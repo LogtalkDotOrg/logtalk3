@@ -1,0 +1,93 @@
+.. index:: single: open_ai_event_stream
+.. _open_ai_event_stream/0:
+
+.. rst-class:: right
+
+**object**
+
+``open_ai_event_stream``
+========================
+
+Small Server-Sent Events helpers used by OpenAI streaming endpoints.
+
+| **Availability:** 
+|    ``logtalk_load(open_ai(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-25
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: event/2
+.. _open_ai_event_stream/0::event/2:
+
+``event/2``
+^^^^^^^^^^^
+
+Parses a single OpenAI event-stream frame atom into ``event(Name, Data)``. Unknown fields are ignored.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``event(Frame,Event)``
+| **Mode and number of proofs:**
+|    ``event(+atom,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: frame/2
+.. _open_ai_event_stream/0::frame/2:
+
+``frame/2``
+^^^^^^^^^^^
+
+Generates an event-stream frame atom from ``event(Name, Data)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``frame(Event,Frame)``
+| **Mode and number of proofs:**
+|    ``frame(+compound,-atom)`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

@@ -1,0 +1,94 @@
+.. index:: single: open_ai_client
+.. _open_ai_client/0:
+
+.. rst-class:: right
+
+**object**
+
+``open_ai_client``
+==================
+
+OpenAI-compatible client facade using http_client(http_socket_process) for HTTPS/WSS support.
+
+| **Availability:** 
+|    ``logtalk_load(open_ai(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-25
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`http_client(HTTPSocket) <http_client/1>`
+|    :ref:`list <list/0>`
+|    :ref:`open_ai_catalog <open_ai_catalog/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: request/5
+.. _open_ai_client/0::request/5:
+
+``request/5``
+^^^^^^^^^^^^^
+
+Calls an OpenAI operation by operation identifier. Path parameters are supplied as ``Name-Value`` pairs. The body is ignored for methods without a request body. Options include ``base_url/1``, ``api_key/1``, ``organization/1``, ``project/1``, and ordinary ``http_client`` request options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``request(OperationId,PathParameters,Body,Response,Options)``
+| **Mode and number of proofs:**
+|    ``request(+atom,+list(pair),+compound,--compound,+list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: operation_url/4
+.. _open_ai_client/0::operation_url/4:
+
+``operation_url/4``
+^^^^^^^^^^^^^^^^^^^
+
+Builds the absolute request URL for an operation and path parameters.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``operation_url(OperationId,PathParameters,URL,Options)``
+| **Mode and number of proofs:**
+|    ``operation_url(+atom,+list(pair),-atom,+list(compound))`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

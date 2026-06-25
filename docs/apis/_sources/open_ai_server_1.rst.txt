@@ -1,0 +1,236 @@
+.. index:: single: open_ai_server(Backend)
+.. _open_ai_server/1:
+
+.. rst-class:: right
+
+**object**
+
+``open_ai_server(Backend)``
+===========================
+
+* ``Backend`` - Application object implementing ``open_ai_backend_protocol``.
+
+
+OpenAI-compatible REST server facade backed by an application object.
+
+| **Availability:** 
+|    ``logtalk_load(open_ai(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-25
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`http_handler_protocol <http_handler_protocol/0>`
+|    ``public`` :ref:`open_api_provider_protocol <open_api_provider_protocol/0>`
+| **Imports:**
+|    ``public`` :ref:`rest <rest/0>`
+| **Uses:**
+|    :ref:`http_core <http_core/0>`
+|    :ref:`list <list/0>`
+|    :ref:`open_ai_api <open_ai_api/0>`
+|    :ref:`open_ai_catalog <open_ai_catalog/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`open_api_provider_protocol/0::api_info/1`  :ref:`rest/0::binary_body/2`  :ref:`rest/0::created_response/4`  :ref:`rest/0::form_body/2`  :ref:`http_handler_protocol/0::handle/2`  :ref:`rest/0::json_array_body/2`  :ref:`rest/0::json_body/2`  :ref:`rest/0::json_object_body/2`  :ref:`rest/0::json_response/4`  :ref:`rest/0::json_response/5`  :ref:`rest/0::no_content_response/2`  :ref:`open_api_provider_protocol/0::operations/1`  :ref:`rest/0::path_parameter/3`  :ref:`rest/0::problem_response/6`  :ref:`rest/0::query_parameter/3`  :ref:`rest/0::request_body/2`  :ref:`rest/0::request_header/3`  :ref:`open_api_provider_protocol/0::schema/2`  :ref:`open_api_provider_protocol/0::security/1`  :ref:`open_api_provider_protocol/0::security_scheme/2`  :ref:`open_api_provider_protocol/0::servers/1`  :ref:`rest/0::text_body/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: open_api_info/1
+.. _open_ai_server/1::open_api_info/1:
+
+``open_api_info/1``
+^^^^^^^^^^^^^^^^^^^
+
+Hook returning the OpenAPI information object for the server facade.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open_api_info(Info)``
+| **Mode and number of proofs:**
+|    ``open_api_info(-compound)`` - ``one``
+
+
+------------
+
+.. index:: open_api_servers/1
+.. _open_ai_server/1::open_api_servers/1:
+
+``open_api_servers/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Hook returning the OpenAPI server list for the local server facade.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open_api_servers(Servers)``
+| **Mode and number of proofs:**
+|    ``open_api_servers(-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: open_api_security/1
+.. _open_ai_server/1::open_api_security/1:
+
+``open_api_security/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook returning the OpenAPI security requirements for the server facade.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open_api_security(Security)``
+| **Mode and number of proofs:**
+|    ``open_api_security(-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: open_api_security_scheme/2
+.. _open_ai_server/1::open_api_security_scheme/2:
+
+``open_api_security_scheme/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook enumerating OpenAPI security schemes for the server facade.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open_api_security_scheme(Name,Scheme)``
+| **Mode and number of proofs:**
+|    ``open_api_security_scheme(?atom,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: open_api_schema/2
+.. _open_ai_server/1::open_api_schema/2:
+
+``open_api_schema/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Hook enumerating named OpenAPI schemas for the server facade.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open_api_schema(Name,Schema)``
+| **Mode and number of proofs:**
+|    ``open_api_schema(?atom,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: endpoint/5
+.. _open_ai_server/1::endpoint/5:
+
+``endpoint/5``
+^^^^^^^^^^^^^^
+
+Hook enumerating REST endpoint descriptors derived from the generated OpenAI catalog.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``endpoint(Id,Method,Path,Action,Options)``
+| **Mode and number of proofs:**
+|    ``endpoint(?atom,?atom,?atom,?atom,?list(compound))`` - ``zero_or_more``
+
+
+------------
+
+.. index:: open_api_validate_request/1
+.. _open_ai_server/1::open_api_validate_request/1:
+
+``open_api_validate_request/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook selecting operations whose requests should be validated against the OpenAPI contract.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open_api_validate_request(Id)``
+| **Mode and number of proofs:**
+|    ``open_api_validate_request(?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: open_api_validate_response/1
+.. _open_ai_server/1::open_api_validate_response/1:
+
+``open_api_validate_response/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Hook selecting operations whose responses should be validated against the OpenAPI contract.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open_api_validate_response(Id)``
+| **Mode and number of proofs:**
+|    ``open_api_validate_response(?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: dispatch_open_ai/2
+.. _open_ai_server/1::dispatch_open_ai/2:
+
+``dispatch_open_ai/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Dispatches a routed OpenAI request to the backend object and returns a REST result.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dispatch_open_ai(Request,Result)``
+| **Mode and number of proofs:**
+|    ``dispatch_open_ai(+compound,--term)`` - ``one_or_error``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

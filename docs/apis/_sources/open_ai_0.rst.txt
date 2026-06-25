@@ -1,0 +1,93 @@
+.. index:: single: open_ai
+.. _open_ai/0:
+
+.. rst-class:: right
+
+**object**
+
+``open_ai``
+===========
+
+Facade predicates for the OpenAI-compatible public non-admin API library.
+
+| **Availability:** 
+|    ``logtalk_load(open_ai(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-25
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`open_ai_catalog <open_ai_catalog/0>`
+|    :ref:`open_api <open_api/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: document/1
+.. _open_ai/0::document/1:
+
+``document/1``
+^^^^^^^^^^^^^^
+
+Returns the generated OpenAPI document for the supported OpenAI-compatible endpoint surface.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``document(Document)``
+| **Mode and number of proofs:**
+|    ``document(-compound)`` - ``one``
+
+
+------------
+
+.. index:: operation_count/1
+.. _open_ai/0::operation_count/1:
+
+``operation_count/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns the number of supported public non-admin OpenAI operations in the pinned catalog.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``operation_count(Count)``
+| **Mode and number of proofs:**
+|    ``operation_count(-integer)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

@@ -1,0 +1,131 @@
+.. index:: single: open_ai_catalog
+.. _open_ai_catalog/0:
+
+.. rst-class:: right
+
+**object**
+
+``open_ai_catalog``
+===================
+
+Generated catalog for the public non-admin OpenAI API endpoint surface.
+
+| **Availability:** 
+|    ``logtalk_load(open_ai(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-25
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: spec_version/1
+.. _open_ai_catalog/0::spec_version/1:
+
+``spec_version/1``
+^^^^^^^^^^^^^^^^^^
+
+Returns the pinned OpenAI OpenAPI document version used to generate the catalog.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``spec_version(Version)``
+| **Mode and number of proofs:**
+|    ``spec_version(-atom)`` - ``one``
+
+
+------------
+
+.. index:: operation_count/1
+.. _open_ai_catalog/0::operation_count/1:
+
+``operation_count/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns the number of public non-admin OpenAI operations in the generated catalog.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``operation_count(Count)``
+| **Mode and number of proofs:**
+|    ``operation_count(-integer)`` - ``one``
+
+
+------------
+
+.. index:: operation/8
+.. _open_ai_catalog/0::operation/8:
+
+``operation/8``
+^^^^^^^^^^^^^^^
+
+Enumerates generated OpenAI operation descriptors.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``operation(Id,Tag,Method,Path,Summary,Parameters,RequestBody,Responses)``
+| **Mode and number of proofs:**
+|    ``operation(?atom,?atom,?atom,?atom,?atom,?list(compound),?compound,?list(compound))`` - ``zero_or_more``
+
+
+------------
+
+.. index:: operation_properties/2
+.. _open_ai_catalog/0::operation_properties/2:
+
+``operation_properties/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Enumerates additional generated OpenAPI properties for an operation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``operation_properties(Id,Properties)``
+| **Mode and number of proofs:**
+|    ``operation_properties(?atom,?list(compound))`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

@@ -1,0 +1,58 @@
+.. index:: single: open_ai_api
+.. _open_ai_api/0:
+
+.. rst-class:: right
+
+**object**
+
+``open_ai_api``
+===============
+
+OpenAPI provider for the public non-admin OpenAI-compatible API surface.
+
+| **Availability:** 
+|    ``logtalk_load(open_ai(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-25
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`open_api_provider_protocol <open_api_provider_protocol/0>`
+| **Uses:**
+|    :ref:`open_ai_catalog <open_ai_catalog/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`open_api_provider_protocol/0::api_info/1`  :ref:`open_api_provider_protocol/0::operations/1`  :ref:`open_api_provider_protocol/0::schema/2`  :ref:`open_api_provider_protocol/0::security/1`  :ref:`open_api_provider_protocol/0::security_scheme/2`  :ref:`open_api_provider_protocol/0::servers/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

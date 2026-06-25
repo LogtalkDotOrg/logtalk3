@@ -6178,6 +6178,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`open_ai <open_ai/0::document/1>`
 * :ref:`sbom <sbom/0::document/1>`
 
 ``document/2``
@@ -6954,6 +6955,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`json_pointer_protocol <json_pointer_protocol/0::evaluate/3>`
+
+``event/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_ai_event_stream <open_ai_event_stream/0::event/2>`
 
 ``exactly_representable/1``
 ---------------------------
@@ -8382,6 +8393,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`statisticsp <statisticsp/0::fractile/3>`
 
+``frame/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_ai_event_stream <open_ai_event_stream/0::frame/2>`
+
 ``frame/5``
 -----------
 
@@ -9484,6 +9505,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`http_handler_protocol <http_handler_protocol/0::handle/2>`
 * :ref:`http_router <http_router/0::handle/2>`
 * :ref:`http_websocket_service_handler_protocol <http_websocket_service_handler_protocol/0::handle/2>`
+
+``handle_open_ai/3``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_ai_backend_protocol <open_ai_backend_protocol/0::handle_open_ai/3>`
 
 ``harmonic_mean/2``
 -------------------
@@ -16189,6 +16220,47 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`open_api <open_api/0::operation/3>`
 
+``operation/8``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_ai_catalog <open_ai_catalog/0::operation/8>`
+
+``operation_count/1``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_ai <open_ai/0::operation_count/1>`
+* :ref:`open_ai_catalog <open_ai_catalog/0::operation_count/1>`
+
+``operation_properties/2``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_ai_catalog <open_ai_catalog/0::operation_properties/2>`
+
+``operation_url/4``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_ai_client <open_ai_client/0::operation_url/4>`
+
 ``operations/1``
 ----------------
 
@@ -20602,6 +20674,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`http_client(HTTPSocket) <http_client/1::request/5>`
 * :ref:`http_client_digest_session(HTTPSocket) <http_client_digest_session/1::request/5>`
 * :ref:`http_client_session(A) <http_client_session/1::request/5>`
+* :ref:`open_ai_client <open_ai_client/0::request/5>`
 
 ``request/7``
 -------------
@@ -22870,6 +22943,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`blank_grammars(Format) <blank_grammars/1::spaces//0>`
+
+``spec_version/1``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_ai_catalog <open_ai_catalog/0::spec_version/1>`
 
 ``split/3``
 -----------
