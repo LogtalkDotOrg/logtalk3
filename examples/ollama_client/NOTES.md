@@ -94,12 +94,16 @@ trace.
 
 The unit tests include deterministic tests using canned OpenAI-compatible and
 native Ollama responses. The live availability test is conditional on a
-reachable local server. The live prompt tests use `OLLAMA_CLIENT_TEST_MODEL`
-when it names an installed chat-capable model; otherwise, they use the first
-chat-capable model returned by `ollama_client::models/1`.
+reachable local server. The live tests use `OLLAMA_SERVER_URL` when set to
+override the default OpenAI-compatible base URL. The live prompt tests use
+`OLLAMA_CLIENT_TEST_MODEL` when it names an installed chat-capable model;
+otherwise, they use the first chat-capable model returned by
+`ollama_client::models/2` for the selected server URL.
 
-Use `OLLAMA_CLIENT_TEST_MODEL` to force a specific model. For example:
+Use `OLLAMA_CLIENT_TEST_MODEL` to force a specific model. Use
+`OLLAMA_SERVER_URL` to point the live tests at a non-default Ollama server URL.
+For example:
 
 ```text
-OLLAMA_CLIENT_TEST_MODEL=llama3.2:latest logtalk_tester -p swi
+OLLAMA_SERVER_URL=http://192.168.1.10:11434/v1 OLLAMA_CLIENT_TEST_MODEL=llama3.2:latest logtalk_tester -p swi
 ```

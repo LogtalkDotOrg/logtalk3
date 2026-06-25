@@ -125,24 +125,36 @@
 	test(ollama_client_ask_02, error(domain_error(ollama_chat_response, _))) :-
 		unexpected_ollama_client::ask('llama3.2:latest', '2+2?', _Answer).
 
-	test(ollama_client_live_available_01, deterministic, [condition(ollama_client::available)]) :-
-		ollama_client::models(_Models).
+	test(ollama_client_live_available_01, deterministic, [condition(live_available)]) :-
+		live_test_options(Options),
+		ollama_client::models(_Models, Options).
 
-	test(ollama_client_live_ask_01, deterministic(non_empty_atom(Answer)), [condition(live_test_model(_Model))]) :-
-		live_test_model(Model),
-		ollama_client::ask(Model, '2+2?', Answer).
+	test(ollama_client_live_ask_01, deterministic(non_empty_atom(Answer)), [condition(live_test_model(_Model, _Options))]) :-
+		live_test_model(Model, Options),
+		ollama_client::ask(Model, '2+2?', Answer, Options).
 
-	test(ollama_client_live_ask_02, deterministic(non_empty_atom(Answer)), [condition(live_test_model(_Model))]) :-
-		live_test_model(Model),
-		ollama_client::ask(Model, 'Say OK.', Answer).
+	test(ollama_client_live_ask_02, deterministic(non_empty_atom(Answer)), [condition(live_test_model(_Model, _Options))]) :-
+		live_test_model(Model, Options),
+		ollama_client::ask(Model, 'Say OK.', Answer, Options).
 
-	live_test_model(Model) :-
-		catch(ollama_client::models(Models), _, fail),
+	live_available :-
+		live_test_options(Options),
+		ollama_client::available(Options).
+
+	live_test_model(Model, Options) :-
+		live_test_options(Options),
+		catch(ollama_client::models(Models, Options), _, fail),
 		(	os::environment_variable('OLLAMA_CLIENT_TEST_MODEL', Model),
 			list::member(Model, Models) ->
 			true
 		;	Models = [Model| _]
 		).
+
+	live_test_options([base_url(URL)]) :-
+		os::environment_variable('OLLAMA_SERVER_URL', URL),
+		URL \== '',
+		!.
+	live_test_options([]).
 
 	non_empty_atom(Atom) :-
 		atom(Atom),
