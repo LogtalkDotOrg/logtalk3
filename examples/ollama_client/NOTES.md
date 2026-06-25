@@ -60,13 +60,13 @@ Load the example with:
 logtalk_load(ollama_client(loader)).
 ```
 
-Check if the local server is reachable:
+Check if the local server is reachable (assumes the default `http://127.0.0.1:11434/v1` URL):
 
 ```logtalk
 ollama_client::available.
 ```
 
-List local models:
+List local chat-capable models:
 
 ```logtalk
 ollama_client::models(Models).
@@ -78,14 +78,25 @@ Ask a short question using one of the returned model identifiers:
 ollama_client::ask('llama3.2:latest', 'Say OK.', Answer).
 ```
 
-The example sends OpenAI-format requests through `open_ai_client::request/5`.
-It does not call Ollama's native `/api/*` endpoints.
+If your Ollama installation uses a non-default URL, the `ollama_client` object
+provides also `available/1`, `models/2`, and `ask/4` predicates that take a
+list of options, including a `base_url(URL)` option to override the default
+`http://127.0.0.1:11434/v1` URL.
 
-The unit tests include deterministic tests using canned OpenAI-compatible
-responses. The live availability test is conditional on a reachable local
-server. The live prompt tests use `OLLAMA_CLIENT_TEST_MODEL` when it names an
-installed local model; otherwise, they look for a known chat model in the
-local model list.
+The example lists installed models using Ollama's OpenAI-compatible `/v1/models`
+endpoint and then calls Ollama's native `/api/show` endpoint once per model to
+filter the result to chat-capable models. Current Ollama releases report text
+generation models using the `completion` capability, which this example treats
+as chat-capable. Chat requests themselves still use `open_ai_client::request/5`,
+and they set `reasoning_effort` to `none` so reasoning-capable models return a
+final short answer instead of spending the small token budget on a reasoning
+trace.
+
+The unit tests include deterministic tests using canned OpenAI-compatible and
+native Ollama responses. The live availability test is conditional on a
+reachable local server. The live prompt tests use `OLLAMA_CLIENT_TEST_MODEL`
+when it names an installed chat-capable model; otherwise, they use the first
+chat-capable model returned by `ollama_client::models/1`.
 
 Use `OLLAMA_CLIENT_TEST_MODEL` to force a specific model. For example:
 

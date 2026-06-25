@@ -25,33 +25,47 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-06-25,
-		comment is 'Ollama client example using the OpenAI-compatible client facade.'
+		comment is 'Ollama client example using native model discovery and the OpenAI-compatible client facade.'
 	]).
 
 	:- public(available/0).
 	:- mode(available, zero_or_one).
 	:- info(available/0, [
-		comment is 'Succeeds when a local Ollama OpenAI-compatible server answers a models request.'
+		comment is 'Succeeds when a local Ollama server answers a chat-capable models request. Uses the default ``http://127.0.0.1:11434/v1`` URL.'
+	]).
+
+	:- public(available/1).
+	:- mode(available(+list(compound)), zero_or_one).
+	:- info(available/1, [
+		comment is 'Succeeds when a local Ollama server answers a chat-capable models request. Use the ``base_url(URL)`` option to override the default ``http://127.0.0.1:11434/v1`` URL.',
+		argnames is ['Options']
 	]).
 
 	:- public(models/1).
 	:- mode(models(-list(atom)), one_or_error).
 	:- info(models/1, [
-		comment is 'Returns the list of model identifiers available from the local Ollama server.',
+		comment is 'Returns the list of chat-capable model identifiers available from the local Ollama server. Uses the default ``http://127.0.0.1:11434/v1`` URL.',
 		argnames is ['Models']
+	]).
+
+	:- public(models/2).
+	:- mode(models(-list(atom), +list(compound)), one_or_error).
+	:- info(models/2, [
+		comment is 'Returns the list of chat-capable model identifiers available from the local Ollama server. Use the ``base_url(URL)`` option to override the default ``http://127.0.0.1:11434/v1`` URL.',
+		argnames is ['Models', 'Options']
 	]).
 
 	:- public(ask/3).
 	:- mode(ask(+atom, +atom, -atom), one_or_error).
 	:- info(ask/3, [
-		comment is 'Asks a question using the given local Ollama model and returns the assistant answer.',
+		comment is 'Asks a question using the given local Ollama model and returns the assistant answer. Uses the default ``http://127.0.0.1:11434/v1`` URL.',
 		argnames is ['Model', 'Question', 'Answer']
 	]).
 
 	:- public(ask/4).
 	:- mode(ask(+atom, +atom, -atom, +list(compound)), one_or_error).
 	:- info(ask/4, [
-		comment is 'Asks a question using the given local Ollama model and caller-supplied OpenAI client options.',
+		comment is 'Asks a question using the given local Ollama model and caller-supplied OpenAI client options. Use the ``base_url(URL)`` option to override the default ``http://127.0.0.1:11434/v1`` URL.',
 		argnames is ['Model', 'Question', 'Answer', 'Options']
 	]).
 
@@ -62,23 +76,38 @@
 		argnames is ['OperationId', 'PathParameters', 'Body', 'Response', 'Options']
 	]).
 
+	:- protected(ollama_request/4).
+	:- mode(ollama_request(+atom, +compound, --compound, +list(compound)), one_or_error).
+	:- info(ollama_request/4, [
+		comment is 'Hook predicate used to call native Ollama model info endpoints. Tests can override it to return canned responses.',
+		argnames is ['OperationId', 'Body', 'Response', 'Options']
+	]).
+
 	:- uses(json_pointer, [
 		evaluate/3
 	]).
 
 	:- uses(list, [
-		select/3
+		member/2, memberchk/2
 	]).
 
 	available :-
-		catch(::models(_), error(_, _), fail).
+		available([]).
+
+	available(Options0) :-
+		request_options(Options0, Options),
+		catch(::models(_, Options), _, fail).
 
 	models(Models) :-
+		models(Models, []).
+
+	models(Models, Options0) :-
 		context(Context),
-		request_options([], Options),
+		request_options(Options0, Options),
 		::open_ai_request(listModels, [], empty, Response, Options),
 		response_json(Response, Context, JSON),
-		model_ids(JSON, Context, Models).
+		model_ids(JSON, Context, ModelIDs),
+		chat_model_ids(ModelIDs, Context, Options, Models).
 
 	ask(Model, Question, Answer) :-
 		::ask(Model, Question, Answer, []).
@@ -99,10 +128,16 @@
 	open_ai_request(OperationId, PathParameters, Body, Response, Options) :-
 		open_ai_client::request(OperationId, PathParameters, Body, Response, Options).
 
+	% default definition
+	ollama_request(showModel, Body, Response, Options) :-
+		show_url(Options, URL),
+		ollama_http_options(Options, HTTPOptions),
+		http_client(http_socket_process)::post(URL, Body, Response, HTTPOptions).
+
 	default_base_url('http://127.0.0.1:11434/v1').
 
 	request_options(Options, Options) :-
-		select(base_url(_), Options, _),
+		member(base_url(_), Options),
 		!.
 	request_options(Options, [base_url(BaseURL)| Options]) :-
 		default_base_url(BaseURL).
@@ -114,7 +149,8 @@
 			{role-user, content-Question}
 		],
 		stream- @false,
-		max_tokens-16
+		max_tokens-16,
+		reasoning_effort-'none'
 	}))).
 
 	response_json(Response, _Context, JSON) :-
@@ -129,6 +165,62 @@
 			model_ids_list(Data, Context, Models)
 		;	throw(error(domain_error(ollama_models_response, JSON), Context))
 		).
+
+	chat_model_ids([], _, _, []).
+	chat_model_ids([ModelID| ModelIDs], Context, Options, Models) :-
+		(	chat_model(ModelID, Context, Options) ->
+			Models = [ModelID| Tail]
+		;	Models = Tail
+		),
+		chat_model_ids(ModelIDs, Context, Options, Tail).
+
+	chat_model(Model, Context, Options) :-
+		show_body(Model, Body),
+		::ollama_request(showModel, Body, Response, Options),
+		response_json(Response, Context, JSON),
+		model_capabilities(JSON, Context, Capabilities),
+		chat_capabilities(Capabilities).
+
+	chat_capabilities(Capabilities) :-
+		member(completion, Capabilities),
+		!.
+	chat_capabilities(Capabilities) :-
+		memberchk(chat, Capabilities).
+
+	show_body(Model, content('application/json', json({model-Model}))).
+
+	show_url(Options, URL) :-
+		api_base_url(Options, BaseURL),
+		atom_concat(BaseURL, '/api/show', URL).
+
+	api_base_url(Options, BaseURL) :-
+		memberchk(base_url(OpenAIBaseURL), Options),
+		strip_open_ai_suffix(OpenAIBaseURL, BaseURL).
+
+	strip_open_ai_suffix(OpenAIBaseURL, BaseURL) :-
+		(	sub_atom(OpenAIBaseURL, Before, 3, 0, '/v1') ->
+			sub_atom(OpenAIBaseURL, 0, Before, _, BaseURL)
+		;	BaseURL = OpenAIBaseURL
+		).
+
+	ollama_http_options([], []).
+	ollama_http_options([base_url(_)| Options], HTTPOptions) :-
+		!,
+		ollama_http_options(Options, HTTPOptions).
+	ollama_http_options([Option| Options], [Option| HTTPOptions]) :-
+		ollama_http_options(Options, HTTPOptions).
+
+	model_capabilities(JSON, Context, Capabilities) :-
+		(	evaluate([capabilities], JSON, Capabilities),
+			capabilities_list(Capabilities) ->
+			true
+		;	throw(error(domain_error(ollama_model_capabilities_response, JSON), Context))
+		).
+
+	capabilities_list([]).
+	capabilities_list([Capability| Capabilities]) :-
+		atom(Capability),
+		capabilities_list(Capabilities).
 
 	model_ids_list([], _, []).
 	model_ids_list([ModelJSON| ModelJSONs], Context, [Model| Models]) :-

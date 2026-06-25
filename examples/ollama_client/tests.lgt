@@ -26,6 +26,7 @@
 		Options = [base_url('http://127.0.0.1:11434/v1')],
 		models_response([
 			{id-'llama3.2:latest', object-model},
+			{id-'nomic-embed-text:latest', object-model},
 			{id-'qwen2.5:0.5b', object-model}
 		], Response).
 	open_ai_request(createChatCompletion, [], content('application/json', json({
@@ -35,13 +36,27 @@
 			{role-user, content-'2+2?'}
 		],
 		stream- @false,
-		max_tokens-16
+		max_tokens-16,
+		reasoning_effort-'none'
 	})), Response, Options) :-
 		Options = [base_url('http://example.com/v1')],
 		chat_response('4.', Response).
 
+	ollama_request(showModel, content('application/json', json({model-'llama3.2:latest'})), Response, Options) :-
+		Options = [base_url('http://127.0.0.1:11434/v1')],
+		show_response([completion], Response).
+	ollama_request(showModel, content('application/json', json({model-'nomic-embed-text:latest'})), Response, Options) :-
+		Options = [base_url('http://127.0.0.1:11434/v1')],
+		show_response([embedding], Response).
+	ollama_request(showModel, content('application/json', json({model-'qwen2.5:0.5b'})), Response, Options) :-
+		Options = [base_url('http://127.0.0.1:11434/v1')],
+		show_response([completion, tools], Response).
+
 	models_response(Models, Response) :-
 		http_core::response(http(1, 1), status(200, 'OK'), [], content('application/json', json({object-list, data-Models})), [], Response).
+
+	show_response(Capabilities, Response) :-
+		http_core::response(http(1, 1), status(200, 'OK'), [], content('application/json', json({capabilities-Capabilities})), [], Response).
 
 	chat_response(Answer, Response) :-
 		http_core::response(http(1, 1), status(200, 'OK'), [], content('application/json', json({choices-[{message-{content-Answer}}]})), [], Response).
@@ -69,6 +84,17 @@
 :- end_object.
 
 
+:- object(malformed_show_ollama_client,
+	extends(ollama_client)).
+
+	open_ai_request(listModels, [], empty, Response, _Options) :-
+		http_core::response(http(1, 1), status(200, 'OK'), [], content('application/json', json({object-list, data-[{id-'llama3.2:latest', object-model}]})), [], Response).
+	ollama_request(showModel, content('application/json', json({model-'llama3.2:latest'})), Response, _Options) :-
+		http_core::response(http(1, 1), status(200, 'OK'), [], content('application/json', json({details-{family-llama}})), [], Response).
+
+:- end_object.
+
+
 :- object(tests,
 	extends(lgtunit)).
 
@@ -89,6 +115,9 @@
 
 	test(ollama_client_models_03, error(domain_error(ollama_models_response, _))) :-
 		unexpected_ollama_client::models(_Models).
+
+	test(ollama_client_models_04, error(domain_error(ollama_model_capabilities_response, _))) :-
+		malformed_show_ollama_client::models(_Models).
 
 	test(ollama_client_ask_01, deterministic(Answer == '4.')) :-
 		mock_ollama_client::ask('llama3.2:latest', '2+2?', Answer, [base_url('http://example.com/v1')]).
@@ -112,25 +141,8 @@
 		(	os::environment_variable('OLLAMA_CLIENT_TEST_MODEL', Model),
 			list::member(Model, Models) ->
 			true
-		;	preferred_live_model(Models, Model)
+		;	Models = [Model| _]
 		).
-
-	preferred_live_model(Models, Model) :-
-		preferred_chat_model(Model),
-		list::member(Model, Models),
-		!.
-
-	preferred_chat_model('llama3.2:latest').
-	preferred_chat_model('llama3.1:latest').
-	preferred_chat_model('llama3:latest').
-	preferred_chat_model('mistral-nemo:latest').
-	preferred_chat_model('mistral:latest').
-	preferred_chat_model('gemma3:latest').
-	preferred_chat_model('gemma2:latest').
-	preferred_chat_model('phi4:latest').
-	preferred_chat_model('phi3:latest').
-	preferred_chat_model('qwen2.5:latest').
-	preferred_chat_model('qwen2.5:0.5b').
 
 	non_empty_atom(Atom) :-
 		atom(Atom),
