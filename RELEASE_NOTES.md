@@ -95,8 +95,10 @@ interdependency due to shared temporary files.
 * UPDATED: The `cuid`, `ids`, `ksuid`, `nanoid`, `ulid`, `uuid`, and `wkt_wkb`
 libraries to use the new `crypto` library.
 
-* FIXED: A parsing bug in the `base64` library (the standard `+` and `/`
-alphabet entries were swapped).
+* FIXED: A parsing bug in the `base64` library object (the standard `+` and
+`/` alphabet entries were swapped). Also fixed the a parsing bug in the
+`base64url` library object (the standard `-` and `_` alphabet entries were
+also swapped).
 
 * FIXED: Case where the `json_pointer` library `evaluate/1` predicate would
 throw an error when failure was expected.

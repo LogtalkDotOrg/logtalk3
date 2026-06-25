@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2023-05-18,
+		date is 2023-06-25,
 		comment is 'Unit tests for the "base64" library.'
 	]).
 
@@ -115,5 +115,13 @@
 	test(base64url_generate_codes, deterministic) :-
 		base64url::generate(codes(Base64URL), [104,116,116,112,115,58,47,47,108,111,103,116,97,108,107,46,111,114,103]),
 		^^assertion(Base64URL == [97,72,82,48,99,72,77,54,76,121,57,115,98,50,100,48,89,87,120,114,76,109,57,121,90,119]).
+
+	test(base64url_rfc4648_alphabet_01, deterministic) :-
+		base64url::generate(codes(Base64URL), [251, 255]),
+		^^assertion(Base64URL == [0'-, 0'_, 0'8]).
+
+	test(base64url_rfc4648_alphabet_02, deterministic) :-
+		base64url::parse(codes([0'-, 0'_, 0'8]), Bytes),
+		^^assertion(Bytes == [251, 255]).
 
 :- end_object.
