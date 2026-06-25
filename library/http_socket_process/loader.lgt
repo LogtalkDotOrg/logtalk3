@@ -32,7 +32,7 @@
 		logtalk_load(sockets(loader)),
 		logtalk_load(http_client_core(loader)),
 		logtalk_load(http_server(loader)),
-		logtalk_load(http_socket(http_socket_protocol)),
+		logtalk_load(http_socket(loader)),
 		logtalk_load(http_socket_process, [optimize(on)])
 	)).
 

@@ -33,7 +33,7 @@
 		logtalk_load(sockets(loader)),
 		logtalk_load(http_client_core(loader)),
 		logtalk_load(http_server(loader)),
-		logtalk_load(http_socket(http_socket_protocol)),
+		logtalk_load(http_socket(loader)),
 		logtalk_load(http_socket_process, [debug(on), source_data(on)]),
 		logtalk_load(lgtunit(loader)),
 		logtalk_load(tests, [hook(lgtunit)]),
