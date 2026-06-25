@@ -200,6 +200,7 @@ directory in the ``NOTES.md`` file.
    nmea
    nmf_projection
    open_api
+   open_ai
    optics_clusterer
    optionals
    options

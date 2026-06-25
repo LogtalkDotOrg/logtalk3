@@ -56,6 +56,8 @@ aggregation, and dependency-aware ordering.
 `http_static_files`, `http_parameters`, `http_htmx`, `http_authenticate`,
 `http_digest`, `http_cors`, `open_api`, and `rest` libraries.
 
+* ADDED: New `open_ai` library and providing OpenAI client and server support.
+
 * ADDED: Support for the SHA-512/256 hash function to the `hashes` library.
 
 * ADDED: Support for computing HMAC-SHA-512/256 digests to the `hmac`
@@ -152,6 +154,9 @@ directory-listing helpers.
 * ADDED: New `http_static_site_digest` example illustrating the use of the new
 HTTP Digest authentication library together with the static-file and
 directory-listing helpers.
+
+* ADDED: New `ollama_client` example illustrating how to use the new `open_ai`
+library.
 
 * FIXED: The `checkpoint` multi-threading example test flakiness due to
 potential out-or-order output. Thanks to Andrew Davison for the bug report.

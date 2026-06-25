@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on June 19, 2026
+%  Last updated on June 25, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -280,6 +280,7 @@ logtalk_library_path(nested_dictionaries, library('nested_dictionaries/')).
 logtalk_library_path(nmea, library('nmea/')).
 logtalk_library_path(nmf_projection, library('nmf_projection/')).
 logtalk_library_path(open_api, library('open_api/')).
+logtalk_library_path(open_ai, library('open_ai/')).
 logtalk_library_path(optics_clusterer, library('optics_clusterer/')).
 logtalk_library_path(optionals, library('optionals/')).
 logtalk_library_path(options, library('options/')).
@@ -472,6 +473,7 @@ logtalk_library_path(nondet, threads('nondet/')).
 logtalk_library_path(neo4j, examples('neo4j/')).
 logtalk_library_path(now_you_see_me, examples('now_you_see_me/')).
 logtalk_library_path(object_aliases, examples('object_aliases/')).
+logtalk_library_path(ollama_client, examples('ollama_client/')).
 logtalk_library_path(operators, examples('operators/')).
 logtalk_library_path(patches, examples('patches/')).
 logtalk_library_path(patching, examples('patching/')).

@@ -239,6 +239,7 @@
 		http_static_files(loader),
 		http_directory_listing(loader),
 		open_api(loader),
+		open_ai(loader),
 		rest(loader),
 		format(loader),
 		union_find(loader),

@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on June 19, 2026
+##   Last updated on June 25, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -251,6 +251,7 @@ sed '1,19d' ../../../library/nested_dictionaries/NOTES.md | pandoc -f gfm -t rst
 sed '1,19d' ../../../library/nmea/NOTES.md | pandoc -f gfm -t rst -o libraries/nmea.rst
 sed '1,19d' ../../../library/nmf_projection/NOTES.md | pandoc -f gfm -t rst -o libraries/nmf_projection.rst
 sed '1,19d' ../../../library/open_api/NOTES.md | pandoc -f gfm -t rst -o libraries/open_api.rst
+sed '1,19d' ../../../library/open_ai/NOTES.md | pandoc -f gfm -t rst -o libraries/open_ai.rst
 sed '1,19d' ../../../library/optics_clusterer/NOTES.md | pandoc -f gfm -t rst -o libraries/optics_clusterer.rst
 sed '1,19d' ../../../library/optionals/NOTES.md | pandoc -f gfm -t rst -o libraries/optionals.rst
 sed '1,19d' ../../../library/options/NOTES.md | pandoc -f gfm -t rst -o libraries/options.rst

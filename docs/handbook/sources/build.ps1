@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on June 19, 2026
+##   Last updated on June 25, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -251,6 +251,7 @@ Foreach-Object {
 (Get-Content ../../../library/nmea/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/nmea.rst
 (Get-Content ../../../library/nmf_projection/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/nmf_projection.rst
 (Get-Content ../../../library/open_api/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/open_api.rst
+(Get-Content ../../../library/open_ai/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/open_ai.rst
 (Get-Content ../../../library/optics_clusterer/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/optics_clusterer.rst
 (Get-Content ../../../library/optionals/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/optionals.rst
 (Get-Content ../../../library/options/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/options.rst

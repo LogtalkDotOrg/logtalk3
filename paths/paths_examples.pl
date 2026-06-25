@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths for the programming examples
-%  Last updated on June 8, 2026
+%  Last updated on June 25, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -157,6 +157,7 @@ logtalk_library_path(nondet, threads('nondet/')).
 logtalk_library_path(neo4j, examples('neo4j/')).
 logtalk_library_path(now_you_see_me, examples('now_you_see_me/')).
 logtalk_library_path(object_aliases, examples('object_aliases/')).
+logtalk_library_path(ollama_client, examples('ollama_client/')).
 logtalk_library_path(operators, examples('operators/')).
 logtalk_library_path(patches, examples('patches/')).
 logtalk_library_path(patching, examples('patching/')).
