@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-04-17,
+		date is 2026-06-24,
 		comment is 'Unit tests for the tzif library.'
 	]).
 
@@ -153,14 +153,12 @@
 		tzif::offset(LondonTZif, 'Europe/London', 0, UTCOffset),
 		tzif::offset(NewYorkTZif, 'America/New_York', date_time(2024, 7, 1, 12, 0, 0), SummerOffset).
 
-	test(tzif_load_directory_source_2_01, deterministic(One-Two == true-true)) :-
+	test(tzif_load_directory_source_2_01, deterministic) :-
 		generated_database_fixture(Root),
 		tzif::load(directory(Root), TZifs),
 		tzif::zones(TZifs, Zones),
 		list::memberchk('Europe/London', Zones),
-		list::memberchk('America/New_York', Zones),
-		One = true,
-		Two = true.
+		list::memberchk('America/New_York', Zones).
 
 	test(tzif_save_load_cached_queries_2_01, deterministic(Explicit-Cached == time_type(-14400, true, 'EDT', footer)-time_type(-14400, true, 'EDT', footer))) :-
 		v2_fixture_bytes(Bytes),

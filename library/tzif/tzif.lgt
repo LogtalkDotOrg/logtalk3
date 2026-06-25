@@ -288,15 +288,24 @@
 		existence_error(tzif_cache, tzif).
 
 	require_cached_zone(Zone, ZoneData) :-
-		( cached_tzif_(Zone, tzif(Zone, _, ZoneData)) -> true ; existence_error(time_zone, Zone) ).
+		(	cached_tzif_(Zone, tzif(Zone, _, ZoneData)) ->
+			true
+		;	existence_error(time_zone, Zone)
+		).
 
 	require_single_cached_tzif(TZif) :-
 		require_cached_tzifs(TZifs),
-		( TZifs = [TZif] -> true ; domain_error(single_zone_tzif_cache, TZifs) ).
+		(	TZifs = [TZif] ->
+			true
+		;	domain_error(single_zone_tzif_cache, TZifs)
+		).
 
 	require_tzif_zone(TZif, Zone, ZoneData) :-
 		check_tzif_term(TZif),
-		( TZif = tzif(Zone, _, ZoneData) -> true ; existence_error(time_zone, Zone) ).
+		(	TZif = tzif(Zone, _, ZoneData) ->
+			true
+		;	existence_error(time_zone, Zone)
+		).
 
 	load_source(snapshot(File), TZifs) :-
 		!,
@@ -411,16 +420,25 @@
 		tzif_terms_zones(TZifs, Zones).
 
 	check_directory_root(Root) :-
-		( atom(Root) -> true ; domain_error(directory, Root) ).
+		(	atom(Root) ->
+			true
+		;	domain_error(directory, Root)
+		).
 
 	check_zone_paths([]).
 	check_zone_paths([Path| Paths]) :-
-		( atom(Path) -> true ; domain_error(file_name, Path) ),
+		(	atom(Path) ->
+			true
+		;	domain_error(file_name, Path)
+		),
 		check_zone_paths(Paths).
 
 	check_known_zone_paths([]).
 	check_known_zone_paths([Path| Paths]) :-
-		( known_zone_id(Path) -> true ; domain_error(time_zone, Path) ),
+		(	known_zone_id(Path) ->
+			true
+		;	domain_error(time_zone, Path)
+		),
 		check_known_zone_paths(Paths).
 
 	filter_known_zone_paths([], []).
@@ -437,7 +455,10 @@
 		instantiation_error.
 	check_source_zone_id(ZoneId, _) :-
 		atom(ZoneId),
-		( known_zone_id(ZoneId) -> true ; domain_error(time_zone, ZoneId) ),
+		(	known_zone_id(ZoneId) ->
+			true
+		;	domain_error(time_zone, ZoneId)
+		),
 		!.
 	check_source_zone_id(_, Source) :-
 		domain_error(tzif_source, Source).
