@@ -64,6 +64,8 @@ Basic client usage
            [api_key('sk-...')]
         ).
 
+See the ``ollama_client`` for a complete example of using this library.
+
 Basic server usage
 ------------------
 

@@ -480,6 +480,9 @@ Follows a short description of each included example (in alphabetical order):
 - `operators`  
 	example of using operators local to objects and categories
 
+- `ollama_client`  
+	example illustrating the use of the `open_ai` library
+
 - `parametric`  
 	simple examples of parametric objects
 
