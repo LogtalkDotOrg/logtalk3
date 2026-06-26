@@ -9,7 +9,7 @@ sequences for text and binary messages, decodes and encodes UTF-8 text
 payloads, and adds a normalized message term for text, binary, ping,
 pong, and close messages.
 
-This library can be used with backend Prolog systems that supports
+This library can be used with backend Prolog systems that support
 unbound integer arithmetic.
 
 API documentation

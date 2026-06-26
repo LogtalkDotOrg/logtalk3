@@ -148,6 +148,7 @@
 <li class="toctree-l2"><a class="reference internal" href="gradient_boosting_regression.html"><code class="docutils literal notranslate"><span class="pre">gradient_boosting_regression</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="grammars.html"><code class="docutils literal notranslate"><span class="pre">grammars</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="graphs.html"><code class="docutils literal notranslate"><span class="pre">graphs</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gravatar.html"><code class="docutils literal notranslate"><span class="pre">gravatar</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="gsp_pattern_miner.html"><code class="docutils literal notranslate"><span class="pre">gsp_pattern_miner</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="hashes.html"><code class="docutils literal notranslate"><span class="pre">hashes</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="hdbscan_clusterer.html"><code class="docutils literal notranslate"><span class="pre">hdbscan_clusterer</span></code></a></li>
@@ -371,7 +372,7 @@ libraries. It is the request-oriented client-side entry point: it builds
 normalized requests from absolute URLs plus options and delegates
 transport to the selected <code class="docutils literal notranslate"><span class="pre">http_socket_protocol</span></code>-compatible layer,
 such as <code class="docutils literal notranslate"><span class="pre">http_socket</span></code> or <code class="docutils literal notranslate"><span class="pre">http_socket_process</span></code>.</p>
-<p>This library can be used with backend Prolog systems that supports
+<p>This library can be used with backend Prolog systems that support
 unbound integer arithmetic and the <code class="docutils literal notranslate"><span class="pre">sockets</span></code> library: ECLiPSe, SICStus
 Prolog, SWI-Prolog, Trealla Prolog, and XVM.</p>
 <p>When using the default <code class="docutils literal notranslate"><span class="pre">http_client</span></code> object, the transport
@@ -523,7 +524,9 @@ string.</p></li>
 properties.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">connection_options(Options)</span></code> to pass transport-specific options
 through to the underlying <code class="docutils literal notranslate"><span class="pre">open_connection/4</span></code> call for one-shot
-requests.</p></li>
+requests. When the URL uses the <code class="docutils literal notranslate"><span class="pre">https://</span></code> scheme,
+<code class="docutils literal notranslate"><span class="pre">connection_transport(tls)</span></code> is added automatically unless
+<code class="docutils literal notranslate"><span class="pre">Options</span></code> already specify a transport explicitly.</p></li>
 </ul>
 <p>Supported WebSocket opening-handshake options are:</p>
 <ul class="simple">
@@ -537,7 +540,10 @@ The opening handshake requires HTTP/1.1 or later.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">key(Key)</span></code> to provide an explicit <code class="docutils literal notranslate"><span class="pre">Sec-WebSocket-Key</span></code> value. When
 omitted, a fresh key is generated automatically.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">connection_options(Options)</span></code> to pass transport-specific options
-through to the selected transport <code class="docutils literal notranslate"><span class="pre">open_connection/4</span></code> predicate.</p></li>
+through to the selected transport <code class="docutils literal notranslate"><span class="pre">open_connection/4</span></code> predicate.
+When the URL uses the <code class="docutils literal notranslate"><span class="pre">wss://</span></code> scheme, <code class="docutils literal notranslate"><span class="pre">connection_transport(tls)</span></code>
+is added automatically unless <code class="docutils literal notranslate"><span class="pre">Options</span></code> already specify a transport
+explicitly.</p></li>
 </ul>
 <p>The stream-based primitives remain available from the
 <code class="docutils literal notranslate"><span class="pre">http_client_core</span></code> object.</p>
@@ -617,9 +623,15 @@ facade and only plain <code class="docutils literal notranslate"><span class="pr
 <code class="docutils literal notranslate"><span class="pre">open_websocket/4</span></code>. The corresponding TLS-backed <code class="docutils literal notranslate"><span class="pre">https://</span></code> and
 <code class="docutils literal notranslate"><span class="pre">wss://</span></code> schemes are therefore not supported in this
 parameterization.</p></li>
-<li><p>This non-TLS limitation does not apply to the <code class="docutils literal notranslate"><span class="pre">http_socket_process</span></code>
-parameterization, which provides transport support for secure schemes
-via the same <code class="docutils literal notranslate"><span class="pre">http_socket_protocol</span></code> interface.</p></li>
+<li><p>When the selected transport parameterization supports secure schemes,
+the request-oriented facade defaults <code class="docutils literal notranslate"><span class="pre">https://</span></code> and <code class="docutils literal notranslate"><span class="pre">wss://</span></code> URLs
+without an explicit port to port <code class="docutils literal notranslate"><span class="pre">443</span></code> and adds
+<code class="docutils literal notranslate"><span class="pre">connection_transport(tls)</span></code> to the connection options automatically
+unless already specified explicitly.</p></li>
+<li><p>This TLS-aware behavior applies, for example, to the
+<code class="docutils literal notranslate"><span class="pre">http_socket_process</span></code> parameterization, which provides transport
+support for secure schemes via the same <code class="docutils literal notranslate"><span class="pre">http_socket_protocol</span></code>
+interface.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">open_websocket/4</span></code> predicate is limited to opening-handshake
 validation. See the dedicated WebSocket libraries for frame parsing,
 message reassembly, and related functionality.</p></li>

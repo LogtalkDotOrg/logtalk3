@@ -31,7 +31,7 @@ requests are made using `http_socket_process` TLS connections, which require
 the `openssl` command to be available unless overridden with the
 `openssl_executable/1` option.
 
-This library can be used with backend Prolog systems that supports unbound
+This library can be used with backend Prolog systems that support unbound
 integer arithmetic and the `sockets` library: ECLiPSe, SICStus Prolog,
 SWI-Prolog, Trealla Prolog, and XVM.
 

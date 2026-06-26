@@ -1,0 +1,109 @@
+.. index:: single: gravatar_api
+.. _gravatar_api/0:
+
+.. rst-class:: right
+
+**object**
+
+``gravatar_api``
+================
+
+REST metadata and path construction helpers for the Gravatar public API.
+
+| **Availability:** 
+|    ``logtalk_load(gravatar(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-26
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`rest <rest/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`http_router/0::api_info/1`  :ref:`rest/0::binary_body/2`  :ref:`rest/0::created_response/4`  :ref:`rest/0::form_body/2`  :ref:`http_router/0::handle/2`  :ref:`rest/0::json_array_body/2`  :ref:`rest/0::json_body/2`  :ref:`rest/0::json_object_body/2`  :ref:`rest/0::json_response/4`  :ref:`rest/0::json_response/5`  :ref:`rest/0::no_content_response/2`  :ref:`http_router/0::operations/1`  :ref:`rest/0::path_parameter/3`  :ref:`rest/0::problem_response/6`  :ref:`rest/0::query_parameter/3`  :ref:`rest/0::request_body/2`  :ref:`rest/0::request_header/3`  :ref:`http_router/0::schema/2`  :ref:`http_router/0::security/1`  :ref:`http_router/0::security_scheme/2`  :ref:`http_router/0::servers/1`  :ref:`rest/0::text_body/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: profile_path/2
+.. _gravatar_api/0::profile_path/2:
+
+``profile_path/2``
+^^^^^^^^^^^^^^^^^^
+
+Builds the profile endpoint path for a SHA-256 email hash or profile URL slug.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``profile_path(ProfileIdentifier,Path)``
+| **Mode and number of proofs:**
+|    ``profile_path(+atom,-atom)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+.. index:: endpoint/5
+.. _gravatar_api/0::endpoint/5:
+
+``endpoint/5``
+^^^^^^^^^^^^^^
+
+REST endpoint descriptor for the Gravatar profile lookup operation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``endpoint(Id,Method,Path,Action,Options)``
+| **Mode and number of proofs:**
+|    ``endpoint(?atom,?atom,?atom,?atom,?list(compound))`` - ``zero_or_more``
+
+
+------------
+
+.. index:: profile/2
+.. _gravatar_api/0::profile/2:
+
+``profile/2``
+^^^^^^^^^^^^^
+
+Placeholder action for the remote Gravatar profile endpoint descriptor.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``profile(Request,Result)``
+| **Mode and number of proofs:**
+|    ``profile(+compound,--term)`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

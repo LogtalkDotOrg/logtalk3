@@ -30,7 +30,7 @@ which is limited to the `ws://` scheme. The parametric `http_websocket(_HTTPSock
 object supports alternative `http_socket_protocol` implementations such as
 `http_socket_process`, which supports both `ws://` and `wss://` schemes.
 
-This library can be used with backend Prolog systems that supports unbound
+This library can be used with backend Prolog systems that support unbound
 integer arithmetic and the `sockets` library: ECLiPSe, SICStus Prolog,
 SWI-Prolog, Trealla Prolog, and XVM.
 

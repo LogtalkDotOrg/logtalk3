@@ -46,6 +46,9 @@ accept relative reference arguments.
 * ADDED: New `crypto` library providing transport-neutral cryptographic helper
 predicates.
 
+* ADDED: New `gravatar` library providing a portable client for retrieving
+Gravatar profile information using the Gravatar REST API.
+
 * ADDED: New `html` library support for CSS/JS resource declarations,
 aggregation, and dependency-aware ordering.
 

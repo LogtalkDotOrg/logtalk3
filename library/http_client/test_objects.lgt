@@ -84,6 +84,54 @@
 :- end_object.
 
 
+:- object(probe_http_client_socket).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-06-26,
+		comment is 'Probe socket object used by the http_client tests to verify scheme-derived defaults.'
+	]).
+
+	:- uses(http_websocket_handshake, [
+		websocket_accept/2
+	]).
+
+	:- public(supported_request_scheme/1).
+	:- public(supported_websocket_scheme/1).
+	:- public(exchange/5).
+	:- public(open_connection/4).
+	:- public(close_connection/1).
+	:- public(exchange/3).
+
+	supported_request_scheme(http).
+	supported_request_scheme(https).
+
+	supported_websocket_scheme(ws).
+	supported_websocket_scheme(wss).
+
+	exchange(Host, Port, _Request, Response, Options) :-
+		http_core::response(http(1, 1), status(200, 'OK'), [], empty, [probe(Host, Port, Options)], Response).
+
+	open_connection(Host, Port, probe_connection(Host, Port, Options), Options).
+
+	close_connection(_Connection).
+
+	exchange(probe_connection(Host, Port, Options), Request, Response) :-
+		http_core::property(Request, websocket_key(Key)),
+		websocket_accept(Key, Accept),
+		http_core::response(
+			http(1, 1),
+			status(101, 'Switching Protocols'),
+			[],
+			empty,
+			[connection([upgrade]), upgrade([websocket]), websocket_accept(Accept), probe(Host, Port, Options)],
+			Response
+		).
+
+:- end_object.
+
+
 :- object(websocket_http_client_handler,
 	implements(http_handler_protocol)).
 

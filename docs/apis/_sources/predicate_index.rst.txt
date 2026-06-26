@@ -1272,6 +1272,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`packs <packs/0::available/2>`
 
+``avatar_alt_text/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`gravatar <gravatar/0::avatar_alt_text/2>`
+
+``avatar_url/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`gravatar <gravatar/0::avatar_url/2>`
+
 ``average/2``
 -------------
 
@@ -3188,6 +3208,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`jwt_compact <jwt_compact/0::compact/4>`
+
+``company/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`gravatar <gravatar/0::company/2>`
 
 ``compare_date_time/3``
 -----------------------
@@ -5217,6 +5247,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`pack_protocol <pack_protocol/0::description/1>`
 * :ref:`registry_protocol <registry_protocol/0::description/1>`
 
+``description/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`gravatar <gravatar/0::description/2>`
+
 ``destination_point/4``
 -----------------------
 
@@ -5864,6 +5904,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ccsds_tc_services <ccsds_tc_services/0::dispatch_service_units_by_map/3>`
+
+``display_name/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`gravatar <gravatar/0::display_name/2>`
 
 ``distance/4``
 --------------
@@ -6540,6 +6590,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`mcp_server <mcp_server/0::elicit_request/5>`
+
+``email_hash/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`gravatar <gravatar/0::email_hash/2>`
 
 ``empty/1``
 -----------
@@ -7605,6 +7665,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`natural <natural/0::fibonacci/2>`
+
+``field/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`gravatar <gravatar/0::field/3>`
 
 ``field/4``
 -----------
@@ -9714,6 +9784,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`gravatar <gravatar/0::hash/2>`
 * :ref:`hash_protocol <hash_protocol/0::hash/2>`
 
 ``haversine_distance/3``
@@ -11660,6 +11731,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`string_distance(Representation) <string_distance/1::jaro_winkler/3>`
 
+``job_title/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`gravatar <gravatar/0::job_title/2>`
+
 ``join/3``
 ----------
 
@@ -13270,6 +13351,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`dates_tz_protocol <dates_tz_protocol/0::local_to_utc_tz_with_resolution/4>`
+
+``location/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`gravatar <gravatar/0::location/2>`
 
 ``locked_pairs/2``
 ------------------
@@ -18833,6 +18924,56 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`setp <setp/0::product/3>`
 
+``profile/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`gravatar <gravatar/0::profile/2>`
+
+``profile/3``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`gravatar <gravatar/0::profile/3>`
+
+``profile_path/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`gravatar_api <gravatar_api/0::profile_path/2>`
+
+``profile_response/3``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`gravatar <gravatar/0::profile_response/3>`
+
+``profile_url/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`gravatar <gravatar/0::profile_url/2>`
+
 ``program_to_clauses/2``
 ------------------------
 
@@ -18882,6 +19023,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`mcp_prompt_protocol <mcp_prompt_protocol/0::prompts/1>`
+
+``pronouns/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`gravatar <gravatar/0::pronouns/2>`
 
 ``propagate/2``
 ---------------
@@ -22101,6 +22252,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::secondary_header_time/3>`
+
+``section_visibility/2``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`gravatar <gravatar/0::section_visibility/2>`
 
 ``secure_compare/2``
 --------------------
@@ -26466,6 +26627,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`linear_algebra_protocol <linear_algebra_protocol/0::vector_value/3>`
+
+``verified_accounts/2``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`gravatar <gravatar/0::verified_accounts/2>`
 
 ``verify/3``
 ------------

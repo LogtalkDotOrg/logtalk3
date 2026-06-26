@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on June 25, 2026
+%  Last updated on June 26, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -111,6 +111,7 @@ logtalk_library_path(gradient_boosting_classifier, library('gradient_boosting_cl
 logtalk_library_path(gradient_boosting_regression, library('gradient_boosting_regression/')).
 logtalk_library_path(grammars, library('grammars/')).
 logtalk_library_path(graphs, library('graphs/')).
+logtalk_library_path(gravatar, library('gravatar/')).
 logtalk_library_path(gsp_pattern_miner, library('gsp_pattern_miner/')).
 logtalk_library_path(hashes, library('hashes/')).
 logtalk_library_path(hdbscan_clusterer, library('hdbscan_clusterer/')).

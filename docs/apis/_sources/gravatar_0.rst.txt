@@ -1,0 +1,421 @@
+.. index:: single: gravatar
+.. _gravatar/0:
+
+.. rst-class:: right
+
+**object**
+
+``gravatar``
+============
+
+Portable Gravatar profile client using the Gravatar REST API.
+
+| **Availability:** 
+|    ``logtalk_load(gravatar(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-26
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`gravatar_api <gravatar_api/0>`
+|    :ref:`http_client(HTTPSocket) <http_client/1>`
+|    :ref:`http_core <http_core/0>`
+|    :ref:`list <list/0>`
+|    :ref:`os <os/0>`
+|    :ref:`sha256 <sha256/0>`
+|    :ref:`url(Representation) <url/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: profile/2
+.. _gravatar/0::profile/2:
+
+``profile/2``
+^^^^^^^^^^^^^
+
+Retrieves a Gravatar profile JSON object for an email address using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``profile(Email,Profile)``
+| **Mode and number of proofs:**
+|    ``profile(+atom,-term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Email`` is a variable:
+|        ``instantiation_error``
+|    ``Email`` is neither a variable nor an atom:
+|        ``type_error(atom,Email)``
+|    The Gravatar API returns a non-success response:
+|        ``gravatar_api_error(Status,Body)``
+
+
+------------
+
+.. index:: profile/3
+.. _gravatar/0::profile/3:
+
+``profile/3``
+^^^^^^^^^^^^^
+
+Retrieves a Gravatar profile JSON object for an email address using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``profile(Email,Profile,Options)``
+| **Mode and number of proofs:**
+|    ``profile(+atom,-term,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Email`` is a variable:
+|        ``instantiation_error``
+|    ``Email`` is neither a variable nor an atom:
+|        ``type_error(atom,Email)``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    The Gravatar API returns a non-success response:
+|        ``gravatar_api_error(Status,Body)``
+
+| **Remarks:**
+
+    - Option ``api_key(APIKey)``: Uses the given Gravatar API key as a Bearer token. When absent, the ``LOGTALK_GRAVATAR_API_KEY`` environment variable is used when defined.
+    - Option ``base_url(URL)``: Overrides the Gravatar API base URL. The default is ``https://api.gravatar.com/v3``.
+    - HTTP options: Options ``headers/1``, ``version/1``, ``properties/1``, and ``connection_options/1`` are forwarded to the HTTP client.
+
+
+------------
+
+.. index:: profile_response/3
+.. _gravatar/0::profile_response/3:
+
+``profile_response/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Retrieves the raw normalized HTTP response for a Gravatar profile request.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``profile_response(Email,Response,Options)``
+| **Mode and number of proofs:**
+|    ``profile_response(+atom,-compound,+list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: email_hash/2
+.. _gravatar/0::email_hash/2:
+
+``email_hash/2``
+^^^^^^^^^^^^^^^^
+
+Computes the Gravatar SHA-256 email hash after trimming leading and trailing whitespace and lowercasing ASCII letters.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``email_hash(Email,Hash)``
+| **Mode and number of proofs:**
+|    ``email_hash(+atom,-atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Email`` is a variable:
+|        ``instantiation_error``
+|    ``Email`` is neither a variable nor an atom:
+|        ``type_error(atom,Email)``
+
+
+------------
+
+.. index:: field/3
+.. _gravatar/0::field/3:
+
+``field/3``
+^^^^^^^^^^^
+
+Returns a top-level field from a decoded Gravatar profile JSON object.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``field(Profile,Field,Value)``
+| **Mode and number of proofs:**
+|    ``field(+term,+atom,?term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: hash/2
+.. _gravatar/0::hash/2:
+
+``hash/2``
+^^^^^^^^^^
+
+Returns the Gravatar profile hash field.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``hash(Profile,Value)``
+| **Mode and number of proofs:**
+|    ``hash(+term,?term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: display_name/2
+.. _gravatar/0::display_name/2:
+
+``display_name/2``
+^^^^^^^^^^^^^^^^^^
+
+Returns the Gravatar profile display name field.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``display_name(Profile,Value)``
+| **Mode and number of proofs:**
+|    ``display_name(+term,?term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: profile_url/2
+.. _gravatar/0::profile_url/2:
+
+``profile_url/2``
+^^^^^^^^^^^^^^^^^
+
+Returns the Gravatar profile URL field.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``profile_url(Profile,Value)``
+| **Mode and number of proofs:**
+|    ``profile_url(+term,?term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: avatar_url/2
+.. _gravatar/0::avatar_url/2:
+
+``avatar_url/2``
+^^^^^^^^^^^^^^^^
+
+Returns the Gravatar avatar URL field.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``avatar_url(Profile,Value)``
+| **Mode and number of proofs:**
+|    ``avatar_url(+term,?term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: avatar_alt_text/2
+.. _gravatar/0::avatar_alt_text/2:
+
+``avatar_alt_text/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns the Gravatar avatar alternative text field.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``avatar_alt_text(Profile,Value)``
+| **Mode and number of proofs:**
+|    ``avatar_alt_text(+term,?term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: location/2
+.. _gravatar/0::location/2:
+
+``location/2``
+^^^^^^^^^^^^^^
+
+Returns the Gravatar profile location field.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``location(Profile,Value)``
+| **Mode and number of proofs:**
+|    ``location(+term,?term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: job_title/2
+.. _gravatar/0::job_title/2:
+
+``job_title/2``
+^^^^^^^^^^^^^^^
+
+Returns the Gravatar profile job title field.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``job_title(Profile,Value)``
+| **Mode and number of proofs:**
+|    ``job_title(+term,?term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: company/2
+.. _gravatar/0::company/2:
+
+``company/2``
+^^^^^^^^^^^^^
+
+Returns the Gravatar profile company field.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``company(Profile,Value)``
+| **Mode and number of proofs:**
+|    ``company(+term,?term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: description/2
+.. _gravatar/0::description/2:
+
+``description/2``
+^^^^^^^^^^^^^^^^^
+
+Returns the Gravatar profile description field.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``description(Profile,Value)``
+| **Mode and number of proofs:**
+|    ``description(+term,?term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: pronouns/2
+.. _gravatar/0::pronouns/2:
+
+``pronouns/2``
+^^^^^^^^^^^^^^
+
+Returns the Gravatar profile pronouns field.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pronouns(Profile,Value)``
+| **Mode and number of proofs:**
+|    ``pronouns(+term,?term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: verified_accounts/2
+.. _gravatar/0::verified_accounts/2:
+
+``verified_accounts/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the Gravatar profile verified accounts field.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``verified_accounts(Profile,Value)``
+| **Mode and number of proofs:**
+|    ``verified_accounts(+term,?term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: section_visibility/2
+.. _gravatar/0::section_visibility/2:
+
+``section_visibility/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the Gravatar profile section visibility field.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``section_visibility(Profile,Value)``
+| **Mode and number of proofs:**
+|    ``section_visibility(+term,?term)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

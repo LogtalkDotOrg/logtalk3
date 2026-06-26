@@ -26,7 +26,7 @@ The `http_socket` library is the first transport-aware layer on top of the
 for connection management while delegating HTTP message framing and connection
 semantics to the existing stream core and server layers.
 
-This library can be used with backend Prolog systems that supports unbound
+This library can be used with backend Prolog systems that support unbound
 integer arithmetic and the `sockets` library: ECLiPSe, SICStus Prolog,
 SWI-Prolog, Trealla Prolog, and XVM.
 

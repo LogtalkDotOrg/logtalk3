@@ -243,6 +243,7 @@
 		rest(loader),
 		open_ai(loader),
 		open_id(loader),
+		gravatar(loader),
 		format(loader),
 		union_find(loader),
 		mutations(loader),

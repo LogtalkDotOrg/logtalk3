@@ -440,3 +440,48 @@
 		read_bytes(Input, NextByte, Bytes).
 
 :- end_object.
+
+
+:- object(scheme_tests,
+	extends(lgtunit)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-06-26,
+		comment is 'Regression tests for scheme-derived defaults in the "http_client" library.'
+	]).
+
+	:- uses(http_core, [
+		property/2, status/2
+	]).
+
+	cover(http_client).
+
+	test(http_client_get_https_3_01, deterministic) :-
+		http_client(probe_http_client_socket)::get('https://example.com/profile', Response, []),
+		status(Response, status(200, 'OK')),
+		property(Response, probe('example.com', 443, [connection_transport(tls)])).
+
+	test(http_client_get_https_3_02, deterministic) :-
+		http_client(probe_http_client_socket)::get(
+			'https://example.com/profile',
+			Response,
+			[connection_options([server_name('example.com')])]
+		),
+		status(Response, status(200, 'OK')),
+		property(Response, probe('example.com', 443, [connection_transport(tls), server_name('example.com')])).
+
+	test(http_client_get_http_3_01, deterministic) :-
+		http_client(probe_http_client_socket)::get('http://example.com/profile', Response, []),
+		status(Response, status(200, 'OK')),
+		property(Response, probe('example.com', 80, [])).
+
+	test(http_client_open_websocket_4_18, deterministic) :-
+		http_client(probe_http_client_socket)::open_websocket('wss://example.com/socket', Connection, Response, []),
+		probe_http_client_socket::close_connection(Connection),
+		status(Response, status(101, 'Switching Protocols')),
+		Connection = probe_connection('example.com', 443, [connection_transport(tls)]),
+		property(Response, probe('example.com', 443, [connection_transport(tls)])).
+
+:- end_object.

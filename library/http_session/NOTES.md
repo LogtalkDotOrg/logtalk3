@@ -48,7 +48,7 @@ object can also be parameterized with alternative `http_socket_protocol`
 implementations such as `http_socket_process`, which supports TLS-backed client
 transport.
 
-This library can be used with backend Prolog systems that supports unbound
+This library can be used with backend Prolog systems that support unbound
 integer arithmetic and the `sockets` library: ECLiPSe, SICStus Prolog,
 SWI-Prolog, Trealla Prolog, and XVM.
 

@@ -303,13 +303,14 @@
 	]).
 
 	request(Method, URL, Response, Options) :-
-		parse_request_options(Options, Headers, Body, QueryPairs, Version, Properties, ConnectionOptions),
-		build_request(Method, URL, Headers, Body, QueryPairs, Version, Properties, Host, Port, Request),
+		parse_request_options(Options, Headers, Body, QueryPairs, Version, Properties, ConnectionOptions0),
+		build_request(Method, URL, Headers, Body, QueryPairs, Version, Properties, Scheme, Host, Port, Request),
+		append_tls_transport(Scheme, ConnectionOptions0, ConnectionOptions),
 		exchange(Host, Port, Request, Response, ConnectionOptions).
 
 	request(ConnectionOrPool, Method, URL, Response, Options) :-
 		parse_request_options(Options, Headers, Body, QueryPairs, Version, Properties, _ConnectionOptions),
-		build_request(Method, URL, Headers, Body, QueryPairs, Version, Properties, Host, Port, Request),
+		build_request(Method, URL, Headers, Body, QueryPairs, Version, Properties, _Scheme, Host, Port, Request),
 		validate_connection_or_pool_endpoint(ConnectionOrPool, Host, Port),
 		exchange(ConnectionOrPool, Request, Response).
 
@@ -356,8 +357,9 @@
 		request(ConnectionOrPool, patch, URL, Response, RequestOptions).
 
 	open_websocket(URL, Connection, Response, Options) :-
-		parse_websocket_options(Options, Headers, QueryPairs, Version, Protocols, Key, ConnectionOptions),
-		build_websocket_request(URL, Headers, QueryPairs, Version, Protocols, Key, Host, Port, Request),
+		parse_websocket_options(Options, Headers, QueryPairs, Version, Protocols, Key, ConnectionOptions0),
+		build_websocket_request(URL, Headers, QueryPairs, Version, Protocols, Key, Scheme, Host, Port, Request),
+		append_tls_transport(Scheme, ConnectionOptions0, ConnectionOptions),
 		open_connection(Host, Port, Connection, ConnectionOptions),
 		catch(
 			(	exchange(Connection, Request, Response),
@@ -497,19 +499,19 @@
 	default_option(protocols([])).
 	default_option(key(none)).
 
-	build_request(Method, URL, Headers, Body, QueryPairs, Version, Properties0, Host, Port, Request) :-
-		parse_http_url(URL, Host, Port, Path, URLQuery),
+	build_request(Method, URL, Headers, Body, QueryPairs, Version, Properties0, Scheme, Host, Port, Request) :-
+		parse_http_url(URL, Scheme, Host, Port, Path, URLQuery),
 		merge_request_query(URLQuery, QueryPairs, Query),
 		build_origin_target(Path, Query, Target),
-		request_host_property(Host, Port, HostProperty),
+		request_host_property(Scheme, Host, Port, HostProperty),
 		http_core::request(Method, Target, Version, Headers, Body, [HostProperty| Properties0], Request).
 
-	build_websocket_request(URL, Headers, QueryPairs, Version, Protocols, Key, Host, Port, Request) :-
-		parse_websocket_url(URL, Host, Port, Path, URLQuery),
+	build_websocket_request(URL, Headers, QueryPairs, Version, Protocols, Key, Scheme, Host, Port, Request) :-
+		parse_websocket_url(URL, Scheme, Host, Port, Path, URLQuery),
 		validate_websocket_http_version(Version),
 		merge_request_query(URLQuery, QueryPairs, Query),
 		build_origin_target(Path, Query, Target),
-		request_host_property(Host, Port, HostProperty),
+		request_host_property(Scheme, Host, Port, HostProperty),
 		websocket_request_properties(Protocols, Key, HostProperty, Properties),
 		http_core::request(get, Target, Version, Headers, empty, Properties, Request).
 
@@ -518,48 +520,54 @@
 	websocket_request_properties(Protocols, Key, HostProperty, [HostProperty, connection([upgrade]), upgrade([websocket]), websocket_key(Key), websocket_version(13), websocket_protocol(Protocols)]) :-
 		Protocols \== [].
 
-	parse_http_url(URL, Host, Port, Path, Query) :-
+	parse_http_url(URL, Scheme, Host, Port, Path, Query) :-
 		(	var(URL) ->
 			instantiation_error
 		;	url(atom)::parse(URL, Components) ->
 			true
 		;	domain_error(http_client_url, URL)
 		),
-		validate_request_scheme(Components),
-		components_endpoint(Components, Host, Port),
+		http_scheme(Components, Scheme),
+		validate_request_scheme(Scheme),
+		components_endpoint(Scheme, Components, Host, Port),
 		components_path_query(Components, Path, Query).
 
-	parse_websocket_url(URL, Host, Port, Path, Query) :-
+	parse_websocket_url(URL, Scheme, Host, Port, Path, Query) :-
 		(	var(URL) ->
 			instantiation_error
 		;	url(atom)::parse(URL, Components) ->
 			true
 		;	domain_error(http_client_websocket_url, URL)
 		),
-		validate_websocket_scheme(Components),
+		websocket_scheme(Components, Scheme),
+		validate_websocket_scheme(Scheme),
 		validate_websocket_fragment(Components, URL),
-		components_endpoint(Components, Host, Port),
+		components_endpoint(Scheme, Components, Host, Port),
 		components_path_query(Components, Path, Query).
 
-	validate_request_scheme(Components) :-
+	http_scheme(Components, Scheme) :-
 		member(scheme(Scheme), Components),
-		!,
+		!.
+	http_scheme(_Components, _Scheme) :-
+		domain_error(http_client_url, missing_scheme).
+
+	websocket_scheme(Components, Scheme) :-
+		member(scheme(Scheme), Components),
+		!.
+	websocket_scheme(_Components, _Scheme) :-
+		domain_error(http_client_websocket_url, missing_scheme).
+
+	validate_request_scheme(Scheme) :-
 		(	_HTTPSocket_::supported_request_scheme(Scheme) ->
 			true
 		;	domain_error(http_client_scheme, Scheme)
 		).
-	validate_request_scheme(_Components) :-
-		domain_error(http_client_url, missing_scheme).
 
-	validate_websocket_scheme(Components) :-
-		member(scheme(Scheme), Components),
-		!,
+	validate_websocket_scheme(Scheme) :-
 		(	_HTTPSocket_::supported_websocket_scheme(Scheme) ->
 			true
 		;	domain_error(http_client_websocket_scheme, Scheme)
 		).
-	validate_websocket_scheme(_Components) :-
-		domain_error(http_client_websocket_url, missing_scheme).
 
 	validate_websocket_fragment(Components, URL) :-
 		(	member(fragment(Fragment), Components), Fragment \== '' ->
@@ -707,19 +715,26 @@
 	response_websocket_protocol_present(Message) :-
 		http_core::property(Message, websocket_protocol(_Protocols)).
 
-	components_endpoint(Components, Host, Port) :-
+	components_endpoint(Scheme, Components, Host, Port) :-
 		member(authority(Authority), Components),
 		!,
-		(	authority_url_context(Authority, Host, Port) ->
+		(	authority_url_context(Scheme, Authority, Host, Port) ->
 			true
 		;	domain_error(http_client_url, Authority)
 		).
-	components_endpoint(Components, _Host, _Port) :-
+	components_endpoint(_Scheme, Components, _Host, _Port) :-
 		domain_error(http_client_url, Components).
 
-	authority_url_context(Authority, Host, Port) :-
-		atomic_list_concat(['http://', Authority, '/'], URL),
-		^^absolute_url_context(URL, http_url_context(http, Host, Port, '/')).
+	authority_url_context(Scheme, Authority, Host, Port) :-
+		endpoint_context_scheme(Scheme, ContextScheme),
+		atomic_list_concat([ContextScheme, '://', Authority, '/'], URL),
+		^^absolute_url_context(URL, http_url_context(ContextScheme, Host, Port, '/')).
+
+	endpoint_context_scheme(ws, http) :-
+		!.
+	endpoint_context_scheme(wss, https) :-
+		!.
+	endpoint_context_scheme(Scheme, Scheme).
 
 	components_path_query(Components, Path, Query) :-
 		(	member(path(Path0), Components) ->
@@ -756,9 +771,28 @@
 		!.
 	build_origin_target(Path, Query, origin(Path, Query)).
 
-	request_host_property(Host, 80, host(Host)) :-
+	request_host_property(http, Host, 80, host(Host)) :-
 		!.
-	request_host_property(Host, Port, host(Host, Port)).
+	request_host_property(ws, Host, 80, host(Host)) :-
+		!.
+	request_host_property(https, Host, 443, host(Host)) :-
+		!.
+	request_host_property(wss, Host, 443, host(Host)) :-
+		!.
+	request_host_property(_Scheme, Host, Port, host(Host, Port)).
+
+	append_tls_transport(Scheme, Options, OptionsWithTransport) :-
+		(	Scheme == https ->
+			append_tls_transport(Options, OptionsWithTransport)
+		;	Scheme == wss ->
+			append_tls_transport(Options, OptionsWithTransport)
+		;	OptionsWithTransport = Options
+		).
+
+	append_tls_transport(Options, Options) :-
+		member(connection_transport(_), Options),
+		!.
+	append_tls_transport(Options, [connection_transport(tls)| Options]).
 
 	validate_connection_or_pool_endpoint(ConnectionOrPool, Host, Port) :-
 		connection_or_pool_endpoint(ConnectionOrPool, EndpointHost, EndpointPort),

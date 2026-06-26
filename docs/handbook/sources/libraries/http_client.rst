@@ -10,7 +10,7 @@ normalized requests from absolute URLs plus options and delegates
 transport to the selected ``http_socket_protocol``-compatible layer,
 such as ``http_socket`` or ``http_socket_process``.
 
-This library can be used with backend Prolog systems that supports
+This library can be used with backend Prolog systems that support
 unbound integer arithmetic and the ``sockets`` library: ECLiPSe, SICStus
 Prolog, SWI-Prolog, Trealla Prolog, and XVM.
 
@@ -181,7 +181,9 @@ Supported request options are:
   properties.
 - ``connection_options(Options)`` to pass transport-specific options
   through to the underlying ``open_connection/4`` call for one-shot
-  requests.
+  requests. When the URL uses the ``https://`` scheme,
+  ``connection_transport(tls)`` is added automatically unless
+  ``Options`` already specify a transport explicitly.
 
 Supported WebSocket opening-handshake options are:
 
@@ -196,6 +198,9 @@ Supported WebSocket opening-handshake options are:
   omitted, a fresh key is generated automatically.
 - ``connection_options(Options)`` to pass transport-specific options
   through to the selected transport ``open_connection/4`` predicate.
+  When the URL uses the ``wss://`` scheme, ``connection_transport(tls)``
+  is added automatically unless ``Options`` already specify a transport
+  explicitly.
 
 The stream-based primitives remain available from the
 ``http_client_core`` object.
@@ -277,9 +282,15 @@ Current limitations
   ``open_websocket/4``. The corresponding TLS-backed ``https://`` and
   ``wss://`` schemes are therefore not supported in this
   parameterization.
-- This non-TLS limitation does not apply to the ``http_socket_process``
-  parameterization, which provides transport support for secure schemes
-  via the same ``http_socket_protocol`` interface.
+- When the selected transport parameterization supports secure schemes,
+  the request-oriented facade defaults ``https://`` and ``wss://`` URLs
+  without an explicit port to port ``443`` and adds
+  ``connection_transport(tls)`` to the connection options automatically
+  unless already specified explicitly.
+- This TLS-aware behavior applies, for example, to the
+  ``http_socket_process`` parameterization, which provides transport
+  support for secure schemes via the same ``http_socket_protocol``
+  interface.
 - The ``open_websocket/4`` predicate is limited to opening-handshake
   validation. See the dedicated WebSocket libraries for frame parsing,
   message reassembly, and related functionality.

@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on June 25, 2026
+##   Last updated on June 26, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -157,6 +157,7 @@ sed '1,19d' ../../../library/gradient_boosting_classifier/NOTES.md | pandoc -f g
 sed '1,19d' ../../../library/gradient_boosting_regression/NOTES.md | pandoc -f gfm -t rst -o libraries/gradient_boosting_regression.rst
 sed '1,19d' ../../../library/grammars/NOTES.md | pandoc -f gfm -t rst -o libraries/grammars.rst
 sed '1,19d' ../../../library/graphs/NOTES.md | pandoc -f gfm -t rst -o libraries/graphs.rst
+sed '1,19d' ../../../library/gravatar/NOTES.md | pandoc -f gfm -t rst -o libraries/gravatar.rst
 sed '1,19d' ../../../library/gsp_pattern_miner/NOTES.md | pandoc -f gfm -t rst -o libraries/gsp_pattern_miner.rst
 sed '1,19d' ../../../library/hashes/NOTES.md | pandoc -f gfm -t rst -o libraries/hashes.rst
 sed '1,19d' ../../../library/hdbscan_clusterer/NOTES.md | pandoc -f gfm -t rst -o libraries/hdbscan_clusterer.rst

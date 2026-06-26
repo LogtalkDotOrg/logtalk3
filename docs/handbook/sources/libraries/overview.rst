@@ -42,8 +42,8 @@ multiple areas):
   ``http_router``, ``http_server``, ``http_session``, ``http_socket``,
   ``http_socket_process``, ``http_static_files``, ``http_websocket``,
   ``http_websocket_messages``, ``http_websocket_service``,
-  ``http_websocket_session``, ``open_api``, ``open_ai``, ``open_id``,
-  and ``rest``.
+  ``http_websocket_session``, ``gravatar``, ``open_api``, ``open_ai``,
+  ``open_id``, and ``rest``.
 - Identifiers: ``cuid2``, ``genint``, ``gensym``, ``ids``, ``ksuid``,
   ``nanoid``, ``snowflakeid``, ``ulid``, and ``uuid``.
 - Interchange formats and wire protocols: ``amqp``, ``avro``,
