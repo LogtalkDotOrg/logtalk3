@@ -1,0 +1,106 @@
+.. index:: single: open_id_der
+.. _open_id_der/0:
+
+.. rst-class:: right
+
+**object**
+
+``open_id_der``
+===============
+
+DER and PEM helpers for OpenID Connect JWT signature verification.
+
+| **Availability:** 
+|    ``logtalk_load(open_id(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-25
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`open_id_helpers <open_id_helpers/0>`
+| **Uses:**
+|    :ref:`base64 <base64/0>`
+|    :ref:`list <list/0>`
+|    :ref:`user <user/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: public_key_pem/2
+.. _open_id_der/0::public_key_pem/2:
+
+``public_key_pem/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Converts a supported JWK public key into PEM SubjectPublicKeyInfo text.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``public_key_pem(Key,PEM)``
+| **Mode and number of proofs:**
+|    ``public_key_pem(+term,-atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Key`` is not a supported RSA or P-256 EC public JWK:
+|        ``domain_error(open_id_jwk_public_key,Key)``
+|    ``Key`` contains Base64URL data with characters outside the Base64URL alphabet:
+|        ``representation_error(base64)``
+
+
+------------
+
+.. index:: es256_signature_der/2
+.. _open_id_der/0::es256_signature_der/2:
+
+``es256_signature_der/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts a raw ES256 signature into DER-encoded ASN.1 form.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``es256_signature_der(Signature,DER)``
+| **Mode and number of proofs:**
+|    ``es256_signature_der(+list(byte),-list(byte))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Signature`` is not a 64-byte raw ES256 signature:
+|        ``domain_error(open_id_es256_signature,Signature)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

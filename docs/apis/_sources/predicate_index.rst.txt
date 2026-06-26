@@ -662,6 +662,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`code_metric <code_metric/0::all_score/1>`
 
+``allowed_algorithm/2``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`jwt_jwa <jwt_jwa/0::allowed_algorithm/2>`
+
 ``along_track_distance/4``
 --------------------------
 
@@ -1210,6 +1220,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http_authenticate <http_authenticate/0::authorization/2>`
 * :ref:`http_digest <http_digest/0::authorization/2>`
+
+``authorization_url/5``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_id <open_id/0::authorization_url/5>`
+* :ref:`open_id_pkce <open_id_pkce/0::authorization_url/5>`
 
 ``authorize_request/6``
 -----------------------
@@ -2559,6 +2580,28 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`sampling_protocol <sampling_protocol/0::circular_uniform_polar/3>`
 
+``claim/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`jwt <jwt/0::claim/3>`
+* :ref:`jwt_claims <jwt_claims/0::claim/3>`
+
+``claims/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`jwt <jwt/0::claims/2>`
+* :ref:`jwt_compact <jwt_compact/0::claims/2>`
+
 ``class/1``
 -----------
 
@@ -2906,6 +2949,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ccsds_cuc(CoarseOctets,FineOctets,Epoch) <ccsds_cuc/3::coarse/2>`
 
+``code_challenge/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_id_pkce <open_id_pkce/0::code_challenge/2>`
+
+``code_verifier/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_id_pkce <open_id_pkce/0::code_verifier/2>`
+
 ``codes_to_bytes/2``
 --------------------
 
@@ -3116,6 +3179,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`json_ld_protocol <json_ld_protocol/0::compact/3>`
 
+``compact/4``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`jwt_compact <jwt_compact/0::compact/4>`
+
 ``compare_date_time/3``
 -----------------------
 
@@ -3125,6 +3198,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`datep <datep/0::compare_date_time/3>`
+
+``compatible_key/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`jwt_jwk <jwt_jwk/0::compatible_key/2>`
 
 ``compile_aux_clauses/1``
 -------------------------
@@ -4394,6 +4477,29 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`geohash_protocol <geohash_protocol/0::decode/2>`
 * :ref:`json_rpc <json_rpc/0::decode/2>`
+
+``decode/3``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`jwt <jwt/0::decode/3>`
+* :ref:`jwt_compact <jwt_compact/0::decode/3>`
+* :ref:`open_id_jwt <open_id_jwt/0::decode/3>`
+
+``decode/5``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`jwt <jwt/0::decode/5>`
+* :ref:`jwt_compact <jwt_compact/0::decode/5>`
 
 ``decode_bits/3``
 -----------------
@@ -5668,6 +5774,27 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`stomp <stomp/0::disconnect/2>`
 
+``discover/3``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_id <open_id/0::discover/3>`
+* :ref:`open_id_client <open_id_client/0::discover/3>`
+
+``discovery_url/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_id_discovery <open_id_discovery/0::discovery_url/2>`
+
 ``disjoint/2``
 --------------
 
@@ -6894,6 +7021,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`json_rpc <json_rpc/0::error_response/5>`
 
+``es256_signature_der/2``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`jwt_der <jwt_der/0::es256_signature_der/2>`
+* :ref:`open_id_der <open_id_der/0::es256_signature_der/2>`
+
 ``essentially_equal/3``
 -----------------------
 
@@ -7041,6 +7179,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`amqp <amqp/0::exchange_bind/4>`
+
+``exchange_code/5``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_id <open_id/0::exchange_code/5>`
+* :ref:`open_id_client <open_id_client/0::exchange_code/5>`
 
 ``exchange_connection/3``
 -------------------------
@@ -9639,6 +9788,8 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http_request_protocol <http_request_protocol/0::header/2>`
 * :ref:`http_response_protocol <http_response_protocol/0::header/2>`
+* :ref:`jwt <jwt/0::header/2>`
+* :ref:`jwt_compact <jwt_compact/0::header/2>`
 
 ``header/3``
 ------------
@@ -9649,6 +9800,28 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_core <http_core/0::header/3>`
+
+``header_algorithm/2``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`jwt_jwa <jwt_jwa/0::header_algorithm/2>`
+* :ref:`open_id_jwks <open_id_jwks/0::header_algorithm/2>`
+
+``header_key_id/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`jwt_jwa <jwt_jwa/0::header_key_id/2>`
+* :ref:`open_id_jwks <open_id_jwks/0::header_key_id/2>`
 
 ``headers/1``
 -------------
@@ -9821,6 +9994,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`redis <redis/0::hlen/3>`
+
+``hmac_hash/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`jwt_jwa <jwt_jwa/0::hmac_hash/2>`
 
 ``home/1``
 ----------
@@ -11667,6 +11850,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`queuep <queuep/0::jump_all_block/3>`
 
+``jwks/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_id <open_id/0::jwks/3>`
+* :ref:`open_id_client <open_id_client/0::jwks/3>`
+
 ``k_distinct_subsequence/3``
 ----------------------------
 
@@ -11736,6 +11930,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`pairs <pairs/0::key/2>`
+
+``key_type/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`jwt_jwa <jwt_jwa/0::key_type/2>`
 
 ``keys/2``
 ----------
@@ -17498,6 +17702,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`crypto <crypto/0::pbkdf2/6>`
 
+``peek_algorithm/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`jwt <jwt/0::peek_algorithm/2>`
+
 ``peek_back/2``
 ---------------
 
@@ -17517,6 +17731,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`deque_protocol <deque_protocol/0::peek_front/2>`
+
+``peek_key_id/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`jwt <jwt/0::peek_key_id/2>`
 
 ``pending_data/2``
 ------------------
@@ -18824,6 +19048,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`http_websocket(HTTPSocket) <http_websocket/1::property/2>`
 * :ref:`http_websocket_frames <http_websocket_frames/0::property/2>`
 
+``property/3``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_id_discovery <open_id_discovery/0::property/3>`
+
 ``protect_request/4``
 ---------------------
 
@@ -18854,6 +19088,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`interpreterp <interpreterp/0::prove/3>`
+
+``provider/3``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_id_discovery <open_id_discovery/0::provider/3>`
+
+``provider/4``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_id_discovery <open_id_discovery/0::provider/4>`
 
 ``provides/2``
 --------------
@@ -18904,6 +19158,18 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`linear_algebra_protocol <linear_algebra_protocol/0::pseudo_inverse/3>`
+
+``public_key_pem/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`jwt_der <jwt_der/0::public_key_pem/2>`
+* :ref:`jwt_jwk <jwt_jwk/0::public_key_pem/2>`
+* :ref:`open_id_der <open_id_der/0::public_key_pem/2>`
 
 ``push_back/3``
 ---------------
@@ -21918,6 +22184,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ccsds_tm_frames(FrameLength,SecondaryHeaderLength,HasFECF) <ccsds_tm_frames/3::segment_length_identifier/2>`
 
+``segments/5``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`jwt_compact <jwt_compact/0::segments/5>`
+
 ``select/3``
 ------------
 
@@ -21941,6 +22217,27 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`listp <listp/0::select/4>`
 * :ref:`random_protocol <random_protocol/0::select/4>`
+
+``select_key/3``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`jwt_jwks <jwt_jwks/0::select_key/3>`
+* :ref:`open_id_jwks <open_id_jwks/0::select_key/3>`
+
+``select_key/4``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`jwt_jwks <jwt_jwks/0::select_key/4>`
 
 ``selectchk/3``
 ---------------
@@ -22661,6 +22958,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`linda_client <linda_client/0::shutdown_server/1>`
 
+``sign/5``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`jwt <jwt/0::sign/5>`
+* :ref:`jwt_jws <jwt_jws/0::sign/5>`
+
 ``sign//1``
 -----------
 
@@ -22671,6 +22979,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`number_grammars(Format) <number_grammars/1::sign//1>`
 
+``sign_payload/5``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`jwt <jwt/0::sign_payload/5>`
+* :ref:`jwt_jws <jwt_jws/0::sign_payload/5>`
+
 ``signaling_field/2``
 ---------------------
 
@@ -22680,6 +22999,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ccsds_aos_frames(FrameLength,InsertZoneLength,HasOCF,HasFECF) <ccsds_aos_frames/4::signaling_field/2>`
+
+``signing_input/4``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`jwt_compact <jwt_compact/0::signing_input/4>`
 
 ``singleton/2``
 ---------------
@@ -23945,6 +24274,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`application_protocol <application_protocol/0::supplier/1>`
 
+``supported_algorithm/1``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`jwt_jwa <jwt_jwa/0::supported_algorithm/1>`
+
 ``supported_range/2``
 ---------------------
 
@@ -24065,6 +24404,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`linear_algebra_protocol <linear_algebra_protocol/0::symmetric_eigen/5>`
+
+``symmetric_key_bytes/2``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`jwt_jwk <jwt_jwk/0::symmetric_key_bytes/2>`
 
 ``synchronization_flag/2``
 --------------------------
@@ -25769,6 +26118,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`flags_validator <flags_validator/0::validate/1>`
 * :ref:`geojson_protocol <geojson_protocol/0::validate/1>`
+* :ref:`jwt_jwks <jwt_jwks/0::validate/1>`
 * :ref:`wkt_wkb_protocol <wkt_wkb_protocol/0::validate/1>`
 
 ``validate/2``
@@ -25792,6 +26142,28 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`json_schema_protocol <json_schema_protocol/0::validate/3>`
+
+``validate_claim/3``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`jwt <jwt/0::validate_claim/3>`
+* :ref:`jwt_claims <jwt_claims/0::validate_claim/3>`
+
+``validate_claims/3``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`jwt <jwt/0::validate_claims/3>`
+* :ref:`jwt_claims <jwt_claims/0::validate_claims/3>`
 
 ``validate_document/1``
 -----------------------
@@ -26105,6 +26477,29 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http_authenticate_verifier_protocol <http_authenticate_verifier_protocol/0::verify/3>`
 
+``verify/4``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`jwt <jwt/0::verify/4>`
+
+``verify/5``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`jwt <jwt/0::verify/5>`
+* :ref:`jwt_jws <jwt_jws/0::verify/5>`
+* :ref:`jwt_openssl <jwt_openssl/0::verify/5>`
+* :ref:`open_id_openssl <open_id_openssl/0::verify/5>`
+
 ``verify_commands_availability/0``
 ----------------------------------
 
@@ -26129,6 +26524,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ccsds_tc_frames(FrameLength,SegmentHeaderLength,HasFECF) <ccsds_tc_frames/3::verify_fecf/1>`
 * :ref:`ccsds_tm_frames(FrameLength,SecondaryHeaderLength,HasFECF) <ccsds_tm_frames/3::verify_fecf/1>`
 
+``verify_id_token/5``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_id <open_id/0::verify_id_token/5>`
+* :ref:`open_id_jwt <open_id_jwt/0::verify_id_token/5>`
+
 ``verify_password_hash/2``
 --------------------------
 
@@ -26138,6 +26544,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`crypto <crypto/0::verify_password_hash/2>`
+
+``verify_signature/5``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`jwt <jwt/0::verify_signature/5>`
 
 ``version/1``
 -------------

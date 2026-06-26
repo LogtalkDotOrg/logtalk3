@@ -66,6 +66,7 @@ Categories
    http_router_server_session(Manager) <http_router_server_session_1>
    http_text_helpers <http_text_helpers_0>
    ieee_754_common(Precision,ByteOrder) <ieee_754_common_2>
+   jwt_helpers <jwt_helpers_0>
    lgtdoc_messages <lgtdoc_messages_0>
    lgtunit_messages <lgtunit_messages_0>
    library_diagram(Format) <library_diagram_1>
@@ -79,6 +80,7 @@ Categories
    mutations <mutations_0>
    mutator_common <mutator_common_0>
    observer <observer_0>
+   open_id_helpers <open_id_helpers_0>
    options <options_0>
    os_types <os_types_0>
    packs_common <packs_common_0>
@@ -413,6 +415,15 @@ Objects
    json_schema <json_schema_0>
    json_schema(StringRepresentation) <json_schema_1>
    json_schema(ObjectRepresentation,PairRepresentation,StringRepresentation) <json_schema_3>
+   jwt <jwt_0>
+   jwt_claims <jwt_claims_0>
+   jwt_compact <jwt_compact_0>
+   jwt_der <jwt_der_0>
+   jwt_jwa <jwt_jwa_0>
+   jwt_jwk <jwt_jwk_0>
+   jwt_jwks <jwt_jwks_0>
+   jwt_jws <jwt_jws_0>
+   jwt_openssl <jwt_openssl_0>
    kcenters_clusterer <kcenters_clusterer_0>
    kemeny_young_ranker <kemeny_young_ranker_0>
    kernel_pca_projection <kernel_pca_projection_0>
@@ -503,6 +514,14 @@ Objects
    open_ai_event_stream <open_ai_event_stream_0>
    open_ai_server(Backend) <open_ai_server_1>
    open_api <open_api_0>
+   open_id <open_id_0>
+   open_id_client <open_id_client_0>
+   open_id_der <open_id_der_0>
+   open_id_discovery <open_id_discovery_0>
+   open_id_jwks <open_id_jwks_0>
+   open_id_jwt <open_id_jwt_0>
+   open_id_openssl <open_id_openssl_0>
+   open_id_pkce <open_id_pkce_0>
    optics_clusterer <optics_clusterer_0>
    optional <optional_0>
    optional(Optional) <optional_1>

@@ -1,0 +1,221 @@
+.. index:: single: jwt_helpers
+.. _jwt_helpers/0:
+
+.. rst-class:: right
+
+**category**
+
+``jwt_helpers``
+===============
+
+Internal shared helpers for the jwt library.
+
+| **Availability:** 
+|    ``logtalk_load(jwt(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-26
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Extends:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`base64url <base64url/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: json_member/3
+.. _jwt_helpers/0::json_member/3:
+
+``json_member/3``
+^^^^^^^^^^^^^^^^^
+
+Enumerates JSON object member values for a given key.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``json_member(Key,Object,Value)``
+| **Mode and number of proofs:**
+|    ``json_member(+atom,+term,-term)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: json_member_default/4
+.. _jwt_helpers/0::json_member_default/4:
+
+``json_member_default/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a JSON object member value or a default when the key is absent.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``json_member_default(Key,Object,Default,Value)``
+| **Mode and number of proofs:**
+|    ``json_member_default(+atom,+term,+term,-term)`` - ``one``
+
+
+------------
+
+.. index:: json_object_pairs/2
+.. _jwt_helpers/0::json_object_pairs/2:
+
+``json_object_pairs/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Extracts the key-value pairs from a JSON object term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``json_object_pairs(Object,Pairs)``
+| **Mode and number of proofs:**
+|    ``json_object_pairs(+term,-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: pair_key_value/3
+.. _jwt_helpers/0::pair_key_value/3:
+
+``pair_key_value/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Extracts the key and value from a JSON pair compound term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pair_key_value(Pair,Key,Value)``
+| **Mode and number of proofs:**
+|    ``pair_key_value(+compound,-term,-term)`` - ``one``
+
+
+------------
+
+.. index:: base64url_atom_bytes/2
+.. _jwt_helpers/0::base64url_atom_bytes/2:
+
+``base64url_atom_bytes/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts between Base64URL atoms and byte lists.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``base64url_atom_bytes(Atom,Bytes)``
+| **Mode and number of proofs:**
+|    ``base64url_atom_bytes(+atom,-list(byte))`` - ``one_or_error``
+|    ``base64url_atom_bytes(-atom,+list(byte))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Atom`` is a variable or the sink is a variable:
+|        ``instantiation_error``
+|    ``Atom`` is neither a variable nor a valid Base64URL source term:
+|        ``domain_error(base64url_source,codes(Codes))``
+|    ``Bytes`` cannot be encoded in the requested Base64URL sink representation:
+|        ``domain_error(base64url_sink,codes(Codes))``
+|    ``Atom`` contains Base64URL data with characters outside the Base64URL alphabet:
+|        ``representation_error(base64)``
+
+
+------------
+
+.. index:: atom_bytes/2
+.. _jwt_helpers/0::atom_bytes/2:
+
+``atom_bytes/2``
+^^^^^^^^^^^^^^^^
+
+Converts between an atom and its byte list representation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``atom_bytes(Atom,Bytes)``
+| **Mode and number of proofs:**
+|    ``atom_bytes(+atom,-list(byte))`` - ``one``
+|    ``atom_bytes(-atom,+list(byte))`` - ``one``
+
+
+------------
+
+.. index:: bytes_atom/2
+.. _jwt_helpers/0::bytes_atom/2:
+
+``bytes_atom/2``
+^^^^^^^^^^^^^^^^
+
+Converts a byte list into an atom.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bytes_atom(Bytes,Atom)``
+| **Mode and number of proofs:**
+|    ``bytes_atom(+list(byte),-atom)`` - ``one``
+
+
+------------
+
+.. index:: atom_list/1
+.. _jwt_helpers/0::atom_list/1:
+
+``atom_list/1``
+^^^^^^^^^^^^^^^
+
+Validates that a list contains only atoms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``atom_list(Atoms)``
+| **Mode and number of proofs:**
+|    ``atom_list(+list(atom))`` - ``zero_or_one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

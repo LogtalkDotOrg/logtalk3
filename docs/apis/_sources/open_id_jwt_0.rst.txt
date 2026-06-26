@@ -1,0 +1,149 @@
+.. index:: single: open_id_jwt
+.. _open_id_jwt/0:
+
+.. rst-class:: right
+
+**object**
+
+``open_id_jwt``
+===============
+
+JWT parsing and ID-token verification helpers.
+
+| **Availability:** 
+|    ``logtalk_load(open_id(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-25
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`open_id_helpers <open_id_helpers/0>`
+| **Uses:**
+|    :ref:`jwt <jwt/0>`
+|    :ref:`jwt_jwa <jwt_jwa/0>`
+|    :ref:`list <list/0>`
+|    :ref:`os <os/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: decode/3
+.. _open_id_jwt/0::decode/3:
+
+``decode/3``
+^^^^^^^^^^^^
+
+Decodes a JWT into its header and claims JSON terms without verifying the signature.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode(Token,Header,Claims)``
+| **Mode and number of proofs:**
+|    ``decode(+atom,-term,-term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Token`` is a variable:
+|        ``instantiation_error``
+|    ``Token`` is neither a variable nor an atom:
+|        ``type_error(atom,Token)``
+|    ``Token`` is an atom but not a valid compact JWT:
+|        ``domain_error(jwt_compact_serialization,Token)``
+|    ``Token`` contains Base64URL data with characters outside the Base64URL alphabet:
+|        ``representation_error(base64)``
+
+
+------------
+
+.. index:: verify_id_token/5
+.. _open_id_jwt/0::verify_id_token/5:
+
+``verify_id_token/5``
+^^^^^^^^^^^^^^^^^^^^^
+
+Verifies an ID-token signature and claims using the given provider metadata and JWKS.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``verify_id_token(Token,Provider,JWKSet,Claims,Options)``
+| **Mode and number of proofs:**
+|    ``verify_id_token(+atom,+compound,+term,-term,+list(compound))`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Token`` is a variable:
+|        ``instantiation_error``
+|    ``Token`` is neither a variable nor an atom:
+|        ``type_error(atom,Token)``
+|    ``Token`` is an atom but not a valid compact JWT:
+|        ``domain_error(jwt_compact_serialization,Token)``
+|    ``Token`` contains Base64URL data with characters outside the Base64URL alphabet:
+|        ``representation_error(base64)``
+|    The JWT header does not contain a valid ``alg`` member:
+|        ``domain_error(jwt_header,Header)``
+|    The JWT algorithm is unsupported or disallowed:
+|        ``domain_error(open_id_jwt_algorithm,Algorithm)``
+|    ``JWKSet`` is not a JSON Web Key Set with a ``keys`` list:
+|        ``domain_error(jwt_jwks,JWKSet)``
+|    No compatible key exists for the JWT header:
+|        ``existence_error(jwt_jwk,Header)``
+|    The selected JWK is not a supported public key:
+|        ``domain_error(jwt_jwk_public_key,Key)``
+|    The ES256 signature is not 64 bytes long:
+|        ``domain_error(jwt_es256_signature,Signature)``
+|    The OpenSSL executable does not exist:
+|        ``existence_error(os_command,Executable)``
+|    The ``iss`` claim does not match the provider issuer:
+|        ``domain_error(open_id_claim(iss),Value)``
+|    A required OpenID ID-token claim is missing:
+|        ``domain_error(open_id_claims,missing(Name))``
+|    The expected audience option is missing:
+|        ``domain_error(open_id_claims,missing(expected_audience))``
+|    An OpenID ID-token claim has an invalid value:
+|        ``domain_error(open_id_claim(Name),Value)``
+|    An OpenID ID-token time claim value is not a number:
+|        ``type_error(time_number,Name-Time)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

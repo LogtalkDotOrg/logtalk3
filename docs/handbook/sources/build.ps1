@@ -209,6 +209,7 @@ Foreach-Object {
 (Get-Content ../../../library/json_pointer/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/json_pointer.rst
 (Get-Content ../../../library/json_rpc/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/json_rpc.rst
 (Get-Content ../../../library/json_schema/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/json_schema.rst
+(Get-Content ../../../library/jwt/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/jwt.rst
 (Get-Content ../../../library/kcenters_clusterer/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/kcenters_clusterer.rst
 (Get-Content ../../../library/kemeny_young_ranker/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/kemeny_young_ranker.rst
 (Get-Content ../../../library/kernel_svm_classifier/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/kernel_svm_classifier.rst
@@ -252,6 +253,7 @@ Foreach-Object {
 (Get-Content ../../../library/nmf_projection/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/nmf_projection.rst
 (Get-Content ../../../library/open_api/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/open_api.rst
 (Get-Content ../../../library/open_ai/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/open_ai.rst
+(Get-Content ../../../library/open_id/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/open_id.rst
 (Get-Content ../../../library/optics_clusterer/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/optics_clusterer.rst
 (Get-Content ../../../library/optionals/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/optionals.rst
 (Get-Content ../../../library/options/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/options.rst

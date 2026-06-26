@@ -1,0 +1,423 @@
+.. index:: single: open_id_helpers
+.. _open_id_helpers/0:
+
+.. rst-class:: right
+
+**category**
+
+``open_id_helpers``
+===================
+
+Internal shared helpers for the open_id library.
+
+| **Availability:** 
+|    ``logtalk_load(open_id(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-25
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Extends:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`base64url <base64url/0>`
+|    :ref:`http_core <http_core/0>`
+|    :ref:`list <list/0>`
+|    :ref:`url(Representation) <url/1>`
+|    :ref:`user <user/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: json_member/3
+.. _open_id_helpers/0::json_member/3:
+
+``json_member/3``
+^^^^^^^^^^^^^^^^^
+
+Enumerates JSON object member values for a given key.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``json_member(Key,Object,Value)``
+| **Mode and number of proofs:**
+|    ``json_member(+atom,+term,-term)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: json_member_default/4
+.. _open_id_helpers/0::json_member_default/4:
+
+``json_member_default/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a JSON object member value or a default when the key is absent.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``json_member_default(Key,Object,Default,Value)``
+| **Mode and number of proofs:**
+|    ``json_member_default(+atom,+term,+term,-term)`` - ``one``
+
+
+------------
+
+.. index:: provider_property/3
+.. _open_id_helpers/0::provider_property/3:
+
+``provider_property/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Looks up a property in a provider metadata compound term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``provider_property(Provider,Name,Value)``
+| **Mode and number of proofs:**
+|    ``provider_property(+compound,+atom,-term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: provider_property_default/4
+.. _open_id_helpers/0::provider_property_default/4:
+
+``provider_property_default/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a provider metadata property or a default when the property is absent.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``provider_property_default(Provider,Name,Default,Value)``
+| **Mode and number of proofs:**
+|    ``provider_property_default(+compound,+atom,+term,-term)`` - ``one``
+
+
+------------
+
+.. index:: normalize_options_term/2
+.. _open_id_helpers/0::normalize_options_term/2:
+
+``normalize_options_term/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Normalizes either a direct options list or a named options wrapper term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``normalize_options_term(NameOptions,Options)``
+| **Mode and number of proofs:**
+|    ``normalize_options_term(+term,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: query_atom/2
+.. _open_id_helpers/0::query_atom/2:
+
+``query_atom/2``
+^^^^^^^^^^^^^^^^
+
+Encodes query parameters as a URL query atom.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``query_atom(Pairs,Query)``
+| **Mode and number of proofs:**
+|    ``query_atom(+list(pair),-atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The HTTP body sink is a variable:
+|        ``instantiation_error``
+|    The HTTP body sink is not a valid sink term:
+|        ``domain_error(http_sink,Sink)``
+|    ``Pairs`` cannot be represented as an HTTP form body:
+|        ``domain_error(http_body,Body)``
+|    The HTTP body options are invalid:
+|        ``domain_error(http_body_options,Options)``
+
+
+------------
+
+.. index:: space_atom/2
+.. _open_id_helpers/0::space_atom/2:
+
+``space_atom/2``
+^^^^^^^^^^^^^^^^
+
+Converts an atom or list of atoms into a space-separated atom.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``space_atom(Value,Atom)``
+| **Mode and number of proofs:**
+|    ``space_atom(+term,-atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Value`` is neither an atom nor a list of atoms:
+|        ``domain_error(open_id_space_separated_atom,Value)``
+
+
+------------
+
+.. index:: url_scheme/2
+.. _open_id_helpers/0::url_scheme/2:
+
+``url_scheme/2``
+^^^^^^^^^^^^^^^^
+
+Extracts the scheme from an absolute URL atom.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``url_scheme(URL,Scheme)``
+| **Mode and number of proofs:**
+|    ``url_scheme(+atom,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: https_url/1
+.. _open_id_helpers/0::https_url/1:
+
+``https_url/1``
+^^^^^^^^^^^^^^^
+
+Succeeds when the URL uses the https scheme.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``https_url(URL)``
+| **Mode and number of proofs:**
+|    ``https_url(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: localhost_http_url/1
+.. _open_id_helpers/0::localhost_http_url/1:
+
+``localhost_http_url/1``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Succeeds when the URL uses http for a localhost or loopback host.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``localhost_http_url(URL)``
+| **Mode and number of proofs:**
+|    ``localhost_http_url(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: ensure_absolute_url/2
+.. _open_id_helpers/0::ensure_absolute_url/2:
+
+``ensure_absolute_url/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Validates that a value is an absolute URL for the given domain label.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``ensure_absolute_url(Domain,URL)``
+| **Mode and number of proofs:**
+|    ``ensure_absolute_url(+atom,+atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``URL`` is a variable:
+|        ``instantiation_error``
+|    ``URL`` is not an absolute URL atom:
+|        ``domain_error(Domain,URL)``
+
+
+------------
+
+.. index:: ensure_secure_url/3
+.. _open_id_helpers/0::ensure_secure_url/3:
+
+``ensure_secure_url/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Validates that a URL uses https or an allowed localhost exception.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``ensure_secure_url(Domain,URL,Options)``
+| **Mode and number of proofs:**
+|    ``ensure_secure_url(+atom,+atom,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``URL`` is a variable:
+|        ``instantiation_error``
+|    ``URL`` is not an absolute URL atom:
+|        ``domain_error(Domain,URL)``
+|    ``URL`` is not secure and is not an allowed localhost HTTP URL:
+|        ``domain_error(Domain,URL)``
+
+
+------------
+
+.. index:: atom_bytes/2
+.. _open_id_helpers/0::atom_bytes/2:
+
+``atom_bytes/2``
+^^^^^^^^^^^^^^^^
+
+Converts between an atom and its byte list representation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``atom_bytes(Atom,Bytes)``
+| **Mode and number of proofs:**
+|    ``atom_bytes(+atom,-list(byte))`` - ``one``
+|    ``atom_bytes(-atom,+list(byte))`` - ``one``
+
+
+------------
+
+.. index:: bytes_atom/2
+.. _open_id_helpers/0::bytes_atom/2:
+
+``bytes_atom/2``
+^^^^^^^^^^^^^^^^
+
+Converts a byte list into an atom.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bytes_atom(Bytes,Atom)``
+| **Mode and number of proofs:**
+|    ``bytes_atom(+list(byte),-atom)`` - ``one``
+
+
+------------
+
+.. index:: base64url_atom_bytes/2
+.. _open_id_helpers/0::base64url_atom_bytes/2:
+
+``base64url_atom_bytes/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts between Base64URL atoms and byte lists.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``base64url_atom_bytes(Atom,Bytes)``
+| **Mode and number of proofs:**
+|    ``base64url_atom_bytes(+atom,-list(byte))`` - ``one_or_error``
+|    ``base64url_atom_bytes(-atom,+list(byte))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Atom`` is a variable or the sink is a variable:
+|        ``instantiation_error``
+|    ``Atom`` is neither a variable nor a valid Base64URL source term:
+|        ``domain_error(base64url_source,codes(Codes))``
+|    ``Bytes`` cannot be encoded in the requested Base64URL sink representation:
+|        ``domain_error(base64url_sink,codes(Codes))``
+|    ``Atom`` contains Base64URL data with characters outside the Base64URL alphabet:
+|        ``representation_error(base64)``
+
+
+------------
+
+.. index:: json_object_pairs/2
+.. _open_id_helpers/0::json_object_pairs/2:
+
+``json_object_pairs/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Extracts the key-value pairs from a JSON object term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``json_object_pairs(Object,Pairs)``
+| **Mode and number of proofs:**
+|    ``json_object_pairs(+term,-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: pair_key_value/3
+.. _open_id_helpers/0::pair_key_value/3:
+
+``pair_key_value/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Extracts the key and value from a JSON pair compound term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pair_key_value(Pair,Key,Value)``
+| **Mode and number of proofs:**
+|    ``pair_key_value(+compound,-term,-term)`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

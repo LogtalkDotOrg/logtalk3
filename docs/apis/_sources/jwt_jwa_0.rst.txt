@@ -1,0 +1,178 @@
+.. index:: single: jwt_jwa
+.. _jwt_jwa/0:
+
+.. rst-class:: right
+
+**object**
+
+``jwt_jwa``
+===========
+
+JSON Web Algorithm metadata and header helpers.
+
+| **Availability:** 
+|    ``logtalk_load(jwt(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-26
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`jwt_helpers <jwt_helpers/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: header_algorithm/2
+.. _jwt_jwa/0::header_algorithm/2:
+
+``header_algorithm/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Extracts and validates the JWT header algorithm.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``header_algorithm(Header,Algorithm)``
+| **Mode and number of proofs:**
+|    ``header_algorithm(+term,-atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Header`` does not contain a valid ``alg`` member:
+|        ``domain_error(jwt_header,Header)``
+
+
+------------
+
+.. index:: header_key_id/2
+.. _jwt_jwa/0::header_key_id/2:
+
+``header_key_id/2``
+^^^^^^^^^^^^^^^^^^^
+
+Extracts the optional key identifier from a JWT header.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``header_key_id(Header,KeyId)``
+| **Mode and number of proofs:**
+|    ``header_key_id(+term,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: allowed_algorithm/2
+.. _jwt_jwa/0::allowed_algorithm/2:
+
+``allowed_algorithm/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Validates that an algorithm is supported and allowed by the options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``allowed_algorithm(Algorithm,Options)``
+| **Mode and number of proofs:**
+|    ``allowed_algorithm(+atom,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Algorithm`` is unsupported or disallowed by ``Options``:
+|        ``domain_error(jwt_algorithm,Algorithm)``
+
+
+------------
+
+.. index:: supported_algorithm/1
+.. _jwt_jwa/0::supported_algorithm/1:
+
+``supported_algorithm/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Succeeds when the algorithm is supported by this library.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``supported_algorithm(Algorithm)``
+| **Mode and number of proofs:**
+|    ``supported_algorithm(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: key_type/2
+.. _jwt_jwa/0::key_type/2:
+
+``key_type/2``
+^^^^^^^^^^^^^^
+
+Maps a supported algorithm to the required JWK key type.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``key_type(Algorithm,KeyType)``
+| **Mode and number of proofs:**
+|    ``key_type(+atom,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: hmac_hash/2
+.. _jwt_jwa/0::hmac_hash/2:
+
+``hmac_hash/2``
+^^^^^^^^^^^^^^^
+
+Maps a supported HMAC algorithm to its hash object.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``hmac_hash(Algorithm,Hash)``
+| **Mode and number of proofs:**
+|    ``hmac_hash(+atom,-object_identifier)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

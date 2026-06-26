@@ -1,0 +1,148 @@
+.. index:: single: jwt_claims
+.. _jwt_claims/0:
+
+.. rst-class:: right
+
+**object**
+
+``jwt_claims``
+==============
+
+Reusable JWT registered-claim validation helpers.
+
+| **Availability:** 
+|    ``logtalk_load(jwt(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-26
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`jwt_helpers <jwt_helpers/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`os <os/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: validate_claims/3
+.. _jwt_claims/0::validate_claims/3:
+
+``validate_claims/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Validates JWT claims using registered-claim defaults, a policy list, and options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate_claims(Claims,Policy,Options)``
+| **Mode and number of proofs:**
+|    ``validate_claims(+term,+list(compound),+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    A required claim is missing:
+|        ``domain_error(jwt_claims,missing(Name))``
+|    A claim has an invalid value:
+|        ``domain_error(jwt_claim(Name),Value)``
+|    ``Policy`` contains an invalid claim policy:
+|        ``domain_error(jwt_claim_policy,Policy)``
+|    A time claim value is not a number:
+|        ``type_error(time_number,Name-Time)``
+|    ``Policy`` contains an invalid time-claim kind:
+|        ``domain_error(jwt_time_claim_kind,Kind)``
+
+
+------------
+
+.. index:: validate_claim/3
+.. _jwt_claims/0::validate_claim/3:
+
+``validate_claim/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Validates a single JWT claim policy against a claims JSON term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate_claim(Claims,ClaimPolicy,Options)``
+| **Meta-predicate template:**
+|    ``validate_claim(*,*,*)``
+| **Mode and number of proofs:**
+|    ``validate_claim(+term,+compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    A required claim is missing:
+|        ``domain_error(jwt_claims,missing(Name))``
+|    A claim has an invalid value:
+|        ``domain_error(jwt_claim(Name),Value)``
+|    ``ClaimPolicy`` is not a valid claim policy:
+|        ``domain_error(jwt_claim_policy,ClaimPolicy)``
+|    A time claim value is not a number:
+|        ``type_error(time_number,Name-Time)``
+|    ``ClaimPolicy`` contains an invalid time-claim kind:
+|        ``domain_error(jwt_time_claim_kind,Kind)``
+
+
+------------
+
+.. index:: claim/3
+.. _jwt_claims/0::claim/3:
+
+``claim/3``
+^^^^^^^^^^^
+
+Looks up a claim value by name in a claims JSON term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``claim(Claims,Name,Value)``
+| **Mode and number of proofs:**
+|    ``claim(+term,+atom,-term)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

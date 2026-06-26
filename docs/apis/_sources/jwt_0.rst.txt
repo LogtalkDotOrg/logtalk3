@@ -1,0 +1,550 @@
+.. index:: single: jwt
+.. _jwt/0:
+
+.. rst-class:: right
+
+**object**
+
+``jwt``
+=======
+
+Facade predicates for parsing, signing, verifying, and validating JSON Web Tokens.
+
+| **Availability:** 
+|    ``logtalk_load(jwt(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-26
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`jwt_helpers <jwt_helpers/0>`
+| **Uses:**
+|    :ref:`jwt_claims <jwt_claims/0>`
+|    :ref:`jwt_compact <jwt_compact/0>`
+|    :ref:`jwt_jwa <jwt_jwa/0>`
+|    :ref:`jwt_jwks <jwt_jwks/0>`
+|    :ref:`jwt_jws <jwt_jws/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: decode/3
+.. _jwt/0::decode/3:
+
+``decode/3``
+^^^^^^^^^^^^
+
+Decodes a compact JWT into header and claims JSON terms without verifying the signature.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode(Token,Header,Claims)``
+| **Mode and number of proofs:**
+|    ``decode(+atom,-term,-term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Token`` is a variable:
+|        ``instantiation_error``
+|    ``Token`` is neither a variable nor an atom:
+|        ``type_error(atom,Token)``
+|    ``Token`` is an atom but not a valid compact JWT:
+|        ``domain_error(jwt_compact_serialization,Token)``
+|    ``Token`` contains Base64URL data with characters outside the Base64URL alphabet:
+|        ``representation_error(base64)``
+
+
+------------
+
+.. index:: decode/5
+.. _jwt/0::decode/5:
+
+``decode/5``
+^^^^^^^^^^^^
+
+Decodes a compact JWT into header, claims, signature bytes, and signing input.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode(Token,Header,Claims,Signature,SigningInput)``
+| **Mode and number of proofs:**
+|    ``decode(+atom,-term,-term,-list(byte),-atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Token`` is a variable:
+|        ``instantiation_error``
+|    ``Token`` is neither a variable nor an atom:
+|        ``type_error(atom,Token)``
+|    ``Token`` is an atom but not a valid compact JWT:
+|        ``domain_error(jwt_compact_serialization,Token)``
+|    ``Token`` contains Base64URL data with characters outside the Base64URL alphabet:
+|        ``representation_error(base64)``
+
+
+------------
+
+.. index:: header/2
+.. _jwt/0::header/2:
+
+``header/2``
+^^^^^^^^^^^^
+
+Decodes only the JWT header JSON term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``header(Token,Header)``
+| **Mode and number of proofs:**
+|    ``header(+atom,-term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Token`` is a variable:
+|        ``instantiation_error``
+|    ``Token`` is neither a variable nor an atom:
+|        ``type_error(atom,Token)``
+|    ``Token`` is an atom but not a valid compact JWT:
+|        ``domain_error(jwt_compact_serialization,Token)``
+|    ``Token`` contains Base64URL data with characters outside the Base64URL alphabet:
+|        ``representation_error(base64)``
+
+
+------------
+
+.. index:: claims/2
+.. _jwt/0::claims/2:
+
+``claims/2``
+^^^^^^^^^^^^
+
+Decodes only the JWT claims JSON term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``claims(Token,Claims)``
+| **Mode and number of proofs:**
+|    ``claims(+atom,-term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Token`` is a variable:
+|        ``instantiation_error``
+|    ``Token`` is neither a variable nor an atom:
+|        ``type_error(atom,Token)``
+|    ``Token`` is an atom but not a valid compact JWT:
+|        ``domain_error(jwt_compact_serialization,Token)``
+|    ``Token`` contains Base64URL data with characters outside the Base64URL alphabet:
+|        ``representation_error(base64)``
+
+
+------------
+
+.. index:: claim/3
+.. _jwt/0::claim/3:
+
+``claim/3``
+^^^^^^^^^^^
+
+Looks up a claim value by name in a claims JSON term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``claim(Claims,Name,Value)``
+| **Mode and number of proofs:**
+|    ``claim(+term,+atom,-term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: peek_algorithm/2
+.. _jwt/0::peek_algorithm/2:
+
+``peek_algorithm/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Decodes the JWT header and returns its algorithm.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``peek_algorithm(Token,Algorithm)``
+| **Mode and number of proofs:**
+|    ``peek_algorithm(+atom,-atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Token`` is a variable:
+|        ``instantiation_error``
+|    ``Token`` is neither a variable nor an atom:
+|        ``type_error(atom,Token)``
+|    ``Token`` is an atom but not a valid compact JWT:
+|        ``domain_error(jwt_compact_serialization,Token)``
+|    ``Token`` contains Base64URL data with characters outside the Base64URL alphabet:
+|        ``representation_error(base64)``
+|    The decoded JWT header does not contain a valid ``alg`` member:
+|        ``domain_error(jwt_header,Header)``
+
+
+------------
+
+.. index:: peek_key_id/2
+.. _jwt/0::peek_key_id/2:
+
+``peek_key_id/2``
+^^^^^^^^^^^^^^^^^
+
+Decodes the JWT header and returns its optional key identifier.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``peek_key_id(Token,KeyId)``
+| **Mode and number of proofs:**
+|    ``peek_key_id(+atom,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: verify/4
+.. _jwt/0::verify/4:
+
+``verify/4``
+^^^^^^^^^^^^
+
+Verifies a compact JWT using a key or JWK Set and returns the claims.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``verify(Token,KeyOrJWKSet,Claims,Options)``
+| **Mode and number of proofs:**
+|    ``verify(+atom,+term,-term,+list(compound))`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Token`` is a variable:
+|        ``instantiation_error``
+|    ``Token`` is neither a variable nor an atom:
+|        ``type_error(atom,Token)``
+|    ``Token`` is an atom but not a valid compact JWT:
+|        ``domain_error(jwt_compact_serialization,Token)``
+|    ``Token`` contains Base64URL data with characters outside the Base64URL alphabet:
+|        ``representation_error(base64)``
+|    The decoded JWT header does not contain a valid ``alg`` member:
+|        ``domain_error(jwt_header,Header)``
+|    The JWT algorithm is unsupported or disallowed:
+|        ``domain_error(jwt_algorithm,Algorithm)``
+|    ``KeyOrJWKSet`` is not a JSON Web Key Set with a ``keys`` list:
+|        ``domain_error(jwt_jwks,KeyOrJWKSet)``
+|    No compatible key exists for the JWT header:
+|        ``existence_error(jwt_jwk,Header)``
+|    ``KeyOrJWKSet`` is not a valid symmetric key:
+|        ``domain_error(jwt_symmetric_key,KeyOrJWKSet)``
+|    ``KeyOrJWKSet`` is not a supported public JWK:
+|        ``domain_error(jwt_jwk_public_key,KeyOrJWKSet)``
+|    The ES256 signature is not 64 bytes long:
+|        ``domain_error(jwt_es256_signature,Signature)``
+|    The OpenSSL executable does not exist:
+|        ``existence_error(os_command,Executable)``
+|    A required claim is missing:
+|        ``domain_error(jwt_claims,missing(Name))``
+|    A claim has an invalid value:
+|        ``domain_error(jwt_claim(Name),Value)``
+|    A time claim value is not a number:
+|        ``type_error(time_number,Name-Time)``
+
+
+------------
+
+.. index:: verify/5
+.. _jwt/0::verify/5:
+
+``verify/5``
+^^^^^^^^^^^^
+
+Verifies a compact JWT using a key or JWK Set and returns the header and claims.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``verify(Token,Header,Claims,KeyOrJWKSet,Options)``
+| **Mode and number of proofs:**
+|    ``verify(+atom,-term,-term,+term,+list(compound))`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Token`` is a variable:
+|        ``instantiation_error``
+|    ``Token`` is neither a variable nor an atom:
+|        ``type_error(atom,Token)``
+|    ``Token`` is an atom but not a valid compact JWT:
+|        ``domain_error(jwt_compact_serialization,Token)``
+|    ``Token`` contains Base64URL data with characters outside the Base64URL alphabet:
+|        ``representation_error(base64)``
+|    The decoded JWT header does not contain a valid ``alg`` member:
+|        ``domain_error(jwt_header,Header)``
+|    The JWT algorithm is unsupported or disallowed:
+|        ``domain_error(jwt_algorithm,Algorithm)``
+|    ``KeyOrJWKSet`` is not a JSON Web Key Set with a ``keys`` list:
+|        ``domain_error(jwt_jwks,KeyOrJWKSet)``
+|    No compatible key exists for the JWT header:
+|        ``existence_error(jwt_jwk,Header)``
+|    ``KeyOrJWKSet`` is not a valid symmetric key:
+|        ``domain_error(jwt_symmetric_key,KeyOrJWKSet)``
+|    ``KeyOrJWKSet`` is not a supported public JWK:
+|        ``domain_error(jwt_jwk_public_key,KeyOrJWKSet)``
+|    The ES256 signature is not 64 bytes long:
+|        ``domain_error(jwt_es256_signature,Signature)``
+|    The OpenSSL executable does not exist:
+|        ``existence_error(os_command,Executable)``
+|    A required claim is missing:
+|        ``domain_error(jwt_claims,missing(Name))``
+|    A claim has an invalid value:
+|        ``domain_error(jwt_claim(Name),Value)``
+|    A time claim value is not a number:
+|        ``type_error(time_number,Name-Time)``
+
+
+------------
+
+.. index:: verify_signature/5
+.. _jwt/0::verify_signature/5:
+
+``verify_signature/5``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Verifies a JWS signature for a signing input, algorithm, key, and options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``verify_signature(Algorithm,SigningInput,Signature,Key,Options)``
+| **Mode and number of proofs:**
+|    ``verify_signature(+atom,+atom,+list(byte),+term,+list(compound))`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Algorithm`` is unsupported or disallowed:
+|        ``domain_error(jwt_algorithm,Algorithm)``
+|    ``Key`` is not a valid symmetric key:
+|        ``domain_error(jwt_symmetric_key,Key)``
+|    ``Key`` is not a supported public JWK:
+|        ``domain_error(jwt_jwk_public_key,Key)``
+|    ``Signature`` is not a 64-byte raw ES256 signature:
+|        ``domain_error(jwt_es256_signature,Signature)``
+|    The OpenSSL executable does not exist:
+|        ``existence_error(os_command,Executable)``
+
+
+------------
+
+.. index:: sign/5
+.. _jwt/0::sign/5:
+
+``sign/5``
+^^^^^^^^^^
+
+Signs claims as a compact JWT using the given header, key, and options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sign(Header,Claims,Key,Token,Options)``
+| **Mode and number of proofs:**
+|    ``sign(+term,+term,+term,-atom,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Header`` does not contain a valid ``alg`` member:
+|        ``domain_error(jwt_header,Header)``
+|    The JWT algorithm is unsupported or disallowed:
+|        ``domain_error(jwt_algorithm,Algorithm)``
+|    ``Header`` or ``Claims`` cannot be encoded as JSON:
+|        ``domain_error(json_sink,HeaderOrClaims)``
+|    ``Key`` is not a valid symmetric key:
+|        ``domain_error(jwt_symmetric_key,Key)``
+|    ``Algorithm`` is not a supported signing algorithm:
+|        ``domain_error(jwt_signing_algorithm,Algorithm)``
+
+
+------------
+
+.. index:: sign_payload/5
+.. _jwt/0::sign_payload/5:
+
+``sign_payload/5``
+^^^^^^^^^^^^^^^^^^
+
+Signs a payload JSON term as a compact JWS using the given header, key, and options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sign_payload(Header,Payload,Key,Token,Options)``
+| **Mode and number of proofs:**
+|    ``sign_payload(+term,+term,+term,-atom,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Header`` does not contain a valid ``alg`` member:
+|        ``domain_error(jwt_header,Header)``
+|    The JWT algorithm is unsupported or disallowed:
+|        ``domain_error(jwt_algorithm,Algorithm)``
+|    ``Header`` or ``Payload`` cannot be encoded as JSON:
+|        ``domain_error(json_sink,HeaderOrPayload)``
+|    ``Key`` is not a valid symmetric key:
+|        ``domain_error(jwt_symmetric_key,Key)``
+|    ``Algorithm`` is not a supported signing algorithm:
+|        ``domain_error(jwt_signing_algorithm,Algorithm)``
+
+
+------------
+
+.. index:: validate_claims/3
+.. _jwt/0::validate_claims/3:
+
+``validate_claims/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Validates JWT claims using registered-claim defaults, a policy list, and options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate_claims(Claims,Policy,Options)``
+| **Mode and number of proofs:**
+|    ``validate_claims(+term,+list(compound),+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    A required claim is missing:
+|        ``domain_error(jwt_claims,missing(Name))``
+|    A claim has an invalid value:
+|        ``domain_error(jwt_claim(Name),Value)``
+|    ``Policy`` contains an invalid claim policy:
+|        ``domain_error(jwt_claim_policy,Policy)``
+|    A time claim value is not a number:
+|        ``type_error(time_number,Name-Time)``
+|    ``Policy`` contains an invalid time-claim kind:
+|        ``domain_error(jwt_time_claim_kind,Kind)``
+
+
+------------
+
+.. index:: validate_claim/3
+.. _jwt/0::validate_claim/3:
+
+``validate_claim/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Validates a single JWT claim policy against a claims JSON term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate_claim(Claims,ClaimPolicy,Options)``
+| **Mode and number of proofs:**
+|    ``validate_claim(+term,+compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    A required claim is missing:
+|        ``domain_error(jwt_claims,missing(Name))``
+|    A claim has an invalid value:
+|        ``domain_error(jwt_claim(Name),Value)``
+|    ``ClaimPolicy`` is not a valid claim policy:
+|        ``domain_error(jwt_claim_policy,ClaimPolicy)``
+|    A time claim value is not a number:
+|        ``type_error(time_number,Name-Time)``
+|    ``ClaimPolicy`` contains an invalid time-claim kind:
+|        ``domain_error(jwt_time_claim_kind,Kind)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

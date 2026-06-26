@@ -1,0 +1,83 @@
+.. index:: single: open_id_openssl
+.. _open_id_openssl/0:
+
+.. rst-class:: right
+
+**object**
+
+``open_id_openssl``
+===================
+
+OpenSSL-backed JWT signature verification helpers.
+
+| **Availability:** 
+|    ``logtalk_load(open_id(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-25
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`crypto <crypto/0>`
+|    :ref:`list <list/0>`
+|    :ref:`open_id_der <open_id_der/0>`
+|    :ref:`os <os/0>`
+|    :ref:`process <process/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: verify/5
+.. _open_id_openssl/0::verify/5:
+
+``verify/5``
+^^^^^^^^^^^^
+
+Verifies a JWT signing input and signature using OpenSSL and a PEM public key.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``verify(Algorithm,PEM,SigningInput,Signature,Options)``
+| **Mode and number of proofs:**
+|    ``verify(+atom,+atom,+atom,+list(byte),+list(compound))`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    The OpenSSL executable does not exist:
+|        ``existence_error(os_command,Executable)``
+|    ``Signature`` is not a 64-byte raw ES256 signature:
+|        ``domain_error(open_id_es256_signature,Signature)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

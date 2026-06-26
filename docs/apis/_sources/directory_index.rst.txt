@@ -1666,6 +1666,25 @@ To load an entity, always load the library that includes it using the goal ``log
    json_schema(ObjectRepresentation,PairRepresentation,StringRepresentation) <json_schema_3>
    json_schema_protocol <json_schema_protocol_0>
 
+``library/jwt/``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   jwt <jwt_0>
+   jwt_claims <jwt_claims_0>
+   jwt_compact <jwt_compact_0>
+   jwt_der <jwt_der_0>
+   jwt_helpers <jwt_helpers_0>
+   jwt_jwa <jwt_jwa_0>
+   jwt_jwk <jwt_jwk_0>
+   jwt_jwks <jwt_jwks_0>
+   jwt_jws <jwt_jws_0>
+   jwt_openssl <jwt_openssl_0>
+
 ``library/kcenters_clusterer/``
 -------------------------------
 
@@ -2127,6 +2146,24 @@ To load an entity, always load the library that includes it using the goal ``log
 
    open_api <open_api_0>
    open_api_provider_protocol <open_api_provider_protocol_0>
+
+``library/open_id/``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   open_id <open_id_0>
+   open_id_client <open_id_client_0>
+   open_id_der <open_id_der_0>
+   open_id_discovery <open_id_discovery_0>
+   open_id_helpers <open_id_helpers_0>
+   open_id_jwks <open_id_jwks_0>
+   open_id_jwt <open_id_jwt_0>
+   open_id_openssl <open_id_openssl_0>
+   open_id_pkce <open_id_pkce_0>
 
 ``library/optics_clusterer/``
 -----------------------------

@@ -32,7 +32,8 @@ grouping is thematic only, as some libraries naturally span multiple areas):
 	`dictionaries`, `nested_dictionaries`, `graphs`, `heaps`, `hierarchies`,
 	`intervals`, `queues`, `sets`, `subsequences`, `union_find`, and `zippers`.
 - Combinatorics:
-	`arrangements`, `cartesian_products`, `combinations`, `derangements`, `multisets`, `partitions`, and `permutations`.
+	`arrangements`, `cartesian_products`, `combinations`, `derangements`,
+    `multisets`, `partitions`, and `permutations`.
 - Meta-programming:
     `meta` and `meta_compiler`
 - Monoid implementations:
@@ -58,7 +59,8 @@ grouping is thematic only, as some libraries naturally span multiple areas):
 	`http_htmx`, `http_multipart`, `http_parameters`, `http_router`,
 	`http_server`, `http_session`, `http_socket`, `http_socket_process`,
 	`http_static_files`, `http_websocket`, `http_websocket_messages`,
-	`http_websocket_service`, `http_websocket_session`, `open_api`, `open_ai`, and `rest`.
+	`http_websocket_service`, `http_websocket_session`,
+    `open_api`, `open_ai`, `open_id`, and `rest`.
 - Identifiers:
 	`cuid2`, `genint`, `gensym`, `ids`, `ksuid`, `nanoid`, `snowflakeid`,
 	`ulid`, and `uuid`.
@@ -74,7 +76,7 @@ grouping is thematic only, as some libraries naturally span multiple areas):
 - Logic and symbolic computing:
 	`datalog`.
 - Security and integrity:
-	`crypto`, `hashes`, and `hmac`.
+	`crypto`, `hashes`, `hmac`, and `jwt`.
 - Randomness:
 	`arbitrary`, `mutations`, and `random`.
 - Mathematics, statistics, and optimization:

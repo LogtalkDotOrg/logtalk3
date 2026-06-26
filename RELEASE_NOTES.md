@@ -56,7 +56,12 @@ aggregation, and dependency-aware ordering.
 `http_static_files`, `http_parameters`, `http_htmx`, `http_authenticate`,
 `http_digest`, `http_cors`, `open_api`, and `rest` libraries.
 
+* ADDED: New `jwt` library providing JWT parsing, JWS signing and verification,
+JWK/JWKS key selection, and reusable registered-claim validation predicates.
+
 * ADDED: New `open_ai` library and providing OpenAI client and server support.
+
+* ADDED: New `open_id` library providing OpenID client support.
 
 * ADDED: Support for the SHA-512/256 hash function to the `hashes` library.
 

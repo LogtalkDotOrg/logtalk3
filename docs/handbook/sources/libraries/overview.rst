@@ -42,7 +42,8 @@ multiple areas):
   ``http_router``, ``http_server``, ``http_session``, ``http_socket``,
   ``http_socket_process``, ``http_static_files``, ``http_websocket``,
   ``http_websocket_messages``, ``http_websocket_service``,
-  ``http_websocket_session``, ``open_api``, ``open_ai``, and ``rest``.
+  ``http_websocket_session``, ``open_api``, ``open_ai``, ``open_id``,
+  and ``rest``.
 - Identifiers: ``cuid2``, ``genint``, ``gensym``, ``ids``, ``ksuid``,
   ``nanoid``, ``snowflakeid``, ``ulid``, and ``uuid``.
 - Interchange formats and wire protocols: ``amqp``, ``avro``,
@@ -54,7 +55,7 @@ multiple areas):
 - System and external integration: ``git``, ``java``, ``os``, and
   ``sockets``.
 - Logic and symbolic computing: ``datalog``.
-- Security and integrity: ``crypto``, ``hashes``, and ``hmac``.
+- Security and integrity: ``crypto``, ``hashes``, ``hmac``, and ``jwt``.
 - Randomness: ``arbitrary``, ``mutations``, and ``random``.
 - Mathematics, statistics, and optimization: ``ieee_754``,
   ``linear_algebra``, ``simulated_annealing``, and ``statistics``.

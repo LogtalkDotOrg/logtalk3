@@ -1,0 +1,249 @@
+.. index:: single: jwt_compact
+.. _jwt_compact/0:
+
+.. rst-class:: right
+
+**object**
+
+``jwt_compact``
+===============
+
+JWT compact serialization parsing and generation helpers.
+
+| **Availability:** 
+|    ``logtalk_load(jwt(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-26
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`jwt_helpers <jwt_helpers/0>`
+| **Uses:**
+|    :ref:`atom <atom/0>`
+|    :ref:`json <json/0>`
+|    :ref:`user <user/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: decode/3
+.. _jwt_compact/0::decode/3:
+
+``decode/3``
+^^^^^^^^^^^^
+
+Decodes a compact JWT into header and claims JSON terms without verifying the signature.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode(Token,Header,Claims)``
+| **Mode and number of proofs:**
+|    ``decode(+atom,-term,-term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Token`` is a variable:
+|        ``instantiation_error``
+|    ``Token`` is neither a variable nor an atom:
+|        ``type_error(atom,Token)``
+|    ``Token`` is an atom but not a valid compact JWT:
+|        ``domain_error(jwt_compact_serialization,Token)``
+|    ``Token`` contains Base64URL data with characters outside the Base64URL alphabet:
+|        ``representation_error(base64)``
+
+
+------------
+
+.. index:: decode/5
+.. _jwt_compact/0::decode/5:
+
+``decode/5``
+^^^^^^^^^^^^
+
+Decodes a compact JWT into header, claims, signature bytes, and signing input.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode(Token,Header,Claims,Signature,SigningInput)``
+| **Mode and number of proofs:**
+|    ``decode(+atom,-term,-term,-list(byte),-atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Token`` is a variable:
+|        ``instantiation_error``
+|    ``Token`` is neither a variable nor an atom:
+|        ``type_error(atom,Token)``
+|    ``Token`` is an atom but not a valid compact JWT:
+|        ``domain_error(jwt_compact_serialization,Token)``
+|    ``Token`` contains Base64URL data with characters outside the Base64URL alphabet:
+|        ``representation_error(base64)``
+
+
+------------
+
+.. index:: header/2
+.. _jwt_compact/0::header/2:
+
+``header/2``
+^^^^^^^^^^^^
+
+Decodes only the JWT header JSON term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``header(Token,Header)``
+| **Mode and number of proofs:**
+|    ``header(+atom,-term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Token`` is a variable:
+|        ``instantiation_error``
+|    ``Token`` is neither a variable nor an atom:
+|        ``type_error(atom,Token)``
+|    ``Token`` is an atom but not a valid compact JWT:
+|        ``domain_error(jwt_compact_serialization,Token)``
+|    ``Token`` contains Base64URL data with characters outside the Base64URL alphabet:
+|        ``representation_error(base64)``
+
+
+------------
+
+.. index:: claims/2
+.. _jwt_compact/0::claims/2:
+
+``claims/2``
+^^^^^^^^^^^^
+
+Decodes only the JWT claims JSON term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``claims(Token,Claims)``
+| **Mode and number of proofs:**
+|    ``claims(+atom,-term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Token`` is a variable:
+|        ``instantiation_error``
+|    ``Token`` is neither a variable nor an atom:
+|        ``type_error(atom,Token)``
+|    ``Token`` is an atom but not a valid compact JWT:
+|        ``domain_error(jwt_compact_serialization,Token)``
+|    ``Token`` contains Base64URL data with characters outside the Base64URL alphabet:
+|        ``representation_error(base64)``
+
+
+------------
+
+.. index:: segments/5
+.. _jwt_compact/0::segments/5:
+
+``segments/5``
+^^^^^^^^^^^^^^
+
+Splits a compact JWT into Base64URL segments and signing input.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``segments(Token,HeaderSegment,PayloadSegment,SignatureSegment,SigningInput)``
+| **Mode and number of proofs:**
+|    ``segments(+atom,-atom,-atom,-atom,-atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Token`` is a variable:
+|        ``instantiation_error``
+|    ``Token`` is neither a variable nor an atom:
+|        ``type_error(atom,Token)``
+|    ``Token`` is an atom but not a valid compact JWT:
+|        ``domain_error(jwt_compact_serialization,Token)``
+
+
+------------
+
+.. index:: signing_input/4
+.. _jwt_compact/0::signing_input/4:
+
+``signing_input/4``
+^^^^^^^^^^^^^^^^^^^
+
+Encodes header and payload JSON terms and returns the compact signing input.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``signing_input(Header,Payload,HeaderSegment,SigningInput)``
+| **Mode and number of proofs:**
+|    ``signing_input(+term,+term,-atom,-atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Header`` or ``Payload`` cannot be encoded as JSON:
+|        ``domain_error(json_sink,HeaderOrPayload)``
+|    ``Header`` or ``Payload`` cannot be encoded as Base64URL bytes:
+|        ``domain_error(base64url_sink,codes(Codes))``
+
+
+------------
+
+.. index:: compact/4
+.. _jwt_compact/0::compact/4:
+
+``compact/4``
+^^^^^^^^^^^^^
+
+Builds a compact JWT from a signing input and signature bytes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``compact(HeaderSegment,SigningInput,Signature,Token)``
+| **Mode and number of proofs:**
+|    ``compact(+atom,+atom,+list(byte),-atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Signature`` cannot be encoded as Base64URL bytes:
+|        ``domain_error(base64url_sink,codes(Codes))``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

@@ -163,6 +163,7 @@ logtalk_library_path(json_lines, library('json_lines/')).
 logtalk_library_path(json_pointer, library('json_pointer/')).
 logtalk_library_path(json_rpc, library('json_rpc/')).
 logtalk_library_path(json_schema, library('json_schema/')).
+logtalk_library_path(jwt, library('jwt/')).
 logtalk_library_path(kcenters_clusterer, library('kcenters_clusterer/')).
 logtalk_library_path(kemeny_young_ranker, library('kemeny_young_ranker/')).
 logtalk_library_path(kernel_svm_classifier, library('kernel_svm_classifier/')).
@@ -206,6 +207,7 @@ logtalk_library_path(nmea, library('nmea/')).
 logtalk_library_path(nmf_projection, library('nmf_projection/')).
 logtalk_library_path(open_api, library('open_api/')).
 logtalk_library_path(open_ai, library('open_ai/')).
+logtalk_library_path(open_id, library('open_id/')).
 logtalk_library_path(optics_clusterer, library('optics_clusterer/')).
 logtalk_library_path(optionals, library('optionals/')).
 logtalk_library_path(options, library('options/')).

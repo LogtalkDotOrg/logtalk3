@@ -1,0 +1,169 @@
+.. index:: single: jwt_jws
+.. _jwt_jws/0:
+
+.. rst-class:: right
+
+**object**
+
+``jwt_jws``
+===========
+
+JWS signing input construction and signature algorithm dispatch.
+
+| **Availability:** 
+|    ``logtalk_load(jwt(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-26
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`jwt_helpers <jwt_helpers/0>`
+| **Uses:**
+|    :ref:`hmac <hmac/0>`
+|    :ref:`jwt_compact <jwt_compact/0>`
+|    :ref:`jwt_jwa <jwt_jwa/0>`
+|    :ref:`jwt_jwk <jwt_jwk/0>`
+|    :ref:`jwt_openssl <jwt_openssl/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: verify/5
+.. _jwt_jws/0::verify/5:
+
+``verify/5``
+^^^^^^^^^^^^
+
+Verifies a JWS signature for a signing input, algorithm, key, and options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``verify(Algorithm,SigningInput,Signature,Key,Options)``
+| **Mode and number of proofs:**
+|    ``verify(+atom,+atom,+list(byte),+term,+list(compound))`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``Algorithm`` is unsupported:
+|        ``domain_error(jwt_algorithm,Algorithm)``
+|    ``Key`` is not a valid symmetric key:
+|        ``domain_error(jwt_symmetric_key,Key)``
+|    ``Key`` is not a supported public JWK:
+|        ``domain_error(jwt_jwk_public_key,Key)``
+|    ``Signature`` is not a 64-byte raw ES256 signature:
+|        ``domain_error(jwt_es256_signature,Signature)``
+|    The OpenSSL executable does not exist:
+|        ``existence_error(os_command,Executable)``
+
+
+------------
+
+.. index:: sign/5
+.. _jwt_jws/0::sign/5:
+
+``sign/5``
+^^^^^^^^^^
+
+Signs claims as a compact JWT using the given header, key, and options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sign(Header,Claims,Key,Token,Options)``
+| **Mode and number of proofs:**
+|    ``sign(+term,+term,+term,-atom,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Header`` does not contain a valid ``alg`` member:
+|        ``domain_error(jwt_header,Header)``
+|    The JWT algorithm is unsupported or disallowed:
+|        ``domain_error(jwt_algorithm,Algorithm)``
+|    ``Header`` or ``Claims`` cannot be encoded as JSON:
+|        ``domain_error(json_sink,HeaderOrClaims)``
+|    ``Key`` is not a valid symmetric key:
+|        ``domain_error(jwt_symmetric_key,Key)``
+|    ``Algorithm`` is not a supported signing algorithm:
+|        ``domain_error(jwt_signing_algorithm,Algorithm)``
+
+
+------------
+
+.. index:: sign_payload/5
+.. _jwt_jws/0::sign_payload/5:
+
+``sign_payload/5``
+^^^^^^^^^^^^^^^^^^
+
+Signs a payload JSON term as a compact JWS using the given header, key, and options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sign_payload(Header,Payload,Key,Token,Options)``
+| **Mode and number of proofs:**
+|    ``sign_payload(+term,+term,+term,-atom,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Header`` does not contain a valid ``alg`` member:
+|        ``domain_error(jwt_header,Header)``
+|    The JWT algorithm is unsupported or disallowed:
+|        ``domain_error(jwt_algorithm,Algorithm)``
+|    ``Header`` or ``Payload`` cannot be encoded as JSON:
+|        ``domain_error(json_sink,HeaderOrPayload)``
+|    ``Key`` is not a valid symmetric key:
+|        ``domain_error(jwt_symmetric_key,Key)``
+|    ``Algorithm`` is not a supported signing algorithm:
+|        ``domain_error(jwt_signing_algorithm,Algorithm)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

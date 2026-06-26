@@ -209,6 +209,7 @@ sed '1,19d' ../../../library/json_lines/NOTES.md | pandoc -f gfm -t rst -o libra
 sed '1,19d' ../../../library/json_pointer/NOTES.md | pandoc -f gfm -t rst -o libraries/json_pointer.rst
 sed '1,19d' ../../../library/json_rpc/NOTES.md | pandoc -f gfm -t rst -o libraries/json_rpc.rst
 sed '1,19d' ../../../library/json_schema/NOTES.md | pandoc -f gfm -t rst -o libraries/json_schema.rst
+sed '1,19d' ../../../library/jwt/NOTES.md | pandoc -f gfm -t rst -o libraries/jwt.rst
 sed '1,19d' ../../../library/kcenters_clusterer/NOTES.md | pandoc -f gfm -t rst -o libraries/kcenters_clusterer.rst
 sed '1,19d' ../../../library/kemeny_young_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/kemeny_young_ranker.rst
 sed '1,19d' ../../../library/kernel_svm_classifier/NOTES.md | pandoc -f gfm -t rst -o libraries/kernel_svm_classifier.rst
@@ -252,6 +253,7 @@ sed '1,19d' ../../../library/nmea/NOTES.md | pandoc -f gfm -t rst -o libraries/n
 sed '1,19d' ../../../library/nmf_projection/NOTES.md | pandoc -f gfm -t rst -o libraries/nmf_projection.rst
 sed '1,19d' ../../../library/open_api/NOTES.md | pandoc -f gfm -t rst -o libraries/open_api.rst
 sed '1,19d' ../../../library/open_ai/NOTES.md | pandoc -f gfm -t rst -o libraries/open_ai.rst
+sed '1,19d' ../../../library/open_id/NOTES.md | pandoc -f gfm -t rst -o libraries/open_id.rst
 sed '1,19d' ../../../library/optics_clusterer/NOTES.md | pandoc -f gfm -t rst -o libraries/optics_clusterer.rst
 sed '1,19d' ../../../library/optionals/NOTES.md | pandoc -f gfm -t rst -o libraries/optionals.rst
 sed '1,19d' ../../../library/options/NOTES.md | pandoc -f gfm -t rst -o libraries/options.rst

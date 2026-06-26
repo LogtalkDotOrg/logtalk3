@@ -158,6 +158,7 @@ directory in the ``NOTES.md`` file.
    json_pointer
    json_rpc
    json_schema
+   jwt
    kcenters_clusterer
    kemeny_young_ranker
    kernel_svm_classifier
@@ -201,6 +202,7 @@ directory in the ``NOTES.md`` file.
    nmf_projection
    open_api
    open_ai
+   open_id
    optics_clusterer
    optionals
    options
