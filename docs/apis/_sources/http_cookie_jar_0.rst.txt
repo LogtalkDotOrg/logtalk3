@@ -15,7 +15,7 @@ HTTP cookie jar implementing explicit storage and request matching on top of the
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-06
+| **Date:** 2026-06-26
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -82,8 +82,22 @@ Opens a new cookie jar using the given options list. Supported options include `
 |    ``open(-compound,+list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Options`` contain invalid cookie-jar configuration or persisted-cookie input:
-|        ``error``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    The cookies file option is a variable:
+|        ``instantiation_error``
+|    The cookies file option is neither a variable nor an atom:
+|        ``type_error(atom,File)``
+|    The persisted cookie data is malformed:
+|        ``domain_error(http_cookie_jar_persisted_cookies,PersistedCookies)``
+|    A persisted cookie is malformed:
+|        ``domain_error(http_cookie_jar_persisted_cookie,PersistedCookie)``
 
 
 ------------
@@ -105,8 +119,12 @@ Closes a cookie jar and removes all stored cookies.
 |    ``close(+compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Jar`` is not an open cookie-jar handle:
-|        ``error``
+|    ``Jar`` is a variable:
+|        ``instantiation_error``
+|    ``Jar`` is neither a variable nor an open cookie-jar handle:
+|        ``domain_error(http_cookie_jar,Jar)``
+|    ``Jar`` refers to a closed cookie-jar handle:
+|        ``existence_error(http_cookie_jar,cookie_jar(JarId))``
 
 
 ------------
@@ -128,8 +146,12 @@ Removes all currently stored cookies from a cookie jar while keeping the jar han
 |    ``clear(+compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Jar`` is not an open cookie-jar handle:
-|        ``error``
+|    ``Jar`` is a variable:
+|        ``instantiation_error``
+|    ``Jar`` is neither a variable nor an open cookie-jar handle:
+|        ``domain_error(http_cookie_jar,Jar)``
+|    ``Jar`` refers to a closed cookie-jar handle:
+|        ``existence_error(http_cookie_jar,cookie_jar(JarId))``
 
 
 ------------
@@ -151,10 +173,24 @@ Stores normalized Set-Cookie terms for the given absolute URL, replacing existin
 |    ``store_set_cookies(+compound,+atom,+list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Jar`` is not an open cookie-jar handle:
-|        ``error``
-|    ``URL`` is not a supported absolute cookie-jar URL or ``SetCookies`` is not a valid set-cookie list:
-|        ``error``
+|    ``Jar`` is a variable:
+|        ``instantiation_error``
+|    ``Jar`` is neither a variable nor an open cookie-jar handle:
+|        ``domain_error(http_cookie_jar,Jar)``
+|    ``Jar`` refers to a closed cookie-jar handle:
+|        ``existence_error(http_cookie_jar,cookie_jar(JarId))``
+|    ``URL`` is a variable:
+|        ``instantiation_error``
+|    ``URL`` is not a supported absolute cookie-jar URL:
+|        ``domain_error(http_cookie_jar_url,URL)``
+|    ``URL`` uses an unsupported cookie-jar URL scheme:
+|        ``domain_error(http_cookie_jar_url_scheme,Scheme)``
+|    ``SetCookies`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``SetCookies`` is not a valid set-cookie list:
+|        ``domain_error(http_cookie_jar_set_cookies,SetCookies)``
+|    An element ``SetCookie`` of ``SetCookies`` is not a valid normalized Set-Cookie term:
+|        ``domain_error(http_cookie_jar_set_cookie,SetCookie)``
 
 
 ------------
@@ -176,8 +212,18 @@ Returns the cookie name-value pairs currently applicable to the given absolute U
 |    ``request_cookies(+compound,+atom,-list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Jar`` is not an open cookie-jar handle or ``URL`` is not a supported absolute cookie-jar URL:
-|        ``error``
+|    ``Jar`` is a variable:
+|        ``instantiation_error``
+|    ``Jar`` is neither a variable nor an open cookie-jar handle:
+|        ``domain_error(http_cookie_jar,Jar)``
+|    ``Jar`` refers to a closed cookie-jar handle:
+|        ``existence_error(http_cookie_jar,cookie_jar(JarId))``
+|    ``URL`` is a variable:
+|        ``instantiation_error``
+|    ``URL`` is not a supported absolute cookie-jar URL:
+|        ``domain_error(http_cookie_jar_url,URL)``
+|    ``URL`` uses an unsupported cookie-jar URL scheme:
+|        ``domain_error(http_cookie_jar_url_scheme,Scheme)``
 
 
 ------------
@@ -199,8 +245,26 @@ Returns the cookie name-value pairs currently applicable to the given absolute U
 |    ``request_cookies(+compound,+atom,+compound,-list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Jar`` is not an open cookie-jar handle, ``URL`` is invalid, or ``RequestContext`` is not a valid cookie-jar request context:
-|        ``error``
+|    ``Jar`` is a variable:
+|        ``instantiation_error``
+|    ``Jar`` is neither a variable nor an open cookie-jar handle:
+|        ``domain_error(http_cookie_jar,Jar)``
+|    ``Jar`` refers to a closed cookie-jar handle:
+|        ``existence_error(http_cookie_jar,cookie_jar(JarId))``
+|    ``URL`` is a variable:
+|        ``instantiation_error``
+|    ``URL`` is not a supported absolute cookie-jar URL:
+|        ``domain_error(http_cookie_jar_url,URL)``
+|    ``URL`` uses an unsupported cookie-jar URL scheme:
+|        ``domain_error(http_cookie_jar_url_scheme,Scheme)``
+|    ``RequestContext`` is not a valid cookie-jar request context:
+|        ``domain_error(http_cookie_jar_request_context,RequestContext)``
+|    ``RequestContext`` contains an invalid method:
+|        ``type_error(atom,Method)``
+|    ``RequestContext`` contains an invalid source:
+|        ``domain_error(http_cookie_jar_request_source,Source)``
+|    ``RequestContext`` contains an invalid top-level-navigation flag:
+|        ``domain_error(boolean,TopLevelNavigation)``
 
 
 ------------
@@ -222,8 +286,12 @@ Returns the currently stored cookies as cookie(Name, Value, Attributes) terms.
 |    ``cookies(+compound,-list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Jar`` is not an open cookie-jar handle:
-|        ``error``
+|    ``Jar`` is a variable:
+|        ``instantiation_error``
+|    ``Jar`` is neither a variable nor an open cookie-jar handle:
+|        ``domain_error(http_cookie_jar,Jar)``
+|    ``Jar`` refers to a closed cookie-jar handle:
+|        ``existence_error(http_cookie_jar,cookie_jar(JarId))``
 
 
 ------------
@@ -245,8 +313,12 @@ Returns the number of currently stored cookies.
 |    ``cookie_count(+compound,-integer)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Jar`` is not an open cookie-jar handle:
-|        ``error``
+|    ``Jar`` is a variable:
+|        ``instantiation_error``
+|    ``Jar`` is neither a variable nor an open cookie-jar handle:
+|        ``domain_error(http_cookie_jar,Jar)``
+|    ``Jar`` refers to a closed cookie-jar handle:
+|        ``existence_error(http_cookie_jar,cookie_jar(JarId))``
 
 
 ------------
@@ -268,8 +340,16 @@ Persists the currently stored cookies to a file using a canonical Logtalk term r
 |    ``save(+compound,+atom)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Jar`` is not an open cookie-jar handle or ``File`` is not a valid persistence target:
-|        ``error``
+|    ``Jar`` is a variable:
+|        ``instantiation_error``
+|    ``Jar`` is neither a variable nor an open cookie-jar handle:
+|        ``domain_error(http_cookie_jar,Jar)``
+|    ``Jar`` refers to a closed cookie-jar handle:
+|        ``existence_error(http_cookie_jar,cookie_jar(JarId))``
+|    ``File`` is a variable:
+|        ``instantiation_error``
+|    ``File`` is neither a variable nor an atom:
+|        ``type_error(atom,File)``
 
 
 ------------
@@ -291,8 +371,20 @@ Loads previously persisted cookies from a file, replacing the current jar conten
 |    ``load(+compound,+atom)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Jar`` is not an open cookie-jar handle, ``File`` is invalid, or the persisted cookie data is malformed:
-|        ``error``
+|    ``Jar`` is a variable:
+|        ``instantiation_error``
+|    ``Jar`` is neither a variable nor an open cookie-jar handle:
+|        ``domain_error(http_cookie_jar,Jar)``
+|    ``Jar`` refers to a closed cookie-jar handle:
+|        ``existence_error(http_cookie_jar,cookie_jar(JarId))``
+|    ``File`` is a variable:
+|        ``instantiation_error``
+|    ``File`` is neither a variable nor an atom:
+|        ``type_error(atom,File)``
+|    The persisted cookie data is malformed:
+|        ``domain_error(http_cookie_jar_persisted_cookies,PersistedCookies)``
+|    A persisted cookie is malformed:
+|        ``domain_error(http_cookie_jar_persisted_cookie,PersistedCookie)``
 
 
 ------------

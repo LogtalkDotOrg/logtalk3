@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-06-26,
 		comment is 'HTTP Digest authentication parsing, generation, request decoration, and verification helpers.'
 	]).
 
@@ -56,7 +56,13 @@
 		comment is 'Parses one Digest challenge header field value into a normalized ``digest_challenge/1`` term.',
 		argnames is ['Text', 'Challenge'],
 		exceptions is [
-			'``Text`` is not a valid Digest challenge header value' - error
+			'``Text`` is neither a variable nor text' - type_error(text, 'Text'),
+			'``Text`` is not a valid Digest challenge header value' - domain_error(http_digest_header(www_authenticate), invalid(syntax)),
+			'``Text`` uses an unsupported authentication scheme' - domain_error(http_digest_header(www_authenticate), unsupported_scheme('Scheme')),
+			'``Text`` contains a duplicated Digest challenge directive' - domain_error(http_digest_header(www_authenticate), duplicate('Name')),
+			'``Text`` contains an unexpected Digest challenge directive' - domain_error(http_digest_header(www_authenticate), unexpected('Name')),
+			'``Text`` is missing a required Digest challenge directive' - domain_error(http_digest_header(www_authenticate), missing('Name')),
+			'``Text`` contains an invalid Digest challenge directive value' - domain_error(http_digest_header(www_authenticate), invalid('Name'))
 		]
 	]).
 
@@ -66,7 +72,15 @@
 		comment is 'Generates one canonical Digest challenge header field value from a normalized ``digest_challenge/1`` term.',
 		argnames is ['Challenge', 'HeaderValue'],
 		exceptions is [
-			'``Challenge`` is not a valid normalized Digest challenge term' - error
+			'``Challenge`` is not a valid normalized Digest challenge term' - domain_error(http_digest_term(challenge), 'Challenge'),
+			'``Challenge`` is missing a required field' - domain_error(http_digest_term(challenge), missing('Name')),
+			'``Challenge`` contains a duplicated field' - domain_error(http_digest_term(challenge), duplicate('Name')),
+			'``Challenge`` contains an unexpected field' - domain_error(http_digest_term(challenge), unexpected('Name')),
+			'``Challenge`` contains an invalid field' - domain_error(http_digest_term(challenge), invalid('Name')),
+			'``Challenge`` fields are not in canonical order' - domain_error(http_digest_term(challenge), invalid_order),
+			'``Challenge`` contains an invalid algorithm' - domain_error(http_digest_algorithm, 'Algorithm'),
+			'``Challenge`` contains an invalid qop value' - domain_error(http_digest_qop, 'Qop'),
+			'``Challenge`` contains an invalid charset' - domain_error(http_digest_charset, 'Charset')
 		]
 	]).
 
@@ -76,7 +90,13 @@
 		comment is 'Parses one Digest authorization header field value into a normalized ``digest_authorization/1`` term.',
 		argnames is ['Text', 'Authorization'],
 		exceptions is [
-			'``Text`` is not a valid Digest authorization header value' - error
+			'``Text`` is neither a variable nor text' - type_error(text, 'Text'),
+			'``Text`` is not a valid Digest authorization header value' - domain_error(http_digest_header(authorization), invalid(syntax)),
+			'``Text`` uses an unsupported authentication scheme' - domain_error(http_digest_header(authorization), unsupported_scheme('Scheme')),
+			'``Text`` contains a duplicated Digest authorization directive' - domain_error(http_digest_header(authorization), duplicate('Name')),
+			'``Text`` contains an unexpected Digest authorization directive' - domain_error(http_digest_header(authorization), unexpected('Name')),
+			'``Text`` is missing a required Digest authorization directive' - domain_error(http_digest_header(authorization), missing('Name')),
+			'``Text`` contains an invalid Digest authorization directive value' - domain_error(http_digest_header(authorization), invalid('Name'))
 		]
 	]).
 
@@ -86,7 +106,15 @@
 		comment is 'Generates one canonical Digest authorization header field value from a normalized ``digest_authorization/1`` term.',
 		argnames is ['Authorization', 'HeaderValue'],
 		exceptions is [
-			'``Authorization`` is not a valid normalized Digest authorization term' - error
+			'``Authorization`` is not a valid normalized Digest authorization term' - domain_error(http_digest_term(authorization), 'Authorization'),
+			'``Authorization`` is missing a required field' - domain_error(http_digest_term(authorization), missing('Name')),
+			'``Authorization`` contains a duplicated field' - domain_error(http_digest_term(authorization), duplicate('Name')),
+			'``Authorization`` contains an unexpected field' - domain_error(http_digest_term(authorization), unexpected('Name')),
+			'``Authorization`` contains an invalid field' - domain_error(http_digest_term(authorization), invalid('Name')),
+			'``Authorization`` fields are not in canonical order' - domain_error(http_digest_term(authorization), invalid_order),
+			'``Authorization`` contains inconsistent qop, nonce-count, and cnonce fields' - domain_error(http_digest_term(authorization), inconsistent(qop_nonce_count_cnonce)),
+			'``Authorization`` contains an invalid algorithm' - domain_error(http_digest_algorithm, 'Algorithm'),
+			'``Authorization`` contains an invalid qop value' - domain_error(http_digest_qop, 'Qop')
 		]
 	]).
 
@@ -96,7 +124,11 @@
 		comment is 'Parses one ``Authentication-Info`` header field value into a normalized ``digest_authentication_info/1`` term.',
 		argnames is ['Text', 'AuthenticationInfo'],
 		exceptions is [
-			'``Text`` is not a valid Digest ``Authentication-Info`` header value' - error
+			'``Text`` is neither a variable nor text' - type_error(text, 'Text'),
+			'``Text`` is not a valid Digest ``Authentication-Info`` header value' - domain_error(http_digest_header(authentication_info), invalid(syntax)),
+			'``Text`` contains a duplicated Digest authentication-info directive' - domain_error(http_digest_header(authentication_info), duplicate('Name')),
+			'``Text`` contains an unexpected Digest authentication-info directive' - domain_error(http_digest_header(authentication_info), unexpected('Name')),
+			'``Text`` contains an invalid Digest authentication-info directive value' - domain_error(http_digest_header(authentication_info), invalid('Name'))
 		]
 	]).
 
@@ -106,7 +138,13 @@
 		comment is 'Generates one canonical ``Authentication-Info`` header field value from a normalized ``digest_authentication_info/1`` term.',
 		argnames is ['AuthenticationInfo', 'HeaderValue'],
 		exceptions is [
-			'``AuthenticationInfo`` is not a valid normalized Digest authentication-info term' - error
+			'``AuthenticationInfo`` is not a valid normalized Digest authentication-info term' - domain_error(http_digest_term(authentication_info), 'AuthenticationInfo'),
+			'``AuthenticationInfo`` contains no field to generate' - domain_error(http_digest_term(authentication_info), missing(all)),
+			'``AuthenticationInfo`` contains a duplicated field' - domain_error(http_digest_term(authentication_info), duplicate('Name')),
+			'``AuthenticationInfo`` contains an unexpected field' - domain_error(http_digest_term(authentication_info), unexpected('Name')),
+			'``AuthenticationInfo`` contains an invalid field' - domain_error(http_digest_term(authentication_info), invalid('Name')),
+			'``AuthenticationInfo`` fields are not in canonical order' - domain_error(http_digest_term(authentication_info), invalid_order),
+			'``AuthenticationInfo`` contains inconsistent qop, nonce-count, and cnonce fields' - domain_error(http_digest_term(authentication_info), inconsistent(qop_nonce_count_cnonce))
 		]
 	]).
 
@@ -116,7 +154,18 @@
 		comment is 'Decorates a normalized HTTP request with a Digest ``Authorization`` header computed from a normalized challenge term, username, password, and options.',
 		argnames is ['Request', 'Challenge', 'Username', 'Password', 'AuthorizedRequest', 'Options'],
 		exceptions is [
-			'``Request``, ``Challenge``, or ``Options`` are invalid for Digest authorization generation' - error
+			'``Request`` is not a valid normalized HTTP request term' - domain_error(http_request, 'Request'),
+			'``Challenge`` is not a valid normalized Digest challenge term' - domain_error(http_digest_term(challenge), 'Challenge'),
+			'``Username`` or ``Password`` is neither a variable nor text' - type_error(text, 'Text'),
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
+			'``Options`` contains an invalid Digest authorization option' - domain_error(http_digest_authorize_request_option, 'Option'),
+			'``Challenge`` contains an unsupported algorithm' - domain_error(http_digest_algorithm, 'Algorithm'),
+			'``Challenge`` contains an unsupported qop value' - domain_error(http_digest_qop, 'Qop'),
+			'``Challenge`` contains an unsupported charset' - domain_error(http_digest_charset, 'Charset'),
+			'The authorized request violates normalized HTTP request semantics' - domain_error(http_header_semantics, 'Header')
 		]
 	]).
 
@@ -126,7 +175,20 @@
 		comment is 'Verifies a normalized HTTP request using a Digest verifier object and returns either ``continue(Request)`` or ``respond(Response)``.',
 		argnames is ['Request', 'Verifier', 'Action', 'Options'],
 		exceptions is [
-			'``Request`` or ``Options`` are invalid, or the verifier object rejects the request with an exception' - error
+			'``Request`` is not a valid normalized HTTP request term' - domain_error(http_request, 'Request'),
+			'``Verifier`` is a variable' - instantiation_error,
+			'``Verifier`` is neither a variable nor an existing object' - existence_error(http_digest_verifier, 'Verifier'),
+			'``Verifier`` does not implement the Digest verifier protocol' - domain_error(http_digest_verifier, 'Verifier'),
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
+			'``Options`` contains an invalid Digest protection option' - domain_error(http_digest_protect_request_option, 'Option'),
+			'``Options`` is missing a required Digest protection option' - domain_error(http_digest_protect_request_option, 'Option'),
+			'``Options`` contains an invalid Digest status' - domain_error(http_digest_status, 'Status'),
+			'``Options`` contains an invalid Digest algorithm' - domain_error(http_digest_algorithm, 'Algorithm'),
+			'``Options`` contains an invalid Digest qop value' - domain_error(http_digest_qop, 'Qop'),
+			'``Options`` contains an invalid Digest charset' - domain_error(http_digest_charset, 'Charset')
 		]
 	]).
 
@@ -136,7 +198,17 @@
 		comment is 'Builds a normalized ``401 Unauthorized`` response and returns the generated normalized Digest challenge term.',
 		argnames is ['Challenge', 'Response', 'Options'],
 		exceptions is [
-			'``Options`` are invalid for Digest challenge generation or response construction' - error
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
+			'``Options`` contains an invalid Digest unauthorized-response option' - domain_error(http_digest_unauthorized_response_option, 'Option'),
+			'``Options`` is missing a required Digest unauthorized-response option' - domain_error(http_digest_unauthorized_response_option, 'Option'),
+			'``Options`` contains an invalid Digest status' - domain_error(http_digest_status, 'Status'),
+			'``Options`` contains an invalid Digest algorithm' - domain_error(http_digest_algorithm, 'Algorithm'),
+			'``Options`` contains an invalid Digest qop value' - domain_error(http_digest_qop, 'Qop'),
+			'``Options`` contains an invalid Digest charset' - domain_error(http_digest_charset, 'Charset'),
+			'The generated response violates normalized HTTP response semantics' - domain_error(http_header_semantics, 'Header')
 		]
 	]).
 
@@ -146,7 +218,16 @@
 		comment is 'Decorates a normalized HTTP response with an explicit normalized Digest challenge term and returns the resulting ``401 Unauthorized`` response.',
 		argnames is ['Challenge', 'Response0', 'Response', 'Options'],
 		exceptions is [
-			'``Challenge`` or ``Response0`` are invalid, or ``Options`` are invalid for unauthorized-response construction' - error
+			'``Challenge`` is not a valid normalized Digest challenge term' - domain_error(http_digest_term(challenge), 'Challenge'),
+			'``Response0`` is not a valid normalized HTTP response term' - domain_error(http_response, 'Response0'),
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
+			'``Options`` contains an invalid Digest unauthorized-response option' - domain_error(http_digest_unauthorized_response_option, 'Option'),
+			'``Challenge`` contains an invalid Digest charset' - domain_error(http_digest_charset, 'Charset'),
+			'``Options`` contains an invalid Digest status' - domain_error(http_digest_status, 'Status'),
+			'The decorated response violates normalized HTTP response semantics' - domain_error(http_header_semantics, 'Header')
 		]
 	]).
 
@@ -156,7 +237,16 @@
 		comment is 'Decorates a normalized HTTP response with an ``Authentication-Info`` header computed from a previously verified request and options. The ``nextnonce`` option accepts ``false`` to omit the field, ``true`` to generate a fresh nonce using ``nonce_secret/1``, or an explicit nonce atom to emit verbatim.',
 		argnames is ['Request', 'Response0', 'Response', 'Options'],
 		exceptions is [
-			'``Request`` or ``Response0`` are invalid, or ``Options`` are invalid for authentication-info generation' - error
+			'``Request`` is not a valid normalized HTTP request term' - domain_error(http_request, 'Request'),
+			'``Request`` is not annotated with a verified Digest property' - domain_error(http_digest_verified_request, missing('Property')),
+			'``Response0`` is not a valid normalized HTTP response term' - domain_error(http_response, 'Response0'),
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
+			'``Options`` contains an invalid authentication-info option' - domain_error(http_digest_add_authentication_info_option, 'Option'),
+			'``Options`` is missing a required authentication-info option' - domain_error(http_digest_add_authentication_info_option, 'Option'),
+			'The decorated response violates normalized HTTP response semantics' - domain_error(http_header_semantics, 'Header')
 		]
 	]).
 

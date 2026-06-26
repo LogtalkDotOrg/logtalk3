@@ -398,7 +398,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-05-26</div>
+<div class="line"><strong>Date:</strong> 2026-06-26</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -467,9 +467,17 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">http_htmx::request_properties/2</span></code> for the routed request:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Request</span></code> is not a valid normalized HTTP request term:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_request,Request)</span></code></div>
+</div>
+<div class="line">The annotated request violates normalized HTTP request semantics:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_header_semantics,Header)</span></code></div>
+</div>
+<div class="line">The annotated request properties violate normalized HTTP request semantics:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_property_semantics,Property)</span></code></div>
 </div>
 </div>
 </div>
@@ -497,9 +505,21 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">http_htmx::add_response_headers/4</span></code> for the derived HTMX response options:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Request</span></code> is not a valid normalized HTTP request term:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_request,Request)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Response0</span></code> is not a valid normalized HTTP response term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response,Response0)</span></code></div>
+</div>
+<div class="line">The derived HTMX response options are invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line">The decorated response violates normalized HTTP response semantics:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_header_semantics,Header)</span></code></div>
 </div>
 </div>
 </div>

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-11,
+		date is 2026-06-26,
 		comment is 'Transport-neutral WebSocket frame predicates for constructing, parsing, generating, reading, and writing normalized frame terms.'
 	]).
 
@@ -43,7 +43,16 @@
 		comment is 'Constructs a validated normalized WebSocket frame term from the fragmentation state atom, opcode atom, payload bytes, and frame properties.',
 		argnames is ['Final', 'Opcode', 'Payload', 'Properties', 'Frame'],
 		exceptions is [
-			'``Final``, ``Opcode``, ``Payload``, or ``Properties`` do not define a valid normalized WebSocket frame term' - error
+			'``Final`` is not a valid WebSocket final flag' - domain_error(http_websocket_final, 'Final'),
+			'``Opcode`` is not a valid WebSocket opcode' - domain_error(http_websocket_opcode, 'Opcode'),
+			'``Payload`` is a variable or a partial list' - instantiation_error,
+			'``Payload`` is not a valid WebSocket payload byte list' - domain_error(http_websocket_payload, 'Payload'),
+			'``Properties`` is a variable or a partial list' - instantiation_error,
+			'``Properties`` is not a valid WebSocket frame property list' - domain_error(http_websocket_properties, 'Properties'),
+			'A frame property is invalid' - domain_error(http_websocket_property, 'Property'),
+			'A masking key is invalid' - domain_error(http_websocket_masking_key, 'Key'),
+			'Reserved bits are invalid' - domain_error(http_websocket_reserved_bits, 'Bits'),
+			'The frame violates WebSocket frame semantics' - domain_error(http_websocket_frame, 'Frame')
 		],
 		remarks is [
 			'Final atoms' - 'Use ``final`` for FIN=1 and ``more`` for FIN=0.',
@@ -68,7 +77,10 @@
 		exceptions is [
 			'``Source`` is a variable' - instantiation_error,
 			'``Source`` is neither a variable nor a valid WebSocket frame source term' - domain_error(http_websocket_source, 'Source'),
-			'The source bytes do not encode a valid normalized WebSocket frame' - error
+			'The source bytes are not a valid WebSocket byte sequence' - domain_error(http_websocket_byte_sequence, 'Bytes'),
+			'The source bytes contain an invalid WebSocket opcode' - domain_error(http_websocket_opcode, 'Opcode'),
+			'The source bytes contain an invalid WebSocket frame length' - domain_error(http_websocket_frame_length, 'PayloadLength'),
+			'The source bytes do not encode a valid normalized WebSocket frame' - domain_error(http_websocket_frame, 'Frame')
 		]
 	]).
 
@@ -78,7 +90,9 @@
 		comment is 'Generates one validated WebSocket frame to a sink term. Supported sinks are ``bytes(Bytes)``, ``codes(Bytes)``, ``file(File)``, and ``stream(Stream)``.',
 		argnames is ['Sink', 'Frame'],
 		exceptions is [
-			'``Sink`` is invalid or ``Frame`` is not a valid normalized WebSocket frame term' - error
+			'``Sink`` is a variable' - instantiation_error,
+			'``Sink`` is neither a variable nor a valid WebSocket frame sink term' - domain_error(http_websocket_sink, 'Sink'),
+			'``Frame`` is not a valid normalized WebSocket frame term' - domain_error(http_websocket_frame, 'Frame')
 		]
 	]).
 
@@ -88,7 +102,10 @@
 		comment is 'Reads one WebSocket frame from a binary stream without requiring end-of-file. Returns ``end_of_file`` when the stream is already exhausted.',
 		argnames is ['Stream', 'Frame'],
 		exceptions is [
-			'Any exception that can be thrown by ``read_frame/3`` using the default options' - error
+			'``Stream`` is a variable' - instantiation_error,
+			'The inbound bytes are not a valid WebSocket byte sequence' - domain_error(http_websocket_byte_sequence, 'Bytes'),
+			'The inbound payload length exceeds the configured limit' - domain_error(http_websocket_payload_length_limit, 'PayloadLength'),
+			'The inbound bytes do not encode a valid normalized WebSocket frame' - domain_error(http_websocket_frame, 'Frame')
 		]
 	]).
 
@@ -98,7 +115,14 @@
 		comment is 'Reads one WebSocket frame from a binary stream using the given read options. Returns ``end_of_file`` when the stream is already exhausted.',
 		argnames is ['Stream', 'Frame', 'Options'],
 		exceptions is [
-			'``Stream`` is a variable, ``Options`` are invalid, the payload length exceeds the configured limit, or the stream bytes do not encode a valid frame' - error
+			'``Stream`` is a variable' - instantiation_error,
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
+			'The inbound payload length exceeds the configured limit' - domain_error(http_websocket_payload_length_limit, 'PayloadLength'),
+			'The inbound bytes are not a valid WebSocket byte sequence' - domain_error(http_websocket_byte_sequence, 'Bytes'),
+			'The inbound bytes do not encode a valid normalized WebSocket frame' - domain_error(http_websocket_frame, 'Frame')
 		],
 		remarks is [
 			'Repeated options' - 'When the same read option is given multiple times, the first occurrence is used.',
@@ -112,7 +136,8 @@
 		comment is 'Writes one validated WebSocket frame to a binary stream and flushes the stream.',
 		argnames is ['Stream', 'Frame'],
 		exceptions is [
-			'``Stream`` is a variable or ``Frame`` is not a valid normalized WebSocket frame term' - error
+			'``Stream`` is a variable' - instantiation_error,
+			'``Frame`` is not a valid normalized WebSocket frame term' - domain_error(http_websocket_frame, 'Frame')
 		]
 	]).
 
@@ -122,7 +147,7 @@
 		comment is 'Returns the fragmentation state atom of a validated WebSocket frame term.',
 		argnames is ['Frame', 'Final'],
 		exceptions is [
-			'``Frame`` is not a valid normalized WebSocket frame term' - error
+			'``Frame`` is not a valid normalized WebSocket frame term' - domain_error(http_websocket_frame, 'Frame')
 		]
 	]).
 
@@ -132,7 +157,7 @@
 		comment is 'Returns the opcode atom of a validated WebSocket frame term.',
 		argnames is ['Frame', 'Opcode'],
 		exceptions is [
-			'``Frame`` is not a valid normalized WebSocket frame term' - error
+			'``Frame`` is not a valid normalized WebSocket frame term' - domain_error(http_websocket_frame, 'Frame')
 		]
 	]).
 
@@ -142,7 +167,7 @@
 		comment is 'Returns the payload byte list of a validated WebSocket frame term.',
 		argnames is ['Frame', 'Payload'],
 		exceptions is [
-			'``Frame`` is not a valid normalized WebSocket frame term' - error
+			'``Frame`` is not a valid normalized WebSocket frame term' - domain_error(http_websocket_frame, 'Frame')
 		]
 	]).
 
@@ -152,7 +177,7 @@
 		comment is 'Returns the normalized property list of a validated WebSocket frame term.',
 		argnames is ['Frame', 'Properties'],
 		exceptions is [
-			'``Frame`` is not a valid normalized WebSocket frame term' - error
+			'``Frame`` is not a valid normalized WebSocket frame term' - domain_error(http_websocket_frame, 'Frame')
 		]
 	]).
 
@@ -162,7 +187,7 @@
 		comment is 'True when the validated WebSocket frame term contains the given property. When the property argument is a variable, properties can be enumerated on backtracking.',
 		argnames is ['Frame', 'Property'],
 		exceptions is [
-			'``Frame`` is not a valid normalized WebSocket frame term' - error
+			'``Frame`` is not a valid normalized WebSocket frame term' - domain_error(http_websocket_frame, 'Frame')
 		]
 	]).
 

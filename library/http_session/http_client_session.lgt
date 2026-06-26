@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-22,
+		date is 2026-06-26,
 		comment is 'Stateful HTTP client sessions that add cookie persistence on top of the stateless ``http_client`` facade.',
 		remarks is [
 			'Option precedence' - 'When the same session default or per-request option is given multiple times, the first occurrence is used.',
@@ -47,7 +47,13 @@
 		comment is 'Opens a new HTTP session using the given defaults and cookie-jar options, including ``cookies_file(File)`` for reopening a saved owned cookie jar and ``connection_options(Options)`` for one-shot transport configuration.',
 		argnames is ['Session', 'Options'],
 		exceptions is [
-			'``Options`` contain invalid session defaults or cookie-jar options' - error
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
+			'``Options`` contains an invalid HTTP client session option' - domain_error(http_client_session_option, 'Option'),
+			'``Options`` contains an invalid HTTP client session option combination' - domain_error(http_client_session_options, 'Options'),
+			'``Options`` contains invalid persisted cookie data' - domain_error(http_cookie_jar_persisted_cookies, 'PersistedCookies')
 		]
 	]).
 
@@ -57,7 +63,9 @@
 		comment is 'Closes a session and, when applicable, the owned cookie jar created for it.',
 		argnames is ['Session'],
 		exceptions is [
-			'``Session`` is not an open HTTP client session handle' - error
+			'``Session`` is a variable' - instantiation_error,
+			'``Session`` is neither a variable nor an open HTTP client session handle' - domain_error(http_client_session, 'Session'),
+			'``Session`` refers to a closed HTTP client session handle' - existence_error(http_client_session, http_client_session('SessionId'))
 		]
 	]).
 
@@ -67,7 +75,9 @@
 		comment is 'Returns the configured cookie jar handle or the atom ``none`` when the session does not persist cookies.',
 		argnames is ['Session', 'Jar'],
 		exceptions is [
-			'``Session`` is not an open HTTP client session handle' - error
+			'``Session`` is a variable' - instantiation_error,
+			'``Session`` is neither a variable nor an open HTTP client session handle' - domain_error(http_client_session, 'Session'),
+			'``Session`` refers to a closed HTTP client session handle' - existence_error(http_client_session, http_client_session('SessionId'))
 		]
 	]).
 
@@ -77,9 +87,16 @@
 		comment is 'Performs one HTTP request using session defaults and automatic cookie replay/storage. Per-request options can include ``connection_options(Options)`` for one-shot transport configuration, ``source_url(URL)`` for an absolute HTTP or HTTPS URL, ``source_origin(Origin)`` for a bare Origin header value, and ``top_level_navigation(Boolean)`` to drive SameSite-aware cookie replay. When omitted, SameSite replay defaults to ``source_url(URL)`` and ``top_level_navigation(false)``.',
 		argnames is ['Session', 'Method', 'URL', 'Response', 'Options'],
 		exceptions is [
-			'``Session`` is not an open HTTP client session handle' - error,
-			'``Options`` contain invalid session request options or cookie-replay context metadata' - error,
-			'The delegated stateless HTTP request or cookie-jar processing raises an exception' - error
+			'``Session`` is a variable' - instantiation_error,
+			'``Session`` is neither a variable nor an open HTTP client session handle' - domain_error(http_client_session, 'Session'),
+			'``Session`` refers to a closed HTTP client session handle' - existence_error(http_client_session, http_client_session('SessionId')),
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` contains invalid HTTP client session request options' - domain_error(http_client_session_request_options, 'Options'),
+			'``Options`` contains an invalid HTTP client session request option' - domain_error(http_client_session_request_option, 'Option'),
+			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
+			'``URL`` uses an unsupported HTTP scheme' - domain_error(http_client_scheme, 'Scheme'),
+			'Cookie replay uses an invalid request context' - domain_error(http_cookie_jar_request_context, 'RequestContext'),
+			'The stateless HTTP client rejects the request option' - domain_error(http_client_request_option, 'Option')
 		]
 	]).
 
@@ -89,7 +106,9 @@
 		comment is 'Convenience wrapper over request/5 using the ``get`` method.',
 		argnames is ['Session', 'URL', 'Response', 'Options'],
 		exceptions is [
-			'Any exception that can be thrown by ``request/5`` for the given session, URL, and options' - error
+			'``Session`` is not an open HTTP client session handle' - domain_error(http_client_session, 'Session'),
+			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
+			'``Options`` contains invalid HTTP client session request options' - domain_error(http_client_session_request_options, 'Options')
 		]
 	]).
 
@@ -99,7 +118,9 @@
 		comment is 'Convenience wrapper over request/5 using the ``head`` method.',
 		argnames is ['Session', 'URL', 'Response', 'Options'],
 		exceptions is [
-			'Any exception that can be thrown by ``request/5`` for the given session, URL, and options' - error
+			'``Session`` is not an open HTTP client session handle' - domain_error(http_client_session, 'Session'),
+			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
+			'``Options`` contains invalid HTTP client session request options' - domain_error(http_client_session_request_options, 'Options')
 		]
 	]).
 
@@ -109,7 +130,9 @@
 		comment is 'Convenience wrapper over request/5 using the ``delete`` method.',
 		argnames is ['Session', 'URL', 'Response', 'Options'],
 		exceptions is [
-			'Any exception that can be thrown by ``request/5`` for the given session, URL, and options' - error
+			'``Session`` is not an open HTTP client session handle' - domain_error(http_client_session, 'Session'),
+			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
+			'``Options`` contains invalid HTTP client session request options' - domain_error(http_client_session_request_options, 'Options')
 		]
 	]).
 
@@ -119,7 +142,10 @@
 		comment is 'Convenience wrapper over request/5 using the ``post`` method and the given body.',
 		argnames is ['Session', 'URL', 'Body', 'Response', 'Options'],
 		exceptions is [
-			'Any exception that can be thrown by ``request/5`` when the given body is merged into the request options' - error
+			'``Session`` is not an open HTTP client session handle' - domain_error(http_client_session, 'Session'),
+			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
+			'``Body`` is invalid for the generated normalized HTTP request' - domain_error(http_body, 'Body'),
+			'``Options`` contains invalid HTTP client session request options' - domain_error(http_client_session_request_options, 'Options')
 		]
 	]).
 
@@ -129,7 +155,10 @@
 		comment is 'Convenience wrapper over request/5 using the ``put`` method and the given body.',
 		argnames is ['Session', 'URL', 'Body', 'Response', 'Options'],
 		exceptions is [
-			'Any exception that can be thrown by ``request/5`` when the given body is merged into the request options' - error
+			'``Session`` is not an open HTTP client session handle' - domain_error(http_client_session, 'Session'),
+			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
+			'``Body`` is invalid for the generated normalized HTTP request' - domain_error(http_body, 'Body'),
+			'``Options`` contains invalid HTTP client session request options' - domain_error(http_client_session_request_options, 'Options')
 		]
 	]).
 
@@ -139,7 +168,10 @@
 		comment is 'Convenience wrapper over request/5 using the ``patch`` method and the given body.',
 		argnames is ['Session', 'URL', 'Body', 'Response', 'Options'],
 		exceptions is [
-			'Any exception that can be thrown by ``request/5`` when the given body is merged into the request options' - error
+			'``Session`` is not an open HTTP client session handle' - domain_error(http_client_session, 'Session'),
+			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
+			'``Body`` is invalid for the generated normalized HTTP request' - domain_error(http_body, 'Body'),
+			'``Options`` contains invalid HTTP client session request options' - domain_error(http_client_session_request_options, 'Options')
 		]
 	]).
 
@@ -529,7 +561,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-22,
+		date is 2026-06-26,
 		comment is 'By default, stateful HTTP client sessions use the ``http_socket`` library.'
 	]).
 

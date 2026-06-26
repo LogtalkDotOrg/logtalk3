@@ -15,7 +15,7 @@ Transport-neutral HTMX request classification, HTML reply helpers, and response 
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-07
+| **Date:** 2026-06-26
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -314,8 +314,14 @@ Builds a normalized ``text/html`` response from a pre-rendered HTML atom or an `
 |    ``reply(+compound,+term,-compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Content`` or the derived HTMX response options are invalid for HTML reply generation:
-|        ``error``
+|    ``Request`` is not a valid normalized HTTP request term:
+|        ``domain_error(http_request,Request)``
+|    ``Content`` cannot be rendered as HTMX HTML content:
+|        ``domain_error(http_htmx_content,Content)``
+|    The HTMX response status is invalid:
+|        ``domain_error(htmx_response_headers_status,Status)``
+|    The generated response violates normalized HTTP response semantics:
+|        ``domain_error(http_header_semantics,Header)``
 
 
 ------------
@@ -337,8 +343,22 @@ Builds a normalized ``text/html`` response from a pre-rendered HTML atom or an `
 |    ``reply(+compound,+term,-compound,+list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Content`` or ``Options`` are invalid for HTMX HTML reply generation:
-|        ``error``
+|    ``Request`` is not a valid normalized HTTP request term:
+|        ``domain_error(http_request,Request)``
+|    ``Content`` cannot be rendered as HTMX HTML content:
+|        ``domain_error(http_htmx_content,Content)``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    The HTMX response status is invalid:
+|        ``domain_error(htmx_response_headers_status,Status)``
+|    The generated response violates normalized HTTP response semantics:
+|        ``domain_error(http_header_semantics,Header)``
 
 
 ------------
@@ -360,8 +380,14 @@ Builds a normalized ``text/html`` response using the fragment content when ``is_
 |    ``page_fragment_reply(+compound,+term,+term,-compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``PageContent`` or ``FragmentContent`` are invalid for HTMX HTML reply generation:
-|        ``error``
+|    ``Request`` is not a valid normalized HTTP request term:
+|        ``domain_error(http_request,Request)``
+|    ``PageContent`` or ``FragmentContent`` cannot be rendered as HTMX HTML content:
+|        ``domain_error(http_htmx_content,Content)``
+|    The HTMX response status is invalid:
+|        ``domain_error(htmx_response_headers_status,Status)``
+|    The generated response violates normalized HTTP response semantics:
+|        ``domain_error(http_header_semantics,Header)``
 
 
 ------------
@@ -383,8 +409,22 @@ Builds a normalized ``text/html`` response using the fragment content when ``is_
 |    ``page_fragment_reply(+compound,+term,+term,-compound,+list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``PageContent``, ``FragmentContent``, or ``Options`` are invalid for HTMX HTML reply generation:
-|        ``error``
+|    ``Request`` is not a valid normalized HTTP request term:
+|        ``domain_error(http_request,Request)``
+|    ``PageContent`` or ``FragmentContent`` cannot be rendered as HTMX HTML content:
+|        ``domain_error(http_htmx_content,Content)``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    The HTMX response status is invalid:
+|        ``domain_error(htmx_response_headers_status,Status)``
+|    The generated response violates normalized HTTP response semantics:
+|        ``domain_error(http_header_semantics,Header)``
 
 
 ------------
@@ -406,8 +446,22 @@ Decorates a normalized response with the relevant HTMX response headers and opti
 |    ``add_response_headers(+compound,+compound,-compound,+list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Options`` contain invalid HTMX response-header declarations or the delegated response builder rejects them:
-|        ``error``
+|    ``Request`` is not a valid normalized HTTP request term:
+|        ``domain_error(http_request,Request)``
+|    ``Response0`` is not a valid normalized HTTP response term:
+|        ``domain_error(http_response,Response0)``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    The HTMX response status is invalid:
+|        ``domain_error(htmx_response_headers_status,Status)``
+|    The decorated response violates normalized HTTP response semantics:
+|        ``domain_error(http_header_semantics,Header)``
 
 
 ------------

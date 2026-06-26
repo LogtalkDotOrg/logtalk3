@@ -18,7 +18,7 @@ Transport-neutral WebSocket message predicates built on top of the http_websocke
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-11
+| **Date:** 2026-06-26
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -60,8 +60,16 @@ Constructs a validated normalized WebSocket message term from the message type a
 |    ``message(+atom,+term,-compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Type`` or ``Payload`` do not define a valid normalized WebSocket message term:
-|        ``error``
+|    ``Type`` is not a supported WebSocket message type:
+|        ``domain_error(http_websocket_message_type,Type)``
+|    ``Payload`` is not valid for the requested WebSocket message type:
+|        ``domain_error(http_websocket_message,Message)``
+|    ``Payload`` is not a valid WebSocket close payload:
+|        ``domain_error(http_websocket_close_payload,Payload)``
+|    ``Payload`` contains an invalid WebSocket close code:
+|        ``domain_error(http_websocket_close_code,Code)``
+|    ``Payload`` is not valid text for the selected text representation:
+|        ``domain_error(http_websocket_message_text,Text)``
 
 | **Remarks:**
 
@@ -109,8 +117,16 @@ Reads one WebSocket message from a binary stream. Continuation frames are reasse
 |    ``read_message(+stream_or_alias,-term)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Stream`` is a variable or the inbound frames do not form a valid normalized WebSocket message sequence:
-|        ``error``
+|    ``Stream`` is a variable:
+|        ``instantiation_error``
+|    The inbound frames do not form a valid normalized WebSocket message sequence:
+|        ``domain_error(http_websocket_message_sequence,Frame)``
+|    The inbound frame is invalid:
+|        ``domain_error(http_websocket_frame,Frame)``
+|    The inbound message payload is invalid:
+|        ``domain_error(http_websocket_message,Message)``
+|    The inbound message text is invalid for the selected text representation:
+|        ``domain_error(http_websocket_message_text,Text)``
 
 | **Remarks:**
 
@@ -136,8 +152,16 @@ Writes one validated WebSocket message as a single final frame to a binary strea
 |    ``write_message(+stream_or_alias,+compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Stream`` is a variable or ``Message`` is not a valid normalized WebSocket message term:
-|        ``error``
+|    ``Stream`` is a variable:
+|        ``instantiation_error``
+|    ``Message`` is not a valid normalized WebSocket message term:
+|        ``domain_error(http_websocket_message,Message)``
+|    ``Message`` has an unsupported message type:
+|        ``domain_error(http_websocket_message_type,Type)``
+|    ``Message`` has an invalid close payload:
+|        ``domain_error(http_websocket_close_payload,Payload)``
+|    ``Message`` has invalid text for the selected text representation:
+|        ``domain_error(http_websocket_message_text,Text)``
 
 
 ------------
@@ -160,7 +184,9 @@ Returns the type atom of a validated WebSocket message term.
 
 | **Exceptions:**
 |    ``Message`` is not a valid normalized WebSocket message term:
-|        ``error``
+|        ``domain_error(http_websocket_message,Message)``
+|    ``Message`` has an unsupported message type:
+|        ``domain_error(http_websocket_message_type,Type)``
 
 
 ------------
@@ -183,7 +209,9 @@ Returns the payload term of a validated WebSocket message term.
 
 | **Exceptions:**
 |    ``Message`` is not a valid normalized WebSocket message term:
-|        ``error``
+|        ``domain_error(http_websocket_message,Message)``
+|    ``Message`` has an unsupported message type:
+|        ``domain_error(http_websocket_message_type,Type)``
 
 
 ------------
@@ -209,7 +237,13 @@ Protected helper that normalizes a WebSocket message term and returns the normal
 
 | **Exceptions:**
 |    ``Message`` is not a valid normalized WebSocket message term:
-|        ``error``
+|        ``domain_error(http_websocket_message,Message)``
+|    ``Message`` has an unsupported message type:
+|        ``domain_error(http_websocket_message_type,Type)``
+|    ``Message`` has an invalid close payload:
+|        ``domain_error(http_websocket_close_payload,Payload)``
+|    ``Message`` has invalid text for the selected text representation:
+|        ``domain_error(http_websocket_message_text,Text)``
 
 
 ------------
@@ -231,8 +265,14 @@ Protected helper that decodes payload bytes for the given message type atom into
 |    ``decode_message(+atom,+list(byte),-compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Type`` is not a supported WebSocket message type or ``PayloadBytes`` do not decode to a valid message payload:
-|        ``error``
+|    ``Type`` is not a supported WebSocket message type:
+|        ``domain_error(http_websocket_message_type,Type)``
+|    ``PayloadBytes`` is not a valid close payload:
+|        ``domain_error(http_websocket_close_payload,PayloadBytes)``
+|    ``PayloadBytes`` contains an invalid close code:
+|        ``domain_error(http_websocket_close_code,Code)``
+|    ``PayloadBytes`` does not decode to valid text for the selected text representation:
+|        ``domain_error(http_websocket_message_text,PayloadBytes)``
 
 
 ------------

@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-28,
+		date is 2026-06-26,
 		comment is 'Optional server-session middleware helpers for router objects importing the ``http_router`` category.',
 		parameters is [
 			'Manager' - 'Server-session manager handle used for request begin and response finish processing.'
@@ -37,7 +37,8 @@
 		comment is 'Router middleware helper that annotates a normalized request with a server-session handle and state before route dispatch.',
 		argnames is ['Request', 'Action'],
 		exceptions is [
-			'Any exception that can be thrown by ``http_server_session::begin/3`` for the configured manager and request' - error
+			'The configured manager is not an open server-session manager handle' - domain_error(http_server_session, 'Manager'),
+			'``Request`` is not a valid normalized HTTP request' - domain_error(http_server_session_request, 'Request')
 		]
 	]).
 
@@ -47,7 +48,9 @@
 		comment is 'Router response-middleware helper that finalizes server-session cookie lifecycle changes after route dispatch.',
 		argnames is ['Request', 'Response0', 'Response'],
 		exceptions is [
-			'Any exception that can be thrown by ``http_server_session::finish/3`` for the configured manager request/response pair' - error
+			'``Request`` is not a valid annotated server-session request' - domain_error(http_server_session_request, 'Request'),
+			'``Response0`` is not a valid normalized HTTP response' - domain_error(http_server_session_response, 'Response0'),
+			'The decorated response violates normalized HTTP response semantics' - domain_error(http_header_semantics, 'Header')
 		]
 	]).
 

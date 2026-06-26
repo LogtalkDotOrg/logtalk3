@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-28,
+		date is 2026-06-26,
 		comment is 'Declarative router companion category that reuses ``http_parameters`` declarations for request extraction and OpenAPI metadata generation.',
 		remarks is [
 			'Route declarations' - 'Importing objects define parameter declarations per route using ``route_parameter_declarations/2``.',
@@ -40,7 +40,12 @@
 		comment is 'Extracts typed parameters for the route identified by the routed request ``route/1`` annotation.',
 		argnames is ['Request', 'Parameters'],
 		exceptions is [
-			'The routed request is missing route annotations, the route declarations are invalid, or typed parameter extraction fails' - error
+			'``Request`` is not a valid normalized HTTP request term' - domain_error(http_request, 'Request'),
+			'``Request`` does not contain a route annotation' - domain_error(http_routed_request, 'Request'),
+			'The route parameter declarations are invalid' - domain_error(http_parameter_declaration, 'Declaration'),
+			'A path parameter declaration is not declared by the route path template' - domain_error(http_parameter_declaration('Name', path), not_in_route_path('RouteId')),
+			'A path parameter declaration type is incompatible with the route path template' - domain_error(http_parameter_declaration('Name', path), incompatible_route_path_type('Type', 'PathTemplateType')),
+			'The request parameters fail declared type or constraint validation' - error(http_parameter_validation('Errors'), 'Context')
 		]
 	]).
 

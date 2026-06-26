@@ -405,7 +405,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-11</div>
+<div class="line"><strong>Date:</strong> 2026-06-26</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -537,9 +537,37 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> or <code class="docutils literal notranslate"><span class="pre">State</span></code> are invalid for the current session role, or the inbound frame/message sequence violates RFC 6455 session rules:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">The session role parameter is neither <code class="docutils literal notranslate"><span class="pre">client</span></code> nor <code class="docutils literal notranslate"><span class="pre">server</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_role,_Role_)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is not a valid WebSocket session state:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_state,State)</span></code></div>
+</div>
+<div class="line">The inbound frame/message sequence violates RFC 6455 session rules:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_sequence,Frame)</span></code></div>
+</div>
+<div class="line">The inbound frame violates the current peer masking policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_masking,Frame)</span></code></div>
+</div>
+<div class="line">The inbound frame uses unsupported extensions:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_extensions,Frame)</span></code></div>
+</div>
+<div class="line">The inbound frame is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_frame,Frame)</span></code></div>
+</div>
+<div class="line">The inbound message text is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_message_text,Payload)</span></code></div>
 </div>
 </div>
 </div>
@@ -577,9 +605,37 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Input</span></code>, <code class="docutils literal notranslate"><span class="pre">Output</span></code>, or <code class="docutils literal notranslate"><span class="pre">State</span></code> are invalid for the current session role, or the inbound frame/message sequence violates RFC 6455 session rules:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Input</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">The session role parameter is neither <code class="docutils literal notranslate"><span class="pre">client</span></code> nor <code class="docutils literal notranslate"><span class="pre">server</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_role,_Role_)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is not a valid WebSocket session state:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_state,State)</span></code></div>
+</div>
+<div class="line">The inbound frame/message sequence violates RFC 6455 session rules:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_sequence,Frame)</span></code></div>
+</div>
+<div class="line">The inbound frame violates the current peer masking policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_masking,Frame)</span></code></div>
+</div>
+<div class="line">The inbound frame uses unsupported extensions:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_extensions,Frame)</span></code></div>
+</div>
+<div class="line">The inbound frame is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_frame,Frame)</span></code></div>
+</div>
+<div class="line">The inbound message text is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_message_text,Payload)</span></code></div>
 </div>
 </div>
 </div>
@@ -615,9 +671,49 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Input</span></code>, <code class="docutils literal notranslate"><span class="pre">Output</span></code>, <code class="docutils literal notranslate"><span class="pre">State</span></code>, or <code class="docutils literal notranslate"><span class="pre">Options</span></code> are invalid for the current session role, or the inbound frame/message sequence violates RFC 6455 session rules:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Input</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">The session role parameter is neither <code class="docutils literal notranslate"><span class="pre">client</span></code> nor <code class="docutils literal notranslate"><span class="pre">server</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_role,_Role_)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is not a valid WebSocket session state:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_state,State)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid read option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_read_option,Option)</span></code></div>
+</div>
+<div class="line">The inbound frame/message sequence violates RFC 6455 session rules:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_sequence,Frame)</span></code></div>
+</div>
+<div class="line">The inbound frame violates the current peer masking policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_masking,Frame)</span></code></div>
+</div>
+<div class="line">The inbound frame uses unsupported extensions:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_extensions,Frame)</span></code></div>
+</div>
+<div class="line">The inbound payload length exceeds the configured limit:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_payload_length_limit,PayloadLength)</span></code></div>
 </div>
 </div>
 </div>
@@ -655,9 +751,25 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> or <code class="docutils literal notranslate"><span class="pre">Message</span></code> are invalid for the current session role:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">The session role parameter is neither <code class="docutils literal notranslate"><span class="pre">client</span></code> nor <code class="docutils literal notranslate"><span class="pre">server</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_role,_Role_)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> is not a valid normalized WebSocket message term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_message,Message)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> contains invalid text:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_message_text,Text)</span></code></div>
+</div>
+<div class="line">The generated outbound frame is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_frame,Frame)</span></code></div>
 </div>
 </div>
 </div>
@@ -685,9 +797,37 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code>, <code class="docutils literal notranslate"><span class="pre">Message</span></code>, or <code class="docutils literal notranslate"><span class="pre">Options</span></code> are invalid for the current session role:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">The session role parameter is neither <code class="docutils literal notranslate"><span class="pre">client</span></code> nor <code class="docutils literal notranslate"><span class="pre">server</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_role,_Role_)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> is not a valid normalized WebSocket message term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_message,Message)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid write option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_write_option,Option)</span></code></div>
+</div>
+<div class="line">The generated outbound frame is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_frame,Frame)</span></code></div>
 </div>
 </div>
 </div>
@@ -723,9 +863,25 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code>, <code class="docutils literal notranslate"><span class="pre">State</span></code>, or <code class="docutils literal notranslate"><span class="pre">Message</span></code> are invalid for the current session role or close-handshake state:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">The session role parameter is neither <code class="docutils literal notranslate"><span class="pre">client</span></code> nor <code class="docutils literal notranslate"><span class="pre">server</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_role,_Role_)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is not a valid WebSocket session state:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_state,State)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> is not a valid normalized WebSocket message term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_message,Message)</span></code></div>
+</div>
+<div class="line">The write violates the current close-handshake state:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_state,State)</span></code></div>
 </div>
 </div>
 </div>
@@ -761,9 +917,41 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code>, <code class="docutils literal notranslate"><span class="pre">State</span></code>, <code class="docutils literal notranslate"><span class="pre">Message</span></code>, or <code class="docutils literal notranslate"><span class="pre">Options</span></code> are invalid for the current session role or close-handshake state:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">The session role parameter is neither <code class="docutils literal notranslate"><span class="pre">client</span></code> nor <code class="docutils literal notranslate"><span class="pre">server</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_role,_Role_)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is not a valid WebSocket session state:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_state,State)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> is not a valid normalized WebSocket message term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_message,Message)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid write option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_write_option,Option)</span></code></div>
+</div>
+<div class="line">The write violates the current close-handshake state:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_state,State)</span></code></div>
 </div>
 </div>
 </div>
@@ -828,9 +1016,25 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">The session role or state is invalid, or the inbound frame/message sequence violates RFC 6455 session rules:</div>
+<div class="line">The session role parameter is neither <code class="docutils literal notranslate"><span class="pre">client</span></code> nor <code class="docutils literal notranslate"><span class="pre">server</span></code>:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_role,_Role_)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is not a valid WebSocket session state:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_state,State)</span></code></div>
+</div>
+<div class="line">The inbound frame/message sequence violates RFC 6455 session rules:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_sequence,Frame)</span></code></div>
+</div>
+<div class="line">The inbound frame violates the current peer masking policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_masking,Frame)</span></code></div>
+</div>
+<div class="line">The inbound frame uses unsupported extensions:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_extensions,Frame)</span></code></div>
 </div>
 </div>
 </div>
@@ -858,9 +1062,17 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">The session state, automatic-control options, or message are invalid for session-read post-processing:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is not a valid WebSocket session state:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_state,State)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">AutoPong</span></code> is not a supported automatic pong setting:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_read_option,auto_pong(AutoPong))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> is not a valid normalized WebSocket message term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_message,Message)</span></code></div>
 </div>
 </div>
 </div>

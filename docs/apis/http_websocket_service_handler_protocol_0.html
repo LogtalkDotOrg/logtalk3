@@ -404,7 +404,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-11</div>
+<div class="line"><strong>Date:</strong> 2026-06-26</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -466,9 +466,25 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">The implementing handler may throw message-specific or reply-construction exceptions:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> is not a valid normalized WebSocket message term:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_message,Message)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Replies</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Replies</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Replies)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Reply</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Replies</span></code> is not a valid reply message:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_service_handler_reply,Reply)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Reply</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Replies</span></code> is not a valid registry-backed action:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_service_handler_action,Reply)</span></code></div>
 </div>
 </div>
 </div>

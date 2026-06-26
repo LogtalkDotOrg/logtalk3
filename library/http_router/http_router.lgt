@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-14,
+		date is 2026-06-26,
 		comment is 'Declarative HTTP router category for objects implementing the http_handler_protocol protocol.'
 	]).
 
@@ -35,7 +35,20 @@
 		comment is 'Routes a normalized HTTP request using the importing object ``route/4`` clauses.',
 		argnames is ['Request', 'Response'],
 		exceptions is [
-			'The request, route metadata, middleware, or delegated route handler raise a routing exception' - error
+			'A middleware handler is not valid' - domain_error(http_router_middleware, 'Handler'),
+			'A middleware action is not valid' - domain_error(http_router_middleware_action, 'Action'),
+			'A response middleware handler is not valid' - domain_error(http_router_response_middleware, 'Handler'),
+			'A response middleware result is not a valid normalized HTTP response term' - domain_error(http_router_response_middleware_response, 'Response'),
+			'A route authorization action is not valid' - domain_error(http_router_route_authorization_action, 'Action'),
+			'A route ``produces`` declaration is not a non-empty list of media types' - domain_error(http_router_route_produces, 'ProducedMediaTypes'),
+			'A route ``produces`` media type is invalid' - domain_error(http_router_route_media_type, 'ProducedMediaType'),
+			'Route metadata is not a proper list' - domain_error(http_router_route_metadata, 'Metadata'),
+			'A route metadata property is invalid' - domain_error(http_router_route_metadata_property, 'MetadataProperty'),
+			'A route handler is not valid' - domain_error(http_router_handler, 'Handler'),
+			'A route path template is invalid' - domain_error(http_router_path_template, 'Template'),
+			'A route path template segment is invalid' - domain_error(http_router_path_template_segment, 'Segment'),
+			'A request path is invalid' - domain_error(http_router_path, 'Path'),
+			'The route handler reports parameter validation errors' - error(http_parameter_validation('Errors'), 'Context')
 		]
 	]).
 
@@ -115,7 +128,7 @@
 		comment is 'Optional hook predicate that validates or decorates a routed request after route matching and metadata annotation but before route handler dispatch. It must return either ``continue(Request)`` or ``respond(Response)``. The default implementation continues with the routed request unchanged.',
 		argnames is ['Request', 'Action'],
 		exceptions is [
-			'The authorizer hook may throw request-specific authorization exceptions' - error
+			'``Action`` is not a valid route authorization action' - domain_error(http_router_route_authorization_action, 'Action')
 		]
 	]).
 
@@ -181,7 +194,8 @@
 		comment is 'Returns the normalized placeholder descriptors declared in a path template as ``parameter(Name, Type)`` terms.',
 		argnames is ['PathTemplate', 'Parameters'],
 		exceptions is [
-			'``PathTemplate`` is not a valid router path template' - error
+			'``PathTemplate`` is not a valid router path template' - domain_error(http_router_path_template, 'PathTemplate'),
+			'A segment in ``PathTemplate`` is not a valid router path template segment' - domain_error(http_router_path_template_segment, 'Segment')
 		]
 	]).
 

@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-26,
 		comment is 'Protocol for portable HTTP body codecs.'
 	]).
 
@@ -41,7 +41,10 @@
 		comment is 'Encodes a semantic payload term for the given media type and options into a normalized HTTP body term.',
 		argnames is ['MediaType', 'Payload', 'Options', 'Body'],
 		exceptions is [
-			'The implementing codec may throw media-type-specific validation or encoding exceptions' - error
+			'``MediaType`` is not a valid HTTP media type atom' - domain_error(http_media_type, 'MediaType'),
+			'``Payload`` is not valid for ``MediaType``' - domain_error(http_body_payload, 'Payload'),
+			'``Options`` is not a valid HTTP body options list' - domain_error(http_body_options, 'Options'),
+			'``Body`` is not a valid normalized HTTP body term' - domain_error(http_body, 'Body')
 		]
 	]).
 
@@ -51,7 +54,10 @@
 		comment is 'Decodes a normalized HTTP body term for the given media type and options into a semantic payload term.',
 		argnames is ['MediaType', 'Body', 'Options', 'Payload'],
 		exceptions is [
-			'The implementing codec may throw media-type-specific validation or decoding exceptions' - error
+			'``MediaType`` is not a valid HTTP media type atom' - domain_error(http_media_type, 'MediaType'),
+			'``Body`` is not a valid normalized HTTP body term' - domain_error(http_body, 'Body'),
+			'``Options`` is not a valid HTTP body options list' - domain_error(http_body_options, 'Options'),
+			'``Payload`` cannot be decoded from ``Body`` for ``MediaType``' - domain_error(http_body_payload, 'Payload')
 		]
 	]).
 

@@ -398,7 +398,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-05-28</div>
+<div class="line"><strong>Date:</strong> 2026-06-26</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -476,9 +476,29 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">The routed request is missing route annotations, the route declarations are invalid, or typed parameter extraction fails:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Request</span></code> is not a valid normalized HTTP request term:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_request,Request)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Request</span></code> does not contain a route annotation:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_routed_request,Request)</span></code></div>
+</div>
+<div class="line">The route parameter declarations are invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_parameter_declaration,Declaration)</span></code></div>
+</div>
+<div class="line">A path parameter declaration is not declared by the route path template:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_parameter_declaration(Name,path),not_in_route_path(RouteId))</span></code></div>
+</div>
+<div class="line">A path parameter declaration type is incompatible with the route path template:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_parameter_declaration(Name,path),incompatible_route_path_type(Type,PathTemplateType))</span></code></div>
+</div>
+<div class="line">The request parameters fail declared type or constraint validation:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error(http_parameter_validation(Errors),Context)</span></code></div>
 </div>
 </div>
 </div>

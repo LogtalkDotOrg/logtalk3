@@ -409,7 +409,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-22</div>
+<div class="line"><strong>Date:</strong> 2026-06-26</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -488,9 +488,57 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Connection</span></code> or <code class="docutils literal notranslate"><span class="pre">Handler</span></code> are invalid for the callback-driven session loop, or the delegated WebSocket session processing raises an exception:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Connection</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Connection</span></code> is not a valid upgraded WebSocket connection handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_connection,Connection)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> is not a valid WebSocket service handler:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_service_handler,Handler)</span></code></div>
+</div>
+<div class="line">The session role parameter is neither <code class="docutils literal notranslate"><span class="pre">client</span></code> nor <code class="docutils literal notranslate"><span class="pre">server</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_role,_Role_)</span></code></div>
+</div>
+<div class="line">The inbound frame/message sequence violates RFC 6455 session rules:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_sequence,Frame)</span></code></div>
+</div>
+<div class="line">The inbound frame violates the current peer masking policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_masking,Frame)</span></code></div>
+</div>
+<div class="line">The inbound frame uses unsupported extensions:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_extensions,Frame)</span></code></div>
+</div>
+<div class="line">The inbound frame is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_frame,Frame)</span></code></div>
+</div>
+<div class="line">The inbound message text is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_message_text,Payload)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> returns a variable reply list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> returns a non-list reply list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Replies)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> returns an invalid reply:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_service_handler_reply,Reply)</span></code></div>
 </div>
 </div>
 </div>
@@ -527,9 +575,81 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Connection</span></code>, <code class="docutils literal notranslate"><span class="pre">Handler</span></code>, or <code class="docutils literal notranslate"><span class="pre">Options</span></code> are invalid for the callback-driven session loop, or the delegated WebSocket session processing raises an exception:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Connection</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Connection</span></code> is not a valid upgraded WebSocket connection handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_connection,Connection)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> is not a valid WebSocket service handler:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_service_handler,Handler)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains an invalid WebSocket service loop option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_service_option,Option)</span></code></div>
+</div>
+<div class="line">Timed session-loop options are not available on this backend:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">not_available(http_websocket_service_timing)</span></code></div>
+</div>
+<div class="line">The session role parameter is neither <code class="docutils literal notranslate"><span class="pre">client</span></code> nor <code class="docutils literal notranslate"><span class="pre">server</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_role,_Role_)</span></code></div>
+</div>
+<div class="line">The inbound frame/message sequence violates RFC 6455 session rules:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_sequence,Frame)</span></code></div>
+</div>
+<div class="line">The inbound frame violates the current peer masking policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_masking,Frame)</span></code></div>
+</div>
+<div class="line">The inbound frame uses unsupported extensions:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_extensions,Frame)</span></code></div>
+</div>
+<div class="line">The inbound frame is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_frame,Frame)</span></code></div>
+</div>
+<div class="line">The inbound message text is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_message_text,Payload)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> returns a variable reply list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> returns a non-list reply list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Replies)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> returns an invalid reply:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_service_handler_reply,Reply)</span></code></div>
 </div>
 </div>
 </div>
@@ -572,9 +692,113 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">The connection, handler descriptor, session state, or loop options are invalid for the callback-driven session loop:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Connection</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Connection</span></code> is not a valid upgraded WebSocket connection handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_connection,Connection)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">HandlerDescriptor</span></code> is not a valid WebSocket service handler descriptor:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_service_handler,HandlerDescriptor)</span></code></div>
+</div>
+<div class="line">The handler in <code class="docutils literal notranslate"><span class="pre">HandlerDescriptor</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">The handler in <code class="docutils literal notranslate"><span class="pre">HandlerDescriptor</span></code> is not a valid WebSocket service handler:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_service_handler,Handler)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">State</span></code> is not a valid WebSocket session state:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_state,State)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains an invalid WebSocket service loop option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_service_option,Option)</span></code></div>
+</div>
+<div class="line">Timed session-loop options are not available on this backend:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">not_available(http_websocket_service_timing)</span></code></div>
+</div>
+<div class="line">The session role parameter is neither <code class="docutils literal notranslate"><span class="pre">client</span></code> nor <code class="docutils literal notranslate"><span class="pre">server</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_role,_Role_)</span></code></div>
+</div>
+<div class="line">The inbound frame/message sequence violates RFC 6455 session rules:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_sequence,Frame)</span></code></div>
+</div>
+<div class="line">The inbound frame violates the current peer masking policy:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_masking,Frame)</span></code></div>
+</div>
+<div class="line">The inbound frame uses unsupported extensions:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_session_extensions,Frame)</span></code></div>
+</div>
+<div class="line">The inbound frame is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_frame,Frame)</span></code></div>
+</div>
+<div class="line">The inbound message text is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_message_text,Payload)</span></code></div>
+</div>
+<div class="line">The handler returns a variable reply or action list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">The handler returns a non-list reply list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Replies)</span></code></div>
+</div>
+<div class="line">The handler returns a non-list action list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Actions)</span></code></div>
+</div>
+<div class="line">The handler returns an invalid reply:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_service_handler_reply,Reply)</span></code></div>
+</div>
+<div class="line">The handler returns an invalid registry action:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_service_handler_action,Action)</span></code></div>
+</div>
+<div class="line">The registry in <code class="docutils literal notranslate"><span class="pre">HandlerDescriptor</span></code> is not an open WebSocket service registry handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_service_registry,Registry)</span></code></div>
+</div>
+<div class="line">The session in <code class="docutils literal notranslate"><span class="pre">HandlerDescriptor</span></code> is not a valid WebSocket service registry session handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_service_registry_session,Session)</span></code></div>
+</div>
+<div class="line">The session in <code class="docutils literal notranslate"><span class="pre">HandlerDescriptor</span></code> is not registered in the registry:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_websocket_service_registry_session,websocket_session(RegistryId,SessionId))</span></code></div>
 </div>
 </div>
 </div>
@@ -604,7 +828,7 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Value</span></code> is not a non-negative integer option value for the given domain and option name:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(Domain,Option)</span></code></div>
 </div>
 </div>
 </div>

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-06-15,
+		date is 2026-06-26,
 		comment is 'OpenAPI 3.1.0 document derivation, parsing, generation, and validation built on top of the ``json`` and ``json_schema`` libraries.',
 		see_also is [json, json_schema, application_protocol, open_api_provider_protocol]
 	]).
@@ -80,7 +80,8 @@
 		comment is 'Resolves an operation descriptor exposed by a provider object using its ``operationId`` atom.',
 		argnames is ['Provider', 'OperationId', 'Operation'],
 		exceptions is [
-			'``Provider`` does not expose the requested ``operationId`` or provider hooks violate OpenAPI descriptor expectations' - error
+			'``Provider`` does not expose the requested ``operationId``' - existence_error(open_api_operation, 'OperationId'),
+			'``Provider`` exposes duplicated ``operationId`` values' - domain_error(open_api_operation_id, duplicate('Id'))
 		]
 	]).
 

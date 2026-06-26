@@ -19,7 +19,7 @@ Stateful WebSocket session predicates that build on top of the message layer to 
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-11
+| **Date:** 2026-06-26
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -103,8 +103,22 @@ Reads the next session-level WebSocket message from a binary stream using the gi
 |    ``read_message(+stream_or_alias,+compound,-compound,-term)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Stream`` or ``State`` are invalid for the current session role, or the inbound frame/message sequence violates RFC 6455 session rules:
-|        ``error``
+|    ``Stream`` is a variable:
+|        ``instantiation_error``
+|    The session role parameter is neither ``client`` nor ``server``:
+|        ``domain_error(http_websocket_session_role,_Role_)``
+|    ``State`` is not a valid WebSocket session state:
+|        ``domain_error(http_websocket_session_state,State)``
+|    The inbound frame/message sequence violates RFC 6455 session rules:
+|        ``domain_error(http_websocket_session_sequence,Frame)``
+|    The inbound frame violates the current peer masking policy:
+|        ``domain_error(http_websocket_session_masking,Frame)``
+|    The inbound frame uses unsupported extensions:
+|        ``domain_error(http_websocket_session_extensions,Frame)``
+|    The inbound frame is invalid:
+|        ``domain_error(http_websocket_frame,Frame)``
+|    The inbound message text is invalid:
+|        ``domain_error(http_websocket_message_text,Payload)``
 
 | **Remarks:**
 
@@ -132,8 +146,22 @@ Reads the next session-level WebSocket message from a binary input stream using 
 |    ``read_message(+stream_or_alias,+stream_or_alias,+compound,-compound,-term)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Input``, ``Output``, or ``State`` are invalid for the current session role, or the inbound frame/message sequence violates RFC 6455 session rules:
-|        ``error``
+|    ``Input`` is a variable:
+|        ``instantiation_error``
+|    The session role parameter is neither ``client`` nor ``server``:
+|        ``domain_error(http_websocket_session_role,_Role_)``
+|    ``State`` is not a valid WebSocket session state:
+|        ``domain_error(http_websocket_session_state,State)``
+|    The inbound frame/message sequence violates RFC 6455 session rules:
+|        ``domain_error(http_websocket_session_sequence,Frame)``
+|    The inbound frame violates the current peer masking policy:
+|        ``domain_error(http_websocket_session_masking,Frame)``
+|    The inbound frame uses unsupported extensions:
+|        ``domain_error(http_websocket_session_extensions,Frame)``
+|    The inbound frame is invalid:
+|        ``domain_error(http_websocket_frame,Frame)``
+|    The inbound message text is invalid:
+|        ``domain_error(http_websocket_message_text,Payload)``
 
 | **Remarks:**
 
@@ -159,8 +187,28 @@ Reads the next session-level WebSocket message from a binary input stream using 
 |    ``read_message(+stream_or_alias,+stream_or_alias,+compound,-compound,-term,+list)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Input``, ``Output``, ``State``, or ``Options`` are invalid for the current session role, or the inbound frame/message sequence violates RFC 6455 session rules:
-|        ``error``
+|    ``Input`` is a variable:
+|        ``instantiation_error``
+|    The session role parameter is neither ``client`` nor ``server``:
+|        ``domain_error(http_websocket_session_role,_Role_)``
+|    ``State`` is not a valid WebSocket session state:
+|        ``domain_error(http_websocket_session_state,State)``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid read option:
+|        ``domain_error(http_websocket_session_read_option,Option)``
+|    The inbound frame/message sequence violates RFC 6455 session rules:
+|        ``domain_error(http_websocket_session_sequence,Frame)``
+|    The inbound frame violates the current peer masking policy:
+|        ``domain_error(http_websocket_session_masking,Frame)``
+|    The inbound frame uses unsupported extensions:
+|        ``domain_error(http_websocket_session_extensions,Frame)``
+|    The inbound payload length exceeds the configured limit:
+|        ``domain_error(http_websocket_payload_length_limit,PayloadLength)``
 
 | **Remarks:**
 
@@ -188,8 +236,16 @@ Stateless convenience wrapper that writes one validated WebSocket message using 
 |    ``write_message(+stream_or_alias,+compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Stream`` or ``Message`` are invalid for the current session role:
-|        ``error``
+|    ``Stream`` is a variable:
+|        ``instantiation_error``
+|    The session role parameter is neither ``client`` nor ``server``:
+|        ``domain_error(http_websocket_session_role,_Role_)``
+|    ``Message`` is not a valid normalized WebSocket message term:
+|        ``domain_error(http_websocket_message,Message)``
+|    ``Message`` contains invalid text:
+|        ``domain_error(http_websocket_message_text,Text)``
+|    The generated outbound frame is invalid:
+|        ``domain_error(http_websocket_frame,Frame)``
 
 
 ------------
@@ -211,8 +267,22 @@ Stateless convenience wrapper that writes one validated WebSocket message using 
 |    ``write_message(+stream_or_alias,+compound,+list)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Stream``, ``Message``, or ``Options`` are invalid for the current session role:
-|        ``error``
+|    ``Stream`` is a variable:
+|        ``instantiation_error``
+|    The session role parameter is neither ``client`` nor ``server``:
+|        ``domain_error(http_websocket_session_role,_Role_)``
+|    ``Message`` is not a valid normalized WebSocket message term:
+|        ``domain_error(http_websocket_message,Message)``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid write option:
+|        ``domain_error(http_websocket_session_write_option,Option)``
+|    The generated outbound frame is invalid:
+|        ``domain_error(http_websocket_frame,Frame)``
 
 | **Remarks:**
 
@@ -238,8 +308,16 @@ Writes one validated WebSocket message using the masking policy implied by the s
 |    ``write_message(+stream_or_alias,+compound,-compound,+compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Stream``, ``State``, or ``Message`` are invalid for the current session role or close-handshake state:
-|        ``error``
+|    ``Stream`` is a variable:
+|        ``instantiation_error``
+|    The session role parameter is neither ``client`` nor ``server``:
+|        ``domain_error(http_websocket_session_role,_Role_)``
+|    ``State`` is not a valid WebSocket session state:
+|        ``domain_error(http_websocket_session_state,State)``
+|    ``Message`` is not a valid normalized WebSocket message term:
+|        ``domain_error(http_websocket_message,Message)``
+|    The write violates the current close-handshake state:
+|        ``domain_error(http_websocket_session_state,State)``
 
 | **Remarks:**
 
@@ -265,8 +343,24 @@ Writes one validated WebSocket message using the masking policy implied by the s
 |    ``write_message(+stream_or_alias,+compound,-compound,+compound,+list)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Stream``, ``State``, ``Message``, or ``Options`` are invalid for the current session role or close-handshake state:
-|        ``error``
+|    ``Stream`` is a variable:
+|        ``instantiation_error``
+|    The session role parameter is neither ``client`` nor ``server``:
+|        ``domain_error(http_websocket_session_role,_Role_)``
+|    ``State`` is not a valid WebSocket session state:
+|        ``domain_error(http_websocket_session_state,State)``
+|    ``Message`` is not a valid normalized WebSocket message term:
+|        ``domain_error(http_websocket_message,Message)``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid write option:
+|        ``domain_error(http_websocket_session_write_option,Option)``
+|    The write violates the current close-handshake state:
+|        ``domain_error(http_websocket_session_state,State)``
 
 | **Remarks:**
 
@@ -316,8 +410,16 @@ Protected helper that validates the session role and state and reads the next se
 |    ``read_session_message(+stream_or_alias,+compound,+term,-compound,-term)`` - ``one_or_error``
 
 | **Exceptions:**
-|    The session role or state is invalid, or the inbound frame/message sequence violates RFC 6455 session rules:
-|        ``error``
+|    The session role parameter is neither ``client`` nor ``server``:
+|        ``domain_error(http_websocket_session_role,_Role_)``
+|    ``State`` is not a valid WebSocket session state:
+|        ``domain_error(http_websocket_session_state,State)``
+|    The inbound frame/message sequence violates RFC 6455 session rules:
+|        ``domain_error(http_websocket_session_sequence,Frame)``
+|    The inbound frame violates the current peer masking policy:
+|        ``domain_error(http_websocket_session_masking,Frame)``
+|    The inbound frame uses unsupported extensions:
+|        ``domain_error(http_websocket_session_extensions,Frame)``
 
 
 ------------
@@ -339,8 +441,12 @@ Protected helper that applies the close-state and automatic control-message tran
 |    ``apply_session_read(+stream_or_alias,+compound,+atom,+compound,+term,-compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    The session state, automatic-control options, or message are invalid for session-read post-processing:
-|        ``error``
+|    ``State`` is not a valid WebSocket session state:
+|        ``domain_error(http_websocket_session_state,State)``
+|    ``AutoPong`` is not a supported automatic pong setting:
+|        ``domain_error(http_websocket_session_read_option,auto_pong(AutoPong))``
+|    ``Message`` is not a valid normalized WebSocket message term:
+|        ``domain_error(http_websocket_message,Message)``
 
 
 ------------

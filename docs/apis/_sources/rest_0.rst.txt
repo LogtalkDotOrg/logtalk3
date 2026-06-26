@@ -15,7 +15,7 @@ REST authoring layer built on top of the HTTP router category.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-16
+| **Date:** 2026-06-26
 
 | **Compilation flags:**
 |    ``static``
@@ -541,8 +541,12 @@ Runs the action associated with the matched endpoint and normalizes any supporte
 |    ``dispatch_rest_endpoint(+compound,-compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    The routed endpoint identifier is missing, unknown, duplicated, or the endpoint action produces an invalid REST result term:
-|        ``error``
+|    The routed endpoint identifier is missing or unknown:
+|        ``existence_error(rest_endpoint_id,Id)``
+|    The routed endpoint identifier is duplicated:
+|        ``domain_error(rest_endpoint_id,duplicate(Id))``
+|    The endpoint action produces an invalid REST result term:
+|        ``domain_error(rest_result,Result)``
 
 
 ------------

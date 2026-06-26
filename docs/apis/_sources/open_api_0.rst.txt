@@ -15,7 +15,7 @@ OpenAPI 3.1.0 document derivation, parsing, generation, and validation built on 
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:1
-| **Date:** 2026-06-15
+| **Date:** 2026-06-26
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -170,8 +170,10 @@ Resolves an operation descriptor exposed by a provider object using its ``operat
 |    ``operation(+object_identifier,+atom,-compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Provider`` does not expose the requested ``operationId`` or provider hooks violate OpenAPI descriptor expectations:
-|        ``error``
+|    ``Provider`` does not expose the requested ``operationId``:
+|        ``existence_error(open_api_operation,OperationId)``
+|    ``Provider`` exposes duplicated ``operationId`` values:
+|        ``domain_error(open_api_operation_id,duplicate(Id))``
 
 
 ------------

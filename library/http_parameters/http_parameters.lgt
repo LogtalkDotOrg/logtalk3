@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-28,
+		date is 2026-06-26,
 		comment is 'Typed HTTP query, form, path, header, and cookie parameter extraction helpers plus OpenAPI descriptor generation helpers.'
 	]).
 
@@ -35,7 +35,18 @@
 		comment is 'Extracts typed parameters from a normalized HTTP request using the given declaration list. Client-input failures throw ``error(http_parameter_validation(Errors), Context)`` where ``Errors`` is a non-empty list of structured parameter errors.',
 		argnames is ['Request', 'Declarations', 'Parameters'],
 		exceptions is [
-			'``Request`` is not a valid normalized HTTP request term or ``Declarations`` are not valid parameter declarations' - error,
+			'``Request`` is not a valid normalized HTTP request term' - domain_error(http_request, 'Request'),
+			'``Declarations`` is a variable or a partial list' - instantiation_error,
+			'``Declarations`` is neither a variable nor a list' - type_error(list, 'Declarations'),
+			'An element ``Declaration`` of the list ``Declarations`` is not a valid HTTP parameter declaration' - domain_error(http_parameter_declaration, 'Declaration'),
+			'An element ``Declaration`` of the list ``Declarations`` has an invalid parameter name' - domain_error(http_parameter_name, 'Name'),
+			'An element ``Declaration`` of the list ``Declarations`` has an invalid parameter source' - domain_error(http_parameter_source, 'Source'),
+			'An element ``Declaration`` of the list ``Declarations`` has an invalid parameter type' - domain_error(http_parameter_type, 'Type'),
+			'An element ``Declaration`` of the list ``Declarations`` has duplicated declaration options' - domain_error(http_parameter_options, duplicate('Option')),
+			'An element ``Declaration`` of the list ``Declarations`` has an invalid declaration option' - domain_error(http_parameter_option, 'Option'),
+			'An element ``Declaration`` of the list ``Declarations`` has an invalid description' - domain_error(http_parameter_description, 'Description'),
+			'An element ``Declaration`` of the list ``Declarations`` has an invalid default value' - domain_error(http_parameter_default('Type'), invalid_default('Name', 'Value')),
+			'``Declarations`` contains duplicated declarations for a parameter source' - domain_error(http_parameter_declaration('Name', 'Source'), duplicate),
 			'The request parameters fail declared type or constraint validation' - error(http_parameter_validation('Errors'), 'Context')
 		]
 	]).
@@ -53,7 +64,15 @@
 		comment is 'Generates OpenAPI ``parameter/5`` descriptors for query, path, header, and cookie declarations.',
 		argnames is ['Declarations', 'Parameters'],
 		exceptions is [
-			'``Declarations`` are not valid HTTP parameter declarations for OpenAPI export' - error
+			'``Declarations`` is a variable or a partial list' - instantiation_error,
+			'``Declarations`` is neither a variable nor a list' - type_error(list, 'Declarations'),
+			'An element ``Declaration`` of the list ``Declarations`` is not a valid HTTP parameter declaration' - domain_error(http_parameter_declaration, 'Declaration'),
+			'An element ``Declaration`` of the list ``Declarations`` has an invalid parameter name' - domain_error(http_parameter_name, 'Name'),
+			'An element ``Declaration`` of the list ``Declarations`` has an invalid parameter source' - domain_error(http_parameter_source, 'Source'),
+			'An element ``Declaration`` of the list ``Declarations`` has an invalid parameter type' - domain_error(http_parameter_type, 'Type'),
+			'An element ``Declaration`` of the list ``Declarations`` has an invalid declaration option' - domain_error(http_parameter_option, 'Option'),
+			'An element ``Declaration`` of the list ``Declarations`` has duplicated declaration options' - domain_error(http_parameter_options, duplicate('Option')),
+			'``Declarations`` contains duplicated declarations for a parameter source' - domain_error(http_parameter_declaration('Name', 'Source'), duplicate)
 		]
 	]).
 

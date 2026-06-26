@@ -397,7 +397,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-16</div>
+<div class="line"><strong>Date:</strong> 2026-06-26</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1090,9 +1090,17 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">The routed endpoint identifier is missing, unknown, duplicated, or the endpoint action produces an invalid REST result term:</div>
+<div class="line">The routed endpoint identifier is missing or unknown:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(rest_endpoint_id,Id)</span></code></div>
+</div>
+<div class="line">The routed endpoint identifier is duplicated:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(rest_endpoint_id,duplicate(Id))</span></code></div>
+</div>
+<div class="line">The endpoint action produces an invalid REST result term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(rest_result,Result)</span></code></div>
 </div>
 </div>
 </div>

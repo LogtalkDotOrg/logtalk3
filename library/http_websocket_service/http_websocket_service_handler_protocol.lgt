@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-11,
+		date is 2026-06-26,
 		comment is 'Protocol for callback objects used by the callback-driven WebSocket service loops.'
 	]).
 
@@ -34,7 +34,11 @@
 		comment is 'Processes a received normalized WebSocket message and returns a list of zero or more session actions. Plain normalized messages are written back on the same session before the next read. When used with the registry-backed server helper, the list may also contain the action wrappers ``reply(Message)``, ``broadcast(Message)``, and ``broadcast_others(Message)``.',
 		argnames is ['Message', 'Replies'],
 		exceptions is [
-			'The implementing handler may throw message-specific or reply-construction exceptions' - error
+			'``Message`` is not a valid normalized WebSocket message term' - domain_error(http_websocket_message, 'Message'),
+			'``Replies`` is a variable' - instantiation_error,
+			'``Replies`` is neither a variable nor a list' - type_error(list, 'Replies'),
+			'An element ``Reply`` of the list ``Replies`` is not a valid reply message' - domain_error(http_websocket_service_handler_reply, 'Reply'),
+			'An element ``Reply`` of the list ``Replies`` is not a valid registry-backed action' - domain_error(http_websocket_service_handler_action, 'Reply')
 		]
 	]).
 

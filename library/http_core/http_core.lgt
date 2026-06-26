@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-18,
+		date is 2026-06-26,
 		comment is 'Transport-independent normalized HTTP request and response constructors, validators, wire parsers and generators, and body codec dispatch.'
 	]).
 
@@ -41,7 +41,8 @@
 			'``Headers`` is not a valid normalized HTTP header list' - domain_error(http_headers, 'Headers'),
 			'``Body`` is not a valid normalized HTTP body term' - domain_error(http_body, 'Body'),
 			'``Properties`` is not a valid normalized HTTP property list' - domain_error(http_properties, 'Properties'),
-			'The request headers, body, or properties violate normalized HTTP request semantics' - error
+			'The request headers violate normalized HTTP request semantics' - domain_error(http_header_semantics, 'Header'),
+			'The request properties violate normalized HTTP request semantics' - domain_error(http_property_semantics, 'Property')
 		]
 	]).
 
@@ -56,7 +57,8 @@
 			'``Headers`` is not a valid normalized HTTP header list' - domain_error(http_headers, 'Headers'),
 			'``Body`` is not a valid normalized HTTP body term' - domain_error(http_body, 'Body'),
 			'``Properties`` is not a valid normalized HTTP property list' - domain_error(http_properties, 'Properties'),
-			'The response headers, body, or properties violate normalized HTTP response semantics' - error
+			'The response headers violate normalized HTTP response semantics' - domain_error(http_header_semantics, 'Header'),
+			'The response properties violate normalized HTTP response semantics' - domain_error(http_property_semantics, 'Property')
 		]
 	]).
 
@@ -82,7 +84,14 @@
 		exceptions is [
 			'``Source`` is a variable' - instantiation_error,
 			'``Source`` is neither a variable nor a valid HTTP source term' - domain_error(http_source, 'Source'),
-			'The parsed request violates normalized HTTP request validation or semantics' - error
+			'The parsed request method is not a valid HTTP method atom' - domain_error(http_method, 'Method'),
+			'The parsed request target is not a valid normalized HTTP target term' - domain_error(http_target, 'Target'),
+			'The parsed request version is not a valid HTTP version term' - domain_error(http_version, 'Version'),
+			'The parsed request headers are not a valid normalized HTTP header list' - domain_error(http_headers, 'Headers'),
+			'The parsed request body is not a valid normalized HTTP body term' - domain_error(http_body, 'Body'),
+			'The parsed request properties are not a valid normalized HTTP property list' - domain_error(http_properties, 'Properties'),
+			'The parsed request headers violate normalized HTTP request semantics' - domain_error(http_header_semantics, 'Header'),
+			'The parsed request properties violate normalized HTTP request semantics' - domain_error(http_property_semantics, 'Property')
 		]
 	]).
 
@@ -94,7 +103,7 @@
 		exceptions is [
 			'``Sink`` is a variable' - instantiation_error,
 			'``Sink`` is neither a variable nor a valid HTTP sink term' - domain_error(http_sink, 'Sink'),
-			'``Request`` is not a valid normalized HTTP request term' - error
+			'``Request`` is not a valid normalized HTTP request term' - domain_error(http_request, 'Request')
 		]
 	]).
 
@@ -106,7 +115,13 @@
 		exceptions is [
 			'``Source`` is a variable' - instantiation_error,
 			'``Source`` is neither a variable nor a valid HTTP source term' - domain_error(http_source, 'Source'),
-			'The parsed response violates normalized HTTP response validation or semantics' - error
+			'The parsed response version is not a valid HTTP version term' - domain_error(http_version, 'Version'),
+			'The parsed response status is not a valid normalized HTTP status term' - domain_error(http_status, 'Status'),
+			'The parsed response headers are not a valid normalized HTTP header list' - domain_error(http_headers, 'Headers'),
+			'The parsed response body is not a valid normalized HTTP body term' - domain_error(http_body, 'Body'),
+			'The parsed response properties are not a valid normalized HTTP property list' - domain_error(http_properties, 'Properties'),
+			'The parsed response headers violate normalized HTTP response semantics' - domain_error(http_header_semantics, 'Header'),
+			'The parsed response properties violate normalized HTTP response semantics' - domain_error(http_property_semantics, 'Property')
 		]
 	]).
 
@@ -118,7 +133,7 @@
 		exceptions is [
 			'``Sink`` is a variable' - instantiation_error,
 			'``Sink`` is neither a variable nor a valid HTTP sink term' - domain_error(http_sink, 'Sink'),
-			'``Response`` is not a valid normalized HTTP response term' - error
+			'``Response`` is not a valid normalized HTTP response term' - domain_error(http_response, 'Response')
 		]
 	]).
 
@@ -130,7 +145,7 @@
 		exceptions is [
 			'``Sink`` is a variable' - instantiation_error,
 			'``Sink`` is neither a variable nor a valid HTTP sink term' - domain_error(http_sink, 'Sink'),
-			'``Response`` is not a valid normalized HTTP response term' - error
+			'``Response`` is not a valid normalized HTTP response term' - domain_error(http_response, 'Response')
 		]
 	]).
 

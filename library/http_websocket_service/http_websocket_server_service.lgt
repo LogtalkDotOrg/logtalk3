@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-24,
+		date is 2026-06-26,
 		comment is 'Server-side convenience for callback-driven WebSocket sessions with atom text representation, including registry-backed broadcast helpers.',
 		parnames is ['HTTPSocket']
 	]).
@@ -36,7 +36,14 @@
 		comment is 'Accepts one incoming socket connection on the given listener created by the selected transport parameterization, serves one WebSocket opening handshake using the given HTTP handler, then runs one callback-driven WebSocket session using the given session handler until the close handshake completes or the peer closes the stream.',
 		argnames is ['Listener', 'HandshakeHandler', 'SessionHandler', 'Response', 'State', 'ClientInfo'],
 		exceptions is [
-			'The listener or delegated WebSocket handshake and session handlers raise an exception' - error
+			'The listener is invalid for the selected transport' - domain_error(http_socket_listener, 'Listener'),
+			'The WebSocket opening request does not exist' - existence_error(http_socket_websocket_request, end_of_file),
+			'The WebSocket opening response is invalid' - domain_error(http_socket_websocket_response, 'Response'),
+			'``SessionHandler`` is a variable' - instantiation_error,
+			'``SessionHandler`` is not a valid WebSocket service handler' - domain_error(http_websocket_service_handler, 'SessionHandler'),
+			'The upgraded connection handle is invalid' - domain_error(http_socket_connection, 'Connection'),
+			'The delegated session loop raises a WebSocket session error' - domain_error(http_websocket_session_sequence, 'Frame'),
+			'``SessionHandler`` returns an invalid reply' - domain_error(http_websocket_service_handler_reply, 'Reply')
 		]
 	]).
 
@@ -46,7 +53,20 @@
 		comment is 'Accepts one incoming socket connection on the given listener created by the selected transport parameterization, serves one WebSocket opening handshake using the given HTTP handler, then runs one callback-driven WebSocket session using the given session handler and the given session-loop options.',
 		argnames is ['Listener', 'HandshakeHandler', 'SessionHandler', 'Response', 'State', 'ClientInfo', 'Options'],
 		exceptions is [
-			'The listener, session handlers, or loop options are invalid for WebSocket server-session startup' - error
+			'The listener is invalid for the selected transport' - domain_error(http_socket_listener, 'Listener'),
+			'The WebSocket opening request does not exist' - existence_error(http_socket_websocket_request, end_of_file),
+			'The WebSocket opening response is invalid' - domain_error(http_socket_websocket_response, 'Response'),
+			'``SessionHandler`` is a variable' - instantiation_error,
+			'``SessionHandler`` is not a valid WebSocket service handler' - domain_error(http_websocket_service_handler, 'SessionHandler'),
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
+			'``Options`` contains an invalid WebSocket service loop option' - domain_error(http_websocket_service_option, 'Option'),
+			'Timed session-loop options are not available on this backend' - not_available(http_websocket_service_timing),
+			'The upgraded connection handle is invalid' - domain_error(http_socket_connection, 'Connection'),
+			'The delegated session loop raises a WebSocket session error' - domain_error(http_websocket_session_sequence, 'Frame'),
+			'``SessionHandler`` returns an invalid reply' - domain_error(http_websocket_service_handler_reply, 'Reply')
 		],
 		remarks is [
 			'Option ``auto_pong(on)``' - 'Automatically writes pong replies while still forwarding ping messages to the session handler.',
@@ -63,7 +83,16 @@
 		comment is 'Accepts WebSocket opening handshakes on the given listener created by the selected transport parameterization until request_shutdown/1 is called for the specified control term, runs one callback-driven session loop per accepted upgraded connection, registers active sessions in the given registry for queued broadcasts, and closes the listener before returning.',
 		argnames is ['Listener', 'HandshakeHandler', 'SessionHandler', 'Registry', 'Control'],
 		exceptions is [
-			'The listener, registry, control term, or delegated session handlers are invalid for registry-backed serving' - error
+			'Registry-backed serving is not available on this backend' - not_available(http_websocket_server_service_registry),
+			'``Registry`` is not an open WebSocket service registry handle' - domain_error(http_websocket_service_registry, 'Registry'),
+			'``Registry`` refers to a closed WebSocket service registry handle' - existence_error(http_websocket_service_registry, session_registry('RegistryId')),
+			'``Control`` is a variable' - instantiation_error,
+			'``Control`` is already registered for another open-ended WebSocket server loop' - permission_error(reuse, http_websocket_service_shutdown_control, 'Control'),
+			'The WebSocket opening response is invalid' - domain_error(http_socket_websocket_response, 'Response'),
+			'``SessionHandler`` is a variable' - instantiation_error,
+			'``SessionHandler`` is not a valid WebSocket service handler' - domain_error(http_websocket_service_handler, 'SessionHandler'),
+			'The delegated session loop raises a WebSocket session error' - domain_error(http_websocket_session_sequence, 'Frame'),
+			'``SessionHandler`` returns an invalid registry action' - domain_error(http_websocket_service_handler_action, 'Action')
 		],
 		remarks is [
 			'Thread support' - 'This helper requires backend thread support so that multiple sessions can stay active concurrently.',
@@ -77,7 +106,20 @@
 		comment is 'Accepts WebSocket opening handshakes on the given listener created by the selected transport parameterization until request_shutdown/1 is called for the specified control term, runs one registry-backed callback session per accepted connection, applies the given session-loop options to every active session, and closes the listener before returning.',
 		argnames is ['Listener', 'HandshakeHandler', 'SessionHandler', 'Registry', 'Control', 'Options'],
 		exceptions is [
-			'The listener, registry, control term, or session-loop options are invalid for registry-backed serving' - error
+			'Registry-backed serving is not available on this backend' - not_available(http_websocket_server_service_registry),
+			'``Registry`` is not an open WebSocket service registry handle' - domain_error(http_websocket_service_registry, 'Registry'),
+			'``Registry`` refers to a closed WebSocket service registry handle' - existence_error(http_websocket_service_registry, session_registry('RegistryId')),
+			'``Control`` is a variable' - instantiation_error,
+			'``Control`` is already registered for another open-ended WebSocket server loop' - permission_error(reuse, http_websocket_service_shutdown_control, 'Control'),
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'``Options`` contains an invalid WebSocket service loop option' - domain_error(http_websocket_service_option, 'Option'),
+			'Timed session-loop options are not available on this backend' - not_available(http_websocket_service_timing),
+			'The WebSocket opening response is invalid' - domain_error(http_socket_websocket_response, 'Response'),
+			'``SessionHandler`` is a variable' - instantiation_error,
+			'``SessionHandler`` is not a valid WebSocket service handler' - domain_error(http_websocket_service_handler, 'SessionHandler'),
+			'The delegated session loop raises a WebSocket session error' - domain_error(http_websocket_session_sequence, 'Frame'),
+			'``SessionHandler`` returns an invalid registry action' - domain_error(http_websocket_service_handler_action, 'Action')
 		],
 		remarks is [
 			'Option ``auto_pong(on|off)``' - 'Controls automatic pong replies in each active session loop.',
@@ -93,7 +135,9 @@
 		comment is 'Requests shutdown of a registry-backed server loop started with serve_until_shutdown/5-6 for the specified control term and wakes any blocked accept call so the loop can terminate portably.',
 		argnames is ['Control'],
 		exceptions is [
-			'``Control`` is not a valid registered server-loop shutdown control term' - error
+			'Registry-backed serving is not available on this backend' - not_available(http_websocket_server_service_registry),
+			'``Control`` is a variable' - instantiation_error,
+			'``Control`` is not registered for an open-ended WebSocket server loop' - existence_error(http_websocket_service_shutdown_control, 'Control')
 		]
 	]).
 
@@ -366,7 +410,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-22,
+		date is 2026-06-26,
 		comment is 'By default, the server-side convenience for callback-driven WebSocket sessions with atom text representation, including registry-backed broadcast helpers, uses the ``http_socket`` library.'
 	]).
 

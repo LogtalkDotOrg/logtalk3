@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-29,
+		date is 2026-06-26,
 		comment is 'Optional Basic-auth router helpers for objects importing the ``http_router`` category.',
 		parameters is [
 			'Verifier' - 'Verifier object passed to ``http_authenticate::protect_request/4`` when a routed request declares Basic auth metadata.',
@@ -38,7 +38,12 @@
 		comment is 'Router helper that applies Basic-auth route metadata to a routed request and returns either ``continue(Request)`` or ``respond(Response)``.',
 		argnames is ['Request', 'Action'],
 		exceptions is [
-			'Route metadata options are not a proper list or the delegated Basic-auth protection predicate raises an exception' - error
+			'Route metadata options are not a proper list' - domain_error(http_router_basic_auth_options, 'Options'),
+			'``Request`` is not a valid normalized HTTP request term' - domain_error(http_request, 'Request'),
+			'The Basic verifier object is invalid' - domain_error(http_authenticate_verifier, 'Verifier'),
+			'The Basic verifier object does not exist' - existence_error(http_authenticate_verifier, 'Verifier'),
+			'The Basic-auth protection options are invalid' - domain_error(option, 'Option'),
+			'The Basic-auth status is invalid' - domain_error(http_authenticate_status, 'Status')
 		]
 	]).
 

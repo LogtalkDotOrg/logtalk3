@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-16,
+		date is 2026-06-26,
 		comment is 'REST authoring layer built on top of the HTTP router category.'
 	]).
 
@@ -231,7 +231,9 @@
 		comment is 'Runs the action associated with the matched endpoint and normalizes any supported returned or thrown result term into an HTTP response.',
 		argnames is ['Request', 'Response'],
 		exceptions is [
-			'The routed endpoint identifier is missing, unknown, duplicated, or the endpoint action produces an invalid REST result term' - error
+			'The routed endpoint identifier is missing or unknown' - existence_error(rest_endpoint_id, 'Id'),
+			'The routed endpoint identifier is duplicated' - domain_error(rest_endpoint_id, duplicate('Id')),
+			'The endpoint action produces an invalid REST result term' - domain_error(rest_result, 'Result')
 		]
 	]).
 

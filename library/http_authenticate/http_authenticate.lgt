@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-29,
+		date is 2026-06-26,
 		comment is 'HTTP Basic authentication parsing, generation, challenge building, and request verification helpers.'
 	]).
 
@@ -49,7 +49,12 @@
 		comment is 'Parses one Basic challenge header field value into a normalized ``basic_challenge/1`` term.',
 		argnames is ['Text', 'Challenge'],
 		exceptions is [
-			'``Text`` is not a valid Basic challenge header value' - error
+			'``Text`` is not a valid Basic challenge header value' - domain_error(http_authenticate_header(www_authenticate), invalid(syntax)),
+			'``Text`` uses an unsupported authentication scheme' - domain_error(http_authenticate_header(www_authenticate), unsupported_scheme('Scheme')),
+			'``Text`` contains a duplicated Basic challenge directive' - domain_error(http_authenticate_header(www_authenticate), duplicate('Name')),
+			'``Text`` is missing a required Basic challenge directive' - domain_error(http_authenticate_header(www_authenticate), missing('Name')),
+			'``Text`` contains an unexpected Basic challenge directive' - domain_error(http_authenticate_header(www_authenticate), unexpected('Name')),
+			'``Text`` contains an invalid Basic challenge charset' - domain_error(http_authenticate_header(www_authenticate), invalid(charset))
 		]
 	]).
 
@@ -59,7 +64,11 @@
 		comment is 'Generates one canonical Basic challenge header field value from a normalized ``basic_challenge/1`` term.',
 		argnames is ['Challenge', 'HeaderValue'],
 		exceptions is [
-			'``Challenge`` is not a valid normalized Basic challenge term' - error
+			'``Challenge`` is not a valid normalized Basic challenge term' - domain_error(http_authenticate_term(challenge), 'Challenge'),
+			'``Challenge`` is missing a required field' - domain_error(http_authenticate_term(challenge), missing('Name')),
+			'``Challenge`` contains a duplicated field' - domain_error(http_authenticate_term(challenge), duplicate('Name')),
+			'``Challenge`` contains an unexpected field' - domain_error(http_authenticate_term(challenge), unexpected('Name')),
+			'``Challenge`` contains an invalid field' - domain_error(http_authenticate_term(challenge), invalid('Field'))
 		]
 	]).
 
@@ -69,7 +78,9 @@
 		comment is 'Parses one Basic authorization header field value into a normalized ``basic_authorization/1`` term.',
 		argnames is ['Text', 'Authorization'],
 		exceptions is [
-			'``Text`` is not a valid Basic authorization header value' - error
+			'``Text`` is not a valid Basic authorization header value' - domain_error(http_authenticate_header(authorization), invalid(syntax)),
+			'``Text`` uses an unsupported authentication scheme' - domain_error(http_authenticate_header(authorization), unsupported_scheme('Scheme')),
+			'``Text`` contains invalid Basic credentials' - domain_error(http_authenticate_header(authorization), invalid(credentials))
 		]
 	]).
 
@@ -79,7 +90,8 @@
 		comment is 'Generates one canonical Basic authorization header field value from a normalized ``basic_authorization/1`` term.',
 		argnames is ['Authorization', 'HeaderValue'],
 		exceptions is [
-			'``Authorization`` is not a valid normalized Basic authorization term' - error
+			'``Authorization`` is not a valid normalized Basic authorization term' - domain_error(http_authenticate_term(authorization), 'Authorization'),
+			'``Authorization`` contains an invalid Basic username' - domain_error(http_authenticate_value(username), 'Username')
 		]
 	]).
 
@@ -89,7 +101,18 @@
 		comment is 'Verifies a normalized HTTP request using a Basic verifier object and returns either ``continue(Request)`` or ``respond(Response)``.',
 		argnames is ['Request', 'Verifier', 'Action', 'Options'],
 		exceptions is [
-			'``Request`` or ``Options`` are invalid, or the verifier object rejects the request with an exception' - error
+			'``Request`` is not a valid normalized HTTP request term' - domain_error(http_request, 'Request'),
+			'``Verifier`` is a variable' - instantiation_error,
+			'``Verifier`` is neither a variable nor an existing object' - existence_error(http_authenticate_verifier, 'Verifier'),
+			'``Verifier`` does not implement the Basic verifier protocol' - domain_error(http_authenticate_verifier, 'Verifier'),
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
+			'``Options`` contains an invalid Basic-auth status' - domain_error(http_authenticate_status, 'Status'),
+			'``Options`` contains invalid Basic-auth headers' - domain_error(http_headers, 'Headers'),
+			'``Options`` contains an invalid Basic-auth body' - domain_error(http_body, 'Body'),
+			'``Options`` contains invalid Basic-auth properties' - domain_error(http_properties, 'Properties')
 		]
 	]).
 
@@ -99,7 +122,16 @@
 		comment is 'Builds a normalized ``401 Unauthorized`` response and returns the generated normalized Basic challenge term.',
 		argnames is ['Challenge', 'Response', 'Options'],
 		exceptions is [
-			'``Options`` are invalid for Basic challenge generation or response construction' - error
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
+			'``Options`` contains an invalid Basic-auth status' - domain_error(http_authenticate_status, 'Status'),
+			'``Options`` contains invalid Basic-auth headers' - domain_error(http_headers, 'Headers'),
+			'``Options`` contains an invalid Basic-auth body' - domain_error(http_body, 'Body'),
+			'``Options`` contains invalid Basic-auth properties' - domain_error(http_properties, 'Properties'),
+			'The generated response headers violate normalized HTTP response semantics' - domain_error(http_header_semantics, 'Header'),
+			'The generated response properties violate normalized HTTP response semantics' - domain_error(http_property_semantics, 'Property')
 		]
 	]).
 
@@ -109,7 +141,18 @@
 		comment is 'Decorates a normalized HTTP response with an explicit normalized Basic challenge term and returns the resulting ``401 Unauthorized`` response.',
 		argnames is ['Challenge', 'Response0', 'Response', 'Options'],
 		exceptions is [
-			'``Challenge`` or ``Response0`` are invalid, or ``Options`` are invalid for unauthorized-response construction' - error
+			'``Challenge`` is not a valid normalized Basic challenge term' - domain_error(http_authenticate_term(challenge), 'Challenge'),
+			'``Response0`` is not a valid normalized HTTP response term' - domain_error(http_response, 'Response0'),
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid unauthorized-response overlay option' - domain_error(http_authenticate_unauthorized_response_overlay_option, 'Option'),
+			'``Options`` contains an invalid Basic-auth status' - domain_error(http_authenticate_status, 'Status'),
+			'``Options`` contains invalid Basic-auth headers' - domain_error(http_headers, 'Headers'),
+			'``Options`` contains an invalid Basic-auth body' - domain_error(http_body, 'Body'),
+			'``Options`` contains invalid Basic-auth properties' - domain_error(http_properties, 'Properties'),
+			'The decorated response headers violate normalized HTTP response semantics' - domain_error(http_header_semantics, 'Header'),
+			'The decorated response properties violate normalized HTTP response semantics' - domain_error(http_property_semantics, 'Property')
 		]
 	]).
 

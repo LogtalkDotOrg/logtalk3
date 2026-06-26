@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-26,
 		comment is 'Protocol for portable HTTP request handlers.'
 	]).
 
@@ -34,7 +34,8 @@
 		comment is 'Handles a normalized HTTP request term and returns a normalized HTTP response term.',
 		argnames is ['Request', 'Response'],
 		exceptions is [
-			'The implementing handler may throw request-specific or response-construction exceptions' - error
+			'``Request`` is not a valid normalized HTTP request term' - domain_error(http_request, 'Request'),
+			'``Response`` is not a valid normalized HTTP response term' - domain_error(http_response, 'Response')
 		]
 	]).
 

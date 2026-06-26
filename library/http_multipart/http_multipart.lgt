@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-14,
+		date is 2026-06-26,
 		comment is 'Multipart helper predicates built on top of the normalized body and part terms provided by the http library.'
 	]).
 
@@ -55,7 +55,10 @@
 		argnames is ['Source', 'MediaType', 'Options', 'Body'],
 		exceptions is [
 			'``MediaType`` is not a valid multipart media type atom' - domain_error(http_multipart_media_type, 'MediaType'),
-			'``Source`` or ``Options`` are not valid for ``http_core::parse_body/4``' - error,
+			'``Source`` is a variable' - instantiation_error,
+			'``Source`` is neither a variable nor a valid HTTP source term' - domain_error(http_source, 'Source'),
+			'``Options`` is not a valid HTTP body options list' - domain_error(http_body_options, 'Options'),
+			'No registered HTTP body codec exists for ``MediaType`` when codec-based decoding is required' - existence_error(http_body_codec, 'MediaType'),
 			'The parsed body is not a valid normalized multipart body term' - domain_error(http_multipart_body, 'Body')
 		]
 	]).
@@ -68,7 +71,10 @@
 		argnames is ['Sink', 'Body', 'Options'],
 		exceptions is [
 			'``Body`` is not a valid normalized multipart body term' - domain_error(http_multipart_body, 'Body'),
-			'``Sink`` or ``Options`` are not valid for ``http_core::generate_body/3``' - error
+			'``Sink`` is a variable' - instantiation_error,
+			'``Sink`` is neither a variable nor a valid HTTP sink term' - domain_error(http_sink, 'Sink'),
+			'``Options`` is not a valid HTTP body options list' - domain_error(http_body_options, 'Options'),
+			'No registered HTTP body codec exists for the body media type when codec-based encoding is required' - existence_error(http_body_codec, 'MediaType')
 		]
 	]).
 

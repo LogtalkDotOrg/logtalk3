@@ -398,7 +398,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-22</div>
+<div class="line"><strong>Date:</strong> 2026-06-26</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -482,9 +482,53 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">The transport implementation may throw socket-opening or option-validation exceptions:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Host</span></code> is not a valid listener host atom:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Host)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Port</span></code> is not a non-negative integer or a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Port)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains an invalid listener option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_process_listener_option,Option)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains an invalid listener helper executable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_process_listener_helper_executable,Executable)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains incompatible TCP listener options:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_process_listener_tcp_options,[listener_transport(tcp),temporary_tls_credentials(TemporaryTLSCredentialsPrefix)])</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains incompatible TLS listener options:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_process_listener_tls_options,[tls_certificate_file(CertificateFile),tls_key_file(KeyFile)])</span></code></div>
+</div>
+<div class="line">Temporary TLS credentials cannot be created:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(http_socket_process_temporary_tls_credentials)</span></code></div>
+</div>
+<div class="line">The process-backed listener helper cannot be started:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(http_socket_process_listener)</span></code></div>
 </div>
 </div>
 </div>
@@ -512,9 +556,17 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">The transport implementation may throw listener-validation or close exceptions:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Listener</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Listener</span></code> is not an open listener handle for the transport implementation:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_listener,Listener)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Listener</span></code> no longer exists for the transport implementation:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_socket_listener,Listener)</span></code></div>
 </div>
 </div>
 </div>
@@ -542,9 +594,17 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">The transport implementation may throw listener-validation exceptions:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Listener</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Listener</span></code> is not an open listener handle for the transport implementation:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_listener,Listener)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Listener</span></code> no longer exists for the transport implementation:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_socket_listener,Listener)</span></code></div>
 </div>
 </div>
 </div>
@@ -572,9 +632,33 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">The transport implementation may throw connection-opening or option-validation exceptions:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Host</span></code> and <code class="docutils literal notranslate"><span class="pre">Port</span></code> are not a valid HTTP authority target:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_target,authority(Host,Port))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains an invalid connection option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_process_connection_option,Option)</span></code></div>
+</div>
+<div class="line">The process-backed client helper cannot be started:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(http_socket_process_connection)</span></code></div>
 </div>
 </div>
 </div>
@@ -602,9 +686,13 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">The transport implementation may throw connection-validation or close exceptions:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Connection</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Connection</span></code> is not an open reusable client connection handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_connection,Connection)</span></code></div>
 </div>
 </div>
 </div>
@@ -632,9 +720,13 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">The transport implementation may throw connection-handle validation exceptions:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Connection</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Connection</span></code> is not an open reusable client or upgraded WebSocket connection handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_connection,Connection)</span></code></div>
 </div>
 </div>
 </div>
@@ -662,9 +754,49 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">The transport implementation may throw connection-pool creation, resource, or option-validation exceptions:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Host</span></code> and <code class="docutils literal notranslate"><span class="pre">Port</span></code> are not a valid HTTP authority target:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_target,authority(Host,Port))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains an invalid connection-pool option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_connection_pool_option,Option)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains an invalid process-backed connection-pool option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_process_connection_pool_option,Option)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains incompatible connection-pool bounds:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_connection_pool_options,[min_size(MinSize),max_size(MaxSize)])</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains incompatible process-backed connection-pool bounds:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_process_connection_pool_options,[min_size(MinSize),max_size(MaxSize)])</span></code></div>
+</div>
+<div class="line">No managed connection is available in the connection pool:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(http_socket_connection_pool)</span></code></div>
+</div>
+<div class="line">The process-backed client helper cannot be started:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(http_socket_process_connection)</span></code></div>
 </div>
 </div>
 </div>
@@ -702,9 +834,21 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">The transport implementation may throw pool-validation exceptions or reject closing while exchanges remain active:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pool</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pool</span></code> is not a valid managed connection-pool handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_connection_pool,Pool)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pool</span></code> no longer exists:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_socket_connection_pool,Pool)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pool</span></code> cannot be closed while pooled exchanges remain active:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(close,http_socket_connection_pool,Pool)</span></code></div>
 </div>
 </div>
 </div>
@@ -732,9 +876,17 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">The transport implementation may throw pool-validation exceptions:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pool</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pool</span></code> is not a valid managed connection-pool handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_connection_pool,Pool)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Pool</span></code> no longer exists:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_socket_connection_pool,Pool)</span></code></div>
 </div>
 </div>
 </div>
@@ -762,9 +914,33 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">The transport implementation may throw handle-validation, request-validation, or exchange exceptions:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ConnectionOrPool</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ConnectionOrPool</span></code> is neither an open connection nor a managed connection-pool handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_connection,ConnectionOrPool)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ConnectionOrPool</span></code> is not a valid managed connection-pool handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_connection_pool,ConnectionOrPool)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ConnectionOrPool</span></code> no longer exists as a managed connection pool:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_socket_connection_pool,ConnectionOrPool)</span></code></div>
+</div>
+<div class="line">No managed connection is available in the connection pool:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(http_socket_connection_pool)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Request</span></code> is not a valid normalized HTTP request term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_request,Request)</span></code></div>
+</div>
+<div class="line">The response stream cannot be parsed as a normalized HTTP response:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response_stream,Error)</span></code></div>
 </div>
 </div>
 </div>
@@ -792,9 +968,33 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">The transport implementation may throw handle-validation, request-sequence validation, or exchange exceptions:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ConnectionOrPool</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ConnectionOrPool</span></code> is neither an open connection nor a managed connection-pool handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_connection,ConnectionOrPool)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ConnectionOrPool</span></code> is not a valid managed connection-pool handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_connection_pool,ConnectionOrPool)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ConnectionOrPool</span></code> no longer exists as a managed connection pool:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_socket_connection_pool,ConnectionOrPool)</span></code></div>
+</div>
+<div class="line">No managed connection is available in the connection pool:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(http_socket_connection_pool)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Requests</span></code> is not a list of normalized HTTP request terms:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_request_sequence,Requests)</span></code></div>
+</div>
+<div class="line">The response stream cannot be parsed as a normalized HTTP response:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response_stream,Error)</span></code></div>
 </div>
 </div>
 </div>
@@ -822,9 +1022,21 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">The transport implementation may throw connection-opening, request-validation, or exchange exceptions:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Host</span></code> and <code class="docutils literal notranslate"><span class="pre">Port</span></code> are not a valid HTTP authority target:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_target,authority(Host,Port))</span></code></div>
+</div>
+<div class="line">The process-backed client helper cannot be started:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(http_socket_process_connection)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Request</span></code> is not a valid normalized HTTP request term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_request,Request)</span></code></div>
+</div>
+<div class="line">The response stream cannot be parsed as a normalized HTTP response:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response_stream,Error)</span></code></div>
 </div>
 </div>
 </div>
@@ -852,9 +1064,41 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">The transport implementation may throw connection-opening, request-validation, option-validation, or exchange exceptions:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Host</span></code> and <code class="docutils literal notranslate"><span class="pre">Port</span></code> are not a valid HTTP authority target:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_target,authority(Host,Port))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains an invalid connection option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_process_connection_option,Option)</span></code></div>
+</div>
+<div class="line">The process-backed client helper cannot be started:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(http_socket_process_connection)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Request</span></code> is not a valid normalized HTTP request term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_request,Request)</span></code></div>
+</div>
+<div class="line">The response stream cannot be parsed as a normalized HTTP response:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response_stream,Error)</span></code></div>
 </div>
 </div>
 </div>
@@ -882,9 +1126,21 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">The transport implementation may throw connection-opening, request-sequence validation, or exchange exceptions:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Host</span></code> and <code class="docutils literal notranslate"><span class="pre">Port</span></code> are not a valid HTTP authority target:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_target,authority(Host,Port))</span></code></div>
+</div>
+<div class="line">The process-backed client helper cannot be started:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(http_socket_process_connection)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Requests</span></code> is not a list of normalized HTTP request terms:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_request_sequence,Requests)</span></code></div>
+</div>
+<div class="line">The response stream cannot be parsed as a normalized HTTP response:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response_stream,Error)</span></code></div>
 </div>
 </div>
 </div>
@@ -912,9 +1168,13 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">The transport implementation may throw listener-accept, stream, or delegated server-serving exceptions:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> does not conform to the HTTP handler protocol:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_handler_protocol,Handler)</span></code></div>
+</div>
+<div class="line">The delegated HTTP server rejects the response stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response_stream,Error)</span></code></div>
 </div>
 </div>
 </div>
@@ -942,9 +1202,21 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">The transport implementation may throw listener-accept, stream, or delegated WebSocket-serving exceptions:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> does not conform to the HTTP handler protocol:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_handler_protocol,Handler)</span></code></div>
+</div>
+<div class="line">The WebSocket opening request does not exist:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_socket_websocket_request,end_of_file)</span></code></div>
+</div>
+<div class="line">The WebSocket opening response is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_websocket_response,Response)</span></code></div>
+</div>
+<div class="line">The delegated HTTP server rejects the response stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response_stream,Error)</span></code></div>
 </div>
 </div>
 </div>
@@ -972,9 +1244,25 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">The transport implementation may throw listener, worker, or delegated server-serving exceptions:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is not a non-negative integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Count)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> does not conform to the HTTP handler protocol:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_handler_protocol,Handler)</span></code></div>
+</div>
+<div class="line">The delegated HTTP server rejects the response stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response_stream,Error)</span></code></div>
+</div>
+<div class="line">Thread workers are not available on this backend:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(threads)</span></code></div>
 </div>
 </div>
 </div>
@@ -1002,9 +1290,45 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">The transport implementation may throw listener, worker, resource, or option-validation exceptions:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is not a non-negative integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Count)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains an invalid listener-serving option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_listener_option,Option)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> does not conform to the HTTP handler protocol:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_handler_protocol,Handler)</span></code></div>
+</div>
+<div class="line">The delegated HTTP server rejects the response stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response_stream,Error)</span></code></div>
+</div>
+<div class="line">Thread workers are not available on this backend:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(threads)</span></code></div>
 </div>
 </div>
 </div>
@@ -1045,9 +1369,37 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">The transport implementation may throw listener, worker, control-registration, or option-validation exceptions:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Control</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Control</span></code> is already registered for another open-ended listener loop:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(reuse,http_socket_shutdown_control,Control)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains an invalid listener-serving option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_listener_option,Option)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> does not conform to the HTTP handler protocol:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_handler_protocol,Handler)</span></code></div>
+</div>
+<div class="line">The delegated HTTP server rejects the response stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response_stream,Error)</span></code></div>
+</div>
+<div class="line">Thread workers are not available on this backend:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(threads)</span></code></div>
 </div>
 </div>
 </div>
@@ -1092,9 +1444,37 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">The transport implementation may throw listener, worker, ready-goal, control-registration, or option-validation exceptions:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Control</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Control</span></code> is already registered for another open-ended listener loop:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(reuse,http_socket_shutdown_control,Control)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains an invalid listener-serving option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_listener_option,Option)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> does not conform to the HTTP handler protocol:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_handler_protocol,Handler)</span></code></div>
+</div>
+<div class="line">The delegated HTTP server rejects the response stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response_stream,Error)</span></code></div>
+</div>
+<div class="line">Thread workers are not available on this backend:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(threads)</span></code></div>
 </div>
 </div>
 </div>
@@ -1132,9 +1512,17 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">The transport implementation may throw shutdown-control validation exceptions:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Control</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Control</span></code> is not registered for an open-ended listener loop:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_socket_shutdown_control,Control)</span></code></div>
+</div>
+<div class="line">Thread-backed shutdown is not available on this backend:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(threads)</span></code></div>
 </div>
 </div>
 </div>

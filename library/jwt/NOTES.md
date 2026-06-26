@@ -31,6 +31,36 @@ from JOSE raw `R || S` encoding to DER before calling OpenSSL.
 This library requires a Prolog backend supporting unbound integer arithmetic.
 
 
+Requirements
+------------
+
+The `openssl` command must be available on the current `PATH`.
+
+On macOS, it can be installed using e.g. Homebrew:
+
+	$ brew install openssl
+
+Or using MacPorts:
+
+	$ sudo port install openssl
+
+On Ubuntu, it can be installed using:
+
+	$ sudo apt install openssl
+
+On RedHat distributions (8.x and later):
+
+	$ sudo dnf install openssl
+
+For older RedHat distributions:
+
+    $ sudo yum install openssl
+
+On Windows, it can be installed using e.g. Chocolatey:
+
+	> choco install openssl
+
+
 Loading
 -------
 

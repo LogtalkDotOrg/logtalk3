@@ -15,7 +15,7 @@ Protocol for portable HTTP request handlers.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-05-23
+| **Date:** 2026-06-26
 
 | **Compilation flags:**
 |    ``static``
@@ -55,8 +55,10 @@ Handles a normalized HTTP request term and returns a normalized HTTP response te
 |    ``handle(+compound,-compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    The implementing handler may throw request-specific or response-construction exceptions:
-|        ``error``
+|    ``Request`` is not a valid normalized HTTP request term:
+|        ``domain_error(http_request,Request)``
+|    ``Response`` is not a valid normalized HTTP response term:
+|        ``domain_error(http_response,Response)``
 
 
 ------------

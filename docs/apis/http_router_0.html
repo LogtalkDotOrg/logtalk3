@@ -397,7 +397,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-14</div>
+<div class="line"><strong>Date:</strong> 2026-06-26</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -493,9 +493,61 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">The request, route metadata, middleware, or delegated route handler raise a routing exception:</div>
+<div class="line">A middleware handler is not valid:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_router_middleware,Handler)</span></code></div>
+</div>
+<div class="line">A middleware action is not valid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_router_middleware_action,Action)</span></code></div>
+</div>
+<div class="line">A response middleware handler is not valid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_router_response_middleware,Handler)</span></code></div>
+</div>
+<div class="line">A response middleware result is not a valid normalized HTTP response term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_router_response_middleware_response,Response)</span></code></div>
+</div>
+<div class="line">A route authorization action is not valid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_router_route_authorization_action,Action)</span></code></div>
+</div>
+<div class="line">A route <code class="docutils literal notranslate"><span class="pre">produces</span></code> declaration is not a non-empty list of media types:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_router_route_produces,ProducedMediaTypes)</span></code></div>
+</div>
+<div class="line">A route <code class="docutils literal notranslate"><span class="pre">produces</span></code> media type is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_router_route_media_type,ProducedMediaType)</span></code></div>
+</div>
+<div class="line">Route metadata is not a proper list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_router_route_metadata,Metadata)</span></code></div>
+</div>
+<div class="line">A route metadata property is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_router_route_metadata_property,MetadataProperty)</span></code></div>
+</div>
+<div class="line">A route handler is not valid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_router_handler,Handler)</span></code></div>
+</div>
+<div class="line">A route path template is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_router_path_template,Template)</span></code></div>
+</div>
+<div class="line">A route path template segment is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_router_path_template_segment,Segment)</span></code></div>
+</div>
+<div class="line">A request path is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_router_path,Path)</span></code></div>
+</div>
+<div class="line">The route handler reports parameter validation errors:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">error(http_parameter_validation(Errors),Context)</span></code></div>
 </div>
 </div>
 </div>
@@ -736,9 +788,9 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">The authorizer hook may throw request-specific authorization exceptions:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Action</span></code> is not a valid route authorization action:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_router_route_authorization_action,Action)</span></code></div>
 </div>
 </div>
 </div>
@@ -936,7 +988,11 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">PathTemplate</span></code> is not a valid router path template:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_router_path_template,PathTemplate)</span></code></div>
+</div>
+<div class="line">A segment in <code class="docutils literal notranslate"><span class="pre">PathTemplate</span></code> is not a valid router path template segment:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_router_path_template_segment,Segment)</span></code></div>
 </div>
 </div>
 </div>

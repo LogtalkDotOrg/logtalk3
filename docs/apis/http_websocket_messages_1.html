@@ -401,7 +401,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-11</div>
+<div class="line"><strong>Date:</strong> 2026-06-26</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -477,9 +477,25 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Type</span></code> or <code class="docutils literal notranslate"><span class="pre">Payload</span></code> do not define a valid normalized WebSocket message term:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Type</span></code> is not a supported WebSocket message type:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_message_type,Type)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Payload</span></code> is not valid for the requested WebSocket message type:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_message,Message)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Payload</span></code> is not a valid WebSocket close payload:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_close_payload,Payload)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Payload</span></code> contains an invalid WebSocket close code:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_close_code,Code)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Payload</span></code> is not valid text for the selected text representation:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_message_text,Text)</span></code></div>
 </div>
 </div>
 </div>
@@ -539,9 +555,25 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is a variable or the inbound frames do not form a valid normalized WebSocket message sequence:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">The inbound frames do not form a valid normalized WebSocket message sequence:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_message_sequence,Frame)</span></code></div>
+</div>
+<div class="line">The inbound frame is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_frame,Frame)</span></code></div>
+</div>
+<div class="line">The inbound message payload is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_message,Message)</span></code></div>
+</div>
+<div class="line">The inbound message text is invalid for the selected text representation:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_message_text,Text)</span></code></div>
 </div>
 </div>
 </div>
@@ -577,9 +609,25 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is a variable or <code class="docutils literal notranslate"><span class="pre">Message</span></code> is not a valid normalized WebSocket message term:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> is not a valid normalized WebSocket message term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_message,Message)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> has an unsupported message type:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_message_type,Type)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> has an invalid close payload:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_close_payload,Payload)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> has invalid text for the selected text representation:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_message_text,Text)</span></code></div>
 </div>
 </div>
 </div>
@@ -609,7 +657,11 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> is not a valid normalized WebSocket message term:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_message,Message)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> has an unsupported message type:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_message_type,Type)</span></code></div>
 </div>
 </div>
 </div>
@@ -639,7 +691,11 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> is not a valid normalized WebSocket message term:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_message,Message)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> has an unsupported message type:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_message_type,Type)</span></code></div>
 </div>
 </div>
 </div>
@@ -672,7 +728,19 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> is not a valid normalized WebSocket message term:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_message,Message)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> has an unsupported message type:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_message_type,Type)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> has an invalid close payload:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_close_payload,Payload)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> has invalid text for the selected text representation:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_message_text,Text)</span></code></div>
 </div>
 </div>
 </div>
@@ -700,9 +768,21 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Type</span></code> is not a supported WebSocket message type or <code class="docutils literal notranslate"><span class="pre">PayloadBytes</span></code> do not decode to a valid message payload:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Type</span></code> is not a supported WebSocket message type:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_message_type,Type)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">PayloadBytes</span></code> is not a valid close payload:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_close_payload,PayloadBytes)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">PayloadBytes</span></code> contains an invalid close code:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_close_code,Code)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">PayloadBytes</span></code> does not decode to valid text for the selected text representation:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_message_text,PayloadBytes)</span></code></div>
 </div>
 </div>
 </div>

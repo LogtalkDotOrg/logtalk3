@@ -15,7 +15,7 @@ Portable stream-based HTTP server orchestration predicates.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-02
+| **Date:** 2026-06-26
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -82,8 +82,12 @@ Writes exactly one normalized HTTP response term to a binary stream.
 |    ``write_response(+stream,+compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Response`` or ``Output`` are invalid for the delegated HTTP response generator:
-|        ``error``
+|    ``Output`` is invalid for the delegated HTTP response generator:
+|        ``domain_error(http_sink,stream(Output))``
+|    ``Response`` is not a valid normalized HTTP response term:
+|        ``domain_error(http_response,Response)``
+|    The response body file range is outside the file contents:
+|        ``domain_error(http_body_file_range,file(File,Offset,Length))``
 
 
 ------------
@@ -145,8 +149,14 @@ Repeatedly reads requests from a binary input stream, dispatches them to a handl
 |    ``serve_connection(+stream,+stream,+object_identifier)`` - ``one_or_error``
 
 | **Exceptions:**
-|    The binary streams or delegated request/response processing predicates raise a serving error:
-|        ``error``
+|    ``Handler`` does not conform to the HTTP handler protocol:
+|        ``domain_error(http_handler_protocol,Handler)``
+|    ``Output`` is invalid for the delegated HTTP response generator:
+|        ``domain_error(http_sink,stream(Output))``
+|    The generated response is not a valid normalized HTTP response term:
+|        ``domain_error(http_response,Response)``
+|    The response body file range is outside the file contents:
+|        ``domain_error(http_body_file_range,file(File,Offset,Length))``
 
 
 ------------
@@ -168,8 +178,18 @@ Validates a normalized WebSocket opening-handshake request and builds a matching
 |    ``accept_websocket(+compound,--compound,+list)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Request`` is not a valid normalized WebSocket opening-handshake request or ``Options`` are invalid:
-|        ``error``
+|    ``Options`` contains an invalid WebSocket acceptance option:
+|        ``domain_error(http_server_websocket_option,Option)``
+|    ``Options`` contains reserved WebSocket handshake headers:
+|        ``domain_error(http_server_websocket_headers,Headers)``
+|    ``Options`` contains reserved WebSocket handshake properties:
+|        ``domain_error(http_server_websocket_properties,Properties)``
+|    ``Request`` is not a valid normalized WebSocket opening-handshake request:
+|        ``domain_error(http_server_websocket_request,Request)``
+|    ``Options`` selects a subprotocol not offered by ``Request``:
+|        ``domain_error(http_server_websocket_protocol,Protocol)``
+|    The generated WebSocket response is not a valid normalized HTTP response term:
+|        ``domain_error(http_response,Response)``
 
 | **Remarks:**
 
@@ -195,8 +215,14 @@ Reads one request from a binary input stream, dispatches it to a handler object,
 |    ``serve_websocket(+stream,+stream,+object_identifier,--compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    The binary streams or delegated WebSocket handshake processing predicates raise a serving error:
-|        ``error``
+|    ``Handler`` does not conform to the HTTP handler protocol:
+|        ``domain_error(http_handler_protocol,Handler)``
+|    ``Output`` is invalid for the delegated HTTP response generator:
+|        ``domain_error(http_sink,stream(Output))``
+|    The generated response is not a valid normalized HTTP response term:
+|        ``domain_error(http_response,Response)``
+|    The response body file range is outside the file contents:
+|        ``domain_error(http_body_file_range,file(File,Offset,Length))``
 
 
 ------------

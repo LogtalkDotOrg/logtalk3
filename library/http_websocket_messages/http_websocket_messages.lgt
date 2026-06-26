@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-11,
+		date is 2026-06-26,
 		comment is 'Transport-neutral WebSocket message predicates built on top of the http_websocket frame layer.',
 		remarks is [
 			'Fragmentation model' - 'This layer reassembles fragmented text and binary messages only when all continuation frames arrive contiguously. Interleaved control frames during fragmented messages raise ``http_websocket_message_sequence``. Use ``http_websocket_session`` for RFC 6455 live-stream processing that must surface interleaved control frames while reassembling data messages.'
@@ -40,7 +40,11 @@
 		comment is 'Constructs a validated normalized WebSocket message term from the message type atom and payload term.',
 		argnames is ['Type', 'Payload', 'Message'],
 		exceptions is [
-			'``Type`` or ``Payload`` do not define a valid normalized WebSocket message term' - error
+			'``Type`` is not a supported WebSocket message type' - domain_error(http_websocket_message_type, 'Type'),
+			'``Payload`` is not valid for the requested WebSocket message type' - domain_error(http_websocket_message, 'Message'),
+			'``Payload`` is not a valid WebSocket close payload' - domain_error(http_websocket_close_payload, 'Payload'),
+			'``Payload`` contains an invalid WebSocket close code' - domain_error(http_websocket_close_code, 'Code'),
+			'``Payload`` is not valid text for the selected text representation' - domain_error(http_websocket_message_text, 'Text')
 		],
 		remarks is [
 			'Type ``text``' - 'Payload is text in the selected text representation.',
@@ -63,7 +67,11 @@
 		comment is 'Reads one WebSocket message from a binary stream. Continuation frames are reassembled for text and binary messages when they arrive contiguously. Returns ``end_of_file`` when the stream is already exhausted.',
 		argnames is ['Stream', 'Message'],
 		exceptions is [
-			'``Stream`` is a variable or the inbound frames do not form a valid normalized WebSocket message sequence' - error
+			'``Stream`` is a variable' - instantiation_error,
+			'The inbound frames do not form a valid normalized WebSocket message sequence' - domain_error(http_websocket_message_sequence, 'Frame'),
+			'The inbound frame is invalid' - domain_error(http_websocket_frame, 'Frame'),
+			'The inbound message payload is invalid' - domain_error(http_websocket_message, 'Message'),
+			'The inbound message text is invalid for the selected text representation' - domain_error(http_websocket_message_text, 'Text')
 		],
 		remarks is [
 			'Interleaved control frames' - 'Control frames interleaved in the middle of a fragmented data message are not surfaced by this simplified layer and instead raise ``http_websocket_message_sequence``. Use ``http_websocket_session`` when interleaved control frames must be handled while a fragmented message is in progress.'
@@ -76,7 +84,11 @@
 		comment is 'Writes one validated WebSocket message as a single final frame to a binary stream and flushes the stream.',
 		argnames is ['Stream', 'Message'],
 		exceptions is [
-			'``Stream`` is a variable or ``Message`` is not a valid normalized WebSocket message term' - error
+			'``Stream`` is a variable' - instantiation_error,
+			'``Message`` is not a valid normalized WebSocket message term' - domain_error(http_websocket_message, 'Message'),
+			'``Message`` has an unsupported message type' - domain_error(http_websocket_message_type, 'Type'),
+			'``Message`` has an invalid close payload' - domain_error(http_websocket_close_payload, 'Payload'),
+			'``Message`` has invalid text for the selected text representation' - domain_error(http_websocket_message_text, 'Text')
 		]
 	]).
 
@@ -86,7 +98,8 @@
 		comment is 'Returns the type atom of a validated WebSocket message term.',
 		argnames is ['Message', 'Type'],
 		exceptions is [
-			'``Message`` is not a valid normalized WebSocket message term' - error
+			'``Message`` is not a valid normalized WebSocket message term' - domain_error(http_websocket_message, 'Message'),
+			'``Message`` has an unsupported message type' - domain_error(http_websocket_message_type, 'Type')
 		]
 	]).
 
@@ -96,7 +109,8 @@
 		comment is 'Returns the payload term of a validated WebSocket message term.',
 		argnames is ['Message', 'Payload'],
 		exceptions is [
-			'``Message`` is not a valid normalized WebSocket message term' - error
+			'``Message`` is not a valid normalized WebSocket message term' - domain_error(http_websocket_message, 'Message'),
+			'``Message`` has an unsupported message type' - domain_error(http_websocket_message_type, 'Type')
 		]
 	]).
 
@@ -106,7 +120,10 @@
 		comment is 'Protected helper that normalizes a WebSocket message term and returns the normalized term together with the corresponding frame opcode and payload bytes.',
 		argnames is ['Message', 'NormalizedMessage', 'Opcode', 'PayloadBytes'],
 		exceptions is [
-			'``Message`` is not a valid normalized WebSocket message term' - error
+			'``Message`` is not a valid normalized WebSocket message term' - domain_error(http_websocket_message, 'Message'),
+			'``Message`` has an unsupported message type' - domain_error(http_websocket_message_type, 'Type'),
+			'``Message`` has an invalid close payload' - domain_error(http_websocket_close_payload, 'Payload'),
+			'``Message`` has invalid text for the selected text representation' - domain_error(http_websocket_message_text, 'Text')
 		]
 	]).
 
@@ -116,7 +133,10 @@
 		comment is 'Protected helper that decodes payload bytes for the given message type atom into a normalized WebSocket message term.',
 		argnames is ['Type', 'PayloadBytes', 'Message'],
 		exceptions is [
-			'``Type`` is not a supported WebSocket message type or ``PayloadBytes`` do not decode to a valid message payload' - error
+			'``Type`` is not a supported WebSocket message type' - domain_error(http_websocket_message_type, 'Type'),
+			'``PayloadBytes`` is not a valid close payload' - domain_error(http_websocket_close_payload, 'PayloadBytes'),
+			'``PayloadBytes`` contains an invalid close code' - domain_error(http_websocket_close_code, 'Code'),
+			'``PayloadBytes`` does not decode to valid text for the selected text representation' - domain_error(http_websocket_message_text, 'PayloadBytes')
 		]
 	]).
 
@@ -341,7 +361,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-26,
 		comment is 'Transport-neutral WebSocket message predicates using atoms for text messages and close reasons.'
 	]).
 

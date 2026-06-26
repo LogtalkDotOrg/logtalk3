@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-10,
+		date is 2026-06-26,
 		comment is 'Transport-neutral CORS request classification, preflight response generation, and response decoration helpers for normalized HTTP messages.'
 	]).
 
@@ -57,7 +57,12 @@
 		argnames is ['Request', 'Response', 'Options'],
 		exceptions is [
 			'``Request`` is not a CORS preflight request' - domain_error(http_cors_preflight_request, 'Request'),
-			'``Options`` contain invalid CORS policy declarations' - error
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
+			'``Options`` contains an invalid CORS option combination' - domain_error(http_cors_options, 'Options'),
+			'The generated response violates normalized HTTP response semantics' - domain_error(http_header_semantics, 'Header')
 		]
 	]).
 
@@ -67,7 +72,13 @@
 		comment is 'Decorates a normalized response with the relevant CORS response headers when the request matches and the policy allows it. Denied requests preserve or add cache-relevant ``Vary`` metadata but do not add permission headers.',
 		argnames is ['Request', 'Response0', 'Response', 'Options'],
 		exceptions is [
-			'``Options`` contain invalid CORS policy declarations or the delegated response builder rejects the normalized response terms' - error
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
+			'``Options`` contains an invalid CORS option combination' - domain_error(http_cors_options, 'Options'),
+			'``Response0`` is not a valid normalized HTTP response term' - domain_error(http_response, 'Response0'),
+			'The decorated response violates normalized HTTP response semantics' - domain_error(http_header_semantics, 'Header')
 		]
 	]).
 

@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-11,
+		date is 2026-06-26,
 		comment is 'Session registry predicates for active WebSocket sessions and queued broadcast delivery.'
 	]).
 
@@ -41,7 +41,9 @@
 		comment is 'Closes a session registry and removes all registered sessions and queued messages.',
 		argnames is ['Registry'],
 		exceptions is [
-			'``Registry`` is not an open WebSocket service registry handle' - error
+			'``Registry`` is a variable' - instantiation_error,
+			'``Registry`` is neither a variable nor an open WebSocket service registry handle' - domain_error(http_websocket_service_registry, 'Registry'),
+			'``Registry`` refers to a closed WebSocket service registry handle' - existence_error(http_websocket_service_registry, session_registry('RegistryId'))
 		]
 	]).
 
@@ -51,7 +53,9 @@
 		comment is 'Registers a new active session in the given registry and returns its session identifier.',
 		argnames is ['Registry', 'Session'],
 		exceptions is [
-			'``Registry`` is not an open WebSocket service registry handle' - error
+			'``Registry`` is a variable' - instantiation_error,
+			'``Registry`` is neither a variable nor an open WebSocket service registry handle' - domain_error(http_websocket_service_registry, 'Registry'),
+			'``Registry`` refers to a closed WebSocket service registry handle' - existence_error(http_websocket_service_registry, session_registry('RegistryId'))
 		]
 	]).
 
@@ -61,7 +65,12 @@
 		comment is 'Removes a session from the given registry together with any queued outbound messages.',
 		argnames is ['Registry', 'Session'],
 		exceptions is [
-			'``Registry`` or ``Session`` are not valid registered WebSocket service handles' - error
+			'``Registry`` is a variable' - instantiation_error,
+			'``Registry`` is neither a variable nor an open WebSocket service registry handle' - domain_error(http_websocket_service_registry, 'Registry'),
+			'``Registry`` refers to a closed WebSocket service registry handle' - existence_error(http_websocket_service_registry, session_registry('RegistryId')),
+			'``Session`` is a variable or is not a session for ``Registry``' - instantiation_error,
+			'``Session`` is not a valid WebSocket service registry session handle' - domain_error(http_websocket_service_registry_session, 'Session'),
+			'``Session`` is not registered in ``Registry``' - existence_error(http_websocket_service_registry_session, websocket_session('RegistryId', 'SessionId'))
 		]
 	]).
 
@@ -78,7 +87,9 @@
 		comment is 'Returns the list of active session identifiers registered in the given registry.',
 		argnames is ['Registry', 'Sessions'],
 		exceptions is [
-			'``Registry`` is not an open WebSocket service registry handle' - error
+			'``Registry`` is a variable' - instantiation_error,
+			'``Registry`` is neither a variable nor an open WebSocket service registry handle' - domain_error(http_websocket_service_registry, 'Registry'),
+			'``Registry`` refers to a closed WebSocket service registry handle' - existence_error(http_websocket_service_registry, session_registry('RegistryId'))
 		]
 	]).
 
@@ -88,7 +99,9 @@
 		comment is 'Returns the number of active sessions currently registered in the given registry.',
 		argnames is ['Registry', 'Count'],
 		exceptions is [
-			'``Registry`` is not an open WebSocket service registry handle' - error
+			'``Registry`` is a variable' - instantiation_error,
+			'``Registry`` is neither a variable nor an open WebSocket service registry handle' - domain_error(http_websocket_service_registry, 'Registry'),
+			'``Registry`` refers to a closed WebSocket service registry handle' - existence_error(http_websocket_service_registry, session_registry('RegistryId'))
 		]
 	]).
 
@@ -98,7 +111,10 @@
 		comment is 'Queues a normalized outbound message for the specified registered session.',
 		argnames is ['Registry', 'Session', 'Message'],
 		exceptions is [
-			'``Registry`` or ``Session`` are invalid, or ``Message`` is not a valid normalized WebSocket message term' - error
+			'``Registry`` is not an open WebSocket service registry handle' - domain_error(http_websocket_service_registry, 'Registry'),
+			'``Session`` is not a valid WebSocket service registry session handle' - domain_error(http_websocket_service_registry_session, 'Session'),
+			'``Session`` is not registered in ``Registry``' - existence_error(http_websocket_service_registry_session, websocket_session('RegistryId', 'SessionId')),
+			'``Message`` is not a valid normalized WebSocket message term' - domain_error(http_websocket_service_registry_message, 'Message')
 		]
 	]).
 
@@ -108,7 +124,8 @@
 		comment is 'Queues a normalized outbound message for all currently registered sessions.',
 		argnames is ['Registry', 'Message'],
 		exceptions is [
-			'``Registry`` is invalid or ``Message`` is not a valid normalized WebSocket message term' - error
+			'``Registry`` is not an open WebSocket service registry handle' - domain_error(http_websocket_service_registry, 'Registry'),
+			'``Message`` is not a valid normalized WebSocket message term' - domain_error(http_websocket_service_registry_message, 'Message')
 		]
 	]).
 
@@ -118,7 +135,10 @@
 		comment is 'Queues a normalized outbound message for all currently registered sessions except the specified session.',
 		argnames is ['Registry', 'Session', 'Message'],
 		exceptions is [
-			'``Registry`` or ``Session`` are invalid, or ``Message`` is not a valid normalized WebSocket message term' - error
+			'``Registry`` is not an open WebSocket service registry handle' - domain_error(http_websocket_service_registry, 'Registry'),
+			'``Session`` is not a valid WebSocket service registry session handle' - domain_error(http_websocket_service_registry_session, 'Session'),
+			'``Session`` is not registered in ``Registry``' - existence_error(http_websocket_service_registry_session, websocket_session('RegistryId', 'SessionId')),
+			'``Message`` is not a valid normalized WebSocket message term' - domain_error(http_websocket_service_registry_message, 'Message')
 		]
 	]).
 
@@ -128,7 +148,9 @@
 		comment is 'Removes and returns the queued outbound messages for the specified registered session.',
 		argnames is ['Registry', 'Session', 'Messages'],
 		exceptions is [
-			'``Registry`` or ``Session`` are not valid registered WebSocket service handles' - error
+			'``Registry`` is not an open WebSocket service registry handle' - domain_error(http_websocket_service_registry, 'Registry'),
+			'``Session`` is not a valid WebSocket service registry session handle' - domain_error(http_websocket_service_registry_session, 'Session'),
+			'``Session`` is not registered in ``Registry``' - existence_error(http_websocket_service_registry_session, websocket_session('RegistryId', 'SessionId'))
 		]
 	]).
 

@@ -19,7 +19,7 @@ Optional Basic-auth router helpers for objects importing the ``http_router`` cat
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-05-29
+| **Date:** 2026-06-26
 
 | **Compilation flags:**
 |    ``static``
@@ -65,8 +65,18 @@ Router helper that applies Basic-auth route metadata to a routed request and ret
 |    ``authorize_basic_auth_request(+compound,-compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Route metadata options are not a proper list or the delegated Basic-auth protection predicate raises an exception:
-|        ``error``
+|    Route metadata options are not a proper list:
+|        ``domain_error(http_router_basic_auth_options,Options)``
+|    ``Request`` is not a valid normalized HTTP request term:
+|        ``domain_error(http_request,Request)``
+|    The Basic verifier object is invalid:
+|        ``domain_error(http_authenticate_verifier,Verifier)``
+|    The Basic verifier object does not exist:
+|        ``existence_error(http_authenticate_verifier,Verifier)``
+|    The Basic-auth protection options are invalid:
+|        ``domain_error(option,Option)``
+|    The Basic-auth status is invalid:
+|        ``domain_error(http_authenticate_status,Status)``
 
 
 ------------

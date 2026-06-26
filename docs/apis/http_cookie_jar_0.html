@@ -402,7 +402,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-06</div>
+<div class="line"><strong>Date:</strong> 2026-06-26</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -512,9 +512,37 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contain invalid cookie-jar configuration or persisted-cookie input:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable or a partial list:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line">The cookies file option is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">The cookies file option is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,File)</span></code></div>
+</div>
+<div class="line">The persisted cookie data is malformed:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_cookie_jar_persisted_cookies,PersistedCookies)</span></code></div>
+</div>
+<div class="line">A persisted cookie is malformed:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_cookie_jar_persisted_cookie,PersistedCookie)</span></code></div>
 </div>
 </div>
 </div>
@@ -542,9 +570,17 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> is not an open cookie-jar handle:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> is neither a variable nor an open cookie-jar handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_cookie_jar,Jar)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> refers to a closed cookie-jar handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_cookie_jar,cookie_jar(JarId))</span></code></div>
 </div>
 </div>
 </div>
@@ -572,9 +608,17 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> is not an open cookie-jar handle:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> is neither a variable nor an open cookie-jar handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_cookie_jar,Jar)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> refers to a closed cookie-jar handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_cookie_jar,cookie_jar(JarId))</span></code></div>
 </div>
 </div>
 </div>
@@ -602,13 +646,41 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> is not an open cookie-jar handle:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">URL</span></code> is not a supported absolute cookie-jar URL or <code class="docutils literal notranslate"><span class="pre">SetCookies</span></code> is not a valid set-cookie list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> is neither a variable nor an open cookie-jar handle:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_cookie_jar,Jar)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> refers to a closed cookie-jar handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_cookie_jar,cookie_jar(JarId))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">URL</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">URL</span></code> is not a supported absolute cookie-jar URL:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_cookie_jar_url,URL)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">URL</span></code> uses an unsupported cookie-jar URL scheme:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_cookie_jar_url_scheme,Scheme)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SetCookies</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SetCookies</span></code> is not a valid set-cookie list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_cookie_jar_set_cookies,SetCookies)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">SetCookie</span></code> of <code class="docutils literal notranslate"><span class="pre">SetCookies</span></code> is not a valid normalized Set-Cookie term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_cookie_jar_set_cookie,SetCookie)</span></code></div>
 </div>
 </div>
 </div>
@@ -636,9 +708,29 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> is not an open cookie-jar handle or <code class="docutils literal notranslate"><span class="pre">URL</span></code> is not a supported absolute cookie-jar URL:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> is neither a variable nor an open cookie-jar handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_cookie_jar,Jar)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> refers to a closed cookie-jar handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_cookie_jar,cookie_jar(JarId))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">URL</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">URL</span></code> is not a supported absolute cookie-jar URL:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_cookie_jar_url,URL)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">URL</span></code> uses an unsupported cookie-jar URL scheme:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_cookie_jar_url_scheme,Scheme)</span></code></div>
 </div>
 </div>
 </div>
@@ -666,9 +758,45 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> is not an open cookie-jar handle, <code class="docutils literal notranslate"><span class="pre">URL</span></code> is invalid, or <code class="docutils literal notranslate"><span class="pre">RequestContext</span></code> is not a valid cookie-jar request context:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> is neither a variable nor an open cookie-jar handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_cookie_jar,Jar)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> refers to a closed cookie-jar handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_cookie_jar,cookie_jar(JarId))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">URL</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">URL</span></code> is not a supported absolute cookie-jar URL:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_cookie_jar_url,URL)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">URL</span></code> uses an unsupported cookie-jar URL scheme:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_cookie_jar_url_scheme,Scheme)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">RequestContext</span></code> is not a valid cookie-jar request context:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_cookie_jar_request_context,RequestContext)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">RequestContext</span></code> contains an invalid method:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Method)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">RequestContext</span></code> contains an invalid source:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_cookie_jar_request_source,Source)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">RequestContext</span></code> contains an invalid top-level-navigation flag:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(boolean,TopLevelNavigation)</span></code></div>
 </div>
 </div>
 </div>
@@ -696,9 +824,17 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> is not an open cookie-jar handle:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> is neither a variable nor an open cookie-jar handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_cookie_jar,Jar)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> refers to a closed cookie-jar handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_cookie_jar,cookie_jar(JarId))</span></code></div>
 </div>
 </div>
 </div>
@@ -726,9 +862,17 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> is not an open cookie-jar handle:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> is neither a variable nor an open cookie-jar handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_cookie_jar,Jar)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> refers to a closed cookie-jar handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_cookie_jar,cookie_jar(JarId))</span></code></div>
 </div>
 </div>
 </div>
@@ -756,9 +900,25 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> is not an open cookie-jar handle or <code class="docutils literal notranslate"><span class="pre">File</span></code> is not a valid persistence target:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> is neither a variable nor an open cookie-jar handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_cookie_jar,Jar)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> refers to a closed cookie-jar handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_cookie_jar,cookie_jar(JarId))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,File)</span></code></div>
 </div>
 </div>
 </div>
@@ -786,9 +946,33 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> is not an open cookie-jar handle, <code class="docutils literal notranslate"><span class="pre">File</span></code> is invalid, or the persisted cookie data is malformed:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> is neither a variable nor an open cookie-jar handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_cookie_jar,Jar)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Jar</span></code> refers to a closed cookie-jar handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_cookie_jar,cookie_jar(JarId))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">File</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,File)</span></code></div>
+</div>
+<div class="line">The persisted cookie data is malformed:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_cookie_jar_persisted_cookies,PersistedCookies)</span></code></div>
+</div>
+<div class="line">A persisted cookie is malformed:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_cookie_jar_persisted_cookie,PersistedCookie)</span></code></div>
 </div>
 </div>
 </div>

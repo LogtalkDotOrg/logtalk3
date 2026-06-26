@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-22,
+		date is 2026-06-26,
 		comment is 'Auxiliary object defining the supported session-loop options and default values for callback-driven WebSocket services.'
 	]).
 
@@ -68,7 +68,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-22,
+		date is 2026-06-26,
 		comment is 'Callback-driven WebSocket session loops over upgraded WebSocket connections provided by a selected ``http_socket_protocol`` implementation, including automatic close-handshake orchestration, optional auto-pong, keepalive, and idle-timeout policies.',
 		parameters is [
 			'HTTPSocket' - 'The object implementing ``http_socket_protocol``.',
@@ -91,7 +91,19 @@
 		comment is 'Runs a higher-level session loop on an upgraded WebSocket connection produced by the selected transport parameterization until the close handshake completes or the peer closes the stream, then closes the upgraded connection automatically.',
 		argnames is ['Connection', 'Handler', 'State'],
 		exceptions is [
-			'``Connection`` or ``Handler`` are invalid for the callback-driven session loop, or the delegated WebSocket session processing raises an exception' - error
+			'``Connection`` is a variable' - instantiation_error,
+			'``Connection`` is not a valid upgraded WebSocket connection handle' - domain_error(http_socket_connection, 'Connection'),
+			'``Handler`` is a variable' - instantiation_error,
+			'``Handler`` is not a valid WebSocket service handler' - domain_error(http_websocket_service_handler, 'Handler'),
+			'The session role parameter is neither ``client`` nor ``server``' - domain_error(http_websocket_session_role, '_Role_'),
+			'The inbound frame/message sequence violates RFC 6455 session rules' - domain_error(http_websocket_session_sequence, 'Frame'),
+			'The inbound frame violates the current peer masking policy' - domain_error(http_websocket_session_masking, 'Frame'),
+			'The inbound frame uses unsupported extensions' - domain_error(http_websocket_session_extensions, 'Frame'),
+			'The inbound frame is invalid' - domain_error(http_websocket_frame, 'Frame'),
+			'The inbound message text is invalid' - domain_error(http_websocket_message_text, 'Payload'),
+			'``Handler`` returns a variable reply list' - instantiation_error,
+			'``Handler`` returns a non-list reply list' - type_error(list, 'Replies'),
+			'``Handler`` returns an invalid reply' - domain_error(http_websocket_service_handler_reply, 'Reply')
 		],
 		remarks is [
 			'Handler protocol' - 'The handler object must conform to the ``http_websocket_service_handler_protocol`` protocol and return a list of normalized reply messages for each received message.',
@@ -105,7 +117,25 @@
 		comment is 'Runs a higher-level session loop on an upgraded WebSocket connection produced by the selected transport parameterization using the given loop options, then closes the upgraded connection automatically.',
 		argnames is ['Connection', 'Handler', 'State', 'Options'],
 		exceptions is [
-			'``Connection``, ``Handler``, or ``Options`` are invalid for the callback-driven session loop, or the delegated WebSocket session processing raises an exception' - error
+			'``Connection`` is a variable' - instantiation_error,
+			'``Connection`` is not a valid upgraded WebSocket connection handle' - domain_error(http_socket_connection, 'Connection'),
+			'``Handler`` is a variable' - instantiation_error,
+			'``Handler`` is not a valid WebSocket service handler' - domain_error(http_websocket_service_handler, 'Handler'),
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
+			'``Options`` contains an invalid WebSocket service loop option' - domain_error(http_websocket_service_option, 'Option'),
+			'Timed session-loop options are not available on this backend' - not_available(http_websocket_service_timing),
+			'The session role parameter is neither ``client`` nor ``server``' - domain_error(http_websocket_session_role, '_Role_'),
+			'The inbound frame/message sequence violates RFC 6455 session rules' - domain_error(http_websocket_session_sequence, 'Frame'),
+			'The inbound frame violates the current peer masking policy' - domain_error(http_websocket_session_masking, 'Frame'),
+			'The inbound frame uses unsupported extensions' - domain_error(http_websocket_session_extensions, 'Frame'),
+			'The inbound frame is invalid' - domain_error(http_websocket_frame, 'Frame'),
+			'The inbound message text is invalid' - domain_error(http_websocket_message_text, 'Payload'),
+			'``Handler`` returns a variable reply list' - instantiation_error,
+			'``Handler`` returns a non-list reply list' - type_error(list, 'Replies'),
+			'``Handler`` returns an invalid reply' - domain_error(http_websocket_service_handler_reply, 'Reply')
 		],
 		remarks is [
 			'Option ``auto_pong(on)``' - 'Automatically writes pong replies while still forwarding ping messages to the handler.',
@@ -122,7 +152,33 @@
 		comment is 'Protected helper that runs the callback-driven session loop on an upgraded WebSocket connection starting from the given session state and using the given loop options. Connection ownership is handled by the caller.',
 		argnames is ['Connection', 'HandlerDescriptor', 'State', 'UpdatedState', 'Options'],
 		exceptions is [
-			'The connection, handler descriptor, session state, or loop options are invalid for the callback-driven session loop' - error
+			'``Connection`` is a variable' - instantiation_error,
+			'``Connection`` is not a valid upgraded WebSocket connection handle' - domain_error(http_socket_connection, 'Connection'),
+			'``HandlerDescriptor`` is not a valid WebSocket service handler descriptor' - domain_error(http_websocket_service_handler, 'HandlerDescriptor'),
+			'The handler in ``HandlerDescriptor`` is a variable' - instantiation_error,
+			'The handler in ``HandlerDescriptor`` is not a valid WebSocket service handler' - domain_error(http_websocket_service_handler, 'Handler'),
+			'``State`` is a variable' - instantiation_error,
+			'``State`` is not a valid WebSocket session state' - domain_error(http_websocket_session_state, 'State'),
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
+			'``Options`` contains an invalid WebSocket service loop option' - domain_error(http_websocket_service_option, 'Option'),
+			'Timed session-loop options are not available on this backend' - not_available(http_websocket_service_timing),
+			'The session role parameter is neither ``client`` nor ``server``' - domain_error(http_websocket_session_role, '_Role_'),
+			'The inbound frame/message sequence violates RFC 6455 session rules' - domain_error(http_websocket_session_sequence, 'Frame'),
+			'The inbound frame violates the current peer masking policy' - domain_error(http_websocket_session_masking, 'Frame'),
+			'The inbound frame uses unsupported extensions' - domain_error(http_websocket_session_extensions, 'Frame'),
+			'The inbound frame is invalid' - domain_error(http_websocket_frame, 'Frame'),
+			'The inbound message text is invalid' - domain_error(http_websocket_message_text, 'Payload'),
+			'The handler returns a variable reply or action list' - instantiation_error,
+			'The handler returns a non-list reply list' - type_error(list, 'Replies'),
+			'The handler returns a non-list action list' - type_error(list, 'Actions'),
+			'The handler returns an invalid reply' - domain_error(http_websocket_service_handler_reply, 'Reply'),
+			'The handler returns an invalid registry action' - domain_error(http_websocket_service_handler_action, 'Action'),
+			'The registry in ``HandlerDescriptor`` is not an open WebSocket service registry handle' - domain_error(http_websocket_service_registry, 'Registry'),
+			'The session in ``HandlerDescriptor`` is not a valid WebSocket service registry session handle' - domain_error(http_websocket_service_registry_session, 'Session'),
+			'The session in ``HandlerDescriptor`` is not registered in the registry' - existence_error(http_websocket_service_registry_session, websocket_session('RegistryId', 'SessionId'))
 		]
 	]).
 
@@ -132,7 +188,7 @@
 		comment is 'Validates a non-negative integer option value for the given domain and option name.',
 		argnames is ['Domain', 'Name', 'Value', 'ValidatedValue'],
 		exceptions is [
-			'``Value`` is not a non-negative integer option value for the given domain and option name' - error
+			'``Value`` is not a non-negative integer option value for the given domain and option name' - domain_error('Domain', 'Option')
 		]
 	]).
 

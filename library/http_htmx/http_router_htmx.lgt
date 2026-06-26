@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-26,
+		date is 2026-06-26,
 		comment is 'Optional HTMX middleware helpers for router objects importing the ``http_router`` category.'
 	]).
 
@@ -34,7 +34,9 @@
 		comment is 'Router middleware helper that annotates a normalized request with derived HTMX properties and continues the middleware chain.',
 		argnames is ['Request', 'Action'],
 		exceptions is [
-			'Any exception that can be thrown by ``http_htmx::request_properties/2`` for the routed request' - error
+			'``Request`` is not a valid normalized HTTP request term' - domain_error(http_request, 'Request'),
+			'The annotated request violates normalized HTTP request semantics' - domain_error(http_header_semantics, 'Header'),
+			'The annotated request properties violate normalized HTTP request semantics' - domain_error(http_property_semantics, 'Property')
 		]
 	]).
 
@@ -44,7 +46,10 @@
 		comment is 'Router response-middleware helper that decorates a normalized response using ``htmx_response_options/1`` request or response properties.',
 		argnames is ['Request', 'Response0', 'Response'],
 		exceptions is [
-			'Any exception that can be thrown by ``http_htmx::add_response_headers/4`` for the derived HTMX response options' - error
+			'``Request`` is not a valid normalized HTTP request term' - domain_error(http_request, 'Request'),
+			'``Response0`` is not a valid normalized HTTP response term' - domain_error(http_response, 'Response0'),
+			'The derived HTMX response options are invalid' - domain_error(option, 'Option'),
+			'The decorated response violates normalized HTTP response semantics' - domain_error(http_header_semantics, 'Header')
 		]
 	]).
 

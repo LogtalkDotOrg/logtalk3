@@ -15,7 +15,7 @@ Transport-neutral CORS request classification, preflight response generation, an
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-10
+| **Date:** 2026-06-26
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -118,8 +118,18 @@ Builds a normalized CORS preflight response using the given policy options. Allo
 | **Exceptions:**
 |    ``Request`` is not a CORS preflight request:
 |        ``domain_error(http_cors_preflight_request,Request)``
-|    ``Options`` contain invalid CORS policy declarations:
-|        ``error``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Options`` contains an invalid CORS option combination:
+|        ``domain_error(http_cors_options,Options)``
+|    The generated response violates normalized HTTP response semantics:
+|        ``domain_error(http_header_semantics,Header)``
 
 
 ------------
@@ -141,8 +151,20 @@ Decorates a normalized response with the relevant CORS response headers when the
 |    ``add_response_headers(+compound,+compound,-compound,+list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Options`` contain invalid CORS policy declarations or the delegated response builder rejects the normalized response terms:
-|        ``error``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Options`` contains an invalid CORS option combination:
+|        ``domain_error(http_cors_options,Options)``
+|    ``Response0`` is not a valid normalized HTTP response term:
+|        ``domain_error(http_response,Response0)``
+|    The decorated response violates normalized HTTP response semantics:
+|        ``domain_error(http_header_semantics,Header)``
 
 
 ------------

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-22,
+		date is 2026-06-26,
 		comment is 'Client-side convenience for callback-driven WebSocket sessions with atom text representation, combining the opening handshake, optional initial outbound messages, and the higher-level session loop.',
 		parnames is ['HTTPSocket']
 	]).
@@ -36,7 +36,19 @@
 		comment is 'Builds a WebSocket opening handshake from the given absolute WebSocket URL supported by the selected transport parameterization, opens the upgraded connection, optionally writes initial outbound messages, then runs one callback-driven client session loop until the close handshake completes or the peer closes the stream.',
 		argnames is ['URL', 'Handler', 'Response', 'State'],
 		exceptions is [
-			'``URL`` or ``Handler`` are invalid for client WebSocket session startup, or the delegated opening handshake and session loop raise an exception' - error
+			'``URL`` is a variable' - instantiation_error,
+			'``URL`` is not a supported absolute WebSocket URL' - domain_error(http_client_websocket_url, 'URL'),
+			'``URL`` uses an unsupported WebSocket scheme' - domain_error(http_client_websocket_scheme, 'Scheme'),
+			'The WebSocket server rejects the opening handshake version' - domain_error(http_client_websocket_version_rejection, 'Response'),
+			'The WebSocket server rejects authentication' - domain_error(http_client_websocket_authentication_rejection, 'Response'),
+			'The WebSocket server redirects the opening handshake' - domain_error(http_client_websocket_redirection_rejection, 'Response'),
+			'The WebSocket server rejects the opening handshake' - domain_error(http_client_websocket_rejection, 'Response'),
+			'The WebSocket server response is not a valid opening handshake response' - domain_error(http_client_websocket_response, 'Response'),
+			'``Handler`` is a variable' - instantiation_error,
+			'``Handler`` is not a valid WebSocket service handler' - domain_error(http_websocket_service_handler, 'Handler'),
+			'The upgraded connection handle is invalid' - domain_error(http_socket_connection, 'Connection'),
+			'The delegated session loop raises a WebSocket session error' - domain_error(http_websocket_session_sequence, 'Frame'),
+			'``Handler`` returns an invalid reply' - domain_error(http_websocket_service_handler_reply, 'Reply')
 		]
 	]).
 
@@ -46,7 +58,30 @@
 		comment is 'Builds a WebSocket opening handshake from the given absolute WebSocket URL supported by the selected transport parameterization, opens the upgraded connection, optionally writes initial outbound messages, then runs one callback-driven client session loop using the given combined handshake and session options.',
 		argnames is ['URL', 'Handler', 'Response', 'State', 'Options'],
 		exceptions is [
-			'``URL``, ``Handler``, or ``Options`` are invalid for client WebSocket session startup, or the delegated opening handshake and session loop raise an exception' - error
+			'``URL`` is a variable' - instantiation_error,
+			'``URL`` is not a supported absolute WebSocket URL' - domain_error(http_client_websocket_url, 'URL'),
+			'``URL`` uses an unsupported WebSocket scheme' - domain_error(http_client_websocket_scheme, 'Scheme'),
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'``Options`` contains an invalid initial message list' - type_error(list, 'Messages'),
+			'``Options`` contains an invalid initial message' - domain_error(http_websocket_client_service_initial_message, 'Message'),
+			'``Options`` contains an invalid automatic pong setting' - domain_error(http_websocket_client_service_option, auto_pong('Option')),
+			'``Options`` contains an invalid client service option' - domain_error(http_websocket_client_service_option, 'Option'),
+			'``Options`` contains an invalid WebSocket client option' - domain_error(http_client_websocket_option, 'Option'),
+			'``Options`` contains an invalid WebSocket HTTP version' - domain_error(http_client_websocket_version, 'Version'),
+			'``Options`` contains reserved WebSocket headers' - domain_error(http_client_websocket_headers, 'Headers'),
+			'``Options`` contains an invalid WebSocket service loop option' - domain_error(http_websocket_service_option, 'Option'),
+			'Timed session-loop options are not available on this backend' - not_available(http_websocket_service_timing),
+			'The WebSocket server rejects the opening handshake version' - domain_error(http_client_websocket_version_rejection, 'Response'),
+			'The WebSocket server rejects authentication' - domain_error(http_client_websocket_authentication_rejection, 'Response'),
+			'The WebSocket server redirects the opening handshake' - domain_error(http_client_websocket_redirection_rejection, 'Response'),
+			'The WebSocket server rejects the opening handshake' - domain_error(http_client_websocket_rejection, 'Response'),
+			'The WebSocket server response is not a valid opening handshake response' - domain_error(http_client_websocket_response, 'Response'),
+			'``Handler`` is a variable' - instantiation_error,
+			'``Handler`` is not a valid WebSocket service handler' - domain_error(http_websocket_service_handler, 'Handler'),
+			'The upgraded connection handle is invalid' - domain_error(http_socket_connection, 'Connection'),
+			'The delegated session loop raises a WebSocket session error' - domain_error(http_websocket_session_sequence, 'Frame'),
+			'``Handler`` returns an invalid reply' - domain_error(http_websocket_service_handler_reply, 'Reply')
 		],
 		remarks is [
 			'Repeated options' - 'When the same handshake or session option is given multiple times, the first occurrence is used.',
@@ -206,7 +241,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-22,
+		date is 2026-06-26,
 		comment is 'By default, the client-side convenience for callback-driven WebSocket sessions with atom text representation, combining the opening handshake, optional initial outbound messages, and the higher-level session loop, uses the ``http_socket`` library.'
 	]).
 

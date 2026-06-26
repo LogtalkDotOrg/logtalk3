@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-22,
+		date is 2026-06-26,
 		comment is 'Request-oriented HTTP client facade built on top of the url and http_socket libraries.',
 		parnames is ['HTTPSocket']
 	]).
@@ -36,8 +36,18 @@
 		comment is 'Builds a normalized request from the given method, absolute URL supported by the selected transport parameterization, and options, performs a one-shot exchange, and returns the response.',
 		argnames is ['Method', 'URL', 'Response', 'Options'],
 		exceptions is [
-			'``URL`` is not a supported absolute HTTP URL or ``Options`` contain invalid request-construction options' - error,
-			'The delegated socket exchange fails request validation or transport processing' - error
+			'``URL`` is a variable' - instantiation_error,
+			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
+			'``URL`` uses an unsupported HTTP scheme' - domain_error(http_client_scheme, 'Scheme'),
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
+			'``Options`` contains an invalid HTTP client request option' - domain_error(http_client_request_option, 'Option'),
+			'``Options`` contains invalid form-data headers' - domain_error(http_client_form_data_headers, 'Headers'),
+			'``Options`` contains invalid form-data properties' - domain_error(http_client_form_data_properties, 'Properties'),
+			'The generated request is not a valid normalized HTTP request term' - domain_error(http_request, 'Request'),
+			'The delegated socket exchange rejects the response stream' - domain_error(http_response_stream, 'Error')
 		]
 	]).
 
@@ -47,9 +57,21 @@
 		comment is 'Builds a normalized request from the given method, absolute URL supported by the selected transport parameterization, and options, validates it against an open compatible connection or pool handle endpoint, performs one exchange, and returns the response.',
 		argnames is ['ConnectionOrPool', 'Method', 'URL', 'Response', 'Options'],
 		exceptions is [
-			'``ConnectionOrPool`` is not a valid reusable connection or pool handle for ``URL``' - error,
-			'``URL`` is not a supported absolute HTTP URL or ``Options`` contain invalid request-construction options' - error,
-			'The delegated socket exchange fails request validation or transport processing' - error
+			'``ConnectionOrPool`` is a variable' - instantiation_error,
+			'``ConnectionOrPool`` is not a valid reusable connection or pool handle' - domain_error(http_socket_connection_or_pool, 'ConnectionOrPool'),
+			'``ConnectionOrPool`` is not connected to the requested endpoint' - domain_error(http_client_connection_target, endpoint('EndpointHost', 'EndpointPort', 'Host', 'Port')),
+			'``URL`` is a variable' - instantiation_error,
+			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
+			'``URL`` uses an unsupported HTTP scheme' - domain_error(http_client_scheme, 'Scheme'),
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
+			'``Options`` contains an invalid HTTP client request option' - domain_error(http_client_request_option, 'Option'),
+			'``Options`` contains invalid form-data headers' - domain_error(http_client_form_data_headers, 'Headers'),
+			'``Options`` contains invalid form-data properties' - domain_error(http_client_form_data_properties, 'Properties'),
+			'The generated request is not a valid normalized HTTP request term' - domain_error(http_request, 'Request'),
+			'The delegated socket exchange rejects the response stream' - domain_error(http_response_stream, 'Error')
 		]
 	]).
 
@@ -59,7 +81,11 @@
 		comment is 'Convenience wrapper over ``request/4`` using the ``get`` method.',
 		argnames is ['URL', 'Response', 'Options'],
 		exceptions is [
-			'Any exception that can be thrown by ``request/4`` for the given URL and options' - error
+			'``URL`` is a variable' - instantiation_error,
+			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
+			'``URL`` uses an unsupported HTTP scheme' - domain_error(http_client_scheme, 'Scheme'),
+			'``Options`` contains an invalid HTTP client request option' - domain_error(http_client_request_option, 'Option'),
+			'The delegated socket exchange rejects the response stream' - domain_error(http_response_stream, 'Error')
 		]
 	]).
 
@@ -69,7 +95,13 @@
 		comment is 'Convenience wrapper over ``request/5`` using the ``get`` method.',
 		argnames is ['ConnectionOrPool', 'URL', 'Response', 'Options'],
 		exceptions is [
-			'Any exception that can be thrown by ``request/5`` for the given connection, URL, and options' - error
+			'``ConnectionOrPool`` is not a valid reusable connection or pool handle' - domain_error(http_socket_connection_or_pool, 'ConnectionOrPool'),
+			'``ConnectionOrPool`` is not connected to the requested endpoint' - domain_error(http_client_connection_target, endpoint('EndpointHost', 'EndpointPort', 'Host', 'Port')),
+			'``URL`` is a variable' - instantiation_error,
+			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
+			'``URL`` uses an unsupported HTTP scheme' - domain_error(http_client_scheme, 'Scheme'),
+			'``Options`` contains an invalid HTTP client request option' - domain_error(http_client_request_option, 'Option'),
+			'The delegated socket exchange rejects the response stream' - domain_error(http_response_stream, 'Error')
 		]
 	]).
 
@@ -79,7 +111,11 @@
 		comment is 'Convenience wrapper over ``request/4`` using the ``head`` method.',
 		argnames is ['URL', 'Response', 'Options'],
 		exceptions is [
-			'Any exception that can be thrown by ``request/4`` for the given URL and options' - error
+			'``URL`` is a variable' - instantiation_error,
+			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
+			'``URL`` uses an unsupported HTTP scheme' - domain_error(http_client_scheme, 'Scheme'),
+			'``Options`` contains an invalid HTTP client request option' - domain_error(http_client_request_option, 'Option'),
+			'The delegated socket exchange rejects the response stream' - domain_error(http_response_stream, 'Error')
 		]
 	]).
 
@@ -89,7 +125,13 @@
 		comment is 'Convenience wrapper over ``request/5`` using the ``head`` method.',
 		argnames is ['ConnectionOrPool', 'URL', 'Response', 'Options'],
 		exceptions is [
-			'Any exception that can be thrown by ``request/5`` for the given connection, URL, and options' - error
+			'``ConnectionOrPool`` is not a valid reusable connection or pool handle' - domain_error(http_socket_connection_or_pool, 'ConnectionOrPool'),
+			'``ConnectionOrPool`` is not connected to the requested endpoint' - domain_error(http_client_connection_target, endpoint('EndpointHost', 'EndpointPort', 'Host', 'Port')),
+			'``URL`` is a variable' - instantiation_error,
+			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
+			'``URL`` uses an unsupported HTTP scheme' - domain_error(http_client_scheme, 'Scheme'),
+			'``Options`` contains an invalid HTTP client request option' - domain_error(http_client_request_option, 'Option'),
+			'The delegated socket exchange rejects the response stream' - domain_error(http_response_stream, 'Error')
 		]
 	]).
 
@@ -99,7 +141,11 @@
 		comment is 'Convenience wrapper over ``request/4`` using the ``delete`` method.',
 		argnames is ['URL', 'Response', 'Options'],
 		exceptions is [
-			'Any exception that can be thrown by ``request/4`` for the given URL and options' - error
+			'``URL`` is a variable' - instantiation_error,
+			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
+			'``URL`` uses an unsupported HTTP scheme' - domain_error(http_client_scheme, 'Scheme'),
+			'``Options`` contains an invalid HTTP client request option' - domain_error(http_client_request_option, 'Option'),
+			'The delegated socket exchange rejects the response stream' - domain_error(http_response_stream, 'Error')
 		]
 	]).
 
@@ -109,7 +155,13 @@
 		comment is 'Convenience wrapper over ``request/5`` using the ``delete`` method.',
 		argnames is ['ConnectionOrPool', 'URL', 'Response', 'Options'],
 		exceptions is [
-			'Any exception that can be thrown by ``request/5`` for the given connection, URL, and options' - error
+			'``ConnectionOrPool`` is not a valid reusable connection or pool handle' - domain_error(http_socket_connection_or_pool, 'ConnectionOrPool'),
+			'``ConnectionOrPool`` is not connected to the requested endpoint' - domain_error(http_client_connection_target, endpoint('EndpointHost', 'EndpointPort', 'Host', 'Port')),
+			'``URL`` is a variable' - instantiation_error,
+			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
+			'``URL`` uses an unsupported HTTP scheme' - domain_error(http_client_scheme, 'Scheme'),
+			'``Options`` contains an invalid HTTP client request option' - domain_error(http_client_request_option, 'Option'),
+			'The delegated socket exchange rejects the response stream' - domain_error(http_response_stream, 'Error')
 		]
 	]).
 
@@ -119,7 +171,12 @@
 		comment is 'Convenience wrapper over ``request/4`` using the ``post`` method and the given request body.',
 		argnames is ['URL', 'Body', 'Response', 'Options'],
 		exceptions is [
-			'Any exception that can be thrown by ``request/4`` when the given body is merged into the request options' - error
+			'``URL`` is a variable' - instantiation_error,
+			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
+			'``URL`` uses an unsupported HTTP scheme' - domain_error(http_client_scheme, 'Scheme'),
+			'``Options`` contains an invalid HTTP client request option' - domain_error(http_client_request_option, 'Option'),
+			'``Body`` is invalid for the generated normalized HTTP request' - domain_error(http_body, 'Body'),
+			'The delegated socket exchange rejects the response stream' - domain_error(http_response_stream, 'Error')
 		]
 	]).
 
@@ -129,7 +186,14 @@
 		comment is 'Convenience wrapper over ``request/5`` using the ``post`` method and the given request body.',
 		argnames is ['ConnectionOrPool', 'URL', 'Body', 'Response', 'Options'],
 		exceptions is [
-			'Any exception that can be thrown by ``request/5`` when the given body is merged into the request options' - error
+			'``ConnectionOrPool`` is not a valid reusable connection or pool handle' - domain_error(http_socket_connection_or_pool, 'ConnectionOrPool'),
+			'``ConnectionOrPool`` is not connected to the requested endpoint' - domain_error(http_client_connection_target, endpoint('EndpointHost', 'EndpointPort', 'Host', 'Port')),
+			'``URL`` is a variable' - instantiation_error,
+			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
+			'``URL`` uses an unsupported HTTP scheme' - domain_error(http_client_scheme, 'Scheme'),
+			'``Options`` contains an invalid HTTP client request option' - domain_error(http_client_request_option, 'Option'),
+			'``Body`` is invalid for the generated normalized HTTP request' - domain_error(http_body, 'Body'),
+			'The delegated socket exchange rejects the response stream' - domain_error(http_response_stream, 'Error')
 		]
 	]).
 
@@ -139,7 +203,12 @@
 		comment is 'Convenience wrapper over ``request/4`` using the ``put`` method and the given request body.',
 		argnames is ['URL', 'Body', 'Response', 'Options'],
 		exceptions is [
-			'Any exception that can be thrown by ``request/4`` when the given body is merged into the request options' - error
+			'``URL`` is a variable' - instantiation_error,
+			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
+			'``URL`` uses an unsupported HTTP scheme' - domain_error(http_client_scheme, 'Scheme'),
+			'``Options`` contains an invalid HTTP client request option' - domain_error(http_client_request_option, 'Option'),
+			'``Body`` is invalid for the generated normalized HTTP request' - domain_error(http_body, 'Body'),
+			'The delegated socket exchange rejects the response stream' - domain_error(http_response_stream, 'Error')
 		]
 	]).
 
@@ -149,7 +218,14 @@
 		comment is 'Convenience wrapper over ``request/5`` using the ``put`` method and the given request body.',
 		argnames is ['ConnectionOrPool', 'URL', 'Body', 'Response', 'Options'],
 		exceptions is [
-			'Any exception that can be thrown by ``request/5`` when the given body is merged into the request options' - error
+			'``ConnectionOrPool`` is not a valid reusable connection or pool handle' - domain_error(http_socket_connection_or_pool, 'ConnectionOrPool'),
+			'``ConnectionOrPool`` is not connected to the requested endpoint' - domain_error(http_client_connection_target, endpoint('EndpointHost', 'EndpointPort', 'Host', 'Port')),
+			'``URL`` is a variable' - instantiation_error,
+			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
+			'``URL`` uses an unsupported HTTP scheme' - domain_error(http_client_scheme, 'Scheme'),
+			'``Options`` contains an invalid HTTP client request option' - domain_error(http_client_request_option, 'Option'),
+			'``Body`` is invalid for the generated normalized HTTP request' - domain_error(http_body, 'Body'),
+			'The delegated socket exchange rejects the response stream' - domain_error(http_response_stream, 'Error')
 		]
 	]).
 
@@ -159,7 +235,12 @@
 		comment is 'Convenience wrapper over ``request/4`` using the ``patch`` method and the given request body.',
 		argnames is ['URL', 'Body', 'Response', 'Options'],
 		exceptions is [
-			'Any exception that can be thrown by ``request/4`` when the given body is merged into the request options' - error
+			'``URL`` is a variable' - instantiation_error,
+			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
+			'``URL`` uses an unsupported HTTP scheme' - domain_error(http_client_scheme, 'Scheme'),
+			'``Options`` contains an invalid HTTP client request option' - domain_error(http_client_request_option, 'Option'),
+			'``Body`` is invalid for the generated normalized HTTP request' - domain_error(http_body, 'Body'),
+			'The delegated socket exchange rejects the response stream' - domain_error(http_response_stream, 'Error')
 		]
 	]).
 
@@ -169,7 +250,14 @@
 		comment is 'Convenience wrapper over ``request/5`` using the ``patch`` method and the given request body.',
 		argnames is ['ConnectionOrPool', 'URL', 'Body', 'Response', 'Options'],
 		exceptions is [
-			'Any exception that can be thrown by ``request/5`` when the given body is merged into the request options' - error
+			'``ConnectionOrPool`` is not a valid reusable connection or pool handle' - domain_error(http_socket_connection_or_pool, 'ConnectionOrPool'),
+			'``ConnectionOrPool`` is not connected to the requested endpoint' - domain_error(http_client_connection_target, endpoint('EndpointHost', 'EndpointPort', 'Host', 'Port')),
+			'``URL`` is a variable' - instantiation_error,
+			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
+			'``URL`` uses an unsupported HTTP scheme' - domain_error(http_client_scheme, 'Scheme'),
+			'``Options`` contains an invalid HTTP client request option' - domain_error(http_client_request_option, 'Option'),
+			'``Body`` is invalid for the generated normalized HTTP request' - domain_error(http_body, 'Body'),
+			'The delegated socket exchange rejects the response stream' - domain_error(http_response_stream, 'Error')
 		]
 	]).
 
@@ -179,8 +267,21 @@
 		comment is 'Builds a WebSocket opening-handshake request from the given absolute WebSocket URL supported by the selected transport parameterization and options, opens a reusable socket connection, validates the server ``101`` response, and returns both the connection handle and the response.',
 		argnames is ['URL', 'Connection', 'Response', 'Options'],
 		exceptions is [
-			'``URL`` is not a supported absolute WebSocket URL or ``Options`` contain invalid opening-handshake options' - error,
-			'The delegated socket or handshake processing rejects the connection or server response' - error
+			'``URL`` is a variable' - instantiation_error,
+			'``URL`` is not a supported absolute WebSocket URL' - domain_error(http_client_websocket_url, 'URL'),
+			'``URL`` uses an unsupported WebSocket scheme' - domain_error(http_client_websocket_scheme, 'Scheme'),
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
+			'``Options`` contains an invalid WebSocket client option' - domain_error(http_client_websocket_option, 'Option'),
+			'``Options`` contains an invalid WebSocket HTTP version' - domain_error(http_client_websocket_version, 'Version'),
+			'``Options`` contains reserved WebSocket headers' - domain_error(http_client_websocket_headers, 'Headers'),
+			'The WebSocket server rejects the version' - domain_error(http_client_websocket_version_rejection, 'Response'),
+			'The WebSocket server rejects authentication' - domain_error(http_client_websocket_authentication_rejection, 'Response'),
+			'The WebSocket server redirects the opening handshake' - domain_error(http_client_websocket_redirection_rejection, 'Response'),
+			'The WebSocket server rejects the opening handshake' - domain_error(http_client_websocket_rejection, 'Response'),
+			'The WebSocket server response is not a valid opening handshake response' - domain_error(http_client_websocket_response, 'Response')
 		]
 	]).
 
@@ -689,7 +790,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-22,
+		date is 2026-06-26,
 		comment is 'By default, the request-oriented HTTP client facade uses the ``http_socket`` library.'
 	]).
 

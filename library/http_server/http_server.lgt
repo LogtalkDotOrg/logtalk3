@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-06-26,
 		comment is 'Portable stream-based HTTP server orchestration predicates.',
 		remarks is [
 			'Binary streams' - 'All stream predicates expect binary input and output streams.',
@@ -49,7 +49,9 @@
 		comment is 'Writes exactly one normalized HTTP response term to a binary stream.',
 		argnames is ['Output', 'Response'],
 		exceptions is [
-			'``Response`` or ``Output`` are invalid for the delegated HTTP response generator' - error
+			'``Output`` is invalid for the delegated HTTP response generator' - domain_error(http_sink, stream('Output')),
+			'``Response`` is not a valid normalized HTTP response term' - domain_error(http_response, 'Response'),
+			'The response body file range is outside the file contents' - domain_error(http_body_file_range, file('File', 'Offset', 'Length'))
 		]
 	]).
 
@@ -74,7 +76,10 @@
 		comment is 'Repeatedly reads requests from a binary input stream, dispatches them to a handler object, and writes responses to a binary output stream until end-of-file, a ``101 Switching Protocols`` response, or connection-close semantics terminate the connection. HEAD requests suppress response body bytes on the wire while preserving the generated response headers.',
 		argnames is ['Input', 'Output', 'Handler'],
 		exceptions is [
-			'The binary streams or delegated request/response processing predicates raise a serving error' - error
+			'``Handler`` does not conform to the HTTP handler protocol' - domain_error(http_handler_protocol, 'Handler'),
+			'``Output`` is invalid for the delegated HTTP response generator' - domain_error(http_sink, stream('Output')),
+			'The generated response is not a valid normalized HTTP response term' - domain_error(http_response, 'Response'),
+			'The response body file range is outside the file contents' - domain_error(http_body_file_range, file('File', 'Offset', 'Length'))
 		]
 	]).
 
@@ -84,7 +89,12 @@
 		comment is 'Validates a normalized WebSocket opening-handshake request and builds a matching ``101 Switching Protocols`` response. The ``protocol(Protocol)`` option can be used to select a single offered subprotocol.',
 		argnames is ['Request', 'Response', 'Options'],
 		exceptions is [
-			'``Request`` is not a valid normalized WebSocket opening-handshake request or ``Options`` are invalid' - error
+			'``Options`` contains an invalid WebSocket acceptance option' - domain_error(http_server_websocket_option, 'Option'),
+			'``Options`` contains reserved WebSocket handshake headers' - domain_error(http_server_websocket_headers, 'Headers'),
+			'``Options`` contains reserved WebSocket handshake properties' - domain_error(http_server_websocket_properties, 'Properties'),
+			'``Request`` is not a valid normalized WebSocket opening-handshake request' - domain_error(http_server_websocket_request, 'Request'),
+			'``Options`` selects a subprotocol not offered by ``Request``' - domain_error(http_server_websocket_protocol, 'Protocol'),
+			'The generated WebSocket response is not a valid normalized HTTP response term' - domain_error(http_response, 'Response')
 		],
 		remarks is [
 			'Repeated options' - 'When the same WebSocket acceptance option is given multiple times, the first occurrence is used.'
@@ -97,7 +107,10 @@
 		comment is 'Reads one request from a binary input stream, dispatches it to a handler object, writes one response to a binary output stream, and returns ``accepted(Request, Response)`` when the exchange completed with a valid WebSocket opening-handshake response. Malformed requests and non-upgrade responses are written to the stream and reported as ``rejected(Response)``. Clean end-of-file before any bytes are read is reported as ``end_of_file``.',
 		argnames is ['Input', 'Output', 'Handler', 'Outcome'],
 		exceptions is [
-			'The binary streams or delegated WebSocket handshake processing predicates raise a serving error' - error
+			'``Handler`` does not conform to the HTTP handler protocol' - domain_error(http_handler_protocol, 'Handler'),
+			'``Output`` is invalid for the delegated HTTP response generator' - domain_error(http_sink, stream('Output')),
+			'The generated response is not a valid normalized HTTP response term' - domain_error(http_response, 'Response'),
+			'The response body file range is outside the file contents' - domain_error(http_body_file_range, file('File', 'Offset', 'Length'))
 		]
 	]).
 

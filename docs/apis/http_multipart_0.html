@@ -397,7 +397,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-14</div>
+<div class="line"><strong>Date:</strong> 2026-06-26</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -541,9 +541,21 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_multipart_media_type,MediaType)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> or <code class="docutils literal notranslate"><span class="pre">Options</span></code> are not valid for <code class="docutils literal notranslate"><span class="pre">http_core::parse_body/4</span></code>:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> is neither a variable nor a valid HTTP source term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_source,Source)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is not a valid HTTP body options list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_body_options,Options)</span></code></div>
+</div>
+<div class="line">No registered HTTP body codec exists for <code class="docutils literal notranslate"><span class="pre">MediaType</span></code> when codec-based decoding is required:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_body_codec,MediaType)</span></code></div>
 </div>
 <div class="line">The parsed body is not a valid normalized multipart body term:</div>
 <div class="line-block">
@@ -579,9 +591,21 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_multipart_body,Body)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Sink</span></code> or <code class="docutils literal notranslate"><span class="pre">Options</span></code> are not valid for <code class="docutils literal notranslate"><span class="pre">http_core::generate_body/3</span></code>:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Sink</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Sink</span></code> is neither a variable nor a valid HTTP sink term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sink,Sink)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is not a valid HTTP body options list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_body_options,Options)</span></code></div>
+</div>
+<div class="line">No registered HTTP body codec exists for the body media type when codec-based encoding is required:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_body_codec,MediaType)</span></code></div>
 </div>
 </div>
 </div>

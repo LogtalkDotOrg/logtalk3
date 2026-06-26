@@ -397,7 +397,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-02</div>
+<div class="line"><strong>Date:</strong> 2026-06-26</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -498,9 +498,17 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Response</span></code> or <code class="docutils literal notranslate"><span class="pre">Output</span></code> are invalid for the delegated HTTP response generator:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Output</span></code> is invalid for the delegated HTTP response generator:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sink,stream(Output))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Response</span></code> is not a valid normalized HTTP response term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response,Response)</span></code></div>
+</div>
+<div class="line">The response body file range is outside the file contents:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_body_file_range,file(File,Offset,Length))</span></code></div>
 </div>
 </div>
 </div>
@@ -573,9 +581,21 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">The binary streams or delegated request/response processing predicates raise a serving error:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> does not conform to the HTTP handler protocol:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_handler_protocol,Handler)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Output</span></code> is invalid for the delegated HTTP response generator:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sink,stream(Output))</span></code></div>
+</div>
+<div class="line">The generated response is not a valid normalized HTTP response term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response,Response)</span></code></div>
+</div>
+<div class="line">The response body file range is outside the file contents:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_body_file_range,file(File,Offset,Length))</span></code></div>
 </div>
 </div>
 </div>
@@ -603,9 +623,29 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Request</span></code> is not a valid normalized WebSocket opening-handshake request or <code class="docutils literal notranslate"><span class="pre">Options</span></code> are invalid:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains an invalid WebSocket acceptance option:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_server_websocket_option,Option)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains reserved WebSocket handshake headers:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_server_websocket_headers,Headers)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains reserved WebSocket handshake properties:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_server_websocket_properties,Properties)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Request</span></code> is not a valid normalized WebSocket opening-handshake request:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_server_websocket_request,Request)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> selects a subprotocol not offered by <code class="docutils literal notranslate"><span class="pre">Request</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_server_websocket_protocol,Protocol)</span></code></div>
+</div>
+<div class="line">The generated WebSocket response is not a valid normalized HTTP response term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response,Response)</span></code></div>
 </div>
 </div>
 </div>
@@ -641,9 +681,21 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">The binary streams or delegated WebSocket handshake processing predicates raise a serving error:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> does not conform to the HTTP handler protocol:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_handler_protocol,Handler)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Output</span></code> is invalid for the delegated HTTP response generator:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sink,stream(Output))</span></code></div>
+</div>
+<div class="line">The generated response is not a valid normalized HTTP response term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response,Response)</span></code></div>
+</div>
+<div class="line">The response body file range is outside the file contents:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_body_file_range,file(File,Offset,Length))</span></code></div>
 </div>
 </div>
 </div>

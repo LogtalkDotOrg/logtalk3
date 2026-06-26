@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-07,
+		date is 2026-06-26,
 		comment is 'Auxiliary object defining the supported read options and default values for HTTP WebSocket sessions.'
 	]).
 
@@ -58,7 +58,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-06-26,
 		comment is 'Auxiliary object defining the supported write options and default values for HTTP WebSocket sessions.'
 	]).
 
@@ -88,7 +88,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-11,
+		date is 2026-06-26,
 		comment is 'Stateful WebSocket session predicates that build on top of the message layer to surface interleaved control frames, apply role-aware masking policies, and track close-handshake state. The callback-driven session loops are provided by the http_websocket_service library.',
 		parameters is [
 			'Role' - 'Peer role for masking policy. Possible values are ``client`` and ``server``.',
@@ -119,7 +119,14 @@
 		comment is 'Reads the next session-level WebSocket message from a binary stream using the given input state. Fragmented text and binary messages are reassembled across calls, interleaved control frames are surfaced immediately, and close-message state transitions are tracked in the returned state.',
 		argnames is ['Stream', 'State', 'UpdatedState', 'Message'],
 		exceptions is [
-			'``Stream`` or ``State`` are invalid for the current session role, or the inbound frame/message sequence violates RFC 6455 session rules' - error
+			'``Stream`` is a variable' - instantiation_error,
+			'The session role parameter is neither ``client`` nor ``server``' - domain_error(http_websocket_session_role, '_Role_'),
+			'``State`` is not a valid WebSocket session state' - domain_error(http_websocket_session_state, 'State'),
+			'The inbound frame/message sequence violates RFC 6455 session rules' - domain_error(http_websocket_session_sequence, 'Frame'),
+			'The inbound frame violates the current peer masking policy' - domain_error(http_websocket_session_masking, 'Frame'),
+			'The inbound frame uses unsupported extensions' - domain_error(http_websocket_session_extensions, 'Frame'),
+			'The inbound frame is invalid' - domain_error(http_websocket_frame, 'Frame'),
+			'The inbound message text is invalid' - domain_error(http_websocket_message_text, 'Payload')
 		],
 		remarks is [
 			'End of file' - 'Returns ``end_of_file`` only when the input state is idle and the stream is already exhausted.',
@@ -134,7 +141,14 @@
 		comment is 'Reads the next session-level WebSocket message from a binary input stream using the given state and automatically orchestrates the close handshake on the given binary output stream when a close message is received.',
 		argnames is ['Input', 'Output', 'State', 'UpdatedState', 'Message'],
 		exceptions is [
-			'``Input``, ``Output``, or ``State`` are invalid for the current session role, or the inbound frame/message sequence violates RFC 6455 session rules' - error
+			'``Input`` is a variable' - instantiation_error,
+			'The session role parameter is neither ``client`` nor ``server``' - domain_error(http_websocket_session_role, '_Role_'),
+			'``State`` is not a valid WebSocket session state' - domain_error(http_websocket_session_state, 'State'),
+			'The inbound frame/message sequence violates RFC 6455 session rules' - domain_error(http_websocket_session_sequence, 'Frame'),
+			'The inbound frame violates the current peer masking policy' - domain_error(http_websocket_session_masking, 'Frame'),
+			'The inbound frame uses unsupported extensions' - domain_error(http_websocket_session_extensions, 'Frame'),
+			'The inbound frame is invalid' - domain_error(http_websocket_frame, 'Frame'),
+			'The inbound message text is invalid' - domain_error(http_websocket_message_text, 'Payload')
 		],
 		remarks is [
 			'Close handshake' - 'When a close message is received and no close message has yet been sent for the tracked session state, a matching close message is written automatically on the output stream and the returned state records the completed handshake.'
@@ -147,7 +161,17 @@
 		comment is 'Reads the next session-level WebSocket message from a binary input stream using the given state, automatically orchestrates the close handshake on the given binary output stream, and applies optional automatic control-message policies.',
 		argnames is ['Input', 'Output', 'State', 'UpdatedState', 'Message', 'Options'],
 		exceptions is [
-			'``Input``, ``Output``, ``State``, or ``Options`` are invalid for the current session role, or the inbound frame/message sequence violates RFC 6455 session rules' - error
+			'``Input`` is a variable' - instantiation_error,
+			'The session role parameter is neither ``client`` nor ``server``' - domain_error(http_websocket_session_role, '_Role_'),
+			'``State`` is not a valid WebSocket session state' - domain_error(http_websocket_session_state, 'State'),
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid read option' - domain_error(http_websocket_session_read_option, 'Option'),
+			'The inbound frame/message sequence violates RFC 6455 session rules' - domain_error(http_websocket_session_sequence, 'Frame'),
+			'The inbound frame violates the current peer masking policy' - domain_error(http_websocket_session_masking, 'Frame'),
+			'The inbound frame uses unsupported extensions' - domain_error(http_websocket_session_extensions, 'Frame'),
+			'The inbound payload length exceeds the configured limit' - domain_error(http_websocket_payload_length_limit, 'PayloadLength')
 		],
 		remarks is [
 			'Option ``auto_pong(on)``' - 'Automatically writes a pong message with the same payload when a ping message is read while still returning the ping message to the caller.',
@@ -162,7 +186,11 @@
 		comment is 'Stateless convenience wrapper that writes one validated WebSocket message using the masking policy implied by the session role. Client sessions mask all outgoing frames; server sessions leave them unmasked.',
 		argnames is ['Stream', 'Message'],
 		exceptions is [
-			'``Stream`` or ``Message`` are invalid for the current session role' - error
+			'``Stream`` is a variable' - instantiation_error,
+			'The session role parameter is neither ``client`` nor ``server``' - domain_error(http_websocket_session_role, '_Role_'),
+			'``Message`` is not a valid normalized WebSocket message term' - domain_error(http_websocket_message, 'Message'),
+			'``Message`` contains invalid text' - domain_error(http_websocket_message_text, 'Text'),
+			'The generated outbound frame is invalid' - domain_error(http_websocket_frame, 'Frame')
 		]
 	]).
 
@@ -172,7 +200,14 @@
 		comment is 'Stateless convenience wrapper that writes one validated WebSocket message using the masking policy implied by the session role and the given write options.',
 		argnames is ['Stream', 'Message', 'Options'],
 		exceptions is [
-			'``Stream``, ``Message``, or ``Options`` are invalid for the current session role' - error
+			'``Stream`` is a variable' - instantiation_error,
+			'The session role parameter is neither ``client`` nor ``server``' - domain_error(http_websocket_session_role, '_Role_'),
+			'``Message`` is not a valid normalized WebSocket message term' - domain_error(http_websocket_message, 'Message'),
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid write option' - domain_error(http_websocket_session_write_option, 'Option'),
+			'The generated outbound frame is invalid' - domain_error(http_websocket_frame, 'Frame')
 		],
 		remarks is [
 			'Option ``fragment_size(Size)``' - 'When writing ``text`` or ``binary`` messages, split the payload into frames of at most ``Size`` bytes. Control messages always remain single final frames.'
@@ -185,7 +220,11 @@
 		comment is 'Writes one validated WebSocket message using the masking policy implied by the session role and updates the given session state with any close-handshake transition caused by the write.',
 		argnames is ['Stream', 'State', 'UpdatedState', 'Message'],
 		exceptions is [
-			'``Stream``, ``State``, or ``Message`` are invalid for the current session role or close-handshake state' - error
+			'``Stream`` is a variable' - instantiation_error,
+			'The session role parameter is neither ``client`` nor ``server``' - domain_error(http_websocket_session_role, '_Role_'),
+			'``State`` is not a valid WebSocket session state' - domain_error(http_websocket_session_state, 'State'),
+			'``Message`` is not a valid normalized WebSocket message term' - domain_error(http_websocket_message, 'Message'),
+			'The write violates the current close-handshake state' - domain_error(http_websocket_session_state, 'State')
 		],
 		remarks is [
 			'Closing state' - 'After a peer close is recorded, only the matching close reply may be written. After a local close is recorded, further data messages are rejected.'
@@ -198,7 +237,15 @@
 		comment is 'Writes one validated WebSocket message using the masking policy implied by the session role and the given write options while updating the given session state with any close-handshake transition caused by the write.',
 		argnames is ['Stream', 'State', 'UpdatedState', 'Message', 'Options'],
 		exceptions is [
-			'``Stream``, ``State``, ``Message``, or ``Options`` are invalid for the current session role or close-handshake state' - error
+			'``Stream`` is a variable' - instantiation_error,
+			'The session role parameter is neither ``client`` nor ``server``' - domain_error(http_websocket_session_role, '_Role_'),
+			'``State`` is not a valid WebSocket session state' - domain_error(http_websocket_session_state, 'State'),
+			'``Message`` is not a valid normalized WebSocket message term' - domain_error(http_websocket_message, 'Message'),
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid write option' - domain_error(http_websocket_session_write_option, 'Option'),
+			'The write violates the current close-handshake state' - domain_error(http_websocket_session_state, 'State')
 		],
 		remarks is [
 			'Option ``fragment_size(Size)``' - 'When writing ``text`` or ``binary`` messages, split the payload into frames of at most ``Size`` bytes. Control messages always remain single final frames.'
@@ -222,7 +269,11 @@
 		comment is 'Protected helper that validates the session role and state and reads the next session-level message, returning the updated pending-fragment bookkeeping term and the message. Close-state transitions are left to the caller.',
 		argnames is ['Stream', 'State', 'MaxPayloadLength', 'Pending', 'Message'],
 		exceptions is [
-			'The session role or state is invalid, or the inbound frame/message sequence violates RFC 6455 session rules' - error
+			'The session role parameter is neither ``client`` nor ``server``' - domain_error(http_websocket_session_role, '_Role_'),
+			'``State`` is not a valid WebSocket session state' - domain_error(http_websocket_session_state, 'State'),
+			'The inbound frame/message sequence violates RFC 6455 session rules' - domain_error(http_websocket_session_sequence, 'Frame'),
+			'The inbound frame violates the current peer masking policy' - domain_error(http_websocket_session_masking, 'Frame'),
+			'The inbound frame uses unsupported extensions' - domain_error(http_websocket_session_extensions, 'Frame')
 		]
 	]).
 
@@ -232,7 +283,9 @@
 		comment is 'Protected helper that applies the close-state and automatic control-message transitions for a message read outside this object and returns the updated session state.',
 		argnames is ['Output', 'State', 'AutoPong', 'Pending', 'Message', 'UpdatedState'],
 		exceptions is [
-			'The session state, automatic-control options, or message are invalid for session-read post-processing' - error
+			'``State`` is not a valid WebSocket session state' - domain_error(http_websocket_session_state, 'State'),
+			'``AutoPong`` is not a supported automatic pong setting' - domain_error(http_websocket_session_read_option, auto_pong('AutoPong')),
+			'``Message`` is not a valid normalized WebSocket message term' - domain_error(http_websocket_message, 'Message')
 		]
 	]).
 
@@ -707,7 +760,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-11,
+		date is 2026-06-26,
 		comment is 'Stateful WebSocket session predicates for client-side use with atom text representation.'
 	]).
 
@@ -720,7 +773,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-11,
+		date is 2026-06-26,
 		comment is 'Stateful WebSocket session predicates for server-side use with atom text representation.'
 	]).
 

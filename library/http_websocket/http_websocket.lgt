@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-22,
+		date is 2026-06-26,
 		comment is 'High-level WebSocket predicates for opening and closing connections, exchanging messages, and running common client and server session loops.',
 		parnames is ['HTTPSocket']
 	]).
@@ -36,7 +36,9 @@
 		comment is 'Opens a client WebSocket connection to the given ``ws://`` or ``wss://`` URL and returns an opaque handle managed by this object.',
 		argnames is ['URL', 'WebSocket'],
 		exceptions is [
-			'Any exception that can be thrown by ``open/3`` using the default options' - error
+			'``URL`` is a variable' - instantiation_error,
+			'``URL`` is not a supported absolute WebSocket URL' - domain_error(http_client_websocket_url, 'URL'),
+			'``URL`` uses an unsupported WebSocket scheme' - domain_error(http_client_websocket_scheme, 'Scheme')
 		]
 	]).
 
@@ -46,7 +48,14 @@
 		comment is 'Opens a client WebSocket connection to the given URL, returning an opaque handle. Client handshake options are forwarded to ``http_client::open_websocket/4``. The direct API also accepts ``auto_pong(on|off)`` and ``max_payload_length(Bytes|none)`` options.',
 		argnames is ['URL', 'WebSocket', 'Options'],
 		exceptions is [
-			'``URL`` or ``Options`` are invalid for WebSocket opening, or the delegated opening handshake raises an exception' - error
+			'``URL`` is a variable' - instantiation_error,
+			'``URL`` is not a supported absolute WebSocket URL' - domain_error(http_client_websocket_url, 'URL'),
+			'``URL`` uses an unsupported WebSocket scheme' - domain_error(http_client_websocket_scheme, 'Scheme'),
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'``Options`` contains an invalid direct WebSocket option' - domain_error(http_websocket_option, 'Option'),
+			'``Options`` contains an invalid WebSocket client option' - domain_error(http_client_websocket_option, 'Option'),
+			'The WebSocket server response is not a valid opening handshake response' - domain_error(http_client_websocket_response, 'Response')
 		]
 	]).
 
@@ -56,7 +65,8 @@
 		comment is 'Accepts one incoming WebSocket connection on the given listener using the default opening-handshake policy and returns an opaque server-side handle together with the accepted client information.',
 		argnames is ['Listener', 'WebSocket', 'ClientInfo'],
 		exceptions is [
-			'Any exception that can be thrown by ``accept/4`` using the default options' - error
+			'The WebSocket opening request does not exist' - existence_error(http_socket_websocket_request, 'Request'),
+			'The WebSocket opening response is invalid' - domain_error(http_socket_websocket_response, 'Response')
 		]
 	]).
 
@@ -67,7 +77,11 @@
 		comment is 'Accepts one incoming WebSocket connection on the given listener and returns an opaque server-side handle. Server opening-handshake options are forwarded to ``http_server::accept_websocket/3``. The direct API also accepts ``auto_pong(on|off)`` and ``max_payload_length(Bytes|none)`` options.',
 		argnames is ['Listener', 'WebSocket', 'ClientInfo', 'Options'],
 		exceptions is [
-			'``Listener`` or ``Options`` are invalid for WebSocket acceptance, or the delegated server handshake raises an exception' - error
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'``Options`` contains an invalid direct WebSocket option' - domain_error(http_websocket_option, 'Option'),
+			'The WebSocket opening request does not exist' - existence_error(http_socket_websocket_request, 'Request'),
+			'The WebSocket opening response is invalid' - domain_error(http_socket_websocket_response, 'Response')
 		]
 	]).
 
@@ -77,7 +91,10 @@
 		comment is 'Writes one outbound WebSocket message using the opaque handle. Accepts normalized ``message(Type, Payload)`` terms and the convenience wrappers ``text(Text)``, ``binary(Bytes)``, ``ping(Bytes)``, ``pong(Bytes)``, ``close(Payload)``, ``json(JSON)``, and ``term(Term)``.',
 		argnames is ['WebSocket', 'Message'],
 		exceptions is [
-			'``WebSocket`` is not an open opaque WebSocket handle or ``Message`` is not a valid outbound WebSocket message' - error
+			'``WebSocket`` is a variable' - instantiation_error,
+			'``WebSocket`` is not an open opaque WebSocket handle' - domain_error(http_websocket_handle, 'WebSocket'),
+			'``WebSocket`` refers to a closed opaque WebSocket handle' - existence_error(http_websocket_handle, 'WebSocket'),
+			'``Message`` is not a valid outbound WebSocket message' - domain_error(http_websocket_message, 'Message')
 		]
 	]).
 
@@ -87,7 +104,12 @@
 		comment is 'Writes one outbound WebSocket message using the opaque handle and the given write options, forwarding those options to the underlying session ``write_message/5`` predicate.',
 		argnames is ['WebSocket', 'Message', 'Options'],
 		exceptions is [
-			'``WebSocket``, ``Message``, or ``Options`` are invalid for outbound WebSocket writes' - error
+			'``WebSocket`` is a variable' - instantiation_error,
+			'``WebSocket`` is not an open opaque WebSocket handle' - domain_error(http_websocket_handle, 'WebSocket'),
+			'``Message`` is not a valid outbound WebSocket message' - domain_error(http_websocket_message, 'Message'),
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'``Options`` contains an invalid write option' - domain_error(http_websocket_session_write_option, 'Option')
 		]
 	]).
 
@@ -97,7 +119,10 @@
 		comment is 'Reads the next normalized WebSocket message using the opaque handle. Returns ``end_of_file`` when the peer closes the transport before another message is available.',
 		argnames is ['WebSocket', 'Message'],
 		exceptions is [
-			'``WebSocket`` is not an open opaque WebSocket handle or the delegated session read raises an exception' - error
+			'``WebSocket`` is a variable' - instantiation_error,
+			'``WebSocket`` is not an open opaque WebSocket handle' - domain_error(http_websocket_handle, 'WebSocket'),
+			'``WebSocket`` refers to a closed opaque WebSocket handle' - existence_error(http_websocket_handle, 'WebSocket'),
+			'The inbound WebSocket session sequence is invalid' - domain_error(http_websocket_session_sequence, 'Frame')
 		]
 	]).
 
@@ -107,7 +132,12 @@
 		comment is 'Reads the next normalized WebSocket message using the opaque handle and the given read options. The direct API accepts per-call ``auto_pong(on|off)`` and ``max_payload_length(Bytes|none)`` overrides.',
 		argnames is ['WebSocket', 'Message', 'Options'],
 		exceptions is [
-			'``WebSocket`` or ``Options`` are invalid for inbound WebSocket reads, or the delegated session read raises an exception' - error
+			'``WebSocket`` is a variable' - instantiation_error,
+			'``WebSocket`` is not an open opaque WebSocket handle' - domain_error(http_websocket_handle, 'WebSocket'),
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'``Options`` contains an invalid direct WebSocket option' - domain_error(http_websocket_option, 'Option'),
+			'The inbound WebSocket session sequence is invalid' - domain_error(http_websocket_session_sequence, 'Frame')
 		]
 	]).
 
@@ -117,7 +147,9 @@
 		comment is 'Best-effort graceful close of the WebSocket handle using the normal close payload ``empty``.',
 		argnames is ['WebSocket'],
 		exceptions is [
-			'``WebSocket`` is not an open opaque WebSocket handle' - error
+			'``WebSocket`` is a variable' - instantiation_error,
+			'``WebSocket`` is not an open opaque WebSocket handle' - domain_error(http_websocket_handle, 'WebSocket'),
+			'``WebSocket`` refers to a closed opaque WebSocket handle' - existence_error(http_websocket_handle, 'WebSocket')
 		]
 	]).
 
@@ -127,7 +159,9 @@
 		comment is 'Best-effort graceful close of the WebSocket handle using the given close payload, which must be valid for a normalized ``message(close, Payload)`` term.',
 		argnames is ['WebSocket', 'Payload'],
 		exceptions is [
-			'``WebSocket`` is not an open opaque WebSocket handle or ``Payload`` is not a valid close payload' - error
+			'``WebSocket`` is a variable' - instantiation_error,
+			'``WebSocket`` is not an open opaque WebSocket handle' - domain_error(http_websocket_handle, 'WebSocket'),
+			'``Payload`` is not a valid close payload' - domain_error(http_websocket_close_payload, 'Payload')
 		]
 	]).
 
@@ -145,7 +179,8 @@
 		comment is 'Convenience wrapper for sending one text message.',
 		argnames is ['WebSocket', 'Text'],
 		exceptions is [
-			'``WebSocket`` is not an open opaque WebSocket handle or ``Text`` is not a valid text payload' - error
+			'``WebSocket`` is not an open opaque WebSocket handle' - domain_error(http_websocket_handle, 'WebSocket'),
+			'``Text`` is not a valid text payload' - domain_error(http_websocket_message_text, 'Text')
 		]
 	]).
 
@@ -155,7 +190,8 @@
 		comment is 'Reads the next message and returns its text payload when the message type is ``text``. Returns ``end_of_file`` unchanged.',
 		argnames is ['WebSocket', 'Text'],
 		exceptions is [
-			'``WebSocket`` is not an open opaque WebSocket handle or the received message is not a text message' - error
+			'``WebSocket`` is not an open opaque WebSocket handle' - domain_error(http_websocket_handle, 'WebSocket'),
+			'The received message is not a text message' - domain_error(http_websocket_text_message, 'Message')
 		]
 	]).
 
@@ -165,7 +201,8 @@
 		comment is 'Convenience wrapper for sending one binary message.',
 		argnames is ['WebSocket', 'Bytes'],
 		exceptions is [
-			'``WebSocket`` is not an open opaque WebSocket handle or ``Bytes`` is not a valid binary payload' - error
+			'``WebSocket`` is not an open opaque WebSocket handle' - domain_error(http_websocket_handle, 'WebSocket'),
+			'``Bytes`` is not a valid binary payload' - domain_error(http_websocket_message, 'Message')
 		]
 	]).
 
@@ -175,7 +212,8 @@
 		comment is 'Reads the next message and returns its binary payload when the message type is ``binary``. Returns ``end_of_file`` unchanged.',
 		argnames is ['WebSocket', 'Bytes'],
 		exceptions is [
-			'``WebSocket`` is not an open opaque WebSocket handle or the received message is not a binary message' - error
+			'``WebSocket`` is not an open opaque WebSocket handle' - domain_error(http_websocket_handle, 'WebSocket'),
+			'The received message is not a binary message' - domain_error(http_websocket_binary_message, 'Message')
 		]
 	]).
 
@@ -185,7 +223,8 @@
 		comment is 'Serializes a JSON term as UTF-8 text and sends it as one text message. Uses curly terms for parsed JSON objects, dashes for parsed JSON pairs, and atoms for parsed JSON strings.',
 		argnames is ['WebSocket', 'JSON'],
 		exceptions is [
-			'``WebSocket`` is not an open opaque WebSocket handle or ``JSON`` cannot be serialized as a text WebSocket message' - error
+			'``WebSocket`` is not an open opaque WebSocket handle' - domain_error(http_websocket_handle, 'WebSocket'),
+			'``JSON`` cannot be serialized as a text WebSocket message' - domain_error(json_sink, 'JSON')
 		]
 	]).
 
@@ -195,7 +234,8 @@
 		comment is 'Reads the next text message and decodes its payload as JSON. Returns ``end_of_file`` unchanged. Uses curly terms for parsed JSON objects, dashes for parsed JSON pairs, and atoms for parsed JSON strings.',
 		argnames is ['WebSocket', 'JSON'],
 		exceptions is [
-			'``WebSocket`` is not an open opaque WebSocket handle or the received text payload is not valid JSON' - error
+			'``WebSocket`` is not an open opaque WebSocket handle' - domain_error(http_websocket_handle, 'WebSocket'),
+			'The received text payload is not valid JSON' - domain_error(http_websocket_json_text, 'Text')
 		]
 	]).
 
@@ -205,7 +245,8 @@
 		comment is 'Serializes a Prolog term using canonical write options and sends it as one text message.',
 		argnames is ['WebSocket', 'Term'],
 		exceptions is [
-			'``WebSocket`` is not an open opaque WebSocket handle or ``Term`` cannot be serialized as a text WebSocket message' - error
+			'``WebSocket`` is not an open opaque WebSocket handle' - domain_error(http_websocket_handle, 'WebSocket'),
+			'``Term`` cannot be serialized as a text WebSocket message' - domain_error(http_websocket_term_text, 'Text')
 		]
 	]).
 
@@ -215,7 +256,8 @@
 		comment is 'Reads the next text message and parses its payload as one Prolog term. Returns ``end_of_file`` unchanged.',
 		argnames is ['WebSocket', 'Term'],
 		exceptions is [
-			'``WebSocket`` is not an open opaque WebSocket handle or the received text payload is not a canonical Prolog term' - error
+			'``WebSocket`` is not an open opaque WebSocket handle' - domain_error(http_websocket_handle, 'WebSocket'),
+			'The received text payload is not a canonical Prolog term' - domain_error(http_websocket_term_text, 'Text')
 		]
 	]).
 
@@ -226,7 +268,8 @@
 		comment is 'Convenience wrapper over ``http_websocket_client_service::open/4`` that keeps the user in the high-level ``http_websocket`` surface for callback-driven client sessions.',
 		argnames is ['URL', 'Handler', 'Response', 'State'],
 		exceptions is [
-			'Any exception that can be thrown by ``http_websocket_client_service::open/4``' - error
+			'``URL`` is not a supported absolute WebSocket URL' - domain_error(http_client_websocket_url, 'URL'),
+			'``Handler`` is not a valid WebSocket service handler' - domain_error(http_websocket_service_handler, 'Handler')
 		]
 	]).
 
@@ -237,7 +280,10 @@
 		comment is 'Convenience wrapper over ``http_websocket_client_service::open/5``.',
 		argnames is ['URL', 'Handler', 'Response', 'State', 'Options'],
 		exceptions is [
-			'Any exception that can be thrown by ``http_websocket_client_service::open/5``' - error
+			'``URL`` is not a supported absolute WebSocket URL' - domain_error(http_client_websocket_url, 'URL'),
+			'``Handler`` is not a valid WebSocket service handler' - domain_error(http_websocket_service_handler, 'Handler'),
+			'``Options`` contains an invalid WebSocket client service option' - domain_error(http_websocket_client_service_option, 'Option'),
+			'``Options`` contains an invalid WebSocket service loop option' - domain_error(http_websocket_service_option, 'Option')
 		]
 	]).
 
@@ -247,7 +293,9 @@
 		comment is 'Convenience wrapper that accepts one incoming WebSocket connection on the given listener, performs the opening handshake using the default server policy, and runs one callback-driven server session.',
 		argnames is ['Listener', 'Handler', 'Response', 'State', 'ClientInfo'],
 		exceptions is [
-			'Any exception that can be thrown by ``serve_once/6`` using the default options' - error
+			'``Handler`` is not a valid WebSocket service handler' - domain_error(http_websocket_service_handler, 'Handler'),
+			'The WebSocket opening request does not exist' - existence_error(http_socket_websocket_request, 'Request'),
+			'The WebSocket opening response is invalid' - domain_error(http_socket_websocket_response, 'Response')
 		]
 	]).
 
@@ -257,7 +305,10 @@
 		comment is 'Convenience wrapper that accepts one incoming WebSocket connection on the given listener and runs one callback-driven server session using the given combined handshake and session options.',
 		argnames is ['Listener', 'Handler', 'Response', 'State', 'ClientInfo', 'Options'],
 		exceptions is [
-			'``Listener`` or ``Options`` are invalid for WebSocket server-session startup, or the delegated handshake/session loop raises an exception' - error
+			'``Handler`` is not a valid WebSocket service handler' - domain_error(http_websocket_service_handler, 'Handler'),
+			'``Options`` contains an invalid WebSocket service loop option' - domain_error(http_websocket_service_option, 'Option'),
+			'The WebSocket opening request does not exist' - existence_error(http_socket_websocket_request, 'Request'),
+			'The WebSocket opening response is invalid' - domain_error(http_socket_websocket_response, 'Response')
 		]
 	]).
 
@@ -709,7 +760,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-22,
+		date is 2026-06-26,
 		comment is 'Internal opening-handshake adapter used by the high-level http_websocket server predicates.',
 		parnames is ['Options']
 	]).
@@ -726,7 +777,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-22,
+		date is 2026-06-26,
 		comment is 'By default, the high-level WebSocket predicates use the ``http_socket`` library.'
 	]).
 

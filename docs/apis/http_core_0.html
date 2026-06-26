@@ -410,7 +410,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-18</div>
+<div class="line"><strong>Date:</strong> 2026-06-26</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -531,9 +531,13 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_properties,Properties)</span></code></div>
 </div>
-<div class="line">The request headers, body, or properties violate normalized HTTP request semantics:</div>
+<div class="line">The request headers violate normalized HTTP request semantics:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_header_semantics,Header)</span></code></div>
+</div>
+<div class="line">The request properties violate normalized HTTP request semantics:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_property_semantics,Property)</span></code></div>
 </div>
 </div>
 </div>
@@ -581,9 +585,13 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_properties,Properties)</span></code></div>
 </div>
-<div class="line">The response headers, body, or properties violate normalized HTTP response semantics:</div>
+<div class="line">The response headers violate normalized HTTP response semantics:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_header_semantics,Header)</span></code></div>
+</div>
+<div class="line">The response properties violate normalized HTTP response semantics:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_property_semantics,Property)</span></code></div>
 </div>
 </div>
 </div>
@@ -661,9 +669,37 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_source,Source)</span></code></div>
 </div>
-<div class="line">The parsed request violates normalized HTTP request validation or semantics:</div>
+<div class="line">The parsed request method is not a valid HTTP method atom:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_method,Method)</span></code></div>
+</div>
+<div class="line">The parsed request target is not a valid normalized HTTP target term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_target,Target)</span></code></div>
+</div>
+<div class="line">The parsed request version is not a valid HTTP version term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_version,Version)</span></code></div>
+</div>
+<div class="line">The parsed request headers are not a valid normalized HTTP header list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_headers,Headers)</span></code></div>
+</div>
+<div class="line">The parsed request body is not a valid normalized HTTP body term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_body,Body)</span></code></div>
+</div>
+<div class="line">The parsed request properties are not a valid normalized HTTP property list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_properties,Properties)</span></code></div>
+</div>
+<div class="line">The parsed request headers violate normalized HTTP request semantics:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_header_semantics,Header)</span></code></div>
+</div>
+<div class="line">The parsed request properties violate normalized HTTP request semantics:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_property_semantics,Property)</span></code></div>
 </div>
 </div>
 </div>
@@ -701,7 +737,7 @@
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Request</span></code> is not a valid normalized HTTP request term:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_request,Request)</span></code></div>
 </div>
 </div>
 </div>
@@ -737,9 +773,33 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_source,Source)</span></code></div>
 </div>
-<div class="line">The parsed response violates normalized HTTP response validation or semantics:</div>
+<div class="line">The parsed response version is not a valid HTTP version term:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_version,Version)</span></code></div>
+</div>
+<div class="line">The parsed response status is not a valid normalized HTTP status term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_status,Status)</span></code></div>
+</div>
+<div class="line">The parsed response headers are not a valid normalized HTTP header list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_headers,Headers)</span></code></div>
+</div>
+<div class="line">The parsed response body is not a valid normalized HTTP body term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_body,Body)</span></code></div>
+</div>
+<div class="line">The parsed response properties are not a valid normalized HTTP property list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_properties,Properties)</span></code></div>
+</div>
+<div class="line">The parsed response headers violate normalized HTTP response semantics:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_header_semantics,Header)</span></code></div>
+</div>
+<div class="line">The parsed response properties violate normalized HTTP response semantics:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_property_semantics,Property)</span></code></div>
 </div>
 </div>
 </div>
@@ -777,7 +837,7 @@
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Response</span></code> is not a valid normalized HTTP response term:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response,Response)</span></code></div>
 </div>
 </div>
 </div>
@@ -815,7 +875,7 @@
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Response</span></code> is not a valid normalized HTTP response term:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response,Response)</span></code></div>
 </div>
 </div>
 </div>

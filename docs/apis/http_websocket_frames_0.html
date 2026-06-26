@@ -397,7 +397,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-11</div>
+<div class="line"><strong>Date:</strong> 2026-06-26</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -475,9 +475,45 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Final</span></code>, <code class="docutils literal notranslate"><span class="pre">Opcode</span></code>, <code class="docutils literal notranslate"><span class="pre">Payload</span></code>, or <code class="docutils literal notranslate"><span class="pre">Properties</span></code> do not define a valid normalized WebSocket frame term:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Final</span></code> is not a valid WebSocket final flag:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_final,Final)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Opcode</span></code> is not a valid WebSocket opcode:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_opcode,Opcode)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Payload</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Payload</span></code> is not a valid WebSocket payload byte list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_payload,Payload)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Properties</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Properties</span></code> is not a valid WebSocket frame property list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_properties,Properties)</span></code></div>
+</div>
+<div class="line">A frame property is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_property,Property)</span></code></div>
+</div>
+<div class="line">A masking key is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_masking_key,Key)</span></code></div>
+</div>
+<div class="line">Reserved bits are invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_reserved_bits,Bits)</span></code></div>
+</div>
+<div class="line">The frame violates WebSocket frame semantics:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_frame,Frame)</span></code></div>
 </div>
 </div>
 </div>
@@ -545,9 +581,21 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_source,Source)</span></code></div>
 </div>
+<div class="line">The source bytes are not a valid WebSocket byte sequence:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_byte_sequence,Bytes)</span></code></div>
+</div>
+<div class="line">The source bytes contain an invalid WebSocket opcode:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_opcode,Opcode)</span></code></div>
+</div>
+<div class="line">The source bytes contain an invalid WebSocket frame length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_frame_length,PayloadLength)</span></code></div>
+</div>
 <div class="line">The source bytes do not encode a valid normalized WebSocket frame:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_frame,Frame)</span></code></div>
 </div>
 </div>
 </div>
@@ -575,9 +623,17 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Sink</span></code> is invalid or <code class="docutils literal notranslate"><span class="pre">Frame</span></code> is not a valid normalized WebSocket frame term:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Sink</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Sink</span></code> is neither a variable nor a valid WebSocket frame sink term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_sink,Sink)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is not a valid normalized WebSocket frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_frame,Frame)</span></code></div>
 </div>
 </div>
 </div>
@@ -605,9 +661,21 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Any exception that can be thrown by <code class="docutils literal notranslate"><span class="pre">read_frame/3</span></code> using the default options:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">The inbound bytes are not a valid WebSocket byte sequence:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_byte_sequence,Bytes)</span></code></div>
+</div>
+<div class="line">The inbound payload length exceeds the configured limit:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_payload_length_limit,PayloadLength)</span></code></div>
+</div>
+<div class="line">The inbound bytes do not encode a valid normalized WebSocket frame:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_frame,Frame)</span></code></div>
 </div>
 </div>
 </div>
@@ -635,9 +703,37 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is a variable, <code class="docutils literal notranslate"><span class="pre">Options</span></code> are invalid, the payload length exceeds the configured limit, or the stream bytes do not encode a valid frame:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line">The inbound payload length exceeds the configured limit:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_payload_length_limit,PayloadLength)</span></code></div>
+</div>
+<div class="line">The inbound bytes are not a valid WebSocket byte sequence:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_byte_sequence,Bytes)</span></code></div>
+</div>
+<div class="line">The inbound bytes do not encode a valid normalized WebSocket frame:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_frame,Frame)</span></code></div>
 </div>
 </div>
 </div>
@@ -674,9 +770,13 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is a variable or <code class="docutils literal notranslate"><span class="pre">Frame</span></code> is not a valid normalized WebSocket frame term:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Stream</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is not a valid normalized WebSocket frame term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_frame,Frame)</span></code></div>
 </div>
 </div>
 </div>
@@ -706,7 +806,7 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is not a valid normalized WebSocket frame term:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_frame,Frame)</span></code></div>
 </div>
 </div>
 </div>
@@ -736,7 +836,7 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is not a valid normalized WebSocket frame term:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_frame,Frame)</span></code></div>
 </div>
 </div>
 </div>
@@ -766,7 +866,7 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is not a valid normalized WebSocket frame term:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_frame,Frame)</span></code></div>
 </div>
 </div>
 </div>
@@ -796,7 +896,7 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is not a valid normalized WebSocket frame term:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_frame,Frame)</span></code></div>
 </div>
 </div>
 </div>
@@ -826,7 +926,7 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is not a valid normalized WebSocket frame term:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_frame,Frame)</span></code></div>
 </div>
 </div>
 </div>

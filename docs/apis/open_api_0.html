@@ -398,7 +398,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:1</div>
-<div class="line"><strong>Date:</strong> 2026-06-15</div>
+<div class="line"><strong>Date:</strong> 2026-06-26</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -625,9 +625,13 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Provider</span></code> does not expose the requested <code class="docutils literal notranslate"><span class="pre">operationId</span></code> or provider hooks violate OpenAPI descriptor expectations:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Provider</span></code> does not expose the requested <code class="docutils literal notranslate"><span class="pre">operationId</span></code>:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(open_api_operation,OperationId)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Provider</span></code> exposes duplicated <code class="docutils literal notranslate"><span class="pre">operationId</span></code> values:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(open_api_operation_id,duplicate(Id))</span></code></div>
 </div>
 </div>
 </div>

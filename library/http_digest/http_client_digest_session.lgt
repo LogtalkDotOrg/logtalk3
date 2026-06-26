@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-22,
+		date is 2026-06-26,
 		comment is 'Stateful HTTP Digest client sessions that add cookie persistence and one-round-trip Digest challenge retry on top of the normalized HTTP client and socket libraries.',
 		parnames is ['HTTPSocket'],
 		remarks is [
@@ -48,7 +48,14 @@
 		comment is 'Opens a new Digest client session using the given credentials plus cookie-jar, request-default, and default Digest authorization options.',
 		argnames is ['Session', 'Username', 'Password', 'Options'],
 		exceptions is [
-			'``Options`` contain invalid Digest session defaults or cookie-jar options' - error
+			'``Username`` or ``Password`` is neither a variable nor text' - type_error(text, 'Text'),
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
+			'``Options`` contains an invalid Digest client session option' - domain_error(http_client_digest_session_option, 'Option'),
+			'``Options`` contains an invalid Digest client session option combination' - domain_error(http_client_digest_session_options, 'Options'),
+			'``Options`` contains invalid persisted cookie data' - domain_error(http_cookie_jar_persisted_cookies, 'PersistedCookies')
 		]
 	]).
 
@@ -58,7 +65,9 @@
 		comment is 'Closes a Digest client session and, when applicable, the owned cookie jar created for it.',
 		argnames is ['Session'],
 		exceptions is [
-			'``Session`` is not an open Digest client session handle' - error
+			'``Session`` is a variable' - instantiation_error,
+			'``Session`` is neither a variable nor an open Digest client session handle' - domain_error(http_client_digest_session, 'Session'),
+			'``Session`` refers to a closed Digest client session handle' - existence_error(http_client_digest_session, http_client_digest_session('SessionId'))
 		]
 	]).
 
@@ -68,7 +77,9 @@
 		comment is 'Returns the configured cookie jar handle or the atom ``none`` when the session does not persist cookies.',
 		argnames is ['Session', 'Jar'],
 		exceptions is [
-			'``Session`` is not an open Digest client session handle' - error
+			'``Session`` is a variable' - instantiation_error,
+			'``Session`` is neither a variable nor an open Digest client session handle' - domain_error(http_client_digest_session, 'Session'),
+			'``Session`` refers to a closed Digest client session handle' - existence_error(http_client_digest_session, http_client_digest_session('SessionId'))
 		]
 	]).
 
@@ -78,8 +89,19 @@
 		comment is 'Performs one HTTP request using session defaults, cookie replay/storage, and automatic retry when the server replies with a Digest challenge.',
 		argnames is ['Session', 'Method', 'URL', 'Response', 'Options'],
 		exceptions is [
-			'``Session`` is not an open Digest client session handle' - error,
-			'``Options`` contain invalid Digest request options or the delegated client/authentication processing raises an exception' - error
+			'``Session`` is a variable' - instantiation_error,
+			'``Session`` is neither a variable nor an open Digest client session handle' - domain_error(http_client_digest_session, 'Session'),
+			'``Session`` refers to a closed Digest client session handle' - existence_error(http_client_digest_session, http_client_digest_session('SessionId')),
+			'``URL`` is a variable' - instantiation_error,
+			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
+			'``URL`` uses an unsupported HTTP scheme' - domain_error(http_client_scheme, 'Scheme'),
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` contains invalid Digest client session request options' - domain_error(http_client_digest_session_request_options, 'Options'),
+			'``Options`` contains an invalid Digest client session request option' - domain_error(http_client_digest_session_request_option, 'Option'),
+			'``Options`` contains invalid form-data headers' - domain_error(http_client_form_data_headers, 'Headers'),
+			'``Options`` contains invalid form-data properties' - domain_error(http_client_form_data_properties, 'Properties'),
+			'The Digest challenge contains an unsupported algorithm' - domain_error(http_digest_algorithm, 'Algorithm'),
+			'The Digest challenge contains an unsupported qop value' - domain_error(http_digest_qop, 'Qop')
 		]
 	]).
 
@@ -89,7 +111,9 @@
 		comment is 'Convenience wrapper over ``request/5`` using the ``get`` method.',
 		argnames is ['Session', 'URL', 'Response', 'Options'],
 		exceptions is [
-			'Any exception that can be thrown by ``request/5`` for the given session, URL, and options' - error
+			'``Session`` is not an open Digest client session handle' - domain_error(http_client_digest_session, 'Session'),
+			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
+			'``Options`` contains invalid Digest client session request options' - domain_error(http_client_digest_session_request_options, 'Options')
 		]
 	]).
 
@@ -99,7 +123,9 @@
 		comment is 'Convenience wrapper over ``request/5`` using the ``head`` method.',
 		argnames is ['Session', 'URL', 'Response', 'Options'],
 		exceptions is [
-			'Any exception that can be thrown by ``request/5`` for the given session, URL, and options' - error
+			'``Session`` is not an open Digest client session handle' - domain_error(http_client_digest_session, 'Session'),
+			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
+			'``Options`` contains invalid Digest client session request options' - domain_error(http_client_digest_session_request_options, 'Options')
 		]
 	]).
 
@@ -109,7 +135,9 @@
 		comment is 'Convenience wrapper over ``request/5`` using the ``delete`` method.',
 		argnames is ['Session', 'URL', 'Response', 'Options'],
 		exceptions is [
-			'Any exception that can be thrown by ``request/5`` for the given session, URL, and options' - error
+			'``Session`` is not an open Digest client session handle' - domain_error(http_client_digest_session, 'Session'),
+			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
+			'``Options`` contains invalid Digest client session request options' - domain_error(http_client_digest_session_request_options, 'Options')
 		]
 	]).
 
@@ -119,7 +147,10 @@
 		comment is 'Convenience wrapper over ``request/5`` using the ``post`` method and the given body.',
 		argnames is ['Session', 'URL', 'Body', 'Response', 'Options'],
 		exceptions is [
-			'Any exception that can be thrown by ``request/5`` when the given body is merged into the request options' - error
+			'``Session`` is not an open Digest client session handle' - domain_error(http_client_digest_session, 'Session'),
+			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
+			'``Body`` is invalid for the generated normalized HTTP request' - domain_error(http_body, 'Body'),
+			'``Options`` contains invalid Digest client session request options' - domain_error(http_client_digest_session_request_options, 'Options')
 		]
 	]).
 
@@ -129,7 +160,10 @@
 		comment is 'Convenience wrapper over ``request/5`` using the ``put`` method and the given body.',
 		argnames is ['Session', 'URL', 'Body', 'Response', 'Options'],
 		exceptions is [
-			'Any exception that can be thrown by ``request/5`` when the given body is merged into the request options' - error
+			'``Session`` is not an open Digest client session handle' - domain_error(http_client_digest_session, 'Session'),
+			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
+			'``Body`` is invalid for the generated normalized HTTP request' - domain_error(http_body, 'Body'),
+			'``Options`` contains invalid Digest client session request options' - domain_error(http_client_digest_session_request_options, 'Options')
 		]
 	]).
 
@@ -139,7 +173,10 @@
 		comment is 'Convenience wrapper over ``request/5`` using the ``patch`` method and the given body.',
 		argnames is ['Session', 'URL', 'Body', 'Response', 'Options'],
 		exceptions is [
-			'Any exception that can be thrown by ``request/5`` when the given body is merged into the request options' - error
+			'``Session`` is not an open Digest client session handle' - domain_error(http_client_digest_session, 'Session'),
+			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
+			'``Body`` is invalid for the generated normalized HTTP request' - domain_error(http_body, 'Body'),
+			'``Options`` contains invalid Digest client session request options' - domain_error(http_client_digest_session_request_options, 'Options')
 		]
 	]).
 
@@ -719,7 +756,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-22,
+		date is 2026-06-26,
 		comment is 'By deafult, Stateful HTTP Digest client sessions use the ``http_socket`` library.'
 	]).
 

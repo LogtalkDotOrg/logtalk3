@@ -106,6 +106,7 @@ directory in the ``NOTES.md`` file.
    gradient_boosting_regression
    grammars
    graphs
+   gravatar
    gsp_pattern_miner
    hashes
    hdbscan_clusterer

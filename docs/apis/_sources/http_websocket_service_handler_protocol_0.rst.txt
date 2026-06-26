@@ -15,7 +15,7 @@ Protocol for callback objects used by the callback-driven WebSocket service loop
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-11
+| **Date:** 2026-06-26
 
 | **Compilation flags:**
 |    ``static``
@@ -55,8 +55,16 @@ Processes a received normalized WebSocket message and returns a list of zero or 
 |    ``handle(+compound,-list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
-|    The implementing handler may throw message-specific or reply-construction exceptions:
-|        ``error``
+|    ``Message`` is not a valid normalized WebSocket message term:
+|        ``domain_error(http_websocket_message,Message)``
+|    ``Replies`` is a variable:
+|        ``instantiation_error``
+|    ``Replies`` is neither a variable nor a list:
+|        ``type_error(list,Replies)``
+|    An element ``Reply`` of the list ``Replies`` is not a valid reply message:
+|        ``domain_error(http_websocket_service_handler_reply,Reply)``
+|    An element ``Reply`` of the list ``Replies`` is not a valid registry-backed action:
+|        ``domain_error(http_websocket_service_handler_action,Reply)``
 
 
 ------------

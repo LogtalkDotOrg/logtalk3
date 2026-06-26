@@ -410,7 +410,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-05-23</div>
+<div class="line"><strong>Date:</strong> 2026-06-26</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -495,9 +495,21 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">The implementing codec may throw media-type-specific validation or encoding exceptions:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">MediaType</span></code> is not a valid HTTP media type atom:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_media_type,MediaType)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Payload</span></code> is not valid for <code class="docutils literal notranslate"><span class="pre">MediaType</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_body_payload,Payload)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is not a valid HTTP body options list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_body_options,Options)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Body</span></code> is not a valid normalized HTTP body term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_body,Body)</span></code></div>
 </div>
 </div>
 </div>
@@ -525,9 +537,21 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">The implementing codec may throw media-type-specific validation or decoding exceptions:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">MediaType</span></code> is not a valid HTTP media type atom:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_media_type,MediaType)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Body</span></code> is not a valid normalized HTTP body term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_body,Body)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is not a valid HTTP body options list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_body_options,Options)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Payload</span></code> cannot be decoded from <code class="docutils literal notranslate"><span class="pre">Body</span></code> for <code class="docutils literal notranslate"><span class="pre">MediaType</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_body_payload,Payload)</span></code></div>
 </div>
 </div>
 </div>

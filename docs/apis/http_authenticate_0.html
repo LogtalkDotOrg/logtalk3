@@ -401,7 +401,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-05-29</div>
+<div class="line"><strong>Date:</strong> 2026-06-26</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -524,7 +524,27 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Text</span></code> is not a valid Basic challenge header value:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_authenticate_header(www_authenticate),invalid(syntax))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Text</span></code> uses an unsupported authentication scheme:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_authenticate_header(www_authenticate),unsupported_scheme(Scheme))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Text</span></code> contains a duplicated Basic challenge directive:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_authenticate_header(www_authenticate),duplicate(Name))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Text</span></code> is missing a required Basic challenge directive:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_authenticate_header(www_authenticate),missing(Name))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Text</span></code> contains an unexpected Basic challenge directive:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_authenticate_header(www_authenticate),unexpected(Name))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Text</span></code> contains an invalid Basic challenge charset:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_authenticate_header(www_authenticate),invalid(charset))</span></code></div>
 </div>
 </div>
 </div>
@@ -554,7 +574,23 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Challenge</span></code> is not a valid normalized Basic challenge term:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_authenticate_term(challenge),Challenge)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Challenge</span></code> is missing a required field:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_authenticate_term(challenge),missing(Name))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Challenge</span></code> contains a duplicated field:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_authenticate_term(challenge),duplicate(Name))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Challenge</span></code> contains an unexpected field:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_authenticate_term(challenge),unexpected(Name))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Challenge</span></code> contains an invalid field:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_authenticate_term(challenge),invalid(Field))</span></code></div>
 </div>
 </div>
 </div>
@@ -584,7 +620,15 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Text</span></code> is not a valid Basic authorization header value:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_authenticate_header(authorization),invalid(syntax))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Text</span></code> uses an unsupported authentication scheme:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_authenticate_header(authorization),unsupported_scheme(Scheme))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Text</span></code> contains invalid Basic credentials:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_authenticate_header(authorization),invalid(credentials))</span></code></div>
 </div>
 </div>
 </div>
@@ -614,7 +658,11 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Authorization</span></code> is not a valid normalized Basic authorization term:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_authenticate_term(authorization),Authorization)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Authorization</span></code> contains an invalid Basic username:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_authenticate_value(username),Username)</span></code></div>
 </div>
 </div>
 </div>
@@ -642,9 +690,53 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Request</span></code> or <code class="docutils literal notranslate"><span class="pre">Options</span></code> are invalid, or the verifier object rejects the request with an exception:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Request</span></code> is not a valid normalized HTTP request term:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_request,Request)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Verifier</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Verifier</span></code> is neither a variable nor an existing object:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_authenticate_verifier,Verifier)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Verifier</span></code> does not implement the Basic verifier protocol:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_authenticate_verifier,Verifier)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains an invalid Basic-auth status:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_authenticate_status,Status)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains invalid Basic-auth headers:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_headers,Headers)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains an invalid Basic-auth body:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_body,Body)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains invalid Basic-auth properties:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_properties,Properties)</span></code></div>
 </div>
 </div>
 </div>
@@ -672,9 +764,45 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> are invalid for Basic challenge generation or response construction:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable or a partial list:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains an invalid Basic-auth status:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_authenticate_status,Status)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains invalid Basic-auth headers:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_headers,Headers)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains an invalid Basic-auth body:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_body,Body)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains invalid Basic-auth properties:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_properties,Properties)</span></code></div>
+</div>
+<div class="line">The generated response headers violate normalized HTTP response semantics:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_header_semantics,Header)</span></code></div>
+</div>
+<div class="line">The generated response properties violate normalized HTTP response semantics:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_property_semantics,Property)</span></code></div>
 </div>
 </div>
 </div>
@@ -702,9 +830,53 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Challenge</span></code> or <code class="docutils literal notranslate"><span class="pre">Response0</span></code> are invalid, or <code class="docutils literal notranslate"><span class="pre">Options</span></code> are invalid for unauthorized-response construction:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Challenge</span></code> is not a valid normalized Basic challenge term:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_authenticate_term(challenge),Challenge)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Response0</span></code> is not a valid normalized HTTP response term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response,Response0)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid unauthorized-response overlay option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_authenticate_unauthorized_response_overlay_option,Option)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains an invalid Basic-auth status:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_authenticate_status,Status)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains invalid Basic-auth headers:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_headers,Headers)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains an invalid Basic-auth body:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_body,Body)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains invalid Basic-auth properties:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_properties,Properties)</span></code></div>
+</div>
+<div class="line">The decorated response headers violate normalized HTTP response semantics:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_header_semantics,Header)</span></code></div>
+</div>
+<div class="line">The decorated response properties violate normalized HTTP response semantics:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_property_semantics,Property)</span></code></div>
 </div>
 </div>
 </div>

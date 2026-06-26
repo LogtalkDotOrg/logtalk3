@@ -15,7 +15,7 @@ Sockets-backed HTTP transport predicates.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-22
+| **Date:** 2026-06-26
 
 | **Compilation flags:**
 |    ``static``
@@ -55,8 +55,30 @@ Opens a TCP listener on the given host and port using the given socket options. 
 |    ``open_listener(+atom,?integer,--compound,+list)`` - ``one_or_error``
 
 | **Exceptions:**
-|    The transport implementation may throw socket-opening or option-validation exceptions:
-|        ``error``
+|    ``Host`` is not a valid listener host atom:
+|        ``type_error(atom,Host)``
+|    ``Port`` is not a non-negative integer or a variable:
+|        ``domain_error(non_negative_integer,Port)``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Options`` contains an invalid listener option:
+|        ``domain_error(http_socket_process_listener_option,Option)``
+|    ``Options`` contains an invalid listener helper executable:
+|        ``domain_error(http_socket_process_listener_helper_executable,Executable)``
+|    ``Options`` contains incompatible TCP listener options:
+|        ``domain_error(http_socket_process_listener_tcp_options,[listener_transport(tcp),temporary_tls_credentials(TemporaryTLSCredentialsPrefix)])``
+|    ``Options`` contains incompatible TLS listener options:
+|        ``domain_error(http_socket_process_listener_tls_options,[tls_certificate_file(CertificateFile),tls_key_file(KeyFile)])``
+|    Temporary TLS credentials cannot be created:
+|        ``resource_error(http_socket_process_temporary_tls_credentials)``
+|    The process-backed listener helper cannot be started:
+|        ``resource_error(http_socket_process_listener)``
 
 
 ------------
@@ -78,8 +100,12 @@ Closes a listener previously opened with open_listener/4.
 |    ``close_listener(+compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    The transport implementation may throw listener-validation or close exceptions:
-|        ``error``
+|    ``Listener`` is a variable:
+|        ``instantiation_error``
+|    ``Listener`` is not an open listener handle for the transport implementation:
+|        ``domain_error(http_socket_listener,Listener)``
+|    ``Listener`` no longer exists for the transport implementation:
+|        ``existence_error(http_socket_listener,Listener)``
 
 
 ------------
@@ -101,8 +127,12 @@ Best-effort wakeup request for a listener accept loop opened with ``open_listene
 |    ``request_listener_shutdown(+compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    The transport implementation may throw listener-validation exceptions:
-|        ``error``
+|    ``Listener`` is a variable:
+|        ``instantiation_error``
+|    ``Listener`` is not an open listener handle for the transport implementation:
+|        ``domain_error(http_socket_listener,Listener)``
+|    ``Listener`` no longer exists for the transport implementation:
+|        ``existence_error(http_socket_listener,Listener)``
 
 
 ------------
@@ -124,8 +154,20 @@ Opens a reusable client connection to the given host and port using the given so
 |    ``open_connection(+atom,+integer,--compound,+list)`` - ``one_or_error``
 
 | **Exceptions:**
-|    The transport implementation may throw connection-opening or option-validation exceptions:
-|        ``error``
+|    ``Host`` and ``Port`` are not a valid HTTP authority target:
+|        ``domain_error(http_target,authority(Host,Port))``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Options`` contains an invalid connection option:
+|        ``domain_error(http_socket_process_connection_option,Option)``
+|    The process-backed client helper cannot be started:
+|        ``resource_error(http_socket_process_connection)``
 
 
 ------------
@@ -147,8 +189,10 @@ Closes a reusable client connection previously opened with open_connection/4.
 |    ``close_connection(+compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    The transport implementation may throw connection-validation or close exceptions:
-|        ``error``
+|    ``Connection`` is a variable:
+|        ``instantiation_error``
+|    ``Connection`` is not an open reusable client connection handle:
+|        ``domain_error(http_socket_connection,Connection)``
 
 
 ------------
@@ -170,8 +214,10 @@ Returns the binary input and output streams carried by a reusable client connect
 |    ``connection_streams(+compound,--stream,--stream)`` - ``one_or_error``
 
 | **Exceptions:**
-|    The transport implementation may throw connection-handle validation exceptions:
-|        ``error``
+|    ``Connection`` is a variable:
+|        ``instantiation_error``
+|    ``Connection`` is not an open reusable client or upgraded WebSocket connection handle:
+|        ``domain_error(http_socket_connection,Connection)``
 
 
 ------------
@@ -193,8 +239,28 @@ Opens a managed reusable connection pool for the given host and port.
 |    ``open_connection_pool(+atom,+integer,--compound,+list)`` - ``one_or_error``
 
 | **Exceptions:**
-|    The transport implementation may throw connection-pool creation, resource, or option-validation exceptions:
-|        ``error``
+|    ``Host`` and ``Port`` are not a valid HTTP authority target:
+|        ``domain_error(http_target,authority(Host,Port))``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Options`` contains an invalid connection-pool option:
+|        ``domain_error(http_socket_connection_pool_option,Option)``
+|    ``Options`` contains an invalid process-backed connection-pool option:
+|        ``domain_error(http_socket_process_connection_pool_option,Option)``
+|    ``Options`` contains incompatible connection-pool bounds:
+|        ``domain_error(http_socket_connection_pool_options,[min_size(MinSize),max_size(MaxSize)])``
+|    ``Options`` contains incompatible process-backed connection-pool bounds:
+|        ``domain_error(http_socket_process_connection_pool_options,[min_size(MinSize),max_size(MaxSize)])``
+|    No managed connection is available in the connection pool:
+|        ``resource_error(http_socket_connection_pool)``
+|    The process-backed client helper cannot be started:
+|        ``resource_error(http_socket_process_connection)``
 
 | **Remarks:**
 
@@ -222,8 +288,14 @@ Closes a managed reusable connection pool and all currently available pooled con
 |    ``close_connection_pool(+compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    The transport implementation may throw pool-validation exceptions or reject closing while exchanges remain active:
-|        ``error``
+|    ``Pool`` is a variable:
+|        ``instantiation_error``
+|    ``Pool`` is not a valid managed connection-pool handle:
+|        ``domain_error(http_socket_connection_pool,Pool)``
+|    ``Pool`` no longer exists:
+|        ``existence_error(http_socket_connection_pool,Pool)``
+|    ``Pool`` cannot be closed while pooled exchanges remain active:
+|        ``permission_error(close,http_socket_connection_pool,Pool)``
 
 
 ------------
@@ -245,8 +317,12 @@ Returns managed pool statistics as stats(Available, InUse, Total, MinSize, MaxSi
 |    ``connection_pool_stats(+compound,--compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    The transport implementation may throw pool-validation exceptions:
-|        ``error``
+|    ``Pool`` is a variable:
+|        ``instantiation_error``
+|    ``Pool`` is not a valid managed connection-pool handle:
+|        ``domain_error(http_socket_connection_pool,Pool)``
+|    ``Pool`` no longer exists:
+|        ``existence_error(http_socket_connection_pool,Pool)``
 
 
 ------------
@@ -268,8 +344,20 @@ Performs a single HTTP exchange on an open reusable client connection or by temp
 |    ``exchange(+compound,+compound,--compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    The transport implementation may throw handle-validation, request-validation, or exchange exceptions:
-|        ``error``
+|    ``ConnectionOrPool`` is a variable:
+|        ``instantiation_error``
+|    ``ConnectionOrPool`` is neither an open connection nor a managed connection-pool handle:
+|        ``domain_error(http_socket_connection,ConnectionOrPool)``
+|    ``ConnectionOrPool`` is not a valid managed connection-pool handle:
+|        ``domain_error(http_socket_connection_pool,ConnectionOrPool)``
+|    ``ConnectionOrPool`` no longer exists as a managed connection pool:
+|        ``existence_error(http_socket_connection_pool,ConnectionOrPool)``
+|    No managed connection is available in the connection pool:
+|        ``resource_error(http_socket_connection_pool)``
+|    ``Request`` is not a valid normalized HTTP request term:
+|        ``domain_error(http_request,Request)``
+|    The response stream cannot be parsed as a normalized HTTP response:
+|        ``domain_error(http_response_stream,Error)``
 
 
 ------------
@@ -291,8 +379,20 @@ Performs a sequence of HTTP exchanges on an open reusable client connection or b
 |    ``exchange_connection(+compound,++list(compound),--list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
-|    The transport implementation may throw handle-validation, request-sequence validation, or exchange exceptions:
-|        ``error``
+|    ``ConnectionOrPool`` is a variable:
+|        ``instantiation_error``
+|    ``ConnectionOrPool`` is neither an open connection nor a managed connection-pool handle:
+|        ``domain_error(http_socket_connection,ConnectionOrPool)``
+|    ``ConnectionOrPool`` is not a valid managed connection-pool handle:
+|        ``domain_error(http_socket_connection_pool,ConnectionOrPool)``
+|    ``ConnectionOrPool`` no longer exists as a managed connection pool:
+|        ``existence_error(http_socket_connection_pool,ConnectionOrPool)``
+|    No managed connection is available in the connection pool:
+|        ``resource_error(http_socket_connection_pool)``
+|    ``Requests`` is not a list of normalized HTTP request terms:
+|        ``domain_error(http_request_sequence,Requests)``
+|    The response stream cannot be parsed as a normalized HTTP response:
+|        ``domain_error(http_response_stream,Error)``
 
 
 ------------
@@ -314,8 +414,14 @@ Opens a client socket connection to the given host and port, performs a single H
 |    ``exchange(+atom,+integer,+compound,--compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    The transport implementation may throw connection-opening, request-validation, or exchange exceptions:
-|        ``error``
+|    ``Host`` and ``Port`` are not a valid HTTP authority target:
+|        ``domain_error(http_target,authority(Host,Port))``
+|    The process-backed client helper cannot be started:
+|        ``resource_error(http_socket_process_connection)``
+|    ``Request`` is not a valid normalized HTTP request term:
+|        ``domain_error(http_request,Request)``
+|    The response stream cannot be parsed as a normalized HTTP response:
+|        ``domain_error(http_response_stream,Error)``
 
 
 ------------
@@ -337,8 +443,24 @@ Opens a client socket connection to the given host and port using the given conn
 |    ``exchange(+atom,+integer,+compound,--compound,+list)`` - ``one_or_error``
 
 | **Exceptions:**
-|    The transport implementation may throw connection-opening, request-validation, option-validation, or exchange exceptions:
-|        ``error``
+|    ``Host`` and ``Port`` are not a valid HTTP authority target:
+|        ``domain_error(http_target,authority(Host,Port))``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Options`` contains an invalid connection option:
+|        ``domain_error(http_socket_process_connection_option,Option)``
+|    The process-backed client helper cannot be started:
+|        ``resource_error(http_socket_process_connection)``
+|    ``Request`` is not a valid normalized HTTP request term:
+|        ``domain_error(http_request,Request)``
+|    The response stream cannot be parsed as a normalized HTTP response:
+|        ``domain_error(http_response_stream,Error)``
 
 
 ------------
@@ -360,8 +482,14 @@ Opens a client socket connection to the given host and port, performs a sequence
 |    ``exchange_connection(+atom,+integer,++list(compound),--list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
-|    The transport implementation may throw connection-opening, request-sequence validation, or exchange exceptions:
-|        ``error``
+|    ``Host`` and ``Port`` are not a valid HTTP authority target:
+|        ``domain_error(http_target,authority(Host,Port))``
+|    The process-backed client helper cannot be started:
+|        ``resource_error(http_socket_process_connection)``
+|    ``Requests`` is not a list of normalized HTTP request terms:
+|        ``domain_error(http_request_sequence,Requests)``
+|    The response stream cannot be parsed as a normalized HTTP response:
+|        ``domain_error(http_response_stream,Error)``
 
 
 ------------
@@ -383,8 +511,10 @@ Accepts one incoming socket connection on the given server socket, serves that c
 |    ``serve_once(+compound,+object_identifier,--compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    The transport implementation may throw listener-accept, stream, or delegated server-serving exceptions:
-|        ``error``
+|    ``Handler`` does not conform to the HTTP handler protocol:
+|        ``domain_error(http_handler_protocol,Handler)``
+|    The delegated HTTP server rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
 
 
 ------------
@@ -406,8 +536,14 @@ Accepts one incoming socket connection on the given listener, serves exactly one
 |    ``serve_websocket_once(+compound,+object_identifier,--compound,--compound,--compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    The transport implementation may throw listener-accept, stream, or delegated WebSocket-serving exceptions:
-|        ``error``
+|    ``Handler`` does not conform to the HTTP handler protocol:
+|        ``domain_error(http_handler_protocol,Handler)``
+|    The WebSocket opening request does not exist:
+|        ``existence_error(http_socket_websocket_request,end_of_file)``
+|    The WebSocket opening response is invalid:
+|        ``domain_error(http_socket_websocket_response,Response)``
+|    The delegated HTTP server rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
 
 
 ------------
@@ -429,8 +565,16 @@ Accepts and serves Count incoming connections on the given listener, returning t
 |    ``serve_listener(+compound,+object_identifier,+integer,--list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
-|    The transport implementation may throw listener, worker, or delegated server-serving exceptions:
-|        ``error``
+|    ``Count`` is a variable:
+|        ``instantiation_error``
+|    ``Count`` is not a non-negative integer:
+|        ``domain_error(non_negative_integer,Count)``
+|    ``Handler`` does not conform to the HTTP handler protocol:
+|        ``domain_error(http_handler_protocol,Handler)``
+|    The delegated HTTP server rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+|    Thread workers are not available on this backend:
+|        ``resource_error(threads)``
 
 
 ------------
@@ -452,8 +596,26 @@ Accepts and serves ``Count`` incoming connections on the given listener using th
 |    ``serve_listener(+compound,+object_identifier,+integer,--list(compound),+list)`` - ``one_or_error``
 
 | **Exceptions:**
-|    The transport implementation may throw listener, worker, resource, or option-validation exceptions:
-|        ``error``
+|    ``Count`` is a variable:
+|        ``instantiation_error``
+|    ``Count`` is not a non-negative integer:
+|        ``domain_error(non_negative_integer,Count)``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Options`` contains an invalid listener-serving option:
+|        ``domain_error(http_socket_listener_option,Option)``
+|    ``Handler`` does not conform to the HTTP handler protocol:
+|        ``domain_error(http_handler_protocol,Handler)``
+|    The delegated HTTP server rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+|    Thread workers are not available on this backend:
+|        ``resource_error(threads)``
 
 | **Remarks:**
 
@@ -484,8 +646,22 @@ Accepts and serves incoming connections on the given listener until ``request_sh
 |    ``serve_until_shutdown(+compound,+object_identifier,+nonvar,+list)`` - ``one_or_error``
 
 | **Exceptions:**
-|    The transport implementation may throw listener, worker, control-registration, or option-validation exceptions:
-|        ``error``
+|    ``Control`` is a variable:
+|        ``instantiation_error``
+|    ``Control`` is already registered for another open-ended listener loop:
+|        ``permission_error(reuse,http_socket_shutdown_control,Control)``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    ``Options`` contains an invalid listener-serving option:
+|        ``domain_error(http_socket_listener_option,Option)``
+|    ``Handler`` does not conform to the HTTP handler protocol:
+|        ``domain_error(http_handler_protocol,Handler)``
+|    The delegated HTTP server rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+|    Thread workers are not available on this backend:
+|        ``resource_error(threads)``
 
 | **Remarks:**
 
@@ -518,8 +694,22 @@ Accepts and serves incoming connections on the given listener until ``request_sh
 |    ``serve_until_shutdown(+compound,+object_identifier,+nonvar,+list,+callable)`` - ``one_or_error``
 
 | **Exceptions:**
-|    The transport implementation may throw listener, worker, ready-goal, control-registration, or option-validation exceptions:
-|        ``error``
+|    ``Control`` is a variable:
+|        ``instantiation_error``
+|    ``Control`` is already registered for another open-ended listener loop:
+|        ``permission_error(reuse,http_socket_shutdown_control,Control)``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    ``Options`` contains an invalid listener-serving option:
+|        ``domain_error(http_socket_listener_option,Option)``
+|    ``Handler`` does not conform to the HTTP handler protocol:
+|        ``domain_error(http_handler_protocol,Handler)``
+|    The delegated HTTP server rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+|    Thread workers are not available on this backend:
+|        ``resource_error(threads)``
 
 | **Remarks:**
 
@@ -547,8 +737,12 @@ Requests shutdown of an open-ended serving loop started with ``serve_until_shutd
 |    ``request_shutdown(+nonvar)`` - ``one_or_error``
 
 | **Exceptions:**
-|    The transport implementation may throw shutdown-control validation exceptions:
-|        ``error``
+|    ``Control`` is a variable:
+|        ``instantiation_error``
+|    ``Control`` is not registered for an open-ended listener loop:
+|        ``existence_error(http_socket_shutdown_control,Control)``
+|    Thread-backed shutdown is not available on this backend:
+|        ``resource_error(threads)``
 
 
 ------------

@@ -15,7 +15,7 @@ Multipart helper predicates built on top of the normalized body and part terms p
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-14
+| **Date:** 2026-06-26
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -104,8 +104,14 @@ Parses a multipart body from a source term by delegating to the underlying ``htt
 | **Exceptions:**
 |    ``MediaType`` is not a valid multipart media type atom:
 |        ``domain_error(http_multipart_media_type,MediaType)``
-|    ``Source`` or ``Options`` are not valid for ``http_core::parse_body/4``:
-|        ``error``
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid HTTP source term:
+|        ``domain_error(http_source,Source)``
+|    ``Options`` is not a valid HTTP body options list:
+|        ``domain_error(http_body_options,Options)``
+|    No registered HTTP body codec exists for ``MediaType`` when codec-based decoding is required:
+|        ``existence_error(http_body_codec,MediaType)``
 |    The parsed body is not a valid normalized multipart body term:
 |        ``domain_error(http_multipart_body,Body)``
 
@@ -131,8 +137,14 @@ Generates a multipart body to a sink term by delegating to the underlying ``http
 | **Exceptions:**
 |    ``Body`` is not a valid normalized multipart body term:
 |        ``domain_error(http_multipart_body,Body)``
-|    ``Sink`` or ``Options`` are not valid for ``http_core::generate_body/3``:
-|        ``error``
+|    ``Sink`` is a variable:
+|        ``instantiation_error``
+|    ``Sink`` is neither a variable nor a valid HTTP sink term:
+|        ``domain_error(http_sink,Sink)``
+|    ``Options`` is not a valid HTTP body options list:
+|        ``domain_error(http_body_options,Options)``
+|    No registered HTTP body codec exists for the body media type when codec-based encoding is required:
+|        ``existence_error(http_body_codec,MediaType)``
 
 
 ------------

@@ -18,7 +18,7 @@ Optional server-session middleware helpers for router objects importing the ``ht
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-05-28
+| **Date:** 2026-06-26
 
 | **Compilation flags:**
 |    ``static``
@@ -62,8 +62,10 @@ Router middleware helper that annotates a normalized request with a server-sessi
 |    ``annotate_server_session_request(+compound,-compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Any exception that can be thrown by ``http_server_session::begin/3`` for the configured manager and request:
-|        ``error``
+|    The configured manager is not an open server-session manager handle:
+|        ``domain_error(http_server_session,Manager)``
+|    ``Request`` is not a valid normalized HTTP request:
+|        ``domain_error(http_server_session_request,Request)``
 
 
 ------------
@@ -85,8 +87,12 @@ Router response-middleware helper that finalizes server-session cookie lifecycle
 |    ``add_server_session_response(+compound,+compound,-compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Any exception that can be thrown by ``http_server_session::finish/3`` for the configured manager request/response pair:
-|        ``error``
+|    ``Request`` is not a valid annotated server-session request:
+|        ``domain_error(http_server_session_request,Request)``
+|    ``Response0`` is not a valid normalized HTTP response:
+|        ``domain_error(http_server_session_response,Response0)``
+|    The decorated response violates normalized HTTP response semantics:
+|        ``domain_error(http_header_semantics,Header)``
 
 
 ------------

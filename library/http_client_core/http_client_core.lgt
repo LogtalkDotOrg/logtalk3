@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-13,
+		date is 2026-06-26,
 		comment is 'Portable stream-based HTTP client core predicates.',
 		remarks is [
 			'Binary streams' - 'All stream predicates expect binary input and output streams.',
@@ -40,7 +40,9 @@
 		comment is 'Writes exactly one normalized HTTP request term to a binary stream.',
 		argnames is ['Output', 'Request'],
 		exceptions is [
-			'``Request`` or ``Output`` are invalid for the delegated ``http_core::generate_request/2`` call' - error
+			'``Request`` is not a valid normalized HTTP request term' - domain_error(http_request, 'Request'),
+			'The generated request violates normalized HTTP request semantics' - domain_error(http_header_semantics, 'Header'),
+			'The generated request properties violate normalized HTTP request semantics' - domain_error(http_property_semantics, 'Property')
 		]
 	]).
 
@@ -60,9 +62,16 @@
 		comment is 'Writes one normalized request to a binary output stream and then reads one normalized response from a binary input stream.',
 		argnames is ['Input', 'Output', 'Request', 'Response'],
 		exceptions is [
-			'``Request`` or ``Output`` are invalid for the delegated request writer' - error,
+			'``Request`` is not a valid normalized HTTP request term' - domain_error(http_request, 'Request'),
+			'The generated request violates normalized HTTP request semantics' - domain_error(http_header_semantics, 'Header'),
+			'The generated request properties violate normalized HTTP request semantics' - domain_error(http_property_semantics, 'Property'),
 			'The input stream ends before a complete response is read' - domain_error(http_response_stream, unexpected_end_of_file),
-			'The input stream does not contain a valid normalized HTTP response message' - domain_error(http_response_stream, malformed_response('Bytes'))
+			'The input stream does not contain a valid normalized HTTP response status line' - domain_error(http_response_stream, malformed_status_line('Bytes')),
+			'The input stream contains an unsupported response transfer encoding' - domain_error(http_response_stream, unsupported_transfer_encoding('Encodings')),
+			'The input stream contains an invalid response line ending' - domain_error(http_response_stream, invalid_line_ending('CarriageReturn', 'LineFeed')),
+			'The input stream contains a bare line feed' - domain_error(http_response_stream, bare_line_feed),
+			'The input stream does not contain a valid normalized HTTP response message' - domain_error(http_response_stream, malformed_response('Bytes')),
+			'The response declares an invalid content length' - domain_error(non_negative_integer, 'Length')
 		]
 	]).
 

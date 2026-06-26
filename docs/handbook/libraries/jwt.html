@@ -201,6 +201,7 @@
 <li class="toctree-l2"><a class="reference internal" href="json_rpc.html"><code class="docutils literal notranslate"><span class="pre">json_rpc</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="json_schema.html"><code class="docutils literal notranslate"><span class="pre">json_schema</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">jwt</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#requirements">Requirements</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#basic-usage">Basic usage</a></li>
@@ -369,6 +370,34 @@ verification. <code class="docutils literal notranslate"><span class="pre">ES256
 <code class="docutils literal notranslate"><span class="pre">R</span> <span class="pre">||</span> <span class="pre">S</span></code> encoding to DER before calling OpenSSL.</p>
 <p>This library requires a Prolog backend supporting unbound integer
 arithmetic.</p>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">openssl</span></code> command must be available on the current <code class="docutils literal notranslate"><span class="pre">PATH</span></code>.</p>
+<p>On macOS, it can be installed using e.g. Homebrew:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> brew install openssl
+</pre></div>
+</div>
+<p>Or using MacPorts:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo port install openssl
+</pre></div>
+</div>
+<p>On Ubuntu, it can be installed using:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo apt install openssl
+</pre></div>
+</div>
+<p>On RedHat distributions (8.x and later):</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo dnf install openssl
+</pre></div>
+</div>
+<p>For older RedHat distributions:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo yum install openssl
+</pre></div>
+</div>
+<p>On Windows, it can be installed using e.g. Chocolatey:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> choco install openssl
+</pre></div>
+</div>
+</section>
 <section id="loading">
 <h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
 <p>To load the library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>

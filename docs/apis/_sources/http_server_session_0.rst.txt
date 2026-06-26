@@ -15,7 +15,7 @@ Server-side HTTP session manager over normalized request and response terms usin
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-07
+| **Date:** 2026-06-26
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -82,8 +82,14 @@ Opens a new server-session manager using the given cookie, timeout, and store op
 |    ``open(-compound,+list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Options`` contain invalid server-session configuration:
-|        ``error``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
 
 
 ------------
@@ -105,8 +111,10 @@ Closes a server-session manager and discards all in-memory request contexts and 
 |    ``close(+compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Manager`` is not an open server-session manager handle:
-|        ``error``
+|    ``Manager`` is a variable:
+|        ``instantiation_error``
+|    ``Manager`` is neither a variable nor an open server-session manager handle:
+|        ``domain_error(http_server_session,Manager)``
 
 
 ------------
@@ -128,8 +136,12 @@ Begins server-session processing for a normalized request, annotating it with a 
 |    ``begin(+compound,+compound,-compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Manager`` is not an open server-session manager handle or ``Request`` is not a valid normalized HTTP request:
-|        ``error``
+|    ``Manager`` is a variable:
+|        ``instantiation_error``
+|    ``Manager`` is neither a variable nor an open server-session manager handle:
+|        ``domain_error(http_server_session,Manager)``
+|    ``Request`` is not a valid normalized HTTP request:
+|        ``domain_error(http_server_session_request,Request)``
 
 
 ------------
@@ -151,8 +163,12 @@ Finishes server-session processing for an annotated normalized request and a nor
 |    ``finish(+compound,+compound,-compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Request`` is not a valid annotated server-session request or ``Response0`` is not a valid normalized HTTP response:
-|        ``error``
+|    ``Request`` is not a valid annotated server-session request:
+|        ``domain_error(http_server_session_request,Request)``
+|    ``Response0`` is not a valid normalized HTTP response:
+|        ``domain_error(http_server_session_response,Response0)``
+|    The decorated response violates normalized HTTP response semantics:
+|        ``domain_error(http_header_semantics,Header)``
 
 
 ------------
@@ -175,7 +191,7 @@ Returns the request-bound current server-session handle from an annotated normal
 
 | **Exceptions:**
 |    ``Request`` is not a valid annotated server-session request:
-|        ``error``
+|        ``domain_error(http_server_session_request,Request)``
 
 
 ------------
@@ -198,7 +214,7 @@ Ensures that the annotated request has a backing stored server session and retur
 
 | **Exceptions:**
 |    ``Request`` is not a valid annotated server-session request:
-|        ``error``
+|        ``domain_error(http_server_session_request,Request)``
 
 
 ------------
@@ -220,8 +236,10 @@ Returns the current session key-value data pairs for a request-bound server-sess
 |    ``data(+compound,-list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
+|    ``Session`` is a variable:
+|        ``instantiation_error``
 |    ``Session`` is not a valid request-bound server-session handle:
-|        ``error``
+|        ``domain_error(http_server_session_handle,Session)``
 
 
 ------------
@@ -262,8 +280,10 @@ Sets or replaces a session data key-value pair, creating a backing stored sessio
 |    ``set(+compound,+term,+term)`` - ``one_or_error``
 
 | **Exceptions:**
+|    ``Session`` is a variable:
+|        ``instantiation_error``
 |    ``Session`` is not a valid request-bound server-session handle:
-|        ``error``
+|        ``domain_error(http_server_session_handle,Session)``
 
 
 ------------
@@ -304,8 +324,10 @@ Destroys the backing stored session, causing finish/3 to emit a deletion cookie 
 |    ``destroy(+compound)`` - ``one_or_error``
 
 | **Exceptions:**
+|    ``Session`` is a variable:
+|        ``instantiation_error``
 |    ``Session`` is not a valid request-bound server-session handle:
-|        ``error``
+|        ``domain_error(http_server_session_handle,Session)``
 
 
 ------------
@@ -327,8 +349,10 @@ Renews the backing stored session identifier and returns the new opaque cookie i
 |    ``renew(+compound,-atom)`` - ``one_or_error``
 
 | **Exceptions:**
+|    ``Session`` is a variable:
+|        ``instantiation_error``
 |    ``Session`` is not a valid request-bound server-session handle:
-|        ``error``
+|        ``domain_error(http_server_session_handle,Session)``
 
 
 ------------
@@ -350,8 +374,10 @@ Performs opportunistic garbage collection of expired stored sessions for the giv
 |    ``gc(+compound,-integer)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Manager`` is not an open server-session manager handle:
-|        ``error``
+|    ``Manager`` is a variable:
+|        ``instantiation_error``
+|    ``Manager`` is neither a variable nor an open server-session manager handle:
+|        ``domain_error(http_server_session,Manager)``
 
 
 ------------
@@ -373,8 +399,10 @@ Returns the number of currently stored sessions owned by the given manager.
 |    ``count(+compound,-integer)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Manager`` is not an open server-session manager handle:
-|        ``error``
+|    ``Manager`` is a variable:
+|        ``instantiation_error``
+|    ``Manager`` is neither a variable nor an open server-session manager handle:
+|        ``domain_error(http_server_session,Manager)``
 
 
 ------------

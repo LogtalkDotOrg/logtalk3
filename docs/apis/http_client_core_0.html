@@ -397,7 +397,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-13</div>
+<div class="line"><strong>Date:</strong> 2026-06-26</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -471,9 +471,17 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Request</span></code> or <code class="docutils literal notranslate"><span class="pre">Output</span></code> are invalid for the delegated <code class="docutils literal notranslate"><span class="pre">http_core::generate_request/2</span></code> call:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Request</span></code> is not a valid normalized HTTP request term:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_request,Request)</span></code></div>
+</div>
+<div class="line">The generated request violates normalized HTTP request semantics:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_header_semantics,Header)</span></code></div>
+</div>
+<div class="line">The generated request properties violate normalized HTTP request semantics:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_property_semantics,Property)</span></code></div>
 </div>
 </div>
 </div>
@@ -531,17 +539,45 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Request</span></code> or <code class="docutils literal notranslate"><span class="pre">Output</span></code> are invalid for the delegated request writer:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Request</span></code> is not a valid normalized HTTP request term:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_request,Request)</span></code></div>
+</div>
+<div class="line">The generated request violates normalized HTTP request semantics:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_header_semantics,Header)</span></code></div>
+</div>
+<div class="line">The generated request properties violate normalized HTTP request semantics:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_property_semantics,Property)</span></code></div>
 </div>
 <div class="line">The input stream ends before a complete response is read:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response_stream,unexpected_end_of_file)</span></code></div>
 </div>
+<div class="line">The input stream does not contain a valid normalized HTTP response status line:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response_stream,malformed_status_line(Bytes))</span></code></div>
+</div>
+<div class="line">The input stream contains an unsupported response transfer encoding:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response_stream,unsupported_transfer_encoding(Encodings))</span></code></div>
+</div>
+<div class="line">The input stream contains an invalid response line ending:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response_stream,invalid_line_ending(CarriageReturn,LineFeed))</span></code></div>
+</div>
+<div class="line">The input stream contains a bare line feed:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response_stream,bare_line_feed)</span></code></div>
+</div>
 <div class="line">The input stream does not contain a valid normalized HTTP response message:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response_stream,malformed_response(Bytes))</span></code></div>
+</div>
+<div class="line">The response declares an invalid content length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Length)</span></code></div>
 </div>
 </div>
 </div>

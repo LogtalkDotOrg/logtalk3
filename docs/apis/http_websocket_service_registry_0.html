@@ -404,7 +404,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-11</div>
+<div class="line"><strong>Date:</strong> 2026-06-26</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -504,9 +504,17 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is not an open WebSocket service registry handle:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is neither a variable nor an open WebSocket service registry handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_service_registry,Registry)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> refers to a closed WebSocket service registry handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_websocket_service_registry,session_registry(RegistryId))</span></code></div>
 </div>
 </div>
 </div>
@@ -534,9 +542,17 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is not an open WebSocket service registry handle:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is neither a variable nor an open WebSocket service registry handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_service_registry,Registry)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> refers to a closed WebSocket service registry handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_websocket_service_registry,session_registry(RegistryId))</span></code></div>
 </div>
 </div>
 </div>
@@ -564,9 +580,29 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> or <code class="docutils literal notranslate"><span class="pre">Session</span></code> are not valid registered WebSocket service handles:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is neither a variable nor an open WebSocket service registry handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_service_registry,Registry)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> refers to a closed WebSocket service registry handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_websocket_service_registry,session_registry(RegistryId))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Session</span></code> is a variable or is not a session for <code class="docutils literal notranslate"><span class="pre">Registry</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Session</span></code> is not a valid WebSocket service registry session handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_service_registry_session,Session)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Session</span></code> is not registered in <code class="docutils literal notranslate"><span class="pre">Registry</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_websocket_service_registry_session,websocket_session(RegistryId,SessionId))</span></code></div>
 </div>
 </div>
 </div>
@@ -615,9 +651,17 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is not an open WebSocket service registry handle:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is neither a variable nor an open WebSocket service registry handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_service_registry,Registry)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> refers to a closed WebSocket service registry handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_websocket_service_registry,session_registry(RegistryId))</span></code></div>
 </div>
 </div>
 </div>
@@ -645,9 +689,17 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is not an open WebSocket service registry handle:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is neither a variable nor an open WebSocket service registry handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_service_registry,Registry)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> refers to a closed WebSocket service registry handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_websocket_service_registry,session_registry(RegistryId))</span></code></div>
 </div>
 </div>
 </div>
@@ -675,9 +727,21 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> or <code class="docutils literal notranslate"><span class="pre">Session</span></code> are invalid, or <code class="docutils literal notranslate"><span class="pre">Message</span></code> is not a valid normalized WebSocket message term:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is not an open WebSocket service registry handle:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_service_registry,Registry)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Session</span></code> is not a valid WebSocket service registry session handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_service_registry_session,Session)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Session</span></code> is not registered in <code class="docutils literal notranslate"><span class="pre">Registry</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_websocket_service_registry_session,websocket_session(RegistryId,SessionId))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> is not a valid normalized WebSocket message term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_service_registry_message,Message)</span></code></div>
 </div>
 </div>
 </div>
@@ -705,9 +769,13 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is invalid or <code class="docutils literal notranslate"><span class="pre">Message</span></code> is not a valid normalized WebSocket message term:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is not an open WebSocket service registry handle:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_service_registry,Registry)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> is not a valid normalized WebSocket message term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_service_registry_message,Message)</span></code></div>
 </div>
 </div>
 </div>
@@ -735,9 +803,21 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> or <code class="docutils literal notranslate"><span class="pre">Session</span></code> are invalid, or <code class="docutils literal notranslate"><span class="pre">Message</span></code> is not a valid normalized WebSocket message term:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is not an open WebSocket service registry handle:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_service_registry,Registry)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Session</span></code> is not a valid WebSocket service registry session handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_service_registry_session,Session)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Session</span></code> is not registered in <code class="docutils literal notranslate"><span class="pre">Registry</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_websocket_service_registry_session,websocket_session(RegistryId,SessionId))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> is not a valid normalized WebSocket message term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_service_registry_message,Message)</span></code></div>
 </div>
 </div>
 </div>
@@ -765,9 +845,17 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> or <code class="docutils literal notranslate"><span class="pre">Session</span></code> are not valid registered WebSocket service handles:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Registry</span></code> is not an open WebSocket service registry handle:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_service_registry,Registry)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Session</span></code> is not a valid WebSocket service registry session handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_websocket_service_registry_session,Session)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Session</span></code> is not registered in <code class="docutils literal notranslate"><span class="pre">Registry</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_websocket_service_registry_session,websocket_session(RegistryId,SessionId))</span></code></div>
 </div>
 </div>
 </div>
