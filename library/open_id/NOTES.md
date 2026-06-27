@@ -51,6 +51,26 @@ To test this library, load the `tester.lgt` file:
 
 	| ?- logtalk_load(open_id(tester)).
 
+To run the optional live tests against Google's public OpenID Connect
+discovery and JWKS endpoints, load the `tester_live.lgt` file:
+
+	| ?- logtalk_load(open_id(tester_live)).
+
+The Google discovery and JWKS live tests do not require credentials. The
+optional Google ID-token verification live test requires a fresh Google-issued
+ID token and its expected audience:
+
+	$ export LOGTALK_OPEN_ID_GOOGLE_ID_TOKEN="..."
+	$ export LOGTALK_OPEN_ID_GOOGLE_AUDIENCE="..."
+
+If the ID token includes a nonce claim, also define the
+`LOGTALK_OPEN_ID_GOOGLE_NONCE` environment variable.
+
+The live tests also include an end-to-end Authorization Code + PKCE flow
+against the community-run `https://oidctest.wsweet.org/` OpenID Connect test
+provider, using its documented test account `dwho`/`dwho` and pre-registered
+client `private`/`tardis`. This provider has no availability guarantees.
+
 
 Basic usage
 -----------
@@ -99,4 +119,3 @@ Current limitations
   the first release scope.
 - JWKS caching is left to applications.
 - ID-token verification requires the `openssl` command.
-
