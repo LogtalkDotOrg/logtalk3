@@ -44,6 +44,11 @@ attribute names.
 The ``Expires`` attribute is normalized to a ``date_time/6`` term when
 parsing and generated back using the canonical HTTP-date syntax.
 
+For interoperability with LemonLDAP::NG-style cookies, the parser also
+accepts boolean ``Set-Cookie`` attributes encoded as ``Name=1`` in
+addition to the standard flag form. This applies to the ``Secure``,
+``HttpOnly``, and ``Partitioned`` attributes.
+
 The library also provides pure helpers for working with canonical
 attribute lists:
 

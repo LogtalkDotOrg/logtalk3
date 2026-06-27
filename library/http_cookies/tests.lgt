@@ -63,6 +63,9 @@
 	test(parse_set_cookie_2_04, deterministic((Name == "SID", Value == "31d4d96e407aad42", Attributes == [same_site-none, partitioned-true, path-("/docs"), secure-true]))) :-
 		http_cookies::parse_set_cookie("SID=31d4d96e407aad42; SameSite=None; Partitioned; Path=/docs; Secure", Name, Value, Attributes).
 
+	test(parse_set_cookie_2_05, deterministic((Name == "SID", Value == "31d4d96e407aad42", Attributes == [http_only-true, same_site-none, secure-true, partitioned-true]))) :-
+		http_cookies::parse_set_cookie("SID=31d4d96e407aad42; HttpOnly=1; SameSite=None; Secure=1; Partitioned=1", Name, Value, Attributes).
+
 	test(generate_set_cookie_2_01, deterministic(SetCookie == "SID=31d4d96e407aad42; Expires=Wed, 09 Jun 2021 10:18:14 GMT; Max-Age=3600; Domain=example.com; Path=/docs; Secure; HttpOnly; Priority=High")) :-
 		http_cookies::generate_set_cookie(
 			"SID",

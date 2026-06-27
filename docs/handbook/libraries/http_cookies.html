@@ -396,6 +396,10 @@ pairs so long as they do not reuse one of the reserved RFC 6265
 attribute names.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">Expires</span></code> attribute is normalized to a <code class="docutils literal notranslate"><span class="pre">date_time/6</span></code> term when
 parsing and generated back using the canonical HTTP-date syntax.</p>
+<p>For interoperability with LemonLDAP::NG-style cookies, the parser also
+accepts boolean <code class="docutils literal notranslate"><span class="pre">Set-Cookie</span></code> attributes encoded as <code class="docutils literal notranslate"><span class="pre">Name=1</span></code> in
+addition to the standard flag form. This applies to the <code class="docutils literal notranslate"><span class="pre">Secure</span></code>,
+<code class="docutils literal notranslate"><span class="pre">HttpOnly</span></code>, and <code class="docutils literal notranslate"><span class="pre">Partitioned</span></code> attributes.</p>
 <p>The library also provides pure helpers for working with canonical
 attribute lists:</p>
 <ul class="simple">

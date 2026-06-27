@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-14,
+		date is 2026-06-27,
 		comment is 'HTTP Cookie and ``Set-Cookie`` header parsing and generation predicates implementing RFC 6265 syntax.',
 		parameters is [
 			'Representation' - 'Cookie header representation. Valid values are ``atom``, ``chars``, and ``codes``.'
@@ -420,11 +420,23 @@
 	interpret_attribute(Codes, secure-true) :-
 		codes_ignore_case_match(Codes, [0's, 0'e, 0'c, 0'u, 0'r, 0'e]),
 		!.
+	interpret_attribute(Codes, secure-true) :-
+		split_attribute_codes(Codes, NameCodes, [0'1]),
+		codes_ignore_case_match(NameCodes, [0's, 0'e, 0'c, 0'u, 0'r, 0'e]),
+		!.
 	interpret_attribute(Codes, http_only-true) :-
 		codes_ignore_case_match(Codes, [0'h, 0't, 0't, 0'p, 0'o, 0'n, 0'l, 0'y]),
 		!.
+	interpret_attribute(Codes, http_only-true) :-
+		split_attribute_codes(Codes, NameCodes, [0'1]),
+		codes_ignore_case_match(NameCodes, [0'h, 0't, 0't, 0'p, 0'o, 0'n, 0'l, 0'y]),
+		!.
 	interpret_attribute(Codes, partitioned-true) :-
 		codes_ignore_case_match(Codes, [0'p, 0'a, 0'r, 0't, 0'i, 0't, 0'i, 0'o, 0'n, 0'e, 0'd]),
+		!.
+	interpret_attribute(Codes, partitioned-true) :-
+		split_attribute_codes(Codes, NameCodes, [0'1]),
+		codes_ignore_case_match(NameCodes, [0'p, 0'a, 0'r, 0't, 0'i, 0't, 0'i, 0'o, 0'n, 0'e, 0'd]),
 		!.
 	interpret_attribute(Codes, expires-DateTime) :-
 		split_attribute_codes(Codes, NameCodes, Value),
