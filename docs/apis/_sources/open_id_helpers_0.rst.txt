@@ -15,7 +15,7 @@ Internal shared helpers for the open_id library.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-25
+| **Date:** 2026-06-27
 
 | **Compilation flags:**
 |    ``static``
@@ -407,6 +407,25 @@ Extracts the key and value from a JSON pair compound term.
 |    ``pair_key_value(Pair,Key,Value)``
 | **Mode and number of proofs:**
 |    ``pair_key_value(+compound,-term,-term)`` - ``one``
+
+
+------------
+
+.. index:: append_query/3
+.. _open_id_helpers/0::append_query/3:
+
+``append_query/3``
+^^^^^^^^^^^^^^^^^^
+
+Appends a query atom to an endpoint URL, preserving any existing query.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``append_query(Endpoint,Query,URL)``
+| **Mode and number of proofs:**
+|    ``append_query(+atom,+atom,-atom)`` - ``one``
 
 
 ------------

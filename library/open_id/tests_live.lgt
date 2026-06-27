@@ -98,7 +98,7 @@
 			Code,
 			AuthorizationSession,
 			Tokens,
-			[client_secret_post('tardis')]
+			[client_authentication(client_secret_post('tardis'))]
 		),
 		token_property(Tokens, access_token, AccessToken),
 		token_property(Tokens, id_token, IdToken),

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-25,
+		date is 2026-06-27,
 		comment is 'Internal shared helpers for the open_id library.'
 	]).
 
@@ -174,6 +174,13 @@
 		argnames is ['Pair', 'Key', 'Value']
 	]).
 
+	:- protected(append_query/3).
+	:- mode(append_query(+atom, +atom, -atom), one).
+	:- info(append_query/3, [
+		comment is 'Appends a query atom to an endpoint URL, preserving any existing query.',
+		argnames is ['Endpoint', 'Query', 'URL']
+	]).
+
 	:- uses(list, [
 		member/2, memberchk/2
 	]).
@@ -184,8 +191,9 @@
 
 	valid_option(allow_insecure_http(Boolean)) :-
 		once((Boolean == true; Boolean == false)).
-	valid_option(client_secret_post(Secret)) :-
-		atom(Secret).
+	valid_option(client_authentication(Authentication)) :-
+		ground(Authentication),
+		valid_client_authentication(Authentication).
 	valid_option(clock_skew(ClockSkew)) :-
 		number(ClockSkew),
 		ClockSkew >= 0.
@@ -203,10 +211,15 @@
 		atom_list(Algorithms).
 	valid_option(code_verifier(Verifier)) :-
 		atom(Verifier).
+	valid_option(jwks_cache_ttl(TTL)) :-
+		number(TTL),
+		TTL >= 0.
 	valid_option(openssl_executable(Executable)) :-
 		atom(Executable).
 	valid_option(openssl_arguments(Arguments)) :-
 		list::valid(Arguments).
+	valid_option(refresh_on_unknown_kid(Boolean)) :-
+		once((Boolean == true; Boolean == false)).
 	valid_option(server_name(ServerName)) :-
 		atom(ServerName).
 	valid_option(connection_options(ConnectionOptions)) :-
@@ -215,16 +228,34 @@
 		list::valid(Headers).
 	valid_option(query(Query)) :-
 		list::valid(Query).
-	valid_option(version(_Version)).
+	valid_option(scope(Scope)) :-
+		(	atom(Scope) ->
+			true
+		;	atom_list(Scope)
+		).
+	valid_option(version(http(Major, Minor))) :-
+		integer(Major),
+		Major >= 0,
+		integer(Minor),
+		Minor >= 0.
 	valid_option(properties(Properties)) :-
 		list::valid(Properties).
 	valid_option(state(State)) :-
 		atom(State).
 	valid_option(nonce(Nonce)) :-
 		atom(Nonce).
+	valid_option(provider(Properties)) :-
+		list::valid(Properties).
+	valid_option(session(Properties)) :-
+		list::valid(Properties).
+	valid_option(allow_fragment_response(Boolean)) :-
+		once((Boolean == true; Boolean == false)).
 
 	default_option(allow_insecure_http(false)).
+	default_option(client_authentication(none)).
 	default_option(clock_skew(60)).
+	default_option(jwks_cache_ttl(3600)).
+	default_option(refresh_on_unknown_kid(true)).
 	default_option(required_claims([])).
 	default_option(allow_algorithms(['RS256', 'ES256'])).
 
@@ -357,9 +388,22 @@
 		!.
 	pair_key_value(':'(Key, Value), Key, Value).
 
+	append_query(Endpoint, Query, URL) :-
+		(	sub_atom(Endpoint, _, _, _, '?') ->
+			atom_concat(Endpoint, '&', Prefix)
+		;	atom_concat(Endpoint, '?', Prefix)
+		),
+		atom_concat(Prefix, Query, URL).
+
 	atom_list([]).
 	atom_list([Atom| Atoms]) :-
 		atom(Atom),
 		atom_list(Atoms).
+
+	valid_client_authentication(none).
+	valid_client_authentication(client_secret_basic(Secret)) :-
+		atom(Secret).
+	valid_client_authentication(client_secret_post(Secret)) :-
+		atom(Secret).
 
 :- end_category.

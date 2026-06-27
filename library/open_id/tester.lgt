@@ -13,6 +13,7 @@
 )).
 
 	:- initialization((
+		logtalk_load(basic_types(loader)),
 		logtalk_load(base64(loader)),
 		logtalk_load(crypto(loader)),
 		logtalk_load(hashes(loader)),
@@ -26,11 +27,14 @@
 			open_id_helpers,
 			open_id_discovery,
 			open_id_pkce,
+			open_id_logout,
+			open_id_response,
 			open_id_client,
 			open_id_jwks,
 			open_id_der,
 			open_id_openssl,
 			open_id_jwt,
+			open_id_jwks_cache,
 			open_id
 		], [
 			debug(on),

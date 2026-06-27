@@ -15,7 +15,7 @@ OpenID Provider discovery metadata helpers.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-25
+| **Date:** 2026-06-27
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -23,6 +23,8 @@ OpenID Provider discovery metadata helpers.
 
 | **Imports:**
 |    ``public`` :ref:`open_id_helpers <open_id_helpers/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
 
 | **Remarks:**
 |    (none)

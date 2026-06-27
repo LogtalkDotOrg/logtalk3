@@ -12,7 +12,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-25,
+		date is 2026-06-27,
 		comment is 'OpenSSL-backed JWT signature verification helpers.'
 	]).
 
@@ -54,7 +54,8 @@
 				(cleanup_temporary_files([PublicKeyFile, DataFile, SignatureFile]), throw(Error))
 			) ->
 			cleanup_temporary_files([PublicKeyFile, DataFile, SignatureFile])
-		;	cleanup_temporary_files([PublicKeyFile, DataFile, SignatureFile])
+		;	cleanup_temporary_files([PublicKeyFile, DataFile, SignatureFile]),
+			fail
 		).
 
 	openssl_executable(Options, Path) :-

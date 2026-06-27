@@ -264,9 +264,12 @@
 <li class="toctree-l3"><a class="reference internal" href="open_id_discovery_0.html">open_id_discovery</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">open_id_helpers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="open_id_jwks_0.html">open_id_jwks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="open_id_jwks_cache_0.html">open_id_jwks_cache</a></li>
 <li class="toctree-l3"><a class="reference internal" href="open_id_jwt_0.html">open_id_jwt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="open_id_logout_0.html">open_id_logout</a></li>
 <li class="toctree-l3"><a class="reference internal" href="open_id_openssl_0.html">open_id_openssl</a></li>
 <li class="toctree-l3"><a class="reference internal" href="open_id_pkce_0.html">open_id_pkce</a></li>
+<li class="toctree-l3"><a class="reference internal" href="open_id_response_0.html">open_id_response</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#optics-clusterer"><span class="xref std std-ref">optics_clusterer</span></a></li>
@@ -406,7 +409,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-25</div>
+<div class="line"><strong>Date:</strong> 2026-06-27</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -462,10 +465,11 @@
 <li><p><a class="reference internal" href="#base64url-atom-bytes-2" id="id17"><code class="docutils literal notranslate"><span class="pre">base64url_atom_bytes/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#json-object-pairs-2" id="id18"><code class="docutils literal notranslate"><span class="pre">json_object_pairs/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#pair-key-value-3" id="id19"><code class="docutils literal notranslate"><span class="pre">pair_key_value/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#append-query-3" id="id20"><code class="docutils literal notranslate"><span class="pre">append_query/3</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#private-predicates" id="id20">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id21">Operators</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id21">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id22">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -910,6 +914,27 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">pair_key_value(+compound,-term,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="append-query-3">
+<span id="open-id-helpers-0-append-query-3"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">append_query/3</span></code></a><a class="headerlink" href="#append-query-3" title="Link to this heading"></a></h3>
+<p>Appends a query atom to an endpoint URL, preserving any existing query.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">append_query(Endpoint,Query,URL)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">append_query(+atom,+atom,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 </section>

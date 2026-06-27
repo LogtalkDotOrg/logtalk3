@@ -15,7 +15,7 @@ Facade predicates for a portable OpenID Connect Authorization Code + PKCE client
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-25
+| **Date:** 2026-06-27
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -23,8 +23,11 @@ Facade predicates for a portable OpenID Connect Authorization Code + PKCE client
 
 | **Uses:**
 |    :ref:`open_id_client <open_id_client/0>`
+|    :ref:`open_id_jwks_cache <open_id_jwks_cache/0>`
 |    :ref:`open_id_jwt <open_id_jwt/0>`
+|    :ref:`open_id_logout <open_id_logout/0>`
 |    :ref:`open_id_pkce <open_id_pkce/0>`
+|    :ref:`open_id_response <open_id_response/0>`
 
 | **Remarks:**
 |    (none)
@@ -121,6 +124,72 @@ Builds an authorization URL and returns the session data needed for the code exc
 
 ------------
 
+.. index:: authorization_response/3
+.. _open_id/0::authorization_response/3:
+
+``authorization_response/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Parses an authorization callback URL into either an authorization response or an authorization error term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``authorization_response(CallbackURL,Response,Options)``
+| **Mode and number of proofs:**
+|    ``authorization_response(+atom,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``CallbackURL`` is not a valid callback URL or relative reference:
+|        ``domain_error(open_id_authorization_response,CallbackURL)``
+
+
+------------
+
+.. index:: authorization_code/4
+.. _open_id/0::authorization_code/4:
+
+``authorization_code/4``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Parses an authorization callback URL, validates the session state, and returns the authorization code.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``authorization_code(CallbackURL,Session,Code,Options)``
+| **Mode and number of proofs:**
+|    ``authorization_code(+atom,+compound,-atom,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Session`` is missing required state data:
+|        ``domain_error(open_id_session,missing(Session,state))``
+|    The callback response is an authorization error:
+|        ``domain_error(open_id_authorization_response,authorization_error(Response))``
+|    The callback response state does not match the session state:
+|        ``domain_error(open_id_authorization_response,state_mismatch(Expected,Actual))``
+
+
+------------
+
 .. index:: exchange_code/5
 .. _open_id/0::exchange_code/5:
 
@@ -158,6 +227,117 @@ Exchanges an authorization code for token response data.
 
 ------------
 
+.. index:: refresh_token/4
+.. _open_id/0::refresh_token/4:
+
+``refresh_token/4``
+^^^^^^^^^^^^^^^^^^^
+
+Exchanges a refresh token for token response data.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``refresh_token(Provider,RefreshToken,Tokens,Options)``
+| **Mode and number of proofs:**
+|    ``refresh_token(+compound,+atom,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    The ``client_id`` option is missing:
+|        ``domain_error(open_id_refresh_token,missing(client_id))``
+|    The token endpoint returned a non-success status:
+|        ``domain_error(open_id_http_status,Code)``
+|    The token endpoint response body is not JSON:
+|        ``domain_error(open_id_json_response,Body)``
+|    The token endpoint JSON response is missing a required member:
+|        ``domain_error(open_id_token_response,missing(Name))``
+
+
+------------
+
+.. index:: userinfo/4
+.. _open_id/0::userinfo/4:
+
+``userinfo/4``
+^^^^^^^^^^^^^^
+
+Fetches UserInfo claims using the given access token.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``userinfo(Provider,AccessToken,Claims,Options)``
+| **Mode and number of proofs:**
+|    ``userinfo(+compound,+atom,-term,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    The provider metadata is missing a UserInfo endpoint:
+|        ``domain_error(open_id_provider,missing(userinfo_endpoint))``
+|    The UserInfo endpoint returned a non-success status:
+|        ``domain_error(open_id_http_status,Code)``
+|    The UserInfo endpoint response body is not JSON:
+|        ``domain_error(open_id_json_response,Body)``
+
+
+------------
+
+.. index:: logout_url/4
+.. _open_id/0::logout_url/4:
+
+``logout_url/4``
+^^^^^^^^^^^^^^^^
+
+Builds a logout URL for an RP-initiated logout request.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``logout_url(Provider,Request,URL,Options)``
+| **Mode and number of proofs:**
+|    ``logout_url(+compound,+compound,-atom,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Request`` is neither a direct options list nor a request wrapper term containing an options list:
+|        ``domain_error(open_id_options,Request)``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    The provider metadata is missing an end-session endpoint:
+|        ``domain_error(open_id_provider,missing(end_session_endpoint))``
+|    A request value that must be an atom is not an atom:
+|        ``type_error(atom,Value)``
+|    A ``ui_locales`` value is neither an atom nor a list of atoms:
+|        ``domain_error(open_id_space_separated_atom,Value)``
+|    The ``post_logout_redirect_uri`` is not secure:
+|        ``domain_error(open_id_post_logout_redirect_uri,URL)``
+
+
+------------
+
 .. index:: jwks/3
 .. _open_id/0::jwks/3:
 
@@ -187,6 +367,44 @@ Fetches the JSON Web Key Set for the provider.
 |        ``domain_error(open_id_http_status,Code)``
 |    The JWKS endpoint response body is not JSON:
 |        ``domain_error(open_id_json_response,Body)``
+
+
+------------
+
+.. index:: cached_jwks/3
+.. _open_id/0::cached_jwks/3:
+
+``cached_jwks/3``
+^^^^^^^^^^^^^^^^^
+
+Returns a cached JWKS for a provider, refreshing it when needed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cached_jwks(Provider,JWKSet,Options)``
+| **Mode and number of proofs:**
+|    ``cached_jwks(+compound,-term,+list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: verify_id_token/4
+.. _open_id/0::verify_id_token/4:
+
+``verify_id_token/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+Verifies an ID-token using cached JWKS data, refreshing the JWKS once when the token key identifier is unknown.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``verify_id_token(Token,Provider,Claims,Options)``
+| **Mode and number of proofs:**
+|    ``verify_id_token(+atom,+compound,-term,+list(compound))`` - ``zero_or_one_or_error``
 
 
 ------------

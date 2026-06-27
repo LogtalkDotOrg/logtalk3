@@ -13,7 +13,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-25,
+		date is 2026-06-27,
 		comment is 'PKCE and authorization-request helpers for OpenID Connect clients.'
 	]).
 
@@ -117,7 +117,7 @@
 			code_challenge_method-'S256'
 		| Extra],
 		^^query_atom(Parameters, Query),
-		append_query(Endpoint, Query, URL),
+		^^append_query(Endpoint, Query, URL),
 		Session = session([
 			state(State),
 			nonce(Nonce),
@@ -150,12 +150,6 @@
 
 	option_term(Name, Value, Term) :-
 		Term =.. [Name, Value].
-
-	append_query(Endpoint, Query, URL) :-
-		(	sub_atom(Endpoint, _, _, _, '?') ->
-			atomic_list_concat([Endpoint, '&', Query], URL)
-		;	atomic_list_concat([Endpoint, '?', Query], URL)
-		).
 
 	validate_code_verifier(Verifier) :-
 		(	var(Verifier) ->

@@ -5,8 +5,10 @@
 
 The ``open_id`` library provides a portable OpenID Connect client for
 the Authorization Code + PKCE flow. It supports provider discovery,
-authorization URL construction, authorization-code token exchange, JWKS
-retrieval, and ID-token verification for ``RS256`` and ``ES256``.
+authorization URL construction, authorization response parsing and state
+validation, authorization-code and refresh-token exchanges, UserInfo
+requests, RP-initiated logout URL construction, JWKS retrieval and
+caching, and ID-token verification for ``RS256`` and ``ES256``.
 
 The library uses ``http_client(http_socket_process)`` for HTTP requests.
 HTTPS requests are made using ``http_socket_process`` TLS connections,
@@ -78,35 +80,78 @@ Basic usage
             []
         ).
 
-After redirecting the user to ``URL`` and receiving an authorization
-code:
+After redirecting the user to ``URL`` and receiving the callback URL:
 
 ::
 
-   | ?- open_id::exchange_code(Provider, Code, Session, Tokens, []),
-        open_id::jwks(Provider, JWKSet, []),
+   | ?- open_id::authorization_code(CallbackURL, Session, Code, []),
+        open_id::exchange_code(
+            Provider,
+            Code,
+            Session,
+            Tokens,
+            [client_authentication(client_secret_basic('client-secret'))]
+        ),
         Tokens = tokens(Properties),
         member(id_token(IDToken), Properties),
-        open_id::verify_id_token(IDToken, Provider, JWKSet, Claims,
-            [client_id('client-id')]).
+        open_id::verify_id_token(IDToken, Provider, Claims,
+            [expected_audience('client-id')]).
+
+To call the UserInfo endpoint with the resulting access token:
+
+::
+
+   | ?- Tokens = tokens(Properties),
+        member(access_token(AccessToken), Properties),
+        open_id::userinfo(Provider, AccessToken, UserInfo, []).
+
+To use a refresh token:
+
+::
+
+   | ?- open_id::refresh_token(
+            Provider,
+            RefreshToken,
+            RefreshedTokens,
+            [
+                client_id('client-id'),
+                client_authentication(client_secret_basic('client-secret'))
+            ]
+        ).
+
+To build an RP-initiated logout URL:
+
+::
+
+   | ?- open_id::logout_url(
+            Provider,
+            logout_request([
+                id_token_hint(IDToken),
+                post_logout_redirect_uri('https://client.example/logout/callback'),
+                state('logout-state')
+            ]),
+            LogoutURL,
+            []
+        ).
 
 Current scope
 -------------
 
 - OpenID Provider discovery.
 - Authorization Code + PKCE (``S256``) URL construction.
-- Authorization-code token exchange for public clients and
-  ``client_secret_post/1``.
-- JWKS retrieval and key selection.
+- Authorization response parsing and state validation.
+- Authorization-code token exchange for public clients,
+  ``client_secret_post/1``, and ``client_secret_basic/1``.
+- Refresh-token exchange and UserInfo retrieval.
+- RP-initiated logout URL construction.
+- JWKS retrieval, caching, and refresh-on-unknown-``kid`` key rotation.
 - ID-token JWT verification for ``RS256`` and ``ES256`` using OpenSSL.
-- Claim validation for issuer, audience, authorized party, nonce,
-  expiration, not-before, and issued-at tolerance.
+- Claim validation for issuer, subject, audience, authorized party,
+  nonce, expiration, not-before, and issued-at tolerance.
 
 Current limitations
 -------------------
 
-- Refresh-token handling, UserInfo, logout, device authorization,
-  dynamic client registration, browser launching, and callback server
-  ownership are outside the first release scope.
-- JWKS caching is left to applications.
+- Device authorization, dynamic client registration, browser launching,
+  and callback server ownership are outside the current scope.
 - ID-token verification requires the ``openssl`` command.

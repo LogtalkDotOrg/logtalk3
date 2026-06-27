@@ -13,7 +13,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-25,
+		date is 2026-06-27,
 		comment is 'JWT parsing and ID-token verification helpers.'
 	]).
 
@@ -111,6 +111,7 @@
 	validate_claims(Claims, Provider, Options) :-
 		^^provider_property(Provider, issuer, Issuer),
 		required_claim_value(iss, Claims, Issuer),
+		required_subject(Claims),
 		expected_audience(Options, Audience),
 		required_claim(aud, Claims, AudienceClaim),
 		validate_audience(AudienceClaim, Audience),
@@ -120,7 +121,7 @@
 		^^option(clock_skew(ClockSkew), Options),
 		validate_time_claim(exp, Claims, Now, ClockSkew, expiration),
 		validate_optional_time_claim(nbf, Claims, Now, ClockSkew, not_before),
-		validate_optional_iat(Claims, Now, ClockSkew),
+		validate_iat(Claims, Now, ClockSkew),
 		validate_required_claims(Claims, Options).
 
 	required_claim_value(Name, Claims, Value) :-
@@ -180,6 +181,14 @@
 		;	true
 		).
 
+	required_subject(Claims) :-
+		required_claim(sub, Claims, Subject),
+		(	atom(Subject),
+			Subject \== '' ->
+			true
+		;	domain_error(open_id_claim(sub), Subject)
+		).
+
 	current_time(Options, Now) :-
 		(	^^option(now(Now), Options) ->
 			true
@@ -208,14 +217,12 @@
 		;	true
 		).
 
-	validate_optional_iat(Claims, Now, ClockSkew) :-
-		(	^^json_member(iat, Claims, IssuedAt) ->
-			validate_time_number(iat, IssuedAt),
-			(	IssuedAt =< Now + ClockSkew ->
-				true
-			;	domain_error(open_id_claim(iat), IssuedAt)
-			)
-		;	true
+	validate_iat(Claims, Now, ClockSkew) :-
+		required_claim(iat, Claims, IssuedAt),
+		validate_time_number(iat, IssuedAt),
+		(	IssuedAt =< Now + ClockSkew ->
+			true
+		;	domain_error(open_id_claim(iat), IssuedAt)
 		).
 
 	validate_time_number(Name, Time) :-

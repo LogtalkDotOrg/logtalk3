@@ -13,8 +13,12 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-25,
+		date is 2026-06-27,
 		comment is 'OpenID Provider discovery metadata helpers.'
+	]).
+
+	:- uses(list, [
+		append/2
 	]).
 
 	:- public(discovery_url/2).
@@ -80,15 +84,27 @@
 		required_url(authorization_endpoint, JSON, AuthorizationEndpoint, MergedOptions),
 		required_url(token_endpoint, JSON, TokenEndpoint, MergedOptions),
 		required_url(jwks_uri, JSON, JWKsURI, MergedOptions),
+		optional_url_property(userinfo_endpoint, JSON, MergedOptions, UserInfoProperties),
+		optional_url_property(end_session_endpoint, JSON, MergedOptions, EndSessionProperties),
 		^^json_member_default(id_token_signing_alg_values_supported, JSON, ['RS256', 'ES256'], Algorithms),
-		Provider = provider([
-			issuer(Issuer),
-			authorization_endpoint(AuthorizationEndpoint),
-			token_endpoint(TokenEndpoint),
-			jwks_uri(JWKsURI),
-			id_token_signing_alg_values_supported(Algorithms),
-			raw(JSON)
-		]).
+		append(
+			[
+				[
+					issuer(Issuer),
+					authorization_endpoint(AuthorizationEndpoint),
+					token_endpoint(TokenEndpoint),
+					jwks_uri(JWKsURI)
+				],
+				UserInfoProperties,
+				EndSessionProperties,
+				[
+					id_token_signing_alg_values_supported(Algorithms),
+					raw(JSON)
+				]
+			],
+			Properties
+		),
+		Provider = provider(Properties).
 
 	property(Provider, Name, Value) :-
 		^^provider_property(Provider, Name, Value).
@@ -96,6 +112,13 @@
 	required_url(Name, JSON, URL, Options) :-
 		^^json_member(Name, JSON, URL),
 		^^ensure_secure_url(open_id_provider_metadata_url, URL, Options).
+
+	optional_url_property(Name, JSON, Options, [Property]) :-
+		^^json_member(Name, JSON, URL),
+		!,
+		^^ensure_secure_url(open_id_provider_metadata_url, URL, Options),
+		Property =.. [Name, URL].
+	optional_url_property(_, _, _, []).
 
 	strip_trailing_slash(Issuer, NormalizedIssuer) :-
 		atom_concat(NormalizedIssuer, '/', Issuer),

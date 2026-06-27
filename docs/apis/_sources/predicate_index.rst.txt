@@ -1221,6 +1221,28 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`http_authenticate <http_authenticate/0::authorization/2>`
 * :ref:`http_digest <http_digest/0::authorization/2>`
 
+``authorization_code/4``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_id <open_id/0::authorization_code/4>`
+* :ref:`open_id_response <open_id_response/0::authorization_code/4>`
+
+``authorization_response/3``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_id <open_id/0::authorization_response/3>`
+* :ref:`open_id_response <open_id_response/0::authorization_response/3>`
+
 ``authorization_url/5``
 -----------------------
 
@@ -2008,6 +2030,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`tzif_protocol <tzif_protocol/0::cache_source/1>`
 
+``cached_jwks/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_id <open_id/0::cached_jwks/3>`
+* :ref:`open_id_jwks_cache <open_id_jwks_cache/0::cached_jwks/3>`
+
 ``cached_tzif/1``
 -----------------
 
@@ -2738,6 +2771,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`datalog_protocol <datalog_protocol/0::clear/0>`
+* :ref:`open_id_jwks_cache <open_id_jwks_cache/0::clear/0>`
 
 ``clear/1``
 -----------
@@ -2748,6 +2782,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_cookie_jar <http_cookie_jar/0::clear/1>`
+* :ref:`open_id_jwks_cache <open_id_jwks_cache/0::clear/1>`
 
 ``clear_cache/0``
 -----------------
@@ -13442,6 +13477,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`sampling_protocol <sampling_protocol/0::lognormal/3>`
 
+``logout_url/4``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_id <open_id/0::logout_url/4>`
+* :ref:`open_id_logout <open_id_logout/0::logout_url/4>`
+
 ``logseries/2``
 ---------------
 
@@ -20718,6 +20764,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::refine_propagate/6>`
 
+``refresh_token/4``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_id <open_id/0::refresh_token/4>`
+* :ref:`open_id_client <open_id_client/0::refresh_token/4>`
+
 ``register/2``
 --------------
 
@@ -25793,6 +25850,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::user_data/2>`
 
+``userinfo/4``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_id <open_id/0::userinfo/4>`
+* :ref:`open_id_client <open_id_client/0::userinfo/4>`
+
 ``utc_date_time_to_instant/2``
 ------------------------------
 
@@ -26694,6 +26762,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ccsds_frames <ccsds_frames/0::verify_fecf/1>`
 * :ref:`ccsds_tc_frames(FrameLength,SegmentHeaderLength,HasFECF) <ccsds_tc_frames/3::verify_fecf/1>`
 * :ref:`ccsds_tm_frames(FrameLength,SecondaryHeaderLength,HasFECF) <ccsds_tm_frames/3::verify_fecf/1>`
+
+``verify_id_token/4``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`open_id <open_id/0::verify_id_token/4>`
+* :ref:`open_id_jwks_cache <open_id_jwks_cache/0::verify_id_token/4>`
 
 ``verify_id_token/5``
 ---------------------

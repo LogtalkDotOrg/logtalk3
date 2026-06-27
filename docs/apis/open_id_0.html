@@ -264,9 +264,12 @@
 <li class="toctree-l3"><a class="reference internal" href="open_id_discovery_0.html">open_id_discovery</a></li>
 <li class="toctree-l3"><a class="reference internal" href="open_id_helpers_0.html">open_id_helpers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="open_id_jwks_0.html">open_id_jwks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="open_id_jwks_cache_0.html">open_id_jwks_cache</a></li>
 <li class="toctree-l3"><a class="reference internal" href="open_id_jwt_0.html">open_id_jwt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="open_id_logout_0.html">open_id_logout</a></li>
 <li class="toctree-l3"><a class="reference internal" href="open_id_openssl_0.html">open_id_openssl</a></li>
 <li class="toctree-l3"><a class="reference internal" href="open_id_pkce_0.html">open_id_pkce</a></li>
+<li class="toctree-l3"><a class="reference internal" href="open_id_response_0.html">open_id_response</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#optics-clusterer"><span class="xref std std-ref">optics_clusterer</span></a></li>
@@ -406,7 +409,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-25</div>
+<div class="line"><strong>Date:</strong> 2026-06-27</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -418,8 +421,11 @@
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
 <div class="line"><a class="reference internal" href="open_id_client_0.html#open-id-client-0"><span class="std std-ref">open_id_client</span></a></div>
+<div class="line"><a class="reference internal" href="open_id_jwks_cache_0.html#open-id-jwks-cache-0"><span class="std std-ref">open_id_jwks_cache</span></a></div>
 <div class="line"><a class="reference internal" href="open_id_jwt_0.html#open-id-jwt-0"><span class="std std-ref">open_id_jwt</span></a></div>
+<div class="line"><a class="reference internal" href="open_id_logout_0.html#open-id-logout-0"><span class="std std-ref">open_id_logout</span></a></div>
 <div class="line"><a class="reference internal" href="open_id_pkce_0.html#open-id-pkce-0"><span class="std std-ref">open_id_pkce</span></a></div>
+<div class="line"><a class="reference internal" href="open_id_response_0.html#open-id-response-0"><span class="std std-ref">open_id_response</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -440,14 +446,21 @@
 <ul>
 <li><p><a class="reference internal" href="#discover-3" id="id2"><code class="docutils literal notranslate"><span class="pre">discover/3</span></code></a></p></li>
 <li><p><a class="reference internal" href="#authorization-url-5" id="id3"><code class="docutils literal notranslate"><span class="pre">authorization_url/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#exchange-code-5" id="id4"><code class="docutils literal notranslate"><span class="pre">exchange_code/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#jwks-3" id="id5"><code class="docutils literal notranslate"><span class="pre">jwks/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#verify-id-token-5" id="id6"><code class="docutils literal notranslate"><span class="pre">verify_id_token/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#authorization-response-3" id="id4"><code class="docutils literal notranslate"><span class="pre">authorization_response/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#authorization-code-4" id="id5"><code class="docutils literal notranslate"><span class="pre">authorization_code/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#exchange-code-5" id="id6"><code class="docutils literal notranslate"><span class="pre">exchange_code/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#refresh-token-4" id="id7"><code class="docutils literal notranslate"><span class="pre">refresh_token/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#userinfo-4" id="id8"><code class="docutils literal notranslate"><span class="pre">userinfo/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#logout-url-4" id="id9"><code class="docutils literal notranslate"><span class="pre">logout_url/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#jwks-3" id="id10"><code class="docutils literal notranslate"><span class="pre">jwks/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#cached-jwks-3" id="id11"><code class="docutils literal notranslate"><span class="pre">cached_jwks/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#verify-id-token-4" id="id12"><code class="docutils literal notranslate"><span class="pre">verify_id_token/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#verify-id-token-5" id="id13"><code class="docutils literal notranslate"><span class="pre">verify_id_token/5</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id7">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id8">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id9">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id14">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id15">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id16">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -584,8 +597,108 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="authorization-response-3">
+<span id="open-id-0-authorization-response-3"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">authorization_response/3</span></code></a><a class="headerlink" href="#authorization-response-3" title="Link to this heading"></a></h3>
+<p>Parses an authorization callback URL into either an authorization response or an authorization error term.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">authorization_response(CallbackURL,Response,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">authorization_response(+atom,-compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">CallbackURL</span></code> is not a valid callback URL or relative reference:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(open_id_authorization_response,CallbackURL)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="authorization-code-4">
+<span id="open-id-0-authorization-code-4"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">authorization_code/4</span></code></a><a class="headerlink" href="#authorization-code-4" title="Link to this heading"></a></h3>
+<p>Parses an authorization callback URL, validates the session state, and returns the authorization code.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">authorization_code(CallbackURL,Session,Code,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">authorization_code(+atom,+compound,-atom,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Session</span></code> is missing required state data:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(open_id_session,missing(Session,state))</span></code></div>
+</div>
+<div class="line">The callback response is an authorization error:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(open_id_authorization_response,authorization_error(Response))</span></code></div>
+</div>
+<div class="line">The callback response state does not match the session state:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(open_id_authorization_response,state_mismatch(Expected,Actual))</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="exchange-code-5">
-<span id="open-id-0-exchange-code-5"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">exchange_code/5</span></code></a><a class="headerlink" href="#exchange-code-5" title="Link to this heading"></a></h3>
+<span id="open-id-0-exchange-code-5"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">exchange_code/5</span></code></a><a class="headerlink" href="#exchange-code-5" title="Link to this heading"></a></h3>
 <p>Exchanges an authorization code for token response data.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -642,8 +755,182 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="refresh-token-4">
+<span id="open-id-0-refresh-token-4"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">refresh_token/4</span></code></a><a class="headerlink" href="#refresh-token-4" title="Link to this heading"></a></h3>
+<p>Exchanges a refresh token for token response data.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">refresh_token(Provider,RefreshToken,Tokens,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">refresh_token(+compound,+atom,-compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line">The <code class="docutils literal notranslate"><span class="pre">client_id</span></code> option is missing:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(open_id_refresh_token,missing(client_id))</span></code></div>
+</div>
+<div class="line">The token endpoint returned a non-success status:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(open_id_http_status,Code)</span></code></div>
+</div>
+<div class="line">The token endpoint response body is not JSON:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(open_id_json_response,Body)</span></code></div>
+</div>
+<div class="line">The token endpoint JSON response is missing a required member:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(open_id_token_response,missing(Name))</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="userinfo-4">
+<span id="open-id-0-userinfo-4"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">userinfo/4</span></code></a><a class="headerlink" href="#userinfo-4" title="Link to this heading"></a></h3>
+<p>Fetches UserInfo claims using the given access token.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">userinfo(Provider,AccessToken,Claims,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">userinfo(+compound,+atom,-term,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line">The provider metadata is missing a UserInfo endpoint:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(open_id_provider,missing(userinfo_endpoint))</span></code></div>
+</div>
+<div class="line">The UserInfo endpoint returned a non-success status:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(open_id_http_status,Code)</span></code></div>
+</div>
+<div class="line">The UserInfo endpoint response body is not JSON:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(open_id_json_response,Body)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="logout-url-4">
+<span id="open-id-0-logout-url-4"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">logout_url/4</span></code></a><a class="headerlink" href="#logout-url-4" title="Link to this heading"></a></h3>
+<p>Builds a logout URL for an RP-initiated logout request.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">logout_url(Provider,Request,URL,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">logout_url(+compound,+compound,-atom,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Request</span></code> is neither a direct options list nor a request wrapper term containing an options list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(open_id_options,Request)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line">The provider metadata is missing an end-session endpoint:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(open_id_provider,missing(end_session_endpoint))</span></code></div>
+</div>
+<div class="line">A request value that must be an atom is not an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Value)</span></code></div>
+</div>
+<div class="line">A <code class="docutils literal notranslate"><span class="pre">ui_locales</span></code> value is neither an atom nor a list of atoms:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(open_id_space_separated_atom,Value)</span></code></div>
+</div>
+<div class="line">The <code class="docutils literal notranslate"><span class="pre">post_logout_redirect_uri</span></code> is not secure:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(open_id_post_logout_redirect_uri,URL)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="jwks-3">
-<span id="open-id-0-jwks-3"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">jwks/3</span></code></a><a class="headerlink" href="#jwks-3" title="Link to this heading"></a></h3>
+<span id="open-id-0-jwks-3"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">jwks/3</span></code></a><a class="headerlink" href="#jwks-3" title="Link to this heading"></a></h3>
 <p>Fetches the JSON Web Key Set for the provider.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -692,8 +979,50 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="cached-jwks-3">
+<span id="open-id-0-cached-jwks-3"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">cached_jwks/3</span></code></a><a class="headerlink" href="#cached-jwks-3" title="Link to this heading"></a></h3>
+<p>Returns a cached JWKS for a provider, refreshing it when needed.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cached_jwks(Provider,JWKSet,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">cached_jwks(+compound,-term,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="verify-id-token-4">
+<span id="open-id-0-verify-id-token-4"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">verify_id_token/4</span></code></a><a class="headerlink" href="#verify-id-token-4" title="Link to this heading"></a></h3>
+<p>Verifies an ID-token using cached JWKS data, refreshing the JWKS once when the token key identifier is unknown.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">verify_id_token(Token,Provider,Claims,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">verify_id_token(+atom,+compound,-term,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="verify-id-token-5">
-<span id="open-id-0-verify-id-token-5"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">verify_id_token/5</span></code></a><a class="headerlink" href="#verify-id-token-5" title="Link to this heading"></a></h3>
+<span id="open-id-0-verify-id-token-5"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">verify_id_token/5</span></code></a><a class="headerlink" href="#verify-id-token-5" title="Link to this heading"></a></h3>
 <p>Verifies an ID-token signature and claims using the given provider metadata and JWKS.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
