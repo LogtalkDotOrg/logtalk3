@@ -22,9 +22,9 @@
 :- object(json_rpc).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:0:2,
 		author is 'Paulo Moura',
-		date is 2026-06-15,
+		date is 2026-06-28,
 		comment is 'JSON-RPC 2.0 protocol encoding and decoding. Provides predicates for constructing and parsing JSON-RPC 2.0 request, notification, response, and error objects. Uses the ``json`` library for JSON parsing and generation.',
 		remarks is [
 			'Specification' - 'Implements the JSON-RPC 2.0 specification: https://www.jsonrpc.org/specification',
@@ -400,9 +400,7 @@
 		length(Codes, Length),
 		write(Output, 'Content-Length: '),
 		write(Output, Length),
-		put_code(Output, 0'\r), put_code(Output, 0'\n),
-		put_code(Output, 0'\r), put_code(Output, 0'\n),
-		write_codes(Codes, Output),
+		write_codes([0'\r, 0'\n, 0'\r, 0'\n| Codes], Output),
 		flush_output(Output).
 
 	read_framed_message(Input, Message) :-

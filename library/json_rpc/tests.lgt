@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:0:2,
 		author is 'Paulo Moura',
-		date is 2026-06-24,
+		date is 2026-06-28,
 		comment is 'Unit tests for the "json_rpc" library.'
 	]).
 
@@ -337,7 +337,7 @@
 	% Write and read back a single framed request
 	test(json_rpc_write_read_framed_message_01, true(json_rpc::is_request(ReadMsg))) :-
 		json_rpc::request(subtract, [42,23], 1, Request),
-		^^file_path('test_json_rpc_framed.tmp_1', File),
+		^^file_path('test_json_rpc_framed_1.tmp', File),
 		open(File, write, Output),
 		json_rpc::write_framed_message(Output, Request),
 		close(Output),
