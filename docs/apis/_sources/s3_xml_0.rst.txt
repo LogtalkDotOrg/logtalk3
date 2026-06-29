@@ -1,0 +1,181 @@
+.. index:: single: s3_xml
+.. _s3_xml/0:
+
+.. rst-class:: right
+
+**object**
+
+``s3_xml``
+==========
+
+Adapter layer mapping S3 XML responses to stable library terms.
+
+| **Availability:** 
+|    ``logtalk_load(s3(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-29
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`user <user/0>`
+|    :ref:`xml <xml/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: list_buckets_response/2
+.. _s3_xml/0::list_buckets_response/2:
+
+``list_buckets_response/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Parses a ListBuckets XML response body.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``list_buckets_response(Body,Buckets)``
+| **Mode and number of proofs:**
+|    ``list_buckets_response(+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Body`` is not a supported XML response body term:
+|        ``domain_error(s3_xml_body,Body)``
+|    The XML document is malformed or missing required elements:
+|        ``domain_error(s3_xml_document,Codes)``
+
+
+------------
+
+.. index:: list_objects_v2_response/2
+.. _s3_xml/0::list_objects_v2_response/2:
+
+``list_objects_v2_response/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Parses a ListObjectsV2 XML response body.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``list_objects_v2_response(Body,Listing)``
+| **Mode and number of proofs:**
+|    ``list_objects_v2_response(+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Body`` is not a supported XML response body term:
+|        ``domain_error(s3_xml_body,Body)``
+|    The XML document is malformed or missing required elements:
+|        ``domain_error(s3_xml_document,Codes)``
+
+
+------------
+
+.. index:: copy_object_response/2
+.. _s3_xml/0::copy_object_response/2:
+
+``copy_object_response/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Parses a CopyObject XML response body.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``copy_object_response(Body,Result)``
+| **Mode and number of proofs:**
+|    ``copy_object_response(+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Body`` is not a supported XML response body term:
+|        ``domain_error(s3_xml_body,Body)``
+|    The XML document is malformed or missing required elements:
+|        ``domain_error(s3_xml_document,Codes)``
+
+
+------------
+
+.. index:: create_multipart_upload_response/2
+.. _s3_xml/0::create_multipart_upload_response/2:
+
+``create_multipart_upload_response/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Parses a CreateMultipartUpload XML response body.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``create_multipart_upload_response(Body,Result)``
+| **Mode and number of proofs:**
+|    ``create_multipart_upload_response(+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Body`` is not a supported XML response body term:
+|        ``domain_error(s3_xml_body,Body)``
+|    The XML document is malformed or missing required elements:
+|        ``domain_error(s3_xml_document,Codes)``
+
+
+------------
+
+.. index:: error_response/2
+.. _s3_xml/0::error_response/2:
+
+``error_response/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Parses an S3 XML error response body.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``error_response(Body,Error)``
+| **Mode and number of proofs:**
+|    ``error_response(+compound,-compound)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``Body`` is not a supported XML response body term:
+|        ``domain_error(s3_xml_body,Body)``
+|    The XML document is malformed or missing required elements:
+|        ``domain_error(s3_xml_document,Codes)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

@@ -2101,6 +2101,46 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`iso_13616_protocol <iso_13616_protocol/0::canonical_iban/2>`
 
+``canonical_query/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_signing <s3_signing/0::canonical_query/2>`
+
+``canonical_request/6``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_signing <s3_signing/0::canonical_request/6>`
+
+``canonical_uri/4``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_endpoints <s3_endpoints/0::canonical_uri/4>`
+
+``canonical_uri/5``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_endpoints <s3_endpoints/0::canonical_uri/5>`
+
 ``capabilities/1``
 ------------------
 
@@ -2892,6 +2932,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`http_server_session <http_server_session/0::close/1>`
 * :ref:`http_websocket(HTTPSocket) <http_websocket/1::close/1>`
 * :ref:`http_websocket_service_registry <http_websocket_service_registry/0::close/1>`
+* :ref:`s3_session(A) <s3_session/1::close/1>`
 
 ``close/2``
 -----------
@@ -3732,6 +3773,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`osp <osp/0::copy_file/2>`
 
+``copy_object/5``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_protocol <s3_protocol/0::copy_object/5>`
+
+``copy_object/6``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_session(A) <s3_session/1::copy_object/6>`
+
+``copy_object_response/2``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_xml <s3_xml/0::copy_object_response/2>`
+
 ``correlation/3``
 -----------------
 
@@ -4074,6 +4145,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`process <process/0::create/3>`
+
+``create_multipart_upload_response/2``
+--------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_xml <s3_xml/0::create_multipart_upload_response/2>`
 
 ``created_response/4``
 ----------------------
@@ -5057,6 +5138,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`dictionaryp <dictionaryp/0::delete_min/4>`
+
+``delete_object/4``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_protocol <s3_protocol/0::delete_object/4>`
+
+``delete_object/5``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_session(A) <s3_session/1::delete_object/5>`
 
 ``delete_vertex/3``
 -------------------
@@ -7095,6 +7196,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`json_rpc <json_rpc/0::error_message/2>`
+
+``error_response/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_xml <s3_xml/0::error_response/2>`
 
 ``error_response/4``
 --------------------
@@ -9347,6 +9458,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`flags <flags/0::get_flag_value/2>`
 
+``get_object/5``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_protocol <s3_protocol/0::get_object/5>`
+
+``get_object/6``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_session(A) <s3_session/1::get_object/6>`
+
 ``get_seed/1``
 --------------
 
@@ -9874,6 +10005,46 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`http_client_digest_session(HTTPSocket) <http_client_digest_session/1::head/4>`
 * :ref:`http_client_session(A) <http_client_session/1::head/4>`
 
+``head_bucket/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_protocol <s3_protocol/0::head_bucket/3>`
+
+``head_bucket/4``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_session(A) <s3_session/1::head_bucket/4>`
+
+``head_object/4``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_protocol <s3_protocol/0::head_object/4>`
+
+``head_object/5``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_session(A) <s3_session/1::head_object/5>`
+
 ``head_pred/1``
 ---------------
 
@@ -9928,6 +10099,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`jwt_jwa <jwt_jwa/0::header_key_id/2>`
 * :ref:`open_id_jwks <open_id_jwks/0::header_key_id/2>`
+
+``header_value/3``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_headers <s3_headers/0::header_value/3>`
 
 ``headers/1``
 -------------
@@ -12770,6 +12951,66 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`registries <registries/0::list/0>`
+
+``list_buckets/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_protocol <s3_protocol/0::list_buckets/2>`
+
+``list_buckets/3``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_session(A) <s3_session/1::list_buckets/3>`
+
+``list_buckets_response/2``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_xml <s3_xml/0::list_buckets_response/2>`
+
+``list_objects_v2/4``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_protocol <s3_protocol/0::list_objects_v2/4>`
+
+``list_objects_v2/5``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_session(A) <s3_session/1::list_objects_v2/5>`
+
+``list_objects_v2_response/2``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_xml <s3_xml/0::list_objects_v2_response/2>`
 
 ``list_to_array/2``
 -------------------
@@ -16375,6 +16616,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`http_cookie_jar <http_cookie_jar/0::open/1>`
 * :ref:`http_server_session <http_server_session/0::open/1>`
 * :ref:`http_websocket_service_registry <http_websocket_service_registry/0::open/1>`
+* :ref:`s3_session(A) <s3_session/1::open/1>`
 
 ``open/2``
 ----------
@@ -16388,6 +16630,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`http_cookie_jar <http_cookie_jar/0::open/2>`
 * :ref:`http_server_session <http_server_session/0::open/2>`
 * :ref:`http_websocket(HTTPSocket) <http_websocket/1::open/2>`
+* :ref:`s3_session(A) <s3_session/1::open/2>`
 
 ``open/3``
 ----------
@@ -17829,6 +18072,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`http_websocket_frames <http_websocket_frames/0::payload/2>`
 * :ref:`http_websocket_messages(TextRepresentation) <http_websocket_messages/1::payload/2>`
 
+``payload_hash/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_signing <s3_signing/0::payload_hash/2>`
+
 ``pbkdf2/6``
 ------------
 
@@ -18678,6 +18931,76 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`memcached <memcached/0::prepend/3>`
 
+``presigned_get_object/4``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_protocol <s3_protocol/0::presigned_get_object/4>`
+
+``presigned_get_object/5``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_session(A) <s3_session/1::presigned_get_object/5>`
+
+``presigned_post_object/4``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_protocol <s3_protocol/0::presigned_post_object/4>`
+
+``presigned_post_object/5``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_session(A) <s3_session/1::presigned_post_object/5>`
+
+``presigned_put_object/4``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_protocol <s3_protocol/0::presigned_put_object/4>`
+
+``presigned_put_object/5``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_session(A) <s3_session/1::presigned_put_object/5>`
+
+``presigned_query_pairs/7``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_signing <s3_signing/0::presigned_query_pairs/7>`
+
 ``previous/2``
 --------------
 
@@ -19409,6 +19732,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`http_client(HTTPSocket) <http_client/1::put/5>`
 * :ref:`http_client_digest_session(HTTPSocket) <http_client_digest_session/1::put/5>`
 * :ref:`http_client_session(A) <http_client_session/1::put/5>`
+
+``put_object/6``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_protocol <s3_protocol/0::put_object/6>`
+
+``put_object/7``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_session(A) <s3_session/1::put_object/7>`
 
 ``qr_decomposition/3``
 ----------------------
@@ -21150,6 +21493,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`http_client_session(A) <http_client_session/1::request/5>`
 * :ref:`open_ai_client <open_ai_client/0::request/5>`
 
+``request/6``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_endpoints <s3_endpoints/0::request/6>`
+
 ``request/7``
 -------------
 
@@ -21477,6 +21830,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_core <http_core/0::response/6>`
+
+``response_properties/2``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_headers <s3_headers/0::response_properties/2>`
 
 ``restore/1``
 -------------
@@ -23207,6 +23570,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`jwt <jwt/0::sign_payload/5>`
 * :ref:`jwt_jws <jwt_jws/0::sign_payload/5>`
+
+``sign_request/8``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`s3_signing <s3_signing/0::sign_request/8>`
 
 ``signaling_field/2``
 ---------------------

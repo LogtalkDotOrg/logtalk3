@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on June 26, 2026
+##   Last updated on June 29, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -287,6 +287,7 @@ sed '1,19d' ../../../library/regression_tree/NOTES.md | pandoc -f gfm -t rst -o 
 sed '1,19d' ../../../library/regularized_bradley_terry_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/regularized_bradley_terry_ranker.rst
 sed '1,19d' ../../../library/rest/NOTES.md | pandoc -f gfm -t rst -o libraries/rest.rst
 sed '1,19d' ../../../library/ridge_regression/NOTES.md | pandoc -f gfm -t rst -o libraries/ridge_regression.rst
+sed '1,19d' ../../../library/s3/NOTES.md | pandoc -f gfm -t rst -o libraries/s3.rst
 sed '1,19d' ../../../library/schulze_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/schulze_ranker.rst
 sed '1,19d' ../../../library/sequential_pattern_mining_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/sequential_pattern_mining_protocols.rst
 sed '1,19d' ../../../library/sets/NOTES.md | pandoc -f gfm -t rst -o libraries/sets.rst

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on June 26, 2026
+%  Last updated on June 29, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -209,6 +209,7 @@ logtalk_library_path(nmf_projection, library('nmf_projection/')).
 logtalk_library_path(open_api, library('open_api/')).
 logtalk_library_path(open_ai, library('open_ai/')).
 logtalk_library_path(open_id, library('open_id/')).
+logtalk_library_path(s3, library('s3/')).
 logtalk_library_path(optics_clusterer, library('optics_clusterer/')).
 logtalk_library_path(optionals, library('optionals/')).
 logtalk_library_path(options, library('options/')).

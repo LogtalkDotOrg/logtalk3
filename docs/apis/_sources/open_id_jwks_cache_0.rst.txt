@@ -1,0 +1,151 @@
+.. index:: single: open_id_jwks_cache
+.. _open_id_jwks_cache/0:
+
+.. rst-class:: right
+
+**object**
+
+``open_id_jwks_cache``
+======================
+
+JWKS caching and key-rotation helpers.
+
+| **Availability:** 
+|    ``logtalk_load(open_id(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-27
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`open_id_helpers <open_id_helpers/0>`
+| **Uses:**
+|    :ref:`open_id_client <open_id_client/0>`
+|    :ref:`open_id_jwt <open_id_jwt/0>`
+|    :ref:`os <os/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: cached_jwks/3
+.. _open_id_jwks_cache/0::cached_jwks/3:
+
+``cached_jwks/3``
+^^^^^^^^^^^^^^^^^
+
+Returns a cached JWKS for a provider, refreshing it when the cache is stale or missing.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cached_jwks(Provider,JWKSet,Options)``
+| **Mode and number of proofs:**
+|    ``cached_jwks(+compound,-term,+list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: verify_id_token/4
+.. _open_id_jwks_cache/0::verify_id_token/4:
+
+``verify_id_token/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+Verifies an ID-token using cached JWKS data, refreshing the cache once when the token key identifier is unknown.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``verify_id_token(Token,Provider,Claims,Options)``
+| **Mode and number of proofs:**
+|    ``verify_id_token(+atom,+compound,-term,+list(compound))`` - ``zero_or_one_or_error``
+
+
+------------
+
+.. index:: clear/0
+.. _open_id_jwks_cache/0::clear/0:
+
+``clear/0``
+^^^^^^^^^^^
+
+Clears all cached JWKS entries.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``clear``
+| **Mode and number of proofs:**
+|    ``clear`` - ``one``
+
+
+------------
+
+.. index:: clear/1
+.. _open_id_jwks_cache/0::clear/1:
+
+``clear/1``
+^^^^^^^^^^^
+
+Clears the cached JWKS entry for a provider.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``clear(Provider)``
+| **Mode and number of proofs:**
+|    ``clear(+compound)`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: cached_jwks_/3
+.. _open_id_jwks_cache/0::cached_jwks_/3:
+
+``cached_jwks_/3``
+^^^^^^^^^^^^^^^^^^
+
+Cached JWKS entries indexed by URI and fetch time.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``cached_jwks_(URI,FetchedAt,JWKSet)``
+| **Mode and number of proofs:**
+|    ``cached_jwks_(?atom,?number,?term)`` - ``zero_or_more``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

@@ -1,0 +1,675 @@
+.. index:: single: s3_protocol
+.. _s3_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``s3_protocol``
+===============
+
+Extracted protocol entity
+
+| **Availability:** 
+|    ``logtalk_load(s3(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-29
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: list_buckets/2
+.. _s3_protocol/0::list_buckets/2:
+
+``list_buckets/2``
+^^^^^^^^^^^^^^^^^^
+
+Lists accessible buckets.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``list_buckets(Buckets,Options)``
+| **Mode and number of proofs:**
+|    ``list_buckets(-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Options`` contains an invalid S3 client option:
+|        ``domain_error(s3_client_option,Option)``
+|    Credentials are missing or invalid:
+|        ``domain_error(s3_credentials,missing)``
+|    The S3 service returned a non-success status or malformed XML body:
+|        ``domain_error(s3_http_status,Status)``
+
+| **Remarks:**
+
+    - Option ``credentials/1``: Required access credentials as ``credentials(access_key_id(AccessKeyId), secret_access_key(SecretAccessKey))``.
+    - Option ``session_token/1``: Optional session token for temporary credentials.
+    - Option ``region/1``: AWS region to use when ``endpoint/1`` is absent. Defaults to ``us-east-1``.
+    - Option ``endpoint/1``: Optional custom S3-compatible endpoint URL.
+    - Option ``addressing_style/1``: Endpoint addressing style, either ``virtual_hosted`` or ``path``. Defaults to ``virtual_hosted``.
+    - Option ``headers/1``: Optional extra normalized HTTP request headers.
+    - Option ``version/1``: HTTP protocol version as ``http(Major, Minor)``. Defaults to ``http(1,1)``.
+    - Option ``properties/1``: Optional extra normalized HTTP request properties.
+    - Option ``connection_options/1``: Optional transport-specific HTTP client options.
+    - Option ``payload_hash_mode/1``: Payload signing mode, either ``signed`` or ``unsigned``. Defaults to ``signed``.
+    - Option ``request_time/1``: Optional explicit local request time as ``date_time(Year, Month, Day, Hours, Minutes, Seconds)``.
+    - Option ``utc_offset_seconds/1``: UTC offset used to derive the signing time from the local clock. Defaults to ``0``.
+    - Option ``amz_date/1``: Optional explicit AWS SigV4 timestamp overriding any derived request time.
+
+
+------------
+
+.. index:: head_bucket/3
+.. _s3_protocol/0::head_bucket/3:
+
+``head_bucket/3``
+^^^^^^^^^^^^^^^^^
+
+Returns response metadata for a bucket.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``head_bucket(Bucket,Metadata,Options)``
+| **Mode and number of proofs:**
+|    ``head_bucket(+atom,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Bucket`` is a variable:
+|        ``instantiation_error``
+|    ``Bucket`` is neither a variable nor an atom:
+|        ``type_error(atom,Bucket)``
+|    ``Bucket`` is an atom but not a valid S3 bucket:
+|        ``domain_error(s3_bucket,Bucket)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Options`` contains an invalid S3 client option:
+|        ``domain_error(s3_client_option,Option)``
+|    The S3 service returned a non-success status:
+|        ``domain_error(s3_http_status,Status)``
+
+| **Remarks:**
+
+    - Options: Supported options are the standard S3 request options: ``credentials(access_key_id(AccessKeyId), secret_access_key(SecretAccessKey))``, optional ``session_token(Token)``, ``region(Region)``, optional custom ``endpoint(URL)``, ``addressing_style(virtual_hosted|path)``, optional ``headers(Headers)``, ``version(http(Major, Minor))``, optional ``properties(Properties)``, optional ``connection_options(ConnectionOptions)``, ``payload_hash_mode(signed|unsigned)``, optional ``request_time(date_time(...))``, ``utc_offset_seconds(OffsetSeconds)``, and optional explicit ``amz_date(AmzDate)``.
+
+
+------------
+
+.. index:: list_objects_v2/4
+.. _s3_protocol/0::list_objects_v2/4:
+
+``list_objects_v2/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+Lists bucket objects using the ListObjectsV2 API.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``list_objects_v2(Bucket,Request,Listing,Options)``
+| **Mode and number of proofs:**
+|    ``list_objects_v2(+atom,+compound,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Bucket`` is a variable:
+|        ``instantiation_error``
+|    ``Request`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the request option list is a variable:
+|        ``instantiation_error``
+|    ``Bucket`` is neither a variable nor an atom:
+|        ``type_error(atom,Bucket)``
+|    An element ``Option`` of the request option list is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    ``Bucket`` is an atom but not a valid S3 bucket:
+|        ``domain_error(s3_bucket,Bucket)``
+|    ``Request`` is not a valid ListObjectsV2 request term or option list:
+|        ``domain_error(s3_list_objects_request,Request)``
+|    An element ``Option`` of the request option list is a compound term but not a valid ListObjectsV2 request option:
+|        ``domain_error(s3_list_objects_request_option,Option)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Options`` contains an invalid S3 client option:
+|        ``domain_error(s3_client_option,Option)``
+|    The S3 service returned a non-success status or malformed XML body:
+|        ``domain_error(s3_http_status,Status)``
+
+| **Remarks:**
+
+    - Options: ``Options`` accepts the standard S3 request options: ``credentials(access_key_id(AccessKeyId), secret_access_key(SecretAccessKey))``, optional ``session_token(Token)``, ``region(Region)``, optional custom ``endpoint(URL)``, ``addressing_style(virtual_hosted|path)``, optional ``headers(Headers)``, ``version(http(Major, Minor))``, optional ``properties(Properties)``, optional ``connection_options(ConnectionOptions)``, ``payload_hash_mode(signed|unsigned)``, optional ``request_time(date_time(...))``, ``utc_offset_seconds(OffsetSeconds)``, and optional explicit ``amz_date(AmzDate)``. The ``Request`` argument carries the ListObjectsV2-specific request options.
+
+
+------------
+
+.. index:: head_object/4
+.. _s3_protocol/0::head_object/4:
+
+``head_object/4``
+^^^^^^^^^^^^^^^^^
+
+Returns response metadata for an object.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``head_object(Bucket,Key,Metadata,Options)``
+| **Mode and number of proofs:**
+|    ``head_object(+atom,+atom,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Bucket`` is a variable:
+|        ``instantiation_error``
+|    ``Key`` is a variable:
+|        ``instantiation_error``
+|    ``Bucket`` is neither a variable nor an atom:
+|        ``type_error(atom,Bucket)``
+|    ``Key`` is neither a variable nor an atom:
+|        ``type_error(atom,Key)``
+|    ``Bucket`` is an atom but not a valid S3 bucket:
+|        ``domain_error(s3_bucket,Bucket)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Options`` contains an invalid S3 client option:
+|        ``domain_error(s3_client_option,Option)``
+|    The S3 service returned a non-success status:
+|        ``domain_error(s3_http_status,Status)``
+
+| **Remarks:**
+
+    - Options: Supported options are the standard S3 request options: ``credentials(access_key_id(AccessKeyId), secret_access_key(SecretAccessKey))``, optional ``session_token(Token)``, ``region(Region)``, optional custom ``endpoint(URL)``, ``addressing_style(virtual_hosted|path)``, optional ``headers(Headers)``, ``version(http(Major, Minor))``, optional ``properties(Properties)``, optional ``connection_options(ConnectionOptions)``, ``payload_hash_mode(signed|unsigned)``, optional ``request_time(date_time(...))``, ``utc_offset_seconds(OffsetSeconds)``, and optional explicit ``amz_date(AmzDate)``.
+
+
+------------
+
+.. index:: get_object/5
+.. _s3_protocol/0::get_object/5:
+
+``get_object/5``
+^^^^^^^^^^^^^^^^
+
+Fetches an object into a local file path and returns its response metadata as a separate argument.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``get_object(Bucket,Key,File,Properties,Options)``
+| **Mode and number of proofs:**
+|    ``get_object(+atom,+atom,+atom,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Bucket`` is a variable:
+|        ``instantiation_error``
+|    ``Key`` is a variable:
+|        ``instantiation_error``
+|    ``File`` is a variable:
+|        ``instantiation_error``
+|    ``Bucket`` is neither a variable nor an atom:
+|        ``type_error(atom,Bucket)``
+|    ``Key`` is neither a variable nor an atom:
+|        ``type_error(atom,Key)``
+|    ``File`` is neither a variable nor an atom:
+|        ``type_error(atom,File)``
+|    ``Bucket`` is an atom but not a valid S3 bucket:
+|        ``domain_error(s3_bucket,Bucket)``
+|    ``File`` exists but is not a writable file:
+|        ``domain_error(file([],[write]),File)``
+|    The directory ``Directory`` exists but is not writable:
+|        ``domain_error(directory([write]),Directory)``
+|    The directory ``Directory`` does not exist:
+|        ``existence_error(directory,Directory)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Options`` contains an invalid S3 client option:
+|        ``domain_error(s3_client_option,Option)``
+|    The S3 service returned a non-success status:
+|        ``domain_error(s3_http_status,Status)``
+
+| **Remarks:**
+
+    - Options: Supported options are: ``credentials(access_key_id(AccessKeyId), secret_access_key(SecretAccessKey))`` for access credentials; ``session_token(Token)`` for temporary credentials; ``region(Region)`` for the AWS region, defaulting to ``us-east-1`` when ``endpoint/1`` is absent; ``endpoint(URL)`` for a custom S3-compatible endpoint; ``addressing_style(virtual_hosted|path)`` for endpoint addressing, defaulting to ``virtual_hosted``; ``headers(Headers)`` for extra normalized request headers; ``version(http(Major, Minor))`` for the HTTP protocol version, defaulting to ``http(1,1)``; ``properties(Properties)`` for extra normalized HTTP request properties; ``connection_options(ConnectionOptions)`` for transport-specific HTTP client options; ``payload_hash_mode(signed|unsigned)`` for payload signing, defaulting to ``signed``; ``request_time(date_time(...))`` for an explicit local request time; ``utc_offset_seconds(OffsetSeconds)`` for deriving UTC from the local clock, defaulting to ``0``; and ``amz_date(AmzDate)`` for an explicit AWS SigV4 timestamp overriding time derivation.
+
+
+------------
+
+.. index:: put_object/6
+.. _s3_protocol/0::put_object/6:
+
+``put_object/6``
+^^^^^^^^^^^^^^^^
+
+Uploads a local file path and returns the object ETag and response metadata as separate arguments.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``put_object(Bucket,Key,File,ETag,Properties,Options)``
+| **Mode and number of proofs:**
+|    ``put_object(+atom,+atom,+atom,-atom,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Bucket`` is a variable:
+|        ``instantiation_error``
+|    ``Key`` is a variable:
+|        ``instantiation_error``
+|    ``File`` is a variable:
+|        ``instantiation_error``
+|    ``Bucket`` is neither a variable nor an atom:
+|        ``type_error(atom,Bucket)``
+|    ``Key`` is neither a variable nor an atom:
+|        ``type_error(atom,Key)``
+|    ``File`` is neither a variable nor an atom:
+|        ``type_error(atom,File)``
+|    ``Bucket`` is an atom but not a valid S3 bucket:
+|        ``domain_error(s3_bucket,Bucket)``
+|    ``File`` exists but is not a readable file:
+|        ``domain_error(file([],[read]),File)``
+|    The file ``File`` does not exist:
+|        ``existence_error(file,File)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Options`` contains an invalid S3 client option:
+|        ``domain_error(s3_client_option,Option)``
+|    The S3 service returned a non-success status:
+|        ``domain_error(s3_http_status,Status)``
+
+| **Remarks:**
+
+    - Options: Supported options are the standard S3 request options: ``credentials(access_key_id(AccessKeyId), secret_access_key(SecretAccessKey))``, optional ``session_token(Token)``, ``region(Region)``, optional custom ``endpoint(URL)``, ``addressing_style(virtual_hosted|path)``, optional ``headers(Headers)``, ``version(http(Major, Minor))``, optional ``properties(Properties)``, optional ``connection_options(ConnectionOptions)``, ``payload_hash_mode(signed|unsigned)``, optional ``request_time(date_time(...))``, ``utc_offset_seconds(OffsetSeconds)``, and optional explicit ``amz_date(AmzDate)``.
+
+
+------------
+
+.. index:: delete_object/4
+.. _s3_protocol/0::delete_object/4:
+
+``delete_object/4``
+^^^^^^^^^^^^^^^^^^^
+
+Deletes an object, returning ``delete_result(Properties)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete_object(Bucket,Key,Result,Options)``
+| **Mode and number of proofs:**
+|    ``delete_object(+atom,+atom,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Bucket`` is a variable:
+|        ``instantiation_error``
+|    ``Key`` is a variable:
+|        ``instantiation_error``
+|    ``Bucket`` is neither a variable nor an atom:
+|        ``type_error(atom,Bucket)``
+|    ``Key`` is neither a variable nor an atom:
+|        ``type_error(atom,Key)``
+|    ``Bucket`` is an atom but not a valid S3 bucket:
+|        ``domain_error(s3_bucket,Bucket)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Options`` contains an invalid S3 client option:
+|        ``domain_error(s3_client_option,Option)``
+|    The S3 service returned a non-success status:
+|        ``domain_error(s3_http_status,Status)``
+
+| **Remarks:**
+
+    - Options: Supported options are the standard S3 request options: ``credentials(access_key_id(AccessKeyId), secret_access_key(SecretAccessKey))``, optional ``session_token(Token)``, ``region(Region)``, optional custom ``endpoint(URL)``, ``addressing_style(virtual_hosted|path)``, optional ``headers(Headers)``, ``version(http(Major, Minor))``, optional ``properties(Properties)``, optional ``connection_options(ConnectionOptions)``, ``payload_hash_mode(signed|unsigned)``, optional ``request_time(date_time(...))``, ``utc_offset_seconds(OffsetSeconds)``, and optional explicit ``amz_date(AmzDate)``.
+
+
+------------
+
+.. index:: copy_object/5
+.. _s3_protocol/0::copy_object/5:
+
+``copy_object/5``
+^^^^^^^^^^^^^^^^^
+
+Copies an object from a source bucket/key into the destination bucket/key, returning ``copy_result(ETag, Properties)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``copy_object(Source,Bucket,Key,Result,Options)``
+| **Mode and number of proofs:**
+|    ``copy_object(+compound,+atom,+atom,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Bucket`` is a variable:
+|        ``instantiation_error``
+|    ``Key`` is a variable:
+|        ``instantiation_error``
+|    The version identifier in ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a compound term:
+|        ``type_error(compound,Source)``
+|    ``Bucket`` is neither a variable nor an atom:
+|        ``type_error(atom,Bucket)``
+|    ``Key`` is neither a variable nor an atom:
+|        ``type_error(atom,Key)``
+|    The version identifier in ``Source`` is neither a variable nor an atom:
+|        ``type_error(atom,VersionId)``
+|    ``Source`` is a compound term but not a valid copy source term:
+|        ``domain_error(s3_copy_source,Source)``
+|    ``Bucket`` is an atom but not a valid S3 bucket:
+|        ``domain_error(s3_bucket,Bucket)``
+|    The version identifier in ``Source`` is an atom but not a valid version identifier:
+|        ``domain_error(s3_version_id,VersionId)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Options`` contains an invalid S3 client option:
+|        ``domain_error(s3_client_option,Option)``
+|    The S3 service returned a non-success status or malformed XML body:
+|        ``domain_error(s3_http_status,Status)``
+
+| **Remarks:**
+
+    - Options: Supported options are the standard S3 request options: ``credentials(access_key_id(AccessKeyId), secret_access_key(SecretAccessKey))``, optional ``session_token(Token)``, ``region(Region)``, optional custom ``endpoint(URL)``, ``addressing_style(virtual_hosted|path)``, optional ``headers(Headers)``, ``version(http(Major, Minor))``, optional ``properties(Properties)``, optional ``connection_options(ConnectionOptions)``, ``payload_hash_mode(signed|unsigned)``, optional ``request_time(date_time(...))``, ``utc_offset_seconds(OffsetSeconds)``, and optional explicit ``amz_date(AmzDate)``.
+
+
+------------
+
+.. index:: presigned_get_object/4
+.. _s3_protocol/0::presigned_get_object/4:
+
+``presigned_get_object/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates a presigned URL for downloading an object with an external HTTP client.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``presigned_get_object(Bucket,Key,URL,Options)``
+| **Mode and number of proofs:**
+|    ``presigned_get_object(+atom,+atom,-atom,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Bucket`` is a variable:
+|        ``instantiation_error``
+|    ``Key`` is a variable:
+|        ``instantiation_error``
+|    ``Bucket`` is neither a variable nor an atom:
+|        ``type_error(atom,Bucket)``
+|    ``Key`` is neither a variable nor an atom:
+|        ``type_error(atom,Key)``
+|    ``Bucket`` is an atom but not a valid S3 bucket:
+|        ``domain_error(s3_bucket,Bucket)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Options`` contains an invalid S3 client option:
+|        ``domain_error(s3_client_option,Option)``
+|    Credentials are missing or invalid:
+|        ``domain_error(s3_credentials,missing)``
+|    The expiration is invalid or outside the AWS SigV4 range:
+|        ``domain_error(s3_presign_expires,Expires)``
+|    The payload hash is missing, invalid, or incompatible with unsigned mode:
+|        ``domain_error(s3_presign_payload_hash,Hash)``
+
+| **Remarks:**
+
+    - Option ``credentials/1``: Required access credentials as ``credentials(access_key_id(AccessKeyId), secret_access_key(SecretAccessKey))``.
+    - Option ``session_token/1``: Optional session token for temporary credentials.
+    - Option ``region/1``: AWS region to use when ``endpoint/1`` is absent. Defaults to ``us-east-1``.
+    - Option ``endpoint/1``: Optional custom S3-compatible endpoint URL.
+    - Option ``addressing_style/1``: Endpoint addressing style, either ``virtual_hosted`` or ``path``. Defaults to ``virtual_hosted``.
+    - Option ``headers/1``: Optional extra normalized request headers. When present they are signed into the URL and must be reproduced by the eventual caller.
+    - Option ``payload_hash_mode/1``: Presigned URLs default to ``payload_hash_mode(unsigned)``. Use ``signed`` together with ``payload_hash/1`` to sign a precomputed payload hash.
+    - Option ``payload_hash/1``: Precomputed hexadecimal SHA-256 payload hash required when ``payload_hash_mode(signed)`` is selected.
+    - Option ``request_time/1``: Optional explicit local request time as ``date_time(Year, Month, Day, Hours, Minutes, Seconds)``.
+    - Option ``utc_offset_seconds/1``: UTC offset used to derive the signing time from the local clock. Defaults to ``0``.
+    - Option ``amz_date/1``: Optional explicit AWS SigV4 timestamp overriding any derived request time.
+    - Option ``expires/1``: Presigned URL lifetime in seconds. Defaults to ``900`` and must not exceed ``604800``.
+
+
+------------
+
+.. index:: presigned_put_object/4
+.. _s3_protocol/0::presigned_put_object/4:
+
+``presigned_put_object/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates a presigned URL for uploading an object with an external HTTP client.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``presigned_put_object(Bucket,Key,URL,Options)``
+| **Mode and number of proofs:**
+|    ``presigned_put_object(+atom,+atom,-atom,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Bucket`` is a variable:
+|        ``instantiation_error``
+|    ``Key`` is a variable:
+|        ``instantiation_error``
+|    ``Bucket`` is neither a variable nor an atom:
+|        ``type_error(atom,Bucket)``
+|    ``Key`` is neither a variable nor an atom:
+|        ``type_error(atom,Key)``
+|    ``Bucket`` is an atom but not a valid S3 bucket:
+|        ``domain_error(s3_bucket,Bucket)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Options`` contains an invalid S3 client option:
+|        ``domain_error(s3_client_option,Option)``
+|    Credentials are missing or invalid:
+|        ``domain_error(s3_credentials,missing)``
+|    The expiration is invalid or outside the AWS SigV4 range:
+|        ``domain_error(s3_presign_expires,Expires)``
+|    The payload hash is missing, invalid, or incompatible with unsigned mode:
+|        ``domain_error(s3_presign_payload_hash,Hash)``
+
+| **Remarks:**
+
+    - Option ``credentials/1``: Required access credentials as ``credentials(access_key_id(AccessKeyId), secret_access_key(SecretAccessKey))``.
+    - Option ``session_token/1``: Optional session token for temporary credentials.
+    - Option ``region/1``: AWS region to use when ``endpoint/1`` is absent. Defaults to ``us-east-1``.
+    - Option ``endpoint/1``: Optional custom S3-compatible endpoint URL.
+    - Option ``addressing_style/1``: Endpoint addressing style, either ``virtual_hosted`` or ``path``. Defaults to ``virtual_hosted``.
+    - Option ``headers/1``: Optional extra normalized request headers. When present they are signed into the URL and must be reproduced by the eventual caller.
+    - Option ``payload_hash_mode/1``: Presigned URLs default to ``payload_hash_mode(unsigned)``. Use ``signed`` together with ``payload_hash/1`` to sign a precomputed payload hash.
+    - Option ``payload_hash/1``: Precomputed hexadecimal SHA-256 payload hash required when ``payload_hash_mode(signed)`` is selected.
+    - Option ``request_time/1``: Optional explicit local request time as ``date_time(Year, Month, Day, Hours, Minutes, Seconds)``.
+    - Option ``utc_offset_seconds/1``: UTC offset used to derive the signing time from the local clock. Defaults to ``0``.
+    - Option ``amz_date/1``: Optional explicit AWS SigV4 timestamp overriding any derived request time.
+    - Option ``expires/1``: Presigned URL lifetime in seconds. Defaults to ``900`` and must not exceed ``604800``.
+
+
+------------
+
+.. index:: presigned_post_object/4
+.. _s3_protocol/0::presigned_post_object/4:
+
+``presigned_post_object/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates a presigned URL for a POST request to an object with an external HTTP client.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``presigned_post_object(Bucket,Key,URL,Options)``
+| **Mode and number of proofs:**
+|    ``presigned_post_object(+atom,+atom,-atom,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Bucket`` is a variable:
+|        ``instantiation_error``
+|    ``Key`` is a variable:
+|        ``instantiation_error``
+|    ``Bucket`` is neither a variable nor an atom:
+|        ``type_error(atom,Bucket)``
+|    ``Key`` is neither a variable nor an atom:
+|        ``type_error(atom,Key)``
+|    ``Bucket`` is an atom but not a valid S3 bucket:
+|        ``domain_error(s3_bucket,Bucket)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Options`` contains an invalid S3 client option:
+|        ``domain_error(s3_client_option,Option)``
+|    Credentials are missing or invalid:
+|        ``domain_error(s3_credentials,missing)``
+|    The expiration is invalid or outside the AWS SigV4 range:
+|        ``domain_error(s3_presign_expires,Expires)``
+|    The payload hash is missing, invalid, or incompatible with unsigned mode:
+|        ``domain_error(s3_presign_payload_hash,Hash)``
+
+| **Remarks:**
+
+    - Option ``credentials/1``: Required access credentials as ``credentials(access_key_id(AccessKeyId), secret_access_key(SecretAccessKey))``.
+    - Option ``session_token/1``: Optional session token for temporary credentials.
+    - Option ``region/1``: AWS region to use when ``endpoint/1`` is absent. Defaults to ``us-east-1``.
+    - Option ``endpoint/1``: Optional custom S3-compatible endpoint URL.
+    - Option ``addressing_style/1``: Endpoint addressing style, either ``virtual_hosted`` or ``path``. Defaults to ``virtual_hosted``.
+    - Option ``headers/1``: Optional extra normalized request headers. When present they are signed into the URL and must be reproduced by the eventual caller.
+    - Option ``payload_hash_mode/1``: Presigned URLs default to ``payload_hash_mode(unsigned)``. Use ``signed`` together with ``payload_hash/1`` to sign a precomputed payload hash.
+    - Option ``payload_hash/1``: Precomputed hexadecimal SHA-256 payload hash required when ``payload_hash_mode(signed)`` is selected.
+    - Option ``request_time/1``: Optional explicit local request time as ``date_time(Year, Month, Day, Hours, Minutes, Seconds)``.
+    - Option ``utc_offset_seconds/1``: UTC offset used to derive the signing time from the local clock. Defaults to ``0``.
+    - Option ``amz_date/1``: Optional explicit AWS SigV4 timestamp overriding any derived request time.
+    - Option ``expires/1``: Presigned URL lifetime in seconds. Defaults to ``900`` and must not exceed ``604800``.
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

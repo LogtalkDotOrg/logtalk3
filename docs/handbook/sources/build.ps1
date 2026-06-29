@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on June 26, 2026
+##   Last updated on June 29, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -287,6 +287,7 @@ Foreach-Object {
 (Get-Content ../../../library/regularized_bradley_terry_ranker/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/regularized_bradley_terry_ranker.rst
 (Get-Content ../../../library/rest/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/rest.rst
 (Get-Content ../../../library/ridge_regression/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ridge_regression.rst
+(Get-Content ../../../library/s3/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/s3.rst
 (Get-Content ../../../library/schulze_ranker/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/schulze_ranker.rst
 (Get-Content ../../../library/sequential_pattern_mining_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/sequential_pattern_mining_protocols.rst
 (Get-Content ../../../library/sets/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/sets.rst

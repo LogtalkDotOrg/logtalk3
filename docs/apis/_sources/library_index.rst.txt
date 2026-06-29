@@ -2769,6 +2769,23 @@ To load any library (including developer tools, ports, and contributions), use t
 
    ridge_regression <ridge_regression_0>
 
+:ref:`s3 <library_s3>`
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   s3_client <s3_client_0>
+   s3_client(HTTPSocket) <s3_client_1>
+   s3_endpoints <s3_endpoints_0>
+   s3_headers <s3_headers_0>
+   s3_protocol <s3_protocol_0>
+   s3_session(A) <s3_session_1>
+   s3_signing <s3_signing_0>
+   s3_xml <s3_xml_0>
+
 :ref:`sarif <library_sarif>`
 ----------------------------
 

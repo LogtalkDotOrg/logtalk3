@@ -66,6 +66,8 @@ JWK/JWKS key selection, and reusable registered-claim validation predicates.
 
 * ADDED: New `open_id` library providing OpenID client support.
 
+* ADDED: New `s3` library implementing a portable AWS S3 client.
+
 * ADDED: Support for the SHA-512/256 hash function to the `hashes` library.
 
 * ADDED: Support for computing HMAC-SHA-512/256 digests to the `hmac`

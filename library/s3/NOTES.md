@@ -1,0 +1,220 @@
+________________________________________________________________________
+
+This file is part of Logtalk <https://logtalk.org/>
+SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+SPDX-License-Identifier: Apache-2.0
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+________________________________________________________________________
+
+
+`s3`
+====
+
+Portable S3-compatible client library layered on top of the normalized
+`http_client` stack. The current implementation focuses on general-purpose
+bucket operations and AWS Signature Version 4 request signing.
+
+The library depends on the contributed `xml_parser` parser to decode S3 XML
+responses and wraps it behind the `s3_xml` adapter so the public API exposes
+stable S3-specific terms instead of generic XML parse trees.
+
+This library can be used with backend Prolog systems that support unbound
+integer arithmetic and the `sockets` library: ECLiPSe, SICStus Prolog,
+SWI-Prolog, Trealla Prolog, and XVM.
+
+
+Loading
+-------
+
+To load the library, load the `loader.lgt` file:
+
+    | ?- logtalk_load(s3(loader)).
+
+
+Testing
+-------
+
+To test this library, load the `tester.lgt` file:
+
+    | ?- logtalk_load(s3(tester)).
+
+
+Current scope
+-------------
+
+- `list_buckets/2`
+- `head_bucket/3`
+- `list_objects_v2/4`
+- `head_object/4`
+- `get_object/5`
+- `presigned_get_object/4`
+- `put_object/6`
+- `presigned_put_object/4`
+- `presigned_post_object/4`
+- `delete_object/4`
+- `copy_object/5`
+- explicit session wrapper via `s3_session(_HTTPSocket_)`
+- AWS Signature Version 4 request signing for service `s3`
+- virtual-hosted and path-style endpoint generation
+- direct support for custom S3-compatible endpoints such as MinIO
+
+
+Basic usage
+-----------
+
+For typical file transfers, prefer the file-based arities:
+
+- `get_object/5` downloads an object to a local file path and returns response
+  metadata separately.
+- `put_object/6` uploads a local file path and returns the object ETag and
+  response metadata separately.
+
+The `presigned_get_object/4`, `presigned_put_object/4`, and
+`presigned_post_object/4` predicates generate portable SigV4 query-string URLs
+for external HTTP clients. They default to `UNSIGNED-PAYLOAD`, accept
+`expires(Seconds)` with a maximum of `604800` seconds, support signed payloads
+using `payload_hash_mode(signed)` plus `payload_hash(Hash)`, and sign any extra
+request headers supplied using `headers/1`.
+
+Result terms for the predicates returning a `Result` argument are:
+
+- `delete_object/4` -> `delete_result(Properties)`
+- `copy_object/5` -> `copy_result(ETag, Properties)`
+
+List buckets using the default TLS-capable transport:
+
+    | ?- s3_client::list_buckets(
+             Buckets,
+             [
+                 credentials(access_key_id('AKIDEXAMPLE'), secret_access_key('secret')),
+                 amz_date('20240627T120000Z')
+             ]
+         ).
+
+Download `report.txt` from a custom S3-compatible endpoint into a local file:
+
+    | ?- s3_client::get_object(
+            photos,
+            'report.txt',
+            'report.txt',
+            Properties,
+            [
+                 endpoint('http://127.0.0.1:9000'),
+                 addressing_style(path),
+                 credentials(access_key_id('minioadmin'), secret_access_key('minioadmin')),
+                 amz_date('20240627T120000Z')
+             ]
+         ).
+
+Upload the same local `report.txt` file to the same custom endpoint:
+
+    | ?- s3_client::put_object(
+            photos,
+            'report.txt',
+            'report.txt',
+            ETag,
+            Properties,
+            [
+                endpoint('http://127.0.0.1:9000'),
+                addressing_style(path),
+                credentials(access_key_id('minioadmin'), secret_access_key('minioadmin')),
+                amz_date('20240627T120000Z')
+            ]
+         ).
+
+Use an explicit session handle to carry defaults:
+
+    | ?- s3_session(http_socket_process)::open(
+             Session,
+             [
+                 region('eu-west-1'),
+                 credentials(access_key_id('AKIDEXAMPLE'), secret_access_key('secret')),
+                 amz_date('20240627T120000Z')
+             ]
+         ),
+         s3_session(http_socket_process)::list_buckets(Session, Buckets, []),
+         s3_session(http_socket_process)::close(Session).
+
+Generate a presigned download URL for `report.txt`:
+
+    | ?- s3_client::presigned_get_object(
+            photos,
+            'report.txt',
+            URL,
+            [
+                region('eu-west-1'),
+                credentials(access_key_id('AKIDEXAMPLE'), secret_access_key('secret')),
+                amz_date('20240627T120000Z'),
+                expires(600)
+            ]
+         ).
+
+Generate a presigned upload URL for the same `report.txt` object:
+
+    | ?- s3_client::presigned_put_object(
+            photos,
+            'report.txt',
+            URL,
+            [
+                endpoint('http://127.0.0.1:9000'),
+                addressing_style(path),
+                credentials(access_key_id('minioadmin'), secret_access_key('minioadmin')),
+                headers([content_type-'text/plain']),
+                amz_date('20240627T120000Z'),
+                expires(300)
+            ]
+         ).
+
+Generate a presigned POST URL for the same `report.txt` object:
+
+    | ?- s3_client::presigned_post_object(
+            photos,
+            'report.txt',
+            URL,
+            [
+                endpoint('http://127.0.0.1:9000'),
+                addressing_style(path),
+                credentials(access_key_id('minioadmin'), secret_access_key('minioadmin')),
+                amz_date('20240627T120000Z'),
+                expires(300)
+            ]
+         ).
+
+Generate a presigned URL that signs a precomputed SHA-256 payload hash:
+
+    | ?- s3_client::presigned_put_object(
+            photos,
+            'report.txt',
+            URL,
+            [
+                region('eu-west-1'),
+                credentials(access_key_id('AKIDEXAMPLE'), secret_access_key('secret')),
+                amz_date('20240627T120000Z'),
+                payload_hash_mode(signed),
+                payload_hash('2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824')
+            ]
+         ).
+
+When using signed extra headers such as `content_type-'text/plain'`, the
+eventual HTTP client must send the same headers when dereferencing the URL.
+
+
+Current limitations
+-------------------
+
+- Time signing defaults derive UTC from the local system clock plus the
+  configurable `utc_offset_seconds/1` option. For deterministic use and tests,
+  prefer passing `amz_date/1` or `request_time/1`.
+- Multipart uploads are not implemented yet.
+- S3 Express / directory bucket APIs are outside the current scope.

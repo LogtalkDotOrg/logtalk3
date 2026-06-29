@@ -1,0 +1,692 @@
+.. index:: single: s3_session(A)
+.. _s3_session/1:
+
+.. rst-class:: right
+
+**object**
+
+``s3_session(A)``
+=================
+
+Explicit S3 client sessions carrying default request options.
+
+| **Availability:** 
+|    ``logtalk_load(s3(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-29
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`s3_client(HTTPSocket) <s3_client/1>`
+|    :ref:`url(Representation) <url/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: get_object/6
+.. _s3_session/1::get_object/6:
+
+``get_object/6``
+^^^^^^^^^^^^^^^^
+
+Fetches an object into a local file path using session defaults merged with per-call options and returns its response metadata as a separate argument.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``get_object(Session,Bucket,Key,File,Properties,Options)``
+| **Mode and number of proofs:**
+|    ``get_object(+compound,+atom,+atom,+atom,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Session`` is a variable:
+|        ``instantiation_error``
+|    ``Session`` is neither a variable nor a valid S3 session handle:
+|        ``domain_error(s3_session,Session)``
+|    ``Session`` is a valid S3 session handle but not open:
+|        ``existence_error(s3_session,Session)``
+|    ``Bucket`` is a variable:
+|        ``instantiation_error``
+|    ``Bucket`` is neither a variable nor an atom:
+|        ``type_error(atom,Bucket)``
+|    ``Bucket`` is an atom but not a valid S3 bucket:
+|        ``domain_error(s3_bucket,Bucket)``
+|    ``Key`` is a variable:
+|        ``instantiation_error``
+|    ``Key`` is neither a variable nor an atom:
+|        ``type_error(atom,Key)``
+|    ``File`` is a variable:
+|        ``instantiation_error``
+|    ``File`` is neither a variable nor an atom:
+|        ``type_error(atom,File)``
+|    ``File`` exists but is not a writable file:
+|        ``domain_error(file([],[write]),File)``
+|    The directory ``Directory`` exists but is not writable:
+|        ``domain_error(directory([write]),Directory)``
+|    The directory ``Directory`` does not exist:
+|        ``existence_error(directory,Directory)``
+|    The delegated S3 client request failed:
+|        ``domain_error(s3_http_status,Status)``
+
+| **Remarks:**
+
+    - Option precedence: Per-call options are merged before the stored session defaults, so explicit call options take precedence.
+    - Option ``credentials/1``: Access credentials as ``credentials(access_key_id(AccessKeyId), secret_access_key(SecretAccessKey))``.
+    - Option ``session_token/1``: Optional session token for temporary credentials.
+    - Option ``region/1``: AWS region to use when ``endpoint/1`` is absent.
+    - Option ``endpoint/1``: Optional custom S3-compatible endpoint URL.
+    - Option ``addressing_style/1``: Endpoint addressing style, either ``virtual_hosted`` or ``path``.
+    - Option ``headers/1``: Optional extra normalized HTTP request headers.
+    - Option ``version/1``: HTTP protocol version as ``http(Major, Minor)``.
+    - Option ``properties/1``: Optional extra normalized HTTP request properties.
+    - Option ``connection_options/1``: Optional transport-specific HTTP client options.
+    - Option ``payload_hash_mode/1``: Payload signing mode, either ``signed`` or ``unsigned``.
+    - Option ``request_time/1``: Optional explicit local request time as ``date_time(Year, Month, Day, Hours, Minutes, Seconds)``.
+    - Option ``utc_offset_seconds/1``: UTC offset used to derive the signing time from the local clock.
+    - Option ``amz_date/1``: Optional explicit AWS SigV4 timestamp overriding any derived request time.
+
+
+------------
+
+.. index:: open/1
+.. _s3_session/1::open/1:
+
+``open/1``
+^^^^^^^^^^
+
+Opens a new S3 client session with no default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open(Session)``
+| **Mode and number of proofs:**
+|    ``open(-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+
+
+------------
+
+.. index:: open/2
+.. _s3_session/1::open/2:
+
+``open/2``
+^^^^^^^^^^
+
+Opens a new S3 client session with the given default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open(Session,Options)``
+| **Mode and number of proofs:**
+|    ``open(-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Options`` contains an invalid S3 session option:
+|        ``domain_error(option,Option)``
+
+| **Remarks:**
+
+    - Option role: ``Options`` stores default request options reused by later session calls.
+    - Option ``credentials/1``: Default access credentials as ``credentials(access_key_id(AccessKeyId), secret_access_key(SecretAccessKey))``.
+    - Option ``session_token/1``: Optional default session token for temporary credentials.
+    - Option ``region/1``: Default AWS region to use when ``endpoint/1`` is absent.
+    - Option ``endpoint/1``: Optional default custom S3-compatible endpoint URL.
+    - Option ``addressing_style/1``: Default endpoint addressing style, either ``virtual_hosted`` or ``path``.
+    - Option ``headers/1``: Optional default normalized HTTP request headers.
+    - Option ``version/1``: Default HTTP protocol version as ``http(Major, Minor)``.
+    - Option ``properties/1``: Optional default normalized HTTP request properties.
+    - Option ``connection_options/1``: Optional default transport-specific HTTP client options.
+    - Option ``payload_hash_mode/1``: Default payload signing mode, either ``signed`` or ``unsigned``.
+    - Option ``request_time/1``: Optional default local request time as ``date_time(Year, Month, Day, Hours, Minutes, Seconds)``.
+    - Option ``utc_offset_seconds/1``: Default UTC offset used to derive the signing time from the local clock.
+    - Option ``amz_date/1``: Optional default AWS SigV4 timestamp overriding any derived request time.
+
+
+------------
+
+.. index:: close/1
+.. _s3_session/1::close/1:
+
+``close/1``
+^^^^^^^^^^^
+
+Closes a S3 client session.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``close(Session)``
+| **Mode and number of proofs:**
+|    ``close(+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Session`` is a variable:
+|        ``instantiation_error``
+|    ``Session`` is neither a variable nor a valid S3 session handle:
+|        ``domain_error(s3_session,Session)``
+|    ``Session`` is a valid S3 session handle but not open:
+|        ``existence_error(s3_session,Session)``
+
+
+------------
+
+.. index:: list_buckets/3
+.. _s3_session/1::list_buckets/3:
+
+``list_buckets/3``
+^^^^^^^^^^^^^^^^^^
+
+Lists accessible buckets using session defaults merged with per-call options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``list_buckets(Session,Buckets,Options)``
+| **Mode and number of proofs:**
+|    ``list_buckets(+compound,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Session`` is a variable:
+|        ``instantiation_error``
+|    ``Session`` is neither a variable nor a valid S3 session handle:
+|        ``domain_error(s3_session,Session)``
+|    ``Session`` is a valid S3 session handle but not open:
+|        ``existence_error(s3_session,Session)``
+|    ``Options`` contains an invalid S3 session option:
+|        ``domain_error(option,Option)``
+|    The delegated S3 client request failed:
+|        ``domain_error(s3_http_status,Status)``
+
+| **Remarks:**
+
+    - Options: Per-call options accept the same terms as ``open/2`` and are merged before the stored session defaults, so explicit call options take precedence.
+
+
+------------
+
+.. index:: head_bucket/4
+.. _s3_session/1::head_bucket/4:
+
+``head_bucket/4``
+^^^^^^^^^^^^^^^^^
+
+Returns bucket metadata using session defaults merged with per-call options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``head_bucket(Session,Bucket,Metadata,Options)``
+| **Mode and number of proofs:**
+|    ``head_bucket(+compound,+atom,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Session`` is a variable:
+|        ``instantiation_error``
+|    ``Session`` is neither a variable nor a valid S3 session handle:
+|        ``domain_error(s3_session,Session)``
+|    ``Session`` is a valid S3 session handle but not open:
+|        ``existence_error(s3_session,Session)``
+|    ``Bucket`` is a variable:
+|        ``instantiation_error``
+|    ``Bucket`` is neither a variable nor an atom:
+|        ``type_error(atom,Bucket)``
+|    ``Bucket`` is an atom but not a valid S3 bucket:
+|        ``domain_error(s3_bucket,Bucket)``
+|    The delegated S3 client request failed:
+|        ``domain_error(s3_http_status,Status)``
+
+| **Remarks:**
+
+    - Options: Per-call options accept the same terms as ``open/2`` and are merged before the stored session defaults, so explicit call options take precedence.
+
+
+------------
+
+.. index:: list_objects_v2/5
+.. _s3_session/1::list_objects_v2/5:
+
+``list_objects_v2/5``
+^^^^^^^^^^^^^^^^^^^^^
+
+Lists objects using session defaults merged with per-call options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``list_objects_v2(Session,Bucket,Request,Listing,Options)``
+| **Mode and number of proofs:**
+|    ``list_objects_v2(+compound,+atom,+compound,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Session`` is a variable:
+|        ``instantiation_error``
+|    ``Session`` is neither a variable nor a valid S3 session handle:
+|        ``domain_error(s3_session,Session)``
+|    ``Session`` is a valid S3 session handle but not open:
+|        ``existence_error(s3_session,Session)``
+|    ``Bucket`` is a variable:
+|        ``instantiation_error``
+|    ``Bucket`` is neither a variable nor an atom:
+|        ``type_error(atom,Bucket)``
+|    ``Bucket`` is an atom but not a valid S3 bucket:
+|        ``domain_error(s3_bucket,Bucket)``
+|    ``Request`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the request option list is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the request option list is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    ``Request`` is not a valid ListObjectsV2 request term or option list:
+|        ``domain_error(s3_list_objects_request,Request)``
+|    An element ``Option`` of the request option list is a compound term but not a valid ListObjectsV2 request option:
+|        ``domain_error(s3_list_objects_request_option,Option)``
+|    The delegated S3 client request failed:
+|        ``domain_error(s3_http_status,Status)``
+
+| **Remarks:**
+
+    - Options: Per-call options accept the same terms as ``open/2`` and are merged before the stored session defaults, so explicit call options take precedence. The ``Request`` argument carries the ListObjectsV2-specific request terms.
+
+
+------------
+
+.. index:: head_object/5
+.. _s3_session/1::head_object/5:
+
+``head_object/5``
+^^^^^^^^^^^^^^^^^
+
+Returns object metadata using session defaults merged with per-call options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``head_object(Session,Bucket,Key,Metadata,Options)``
+| **Mode and number of proofs:**
+|    ``head_object(+compound,+atom,+atom,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Session`` is a variable:
+|        ``instantiation_error``
+|    ``Session`` is neither a variable nor a valid S3 session handle:
+|        ``domain_error(s3_session,Session)``
+|    ``Session`` is a valid S3 session handle but not open:
+|        ``existence_error(s3_session,Session)``
+|    ``Bucket`` is a variable:
+|        ``instantiation_error``
+|    ``Bucket`` is neither a variable nor an atom:
+|        ``type_error(atom,Bucket)``
+|    ``Bucket`` is an atom but not a valid S3 bucket:
+|        ``domain_error(s3_bucket,Bucket)``
+|    ``Key`` is a variable:
+|        ``instantiation_error``
+|    ``Key`` is neither a variable nor an atom:
+|        ``type_error(atom,Key)``
+|    The delegated S3 client request failed:
+|        ``domain_error(s3_http_status,Status)``
+
+| **Remarks:**
+
+    - Options: Per-call options accept the same terms as ``open/2`` and are merged before the stored session defaults, so explicit call options take precedence.
+
+
+------------
+
+.. index:: presigned_get_object/5
+.. _s3_session/1::presigned_get_object/5:
+
+``presigned_get_object/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates a presigned download URL using session defaults merged with per-call options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``presigned_get_object(Session,Bucket,Key,URL,Options)``
+| **Mode and number of proofs:**
+|    ``presigned_get_object(+compound,+atom,+atom,-atom,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Session`` is a variable:
+|        ``instantiation_error``
+|    ``Session`` is neither a variable nor a valid S3 session handle:
+|        ``domain_error(s3_session,Session)``
+|    ``Session`` is a valid S3 session handle but not open:
+|        ``existence_error(s3_session,Session)``
+|    ``Bucket`` is a variable:
+|        ``instantiation_error``
+|    ``Bucket`` is neither a variable nor an atom:
+|        ``type_error(atom,Bucket)``
+|    ``Bucket`` is an atom but not a valid S3 bucket:
+|        ``domain_error(s3_bucket,Bucket)``
+|    ``Key`` is a variable:
+|        ``instantiation_error``
+|    ``Key`` is neither a variable nor an atom:
+|        ``type_error(atom,Key)``
+|    The delegated S3 client request failed:
+|        ``domain_error(s3_client_option,Option)``
+
+| **Remarks:**
+
+    - Options: Per-call options accept the same terms as ``open/2`` plus ``expires(Seconds)`` for the URL lifetime and ``payload_hash(Hash)`` when ``payload_hash_mode(signed)`` is selected. Presigned URLs default to ``payload_hash_mode(unsigned)``. Options are merged before the stored session defaults, so explicit call options take precedence.
+
+
+------------
+
+.. index:: presigned_put_object/5
+.. _s3_session/1::presigned_put_object/5:
+
+``presigned_put_object/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates a presigned upload URL using session defaults merged with per-call options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``presigned_put_object(Session,Bucket,Key,URL,Options)``
+| **Mode and number of proofs:**
+|    ``presigned_put_object(+compound,+atom,+atom,-atom,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Session`` is a variable:
+|        ``instantiation_error``
+|    ``Session`` is neither a variable nor a valid S3 session handle:
+|        ``domain_error(s3_session,Session)``
+|    ``Session`` is a valid S3 session handle but not open:
+|        ``existence_error(s3_session,Session)``
+|    ``Bucket`` is a variable:
+|        ``instantiation_error``
+|    ``Bucket`` is neither a variable nor an atom:
+|        ``type_error(atom,Bucket)``
+|    ``Bucket`` is an atom but not a valid S3 bucket:
+|        ``domain_error(s3_bucket,Bucket)``
+|    ``Key`` is a variable:
+|        ``instantiation_error``
+|    ``Key`` is neither a variable nor an atom:
+|        ``type_error(atom,Key)``
+|    The delegated S3 client request failed:
+|        ``domain_error(s3_client_option,Option)``
+
+| **Remarks:**
+
+    - Options: Per-call options accept the same terms as ``open/2`` plus ``expires(Seconds)`` for the URL lifetime and ``payload_hash(Hash)`` when ``payload_hash_mode(signed)`` is selected. Presigned URLs default to ``payload_hash_mode(unsigned)``. Options are merged before the stored session defaults, so explicit call options take precedence.
+
+
+------------
+
+.. index:: presigned_post_object/5
+.. _s3_session/1::presigned_post_object/5:
+
+``presigned_post_object/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates a presigned POST URL using session defaults merged with per-call options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``presigned_post_object(Session,Bucket,Key,URL,Options)``
+| **Mode and number of proofs:**
+|    ``presigned_post_object(+compound,+atom,+atom,-atom,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Session`` is a variable:
+|        ``instantiation_error``
+|    ``Session`` is neither a variable nor a valid S3 session handle:
+|        ``domain_error(s3_session,Session)``
+|    ``Session`` is a valid S3 session handle but not open:
+|        ``existence_error(s3_session,Session)``
+|    ``Bucket`` is a variable:
+|        ``instantiation_error``
+|    ``Bucket`` is neither a variable nor an atom:
+|        ``type_error(atom,Bucket)``
+|    ``Bucket`` is an atom but not a valid S3 bucket:
+|        ``domain_error(s3_bucket,Bucket)``
+|    ``Key`` is a variable:
+|        ``instantiation_error``
+|    ``Key`` is neither a variable nor an atom:
+|        ``type_error(atom,Key)``
+|    The delegated S3 client request failed:
+|        ``domain_error(s3_client_option,Option)``
+
+| **Remarks:**
+
+    - Options: Per-call options accept the same terms as ``open/2`` plus ``expires(Seconds)`` for the URL lifetime and ``payload_hash(Hash)`` when ``payload_hash_mode(signed)`` is selected. Presigned URLs default to ``payload_hash_mode(unsigned)``. Options are merged before the stored session defaults, so explicit call options take precedence.
+
+
+------------
+
+.. index:: put_object/7
+.. _s3_session/1::put_object/7:
+
+``put_object/7``
+^^^^^^^^^^^^^^^^
+
+Uploads a local file path using session defaults merged with per-call options and returns the object ETag and response metadata as separate arguments.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``put_object(Session,Bucket,Key,File,ETag,Properties,Options)``
+| **Mode and number of proofs:**
+|    ``put_object(+compound,+atom,+atom,+atom,-atom,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Session`` is a variable:
+|        ``instantiation_error``
+|    ``Session`` is neither a variable nor a valid S3 session handle:
+|        ``domain_error(s3_session,Session)``
+|    ``Session`` is a valid S3 session handle but not open:
+|        ``existence_error(s3_session,Session)``
+|    ``Bucket`` is a variable:
+|        ``instantiation_error``
+|    ``Bucket`` is neither a variable nor an atom:
+|        ``type_error(atom,Bucket)``
+|    ``Bucket`` is an atom but not a valid S3 bucket:
+|        ``domain_error(s3_bucket,Bucket)``
+|    ``Key`` is a variable:
+|        ``instantiation_error``
+|    ``Key`` is neither a variable nor an atom:
+|        ``type_error(atom,Key)``
+|    ``File`` is a variable:
+|        ``instantiation_error``
+|    ``File`` is neither a variable nor an atom:
+|        ``type_error(atom,File)``
+|    ``File`` exists but is not a readable file:
+|        ``domain_error(file([],[read]),File)``
+|    The file ``File`` does not exist:
+|        ``existence_error(file,File)``
+|    The delegated S3 client request failed:
+|        ``domain_error(s3_http_status,Status)``
+
+| **Remarks:**
+
+    - Options: Per-call options accept the same terms as ``open/2`` and are merged before the stored session defaults, so explicit call options take precedence.
+
+
+------------
+
+.. index:: delete_object/5
+.. _s3_session/1::delete_object/5:
+
+``delete_object/5``
+^^^^^^^^^^^^^^^^^^^
+
+Deletes an object using session defaults merged with per-call options, returning ``delete_result(Properties)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete_object(Session,Bucket,Key,Result,Options)``
+| **Mode and number of proofs:**
+|    ``delete_object(+compound,+atom,+atom,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Session`` is a variable:
+|        ``instantiation_error``
+|    ``Session`` is neither a variable nor a valid S3 session handle:
+|        ``domain_error(s3_session,Session)``
+|    ``Session`` is a valid S3 session handle but not open:
+|        ``existence_error(s3_session,Session)``
+|    ``Bucket`` is a variable:
+|        ``instantiation_error``
+|    ``Bucket`` is neither a variable nor an atom:
+|        ``type_error(atom,Bucket)``
+|    ``Bucket`` is an atom but not a valid S3 bucket:
+|        ``domain_error(s3_bucket,Bucket)``
+|    ``Key`` is a variable:
+|        ``instantiation_error``
+|    ``Key`` is neither a variable nor an atom:
+|        ``type_error(atom,Key)``
+|    The delegated S3 client request failed:
+|        ``domain_error(s3_http_status,Status)``
+
+| **Remarks:**
+
+    - Options: Per-call options accept the same terms as ``open/2`` and are merged before the stored session defaults, so explicit call options take precedence.
+
+
+------------
+
+.. index:: copy_object/6
+.. _s3_session/1::copy_object/6:
+
+``copy_object/6``
+^^^^^^^^^^^^^^^^^
+
+Copies an object using session defaults merged with per-call options, returning ``copy_result(ETag, Properties)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``copy_object(Session,Source,Bucket,Key,Result,Options)``
+| **Mode and number of proofs:**
+|    ``copy_object(+compound,+compound,+atom,+atom,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Session`` is a variable:
+|        ``instantiation_error``
+|    ``Session`` is neither a variable nor a valid S3 session handle:
+|        ``domain_error(s3_session,Session)``
+|    ``Session`` is a valid S3 session handle but not open:
+|        ``existence_error(s3_session,Session)``
+|    ``Bucket`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    The version identifier in ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a compound term:
+|        ``type_error(compound,Source)``
+|    ``Bucket`` is neither a variable nor an atom:
+|        ``type_error(atom,Bucket)``
+|    The version identifier in ``Source`` is neither a variable nor an atom:
+|        ``type_error(atom,VersionId)``
+|    ``Source`` is a compound term but not a valid copy source term:
+|        ``domain_error(s3_copy_source,Source)``
+|    ``Bucket`` is an atom but not a valid S3 bucket:
+|        ``domain_error(s3_bucket,Bucket)``
+|    The version identifier in ``Source`` is an atom but not a valid version identifier:
+|        ``domain_error(s3_version_id,VersionId)``
+|    ``Key`` is a variable:
+|        ``instantiation_error``
+|    ``Key`` is neither a variable nor an atom:
+|        ``type_error(atom,Key)``
+|    The delegated S3 client request failed:
+|        ``domain_error(s3_http_status,Status)``
+
+| **Remarks:**
+
+    - Options: Per-call options accept the same terms as ``open/2`` and are merged before the stored session defaults, so explicit call options take precedence.
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: session_seed_/1
+.. _s3_session/1::session_seed_/1:
+
+``session_seed_/1``
+^^^^^^^^^^^^^^^^^^^
+
+Dynamic counter used to generate fresh session identifiers.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``session_seed_(SessionId)``
+| **Mode and number of proofs:**
+|    ``session_seed_(?positive_integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: session_state_/2
+.. _s3_session/1::session_state_/2:
+
+``session_state_/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Dynamic mapping between session identifiers and their stored default option lists.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``session_state_(SessionId,Options)``
+| **Mode and number of proofs:**
+|    ``session_state_(?positive_integer,?list(compound))`` - ``zero_or_more``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

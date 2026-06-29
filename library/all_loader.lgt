@@ -244,6 +244,7 @@
 		open_ai(loader),
 		open_id(loader),
 		gravatar(loader),
+		s3(loader),
 		format(loader),
 		union_find(loader),
 		mutations(loader),

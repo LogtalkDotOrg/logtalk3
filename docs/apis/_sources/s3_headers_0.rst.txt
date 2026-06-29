@@ -1,0 +1,100 @@
+.. index:: single: s3_headers
+.. _s3_headers/0:
+
+.. rst-class:: right
+
+**object**
+
+``s3_headers``
+==============
+
+Helpers for extracting S3 response metadata from normalized HTTP responses.
+
+| **Availability:** 
+|    ``logtalk_load(s3(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-29
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`http_core <http_core/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: response_properties/2
+.. _s3_headers/0::response_properties/2:
+
+``response_properties/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Collects status and response headers into a stable property list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``response_properties(Response,Properties)``
+| **Mode and number of proofs:**
+|    ``response_properties(+compound,-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Response`` is not a normalized HTTP response term:
+|        ``domain_error(http_response,Response)``
+
+
+------------
+
+.. index:: header_value/3
+.. _s3_headers/0::header_value/3:
+
+``header_value/3``
+^^^^^^^^^^^^^^^^^^
+
+Enumerates response header values by normalized header name.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``header_value(Response,Name,Value)``
+| **Mode and number of proofs:**
+|    ``header_value(+compound,+atom,-term)`` - ``zero_or_more``
+
+| **Exceptions:**
+|    ``Response`` is not a normalized HTTP response term:
+|        ``domain_error(http_response,Response)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

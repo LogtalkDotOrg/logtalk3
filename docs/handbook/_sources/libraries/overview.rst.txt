@@ -43,7 +43,7 @@ multiple areas):
   ``http_socket_process``, ``http_static_files``, ``http_websocket``,
   ``http_websocket_messages``, ``http_websocket_service``,
   ``http_websocket_session``, ``gravatar``, ``open_api``, ``open_ai``,
-  ``open_id``, and ``rest``.
+  ``open_id``, ``rest``, and ``s3``.
 - Identifiers: ``cuid2``, ``genint``, ``gensym``, ``ids``, ``ksuid``,
   ``nanoid``, ``snowflakeid``, ``ulid``, and ``uuid``.
 - Interchange formats and wire protocols: ``amqp``, ``avro``,

@@ -576,6 +576,13 @@ Objects
    rfc_metric <rfc_metric_0>
    ridge_regression <ridge_regression_0>
    rule_expansion(Mode) <rule_expansion_1>
+   s3_client <s3_client_0>
+   s3_client(HTTPSocket) <s3_client_1>
+   s3_endpoints <s3_endpoints_0>
+   s3_headers <s3_headers_0>
+   s3_session(A) <s3_session_1>
+   s3_signing <s3_signing_0>
+   s3_xml <s3_xml_0>
    sample <sample_0>
    sarif <sarif_0>
    sbom <sbom_0>
@@ -834,6 +841,7 @@ Protocols
    registry_protocol <registry_protocol_0>
    regression_dataset_protocol <regression_dataset_protocol_0>
    regressor_protocol <regressor_protocol_0>
+   s3_protocol <s3_protocol_0>
    sampling_protocol <sampling_protocol_0>
    sequence_dataset_protocol <sequence_dataset_protocol_0>
    setp <setp_0>

@@ -1,0 +1,218 @@
+.. index:: single: s3_signing
+.. _s3_signing/0:
+
+.. rst-class:: right
+
+**object**
+
+``s3_signing``
+==============
+
+AWS Signature Version 4 helpers specialized for S3.
+
+| **Availability:** 
+|    ``logtalk_load(s3(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-06-29
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`date <date/0>`
+|    :ref:`hmac <hmac/0>`
+|    :ref:`http_core <http_core/0>`
+|    :ref:`list <list/0>`
+|    :ref:`os <os/0>`
+|    :ref:`sha256 <sha256/0>`
+|    :ref:`term_io <term_io/0>`
+|    :ref:`user <user/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: payload_hash/2
+.. _s3_signing/0::payload_hash/2:
+
+``payload_hash/2``
+^^^^^^^^^^^^^^^^^^
+
+Returns the hexadecimal SHA-256 payload hash for a normalized HTTP body term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``payload_hash(Body,Hash)``
+| **Mode and number of proofs:**
+|    ``payload_hash(+compound,-atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Body`` is not a valid normalized HTTP body term:
+|        ``domain_error(http_body,Body)``
+|    No registered HTTP body codec exists for the body media type when codec-based encoding is required:
+|        ``existence_error(http_body_codec,MediaType)``
+
+
+------------
+
+.. index:: canonical_query/2
+.. _s3_signing/0::canonical_query/2:
+
+``canonical_query/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns the canonical AWS SigV4 query string for the given name-value pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``canonical_query(Pairs,Query)``
+| **Mode and number of proofs:**
+|    ``canonical_query(+list(pair),-atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Pairs`` is not a valid list of canonical query pairs:
+|        ``domain_error(s3_query_pairs,Pairs)``
+
+
+------------
+
+.. index:: canonical_request/6
+.. _s3_signing/0::canonical_request/6:
+
+``canonical_request/6``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Builds the canonical request string for the given method, URI, query pairs, signed headers, and payload hash.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``canonical_request(Method,CanonicalURI,QueryPairs,Headers,PayloadHash,CanonicalRequest)``
+| **Mode and number of proofs:**
+|    ``canonical_request(+atom,+atom,+list(pair),+list(compound),+atom,-atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Method`` is not a supported HTTP method for this helper:
+|        ``domain_error(s3_method,Method)``
+|    ``QueryPairs`` is not a valid list of canonical query pairs:
+|        ``domain_error(s3_query_pairs,QueryPairs)``
+
+
+------------
+
+.. index:: sign_request/8
+.. _s3_signing/0::sign_request/8:
+
+``sign_request/8``
+^^^^^^^^^^^^^^^^^^
+
+Signs an S3 request and returns the final normalized header list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sign_request(Method,HostHeader,CanonicalURI,QueryPairs,Body,Headers,SignedHeaders,Options)``
+| **Mode and number of proofs:**
+|    ``sign_request(+atom,+atom,+atom,+list(pair),+compound,+list(compound),-list(compound),+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Options`` is missing valid credentials:
+|        ``domain_error(s3_credentials,missing)``
+|    ``Body`` is not a valid normalized HTTP body term:
+|        ``domain_error(http_body,Body)``
+|    ``Headers`` contains a managed or invalid signed header:
+|        ``domain_error(s3_managed_header,Header)``
+|    The signing timestamp is invalid:
+|        ``domain_error(s3_amz_date,AmzDate)``
+
+| **Remarks:**
+
+    - Option ``credentials/1``: Required access credentials as ``credentials(access_key_id(AccessKeyId), secret_access_key(SecretAccessKey))``.
+    - Option ``session_token/1``: Optional session token for temporary credentials.
+    - Option ``region/1``: AWS region for the credential scope. Defaults to ``us-east-1``.
+    - Option ``payload_hash_mode/1``: Payload signing mode, either ``signed`` or ``unsigned``. Defaults to ``signed``.
+    - Option ``request_time/1``: Optional explicit local request time as ``date_time(Year, Month, Day, Hours, Minutes, Seconds)``.
+    - Option ``utc_offset_seconds/1``: UTC offset used to derive the signing time from the local clock. Defaults to ``0``.
+    - Option ``amz_date/1``: Optional explicit AWS SigV4 timestamp overriding any derived request time.
+
+
+------------
+
+.. index:: presigned_query_pairs/7
+.. _s3_signing/0::presigned_query_pairs/7:
+
+``presigned_query_pairs/7``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Signs an S3 request for query-string authentication and returns the final canonical query pairs, including the signature.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``presigned_query_pairs(Method,HostHeader,CanonicalURI,QueryPairs,Headers,SignedQueryPairs,Options)``
+| **Mode and number of proofs:**
+|    ``presigned_query_pairs(+atom,+atom,+atom,+list(pair),+list(compound),-list(pair),+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Options`` is missing valid credentials:
+|        ``domain_error(s3_credentials,missing)``
+|    ``Headers`` contains a managed or invalid signed header:
+|        ``domain_error(s3_managed_header,Header)``
+|    The signing timestamp is invalid:
+|        ``domain_error(s3_amz_date,AmzDate)``
+|    The expiration is invalid or outside the AWS SigV4 range:
+|        ``domain_error(s3_presign_expires,Expires)``
+|    The payload hash is missing, invalid, or incompatible with unsigned mode:
+|        ``domain_error(s3_presign_payload_hash,Hash)``
+
+| **Remarks:**
+
+    - Option ``credentials/1``: Required access credentials as ``credentials(access_key_id(AccessKeyId), secret_access_key(SecretAccessKey))``.
+    - Option ``session_token/1``: Optional session token for temporary credentials. It is emitted as the ``X-Amz-Security-Token`` query parameter.
+    - Option ``region/1``: AWS region for the credential scope. Defaults to ``us-east-1``.
+    - Option ``payload_hash_mode/1``: Presigned URLs default to ``unsigned`` payload hashing and use ``UNSIGNED-PAYLOAD``. Use ``signed`` together with ``payload_hash/1`` to sign a precomputed payload hash.
+    - Option ``payload_hash/1``: Precomputed hexadecimal SHA-256 payload hash required when ``payload_hash_mode(signed)`` is selected.
+    - Option ``request_time/1``: Optional explicit local request time as ``date_time(Year, Month, Day, Hours, Minutes, Seconds)``.
+    - Option ``utc_offset_seconds/1``: UTC offset used to derive the signing time from the local clock. Defaults to ``0``.
+    - Option ``amz_date/1``: Optional explicit AWS SigV4 timestamp overriding any derived request time.
+    - Option ``expires/1``: Presigned URL lifetime in seconds. Defaults to ``900`` and must not exceed ``604800``.
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
