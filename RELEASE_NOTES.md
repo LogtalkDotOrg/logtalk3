@@ -115,6 +115,8 @@ throw an error when failure was expected.
 
 * FIXED: A `linda` library timing issue at server shutdown.
 
+* FIXED: The `timeout` library tests for Trealla Prolog.
+
 Tools
 -----
 
