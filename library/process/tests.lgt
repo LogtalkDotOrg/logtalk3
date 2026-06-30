@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-19,
+		date is 2026-06-30,
 		comment is 'Unit tests for the "process" library.'
 	]).
 
@@ -53,6 +53,10 @@
 
 		test(process_wait_2_01, true((Status == exit(0) ; Status == 0))) :-
 			create('cmd.exe', ['/c', 'echo', 'hello'], [process(Pid)]),
+			wait(Pid, Status).
+
+		test(process_wait_2_02, true((Status \== exit(0), Status \== 0))) :-
+			create('cmd.exe', ['/c', 'dir', 'non_existant'], [process(Pid)]),
 			wait(Pid, Status).
 
 		test(process_kill_1_01, true) :-
@@ -85,6 +89,10 @@
 
 		test(process_wait_2_01, true((Status == exit(0) ; Status == 0))) :-
 			create('/bin/echo', ['hello'], [process(Pid)]),
+			wait(Pid, Status).
+
+		test(process_wait_2_02, true((Status \== exit(0), Status \== 0))) :-
+			create('/bin/ls', ['non_existant'], [process(Pid)]),
 			wait(Pid, Status).
 
 		test(process_kill_1_01, true) :-

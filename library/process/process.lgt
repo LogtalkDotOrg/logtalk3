@@ -24,7 +24,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-23,
+		date is 2026-06-30,
 		comment is 'Portable process handling predicates.',
 		remarks is [
 			'Supported backend Prolog systems' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM.',
@@ -267,13 +267,8 @@
 		translate_option(stdout(Stream), stdout(pipe(Stream))).
 		translate_option(stderr(Stream), stderr(pipe(Stream))).
 
-		% Trealla's process_wait/2 takes options as second argument (input),
-		% not a status output. process_wait/1 just waits for the process.
-		% Since Trealla doesn't provide exit status, we return exit(0)
-		% assuming successful completion.
 		wait(Pid, Status) :-
-			{process_wait(Pid)},
-			Status = exit(0).
+			{process_wait(Pid, Status)}.
 
 		kill(Pid, Signal) :-
 			(	atom(Signal) ->
