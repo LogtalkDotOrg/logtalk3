@@ -15,7 +15,7 @@ Small Server-Sent Events helpers used by OpenAI streaming endpoints.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-25
+| **Date:** 2026-06-30
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -54,6 +54,10 @@ Parses a single OpenAI event-stream frame atom into ``event(Name, Data)``. Unkno
 | **Mode and number of proofs:**
 |    ``event(+atom,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Frame`` is not an event-stream frame atom:
+|        ``domain_error(open_ai_event_stream_frame,Frame)``
+
 
 ------------
 
@@ -72,6 +76,10 @@ Generates an event-stream frame atom from ``event(Name, Data)``.
 |    ``frame(Event,Frame)``
 | **Mode and number of proofs:**
 |    ``frame(+compound,-atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Event`` is not an event-stream event term:
+|        ``domain_error(open_ai_event_stream_event,Event)``
 
 
 ------------

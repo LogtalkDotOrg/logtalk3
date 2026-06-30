@@ -15,7 +15,7 @@ OpenAI-compatible client facade using http_client(http_socket_process) for HTTPS
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-25
+| **Date:** 2026-06-30
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -55,6 +55,16 @@ Calls an OpenAI operation by operation identifier. Path parameters are supplied 
 | **Mode and number of proofs:**
 |    ``request(+atom,+list(pair),+compound,--compound,+list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    The catalog operation method ``Method`` is unsupported by the client facade:
+|        ``domain_error(open_ai_operation_method,Method)``
+|    An element ``Parameter`` of the list ``PathParameters`` is not a ``Name-Value`` pair of atoms:
+|        ``domain_error(open_ai_path_parameter,Parameter)``
+|    ``Options`` contains an invalid OpenAI client option:
+|        ``domain_error(open_ai_client_option,Option)``
+|    The delegated HTTP client rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+
 
 ------------
 
@@ -73,6 +83,10 @@ Builds the absolute request URL for an operation and path parameters.
 |    ``operation_url(OperationId,PathParameters,URL,Options)``
 | **Mode and number of proofs:**
 |    ``operation_url(+atom,+list(pair),-atom,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An element ``Parameter`` of the list ``PathParameters`` is not a ``Name-Value`` pair of atoms:
+|        ``domain_error(open_ai_path_parameter,Parameter)``
 
 
 ------------

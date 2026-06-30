@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-25,
+		date is 2026-06-30,
 		comment is 'Small Server-Sent Events helpers used by OpenAI streaming endpoints.'
 	]).
 
@@ -32,14 +32,20 @@
 	:- mode(event(+atom, -compound), one_or_error).
 	:- info(event/2, [
 		comment is 'Parses a single OpenAI event-stream frame atom into ``event(Name, Data)``. Unknown fields are ignored.',
-		argnames is ['Frame', 'Event']
+		argnames is ['Frame', 'Event'],
+		exceptions is [
+			'``Frame`` is not an event-stream frame atom' - domain_error(open_ai_event_stream_frame, 'Frame')
+		]
 	]).
 
 	:- public(frame/2).
 	:- mode(frame(+compound, -atom), one_or_error).
 	:- info(frame/2, [
 		comment is 'Generates an event-stream frame atom from ``event(Name, Data)``.',
-		argnames is ['Event', 'Frame']
+		argnames is ['Event', 'Frame'],
+		exceptions is [
+			'``Event`` is not an event-stream event term' - domain_error(open_ai_event_stream_event, 'Event')
+		]
 	]).
 
 	event(Frame, event(Name, Data)) :-

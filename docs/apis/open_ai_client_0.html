@@ -405,7 +405,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-25</div>
+<div class="line"><strong>Date:</strong> 2026-06-30</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -467,6 +467,27 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">request(+atom,+list(pair),+compound,--compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The catalog operation method <code class="docutils literal notranslate"><span class="pre">Method</span></code> is unsupported by the client facade:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(open_ai_operation_method,Method)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Parameter</span></code> of the list <code class="docutils literal notranslate"><span class="pre">PathParameters</span></code> is not a <code class="docutils literal notranslate"><span class="pre">Name-Value</span></code> pair of atoms:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(open_ai_path_parameter,Parameter)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains an invalid OpenAI client option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(open_ai_client_option,Option)</span></code></div>
+</div>
+<div class="line">The delegated HTTP client rejects the response stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response_stream,Error)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="operation-url-4">
@@ -486,6 +507,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">operation_url(+atom,+list(pair),-atom,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Parameter</span></code> of the list <code class="docutils literal notranslate"><span class="pre">PathParameters</span></code> is not a <code class="docutils literal notranslate"><span class="pre">Name-Value</span></code> pair of atoms:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(open_ai_path_parameter,Parameter)</span></code></div>
+</div>
 </div>
 </div>
 </section>

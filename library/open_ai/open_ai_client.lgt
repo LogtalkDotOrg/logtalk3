@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-25,
+		date is 2026-06-30,
 		comment is 'OpenAI-compatible client facade using http_client(http_socket_process) for HTTPS/WSS support.'
 	]).
 
@@ -32,14 +32,23 @@
 	:- mode(request(+atom, +list(pair), +compound, --compound, +list(compound)), one_or_error).
 	:- info(request/5, [
 		comment is 'Calls an OpenAI operation by operation identifier. Path parameters are supplied as ``Name-Value`` pairs. The body is ignored for methods without a request body. Options include ``base_url/1``, ``api_key/1``, ``organization/1``, ``project/1``, and ordinary ``http_client`` request options.',
-		argnames is ['OperationId', 'PathParameters', 'Body', 'Response', 'Options']
+		argnames is ['OperationId', 'PathParameters', 'Body', 'Response', 'Options'],
+		exceptions is [
+			'The catalog operation method ``Method`` is unsupported by the client facade' - domain_error(open_ai_operation_method, 'Method'),
+			'An element ``Parameter`` of the list ``PathParameters`` is not a ``Name-Value`` pair of atoms' - domain_error(open_ai_path_parameter, 'Parameter'),
+			'``Options`` contains an invalid OpenAI client option' - domain_error(open_ai_client_option, 'Option'),
+			'The delegated HTTP client rejects the response stream' - domain_error(http_response_stream, 'Error')
+		]
 	]).
 
 	:- public(operation_url/4).
 	:- mode(operation_url(+atom, +list(pair), -atom, +list(compound)), one_or_error).
 	:- info(operation_url/4, [
 		comment is 'Builds the absolute request URL for an operation and path parameters.',
-		argnames is ['OperationId', 'PathParameters', 'URL', 'Options']
+		argnames is ['OperationId', 'PathParameters', 'URL', 'Options'],
+		exceptions is [
+			'An element ``Parameter`` of the list ``PathParameters`` is not a ``Name-Value`` pair of atoms' - domain_error(open_ai_path_parameter, 'Parameter')
+		]
 	]).
 
 	:- uses(list, [
