@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-25,
+		date is 2026-06-30,
 		comment is 'Ollama client example using native model discovery and the OpenAI-compatible client facade.'
 	]).
 
@@ -45,42 +45,77 @@
 	:- mode(models(-list(atom)), one_or_error).
 	:- info(models/1, [
 		comment is 'Returns the list of chat-capable model identifiers available from the local Ollama server. Uses the default ``http://127.0.0.1:11434/v1`` URL.',
-		argnames is ['Models']
+		argnames is ['Models'],
+		exceptions is [
+			'The delegated native Ollama request rejects the response stream' - domain_error(http_response_stream, 'Error'),
+			'The server response is not a successful JSON response' - domain_error(ollama_response, 'Response'),
+			'The native tags response does not contain a valid models list' - domain_error(ollama_tags_response, 'JSON'),
+			'A native tags response model entry does not contain a valid name and size' - domain_error(ollama_tags_model, 'ModelJSON'),
+			'The native model details response does not contain a valid capabilities list' - domain_error(ollama_model_capabilities_response, 'JSON')
+		]
 	]).
 
 	:- public(models/2).
 	:- mode(models(-list(atom), +list(compound)), one_or_error).
 	:- info(models/2, [
 		comment is 'Returns the list of chat-capable model identifiers available from the local Ollama server. Use the ``base_url(URL)`` option to override the default ``http://127.0.0.1:11434/v1`` URL.',
-		argnames is ['Models', 'Options']
+		argnames is ['Models', 'Options'],
+		exceptions is [
+			'The delegated native Ollama request rejects the response stream' - domain_error(http_response_stream, 'Error'),
+			'The server response is not a successful JSON response' - domain_error(ollama_response, 'Response'),
+			'The native tags response does not contain a valid models list' - domain_error(ollama_tags_response, 'JSON'),
+			'A native tags response model entry does not contain a valid name and size' - domain_error(ollama_tags_model, 'ModelJSON'),
+			'The native model details response does not contain a valid capabilities list' - domain_error(ollama_model_capabilities_response, 'JSON')
+		]
 	]).
 
 	:- public(ask/3).
 	:- mode(ask(+atom, +atom, -atom), one_or_error).
 	:- info(ask/3, [
 		comment is 'Asks a question using the given local Ollama model and returns the assistant answer. Uses the default ``http://127.0.0.1:11434/v1`` URL.',
-		argnames is ['Model', 'Question', 'Answer']
+		argnames is ['Model', 'Question', 'Answer'],
+		exceptions is [
+			'The delegated OpenAI client request rejects the response stream' - domain_error(http_response_stream, 'Error'),
+			'The server response is not a successful JSON response' - domain_error(ollama_response, 'Response'),
+			'The chat completion response does not contain a valid answer' - domain_error(ollama_chat_response, 'JSON')
+		]
 	]).
 
 	:- public(ask/4).
 	:- mode(ask(+atom, +atom, -atom, +list(compound)), one_or_error).
 	:- info(ask/4, [
 		comment is 'Asks a question using the given local Ollama model and caller-supplied OpenAI client options. Use the ``base_url(URL)`` option to override the default ``http://127.0.0.1:11434/v1`` URL.',
-		argnames is ['Model', 'Question', 'Answer', 'Options']
+		argnames is ['Model', 'Question', 'Answer', 'Options'],
+		exceptions is [
+			'``Options`` contains an invalid OpenAI client option' - domain_error(open_ai_client_option, 'Option'),
+			'The delegated OpenAI client request rejects the response stream' - domain_error(http_response_stream, 'Error'),
+			'The server response is not a successful JSON response' - domain_error(ollama_response, 'Response'),
+			'The chat completion response does not contain a valid answer' - domain_error(ollama_chat_response, 'JSON')
+		]
 	]).
 
 	:- protected(open_ai_request/5).
 	:- mode(open_ai_request(+atom, +list(pair), +compound, --compound, +list(compound)), one_or_error).
 	:- info(open_ai_request/5, [
 		comment is 'Hook predicate used to call the OpenAI client facade. Tests can override it to return canned responses.',
-		argnames is ['OperationId', 'PathParameters', 'Body', 'Response', 'Options']
+		argnames is ['OperationId', 'PathParameters', 'Body', 'Response', 'Options'],
+		exceptions is [
+			'The delegated OpenAI client request rejects an operation method declared by the catalog' - domain_error(open_ai_operation_method, 'Method'),
+			'The delegated OpenAI client request rejects a path parameter' - domain_error(open_ai_path_parameter, 'Parameter'),
+			'The delegated OpenAI client request rejects an option' - domain_error(open_ai_client_option, 'Option'),
+			'The delegated OpenAI client request rejects the response stream' - domain_error(http_response_stream, 'Error')
+		]
 	]).
 
 	:- protected(ollama_request/4).
+	:- mode(ollama_request(+atom, +atom, --compound, +list(compound)), one_or_error).
 	:- mode(ollama_request(+atom, +compound, --compound, +list(compound)), one_or_error).
 	:- info(ollama_request/4, [
 		comment is 'Hook predicate used to call native Ollama model info endpoints. Tests can override it to return canned responses.',
-		argnames is ['OperationId', 'Body', 'Response', 'Options']
+		argnames is ['OperationId', 'Body', 'Response', 'Options'],
+		exceptions is [
+			'The delegated HTTP client rejects the response stream' - domain_error(http_response_stream, 'Error')
+		]
 	]).
 
 	:- uses(json_pointer, [
@@ -88,7 +123,7 @@
 	]).
 
 	:- uses(list, [
-		member/2, memberchk/2
+		member/2, memberchk/2, sort/4
 	]).
 
 	available :-
@@ -104,10 +139,11 @@
 	models(Models, Options0) :-
 		context(Context),
 		request_options(Options0, Options),
-		::open_ai_request(listModels, [], empty, Response, Options),
+		::ollama_request(listTags, empty, Response, Options),
 		response_json(Response, Context, JSON),
-		model_ids(JSON, Context, ModelIDs),
-		chat_model_ids(ModelIDs, Context, Options, Models).
+		model_size_pairs(JSON, Context, Pairs),
+		sort(1, @=<, Pairs, SortedPairs),
+		chat_model_ids(SortedPairs, Context, Options, Models).
 
 	ask(Model, Question, Answer) :-
 		::ask(Model, Question, Answer, []).
@@ -133,6 +169,10 @@
 		show_url(Options, URL),
 		ollama_http_options(Options, HTTPOptions),
 		http_client(http_socket_process)::post(URL, Body, Response, HTTPOptions).
+	ollama_request(listTags, empty, Response, Options) :-
+		tags_url(Options, URL),
+		ollama_http_options(Options, HTTPOptions),
+		http_client(http_socket_process)::get(URL, Response, HTTPOptions).
 
 	default_base_url('http://127.0.0.1:11434/v1').
 
@@ -160,14 +200,14 @@
 	response_json(Response, Context, _) :-
 		throw(error(domain_error(ollama_response, Response), Context)).
 
-	model_ids(JSON, Context, Models) :-
-		(	evaluate([data], JSON, Data) ->
-			model_ids_list(Data, Context, Models)
-		;	throw(error(domain_error(ollama_models_response, JSON), Context))
+	model_size_pairs(JSON, Context, Pairs) :-
+		(	evaluate([models], JSON, Models) ->
+			model_size_pairs_list(Models, Context, Pairs)
+		;	throw(error(domain_error(ollama_tags_response, JSON), Context))
 		).
 
 	chat_model_ids([], _, _, []).
-	chat_model_ids([ModelID| ModelIDs], Context, Options, Models) :-
+	chat_model_ids([_Size-ModelID| ModelIDs], Context, Options, Models) :-
 		(	chat_model(ModelID, Context, Options) ->
 			Models = [ModelID| Tail]
 		;	Models = Tail
@@ -192,6 +232,10 @@
 	show_url(Options, URL) :-
 		api_base_url(Options, BaseURL),
 		atom_concat(BaseURL, '/api/show', URL).
+
+	tags_url(Options, URL) :-
+		api_base_url(Options, BaseURL),
+		atom_concat(BaseURL, '/api/tags', URL).
 
 	api_base_url(Options, BaseURL) :-
 		memberchk(base_url(OpenAIBaseURL), Options),
@@ -222,16 +266,18 @@
 		atom(Capability),
 		capabilities_list(Capabilities).
 
-	model_ids_list([], _, []).
-	model_ids_list([ModelJSON| ModelJSONs], Context, [Model| Models]) :-
-		model_id(ModelJSON, Context, Model),
-		model_ids_list(ModelJSONs, Context, Models).
+	model_size_pairs_list([], _, []).
+	model_size_pairs_list([ModelJSON| ModelJSONs], Context, [Size-Model| Pairs]) :-
+		model_size_pair(ModelJSON, Context, Size-Model),
+		model_size_pairs_list(ModelJSONs, Context, Pairs).
 
-	model_id(ModelJSON, Context, Model) :-
-		(	evaluate([id], ModelJSON, Model),
-			atom(Model) ->
+	model_size_pair(ModelJSON, Context, Size-Model) :-
+		(	evaluate([name], ModelJSON, Model),
+			atom(Model),
+			evaluate([size], ModelJSON, Size),
+			integer(Size) ->
 			true
-		;	throw(error(domain_error(ollama_model, ModelJSON), Context))
+		;	throw(error(domain_error(ollama_tags_model, ModelJSON), Context))
 		).
 
 :- end_object.

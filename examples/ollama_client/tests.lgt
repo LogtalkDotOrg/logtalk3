@@ -22,13 +22,6 @@
 :- object(mock_ollama_client,
 	extends(ollama_client)).
 
-	open_ai_request(listModels, [], empty, Response, Options) :-
-		Options = [base_url('http://127.0.0.1:11434/v1')],
-		models_response([
-			{id-'llama3.2:latest', object-model},
-			{id-'nomic-embed-text:latest', object-model},
-			{id-'qwen2.5:0.5b', object-model}
-		], Response).
 	open_ai_request(createChatCompletion, [], content('application/json', json({
 		model-'llama3.2:latest',
 		messages-[
@@ -51,9 +44,16 @@
 	ollama_request(showModel, content('application/json', json({model-'qwen2.5:0.5b'})), Response, Options) :-
 		Options = [base_url('http://127.0.0.1:11434/v1')],
 		show_response([completion, tools], Response).
+	ollama_request(listTags, empty, Response, Options) :-
+		Options = [base_url('http://127.0.0.1:11434/v1')],
+		tags_response([
+			{name-'llama3.2:latest', size-2019393189},
+			{name-'nomic-embed-text:latest', size-274302450},
+			{name-'qwen2.5:0.5b', size-397821635}
+		], Response).
 
-	models_response(Models, Response) :-
-		http_core::response(http(1, 1), status(200, 'OK'), [], content('application/json', json({object-list, data-Models})), [], Response).
+	tags_response(Models, Response) :-
+		http_core::response(http(1, 1), status(200, 'OK'), [], content('application/json', json({models-Models})), [], Response).
 
 	show_response(Capabilities, Response) :-
 		http_core::response(http(1, 1), status(200, 'OK'), [], content('application/json', json({capabilities-Capabilities})), [], Response).
@@ -67,8 +67,8 @@
 :- object(empty_ollama_client,
 	extends(ollama_client)).
 
-	open_ai_request(listModels, [], empty, Response, _Options) :-
-		http_core::response(http(1, 1), status(200, 'OK'), [], content('application/json', json({object-list, data-[]})), [], Response).
+	ollama_request(listTags, empty, Response, _Options) :-
+		http_core::response(http(1, 1), status(200, 'OK'), [], content('application/json', json({models-[]})), [], Response).
 
 :- end_object.
 
@@ -76,8 +76,8 @@
 :- object(unexpected_ollama_client,
 	extends(ollama_client)).
 
-	open_ai_request(listModels, [], empty, Response, _Options) :-
-		http_core::response(http(1, 1), status(200, 'OK'), [], content('application/json', json({models-[]})), [], Response).
+	ollama_request(listTags, empty, Response, _Options) :-
+		http_core::response(http(1, 1), status(200, 'OK'), [], content('application/json', json({data-[]})), [], Response).
 	open_ai_request(createChatCompletion, [], _Body, Response, _Options) :-
 		http_core::response(http(1, 1), status(200, 'OK'), [], content('application/json', json({choices-[]})), [], Response).
 
@@ -87,8 +87,8 @@
 :- object(malformed_show_ollama_client,
 	extends(ollama_client)).
 
-	open_ai_request(listModels, [], empty, Response, _Options) :-
-		http_core::response(http(1, 1), status(200, 'OK'), [], content('application/json', json({object-list, data-[{id-'llama3.2:latest', object-model}]})), [], Response).
+	ollama_request(listTags, empty, Response, _Options) :-
+		http_core::response(http(1, 1), status(200, 'OK'), [], content('application/json', json({models-[{name-'llama3.2:latest', size-2019393189}]})), [], Response).
 	ollama_request(showModel, content('application/json', json({model-'llama3.2:latest'})), Response, _Options) :-
 		http_core::response(http(1, 1), status(200, 'OK'), [], content('application/json', json({details-{family-llama}})), [], Response).
 
@@ -101,19 +101,19 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-25,
+		date is 2026-06-30,
 		comment is 'Unit tests for the "ollama_client" example.'
 	]).
 
 	cover(ollama_client).
 
-	test(ollama_client_models_01, deterministic(Models == ['llama3.2:latest', 'qwen2.5:0.5b'])) :-
+	test(ollama_client_models_01, deterministic(Models == ['qwen2.5:0.5b', 'llama3.2:latest'])) :-
 		mock_ollama_client::models(Models).
 
 	test(ollama_client_models_02, deterministic(Models == [])) :-
 		empty_ollama_client::models(Models).
 
-	test(ollama_client_models_03, error(domain_error(ollama_models_response, _))) :-
+	test(ollama_client_models_03, error(domain_error(ollama_tags_response, _))) :-
 		unexpected_ollama_client::models(_Models).
 
 	test(ollama_client_models_04, error(domain_error(ollama_model_capabilities_response, _))) :-

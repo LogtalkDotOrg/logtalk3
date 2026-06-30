@@ -83,11 +83,11 @@ provides also `available/1`, `models/2`, and `ask/4` predicates that take a
 list of options, including a `base_url(URL)` option to override the default
 `http://127.0.0.1:11434/v1` URL.
 
-The example lists installed models using Ollama's OpenAI-compatible `/v1/models`
-endpoint and then calls Ollama's native `/api/show` endpoint once per model to
-filter the result to chat-capable models. Current Ollama releases report text
-generation models using the `completion` capability, which this example treats
-as chat-capable. Chat requests themselves still use `open_ai_client::request/5`,
+The example lists installed models using Ollama's native `/api/tags` endpoint,
+which reports each model's `size`, and sorts the models by size before checking
+capabilities with `/api/show`. Current Ollama releases report text generation
+models using the `completion` capability, which this example treats as
+chat-capable. Chat requests themselves still use `open_ai_client::request/5`,
 and they set `reasoning_effort` to `none` so reasoning-capable models return a
 final short answer instead of spending the small token budget on a reasoning
 trace.
@@ -97,7 +97,7 @@ native Ollama responses. The live availability test is conditional on a
 reachable local server. The live tests use `OLLAMA_SERVER_URL` when set to
 override the default OpenAI-compatible base URL. The live prompt tests use
 `OLLAMA_CLIENT_TEST_MODEL` when it names an installed chat-capable model;
-otherwise, they use the first chat-capable model returned by
+otherwise, they use the smallest chat-capable model returned by
 `ollama_client::models/2` for the selected server URL.
 
 Use `OLLAMA_CLIENT_TEST_MODEL` to force a specific model. Use
