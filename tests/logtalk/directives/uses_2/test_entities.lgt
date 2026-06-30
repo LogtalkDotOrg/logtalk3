@@ -209,3 +209,25 @@
 	p(X) :- q(X).
 
 :- end_object.
+
+
+:- object(qux(_A_, _B_, _C_)).
+
+	:- public(p/1).
+	p(X) :-
+		X is _A_ + _B_ + _C_.
+
+:- end_object.
+
+
+:- object(quux).
+
+	:- uses(qux(1,2,3), [
+		p/1
+	]).
+
+	:- public(q/1).
+	q(X) :-
+		p(X).
+
+:- end_object.

@@ -175,6 +175,11 @@ library.
 * FIXED: The `checkpoint` multi-threading example test flakiness due to
 potential out-or-order output. Thanks to Andrew Davison for the bug report.
 
+Tests
+-----
+
+* ADDED: Additional test for the `uses/2` directive.
+
 
 3.100.1 - May 16, 2026
 ======================

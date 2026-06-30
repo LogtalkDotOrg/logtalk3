@@ -23,10 +23,10 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:9:0,
+		version is 1:10:0,
 		author is 'Paulo Moura',
-		date is 2024-08-29,
-		comment is 'Unit tests for the uses/2 built-in directive.'
+		date is 2026-06-30,
+		comment is 'Unit tests for the "uses/2" built-in directive.'
 	]).
 
 	:- uses(uses_2_test_object_1, [
@@ -97,5 +97,8 @@
 
 	test(uses_2_17, true(L == [de,kl])) :-
 		uses_2_test_object_4::filter(2, [abc,de,f,ghij,kl], L).
+
+	test(uses_2_18, true(X == 6)) :-
+		quux::q(X).
 
 :- end_object.
