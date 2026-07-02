@@ -3033,7 +3033,7 @@ logtalk_make(Target) :-
 	% that are compiled with an explicit compilation mode set using the corresponding
 	% compiler option)
 	findall(
-		file(Path, Flags),
+		Path-Flags,
 		(	'$lgt_loaded_file_'(Basename, Directory, Mode, Flags, _, _, _),
 			'$lgt_changed_compilation_mode'(Mode, Flags),
 			atom_concat(Directory, Basename, Path)
@@ -3041,10 +3041,10 @@ logtalk_make(Target) :-
 		Files
 	),
 	% filter files that will be reloaded by a parent file that will also be reloaded
-	'$lgt_member'(file(Path,Flags), Files),
+	'$lgt_member'(Path-Flags, Files),
 	\+ (
 		'$lgt_parent_file_'(Path, Parent),
-		'$lgt_member'(file(Parent,_), Files)
+		'$lgt_member'(Parent-_, Files)
 	),
 	'$lgt_file_exists'(Path),
 	logtalk_load(Path, Flags),
@@ -3055,10 +3055,13 @@ logtalk_make(Target) :-
 '$lgt_logtalk_make'(force) :-
 	'$lgt_print_message'(comment(make), reload_all_files),
 	'$lgt_compiler_flag'(reload, Current),
-	(	'$lgt_set_compiler_flag'(reload, always),
+	(	'$lgt_set_compiler_flag'(reload, changed),
 		findall(
 			file(Path, Flags),
-			(	'$lgt_loaded_file_'(Basename, Directory, _, Flags, _, _, _),
+			(	retract('$lgt_loaded_file_'(Basename, Directory, Mode, Flags, TextProperties, ObjectFile, TimeStamp)),
+				% pretend that original source file is newer
+				'$lgt_decrement_file_time_stamp'(TimeStamp, DecrementedTimeStamp),
+				assertz('$lgt_loaded_file_'(Basename, Directory, Mode, Flags, TextProperties, ObjectFile, DecrementedTimeStamp)),
 				atom_concat(Directory, Basename, Path)
 			),
 			Files
@@ -3070,7 +3073,7 @@ logtalk_make(Target) :-
 			'$lgt_member'(file(Parent,_), Files)
 		),
 		'$lgt_file_exists'(Path),
-		logtalk_load(Path, [reload(always)| Flags]),
+		logtalk_load(Path, Flags),
 		fail
 	;	true
 	),
@@ -3557,6 +3560,19 @@ logtalk_make(Target) :-
 	),
 	atom_concat(OtherDirectory, OtherBasename, Dependency),
 	!.
+
+
+% with the exeption of GNU Prolog, which represents a file modification time
+% stamp uisng a dt/6 compound term, all other supported backends use a number
+
+'$lgt_decrement_file_time_stamp'(TimeStamp, DecrementedTimeStamp) :-
+	(	number(TimeStamp) ->
+		DecrementedTimeStamp is TimeStamp - 1
+	;	TimeStamp = dt(Year, Month, Day, Hours, Minutes, Seconds) ->
+		DecrementedYear is Year - 1,
+		DecrementedTimeStamp = dt(DecrementedYear, Month, Day, Hours, Minutes, Seconds)
+	;	DecrementedTimeStamp = TimeStamp
+	).
 
 
 

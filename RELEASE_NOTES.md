@@ -22,7 +22,7 @@ RELEASE NOTES
 =============
 
 
-3.101.0 - June ??, 2026
+3.101.0 - July ??, 2026
 =======================
 
 Logtalk compiler and runtime
@@ -30,6 +30,8 @@ Logtalk compiler and runtime
 
 * ADDED: Read-only `sockets` compilation flag to declare if a backend provides
 compatible sockets support. Valid values are `supported` and `unsupported`.
+
+* IMPROVED: Performance of the `logtalk_make(force)` goal.
 
 Prolog adapter and integration files
 ------------------------------------
