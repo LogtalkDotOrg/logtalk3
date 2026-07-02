@@ -115,6 +115,10 @@ also swapped).
 * FIXED: Case where the `json_pointer` library `evaluate/1` predicate would
 throw an error when failure was expected.
 
+* FIXED: The `json_rpc` library test failures for content-length framed
+messages (as used by LSP style protocols) on Windows when using the SICStus
+Prolog backend by being less strict when writing messages.
+
 * FIXED: A `linda` library timing issue at server shutdown.
 
 * FIXED: The `timeout` library tests for Trealla Prolog.

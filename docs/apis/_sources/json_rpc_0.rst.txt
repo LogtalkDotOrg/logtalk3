@@ -14,8 +14,8 @@ JSON-RPC 2.0 protocol encoding and decoding. Provides predicates for constructin
 |    ``logtalk_load(json_rpc(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:2
-| **Date:** 2026-06-28
+| **Version:** 1:0:3
+| **Date:** 2026-07-02
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -572,7 +572,7 @@ Extracts the error data from a JSON-RPC 2.0 error response. Fails if no data fie
 ``write_message/2``
 ^^^^^^^^^^^^^^^^^^^
 
-Writes a JSON-RPC 2.0 message to an output stream as a single line of JSON followed by a newline. Flushes the output stream after writing.
+Writes a JSON-RPC 2.0 message to an output text stream as a single line of JSON followed by a newline. Flushes the output stream after writing.
 
 | **Compilation flags:**
 |    ``static``
@@ -591,7 +591,7 @@ Writes a JSON-RPC 2.0 message to an output stream as a single line of JSON follo
 ``read_message/2``
 ^^^^^^^^^^^^^^^^^^
 
-Reads a JSON-RPC 2.0 message from an input stream. Reads a line of JSON text and parses it. Fails at end of stream.
+Reads a JSON-RPC 2.0 message from an input text stream. Reads a line of JSON text and parses it. Fails at end of stream.
 
 | **Compilation flags:**
 |    ``static``

@@ -22,9 +22,9 @@
 :- object(json_rpc).
 
 	:- info([
-		version is 1:0:2,
+		version is 1:0:3,
 		author is 'Paulo Moura',
-		date is 2026-06-28,
+		date is 2026-07-02,
 		comment is 'JSON-RPC 2.0 protocol encoding and decoding. Provides predicates for constructing and parsing JSON-RPC 2.0 request, notification, response, and error objects. Uses the ``json`` library for JSON parsing and generation.',
 		remarks is [
 			'Specification' - 'Implements the JSON-RPC 2.0 specification: https://www.jsonrpc.org/specification',
@@ -357,14 +357,14 @@
 	:- public(write_message/2).
 	:- mode(write_message(+stream, +compound), one).
 	:- info(write_message/2, [
-		comment is 'Writes a JSON-RPC 2.0 message to an output stream as a single line of JSON followed by a newline. Flushes the output stream after writing.',
+		comment is 'Writes a JSON-RPC 2.0 message to an output text stream as a single line of JSON followed by a newline. Flushes the output stream after writing.',
 		argnames is ['Output', 'Message']
 	]).
 
 	:- public(read_message/2).
 	:- mode(read_message(+stream, --compound), zero_or_one).
 	:- info(read_message/2, [
-		comment is 'Reads a JSON-RPC 2.0 message from an input stream. Reads a line of JSON text and parses it. Fails at end of stream.',
+		comment is 'Reads a JSON-RPC 2.0 message from an input text stream. Reads a line of JSON text and parses it. Fails at end of stream.',
 		argnames is ['Input', 'Message']
 	]).
 
@@ -399,8 +399,9 @@
 		generate(codes(Codes), Message),
 		length(Codes, Length),
 		write(Output, 'Content-Length: '),
-		write(Output, Length),
-		write_codes([0'\r, 0'\n, 0'\r, 0'\n| Codes], Output),
+		write(Output, Length), nl(Output),
+		nl(Output),
+		write_codes(Codes, Output),
 		flush_output(Output).
 
 	read_framed_message(Input, Message) :-
@@ -415,7 +416,8 @@
 	has_pair({Pairs}, Key, Value) :-
 		curly_member(Key-Value, Pairs).
 
-	curly_member(Pair, (Pair, _)) :- !.
+	curly_member(Pair, (Pair, _)) :-
+		!.
 	curly_member(Pair, (_, Rest)) :-
 		!,
 		curly_member(Pair, Rest).
