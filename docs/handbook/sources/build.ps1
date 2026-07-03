@@ -208,6 +208,7 @@ Foreach-Object {
 (Get-Content ../../../library/json_graph/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/json_graph.rst
 (Get-Content ../../../library/json_ld/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/json_ld.rst
 (Get-Content ../../../library/json_lines/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/json_lines.rst
+(Get-Content ../../../library/json_patch/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/json_patch.rst
 (Get-Content ../../../library/json_pointer/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/json_pointer.rst
 (Get-Content ../../../library/json_rpc/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/json_rpc.rst
 (Get-Content ../../../library/json_schema/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/json_schema.rst

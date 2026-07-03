@@ -1,0 +1,59 @@
+.. index:: single: json_patch
+.. _json_patch/0:
+
+.. rst-class:: right
+
+**object**
+
+``json_patch``
+==============
+
+JSON Patch (RFC 6902) application predicates for native Logtalk JSON terms.
+
+| **Availability:** 
+|    ``logtalk_load(json_patch(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-07-03
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`json_patch_protocol <json_patch_protocol/0>`
+| **Uses:**
+|    :ref:`json_pointer <json_pointer/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`json_patch_protocol/0::apply/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

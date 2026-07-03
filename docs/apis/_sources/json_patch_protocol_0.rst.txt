@@ -1,0 +1,84 @@
+.. index:: single: json_patch_protocol
+.. _json_patch_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``json_patch_protocol``
+=======================
+
+JSON Patch (RFC 6902) application protocol.
+
+| **Availability:** 
+|    ``logtalk_load(json_patch(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-07-03
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: apply/3
+.. _json_patch_protocol/0::apply/3:
+
+``apply/3``
+^^^^^^^^^^^
+
+Applies a JSON Patch document represented as a list of operation objects to a JSON term and returns the patched JSON term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``apply(Patch,OldJSON,NewJSON)``
+| **Mode and number of proofs:**
+|    ``apply(++list,++term,--term)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``Patch`` is a variable:
+|        ``instantiation_error``
+|    ``OldJSON`` is a variable:
+|        ``instantiation_error``
+|    ``Patch`` is neither a variable nor a list:
+|        ``type_error(list,Patch)``
+|    An operation in ``Patch`` is malformed:
+|        ``domain_error(json_patch_operation,Operation)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

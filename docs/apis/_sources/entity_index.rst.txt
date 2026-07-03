@@ -412,6 +412,7 @@ Objects
    json_lines <json_lines_0>
    json_lines(StringRepresentation) <json_lines_1>
    json_lines(ObjectRepresentation,PairRepresentation,StringRepresentation) <json_lines_3>
+   json_patch <json_patch_0>
    json_pointer <json_pointer_0>
    json_pointer(StringRepresentation) <json_pointer_1>
    json_rpc <json_rpc_0>
@@ -802,6 +803,7 @@ Protocols
    json_graph_protocol <json_graph_protocol_0>
    json_ld_protocol <json_ld_protocol_0>
    json_lines_protocol <json_lines_protocol_0>
+   json_patch_protocol <json_patch_protocol_0>
    json_pointer_protocol <json_pointer_protocol_0>
    json_protocol <json_protocol_0>
    json_schema_protocol <json_schema_protocol_0>

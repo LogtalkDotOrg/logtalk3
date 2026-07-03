@@ -61,7 +61,9 @@ aggregation, and dependency-aware ordering.
 `http_static_files`, `http_parameters`, `http_htmx`, `http_authenticate`,
 `http_digest`, `http_cors`, `open_api`, and `rest` libraries.
 
-* ADDED: New `json_graph` library implementing the JSON Graph Format (JGF) V2.
+* ADDED: New `json_graph` library implementing JSON Graph Format (JGF) V2.
+
+* ADDED: New `json_patch` library implementing RFC 6902.
 
 * ADDED: New `jwt` library providing JWT parsing, JWS signing and verification,
 JWK/JWKS key selection, and reusable registered-claim validation predicates.
