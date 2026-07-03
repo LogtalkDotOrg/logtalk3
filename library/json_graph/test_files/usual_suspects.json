@@ -1,0 +1,32 @@
+{
+    "graph": {
+        "id": "Usual Suspects",
+        "type": "movie characters",
+        "label": "Usual Suspects",
+        "nodes": {
+            "Roger Kint": {
+                "label": "Roger Kint",
+                "metadata": {
+                    "nickname": "Verbal",
+                    "actor": "Kevin Spacey"
+                }
+            },
+            "Keyser Söze": {
+                "label": "Keyser Söze",
+                "metadata": {
+                    "actor": "Kevin Spacey"
+                }
+            }
+        },
+        "edges": [
+            {
+                "source": "Roger Kint",
+                "target": "Keyser Söze",
+                "relation": "is"
+            }
+        ],
+        "metadata": {
+            "release year": "1995"
+        }
+    }
+}

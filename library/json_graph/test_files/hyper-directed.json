@@ -1,0 +1,14 @@
+{
+  "graph": {
+    "id": "1",
+    "type": "weighted directed network",
+    "label": "None",
+    "nodes": { "a": {}, "b": {}, "c": {}, "d": {}, "e": {}, "f": {}, "g": {}, "h": {} },
+    "hyperedges": [
+      { "source": ["a", "b", "c"], "target": ["f", "g"], "metadata": { "weight": 17 } },
+      { "source": ["a", "b", "c"], "target": ["f", "h"], "metadata": { "weight": 123 } },
+      { "source": ["c"], "target": ["d"], "metadata": { "weight": 45 } },
+      { "source": ["d"], "target": ["e"], "metadata": { "weight": 46 } }
+    ]
+  }
+}

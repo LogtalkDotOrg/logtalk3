@@ -6657,6 +6657,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`weighted_graph_protocol <weighted_graph_protocol/0::edge/4>`
 
+``edge/5``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_graph_data_protocol <json_graph_data_protocol/0::edge/5>`
+
 ``edge/6``
 ----------
 
@@ -9117,6 +9127,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`html <html/0::generate/2>`
 * :ref:`http_websocket_frames <http_websocket_frames/0::generate/2>`
 * :ref:`ieee_754_protocol <ieee_754_protocol/0::generate/2>`
+* :ref:`json_graph_protocol <json_graph_protocol/0::generate/2>`
 * :ref:`json_ld_protocol <json_ld_protocol/0::generate/2>`
 * :ref:`json_lines_protocol <json_lines_protocol/0::generate/2>`
 * :ref:`json_pointer_protocol <json_pointer_protocol/0::generate/2>`
@@ -9558,6 +9569,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`linear_algebra_protocol <linear_algebra_protocol/0::gram_matrix/2>`
+
+``graph/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_graph_data_protocol <json_graph_data_protocol/0::graph/2>`
 
 ``graph_coloring/3``
 --------------------
@@ -10332,6 +10353,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`redis <redis/0::hvals/3>`
+
+``hyperedge/4``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_graph_data_protocol <json_graph_data_protocol/0::hyperedge/4>`
+
+``hyperedge/5``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_graph_data_protocol <json_graph_data_protocol/0::hyperedge/5>`
 
 ``hypergeometric/4``
 --------------------
@@ -15697,6 +15738,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`rest <rest/0::no_content_response/2>`
 
+``node/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_graph_data_protocol <json_graph_data_protocol/0::node/3>`
+
 ``node/7``
 ----------
 
@@ -17531,6 +17582,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`geojson_protocol <geojson_protocol/0::parse/2>`
 * :ref:`http_websocket_frames <http_websocket_frames/0::parse/2>`
 * :ref:`ieee_754_protocol <ieee_754_protocol/0::parse/2>`
+* :ref:`json_graph_protocol <json_graph_protocol/0::parse/2>`
 * :ref:`json_ld_protocol <json_ld_protocol/0::parse/2>`
 * :ref:`json_lines_protocol <json_lines_protocol/0::parse/2>`
 * :ref:`json_pointer_protocol <json_pointer_protocol/0::parse/2>`

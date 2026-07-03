@@ -98,6 +98,7 @@
 		csv(loader),
 		tsv(loader),
 		json(loader),
+		json_graph(loader),
 		json_rpc(loader),
 		json_lines(loader),
 		json_pointer(loader),

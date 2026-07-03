@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on June 29, 2026
+##   Last updated on July 3, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -205,6 +205,7 @@ Foreach-Object {
 (Get-Content ../../../library/isolation_forest_anomaly_detector/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/isolation_forest_anomaly_detector.rst
 (Get-Content ../../../library/java/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/java.rst
 (Get-Content ../../../library/json/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/json.rst
+(Get-Content ../../../library/json_graph/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/json_graph.rst
 (Get-Content ../../../library/json_ld/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/json_ld.rst
 (Get-Content ../../../library/json_lines/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/json_lines.rst
 (Get-Content ../../../library/json_pointer/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/json_pointer.rst

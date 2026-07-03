@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on June 29, 2026
+%  Last updated on July 3, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -159,6 +159,7 @@ logtalk_library_path(iso_13616, library('iso_13616/')).
 logtalk_library_path(isolation_forest_anomaly_detector, library('isolation_forest_anomaly_detector/')).
 logtalk_library_path(java, library('java/')).
 logtalk_library_path(json, library('json/')).
+logtalk_library_path(json_graph, library('json_graph')).
 logtalk_library_path(json_ld, library('json_ld/')).
 logtalk_library_path(json_lines, library('json_lines/')).
 logtalk_library_path(json_pointer, library('json_pointer/')).

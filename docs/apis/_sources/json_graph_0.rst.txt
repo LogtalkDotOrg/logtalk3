@@ -1,0 +1,59 @@
+.. index:: single: json_graph
+.. _json_graph/0:
+
+.. rst-class:: right
+
+**object**
+
+``json_graph``
+==============
+
+JSON Graph Format v2 parser and generator.
+
+| **Availability:** 
+|    ``logtalk_load(json_graph(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-07-03
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`json_graph_protocol <json_graph_protocol/0>`
+| **Uses:**
+|    :ref:`json <json/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`json_graph_protocol/0::generate/2`  :ref:`json_graph_protocol/0::parse/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

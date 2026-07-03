@@ -405,6 +405,7 @@ Objects
    json <json_0>
    json(StringRepresentation) <json_1>
    json(ObjectRepresentation,PairRepresentation,StringRepresentation) <json_3>
+   json_graph <json_graph_0>
    json_ld <json_ld_0>
    json_ld(StringRepresentation) <json_ld_1>
    json_ld(ObjectRepresentation,PairRepresentation,StringRepresentation) <json_ld_3>
@@ -797,6 +798,8 @@ Protocols
    iso_9362_protocol <iso_9362_protocol_0>
    java_access_protocol <java_access_protocol_0>
    java_utils_protocol <java_utils_protocol_0>
+   json_graph_data_protocol <json_graph_data_protocol_0>
+   json_graph_protocol <json_graph_protocol_0>
    json_ld_protocol <json_ld_protocol_0>
    json_lines_protocol <json_lines_protocol_0>
    json_pointer_protocol <json_pointer_protocol_0>

@@ -1,0 +1,109 @@
+.. index:: single: json_graph_protocol
+.. _json_graph_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``json_graph_protocol``
+=======================
+
+JSON Graph Format v2 parser and generator protocol.
+
+| **Availability:** 
+|    ``logtalk_load(json_graph(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-07-03
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: parse/2
+.. _json_graph_protocol/0::parse/2:
+
+``parse/2``
+^^^^^^^^^^^
+
+Parses the graph contents read from the given source (``codes(List)``, ``stream(Stream)``, ``file(Path)``, ``chars(List)``, ``atom(Atom)``, or ``object(Object)``) into a list of canonical graph terms. Fails if the contents cannot be parsed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse(Source,Terms)``
+| **Mode and number of proofs:**
+|    ``parse(++compound,--list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid JSON graph source term:
+|        ``domain_error(json_graph_source,Source)``
+|    ``Source`` is ``object(Object)`` but ``Object`` does not conform to the graph data protocol:
+|        ``domain_error(json_graph_source,Source)``
+
+
+------------
+
+.. index:: generate/2
+.. _json_graph_protocol/0::generate/2:
+
+``generate/2``
+^^^^^^^^^^^^^^
+
+Generates the graph contents using the representation specified in the first argument (``codes(List)``, ``stream(Stream)``, ``file(Path)``, ``chars(List)``, ``atom(Atom)``, or ``object(Object)``) for the list of canonical graph terms in the second argument.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(Sink,Terms)``
+| **Mode and number of proofs:**
+|    ``generate(+compound,++list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Sink`` is a variable:
+|        ``instantiation_error``
+|    ``Sink`` is neither a variable nor a valid JSON graph sink term:
+|        ``domain_error(json_graph_sink,Sink)``
+|    ``Terms`` is neither a variable nor a valid list of canonical graph terms:
+|        ``domain_error(json_graph_terms,Terms)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

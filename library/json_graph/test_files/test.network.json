@@ -1,0 +1,434 @@
+{
+    "graph": {
+        "nodes": {
+            "p(HGNC:LTA)": {
+                "metadata": {
+                    "yloc": 105,
+                    "xloc": 265
+                },
+                "label": "p(HGNC:LTA)"
+            }, 
+            "r(HGNC:IFNG)": {
+                "metadata": {
+                    "yloc": 30,
+                    "xloc": 45
+                },
+                "label": "r(HGNC:IFNG)"
+            }, 
+            "bp(GO:\"T-helper 1 type immune response\")": {
+                "metadata": {
+                    "yloc": 230,
+                    "xloc": 165
+                },
+                "label": "bp(GO:\"T-helper 1 type immune response\")"
+            }, 
+            "r(HGNC:LTA)": {
+                "metadata": {
+                    "yloc": 30,
+                    "xloc": 265
+                },
+                "label": "r(HGNC:LTA)"
+            }, 
+            "r(HGNC:IL2)": {
+                "metadata": {
+                    "yloc": 30,
+                    "xloc": 155
+                },
+                "label": "r(HGNC:IL2)"
+            }, 
+            "r(HGNC:LTB)": {
+                "metadata": {
+                    "yloc": 30,
+                    "xloc": 375
+                },
+                "label": "r(HGNC:LTB)"
+            }, 
+            "p(HGNC:IFNG)": {
+                "metadata": {
+                    "yloc": 105,
+                    "xloc": 45
+                },
+                "label": "p(HGNC:IFNG)"
+            }, 
+            "p(HGNC:IL2)": {
+                "metadata": {
+                    "yloc": 105,
+                    "xloc": 155
+                },
+                "label": "p(HGNC:IL2)"
+            }, 
+            "p(HGNC:LTB)": {
+                "metadata": {
+                    "yloc": 105,
+                    "xloc": 375
+                },
+                "label": "p(HGNC:LTB)"
+            }
+        },
+        "edges": [{
+            "source": "r(HGNC:IL2)",
+            "relation": "translatedTo",
+            "target": "p(HGNC:IL2)",
+            "metadata": {
+                "evidences": [{
+                    "bel_statement": "r(HGNC:IL2) translatedTo p(HGNC:IL2)",
+                    "citation": {
+                        "type": "Online Resource",
+                        "id": "http://www.ncbi.nlm.nih.gov/gene/",
+                        "name": "NCBI Entrez Gene"
+                    },
+                    "experiment_context": {
+                        "SpeciesName": "Mouse",
+                        "Species": "10090"
+                    }
+                }, {
+                    "bel_statement": "r(HGNC:IL2) translatedTo p(HGNC:IL2)",
+                    "citation": {
+                        "type": "Online Resource",
+                        "id": "http://www.ncbi.nlm.nih.gov/gene/",
+                        "name": "NCBI Entrez Gene"
+                    },
+                    "experiment_context": {
+                        "SpeciesName": "Human",
+                        "Species": "9606"
+                    }
+                }, {
+                    "bel_statement": "r(HGNC:IL2) translatedTo p(HGNC:IL2)",
+                    "citation": {
+                        "type": "Online Resource",
+                        "id": "http://www.ncbi.nlm.nih.gov/gene/",
+                        "name": "NCBI Entrez Gene"
+                    },
+                    "experiment_context": {
+                        "SpeciesName": "Rat",
+                        "Species": "10116"
+                    }
+                }]
+            }
+        }, {
+            "source": "p(HGNC:LTA)",
+            "relation": "increases",
+            "target": "bp(GO:\"T-helper 1 type immune response\")",
+            "metadata": {
+                "evidences": [{
+                    "bel_statement": "p(HGNC:LTA) increases bp(GO:\"T-helper 1 type immune response\")",
+                    "citation": {
+                        "type": "PubMed",
+                        "id": "15745050",
+                        "name": "Acta Virol 2004 48(4) 263-6"
+                    },
+                    "summary_text": "IM shows a mainly Th1-type profile, so Th1-type cytokines such as interleukin-2 (IL-2), interferon-gamma (IFN-gamma), and lymphotoxin (LT) are moderately enhanced. ",
+                    "experiment_context": {
+                        "Cell": "Th1 cell",
+                        "SpeciesName": "Human",
+                        "Species": "9606"
+                    },
+                    "metadata": {
+                        "reviewer": "dpncab"
+                    }
+                }]
+            }
+        }, {
+            "source": "p(HGNC:IFNG)",
+            "relation": "increases",
+            "target": "bp(GO:\"T-helper 1 type immune response\")",
+            "metadata": {
+                "evidences": [{
+                    "bel_statement": "p(HGNC:IFNG) increases bp(GO:\"T-helper 1 type immune response\")",
+                    "citation": {
+                        "type": "PubMed",
+                        "id": "15745050",
+                        "name": "Acta Virol 2004 48(4) 263-6"
+                    },
+                    "experiment_context": {
+                        "Cell": "Th1 cell",
+                        "SpeciesName": "Human",
+                        "Species": "9606"
+                    },
+                    "summary_text": "IM shows a mainly Th1-type profile, so Th1-type cytokines such as interleukin-2 (IL-2), interferon-gamma (IFN-gamma), and lymphotoxin (LT) are moderately enhanced. "
+                }, {
+                    "bel_statement": "p(HGNC:IFNG) increases bp(GO:\"T-helper 1 type immune response\")",
+                    "citation": {
+                        "type": "PubMed",
+                        "id": "11739273",
+                        "name": "Circ Res 2001 Dec 7 89(12) 1092-103"
+                    },
+                    "experiment_context": {
+                        "Cell": "Endothelial Cells",
+                        "SpeciesName": "Human",
+                        "Species": "9606"
+                    },
+                    "summary_text": "IL-12p40, dimerized with the IL-12p35 subunit, triggers synthesis of IFN-, a cytokine that not only directly promotes Th1 responses, but further elevates CD40 levels"
+                }, {
+                    "bel_statement": "p(HGNC:IFNG) increases bp(GO:\"T-helper 1 type immune response\")",
+                    "citation": {
+                        "type": "PubMed",
+                        "id": "10756059",
+                        "name": "J Virol 2000 May 74(9) 4429-32"
+                    },
+                    "experiment_context": {
+                        "Cell": "Th1 cell",
+                        "SpeciesName": "Mouse",
+                        "Species": "10090"
+                    },
+                    "summary_text": "Analysis of C57BL/6 mice acutely infected with lymphocytic choriomeningitis virus (LCMV) by using intracellular cytokine staining revealed a high frequency (2 to 10%) of CD4(+) T cells secreting the Th1-associated cytokines interleukin-2 (IL-2), gamma interferon (IFN-gamma), and tumor necrosis factor alpha, with no concomitant increase in the frequency of CD4(+) T cells secreting the Th2-associated cytokines IL-4, IL-5, and IL-10 following stimulation with viral peptides."
+                }, {
+                    "bel_statement": "p(HGNC:IFNG) increases bp(GO:\"T-helper 1 type immune response\")",
+                    "citation": {
+                        "type": "PubMed",
+                        "id": "10077627",
+                        "name": "Proc Natl Acad Sci U S A 1999 Mar 16 96(6) 3006-11"
+                    },
+                    "experiment_context": {
+                        "Cell": "Th1 cell",
+                        "SpeciesName": "Mouse",
+                        "Species": "10090"
+                    },
+                    "summary_text": "CyCAP is a widely expressed secreted glycoprotein that modulates the host response to endotoxin gene-targeted CyCAP-deficient mice are more sensitive to the lethal effects of endotoxin in response to endotoxin, CyCAP-deficient mice overproduce interleukin 12 and interferon-gamma systemically and tumor necrosis factor alpha locally, these are proinflammatory molecules that also promote T helper 1 responses"
+                }, {
+                    "bel_statement": "p(HGNC:IFNG) increases bp(GO:\"T-helper 1 type immune response\")",
+                    "citation": {
+                        "type": "PubMed",
+                        "id": "11057672",
+                        "name": "Nature 2000 Oct 19 407(6806) 916-20"
+                    },
+                    "experiment_context": {
+                        "Cell": "Th1 cell",
+                        "SpeciesName": "Human",
+                        "Species": "9606"
+                    },
+                    "summary_text": "Th1 cells produce interleukin (IL)-2, interferon-gamma (IFN-gamma) and lymphotoxin-beta, which mediate pro-inflammatory functions critical for the development of cell-mediated immune responses, whereas Th2 cells secrete cytokines such as IL-4, IL-5 and IL-10 that enhance humoral immunity."
+                }, {
+                    "bel_statement": "p(HGNC:IFNG) increases bp(GO:\"T-helper 1 type immune response\")",
+                    "citation": {
+                        "type": "PubMed",
+                        "id": "11397944",
+                        "name": "Science 2001 Jun 8 292(5523) 1907-10"
+                    },
+                    "experiment_context": {
+                        "Cell": "Th1 cell",
+                        "SpeciesName": "Human",
+                        "Species": "9606"
+                    },
+                    "summary_text": "TH1 cells express IFN-g and mediate cellular immunity. TH2 cells express IL-4, IL-5, and IL-13 and mediate nonphagocytic immunity."
+                }]
+            }
+        }, {
+            "source": "p(HGNC:IL2)",
+            "relation": "increases",
+            "target": "bp(GO:\"T-helper 1 type immune response\")",
+            "metadata": {
+                "evidences": [{
+                    "bel_statement": "p(HGNC:IL2) increases bp(GO:\"T-helper 1 type immune response\")",
+                    "citation": {
+                        "type": "PubMed",
+                        "id": "15745050",
+                        "name": "Acta Virol 2004 48(4) 263-6"
+                    },
+                    "experiment_context": {
+                        "Cell": "Th1 cell",
+                        "SpeciesName": "Human",
+                        "Species": "9606"
+                    },
+                    "summary_text": "IM shows a mainly Th1-type profile, so Th1-type cytokines such as interleukin-2 (IL-2), interferon-gamma (IFN-gamma), and lymphotoxin (LT) are moderately enhanced. "
+                }, {
+                    "bel_statement": "p(HGNC:IL2) increases bp(GO:\"T-helper 1 type immune response\")",
+                    "citation": {
+                        "type": "PubMed",
+                        "id": "11057672",
+                        "name": "Nature 2000 Oct 19 407(6806) 916-20"
+                    },
+                    "experiment_context": {
+                        "Cell": "Th1 cell",
+                        "SpeciesName": "Human",
+                        "Species": "9606"
+                    },
+                    "summary_text": "Th1 cells produce interleukin (IL)-2, interferon-gamma (IFN-gamma) and lymphotoxin-beta, which mediate pro-inflammatory functions critical for the development of cell-mediated immune responses, whereas Th2 cells secrete cytokines such as IL-4, IL-5 and IL-10 that enhance humoral immunity."
+                }, {
+                    "bel_statement": "p(HGNC:IL2) increases bp(GO:\"T-helper 1 type immune response\")",
+                    "citation": {
+                        "type": "PubMed",
+                        "id": "9144387",
+                        "name": "Biochem Biophys Res Commun 1997 Apr 7 233(1) 14-9"
+                    },
+                    "experiment_context": {
+                        "Cell": "Th1 cell",
+                        "SpeciesName": "Human",
+                        "Species": "9606"
+                    },
+                    "summary_text": "Furthermore, NO inhibits the proliferation of, and production of interleukin-2 (IL-2) and interferon-gamma by, Th1 but not Th2 cells."
+                }, {
+                    "bel_statement": "p(HGNC:IL2) increases bp(GO:\"T-helper 1 type immune response\")",
+                    "citation": {
+                        "type": "PubMed",
+                        "id": "10756059",
+                        "name": "J Virol 2000 May 74(9) 4429-32"
+                    },
+                    "experiment_context": {
+                        "Cell": "Th1 cell",
+                        "SpeciesName": "Mouse",
+                        "Species": "10090"
+                    },
+                    "summary_text": "Analysis of C57BL/6 mice acutely infected with lymphocytic choriomeningitis virus (LCMV) by using intracellular cytokine staining revealed a high frequency (2 to 10%) of CD4(+) T cells secreting the Th1-associated cytokines interleukin-2 (IL-2), gamma interferon (IFN-gamma), and tumor necrosis factor alpha, with no concomitant increase in the frequency of CD4(+) T cells secreting the Th2-associated cytokines IL-4, IL-5, and IL-10 following stimulation with viral peptides."
+                }]
+            }
+        }, {
+            "source": "r(HGNC:LTB)",
+            "relation": "translatedTo",
+            "target": "p(HGNC:LTB)",
+            "metadata": {
+                "evidences": [{
+                    "bel_statement": "r(HGNC:LTB) translatedTo p(HGNC:LTB)",
+                    "citation": {
+                        "type": "Online Resource",
+                        "id": "http://www.ncbi.nlm.nih.gov/gene/",
+                        "name": "NCBI Entrez Gene"
+                    },
+                    "experiment_context": {
+                        "SpeciesName": "Rat",
+                        "Species": "10116"
+                    }
+                }, {
+                    "bel_statement": "r(HGNC:LTB) translatedTo p(HGNC:LTB)",
+                    "citation": {
+                        "type": "Online Resource",
+                        "id": "http://www.ncbi.nlm.nih.gov/gene/",
+                        "name": "NCBI Entrez Gene"
+                    },
+                    "experiment_context": {
+                        "SpeciesName": "Human",
+                        "Species": "9606"
+                    }
+                }, {
+                    "bel_statement": "r(HGNC:LTB) translatedTo p(HGNC:LTB)",
+                    "citation": {
+                        "type": "Online Resource",
+                        "id": "http://www.ncbi.nlm.nih.gov/gene/",
+                        "name": "NCBI Entrez Gene"
+                    },
+                    "experiment_context": {
+                        "SpeciesName": "Mouse",
+                        "Species": "10090"
+                    }
+                }]
+            }
+        }, {
+            "source": "r(HGNC:IFNG)",
+            "relation": "translatedTo",
+            "target": "p(HGNC:IFNG)",
+            "metadata": {
+                "evidences": [{
+                    "bel_statement": "r(HGNC:IFNG) translatedTo p(HGNC:IFNG)",
+                    "citation": {
+                        "type": "Online Resource",
+                        "id": "http://www.ncbi.nlm.nih.gov/gene/",
+                        "name": "NCBI Entrez Gene"
+                    },
+                    "experiment_context": {
+                        "SpeciesName": "Mouse",
+                        "Species": "10090"
+                    }
+                }, {
+                    "bel_statement": "r(HGNC:IFNG) translatedTo p(HGNC:IFNG)",
+                    "citation": {
+                        "type": "Online Resource",
+                        "id": "http://www.ncbi.nlm.nih.gov/gene/",
+                        "name": "NCBI Entrez Gene"
+                    },
+                    "experiment_context": {
+                        "SpeciesName": "Human",
+                        "Species": "9606"
+                    }
+                }, {
+                    "bel_statement": "r(HGNC:IFNG) translatedTo p(HGNC:IFNG)",
+                    "citation": {
+                        "type": "Online Resource",
+                        "id": "http://www.ncbi.nlm.nih.gov/gene/",
+                        "name": "NCBI Entrez Gene"
+                    },
+                    "experiment_context": {
+                        "SpeciesName": "Rat",
+                        "Species": "10116"
+                    }
+                }]
+            }
+        }, {
+            "source": "p(HGNC:LTB)",
+            "relation": "increases",
+            "target": "bp(GO:\"T-helper 1 type immune response\")",
+            "metadata": {
+                "evidences": [{
+                    "bel_statement": "p(HGNC:LTB) increases bp(GO:\"T-helper 1 type immune response\")",
+                    "citation": {
+                        "type": "PubMed",
+                        "id": "11057672",
+                        "name": "Nature 2000 Oct 19 407(6806) 916-20"
+                    },
+                    "experiment_context": {
+                        "Cell": "Th1 cell",
+                        "SpeciesName": "Human",
+                        "Species": "9606"
+                    },
+                    "summary_text": "Th1 cells produce interleukin (IL)-2, interferon-gamma (IFN-gamma) and lymphotoxin-beta, which mediate pro-inflammatory functions critical for the development of cell-mediated immune responses, whereas Th2 cells secrete cytokines such as IL-4, IL-5 and IL-10 that enhance humoral immunity."
+                }]
+            }
+        }, {
+            "source": "r(HGNC:LTA)",
+            "relation": "translatedTo",
+            "target": "p(HGNC:LTA)",
+            "metadata": {
+                "evidences": [{
+                    "bel_statement": "r(HGNC:LTA) translatedTo p(HGNC:LTA)",
+                    "citation": {
+                        "type": "Online Resource",
+                        "id": "http://www.ncbi.nlm.nih.gov/gene/",
+                        "name": "NCBI Entrez Gene"
+                    },
+                    "experiment_context": {
+                        "SpeciesName": "Human",
+                        "Species": "9606"
+                    }
+                }, {
+                    "bel_statement": "r(HGNC:LTA) translatedTo p(HGNC:LTA)",
+                    "citation": {
+                        "type": "Online Resource",
+                        "id": "http://www.ncbi.nlm.nih.gov/gene/",
+                        "name": "NCBI Entrez Gene"
+                    },
+                    "experiment_context": {
+                        "SpeciesName": "Mouse",
+                        "Species": "10090"
+                    }
+                }, {
+                    "bel_statement": "r(HGNC:LTA) translatedTo p(HGNC:LTA)",
+                    "citation": {
+                        "type": "Online Resource",
+                        "id": "http://www.ncbi.nlm.nih.gov/gene/",
+                        "name": "NCBI Entrez Gene"
+                    },
+                    "experiment_context": {
+                        "SpeciesName": "Rat",
+                        "Species": "10116"
+                    }
+                }]
+            }
+        }],
+        "type": "BEL-V1.0",
+        "metadata": {
+            "customer": "Philip Morris International",
+            "speciesName": "Human",
+            "description": "The Th1 response model depicts the causal mechanisms that occur following activation of Th1 cells in response to upstream signals, including IFNG, IL2, LTA, and LTB.",
+            "modelVersion": "3.0",
+            "graphCreatedByEmail": "tthomson@genstruct.com",
+            "graphCreatedAt": "1305578028000",
+            "graphCreatedBy": "Ty Thomson",
+            "graphUpdatedBy": "Ty Thomson",
+            "reference_node": "bp(GO:\"T-helper 1 type immune response\")",
+            "graphUpdatedByEmail": "tthomson@genstruct.com",
+            "graphProject": "System Models Project",
+            "graphUpdatedAt": "1305578028000",
+            "species": 9606,
+            "bel_version": "1.0"
+        }
+    }
+}

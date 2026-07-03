@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on June 29, 2026
+##   Last updated on July 3, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -205,6 +205,7 @@ sed '1,19d' ../../../library/iso_13616/NOTES.md | pandoc -f gfm -t rst -o librar
 sed '1,19d' ../../../library/isolation_forest_anomaly_detector/NOTES.md | pandoc -f gfm -t rst -o libraries/isolation_forest_anomaly_detector.rst
 sed '1,19d' ../../../library/java/NOTES.md | pandoc -f gfm -t rst -o libraries/java.rst
 sed '1,19d' ../../../library/json/NOTES.md | pandoc -f gfm -t rst -o libraries/json.rst
+sed '1,19d' ../../../library/json_graph/NOTES.md | pandoc -f gfm -t rst -o libraries/json_graph.rst
 sed '1,19d' ../../../library/json_ld/NOTES.md | pandoc -f gfm -t rst -o libraries/json_ld.rst
 sed '1,19d' ../../../library/json_lines/NOTES.md | pandoc -f gfm -t rst -o libraries/json_lines.rst
 sed '1,19d' ../../../library/json_pointer/NOTES.md | pandoc -f gfm -t rst -o libraries/json_pointer.rst

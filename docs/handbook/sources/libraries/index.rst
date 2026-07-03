@@ -154,6 +154,7 @@ directory in the ``NOTES.md`` file.
    isolation_forest_anomaly_detector
    java
    json
+   json_graph
    json_ld
    json_lines
    json_pointer

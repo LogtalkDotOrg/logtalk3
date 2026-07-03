@@ -1,0 +1,150 @@
+.. index:: single: json_graph_data_protocol
+.. _json_graph_data_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``json_graph_data_protocol``
+============================
+
+Canonical JSON graph data protocol for object-backed graph sources and sinks using atom identifiers.
+
+| **Availability:** 
+|    ``logtalk_load(json_graph(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-07-03
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: graph/2
+.. _json_graph_data_protocol/0::graph/2:
+
+``graph/2``
+^^^^^^^^^^^
+
+Enumerates or stores graph properties for an atom graph identifier.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``graph(GraphId,Properties)``
+| **Mode and number of proofs:**
+|    ``graph(?atom,?list)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: node/3
+.. _json_graph_data_protocol/0::node/3:
+
+``node/3``
+^^^^^^^^^^
+
+Enumerates or stores node properties for atom graph and node identifiers.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``node(GraphId,NodeId,Properties)``
+| **Mode and number of proofs:**
+|    ``node(?atom,?atom,?list)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: edge/5
+.. _json_graph_data_protocol/0::edge/5:
+
+``edge/5``
+^^^^^^^^^^
+
+Enumerates or stores edge properties for atom graph, edge, source node, and target node identifiers.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``edge(GraphId,EdgeId,Source,Target,Properties)``
+| **Mode and number of proofs:**
+|    ``edge(?atom,?atom,?atom,?atom,?list)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: hyperedge/4
+.. _json_graph_data_protocol/0::hyperedge/4:
+
+``hyperedge/4``
+^^^^^^^^^^^^^^^
+
+Enumerates or stores undirected hyperedge properties for atom graph and hyperedge identifiers and a list of atom node identifiers.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``hyperedge(GraphId,HyperedgeId,Nodes,Properties)``
+| **Mode and number of proofs:**
+|    ``hyperedge(?atom,?atom,?list(atom),?list)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: hyperedge/5
+.. _json_graph_data_protocol/0::hyperedge/5:
+
+``hyperedge/5``
+^^^^^^^^^^^^^^^
+
+Enumerates or stores directed hyperedge properties for atom graph and hyperedge identifiers and lists of atom source and target node identifiers.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``hyperedge(GraphId,HyperedgeId,Sources,Targets,Properties)``
+| **Mode and number of proofs:**
+|    ``hyperedge(?atom,?atom,?list(atom),?list(atom),?list)`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

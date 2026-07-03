@@ -1,0 +1,15 @@
+{
+  "graph": {
+    "id": "1",
+    "type": "weighted network",
+    "directed": false,
+    "label": "None",
+    "nodes": { "a": {}, "b": {}, "c": {}, "d": {}, "e": {}, "x": {} },
+    "hyperedges": [
+      { "nodes": ["a", "b", "x"], "metadata": { "weight": 17 } },
+      { "nodes": ["a", "b"], "metadata": { "weight": 123 } },
+      { "nodes": ["c", "d"], "metadata": { "weight": 45 } },
+      { "nodes": ["d", "e"], "metadata": { "weight": 46 } }
+    ]
+  }
+}
