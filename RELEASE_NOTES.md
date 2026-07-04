@@ -70,6 +70,8 @@ aggregation, and dependency-aware ordering.
 * ADDED: New `jwt` library providing JWT parsing, JWS signing and verification,
 JWK/JWKS key selection, and reusable registered-claim validation predicates.
 
+* ADDED: Support to the `json_pointer` library for relative JSON pointers.
+
 * ADDED: New `open_ai` library and providing OpenAI client and server support.
 
 * ADDED: New `open_id` library providing OpenID client support.

@@ -7321,6 +7321,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`json_path_protocol <json_path_protocol/0::evaluate/3>`
 * :ref:`json_pointer_protocol <json_pointer_protocol/0::evaluate/3>`
 
+``evaluate_relative/4``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_pointer_protocol <json_pointer_protocol/0::evaluate_relative/4>`
+
 ``event/2``
 -----------
 
@@ -9304,6 +9314,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ccsds_packetization <ccsds_packetization/0::generate_idle_packet/4>`
+
+``generate_relative/2``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_pointer_protocol <json_pointer_protocol/0::generate_relative/2>`
 
 ``generate_request/2``
 ----------------------
@@ -17820,6 +17840,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`pddl <pddl/0::parse_problem/3>`
+
+``parse_relative/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_pointer_protocol <json_pointer_protocol/0::parse_relative/2>`
 
 ``parse_request/2``
 -------------------

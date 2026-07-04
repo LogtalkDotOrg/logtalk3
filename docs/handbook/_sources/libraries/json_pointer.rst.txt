@@ -4,13 +4,16 @@
 ================
 
 The ``json_pointer`` library provides predicates for parsing,
-generating, and evaluating JSON Pointers as specified by RFC 6901:
+generating, and evaluating JSON Pointers as specified by RFC 6901, plus
+support for Relative JSON Pointer:
 
 - https://www.rfc-editor.org/rfc/rfc6901
+- https://json-schema.org/draft/2020-12/relative-json-pointer
 
-It supports both the plain string syntax and the URI fragment syntax.
-Reference tokens can be represented as atoms, ``chars(List)``, or
-``codes(List)``.
+It supports both the plain string syntax and the URI fragment syntax for
+absolute JSON Pointers. Relative JSON Pointers use the plain string
+syntax. Reference tokens can be represented as atoms, ``chars(List)``,
+or ``codes(List)``.
 
 API documentation
 -----------------
@@ -50,6 +53,13 @@ object where ``_Representation_`` can be one of:
 When using the default ``json_pointer`` object, reference tokens are
 represented as atoms.
 
+Relative JSON Pointer values are represented as
+``relative(Up, Shift, Suffix)``:
+
+- ``Up`` is the number of ancestor steps
+- ``Shift`` is the optional signed array index adjustment
+- ``Suffix`` is either a list of reference tokens or the atom ``'#'``
+
 Examples
 --------
 
@@ -69,4 +79,12 @@ Generate a URI fragment representation:
 
    | ?- json_pointer::generate_fragment(atom(Fragment), ['a b', 'c/d']).
    Fragment = '#/a%20b/c~1d'
+   yes
+
+Evaluate a Relative JSON Pointer from a known context path:
+
+::
+
+   | ?- json_pointer::evaluate_relative(relative(1, 0, ['0']), [foo, '1'], {foo-[bar, baz]}, Value).
+   Value = bar
    yes

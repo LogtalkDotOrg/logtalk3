@@ -368,13 +368,16 @@
   <section id="json-pointer">
 <span id="library-json-pointer"></span><h1><code class="docutils literal notranslate"><span class="pre">json_pointer</span></code><a class="headerlink" href="#json-pointer" title="Link to this heading"></a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">json_pointer</span></code> library provides predicates for parsing,
-generating, and evaluating JSON Pointers as specified by RFC 6901:</p>
+generating, and evaluating JSON Pointers as specified by RFC 6901, plus
+support for Relative JSON Pointer:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.rfc-editor.org/rfc/rfc6901">https://www.rfc-editor.org/rfc/rfc6901</a></p></li>
+<li><p><a class="reference external" href="https://json-schema.org/draft/2020-12/relative-json-pointer">https://json-schema.org/draft/2020-12/relative-json-pointer</a></p></li>
 </ul>
-<p>It supports both the plain string syntax and the URI fragment syntax.
-Reference tokens can be represented as atoms, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>, or
-<code class="docutils literal notranslate"><span class="pre">codes(List)</span></code>.</p>
+<p>It supports both the plain string syntax and the URI fragment syntax for
+absolute JSON Pointers. Relative JSON Pointers use the plain string
+syntax. Reference tokens can be represented as atoms, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>,
+or <code class="docutils literal notranslate"><span class="pre">codes(List)</span></code>.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -406,6 +409,13 @@ object where <code class="docutils literal notranslate"><span class="pre">_Repre
 </ul>
 <p>When using the default <code class="docutils literal notranslate"><span class="pre">json_pointer</span></code> object, reference tokens are
 represented as atoms.</p>
+<p>Relative JSON Pointer values are represented as
+<code class="docutils literal notranslate"><span class="pre">relative(Up,</span> <span class="pre">Shift,</span> <span class="pre">Suffix)</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Up</span></code> is the number of ancestor steps</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Shift</span></code> is the optional signed array index adjustment</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Suffix</span></code> is either a list of reference tokens or the atom <code class="docutils literal notranslate"><span class="pre">'#'</span></code></p></li>
+</ul>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
@@ -420,6 +430,12 @@ yes
 <p>Generate a URI fragment representation:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> json_pointer<span class="o">::</span>generate_fragment(<span class="k">atom</span>(<span class="nv">Fragment</span>), [<span class="s">&#39;a b&#39;</span>, <span class="s">&#39;c/d&#39;</span>]).
 <span class="nv">Fragment</span> <span class="o">=</span> <span class="s">&#39;#/a%20b/c~1d&#39;</span>
+yes
+</pre></div>
+</div>
+<p>Evaluate a Relative JSON Pointer from a known context path:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> json_pointer<span class="o">::</span>evaluate_relative(relative(<span class="m">1</span>, <span class="m">0</span>, [<span class="s">&#39;0&#39;</span>]), [foo, <span class="s">&#39;1&#39;</span>], <span class="k">{</span>foo<span class="o">-</span>[bar, baz]<span class="k">}</span>, <span class="nv">Value</span>).
+<span class="nv">Value</span> <span class="o">=</span> bar
 yes
 </pre></div>
 </div>

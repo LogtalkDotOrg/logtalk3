@@ -8,14 +8,14 @@
 ``json_pointer_protocol``
 =========================
 
-JSON Pointer (RFC 6901) parser, generator, and evaluator protocol.
+JSON Pointer (RFC 6901) and Relative JSON Pointer parser, generator, and evaluator protocol.
 
 | **Availability:** 
 |    ``logtalk_load(json_pointer(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:1
-| **Date:** 2026-06-02
+| **Version:** 1:1:0
+| **Date:** 2026-07-04
 
 | **Compilation flags:**
 |    ``static``
@@ -146,6 +146,60 @@ Generates the URI fragment representation of a JSON Pointer using the representa
 
 ------------
 
+.. index:: parse_relative/2
+.. _json_pointer_protocol/0::parse_relative/2:
+
+``parse_relative/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Parses a Relative JSON Pointer from the given source (``codes(Codes)``, ``chars(Chars)``, or ``atom(Atom)``) into a canonical term ``relative(Up, Shift, Suffix)`` where ``Up`` is the number of ancestor steps, ``Shift`` is the optional array index adjustment, and ``Suffix`` is either a list of reference tokens or the atom ``'#'``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse_relative(Source,RelativePointer)``
+| **Mode and number of proofs:**
+|    ``parse_relative(++compound,--compound)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid source:
+|        ``domain_error(json_relative_pointer_source,Source)``
+
+
+------------
+
+.. index:: generate_relative/2
+.. _json_pointer_protocol/0::generate_relative/2:
+
+``generate_relative/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates a Relative JSON Pointer using the representation specified in the first argument (``codes(Codes)``, ``chars(Chars)``, or ``atom(Atom)``) from a canonical term ``relative(Up, Shift, Suffix)`` where ``Suffix`` is either a list of reference tokens or the atom ``'#'``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate_relative(Sink,RelativePointer)``
+| **Mode and number of proofs:**
+|    ``generate_relative(+compound,++compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Sink`` is a variable:
+|        ``instantiation_error``
+|    ``RelativePointer`` is not a valid Relative JSON Pointer term:
+|        ``domain_error(json_relative_pointer,RelativePointer)``
+|    ``RelativePointer`` contains an invalid reference token:
+|        ``domain_error(json_pointer_token,Token)``
+|    ``Sink`` cannot be generated:
+|        ``domain_error(json_relative_pointer_sink,Sink)``
+
+
+------------
+
 .. index:: evaluate/3
 .. _json_pointer_protocol/0::evaluate/3:
 
@@ -170,6 +224,39 @@ Evaluates a parsed JSON Pointer against a JSON term. Fails if the pointer does n
 |    ``Pointer`` is neither a variable nor a list:
 |        ``type_error(list,Pointer)``
 |    ``Pointer`` contains an invalid reference token:
+|        ``domain_error(json_pointer_token,Token)``
+
+
+------------
+
+.. index:: evaluate_relative/4
+.. _json_pointer_protocol/0::evaluate_relative/4:
+
+``evaluate_relative/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Evaluates a parsed Relative JSON Pointer term against a JSON term, using the second argument as the absolute JSON Pointer to the current context value. Fails if either the context or the relative pointer does not identify a value in the given JSON term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``evaluate_relative(RelativePointer,Context,JSON,Value)``
+| **Mode and number of proofs:**
+|    ``evaluate_relative(++compound,++list(ground),++term,?term)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``RelativePointer`` is a variable:
+|        ``instantiation_error``
+|    ``Context`` is a variable:
+|        ``instantiation_error``
+|    ``JSON`` is a variable:
+|        ``instantiation_error``
+|    ``RelativePointer`` is not a valid Relative JSON Pointer term:
+|        ``domain_error(json_relative_pointer,RelativePointer)``
+|    ``Context`` is neither a variable nor a list:
+|        ``type_error(list,Context)``
+|    ``Context`` or ``RelativePointer`` contains an invalid reference token:
 |        ``domain_error(json_pointer_token,Token)``
 
 

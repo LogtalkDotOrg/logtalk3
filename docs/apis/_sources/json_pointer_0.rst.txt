@@ -8,14 +8,14 @@
 ``json_pointer``
 ================
 
-JSON Pointer (RFC 6901) parser, generator, and evaluator using atoms for text representation.
+JSON Pointer (RFC 6901) and Relative JSON Pointer parser, generator, and evaluator using atoms for text representation.
 
 | **Availability:** 
 |    ``logtalk_load(json_pointer(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-05-11
+| **Version:** 1:1:0
+| **Date:** 2026-07-04
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -28,7 +28,7 @@ JSON Pointer (RFC 6901) parser, generator, and evaluator using atoms for text re
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`json_pointer_protocol/0::evaluate/3`  :ref:`json_pointer_protocol/0::generate/2`  :ref:`json_pointer_protocol/0::generate_fragment/2`  :ref:`json_pointer_protocol/0::parse/2`  :ref:`json_pointer_protocol/0::parse_fragment/2`  
+|     :ref:`json_pointer_protocol/0::evaluate/3`  :ref:`json_pointer_protocol/0::evaluate_relative/4`  :ref:`json_pointer_protocol/0::generate/2`  :ref:`json_pointer_protocol/0::generate_fragment/2`  :ref:`json_pointer_protocol/0::generate_relative/2`  :ref:`json_pointer_protocol/0::parse/2`  :ref:`json_pointer_protocol/0::parse_fragment/2`  :ref:`json_pointer_protocol/0::parse_relative/2`  
 
 .. contents::
    :local:

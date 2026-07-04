@@ -23,14 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-11,
+		date is 2026-07-04,
 		comment is 'Tests for the "json_pointer" library.'
 	]).
 
 	:- uses(json_pointer, [
-		parse/2, generate/2, parse_fragment/2, generate_fragment/2, evaluate/3
+		parse/2, generate/2, parse_fragment/2, generate_fragment/2, parse_relative/2, generate_relative/2, evaluate/3, evaluate_relative/4
 	]).
 
 	:- uses(lgtunit, [
@@ -70,6 +70,27 @@
 	test(parse_invalid_escape, fail) :-
 		parse(atom('/a~2b'), _).
 
+	test(parse_relative_current_value, deterministic(RelativePointer == relative(0, 0, []))) :-
+		parse_relative(atom('0'), RelativePointer).
+
+	test(parse_relative_descend, deterministic(RelativePointer == relative(1, 0, [foo, bar]))) :-
+		parse_relative(atom('1/foo/bar'), RelativePointer).
+
+	test(parse_relative_hash, deterministic(RelativePointer == relative(0, 0, '#'))) :-
+		parse_relative(atom('0#'), RelativePointer).
+
+	test(parse_relative_shift, deterministic(RelativePointer == relative(0, -1, []))) :-
+		parse_relative(atom('0-1'), RelativePointer).
+
+	test(parse_relative_error_var_source, error(instantiation_error)) :-
+		parse_relative(_, _).
+
+	test(parse_relative_error_invalid_source, error(domain_error(json_relative_pointer_source, foo))) :-
+		parse_relative(foo, _).
+
+	test(parse_relative_invalid_syntax, fail) :-
+		parse_relative(atom('/foo'), _).
+
 	test(generate_empty_pointer, deterministic(Atom == '')) :-
 		generate(atom(Atom), []).
 
@@ -93,6 +114,27 @@
 
 	test(generate_error_improper_pointer, error(type_error(list, bar))) :-
 		generate(atom(_), [foo| bar]).
+
+	test(generate_relative_current_value, deterministic(Atom == '0')) :-
+		generate_relative(atom(Atom), relative(0, 0, [])).
+
+	test(generate_relative_descend, deterministic(Atom == '2/highly/nested/objects')) :-
+		generate_relative(atom(Atom), relative(2, 0, [highly, nested, objects])).
+
+	test(generate_relative_hash, deterministic(Atom == '0#')) :-
+		generate_relative(atom(Atom), relative(0, 0, '#')).
+
+	test(generate_relative_shift, deterministic(Atom == '0-1/child')) :-
+		generate_relative(atom(Atom), relative(0, -1, [child])).
+
+	test(generate_relative_error_var_sink, error(instantiation_error)) :-
+		generate_relative(_, relative(0, 0, [])).
+
+	test(generate_relative_error_invalid_sink, error(domain_error(json_relative_pointer_sink, foo))) :-
+		generate_relative(foo, relative(0, 0, [])).
+
+	test(generate_relative_error_invalid_pointer, error(domain_error(json_relative_pointer, foo))) :-
+		generate_relative(atom(_), foo).
 
 	test(generate_chars_representation, deterministic(Atom == '/foo')) :-
 		json_pointer(chars)::generate(atom(Atom), [chars([f, o, o])]).
@@ -162,6 +204,9 @@
 
 	test(parse_codes_representation, deterministic(Pointer == [codes([102,111,111])])) :-
 		json_pointer(codes)::parse(atom('/foo'), Pointer).
+
+	test(parse_relative_chars_representation, deterministic(RelativePointer == relative(1, 0, [chars([f,o,o])]))) :-
+		json_pointer(chars)::parse_relative(atom('1/foo'), RelativePointer).
 
 	test(evaluate_root, deterministic(Value == {foo-bar})) :-
 		evaluate([], {foo-bar}, Value).
@@ -252,5 +297,53 @@
 
 	test(evaluate_chars_pointer, deterministic(Value == chars([v,a,l,u,e]))) :-
 		json_pointer(chars)::evaluate([chars([f,o,o])], json([chars([f,o,o])-chars([v,a,l,u,e])]), Value).
+
+	test(evaluate_relative_current_value, deterministic(Value == baz)) :-
+		evaluate_relative(relative(0, 0, []), [foo, '1'], {foo-[bar, baz], highly-{nested-{objects-true}}}, Value).
+
+	test(evaluate_relative_up_and_descend, deterministic(Value == bar)) :-
+		evaluate_relative(relative(1, 0, ['0']), [foo, '1'], {foo-[bar, baz], highly-{nested-{objects-true}}}, Value).
+
+	test(evaluate_relative_shift, deterministic(Value == bar)) :-
+		evaluate_relative(relative(0, -1, []), [foo, '1'], {foo-[bar, baz], highly-{nested-{objects-true}}}, Value).
+
+	test(evaluate_relative_hash_array_index, deterministic(Value == 1)) :-
+		evaluate_relative(relative(0, 0, '#'), [foo, '1'], {foo-[bar, baz], highly-{nested-{objects-true}}}, Value).
+
+	test(evaluate_relative_hash_shifted_array_index, deterministic(Value == 0)) :-
+		evaluate_relative(relative(0, -1, '#'), [foo, '1'], {foo-[bar, baz], highly-{nested-{objects-true}}}, Value).
+
+	test(evaluate_relative_hash_object_member, deterministic(Value == nested)) :-
+		evaluate_relative(relative(0, 0, '#'), [highly, nested], {foo-[bar, baz], highly-{nested-{objects-true}}}, Value).
+
+	test(evaluate_relative_from_nested_object, deterministic(Value == true)) :-
+		evaluate_relative(relative(0, 0, [objects]), [highly, nested], {foo-[bar, baz], highly-{nested-{objects-true}}}, Value).
+
+	test(evaluate_relative_error_var_pointer, error(instantiation_error)) :-
+		evaluate_relative(_, [], {}, _).
+
+	test(evaluate_relative_error_var_context, error(instantiation_error)) :-
+		evaluate_relative(relative(0, 0, []), _, {}, _).
+
+	test(evaluate_relative_error_var_json, error(instantiation_error)) :-
+		evaluate_relative(relative(0, 0, []), [], _, _).
+
+	test(evaluate_relative_error_invalid_context, error(type_error(list, foo))) :-
+		evaluate_relative(relative(0, 0, []), foo, {}, _).
+
+	test(evaluate_relative_error_invalid_pointer, error(domain_error(json_relative_pointer, foo))) :-
+		evaluate_relative(foo, [], {}, _).
+
+	test(evaluate_relative_up_past_root, fail) :-
+		evaluate_relative(relative(3, 0, []), [foo, '1'], {foo-[bar, baz]}, _).
+
+	test(evaluate_relative_shift_on_object_member, fail) :-
+		evaluate_relative(relative(0, 1, []), [highly, nested], {highly-{nested-{objects-true}}}, _).
+
+	test(evaluate_relative_shift_on_numeric_object_member, fail) :-
+		evaluate_relative(relative(0, 1, []), ['0'], {'0'-foo, '1'-bar}, _).
+
+	test(evaluate_relative_chars_hash_member, deterministic(Value == chars([f,o,o]))) :-
+		json_pointer(chars)::evaluate_relative(relative(0, 0, '#'), [chars([f,o,o])], json([chars([f,o,o])-1]), Value).
 
 :- end_object.
