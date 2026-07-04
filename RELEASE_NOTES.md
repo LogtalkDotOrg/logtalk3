@@ -120,6 +120,8 @@ libraries to use the new `crypto` library.
 `base64url` library object (the standard `-` and `_` alphabet entries were
 also swapped).
 
+* FIXED: Compliance issues of the `json` library.
+
 * FIXED: Case where the `json_pointer` library `evaluate/1` predicate would
 throw an error when failure was expected.
 

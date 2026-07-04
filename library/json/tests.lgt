@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:17:0,
+		version is 1:0:0,
 		author is 'Paulo Moura and Jacinto Dávila',
-		date is 2024-01-14,
+		date is 2026-07-04,
 		comment is 'Tests for different collections of JSON files and other media in JSON format.'
 	]).
 
@@ -132,7 +132,7 @@
 		forall(regular_member(File, Files), assertion(File, json::parse(file(File), _))).
 
 	test(parse_simple_invalid_files, true) :-
-		^^file_path('test_files/json_org', Directory),
+		^^file_path('test_files/simple', Directory),
 		directory_files(Directory, Files, [type(regular), paths(absolute), extensions(['.json'])]),
 		forall(fail_named(File, Files), assertion(File, (catch(json::parse(file(File), _), Error, true), nonvar(Error)))).
 
@@ -175,6 +175,36 @@
 	test(valid_escape, true) :-
 		parse(atom('"\\t  \\r  \\n \\f \\b \\/ \\\\ \\"  "'), _Term).
 
+	test(parse_error_unescaped_newline, error(domain_error(json_source, codes([34, 108, 105, 110, 101, 10, 98, 114, 101, 97, 107, 34])))) :-
+		parse(codes([34, 108, 105, 110, 101, 10, 98, 114, 101, 97, 107, 34]), _Term).
+
+	test(parse_error_unescaped_control_code, error(domain_error(json_source, codes([34, 1, 34])))) :-
+		parse(codes([34, 1, 34]), _Term).
+
+	test(parse_error_negative_leading_zero, error(domain_error(json_source, codes([45, 48, 49])))) :-
+		parse(codes([45, 48, 49]), _Term).
+
+	test(parse_error_negative_missing_integer_digit, error(domain_error(json_source, codes([45, 46, 49])))) :-
+		parse(codes([45, 46, 49]), _Term).
+
+	test(parse_error_missing_fraction_digit, error(domain_error(json_source, codes([49, 46])))) :-
+		parse(codes([49, 46]), _Term).
+
+	test(parse_error_missing_exponent_digit, error(domain_error(json_source, codes([49, 101])))) :-
+		parse(codes([49, 101]), _Term).
+
+	test(parse_error_minus_only, error(domain_error(json_source, codes([45])))) :-
+		parse(codes([45]), _Term).
+
+	test(parse_unicode_surrogate_pair, true(Term == codes([119070]))) :-
+		json(codes)::parse(codes([34, 92, 117, 68, 56, 51, 52, 92, 117, 68, 68, 49, 69, 34]), Term).
+
+	test(parse_error_unicode_isolated_high_surrogate, error(domain_error(json_source, codes([34, 92, 117, 68, 56, 51, 52, 34])))) :-
+		json(codes)::parse(codes([34, 92, 117, 68, 56, 51, 52, 34]), _Term).
+
+	test(parse_error_unicode_isolated_low_surrogate, error(domain_error(json_source, codes([34, 92, 117, 68, 68, 49, 69, 34])))) :-
+		json(codes)::parse(codes([34, 92, 117, 68, 68, 49, 69, 34]), _Term).
+
 	test(new_line_escape, true(Term == {a-'\n'})) :-
 		^^file_path('test_files/escape_sequences/new_line.json', Path),
 		parse(file(Path), Term).
@@ -212,10 +242,26 @@
 	test(json_double_quote_escape_generate, true(Atom == '{"foo":"bar \\"1\\" baz"}')) :-
 		json(atom)::generate(atom(Atom), {foo-'bar "1" baz'}).
 
-	test(json_generate_error_object_list_representation, error(domain_error(json_sink, {a-b}))) :-
+	test(json_generate_literal_backslash_unicode_escape, true(Term == codes([92, 117, 48, 48, 52, 49]))) :-
+		json(codes)::generate(codes(Codes), codes([92, 117, 48, 48, 52, 49])),
+		json(codes)::parse(codes(Codes), Term).
+
+	test(json_generate_control_code_escape, true(Codes == [34, 92, 117, 48, 48, 48, 49, 34])) :-
+		json(codes)::generate(codes(Codes), codes([1])).
+
+	test(json_generate_error_number_key, error(domain_error(json_term, {1-a}))) :-
+		generate(chars(_), {1-a}).
+
+	test(json_generate_error_literal_key, error(domain_error(json_term, {@true-a}))) :-
+		generate(chars(_), {@true-a}).
+
+	test(json_generate_error_invalid_sink, error(domain_error(json_sink, foo))) :-
+		generate(foo, a).
+
+	test(json_generate_error_object_list_representation, error(domain_error(json_term, {a-b}))) :-
 		json(list,dash,atom)::generate(chars(_), {a-b}).
 
-	test(json_generate_error_object_curly_representation, error(domain_error(json_sink, json([a-b])))) :-
+	test(json_generate_error_object_curly_representation, error(domain_error(json_term, json([a-b])))) :-
 		json(curly,dash,atom)::generate(chars(_), json([a-b])).
 
 	% auxiliary predicates
