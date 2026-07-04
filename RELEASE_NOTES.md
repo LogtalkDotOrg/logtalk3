@@ -65,6 +65,8 @@ aggregation, and dependency-aware ordering.
 
 * ADDED: New `json_patch` library implementing RFC 6902.
 
+* ADDED: New `json_path` library implementing RFC 9535.
+
 * ADDED: New `jwt` library providing JWT parsing, JWS signing and verification,
 JWK/JWKS key selection, and reusable registered-claim validation predicates.
 

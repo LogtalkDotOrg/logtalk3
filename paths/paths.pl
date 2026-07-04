@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on July 3, 2026
+%  Last updated on July 4, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -238,6 +238,7 @@ logtalk_library_path(json_graph, library('json_graph')).
 logtalk_library_path(json_ld, library('json_ld/')).
 logtalk_library_path(json_lines, library('json_lines/')).
 logtalk_library_path(json_patch, library('json_patch/')).
+logtalk_library_path(json_path, library('json_path/')).
 logtalk_library_path(json_pointer, library('json_pointer/')).
 logtalk_library_path(json_rpc, library('json_rpc/')).
 logtalk_library_path(json_schema, library('json_schema/')).

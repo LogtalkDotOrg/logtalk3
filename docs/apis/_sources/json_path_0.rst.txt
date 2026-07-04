@@ -1,0 +1,56 @@
+.. index:: single: json_path
+.. _json_path/0:
+
+.. rst-class:: right
+
+**object**
+
+``json_path``
+=============
+
+JSONPath implementation using atoms for text representation.
+
+| **Availability:** 
+|    ``logtalk_load(json_path(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 0:1:0
+| **Date:** 2026-07-03
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`json_path(atom) <json_path/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`json_path_protocol/0::evaluate/3`  :ref:`json_path_protocol/0::generate/2`  :ref:`json_path_protocol/0::nodes/3`  :ref:`json_path_protocol/0::parse/2`  :ref:`json_path_protocol/0::paths/3`  :ref:`json_path_protocol/0::query/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

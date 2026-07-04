@@ -103,6 +103,7 @@
 		json_lines(loader),
 		json_pointer(loader),
 		json_patch(loader),
+		json_path(loader),
 		json_schema(loader),
 		ksuid(loader),
 		json_ld(loader),

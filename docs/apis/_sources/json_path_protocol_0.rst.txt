@@ -1,0 +1,215 @@
+.. index:: single: json_path_protocol
+.. _json_path_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``json_path_protocol``
+======================
+
+JSONPath parser, generator, and evaluator protocol.
+
+| **Availability:** 
+|    ``logtalk_load(json_path(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-07-03
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: parse/2
+.. _json_path_protocol/0::parse/2:
+
+``parse/2``
+^^^^^^^^^^^
+
+Parses a JSONPath query from the given source (``codes(Codes)``, ``chars(Chars)``, or ``atom(Atom)``) into a parsed query term. Fails if the query cannot be parsed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse(Source,Query)``
+| **Mode and number of proofs:**
+|    ``parse(++compound,--compound)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid source:
+|        ``domain_error(json_path_source,Source)``
+
+
+------------
+
+.. index:: generate/2
+.. _json_path_protocol/0::generate/2:
+
+``generate/2``
+^^^^^^^^^^^^^^
+
+Generates a JSONPath query using the representation specified in the first argument (``codes(Codes)``, ``chars(Chars)``, or ``atom(Atom)``) for the parsed query term in the second argument.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(Sink,Query)``
+| **Mode and number of proofs:**
+|    ``generate(+compound,++compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Sink`` is a variable:
+|        ``instantiation_error``
+|    ``Query`` is neither a variable nor a valid parsed query term:
+|        ``domain_error(json_path_query,Query)``
+|    ``Sink`` cannot be generated:
+|        ``domain_error(json_path_sink,Sink)``
+
+
+------------
+
+.. index:: evaluate/3
+.. _json_path_protocol/0::evaluate/3:
+
+``evaluate/3``
+^^^^^^^^^^^^^^
+
+Evaluates a parsed JSONPath query against a JSON term and returns the selected values.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``evaluate(Query,JSON,Values)``
+| **Mode and number of proofs:**
+|    ``evaluate(++compound,++term,--list)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``Query`` is a variable:
+|        ``instantiation_error``
+|    ``JSON`` is a variable:
+|        ``instantiation_error``
+|    ``Query`` is neither a variable nor a valid parsed query term:
+|        ``domain_error(json_path_query,Query)``
+
+
+------------
+
+.. index:: paths/3
+.. _json_path_protocol/0::paths/3:
+
+``paths/3``
+^^^^^^^^^^^
+
+Evaluates a parsed JSONPath query against a JSON term and returns the selected normalized paths.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``paths(Query,JSON,Paths)``
+| **Mode and number of proofs:**
+|    ``paths(++compound,++term,--list)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``Query`` is a variable:
+|        ``instantiation_error``
+|    ``JSON`` is a variable:
+|        ``instantiation_error``
+|    ``Query`` is neither a variable nor a valid parsed query term:
+|        ``domain_error(json_path_query,Query)``
+
+
+------------
+
+.. index:: nodes/3
+.. _json_path_protocol/0::nodes/3:
+
+``nodes/3``
+^^^^^^^^^^^
+
+Evaluates a parsed JSONPath query against a JSON term and returns the selected nodes as ``node(Path, Value)`` terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``nodes(Query,JSON,Nodes)``
+| **Mode and number of proofs:**
+|    ``nodes(++compound,++term,--list)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``Query`` is a variable:
+|        ``instantiation_error``
+|    ``JSON`` is a variable:
+|        ``instantiation_error``
+|    ``Query`` is neither a variable nor a valid parsed query term:
+|        ``domain_error(json_path_query,Query)``
+
+
+------------
+
+.. index:: query/3
+.. _json_path_protocol/0::query/3:
+
+``query/3``
+^^^^^^^^^^^
+
+Parses a JSONPath query source and evaluates it against a JSON term, returning the selected values.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``query(Source,JSON,Values)``
+| **Mode and number of proofs:**
+|    ``query(++compound,++term,--list)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``Source`` is a variable:
+|        ``instantiation_error``
+|    ``JSON`` is a variable:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid source:
+|        ``domain_error(json_path_source,Source)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

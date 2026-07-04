@@ -158,6 +158,7 @@ directory in the ``NOTES.md`` file.
    json_ld
    json_lines
    json_patch
+   json_path
    json_pointer
    json_rpc
    json_schema

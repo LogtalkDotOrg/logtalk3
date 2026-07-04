@@ -7318,6 +7318,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`json_path_protocol <json_path_protocol/0::evaluate/3>`
 * :ref:`json_pointer_protocol <json_pointer_protocol/0::evaluate/3>`
 
 ``event/2``
@@ -9140,6 +9141,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`json_graph_protocol <json_graph_protocol/0::generate/2>`
 * :ref:`json_ld_protocol <json_ld_protocol/0::generate/2>`
 * :ref:`json_lines_protocol <json_lines_protocol/0::generate/2>`
+* :ref:`json_path_protocol <json_path_protocol/0::generate/2>`
 * :ref:`json_pointer_protocol <json_pointer_protocol/0::generate/2>`
 * :ref:`json_protocol <json_protocol/0::generate/2>`
 * :ref:`message_pack(StringRepresentation) <message_pack/1::generate/2>`
@@ -15788,6 +15790,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::nodes/2>`
 
+``nodes/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_path_protocol <json_path_protocol/0::nodes/3>`
+
 ``nolog/3``
 -----------
 
@@ -17595,6 +17607,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`json_graph_protocol <json_graph_protocol/0::parse/2>`
 * :ref:`json_ld_protocol <json_ld_protocol/0::parse/2>`
 * :ref:`json_lines_protocol <json_lines_protocol/0::parse/2>`
+* :ref:`json_path_protocol <json_path_protocol/0::parse/2>`
 * :ref:`json_pointer_protocol <json_pointer_protocol/0::parse/2>`
 * :ref:`json_protocol <json_protocol/0::parse/2>`
 * :ref:`json_schema_protocol <json_schema_protocol/0::parse/2>`
@@ -18112,6 +18125,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`rest <rest/0::path_parameter/3>`
+
+``paths/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_path_protocol <json_path_protocol/0::paths/3>`
 
 ``pattern_miner_options/2``
 ---------------------------
@@ -19854,6 +19877,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`datalog_protocol <datalog_protocol/0::query/2>`
+
+``query/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`json_path_protocol <json_path_protocol/0::query/3>`
 
 ``query_parameter/3``
 ---------------------
