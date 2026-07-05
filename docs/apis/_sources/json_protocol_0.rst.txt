@@ -15,7 +15,7 @@ JSON parser and generator protocol.
 
 | **Author:** Paulo Moura and Jacinto Dávila
 | **Version:** 1:0:0
-| **Date:** 2026-07-04
+| **Date:** 2026-07-05
 
 | **Compilation flags:**
 |    ``static``
@@ -44,7 +44,7 @@ Public predicates
 ``parse/2``
 ^^^^^^^^^^^
 
-Parses the JSON contents read from the given source (``codes(List)``, ``stream(Stream)``, ``line(Stream)``, ``file(Path)``, ``chars(List)``, or ``atom(Atom)``) into a term. Fails if the JSON contents cannot be parsed.
+Parses the JSON contents read from the given source (``codes(List)``, ``stream(Stream)``, ``line(Stream)``, ``file(Path)``, ``chars(List)``, or ``atom(Atom)``) into a term.
 
 | **Compilation flags:**
 |    ``static``
@@ -57,8 +57,10 @@ Parses the JSON contents read from the given source (``codes(List)``, ``stream(S
 | **Exceptions:**
 |    ``Source`` is a variable:
 |        ``instantiation_error``
-|    ``Source`` is neither a variable nor a valid JSON source term or does not contain parsable JSON by the implementation:
+|    ``Source`` is neither a variable nor a valid JSON source term:
 |        ``domain_error(json_source,Source)``
+|    ``Source`` is a valid JSON source term but does not contain parsable JSON:
+|        ``domain_error(json,Source)``
 
 
 ------------

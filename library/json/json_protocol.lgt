@@ -25,18 +25,19 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura and Jacinto Dávila',
-		date is 2026-07-04,
+		date is 2026-07-05,
 		comment is 'JSON parser and generator protocol.'
 	]).
 
 	:- public(parse/2).
 	:- mode(parse(++compound, --term), one_or_error).
 	:- info(parse/2, [
-		comment is 'Parses the JSON contents read from the given source (``codes(List)``, ``stream(Stream)``, ``line(Stream)``, ``file(Path)``, ``chars(List)``, or ``atom(Atom)``) into a term. Fails if the JSON contents cannot be parsed.',
+		comment is 'Parses the JSON contents read from the given source (``codes(List)``, ``stream(Stream)``, ``line(Stream)``, ``file(Path)``, ``chars(List)``, or ``atom(Atom)``) into a term.',
 		argnames is ['Source', 'Term'],
 		exceptions is [
 			'``Source`` is a variable' - instantiation_error,
-			'``Source`` is neither a variable nor a valid JSON source term or does not contain parsable JSON by the implementation' - domain_error(json_source, 'Source')
+			'``Source`` is neither a variable nor a valid JSON source term' - domain_error(json_source, 'Source'),
+			'``Source`` is a valid JSON source term but does not contain parsable JSON' - domain_error(json, 'Source')
 		]
 	]).
 

@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura and Jacinto Dávila',
-		date is 2026-07-04,
+		date is 2026-07-05,
 		comment is 'Tests for different collections of JSON files and other media in JSON format.'
 	]).
 
@@ -175,34 +175,34 @@
 	test(valid_escape, true) :-
 		parse(atom('"\\t  \\r  \\n \\f \\b \\/ \\\\ \\"  "'), _Term).
 
-	test(parse_error_unescaped_newline, error(domain_error(json_source, codes([34, 108, 105, 110, 101, 10, 98, 114, 101, 97, 107, 34])))) :-
+	test(parse_error_unescaped_newline, error(domain_error(json, codes([34, 108, 105, 110, 101, 10, 98, 114, 101, 97, 107, 34])))) :-
 		parse(codes([34, 108, 105, 110, 101, 10, 98, 114, 101, 97, 107, 34]), _Term).
 
-	test(parse_error_unescaped_control_code, error(domain_error(json_source, codes([34, 1, 34])))) :-
+	test(parse_error_unescaped_control_code, error(domain_error(json, codes([34, 1, 34])))) :-
 		parse(codes([34, 1, 34]), _Term).
 
-	test(parse_error_negative_leading_zero, error(domain_error(json_source, codes([45, 48, 49])))) :-
+	test(parse_error_negative_leading_zero, error(domain_error(json, codes([45, 48, 49])))) :-
 		parse(codes([45, 48, 49]), _Term).
 
-	test(parse_error_negative_missing_integer_digit, error(domain_error(json_source, codes([45, 46, 49])))) :-
+	test(parse_error_negative_missing_integer_digit, error(domain_error(json, codes([45, 46, 49])))) :-
 		parse(codes([45, 46, 49]), _Term).
 
-	test(parse_error_missing_fraction_digit, error(domain_error(json_source, codes([49, 46])))) :-
+	test(parse_error_missing_fraction_digit, error(domain_error(json, codes([49, 46])))) :-
 		parse(codes([49, 46]), _Term).
 
-	test(parse_error_missing_exponent_digit, error(domain_error(json_source, codes([49, 101])))) :-
+	test(parse_error_missing_exponent_digit, error(domain_error(json, codes([49, 101])))) :-
 		parse(codes([49, 101]), _Term).
 
-	test(parse_error_minus_only, error(domain_error(json_source, codes([45])))) :-
+	test(parse_error_minus_only, error(domain_error(json, codes([45])))) :-
 		parse(codes([45]), _Term).
 
 	test(parse_unicode_surrogate_pair, true(Term == codes([119070]))) :-
 		json(codes)::parse(codes([34, 92, 117, 68, 56, 51, 52, 92, 117, 68, 68, 49, 69, 34]), Term).
 
-	test(parse_error_unicode_isolated_high_surrogate, error(domain_error(json_source, codes([34, 92, 117, 68, 56, 51, 52, 34])))) :-
+	test(parse_error_unicode_isolated_high_surrogate, error(domain_error(json, codes([34, 92, 117, 68, 56, 51, 52, 34])))) :-
 		json(codes)::parse(codes([34, 92, 117, 68, 56, 51, 52, 34]), _Term).
 
-	test(parse_error_unicode_isolated_low_surrogate, error(domain_error(json_source, codes([34, 92, 117, 68, 68, 49, 69, 34])))) :-
+	test(parse_error_unicode_isolated_low_surrogate, error(domain_error(json, codes([34, 92, 117, 68, 68, 49, 69, 34])))) :-
 		json(codes)::parse(codes([34, 92, 117, 68, 68, 49, 69, 34]), _Term).
 
 	test(new_line_escape, true(Term == {a-'\n'})) :-

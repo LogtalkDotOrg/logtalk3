@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura and Jacinto Dávila',
-		date is 2026-07-04,
+		date is 2026-07-05,
 		comment is 'JSON parser and generator.',
 		parameters is [
 			'ObjectRepresentation' - 'Object representation to be used when decoding JSON objects. Possible values are ``curly`` (default) and ``list``.',
@@ -44,27 +44,45 @@
 		instantiation_error.
 	parse(file(File), JSON) :-
 		file_to_codes(File, Codes),
-		phrase(json(JSON), Codes),
-		!.
+		!,
+		(	phrase(json(JSON), Codes) ->
+			true
+		;	domain_error(json, file(File))
+		).
 	parse(stream(Stream), JSON) :-
 		stream_to_codes(Stream, Codes),
-		phrase(json(JSON), Codes),
-		!.
+		!,
+		(	phrase(json(JSON), Codes) ->
+			true
+		;	domain_error(json, stream(Stream))
+		).
 	parse(line(Stream), JSON) :-
 		line_to_codes(Stream, Codes),
-		phrase(json(JSON), Codes),
-		!.
+		!,
+		(	phrase(json(JSON), Codes) ->
+			true
+		;	domain_error(json, line(Stream))
+		).
 	parse(codes(Codes), JSON) :-
-		phrase(json(JSON), Codes),
-		!.
+		!,
+		(	phrase(json(JSON), Codes) ->
+			true
+		;	domain_error(json, codes(Codes))
+		).
 	parse(chars(Chars), JSON) :-
 		chars_to_codes(Chars, Codes),
-		phrase(json(JSON), Codes),
-		!.
+		!,
+		(	phrase(json(JSON), Codes) ->
+			true
+		;	domain_error(json, chars(Chars))
+		).
 	parse(atom(Atom), JSON) :-
 		atom_codes(Atom, Codes),
-		phrase(json(JSON), Codes),
-		!.
+		!,
+		(	phrase(json(JSON), Codes) ->
+			true
+		;	domain_error(json, atom(Atom))
+		).
 	parse(Source, _) :-
 		domain_error(json_source, Source).
 
