@@ -23,9 +23,9 @@
 	implements(json_schema_protocol)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2026-05-11,
+		date is 2026-07-06,
 		comment is 'JSON Schema parser and validator supporting JSON Schema draft-07/draft-2019-09/draft-2020-12.',
 		parameters is [
 			'ObjectRepresentation' - 'Object representation used for JSON objects. Possible values are ``curly`` (default) and ``list``.',
@@ -39,6 +39,8 @@
 	]).
 
 	:- uses(json_pointer(atom), [
+		parse/2 as parse_json_pointer/2,
+		parse_relative/2 as parse_relative_json_pointer/2,
 		parse_fragment/2 as parse_json_pointer_fragment/2, evaluate/3 as evaluate_json_pointer/3
 	]).
 
@@ -803,6 +805,24 @@
 			Errors = []
 		;	Errors = [error(Path, invalid_format(uri))]
 		).
+	validate_format_string(hostname, Value, Path, Errors) :-
+		!,
+		(	validate_hostname_format(Value) ->
+			Errors = []
+		;	Errors = [error(Path, invalid_format(hostname))]
+		).
+	validate_format_string('json-pointer', Value, Path, Errors) :-
+		!,
+		(	parse_json_pointer(atom(Value), _) ->
+			Errors = []
+		;	Errors = [error(Path, invalid_format('json-pointer'))]
+		).
+	validate_format_string('relative-json-pointer', Value, Path, Errors) :-
+		!,
+		(	parse_relative_json_pointer(atom(Value), _) ->
+			Errors = []
+		;	Errors = [error(Path, invalid_format('relative-json-pointer'))]
+		).
 	validate_format_string('uri-reference', Value, Path, Errors) :-
 		!,
 		(	validate_uri_reference_format(Value) ->
@@ -1015,6 +1035,51 @@
 		),
 		number_codes(Num, Codes),
 		Num >= 0, Num =< 255.
+
+	% =============== Hostname format validation ===============
+	validate_hostname_format(Value) :-
+		atom_codes(Value, Codes),
+		Codes \== [],
+		length(Codes, Length),
+		Length =< 253,
+		\+ validate_ipv4_format(Value),
+		split_by_dot(Codes, Labels),
+		all_valid_hostname_labels(Labels).
+
+	all_valid_hostname_labels([]).
+	all_valid_hostname_labels([Label| Labels]) :-
+		valid_hostname_label(Label),
+		all_valid_hostname_labels(Labels).
+
+	valid_hostname_label(Codes) :-
+		Codes \== [],
+		length(Codes, Length),
+		Length =< 63,
+		Codes = [First| Rest],
+		is_hostname_alnum(First),
+		valid_hostname_label_rest(Rest).
+
+	valid_hostname_label_rest([]).
+	valid_hostname_label_rest([Code]) :-
+		!,
+		is_hostname_alnum(Code).
+	valid_hostname_label_rest([Code| Codes]) :-
+		is_hostname_label_code(Code),
+		valid_hostname_label_rest(Codes).
+
+	is_hostname_label_code(Code) :-
+		is_hostname_alnum(Code),
+		!.
+	is_hostname_label_code(0'-).
+
+	is_hostname_alnum(Code) :-
+		Code >= 0'0, Code =< 0'9,
+		!.
+	is_hostname_alnum(Code) :-
+		Code >= 0'a, Code =< 0'z,
+		!.
+	is_hostname_alnum(Code) :-
+		Code >= 0'A, Code =< 0'Z.
 
 	% =============== IPv6 format validation ===============
 	validate_ipv6_format(Value) :-

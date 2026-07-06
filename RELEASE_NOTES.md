@@ -67,10 +67,13 @@ aggregation, and dependency-aware ordering.
 
 * ADDED: New `json_path` library implementing RFC 9535.
 
+* ADDED: Support to the `json_pointer` library for relative JSON pointers.
+
+* ADDED: Support to the `json_schema` library for the `relative-json-pointer`,
+`json-pointer`, and `hostname` formats.
+
 * ADDED: New `jwt` library providing JWT parsing, JWS signing and verification,
 JWK/JWKS key selection, and reusable registered-claim validation predicates.
-
-* ADDED: Support to the `json_pointer` library for relative JSON pointers.
 
 * ADDED: New `open_ai` library and providing OpenAI client and server support.
 

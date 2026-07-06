@@ -149,10 +149,13 @@ specification. Supported formats:
 - ``date-time`` - ISO 8601 combined date and time
 - ``uri`` - URI with scheme (e.g., ``http://example.com``)
 - ``uri-reference`` - URI or relative reference
+- ``hostname`` - RFC 1123 hostname
 - ``ipv4`` - IPv4 address (dotted decimal notation)
 - ``ipv6`` - IPv6 address (hex groups with colons, supports ::
   compression)
 - ``uuid`` - UUID format (8-4-4-4-12 hex pattern)
+- ``json-pointer`` - JSON Pointer (RFC 6901)
+- ``relative-json-pointer`` - Relative JSON Pointer
 
 **Boolean schemas:**
 
@@ -166,7 +169,6 @@ The following JSON Schema features are not yet supported:
 
 - ``pattern`` - regular expression validation (requires regex support)
 - ``patternProperties`` - property matching by pattern
-- ``format`` - formats not listed above (e.g., ``hostname``, ``regex``,
-  ``json-pointer``)
+- ``format`` - formats not listed above (e.g., ``regex``)
 - ``$ref`` with remote URLs - external schema references require HTTP
   support

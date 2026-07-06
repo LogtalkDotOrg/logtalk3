@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-05-11,
+		date is 2026-07-06,
 		comment is 'Tests for the json_schema library.'
 	]).
 
@@ -627,6 +627,133 @@
 	test(validate_format_uuid_invalid_wrong_pattern, false) :-
 		parse(atom('{"format": "uuid"}'), Schema),
 		validate(Schema, '550e8400e29b41d4a716446655440000').
+
+	% Hostname format
+	test(validate_format_hostname_valid_domain, true) :-
+		parse(atom('{"format": "hostname"}'), Schema),
+		validate(Schema, 'example.com').
+
+	test(validate_format_hostname_valid_subdomain, true) :-
+		parse(atom('{"format": "hostname"}'), Schema),
+		validate(Schema, 'sub.example.co.uk').
+
+	test(validate_format_hostname_valid_hyphen, true) :-
+		parse(atom('{"format": "hostname"}'), Schema),
+		validate(Schema, 'my-host.example.com').
+
+	test(validate_format_hostname_valid_single_label, true) :-
+		parse(atom('{"format": "hostname"}'), Schema),
+		validate(Schema, localhost).
+
+	test(validate_format_hostname_valid_numeric_leading_label, true) :-
+		parse(atom('{"format": "hostname"}'), Schema),
+		validate(Schema, '3com.com').
+
+	test(validate_format_hostname_valid_punycode_label, true) :-
+		parse(atom('{"format": "hostname"}'), Schema),
+		validate(Schema, 'xn--bcher-kva.example').
+
+	test(validate_format_hostname_invalid_empty, false) :-
+		parse(atom('{"format": "hostname"}'), Schema),
+		validate(Schema, '').
+
+	test(validate_format_hostname_invalid_leading_hyphen, false) :-
+		parse(atom('{"format": "hostname"}'), Schema),
+		validate(Schema, '-example.com').
+
+	test(validate_format_hostname_invalid_trailing_hyphen, false) :-
+		parse(atom('{"format": "hostname"}'), Schema),
+		validate(Schema, 'example-.com').
+
+	test(validate_format_hostname_invalid_underscore, false) :-
+		parse(atom('{"format": "hostname"}'), Schema),
+		validate(Schema, 'exa_mple.com').
+
+	test(validate_format_hostname_invalid_consecutive_dots, false) :-
+		parse(atom('{"format": "hostname"}'), Schema),
+		validate(Schema, 'example..com').
+
+	test(validate_format_hostname_invalid_leading_dot, false) :-
+		parse(atom('{"format": "hostname"}'), Schema),
+		validate(Schema, '.example.com').
+
+	test(validate_format_hostname_invalid_trailing_dot, false) :-
+		parse(atom('{"format": "hostname"}'), Schema),
+		validate(Schema, 'example.com.').
+
+	test(validate_format_hostname_invalid_space, false) :-
+		parse(atom('{"format": "hostname"}'), Schema),
+		validate(Schema, 'bad host.example').
+
+	test(validate_format_hostname_invalid_long_label, false) :-
+		parse(atom('{"format": "hostname"}'), Schema),
+		validate(Schema, 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.example').
+
+	test(validate_format_hostname_invalid_ipv4_literal, false) :-
+		parse(atom('{"format": "hostname"}'), Schema),
+		validate(Schema, '192.168.1.1').
+
+	% JSON Pointer format
+	test(validate_format_json_pointer_valid_empty, true) :-
+		parse(atom('{"format": "json-pointer"}'), Schema),
+		validate(Schema, '').
+
+	test(validate_format_json_pointer_valid_root_member, true) :-
+		parse(atom('{"format": "json-pointer"}'), Schema),
+		validate(Schema, '/foo').
+
+	test(validate_format_json_pointer_valid_empty_reference_token, true) :-
+		parse(atom('{"format": "json-pointer"}'), Schema),
+		validate(Schema, '/').
+
+	test(validate_format_json_pointer_valid_escaped_tokens, true) :-
+		parse(atom('{"format": "json-pointer"}'), Schema),
+		validate(Schema, '/a~1b/m~0n').
+
+	test(validate_format_json_pointer_invalid_relative_name, false) :-
+		parse(atom('{"format": "json-pointer"}'), Schema),
+		validate(Schema, 'foo').
+
+	test(validate_format_json_pointer_invalid_escape, false) :-
+		parse(atom('{"format": "json-pointer"}'), Schema),
+		validate(Schema, '/a~2b').
+
+	test(validate_format_json_pointer_invalid_fragment, false) :-
+		parse(atom('{"format": "json-pointer"}'), Schema),
+		validate(Schema, '#/foo').
+
+	% Relative JSON Pointer format
+	test(validate_format_relative_json_pointer_valid_current_value, true) :-
+		parse(atom('{"format": "relative-json-pointer"}'), Schema),
+		validate(Schema, '0').
+
+	test(validate_format_relative_json_pointer_valid_descend, true) :-
+		parse(atom('{"format": "relative-json-pointer"}'), Schema),
+		validate(Schema, '1/foo/bar').
+
+	test(validate_format_relative_json_pointer_valid_hash, true) :-
+		parse(atom('{"format": "relative-json-pointer"}'), Schema),
+		validate(Schema, '0#').
+
+	test(validate_format_relative_json_pointer_valid_shift, true) :-
+		parse(atom('{"format": "relative-json-pointer"}'), Schema),
+		validate(Schema, '0-1').
+
+	test(validate_format_relative_json_pointer_invalid_absolute_pointer, false) :-
+		parse(atom('{"format": "relative-json-pointer"}'), Schema),
+		validate(Schema, '/foo').
+
+	test(validate_format_relative_json_pointer_invalid_leading_zero, false) :-
+		parse(atom('{"format": "relative-json-pointer"}'), Schema),
+		validate(Schema, '01/foo').
+
+	test(validate_format_relative_json_pointer_invalid_negative_prefix, false) :-
+		parse(atom('{"format": "relative-json-pointer"}'), Schema),
+		validate(Schema, '-1/foo').
+
+	test(validate_format_relative_json_pointer_invalid_suffix, false) :-
+		parse(atom('{"format": "relative-json-pointer"}'), Schema),
+		validate(Schema, '0~').
 
 	% Format on non-string passes (per JSON Schema spec)
 	test(validate_format_nonstring_passes, true) :-

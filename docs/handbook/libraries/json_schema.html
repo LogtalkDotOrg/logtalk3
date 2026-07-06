@@ -502,10 +502,13 @@ and timezone</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">date-time</span></code> - ISO 8601 combined date and time</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">uri</span></code> - URI with scheme (e.g., <code class="docutils literal notranslate"><span class="pre">http://example.com</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">uri-reference</span></code> - URI or relative reference</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hostname</span></code> - RFC 1123 hostname</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ipv4</span></code> - IPv4 address (dotted decimal notation)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ipv6</span></code> - IPv6 address (hex groups with colons, supports ::
 compression)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">uuid</span></code> - UUID format (8-4-4-4-12 hex pattern)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">json-pointer</span></code> - JSON Pointer (RFC 6901)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">relative-json-pointer</span></code> - Relative JSON Pointer</p></li>
 </ul>
 <p><strong>Boolean schemas:</strong></p>
 <ul class="simple">
@@ -519,8 +522,7 @@ compression)</p></li>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">pattern</span></code> - regular expression validation (requires regex support)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">patternProperties</span></code> - property matching by pattern</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">format</span></code> - formats not listed above (e.g., <code class="docutils literal notranslate"><span class="pre">hostname</span></code>, <code class="docutils literal notranslate"><span class="pre">regex</span></code>,
-<code class="docutils literal notranslate"><span class="pre">json-pointer</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">format</span></code> - formats not listed above (e.g., <code class="docutils literal notranslate"><span class="pre">regex</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">$ref</span></code> with remote URLs - external schema references require HTTP
 support</p></li>
 </ul>
