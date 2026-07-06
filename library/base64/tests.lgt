@@ -31,6 +31,7 @@
 
 	cover(base64).
 	cover(base64url).
+	cover(base64url_no_padding).
 
 	cleanup :-
 		^^clean_file('test_files/dump_base64.txt').
@@ -93,35 +94,70 @@
 		^^assertion(Bytes == Bytes0).
 
 	test(base64url_parse_atom, deterministic) :-
-		base64url::parse(atom('aHR0cHM6Ly9sb2d0YWxrLm9yZw'), URL),
+		base64url::parse(atom('aHR0cHM6Ly9sb2d0YWxrLm9yZw=='), URL),
 		^^assertion(URL == 'https://logtalk.org').
 
 	test(base64url_parse_chars, deterministic) :-
-		base64url::parse(chars([a,'H','R','0',c,'H','M','6','L',y,'9',s,b,'2',d,'0','Y','W',x,r,'L',m,'9',y,'Z',w]), URL),
+		base64url::parse(chars([a,'H','R','0',c,'H','M','6','L',y,'9',s,b,'2',d,'0','Y','W',x,r,'L',m,'9',y,'Z',w,'=','=']), URL),
 		^^assertion(URL == [h,t,t,p,s,:,/,/,l,o,g,t,a,l,k,'.',o,r,g]).
 
 	test(base64url_parse_codes, deterministic) :-
-		base64url::parse(codes([97,72,82,48,99,72,77,54,76,121,57,115,98,50,100,48,89,87,120,114,76,109,57,121,90,119]), URL),
+		base64url::parse(codes([97,72,82,48,99,72,77,54,76,121,57,115,98,50,100,48,89,87,120,114,76,109,57,121,90,119,61,61]), URL),
 		^^assertion(URL == [104,116,116,112,115,58,47,47,108,111,103,116,97,108,107,46,111,114,103]).
 
 	test(base64url_generate_atom, deterministic) :-
 		base64url::generate(atom(Base64URL), 'https://logtalk.org'),
-		^^assertion(Base64URL == 'aHR0cHM6Ly9sb2d0YWxrLm9yZw').
+		^^assertion(Base64URL == 'aHR0cHM6Ly9sb2d0YWxrLm9yZw==').
 
 	test(base64url_generate_chars, deterministic) :-
 		base64url::generate(chars(Base64URL), [h,t,t,p,s,:,/,/,l,o,g,t,a,l,k,'.',o,r,g]),
-		^^assertion(Base64URL == [a,'H','R','0',c,'H','M','6','L',y,'9',s,b,'2',d,'0','Y','W',x,r,'L',m,'9',y,'Z',w]).
+		^^assertion(Base64URL == [a,'H','R','0',c,'H','M','6','L',y,'9',s,b,'2',d,'0','Y','W',x,r,'L',m,'9',y,'Z',w,'=','=']).
 
 	test(base64url_generate_codes, deterministic) :-
 		base64url::generate(codes(Base64URL), [104,116,116,112,115,58,47,47,108,111,103,116,97,108,107,46,111,114,103]),
-		^^assertion(Base64URL == [97,72,82,48,99,72,77,54,76,121,57,115,98,50,100,48,89,87,120,114,76,109,57,121,90,119]).
+		^^assertion(Base64URL == [97,72,82,48,99,72,77,54,76,121,57,115,98,50,100,48,89,87,120,114,76,109,57,121,90,119,61,61]).
+
+	test(base64url_rfc4648_padding_01, deterministic) :-
+		base64url::generate(codes(Base64URL), [102]),
+		^^assertion(Base64URL == [0'Z, 0'g, 0'=, 0'=]).
+
+	test(base64url_rfc4648_padding_02, deterministic) :-
+		base64url::generate(codes(Base64URL), [102, 111]),
+		^^assertion(Base64URL == [0'Z, 0'm, 0'8, 0'=]).
+
+	test(base64url_rfc4648_padding_03, deterministic) :-
+		base64url::parse(codes([0'Z, 0'g, 0'=, 0'=]), Bytes),
+		^^assertion(Bytes == [102]).
+
+	test(base64url_rfc4648_padding_04, deterministic) :-
+		base64url::parse(codes([0'Z, 0'm, 0'8, 0'=]), Bytes),
+		^^assertion(Bytes == [102, 111]).
 
 	test(base64url_rfc4648_alphabet_01, deterministic) :-
 		base64url::generate(codes(Base64URL), [251, 255]),
-		^^assertion(Base64URL == [0'-, 0'_, 0'8]).
+		^^assertion(Base64URL == [0'-, 0'_, 0'8, 0'=]).
 
 	test(base64url_rfc4648_alphabet_02, deterministic) :-
-		base64url::parse(codes([0'-, 0'_, 0'8]), Bytes),
+		base64url::parse(codes([0'-, 0'_, 0'8, 0'=]), Bytes),
 		^^assertion(Bytes == [251, 255]).
+
+	test(base64url_no_padding_generate_01, deterministic) :-
+		base64url_no_padding::generate(codes(Base64URL), [102]),
+		^^assertion(Base64URL == [0'Z, 0'g]).
+
+	test(base64url_no_padding_generate_02, deterministic) :-
+		base64url_no_padding::generate(codes(Base64URL), [102, 111]),
+		^^assertion(Base64URL == [0'Z, 0'm, 0'8]).
+
+	test(base64url_no_padding_parse_01, deterministic) :-
+		base64url_no_padding::parse(codes([0'Z, 0'g]), Bytes),
+		^^assertion(Bytes == [102]).
+
+	test(base64url_no_padding_parse_02, deterministic) :-
+		base64url_no_padding::parse(codes([0'Z, 0'm, 0'8]), Bytes),
+		^^assertion(Bytes == [102, 111]).
+
+	test(base64url_no_padding_rejects_padding, error(representation_error(base64))) :-
+		base64url_no_padding::parse(codes([0'Z, 0'g, 0'=, 0'=]), _).
 
 :- end_object.

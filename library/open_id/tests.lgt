@@ -13,7 +13,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-27,
+		date is 2026-07-06,
 		comment is 'Unit tests for the "open_id" library.'
 	]).
 
@@ -567,7 +567,7 @@
 		atom_concat(Header, '.', HeaderDot),
 		atom_concat(HeaderDot, Payload, SigningInput),
 		atom_codes(SignatureBase64URL, SignatureCodes),
-		base64url::parse(codes(SignatureCodes), Signature).
+		base64url_no_padding::parse(codes(SignatureCodes), Signature).
 
 	alter_signature([Byte| Bytes], [AlteredByte| Bytes]) :-
 		AlteredByte is (Byte + 1) mod 256.

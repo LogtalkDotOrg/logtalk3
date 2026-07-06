@@ -24,7 +24,7 @@ Internal shared helpers for the jwt library.
 | **Extends:**
 |    ``public`` :ref:`options <options/0>`
 | **Uses:**
-|    :ref:`base64url <base64url/0>`
+|    :ref:`base64url_no_padding <base64url_no_padding/0>`
 |    :ref:`list <list/0>`
 
 | **Remarks:**
@@ -150,7 +150,7 @@ Extracts the key and value from a JSON pair compound term.
 ``base64url_atom_bytes/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Converts between Base64URL atoms and byte lists.
+Converts between unpadded Base64URL atoms and byte lists.
 
 | **Compilation flags:**
 |    ``static``

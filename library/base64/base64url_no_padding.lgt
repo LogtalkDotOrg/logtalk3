@@ -19,23 +19,23 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(base64url).
+:- object(base64url_no_padding).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-07-06,
-		comment is 'Base64URL parser and generator.'
+		comment is 'Base64URL parser and generator without padding.'
 	]).
 
 	:- public(parse/2).
 	:- mode(parse(++compound, --types([atom,chars,codes])), one_or_error).
 	:- info(parse/2, [
-		comment is 'Parses the Base64URL data from the given source (``atom(Atom)``, ``chars(List)``, or ``codes(List)`` into a URL (using the same format as the source).',
+		comment is 'Parses the unpadded Base64URL data from the given source (``atom(Atom)``, ``chars(List)``, or ``codes(List)`` into a URL (using the same format as the source).',
 		argnames is ['Source', 'URL'],
 		exceptions is [
 			'``Source`` is a variable' - instantiation_error,
-			'``Source`` is neither a variable nor a valid Base64 source term' - domain_error(base64url_source, 'Source'),
+			'``Source`` is neither a variable nor a valid Base64URL source term' - domain_error(base64url_source, 'Source'),
 			'``Source`` contains Base64URL data with characters outside the Base64URL alphabet' - representation_error(base64)
 		]
 	]).
@@ -43,11 +43,11 @@
 	:- public(generate/2).
 	:- mode(generate(+compound, +types([atom,chars,codes])), one_or_error).
 	:- info(generate/2, [
-		comment is 'Generates Base64URL data in the representation specified in the first argument (``atom(Atom)``, ``chars(List)``, or ``codes(List)`` for the given URL (given in the same format as the sink).',
+		comment is 'Generates unpadded Base64URL data in the representation specified in the first argument (``atom(Atom)``, ``chars(List)``, or ``codes(List)`` for the given URL (given in the same format as the sink).',
 		argnames is ['Sink', 'URL'],
 		exceptions is [
 			'``Sink`` is a variable' - instantiation_error,
-			'``Sink`` is neither a variable nor a valid Base64 sink term' - domain_error(base64url_sink, 'Sink')
+			'``Sink`` is neither a variable nor a valid Base64URL sink term' - domain_error(base64url_sink, 'Sink')
 		]
 	]).
 
@@ -95,17 +95,22 @@
 		!,
 		codes_to_bytes(Code4, Code3, Code2, Code1),
 		decode(Codes).
+	decode([Code1, Code2, Code3]) -->
+		!,
+		codes_to_bytes(Code3, Code2, Code1).
+	decode([Code1, Code2]) -->
+		codes_to_bytes(Code2, Code1).
 	decode([]) -->
 		[].
 
-	codes_to_bytes(0'=, 0'=, Code2, Code1) -->
+	codes_to_bytes(Code2, Code1) -->
 		!,
 		{	code_to_index(Code1, Index1),
 			code_to_index(Code2, Index2),
 			Byte1 is (Index1 << 2) \/ (Index2 >> 4)
 		},
 		[Byte1].
-	codes_to_bytes(0'=, Code3, Code2, Code1) -->
+	codes_to_bytes(Code3, Code2, Code1) -->
 		!,
 		{	code_to_index(Code1, Index1),
 			code_to_index(Code2, Index2),
@@ -170,7 +175,7 @@
 			index_to_code(Index2, Code2),
 			index_to_code(Index3, Code3)
 		},
-		[Code1, Code2, Code3, 0'=].
+		[Code1, Code2, Code3].
 
 	bytes_to_codes(Byte1) -->
 		{	Index1 is Byte1 >> 2,
@@ -178,7 +183,7 @@
 			index_to_code(Index1, Code1),
 			index_to_code(Index2, Code2)
 		},
-		[Code1, Code2, 0'=, 0'=].
+		[Code1, Code2].
 
 	index_to_code(Index, Code) :-
 		(	Index =< 25 -> Code is 0'A + Index

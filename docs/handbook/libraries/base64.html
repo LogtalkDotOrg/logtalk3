@@ -414,12 +414,14 @@ to a file or to a stream. See the API documentation for details.</p>
 <p>For safe encoding of URLs, use instead the Base64URL format. For
 example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> base64url<span class="o">::</span>generate(<span class="k">atom</span>(<span class="nv">Base64URL</span>), <span class="s">&#39;https://logtalk.org&#39;</span>).
-<span class="nv">Base64URL</span> <span class="o">==</span> <span class="s">&#39;aHR0cHM6Ly9sb2d0YWxrLm9yZw&#39;</span>
+<span class="nv">Base64URL</span> <span class="o">==</span> <span class="s">&#39;aHR0cHM6Ly9sb2d0YWxrLm9yZw==&#39;</span>
 yes
 </pre></div>
 </div>
 <p>The Base64URL can also be represented using a list of chars or a list of
-codes. The input URL should be in the same format.</p>
+codes. The input URL should be in the same format. Use the
+<code class="docutils literal notranslate"><span class="pre">base64url_no_padding</span></code> object when a specification explicitly omits
+Base64URL padding, such as JOSE (JWT, JWS, and JWK) and PKCE.</p>
 </section>
 <section id="decoding">
 <h2>Decoding<a class="headerlink" href="#decoding" title="Link to this heading"></a></h2>
@@ -442,7 +444,7 @@ yes
 file or a stream. See the API documentation for details.</p>
 <p>For decoding of URLs in the Base64URL format, use the
 <code class="docutils literal notranslate"><span class="pre">base64url::parse/2</span></code> predicate. For example:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> base64url<span class="o">::</span>parse(<span class="k">atom</span>(<span class="s">&#39;aHR0cHM6Ly9sb2d0YWxrLm9yZw&#39;</span>), <span class="nv">URL</span>).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> base64url<span class="o">::</span>parse(<span class="k">atom</span>(<span class="s">&#39;aHR0cHM6Ly9sb2d0YWxrLm9yZw==&#39;</span>), <span class="nv">URL</span>).
 <span class="nv">URL</span> <span class="o">==</span> <span class="s">&#39;https://logtalk.org&#39;</span>
 yes
 </pre></div>

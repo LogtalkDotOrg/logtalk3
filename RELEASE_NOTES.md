@@ -115,10 +115,10 @@ interdependency due to shared temporary files.
 * UPDATED: The `cuid`, `ids`, `ksuid`, `nanoid`, `ulid`, `uuid`, and `wkt_wkb`
 libraries to use the new `crypto` library.
 
-* FIXED: A parsing bug in the `base64` library object (the standard `+` and
-`/` alphabet entries were swapped). Also fixed the a parsing bug in the
-`base64url` library object (the standard `-` and `_` alphabet entries were
-also swapped).
+* FIXED: Standard compliance bugs in the `base64` library: swapped alphabet
+entries in the `base64` and `base64url` objects and missing Base64URL output
+padding. Added a `base64url_no_padding` object for specifications that require
+unpadded Base64URL encoding.
 
 * FIXED: Compliance issues of the `json` library.
 

@@ -229,16 +229,16 @@
 
 	hs256_token_from_json(HeaderJSON, ClaimsJSON, Key, Token) :-
 		atom_codes(HeaderJSON, HeaderCodes),
-		base64url::generate(codes(HeaderSegmentCodes), HeaderCodes),
+		base64url_no_padding::generate(codes(HeaderSegmentCodes), HeaderCodes),
 		atom_codes(HeaderSegment, HeaderSegmentCodes),
 		atom_codes(ClaimsJSON, ClaimsCodes),
-		base64url::generate(codes(ClaimsSegmentCodes), ClaimsCodes),
+		base64url_no_padding::generate(codes(ClaimsSegmentCodes), ClaimsCodes),
 		atom_codes(ClaimsSegment, ClaimsSegmentCodes),
 		atomic_list_concat([HeaderSegment, ClaimsSegment], '.', SigningInput),
 		atom_codes(Key, KeyBytes),
 		atom_codes(SigningInput, MessageBytes),
 		hmac::digest(sha256, KeyBytes, MessageBytes, Signature),
-		base64url::generate(codes(SignatureSegmentCodes), Signature),
+		base64url_no_padding::generate(codes(SignatureSegmentCodes), Signature),
 		atom_codes(SignatureSegment, SignatureSegmentCodes),
 		atomic_list_concat([SigningInput, SignatureSegment], '.', Token).
 
@@ -278,7 +278,7 @@
 		bytes_base64url_atom(YBytes, Y).
 
 	bytes_base64url_atom(Bytes, Atom) :-
-		base64url::generate(codes(Codes), Bytes),
+		base64url_no_padding::generate(codes(Codes), Bytes),
 		atom_codes(Atom, Codes).
 
 	valid_rsa_modulus_bytes([128| Bytes]) :-

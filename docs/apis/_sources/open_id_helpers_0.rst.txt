@@ -15,7 +15,7 @@ Internal shared helpers for the open_id library.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-27
+| **Date:** 2026-07-06
 
 | **Compilation flags:**
 |    ``static``
@@ -24,7 +24,7 @@ Internal shared helpers for the open_id library.
 | **Extends:**
 |    ``public`` :ref:`options <options/0>`
 | **Uses:**
-|    :ref:`base64url <base64url/0>`
+|    :ref:`base64url_no_padding <base64url_no_padding/0>`
 |    :ref:`http_core <http_core/0>`
 |    :ref:`list <list/0>`
 |    :ref:`url(Representation) <url/1>`
@@ -349,7 +349,7 @@ Converts a byte list into an atom.
 ``base64url_atom_bytes/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Converts between Base64URL atoms and byte lists.
+Converts between unpadded Base64URL atoms and byte lists.
 
 | **Compilation flags:**
 |    ``static``

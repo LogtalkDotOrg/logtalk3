@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>base64url &mdash; Logtalk 3.101.0</title>
+  <title>base64url_no_padding &mdash; Logtalk 3.101.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -32,8 +32,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="base64url_no_padding" href="base64url_no_padding_0.html" />
-    <link rel="prev" title="base64" href="base64_0.html" />
+    <link rel="next" title="base85" href="base85_0.html" />
+    <link rel="prev" title="base64url" href="base64url_0.html" />
    
 </head>
 
@@ -79,8 +79,8 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#base58"><span class="xref std std-ref">base58</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#base64"><span class="xref std std-ref">base64</span></a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="base64_0.html">base64</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">base64url</a></li>
-<li class="toctree-l3"><a class="reference internal" href="base64url_no_padding_0.html">base64url_no_padding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="base64url_0.html">base64url</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">base64url_no_padding</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#base85"><span class="xref std std-ref">base85</span></a></li>
@@ -381,9 +381,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">base64url</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">base64url_no_padding</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/base64url_0.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/base64url_no_padding_0.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -391,10 +391,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="base64url-0"><span id="index-0"></span><strong>object</strong></p>
-<section id="base64url">
-<h1><code class="docutils literal notranslate"><span class="pre">base64url</span></code><a class="headerlink" href="#base64url" title="Link to this heading"></a></h1>
-<p>Base64URL parser and generator.</p>
+  <p class="right" id="base64url-no-padding-0"><span id="index-0"></span><strong>object</strong></p>
+<section id="base64url-no-padding">
+<h1><code class="docutils literal notranslate"><span class="pre">base64url_no_padding</span></code><a class="headerlink" href="#base64url-no-padding" title="Link to this heading"></a></h1>
+<p>Base64URL parser and generator without padding.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -446,8 +446,8 @@
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
 <section id="parse-2">
-<span id="base64url-0-parse-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">parse/2</span></code></a><a class="headerlink" href="#parse-2" title="Link to this heading"></a></h3>
-<p>Parses the Base64URL data from the given source (<code class="docutils literal notranslate"><span class="pre">atom(Atom)</span></code>, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>, or <code class="docutils literal notranslate"><span class="pre">codes(List)</span></code> into a URL (using the same format as the source).</p>
+<span id="base64url-no-padding-0-parse-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">parse/2</span></code></a><a class="headerlink" href="#parse-2" title="Link to this heading"></a></h3>
+<p>Parses the unpadded Base64URL data from the given source (<code class="docutils literal notranslate"><span class="pre">atom(Atom)</span></code>, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>, or <code class="docutils literal notranslate"><span class="pre">codes(List)</span></code> into a URL (using the same format as the source).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -471,7 +471,7 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> is neither a variable nor a valid Base64 source term:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> is neither a variable nor a valid Base64URL source term:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(base64url_source,Source)</span></code></div>
 </div>
@@ -484,8 +484,8 @@
 <hr class="docutils" />
 </section>
 <section id="generate-2">
-<span id="base64url-0-generate-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">generate/2</span></code></a><a class="headerlink" href="#generate-2" title="Link to this heading"></a></h3>
-<p>Generates Base64URL data in the representation specified in the first argument (<code class="docutils literal notranslate"><span class="pre">atom(Atom)</span></code>, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>, or <code class="docutils literal notranslate"><span class="pre">codes(List)</span></code> for the given URL (given in the same format as the sink).</p>
+<span id="base64url-no-padding-0-generate-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">generate/2</span></code></a><a class="headerlink" href="#generate-2" title="Link to this heading"></a></h3>
+<p>Generates unpadded Base64URL data in the representation specified in the first argument (<code class="docutils literal notranslate"><span class="pre">atom(Atom)</span></code>, <code class="docutils literal notranslate"><span class="pre">chars(List)</span></code>, or <code class="docutils literal notranslate"><span class="pre">codes(List)</span></code> for the given URL (given in the same format as the sink).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -509,7 +509,7 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Sink</span></code> is neither a variable nor a valid Base64 sink term:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Sink</span></code> is neither a variable nor a valid Base64URL sink term:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(base64url_sink,Sink)</span></code></div>
 </div>
@@ -536,8 +536,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="base64_0.html" class="btn btn-neutral float-left" title="base64" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="base64url_no_padding_0.html" class="btn btn-neutral float-right" title="base64url_no_padding" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="base64url_0.html" class="btn btn-neutral float-left" title="base64url" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="base85_0.html" class="btn btn-neutral float-right" title="base85" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

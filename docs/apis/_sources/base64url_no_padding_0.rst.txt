@@ -1,14 +1,14 @@
-.. index:: single: base64url
-.. _base64url/0:
+.. index:: single: base64url_no_padding
+.. _base64url_no_padding/0:
 
 .. rst-class:: right
 
 **object**
 
-``base64url``
-=============
+``base64url_no_padding``
+========================
 
-Base64URL parser and generator.
+Base64URL parser and generator without padding.
 
 | **Availability:** 
 |    ``logtalk_load(base64(loader))``
@@ -39,12 +39,12 @@ Public predicates
 -----------------
 
 .. index:: parse/2
-.. _base64url/0::parse/2:
+.. _base64url_no_padding/0::parse/2:
 
 ``parse/2``
 ^^^^^^^^^^^
 
-Parses the Base64URL data from the given source (``atom(Atom)``, ``chars(List)``, or ``codes(List)`` into a URL (using the same format as the source).
+Parses the unpadded Base64URL data from the given source (``atom(Atom)``, ``chars(List)``, or ``codes(List)`` into a URL (using the same format as the source).
 
 | **Compilation flags:**
 |    ``static``
@@ -57,7 +57,7 @@ Parses the Base64URL data from the given source (``atom(Atom)``, ``chars(List)``
 | **Exceptions:**
 |    ``Source`` is a variable:
 |        ``instantiation_error``
-|    ``Source`` is neither a variable nor a valid Base64 source term:
+|    ``Source`` is neither a variable nor a valid Base64URL source term:
 |        ``domain_error(base64url_source,Source)``
 |    ``Source`` contains Base64URL data with characters outside the Base64URL alphabet:
 |        ``representation_error(base64)``
@@ -66,12 +66,12 @@ Parses the Base64URL data from the given source (``atom(Atom)``, ``chars(List)``
 ------------
 
 .. index:: generate/2
-.. _base64url/0::generate/2:
+.. _base64url_no_padding/0::generate/2:
 
 ``generate/2``
 ^^^^^^^^^^^^^^
 
-Generates Base64URL data in the representation specified in the first argument (``atom(Atom)``, ``chars(List)``, or ``codes(List)`` for the given URL (given in the same format as the sink).
+Generates unpadded Base64URL data in the representation specified in the first argument (``atom(Atom)``, ``chars(List)``, or ``codes(List)`` for the given URL (given in the same format as the sink).
 
 | **Compilation flags:**
 |    ``static``
@@ -84,7 +84,7 @@ Generates Base64URL data in the representation specified in the first argument (
 | **Exceptions:**
 |    ``Sink`` is a variable:
 |        ``instantiation_error``
-|    ``Sink`` is neither a variable nor a valid Base64 sink term:
+|    ``Sink`` is neither a variable nor a valid Base64URL sink term:
 |        ``domain_error(base64url_sink,Sink)``
 
 

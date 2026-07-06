@@ -74,11 +74,13 @@ a file or to a stream. See the API documentation for details.
 For safe encoding of URLs, use instead the Base64URL format. For example:
 
 	| ?- base64url::generate(atom(Base64URL), 'https://logtalk.org').
-	Base64URL == 'aHR0cHM6Ly9sb2d0YWxrLm9yZw'
+	Base64URL == 'aHR0cHM6Ly9sb2d0YWxrLm9yZw=='
 	yes
 
 The Base64URL can also be represented using a list of chars or a list of codes.
-The input URL should be in the same format.	
+The input URL should be in the same format. Use the `base64url_no_padding`
+object when a specification explicitly omits Base64URL padding, such as JOSE
+(JWT, JWS, and JWK) and PKCE.
 
 
 Decoding
@@ -105,7 +107,7 @@ stream. See the API documentation for details.
 For decoding of URLs in the Base64URL format, use the `base64url::parse/2`
 predicate. For example:
 
-	| ?- base64url::parse(atom('aHR0cHM6Ly9sb2d0YWxrLm9yZw'), URL).
+	| ?- base64url::parse(atom('aHR0cHM6Ly9sb2d0YWxrLm9yZw=='), URL).
 	URL == 'https://logtalk.org'
 	yes
 

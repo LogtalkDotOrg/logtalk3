@@ -59,7 +59,7 @@
 	:- mode(base64url_atom_bytes(+atom, -list(byte)), one_or_error).
 	:- mode(base64url_atom_bytes(-atom, +list(byte)), one_or_error).
 	:- info(base64url_atom_bytes/2, [
-		comment is 'Converts between Base64URL atoms and byte lists.',
+		comment is 'Converts between unpadded Base64URL atoms and byte lists.',
 		argnames is ['Atom', 'Bytes'],
 		exceptions is [
 			'``Atom`` is a variable or the sink is a variable' - instantiation_error,
@@ -183,9 +183,9 @@
 		atom(Atom),
 		!,
 		atom_codes(Atom, Codes),
-		base64url::parse(codes(Codes), Bytes).
+		base64url_no_padding::parse(codes(Codes), Bytes).
 	base64url_atom_bytes(Atom, Bytes) :-
-		base64url::generate(codes(Codes), Bytes),
+		base64url_no_padding::generate(codes(Codes), Bytes),
 		atom_codes(Atom, Codes).
 
 	atom_bytes(Atom, Bytes) :-

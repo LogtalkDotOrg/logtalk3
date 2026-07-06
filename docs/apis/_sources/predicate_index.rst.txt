@@ -9139,6 +9139,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`base58 <base58/0::generate/2>`
 * :ref:`base64 <base64/0::generate/2>`
 * :ref:`base64url <base64url/0::generate/2>`
+* :ref:`base64url_no_padding <base64url_no_padding/0::generate/2>`
 * :ref:`base85 <base85/0::generate/2>`
 * :ref:`cbor(StringRepresentation) <cbor/1::generate/2>`
 * :ref:`ccsds_frame_protocol <ccsds_frame_protocol/0::generate/2>`
@@ -17616,6 +17617,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`base58 <base58/0::parse/2>`
 * :ref:`base64 <base64/0::parse/2>`
 * :ref:`base64url <base64url/0::parse/2>`
+* :ref:`base64url_no_padding <base64url_no_padding/0::parse/2>`
 * :ref:`base85 <base85/0::parse/2>`
 * :ref:`cbor(StringRepresentation) <cbor/1::parse/2>`
 * :ref:`ccsds_frame_protocol <ccsds_frame_protocol/0::parse/2>`
