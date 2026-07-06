@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-07-06,
 		comment is 'Router-agnostic static file response helper built on the normalized ``http_core`` library.'
 	]).
 
@@ -66,7 +66,7 @@
 	]).
 
 	:- uses(user, [
-		atomic_list_concat/3
+		atomic_list_concat/2, atomic_list_concat/3
 	]).
 
 	:- uses(date, [
@@ -82,7 +82,9 @@
 		^^validate_document_root(DocumentRoot),
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		(	^^supported_method(Request) ->
+		( 	options_method(Request) ->
+			options_response(Path, Request, DocumentRoot, Options, Response)
+		;	^^supported_method(Request) ->
 			(	resolve_resource(Path, Request, DocumentRoot, Options, Resource) ->
 				resource_response(Request, Resource, Response)
 			;	not_found_response(Request, Response)
@@ -90,29 +92,50 @@
 		;	method_not_allowed_response(Request, Response)
 		).
 
+	options_method(Request) :-
+		http_core::method(Request, Method),
+		Method == options.
+
 	valid_option(index_files(IndexFiles)) :-
 		valid_atom_list(IndexFiles).
 	valid_option(mime_types_strict(Boolean)) :-
-		valid_boolean_option(Boolean).
+		once((Boolean == true; Boolean == false)).
+	valid_option(mime_type_overrides(Overrides)) :-
+		valid_mime_type_overrides(Overrides).
+	valid_option(fallback_file(Fallback)) :-
+		ground(Fallback),
+		valid_fallback_file(Fallback).
 	valid_option(cache_control(Directives)) :-
 		valid_cache_control_directives(Directives).
-	valid_option(expires(none)).
 	valid_option(expires(Value)) :-
-		valid_expires_value(Value).
+		(	Value == none ->
+			true
+		;	valid_expires_value(Value)
+		).
+	valid_option(content_disposition(Disposition)) :-
+		ground(Disposition),
+		valid_content_disposition(Disposition).
 
 	default_option(index_files(['index.html', 'index.htm'])).
 	default_option(mime_types_strict(false)).
+	default_option(mime_type_overrides([])).
+	default_option(fallback_file(none)).
 	default_option(cache_control([])).
 	default_option(expires(none)).
+	default_option(content_disposition(none)).
 
 	resolve_resource(Path, Request, DocumentRoot, Options, Resource) :-
 		resolved_document_root(DocumentRoot, Root),
 		^^resolved_target_path(Path, Root, Candidate),
-		existing_target_file(Candidate, Root, Options, TargetFile),
-		selected_representation_file(Request, TargetFile, File, VaryAcceptEncoding),
-		(	File == not_acceptable ->
-			Resource = not_acceptable(VaryAcceptEncoding)
-		;	resource(File, Options, VaryAcceptEncoding, Resource)
+		( 	directory_redirect(Candidate, Request, Location) ->
+			Resource = redirect(Location)
+		;	existing_target_file(Candidate, Root, Options, TargetFile, ResourcePath),
+			selected_representation_file(Request, TargetFile, File, VaryAcceptEncoding),
+			( 	File == not_acceptable ->
+				Resource = not_acceptable(VaryAcceptEncoding)
+			;	resource(File, ResourcePath, Options, VaryAcceptEncoding, Resource)
+			)
+		;	fallback_resource(Root, Request, Options, Resource)
 		).
 
 	resolved_document_root(DocumentRoot, Root) :-
@@ -122,15 +145,45 @@
 		;	domain_error(http_static_files_document_root, DocumentRoot)
 		).
 
-	existing_target_file(Candidate, _Root, _Options, Candidate) :-
+	existing_target_file(Candidate, Root, _Options, Candidate, ResourcePath) :-
 		os::file_exists(Candidate),
+		path_relative_to_root(Root, Candidate, ResourcePath),
 		!.
-	existing_target_file(Candidate, Root, Options, File) :-
+	existing_target_file(Candidate, Root, Options, File, ResourcePath) :-
 		os::directory_exists(Candidate),
 		!,
-		directory_index_file(Candidate, Root, Options, File).
+		directory_index_file(Candidate, Root, Options, File, ResourcePath).
 
-	directory_index_file(Directory, Root, Options, File) :-
+	path_relative_to_root(Root, File, Path) :-
+		atom_length(Root, RootLength),
+		sub_atom(File, RootLength, _, 0, Path).
+
+	directory_redirect(Candidate, Request, Location) :-
+		os::directory_exists(Candidate),
+		http_core::target(Request, Target),
+		redirect_location(Target, Location).
+
+	redirect_location(origin(Path), Location) :-
+		\+ sub_atom(Path, _, 1, 0, '/'),
+		atom_concat(Path, '/', Location).
+	redirect_location(origin(Path, Query), Location) :-
+		\+ sub_atom(Path, _, 1, 0, '/'),
+		text_atom(Query, QueryAtom),
+		atomic_list_concat([Path, '/', '?', QueryAtom], Location).
+
+	text_atom(Text, Atom) :-
+		atom(Text),
+		!,
+		Atom = Text.
+	text_atom([Head| Tail], Atom) :-
+		integer(Head),
+		!,
+		atom_codes(Atom, [Head| Tail]).
+	text_atom([Head| Tail], Atom) :-
+		atom(Head),
+		atom_chars(Atom, [Head| Tail]).
+
+	directory_index_file(Directory, Root, Options, File, ResourcePath) :-
 		^^option(index_files(IndexFiles), Options),
 		member(IndexFile, IndexFiles),
 		os::path_concat(Directory, IndexFile, Candidate0),
@@ -138,7 +191,31 @@
 		^^path_within_root(Root, Candidate),
 		os::file_exists(Candidate),
 		!,
-		File = Candidate.
+		File = Candidate,
+		path_relative_to_root(Root, Candidate, ResourcePath).
+
+	fallback_resource(Root, Request, Options, Resource) :-
+		fallback_target_file(Root, Options, Status, TargetFile, ResourcePath),
+		selected_representation_file(Request, TargetFile, File, VaryAcceptEncoding),
+		( 	File == not_acceptable ->
+			Resource = not_acceptable(VaryAcceptEncoding)
+		;	resource(File, ResourcePath, Options, VaryAcceptEncoding, Resource0),
+			status_resource(Status, Resource0, Resource)
+		).
+
+	fallback_target_file(Root, Options, Status, TargetFile, ResourcePath) :-
+		^^option(fallback_file(Fallback), Options),
+		fallback_status_path(Fallback, Status, FallbackPath),
+		^^resolved_target_path(FallbackPath, Root, TargetFile),
+		os::file_exists(TargetFile),
+		path_relative_to_root(Root, TargetFile, ResourcePath).
+
+	fallback_status_path(not_found(Path), status(404, 'Not Found'), Path).
+	fallback_status_path(spa(Path), status(200, 'OK'), Path).
+
+	status_resource(status(200, 'OK'), Resource, Resource) :-
+		!.
+	status_resource(Status, Resource, status_resource(Status, Resource)).
 
 	selected_representation_file(Request, TargetFile, File, VaryAcceptEncoding) :-
 		negotiable_resource_file(TargetFile),
@@ -327,21 +404,55 @@
 		Code is Code0 + 32.
 	lowercase_ascii_code(Code, Code).
 
-	resource(File, Options, VaryAcceptEncoding, resource(File, MediaType, Headers, Size, ModifiedTime, ETag, LastModified)) :-
+	resource(File, ResourcePath, Options, VaryAcceptEncoding, resource(File, MediaType, Headers, Size, ModifiedTime, ETag, LastModified)) :-
 		os::file_size(File, Size),
 		os::file_modification_time(File, ModifiedTime0),
 		normalize_modification_time(ModifiedTime0, ModifiedTime),
 		entity_tag(Size, ModifiedTime, ETag),
 		http_date(ModifiedTime, LastModified),
-		resource_headers(File, Options, VaryAcceptEncoding, ETag, LastModified, Headers, MediaType).
+		resource_headers(File, ResourcePath, Options, VaryAcceptEncoding, ETag, LastModified, Headers, MediaType).
 
-	resource_headers(File, Options, VaryAcceptEncoding, ETag, LastModified, Headers, MediaType) :-
-		representation_headers(File, Options, RepresentationHeaders, MediaType),
+	resource_headers(File, ResourcePath, Options, VaryAcceptEncoding, ETag, LastModified, Headers, MediaType) :-
+		representation_headers(File, ResourcePath, Options, RepresentationHeaders, MediaType),
+		content_disposition_headers(DispositionHeaders, Options),
 		vary_headers(VaryAcceptEncoding, VaryHeaders),
 		cache_headers(CacheHeaders, Options),
-		append(RepresentationHeaders, VaryHeaders, HeaderPrefix0),
-		append(HeaderPrefix0, CacheHeaders, HeaderPrefix),
+		append(RepresentationHeaders, DispositionHeaders, HeaderPrefix0),
+		append(HeaderPrefix0, VaryHeaders, HeaderPrefix1),
+		append(HeaderPrefix1, CacheHeaders, HeaderPrefix),
 		append(HeaderPrefix, [accept_ranges-'bytes', etag-ETag, last_modified-LastModified], Headers).
+
+	content_disposition_headers([content_disposition-Value], Options) :-
+		^^option(content_disposition(Disposition), Options),
+		Disposition \== none,
+		!,
+		content_disposition_value(Disposition, Value).
+	content_disposition_headers([], _Options).
+
+	content_disposition_value(inline, 'inline').
+	content_disposition_value(attachment, 'attachment').
+	content_disposition_value(inline(Filename), Value) :-
+		filename_parameter_value(Filename, ParameterValue),
+		atomic_list_concat(['inline; filename=', ParameterValue], Value).
+	content_disposition_value(attachment(Filename), Value) :-
+		filename_parameter_value(Filename, ParameterValue),
+		atomic_list_concat(['attachment; filename=', ParameterValue], Value).
+
+	filename_parameter_value(Filename, Value) :-
+		atom_codes(Filename, Codes),
+		quoted_filename_codes(Codes, QuotedCodes),
+		atom_codes(Value, QuotedCodes).
+
+	quoted_filename_codes(Codes, QuotedCodes) :-
+		quoted_filename_codes(Codes, EscapedCodes, [0'"]),
+		QuotedCodes = [0'"| EscapedCodes].
+
+	quoted_filename_codes([], Codes, Codes).
+	quoted_filename_codes([0'"| Codes], [0'\\, 0'"| EscapedCodes], Tail) :-
+		!,
+		quoted_filename_codes(Codes, EscapedCodes, Tail).
+	quoted_filename_codes([Code| Codes], [Code| EscapedCodes], Tail) :-
+		quoted_filename_codes(Codes, EscapedCodes, Tail).
 
 	cache_headers(Headers, Options) :-
 		cache_control_headers(CacheControlHeaders, Options),
@@ -412,20 +523,76 @@
 		!.
 	vary_headers(false, []).
 
-	representation_headers(File, Options, [content_encoding-Encoding], MediaType) :-
+	representation_headers(File, ResourcePath, Options, [content_encoding-Encoding], MediaType) :-
 		^^option(mime_types_strict(Strict), Options),
-		mime_types::guess_file_type(File, Type, Encoding, Strict),
+		mime_types::guess_file_type(File, Type0, Encoding, Strict),
 		Encoding \== '',
 		!,
-		guessed_media_type(Type, MediaType).
-	representation_headers(File, Options, [], MediaType) :-
+		media_type_for_resource(ResourcePath, Type0, Options, MediaType).
+	representation_headers(File, ResourcePath, Options, [], MediaType) :-
 		^^option(mime_types_strict(Strict), Options),
-		mime_types::guess_file_type(File, Type, _Encoding, Strict),
+		mime_types::guess_file_type(File, Type0, _Encoding, Strict),
+		media_type_for_resource(ResourcePath, Type0, Options, MediaType).
+
+	media_type_for_resource(ResourcePath, _Type, Options, MediaType) :-
+		mime_type_override(ResourcePath, Options, MediaType),
+		!.
+	media_type_for_resource(_ResourcePath, Type, _Options, MediaType) :-
 		guessed_media_type(Type, MediaType).
 
+	mime_type_override(ResourcePath, Options, MediaType) :-
+		^^option(mime_type_overrides(Overrides), Options),
+		mime_path_override(Overrides, ResourcePath, MediaType),
+		!.
+	mime_type_override(ResourcePath, Options, MediaType) :-
+		^^option(mime_type_overrides(Overrides), Options),
+		os::decompose_file_name(ResourcePath, _Directory, _Name, Extension0),
+		normalized_extension(Extension0, Extension),
+		mime_extension_override(Overrides, Extension, MediaType).
+
+	mime_path_override([path(Path0, MediaType)| _], ResourcePath, MediaType) :-
+		strip_leading_slashes(Path0, Path),
+		Path == ResourcePath,
+		!.
+	mime_path_override([_| Overrides], ResourcePath, MediaType) :-
+		mime_path_override(Overrides, ResourcePath, MediaType).
+
+	mime_extension_override([extension(Extension0, MediaType)| _], Extension, MediaType) :-
+		normalized_extension(Extension0, Extension),
+		!.
+	mime_extension_override([_| Overrides], Extension, MediaType) :-
+		mime_extension_override(Overrides, Extension, MediaType).
+
+	normalized_extension(Extension0, Extension) :-
+		( 	sub_atom(Extension0, 0, 1, _, '.') ->
+			Extension1 = Extension0
+		;	atom_concat('.', Extension0, Extension1)
+		),
+		lowercase_ascii_atom(Extension1, Extension).
+
+	strip_leading_slashes(Path, StrippedPath) :-
+		atom_codes(Path, Codes),
+		strip_leading_slash_codes(Codes, StrippedCodes),
+		atom_codes(StrippedPath, StrippedCodes).
+
+	strip_leading_slash_codes([0'/| Codes], StrippedCodes) :-
+		!,
+		strip_leading_slash_codes(Codes, StrippedCodes).
+	strip_leading_slash_codes(Codes, Codes).
+
+	resource_response(Request, redirect(Location), Response) :-
+		!,
+		redirect_response(Request, Location, Response).
 	resource_response(Request, not_acceptable(VaryAcceptEncoding), Response) :-
 		!,
 		not_acceptable_response(Request, VaryAcceptEncoding, Response).
+	resource_response(Request, status_resource(Status, Resource), Response) :-
+		!,
+		full_response(Request, Status, Resource, Response).
+	resource_response(Request, Resource, Response) :-
+		request_precondition_failed(Request, Resource),
+		!,
+		precondition_failed_response(Request, Resource, Response).
 	resource_response(Request, Resource, Response) :-
 		request_not_modified(Request, Resource),
 		!,
@@ -437,9 +604,20 @@
 	resource_response(Request, Resource, Response) :-
 		full_response(Request, Resource, Response).
 
-	full_response(Request, resource(File, MediaType, Headers, Size, _ModifiedTime, _ETag, _LastModified), Response) :-
+	full_response(Request, Resource, Response) :-
+		full_response(Request, status(200, 'OK'), Resource, Response).
+
+	full_response(Request, Status, resource(File, MediaType, Headers, Size, _ModifiedTime, _ETag, _LastModified), Response) :-
 		http_core::version(Request, Version),
-		http_core::response(Version, status(200, 'OK'), Headers, content(MediaType, file(File, 0, Size)), [], Response).
+		http_core::response(Version, Status, Headers, content(MediaType, file(File, 0, Size)), [], Response).
+
+	redirect_response(Request, Location, Response) :-
+		http_core::version(Request, Version),
+		http_core::response(Version, status(301, 'Moved Permanently'), [location-Location], content('text/plain', text('Moved Permanently')), [], Response).
+
+	precondition_failed_response(Request, resource(_File, _MediaType, Headers, _Size, _ModifiedTime, _ETag, _LastModified), Response) :-
+		http_core::version(Request, Version),
+		http_core::response(Version, status(412, 'Precondition Failed'), Headers, content('text/plain', text('Precondition Failed')), [], Response).
 
 	range_response(Request, _RangeValue, Resource, Response) :-
 		\+ if_range_matches(Request, Resource),
@@ -470,6 +648,15 @@
 		http_core::version(Request, Version),
 		http_core::response(Version, status(416, 'Range Not Satisfiable'), Headers, empty, [], Response).
 
+	request_precondition_failed(Request, Resource) :-
+		request_header_value(Request, if_match, Value),
+		!,
+		\+ if_match_matches(Value, Resource).
+	request_precondition_failed(Request, resource(_File, _MediaType, _Headers, _Size, ModifiedTime, _ETag, _LastModified)) :-
+		request_header_value(Request, if_unmodified_since, Value),
+		http_date_seconds(Value, Seconds),
+		ModifiedTime > Seconds.
+
 	request_not_modified(Request, resource(_File, _MediaType, _Headers, _Size, _ModifiedTime, ETag, _LastModified)) :-
 		request_header_value(Request, if_none_match, Value),
 		!,
@@ -497,6 +684,21 @@
 	request_header_value(Request, Name, Value) :-
 		http_core::header(Request, Name, Value),
 		!.
+
+	if_match_matches(Value, resource(_File, _MediaType, _Headers, _Size, _ModifiedTime, ETag, _LastModified)) :-
+		trim_ows_atom(Value, TrimmedValue),
+		( 	TrimmedValue == ('*') ->
+			true
+		;	atom::split(TrimmedValue, ',', Tags),
+			strong_etag_list_matches(Tags, ETag)
+		).
+
+	strong_etag_list_matches([Tag| _], ETag) :-
+		trim_ows_atom(Tag, TrimmedTag),
+		strong_entity_tag_match(TrimmedTag, ETag),
+		!.
+	strong_etag_list_matches([_| Tags], ETag) :-
+		strong_etag_list_matches(Tags, ETag).
 
 	if_none_match_matches(Value, ETag) :-
 		trim_ows_atom(Value, TrimmedValue),
@@ -669,15 +871,31 @@
 		http_core::version(Request, Version),
 		http_core::response(Version, status(406, 'Not Acceptable'), Headers, content('text/plain', text('Not Acceptable')), [], Response).
 
+	options_response(Path, Request, DocumentRoot, Options, Response) :-
+		( 	options_resource(Path, Request, DocumentRoot, Options) ->
+			allowed_options_response(Request, Options, Response)
+		;	not_found_response(Request, Response)
+		).
+
+	options_resource(Path, Request, DocumentRoot, Options) :-
+		resolved_document_root(DocumentRoot, Root),
+		^^resolved_target_path(Path, Root, Candidate),
+		( 	directory_redirect(Candidate, Request, _) ->
+			true
+		;	existing_target_file(Candidate, Root, Options, _File, _ResourcePath) ->
+			true
+		;	fallback_target_file(Root, Options, _Status, _FallbackFile, _FallbackPath)
+		).
+
+	allowed_options_response(Request, Options, Response) :-
+		cache_headers(CacheHeaders, Options),
+		prepend_header(allow-'GET, HEAD, OPTIONS', CacheHeaders, Headers),
+		http_core::version(Request, Version),
+		http_core::response(Version, status(204, 'No Content'), Headers, empty, [], Response).
+
 	method_not_allowed_response(Request, Response) :-
 		http_core::version(Request, Version),
-		http_core::response(Version, status(405, 'Method Not Allowed'), [allow-'GET, HEAD'], content('text/plain', text('Method Not Allowed')), [], Response).
-
-	valid_boolean_option(Boolean) :-
-		once((
-			Boolean == true;
-			Boolean == false
-		)).
+		http_core::response(Version, status(405, 'Method Not Allowed'), [allow-'GET, HEAD, OPTIONS'], content('text/plain', text('Method Not Allowed')), [], Response).
 
 	valid_cache_control_directives([]).
 	valid_cache_control_directives([Directive| Directives]) :-
@@ -709,6 +927,95 @@
 		valid_non_negative_integer(Value).
 	valid_expires_value(Value) :-
 		valid_date_time(Value).
+
+	valid_fallback_file(none).
+	valid_fallback_file(not_found(Path)) :-
+		valid_fallback_file_path(Path).
+	valid_fallback_file(spa(Path)) :-
+		valid_fallback_file_path(Path).
+
+	valid_fallback_file_path(Path) :-
+		atom(Path),
+		Path \== '',
+		catch(^^validate_relative_path(Path), _, fail).
+
+	valid_mime_type_overrides(Overrides) :-
+		ground(Overrides),
+		valid_mime_type_overrides_list(Overrides).
+
+	valid_mime_type_overrides_list([]).
+	valid_mime_type_overrides_list([Override| Overrides]) :-
+		valid_mime_type_override(Override),
+		valid_mime_type_overrides_list(Overrides).
+
+	valid_mime_type_override(extension(Extension, MediaType)) :-
+		valid_mime_extension(Extension),
+		valid_media_type(MediaType).
+	valid_mime_type_override(path(Path, MediaType)) :-
+		catch(^^validate_relative_path(Path), _, fail),
+		valid_media_type(MediaType).
+
+	valid_mime_extension(Extension) :-
+		atom(Extension),
+		Extension \== '',
+		Extension \== '.'.
+
+	valid_media_type(MediaType) :-
+		atom(MediaType),
+		atom::split(MediaType, '/', [Type, Subtype]),
+		atom_codes(Type, TypeCodes),
+		atom_codes(Subtype, SubtypeCodes),
+		valid_media_type_token_codes(TypeCodes),
+		valid_media_type_token_codes(SubtypeCodes).
+
+	valid_media_type_token_codes([Code| Codes]) :-
+		media_type_token_code(Code),
+		valid_media_type_token_codes_tail(Codes).
+
+	valid_media_type_token_codes_tail([]).
+	valid_media_type_token_codes_tail([Code| Codes]) :-
+		media_type_token_code(Code),
+		valid_media_type_token_codes_tail(Codes).
+
+	media_type_token_code(Code) :-
+		Code >= 0'a,
+		Code =< 0'z,
+		!.
+	media_type_token_code(Code) :-
+		Code >= 0'A,
+		Code =< 0'Z,
+		!.
+	media_type_token_code(Code) :-
+		Code >= 0'0,
+		Code =< 0'9,
+		!.
+	media_type_token_code(Code) :-
+		memberchk(Code, [0'!, 0'#, 0'$, 0'%, 0'&, 0'*, 0'+, 0'-, 0'., 0'^, 0'_, 0'`, 0'|, 0'~]).
+
+	valid_content_disposition(none).
+	valid_content_disposition(inline).
+	valid_content_disposition(attachment).
+	valid_content_disposition(inline(Filename)) :-
+		valid_content_disposition_filename(Filename).
+	valid_content_disposition(attachment(Filename)) :-
+		valid_content_disposition_filename(Filename).
+
+	valid_content_disposition_filename(Filename) :-
+		atom(Filename),
+		Filename \== '',
+		atom_codes(Filename, Codes),
+		valid_content_disposition_filename_codes(Codes).
+
+	valid_content_disposition_filename_codes([]).
+	valid_content_disposition_filename_codes([Code| Codes]) :-
+		valid_content_disposition_filename_code(Code),
+		valid_content_disposition_filename_codes(Codes).
+
+	valid_content_disposition_filename_code(Code) :-
+		Code > 31,
+		Code =\= 127,
+		Code =\= 0'/,
+		Code =\= 0'\\.
 
 	valid_non_negative_integer(Value) :-
 		integer(Value),

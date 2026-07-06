@@ -409,23 +409,33 @@ predicates:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">index_files(IndexFiles)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">mime_types_strict(Boolean)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mime_type_overrides(Overrides)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fallback_file(Fallback)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">cache_control(Directives)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">expires(Expires)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">content_disposition(Disposition)</span></code></p></li>
 </ul>
 <p>Default options are:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">index_files(['index.html',</span> <span class="pre">'index.htm'])</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">mime_types_strict(false)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mime_type_overrides([])</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fallback_file(none)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">cache_control([])</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">expires(none)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">content_disposition(none)</span></code></p></li>
 </ul>
 <p>Supported features:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">GET</span></code> and <code class="docutils literal notranslate"><span class="pre">HEAD</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GET</span></code>, <code class="docutils literal notranslate"><span class="pre">HEAD</span></code>, and <code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code> file responses</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">204</span> <span class="pre">No</span> <span class="pre">Content</span></code> <code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code> responses with
+<code class="docutils literal notranslate"><span class="pre">Allow:</span> <span class="pre">GET,</span> <span class="pre">HEAD,</span> <span class="pre">OPTIONS</span></code></p></li>
 <li><p>canonical docroot-prefix checks after path normalization</p></li>
 <li><p>weak <code class="docutils literal notranslate"><span class="pre">ETag</span></code> and <code class="docutils literal notranslate"><span class="pre">Last-Modified</span></code> validators derived from file size
 and modification time</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">412</span> <span class="pre">Precondition</span> <span class="pre">Failed</span></code> responses for failing <code class="docutils literal notranslate"><span class="pre">If-Match</span></code> and
+<code class="docutils literal notranslate"><span class="pre">If-Unmodified-Since</span></code> request preconditions</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">304</span> <span class="pre">Not</span> <span class="pre">Modified</span></code> responses for matching <code class="docutils literal notranslate"><span class="pre">If-None-Match</span></code> and
 <code class="docutils literal notranslate"><span class="pre">If-Modified-Since</span></code> requests, with <code class="docutils literal notranslate"><span class="pre">If-None-Match</span></code> taking
 precedence</p></li>
@@ -437,14 +447,24 @@ does not match or is only weakly equal</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">406</span> <span class="pre">Not</span> <span class="pre">Acceptable</span></code> when <code class="docutils literal notranslate"><span class="pre">Accept-Encoding</span></code> rejects the identity
 representation and no acceptable precompressed variant is available</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">404</span> <span class="pre">Not</span> <span class="pre">Found</span></code> for missing or unsafe paths</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">405</span> <span class="pre">Method</span> <span class="pre">Not</span> <span class="pre">Allowed</span></code> for other methods</p></li>
+<li><p>custom fallback file responses for missing paths that resolve safely
+inside the document root</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">405</span> <span class="pre">Method</span> <span class="pre">Not</span> <span class="pre">Allowed</span></code> for other methods with
+<code class="docutils literal notranslate"><span class="pre">Allow:</span> <span class="pre">GET,</span> <span class="pre">HEAD,</span> <span class="pre">OPTIONS</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">301</span> <span class="pre">Moved</span> <span class="pre">Permanently</span></code> trailing-slash redirects for directory
+targets</p></li>
 <li><p>index-file lookup for directory targets</p></li>
 <li><p>precompressed <code class="docutils literal notranslate"><span class="pre">.br</span></code> and <code class="docutils literal notranslate"><span class="pre">.gz</span></code> asset negotiation driven by
 <code class="docutils literal notranslate"><span class="pre">Accept-Encoding</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Vary:</span> <span class="pre">Accept-Encoding</span></code> responses when negotiated precompressed
 variants exist</p></li>
 <li><p>MIME type and content-encoding guessing</p></li>
-<li><p>configurable <code class="docutils literal notranslate"><span class="pre">Cache-Control</span></code> and <code class="docutils literal notranslate"><span class="pre">Expires</span></code> response headers</p></li>
+<li><p>per-extension and per-path MIME type overrides on top of
+<code class="docutils literal notranslate"><span class="pre">mime_types</span></code></p></li>
+<li><p>configurable <code class="docutils literal notranslate"><span class="pre">Cache-Control</span></code> and <code class="docutils literal notranslate"><span class="pre">Expires</span></code> response headers, also
+shared by <code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code> responses when configured</p></li>
+<li><p>configurable <code class="docutils literal notranslate"><span class="pre">Content-Disposition</span></code> response headers for inline or
+attachment file delivery</p></li>
 </ul>
 <p>For directory listing, see the <code class="docutils literal notranslate"><span class="pre">http_directory_listing</span></code> library.</p>
 <p>Cache-policy configuration uses these option values:</p>
@@ -459,6 +479,24 @@ containing any of <code class="docutils literal notranslate"><span class="pre">p
 relative expiry from the current system time, or
 <code class="docutils literal notranslate"><span class="pre">expires(date_time(Year,Month,Day,Hour,Minute,Second))</span></code> for an
 absolute expiry time</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mime_type_overrides(Overrides)</span></code> where <code class="docutils literal notranslate"><span class="pre">Overrides</span></code> is a list
+containing <code class="docutils literal notranslate"><span class="pre">extension(Extension,</span> <span class="pre">MediaType)</span></code> or
+<code class="docutils literal notranslate"><span class="pre">path(Path,</span> <span class="pre">MediaType)</span></code> terms; path overrides match the served
+document-root relative file path and take precedence over extension
+overrides</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fallback_file(none)</span></code> to omit custom fallback handling,
+<code class="docutils literal notranslate"><span class="pre">fallback_file(not_found(Path))</span></code> to serve a document-root relative
+file with <code class="docutils literal notranslate"><span class="pre">404</span> <span class="pre">Not</span> <span class="pre">Found</span></code> status for missing targets, or
+<code class="docutils literal notranslate"><span class="pre">fallback_file(spa(Path))</span></code> to serve a document-root relative file
+with <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code> status for SPA client-side routes; fallback files are
+only considered after the requested path has resolved safely inside
+the document root</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">content_disposition(none)</span></code> to omit the header,
+<code class="docutils literal notranslate"><span class="pre">content_disposition(inline)</span></code> or <code class="docutils literal notranslate"><span class="pre">content_disposition(attachment)</span></code>
+for disposition-only values, and
+<code class="docutils literal notranslate"><span class="pre">content_disposition(inline(Filename))</span></code> or
+<code class="docutils literal notranslate"><span class="pre">content_disposition(attachment(Filename))</span></code> to include a quoted
+<code class="docutils literal notranslate"><span class="pre">filename</span></code> parameter</p></li>
 </ul>
 <p>Current validator and date handling is intentionally conservative:</p>
 <ul class="simple">
@@ -467,6 +505,9 @@ absolute expiry time</p></li>
 <li><p>HTTP-date formatting, date validation, and Unix-time conversion
 delegate to the <code class="docutils literal notranslate"><span class="pre">dates</span></code> library; request parsing remains limited to
 the IMF-fixdate form generated for <code class="docutils literal notranslate"><span class="pre">Last-Modified</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">If-Match</span></code> entity-tag evaluation uses strong comparison semantics,
+so the generated weak <code class="docutils literal notranslate"><span class="pre">ETag</span></code> values only satisfy the wildcard <code class="docutils literal notranslate"><span class="pre">*</span></code>
+precondition</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">If-Range</span></code> entity-tag evaluation uses strong comparison semantics,
 so the generated weak <code class="docutils literal notranslate"><span class="pre">ETag</span></code> values never authorize partial
 responses; matching <code class="docutils literal notranslate"><span class="pre">Last-Modified</span></code> dates can still do so</p></li>

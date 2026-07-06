@@ -54,23 +54,33 @@ Supported options are:
 
 - ``index_files(IndexFiles)``
 - ``mime_types_strict(Boolean)``
+- ``mime_type_overrides(Overrides)``
+- ``fallback_file(Fallback)``
 - ``cache_control(Directives)``
 - ``expires(Expires)``
+- ``content_disposition(Disposition)``
 
 Default options are:
 
 - ``index_files(['index.html', 'index.htm'])``
 - ``mime_types_strict(false)``
+- ``mime_type_overrides([])``
+- ``fallback_file(none)``
 - ``cache_control([])``
 - ``expires(none)``
+- ``content_disposition(none)``
 
 Supported features:
 
-- ``GET`` and ``HEAD``
+- ``GET``, ``HEAD``, and ``OPTIONS``
 - ``200 OK`` file responses
+- ``204 No Content`` ``OPTIONS`` responses with
+  ``Allow: GET, HEAD, OPTIONS``
 - canonical docroot-prefix checks after path normalization
 - weak ``ETag`` and ``Last-Modified`` validators derived from file size
   and modification time
+- ``412 Precondition Failed`` responses for failing ``If-Match`` and
+  ``If-Unmodified-Since`` request preconditions
 - ``304 Not Modified`` responses for matching ``If-None-Match`` and
   ``If-Modified-Since`` requests, with ``If-None-Match`` taking
   precedence
@@ -82,14 +92,24 @@ Supported features:
 - ``406 Not Acceptable`` when ``Accept-Encoding`` rejects the identity
   representation and no acceptable precompressed variant is available
 - ``404 Not Found`` for missing or unsafe paths
-- ``405 Method Not Allowed`` for other methods
+- custom fallback file responses for missing paths that resolve safely
+  inside the document root
+- ``405 Method Not Allowed`` for other methods with
+  ``Allow: GET, HEAD, OPTIONS``
+- ``301 Moved Permanently`` trailing-slash redirects for directory
+  targets
 - index-file lookup for directory targets
 - precompressed ``.br`` and ``.gz`` asset negotiation driven by
   ``Accept-Encoding``
 - ``Vary: Accept-Encoding`` responses when negotiated precompressed
   variants exist
 - MIME type and content-encoding guessing
-- configurable ``Cache-Control`` and ``Expires`` response headers
+- per-extension and per-path MIME type overrides on top of
+  ``mime_types``
+- configurable ``Cache-Control`` and ``Expires`` response headers, also
+  shared by ``OPTIONS`` responses when configured
+- configurable ``Content-Disposition`` response headers for inline or
+  attachment file delivery
 
 For directory listing, see the ``http_directory_listing`` library.
 
@@ -105,6 +125,24 @@ Cache-policy configuration uses these option values:
   relative expiry from the current system time, or
   ``expires(date_time(Year,Month,Day,Hour,Minute,Second))`` for an
   absolute expiry time
+- ``mime_type_overrides(Overrides)`` where ``Overrides`` is a list
+  containing ``extension(Extension, MediaType)`` or
+  ``path(Path, MediaType)`` terms; path overrides match the served
+  document-root relative file path and take precedence over extension
+  overrides
+- ``fallback_file(none)`` to omit custom fallback handling,
+  ``fallback_file(not_found(Path))`` to serve a document-root relative
+  file with ``404 Not Found`` status for missing targets, or
+  ``fallback_file(spa(Path))`` to serve a document-root relative file
+  with ``200 OK`` status for SPA client-side routes; fallback files are
+  only considered after the requested path has resolved safely inside
+  the document root
+- ``content_disposition(none)`` to omit the header,
+  ``content_disposition(inline)`` or ``content_disposition(attachment)``
+  for disposition-only values, and
+  ``content_disposition(inline(Filename))`` or
+  ``content_disposition(attachment(Filename))`` to include a quoted
+  ``filename`` parameter
 
 Current validator and date handling is intentionally conservative:
 
@@ -113,6 +151,9 @@ Current validator and date handling is intentionally conservative:
 - HTTP-date formatting, date validation, and Unix-time conversion
   delegate to the ``dates`` library; request parsing remains limited to
   the IMF-fixdate form generated for ``Last-Modified``
+- ``If-Match`` entity-tag evaluation uses strong comparison semantics,
+  so the generated weak ``ETag`` values only satisfy the wildcard ``*``
+  precondition
 - ``If-Range`` entity-tag evaluation uses strong comparison semantics,
   so the generated weak ``ETag`` values never authorize partial
   responses; matching ``Last-Modified`` dates can still do so

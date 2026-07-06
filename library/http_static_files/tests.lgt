@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-25,
+		date is 2026-07-06,
 		comment is 'Unit tests for the "http_static_files" library.'
 	]).
 
@@ -82,12 +82,77 @@
 		memberchk(expires-Expires, Headers),
 		body(Response, content('text/plain', file(File, 0, 5))).
 
+	test(http_static_files_serve_5_06, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'hello.txt', File),
+		write_file_atom(File, 'hello'),
+		request(get, origin('/hello.txt'), http(1, 1), [], empty, [], Request),
+		http_static_files::serve('hello.txt', Request, Root, [content_disposition(inline)], Response),
+		status(Response, status(200, 'OK')),
+		header(Response, content_disposition, inline),
+		body(Response, content('text/plain', file(File, 0, 5))).
+
+	test(http_static_files_serve_5_07, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'hello.txt', File),
+		write_file_atom(File, 'hello'),
+		request(get, origin('/download'), http(1, 1), [], empty, [], Request),
+		http_static_files::serve('hello.txt', Request, Root, [content_disposition(attachment('report.txt'))], Response),
+		status(Response, status(200, 'OK')),
+		header(Response, content_disposition, 'attachment; filename="report.txt"'),
+		body(Response, content('text/plain', file(File, 0, 5))).
+
+	test(http_static_files_serve_5_08, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'hello.txt', File),
+		write_file_atom(File, 'hello'),
+		request(get, origin('/download'), http(1, 1), [], empty, [], Request),
+		http_static_files::serve('hello.txt', Request, Root, [content_disposition(attachment('quoted"name.txt'))], Response),
+		status(Response, status(200, 'OK')),
+		header(Response, content_disposition, 'attachment; filename="quoted\\"name.txt"'),
+		body(Response, content('text/plain', file(File, 0, 5))).
+
 	test(http_static_files_serve_5_01, deterministic) :-
 		ensure_docroot(Root),
 		os::path_concat(Root, 'home.html', File),
 		write_file_atom(File, 'ok'),
 		request(get, origin('/'), http(1, 1), [], empty, [], Request),
 		http_static_files::serve('/', Request, Root, [index_files(['home.html'])], Response),
+		status(Response, status(200, 'OK')),
+		body(Response, content('text/html', file(File, 0, 2))).
+
+	test(http_static_files_serve_4_25, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'docs', Directory),
+		os::make_directory_path(Directory),
+		os::path_concat(Directory, 'index.html', File),
+		write_file_atom(File, 'ok'),
+		request(get, origin('/docs'), http(1, 1), [], empty, [], Request),
+		http_static_files::serve('docs', Request, Root, Response),
+		status(Response, status(301, 'Moved Permanently')),
+		header(Response, location, '/docs/'),
+		body(Response, content('text/plain', text('Moved Permanently'))).
+
+	test(http_static_files_serve_4_26, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'docs', Directory),
+		os::make_directory_path(Directory),
+		os::path_concat(Directory, 'index.html', File),
+		write_file_atom(File, 'ok'),
+		request(get, origin('/docs', 'version=1'), http(1, 1), [], empty, [], Request),
+		http_static_files::serve('docs', Request, Root, Response),
+		status(Response, status(301, 'Moved Permanently')),
+		header(Response, location, '/docs/?version=1'),
+		body(Response, content('text/plain', text('Moved Permanently'))).
+
+	test(http_static_files_serve_4_27, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'docs', Directory),
+		os::make_directory_path(Directory),
+		os::path_concat(Directory, 'index.html', File),
+		write_file_atom(File, 'ok'),
+		request(get, origin('/docs/'), http(1, 1), [], empty, [], Request),
+		http_static_files::serve('docs/', Request, Root, Response),
 		status(Response, status(200, 'OK')),
 		body(Response, content('text/html', file(File, 0, 2))).
 
@@ -104,6 +169,35 @@
 		write_file_atom(SecretFile, 'secret'),
 		request(get, origin('/../test_secret.txt'), http(1, 1), [], empty, [], Request),
 		http_static_files::serve('../test_secret.txt', Request, Root, Response),
+		status(Response, status(404, 'Not Found')),
+		body(Response, content('text/plain', text('Not Found'))).
+
+	test(http_static_files_serve_4_32, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, '404.html', File),
+		write_file_atom(File, 'missing'),
+		request(get, origin('/missing.txt'), http(1, 1), [], empty, [], Request),
+		http_static_files::serve('missing.txt', Request, Root, [fallback_file(not_found('404.html'))], Response),
+		status(Response, status(404, 'Not Found')),
+		body(Response, content('text/html', file(File, 0, 7))).
+
+	test(http_static_files_serve_4_33, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'index.html', File),
+		write_file_atom(File, 'shell'),
+		request(get, origin('/app/deep/link'), http(1, 1), [], empty, [], Request),
+		http_static_files::serve('app/deep/link', Request, Root, [fallback_file(spa('index.html'))], Response),
+		status(Response, status(200, 'OK')),
+		body(Response, content('text/html', file(File, 0, 5))).
+
+	test(http_static_files_serve_4_34, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, '404.html', File),
+		write_file_atom(File, 'missing'),
+		^^file_path('test_secret.txt', SecretFile),
+		write_file_atom(SecretFile, 'secret'),
+		request(get, origin('/nested/../../test_secret.txt'), http(1, 1), [], empty, [], Request),
+		http_static_files::serve('nested/../../test_secret.txt', Request, Root, [fallback_file(not_found('404.html'))], Response),
 		status(Response, status(404, 'Not Found')),
 		body(Response, content('text/plain', text('Not Found'))).
 
@@ -132,8 +226,50 @@
 		request(post, origin('/hello.txt'), http(1, 1), [], empty, [], Request),
 		http_static_files::serve('hello.txt', Request, Root, Response),
 		status(Response, status(405, 'Method Not Allowed')),
-		header(Response, allow, 'GET, HEAD'),
+		header(Response, allow, 'GET, HEAD, OPTIONS'),
 		body(Response, content('text/plain', text('Method Not Allowed'))).
+
+	test(http_static_files_serve_4_35, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'hello.txt', File),
+		write_file_atom(File, 'hello'),
+		request(options, origin('/hello.txt'), http(1, 1), [], empty, [], Request),
+		http_static_files::serve('hello.txt', Request, Root, Response),
+		status(Response, status(204, 'No Content')),
+		header(Response, allow, 'GET, HEAD, OPTIONS'),
+		body(Response, empty).
+
+	test(http_static_files_serve_4_36, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'hello.txt', File),
+		write_file_atom(File, 'hello'),
+		format_date_time(date_time(2099, 1, 1, 0, 0, 0), 0, http_date, Expires),
+		request(options, origin('/hello.txt'), http(1, 1), [], empty, [], Request),
+		http_static_files::serve('hello.txt', Request, Root, [cache_control([public, max_age(3600)]), expires(date_time(2099, 1, 1, 0, 0, 0))], Response),
+		status(Response, status(204, 'No Content')),
+		header(Response, allow, 'GET, HEAD, OPTIONS'),
+		header(Response, cache_control, 'public, max-age=3600'),
+		header(Response, expires, Expires),
+		body(Response, empty).
+
+	test(http_static_files_serve_4_37, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'index.html', File),
+		write_file_atom(File, 'shell'),
+		request(options, origin('/app/deep/link'), http(1, 1), [], empty, [], Request),
+		http_static_files::serve('app/deep/link', Request, Root, [fallback_file(spa('index.html'))], Response),
+		status(Response, status(204, 'No Content')),
+		header(Response, allow, 'GET, HEAD, OPTIONS'),
+		body(Response, empty).
+
+	test(http_static_files_serve_4_38, deterministic) :-
+		ensure_docroot(Root),
+		^^file_path('test_secret.txt', SecretFile),
+		write_file_atom(SecretFile, 'secret'),
+		request(options, origin('/nested/../../test_secret.txt'), http(1, 1), [], empty, [], Request),
+		http_static_files::serve('nested/../../test_secret.txt', Request, Root, Response),
+		status(Response, status(404, 'Not Found')),
+		body(Response, content('text/plain', text('Not Found'))).
 
 	test(http_static_files_serve_4_07, deterministic) :-
 		ensure_docroot(Root),
@@ -178,6 +314,51 @@
 		http_static_files::serve('hello.txt', Request, Root, Response),
 		status(Response, status(304, 'Not Modified')),
 		body(Response, empty).
+
+	test(http_static_files_serve_4_28, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'hello.txt', File),
+		write_file_atom(File, 'hello'),
+		request(get, origin('/hello.txt'), http(1, 1), [if_match-('*')], empty, [], Request),
+		http_static_files::serve('hello.txt', Request, Root, Response),
+		status(Response, status(200, 'OK')),
+		body(Response, content('text/plain', file(File, 0, 5))).
+
+	test(http_static_files_serve_4_29, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'hello.txt', File),
+		write_file_atom(File, 'hello'),
+		request(get, origin('/hello.txt'), http(1, 1), [], empty, [], Request0),
+		http_static_files::serve('hello.txt', Request0, Root, Response0),
+		headers(Response0, Headers0),
+		memberchk(etag-ETag, Headers0),
+		request(get, origin('/hello.txt'), http(1, 1), [if_match-ETag], empty, [], Request),
+		http_static_files::serve('hello.txt', Request, Root, Response),
+		status(Response, status(412, 'Precondition Failed')),
+		body(Response, content('text/plain', text('Precondition Failed'))).
+
+	test(http_static_files_serve_4_30, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'hello.txt', File),
+		write_file_atom(File, 'hello'),
+		request(get, origin('/hello.txt'), http(1, 1), [], empty, [], Request0),
+		http_static_files::serve('hello.txt', Request0, Root, Response0),
+		headers(Response0, Headers0),
+		memberchk(last_modified-LastModified, Headers0),
+		request(get, origin('/hello.txt'), http(1, 1), [if_unmodified_since-LastModified], empty, [], Request),
+		http_static_files::serve('hello.txt', Request, Root, Response),
+		status(Response, status(200, 'OK')),
+		body(Response, content('text/plain', file(File, 0, 5))).
+
+	test(http_static_files_serve_4_31, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'hello.txt', File),
+		write_file_atom(File, 'hello'),
+		format_date_time(date_time(1990, 1, 1, 0, 0, 0), 0, http_date, Date),
+		request(get, origin('/hello.txt'), http(1, 1), [if_unmodified_since-Date], empty, [], Request),
+		http_static_files::serve('hello.txt', Request, Root, Response),
+		status(Response, status(412, 'Precondition Failed')),
+		body(Response, content('text/plain', text('Precondition Failed'))).
 
 	test(http_static_files_serve_4_10, deterministic) :-
 		ensure_docroot(Root),
@@ -374,10 +555,77 @@
 		status(Response, status(200, 'OK')),
 		body(Response, content('application/octet-stream', file(File, 0, 5))).
 
+	test(http_static_files_serve_5_11, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'payload.data', File),
+		write_file_atom(File, 'hello'),
+		request(get, origin('/payload.data'), http(1, 1), [], empty, [], Request),
+		http_static_files::serve('payload.data', Request, Root, [mime_type_overrides([extension('.data', 'application/x-data')])], Response),
+		status(Response, status(200, 'OK')),
+		body(Response, content('application/x-data', file(File, 0, 5))).
+
+	test(http_static_files_serve_5_12, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'reports', Directory),
+		os::make_directory_path(Directory),
+		os::path_concat(Directory, 'summary.txt', File),
+		write_file_atom(File, 'hello'),
+		request(get, origin('/reports/summary.txt'), http(1, 1), [], empty, [], Request),
+		http_static_files::serve('reports/summary.txt', Request, Root, [mime_type_overrides([extension('.txt', 'application/x-text'), path('reports/summary.txt', 'application/pdf')])], Response),
+		status(Response, status(200, 'OK')),
+		body(Response, content('application/pdf', file(File, 0, 5))).
+
+	test(http_static_files_serve_5_13, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'payload.custom', File),
+		write_file_atom(File, 'hello'),
+		atom_concat(File, '.gz', GzipFile),
+		write_file_atom(GzipFile, 'gzip'),
+		request(get, origin('/payload.custom'), http(1, 1), [accept_encoding-'gzip'], empty, [], Request),
+		http_static_files::serve('payload.custom', Request, Root, [mime_type_overrides([extension(custom, 'application/x-custom')])], Response),
+		status(Response, status(200, 'OK')),
+		header(Response, content_encoding, gzip),
+		body(Response, content('application/x-custom', file(GzipFile, 0, 4))).
+
 	test(http_static_files_serve_5_04, error(domain_error(option, mime_types_strict(_)))) :-
 		ensure_docroot(Root),
 		request(get, origin('/'), http(1, 1), [], empty, [], Request),
 		http_static_files::serve('/', Request, Root, [mime_types_strict(_)], _Response).
+
+	test(http_static_files_serve_5_14, error(domain_error(option, mime_type_overrides(_)))) :-
+		ensure_docroot(Root),
+		request(get, origin('/'), http(1, 1), [], empty, [], Request),
+		http_static_files::serve('/', Request, Root, [mime_type_overrides(_)], _Response).
+
+	test(http_static_files_serve_5_15, error(domain_error(option, mime_type_overrides([extension('.', 'application/x-empty')])))) :-
+		ensure_docroot(Root),
+		request(get, origin('/'), http(1, 1), [], empty, [], Request),
+		http_static_files::serve('/', Request, Root, [mime_type_overrides([extension('.', 'application/x-empty')])], _Response).
+
+	test(http_static_files_serve_5_16, error(domain_error(option, mime_type_overrides([path('payload.data', bogus)])))) :-
+		ensure_docroot(Root),
+		request(get, origin('/'), http(1, 1), [], empty, [], Request),
+		http_static_files::serve('/', Request, Root, [mime_type_overrides([path('payload.data', bogus)])], _Response).
+
+	test(http_static_files_serve_5_17, error(domain_error(option, fallback_file(_)))) :-
+		ensure_docroot(Root),
+		request(get, origin('/'), http(1, 1), [], empty, [], Request),
+		http_static_files::serve('/', Request, Root, [fallback_file(_)], _Response).
+
+	test(http_static_files_serve_5_18, error(domain_error(option, fallback_file(spa(''))))) :-
+		ensure_docroot(Root),
+		request(get, origin('/'), http(1, 1), [], empty, [], Request),
+		http_static_files::serve('/', Request, Root, [fallback_file(spa(''))], _Response).
+
+	test(http_static_files_serve_5_09, error(domain_error(option, content_disposition(attachment('bad/name.txt'))))) :-
+		ensure_docroot(Root),
+		request(get, origin('/'), http(1, 1), [], empty, [], Request),
+		http_static_files::serve('/', Request, Root, [content_disposition(attachment('bad/name.txt'))], _Response).
+
+	test(http_static_files_serve_5_10, error(domain_error(option, content_disposition(_)))) :-
+		ensure_docroot(Root),
+		request(get, origin('/'), http(1, 1), [], empty, [], Request),
+		http_static_files::serve('/', Request, Root, [content_disposition(_)], _Response).
 
 	ensure_docroot(Root) :-
 		^^file_path('test_docroot', Root),
