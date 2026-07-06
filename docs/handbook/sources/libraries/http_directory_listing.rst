@@ -55,9 +55,13 @@ Supported options are:
 - ``sort_order(SortOrder)``
 - ``columns(Columns)``
 - ``type_display(TypeDisplay)``
+- ``size_display(SizeDisplay)``
 - ``title(Title)``
 - ``theme(Theme)``
 - ``stylesheets(Stylesheets)``
+- ``exclude(Exclusions)``
+- ``cache_control(Directives)``
+- ``expires(Expires)``
 
 Default options are:
 
@@ -67,9 +71,13 @@ Default options are:
 - ``sort_order(ascending)``
 - ``columns([name, type, size, modified])``
 - ``type_display(simple)``
+- ``size_display(bytes)``
 - ``title('Directory listing')``
 - ``theme(default)``
 - ``stylesheets([])``
+- ``exclude([])``
+- ``cache_control([])``
+- ``expires(none)``
 
 Supported features:
 
@@ -89,11 +97,17 @@ Supported features:
   time
 - optional column selection while keeping the ``Name`` column visible
 - MIME-based file-type display using ``type_display(media)``
+- optional file-size display units using ``size_display(kilobytes)``,
+  ``size_display(megabytes)``, ``size_display(gigabytes)``, or
+  ``size_display(terabytes)``
 - theme-aware CSS hooks on the generated ``<body>``, ``<table>``, and
   entry rows
 - optional stylesheet ``<link>`` generation for custom presentation
   themes
 - optional inclusion of dot files
+- configurable exclusion of entry names using exact names, prefixes,
+  suffixes, or simple wildcard patterns
+- configurable ``Cache-Control`` and ``Expires`` response headers
 - ``404 Not Found`` for missing, unsafe, or non-directory targets
 - ``405 Method Not Allowed`` for other methods
 
@@ -107,10 +121,34 @@ Presentation customization uses these option values:
 - ``type_display(simple)`` keeps the existing ``file``/``directory``
   labels while ``type_display(media)`` renders MIME-based file type text
   such as ``text/plain``
+- ``size_display(bytes)`` renders file sizes as raw byte counts;
+  ``size_display(kilobytes)``, ``size_display(megabytes)``,
+  ``size_display(gigabytes)``, and ``size_display(terabytes)`` render
+  sizes with one decimal digit using binary multiples and labels such as
+  ``1.2 KB`` or ``4.8 MB``; size sorting continues to use the raw byte
+  value
 - ``theme(Theme)`` adds a ``theme-Theme`` CSS class to the generated
   ``<body>`` and ``<table>`` elements
 - ``stylesheets(Stylesheets)`` appends stylesheet links in the generated
   ``<head>``
+- ``exclude(Exclusions)`` removes matching entry names before metadata
+  and sorting; entries can be excluded using ``name(Name)``,
+  ``prefix(Prefix)``, ``suffix(Suffix)``, ``wildcard(Pattern)``, or an
+  atom shortcut for a wildcard pattern such as ``'.DS_Store'`` or
+  ``'*.tmp'``; in wildcard patterns, only ``*`` has special meaning
+
+Cache-policy configuration uses these option values:
+
+- ``cache_control(Directives)`` where ``Directives`` is a list
+  containing any of ``public``, ``private``, ``no_cache``, ``no_store``,
+  ``no_transform``, ``must_revalidate``, ``proxy_revalidate``,
+  ``immutable``, ``max_age(Seconds)``, ``s_maxage(Seconds)``,
+  ``stale_while_revalidate(Seconds)``, ``stale_if_error(Seconds)``, or
+  ``extension(Directive)``
+- ``expires(none)`` to omit the header, ``expires(Seconds)`` for a
+  relative expiry from the current system time, or
+  ``expires(date_time(Year,Month,Day,Hour,Minute,Second))`` for an
+  absolute expiry time
 
 The generated HTML now includes stable CSS hooks such as:
 

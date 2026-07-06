@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-07-06,
 		comment is 'Unit tests for the "http_directory_listing" library.'
 	]).
 
@@ -255,6 +255,119 @@
 		once(sub_atom(HTML, PosAlpha, _, _, '<a href="alpha.txt">alpha.txt</a>')),
 		once(sub_atom(HTML, PosZeta, _, _, '<a href="zeta.txt">zeta.txt</a>')).
 
+	test(http_directory_listing_serve_5_12, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'alpha.txt', AlphaFile),
+		write_file_atom(AlphaFile, 'alpha'),
+		format_date_time(date_time(2099, 1, 1, 0, 0, 0), 0, http_date, Expires),
+		request(get, origin('/'), http(1, 1), [], empty, [], Request),
+		http_directory_listing::serve('/', Request, Root, Response, [cache_control([public, max_age(3600), immutable]), expires(date_time(2099, 1, 1, 0, 0, 0))]),
+		status(Response, status(200, 'OK')),
+		header(Response, cache_control, 'public, max-age=3600, immutable'),
+		header(Response, expires, Expires),
+		body(Response, content('text/html', text(HTML))),
+		once(sub_atom(HTML, _, _, _, '<a href="alpha.txt">alpha.txt</a>')).
+
+	test(http_directory_listing_serve_5_13, error(domain_error(option, cache_control(_)))) :-
+		ensure_docroot(Root),
+		request(get, origin('/'), http(1, 1), [], empty, [], Request),
+		http_directory_listing::serve('/', Request, Root, _Response, [cache_control(_)]).
+
+	test(http_directory_listing_serve_5_14, error(domain_error(option, cache_control([max_age(-1)])))) :-
+		ensure_docroot(Root),
+		request(get, origin('/'), http(1, 1), [], empty, [], Request),
+		http_directory_listing::serve('/', Request, Root, _Response, [cache_control([max_age(-1)])]).
+
+	test(http_directory_listing_serve_5_15, error(domain_error(option, expires(-1)))) :-
+		ensure_docroot(Root),
+		request(get, origin('/'), http(1, 1), [], empty, [], Request),
+		http_directory_listing::serve('/', Request, Root, _Response, [expires(-1)]).
+
+	test(http_directory_listing_serve_5_16, error(domain_error(option, expires(_)))) :-
+		ensure_docroot(Root),
+		request(get, origin('/'), http(1, 1), [], empty, [], Request),
+		http_directory_listing::serve('/', Request, Root, _Response, [expires(_)]).
+
+	test(http_directory_listing_serve_5_17, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'alpha.txt', AlphaFile),
+		write_file_atom(AlphaFile, 'alpha'),
+		os::path_concat(Root, 'notes.tmp', TmpFile),
+		write_file_atom(TmpFile, 'tmp'),
+		os::path_concat(Root, '.DS_Store', StoreFile),
+		write_file_atom(StoreFile, 'store'),
+		request(get, origin('/'), http(1, 1), [], empty, [], Request),
+		http_directory_listing::serve('/', Request, Root, Response, [dot_files(true), exclude(['*.tmp', '.DS_Store'])]),
+		status(Response, status(200, 'OK')),
+		body(Response, content('text/html', text(HTML))),
+		once(sub_atom(HTML, _, _, _, '<a href="alpha.txt">alpha.txt</a>')),
+		\+ sub_atom(HTML, _, _, _, 'notes.tmp'),
+		\+ sub_atom(HTML, _, _, _, '.DS_Store').
+
+	test(http_directory_listing_serve_5_18, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'keep.txt', KeepFile),
+		write_file_atom(KeepFile, 'keep'),
+		os::path_concat(Root, 'secret.txt', SecretFile),
+		write_file_atom(SecretFile, 'secret'),
+		os::path_concat(Root, 'draft-plan.txt', DraftFile),
+		write_file_atom(DraftFile, 'draft'),
+		os::path_concat(Root, 'report.bak', BackupFile),
+		write_file_atom(BackupFile, 'backup'),
+		request(get, origin('/'), http(1, 1), [], empty, [], Request),
+		http_directory_listing::serve('/', Request, Root, Response, [exclude([name('secret.txt'), prefix('draft-'), suffix('.bak')])]),
+		status(Response, status(200, 'OK')),
+		body(Response, content('text/html', text(HTML))),
+		once(sub_atom(HTML, _, _, _, '<a href="keep.txt">keep.txt</a>')),
+		\+ sub_atom(HTML, _, _, _, 'secret.txt'),
+		\+ sub_atom(HTML, _, _, _, 'draft-plan.txt'),
+		\+ sub_atom(HTML, _, _, _, 'report.bak').
+
+	test(http_directory_listing_serve_5_19, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'build-app.log', LogFile),
+		write_file_atom(LogFile, 'log'),
+		os::path_concat(Root, 'build-app.txt', TextFile),
+		write_file_atom(TextFile, 'text'),
+		request(get, origin('/'), http(1, 1), [], empty, [], Request),
+		http_directory_listing::serve('/', Request, Root, Response, [exclude([wildcard('build-*.log')])]),
+		status(Response, status(200, 'OK')),
+		body(Response, content('text/html', text(HTML))),
+		once(sub_atom(HTML, _, _, _, '<a href="build-app.txt">build-app.txt</a>')),
+		\+ sub_atom(HTML, _, _, _, 'build-app.log').
+
+	test(http_directory_listing_serve_5_20, error(domain_error(option, exclude(_)))) :-
+		ensure_docroot(Root),
+		request(get, origin('/'), http(1, 1), [], empty, [], Request),
+		http_directory_listing::serve('/', Request, Root, _Response, [exclude(_)]).
+
+	test(http_directory_listing_serve_5_21, error(domain_error(option, exclude([prefix('')])))) :-
+		ensure_docroot(Root),
+		request(get, origin('/'), http(1, 1), [], empty, [], Request),
+		http_directory_listing::serve('/', Request, Root, _Response, [exclude([prefix('')])]).
+
+	test(http_directory_listing_serve_5_22, error(domain_error(option, exclude([42])))) :-
+		ensure_docroot(Root),
+		request(get, origin('/'), http(1, 1), [], empty, [], Request),
+		http_directory_listing::serve('/', Request, Root, _Response, [exclude([42])]).
+
+	test(http_directory_listing_serve_5_23, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'chunk.bin', ChunkFile),
+		write_file_bytes(ChunkFile, 1229),
+		request(get, origin('/'), http(1, 1), [], empty, [], Request),
+		http_directory_listing::serve('/', Request, Root, Response, [size_display(kilobytes)]),
+		status(Response, status(200, 'OK')),
+		body(Response, content('text/html', text(HTML))),
+		once(sub_atom(HTML, _, _, _, '<a href="chunk.bin">chunk.bin</a>')),
+		once(sub_atom(HTML, _, _, _, '<td>\n1.2 KB\n</td>')),
+		\+ sub_atom(HTML, _, _, _, '<td>\n1229\n</td>').
+
+	test(http_directory_listing_serve_5_24, error(domain_error(option, size_display(human)))) :-
+		ensure_docroot(Root),
+		request(get, origin('/'), http(1, 1), [], empty, [], Request),
+		http_directory_listing::serve('/', Request, Root, _Response, [size_display(human)]).
+
 	% auxiliary predicates
 
 	ensure_docroot(Root) :-
@@ -267,10 +380,22 @@
 		write_bytes(Bytes, Output),
 		close(Output).
 
+	write_file_bytes(File, Size) :-
+		open(File, write, Output, [type(binary)]),
+		write_repeated_byte(Size, Output),
+		close(Output).
+
 	write_bytes([], _Output).
 	write_bytes([Byte| Bytes], Output) :-
 		put_byte(Output, Byte),
 		write_bytes(Bytes, Output).
+
+	write_repeated_byte(0, _Output) :-
+		!.
+	write_repeated_byte(Size, Output) :-
+		put_byte(Output, 0'x),
+		RemainingSize is Size - 1,
+		write_repeated_byte(RemainingSize, Output).
 
 	expected_modified_display(File, Display) :-
 		os::file_modification_time(File, ModifiedTime),

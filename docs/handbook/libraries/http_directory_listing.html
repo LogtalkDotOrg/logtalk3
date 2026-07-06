@@ -410,9 +410,13 @@ predicates:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">sort_order(SortOrder)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">columns(Columns)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">type_display(TypeDisplay)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">size_display(SizeDisplay)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">title(Title)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">theme(Theme)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">stylesheets(Stylesheets)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exclude(Exclusions)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cache_control(Directives)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">expires(Expires)</span></code></p></li>
 </ul>
 <p>Default options are:</p>
 <ul class="simple">
@@ -422,9 +426,13 @@ predicates:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">sort_order(ascending)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">columns([name,</span> <span class="pre">type,</span> <span class="pre">size,</span> <span class="pre">modified])</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">type_display(simple)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">size_display(bytes)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">title('Directory</span> <span class="pre">listing')</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">theme(default)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">stylesheets([])</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exclude([])</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cache_control([])</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">expires(none)</span></code></p></li>
 </ul>
 <p>Supported features:</p>
 <ul class="simple">
@@ -444,11 +452,17 @@ single mixed ordering</p></li>
 time</p></li>
 <li><p>optional column selection while keeping the <code class="docutils literal notranslate"><span class="pre">Name</span></code> column visible</p></li>
 <li><p>MIME-based file-type display using <code class="docutils literal notranslate"><span class="pre">type_display(media)</span></code></p></li>
+<li><p>optional file-size display units using <code class="docutils literal notranslate"><span class="pre">size_display(kilobytes)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">size_display(megabytes)</span></code>, <code class="docutils literal notranslate"><span class="pre">size_display(gigabytes)</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">size_display(terabytes)</span></code></p></li>
 <li><p>theme-aware CSS hooks on the generated <code class="docutils literal notranslate"><span class="pre">&lt;body&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">&lt;table&gt;</span></code>, and
 entry rows</p></li>
 <li><p>optional stylesheet <code class="docutils literal notranslate"><span class="pre">&lt;link&gt;</span></code> generation for custom presentation
 themes</p></li>
 <li><p>optional inclusion of dot files</p></li>
+<li><p>configurable exclusion of entry names using exact names, prefixes,
+suffixes, or simple wildcard patterns</p></li>
+<li><p>configurable <code class="docutils literal notranslate"><span class="pre">Cache-Control</span></code> and <code class="docutils literal notranslate"><span class="pre">Expires</span></code> response headers</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">404</span> <span class="pre">Not</span> <span class="pre">Found</span></code> for missing, unsafe, or non-directory targets</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">405</span> <span class="pre">Method</span> <span class="pre">Not</span> <span class="pre">Allowed</span></code> for other methods</p></li>
 </ul>
@@ -462,10 +476,34 @@ visible column</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">type_display(simple)</span></code> keeps the existing <code class="docutils literal notranslate"><span class="pre">file</span></code>/<code class="docutils literal notranslate"><span class="pre">directory</span></code>
 labels while <code class="docutils literal notranslate"><span class="pre">type_display(media)</span></code> renders MIME-based file type text
 such as <code class="docutils literal notranslate"><span class="pre">text/plain</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">size_display(bytes)</span></code> renders file sizes as raw byte counts;
+<code class="docutils literal notranslate"><span class="pre">size_display(kilobytes)</span></code>, <code class="docutils literal notranslate"><span class="pre">size_display(megabytes)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">size_display(gigabytes)</span></code>, and <code class="docutils literal notranslate"><span class="pre">size_display(terabytes)</span></code> render
+sizes with one decimal digit using binary multiples and labels such as
+<code class="docutils literal notranslate"><span class="pre">1.2</span> <span class="pre">KB</span></code> or <code class="docutils literal notranslate"><span class="pre">4.8</span> <span class="pre">MB</span></code>; size sorting continues to use the raw byte
+value</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">theme(Theme)</span></code> adds a <code class="docutils literal notranslate"><span class="pre">theme-Theme</span></code> CSS class to the generated
 <code class="docutils literal notranslate"><span class="pre">&lt;body&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;table&gt;</span></code> elements</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">stylesheets(Stylesheets)</span></code> appends stylesheet links in the generated
 <code class="docutils literal notranslate"><span class="pre">&lt;head&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exclude(Exclusions)</span></code> removes matching entry names before metadata
+and sorting; entries can be excluded using <code class="docutils literal notranslate"><span class="pre">name(Name)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">prefix(Prefix)</span></code>, <code class="docutils literal notranslate"><span class="pre">suffix(Suffix)</span></code>, <code class="docutils literal notranslate"><span class="pre">wildcard(Pattern)</span></code>, or an
+atom shortcut for a wildcard pattern such as <code class="docutils literal notranslate"><span class="pre">'.DS_Store'</span></code> or
+<code class="docutils literal notranslate"><span class="pre">'*.tmp'</span></code>; in wildcard patterns, only <code class="docutils literal notranslate"><span class="pre">*</span></code> has special meaning</p></li>
+</ul>
+<p>Cache-policy configuration uses these option values:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cache_control(Directives)</span></code> where <code class="docutils literal notranslate"><span class="pre">Directives</span></code> is a list
+containing any of <code class="docutils literal notranslate"><span class="pre">public</span></code>, <code class="docutils literal notranslate"><span class="pre">private</span></code>, <code class="docutils literal notranslate"><span class="pre">no_cache</span></code>, <code class="docutils literal notranslate"><span class="pre">no_store</span></code>,
+<code class="docutils literal notranslate"><span class="pre">no_transform</span></code>, <code class="docutils literal notranslate"><span class="pre">must_revalidate</span></code>, <code class="docutils literal notranslate"><span class="pre">proxy_revalidate</span></code>,
+<code class="docutils literal notranslate"><span class="pre">immutable</span></code>, <code class="docutils literal notranslate"><span class="pre">max_age(Seconds)</span></code>, <code class="docutils literal notranslate"><span class="pre">s_maxage(Seconds)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">stale_while_revalidate(Seconds)</span></code>, <code class="docutils literal notranslate"><span class="pre">stale_if_error(Seconds)</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">extension(Directive)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">expires(none)</span></code> to omit the header, <code class="docutils literal notranslate"><span class="pre">expires(Seconds)</span></code> for a
+relative expiry from the current system time, or
+<code class="docutils literal notranslate"><span class="pre">expires(date_time(Year,Month,Day,Hour,Minute,Second))</span></code> for an
+absolute expiry time</p></li>
 </ul>
 <p>The generated HTML now includes stable CSS hooks such as:</p>
 <ul class="simple">

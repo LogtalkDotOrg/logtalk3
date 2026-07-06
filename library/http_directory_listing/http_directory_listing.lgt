@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-07-06,
 		comment is 'Router-agnostic directory listing helper built on the normalized ``http_core`` library.'
 	]).
 
@@ -66,7 +66,7 @@
 	]).
 
 	:- uses(date, [
-		date_time_to_unix/2, format_date_time/4, unix_to_date_time/2
+		date_time_to_unix/2, format_date_time/4, unix_to_date_time/2, valid_date_time/1
 	]).
 
 	:- uses(term_io, [
@@ -74,7 +74,7 @@
 	]).
 
 	:- uses(user, [
-		atomic_list_concat/2, atomic_list_concat/3
+		atomic_concat/3, atomic_list_concat/2, atomic_list_concat/3
 	]).
 
 	serve(Path, Request, DocumentRoot, Response) :-
@@ -107,6 +107,9 @@
 		valid_columns_option(Columns).
 	valid_option(type_display(TypeDisplay)) :-
 		valid_type_display_value(TypeDisplay).
+	valid_option(size_display(SizeDisplay)) :-
+		ground(SizeDisplay),
+		valid_size_display_value(SizeDisplay).
 	valid_option(title(Title)) :-
 		atom(Title).
 	valid_option(theme(Theme)) :-
@@ -114,6 +117,18 @@
 		Theme \== ''.
 	valid_option(stylesheets(Stylesheets)) :-
 		valid_stylesheet_list(Stylesheets).
+	valid_option(exclude(Exclusions)) :-
+		ground(Exclusions),
+		valid_exclusions(Exclusions).
+	valid_option(cache_control(Directives)) :-
+		ground(Directives),
+		valid_cache_control_directives(Directives).
+	valid_option(expires(Value)) :-
+		ground(Value),
+		( 	Value == none ->
+			true
+		;	valid_expires_value(Value)
+		).
 
 	default_option(dot_files(false)).
 	default_option(directories_first(true)).
@@ -121,9 +136,13 @@
 	default_option(sort_order(ascending)).
 	default_option(columns([name, type, size, modified])).
 	default_option(type_display(simple)).
+	default_option(size_display(bytes)).
 	default_option(title('Directory listing')).
 	default_option(theme(default)).
 	default_option(stylesheets([])).
+	default_option(exclude([])).
+	default_option(cache_control([])).
+	default_option(expires(none)).
 
 	resolve_directory(Path, DocumentRoot, Directory) :-
 		resolved_document_root(DocumentRoot, Root),
@@ -143,8 +162,9 @@
 		listing_settings(Request, Options, Settings),
 		directory_entries(Directory, Settings, Entries, Options),
 		render_directory_listing(DisplayPath, Settings, Entries, HTML, Options),
+		cache_headers(Headers, Options),
 		http_core::version(Request, Version),
-		http_core::response(Version, status(200, 'OK'), [], content('text/html', text(HTML)), [], Response).
+		http_core::response(Version, status(200, 'OK'), Headers, content('text/html', text(HTML)), [], Response).
 
 	display_path(Path, '/') :-
 		strip_leading_slashes(Path, ''),
@@ -272,7 +292,9 @@
 		^^option(dot_files(DotFiles), Options),
 		os::directory_files(Directory, Names0, [dot_files(DotFiles)]),
 		filter_special_entries(Names0, Names1),
-		entry_terms(Names1, Directory, Entries0),
+		^^option(exclude(Exclusions), Options),
+		filter_excluded_entries(Names1, Exclusions, Names),
+		entry_terms(Names, Directory, Entries0, Options),
 		sort_entries(Entries0, Settings, Entries).
 
 	filter_special_entries([], []).
@@ -283,14 +305,55 @@
 	filter_special_entries([Name| Names], [Name| FilteredNames]) :-
 		filter_special_entries(Names, FilteredNames).
 
-	entry_terms([], _Directory, []).
-	entry_terms([Name0| Names], Directory, [Entry| Entries]) :-
+	filter_excluded_entries([], _Exclusions, []).
+	filter_excluded_entries([Name0| Names], Exclusions, FilteredNames) :-
+		strip_trailing_slash(Name0, Name),
+		( 	excluded_entry(Name, Exclusions) ->
+			FilteredNames = RestFilteredNames
+		;	FilteredNames = [Name0| RestFilteredNames]
+		),
+		filter_excluded_entries(Names, Exclusions, RestFilteredNames).
+
+	excluded_entry(Name, [Exclusion| _Exclusions]) :-
+		exclusion_matches(Exclusion, Name),
+		!.
+	excluded_entry(Name, [_Exclusion| Exclusions]) :-
+		excluded_entry(Name, Exclusions).
+
+	exclusion_matches(name(Exact), Name) :-
+		Name == Exact.
+	exclusion_matches(prefix(Prefix), Name) :-
+		sub_atom(Name, 0, _, _, Prefix).
+	exclusion_matches(suffix(Suffix), Name) :-
+		sub_atom(Name, _, _, 0, Suffix).
+	exclusion_matches(wildcard(Pattern), Name) :-
+		wildcard_match(Pattern, Name).
+	exclusion_matches(Pattern, Name) :-
+		atom(Pattern),
+		wildcard_match(Pattern, Name).
+
+	wildcard_match(Pattern, Name) :-
+		atom_codes(Pattern, PatternCodes),
+		atom_codes(Name, NameCodes),
+		once(wildcard_codes_match(PatternCodes, NameCodes)).
+
+	wildcard_codes_match([], []).
+	wildcard_codes_match([0'*| PatternCodes], NameCodes) :-
+		wildcard_codes_match(PatternCodes, NameCodes).
+	wildcard_codes_match([0'*| PatternCodes], [_Code| NameCodes]) :-
+		wildcard_codes_match([0'*| PatternCodes], NameCodes).
+	wildcard_codes_match([Code| PatternCodes], [Code| NameCodes]) :-
+		Code =\= 0'*,
+		wildcard_codes_match(PatternCodes, NameCodes).
+
+	entry_terms([], _Directory, [], _Options).
+	entry_terms([Name0| Names], Directory, [Entry| Entries], Options) :-
 		strip_trailing_slash(Name0, Name),
 		os::path_concat(Directory, Name, EntryPath),
-		entry_term(Name, EntryPath, Entry),
-		entry_terms(Names, Directory, Entries).
+		entry_term(Name, EntryPath, Entry, Options),
+		entry_terms(Names, Directory, Entries, Options).
 
-	entry_term(Name, EntryPath, entry(Name, Href, Label, EntryKind, TypeKey, TypeSimpleDisplay, TypeMediaDisplay, SizeValue, SizeDisplay, ModifiedValue, ModifiedDisplay)) :-
+	entry_term(Name, EntryPath, entry(Name, Href, Label, EntryKind, TypeKey, TypeSimpleDisplay, TypeMediaDisplay, SizeValue, SizeDisplay, ModifiedValue, ModifiedDisplay), Options) :-
 		(	os::directory_exists(EntryPath) ->
 			atom_concat(Name, '/', Href),
 			Label = Href,
@@ -308,7 +371,7 @@
 			TypeSimpleDisplay = file,
 			file_type_metadata(EntryPath, TypeKey, TypeMediaDisplay),
 			os::file_size(EntryPath, SizeValue),
-			size_display(SizeValue, SizeDisplay),
+			entry_size_display(SizeValue, SizeDisplay, Options),
 			os::file_modification_time(EntryPath, ModifiedValue0),
 			normalize_modification_time(ModifiedValue0, ModifiedValue),
 			modified_display(ModifiedValue, ModifiedDisplay)
@@ -324,9 +387,31 @@
 	media_type_display(MediaType, Encoding, Display) :-
 		atomic_list_concat([MediaType, ' (', Encoding, ')'], Display).
 
-	size_display(Size, Display) :-
+	entry_size_display(Size, Display, Options) :-
+		^^option(size_display(SizeDisplay), Options),
+		file_size_display(SizeDisplay, Size, Display).
+
+	file_size_display(bytes, Size, Display) :-
 		number_codes(Size, Codes),
 		atom_codes(Display, Codes).
+	file_size_display(kilobytes, Size, Display) :-
+		scaled_size_display(Size, 1024, 'KB', Display).
+	file_size_display(megabytes, Size, Display) :-
+		scaled_size_display(Size, 1048576, 'MB', Display).
+	file_size_display(gigabytes, Size, Display) :-
+		scaled_size_display(Size, 1073741824, 'GB', Display).
+	file_size_display(terabytes, Size, Display) :-
+		scaled_size_display(Size, 1099511627776, 'TB', Display).
+
+	scaled_size_display(Size, Scale, Unit, Display) :-
+		RoundedTenths is (Size * 10 + Scale // 2) // Scale,
+		Whole is RoundedTenths // 10,
+		Fraction is RoundedTenths mod 10,
+		number_codes(Whole, WholeCodes),
+		number_codes(Fraction, FractionCodes),
+		atom_codes(WholeAtom, WholeCodes),
+		atom_codes(FractionAtom, FractionCodes),
+		atomic_list_concat([WholeAtom, '.', FractionAtom, ' ', Unit], Display).
 
 	normalize_modification_time(ModifiedTime, NormalizedTime) :-
 		(	integer(ModifiedTime) ->
@@ -543,6 +628,70 @@
 		!.
 	guessed_media_type(Type, Type).
 
+	cache_headers(Headers, Options) :-
+		cache_control_headers(CacheControlHeaders, Options),
+		expires_headers(ExpiresHeaders, Options),
+		append(CacheControlHeaders, ExpiresHeaders, Headers).
+
+	cache_control_headers([cache_control-Value], Options) :-
+		^^option(cache_control(Directives), Options),
+		Directives \== [],
+		!,
+		cache_control_value(Directives, Value).
+	cache_control_headers([], _Options).
+
+	expires_headers([expires-Value], Options) :-
+		^^option(expires(Expires0), Options),
+		Expires0 \== none,
+		!,
+		expires_value(Expires0, Value).
+	expires_headers([], _Options).
+
+	cache_control_value(Directives, Value) :-
+		cache_control_directive_atoms(Directives, Atoms),
+		atomic_list_concat(Atoms, ', ', Value).
+
+	cache_control_directive_atoms([], []).
+	cache_control_directive_atoms([Directive| Directives], [Atom| Atoms]) :-
+		cache_control_directive_atom(Directive, Atom),
+		cache_control_directive_atoms(Directives, Atoms).
+
+	cache_control_directive_atom(public, 'public').
+	cache_control_directive_atom(private, 'private').
+	cache_control_directive_atom(no_cache, 'no-cache').
+	cache_control_directive_atom(no_store, 'no-store').
+	cache_control_directive_atom(no_transform, 'no-transform').
+	cache_control_directive_atom(must_revalidate, 'must-revalidate').
+	cache_control_directive_atom(proxy_revalidate, 'proxy-revalidate').
+	cache_control_directive_atom(immutable, 'immutable').
+	cache_control_directive_atom(max_age(Seconds), Atom) :-
+		atomic_concat('max-age=', Seconds, Atom).
+	cache_control_directive_atom(s_maxage(Seconds), Atom) :-
+		atomic_concat('s-maxage=', Seconds, Atom).
+	cache_control_directive_atom(stale_while_revalidate(Seconds), Atom) :-
+		atomic_concat('stale-while-revalidate=', Seconds, Atom).
+	cache_control_directive_atom(stale_if_error(Seconds), Atom) :-
+		atomic_concat('stale-if-error=', Seconds, Atom).
+	cache_control_directive_atom(extension(Directive), Directive).
+
+	expires_value(Seconds0, Value) :-
+		integer(Seconds0),
+		!,
+		current_unix_time(CurrentTime),
+		ExpiresTime is CurrentTime + Seconds0,
+		http_date(ExpiresTime, Value).
+	expires_value(DateTime, Value) :-
+		date_time_to_unix(DateTime, ExpiresTime),
+		http_date(ExpiresTime, Value).
+
+	current_unix_time(CurrentTime) :-
+		os::date_time(Year, Month, Day, Hours, Minutes, Seconds, _Milliseconds),
+		date_time_to_unix(date_time(Year, Month, Day, Hours, Minutes, Seconds), CurrentTime).
+
+	http_date(Seconds, Date) :-
+		unix_to_date_time(Seconds, DateTime),
+		format_date_time(DateTime, 0, http_date, Date).
+
 	not_found_response(Request, Response) :-
 		http_core::version(Request, Version),
 		http_core::response(Version, status(404, 'Not Found'), [], content('text/plain', text('Not Found')), [], Response).
@@ -571,10 +720,71 @@
 	valid_type_display_value(simple).
 	valid_type_display_value(media).
 
+	valid_size_display_value(bytes).
+	valid_size_display_value(kilobytes).
+	valid_size_display_value(megabytes).
+	valid_size_display_value(gigabytes).
+	valid_size_display_value(terabytes).
+
 	valid_stylesheet_list([]).
 	valid_stylesheet_list([Stylesheet| Stylesheets]) :-
 		atom(Stylesheet),
 		Stylesheet \== '',
 		valid_stylesheet_list(Stylesheets).
+
+	valid_exclusions([]).
+	valid_exclusions([Exclusion| Exclusions]) :-
+		valid_exclusion(Exclusion),
+		valid_exclusions(Exclusions).
+
+	valid_exclusion(name(Name)) :-
+		valid_exclusion_atom(Name).
+	valid_exclusion(prefix(Prefix)) :-
+		valid_exclusion_atom(Prefix).
+	valid_exclusion(suffix(Suffix)) :-
+		valid_exclusion_atom(Suffix).
+	valid_exclusion(wildcard(Pattern)) :-
+		valid_exclusion_atom(Pattern).
+	valid_exclusion(Pattern) :-
+		valid_exclusion_atom(Pattern).
+
+	valid_exclusion_atom(Atom) :-
+		atom(Atom),
+		Atom \== ''.
+
+	valid_cache_control_directives([]).
+	valid_cache_control_directives([Directive| Directives]) :-
+		ground(Directive),
+		valid_cache_control_directive(Directive),
+		valid_cache_control_directives(Directives).
+
+	valid_cache_control_directive(public).
+	valid_cache_control_directive(private).
+	valid_cache_control_directive(no_cache).
+	valid_cache_control_directive(no_store).
+	valid_cache_control_directive(no_transform).
+	valid_cache_control_directive(must_revalidate).
+	valid_cache_control_directive(proxy_revalidate).
+	valid_cache_control_directive(immutable).
+	valid_cache_control_directive(max_age(Seconds)) :-
+		valid_non_negative_integer(Seconds).
+	valid_cache_control_directive(s_maxage(Seconds)) :-
+		valid_non_negative_integer(Seconds).
+	valid_cache_control_directive(stale_while_revalidate(Seconds)) :-
+		valid_non_negative_integer(Seconds).
+	valid_cache_control_directive(stale_if_error(Seconds)) :-
+		valid_non_negative_integer(Seconds).
+	valid_cache_control_directive(extension(Directive)) :-
+		atom(Directive),
+		Directive \== ''.
+
+	valid_expires_value(Value) :-
+		valid_non_negative_integer(Value).
+	valid_expires_value(Value) :-
+		valid_date_time(Value).
+
+	valid_non_negative_integer(Value) :-
+		integer(Value),
+		Value >= 0.
 
 :- end_object.
