@@ -403,8 +403,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:6:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-08</div>
+<div class="line"><strong>Version:</strong> 1:0:0</div>
+<div class="line"><strong>Date:</strong> 2026-07-06</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -435,26 +435,28 @@
 <li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
 <ul>
 <li><p><a class="reference internal" href="#uuid-v1-2" id="id2"><code class="docutils literal notranslate"><span class="pre">uuid_v1/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#uuid-v3-3" id="id3"><code class="docutils literal notranslate"><span class="pre">uuid_v3/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#uuid-v4-1" id="id4"><code class="docutils literal notranslate"><span class="pre">uuid_v4/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#uuid-v5-3" id="id5"><code class="docutils literal notranslate"><span class="pre">uuid_v5/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#uuid-v7-1" id="id6"><code class="docutils literal notranslate"><span class="pre">uuid_v7/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#uuid-null-1" id="id7"><code class="docutils literal notranslate"><span class="pre">uuid_null/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#uuid-nil-1" id="id8"><code class="docutils literal notranslate"><span class="pre">uuid_nil/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#uuid-max-1" id="id9"><code class="docutils literal notranslate"><span class="pre">uuid_max/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#random-node-1" id="id10"><code class="docutils literal notranslate"><span class="pre">random_node/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#uuid-v1-3" id="id3"><code class="docutils literal notranslate"><span class="pre">uuid_v1/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#uuid-v3-3" id="id4"><code class="docutils literal notranslate"><span class="pre">uuid_v3/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#uuid-v4-1" id="id5"><code class="docutils literal notranslate"><span class="pre">uuid_v4/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#uuid-v5-3" id="id6"><code class="docutils literal notranslate"><span class="pre">uuid_v5/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#uuid-v7-1" id="id7"><code class="docutils literal notranslate"><span class="pre">uuid_v7/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#uuid-v7-2" id="id8"><code class="docutils literal notranslate"><span class="pre">uuid_v7/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#uuid-null-1" id="id9"><code class="docutils literal notranslate"><span class="pre">uuid_null/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#uuid-nil-1" id="id10"><code class="docutils literal notranslate"><span class="pre">uuid_nil/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#uuid-max-1" id="id11"><code class="docutils literal notranslate"><span class="pre">uuid_max/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#random-node-1" id="id12"><code class="docutils literal notranslate"><span class="pre">random_node/1</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id11">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id12">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id13">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id13">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id14">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id15">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
 <section id="uuid-v1-2">
 <span id="uuid-protocol-0-uuid-v1-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">uuid_v1/2</span></code></a><a class="headerlink" href="#uuid-v1-2" title="Link to this heading"></a></h3>
-<p>Returns a version 1 UUID for the given MAC address (a list of six bytes). The MAC address can be replaced by a random 6 bytes node identifier as per RFC 4122 when the MAC address is not available or should not be disclosed.</p>
+<p>Returns a version 1 UUID for the given MAC address (a list of six bytes). The MAC address can be replaced by a random 6 bytes node identifier as per RFC 4122 when the MAC address is not available or should not be disclosed. Portability note: some backends only provide access to local time; use <code class="docutils literal notranslate"><span class="pre">uuid_v1/3</span></code> with an explicit UTC offset when a UTC timestamp is required.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -473,8 +475,29 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="uuid-v1-3">
+<span id="uuid-protocol-0-uuid-v1-3"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">uuid_v1/3</span></code></a><a class="headerlink" href="#uuid-v1-3" title="Link to this heading"></a></h3>
+<p>Returns a version 1 UUID for the given MAC address (a list of six bytes) using the given local UTC offset (<code class="docutils literal notranslate"><span class="pre">Z</span></code> or <code class="docutils literal notranslate"><span class="pre">+HH:MM</span></code>/<code class="docutils literal notranslate"><span class="pre">-HH:MM</span></code>) to convert the backend local time to UTC. The MAC address can be replaced by a random 6 bytes node identifier as per RFC 4122 when the MAC address is not available or should not be disclosed.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">uuid_v1(MAC,Offset,UUID)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">uuid_v1(+list(byte),+atom,--text)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="uuid-v3-3">
-<span id="uuid-protocol-0-uuid-v3-3"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">uuid_v3/3</span></code></a><a class="headerlink" href="#uuid-v3-3" title="Link to this heading"></a></h3>
+<span id="uuid-protocol-0-uuid-v3-3"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">uuid_v3/3</span></code></a><a class="headerlink" href="#uuid-v3-3" title="Link to this heading"></a></h3>
 <p>Returns a version 3 UUID for the given namespace UUID and name. Namespace UUIDs and names can be represented as atoms, lists of characters, or lists of character codes. Name character codes must be bytes.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -495,7 +518,7 @@
 <hr class="docutils" />
 </section>
 <section id="uuid-v4-1">
-<span id="uuid-protocol-0-uuid-v4-1"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">uuid_v4/1</span></code></a><a class="headerlink" href="#uuid-v4-1" title="Link to this heading"></a></h3>
+<span id="uuid-protocol-0-uuid-v4-1"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">uuid_v4/1</span></code></a><a class="headerlink" href="#uuid-v4-1" title="Link to this heading"></a></h3>
 <p>Returns a version 4 UUID.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -516,7 +539,7 @@
 <hr class="docutils" />
 </section>
 <section id="uuid-v5-3">
-<span id="uuid-protocol-0-uuid-v5-3"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">uuid_v5/3</span></code></a><a class="headerlink" href="#uuid-v5-3" title="Link to this heading"></a></h3>
+<span id="uuid-protocol-0-uuid-v5-3"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">uuid_v5/3</span></code></a><a class="headerlink" href="#uuid-v5-3" title="Link to this heading"></a></h3>
 <p>Returns a version 5 UUID for the given namespace UUID and name. Namespace UUIDs and names can be represented as atoms, lists of characters, or lists of character codes. Name character codes must be bytes.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -537,8 +560,8 @@
 <hr class="docutils" />
 </section>
 <section id="uuid-v7-1">
-<span id="uuid-protocol-0-uuid-v7-1"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">uuid_v7/1</span></code></a><a class="headerlink" href="#uuid-v7-1" title="Link to this heading"></a></h3>
-<p>Returns a version 7 UUID.</p>
+<span id="uuid-protocol-0-uuid-v7-1"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">uuid_v7/1</span></code></a><a class="headerlink" href="#uuid-v7-1" title="Link to this heading"></a></h3>
+<p>Returns a version 7 UUID. Portability note: some backends only provide access to local time; use <code class="docutils literal notranslate"><span class="pre">uuid_v7/2</span></code> with an explicit UTC offset when a UTC timestamp is required.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -557,8 +580,29 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="uuid-v7-2">
+<span id="uuid-protocol-0-uuid-v7-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">uuid_v7/2</span></code></a><a class="headerlink" href="#uuid-v7-2" title="Link to this heading"></a></h3>
+<p>Returns a version 7 UUID using the given local UTC offset (<code class="docutils literal notranslate"><span class="pre">Z</span></code> or <code class="docutils literal notranslate"><span class="pre">+HH:MM</span></code>/<code class="docutils literal notranslate"><span class="pre">-HH:MM</span></code>) to convert the backend local time to UTC.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">uuid_v7(Offset,UUID)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">uuid_v7(+atom,--text)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="uuid-null-1">
-<span id="uuid-protocol-0-uuid-null-1"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">uuid_null/1</span></code></a><a class="headerlink" href="#uuid-null-1" title="Link to this heading"></a></h3>
+<span id="uuid-protocol-0-uuid-null-1"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">uuid_null/1</span></code></a><a class="headerlink" href="#uuid-null-1" title="Link to this heading"></a></h3>
 <p>Returns the null UUID. Deprecated. Use <code class="docutils literal notranslate"><span class="pre">uuid_nil/1</span></code> instead.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -579,7 +623,7 @@
 <hr class="docutils" />
 </section>
 <section id="uuid-nil-1">
-<span id="uuid-protocol-0-uuid-nil-1"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">uuid_nil/1</span></code></a><a class="headerlink" href="#uuid-nil-1" title="Link to this heading"></a></h3>
+<span id="uuid-protocol-0-uuid-nil-1"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">uuid_nil/1</span></code></a><a class="headerlink" href="#uuid-nil-1" title="Link to this heading"></a></h3>
 <p>Returns the Nil UUID.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -600,7 +644,7 @@
 <hr class="docutils" />
 </section>
 <section id="uuid-max-1">
-<span id="uuid-protocol-0-uuid-max-1"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">uuid_max/1</span></code></a><a class="headerlink" href="#uuid-max-1" title="Link to this heading"></a></h3>
+<span id="uuid-protocol-0-uuid-max-1"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">uuid_max/1</span></code></a><a class="headerlink" href="#uuid-max-1" title="Link to this heading"></a></h3>
 <p>Returns the Max UUID.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -621,7 +665,7 @@
 <hr class="docutils" />
 </section>
 <section id="random-node-1">
-<span id="uuid-protocol-0-random-node-1"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">random_node/1</span></code></a><a class="headerlink" href="#random-node-1" title="Link to this heading"></a></h3>
+<span id="uuid-protocol-0-random-node-1"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">random_node/1</span></code></a><a class="headerlink" href="#random-node-1" title="Link to this heading"></a></h3>
 <p>Generates a list with six random bytes that can be used in alternative to a MAC address when generating version 1 UUIDs.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

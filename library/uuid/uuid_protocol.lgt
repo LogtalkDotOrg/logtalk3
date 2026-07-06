@@ -22,17 +22,24 @@
 :- protocol(uuid_protocol).
 
 	:- info([
-		version is 0:6:0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-08,
+		date is 2026-07-06,
 		comment is 'Universally unique identifier (UUID) generator protocol.'
 	]).
 
 	:- public(uuid_v1/2).
 	:- mode(uuid_v1(+list(byte), --text), one).
 	:- info(uuid_v1/2, [
-		comment is 'Returns a version 1 UUID for the given MAC address (a list of six bytes). The MAC address can be replaced by a random 6 bytes node identifier as per RFC 4122 when the MAC address is not available or should not be disclosed.',
+		comment is 'Returns a version 1 UUID for the given MAC address (a list of six bytes). The MAC address can be replaced by a random 6 bytes node identifier as per RFC 4122 when the MAC address is not available or should not be disclosed. Portability note: some backends only provide access to local time; use ``uuid_v1/3`` with an explicit UTC offset when a UTC timestamp is required.',
 		argnames is ['MAC', 'UUID']
+	]).
+
+	:- public(uuid_v1/3).
+	:- mode(uuid_v1(+list(byte), +atom, --text), zero_or_one).
+	:- info(uuid_v1/3, [
+		comment is 'Returns a version 1 UUID for the given MAC address (a list of six bytes) using the given local UTC offset (``Z`` or ``+HH:MM``/``-HH:MM``) to convert the backend local time to UTC. The MAC address can be replaced by a random 6 bytes node identifier as per RFC 4122 when the MAC address is not available or should not be disclosed.',
+		argnames is ['MAC', 'Offset', 'UUID']
 	]).
 
 	:- public(uuid_v3/3).
@@ -63,8 +70,15 @@
 	:- public(uuid_v7/1).
 	:- mode(uuid_v7(--text), one).
 	:- info(uuid_v7/1, [
-		comment is 'Returns a version 7 UUID.',
+		comment is 'Returns a version 7 UUID. Portability note: some backends only provide access to local time; use ``uuid_v7/2`` with an explicit UTC offset when a UTC timestamp is required.',
 		argnames is ['UUID']
+	]).
+
+	:- public(uuid_v7/2).
+	:- mode(uuid_v7(+atom, --text), zero_or_one).
+	:- info(uuid_v7/2, [
+		comment is 'Returns a version 7 UUID using the given local UTC offset (``Z`` or ``+HH:MM``/``-HH:MM``) to convert the backend local time to UTC.',
+		argnames is ['Offset', 'UUID']
 	]).
 
 	:- public(uuid_null/1).

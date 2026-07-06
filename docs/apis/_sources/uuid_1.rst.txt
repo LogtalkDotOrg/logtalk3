@@ -17,8 +17,8 @@ Universally unique identifier (UUID) generator.
 |    ``logtalk_load(uuid(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:9:1
-| **Date:** 2026-06-01
+| **Version:** 1:0:0
+| **Date:** 2026-07-06
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -28,6 +28,7 @@ Universally unique identifier (UUID) generator.
 |    ``public`` :ref:`uuid_protocol <uuid_protocol/0>`
 | **Uses:**
 |    :ref:`crypto <crypto/0>`
+|    :ref:`date <date/0>`
 |    :ref:`iso8601 <iso8601/0>`
 |    :ref:`list <list/0>`
 |    :ref:`os <os/0>`
@@ -36,7 +37,7 @@ Universally unique identifier (UUID) generator.
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`uuid_protocol/0::random_node/1`  :ref:`uuid_protocol/0::uuid_max/1`  :ref:`uuid_protocol/0::uuid_nil/1`  :ref:`uuid_protocol/0::uuid_null/1`  :ref:`uuid_protocol/0::uuid_v1/2`  :ref:`uuid_protocol/0::uuid_v3/3`  :ref:`uuid_protocol/0::uuid_v4/1`  :ref:`uuid_protocol/0::uuid_v5/3`  :ref:`uuid_protocol/0::uuid_v7/1`  
+|     :ref:`uuid_protocol/0::random_node/1`  :ref:`uuid_protocol/0::uuid_max/1`  :ref:`uuid_protocol/0::uuid_nil/1`  :ref:`uuid_protocol/0::uuid_null/1`  :ref:`uuid_protocol/0::uuid_v1/2`  :ref:`uuid_protocol/0::uuid_v1/3`  :ref:`uuid_protocol/0::uuid_v3/3`  :ref:`uuid_protocol/0::uuid_v4/1`  :ref:`uuid_protocol/0::uuid_v5/3`  :ref:`uuid_protocol/0::uuid_v7/1`  :ref:`uuid_protocol/0::uuid_v7/2`  
 
 .. contents::
    :local:

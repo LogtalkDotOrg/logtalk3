@@ -22,6 +22,7 @@
 :- initialization((
 	logtalk_load(basic_types(loader)),
 	logtalk_load(crypto(loader)),
+	logtalk_load(dates(loader)),
 	logtalk_load(iso8601(loader)),
 	logtalk_load(hashes(loader)),
 	logtalk_load([uuid_protocol, uuid], [optimize(on)])

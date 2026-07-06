@@ -32,6 +32,12 @@ Some backends provide time stamps with low granularity (e.g., seconds but not
 milliseconds or nanoseconds). To compensate, the generation of version 1 UUIDs
 uses 14 random bits for the clock sequence.
 
+Some backends only provide access to local time. On those backends, the
+`uuid_v1/2` and `uuid_v7/1` predicates preserve the backend behavior and use
+the available local time fields when computing the UUID timestamp. To compute
+UUID timestamps using UTC instead, use the `uuid_v1/3` and `uuid_v7/2`
+predicates and pass the current local UTC offset as `Z`, `+HH:MM`, or `-HH:MM`.
+
 The generation of version 4 and version 7 UUIDs uses the `/dev/urandom` random
 number generator when available. This includes macOS, Linux, *BSD, and other
 POSIX operating-systems. On Windows, a pseudo-random generator is used, but
@@ -95,6 +101,13 @@ Similarly, to get a UUID using a list of character codes representation:
 	| ?- uuid(codes)::uuid_v1([0xf2,0xd1,0x90,0x94,0xdc,0x4b], UUID).
 	UUID = [48,48,52,99,99,54,99,48,45,56,50,99,102,45,49,49,101,98,45,
 	        98,57,102,52,45,102,50,100,49,57,48,57,52,100,99,52,98]
+	yes
+
+When the backend only provides access to local time, use `uuid_v1/3` with the
+current local UTC offset to compute the UUID timestamp using UTC:
+
+	| ?- uuid::uuid_v1([0xf2,0xd1,0x90,0x94,0xdc,0x4b], '+01:00', UUID).
+	UUID = '00a66fc0-82cf-11eb-bc83-f2d19094dc4b'
 	yes
 
 
@@ -200,6 +213,13 @@ Similar to get a UUID using a list of character codes representation:
 	| ?- uuid(codes)::uuid_v7(UUID).
 	UUID = [48,49,56,100,53,102,51,99,45,57,98,53,97,45,55,99,52,101,45,
 	        56,102,50,97,45,49,98,51,99,52,100,53,101,54,102,55,48]
+	yes
+
+When the backend only provides access to local time, use `uuid_v7/2` with the
+current local UTC offset to compute the UUID timestamp using UTC:
+
+	| ?- uuid::uuid_v7('+01:00', UUID).
+	UUID = '018d5f3c-9b5a-7c4e-8f2a-1b3c4d5e6f70'
 	yes
 
 

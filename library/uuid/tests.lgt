@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:5:0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-04-08,
+		date is 2026-07-06,
 		comment is 'Unit tests for the "uuid" library.'
 	]).
 
@@ -33,12 +33,14 @@
 	cover(uuid(_)).
 
 	quick_check(uuid_v1_valid, uuid_v1_valid(+list(byte,6), -chars)).
+	quick_check(uuid_v1_offset_valid, uuid_v1_offset_valid(+list(byte,6), -chars)).
 	quick_check(uuid_v3_valid, uuid_v3_valid(+list(byte), -chars)).
 	quick_check(uuid_v4_valid, uuid_v4_valid(-chars)).
 	:- if(current_prolog_flag(bounded, false)).
 		quick_check(uuid_v5_valid, uuid_v5_valid(+list(byte), -chars)).
 	:- endif.
 	quick_check(uuid_v7_valid, uuid_v7_valid(-chars)).
+	quick_check(uuid_v7_offset_valid, uuid_v7_offset_valid(-chars)).
 
 	test(uuid_nil_atom, true(atom(UUID))) :-
 		uuid(atom)::uuid_nil(UUID).
@@ -58,8 +60,9 @@
 	test(uuid_max_codes, true(type::valid(codes,UUID))) :-
 		uuid(codes)::uuid_max(UUID).
 
-	test(uuid_random_node, true(type::valid(list(byte,6),Node))) :-
-		uuid::random_node(Node).
+	test(uuid_random_node, true((type::valid(list(byte,6),Node), Byte1 /\ 1 =:= 1))) :-
+		uuid::random_node(Node),
+		Node = [Byte1| _].
 
 	test(uuid_v3_valid_generated) :-
 		uuid_v3_valid('', _).
@@ -93,6 +96,13 @@
 
 	uuid_v1_valid(MAC, UUID) :-
 		uuid(chars)::uuid_v1(MAC, UUID),
+		uuid_v1_valid_(UUID).
+
+	uuid_v1_offset_valid(MAC, UUID) :-
+		uuid(chars)::uuid_v1(MAC, 'Z', UUID),
+		uuid_v1_valid_(UUID).
+
+	uuid_v1_valid_(UUID) :-
 		UUID = [
 			_, _, _, _, _, _, _, _, Dash,
 			_, _, _, _, Dash,
@@ -149,6 +159,13 @@
 
 	uuid_v7_valid(UUID) :-
 		uuid(chars)::uuid_v7(UUID),
+		uuid_v7_valid_(UUID).
+
+	uuid_v7_offset_valid(UUID) :-
+		uuid(chars)::uuid_v7('Z', UUID),
+		uuid_v7_valid_(UUID).
+
+	uuid_v7_valid_(UUID) :-
 		UUID = [
 			_, _, _, _, _, _, _, _, Dash,
 			_, _, _, _, Dash,

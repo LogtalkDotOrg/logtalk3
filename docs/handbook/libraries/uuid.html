@@ -380,6 +380,12 @@ material, see e.g.</p>
 <p>Some backends provide time stamps with low granularity (e.g., seconds
 but not milliseconds or nanoseconds). To compensate, the generation of
 version 1 UUIDs uses 14 random bits for the clock sequence.</p>
+<p>Some backends only provide access to local time. On those backends, the
+<code class="docutils literal notranslate"><span class="pre">uuid_v1/2</span></code> and <code class="docutils literal notranslate"><span class="pre">uuid_v7/1</span></code> predicates preserve the backend behavior
+and use the available local time fields when computing the UUID
+timestamp. To compute UUID timestamps using UTC instead, use the
+<code class="docutils literal notranslate"><span class="pre">uuid_v1/3</span></code> and <code class="docutils literal notranslate"><span class="pre">uuid_v7/2</span></code> predicates and pass the current local
+UTC offset as <code class="docutils literal notranslate"><span class="pre">Z</span></code>, <code class="docutils literal notranslate"><span class="pre">+HH:MM</span></code>, or <code class="docutils literal notranslate"><span class="pre">-HH:MM</span></code>.</p>
 <p>The generation of version 4 and version 7 UUIDs uses the
 <code class="docutils literal notranslate"><span class="pre">/dev/urandom</span></code> random number generator when available. This includes
 macOS, Linux, *BSD, and other POSIX operating-systems. On Windows, a
@@ -435,6 +441,14 @@ yes
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> uuid(codes)<span class="o">::</span>uuid_v1([<span class="mh">0xf2</span>,<span class="mh">0xd1</span>,<span class="mh">0x90</span>,<span class="mh">0x94</span>,<span class="mh">0xdc</span>,<span class="mh">0x4b</span>], <span class="nv">UUID</span>).
 <span class="nv">UUID</span> <span class="o">=</span> [<span class="m">48</span>,<span class="m">48</span>,<span class="m">52</span>,<span class="m">99</span>,<span class="m">99</span>,<span class="m">54</span>,<span class="m">99</span>,<span class="m">48</span>,<span class="m">45</span>,<span class="m">56</span>,<span class="m">50</span>,<span class="m">99</span>,<span class="m">102</span>,<span class="m">45</span>,<span class="m">49</span>,<span class="m">49</span>,<span class="m">101</span>,<span class="m">98</span>,<span class="m">45</span>,
         <span class="m">98</span>,<span class="m">57</span>,<span class="m">102</span>,<span class="m">52</span>,<span class="m">45</span>,<span class="m">102</span>,<span class="m">50</span>,<span class="m">100</span>,<span class="m">49</span>,<span class="m">57</span>,<span class="m">48</span>,<span class="m">57</span>,<span class="m">52</span>,<span class="m">100</span>,<span class="m">99</span>,<span class="m">52</span>,<span class="m">98</span>]
+yes
+</pre></div>
+</div>
+<p>When the backend only provides access to local time, use <code class="docutils literal notranslate"><span class="pre">uuid_v1/3</span></code>
+with the current local UTC offset to compute the UUID timestamp using
+UTC:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> uuid<span class="o">::</span>uuid_v1([<span class="mh">0xf2</span>,<span class="mh">0xd1</span>,<span class="mh">0x90</span>,<span class="mh">0x94</span>,<span class="mh">0xdc</span>,<span class="mh">0x4b</span>], <span class="s">&#39;+01:00&#39;</span>, <span class="nv">UUID</span>).
+<span class="nv">UUID</span> <span class="o">=</span> <span class="s">&#39;00a66fc0-82cf-11eb-bc83-f2d19094dc4b&#39;</span>
 yes
 </pre></div>
 </div>
@@ -536,6 +550,14 @@ yes
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> uuid(codes)<span class="o">::</span>uuid_v7(<span class="nv">UUID</span>).
 <span class="nv">UUID</span> <span class="o">=</span> [<span class="m">48</span>,<span class="m">49</span>,<span class="m">56</span>,<span class="m">100</span>,<span class="m">53</span>,<span class="m">102</span>,<span class="m">51</span>,<span class="m">99</span>,<span class="m">45</span>,<span class="m">57</span>,<span class="m">98</span>,<span class="m">53</span>,<span class="m">97</span>,<span class="m">45</span>,<span class="m">55</span>,<span class="m">99</span>,<span class="m">52</span>,<span class="m">101</span>,<span class="m">45</span>,
         <span class="m">56</span>,<span class="m">102</span>,<span class="m">50</span>,<span class="m">97</span>,<span class="m">45</span>,<span class="m">49</span>,<span class="m">98</span>,<span class="m">51</span>,<span class="m">99</span>,<span class="m">52</span>,<span class="m">100</span>,<span class="m">53</span>,<span class="m">101</span>,<span class="m">54</span>,<span class="m">102</span>,<span class="m">55</span>,<span class="m">48</span>]
+yes
+</pre></div>
+</div>
+<p>When the backend only provides access to local time, use <code class="docutils literal notranslate"><span class="pre">uuid_v7/2</span></code>
+with the current local UTC offset to compute the UUID timestamp using
+UTC:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> uuid<span class="o">::</span>uuid_v7(<span class="s">&#39;+01:00&#39;</span>, <span class="nv">UUID</span>).
+<span class="nv">UUID</span> <span class="o">=</span> <span class="s">&#39;018d5f3c-9b5a-7c4e-8f2a-1b3c4d5e6f70&#39;</span>
 yes
 </pre></div>
 </div>

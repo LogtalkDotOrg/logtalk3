@@ -23,9 +23,9 @@
 	implements(uuid_protocol)).
 
 	:- info([
-		version is 0:9:1,
+		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-01,
+		date is 2026-07-06,
 		comment is 'Universally unique identifier (UUID) generator.',
 		parameters is [
 			'Representation' - 'Text representation for the UUID. Possible values are ``atom``, ``chars``, and ``codes``.'
@@ -36,13 +36,27 @@
 	:- uses(crypto, [
 		random_bytes/2
 	]).
+	:- uses(date, [
+		date_time_to_unix/2, local_to_utc/3
+	]).
 
 	uuid_v1([Byte11, Byte12, Byte13, Byte14, Byte15, Byte16], UUID) :-
 		iso8601::date(Start, 1582, 10, 15),
 		iso8601::date(Current, _, _, _),
 		SecondsBetweenEpochs is (Current - Start) * 86400,
 		os::date_time(_, _, _, Hours, Minutes, Seconds, Milliseconds),
-		HundredsOfNanoseconds is (SecondsBetweenEpochs + Hours*3600 + Minutes*60 + Seconds + Milliseconds//1000) * 10000000,
+		HundredsOfNanoseconds is (SecondsBetweenEpochs + Hours*3600 + Minutes*60 + Seconds) * 10000000 + Milliseconds * 10000,
+		uuid_v1_timestamp(HundredsOfNanoseconds, [Byte11, Byte12, Byte13, Byte14, Byte15, Byte16], UUID).
+
+	uuid_v1([Byte11, Byte12, Byte13, Byte14, Byte15, Byte16], Offset, UUID) :-
+		os::date_time(Year, Month, Day, Hours, Minutes, Seconds, Milliseconds),
+		local_to_utc(date_time(Year, Month, Day, Hours, Minutes, Seconds), Offset, UTCDateTime),
+		date_time_to_unix(UTCDateTime, UnixTime),
+		date_time_to_unix(date_time(1582, 10, 15, 0, 0, 0), GregorianEpochUnixTime),
+		HundredsOfNanoseconds is (UnixTime - GregorianEpochUnixTime) * 10000000 + Milliseconds * 10000,
+		uuid_v1_timestamp(HundredsOfNanoseconds, [Byte11, Byte12, Byte13, Byte14, Byte15, Byte16], UUID).
+
+	uuid_v1_timestamp(HundredsOfNanoseconds, [Byte11, Byte12, Byte13, Byte14, Byte15, Byte16], UUID) :-
 		TimeLow is HundredsOfNanoseconds /\ 0xffffffff,
 		TimeMid is (HundredsOfNanoseconds >> 32) /\ 0xffff,
 		TimeHiAndVersion is ((HundredsOfNanoseconds >> 48) /\ 0x0fff) \/ 0b0001000000000000,
@@ -100,6 +114,13 @@
 
 	:- endif.
 
+	uuid_v7(Offset, UUID) :-
+		os::date_time(Year, Month, Day, Hours, Minutes, Seconds, Milliseconds),
+		local_to_utc(date_time(Year, Month, Day, Hours, Minutes, Seconds), Offset, UTCDateTime),
+		date_time_to_unix(UTCDateTime, UnixTime),
+		UnixTimestampMs is UnixTime * 1000 + Milliseconds,
+		uuid_v7_timestamp(UnixTimestampMs, UUID).
+
 	uuid_v7(UUID) :-
 		% get Unix timestamp in milliseconds
 		os::date_time(Year, Month, Day, Hours, Minutes, Seconds, Milliseconds),
@@ -109,6 +130,9 @@
 		DaysSinceEpoch is Current - UnixEpoch,
 		% calculate total milliseconds since Unix epoch
 		UnixTimestampMs is DaysSinceEpoch * 86400000 + Hours * 3600000 + Minutes * 60000 + Seconds * 1000 + Milliseconds,
+		uuid_v7_timestamp(UnixTimestampMs, UUID).
+
+	uuid_v7_timestamp(UnixTimestampMs, UUID) :-
 		% extract 6 bytes from the 48-bit timestamp (big-endian)
 		Byte1 is (UnixTimestampMs >> 40) /\ 0xff,
 		Byte2 is (UnixTimestampMs >> 32) /\ 0xff,
@@ -200,8 +224,9 @@
 	uuid_max(chars, ['F','F','F','F','F','F','F','F',-,'F','F','F','F',-,'F','F','F','F',-,'F','F','F','F',-,'F','F','F','F','F','F','F','F','F','F','F','F']).
 	uuid_max(codes, [70,70,70,70,70,70,70,70,45,70,70,70,70,45,70,70,70,70,45,70,70,70,70,45,70,70,70,70,70,70,70,70,70,70,70,70]).
 
-	random_node(Node) :-
-		random_bytes(6, Node).
+	random_node([Byte1| Bytes]) :-
+		random_bytes(6, [RandomByte1| Bytes]),
+		Byte1 is RandomByte1 \/ 0x01.
 
 	% auxiliary predicates
 

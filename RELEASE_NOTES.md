@@ -93,6 +93,10 @@ process input and output streams type to `binary` or `text`.
 * ADDED: New `url` library `parse/3`, `reference_kind/2`, `equivalent/2`,
 `relativize/3`, and `resolve/3` predicates.
 
+* ADDED: New `uuid` library `uuid_v1/3` and `uuid_v7/2` predicates that take
+a time zone offset to workaround some backends only providing access to local
+time.
+
 * IMPROVED: The `hashes` library implementation of the SHA1-1, SHA-256, and
 SHA-512/256 hash functions.
 
@@ -133,6 +137,10 @@ Prolog backend by being less strict when writing messages.
 
 * FIXED: The `ulid` library to encode 80 bits of randomness and to reject
 timestamps outside the 48-bit range required by the ULID specification.
+
+* FIXED: Standard compliance issues in the `uuid` library: version 1 UUIDs now
+preserve available millisecond precision in the timestamp field and random node
+identifiers now set the multicast bit as required by RFC 4122.
 
 * FIXED: The `timeout` library tests for Trealla Prolog.
 
