@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2024-03-16,
+		date is 2024-07-06,
 		comment is 'Unit tests for the "ulid" library.'
 	]).
 
@@ -64,11 +64,24 @@
 		ulid::generate(1684316883417, ULID),
 		ulid::timestamp(ULID, Timestamp).
 
+	test(ulid_timestamp_2_spec_example, true(Timestamp == 1469922850259)) :-
+		ulid::timestamp('01ARZ3NDEKTSV4RRFFQ69G5FAV', Timestamp).
+
+	test(ulid_generate_2_max_timestamp, true((Timestamp == 281474976710655, sub_atom(ULID, 0, 10, _, '7ZZZZZZZZZ')))) :-
+		ulid::generate(281474976710655, ULID),
+		ulid::timestamp(ULID, Timestamp).
+
+	test(ulid_generate_2_error_timestamp_overflow, error(domain_error(ulid_timestamp, 281474976710656))) :-
+		ulid::generate(281474976710656, _).
+
 	% generate/8 and timestamp/8 type tests
 
 	test(ulid_generate_8_roundtrip, true(dt(Year,Month,Day,Hours,Minutes,Seconds,Milliseconds) == dt(2023,5,17,16,23,38,591))) :-
 		ulid::generate(2023, 5, 17, 16, 23, 38, 591, ULID),
 		ulid::timestamp(ULID, Year, Month, Day, Hours, Minutes, Seconds, Milliseconds).
+
+	test(ulid_generate_8_error_millisecond_overflow, error(domain_error(ulid_millisecond, 1000))) :-
+		ulid::generate(2023, 5, 17, 16, 23, 38, 1000, _).
 
 	% ulid(Representation) type tests
 

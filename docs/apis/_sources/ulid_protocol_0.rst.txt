@@ -14,8 +14,8 @@ Universally Unique Lexicographically Sortable Identifier (ULID) generator protoc
 |    ``logtalk_load(ulid(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2023-05-17
+| **Version:** 1:1:0
+| **Date:** 2026-07-06
 
 | **Compilation flags:**
 |    ``static``
@@ -52,7 +52,13 @@ Generates a new ULID.
 | **Template:**
 |    ``generate(ULID)``
 | **Mode and number of proofs:**
-|    ``generate(--ulid)`` - ``one``
+|    ``generate(--ulid)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The representation parameter is a variable:
+|        ``instantiation_error``
+|    The representation parameter is not a variable but also neither ``atom``, ``chars``, nor ``codes``:
+|        ``domain_error(ulid_representation,Representation)``
 
 
 ------------
@@ -71,7 +77,19 @@ Generates a new ULID from a timestamp (number of milliseconds since the Unix epo
 | **Template:**
 |    ``generate(Milliseconds,ULID)``
 | **Mode and number of proofs:**
-|    ``generate(+integer,--ulid)`` - ``one``
+|    ``generate(+integer,--ulid)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The representation parameter is a variable:
+|        ``instantiation_error``
+|    The representation parameter is not a variable but also neither ``atom``, ``chars``, nor ``codes``:
+|        ``domain_error(ulid_representation,Representation)``
+|    ``Milliseconds`` is a variable:
+|        ``instantiation_error``
+|    ``Milliseconds`` is neither a variable nor an integer:
+|        ``type_error(integer,Milliseconds)``
+|    ``Milliseconds`` is outside the 48-bit range required by the ULID specification:
+|        ``domain_error(ulid_timestamp,Milliseconds)``
 
 
 ------------
@@ -90,7 +108,21 @@ Generates a new ULID from a timestamp discrete components.
 | **Template:**
 |    ``generate(Year,Month,Day,Hours,Minutes,Seconds,Milliseconds,ULID)``
 | **Mode and number of proofs:**
-|    ``generate(+integer,+integer,+integer,+integer,+integer,+integer,+integer,--ulid)`` - ``one``
+|    ``generate(+integer,+integer,+integer,+integer,+integer,+integer,+integer,--ulid)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The representation parameter is a variable:
+|        ``instantiation_error``
+|    The representation parameter is not a variable but also neither ``atom``, ``chars``, nor ``codes``:
+|        ``domain_error(ulid_representation,Representation)``
+|    ``Milliseconds`` is a variable:
+|        ``instantiation_error``
+|    ``Milliseconds`` is neither a variable nor an integer:
+|        ``type_error(integer,Milliseconds)``
+|    ``Milliseconds`` is an integer but outside the 0..999 range:
+|        ``domain_error(ulid_millisecond,Milliseconds)``
+|    The timestamp is outside the 48-bit range required by the ULID specification:
+|        ``domain_error(ulid_timestamp,Timestamp)``
 
 
 ------------
@@ -109,7 +141,23 @@ Returns the given ULID timestamp (number of milliseconds since the Unix epoch: 0
 | **Template:**
 |    ``timestamp(ULID,Milliseconds)``
 | **Mode and number of proofs:**
-|    ``timestamp(++ulid,-integer)`` - ``one``
+|    ``timestamp(++ulid,-integer)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The representation parameter is a variable:
+|        ``instantiation_error``
+|    The representation parameter is not a variable but also neither ``atom``, ``chars``, nor ``codes``:
+|        ``domain_error(ulid_representation,Representation)``
+|    ``ULID`` is a variable:
+|        ``instantiation_error``
+|    ``ULID`` is neither a variable nor an atom when using the ``atom`` representation:
+|        ``type_error(atom,ULID)``
+|    ``ULID`` is neither a variable nor a list of characters when using the ``chars`` representation:
+|        ``type_error(chars,ULID)``
+|    ``ULID`` is neither a variable nor a list of character codes when using the ``codes`` representation:
+|        ``type_error(codes,ULID)``
+|    ``ULID`` is not a valid ULID:
+|        ``domain_error(ulid,ULID)``
 
 
 ------------
@@ -128,7 +176,23 @@ Decodes a ULID into its timestamp discrete components.
 | **Template:**
 |    ``timestamp(ULID,Year,Month,Day,Hours,Minutes,Seconds,Milliseconds)``
 | **Mode and number of proofs:**
-|    ``timestamp(++ulid,-integer,-integer,-integer,-integer,-integer,-integer,-integer)`` - ``one``
+|    ``timestamp(++ulid,-integer,-integer,-integer,-integer,-integer,-integer,-integer)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The representation parameter is a variable:
+|        ``instantiation_error``
+|    The representation parameter is not a variable but also neither ``atom``, ``chars``, nor ``codes``:
+|        ``domain_error(ulid_representation,Representation)``
+|    ``ULID`` is a variable:
+|        ``instantiation_error``
+|    ``ULID`` is neither a variable nor an atom when using the ``atom`` representation:
+|        ``type_error(atom,ULID)``
+|    ``ULID`` is neither a variable nor a list of characters when using the ``chars`` representation:
+|        ``type_error(chars,ULID)``
+|    ``ULID`` is neither a variable nor a list of character codes when using the ``codes`` representation:
+|        ``type_error(codes,ULID)``
+|    ``ULID`` is not a valid ULID:
+|        ``domain_error(ulid,ULID)``
 
 
 ------------

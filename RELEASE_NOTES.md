@@ -131,6 +131,9 @@ Prolog backend by being less strict when writing messages.
 
 * FIXED: A `linda` library timing issue at server shutdown.
 
+* FIXED: The `ulid` library to encode 80 bits of randomness and to reject
+timestamps outside the 48-bit range required by the ULID specification.
+
 * FIXED: The `timeout` library tests for Trealla Prolog.
 
 Tools

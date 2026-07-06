@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-06-01,
+		date is 2026-07-06,
 		comment is 'Universally Unique Lexicographically Sortable Identifier (ULID) generator.',
 		parameters is [
 			'Representation' - 'Text representation for the ULID. Possible values are ``atom``, ``chars``, and ``codes``.'
@@ -36,58 +36,94 @@
 	:- uses(crypto, [
 		random_bytes/2
 	]).
+	:- uses(date, [
+		date_time_to_unix/2, unix_to_date_time/2
+	]).
 
 	generate(ULID) :-
-		iso8601::date(Start, 1970, 1, 1),
-		iso8601::date(Current, _, _, _),
-		SecondsBetweenEpochs is (Current - Start) * 86400,
-		os::date_time(_, _, _, Hours, Minutes, Seconds, Milliseconds),
-		TotalMilliseconds is (SecondsBetweenEpochs + Hours*3600 + Minutes*60 + Seconds) * 1000 + Milliseconds,
+		os::date_time(Year, Month, Day, Hours, Minutes, Seconds, Milliseconds),
+		date_time_to_unix(date_time(Year, Month, Day, Hours, Minutes, Seconds), UnixTime),
+		TotalMilliseconds is UnixTime * 1000 + Milliseconds,
 		generate(TotalMilliseconds, ULID).
 
 	generate(Milliseconds, ULID) :-
-		random_bytes(16, Bytes),
-		encode_time(10, Milliseconds, Tail, Codes),
-		encode_random(Bytes, Tail),
+		context(Context),
+		check_representation(Context),
+		check_timestamp(Context, Milliseconds),
+		random_bytes(10, Bytes),
+		bytes_integer(Bytes, 0, Randomness),
+		encode_base32(10, Milliseconds, Tail, Codes),
+		encode_base32(16, Randomness, [], Tail),
 		codes_to_ulid(_Representation_, Codes, ULID).
 
 	generate(Year, Month, Day, Hours, Minutes, Seconds, Milliseconds, ULID) :-
-		iso8601::date(Start, 1970, 1, 1),
-		iso8601::date(Current, Year, Month, Day),
-		SecondsBetweenEpochs is (Current - Start) * 86400,
-		TotalMilliseconds is (SecondsBetweenEpochs + Hours*3600 + Minutes*60 + Seconds) * 1000 + Milliseconds,
+		context(Context),
+		check_millisecond_component(Context, Milliseconds),
+		date_time_to_unix(date_time(Year, Month, Day, Hours, Minutes, Seconds), UnixTime),
+		TotalMilliseconds is UnixTime * 1000 + Milliseconds,
 		generate(TotalMilliseconds, ULID).
 
 	timestamp(ULID, Milliseconds) :-
+		context(Context),
+		check_representation(Context),
+		type::check(ulid(_Representation_), ULID),
 		ulid_to_codes(_Representation_, ULID, Codes),
 		decode_time(Codes, Milliseconds).
 
 	timestamp(ULID, Year, Month, Day, Hours, Minutes, Seconds, Milliseconds) :-
 		timestamp(ULID, TotalMilliseconds),
 		TotalSeconds is TotalMilliseconds // 1000,
-		iso8601::date(Start, 1970, 1, 1),
-		Current is Start + TotalSeconds // 86400,
-		iso8601::date(Current, Year, Month, Day),
-		RemainingSeconds is TotalSeconds - (Current - Start) * 86400,
-		Hours is RemainingSeconds // 3600,
-		Minutes is (RemainingSeconds - Hours * 3600) // 60,
-		Seconds is RemainingSeconds - Hours * 3600 - Minutes * 60,
+		unix_to_date_time(TotalSeconds, date_time(Year, Month, Day, Hours, Minutes, Seconds)),
 		Milliseconds is TotalMilliseconds rem 1000.
 
-	encode_time(0, _, Tail, Tail) :-
+	check_representation(Context) :-
+		(	var(_Representation_) ->
+			throw(error(instantiation_error, Context))
+		;	_Representation_ == atom ->
+			true
+		;	_Representation_ == chars ->
+			true
+		;	_Representation_ == codes ->
+			true
+		;	throw(error(domain_error(ulid_representation, _Representation_), Context))
+		).
+
+	check_timestamp(Context, Milliseconds) :-
+		(	var(Milliseconds) ->
+			throw(error(instantiation_error, Context))
+		;	integer(Milliseconds) ->
+			MaxTimestamp is (1 << 48) - 1,
+			(	Milliseconds >= 0, Milliseconds =< MaxTimestamp ->
+				true
+			;	throw(error(domain_error(ulid_timestamp, Milliseconds), Context))
+			)
+		;	throw(error(type_error(integer, Milliseconds), Context))
+		).
+
+	check_millisecond_component(Context, Milliseconds) :-
+		(	var(Milliseconds) ->
+			throw(error(instantiation_error, Context))
+		;	integer(Milliseconds) ->
+			(	Milliseconds >= 0, Milliseconds =< 999 ->
+				true
+			;	throw(error(domain_error(ulid_millisecond, Milliseconds), Context))
+			)
+		;	throw(error(type_error(integer, Milliseconds), Context))
+		).
+
+	bytes_integer([], Integer, Integer).
+	bytes_integer([Byte| Bytes], Integer0, Integer) :-
+		Integer1 is Integer0 * 256 + Byte,
+		bytes_integer(Bytes, Integer1, Integer).
+
+	encode_base32(0, _, Tail, Tail) :-
 		!.
-	encode_time(N, Time0, Tail, Codes) :-
+	encode_base32(N, Time0, Tail, Codes) :-
 		Index is Time0 rem 32,
 		code(Index, Code),
 		Time1 is Time0 div 32,
 		M is N - 1,
-		encode_time(M, Time1, [Code| Tail], Codes).
-
-	encode_random([], []).
-	encode_random([Byte| Bytes], [Code| Codes]) :-
-		Index is floor((Byte / 255) * 31),
-		code(Index, Code),
-		encode_random(Bytes, Codes).
+		encode_base32(M, Time1, [Code| Tail], Codes).
 
 	decode_time([Code1, Code2, Code3, Code4, Code5, Code6, Code7, Code8, Code9, Code10| _], Milliseconds) :-
 		code(Index1, Code1),

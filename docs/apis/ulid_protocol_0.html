@@ -404,8 +404,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2023-05-17</div>
+<div class="line"><strong>Version:</strong> 1:1:0</div>
+<div class="line"><strong>Date:</strong> 2026-07-06</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -465,7 +465,20 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">generate(--ulid)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">generate(--ulid)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The representation parameter is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">The representation parameter is not a variable but also neither <code class="docutils literal notranslate"><span class="pre">atom</span></code>, <code class="docutils literal notranslate"><span class="pre">chars</span></code>, nor <code class="docutils literal notranslate"><span class="pre">codes</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ulid_representation,Representation)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -486,7 +499,32 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">generate(+integer,--ulid)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">generate(+integer,--ulid)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The representation parameter is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">The representation parameter is not a variable but also neither <code class="docutils literal notranslate"><span class="pre">atom</span></code>, <code class="docutils literal notranslate"><span class="pre">chars</span></code>, nor <code class="docutils literal notranslate"><span class="pre">codes</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ulid_representation,Representation)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Milliseconds</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Milliseconds</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Milliseconds)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Milliseconds</span></code> is outside the 48-bit range required by the ULID specification:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ulid_timestamp,Milliseconds)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -507,7 +545,36 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">generate(+integer,+integer,+integer,+integer,+integer,+integer,+integer,--ulid)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">generate(+integer,+integer,+integer,+integer,+integer,+integer,+integer,--ulid)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The representation parameter is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">The representation parameter is not a variable but also neither <code class="docutils literal notranslate"><span class="pre">atom</span></code>, <code class="docutils literal notranslate"><span class="pre">chars</span></code>, nor <code class="docutils literal notranslate"><span class="pre">codes</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ulid_representation,Representation)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Milliseconds</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Milliseconds</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Milliseconds)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Milliseconds</span></code> is an integer but outside the 0..999 range:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ulid_millisecond,Milliseconds)</span></code></div>
+</div>
+<div class="line">The timestamp is outside the 48-bit range required by the ULID specification:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ulid_timestamp,Timestamp)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -528,7 +595,40 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">timestamp(++ulid,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">timestamp(++ulid,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The representation parameter is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">The representation parameter is not a variable but also neither <code class="docutils literal notranslate"><span class="pre">atom</span></code>, <code class="docutils literal notranslate"><span class="pre">chars</span></code>, nor <code class="docutils literal notranslate"><span class="pre">codes</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ulid_representation,Representation)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ULID</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ULID</span></code> is neither a variable nor an atom when using the <code class="docutils literal notranslate"><span class="pre">atom</span></code> representation:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,ULID)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ULID</span></code> is neither a variable nor a list of characters when using the <code class="docutils literal notranslate"><span class="pre">chars</span></code> representation:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(chars,ULID)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ULID</span></code> is neither a variable nor a list of character codes when using the <code class="docutils literal notranslate"><span class="pre">codes</span></code> representation:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(codes,ULID)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ULID</span></code> is not a valid ULID:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ulid,ULID)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -549,7 +649,40 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">timestamp(++ulid,-integer,-integer,-integer,-integer,-integer,-integer,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">timestamp(++ulid,-integer,-integer,-integer,-integer,-integer,-integer,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The representation parameter is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">The representation parameter is not a variable but also neither <code class="docutils literal notranslate"><span class="pre">atom</span></code>, <code class="docutils literal notranslate"><span class="pre">chars</span></code>, nor <code class="docutils literal notranslate"><span class="pre">codes</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ulid_representation,Representation)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ULID</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ULID</span></code> is neither a variable nor an atom when using the <code class="docutils literal notranslate"><span class="pre">atom</span></code> representation:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,ULID)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ULID</span></code> is neither a variable nor a list of characters when using the <code class="docutils literal notranslate"><span class="pre">chars</span></code> representation:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(chars,ULID)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ULID</span></code> is neither a variable nor a list of character codes when using the <code class="docutils literal notranslate"><span class="pre">codes</span></code> representation:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(codes,ULID)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ULID</span></code> is not a valid ULID:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(ulid,ULID)</span></code></div>
+</div>
 </div>
 </div>
 </section>
