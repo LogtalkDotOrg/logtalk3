@@ -617,6 +617,59 @@
 		request(get, origin('/'), http(1, 1), [], empty, [], Request),
 		http_static_files::serve('/', Request, Root, [fallback_file(spa(''))], _Response).
 
+	test(http_static_files_serve_5_19, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'hello.txt', File),
+		write_file_atom(File, 'hello'),
+		request(get, origin('/hello.txt'), http(1, 1), [origin-'https://app.example.com'], empty, [], Request),
+		http_static_files::serve('hello.txt', Request, Root, [cors([allowed_origins(any)])], Response),
+		status(Response, status(200, 'OK')),
+		header(Response, access_control_allow_origin, '*'),
+		body(Response, content('text/plain', file(File, 0, 5))).
+
+	test(http_static_files_serve_5_20, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'cors.txt', File),
+		write_file_atom(File, 'hello'),
+		request(get, origin('/cors.txt'), http(1, 1), [origin-'https://app.example.com'], empty, [], Request),
+		http_static_files::serve('cors.txt', Request, Root, [cors([allowed_origins(['https://app.example.com']), allow_credentials(true)])], Response),
+		status(Response, status(200, 'OK')),
+		header(Response, access_control_allow_origin, 'https://app.example.com'),
+		header(Response, access_control_allow_credentials, 'true'),
+		header(Response, vary, 'Origin'),
+		body(Response, content('text/plain', file(File, 0, 5))).
+
+	test(http_static_files_serve_5_21, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'hello.txt', File),
+		write_file_atom(File, 'hello'),
+		request(options, origin('/hello.txt'), http(1, 1), [origin-'https://app.example.com', access_control_request_method-'HEAD'], empty, [], Request),
+		http_static_files::serve('hello.txt', Request, Root, [cors([allowed_origins(any), allowed_methods(any)])], Response),
+		status(Response, status(204, 'No Content')),
+		header(Response, allow, 'GET, HEAD, OPTIONS'),
+		header(Response, access_control_allow_origin, '*'),
+		header(Response, access_control_allow_methods, 'GET, HEAD'),
+		header(Response, vary, 'Access-Control-Request-Method'),
+		body(Response, empty).
+
+	test(http_static_files_serve_5_22, deterministic) :-
+		ensure_docroot(Root),
+		request(get, origin('/missing.txt'), http(1, 1), [origin-'https://app.example.com'], empty, [], Request),
+		http_static_files::serve('missing.txt', Request, Root, [cors([allowed_origins(any)])], Response),
+		status(Response, status(404, 'Not Found')),
+		header(Response, access_control_allow_origin, '*'),
+		body(Response, content('text/plain', text('Not Found'))).
+
+	test(http_static_files_serve_5_23, error(domain_error(option, cors(_)))) :-
+		ensure_docroot(Root),
+		request(get, origin('/'), http(1, 1), [], empty, [], Request),
+		http_static_files::serve('/', Request, Root, [cors(_)], _Response).
+
+	test(http_static_files_serve_5_24, error(domain_error(option, allowed_origins(42)))) :-
+		ensure_docroot(Root),
+		request(get, origin('/'), http(1, 1), [], empty, [], Request),
+		http_static_files::serve('/', Request, Root, [cors([allowed_origins(42)])], _Response).
+
 	test(http_static_files_serve_5_09, error(domain_error(option, content_disposition(attachment('bad/name.txt'))))) :-
 		ensure_docroot(Root),
 		request(get, origin('/'), http(1, 1), [], empty, [], Request),

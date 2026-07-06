@@ -83,14 +83,15 @@
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
 		( 	options_method(Request) ->
-			options_response(Path, Request, DocumentRoot, Options, Response)
+			options_response(Path, Request, DocumentRoot, Options, Response0)
 		;	^^supported_method(Request) ->
 			(	resolve_resource(Path, Request, DocumentRoot, Options, Resource) ->
-				resource_response(Request, Resource, Response)
-			;	not_found_response(Request, Response)
+				resource_response(Request, Resource, Response0)
+			;	not_found_response(Request, Response0)
 			)
-		;	method_not_allowed_response(Request, Response)
-		).
+		;	method_not_allowed_response(Request, Response0)
+		),
+		cors_response(Request, Options, Response0, Response).
 
 	options_method(Request) :-
 		http_core::method(Request, Method),
@@ -105,6 +106,9 @@
 	valid_option(fallback_file(Fallback)) :-
 		ground(Fallback),
 		valid_fallback_file(Fallback).
+	valid_option(cors(Policy)) :-
+		ground(Policy),
+		valid_cors_policy(Policy).
 	valid_option(cache_control(Directives)) :-
 		valid_cache_control_directives(Directives).
 	valid_option(expires(Value)) :-
@@ -120,6 +124,7 @@
 	default_option(mime_types_strict(false)).
 	default_option(mime_type_overrides([])).
 	default_option(fallback_file(none)).
+	default_option(cors([])).
 	default_option(cache_control([])).
 	default_option(expires(none)).
 	default_option(content_disposition(none)).
@@ -216,6 +221,40 @@
 	status_resource(status(200, 'OK'), Resource, Resource) :-
 		!.
 	status_resource(Status, Resource, status_resource(Status, Resource)).
+
+	cors_response(Request0, Options, Response0, Response) :-
+		^^option(cors(Policy0), Options),
+		Policy0 \== [],
+		!,
+		static_cors_policy(Policy0, Policy),
+		static_cors_request(Request0, Request),
+		http_cors::add_response_headers(Request, Response0, Response, Policy).
+	cors_response(_Request, _Options, Response, Response).
+
+	static_cors_policy(Policy, Policy) :-
+		cors_allowed_methods_option(Policy),
+		!.
+	static_cors_policy(Policy, [allowed_methods([get, head])| Policy]).
+
+	cors_allowed_methods_option([allowed_methods(_)| _]) :-
+		!.
+	cors_allowed_methods_option([_| Options]) :-
+		cors_allowed_methods_option(Options).
+
+	static_cors_request(request(Method, Target, Version, Headers, Body, Properties0), request(Method, Target, Version, Headers, Body, [effective_methods([get, head, options])| Properties])) :-
+		remove_property(Properties0, effective_methods, Properties).
+
+	remove_property([], _Functor, []).
+	remove_property([Property| Properties], Functor, FilteredProperties) :-
+		( 	property_functor(Property, Functor) ->
+			FilteredProperties = RestFilteredProperties
+		;	FilteredProperties = [Property| RestFilteredProperties]
+		),
+		remove_property(Properties, Functor, RestFilteredProperties).
+
+	property_functor(Property, Functor) :-
+		nonvar(Property),
+		functor(Property, Functor, 1).
 
 	selected_representation_file(Request, TargetFile, File, VaryAcceptEncoding) :-
 		negotiable_resource_file(TargetFile),
@@ -938,6 +977,11 @@
 		atom(Path),
 		Path \== '',
 		catch(^^validate_relative_path(Path), _, fail).
+
+	valid_cors_policy([]).
+	valid_cors_policy([Option| Options]) :-
+		compound(Option),
+		valid_cors_policy(Options).
 
 	valid_mime_type_overrides(Overrides) :-
 		ground(Overrides),

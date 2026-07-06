@@ -71,6 +71,7 @@ Supported options are:
 - `mime_types_strict(Boolean)`
 - `mime_type_overrides(Overrides)`
 - `fallback_file(Fallback)`
+- `cors(Policy)`
 - `cache_control(Directives)`
 - `expires(Expires)`
 - `content_disposition(Disposition)`
@@ -81,6 +82,7 @@ Default options are:
 - `mime_types_strict(false)`
 - `mime_type_overrides([])`
 - `fallback_file(none)`
+- `cors([])`
 - `cache_control([])`
 - `expires(none)`
 - `content_disposition(none)`
@@ -114,6 +116,7 @@ Supported features:
 - `Vary: Accept-Encoding` responses when negotiated precompressed variants exist
 - MIME type and content-encoding guessing
 - per-extension and per-path MIME type overrides on top of `mime_types`
+- optional CORS response decoration using the `http_cors` library
 - configurable `Cache-Control` and `Expires` response headers, also shared by
     `OPTIONS` responses when configured
 - configurable `Content-Disposition` response headers for inline or attachment
@@ -142,6 +145,11 @@ Cache-policy configuration uses these option values:
     `200 OK` status for SPA client-side routes; fallback files are only
     considered after the requested path has resolved safely inside the document
     root
+- `cors([])` to omit CORS response decoration, or `cors(Policy)` to decorate
+    generated responses using `http_cors::add_response_headers/4`; when the
+    policy omits `allowed_methods/1`, static files provide the default CORS
+    method policy `allowed_methods([get, head])`, and `allowed_methods(any)`
+    expands from the effective methods `[get, head, options]`
 - `content_disposition(none)` to omit the header, `content_disposition(inline)`
     or `content_disposition(attachment)` for disposition-only values, and
     `content_disposition(inline(Filename))` or

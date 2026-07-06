@@ -411,6 +411,7 @@ predicates:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">mime_types_strict(Boolean)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">mime_type_overrides(Overrides)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">fallback_file(Fallback)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cors(Policy)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">cache_control(Directives)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">expires(Expires)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">content_disposition(Disposition)</span></code></p></li>
@@ -421,6 +422,7 @@ predicates:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">mime_types_strict(false)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">mime_type_overrides([])</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">fallback_file(none)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cors([])</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">cache_control([])</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">expires(none)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">content_disposition(none)</span></code></p></li>
@@ -461,6 +463,7 @@ variants exist</p></li>
 <li><p>MIME type and content-encoding guessing</p></li>
 <li><p>per-extension and per-path MIME type overrides on top of
 <code class="docutils literal notranslate"><span class="pre">mime_types</span></code></p></li>
+<li><p>optional CORS response decoration using the <code class="docutils literal notranslate"><span class="pre">http_cors</span></code> library</p></li>
 <li><p>configurable <code class="docutils literal notranslate"><span class="pre">Cache-Control</span></code> and <code class="docutils literal notranslate"><span class="pre">Expires</span></code> response headers, also
 shared by <code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code> responses when configured</p></li>
 <li><p>configurable <code class="docutils literal notranslate"><span class="pre">Content-Disposition</span></code> response headers for inline or
@@ -491,6 +494,12 @@ file with <code class="docutils literal notranslate"><span class="pre">404</span
 with <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code> status for SPA client-side routes; fallback files are
 only considered after the requested path has resolved safely inside
 the document root</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cors([])</span></code> to omit CORS response decoration, or <code class="docutils literal notranslate"><span class="pre">cors(Policy)</span></code> to
+decorate generated responses using
+<code class="docutils literal notranslate"><span class="pre">http_cors::add_response_headers/4</span></code>; when the policy omits
+<code class="docutils literal notranslate"><span class="pre">allowed_methods/1</span></code>, static files provide the default CORS method
+policy <code class="docutils literal notranslate"><span class="pre">allowed_methods([get,</span> <span class="pre">head])</span></code>, and <code class="docutils literal notranslate"><span class="pre">allowed_methods(any)</span></code>
+expands from the effective methods <code class="docutils literal notranslate"><span class="pre">[get,</span> <span class="pre">head,</span> <span class="pre">options]</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">content_disposition(none)</span></code> to omit the header,
 <code class="docutils literal notranslate"><span class="pre">content_disposition(inline)</span></code> or <code class="docutils literal notranslate"><span class="pre">content_disposition(attachment)</span></code>
 for disposition-only values, and

@@ -27,6 +27,7 @@
 	logtalk_load(mime_types(loader)),
 	logtalk_load(dates(loader)),
 	logtalk_load(http_core(loader)),
+	logtalk_load(http_cors(loader)),
 	logtalk_load(http_static_files, [debug(on), source_data(on)]),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(tests, [hook(lgtunit)]),
