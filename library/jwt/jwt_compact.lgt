@@ -13,7 +13,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-07-06,
 		comment is 'JWT compact serialization parsing and generation helpers.'
 	]).
 
@@ -112,22 +112,22 @@
 
 	decode(Token, Header, Claims) :-
 		segments(Token, HeaderSegment, PayloadSegment, _SignatureSegment, _SigningInput),
-		json_segment(HeaderSegment, Header),
-		json_segment(PayloadSegment, Claims).
+		json_object_segment(HeaderSegment, Header),
+		json_object_segment(PayloadSegment, Claims).
 
 	decode(Token, Header, Claims, Signature, SigningInput) :-
 		segments(Token, HeaderSegment, PayloadSegment, SignatureSegment, SigningInput),
-		json_segment(HeaderSegment, Header),
-		json_segment(PayloadSegment, Claims),
+		json_object_segment(HeaderSegment, Header),
+		json_object_segment(PayloadSegment, Claims),
 		^^base64url_atom_bytes(SignatureSegment, Signature).
 
 	header(Token, Header) :-
 		segments(Token, HeaderSegment, _PayloadSegment, _SignatureSegment, _SigningInput),
-		json_segment(HeaderSegment, Header).
+		json_object_segment(HeaderSegment, Header).
 
 	claims(Token, Claims) :-
 		segments(Token, _HeaderSegment, PayloadSegment, _SignatureSegment, _SigningInput),
-		json_segment(PayloadSegment, Claims).
+		json_object_segment(PayloadSegment, Claims).
 
 	segments(Token, HeaderSegment, PayloadSegment, SignatureSegment, SigningInput) :-
 		(	var(Token) ->
@@ -143,7 +143,7 @@
 		).
 
 	signing_input(Header, Payload, HeaderSegment, SigningInput) :-
-		json_segment(HeaderSegment, Header),
+		json_object_segment(HeaderSegment, Header),
 		json_segment(PayloadSegment, Payload),
 		atomic_list_concat([HeaderSegment, PayloadSegment], '.', SigningInput).
 
@@ -161,5 +161,9 @@
 		json::generate(atom(Atom), JSON),
 		atom_codes(Atom, Bytes),
 		^^base64url_atom_bytes(Segment, Bytes).
+
+	json_object_segment(Segment, JSON) :-
+		json_segment(Segment, JSON),
+		^^json_object(JSON).
 
 :- end_object.

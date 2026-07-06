@@ -13,7 +13,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-07-06,
 		comment is 'JWS signing input construction and signature algorithm dispatch.'
 	]).
 
@@ -83,6 +83,7 @@
 		).
 
 	sign(Header, Claims, Key, Token, Options) :-
+		^^json_object(Claims),
 		sign_payload(Header, Claims, Key, Token, Options).
 
 	sign_payload(Header, Payload, Key, Token, Options) :-
@@ -90,6 +91,7 @@
 		^^merge_options(Options, MergedOptions),
 		jwt_jwa::header_algorithm(Header, Algorithm),
 		jwt_jwa::allowed_algorithm(Algorithm, MergedOptions),
+		jwt_jwa::validate_header(Header),
 		jwt_compact::signing_input(Header, Payload, _HeaderSegment, SigningInput),
 		signature(Algorithm, SigningInput, Key, Signature, MergedOptions),
 		jwt_compact::compact(_HeaderSegment, SigningInput, Signature, Token).

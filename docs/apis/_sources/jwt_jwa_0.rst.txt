@@ -15,7 +15,7 @@ JSON Web Algorithm metadata and header helpers.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-26
+| **Date:** 2026-07-06
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -77,6 +77,29 @@ Extracts the optional key identifier from a JWT header.
 |    ``header_key_id(Header,KeyId)``
 | **Mode and number of proofs:**
 |    ``header_key_id(+term,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: validate_header/1
+.. _jwt_jwa/0::validate_header/1:
+
+``validate_header/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Validates a JWT header object and rejects unsupported critical header parameters.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate_header(Header)``
+| **Mode and number of proofs:**
+|    ``validate_header(+term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Header`` is not a JSON object, contains duplicate member names, or contains unsupported critical header parameters:
+|        ``domain_error(jwt_header,Header)``
 
 
 ------------

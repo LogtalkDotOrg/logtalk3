@@ -13,7 +13,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-07-06,
 		comment is 'JSON Web Key normalization and key material helpers.'
 	]).
 
@@ -52,28 +52,66 @@
 	symmetric_key_bytes(Key, Bytes) :-
 		atom(Key),
 		!,
-		atom_codes(Key, Bytes).
+		atom_codes(Key, Bytes),
+		valid_symmetric_key_bytes(Key, Bytes).
 	symmetric_key_bytes(bytes(Bytes), Bytes) :-
-		list::valid(Bytes),
+		byte_list(Bytes),
+		valid_symmetric_key_bytes(bytes(Bytes), Bytes),
 		!.
 	symmetric_key_bytes(Key, Bytes) :-
 		^^json_member(kty, Key, 'oct'),
 		^^json_member(k, Key, Encoded),
 		atom(Encoded),
 		!,
-		^^base64url_atom_bytes(Encoded, Bytes).
+		^^base64url_atom_bytes(Encoded, Bytes),
+		valid_symmetric_key_bytes(Key, Bytes).
 	symmetric_key_bytes(Key, _) :-
 		domain_error(jwt_symmetric_key, Key).
 
-	compatible_key(Key, Algorithm) :-
-		jwt_jwa::key_type(Algorithm, KeyType),
-		^^json_member(kty, Key, KeyType),
+	compatible_key(Key, 'HS256') :-
+		( 	atom(Key),
+			atom_codes(Key, Bytes),
+			symmetric_key_bytes_length(Bytes)
+		; 	Key = bytes(Bytes),
+			byte_list(Bytes),
+			symmetric_key_bytes_length(Bytes)
+		; 	^^json_member(kty, Key, 'oct'),
+			^^json_member(k, Key, Encoded),
+			atom(Encoded),
+			catch((^^base64url_atom_bytes(Encoded, Bytes), symmetric_key_bytes_length(Bytes)), _, fail)
+		),
 		!.
-	compatible_key(Key, Algorithm) :-
-		Algorithm == 'HS256',
-		(	atom(Key)
-		;	Key = bytes(Bytes),
-			list::valid(Bytes)
-		).
+	compatible_key(Key, 'RS256') :-
+		^^json_member(kty, Key, 'RSA'),
+		^^json_member(n, Key, N),
+		atom(N),
+		^^json_member(e, Key, E),
+		atom(E),
+		!.
+	compatible_key(Key, 'ES256') :-
+		^^json_member(kty, Key, 'EC'),
+		^^json_member(crv, Key, 'P-256'),
+		^^json_member(x, Key, X),
+		atom(X),
+		^^json_member(y, Key, Y),
+		atom(Y),
+		!.
+
+	byte_list([]).
+	byte_list([Byte| Bytes]) :-
+		integer(Byte),
+		0 =< Byte,
+		Byte =< 255,
+		byte_list(Bytes).
+
+	valid_symmetric_key_bytes(_Key, Bytes) :-
+		symmetric_key_bytes_length(Bytes),
+		!.
+	valid_symmetric_key_bytes(Key, _Bytes) :-
+		domain_error(jwt_symmetric_key, Key).
+
+	symmetric_key_bytes_length(Bytes) :-
+		length(Bytes, Length),
+		Length >= 32.
 
 :- end_object.

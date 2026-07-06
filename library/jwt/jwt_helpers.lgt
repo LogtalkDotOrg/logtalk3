@@ -13,7 +13,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-07-06,
 		comment is 'Internal shared helpers for the jwt library.'
 	]).
 
@@ -36,6 +36,16 @@
 	:- info(json_object_pairs/2, [
 		comment is 'Extracts the key-value pairs from a JSON object term.',
 		argnames is ['Object', 'Pairs']
+	]).
+
+	:- protected(json_object/1).
+	:- mode(json_object(+term), one_or_error).
+	:- info(json_object/1, [
+		comment is 'Validates that a JSON term is an object without duplicate member names.',
+		argnames is ['Object'],
+		exceptions is [
+			'``Object`` is not a JSON object or contains duplicate member names' - domain_error(jwt_json_object, 'Object')
+		]
 	]).
 
 	:- protected(pair_key_value/3).
@@ -82,7 +92,7 @@
 	]).
 
 	:- uses(list, [
-		memberchk/2
+		member/2
 	]).
 
 	valid_option(allow_algorithms(Algorithms)) :-
@@ -121,6 +131,13 @@
 		json_object_pairs(Object, Pairs),
 		json_pair_member(Pairs, Key, Value).
 
+	json_object(Object) :-
+		( 	json_object_pairs(Object, Pairs),
+			list::valid(Pairs) ->
+			unique_pair_keys(Pairs, [], Object)
+		; 	domain_error(jwt_json_object, Object)
+		).
+
 	json_member_default(Key, Object, Default, Value) :-
 		(	json_member(Key, Object, Value0) ->
 			Value = Value0
@@ -151,6 +168,16 @@
 	pair_key_value(Key=Value, Key, Value) :-
 		!.
 	pair_key_value(':'(Key, Value), Key, Value).
+
+	unique_pair_keys([], _, _).
+	unique_pair_keys([Pair| Pairs], Seen, Object) :-
+		( 	pair_key_value(Pair, Key, _) ->
+			( 	member(Key, Seen) ->
+				domain_error(jwt_json_object, Object)
+			; 	unique_pair_keys(Pairs, [Key| Seen], Object)
+			)
+		; 	domain_error(jwt_json_object, Object)
+		).
 
 	base64url_atom_bytes(Atom, Bytes) :-
 		atom(Atom),

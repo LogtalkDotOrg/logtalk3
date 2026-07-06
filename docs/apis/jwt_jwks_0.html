@@ -411,7 +411,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-26</div>
+<div class="line"><strong>Date:</strong> 2026-07-06</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -450,11 +450,12 @@
 <li><p><a class="reference internal" href="#validate-1" id="id2"><code class="docutils literal notranslate"><span class="pre">validate/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#select-key-3" id="id3"><code class="docutils literal notranslate"><span class="pre">select_key/3</span></code></a></p></li>
 <li><p><a class="reference internal" href="#select-key-4" id="id4"><code class="docutils literal notranslate"><span class="pre">select_key/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#select-keys-4" id="id5"><code class="docutils literal notranslate"><span class="pre">select_keys/4</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id5">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id6">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id7">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id6">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id7">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id8">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -548,6 +549,64 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">select_key(+term,+term,-term,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">JWKSet</span></code> is not a JSON Web Key Set with a <code class="docutils literal notranslate"><span class="pre">keys</span></code> list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(jwt_jwks,JWKSet)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Header</span></code> does not contain a valid <code class="docutils literal notranslate"><span class="pre">alg</span></code> member:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(jwt_header,Header)</span></code></div>
+</div>
+<div class="line">The JWT algorithm is unsupported or disallowed:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(jwt_algorithm,Algorithm)</span></code></div>
+</div>
+<div class="line">No compatible key exists for <code class="docutils literal notranslate"><span class="pre">Header</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(jwt_jwk,Header)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="select-keys-4">
+<span id="jwt-jwks-0-select-keys-4"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">select_keys/4</span></code></a><a class="headerlink" href="#select-keys-4" title="Link to this heading"></a></h3>
+<p>Selects all matching verification keys from a JWK Set for a JWT header and options.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">select_keys(JWKSet,Header,Keys,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">select_keys(+term,+term,-list(term),+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">

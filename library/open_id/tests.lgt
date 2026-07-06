@@ -183,7 +183,7 @@
 		open_id_der::public_key_pem(Key, PEM),
 		atom_concat('-----BEGIN PUBLIC KEY-----\n', BodyAndFooter, PEM),
 		atom_concat(Body, '-----END PUBLIC KEY-----\n', BodyAndFooter),
-		atom_concat('MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDJgOdXn8PlD6K5io8hW/tEFuPY', _, Body).
+		atom_concat('MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzuxofQx+whGosAeo0SD9', _, Body).
 
 	test(open_id_der_02, deterministic) :-
 		ECKey = {kty-'EC', crv-'P-256', x-'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA', y-'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'},
@@ -207,14 +207,14 @@
 		^^assertion(Header == {alg-'RS256', kid-'1'}),
 		^^assertion(Claims == {
 			iss-'https://issuer.example',
-			sub-subject,
 			aud-'client',
 			azp-'client',
 			nonce-'nonce',
 			exp-4102444800,
 			nbf-1700000000,
 			iat-1700000000,
-			custom-'ok'
+			custom-'ok',
+			sub-subject
 		}).
 
 	test(open_id_jwt_claims_01, error(domain_error(open_id_jwt_algorithm, none))) :-
@@ -230,14 +230,14 @@
 		open_id::verify_id_token(Token, Provider, JWKSet, Claims, [expected_audience('client'), expected_nonce('nonce'), required_claims([custom]), now(1700000001)]),
 		^^assertion(Claims == {
 			iss-'https://issuer.example',
-			sub-subject,
 			aud-'client',
 			azp-'client',
 			nonce-'nonce',
 			exp-4102444800,
 			nbf-1700000000,
 			iat-1700000000,
-			custom-'ok'
+			custom-'ok',
+			sub-subject
 		}).
 
 	test(open_id_jwt_verify_02, deterministic) :-
@@ -247,14 +247,14 @@
 		open_id::verify_id_token(Token, Provider, JWKSet, Claims, [expected_audience('client'), expected_nonce('nonce'), required_claims([custom]), now(1700000001)]),
 		^^assertion(Claims == {
 			iss-'https://issuer.example',
-			sub-subject,
 			aud-['client', 'other'],
 			azp-'client',
 			nonce-'nonce',
 			exp-4102444800,
 			nbf-1700000000,
 			iat-1700000000,
-			custom-'ok'
+			custom-'ok',
+			sub-subject
 		}).
 
 	test(open_id_jwt_verify_03, error(domain_error(open_id_claims, missing(sub)))) :-
@@ -437,14 +437,14 @@
 			),
 			Claims == {
 				iss-'https://issuer.example',
-				sub-subject,
 				aud-'client',
 				azp-'client',
 				nonce-'nonce',
 				exp-4102444800,
 				nbf-1700000000,
 				iat-1700000000,
-				custom-'ok'
+				custom-'ok',
+				sub-subject
 			},
 			open_id_test_handler::reset_jwks_sequence.
 
@@ -521,7 +521,7 @@
 		kid-'1',
 		alg-'RS256',
 		use-sig,
-		n-'yYDnV5_D5Q-iuYqPIVv7RBbj2LpsvoH6tSh0Wrnk_61BtC-IfGRAIafRn7l-wzcXHsOHMaGvM4NkvYCaFK8fjBhb8fHS7ExXT6rkqP0fB7ngv6bfSOZBrQ_nrKBXJN_FPbjoezPvyNxAES8oLQuQD680aGvrbgi_SQkI1-Km_5U',
+		n-'zuxofQx-whGosAeo0SD9BUVEKoglhV9gZGZwI7VlguUL-RPGgBWrsJchWjubbOlVvXmRc4kC02yOgff0i0nubqyOEnk0YIxL6mw-Egb4TkwowBatzdfE38BgPmc9GKpm4Gws_70LLcn79Bfyx509jU50AJ7UOEuSBSeeW-a5xX1DMZ46wXKa1jbNk3JvilRyIGMUPrFo-EEVDxJ_OoAEUY9bkKqhiBHjvzz-XMJbNttJ6K4vV6mf0a6kxeH9fqjBY1UnDzfYyYR-47rheDjv60VleiYzvkeQl04vDbfgHTwg6VAlG8RMeEkPnbiFqhNVAH2rtbuNnsJkd71HyAY8dw',
 		e-'AQAB'
 	}).
 
@@ -530,7 +530,7 @@
 		kid-KeyId,
 		alg-'RS256',
 		use-sig,
-		n-'yYDnV5_D5Q-iuYqPIVv7RBbj2LpsvoH6tSh0Wrnk_61BtC-IfGRAIafRn7l-wzcXHsOHMaGvM4NkvYCaFK8fjBhb8fHS7ExXT6rkqP0fB7ngv6bfSOZBrQ_nrKBXJN_FPbjoezPvyNxAES8oLQuQD680aGvrbgi_SQkI1-Km_5U',
+		n-'zuxofQx-whGosAeo0SD9BUVEKoglhV9gZGZwI7VlguUL-RPGgBWrsJchWjubbOlVvXmRc4kC02yOgff0i0nubqyOEnk0YIxL6mw-Egb4TkwowBatzdfE38BgPmc9GKpm4Gws_70LLcn79Bfyx509jU50AJ7UOEuSBSeeW-a5xX1DMZ46wXKa1jbNk3JvilRyIGMUPrFo-EEVDxJ_OoAEUY9bkKqhiBHjvzz-XMJbNttJ6K4vV6mf0a6kxeH9fqjBY1UnDzfYyYR-47rheDjv60VleiYzvkeQl04vDbfgHTwg6VAlG8RMeEkPnbiFqhNVAH2rtbuNnsJkd71HyAY8dw',
 		e-'AQAB'
 	}).
 
@@ -540,24 +540,27 @@
 	rsa_public_pem(PEM) :-
 		atomic_list_concat([
 			'-----BEGIN PUBLIC KEY-----\n',
-			'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDJgOdXn8PlD6K5io8hW/tEFuPY\n',
-			'umy+gfq1KHRaueT/rUG0L4h8ZEAhp9GfuX7DNxcew4cxoa8zg2S9gJoUrx+MGFvx\n',
-			'8dLsTFdPquSo/R8HueC/pt9I5kGtD+esoFck38U9uOh7M+/I3EARLygtC5APrzRo\n',
-			'a+tuCL9JCQjX4qb/lQIDAQAB\n',
+			'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzuxofQx+whGosAeo0SD9\n',
+			'BUVEKoglhV9gZGZwI7VlguUL+RPGgBWrsJchWjubbOlVvXmRc4kC02yOgff0i0nu\n',
+			'bqyOEnk0YIxL6mw+Egb4TkwowBatzdfE38BgPmc9GKpm4Gws/70LLcn79Bfyx509\n',
+			'jU50AJ7UOEuSBSeeW+a5xX1DMZ46wXKa1jbNk3JvilRyIGMUPrFo+EEVDxJ/OoAE\n',
+			'UY9bkKqhiBHjvzz+XMJbNttJ6K4vV6mf0a6kxeH9fqjBY1UnDzfYyYR+47rheDjv\n',
+			'60VleiYzvkeQl04vDbfgHTwg6VAlG8RMeEkPnbiFqhNVAH2rtbuNnsJkd71HyAY8\n',
+			'dwIDAQAB\n',
 			'-----END PUBLIC KEY-----\n'
 		], PEM).
 
-	rs256_token('eyJhbGciOiJSUzI1NiIsImtpZCI6IjEifQ.eyJpc3MiOiJodHRwczovL2lzc3Vlci5leGFtcGxlIiwic3ViIjoic3ViamVjdCIsImF1ZCI6ImNsaWVudCIsImF6cCI6ImNsaWVudCIsIm5vbmNlIjoibm9uY2UiLCJleHAiOjQxMDI0NDQ4MDAsIm5iZiI6MTcwMDAwMDAwMCwiaWF0IjoxNzAwMDAwMDAwLCJjdXN0b20iOiJvayJ9.QZ3-wOGWubxi5tIFtZKB0XtBRg5BfNzw4cf9bD7DlXMI-oFy7YtoLQ78xzj1ynWF4B8wlY1pCAEaSpknDm4wKnUxkVtrVVnoiEV5IVpkPorPrltGYqmbpr6k8FHJ7NHasKyS1PWTiTHxtCs377nXIYkifUQJXYHRwdvikuODJgM').
+	rs256_token('eyJhbGciOiJSUzI1NiIsImtpZCI6IjEifQ.eyJpc3MiOiJodHRwczovL2lzc3Vlci5leGFtcGxlIiwiYXVkIjoiY2xpZW50IiwiYXpwIjoiY2xpZW50Iiwibm9uY2UiOiJub25jZSIsImV4cCI6NDEwMjQ0NDgwMCwibmJmIjoxNzAwMDAwMDAwLCJpYXQiOjE3MDAwMDAwMDAsImN1c3RvbSI6Im9rIiwic3ViIjoic3ViamVjdCJ9.pcCYUqt6wdrfGyAJqPOMK9ztPQHLeY8ibSzCAzBPUIR--83payXy0n6EWtvcdROf_Ajnp20hZ8o5K8DdJIrIqczJcB5gYEwsLviXXq1TwAlPQlHNloiJwjgJ-g3E7xSJr81W03FZUQkHdnzDmX6KQa7EoCUGM9rd335QC0uMmct73MNiVU0q6Mq976OaGZMmqt3KfKDkUecJQ5et8RAyJN3yr9FqmqM7cydEY8x67EMdQpq-VRMRbtS9fnr_JvoUfEG39qkCiZy-8TjGIuRFBueaBY6InfGD3cU-U7e9VB8-hVpDlZ5v2OCT5tTgkN0WwBqG7aFrPYf785fCKrY4wQ').
 
-	rs256_token_list_aud('eyJhbGciOiJSUzI1NiIsImtpZCI6IjEifQ.eyJpc3MiOiJodHRwczovL2lzc3Vlci5leGFtcGxlIiwic3ViIjoic3ViamVjdCIsImF1ZCI6WyJjbGllbnQiLCJvdGhlciJdLCJhenAiOiJjbGllbnQiLCJub25jZSI6Im5vbmNlIiwiZXhwIjo0MTAyNDQ0ODAwLCJuYmYiOjE3MDAwMDAwMDAsImlhdCI6MTcwMDAwMDAwMCwiY3VzdG9tIjoib2sifQ.Oi5O2myJW0LdkINKCj1tww4iyffU4X_Br61Qeu0RQctdaVCJOFcgnknlKf6lgfboEAH-zzvE1EiAUsB331pZvlmuu7Bp4zOjSiymFd7JcSbRvh8Bx4cGanxYvyMCcjA8gNBsJGqXxIVmE4sDKcB-917rAClILR_KQQyjMb1bPYw').
+	rs256_token_list_aud('eyJhbGciOiJSUzI1NiIsImtpZCI6IjEifQ.eyJpc3MiOiJodHRwczovL2lzc3Vlci5leGFtcGxlIiwiYXVkIjpbImNsaWVudCIsIm90aGVyIl0sImF6cCI6ImNsaWVudCIsIm5vbmNlIjoibm9uY2UiLCJleHAiOjQxMDI0NDQ4MDAsIm5iZiI6MTcwMDAwMDAwMCwiaWF0IjoxNzAwMDAwMDAwLCJjdXN0b20iOiJvayIsInN1YiI6InN1YmplY3QifQ.EasklgA9a3YWYrLV88eC6VOrxqanWEDGWFQ0cYqXym3IK4bfE4ZB9-i-Qlw7KsqFZ3UG64ZLMJlLTn4XBrXnIgY1nQ1FsUyrwZky52A85JV1UHnQGLtciFAmKkJeZopcGHVB7he3rS4DHCpYjNi1GAKG9QARH4qjaJu50ekGKs0SZKhfOg7aq-tu7YZY0yvdjcU3zk62FALYIL_wd1-De_1QHw0YEo5omdGGa0ZlLs4L4sWcLvnfXnGXzNnsQgZkPZIjhfvZOJBG_s11H2qodt6XU5Xv3RIX3WfD0wCQScmOFkXcxyeMrkWwGpQt5W7oXyEc_9Ji_32fazI7nvtTyA').
 
-	rs256_token_missing_sub('eyJhbGciOiJSUzI1NiIsImtpZCI6IjEifQ.eyJpc3MiOiJodHRwczovL2lzc3Vlci5leGFtcGxlIiwiYXVkIjoiY2xpZW50IiwiYXpwIjoiY2xpZW50Iiwibm9uY2UiOiJub25jZSIsImV4cCI6NDEwMjQ0NDgwMCwibmJmIjoxNzAwMDAwMDAwLCJpYXQiOjE3MDAwMDAwMDAsImN1c3RvbSI6Im9rIn0.Av5P6n3kYdQarXLWwLLgfwzgaz9RNtD6_6Q6jv25GPjUbfqxoqg1HutMhXHOquGprUzUFzzifWy5KwCcK9rxM2o8csC6falyGXLz5Q5Llrui8Ax28EzYdW3ItFZ8KOcYVVP5_8JZYdUdJUwAmLMa6DAY1u6FVFPm4T3NyDMQQvI').
+	rs256_token_missing_sub('eyJhbGciOiJSUzI1NiIsImtpZCI6IjEifQ.eyJpc3MiOiJodHRwczovL2lzc3Vlci5leGFtcGxlIiwiYXVkIjoiY2xpZW50IiwiYXpwIjoiY2xpZW50Iiwibm9uY2UiOiJub25jZSIsImV4cCI6NDEwMjQ0NDgwMCwibmJmIjoxNzAwMDAwMDAwLCJpYXQiOjE3MDAwMDAwMDAsImN1c3RvbSI6Im9rIn0.OXskQlx3GGf9CKBJSCmsUR25VYYs8bj0v0UEVejkLdJ33QmnowrkF4CMNcqpehZ_x8G7Mdad974ko4y3WmTCAs8cLuNMhal59Gu4HSnkn8Qo0JSbU4Bh6BO2ZqSDILFDEMRtEQdmr4QtvAeRMhMou2aLSGepGAn-Kh_Zc30lLUqc1-Uz5rlGdsp0pvncublIp1bOFWF3_k2qDUZACcWZcD_4qurRLaJ2MtZdrvikPsWjZKpcigy7PAR5Eq_3AvKMf2D3YZQ6Mi8HKeO-igfeSgFqw3eSrKcc8tCiWYrJKfRHF9blW1Ho_Lsbc2WlSnDDgNvrcZWUppUCwvN7SaMuiA').
 
-	rs256_token_missing_iat('eyJhbGciOiJSUzI1NiIsImtpZCI6IjEifQ.eyJpc3MiOiJodHRwczovL2lzc3Vlci5leGFtcGxlIiwic3ViIjoic3ViamVjdCIsImF1ZCI6ImNsaWVudCIsImF6cCI6ImNsaWVudCIsIm5vbmNlIjoibm9uY2UiLCJleHAiOjQxMDI0NDQ4MDAsIm5iZiI6MTcwMDAwMDAwMCwiY3VzdG9tIjoib2sifQ.awmvs135R7FK-B6JHh-ePX61jiBod7n8AkEVzkCHt7KrdHc7v0Vh9QZ685Z-lWJgV60hZSxS1Ds5n5CNc2lwsY8Bm3FNG_WhiFRe3e-bnO1uiSTFiHUwT_Emg_TFFDJ_iUcx1hVpZKVZ_BzkUCMLL_6sgHgtrLJRBJbrr2bkqIk').
+	rs256_token_missing_iat('eyJhbGciOiJSUzI1NiIsImtpZCI6IjEifQ.eyJpc3MiOiJodHRwczovL2lzc3Vlci5leGFtcGxlIiwiYXVkIjoiY2xpZW50IiwiYXpwIjoiY2xpZW50Iiwibm9uY2UiOiJub25jZSIsImV4cCI6NDEwMjQ0NDgwMCwibmJmIjoxNzAwMDAwMDAwLCJjdXN0b20iOiJvayIsInN1YiI6InN1YmplY3QifQ.dDQRQLb3ItYrn6T6e88f25p6JZz2ORzcTuH23d9YMdz63bYechIRmZEgAKCdwptrMaH0c1hCSMwxOqSrg-vRhm9lDXhjeReUcAJxHXerBsap9MkoBbVcMq8O9LuOSaM__xKRjoENQZA3wju0F3iINliK6zal05N1dZZlf2Z9asI_QFUCjiAaqz8-ijcPyzFes1EutTXoZL5sHpcnZfweuocj4n5iVQZJHo3-wAkfEQrr0iPx3o_TXo7yGBaxK8wGf-CaSMr8A_0t6_c_BxwsJe23X-DYJWMc3IRiMC9-OmeG6Jfpqw7G3Z5F8fezPQ1bH_3Dl7va3DWzVOYSIJti2w').
 
-	rs256_token_future_iat('eyJhbGciOiJSUzI1NiIsImtpZCI6IjEifQ.eyJpc3MiOiJodHRwczovL2lzc3Vlci5leGFtcGxlIiwic3ViIjoic3ViamVjdCIsImF1ZCI6ImNsaWVudCIsImF6cCI6ImNsaWVudCIsIm5vbmNlIjoibm9uY2UiLCJleHAiOjQxMDI0NDQ4MDAsIm5iZiI6MTcwMDAwMDAwMCwiaWF0IjoxNzAwMDAwOTAwLCJjdXN0b20iOiJvayJ9.naXqYmkml1F1h2tN_3BPAdF8eLXsDrrBzaiqQgEFf9E0qhvt-SV3ZW3aK1X_qFyYof1a5RseAhUM0Ds2X4IEnT6Wpqrgn79Hai-3X-h89yjqVH4hRP33VVWrHXuweKG9q7MrVL6I1lDr_n5BJOIYnpFy43R-95Hg_cUZ5q1hHo8').
+	rs256_token_future_iat('eyJhbGciOiJSUzI1NiIsImtpZCI6IjEifQ.eyJpc3MiOiJodHRwczovL2lzc3Vlci5leGFtcGxlIiwiYXVkIjoiY2xpZW50IiwiYXpwIjoiY2xpZW50Iiwibm9uY2UiOiJub25jZSIsImV4cCI6NDEwMjQ0NDgwMCwibmJmIjoxNzAwMDAwMDAwLCJpYXQiOjE3MDAwMDA5MDAsImN1c3RvbSI6Im9rIiwic3ViIjoic3ViamVjdCJ9.qauuW0gtBpM4xOH_0hZMHNMKUOtSm6RXMuSVFA8SjFOZd4sX16aNf_rVMmJVT7lZ3PjjHNTca0Fsz3RLE2f51jxRXWzzyN9uitvBCEdoMVRAfwz63K__zCTK9TRb6kYbXFCUMs-kQbUTcVBJ65zH3hakDOrwYpBg-KxtiGVW8RggxqTpnfM-4niPzpiGtJlZWnT7qJILNFTq45Rar7Iz1ejcoSlbn1X7y55h7UxfGIxsoXzX3_ybuB5cs7aMKO_sNc5tLOnbvko2qbdKB_wRUvOwLTW8NK-RWyIlirLFH-4IMO-deHBULeaAtPKZFDGP5vmb0cI-Vpc5xTFfkGdKLg').
 
-	rs256_token_rotated_kid('eyJhbGciOiJSUzI1NiIsImtpZCI6IjIifQ.eyJpc3MiOiJodHRwczovL2lzc3Vlci5leGFtcGxlIiwic3ViIjoic3ViamVjdCIsImF1ZCI6ImNsaWVudCIsImF6cCI6ImNsaWVudCIsIm5vbmNlIjoibm9uY2UiLCJleHAiOjQxMDI0NDQ4MDAsIm5iZiI6MTcwMDAwMDAwMCwiaWF0IjoxNzAwMDAwMDAwLCJjdXN0b20iOiJvayJ9.r8SpzJwJgnha49WZxv5XvjA_DoFsZGoObLHDjEm6A5TIdy_CZCaeTOWdwpepYRju8BhZdrKpVdqLuJCOVfOhOAi5ho0Fj6U_jMhWQYlI_gi5e3Oqew4UC_6IfYlGHYWr6Ljc5ypCXqm4UKBiZVsC5XAgKxfUWRkYN3laagOPj6w').
+	rs256_token_rotated_kid('eyJhbGciOiJSUzI1NiIsImtpZCI6IjIifQ.eyJpc3MiOiJodHRwczovL2lzc3Vlci5leGFtcGxlIiwiYXVkIjoiY2xpZW50IiwiYXpwIjoiY2xpZW50Iiwibm9uY2UiOiJub25jZSIsImV4cCI6NDEwMjQ0NDgwMCwibmJmIjoxNzAwMDAwMDAwLCJpYXQiOjE3MDAwMDAwMDAsImN1c3RvbSI6Im9rIiwic3ViIjoic3ViamVjdCJ9.FhvoWwbJTqnLzEil4h0sRu3ywbUcWyuGhqbQV4MKQSIrYA3akcCMFgGbTDFWkYXth7yRyfa56brjbM5sualRhbAs2HoeWGxzA5g3Jhx0S5Le1K-zWJMjeOaYf1jhFG0Y86wU8cy-dSBYUfswxEv_texXKdPUne07bEsPV0HRFbjFCPjFePcmqLXdjFpmgW1WlFInb7hizVbYZhQBnlb6uucLjECUFV-4D39PdtVrcTDm8rw_qNwEEVYBmYbY7vbHzApv-8LaMRhsu_YdS07ZRfdEorPlRWohpnltwXhPpA8gXYoPfoqHZ1yB0WgQrw6g0AgspgmX7_C3ZcpNJCm8iw').
 
 	jwt_signing_input_signature(Token, SigningInput, Signature) :-
 		atom::split(Token, '.', [Header, Payload, SignatureBase64URL]),

@@ -13,7 +13,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-07-06,
 		comment is 'JSON Web Key Set validation and key selection helpers.'
 	]).
 
@@ -57,6 +57,23 @@
 		]
 	]).
 
+	:- public(select_keys/4).
+	:- mode(select_keys(+term, +term, -list(term), +list(compound)), one_or_error).
+	:- info(select_keys/4, [
+		comment is 'Selects all matching verification keys from a JWK Set for a JWT header and options.',
+		argnames is ['JWKSet', 'Header', 'Keys', 'Options'],
+		exceptions is [
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
+			'``JWKSet`` is not a JSON Web Key Set with a ``keys`` list' - domain_error(jwt_jwks, 'JWKSet'),
+			'``Header`` does not contain a valid ``alg`` member' - domain_error(jwt_header, 'Header'),
+			'The JWT algorithm is unsupported or disallowed' - domain_error(jwt_algorithm, 'Algorithm'),
+			'No compatible key exists for ``Header``' - existence_error(jwt_jwk, 'Header')
+		]
+	]).
+
 	:- uses(list, [
 		member/2
 	]).
@@ -68,18 +85,22 @@
 		select_key(JWKSet, Header, Key, []).
 
 	select_key(JWKSet, Header, Key, Options) :-
+		select_keys(JWKSet, Header, [Key| _], Options).
+
+	select_keys(JWKSet, Header, Keys, Options) :-
 		^^check_options(Options),
 		^^merge_options(Options, MergedOptions),
-		jwks_keys(JWKSet, Keys),
+		jwks_keys(JWKSet, JWKSetKeys),
 		jwt_jwa::header_algorithm(Header, Algorithm),
 		jwt_jwa::allowed_algorithm(Algorithm, MergedOptions),
 		(	jwt_jwa::header_key_id(Header, KeyId) ->
 			true
 		;	KeyId = none
 		),
-		select_matching_key(Keys, Algorithm, KeyId, Key),
+		select_matching_keys(JWKSetKeys, Algorithm, KeyId, Keys),
+		Keys = [_| _],
 		!.
-	select_key(_JWKSet, Header, _Key, _Options) :-
+	select_keys(_JWKSet, Header, _Keys, _Options) :-
 		existence_error(jwt_jwk, Header).
 
 	jwks_keys(JWKSet, Keys) :-
@@ -89,11 +110,13 @@
 		;	domain_error(jwt_jwks, JWKSet)
 		).
 
-	select_matching_key([Key| _], Algorithm, KeyId, Key) :-
-		matching_key(Key, Algorithm, KeyId),
-		!.
-	select_matching_key([_| Keys], Algorithm, KeyId, Key) :-
-		select_matching_key(Keys, Algorithm, KeyId, Key).
+	select_matching_keys([], _Algorithm, _KeyId, []).
+	select_matching_keys([Key| Keys], Algorithm, KeyId, MatchingKeys) :-
+		( 	matching_key(Key, Algorithm, KeyId) ->
+			MatchingKeys = [Key| OtherMatchingKeys]
+		; 	MatchingKeys = OtherMatchingKeys
+		),
+		select_matching_keys(Keys, Algorithm, KeyId, OtherMatchingKeys).
 
 	matching_key(Key, Algorithm, KeyId) :-
 		jwt_jwk::compatible_key(Key, Algorithm),

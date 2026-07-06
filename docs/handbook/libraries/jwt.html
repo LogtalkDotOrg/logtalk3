@@ -208,6 +208,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#requirements">Requirements</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#validation-policy">Validation policy</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#basic-usage">Basic usage</a></li>
 </ul>
 </li>
@@ -417,6 +419,84 @@ arithmetic.</p>
 </pre></div>
 </div>
 </section>
+<section id="options">
+<h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
+<p>The facade predicates that take an options list validate the following
+option terms. Each option only affects predicates that perform the
+corresponding operation.</p>
+<p>Signature and algorithm options:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">allow_algorithms(Algorithms)</span></code> - List of allowed JOSE <code class="docutils literal notranslate"><span class="pre">alg</span></code> atom
+values for verification and signing. The default is
+<code class="docutils literal notranslate"><span class="pre">['HS256',</span> <span class="pre">'RS256',</span> <span class="pre">'ES256']</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">algorithm(Algorithm)</span></code> - Requires one exact JOSE <code class="docutils literal notranslate"><span class="pre">alg</span></code> atom value.
+When used with <code class="docutils literal notranslate"><span class="pre">allow_algorithms/1</span></code>, both checks must pass.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">allow_none(Boolean)</span></code> - Allows or rejects the unsecured <code class="docutils literal notranslate"><span class="pre">none</span></code>
+algorithm. The default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+</ul>
+<p>Claim validation options:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">allow_missing_exp(Boolean)</span></code> - Allows tokens without an <code class="docutils literal notranslate"><span class="pre">exp</span></code>
+claim when set to <code class="docutils literal notranslate"><span class="pre">true</span></code>. The default is <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">clock_skew(Seconds)</span></code> - Non-negative numeric leeway, in seconds, for
+time claim validation. The default is <code class="docutils literal notranslate"><span class="pre">60</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">now(Timestamp)</span></code> - Numeric timestamp to use instead of the current
+operating system time when validating time claims.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_age(Seconds)</span></code> - Non-negative maximum age, in seconds, for
+policies that validate an <code class="docutils literal notranslate"><span class="pre">iat</span></code> claim as <code class="docutils literal notranslate"><span class="pre">time(issued_at)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">required_claims(Names)</span></code> - List of claim-name atoms that must be
+present when validating claims. The default is <code class="docutils literal notranslate"><span class="pre">[]</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">claim_policy(Policy)</span></code> - Claim policy list applied by <code class="docutils literal notranslate"><span class="pre">verify/4</span></code>
+and <code class="docutils literal notranslate"><span class="pre">verify/5</span></code> after signature verification. When calling
+<code class="docutils literal notranslate"><span class="pre">validate_claims/3</span></code> directly, pass the policy as the second argument
+instead.</p></li>
+</ul>
+<p>OpenSSL options:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">openssl_executable(Executable)</span></code> - Atom naming the OpenSSL
+executable or its path. The default command name is <code class="docutils literal notranslate"><span class="pre">openssl</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">openssl_arguments(Arguments)</span></code> - List accepted by the option checker
+for OpenSSL command customization. The current facade implementation
+does not add these arguments to the generated OpenSSL command.</p></li>
+</ul>
+</section>
+<section id="validation-policy">
+<h2>Validation policy<a class="headerlink" href="#validation-policy" title="Link to this heading"></a></h2>
+<p>The verification predicates apply a conservative JWT validation policy
+in addition to signature verification:</p>
+<ul class="simple">
+<li><p>JWT headers and claims must decode to JSON objects. Objects with
+duplicate member names are rejected instead of using first-wins or
+last-wins semantics.</p></li>
+<li><p>JWS <code class="docutils literal notranslate"><span class="pre">crit</span></code> header parameters are rejected unless explicitly
+supported by the library. The current implementation does not support
+extension header parameters that can be marked critical.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">exp</span></code> claim is required by default. This is stricter than the
+base JWT specification, where registered claims are optional. Use the
+option <code class="docutils literal notranslate"><span class="pre">allow_missing_exp(true)</span></code> when verifying tokens whose issuer
+legitimately omits this claim.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">allow_algorithms/1</span></code> to configure the allowed algorithm set. Use
+<code class="docutils literal notranslate"><span class="pre">algorithm/1</span></code> when the caller expects one exact JOSE <code class="docutils literal notranslate"><span class="pre">alg</span></code> value.
+When both options are present, both constraints must be satisfied.</p></li>
+<li><p>When verifying with a JWK Set, all keys matching the token header
+<code class="docutils literal notranslate"><span class="pre">alg</span></code> and optional <code class="docutils literal notranslate"><span class="pre">kid</span></code> are tried in set order until a signature
+verifies. Verification fails only after all matching candidate keys
+fail.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HS256</span></code> symmetric keys must contain at least 32 bytes of key
+material, matching the algorithm’s 256-bit security requirement.</p></li>
+<li><p>RSA JWK <code class="docutils literal notranslate"><span class="pre">n</span></code> and <code class="docutils literal notranslate"><span class="pre">e</span></code> members must be minimally encoded positive
+Base64urlUInt values. <code class="docutils literal notranslate"><span class="pre">RS256</span></code> public moduli must be odd and at least
+2048 bits, and public exponents must be odd integers greater than one
+and smaller than the modulus.</p></li>
+<li><p>P-256 EC JWK coordinates must be 32-byte unsigned values in range and
+the point <code class="docutils literal notranslate"><span class="pre">(x,y)</span></code> must lie on the P-256 curve.</p></li>
+<li><p>Octet, RSA, and P-256 EC JWKs are validated before key material is
+used. Malformed key objects raise JWT key-domain errors.</p></li>
+</ul>
+<p>OpenSSL-backed <code class="docutils literal notranslate"><span class="pre">RS256</span></code> and <code class="docutils literal notranslate"><span class="pre">ES256</span></code> verification requires an
+<code class="docutils literal notranslate"><span class="pre">openssl</span></code> command in the current command search path, unless
+overridden using <code class="docutils literal notranslate"><span class="pre">openssl_executable/1</span></code>.</p>
+</section>
 <section id="basic-usage">
 <h2>Basic usage<a class="headerlink" href="#basic-usage" title="Link to this heading"></a></h2>
 <p>Decode a compact JWT without verifying its signature:</p>
@@ -432,8 +512,8 @@ arithmetic.</p>
 <p>Sign and verify a token using native <code class="docutils literal notranslate"><span class="pre">HS256</span></code> support:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="nv">Header</span> <span class="o">=</span> <span class="k">{</span>alg<span class="o">-</span><span class="s">&#39;HS256&#39;</span>, typ<span class="o">-</span><span class="s">&#39;JWT&#39;</span><span class="k">}</span>,
      <span class="nv">Claims</span> <span class="o">=</span> <span class="k">{</span>sub<span class="o">-</span><span class="s">&#39;123&#39;</span>, exp<span class="o">-</span><span class="m">4102444800</span><span class="k">}</span>,
-     jwt<span class="o">::</span><span class="k">sign</span>(<span class="nv">Header</span>, <span class="nv">Claims</span>, <span class="s">&#39;shared-secret&#39;</span>, <span class="nv">Token</span>, []),
-     jwt<span class="o">::</span>verify(<span class="nv">Token</span>, <span class="s">&#39;shared-secret&#39;</span>, <span class="nv">VerifiedClaims</span>, []).
+     jwt<span class="o">::</span><span class="k">sign</span>(<span class="nv">Header</span>, <span class="nv">Claims</span>, <span class="s">&#39;0123456789abcdef0123456789abcdef&#39;</span>, <span class="nv">Token</span>, []),
+     jwt<span class="o">::</span>verify(<span class="nv">Token</span>, <span class="s">&#39;0123456789abcdef0123456789abcdef&#39;</span>, <span class="nv">VerifiedClaims</span>, []).
 </pre></div>
 </div>
 <p>Validate claims independently from signature verification:</p>
@@ -445,8 +525,8 @@ arithmetic.</p>
      jwt<span class="o">::</span>validate_claims(<span class="nv">Claims</span>, <span class="nv">Policy</span>, [now(<span class="m">1700000001</span>)]).
 </pre></div>
 </div>
-<p>Verify an asymmetric token using a JWK Set. The library selects a key
-matching the JWT header <code class="docutils literal notranslate"><span class="pre">alg</span></code> and optional <code class="docutils literal notranslate"><span class="pre">kid</span></code> values:</p>
+<p>Verify an asymmetric token using a JWK Set. The library selects matching
+keys using the JWT header <code class="docutils literal notranslate"><span class="pre">alg</span></code> and optional <code class="docutils literal notranslate"><span class="pre">kid</span></code> values:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="nv">JWKSet</span> <span class="o">=</span> <span class="k">{</span>keys<span class="o">-</span>[<span class="nv">PublicJWK</span>]<span class="k">}</span>,
      jwt<span class="o">::</span>verify(<span class="nv">Token</span>, <span class="nv">JWKSet</span>, <span class="nv">Claims</span>, [
          allow_algorithms([<span class="s">&#39;RS256&#39;</span>, <span class="s">&#39;ES256&#39;</span>]),

@@ -13,7 +13,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-07-06,
 		comment is 'DER and PEM helpers for JWK public keys and JOSE signatures.'
 	]).
 
@@ -49,10 +49,10 @@
 	public_key_pem(Key, PEM) :-
 		^^json_member(kty, Key, 'RSA'),
 		!,
-		^^json_member(n, Key, NAtom),
-		^^json_member(e, Key, EAtom),
-		^^base64url_atom_bytes(NAtom, NBytes),
-		^^base64url_atom_bytes(EAtom, EBytes),
+		( 	rsa_public_key_bytes(Key, NBytes, EBytes) ->
+			true
+		; 	domain_error(jwt_jwk_public_key, Key)
+		),
 		asn1_integer(NBytes, NInteger),
 		asn1_integer(EBytes, EInteger),
 		asn1_sequence([NInteger, EInteger], RSAPublicKey),
@@ -66,10 +66,10 @@
 		^^json_member(kty, Key, 'EC'),
 		^^json_member(crv, Key, 'P-256'),
 		!,
-		^^json_member(x, Key, XAtom),
-		^^json_member(y, Key, YAtom),
-		^^base64url_atom_bytes(XAtom, XBytes),
-		^^base64url_atom_bytes(YAtom, YBytes),
+		( 	ec_public_key_bytes(Key, XBytes, YBytes) ->
+			true
+		; 	domain_error(jwt_jwk_public_key, Key)
+		),
 		append([0x04| XBytes], YBytes, Point),
 		asn1_oid([42,134,72,206,61,2,1], ECPublicKeyOID),
 		asn1_oid([42,134,72,206,61,3,1,7], Prime256v1OID),
@@ -89,6 +89,87 @@
 		asn1_sequence([RInteger, SInteger], DER).
 	es256_signature_der(Signature, _) :-
 		domain_error(jwt_es256_signature, Signature).
+
+	rsa_public_key_bytes(Key, NBytes, EBytes) :-
+		^^json_member(n, Key, NAtom),
+		atom(NAtom),
+		^^json_member(e, Key, EAtom),
+		atom(EAtom),
+		^^base64url_atom_bytes(NAtom, NBytes),
+		^^base64url_atom_bytes(EAtom, EBytes),
+		base64url_uint(NBytes, N),
+		base64url_uint(EBytes, E),
+		valid_rsa_public_key(NBytes, N, EBytes, E).
+
+	ec_public_key_bytes(Key, XBytes, YBytes) :-
+		^^json_member(x, Key, XAtom),
+		atom(XAtom),
+		^^json_member(y, Key, YAtom),
+		atom(YAtom),
+		^^base64url_atom_bytes(XAtom, XBytes),
+		^^base64url_atom_bytes(YAtom, YBytes),
+		length(XBytes, 32),
+		length(YBytes, 32),
+		valid_p256_point(XBytes, YBytes).
+
+	base64url_uint(Bytes, Integer) :-
+		minimal_unsigned_bytes(Bytes),
+		unsigned_bytes_integer(Bytes, Integer),
+		Integer > 0.
+
+	minimal_unsigned_bytes([0| [_| _]]) :-
+		!,
+		fail.
+	minimal_unsigned_bytes([_| _]).
+
+	unsigned_bytes_integer(Bytes, Integer) :-
+		unsigned_bytes_integer(Bytes, 0, Integer).
+
+	unsigned_bytes_integer([], Integer, Integer).
+	unsigned_bytes_integer([Byte| Bytes], Acc, Integer) :-
+		Next is Acc * 256 + Byte,
+		unsigned_bytes_integer(Bytes, Next, Integer).
+
+	valid_rsa_public_key(NBytes, N, EBytes, E) :-
+		valid_rsa_modulus_size(NBytes),
+		last_byte_odd(NBytes),
+		last_byte_odd(EBytes),
+		E > 1,
+		E < N.
+
+	valid_rsa_modulus_size(NBytes) :-
+		length(NBytes, Length),
+		( 	Length > 256 ->
+			true
+		; 	Length == 256,
+			NBytes = [First| _],
+			First >= 128
+		).
+
+	last_byte_odd([Byte]) :-
+		!,
+		1 =:= Byte mod 2.
+	last_byte_odd([_| Bytes]) :-
+		last_byte_odd(Bytes).
+
+	valid_p256_point(XBytes, YBytes) :-
+		unsigned_bytes_integer(XBytes, X),
+		unsigned_bytes_integer(YBytes, Y),
+		p256_prime(P),
+		p256_b(B),
+		0 =< X,
+		X < P,
+		0 =< Y,
+		Y < P,
+		Left is (Y * Y) mod P,
+		X2 is (X * X) mod P,
+		X3 is (X2 * X) mod P,
+		Right is (X3 - 3 * X + B) mod P,
+		Left =:= Right.
+
+	p256_prime(115792089210356248762697446949407573530086143415290314195533631308867097853951).
+
+	p256_b(41058363725152142129326129780047268409114441015993725554835256314039467401291).
 
 	asn1_sequence(Elements, [0x30| DER]) :-
 		append(Elements, Content),

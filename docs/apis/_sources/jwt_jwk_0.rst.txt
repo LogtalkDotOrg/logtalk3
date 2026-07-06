@@ -15,7 +15,7 @@ JSON Web Key normalization and key material helpers.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-26
+| **Date:** 2026-07-06
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -25,8 +25,6 @@ JSON Web Key normalization and key material helpers.
 |    ``public`` :ref:`jwt_helpers <jwt_helpers/0>`
 | **Uses:**
 |    :ref:`jwt_der <jwt_der/0>`
-|    :ref:`jwt_jwa <jwt_jwa/0>`
-|    :ref:`list <list/0>`
 
 | **Remarks:**
 |    (none)

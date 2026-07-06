@@ -15,7 +15,7 @@ Internal shared helpers for the jwt library.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-26
+| **Date:** 2026-07-06
 
 | **Compilation flags:**
 |    ``static``
@@ -98,6 +98,29 @@ Extracts the key-value pairs from a JSON object term.
 |    ``json_object_pairs(Object,Pairs)``
 | **Mode and number of proofs:**
 |    ``json_object_pairs(+term,-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: json_object/1
+.. _jwt_helpers/0::json_object/1:
+
+``json_object/1``
+^^^^^^^^^^^^^^^^^
+
+Validates that a JSON term is an object without duplicate member names.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``json_object(Object)``
+| **Mode and number of proofs:**
+|    ``json_object(+term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Object`` is not a JSON object or contains duplicate member names:
+|        ``domain_error(jwt_json_object,Object)``
 
 
 ------------

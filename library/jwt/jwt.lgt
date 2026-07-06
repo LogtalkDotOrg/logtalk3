@@ -13,7 +13,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-07-06,
 		comment is 'Facade predicates for parsing, signing, verifying, and validating JSON Web Tokens.'
 	]).
 
@@ -271,8 +271,9 @@
 		decode(Token, Header, Claims, Signature, SigningInput),
 		jwt_jwa::header_algorithm(Header, Algorithm),
 		jwt_jwa::allowed_algorithm(Algorithm, MergedOptions),
-		verification_key(KeyOrJWKSet, Header, Key, MergedOptions),
-		verify_signature(Algorithm, SigningInput, Signature, Key, MergedOptions),
+		jwt_jwa::validate_header(Header),
+		verification_keys(KeyOrJWKSet, Header, Keys, MergedOptions),
+		verify_signature_with_keys(Keys, Algorithm, SigningInput, Signature, MergedOptions),
 		^^option(claim_policy(Policy), MergedOptions),
 		jwt_claims::validate_claims(Claims, Policy, MergedOptions).
 
@@ -294,10 +295,16 @@
 	validate_claim(Claims, ClaimPolicy, Options) :-
 		jwt_claims::validate_claim(Claims, ClaimPolicy, Options).
 
-	verification_key(KeyOrJWKSet, Header, Key, Options) :-
+	verification_keys(KeyOrJWKSet, Header, Keys, Options) :-
 		(	^^json_member(keys, KeyOrJWKSet, _) ->
-			jwt_jwks::select_key(KeyOrJWKSet, Header, Key, Options)
-		;	Key = KeyOrJWKSet
+			jwt_jwks::select_keys(KeyOrJWKSet, Header, Keys, Options)
+		; 	Keys = [KeyOrJWKSet]
+		).
+
+	verify_signature_with_keys([Key| Keys], Algorithm, SigningInput, Signature, Options) :-
+		( 	verify_signature(Algorithm, SigningInput, Signature, Key, Options) ->
+			true
+		; 	verify_signature_with_keys(Keys, Algorithm, SigningInput, Signature, Options)
 		).
 
 :- end_object.

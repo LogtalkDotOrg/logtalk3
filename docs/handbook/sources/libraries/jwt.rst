@@ -74,6 +74,86 @@ To test this library, load the ``tester.lgt`` file:
 
    | ?- logtalk_load(jwt(tester)).
 
+Options
+-------
+
+The facade predicates that take an options list validate the following
+option terms. Each option only affects predicates that perform the
+corresponding operation.
+
+Signature and algorithm options:
+
+- ``allow_algorithms(Algorithms)`` - List of allowed JOSE ``alg`` atom
+  values for verification and signing. The default is
+  ``['HS256', 'RS256', 'ES256']``.
+- ``algorithm(Algorithm)`` - Requires one exact JOSE ``alg`` atom value.
+  When used with ``allow_algorithms/1``, both checks must pass.
+- ``allow_none(Boolean)`` - Allows or rejects the unsecured ``none``
+  algorithm. The default is ``false``.
+
+Claim validation options:
+
+- ``allow_missing_exp(Boolean)`` - Allows tokens without an ``exp``
+  claim when set to ``true``. The default is ``false``.
+- ``clock_skew(Seconds)`` - Non-negative numeric leeway, in seconds, for
+  time claim validation. The default is ``60``.
+- ``now(Timestamp)`` - Numeric timestamp to use instead of the current
+  operating system time when validating time claims.
+- ``max_age(Seconds)`` - Non-negative maximum age, in seconds, for
+  policies that validate an ``iat`` claim as ``time(issued_at)``.
+- ``required_claims(Names)`` - List of claim-name atoms that must be
+  present when validating claims. The default is ``[]``.
+- ``claim_policy(Policy)`` - Claim policy list applied by ``verify/4``
+  and ``verify/5`` after signature verification. When calling
+  ``validate_claims/3`` directly, pass the policy as the second argument
+  instead.
+
+OpenSSL options:
+
+- ``openssl_executable(Executable)`` - Atom naming the OpenSSL
+  executable or its path. The default command name is ``openssl``.
+- ``openssl_arguments(Arguments)`` - List accepted by the option checker
+  for OpenSSL command customization. The current facade implementation
+  does not add these arguments to the generated OpenSSL command.
+
+Validation policy
+-----------------
+
+The verification predicates apply a conservative JWT validation policy
+in addition to signature verification:
+
+- JWT headers and claims must decode to JSON objects. Objects with
+  duplicate member names are rejected instead of using first-wins or
+  last-wins semantics.
+- JWS ``crit`` header parameters are rejected unless explicitly
+  supported by the library. The current implementation does not support
+  extension header parameters that can be marked critical.
+- The ``exp`` claim is required by default. This is stricter than the
+  base JWT specification, where registered claims are optional. Use the
+  option ``allow_missing_exp(true)`` when verifying tokens whose issuer
+  legitimately omits this claim.
+- Use ``allow_algorithms/1`` to configure the allowed algorithm set. Use
+  ``algorithm/1`` when the caller expects one exact JOSE ``alg`` value.
+  When both options are present, both constraints must be satisfied.
+- When verifying with a JWK Set, all keys matching the token header
+  ``alg`` and optional ``kid`` are tried in set order until a signature
+  verifies. Verification fails only after all matching candidate keys
+  fail.
+- ``HS256`` symmetric keys must contain at least 32 bytes of key
+  material, matching the algorithm's 256-bit security requirement.
+- RSA JWK ``n`` and ``e`` members must be minimally encoded positive
+  Base64urlUInt values. ``RS256`` public moduli must be odd and at least
+  2048 bits, and public exponents must be odd integers greater than one
+  and smaller than the modulus.
+- P-256 EC JWK coordinates must be 32-byte unsigned values in range and
+  the point ``(x,y)`` must lie on the P-256 curve.
+- Octet, RSA, and P-256 EC JWKs are validated before key material is
+  used. Malformed key objects raise JWT key-domain errors.
+
+OpenSSL-backed ``RS256`` and ``ES256`` verification requires an
+``openssl`` command in the current command search path, unless
+overridden using ``openssl_executable/1``.
+
 Basic usage
 -----------
 
@@ -97,8 +177,8 @@ Sign and verify a token using native ``HS256`` support:
 
    | ?- Header = {alg-'HS256', typ-'JWT'},
         Claims = {sub-'123', exp-4102444800},
-        jwt::sign(Header, Claims, 'shared-secret', Token, []),
-        jwt::verify(Token, 'shared-secret', VerifiedClaims, []).
+        jwt::sign(Header, Claims, '0123456789abcdef0123456789abcdef', Token, []),
+        jwt::verify(Token, '0123456789abcdef0123456789abcdef', VerifiedClaims, []).
 
 Validate claims independently from signature verification:
 
@@ -111,8 +191,8 @@ Validate claims independently from signature verification:
         ],
         jwt::validate_claims(Claims, Policy, [now(1700000001)]).
 
-Verify an asymmetric token using a JWK Set. The library selects a key
-matching the JWT header ``alg`` and optional ``kid`` values:
+Verify an asymmetric token using a JWK Set. The library selects matching
+keys using the JWT header ``alg`` and optional ``kid`` values:
 
 ::
 

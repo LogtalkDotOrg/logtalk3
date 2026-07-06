@@ -13,7 +13,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-07-06,
 		comment is 'JSON Web Algorithm metadata and header helpers.'
 	]).
 
@@ -32,6 +32,16 @@
 	:- info(header_key_id/2, [
 		comment is 'Extracts the optional key identifier from a JWT header.',
 		argnames is ['Header', 'KeyId']
+	]).
+
+	:- public(validate_header/1).
+	:- mode(validate_header(+term), one_or_error).
+	:- info(validate_header/1, [
+		comment is 'Validates a JWT header object and rejects unsupported critical header parameters.',
+		argnames is ['Header'],
+		exceptions is [
+			'``Header`` is not a JSON object, contains duplicate member names, or contains unsupported critical header parameters' - domain_error(jwt_header, 'Header')
+		]
 	]).
 
 	:- public(allowed_algorithm/2).
@@ -69,6 +79,13 @@
 		member/2
 	]).
 
+	validate_header(Header) :-
+		( 	^^json_object(Header),
+			validate_critical_headers(Header) ->
+			true
+		; 	domain_error(jwt_header, Header)
+		).
+
 	header_algorithm(Header, Algorithm) :-
 		(	^^json_member(alg, Header, Algorithm),
 			atom(Algorithm) ->
@@ -81,19 +98,18 @@
 		atom(KeyId).
 
 	allowed_algorithm(Algorithm, Options) :-
-		(	Algorithm == none ->
-			(	^^option(allow_none(true), Options) ->
-				true
-			;	domain_error(jwt_algorithm, Algorithm)
-			)
-		;	supported_algorithm(Algorithm) ->
-			(	^^option(allow_algorithms(Algorithms), Options),
-				member(Algorithm, Algorithms) ->
-				true
-			;	domain_error(jwt_algorithm, Algorithm)
-			)
-		;	domain_error(jwt_algorithm, Algorithm)
-		).
+		( 	Algorithm == none ->
+			^^option(allow_none(true), Options),
+			expected_algorithm(Algorithm, Options)
+		; 	supported_algorithm(Algorithm) ->
+			^^option(allow_algorithms(Algorithms), Options),
+			member(Algorithm, Algorithms),
+			expected_algorithm(Algorithm, Options)
+		; 	fail
+		),
+		!.
+	allowed_algorithm(Algorithm, _Options) :-
+		domain_error(jwt_algorithm, Algorithm).
 
 	supported_algorithm('HS256').
 	supported_algorithm('RS256').
@@ -104,5 +120,31 @@
 	key_type('ES256', 'EC').
 
 	hmac_hash('HS256', sha256).
+
+	expected_algorithm(Algorithm, Options) :-
+		( 	^^option(algorithm(Expected), Options) ->
+			( 	Algorithm == Expected ->
+				true
+			; 	domain_error(jwt_algorithm, Algorithm)
+			)
+		; 	true
+		).
+
+	validate_critical_headers(Header) :-
+		( 	^^json_member(crit, Header, CriticalHeaders) ->
+			list::valid(CriticalHeaders),
+			CriticalHeaders \== [],
+			^^atom_list(CriticalHeaders),
+			critical_headers_present(CriticalHeaders, Header),
+			understood_critical_headers(CriticalHeaders)
+		; 	true
+		).
+
+	critical_headers_present([], _Header).
+	critical_headers_present([Name| Names], Header) :-
+		^^json_member(Name, Header, _),
+		critical_headers_present(Names, Header).
+
+	understood_critical_headers([]).
 
 :- end_object.

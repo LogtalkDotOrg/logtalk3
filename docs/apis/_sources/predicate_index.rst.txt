@@ -22945,6 +22945,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`jwt_jwks <jwt_jwks/0::select_key/4>`
 
+``select_keys/4``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`jwt_jwks <jwt_jwks/0::select_keys/4>`
+
 ``selectchk/3``
 ---------------
 
@@ -26931,6 +26941,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ranking_dataset_common <ranking_dataset_common/0::validate_grouped_dataset/2>`
+
+``validate_header/1``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`jwt_jwa <jwt_jwa/0::validate_header/1>`
 
 ``validate_http_request/3``
 ---------------------------
