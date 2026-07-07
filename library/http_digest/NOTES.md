@@ -133,8 +133,9 @@ Current scope
 - route-level protection and successful-response `Authentication-Info`
 	decoration through `http_router_digest_auth(_, _, _)` plus the
 	`authorize_routed_request/2` and `response_middleware/2` router hooks
-- client-side Digest retry on top of the existing `http://` socket-backed
-  transport and cookie-jar support
+- client-side Digest retry on top of the existing socket-backed transport and
+	cookie-jar support, including `https://` URLs when the selected transport
+	parameterization supports secure schemes
 - MD5, SHA-256, and SHA-512-256 based Digest computations through the `hashes`
 	and `hmac` libraries; when no algorithm option is provided, the default
 	challenge algorithm remains `sha256`
@@ -143,7 +144,6 @@ Current scope
 Non-implemented features
 ------------------------
 
-- HTTPS transport support in the client helper
 - proactive client-side challenge caching across requests
 - shared or persistent nonce replay stores
 - `auth-int` request-body hashing support

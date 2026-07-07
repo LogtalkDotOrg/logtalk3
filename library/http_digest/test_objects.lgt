@@ -57,6 +57,27 @@
 :- end_object.
 
 
+:- object(http_digest_probe_socket).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-07-07,
+		comment is 'Probe socket object used by the http_digest tests to verify scheme-derived Digest client session transport defaults.'
+	]).
+
+	:- public(supported_request_scheme/1).
+	:- public(exchange/5).
+
+	supported_request_scheme(http).
+	supported_request_scheme(https).
+
+	exchange(Host, Port, _Request, Response, Options) :-
+		http_core::response(http(1, 1), status(200, 'OK'), [], empty, [probe(Host, Port, Options)], Response).
+
+:- end_object.
+
+
 :- object(http_digest_test_handler,
 	implements(http_handler_protocol)).
 

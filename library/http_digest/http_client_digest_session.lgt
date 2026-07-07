@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-07-07,
 		comment is 'Stateful HTTP Digest client sessions that add cookie persistence and one-round-trip Digest challenge retry on top of the normalized HTTP client and socket libraries.',
 		parnames is ['HTTPSocket'],
 		remarks is [
@@ -205,7 +205,7 @@
 	:- endif.
 
 	:- uses(_HTTPSocket_, [
-		exchange/4
+		exchange/5
 	]).
 
 	:- uses(list, [
@@ -220,23 +220,24 @@
 		open(Session, Username, Password, []).
 
 	open(Session, Username, Password, Options) :-
-		parse_open_options(Options, JarOption, DefaultHeaders, DefaultQueryPairs, DefaultVersion, DefaultProperties, DefaultDigestOptions),
+		parse_open_options(Options, JarOption, DefaultHeaders, DefaultQueryPairs, DefaultVersion, DefaultProperties, DefaultConnectionOptions, DefaultDigestOptions),
 		resolve_session_jar(JarOption, Jar, Ownership),
-		open_session(Session, session_state(Jar, Ownership, Username, Password, DefaultHeaders, DefaultQueryPairs, DefaultVersion, DefaultProperties, DefaultDigestOptions)).
+		open_session(Session, session_state(Jar, Ownership, Username, Password, DefaultHeaders, DefaultQueryPairs, DefaultVersion, DefaultProperties, DefaultConnectionOptions, DefaultDigestOptions)).
 
 	close(Session) :-
 		close_session(Session).
 
 	cookie_jar(Session, Jar) :-
-		current_session_state(Session, session_state(Jar, _Ownership, _Username, _Password, _Headers, _QueryPairs, _Version, _Properties, _DigestOptions)).
+		current_session_state(Session, session_state(Jar, _Ownership, _Username, _Password, _Headers, _QueryPairs, _Version, _Properties, _ConnectionOptions, _DigestOptions)).
 
 	request(Session, Method, URL, Response, Options) :-
-		current_session_state(Session, session_state(Jar, _Ownership, Username, Password, DefaultHeaders, DefaultQueryPairs, DefaultVersion, DefaultProperties0, DefaultDigestOptions)),
-		parse_request_options(Options, RequestHeaders, Body0, RequestQueryPairs, RequestVersion, RequestProperties0, ExplicitCookiePairs, RequestDigestOptions),
+		current_session_state(Session, session_state(Jar, _Ownership, Username, Password, DefaultHeaders, DefaultQueryPairs, DefaultVersion, DefaultProperties0, DefaultConnectionOptions, DefaultDigestOptions)),
+		parse_request_options(Options, RequestHeaders, Body0, RequestQueryPairs, RequestVersion, RequestProperties0, RequestConnectionOptions, ExplicitCookiePairs, RequestDigestOptions),
 		extract_request_cookie_properties(RequestProperties0, PropertyCookiePairs, RequestProperties),
 		merge_named_pairs(DefaultHeaders, RequestHeaders, MergedHeaders),
 		merge_named_pairs(DefaultQueryPairs, RequestQueryPairs, MergedQueryPairs),
 		merge_properties(DefaultProperties0, RequestProperties, MergedProperties0),
+		merge_option_terms(DefaultConnectionOptions, RequestConnectionOptions, MergedConnectionOptions0),
 		resolve_request_body(Body0, MergedHeaders, MergedProperties0, Body, MergedProperties1),
 		jar_request_cookie_pairs(Jar, URL, JarCookiePairs),
 		merge_named_pairs(JarCookiePairs, PropertyCookiePairs, PropertyMergedCookiePairs),
@@ -244,8 +245,9 @@
 		maybe_add_cookie_property(FinalCookiePairs, MergedProperties1, MergedProperties),
 		final_request_version(DefaultVersion, RequestVersion, FinalVersion),
 		merge_option_terms(DefaultDigestOptions, RequestDigestOptions, DigestOptions),
-		build_request(Method, URL, MergedHeaders, Body, MergedQueryPairs, FinalVersion, MergedProperties, Host, Port, Request),
-		exchange_digest_request(Host, Port, URL, Username, Password, Request, DigestOptions, Jar, Response).
+		build_request(Method, URL, MergedHeaders, Body, MergedQueryPairs, FinalVersion, MergedProperties, Scheme, Host, Port, Request),
+		append_tls_transport(Scheme, MergedConnectionOptions0, MergedConnectionOptions),
+		exchange_digest_request(Host, Port, URL, Username, Password, Request, DigestOptions, MergedConnectionOptions, Jar, Response).
 
 	get(Session, URL, Response, Options) :-
 		request(Session, get, URL, Response, Options).
@@ -268,7 +270,7 @@
 		RequestOptions = [body(Body)| Options],
 		request(Session, patch, URL, Response, RequestOptions).
 
-	parse_open_options(UserOptions, JarOption, Headers, QueryPairs, Version, Properties, DigestOptions) :-
+	parse_open_options(UserOptions, JarOption, Headers, QueryPairs, Version, Properties, ConnectionOptions, DigestOptions) :-
 		^^check_options(UserOptions),
 		ensure_consistent_cookie_source_options(UserOptions),
 		^^merge_options(UserOptions, Options),
@@ -280,6 +282,7 @@
 		^^option(query(QueryPairs), Options),
 		^^option(version(Version), Options),
 		^^option(properties(Properties), Options),
+		^^option(connection_options(ConnectionOptions), Options),
 		^^option(digest_options(DigestOptions), Options),
 		ensure_no_default_cookie_property(Properties).
 
@@ -288,6 +291,7 @@
 	default_option(query([])).
 	default_option(version(http(1, 1))).
 	default_option(properties([])).
+	default_option(connection_options([])).
 	default_option(digest_options([])).
 
 	valid_option(cookie_jar(new)) :-
@@ -316,10 +320,13 @@
 	valid_option(properties(Properties)) :-
 		proper_list(Properties),
 		!.
+	valid_option(connection_options(ConnectionOptions)) :-
+		proper_list(ConnectionOptions),
+		!.
 	valid_option(digest_options(DigestOptions)) :-
 		valid_digest_options(DigestOptions).
 
-	parse_request_options(Options, Headers, Body, QueryPairs, Version, Properties, CookiePairs, DigestOptions) :-
+	parse_request_options(Options, Headers, Body, QueryPairs, Version, Properties, ConnectionOptions, CookiePairs, DigestOptions) :-
 		validate_request_options(Options),
 		(	member(headers(Headers0), Options) ->
 			Headers = Headers0
@@ -340,6 +347,10 @@
 		(	member(properties(Properties0), Options) ->
 			Properties = Properties0
 		;	Properties = []
+		),
+		(	member(connection_options(ConnectionOptions0), Options) ->
+			ConnectionOptions = ConnectionOptions0
+		;	ConnectionOptions = []
 		),
 		(	member(cookies(CookiePairs0), Options) ->
 			CookiePairs = CookiePairs0
@@ -379,6 +390,9 @@
 		!.
 	validate_request_option(properties(Properties)) :-
 		proper_list(Properties),
+		!.
+	validate_request_option(connection_options(ConnectionOptions)) :-
+		proper_list(ConnectionOptions),
 		!.
 	validate_request_option(cookies(CookiePairs)) :-
 		valid_cookie_pairs(CookiePairs),
@@ -442,7 +456,7 @@
 		assertz(session_state_(SessionId, State)).
 
 	close_session(Session) :-
-		current_session_state(Session, session_state(Jar, Ownership, _Username, _Password, _Headers, _QueryPairs, _Version, _Properties, _DigestOptions)),
+		current_session_state(Session, session_state(Jar, Ownership, _Username, _Password, _Headers, _QueryPairs, _Version, _Properties, _ConnectionOptions, _DigestOptions)),
 		retract(session_state_(SessionId, _State)),
 		Session = http_client_digest_session(SessionId),
 		maybe_close_owned_jar(Jar, Ownership).
@@ -558,6 +572,16 @@
 		!.
 	final_request_version(DefaultVersion, none, DefaultVersion).
 
+	append_tls_transport(https, Options, OptionsWithTransport) :-
+		!,
+		append_tls_transport(Options, OptionsWithTransport).
+	append_tls_transport(_Scheme, Options, Options).
+
+	append_tls_transport(Options, Options) :-
+		member(connection_transport(_), Options),
+		!.
+	append_tls_transport(Options, [connection_transport(tls)| Options]).
+
 	resolve_request_body(form_data(Items), Headers, Properties0, Body, Properties) :-
 		!,
 		validate_form_data_headers(Headers),
@@ -591,56 +615,56 @@
 		^^lowercase_ascii_codes(Codes0, Codes),
 		atom_codes('multipart/form-data', Codes).
 
-	exchange_digest_request(Host, Port, URL, Username, Password, Request, DigestOptions, Jar, Response) :-
-		exchange(Host, Port, Request, InitialResponse),
+	exchange_digest_request(Host, Port, URL, Username, Password, Request, DigestOptions, ConnectionOptions, Jar, Response) :-
+		exchange(Host, Port, Request, InitialResponse, ConnectionOptions),
 		store_response_cookies(Jar, URL, InitialResponse),
-		maybe_retry_digest_request(Host, Port, URL, Username, Password, Request, DigestOptions, Jar, InitialResponse, Response).
+		maybe_retry_digest_request(Host, Port, URL, Username, Password, Request, DigestOptions, ConnectionOptions, Jar, InitialResponse, Response).
 
-	maybe_retry_digest_request(Host, Port, URL, Username, Password, Request, DigestOptions, Jar, InitialResponse, Response) :-
+	maybe_retry_digest_request(Host, Port, URL, Username, Password, Request, DigestOptions, ConnectionOptions, Jar, InitialResponse, Response) :-
 		digest_challenge_response(InitialResponse, Challenge),
 		!,
 		http_digest::authorize_request(Request, Challenge, Username, Password, AuthorizedRequest, DigestOptions),
-		exchange(Host, Port, AuthorizedRequest, Response),
+		exchange(Host, Port, AuthorizedRequest, Response, ConnectionOptions),
 		store_response_cookies(Jar, URL, Response).
-	maybe_retry_digest_request(_Host, _Port, _URL, _Username, _Password, _Request, _DigestOptions, _Jar, Response, Response).
+	maybe_retry_digest_request(_Host, _Port, _URL, _Username, _Password, _Request, _DigestOptions, _ConnectionOptions, _Jar, Response, Response).
 
 	digest_challenge_response(Response, Challenge) :-
 		http_core::status(Response, status(401, _ReasonPhrase)),
 		http_digest::challenge(Response, Challenge).
 
-	build_request(Method, URL, Headers, Body, QueryPairs, Version, Properties0, Host, Port, Request) :-
-		parse_http_url(URL, Host, Port, Path, URLQuery),
+	build_request(Method, URL, Headers, Body, QueryPairs, Version, Properties0, Scheme, Host, Port, Request) :-
+		parse_http_url(URL, Scheme, Host, Port, Path, URLQuery),
 		merge_request_query(URLQuery, QueryPairs, Query),
 		build_origin_target(Path, Query, Target),
-		request_host_property(Host, Port, HostProperty),
+		request_host_property(Scheme, Host, Port, HostProperty),
 		http_core::request(Method, Target, Version, Headers, Body, [HostProperty| Properties0], Request).
 
-	parse_http_url(URL, Host, Port, Path, Query) :-
+	parse_http_url(URL, Scheme, Host, Port, Path, Query) :-
 		(	var(URL) ->
 			instantiation_error
 		;	url(atom)::parse(URL, Components) ->
 			true
 		;	domain_error(http_client_url, URL)
 		),
-		validate_request_scheme(Components),
-		components_endpoint(Components, Host, Port),
+		validate_request_scheme(Components, Scheme),
+		components_endpoint(Scheme, Components, Host, Port),
 		components_path_query(Components, Path, Query).
 
-	validate_request_scheme(Components) :-
+	validate_request_scheme(Components, Scheme) :-
 		member(scheme(Scheme), Components),
 		!,
 		(	_HTTPSocket_::supported_request_scheme(Scheme) ->
 			true
 		;	domain_error(http_client_scheme, Scheme)
 		).
-	validate_request_scheme(_Components) :-
+	validate_request_scheme(_Components, _Scheme) :-
 		domain_error(http_client_url, missing_scheme).
 
-	components_endpoint(Components, Host, Port) :-
+	components_endpoint(Scheme, Components, Host, Port) :-
 		member(authority(Authority), Components),
 		!,
-		parse_authority_endpoint(Authority, Host, Port).
-	components_endpoint(Components, _Host, _Port) :-
+		parse_authority_endpoint(Scheme, Authority, Host, Port).
+	components_endpoint(_Scheme, Components, _Host, _Port) :-
 		domain_error(http_client_url, Components).
 
 	components_path_query(Components, Path, Query) :-
@@ -653,10 +677,11 @@
 		;	Query = ''
 		).
 
-	parse_authority_endpoint(Authority, Host, Port) :-
+	parse_authority_endpoint(Scheme, Authority, Host, Port) :-
 		(	atom_codes(Authority, Codes0),
 			strip_userinfo_codes(Codes0, Codes),
-			parse_authority_codes(Codes, HostCodes, Port),
+			default_request_port(Scheme, DefaultPort),
+			parse_authority_codes(Codes, DefaultPort, HostCodes, Port),
 			^^lowercase_ascii_codes(HostCodes, NormalizedHostCodes),
 			atom_codes(Host, NormalizedHostCodes),
 			validate_endpoint_host_port(Host, Port) ->
@@ -664,21 +689,25 @@
 		;	domain_error(http_client_url, Authority)
 		).
 
-	parse_authority_codes([0'[| Codes], HostCodes, Port) :-
+	default_request_port(https, 443) :-
+		!.
+	default_request_port(_Scheme, 80).
+
+	parse_authority_codes([0'[| Codes], DefaultPort, HostCodes, Port) :-
 		split_once(0'], Codes, HostCodes, RestCodes),
 		!,
-		parse_bracketed_port_codes(RestCodes, Port).
-	parse_authority_codes(Codes, HostCodes, Port) :-
+		parse_bracketed_port_codes(RestCodes, DefaultPort, Port).
+	parse_authority_codes(Codes, _DefaultPort, HostCodes, Port) :-
 		split_last_colon(Codes, HostCodes, PortCodes),
 		PortCodes \== [],
 		digit_codes(PortCodes),
 		!,
 		number_codes(Port, PortCodes).
-	parse_authority_codes(Codes, Codes, 80).
+	parse_authority_codes(Codes, DefaultPort, Codes, DefaultPort).
 
-	parse_bracketed_port_codes([], 80) :-
+	parse_bracketed_port_codes([], DefaultPort, DefaultPort) :-
 		!.
-	parse_bracketed_port_codes([0':| PortCodes], Port) :-
+	parse_bracketed_port_codes([0':| PortCodes], _DefaultPort, Port) :-
 		PortCodes \== [],
 		digit_codes(PortCodes),
 		number_codes(Port, PortCodes).
@@ -708,9 +737,11 @@
 		!.
 	build_origin_target(Path, Query, origin(Path, Query)).
 
-	request_host_property(Host, 80, host(Host)) :-
+	request_host_property(http, Host, 80, host(Host)) :-
 		!.
-	request_host_property(Host, Port, host(Host, Port)).
+	request_host_property(https, Host, 443, host(Host)) :-
+		!.
+	request_host_property(_Scheme, Host, Port, host(Host, Port)).
 
 	store_response_cookies(none, _URL, _Response) :-
 		!.

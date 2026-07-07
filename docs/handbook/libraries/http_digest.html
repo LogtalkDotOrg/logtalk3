@@ -474,8 +474,9 @@ authorizations, and <code class="docutils literal notranslate"><span class="pre"
 decoration through <code class="docutils literal notranslate"><span class="pre">http_router_digest_auth(_,</span> <span class="pre">_,</span> <span class="pre">_)</span></code> plus the
 <code class="docutils literal notranslate"><span class="pre">authorize_routed_request/2</span></code> and <code class="docutils literal notranslate"><span class="pre">response_middleware/2</span></code> router
 hooks</p></li>
-<li><p>client-side Digest retry on top of the existing <code class="docutils literal notranslate"><span class="pre">http://</span></code>
-socket-backed transport and cookie-jar support</p></li>
+<li><p>client-side Digest retry on top of the existing socket-backed
+transport and cookie-jar support, including <code class="docutils literal notranslate"><span class="pre">https://</span></code> URLs when the
+selected transport parameterization supports secure schemes</p></li>
 <li><p>MD5, SHA-256, and SHA-512-256 based Digest computations through the
 <code class="docutils literal notranslate"><span class="pre">hashes</span></code> and <code class="docutils literal notranslate"><span class="pre">hmac</span></code> libraries; when no algorithm option is
 provided, the default challenge algorithm remains <code class="docutils literal notranslate"><span class="pre">sha256</span></code></p></li>
@@ -484,7 +485,6 @@ provided, the default challenge algorithm remains <code class="docutils literal 
 <section id="non-implemented-features">
 <h2>Non-implemented features<a class="headerlink" href="#non-implemented-features" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>HTTPS transport support in the client helper</p></li>
 <li><p>proactive client-side challenge caching across requests</p></li>
 <li><p>shared or persistent nonce replay stores</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">auth-int</span></code> request-body hashing support</p></li>

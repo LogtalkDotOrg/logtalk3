@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-24,
+		date is 2026-07-07,
 		comment is 'Unit tests for the "http_digest" library.'
 	]).
 
@@ -338,6 +338,12 @@
 			http_client_digest_session(_HTTPSocket_)::open(Session, 'Mufasa', 'Circle Of Life', [cookie_jar(none)]),
 			http_client_digest_session(_HTTPSocket_)::cookie_jar(Session, none),
 			http_client_digest_session(_HTTPSocket_)::close(Session).
+
+		test(http_client_digest_session_https_01, deterministic(Probe == probe('example.com', 443, [connection_transport(tls)])), [cleanup(catch(http_client_digest_session(http_digest_probe_socket)::close(Session), _, true))]) :-
+			http_client_digest_session(http_digest_probe_socket)::open(Session, 'Mufasa', 'Circle Of Life', [cookie_jar(none)]),
+			http_client_digest_session(http_digest_probe_socket)::get(Session, 'https://example.com/profile', Response, []),
+			http_client_digest_session(http_digest_probe_socket)::close(Session),
+			once(property(Response, Probe)).
 
 		:- if(current_logtalk_flag(threads, supported)).
 			:- threaded.
