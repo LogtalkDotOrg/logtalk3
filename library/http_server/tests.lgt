@@ -71,7 +71,8 @@
 		^^clean_file('test_http_server_head_connection_input.tmp'),
 		^^clean_file('test_http_server_head_connection_output.tmp'),
 		^^clean_file('test_http_server_upgrade_connection_input.tmp'),
-		^^clean_file('test_http_server_upgrade_connection_output.tmp').
+		^^clean_file('test_http_server_upgrade_connection_output.tmp'),
+		^^clean_file('test_http_server_query.tmp').
 
 	test(http_server_read_request_2_01, deterministic) :-
 		write_file_atom(
