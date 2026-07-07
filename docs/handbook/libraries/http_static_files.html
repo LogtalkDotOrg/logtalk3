@@ -411,6 +411,7 @@ predicates:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">mime_types_strict(Boolean)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">mime_type_overrides(Overrides)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">fallback_file(Fallback)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">directory_listing(BooleanOrOptions)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">cors(Policy)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">cache_control(Directives)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">expires(Expires)</span></code></p></li>
@@ -422,6 +423,7 @@ predicates:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">mime_types_strict(false)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">mime_type_overrides([])</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">fallback_file(none)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">directory_listing(false)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">cors([])</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">cache_control([])</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">expires(none)</span></code></p></li>
@@ -456,6 +458,8 @@ inside the document root</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">301</span> <span class="pre">Moved</span> <span class="pre">Permanently</span></code> trailing-slash redirects for directory
 targets</p></li>
 <li><p>index-file lookup for directory targets</p></li>
+<li><p>optional directory-listing fallback for directory targets without an
+index file, using the <code class="docutils literal notranslate"><span class="pre">http_directory_listing</span></code> library</p></li>
 <li><p>precompressed <code class="docutils literal notranslate"><span class="pre">.br</span></code> and <code class="docutils literal notranslate"><span class="pre">.gz</span></code> asset negotiation driven by
 <code class="docutils literal notranslate"><span class="pre">Accept-Encoding</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Vary:</span> <span class="pre">Accept-Encoding</span></code> responses when negotiated precompressed
@@ -494,6 +498,13 @@ file with <code class="docutils literal notranslate"><span class="pre">404</span
 with <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code> status for SPA client-side routes; fallback files are
 only considered after the requested path has resolved safely inside
 the document root</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">directory_listing(false)</span></code> to omit directory-listing fallback,
+<code class="docutils literal notranslate"><span class="pre">directory_listing(true)</span></code> to serve listings using the
+<code class="docutils literal notranslate"><span class="pre">http_directory_listing</span></code> defaults, or <code class="docutils literal notranslate"><span class="pre">directory_listing(Options)</span></code>
+to pass options to <code class="docutils literal notranslate"><span class="pre">http_directory_listing::serve/5</span></code>; listing
+fallback is only used for existing directory targets after
+trailing-slash redirect checks and index-file lookup, and before
+generic <code class="docutils literal notranslate"><span class="pre">fallback_file/1</span></code> handling</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">cors([])</span></code> to omit CORS response decoration, or <code class="docutils literal notranslate"><span class="pre">cors(Policy)</span></code> to
 decorate generated responses using
 <code class="docutils literal notranslate"><span class="pre">http_cors::add_response_headers/4</span></code>; when the policy omits

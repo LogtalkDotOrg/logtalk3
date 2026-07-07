@@ -15,7 +15,7 @@ Router-agnostic static file response helper built on the normalized ``http_core`
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-07-06
+| **Date:** 2026-07-07
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -29,6 +29,7 @@ Router-agnostic static file response helper built on the normalized ``http_core`
 |    :ref:`date <date/0>`
 |    :ref:`http_core <http_core/0>`
 |    :ref:`http_cors <http_cors/0>`
+|    :ref:`http_directory_listing <http_directory_listing/0>`
 |    :ref:`list <list/0>`
 |    :ref:`mime_types <mime_types/0>`
 |    :ref:`os <os/0>`

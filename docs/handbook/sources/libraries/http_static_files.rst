@@ -56,6 +56,7 @@ Supported options are:
 - ``mime_types_strict(Boolean)``
 - ``mime_type_overrides(Overrides)``
 - ``fallback_file(Fallback)``
+- ``directory_listing(BooleanOrOptions)``
 - ``cors(Policy)``
 - ``cache_control(Directives)``
 - ``expires(Expires)``
@@ -67,6 +68,7 @@ Default options are:
 - ``mime_types_strict(false)``
 - ``mime_type_overrides([])``
 - ``fallback_file(none)``
+- ``directory_listing(false)``
 - ``cors([])``
 - ``cache_control([])``
 - ``expires(none)``
@@ -101,6 +103,8 @@ Supported features:
 - ``301 Moved Permanently`` trailing-slash redirects for directory
   targets
 - index-file lookup for directory targets
+- optional directory-listing fallback for directory targets without an
+  index file, using the ``http_directory_listing`` library
 - precompressed ``.br`` and ``.gz`` asset negotiation driven by
   ``Accept-Encoding``
 - ``Vary: Accept-Encoding`` responses when negotiated precompressed
@@ -140,6 +144,13 @@ Cache-policy configuration uses these option values:
   with ``200 OK`` status for SPA client-side routes; fallback files are
   only considered after the requested path has resolved safely inside
   the document root
+- ``directory_listing(false)`` to omit directory-listing fallback,
+  ``directory_listing(true)`` to serve listings using the
+  ``http_directory_listing`` defaults, or ``directory_listing(Options)``
+  to pass options to ``http_directory_listing::serve/5``; listing
+  fallback is only used for existing directory targets after
+  trailing-slash redirect checks and index-file lookup, and before
+  generic ``fallback_file/1`` handling
 - ``cors([])`` to omit CORS response decoration, or ``cors(Policy)`` to
   decorate generated responses using
   ``http_cors::add_response_headers/4``; when the policy omits

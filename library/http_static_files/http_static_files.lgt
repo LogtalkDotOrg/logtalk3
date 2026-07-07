@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-06,
+		date is 2026-07-07,
 		comment is 'Router-agnostic static file response helper built on the normalized ``http_core`` library.'
 	]).
 
@@ -106,6 +106,9 @@
 	valid_option(fallback_file(Fallback)) :-
 		ground(Fallback),
 		valid_fallback_file(Fallback).
+	valid_option(directory_listing(Listing)) :-
+		ground(Listing),
+		valid_directory_listing(Listing).
 	valid_option(cors(Policy)) :-
 		ground(Policy),
 		valid_cors_policy(Policy).
@@ -124,6 +127,7 @@
 	default_option(mime_types_strict(false)).
 	default_option(mime_type_overrides([])).
 	default_option(fallback_file(none)).
+	default_option(directory_listing(false)).
 	default_option(cors([])).
 	default_option(cache_control([])).
 	default_option(expires(none)).
@@ -139,7 +143,10 @@
 			( 	File == not_acceptable ->
 				Resource = not_acceptable(VaryAcceptEncoding)
 			;	resource(File, ResourcePath, Options, VaryAcceptEncoding, Resource)
-			)
+			) ->
+			true
+		; 	directory_listing_resource(Path, Root, Candidate, Options, Resource) ->
+			true
 		;	fallback_resource(Root, Request, Options, Resource)
 		).
 
@@ -217,6 +224,16 @@
 
 	fallback_status_path(not_found(Path), status(404, 'Not Found'), Path).
 	fallback_status_path(spa(Path), status(200, 'OK'), Path).
+
+	directory_listing_resource(Path, Root, Candidate, Options, listing(Path, Root, ListingOptions)) :-
+		os::directory_exists(Candidate),
+		^^option(directory_listing(Listing), Options),
+		directory_listing_options(Listing, ListingOptions).
+
+	directory_listing_options(true, []) :-
+		!.
+	directory_listing_options(Options, Options) :-
+		valid_directory_listing_options(Options).
 
 	status_resource(status(200, 'OK'), Resource, Resource) :-
 		!.
@@ -622,6 +639,9 @@
 	resource_response(Request, redirect(Location), Response) :-
 		!,
 		redirect_response(Request, Location, Response).
+	resource_response(Request, listing(Path, Root, Options), Response) :-
+		!,
+		http_directory_listing::serve(Path, Request, Root, Response, Options).
 	resource_response(Request, not_acceptable(VaryAcceptEncoding), Response) :-
 		!,
 		not_acceptable_response(Request, VaryAcceptEncoding, Response).
@@ -923,6 +943,8 @@
 			true
 		;	existing_target_file(Candidate, Root, Options, _File, _ResourcePath) ->
 			true
+		; 	directory_listing_resource(Path, Root, Candidate, Options, _Resource) ->
+			true
 		;	fallback_target_file(Root, Options, _Status, _FallbackFile, _FallbackPath)
 		).
 
@@ -977,6 +999,18 @@
 		atom(Path),
 		Path \== '',
 		catch(^^validate_relative_path(Path), _, fail).
+
+	valid_directory_listing(false) :-
+		!.
+	valid_directory_listing(true) :-
+		!.
+	valid_directory_listing(Options) :-
+		valid_directory_listing_options(Options).
+
+	valid_directory_listing_options([]).
+	valid_directory_listing_options([Option| Options]) :-
+		http_directory_listing::valid_option(Option),
+		valid_directory_listing_options(Options).
 
 	valid_cors_policy([]).
 	valid_cors_policy([Option| Options]) :-

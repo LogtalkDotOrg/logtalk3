@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-06,
+		date is 2026-07-07,
 		comment is 'Unit tests for the "http_static_files" library.'
 	]).
 
@@ -155,6 +155,81 @@
 		http_static_files::serve('docs/', Request, Root, Response),
 		status(Response, status(200, 'OK')),
 		body(Response, content('text/html', file(File, 0, 2))).
+
+	test(http_static_files_serve_5_25, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'listing', Directory),
+		os::make_directory_path(Directory),
+		os::path_concat(Directory, 'guide.txt', File),
+		write_file_atom(File, 'guide'),
+		request(get, origin('/listing/'), http(1, 1), [], empty, [], Request),
+		http_static_files::serve('listing/', Request, Root, [directory_listing(true)], Response),
+		status(Response, status(200, 'OK')),
+		body(Response, content('text/html', text(HTML))),
+		once(sub_atom(HTML, _, _, _, '<a href="guide.txt">guide.txt</a>')),
+		once(sub_atom(HTML, _, _, _, '<code>/listing/</code>')).
+
+	test(http_static_files_serve_5_26, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'listing-redirect', Directory),
+		os::make_directory_path(Directory),
+		os::path_concat(Directory, 'guide.txt', File),
+		write_file_atom(File, 'guide'),
+		request(get, origin('/listing-redirect'), http(1, 1), [], empty, [], Request),
+		http_static_files::serve('listing-redirect', Request, Root, [directory_listing(true)], Response),
+		status(Response, status(301, 'Moved Permanently')),
+		header(Response, location, '/listing-redirect/'),
+		body(Response, content('text/plain', text('Moved Permanently'))).
+
+	test(http_static_files_serve_5_27, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'listing-custom', Directory),
+		os::make_directory_path(Directory),
+		os::path_concat(Directory, 'guide.txt', File),
+		write_file_atom(File, 'guide'),
+		request(get, origin('/listing-custom/'), http(1, 1), [], empty, [], Request),
+		http_static_files::serve('listing-custom/', Request, Root, [directory_listing([title('Files'), columns([name])])], Response),
+		status(Response, status(200, 'OK')),
+		body(Response, content('text/html', text(HTML))),
+		once(sub_atom(HTML, _, _, _, '<title>')),
+		once(sub_atom(HTML, _, _, _, 'Files')),
+		once(sub_atom(HTML, _, _, _, '<a href="guide.txt">guide.txt</a>')),
+		\+ sub_atom(HTML, _, _, _, '?sort=size'),
+		\+ sub_atom(HTML, _, _, _, '?sort=type').
+
+	test(http_static_files_serve_5_28, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'no-listing', Directory),
+		os::make_directory_path(Directory),
+		request(get, origin('/no-listing/'), http(1, 1), [], empty, [], Request),
+		http_static_files::serve('no-listing/', Request, Root, Response),
+		status(Response, status(404, 'Not Found')),
+		body(Response, content('text/plain', text('Not Found'))).
+
+	test(http_static_files_serve_5_29, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'listing-index', Directory),
+		os::make_directory_path(Directory),
+		os::path_concat(Directory, 'index.html', IndexFile),
+		write_file_atom(IndexFile, 'index'),
+		os::path_concat(Directory, 'guide.txt', GuideFile),
+		write_file_atom(GuideFile, 'guide'),
+		request(get, origin('/listing-index/'), http(1, 1), [], empty, [], Request),
+		http_static_files::serve('listing-index/', Request, Root, [directory_listing(true)], Response),
+		status(Response, status(200, 'OK')),
+		body(Response, content('text/html', file(IndexFile, 0, 5))).
+
+	test(http_static_files_serve_5_30, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'listing-options', Directory),
+		os::make_directory_path(Directory),
+		os::path_concat(Directory, 'guide.txt', File),
+		write_file_atom(File, 'guide'),
+		request(options, origin('/listing-options/'), http(1, 1), [], empty, [], Request),
+		http_static_files::serve('listing-options/', Request, Root, [directory_listing(true)], Response),
+		status(Response, status(204, 'No Content')),
+		header(Response, allow, 'GET, HEAD, OPTIONS'),
+		body(Response, empty).
 
 	test(http_static_files_serve_4_02, deterministic) :-
 		ensure_docroot(Root),
@@ -616,6 +691,16 @@
 		ensure_docroot(Root),
 		request(get, origin('/'), http(1, 1), [], empty, [], Request),
 		http_static_files::serve('/', Request, Root, [fallback_file(spa(''))], _Response).
+
+	test(http_static_files_serve_5_31, error(domain_error(option, directory_listing(_)))) :-
+		ensure_docroot(Root),
+		request(get, origin('/'), http(1, 1), [], empty, [], Request),
+		http_static_files::serve('/', Request, Root, [directory_listing(_)], _Response).
+
+	test(http_static_files_serve_5_32, error(domain_error(option, directory_listing([title('Files'), bogus])))) :-
+		ensure_docroot(Root),
+		request(get, origin('/'), http(1, 1), [], empty, [], Request),
+		http_static_files::serve('/', Request, Root, [directory_listing([title('Files'), bogus])], _Response).
 
 	test(http_static_files_serve_5_19, deterministic) :-
 		ensure_docroot(Root),
