@@ -313,12 +313,6 @@
 		atom_codes('wMNl45x8O/GwpKqsO3mZV1', ExpectedChecksum),
 		apr1(Password, Salt, Checksum).
 
-	test(crypto_apr1_3_04, fail) :-
-		atom_codes('Circle Of Life', Password),
-		atom_codes('portable', Salt),
-		atom_codes('G/0Ac3GBA/V51P9DJ7acL.', Checksum),
-		apr1(Password, Salt, Checksum).
-
 	test(crypto_apr1_3_05, error(instantiation_error)) :-
 		apr1(_, [0'x], _Checksum).
 
@@ -334,12 +328,6 @@
 
 	test(crypto_apr1_3_09, error(domain_error(apr1_salt, [0'$]))) :-
 		apr1([0'p], [0'$], _Checksum).
-
-	test(crypto_apr1_3_10, error(type_error(list(byte), foo))) :-
-		apr1([0'p], [0'x], foo).
-
-	test(crypto_apr1_3_11, error(domain_error(apr1_checksum, []))) :-
-		apr1([0'p], [0'x], []).
 
 	% password_hash/4 tests
 

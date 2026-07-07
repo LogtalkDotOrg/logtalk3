@@ -77,7 +77,7 @@
 	:- public(hkdf/5).
 	:- mode(hkdf(+object_identifier, +list(byte), +non_negative_integer, -list(byte), +list(compound)), one_or_error).
 	:- info(hkdf/5, [
-		comment is 'Derives a byte sequence of the requested length from input keying material using HKDF with a hash object implementing the `hash_digest_protocol` protocol.',
+		comment is 'Derives a byte sequence of the requested length from input keying material using HKDF with a hash object implementing the ``hash_digest_protocol`` protocol.',
 		argnames is ['Hash', 'KeyMaterial', 'Length', 'Bytes', 'Options'],
 		remarks is [
 			'Repeated options' - 'When the same HKDF option is given multiple times, the last occurrence is used.',
@@ -108,7 +108,7 @@
 	:- public(pbkdf2/6).
 	:- mode(pbkdf2(+object_identifier, +list(byte), +list(byte), +integer, +non_negative_integer, -list(byte)), one_or_error).
 	:- info(pbkdf2/6, [
-		comment is 'Derives a key from a password byte sequence and a salt using PBKDF2 with a hash object implementing the `hash_digest_protocol` protocol.',
+		comment is 'Derives a key from a password byte sequence and a salt using PBKDF2 with a hash object implementing the ``hash_digest_protocol`` protocol.',
 		argnames is ['Hash', 'Password', 'Salt', 'Iterations', 'Length', 'DerivedKey'],
 		exceptions is [
 			'``Hash`` is a variable' - instantiation_error,
@@ -133,7 +133,6 @@
 
 	:- public(apr1/3).
 	:- mode(apr1(+list(byte), +list(byte), -list(byte)), one_or_error).
-	:- mode(apr1(+list(byte), +list(byte), +list(byte)), zero_or_one_or_error).
 	:- info(apr1/3, [
 		comment is 'Computes the Apache APR1 encoded checksum for a password byte sequence and salt byte sequence.',
 		argnames is ['Password', 'Salt', 'Checksum'],
@@ -146,19 +145,14 @@
 			'``Salt`` is a list but not a list of bytes' - type_error(list(byte), 'Salt'),
 			'``Salt`` contains a non-integer element' - type_error(integer, 'Byte'),
 			'``Salt`` contains an integer outside the byte range' - domain_error(byte, 'Byte'),
-			'``Salt`` is not a valid APR1 salt' - domain_error(apr1_salt, 'Salt'),
-			'``Checksum`` is a partial list or a list with an element which is a variable' - instantiation_error,
-			'``Checksum`` is neither a variable nor a list of bytes' - type_error(list(byte), 'Checksum'),
-			'``Checksum`` contains a non-integer element' - type_error(integer, 'Byte'),
-			'``Checksum`` contains an integer outside the byte range' - domain_error(byte, 'Byte'),
-			'``Checksum`` is not a valid APR1 checksum' - domain_error(apr1_checksum, 'Checksum')
+			'``Salt`` is not a valid APR1 salt' - domain_error(apr1_salt, 'Salt')
 		]
 	]).
 
 	:- public(password_hash/4).
 	:- mode(password_hash(+object_identifier, +list(byte), -compound, +list(compound)), one_or_error).
 	:- info(password_hash/4, [
-		comment is 'Computes a structured password-hash term using PBKDF2, a hash object implementing the `hash_digest_protocol` protocol, and the given derivation options.',
+		comment is 'Computes a structured password-hash term using PBKDF2, a hash object implementing the ``hash_digest_protocol`` protocol, and the given derivation options.',
 		argnames is ['Hash', 'Password', 'PasswordHash', 'Options'],
 		remarks is [
 			'Repeated options' - 'When the same password-hash option is given multiple times, the last occurrence is used.',
@@ -308,11 +302,6 @@
 		check(list(byte), Password, Context),
 		check(list(byte), Salt, Context),
 		check_apr1_salt(Salt, Context),
-		(	var(Checksum) ->
-			true
-		;	check(list(byte), Checksum, Context),
-			check_apr1_checksum(Checksum, Context)
-		),
 		apr1_digest(Password, Salt, Digest),
 		apr1_encode_digest(Digest, ComputedChecksum),
 		Checksum = ComputedChecksum.

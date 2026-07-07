@@ -604,7 +604,7 @@
 </section>
 <section id="hkdf-5">
 <span id="crypto-0-hkdf-5"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">hkdf/5</span></code></a><a class="headerlink" href="#hkdf-5" title="Link to this heading"></a></h3>
-<p>Derives a byte sequence of the requested length from input keying material using HKDF with a hash object implementing the <cite>hash_digest_protocol</cite> protocol.</p>
+<p>Derives a byte sequence of the requested length from input keying material using HKDF with a hash object implementing the <code class="docutils literal notranslate"><span class="pre">hash_digest_protocol</span></code> protocol.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -708,7 +708,7 @@
 </section>
 <section id="pbkdf2-6">
 <span id="crypto-0-pbkdf2-6"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">pbkdf2/6</span></code></a><a class="headerlink" href="#pbkdf2-6" title="Link to this heading"></a></h3>
-<p>Derives a key from a password byte sequence and a salt using PBKDF2 with a hash object implementing the <cite>hash_digest_protocol</cite> protocol.</p>
+<p>Derives a key from a password byte sequence and a salt using PBKDF2 with a hash object implementing the <code class="docutils literal notranslate"><span class="pre">hash_digest_protocol</span></code> protocol.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -817,7 +817,6 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">apr1(+list(byte),+list(byte),-list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">apr1(+list(byte),+list(byte),+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
@@ -859,33 +858,13 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(apr1_salt,Salt)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Checksum</span></code> is a partial list or a list with an element which is a variable:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
-</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Checksum</span></code> is neither a variable nor a list of bytes:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte),Checksum)</span></code></div>
-</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Checksum</span></code> contains a non-integer element:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Byte)</span></code></div>
-</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Checksum</span></code> contains an integer outside the byte range:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(byte,Byte)</span></code></div>
-</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Checksum</span></code> is not a valid APR1 checksum:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(apr1_checksum,Checksum)</span></code></div>
-</div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="password-hash-4">
 <span id="crypto-0-password-hash-4"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">password_hash/4</span></code></a><a class="headerlink" href="#password-hash-4" title="Link to this heading"></a></h3>
-<p>Computes a structured password-hash term using PBKDF2, a hash object implementing the <cite>hash_digest_protocol</cite> protocol, and the given derivation options.</p>
+<p>Computes a structured password-hash term using PBKDF2, a hash object implementing the <code class="docutils literal notranslate"><span class="pre">hash_digest_protocol</span></code> protocol, and the given derivation options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

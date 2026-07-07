@@ -147,7 +147,7 @@ Succeeds when both inputs are equal using a constant-time comparison strategy fo
 ``hkdf/5``
 ^^^^^^^^^^
 
-Derives a byte sequence of the requested length from input keying material using HKDF with a hash object implementing the `hash_digest_protocol` protocol.
+Derives a byte sequence of the requested length from input keying material using HKDF with a hash object implementing the ``hash_digest_protocol`` protocol.
 
 | **Compilation flags:**
 |    ``static``
@@ -208,7 +208,7 @@ Derives a byte sequence of the requested length from input keying material using
 ``pbkdf2/6``
 ^^^^^^^^^^^^
 
-Derives a key from a password byte sequence and a salt using PBKDF2 with a hash object implementing the `hash_digest_protocol` protocol.
+Derives a key from a password byte sequence and a salt using PBKDF2 with a hash object implementing the ``hash_digest_protocol`` protocol.
 
 | **Compilation flags:**
 |    ``static``
@@ -272,7 +272,6 @@ Computes the Apache APR1 encoded checksum for a password byte sequence and salt 
 |    ``apr1(Password,Salt,Checksum)``
 | **Mode and number of proofs:**
 |    ``apr1(+list(byte),+list(byte),-list(byte))`` - ``one_or_error``
-|    ``apr1(+list(byte),+list(byte),+list(byte))`` - ``zero_or_one_or_error``
 
 | **Exceptions:**
 |    ``Password`` is a partial list or a list with an element which is a variable:
@@ -293,16 +292,6 @@ Computes the Apache APR1 encoded checksum for a password byte sequence and salt 
 |        ``domain_error(byte,Byte)``
 |    ``Salt`` is not a valid APR1 salt:
 |        ``domain_error(apr1_salt,Salt)``
-|    ``Checksum`` is a partial list or a list with an element which is a variable:
-|        ``instantiation_error``
-|    ``Checksum`` is neither a variable nor a list of bytes:
-|        ``type_error(list(byte),Checksum)``
-|    ``Checksum`` contains a non-integer element:
-|        ``type_error(integer,Byte)``
-|    ``Checksum`` contains an integer outside the byte range:
-|        ``domain_error(byte,Byte)``
-|    ``Checksum`` is not a valid APR1 checksum:
-|        ``domain_error(apr1_checksum,Checksum)``
 
 
 ------------
@@ -313,7 +302,7 @@ Computes the Apache APR1 encoded checksum for a password byte sequence and salt 
 ``password_hash/4``
 ^^^^^^^^^^^^^^^^^^^
 
-Computes a structured password-hash term using PBKDF2, a hash object implementing the `hash_digest_protocol` protocol, and the given derivation options.
+Computes a structured password-hash term using PBKDF2, a hash object implementing the ``hash_digest_protocol`` protocol, and the given derivation options.
 
 | **Compilation flags:**
 |    ``static``
