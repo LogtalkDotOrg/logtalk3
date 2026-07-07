@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-07-07,
 		comment is 'Transport-neutral HTMX request classification, HTML reply helpers, and response decoration helpers for normalized HTTP messages.'
 	]).
 
@@ -442,16 +442,17 @@
 		equivalent_origin_port(URLScheme, URLPort, RequestPort).
 
 	request_origin_endpoint(Request, Host, Port) :-
-		(	http_core::property(Request, host(Host, Port)) ->
+		(	http_core::property(Request, host(Host0, Port)) ->
 			true
-		;	http_core::property(Request, host(Host)) ->
+		;	http_core::property(Request, host(Host0)) ->
 			Port = implied
-		;	http_core::header(Request, host, host(Host, Port)) ->
+		;	http_core::header(Request, host, host(Host0, Port)) ->
 			true
-		;	http_core::header(Request, host, host(Host)) ->
+		;	http_core::header(Request, host, host(Host0)) ->
 			Port = implied
 		;	false
-		).
+		),
+		lowercase_ascii_atom(Host0, Host).
 
 	authority_endpoint(Authority, Host, Port) :-
 		strip_authority_userinfo(Authority, HostPort),
@@ -681,7 +682,7 @@
 		!,
 		HeaderValue = Value.
 	trigger_header_value(Value, HeaderValue) :-
-		valid_atom_list(Value),
+		valid_trigger_event_list(Value),
 		!,
 		atomic_list_concat(Value, ', ', HeaderValue).
 	trigger_header_value(Value, HeaderValue) :-
@@ -900,7 +901,7 @@
 		valid_non_empty_atom(Value),
 		!.
 	valid_trigger_value(Value) :-
-		valid_atom_list(Value),
+		valid_trigger_event_list(Value),
 		Value \== [],
 		!.
 	valid_trigger_value(Value) :-
@@ -926,6 +927,8 @@
 	valid_location_pair(swap, Value, PathSeen, PathSeen) :-
 		valid_non_empty_atom(Value).
 	valid_location_pair(select, Value, PathSeen, PathSeen) :-
+		valid_non_empty_atom(Value).
+	valid_location_pair(selectOOB, Value, PathSeen, PathSeen) :-
 		valid_non_empty_atom(Value).
 	valid_location_pair(push, Value, PathSeen, PathSeen) :-
 		valid_push_replace_value(Value).
@@ -973,10 +976,11 @@
 		ground(Value),
 		catch(^^normalize_json_value(Value, _), _, fail).
 
-	valid_atom_list([]).
-	valid_atom_list([Atom| Atoms]) :-
-		atom(Atom),
-		valid_atom_list(Atoms).
+	valid_trigger_event_list([]).
+	valid_trigger_event_list([Event| Events]) :-
+		valid_non_empty_atom(Event),
+		\+ member(Event, Events),
+		valid_trigger_event_list(Events).
 
 	text_atom(Value, Atom) :-
 		atom(Value),

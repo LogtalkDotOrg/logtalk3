@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-26,
+		date is 2026-07-07,
 		comment is 'Unit tests for the ``http_htmx`` library.'
 	]).
 
@@ -110,6 +110,30 @@
 			Request
 		),
 		http_htmx::current_url_abs_path(Request, _AbsolutePath).
+
+	test(http_htmx_current_url_abs_path_2_04, deterministic(AbsolutePath == '/items/1')) :-
+		request(
+			get,
+			origin('/items/1'),
+			http(1, 1),
+			[host-host('EXAMPLE.com', 443), hx_current_url-'https://example.com/items/1'],
+			empty,
+			[scheme(https)],
+			Request
+		),
+		http_htmx::current_url_abs_path(Request, AbsolutePath).
+
+	test(http_htmx_current_url_abs_path_2_05, deterministic(AbsolutePath == '/items/1')) :-
+		request(
+			get,
+			origin('/items/1'),
+			http(1, 1),
+			[host-host('example.com'), hx_current_url-'https://example.com:443/items/1'],
+			empty,
+			[scheme(https)],
+			Request
+		),
+		http_htmx::current_url_abs_path(Request, AbsolutePath).
 
 	test(http_htmx_request_properties_2_01, deterministic(Properties == [htmx_request(true), htmx_request_kind(history_restore), htmx_boosted(true), htmx_target(panel), htmx_trigger('save-button'), htmx_trigger_name(save), htmx_current_url('https://example.com/items/1'), htmx_current_url_abs_path('/items/1'), htmx_prompt('Rename?'), htmx_history_restore_request(true)])) :-
 		request(
@@ -270,10 +294,11 @@
 	test(http_htmx_add_response_headers_4_03, deterministic) :-
 		request(get, origin('/items/1'), http(1, 1), [hx_request-'true'], empty, [], Request),
 		response(http(1, 1), status(200, 'OK'), [], content('text/html', text('<div>ok</div>')), [], Response0),
-		http_htmx::add_response_headers(Request, Response0, Response, [location({path-'/items/2', target-'#panel', swap-'innerHTML', select-'#item', push-false, replace-'/items/2', source-'link-1', event-click, handler-'swap-handler', values-{page-1}, headers-{accept-'text/html'}})]),
+		http_htmx::add_response_headers(Request, Response0, Response, [location({path-'/items/2', target-'#panel', swap-'innerHTML', select-'#item', selectOOB-'#flash', push-false, replace-'/items/2', source-'link-1', event-click, handler-'swap-handler', values-{page-1}, headers-{accept-'text/html'}})]),
 		once(header(Response, hx_location, Location)),
 		once(sub_atom(Location, _, _, _, '"path":"/items/2"')),
 		once(sub_atom(Location, _, _, _, '"swap":"innerHTML"')),
+		once(sub_atom(Location, _, _, _, '"selectOOB":"#flash"')),
 		once(sub_atom(Location, _, _, _, '"push":false')),
 		once(sub_atom(Location, _, _, _, '"values":{"page":1}')),
 		once(sub_atom(Location, _, _, _, '"headers":{"accept":"text/html"}')).
@@ -317,6 +342,14 @@
 	test(http_htmx_reply_4_06, error(domain_error(option, trigger(1)))) :-
 		request(get, origin('/items/1'), http(1, 1), [hx_request-'true'], empty, [], Request),
 		http_htmx::reply(Request, '<div>item</div>', _Response, [trigger(1)]).
+
+	test(http_htmx_reply_4_10, error(domain_error(option, trigger([saved, ''])))) :-
+		request(get, origin('/items/1'), http(1, 1), [hx_request-'true'], empty, [], Request),
+		http_htmx::reply(Request, '<div>item</div>', _Response, [trigger([saved, ''])]).
+
+	test(http_htmx_reply_4_11, error(domain_error(option, trigger([saved, saved])))) :-
+		request(get, origin('/items/1'), http(1, 1), [hx_request-'true'], empty, [], Request),
+		http_htmx::reply(Request, '<div>item</div>', _Response, [trigger([saved, saved])]).
 
 	test(http_htmx_reply_4_07, error(domain_error(htmx_response_headers_status, status(302, 'Found')))) :-
 		request(get, origin('/items/1'), http(1, 1), [hx_request-'true'], empty, [], Request),

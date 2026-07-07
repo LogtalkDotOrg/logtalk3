@@ -492,7 +492,9 @@ repository JSON-term conventions through the shared HTTP JSON helpers,
 with HTMX-specific validation of the top-level shape:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">location/1</span></code> accepts either a URL atom or a JSON object with a
-required <code class="docutils literal notranslate"><span class="pre">path</span></code> key and only the documented HTMX optional keys</p></li>
+required <code class="docutils literal notranslate"><span class="pre">path</span></code> key and only the documented HTMX optional keys
+(<code class="docutils literal notranslate"><span class="pre">source</span></code>, <code class="docutils literal notranslate"><span class="pre">event</span></code>, <code class="docutils literal notranslate"><span class="pre">handler</span></code>, <code class="docutils literal notranslate"><span class="pre">target</span></code>, <code class="docutils literal notranslate"><span class="pre">swap</span></code>, <code class="docutils literal notranslate"><span class="pre">values</span></code>,
+<code class="docutils literal notranslate"><span class="pre">headers</span></code>, <code class="docutils literal notranslate"><span class="pre">select</span></code>, <code class="docutils literal notranslate"><span class="pre">selectOOB</span></code>, <code class="docutils literal notranslate"><span class="pre">push</span></code>, and <code class="docutils literal notranslate"><span class="pre">replace</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">trigger/1</span></code>, <code class="docutils literal notranslate"><span class="pre">trigger_after_settle/1</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">trigger_after_swap/1</span></code> accept either a single event atom, a list of
 event atoms, or a JSON object whose top-level keys are event names</p></li>

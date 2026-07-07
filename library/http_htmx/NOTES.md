@@ -150,6 +150,8 @@ HTMX-specific validation of the top-level shape:
 
 - `location/1` accepts either a URL atom or a JSON object with a required
     `path` key and only the documented HTMX optional keys
+    (`source`, `event`, `handler`, `target`, `swap`, `values`, `headers`,
+    `select`, `selectOOB`, `push`, and `replace`)
 - `trigger/1`, `trigger_after_settle/1`, and `trigger_after_swap/1` accept
     either a single event atom, a list of event atoms, or a JSON object whose
     top-level keys are event names
