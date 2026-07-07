@@ -434,6 +434,18 @@ response:</p>
 <span class="nv">Response</span> <span class="o">=</span> response(http(<span class="m">1</span>,<span class="m">1</span>), status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), <span class="nv">_</span>, content(<span class="s">&#39;text/plain&#39;</span>, text(hello)), <span class="nv">_</span>).
 </pre></div>
 </div>
+<p>The QUERY method uses the same body-carrying convenience shape as POST,
+PUT, and PATCH:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> http_socket<span class="o">::</span>open_listener(<span class="s">&#39;127.0.0.1&#39;</span>, <span class="nv">Port</span>, <span class="nv">Listener</span>, []),
+     <span class="k">threaded_once</span>(http_socket<span class="o">::</span>serve_once(<span class="nv">Listener</span>, notes_http_client_echo_handler, <span class="nv">_</span>), <span class="nv">Tag</span>),
+     atomic_list_concat([<span class="s">&#39;http://127.0.0.1:&#39;</span>, <span class="nv">Port</span>, <span class="s">&#39;/contacts&#39;</span>], <span class="nv">URL</span>),
+     http_client<span class="o">::</span>query(<span class="nv">URL</span>, content(<span class="s">&#39;application/x-www-form-urlencoded&#39;</span>, form([limit<span class="o">-</span><span class="s">&#39;10&#39;</span>])), <span class="nv">Response</span>, []),
+     <span class="k">threaded_exit</span>(http_socket<span class="o">::</span>serve_once(<span class="nv">Listener</span>, notes_http_client_echo_handler, <span class="nv">_</span>), <span class="nv">Tag</span>),
+     http_socket<span class="o">::</span>close_listener(<span class="nv">Listener</span>).
+
+<span class="nv">Response</span> <span class="o">=</span> response(http(<span class="m">1</span>,<span class="m">1</span>), status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), <span class="nv">_</span>, content(<span class="s">&#39;application/x-www-form-urlencoded&#39;</span>, form([limit<span class="o">-</span><span class="s">&#39;10&#39;</span>])), <span class="nv">_</span>).
+</pre></div>
+</div>
 <p>For a multipart form-data request, define a handler that inspects the
 normalized request body using <code class="docutils literal notranslate"><span class="pre">http_multipart</span></code>:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(notes_http_client_multipart_handler,

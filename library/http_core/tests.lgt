@@ -73,7 +73,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-18,
+		date is 2026-07-07,
 		comment is 'Unit tests for the "http" library.'
 	]).
 
@@ -205,6 +205,9 @@
 	test(http_request_7_06, deterministic(Request == request(get, origin('/users'), http(1, 1), ['foo!bar'-'baz'], empty, []))) :-
 		request(get, origin('/users'), http(1, 1), ['foo!bar'-'baz'], empty, [], Request).
 
+	test(http_request_7_11, deterministic(Request == request(query, origin('/contacts'), http(1, 1), [host-'example.com'], content('application/x-www-form-urlencoded', form([limit-'10'])), []))) :-
+		request(query, origin('/contacts'), http(1, 1), [host-'example.com'], content('application/x-www-form-urlencoded', form([limit-'10'])), [], Request).
+
 	test(http_response_6_01, deterministic(Response == response(http(1, 1), status(200, 'OK'), [content_type-'application/json'], content('application/json', json({ok- @true})), [decoded_body(true)]))) :-
 		response(http(1, 1), status(200, 'OK'), [content_type-'application/json'], content('application/json', json({ok- @true})), [decoded_body(true)], Response).
 
@@ -257,8 +260,14 @@
 	test(http_parse_request_line_2_01, deterministic(RequestLine == request_line(get, origin('/users', 'active=true'), http(1, 1)))) :-
 		parse_request_line(atom('GET /users?active=true HTTP/1.1\r\n'), RequestLine).
 
+	test(http_parse_request_line_2_02, deterministic(RequestLine == request_line(query, origin('/contacts'), http(1, 1)))) :-
+		parse_request_line(atom('QUERY /contacts HTTP/1.1\r\n'), RequestLine).
+
 	test(http_generate_request_line_2_01, deterministic(Line == 'POST example.com:443 HTTP/1.1\r\n')) :-
 		generate_request_line(atom(Line), request_line(post, authority('example.com', 443), http(1, 1))).
+
+	test(http_generate_request_line_2_02, deterministic(Line == 'QUERY /contacts HTTP/1.1\r\n')) :-
+		generate_request_line(atom(Line), request_line(query, origin('/contacts'), http(1, 1))).
 
 	test(http_parse_status_line_2_01, deterministic(StatusLine == status_line(http(1, 1), status(404, 'Not Found')))) :-
 		parse_status_line(atom('HTTP/1.1 404 Not Found\r\n'), StatusLine).
@@ -296,6 +305,13 @@
 			atom('Foo!Bar: baz\r\n'),
 			Headers
 		).
+
+	test(http_parse_headers_2_04, deterministic(Headers == [accept_query-[media_range('application/jsonpath', []), media_range('application/sql', [charset-'UTF-8'])]])) :-
+		parse_headers(
+			atom('Accept-Query: "application/jsonpath", application/sql;charset="UTF-8"\r\n'),
+			Headers
+		).
+
 	test(http_generate_headers_2_01, deterministic(HeaderBlock == 'content-type: application/json; charset=utf-8\r\ncontent-length: 17\r\ncookie: session=abc\r\nset-cookie: SID=31d4d96e407aad42; Path=/; Secure\r\nhost: example.com:8080\r\n')) :-
 		generate_headers(
 			atom(HeaderBlock),
@@ -325,6 +341,12 @@
 		generate_headers(
 			atom(HeaderBlock),
 			['foo!bar'-'baz']
+		).
+
+	test(http_generate_headers_2_04, deterministic(HeaderBlock == 'accept-query: application/jsonpath, application/sql;charset="UTF-8"\r\n')) :-
+		generate_headers(
+			atom(HeaderBlock),
+			[accept_query-[media_range('application/jsonpath', []), media_range('application/sql', [charset-'UTF-8'])]]
 		).
 
 	test(http_encode_body_4_01, deterministic(Body == content('application/json', json({name-'Alice'})))) :-
@@ -413,6 +435,19 @@
 		body(Request, content('application/json', json({city-City}))),
 		atom_codes(City, [225]),
 		property(Request, content_length(17)),
+		property(Request, decoded_body(true)).
+
+	test(http_parse_request_2_04, deterministic) :-
+		parse_request(
+			atom('QUERY /contacts HTTP/1.1\r\nhost: example.com\r\ncontent-type: application/x-www-form-urlencoded\r\ncontent-length: 8\r\n\r\nlimit=10'),
+			Request
+		),
+		method(Request, query),
+		target(Request, origin('/contacts')),
+		body(Request, content('application/x-www-form-urlencoded', form([limit-'10']))),
+		property(Request, host('example.com')),
+		property(Request, content_type('application/x-www-form-urlencoded', [])),
+		property(Request, content_length(8)),
 		property(Request, decoded_body(true)).
 
 	test(http_generate_request_2_01, deterministic(Message == 'POST /users HTTP/1.1\r\ncontent-length: 16\r\ncontent-type: application/json\r\nhost: example.com\r\n\r\n{"name":"Alice"}')) :-
@@ -577,6 +612,22 @@
 		^^file_path('test_http_response_body.tmp', File),
 		Response = response(http(1, 1), status(206, 'Partial Content'), [], content('application/octet-stream', file(File, 1, 3)), []),
 		generate_response(atom(Message), Response).
+
+	test(http_generate_response_2_07, deterministic) :-
+		Response = response(
+			http(1, 1),
+			status(200, 'OK'),
+			[],
+			empty,
+			[accept_query([media_range('application/jsonpath', []), media_range('application/sql', [charset-'UTF-8'])])]
+		),
+		generate_response(atom(Message), Response),
+		parse_response(atom(Message), ParsedResponse),
+		header(ParsedResponse, accept_query, [media_range('application/jsonpath', []), media_range('application/sql', [charset-'UTF-8'])]),
+		property(ParsedResponse, accept_query([media_range('application/jsonpath', []), media_range('application/sql', [charset-'UTF-8'])])).
+
+	test(http_response_6_03, error(domain_error(http_header_value(accept_query), [media_range('*/json', [])]))) :-
+		response(http(1, 1), status(200, 'OK'), [accept_query-[media_range('*/json', [])]], empty, [], _).
 
 	test(http_request_7_07, error(domain_error(http_header_semantics, content_length(5)))) :-
 		request(get, origin('/users'), http(1, 1), [content_length-5], empty, [], _).

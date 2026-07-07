@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-07-07,
 		comment is 'Unit tests for the "http_router" library.'
 	]).
 
@@ -56,6 +56,13 @@
 		sample_http_router::handle(Request, Response),
 		status(Response, status(200, 'OK')),
 		body(Response, content('text/plain', text(head_status))).
+
+	test(http_router_handle_2_04a, deterministic) :-
+		Request = request(query, origin('/contacts'), http(1, 1), [], content('application/x-www-form-urlencoded', form([limit-'10'])), []),
+		sample_http_router::handle(Request, Response),
+		status(Response, status(200, 'OK')),
+		body(Response, content('application/x-www-form-urlencoded', form([limit-'10']))),
+		property(Response, accept_query([media_range('application/x-www-form-urlencoded', []), media_range('application/jsonpath', [])])).
 
 	test(http_router_handle_2_05, deterministic) :-
 		Request = request(post, origin('/users/42'), http(1, 1), [], empty, []),
@@ -90,11 +97,25 @@
 		header(Response, allow, 'HEAD, GET, OPTIONS'),
 		body(Response, content('text/plain', text('Method Not Allowed'))).
 
+	test(http_router_handle_2_08a, deterministic) :-
+		Request = request(get, origin('/contacts'), http(1, 1), [], empty, []),
+		sample_http_router::handle(Request, Response),
+		status(Response, status(405, 'Method Not Allowed')),
+		header(Response, allow, 'QUERY, OPTIONS'),
+		body(Response, content('text/plain', text('Method Not Allowed'))).
+
 	test(http_router_handle_2_09, deterministic) :-
 		Request = request(options, origin('/users/42'), http(1, 1), [], empty, []),
 		sample_http_router::handle(Request, Response),
 		status(Response, status(200, 'OK')),
 		header(Response, allow, 'GET, HEAD, OPTIONS'),
+		body(Response, empty).
+
+	test(http_router_handle_2_09a, deterministic) :-
+		Request = request(options, origin('/contacts'), http(1, 1), [], empty, []),
+		sample_http_router::handle(Request, Response),
+		status(Response, status(200, 'OK')),
+		header(Response, allow, 'QUERY, OPTIONS'),
 		body(Response, empty).
 
 	test(http_router_handle_2_10, deterministic) :-

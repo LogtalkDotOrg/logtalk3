@@ -54,10 +54,17 @@
 		argnames is ['Request', 'Response']
 	]).
 
+	:- protected(query_contacts/2).
+	:- info(query_contacts/2, [
+		comment is 'Route handler used by the sample router object for ``QUERY /contacts`` requests.',
+		argnames is ['Request', 'Response']
+	]).
+
 	route(list_users, get, '/users', list_users).
 	route(show_user, get, '/users/{id}', show_user).
 	route(status_head, head, '/status', status_head).
 	route(status_get, get, '/status', status_get).
+	route(query_contacts, query, '/contacts', query_contacts).
 
 	list_users(Request, Response) :-
 		http_core::property(Request, route(list_users)),
@@ -87,6 +94,20 @@
 		http_core::property(Request, path_params([])),
 		http_core::version(Request, Version),
 		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(get_status)), [], Response).
+
+	query_contacts(Request, Response) :-
+		http_core::property(Request, route(query_contacts)),
+		http_core::property(Request, path_params([])),
+		http_core::version(Request, Version),
+		http_core::body(Request, Body),
+		http_core::response(
+			Version,
+			status(200, 'OK'),
+			[],
+			Body,
+			[accept_query([media_range('application/x-www-form-urlencoded', []), media_range('application/jsonpath', [])])],
+			Response
+		).
 
 :- end_object.
 

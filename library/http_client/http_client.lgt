@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-07-07,
 		comment is 'Request-oriented HTTP client facade built on top of the url and http_socket libraries.',
 		parnames is ['HTTPSocket']
 	]).
@@ -261,6 +261,38 @@
 		]
 	]).
 
+	:- public(query/4).
+	:- mode(query(+atom, +compound, --compound, +list), one_or_error).
+	:- info(query/4, [
+		comment is 'Convenience wrapper over ``request/4`` using the ``query`` method and the given request body.',
+		argnames is ['URL', 'Body', 'Response', 'Options'],
+		exceptions is [
+			'``URL`` is a variable' - instantiation_error,
+			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
+			'``URL`` uses an unsupported HTTP scheme' - domain_error(http_client_scheme, 'Scheme'),
+			'``Options`` contains an invalid HTTP client request option' - domain_error(http_client_request_option, 'Option'),
+			'``Body`` is invalid for the generated normalized HTTP request' - domain_error(http_body, 'Body'),
+			'The delegated socket exchange rejects the response stream' - domain_error(http_response_stream, 'Error')
+		]
+	]).
+
+	:- public(query/5).
+	:- mode(query(+compound, +atom, +compound, --compound, +list), one_or_error).
+	:- info(query/5, [
+		comment is 'Convenience wrapper over ``request/5`` using the ``query`` method and the given request body.',
+		argnames is ['ConnectionOrPool', 'URL', 'Body', 'Response', 'Options'],
+		exceptions is [
+			'``ConnectionOrPool`` is not a valid reusable connection or pool handle' - domain_error(http_socket_connection_or_pool, 'ConnectionOrPool'),
+			'``ConnectionOrPool`` is not connected to the requested endpoint' - domain_error(http_client_connection_target, endpoint('EndpointHost', 'EndpointPort', 'Host', 'Port')),
+			'``URL`` is a variable' - instantiation_error,
+			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
+			'``URL`` uses an unsupported HTTP scheme' - domain_error(http_client_scheme, 'Scheme'),
+			'``Options`` contains an invalid HTTP client request option' - domain_error(http_client_request_option, 'Option'),
+			'``Body`` is invalid for the generated normalized HTTP request' - domain_error(http_body, 'Body'),
+			'The delegated socket exchange rejects the response stream' - domain_error(http_response_stream, 'Error')
+		]
+	]).
+
 	:- public(open_websocket/4).
 	:- mode(open_websocket(+atom, --compound, --compound, +list), one_or_error).
 	:- info(open_websocket/4, [
@@ -355,6 +387,14 @@
 	patch(ConnectionOrPool, URL, Body, Response, Options) :-
 		RequestOptions = [body(Body)| Options],
 		request(ConnectionOrPool, patch, URL, Response, RequestOptions).
+
+	query(URL, Body, Response, Options) :-
+		RequestOptions = [body(Body)| Options],
+		request(query, URL, Response, RequestOptions).
+
+	query(ConnectionOrPool, URL, Body, Response, Options) :-
+		RequestOptions = [body(Body)| Options],
+		request(ConnectionOrPool, query, URL, Response, RequestOptions).
 
 	open_websocket(URL, Connection, Response, Options) :-
 		parse_websocket_options(Options, Headers, QueryPairs, Version, Protocols, Key, ConnectionOptions0),

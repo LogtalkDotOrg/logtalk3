@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-07-07,
 		comment is 'Transport-independent normalized HTTP request and response constructors, validators, wire parsers and generators, and body codec dispatch.'
 	]).
 
@@ -725,46 +725,50 @@
 			add_unique_property(content_type(MediaType, Parameters), Acc0, Acc1)
 		;	Acc1 = Acc0
 		),
-		(	semantic_single_header_value(Headers, content_length, Length) ->
-			add_unique_property(content_length(Length), Acc1, Acc2)
+		(	semantic_single_header_value(Headers, accept_query, MediaRanges) ->
+			add_unique_property(accept_query(MediaRanges), Acc1, Acc2)
 		;	Acc2 = Acc1
 		),
-		(	semantic_single_header_value(Headers, cookie, Pairs) ->
-			add_unique_property(cookies(Pairs), Acc2, Acc3)
+		(	semantic_single_header_value(Headers, content_length, Length) ->
+			add_unique_property(content_length(Length), Acc2, Acc3)
 		;	Acc3 = Acc2
+		),
+		(	semantic_single_header_value(Headers, cookie, Pairs) ->
+			add_unique_property(cookies(Pairs), Acc3, Acc4)
+		;	Acc4 = Acc3
 		),
 		header_values(Headers, set_cookie, SetCookies),
 		(	SetCookies \== [] ->
-			add_unique_property(set_cookies(SetCookies), Acc3, Acc4)
-		;	Acc4 = Acc3
-		),
-		(	semantic_single_header_value(Headers, connection, ConnectionTokens) ->
-			add_unique_property(connection(ConnectionTokens), Acc4, Acc5)
+			add_unique_property(set_cookies(SetCookies), Acc4, Acc5)
 		;	Acc5 = Acc4
 		),
-		(	semantic_single_header_value(Headers, upgrade, UpgradeTokens) ->
-			add_unique_property(upgrade(UpgradeTokens), Acc5, Acc6)
+		(	semantic_single_header_value(Headers, connection, ConnectionTokens) ->
+			add_unique_property(connection(ConnectionTokens), Acc5, Acc6)
 		;	Acc6 = Acc5
 		),
-		(	semantic_single_header_value(Headers, sec_websocket_key, Key) ->
-			add_unique_property(websocket_key(Key), Acc6, Acc7)
+		(	semantic_single_header_value(Headers, upgrade, UpgradeTokens) ->
+			add_unique_property(upgrade(UpgradeTokens), Acc6, Acc7)
 		;	Acc7 = Acc6
 		),
-		(	semantic_websocket_version_header_value(Headers, Version) ->
-			add_unique_property(websocket_version(Version), Acc7, Acc8)
+		(	semantic_single_header_value(Headers, sec_websocket_key, Key) ->
+			add_unique_property(websocket_key(Key), Acc7, Acc8)
 		;	Acc8 = Acc7
 		),
-		(	semantic_single_header_value(Headers, sec_websocket_accept, Accept) ->
-			add_unique_property(websocket_accept(Accept), Acc8, Acc9)
+		(	semantic_websocket_version_header_value(Headers, Version) ->
+			add_unique_property(websocket_version(Version), Acc8, Acc9)
 		;	Acc9 = Acc8
 		),
-		(	semantic_single_header_value(Headers, sec_websocket_protocol, Protocols) ->
-			add_unique_property(websocket_protocol(Protocols), Acc9, Acc10)
+		(	semantic_single_header_value(Headers, sec_websocket_accept, Accept) ->
+			add_unique_property(websocket_accept(Accept), Acc9, Acc10)
 		;	Acc10 = Acc9
 		),
+		(	semantic_single_header_value(Headers, sec_websocket_protocol, Protocols) ->
+			add_unique_property(websocket_protocol(Protocols), Acc10, Acc11)
+		;	Acc11 = Acc10
+		),
 		(	semantic_single_header_value(Headers, transfer_encoding, TransferTokens) ->
-			add_unique_property(transfer_encoding(TransferTokens), Acc10, Properties)
-		;	Properties = Acc10
+			add_unique_property(transfer_encoding(TransferTokens), Acc11, Properties)
+		;	Properties = Acc11
 		).
 
 	properties_from_body(Body, Properties) :-
@@ -831,6 +835,7 @@
 		semantic_property_functor(Functor, Arity).
 
 	semantic_property_functor(content_type, 2).
+	semantic_property_functor(accept_query, 1).
 	semantic_property_functor(content_length, 1).
 	semantic_property_functor(host, 1).
 	semantic_property_functor(host, 2).
@@ -862,14 +867,15 @@
 
 	response_effective_headers(Headers0, Body, Properties, Headers) :-
 		maybe_add_set_cookie_headers(Properties, Headers0, Headers1),
-		maybe_add_connection_header(Properties, Headers1, Headers2),
-		maybe_add_upgrade_header(Properties, Headers2, Headers3),
-		maybe_add_websocket_accept_header(Properties, Headers3, Headers4),
-		maybe_add_websocket_version_header(Properties, Headers4, Headers5),
-		maybe_add_websocket_protocol_header(Properties, Headers5, Headers6),
-		maybe_add_transfer_encoding_header(Properties, Headers6, Headers7),
-		maybe_add_content_type_header(Body, Properties, Headers7, Headers8),
-		maybe_add_content_length_header(Body, Properties, Headers8, Headers).
+		maybe_add_accept_query_header(Properties, Headers1, Headers2),
+		maybe_add_connection_header(Properties, Headers2, Headers3),
+		maybe_add_upgrade_header(Properties, Headers3, Headers4),
+		maybe_add_websocket_accept_header(Properties, Headers4, Headers5),
+		maybe_add_websocket_version_header(Properties, Headers5, Headers6),
+		maybe_add_websocket_protocol_header(Properties, Headers6, Headers7),
+		maybe_add_transfer_encoding_header(Properties, Headers7, Headers8),
+		maybe_add_content_type_header(Body, Properties, Headers8, Headers9),
+		maybe_add_content_length_header(Body, Properties, Headers9, Headers).
 
 	response_header_bytes(response(Version, Status, Headers0, Body, Properties), Bytes) :-
 		response_effective_headers(Headers0, Body, Properties, Headers),
@@ -915,6 +921,14 @@
 	set_cookie_headers([], []).
 	set_cookie_headers([SetCookie| SetCookies], [set_cookie-SetCookie| Headers]) :-
 		set_cookie_headers(SetCookies, Headers).
+
+	maybe_add_accept_query_header(_Properties, Headers, Headers) :-
+		header_name_present(Headers, accept_query),
+		!.
+	maybe_add_accept_query_header(Properties, Headers, [accept_query-MediaRanges| Headers]) :-
+		member(accept_query(MediaRanges), Properties),
+		!.
+	maybe_add_accept_query_header(_Properties, Headers, Headers).
 
 	maybe_add_connection_header(_Properties, Headers, Headers) :-
 		header_name_present(Headers, connection),
@@ -1676,6 +1690,9 @@
 	parse_header_value(content_type, ValueCodes, Value) :-
 		normalize_header_semantics(content_type, ValueCodes, Value),
 		!.
+	parse_header_value(accept_query, ValueCodes, Value) :-
+		normalize_header_semantics(accept_query, ValueCodes, Value),
+		!.
 	parse_header_value(cookie, ValueCodes, Value) :-
 		normalize_header_semantics(cookie, ValueCodes, Value),
 		!.
@@ -1723,6 +1740,10 @@
 	header_value_codes(content_type, Value, Codes) :-
 		normalize_header_semantics(content_type, Value, MediaTypeProperty),
 		media_type_property_codes(MediaTypeProperty, Codes),
+		!.
+	header_value_codes(accept_query, Value, Codes) :-
+		normalize_header_semantics(accept_query, Value, MediaRanges),
+		accept_query_ranges_codes(MediaRanges, Codes),
 		!.
 	header_value_codes(cookie, Value, Codes) :-
 		normalize_header_semantics(cookie, Value, Pairs),
@@ -1817,6 +1838,14 @@
 	normalize_header_semantics(content_type, Value, media_type(MediaType, Parameters)) :-
 		text_to_codes(Value, Codes),
 		parse_media_type_codes(Codes, media_type(MediaType, Parameters)).
+	normalize_header_semantics(accept_query, MediaRanges, NormalizedMediaRanges) :-
+		MediaRanges = [media_range(_, _)| _],
+		!,
+		normalize_accept_query_ranges(MediaRanges, NormalizedMediaRanges),
+		!.
+	normalize_header_semantics(accept_query, Value, MediaRanges) :-
+		text_to_codes(Value, Codes),
+		parse_accept_query_codes(Codes, MediaRanges).
 	normalize_header_semantics(cookie, Pairs, Pairs) :-
 		valid_text_pairs(Pairs),
 		!.
@@ -1910,7 +1939,7 @@
 		).
 
 	normalize_semantic_header_value(Name, RawValue, Value) :-
-		(	member(Name, [content_length, content_type, cookie, set_cookie, host, connection, upgrade, sec_websocket_key, sec_websocket_version, sec_websocket_accept, sec_websocket_protocol, sec_websocket_extensions, transfer_encoding]) ->
+		(	member(Name, [content_length, content_type, accept_query, cookie, set_cookie, host, connection, upgrade, sec_websocket_key, sec_websocket_version, sec_websocket_accept, sec_websocket_protocol, sec_websocket_extensions, transfer_encoding]) ->
 			normalize_header_semantics(Name, RawValue, Value)
 		;	Value = RawValue
 		).
@@ -2170,6 +2199,7 @@
 	valid_method(patch).
 	valid_method(trace).
 	valid_method(connect).
+	valid_method(query).
 
 	validate_target(Target) :-
 		(	valid_target(Target) ->
@@ -2290,6 +2320,12 @@
 		(	normalize_header_semantics(content_type, Value, _) ->
 			true
 		;	domain_error(http_header_value(content_type), Value)
+		).
+	validate_header_value(accept_query, Value) :-
+		!,
+		(	normalize_header_semantics(accept_query, Value, _) ->
+			true
+		;	domain_error(http_header_value(accept_query), Value)
 		).
 	validate_header_value(cookie, Value) :-
 		!,
@@ -2451,6 +2487,8 @@
 	valid_property_by_functor(content_type, content_type(MediaType, Parameters)) :-
 		valid_media_type(MediaType),
 		validate_parameter_pairs(Parameters).
+	valid_property_by_functor(accept_query, accept_query(MediaRanges)) :-
+		catch(normalize_accept_query_ranges(MediaRanges, _), _, fail).
 	valid_property_by_functor(content_length, content_length(Length)) :-
 		integer(Length),
 		Length >= 0.
@@ -2503,6 +2541,7 @@
 		compound(Property).
 
 	recognized_property_functor(content_type).
+	recognized_property_functor(accept_query).
 	recognized_property_functor(content_length).
 	recognized_property_functor(host).
 	recognized_property_functor(cookies).
@@ -2604,6 +2643,29 @@
 		token_code(Code),
 		valid_token_codes_tail(Codes).
 
+	valid_structured_token_codes([Code| Codes]) :-
+		structured_token_initial_code(Code),
+		valid_structured_token_codes_tail(Codes).
+
+	valid_structured_token_codes_tail([]).
+	valid_structured_token_codes_tail([Code| Codes]) :-
+		structured_token_code(Code),
+		valid_structured_token_codes_tail(Codes).
+
+	structured_token_initial_code(Code) :-
+		lowercase_alpha(Code),
+		!.
+	structured_token_initial_code(Code) :-
+		uppercase_alpha(Code),
+		!.
+	structured_token_initial_code(0'*).
+
+	structured_token_code(Code) :-
+		token_code(Code),
+		!.
+	structured_token_code(0':).
+	structured_token_code(0'/).
+
 	valid_token_codes_tail([]).
 	valid_token_codes_tail([Code| Codes]) :-
 		token_code(Code),
@@ -2702,6 +2764,52 @@
 		parameter_pairs_codes(Parameters, ParameterCodes),
 		append([MediaTypeCodes| ParameterCodes], Codes).
 
+	accept_query_ranges_codes([MediaRange], Codes) :-
+		!,
+		accept_query_range_codes(MediaRange, Codes).
+	accept_query_ranges_codes([MediaRange| MediaRanges], Codes) :-
+		accept_query_range_codes(MediaRange, RangeCodes),
+		accept_query_ranges_codes(MediaRanges, RangesCodes),
+		append(RangeCodes, [0',, 32| RangesCodes], Codes).
+
+	accept_query_range_codes(media_range(MediaRange, Parameters), Codes) :-
+		accept_query_media_range_value_codes(MediaRange, MediaRangeCodes),
+		accept_query_parameter_pairs_codes(Parameters, ParameterCodes),
+		append([MediaRangeCodes| ParameterCodes], Codes).
+
+	accept_query_media_range_value_codes(MediaRange, Codes) :-
+		atom_codes(MediaRange, MediaRangeCodes),
+		(	valid_structured_token_codes(MediaRangeCodes) ->
+			Codes = MediaRangeCodes
+		;	structured_string_codes(MediaRangeCodes, Codes)
+		).
+
+	accept_query_parameter_pairs_codes([], []).
+	accept_query_parameter_pairs_codes([Name-Value| Parameters], [[0';| PairCodes]| Codes]) :-
+		normalize_atom_text(Name, NormalizedName),
+		atom_codes(NormalizedName, NameCodes),
+		structured_parameter_value_codes(Value, ValueCodes),
+		append(NameCodes, [0'=| ValueCodes], PairCodes),
+		accept_query_parameter_pairs_codes(Parameters, Codes).
+
+	structured_parameter_value_codes(Value, ValueCodes) :-
+		text_to_codes(Value, Codes),
+		structured_string_codes(Codes, ValueCodes).
+
+	structured_string_codes(Codes, [0'"| QuotedCodes]) :-
+		escape_structured_string_codes(Codes, EscapedCodes),
+		append(EscapedCodes, [0'"], QuotedCodes).
+
+	escape_structured_string_codes([], []).
+	escape_structured_string_codes([Code| Codes], [0'\\, Code| EscapedCodes]) :-
+		(	Code =:= 0'"
+		;	Code =:= 0'\\
+		),
+		!,
+		escape_structured_string_codes(Codes, EscapedCodes).
+	escape_structured_string_codes([Code| Codes], [Code| EscapedCodes]) :-
+		escape_structured_string_codes(Codes, EscapedCodes).
+
 	parameter_pairs_codes([], []).
 	parameter_pairs_codes([Name-Value| Parameters], [[0';, 0' ]| Codes]) :-
 		normalize_atom_text(Name, NormalizedName),
@@ -2723,6 +2831,106 @@
 		split_codes(0';, TrimmedCodes, [MediaTypeCodes| ParameterSegments]),
 		media_type_codes_atom(MediaTypeCodes, MediaType),
 		parse_media_type_parameters(ParameterSegments, Parameters).
+
+	parse_accept_query_codes(Codes0, MediaRanges) :-
+		trim_ows_codes(Codes0, Codes),
+		Codes \== [],
+		split_quoted_codes(0',, Codes, ItemCodeLists),
+		accept_query_item_code_lists_ranges(ItemCodeLists, MediaRanges).
+
+	accept_query_item_code_lists_ranges([], []) :-
+		!,
+		fail.
+	accept_query_item_code_lists_ranges([ItemCodes| ItemCodeLists], [MediaRange| MediaRanges]) :-
+		accept_query_item_codes_range(ItemCodes, MediaRange),
+		accept_query_item_code_lists_ranges_tail(ItemCodeLists, MediaRanges).
+
+	accept_query_item_code_lists_ranges_tail([], []).
+	accept_query_item_code_lists_ranges_tail([ItemCodes| ItemCodeLists], [MediaRange| MediaRanges]) :-
+		accept_query_item_codes_range(ItemCodes, MediaRange),
+		accept_query_item_code_lists_ranges_tail(ItemCodeLists, MediaRanges).
+
+	accept_query_item_codes_range(ItemCodes0, media_range(MediaRange, Parameters)) :-
+		trim_ows_codes(ItemCodes0, ItemCodes),
+		ItemCodes \== [],
+		split_quoted_codes(0';, ItemCodes, [MediaRangeCodes| ParameterSegments]),
+		accept_query_media_range_codes_atom(MediaRangeCodes, MediaRange),
+		parse_accept_query_parameters(ParameterSegments, Parameters).
+
+	accept_query_media_range_codes_atom(Codes0, MediaRange) :-
+		trim_ows_codes(Codes0, Codes1),
+		structured_item_value_codes(Codes1, Codes2),
+		trim_ows_codes(Codes2, Codes3),
+		lowercase_ascii_codes(Codes3, NormalizedCodes),
+		valid_accept_query_media_range_codes(NormalizedCodes),
+		atom_codes(MediaRange, NormalizedCodes).
+
+	structured_item_value_codes([0'"| Codes0], Codes) :-
+		append(StringCodes, [0'"], Codes0),
+		unescape_structured_string_codes(StringCodes, Codes),
+		!.
+	structured_item_value_codes(Codes, Codes).
+
+	unescape_structured_string_codes([], []).
+	unescape_structured_string_codes([0'\\, Code| Codes], [Code| UnescapedCodes]) :-
+		!,
+		unescape_structured_string_codes(Codes, UnescapedCodes).
+	unescape_structured_string_codes([Code| Codes], [Code| UnescapedCodes]) :-
+		unescape_structured_string_codes(Codes, UnescapedCodes).
+
+	parse_accept_query_parameters([], []).
+	parse_accept_query_parameters([Segment| Segments], [Name-Value| Parameters]) :-
+		trim_ows_codes(Segment, TrimmedSegment),
+		split_once(0'=, TrimmedSegment, NameCodes0, ValueCodes0),
+		trim_ows_codes(NameCodes0, NameCodes1),
+		NameCodes1 \== [],
+		lowercase_ascii_codes(NameCodes1, NameCodes),
+		valid_token_codes(NameCodes),
+		atom_codes(Name, NameCodes),
+		trim_ows_codes(ValueCodes0, ValueCodes1),
+		structured_item_value_codes(ValueCodes1, ValueCodes),
+		atom_codes(Value, ValueCodes),
+		parse_accept_query_parameters(Segments, Parameters).
+
+	normalize_accept_query_ranges(MediaRanges0, MediaRanges) :-
+		MediaRanges0 = [_| _],
+		normalize_accept_query_range_list(MediaRanges0, MediaRanges).
+
+	normalize_accept_query_range_list([], []).
+	normalize_accept_query_range_list([MediaRange0| MediaRanges0], [MediaRange| MediaRanges]) :-
+		normalize_accept_query_range(MediaRange0, MediaRange),
+		normalize_accept_query_range_list(MediaRanges0, MediaRanges).
+
+	normalize_accept_query_range(media_range(MediaRange0, Parameters0), media_range(MediaRange, Parameters)) :-
+		atom(MediaRange0),
+		atom_codes(MediaRange0, MediaRangeCodes0),
+		lowercase_ascii_codes(MediaRangeCodes0, MediaRangeCodes),
+		valid_accept_query_media_range_codes(MediaRangeCodes),
+		atom_codes(MediaRange, MediaRangeCodes),
+		normalize_accept_query_parameters(Parameters0, Parameters).
+
+	normalize_accept_query_parameters([], []).
+	normalize_accept_query_parameters([Name0-Value| Parameters0], [Name-Value| Parameters]) :-
+		atom(Name0),
+		atom_codes(Name0, NameCodes0),
+		lowercase_ascii_codes(NameCodes0, NameCodes),
+		valid_token_codes(NameCodes),
+		atom_codes(Name, NameCodes),
+		valid_text(Value),
+		normalize_accept_query_parameters(Parameters0, Parameters).
+
+	valid_accept_query_media_range_codes([0'*, 0'/, 0'*]) :-
+		!.
+	valid_accept_query_media_range_codes(Codes) :-
+		split_once(0'/, Codes, TypeCodes, SubtypeCodes),
+		TypeCodes \== [],
+		SubtypeCodes \== [],
+		TypeCodes \== [0'*],
+		valid_token_codes(TypeCodes),
+		(	SubtypeCodes == [0'*] ->
+			true
+		;	valid_token_codes(SubtypeCodes)
+		).
 
 	media_type_codes_atom(MediaTypeCodes0, MediaType) :-
 		trim_ows_codes(MediaTypeCodes0, MediaTypeCodes),
@@ -3160,6 +3368,32 @@
 		split_codes(Separator, Codes, [], Segments).
 	split_codes(Separator, [Code| Codes], CurrentCodes, Segments) :-
 		split_codes(Separator, Codes, [Code| CurrentCodes], Segments).
+
+	split_quoted_codes(Separator, Codes, Segments) :-
+		split_quoted_codes(Separator, Codes, [], Segments).
+
+	split_quoted_codes(_Separator, [], CurrentCodes, [Segment]) :-
+		Segment = CurrentCodes.
+	split_quoted_codes(Separator, [Separator| Codes], CurrentCodes, [Segment| Segments]) :-
+		!,
+		Segment = CurrentCodes,
+		split_quoted_codes(Separator, Codes, [], Segments).
+	split_quoted_codes(Separator, [0'"| Codes], CurrentCodes, Segments) :-
+		!,
+		quoted_segment_codes(Codes, QuotedCodes, RestCodes),
+		append(CurrentCodes, [0'"| QuotedCodes], CurrentCodes1),
+		split_quoted_codes(Separator, RestCodes, CurrentCodes1, Segments).
+	split_quoted_codes(Separator, [Code| Codes], CurrentCodes, Segments) :-
+		append(CurrentCodes, [Code], CurrentCodes1),
+		split_quoted_codes(Separator, Codes, CurrentCodes1, Segments).
+
+	quoted_segment_codes([0'"| Codes], [0'"], Codes) :-
+		!.
+	quoted_segment_codes([0'\\, Code| Codes], [0'\\, Code| QuotedCodes], RestCodes) :-
+		!,
+		quoted_segment_codes(Codes, QuotedCodes, RestCodes).
+	quoted_segment_codes([Code| Codes], [Code| QuotedCodes], RestCodes) :-
+		quoted_segment_codes(Codes, QuotedCodes, RestCodes).
 
 	codes_prefix(Codes, Prefix) :-
 		append(Prefix, _, Codes).

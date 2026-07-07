@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-07-07,
 		comment is 'Unit tests for the "http_server" library.'
 	]).
 
@@ -86,6 +86,22 @@
 		target(Request, origin('/echo')),
 		body(Request, content('text/plain', text(hello))),
 		property(Request, host('example.com')).
+
+	test(http_server_read_request_2_01a, deterministic) :-
+		write_file_atom(
+			'test_http_server_query.tmp',
+			'QUERY /contacts HTTP/1.1\r\nhost: example.com\r\ncontent-type: application/x-www-form-urlencoded\r\ncontent-length: 8\r\n\r\nlimit=10'
+		),
+		^^file_path('test_http_server_query.tmp', File),
+		open(File, read, Input, [type(binary)]),
+		http_server::read_request(Input, Request),
+		close(Input),
+		method(Request, query),
+		target(Request, origin('/contacts')),
+		body(Request, content('application/x-www-form-urlencoded', form([limit-'10']))),
+		property(Request, host('example.com')),
+		property(Request, content_type('application/x-www-form-urlencoded', [])),
+		property(Request, content_length(8)).
 
 	test(http_server_read_request_2_02, deterministic) :-
 		write_file_atom(

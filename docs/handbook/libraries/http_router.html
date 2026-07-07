@@ -450,8 +450,13 @@ defined by the importing object.</p></li>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">route(Id,</span> <span class="pre">Method,</span> <span class="pre">PathTemplate,</span> <span class="pre">Handler)</span></code></p></li>
 </ul>
-<p>The <code class="docutils literal notranslate"><span class="pre">Handler</span></code> argument is the name of a declared local predicate with
-arity 2, typically a protected predicate.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Method</span></code> argument is a normalized lowercase HTTP method atom
+accepted by <code class="docutils literal notranslate"><span class="pre">http_core</span></code>, including <code class="docutils literal notranslate"><span class="pre">query</span></code> for RFC 10008 QUERY
+routes. The <code class="docutils literal notranslate"><span class="pre">Handler</span></code> argument is the name of a declared local
+predicate with arity 2, typically a protected predicate.</p>
+<p>When automatic <code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code> or <code class="docutils literal notranslate"><span class="pre">405</span> <span class="pre">Method</span> <span class="pre">Not</span> <span class="pre">Allowed</span></code> responses are
+generated, QUERY routes are included in the <code class="docutils literal notranslate"><span class="pre">Allow</span></code> header like other
+route methods.</p>
 </section>
 <section id="path-templates">
 <h2>Path templates<a class="headerlink" href="#path-templates" title="Link to this heading"></a></h2>

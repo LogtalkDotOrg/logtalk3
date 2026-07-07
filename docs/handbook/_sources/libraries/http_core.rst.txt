@@ -86,14 +86,14 @@ Current scope
   ``text/plain``, ``application/json``, and
   ``application/x-www-form-urlencoded``
 - Normalize semantic header values for ``Content-Length``,
-  ``Content-Type``, ``Cookie``, ``Set-Cookie``, ``Host``,
-  ``Connection``, ``Upgrade``, ``Sec-WebSocket-Key``,
+  ``Content-Type``, ``Accept-Query``, ``Cookie``, ``Set-Cookie``,
+  ``Host``, ``Connection``, ``Upgrade``, ``Sec-WebSocket-Key``,
   ``Sec-WebSocket-Version``, ``Sec-WebSocket-Accept``,
   ``Sec-WebSocket-Protocol``, and ``Transfer-Encoding``
 - Derive and validate normalized properties such as ``content_type/2``,
-  ``content_length/1``, ``host/1-2``, ``cookies/1``, ``set_cookies/1``,
-  ``query_pairs/1``, ``path_segments/1``, ``scheme/1``,
-  ``connection/1``, ``upgrade/1``, ``websocket_key/1``,
+  ``accept_query/1``, ``content_length/1``, ``host/1-2``, ``cookies/1``,
+  ``set_cookies/1``, ``query_pairs/1``, ``path_segments/1``,
+  ``scheme/1``, ``connection/1``, ``upgrade/1``, ``websocket_key/1``,
   ``websocket_version/1``, ``websocket_accept/1``,
   ``websocket_protocol/1``, ``transfer_encoding/1``, ``trailers/1``, and
   ``decoded_body/1``
@@ -120,6 +120,11 @@ Responses use the fixed-arity term:
 
    response(Version, Status, Headers, Body, Properties)
 
+Supported request method atoms include the core HTTP methods plus
+``query`` for the HTTP QUERY method defined by RFC 10008. Method atoms
+are normalized to lowercase internally and generated uppercase on the
+wire.
+
 Supported request targets are:
 
 - ``asterisk``
@@ -144,6 +149,17 @@ Multipart parts use recursive normalized terms:
 ::
 
    part(Headers, Body, Properties)
+
+The ``Accept-Query`` response header can be represented directly as a
+typed header value or as a response property:
+
+accept_query-[media_range(MediaRange, Parameters), ...]
+accept_query([media_range(MediaRange, Parameters), ...])
+
+``MediaRange`` is a lowercase media range atom such as
+``application/x-www-form-urlencoded``, ``application/jsonpath``,
+``text/*``, or ``*/*``. ``Parameters`` is a list of ``Name-Value``
+pairs.
 
 Current limitations
 -------------------

@@ -445,14 +445,14 @@ needed by the next client and server transport slices</p></li>
 <code class="docutils literal notranslate"><span class="pre">text/plain</span></code>, <code class="docutils literal notranslate"><span class="pre">application/json</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">application/x-www-form-urlencoded</span></code></p></li>
 <li><p>Normalize semantic header values for <code class="docutils literal notranslate"><span class="pre">Content-Length</span></code>,
-<code class="docutils literal notranslate"><span class="pre">Content-Type</span></code>, <code class="docutils literal notranslate"><span class="pre">Cookie</span></code>, <code class="docutils literal notranslate"><span class="pre">Set-Cookie</span></code>, <code class="docutils literal notranslate"><span class="pre">Host</span></code>,
-<code class="docutils literal notranslate"><span class="pre">Connection</span></code>, <code class="docutils literal notranslate"><span class="pre">Upgrade</span></code>, <code class="docutils literal notranslate"><span class="pre">Sec-WebSocket-Key</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Content-Type</span></code>, <code class="docutils literal notranslate"><span class="pre">Accept-Query</span></code>, <code class="docutils literal notranslate"><span class="pre">Cookie</span></code>, <code class="docutils literal notranslate"><span class="pre">Set-Cookie</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Host</span></code>, <code class="docutils literal notranslate"><span class="pre">Connection</span></code>, <code class="docutils literal notranslate"><span class="pre">Upgrade</span></code>, <code class="docutils literal notranslate"><span class="pre">Sec-WebSocket-Key</span></code>,
 <code class="docutils literal notranslate"><span class="pre">Sec-WebSocket-Version</span></code>, <code class="docutils literal notranslate"><span class="pre">Sec-WebSocket-Accept</span></code>,
 <code class="docutils literal notranslate"><span class="pre">Sec-WebSocket-Protocol</span></code>, and <code class="docutils literal notranslate"><span class="pre">Transfer-Encoding</span></code></p></li>
 <li><p>Derive and validate normalized properties such as <code class="docutils literal notranslate"><span class="pre">content_type/2</span></code>,
-<code class="docutils literal notranslate"><span class="pre">content_length/1</span></code>, <code class="docutils literal notranslate"><span class="pre">host/1-2</span></code>, <code class="docutils literal notranslate"><span class="pre">cookies/1</span></code>, <code class="docutils literal notranslate"><span class="pre">set_cookies/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">query_pairs/1</span></code>, <code class="docutils literal notranslate"><span class="pre">path_segments/1</span></code>, <code class="docutils literal notranslate"><span class="pre">scheme/1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">connection/1</span></code>, <code class="docutils literal notranslate"><span class="pre">upgrade/1</span></code>, <code class="docutils literal notranslate"><span class="pre">websocket_key/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">accept_query/1</span></code>, <code class="docutils literal notranslate"><span class="pre">content_length/1</span></code>, <code class="docutils literal notranslate"><span class="pre">host/1-2</span></code>, <code class="docutils literal notranslate"><span class="pre">cookies/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">set_cookies/1</span></code>, <code class="docutils literal notranslate"><span class="pre">query_pairs/1</span></code>, <code class="docutils literal notranslate"><span class="pre">path_segments/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">scheme/1</span></code>, <code class="docutils literal notranslate"><span class="pre">connection/1</span></code>, <code class="docutils literal notranslate"><span class="pre">upgrade/1</span></code>, <code class="docutils literal notranslate"><span class="pre">websocket_key/1</span></code>,
 <code class="docutils literal notranslate"><span class="pre">websocket_version/1</span></code>, <code class="docutils literal notranslate"><span class="pre">websocket_accept/1</span></code>,
 <code class="docutils literal notranslate"><span class="pre">websocket_protocol/1</span></code>, <code class="docutils literal notranslate"><span class="pre">transfer_encoding/1</span></code>, <code class="docutils literal notranslate"><span class="pre">trailers/1</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">decoded_body/1</span></code></p></li>
@@ -475,6 +475,10 @@ exact, wildcard, and exception cases</p></li>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>response(<span class="nv">Version</span>, <span class="nv">Status</span>, <span class="nv">Headers</span>, <span class="nv">Body</span>, <span class="nv">Properties</span>)
 </pre></div>
 </div>
+<p>Supported request method atoms include the core HTTP methods plus
+<code class="docutils literal notranslate"><span class="pre">query</span></code> for the HTTP QUERY method defined by RFC 10008. Method atoms
+are normalized to lowercase internally and generated uppercase on the
+wire.</p>
 <p>Supported request targets are:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">asterisk</span></code></p></li>
@@ -498,6 +502,14 @@ exact, wildcard, and exception cases</p></li>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>part(<span class="nv">Headers</span>, <span class="nv">Body</span>, <span class="nv">Properties</span>)
 </pre></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Accept-Query</span></code> response header can be represented directly as a
+typed header value or as a response property:</p>
+<p>accept_query-[media_range(MediaRange, Parameters), …]
+accept_query([media_range(MediaRange, Parameters), …])</p>
+<p><code class="docutils literal notranslate"><span class="pre">MediaRange</span></code> is a lowercase media range atom such as
+<code class="docutils literal notranslate"><span class="pre">application/x-www-form-urlencoded</span></code>, <code class="docutils literal notranslate"><span class="pre">application/jsonpath</span></code>,
+<code class="docutils literal notranslate"><span class="pre">text/*</span></code>, or <code class="docutils literal notranslate"><span class="pre">*/*</span></code>. <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> is a list of <code class="docutils literal notranslate"><span class="pre">Name-Value</span></code>
+pairs.</p>
 </section>
 <section id="current-limitations">
 <h2>Current limitations<a class="headerlink" href="#current-limitations" title="Link to this heading"></a></h2>

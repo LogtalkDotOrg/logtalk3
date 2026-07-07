@@ -94,8 +94,13 @@ Importing router objects must define route descriptors using:
 
 - `route(Id, Method, PathTemplate, Handler)`
 
-The `Handler` argument is the name of a declared local predicate with arity 2,
-typically a protected predicate.
+The `Method` argument is a normalized lowercase HTTP method atom accepted by
+`http_core`, including `query` for RFC 10008 QUERY routes. The `Handler`
+argument is the name of a declared local predicate with arity 2, typically a
+protected predicate.
+
+When automatic `OPTIONS` or `405 Method Not Allowed` responses are generated,
+QUERY routes are included in the `Allow` header like other route methods.
 
 
 Path templates

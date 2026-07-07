@@ -197,6 +197,12 @@ library, handler objects can inspect ``multipart/form-data`` requests
 directly using the ``http_multipart`` predicates after reading or
 serving a request.
 
+QUERY requests are read and dispatched like any other normalized
+request. A resource handler that implements RFC 10008 QUERY semantics
+remains responsible for rejecting missing or unsupported query content
+metadata, such as absent or unsupported ``Content-Type``, with the
+appropriate 4xx response.
+
 This layer intentionally stays transport-neutral. It does not accept
 sockets, listen for connections, or manage concurrency. Those concerns
 belong to higher layers or backend-specific integration built on top of

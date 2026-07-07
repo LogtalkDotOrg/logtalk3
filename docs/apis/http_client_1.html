@@ -403,7 +403,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-26</div>
+<div class="line"><strong>Date:</strong> 2026-07-07</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -460,12 +460,14 @@
 <li><p><a class="reference internal" href="#put-5" id="id13"><code class="docutils literal notranslate"><span class="pre">put/5</span></code></a></p></li>
 <li><p><a class="reference internal" href="#patch-4" id="id14"><code class="docutils literal notranslate"><span class="pre">patch/4</span></code></a></p></li>
 <li><p><a class="reference internal" href="#patch-5" id="id15"><code class="docutils literal notranslate"><span class="pre">patch/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#open-websocket-4" id="id16"><code class="docutils literal notranslate"><span class="pre">open_websocket/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#query-4" id="id16"><code class="docutils literal notranslate"><span class="pre">query/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#query-5" id="id17"><code class="docutils literal notranslate"><span class="pre">query/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#open-websocket-4" id="id18"><code class="docutils literal notranslate"><span class="pre">open_websocket/4</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id17">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id18">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id19">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id19">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id20">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id21">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -1254,8 +1256,116 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="query-4">
+<span id="http-client-1-query-4"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">query/4</span></code></a><a class="headerlink" href="#query-4" title="Link to this heading"></a></h3>
+<p>Convenience wrapper over <code class="docutils literal notranslate"><span class="pre">request/4</span></code> using the <code class="docutils literal notranslate"><span class="pre">query</span></code> method and the given request body.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">query(URL,Body,Response,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">query(+atom,+compound,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">URL</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">URL</span></code> is not a supported absolute HTTP URL:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_client_url,URL)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">URL</span></code> uses an unsupported HTTP scheme:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_client_scheme,Scheme)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains an invalid HTTP client request option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_client_request_option,Option)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Body</span></code> is invalid for the generated normalized HTTP request:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_body,Body)</span></code></div>
+</div>
+<div class="line">The delegated socket exchange rejects the response stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response_stream,Error)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="query-5">
+<span id="http-client-1-query-5"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">query/5</span></code></a><a class="headerlink" href="#query-5" title="Link to this heading"></a></h3>
+<p>Convenience wrapper over <code class="docutils literal notranslate"><span class="pre">request/5</span></code> using the <code class="docutils literal notranslate"><span class="pre">query</span></code> method and the given request body.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">query(ConnectionOrPool,URL,Body,Response,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">query(+compound,+atom,+compound,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ConnectionOrPool</span></code> is not a valid reusable connection or pool handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_connection_or_pool,ConnectionOrPool)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ConnectionOrPool</span></code> is not connected to the requested endpoint:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_client_connection_target,endpoint(EndpointHost,EndpointPort,Host,Port))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">URL</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">URL</span></code> is not a supported absolute HTTP URL:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_client_url,URL)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">URL</span></code> uses an unsupported HTTP scheme:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_client_scheme,Scheme)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains an invalid HTTP client request option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_client_request_option,Option)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Body</span></code> is invalid for the generated normalized HTTP request:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_body,Body)</span></code></div>
+</div>
+<div class="line">The delegated socket exchange rejects the response stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response_stream,Error)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="open-websocket-4">
-<span id="http-client-1-open-websocket-4"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">open_websocket/4</span></code></a><a class="headerlink" href="#open-websocket-4" title="Link to this heading"></a></h3>
+<span id="http-client-1-open-websocket-4"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">open_websocket/4</span></code></a><a class="headerlink" href="#open-websocket-4" title="Link to this heading"></a></h3>
 <p>Builds a WebSocket opening-handshake request from the given absolute WebSocket URL supported by the selected transport parameterization and options, opens a reusable socket connection, validates the server <code class="docutils literal notranslate"><span class="pre">101</span></code> response, and returns both the connection handle and the response.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

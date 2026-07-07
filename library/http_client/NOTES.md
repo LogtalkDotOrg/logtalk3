@@ -91,6 +91,18 @@ Start a local listener, send a request, and inspect the normalized response:
 	
 	Response = response(http(1,1), status(200, 'OK'), _, content('text/plain', text(hello)), _).
 
+The QUERY method uses the same body-carrying convenience shape as POST, PUT,
+and PATCH:
+
+	| ?- http_socket::open_listener('127.0.0.1', Port, Listener, []),
+	     threaded_once(http_socket::serve_once(Listener, notes_http_client_echo_handler, _), Tag),
+	     atomic_list_concat(['http://127.0.0.1:', Port, '/contacts'], URL),
+	     http_client::query(URL, content('application/x-www-form-urlencoded', form([limit-'10'])), Response, []),
+	     threaded_exit(http_socket::serve_once(Listener, notes_http_client_echo_handler, _), Tag),
+	     http_socket::close_listener(Listener).
+	
+	Response = response(http(1,1), status(200, 'OK'), _, content('application/x-www-form-urlencoded', form([limit-'10'])), _).
+
 For a multipart form-data request, define a handler that inspects the normalized
 request body using `http_multipart`:
 

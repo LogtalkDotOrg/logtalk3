@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-24,
+		date is 2026-07-07,
 		comment is 'Unit tests for the "http_client" library.',
 		parnames is ['HTTPSocket']
 	]).
@@ -91,6 +91,15 @@
 		close_listener(Listener),
 		status(Response, status(200, 'OK')),
 		body(Response, content('text/plain', text(hello))).
+
+	test(http_client_query_4_01, deterministic) :-
+		open_listener('127.0.0.1', Port, Listener, []),
+		threaded_ignore(server_serve_once(Listener, echo_http_client_handler)),
+		local_http_url(Port, '/query', URL),
+		http_client(_HTTPSocket_)::query(URL, content('application/x-www-form-urlencoded', form([limit-'10'])), Response, []),
+		close_listener(Listener),
+		status(Response, status(200, 'OK')),
+		body(Response, content('application/x-www-form-urlencoded', form([limit-'10']))).
 
 	test(http_client_post_4_02, deterministic) :-
 		open_listener('127.0.0.1', Port, Listener, []),
@@ -301,6 +310,18 @@
 		close_listener(Listener),
 		status(Response, status(200, 'OK')),
 		body(Response, content('text/plain', text('/via-connection'))).
+
+	test(http_client_query_5_01, deterministic) :-
+		open_listener('127.0.0.1', Port, Listener, []),
+		threaded_once(server_serve_request_once(Listener, echo_http_client_handler), Tag),
+		open_connection('127.0.0.1', Port, Connection, []),
+		local_http_url(Port, '/query-connection', URL),
+		http_client(_HTTPSocket_)::query(Connection, URL, content('text/plain', text(hello)), Response, []),
+		close_connection(Connection),
+		threaded_exit(server_serve_request_once(Listener, echo_http_client_handler), Tag),
+		close_listener(Listener),
+		status(Response, status(200, 'OK')),
+		body(Response, content('text/plain', text(hello))).
 
 	test(http_client_get_4_02, deterministic) :-
 		Port = 80,
