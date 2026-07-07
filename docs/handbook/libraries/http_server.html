@@ -377,6 +377,7 @@ orchestration step above the wire parser and generator: read exactly one
 request from an existing binary stream, dispatch it to a handler object
 implementing the <code class="docutils literal notranslate"><span class="pre">http_handler_protocol</span></code> protocol, and write exactly
 one response.</p>
+<p>All stream predicates expect binary input and output streams.</p>
 <p>This library can be used with backend Prolog systems that support
 unbound integer arithmetic and the <code class="docutils literal notranslate"><span class="pre">sockets</span></code> library: ECLiPSe, SICStus
 Prolog, SWI-Prolog, Trealla Prolog, and XVM.</p>
@@ -503,11 +504,13 @@ repeated in that list.</p>
 </div>
 <p>After <code class="docutils literal notranslate"><span class="pre">serve_websocket/4</span></code> succeeds, higher layers must take ownership
 of the underlying upgraded connection or streams. This library stops at
-the HTTP opening handshake.</p>
+the WebSocket HTTP opening handshake, independently of whether those
+streams are plain or TLS-protected.</p>
 </section>
 <section id="current-scope">
 <h2>Current scope<a class="headerlink" href="#current-scope" title="Link to this heading"></a></h2>
-<p>The current implementation provides seven predicates:</p>
+<p>The current implementation provides per-message primitives, a connection
+loop, and WebSocket handshake helpers:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">read_request/2</span></code> reads exactly one request from a binary stream
 without requiring end-of-file.</p></li>
@@ -526,14 +529,12 @@ opening-handshake request and builds the corresponding
 writes it to the output stream, and reports whether the exchange
 completed with a valid WebSocket opening-handshake response.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">serve/3</span></code> connects request reading, handler dispatch, and response
-writing, returning <code class="docutils literal notranslate"><span class="pre">400</span> <span class="pre">Bad</span> <span class="pre">Request</span></code> for malformed input. For
-<code class="docutils literal notranslate"><span class="pre">HEAD</span></code> requests it sends the generated response headers but
-suppresses the response body bytes, including for file-backed
-responses.</p></li>
+writing, returning <code class="docutils literal notranslate"><span class="pre">400</span> <span class="pre">Bad</span> <span class="pre">Request</span></code> for malformed input.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">serve_connection/3</span></code> repeatedly serves requests on the same stream
 pair using HTTP persistence rules and stops on end-of-file or
-<code class="docutils literal notranslate"><span class="pre">Connection:</span> <span class="pre">close</span></code> semantics. For <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> requests it sends the
-generated response headers but suppresses the response body bytes,
+<code class="docutils literal notranslate"><span class="pre">Connection:</span> <span class="pre">close</span></code> semantics.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">serve/3</span></code> and <code class="docutils literal notranslate"><span class="pre">serve_connection/3</span></code> send the generated response
+headers for <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> requests but suppress the response body bytes,
 including for file-backed responses.</p></li>
 </ul>
 <p>Because incoming request bodies are normalized by the <code class="docutils literal notranslate"><span class="pre">http_core</span></code>
@@ -582,11 +583,16 @@ normalized handshake request and build the matching <code class="docutils litera
 <code class="docutils literal notranslate"><span class="pre">accepted(Request,</span> <span class="pre">Response)</span></code> or <code class="docutils literal notranslate"><span class="pre">rejected(Response)</span></code>.</p></li>
 <li><p>The optional <code class="docutils literal notranslate"><span class="pre">protocol(Protocol)</span></code> option selects one offered
 subprotocol.</p></li>
-<li><p>The helper is intentionally transport-neutral: it does not take
-ownership of the upgraded stream or begin frame processing.</p></li>
-<li><p>Higher layers that need to continue on the upgraded connection must
-stop at a single served message and then take over the underlying
-stream or socket.</p></li>
+<li><p>The helper is intentionally transport-neutral: it handles the
+WebSocket HTTP opening handshake on existing binary streams,
+independently of whether those streams are plain or TLS-protected.</p></li>
+<li><p>It does not take ownership of the upgraded stream or begin frame
+processing. Higher layers that need to continue on the upgraded
+connection must stop at a single served message and then take over the
+underlying stream or socket.</p></li>
+<li><p>Upgraded connection handles and frame/session loops are provided by
+higher layers such as <code class="docutils literal notranslate"><span class="pre">http_socket</span></code>, <code class="docutils literal notranslate"><span class="pre">http_socket_process</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">http_websocket_service</span></code>.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">http_websocket_server_service::serve_once/6-7</span></code> predicates build
 on top of this handshake helper when server-side code wants a single
 entry point for handshake plus callback-driven session execution.</p></li>
@@ -597,13 +603,8 @@ entry point for handshake plus callback-driven session execution.</p></li>
 <ul class="simple">
 <li><p>Only the transport coding sequence <code class="docutils literal notranslate"><span class="pre">[chunked]</span></code> is recognized when
 reading streamed request bodies.</p></li>
-<li><p>The <code class="docutils literal notranslate"><span class="pre">accept_websocket/3</span></code> helper is limited to the HTTP opening
-handshake. This layer does not hand upgraded connections off to a
-frame-processing loop, and <code class="docutils literal notranslate"><span class="pre">serve_connection/3</span></code> remains HTTP-request
-oriented.</p></li>
 <li><p>The library does not provide socket accept loops, connection pooling,
 or concurrency management.</p></li>
-<li><p>The library assumes binary streams for both input and output.</p></li>
 </ul>
 </section>
 </section>

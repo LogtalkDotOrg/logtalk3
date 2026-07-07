@@ -27,6 +27,8 @@ the wire parser and generator: read exactly one request from an existing binary
 stream, dispatch it to a handler object implementing the `http_handler_protocol`
 protocol, and write exactly one response.
 
+All stream predicates expect binary input and output streams.
+
 This library can be used with backend Prolog systems that support unbound
 integer arithmetic and the `sockets` library: ECLiPSe, SICStus Prolog,
 SWI-Prolog, Trealla Prolog, and XVM.
@@ -163,14 +165,16 @@ For a WebSocket opening handshake, define a handler that delegates to
 	Response = response(http(1,1), status(101, 'Switching Protocols'), _, empty, _).
 
 After `serve_websocket/4` succeeds, higher layers must take ownership of the
-underlying upgraded connection or streams. This library stops at the HTTP
-opening handshake.
+underlying upgraded connection or streams. This library stops at the WebSocket
+HTTP opening handshake, independently of whether those streams are plain or
+TLS-protected.
 
 
 Current scope
 -------------
 
-The current implementation provides seven predicates:
+The current implementation provides per-message primitives, a connection loop,
+and WebSocket handshake helpers:
 
 - `read_request/2` reads exactly one request from a binary stream without
   requiring end-of-file.
@@ -187,13 +191,13 @@ The current implementation provides seven predicates:
   the output stream, and reports whether the exchange completed with a valid
   WebSocket opening-handshake response.
 - `serve/3` connects request reading, handler dispatch, and response writing,
-  returning `400 Bad Request` for malformed input. For `HEAD` requests it sends
-	the generated response headers but suppresses the response body bytes,
-	including for file-backed responses.
+	returning `400 Bad Request` for malformed input.
 - `serve_connection/3` repeatedly serves requests on the same stream pair using
-  HTTP persistence rules and stops on end-of-file or `Connection: close`
-  semantics. For `HEAD` requests it sends the generated response headers but
-	suppresses the response body bytes, including for file-backed responses.
+	HTTP persistence rules and stops on end-of-file or `Connection: close`
+	semantics.
+- `serve/3` and `serve_connection/3` send the generated response headers for
+	`HEAD` requests but suppress the response body bytes, including for
+	file-backed responses.
 
 Because incoming request bodies are normalized by the `http_core` library,
 handler objects can inspect `multipart/form-data` requests directly using the
@@ -241,10 +245,15 @@ This layer now provides a focused helper for the HTTP opening handshake:
   `serve_websocket/4` and inspect whether it returned `accepted(Request,
   Response)` or `rejected(Response)`.
 - The optional `protocol(Protocol)` option selects one offered subprotocol.
-- The helper is intentionally transport-neutral: it does not take ownership of
-  the upgraded stream or begin frame processing.
-- Higher layers that need to continue on the upgraded connection must stop at
-  a single served message and then take over the underlying stream or socket.
+- The helper is intentionally transport-neutral: it handles the WebSocket HTTP
+	opening handshake on existing binary streams, independently of whether those
+	streams are plain or TLS-protected.
+- It does not take ownership of the upgraded stream or begin frame processing.
+	Higher layers that need to continue on the upgraded connection must stop at a
+	single served message and then take over the underlying stream or socket.
+- Upgraded connection handles and frame/session loops are provided by higher
+	layers such as `http_socket`, `http_socket_process`, and
+	`http_websocket_service`.
 - The `http_websocket_server_service::serve_once/6-7` predicates build on top
   of this handshake helper when server-side code wants a single entry point for
   handshake plus callback-driven session execution.
@@ -255,9 +264,5 @@ Current limitations
 
 - Only the transport coding sequence `[chunked]` is recognized when reading
   streamed request bodies.
-- The `accept_websocket/3` helper is limited to the HTTP opening handshake.
-	This layer does not hand upgraded connections off to a frame-processing
-	loop, and `serve_connection/3` remains HTTP-request oriented.
 - The library does not provide socket accept loops, connection pooling, or
   concurrency management.
-- The library assumes binary streams for both input and output.

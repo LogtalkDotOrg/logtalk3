@@ -402,7 +402,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-26</div>
+<div class="line"><strong>Date:</strong> 2026-07-07</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -424,16 +424,10 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Binary streams: All stream predicates expect binary input and output streams.</p></li>
-<li><p>Per-message primitives: The read_request/2, write_response/2, dispatch/3, and serve/3 predicates process a single HTTP message.</p></li>
-<li><p>Connection loop: The serve_connection/3 predicate repeatedly serves requests on the same stream pair according to HTTP persistence rules.</p></li>
-<li><p>HEAD requests: The serve/3 and serve_connection/3 predicates suppress response body bytes on the wire for HEAD requests while preserving the generated response headers.</p></li>
-<li><p>WebSocket handshake responses: The accept_websocket/3 predicate validates a normalized opening-handshake request and builds the corresponding <code class="docutils literal notranslate"><span class="pre">101</span> <span class="pre">Switching</span> <span class="pre">Protocols</span></code> response, but this stream layer does not yet hand upgraded connections off to a frame-processing layer.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">

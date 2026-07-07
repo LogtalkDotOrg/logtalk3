@@ -15,7 +15,7 @@ Portable stream-based HTTP server orchestration predicates.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-26
+| **Date:** 2026-07-07
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -29,12 +29,7 @@ Portable stream-based HTTP server orchestration predicates.
 |    :ref:`list <list/0>`
 
 | **Remarks:**
-
-   - Binary streams: All stream predicates expect binary input and output streams.
-   - Per-message primitives: The read_request/2, write_response/2, dispatch/3, and serve/3 predicates process a single HTTP message.
-   - Connection loop: The serve_connection/3 predicate repeatedly serves requests on the same stream pair according to HTTP persistence rules.
-   - HEAD requests: The serve/3 and serve_connection/3 predicates suppress response body bytes on the wire for HEAD requests while preserving the generated response headers.
-   - WebSocket handshake responses: The accept_websocket/3 predicate validates a normalized opening-handshake request and builds the corresponding ``101 Switching Protocols`` response, but this stream layer does not yet hand upgraded connections off to a frame-processing layer.
+|    (none)
 
 | **Inherited public predicates:**
 |    (none)
