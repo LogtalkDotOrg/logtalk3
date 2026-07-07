@@ -378,7 +378,7 @@ for checking plaintext credentials</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">http_authenticate</span></code> core Basic parsing, generation, request
 protection, and challenge helpers</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">http_htpasswd_verifier(_)</span></code> portable Apache <code class="docutils literal notranslate"><span class="pre">.htpasswd</span></code> subset
-verifier supporting <code class="docutils literal notranslate"><span class="pre">{SHA}</span></code> entries</p></li>
+verifier supporting <code class="docutils literal notranslate"><span class="pre">{SHA}</span></code> and <code class="docutils literal notranslate"><span class="pre">$apr1$</span></code> entries</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">http_server_basic_handler(_,</span> <span class="pre">_,</span> <span class="pre">_)</span></code> portable handler wrapper that
 applies Basic protection around another object implementing
 <code class="docutils literal notranslate"><span class="pre">http_handler_protocol</span></code></p></li>
@@ -440,9 +440,9 @@ responses while verifier and configuration errors are rethrown</p></li>
 <code class="docutils literal notranslate"><span class="pre">http_handler_protocol</span></code> objects</p></li>
 <li><p>route-level protection through <code class="docutils literal notranslate"><span class="pre">http_router_basic_auth(_,</span> <span class="pre">_)</span></code> and
 the <code class="docutils literal notranslate"><span class="pre">authorize_routed_request/2</span></code> router hook</p></li>
-<li><p>portable Apache <code class="docutils literal notranslate"><span class="pre">.htpasswd</span></code> subset verification for <code class="docutils literal notranslate"><span class="pre">{SHA}</span></code>
-entries using expanded file paths and rejecting malformed decoded
-SHA-1 digests</p></li>
+<li><p>portable Apache <code class="docutils literal notranslate"><span class="pre">.htpasswd</span></code> subset verification for <code class="docutils literal notranslate"><span class="pre">{SHA}</span></code> and
+<code class="docutils literal notranslate"><span class="pre">$apr1$</span></code> entries using expanded file paths and rejecting malformed
+supported hash entries</p></li>
 </ul>
 </section>
 <section id="option-validation">
@@ -465,8 +465,8 @@ rejected before any normalized HTTP response term is constructed</p></li>
 <ul class="simple">
 <li><p>client-side session helpers</p></li>
 <li><p>automatic role or scope authorization metadata</p></li>
-<li><p>portable verification of <code class="docutils literal notranslate"><span class="pre">$apr1$</span></code>, bcrypt (<code class="docutils literal notranslate"><span class="pre">$2a$</span></code>, <code class="docutils literal notranslate"><span class="pre">$2b$</span></code>,
-<code class="docutils literal notranslate"><span class="pre">$2y$</span></code>), or traditional <code class="docutils literal notranslate"><span class="pre">crypt()</span></code> <code class="docutils literal notranslate"><span class="pre">.htpasswd</span></code> entries</p></li>
+<li><p>portable verification of bcrypt (<code class="docutils literal notranslate"><span class="pre">$2a$</span></code>, <code class="docutils literal notranslate"><span class="pre">$2b$</span></code>, <code class="docutils literal notranslate"><span class="pre">$2y$</span></code>) or
+traditional <code class="docutils literal notranslate"><span class="pre">crypt()</span></code> <code class="docutils literal notranslate"><span class="pre">.htpasswd</span></code> entries</p></li>
 </ul>
 </section>
 </section>

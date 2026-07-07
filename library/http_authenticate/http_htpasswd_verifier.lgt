@@ -26,8 +26,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
-		comment is 'Portable Apache ``.htpasswd`` subset verifier supporting ``{SHA}`` entries and rejecting unsupported hash markers.',
+		date is 2026-07-07,
+		comment is 'Portable Apache ``.htpasswd`` subset verifier supporting ``{SHA}`` and ``$apr1$`` entries and rejecting unsupported hash markers.',
 		parameters is [
 			'Path' - 'Path of the password file to load on each verification request.'
 		]
@@ -108,11 +108,47 @@
 		!.
 	parse_password_hash(Path, LineNumber, [0'{, 0'S, 0'H, 0'A, 0'}| _DigestCodes], _HashSpec) :-
 		domain_error(http_password_file(Path), invalid(LineNumber)).
+	parse_password_hash(_Path, _LineNumber, [0'$, 0'a, 0'p, 0'r, 0'1, 0'$| HashCodes], apr1(SaltCodes, ChecksumCodes)) :-
+		split_apr1_salt_checksum(HashCodes, SaltCodes, ChecksumCodes),
+		valid_apr1_salt(SaltCodes),
+		valid_apr1_checksum(ChecksumCodes),
+		!.
+	parse_password_hash(Path, LineNumber, [0'$, 0'a, 0'p, 0'r, 0'1, 0'$| _HashCodes], _HashSpec) :-
+		domain_error(http_password_file(Path), invalid(LineNumber)).
 	parse_password_hash(Path, LineNumber, [0'$| MarkerCodes], _HashSpec) :-
 		password_hash_marker(MarkerCodes, Marker),
 		domain_error(http_password_file(Path), unsupported(LineNumber, Marker)).
 	parse_password_hash(Path, LineNumber, _HashCodes, _HashSpec) :-
 		domain_error(http_password_file(Path), unsupported(LineNumber, crypt)).
+
+	split_apr1_salt_checksum([0'$| ChecksumCodes], [], ChecksumCodes) :-
+		!.
+	split_apr1_salt_checksum([Code| Codes], [Code| SaltCodes], ChecksumCodes) :-
+		split_apr1_salt_checksum(Codes, SaltCodes, ChecksumCodes).
+
+	valid_apr1_salt(SaltCodes) :-
+		length(SaltCodes, Length),
+		Length > 0,
+		Length =< 8,
+		valid_apr1_codes(SaltCodes).
+
+	valid_apr1_checksum(ChecksumCodes) :-
+		length(ChecksumCodes, 22),
+		valid_apr1_codes(ChecksumCodes).
+
+	valid_apr1_codes([]).
+	valid_apr1_codes([Code| Codes]) :-
+		valid_apr1_code(Code),
+		valid_apr1_codes(Codes).
+
+	valid_apr1_code(Code) :-
+		(	Code =:= 0'.
+		;	Code =:= 0'/
+		;	0'0 =< Code, Code =< 0'9
+		;	0'A =< Code, Code =< 0'Z
+		;	0'a =< Code, Code =< 0'z
+		),
+		!.
 
 	password_hash_marker(Codes, Marker) :-
 		password_hash_marker(Codes, [], MarkerCodes),

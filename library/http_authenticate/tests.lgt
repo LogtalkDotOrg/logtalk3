@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-10,
+		date is 2026-07-07,
 		comment is 'Unit tests for the http_authenticate library.'
 	]).
 
@@ -107,7 +107,7 @@
 		^^file_path('test_files/supported.htpasswd', Path),
 		http_htpasswd_verifier(Path)::verify('ignored-realm', 'Mufasa', 'Circle Of Life').
 
-	test(http_authenticate_10, error(domain_error(http_password_file(Path), unsupported(1, apr1)))) :-
+	test(http_authenticate_10, error(domain_error(http_password_file(Path), unsupported(1, '2y')))) :-
 		^^file_path('test_files/unsupported.htpasswd', Path),
 		http_htpasswd_verifier(Path)::verify('ignored-realm', 'Mufasa', 'Circle Of Life').
 
@@ -174,6 +174,14 @@
 			charset(none)
 		]),
 		http_authenticate::unauthorized_response(Challenge, Response0, _Response, [status(status(403, 'Forbidden'))]).
+
+	test(http_authenticate_20, deterministic) :-
+		^^file_path('test_files/apr1_supported.htpasswd', Path),
+		http_htpasswd_verifier(Path)::verify('ignored-realm', 'Mufasa', 'Circle Of Life').
+
+	test(http_authenticate_21, fail) :-
+		^^file_path('test_files/apr1_supported.htpasswd', Path),
+		http_htpasswd_verifier(Path)::verify('ignored-realm', 'Mufasa', 'wrong password').
 
 	% auxiliary predicates
 

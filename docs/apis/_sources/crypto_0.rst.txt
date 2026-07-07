@@ -15,7 +15,7 @@ Transport-neutral cryptographic helper predicates.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-02
+| **Date:** 2026-07-07
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -25,6 +25,7 @@ Transport-neutral cryptographic helper predicates.
 |    :ref:`fast_random(Algorithm) <fast_random/1>`
 |    :ref:`hmac <hmac/0>`
 |    :ref:`list <list/0>`
+|    :ref:`md5 <md5/0>`
 |    :ref:`os <os/0>`
 |    :ref:`type <type/0>`
 
@@ -256,6 +257,56 @@ Derives a key from a password byte sequence and a salt using PBKDF2 with a hash 
 
 ------------
 
+.. index:: apr1/3
+.. _crypto/0::apr1/3:
+
+``apr1/3``
+^^^^^^^^^^
+
+Computes the Apache APR1 encoded checksum for a password byte sequence and salt byte sequence.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``apr1(Password,Salt,Checksum)``
+| **Mode and number of proofs:**
+|    ``apr1(+list(byte),+list(byte),-list(byte))`` - ``one_or_error``
+|    ``apr1(+list(byte),+list(byte),+list(byte))`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``Password`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``Password`` is a list but not a list of bytes:
+|        ``type_error(list(byte),Password)``
+|    ``Password`` contains a non-integer element:
+|        ``type_error(integer,Byte)``
+|    ``Password`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``Salt`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``Salt`` is a list but not a list of bytes:
+|        ``type_error(list(byte),Salt)``
+|    ``Salt`` contains a non-integer element:
+|        ``type_error(integer,Byte)``
+|    ``Salt`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``Salt`` is not a valid APR1 salt:
+|        ``domain_error(apr1_salt,Salt)``
+|    ``Checksum`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``Checksum`` is neither a variable nor a list of bytes:
+|        ``type_error(list(byte),Checksum)``
+|    ``Checksum`` contains a non-integer element:
+|        ``type_error(integer,Byte)``
+|    ``Checksum`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``Checksum`` is not a valid APR1 checksum:
+|        ``domain_error(apr1_checksum,Checksum)``
+
+
+------------
+
 .. index:: password_hash/4
 .. _crypto/0::password_hash/4:
 
@@ -346,14 +397,18 @@ Succeeds when the password byte sequence matches the given structured password-h
 |        ``type_error(integer,Iterations)``
 |    ``PasswordHash`` contains an ``Iterations`` value that is not a positive integer:
 |        ``domain_error(positive_integer,Iterations)``
-|    ``PasswordHash`` contains a ``Salt``, ``StoredKey``, or ``StoredDigest`` value that is not a list of bytes:
+|    ``PasswordHash`` contains a ``Salt``, ``StoredKey``, ``StoredDigest``, or ``Checksum`` value that is not a list of bytes:
 |        ``type_error(list(byte),Bytes)``
-|    ``PasswordHash`` contains a ``Salt``, ``StoredKey``, or ``StoredDigest`` value with a variable byte:
+|    ``PasswordHash`` contains a ``Salt``, ``StoredKey``, ``StoredDigest``, or ``Checksum`` value with a variable byte:
 |        ``instantiation_error``
-|    ``PasswordHash`` contains a ``Salt``, ``StoredKey``, or ``StoredDigest`` value with a non-integer byte:
+|    ``PasswordHash`` contains a ``Salt``, ``StoredKey``, ``StoredDigest``, or ``Checksum`` value with a non-integer byte:
 |        ``type_error(integer,Byte)``
-|    ``PasswordHash`` contains a ``Salt``, ``StoredKey``, or ``StoredDigest`` value with an integer outside the byte range:
+|    ``PasswordHash`` contains a ``Salt``, ``StoredKey``, ``StoredDigest``, or ``Checksum`` value with an integer outside the byte range:
 |        ``domain_error(byte,Byte)``
+|    ``PasswordHash`` contains an invalid APR1 salt:
+|        ``domain_error(apr1_salt,Salt)``
+|    ``PasswordHash`` contains an invalid APR1 checksum:
+|        ``domain_error(apr1_checksum,Checksum)``
 |    ``Password`` is a partial list or a list with an element which is a variable:
 |        ``instantiation_error``
 |    ``Password`` is a list but not a list of bytes:

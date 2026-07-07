@@ -11,6 +11,7 @@ currently exports the ``crypto`` object with the predicates:
 - ``secure_compare/2``
 - ``hkdf/5``
 - ``pbkdf2/6``
+- ``apr1/3``
 - ``password_hash/4``
 - ``verify_password_hash/2``
 
@@ -29,10 +30,14 @@ The ``hkdf/5`` and ``pbkdf2/6`` predicates provide portable key
 derivation implemented on top of the existing ``hashes`` and ``hmac``
 libraries.
 
+The ``apr1/3`` predicate computes Apache APR1 encoded checksums for
+password and salt byte sequences using a portable MD5-based
+implementation.
+
 The ``password_hash/4`` predicate builds on top of ``pbkdf2/6`` to
 generate structured password-hash terms. The ``verify_password_hash/2``
-predicate verifies both ``pbkdf2(Hash, Iterations, Salt, DerivedKey)``
-terms and ``digest(Hash, StoredDigest)`` terms.
+predicate verifies ``pbkdf2(Hash, Iterations, Salt, DerivedKey)``,
+``digest(Hash, StoredDigest)``, and ``apr1(Salt, Checksum)`` terms.
 
 API documentation
 -----------------
@@ -84,4 +89,12 @@ Derive 32 bytes using HKDF-SHA-256:
 
    | ?- crypto::hkdf(sha256, [1,2,3,4], 32, Bytes, [salt([5,6,7,8]),info([9,10])]).
    Bytes = [...]
+   yes
+
+Compute an Apache APR1 checksum:
+
+::
+
+   | ?- crypto::apr1([112,97,115,115,119,111,114,100], [112,111,114,116,97,98,108,101], Checksum).
+   Checksum = [107,117,110,70,78,90,57,114,48,81,57,54,51,88,98,115,116,101,79,79,87,46]
    yes

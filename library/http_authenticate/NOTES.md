@@ -31,7 +31,8 @@ The library currently provides these public entities:
 - `http_authenticate`
 	core Basic parsing, generation, request protection, and challenge helpers
 - `http_htpasswd_verifier(_)`
-	portable Apache `.htpasswd` subset verifier supporting `{SHA}` entries
+	portable Apache `.htpasswd` subset verifier supporting `{SHA}` and `$apr1$`
+	entries
 - `http_server_basic_handler(_, _, _)`
 	portable handler wrapper that applies Basic protection around another object
 	implementing `http_handler_protocol`
@@ -97,8 +98,9 @@ Current scope
 	objects
 - route-level protection through `http_router_basic_auth(_, _)`
 	and the `authorize_routed_request/2` router hook
-- portable Apache `.htpasswd` subset verification for `{SHA}` entries
-	using expanded file paths and rejecting malformed decoded SHA-1 digests
+- portable Apache `.htpasswd` subset verification for `{SHA}` and `$apr1$`
+	entries
+	using expanded file paths and rejecting malformed supported hash entries
 
 
 Option validation
@@ -120,5 +122,5 @@ Non-implemented features
 
 - client-side session helpers
 - automatic role or scope authorization metadata
-- portable verification of `$apr1$`, bcrypt (`$2a$`, `$2b$`, `$2y$`), or
-	traditional `crypt()` `.htpasswd` entries
+- portable verification of bcrypt (`$2a$`, `$2b$`, `$2y$`) or traditional
+	`crypt()` `.htpasswd` entries

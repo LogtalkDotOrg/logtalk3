@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-07-07,
 		comment is 'Transport-neutral cryptographic helper predicates.'
 	]).
 
@@ -131,6 +131,30 @@
 		]
 	]).
 
+	:- public(apr1/3).
+	:- mode(apr1(+list(byte), +list(byte), -list(byte)), one_or_error).
+	:- mode(apr1(+list(byte), +list(byte), +list(byte)), zero_or_one_or_error).
+	:- info(apr1/3, [
+		comment is 'Computes the Apache APR1 encoded checksum for a password byte sequence and salt byte sequence.',
+		argnames is ['Password', 'Salt', 'Checksum'],
+		exceptions is [
+			'``Password`` is a partial list or a list with an element which is a variable' - instantiation_error,
+			'``Password`` is a list but not a list of bytes' - type_error(list(byte), 'Password'),
+			'``Password`` contains a non-integer element' - type_error(integer, 'Byte'),
+			'``Password`` contains an integer outside the byte range' - domain_error(byte, 'Byte'),
+			'``Salt`` is a partial list or a list with an element which is a variable' - instantiation_error,
+			'``Salt`` is a list but not a list of bytes' - type_error(list(byte), 'Salt'),
+			'``Salt`` contains a non-integer element' - type_error(integer, 'Byte'),
+			'``Salt`` contains an integer outside the byte range' - domain_error(byte, 'Byte'),
+			'``Salt`` is not a valid APR1 salt' - domain_error(apr1_salt, 'Salt'),
+			'``Checksum`` is a partial list or a list with an element which is a variable' - instantiation_error,
+			'``Checksum`` is neither a variable nor a list of bytes' - type_error(list(byte), 'Checksum'),
+			'``Checksum`` contains a non-integer element' - type_error(integer, 'Byte'),
+			'``Checksum`` contains an integer outside the byte range' - domain_error(byte, 'Byte'),
+			'``Checksum`` is not a valid APR1 checksum' - domain_error(apr1_checksum, 'Checksum')
+		]
+	]).
+
 	:- public(password_hash/4).
 	:- mode(password_hash(+object_identifier, +list(byte), -compound, +list(compound)), one_or_error).
 	:- info(password_hash/4, [
@@ -175,10 +199,12 @@
 			'``PasswordHash`` contains a hash object that does not implement the ``hash_digest_protocol`` protocol' - domain_error(crypto_hash, 'Hash'),
 			'``PasswordHash`` contains an ``Iterations`` value that is not an integer' - type_error(integer, 'Iterations'),
 			'``PasswordHash`` contains an ``Iterations`` value that is not a positive integer' - domain_error(positive_integer, 'Iterations'),
-			'``PasswordHash`` contains a ``Salt``, ``StoredKey``, or ``StoredDigest`` value that is not a list of bytes' - type_error(list(byte), 'Bytes'),
-			'``PasswordHash`` contains a ``Salt``, ``StoredKey``, or ``StoredDigest`` value with a variable byte' - instantiation_error,
-			'``PasswordHash`` contains a ``Salt``, ``StoredKey``, or ``StoredDigest`` value with a non-integer byte' - type_error(integer, 'Byte'),
-			'``PasswordHash`` contains a ``Salt``, ``StoredKey``, or ``StoredDigest`` value with an integer outside the byte range' - domain_error(byte, 'Byte'),
+			'``PasswordHash`` contains a ``Salt``, ``StoredKey``, ``StoredDigest``, or ``Checksum`` value that is not a list of bytes' - type_error(list(byte), 'Bytes'),
+			'``PasswordHash`` contains a ``Salt``, ``StoredKey``, ``StoredDigest``, or ``Checksum`` value with a variable byte' - instantiation_error,
+			'``PasswordHash`` contains a ``Salt``, ``StoredKey``, ``StoredDigest``, or ``Checksum`` value with a non-integer byte' - type_error(integer, 'Byte'),
+			'``PasswordHash`` contains a ``Salt``, ``StoredKey``, ``StoredDigest``, or ``Checksum`` value with an integer outside the byte range' - domain_error(byte, 'Byte'),
+			'``PasswordHash`` contains an invalid APR1 salt' - domain_error(apr1_salt, 'Salt'),
+			'``PasswordHash`` contains an invalid APR1 checksum' - domain_error(apr1_checksum, 'Checksum'),
 			'``Password`` is a partial list or a list with an element which is a variable' - instantiation_error,
 			'``Password`` is a list but not a list of bytes' - type_error(list(byte), 'Password'),
 			'``Password`` contains a non-integer element' - type_error(integer, 'Byte'),
@@ -187,7 +213,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2
+		append/2, append/3, length/2
 	]).
 
 	:- uses(fast_random(xoshiro128pp), [
@@ -277,6 +303,20 @@
 		;	pbkdf2_blocks(Hash, Password, Salt, Iterations, 1, Length, DerivedKey, [])
 		).
 
+	apr1(Password, Salt, Checksum) :-
+		context(Context),
+		check(list(byte), Password, Context),
+		check(list(byte), Salt, Context),
+		check_apr1_salt(Salt, Context),
+		(	var(Checksum) ->
+			true
+		;	check(list(byte), Checksum, Context),
+			check_apr1_checksum(Checksum, Context)
+		),
+		apr1_digest(Password, Salt, Digest),
+		apr1_encode_digest(Digest, ComputedChecksum),
+		Checksum = ComputedChecksum.
+
 	password_hash(Hash, Password, PasswordHash, Options) :-
 		context(Context),
 		check_hash(Hash, Context),
@@ -297,6 +337,10 @@
 			check_digest_password_hash(PasswordHash, Hash, StoredDigest, Context),
 			Hash::digest(Password, ComputedDigest),
 			secure_compare(StoredDigest, ComputedDigest)
+		;	PasswordHash = apr1(_, _) ->
+			check_apr1_password_hash(PasswordHash, Salt, StoredChecksum, Context),
+			apr1(Password, Salt, ComputedChecksum),
+			secure_compare(StoredChecksum, ComputedChecksum)
 		;	check_password_hash(PasswordHash, _Hash, _Iterations, _Salt, _StoredKey, Context)
 		).
 
@@ -510,6 +554,139 @@
 			StoredDigest = StoredDigest0
 		;	throw(error(domain_error(password_hash, PasswordHash), Context))
 		).
+
+	check_apr1_password_hash(PasswordHash, Salt, Checksum, Context) :-
+		(	var(PasswordHash) ->
+			throw(error(instantiation_error, Context))
+		;	PasswordHash = apr1(Salt0, Checksum0) ->
+			check(list(byte), Salt0, Context),
+			check(list(byte), Checksum0, Context),
+			check_apr1_salt(Salt0, Context),
+			check_apr1_checksum(Checksum0, Context),
+			Salt = Salt0,
+			Checksum = Checksum0
+		;	throw(error(domain_error(password_hash, PasswordHash), Context))
+		).
+
+	check_apr1_salt(Salt, Context) :-
+		length(Salt, Length),
+		(	Length > 0,
+			Length =< 8,
+			apr1_base64_codes(Salt) ->
+			true
+		;	throw(error(domain_error(apr1_salt, Salt), Context))
+		).
+
+	check_apr1_checksum(Checksum, Context) :-
+		length(Checksum, Length),
+		(	Length =:= 22,
+			apr1_base64_codes(Checksum) ->
+			true
+		;	throw(error(domain_error(apr1_checksum, Checksum), Context))
+		).
+
+	apr1_digest(Password, Salt, Digest) :-
+		length(Password, PasswordLength),
+		append([Password, Salt, Password], AlternateInput),
+		md5::digest(AlternateInput, AlternateDigest),
+		copy_repeated_bytes(AlternateDigest, PasswordLength, AlternatePrefix, []),
+		apr1_length_mixing(PasswordLength, Password, LengthMixing),
+		append([Password, [0'$, 0'a, 0'p, 0'r, 0'1, 0'$], Salt, AlternatePrefix, LengthMixing], InitialInput),
+		md5::digest(InitialInput, InitialDigest),
+		apr1_rounds(0, Password, Salt, InitialDigest, Digest).
+
+	apr1_length_mixing(0, _Password, []) :-
+		!.
+	apr1_length_mixing(Length, [PasswordByte| _], Mixing) :-
+		apr1_length_mixing(Length, PasswordByte, Mixing, []).
+
+	apr1_length_mixing(0, _PasswordByte, Mixing, Mixing) :-
+		!.
+	apr1_length_mixing(Length, PasswordByte, Mixing0, Mixing) :-
+		(	Length /\ 1 =:= 1 ->
+			Mixing0 = [0| Mixing1]
+		;	Mixing0 = [PasswordByte| Mixing1]
+		),
+		NextLength is Length >> 1,
+		apr1_length_mixing(NextLength, PasswordByte, Mixing1, Mixing).
+
+	apr1_rounds(1000, _Password, _Salt, Digest, Digest) :-
+		!.
+	apr1_rounds(Index, Password, Salt, Digest0, Digest) :-
+		apr1_round_input(Index, Password, Salt, Digest0, Input),
+		md5::digest(Input, Digest1),
+		NextIndex is Index + 1,
+		apr1_rounds(NextIndex, Password, Salt, Digest1, Digest).
+
+	apr1_round_input(Index, Password, Salt, Digest, Input) :-
+		(	Index /\ 1 =:= 1 ->
+			Prefix = Password,
+			Suffix = Digest
+		;	Prefix = Digest,
+			Suffix = Password
+		),
+		(	Index mod 3 =:= 0 ->
+			SaltPart = []
+		;	SaltPart = Salt
+		),
+		(	Index mod 7 =:= 0 ->
+			PasswordPart = []
+		;	PasswordPart = Password
+		),
+		append([Prefix, SaltPart, PasswordPart, Suffix], Input).
+
+	apr1_encode_digest([
+			Byte00, Byte01, Byte02, Byte03, Byte04, Byte05, Byte06, Byte07,
+			Byte08, Byte09, Byte10, Byte11, Byte12, Byte13, Byte14, Byte15
+		], Checksum) :-
+		apr1_to64((Byte00 << 16) \/ (Byte06 << 8) \/ Byte12, 4, Checksum, Checksum1),
+		apr1_to64((Byte01 << 16) \/ (Byte07 << 8) \/ Byte13, 4, Checksum1, Checksum2),
+		apr1_to64((Byte02 << 16) \/ (Byte08 << 8) \/ Byte14, 4, Checksum2, Checksum3),
+		apr1_to64((Byte03 << 16) \/ (Byte09 << 8) \/ Byte15, 4, Checksum3, Checksum4),
+		apr1_to64((Byte04 << 16) \/ (Byte10 << 8) \/ Byte05, 4, Checksum4, Checksum5),
+		apr1_to64(Byte11, 2, Checksum5, []).
+
+	apr1_to64(_Value, 0, Checksum, Checksum) :-
+		!.
+	apr1_to64(Value, Count, [Code| Codes0], Codes) :-
+		Index is Value /\ 0x3f,
+		apr1_base64_code(Index, Code),
+		NextValue is Value >> 6,
+		NextCount is Count - 1,
+		apr1_to64(NextValue, NextCount, Codes0, Codes).
+
+	apr1_base64_code(Index, Code) :-
+		(	Index =:= 0 ->
+			Code is 0'.
+		;	Index =:= 1 ->
+			Code is 0'/
+		;	Index =< 11 ->
+			Code is 0'0 + Index - 2
+		;	Index =< 37 ->
+			Code is 0'A + Index - 12
+		;	Code is 0'a + Index - 38
+		),
+		!.
+
+	apr1_base64_codes([]).
+	apr1_base64_codes([Code| Codes]) :-
+		apr1_base64_code(Code),
+		apr1_base64_codes(Codes).
+
+	apr1_base64_code(Code) :-
+		(	Code =:= 0'.
+		;	Code =:= 0'/
+		;	0'0 =< Code, Code =< 0'9
+		;	0'A =< Code, Code =< 0'Z
+		;	0'a =< Code, Code =< 0'z
+		),
+		!.
+
+	copy_repeated_bytes(_Bytes, 0, Output, Output) :-
+		!.
+	copy_repeated_bytes(Bytes, Count0, Output0, Output) :-
+		copy_output_bytes(Bytes, Count0, Count, Output0, Output1),
+		copy_repeated_bytes(Bytes, Count, Output1, Output).
 
 	zero_bytes(0, []) :-
 		!.

@@ -25,12 +25,12 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-02,
+		date is 2026-07-07,
 		comment is 'Unit tests for the "crypto" library.'
 	]).
 
 	:- uses(crypto, [
-		hkdf/5, hex_bytes/2, password_hash/4, pbkdf2/6, random_bytes/2, secure_compare/2,
+		apr1/3, hkdf/5, hex_bytes/2, password_hash/4, pbkdf2/6, random_bytes/2, secure_compare/2,
 		verify_password_hash/2
 	]).
 
@@ -293,6 +293,54 @@
 
 	:- endif.
 
+	% apr1/3 tests
+
+	test(crypto_apr1_3_01, deterministic(Checksum == ExpectedChecksum)) :-
+		atom_codes('Circle Of Life', Password),
+		atom_codes('portable', Salt),
+		atom_codes('F/0Ac3GBA/V51P9DJ7acL.', ExpectedChecksum),
+		apr1(Password, Salt, Checksum).
+
+	test(crypto_apr1_3_02, deterministic(Checksum == ExpectedChecksum)) :-
+		atom_codes('password', Password),
+		atom_codes('x', Salt),
+		atom_codes('JzZzpGvcyRmaRIUjVzP42/', ExpectedChecksum),
+		apr1(Password, Salt, Checksum).
+
+	test(crypto_apr1_3_03, deterministic(Checksum == ExpectedChecksum)) :-
+		atom_codes('', Password),
+		atom_codes('portable', Salt),
+		atom_codes('wMNl45x8O/GwpKqsO3mZV1', ExpectedChecksum),
+		apr1(Password, Salt, Checksum).
+
+	test(crypto_apr1_3_04, fail) :-
+		atom_codes('Circle Of Life', Password),
+		atom_codes('portable', Salt),
+		atom_codes('G/0Ac3GBA/V51P9DJ7acL.', Checksum),
+		apr1(Password, Salt, Checksum).
+
+	test(crypto_apr1_3_05, error(instantiation_error)) :-
+		apr1(_, [0'x], _Checksum).
+
+	test(crypto_apr1_3_06, error(type_error(list(byte), foo))) :-
+		apr1([0'p], foo, _Checksum).
+
+	test(crypto_apr1_3_07, error(domain_error(apr1_salt, []))) :-
+		apr1([0'p], [], _Checksum).
+
+	test(crypto_apr1_3_08, error(domain_error(apr1_salt, Salt))) :-
+		atom_codes('123456789', Salt),
+		apr1([0'p], Salt, _Checksum).
+
+	test(crypto_apr1_3_09, error(domain_error(apr1_salt, [0'$]))) :-
+		apr1([0'p], [0'$], _Checksum).
+
+	test(crypto_apr1_3_10, error(type_error(list(byte), foo))) :-
+		apr1([0'p], [0'x], foo).
+
+	test(crypto_apr1_3_11, error(domain_error(apr1_checksum, []))) :-
+		apr1([0'p], [0'x], []).
+
 	% password_hash/4 tests
 
 	test(crypto_password_hash_4_02, error(domain_error(password_hash_option, rounds(2)))) :-
@@ -423,6 +471,28 @@
 
 	test(crypto_verify_password_hash_2_24, error(domain_error(byte, 256))) :-
 		verify_password_hash(digest(md5, [256]), [112,97,115,115]).
+
+	test(crypto_verify_password_hash_2_25, deterministic) :-
+		atom_codes('Circle Of Life', Password),
+		atom_codes('portable', Salt),
+		atom_codes('F/0Ac3GBA/V51P9DJ7acL.', Checksum),
+		verify_password_hash(apr1(Salt, Checksum), Password).
+
+	test(crypto_verify_password_hash_2_26, fail) :-
+		atom_codes('wrong password', Password),
+		atom_codes('portable', Salt),
+		atom_codes('F/0Ac3GBA/V51P9DJ7acL.', Checksum),
+		verify_password_hash(apr1(Salt, Checksum), Password).
+
+	test(crypto_verify_password_hash_2_27, error(domain_error(apr1_salt, []))) :-
+		atom_codes('Circle Of Life', Password),
+		atom_codes('F/0Ac3GBA/V51P9DJ7acL.', Checksum),
+		verify_password_hash(apr1([], Checksum), Password).
+
+	test(crypto_verify_password_hash_2_28, error(domain_error(apr1_checksum, []))) :-
+		atom_codes('Circle Of Life', Password),
+		atom_codes('portable', Salt),
+		verify_password_hash(apr1(Salt, []), Password).
 
 	test(crypto_verify_password_hash_2_01, deterministic) :-
 		hex_bytes('fd510b4e8ac8db80209ed7da24e932d2', ExpectedBytes),
