@@ -21680,6 +21680,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`rest <rest/0::request_body/2>`
 
+``request_body_bytes/4``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_core <http_core/0::request_body_bytes/4>`
+
 ``request_cookies/3``
 ---------------------
 
@@ -21987,6 +21997,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_core <http_core/0::response/6>`
+
+``response_body_bytes/4``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_core <http_core/0::response_body_bytes/4>`
 
 ``response_properties/2``
 -------------------------

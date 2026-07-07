@@ -529,6 +529,60 @@ Generates a body payload to the given sink (``bytes(List)``, ``codes(List)``, ``
 
 ------------
 
+.. index:: request_body_bytes/4
+.. _http_core/0::request_body_bytes/4:
+
+``request_body_bytes/4``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates the transfer-decoded entity-body bytes for a normalized HTTP request body using the request headers and properties to select body serialization options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``request_body_bytes(Headers,Body,Properties,Bytes)``
+| **Mode and number of proofs:**
+|    ``request_body_bytes(+list(compound),++compound,+list(compound),--list(byte))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Headers`` is not a valid normalized HTTP header list:
+|        ``domain_error(http_headers,Headers)``
+|    ``Body`` is not a valid normalized HTTP body term:
+|        ``domain_error(http_body,Body)``
+|    ``Properties`` is not a valid normalized HTTP property list:
+|        ``domain_error(http_properties,Properties)``
+
+
+------------
+
+.. index:: response_body_bytes/4
+.. _http_core/0::response_body_bytes/4:
+
+``response_body_bytes/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates the transfer-decoded entity-body bytes for a normalized HTTP response body using the response headers and properties to select body serialization options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``response_body_bytes(Headers,Body,Properties,Bytes)``
+| **Mode and number of proofs:**
+|    ``response_body_bytes(+list(compound),++compound,+list(compound),--list(byte))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Headers`` is not a valid normalized HTTP header list:
+|        ``domain_error(http_headers,Headers)``
+|    ``Body`` is not a valid normalized HTTP body term:
+|        ``domain_error(http_body,Body)``
+|    ``Properties`` is not a valid normalized HTTP property list:
+|        ``domain_error(http_properties,Properties)``
+
+
+------------
+
 .. index:: encode_body/4
 .. _http_core/0::encode_body/4:
 

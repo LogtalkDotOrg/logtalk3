@@ -244,6 +244,30 @@
 		]
 	]).
 
+	:- public(request_body_bytes/4).
+	:- mode(request_body_bytes(+list(compound), ++compound, +list(compound), --list(byte)), one_or_error).
+	:- info(request_body_bytes/4, [
+		comment is 'Generates the transfer-decoded entity-body bytes for a normalized HTTP request body using the request headers and properties to select body serialization options.',
+		argnames is ['Headers', 'Body', 'Properties', 'Bytes'],
+		exceptions is [
+			'``Headers`` is not a valid normalized HTTP header list' - domain_error(http_headers, 'Headers'),
+			'``Body`` is not a valid normalized HTTP body term' - domain_error(http_body, 'Body'),
+			'``Properties`` is not a valid normalized HTTP property list' - domain_error(http_properties, 'Properties')
+		]
+	]).
+
+	:- public(response_body_bytes/4).
+	:- mode(response_body_bytes(+list(compound), ++compound, +list(compound), --list(byte)), one_or_error).
+	:- info(response_body_bytes/4, [
+		comment is 'Generates the transfer-decoded entity-body bytes for a normalized HTTP response body using the response headers and properties to select body serialization options.',
+		argnames is ['Headers', 'Body', 'Properties', 'Bytes'],
+		exceptions is [
+			'``Headers`` is not a valid normalized HTTP header list' - domain_error(http_headers, 'Headers'),
+			'``Body`` is not a valid normalized HTTP body term' - domain_error(http_body, 'Body'),
+			'``Properties`` is not a valid normalized HTTP property list' - domain_error(http_properties, 'Properties')
+		]
+	]).
+
 	:- public(encode_body/4).
 	:- mode(encode_body(+atom, ++term, +list(compound), -compound), one_or_error).
 	:- info(encode_body/4, [
@@ -845,6 +869,7 @@
 	semantic_property_functor(path_segments, 1).
 	semantic_property_functor(scheme, 1).
 	semantic_property_functor(decoded_body, 1).
+	semantic_property_functor(entity_body_bytes, 1).
 	semantic_property_functor(connection, 1).
 	semantic_property_functor(upgrade, 1).
 	semantic_property_functor(websocket_key, 1).
@@ -1084,8 +1109,13 @@
 		generate_wire_payload(MediaType, Payload, Options, Bytes).
 
 	message_body_from_headers(Headers, Bytes, Body, Properties) :-
-		transfer_body_bytes(Headers, Bytes, BodyBytes, Properties),
-		payload_body_from_headers(Headers, BodyBytes, Body).
+		transfer_body_bytes(Headers, Bytes, BodyBytes, TransferProperties),
+		payload_body_from_headers(Headers, BodyBytes, Body),
+		maybe_add_entity_body_bytes_property(BodyBytes, TransferProperties, Properties).
+
+	maybe_add_entity_body_bytes_property([], Properties, Properties) :-
+		!.
+	maybe_add_entity_body_bytes_property(BodyBytes, Properties, [entity_body_bytes(BodyBytes)| Properties]).
 
 	payload_body_from_headers(_Headers, [], empty) :-
 		!.
@@ -2517,6 +2547,8 @@
 		valid_port(Port).
 	valid_property_by_functor(decoded_body, decoded_body(Boolean)) :-
 		valid_boolean(Boolean).
+	valid_property_by_functor(entity_body_bytes, entity_body_bytes(Bytes)) :-
+		valid_byte_list(Bytes).
 	valid_property_by_functor(open_api_probe, open_api_probe(Boolean)) :-
 		valid_boolean(Boolean).
 	valid_property_by_functor(connection, connection(Tokens)) :-
@@ -2553,6 +2585,7 @@
 	recognized_property_functor(scheme).
 	recognized_property_functor(peer).
 	recognized_property_functor(decoded_body).
+	recognized_property_functor(entity_body_bytes).
 	recognized_property_functor(connection).
 	recognized_property_functor(upgrade).
 	recognized_property_functor(websocket_key).

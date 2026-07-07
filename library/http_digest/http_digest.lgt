@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-07-07,
 		comment is 'HTTP Digest authentication parsing, generation, request decoration, and verification helpers.'
 	]).
 
@@ -264,8 +264,9 @@
 
 	:- uses(http_core, [
 		body/2, header/3, headers/2, is_request/1, is_response/1,
-		method/2, property/2, request/7, response/6, status/2,
-		target/2, version/2
+		method/2, property/2, request/7, request_body_bytes/4,
+		response/6, response_body_bytes/4, status/2, target/2,
+		version/2
 	]).
 
 	:- uses(list, [
@@ -353,7 +354,7 @@
 		resolve_client_nonce(Qop, CNonceOption, Username, Method, URI, CNonce),
 		resolve_nonce_count(Qop, NonceCountOption, NonceCount),
 		compute_ha1_from_password(Algorithm, Username, Realm, Password, Nonce, CNonce, HA1),
-		compute_request_digest(Algorithm, HA1, Method, URI, Nonce, Qop, NonceCount, CNonce, Digest),
+		compute_request_digest(Algorithm, HA1, Method, URI, Nonce, Qop, NonceCount, CNonce, Request, Digest),
 		Authorization = digest_authorization([
 			username(Username),
 			userhash(Userhash),
@@ -376,7 +377,7 @@
 		parse_protect_request_options(Realm, Domains, Algorithm, AcceptedAlgorithms, Qops, Opaque, Userhash, Charset, Secret, NonceTTL, CurrentTime, Status0, Headers0, Body0, Properties0, Options),
 		validate_supported_server_challenge_settings(Algorithm, Qops, Userhash, Charset),
 		validate_supported_algorithms_list(AcceptedAlgorithms),
-		protected_request_status(Request, Verifier, Realm, AcceptedAlgorithms, Opaque, Secret, NonceTTL, CurrentTime, VerifiedRequest, VerificationStatus),
+		protected_request_status(Request, Verifier, Realm, AcceptedAlgorithms, Qops, Opaque, Secret, NonceTTL, CurrentTime, VerifiedRequest, VerificationStatus),
 		(	VerificationStatus == valid ->
 			Action = continue(VerifiedRequest)
 		;	protect_request_failure_response(VerificationStatus, Realm, Domains, Algorithm, Qops, Opaque, Userhash, Charset, Secret, NonceTTL, CurrentTime, Status0, Headers0, Body0, Properties0, Response),
@@ -427,7 +428,7 @@
 		verified_request_authentication_state(Request, Authorization, HA1, Realm),
 		validate_authorization_term(Authorization, _Username, _Userhash, _AuthRealm, Nonce, URI, _Digest, Algorithm, _Opaque, Qop, NonceCount, CNonce),
 		validate_supported_response_qop(Qop),
-		compute_rspauth(Algorithm, HA1, URI, Nonce, Qop, NonceCount, CNonce, Rspauth),
+		compute_rspauth(Algorithm, HA1, URI, Nonce, Qop, NonceCount, CNonce, Response0, Rspauth),
 		resolve_nextnonce(NextNoncePolicy, SecretOption, Realm, NonceTTL, CurrentTime, NextNonce),
 		AuthenticationInfo = digest_authentication_info([
 			nextnonce(NextNonce),
@@ -716,21 +717,21 @@
 		;	existence_error(http_digest_verifier, Verifier)
 		).
 
-	protected_request_status(Request, _Verifier, _Realm, _AcceptedAlgorithms, _Opaque, _Secret, _NonceTTL, _CurrentTime, _VerifiedRequest, missing) :-
+	protected_request_status(Request, _Verifier, _Realm, _AcceptedAlgorithms, _Qops, _Opaque, _Secret, _NonceTTL, _CurrentTime, _VerifiedRequest, missing) :-
 		findall(Value, digest_scheme_header_value(Request, authorization, Value), []),
 		!.
-	protected_request_status(Request, _Verifier, _Realm, _AcceptedAlgorithms, _Opaque, _Secret, _NonceTTL, _CurrentTime, _VerifiedRequest, malformed) :-
+	protected_request_status(Request, _Verifier, _Realm, _AcceptedAlgorithms, _Qops, _Opaque, _Secret, _NonceTTL, _CurrentTime, _VerifiedRequest, malformed) :-
 		catch((authorization(Request, _Authorization), fail), error(domain_error(http_digest_header(authorization), _), _), true),
 		!.
-	protected_request_status(Request, Verifier, Realm, AcceptedAlgorithms, Opaque, Secret, NonceTTL, CurrentTime, VerifiedRequest, Status) :-
+	protected_request_status(Request, Verifier, Realm, AcceptedAlgorithms, Qops, Opaque, Secret, NonceTTL, CurrentTime, VerifiedRequest, Status) :-
 		authorization(Request, Authorization),
-		(	catch(verify_authorization_request(Authorization, Request, Verifier, Realm, AcceptedAlgorithms, Opaque, Secret, NonceTTL, CurrentTime, VerifiedRequest, Status), Error, protect_request_error_status(Error, Status)) ->
+		( catch(verify_authorization_request(Authorization, Request, Verifier, Realm, AcceptedAlgorithms, Qops, Opaque, Secret, NonceTTL, CurrentTime, VerifiedRequest, Status), Error, protect_request_error_status(Error, Status)) ->
 			true
 		;	Status = invalid
 		),
 		!.
 
-	verify_authorization_request(Authorization, Request, Verifier, Realm, AcceptedAlgorithms, Opaque, Secret, NonceTTL, CurrentTime, VerifiedRequest, Status) :-
+	verify_authorization_request(Authorization, Request, Verifier, Realm, AcceptedAlgorithms, Qops, Opaque, Secret, NonceTTL, CurrentTime, VerifiedRequest, Status) :-
 		validate_authorization_term(Authorization, Username, Userhash, AuthorizationRealm, Nonce, URI, ResponseDigest, Algorithm, AuthorizationOpaque, Qop, NonceCount, CNonce),
 		Userhash == false,
 		once(( AuthorizationRealm == none ; AuthorizationRealm == Realm )),
@@ -738,6 +739,7 @@
 		memberchk(Algorithm, AcceptedAlgorithms),
 		validate_supported_compute_algorithm(Algorithm),
 		validate_supported_response_qop(Qop),
+		validate_authorization_qop(Qop, Qops),
 		request_uri_matches(Request, URI),
 		verify_nonce(Realm, Secret, Nonce, NonceTTL, CurrentTime, NonceStatus),
 		(	NonceStatus == stale ->
@@ -747,7 +749,7 @@
 			Verifier::ha1(BaseAlgorithm, Realm, Username, StoredHA1),
 			compute_effective_ha1(Algorithm, StoredHA1, Nonce, CNonce, HA1),
 			method(Request, Method),
-			compute_request_digest(Algorithm, HA1, Method, URI, Nonce, Qop, NonceCount, CNonce, ExpectedDigest),
+			compute_request_digest(Algorithm, HA1, Method, URI, Nonce, Qop, NonceCount, CNonce, Request, ExpectedDigest),
 			secure_compare(ExpectedDigest, ResponseDigest),
 			annotated_digest_request(Request, Authorization, Username, Userhash, Realm, Algorithm, Qop, Nonce, NonceCount, HA1, VerifiedRequest),
 			Status = valid
@@ -758,6 +760,15 @@
 	protect_request_error_status(error(domain_error(http_digest_qop, _), _), invalid).
 	protect_request_error_status(Error, _Status) :-
 		throw(Error).
+
+	validate_authorization_qop(none, []) :-
+		!.
+	validate_authorization_qop(Qop, Qops) :-
+		Qop \== none,
+		member(Qop, Qops),
+		!.
+	validate_authorization_qop(Qop, _Qops) :-
+		domain_error(http_digest_qop, Qop).
 
 	protect_request_failure_response(Failure, Realm, Domains, Algorithm, Qops, Opaque, Userhash, Charset, Secret, NonceTTL, CurrentTime, Status, Headers0, Body, Properties, Response) :-
 		(	Failure == stale ->
@@ -888,16 +899,57 @@
 		joined_atom_codes([BaseHA1, ':', Nonce, ':', CNonce], Input),
 		compute_hash_hex(sha512_256, Input, HA1).
 
-	compute_request_digest(Algorithm, HA1, Method, URI, Nonce, Qop, NonceCount, CNonce, Digest) :-
-		joined_atom_codes([Method, ':', URI], A2Codes),
+	compute_request_digest(Algorithm, HA1, Method, URI, Nonce, Qop, NonceCount, CNonce, Request, Digest) :-
+		compute_request_a2_codes(Qop, Algorithm, Method, URI, Request, A2Codes),
 		compute_hash_hex(Algorithm, A2Codes, HA2),
 		compute_kd(Algorithm, HA1, Nonce, Qop, NonceCount, CNonce, HA2, Digest).
 
-	compute_rspauth(Algorithm, HA1, URI, Nonce, Qop, NonceCount, CNonce, Rspauth) :-
-		once(( Qop == none ; Qop == auth )),
-		joined_atom_codes(['', ':', URI], A2Codes),
+	compute_rspauth(Algorithm, HA1, URI, Nonce, Qop, NonceCount, CNonce, Response, Rspauth) :-
+		compute_response_a2_codes(Qop, Algorithm, URI, Response, A2Codes),
 		compute_hash_hex(Algorithm, A2Codes, HA2),
 		compute_kd(Algorithm, HA1, Nonce, Qop, NonceCount, CNonce, HA2, Rspauth).
+
+	compute_request_a2_codes(auth_int, Algorithm, Method, URI, Request, A2Codes) :-
+		!,
+		request_entity_body_hash(Request, Algorithm, EntityBodyHash),
+		joined_atom_codes([Method, ':', URI, ':', EntityBodyHash], A2Codes).
+	compute_request_a2_codes(Qop, _Algorithm, Method, URI, _Request, A2Codes) :-
+		once((Qop == none; Qop == auth)),
+		joined_atom_codes([Method, ':', URI], A2Codes).
+
+	compute_response_a2_codes(auth_int, Algorithm, URI, Response, A2Codes) :-
+		!,
+		response_entity_body_hash(Response, Algorithm, EntityBodyHash),
+		joined_atom_codes(['', ':', URI, ':', EntityBodyHash], A2Codes).
+	compute_response_a2_codes(Qop, _Algorithm, URI, _Response, A2Codes) :-
+		once((Qop == none; Qop == auth)),
+		joined_atom_codes(['', ':', URI], A2Codes).
+
+	request_entity_body_hash(Request, Algorithm, EntityBodyHash) :-
+		request_entity_body_bytes(Request, EntityBodyBytes),
+		compute_hash_hex(Algorithm, EntityBodyBytes, EntityBodyHash).
+
+	response_entity_body_hash(Response, Algorithm, EntityBodyHash) :-
+		response_entity_body_bytes(Response, EntityBodyBytes),
+		compute_hash_hex(Algorithm, EntityBodyBytes, EntityBodyHash).
+
+	request_entity_body_bytes(Request, Bytes) :-
+		property(Request, entity_body_bytes(Bytes)),
+		!.
+	request_entity_body_bytes(Request, Bytes) :-
+		headers(Request, Headers),
+		body(Request, Body),
+		findall(Property, property(Request, Property), Properties),
+		request_body_bytes(Headers, Body, Properties, Bytes).
+
+	response_entity_body_bytes(Response, Bytes) :-
+		property(Response, entity_body_bytes(Bytes)),
+		!.
+	response_entity_body_bytes(Response, Bytes) :-
+		headers(Response, Headers),
+		body(Response, Body),
+		findall(Property, property(Response, Property), Properties),
+		response_body_bytes(Headers, Body, Properties, Bytes).
 
 	compute_kd(Algorithm, HA1, Nonce, none, _NonceCount, _CNonce, HA2, Digest) :-
 		joined_atom_codes([HA1, ':', Nonce, ':', HA2], Input),
@@ -932,23 +984,33 @@
 	base_hash_object(sha256, sha256).
 	base_hash_object(sha512_256, sha512_256).
 
-	resolve_client_nonce(none, _CNonceOption, _Username, _Method, _URI, none).
-	resolve_client_nonce(auth, auto, Username, Method, URI, CNonce) :-
+	resolve_client_nonce(none, _CNonceOption, _Username, _Method, _URI, none) :-
+		!.
+	resolve_client_nonce(Qop, auto, Username, Method, URI, CNonce) :-
+		requires_nonce(Qop),
 		current_unix_time(CurrentTime),
 		number_codes(CurrentTime, TimeCodes),
 		atom_codes(TimeAtom, TimeCodes),
 		joined_atom_codes([Username, ':', Method, ':', URI, ':', TimeAtom], Codes),
 		sha256::hash(Codes, CNonce),
 		!.
-	resolve_client_nonce(auth, CNonce, _Username, _Method, _URI, CNonce).
+	resolve_client_nonce(Qop, CNonce, _Username, _Method, _URI, CNonce) :-
+		requires_nonce(Qop).
 
 	resolve_nonce_count(none, _NonceCountOption, none).
 	resolve_nonce_count(auth, NonceCount, NonceCount).
+	resolve_nonce_count(auth_int, NonceCount, NonceCount).
+
+	requires_nonce(auth).
+	requires_nonce(auth_int).
 
 	select_authorization_qop([], none) :-
 		!.
 	select_authorization_qop(Qops, auth) :-
 		member(auth, Qops),
+		!.
+	select_authorization_qop(Qops, auth_int) :-
+		member(auth_int, Qops),
 		!.
 	select_authorization_qop([Qop| _], _SelectedQop) :-
 		domain_error(http_digest_qop, Qop).
@@ -978,12 +1040,17 @@
 	validate_supported_challenge_qops([auth| Qops]) :-
 		!,
 		validate_supported_challenge_qops(Qops).
+	validate_supported_challenge_qops([auth_int| Qops]) :-
+		!,
+		validate_supported_challenge_qops(Qops).
 	validate_supported_challenge_qops([Qop| _Qops]) :-
 		domain_error(http_digest_qop, Qop).
 
 	validate_supported_response_qop(none) :-
 		!.
 	validate_supported_response_qop(auth) :-
+		!.
+	validate_supported_response_qop(auth_int) :-
 		!.
 	validate_supported_response_qop(Qop) :-
 		domain_error(http_digest_qop, Qop).

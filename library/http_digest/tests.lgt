@@ -172,7 +172,7 @@
 		memberchk(cnonce(none), AuthorizationFields),
 		protect_options_without_qop(md5, 1700000000, ProtectOptions),
 		http_digest::protect_request(AuthorizedRequest, http_digest_test_verifier, continue(VerifiedRequest), ProtectOptions),
-		property(VerifiedRequest, digest_qop(none)),
+		once(property(VerifiedRequest, digest_qop(none))),
 		\+ property(VerifiedRequest, digest_nonce_count(_)),
 		response(http(1, 1), status(200, 'OK'), [], empty, [], Response1),
 		http_digest::add_authentication_info(VerifiedRequest, Response1, Response2, []),
@@ -202,6 +202,33 @@
 		protect_options(md5, 1700000000, Options),
 		http_digest::protect_request(Request, http_digest_test_verifier, respond(Response), Options),
 		status(Response, status(401, 'Unauthorized')).
+
+	test(http_digest_auth_int_01, deterministic) :-
+		verified_auth_int_request(md5, post, '/protected', content('text/plain', text('hello')), 1700000000, VerifiedRequest),
+		once(property(VerifiedRequest, digest_qop(auth_int))),
+		once(property(VerifiedRequest, digest_username('Mufasa'))).
+
+	test(http_digest_auth_int_02, deterministic) :-
+		authorized_auth_int_request(md5, post, '/protected', content('text/plain', text('hello')), 1700000000, AuthorizedRequest),
+		AuthorizedRequest = request(Method, Target, Version, Headers, _Body, Properties),
+		request(Method, Target, Version, Headers, content('text/plain', text('changed')), Properties, TamperedRequest),
+		protect_options_auth_int(md5, 1700000000, Options),
+		http_digest::protect_request(TamperedRequest, http_digest_test_verifier, respond(Response), Options),
+		status(Response, status(401, 'Unauthorized')).
+
+	test(http_digest_auth_int_03, deterministic) :-
+		verified_auth_int_request(sha256, post, '/protected', content('text/plain', text('hello')), 1700000000, VerifiedRequest),
+		response(http(1, 1), status(200, 'OK'), [], content('text/plain', text(one)), [], ResponseA0),
+		response(http(1, 1), status(200, 'OK'), [], content('text/plain', text(two)), [], ResponseB0),
+		http_digest::add_authentication_info(VerifiedRequest, ResponseA0, ResponseA, [nextnonce('next-nonce')]),
+		http_digest::add_authentication_info(VerifiedRequest, ResponseB0, ResponseB, [nextnonce('next-nonce')]),
+		http_digest::authentication_info(ResponseA, digest_authentication_info(FieldsA)),
+		http_digest::authentication_info(ResponseB, digest_authentication_info(FieldsB)),
+		memberchk(qop(auth_int), FieldsA),
+		memberchk(rspauth(RspauthA), FieldsA),
+		memberchk(rspauth(RspauthB), FieldsB),
+		RspauthA \== none,
+		RspauthA \== RspauthB.
 
 	test(http_digest_13, error(domain_error(http_digest_header(authentication_info), invalid(nc)))) :-
 		response(http(1, 1), status(200, 'OK'), [authentication_info-'qop=auth, rspauth="abcd", cnonce="client-nonce", nc=zzzzzzzz'], empty, [], Response),
@@ -410,6 +437,19 @@
 				status(Response, status(200, 'OK')),
 				body(Response, content('text/plain', text('title=Logtalk; boundary=fixed-boundary'))).
 
+			test(http_client_digest_session_auth_int_01, deterministic) :-
+				protect_options_auth_int(sha256, 1700000000, DigestOptions),
+				open_listener('127.0.0.1', Port, Listener, []),
+				threaded_once(serve_listener(Listener, http_server_digest_handler(http_digest_test_verifier, http_digest_request_echo_handler, DigestOptions, []), 2, _ClientInfos, [shutdown(keep_open)]), Tag),
+				request_echo_url(Port, '/echo', URL),
+				http_client_digest_session(_HTTPSocket_)::open(Session, 'Mufasa', 'Circle Of Life', [cookie_jar(none)]),
+				http_client_digest_session(_HTTPSocket_)::post(Session, URL, content('text/plain', text('post-int')), Response, []),
+				http_client_digest_session(_HTTPSocket_)::close(Session),
+				once(threaded_exit(serve_listener(Listener, http_server_digest_handler(http_digest_test_verifier, http_digest_request_echo_handler, DigestOptions, []), 2, _ClientInfos, [shutdown(keep_open)]), Tag)),
+				catch(close_listener(Listener), _, true),
+				status(Response, status(200, 'OK')),
+				body(Response, content('text/plain', text('post-int'))).
+
 		:- endif.
 
 	:- endif.
@@ -421,6 +461,10 @@
 	challenge_options_without_qop(Algorithm, CurrentTime, [realm('test-realm'), algorithm(Algorithm), qops([]), nonce_secret('secret'), current_time(CurrentTime)]).
 
 	protect_options(Algorithm, CurrentTime, [realm('test-realm'), algorithm(Algorithm), accepted_algorithms([Algorithm]), qops([auth]), nonce_secret('secret'), current_time(CurrentTime)]).
+
+	challenge_options_auth_int(Algorithm, CurrentTime, [realm('test-realm'), algorithm(Algorithm), qops([auth_int]), nonce_secret('secret'), current_time(CurrentTime)]).
+
+	protect_options_auth_int(Algorithm, CurrentTime, [realm('test-realm'), algorithm(Algorithm), accepted_algorithms([Algorithm]), qops([auth_int]), nonce_secret('secret'), current_time(CurrentTime)]).
 
 	protect_options_without_qop(Algorithm, CurrentTime, [realm('test-realm'), algorithm(Algorithm), accepted_algorithms([Algorithm]), qops([]), nonce_secret('secret'), current_time(CurrentTime)]).
 
@@ -441,9 +485,20 @@
 		challenge_for_algorithm(Algorithm, CurrentTime, Challenge),
 		http_digest::authorize_request(Request, Challenge, 'Mufasa', 'Circle Of Life', AuthorizedRequest, [cnonce('client-nonce'), nonce_count(1)]).
 
+	authorized_auth_int_request(Algorithm, Method, Path, Body, CurrentTime, AuthorizedRequest) :-
+		request(Method, origin(Path), http(1, 1), [], Body, [], Request),
+		challenge_options_auth_int(Algorithm, CurrentTime, ChallengeOptions),
+		http_digest::unauthorized_response(Challenge, _Response, ChallengeOptions),
+		http_digest::authorize_request(Request, Challenge, 'Mufasa', 'Circle Of Life', AuthorizedRequest, [cnonce('client-nonce'), nonce_count(1)]).
+
 	verified_request(Algorithm, Path, CurrentTime, VerifiedRequest) :-
 		authorized_request(Algorithm, Path, CurrentTime, AuthorizedRequest),
 		protect_options(Algorithm, CurrentTime, Options),
+		http_digest::protect_request(AuthorizedRequest, http_digest_test_verifier, continue(VerifiedRequest), Options).
+
+	verified_auth_int_request(Algorithm, Method, Path, Body, CurrentTime, VerifiedRequest) :-
+		authorized_auth_int_request(Algorithm, Method, Path, Body, CurrentTime, AuthorizedRequest),
+		protect_options_auth_int(Algorithm, CurrentTime, Options),
 		http_digest::protect_request(AuthorizedRequest, http_digest_test_verifier, continue(VerifiedRequest), Options).
 
 :- end_object.

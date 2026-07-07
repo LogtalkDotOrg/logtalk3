@@ -468,6 +468,9 @@ three forms:</p>
 <ul class="simple">
 <li><p>deterministic Digest header parsing and generation for challenges,
 authorizations, and <code class="docutils literal notranslate"><span class="pre">Authentication-Info</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">auth</span></code> and <code class="docutils literal notranslate"><span class="pre">auth-int</span></code> quality-of-protection request and response
+digest computation, with <code class="docutils literal notranslate"><span class="pre">auth-int</span></code> hashing transfer-decoded
+entity-body bytes</p></li>
 <li><p>server-side request protection through explicit verifier objects</p></li>
 <li><p>middleware-style handler wrapping for server integration</p></li>
 <li><p>route-level protection and successful-response <code class="docutils literal notranslate"><span class="pre">Authentication-Info</span></code>
@@ -487,7 +490,6 @@ provided, the default challenge algorithm remains <code class="docutils literal 
 <ul class="simple">
 <li><p>proactive client-side challenge caching across requests</p></li>
 <li><p>shared or persistent nonce replay stores</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">auth-int</span></code> request-body hashing support</p></li>
 </ul>
 </section>
 </section>

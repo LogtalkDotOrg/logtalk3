@@ -121,6 +121,9 @@ Current scope
 
 - deterministic Digest header parsing and generation for challenges,
   authorizations, and ``Authentication-Info``
+- ``auth`` and ``auth-int`` quality-of-protection request and response
+  digest computation, with ``auth-int`` hashing transfer-decoded
+  entity-body bytes
 - server-side request protection through explicit verifier objects
 - middleware-style handler wrapping for server integration
 - route-level protection and successful-response ``Authentication-Info``
@@ -139,4 +142,3 @@ Non-implemented features
 
 - proactive client-side challenge caching across requests
 - shared or persistent nonce replay stores
-- ``auth-int`` request-body hashing support
