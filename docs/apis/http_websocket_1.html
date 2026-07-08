@@ -175,11 +175,11 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-htmx"><span class="xref std std-ref">http_htmx</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-multipart"><span class="xref std std-ref">http_multipart</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-parameters"><span class="xref std std-ref">http_parameters</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-process-transport"><span class="xref std std-ref">http_process_transport</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-router"><span class="xref std std-ref">http_router</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-server"><span class="xref std std-ref">http_server</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-server-core"><span class="xref std std-ref">http_server_core</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-session"><span class="xref std std-ref">http_session</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-socket"><span class="xref std std-ref">http_socket</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-socket-process"><span class="xref std std-ref">http_socket_process</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-socket-transport"><span class="xref std std-ref">http_socket_transport</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-static-files"><span class="xref std std-ref">http_static_files</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#http-websocket"><span class="xref std std-ref">http_websocket</span></a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="http_websocket_0.html">http_websocket</a></li>
@@ -404,7 +404,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-26</div>
+<div class="line"><strong>Date:</strong> 2026-07-08</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -604,11 +604,11 @@
 <div class="line-block">
 <div class="line">The WebSocket opening request does not exist:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_socket_websocket_request,Request)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_socket_transport_websocket_request,Request)</span></code></div>
 </div>
 <div class="line">The WebSocket opening response is invalid:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_websocket_response,Response)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_transport_websocket_response,Response)</span></code></div>
 </div>
 </div>
 </div>
@@ -616,7 +616,7 @@
 </section>
 <section id="accept-4">
 <span id="http-websocket-1-accept-4"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">accept/4</span></code></a><a class="headerlink" href="#accept-4" title="Link to this heading"></a></h3>
-<p>Accepts one incoming WebSocket connection on the given listener and returns an opaque server-side handle. Server opening-handshake options are forwarded to <code class="docutils literal notranslate"><span class="pre">http_server::accept_websocket/3</span></code>. The direct API also accepts <code class="docutils literal notranslate"><span class="pre">auto_pong(on|off)</span></code> and <code class="docutils literal notranslate"><span class="pre">max_payload_length(Bytes|none)</span></code> options.</p>
+<p>Accepts one incoming WebSocket connection on the given listener and returns an opaque server-side handle. Server opening-handshake options are forwarded to <code class="docutils literal notranslate"><span class="pre">http_server_core::accept_websocket/3</span></code>. The direct API also accepts <code class="docutils literal notranslate"><span class="pre">auto_pong(on|off)</span></code> and <code class="docutils literal notranslate"><span class="pre">max_payload_length(Bytes|none)</span></code> options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -650,11 +650,11 @@
 </div>
 <div class="line">The WebSocket opening request does not exist:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_socket_websocket_request,Request)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_socket_transport_websocket_request,Request)</span></code></div>
 </div>
 <div class="line">The WebSocket opening response is invalid:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_websocket_response,Response)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_transport_websocket_response,Response)</span></code></div>
 </div>
 </div>
 </div>
@@ -1318,11 +1318,11 @@
 </div>
 <div class="line">The WebSocket opening request does not exist:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_socket_websocket_request,Request)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_socket_transport_websocket_request,Request)</span></code></div>
 </div>
 <div class="line">The WebSocket opening response is invalid:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_websocket_response,Response)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_transport_websocket_response,Response)</span></code></div>
 </div>
 </div>
 </div>
@@ -1360,11 +1360,11 @@
 </div>
 <div class="line">The WebSocket opening request does not exist:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_socket_websocket_request,Request)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_socket_transport_websocket_request,Request)</span></code></div>
 </div>
 <div class="line">The WebSocket opening response is invalid:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_websocket_response,Response)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_transport_websocket_response,Response)</span></code></div>
 </div>
 </div>
 </div>

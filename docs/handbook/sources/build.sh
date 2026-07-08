@@ -181,10 +181,10 @@ sed '1,19d' ../../../library/http_htmx/NOTES.md | pandoc -f gfm -t rst -o librar
 sed '1,19d' ../../../library/http_multipart/NOTES.md | pandoc -f gfm -t rst -o libraries/http_multipart.rst
 sed '1,19d' ../../../library/http_parameters/NOTES.md | pandoc -f gfm -t rst -o libraries/http_parameters.rst
 sed '1,19d' ../../../library/http_router/NOTES.md | pandoc -f gfm -t rst -o libraries/http_router.rst
-sed '1,19d' ../../../library/http_server/NOTES.md | pandoc -f gfm -t rst -o libraries/http_server.rst
+sed '1,19d' ../../../library/http_server_core/NOTES.md | pandoc -f gfm -t rst -o libraries/http_server_core.rst
 sed '1,19d' ../../../library/http_session/NOTES.md | pandoc -f gfm -t rst -o libraries/http_session.rst
-sed '1,19d' ../../../library/http_socket/NOTES.md | pandoc -f gfm -t rst -o libraries/http_socket.rst
-sed '1,19d' ../../../library/http_socket_process/NOTES.md | pandoc -f gfm -t rst -o libraries/http_socket_process.rst
+sed '1,19d' ../../../library/http_socket_transport/NOTES.md | pandoc -f gfm -t rst -o libraries/http_socket_transport.rst
+sed '1,19d' ../../../library/http_process_transport/NOTES.md | pandoc -f gfm -t rst -o libraries/http_process_transport.rst
 sed '1,19d' ../../../library/http_static_files/NOTES.md | pandoc -f gfm -t rst -o libraries/http_static_files.rst
 sed '1,19d' ../../../library/http_websocket/NOTES.md | pandoc -f gfm -t rst -o libraries/http_websocket.rst
 sed '1,19d' ../../../library/http_websocket_frames/NOTES.md | pandoc -f gfm -t rst -o libraries/http_websocket_frames.rst

@@ -182,10 +182,7 @@
 <li class="toctree-l2"><a class="reference internal" href="http_multipart.html"><code class="docutils literal notranslate"><span class="pre">http_multipart</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_parameters.html"><code class="docutils literal notranslate"><span class="pre">http_parameters</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_router.html"><code class="docutils literal notranslate"><span class="pre">http_router</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="http_server.html"><code class="docutils literal notranslate"><span class="pre">http_server</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_session.html"><code class="docutils literal notranslate"><span class="pre">http_session</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="http_socket.html"><code class="docutils literal notranslate"><span class="pre">http_socket</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="http_socket_process.html"><code class="docutils literal notranslate"><span class="pre">http_socket_process</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_static_files.html"><code class="docutils literal notranslate"><span class="pre">http_static_files</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_websocket.html"><code class="docutils literal notranslate"><span class="pre">http_websocket</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_websocket_frames.html"><code class="docutils literal notranslate"><span class="pre">http_websocket_frames</span></code></a></li>
@@ -375,7 +372,7 @@ of the normalized <code class="docutils literal notranslate"><span class="pre">h
 requests as CORS or preflight requests, builds direct preflight
 responses from CORS policies, and decorates normalized responses with
 the relevant <code class="docutils literal notranslate"><span class="pre">Access-Control-*</span></code> headers.</p>
-<p>This library reuses the <code class="docutils literal notranslate"><span class="pre">http_core</span></code>, <code class="docutils literal notranslate"><span class="pre">http_server</span></code>, and
+<p>This library reuses the <code class="docutils literal notranslate"><span class="pre">http_core</span></code>, <code class="docutils literal notranslate"><span class="pre">http_server_core</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">http_router</span></code>. It uses normalized request and response terms and can
 be called directly from plain handlers or from router hooks and response
 middleware.</p>
@@ -536,7 +533,8 @@ unique or the metadata is shared across same-path matches. This allows
 </section>
 <section id="plain-handler-integration">
 <h2>Plain handler integration<a class="headerlink" href="#plain-handler-integration" title="Link to this heading"></a></h2>
-<p>For plain handlers using <code class="docutils literal notranslate"><span class="pre">http_server</span></code>, the recommended pattern is:</p>
+<p>For plain handlers using <code class="docutils literal notranslate"><span class="pre">http_server_core</span></code>, the recommended pattern
+is:</p>
 <ol class="arabic simple">
 <li><p>detect preflight requests with <code class="docutils literal notranslate"><span class="pre">is_preflight_request/1</span></code></p></li>
 <li><p>build the direct preflight response with <code class="docutils literal notranslate"><span class="pre">preflight_response/3</span></code></p></li>

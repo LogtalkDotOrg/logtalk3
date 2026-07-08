@@ -198,26 +198,26 @@
 	:- endif.
 
 	serve(Port, Count) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
 		catch(
-			http_socket::serve_listener(Listener, yoda_open_ai_server, Count, _ClientInfos, [shutdown(close)]),
+			http_socket_transport::serve_listener(Listener, yoda_open_ai_server, Count, _ClientInfos, [shutdown(close)]),
 			Error,
-			( 	catch(http_socket::close_listener(Listener), _, true),
+			( 	catch(http_socket_transport::close_listener(Listener), _, true),
 				throw(Error)
 			)
 		).
 
 	serve_until_shutdown(Port, Control) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
 		register_server_listener(Control, Listener),
 		serve_open_listener(Listener, Control, Port).
 
 	serve_open_listener(Listener, Control, Port) :-
 		catch(
-			http_socket::serve_until_shutdown(Listener, yoda_open_ai_server, Control, [], notify_server_ready(Control, Port)),
+			http_socket_transport::serve_until_shutdown(Listener, yoda_open_ai_server, Control, [], notify_server_ready(Control, Port)),
 			Error,
 			( 	retractall(server_listener_(Control, _)),
-				catch(http_socket::close_listener(Listener), _, true),
+				catch(http_socket_transport::close_listener(Listener), _, true),
 				throw(Error)
 			)
 		),
@@ -228,12 +228,12 @@
 		assertz(server_listener_(Control, Listener)).
 
 	stop(Control) :-
-		http_socket::request_shutdown(Control).
+		http_socket_transport::request_shutdown(Control).
 
 	:- if(current_logtalk_flag(threads, supported)).
 
 		start(Port, Control, Tag) :-
-			http_socket::open_listener('127.0.0.1', Port, Listener, []),
+			http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
 			register_server_listener(Control, Listener),
 			catch(
 				( 	threaded_once(serve_open_listener(Listener, Control, Port), Tag),
@@ -241,7 +241,7 @@
 				),
 				Error,
 				( 	retractall(server_listener_(Control, _)),
-					catch(http_socket::close_listener(Listener), _, true),
+					catch(http_socket_transport::close_listener(Listener), _, true),
 					throw(Error)
 				)
 			).
@@ -253,7 +253,7 @@
 
 		wake_server_listener(Control) :-
 			( 	server_listener_(Control, Listener) ->
-				catch(http_socket::request_listener_shutdown(Listener), _, true)
+				catch(http_socket_transport::request_listener_shutdown(Listener), _, true)
 			; 	true
 			).
 

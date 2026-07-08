@@ -30,8 +30,8 @@
 		logtalk_load(uuid(loader)),
 		logtalk_load(http_core(loader)),
 		logtalk_load(http_multipart(loader)),
-		logtalk_load(http_socket(loader)),
-		logtalk_load(http_socket_process(loader)),
+		logtalk_load(http_socket_transport(loader)),
+		logtalk_load(http_process_transport(loader)),
 		logtalk_load(http_websocket_handshake(loader)),
 		logtalk_load(http_client, [optimize(on)])
 	)).

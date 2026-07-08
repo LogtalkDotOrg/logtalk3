@@ -172,10 +172,7 @@
 <li class="toctree-l2"><a class="reference internal" href="http_multipart.html"><code class="docutils literal notranslate"><span class="pre">http_multipart</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_parameters.html"><code class="docutils literal notranslate"><span class="pre">http_parameters</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_router.html"><code class="docutils literal notranslate"><span class="pre">http_router</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="http_server.html"><code class="docutils literal notranslate"><span class="pre">http_server</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_session.html"><code class="docutils literal notranslate"><span class="pre">http_session</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="http_socket.html"><code class="docutils literal notranslate"><span class="pre">http_socket</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="http_socket_process.html"><code class="docutils literal notranslate"><span class="pre">http_socket_process</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_static_files.html"><code class="docutils literal notranslate"><span class="pre">http_static_files</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_websocket.html"><code class="docutils literal notranslate"><span class="pre">http_websocket</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_websocket_frames.html"><code class="docutils literal notranslate"><span class="pre">http_websocket_frames</span></code></a></li>
@@ -374,18 +371,18 @@
 <p>This library provides higher-level callback-driven WebSocket session
 loops on top of the <code class="docutils literal notranslate"><span class="pre">http_websocket_session</span></code> state-machine library and
 upgraded WebSocket connections provided by a selected
-<code class="docutils literal notranslate"><span class="pre">http_socket_protocol</span></code> implementation. It adds connection lifecycle
+<code class="docutils literal notranslate"><span class="pre">http_transport_protocol</span></code> implementation. It adds connection lifecycle
 ownership, optional auto-pong, keepalive, and idle-timeout policies,
 client- and server-side conveniences that collapse the opening handshake
 and the session loop into a single call, and a registry-backed broadcast
 helper for multi-session servers.</p>
-<p>By default, the convenience objects use the <code class="docutils literal notranslate"><span class="pre">http_socket</span></code> transport.
-The parametric
+<p>By default, the convenience objects use the <code class="docutils literal notranslate"><span class="pre">http_socket_transport</span></code>
+transport. The parametric
 <code class="docutils literal notranslate"><span class="pre">http_websocket_service(_HTTPSocket_,</span> <span class="pre">_Role_,</span> <span class="pre">_TextRepresentation_)</span></code>,
 <code class="docutils literal notranslate"><span class="pre">http_websocket_client_service(_HTTPSocket_)</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">http_websocket_server_service(_HTTPSocket_)</span></code> objects can also use
-alternative <code class="docutils literal notranslate"><span class="pre">http_socket_protocol</span></code> implementations such as
-<code class="docutils literal notranslate"><span class="pre">http_socket_process</span></code>.</p>
+alternative <code class="docutils literal notranslate"><span class="pre">http_transport_protocol</span></code> implementations such as
+<code class="docutils literal notranslate"><span class="pre">http_process_transport</span></code>.</p>
 <p>This library can be used with backend Prolog systems that support
 unbound integer arithmetic and the <code class="docutils literal notranslate"><span class="pre">sockets</span></code> library: ECLiPSe, SICStus
 Prolog, SWI-Prolog, Trealla Prolog, and XVM. On backends that don’t
@@ -426,8 +423,8 @@ client-side convenience that combines
 <code class="docutils literal notranslate"><span class="pre">http_client::open_websocket/4</span></code>, optional initial outbound messages,
 and the higher-level session loop. The accepted URL schemes depend on
 the selected transport parameterization, e.g. <code class="docutils literal notranslate"><span class="pre">ws://</span></code> for
-<code class="docutils literal notranslate"><span class="pre">http_socket</span></code> and both <code class="docutils literal notranslate"><span class="pre">ws://</span></code> and <code class="docutils literal notranslate"><span class="pre">wss://</span></code> for
-<code class="docutils literal notranslate"><span class="pre">http_socket_process</span></code>.</p></li>
+<code class="docutils literal notranslate"><span class="pre">http_socket_transport</span></code> and both <code class="docutils literal notranslate"><span class="pre">ws://</span></code> and <code class="docutils literal notranslate"><span class="pre">wss://</span></code> for
+<code class="docutils literal notranslate"><span class="pre">http_process_transport</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">serve_once/6-7</span></code> in the <code class="docutils literal notranslate"><span class="pre">http_websocket_server_service</span></code> object as
 a server-side convenience that combines the selected transport
 parameterization <code class="docutils literal notranslate"><span class="pre">serve_websocket_once/5</span></code> predicate with the
@@ -521,9 +518,9 @@ object provides:</p>
 </div>
 <p>The accepted WebSocket URL schemes depend on the selected transport
 parameterization. For example, the default
-<code class="docutils literal notranslate"><span class="pre">http_websocket_client_service</span></code> object uses <code class="docutils literal notranslate"><span class="pre">http_socket</span></code> and
-therefore accepts <code class="docutils literal notranslate"><span class="pre">ws://</span></code> URLs, while
-<code class="docutils literal notranslate"><span class="pre">http_websocket_client_service(http_socket_process)</span></code> also accepts
+<code class="docutils literal notranslate"><span class="pre">http_websocket_client_service</span></code> object uses <code class="docutils literal notranslate"><span class="pre">http_socket_transport</span></code>
+and therefore accepts <code class="docutils literal notranslate"><span class="pre">ws://</span></code> URLs, while
+<code class="docutils literal notranslate"><span class="pre">http_websocket_client_service(http_process_transport)</span></code> also accepts
 <code class="docutils literal notranslate"><span class="pre">wss://</span></code> URLs.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">initial_messages(Messages)</span></code> option writes the given list of
 normalized outbound messages immediately after the handshake and before
@@ -549,8 +546,8 @@ automatically. They also accept the <code class="docutils literal notranslate"><
 <code class="docutils literal notranslate"><span class="pre">idle_timeout/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">max_payload_length/1</span></code> session-loop options.</p>
 <p>For server-side helpers, the <code class="docutils literal notranslate"><span class="pre">Listener</span></code> must come from the same
 selected transport parameterization as the service object, e.g.
-<code class="docutils literal notranslate"><span class="pre">http_websocket_server_service(http_socket_process)</span></code> must be paired
-with a listener opened by <code class="docutils literal notranslate"><span class="pre">http_socket_process::open_listener/4</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">http_websocket_server_service(http_process_transport)</span></code> must be paired
+with a listener opened by <code class="docutils literal notranslate"><span class="pre">http_process_transport::open_listener/4</span></code>.</p>
 </section>
 <section id="registry-backed-server-helper">
 <h2>Registry-backed server helper<a class="headerlink" href="#registry-backed-server-helper" title="Link to this heading"></a></h2>
@@ -649,12 +646,12 @@ lifecycle, call <code class="docutils literal notranslate"><span class="pre">htt
 the service layer handle the opening handshake, any configured initial
 outbound messages, and the final connection close.</p></li>
 <li><p>When the client transport must support secure <code class="docutils literal notranslate"><span class="pre">wss://</span></code> URLs, use the
-a TLS-capable parameterization such as <code class="docutils literal notranslate"><span class="pre">http_socket_process</span></code>.</p></li>
+a TLS-capable parameterization such as <code class="docutils literal notranslate"><span class="pre">http_process_transport</span></code>.</p></li>
 <li><p>When server-side code already owns a listener and wants a single entry
 point for handshake plus session execution, call
 <code class="docutils literal notranslate"><span class="pre">http_websocket_server_service::serve_once/6-7</span></code>.</p></li>
 <li><p>When server-side code uses a non-default transport such as
-<code class="docutils literal notranslate"><span class="pre">http_socket_process</span></code>, use the matching parametric service object
+<code class="docutils literal notranslate"><span class="pre">http_process_transport</span></code>, use the matching parametric service object
 and open the listener with that same transport parameterization.</p></li>
 <li><p>When server-side code needs multiple active sessions plus queued
 broadcast delivery, create a registry with

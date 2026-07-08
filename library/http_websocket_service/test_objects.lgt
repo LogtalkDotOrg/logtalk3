@@ -25,12 +25,12 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-11,
+		date is 2026-07-08,
 		comment is 'WebSocket handshake handler used by the http_websocket_service tests.'
 	]).
 
 	handle(Request, Response) :-
-		http_server::accept_websocket(Request, Response, [protocol(chat)]).
+		http_server_core::accept_websocket(Request, Response, [protocol(chat)]).
 
 :- end_object.
 
@@ -41,7 +41,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-11,
+		date is 2026-07-08,
 		comment is 'Callback object used by the higher-level session-loop tests.'
 	]).
 
@@ -62,7 +62,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-11,
+		date is 2026-07-08,
 		comment is 'Callback object used by the client-side handshake-plus-session convenience tests.'
 	]).
 
@@ -83,7 +83,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-11,
+		date is 2026-07-08,
 		comment is 'Callback object used to capture a client keepalive ping and then close the session.'
 	]).
 
@@ -137,7 +137,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-11,
+		date is 2026-07-08,
 		comment is 'Callback object used by the registry-backed broadcast server tests.'
 	]).
 
@@ -158,7 +158,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-11,
+		date is 2026-07-08,
 		comment is 'Callback object used to verify that registry actions are skipped when a peer close is received.'
 	]).
 
@@ -177,7 +177,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-11,
+		date is 2026-07-08,
 		comment is 'Callback object used to verify that queued registry messages are not flushed after sending a close frame.'
 	]).
 

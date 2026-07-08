@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-12,
+		date is 2026-07-08,
 		comment is 'HTTP handler for the multipart form example.'
 	]).
 
@@ -253,18 +253,18 @@
 	]).
 
 	serve(Port, Count) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
 		catch(
 			serve_listener(Listener, Count),
 			Error,
-			( 	catch(http_socket::close_listener(Listener), _, true),
+			( 	catch(http_socket_transport::close_listener(Listener), _, true),
 				throw(Error)
 			)
 		),
-		http_socket::close_listener(Listener).
+		http_socket_transport::close_listener(Listener).
 
 	serve_listener(Listener, Count) :-
-		http_socket::serve_listener(Listener, multipart_form_http_handler, Count, _ClientInfos, [shutdown(close)]).
+		http_socket_transport::serve_listener(Listener, multipart_form_http_handler, Count, _ClientInfos, [shutdown(close)]).
 
 :- end_object.
 
@@ -351,7 +351,7 @@
 			print_result(Result).
 
 		run(Result) :-
-			http_socket::open_listener('127.0.0.1', Port, Listener, []),
+			http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
 			threaded_once(multipart_form_server::serve_listener(Listener, 2), Tag),
 			catch(
 				multipart_form_client::run(Port, 'Ada Lovelace', 'ada@example.com', Result),
@@ -360,14 +360,14 @@
 					throw(Error)
 				)
 			),
-			http_socket::request_listener_shutdown(Listener),
+			http_socket_transport::request_listener_shutdown(Listener),
 			threaded_exit(multipart_form_server::serve_listener(Listener, 2), Tag),
-			catch(http_socket::close_listener(Listener), _, true).
+			catch(http_socket_transport::close_listener(Listener), _, true).
 
 		cleanup_demo(Listener, Tag) :-
-			http_socket::request_listener_shutdown(Listener),
+			http_socket_transport::request_listener_shutdown(Listener),
 			catch(threaded_exit(multipart_form_server::serve_listener(Listener, 2), Tag), _, true),
-			catch(http_socket::close_listener(Listener), _, true).
+			catch(http_socket_transport::close_listener(Listener), _, true).
 
 		print_result(result(FormResponse, SubmitResponse)) :-
 			http_core::status(FormResponse, FormStatus),

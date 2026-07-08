@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-12,
+		date is 2026-07-08,
 		comment is 'Unit tests for the "http_open_api" example.'
 	]).
 

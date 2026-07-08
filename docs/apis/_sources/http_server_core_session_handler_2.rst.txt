@@ -1,0 +1,62 @@
+.. index:: single: http_server_core_session_handler(Manager,Handler)
+.. _http_server_core_session_handler/2:
+
+.. rst-class:: right
+
+**object**
+
+``http_server_core_session_handler(Manager,Handler)``
+=====================================================
+
+* ``Manager`` - Server-session manager handle.
+* ``Handler`` - Wrapped object implementing the ``http_handler_protocol`` protocol.
+
+
+Wrapper HTTP handler object that applies server-session begin and finish processing around another portable HTTP handler.
+
+| **Availability:** 
+|    ``logtalk_load(http_session(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-07-08
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`http_handler_protocol <http_handler_protocol/0>`
+| **Uses:**
+|    :ref:`http_server_core_session <http_server_core_session/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`http_handler_protocol/0::handle/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

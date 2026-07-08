@@ -24,7 +24,7 @@ Internal opening-handshake adapter used by the high-level http_websocket server 
 | **Implements:**
 |    ``public`` :ref:`http_handler_protocol <http_handler_protocol/0>`
 | **Uses:**
-|    :ref:`http_server <http_server/0>`
+|    :ref:`http_server_core <http_server_core/0>`
 
 | **Remarks:**
 |    (none)

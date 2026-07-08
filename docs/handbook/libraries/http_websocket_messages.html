@@ -172,10 +172,7 @@
 <li class="toctree-l2"><a class="reference internal" href="http_multipart.html"><code class="docutils literal notranslate"><span class="pre">http_multipart</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_parameters.html"><code class="docutils literal notranslate"><span class="pre">http_parameters</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_router.html"><code class="docutils literal notranslate"><span class="pre">http_router</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="http_server.html"><code class="docutils literal notranslate"><span class="pre">http_server</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_session.html"><code class="docutils literal notranslate"><span class="pre">http_session</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="http_socket.html"><code class="docutils literal notranslate"><span class="pre">http_socket</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="http_socket_process.html"><code class="docutils literal notranslate"><span class="pre">http_socket_process</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_static_files.html"><code class="docutils literal notranslate"><span class="pre">http_static_files</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_websocket.html"><code class="docutils literal notranslate"><span class="pre">http_websocket</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_websocket_frames.html"><code class="docutils literal notranslate"><span class="pre">http_websocket_frames</span></code></a></li>
@@ -444,9 +441,9 @@ accepts <code class="docutils literal notranslate"><span class="pre">atom</span>
 <h2>Current workflow<a class="headerlink" href="#current-workflow" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>Complete the opening handshake with <code class="docutils literal notranslate"><span class="pre">http_client::open_websocket/4</span></code>
-or <code class="docutils literal notranslate"><span class="pre">http_socket::serve_websocket_once/5</span></code>.</p></li>
+or <code class="docutils literal notranslate"><span class="pre">http_socket_transport::serve_websocket_once/5</span></code>.</p></li>
 <li><p>Obtain the upgraded binary streams with
-<code class="docutils literal notranslate"><span class="pre">http_socket::connection_streams/3</span></code>.</p></li>
+<code class="docutils literal notranslate"><span class="pre">http_socket_transport::connection_streams/3</span></code>.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">read_message/2</span></code> and <code class="docutils literal notranslate"><span class="pre">write_message/2</span></code> when you want
 UTF-8-aware text messages and continuation reassembly instead of raw
 frame access.</p></li>

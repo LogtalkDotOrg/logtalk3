@@ -8,19 +8,19 @@
 ``http_websocket_service(HTTPSocket,Role,TextRepresentation)``
 ==============================================================
 
-* ``HTTPSocket`` - The object implementing ``http_socket_protocol``.
+* ``HTTPSocket`` - The object implementing ``http_transport_protocol``.
 * ``Role`` - Peer role for masking policy. Possible values are ``client`` and ``server``.
 * ``TextRepresentation`` - Text representation to be used for text messages and close reasons. Possible values are ``atom`` (default), ``chars``, and ``codes``.
 
 
-Callback-driven WebSocket session loops over upgraded WebSocket connections provided by a selected ``http_socket_protocol`` implementation, including automatic close-handshake orchestration, optional auto-pong, keepalive, and idle-timeout policies.
+Callback-driven WebSocket session loops over upgraded WebSocket connections provided by a selected ``http_transport_protocol`` implementation, including automatic close-handshake orchestration, optional auto-pong, keepalive, and idle-timeout policies.
 
 | **Availability:** 
 |    ``logtalk_load(http_websocket_service(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-26
+| **Date:** 2026-07-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls, threaded``
@@ -70,7 +70,7 @@ Runs a higher-level session loop on an upgraded WebSocket connection produced by
 |    ``Connection`` is a variable:
 |        ``instantiation_error``
 |    ``Connection`` is not a valid upgraded WebSocket connection handle:
-|        ``domain_error(http_socket_connection,Connection)``
+|        ``domain_error(http_socket_transport_connection,Connection)``
 |    ``Handler`` is a variable:
 |        ``instantiation_error``
 |    ``Handler`` is not a valid WebSocket service handler:
@@ -122,7 +122,7 @@ Runs a higher-level session loop on an upgraded WebSocket connection produced by
 |    ``Connection`` is a variable:
 |        ``instantiation_error``
 |    ``Connection`` is not a valid upgraded WebSocket connection handle:
-|        ``domain_error(http_socket_connection,Connection)``
+|        ``domain_error(http_socket_transport_connection,Connection)``
 |    ``Handler`` is a variable:
 |        ``instantiation_error``
 |    ``Handler`` is not a valid WebSocket service handler:
@@ -192,7 +192,7 @@ Protected helper that runs the callback-driven session loop on an upgraded WebSo
 |    ``Connection`` is a variable:
 |        ``instantiation_error``
 |    ``Connection`` is not a valid upgraded WebSocket connection handle:
-|        ``domain_error(http_socket_connection,Connection)``
+|        ``domain_error(http_socket_transport_connection,Connection)``
 |    ``HandlerDescriptor`` is not a valid WebSocket service handler descriptor:
 |        ``domain_error(http_websocket_service_handler,HandlerDescriptor)``
 |    The handler in ``HandlerDescriptor`` is a variable:

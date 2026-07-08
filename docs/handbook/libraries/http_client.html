@@ -182,10 +182,7 @@
 <li class="toctree-l2"><a class="reference internal" href="http_multipart.html"><code class="docutils literal notranslate"><span class="pre">http_multipart</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_parameters.html"><code class="docutils literal notranslate"><span class="pre">http_parameters</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_router.html"><code class="docutils literal notranslate"><span class="pre">http_router</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="http_server.html"><code class="docutils literal notranslate"><span class="pre">http_server</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_session.html"><code class="docutils literal notranslate"><span class="pre">http_session</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="http_socket.html"><code class="docutils literal notranslate"><span class="pre">http_socket</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="http_socket_process.html"><code class="docutils literal notranslate"><span class="pre">http_socket_process</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_static_files.html"><code class="docutils literal notranslate"><span class="pre">http_static_files</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_websocket.html"><code class="docutils literal notranslate"><span class="pre">http_websocket</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_websocket_frames.html"><code class="docutils literal notranslate"><span class="pre">http_websocket_frames</span></code></a></li>
@@ -374,13 +371,13 @@
 top of the <code class="docutils literal notranslate"><span class="pre">http_core</span></code>, <code class="docutils literal notranslate"><span class="pre">url</span></code>, and parameterized HTTP transport
 libraries. It is the request-oriented client-side entry point: it builds
 normalized requests from absolute URLs plus options and delegates
-transport to the selected <code class="docutils literal notranslate"><span class="pre">http_socket_protocol</span></code>-compatible layer,
-such as <code class="docutils literal notranslate"><span class="pre">http_socket</span></code> or <code class="docutils literal notranslate"><span class="pre">http_socket_process</span></code>.</p>
+transport to the selected <code class="docutils literal notranslate"><span class="pre">http_transport_protocol</span></code>-compatible layer,
+such as <code class="docutils literal notranslate"><span class="pre">http_socket_transport</span></code> or <code class="docutils literal notranslate"><span class="pre">http_process_transport</span></code>.</p>
 <p>This library can be used with backend Prolog systems that support
 unbound integer arithmetic and the <code class="docutils literal notranslate"><span class="pre">sockets</span></code> library: ECLiPSe, SICStus
 Prolog, SWI-Prolog, Trealla Prolog, and XVM.</p>
 <p>When using the default <code class="docutils literal notranslate"><span class="pre">http_client</span></code> object, the transport
-parameterization is <code class="docutils literal notranslate"><span class="pre">http_socket</span></code>. The parametric
+parameterization is <code class="docutils literal notranslate"><span class="pre">http_socket_transport</span></code>. The parametric
 <code class="docutils literal notranslate"><span class="pre">http_client(_HTTPSocket_)</span></code> object can also be instantiated with
 alternative transports that implement the same protocol.</p>
 <section id="api-documentation">
@@ -405,11 +402,11 @@ link in a web browser.</p>
 </section>
 <section id="usage-examples">
 <h2>Usage examples<a class="headerlink" href="#usage-examples" title="Link to this heading"></a></h2>
-<p>The examples below are self-contained. They use a local <code class="docutils literal notranslate"><span class="pre">http_socket</span></code>
-listener so they can be reproduced without any external service. They
-assume a backend with thread support because <code class="docutils literal notranslate"><span class="pre">threaded_once/2</span></code> and
-<code class="docutils literal notranslate"><span class="pre">threaded_exit/2</span></code> are used to run the local server concurrently with
-the client call.</p>
+<p>The examples below are self-contained. They use a local
+<code class="docutils literal notranslate"><span class="pre">http_socket_transport</span></code> listener so they can be reproduced without any
+external service. They assume a backend with thread support because
+<code class="docutils literal notranslate"><span class="pre">threaded_once/2</span></code> and <code class="docutils literal notranslate"><span class="pre">threaded_exit/2</span></code> are used to run the local
+server concurrently with the client call.</p>
 <p>Define a small echo handler once:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(notes_http_client_echo_handler,
     <span class="k">implements</span>(http_handler_protocol)).
@@ -424,24 +421,24 @@ the client call.</p>
 </div>
 <p>Start a local listener, send a request, and inspect the normalized
 response:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> http_socket<span class="o">::</span>open_listener(<span class="s">&#39;127.0.0.1&#39;</span>, <span class="nv">Port</span>, <span class="nv">Listener</span>, []),
-     <span class="k">threaded_once</span>(http_socket<span class="o">::</span>serve_once(<span class="nv">Listener</span>, notes_http_client_echo_handler, <span class="nv">_</span>), <span class="nv">Tag</span>),
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> http_socket_transport<span class="o">::</span>open_listener(<span class="s">&#39;127.0.0.1&#39;</span>, <span class="nv">Port</span>, <span class="nv">Listener</span>, []),
+     <span class="k">threaded_once</span>(http_socket_transport<span class="o">::</span>serve_once(<span class="nv">Listener</span>, notes_http_client_echo_handler, <span class="nv">_</span>), <span class="nv">Tag</span>),
      atomic_list_concat([<span class="s">&#39;http://127.0.0.1:&#39;</span>, <span class="nv">Port</span>, <span class="s">&#39;/echo&#39;</span>], <span class="nv">URL</span>),
      http_client<span class="o">::</span>post(<span class="nv">URL</span>, content(<span class="s">&#39;text/plain&#39;</span>, text(hello)), <span class="nv">Response</span>, []),
-     <span class="k">threaded_exit</span>(http_socket<span class="o">::</span>serve_once(<span class="nv">Listener</span>, notes_http_client_echo_handler, <span class="nv">_</span>), <span class="nv">Tag</span>),
-     http_socket<span class="o">::</span>close_listener(<span class="nv">Listener</span>).
+     <span class="k">threaded_exit</span>(http_socket_transport<span class="o">::</span>serve_once(<span class="nv">Listener</span>, notes_http_client_echo_handler, <span class="nv">_</span>), <span class="nv">Tag</span>),
+     http_socket_transport<span class="o">::</span>close_listener(<span class="nv">Listener</span>).
 
 <span class="nv">Response</span> <span class="o">=</span> response(http(<span class="m">1</span>,<span class="m">1</span>), status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), <span class="nv">_</span>, content(<span class="s">&#39;text/plain&#39;</span>, text(hello)), <span class="nv">_</span>).
 </pre></div>
 </div>
 <p>The QUERY method uses the same body-carrying convenience shape as POST,
 PUT, and PATCH:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> http_socket<span class="o">::</span>open_listener(<span class="s">&#39;127.0.0.1&#39;</span>, <span class="nv">Port</span>, <span class="nv">Listener</span>, []),
-     <span class="k">threaded_once</span>(http_socket<span class="o">::</span>serve_once(<span class="nv">Listener</span>, notes_http_client_echo_handler, <span class="nv">_</span>), <span class="nv">Tag</span>),
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> http_socket_transport<span class="o">::</span>open_listener(<span class="s">&#39;127.0.0.1&#39;</span>, <span class="nv">Port</span>, <span class="nv">Listener</span>, []),
+     <span class="k">threaded_once</span>(http_socket_transport<span class="o">::</span>serve_once(<span class="nv">Listener</span>, notes_http_client_echo_handler, <span class="nv">_</span>), <span class="nv">Tag</span>),
      atomic_list_concat([<span class="s">&#39;http://127.0.0.1:&#39;</span>, <span class="nv">Port</span>, <span class="s">&#39;/contacts&#39;</span>], <span class="nv">URL</span>),
      http_client<span class="o">::</span>query(<span class="nv">URL</span>, content(<span class="s">&#39;application/x-www-form-urlencoded&#39;</span>, form([limit<span class="o">-</span><span class="s">&#39;10&#39;</span>])), <span class="nv">Response</span>, []),
-     <span class="k">threaded_exit</span>(http_socket<span class="o">::</span>serve_once(<span class="nv">Listener</span>, notes_http_client_echo_handler, <span class="nv">_</span>), <span class="nv">Tag</span>),
-     http_socket<span class="o">::</span>close_listener(<span class="nv">Listener</span>).
+     <span class="k">threaded_exit</span>(http_socket_transport<span class="o">::</span>serve_once(<span class="nv">Listener</span>, notes_http_client_echo_handler, <span class="nv">_</span>), <span class="nv">Tag</span>),
+     http_socket_transport<span class="o">::</span>close_listener(<span class="nv">Listener</span>).
 
 <span class="nv">Response</span> <span class="o">=</span> response(http(<span class="m">1</span>,<span class="m">1</span>), status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), <span class="nv">_</span>, content(<span class="s">&#39;application/x-www-form-urlencoded&#39;</span>, form([limit<span class="o">-</span><span class="s">&#39;10&#39;</span>])), <span class="nv">_</span>).
 </pre></div>
@@ -461,8 +458,8 @@ normalized request body using <code class="docutils literal notranslate"><span c
 
 <span class="p">:- </span><span class="k">end_object</span>.
 
-| <span class="o">?-</span> http_socket<span class="o">::</span>open_listener(<span class="s">&#39;127.0.0.1&#39;</span>, <span class="nv">Port</span>, <span class="nv">Listener</span>, []),
-     <span class="k">threaded_once</span>(http_socket<span class="o">::</span>serve_once(<span class="nv">Listener</span>, notes_http_client_multipart_handler, <span class="nv">_</span>), <span class="nv">Tag</span>),
+| <span class="o">?-</span> http_socket_transport<span class="o">::</span>open_listener(<span class="s">&#39;127.0.0.1&#39;</span>, <span class="nv">Port</span>, <span class="nv">Listener</span>, []),
+     <span class="k">threaded_once</span>(http_socket_transport<span class="o">::</span>serve_once(<span class="nv">Listener</span>, notes_http_client_multipart_handler, <span class="nv">_</span>), <span class="nv">Tag</span>),
      atomic_list_concat([<span class="s">&#39;http://127.0.0.1:&#39;</span>, <span class="nv">Port</span>, <span class="s">&#39;/upload&#39;</span>], <span class="nv">URL</span>),
      http_client<span class="o">::</span>post(
          <span class="nv">URL</span>,
@@ -473,8 +470,8 @@ normalized request body using <code class="docutils literal notranslate"><span c
          <span class="nv">Response</span>,
          []
      ),
-     <span class="k">threaded_exit</span>(http_socket<span class="o">::</span>serve_once(<span class="nv">Listener</span>, notes_http_client_multipart_handler, <span class="nv">_</span>), <span class="nv">Tag</span>),
-     http_socket<span class="o">::</span>close_listener(<span class="nv">Listener</span>).
+     <span class="k">threaded_exit</span>(http_socket_transport<span class="o">::</span>serve_once(<span class="nv">Listener</span>, notes_http_client_multipart_handler, <span class="nv">_</span>), <span class="nv">Tag</span>),
+     http_socket_transport<span class="o">::</span>close_listener(<span class="nv">Listener</span>).
 
 <span class="nv">Response</span> <span class="o">=</span> response(http(<span class="m">1</span>,<span class="m">1</span>), status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), <span class="nv">_</span>, content(<span class="s">&#39;text/plain&#39;</span>, text(<span class="s">&#39;title=Logtalk; upload=notes.txt&#39;</span>)), <span class="nv">_</span>).
 </pre></div>
@@ -485,24 +482,24 @@ upgrade:</p>
     <span class="k">implements</span>(http_handler_protocol)).
 
     handle(<span class="nv">Request</span>, <span class="nv">Response</span>) <span class="o">:-</span>
-        http_server<span class="o">::</span>accept_websocket(<span class="nv">Request</span>, <span class="nv">Response</span>, [protocol(chat)]).
+        http_server_core<span class="o">::</span>accept_websocket(<span class="nv">Request</span>, <span class="nv">Response</span>, [protocol(chat)]).
 
 <span class="p">:- </span><span class="k">end_object</span>.
 
-| <span class="o">?-</span> http_socket<span class="o">::</span>open_listener(<span class="s">&#39;127.0.0.1&#39;</span>, <span class="nv">Port</span>, <span class="nv">Listener</span>, []),
-     <span class="k">threaded_once</span>(http_socket<span class="o">::</span>serve_once(<span class="nv">Listener</span>, notes_http_client_websocket_handler, <span class="nv">_</span>), <span class="nv">Tag</span>),
+| <span class="o">?-</span> http_socket_transport<span class="o">::</span>open_listener(<span class="s">&#39;127.0.0.1&#39;</span>, <span class="nv">Port</span>, <span class="nv">Listener</span>, []),
+     <span class="k">threaded_once</span>(http_socket_transport<span class="o">::</span>serve_once(<span class="nv">Listener</span>, notes_http_client_websocket_handler, <span class="nv">_</span>), <span class="nv">Tag</span>),
      atomic_list_concat([<span class="s">&#39;ws://127.0.0.1:&#39;</span>, <span class="nv">Port</span>, <span class="s">&#39;/socket&#39;</span>], <span class="nv">URL</span>),
      http_client<span class="o">::</span>open_websocket(<span class="nv">URL</span>, <span class="nv">Connection</span>, <span class="nv">Response</span>, [protocols([chat]), key(<span class="s">&#39;dGhlIHNhbXBsZSBub25jZQ==&#39;</span>)]),
-     http_socket<span class="o">::</span>close_connection(<span class="nv">Connection</span>),
-     <span class="k">threaded_exit</span>(http_socket<span class="o">::</span>serve_once(<span class="nv">Listener</span>, notes_http_client_websocket_handler, <span class="nv">_</span>), <span class="nv">Tag</span>),
-     http_socket<span class="o">::</span>close_listener(<span class="nv">Listener</span>).
+     http_socket_transport<span class="o">::</span>close_connection(<span class="nv">Connection</span>),
+     <span class="k">threaded_exit</span>(http_socket_transport<span class="o">::</span>serve_once(<span class="nv">Listener</span>, notes_http_client_websocket_handler, <span class="nv">_</span>), <span class="nv">Tag</span>),
+     http_socket_transport<span class="o">::</span>close_listener(<span class="nv">Listener</span>).
 
 <span class="nv">Response</span> <span class="o">=</span> response(http(<span class="m">1</span>,<span class="m">1</span>), status(<span class="m">101</span>, <span class="s">&#39;Switching Protocols&#39;</span>), <span class="nv">_</span>, empty, <span class="nv">_</span>).
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">Connection</span></code> term returned by <code class="docutils literal notranslate"><span class="pre">open_websocket/4</span></code> remains open.
 After the handshake, either close it explicitly with
-<code class="docutils literal notranslate"><span class="pre">http_socket::close_connection/1</span></code> or hand it to the
+<code class="docutils literal notranslate"><span class="pre">http_socket_transport::close_connection/1</span></code> or hand it to the
 <code class="docutils literal notranslate"><span class="pre">http_websocket</span></code>, <code class="docutils literal notranslate"><span class="pre">http_websocket_messages</span></code>,
 <code class="docutils literal notranslate"><span class="pre">http_websocket_session</span></code>, or <code class="docutils literal notranslate"><span class="pre">http_websocket_service</span></code> libraries.</p>
 </section>
@@ -633,20 +630,20 @@ the session loop finishes, as do the higher-level
 <h2>Current limitations<a class="headerlink" href="#current-limitations" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>URL scheme support depends on the selected transport parameterization.
-With the default <code class="docutils literal notranslate"><span class="pre">http_socket</span></code> parameterization, only absolute
-<code class="docutils literal notranslate"><span class="pre">http://</span></code> URLs are currently supported by the request-oriented
-facade and only plain <code class="docutils literal notranslate"><span class="pre">ws://</span></code> opening handshakes are supported by
-<code class="docutils literal notranslate"><span class="pre">open_websocket/4</span></code>. The corresponding TLS-backed <code class="docutils literal notranslate"><span class="pre">https://</span></code> and
-<code class="docutils literal notranslate"><span class="pre">wss://</span></code> schemes are therefore not supported in this
-parameterization.</p></li>
+With the default <code class="docutils literal notranslate"><span class="pre">http_socket_transport</span></code> parameterization, only
+absolute <code class="docutils literal notranslate"><span class="pre">http://</span></code> URLs are currently supported by the
+request-oriented facade and only plain <code class="docutils literal notranslate"><span class="pre">ws://</span></code> opening handshakes
+are supported by <code class="docutils literal notranslate"><span class="pre">open_websocket/4</span></code>. The corresponding TLS-backed
+<code class="docutils literal notranslate"><span class="pre">https://</span></code> and <code class="docutils literal notranslate"><span class="pre">wss://</span></code> schemes are therefore not supported in
+this parameterization.</p></li>
 <li><p>When the selected transport parameterization supports secure schemes,
 the request-oriented facade defaults <code class="docutils literal notranslate"><span class="pre">https://</span></code> and <code class="docutils literal notranslate"><span class="pre">wss://</span></code> URLs
 without an explicit port to port <code class="docutils literal notranslate"><span class="pre">443</span></code> and adds
 <code class="docutils literal notranslate"><span class="pre">connection_transport(tls)</span></code> to the connection options automatically
 unless already specified explicitly.</p></li>
 <li><p>This TLS-aware behavior applies, for example, to the
-<code class="docutils literal notranslate"><span class="pre">http_socket_process</span></code> parameterization, which provides transport
-support for secure schemes via the same <code class="docutils literal notranslate"><span class="pre">http_socket_protocol</span></code>
+<code class="docutils literal notranslate"><span class="pre">http_process_transport</span></code> parameterization, which provides transport
+support for secure schemes via the same <code class="docutils literal notranslate"><span class="pre">http_transport_protocol</span></code>
 interface.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">open_websocket/4</span></code> predicate is limited to opening-handshake
 validation. See the dedicated WebSocket libraries for frame parsing,

@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-30,
+		date is 2026-07-08,
 		comment is 'Small Server-Sent Events helpers used by OpenAI streaming endpoints.'
 	]).
 

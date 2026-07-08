@@ -5,7 +5,7 @@
 
 The ``gravatar`` library provides a portable client for retrieving
 Gravatar profile information using the Gravatar REST API. It uses
-``http_client`` with the ``http_socket_process`` transport for HTTPS
+``http_client`` with the ``http_process_transport`` transport for HTTPS
 support and reuses the ``crypto``, ``options``, ``os``, ``json``,
 ``url``, and ``rest`` libraries.
 

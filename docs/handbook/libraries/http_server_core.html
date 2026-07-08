@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>http_server_core &mdash; Logtalk 3.101.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=ab892a5e"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            The Logtalk Handbook
+              <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.101.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Developer Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ports/index.html">Ports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributions/index.html">Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+    <p class="caption"><span class="caption-text">External Contents</span></p>
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="../../apis/index.html">APIs</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://logtalk.org">Logtalk website</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
+    </ul>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">http_server_core</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/libraries/http_server_core.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="http-server-core">
+<span id="library-http-server-core"></span><h1><code class="docutils literal notranslate"><span class="pre">http_server_core</span></code><a class="headerlink" href="#http-server-core" title="Link to this heading"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">http_server_core</span></code> library provides a portable stream-oriented
+server layer on top of the <code class="docutils literal notranslate"><span class="pre">http_core</span></code> library. It is designed for the
+first orchestration step above the wire parser and generator: read
+exactly one request from an existing binary stream, dispatch it to a
+handler object implementing the <code class="docutils literal notranslate"><span class="pre">http_handler_protocol</span></code> protocol, and
+write exactly one response.</p>
+<p>All stream predicates expect binary input and output streams.</p>
+<p>This library can be used with backend Prolog systems that support
+unbound integer arithmetic and the <code class="docutils literal notranslate"><span class="pre">sockets</span></code> library: ECLiPSe, SICStus
+Prolog, SWI-Prolog, Trealla Prolog, and XVM.</p>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<p>Open the
+<a class="reference external" href="../../apis/library_index.html#http_server_core">../../apis/library_index.html#http_server_core</a>
+link in a web browser.</p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
+<p>To load the library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(http_server_core(loader)).
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this library, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(http_server_core(tester)).
+</pre></div>
+</div>
+</section>
+<section id="usage-examples">
+<h2>Usage examples<a class="headerlink" href="#usage-examples" title="Link to this heading"></a></h2>
+<p>The examples below use in-memory streams or local files so they can be
+reproduced directly.</p>
+<p>Define a simple handler object once:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(notes_http_server_core_echo_handler,
+    <span class="k">implements</span>(http_handler_protocol)).
+
+    handle(<span class="nv">Request</span>, <span class="nv">Response</span>) <span class="o">:-</span>
+        http_core<span class="o">::</span>version(<span class="nv">Request</span>, <span class="nv">Version</span>),
+        http_core<span class="o">::</span>body(<span class="nv">Request</span>, <span class="nv">Body</span>),
+        http_core<span class="o">::</span>response(<span class="nv">Version</span>, status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), [], <span class="nv">Body</span>, [], <span class="nv">Response</span>).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>To serve a single request from existing binary streams:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="nv">Request</span> <span class="o">=</span> <span class="s">&#39;POST /echo HTTP/1.1</span><span class="se">\r\n</span><span class="s">host: example.com</span><span class="se">\r\n</span><span class="s">content-type: text/plain</span><span class="se">\r\n</span><span class="s">content-length: 5</span><span class="se">\r\n\r\n</span><span class="s">hello&#39;</span>,
+     <span class="k">atom_codes</span>(<span class="nv">Request</span>, <span class="nv">RequestBytes</span>),
+     <span class="k">open</span>(<span class="s">&#39;request.tmp&#39;</span>, write, <span class="nv">RequestStream</span>, [type(binary)]),
+     <span class="k">forall</span>(member(<span class="nv">RequestByte</span>, <span class="nv">RequestBytes</span>), <span class="k">put_byte</span>(<span class="nv">RequestStream</span>, <span class="nv">RequestByte</span>)),
+     <span class="k">close</span>(<span class="nv">RequestStream</span>),
+     <span class="k">open</span>(<span class="s">&#39;request.tmp&#39;</span>, read, <span class="nv">Input</span>, [type(binary)]),
+     <span class="k">open</span>(<span class="s">&#39;response.tmp&#39;</span>, write, <span class="nv">Output</span>, [type(binary)]),
+     http_server_core<span class="o">::</span>serve(<span class="nv">Input</span>, <span class="nv">Output</span>, notes_http_server_core_echo_handler),
+     <span class="k">close</span>(<span class="nv">Input</span>),
+     <span class="k">close</span>(<span class="nv">Output</span>),
+     http_core<span class="o">::</span>parse_response(file(<span class="s">&#39;response.tmp&#39;</span>), <span class="nv">Response</span>).
+
+<span class="nv">Response</span> <span class="o">=</span> response(http(<span class="m">1</span>,<span class="m">1</span>), status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), <span class="nv">_</span>, content(<span class="s">&#39;text/plain&#39;</span>, text(hello)), <span class="nv">_</span>).
+</pre></div>
+</div>
+<p>To keep serving requests on the same stream pair until persistence rules
+say to stop, write several requests into the same input stream and call
+<code class="docutils literal notranslate"><span class="pre">serve_connection/3</span></code> once:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="nv">Requests</span> <span class="o">=</span> <span class="s">&#39;POST /echo HTTP/1.1</span><span class="se">\r\n</span><span class="s">host: example.com</span><span class="se">\r\n</span><span class="s">content-type: text/plain</span><span class="se">\r\n</span><span class="s">content-length: 3</span><span class="se">\r\n\r\n</span><span class="s">onePOST /echo HTTP/1.1</span><span class="se">\r\n</span><span class="s">host: example.com</span><span class="se">\r\n</span><span class="s">content-type: text/plain</span><span class="se">\r\n</span><span class="s">content-length: 3</span><span class="se">\r\n\r\n</span><span class="s">two&#39;</span>,
+     <span class="k">atom_codes</span>(<span class="nv">Requests</span>, <span class="nv">RequestBytes</span>),
+     <span class="k">open</span>(<span class="s">&#39;requests.tmp&#39;</span>, write, <span class="nv">RequestStream</span>, [type(binary)]),
+     <span class="k">forall</span>(member(<span class="nv">RequestByte</span>, <span class="nv">RequestBytes</span>), <span class="k">put_byte</span>(<span class="nv">RequestStream</span>, <span class="nv">RequestByte</span>)),
+     <span class="k">close</span>(<span class="nv">RequestStream</span>),
+     <span class="k">open</span>(<span class="s">&#39;requests.tmp&#39;</span>, read, <span class="nv">Input</span>, [type(binary)]),
+     <span class="k">open</span>(<span class="s">&#39;responses.tmp&#39;</span>, write, <span class="nv">Output</span>, [type(binary)]),
+     http_server_core<span class="o">::</span>serve_connection(<span class="nv">Input</span>, <span class="nv">Output</span>, notes_http_server_core_echo_handler),
+     <span class="k">close</span>(<span class="nv">Input</span>),
+     <span class="k">close</span>(<span class="nv">Output</span>).
+</pre></div>
+</div>
+<p>The generated <code class="docutils literal notranslate"><span class="pre">responses.tmp</span></code> file contains two consecutive normalized
+HTTP responses, one for <code class="docutils literal notranslate"><span class="pre">one</span></code> and one for <code class="docutils literal notranslate"><span class="pre">two</span></code>.</p>
+<p>For multipart request inspection, define a handler that uses
+<code class="docutils literal notranslate"><span class="pre">http_multipart</span></code> on the normalized request body:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(notes_http_server_core_multipart_handler,
+    <span class="k">implements</span>(http_handler_protocol)).
+
+    handle(<span class="nv">Request</span>, <span class="nv">Response</span>) <span class="o">:-</span>
+        http_core<span class="o">::</span>version(<span class="nv">Request</span>, <span class="nv">Version</span>),
+        http_core<span class="o">::</span>body(<span class="nv">Request</span>, <span class="nv">Body</span>),
+        http_multipart<span class="o">::</span>fields(<span class="nv">Body</span>, [field(title, <span class="nv">Title</span>, <span class="nv">_FieldParameters</span>)]),
+        http_multipart<span class="o">::</span>files(<span class="nv">Body</span>, [file(upload, <span class="nv">Filename</span>, <span class="s">&#39;text/plain&#39;</span>, text(hello), <span class="nv">_FileParameters</span>)]),
+        atomic_list_concat([<span class="s">&#39;title=&#39;</span>, <span class="nv">Title</span>, <span class="s">&#39;; upload=&#39;</span>, <span class="nv">Filename</span>], <span class="nv">Text</span>),
+        http_core<span class="o">::</span>response(<span class="nv">Version</span>, status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), [], content(<span class="s">&#39;text/plain&#39;</span>, text(<span class="nv">Text</span>)), [], <span class="nv">Response</span>).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>That handler can be used unchanged with <code class="docutils literal notranslate"><span class="pre">serve/3</span></code> or
+<code class="docutils literal notranslate"><span class="pre">serve_connection/3</span></code> because this library exposes multipart requests
+in the same normalized form produced by <code class="docutils literal notranslate"><span class="pre">http_core::parse_request/2</span></code>.</p>
+<p>The multipart helper predicates used by handlers return the
+parameter-aware <code class="docutils literal notranslate"><span class="pre">field(Name,</span> <span class="pre">Value,</span> <span class="pre">Parameters)</span></code> and
+<code class="docutils literal notranslate"><span class="pre">file(Name,</span> <span class="pre">Filename,</span> <span class="pre">MediaType,</span> <span class="pre">Payload,</span> <span class="pre">Parameters)</span></code> descriptors
+defined by the <code class="docutils literal notranslate"><span class="pre">http_multipart</span></code> library.</p>
+<p>In both descriptor shapes, <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> is the ordered list of extra
+<code class="docutils literal notranslate"><span class="pre">Content-Disposition:</span> <span class="pre">form-data</span></code> parameters. The reserved <code class="docutils literal notranslate"><span class="pre">name</span></code> and
+<code class="docutils literal notranslate"><span class="pre">filename</span></code> parameters stay explicit helper arguments and are not
+repeated in that list.</p>
+<p>For a WebSocket opening handshake, define a handler that delegates to
+<code class="docutils literal notranslate"><span class="pre">accept_websocket/3</span></code>:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(notes_http_server_core_websocket_handler,
+    <span class="k">implements</span>(http_handler_protocol)).
+
+    handle(<span class="nv">Request</span>, <span class="nv">Response</span>) <span class="o">:-</span>
+        http_server_core<span class="o">::</span>accept_websocket(<span class="nv">Request</span>, <span class="nv">Response</span>, [protocol(chat)]).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+
+| <span class="o">?-</span> <span class="nv">Request</span> <span class="o">=</span> <span class="s">&#39;GET /socket HTTP/1.1</span><span class="se">\r\n</span><span class="s">host: example.com</span><span class="se">\r\n</span><span class="s">connection: Upgrade</span><span class="se">\r\n</span><span class="s">upgrade: websocket</span><span class="se">\r\n</span><span class="s">sec-websocket-key: dGhlIHNhbXBsZSBub25jZQ==</span><span class="se">\r\n</span><span class="s">sec-websocket-version: 13</span><span class="se">\r\n</span><span class="s">sec-websocket-protocol: chat</span><span class="se">\r\n\r\n</span><span class="s">&#39;</span>,
+     <span class="k">atom_codes</span>(<span class="nv">Request</span>, <span class="nv">RequestBytes</span>),
+     <span class="k">open</span>(<span class="s">&#39;ws_request.tmp&#39;</span>, write, <span class="nv">RequestStream</span>, [type(binary)]),
+     <span class="k">forall</span>(member(<span class="nv">RequestByte</span>, <span class="nv">RequestBytes</span>), <span class="k">put_byte</span>(<span class="nv">RequestStream</span>, <span class="nv">RequestByte</span>)),
+     <span class="k">close</span>(<span class="nv">RequestStream</span>),
+     <span class="k">open</span>(<span class="s">&#39;ws_request.tmp&#39;</span>, read, <span class="nv">Input</span>, [type(binary)]),
+     <span class="k">open</span>(<span class="s">&#39;ws_response.tmp&#39;</span>, write, <span class="nv">Output</span>, [type(binary)]),
+     http_server_core<span class="o">::</span>serve_websocket(<span class="nv">Input</span>, <span class="nv">Output</span>, notes_http_server_core_websocket_handler, <span class="nv">Outcome</span>),
+     <span class="k">close</span>(<span class="nv">Input</span>),
+     <span class="k">close</span>(<span class="nv">Output</span>).
+
+<span class="nv">Outcome</span> <span class="o">=</span> accepted(<span class="nv">RequestTerm</span>, <span class="nv">Response</span>),
+<span class="nv">Response</span> <span class="o">=</span> response(http(<span class="m">1</span>,<span class="m">1</span>), status(<span class="m">101</span>, <span class="s">&#39;Switching Protocols&#39;</span>), <span class="nv">_</span>, empty, <span class="nv">_</span>).
+</pre></div>
+</div>
+<p>After <code class="docutils literal notranslate"><span class="pre">serve_websocket/4</span></code> succeeds, higher layers must take ownership
+of the underlying upgraded connection or streams. This library stops at
+the WebSocket HTTP opening handshake, independently of whether those
+streams are plain or TLS-protected.</p>
+</section>
+<section id="current-scope">
+<h2>Current scope<a class="headerlink" href="#current-scope" title="Link to this heading"></a></h2>
+<p>The current implementation provides per-message primitives, a connection
+loop, and WebSocket handshake helpers:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">read_request/2</span></code> reads exactly one request from a binary stream
+without requiring end-of-file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">write_response/2</span></code> writes exactly one normalized response to a
+binary stream.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">write_response/2</span></code> streams file-backed response bodies directly
+after writing the generated header block when the response does not
+use chunked transfer coding.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dispatch/3</span></code> calls a handler object and normalizes handler failures
+into <code class="docutils literal notranslate"><span class="pre">500</span> <span class="pre">Internal</span> <span class="pre">Server</span> <span class="pre">Error</span></code> responses.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">accept_websocket/3</span></code> validates a normalized WebSocket
+opening-handshake request and builds the corresponding
+<code class="docutils literal notranslate"><span class="pre">101</span> <span class="pre">Switching</span> <span class="pre">Protocols</span></code> response, including
+<code class="docutils literal notranslate"><span class="pre">Sec-WebSocket-Accept</span></code> and optional subprotocol selection.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">serve_websocket/4</span></code> reads one request, dispatches one response,
+writes it to the output stream, and reports whether the exchange
+completed with a valid WebSocket opening-handshake response.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">serve/3</span></code> connects request reading, handler dispatch, and response
+writing, returning <code class="docutils literal notranslate"><span class="pre">400</span> <span class="pre">Bad</span> <span class="pre">Request</span></code> for malformed input.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">serve_connection/3</span></code> repeatedly serves requests on the same stream
+pair using HTTP persistence rules and stops on end-of-file or
+<code class="docutils literal notranslate"><span class="pre">Connection:</span> <span class="pre">close</span></code> semantics.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">serve/3</span></code> and <code class="docutils literal notranslate"><span class="pre">serve_connection/3</span></code> send the generated response
+headers for <code class="docutils literal notranslate"><span class="pre">HEAD</span></code> requests but suppress the response body bytes,
+including for file-backed responses.</p></li>
+</ul>
+<p>Because incoming request bodies are normalized by the <code class="docutils literal notranslate"><span class="pre">http_core</span></code>
+library, handler objects can inspect <code class="docutils literal notranslate"><span class="pre">multipart/form-data</span></code> requests
+directly using the <code class="docutils literal notranslate"><span class="pre">http_multipart</span></code> predicates after reading or
+serving a request.</p>
+<p>QUERY requests are read and dispatched like any other normalized
+request. A resource handler that implements RFC 10008 QUERY semantics
+remains responsible for rejecting missing or unsupported query content
+metadata, such as absent or unsupported <code class="docutils literal notranslate"><span class="pre">Content-Type</span></code>, with the
+appropriate 4xx response.</p>
+<p>This layer intentionally stays transport-neutral. It does not accept
+sockets, listen for connections, or manage concurrency. Those concerns
+belong to higher layers or backend-specific integration built on top of
+this stream contract.</p>
+</section>
+<section id="framing-rules">
+<h2>Framing rules<a class="headerlink" href="#framing-rules" title="Link to this heading"></a></h2>
+<p>Request framing currently supports:</p>
+<ul class="simple">
+<li><p>header termination using <code class="docutils literal notranslate"><span class="pre">CRLF</span> <span class="pre">CRLF</span></code></p></li>
+<li><p>fixed-length bodies via <code class="docutils literal notranslate"><span class="pre">Content-Length</span></code></p></li>
+<li><p>chunked request bodies via <code class="docutils literal notranslate"><span class="pre">Transfer-Encoding:</span> <span class="pre">chunked</span></code>, including
+trailers</p></li>
+</ul>
+<p>When neither <code class="docutils literal notranslate"><span class="pre">Content-Length</span></code> nor <code class="docutils literal notranslate"><span class="pre">Transfer-Encoding</span></code> is present,
+the request is read as having an empty body so that subsequent bytes
+remain available for the next request on the stream.</p>
+</section>
+<section id="multipart-workflow">
+<h2>Multipart workflow<a class="headerlink" href="#multipart-workflow" title="Link to this heading"></a></h2>
+<p>This library does not introduce a separate multipart server API.
+Multipart requests are exposed to handlers as the same normalized
+request bodies produced by <code class="docutils literal notranslate"><span class="pre">http_core::parse_request/2</span></code>, which means
+handlers can use <code class="docutils literal notranslate"><span class="pre">http_multipart::fields/2</span></code> and
+<code class="docutils literal notranslate"><span class="pre">http_multipart::files/2</span></code> directly on the request body.</p>
+</section>
+<section id="websocket-handshake-workflow">
+<h2>WebSocket handshake workflow<a class="headerlink" href="#websocket-handshake-workflow" title="Link to this heading"></a></h2>
+<p>This layer now provides a focused helper for the HTTP opening handshake:</p>
+<ul class="simple">
+<li><p>Handlers can call <code class="docutils literal notranslate"><span class="pre">accept_websocket/3</span></code> to validate an incoming
+normalized handshake request and build the matching <code class="docutils literal notranslate"><span class="pre">101</span></code> response.</p></li>
+<li><p>Servers that need to stop after one opening handshake can call
+<code class="docutils literal notranslate"><span class="pre">serve_websocket/4</span></code> and inspect whether it returned
+<code class="docutils literal notranslate"><span class="pre">accepted(Request,</span> <span class="pre">Response)</span></code> or <code class="docutils literal notranslate"><span class="pre">rejected(Response)</span></code>.</p></li>
+<li><p>The optional <code class="docutils literal notranslate"><span class="pre">protocol(Protocol)</span></code> option selects one offered
+subprotocol.</p></li>
+<li><p>The helper is intentionally transport-neutral: it handles the
+WebSocket HTTP opening handshake on existing binary streams,
+independently of whether those streams are plain or TLS-protected.</p></li>
+<li><p>It does not take ownership of the upgraded stream or begin frame
+processing. Higher layers that need to continue on the upgraded
+connection must stop at a single served message and then take over the
+underlying stream or socket.</p></li>
+<li><p>Upgraded connection handles and frame/session loops are provided by
+higher layers such as <code class="docutils literal notranslate"><span class="pre">http_socket_transport</span></code>,
+<code class="docutils literal notranslate"><span class="pre">http_process_transport</span></code>, and <code class="docutils literal notranslate"><span class="pre">http_websocket_service</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">http_websocket_server_service::serve_once/6-7</span></code> predicates build
+on top of this handshake helper when server-side code wants a single
+entry point for handshake plus callback-driven session execution.</p></li>
+</ul>
+</section>
+<section id="current-limitations">
+<h2>Current limitations<a class="headerlink" href="#current-limitations" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Only the transport coding sequence <code class="docutils literal notranslate"><span class="pre">[chunked]</span></code> is recognized when
+reading streamed request bodies.</p></li>
+<li><p>The library does not provide socket accept loops, connection pooling,
+or concurrency management.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1998-2026, Paulo Moura.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

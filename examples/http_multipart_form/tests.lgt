@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-12,
+		date is 2026-07-08,
 		comment is 'Unit tests for the "http_multipart_form" example.'
 	]).
 
@@ -90,7 +90,7 @@
 		:- threaded.
 
 		test(http_multipart_form_client_01, deterministic) :-
-			http_socket::open_listener('127.0.0.1', Port, Listener, []),
+			http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
 			threaded_once(multipart_form_server::serve_listener(Listener, 2), Tag),
 			catch(
 				multipart_form_client::run(Port, 'Ada Lovelace', 'ada@example.com', result(FormResponse, SubmitResponse)),
@@ -99,9 +99,9 @@
 					throw(Error)
 				)
 			),
-			http_socket::request_listener_shutdown(Listener),
+			http_socket_transport::request_listener_shutdown(Listener),
 			threaded_exit(multipart_form_server::serve_listener(Listener, 2), Tag),
-			catch(http_socket::close_listener(Listener), _, true),
+			catch(http_socket_transport::close_listener(Listener), _, true),
 			status(FormResponse, status(200, 'OK')),
 			body(FormResponse, content('text/html', text(FormHTML))),
 			once(sub_atom(FormHTML, _, _, _, 'Contact form')),
@@ -116,9 +116,9 @@
 			status(SubmitResponse, status(200, 'OK')).
 
 		cleanup_server_thread(Listener, Tag) :-
-			http_socket::request_listener_shutdown(Listener),
+			http_socket_transport::request_listener_shutdown(Listener),
 			catch(threaded_exit(multipart_form_server::serve_listener(Listener, 2), Tag), _, true),
-			catch(http_socket::close_listener(Listener), _, true).
+			catch(http_socket_transport::close_listener(Listener), _, true).
 
 	:- endif.
 

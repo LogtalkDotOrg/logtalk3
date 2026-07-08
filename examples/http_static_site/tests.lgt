@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-12,
+		date is 2026-07-08,
 		comment is 'Unit tests for the "http_static_site" example.'
 	]).
 
@@ -98,7 +98,7 @@
 
 		test(http_static_site_client_01, deterministic) :-
 			static_site_fixture::prepare(Root),
-			http_socket::open_listener('127.0.0.1', Port, Listener, []),
+			http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
 			threaded_once(static_site_server::serve_listener(Listener, Root, 3), Tag),
 			catch(
 				static_site_client::run(Port, result(HomeResponse, GuideResponse, ListingResponse)),
@@ -107,9 +107,9 @@
 					throw(Error)
 				)
 			),
-			http_socket::request_listener_shutdown(Listener),
+			http_socket_transport::request_listener_shutdown(Listener),
 			threaded_exit(static_site_server::serve_listener(Listener, Root, 3), Tag),
-			catch(http_socket::close_listener(Listener), _, true),
+			catch(http_socket_transport::close_listener(Listener), _, true),
 			status(HomeResponse, status(200, 'OK')),
 			body(HomeResponse, content('text/html', text(HomeHTML))),
 			once(sub_atom(HomeHTML, _, _, _, 'Static site example')),
@@ -123,7 +123,7 @@
 
 		test(http_static_site_client_02, deterministic) :-
 			static_site_fixture::prepare(Root),
-			http_socket::open_listener('127.0.0.1', Port, Listener, []),
+			http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
 			threaded_once(static_site_server::serve_listener(Listener, Root, 1), Tag),
 			catch(
 				( 	atomic_list_concat(['http://127.0.0.1:', Port, '/browse/docs/guide.txt'], URL),
@@ -134,9 +134,9 @@
 					throw(Error)
 				)
 			),
-			http_socket::request_listener_shutdown(Listener),
+			http_socket_transport::request_listener_shutdown(Listener),
 			threaded_exit(static_site_server::serve_listener(Listener, Root, 1), Tag),
-			catch(http_socket::close_listener(Listener), _, true),
+			catch(http_socket_transport::close_listener(Listener), _, true),
 			status(Response, status(200, 'OK')),
 			body(Response, content('text/plain', text('Guide for the static site example.'))).
 
@@ -153,9 +153,9 @@
 			once(sub_atom(ListingHTML, _, _, _, 'class="directory-listing-table theme-ocean columns-name-type-modified"')).
 
 		cleanup_server_thread(Root, Listener, Tag, Count) :-
-			http_socket::request_listener_shutdown(Listener),
+			http_socket_transport::request_listener_shutdown(Listener),
 			catch(threaded_exit(static_site_server::serve_listener(Listener, Root, Count), Tag), _, true),
-			catch(http_socket::close_listener(Listener), _, true),
+			catch(http_socket_transport::close_listener(Listener), _, true),
 			catch(static_site_fixture::cleanup(Root), _, true).
 
 	:- endif.

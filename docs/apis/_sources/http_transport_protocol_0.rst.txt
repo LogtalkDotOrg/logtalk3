@@ -1,0 +1,802 @@
+.. index:: single: http_transport_protocol
+.. _http_transport_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``http_transport_protocol``
+===========================
+
+HTTP transport predicates for client connections and server listeners.
+
+| **Availability:** 
+|    ``logtalk_load(http_socket_transport(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-07-08
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: open_listener/4
+.. _http_transport_protocol/0::open_listener/4:
+
+``open_listener/4``
+^^^^^^^^^^^^^^^^^^^
+
+Opens a TCP listener on the given host and port using the given socket options. If Port is a variable, it is unified with the bound port number.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open_listener(Host,Port,Listener,Options)``
+| **Mode and number of proofs:**
+|    ``open_listener(+atom,?integer,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Host`` is not a valid listener host atom:
+|        ``type_error(atom,Host)``
+|    ``Port`` is not a non-negative integer or a variable:
+|        ``domain_error(non_negative_integer,Port)``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Options`` contains an invalid listener option:
+|        ``domain_error(http_process_transport_listener_option,Option)``
+|    ``Options`` contains an invalid listener helper executable:
+|        ``domain_error(http_process_transport_listener_helper_executable,Executable)``
+|    ``Options`` contains incompatible TCP listener options:
+|        ``domain_error(http_process_transport_listener_tcp_options,[listener_transport(tcp),temporary_tls_credentials(TemporaryTLSCredentialsPrefix)])``
+|    ``Options`` contains incompatible TLS listener options:
+|        ``domain_error(http_process_transport_listener_tls_options,[tls_certificate_file(CertificateFile),tls_key_file(KeyFile)])``
+|    Temporary TLS credentials cannot be created:
+|        ``resource_error(http_process_transport_temporary_tls_credentials)``
+|    The process-backed listener helper cannot be started:
+|        ``resource_error(http_process_transport_listener)``
+
+
+------------
+
+.. index:: close_listener/1
+.. _http_transport_protocol/0::close_listener/1:
+
+``close_listener/1``
+^^^^^^^^^^^^^^^^^^^^
+
+Closes a listener previously opened with open_listener/4.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``close_listener(Listener)``
+| **Mode and number of proofs:**
+|    ``close_listener(+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Listener`` is a variable:
+|        ``instantiation_error``
+|    ``Listener`` is not an open listener handle for the transport implementation:
+|        ``domain_error(http_socket_transport_listener,Listener)``
+|    ``Listener`` no longer exists for the transport implementation:
+|        ``existence_error(http_socket_transport_listener,Listener)``
+
+
+------------
+
+.. index:: request_listener_shutdown/1
+.. _http_transport_protocol/0::request_listener_shutdown/1:
+
+``request_listener_shutdown/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Best-effort wakeup request for a listener accept loop opened with ``open_listener/4``. This predicate does not close the listener but causes a blocked accept call to return portably when possible.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``request_listener_shutdown(Listener)``
+| **Mode and number of proofs:**
+|    ``request_listener_shutdown(+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Listener`` is a variable:
+|        ``instantiation_error``
+|    ``Listener`` is not an open listener handle for the transport implementation:
+|        ``domain_error(http_socket_transport_listener,Listener)``
+|    ``Listener`` no longer exists for the transport implementation:
+|        ``existence_error(http_socket_transport_listener,Listener)``
+
+
+------------
+
+.. index:: open_connection/4
+.. _http_transport_protocol/0::open_connection/4:
+
+``open_connection/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+Opens a reusable client connection to the given host and port using the given socket options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open_connection(Host,Port,Connection,Options)``
+| **Mode and number of proofs:**
+|    ``open_connection(+atom,+integer,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Host`` and ``Port`` are not a valid HTTP authority target:
+|        ``domain_error(http_target,authority(Host,Port))``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Options`` contains an invalid connection option:
+|        ``domain_error(http_process_transport_connection_option,Option)``
+|    The process-backed client helper cannot be started:
+|        ``resource_error(http_process_transport_connection)``
+
+
+------------
+
+.. index:: close_connection/1
+.. _http_transport_protocol/0::close_connection/1:
+
+``close_connection/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Closes a reusable client connection previously opened with open_connection/4.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``close_connection(Connection)``
+| **Mode and number of proofs:**
+|    ``close_connection(+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Connection`` is a variable:
+|        ``instantiation_error``
+|    ``Connection`` is not an open reusable client connection handle:
+|        ``domain_error(http_socket_transport_connection,Connection)``
+
+
+------------
+
+.. index:: connection_streams/3
+.. _http_transport_protocol/0::connection_streams/3:
+
+``connection_streams/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the binary input and output streams carried by a reusable client connection handle or by an upgraded WebSocket connection handle returned by ``serve_websocket_once/5``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``connection_streams(Connection,Input,Output)``
+| **Mode and number of proofs:**
+|    ``connection_streams(+compound,--stream,--stream)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Connection`` is a variable:
+|        ``instantiation_error``
+|    ``Connection`` is not an open reusable client or upgraded WebSocket connection handle:
+|        ``domain_error(http_socket_transport_connection,Connection)``
+
+
+------------
+
+.. index:: open_connection_pool/4
+.. _http_transport_protocol/0::open_connection_pool/4:
+
+``open_connection_pool/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Opens a managed reusable connection pool for the given host and port.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open_connection_pool(Host,Port,Pool,Options)``
+| **Mode and number of proofs:**
+|    ``open_connection_pool(+atom,+integer,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Host`` and ``Port`` are not a valid HTTP authority target:
+|        ``domain_error(http_target,authority(Host,Port))``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Options`` contains an invalid connection-pool option:
+|        ``domain_error(http_socket_transport_connection_pool_option,Option)``
+|    ``Options`` contains an invalid process-backed connection-pool option:
+|        ``domain_error(http_process_transport_connection_pool_option,Option)``
+|    ``Options`` contains incompatible connection-pool bounds:
+|        ``domain_error(http_socket_transport_connection_pool_options,[min_size(MinSize),max_size(MaxSize)])``
+|    ``Options`` contains incompatible process-backed connection-pool bounds:
+|        ``domain_error(http_process_transport_connection_pool_options,[min_size(MinSize),max_size(MaxSize)])``
+|    No managed connection is available in the connection pool:
+|        ``resource_error(http_socket_transport_connection_pool)``
+|    The process-backed client helper cannot be started:
+|        ``resource_error(http_process_transport_connection)``
+
+| **Remarks:**
+
+    - Option ``min_size(N)``: Pre-open N reusable client connections when creating the pool. The default is ``0``.
+    - Option ``max_size(N)``: Allow at most N managed client connections in the pool. The default is ``10``.
+    - Option ``connection_options(Options)``: Socket options passed to ``open_connection/4`` when creating pooled connections. The default is ``[]``.
+
+
+------------
+
+.. index:: close_connection_pool/1
+.. _http_transport_protocol/0::close_connection_pool/1:
+
+``close_connection_pool/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Closes a managed reusable connection pool and all currently available pooled connections. Throws if pooled exchanges are still in progress.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``close_connection_pool(Pool)``
+| **Mode and number of proofs:**
+|    ``close_connection_pool(+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Pool`` is a variable:
+|        ``instantiation_error``
+|    ``Pool`` is not a valid managed connection-pool handle:
+|        ``domain_error(http_socket_transport_connection_pool,Pool)``
+|    ``Pool`` no longer exists:
+|        ``existence_error(http_socket_transport_connection_pool,Pool)``
+|    ``Pool`` cannot be closed while pooled exchanges remain active:
+|        ``permission_error(close,http_socket_transport_connection_pool,Pool)``
+
+
+------------
+
+.. index:: connection_pool_stats/2
+.. _http_transport_protocol/0::connection_pool_stats/2:
+
+``connection_pool_stats/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns managed pool statistics as stats(Available, InUse, Total, MinSize, MaxSize).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``connection_pool_stats(Pool,Stats)``
+| **Mode and number of proofs:**
+|    ``connection_pool_stats(+compound,--compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Pool`` is a variable:
+|        ``instantiation_error``
+|    ``Pool`` is not a valid managed connection-pool handle:
+|        ``domain_error(http_socket_transport_connection_pool,Pool)``
+|    ``Pool`` no longer exists:
+|        ``existence_error(http_socket_transport_connection_pool,Pool)``
+
+
+------------
+
+.. index:: exchange/3
+.. _http_transport_protocol/0::exchange/3:
+
+``exchange/3``
+^^^^^^^^^^^^^^
+
+Performs a single HTTP exchange on an open reusable client connection or by temporarily acquiring a pooled reusable client connection.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``exchange(ConnectionOrPool,Request,Response)``
+| **Mode and number of proofs:**
+|    ``exchange(+compound,+compound,--compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``ConnectionOrPool`` is a variable:
+|        ``instantiation_error``
+|    ``ConnectionOrPool`` is neither an open connection nor a managed connection-pool handle:
+|        ``domain_error(http_socket_transport_connection,ConnectionOrPool)``
+|    ``ConnectionOrPool`` is not a valid managed connection-pool handle:
+|        ``domain_error(http_socket_transport_connection_pool,ConnectionOrPool)``
+|    ``ConnectionOrPool`` no longer exists as a managed connection pool:
+|        ``existence_error(http_socket_transport_connection_pool,ConnectionOrPool)``
+|    No managed connection is available in the connection pool:
+|        ``resource_error(http_socket_transport_connection_pool)``
+|    ``Request`` is not a valid normalized HTTP request term:
+|        ``domain_error(http_request,Request)``
+|    The response stream cannot be parsed as a normalized HTTP response:
+|        ``domain_error(http_response_stream,Error)``
+
+
+------------
+
+.. index:: exchange_sequence/3
+.. _http_transport_protocol/0::exchange_sequence/3:
+
+``exchange_sequence/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Performs a sequence of HTTP exchanges on an open reusable client connection or by temporarily acquiring a pooled reusable client connection while HTTP persistence rules allow it.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``exchange_sequence(ConnectionOrPool,Requests,Responses)``
+| **Mode and number of proofs:**
+|    ``exchange_sequence(+compound,++list(compound),--list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``ConnectionOrPool`` is a variable:
+|        ``instantiation_error``
+|    ``ConnectionOrPool`` is neither an open connection nor a managed connection-pool handle:
+|        ``domain_error(http_socket_transport_connection,ConnectionOrPool)``
+|    ``ConnectionOrPool`` is not a valid managed connection-pool handle:
+|        ``domain_error(http_socket_transport_connection_pool,ConnectionOrPool)``
+|    ``ConnectionOrPool`` no longer exists as a managed connection pool:
+|        ``existence_error(http_socket_transport_connection_pool,ConnectionOrPool)``
+|    No managed connection is available in the connection pool:
+|        ``resource_error(http_socket_transport_connection_pool)``
+|    ``Requests`` is not a list of normalized HTTP request terms:
+|        ``domain_error(http_request_sequence,Requests)``
+|    The response stream cannot be parsed as a normalized HTTP response:
+|        ``domain_error(http_response_stream,Error)``
+
+
+------------
+
+.. index:: exchange/4
+.. _http_transport_protocol/0::exchange/4:
+
+``exchange/4``
+^^^^^^^^^^^^^^
+
+Opens a client socket connection to the given host and port, performs a single HTTP exchange, and closes the connection. When the request does not already specify connection handling, ``Connection: close`` is added automatically.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``exchange(Host,Port,Request,Response)``
+| **Mode and number of proofs:**
+|    ``exchange(+atom,+integer,+compound,--compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Host`` and ``Port`` are not a valid HTTP authority target:
+|        ``domain_error(http_target,authority(Host,Port))``
+|    The process-backed client helper cannot be started:
+|        ``resource_error(http_process_transport_connection)``
+|    ``Request`` is not a valid normalized HTTP request term:
+|        ``domain_error(http_request,Request)``
+|    The response stream cannot be parsed as a normalized HTTP response:
+|        ``domain_error(http_response_stream,Error)``
+
+
+------------
+
+.. index:: exchange/5
+.. _http_transport_protocol/0::exchange/5:
+
+``exchange/5``
+^^^^^^^^^^^^^^
+
+Opens a client socket connection to the given host and port using the given connection options, performs a single HTTP exchange, and closes the connection. When the request does not already specify connection handling, ``Connection: close`` is added automatically.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``exchange(Host,Port,Request,Response,Options)``
+| **Mode and number of proofs:**
+|    ``exchange(+atom,+integer,+compound,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Host`` and ``Port`` are not a valid HTTP authority target:
+|        ``domain_error(http_target,authority(Host,Port))``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Options`` contains an invalid connection option:
+|        ``domain_error(http_process_transport_connection_option,Option)``
+|    The process-backed client helper cannot be started:
+|        ``resource_error(http_process_transport_connection)``
+|    ``Request`` is not a valid normalized HTTP request term:
+|        ``domain_error(http_request,Request)``
+|    The response stream cannot be parsed as a normalized HTTP response:
+|        ``domain_error(http_response_stream,Error)``
+
+
+------------
+
+.. index:: exchange_sequence/4
+.. _http_transport_protocol/0::exchange_sequence/4:
+
+``exchange_sequence/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Opens a client socket connection to the given host and port, performs a sequence of HTTP exchanges on that connection, and closes the connection. When the last request does not already specify connection handling, ``Connection: close`` is added automatically to that final request.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``exchange_sequence(Host,Port,Requests,Responses)``
+| **Mode and number of proofs:**
+|    ``exchange_sequence(+atom,+integer,++list(compound),--list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Host`` and ``Port`` are not a valid HTTP authority target:
+|        ``domain_error(http_target,authority(Host,Port))``
+|    The process-backed client helper cannot be started:
+|        ``resource_error(http_process_transport_connection)``
+|    ``Requests`` is not a list of normalized HTTP request terms:
+|        ``domain_error(http_request_sequence,Requests)``
+|    The response stream cannot be parsed as a normalized HTTP response:
+|        ``domain_error(http_response_stream,Error)``
+
+
+------------
+
+.. index:: serve_once/3
+.. _http_transport_protocol/0::serve_once/3:
+
+``serve_once/3``
+^^^^^^^^^^^^^^^^
+
+Accepts one incoming socket connection on the given server socket, serves that connection using the http_server_core library, closes the streams, and returns client information.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serve_once(ServerSocket,Handler,ClientInfo)``
+| **Mode and number of proofs:**
+|    ``serve_once(+compound,+object_identifier,--compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Handler`` does not conform to the HTTP handler protocol:
+|        ``domain_error(http_handler_protocol,Handler)``
+|    The delegated HTTP server rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+
+
+------------
+
+.. index:: serve_websocket_once/5
+.. _http_transport_protocol/0::serve_websocket_once/5:
+
+``serve_websocket_once/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Accepts one incoming socket connection on the given listener, serves exactly one WebSocket opening handshake using the given handler, and on success returns an upgraded connection handle that remains open together with the handshake response and client information. Rejected or malformed handshakes are written to the stream, the accepted streams are closed, and the predicate throws.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serve_websocket_once(Listener,Handler,Connection,Response,ClientInfo)``
+| **Mode and number of proofs:**
+|    ``serve_websocket_once(+compound,+object_identifier,--compound,--compound,--compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Handler`` does not conform to the HTTP handler protocol:
+|        ``domain_error(http_handler_protocol,Handler)``
+|    The WebSocket opening request does not exist:
+|        ``existence_error(http_socket_transport_websocket_request,end_of_file)``
+|    The WebSocket opening response is invalid:
+|        ``domain_error(http_socket_transport_websocket_response,Response)``
+|    The delegated HTTP server rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+
+
+------------
+
+.. index:: serve_listener/4
+.. _http_transport_protocol/0::serve_listener/4:
+
+``serve_listener/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Accepts and serves Count incoming connections on the given listener, returning the accepted client information terms in order. A ``request_listener_shutdown/1`` call for the listener may interrupt the bounded loop before Count connections are accepted.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serve_listener(Listener,Handler,Count,ClientInfos)``
+| **Mode and number of proofs:**
+|    ``serve_listener(+compound,+object_identifier,+integer,--list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Count`` is a variable:
+|        ``instantiation_error``
+|    ``Count`` is not a non-negative integer:
+|        ``domain_error(non_negative_integer,Count)``
+|    ``Handler`` does not conform to the HTTP handler protocol:
+|        ``domain_error(http_handler_protocol,Handler)``
+|    The delegated HTTP server rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+|    Thread workers are not available on this backend:
+|        ``resource_error(threads)``
+
+
+------------
+
+.. index:: serve_listener/5
+.. _http_transport_protocol/0::serve_listener/5:
+
+``serve_listener/5``
+^^^^^^^^^^^^^^^^^^^^
+
+Accepts and serves ``Count`` incoming connections on the given listener using the specified shutdown and worker options. A ``request_listener_shutdown/1`` call for the listener may interrupt the bounded loop before ``Count`` connections are accepted.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serve_listener(Listener,Handler,Count,ClientInfos,Options)``
+| **Mode and number of proofs:**
+|    ``serve_listener(+compound,+object_identifier,+integer,--list(compound),+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Count`` is a variable:
+|        ``instantiation_error``
+|    ``Count`` is not a non-negative integer:
+|        ``domain_error(non_negative_integer,Count)``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Options`` contains an invalid listener-serving option:
+|        ``domain_error(http_socket_transport_listener_option,Option)``
+|    ``Handler`` does not conform to the HTTP handler protocol:
+|        ``domain_error(http_handler_protocol,Handler)``
+|    The delegated HTTP server rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+|    Thread workers are not available on this backend:
+|        ``resource_error(threads)``
+
+| **Remarks:**
+
+    - Option ``shutdown(keep_open)``: Leave the listener open after serving the requested number of connections. This is the default.
+    - Option ``shutdown(close)``: Close the listener when serving completes or aborts.
+    - Option ``workers(serial)``: Serve accepted connections sequentially in the caller thread. This is the default.
+    - Option ``workers(per_connection)``: Spawn one worker thread per accepted connection and wait for all workers before returning. Requires backend thread support.
+    - Option ``workers(pool(Size))``: Serve accepted connections in batches of up to ``Size`` worker threads, waiting for each batch to finish before accepting the next batch. Requires backend thread support.
+    - Option ``workers(pool(Size, rolling))``: Serve accepted connections using at most ``Size`` concurrent worker threads, accepting the next connection as soon as a worker finishes. Requires backend thread support.
+
+
+------------
+
+.. index:: serve_until_shutdown/4
+.. _http_transport_protocol/0::serve_until_shutdown/4:
+
+``serve_until_shutdown/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Accepts and serves incoming connections on the given listener until ``request_shutdown/1`` is called for the specified control term, then closes the listener before returning.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serve_until_shutdown(Listener,Handler,Control,Options)``
+| **Mode and number of proofs:**
+|    ``serve_until_shutdown(+compound,+object_identifier,+nonvar,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Control`` is a variable:
+|        ``instantiation_error``
+|    ``Control`` is already registered for another open-ended listener loop:
+|        ``permission_error(reuse,http_socket_transport_shutdown_control,Control)``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    ``Options`` contains an invalid listener-serving option:
+|        ``domain_error(http_socket_transport_listener_option,Option)``
+|    ``Handler`` does not conform to the HTTP handler protocol:
+|        ``domain_error(http_handler_protocol,Handler)``
+|    The delegated HTTP server rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+|    Thread workers are not available on this backend:
+|        ``resource_error(threads)``
+
+| **Remarks:**
+
+    - Control term: The control term must be non-variable and should be fresh for each open-ended serving loop.
+    - Option ``workers(serial)``: Serve accepted connections sequentially in the caller thread. This is the default.
+    - Option ``workers(per_connection)``: Spawn one worker thread per accepted connection and wait for all workers when shutdown is requested. Requires backend thread support.
+    - Option ``workers(pool(Size))``: Serve accepted connections using at most Size concurrent worker threads, waiting for worker completion notifications before accepting additional connections. Requires backend thread support.
+    - Option ``workers(pool(Size, rolling))``: Alias for ``workers(pool(Size))``. Requires backend thread support.
+    - Shutdown behavior: Calling request_shutdown/1 wakes the serving loop, stops accepting new connections, and waits for active workers to finish before the listener is closed and the serving loop returns.
+
+
+------------
+
+.. index:: serve_until_shutdown/5
+.. _http_transport_protocol/0::serve_until_shutdown/5:
+
+``serve_until_shutdown/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Accepts and serves incoming connections on the given listener until ``request_shutdown/1`` is called for the specified control term, calling Ready after the shutdown control is registered and before the serving loop starts accepting connections.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serve_until_shutdown(Listener,Handler,Control,Options,Ready)``
+| **Meta-predicate template:**
+|    ``serve_until_shutdown(*,*,*,*,0)``
+| **Mode and number of proofs:**
+|    ``serve_until_shutdown(+compound,+object_identifier,+nonvar,+list,+callable)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Control`` is a variable:
+|        ``instantiation_error``
+|    ``Control`` is already registered for another open-ended listener loop:
+|        ``permission_error(reuse,http_socket_transport_shutdown_control,Control)``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    ``Options`` contains an invalid listener-serving option:
+|        ``domain_error(http_socket_transport_listener_option,Option)``
+|    ``Handler`` does not conform to the HTTP handler protocol:
+|        ``domain_error(http_handler_protocol,Handler)``
+|    The delegated HTTP server rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+|    Thread workers are not available on this backend:
+|        ``resource_error(threads)``
+
+| **Remarks:**
+
+    - Control term: The control term must be non-variable and should be fresh for each open-ended serving loop.
+    - Ready goal: Called once after the shutdown control is registered and before the serving loop starts accepting connections.
+    - Options: Supports the same worker options as ``serve_until_shutdown/4``.
+
+
+------------
+
+.. index:: request_shutdown/1
+.. _http_transport_protocol/0::request_shutdown/1:
+
+``request_shutdown/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Requests shutdown of an open-ended serving loop started with ``serve_until_shutdown/4`` or ``serve_until_shutdown/5`` for the specified control term and wakes any blocked accept call so the loop can terminate portably.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``request_shutdown(Control)``
+| **Mode and number of proofs:**
+|    ``request_shutdown(+nonvar)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Control`` is a variable:
+|        ``instantiation_error``
+|    ``Control`` is not registered for an open-ended listener loop:
+|        ``existence_error(http_socket_transport_shutdown_control,Control)``
+|    Thread-backed shutdown is not available on this backend:
+|        ``resource_error(threads)``
+
+
+------------
+
+.. index:: supported_request_scheme/1
+.. _http_transport_protocol/0::supported_request_scheme/1:
+
+``supported_request_scheme/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Table of supported request schemas.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``supported_request_scheme(Scheme)``
+| **Mode and number of proofs:**
+|    ``supported_request_scheme(+nonvar)`` - ``one_or_more``
+
+
+------------
+
+.. index:: supported_websocket_scheme/1
+.. _http_transport_protocol/0::supported_websocket_scheme/1:
+
+``supported_websocket_scheme/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Table of supported websocket schemas.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``supported_websocket_scheme(Scheme)``
+| **Mode and number of proofs:**
+|    ``supported_websocket_scheme(+nonvar)`` - ``one_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

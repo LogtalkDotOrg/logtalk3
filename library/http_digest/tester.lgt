@@ -39,7 +39,7 @@
 		logtalk_load([
 			http_digest_verifier_protocol,
 			http_digest,
-			http_server_digest_handler,
+			http_server_core_digest_handler,
 			http_router_digest_auth,
 			http_client_digest_session
 		], [
@@ -50,8 +50,8 @@
 		logtalk_load(test_objects, [debug(on), source_data(on)]),
 		logtalk_load(tests, [hook(lgtunit)]),
 		lgtunit::run_test_sets([
-			tests(http_socket),
-			tests(http_socket_process)
+			tests(http_socket_transport),
+			tests(http_process_transport)
 		])
 	)).
 

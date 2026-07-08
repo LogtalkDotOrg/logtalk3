@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-07-08,
 		comment is 'Server-side convenience for callback-driven WebSocket sessions with atom text representation, including registry-backed broadcast helpers.',
 		parnames is ['HTTPSocket']
 	]).
@@ -36,12 +36,12 @@
 		comment is 'Accepts one incoming socket connection on the given listener created by the selected transport parameterization, serves one WebSocket opening handshake using the given HTTP handler, then runs one callback-driven WebSocket session using the given session handler until the close handshake completes or the peer closes the stream.',
 		argnames is ['Listener', 'HandshakeHandler', 'SessionHandler', 'Response', 'State', 'ClientInfo'],
 		exceptions is [
-			'The listener is invalid for the selected transport' - domain_error(http_socket_listener, 'Listener'),
-			'The WebSocket opening request does not exist' - existence_error(http_socket_websocket_request, end_of_file),
-			'The WebSocket opening response is invalid' - domain_error(http_socket_websocket_response, 'Response'),
+			'The listener is invalid for the selected transport' - domain_error(http_socket_transport_listener, 'Listener'),
+			'The WebSocket opening request does not exist' - existence_error(http_socket_transport_websocket_request, end_of_file),
+			'The WebSocket opening response is invalid' - domain_error(http_socket_transport_websocket_response, 'Response'),
 			'``SessionHandler`` is a variable' - instantiation_error,
 			'``SessionHandler`` is not a valid WebSocket service handler' - domain_error(http_websocket_service_handler, 'SessionHandler'),
-			'The upgraded connection handle is invalid' - domain_error(http_socket_connection, 'Connection'),
+			'The upgraded connection handle is invalid' - domain_error(http_socket_transport_connection, 'Connection'),
 			'The delegated session loop raises a WebSocket session error' - domain_error(http_websocket_session_sequence, 'Frame'),
 			'``SessionHandler`` returns an invalid reply' - domain_error(http_websocket_service_handler_reply, 'Reply')
 		]
@@ -53,9 +53,9 @@
 		comment is 'Accepts one incoming socket connection on the given listener created by the selected transport parameterization, serves one WebSocket opening handshake using the given HTTP handler, then runs one callback-driven WebSocket session using the given session handler and the given session-loop options.',
 		argnames is ['Listener', 'HandshakeHandler', 'SessionHandler', 'Response', 'State', 'ClientInfo', 'Options'],
 		exceptions is [
-			'The listener is invalid for the selected transport' - domain_error(http_socket_listener, 'Listener'),
-			'The WebSocket opening request does not exist' - existence_error(http_socket_websocket_request, end_of_file),
-			'The WebSocket opening response is invalid' - domain_error(http_socket_websocket_response, 'Response'),
+			'The listener is invalid for the selected transport' - domain_error(http_socket_transport_listener, 'Listener'),
+			'The WebSocket opening request does not exist' - existence_error(http_socket_transport_websocket_request, end_of_file),
+			'The WebSocket opening response is invalid' - domain_error(http_socket_transport_websocket_response, 'Response'),
 			'``SessionHandler`` is a variable' - instantiation_error,
 			'``SessionHandler`` is not a valid WebSocket service handler' - domain_error(http_websocket_service_handler, 'SessionHandler'),
 			'``Options`` is a variable or a partial list' - instantiation_error,
@@ -64,7 +64,7 @@
 			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
 			'``Options`` contains an invalid WebSocket service loop option' - domain_error(http_websocket_service_option, 'Option'),
 			'Timed session-loop options are not available on this backend' - not_available(http_websocket_service_timing),
-			'The upgraded connection handle is invalid' - domain_error(http_socket_connection, 'Connection'),
+			'The upgraded connection handle is invalid' - domain_error(http_socket_transport_connection, 'Connection'),
 			'The delegated session loop raises a WebSocket session error' - domain_error(http_websocket_session_sequence, 'Frame'),
 			'``SessionHandler`` returns an invalid reply' - domain_error(http_websocket_service_handler_reply, 'Reply')
 		],
@@ -88,7 +88,7 @@
 			'``Registry`` refers to a closed WebSocket service registry handle' - existence_error(http_websocket_service_registry, session_registry('RegistryId')),
 			'``Control`` is a variable' - instantiation_error,
 			'``Control`` is already registered for another open-ended WebSocket server loop' - permission_error(reuse, http_websocket_service_shutdown_control, 'Control'),
-			'The WebSocket opening response is invalid' - domain_error(http_socket_websocket_response, 'Response'),
+			'The WebSocket opening response is invalid' - domain_error(http_socket_transport_websocket_response, 'Response'),
 			'``SessionHandler`` is a variable' - instantiation_error,
 			'``SessionHandler`` is not a valid WebSocket service handler' - domain_error(http_websocket_service_handler, 'SessionHandler'),
 			'The delegated session loop raises a WebSocket session error' - domain_error(http_websocket_session_sequence, 'Frame'),
@@ -115,7 +115,7 @@
 			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
 			'``Options`` contains an invalid WebSocket service loop option' - domain_error(http_websocket_service_option, 'Option'),
 			'Timed session-loop options are not available on this backend' - not_available(http_websocket_service_timing),
-			'The WebSocket opening response is invalid' - domain_error(http_socket_websocket_response, 'Response'),
+			'The WebSocket opening response is invalid' - domain_error(http_socket_transport_websocket_response, 'Response'),
 			'``SessionHandler`` is a variable' - instantiation_error,
 			'``SessionHandler`` is not a valid WebSocket service handler' - domain_error(http_websocket_service_handler, 'SessionHandler'),
 			'The delegated session loop raises a WebSocket session error' - domain_error(http_websocket_session_sequence, 'Frame'),
@@ -292,8 +292,8 @@
 			throw(Error)
 		).
 
-	recoverable_accept_error(error(domain_error(http_socket_websocket_response, _Response), _Context)).
-	recoverable_accept_error(error(existence_error(http_socket_websocket_request, end_of_file), _Context)).
+	recoverable_accept_error(error(domain_error(http_socket_transport_websocket_response, _Response), _Context)).
+	recoverable_accept_error(error(existence_error(http_socket_transport_websocket_request, end_of_file), _Context)).
 
 	spawn_session_worker(Control, RunId, Connection, Registry, SessionHandler, Options) :-
 		Goal = serve_session_worker(Control, RunId, Connection, Registry, SessionHandler, Options),
@@ -405,13 +405,13 @@
 
 
 :- object(http_websocket_server_service,
-	extends(http_websocket_service(http_socket, server, atom))).
+	extends(http_websocket_service(http_socket_transport, server, atom))).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
-		comment is 'By default, the server-side convenience for callback-driven WebSocket sessions with atom text representation, including registry-backed broadcast helpers, uses the ``http_socket`` library.'
+		date is 2026-07-08,
+		comment is 'By default, the server-side convenience for callback-driven WebSocket sessions with atom text representation, including registry-backed broadcast helpers, uses the ``http_socket_transport`` library.'
 	]).
 
 :- end_object.

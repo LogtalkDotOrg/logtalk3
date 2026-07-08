@@ -29,7 +29,7 @@
 		http_authenticate_verifier_protocol,
 		http_authenticate,
 		http_htpasswd_verifier,
-		http_server_basic_handler,
+		http_server_core_basic_handler,
 		http_router_basic_auth
 	], [
 		optimize(on)

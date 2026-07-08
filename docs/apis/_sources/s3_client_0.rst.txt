@@ -8,21 +8,21 @@
 ``s3_client``
 =============
 
-Stateless S3-compatible client facade over the normalized HTTP client using by default the ``http_socket_process`` library.
+Stateless S3-compatible client facade over the normalized HTTP client using by default the ``http_process_transport`` library.
 
 | **Availability:** 
 |    ``logtalk_load(s3(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-29
+| **Date:** 2026-07-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
 | **Extends:**
-|    ``public`` :ref:`s3_client(http_socket_process) <s3_client/1>`
+|    ``public`` :ref:`s3_client(http_process_transport) <s3_client/1>`
 
 | **Remarks:**
 |    (none)

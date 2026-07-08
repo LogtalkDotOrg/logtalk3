@@ -179,11 +179,11 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-htmx"><span class="xref std std-ref">http_htmx</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-multipart"><span class="xref std std-ref">http_multipart</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-parameters"><span class="xref std std-ref">http_parameters</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-process-transport"><span class="xref std std-ref">http_process_transport</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-router"><span class="xref std std-ref">http_router</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-server"><span class="xref std std-ref">http_server</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-server-core"><span class="xref std std-ref">http_server_core</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-session"><span class="xref std std-ref">http_session</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-socket"><span class="xref std std-ref">http_socket</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-socket-process"><span class="xref std std-ref">http_socket_process</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-socket-transport"><span class="xref std std-ref">http_socket_transport</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-static-files"><span class="xref std std-ref">http_static_files</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-websocket"><span class="xref std std-ref">http_websocket</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-websocket-frames"><span class="xref std std-ref">http_websocket_frames</span></a></li>
@@ -393,7 +393,7 @@
   <p class="right" id="http-client-1"><span id="index-0"></span><strong>object</strong></p>
 <section id="http-client-httpsocket">
 <h1><code class="docutils literal notranslate"><span class="pre">http_client(HTTPSocket)</span></code><a class="headerlink" href="#http-client-httpsocket" title="Link to this heading"></a></h1>
-<p>Request-oriented HTTP client facade built on top of the url and http_socket libraries.</p>
+<p>Request-oriented HTTP client facade built on top of the url and http_socket_transport libraries.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -574,7 +574,7 @@
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">ConnectionOrPool</span></code> is not a valid reusable connection or pool handle:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_connection_or_pool,ConnectionOrPool)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_transport_connection_or_pool,ConnectionOrPool)</span></code></div>
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">ConnectionOrPool</span></code> is not connected to the requested endpoint:</div>
 <div class="line-block">
@@ -702,7 +702,7 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">ConnectionOrPool</span></code> is not a valid reusable connection or pool handle:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_connection_or_pool,ConnectionOrPool)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_transport_connection_or_pool,ConnectionOrPool)</span></code></div>
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">ConnectionOrPool</span></code> is not connected to the requested endpoint:</div>
 <div class="line-block">
@@ -802,7 +802,7 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">ConnectionOrPool</span></code> is not a valid reusable connection or pool handle:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_connection_or_pool,ConnectionOrPool)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_transport_connection_or_pool,ConnectionOrPool)</span></code></div>
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">ConnectionOrPool</span></code> is not connected to the requested endpoint:</div>
 <div class="line-block">
@@ -902,7 +902,7 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">ConnectionOrPool</span></code> is not a valid reusable connection or pool handle:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_connection_or_pool,ConnectionOrPool)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_transport_connection_or_pool,ConnectionOrPool)</span></code></div>
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">ConnectionOrPool</span></code> is not connected to the requested endpoint:</div>
 <div class="line-block">
@@ -1006,7 +1006,7 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">ConnectionOrPool</span></code> is not a valid reusable connection or pool handle:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_connection_or_pool,ConnectionOrPool)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_transport_connection_or_pool,ConnectionOrPool)</span></code></div>
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">ConnectionOrPool</span></code> is not connected to the requested endpoint:</div>
 <div class="line-block">
@@ -1114,7 +1114,7 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">ConnectionOrPool</span></code> is not a valid reusable connection or pool handle:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_connection_or_pool,ConnectionOrPool)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_transport_connection_or_pool,ConnectionOrPool)</span></code></div>
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">ConnectionOrPool</span></code> is not connected to the requested endpoint:</div>
 <div class="line-block">
@@ -1222,7 +1222,7 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">ConnectionOrPool</span></code> is not a valid reusable connection or pool handle:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_connection_or_pool,ConnectionOrPool)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_transport_connection_or_pool,ConnectionOrPool)</span></code></div>
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">ConnectionOrPool</span></code> is not connected to the requested endpoint:</div>
 <div class="line-block">
@@ -1330,7 +1330,7 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">ConnectionOrPool</span></code> is not a valid reusable connection or pool handle:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_connection_or_pool,ConnectionOrPool)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_transport_connection_or_pool,ConnectionOrPool)</span></code></div>
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">ConnectionOrPool</span></code> is not connected to the requested endpoint:</div>
 <div class="line-block">

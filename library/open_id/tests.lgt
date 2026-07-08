@@ -452,23 +452,23 @@
 			with_test_server(Goal, 1).
 
 		with_test_server(Goal, Requests) :-
-			http_socket_process::open_listener('127.0.0.1', Port, Listener, []),
+			http_process_transport::open_listener('127.0.0.1', Port, Listener, []),
 			threaded_once(serve_requests(Requests, Listener), Tag),
 			catch(
 				call(Goal, Port),
 				Error,
 				(	threaded_exit(serve_requests(Requests, Listener), Tag),
-					http_socket_process::close_listener(Listener),
+					http_process_transport::close_listener(Listener),
 					throw(Error)
 				)
 			),
 			threaded_exit(serve_requests(Requests, Listener), Tag),
-			http_socket_process::close_listener(Listener).
+			http_process_transport::close_listener(Listener).
 
 		serve_requests(0, _Listener) :-
 			!.
 		serve_requests(Requests, Listener) :-
-			http_socket_process::serve_once(Listener, open_id_test_handler, _),
+			http_process_transport::serve_once(Listener, open_id_test_handler, _),
 			NextRequests is Requests - 1,
 			serve_requests(NextRequests, Listener).
 

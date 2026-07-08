@@ -38,7 +38,7 @@
 		logtalk_load([
 			http_digest_verifier_protocol,
 			http_digest,
-			http_server_digest_handler,
+			http_server_core_digest_handler,
 			http_router_digest_auth,
 			http_client_digest_session
 		], [

@@ -26,7 +26,7 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-07-07,
-		comment is 'Request-oriented HTTP client facade built on top of the url and http_socket libraries.',
+		comment is 'Request-oriented HTTP client facade built on top of the url and http_socket_transport libraries.',
 		parnames is ['HTTPSocket']
 	]).
 
@@ -58,7 +58,7 @@
 		argnames is ['ConnectionOrPool', 'Method', 'URL', 'Response', 'Options'],
 		exceptions is [
 			'``ConnectionOrPool`` is a variable' - instantiation_error,
-			'``ConnectionOrPool`` is not a valid reusable connection or pool handle' - domain_error(http_socket_connection_or_pool, 'ConnectionOrPool'),
+			'``ConnectionOrPool`` is not a valid reusable connection or pool handle' - domain_error(http_socket_transport_connection_or_pool, 'ConnectionOrPool'),
 			'``ConnectionOrPool`` is not connected to the requested endpoint' - domain_error(http_client_connection_target, endpoint('EndpointHost', 'EndpointPort', 'Host', 'Port')),
 			'``URL`` is a variable' - instantiation_error,
 			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
@@ -95,7 +95,7 @@
 		comment is 'Convenience wrapper over ``request/5`` using the ``get`` method.',
 		argnames is ['ConnectionOrPool', 'URL', 'Response', 'Options'],
 		exceptions is [
-			'``ConnectionOrPool`` is not a valid reusable connection or pool handle' - domain_error(http_socket_connection_or_pool, 'ConnectionOrPool'),
+			'``ConnectionOrPool`` is not a valid reusable connection or pool handle' - domain_error(http_socket_transport_connection_or_pool, 'ConnectionOrPool'),
 			'``ConnectionOrPool`` is not connected to the requested endpoint' - domain_error(http_client_connection_target, endpoint('EndpointHost', 'EndpointPort', 'Host', 'Port')),
 			'``URL`` is a variable' - instantiation_error,
 			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
@@ -125,7 +125,7 @@
 		comment is 'Convenience wrapper over ``request/5`` using the ``head`` method.',
 		argnames is ['ConnectionOrPool', 'URL', 'Response', 'Options'],
 		exceptions is [
-			'``ConnectionOrPool`` is not a valid reusable connection or pool handle' - domain_error(http_socket_connection_or_pool, 'ConnectionOrPool'),
+			'``ConnectionOrPool`` is not a valid reusable connection or pool handle' - domain_error(http_socket_transport_connection_or_pool, 'ConnectionOrPool'),
 			'``ConnectionOrPool`` is not connected to the requested endpoint' - domain_error(http_client_connection_target, endpoint('EndpointHost', 'EndpointPort', 'Host', 'Port')),
 			'``URL`` is a variable' - instantiation_error,
 			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
@@ -155,7 +155,7 @@
 		comment is 'Convenience wrapper over ``request/5`` using the ``delete`` method.',
 		argnames is ['ConnectionOrPool', 'URL', 'Response', 'Options'],
 		exceptions is [
-			'``ConnectionOrPool`` is not a valid reusable connection or pool handle' - domain_error(http_socket_connection_or_pool, 'ConnectionOrPool'),
+			'``ConnectionOrPool`` is not a valid reusable connection or pool handle' - domain_error(http_socket_transport_connection_or_pool, 'ConnectionOrPool'),
 			'``ConnectionOrPool`` is not connected to the requested endpoint' - domain_error(http_client_connection_target, endpoint('EndpointHost', 'EndpointPort', 'Host', 'Port')),
 			'``URL`` is a variable' - instantiation_error,
 			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
@@ -186,7 +186,7 @@
 		comment is 'Convenience wrapper over ``request/5`` using the ``post`` method and the given request body.',
 		argnames is ['ConnectionOrPool', 'URL', 'Body', 'Response', 'Options'],
 		exceptions is [
-			'``ConnectionOrPool`` is not a valid reusable connection or pool handle' - domain_error(http_socket_connection_or_pool, 'ConnectionOrPool'),
+			'``ConnectionOrPool`` is not a valid reusable connection or pool handle' - domain_error(http_socket_transport_connection_or_pool, 'ConnectionOrPool'),
 			'``ConnectionOrPool`` is not connected to the requested endpoint' - domain_error(http_client_connection_target, endpoint('EndpointHost', 'EndpointPort', 'Host', 'Port')),
 			'``URL`` is a variable' - instantiation_error,
 			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
@@ -218,7 +218,7 @@
 		comment is 'Convenience wrapper over ``request/5`` using the ``put`` method and the given request body.',
 		argnames is ['ConnectionOrPool', 'URL', 'Body', 'Response', 'Options'],
 		exceptions is [
-			'``ConnectionOrPool`` is not a valid reusable connection or pool handle' - domain_error(http_socket_connection_or_pool, 'ConnectionOrPool'),
+			'``ConnectionOrPool`` is not a valid reusable connection or pool handle' - domain_error(http_socket_transport_connection_or_pool, 'ConnectionOrPool'),
 			'``ConnectionOrPool`` is not connected to the requested endpoint' - domain_error(http_client_connection_target, endpoint('EndpointHost', 'EndpointPort', 'Host', 'Port')),
 			'``URL`` is a variable' - instantiation_error,
 			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
@@ -250,7 +250,7 @@
 		comment is 'Convenience wrapper over ``request/5`` using the ``patch`` method and the given request body.',
 		argnames is ['ConnectionOrPool', 'URL', 'Body', 'Response', 'Options'],
 		exceptions is [
-			'``ConnectionOrPool`` is not a valid reusable connection or pool handle' - domain_error(http_socket_connection_or_pool, 'ConnectionOrPool'),
+			'``ConnectionOrPool`` is not a valid reusable connection or pool handle' - domain_error(http_socket_transport_connection_or_pool, 'ConnectionOrPool'),
 			'``ConnectionOrPool`` is not connected to the requested endpoint' - domain_error(http_client_connection_target, endpoint('EndpointHost', 'EndpointPort', 'Host', 'Port')),
 			'``URL`` is a variable' - instantiation_error,
 			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
@@ -282,7 +282,7 @@
 		comment is 'Convenience wrapper over ``request/5`` using the ``query`` method and the given request body.',
 		argnames is ['ConnectionOrPool', 'URL', 'Body', 'Response', 'Options'],
 		exceptions is [
-			'``ConnectionOrPool`` is not a valid reusable connection or pool handle' - domain_error(http_socket_connection_or_pool, 'ConnectionOrPool'),
+			'``ConnectionOrPool`` is not a valid reusable connection or pool handle' - domain_error(http_socket_transport_connection_or_pool, 'ConnectionOrPool'),
 			'``ConnectionOrPool`` is not connected to the requested endpoint' - domain_error(http_client_connection_target, endpoint('EndpointHost', 'EndpointPort', 'Host', 'Port')),
 			'``URL`` is a variable' - instantiation_error,
 			'``URL`` is not a supported absolute HTTP URL' - domain_error(http_client_url, 'URL'),
@@ -849,7 +849,7 @@
 	connection_or_pool_endpoint(ConnectionOrPool, _Host, _Port) :-
 		(	var(ConnectionOrPool) ->
 			instantiation_error
-		;	domain_error(http_socket_connection_or_pool, ConnectionOrPool)
+		;	domain_error(http_socket_transport_connection_or_pool, ConnectionOrPool)
 		).
 
 	lowercase_ascii_codes(Codes, LowercaseCodes) :-
@@ -859,13 +859,13 @@
 
 
 :- object(http_client,
-	extends(http_client(http_socket))).
+	extends(http_client(http_socket_transport))).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-06-26,
-		comment is 'By default, the request-oriented HTTP client facade uses the ``http_socket`` library.'
+		comment is 'By default, the request-oriented HTTP client facade uses the ``http_socket_transport`` library.'
 	]).
 
 :- end_object.

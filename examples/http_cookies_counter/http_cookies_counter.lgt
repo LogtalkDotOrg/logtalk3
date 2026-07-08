@@ -31,7 +31,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-12,
+		date is 2026-07-08,
 		comment is 'HTTP handler for the cookie counter example.'
 	]).
 
@@ -117,11 +117,11 @@
 	]).
 
 	serve(Port, Count) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
 		catch(
-			http_socket::serve_listener(Listener, cookie_counter_http_handler, Count, _ClientInfos, [shutdown(close)]),
+			http_socket_transport::serve_listener(Listener, cookie_counter_http_handler, Count, _ClientInfos, [shutdown(close)]),
 			Error,
-			(	catch(http_socket::close_listener(Listener), _, true),
+			(	catch(http_socket_transport::close_listener(Listener), _, true),
 				throw(Error)
 			)
 		).
@@ -230,7 +230,7 @@
 			print_result(Result).
 
 		run(Result) :-
-			http_socket::open_listener('127.0.0.1', Port, Listener, []),
+			http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
 			threaded_once(serve_demo_requests(Listener), Tag),
 			catch(
 				cookie_counter_client::run(Port, Result),
@@ -239,19 +239,19 @@
 					throw(Error)
 				)
 			),
-			http_socket::request_listener_shutdown(Listener),
+			http_socket_transport::request_listener_shutdown(Listener),
 			threaded_exit(serve_demo_requests(Listener), Tag),
-			catch(http_socket::close_listener(Listener), _, true).
+			catch(http_socket_transport::close_listener(Listener), _, true).
 
 		% The client performs two one-shot GET requests, so the demo server only
 		% needs to accept two HTTP connections before closing the listener.
 		serve_demo_requests(Listener) :-
-			http_socket::serve_listener(Listener, cookie_counter_http_handler, 2, _ClientInfos, [shutdown(close)]).
+			http_socket_transport::serve_listener(Listener, cookie_counter_http_handler, 2, _ClientInfos, [shutdown(close)]).
 
 		cleanup_demo(Listener, Tag) :-
-			http_socket::request_listener_shutdown(Listener),
+			http_socket_transport::request_listener_shutdown(Listener),
 			catch(threaded_exit(serve_demo_requests(Listener), Tag), _, true),
-			catch(http_socket::close_listener(Listener), _, true).
+			catch(http_socket_transport::close_listener(Listener), _, true).
 
 		print_result(result(FirstResponse, StoredCookiePairs, SecondResponse)) :-
 			http_core::body(FirstResponse, content('application/json', json({visits-FirstVisit, message-FirstMessage}))),

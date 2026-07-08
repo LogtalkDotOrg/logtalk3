@@ -32,7 +32,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-12,
+		date is 2026-07-08,
 		comment is 'HTTP handler for the HTMX panel example.'
 	]).
 
@@ -458,18 +458,18 @@
 	]).
 
 	serve(Port, Count) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
 		catch(
 			serve_listener(Listener, Count),
 			Error,
-			(  catch(http_socket::close_listener(Listener), _, true),
+			(  catch(http_socket_transport::close_listener(Listener), _, true),
 				throw(Error)
 			)
 		),
-		http_socket::close_listener(Listener).
+		http_socket_transport::close_listener(Listener).
 
 	serve_listener(Listener, Count) :-
-		http_socket::serve_listener(Listener, htmx_panel_http_handler, Count, _ClientInfos, [shutdown(close)]).
+		http_socket_transport::serve_listener(Listener, htmx_panel_http_handler, Count, _ClientInfos, [shutdown(close)]).
 
 :- end_object.
 
@@ -588,7 +588,7 @@
 			print_result(Result).
 
 		run(Result) :-
-			http_socket::open_listener('127.0.0.1', Port, Listener, []),
+			http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
 			threaded_once(htmx_panel_server::serve_listener(Listener, 4), Tag),
 			catch(
 				htmx_panel_client::run(Port, Result),
@@ -597,14 +597,14 @@
 					throw(Error)
 				)
 			),
-			http_socket::request_listener_shutdown(Listener),
+			http_socket_transport::request_listener_shutdown(Listener),
 			threaded_exit(htmx_panel_server::serve_listener(Listener, 4), Tag),
-			catch(http_socket::close_listener(Listener), _, true).
+			catch(http_socket_transport::close_listener(Listener), _, true).
 
 		cleanup_demo(Listener, Tag) :-
-			http_socket::request_listener_shutdown(Listener),
+			http_socket_transport::request_listener_shutdown(Listener),
 			catch(threaded_exit(htmx_panel_server::serve_listener(Listener, 4), Tag), _, true),
-			catch(http_socket::close_listener(Listener), _, true).
+			catch(http_socket_transport::close_listener(Listener), _, true).
 
 		print_result(result(HomeResponse, PanelPageResponse, PanelFragmentResponse, PanelBoostedResponse)) :-
 			http_core::status(HomeResponse, HomeStatus),

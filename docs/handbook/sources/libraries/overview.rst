@@ -39,8 +39,9 @@ multiple areas):
   ``http_authenticate``, ``http_client``, ``http_cookies``,
   ``http_cors``, ``http_digest``, ``http_directory_listing``,
   ``http_htmx``, ``http_multipart``, ``http_parameters``,
-  ``http_router``, ``http_server``, ``http_session``, ``http_socket``,
-  ``http_socket_process``, ``http_static_files``, ``http_websocket``,
+  ``http_router``, ``http_server_core``, ``http_session``,
+  ``http_socket_transport``, ``http_process_transport``,
+  ``http_static_files``, ``http_websocket``,
   ``http_websocket_messages``, ``http_websocket_service``,
   ``http_websocket_session``, ``gravatar``, ``open_api``, ``open_ai``,
   ``open_id``, ``rest``, and ``s3``.

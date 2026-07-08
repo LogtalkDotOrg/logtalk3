@@ -36,8 +36,8 @@
 		logtalk_load([
 			http_cookie_jar,
 			http_client_session,
-			http_server_session,
-			http_server_session_handler,
+			http_server_core_session,
+			http_server_core_session_handler,
 			http_router_server_session
 		], [
 			debug(on),
@@ -46,8 +46,8 @@
 		logtalk_load(test_objects),
 		logtalk_load(tests, [hook(lgtunit)]),
 		lgtunit::run_test_sets([
-			tests(http_socket),
-			tests(http_socket_process)
+			tests(http_socket_transport),
+			tests(http_process_transport)
 		])
 	)).
 

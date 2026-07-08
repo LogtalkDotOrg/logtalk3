@@ -14,7 +14,7 @@ This library is a pure state-machine layer working on binary streams: it
 does not create threads and does not depend on socket support. The
 higher-level callback-driven session loops, keepalive and idle-timeout
 policies, and the registry-backed broadcast helpers for upgraded
-``http_socket`` connections are provided by the
+``http_socket_transport`` connections are provided by the
 ``http_websocket_service`` library.
 
 This library can be used with backend Prolog systems that support
@@ -140,7 +140,7 @@ Current workflow
 ----------------
 
 - Complete the opening handshake with ``http_client::open_websocket/4``
-  or ``http_socket::serve_websocket_once/5``.
+  or ``http_socket_transport::serve_websocket_once/5``.
 - Use the ``http_websocket_messages`` layer when you only need stateless
   message normalization and simple reassembly.
 - Use the ``http_websocket_session`` layer when you need stateful reads

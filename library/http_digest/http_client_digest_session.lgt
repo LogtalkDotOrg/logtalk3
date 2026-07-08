@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-07,
+		date is 2026-07-08,
 		comment is 'Stateful HTTP Digest client sessions that add cookie persistence and one-round-trip Digest challenge retry on top of the normalized HTTP client and socket libraries.',
 		parnames is ['HTTPSocket'],
 		remarks is [
@@ -782,13 +782,13 @@
 
 
 :- object(http_client_digest_session,
-	extends(http_client_digest_session(http_socket))).
+	extends(http_client_digest_session(http_socket_transport))).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-06-26,
-		comment is 'By deafult, Stateful HTTP Digest client sessions use the ``http_socket`` library.'
+		comment is 'By deafult, Stateful HTTP Digest client sessions use the ``http_socket_transport`` library.'
 	]).
 
 :- end_object.

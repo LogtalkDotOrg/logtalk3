@@ -23,7 +23,7 @@ ________________________________________________________________________
 
 The `open_ai` library provides a portable OpenAI-compatible public non-admin
 API surface. It uses the existing HTTP, REST, and OpenAPI libraries and defaults
-to the `http_socket_process` transport for HTTPS and WSS support.
+to the `http_process_transport` transport for HTTPS and WSS support.
 
 The library implements the OpenAI wire-format routing, client request
 construction, OpenAPI document generation, and validation hooks. Server-side

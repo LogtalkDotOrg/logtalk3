@@ -8,14 +8,14 @@
 ``open_ai_client``
 ==================
 
-OpenAI-compatible client facade using http_client(http_socket_process) for HTTPS/WSS support.
+OpenAI-compatible client facade using http_client(http_process_transport) for HTTPS/WSS support.
 
 | **Availability:** 
 |    ``logtalk_load(open_ai(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-30
+| **Date:** 2026-07-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``

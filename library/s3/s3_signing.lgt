@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-29,
+		date is 2026-07-08,
 		comment is 'AWS Signature Version 4 helpers specialized for S3.'
 	]).
 

@@ -181,10 +181,7 @@
 <li class="toctree-l2"><a class="reference internal" href="http_multipart.html"><code class="docutils literal notranslate"><span class="pre">http_multipart</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_parameters.html"><code class="docutils literal notranslate"><span class="pre">http_parameters</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_router.html"><code class="docutils literal notranslate"><span class="pre">http_router</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="http_server.html"><code class="docutils literal notranslate"><span class="pre">http_server</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_session.html"><code class="docutils literal notranslate"><span class="pre">http_session</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="http_socket.html"><code class="docutils literal notranslate"><span class="pre">http_socket</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="http_socket_process.html"><code class="docutils literal notranslate"><span class="pre">http_socket_process</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_static_files.html"><code class="docutils literal notranslate"><span class="pre">http_static_files</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_websocket.html"><code class="docutils literal notranslate"><span class="pre">http_websocket</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_websocket_frames.html"><code class="docutils literal notranslate"><span class="pre">http_websocket_frames</span></code></a></li>
@@ -379,8 +376,8 @@ for checking plaintext credentials</p></li>
 protection, and challenge helpers</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">http_htpasswd_verifier(_)</span></code> portable Apache <code class="docutils literal notranslate"><span class="pre">.htpasswd</span></code> subset
 verifier supporting <code class="docutils literal notranslate"><span class="pre">{SHA}</span></code> and <code class="docutils literal notranslate"><span class="pre">$apr1$</span></code> entries</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">http_server_basic_handler(_,</span> <span class="pre">_,</span> <span class="pre">_)</span></code> portable handler wrapper that
-applies Basic protection around another object implementing
+<li><p><code class="docutils literal notranslate"><span class="pre">http_server_core_basic_handler(_,</span> <span class="pre">_,</span> <span class="pre">_)</span></code> portable handler wrapper
+that applies Basic protection around another object implementing
 <code class="docutils literal notranslate"><span class="pre">http_handler_protocol</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">http_router_basic_auth(_,</span> <span class="pre">_)</span></code> router companion category that
 protects routes declaring <code class="docutils literal notranslate"><span class="pre">basic_auth/1</span></code> metadata</p></li>
@@ -412,10 +409,10 @@ Basic challenge parsing and request verification:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> http_authenticate<span class="o">::</span>protect_request(<span class="nv">Request</span>, verifier, <span class="nv">Action</span>, [realm(<span class="s">&#39;private&#39;</span>)]).
 </pre></div>
 </div>
-<p>Wrap a normal handler with <code class="docutils literal notranslate"><span class="pre">http_server_basic_handler(_,</span> <span class="pre">_,</span> <span class="pre">_)</span></code> when
-you want a portable middleware-style integration point for Basic
+<p>Wrap a normal handler with <code class="docutils literal notranslate"><span class="pre">http_server_core_basic_handler(_,</span> <span class="pre">_,</span> <span class="pre">_)</span></code>
+when you want a portable middleware-style integration point for Basic
 verification:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="nv">Handler</span> <span class="o">=</span> http_server_basic_handler(verifier, app_handler, [realm(<span class="s">&#39;private&#39;</span>)]).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="nv">Handler</span> <span class="o">=</span> http_server_core_basic_handler(verifier, app_handler, [realm(<span class="s">&#39;private&#39;</span>)]).
 </pre></div>
 </div>
 <p>Use <code class="docutils literal notranslate"><span class="pre">http_router_basic_auth(_,</span> <span class="pre">_)</span></code> in router objects importing

@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-12,
+		date is 2026-07-08,
 		comment is 'REST API used by the HTTP REST example.',
 		parnames is ['Port']
 	]).
@@ -213,11 +213,11 @@
 	]).
 
 	serve(Port, Count) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
 		catch(
-			http_socket::serve_listener(Listener, greetings_rest_api(Port), Count, _ClientInfos, [shutdown(close)]),
+			http_socket_transport::serve_listener(Listener, greetings_rest_api(Port), Count, _ClientInfos, [shutdown(close)]),
 			Error,
-			(	catch(http_socket::close_listener(Listener), _, true),
+			(	catch(http_socket_transport::close_listener(Listener), _, true),
 				throw(Error)
 			)
 		).
@@ -347,7 +347,7 @@
 			print_result(Result).
 
 		run(Result) :-
-			http_socket::open_listener('127.0.0.1', Port, Listener, []),
+			http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
 			threaded_once(serve_demo_requests(Listener, Port), Tag),
 			catch(
 				greetings_rest_client::run(Port, 'Ada', Result),
@@ -356,17 +356,17 @@
 					throw(Error)
 				)
 			),
-			http_socket::request_listener_shutdown(Listener),
+			http_socket_transport::request_listener_shutdown(Listener),
 			threaded_exit(serve_demo_requests(Listener, Port), Tag),
-			catch(http_socket::close_listener(Listener), _, true).
+			catch(http_socket_transport::close_listener(Listener), _, true).
 
 		serve_demo_requests(Listener, Port) :-
-			http_socket::serve_listener(Listener, greetings_rest_api(Port), 4, _ClientInfos, [shutdown(close)]).
+			http_socket_transport::serve_listener(Listener, greetings_rest_api(Port), 4, _ClientInfos, [shutdown(close)]).
 
 		cleanup_demo(Listener, Port, Tag) :-
-			http_socket::request_listener_shutdown(Listener),
+			http_socket_transport::request_listener_shutdown(Listener),
 			catch(threaded_exit(serve_demo_requests(Listener, Port), Tag), _, true),
-			catch(http_socket::close_listener(Listener), _, true).
+			catch(http_socket_transport::close_listener(Listener), _, true).
 
 		print_result(result(_Document, CreateResponse, LookupResponse, DeleteResponse)) :-
 			http_core::body(CreateResponse, content('application/json', json({message-CreateMessage}))),

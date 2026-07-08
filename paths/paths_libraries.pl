@@ -135,10 +135,10 @@ logtalk_library_path(http_htmx, library('http_htmx/')).
 logtalk_library_path(http_multipart, library('http_multipart/')).
 logtalk_library_path(http_parameters, library('http_parameters/')).
 logtalk_library_path(http_router, library('http_router/')).
-logtalk_library_path(http_server, library('http_server/')).
+logtalk_library_path(http_server_core, library('http_server_core/')).
 logtalk_library_path(http_session, library('http_session/')).
-logtalk_library_path(http_socket, library('http_socket/')).
-logtalk_library_path(http_socket_process, library('http_socket_process/')).
+logtalk_library_path(http_socket_transport, library('http_socket_transport/')).
+logtalk_library_path(http_process_transport, library('http_process_transport/')).
 logtalk_library_path(http_static_files, library('http_static_files/')).
 logtalk_library_path(http_websocket, library('http_websocket/')).
 logtalk_library_path(http_websocket_frames, library('http_websocket_frames/')).

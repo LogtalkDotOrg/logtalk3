@@ -33,7 +33,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="http_websocket" href="http_websocket.html" />
-    <link rel="prev" title="http_socket_process" href="http_socket_process.html" />
+    <link rel="prev" title="http_session" href="http_session.html" />
    
 </head>
 
@@ -172,10 +172,7 @@
 <li class="toctree-l2"><a class="reference internal" href="http_multipart.html"><code class="docutils literal notranslate"><span class="pre">http_multipart</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_parameters.html"><code class="docutils literal notranslate"><span class="pre">http_parameters</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_router.html"><code class="docutils literal notranslate"><span class="pre">http_router</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="http_server.html"><code class="docutils literal notranslate"><span class="pre">http_server</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_session.html"><code class="docutils literal notranslate"><span class="pre">http_session</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="http_socket.html"><code class="docutils literal notranslate"><span class="pre">http_socket</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="http_socket_process.html"><code class="docutils literal notranslate"><span class="pre">http_socket_process</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">http_static_files</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
@@ -375,8 +372,8 @@ rejects canonicalized escapes with the same outward <code class="docutils litera
 response used for missing files, falls back to configurable index files
 for directory targets, guesses the response media type using
 <code class="docutils literal notranslate"><span class="pre">mime_types</span></code>, emits <code class="docutils literal notranslate"><span class="pre">ETag</span></code>, <code class="docutils literal notranslate"><span class="pre">Last-Modified</span></code>, and <code class="docutils literal notranslate"><span class="pre">Accept-Ranges</span></code>
-metadata, and returns file-backed response bodies that <code class="docutils literal notranslate"><span class="pre">http_server</span></code>
-can stream efficiently.</p>
+metadata, and returns file-backed response bodies that
+<code class="docutils literal notranslate"><span class="pre">http_server_core</span></code> can stream efficiently.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -548,7 +545,7 @@ no separate cross-backend symlink-policy layer has been added yet</p></li>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="http_socket_process.html" class="btn btn-neutral float-left" title="http_socket_process" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="http_session.html" class="btn btn-neutral float-left" title="http_session" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="http_websocket.html" class="btn btn-neutral float-right" title="http_websocket" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

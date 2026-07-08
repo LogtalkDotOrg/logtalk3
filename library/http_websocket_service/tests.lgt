@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-25,
+		date is 2026-07-08,
 		comment is 'Unit tests for the "http_websocket_service" library.'
 	]).
 
@@ -453,7 +453,7 @@
 	raw_server_once(Listener, ResponseAtom) :-
 		socket::server_accept(Listener, Input, Output, _ClientInfo),
 		(	catch(
-				(	http_server::read_request(Input, _Request),
+				(	http_server_core::read_request(Input, _Request),
 					atom_codes(ResponseAtom, Bytes),
 					write_bytes(Bytes, Output),
 					flush_output(Output)

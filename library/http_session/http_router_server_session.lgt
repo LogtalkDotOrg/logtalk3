@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-07-08,
 		comment is 'Optional server-session middleware helpers for router objects importing the ``http_router`` category.',
 		parameters is [
 			'Manager' - 'Server-session manager handle used for request begin and response finish processing.'
@@ -37,8 +37,8 @@
 		comment is 'Router middleware helper that annotates a normalized request with a server-session handle and state before route dispatch.',
 		argnames is ['Request', 'Action'],
 		exceptions is [
-			'The configured manager is not an open server-session manager handle' - domain_error(http_server_session, 'Manager'),
-			'``Request`` is not a valid normalized HTTP request' - domain_error(http_server_session_request, 'Request')
+			'The configured manager is not an open server-session manager handle' - domain_error(http_server_core_session, 'Manager'),
+			'``Request`` is not a valid normalized HTTP request' - domain_error(http_server_core_session_request, 'Request')
 		]
 	]).
 
@@ -48,16 +48,16 @@
 		comment is 'Router response-middleware helper that finalizes server-session cookie lifecycle changes after route dispatch.',
 		argnames is ['Request', 'Response0', 'Response'],
 		exceptions is [
-			'``Request`` is not a valid annotated server-session request' - domain_error(http_server_session_request, 'Request'),
-			'``Response0`` is not a valid normalized HTTP response' - domain_error(http_server_session_response, 'Response0'),
+			'``Request`` is not a valid annotated server-session request' - domain_error(http_server_core_session_request, 'Request'),
+			'``Response0`` is not a valid normalized HTTP response' - domain_error(http_server_core_session_response, 'Response0'),
 			'The decorated response violates normalized HTTP response semantics' - domain_error(http_header_semantics, 'Header')
 		]
 	]).
 
 	annotate_server_session_request(Request, continue(AnnotatedRequest)) :-
-		http_server_session::begin(_Manager_, Request, AnnotatedRequest).
+		http_server_core_session::begin(_Manager_, Request, AnnotatedRequest).
 
 	add_server_session_response(Request, Response0, Response) :-
-		http_server_session::finish(Request, Response0, Response).
+		http_server_core_session::finish(Request, Response0, Response).
 
 :- end_category.

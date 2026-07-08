@@ -1271,7 +1271,7 @@ To load any library (including developer tools, ports, and contributions), use t
    http_authenticate_verifier_protocol <http_authenticate_verifier_protocol_0>
    http_htpasswd_verifier(Path) <http_htpasswd_verifier_1>
    http_router_basic_auth(Verifier,BaseOptions) <http_router_basic_auth_2>
-   http_server_basic_handler(Verifier,Handler,ProtectOptions) <http_server_basic_handler_3>
+   http_server_core_basic_handler(Verifier,Handler,ProtectOptions) <http_server_core_basic_handler_3>
 
 :ref:`http_client <library_http_client>`
 ----------------------------------------
@@ -1350,7 +1350,7 @@ To load any library (including developer tools, ports, and contributions), use t
    http_digest <http_digest_0>
    http_digest_verifier_protocol <http_digest_verifier_protocol_0>
    http_router_digest_auth(Verifier,ProtectOptions,AuthenticationInfoOptions) <http_router_digest_auth_3>
-   http_server_digest_handler(Verifier,Handler,ProtectOptions,AuthenticationInfoOptions) <http_server_digest_handler_4>
+   http_server_core_digest_handler(Verifier,Handler,ProtectOptions,AuthenticationInfoOptions) <http_server_core_digest_handler_4>
 
 :ref:`http_directory_listing <library_http_directory_listing>`
 --------------------------------------------------------------
@@ -1394,6 +1394,16 @@ To load any library (including developer tools, ports, and contributions), use t
    http_parameters <http_parameters_0>
    http_router_parameters <http_router_parameters_0>
 
+:ref:`http_process_transport <library_http_process_transport>`
+--------------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   http_process_transport <http_process_transport_0>
+
 :ref:`http_router <library_http_router>`
 ----------------------------------------
 
@@ -1404,15 +1414,15 @@ To load any library (including developer tools, ports, and contributions), use t
 
    http_router <http_router_0>
 
-:ref:`http_server <library_http_server>`
-----------------------------------------
+:ref:`http_server_core <library_http_server_core>`
+--------------------------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   http_server <http_server_0>
+   http_server_core <http_server_core_0>
 
 :ref:`http_session <library_http_session>`
 ------------------------------------------
@@ -1426,29 +1436,19 @@ To load any library (including developer tools, ports, and contributions), use t
    http_client_session(A) <http_client_session_1>
    http_cookie_jar <http_cookie_jar_0>
    http_router_server_session(Manager) <http_router_server_session_1>
-   http_server_session <http_server_session_0>
-   http_server_session_handler(Manager,Handler) <http_server_session_handler_2>
+   http_server_core_session <http_server_core_session_0>
+   http_server_core_session_handler(Manager,Handler) <http_server_core_session_handler_2>
 
-:ref:`http_socket <library_http_socket>`
-----------------------------------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-   http_socket <http_socket_0>
-   http_socket_protocol <http_socket_protocol_0>
-
-:ref:`http_socket_process <library_http_socket_process>`
---------------------------------------------------------
+:ref:`http_socket_transport <library_http_socket_transport>`
+------------------------------------------------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-   http_socket_process <http_socket_process_0>
+   http_socket_transport <http_socket_transport_0>
+   http_transport_protocol <http_transport_protocol_0>
 
 :ref:`http_static_files <library_http_static_files>`
 ----------------------------------------------------

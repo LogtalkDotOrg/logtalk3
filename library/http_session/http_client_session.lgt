@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-07-08,
 		comment is 'Stateful HTTP client sessions that add cookie persistence on top of the stateless ``http_client`` facade.',
 		remarks is [
 			'Option precedence' - 'When the same session default or per-request option is given multiple times, the first occurrence is used.',
@@ -556,13 +556,13 @@
 
 
 :- object(http_client_session,
-	extends(http_client_session(http_socket))).
+	extends(http_client_session(http_socket_transport))).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-06-26,
-		comment is 'By default, stateful HTTP client sessions use the ``http_socket`` library.'
+		comment is 'By default, stateful HTTP client sessions use the ``http_socket_transport`` library.'
 	]).
 
 :- end_object.

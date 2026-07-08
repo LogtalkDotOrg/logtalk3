@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-07,
+		date is 2026-07-08,
 		comment is 'Unit tests for the http_authenticate library.'
 	]).
 
@@ -35,7 +35,7 @@
 
 	cover(http_authenticate).
 	cover(http_htpasswd_verifier(_)).
-	cover(http_server_basic_handler(_, _, _)).
+	cover(http_server_core_basic_handler(_, _, _)).
 	cover(http_authenticate_test_verifier).
 	cover(http_authenticate_test_handler).
 	cover(http_authenticate_test_router).
@@ -82,7 +82,7 @@
 
 	test(http_authenticate_06, deterministic) :-
 		request_with_authorization('/protected', Request),
-		http_server_basic_handler(http_authenticate_test_verifier, http_authenticate_test_handler, [realm('test-realm')])::handle(Request, Response),
+		http_server_core_basic_handler(http_authenticate_test_verifier, http_authenticate_test_handler, [realm('test-realm')])::handle(Request, Response),
 		status(Response, status(200, 'OK')),
 		body(Response, content('text/plain', text('Mufasa'))).
 

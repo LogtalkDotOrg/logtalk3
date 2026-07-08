@@ -30,9 +30,9 @@ The library provides these public entities:
 	explicit in-memory cookie storage and request matching for client-side use
 - `http_client_session`
 	reusable HTTP client sessions that automatically replay and store cookies
-- `http_server_session`
+- `http_server_core_session`
 	server-side session manager over normalized request and response terms
-- `http_server_session_handler(_, _)`
+- `http_server_core_session_handler(_, _)`
 	portable handler wrapper that applies server-session begin and finish logic
 - `http_router_server_session(_)`
 	router middleware helpers for request annotation and response finalization
@@ -42,10 +42,10 @@ persistence is scoped to explicit client-session handles, while server-side
 session state stays in an explicit in-memory manager keyed by opaque cookie
 identifiers.
 
-By default, `http_client_session` uses the `http_socket` transport through the
+By default, `http_client_session` uses the `http_socket_transport` transport through the
 default `http_client` facade. The parametric `http_client_session(_HTTPSocket_)`
-object can also be parameterized with alternative `http_socket_protocol`
-implementations such as `http_socket_process`, which supports TLS-backed client
+object can also be parameterized with alternative `http_transport_protocol`
+implementations such as `http_process_transport`, which supports TLS-backed client
 transport.
 
 This library can be used with backend Prolog systems that support unbound
@@ -103,17 +103,17 @@ Sessions can also reopen a saved cookie jar directly:
 	     http_client_session::get(Session, 'http://127.0.0.1:8080/visits', Response, []),
 	     http_client_session::close(Session).
 
-Use `http_server_session` when you need explicit server-side session state over
+Use `http_server_core_session` when you need explicit server-side session state over
 normalized request and response terms:
 
-	| ?- http_server_session::open(Manager),
+	| ?- http_server_core_session::open(Manager),
 	     http_core::request(get, origin('/visits'), http(1, 1), [], empty, [], Request0),
-	     http_server_session::begin(Manager, Request0, Request),
-	     http_server_session::current(Request, Session),
-	     http_server_session::set(Session, visits, 1),
+	     http_server_core_session::begin(Manager, Request0, Request),
+	     http_server_core_session::current(Request, Session),
+	     http_server_core_session::set(Session, visits, 1),
 	     http_core::response(http(1, 1), status(200, 'OK'), [], empty, [], Response0),
-	     http_server_session::finish(Request, Response0, Response),
-	     http_server_session::close(Manager).
+	     http_server_core_session::finish(Request, Response0, Response),
+	     http_server_core_session::close(Manager).
 
 You can also work directly with the cookie jar:
 
@@ -157,8 +157,8 @@ Current scope
 - in-memory server-side session storage keyed by opaque cookie identifiers
 - direct server-session request begin/finish operations plus plain-handler and router adapters
 - client-session transport via the existing parameterized `http_client` facade;
-	with the default `http_socket` parameterization this means absolute
-	`http://` URLs, while parameterizations such as `http_socket_process` also
+	with the default `http_socket_transport` parameterization this means absolute
+	`http://` URLs, while parameterizations such as `http_process_transport` also
 	support `https://` URLs; cookie storage and SameSite source parsing accept
 	both `http://` and `https://` URLs plus bare `Origin` values
 - core handling for host-only and domain cookies, default path computation,
@@ -173,9 +173,9 @@ Current scope
 Current limitations
 -------------------
 
-- HTTPS transport is not available with the default `http_socket`
+- HTTPS transport is not available with the default `http_socket_transport`
 	parameterization; use a TLS-capable parameterization such as
-	`http_socket_process` when client-session transport must support `https://`
+	`http_process_transport` when client-session transport must support `https://`
 - automatic synchronization with the full Mozilla Public Suffix List snapshot
 - browser-specific temporary Lax-allowing-unsafe grace windows
 - full browser document lifecycle semantics for cookie replay decisions

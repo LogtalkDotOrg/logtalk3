@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-07-08,
 		comment is 'Auxiliary object defining the supported session-loop options and default values for callback-driven WebSocket services.'
 	]).
 
@@ -68,10 +68,10 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
-		comment is 'Callback-driven WebSocket session loops over upgraded WebSocket connections provided by a selected ``http_socket_protocol`` implementation, including automatic close-handshake orchestration, optional auto-pong, keepalive, and idle-timeout policies.',
+		date is 2026-07-08,
+		comment is 'Callback-driven WebSocket session loops over upgraded WebSocket connections provided by a selected ``http_transport_protocol`` implementation, including automatic close-handshake orchestration, optional auto-pong, keepalive, and idle-timeout policies.',
 		parameters is [
-			'HTTPSocket' - 'The object implementing ``http_socket_protocol``.',
+			'HTTPSocket' - 'The object implementing ``http_transport_protocol``.',
 			'Role' - 'Peer role for masking policy. Possible values are ``client`` and ``server``.',
 			'TextRepresentation' - 'Text representation to be used for text messages and close reasons. Possible values are ``atom`` (default), ``chars``, and ``codes``.'
 		],
@@ -92,7 +92,7 @@
 		argnames is ['Connection', 'Handler', 'State'],
 		exceptions is [
 			'``Connection`` is a variable' - instantiation_error,
-			'``Connection`` is not a valid upgraded WebSocket connection handle' - domain_error(http_socket_connection, 'Connection'),
+			'``Connection`` is not a valid upgraded WebSocket connection handle' - domain_error(http_socket_transport_connection, 'Connection'),
 			'``Handler`` is a variable' - instantiation_error,
 			'``Handler`` is not a valid WebSocket service handler' - domain_error(http_websocket_service_handler, 'Handler'),
 			'The session role parameter is neither ``client`` nor ``server``' - domain_error(http_websocket_session_role, '_Role_'),
@@ -118,7 +118,7 @@
 		argnames is ['Connection', 'Handler', 'State', 'Options'],
 		exceptions is [
 			'``Connection`` is a variable' - instantiation_error,
-			'``Connection`` is not a valid upgraded WebSocket connection handle' - domain_error(http_socket_connection, 'Connection'),
+			'``Connection`` is not a valid upgraded WebSocket connection handle' - domain_error(http_socket_transport_connection, 'Connection'),
 			'``Handler`` is a variable' - instantiation_error,
 			'``Handler`` is not a valid WebSocket service handler' - domain_error(http_websocket_service_handler, 'Handler'),
 			'``Options`` is a variable or a partial list' - instantiation_error,
@@ -153,7 +153,7 @@
 		argnames is ['Connection', 'HandlerDescriptor', 'State', 'UpdatedState', 'Options'],
 		exceptions is [
 			'``Connection`` is a variable' - instantiation_error,
-			'``Connection`` is not a valid upgraded WebSocket connection handle' - domain_error(http_socket_connection, 'Connection'),
+			'``Connection`` is not a valid upgraded WebSocket connection handle' - domain_error(http_socket_transport_connection, 'Connection'),
 			'``HandlerDescriptor`` is not a valid WebSocket service handler descriptor' - domain_error(http_websocket_service_handler, 'HandlerDescriptor'),
 			'The handler in ``HandlerDescriptor`` is a variable' - instantiation_error,
 			'The handler in ``HandlerDescriptor`` is not a valid WebSocket service handler' - domain_error(http_websocket_service_handler, 'Handler'),

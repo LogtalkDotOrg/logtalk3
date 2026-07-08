@@ -33,8 +33,8 @@
 		logtalk_load([
 			http_cookie_jar,
 			http_client_session,
-			http_server_session,
-			http_server_session_handler,
+			http_server_core_session,
+			http_server_core_session_handler,
 			http_router_server_session
 		], [
 			optimize(on)

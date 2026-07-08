@@ -30,8 +30,8 @@
 		logtalk_load(uuid(loader)),
 		logtalk_load(http_core(loader)),
 		logtalk_load(http_multipart(loader)),
-		logtalk_load(http_socket(loader)),
-		logtalk_load(http_socket_process(loader)),
+		logtalk_load(http_socket_transport(loader)),
+		logtalk_load(http_process_transport(loader)),
 		logtalk_load(http_websocket_handshake(loader)),
 		logtalk_load(http_client, [debug(on), source_data(on)]),
 		logtalk_load(test_objects),
@@ -39,8 +39,8 @@
 		logtalk_load(tests, [hook(lgtunit)]),
 		lgtunit::run_test_sets([
 			scheme_tests,
-			tests(http_socket),
-			tests(http_socket_process)
+			tests(http_socket_transport),
+			tests(http_process_transport)
 		])
 	)).
 

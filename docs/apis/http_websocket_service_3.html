@@ -175,11 +175,11 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-htmx"><span class="xref std std-ref">http_htmx</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-multipart"><span class="xref std std-ref">http_multipart</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-parameters"><span class="xref std std-ref">http_parameters</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-process-transport"><span class="xref std std-ref">http_process_transport</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-router"><span class="xref std std-ref">http_router</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-server"><span class="xref std std-ref">http_server</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-server-core"><span class="xref std std-ref">http_server_core</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-session"><span class="xref std std-ref">http_session</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-socket"><span class="xref std std-ref">http_socket</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-socket-process"><span class="xref std std-ref">http_socket_process</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-socket-transport"><span class="xref std std-ref">http_socket_transport</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-static-files"><span class="xref std std-ref">http_static_files</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-websocket"><span class="xref std std-ref">http_websocket</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-websocket-frames"><span class="xref std std-ref">http_websocket_frames</span></a></li>
@@ -400,11 +400,11 @@
 <section id="http-websocket-service-httpsocket-role-textrepresentation">
 <h1><code class="docutils literal notranslate"><span class="pre">http_websocket_service(HTTPSocket,Role,TextRepresentation)</span></code><a class="headerlink" href="#http-websocket-service-httpsocket-role-textrepresentation" title="Link to this heading"></a></h1>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">HTTPSocket</span></code> - The object implementing <code class="docutils literal notranslate"><span class="pre">http_socket_protocol</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HTTPSocket</span></code> - The object implementing <code class="docutils literal notranslate"><span class="pre">http_transport_protocol</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Role</span></code> - Peer role for masking policy. Possible values are <code class="docutils literal notranslate"><span class="pre">client</span></code> and <code class="docutils literal notranslate"><span class="pre">server</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">TextRepresentation</span></code> - Text representation to be used for text messages and close reasons. Possible values are <code class="docutils literal notranslate"><span class="pre">atom</span></code> (default), <code class="docutils literal notranslate"><span class="pre">chars</span></code>, and <code class="docutils literal notranslate"><span class="pre">codes</span></code>.</p></li>
 </ul>
-<p>Callback-driven WebSocket session loops over upgraded WebSocket connections provided by a selected <code class="docutils literal notranslate"><span class="pre">http_socket_protocol</span></code> implementation, including automatic close-handshake orchestration, optional auto-pong, keepalive, and idle-timeout policies.</p>
+<p>Callback-driven WebSocket session loops over upgraded WebSocket connections provided by a selected <code class="docutils literal notranslate"><span class="pre">http_transport_protocol</span></code> implementation, including automatic close-handshake orchestration, optional auto-pong, keepalive, and idle-timeout policies.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -414,7 +414,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-26</div>
+<div class="line"><strong>Date:</strong> 2026-07-08</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -499,7 +499,7 @@
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Connection</span></code> is not a valid upgraded WebSocket connection handle:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_connection,Connection)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_transport_connection,Connection)</span></code></div>
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> is a variable:</div>
 <div class="line-block">
@@ -586,7 +586,7 @@
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Connection</span></code> is not a valid upgraded WebSocket connection handle:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_connection,Connection)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_transport_connection,Connection)</span></code></div>
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> is a variable:</div>
 <div class="line-block">
@@ -703,7 +703,7 @@
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Connection</span></code> is not a valid upgraded WebSocket connection handle:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_connection,Connection)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_transport_connection,Connection)</span></code></div>
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">HandlerDescriptor</span></code> is not a valid WebSocket service handler descriptor:</div>
 <div class="line-block">

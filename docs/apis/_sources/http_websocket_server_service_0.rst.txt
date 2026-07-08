@@ -8,21 +8,21 @@
 ``http_websocket_server_service``
 =================================
 
-By default, the server-side convenience for callback-driven WebSocket sessions with atom text representation, including registry-backed broadcast helpers, uses the ``http_socket`` library.
+By default, the server-side convenience for callback-driven WebSocket sessions with atom text representation, including registry-backed broadcast helpers, uses the ``http_socket_transport`` library.
 
 | **Availability:** 
 |    ``logtalk_load(http_websocket_service(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-26
+| **Date:** 2026-07-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
 | **Extends:**
-|    ``public`` :ref:`http_websocket_service(http_socket,server,atom) <http_websocket_service/3>`
+|    ``public`` :ref:`http_websocket_service(http_socket_transport,server,atom) <http_websocket_service/3>`
 
 | **Remarks:**
 |    (none)

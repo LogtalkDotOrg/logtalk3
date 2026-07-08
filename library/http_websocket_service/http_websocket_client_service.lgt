@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-07-08,
 		comment is 'Client-side convenience for callback-driven WebSocket sessions with atom text representation, combining the opening handshake, optional initial outbound messages, and the higher-level session loop.',
 		parnames is ['HTTPSocket']
 	]).
@@ -46,7 +46,7 @@
 			'The WebSocket server response is not a valid opening handshake response' - domain_error(http_client_websocket_response, 'Response'),
 			'``Handler`` is a variable' - instantiation_error,
 			'``Handler`` is not a valid WebSocket service handler' - domain_error(http_websocket_service_handler, 'Handler'),
-			'The upgraded connection handle is invalid' - domain_error(http_socket_connection, 'Connection'),
+			'The upgraded connection handle is invalid' - domain_error(http_socket_transport_connection, 'Connection'),
 			'The delegated session loop raises a WebSocket session error' - domain_error(http_websocket_session_sequence, 'Frame'),
 			'``Handler`` returns an invalid reply' - domain_error(http_websocket_service_handler_reply, 'Reply')
 		]
@@ -79,13 +79,13 @@
 			'The WebSocket server response is not a valid opening handshake response' - domain_error(http_client_websocket_response, 'Response'),
 			'``Handler`` is a variable' - instantiation_error,
 			'``Handler`` is not a valid WebSocket service handler' - domain_error(http_websocket_service_handler, 'Handler'),
-			'The upgraded connection handle is invalid' - domain_error(http_socket_connection, 'Connection'),
+			'The upgraded connection handle is invalid' - domain_error(http_socket_transport_connection, 'Connection'),
 			'The delegated session loop raises a WebSocket session error' - domain_error(http_websocket_session_sequence, 'Frame'),
 			'``Handler`` returns an invalid reply' - domain_error(http_websocket_service_handler_reply, 'Reply')
 		],
 		remarks is [
 			'Repeated options' - 'When the same handshake or session option is given multiple times, the first occurrence is used.',
-			'Handshake options' - 'The `headers/1`, `query/1`, `version/1`, `protocols/1`, `key/1`, and `connection_options/1` options are forwarded to `open_websocket/4`. The accepted URL schemes depend on the selected transport parameterization, e.g. `ws://` for `http_socket` and both `ws://` and `wss://` for `http_socket_process`.',
+			'Handshake options' - 'The `headers/1`, `query/1`, `version/1`, `protocols/1`, `key/1`, and `connection_options/1` options are forwarded to `open_websocket/4`. The accepted URL schemes depend on the selected transport parameterization, e.g. `ws://` for `http_socket_transport` and both `ws://` and `wss://` for `http_process_transport`.',
 			'Session option ``auto_pong(on|off)``' - 'Controls automatic pong replies during the session loop.',
 			'Session option ``initial_messages(Messages)``' - 'Writes the given list of normalized outbound messages before entering the session loop.',
 			'Session option ``keepalive_interval(Seconds)``' - 'Schedules empty ping messages when the peer stays silent for the given positive number of seconds. This option requires backend thread support.',
@@ -236,13 +236,13 @@
 
 
 :- object(http_websocket_client_service,
-	extends(http_websocket_service(http_socket, client, atom))).
+	extends(http_websocket_service(http_socket_transport, client, atom))).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
-		comment is 'By default, the client-side convenience for callback-driven WebSocket sessions with atom text representation, combining the opening handshake, optional initial outbound messages, and the higher-level session loop, uses the ``http_socket`` library.'
+		date is 2026-07-08,
+		comment is 'By default, the client-side convenience for callback-driven WebSocket sessions with atom text representation, combining the opening handshake, optional initial outbound messages, and the higher-level session loop, uses the ``http_socket_transport`` library.'
 	]).
 
 :- end_object.

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-29,
+		date is 2026-07-08,
 		comment is 'Explicit S3 client sessions carrying default request options.'
 	]).
 

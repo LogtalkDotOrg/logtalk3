@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-25,
+		date is 2026-07-08,
 		comment is 'Unit tests for the "open_ai" library.'
 	]).
 
@@ -126,7 +126,7 @@
 				]
 			),
 			threaded_exit(serve_client_test_once(Listener), Tag),
-			http_socket_process::close_listener(Listener),
+			http_process_transport::close_listener(Listener),
 			status(Response, status(200, 'OK')),
 			body(Response, content('application/json', json({method-get, path-'/responses/resp_123/input_items'}))).
 
@@ -142,7 +142,7 @@
 				[base_url(BaseURL)]
 			),
 			threaded_exit(serve_client_test_once(Listener), Tag),
-			http_socket_process::close_listener(Listener),
+			http_process_transport::close_listener(Listener),
 			status(Response, status(200, 'OK')),
 			body(Response, content('application/json', json({method-post, path-'/responses'}))).
 
@@ -158,15 +158,15 @@
 				[base_url(BaseURL)]
 			),
 			threaded_exit(serve_client_test_once(Listener), Tag),
-			http_socket_process::close_listener(Listener),
+			http_process_transport::close_listener(Listener),
 			status(Response, status(200, 'OK')),
 			body(Response, content('application/json', json({method-delete, path-'/files/file_123'}))).
 
 		open_client_test_listener(Port, Listener) :-
-			http_socket_process::open_listener('127.0.0.1', Port, Listener, []).
+			http_process_transport::open_listener('127.0.0.1', Port, Listener, []).
 
 		serve_client_test_once(Listener) :-
-			catch(http_socket_process::serve_once(Listener, open_ai_client_test_handler, _ClientInfo), _, true).
+			catch(http_process_transport::serve_once(Listener, open_ai_client_test_handler, _ClientInfo), _, true).
 
 		local_base_url(Port, URL) :-
 			atomic_list_concat(['http://127.0.0.1:', Port], URL).

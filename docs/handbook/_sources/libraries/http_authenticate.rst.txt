@@ -14,8 +14,8 @@ The library currently provides these public entities:
   protection, and challenge helpers
 - ``http_htpasswd_verifier(_)`` portable Apache ``.htpasswd`` subset
   verifier supporting ``{SHA}`` and ``$apr1$`` entries
-- ``http_server_basic_handler(_, _, _)`` portable handler wrapper that
-  applies Basic protection around another object implementing
+- ``http_server_core_basic_handler(_, _, _)`` portable handler wrapper
+  that applies Basic protection around another object implementing
   ``http_handler_protocol``
 - ``http_router_basic_auth(_, _)`` router companion category that
   protects routes declaring ``basic_auth/1`` metadata
@@ -55,13 +55,13 @@ Basic challenge parsing and request verification:
 
    | ?- http_authenticate::protect_request(Request, verifier, Action, [realm('private')]).
 
-Wrap a normal handler with ``http_server_basic_handler(_, _, _)`` when
-you want a portable middleware-style integration point for Basic
+Wrap a normal handler with ``http_server_core_basic_handler(_, _, _)``
+when you want a portable middleware-style integration point for Basic
 verification:
 
 ::
 
-   | ?- Handler = http_server_basic_handler(verifier, app_handler, [realm('private')]).
+   | ?- Handler = http_server_core_basic_handler(verifier, app_handler, [realm('private')]).
 
 Use ``http_router_basic_auth(_, _)`` in router objects importing
 ``http_router`` when you want per-route protection driven by normal

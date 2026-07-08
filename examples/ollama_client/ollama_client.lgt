@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-30,
+		date is 2026-07-08,
 		comment is 'Ollama client example using native model discovery and the OpenAI-compatible client facade.'
 	]).
 
@@ -168,11 +168,11 @@
 	ollama_request(showModel, Body, Response, Options) :-
 		show_url(Options, URL),
 		ollama_http_options(Options, HTTPOptions),
-		http_client(http_socket_process)::post(URL, Body, Response, HTTPOptions).
+		http_client(http_process_transport)::post(URL, Body, Response, HTTPOptions).
 	ollama_request(listTags, empty, Response, Options) :-
 		tags_url(Options, URL),
 		ollama_http_options(Options, HTTPOptions),
-		http_client(http_socket_process)::get(URL, Response, HTTPOptions).
+		http_client(http_process_transport)::get(URL, Response, HTTPOptions).
 
 	default_base_url('http://127.0.0.1:11434/v1').
 

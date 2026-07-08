@@ -15,7 +15,7 @@ Client-side convenience for callback-driven WebSocket sessions with atom text re
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-26
+| **Date:** 2026-07-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -79,7 +79,7 @@ Builds a WebSocket opening handshake from the given absolute WebSocket URL suppo
 |    ``Handler`` is not a valid WebSocket service handler:
 |        ``domain_error(http_websocket_service_handler,Handler)``
 |    The upgraded connection handle is invalid:
-|        ``domain_error(http_socket_connection,Connection)``
+|        ``domain_error(http_socket_transport_connection,Connection)``
 |    The delegated session loop raises a WebSocket session error:
 |        ``domain_error(http_websocket_session_sequence,Frame)``
 |    ``Handler`` returns an invalid reply:
@@ -148,7 +148,7 @@ Builds a WebSocket opening handshake from the given absolute WebSocket URL suppo
 |    ``Handler`` is not a valid WebSocket service handler:
 |        ``domain_error(http_websocket_service_handler,Handler)``
 |    The upgraded connection handle is invalid:
-|        ``domain_error(http_socket_connection,Connection)``
+|        ``domain_error(http_socket_transport_connection,Connection)``
 |    The delegated session loop raises a WebSocket session error:
 |        ``domain_error(http_websocket_session_sequence,Frame)``
 |    ``Handler`` returns an invalid reply:
@@ -157,7 +157,7 @@ Builds a WebSocket opening handshake from the given absolute WebSocket URL suppo
 | **Remarks:**
 
     - Repeated options: When the same handshake or session option is given multiple times, the first occurrence is used.
-    - Handshake options: The `headers/1`, `query/1`, `version/1`, `protocols/1`, `key/1`, and `connection_options/1` options are forwarded to `open_websocket/4`. The accepted URL schemes depend on the selected transport parameterization, e.g. `ws://` for `http_socket` and both `ws://` and `wss://` for `http_socket_process`.
+    - Handshake options: The `headers/1`, `query/1`, `version/1`, `protocols/1`, `key/1`, and `connection_options/1` options are forwarded to `open_websocket/4`. The accepted URL schemes depend on the selected transport parameterization, e.g. `ws://` for `http_socket_transport` and both `ws://` and `wss://` for `http_process_transport`.
     - Session option ``auto_pong(on|off)``: Controls automatic pong replies during the session loop.
     - Session option ``initial_messages(Messages)``: Writes the given list of normalized outbound messages before entering the session loop.
     - Session option ``keepalive_interval(Seconds)``: Schedules empty ping messages when the peer stays silent for the given positive number of seconds. This option requires backend thread support.

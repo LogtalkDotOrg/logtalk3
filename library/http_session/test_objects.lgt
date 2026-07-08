@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-07-08,
 		comment is 'Local HTTP handler used by the http_session library tests.'
 	]).
 
@@ -65,7 +65,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-07-08,
 		comment is 'Local HTTP handler used to exercise the http_session request option and wrapper predicates.'
 	]).
 
@@ -120,23 +120,23 @@
 :- end_object.
 
 
-	:- object(http_server_session_counter_handler,
+	:- object(http_server_core_session_counter_handler,
 		implements(http_handler_protocol)).
 
 		:- info([
 			version is 1:0:0,
 			author is 'Paulo Moura',
-			date is 2026-05-28,
+			date is 2026-07-08,
 			comment is 'Local HTTP handler used by the http_session library tests to exercise the plain server-session handler wrapper.'
 		]).
 
 		handle(Request, Response) :-
-			http_server_session::current(Request, Session),
-			(	http_server_session::get(Session, visits, CurrentCount) ->
+			http_server_core_session::current(Request, Session),
+			(	http_server_core_session::get(Session, visits, CurrentCount) ->
 				VisitCount is CurrentCount + 1
 			;	VisitCount = 1
 			),
-			http_server_session::set(Session, visits, VisitCount),
+			http_server_core_session::set(Session, visits, VisitCount),
 			http_core::version(Request, Version),
 			number_codes(VisitCount, VisitCountCodes),
 			atom_codes(VisitCountText, VisitCountCodes),
@@ -145,13 +145,13 @@
 	:- end_object.
 
 
-	:- object(http_server_session_event_logger,
-		extends(http_server_session)).
+	:- object(http_server_core_session_event_logger,
+		extends(http_server_core_session)).
 
 		:- info([
 			version is 1:0:0,
 			author is 'Paulo Moura',
-			date is 2026-05-28,
+			date is 2026-07-08,
 			comment is 'Local server-session specialization used by the ``http_session`` library tests to record lifecycle hook events.'
 		]).
 
@@ -183,20 +183,20 @@
 		events(Events) :-
 			findall(Event, event_(Event), Events).
 
-		http_server_session_event(_Manager, Event) :-
+		http_server_core_session_event(_Manager, Event) :-
 			assertz(event_(Event)).
 
 	:- end_object.
 
 
-	:- object(http_server_session_router(_Manager_),
+	:- object(http_server_core_session_router(_Manager_),
 		implements(http_handler_protocol),
 		imports([http_router, http_router_server_session(_Manager_)])).
 
 		:- info([
 			version is 1:0:0,
 			author is 'Paulo Moura',
-			date is 2026-05-28,
+			date is 2026-07-08,
 			comment is 'Local router object used by the ``http_session`` library tests to exercise the router-side server-session middleware helpers.'
 		]).
 
@@ -213,12 +213,12 @@
 
 		visits(Request, Response) :-
 			http_core::property(Request, route(visits)),
-			http_server_session::current(Request, Session),
-			(	http_server_session::get(Session, visits, CurrentCount) ->
+			http_server_core_session::current(Request, Session),
+			(	http_server_core_session::get(Session, visits, CurrentCount) ->
 				VisitCount is CurrentCount + 1
 			;	VisitCount = 1
 			),
-			http_server_session::set(Session, visits, VisitCount),
+			http_server_core_session::set(Session, visits, VisitCount),
 			http_core::version(Request, Version),
 			number_codes(VisitCount, VisitCountCodes),
 			atom_codes(VisitCountText, VisitCountCodes),

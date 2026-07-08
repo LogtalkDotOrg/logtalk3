@@ -114,7 +114,7 @@ Current workflow
   want to inspect multipart form-data bodies after parsing.
 - The `http_client` library can send common form-data requests directly from a
   `form_data(Items)` descriptor.
-- The `http_server` library keeps multipart request bodies in the normalized
+- The `http_server_core` library keeps multipart request bodies in the normalized
   form expected by this library, so handlers can inspect incoming multipart
   requests without reparsing them.
 

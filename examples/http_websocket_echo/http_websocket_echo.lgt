@@ -28,7 +28,7 @@
 	:- info([
 		version is 0:1:0,
 		author is 'Paulo Moura',
-		date is 2026-06-12,
+		date is 2026-07-08,
 		comment is 'Small WebSocket echo server used by the example.'
 	]).
 
@@ -50,15 +50,15 @@
 	% session. It opens the listener, waits for one client, serves that client,
 	% and then closes the listener.
 	serve(Port, Session) :-
-		http_socket::open_listener('127.0.0.1', Port, Listener, []),
+		http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
 		catch(
 			serve_listener(Listener, Session),
 			Error,
-			(	catch(http_socket::close_listener(Listener), _, true),
+			(	catch(http_socket_transport::close_listener(Listener), _, true),
 				throw(Error)
 			)
 		),
-		http_socket::close_listener(Listener).
+		http_socket_transport::close_listener(Listener).
 
 	serve_listener(Listener, session(HandshakeResponse, ReceivedMessage, ReplyMessage)) :-
 		http_websocket::accept(Listener, WebSocket, _ClientInfo, [protocol(chat)]),
@@ -164,7 +164,7 @@
 		% The demo opens an ephemeral port first so the client can connect to a
 		% known endpoint while the server thread blocks waiting for the handshake.
 		run(Result) :-
-			http_socket::open_listener('127.0.0.1', Port, Listener, []),
+			http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
 			threaded_once(websocket_echo_server::serve_listener(Listener, ServerSession), Tag),
 			catch(
 				websocket_echo_client::run(Port, hello, ClientSession),
@@ -173,15 +173,15 @@
 					throw(Error)
 				)
 			),
-			http_socket::request_listener_shutdown(Listener),
+			http_socket_transport::request_listener_shutdown(Listener),
 			threaded_exit(websocket_echo_server::serve_listener(Listener, ServerSession), Tag),
-			catch(http_socket::close_listener(Listener), _, true),
+			catch(http_socket_transport::close_listener(Listener), _, true),
 			Result = result(ServerSession, ClientSession).
 
 		cleanup_demo(Listener, Tag) :-
-			http_socket::request_listener_shutdown(Listener),
+			http_socket_transport::request_listener_shutdown(Listener),
 			catch(threaded_exit(websocket_echo_server::serve_listener(Listener, _ServerSession), Tag), _, true),
-			catch(http_socket::close_listener(Listener), _, true).
+			catch(http_socket_transport::close_listener(Listener), _, true).
 
 		print_result(result(_ServerSession, session(_HandshakeResponse, SentMessage, ReplyMessage))) :-
 			http_websocket_messages::payload(SentMessage, SentText),

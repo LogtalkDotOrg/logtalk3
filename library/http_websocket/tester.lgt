@@ -35,14 +35,14 @@
 		logtalk_load(json(loader)),
 		logtalk_load(term_io(loader)),
 		logtalk_load(http_client(loader)),
-		logtalk_load(http_server(loader)),
+		logtalk_load(http_server_core(loader)),
 		logtalk_load(http_websocket_service(loader)),
 		logtalk_load(http_websocket, [debug(on), source_data(on)]),
 		logtalk_load(lgtunit(loader)),
 		logtalk_load(tests, [hook(lgtunit)]),
 		lgtunit::run_test_sets([
-			tests(http_socket),
-			tests(http_socket_process)
+			tests(http_socket_transport),
+			tests(http_process_transport)
 		])
 	)).
 

@@ -35,7 +35,7 @@ The library provides these public entities:
 - `http_digest`
 	core Digest parsing, generation, request authorization, request protection,
 	challenge building, and `Authentication-Info` response decoration
-- `http_server_digest_handler(_, _, _, _)`
+- `http_server_core_digest_handler(_, _, _, _)`
 	portable handler wrapper that applies Digest protection and response
 	decoration around another object implementing `http_handler_protocol`
 - `http_router_digest_auth(_, _, _)`
@@ -54,7 +54,7 @@ for cookie storage.
 The server-side entities are portable across the backends supported by the
 normalized HTTP library. The `http_client_digest_session` helper additionally
 depends on the socket-backed HTTP client stack and is therefore available on
-the same backends supported by the `http_client` and `http_socket` libraries.
+the same backends supported by the `http_client` and `http_socket_transport` libraries.
 
 
 API documentation
@@ -88,10 +88,10 @@ challenge parsing and request verification:
 
 	| ?- http_digest::unauthorized_response(Challenge, Response, [realm('private'), nonce_secret('secret')]).
 
-Wrap a normal handler with `http_server_digest_handler(_, _, _, _)` when you
+Wrap a normal handler with `http_server_core_digest_handler(_, _, _, _)` when you
 want a portable middleware-style integration point for Digest verification:
 
-	| ?- Handler = http_server_digest_handler(verifier, app_handler, [realm('private'), nonce_secret('secret')], []).
+	| ?- Handler = http_server_core_digest_handler(verifier, app_handler, [realm('private'), nonce_secret('secret')], []).
 
 Use `http_router_digest_auth(_, _, _)` in router objects importing
 `http_router` when you want per-route protection driven by normal route

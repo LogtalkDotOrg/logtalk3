@@ -20,7 +20,7 @@ stack:
 
 - Start here when you need normalized ``request/6`` and ``response/5``
   terms, shared protocols, body codecs, or wire parsing and generation.
-- Add `http_server <../http_server/NOTES.md>`__ or
+- Add `http_server_core <../http_server_core/NOTES.md>`__ or
   `http_client <../http_client/NOTES.md>`__ when you need transport-side
   orchestration on top of those normalized messages.
 - Add `http_router <../http_router/NOTES.md>`__ when you want

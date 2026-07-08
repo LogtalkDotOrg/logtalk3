@@ -199,7 +199,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_server <http_server/0::accept_websocket/3>`
+* :ref:`http_server_core <http_server_core/0::accept_websocket/3>`
 
 ``ack/3``
 ---------
@@ -1594,7 +1594,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_server_session <http_server_session/0::begin/3>`
+* :ref:`http_server_core_session <http_server_core_session/0::begin/3>`
 
 ``begin_transaction/3``
 -----------------------
@@ -2949,7 +2949,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`http_client_digest_session(HTTPSocket) <http_client_digest_session/1::close/1>`
 * :ref:`http_client_session(A) <http_client_session/1::close/1>`
 * :ref:`http_cookie_jar <http_cookie_jar/0::close/1>`
-* :ref:`http_server_session <http_server_session/0::close/1>`
+* :ref:`http_server_core_session <http_server_core_session/0::close/1>`
 * :ref:`http_websocket(HTTPSocket) <http_websocket/1::close/1>`
 * :ref:`http_websocket_service_registry <http_websocket_service_registry/0::close/1>`
 * :ref:`s3_session(A) <s3_session/1::close/1>`
@@ -2993,7 +2993,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_socket_protocol <http_socket_protocol/0::close_connection/1>`
+* :ref:`http_transport_protocol <http_transport_protocol/0::close_connection/1>`
 
 ``close_connection_pool/1``
 ---------------------------
@@ -3003,7 +3003,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_socket_protocol <http_socket_protocol/0::close_connection_pool/1>`
+* :ref:`http_transport_protocol <http_transport_protocol/0::close_connection_pool/1>`
 
 ``close_listener/1``
 --------------------
@@ -3013,7 +3013,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_socket_protocol <http_socket_protocol/0::close_listener/1>`
+* :ref:`http_transport_protocol <http_transport_protocol/0::close_listener/1>`
 
 ``close_polygon/2``
 -------------------
@@ -3499,7 +3499,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_socket_protocol <http_socket_protocol/0::connection_pool_stats/2>`
+* :ref:`http_transport_protocol <http_transport_protocol/0::connection_pool_stats/2>`
 
 ``connection_streams/3``
 ------------------------
@@ -3509,7 +3509,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_socket_protocol <http_socket_protocol/0::connection_streams/3>`
+* :ref:`http_transport_protocol <http_transport_protocol/0::connection_streams/3>`
 
 ``consensus_ranking/2``
 -----------------------
@@ -3851,7 +3851,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_server_session <http_server_session/0::count/2>`
+* :ref:`http_server_core_session <http_server_core_session/0::count/2>`
 
 ``count_arrangements/3``
 ------------------------
@@ -4275,7 +4275,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_server_session <http_server_session/0::current/2>`
+* :ref:`http_server_core_session <http_server_core_session/0::current/2>`
 * :ref:`zipperp <zipperp/0::current/2>`
 
 ``current_host/1``
@@ -4367,7 +4367,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_server_session <http_server_session/0::data/2>`
+* :ref:`http_server_core_session <http_server_core_session/0::data/2>`
 * :ref:`nmea_protocol <nmea_protocol/0::data/2>`
 * :ref:`ports_profiler <ports_profiler/0::data/2>`
 
@@ -5441,7 +5441,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_server_session <http_server_session/0::destroy/1>`
+* :ref:`http_server_core_session <http_server_core_session/0::destroy/1>`
 
 ``determinant/2``
 -----------------
@@ -6019,7 +6019,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_server <http_server/0::dispatch/3>`
+* :ref:`http_server_core <http_server_core/0::dispatch/3>`
 
 ``dispatch_map_id/2``
 ---------------------
@@ -6927,7 +6927,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_server_session <http_server_session/0::ensure/2>`
+* :ref:`http_server_core_session <http_server_core_session/0::ensure/2>`
 
 ``ensure_directory/1``
 ----------------------
@@ -7394,7 +7394,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_socket_protocol <http_socket_protocol/0::exchange/3>`
+* :ref:`http_transport_protocol <http_transport_protocol/0::exchange/3>`
 
 ``exchange/4``
 --------------
@@ -7405,7 +7405,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_client_core <http_client_core/0::exchange/4>`
-* :ref:`http_socket_protocol <http_socket_protocol/0::exchange/4>`
+* :ref:`http_transport_protocol <http_transport_protocol/0::exchange/4>`
 
 ``exchange/5``
 --------------
@@ -7415,7 +7415,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_socket_protocol <http_socket_protocol/0::exchange/5>`
+* :ref:`http_transport_protocol <http_transport_protocol/0::exchange/5>`
 
 ``exchange_bind/4``
 -------------------
@@ -7466,7 +7466,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_socket_protocol <http_socket_protocol/0::exchange_sequence/3>`
+* :ref:`http_transport_protocol <http_transport_protocol/0::exchange_sequence/3>`
 
 ``exchange_sequence/4``
 -----------------------
@@ -7477,7 +7477,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_client_core <http_client_core/0::exchange_sequence/4>`
-* :ref:`http_socket_protocol <http_socket_protocol/0::exchange_sequence/4>`
+* :ref:`http_transport_protocol <http_transport_protocol/0::exchange_sequence/4>`
 
 ``exchange_unbind/4``
 ---------------------
@@ -8299,7 +8299,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_server_session <http_server_session/0::finish/3>`
+* :ref:`http_server_core_session <http_server_core_session/0::finish/3>`
 
 ``finished_by/2``
 -----------------
@@ -9130,7 +9130,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_server_session <http_server_session/0::gc/2>`
+* :ref:`http_server_core_session <http_server_core_session/0::gc/2>`
 
 ``generate/1``
 --------------
@@ -9485,7 +9485,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_client(HTTPSocket) <http_client/1::get/3>`
-* :ref:`http_server_session <http_server_session/0::get/3>`
+* :ref:`http_server_core_session <http_server_core_session/0::get/3>`
 * :ref:`memcached <memcached/0::get/3>`
 * :ref:`redis <redis/0::get/3>`
 
@@ -16728,7 +16728,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http_client_session(A) <http_client_session/1::open/1>`
 * :ref:`http_cookie_jar <http_cookie_jar/0::open/1>`
-* :ref:`http_server_session <http_server_session/0::open/1>`
+* :ref:`http_server_core_session <http_server_core_session/0::open/1>`
 * :ref:`http_websocket_service_registry <http_websocket_service_registry/0::open/1>`
 * :ref:`s3_session(A) <s3_session/1::open/1>`
 
@@ -16742,7 +16742,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http_client_session(A) <http_client_session/1::open/2>`
 * :ref:`http_cookie_jar <http_cookie_jar/0::open/2>`
-* :ref:`http_server_session <http_server_session/0::open/2>`
+* :ref:`http_server_core_session <http_server_core_session/0::open/2>`
 * :ref:`http_websocket(HTTPSocket) <http_websocket/1::open/2>`
 * :ref:`s3_session(A) <s3_session/1::open/2>`
 
@@ -16816,7 +16816,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_socket_protocol <http_socket_protocol/0::open_connection/4>`
+* :ref:`http_transport_protocol <http_transport_protocol/0::open_connection/4>`
 
 ``open_connection_pool/4``
 --------------------------
@@ -16826,7 +16826,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_socket_protocol <http_socket_protocol/0::open_connection_pool/4>`
+* :ref:`http_transport_protocol <http_transport_protocol/0::open_connection_pool/4>`
 
 ``open_listener/4``
 -------------------
@@ -16836,7 +16836,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_socket_protocol <http_socket_protocol/0::open_listener/4>`
+* :ref:`http_transport_protocol <http_transport_protocol/0::open_listener/4>`
 
 ``open_session/4``
 ------------------
@@ -20676,7 +20676,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_server <http_server/0::read_request/2>`
+* :ref:`http_server_core <http_server_core/0::read_request/2>`
 
 ``read_response/2``
 -------------------
@@ -21403,7 +21403,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_server_session <http_server_session/0::remove/3>`
+* :ref:`http_server_core_session <http_server_core_session/0::remove/3>`
 
 ``removeDependent/1``
 ---------------------
@@ -21464,7 +21464,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_server_session <http_server_session/0::renew/2>`
+* :ref:`http_server_core_session <http_server_core_session/0::renew/2>`
 
 ``replace/3``
 -------------
@@ -21748,7 +21748,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_socket_protocol <http_socket_protocol/0::request_listener_shutdown/1>`
+* :ref:`http_transport_protocol <http_transport_protocol/0::request_listener_shutdown/1>`
 
 ``request_origin/2``
 --------------------
@@ -21788,7 +21788,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_socket_protocol <http_socket_protocol/0::request_shutdown/1>`
+* :ref:`http_transport_protocol <http_transport_protocol/0::request_shutdown/1>`
 * :ref:`http_websocket_server_service(HTTPSocket) <http_websocket_server_service/1::request_shutdown/1>`
 
 ``rescale/3``
@@ -23235,7 +23235,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_server <http_server/0::serve/3>`
+* :ref:`http_server_core <http_server_core/0::serve/3>`
 * :ref:`queuep <queuep/0::serve/3>`
 
 ``serve/4``
@@ -23268,7 +23268,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_server <http_server/0::serve_connection/3>`
+* :ref:`http_server_core <http_server_core/0::serve_connection/3>`
 
 ``serve_listener/4``
 --------------------
@@ -23278,7 +23278,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_socket_protocol <http_socket_protocol/0::serve_listener/4>`
+* :ref:`http_transport_protocol <http_transport_protocol/0::serve_listener/4>`
 
 ``serve_listener/5``
 --------------------
@@ -23288,7 +23288,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_socket_protocol <http_socket_protocol/0::serve_listener/5>`
+* :ref:`http_transport_protocol <http_transport_protocol/0::serve_listener/5>`
 
 ``serve_once/3``
 ----------------
@@ -23298,7 +23298,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_socket_protocol <http_socket_protocol/0::serve_once/3>`
+* :ref:`http_transport_protocol <http_transport_protocol/0::serve_once/3>`
 
 ``serve_once/5``
 ----------------
@@ -23339,7 +23339,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_socket_protocol <http_socket_protocol/0::serve_until_shutdown/4>`
+* :ref:`http_transport_protocol <http_transport_protocol/0::serve_until_shutdown/4>`
 
 ``serve_until_shutdown/5``
 --------------------------
@@ -23349,7 +23349,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_socket_protocol <http_socket_protocol/0::serve_until_shutdown/5>`
+* :ref:`http_transport_protocol <http_transport_protocol/0::serve_until_shutdown/5>`
 * :ref:`http_websocket_server_service(HTTPSocket) <http_websocket_server_service/1::serve_until_shutdown/5>`
 
 ``serve_until_shutdown/6``
@@ -23370,7 +23370,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_server <http_server/0::serve_websocket/4>`
+* :ref:`http_server_core <http_server_core/0::serve_websocket/4>`
 
 ``serve_websocket_once/5``
 --------------------------
@@ -23380,7 +23380,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_socket_protocol <http_socket_protocol/0::serve_websocket_once/5>`
+* :ref:`http_transport_protocol <http_transport_protocol/0::serve_websocket_once/5>`
 
 ``server_accept/4``
 -------------------
@@ -23501,7 +23501,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_server_session <http_server_session/0::set/3>`
+* :ref:`http_server_core_session <http_server_core_session/0::set/3>`
 * :ref:`memcached <memcached/0::set/3>`
 
 ``set/4``
@@ -25090,7 +25090,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_socket_protocol <http_socket_protocol/0::supported_request_scheme/1>`
+* :ref:`http_transport_protocol <http_transport_protocol/0::supported_request_scheme/1>`
 
 ``supported_websocket_scheme/1``
 --------------------------------
@@ -25100,7 +25100,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_socket_protocol <http_socket_protocol/0::supported_websocket_scheme/1>`
+* :ref:`http_transport_protocol <http_transport_protocol/0::supported_websocket_scheme/1>`
 
 ``suspend_monitor/0``
 ---------------------
@@ -25464,7 +25464,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_socket_process <http_socket_process/0::temporary_tls_credentials/3>`
+* :ref:`http_process_transport <http_process_transport/0::temporary_tls_credentials/3>`
 
 ``temporary_tls_credentials_files/3``
 -------------------------------------
@@ -25474,7 +25474,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_socket_process <http_socket_process/0::temporary_tls_credentials_files/3>`
+* :ref:`http_process_transport <http_process_transport/0::temporary_tls_credentials_files/3>`
 
 ``term/2``
 ----------
@@ -27884,7 +27884,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_server <http_server/0::write_response/2>`
+* :ref:`http_server_core <http_server_core/0::write_response/2>`
 
 ``write_stream/3``
 ------------------

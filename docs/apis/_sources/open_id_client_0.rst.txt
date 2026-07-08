@@ -8,14 +8,14 @@
 ``open_id_client``
 ==================
 
-HTTP-facing OpenID Connect client predicates using http_socket_process for TLS support.
+HTTP-facing OpenID Connect client predicates using http_process_transport for TLS support.
 
 | **Availability:** 
 |    ``logtalk_load(open_id(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-27
+| **Date:** 2026-07-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``

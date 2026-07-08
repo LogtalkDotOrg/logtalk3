@@ -6,19 +6,19 @@
 This library provides higher-level callback-driven WebSocket session
 loops on top of the ``http_websocket_session`` state-machine library and
 upgraded WebSocket connections provided by a selected
-``http_socket_protocol`` implementation. It adds connection lifecycle
+``http_transport_protocol`` implementation. It adds connection lifecycle
 ownership, optional auto-pong, keepalive, and idle-timeout policies,
 client- and server-side conveniences that collapse the opening handshake
 and the session loop into a single call, and a registry-backed broadcast
 helper for multi-session servers.
 
-By default, the convenience objects use the ``http_socket`` transport.
-The parametric
+By default, the convenience objects use the ``http_socket_transport``
+transport. The parametric
 ``http_websocket_service(_HTTPSocket_, _Role_, _TextRepresentation_)``,
 ``http_websocket_client_service(_HTTPSocket_)``, and
 ``http_websocket_server_service(_HTTPSocket_)`` objects can also use
-alternative ``http_socket_protocol`` implementations such as
-``http_socket_process``.
+alternative ``http_transport_protocol`` implementations such as
+``http_process_transport``.
 
 This library can be used with backend Prolog systems that support
 unbound integer arithmetic and the ``sockets`` library: ECLiPSe, SICStus
@@ -67,8 +67,8 @@ The current implementation provides:
   ``http_client::open_websocket/4``, optional initial outbound messages,
   and the higher-level session loop. The accepted URL schemes depend on
   the selected transport parameterization, e.g. ``ws://`` for
-  ``http_socket`` and both ``ws://`` and ``wss://`` for
-  ``http_socket_process``.
+  ``http_socket_transport`` and both ``ws://`` and ``wss://`` for
+  ``http_process_transport``.
 - ``serve_once/6-7`` in the ``http_websocket_server_service`` object as
   a server-side convenience that combines the selected transport
   parameterization ``serve_websocket_once/5`` predicate with the
@@ -178,9 +178,9 @@ or:
 
 The accepted WebSocket URL schemes depend on the selected transport
 parameterization. For example, the default
-``http_websocket_client_service`` object uses ``http_socket`` and
-therefore accepts ``ws://`` URLs, while
-``http_websocket_client_service(http_socket_process)`` also accepts
+``http_websocket_client_service`` object uses ``http_socket_transport``
+and therefore accepts ``ws://`` URLs, while
+``http_websocket_client_service(http_process_transport)`` also accepts
 ``wss://`` URLs.
 
 The ``initial_messages(Messages)`` option writes the given list of
@@ -213,8 +213,8 @@ automatically. They also accept the ``keepalive_interval/1``,
 
 For server-side helpers, the ``Listener`` must come from the same
 selected transport parameterization as the service object, e.g.
-``http_websocket_server_service(http_socket_process)`` must be paired
-with a listener opened by ``http_socket_process::open_listener/4``.
+``http_websocket_server_service(http_process_transport)`` must be paired
+with a listener opened by ``http_process_transport::open_listener/4``.
 
 Registry-backed server helper
 -----------------------------
@@ -323,12 +323,12 @@ Current workflow
   the service layer handle the opening handshake, any configured initial
   outbound messages, and the final connection close.
 - When the client transport must support secure ``wss://`` URLs, use the
-  a TLS-capable parameterization such as ``http_socket_process``.
+  a TLS-capable parameterization such as ``http_process_transport``.
 - When server-side code already owns a listener and wants a single entry
   point for handshake plus session execution, call
   ``http_websocket_server_service::serve_once/6-7``.
 - When server-side code uses a non-default transport such as
-  ``http_socket_process``, use the matching parametric service object
+  ``http_process_transport``, use the matching parametric service object
   and open the listener with that same transport parameterization.
 - When server-side code needs multiple active sessions plus queued
   broadcast delivery, create a registry with

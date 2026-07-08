@@ -172,10 +172,7 @@
 <li class="toctree-l2"><a class="reference internal" href="http_multipart.html"><code class="docutils literal notranslate"><span class="pre">http_multipart</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_parameters.html"><code class="docutils literal notranslate"><span class="pre">http_parameters</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_router.html"><code class="docutils literal notranslate"><span class="pre">http_router</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="http_server.html"><code class="docutils literal notranslate"><span class="pre">http_server</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_session.html"><code class="docutils literal notranslate"><span class="pre">http_session</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="http_socket.html"><code class="docutils literal notranslate"><span class="pre">http_socket</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="http_socket_process.html"><code class="docutils literal notranslate"><span class="pre">http_socket_process</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_static_files.html"><code class="docutils literal notranslate"><span class="pre">http_static_files</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_websocket.html"><code class="docutils literal notranslate"><span class="pre">http_websocket</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_websocket_frames.html"><code class="docutils literal notranslate"><span class="pre">http_websocket_frames</span></code></a></li>
@@ -382,7 +379,7 @@ orchestrate close replies and optional pong replies.</p>
 does not create threads and does not depend on socket support. The
 higher-level callback-driven session loops, keepalive and idle-timeout
 policies, and the registry-backed broadcast helpers for upgraded
-<code class="docutils literal notranslate"><span class="pre">http_socket</span></code> connections are provided by the
+<code class="docutils literal notranslate"><span class="pre">http_socket_transport</span></code> connections are provided by the
 <code class="docutils literal notranslate"><span class="pre">http_websocket_service</span></code> library.</p>
 <p>This library can be used with backend Prolog systems that support
 unbound integer arithmetic.</p>
@@ -494,7 +491,7 @@ messages remain single final frames regardless of the option.</p>
 <h2>Current workflow<a class="headerlink" href="#current-workflow" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>Complete the opening handshake with <code class="docutils literal notranslate"><span class="pre">http_client::open_websocket/4</span></code>
-or <code class="docutils literal notranslate"><span class="pre">http_socket::serve_websocket_once/5</span></code>.</p></li>
+or <code class="docutils literal notranslate"><span class="pre">http_socket_transport::serve_websocket_once/5</span></code>.</p></li>
 <li><p>Use the <code class="docutils literal notranslate"><span class="pre">http_websocket_messages</span></code> layer when you only need stateless
 message normalization and simple reassembly.</p></li>
 <li><p>Use the <code class="docutils literal notranslate"><span class="pre">http_websocket_session</span></code> layer when you need stateful reads

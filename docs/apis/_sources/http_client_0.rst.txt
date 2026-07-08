@@ -8,7 +8,7 @@
 ``http_client``
 ===============
 
-By default, the request-oriented HTTP client facade uses the ``http_socket`` library.
+By default, the request-oriented HTTP client facade uses the ``http_socket_transport`` library.
 
 | **Availability:** 
 |    ``logtalk_load(http_client(loader))``
@@ -22,7 +22,7 @@ By default, the request-oriented HTTP client facade uses the ``http_socket`` lib
 
 
 | **Extends:**
-|    ``public`` :ref:`http_client(http_socket) <http_client/1>`
+|    ``public`` :ref:`http_client(http_socket_transport) <http_client/1>`
 
 | **Remarks:**
 |    (none)

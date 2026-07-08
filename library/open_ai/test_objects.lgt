@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-25,
+		date is 2026-07-08,
 		comment is 'Sample backend used by the open_ai tests.'
 	]).
 
@@ -40,7 +40,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-25,
+		date is 2026-07-08,
 		comment is 'HTTP handler used by the open_ai client tests.'
 	]).
 

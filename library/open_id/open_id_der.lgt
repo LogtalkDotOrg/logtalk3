@@ -13,7 +13,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-27,
+		date is 2026-07-08,
 		comment is 'DER and PEM helpers for OpenID Connect JWT signature verification.'
 	]).
 

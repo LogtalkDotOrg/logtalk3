@@ -24,8 +24,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-30,
-		comment is 'OpenAI-compatible client facade using http_client(http_socket_process) for HTTPS/WSS support.'
+		date is 2026-07-08,
+		comment is 'OpenAI-compatible client facade using http_client(http_process_transport) for HTTPS/WSS support.'
 	]).
 
 	:- public(request/5).
@@ -70,11 +70,11 @@
 		atom_concat(BaseURL, ExpandedPath, URL).
 
 	request_method(get, URL, _Body, Response, Options) :-
-		http_client(http_socket_process)::get(URL, Response, Options).
+		http_client(http_process_transport)::get(URL, Response, Options).
 	request_method(delete, URL, _Body, Response, Options) :-
-		http_client(http_socket_process)::delete(URL, Response, Options).
+		http_client(http_process_transport)::delete(URL, Response, Options).
 	request_method(post, URL, Body, Response, Options) :-
-		http_client(http_socket_process)::post(URL, Body, Response, Options).
+		http_client(http_process_transport)::post(URL, Body, Response, Options).
 
 	valid_operation_method(Method) :-
 		(	operation_method(Method) ->

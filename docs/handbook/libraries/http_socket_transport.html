@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>http_socket_transport &mdash; Logtalk 3.101.0</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=ab892a5e"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <!-- begin favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#355b95" />
+    <meta name="theme-color" content="#ffffff" />
+    <!-- end favicon -->
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            The Logtalk Handbook
+              <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                3.101.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+    
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../userman/index.html">User Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../refman/index.html">Reference Manual</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Developer Tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ports/index.html">Ports</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributions/index.html">Contributions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bibliography.html">Bibliography</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+</ul>
+
+    <p class="caption"><span class="caption-text">External Contents</span></p>
+    <ul>
+    <li class="toctree-l1"><a class="reference internal" href="../../apis/index.html">APIs</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://logtalk.org">Logtalk website</a></li>
+    <li class="toctree-l1"><a class="reference internal" href="https://github.com/LogtalkDotOrg/logtalk3">GitHub repo</a></li>
+    </ul>
+  
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">The Logtalk Handbook</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">http_socket_transport</span></code></li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/libraries/http_socket_transport.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="http-socket-transport">
+<span id="library-http-socket-transport"></span><h1><code class="docutils literal notranslate"><span class="pre">http_socket_transport</span></code><a class="headerlink" href="#http-socket-transport" title="Link to this heading"></a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">http_socket_transport</span></code> library is the first transport-aware layer
+on top of the <code class="docutils literal notranslate"><span class="pre">http_client_core</span></code>, <code class="docutils literal notranslate"><span class="pre">http_server_core</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">sockets</span></code> libraries. It uses TCP sockets for connection management
+while delegating HTTP message framing and connection semantics to the
+existing stream core and server layers.</p>
+<p>This library can be used with backend Prolog systems that support
+unbound integer arithmetic and the <code class="docutils literal notranslate"><span class="pre">sockets</span></code> library: ECLiPSe, SICStus
+Prolog, SWI-Prolog, Trealla Prolog, and XVM.</p>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<p>Open the
+<a class="reference external" href="../../apis/library_index.html#http_socket_transport">../../apis/library_index.html#http_socket_transport</a>
+link in a web browser.</p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
+<p>To load the library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(http_socket_transport(loader)).
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this library, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(http_socket_transport(tester)).
+</pre></div>
+</div>
+</section>
+<section id="current-scope">
+<h2>Current scope<a class="headerlink" href="#current-scope" title="Link to this heading"></a></h2>
+<p>The current implementation provides nineteen public predicates, grouped
+by responsibility:</p>
+<ul class="simple">
+<li><p>Listener lifecycle: <code class="docutils literal notranslate"><span class="pre">open_listener/4</span></code>, <code class="docutils literal notranslate"><span class="pre">close_listener/1</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">request_listener_shutdown/1</span></code>.</p></li>
+<li><p>Reusable client connections: <code class="docutils literal notranslate"><span class="pre">open_connection/4</span></code>,
+<code class="docutils literal notranslate"><span class="pre">close_connection/1</span></code>, <code class="docutils literal notranslate"><span class="pre">connection_streams/3</span></code>, <code class="docutils literal notranslate"><span class="pre">exchange/3</span></code>,
+<code class="docutils literal notranslate"><span class="pre">exchange_sequence/3</span></code>, <code class="docutils literal notranslate"><span class="pre">exchange/4</span></code>, and <code class="docutils literal notranslate"><span class="pre">exchange_sequence/4</span></code>.</p></li>
+<li><p>Managed connection pools: <code class="docutils literal notranslate"><span class="pre">open_connection_pool/4</span></code>,
+<code class="docutils literal notranslate"><span class="pre">close_connection_pool/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">connection_pool_stats/2</span></code>.</p></li>
+<li><p>Server-side request serving: <code class="docutils literal notranslate"><span class="pre">serve_once/3</span></code>,
+<code class="docutils literal notranslate"><span class="pre">serve_websocket_once/5</span></code>, <code class="docutils literal notranslate"><span class="pre">serve_listener/4</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">serve_listener/5</span></code>.</p></li>
+<li><p>Open-ended serving control: <code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/4</span></code>,
+<code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/5</span></code>, and <code class="docutils literal notranslate"><span class="pre">request_shutdown/1</span></code>.</p></li>
+</ul>
+<p>Although it exposes these transport-oriented helpers, the library stays
+focused on socket-backed connection and listener management. It
+delegates HTTP message framing and connection semantics to
+<code class="docutils literal notranslate"><span class="pre">http_client_core</span></code> and <code class="docutils literal notranslate"><span class="pre">http_server_core</span></code>, and delegates socket
+creation and teardown to the <code class="docutils literal notranslate"><span class="pre">sockets</span></code> library.</p>
+<p>Reusable client connections are represented by
+<code class="docutils literal notranslate"><span class="pre">http_connection(Host,</span> <span class="pre">Port,</span> <span class="pre">...)</span></code> handle terms that carry normalized
+endpoint metadata and can be passed to <code class="docutils literal notranslate"><span class="pre">exchange/3</span></code>,
+<code class="docutils literal notranslate"><span class="pre">exchange_sequence/3</span></code>, <code class="docutils literal notranslate"><span class="pre">connection_streams/3</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">close_connection/1</span></code>.</p>
+<p>Accepted WebSocket upgrades are represented by
+<code class="docutils literal notranslate"><span class="pre">http_websocket_connection(ClientInfo,</span> <span class="pre">Input,</span> <span class="pre">Output)</span></code> handle terms
+that can be passed to <code class="docutils literal notranslate"><span class="pre">connection_streams/3</span></code> and
+<code class="docutils literal notranslate"><span class="pre">close_connection/1</span></code>.</p>
+<p>Managed connection pools are represented by
+<code class="docutils literal notranslate"><span class="pre">http_connection_pool(Host,</span> <span class="pre">Port,</span> <span class="pre">...)</span></code> handle terms that carry
+normalized endpoint metadata and can be passed to <code class="docutils literal notranslate"><span class="pre">exchange/3</span></code>,
+<code class="docutils literal notranslate"><span class="pre">exchange_sequence/3</span></code>, <code class="docutils literal notranslate"><span class="pre">close_connection_pool/1</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">connection_pool_stats/2</span></code>.</p>
+<p>Open-ended serving is controlled by a user-supplied control term. A
+control term is any fresh non-variable term chosen by the caller to
+identify one active <code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/4</span></code> or
+<code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/5</span></code> loop. The same term is later passed to
+<code class="docutils literal notranslate"><span class="pre">request_shutdown/1</span></code> to stop that specific serving loop,
+distinguishing it from any other listener loops running at the same
+time.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">open_connection_pool/4</span></code> predicate supports the following options:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">min_size(N)</span></code> pre-opens <code class="docutils literal notranslate"><span class="pre">N</span></code> reusable connections when the pool is
+created. The default is <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_size(N)</span></code> limits the pool to at most <code class="docutils literal notranslate"><span class="pre">N</span></code> managed connections.
+The default is <code class="docutils literal notranslate"><span class="pre">10</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">connection_options(Options)</span></code> passes socket options through to
+<code class="docutils literal notranslate"><span class="pre">open_connection/4</span></code> when creating pooled connections.</p></li>
+</ul>
+<p>Pool exchanges fail immediately with
+<code class="docutils literal notranslate"><span class="pre">resource_error(http_socket_transport_connection_pool)</span></code> when no pooled
+connection is available and the pool is already at its maximum size.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">serve_listener/5</span></code> predicate supports the following option
+families:</p>
+<p>Shutdown options:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">shutdown(keep_open)</span></code> leaves the listener open after the bounded
+serving loop. This is the default.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">shutdown(close)</span></code> closes the listener when the bounded serving loop
+finishes or aborts.</p></li>
+</ul>
+<p>Worker options:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">workers(serial)</span></code> serves accepted connections sequentially in the
+caller thread. This is the default.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">workers(per_connection)</span></code> spawns one worker thread per accepted
+connection and waits for all workers before returning.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">workers(pool(N))</span></code> serves accepted connections in batches of up to
+<code class="docutils literal notranslate"><span class="pre">N</span></code> worker threads, waiting for each batch to finish before
+accepting the next batch.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">workers(pool(N,</span> <span class="pre">rolling))</span></code> keeps up to <code class="docutils literal notranslate"><span class="pre">N</span></code> worker threads active
+and accepts the next connection as soon as one worker finishes.</p></li>
+</ul>
+<p>Calling <code class="docutils literal notranslate"><span class="pre">request_listener_shutdown/1</span></code> for a listener with an active
+bounded <code class="docutils literal notranslate"><span class="pre">serve_listener/5</span></code> loop wakes any blocked accept call and lets
+the loop return with the client information terms accepted before the
+shutdown request.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/4</span></code> and <code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/5</span></code> predicates
+support the <code class="docutils literal notranslate"><span class="pre">workers/1</span></code> option family:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">workers(serial)</span></code> serves accepted connections sequentially in the
+caller thread. This is the default.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">workers(per_connection)</span></code> spawns one worker thread per accepted
+connection and waits for active workers when shutdown is requested.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">workers(pool(N))</span></code> serves accepted connections using at most <code class="docutils literal notranslate"><span class="pre">N</span></code>
+concurrent worker threads, waiting for worker completion notifications
+before accepting additional connections.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">workers(pool(N,</span> <span class="pre">rolling))</span></code> is accepted as an explicit alias for the
+rolling fixed-size worker-pool policy used by <code class="docutils literal notranslate"><span class="pre">workers(pool(N))</span></code>.</p></li>
+</ul>
+<p>Open-ended serving loops should use a fresh control term for each call
+to <code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/4</span></code> or <code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/5</span></code>.</p>
+<p>When the same listener, serving, or pool-management option is given
+multiple times, the first occurrence is used.</p>
+</section>
+<section id="websocket-handshake-workflow">
+<h2>WebSocket handshake workflow<a class="headerlink" href="#websocket-handshake-workflow" title="Link to this heading"></a></h2>
+<p>The current WebSocket transport workflow is intentionally limited to the
+opening handshake handoff:</p>
+<ul class="simple">
+<li><p>Client-side code can use <code class="docutils literal notranslate"><span class="pre">http_client::open_websocket/4</span></code> to obtain a
+reusable upgraded connection handle.</p></li>
+<li><p>Server-side code can use <code class="docutils literal notranslate"><span class="pre">serve_websocket_once/5</span></code> with a handler
+that builds a valid <code class="docutils literal notranslate"><span class="pre">101</span> <span class="pre">Switching</span> <span class="pre">Protocols</span></code> response, typically
+via <code class="docutils literal notranslate"><span class="pre">http_server_core::accept_websocket/3</span></code>.</p></li>
+<li><p>When the opening handshake succeeds, the returned upgraded connection
+remains open and its streams are available through
+<code class="docutils literal notranslate"><span class="pre">connection_streams/3</span></code> for use with <code class="docutils literal notranslate"><span class="pre">http_websocket::read_frame/2</span></code>
+and <code class="docutils literal notranslate"><span class="pre">http_websocket::write_frame/2</span></code> or, at the next abstraction
+level, with <code class="docutils literal notranslate"><span class="pre">http_websocket_messages::read_message/2</span></code> and
+<code class="docutils literal notranslate"><span class="pre">http_websocket_messages::write_message/2</span></code>, or with the stateful
+<code class="docutils literal notranslate"><span class="pre">http_websocket_session</span></code> layer when interleaved control frames and
+role-aware masking policies matter, including automatic close replies
+and optional automatic pong replies, or with the
+<code class="docutils literal notranslate"><span class="pre">http_websocket_service</span></code> layer, which provides the higher-level
+<code class="docutils literal notranslate"><span class="pre">run_session/3-4</span></code> callback loop that takes ownership of the upgraded
+connection and closes it automatically after the close handshake
+completes, the client-side <code class="docutils literal notranslate"><span class="pre">http_websocket_client_service::open/4-5</span></code>
+convenience, and the server-side
+<code class="docutils literal notranslate"><span class="pre">http_websocket_server_service::serve_once/6-7</span></code> convenience.</p></li>
+<li><p>Rejected or malformed handshakes are written to the peer and then
+reported as errors by <code class="docutils literal notranslate"><span class="pre">serve_websocket_once/5</span></code>; the accepted streams
+are closed in that case.</p></li>
+</ul>
+</section>
+<section id="current-limitations">
+<h2>Current limitations<a class="headerlink" href="#current-limitations" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Availability depends on the supported backends of the <code class="docutils literal notranslate"><span class="pre">sockets</span></code>
+library.</p></li>
+<li><p>The library does not provide TLS or URL-based request helpers.</p></li>
+<li><p>The WebSocket transport helper is limited to the opening handshake and
+upgraded connection handle management. It does not provide frame
+parsing, message I/O, or higher-level session handling.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">workers(per_connection)</span></code> and <code class="docutils literal notranslate"><span class="pre">workers(pool(N))</span></code> options
+depend on backend thread support.</p></li>
+<li><p>Server-side helpers do not provide supervision trees.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 1998-2026, Paulo Moura.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

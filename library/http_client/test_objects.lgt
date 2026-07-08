@@ -143,6 +143,6 @@
 	]).
 
 	handle(Request, Response) :-
-		http_server::accept_websocket(Request, Response, [protocol(chat)]).
+		http_server_core::accept_websocket(Request, Response, [protocol(chat)]).
 
 :- end_object.

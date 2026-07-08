@@ -8,7 +8,7 @@
 ``http_client_digest_session``
 ==============================
 
-By deafult, Stateful HTTP Digest client sessions use the ``http_socket`` library.
+By deafult, Stateful HTTP Digest client sessions use the ``http_socket_transport`` library.
 
 | **Availability:** 
 |    ``logtalk_load(http_digest(loader))``
@@ -22,7 +22,7 @@ By deafult, Stateful HTTP Digest client sessions use the ``http_socket`` library
 
 
 | **Extends:**
-|    ``public`` :ref:`http_client_digest_session(http_socket) <http_client_digest_session/1>`
+|    ``public`` :ref:`http_client_digest_session(http_socket_transport) <http_client_digest_session/1>`
 
 | **Remarks:**
 |    (none)

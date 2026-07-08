@@ -330,13 +330,13 @@ Objects
    http_multipart <http_multipart_0>
    http_octet_stream_body_codec <http_octet_stream_body_codec_0>
    http_parameters <http_parameters_0>
-   http_server <http_server_0>
-   http_server_basic_handler(Verifier,Handler,ProtectOptions) <http_server_basic_handler_3>
-   http_server_digest_handler(Verifier,Handler,ProtectOptions,AuthenticationInfoOptions) <http_server_digest_handler_4>
-   http_server_session <http_server_session_0>
-   http_server_session_handler(Manager,Handler) <http_server_session_handler_2>
-   http_socket <http_socket_0>
-   http_socket_process <http_socket_process_0>
+   http_process_transport <http_process_transport_0>
+   http_server_core <http_server_core_0>
+   http_server_core_basic_handler(Verifier,Handler,ProtectOptions) <http_server_core_basic_handler_3>
+   http_server_core_digest_handler(Verifier,Handler,ProtectOptions,AuthenticationInfoOptions) <http_server_core_digest_handler_4>
+   http_server_core_session <http_server_core_session_0>
+   http_server_core_session_handler(Manager,Handler) <http_server_core_session_handler_2>
+   http_socket_transport <http_socket_transport_0>
    http_static_files <http_static_files_0>
    http_text_body_codec <http_text_body_codec_0>
    http_websocket <http_websocket_0>
@@ -786,7 +786,7 @@ Protocols
    http_handler_protocol <http_handler_protocol_0>
    http_request_protocol <http_request_protocol_0>
    http_response_protocol <http_response_protocol_0>
-   http_socket_protocol <http_socket_protocol_0>
+   http_transport_protocol <http_transport_protocol_0>
    http_websocket_service_handler_protocol <http_websocket_service_handler_protocol_0>
    ieee_754_fields_protocol <ieee_754_fields_protocol_0>
    ieee_754_protocol <ieee_754_protocol_0>

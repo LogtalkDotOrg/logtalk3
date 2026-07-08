@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-11,
+		date is 2026-07-08,
 		comment is 'Helper session handler used by http_websocket wrapper tests.'
 	]).
 
@@ -44,7 +44,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-11,
+		date is 2026-07-08,
 		comment is 'Helper client session handler that closes after receiving one text reply.'
 	]).
 
@@ -63,7 +63,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-22,
+		date is 2026-07-08,
 		comment is 'Unit tests for the "http_websocket" library.'
 	]).
 

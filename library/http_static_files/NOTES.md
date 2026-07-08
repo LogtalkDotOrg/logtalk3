@@ -31,7 +31,7 @@ escapes with the same outward `404 Not Found` response used for missing files,
 falls back to configurable index files for directory targets, guesses the
 response media type using `mime_types`, emits `ETag`, `Last-Modified`, and
 `Accept-Ranges` metadata, and returns file-backed response bodies that
-`http_server` can stream efficiently.
+`http_server_core` can stream efficiently.
 
 
 API documentation

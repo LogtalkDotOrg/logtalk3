@@ -45,7 +45,7 @@ The example illustrates five basic steps:
 2. Provide a verifier object implementing `http_digest_verifier_protocol` by deriving `HA1` values from the sample credentials.
 3. Delegate ordinary request paths to `http_static_files::serve/5`.
 4. Delegate a separate browsing prefix to `http_directory_listing::serve/5` with custom presentation options.
-5. Wrap the static-site handler with `http_server_digest_handler(_, _, _, _)` so the whole site requires valid Digest credentials.
+5. Wrap the static-site handler with `http_server_core_digest_handler(_, _, _, _)` so the whole site requires valid Digest credentials.
 
 Load the example with:
 
@@ -170,5 +170,5 @@ Digest-authentication wrapper stay visible: the handler strips a `/browse`
 prefix before calling `http_directory_listing::serve/5`, strips the leading
 slash from ordinary file requests before calling `http_static_files::serve/5`,
 keeps the Digest verifier logic in its own object, and lets
-`http_server_digest_handler(_, _, _, _)` take care of request protection,
+`http_server_core_digest_handler(_, _, _, _)` take care of request protection,
 challenge generation, and `Authentication-Info` response decoration.

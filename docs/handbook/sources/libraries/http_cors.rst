@@ -9,7 +9,7 @@ requests as CORS or preflight requests, builds direct preflight
 responses from CORS policies, and decorates normalized responses with
 the relevant ``Access-Control-*`` headers.
 
-This library reuses the ``http_core``, ``http_server``, and
+This library reuses the ``http_core``, ``http_server_core``, and
 ``http_router``. It uses normalized request and response terms and can
 be called directly from plain handlers or from router hooks and response
 middleware.
@@ -193,7 +193,8 @@ unique or the metadata is shared across same-path matches. This allows
 Plain handler integration
 -------------------------
 
-For plain handlers using ``http_server``, the recommended pattern is:
+For plain handlers using ``http_server_core``, the recommended pattern
+is:
 
 1. detect preflight requests with ``is_preflight_request/1``
 2. build the direct preflight response with ``preflight_response/3``

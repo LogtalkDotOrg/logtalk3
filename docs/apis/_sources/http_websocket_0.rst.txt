@@ -8,7 +8,7 @@
 ``http_websocket``
 ==================
 
-By default, the high-level WebSocket predicates use the ``http_socket`` library.
+By default, the high-level WebSocket predicates use the ``http_socket_transport`` library.
 
 | **Availability:** 
 |    ``logtalk_load(http_websocket(loader))``
@@ -22,7 +22,7 @@ By default, the high-level WebSocket predicates use the ``http_socket`` library.
 
 
 | **Extends:**
-|    ``public`` :ref:`http_websocket(http_socket) <http_websocket/1>`
+|    ``public`` :ref:`http_websocket(http_socket_transport) <http_websocket/1>`
 
 | **Remarks:**
 |    (none)

@@ -135,7 +135,7 @@ Upload the same local `report.txt` file to the same custom endpoint:
 
 Use an explicit session handle to carry defaults:
 
-    | ?- s3_session(http_socket_process)::open(
+    | ?- s3_session(http_process_transport)::open(
              Session,
              [
                  region('eu-west-1'),
@@ -143,8 +143,8 @@ Use an explicit session handle to carry defaults:
                  amz_date('20240627T120000Z')
              ]
          ),
-         s3_session(http_socket_process)::list_buckets(Session, Buckets, []),
-         s3_session(http_socket_process)::close(Session).
+         s3_session(http_process_transport)::list_buckets(Session, Buckets, []),
+         s3_session(http_process_transport)::close(Session).
 
 Generate a presigned download URL for `report.txt`:
 

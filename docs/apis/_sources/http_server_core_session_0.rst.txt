@@ -1,0 +1,534 @@
+.. index:: single: http_server_core_session
+.. _http_server_core_session/0:
+
+.. rst-class:: right
+
+**object**
+
+``http_server_core_session``
+============================
+
+Server-side HTTP session manager over normalized request and response terms using opaque cookie identifiers and an in-memory session store.
+
+| **Availability:** 
+|    ``logtalk_load(http_session(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-07-08
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`date <date/0>`
+|    :ref:`http_cookies(Representation) <http_cookies/1>`
+|    :ref:`http_core <http_core/0>`
+|    :ref:`ids <ids/0>`
+|    :ref:`list <list/0>`
+|    :ref:`os <os/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: open/1
+.. _http_server_core_session/0::open/1:
+
+``open/1``
+^^^^^^^^^^
+
+Opens a new server-session manager using the default cookie and timeout options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open(Manager)``
+| **Mode and number of proofs:**
+|    ``open(-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+
+
+------------
+
+.. index:: open/2
+.. _http_server_core_session/0::open/2:
+
+``open/2``
+^^^^^^^^^^
+
+Opens a new server-session manager using the given cookie, timeout, and store options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open(Manager,Options)``
+| **Mode and number of proofs:**
+|    ``open(-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+
+
+------------
+
+.. index:: close/1
+.. _http_server_core_session/0::close/1:
+
+``close/1``
+^^^^^^^^^^^
+
+Closes a server-session manager and discards all in-memory request contexts and stored sessions owned by it.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``close(Manager)``
+| **Mode and number of proofs:**
+|    ``close(+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Manager`` is a variable:
+|        ``instantiation_error``
+|    ``Manager`` is neither a variable nor an open server-session manager handle:
+|        ``domain_error(http_server_core_session,Manager)``
+
+
+------------
+
+.. index:: begin/3
+.. _http_server_core_session/0::begin/3:
+
+``begin/3``
+^^^^^^^^^^^
+
+Begins server-session processing for a normalized request, annotating it with a per-request session handle and the current session state.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``begin(Manager,Request,AnnotatedRequest)``
+| **Mode and number of proofs:**
+|    ``begin(+compound,+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Manager`` is a variable:
+|        ``instantiation_error``
+|    ``Manager`` is neither a variable nor an open server-session manager handle:
+|        ``domain_error(http_server_core_session,Manager)``
+|    ``Request`` is not a valid normalized HTTP request:
+|        ``domain_error(http_server_core_session_request,Request)``
+
+
+------------
+
+.. index:: finish/3
+.. _http_server_core_session/0::finish/3:
+
+``finish/3``
+^^^^^^^^^^^^
+
+Finishes server-session processing for an annotated normalized request and a normalized response, adding any needed Set-Cookie lifecycle properties.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``finish(Request,Response0,Response)``
+| **Mode and number of proofs:**
+|    ``finish(+compound,+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Request`` is not a valid annotated server-session request:
+|        ``domain_error(http_server_core_session_request,Request)``
+|    ``Response0`` is not a valid normalized HTTP response:
+|        ``domain_error(http_server_core_session_response,Response0)``
+|    The decorated response violates normalized HTTP response semantics:
+|        ``domain_error(http_header_semantics,Header)``
+
+
+------------
+
+.. index:: current/2
+.. _http_server_core_session/0::current/2:
+
+``current/2``
+^^^^^^^^^^^^^
+
+Returns the request-bound current server-session handle from an annotated normalized request.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``current(Request,Session)``
+| **Mode and number of proofs:**
+|    ``current(+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Request`` is not a valid annotated server-session request:
+|        ``domain_error(http_server_core_session_request,Request)``
+
+
+------------
+
+.. index:: ensure/2
+.. _http_server_core_session/0::ensure/2:
+
+``ensure/2``
+^^^^^^^^^^^^
+
+Ensures that the annotated request has a backing stored server session and returns its request-bound handle.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``ensure(Request,Session)``
+| **Mode and number of proofs:**
+|    ``ensure(+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Request`` is not a valid annotated server-session request:
+|        ``domain_error(http_server_core_session_request,Request)``
+
+
+------------
+
+.. index:: data/2
+.. _http_server_core_session/0::data/2:
+
+``data/2``
+^^^^^^^^^^
+
+Returns the current session key-value data pairs for a request-bound server-session handle or ``[]`` when no backing session exists yet.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``data(Session,Data)``
+| **Mode and number of proofs:**
+|    ``data(+compound,-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Session`` is a variable:
+|        ``instantiation_error``
+|    ``Session`` is not a valid request-bound server-session handle:
+|        ``domain_error(http_server_core_session_handle,Session)``
+
+
+------------
+
+.. index:: get/3
+.. _http_server_core_session/0::get/3:
+
+``get/3``
+^^^^^^^^^
+
+Returns the current value for a session data key from a request-bound server-session handle.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``get(Session,Key,Value)``
+| **Mode and number of proofs:**
+|    ``get(+compound,+term,-term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: set/3
+.. _http_server_core_session/0::set/3:
+
+``set/3``
+^^^^^^^^^
+
+Sets or replaces a session data key-value pair, creating a backing stored session when needed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``set(Session,Key,Value)``
+| **Mode and number of proofs:**
+|    ``set(+compound,+term,+term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Session`` is a variable:
+|        ``instantiation_error``
+|    ``Session`` is not a valid request-bound server-session handle:
+|        ``domain_error(http_server_core_session_handle,Session)``
+
+
+------------
+
+.. index:: remove/3
+.. _http_server_core_session/0::remove/3:
+
+``remove/3``
+^^^^^^^^^^^^
+
+Removes a session data key-value pair and returns its previous value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``remove(Session,Key,Value)``
+| **Mode and number of proofs:**
+|    ``remove(+compound,+term,-term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: destroy/1
+.. _http_server_core_session/0::destroy/1:
+
+``destroy/1``
+^^^^^^^^^^^^^
+
+Destroys the backing stored session, causing finish/3 to emit a deletion cookie when applicable.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``destroy(Session)``
+| **Mode and number of proofs:**
+|    ``destroy(+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Session`` is a variable:
+|        ``instantiation_error``
+|    ``Session`` is not a valid request-bound server-session handle:
+|        ``domain_error(http_server_core_session_handle,Session)``
+
+
+------------
+
+.. index:: renew/2
+.. _http_server_core_session/0::renew/2:
+
+``renew/2``
+^^^^^^^^^^^
+
+Renews the backing stored session identifier and returns the new opaque cookie identifier.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``renew(Session,NewIdentifier)``
+| **Mode and number of proofs:**
+|    ``renew(+compound,-atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Session`` is a variable:
+|        ``instantiation_error``
+|    ``Session`` is not a valid request-bound server-session handle:
+|        ``domain_error(http_server_core_session_handle,Session)``
+
+
+------------
+
+.. index:: gc/2
+.. _http_server_core_session/0::gc/2:
+
+``gc/2``
+^^^^^^^^
+
+Performs opportunistic garbage collection of expired stored sessions for the given manager and returns the number collected.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``gc(Manager,Collected)``
+| **Mode and number of proofs:**
+|    ``gc(+compound,-integer)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Manager`` is a variable:
+|        ``instantiation_error``
+|    ``Manager`` is neither a variable nor an open server-session manager handle:
+|        ``domain_error(http_server_core_session,Manager)``
+
+
+------------
+
+.. index:: count/2
+.. _http_server_core_session/0::count/2:
+
+``count/2``
+^^^^^^^^^^^
+
+Returns the number of currently stored sessions owned by the given manager.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``count(Manager,Count)``
+| **Mode and number of proofs:**
+|    ``count(+compound,-integer)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Manager`` is a variable:
+|        ``instantiation_error``
+|    ``Manager`` is neither a variable nor an open server-session manager handle:
+|        ``domain_error(http_server_core_session,Manager)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+.. index:: http_server_core_session_event/2
+.. _http_server_core_session/0::http_server_core_session_event/2:
+
+``http_server_core_session_event/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Optional overridable hook predicate called with server-session lifecycle events.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``http_server_core_session_event(Manager,Event)``
+| **Mode and number of proofs:**
+|    ``http_server_core_session_event(+compound,+compound)`` - ``zero_or_one``
+
+
+------------
+
+Private predicates
+------------------
+
+.. index:: manager_seed_/1
+.. _http_server_core_session/0::manager_seed_/1:
+
+``manager_seed_/1``
+^^^^^^^^^^^^^^^^^^^
+
+Last allocated server-session manager identifier.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``manager_seed_(ManagerId)``
+| **Mode and number of proofs:**
+|    ``manager_seed_(?positive_integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: manager_state_/2
+.. _http_server_core_session/0::manager_state_/2:
+
+``manager_state_/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Per-manager cookie, timeout, and garbage-collection state.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``manager_state_(ManagerId,State)``
+| **Mode and number of proofs:**
+|    ``manager_state_(?positive_integer,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: context_seed_/1
+.. _http_server_core_session/0::context_seed_/1:
+
+``context_seed_/1``
+^^^^^^^^^^^^^^^^^^^
+
+Last allocated request context identifier.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``context_seed_(ContextId)``
+| **Mode and number of proofs:**
+|    ``context_seed_(?positive_integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: context_state_/2
+.. _http_server_core_session/0::context_state_/2:
+
+``context_state_/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Per-request server-session context state.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``context_state_(ContextId,Context)``
+| **Mode and number of proofs:**
+|    ``context_state_(?positive_integer,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: stored_session_/6
+.. _http_server_core_session/0::stored_session_/6:
+
+``stored_session_/6``
+^^^^^^^^^^^^^^^^^^^^^
+
+Stored server-session data entries owned by a manager.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``stored_session_(ManagerId,SessionId,Data,CreatedAt,LastSeenAt,AbsoluteExpiryAt)``
+| **Mode and number of proofs:**
+|    ``stored_session_(?positive_integer,?atom,?list(compound),?non_negative_integer,?non_negative_integer,?nonvar)`` - ``zero_or_more``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

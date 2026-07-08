@@ -720,7 +720,7 @@
 <li class="toctree-l3"><a class="reference internal" href="http_authenticate_verifier_protocol_0.html">http_authenticate_verifier_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_htpasswd_verifier_1.html">http_htpasswd_verifier(Path)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_router_basic_auth_2.html">http_router_basic_auth(Verifier,BaseOptions)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_server_basic_handler_3.html">http_server_basic_handler(Verifier,Handler,ProtectOptions)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_server_core_basic_handler_3.html">http_server_core_basic_handler(Verifier,Handler,ProtectOptions)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#http-client"><span class="xref std std-ref">http_client</span></a><ul>
@@ -763,7 +763,7 @@
 <li class="toctree-l3"><a class="reference internal" href="http_digest_0.html">http_digest</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_digest_verifier_protocol_0.html">http_digest_verifier_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_router_digest_auth_3.html">http_router_digest_auth(Verifier,ProtectOptions,AuthenticationInfoOptions)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_server_digest_handler_4.html">http_server_digest_handler(Verifier,Handler,ProtectOptions,AuthenticationInfoOptions)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_server_core_digest_handler_4.html">http_server_core_digest_handler(Verifier,Handler,ProtectOptions,AuthenticationInfoOptions)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#http-directory-listing"><span class="xref std std-ref">http_directory_listing</span></a><ul>
@@ -784,12 +784,16 @@
 <li class="toctree-l3"><a class="reference internal" href="http_router_parameters_0.html">http_router_parameters</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#http-process-transport"><span class="xref std std-ref">http_process_transport</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http_process_transport_0.html">http_process_transport</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#http-router"><span class="xref std std-ref">http_router</span></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="http_router_0.html">http_router</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#http-server"><span class="xref std std-ref">http_server</span></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="http_server_0.html">http_server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#http-server-core"><span class="xref std std-ref">http_server_core</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http_server_core_0.html">http_server_core</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#http-session"><span class="xref std std-ref">http_session</span></a><ul>
@@ -797,17 +801,13 @@
 <li class="toctree-l3"><a class="reference internal" href="http_client_session_1.html">http_client_session(A)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_cookie_jar_0.html">http_cookie_jar</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_router_server_session_1.html">http_router_server_session(Manager)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_server_session_0.html">http_server_session</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_server_session_handler_2.html">http_server_session_handler(Manager,Handler)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_server_core_session_0.html">http_server_core_session</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_server_core_session_handler_2.html">http_server_core_session_handler(Manager,Handler)</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#http-socket"><span class="xref std std-ref">http_socket</span></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="http_socket_0.html">http_socket</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_socket_protocol_0.html">http_socket_protocol</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#http-socket-process"><span class="xref std std-ref">http_socket_process</span></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="http_socket_process_0.html">http_socket_process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#http-socket-transport"><span class="xref std std-ref">http_socket_transport</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http_socket_transport_0.html">http_socket_transport</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_transport_protocol_0.html">http_transport_protocol</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#http-static-files"><span class="xref std std-ref">http_static_files</span></a><ul>
@@ -2845,7 +2845,7 @@
 <li class="toctree-l1"><a class="reference internal" href="http_authenticate_verifier_protocol_0.html">http_authenticate_verifier_protocol</a></li>
 <li class="toctree-l1"><a class="reference internal" href="http_htpasswd_verifier_1.html">http_htpasswd_verifier(Path)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="http_router_basic_auth_2.html">http_router_basic_auth(Verifier,BaseOptions)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="http_server_basic_handler_3.html">http_server_basic_handler(Verifier,Handler,ProtectOptions)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_server_core_basic_handler_3.html">http_server_core_basic_handler(Verifier,Handler,ProtectOptions)</a></li>
 </ul>
 </div>
 </section>
@@ -2912,7 +2912,7 @@
 <li class="toctree-l1"><a class="reference internal" href="http_digest_0.html">http_digest</a></li>
 <li class="toctree-l1"><a class="reference internal" href="http_digest_verifier_protocol_0.html">http_digest_verifier_protocol</a></li>
 <li class="toctree-l1"><a class="reference internal" href="http_router_digest_auth_3.html">http_router_digest_auth(Verifier,ProtectOptions,AuthenticationInfoOptions)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="http_server_digest_handler_4.html">http_server_digest_handler(Verifier,Handler,ProtectOptions,AuthenticationInfoOptions)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_server_core_digest_handler_4.html">http_server_core_digest_handler(Verifier,Handler,ProtectOptions,AuthenticationInfoOptions)</a></li>
 </ul>
 </div>
 </section>
@@ -2950,6 +2950,14 @@
 </ul>
 </div>
 </section>
+<section id="http-process-transport">
+<h2><a class="reference external" href="../handbook/libraries/http_process_transport.html#library-http-process-transport" title="(in The Logtalk Handbook v3.101.0)"><span class="xref std std-ref">http_process_transport</span></a><a class="headerlink" href="#http-process-transport" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="http_process_transport_0.html">http_process_transport</a></li>
+</ul>
+</div>
+</section>
 <section id="http-router">
 <h2><a class="reference external" href="../handbook/libraries/http_router.html#library-http-router" title="(in The Logtalk Handbook v3.101.0)"><span class="xref std std-ref">http_router</span></a><a class="headerlink" href="#http-router" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -2958,11 +2966,11 @@
 </ul>
 </div>
 </section>
-<section id="http-server">
-<h2><a class="reference external" href="../handbook/libraries/http_server.html#library-http-server" title="(in The Logtalk Handbook v3.101.0)"><span class="xref std std-ref">http_server</span></a><a class="headerlink" href="#http-server" title="Link to this heading"></a></h2>
+<section id="http-server-core">
+<h2><a class="reference external" href="../handbook/libraries/http_server_core.html#library-http-server-core" title="(in The Logtalk Handbook v3.101.0)"><span class="xref std std-ref">http_server_core</span></a><a class="headerlink" href="#http-server-core" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="http_server_0.html">http_server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_server_core_0.html">http_server_core</a></li>
 </ul>
 </div>
 </section>
@@ -2974,25 +2982,17 @@
 <li class="toctree-l1"><a class="reference internal" href="http_client_session_1.html">http_client_session(A)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="http_cookie_jar_0.html">http_cookie_jar</a></li>
 <li class="toctree-l1"><a class="reference internal" href="http_router_server_session_1.html">http_router_server_session(Manager)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="http_server_session_0.html">http_server_session</a></li>
-<li class="toctree-l1"><a class="reference internal" href="http_server_session_handler_2.html">http_server_session_handler(Manager,Handler)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_server_core_session_0.html">http_server_core_session</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_server_core_session_handler_2.html">http_server_core_session_handler(Manager,Handler)</a></li>
 </ul>
 </div>
 </section>
-<section id="http-socket">
-<h2><a class="reference external" href="../handbook/libraries/http_socket.html#library-http-socket" title="(in The Logtalk Handbook v3.101.0)"><span class="xref std std-ref">http_socket</span></a><a class="headerlink" href="#http-socket" title="Link to this heading"></a></h2>
+<section id="http-socket-transport">
+<h2><a class="reference external" href="../handbook/libraries/http_socket_transport.html#library-http-socket-transport" title="(in The Logtalk Handbook v3.101.0)"><span class="xref std std-ref">http_socket_transport</span></a><a class="headerlink" href="#http-socket-transport" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="http_socket_0.html">http_socket</a></li>
-<li class="toctree-l1"><a class="reference internal" href="http_socket_protocol_0.html">http_socket_protocol</a></li>
-</ul>
-</div>
-</section>
-<section id="http-socket-process">
-<h2><a class="reference external" href="../handbook/libraries/http_socket_process.html#library-http-socket-process" title="(in The Logtalk Handbook v3.101.0)"><span class="xref std std-ref">http_socket_process</span></a><a class="headerlink" href="#http-socket-process" title="Link to this heading"></a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="http_socket_process_0.html">http_socket_process</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_socket_transport_0.html">http_socket_transport</a></li>
+<li class="toctree-l1"><a class="reference internal" href="http_transport_protocol_0.html">http_transport_protocol</a></li>
 </ul>
 </div>
 </section>

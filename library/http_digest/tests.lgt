@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-07,
+		date is 2026-07-08,
 		comment is 'Unit tests for the "http_digest" library.'
 	]).
 
@@ -46,7 +46,7 @@
 	]).
 
 	cover(http_digest).
-	cover(http_server_digest_handler(_, _, _, _)).
+	cover(http_server_core_digest_handler(_, _, _, _)).
 	cover(http_router_digest_auth(_, _, _)).
 	cover(http_digest_test_verifier).
 	cover(http_digest_test_handler).
@@ -254,26 +254,26 @@
 		status(Response, status(200, 'OK')),
 		body(Response, content('text/plain', text('Mufasa'))).
 
-	test(http_server_digest_handler_01, deterministic) :-
+	test(http_server_core_digest_handler_01, deterministic) :-
 		request_for_path('/protected', Request),
 		protect_options(sha256, 1700000000, Options),
-		http_server_digest_handler(http_digest_test_verifier, http_digest_test_handler, Options, [])::handle(Request, Response),
+		http_server_core_digest_handler(http_digest_test_verifier, http_digest_test_handler, Options, [])::handle(Request, Response),
 		status(Response, status(401, 'Unauthorized')),
 		http_digest::challenge(Response, _Challenge).
 
-	test(http_server_digest_handler_02, deterministic) :-
+	test(http_server_core_digest_handler_02, deterministic) :-
 		authorized_request(sha256, '/protected', 1700000000, Request),
 		protect_options(sha256, 1700000000, Options),
-		http_server_digest_handler(http_digest_test_verifier, http_digest_test_handler, Options, [nextnonce('next-nonce')])::handle(Request, Response),
+		http_server_core_digest_handler(http_digest_test_verifier, http_digest_test_handler, Options, [nextnonce('next-nonce')])::handle(Request, Response),
 		status(Response, status(200, 'OK')),
 		body(Response, content('text/plain', text('Mufasa'))),
 		http_digest::authentication_info(Response, digest_authentication_info(Fields)),
 		memberchk(nextnonce('next-nonce'), Fields).
 
-	test(http_server_digest_handler_03, deterministic) :-
+	test(http_server_core_digest_handler_03, deterministic) :-
 		authorized_request(md5, '/protected', 1700000000, Request),
 		protect_options_without_accepted_algorithms(md5, 1700000000, Options),
-		http_server_digest_handler(http_digest_test_verifier, http_digest_test_handler, Options, [])::handle(Request, Response),
+		http_server_core_digest_handler(http_digest_test_verifier, http_digest_test_handler, Options, [])::handle(Request, Response),
 		status(Response, status(200, 'OK')),
 		body(Response, content('text/plain', text('Mufasa'))),
 		http_digest::authentication_info(Response, digest_authentication_info(Fields)),
@@ -378,7 +378,7 @@
 			test(http_client_digest_session_07, deterministic) :-
 				protect_options(sha256, 1700000000, DigestOptions),
 				open_listener('127.0.0.1', Port, Listener, []),
-				threaded_once(serve_listener(Listener, http_server_digest_handler(http_digest_test_verifier, http_digest_request_echo_handler, DigestOptions, []), 10, _ClientInfos, [shutdown(keep_open)]), Tag),
+				threaded_once(serve_listener(Listener, http_server_core_digest_handler(http_digest_test_verifier, http_digest_request_echo_handler, DigestOptions, []), 10, _ClientInfos, [shutdown(keep_open)]), Tag),
 				request_echo_url(Port, '/echo', URL),
 				http_client_digest_session(_HTTPSocket_)::open(Session, 'Mufasa', 'Circle Of Life'),
 				http_client_digest_session(_HTTPSocket_)::head(Session, URL, HeadResponse, []),
@@ -387,7 +387,7 @@
 				http_client_digest_session(_HTTPSocket_)::put(Session, URL, content('text/plain', text(put)), PutResponse, []),
 				http_client_digest_session(_HTTPSocket_)::patch(Session, URL, content('text/plain', text(patch)), PatchResponse, []),
 				http_client_digest_session(_HTTPSocket_)::close(Session),
-				once(threaded_exit(serve_listener(Listener, http_server_digest_handler(http_digest_test_verifier, http_digest_request_echo_handler, DigestOptions, []), 10, _ClientInfos, [shutdown(keep_open)]), Tag)),
+				once(threaded_exit(serve_listener(Listener, http_server_core_digest_handler(http_digest_test_verifier, http_digest_request_echo_handler, DigestOptions, []), 10, _ClientInfos, [shutdown(keep_open)]), Tag)),
 				catch(close_listener(Listener), _, true),
 				body(HeadResponse, empty),
 				body(DeleteResponse, content('text/plain', text(delete))),
@@ -398,7 +398,7 @@
 			test(http_client_digest_session_08, deterministic(Cookies == [session-'jar'])) :-
 				protect_options(sha256, 1700000000, DigestOptions),
 				open_listener('127.0.0.1', Port, Listener, []),
-				threaded_once(serve_listener(Listener, http_server_digest_handler(http_digest_test_verifier, http_digest_request_echo_handler, DigestOptions, []), 2, _ClientInfos, [shutdown(keep_open)]), Tag),
+				threaded_once(serve_listener(Listener, http_server_core_digest_handler(http_digest_test_verifier, http_digest_request_echo_handler, DigestOptions, []), 2, _ClientInfos, [shutdown(keep_open)]), Tag),
 				request_echo_url(Port, '/login', LoginURL),
 				request_echo_url(Port, '/request-info?lang=en', URL),
 				http_cookie_jar::open(Jar),
@@ -406,7 +406,7 @@
 				http_client_digest_session(_HTTPSocket_)::open(Session, 'Mufasa', 'Circle Of Life', [cookie_jar(Jar), headers([accept-'text/plain', x_default-'1']), query([page-'1']), version(http(1, 1)), properties([trace(default), keep(default)]), digest_options([cnonce('default-cnonce'), nonce_count(2)])]),
 				http_client_digest_session(_HTTPSocket_)::get(Session, URL, Response, [headers([accept-'application/json']), query([page-'2', item-'7']), version(http(1, 0)), properties([trace(request), cookies([session-'property'])]), cookies([session-'explicit']), digest_options([cnonce('request-cnonce')])]),
 				http_client_digest_session(_HTTPSocket_)::close(Session),
-				once(threaded_exit(serve_listener(Listener, http_server_digest_handler(http_digest_test_verifier, http_digest_request_echo_handler, DigestOptions, []), 2, _ClientInfos, [shutdown(keep_open)]), Tag)),
+				once(threaded_exit(serve_listener(Listener, http_server_core_digest_handler(http_digest_test_verifier, http_digest_request_echo_handler, DigestOptions, []), 2, _ClientInfos, [shutdown(keep_open)]), Tag)),
 				catch(close_listener(Listener), _, true),
 				http_cookie_jar::request_cookies(Jar, URL, Cookies),
 				http_cookie_jar::close(Jar),
@@ -440,12 +440,12 @@
 			test(http_client_digest_session_auth_int_01, deterministic) :-
 				protect_options_auth_int(sha256, 1700000000, DigestOptions),
 				open_listener('127.0.0.1', Port, Listener, []),
-				threaded_once(serve_listener(Listener, http_server_digest_handler(http_digest_test_verifier, http_digest_request_echo_handler, DigestOptions, []), 2, _ClientInfos, [shutdown(keep_open)]), Tag),
+				threaded_once(serve_listener(Listener, http_server_core_digest_handler(http_digest_test_verifier, http_digest_request_echo_handler, DigestOptions, []), 2, _ClientInfos, [shutdown(keep_open)]), Tag),
 				request_echo_url(Port, '/echo', URL),
 				http_client_digest_session(_HTTPSocket_)::open(Session, 'Mufasa', 'Circle Of Life', [cookie_jar(none)]),
 				http_client_digest_session(_HTTPSocket_)::post(Session, URL, content('text/plain', text('post-int')), Response, []),
 				http_client_digest_session(_HTTPSocket_)::close(Session),
-				once(threaded_exit(serve_listener(Listener, http_server_digest_handler(http_digest_test_verifier, http_digest_request_echo_handler, DigestOptions, []), 2, _ClientInfos, [shutdown(keep_open)]), Tag)),
+				once(threaded_exit(serve_listener(Listener, http_server_core_digest_handler(http_digest_test_verifier, http_digest_request_echo_handler, DigestOptions, []), 2, _ClientInfos, [shutdown(keep_open)]), Tag)),
 				catch(close_listener(Listener), _, true),
 				status(Response, status(200, 'OK')),
 				body(Response, content('text/plain', text('post-int'))).

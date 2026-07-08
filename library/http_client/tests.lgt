@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-07,
+		date is 2026-07-08,
 		comment is 'Unit tests for the "http_client" library.',
 		parnames is ['HTTPSocket']
 	]).
@@ -337,7 +337,7 @@
 	server_serve_request_once(Listener, Handler) :-
 		socket::server_accept(Listener, Input, Output, _ClientInfo),
 		(	catch(
-					http_server::serve(Input, Output, Handler),
+					http_server_core::serve(Input, Output, Handler),
 					Error,
 					(	catch(socket::close(Input, Output), _, true),
 						throw(Error)
@@ -355,7 +355,7 @@
 	raw_server_once(Listener, ResponseAtom) :-
 		socket::server_accept(Listener, Input, Output, _ClientInfo),
 		(	catch(
-				(	http_server::read_request(Input, _Request),
+				(	http_server_core::read_request(Input, _Request),
 					atom_codes(ResponseAtom, Bytes),
 					write_bytes(Bytes, Output),
 					flush_output(Output)
@@ -373,7 +373,7 @@
 	raw_websocket_key_server_once(Listener) :-
 		socket::server_accept(Listener, Input, Output, _ClientInfo),
 		(	catch(
-				(	http_server::read_request(Input, Request),
+				(	http_server_core::read_request(Input, Request),
 					websocket_key_response_atom(Request, ResponseAtom),
 					atom_codes(ResponseAtom, Bytes),
 					write_bytes(Bytes, Output),

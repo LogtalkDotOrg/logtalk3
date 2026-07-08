@@ -15,7 +15,7 @@ High-level WebSocket predicates for opening and closing connections, exchanging 
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-26
+| **Date:** 2026-07-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -130,9 +130,9 @@ Accepts one incoming WebSocket connection on the given listener using the defaul
 
 | **Exceptions:**
 |    The WebSocket opening request does not exist:
-|        ``existence_error(http_socket_websocket_request,Request)``
+|        ``existence_error(http_socket_transport_websocket_request,Request)``
 |    The WebSocket opening response is invalid:
-|        ``domain_error(http_socket_websocket_response,Response)``
+|        ``domain_error(http_socket_transport_websocket_response,Response)``
 
 
 ------------
@@ -143,7 +143,7 @@ Accepts one incoming WebSocket connection on the given listener using the defaul
 ``accept/4``
 ^^^^^^^^^^^^
 
-Accepts one incoming WebSocket connection on the given listener and returns an opaque server-side handle. Server opening-handshake options are forwarded to ``http_server::accept_websocket/3``. The direct API also accepts ``auto_pong(on|off)`` and ``max_payload_length(Bytes|none)`` options.
+Accepts one incoming WebSocket connection on the given listener and returns an opaque server-side handle. Server opening-handshake options are forwarded to ``http_server_core::accept_websocket/3``. The direct API also accepts ``auto_pong(on|off)`` and ``max_payload_length(Bytes|none)`` options.
 
 | **Compilation flags:**
 |    ``static``
@@ -161,9 +161,9 @@ Accepts one incoming WebSocket connection on the given listener and returns an o
 |    ``Options`` contains an invalid direct WebSocket option:
 |        ``domain_error(http_websocket_option,Option)``
 |    The WebSocket opening request does not exist:
-|        ``existence_error(http_socket_websocket_request,Request)``
+|        ``existence_error(http_socket_transport_websocket_request,Request)``
 |    The WebSocket opening response is invalid:
-|        ``domain_error(http_socket_websocket_response,Response)``
+|        ``domain_error(http_socket_transport_websocket_response,Response)``
 
 
 ------------
@@ -640,9 +640,9 @@ Convenience wrapper that accepts one incoming WebSocket connection on the given 
 |    ``Handler`` is not a valid WebSocket service handler:
 |        ``domain_error(http_websocket_service_handler,Handler)``
 |    The WebSocket opening request does not exist:
-|        ``existence_error(http_socket_websocket_request,Request)``
+|        ``existence_error(http_socket_transport_websocket_request,Request)``
 |    The WebSocket opening response is invalid:
-|        ``domain_error(http_socket_websocket_response,Response)``
+|        ``domain_error(http_socket_transport_websocket_response,Response)``
 
 
 ------------
@@ -669,9 +669,9 @@ Convenience wrapper that accepts one incoming WebSocket connection on the given 
 |    ``Options`` contains an invalid WebSocket service loop option:
 |        ``domain_error(http_websocket_service_option,Option)``
 |    The WebSocket opening request does not exist:
-|        ``existence_error(http_socket_websocket_request,Request)``
+|        ``existence_error(http_socket_transport_websocket_request,Request)``
 |    The WebSocket opening response is invalid:
-|        ``domain_error(http_socket_websocket_response,Response)``
+|        ``domain_error(http_socket_transport_websocket_response,Response)``
 
 
 ------------

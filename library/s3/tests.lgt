@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-29,
+		date is 2026-07-08,
 		comment is 'Unit tests for the "s3" library.'
 	]).
 
@@ -192,22 +192,22 @@
 		]).
 
 	test(s3_session_presign_01, true(URL == 'https://photos.s3.eu-west-1.amazonaws.com/report.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIDEXAMPLE%2F20240627%2Feu-west-1%2Fs3%2Faws4_request&X-Amz-Date=20240627T120000Z&X-Amz-Expires=60&X-Amz-Signature=734906595c0299469192dfa2b2360dc54232827c9762677accd1b1699c85cdc9&X-Amz-SignedHeaders=host')) :-
-		s3_session(http_socket_process)::open(Session, [
+		s3_session(http_process_transport)::open(Session, [
 			credentials(access_key_id('AKIDEXAMPLE'), secret_access_key('secret')),
 			region('eu-west-1'),
 			amz_date('20240627T120000Z')
 		]),
-		s3_session(http_socket_process)::presigned_get_object(Session, photos, 'report.txt', URL, [expires(60)]),
-		s3_session(http_socket_process)::close(Session).
+		s3_session(http_process_transport)::presigned_get_object(Session, photos, 'report.txt', URL, [expires(60)]),
+		s3_session(http_process_transport)::close(Session).
 
 	test(s3_session_presign_02, true(URL == 'https://photos.s3.eu-west-1.amazonaws.com/report.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIDEXAMPLE%2F20240627%2Feu-west-1%2Fs3%2Faws4_request&X-Amz-Date=20240627T120000Z&X-Amz-Expires=60&X-Amz-Signature=3c9723bbb645241d3fb216140a259438054d9e5999ab54a12a855603bbc2c728&X-Amz-SignedHeaders=host')) :-
-		s3_session(http_socket_process)::open(Session, [
+		s3_session(http_process_transport)::open(Session, [
 			credentials(access_key_id('AKIDEXAMPLE'), secret_access_key('secret')),
 			region('eu-west-1'),
 			amz_date('20240627T120000Z')
 		]),
-		s3_session(http_socket_process)::presigned_post_object(Session, photos, 'report.txt', URL, [expires(60)]),
-		s3_session(http_socket_process)::close(Session).
+		s3_session(http_process_transport)::presigned_post_object(Session, photos, 'report.txt', URL, [expires(60)]),
+		s3_session(http_process_transport)::close(Session).
 
 	test(s3_arg_check_01, error(instantiation_error)) :-
 		s3_client::head_bucket(_, _, []).
@@ -273,24 +273,24 @@
 		atomic_list_concat([Directory, 'report.bin'], File),
 		s3_client::get_object(photos, 'report.txt', File, _, []).
 
-	test(s3_arg_check_22, error(domain_error(s3_bucket, '')), [cleanup((ground(Session) -> s3_session(http_socket_process)::close(Session); true))]) :-
-		s3_session(http_socket_process)::open(Session, []),
-		s3_session(http_socket_process)::head_bucket(Session, '', _, []).
+	test(s3_arg_check_22, error(domain_error(s3_bucket, '')), [cleanup((ground(Session) -> s3_session(http_process_transport)::close(Session); true))]) :-
+		s3_session(http_process_transport)::open(Session, []),
+		s3_session(http_process_transport)::head_bucket(Session, '', _, []).
 
-	test(s3_arg_check_23, error(instantiation_error), [cleanup((ground(Session) -> s3_session(http_socket_process)::close(Session); true))]) :-
-		s3_session(http_socket_process)::open(Session, [
+	test(s3_arg_check_23, error(instantiation_error), [cleanup((ground(Session) -> s3_session(http_process_transport)::close(Session); true))]) :-
+		s3_session(http_process_transport)::open(Session, [
 			credentials(access_key_id('AKIDEXAMPLE'), secret_access_key('secret'))
 		]),
-		s3_session(http_socket_process)::presigned_get_object(Session, photos, 'report.txt', _, _).
+		s3_session(http_process_transport)::presigned_get_object(Session, photos, 'report.txt', _, _).
 
 	test(s3_arg_check_24, error(instantiation_error)) :-
-		s3_session(http_socket_process)::list_buckets(_, _, []).
+		s3_session(http_process_transport)::list_buckets(_, _, []).
 
 	test(s3_arg_check_25, error(domain_error(s3_session, not_a_session))) :-
-		s3_session(http_socket_process)::list_buckets(not_a_session, _, []).
+		s3_session(http_process_transport)::list_buckets(not_a_session, _, []).
 
 	test(s3_arg_check_26, error(existence_error(s3_session, s3_session(999999)))) :-
-		s3_session(http_socket_process)::list_buckets(s3_session(999999), _, []).
+		s3_session(http_process_transport)::list_buckets(s3_session(999999), _, []).
 
 	:- if(current_logtalk_flag(threads, supported)).
 
@@ -302,7 +302,7 @@
 			request_options(Port, Options),
 			s3_client::list_buckets(Buckets, Options),
 			threaded_exit(serve_once(Listener), Tag),
-			http_socket_process::close_listener(Listener).
+			http_process_transport::close_listener(Listener).
 
 		test(s3_client_03, true((Bytes == [104, 101, 108, 108, 111], member(header(etag, '"etag-123"'), Properties)))) :-
 			^^file_path('s3_get_object_report.bin', File),
@@ -312,7 +312,7 @@
 			s3_client::get_object(photos, 'report.txt', File, Properties, Options),
 			http_core::parse_body(file(File), 'application/octet-stream', [], content('application/octet-stream', binary(Bytes))),
 			threaded_exit(serve_once(Listener), Tag),
-			http_socket_process::close_listener(Listener).
+			http_process_transport::close_listener(Listener).
 
 		test(s3_client_05, true((ETag == '"etag-123"', member(header(etag, '"etag-123"'), Properties)))) :-
 			^^file_path('s3_put_object_report.unknown', File),
@@ -322,7 +322,7 @@
 			request_options(Port, Options),
 			s3_client::put_object(photos, 'report.txt', File, ETag, Properties, Options),
 			threaded_exit(serve_once(Listener), Tag),
-			http_socket_process::close_listener(Listener).
+			http_process_transport::close_listener(Listener).
 
 		test(s3_client_06, true(member(header(x_amz_bucket_region, 'us-east-1'), Properties))) :-
 			open_listener(Port, Listener),
@@ -330,7 +330,7 @@
 			request_options(Port, Options),
 			s3_client::head_bucket(photos, bucket_metadata(Properties), Options),
 			threaded_exit(serve_once(Listener), Tag),
-			http_socket_process::close_listener(Listener).
+			http_process_transport::close_listener(Listener).
 
 		test(s3_client_07, true((member(name(photos), Properties), member(prefix('2024/archive/'), Prefixes)))) :-
 			open_listener(Port, Listener),
@@ -347,7 +347,7 @@
 			]),
 			s3_client::list_objects_v2(photos, Request, objects(Properties, _Entries, Prefixes), Options),
 			threaded_exit(serve_once(Listener), Tag),
-			http_socket_process::close_listener(Listener).
+			http_process_transport::close_listener(Listener).
 
 		test(s3_client_08, true((member(header(etag, '"etag-123"'), Properties), member(header(x_amz_version_id, '3'), Properties)))) :-
 			open_listener(Port, Listener),
@@ -355,7 +355,7 @@
 			request_options(Port, Options),
 			s3_client::head_object(photos, 'report.txt', object_metadata(Properties), Options),
 			threaded_exit(serve_once(Listener), Tag),
-			http_socket_process::close_listener(Listener).
+			http_process_transport::close_listener(Listener).
 
 		test(s3_client_09, true(member(status(204, 'No Content'), Properties))) :-
 			open_listener(Port, Listener),
@@ -363,7 +363,7 @@
 			request_options(Port, Options),
 			s3_client::delete_object(photos, 'report.txt', delete_result(Properties), Options),
 			threaded_exit(serve_once(Listener), Tag),
-			http_socket_process::close_listener(Listener).
+			http_process_transport::close_listener(Listener).
 
 		test(s3_client_10, true(Result == copy_result('"etag-copy"', [last_modified('2024-06-01T12:00:00.000Z')]))) :-
 			open_listener(Port, Listener),
@@ -371,7 +371,7 @@
 			request_options(Port, Options),
 			s3_client::copy_object(source(photos, 'report.txt'), archive, 'report.txt', Result, Options),
 			threaded_exit(serve_once(Listener), Tag),
-			http_socket_process::close_listener(Listener).
+			http_process_transport::close_listener(Listener).
 
 		test(s3_client_11, true(Result == copy_result('"etag-copy"', [last_modified('2024-06-01T12:00:00.000Z')]))) :-
 			open_listener(Port, Listener),
@@ -379,85 +379,85 @@
 			request_options(Port, Options),
 			s3_client::copy_object(source(photos, 'report.txt', '3'), archive, 'report.txt', Result, Options),
 			threaded_exit(serve_once(Listener), Tag),
-			http_socket_process::close_listener(Listener).
+			http_process_transport::close_listener(Listener).
 
 		test(s3_session_03, true(Buckets == buckets([bucket(photos, '2024-01-01T00:00:00.000Z', [])]))) :-
 			open_listener(Port, Listener),
 			threaded_once(serve_once(Listener), Tag),
 			request_options(Port, Options),
-			s3_session(http_socket_process)::open(Session),
-			s3_session(http_socket_process)::list_buckets(Session, Buckets, Options),
-			s3_session(http_socket_process)::close(Session),
+			s3_session(http_process_transport)::open(Session),
+			s3_session(http_process_transport)::list_buckets(Session, Buckets, Options),
+			s3_session(http_process_transport)::close(Session),
 			threaded_exit(serve_once(Listener), Tag),
-			http_socket_process::close_listener(Listener).
+			http_process_transport::close_listener(Listener).
 
 		test(s3_session_04, true(member(header(x_amz_bucket_region, 'us-east-1'), Properties))) :-
 			open_listener(Port, Listener),
 			threaded_once(serve_once(Listener), Tag),
 			request_options(Port, Options),
-			s3_session(http_socket_process)::open(Session, Options),
-			s3_session(http_socket_process)::head_bucket(Session, photos, bucket_metadata(Properties), []),
-			s3_session(http_socket_process)::close(Session),
+			s3_session(http_process_transport)::open(Session, Options),
+			s3_session(http_process_transport)::head_bucket(Session, photos, bucket_metadata(Properties), []),
+			s3_session(http_process_transport)::close(Session),
 			threaded_exit(serve_once(Listener), Tag),
-			http_socket_process::close_listener(Listener).
+			http_process_transport::close_listener(Listener).
 
 		test(s3_session_05, true(member(name(photos), Properties))) :-
 			open_listener(Port, Listener),
 			threaded_once(serve_once(Listener), Tag),
 			request_options(Port, Options),
-			s3_session(http_socket_process)::open(Session, Options),
-			s3_session(http_socket_process)::list_objects_v2(Session, photos, [prefix('2024/')], objects(Properties, _Entries, _Prefixes), []),
-			s3_session(http_socket_process)::close(Session),
+			s3_session(http_process_transport)::open(Session, Options),
+			s3_session(http_process_transport)::list_objects_v2(Session, photos, [prefix('2024/')], objects(Properties, _Entries, _Prefixes), []),
+			s3_session(http_process_transport)::close(Session),
 			threaded_exit(serve_once(Listener), Tag),
-			http_socket_process::close_listener(Listener).
+			http_process_transport::close_listener(Listener).
 
 		test(s3_session_06, true(member(header(etag, '"etag-123"'), Properties))) :-
 			open_listener(Port, Listener),
 			threaded_once(serve_once(Listener), Tag),
 			request_options(Port, Options),
-			s3_session(http_socket_process)::open(Session, Options),
-			s3_session(http_socket_process)::head_object(Session, photos, 'report.txt', object_metadata(Properties), []),
-			s3_session(http_socket_process)::close(Session),
+			s3_session(http_process_transport)::open(Session, Options),
+			s3_session(http_process_transport)::head_object(Session, photos, 'report.txt', object_metadata(Properties), []),
+			s3_session(http_process_transport)::close(Session),
 			threaded_exit(serve_once(Listener), Tag),
-			http_socket_process::close_listener(Listener).
+			http_process_transport::close_listener(Listener).
 
 		test(s3_session_07, true((Bytes == [104, 101, 108, 108, 111], member(header(etag, '"etag-123"'), Properties)))) :-
 			^^file_path('s3_session_get_report.bin', File),
 			open_listener(Port, Listener),
 			threaded_once(serve_once(Listener), Tag),
 			request_options(Port, Options),
-			s3_session(http_socket_process)::open(Session, Options),
-			s3_session(http_socket_process)::get_object(Session, photos, 'report.txt', File, Properties, []),
-			s3_session(http_socket_process)::close(Session),
+			s3_session(http_process_transport)::open(Session, Options),
+			s3_session(http_process_transport)::get_object(Session, photos, 'report.txt', File, Properties, []),
+			s3_session(http_process_transport)::close(Session),
 			http_core::parse_body(file(File), 'application/octet-stream', [], content('application/octet-stream', binary(Bytes))),
 			threaded_exit(serve_once(Listener), Tag),
-			http_socket_process::close_listener(Listener).
+			http_process_transport::close_listener(Listener).
 
 		test(s3_session_08, true(sub_atom(URL, _, _, _, 'X-Amz-Signature='))) :-
 			request_options(9000, Options),
-			s3_session(http_socket_process)::open(Session, Options),
-			s3_session(http_socket_process)::presigned_put_object(Session, photos, 'report.txt', URL, [expires(60)]),
-			s3_session(http_socket_process)::close(Session).
+			s3_session(http_process_transport)::open(Session, Options),
+			s3_session(http_process_transport)::presigned_put_object(Session, photos, 'report.txt', URL, [expires(60)]),
+			s3_session(http_process_transport)::close(Session).
 
 		test(s3_session_10, true(member(status(204, 'No Content'), Properties))) :-
 			open_listener(Port, Listener),
 			threaded_once(serve_once(Listener), Tag),
 			request_options(Port, Options),
-			s3_session(http_socket_process)::open(Session, Options),
-			s3_session(http_socket_process)::delete_object(Session, photos, 'report.txt', delete_result(Properties), []),
-			s3_session(http_socket_process)::close(Session),
+			s3_session(http_process_transport)::open(Session, Options),
+			s3_session(http_process_transport)::delete_object(Session, photos, 'report.txt', delete_result(Properties), []),
+			s3_session(http_process_transport)::close(Session),
 			threaded_exit(serve_once(Listener), Tag),
-			http_socket_process::close_listener(Listener).
+			http_process_transport::close_listener(Listener).
 
 		test(s3_session_11, true(Result == copy_result('"etag-copy"', [last_modified('2024-06-01T12:00:00.000Z')]))) :-
 			open_listener(Port, Listener),
 			threaded_once(serve_once(Listener), Tag),
 			request_options(Port, Options),
-			s3_session(http_socket_process)::open(Session, Options),
-			s3_session(http_socket_process)::copy_object(Session, source(photos, 'report.txt'), archive, 'report.txt', Result, []),
-			s3_session(http_socket_process)::close(Session),
+			s3_session(http_process_transport)::open(Session, Options),
+			s3_session(http_process_transport)::copy_object(Session, source(photos, 'report.txt'), archive, 'report.txt', Result, []),
+			s3_session(http_process_transport)::close(Session),
 			threaded_exit(serve_once(Listener), Tag),
-			http_socket_process::close_listener(Listener).
+			http_process_transport::close_listener(Listener).
 
 		test(s3_session_02, true((ETag == '"etag-123"', member(header(etag, '"etag-123"'), Properties)))) :-
 			^^file_path('s3_session_put_report.unknown', File),
@@ -465,17 +465,17 @@
 			open_listener(Port, Listener),
 			threaded_once(serve_once(Listener), Tag),
 			request_options(Port, Options),
-			s3_session(http_socket_process)::open(Session, Options),
-			s3_session(http_socket_process)::put_object(Session, photos, 'report.txt', File, ETag, Properties, []),
-			s3_session(http_socket_process)::close(Session),
+			s3_session(http_process_transport)::open(Session, Options),
+			s3_session(http_process_transport)::put_object(Session, photos, 'report.txt', File, ETag, Properties, []),
+			s3_session(http_process_transport)::close(Session),
 			threaded_exit(serve_once(Listener), Tag),
-			http_socket_process::close_listener(Listener).
+			http_process_transport::close_listener(Listener).
 
 		open_listener(Port, Listener) :-
-			http_socket_process::open_listener('127.0.0.1', Port, Listener, []).
+			http_process_transport::open_listener('127.0.0.1', Port, Listener, []).
 
 		serve_once(Listener) :-
-			catch(http_socket_process::serve_once(Listener, s3_test_handler, _ClientInfo), _, true).
+			catch(http_process_transport::serve_once(Listener, s3_test_handler, _ClientInfo), _, true).
 
 		request_options(Port, Options) :-
 			atomic_list_concat(['http://127.0.0.1:', Port], Endpoint),

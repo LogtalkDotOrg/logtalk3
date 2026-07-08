@@ -15,7 +15,7 @@ Server-side convenience for callback-driven WebSocket sessions with atom text re
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-26
+| **Date:** 2026-07-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls, threaded``
@@ -58,17 +58,17 @@ Accepts one incoming socket connection on the given listener created by the sele
 
 | **Exceptions:**
 |    The listener is invalid for the selected transport:
-|        ``domain_error(http_socket_listener,Listener)``
+|        ``domain_error(http_socket_transport_listener,Listener)``
 |    The WebSocket opening request does not exist:
-|        ``existence_error(http_socket_websocket_request,end_of_file)``
+|        ``existence_error(http_socket_transport_websocket_request,end_of_file)``
 |    The WebSocket opening response is invalid:
-|        ``domain_error(http_socket_websocket_response,Response)``
+|        ``domain_error(http_socket_transport_websocket_response,Response)``
 |    ``SessionHandler`` is a variable:
 |        ``instantiation_error``
 |    ``SessionHandler`` is not a valid WebSocket service handler:
 |        ``domain_error(http_websocket_service_handler,SessionHandler)``
 |    The upgraded connection handle is invalid:
-|        ``domain_error(http_socket_connection,Connection)``
+|        ``domain_error(http_socket_transport_connection,Connection)``
 |    The delegated session loop raises a WebSocket session error:
 |        ``domain_error(http_websocket_session_sequence,Frame)``
 |    ``SessionHandler`` returns an invalid reply:
@@ -95,11 +95,11 @@ Accepts one incoming socket connection on the given listener created by the sele
 
 | **Exceptions:**
 |    The listener is invalid for the selected transport:
-|        ``domain_error(http_socket_listener,Listener)``
+|        ``domain_error(http_socket_transport_listener,Listener)``
 |    The WebSocket opening request does not exist:
-|        ``existence_error(http_socket_websocket_request,end_of_file)``
+|        ``existence_error(http_socket_transport_websocket_request,end_of_file)``
 |    The WebSocket opening response is invalid:
-|        ``domain_error(http_socket_websocket_response,Response)``
+|        ``domain_error(http_socket_transport_websocket_response,Response)``
 |    ``SessionHandler`` is a variable:
 |        ``instantiation_error``
 |    ``SessionHandler`` is not a valid WebSocket service handler:
@@ -117,7 +117,7 @@ Accepts one incoming socket connection on the given listener created by the sele
 |    Timed session-loop options are not available on this backend:
 |        ``not_available(http_websocket_service_timing)``
 |    The upgraded connection handle is invalid:
-|        ``domain_error(http_socket_connection,Connection)``
+|        ``domain_error(http_socket_transport_connection,Connection)``
 |    The delegated session loop raises a WebSocket session error:
 |        ``domain_error(http_websocket_session_sequence,Frame)``
 |    ``SessionHandler`` returns an invalid reply:
@@ -162,7 +162,7 @@ Accepts WebSocket opening handshakes on the given listener created by the select
 |    ``Control`` is already registered for another open-ended WebSocket server loop:
 |        ``permission_error(reuse,http_websocket_service_shutdown_control,Control)``
 |    The WebSocket opening response is invalid:
-|        ``domain_error(http_socket_websocket_response,Response)``
+|        ``domain_error(http_socket_transport_websocket_response,Response)``
 |    ``SessionHandler`` is a variable:
 |        ``instantiation_error``
 |    ``SessionHandler`` is not a valid WebSocket service handler:
@@ -216,7 +216,7 @@ Accepts WebSocket opening handshakes on the given listener created by the select
 |    Timed session-loop options are not available on this backend:
 |        ``not_available(http_websocket_service_timing)``
 |    The WebSocket opening response is invalid:
-|        ``domain_error(http_socket_websocket_response,Response)``
+|        ``domain_error(http_socket_transport_websocket_response,Response)``
 |    ``SessionHandler`` is a variable:
 |        ``instantiation_error``
 |    ``SessionHandler`` is not a valid WebSocket service handler:

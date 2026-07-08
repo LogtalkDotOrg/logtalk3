@@ -97,8 +97,8 @@ Current workflow
 ----------------
 
 - Complete the opening handshake with `http_client::open_websocket/4` or
-  `http_socket::serve_websocket_once/5`.
-- Obtain the upgraded binary streams with `http_socket::connection_streams/3`.
+  `http_socket_transport::serve_websocket_once/5`.
+- Obtain the upgraded binary streams with `http_socket_transport::connection_streams/3`.
 - Use `read_message/2` and `write_message/2` when you want UTF-8-aware text
   messages and continuation reassembly instead of raw frame access.
 - Use the higher-level `http_websocket_session` library when fragmented data

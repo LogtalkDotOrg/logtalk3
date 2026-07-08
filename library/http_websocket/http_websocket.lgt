@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-07-08,
 		comment is 'High-level WebSocket predicates for opening and closing connections, exchanging messages, and running common client and server session loops.',
 		parnames is ['HTTPSocket']
 	]).
@@ -65,8 +65,8 @@
 		comment is 'Accepts one incoming WebSocket connection on the given listener using the default opening-handshake policy and returns an opaque server-side handle together with the accepted client information.',
 		argnames is ['Listener', 'WebSocket', 'ClientInfo'],
 		exceptions is [
-			'The WebSocket opening request does not exist' - existence_error(http_socket_websocket_request, 'Request'),
-			'The WebSocket opening response is invalid' - domain_error(http_socket_websocket_response, 'Response')
+			'The WebSocket opening request does not exist' - existence_error(http_socket_transport_websocket_request, 'Request'),
+			'The WebSocket opening response is invalid' - domain_error(http_socket_transport_websocket_response, 'Response')
 		]
 	]).
 
@@ -74,14 +74,14 @@
 	:- mode(accept(+compound, -compound, -compound, +list), one_or_error).
 
 	:- info(accept/4, [
-		comment is 'Accepts one incoming WebSocket connection on the given listener and returns an opaque server-side handle. Server opening-handshake options are forwarded to ``http_server::accept_websocket/3``. The direct API also accepts ``auto_pong(on|off)`` and ``max_payload_length(Bytes|none)`` options.',
+		comment is 'Accepts one incoming WebSocket connection on the given listener and returns an opaque server-side handle. Server opening-handshake options are forwarded to ``http_server_core::accept_websocket/3``. The direct API also accepts ``auto_pong(on|off)`` and ``max_payload_length(Bytes|none)`` options.',
 		argnames is ['Listener', 'WebSocket', 'ClientInfo', 'Options'],
 		exceptions is [
 			'``Options`` is a variable or a partial list' - instantiation_error,
 			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
 			'``Options`` contains an invalid direct WebSocket option' - domain_error(http_websocket_option, 'Option'),
-			'The WebSocket opening request does not exist' - existence_error(http_socket_websocket_request, 'Request'),
-			'The WebSocket opening response is invalid' - domain_error(http_socket_websocket_response, 'Response')
+			'The WebSocket opening request does not exist' - existence_error(http_socket_transport_websocket_request, 'Request'),
+			'The WebSocket opening response is invalid' - domain_error(http_socket_transport_websocket_response, 'Response')
 		]
 	]).
 
@@ -294,8 +294,8 @@
 		argnames is ['Listener', 'Handler', 'Response', 'State', 'ClientInfo'],
 		exceptions is [
 			'``Handler`` is not a valid WebSocket service handler' - domain_error(http_websocket_service_handler, 'Handler'),
-			'The WebSocket opening request does not exist' - existence_error(http_socket_websocket_request, 'Request'),
-			'The WebSocket opening response is invalid' - domain_error(http_socket_websocket_response, 'Response')
+			'The WebSocket opening request does not exist' - existence_error(http_socket_transport_websocket_request, 'Request'),
+			'The WebSocket opening response is invalid' - domain_error(http_socket_transport_websocket_response, 'Response')
 		]
 	]).
 
@@ -307,8 +307,8 @@
 		exceptions is [
 			'``Handler`` is not a valid WebSocket service handler' - domain_error(http_websocket_service_handler, 'Handler'),
 			'``Options`` contains an invalid WebSocket service loop option' - domain_error(http_websocket_service_option, 'Option'),
-			'The WebSocket opening request does not exist' - existence_error(http_socket_websocket_request, 'Request'),
-			'The WebSocket opening response is invalid' - domain_error(http_socket_websocket_response, 'Response')
+			'The WebSocket opening request does not exist' - existence_error(http_socket_transport_websocket_request, 'Request'),
+			'The WebSocket opening response is invalid' - domain_error(http_socket_transport_websocket_response, 'Response')
 		]
 	]).
 
@@ -766,19 +766,19 @@
 	]).
 
 	handle(Request, Response) :-
-		http_server::accept_websocket(Request, Response, _Options_).
+		http_server_core::accept_websocket(Request, Response, _Options_).
 
 :- end_object.
 
 
 :- object(http_websocket,
-	extends(http_websocket(http_socket))).
+	extends(http_websocket(http_socket_transport))).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-06-26,
-		comment is 'By default, the high-level WebSocket predicates use the ``http_socket`` library.'
+		comment is 'By default, the high-level WebSocket predicates use the ``http_socket_transport`` library.'
 	]).
 
 :- end_object.

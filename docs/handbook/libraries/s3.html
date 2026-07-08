@@ -172,10 +172,7 @@
 <li class="toctree-l2"><a class="reference internal" href="http_multipart.html"><code class="docutils literal notranslate"><span class="pre">http_multipart</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_parameters.html"><code class="docutils literal notranslate"><span class="pre">http_parameters</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_router.html"><code class="docutils literal notranslate"><span class="pre">http_router</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="http_server.html"><code class="docutils literal notranslate"><span class="pre">http_server</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_session.html"><code class="docutils literal notranslate"><span class="pre">http_session</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="http_socket.html"><code class="docutils literal notranslate"><span class="pre">http_socket</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="http_socket_process.html"><code class="docutils literal notranslate"><span class="pre">http_socket_process</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_static_files.html"><code class="docutils literal notranslate"><span class="pre">http_static_files</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_websocket.html"><code class="docutils literal notranslate"><span class="pre">http_websocket</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="http_websocket_frames.html"><code class="docutils literal notranslate"><span class="pre">http_websocket_frames</span></code></a></li>
@@ -476,7 +473,7 @@ local file:</p>
 </pre></div>
 </div>
 <p>Use an explicit session handle to carry defaults:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> s3_session(http_socket_process)<span class="o">::</span><span class="k">open</span>(
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> s3_session(http_process_transport)<span class="o">::</span><span class="k">open</span>(
          <span class="nv">Session</span>,
          [
              region(<span class="s">&#39;eu-west-1&#39;</span>),
@@ -484,8 +481,8 @@ local file:</p>
              amz_date(<span class="s">&#39;20240627T120000Z&#39;</span>)
          ]
      ),
-     s3_session(http_socket_process)<span class="o">::</span>list_buckets(<span class="nv">Session</span>, <span class="nv">Buckets</span>, []),
-     s3_session(http_socket_process)<span class="o">::</span><span class="k">close</span>(<span class="nv">Session</span>).
+     s3_session(http_process_transport)<span class="o">::</span>list_buckets(<span class="nv">Session</span>, <span class="nv">Buckets</span>, []),
+     s3_session(http_process_transport)<span class="o">::</span><span class="k">close</span>(<span class="nv">Session</span>).
 </pre></div>
 </div>
 <p>Generate a presigned download URL for <code class="docutils literal notranslate"><span class="pre">report.txt</span></code>:</p>

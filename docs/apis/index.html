@@ -769,7 +769,7 @@
 <li class="toctree-l3"><a class="reference internal" href="http_authenticate_verifier_protocol_0.html">http_authenticate_verifier_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_htpasswd_verifier_1.html">http_htpasswd_verifier(Path)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_router_basic_auth_2.html">http_router_basic_auth(Verifier,BaseOptions)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_server_basic_handler_3.html">http_server_basic_handler(Verifier,Handler,ProtectOptions)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_server_core_basic_handler_3.html">http_server_core_basic_handler(Verifier,Handler,ProtectOptions)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-client"><span class="xref std std-ref">http_client</span></a><ul>
@@ -812,7 +812,7 @@
 <li class="toctree-l3"><a class="reference internal" href="http_digest_0.html">http_digest</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_digest_verifier_protocol_0.html">http_digest_verifier_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_router_digest_auth_3.html">http_router_digest_auth(Verifier,ProtectOptions,AuthenticationInfoOptions)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_server_digest_handler_4.html">http_server_digest_handler(Verifier,Handler,ProtectOptions,AuthenticationInfoOptions)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_server_core_digest_handler_4.html">http_server_core_digest_handler(Verifier,Handler,ProtectOptions,AuthenticationInfoOptions)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-directory-listing"><span class="xref std std-ref">http_directory_listing</span></a><ul>
@@ -833,12 +833,16 @@
 <li class="toctree-l3"><a class="reference internal" href="http_router_parameters_0.html">http_router_parameters</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-process-transport"><span class="xref std std-ref">http_process_transport</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http_process_transport_0.html">http_process_transport</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-router"><span class="xref std std-ref">http_router</span></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="http_router_0.html">http_router</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-server"><span class="xref std std-ref">http_server</span></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="http_server_0.html">http_server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-server-core"><span class="xref std std-ref">http_server_core</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http_server_core_0.html">http_server_core</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-session"><span class="xref std std-ref">http_session</span></a><ul>
@@ -846,17 +850,13 @@
 <li class="toctree-l3"><a class="reference internal" href="http_client_session_1.html">http_client_session(A)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_cookie_jar_0.html">http_cookie_jar</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_router_server_session_1.html">http_router_server_session(Manager)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_server_session_0.html">http_server_session</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_server_session_handler_2.html">http_server_session_handler(Manager,Handler)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_server_core_session_0.html">http_server_core_session</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_server_core_session_handler_2.html">http_server_core_session_handler(Manager,Handler)</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-socket"><span class="xref std std-ref">http_socket</span></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="http_socket_0.html">http_socket</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_socket_protocol_0.html">http_socket_protocol</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-socket-process"><span class="xref std std-ref">http_socket_process</span></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="http_socket_process_0.html">http_socket_process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-socket-transport"><span class="xref std std-ref">http_socket_transport</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http_socket_transport_0.html">http_socket_transport</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_transport_protocol_0.html">http_transport_protocol</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-static-files"><span class="xref std std-ref">http_static_files</span></a><ul>
@@ -2390,7 +2390,7 @@
 <li class="toctree-l3"><a class="reference internal" href="http_authenticate_verifier_protocol_0.html">http_authenticate_verifier_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_htpasswd_verifier_1.html">http_htpasswd_verifier(Path)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_router_basic_auth_2.html">http_router_basic_auth(Verifier,BaseOptions)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_server_basic_handler_3.html">http_server_basic_handler(Verifier,Handler,ProtectOptions)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_server_core_basic_handler_3.html">http_server_core_basic_handler(Verifier,Handler,ProtectOptions)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="directory_index.html#library-http-client"><code class="docutils literal notranslate"><span class="pre">library/http_client/</span></code></a><ul>
@@ -2433,7 +2433,7 @@
 <li class="toctree-l3"><a class="reference internal" href="http_digest_0.html">http_digest</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_digest_verifier_protocol_0.html">http_digest_verifier_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_router_digest_auth_3.html">http_router_digest_auth(Verifier,ProtectOptions,AuthenticationInfoOptions)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_server_digest_handler_4.html">http_server_digest_handler(Verifier,Handler,ProtectOptions,AuthenticationInfoOptions)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_server_core_digest_handler_4.html">http_server_core_digest_handler(Verifier,Handler,ProtectOptions,AuthenticationInfoOptions)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="directory_index.html#library-http-directory-listing"><code class="docutils literal notranslate"><span class="pre">library/http_directory_listing/</span></code></a><ul>
@@ -2454,12 +2454,16 @@
 <li class="toctree-l3"><a class="reference internal" href="http_router_parameters_0.html">http_router_parameters</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="directory_index.html#library-http-process-transport"><code class="docutils literal notranslate"><span class="pre">library/http_process_transport/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http_process_transport_0.html">http_process_transport</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="directory_index.html#library-http-router"><code class="docutils literal notranslate"><span class="pre">library/http_router/</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="http_router_0.html">http_router</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="directory_index.html#library-http-server"><code class="docutils literal notranslate"><span class="pre">library/http_server/</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="http_server_0.html">http_server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="directory_index.html#library-http-server-core"><code class="docutils literal notranslate"><span class="pre">library/http_server_core/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http_server_core_0.html">http_server_core</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="directory_index.html#library-http-session"><code class="docutils literal notranslate"><span class="pre">library/http_session/</span></code></a><ul>
@@ -2467,17 +2471,13 @@
 <li class="toctree-l3"><a class="reference internal" href="http_client_session_1.html">http_client_session(A)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_cookie_jar_0.html">http_cookie_jar</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_router_server_session_1.html">http_router_server_session(Manager)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_server_session_0.html">http_server_session</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_server_session_handler_2.html">http_server_session_handler(Manager,Handler)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_server_core_session_0.html">http_server_core_session</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_server_core_session_handler_2.html">http_server_core_session_handler(Manager,Handler)</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="directory_index.html#library-http-socket"><code class="docutils literal notranslate"><span class="pre">library/http_socket/</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="http_socket_0.html">http_socket</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_socket_protocol_0.html">http_socket_protocol</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="directory_index.html#library-http-socket-process"><code class="docutils literal notranslate"><span class="pre">library/http_socket_process/</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="http_socket_process_0.html">http_socket_process</a></li>
+<li class="toctree-l2"><a class="reference internal" href="directory_index.html#library-http-socket-transport"><code class="docutils literal notranslate"><span class="pre">library/http_socket_transport/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http_socket_transport_0.html">http_socket_transport</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_transport_protocol_0.html">http_transport_protocol</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="directory_index.html#library-http-static-files"><code class="docutils literal notranslate"><span class="pre">library/http_static_files/</span></code></a><ul>
@@ -3777,13 +3777,13 @@
 <li class="toctree-l3"><a class="reference internal" href="http_multipart_0.html">http_multipart</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_octet_stream_body_codec_0.html">http_octet_stream_body_codec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_parameters_0.html">http_parameters</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_server_0.html">http_server</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_server_basic_handler_3.html">http_server_basic_handler(Verifier,Handler,ProtectOptions)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_server_digest_handler_4.html">http_server_digest_handler(Verifier,Handler,ProtectOptions,AuthenticationInfoOptions)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_server_session_0.html">http_server_session</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_server_session_handler_2.html">http_server_session_handler(Manager,Handler)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_socket_0.html">http_socket</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_socket_process_0.html">http_socket_process</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_process_transport_0.html">http_process_transport</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_server_core_0.html">http_server_core</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_server_core_basic_handler_3.html">http_server_core_basic_handler(Verifier,Handler,ProtectOptions)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_server_core_digest_handler_4.html">http_server_core_digest_handler(Verifier,Handler,ProtectOptions,AuthenticationInfoOptions)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_server_core_session_0.html">http_server_core_session</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_server_core_session_handler_2.html">http_server_core_session_handler(Manager,Handler)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_socket_transport_0.html">http_socket_transport</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_static_files_0.html">http_static_files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_text_body_codec_0.html">http_text_body_codec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_websocket_0.html">http_websocket</a></li>
@@ -4227,7 +4227,7 @@
 <li class="toctree-l3"><a class="reference internal" href="http_handler_protocol_0.html">http_handler_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_request_protocol_0.html">http_request_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_response_protocol_0.html">http_response_protocol</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_socket_protocol_0.html">http_socket_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_transport_protocol_0.html">http_transport_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_websocket_service_handler_protocol_0.html">http_websocket_service_handler_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ieee_754_fields_protocol_0.html">ieee_754_fields_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ieee_754_protocol_0.html">ieee_754_protocol</a></li>
@@ -12577,7 +12577,7 @@
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
 <li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
-<p>Generated on Wed Jul  8 22:16:20 WEST 2026</p>
+<p>Generated on Wed Jul  8 23:38:41 WEST 2026</p>
 </section>
 
 

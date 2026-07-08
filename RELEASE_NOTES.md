@@ -55,8 +55,8 @@ Gravatar profile information using the Gravatar REST API.
 aggregation, and dependency-aware ordering.
 
 * ADDED: New `http_core`, `http_client_core`, `http_client`, `http_cookies`,
-`http_multipart`, `http_router`, `http_server`, `http_session`, `http_socket`,
-`http_socket_process`, `http_websocket`, `http_websocket_messages`,
+`http_multipart`, `http_router`, `http_server_core`, `http_session`, `http_socket_transport`,
+`http_process_transport`, `http_websocket`, `http_websocket_messages`,
 `http_websocket_session`, `http_websocket_service`, `http_directory_listing`,
 `http_static_files`, `http_parameters`, `http_htmx`, `http_authenticate`,
 `http_digest`, `http_cors`, `open_api`, and `rest` libraries.

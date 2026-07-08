@@ -45,7 +45,7 @@ The example illustrates five basic steps:
 2. Prepare a matching `.htpasswd` file outside the served document root.
 3. Delegate ordinary request paths to `http_static_files::serve/5`.
 4. Delegate a separate browsing prefix to `http_directory_listing::serve/5` with custom presentation options.
-5. Wrap the static-site handler with `http_server_basic_handler(_, _, _)` so the whole site requires valid credentials.
+5. Wrap the static-site handler with `http_server_core_basic_handler(_, _, _)` so the whole site requires valid credentials.
 
 Load the example with:
 
@@ -160,5 +160,5 @@ two static-site libraries and the Basic-auth wrapper stay visible: the handler
 strips a `/browse` prefix before calling `http_directory_listing::serve/5`,
 strips the leading slash from ordinary file requests before calling
 `http_static_files::serve/5`, keeps the password file outside the served tree,
-and lets `http_server_basic_handler(_, _, _)` take care of request protection,
+and lets `http_server_core_basic_handler(_, _, _)` take care of request protection,
 challenge generation, and `401 Unauthorized` responses.

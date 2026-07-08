@@ -8,21 +8,21 @@
 ``http_websocket_client_service``
 =================================
 
-By default, the client-side convenience for callback-driven WebSocket sessions with atom text representation, combining the opening handshake, optional initial outbound messages, and the higher-level session loop, uses the ``http_socket`` library.
+By default, the client-side convenience for callback-driven WebSocket sessions with atom text representation, combining the opening handshake, optional initial outbound messages, and the higher-level session loop, uses the ``http_socket_transport`` library.
 
 | **Availability:** 
 |    ``logtalk_load(http_websocket_service(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-26
+| **Date:** 2026-07-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
 | **Extends:**
-|    ``public`` :ref:`http_websocket_service(http_socket,client,atom) <http_websocket_service/3>`
+|    ``public`` :ref:`http_websocket_service(http_socket_transport,client,atom) <http_websocket_service/3>`
 
 | **Remarks:**
 |    (none)

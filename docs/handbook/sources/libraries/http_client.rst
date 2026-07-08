@@ -7,15 +7,15 @@ The ``http_client`` library provides a request-oriented client layer on
 top of the ``http_core``, ``url``, and parameterized HTTP transport
 libraries. It is the request-oriented client-side entry point: it builds
 normalized requests from absolute URLs plus options and delegates
-transport to the selected ``http_socket_protocol``-compatible layer,
-such as ``http_socket`` or ``http_socket_process``.
+transport to the selected ``http_transport_protocol``-compatible layer,
+such as ``http_socket_transport`` or ``http_process_transport``.
 
 This library can be used with backend Prolog systems that support
 unbound integer arithmetic and the ``sockets`` library: ECLiPSe, SICStus
 Prolog, SWI-Prolog, Trealla Prolog, and XVM.
 
 When using the default ``http_client`` object, the transport
-parameterization is ``http_socket``. The parametric
+parameterization is ``http_socket_transport``. The parametric
 ``http_client(_HTTPSocket_)`` object can also be instantiated with
 alternative transports that implement the same protocol.
 
@@ -47,11 +47,11 @@ To test this library, load the ``tester.lgt`` file:
 Usage examples
 --------------
 
-The examples below are self-contained. They use a local ``http_socket``
-listener so they can be reproduced without any external service. They
-assume a backend with thread support because ``threaded_once/2`` and
-``threaded_exit/2`` are used to run the local server concurrently with
-the client call.
+The examples below are self-contained. They use a local
+``http_socket_transport`` listener so they can be reproduced without any
+external service. They assume a backend with thread support because
+``threaded_once/2`` and ``threaded_exit/2`` are used to run the local
+server concurrently with the client call.
 
 Define a small echo handler once:
 
@@ -72,12 +72,12 @@ response:
 
 ::
 
-   | ?- http_socket::open_listener('127.0.0.1', Port, Listener, []),
-        threaded_once(http_socket::serve_once(Listener, notes_http_client_echo_handler, _), Tag),
+   | ?- http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
+        threaded_once(http_socket_transport::serve_once(Listener, notes_http_client_echo_handler, _), Tag),
         atomic_list_concat(['http://127.0.0.1:', Port, '/echo'], URL),
         http_client::post(URL, content('text/plain', text(hello)), Response, []),
-        threaded_exit(http_socket::serve_once(Listener, notes_http_client_echo_handler, _), Tag),
-        http_socket::close_listener(Listener).
+        threaded_exit(http_socket_transport::serve_once(Listener, notes_http_client_echo_handler, _), Tag),
+        http_socket_transport::close_listener(Listener).
 
    Response = response(http(1,1), status(200, 'OK'), _, content('text/plain', text(hello)), _).
 
@@ -86,12 +86,12 @@ PUT, and PATCH:
 
 ::
 
-   | ?- http_socket::open_listener('127.0.0.1', Port, Listener, []),
-        threaded_once(http_socket::serve_once(Listener, notes_http_client_echo_handler, _), Tag),
+   | ?- http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
+        threaded_once(http_socket_transport::serve_once(Listener, notes_http_client_echo_handler, _), Tag),
         atomic_list_concat(['http://127.0.0.1:', Port, '/contacts'], URL),
         http_client::query(URL, content('application/x-www-form-urlencoded', form([limit-'10'])), Response, []),
-        threaded_exit(http_socket::serve_once(Listener, notes_http_client_echo_handler, _), Tag),
-        http_socket::close_listener(Listener).
+        threaded_exit(http_socket_transport::serve_once(Listener, notes_http_client_echo_handler, _), Tag),
+        http_socket_transport::close_listener(Listener).
 
    Response = response(http(1,1), status(200, 'OK'), _, content('application/x-www-form-urlencoded', form([limit-'10'])), _).
 
@@ -113,8 +113,8 @@ normalized request body using ``http_multipart``:
 
    :- end_object.
 
-   | ?- http_socket::open_listener('127.0.0.1', Port, Listener, []),
-        threaded_once(http_socket::serve_once(Listener, notes_http_client_multipart_handler, _), Tag),
+   | ?- http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
+        threaded_once(http_socket_transport::serve_once(Listener, notes_http_client_multipart_handler, _), Tag),
         atomic_list_concat(['http://127.0.0.1:', Port, '/upload'], URL),
         http_client::post(
             URL,
@@ -125,8 +125,8 @@ normalized request body using ``http_multipart``:
             Response,
             []
         ),
-        threaded_exit(http_socket::serve_once(Listener, notes_http_client_multipart_handler, _), Tag),
-        http_socket::close_listener(Listener).
+        threaded_exit(http_socket_transport::serve_once(Listener, notes_http_client_multipart_handler, _), Tag),
+        http_socket_transport::close_listener(Listener).
 
    Response = response(http(1,1), status(200, 'OK'), _, content('text/plain', text('title=Logtalk; upload=notes.txt')), _).
 
@@ -139,23 +139,23 @@ upgrade:
        implements(http_handler_protocol)).
        
        handle(Request, Response) :-
-           http_server::accept_websocket(Request, Response, [protocol(chat)]).
+           http_server_core::accept_websocket(Request, Response, [protocol(chat)]).
 
    :- end_object.
 
-   | ?- http_socket::open_listener('127.0.0.1', Port, Listener, []),
-        threaded_once(http_socket::serve_once(Listener, notes_http_client_websocket_handler, _), Tag),
+   | ?- http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
+        threaded_once(http_socket_transport::serve_once(Listener, notes_http_client_websocket_handler, _), Tag),
         atomic_list_concat(['ws://127.0.0.1:', Port, '/socket'], URL),
         http_client::open_websocket(URL, Connection, Response, [protocols([chat]), key('dGhlIHNhbXBsZSBub25jZQ==')]),
-        http_socket::close_connection(Connection),
-        threaded_exit(http_socket::serve_once(Listener, notes_http_client_websocket_handler, _), Tag),
-        http_socket::close_listener(Listener).
+        http_socket_transport::close_connection(Connection),
+        threaded_exit(http_socket_transport::serve_once(Listener, notes_http_client_websocket_handler, _), Tag),
+        http_socket_transport::close_listener(Listener).
 
    Response = response(http(1,1), status(101, 'Switching Protocols'), _, empty, _).
 
 The ``Connection`` term returned by ``open_websocket/4`` remains open.
 After the handshake, either close it explicitly with
-``http_socket::close_connection/1`` or hand it to the
+``http_socket_transport::close_connection/1`` or hand it to the
 ``http_websocket``, ``http_websocket_messages``,
 ``http_websocket_session``, or ``http_websocket_service`` libraries.
 
@@ -290,20 +290,20 @@ Current limitations
 -------------------
 
 - URL scheme support depends on the selected transport parameterization.
-  With the default ``http_socket`` parameterization, only absolute
-  ``http://`` URLs are currently supported by the request-oriented
-  facade and only plain ``ws://`` opening handshakes are supported by
-  ``open_websocket/4``. The corresponding TLS-backed ``https://`` and
-  ``wss://`` schemes are therefore not supported in this
-  parameterization.
+  With the default ``http_socket_transport`` parameterization, only
+  absolute ``http://`` URLs are currently supported by the
+  request-oriented facade and only plain ``ws://`` opening handshakes
+  are supported by ``open_websocket/4``. The corresponding TLS-backed
+  ``https://`` and ``wss://`` schemes are therefore not supported in
+  this parameterization.
 - When the selected transport parameterization supports secure schemes,
   the request-oriented facade defaults ``https://`` and ``wss://`` URLs
   without an explicit port to port ``443`` and adds
   ``connection_transport(tls)`` to the connection options automatically
   unless already specified explicitly.
 - This TLS-aware behavior applies, for example, to the
-  ``http_socket_process`` parameterization, which provides transport
-  support for secure schemes via the same ``http_socket_protocol``
+  ``http_process_transport`` parameterization, which provides transport
+  support for secure schemes via the same ``http_transport_protocol``
   interface.
 - The ``open_websocket/4`` predicate is limited to opening-handshake
   validation. See the dedicated WebSocket libraries for frame parsing,

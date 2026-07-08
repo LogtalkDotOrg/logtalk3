@@ -27,8 +27,8 @@
 	:- initialization((
 		logtalk_load(os(loader)),
 		logtalk_load(http_client(loader)),
-		logtalk_load(http_socket(loader)),
-		logtalk_load(http_socket_process(loader)),
+		logtalk_load(http_socket_transport(loader)),
+		logtalk_load(http_process_transport(loader)),
 		logtalk_load(http_websocket_session(loader)),
 		logtalk_load([
 			http_websocket_service_handler_protocol,

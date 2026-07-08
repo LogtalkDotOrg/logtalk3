@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-29,
+		date is 2026-07-08,
 		comment is 'Stateless S3-compatible client facade over the normalized HTTP client.',
 		parnames is ['HTTPSocket']
 	]).
@@ -512,13 +512,13 @@
 
 
 :- object(s3_client,
-	extends(s3_client(http_socket_process))).
+	extends(s3_client(http_process_transport))).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-29,
-		comment is 'Stateless S3-compatible client facade over the normalized HTTP client using by default the ``http_socket_process`` library.'
+		date is 2026-07-08,
+		comment is 'Stateless S3-compatible client facade over the normalized HTTP client using by default the ``http_process_transport`` library.'
 	]).
 
 :- end_object.

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-12,
+		date is 2026-07-08,
 		comment is 'Unit tests for the "http_cookies_counter" example.'
 	]).
 
@@ -57,8 +57,8 @@
 		:- threaded.
 
 		test(http_cookies_counter_client_01, deterministic) :-
-			http_socket::open_listener('127.0.0.1', Port, Listener, []),
-			threaded_once(http_socket::serve_listener(Listener, cookie_counter_http_handler, 2, _ClientInfos, [shutdown(close)]), Tag),
+			http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
+			threaded_once(http_socket_transport::serve_listener(Listener, cookie_counter_http_handler, 2, _ClientInfos, [shutdown(close)]), Tag),
 			catch(
 				cookie_counter_client::run(Port, result(FirstResponse, StoredCookiePairs, SecondResponse)),
 				Error,
@@ -66,9 +66,9 @@
 					throw(Error)
 				)
 			),
-			http_socket::request_listener_shutdown(Listener),
-			threaded_exit(http_socket::serve_listener(Listener, cookie_counter_http_handler, 2, _ClientInfos, [shutdown(close)]), Tag),
-			catch(http_socket::close_listener(Listener), _, true),
+			http_socket_transport::request_listener_shutdown(Listener),
+			threaded_exit(http_socket_transport::serve_listener(Listener, cookie_counter_http_handler, 2, _ClientInfos, [shutdown(close)]), Tag),
+			catch(http_socket_transport::close_listener(Listener), _, true),
 			StoredCookiePairs == [visits-'1'],
 			status(FirstResponse, status(200, 'OK')),
 			body(FirstResponse, content('application/json', json({message-'Visit counter stored in the client cookie.', visits-1}))),
@@ -84,9 +84,9 @@
 			body(SecondResponse, content('application/json', json({message-'Visit counter stored in the client cookie.', visits-2}))).
 
 		cleanup_server_thread(Listener, Tag) :-
-			http_socket::request_listener_shutdown(Listener),
-			catch(threaded_exit(http_socket::serve_listener(Listener, cookie_counter_http_handler, 2, _ClientInfos, [shutdown(close)]), Tag), _, true),
-			catch(http_socket::close_listener(Listener), _, true).
+			http_socket_transport::request_listener_shutdown(Listener),
+			catch(threaded_exit(http_socket_transport::serve_listener(Listener, cookie_counter_http_handler, 2, _ClientInfos, [shutdown(close)]), Tag), _, true),
+			catch(http_socket_transport::close_listener(Listener), _, true).
 
 	:- endif.
 
