@@ -22,9 +22,9 @@
 :- protocol(json_lines_protocol).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2025-05-27,
+		date is 2026-07-08,
 		comment is 'JSON Lines parser and generator protocol.'
 	]).
 
@@ -35,7 +35,8 @@
 		argnames is ['Source', 'Terms'],
 		exceptions is [
 			'``Source`` is a variable' - instantiation_error,
-			'``Source`` is neither a variable nor a valid source' - domain_error(json_lines_source, 'Source')
+			'``Source`` is neither a variable nor a valid source' - domain_error(json_lines_source, 'Source'),
+			'``Source`` contents are not valid JSON Lines' - domain_error(json_lines, 'Source')
 		]
 	]).
 

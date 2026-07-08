@@ -14,8 +14,8 @@ JSON Lines parser and generator protocol.
 |    ``logtalk_load(json_lines(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2025-05-27
+| **Version:** 1:1:0
+| **Date:** 2026-07-08
 
 | **Compilation flags:**
 |    ``static``
@@ -59,6 +59,8 @@ Parses the JSON Lines contents read from the given source (``file(Path)``, ``str
 |        ``instantiation_error``
 |    ``Source`` is neither a variable nor a valid source:
 |        ``domain_error(json_lines_source,Source)``
+|    ``Source`` contents are not valid JSON Lines:
+|        ``domain_error(json_lines,Source)``
 
 
 ------------

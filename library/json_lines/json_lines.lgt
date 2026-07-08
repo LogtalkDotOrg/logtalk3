@@ -23,9 +23,9 @@
 	implements(json_lines_protocol)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-01-25,
+		date is 2026-07-08,
 		comment is 'JSON Lines parser and generator.',
 		parameters is [
 			'ObjectRepresentation' - 'Object representation to be used when decoding JSON objects. Possible values are ``curly`` (default) and ``list``.',
@@ -43,28 +43,52 @@
 		instantiation_error.
 	parse(file(File), Terms) :-
 		open(File, read, Stream),
-		line_to_codes(Stream, Codes),
-		parse_stream(Codes, Stream, Terms),
+		catch(
+			(	line_to_codes(Stream, Codes),
+				( 	parse_stream(Codes, Stream, Terms) ->
+					true
+				;	domain_error(json_lines, file(File))
+				)
+			),
+			Error,
+			(close(Stream), throw(Error))
+		),
+		close(Stream),
 		!.
 	parse(stream(Stream), Terms) :-
 		line_to_codes(Stream, Codes),
-		parse_stream(Codes, Stream, Terms),
-		!.
+		!,
+		( 	parse_stream(Codes, Stream, Terms) ->
+			true
+		;	domain_error(json_lines, stream(Stream))
+		).
 	parse(line(Stream), [Term]) :-
 		line_to_codes(Stream, Codes),
-		phrase(json_value(Term), Codes),
-		!.
+		!,
+		( 	phrase(json_value(Term), Codes) ->
+			true
+		;	domain_error(json_lines, line(Stream))
+		).
 	parse(codes(Codes), Terms) :-
-		phrase(json_values(Terms), Codes),
-		!.
+		!,
+		( 	phrase(json_values(Terms), Codes) ->
+			true
+		;	domain_error(json_lines, codes(Codes))
+		).
 	parse(chars(Chars), Terms) :-
 		chars_to_codes(Chars, Codes),
-		phrase(json_values(Terms), Codes),
-		!.
+		!,
+		( 	phrase(json_values(Terms), Codes) ->
+			true
+		;	domain_error(json_lines, chars(Chars))
+		).
 	parse(atom(Atom), Terms) :-
 		atom_codes(Atom, Codes),
-		phrase(json_values(Terms), Codes),
-		!.
+		!,
+		( 	phrase(json_values(Terms), Codes) ->
+			true
+		;	domain_error(json_lines, atom(Atom))
+		).
 	parse(Source, _) :-
 		domain_error(json_lines_source, Source).
 
@@ -74,7 +98,11 @@
 	generate(file(File), Terms) :-
 		phrase(encode(Terms), Codes),
 		open(File, write, Stream),
-		write_codes(Codes, Stream),
+		catch(
+			write_codes(Codes, Stream),
+			Error,
+			(close(Stream), throw(Error))
+		),
 		close(Stream),
 		!.
 	generate(stream(Stream), Terms) :-
@@ -97,8 +125,7 @@
 
 	% parsing
 
-	parse_stream(end_of_file, Stream, []) :-
-		close(Stream).
+	parse_stream(end_of_file, _, []).
 	parse_stream([Code| Codes], Stream, [Term| Terms]) :-
 		phrase(json_value(Term), [Code| Codes]),
 		line_to_codes(Stream, NextCodes),
@@ -213,16 +240,30 @@
 	% neither " nor \ alone nor the whitespace characters are
 	% allowed inside a string according to the standard
 	json_string(0'\\, [Code| Codes]) -->
-		!, json_string_escape(Code), [Next], json_string(Next, Codes).
+		!, java_string_escape(Code), [Next], json_string(Next, Codes).
 	json_string(0'", []) -->
 		!.
+	json_string(Code, _) -->
+		{control_character_code(Code)}, !, {fail}.
 	json_string(Code, [Code| Codes]) -->
 		[Next], json_string(Next, Codes).
 
-	json_string_escape(Code) -->
-		[0'u, H1, H2, H3, H4], !, {is_hex(H1), is_hex(H2), is_hex(H3), is_hex(H4), number_codes(Code, [0'0, 0'x, H1, H2, H3, H4])}.
-	json_string_escape(Code) -->
+	java_string_escape(Code) -->
+		[0'u, H1, H2, H3, H4], !,
+		{is_hex(H1), is_hex(H2), is_hex(H3), is_hex(H4), number_codes(Escape, [0'0, 0'x, H1, H2, H3, H4])},
+		unicode_escape(Escape, Code).
+	java_string_escape(Code) -->
 		[Code0], {valid_escape_code(Code0, Code)}.
+
+	unicode_escape(High, Code) -->
+		{55296 =< High, High =< 56319}, !,
+		[0'\\, 0'u, H1, H2, H3, H4],
+		{is_hex(H1), is_hex(H2), is_hex(H3), is_hex(H4), number_codes(Low, [0'0, 0'x, H1, H2, H3, H4]), 56320 =< Low, Low =< 57343,
+			Code is 65536 + (High - 55296) * 1024 + Low - 56320}.
+	unicode_escape(Code, _) -->
+		{56320 =< Code, Code =< 57343}, !, {fail}.
+	unicode_escape(Code, Code) -->
+		[].
 
 	% see https://www.json.org/json-en.html
 	valid_escape_code(0'",  34).
@@ -238,29 +279,35 @@
 		json_integer(Code, Codes, Tail0),
 		json_fractional(Tail0, Tail),
 		json_exponent(Tail),
-		{number_codes(Number, Codes)}.
+		{catch(number_codes(Number, Codes), _, fail)}.
 
-	json_integer(Digit, [Digit| Digits], Tail) -->
-		json_digits(Digits, Tail),
-		% JSON forbids leading zeros
-		{Digit =:= 0'0 -> Digits == Tail; true}.
+	json_integer(0'-, [0'-| Codes], Tail) -->
+		!, json_digit(Digit), json_integer_digits(Digit, Codes, Tail).
+	json_integer(Digit, Codes, Tail) -->
+		json_integer_digits(Digit, Codes, Tail).
 
-	json_fractional([0'.| Digits], Tail) -->
-		[0'.], !, json_digits(Digits, Tail).
+	json_integer_digits(0'0, [0'0| Tail], Tail) -->
+		!.
+	json_integer_digits(Digit, [Digit| Digits], Tail) -->
+		{0'1 =< Digit, Digit =< 0'9},
+		json_digits(Digits, Tail).
+
+	json_fractional([0'., Digit| Digits], Tail) -->
+		[0'.], !, json_digit(Digit), json_digits(Digits, Tail).
 	json_fractional([0'., 0'0| Tail], Tail), [Code] -->
 		[Code],	{Code == 0'E; Code == 0'e}, !.
 	json_fractional(Tail, Tail) -->
 		[].
 
-	json_exponent([E, Sign, Code| Codes]) -->
+	json_exponent([E| Codes]) -->
 		[E], {E == 0'E; E == 0'e}, !,
-		json_exponent_sign(Sign), json_digit(Code), json_digits(Codes, []).
+		json_exponent_sign(Codes, [Digit| Digits]), json_digit(Digit), json_digits(Digits, []).
 	json_exponent([]) -->
 		[].
 
-	json_exponent_sign(0'+) --> [0'+], !.
-	json_exponent_sign(0'-) --> [0'-], !.
-	json_exponent_sign(0'+) --> [].
+	json_exponent_sign([0'+| Tail], Tail) --> [0'+], !.
+	json_exponent_sign([0'-| Tail], Tail) --> [0'-], !.
+	json_exponent_sign(Tail, Tail) --> [].
 
 	json_digit(Digit) -->
 		[Digit], {0'0 =< Digit, Digit =< 0'9}.
@@ -358,11 +405,6 @@
 	encode_string([Code| Codes]) -->
 		encode_string(Code, Codes).
 
-	encode_string(0'\\, [0'u, H1, H2, H3, H4| Codes]) -->
-		{is_hex(H1), is_hex(H2), is_hex(H3), is_hex(H4)},
-		!,
-		[0'\\, 0'u, H1, H2, H3, H4],
-		encode_string(Codes).
 	encode_string(0'", Codes) -->
 		!, [0'\\, 0'"], encode_string(Codes).
 	encode_string(0'\\, Codes) -->
@@ -377,6 +419,9 @@
 		!, [0'\\, 0'r], encode_string(Codes).
 	encode_string( 9, Codes) -->
 		!, [0'\\, 0't], encode_string(Codes).
+	encode_string(Code, Codes) -->
+		{control_character_code(Code), High is Code // 16, Low is Code mod 16, hex_digit(High, H1), hex_digit(Low, H2)},
+		!, [0'\\, 0'u, 0'0, 0'0, H1, H2], encode_string(Codes).
 	encode_string(Code, Codes) -->
 		[Code], encode_string(Codes).
 
@@ -424,6 +469,15 @@
 	is_hex(0'D).
 	is_hex(0'E).
 	is_hex(0'F).
+
+	control_character_code(Code) :-
+		0 =< Code, Code =< 31.
+
+	hex_digit(Value, Code) :-
+		( 	Value < 10 ->
+			Code is 0'0 + Value
+		; 	Code is 0'A + Value - 10
+		).
 
 :- end_object.
 

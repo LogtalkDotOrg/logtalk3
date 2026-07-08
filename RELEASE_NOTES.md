@@ -133,6 +133,8 @@ unpadded Base64URL encoding.
 
 * FIXED: Compliance issues of the `json_ld` library.
 
+* FIXED: Compliance issues of the `json_lines` library.
+
 * FIXED: Case where the `json_pointer` library `evaluate/1` predicate would
 throw an error when failure was expected.
 
