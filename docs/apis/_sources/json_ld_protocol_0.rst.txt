@@ -14,8 +14,8 @@ JSON-LD 1.1 parser, generator, and processor protocol.
 |    ``logtalk_load(json_ld(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-02-05
+| **Version:** 1:1:0
+| **Date:** 2026-07-08
 
 | **Compilation flags:**
 |    ``static``
@@ -154,6 +154,31 @@ Flattens an expanded JSON-LD document. Flattening collects all node objects into
 
 | **Exceptions:**
 |    ``Document`` is a variable:
+|        ``instantiation_error``
+
+
+------------
+
+.. index:: frame/3
+.. _json_ld_protocol/0::frame/3:
+
+``frame/3``
+^^^^^^^^^^^
+
+Frames a JSON-LD document using the given frame. The result is an expanded framed document unless the frame provides a context, in which case the result is compacted with that context.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``frame(Document,Frame,Framed)``
+| **Mode and number of proofs:**
+|    ``frame(+term,+term,--term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Document`` is a variable:
+|        ``instantiation_error``
+|    ``Frame`` is a variable:
 |        ``instantiation_error``
 
 

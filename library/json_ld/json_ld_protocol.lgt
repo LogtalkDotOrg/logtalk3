@@ -22,9 +22,9 @@
 :- protocol(json_ld_protocol).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-05,
+		date is 2026-07-08,
 		comment is 'JSON-LD 1.1 parser, generator, and processor protocol.'
 	]).
 
@@ -78,6 +78,17 @@
 		argnames is ['Document', 'Flattened'],
 		exceptions is [
 			'``Document`` is a variable' - instantiation_error
+		]
+	]).
+
+	:- public(frame/3).
+	:- mode(frame(+term, +term, --term), one_or_error).
+	:- info(frame/3, [
+		comment is 'Frames a JSON-LD document using the given frame. The result is an expanded framed document unless the frame provides a context, in which case the result is compacted with that context.',
+		argnames is ['Document', 'Frame', 'Framed'],
+		exceptions is [
+			'``Document`` is a variable' - instantiation_error,
+			'``Frame`` is a variable' - instantiation_error
 		]
 	]).
 

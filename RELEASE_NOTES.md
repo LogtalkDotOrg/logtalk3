@@ -67,6 +67,8 @@ aggregation, and dependency-aware ordering.
 
 * ADDED: New `json_path` library implementing RFC 9535.
 
+* ADDED: Support to the `json_ld` library for the framing algorithm.
+
 * ADDED: Support to the `json_pointer` library for relative JSON pointers.
 
 * ADDED: Support to the `json_schema` library for the `relative-json-pointer`,
@@ -128,6 +130,8 @@ padding. Added a `base64url_no_padding` object for specifications that require
 unpadded Base64URL encoding.
 
 * FIXED: Compliance issues of the `json` library.
+
+* FIXED: Compliance issues of the `json_ld` library.
 
 * FIXED: Case where the `json_pointer` library `evaluate/1` predicate would
 throw an error when failure was expected.

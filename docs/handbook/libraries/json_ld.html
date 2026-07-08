@@ -206,7 +206,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#expansion">Expansion</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#compaction">Compaction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#flattening">Flattening</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#supported-features">Supported Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#framing">Framing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#implemented-features">Implemented Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#known-limitations">Known Limitations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#representation">Representation</a></li>
 </ul>
 </li>
@@ -373,8 +375,9 @@
   <section id="json-ld">
 <span id="library-json-ld"></span><h1><code class="docutils literal notranslate"><span class="pre">json_ld</span></code><a class="headerlink" href="#json-ld" title="Link to this heading"></a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">json_ld</span></code> library provides predicates for parsing, generating,
-expanding, and compacting JSON-LD 1.1 (JSON-based Serialization for
-Linked Data) documents based on the W3C Recommendation found at:</p>
+expanding, compacting, flattening, and framing JSON-LD 1.1 (JSON-based
+Serialization for Linked Data) documents based on the W3C Recommendation
+found at:</p>
 <p><a class="reference external" href="https://www.w3.org/TR/json-ld11/">https://www.w3.org/TR/json-ld11/</a></p>
 <p>This library builds on top of the <code class="docutils literal notranslate"><span class="pre">json</span></code> library for JSON parsing and
 generation, and uses the same representation choices for JSON data. It
@@ -437,7 +440,9 @@ yes
 <section id="compaction">
 <h2>Compaction<a class="headerlink" href="#compaction" title="Link to this heading"></a></h2>
 <p>Compaction is the process of applying a context to shorten IRIs to terms
-or compact IRIs. This is the inverse of expansion:</p>
+or compact IRIs. The current implementation provides basic key and value
+compaction but does not yet implement the full JSON-LD 1.1 inverse
+context selection algorithm:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> json_ld<span class="o">::</span>expand(<span class="k">{</span><span class="s">&#39;@context&#39;</span><span class="o">-</span><span class="k">{</span>name<span class="o">-</span><span class="s">&#39;http://schema.org/name&#39;</span><span class="k">}</span>, name<span class="o">-</span><span class="s">&#39;Manu Sporny&#39;</span><span class="k">}</span>, <span class="nv">Expanded</span>),
      json_ld<span class="o">::</span>compact(<span class="nv">Expanded</span>, <span class="k">{</span><span class="s">&#39;@context&#39;</span><span class="o">-</span><span class="k">{</span>name<span class="o">-</span><span class="s">&#39;http://schema.org/name&#39;</span><span class="k">}}</span>, <span class="nv">Compacted</span>).
 </pre></div>
@@ -445,29 +450,52 @@ or compact IRIs. This is the inverse of expansion:</p>
 </section>
 <section id="flattening">
 <h2>Flattening<a class="headerlink" href="#flattening" title="Link to this heading"></a></h2>
-<p>Flattening collects all node objects from a document into a flat
-<code class="docutils literal notranslate"><span class="pre">&#64;graph</span></code> array, with nested objects replaced by references. Blank node
-identifiers are generated for nodes that don’t have an <code class="docutils literal notranslate"><span class="pre">&#64;id</span></code>:</p>
+<p>Flattening uses node map generation to collect node objects into an
+expanded flat array, with nested node objects replaced by references.
+Blank node identifiers are generated for nodes that don’t have an
+<code class="docutils literal notranslate"><span class="pre">&#64;id</span></code> and existing blank node identifiers are relabeled consistently:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> json_ld<span class="o">::</span>parse(<span class="k">atom</span>(<span class="s">&#39;{&quot;@context&quot;:{&quot;knows&quot;:&quot;http://xmlns.com/foaf/0.1/knows&quot;},&quot;@id&quot;:&quot;http://example.org/john&quot;,&quot;knows&quot;:{&quot;@id&quot;:&quot;http://example.org/jane&quot;}}&#39;</span>), <span class="nv">Doc</span>),
      json_ld<span class="o">::</span>expand(<span class="nv">Doc</span>, <span class="nv">Expanded</span>),
      json_ld<span class="o">::</span>flatten(<span class="nv">Expanded</span>, <span class="nv">Flattened</span>).
 </pre></div>
 </div>
 </section>
-<section id="supported-features">
-<h2>Supported Features<a class="headerlink" href="#supported-features" title="Link to this heading"></a></h2>
-<p>The library supports the following JSON-LD 1.1 features:</p>
+<section id="framing">
+<h2>Framing<a class="headerlink" href="#framing" title="Link to this heading"></a></h2>
+<p>Framing selects and shapes nodes from a JSON-LD document using a frame.
+The <code class="docutils literal notranslate"><span class="pre">frame/3</span></code> predicate expands the input document and frame,
+generates a node map, matches nodes by <code class="docutils literal notranslate"><span class="pre">&#64;id</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;type</span></code>, and framed
+properties, and embeds referenced nodes according to the framing
+options. When the frame includes a context, the framed result is
+compacted using that context:</p>
+<p>| ?- json_ld::frame(
+<a class="reference external" href="mailto:{'&#37;&#52;&#48;context'-{name">{‘<span>&#64;</span>context’-{name</a>-’<a class="reference external" href="http://schema.org/name'}">http://schema.org/name’}</a>,
+<a class="reference external" href="mailto:'&#37;&#52;&#48;id'-'http">‘<span>&#64;</span>id’-‘http</a>://example.org/alice’, name-‘Alice’},
+<a class="reference external" href="mailto:{'&#37;&#52;&#48;context'-{name">{‘<span>&#64;</span>context’-{name</a>-’<a class="reference external" href="http://schema.org/name'}">http://schema.org/name’}</a>,
+<a class="reference external" href="mailto:'&#37;&#52;&#48;id">‘<span>&#64;</span>id</a>’-’<a class="reference external" href="http://example.org/alice'}">http://example.org/alice’}</a>,
+Framed).</p>
+</section>
+<section id="implemented-features">
+<h2>Implemented Features<a class="headerlink" href="#implemented-features" title="Link to this heading"></a></h2>
+<p>The library currently implements the following JSON-LD 1.1 processing
+features:</p>
 <p><strong>Context processing:</strong></p>
 <ul class="simple">
 <li><p>Inline context definitions (<code class="docutils literal notranslate"><span class="pre">&#64;context</span></code>)</p></li>
 <li><p>Vocabulary mapping (<code class="docutils literal notranslate"><span class="pre">&#64;vocab</span></code>)</p></li>
 <li><p>Base IRI (<code class="docutils literal notranslate"><span class="pre">&#64;base</span></code>)</p></li>
-<li><p>Default language (<code class="docutils literal notranslate"><span class="pre">&#64;language</span></code>)</p></li>
-<li><p>Base direction (<code class="docutils literal notranslate"><span class="pre">&#64;direction</span></code>)</p></li>
+<li><p>Relative IRI resolution against <code class="docutils literal notranslate"><span class="pre">&#64;base</span></code>, including common path,
+query, and fragment references</p></li>
+<li><p>Default language (<code class="docutils literal notranslate"><span class="pre">&#64;language</span></code>) for string values</p></li>
+<li><p>Validation of base direction (<code class="docutils literal notranslate"><span class="pre">&#64;direction</span></code>) values</p></li>
 <li><p>Compact IRIs (prefix:suffix notation)</p></li>
-<li><p>Term definitions (simple and expanded)</p></li>
-<li><p>Type coercion (<code class="docutils literal notranslate"><span class="pre">&#64;type</span></code> in term definitions)</p></li>
+<li><p>Term definitions with simple IRI mappings and expanded <code class="docutils literal notranslate"><span class="pre">&#64;id</span></code>
+mappings</p></li>
+<li><p>Type coercion for <code class="docutils literal notranslate"><span class="pre">&#64;id</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;vocab</span></code>, and typed literals in term
+definitions</p></li>
 <li><p>Context arrays (multiple contexts)</p></li>
+<li><p>Validation of <code class="docutils literal notranslate"><span class="pre">&#64;version</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;base</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;vocab</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;language</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&#64;direction</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;propagate</span></code>, and <code class="docutils literal notranslate"><span class="pre">&#64;protected</span></code> context values</p></li>
 </ul>
 <p><strong>Node objects:</strong></p>
 <ul class="simple">
@@ -477,9 +505,11 @@ identifiers are generated for nodes that don’t have an <code class="docutils l
 </ul>
 <p><strong>Value objects:</strong></p>
 <ul class="simple">
+<li><p>String, numeric, and boolean property values expanded as value objects</p></li>
 <li><p>Typed values (<code class="docutils literal notranslate"><span class="pre">&#64;value</span></code> with <code class="docutils literal notranslate"><span class="pre">&#64;type</span></code>)</p></li>
 <li><p>Language-tagged strings (<code class="docutils literal notranslate"><span class="pre">&#64;value</span></code> with <code class="docutils literal notranslate"><span class="pre">&#64;language</span></code>)</p></li>
-<li><p>Direction-tagged strings (<code class="docutils literal notranslate"><span class="pre">&#64;value</span></code> with <code class="docutils literal notranslate"><span class="pre">&#64;direction</span></code>)</p></li>
+<li><p>Direction-tagged value objects (<code class="docutils literal notranslate"><span class="pre">&#64;value</span></code> with <code class="docutils literal notranslate"><span class="pre">&#64;direction</span></code>)</p></li>
+<li><p>Ordinary <code class="docutils literal notranslate"><span class="pre">null</span></code> property values are dropped during expansion</p></li>
 </ul>
 <p><strong>Graph support:</strong></p>
 <ul class="simple">
@@ -490,19 +520,94 @@ identifiers are generated for nodes that don’t have an <code class="docutils l
 <ul class="simple">
 <li><p>Ordered lists (<code class="docutils literal notranslate"><span class="pre">&#64;list</span></code>)</p></li>
 <li><p>Unordered sets (<code class="docutils literal notranslate"><span class="pre">&#64;set</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;list</span></code> rejects nested arrays during expansion</p></li>
 </ul>
 <p><strong>Other features:</strong></p>
 <ul class="simple">
 <li><p>Reverse properties (<code class="docutils literal notranslate"><span class="pre">&#64;reverse</span></code>)</p></li>
 <li><p>Included blocks (<code class="docutils literal notranslate"><span class="pre">&#64;included</span></code>)</p></li>
 <li><p>Index preservation (<code class="docutils literal notranslate"><span class="pre">&#64;index</span></code>)</p></li>
-<li><p>Flattening algorithm (<code class="docutils literal notranslate"><span class="pre">flatten/2</span></code>)</p></li>
+<li><p>Nested property blocks (<code class="docutils literal notranslate"><span class="pre">&#64;nest</span></code>)</p></li>
+<li><p>Basic compaction (<code class="docutils literal notranslate"><span class="pre">compact/3</span></code>)</p></li>
+<li><p>Node map based flattening (<code class="docutils literal notranslate"><span class="pre">flatten/2</span></code>), including named graphs,
+reverse properties, included blocks, lists, duplicate suppression,
+type merging, conflicting index detection, and deterministic blank
+node relabeling</p></li>
+<li><p>Framing (<code class="docutils literal notranslate"><span class="pre">frame/3</span></code>) with <code class="docutils literal notranslate"><span class="pre">&#64;id</span></code> and <code class="docutils literal notranslate"><span class="pre">&#64;type</span></code> matching, nested
+frames, <code class="docutils literal notranslate"><span class="pre">&#64;embed</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;explicit</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;requireAll</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;omitDefault</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&#64;default</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;reverse</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;list</span></code>, cycle prevention, and
+context-based compaction of framed output</p></li>
+</ul>
+</section>
+<section id="known-limitations">
+<h2>Known Limitations<a class="headerlink" href="#known-limitations" title="Link to this heading"></a></h2>
+<p>The implementation is intentionally portable and currently incomplete
+with respect to full JSON-LD 1.1 API conformance. Known limitations
+include:</p>
+<p><strong>Context processing:</strong></p>
+<ul class="simple">
+<li><p>Remote contexts referenced by URL are not fetched.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;import</span></code> is rejected with a
+<code class="docutils literal notranslate"><span class="pre">domain_error(json_ld_context_import,</span> <span class="pre">Value)</span></code> error; imported
+contexts are not loaded or merged.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;protected</span></code> and <code class="docutils literal notranslate"><span class="pre">&#64;propagate</span></code> values are validated but their full
+JSON-LD scoping and term redefinition semantics are not yet
+implemented.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;container</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;prefix</span></code>, scoped contexts, reverse properties in
+term definitions, index mappings, language maps, and graph containers
+are not yet implemented.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;direction</span></code> is preserved in explicit value objects and validated in
+contexts, but default direction is not yet applied to string values
+during expansion.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&#64;type:</span> <span class="pre">&#64;json</span></code> and <code class="docutils literal notranslate"><span class="pre">&#64;type:</span> <span class="pre">&#64;none</span></code> coercion are not yet
+implemented.</p></li>
+</ul>
+<p><strong>Expansion:</strong></p>
+<ul class="simple">
+<li><p>Expansion implements common node, value, list, set, reverse, included,
+index, and nest cases but does not yet implement all validation rules
+from the JSON-LD 1.1 expansion algorithm.</p></li>
+<li><p>Container expansion for <code class="docutils literal notranslate"><span class="pre">&#64;language</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;index</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;id</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;type</span></code>,
+<code class="docutils literal notranslate"><span class="pre">&#64;graph</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;list</span></code>, and <code class="docutils literal notranslate"><span class="pre">&#64;set</span></code> containers is not yet implemented.</p></li>
+<li><p>Reverse property validation is partial.</p></li>
+<li><p>Absolute IRI detection and compact IRI processing are sufficient for
+common <code class="docutils literal notranslate"><span class="pre">://</span></code>, <code class="docutils literal notranslate"><span class="pre">urn:</span></code>, and prefix:suffix cases but are not a
+complete RFC 3986/3987 implementation.</p></li>
+</ul>
+<p><strong>Compaction:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">compact/3</span></code> performs basic key and value compaction but does not yet
+build or use the JSON-LD inverse context.</p></li>
+<li><p>Term selection does not yet account for container, type, language,
+direction, reverse, or index preferences.</p></li>
+<li><p>The result is a compacted term tree and does not yet implement the
+full JSON-LD compact API output shape, including context injection and
+all compact arrays rules.</p></li>
+</ul>
+<p><strong>Flattening:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">flatten/2</span></code> returns expanded flattened output and does not implement
+a separate compacted flattening API variant with context injection.</p></li>
+<li><p>The node map implementation covers common node, named graph, reverse,
+included, list, duplicate suppression, type merging, and blank node
+relabeling cases, but some edge-case validation from the full JSON-LD
+1.1 algorithms is still partial.</p></li>
+</ul>
+<p><strong>Framing:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">frame/3</span></code> implements portable JSON-LD framing for common expanded
+and compacted inputs, including nested embedding, reverse properties,
+lists, defaults, and cycle prevention.</p></li>
+<li><p>Full JSON-LD 1.1 framing edge-case semantics are not yet implemented,
+including all <code class="docutils literal notranslate"><span class="pre">&#64;embed</span></code> modes beyond boolean behavior, all default
+object shapes, graph map framing details, <code class="docutils literal notranslate"><span class="pre">&#64;included</span></code> framing
+details, and all validation/error cases from the Recommendation.</p></li>
 </ul>
 <p><strong>Not currently supported:</strong></p>
 <ul class="simple">
 <li><p>Remote context fetching (contexts referenced by URL)</p></li>
-<li><p>Framing algorithm</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">&#64;import</span></code> context processing</p></li>
+<li><p>Full JSON-LD 1.1 compaction algorithm</p></li>
+<li><p>RDF conversion, normalization, or dataset processing</p></li>
 </ul>
 </section>
 <section id="representation">
