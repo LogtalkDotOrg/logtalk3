@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths for the programming examples
-%  Last updated on June 25, 2026
+%  Last updated on July 8, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -221,3 +221,4 @@ logtalk_library_path(whisper, engines('whisper/')).
 logtalk_library_path(wrappers, examples('wrappers/')).
 logtalk_library_path(xpce, examples('xpce/')).
 logtalk_library_path(yield, engines('yield/')).
+logtalk_library_path(yoda_server, examples('yoda_server/')).

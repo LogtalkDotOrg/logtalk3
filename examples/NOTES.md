@@ -663,3 +663,7 @@ Follows a short description of each included example (in alphabetical order):
 
 - `xpce`  
 	SWI-Prolog only example of using XPCE from Logtalk
+
+- `yoda_server`  
+	example illustrating the use of the `open_ai` library to implement
+	an OpenAI-compatible server

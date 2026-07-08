@@ -206,7 +206,10 @@ HTTP Digest authentication library together with the static-file and
 directory-listing helpers.
 
 * ADDED: New `ollama_client` example illustrating how to use the new `open_ai`
-library.
+library to create an OpenAI client.
+
+* ADDED: New `yoda_server` example illustrating how to use the new `open_ai`
+library to create an OpenAI-compatible server.
 
 * FIXED: The `checkpoint` multi-threading example test flakiness due to
 potential out-or-order output. Thanks to Andrew Davison for the bug report.
