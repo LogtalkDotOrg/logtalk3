@@ -7438,27 +7438,6 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`open_id <open_id/0::exchange_code/5>`
 * :ref:`open_id_client <open_id_client/0::exchange_code/5>`
 
-``exchange_connection/3``
--------------------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`http_socket_protocol <http_socket_protocol/0::exchange_connection/3>`
-
-``exchange_connection/4``
--------------------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`http_client_core <http_client_core/0::exchange_connection/4>`
-* :ref:`http_socket_protocol <http_socket_protocol/0::exchange_connection/4>`
-
 ``exchange_declare/3``
 ----------------------
 
@@ -7478,6 +7457,27 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`amqp <amqp/0::exchange_delete/3>`
+
+``exchange_sequence/3``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_socket_protocol <http_socket_protocol/0::exchange_sequence/3>`
+
+``exchange_sequence/4``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_client_core <http_client_core/0::exchange_sequence/4>`
+* :ref:`http_socket_protocol <http_socket_protocol/0::exchange_sequence/4>`
 
 ``exchange_unbind/4``
 ---------------------

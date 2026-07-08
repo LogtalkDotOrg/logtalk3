@@ -25,12 +25,12 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-07-08,
 		comment is 'Portable stream-based HTTP client core predicates.',
 		remarks is [
 			'Binary streams' - 'All stream predicates expect binary input and output streams.',
 			'Per-message primitives' - 'The ``write_request/2``, ``read_response/2``, and ``exchange/4`` predicates process a single HTTP exchange.',
-			'Connection sequence' - 'The ``exchange_connection/4`` predicate performs sequential exchanges on the same stream pair while HTTP persistence rules allow it.'
+			'Connection sequence' - 'The ``exchange_sequence/4`` predicate performs sequential exchanges on the same stream pair while HTTP persistence rules allow it.'
 		]
 	]).
 
@@ -75,9 +75,9 @@
 		]
 	]).
 
-	:- public(exchange_connection/4).
-	:- mode(exchange_connection(+stream, +stream, ++list(compound), --list(compound)), one_or_error).
-	:- info(exchange_connection/4, [
+	:- public(exchange_sequence/4).
+	:- mode(exchange_sequence(+stream, +stream, ++list(compound), --list(compound)), one_or_error).
+	:- info(exchange_sequence/4, [
 		comment is 'Performs a sequence of request-response exchanges on the same binary stream pair. If additional requests remain when HTTP persistence rules require connection closure, an error is thrown.',
 		argnames is ['Input', 'Output', 'Requests', 'Responses'],
 		exceptions is [
@@ -110,17 +110,17 @@
 		;	domain_error(http_response_stream, unexpected_end_of_file)
 		).
 
-	exchange_connection(Input, Output, Requests, Responses) :-
+	exchange_sequence(Input, Output, Requests, Responses) :-
 		validate_request_sequence(Requests),
-		exchange_connection_requests(Requests, Input, Output, Responses).
+		exchange_sequence_requests(Requests, Input, Output, Responses).
 
-	exchange_connection_requests([], _Input, _Output, []).
-	exchange_connection_requests([Request| Requests], Input, Output, [Response| Responses]) :-
+	exchange_sequence_requests([], _Input, _Output, []).
+	exchange_sequence_requests([Request| Requests], Input, Output, [Response| Responses]) :-
 		exchange(Input, Output, Request, Response),
 		(	Requests == [] ->
 			Responses = []
 		;	^^connection_persistent(Request, Response) ->
-			exchange_connection_requests(Requests, Input, Output, Responses)
+			exchange_sequence_requests(Requests, Input, Output, Responses)
 		;	domain_error(http_client_connection, remaining_requests(Requests))
 		).
 

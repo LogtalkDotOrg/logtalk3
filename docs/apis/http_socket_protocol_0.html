@@ -403,7 +403,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-26</div>
+<div class="line"><strong>Date:</strong> 2026-07-08</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -443,10 +443,10 @@
 <li><p><a class="reference internal" href="#close-connection-pool-1" id="id9"><code class="docutils literal notranslate"><span class="pre">close_connection_pool/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#connection-pool-stats-2" id="id10"><code class="docutils literal notranslate"><span class="pre">connection_pool_stats/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#exchange-3" id="id11"><code class="docutils literal notranslate"><span class="pre">exchange/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#exchange-connection-3" id="id12"><code class="docutils literal notranslate"><span class="pre">exchange_connection/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#exchange-sequence-3" id="id12"><code class="docutils literal notranslate"><span class="pre">exchange_sequence/3</span></code></a></p></li>
 <li><p><a class="reference internal" href="#exchange-4" id="id13"><code class="docutils literal notranslate"><span class="pre">exchange/4</span></code></a></p></li>
 <li><p><a class="reference internal" href="#exchange-5" id="id14"><code class="docutils literal notranslate"><span class="pre">exchange/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#exchange-connection-4" id="id15"><code class="docutils literal notranslate"><span class="pre">exchange_connection/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#exchange-sequence-4" id="id15"><code class="docutils literal notranslate"><span class="pre">exchange_sequence/4</span></code></a></p></li>
 <li><p><a class="reference internal" href="#serve-once-3" id="id16"><code class="docutils literal notranslate"><span class="pre">serve_once/3</span></code></a></p></li>
 <li><p><a class="reference internal" href="#serve-websocket-once-5" id="id17"><code class="docutils literal notranslate"><span class="pre">serve_websocket_once/5</span></code></a></p></li>
 <li><p><a class="reference internal" href="#serve-listener-4" id="id18"><code class="docutils literal notranslate"><span class="pre">serve_listener/4</span></code></a></p></li>
@@ -951,8 +951,8 @@
 </div>
 <hr class="docutils" />
 </section>
-<section id="exchange-connection-3">
-<span id="http-socket-protocol-0-exchange-connection-3"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">exchange_connection/3</span></code></a><a class="headerlink" href="#exchange-connection-3" title="Link to this heading"></a></h3>
+<section id="exchange-sequence-3">
+<span id="http-socket-protocol-0-exchange-sequence-3"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">exchange_sequence/3</span></code></a><a class="headerlink" href="#exchange-sequence-3" title="Link to this heading"></a></h3>
 <p>Performs a sequence of HTTP exchanges on an open reusable client connection or by temporarily acquiring a pooled reusable client connection while HTTP persistence rules allow it.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -963,11 +963,11 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">exchange_connection(ConnectionOrPool,Requests,Responses)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exchange_sequence(ConnectionOrPool,Requests,Responses)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">exchange_connection(+compound,++list(compound),--list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exchange_sequence(+compound,++list(compound),--list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
@@ -1109,8 +1109,8 @@
 </div>
 <hr class="docutils" />
 </section>
-<section id="exchange-connection-4">
-<span id="http-socket-protocol-0-exchange-connection-4"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">exchange_connection/4</span></code></a><a class="headerlink" href="#exchange-connection-4" title="Link to this heading"></a></h3>
+<section id="exchange-sequence-4">
+<span id="http-socket-protocol-0-exchange-sequence-4"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">exchange_sequence/4</span></code></a><a class="headerlink" href="#exchange-sequence-4" title="Link to this heading"></a></h3>
 <p>Opens a client socket connection to the given host and port, performs a sequence of HTTP exchanges on that connection, and closes the connection. When the last request does not already specify connection handling, <code class="docutils literal notranslate"><span class="pre">Connection:</span> <span class="pre">close</span></code> is added automatically to that final request.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1121,11 +1121,11 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">exchange_connection(Host,Port,Requests,Responses)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exchange_sequence(Host,Port,Requests,Responses)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">exchange_connection(+atom,+integer,++list(compound),--list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exchange_sequence(+atom,+integer,++list(compound),--list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">

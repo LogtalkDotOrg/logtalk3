@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-12,
+		date is 2026-07-08,
 		comment is 'Unit tests for the "http_socket" library.'
 	]).
 
@@ -144,14 +144,14 @@
 		status(Response2, status(200, 'OK')),
 		body(Response2, content('text/plain', text(two))).
 
-	test(http_socket_exchange_connection_4_01, deterministic) :-
+	test(http_socket_exchange_sequence_4_01, deterministic) :-
 		Requests = [
 			request(post, origin('/one'), http(1, 1), [host-host('example.com')], content('text/plain', text(one)), []),
 			request(post, origin('/two'), http(1, 1), [host-host('example.com')], content('text/plain', text(two)), [])
 		],
 		http_socket::open_listener('127.0.0.1', Port, Listener, []),
 		threaded_once(server_serve_once(Listener, echo_http_socket_handler), Tag),
-		http_socket::exchange_connection('127.0.0.1', Port, Requests, [Response1, Response2]),
+		http_socket::exchange_sequence('127.0.0.1', Port, Requests, [Response1, Response2]),
 		threaded_exit(server_serve_once(Listener, echo_http_socket_handler), Tag),
 		http_socket::close_listener(Listener),
 		status(Response1, status(200, 'OK')),
@@ -159,14 +159,14 @@
 		status(Response2, status(200, 'OK')),
 		body(Response2, content('text/plain', text(two))).
 
-	test(http_socket_exchange_connection_4_02, deterministic) :-
+	test(http_socket_exchange_sequence_4_02, deterministic) :-
 		Requests = [
 			request(get, origin('/one'), http(1, 0), [host-host('example.com'), connection-['keep-alive', 'keep-alive']], empty, []),
 			request(get, origin('/two'), http(1, 0), [host-host('example.com'), connection-['keep-alive', 'keep-alive']], empty, [])
 		],
 		http_socket::open_listener('127.0.0.1', Port, Listener, []),
 		threaded_once(server_serve_requests_once(Listener, keep_alive_close_http_socket_handler, 2), Tag),
-		http_socket::exchange_connection('127.0.0.1', Port, Requests, [Response1, Response2]),
+		http_socket::exchange_sequence('127.0.0.1', Port, Requests, [Response1, Response2]),
 		threaded_exit(server_serve_requests_once(Listener, keep_alive_close_http_socket_handler, 2), Tag),
 		http_socket::close_listener(Listener),
 		status(Response1, status(200, 'OK')),
@@ -176,7 +176,7 @@
 		body(Response2, empty),
 		\+ property(Response2, connection(_)).
 
-	test(http_socket_exchange_connection_3_01, deterministic) :-
+	test(http_socket_exchange_sequence_3_01, deterministic) :-
 		Requests = [
 			request(post, origin('/one'), http(1, 1), [host-host('example.com')], content('text/plain', text(one)), []),
 			request(post, origin('/two'), http(1, 1), [host-host('example.com')], content('text/plain', text(two)), [])
@@ -184,7 +184,7 @@
 		http_socket::open_listener('127.0.0.1', Port, Listener, []),
 		threaded_once(server_serve_requests_once(Listener, echo_http_socket_handler, 2), Tag),
 		http_socket::open_connection('127.0.0.1', Port, Connection, []),
-		http_socket::exchange_connection(Connection, Requests, [Response1, Response2]),
+		http_socket::exchange_sequence(Connection, Requests, [Response1, Response2]),
 		http_socket::close_connection(Connection),
 		threaded_exit(server_serve_requests_once(Listener, echo_http_socket_handler, 2), Tag),
 		http_socket::close_listener(Listener),
@@ -193,7 +193,7 @@
 		status(Response2, status(200, 'OK')),
 		body(Response2, content('text/plain', text(two))).
 
-	test(http_socket_exchange_connection_pool_3_01, deterministic) :-
+	test(http_socket_exchange_sequence_pool_3_01, deterministic) :-
 		Requests = [
 			request(post, origin('/pool-one'), http(1, 1), [host-host('example.com')], content('text/plain', text(one)), []),
 			request(post, origin('/pool-two'), http(1, 1), [host-host('example.com')], content('text/plain', text(two)), [])
@@ -201,7 +201,7 @@
 		http_socket::open_listener('127.0.0.1', Port, Listener, []),
 		threaded_once(server_serve_requests_once(Listener, echo_http_socket_handler, 2), Tag),
 		http_socket::open_connection_pool('127.0.0.1', Port, Pool, [max_size(1)]),
-		http_socket::exchange_connection(Pool, Requests, [Response1, Response2]),
+		http_socket::exchange_sequence(Pool, Requests, [Response1, Response2]),
 		http_socket::connection_pool_stats(Pool, stats(1, 0, 1, 0, 1)),
 		http_socket::close_connection_pool(Pool),
 		threaded_exit(server_serve_requests_once(Listener, echo_http_socket_handler, 2), Tag),

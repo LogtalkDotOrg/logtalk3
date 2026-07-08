@@ -401,7 +401,7 @@ predicates:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">write_request/2</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">read_response/2</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">exchange/4</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">exchange_connection/4</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exchange_sequence/4</span></code></p></li>
 </ul>
 </section>
 <section id="framing-rules">
@@ -415,7 +415,7 @@ predicates:</p>
 <li><p>close-delimited bodies terminated by end-of-file</p></li>
 </ul>
 <p>Request-aware exchanges performed by <code class="docutils literal notranslate"><span class="pre">http_client_core::exchange/4</span></code>
-and <code class="docutils literal notranslate"><span class="pre">http_client_core::exchange_connection/4</span></code> also support <code class="docutils literal notranslate"><span class="pre">HEAD</span></code>
+and <code class="docutils literal notranslate"><span class="pre">http_client_core::exchange_sequence/4</span></code> also support <code class="docutils literal notranslate"><span class="pre">HEAD</span></code>
 responses. In that case the normalized response body is <code class="docutils literal notranslate"><span class="pre">empty</span></code> and
 the response is annotated with the metadata properties
 <code class="docutils literal notranslate"><span class="pre">body_omitted(head)</span></code> and, when applicable,
@@ -433,7 +433,7 @@ the connection is consumed while reading the body.</p>
 <li><p>Only the transport coding sequence <code class="docutils literal notranslate"><span class="pre">[chunked]</span></code> is recognized when
 reading streamed response bodies in <code class="docutils literal notranslate"><span class="pre">http_client_core</span></code>.</p></li>
 <li><p>Close-delimited response bodies can only be used as the final response
-in an <code class="docutils literal notranslate"><span class="pre">http_client_core::exchange_connection/4</span></code> sequence.</p></li>
+in an <code class="docutils literal notranslate"><span class="pre">http_client_core::exchange_sequence/4</span></code> sequence.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">http_client_core</span></code> object assumes binary streams for both input
 and output.</p></li>
 </ul>

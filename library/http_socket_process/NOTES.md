@@ -102,7 +102,7 @@ Current scope
 
 - reusable client connections (`open_connection/4`, `close_connection/1`)
 - reusable client connection pools (`open_connection_pool/4`, `close_connection_pool/1`)
-- reusable-connection and one-shot exchanges (`exchange/3-4`, `exchange_connection/3-4`)
+- reusable-connection and one-shot exchanges (`exchange/3-4`, `exchange_sequence/3-4`)
 - helper-backed plain TCP listeners (`open_listener/4`, `close_listener/1`)
 - helper-backed TLS listeners (`open_listener/4` with `listener_transport(tls)`)
 - server-side serving (`serve_once/3`, `serve_websocket_once/5`, `serve_listener/4-5`, `serve_until_shutdown/4`, `request_shutdown/1`)

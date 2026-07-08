@@ -60,7 +60,7 @@ The `http_client_core` object provides the following stream-based predicates:
 - `write_request/2`
 - `read_response/2`
 - `exchange/4`
-- `exchange_connection/4`
+- `exchange_sequence/4`
 
 
 Framing rules
@@ -74,7 +74,7 @@ The `http_client_core` object supports response framing for:
 - close-delimited bodies terminated by end-of-file
 
 Request-aware exchanges performed by `http_client_core::exchange/4` and
-`http_client_core::exchange_connection/4` also support `HEAD` responses. In
+`http_client_core::exchange_sequence/4` also support `HEAD` responses. In
 that case the normalized response body is `empty` and the response is annotated
 with the metadata properties `body_omitted(head)` and, when applicable,
 `omitted_body_length(Length)`.
@@ -92,6 +92,6 @@ Current limitations
 - Only the transport coding sequence `[chunked]` is recognized when reading
   streamed response bodies in `http_client_core`.
 - Close-delimited response bodies can only be used as the final response in an
-  `http_client_core::exchange_connection/4` sequence.
+  `http_client_core::exchange_sequence/4` sequence.
 - The `http_client_core` object assumes binary streams for both input and
   output.

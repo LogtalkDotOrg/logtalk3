@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-20,
+		date is 2026-07-08,
 		comment is 'Echo handler used by the http_socket_process live smoke tests.'
 	]).
 
@@ -43,7 +43,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-18,
+		date is 2026-07-08,
 		comment is 'WebSocket handshake handler used by the http_socket_process live smoke tests.'
 	]).
 
@@ -59,7 +59,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-22,
+		date is 2026-07-08,
 		comment is 'Opt-in live smoke tests for the "http_socket_process" library covering external HTTPS client paths and local plain/TLS/WSS server paths.'
 	]).
 
@@ -131,13 +131,13 @@
 			http_socket_process::close_connection(Connection)
 		).
 
-	test(http_socket_process_exchange_connection_3_live_01, deterministic) :-
+	test(http_socket_process_exchange_sequence_3_live_01, deterministic) :-
 		live_endpoint(Host, Port, Path),
 		live_request(Host, Path, Request),
 		http_socket_process::open_connection(Host, Port, Connection, [type(binary), connection_transport(tls)]),
 		setup_call_cleanup(
 			true,
-			(	http_socket_process::exchange_connection(Connection, [Request, Request], [Response1, Response2]),
+			(	http_socket_process::exchange_sequence(Connection, [Request, Request], [Response1, Response2]),
 				valid_live_client_response(Response1),
 				valid_live_client_response(Response2)
 			),

@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-07-08,
 		comment is 'Sockets-backed HTTP transport predicates.'
 	]).
 
@@ -177,9 +177,9 @@
 		]
 	]).
 
-	:- public(exchange_connection/3).
-	:- mode(exchange_connection(+compound, ++list(compound), --list(compound)), one_or_error).
-	:- info(exchange_connection/3, [
+	:- public(exchange_sequence/3).
+	:- mode(exchange_sequence(+compound, ++list(compound), --list(compound)), one_or_error).
+	:- info(exchange_sequence/3, [
 		comment is 'Performs a sequence of HTTP exchanges on an open reusable client connection or by temporarily acquiring a pooled reusable client connection while HTTP persistence rules allow it.',
 		argnames is ['ConnectionOrPool', 'Requests', 'Responses'],
 		exceptions is [
@@ -224,9 +224,9 @@
 		]
 	]).
 
-	:- public(exchange_connection/4).
-	:- mode(exchange_connection(+atom, +integer, ++list(compound), --list(compound)), one_or_error).
-	:- info(exchange_connection/4, [
+	:- public(exchange_sequence/4).
+	:- mode(exchange_sequence(+atom, +integer, ++list(compound), --list(compound)), one_or_error).
+	:- info(exchange_sequence/4, [
 		comment is 'Opens a client socket connection to the given host and port, performs a sequence of HTTP exchanges on that connection, and closes the connection. When the last request does not already specify connection handling, ``Connection: close`` is added automatically to that final request.',
 		argnames is ['Host', 'Port', 'Requests', 'Responses'],
 		exceptions is [

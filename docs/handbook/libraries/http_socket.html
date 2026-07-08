@@ -405,8 +405,7 @@ by responsibility:</p>
 <code class="docutils literal notranslate"><span class="pre">request_listener_shutdown/1</span></code>.</p></li>
 <li><p>Reusable client connections: <code class="docutils literal notranslate"><span class="pre">open_connection/4</span></code>,
 <code class="docutils literal notranslate"><span class="pre">close_connection/1</span></code>, <code class="docutils literal notranslate"><span class="pre">connection_streams/3</span></code>, <code class="docutils literal notranslate"><span class="pre">exchange/3</span></code>,
-<code class="docutils literal notranslate"><span class="pre">exchange_connection/3</span></code>, <code class="docutils literal notranslate"><span class="pre">exchange/4</span></code>, and
-<code class="docutils literal notranslate"><span class="pre">exchange_connection/4</span></code>.</p></li>
+<code class="docutils literal notranslate"><span class="pre">exchange_sequence/3</span></code>, <code class="docutils literal notranslate"><span class="pre">exchange/4</span></code>, and <code class="docutils literal notranslate"><span class="pre">exchange_sequence/4</span></code>.</p></li>
 <li><p>Managed connection pools: <code class="docutils literal notranslate"><span class="pre">open_connection_pool/4</span></code>,
 <code class="docutils literal notranslate"><span class="pre">close_connection_pool/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">connection_pool_stats/2</span></code>.</p></li>
 <li><p>Server-side request serving: <code class="docutils literal notranslate"><span class="pre">serve_once/3</span></code>,
@@ -423,7 +422,7 @@ and teardown to the <code class="docutils literal notranslate"><span class="pre"
 <p>Reusable client connections are represented by
 <code class="docutils literal notranslate"><span class="pre">http_connection(Host,</span> <span class="pre">Port,</span> <span class="pre">...)</span></code> handle terms that carry normalized
 endpoint metadata and can be passed to <code class="docutils literal notranslate"><span class="pre">exchange/3</span></code>,
-<code class="docutils literal notranslate"><span class="pre">exchange_connection/3</span></code>, <code class="docutils literal notranslate"><span class="pre">connection_streams/3</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">exchange_sequence/3</span></code>, <code class="docutils literal notranslate"><span class="pre">connection_streams/3</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">close_connection/1</span></code>.</p>
 <p>Accepted WebSocket upgrades are represented by
 <code class="docutils literal notranslate"><span class="pre">http_websocket_connection(ClientInfo,</span> <span class="pre">Input,</span> <span class="pre">Output)</span></code> handle terms
@@ -432,7 +431,7 @@ that can be passed to <code class="docutils literal notranslate"><span class="pr
 <p>Managed connection pools are represented by
 <code class="docutils literal notranslate"><span class="pre">http_connection_pool(Host,</span> <span class="pre">Port,</span> <span class="pre">...)</span></code> handle terms that carry
 normalized endpoint metadata and can be passed to <code class="docutils literal notranslate"><span class="pre">exchange/3</span></code>,
-<code class="docutils literal notranslate"><span class="pre">exchange_connection/3</span></code>, <code class="docutils literal notranslate"><span class="pre">close_connection_pool/1</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">exchange_sequence/3</span></code>, <code class="docutils literal notranslate"><span class="pre">close_connection_pool/1</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">connection_pool_stats/2</span></code>.</p>
 <p>Open-ended serving is controlled by a user-supplied control term. A
 control term is any fresh non-variable term chosen by the caller to

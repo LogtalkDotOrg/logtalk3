@@ -402,7 +402,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-26</div>
+<div class="line"><strong>Date:</strong> 2026-07-08</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -428,7 +428,7 @@
 <div><ul class="simple">
 <li><p>Binary streams: All stream predicates expect binary input and output streams.</p></li>
 <li><p>Per-message primitives: The <code class="docutils literal notranslate"><span class="pre">write_request/2</span></code>, <code class="docutils literal notranslate"><span class="pre">read_response/2</span></code>, and <code class="docutils literal notranslate"><span class="pre">exchange/4</span></code> predicates process a single HTTP exchange.</p></li>
-<li><p>Connection sequence: The <code class="docutils literal notranslate"><span class="pre">exchange_connection/4</span></code> predicate performs sequential exchanges on the same stream pair while HTTP persistence rules allow it.</p></li>
+<li><p>Connection sequence: The <code class="docutils literal notranslate"><span class="pre">exchange_sequence/4</span></code> predicate performs sequential exchanges on the same stream pair while HTTP persistence rules allow it.</p></li>
 </ul>
 </div></blockquote>
 <div class="line-block">
@@ -444,7 +444,7 @@
 <li><p><a class="reference internal" href="#write-request-2" id="id2"><code class="docutils literal notranslate"><span class="pre">write_request/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#read-response-2" id="id3"><code class="docutils literal notranslate"><span class="pre">read_response/2</span></code></a></p></li>
 <li><p><a class="reference internal" href="#exchange-4" id="id4"><code class="docutils literal notranslate"><span class="pre">exchange/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#exchange-connection-4" id="id5"><code class="docutils literal notranslate"><span class="pre">exchange_connection/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#exchange-sequence-4" id="id5"><code class="docutils literal notranslate"><span class="pre">exchange_sequence/4</span></code></a></p></li>
 </ul>
 </li>
 <li><p><a class="reference internal" href="#protected-predicates" id="id6">Protected predicates</a></p></li>
@@ -588,8 +588,8 @@
 </div>
 <hr class="docutils" />
 </section>
-<section id="exchange-connection-4">
-<span id="http-client-core-0-exchange-connection-4"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">exchange_connection/4</span></code></a><a class="headerlink" href="#exchange-connection-4" title="Link to this heading"></a></h3>
+<section id="exchange-sequence-4">
+<span id="http-client-core-0-exchange-sequence-4"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">exchange_sequence/4</span></code></a><a class="headerlink" href="#exchange-sequence-4" title="Link to this heading"></a></h3>
 <p>Performs a sequence of request-response exchanges on the same binary stream pair. If additional requests remain when HTTP persistence rules require connection closure, an error is thrown.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -600,11 +600,11 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">exchange_connection(Input,Output,Requests,Responses)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exchange_sequence(Input,Output,Requests,Responses)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">exchange_connection(+stream,+stream,++list(compound),--list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exchange_sequence(+stream,+stream,++list(compound),--list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">

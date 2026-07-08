@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-13,
+		date is 2026-07-08,
 		comment is 'Unit tests for the "http_client_core" library.'
 	]).
 
@@ -155,7 +155,7 @@
 		property(Response, body_omitted(head)),
 		property(Response, omitted_body_length(5)).
 
-	test(http_client_core_exchange_connection_4_01, deterministic) :-
+	test(http_client_core_exchange_sequence_4_01, deterministic) :-
 		Requests = [
 			request(post, origin('/one'), http(1, 1), [host-host('example.com')], content('text/plain', text(one)), []),
 			request(post, origin('/two'), http(1, 1), [host-host('example.com')], content('text/plain', text(two)), [])
@@ -170,7 +170,7 @@
 		^^file_path('test_http_client_connection_request.tmp', OutputFile),
 		open(InputFile, read, Input, [type(binary)]),
 		open(OutputFile, write, Output, [type(binary)]),
-		http_client_core::exchange_connection(Input, Output, Requests, Responses),
+		http_client_core::exchange_sequence(Input, Output, Requests, Responses),
 		close(Input),
 		close(Output),
 		Responses = [Response1, Response2],
@@ -181,7 +181,7 @@
 		requests_atom(Requests, RequestAtom),
 		read_file_atom('test_http_client_connection_request.tmp', RequestAtom).
 
-	test(http_client_core_exchange_connection_4_02, deterministic) :-
+	test(http_client_core_exchange_sequence_4_02, deterministic) :-
 		Requests = [
 			request(get, origin('/one'), http(1, 0), [host-host('example.com')], empty, [connection(['keep-alive'])]),
 			request(get, origin('/two'), http(1, 0), [host-host('example.com')], empty, [connection(['keep-alive'])])
@@ -196,7 +196,7 @@
 		^^file_path('test_http_client_keep_alive_request.tmp', OutputFile),
 		open(InputFile, read, Input, [type(binary)]),
 		open(OutputFile, write, Output, [type(binary)]),
-		http_client_core::exchange_connection(Input, Output, Requests, Responses),
+		http_client_core::exchange_sequence(Input, Output, Requests, Responses),
 		close(Input),
 		close(Output),
 		Responses = [Response1, Response2],
@@ -209,7 +209,7 @@
 		requests_atom(Requests, RequestAtom),
 		read_file_atom('test_http_client_keep_alive_request.tmp', RequestAtom).
 
-	test(http_client_core_exchange_connection_4_03, error(domain_error(http_client_connection, remaining_requests(_))), [cleanup((close(in), close(out)))]) :-
+	test(http_client_core_exchange_sequence_4_03, error(domain_error(http_client_connection, remaining_requests(_))), [cleanup((close(in), close(out)))]) :-
 		Requests = [
 			request(get, origin('/one'), http(1, 1), [host-host('example.com')], empty, []),
 			request(get, origin('/two'), http(1, 1), [host-host('example.com')], empty, [])
@@ -223,9 +223,9 @@
 		^^file_path('test_http_client_connection_close_request.tmp', OutputFile),
 		open(InputFile, read, Input, [type(binary), alias(in)]),
 		open(OutputFile, write, Output, [type(binary), alias(out)]),
-		http_client_core::exchange_connection(Input, Output, Requests, _Responses).
+		http_client_core::exchange_sequence(Input, Output, Requests, _Responses).
 
-	test(http_client_core_exchange_connection_4_04, deterministic) :-
+	test(http_client_core_exchange_sequence_4_04, deterministic) :-
 		Requests = [
 			request(get, origin('/final'), http(1, 1), [host-host('example.com')], empty, [])
 		],
@@ -237,14 +237,14 @@
 		^^file_path('test_http_client_connection_last_close_delimited_request.tmp', OutputFile),
 		open(InputFile, read, Input, [type(binary)]),
 		open(OutputFile, write, Output, [type(binary)]),
-		http_client_core::exchange_connection(Input, Output, Requests, [Response]),
+		http_client_core::exchange_sequence(Input, Output, Requests, [Response]),
 		close(Input),
 		close(Output),
 		status(Response, status(200, 'OK')),
 		body(Response, content('text/plain', text(hello))),
 		property(Response, body_framing(close_delimited)).
 
-	test(http_client_core_exchange_connection_4_05, deterministic) :-
+	test(http_client_core_exchange_sequence_4_05, deterministic) :-
 		Requests = [
 			request(get, origin('/one'), http(1, 0), [host-host('example.com'), connection-['keep-alive', 'keep-alive']], empty, []),
 			request(get, origin('/two'), http(1, 0), [host-host('example.com'), connection-['keep-alive', 'keep-alive']], empty, [])
@@ -259,7 +259,7 @@
 		^^file_path('test_http_client_merged_connection_request.tmp', OutputFile),
 		open(InputFile, read, Input, [type(binary)]),
 		open(OutputFile, write, Output, [type(binary)]),
-		http_client_core::exchange_connection(Input, Output, Requests, [Response1, Response2]),
+		http_client_core::exchange_sequence(Input, Output, Requests, [Response1, Response2]),
 		close(Input),
 		close(Output),
 		status(Response1, status(200, 'OK')),

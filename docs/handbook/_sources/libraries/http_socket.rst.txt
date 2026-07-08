@@ -48,8 +48,7 @@ by responsibility:
   ``request_listener_shutdown/1``.
 - Reusable client connections: ``open_connection/4``,
   ``close_connection/1``, ``connection_streams/3``, ``exchange/3``,
-  ``exchange_connection/3``, ``exchange/4``, and
-  ``exchange_connection/4``.
+  ``exchange_sequence/3``, ``exchange/4``, and ``exchange_sequence/4``.
 - Managed connection pools: ``open_connection_pool/4``,
   ``close_connection_pool/1``, and ``connection_pool_stats/2``.
 - Server-side request serving: ``serve_once/3``,
@@ -67,7 +66,7 @@ and teardown to the ``sockets`` library.
 Reusable client connections are represented by
 ``http_connection(Host, Port, ...)`` handle terms that carry normalized
 endpoint metadata and can be passed to ``exchange/3``,
-``exchange_connection/3``, ``connection_streams/3``, and
+``exchange_sequence/3``, ``connection_streams/3``, and
 ``close_connection/1``.
 
 Accepted WebSocket upgrades are represented by
@@ -78,7 +77,7 @@ that can be passed to ``connection_streams/3`` and
 Managed connection pools are represented by
 ``http_connection_pool(Host, Port, ...)`` handle terms that carry
 normalized endpoint metadata and can be passed to ``exchange/3``,
-``exchange_connection/3``, ``close_connection_pool/1``, and
+``exchange_sequence/3``, ``close_connection_pool/1``, and
 ``connection_pool_stats/2``.
 
 Open-ended serving is controlled by a user-supplied control term. A

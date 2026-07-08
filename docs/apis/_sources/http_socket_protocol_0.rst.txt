@@ -15,7 +15,7 @@ Sockets-backed HTTP transport predicates.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-26
+| **Date:** 2026-07-08
 
 | **Compilation flags:**
 |    ``static``
@@ -362,11 +362,11 @@ Performs a single HTTP exchange on an open reusable client connection or by temp
 
 ------------
 
-.. index:: exchange_connection/3
-.. _http_socket_protocol/0::exchange_connection/3:
+.. index:: exchange_sequence/3
+.. _http_socket_protocol/0::exchange_sequence/3:
 
-``exchange_connection/3``
-^^^^^^^^^^^^^^^^^^^^^^^^^
+``exchange_sequence/3``
+^^^^^^^^^^^^^^^^^^^^^^^
 
 Performs a sequence of HTTP exchanges on an open reusable client connection or by temporarily acquiring a pooled reusable client connection while HTTP persistence rules allow it.
 
@@ -374,9 +374,9 @@ Performs a sequence of HTTP exchanges on an open reusable client connection or b
 |    ``static``
 
 | **Template:**
-|    ``exchange_connection(ConnectionOrPool,Requests,Responses)``
+|    ``exchange_sequence(ConnectionOrPool,Requests,Responses)``
 | **Mode and number of proofs:**
-|    ``exchange_connection(+compound,++list(compound),--list(compound))`` - ``one_or_error``
+|    ``exchange_sequence(+compound,++list(compound),--list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
 |    ``ConnectionOrPool`` is a variable:
@@ -465,11 +465,11 @@ Opens a client socket connection to the given host and port using the given conn
 
 ------------
 
-.. index:: exchange_connection/4
-.. _http_socket_protocol/0::exchange_connection/4:
+.. index:: exchange_sequence/4
+.. _http_socket_protocol/0::exchange_sequence/4:
 
-``exchange_connection/4``
-^^^^^^^^^^^^^^^^^^^^^^^^^
+``exchange_sequence/4``
+^^^^^^^^^^^^^^^^^^^^^^^
 
 Opens a client socket connection to the given host and port, performs a sequence of HTTP exchanges on that connection, and closes the connection. When the last request does not already specify connection handling, ``Connection: close`` is added automatically to that final request.
 
@@ -477,9 +477,9 @@ Opens a client socket connection to the given host and port, performs a sequence
 |    ``static``
 
 | **Template:**
-|    ``exchange_connection(Host,Port,Requests,Responses)``
+|    ``exchange_sequence(Host,Port,Requests,Responses)``
 | **Mode and number of proofs:**
-|    ``exchange_connection(+atom,+integer,++list(compound),--list(compound))`` - ``one_or_error``
+|    ``exchange_sequence(+atom,+integer,++list(compound),--list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
 |    ``Host`` and ``Port`` are not a valid HTTP authority target:

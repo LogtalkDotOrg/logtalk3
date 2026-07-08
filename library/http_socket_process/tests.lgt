@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-22,
+		date is 2026-07-08,
 		comment is 'Echo handler used by the "http_socket_process" library server-side tests.'
 	]).
 
@@ -59,7 +59,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-24,
+		date is 2026-07-08,
 		comment is 'Unit tests for the "http_socket_process" library.'
 	]).
 
@@ -89,12 +89,12 @@
 			http_socket_process::close_connection_pool(Pool)
 		).
 
-	test(http_socket_process_exchange_connection_pool_3_01, true((Responses == [], StatsBefore == stats(0, 0, 0, 0, 2), StatsAfter == stats(0, 0, 0, 0, 2)))) :-
+	test(http_socket_process_exchange_sequence_pool_3_01, true((Responses == [], StatsBefore == stats(0, 0, 0, 0, 2), StatsAfter == stats(0, 0, 0, 0, 2)))) :-
 		http_socket_process::open_connection_pool('example.com', 443, Pool, [min_size(0), max_size(2), connection_options([type(text)])]),
 		setup_call_cleanup(
 			true,
 			(	http_socket_process::connection_pool_stats(Pool, StatsBefore),
-				http_socket_process::exchange_connection(Pool, [], Responses),
+				http_socket_process::exchange_sequence(Pool, [], Responses),
 				http_socket_process::connection_pool_stats(Pool, StatsAfter)
 			),
 			http_socket_process::close_connection_pool(Pool)
@@ -112,8 +112,8 @@
 	test(http_socket_process_open_connection_pool_4_01, error(domain_error(http_socket_process_connection_pool_options, [min_size(2), max_size(1)]))) :-
 		http_socket_process::open_connection_pool('example.com', 443, _Pool, [min_size(2), max_size(1)]).
 
-	test(http_socket_process_exchange_connection_4_01, true(Responses == [])) :-
-		http_socket_process::exchange_connection('example.com', 443, [], Responses).
+	test(http_socket_process_exchange_sequence_4_01, true(Responses == [])) :-
+		http_socket_process::exchange_sequence('example.com', 443, [], Responses).
 
 	test(http_socket_process_connection_streams_3_01, error(domain_error(http_socket_connection, invalid_connection))) :-
 		http_socket_process::connection_streams(invalid_connection, _Input, _Output).

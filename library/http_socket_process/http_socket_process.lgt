@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-23,
+		date is 2026-07-08,
 		comment is 'Process-backed HTTP transport predicates using the process library and helper processes.'
 	]).
 
@@ -375,12 +375,12 @@
 		connection_streams(Connection, Input, Output),
 		http_client_core::exchange(Input, Output, Request, Response).
 
-	exchange_connection(http_connection_pool(Host, Port, PoolId), Requests, Responses) :-
+	exchange_sequence(http_connection_pool(Host, Port, PoolId), Requests, Responses) :-
 		!,
-		pool_exchange_connection(PoolId, http_connection_pool(Host, Port, PoolId), Requests, Responses).
-	exchange_connection(Connection, Requests, Responses) :-
+		pool_exchange_sequence(PoolId, http_connection_pool(Host, Port, PoolId), Requests, Responses).
+	exchange_sequence(Connection, Requests, Responses) :-
 		connection_streams(Connection, Input, Output),
-		http_client_core::exchange_connection(Input, Output, Requests, Responses).
+		http_client_core::exchange_sequence(Input, Output, Requests, Responses).
 
 	exchange(Host, Port, Request, Response) :-
 		exchange(Host, Port, Request, Response, []).
@@ -393,13 +393,13 @@
 			close_connection(Connection)
 		).
 
-	exchange_connection(_Host, _Port, [], []) :-
+	exchange_sequence(_Host, _Port, [], []) :-
 		!.
-	exchange_connection(Host, Port, Requests0, Responses) :-
+	exchange_sequence(Host, Port, Requests0, Responses) :-
 		setup_call_cleanup(
 			open_connection(Host, Port, Connection, [type(binary)]),
 			(	one_shot_request_sequence(Requests0, Requests),
-				exchange_connection(Connection, Requests, Responses)
+				exchange_sequence(Connection, Requests, Responses)
 			),
 			close_connection(Connection)
 		).
@@ -1412,14 +1412,14 @@
 	release_pool_connection_action(closed, Connection) :-
 		catch(close_connection(Connection), _, true).
 
-	pool_exchange_connection(PoolId, Pool, Requests, Responses) :-
+	pool_exchange_sequence(PoolId, Pool, Requests, Responses) :-
 		(	Requests == [] ->
 			connection_pool_id_outcome(PoolId, Outcome),
 			connection_pool_stats_outcome(Outcome, Pool, _Stats),
 			Responses = []
 		;	acquire_managed_connection(Pool, PoolId, Connection),
 			catch(
-				exchange_connection(Connection, Requests, Responses),
+				exchange_sequence(Connection, Requests, Responses),
 				Error,
 				(	discard_managed_connection(PoolId, Connection),
 					throw(Error)
