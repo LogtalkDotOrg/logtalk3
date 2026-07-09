@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'Unit tests for the "http_static_site_digest" example.'
 	]).
 
@@ -151,18 +151,18 @@
 
 			test(http_static_site_digest_client_01, deterministic) :-
 				static_site_digest_fixture::prepare(DocumentRoot),
-				http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
-				threaded_once(static_site_digest_server::serve_listener(Listener, DocumentRoot, 7), Tag),
+				http_server::open('127.0.0.1', Port, Server, []),
+				threaded_once(static_site_digest_server::serve_listener(Server, DocumentRoot, 7), Tag),
 				catch(
 					static_site_digest_client::run(Port, result(ChallengeResponse, HomeResponse, GuideResponse, ListingResponse)),
 					Error,
-					( 	cleanup_server_thread(DocumentRoot, Listener, Tag, 7),
+					( 	cleanup_server_thread(DocumentRoot, Server, Tag, 7),
 						throw(Error)
 					)
 				),
-				http_socket_transport::request_listener_shutdown(Listener),
-				threaded_exit(static_site_digest_server::serve_listener(Listener, DocumentRoot, 7), Tag),
-				catch(http_socket_transport::close_listener(Listener), _, true),
+				http_server::request_listener_shutdown(Server),
+				threaded_exit(static_site_digest_server::serve_listener(Server, DocumentRoot, 7), Tag),
+				catch(http_server::close(Server), _, true),
 				status(ChallengeResponse, status(401, 'Unauthorized')),
 				digest_challenge_fields(ChallengeResponse, ChallengeFields),
 				static_site_digest_fixture::realm(Realm),
@@ -182,18 +182,18 @@
 
 			test(http_static_site_digest_client_02, deterministic) :-
 				static_site_digest_fixture::prepare(DocumentRoot),
-				http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
-				threaded_once(static_site_digest_server::serve_listener(Listener, DocumentRoot, 2), Tag),
+				http_server::open('127.0.0.1', Port, Server, []),
+				threaded_once(static_site_digest_server::serve_listener(Server, DocumentRoot, 2), Tag),
 				catch(
 					static_site_digest_client::fetch_guide(Port, Response),
 					Error,
-					( 	cleanup_server_thread(DocumentRoot, Listener, Tag, 2),
+					( 	cleanup_server_thread(DocumentRoot, Server, Tag, 2),
 						throw(Error)
 					)
 				),
-				http_socket_transport::request_listener_shutdown(Listener),
-				threaded_exit(static_site_digest_server::serve_listener(Listener, DocumentRoot, 2), Tag),
-				catch(http_socket_transport::close_listener(Listener), _, true),
+				http_server::request_listener_shutdown(Server),
+				threaded_exit(static_site_digest_server::serve_listener(Server, DocumentRoot, 2), Tag),
+				catch(http_server::close(Server), _, true),
 				status(Response, status(200, 'OK')),
 				body(Response, content('text/plain', text('Guide for the digest-authenticated static site example.'))).
 
@@ -213,10 +213,10 @@
 				once(sub_atom(ListingHTML, _, _, _, '<a href="api/">api/</a>')),
 				once(sub_atom(ListingHTML, _, _, _, 'class="directory-listing-table theme-ocean columns-name-type-modified"')).
 
-			cleanup_server_thread(DocumentRoot, Listener, Tag, Count) :-
-				http_socket_transport::request_listener_shutdown(Listener),
-				catch(threaded_exit(static_site_digest_server::serve_listener(Listener, DocumentRoot, Count), Tag), _, true),
-				catch(http_socket_transport::close_listener(Listener), _, true),
+			cleanup_server_thread(DocumentRoot, Server, Tag, Count) :-
+				http_server::request_listener_shutdown(Server),
+				catch(threaded_exit(static_site_digest_server::serve_listener(Server, DocumentRoot, Count), Tag), _, true),
+				catch(http_server::close(Server), _, true),
 				static_site_digest_fixture::workspace_root(Root),
 				catch(static_site_digest_fixture::cleanup(Root), _, true).
 

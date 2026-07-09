@@ -27,7 +27,7 @@
 	:- initialization((
 		set_logtalk_flag(report, warnings),
 		logtalk_load(open_ai(loader)),
-		logtalk_load(http_socket_transport(loader)),
+		logtalk_load(http_server(loader)),
 		logtalk_load(process(loader)),
 		logtalk_load(os(loader)),
 		logtalk_load(json(loader)),

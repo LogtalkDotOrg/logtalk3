@@ -26,7 +26,7 @@
 
 	:- initialization((
 		logtalk_load(open_ai(loader)),
-		logtalk_load(http_socket_transport(loader)),
+		logtalk_load(http_server(loader)),
 		logtalk_load(yoda_server, [optimize(on)])
 	)).
 

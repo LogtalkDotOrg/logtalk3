@@ -25,7 +25,7 @@
 	:- info([
 		version is 0:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'Unit tests for the "http_websocket_echo" example.'
 	]).
 

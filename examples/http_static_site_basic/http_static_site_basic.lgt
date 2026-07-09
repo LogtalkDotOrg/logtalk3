@@ -28,7 +28,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'Fixture object that creates and deletes the sample document root and password file used by the authenticated static-site example.'
 	]).
 
@@ -306,19 +306,12 @@
 		catch(static_site_basic_fixture::cleanup(WorkspaceRoot), _, true).
 
 	serve(Port, DocumentRoot, PasswordFile, Count) :-
-		http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
-		catch(
-			serve_listener(Listener, DocumentRoot, PasswordFile, Count),
-			Error,
-			( 	catch(http_socket_transport::close_listener(Listener), _, true),
-				throw(Error)
-			)
-		),
-		http_socket_transport::close_listener(Listener).
-
-	serve_listener(Listener, DocumentRoot, PasswordFile, Count) :-
 		protected_handler(DocumentRoot, PasswordFile, Handler),
-		http_socket_transport::serve_listener(Listener, Handler, Count, _ClientInfos, [shutdown(close)]).
+		http_server::serve('127.0.0.1', Port, Handler, Count, _ClientInfos, []).
+
+	serve_listener(Server, DocumentRoot, PasswordFile, Count) :-
+		protected_handler(DocumentRoot, PasswordFile, Handler),
+		http_server::serve(Server, Handler, Count, _ClientInfos, []).
 
 	protected_handler(DocumentRoot, PasswordFile, Handler) :-
 		static_site_basic_fixture::realm(Realm),
@@ -453,24 +446,20 @@
 		run(Result) :-
 			static_site_basic_fixture::prepare(DocumentRoot, PasswordFile),
 			static_site_basic_fixture::workspace_root(WorkspaceRoot),
-			http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
-			threaded_once(static_site_basic_server::serve_listener(Listener, DocumentRoot, PasswordFile, 4), Tag),
+			static_site_basic_fixture::realm(Realm),
+			Handler = http_server_core_basic_handler(http_htpasswd_verifier(PasswordFile), static_site_basic_http_handler(DocumentRoot), [realm(Realm)]),
+			http_server::start(Port, Handler, Server, []),
 			catch(
 				static_site_basic_client::run(Port, Result),
 				Error,
-				( 	cleanup_demo(WorkspaceRoot, DocumentRoot, PasswordFile, Listener, Tag),
+				( 	cleanup_demo(WorkspaceRoot, Server),
 					throw(Error)
 				)
 			),
-			http_socket_transport::request_listener_shutdown(Listener),
-			threaded_exit(static_site_basic_server::serve_listener(Listener, DocumentRoot, PasswordFile, 4), Tag),
-			catch(http_socket_transport::close_listener(Listener), _, true),
-			catch(static_site_basic_fixture::cleanup(WorkspaceRoot), _, true).
+			cleanup_demo(WorkspaceRoot, Server).
 
-		cleanup_demo(WorkspaceRoot, DocumentRoot, PasswordFile, Listener, Tag) :-
-			http_socket_transport::request_listener_shutdown(Listener),
-			catch(threaded_exit(static_site_basic_server::serve_listener(Listener, DocumentRoot, PasswordFile, 4), Tag), _, true),
-			catch(http_socket_transport::close_listener(Listener), _, true),
+		cleanup_demo(WorkspaceRoot, Server) :-
+			catch(http_server::stop(Server), _, true),
 			catch(static_site_basic_fixture::cleanup(WorkspaceRoot), _, true).
 
 		print_result(result(ChallengeResponse, HomeResponse, GuideResponse, ListingResponse)) :-

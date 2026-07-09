@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'Unit tests for the "http_multipart_form" example.'
 	]).
 
@@ -90,18 +90,18 @@
 		:- threaded.
 
 		test(http_multipart_form_client_01, deterministic) :-
-			http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
-			threaded_once(multipart_form_server::serve_listener(Listener, 2), Tag),
+			http_server::open('127.0.0.1', Port, Server, []),
+			threaded_once(multipart_form_server::serve_listener(Server, 2), Tag),
 			catch(
 				multipart_form_client::run(Port, 'Ada Lovelace', 'ada@example.com', result(FormResponse, SubmitResponse)),
 				Error,
-				( 	cleanup_server_thread(Listener, Tag),
+				( 	cleanup_server_thread(Server, Tag),
 					throw(Error)
 				)
 			),
-			http_socket_transport::request_listener_shutdown(Listener),
-			threaded_exit(multipart_form_server::serve_listener(Listener, 2), Tag),
-			catch(http_socket_transport::close_listener(Listener), _, true),
+			http_server::request_listener_shutdown(Server),
+			threaded_exit(multipart_form_server::serve_listener(Server, 2), Tag),
+			catch(http_server::close(Server), _, true),
 			status(FormResponse, status(200, 'OK')),
 			body(FormResponse, content('text/html', text(FormHTML))),
 			once(sub_atom(FormHTML, _, _, _, 'Contact form')),
@@ -115,10 +115,10 @@
 			status(FormResponse, status(200, 'OK')),
 			status(SubmitResponse, status(200, 'OK')).
 
-		cleanup_server_thread(Listener, Tag) :-
-			http_socket_transport::request_listener_shutdown(Listener),
-			catch(threaded_exit(multipart_form_server::serve_listener(Listener, 2), Tag), _, true),
-			catch(http_socket_transport::close_listener(Listener), _, true).
+		cleanup_server_thread(Server, Tag) :-
+			http_server::request_listener_shutdown(Server),
+			catch(threaded_exit(multipart_form_server::serve_listener(Server, 2), Tag), _, true),
+			catch(http_server::close(Server), _, true).
 
 	:- endif.
 

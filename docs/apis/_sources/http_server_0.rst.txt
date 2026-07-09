@@ -8,31 +8,29 @@
 ``http_server``
 ===============
 
-Portable stream-based HTTP server orchestration predicates.
+User-facing HTTP(S) server facade built on top of the HTTP transport libraries.
 
 | **Availability:** 
 |    ``logtalk_load(http_server(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-07-07
+| **Date:** 2026-07-09
 
 | **Compilation flags:**
-|    ``static, context_switching_calls``
+|    ``static, context_switching_calls, threaded``
 
 
 | **Imports:**
-|    ``public`` :ref:`http_message_helpers <http_message_helpers/0>`
+|    ``public`` :ref:`options <options/0>`
 | **Uses:**
-|    :ref:`http_core <http_core/0>`
-|    :ref:`http_websocket_handshake <http_websocket_handshake/0>`
 |    :ref:`list <list/0>`
 
 | **Remarks:**
 |    (none)
 
 | **Inherited public predicates:**
-|    (none)
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:
@@ -41,183 +39,310 @@ Portable stream-based HTTP server orchestration predicates.
 Public predicates
 -----------------
 
-.. index:: read_request/2
-.. _http_server/0::read_request/2:
+.. index:: open/3
+.. _http_server/0::open/3:
 
-``read_request/2``
-^^^^^^^^^^^^^^^^^^
+``open/3``
+^^^^^^^^^^
 
-Reads exactly one HTTP request from a binary stream and returns it as a normalized request term. Fails on clean end-of-file before reading any bytes.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``read_request(Input,Request)``
-| **Mode and number of proofs:**
-|    ``read_request(+stream,--compound)`` - ``zero_or_one``
-
-
-------------
-
-.. index:: write_response/2
-.. _http_server/0::write_response/2:
-
-``write_response/2``
-^^^^^^^^^^^^^^^^^^^^
-
-Writes exactly one normalized HTTP response term to a binary stream.
+Opens a listener on the loopback address using the selected scheme and transport options and returns an opaque server handle.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``write_response(Output,Response)``
+|    ``open(Port,Server,Options)``
 | **Mode and number of proofs:**
-|    ``write_response(+stream,+compound)`` - ``one_or_error``
-
-| **Exceptions:**
-|    ``Output`` is invalid for the delegated HTTP response generator:
-|        ``domain_error(http_sink,stream(Output))``
-|    ``Response`` is not a valid normalized HTTP response term:
-|        ``domain_error(http_response,Response)``
-|    The response body file range is outside the file contents:
-|        ``domain_error(http_body_file_range,file(File,Offset,Length))``
+|    ``open(+integer,--compound,+list)`` - ``one_or_error``
 
 
 ------------
 
-.. index:: dispatch/3
-.. _http_server/0::dispatch/3:
+.. index:: open/4
+.. _http_server/0::open/4:
 
-``dispatch/3``
-^^^^^^^^^^^^^^
+``open/4``
+^^^^^^^^^^
 
-Dispatches a normalized HTTP request to a handler object implementing the http_handler_protocol protocol. Handler failures, exceptions, or invalid responses are converted to an internal server error response.
+Opens a listener on the given host using the selected scheme and transport options and returns an opaque server handle.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``dispatch(Handler,Request,Response)``
+|    ``open(Host,Port,Server,Options)``
 | **Mode and number of proofs:**
-|    ``dispatch(+object_identifier,+compound,-compound)`` - ``one_or_error``
-
-| **Exceptions:**
+|    ``open(+atom,+integer,--compound,+list)`` - ``one_or_error``
 
 
 ------------
 
-.. index:: serve/3
-.. _http_server/0::serve/3:
+.. index:: close/1
+.. _http_server/0::close/1:
 
-``serve/3``
+``close/1``
 ^^^^^^^^^^^
 
-Reads one request from a binary input stream, dispatches it to a handler object, and writes one response to a binary output stream. HEAD requests suppress response body bytes on the wire while preserving the generated response headers. Malformed requests are converted to bad request responses.
+Closes an open server listener.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``serve(Input,Output,Handler)``
+|    ``close(Server)``
 | **Mode and number of proofs:**
-|    ``serve(+stream,+stream,+object_identifier)`` - ``zero_or_one``
+|    ``close(+compound)`` - ``one_or_error``
 
 
 ------------
 
-.. index:: serve_connection/3
-.. _http_server/0::serve_connection/3:
+.. index:: request_listener_shutdown/1
+.. _http_server/0::request_listener_shutdown/1:
 
-``serve_connection/3``
+``request_listener_shutdown/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Requests shutdown of a blocking accept operation on an open server listener.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``request_listener_shutdown(Server)``
+| **Mode and number of proofs:**
+|    ``request_listener_shutdown(+compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: serve_once/3
+.. _http_server/0::serve_once/3:
+
+``serve_once/3``
+^^^^^^^^^^^^^^^^
+
+Serves a single request on an open server listener.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serve_once(Server,Handler,ClientInfo)``
+| **Mode and number of proofs:**
+|    ``serve_once(+compound,+object_identifier,--compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: serve_websocket_once/5
+.. _http_server/0::serve_websocket_once/5:
+
+``serve_websocket_once/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Serves a single WebSocket opening handshake on an open server listener.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serve_websocket_once(Server,Handler,Connection,Response,ClientInfo)``
+| **Mode and number of proofs:**
+|    ``serve_websocket_once(+compound,+object_identifier,--compound,--compound,--compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: serve/4
+.. _http_server/0::serve/4:
+
+``serve/4``
+^^^^^^^^^^^
+
+Serves a bounded number of requests on an open server, or opens a loopback listener, serves requests, and closes it.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serve(ServerOrPort,Handler,Count,ClientInfosOrOptions)``
+| **Mode and number of proofs:**
+|    ``serve(+compound,+object_identifier,+integer,--list)`` - ``one_or_error``
+|    ``serve(+integer,+object_identifier,+integer,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: serve/5
+.. _http_server/0::serve/5:
+
+``serve/5``
+^^^^^^^^^^^
+
+Serves a bounded number of requests on an open server, or opens a loopback listener, serves requests, and closes it.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serve(ServerOrPort,Handler,Count,ClientInfos,Options)``
+| **Mode and number of proofs:**
+|    ``serve(+compound,+object_identifier,+integer,--list,+list)`` - ``one_or_error``
+|    ``serve(+integer,+object_identifier,+integer,--list,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: serve/6
+.. _http_server/0::serve/6:
+
+``serve/6``
+^^^^^^^^^^^
+
+Opens a listener on the given host, serves a bounded number of requests, and closes it.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serve(Host,Port,Handler,Count,ClientInfos,Options)``
+| **Mode and number of proofs:**
+|    ``serve(+atom,+integer,+object_identifier,+integer,--list,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: serve_until_shutdown/5
+.. _http_server/0::serve_until_shutdown/5:
+
+``serve_until_shutdown/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Opens a listener on the given host and serves requests until shutdown is requested.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serve_until_shutdown(Host,Port,Handler,Control,Options)``
+| **Mode and number of proofs:**
+|    ``serve_until_shutdown(+atom,+integer,+object_identifier,+nonvar,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: serve_until_shutdown/6
+.. _http_server/0::serve_until_shutdown/6:
+
+``serve_until_shutdown/6``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Opens a listener on the given host, calls Ready after shutdown control registration, and serves requests until shutdown is requested.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serve_until_shutdown(Host,Port,Handler,Control,Options,Ready)``
+| **Meta-predicate template:**
+|    ``serve_until_shutdown(*,*,*,*,*,0)``
+| **Mode and number of proofs:**
+|    ``serve_until_shutdown(+atom,+integer,+object_identifier,+nonvar,+list,+callable)`` - ``one_or_error``
+
+
+------------
+
+.. index:: request_shutdown/1
+.. _http_server/0::request_shutdown/1:
+
+``request_shutdown/1``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Repeatedly reads requests from a binary input stream, dispatches them to a handler object, and writes responses to a binary output stream until end-of-file, a ``101 Switching Protocols`` response, or connection-close semantics terminate the connection. HEAD requests suppress response body bytes on the wire while preserving the generated response headers.
+Requests shutdown of an open-ended server loop.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``serve_connection(Input,Output,Handler)``
+|    ``request_shutdown(Control)``
 | **Mode and number of proofs:**
-|    ``serve_connection(+stream,+stream,+object_identifier)`` - ``one_or_error``
-
-| **Exceptions:**
-|    ``Handler`` does not conform to the HTTP handler protocol:
-|        ``domain_error(http_handler_protocol,Handler)``
-|    ``Output`` is invalid for the delegated HTTP response generator:
-|        ``domain_error(http_sink,stream(Output))``
-|    The generated response is not a valid normalized HTTP response term:
-|        ``domain_error(http_response,Response)``
-|    The response body file range is outside the file contents:
-|        ``domain_error(http_body_file_range,file(File,Offset,Length))``
+|    ``request_shutdown(+nonvar)`` - ``one_or_error``
 
 
 ------------
 
-.. index:: accept_websocket/3
-.. _http_server/0::accept_websocket/3:
+.. index:: server_property/2
+.. _http_server/0::server_property/2:
 
-``accept_websocket/3``
-^^^^^^^^^^^^^^^^^^^^^^
-
-Validates a normalized WebSocket opening-handshake request and builds a matching ``101 Switching Protocols`` response. The ``protocol(Protocol)`` option can be used to select a single offered subprotocol.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``accept_websocket(Request,Response,Options)``
-| **Mode and number of proofs:**
-|    ``accept_websocket(+compound,--compound,+list)`` - ``one_or_error``
-
-| **Exceptions:**
-|    ``Options`` contains an invalid WebSocket acceptance option:
-|        ``domain_error(http_server_websocket_option,Option)``
-|    ``Options`` contains reserved WebSocket handshake headers:
-|        ``domain_error(http_server_websocket_headers,Headers)``
-|    ``Options`` contains reserved WebSocket handshake properties:
-|        ``domain_error(http_server_websocket_properties,Properties)``
-|    ``Request`` is not a valid normalized WebSocket opening-handshake request:
-|        ``domain_error(http_server_websocket_request,Request)``
-|    ``Options`` selects a subprotocol not offered by ``Request``:
-|        ``domain_error(http_server_websocket_protocol,Protocol)``
-|    The generated WebSocket response is not a valid normalized HTTP response term:
-|        ``domain_error(http_response,Response)``
-
-| **Remarks:**
-
-    - Repeated options: When the same WebSocket acceptance option is given multiple times, the first occurrence is used.
-
-
-------------
-
-.. index:: serve_websocket/4
-.. _http_server/0::serve_websocket/4:
-
-``serve_websocket/4``
+``server_property/2``
 ^^^^^^^^^^^^^^^^^^^^^
 
-Reads one request from a binary input stream, dispatches it to a handler object, writes one response to a binary output stream, and returns ``accepted(Request, Response)`` when the exchange completed with a valid WebSocket opening-handshake response. Malformed requests and non-upgrade responses are written to the stream and reported as ``rejected(Response)``. Clean end-of-file before any bytes are read is reported as ``end_of_file``.
+Enumerates selected properties of a server handle.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``serve_websocket(Input,Output,Handler,Outcome)``
+|    ``server_property(Server,Property)``
 | **Mode and number of proofs:**
-|    ``serve_websocket(+stream,+stream,+object_identifier,--compound)`` - ``one_or_error``
+|    ``server_property(+compound,?compound)`` - ``zero_or_more``
 
-| **Exceptions:**
-|    ``Handler`` does not conform to the HTTP handler protocol:
-|        ``domain_error(http_handler_protocol,Handler)``
-|    ``Output`` is invalid for the delegated HTTP response generator:
-|        ``domain_error(http_sink,stream(Output))``
-|    The generated response is not a valid normalized HTTP response term:
-|        ``domain_error(http_response,Response)``
-|    The response body file range is outside the file contents:
-|        ``domain_error(http_body_file_range,file(File,Offset,Length))``
+
+------------
+
+.. index:: start/4
+.. _http_server/0::start/4:
+
+``start/4``
+^^^^^^^^^^^
+
+Starts an open-ended loopback server in a worker thread and waits until it is ready to accept requests.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``start(Port,Handler,Server,Options)``
+| **Mode and number of proofs:**
+|    ``start(+integer,+object_identifier,--compound,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: start/5
+.. _http_server/0::start/5:
+
+``start/5``
+^^^^^^^^^^^
+
+Starts an open-ended server in a worker thread and waits until it is ready to accept requests.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``start(Host,Port,Handler,Server,Options)``
+| **Mode and number of proofs:**
+|    ``start(+atom,+integer,+object_identifier,--compound,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: stop/1
+.. _http_server/0::stop/1:
+
+``stop/1``
+^^^^^^^^^^
+
+Requests shutdown of a threaded server and waits for the worker thread to finish.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``stop(Server)``
+| **Mode and number of proofs:**
+|    ``stop(+compound)`` - ``one_or_error``
 
 
 ------------
@@ -230,7 +355,29 @@ Protected predicates
 Private predicates
 ------------------
 
-(no local declarations; see entity ancestors if any)
+.. index:: server_control_/3
+.. _http_server/0::server_control_/3:
+
+``server_control_/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. index:: server_control_counter_/1
+.. _http_server/0::server_control_counter_/1:
+
+``server_control_counter_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
 
 Operators
 ---------

@@ -26,6 +26,7 @@
 
 	:- initialization((
 		logtalk_load(types(loader)),
+		logtalk_load(http_server(loader)),
 		logtalk_load(http_client(loader)),
 		logtalk_load(http_static_files(loader)),
 		logtalk_load(http_directory_listing(loader)),

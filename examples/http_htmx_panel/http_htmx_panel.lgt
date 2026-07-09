@@ -32,7 +32,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'HTTP handler for the HTMX panel example.'
 	]).
 
@@ -458,18 +458,10 @@
 	]).
 
 	serve(Port, Count) :-
-		http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
-		catch(
-			serve_listener(Listener, Count),
-			Error,
-			(  catch(http_socket_transport::close_listener(Listener), _, true),
-				throw(Error)
-			)
-		),
-		http_socket_transport::close_listener(Listener).
+		http_server::serve('127.0.0.1', Port, htmx_panel_http_handler, Count, _ClientInfos, []).
 
-	serve_listener(Listener, Count) :-
-		http_socket_transport::serve_listener(Listener, htmx_panel_http_handler, Count, _ClientInfos, [shutdown(close)]).
+	serve_listener(Server, Count) :-
+		http_server::serve(Server, htmx_panel_http_handler, Count, _ClientInfos, []).
 
 :- end_object.
 
@@ -588,23 +580,18 @@
 			print_result(Result).
 
 		run(Result) :-
-			http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
-			threaded_once(htmx_panel_server::serve_listener(Listener, 4), Tag),
+			http_server::start(Port, htmx_panel_http_handler, Server, []),
 			catch(
 				htmx_panel_client::run(Port, Result),
 				Error,
-				(  cleanup_demo(Listener, Tag),
+				(  cleanup_demo(Server),
 					throw(Error)
 				)
 			),
-			http_socket_transport::request_listener_shutdown(Listener),
-			threaded_exit(htmx_panel_server::serve_listener(Listener, 4), Tag),
-			catch(http_socket_transport::close_listener(Listener), _, true).
+			cleanup_demo(Server).
 
-		cleanup_demo(Listener, Tag) :-
-			http_socket_transport::request_listener_shutdown(Listener),
-			catch(threaded_exit(htmx_panel_server::serve_listener(Listener, 4), Tag), _, true),
-			catch(http_socket_transport::close_listener(Listener), _, true).
+		cleanup_demo(Server) :-
+			catch(http_server::stop(Server), _, true).
 
 		print_result(result(HomeResponse, PanelPageResponse, PanelFragmentResponse, PanelBoostedResponse)) :-
 			http_core::status(HomeResponse, HomeStatus),

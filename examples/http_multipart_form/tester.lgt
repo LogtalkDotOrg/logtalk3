@@ -28,6 +28,7 @@
 		set_logtalk_flag(report, warnings),
 		logtalk_load(term_io(loader)),
 		logtalk_load(html(loader)),
+		logtalk_load(http_server(loader)),
 		logtalk_load(http_router(loader)),
 		logtalk_load(http_client(loader)),
 		logtalk_load(http_multipart_form, [debug(on), source_data(on)]),

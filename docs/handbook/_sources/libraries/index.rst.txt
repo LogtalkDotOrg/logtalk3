@@ -131,9 +131,10 @@ directory in the ``NOTES.md`` file.
    http_parameters
    http_router
    http_server
+   http_server_core
    http_session
-   http_socket
-   http_socket_process
+   http_socket_transport
+   http_process_transport
    http_static_files
    http_websocket
    http_websocket_frames

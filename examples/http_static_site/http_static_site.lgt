@@ -28,7 +28,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'Fixture object that creates and deletes the sample document root used by the static-site example.'
 	]).
 
@@ -234,18 +234,10 @@
 		catch(static_site_fixture::cleanup(DocumentRoot), _, true).
 
 	serve(Port, DocumentRoot, Count) :-
-		http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
-		catch(
-			serve_listener(Listener, DocumentRoot, Count),
-			Error,
-			( 	catch(http_socket_transport::close_listener(Listener), _, true),
-				throw(Error)
-			)
-		),
-		http_socket_transport::close_listener(Listener).
+		http_server::serve('127.0.0.1', Port, static_site_http_handler(DocumentRoot), Count, _ClientInfos, []).
 
-	serve_listener(Listener, DocumentRoot, Count) :-
-		http_socket_transport::serve_listener(Listener, static_site_http_handler(DocumentRoot), Count, _ClientInfos, [shutdown(close)]).
+	serve_listener(Server, DocumentRoot, Count) :-
+		http_server::serve(Server, static_site_http_handler(DocumentRoot), Count, _ClientInfos, []).
 
 :- end_object.
 
@@ -352,24 +344,19 @@
 
 		run(Result) :-
 			static_site_fixture::prepare(DocumentRoot),
-			http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
-			threaded_once(static_site_server::serve_listener(Listener, DocumentRoot, 3), Tag),
+			http_server::start(Port, static_site_http_handler(DocumentRoot), Server, []),
 			catch(
 				static_site_client::run(Port, Result),
 				Error,
-				( 	cleanup_demo(DocumentRoot, Listener, Tag),
+				( 	cleanup_demo(DocumentRoot, Server),
 					throw(Error)
 				)
 			),
-			http_socket_transport::request_listener_shutdown(Listener),
-			threaded_exit(static_site_server::serve_listener(Listener, DocumentRoot, 3), Tag),
-			catch(http_socket_transport::close_listener(Listener), _, true),
+			cleanup_demo(DocumentRoot, Server),
 			catch(static_site_fixture::cleanup(DocumentRoot), _, true).
 
-		cleanup_demo(DocumentRoot, Listener, Tag) :-
-			http_socket_transport::request_listener_shutdown(Listener),
-			catch(threaded_exit(static_site_server::serve_listener(Listener, DocumentRoot, 3), Tag), _, true),
-			catch(http_socket_transport::close_listener(Listener), _, true),
+		cleanup_demo(DocumentRoot, Server) :-
+			catch(http_server::stop(Server), _, true),
 			catch(static_site_fixture::cleanup(DocumentRoot), _, true).
 
 		print_result(result(HomeResponse, GuideResponse, ListingResponse)) :-

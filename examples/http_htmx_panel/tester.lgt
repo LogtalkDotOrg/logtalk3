@@ -26,6 +26,7 @@
 
 	:- initialization((
 		set_logtalk_flag(report, warnings),
+		logtalk_load(http_server(loader)),
 		logtalk_load(http_client(loader)),
 		logtalk_load(http_htmx(loader)),
 		logtalk_load(http_htmx_panel, [debug(on), source_data(on)]),

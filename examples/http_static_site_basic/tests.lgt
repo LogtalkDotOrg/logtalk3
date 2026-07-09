@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'Unit tests for the "http_static_site_basic" example.'
 	]).
 
@@ -133,18 +133,18 @@
 
 		test(http_static_site_basic_client_01, deterministic) :-
 			static_site_basic_fixture::prepare(DocumentRoot, PasswordFile),
-			http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
-			threaded_once(static_site_basic_server::serve_listener(Listener, DocumentRoot, PasswordFile, 4), Tag),
+			http_server::open('127.0.0.1', Port, Server, []),
+			threaded_once(static_site_basic_server::serve_listener(Server, DocumentRoot, PasswordFile, 4), Tag),
 			catch(
 				static_site_basic_client::run(Port, result(ChallengeResponse, HomeResponse, GuideResponse, ListingResponse)),
 				Error,
-				( 	cleanup_server_thread(DocumentRoot, PasswordFile, Listener, Tag, 4),
+				( 	cleanup_server_thread(DocumentRoot, PasswordFile, Server, Tag, 4),
 					throw(Error)
 				)
 			),
-			http_socket_transport::request_listener_shutdown(Listener),
-			threaded_exit(static_site_basic_server::serve_listener(Listener, DocumentRoot, PasswordFile, 4), Tag),
-			catch(http_socket_transport::close_listener(Listener), _, true),
+			http_server::request_listener_shutdown(Server),
+			threaded_exit(static_site_basic_server::serve_listener(Server, DocumentRoot, PasswordFile, 4), Tag),
+			catch(http_server::close(Server), _, true),
 			status(ChallengeResponse, status(401, 'Unauthorized')),
 			static_site_basic_fixture::realm(Realm),
 			http_authenticate::challenge(ChallengeResponse, basic_challenge([
@@ -164,21 +164,21 @@
 
 		test(http_static_site_basic_client_02, deterministic) :-
 			static_site_basic_fixture::prepare(DocumentRoot, PasswordFile),
-			http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
-			threaded_once(static_site_basic_server::serve_listener(Listener, DocumentRoot, PasswordFile, 1), Tag),
+			http_server::open('127.0.0.1', Port, Server, []),
+			threaded_once(static_site_basic_server::serve_listener(Server, DocumentRoot, PasswordFile, 1), Tag),
 			catch(
 				( 	authorized_request_options(Options),
 					atomic_list_concat(['http://127.0.0.1:', Port, '/browse/docs/guide.txt'], URL),
 					http_client::get(URL, Response, Options)
 				),
 				Error,
-				( 	cleanup_server_thread(DocumentRoot, PasswordFile, Listener, Tag, 1),
+				( 	cleanup_server_thread(DocumentRoot, PasswordFile, Server, Tag, 1),
 					throw(Error)
 				)
 			),
-			http_socket_transport::request_listener_shutdown(Listener),
-			threaded_exit(static_site_basic_server::serve_listener(Listener, DocumentRoot, PasswordFile, 1), Tag),
-			catch(http_socket_transport::close_listener(Listener), _, true),
+			http_server::request_listener_shutdown(Server),
+			threaded_exit(static_site_basic_server::serve_listener(Server, DocumentRoot, PasswordFile, 1), Tag),
+			catch(http_server::close(Server), _, true),
 			status(Response, status(200, 'OK')),
 			body(Response, content('text/plain', text('Guide for the authenticated static site example.'))).
 
@@ -200,10 +200,10 @@
 			once(sub_atom(ListingHTML, _, _, _, '<a href="api/">api/</a>')),
 			once(sub_atom(ListingHTML, _, _, _, 'class="directory-listing-table theme-ocean columns-name-type-modified"')).
 
-		cleanup_server_thread(DocumentRoot, PasswordFile, Listener, Tag, Count) :-
-			http_socket_transport::request_listener_shutdown(Listener),
-			catch(threaded_exit(static_site_basic_server::serve_listener(Listener, DocumentRoot, PasswordFile, Count), Tag), _, true),
-			catch(http_socket_transport::close_listener(Listener), _, true),
+		cleanup_server_thread(DocumentRoot, PasswordFile, Server, Tag, Count) :-
+			http_server::request_listener_shutdown(Server),
+			catch(threaded_exit(static_site_basic_server::serve_listener(Server, DocumentRoot, PasswordFile, Count), Tag), _, true),
+			catch(http_server::close(Server), _, true),
 			static_site_basic_fixture::workspace_root(Root),
 			catch(static_site_basic_fixture::cleanup(Root), _, true).
 

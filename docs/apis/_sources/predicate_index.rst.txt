@@ -2949,6 +2949,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`http_client_digest_session(HTTPTransport) <http_client_digest_session/1::close/1>`
 * :ref:`http_client_session(A) <http_client_session/1::close/1>`
 * :ref:`http_cookie_jar <http_cookie_jar/0::close/1>`
+* :ref:`http_server <http_server/0::close/1>`
 * :ref:`http_server_core_session <http_server_core_session/0::close/1>`
 * :ref:`http_websocket(HTTPTransport) <http_websocket/1::close/1>`
 * :ref:`http_websocket_service_registry <http_websocket_service_registry/0::close/1>`
@@ -16755,6 +16756,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_client_digest_session(HTTPTransport) <http_client_digest_session/1::open/3>`
+* :ref:`http_server <http_server/0::open/3>`
 * :ref:`http_websocket(HTTPTransport) <http_websocket/1::open/3>`
 
 ``open/4``
@@ -16766,6 +16768,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_client_digest_session(HTTPTransport) <http_client_digest_session/1::open/4>`
+* :ref:`http_server <http_server/0::open/4>`
 * :ref:`http_websocket_client_service(HTTPTransport) <http_websocket_client_service/1::open/4>`
 
 ``open/5``
@@ -21748,6 +21751,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_server <http_server/0::request_listener_shutdown/1>`
 * :ref:`http_transport_protocol <http_transport_protocol/0::request_listener_shutdown/1>`
 
 ``request_origin/2``
@@ -21788,6 +21792,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_server <http_server/0::request_shutdown/1>`
 * :ref:`http_transport_protocol <http_transport_protocol/0::request_shutdown/1>`
 * :ref:`http_websocket_server_service(HTTPTransport) <http_websocket_server_service/1::request_shutdown/1>`
 
@@ -23247,6 +23252,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_directory_listing <http_directory_listing/0::serve/4>`
+* :ref:`http_server <http_server/0::serve/4>`
 * :ref:`http_static_files <http_static_files/0::serve/4>`
 
 ``serve/5``
@@ -23258,7 +23264,18 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_directory_listing <http_directory_listing/0::serve/5>`
+* :ref:`http_server <http_server/0::serve/5>`
 * :ref:`http_static_files <http_static_files/0::serve/5>`
+
+``serve/6``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_server <http_server/0::serve/6>`
 
 ``serve_connection/3``
 ----------------------
@@ -23298,6 +23315,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_server <http_server/0::serve_once/3>`
 * :ref:`http_transport_protocol <http_transport_protocol/0::serve_once/3>`
 
 ``serve_once/5``
@@ -23349,6 +23367,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_server <http_server/0::serve_until_shutdown/5>`
 * :ref:`http_transport_protocol <http_transport_protocol/0::serve_until_shutdown/5>`
 * :ref:`http_websocket_server_service(HTTPTransport) <http_websocket_server_service/1::serve_until_shutdown/5>`
 
@@ -23360,6 +23379,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_server <http_server/0::serve_until_shutdown/6>`
 * :ref:`http_websocket_server_service(HTTPTransport) <http_websocket_server_service/1::serve_until_shutdown/6>`
 
 ``serve_websocket/4``
@@ -23380,6 +23400,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_server <http_server/0::serve_websocket_once/5>`
 * :ref:`http_transport_protocol <http_transport_protocol/0::serve_websocket_once/5>`
 
 ``server_accept/4``
@@ -23441,6 +23462,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`socket <socket/0::server_open/4>`
+
+``server_property/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_server <http_server/0::server_property/2>`
 
 ``servers/1``
 -------------
@@ -24330,6 +24361,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_server <http_server/0::start/4>`
 * :ref:`mcp_server <mcp_server/0::start/4>`
 
 ``start/5``
@@ -24340,6 +24372,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_server <http_server/0::start/5>`
 * :ref:`mcp_server <mcp_server/0::start/5>`
 
 ``start_redirect_to_file/2``
@@ -24481,6 +24514,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ports_profiler <ports_profiler/0::stop/0>`
+
+``stop/1``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_server <http_server/0::stop/1>`
 
 ``stop_condition/3``
 --------------------

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'Unit tests for the "http_htmx_panel" example.'
 	]).
 
@@ -107,18 +107,18 @@
 		:- threaded.
 
 		test(http_htmx_panel_client_01, deterministic) :-
-			http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
-			threaded_once(htmx_panel_server::serve_listener(Listener, 4), Tag),
+			http_server::open('127.0.0.1', Port, Server, []),
+			threaded_once(htmx_panel_server::serve_listener(Server, 4), Tag),
 			catch(
 				htmx_panel_client::run(Port, result(HomeResponse, PanelPageResponse, PanelFragmentResponse, PanelBoostedResponse)),
 				Error,
-				(  cleanup_server_thread(Listener, Tag),
+				(  cleanup_server_thread(Server, Tag),
 					throw(Error)
 				)
 			),
-			http_socket_transport::request_listener_shutdown(Listener),
-			threaded_exit(htmx_panel_server::serve_listener(Listener, 4), Tag),
-			catch(http_socket_transport::close_listener(Listener), _, true),
+			http_server::request_listener_shutdown(Server),
+			threaded_exit(htmx_panel_server::serve_listener(Server, 4), Tag),
+			catch(http_server::close(Server), _, true),
 			status(HomeResponse, status(200, 'OK')),
 			body(HomeResponse, content('text/html', text(HomeHTML))),
 			once(sub_atom(HomeHTML, _, _, _, 'Show metrics panel')),
@@ -143,10 +143,10 @@
 			status(PanelBoostedResponse, status(200, 'OK')),
 			header(PanelBoostedResponse, hx_trigger, overview_loaded).
 
-		cleanup_server_thread(Listener, Tag) :-
-			http_socket_transport::request_listener_shutdown(Listener),
-			catch(threaded_exit(htmx_panel_server::serve_listener(Listener, 4), Tag), _, true),
-			catch(http_socket_transport::close_listener(Listener), _, true).
+		cleanup_server_thread(Server, Tag) :-
+			http_server::request_listener_shutdown(Server),
+			catch(threaded_exit(htmx_panel_server::serve_listener(Server, 4), Tag), _, true),
+			catch(http_server::close(Server), _, true).
 
 	:- endif.
 

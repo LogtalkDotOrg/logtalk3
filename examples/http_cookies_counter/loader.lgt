@@ -25,6 +25,7 @@
 )).
 
 	:- initialization((
+		logtalk_load(http_server(loader)),
 		logtalk_load(http_session(loader)),
 		logtalk_load(http_cookies_counter, [optimize(on)])
 	)).

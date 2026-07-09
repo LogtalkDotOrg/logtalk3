@@ -28,7 +28,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'OpenAPI provider for the HTTP and OpenAPI example.',
 		parnames is (['Port'])
 	]).
@@ -267,14 +267,7 @@
 	% so a keep-alive client may still send multiple requests on one accepted
 	% socket connection.
 	serve(Port, Count) :-
-		http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
-		catch(
-			http_socket_transport::serve_listener(Listener, greetings_http_handler(Port), Count, _ClientInfos, [shutdown(close)]),
-			Error,
-			(	catch(http_socket_transport::close_listener(Listener), _, true),
-				throw(Error)
-			)
-		).
+		http_server::serve('127.0.0.1', Port, greetings_http_handler(Port), Count, _ClientInfos, []).
 
 :- end_object.
 
@@ -309,17 +302,17 @@
 
 		:- if(current_logtalk_flag(threads, supported)).
 			:- public(start/3).
-			:- mode(start(?integer, +nonvar, -integer), one_or_error).
+			:- mode(start(?integer, +nonvar, --compound), one_or_error).
 			:- info(start/3, [
-				comment is 'Starts the open-ended server in a worker thread, waits until the listener is accepting requests, and returns the worker tag.',
-				argnames is ['Port', 'Control', 'Tag']
+				comment is 'Starts the open-ended server in a worker thread, waits until the listener is accepting requests, and returns the server handle.',
+				argnames is ['Port', 'Control', 'Server']
 			]).
 
 			:- public(stop/2).
-			:- mode(stop(+nonvar, +integer), one_or_error).
+			:- mode(stop(+nonvar, +compound), one_or_error).
 			:- info(stop/2, [
 				comment is 'Requests shutdown of an open-ended server loop and waits for the worker thread to finish.',
-				argnames is ['Control', 'Tag']
+				argnames is ['Control', 'Server']
 			]).
 
 			:- threaded.
@@ -329,46 +322,22 @@
 		% notification is emitted by the serving loop after registering the
 		% shutdown control so fast clients can stop the server reliably.
 		serve(Port, Control) :-
-			http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
-			catch(
-				http_socket_transport::serve_until_shutdown(Listener, greetings_http_handler(Port), Control, [], notify_server_ready(Control, Port)),
-				Error,
-				(	catch(http_socket_transport::close_listener(Listener), _, true),
-					throw(Error)
-				)
-			).
+			http_server::serve_until_shutdown('127.0.0.1', Port, greetings_http_handler(Port), Control, [], notify_server_ready(Control, Port)).
 
 		% Shutdown is explicit for this server alternative instead of count-based.
 		stop(Control) :-
-			http_socket_transport::request_shutdown(Control).
+			http_server::request_shutdown(Control).
 
 		:- if(current_logtalk_flag(threads, supported)).
 
 			% These helpers keep readiness notifications and worker joins inside the
 			% same object, which is important because the thread notification queue is
 			% object-scoped.
-			start(Port, Control, Tag) :-
-				threaded_once(serve(Port, Control), Tag),
-				threaded_wait(open_ended_greetings_server_ready(Control, Port)),
-				catch(
-					readiness_probe(Port),
-					Error,
-					( 	cleanup_start(Control, Port, Tag),
-						throw(Error)
-					)
-				).
+			start(Port, Control, Server) :-
+				http_server::start(Port, greetings_http_handler(Port), Server, [control(Control)]).
 
-			stop(Control, Tag) :-
-				stop(Control),
-				threaded_exit(serve(_Port, Control), Tag).
-
-			readiness_probe(Port) :-
-				atomic_list_concat(['http://127.0.0.1:', Port, '/openapi.json'], URL),
-				http_client::get(URL, _Response, [properties([connection([close])])]).
-
-			cleanup_start(Control, Port, Tag) :-
-				catch(stop(Control), _, true),
-				catch(threaded_exit(serve(Port, Control), Tag), _, true).
+			stop(_Control, Server) :-
+				http_server::stop(Server).
 
 			notify_server_ready(Control, Port) :-
 				threaded_notify(open_ended_greetings_server_ready(Control, Port)).
@@ -584,31 +553,18 @@
 		% The demo opens an ephemeral port, starts the server in a worker thread,
 		% runs the client workflow, then joins the worker before returning.
 		run(Result) :-
-			http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
-			threaded_once(serve_demo_requests(Listener, Port), Tag),
+			http_server::start(Port, greetings_http_handler(Port), Server, []),
 			catch(
 				greetings_client::run(Port, 'Ada', Result),
 				Error,
-				(	cleanup_demo(Listener, Port, Tag),
+				( cleanup_demo(Server),
 					throw(Error)
 				)
 			),
-			http_socket_transport::request_listener_shutdown(Listener),
-			threaded_exit(serve_demo_requests(Listener, Port), Tag),
-			catch(http_socket_transport::close_listener(Listener), _, true).
+			cleanup_demo(Server).
 
-		% The demo needs three accepted connections because the client performs
-		% three one-shot HTTP calls: fetch the document, POST a greeting, and GET
-		% the path-parameter greeting.
-		serve_demo_requests(Listener, Port) :-
-			http_socket_transport::serve_listener(Listener, greetings_http_handler(Port), 3, _ClientInfos, [shutdown(close)]).
-
-		% Cleanup wakes the listener first so the server thread cannot keep
-		% waiting for more accepted connections after an exception.
-		cleanup_demo(Listener, Port, Tag) :-
-			http_socket_transport::request_listener_shutdown(Listener),
-			catch(threaded_exit(serve_demo_requests(Listener, Port), Tag), _, true),
-			catch(http_socket_transport::close_listener(Listener), _, true).
+		cleanup_demo(Server) :-
+			catch(http_server::stop(Server), _, true).
 
 		% Printing both responses makes the difference between the POST and GET
 		% operations visible when running the demo interactively.

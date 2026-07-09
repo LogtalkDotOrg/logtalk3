@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'OpenAI-compatible backend that rewrites a single user sentence in Yoda style.'
 	]).
 
@@ -132,7 +132,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'OpenAI-compatible HTTP handler for the Yoda server example.'
 	]).
 
@@ -144,7 +144,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'Local HTTP server for the OpenAI-compatible Yoda backend.'
 	]).
 
@@ -169,28 +169,20 @@
 		argnames is ['Control']
 	]).
 
-	:- private(server_listener_/2).
-	:- dynamic(server_listener_/2).
-	:- mode(server_listener_(?nonvar, ?compound), zero_or_more).
-	:- info(server_listener_/2, [
-		comment is 'Active listener for an open-ended server control term.',
-		argnames is ['Control', 'Listener']
-	]).
-
 	:- if(current_logtalk_flag(threads, supported)).
 
 		:- public(start/3).
-		:- mode(start(?integer, +nonvar, -integer), one_or_error).
+		:- mode(start(?integer, +nonvar, --compound), one_or_error).
 		:- info(start/3, [
-			comment is 'Starts the open-ended server in a worker thread, waits until the listener is accepting requests, and returns the worker tag.',
-			argnames is ['Port', 'Control', 'Tag']
+			comment is 'Starts the open-ended server in a worker thread, waits until the listener is accepting requests, and returns the server handle.',
+			argnames is ['Port', 'Control', 'Server']
 		]).
 
 		:- public(stop/2).
-		:- mode(stop(+nonvar, +integer), one_or_error).
+		:- mode(stop(+nonvar, +compound), one_or_error).
 		:- info(stop/2, [
 			comment is 'Requests shutdown of an open-ended server loop and waits for the worker thread to finish.',
-			argnames is ['Control', 'Tag']
+			argnames is ['Control', 'Server']
 		]).
 
 		:- threaded.
@@ -198,64 +190,21 @@
 	:- endif.
 
 	serve(Port, Count) :-
-		http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
-		catch(
-			http_socket_transport::serve_listener(Listener, yoda_open_ai_server, Count, _ClientInfos, [shutdown(close)]),
-			Error,
-			( 	catch(http_socket_transport::close_listener(Listener), _, true),
-				throw(Error)
-			)
-		).
+		http_server::serve('127.0.0.1', Port, yoda_open_ai_server, Count, _ClientInfos, []).
 
 	serve_until_shutdown(Port, Control) :-
-		http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
-		register_server_listener(Control, Listener),
-		serve_open_listener(Listener, Control, Port).
-
-	serve_open_listener(Listener, Control, Port) :-
-		catch(
-			http_socket_transport::serve_until_shutdown(Listener, yoda_open_ai_server, Control, [], notify_server_ready(Control, Port)),
-			Error,
-			( 	retractall(server_listener_(Control, _)),
-				catch(http_socket_transport::close_listener(Listener), _, true),
-				throw(Error)
-			)
-		),
-		retractall(server_listener_(Control, _)).
-
-	register_server_listener(Control, Listener) :-
-		retractall(server_listener_(Control, _)),
-		assertz(server_listener_(Control, Listener)).
+		http_server::serve_until_shutdown('127.0.0.1', Port, yoda_open_ai_server, Control, [], notify_server_ready(Control, Port)).
 
 	stop(Control) :-
-		http_socket_transport::request_shutdown(Control).
+		http_server::request_shutdown(Control).
 
 	:- if(current_logtalk_flag(threads, supported)).
 
-		start(Port, Control, Tag) :-
-			http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
-			register_server_listener(Control, Listener),
-			catch(
-				( 	threaded_once(serve_open_listener(Listener, Control, Port), Tag),
-					threaded_wait(yoda_server_ready(Control, Port))
-				),
-				Error,
-				( 	retractall(server_listener_(Control, _)),
-					catch(http_socket_transport::close_listener(Listener), _, true),
-					throw(Error)
-				)
-			).
+		start(Port, Control, Server) :-
+			http_server::start(Port, yoda_open_ai_server, Server, [control(Control)]).
 
-		stop(Control, Tag) :-
-			stop(Control),
-			wake_server_listener(Control),
-			threaded_exit(serve_open_listener(_Listener, Control, _Port), Tag).
-
-		wake_server_listener(Control) :-
-			( 	server_listener_(Control, Listener) ->
-				catch(http_socket_transport::request_listener_shutdown(Listener), _, true)
-			; 	true
-			).
+		stop(_Control, Server) :-
+			http_server::stop(Server).
 
 		notify_server_ready(Control, Port) :-
 			threaded_notify(yoda_server_ready(Control, Port)).

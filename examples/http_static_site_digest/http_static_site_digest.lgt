@@ -28,7 +28,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'Fixture object that creates and deletes the sample document root used by the Digest-authenticated static-site example.'
 	]).
 
@@ -432,19 +432,12 @@
 		catch(static_site_digest_fixture::cleanup(WorkspaceRoot), _, true).
 
 	serve(Port, DocumentRoot, Count) :-
-		http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
-		catch(
-			serve_listener(Listener, DocumentRoot, Count),
-			Error,
-			( 	catch(http_socket_transport::close_listener(Listener), _, true),
-				throw(Error)
-			)
-		),
-		http_socket_transport::close_listener(Listener).
-
-	serve_listener(Listener, DocumentRoot, Count) :-
 		protected_handler(DocumentRoot, Handler),
-		http_socket_transport::serve_listener(Listener, Handler, Count, _ClientInfos, [shutdown(close)]).
+		http_server::serve('127.0.0.1', Port, Handler, Count, _ClientInfos, []).
+
+	serve_listener(Server, DocumentRoot, Count) :-
+		protected_handler(DocumentRoot, Handler),
+		http_server::serve(Server, Handler, Count, _ClientInfos, []).
 
 	protected_handler(DocumentRoot, Handler) :-
 		static_site_digest_fixture::protect_options(ProtectOptions),
@@ -681,24 +674,20 @@
 			run(Result) :-
 				static_site_digest_fixture::prepare(DocumentRoot),
 				static_site_digest_fixture::workspace_root(WorkspaceRoot),
-				http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
-				threaded_once(static_site_digest_server::serve_listener(Listener, DocumentRoot, 7), Tag),
+				static_site_digest_fixture::protect_options(ProtectOptions),
+				Handler = http_server_core_digest_handler(static_site_digest_verifier, static_site_digest_http_handler(DocumentRoot), ProtectOptions, []),
+				http_server::start(Port, Handler, Server, []),
 				catch(
 					static_site_digest_client::run(Port, Result),
 					Error,
-					( 	cleanup_demo(WorkspaceRoot, DocumentRoot, Listener, Tag),
+					( 	cleanup_demo(WorkspaceRoot, Server),
 						throw(Error)
 					)
 				),
-				http_socket_transport::request_listener_shutdown(Listener),
-				threaded_exit(static_site_digest_server::serve_listener(Listener, DocumentRoot, 7), Tag),
-				catch(http_socket_transport::close_listener(Listener), _, true),
-				catch(static_site_digest_fixture::cleanup(WorkspaceRoot), _, true).
+				cleanup_demo(WorkspaceRoot, Server).
 
-			cleanup_demo(WorkspaceRoot, DocumentRoot, Listener, Tag) :-
-				http_socket_transport::request_listener_shutdown(Listener),
-				catch(threaded_exit(static_site_digest_server::serve_listener(Listener, DocumentRoot, 7), Tag), _, true),
-				catch(http_socket_transport::close_listener(Listener), _, true),
+			cleanup_demo(WorkspaceRoot, Server) :-
+				catch(http_server::stop(Server), _, true),
 				catch(static_site_digest_fixture::cleanup(WorkspaceRoot), _, true).
 
 			print_result(result(ChallengeResponse, HomeResponse, GuideResponse, ListingResponse)) :-

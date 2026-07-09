@@ -26,6 +26,7 @@
 
 	:- initialization((
 		set_logtalk_flag(report, warnings),
+		logtalk_load(http_server(loader)),
 		logtalk_load(http_websocket(loader)),
 		logtalk_load(http_websocket_echo, [debug(on), source_data(on)]),
 		logtalk_load(lgtunit(loader)),

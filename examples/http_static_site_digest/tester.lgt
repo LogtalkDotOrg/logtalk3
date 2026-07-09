@@ -26,6 +26,7 @@
 
 	:- initialization((
 		set_logtalk_flag(report, warnings),
+		logtalk_load(http_server(loader)),
 		logtalk_load(http_static_files(loader)),
 		logtalk_load(http_directory_listing(loader)),
 		logtalk_load(http_digest(loader)),

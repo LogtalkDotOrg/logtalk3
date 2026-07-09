@@ -26,6 +26,7 @@
 
 	:- initialization((
 		logtalk_load(open_api(loader)),
+		logtalk_load(http_server(loader)),
 		logtalk_load(http_client(loader)),
 		logtalk_load(http_open_api, [optimize(on)])
 	)).
