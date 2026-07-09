@@ -385,16 +385,16 @@
 <span id="library-http-router"></span><h1><code class="docutils literal notranslate"><span class="pre">http_router</span></code><a class="headerlink" href="#http-router" title="Link to this heading"></a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">http_router</span></code> library provides the first declarative routing layer
 on top of the <code class="docutils literal notranslate"><span class="pre">http_core</span></code> library. It is implemented as a category so
-that router objects can implement the <code class="docutils literal notranslate"><span class="pre">http_handler_protocol</span></code> protocol
-directly while reusing common method dispatch and path-template matching
-logic.</p>
+that router objects can import it and implement the
+<code class="docutils literal notranslate"><span class="pre">http_handler_protocol</span></code> protocol directly while reusing common method
+dispatch and path-template matching logic.</p>
 <section id="layering">
 <h2>Layering<a class="headerlink" href="#layering" title="Link to this heading"></a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">http_router</span></code> sits between the normalized <code class="docutils literal notranslate"><span class="pre">http_core</span></code> message layer
 and higher-level API authoring helpers:</p>
 <ul class="simple">
-<li><p>Use <a class="reference external" href="../http/NOTES.md">http</a> directly when you only need normalized
-messages, parsers, generators, or low-level handlers.</p></li>
+<li><p>Use <a class="reference external" href="../http_server/NOTES.md">http_server</a> directly when you only
+need normalized messages, parsers, generators, or low-level handlers.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">http_router</span></code> when you want the handler object to keep exposing
 <code class="docutils literal notranslate"><span class="pre">handle/2</span></code> while route matching, metadata annotation, middleware,
 and content negotiation are derived from <code class="docutils literal notranslate"><span class="pre">route/4</span></code> declarations.</p></li>

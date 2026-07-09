@@ -122,55 +122,26 @@
 		argnames is ['Server', 'Property']
 	]).
 
-	:- if(current_logtalk_flag(threads, supported)).
+	:- public(start/4).
+	:- mode(start(+integer, +object_identifier, --compound, +list), one_or_error).
+	:- info(start/4, [
+		comment is 'Starts an open-ended loopback server in a worker thread and waits until it is ready to accept requests. Throws a resource error when thread support is not available.',
+		argnames is ['Port', 'Handler', 'Server', 'Options']
+	]).
 
-		:- threaded.
+	:- public(start/5).
+	:- mode(start(+atom, +integer, +object_identifier, --compound, +list), one_or_error).
+	:- info(start/5, [
+		comment is 'Starts an open-ended server in a worker thread and waits until it is ready to accept requests. Throws a resource error when thread support is not available.',
+		argnames is ['Host', 'Port', 'Handler', 'Server', 'Options']
+	]).
 
-		:- public(start/4).
-		:- mode(start(+integer, +object_identifier, --compound, +list), one_or_error).
-		:- info(start/4, [
-			comment is 'Starts an open-ended loopback server in a worker thread and waits until it is ready to accept requests.',
-			argnames is ['Port', 'Handler', 'Server', 'Options']
-		]).
-
-		:- public(start/5).
-		:- mode(start(+atom, +integer, +object_identifier, --compound, +list), one_or_error).
-		:- info(start/5, [
-			comment is 'Starts an open-ended server in a worker thread and waits until it is ready to accept requests.',
-			argnames is ['Host', 'Port', 'Handler', 'Server', 'Options']
-		]).
-
-		:- public(stop/1).
-		:- mode(stop(+compound), one_or_error).
-		:- info(stop/1, [
-			comment is 'Requests shutdown of a threaded server and waits for the worker thread to finish.',
-			argnames is ['Server']
-		]).
-
-	:- else.
-
-		:- public(start/4).
-		:- mode(start(+integer, +object_identifier, --compound, +list), one_or_error).
-		:- info(start/4, [
-			comment is 'Throws a resource error when thread support is not available.',
-			argnames is ['Port', 'Handler', 'Server', 'Options']
-		]).
-
-		:- public(start/5).
-		:- mode(start(+atom, +integer, +object_identifier, --compound, +list), one_or_error).
-		:- info(start/5, [
-			comment is 'Throws a resource error when thread support is not available.',
-			argnames is ['Host', 'Port', 'Handler', 'Server', 'Options']
-		]).
-
-		:- public(stop/1).
-		:- mode(stop(+compound), one_or_error).
-		:- info(stop/1, [
-			comment is 'Throws a resource error when thread support is not available.',
-			argnames is ['Server']
-		]).
-
-	:- endif.
+	:- public(stop/1).
+	:- mode(stop(+compound), one_or_error).
+	:- info(stop/1, [
+		comment is 'Requests shutdown of a threaded server and waits for the worker thread to finish. Throws a resource error when thread support is not available.',
+		argnames is ['Server']
+	]).
 
 	:- private(server_control_/3).
 	:- dynamic(server_control_/3).
@@ -263,6 +234,8 @@
 
 	:- if(current_logtalk_flag(threads, supported)).
 
+		:- threaded.
+
 		start(Port, Handler, Server, Options) :-
 			start('127.0.0.1', Port, Handler, Server, Options).
 
@@ -296,13 +269,13 @@
 	:- else.
 
 		start(_Port, _Handler, _Server, _Options) :-
-			throw(error(resource_error(threads), http_server::start(_, _, _, _))).
+			resource_error(threads).
 
 		start(_Host, _Port, _Handler, _Server, _Options) :-
-			throw(error(resource_error(threads), http_server::start(_, _, _, _, _))).
+			resource_error(threads).
 
 		stop(_Server) :-
-			throw(error(resource_error(threads), http_server::stop(_))).
+			resource_error(threads).
 
 	:- endif.
 

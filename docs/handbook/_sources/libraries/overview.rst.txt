@@ -37,16 +37,20 @@ Library groups
   ``ccsds_time_codes``, ``ccsds_time_fields``,
 - Text and NLP: ``character_sets``, ``grammars``, ``stemming``,
   ``string_distance``, and ``strings``.
-- Web and HTTP APIs: ``html``, ``mime_types``, ``url``, ``http_core``,
-  ``http_authenticate``, ``http_client_core``, ``http_client``,
-  ``http_cookies``, ``http_cors``, ``http_digest``,
-  ``http_directory_listing``, ``http_htmx``, ``http_multipart``,
-  ``http_parameters``, ``http_router``, ``http_server_core``,
-  ``http_server``, ``http_session``, ``http_socket_transport``,
-  ``http_process_transport``, ``http_static_files``, ``http_websocket``,
-  ``http_websocket_messages``, ``http_websocket_service``,
-  ``http_websocket_session``, ``gravatar``, ``open_api``, ``open_ai``,
-  ``open_id``, ``rest``, and ``s3``.
+- Web and HTTP APIs:
+
+  - High-level libraries: ``html``, ``mime_types``, ``url``,
+    ``http_client``, ``http_server``, ``http_websocket``, ``gravatar``,
+    ``open_api``, ``open_ai``, ``open_id``, ``rest``, and ``s3``.
+  - Supporting libraries: ``http_core``, ``http_authenticate``,
+    ``http_client_core``, ``http_cookies``, ``http_cors``,
+    ``http_digest``, ``http_directory_listing``, ``http_htmx``,
+    ``http_multipart``, ``http_parameters``, ``http_router``,
+    ``http_server_core``, ``http_session``, ``http_socket_transport``,
+    ``http_process_transport``, ``http_static_files``,
+    ``http_websocket_messages``, ``http_websocket_service``,
+    ``http_websocket_session``.
+
 - Identifiers: ``cuid2``, ``genint``, ``gensym``, ``ids``, ``ksuid``,
   ``nanoid``, ``snowflakeid``, ``ulid``, and ``uuid``.
 - Interchange formats and wire protocols: ``amqp``, ``avro``,

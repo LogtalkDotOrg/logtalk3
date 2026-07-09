@@ -23,8 +23,8 @@ ________________________________________________________________________
 
 The `http_router` library provides the first declarative routing layer on top of
 the `http_core` library. It is implemented as a category so that router objects
-can implement the `http_handler_protocol` protocol directly while reusing common
-method dispatch and path-template matching logic.
+can import it and implement the `http_handler_protocol` protocol directly while
+reusing common method dispatch and path-template matching logic.
 
 
 Layering
@@ -33,8 +33,8 @@ Layering
 `http_router` sits between the normalized `http_core` message layer and higher-level
 API authoring helpers:
 
-- Use [http](../http/NOTES.md) directly when you only need normalized messages,
-  parsers, generators, or low-level handlers.
+- Use [http_server](../http_server/NOTES.md) directly when you only need normalized
+  messages, parsers, generators, or low-level handlers.
 - Use `http_router` when you want the handler object to keep exposing `handle/2`
   while route matching, metadata annotation, middleware, and content
   negotiation are derived from `route/4` declarations.

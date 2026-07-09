@@ -296,7 +296,7 @@ Enumerates selected properties of a server handle.
 ``start/4``
 ^^^^^^^^^^^
 
-Starts an open-ended loopback server in a worker thread and waits until it is ready to accept requests.
+Starts an open-ended loopback server in a worker thread and waits until it is ready to accept requests. Throws a resource error when thread support is not available.
 
 | **Compilation flags:**
 |    ``static``
@@ -315,7 +315,7 @@ Starts an open-ended loopback server in a worker thread and waits until it is re
 ``start/5``
 ^^^^^^^^^^^
 
-Starts an open-ended server in a worker thread and waits until it is ready to accept requests.
+Starts an open-ended server in a worker thread and waits until it is ready to accept requests. Throws a resource error when thread support is not available.
 
 | **Compilation flags:**
 |    ``static``
@@ -334,7 +334,7 @@ Starts an open-ended server in a worker thread and waits until it is ready to ac
 ``stop/1``
 ^^^^^^^^^^
 
-Requests shutdown of a threaded server and waits for the worker thread to finish.
+Requests shutdown of a threaded server and waits for the worker thread to finish. Throws a resource error when thread support is not available.
 
 | **Compilation flags:**
 |    ``static``
