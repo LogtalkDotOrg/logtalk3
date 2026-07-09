@@ -70,6 +70,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../devtools/index.html">Developer Tools</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Libraries</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#library-groups">Library groups</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#library-documentation">Library documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading-libraries">Loading libraries</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing-libraries">Testing libraries</a></li>
@@ -369,9 +370,10 @@
   <section id="overview">
 <h1>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h1>
 <p>This folder contains libraries of useful objects, categories, and
-protocols. The currently available libraries can be grouped by scope as
-follows (the grouping is thematic only, as some libraries naturally span
-multiple areas):</p>
+protocols. The currently available libraries can be grouped by theme as
+follows (note that some libraries naturally span multiple themes):</p>
+<section id="library-groups">
+<h2>Library groups<a class="headerlink" href="#library-groups" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>Application metadata, configuration, and logging: <code class="docutils literal notranslate"><span class="pre">application</span></code>,
 <code class="docutils literal notranslate"><span class="pre">expand_library_alias_paths</span></code>, <code class="docutils literal notranslate"><span class="pre">command_line_options</span></code>, <code class="docutils literal notranslate"><span class="pre">logging</span></code>,
@@ -403,12 +405,12 @@ and <code class="docutils literal notranslate"><span class="pre">zippers</span><
 <li><p>Text and NLP: <code class="docutils literal notranslate"><span class="pre">character_sets</span></code>, <code class="docutils literal notranslate"><span class="pre">grammars</span></code>, <code class="docutils literal notranslate"><span class="pre">stemming</span></code>,
 <code class="docutils literal notranslate"><span class="pre">string_distance</span></code>, and <code class="docutils literal notranslate"><span class="pre">strings</span></code>.</p></li>
 <li><p>Web and HTTP APIs: <code class="docutils literal notranslate"><span class="pre">html</span></code>, <code class="docutils literal notranslate"><span class="pre">mime_types</span></code>, <code class="docutils literal notranslate"><span class="pre">url</span></code>, <code class="docutils literal notranslate"><span class="pre">http_core</span></code>,
-<code class="docutils literal notranslate"><span class="pre">http_authenticate</span></code>, <code class="docutils literal notranslate"><span class="pre">http_client</span></code>, <code class="docutils literal notranslate"><span class="pre">http_cookies</span></code>,
-<code class="docutils literal notranslate"><span class="pre">http_cors</span></code>, <code class="docutils literal notranslate"><span class="pre">http_digest</span></code>, <code class="docutils literal notranslate"><span class="pre">http_directory_listing</span></code>,
-<code class="docutils literal notranslate"><span class="pre">http_htmx</span></code>, <code class="docutils literal notranslate"><span class="pre">http_multipart</span></code>, <code class="docutils literal notranslate"><span class="pre">http_parameters</span></code>,
-<code class="docutils literal notranslate"><span class="pre">http_router</span></code>, <code class="docutils literal notranslate"><span class="pre">http_server_core</span></code>, <code class="docutils literal notranslate"><span class="pre">http_session</span></code>,
-<code class="docutils literal notranslate"><span class="pre">http_socket_transport</span></code>, <code class="docutils literal notranslate"><span class="pre">http_process_transport</span></code>,
-<code class="docutils literal notranslate"><span class="pre">http_static_files</span></code>, <code class="docutils literal notranslate"><span class="pre">http_websocket</span></code>,
+<code class="docutils literal notranslate"><span class="pre">http_authenticate</span></code>, <code class="docutils literal notranslate"><span class="pre">http_client_core</span></code>, <code class="docutils literal notranslate"><span class="pre">http_client</span></code>,
+<code class="docutils literal notranslate"><span class="pre">http_cookies</span></code>, <code class="docutils literal notranslate"><span class="pre">http_cors</span></code>, <code class="docutils literal notranslate"><span class="pre">http_digest</span></code>,
+<code class="docutils literal notranslate"><span class="pre">http_directory_listing</span></code>, <code class="docutils literal notranslate"><span class="pre">http_htmx</span></code>, <code class="docutils literal notranslate"><span class="pre">http_multipart</span></code>,
+<code class="docutils literal notranslate"><span class="pre">http_parameters</span></code>, <code class="docutils literal notranslate"><span class="pre">http_router</span></code>, <code class="docutils literal notranslate"><span class="pre">http_server_core</span></code>,
+<code class="docutils literal notranslate"><span class="pre">http_server</span></code>, <code class="docutils literal notranslate"><span class="pre">http_session</span></code>, <code class="docutils literal notranslate"><span class="pre">http_socket_transport</span></code>,
+<code class="docutils literal notranslate"><span class="pre">http_process_transport</span></code>, <code class="docutils literal notranslate"><span class="pre">http_static_files</span></code>, <code class="docutils literal notranslate"><span class="pre">http_websocket</span></code>,
 <code class="docutils literal notranslate"><span class="pre">http_websocket_messages</span></code>, <code class="docutils literal notranslate"><span class="pre">http_websocket_service</span></code>,
 <code class="docutils literal notranslate"><span class="pre">http_websocket_session</span></code>, <code class="docutils literal notranslate"><span class="pre">gravatar</span></code>, <code class="docutils literal notranslate"><span class="pre">open_api</span></code>, <code class="docutils literal notranslate"><span class="pre">open_ai</span></code>,
 <code class="docutils literal notranslate"><span class="pre">open_id</span></code>, <code class="docutils literal notranslate"><span class="pre">rest</span></code>, and <code class="docutils literal notranslate"><span class="pre">s3</span></code>.</p></li>
@@ -492,6 +494,7 @@ usage at continuous integration servers). Starting with Logtalk 3.48.0,
 this setup is only required in general when running with the <code class="docutils literal notranslate"><span class="pre">clean</span></code>
 flag turned off. See the comments in the file itself for usage
 instructions.</p>
+</section>
 <section id="library-documentation">
 <h2>Library documentation<a class="headerlink" href="#library-documentation" title="Link to this heading"></a></h2>
 <p>Specific notes about each library can be found in the corresponding
