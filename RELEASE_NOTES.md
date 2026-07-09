@@ -191,8 +191,8 @@ OpenAPI libraries.
 * ADDED: New `http_rest_greetings` and `http_rest_open_meteo` examples
 illustrating the use of the new HTTP and REST libraries.
 
-* ADDED: New `http_websocket_echo` example illustrating the use of the new
-HTTP and WebSocket libraries.
+* ADDED: New `http_routes` example illustrating the use of the new
+`http_router` library.
 
 * ADDED: New `http_static_site` example illustrating the use of the new HTTP
 libraries.
@@ -204,6 +204,9 @@ directory-listing helpers.
 * ADDED: New `http_static_site_digest` example illustrating the use of the new
 HTTP Digest authentication library together with the static-file and
 directory-listing helpers.
+
+* ADDED: New `http_websocket_echo` example illustrating the use of the new
+HTTP and WebSocket libraries.
 
 * ADDED: New `ollama_client` example illustrating how to use the new `open_ai`
 library to create an OpenAI client.

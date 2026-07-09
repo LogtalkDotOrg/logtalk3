@@ -435,6 +435,7 @@ logtalk_library_path(http_multipart_form, examples('http_multipart_form/')).
 logtalk_library_path(http_open_api, examples('http_open_api/')).
 logtalk_library_path(http_rest_greetings, examples('http_rest_greetings/')).
 logtalk_library_path(http_rest_open_meteo, examples('http_rest_open_meteo/')).
+logtalk_library_path(http_routes, examples('http_routes/')).
 logtalk_library_path(http_static_site, examples('http_static_site/')).
 logtalk_library_path(http_static_site_digest, examples('http_static_site_digest/')).
 logtalk_library_path(http_static_site_basic, examples('http_static_site_basic/')).

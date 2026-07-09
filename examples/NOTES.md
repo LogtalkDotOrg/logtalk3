@@ -333,6 +333,9 @@ Follows a short description of each included example (in alphabetical order):
 	small REST client example showing how to resolve a location name and fetch
 	a weather forecast from the Open-Meteo APIs
 
+- `http_routes`  
+     small example illustrating the use of the `http_router` library
+
 - `http_static_site`  
 	small HTTP client and server example showing how to combine the
 	`http_static_files` and `http_directory_listing` libraries
