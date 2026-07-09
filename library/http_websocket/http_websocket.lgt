@@ -71,7 +71,6 @@
 
 	:- public(accept/4).
 	:- mode(accept(+compound, -compound, -compound, +list), one_or_error).
-
 	:- info(accept/4, [
 		comment is 'Accepts one incoming WebSocket connection on the given listener and returns an opaque server-side handle. Server opening-handshake options are forwarded to ``http_server_core::accept_websocket/3``. The direct API also accepts ``auto_pong(on|off)`` and ``max_payload_length(Bytes|none)`` options.',
 		argnames is ['Listener', 'WebSocket', 'ClientInfo', 'Options'],

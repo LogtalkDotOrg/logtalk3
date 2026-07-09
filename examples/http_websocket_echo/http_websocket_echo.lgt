@@ -63,7 +63,7 @@
 		http_server::close(Server).
 
 	serve_listener(Listener, session(HandshakeResponse, ReceivedMessage, ReplyMessage)) :-
-		http_websocket::accept(Listener, WebSocket, _ClientInfo, [transport(http_socket_transport), protocol(chat)]),
+		http_websocket::accept(Listener, WebSocket, _ClientInfo, [protocol(chat)]),
 		http_websocket::property(WebSocket, response(HandshakeResponse)),
 		http_websocket::receive(WebSocket, ReceivedMessage),
 		echo_reply_message(ReceivedMessage, ReplyMessage),
@@ -105,7 +105,7 @@
 
 	run(Port, Text, session(HandshakeResponse, SentMessage, ReplyMessage)) :-
 		websocket_url(Port, URL),
-		http_websocket::open(URL, WebSocket, [transport(http_socket_transport), protocols([chat])]),
+		http_websocket::open(URL, WebSocket, [protocols([chat])]),
 		http_websocket::property(WebSocket, response(HandshakeResponse)),
 		catch(
 			client_exchange(WebSocket, Text, SentMessage, ReplyMessage),
