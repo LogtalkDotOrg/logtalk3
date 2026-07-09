@@ -79,6 +79,10 @@
 		message/3 as normalized_message/3
 	]).
 
+	:- uses(user, [
+		atomic_list_concat/2
+	]).
+
 	condition(current_object(_HTTPTransport_)).
 
 	cover(http_websocket).
@@ -179,7 +183,7 @@
 		% auxiliary predicates
 
 		server_accept_text_exchange(Listener, session(Response, Role, Protocol, ReceivedMessage, CloseMessage)) :-
-			http_websocket::accept(Listener, WebSocket, _ClientInfo, [protocol(chat)]),
+			http_websocket::accept(Listener, WebSocket, _ClientInfo, [transport(_HTTPTransport_), protocol(chat)]),
 			http_websocket::property(WebSocket, role(Role)),
 			http_websocket::property(WebSocket, response(Response)),
 			http_websocket::property(WebSocket, subprotocol(Protocol)),
@@ -191,7 +195,7 @@
 		client_direct_text_exchange(Port, session(Response, Role, Protocol, SentMessage, ReplyMessage)) :-
 			websocket_url(Port, URL),
 			normalized_message(text, hello, SentMessage),
-			http_websocket::open(URL, WebSocket, [protocols([chat])]),
+			http_websocket::open(URL, WebSocket, [transport(_HTTPTransport_), protocols([chat])]),
 			http_websocket::property(WebSocket, role(Role)),
 			http_websocket::property(WebSocket, response(Response)),
 			http_websocket::property(WebSocket, subprotocol(Protocol)),
@@ -200,33 +204,33 @@
 			http_websocket::close(WebSocket, status(1000, done)).
 
 		server_accept_json_exchange(Listener, ReceivedJSON) :-
-			http_websocket::accept(Listener, WebSocket, _ClientInfo, []),
+			http_websocket::accept(Listener, WebSocket, _ClientInfo, [transport(_HTTPTransport_)]),
 			http_websocket::receive_json(WebSocket, ReceivedJSON),
 			http_websocket::send_json(WebSocket, ReceivedJSON),
 			http_websocket::receive(WebSocket, _CloseMessage).
 
 		client_direct_json_exchange(Port, JSON, ReplyJSON) :-
 			websocket_url(Port, URL),
-			http_websocket::open(URL, WebSocket, []),
+			http_websocket::open(URL, WebSocket, [transport(_HTTPTransport_)]),
 			http_websocket::send_json(WebSocket, JSON),
 			http_websocket::receive_json(WebSocket, ReplyJSON),
 			http_websocket::close(WebSocket, status(1000, done)).
 
 		server_accept_term_exchange(Listener, ReceivedTerm) :-
-			http_websocket::accept(Listener, WebSocket, _ClientInfo, []),
+			http_websocket::accept(Listener, WebSocket, _ClientInfo, [transport(_HTTPTransport_)]),
 			http_websocket::receive_term(WebSocket, ReceivedTerm),
 			http_websocket::send_term(WebSocket, ReceivedTerm),
 			http_websocket::receive(WebSocket, _CloseMessage).
 
 		client_direct_term_exchange(Port, Term, ReplyTerm) :-
 			websocket_url(Port, URL),
-			http_websocket::open(URL, WebSocket, []),
+			http_websocket::open(URL, WebSocket, [transport(_HTTPTransport_)]),
 			http_websocket::send_term(WebSocket, Term),
 			http_websocket::receive_term(WebSocket, ReplyTerm),
 			http_websocket::close(WebSocket, status(1000, done)).
 
 		server_accept_for_open_session(Listener, session(Response, ReceivedMessage, CloseMessage)) :-
-			http_websocket::accept(Listener, WebSocket, _ClientInfo, [protocol(chat)]),
+			http_websocket::accept(Listener, WebSocket, _ClientInfo, [transport(_HTTPTransport_), protocol(chat)]),
 			http_websocket::property(WebSocket, response(Response)),
 			http_websocket::receive(WebSocket, ReceivedMessage),
 			echo_reply_message(ReceivedMessage, ReplyMessage),
@@ -235,16 +239,13 @@
 
 		client_open_session_exchange(Port, Response, State) :-
 			websocket_url(Port, URL),
-			http_websocket::open_session(URL, websocket_close_after_echo_handler, Response, State, [protocols([chat]), initial_messages([message(text, hello)])]).
+			http_websocket::open_session(URL, websocket_close_after_echo_handler, Response, State, [transport(_HTTPTransport_), protocols([chat]), initial_messages([message(text, hello)])]).
 
 		server_serve_once_exchange(Listener, Response, State) :-
-			http_websocket::serve_once(Listener, websocket_echo_session_handler, Response, State, _ClientInfo, [protocol(chat)]).
+			http_websocket::serve_once(Listener, websocket_echo_session_handler, Response, State, _ClientInfo, [transport(_HTTPTransport_), protocol(chat)]).
 
 		websocket_url(Port, URL) :-
-			number_codes(Port, PortCodes),
-			atom_codes(PortAtom, PortCodes),
-			atom_concat('ws://127.0.0.1:', PortAtom, Prefix),
-			atom_concat(Prefix, '/echo', URL).
+			atomic_list_concat(['ws://127.0.0.1:', Port, '/echo'], URL).
 
 		echo_reply_message(message(text, Text), ReplyMessage) :-
 			atom_concat('Echo: ', Text, ReplyText),

@@ -37,6 +37,8 @@ ________________________________________________________________________
 
 This example shows the basics of using the high-level `http_websocket` library
 to accept a WebSocket connection, exchange messages, and close the session.
+It uses the `transport(http_socket_transport)` option explicitly because the
+local listener is opened through the default HTTP server socket transport.
 
 The example illustrates three basic steps:
 

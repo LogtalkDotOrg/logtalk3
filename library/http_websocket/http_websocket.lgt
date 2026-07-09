@@ -19,15 +19,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(http_websocket(_HTTPTransport_),
+:- object(http_websocket,
 	imports(options)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-07-09,
-		comment is 'High-level WebSocket predicates for opening and closing connections, exchanging messages, and running common client and server session loops.',
-		parnames is ['HTTPTransport']
+		comment is 'High-level WebSocket predicates for opening and closing connections, exchanging messages, and running common client and server session loops.'
 	]).
 
 	:- public(open/2).
@@ -169,7 +168,7 @@
 	:- mode(property(+compound, +compound), zero_or_one).
 	:- mode(property(+compound, -compound), zero_or_more).
 	:- info(property/2, [
-		comment is 'Enumerates properties of an open opaque WebSocket handle. Supported properties are ``role(Role)``, ``response(Response)``, ``connection(Connection)``, ``state(State)``, ``client_info(ClientInfo)``, and ``subprotocol(Protocol)``.',
+		comment is 'Enumerates properties of an open opaque WebSocket handle. Supported properties are ``role(Role)``, ``transport(Transport)``, ``response(Response)``, ``connection(Connection)``, ``state(State)``, ``client_info(ClientInfo)``, and ``subprotocol(Protocol)``.',
 		argnames is ['WebSocket', 'Property']
 	]).
 
@@ -320,19 +319,19 @@
 		argnames is ['HandleId']
 	]).
 
-	:- private(handle_state_/8).
-	:- dynamic(handle_state_/8).
-	:- mode(handle_state_(?positive_integer, ?atom, ?compound, ?compound, ?term, ?compound, ?atom, ?term), zero_or_more).
-	:- info(handle_state_/8, [
+	:- private(handle_state_/9).
+	:- dynamic(handle_state_/9).
+	:- mode(handle_state_(?positive_integer, ?atom, ?object_identifier, ?compound, ?compound, ?term, ?compound, ?atom, ?term), zero_or_more).
+	:- info(handle_state_/9, [
 		comment is 'Stored opaque WebSocket handle state.',
 		argnames is [
-			'HandleId', 'Role', 'Connection', 'Response', 'ClientInfo', 'State', 'AutoPong',
+			'HandleId', 'Role', 'Transport', 'Connection', 'Response', 'ClientInfo', 'State', 'AutoPong',
 			'MaxPayloadLength'
 		]
 	]).
 
 	:- synchronized([
-		allocate_handle_id/1, register_handle/8, update_handle_state/2, retract_handle_state/2,
+		allocate_handle_id/1, register_handle/9, update_handle_state/2, retract_handle_state/2,
 		handle_id_outcome/2
 	]).
 
@@ -344,14 +343,6 @@
 		property/2 as http_property/2
 	]).
 
-	:- uses(_HTTPTransport_, [
-		close_connection/1, connection_streams/3, serve_websocket_once/5
-	]).
-
-	:- uses(http_websocket_client_service(_HTTPTransport_), [
-		open/5 as open_client_session/5
-	]).
-
 	:- uses(http_websocket_client_session, [
 		initial_state/1 as client_initial_state/1,
 		read_message/6 as client_read_message/6, write_message/5 as client_write_message/5
@@ -359,10 +350,6 @@
 
 	:- uses(http_websocket_messages, [
 		is_message/1, message/3 as websocket_message/3
-	]).
-
-	:- uses(http_websocket_server_service(_HTTPTransport_), [
-		serve_once/7 as serve_server_session/7
 	]).
 
 	:- uses(http_websocket_server_session, [
@@ -382,13 +369,14 @@
 		open(URL, WebSocket, []).
 
 	open(URL, WebSocket, Options) :-
-		parse_direct_options(Options, AutoPong, MaxPayloadLength, WebSocketOptions),
-		http_client::open_websocket(URL, Connection, Response, [transport(_HTTPTransport_)| WebSocketOptions]),
+		parse_direct_options(Options, Transport0, AutoPong, MaxPayloadLength, WebSocketOptions),
+		resolve_client_transport(URL, Transport0, Transport),
+		http_client::open_websocket(URL, Connection, Response, [transport(Transport)| WebSocketOptions]),
 		client_initial_state(State),
 		catch(
-			register_new_handle(client, Connection, Response, none, State, AutoPong, MaxPayloadLength, WebSocket),
+			register_new_handle(client, Transport, Connection, Response, none, State, AutoPong, MaxPayloadLength, WebSocket),
 			Error,
-			(	catch(close_connection(Connection), _, true),
+			( 	catch(Transport::close_connection(Connection), _, true),
 				throw(Error)
 			)
 		).
@@ -397,13 +385,14 @@
 		accept(Listener, WebSocket, ClientInfo, []).
 
 	accept(Listener, WebSocket, ClientInfo, Options) :-
-		parse_direct_options(Options, AutoPong, MaxPayloadLength, AcceptOptions),
-		serve_websocket_once(Listener, http_websocket_accept_handler(AcceptOptions), Connection, Response, ClientInfo),
+		parse_direct_options(Options, Transport0, AutoPong, MaxPayloadLength, AcceptOptions),
+		resolve_server_transport(Transport0, Transport),
+		Transport::serve_websocket_once(Listener, http_websocket_accept_handler(AcceptOptions), Connection, Response, ClientInfo),
 		server_initial_state(State),
 		catch(
-			register_new_handle(server, Connection, Response, ClientInfo, State, AutoPong, MaxPayloadLength, WebSocket),
+			register_new_handle(server, Transport, Connection, Response, ClientInfo, State, AutoPong, MaxPayloadLength, WebSocket),
 			Error,
-			(	catch(close_connection(Connection), _, true),
+			( 	catch(Transport::close_connection(Connection), _, true),
 				throw(Error)
 			)
 		).
@@ -413,8 +402,8 @@
 
 	send(WebSocket, Message0, Options) :-
 		normalize_outbound_message(Message0, Message),
-		with_handle_state(WebSocket, Role, Connection, _Response, _ClientInfo, State0, _AutoPong, _MaxPayloadLength),
-		connection_streams(Connection, _Input, Output),
+		with_handle_state(WebSocket, Role, Transport, Connection, _Response, _ClientInfo, State0, _AutoPong, _MaxPayloadLength),
+		Transport::connection_streams(Connection, _Input, Output),
 		catch(
 			role_write_message(Role, Output, State0, State, Message, Options),
 			Error,
@@ -422,15 +411,15 @@
 				throw(Error)
 			)
 		),
-		update_or_close_handle(WebSocket, Connection, State).
+		update_or_close_handle(WebSocket, Transport, Connection, State).
 
 	receive(WebSocket, Message) :-
 		receive(WebSocket, Message, []).
 
 	receive(WebSocket, Message, Options) :-
-		with_handle_state(WebSocket, Role, Connection, _Response, _ClientInfo, State0, AutoPong0, MaxPayloadLength0),
+		with_handle_state(WebSocket, Role, Transport, Connection, _Response, _ClientInfo, State0, AutoPong0, MaxPayloadLength0),
 		parse_read_override_options(Options, AutoPong0, MaxPayloadLength0, ReadOptions),
-		connection_streams(Connection, Input, Output),
+		Transport::connection_streams(Connection, Input, Output),
 		catch(
 			role_read_message(Role, Input, Output, State0, State, Message, ReadOptions),
 			Error,
@@ -438,7 +427,7 @@
 				throw(Error)
 			)
 		),
-		update_or_close_after_receive(WebSocket, Connection, State, Message).
+		update_or_close_after_receive(WebSocket, Transport, Connection, State, Message).
 
 	close(WebSocket) :-
 		close(WebSocket, empty).
@@ -451,17 +440,19 @@
 		property_(Property, WebSocket).
 
 	property_(role(Role), WebSocket) :-
-		with_handle_state(WebSocket, Role, _Connection, _Response, _ClientInfo, _State, _AutoPong, _MaxPayloadLength).
+		with_handle_state(WebSocket, Role, _Transport, _Connection, _Response, _ClientInfo, _State, _AutoPong, _MaxPayloadLength).
+	property_(transport(Transport), WebSocket) :-
+		with_handle_state(WebSocket, _Role, Transport, _Connection, _Response, _ClientInfo, _State, _AutoPong, _MaxPayloadLength).
 	property_(response(Response), WebSocket) :-
-		with_handle_state(WebSocket, _Role, _Connection, Response, _ClientInfo, _State, _AutoPong, _MaxPayloadLength).
+		with_handle_state(WebSocket, _Role, _Transport, _Connection, Response, _ClientInfo, _State, _AutoPong, _MaxPayloadLength).
 	property_(connection(Connection), WebSocket) :-
-		with_handle_state(WebSocket, _Role, Connection, _Response, _ClientInfo, _State, _AutoPong, _MaxPayloadLength).
+		with_handle_state(WebSocket, _Role, _Transport, Connection, _Response, _ClientInfo, _State, _AutoPong, _MaxPayloadLength).
 	property_(state(State), WebSocket) :-
-		with_handle_state(WebSocket, _Role, _Connection, _Response, _ClientInfo, State, _AutoPong, _MaxPayloadLength).
+		with_handle_state(WebSocket, _Role, _Transport, _Connection, _Response, _ClientInfo, State, _AutoPong, _MaxPayloadLength).
 	property_(client_info(ClientInfo), WebSocket) :-
-		with_handle_state(WebSocket, server, _Connection, _Response, ClientInfo, _State, _AutoPong, _MaxPayloadLength).
+		with_handle_state(WebSocket, server, _Transport, _Connection, _Response, ClientInfo, _State, _AutoPong, _MaxPayloadLength).
 	property_(subprotocol(Protocol), WebSocket) :-
-		with_handle_state(WebSocket, _Role, _Connection, Response, _ClientInfo, _State, _AutoPong, _MaxPayloadLength),
+		with_handle_state(WebSocket, _Role, _Transport, _Connection, Response, _ClientInfo, _State, _AutoPong, _MaxPayloadLength),
 		http_property(Response, websocket_protocol([Protocol])).
 
 	send_text(WebSocket, Text) :-
@@ -496,14 +487,17 @@
 		open_session(URL, Handler, Response, State, []).
 
 	open_session(URL, Handler, Response, State, Options) :-
-		open_client_session(URL, Handler, Response, State, Options).
+		parse_transport_options(Options, Transport0, SessionOptions),
+		resolve_client_transport(URL, Transport0, Transport),
+		http_websocket_client_service(Transport)::open(URL, Handler, Response, State, SessionOptions).
 
 	serve_once(Listener, Handler, Response, State, ClientInfo) :-
 		serve_once(Listener, Handler, Response, State, ClientInfo, []).
 
 	serve_once(Listener, Handler, Response, State, ClientInfo, Options) :-
-		parse_server_session_options(Options, AcceptOptions, SessionOptions),
-		serve_server_session(Listener, http_websocket_accept_handler(AcceptOptions), Handler, Response, State, ClientInfo, SessionOptions).
+		parse_server_session_options(Options, Transport0, AcceptOptions, SessionOptions),
+		resolve_server_transport(Transport0, Transport),
+		http_websocket_server_service(Transport)::serve_once(Listener, http_websocket_accept_handler(AcceptOptions), Handler, Response, State, ClientInfo, SessionOptions).
 
 	allocate_handle_id(HandleId) :-
 		(	retract(handle_seed_(CurrentHandleId)) ->
@@ -512,33 +506,33 @@
 		),
 		assertz(handle_seed_(HandleId)).
 
-	register_handle(HandleId, Role, Connection, Response, ClientInfo, State, AutoPong, MaxPayloadLength) :-
-		assertz(handle_state_(HandleId, Role, Connection, Response, ClientInfo, State, AutoPong, MaxPayloadLength)).
+	register_handle(HandleId, Role, Transport, Connection, Response, ClientInfo, State, AutoPong, MaxPayloadLength) :-
+		assertz(handle_state_(HandleId, Role, Transport, Connection, Response, ClientInfo, State, AutoPong, MaxPayloadLength)).
 
 	update_handle_state(HandleId, State) :-
-		retract(handle_state_(HandleId, Role, Connection, Response, ClientInfo, _OldState, AutoPong, MaxPayloadLength)),
-		assertz(handle_state_(HandleId, Role, Connection, Response, ClientInfo, State, AutoPong, MaxPayloadLength)).
+		retract(handle_state_(HandleId, Role, Transport, Connection, Response, ClientInfo, _OldState, AutoPong, MaxPayloadLength)),
+		assertz(handle_state_(HandleId, Role, Transport, Connection, Response, ClientInfo, State, AutoPong, MaxPayloadLength)).
 
 	retract_handle_state(HandleId, Outcome) :-
-		(	retract(handle_state_(HandleId, Role, Connection, Response, ClientInfo, State, AutoPong, MaxPayloadLength)) ->
-			Outcome = handle(Role, Connection, Response, ClientInfo, State, AutoPong, MaxPayloadLength)
+		( 	retract(handle_state_(HandleId, Role, Transport, Connection, Response, ClientInfo, State, AutoPong, MaxPayloadLength)) ->
+			Outcome = handle(Role, Transport, Connection, Response, ClientInfo, State, AutoPong, MaxPayloadLength)
 		;	Outcome = missing
 		).
 
 	handle_id_outcome(HandleId, Outcome) :-
-		(	handle_state_(HandleId, Role, Connection, Response, ClientInfo, State, AutoPong, MaxPayloadLength) ->
-			Outcome = handle(Role, Connection, Response, ClientInfo, State, AutoPong, MaxPayloadLength)
+		( 	handle_state_(HandleId, Role, Transport, Connection, Response, ClientInfo, State, AutoPong, MaxPayloadLength) ->
+			Outcome = handle(Role, Transport, Connection, Response, ClientInfo, State, AutoPong, MaxPayloadLength)
 		;	Outcome = missing
 		).
 
-	register_new_handle(Role, Connection, Response, ClientInfo, State, AutoPong, MaxPayloadLength, http_websocket_handle(HandleId)) :-
+	register_new_handle(Role, Transport, Connection, Response, ClientInfo, State, AutoPong, MaxPayloadLength, http_websocket_handle(HandleId)) :-
 		allocate_handle_id(HandleId),
-		register_handle(HandleId, Role, Connection, Response, ClientInfo, State, AutoPong, MaxPayloadLength).
+		register_handle(HandleId, Role, Transport, Connection, Response, ClientInfo, State, AutoPong, MaxPayloadLength).
 
-	with_handle_state(WebSocket, Role, Connection, Response, ClientInfo, State, AutoPong, MaxPayloadLength) :-
+	with_handle_state(WebSocket, Role, Transport, Connection, Response, ClientInfo, State, AutoPong, MaxPayloadLength) :-
 		handle_identifier(WebSocket, HandleId),
 		handle_id_outcome(HandleId, Outcome),
-		(	Outcome = handle(Role, Connection, Response, ClientInfo, State, AutoPong, MaxPayloadLength) ->
+		( 	Outcome = handle(Role, Transport, Connection, Response, ClientInfo, State, AutoPong, MaxPayloadLength) ->
 			true
 		;	existence_error(http_websocket_handle, WebSocket)
 		).
@@ -552,8 +546,9 @@
 	handle_identifier(WebSocket, _HandleId) :-
 		domain_error(http_websocket_handle, WebSocket).
 
-	parse_direct_options(Options, AutoPong, MaxPayloadLength, ForwardedOptions) :-
+	parse_direct_options(Options, Transport, AutoPong, MaxPayloadLength, ForwardedOptions) :-
 		validate_options(Options),
+		transport_option(Options, Transport),
 		(	member(auto_pong(AutoPong0), Options) ->
 			validate_auto_pong(AutoPong0, AutoPong)
 		;	AutoPong = on
@@ -563,6 +558,11 @@
 		;	MaxPayloadLength = none
 		),
 		filter_direct_options(Options, ForwardedOptions).
+
+	parse_transport_options(Options, Transport, FilteredOptions) :-
+		validate_options(Options),
+		transport_option(Options, Transport),
+		filter_transport_options(Options, FilteredOptions).
 
 	parse_read_override_options(Options, DefaultAutoPong, DefaultMaxPayloadLength, ReadOptions) :-
 		validate_options(Options),
@@ -576,9 +576,16 @@
 		),
 		ReadOptions = [auto_pong(AutoPong), max_payload_length(MaxPayloadLength)].
 
-	parse_server_session_options(Options, AcceptOptions, SessionOptions) :-
+	parse_server_session_options(Options, Transport, AcceptOptions, SessionOptions) :-
 		validate_options(Options),
+		transport_option(Options, Transport),
 		filter_server_session_options(Options, AcceptOptions, SessionOptions).
+
+	transport_option(Options, Transport) :-
+		( 	member(transport(Transport0), Options) ->
+			validate_transport_option(Transport0, Transport)
+		; 	Transport = default
+		).
 
 	validate_options(Options) :-
 		(	var(Options) ->
@@ -604,6 +611,61 @@
 	validate_max_payload_length(MaxPayloadLength, _ValidatedMaxPayloadLength) :-
 		domain_error(http_websocket_option, max_payload_length(MaxPayloadLength)).
 
+	validate_transport_option(default, default) :-
+		!.
+	validate_transport_option(Transport, Transport) :-
+		validate_transport(Transport).
+
+	resolve_client_transport(URL, default, Transport) :-
+		!,
+		websocket_url_scheme(URL, Scheme),
+		default_transport(Scheme, Transport).
+	resolve_client_transport(URL, Transport, Transport) :-
+		websocket_url_scheme(URL, Scheme),
+		( 	Transport::supported_websocket_scheme(Scheme) ->
+			true
+		; 	consistency_error(http_websocket_options, scheme(Scheme), transport(Transport))
+		).
+
+	resolve_server_transport(default, http_socket_transport) :-
+		!.
+	resolve_server_transport(Transport, Transport).
+
+	websocket_url_scheme(URL, Scheme) :-
+		( 	var(URL) ->
+			instantiation_error
+		; 	url(atom)::parse(URL, Components) ->
+			true
+		; 	domain_error(http_client_websocket_url, URL)
+		),
+		( 	member(scheme(Scheme), Components) ->
+			validate_websocket_scheme(Scheme)
+		; 	domain_error(http_client_websocket_url, missing_scheme)
+		).
+
+	validate_websocket_scheme(Scheme) :-
+		( 	websocket_scheme(Scheme) ->
+			true
+		; 	domain_error(http_client_websocket_scheme, Scheme)
+		).
+
+	websocket_scheme(ws).
+	websocket_scheme(wss).
+
+	default_transport(ws, http_socket_transport).
+	default_transport(wss, http_process_transport).
+
+	validate_transport(Transport) :-
+		( 	var(Transport) ->
+			instantiation_error
+		; 	current_object(Transport) ->
+			( 	conforms_to_protocol(Transport, http_transport_protocol) ->
+				true
+			; 	domain_error(http_transport_protocol_object, Transport)
+			)
+		; 	existence_error(object, Transport)
+		).
+
 	filter_direct_options([], []).
 	filter_direct_options([auto_pong(_)| Options], FilteredOptions) :-
 		!,
@@ -611,10 +673,23 @@
 	filter_direct_options([max_payload_length(_)| Options], FilteredOptions) :-
 		!,
 		filter_direct_options(Options, FilteredOptions).
+	filter_direct_options([transport(_)| Options], FilteredOptions) :-
+		!,
+		filter_direct_options(Options, FilteredOptions).
 	filter_direct_options([Option| Options], [Option| FilteredOptions]) :-
 		filter_direct_options(Options, FilteredOptions).
 
+	filter_transport_options([], []).
+	filter_transport_options([transport(_)| Options], FilteredOptions) :-
+		!,
+		filter_transport_options(Options, FilteredOptions).
+	filter_transport_options([Option| Options], [Option| FilteredOptions]) :-
+		filter_transport_options(Options, FilteredOptions).
+
 	filter_server_session_options([], [], []).
+	filter_server_session_options([transport(_)| Options], AcceptOptions, SessionOptions) :-
+		!,
+		filter_server_session_options(Options, AcceptOptions, SessionOptions).
 	filter_server_session_options([Option| Options], AcceptOptions, [Option| SessionOptions]) :-
 		server_session_option(Option),
 		!,
@@ -637,16 +712,16 @@
 	role_write_message(server, Output, State0, State, Message, Options) :-
 		server_write_message(Output, State0, State, Message, Options).
 
-	update_or_close_handle(WebSocket, Connection, State) :-
+	update_or_close_handle(WebSocket, Transport, Connection, State) :-
 		(	terminal_state(State) ->
-			close_connection_and_unregister(WebSocket, Connection)
+			close_connection_and_unregister(WebSocket, Transport, Connection)
 		;	update_live_handle(WebSocket, State)
 		).
 
-	update_or_close_after_receive(WebSocket, Connection, State, Message) :-
+	update_or_close_after_receive(WebSocket, Transport, Connection, State, Message) :-
 		(	Message == end_of_file ->
-			close_connection_and_unregister(WebSocket, Connection)
-		;	update_or_close_handle(WebSocket, Connection, State)
+			close_connection_and_unregister(WebSocket, Transport, Connection)
+		; 	update_or_close_handle(WebSocket, Transport, Connection, State)
 		).
 
 	update_live_handle(WebSocket, State) :-
@@ -656,27 +731,27 @@
 	terminal_state(session_state(_Pending, closed(_SentPayload, _ReceivedPayload))).
 
 	close_handle(WebSocket, Message) :-
-		with_handle_state(WebSocket, Role, Connection, _Response, _ClientInfo, State0, _AutoPong, _MaxPayloadLength),
-		connection_streams(Connection, _Input, Output),
+		with_handle_state(WebSocket, Role, Transport, Connection, _Response, _ClientInfo, State0, _AutoPong, _MaxPayloadLength),
+		Transport::connection_streams(Connection, _Input, Output),
 		catch(
 			role_write_message(Role, Output, State0, _State, Message, []),
 			Error,
-			(	close_connection_and_unregister(WebSocket, Connection),
+			( 	close_connection_and_unregister(WebSocket, Transport, Connection),
 				throw(Error)
 			)
 		),
-		close_connection_and_unregister(WebSocket, Connection).
+		close_connection_and_unregister(WebSocket, Transport, Connection).
 
-	close_connection_and_unregister(WebSocket, Connection) :-
+	close_connection_and_unregister(WebSocket, Transport, Connection) :-
 		handle_identifier(WebSocket, HandleId),
 		retract_handle_state(HandleId, _Outcome),
-		catch(close_connection(Connection), _, true).
+		catch(Transport::close_connection(Connection), _, true).
 
 	best_effort_close(WebSocket) :-
 		(	var(WebSocket) ->
 			true
-		;	catch(with_handle_state(WebSocket, _Role, Connection, _Response, _ClientInfo, _State, _AutoPong, _MaxPayloadLength), _, fail) ->
-			close_connection_and_unregister(WebSocket, Connection)
+		; 	catch(with_handle_state(WebSocket, _Role, Transport, Connection, _Response, _ClientInfo, _State, _AutoPong, _MaxPayloadLength), _, fail) ->
+			close_connection_and_unregister(WebSocket, Transport, Connection)
 		;	true
 		).
 
@@ -763,18 +838,5 @@
 
 	handle(Request, Response) :-
 		http_server_core::accept_websocket(Request, Response, _Options_).
-
-:- end_object.
-
-
-:- object(http_websocket,
-	extends(http_websocket(http_socket_transport))).
-
-	:- info([
-		version is 1:0:0,
-		author is 'Paulo Moura',
-		date is 2026-06-26,
-		comment is 'By default, the high-level WebSocket predicates use the ``http_socket_transport`` library.'
-	]).
 
 :- end_object.

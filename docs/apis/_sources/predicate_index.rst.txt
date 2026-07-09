@@ -179,7 +179,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket(HTTPTransport) <http_websocket/1::accept/3>`
+* :ref:`http_websocket <http_websocket/0::accept/3>`
 
 ``accept/4``
 ------------
@@ -189,7 +189,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket(HTTPTransport) <http_websocket/1::accept/4>`
+* :ref:`http_websocket <http_websocket/0::accept/4>`
 
 ``accept_websocket/3``
 ----------------------
@@ -2951,7 +2951,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`http_cookie_jar <http_cookie_jar/0::close/1>`
 * :ref:`http_server <http_server/0::close/1>`
 * :ref:`http_server_core_session <http_server_core_session/0::close/1>`
-* :ref:`http_websocket(HTTPTransport) <http_websocket/1::close/1>`
+* :ref:`http_websocket <http_websocket/0::close/1>`
 * :ref:`http_websocket_service_registry <http_websocket_service_registry/0::close/1>`
 * :ref:`s3_session(A) <s3_session/1::close/1>`
 
@@ -2963,7 +2963,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket(HTTPTransport) <http_websocket/1::close/2>`
+* :ref:`http_websocket <http_websocket/0::close/2>`
 * :ref:`socket <socket/0::close/2>`
 
 ``close/3``
@@ -16744,7 +16744,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`http_client_session(A) <http_client_session/1::open/2>`
 * :ref:`http_cookie_jar <http_cookie_jar/0::open/2>`
 * :ref:`http_server_core_session <http_server_core_session/0::open/2>`
-* :ref:`http_websocket(HTTPTransport) <http_websocket/1::open/2>`
+* :ref:`http_websocket <http_websocket/0::open/2>`
 * :ref:`s3_session(A) <s3_session/1::open/2>`
 
 ``open/3``
@@ -16757,7 +16757,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http_client_digest_session(HTTPTransport) <http_client_digest_session/1::open/3>`
 * :ref:`http_server <http_server/0::open/3>`
-* :ref:`http_websocket(HTTPTransport) <http_websocket/1::open/3>`
+* :ref:`http_websocket <http_websocket/0::open/3>`
 
 ``open/4``
 ----------
@@ -16849,7 +16849,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket(HTTPTransport) <http_websocket/1::open_session/4>`
+* :ref:`http_websocket <http_websocket/0::open_session/4>`
 
 ``open_session/5``
 ------------------
@@ -16859,7 +16859,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket(HTTPTransport) <http_websocket/1::open_session/5>`
+* :ref:`http_websocket <http_websocket/0::open_session/5>`
 
 ``open_websocket/4``
 --------------------
@@ -19705,7 +19705,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_core <http_core/0::property/2>`
-* :ref:`http_websocket(HTTPTransport) <http_websocket/1::property/2>`
+* :ref:`http_websocket <http_websocket/0::property/2>`
 * :ref:`http_websocket_frames <http_websocket_frames/0::property/2>`
 
 ``property/3``
@@ -21103,7 +21103,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket(HTTPTransport) <http_websocket/1::receive/2>`
+* :ref:`http_websocket <http_websocket/0::receive/2>`
 
 ``receive/3``
 -------------
@@ -21114,7 +21114,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`amqp <amqp/0::receive/3>`
-* :ref:`http_websocket(HTTPTransport) <http_websocket/1::receive/3>`
+* :ref:`http_websocket <http_websocket/0::receive/3>`
 * :ref:`stomp <stomp/0::receive/3>`
 
 ``receive_binary/2``
@@ -21125,7 +21125,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket(HTTPTransport) <http_websocket/1::receive_binary/2>`
+* :ref:`http_websocket <http_websocket/0::receive_binary/2>`
 
 ``receive_json/2``
 ------------------
@@ -21135,7 +21135,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket(HTTPTransport) <http_websocket/1::receive_json/2>`
+* :ref:`http_websocket <http_websocket/0::receive_json/2>`
 
 ``receive_term/2``
 ------------------
@@ -21145,7 +21145,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket(HTTPTransport) <http_websocket/1::receive_term/2>`
+* :ref:`http_websocket <http_websocket/0::receive_term/2>`
 
 ``receive_text/2``
 ------------------
@@ -21155,7 +21155,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket(HTTPTransport) <http_websocket/1::receive_text/2>`
+* :ref:`http_websocket <http_websocket/0::receive_text/2>`
 
 ``recorda/2``
 -------------
@@ -23051,7 +23051,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket(HTTPTransport) <http_websocket/1::send/2>`
+* :ref:`http_websocket <http_websocket/0::send/2>`
 
 ``send/3``
 ----------
@@ -23061,7 +23061,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket(HTTPTransport) <http_websocket/1::send/3>`
+* :ref:`http_websocket <http_websocket/0::send/3>`
 * :ref:`http_websocket_service_registry <http_websocket_service_registry/0::send/3>`
 * :ref:`redis <redis/0::send/3>`
 
@@ -23083,7 +23083,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket(HTTPTransport) <http_websocket/1::send_binary/2>`
+* :ref:`http_websocket <http_websocket/0::send_binary/2>`
 
 ``send_heartbeat/1``
 --------------------
@@ -23104,7 +23104,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket(HTTPTransport) <http_websocket/1::send_json/2>`
+* :ref:`http_websocket <http_websocket/0::send_json/2>`
 
 ``send_term/2``
 ---------------
@@ -23114,7 +23114,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket(HTTPTransport) <http_websocket/1::send_term/2>`
+* :ref:`http_websocket <http_websocket/0::send_term/2>`
 
 ``send_text/2``
 ---------------
@@ -23124,7 +23124,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket(HTTPTransport) <http_websocket/1::send_text/2>`
+* :ref:`http_websocket <http_websocket/0::send_text/2>`
 
 ``sentence_type/2``
 -------------------
@@ -23326,7 +23326,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket(HTTPTransport) <http_websocket/1::serve_once/5>`
+* :ref:`http_websocket <http_websocket/0::serve_once/5>`
 
 ``serve_once/6``
 ----------------
@@ -23336,7 +23336,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`http_websocket(HTTPTransport) <http_websocket/1::serve_once/6>`
+* :ref:`http_websocket <http_websocket/0::serve_once/6>`
 * :ref:`http_websocket_server_service(HTTPTransport) <http_websocket_server_service/1::serve_once/6>`
 
 ``serve_once/7``

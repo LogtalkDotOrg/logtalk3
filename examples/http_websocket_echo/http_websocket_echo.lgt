@@ -18,6 +18,7 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 % The server accepts one WebSocket client using the high-level porcelain API,
 % reads one text message, writes one text reply, then waits for the client
 % close frame. Keeping the exchange to one message in each direction makes the
@@ -55,14 +56,14 @@
 		catch(
 			serve_listener(Listener, Session),
 			Error,
-			( catch(http_server::close(Server), _, true),
+			(	catch(http_server::close(Server), _, true),
 				throw(Error)
 			)
 		),
 		http_server::close(Server).
 
 	serve_listener(Listener, session(HandshakeResponse, ReceivedMessage, ReplyMessage)) :-
-		http_websocket::accept(Listener, WebSocket, _ClientInfo, [protocol(chat)]),
+		http_websocket::accept(Listener, WebSocket, _ClientInfo, [transport(http_socket_transport), protocol(chat)]),
 		http_websocket::property(WebSocket, response(HandshakeResponse)),
 		http_websocket::receive(WebSocket, ReceivedMessage),
 		echo_reply_message(ReceivedMessage, ReplyMessage),
@@ -87,7 +88,7 @@
 	:- info([
 		version is 0:1:0,
 		author is 'Paulo Moura',
-		date is 2026-06-12,
+		date is 2026-07-09,
 		comment is 'WebSocket client used by the echo example.'
 	]).
 
@@ -98,9 +99,13 @@
 		argnames is ['Port', 'Text', 'Session']
 	]).
 
+	:- uses(user, [
+		atomic_list_concat/2
+	]).
+
 	run(Port, Text, session(HandshakeResponse, SentMessage, ReplyMessage)) :-
 		websocket_url(Port, URL),
-		http_websocket::open(URL, WebSocket, [protocols([chat])]),
+		http_websocket::open(URL, WebSocket, [transport(http_socket_transport), protocols([chat])]),
 		http_websocket::property(WebSocket, response(HandshakeResponse)),
 		catch(
 			client_exchange(WebSocket, Text, SentMessage, ReplyMessage),
@@ -119,10 +124,7 @@
 	% The client uses the higher-level ws:// URL facade instead of constructing
 	% the opening handshake request manually.
 	websocket_url(Port, URL) :-
-		number_codes(Port, PortCodes),
-		atom_codes(PortAtom, PortCodes),
-		atom_concat('ws://127.0.0.1:', PortAtom, Prefix),
-		atom_concat(Prefix, '/echo', URL).
+		atomic_list_concat(['ws://127.0.0.1:', Port, '/echo'], URL).
 
 :- end_object.
 
@@ -138,7 +140,7 @@
 	:- info([
 		version is 0:1:0,
 		author is 'Paulo Moura',
-		date is 2026-06-12,
+		date is 2026-07-09,
 		comment is 'Self-contained demo object for the WebSocket echo example.'
 	]).
 
@@ -189,12 +191,8 @@
 		print_result(result(_ServerSession, session(_HandshakeResponse, SentMessage, ReplyMessage))) :-
 			http_websocket_messages::payload(SentMessage, SentText),
 			http_websocket_messages::payload(ReplyMessage, ReplyText),
-			write('Sent WebSocket message: '),
-			write(SentText),
-			nl,
-			write('Received WebSocket reply: '),
-			write(ReplyText),
-			nl.
+			write('Sent WebSocket message: '), write(SentText), nl,
+			write('Received WebSocket reply: '), write(ReplyText), nl.
 
 	:- else.
 

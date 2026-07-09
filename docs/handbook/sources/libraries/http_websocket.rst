@@ -7,12 +7,13 @@ This library provides high-level WebSocket predicates for opening and
 closing connections, for exchanging messages, and for running common
 client and server session loops.
 
-By default, the ``http_websocket`` object uses the
-``http_socket_transport`` transport, which is limited to the ``ws://``
-scheme. The parametric ``http_websocket(_HTTPSocket_)`` object supports
-alternative ``http_transport_protocol`` implementations such as
-``http_process_transport``, which supports both ``ws://`` and ``wss://``
-schemes.
+By default, client predicates select a transport from the WebSocket URL
+scheme: ``ws://`` uses ``http_socket_transport`` and ``wss://`` uses
+``http_process_transport``. Server predicates that accept an already
+open listener default to ``http_socket_transport``. Applications can
+select a transport explicitly with the ``transport/1`` option when they
+need lower-level control or a custom ``http_transport_protocol``
+implementation.
 
 This library can be used with backend Prolog systems that support
 unbound integer arithmetic and the ``sockets`` library: ECLiPSe, SICStus
@@ -49,12 +50,13 @@ Current scope
 The current implementation provides the following predicates:
 
 - ``open/2-3`` for opening client WebSocket connections and returning
-  opaque handles. The accepted ``ws://`` and ``wss://`` schemes depend
-  on the selected transport parameterization.
+  opaque handles. The ``transport/1`` option selects the transport;
+  ``transport(default)`` derives it from the URL scheme.
 - ``accept/3-4`` for accepting one server-side WebSocket connection on
   an open listener and returning opaque handles. The listener must be
-  created by the same transport parameterization, such as
-  ``http_socket_transport`` or ``http_process_transport``.
+  created by the selected transport. Use ``transport(Transport)`` when
+  accepting from a listener opened with a transport other than
+  ``http_socket_transport``.
 - ``send/2-3``, ``receive/2-3``, and ``close/1-2`` for direct message
   exchange using those handles.
 - ``property/2`` for inspecting handle properties such as the handshake
@@ -67,10 +69,9 @@ The current implementation provides the following predicates:
   and server sessions built on top of the ``http_websocket_service``
   layer.
 
-The default ``http_websocket`` object is the
-``http_websocket(http_socket_transport)`` specialization. The test suite
-also exercises the ``http_process_transport`` parameterization, which
-supports the ``wss://`` scheme.
+The test suite exercises both ``http_socket_transport`` and
+``http_process_transport`` by passing the selected transport through the
+``transport/1`` option.
 
 Current workflow
 ----------------
@@ -86,29 +87,31 @@ For the common direct server case:
 
 \| ?- http_socket_transport::open_listener('127.0.0.1', 8080, Listener,
 []), http_websocket::accept(Listener, WebSocket, ClientInfo,
-[protocol(chat)]), http_websocket::receive(WebSocket, Message),
+[transport(http_socket_transport), protocol(chat)]),
+http_websocket::receive(WebSocket, Message),
 http_websocket::send(WebSocket, Message).
 
 To use the process-backed transport instead, pair the matching listener
-and WebSocket parameterization:
+and ``transport/1`` option:
 
 \| ?- http_process_transport::open_listener('127.0.0.1', 8080, Listener,
-[]), http_websocket(http_process_transport)::accept(Listener, WebSocket,
-ClientInfo, [protocol(chat)]),
-http_websocket(http_process_transport)::receive(WebSocket, Message),
-http_websocket(http_process_transport)::send(WebSocket, Message).
+[]), http_websocket::accept(Listener, WebSocket, ClientInfo,
+[transport(http_process_transport), protocol(chat)]),
+http_websocket::receive(WebSocket, Message),
+http_websocket::send(WebSocket, Message).
 
 For callback-driven client sessions that should stay on the high-level
 surface, use:
 
 \| ?- http_websocket::open_session(URL, Handler, Response, State,
-[protocols([chat]), initial_messages([message(text, hello)])]).
+[transport(default), protocols([chat]), initial_messages([message(text,
+hello)])]).
 
 For callback-driven server sessions that should stay on the high-level
 surface, use:
 
 \| ?- http_websocket::serve_once(Listener, Handler, Response, State,
-ClientInfo, [protocol(chat)]).
+ClientInfo, [transport(http_socket_transport), protocol(chat)]).
 
 Lower-level layers
 ------------------
