@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'Auxiliary object defining the supported session-loop options and default values for callback-driven WebSocket services.'
 	]).
 
@@ -62,16 +62,16 @@
 :- end_object.
 
 
-:- object(http_websocket_service(_HTTPSocket_, _Role_, _TextRepresentation_),
+:- object(http_websocket_service(_HTTPTransport_, _Role_, _TextRepresentation_),
 	extends(http_websocket_session(_Role_, _TextRepresentation_))).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'Callback-driven WebSocket session loops over upgraded WebSocket connections provided by a selected ``http_transport_protocol`` implementation, including automatic close-handshake orchestration, optional auto-pong, keepalive, and idle-timeout policies.',
 		parameters is [
-			'HTTPSocket' - 'The object implementing ``http_transport_protocol``.',
+			'HTTPTransport' - 'The object implementing ``http_transport_protocol``.',
 			'Role' - 'Peer role for masking policy. Possible values are ``client`` and ``server``.',
 			'TextRepresentation' - 'Text representation to be used for text messages and close reasons. Possible values are ``atom`` (default), ``chars``, and ``codes``.'
 		],
@@ -192,7 +192,7 @@
 		]
 	]).
 
-	:- uses(_HTTPSocket_, [
+	:- uses(_HTTPTransport_, [
 		close_connection/1, connection_streams/3
 	]).
 

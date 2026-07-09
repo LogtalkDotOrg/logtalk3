@@ -19,13 +19,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(s3_session(_HTTPSocket_),
+:- object(s3_session(_HTTPTransport_),
 	imports(options)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'Explicit S3 client sessions carrying default request options.'
 	]).
 
@@ -372,50 +372,50 @@
 
 	list_buckets(Session, Buckets, Options) :-
 		merged_session_options(Session, Options, MergedOptions),
-		s3_client(_HTTPSocket_)::list_buckets(Buckets, MergedOptions).
+		s3_client(_HTTPTransport_)::list_buckets(Buckets, MergedOptions).
 
 	head_bucket(Session, Bucket, Metadata, Options) :-
 		merged_session_options(Session, Options, MergedOptions),
-		s3_client(_HTTPSocket_)::head_bucket(Bucket, Metadata, MergedOptions).
+		s3_client(_HTTPTransport_)::head_bucket(Bucket, Metadata, MergedOptions).
 
 	list_objects_v2(Session, Bucket, Request, Listing, Options) :-
 		merged_session_options(Session, Options, MergedOptions),
-		s3_client(_HTTPSocket_)::list_objects_v2(Bucket, Request, Listing, MergedOptions).
+		s3_client(_HTTPTransport_)::list_objects_v2(Bucket, Request, Listing, MergedOptions).
 
 	head_object(Session, Bucket, Key, Metadata, Options) :-
 		merged_session_options(Session, Options, MergedOptions),
-		s3_client(_HTTPSocket_)::head_object(Bucket, Key, Metadata, MergedOptions).
+		s3_client(_HTTPTransport_)::head_object(Bucket, Key, Metadata, MergedOptions).
 
 	get_object(Session, Bucket, Key, File, Properties, Options) :-
 		merged_session_options(Session, Options, MergedOptions),
-		s3_client(_HTTPSocket_)::get_object(Bucket, Key, File, Properties, MergedOptions).
+		s3_client(_HTTPTransport_)::get_object(Bucket, Key, File, Properties, MergedOptions).
 
 	presigned_get_object(Session, Bucket, Key, URL, Options) :-
 		context(Context),
 		merged_presigned_session_options(Session, Options, MergedOptions, Context),
-		s3_client(_HTTPSocket_)::presigned_get_object(Bucket, Key, URL, MergedOptions).
+		s3_client(_HTTPTransport_)::presigned_get_object(Bucket, Key, URL, MergedOptions).
 
 	presigned_put_object(Session, Bucket, Key, URL, Options) :-
 		context(Context),
 		merged_presigned_session_options(Session, Options, MergedOptions, Context),
-		s3_client(_HTTPSocket_)::presigned_put_object(Bucket, Key, URL, MergedOptions).
+		s3_client(_HTTPTransport_)::presigned_put_object(Bucket, Key, URL, MergedOptions).
 
 	presigned_post_object(Session, Bucket, Key, URL, Options) :-
 		context(Context),
 		merged_presigned_session_options(Session, Options, MergedOptions, Context),
-		s3_client(_HTTPSocket_)::presigned_post_object(Bucket, Key, URL, MergedOptions).
+		s3_client(_HTTPTransport_)::presigned_post_object(Bucket, Key, URL, MergedOptions).
 
 	put_object(Session, Bucket, Key, File, ETag, Properties, Options) :-
 		merged_session_options(Session, Options, MergedOptions),
-		s3_client(_HTTPSocket_)::put_object(Bucket, Key, File, ETag, Properties, MergedOptions).
+		s3_client(_HTTPTransport_)::put_object(Bucket, Key, File, ETag, Properties, MergedOptions).
 
 	delete_object(Session, Bucket, Key, Result, Options) :-
 		merged_session_options(Session, Options, MergedOptions),
-		s3_client(_HTTPSocket_)::delete_object(Bucket, Key, Result, MergedOptions).
+		s3_client(_HTTPTransport_)::delete_object(Bucket, Key, Result, MergedOptions).
 
 	copy_object(Session, Source, Bucket, Key, Result, Options) :-
 		merged_session_options(Session, Options, MergedOptions),
-		s3_client(_HTTPSocket_)::copy_object(Source, Bucket, Key, Result, MergedOptions).
+		s3_client(_HTTPTransport_)::copy_object(Source, Bucket, Key, Result, MergedOptions).
 
 	merged_session_options(Session, Options, MergedOptions) :-
 		^^check_options(Options),

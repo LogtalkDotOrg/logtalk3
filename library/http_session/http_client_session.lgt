@@ -19,13 +19,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(http_client_session(_HTTPSocket_),
+:- object(http_client_session(_HTTPTransport_),
 	imports([options, http_origin_site_helpers])).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'Stateful HTTP client sessions that add cookie persistence on top of the stateless ``http_client`` facade.',
 		remarks is [
 			'Option precedence' - 'When the same session default or per-request option is given multiple times, the first occurrence is used.',
@@ -231,7 +231,7 @@
 		maybe_add_cookie_property(FinalCookiePairs, MergedProperties0, MergedProperties),
 		final_request_version(DefaultVersion, RequestVersion, FinalVersion),
 		build_client_request_options(MergedHeaders, Body, MergedQueryPairs, FinalVersion, MergedConnectionOptions, MergedProperties, ClientOptions),
-		http_client(_HTTPSocket_)::request(Method, URL, Response, ClientOptions),
+		http_client(_HTTPTransport_)::request(Method, URL, Response, ClientOptions),
 		store_response_cookies(Jar, URL, Response).
 
 	get(Session, URL, Response, Options) :-

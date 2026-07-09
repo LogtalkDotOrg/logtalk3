@@ -19,15 +19,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(http_websocket(_HTTPSocket_),
+:- object(http_websocket(_HTTPTransport_),
 	imports(options)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'High-level WebSocket predicates for opening and closing connections, exchanging messages, and running common client and server session loops.',
-		parnames is ['HTTPSocket']
+		parnames is ['HTTPTransport']
 	]).
 
 	:- public(open/2).
@@ -340,7 +340,7 @@
 		member/2, valid/1 as proper_list/1
 	]).
 
-	:- uses(http_client(_HTTPSocket_), [
+	:- uses(http_client(_HTTPTransport_), [
 		open_websocket/4 as open_client_websocket/4
 	]).
 
@@ -348,11 +348,11 @@
 		property/2 as http_property/2
 	]).
 
-	:- uses(_HTTPSocket_, [
+	:- uses(_HTTPTransport_, [
 		close_connection/1, connection_streams/3, serve_websocket_once/5
 	]).
 
-	:- uses(http_websocket_client_service(_HTTPSocket_), [
+	:- uses(http_websocket_client_service(_HTTPTransport_), [
 		open/5 as open_client_session/5
 	]).
 
@@ -365,7 +365,7 @@
 		is_message/1, message/3 as websocket_message/3
 	]).
 
-	:- uses(http_websocket_server_service(_HTTPSocket_), [
+	:- uses(http_websocket_server_service(_HTTPTransport_), [
 		serve_once/7 as serve_server_session/7
 	]).
 

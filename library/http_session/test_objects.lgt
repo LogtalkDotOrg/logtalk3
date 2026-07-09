@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'Local HTTP handler used by the http_session library tests.'
 	]).
 
@@ -65,7 +65,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'Local HTTP handler used to exercise the http_session request option and wrapper predicates.'
 	]).
 
@@ -126,7 +126,7 @@
 		:- info([
 			version is 1:0:0,
 			author is 'Paulo Moura',
-			date is 2026-07-08,
+			date is 2026-07-09,
 			comment is 'Local HTTP handler used by the http_session library tests to exercise the plain server-session handler wrapper.'
 		]).
 
@@ -151,7 +151,7 @@
 		:- info([
 			version is 1:0:0,
 			author is 'Paulo Moura',
-			date is 2026-07-08,
+			date is 2026-07-09,
 			comment is 'Local server-session specialization used by the ``http_session`` library tests to record lifecycle hook events.'
 		]).
 
@@ -196,7 +196,7 @@
 		:- info([
 			version is 1:0:0,
 			author is 'Paulo Moura',
-			date is 2026-07-08,
+			date is 2026-07-09,
 			comment is 'Local router object used by the ``http_session`` library tests to exercise the router-side server-session middleware helpers.'
 		]).
 

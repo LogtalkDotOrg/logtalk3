@@ -1,12 +1,12 @@
-.. index:: single: http_client(HTTPSocket)
+.. index:: single: http_client(HTTPTransport)
 .. _http_client/1:
 
 .. rst-class:: right
 
 **object**
 
-``http_client(HTTPSocket)``
-===========================
+``http_client(HTTPTransport)``
+==============================
 
 Request-oriented HTTP client facade built on top of the url and http_socket_transport libraries.
 
@@ -15,7 +15,7 @@ Request-oriented HTTP client facade built on top of the url and http_socket_tran
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-07-07
+| **Date:** 2026-07-09
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``

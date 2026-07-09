@@ -19,16 +19,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(s3_client(_HTTPSocket_),
+:- object(s3_client(_HTTPTransport_),
 	implements(s3_protocol),
 	imports(options)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'Stateless S3-compatible client facade over the normalized HTTP client.',
-		parnames is ['HTTPSocket']
+		parnames is ['HTTPTransport']
 	]).
 
 	:- uses(http_core, [
@@ -210,7 +210,7 @@
 		s3_signing::sign_request(Method, HostHeader, CanonicalURI, QueryPairs, Body, RequestHeaders, Headers, SigningOptions),
 		append_query(BaseURL, QueryPairs, URL),
 		http_request_options(Headers, Body, MergedOptions, HTTPOptions),
-		http_client(_HTTPSocket_)::request(Method, URL, Response, HTTPOptions).
+		http_client(_HTTPTransport_)::request(Method, URL, Response, HTTPOptions).
 
 	presigned_url(Method, Operation, Bucket, Key, URL, Options) :-
 		extract_presign_options(Options, RequestOptions, PresignOptions),
@@ -517,7 +517,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'Stateless S3-compatible client facade over the normalized HTTP client using by default the ``http_process_transport`` library.'
 	]).
 

@@ -1,12 +1,12 @@
-.. index:: single: s3_client(HTTPSocket)
+.. index:: single: s3_client(HTTPTransport)
 .. _s3_client/1:
 
 .. rst-class:: right
 
 **object**
 
-``s3_client(HTTPSocket)``
-=========================
+``s3_client(HTTPTransport)``
+============================
 
 Stateless S3-compatible client facade over the normalized HTTP client.
 
@@ -15,7 +15,7 @@ Stateless S3-compatible client facade over the normalized HTTP client.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-07-08
+| **Date:** 2026-07-09
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -26,7 +26,7 @@ Stateless S3-compatible client facade over the normalized HTTP client.
 | **Imports:**
 |    ``public`` :ref:`options <options/0>`
 | **Uses:**
-|    :ref:`http_client(HTTPSocket) <http_client/1>`
+|    :ref:`http_client(HTTPTransport) <http_client/1>`
 |    :ref:`http_core <http_core/0>`
 |    :ref:`list <list/0>`
 |    :ref:`mime_types <mime_types/0>`

@@ -19,15 +19,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(http_client_digest_session(_HTTPSocket_),
+:- object(http_client_digest_session(_HTTPTransport_),
 	imports([options, http_text_helpers])).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'Stateful HTTP Digest client sessions that add cookie persistence and one-round-trip Digest challenge retry on top of the normalized HTTP client and socket libraries.',
-		parnames is ['HTTPSocket'],
+		parnames is ['HTTPTransport'],
 		remarks is [
 			'Option precedence' - 'When the same session default, Digest default, or per-request option is given multiple times, the first occurrence is used.',
 			'Reactive authentication' - 'Requests are sent once without credentials and retried automatically only when the response carries a ``401`` Digest challenge accepted by the core ``http_digest`` object.'
@@ -204,7 +204,7 @@
 		]).
 	:- endif.
 
-	:- uses(_HTTPSocket_, [
+	:- uses(_HTTPTransport_, [
 		exchange/5
 	]).
 
@@ -653,7 +653,7 @@
 	validate_request_scheme(Components, Scheme) :-
 		member(scheme(Scheme), Components),
 		!,
-		(	_HTTPSocket_::supported_request_scheme(Scheme) ->
+		(	_HTTPTransport_::supported_request_scheme(Scheme) ->
 			true
 		;	domain_error(http_client_scheme, Scheme)
 		).

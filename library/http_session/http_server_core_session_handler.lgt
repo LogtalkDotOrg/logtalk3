@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'Wrapper HTTP handler object that applies server-session begin and finish processing around another portable HTTP handler.',
 		parameters is [
 			'Manager' - 'Server-session manager handle.',

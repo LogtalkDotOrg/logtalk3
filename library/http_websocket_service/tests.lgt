@@ -19,13 +19,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(tests(_HTTPSocket_),
+:- object(tests(_HTTPTransport_),
 	extends(lgtunit)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'Unit tests for the "http_websocket_service" library.'
 	]).
 
@@ -33,16 +33,16 @@
 		request/7, status/2
 	]).
 
-	:- uses(_HTTPSocket_, [
+	:- uses(_HTTPTransport_, [
 		close_connection/1, close_listener/1, connection_streams/3, exchange/3, open_connection/4,
 		open_listener/4, serve_websocket_once/5
 	]).
 
-	:- uses(http_websocket_client_service(_HTTPSocket_), [
+	:- uses(http_websocket_client_service(_HTTPTransport_), [
 		open/5
 	]).
 
-	:- uses(http_websocket_server_service(_HTTPSocket_), [
+	:- uses(http_websocket_server_service(_HTTPTransport_), [
 		request_shutdown/1, run_session/4, serve_once/7, serve_until_shutdown/6
 	]).
 

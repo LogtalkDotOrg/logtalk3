@@ -1,12 +1,12 @@
-.. index:: single: http_websocket_client_service(HTTPSocket)
+.. index:: single: http_websocket_client_service(HTTPTransport)
 .. _http_websocket_client_service/1:
 
 .. rst-class:: right
 
 **object**
 
-``http_websocket_client_service(HTTPSocket)``
-=============================================
+``http_websocket_client_service(HTTPTransport)``
+================================================
 
 Client-side convenience for callback-driven WebSocket sessions with atom text representation, combining the opening handshake, optional initial outbound messages, and the higher-level session loop.
 
@@ -15,16 +15,16 @@ Client-side convenience for callback-driven WebSocket sessions with atom text re
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-07-08
+| **Date:** 2026-07-09
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
 | **Extends:**
-|    ``public`` :ref:`http_websocket_service(HTTPSocket,client,atom) <http_websocket_service/3>`
+|    ``public`` :ref:`http_websocket_service(HTTPTransport,client,atom) <http_websocket_service/3>`
 | **Uses:**
-|    :ref:`http_client(HTTPSocket) <http_client/1>`
+|    :ref:`http_client(HTTPTransport) <http_client/1>`
 |    :ref:`list <list/0>`
 |    :ref:`user <user/0>`
 

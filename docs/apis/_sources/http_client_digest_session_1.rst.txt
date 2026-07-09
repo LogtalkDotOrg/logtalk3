@@ -1,12 +1,12 @@
-.. index:: single: http_client_digest_session(HTTPSocket)
+.. index:: single: http_client_digest_session(HTTPTransport)
 .. _http_client_digest_session/1:
 
 .. rst-class:: right
 
 **object**
 
-``http_client_digest_session(HTTPSocket)``
-==========================================
+``http_client_digest_session(HTTPTransport)``
+=============================================
 
 Stateful HTTP Digest client sessions that add cookie persistence and one-round-trip Digest challenge retry on top of the normalized HTTP client and socket libraries.
 
@@ -15,7 +15,7 @@ Stateful HTTP Digest client sessions that add cookie persistence and one-round-t
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-07-08
+| **Date:** 2026-07-09
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``

@@ -1,14 +1,14 @@
-.. index:: single: http_websocket_service(HTTPSocket,Role,TextRepresentation)
+.. index:: single: http_websocket_service(HTTPTransport,Role,TextRepresentation)
 .. _http_websocket_service/3:
 
 .. rst-class:: right
 
 **object**
 
-``http_websocket_service(HTTPSocket,Role,TextRepresentation)``
-==============================================================
+``http_websocket_service(HTTPTransport,Role,TextRepresentation)``
+=================================================================
 
-* ``HTTPSocket`` - The object implementing ``http_transport_protocol``.
+* ``HTTPTransport`` - The object implementing ``http_transport_protocol``.
 * ``Role`` - Peer role for masking policy. Possible values are ``client`` and ``server``.
 * ``TextRepresentation`` - Text representation to be used for text messages and close reasons. Possible values are ``atom`` (default), ``chars``, and ``codes``.
 
@@ -20,7 +20,7 @@ Callback-driven WebSocket session loops over upgraded WebSocket connections prov
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-07-08
+| **Date:** 2026-07-09
 
 | **Compilation flags:**
 |    ``static, context_switching_calls, threaded``

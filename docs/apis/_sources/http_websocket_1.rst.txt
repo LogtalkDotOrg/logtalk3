@@ -1,12 +1,12 @@
-.. index:: single: http_websocket(HTTPSocket)
+.. index:: single: http_websocket(HTTPTransport)
 .. _http_websocket/1:
 
 .. rst-class:: right
 
 **object**
 
-``http_websocket(HTTPSocket)``
-==============================
+``http_websocket(HTTPTransport)``
+=================================
 
 High-level WebSocket predicates for opening and closing connections, exchanging messages, and running common client and server session loops.
 
@@ -15,7 +15,7 @@ High-level WebSocket predicates for opening and closing connections, exchanging 
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-07-08
+| **Date:** 2026-07-09
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -24,12 +24,12 @@ High-level WebSocket predicates for opening and closing connections, exchanging 
 | **Imports:**
 |    ``public`` :ref:`options <options/0>`
 | **Uses:**
-|    :ref:`http_client(HTTPSocket) <http_client/1>`
+|    :ref:`http_client(HTTPTransport) <http_client/1>`
 |    :ref:`http_core <http_core/0>`
-|    :ref:`http_websocket_client_service(HTTPSocket) <http_websocket_client_service/1>`
+|    :ref:`http_websocket_client_service(HTTPTransport) <http_websocket_client_service/1>`
 |    :ref:`http_websocket_client_session <http_websocket_client_session/0>`
 |    :ref:`http_websocket_messages <http_websocket_messages/0>`
-|    :ref:`http_websocket_server_service(HTTPSocket) <http_websocket_server_service/1>`
+|    :ref:`http_websocket_server_service(HTTPTransport) <http_websocket_server_service/1>`
 |    :ref:`http_websocket_server_session <http_websocket_server_session/0>`
 |    :ref:`json <json/0>`
 |    :ref:`list <list/0>`

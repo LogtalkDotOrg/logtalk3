@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>http_websocket_service(HTTPSocket,Role,TextRepresentation) &mdash; Logtalk 3.101.0</title>
+  <title>http_websocket_service(HTTPTransport,Role,TextRepresentation) &mdash; Logtalk 3.101.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -33,7 +33,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="http_websocket_service_handler_protocol" href="http_websocket_service_handler_protocol_0.html" />
-    <link rel="prev" title="http_websocket_server_service(HTTPSocket)" href="http_websocket_server_service_1.html" />
+    <link rel="prev" title="http_websocket_server_service(HTTPTransport)" href="http_websocket_server_service_1.html" />
    
 </head>
 
@@ -187,10 +187,10 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-websocket-messages"><span class="xref std std-ref">http_websocket_messages</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#http-websocket-service"><span class="xref std std-ref">http_websocket_service</span></a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="http_websocket_client_service_0.html">http_websocket_client_service</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_websocket_client_service_1.html">http_websocket_client_service(HTTPSocket)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_websocket_client_service_1.html">http_websocket_client_service(HTTPTransport)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_websocket_server_service_0.html">http_websocket_server_service</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_websocket_server_service_1.html">http_websocket_server_service(HTTPSocket)</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">http_websocket_service(HTTPSocket,Role,TextRepresentation)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_websocket_server_service_1.html">http_websocket_server_service(HTTPTransport)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">http_websocket_service(HTTPTransport,Role,TextRepresentation)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_websocket_service_handler_protocol_0.html">http_websocket_service_handler_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_websocket_service_loop_options_0.html">http_websocket_service_loop_options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_websocket_service_registry_0.html">http_websocket_service_registry</a></li>
@@ -386,7 +386,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">http_websocket_service(HTTPSocket,Role,TextRepresentation)</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">http_websocket_service(HTTPTransport,Role,TextRepresentation)</span></code></li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/http_websocket_service_3.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -397,10 +397,10 @@
            <div itemprop="articleBody">
              
   <p class="right" id="http-websocket-service-3"><span id="index-0"></span><strong>object</strong></p>
-<section id="http-websocket-service-httpsocket-role-textrepresentation">
-<h1><code class="docutils literal notranslate"><span class="pre">http_websocket_service(HTTPSocket,Role,TextRepresentation)</span></code><a class="headerlink" href="#http-websocket-service-httpsocket-role-textrepresentation" title="Link to this heading"></a></h1>
+<section id="http-websocket-service-httptransport-role-textrepresentation">
+<h1><code class="docutils literal notranslate"><span class="pre">http_websocket_service(HTTPTransport,Role,TextRepresentation)</span></code><a class="headerlink" href="#http-websocket-service-httptransport-role-textrepresentation" title="Link to this heading"></a></h1>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">HTTPSocket</span></code> - The object implementing <code class="docutils literal notranslate"><span class="pre">http_transport_protocol</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HTTPTransport</span></code> - The object implementing <code class="docutils literal notranslate"><span class="pre">http_transport_protocol</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Role</span></code> - Peer role for masking policy. Possible values are <code class="docutils literal notranslate"><span class="pre">client</span></code> and <code class="docutils literal notranslate"><span class="pre">server</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">TextRepresentation</span></code> - Text representation to be used for text messages and close reasons. Possible values are <code class="docutils literal notranslate"><span class="pre">atom</span></code> (default), <code class="docutils literal notranslate"><span class="pre">chars</span></code>, and <code class="docutils literal notranslate"><span class="pre">codes</span></code>.</p></li>
 </ul>
@@ -414,7 +414,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-07-08</div>
+<div class="line"><strong>Date:</strong> 2026-07-09</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -854,7 +854,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="http_websocket_server_service_1.html" class="btn btn-neutral float-left" title="http_websocket_server_service(HTTPSocket)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="http_websocket_server_service_1.html" class="btn btn-neutral float-left" title="http_websocket_server_service(HTTPTransport)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="http_websocket_service_handler_protocol_0.html" class="btn btn-neutral float-right" title="http_websocket_service_handler_protocol" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

@@ -1,12 +1,12 @@
-.. index:: single: http_websocket_server_service(HTTPSocket)
+.. index:: single: http_websocket_server_service(HTTPTransport)
 .. _http_websocket_server_service/1:
 
 .. rst-class:: right
 
 **object**
 
-``http_websocket_server_service(HTTPSocket)``
-=============================================
+``http_websocket_server_service(HTTPTransport)``
+================================================
 
 Server-side convenience for callback-driven WebSocket sessions with atom text representation, including registry-backed broadcast helpers.
 
@@ -15,14 +15,14 @@ Server-side convenience for callback-driven WebSocket sessions with atom text re
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-07-08
+| **Date:** 2026-07-09
 
 | **Compilation flags:**
 |    ``static, context_switching_calls, threaded``
 
 
 | **Extends:**
-|    ``public`` :ref:`http_websocket_service(HTTPSocket,server,atom) <http_websocket_service/3>`
+|    ``public`` :ref:`http_websocket_service(HTTPTransport,server,atom) <http_websocket_service/3>`
 | **Uses:**
 |    :ref:`http_websocket_service_registry <http_websocket_service_registry/0>`
 |    :ref:`user <user/0>`

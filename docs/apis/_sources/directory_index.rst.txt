@@ -1203,7 +1203,7 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
    http_client <http_client_0>
-   http_client(HTTPSocket) <http_client_1>
+   http_client(HTTPTransport) <http_client_1>
 
 ``library/http_client_core/``
 -----------------------------
@@ -1267,7 +1267,7 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
    http_client_digest_session <http_client_digest_session_0>
-   http_client_digest_session(HTTPSocket) <http_client_digest_session_1>
+   http_client_digest_session(HTTPTransport) <http_client_digest_session_1>
    http_digest <http_digest_0>
    http_digest_verifier_protocol <http_digest_verifier_protocol_0>
    http_router_digest_auth(Verifier,ProtectOptions,AuthenticationInfoOptions) <http_router_digest_auth_3>
@@ -1390,7 +1390,7 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
    http_websocket <http_websocket_0>
-   http_websocket(HTTPSocket) <http_websocket_1>
+   http_websocket(HTTPTransport) <http_websocket_1>
    http_websocket_accept_handler(Options) <http_websocket_accept_handler_1>
 
 ``library/http_websocket_frames/``
@@ -1433,10 +1433,10 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
    http_websocket_client_service <http_websocket_client_service_0>
-   http_websocket_client_service(HTTPSocket) <http_websocket_client_service_1>
+   http_websocket_client_service(HTTPTransport) <http_websocket_client_service_1>
    http_websocket_server_service <http_websocket_server_service_0>
-   http_websocket_server_service(HTTPSocket) <http_websocket_server_service_1>
-   http_websocket_service(HTTPSocket,Role,TextRepresentation) <http_websocket_service_3>
+   http_websocket_server_service(HTTPTransport) <http_websocket_server_service_1>
+   http_websocket_service(HTTPTransport,Role,TextRepresentation) <http_websocket_service_3>
    http_websocket_service_handler_protocol <http_websocket_service_handler_protocol_0>
    http_websocket_service_loop_options <http_websocket_service_loop_options_0>
    http_websocket_service_registry <http_websocket_service_registry_0>
@@ -2576,7 +2576,7 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
    s3_client <s3_client_0>
-   s3_client(HTTPSocket) <s3_client_1>
+   s3_client(HTTPTransport) <s3_client_1>
    s3_endpoints <s3_endpoints_0>
    s3_headers <s3_headers_0>
    s3_protocol <s3_protocol_0>

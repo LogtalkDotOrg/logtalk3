@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'Optional server-session middleware helpers for router objects importing the ``http_router`` category.',
 		parameters is [
 			'Manager' - 'Server-session manager handle used for request begin and response finish processing.'

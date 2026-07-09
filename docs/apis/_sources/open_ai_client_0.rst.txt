@@ -22,7 +22,7 @@ OpenAI-compatible client facade using http_client(http_process_transport) for HT
 
 
 | **Uses:**
-|    :ref:`http_client(HTTPSocket) <http_client/1>`
+|    :ref:`http_client(HTTPTransport) <http_client/1>`
 |    :ref:`list <list/0>`
 |    :ref:`open_ai_catalog <open_ai_catalog/0>`
 

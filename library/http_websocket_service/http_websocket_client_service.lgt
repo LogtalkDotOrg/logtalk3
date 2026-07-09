@@ -19,15 +19,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(http_websocket_client_service(_HTTPSocket_),
-	extends(http_websocket_service(_HTTPSocket_, client, atom))).
+:- object(http_websocket_client_service(_HTTPTransport_),
+	extends(http_websocket_service(_HTTPTransport_, client, atom))).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'Client-side convenience for callback-driven WebSocket sessions with atom text representation, combining the opening handshake, optional initial outbound messages, and the higher-level session loop.',
-		parnames is ['HTTPSocket']
+		parnames is ['HTTPTransport']
 	]).
 
 	:- public(open/4).
@@ -94,11 +94,11 @@
 		]
 	]).
 
-	:- uses(http_client(_HTTPSocket_), [
+	:- uses(http_client(_HTTPTransport_), [
 		open_websocket/4
 	]).
 
-	:- uses(_HTTPSocket_, [
+	:- uses(_HTTPTransport_, [
 		close_connection/1, connection_streams/3
 	]).
 
@@ -241,7 +241,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'By default, the client-side convenience for callback-driven WebSocket sessions with atom text representation, combining the opening handshake, optional initial outbound messages, and the higher-level session loop, uses the ``http_socket_transport`` library.'
 	]).
 

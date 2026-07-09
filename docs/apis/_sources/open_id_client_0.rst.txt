@@ -25,7 +25,7 @@ HTTP-facing OpenID Connect client predicates using http_process_transport for TL
 |    ``public`` :ref:`open_id_helpers <open_id_helpers/0>`
 | **Uses:**
 |    :ref:`base64 <base64/0>`
-|    :ref:`http_client(HTTPSocket) <http_client/1>`
+|    :ref:`http_client(HTTPTransport) <http_client/1>`
 |    :ref:`http_core <http_core/0>`
 |    :ref:`list <list/0>`
 |    :ref:`open_id_discovery <open_id_discovery/0>`

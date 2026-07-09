@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>http_websocket_client_service(HTTPSocket) &mdash; Logtalk 3.101.0</title>
+  <title>http_websocket_client_service(HTTPTransport) &mdash; Logtalk 3.101.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -187,10 +187,10 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-websocket-messages"><span class="xref std std-ref">http_websocket_messages</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#http-websocket-service"><span class="xref std std-ref">http_websocket_service</span></a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="http_websocket_client_service_0.html">http_websocket_client_service</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">http_websocket_client_service(HTTPSocket)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">http_websocket_client_service(HTTPTransport)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_websocket_server_service_0.html">http_websocket_server_service</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_websocket_server_service_1.html">http_websocket_server_service(HTTPSocket)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="http_websocket_service_3.html">http_websocket_service(HTTPSocket,Role,TextRepresentation)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_websocket_server_service_1.html">http_websocket_server_service(HTTPTransport)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_websocket_service_3.html">http_websocket_service(HTTPTransport,Role,TextRepresentation)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_websocket_service_handler_protocol_0.html">http_websocket_service_handler_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_websocket_service_loop_options_0.html">http_websocket_service_loop_options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_websocket_service_registry_0.html">http_websocket_service_registry</a></li>
@@ -386,7 +386,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">http_websocket_client_service(HTTPSocket)</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">http_websocket_client_service(HTTPTransport)</span></code></li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/http_websocket_client_service_1.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -397,8 +397,8 @@
            <div itemprop="articleBody">
              
   <p class="right" id="http-websocket-client-service-1"><span id="index-0"></span><strong>object</strong></p>
-<section id="http-websocket-client-service-httpsocket">
-<h1><code class="docutils literal notranslate"><span class="pre">http_websocket_client_service(HTTPSocket)</span></code><a class="headerlink" href="#http-websocket-client-service-httpsocket" title="Link to this heading"></a></h1>
+<section id="http-websocket-client-service-httptransport">
+<h1><code class="docutils literal notranslate"><span class="pre">http_websocket_client_service(HTTPTransport)</span></code><a class="headerlink" href="#http-websocket-client-service-httptransport" title="Link to this heading"></a></h1>
 <p>Client-side convenience for callback-driven WebSocket sessions with atom text representation, combining the opening handshake, optional initial outbound messages, and the higher-level session loop.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
@@ -409,7 +409,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-07-08</div>
+<div class="line"><strong>Date:</strong> 2026-07-09</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -420,11 +420,11 @@
 <div class="line-block">
 <div class="line"><strong>Extends:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="http_websocket_service_3.html#http-websocket-service-3"><span class="std std-ref">http_websocket_service(HTTPSocket,client,atom)</span></a></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="http_websocket_service_3.html#http-websocket-service-3"><span class="std std-ref">http_websocket_service(HTTPTransport,client,atom)</span></a></div>
 </div>
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
-<div class="line"><a class="reference internal" href="http_client_1.html#http-client-1"><span class="std std-ref">http_client(HTTPSocket)</span></a></div>
+<div class="line"><a class="reference internal" href="http_client_1.html#http-client-1"><span class="std std-ref">http_client(HTTPTransport)</span></a></div>
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
 <div class="line"><a class="reference internal" href="user_0.html#user-0"><span class="std std-ref">user</span></a></div>
 </div>

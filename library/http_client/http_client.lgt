@@ -19,15 +19,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(http_client(_HTTPSocket_),
+:- object(http_client(_HTTPTransport_),
 	imports([options, http_message_helpers, http_text_helpers, http_origin_site_helpers])).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-07,
+		date is 2026-07-09,
 		comment is 'Request-oriented HTTP client facade built on top of the url and http_socket_transport libraries.',
-		parnames is ['HTTPSocket']
+		parnames is ['HTTPTransport']
 	]).
 
 	:- public(request/4).
@@ -321,7 +321,7 @@
 		member/2, memberchk/2, valid/1 as proper_list/1
 	]).
 
-	:- uses(_HTTPSocket_, [
+	:- uses(_HTTPTransport_, [
 		close_connection/1, exchange/3, exchange/5, open_connection/4
 	]).
 
@@ -598,13 +598,13 @@
 		domain_error(http_client_websocket_url, missing_scheme).
 
 	validate_request_scheme(Scheme) :-
-		(	_HTTPSocket_::supported_request_scheme(Scheme) ->
+		(	_HTTPTransport_::supported_request_scheme(Scheme) ->
 			true
 		;	domain_error(http_client_scheme, Scheme)
 		).
 
 	validate_websocket_scheme(Scheme) :-
-		(	_HTTPSocket_::supported_websocket_scheme(Scheme) ->
+		(	_HTTPTransport_::supported_websocket_scheme(Scheme) ->
 			true
 		;	domain_error(http_client_websocket_scheme, Scheme)
 		).

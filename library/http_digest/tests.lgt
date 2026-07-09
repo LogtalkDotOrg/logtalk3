@@ -19,13 +19,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(tests(_HTTPSocket_),
+:- object(tests(_HTTPTransport_),
 	extends(lgtunit)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'Unit tests for the "http_digest" library.'
 	]).
 
@@ -33,7 +33,7 @@
 		body/2, headers/2, property/2, request/7, response/6, status/2
 	]).
 
-	:- uses(_HTTPSocket_, [
+	:- uses(_HTTPTransport_, [
 		close_listener/1, open_listener/4, serve_listener/5
 	]).
 
@@ -340,31 +340,31 @@
 
 		test(http_client_digest_session_01, deterministic) :-
 			http_cookie_jar::open(Jar),
-			http_client_digest_session(_HTTPSocket_)::open(Session, 'Mufasa', 'Circle Of Life', [cookie_jar(Jar)]),
-			http_client_digest_session(_HTTPSocket_)::cookie_jar(Session, Jar),
-			http_client_digest_session(_HTTPSocket_)::close(Session),
+			http_client_digest_session(_HTTPTransport_)::open(Session, 'Mufasa', 'Circle Of Life', [cookie_jar(Jar)]),
+			http_client_digest_session(_HTTPTransport_)::cookie_jar(Session, Jar),
+			http_client_digest_session(_HTTPTransport_)::close(Session),
 			http_cookie_jar::cookie_count(Jar, 0),
 			http_cookie_jar::close(Jar).
 
-		test(http_client_digest_session_02, error(domain_error(http_client_digest_session_request_option, unsupported_option)), [cleanup(catch(http_client_digest_session(_HTTPSocket_)::close(Session), _, true))]) :-
-			http_client_digest_session(_HTTPSocket_)::open(Session, 'Mufasa', 'Circle Of Life'),
-			http_client_digest_session(_HTTPSocket_)::get(Session, 'http://example.com/', _Response, [unsupported_option]).
+		test(http_client_digest_session_02, error(domain_error(http_client_digest_session_request_option, unsupported_option)), [cleanup(catch(http_client_digest_session(_HTTPTransport_)::close(Session), _, true))]) :-
+			http_client_digest_session(_HTTPTransport_)::open(Session, 'Mufasa', 'Circle Of Life'),
+			http_client_digest_session(_HTTPTransport_)::get(Session, 'http://example.com/', _Response, [unsupported_option]).
 
-		test(http_client_digest_session_03, error(domain_error(http_client_digest_session_request_option, digest_options([stale(true)]))), [cleanup(catch(http_client_digest_session(_HTTPSocket_)::close(Session), _, true))]) :-
-			http_client_digest_session(_HTTPSocket_)::open(Session, 'Mufasa', 'Circle Of Life'),
-			http_client_digest_session(_HTTPSocket_)::get(Session, 'http://example.com/', _Response, [digest_options([stale(true)])]).
+		test(http_client_digest_session_03, error(domain_error(http_client_digest_session_request_option, digest_options([stale(true)]))), [cleanup(catch(http_client_digest_session(_HTTPTransport_)::close(Session), _, true))]) :-
+			http_client_digest_session(_HTTPTransport_)::open(Session, 'Mufasa', 'Circle Of Life'),
+			http_client_digest_session(_HTTPTransport_)::get(Session, 'http://example.com/', _Response, [digest_options([stale(true)])]).
 
-		test(http_client_digest_session_04, error(domain_error(http_client_digest_session_request_option, digest_options([cnonce('')]))), [cleanup(catch(http_client_digest_session(_HTTPSocket_)::close(Session), _, true))]) :-
-			http_client_digest_session(_HTTPSocket_)::open(Session, 'Mufasa', 'Circle Of Life'),
-			http_client_digest_session(_HTTPSocket_)::get(Session, 'http://example.com/', _Response, [digest_options([cnonce('')])]).
+		test(http_client_digest_session_04, error(domain_error(http_client_digest_session_request_option, digest_options([cnonce('')]))), [cleanup(catch(http_client_digest_session(_HTTPTransport_)::close(Session), _, true))]) :-
+			http_client_digest_session(_HTTPTransport_)::open(Session, 'Mufasa', 'Circle Of Life'),
+			http_client_digest_session(_HTTPTransport_)::get(Session, 'http://example.com/', _Response, [digest_options([cnonce('')])]).
 
 		test(http_client_digest_session_05, error(domain_error(http_client_digest_session, foo))) :-
-			http_client_digest_session(_HTTPSocket_)::cookie_jar(foo, _Jar).
+			http_client_digest_session(_HTTPTransport_)::cookie_jar(foo, _Jar).
 
 		test(http_client_digest_session_06, deterministic) :-
-			http_client_digest_session(_HTTPSocket_)::open(Session, 'Mufasa', 'Circle Of Life', [cookie_jar(none)]),
-			http_client_digest_session(_HTTPSocket_)::cookie_jar(Session, none),
-			http_client_digest_session(_HTTPSocket_)::close(Session).
+			http_client_digest_session(_HTTPTransport_)::open(Session, 'Mufasa', 'Circle Of Life', [cookie_jar(none)]),
+			http_client_digest_session(_HTTPTransport_)::cookie_jar(Session, none),
+			http_client_digest_session(_HTTPTransport_)::close(Session).
 
 		test(http_client_digest_session_https_01, deterministic(Probe == probe('example.com', 443, [connection_transport(tls)])), [cleanup(catch(http_client_digest_session(http_digest_probe_socket)::close(Session), _, true))]) :-
 			http_client_digest_session(http_digest_probe_socket)::open(Session, 'Mufasa', 'Circle Of Life', [cookie_jar(none)]),
@@ -380,13 +380,13 @@
 				open_listener('127.0.0.1', Port, Listener, []),
 				threaded_once(serve_listener(Listener, http_server_core_digest_handler(http_digest_test_verifier, http_digest_request_echo_handler, DigestOptions, []), 10, _ClientInfos, [shutdown(keep_open)]), Tag),
 				request_echo_url(Port, '/echo', URL),
-				http_client_digest_session(_HTTPSocket_)::open(Session, 'Mufasa', 'Circle Of Life'),
-				http_client_digest_session(_HTTPSocket_)::head(Session, URL, HeadResponse, []),
-				http_client_digest_session(_HTTPSocket_)::delete(Session, URL, DeleteResponse, []),
-				http_client_digest_session(_HTTPSocket_)::post(Session, URL, content('text/plain', text(post)), PostResponse, []),
-				http_client_digest_session(_HTTPSocket_)::put(Session, URL, content('text/plain', text(put)), PutResponse, []),
-				http_client_digest_session(_HTTPSocket_)::patch(Session, URL, content('text/plain', text(patch)), PatchResponse, []),
-				http_client_digest_session(_HTTPSocket_)::close(Session),
+				http_client_digest_session(_HTTPTransport_)::open(Session, 'Mufasa', 'Circle Of Life'),
+				http_client_digest_session(_HTTPTransport_)::head(Session, URL, HeadResponse, []),
+				http_client_digest_session(_HTTPTransport_)::delete(Session, URL, DeleteResponse, []),
+				http_client_digest_session(_HTTPTransport_)::post(Session, URL, content('text/plain', text(post)), PostResponse, []),
+				http_client_digest_session(_HTTPTransport_)::put(Session, URL, content('text/plain', text(put)), PutResponse, []),
+				http_client_digest_session(_HTTPTransport_)::patch(Session, URL, content('text/plain', text(patch)), PatchResponse, []),
+				http_client_digest_session(_HTTPTransport_)::close(Session),
 				once(threaded_exit(serve_listener(Listener, http_server_core_digest_handler(http_digest_test_verifier, http_digest_request_echo_handler, DigestOptions, []), 10, _ClientInfos, [shutdown(keep_open)]), Tag)),
 				catch(close_listener(Listener), _, true),
 				body(HeadResponse, empty),
@@ -403,9 +403,9 @@
 				request_echo_url(Port, '/request-info?lang=en', URL),
 				http_cookie_jar::open(Jar),
 				http_cookie_jar::store_set_cookies(Jar, LoginURL, [set_cookie(session, 'jar', [path-('/'), http_only-true])]),
-				http_client_digest_session(_HTTPSocket_)::open(Session, 'Mufasa', 'Circle Of Life', [cookie_jar(Jar), headers([accept-'text/plain', x_default-'1']), query([page-'1']), version(http(1, 1)), properties([trace(default), keep(default)]), digest_options([cnonce('default-cnonce'), nonce_count(2)])]),
-				http_client_digest_session(_HTTPSocket_)::get(Session, URL, Response, [headers([accept-'application/json']), query([page-'2', item-'7']), version(http(1, 0)), properties([trace(request), cookies([session-'property'])]), cookies([session-'explicit']), digest_options([cnonce('request-cnonce')])]),
-				http_client_digest_session(_HTTPSocket_)::close(Session),
+				http_client_digest_session(_HTTPTransport_)::open(Session, 'Mufasa', 'Circle Of Life', [cookie_jar(Jar), headers([accept-'text/plain', x_default-'1']), query([page-'1']), version(http(1, 1)), properties([trace(default), keep(default)]), digest_options([cnonce('default-cnonce'), nonce_count(2)])]),
+				http_client_digest_session(_HTTPTransport_)::get(Session, URL, Response, [headers([accept-'application/json']), query([page-'2', item-'7']), version(http(1, 0)), properties([trace(request), cookies([session-'property'])]), cookies([session-'explicit']), digest_options([cnonce('request-cnonce')])]),
+				http_client_digest_session(_HTTPTransport_)::close(Session),
 				once(threaded_exit(serve_listener(Listener, http_server_core_digest_handler(http_digest_test_verifier, http_digest_request_echo_handler, DigestOptions, []), 2, _ClientInfos, [shutdown(keep_open)]), Tag)),
 				catch(close_listener(Listener), _, true),
 				http_cookie_jar::request_cookies(Jar, URL, Cookies),
@@ -416,9 +416,9 @@
 				open_listener('127.0.0.1', Port, Listener, []),
 				threaded_once(serve_listener(Listener, http_digest_multipart_summary_handler, 1, _ClientInfos, [shutdown(keep_open)]), Tag),
 				request_echo_url(Port, '/form-info', URL),
-				http_client_digest_session(_HTTPSocket_)::open(Session, 'Mufasa', 'Circle Of Life', [cookie_jar(none)]),
-				http_client_digest_session(_HTTPSocket_)::post(Session, URL, form_data([field(title, 'Logtalk', [])]), Response, []),
-				http_client_digest_session(_HTTPSocket_)::close(Session),
+				http_client_digest_session(_HTTPTransport_)::open(Session, 'Mufasa', 'Circle Of Life', [cookie_jar(none)]),
+				http_client_digest_session(_HTTPTransport_)::post(Session, URL, form_data([field(title, 'Logtalk', [])]), Response, []),
+				http_client_digest_session(_HTTPTransport_)::close(Session),
 				once(threaded_exit(serve_listener(Listener, http_digest_multipart_summary_handler, 1, _ClientInfos, [shutdown(keep_open)]), Tag)),
 				catch(close_listener(Listener), _, true),
 				status(Response, status(200, 'OK')),
@@ -429,9 +429,9 @@
 				open_listener('127.0.0.1', Port, Listener, []),
 				threaded_once(serve_listener(Listener, http_digest_multipart_summary_handler, 1, _ClientInfos, [shutdown(keep_open)]), Tag),
 				request_echo_url(Port, '/form-info', URL),
-				http_client_digest_session(_HTTPSocket_)::open(Session, 'Mufasa', 'Circle Of Life', [cookie_jar(none)]),
-				http_client_digest_session(_HTTPSocket_)::post(Session, URL, form_data([field(title, 'Logtalk', [])]), Response, [properties([content_type('Multipart/Form-Data', [boundary-'fixed-boundary'])])]),
-				http_client_digest_session(_HTTPSocket_)::close(Session),
+				http_client_digest_session(_HTTPTransport_)::open(Session, 'Mufasa', 'Circle Of Life', [cookie_jar(none)]),
+				http_client_digest_session(_HTTPTransport_)::post(Session, URL, form_data([field(title, 'Logtalk', [])]), Response, [properties([content_type('Multipart/Form-Data', [boundary-'fixed-boundary'])])]),
+				http_client_digest_session(_HTTPTransport_)::close(Session),
 				once(threaded_exit(serve_listener(Listener, http_digest_multipart_summary_handler, 1, _ClientInfos, [shutdown(keep_open)]), Tag)),
 				catch(close_listener(Listener), _, true),
 				status(Response, status(200, 'OK')),
@@ -442,9 +442,9 @@
 				open_listener('127.0.0.1', Port, Listener, []),
 				threaded_once(serve_listener(Listener, http_server_core_digest_handler(http_digest_test_verifier, http_digest_request_echo_handler, DigestOptions, []), 2, _ClientInfos, [shutdown(keep_open)]), Tag),
 				request_echo_url(Port, '/echo', URL),
-				http_client_digest_session(_HTTPSocket_)::open(Session, 'Mufasa', 'Circle Of Life', [cookie_jar(none)]),
-				http_client_digest_session(_HTTPSocket_)::post(Session, URL, content('text/plain', text('post-int')), Response, []),
-				http_client_digest_session(_HTTPSocket_)::close(Session),
+				http_client_digest_session(_HTTPTransport_)::open(Session, 'Mufasa', 'Circle Of Life', [cookie_jar(none)]),
+				http_client_digest_session(_HTTPTransport_)::post(Session, URL, content('text/plain', text('post-int')), Response, []),
+				http_client_digest_session(_HTTPTransport_)::close(Session),
 				once(threaded_exit(serve_listener(Listener, http_server_core_digest_handler(http_digest_test_verifier, http_digest_request_echo_handler, DigestOptions, []), 2, _ClientInfos, [shutdown(keep_open)]), Tag)),
 				catch(close_listener(Listener), _, true),
 				status(Response, status(200, 'OK')),

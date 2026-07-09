@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'Server-side HTTP session manager over normalized request and response terms using opaque cookie identifiers and an in-memory session store.'
 	]).
 

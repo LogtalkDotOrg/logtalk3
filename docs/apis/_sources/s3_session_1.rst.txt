@@ -15,7 +15,7 @@ Explicit S3 client sessions carrying default request options.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-07-08
+| **Date:** 2026-07-09
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -25,7 +25,7 @@ Explicit S3 client sessions carrying default request options.
 |    ``public`` :ref:`options <options/0>`
 | **Uses:**
 |    :ref:`list <list/0>`
-|    :ref:`s3_client(HTTPSocket) <s3_client/1>`
+|    :ref:`s3_client(HTTPTransport) <s3_client/1>`
 |    :ref:`url(Representation) <url/1>`
 
 | **Remarks:**

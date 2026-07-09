@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'Helper session handler used by http_websocket wrapper tests.'
 	]).
 
@@ -44,7 +44,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'Helper client session handler that closes after receiving one text reply.'
 	]).
 
@@ -57,13 +57,13 @@
 :- end_object.
 
 
-:- object(tests(_HTTPSocket_),
+:- object(tests(_HTTPTransport_),
 	extends(lgtunit)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'Unit tests for the "http_websocket" library.'
 	]).
 
@@ -71,7 +71,7 @@
 		property/2, status/2
 	]).
 
-	:- uses(_HTTPSocket_, [
+	:- uses(_HTTPTransport_, [
 		close_listener/1, open_listener/4
 	]).
 
@@ -79,7 +79,7 @@
 		message/3 as normalized_message/3
 	]).
 
-	condition(current_object(_HTTPSocket_)).
+	condition(current_object(_HTTPTransport_)).
 
 	cover(http_websocket).
 

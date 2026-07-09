@@ -19,15 +19,15 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(http_websocket_server_service(_HTTPSocket_),
-	extends(http_websocket_service(_HTTPSocket_, server, atom))).
+:- object(http_websocket_server_service(_HTTPTransport_),
+	extends(http_websocket_service(_HTTPTransport_, server, atom))).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'Server-side convenience for callback-driven WebSocket sessions with atom text representation, including registry-backed broadcast helpers.',
-		parnames is ['HTTPSocket']
+		parnames is ['HTTPTransport']
 	]).
 
 	:- public(serve_once/6).
@@ -190,7 +190,7 @@
 		:- meta_predicate(collect_finished_worker(*, 0, *, *, *, *)).
 	:- endif.
 
-	:- uses(_HTTPSocket_, [
+	:- uses(_HTTPTransport_, [
 		close_connection/1, close_listener/1, request_listener_shutdown/1, serve_websocket_once/5
 	]).
 
@@ -410,7 +410,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'By default, the server-side convenience for callback-driven WebSocket sessions with atom text representation, including registry-backed broadcast helpers, uses the ``http_socket_transport`` library.'
 	]).
 
