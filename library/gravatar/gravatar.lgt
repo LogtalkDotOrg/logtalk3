@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'Portable Gravatar profile client using the Gravatar REST API.'
 	]).
 
@@ -199,7 +199,7 @@
 		email_hash(Email, Hash),
 		operation_url(Hash, URL, MergedOptions),
 		http_options(Options, MergedOptions, HTTPOptions),
-		http_client(http_process_transport)::get(URL, Response, HTTPOptions).
+		http_client::get(URL, Response, HTTPOptions).
 
 	email_hash(Email, Hash) :-
 		normalized_email(Email, NormalizedEmail),

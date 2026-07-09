@@ -28,10 +28,10 @@ authorization-code and refresh-token exchanges, UserInfo requests, RP-initiated
 logout URL construction, JWKS retrieval and caching, and ID-token verification
 for `RS256` and `ES256`.
 
-The library uses `http_client(http_process_transport)` for HTTP requests. HTTPS
-requests are made using `http_process_transport` TLS connections, which require
-the `openssl` command to be available unless overridden with the
-`openssl_executable/1` option.
+The library uses `http_client` with `transport(http_process_transport)` for HTTP
+requests. HTTPS requests are made using `http_process_transport` TLS
+connections, which require the `openssl` command to be available unless
+overridden with the `openssl_executable/1` option.
 
 This library can be used with backend Prolog systems that support unbound
 integer arithmetic and the `sockets` library: ECLiPSe, SICStus Prolog,

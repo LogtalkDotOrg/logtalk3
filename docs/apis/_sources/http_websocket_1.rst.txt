@@ -24,7 +24,7 @@ High-level WebSocket predicates for opening and closing connections, exchanging 
 | **Imports:**
 |    ``public`` :ref:`options <options/0>`
 | **Uses:**
-|    :ref:`http_client(HTTPTransport) <http_client/1>`
+|    :ref:`http_client <http_client/0>`
 |    :ref:`http_core <http_core/0>`
 |    :ref:`http_websocket_client_service(HTTPTransport) <http_websocket_client_service/1>`
 |    :ref:`http_websocket_client_session <http_websocket_client_session/0>`

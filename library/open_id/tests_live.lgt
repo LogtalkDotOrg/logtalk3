@@ -13,7 +13,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'Optional live tests for the "open_id" library using public OpenID Connect endpoints.'
 	]).
 
@@ -182,7 +182,7 @@
 		throw(Error).
 
 	oidctest_session_response(SessionId) :-
-		http_client(http_process_transport)::post(
+		http_client::post(
 			'https://oidctest.wsweet.org/oauth2/',
 			content('application/x-www-form-urlencoded', form([user-dwho, password-dwho])),
 			Response,
@@ -200,7 +200,7 @@
 		SessionId \== ''.
 
 	oidctest_authorization_code(URL, SessionId, Code) :-
-		http_client(http_process_transport)::get(
+		http_client::get(
 			URL,
 			Response,
 			[properties([cookies([lemonldap-SessionId])])]

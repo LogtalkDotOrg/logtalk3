@@ -15,7 +15,7 @@ Portable Gravatar profile client using the Gravatar REST API.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-07-08
+| **Date:** 2026-07-09
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -25,7 +25,7 @@ Portable Gravatar profile client using the Gravatar REST API.
 |    ``public`` :ref:`options <options/0>`
 | **Uses:**
 |    :ref:`gravatar_api <gravatar_api/0>`
-|    :ref:`http_client(HTTPTransport) <http_client/1>`
+|    :ref:`http_client <http_client/0>`
 |    :ref:`http_core <http_core/0>`
 |    :ref:`list <list/0>`
 |    :ref:`os <os/0>`

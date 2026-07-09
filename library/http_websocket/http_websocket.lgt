@@ -340,10 +340,6 @@
 		member/2, valid/1 as proper_list/1
 	]).
 
-	:- uses(http_client(_HTTPTransport_), [
-		open_websocket/4 as open_client_websocket/4
-	]).
-
 	:- uses(http_core, [
 		property/2 as http_property/2
 	]).
@@ -387,7 +383,7 @@
 
 	open(URL, WebSocket, Options) :-
 		parse_direct_options(Options, AutoPong, MaxPayloadLength, WebSocketOptions),
-		open_client_websocket(URL, Connection, Response, WebSocketOptions),
+		http_client::open_websocket(URL, Connection, Response, [transport(_HTTPTransport_)| WebSocketOptions]),
 		client_initial_state(State),
 		catch(
 			register_new_handle(client, Connection, Response, none, State, AutoPong, MaxPayloadLength, WebSocket),

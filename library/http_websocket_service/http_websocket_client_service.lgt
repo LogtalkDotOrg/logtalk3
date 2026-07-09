@@ -94,10 +94,6 @@
 		]
 	]).
 
-	:- uses(http_client(_HTTPTransport_), [
-		open_websocket/4
-	]).
-
 	:- uses(_HTTPTransport_, [
 		close_connection/1, connection_streams/3
 	]).
@@ -115,7 +111,7 @@
 
 	open(URL, Handler, Response, State, Options) :-
 		parse_open_options(Options, InitialMessages, SessionOptions, WebSocketOptions),
-		open_websocket(URL, Connection, Response, WebSocketOptions),
+		http_client::open_websocket(URL, Connection, Response, [transport(_HTTPTransport_)| WebSocketOptions]),
 		setup_call_cleanup(
 			^^initial_state(State0),
 			(	write_initial_messages(Connection, State0, State1, InitialMessages),

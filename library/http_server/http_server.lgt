@@ -406,16 +406,16 @@
 
 	collect_serve_options([], []).
 	collect_serve_options([Option| Options], ServeOptions) :-
-		( serve_option(Option) ->
+		(	serve_option(Option) ->
 			ServeOptions = [Option| ServeOptions0]
-		; ServeOptions = ServeOptions0
+		;	ServeOptions = ServeOptions0
 		),
 		collect_serve_options(Options, ServeOptions0).
 
 	complete_listener_options(https, ListenerOptions0, ListenerOptions) :-
-		( member(listener_transport(_), ListenerOptions0) ->
+		(	member(listener_transport(_), ListenerOptions0) ->
 			ListenerOptions = ListenerOptions0
-		; ListenerOptions = [listener_transport(tls)| ListenerOptions0]
+		;	ListenerOptions = [listener_transport(tls)| ListenerOptions0]
 		).
 	complete_listener_options(http, ListenerOptions, ListenerOptions).
 

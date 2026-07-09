@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-07-09,
 		comment is 'Echo handler used by the http_client tests.'
 	]).
 
@@ -43,7 +43,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-07-09,
 		comment is 'Target echo handler used by the http_client tests.'
 	]).
 
@@ -67,7 +67,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-07-09,
 		comment is 'Multipart summary handler used by the http_client tests.'
 	]).
 
@@ -84,12 +84,13 @@
 :- end_object.
 
 
-:- object(probe_http_client_socket).
+:- object(probe_http_client_socket,
+	implements(http_transport_protocol)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-07-09,
 		comment is 'Probe socket object used by the http_client tests to verify scheme-derived defaults.'
 	]).
 
@@ -97,12 +98,7 @@
 		websocket_accept/2
 	]).
 
-	:- public(supported_request_scheme/1).
-	:- public(supported_websocket_scheme/1).
-	:- public(exchange/5).
-	:- public(open_connection/4).
-	:- public(close_connection/1).
-	:- public(exchange/3).
+	% only implement the predicates actually required by the tests
 
 	supported_request_scheme(http).
 	supported_request_scheme(https).
@@ -129,6 +125,9 @@
 			Response
 		).
 
+	exchange(Host, Port, Request, Response) :-
+		exchange(Host, Port, Request, Response, []).
+
 :- end_object.
 
 
@@ -138,7 +137,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-07-09,
 		comment is 'WebSocket handshake handler used by the http_client tests.'
 	]).
 

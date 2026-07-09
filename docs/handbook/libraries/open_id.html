@@ -374,10 +374,11 @@ authorization URL construction, authorization response parsing and state
 validation, authorization-code and refresh-token exchanges, UserInfo
 requests, RP-initiated logout URL construction, JWKS retrieval and
 caching, and ID-token verification for <code class="docutils literal notranslate"><span class="pre">RS256</span></code> and <code class="docutils literal notranslate"><span class="pre">ES256</span></code>.</p>
-<p>The library uses <code class="docutils literal notranslate"><span class="pre">http_client(http_process_transport)</span></code> for HTTP
-requests. HTTPS requests are made using <code class="docutils literal notranslate"><span class="pre">http_process_transport</span></code> TLS
-connections, which require the <code class="docutils literal notranslate"><span class="pre">openssl</span></code> command to be available
-unless overridden with the <code class="docutils literal notranslate"><span class="pre">openssl_executable/1</span></code> option.</p>
+<p>The library uses <code class="docutils literal notranslate"><span class="pre">http_client</span></code> with
+<code class="docutils literal notranslate"><span class="pre">transport(http_process_transport)</span></code> for HTTP requests. HTTPS requests
+are made using <code class="docutils literal notranslate"><span class="pre">http_process_transport</span></code> TLS connections, which require
+the <code class="docutils literal notranslate"><span class="pre">openssl</span></code> command to be available unless overridden with the
+<code class="docutils literal notranslate"><span class="pre">openssl_executable/1</span></code> option.</p>
 <p>This library can be used with backend Prolog systems that support
 unbound integer arithmetic and the <code class="docutils literal notranslate"><span class="pre">sockets</span></code> library: ECLiPSe, SICStus
 Prolog, SWI-Prolog, Trealla Prolog, and XVM.</p>

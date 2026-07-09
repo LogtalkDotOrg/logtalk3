@@ -231,7 +231,7 @@
 		maybe_add_cookie_property(FinalCookiePairs, MergedProperties0, MergedProperties),
 		final_request_version(DefaultVersion, RequestVersion, FinalVersion),
 		build_client_request_options(MergedHeaders, Body, MergedQueryPairs, FinalVersion, MergedConnectionOptions, MergedProperties, ClientOptions),
-		http_client(_HTTPTransport_)::request(Method, URL, Response, ClientOptions),
+		http_client::request(Method, URL, Response, [transport(_HTTPTransport_)| ClientOptions]),
 		store_response_cookies(Jar, URL, Response).
 
 	get(Session, URL, Response, Options) :-

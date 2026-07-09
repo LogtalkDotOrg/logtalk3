@@ -24,7 +24,7 @@ Client-side convenience for callback-driven WebSocket sessions with atom text re
 | **Extends:**
 |    ``public`` :ref:`http_websocket_service(HTTPTransport,client,atom) <http_websocket_service/3>`
 | **Uses:**
-|    :ref:`http_client(HTTPTransport) <http_client/1>`
+|    :ref:`http_client <http_client/0>`
 |    :ref:`list <list/0>`
 |    :ref:`user <user/0>`
 

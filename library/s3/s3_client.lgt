@@ -210,7 +210,7 @@
 		s3_signing::sign_request(Method, HostHeader, CanonicalURI, QueryPairs, Body, RequestHeaders, Headers, SigningOptions),
 		append_query(BaseURL, QueryPairs, URL),
 		http_request_options(Headers, Body, MergedOptions, HTTPOptions),
-		http_client(_HTTPTransport_)::request(Method, URL, Response, HTTPOptions).
+		http_client::request(Method, URL, Response, [transport(_HTTPTransport_)| HTTPOptions]).
 
 	presigned_url(Method, Operation, Bucket, Key, URL, Options) :-
 		extract_presign_options(Options, RequestOptions, PresignOptions),

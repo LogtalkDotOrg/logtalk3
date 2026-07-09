@@ -19,21 +19,20 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(http_client(_HTTPTransport_),
+:- object(http_client,
 	imports([options, http_message_helpers, http_text_helpers, http_origin_site_helpers])).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-07-09,
-		comment is 'Request-oriented HTTP client facade built on top of the url and http_socket_transport libraries.',
-		parnames is ['HTTPTransport']
+		comment is 'Request-oriented HTTP client facade built on top of the URL and HTTP transport libraries.'
 	]).
 
 	:- public(request/4).
 	:- mode(request(+atom, +atom, --compound, +list), one_or_error).
 	:- info(request/4, [
-		comment is 'Builds a normalized request from the given method, absolute URL supported by the selected transport parameterization, and options, performs a one-shot exchange, and returns the response.',
+		comment is 'Builds a normalized request from the given method, absolute URL, and options, selects a compatible transport, performs a one-shot exchange, and returns the response.',
 		argnames is ['Method', 'URL', 'Response', 'Options'],
 		exceptions is [
 			'``URL`` is a variable' - instantiation_error,
@@ -54,7 +53,7 @@
 	:- public(request/5).
 	:- mode(request(+compound, +atom, +atom, --compound, +list), one_or_error).
 	:- info(request/5, [
-		comment is 'Builds a normalized request from the given method, absolute URL supported by the selected transport parameterization, and options, validates it against an open compatible connection or pool handle endpoint, performs one exchange, and returns the response.',
+		comment is 'Builds a normalized request from the given method, absolute URL, and options, validates it against an open compatible connection or pool handle endpoint, selects a compatible transport, performs one exchange, and returns the response.',
 		argnames is ['ConnectionOrPool', 'Method', 'URL', 'Response', 'Options'],
 		exceptions is [
 			'``ConnectionOrPool`` is a variable' - instantiation_error,
@@ -296,7 +295,7 @@
 	:- public(open_websocket/4).
 	:- mode(open_websocket(+atom, --compound, --compound, +list), one_or_error).
 	:- info(open_websocket/4, [
-		comment is 'Builds a WebSocket opening-handshake request from the given absolute WebSocket URL supported by the selected transport parameterization and options, opens a reusable socket connection, validates the server ``101`` response, and returns both the connection handle and the response.',
+		comment is 'Builds a WebSocket opening-handshake request from the given absolute WebSocket URL and options, selects a compatible transport, opens a reusable socket connection, validates the server ``101`` response, and returns both the connection handle and the response.',
 		argnames is ['URL', 'Connection', 'Response', 'Options'],
 		exceptions is [
 			'``URL`` is a variable' - instantiation_error,
@@ -321,10 +320,6 @@
 		member/2, memberchk/2, valid/1 as proper_list/1
 	]).
 
-	:- uses(_HTTPTransport_, [
-		close_connection/1, exchange/3, exchange/5, open_connection/4
-	]).
-
 	:- uses(http_websocket_handshake, [
 		websocket_accept/2,
 		websocket_opening_key/1
@@ -335,16 +330,18 @@
 	]).
 
 	request(Method, URL, Response, Options) :-
-		parse_request_options(Options, Headers, Body, QueryPairs, Version, Properties, ConnectionOptions0),
+		parse_request_options(Options, Transport0, Headers, Body, QueryPairs, Version, Properties, ConnectionOptions0),
 		build_request(Method, URL, Headers, Body, QueryPairs, Version, Properties, Scheme, Host, Port, Request),
+		resolve_request_transport(Scheme, Transport0, Transport),
 		append_tls_transport(Scheme, ConnectionOptions0, ConnectionOptions),
-		exchange(Host, Port, Request, Response, ConnectionOptions).
+		Transport::exchange(Host, Port, Request, Response, ConnectionOptions).
 
 	request(ConnectionOrPool, Method, URL, Response, Options) :-
-		parse_request_options(Options, Headers, Body, QueryPairs, Version, Properties, _ConnectionOptions),
-		build_request(Method, URL, Headers, Body, QueryPairs, Version, Properties, _Scheme, Host, Port, Request),
+		parse_request_options(Options, Transport0, Headers, Body, QueryPairs, Version, Properties, _ConnectionOptions),
+		build_request(Method, URL, Headers, Body, QueryPairs, Version, Properties, Scheme, Host, Port, Request),
+		resolve_request_transport(Scheme, Transport0, Transport),
 		validate_connection_or_pool_endpoint(ConnectionOrPool, Host, Port),
-		exchange(ConnectionOrPool, Request, Response).
+		Transport::exchange(ConnectionOrPool, Request, Response).
 
 	get(URL, Response, Options) :-
 		request(get, URL, Response, Options).
@@ -397,24 +394,26 @@
 		request(ConnectionOrPool, query, URL, Response, RequestOptions).
 
 	open_websocket(URL, Connection, Response, Options) :-
-		parse_websocket_options(Options, Headers, QueryPairs, Version, Protocols, Key, ConnectionOptions0),
+		parse_websocket_options(Options, Transport0, Headers, QueryPairs, Version, Protocols, Key, ConnectionOptions0),
 		build_websocket_request(URL, Headers, QueryPairs, Version, Protocols, Key, Scheme, Host, Port, Request),
+		resolve_websocket_transport(Scheme, Transport0, Transport),
 		append_tls_transport(Scheme, ConnectionOptions0, ConnectionOptions),
-		open_connection(Host, Port, Connection, ConnectionOptions),
+		Transport::open_connection(Host, Port, Connection, ConnectionOptions),
 		catch(
-			(	exchange(Connection, Request, Response),
+			(	Transport::exchange(Connection, Request, Response),
 				validate_websocket_response(Request, Response)
 			),
 			Error,
-			(	catch(close_connection(Connection), _, true),
+			(	catch(Transport::close_connection(Connection), _, true),
 				throw(Error)
 			)
 		).
 
-	parse_request_options(Options, Headers, Body, QueryPairs, Version, Properties, ConnectionOptions) :-
+	parse_request_options(Options, Transport, Headers, Body, QueryPairs, Version, Properties, ConnectionOptions) :-
 		^^check_options(Options),
 		check_request_options(Options),
 		^^merge_options(Options, MergedOptions),
+		^^option(transport(Transport), MergedOptions),
 		^^option(headers(Headers), MergedOptions),
 		^^option(body(Body0), MergedOptions),
 		^^option(query(QueryPairs), MergedOptions),
@@ -423,10 +422,11 @@
 		^^option(connection_options(ConnectionOptions), MergedOptions),
 		resolve_request_body(Body0, Headers, Properties0, Body, Properties).
 
-	parse_websocket_options(Options, Headers, QueryPairs, Version, Protocols, Key, ConnectionOptions) :-
+	parse_websocket_options(Options, Transport, Headers, QueryPairs, Version, Protocols, Key, ConnectionOptions) :-
 		^^check_options(Options),
 		check_websocket_options(Options),
 		^^merge_options(Options, MergedOptions),
+		^^option(transport(Transport), MergedOptions),
 		^^option(headers(Headers), MergedOptions),
 		^^option(query(QueryPairs), MergedOptions),
 		^^option(version(Version), MergedOptions),
@@ -486,6 +486,8 @@
 		!.
 	check_request_option(connection_options(_)) :-
 		!.
+	check_request_option(transport(_)) :-
+		!.
 	check_request_option(Option) :-
 		domain_error(http_client_request_option, Option).
 
@@ -506,9 +508,16 @@
 		!.
 	check_websocket_option(connection_options(_)) :-
 		!.
+	check_websocket_option(transport(_)) :-
+		!.
 	check_websocket_option(Option) :-
 		domain_error(http_client_websocket_option, Option).
 
+	valid_option(transport(Transport)) :-
+		(	Transport == default ->
+			true
+		;	validate_transport(Transport)
+		).
 	valid_option(headers(Headers)) :-
 		proper_list(Headers).
 	valid_option(body(_Body)).
@@ -530,6 +539,7 @@
 	valid_option(connection_options(ConnectionOptions)) :-
 		proper_list(ConnectionOptions).
 
+	default_option(transport(default)).
 	default_option(headers([])).
 	default_option(body(empty)).
 	default_option(query([])).
@@ -598,15 +608,57 @@
 		domain_error(http_client_websocket_url, missing_scheme).
 
 	validate_request_scheme(Scheme) :-
-		(	_HTTPTransport_::supported_request_scheme(Scheme) ->
+		(	request_scheme(Scheme) ->
 			true
 		;	domain_error(http_client_scheme, Scheme)
 		).
 
 	validate_websocket_scheme(Scheme) :-
-		(	_HTTPTransport_::supported_websocket_scheme(Scheme) ->
+		(	websocket_scheme_(Scheme) ->
 			true
 		;	domain_error(http_client_websocket_scheme, Scheme)
+		).
+
+	request_scheme(http).
+	request_scheme(https).
+
+	websocket_scheme_(ws).
+	websocket_scheme_(wss).
+
+	resolve_request_transport(Scheme, default, Transport) :-
+		!,
+		default_transport(Scheme, Transport).
+	resolve_request_transport(Scheme, Transport, Transport) :-
+		validate_transport(Transport),
+		(	Transport::supported_request_scheme(Scheme) ->
+			true
+		;	consistency_error(http_client_options, scheme(Scheme), transport(Transport))
+		).
+
+	resolve_websocket_transport(Scheme, default, Transport) :-
+		!,
+		default_transport(Scheme, Transport).
+	resolve_websocket_transport(Scheme, Transport, Transport) :-
+		validate_transport(Transport),
+		(	Transport::supported_websocket_scheme(Scheme) ->
+			true
+		;	consistency_error(http_client_options, scheme(Scheme), transport(Transport))
+		).
+
+	default_transport(http, http_socket_transport).
+	default_transport(https, http_process_transport).
+	default_transport(ws, http_socket_transport).
+	default_transport(wss, http_process_transport).
+
+	validate_transport(Transport) :-
+		(	var(Transport) ->
+			instantiation_error
+		;	current_object(Transport) ->
+			(	conforms_to_protocol(Transport, http_transport_protocol) ->
+				true
+			;	domain_error(http_transport_protocol_object, Transport)
+			)
+		;	existence_error(object, Transport)
 		).
 
 	validate_websocket_fragment(Components, URL) :-
@@ -854,18 +906,5 @@
 
 	lowercase_ascii_codes(Codes, LowercaseCodes) :-
 		^^lowercase_ascii_codes(Codes, LowercaseCodes).
-
-:- end_object.
-
-
-:- object(http_client,
-	extends(http_client(http_socket_transport))).
-
-	:- info([
-		version is 1:0:0,
-		author is 'Paulo Moura',
-		date is 2026-06-26,
-		comment is 'By default, the request-oriented HTTP client facade uses the ``http_socket_transport`` library.'
-	]).
 
 :- end_object.

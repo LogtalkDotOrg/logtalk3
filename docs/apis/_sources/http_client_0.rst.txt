@@ -8,27 +8,38 @@
 ``http_client``
 ===============
 
-By default, the request-oriented HTTP client facade uses the ``http_socket_transport`` library.
+Request-oriented HTTP client facade built on top of the URL and HTTP transport libraries.
 
 | **Availability:** 
 |    ``logtalk_load(http_client(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-06-26
+| **Date:** 2026-07-09
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
-| **Extends:**
-|    ``public`` :ref:`http_client(http_socket_transport) <http_client/1>`
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+|    ``public`` :ref:`http_message_helpers <http_message_helpers/0>`
+|    ``public`` :ref:`http_text_helpers <http_text_helpers/0>`
+|    ``public`` :ref:`http_origin_site_helpers <http_origin_site_helpers/0>`
+| **Uses:**
+|    :ref:`http_core <http_core/0>`
+|    :ref:`http_multipart <http_multipart/0>`
+|    :ref:`http_websocket_handshake <http_websocket_handshake/0>`
+|    :ref:`list <list/0>`
+|    :ref:`url(Representation) <url/1>`
+|    :ref:`user <user/0>`
+|    :ref:`uuid(Representation) <uuid/1>`
 
 | **Remarks:**
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`http_client/1::delete/3`  :ref:`http_client/1::delete/4`  :ref:`http_client/1::get/3`  :ref:`http_client/1::get/4`  :ref:`http_client/1::head/3`  :ref:`http_client/1::head/4`  :ref:`http_client/1::open_websocket/4`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`http_client/1::patch/4`  :ref:`http_client/1::patch/5`  :ref:`http_client/1::post/4`  :ref:`http_client/1::post/5`  :ref:`http_client/1::put/4`  :ref:`http_client/1::put/5`  :ref:`http_client/1::query/4`  :ref:`http_client/1::query/5`  :ref:`http_client/1::request/4`  :ref:`http_client/1::request/5`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:
@@ -37,7 +48,630 @@ By default, the request-oriented HTTP client facade uses the ``http_socket_trans
 Public predicates
 -----------------
 
-(no local declarations; see entity ancestors if any)
+.. index:: request/4
+.. _http_client/0::request/4:
+
+``request/4``
+^^^^^^^^^^^^^
+
+Builds a normalized request from the given method, absolute URL, and options, selects a compatible transport, performs a one-shot exchange, and returns the response.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``request(Method,URL,Response,Options)``
+| **Mode and number of proofs:**
+|    ``request(+atom,+atom,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``URL`` is a variable:
+|        ``instantiation_error``
+|    ``URL`` is not a supported absolute HTTP URL:
+|        ``domain_error(http_client_url,URL)``
+|    ``URL`` uses an unsupported HTTP scheme:
+|        ``domain_error(http_client_scheme,Scheme)``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Options`` contains an invalid HTTP client request option:
+|        ``domain_error(http_client_request_option,Option)``
+|    ``Options`` contains invalid form-data headers:
+|        ``domain_error(http_client_form_data_headers,Headers)``
+|    ``Options`` contains invalid form-data properties:
+|        ``domain_error(http_client_form_data_properties,Properties)``
+|    The generated request is not a valid normalized HTTP request term:
+|        ``domain_error(http_request,Request)``
+|    The delegated socket exchange rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+
+
+------------
+
+.. index:: request/5
+.. _http_client/0::request/5:
+
+``request/5``
+^^^^^^^^^^^^^
+
+Builds a normalized request from the given method, absolute URL, and options, validates it against an open compatible connection or pool handle endpoint, selects a compatible transport, performs one exchange, and returns the response.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``request(ConnectionOrPool,Method,URL,Response,Options)``
+| **Mode and number of proofs:**
+|    ``request(+compound,+atom,+atom,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``ConnectionOrPool`` is a variable:
+|        ``instantiation_error``
+|    ``ConnectionOrPool`` is not a valid reusable connection or pool handle:
+|        ``domain_error(http_socket_transport_connection_or_pool,ConnectionOrPool)``
+|    ``ConnectionOrPool`` is not connected to the requested endpoint:
+|        ``domain_error(http_client_connection_target,endpoint(EndpointHost,EndpointPort,Host,Port))``
+|    ``URL`` is a variable:
+|        ``instantiation_error``
+|    ``URL`` is not a supported absolute HTTP URL:
+|        ``domain_error(http_client_url,URL)``
+|    ``URL`` uses an unsupported HTTP scheme:
+|        ``domain_error(http_client_scheme,Scheme)``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Options`` contains an invalid HTTP client request option:
+|        ``domain_error(http_client_request_option,Option)``
+|    ``Options`` contains invalid form-data headers:
+|        ``domain_error(http_client_form_data_headers,Headers)``
+|    ``Options`` contains invalid form-data properties:
+|        ``domain_error(http_client_form_data_properties,Properties)``
+|    The generated request is not a valid normalized HTTP request term:
+|        ``domain_error(http_request,Request)``
+|    The delegated socket exchange rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+
+
+------------
+
+.. index:: get/3
+.. _http_client/0::get/3:
+
+``get/3``
+^^^^^^^^^
+
+Convenience wrapper over ``request/4`` using the ``get`` method.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``get(URL,Response,Options)``
+| **Mode and number of proofs:**
+|    ``get(+atom,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``URL`` is a variable:
+|        ``instantiation_error``
+|    ``URL`` is not a supported absolute HTTP URL:
+|        ``domain_error(http_client_url,URL)``
+|    ``URL`` uses an unsupported HTTP scheme:
+|        ``domain_error(http_client_scheme,Scheme)``
+|    ``Options`` contains an invalid HTTP client request option:
+|        ``domain_error(http_client_request_option,Option)``
+|    The delegated socket exchange rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+
+
+------------
+
+.. index:: get/4
+.. _http_client/0::get/4:
+
+``get/4``
+^^^^^^^^^
+
+Convenience wrapper over ``request/5`` using the ``get`` method.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``get(ConnectionOrPool,URL,Response,Options)``
+| **Mode and number of proofs:**
+|    ``get(+compound,+atom,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``ConnectionOrPool`` is not a valid reusable connection or pool handle:
+|        ``domain_error(http_socket_transport_connection_or_pool,ConnectionOrPool)``
+|    ``ConnectionOrPool`` is not connected to the requested endpoint:
+|        ``domain_error(http_client_connection_target,endpoint(EndpointHost,EndpointPort,Host,Port))``
+|    ``URL`` is a variable:
+|        ``instantiation_error``
+|    ``URL`` is not a supported absolute HTTP URL:
+|        ``domain_error(http_client_url,URL)``
+|    ``URL`` uses an unsupported HTTP scheme:
+|        ``domain_error(http_client_scheme,Scheme)``
+|    ``Options`` contains an invalid HTTP client request option:
+|        ``domain_error(http_client_request_option,Option)``
+|    The delegated socket exchange rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+
+
+------------
+
+.. index:: head/3
+.. _http_client/0::head/3:
+
+``head/3``
+^^^^^^^^^^
+
+Convenience wrapper over ``request/4`` using the ``head`` method.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``head(URL,Response,Options)``
+| **Mode and number of proofs:**
+|    ``head(+atom,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``URL`` is a variable:
+|        ``instantiation_error``
+|    ``URL`` is not a supported absolute HTTP URL:
+|        ``domain_error(http_client_url,URL)``
+|    ``URL`` uses an unsupported HTTP scheme:
+|        ``domain_error(http_client_scheme,Scheme)``
+|    ``Options`` contains an invalid HTTP client request option:
+|        ``domain_error(http_client_request_option,Option)``
+|    The delegated socket exchange rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+
+
+------------
+
+.. index:: head/4
+.. _http_client/0::head/4:
+
+``head/4``
+^^^^^^^^^^
+
+Convenience wrapper over ``request/5`` using the ``head`` method.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``head(ConnectionOrPool,URL,Response,Options)``
+| **Mode and number of proofs:**
+|    ``head(+compound,+atom,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``ConnectionOrPool`` is not a valid reusable connection or pool handle:
+|        ``domain_error(http_socket_transport_connection_or_pool,ConnectionOrPool)``
+|    ``ConnectionOrPool`` is not connected to the requested endpoint:
+|        ``domain_error(http_client_connection_target,endpoint(EndpointHost,EndpointPort,Host,Port))``
+|    ``URL`` is a variable:
+|        ``instantiation_error``
+|    ``URL`` is not a supported absolute HTTP URL:
+|        ``domain_error(http_client_url,URL)``
+|    ``URL`` uses an unsupported HTTP scheme:
+|        ``domain_error(http_client_scheme,Scheme)``
+|    ``Options`` contains an invalid HTTP client request option:
+|        ``domain_error(http_client_request_option,Option)``
+|    The delegated socket exchange rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+
+
+------------
+
+.. index:: delete/3
+.. _http_client/0::delete/3:
+
+``delete/3``
+^^^^^^^^^^^^
+
+Convenience wrapper over ``request/4`` using the ``delete`` method.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete(URL,Response,Options)``
+| **Mode and number of proofs:**
+|    ``delete(+atom,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``URL`` is a variable:
+|        ``instantiation_error``
+|    ``URL`` is not a supported absolute HTTP URL:
+|        ``domain_error(http_client_url,URL)``
+|    ``URL`` uses an unsupported HTTP scheme:
+|        ``domain_error(http_client_scheme,Scheme)``
+|    ``Options`` contains an invalid HTTP client request option:
+|        ``domain_error(http_client_request_option,Option)``
+|    The delegated socket exchange rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+
+
+------------
+
+.. index:: delete/4
+.. _http_client/0::delete/4:
+
+``delete/4``
+^^^^^^^^^^^^
+
+Convenience wrapper over ``request/5`` using the ``delete`` method.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete(ConnectionOrPool,URL,Response,Options)``
+| **Mode and number of proofs:**
+|    ``delete(+compound,+atom,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``ConnectionOrPool`` is not a valid reusable connection or pool handle:
+|        ``domain_error(http_socket_transport_connection_or_pool,ConnectionOrPool)``
+|    ``ConnectionOrPool`` is not connected to the requested endpoint:
+|        ``domain_error(http_client_connection_target,endpoint(EndpointHost,EndpointPort,Host,Port))``
+|    ``URL`` is a variable:
+|        ``instantiation_error``
+|    ``URL`` is not a supported absolute HTTP URL:
+|        ``domain_error(http_client_url,URL)``
+|    ``URL`` uses an unsupported HTTP scheme:
+|        ``domain_error(http_client_scheme,Scheme)``
+|    ``Options`` contains an invalid HTTP client request option:
+|        ``domain_error(http_client_request_option,Option)``
+|    The delegated socket exchange rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+
+
+------------
+
+.. index:: post/4
+.. _http_client/0::post/4:
+
+``post/4``
+^^^^^^^^^^
+
+Convenience wrapper over ``request/4`` using the ``post`` method and the given request body.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``post(URL,Body,Response,Options)``
+| **Mode and number of proofs:**
+|    ``post(+atom,+compound,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``URL`` is a variable:
+|        ``instantiation_error``
+|    ``URL`` is not a supported absolute HTTP URL:
+|        ``domain_error(http_client_url,URL)``
+|    ``URL`` uses an unsupported HTTP scheme:
+|        ``domain_error(http_client_scheme,Scheme)``
+|    ``Options`` contains an invalid HTTP client request option:
+|        ``domain_error(http_client_request_option,Option)``
+|    ``Body`` is invalid for the generated normalized HTTP request:
+|        ``domain_error(http_body,Body)``
+|    The delegated socket exchange rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+
+
+------------
+
+.. index:: post/5
+.. _http_client/0::post/5:
+
+``post/5``
+^^^^^^^^^^
+
+Convenience wrapper over ``request/5`` using the ``post`` method and the given request body.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``post(ConnectionOrPool,URL,Body,Response,Options)``
+| **Mode and number of proofs:**
+|    ``post(+compound,+atom,+compound,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``ConnectionOrPool`` is not a valid reusable connection or pool handle:
+|        ``domain_error(http_socket_transport_connection_or_pool,ConnectionOrPool)``
+|    ``ConnectionOrPool`` is not connected to the requested endpoint:
+|        ``domain_error(http_client_connection_target,endpoint(EndpointHost,EndpointPort,Host,Port))``
+|    ``URL`` is a variable:
+|        ``instantiation_error``
+|    ``URL`` is not a supported absolute HTTP URL:
+|        ``domain_error(http_client_url,URL)``
+|    ``URL`` uses an unsupported HTTP scheme:
+|        ``domain_error(http_client_scheme,Scheme)``
+|    ``Options`` contains an invalid HTTP client request option:
+|        ``domain_error(http_client_request_option,Option)``
+|    ``Body`` is invalid for the generated normalized HTTP request:
+|        ``domain_error(http_body,Body)``
+|    The delegated socket exchange rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+
+
+------------
+
+.. index:: put/4
+.. _http_client/0::put/4:
+
+``put/4``
+^^^^^^^^^
+
+Convenience wrapper over ``request/4`` using the ``put`` method and the given request body.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``put(URL,Body,Response,Options)``
+| **Mode and number of proofs:**
+|    ``put(+atom,+compound,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``URL`` is a variable:
+|        ``instantiation_error``
+|    ``URL`` is not a supported absolute HTTP URL:
+|        ``domain_error(http_client_url,URL)``
+|    ``URL`` uses an unsupported HTTP scheme:
+|        ``domain_error(http_client_scheme,Scheme)``
+|    ``Options`` contains an invalid HTTP client request option:
+|        ``domain_error(http_client_request_option,Option)``
+|    ``Body`` is invalid for the generated normalized HTTP request:
+|        ``domain_error(http_body,Body)``
+|    The delegated socket exchange rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+
+
+------------
+
+.. index:: put/5
+.. _http_client/0::put/5:
+
+``put/5``
+^^^^^^^^^
+
+Convenience wrapper over ``request/5`` using the ``put`` method and the given request body.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``put(ConnectionOrPool,URL,Body,Response,Options)``
+| **Mode and number of proofs:**
+|    ``put(+compound,+atom,+compound,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``ConnectionOrPool`` is not a valid reusable connection or pool handle:
+|        ``domain_error(http_socket_transport_connection_or_pool,ConnectionOrPool)``
+|    ``ConnectionOrPool`` is not connected to the requested endpoint:
+|        ``domain_error(http_client_connection_target,endpoint(EndpointHost,EndpointPort,Host,Port))``
+|    ``URL`` is a variable:
+|        ``instantiation_error``
+|    ``URL`` is not a supported absolute HTTP URL:
+|        ``domain_error(http_client_url,URL)``
+|    ``URL`` uses an unsupported HTTP scheme:
+|        ``domain_error(http_client_scheme,Scheme)``
+|    ``Options`` contains an invalid HTTP client request option:
+|        ``domain_error(http_client_request_option,Option)``
+|    ``Body`` is invalid for the generated normalized HTTP request:
+|        ``domain_error(http_body,Body)``
+|    The delegated socket exchange rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+
+
+------------
+
+.. index:: patch/4
+.. _http_client/0::patch/4:
+
+``patch/4``
+^^^^^^^^^^^
+
+Convenience wrapper over ``request/4`` using the ``patch`` method and the given request body.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``patch(URL,Body,Response,Options)``
+| **Mode and number of proofs:**
+|    ``patch(+atom,+compound,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``URL`` is a variable:
+|        ``instantiation_error``
+|    ``URL`` is not a supported absolute HTTP URL:
+|        ``domain_error(http_client_url,URL)``
+|    ``URL`` uses an unsupported HTTP scheme:
+|        ``domain_error(http_client_scheme,Scheme)``
+|    ``Options`` contains an invalid HTTP client request option:
+|        ``domain_error(http_client_request_option,Option)``
+|    ``Body`` is invalid for the generated normalized HTTP request:
+|        ``domain_error(http_body,Body)``
+|    The delegated socket exchange rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+
+
+------------
+
+.. index:: patch/5
+.. _http_client/0::patch/5:
+
+``patch/5``
+^^^^^^^^^^^
+
+Convenience wrapper over ``request/5`` using the ``patch`` method and the given request body.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``patch(ConnectionOrPool,URL,Body,Response,Options)``
+| **Mode and number of proofs:**
+|    ``patch(+compound,+atom,+compound,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``ConnectionOrPool`` is not a valid reusable connection or pool handle:
+|        ``domain_error(http_socket_transport_connection_or_pool,ConnectionOrPool)``
+|    ``ConnectionOrPool`` is not connected to the requested endpoint:
+|        ``domain_error(http_client_connection_target,endpoint(EndpointHost,EndpointPort,Host,Port))``
+|    ``URL`` is a variable:
+|        ``instantiation_error``
+|    ``URL`` is not a supported absolute HTTP URL:
+|        ``domain_error(http_client_url,URL)``
+|    ``URL`` uses an unsupported HTTP scheme:
+|        ``domain_error(http_client_scheme,Scheme)``
+|    ``Options`` contains an invalid HTTP client request option:
+|        ``domain_error(http_client_request_option,Option)``
+|    ``Body`` is invalid for the generated normalized HTTP request:
+|        ``domain_error(http_body,Body)``
+|    The delegated socket exchange rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+
+
+------------
+
+.. index:: query/4
+.. _http_client/0::query/4:
+
+``query/4``
+^^^^^^^^^^^
+
+Convenience wrapper over ``request/4`` using the ``query`` method and the given request body.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``query(URL,Body,Response,Options)``
+| **Mode and number of proofs:**
+|    ``query(+atom,+compound,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``URL`` is a variable:
+|        ``instantiation_error``
+|    ``URL`` is not a supported absolute HTTP URL:
+|        ``domain_error(http_client_url,URL)``
+|    ``URL`` uses an unsupported HTTP scheme:
+|        ``domain_error(http_client_scheme,Scheme)``
+|    ``Options`` contains an invalid HTTP client request option:
+|        ``domain_error(http_client_request_option,Option)``
+|    ``Body`` is invalid for the generated normalized HTTP request:
+|        ``domain_error(http_body,Body)``
+|    The delegated socket exchange rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+
+
+------------
+
+.. index:: query/5
+.. _http_client/0::query/5:
+
+``query/5``
+^^^^^^^^^^^
+
+Convenience wrapper over ``request/5`` using the ``query`` method and the given request body.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``query(ConnectionOrPool,URL,Body,Response,Options)``
+| **Mode and number of proofs:**
+|    ``query(+compound,+atom,+compound,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``ConnectionOrPool`` is not a valid reusable connection or pool handle:
+|        ``domain_error(http_socket_transport_connection_or_pool,ConnectionOrPool)``
+|    ``ConnectionOrPool`` is not connected to the requested endpoint:
+|        ``domain_error(http_client_connection_target,endpoint(EndpointHost,EndpointPort,Host,Port))``
+|    ``URL`` is a variable:
+|        ``instantiation_error``
+|    ``URL`` is not a supported absolute HTTP URL:
+|        ``domain_error(http_client_url,URL)``
+|    ``URL`` uses an unsupported HTTP scheme:
+|        ``domain_error(http_client_scheme,Scheme)``
+|    ``Options`` contains an invalid HTTP client request option:
+|        ``domain_error(http_client_request_option,Option)``
+|    ``Body`` is invalid for the generated normalized HTTP request:
+|        ``domain_error(http_body,Body)``
+|    The delegated socket exchange rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+
+
+------------
+
+.. index:: open_websocket/4
+.. _http_client/0::open_websocket/4:
+
+``open_websocket/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Builds a WebSocket opening-handshake request from the given absolute WebSocket URL and options, selects a compatible transport, opens a reusable socket connection, validates the server ``101`` response, and returns both the connection handle and the response.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open_websocket(URL,Connection,Response,Options)``
+| **Mode and number of proofs:**
+|    ``open_websocket(+atom,--compound,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``URL`` is a variable:
+|        ``instantiation_error``
+|    ``URL`` is not a supported absolute WebSocket URL:
+|        ``domain_error(http_client_websocket_url,URL)``
+|    ``URL`` uses an unsupported WebSocket scheme:
+|        ``domain_error(http_client_websocket_scheme,Scheme)``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Options`` contains an invalid WebSocket client option:
+|        ``domain_error(http_client_websocket_option,Option)``
+|    ``Options`` contains an invalid WebSocket HTTP version:
+|        ``domain_error(http_client_websocket_version,Version)``
+|    ``Options`` contains reserved WebSocket headers:
+|        ``domain_error(http_client_websocket_headers,Headers)``
+|    The WebSocket server rejects the version:
+|        ``domain_error(http_client_websocket_version_rejection,Response)``
+|    The WebSocket server rejects authentication:
+|        ``domain_error(http_client_websocket_authentication_rejection,Response)``
+|    The WebSocket server redirects the opening handshake:
+|        ``domain_error(http_client_websocket_redirection_rejection,Response)``
+|    The WebSocket server rejects the opening handshake:
+|        ``domain_error(http_client_websocket_rejection,Response)``
+|    The WebSocket server response is not a valid opening handshake response:
+|        ``domain_error(http_client_websocket_response,Response)``
+
+
+------------
 
 Protected predicates
 --------------------

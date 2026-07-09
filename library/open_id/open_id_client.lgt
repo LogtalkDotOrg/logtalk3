@@ -13,8 +13,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
-		comment is 'HTTP-facing OpenID Connect client predicates using http_process_transport for TLS support.'
+		date is 2026-07-09,
+		comment is 'HTTP-facing OpenID Connect client predicates.'
 	]).
 
 	:- public(discover/3).
@@ -156,18 +156,18 @@
 		^^merge_options(Options, MergedOptions),
 		provider_required_property(Provider, userinfo_endpoint, URL),
 		userinfo_http_options(URL, AccessToken, MergedOptions, HTTPOptions),
-		http_client(http_process_transport)::get(URL, Response, HTTPOptions),
+		http_client::get(URL, Response, HTTPOptions),
 		response_json(Response, Claims).
 
 	get_json(URL, JSON, Options) :-
 		http_options(URL, Options, HTTPOptions),
-		http_client(http_process_transport)::get(URL, Response, HTTPOptions),
+		http_client::get(URL, Response, HTTPOptions),
 		response_json(Response, JSON).
 
 	post_form_json(URL, Parameters, ClientId, JSON, Options) :-
 		token_http_options(URL, ClientId, Options, HTTPOptions),
 		Body = content('application/x-www-form-urlencoded', form(Parameters)),
-		http_client(http_process_transport)::post(URL, Body, Response, HTTPOptions),
+		http_client::post(URL, Body, Response, HTTPOptions),
 		response_json(Response, JSON).
 
 	response_json(Response, JSON) :-

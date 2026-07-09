@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-09,
 		comment is 'OpenAI-compatible REST server facade backed by an application object.',
 		parameters is ['Backend' - 'Application object implementing ``open_ai_backend_protocol``.']
 	]).
