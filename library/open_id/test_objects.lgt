@@ -20,8 +20,7 @@
 	:- public(reset_jwks_sequence/0).
 	:- mode(reset_jwks_sequence, one).
 	:- info(reset_jwks_sequence/0, [
-		comment is 'Resets the scripted JWKS sequence used by the local provider fixture.',
-		argnames is []
+		comment is 'Resets the scripted JWKS sequence used by the local provider fixture.'
 	]).
 
 	:- public(set_jwks_sequence/1).

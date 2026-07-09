@@ -653,8 +653,7 @@
 
 		:- public(run/0).
 		:- info(run/0, [
-			comment is 'Runs the complete example and prints a short summary when backend threads are available.',
-			argnames is []
+			comment is 'Runs the complete example and prints a short summary when backend threads are available.'
 		]).
 
 		:- public(run/1).
@@ -734,8 +733,7 @@
 
 		:- public(run/0).
 		:- info(run/0, [
-			comment is 'Prints a short message explaining that the current backend does not support the Digest client-session helper used by this example demo.',
-			argnames is []
+			comment is 'Prints a short message explaining that the current backend does not support the Digest client-session helper used by this example demo.'
 		]).
 
 		:- public(run/1).

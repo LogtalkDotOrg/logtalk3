@@ -158,8 +158,7 @@
 		:- public(reset/0).
 		:- mode(reset, one).
 		:- info(reset/0, [
-			comment is 'Clears the recorded server-session lifecycle events.',
-			argnames is []
+			comment is 'Clears the recorded server-session lifecycle events.'
 		]).
 
 		:- public(events/1).

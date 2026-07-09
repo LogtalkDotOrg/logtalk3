@@ -34,8 +34,7 @@
 	:- public(clear/0).
 	:- mode(clear, one).
 	:- info(clear/0, [
-		comment is 'Clears all cached JWKS entries.',
-		argnames is []
+		comment is 'Clears all cached JWKS entries.'
 	]).
 
 	:- public(clear/1).

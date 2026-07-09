@@ -561,8 +561,7 @@
 
 	:- public(run/0).
 	:- info(run/0, [
-		comment is 'Runs the complete example and prints a short summary when backend threads are available.',
-		argnames is []
+		comment is 'Runs the complete example and prints a short summary when backend threads are available.'
 	]).
 
 	:- public(run/1).
