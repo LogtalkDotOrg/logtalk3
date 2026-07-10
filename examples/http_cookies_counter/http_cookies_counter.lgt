@@ -105,7 +105,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-07-09,
 		comment is 'Small local HTTP server used by the cookie counter example.'
 	]).
 
@@ -132,7 +132,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-07-09,
 		comment is 'HTTP client used by the cookie counter example, backed by an explicit http_client_session cookie jar.'
 	]).
 
@@ -148,6 +148,10 @@
 	:- info(run/2, [
 		comment is 'Performs two visits using one explicit session so the returned result shows both the first stored cookie state and the second request that reuses it automatically.',
 		argnames is ['Port', 'Result']
+	]).
+
+	:- uses(user, [
+		atomic_list_concat/2
 	]).
 
 	visit(Port, Session, Response, StoredCookiePairs) :-
@@ -180,10 +184,7 @@
 		).
 
 	visits_url(Port, URL) :-
-		number_codes(Port, PortCodes),
-		atom_codes(PortAtom, PortCodes),
-		atom_concat('http://127.0.0.1:', PortAtom, Prefix),
-		atom_concat(Prefix, '/visits', URL).
+		atomic_list_concat(['http://127.0.0.1:', Port, '/visits'], URL).
 
 :- end_object.
 
@@ -198,7 +199,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-07-09,
 		comment is 'Self-contained demo object for the cookie counter example.'
 	]).
 
@@ -226,7 +227,7 @@
 			catch(
 				cookie_counter_client::run(Port, Result),
 				Error,
-				( cleanup_demo(Server),
+				(	cleanup_demo(Server),
 					throw(Error)
 				)
 			),
@@ -238,21 +239,9 @@
 		print_result(result(FirstResponse, StoredCookiePairs, SecondResponse)) :-
 			http_core::body(FirstResponse, content('application/json', json({visits-FirstVisit, message-FirstMessage}))),
 			http_core::body(SecondResponse, content('application/json', json({visits-SecondVisit, message-SecondMessage}))),
-			write('First visit: '),
-			write(FirstVisit),
-			write(' ('),
-			write(FirstMessage),
-			write(')'),
-			nl,
-			write('Session cookie pairs: '),
-			write(StoredCookiePairs),
-			nl,
-			write('Second visit: '),
-			write(SecondVisit),
-			write(' ('),
-			write(SecondMessage),
-			write(')'),
-			nl.
+			write('First visit: '), write(FirstVisit), write(' ('), write(FirstMessage), write(')'), nl,
+			write('Session cookie pairs: '), write(StoredCookiePairs), nl,
+			write('Second visit: '), write(SecondVisit), write(' ('), write(SecondMessage), write(')'), nl.
 
 	:- else.
 
