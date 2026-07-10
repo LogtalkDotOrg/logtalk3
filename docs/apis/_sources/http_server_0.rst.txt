@@ -15,7 +15,7 @@ User-facing HTTP(S) server facade built on top of the HTTP transport libraries.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-07-09
+| **Date:** 2026-07-10
 
 | **Compilation flags:**
 |    ``static, context_switching_calls, threaded``
@@ -361,8 +361,15 @@ Private predicates
 ``server_control_/3``
 ^^^^^^^^^^^^^^^^^^^^^
 
+Table of HTTP server shutdown control handles.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``server_control_(Control,Transport,Server)``
+| **Mode and number of proofs:**
+|    ``server_control_(?nonvar,?object_identiifer,?compound)`` - ``zero_or_more``
 
 
 ------------
@@ -373,8 +380,15 @@ Private predicates
 ``server_control_counter_/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Counter for generating unique HTTP server shutdown control identifiers.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``server_control_counter_(Counter)``
+| **Mode and number of proofs:**
+|    ``server_control_counter_(-integer)`` - ``zero_or_one``
 
 
 ------------

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-09,
+		date is 2026-07-10,
 		comment is 'User-facing HTTP(S) server facade built on top of the HTTP transport libraries.'
 	]).
 
@@ -145,9 +145,19 @@
 
 	:- private(server_control_/3).
 	:- dynamic(server_control_/3).
+	:- mode(server_control_(?nonvar, ?object_identiifer, ?compound), zero_or_more).
+	:- info(server_control_/3, [
+		comment is 'Table of HTTP server shutdown control handles.',
+		argnames is ['Control', 'Transport', 'Server']
+	]).
 
 	:- private(server_control_counter_/1).
 	:- dynamic(server_control_counter_/1).
+	:- mode(server_control_counter_(-integer), zero_or_one).
+	:- info(server_control_counter_/1, [
+		comment is 'Counter for generating unique HTTP server shutdown control identifiers.',
+		argnames is ['Counter']
+	]).
 
 	:- uses(list, [
 		append/3, member/2, valid/1 as proper_list/1
@@ -180,21 +190,29 @@
 		open_server_handle(Server, _Scheme, Transport, _Host, _Port, Listener),
 		Transport::serve_websocket_once(Listener, Handler, Connection, Response, ClientInfo).
 
+	serve(Server, _, _, _) :-
+		var(Server),
+		instantiation_error.
 	serve(Server, Handler, Count, ClientInfos) :-
-		nonvar(Server),
+		compound(Server),
 		open_server_handle(Server, _Scheme, Transport, _Host, _Port, Listener),
 		!,
 		Transport::serve_listener(Listener, Handler, Count, ClientInfos).
 	serve(Port, Handler, Count, Options) :-
+		integer(Port),
 		serve('127.0.0.1', Port, Handler, Count, _ClientInfos, Options).
 
+	serve(Server, _, _, _, _) :-
+		var(Server),
+		instantiation_error.
 	serve(Server, Handler, Count, ClientInfos, Options) :-
-		nonvar(Server),
+		compound(Server),
 		open_server_handle(Server, _Scheme, Transport, _Host, _Port, Listener),
 		!,
 		parse_serving_options(Options, ServeOptions),
 		Transport::serve_listener(Listener, Handler, Count, ClientInfos, ServeOptions).
 	serve(Port, Handler, Count, ClientInfos, Options) :-
+		integer(Port),
 		serve('127.0.0.1', Port, Handler, Count, ClientInfos, Options).
 
 	serve(Host, Port, Handler, Count, ClientInfos, Options) :-

@@ -26,7 +26,10 @@
 
 	:- initialization((
 		logtalk_load(http_client(loader)),
-		logtalk_load(loader),
+		logtalk_load(options(loader)),
+		logtalk_load(http_socket_transport(loader)),
+		logtalk_load(http_process_transport(loader)),
+		logtalk_load(http_server, [debug(on), source_data(on)]),
 		logtalk_load(test_objects),
 		logtalk_load(lgtunit(loader)),
 		logtalk_load(tests, [hook(lgtunit)]),

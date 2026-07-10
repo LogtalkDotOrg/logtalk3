@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-09,
+		date is 2026-07-10,
 		comment is 'Target echo handler used by the http_server tests.'
 	]).
 
@@ -39,5 +39,33 @@
 	target_text(origin(Path, Query), Text) :-
 		atom_concat(Path, '?', Prefix),
 		atom_concat(Prefix, Query, Text).
+
+:- end_object.
+
+
+:- object(probe_http_server_transport,
+	implements(http_transport_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-07-10,
+		comment is 'Probe transport used by the http_server tests to exercise facade cleanup paths.'
+	]).
+
+	% only implement the predicates actually required by the tests
+
+	supported_request_scheme(http).
+
+	open_listener(Host, Port, probe_listener(Host, BoundPort, Options), Options) :-
+		( 	var(Port) ->
+			BoundPort = 0,
+			Port = BoundPort
+		; 	BoundPort = Port
+		).
+
+	close_listener(_Listener).
+
+	serve_listener(_Listener, _Handler, _Count, [], _Options).
 
 :- end_object.
