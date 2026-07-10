@@ -393,26 +393,20 @@ dispatch and path-template matching logic.</p>
 <p><code class="docutils literal notranslate"><span class="pre">http_router</span></code> sits between the normalized <code class="docutils literal notranslate"><span class="pre">http_core</span></code> message layer
 and higher-level API authoring helpers:</p>
 <ul class="simple">
-<li><p>Use <a class="reference external" href="../http_server/NOTES.md">http_server</a> directly when you only
-need normalized messages, parsers, generators, or low-level handlers.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">http_server</span></code> directly when you only need normalized messages,
+parsers, generators, or low-level handlers.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">http_router</span></code> when you want the handler object to keep exposing
 <code class="docutils literal notranslate"><span class="pre">handle/2</span></code> while route matching, metadata annotation, middleware,
 and content negotiation are derived from <code class="docutils literal notranslate"><span class="pre">route/4</span></code> declarations.</p></li>
-<li><p>Add <a class="reference external" href="../rest/NOTES.md">rest</a> when <code class="docutils literal notranslate"><span class="pre">route/4</span></code> is still too
-low-level and you prefer endpoint descriptors plus small normalized
-result terms.</p></li>
-<li><p>Pair router objects with <a class="reference external" href="../open_api/NOTES.md">open_api</a> when you
-want the route declarations and metadata to derive OpenAPI operations
-automatically.</p></li>
-<li><p>Add companion libraries such as
-<a class="reference external" href="../http_parameters/NOTES.md">http_parameters</a>,
-<a class="reference external" href="../http_cors/NOTES.md">http_cors</a>,
-<a class="reference external" href="../http_htmx/NOTES.md">http_htmx</a>,
-<a class="reference external" href="../http_session/NOTES.md">http_session</a>,
-<a class="reference external" href="../http_static_files/NOTES.md">http_static_files</a>, and
-<a class="reference external" href="../http_directory_listing/NOTES.md">http_directory_listing</a> when
-you need parameter extraction, middleware helpers, sessions, or
-static-file routing on the same dispatch layer.</p></li>
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">rest</span></code> when <code class="docutils literal notranslate"><span class="pre">route/4</span></code> is still too low-level and you prefer
+endpoint descriptors plus small normalized result terms.</p></li>
+<li><p>Pair router objects with <code class="docutils literal notranslate"><span class="pre">open_api</span></code> when you want the route
+declarations and metadata to derive OpenAPI operations automatically.</p></li>
+<li><p>Add companion libraries such as <code class="docutils literal notranslate"><span class="pre">http_parameters</span></code>, <code class="docutils literal notranslate"><span class="pre">http_cors</span></code>,
+<code class="docutils literal notranslate"><span class="pre">http_htmx</span></code>, <code class="docutils literal notranslate"><span class="pre">http_session</span></code>, <code class="docutils literal notranslate"><span class="pre">http_static_files</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">http_directory_listing</span></code> when you need parameter extraction,
+middleware helpers, sessions, or static-file routing on the same
+dispatch layer.</p></li>
 </ul>
 </section>
 <section id="api-documentation">

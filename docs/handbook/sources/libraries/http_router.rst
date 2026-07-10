@@ -15,26 +15,20 @@ Layering
 ``http_router`` sits between the normalized ``http_core`` message layer
 and higher-level API authoring helpers:
 
-- Use `http_server <../http_server/NOTES.md>`__ directly when you only
-  need normalized messages, parsers, generators, or low-level handlers.
+- Use ``http_server`` directly when you only need normalized messages,
+  parsers, generators, or low-level handlers.
 - Use ``http_router`` when you want the handler object to keep exposing
   ``handle/2`` while route matching, metadata annotation, middleware,
   and content negotiation are derived from ``route/4`` declarations.
-- Add `rest <../rest/NOTES.md>`__ when ``route/4`` is still too
-  low-level and you prefer endpoint descriptors plus small normalized
-  result terms.
-- Pair router objects with `open_api <../open_api/NOTES.md>`__ when you
-  want the route declarations and metadata to derive OpenAPI operations
-  automatically.
-- Add companion libraries such as
-  `http_parameters <../http_parameters/NOTES.md>`__,
-  `http_cors <../http_cors/NOTES.md>`__,
-  `http_htmx <../http_htmx/NOTES.md>`__,
-  `http_session <../http_session/NOTES.md>`__,
-  `http_static_files <../http_static_files/NOTES.md>`__, and
-  `http_directory_listing <../http_directory_listing/NOTES.md>`__ when
-  you need parameter extraction, middleware helpers, sessions, or
-  static-file routing on the same dispatch layer.
+- Add ``rest`` when ``route/4`` is still too low-level and you prefer
+  endpoint descriptors plus small normalized result terms.
+- Pair router objects with ``open_api`` when you want the route
+  declarations and metadata to derive OpenAPI operations automatically.
+- Add companion libraries such as ``http_parameters``, ``http_cors``,
+  ``http_htmx``, ``http_session``, ``http_static_files``, and
+  ``http_directory_listing`` when you need parameter extraction,
+  middleware helpers, sessions, or static-file routing on the same
+  dispatch layer.
 
 API documentation
 -----------------
