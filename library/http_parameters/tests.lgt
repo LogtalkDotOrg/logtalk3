@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-28,
+		date is 2026-07-11,
 		comment is 'Unit tests for the "http_parameters" library.'
 	]).
 
@@ -247,11 +247,13 @@
 		Request = request(get, origin('/path'), http(1, 1), [], empty, [path_params([caption-42, alias-42, weight-oops, published-maybe])]),
 		http_parameters::parameter(Request, parameter(published, path, boolean, []), _Published).
 
-	test(http_parameters_parameters_3_21, deterministic((
-		thrown_error(http_parameters::parameters(Request, [parameter(tags, query, list(atom), [default(tag)])], _Parameters0), error(domain_error(http_parameter_default(list(atom)), invalid_default(tags, tag)), _)),
-		thrown_error(http_parameters::parameters(Request, [parameter(levels, query, list(integer), [default([1, 0]), minimum(1)])], _Parameters1), error(domain_error(http_parameter_default(list(integer)), invalid_default(levels, 0)), _))
-	))) :-
-		Request = request(get, origin('/defaults'), http(1, 1), [], empty, []).
+	test(http_parameters_parameters_3_21a, error(domain_error(http_parameter_default(list(atom)), invalid_default(tags, tag)))) :-
+		Request = request(get, origin('/defaults'), http(1, 1), [], empty, []),
+		http_parameters::parameters(Request, [parameter(tags, query, list(atom), [default(tag)])], _Parameters).
+
+	test(http_parameters_parameters_3_21b, error(domain_error(http_parameter_default(list(integer)), invalid_default(levels, 0)))) :-
+		Request = request(get, origin('/defaults'), http(1, 1), [], empty, []),
+		http_parameters::parameters(Request, [parameter(levels, query, list(integer), [default([1, 0]), minimum(1)])], _Parameters).
 
 	test(http_parameters_open_api_parameters_2_01, deterministic(Parameters == [
 		parameter(q, query, 'Search query', true, {type-string}),
@@ -316,30 +318,59 @@
 			parameter('content-type', header, string, [description('Ignored Content-Type header parameter')])
 		], Parameters).
 
-	test(http_parameters_open_api_parameters_2_07, deterministic((
-		thrown_error(http_parameters::open_api_parameters([foo], _Parameters0), error(domain_error(http_parameter_declaration, foo), _)),
-		thrown_error(http_parameters::open_api_parameters([parameter(123, query, string, [])], _Parameters1), error(domain_error(http_parameter_name, 123), _)),
-		thrown_error(http_parameters::open_api_parameters([parameter(id, matrix, string, [])], _Parameters2), error(domain_error(http_parameter_source, matrix), _)),
-		thrown_error(http_parameters::open_api_parameters([parameter(id, query, decimal, [])], _Parameters3), error(domain_error(http_parameter_type, decimal), _)),
-		thrown_error(http_parameters::open_api_parameters([parameter(ids, path, list(integer), [])], _Parameters4), error(domain_error(http_parameter_declaration, parameter(ids, path, list(integer), [])), _)),
-		thrown_error(http_parameters::open_api_parameters([parameter(id, path, integer, [default(1)])], _Parameters5), error(domain_error(http_parameter_declaration, parameter(id, path, integer, [default(1)])), _)),
-		thrown_error(http_parameters::open_api_parameters([parameter(limit, query, string, [minimum(1)])], _Parameters6), error(domain_error(http_parameter_declaration, parameter(limit, query, string, [minimum(1)])), _)),
-		thrown_error(http_parameters::open_api_parameters([parameter(limit, query, boolean, [maximum(1)])], _Parameters7), error(domain_error(http_parameter_declaration, parameter(limit, query, boolean, [maximum(1)])), _))
-	))).
+	test(http_parameters_open_api_parameters_2_07a, error(domain_error(http_parameter_declaration, foo))) :-
+		http_parameters::open_api_parameters([foo], _Parameters).
 
-	test(http_parameters_open_api_parameters_2_08, deterministic((
-		thrown_error(http_parameters::open_api_parameters([parameter(id, query, string, [optional, optional])], _Parameters0), error(domain_error(http_parameter_options, duplicate(optional)), _)),
-		thrown_error(http_parameters::open_api_parameters([parameter(id, query, integer, [default(1), default(2)])], _Parameters1), error(domain_error(http_parameter_options, duplicate(default)), _)),
-		thrown_error(http_parameters::open_api_parameters([parameter(id, query, string, [description(42)])], _Parameters2), error(domain_error(http_parameter_description, 42), _)),
-		thrown_error(http_parameters::open_api_parameters([parameter(id, query, string, [description('First'), description('Second')])], _Parameters3), error(domain_error(http_parameter_options, duplicate(description)), _)),
-		thrown_error(http_parameters::open_api_parameters([parameter(id, query, string, [schema(_)])], _Parameters4), error(instantiation_error, _)),
-		thrown_error(http_parameters::open_api_parameters([parameter(id, query, string, [schema({type-string}), schema({type-string})])], _Parameters5), error(domain_error(http_parameter_options, duplicate(schema)), _)),
-		thrown_error(http_parameters::open_api_parameters([parameter(id, query, atom, [enum([one]), enum([two])])], _Parameters6), error(domain_error(http_parameter_options, duplicate(enum)), _)),
-		thrown_error(http_parameters::open_api_parameters([parameter(id, query, integer, [minimum(1), minimum(2)])], _Parameters7), error(domain_error(http_parameter_options, duplicate(minimum)), _)),
-		thrown_error(http_parameters::open_api_parameters([parameter(id, query, integer, [maximum(2), maximum(3)])], _Parameters8), error(domain_error(http_parameter_options, duplicate(maximum)), _)),
-		thrown_error(http_parameters::open_api_parameters([parameter(id, query, string, [pattern('^a$'), pattern('^b$')])], _Parameters9), error(domain_error(http_parameter_options, duplicate(pattern)), _)),
-		thrown_error(http_parameters::open_api_parameters([parameter(id, query, string, [unknown])], _Parameters10), error(domain_error(http_parameter_option, unknown), _))
-	))).
+	test(http_parameters_open_api_parameters_2_07b, error(domain_error(http_parameter_name, 123))) :-
+		http_parameters::open_api_parameters([parameter(123, query, string, [])], _Parameters).
+
+	test(http_parameters_open_api_parameters_2_07c, error(domain_error(http_parameter_source, matrix))) :-
+		http_parameters::open_api_parameters([parameter(id, matrix, string, [])], _Parameters).
+
+	test(http_parameters_open_api_parameters_2_07d, error(domain_error(http_parameter_type, decimal))) :-
+		http_parameters::open_api_parameters([parameter(id, query, decimal, [])], _Parameters).
+
+	test(http_parameters_open_api_parameters_2_07e, error(domain_error(http_parameter_declaration, parameter(ids, path, list(integer), [])))) :-
+		http_parameters::open_api_parameters([parameter(ids, path, list(integer), [])], _Parameters).
+
+	test(http_parameters_open_api_parameters_2_07f, error(domain_error(http_parameter_declaration, parameter(id, path, integer, [default(1)])))) :-
+		http_parameters::open_api_parameters([parameter(id, path, integer, [default(1)])], _Parameters).
+
+	test(http_parameters_open_api_parameters_2_07g, error(domain_error(http_parameter_declaration, parameter(limit, query, string, [minimum(1)])))) :-
+		http_parameters::open_api_parameters([parameter(limit, query, string, [minimum(1)])], _Parameters).
+
+	test(http_parameters_open_api_parameters_2_08a, error(domain_error(http_parameter_options, duplicate(optional)))) :-
+		http_parameters::open_api_parameters([parameter(id, query, string, [optional, optional])], _Parameters).
+
+	test(http_parameters_open_api_parameters_2_08b, error(domain_error(http_parameter_options, duplicate(default)))) :-
+		http_parameters::open_api_parameters([parameter(id, query, integer, [default(1), default(2)])], _Parameters).
+
+	test(http_parameters_open_api_parameters_2_08c, error(domain_error(http_parameter_description, 42))) :-
+		http_parameters::open_api_parameters([parameter(id, query, string, [description(42)])], _Parameters).
+
+	test(http_parameters_open_api_parameters_2_08d, error(domain_error(http_parameter_options, duplicate(description)))) :-
+		http_parameters::open_api_parameters([parameter(id, query, string, [description('First'), description('Second')])], _Parameters).
+
+	test(http_parameters_open_api_parameters_2_08e, error(instantiation_error)) :-
+		http_parameters::open_api_parameters([parameter(id, query, string, [schema(_)])], _Parameters).
+
+	test(http_parameters_open_api_parameters_2_08f, error(domain_error(http_parameter_options, duplicate(schema)))) :-
+		http_parameters::open_api_parameters([parameter(id, query, string, [schema({type-string}), schema({type-string})])], _Parameters).
+
+	test(http_parameters_open_api_parameters_2_08g, error(domain_error(http_parameter_options, duplicate(enum)))) :-
+		http_parameters::open_api_parameters([parameter(id, query, atom, [enum([one]), enum([two])])], _Parameters).
+
+	test(http_parameters_open_api_parameters_2_08h, error(domain_error(http_parameter_options, duplicate(minimum)))) :-
+		http_parameters::open_api_parameters([parameter(id, query, integer, [minimum(1), minimum(2)])], _Parameters).
+
+	test(http_parameters_open_api_parameters_2_08i, error(domain_error(http_parameter_options, duplicate(maximum)))) :-
+		http_parameters::open_api_parameters([parameter(id, query, integer, [maximum(2), maximum(3)])], _Parameters).
+
+	test(http_parameters_open_api_parameters_2_08j, error(domain_error(http_parameter_options, duplicate(pattern)))) :-
+		http_parameters::open_api_parameters([parameter(id, query, string, [pattern('^a$'), pattern('^b$')])], _Parameters).
+
+	test(http_parameters_open_api_parameters_2_08k, error(domain_error(http_parameter_option, unknown))) :-
+		http_parameters::open_api_parameters([parameter(id, query, string, [unknown])], _Parameters).
 
 	test(http_parameters_open_api_request_body_3_01, deterministic(RequestBody == request_body('Login form', true, [media('application/x-www-form-urlencoded', {
 		type-object,
@@ -443,10 +474,11 @@
 		Request = request(get, origin('/reports', 'status=published&page=0'), http(1, 1), [], empty, []),
 		validated_http_router::handle(Request, Response).
 
-	test(http_router_parameters_route_parameters_2_01, deterministic((
-		thrown_error(path_scalar_http_router::route_parameters(invalid_request, _Parameters0), error(domain_error(http_request, invalid_request), _)),
-		thrown_error(path_scalar_http_router::route_parameters(request(get, origin('/notes/note'), http(1, 1), [], empty, []), _Parameters1), error(domain_error(http_routed_request, request(get, origin('/notes/note'), http(1, 1), [], empty, [])), _))
-	))).
+	test(http_router_parameters_route_parameters_2_01, error(domain_error(http_request, invalid_request))) :-
+		path_scalar_http_router::route_parameters(invalid_request, _).
+
+	test(http_router_parameters_route_parameters_2_02, error(domain_error(http_routed_request, request(get, origin('/notes/note'), http(1, 1), [], empty, [])))) :-
+		path_scalar_http_router::route_parameters(request(get, origin('/notes/note'), http(1, 1), [], empty, []), _Parameters1).
 
 	test(http_router_parameters_handle_2_09, deterministic((
 		status(NoteResponse, status(200, 'OK')),
@@ -677,10 +709,7 @@
 		OpenAPI = open_api,
 		OpenAPI::document(validated_http_router, Document).
 
-	thrown_error(Goal, ExpectedError) :-
-		catch(Goal, Error, true),
-		nonvar(Error),
-		Error = ExpectedError.
+	% auxiliary predicates
 
 	json_field({Pairs}, Key, Value) :-
 		memberchk(Key-Value, Pairs).
