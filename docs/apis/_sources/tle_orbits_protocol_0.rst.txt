@@ -14,8 +14,8 @@ Protocol for parsing Two-Line Element sets and performing approximate portable o
 |    ``logtalk_load(tle_orbits(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-05-11
+| **Version:** 1:1:0
+| **Date:** 2026-07-13
 
 | **Compilation flags:**
 |    ``static``
@@ -55,8 +55,12 @@ Parses one or more TLE records from a source specification into canonical ``tle(
 |    ``parse(++compound,--list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
-|    Any exception defined by the implementing TLE parser for invalid sources or malformed TLE data:
-|        ``error``
+|    ``Source`` is a variable or contains a variable source argument:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid source specification:
+|        ``domain_error(tle_source,Source)``
+|    The parsed non-blank lines cannot be grouped into valid TLE records:
+|        ``domain_error(tle_records,Lines)``
 
 
 ------------
@@ -78,8 +82,20 @@ Parses a single TLE record given an optional name atom or the atom ``none`` plus
 |    ``parse_lines(++nonvar,++atom,++atom,--compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Any exception defined by the implementing TLE parser for invalid line syntax, checksums, or orbital element ranges:
-|        ``error``
+|    ``Name`` is a variable:
+|        ``instantiation_error``
+|    ``Name`` is neither the atom ``none`` nor an atom name:
+|        ``domain_error(tle_name,Name)``
+|    ``Line1`` is a variable:
+|        ``instantiation_error``
+|    ``Line1`` is neither a variable nor an atom:
+|        ``domain_error(tle_line,Line1)``
+|    ``Line2`` is a variable:
+|        ``instantiation_error``
+|    ``Line2`` is neither a variable nor an atom:
+|        ``domain_error(tle_line,Line2)``
+|    The given name and lines do not form a valid TLE record because of invalid syntax, checksum, field encoding, or orbital element ranges:
+|        ``domain_error(tle_lines,[Name,Line1,Line2])``
 
 
 ------------
@@ -101,8 +117,8 @@ Propagates a parsed TLE using the default ``approximate`` model and returns a ``
 |    ``propagate(++compound,++nonvar,--compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Any exception defined by the implementing propagator for invalid TLE terms, time specifications, or propagation-domain failures:
-|        ``error``
+|    ``Time`` is not one of the supported time specifications with the required numeric components:
+|        ``domain_error(tle_time,Time)``
 
 
 ------------
@@ -124,8 +140,10 @@ Propagates a parsed TLE using the default ``approximate`` model and returns coor
 |    ``propagate(++compound,++nonvar,++atom,--compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Any exception defined by the implementing propagator for invalid TLE terms, time specifications, frame identifiers, or propagation-domain failures:
-|        ``error``
+|    ``Frame`` is not one of the supported reference frame identifiers:
+|        ``domain_error(tle_reference_frame,Frame)``
+|    ``Time`` is not one of the supported time specifications with the required numeric components:
+|        ``domain_error(tle_time,Time)``
 
 
 ------------
@@ -147,8 +165,12 @@ Propagates a parsed TLE using the requested propagation model and returns coordi
 |    ``propagate(++compound,++nonvar,++atom,++atom,--compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Any exception defined by the implementing propagator for invalid TLE terms, time specifications, frame identifiers, model identifiers, or propagation-domain failures:
-|        ``error``
+|    ``Frame`` is not one of the supported reference frame identifiers:
+|        ``domain_error(tle_reference_frame,Frame)``
+|    ``Model`` is not one of the supported propagation model identifiers:
+|        ``domain_error(tle_propagation_model,Model)``
+|    ``Time`` is not one of the supported time specifications with the required numeric components:
+|        ``domain_error(tle_time,Time)``
 
 
 ------------
@@ -170,8 +192,10 @@ Propagates a parsed TLE using the default ``approximate`` model and returns ``st
 |    ``propagate_state(++compound,++nonvar,++atom,--compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Any exception defined by the implementing propagator for invalid TLE terms, time specifications, frame identifiers, or propagation-domain failures:
-|        ``error``
+|    ``Frame`` is not one of the supported reference frame identifiers:
+|        ``domain_error(tle_reference_frame,Frame)``
+|    ``Time`` is not one of the supported time specifications with the required numeric components:
+|        ``domain_error(tle_time,Time)``
 
 
 ------------
@@ -193,8 +217,12 @@ Propagates a parsed TLE using the requested propagation model and returns ``stat
 |    ``propagate_state(++compound,++nonvar,++atom,++atom,--compound)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Any exception defined by the implementing propagator for invalid TLE terms, time specifications, frame identifiers, model identifiers, or propagation-domain failures:
-|        ``error``
+|    ``Frame`` is not one of the supported reference frame identifiers:
+|        ``domain_error(tle_reference_frame,Frame)``
+|    ``Model`` is not one of the supported propagation model identifiers:
+|        ``domain_error(tle_propagation_model,Model)``
+|    ``Time`` is not one of the supported time specifications with the required numeric components:
+|        ``domain_error(tle_time,Time)``
 
 
 ------------
@@ -216,8 +244,8 @@ Samples the propagated sub-satellite ground track between two UTC ``date_time/6`
 |    ``ground_track(++compound,++compound,++compound,++number,--list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
-|    Any exception defined by the implementing propagator for invalid TLE terms, time intervals, step sizes, or propagation-domain failures:
-|        ``error``
+|    ``StartDateTime``, ``EndDateTime``, or ``StepSeconds`` do not define a valid ground-track sampling interval for the default model:
+|        ``domain_error(tle_ground_track,[StartDateTime,EndDateTime,StepSeconds,approximate])``
 
 
 ------------
@@ -239,8 +267,10 @@ Samples the propagated sub-satellite ground track between two UTC ``date_time/6`
 |    ``ground_track(++compound,++compound,++compound,++number,++atom,--list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
-|    Any exception defined by the implementing propagator for invalid TLE terms, time intervals, step sizes, model identifiers, or propagation-domain failures:
-|        ``error``
+|    ``Model`` is not one of the supported propagation model identifiers:
+|        ``domain_error(tle_propagation_model,Model)``
+|    ``StartDateTime``, ``EndDateTime``, or ``StepSeconds`` do not define a valid ground-track sampling interval for the requested model:
+|        ``domain_error(tle_ground_track,[StartDateTime,EndDateTime,StepSeconds,Model])``
 
 
 ------------

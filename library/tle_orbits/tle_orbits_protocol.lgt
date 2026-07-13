@@ -22,9 +22,9 @@
 :- protocol(tle_orbits_protocol).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-11,
+		date is 2026-07-13,
 		comment is 'Protocol for parsing Two-Line Element sets and performing approximate portable orbit propagation with near-earth and deep-space variants plus ground-track sampling.',
 		see_also is [tle_orbits, crs_projections_protocol]
 	]).
@@ -35,7 +35,9 @@
 		comment is 'Parses one or more TLE records from a source specification into canonical ``tle(...)`` terms. Supported source specifications are ``atom(Atom)``, ``chars(List)``, ``codes(List)``, ``stream(Stream)``, and ``file(Path)``.',
 		argnames is ['Source', 'TLEs'],
 		exceptions is [
-			'Any exception defined by the implementing TLE parser for invalid sources or malformed TLE data' - error
+			'``Source`` is a variable or contains a variable source argument' - instantiation_error,
+			'``Source`` is neither a variable nor a valid source specification' - domain_error(tle_source, 'Source'),
+			'The parsed non-blank lines cannot be grouped into valid TLE records' - domain_error(tle_records, 'Lines')
 		]
 	]).
 
@@ -45,7 +47,13 @@
 		comment is 'Parses a single TLE record given an optional name atom or the atom ``none`` plus the two raw TLE lines.',
 		argnames is ['Name', 'Line1', 'Line2', 'TLE'],
 		exceptions is [
-			'Any exception defined by the implementing TLE parser for invalid line syntax, checksums, or orbital element ranges' - error
+			'``Name`` is a variable' - instantiation_error,
+			'``Name`` is neither the atom ``none`` nor an atom name' - domain_error(tle_name, 'Name'),
+			'``Line1`` is a variable' - instantiation_error,
+			'``Line1`` is neither a variable nor an atom' - domain_error(tle_line, 'Line1'),
+			'``Line2`` is a variable' - instantiation_error,
+			'``Line2`` is neither a variable nor an atom' - domain_error(tle_line, 'Line2'),
+			'The given name and lines do not form a valid TLE record because of invalid syntax, checksum, field encoding, or orbital element ranges' - domain_error(tle_lines, ['Name', 'Line1', 'Line2'])
 		]
 	]).
 
@@ -55,7 +63,7 @@
 		comment is 'Propagates a parsed TLE using the default ``approximate`` model and returns a ``geographic(Latitude,Longitude,Height)`` coordinate. Supported time specifications are ``date_time(Year,Month,Day,Hours,Minutes,Seconds)``, ``julian_date(JulianDate)``, and ``offset_seconds(SecondsSinceEpoch)``.',
 		argnames is ['TLE', 'Time', 'Coordinate'],
 		exceptions is [
-			'Any exception defined by the implementing propagator for invalid TLE terms, time specifications, or propagation-domain failures' - error
+			'``Time`` is not one of the supported time specifications with the required numeric components' - domain_error(tle_time, 'Time')
 		]
 	]).
 
@@ -65,7 +73,8 @@
 		comment is 'Propagates a parsed TLE using the default ``approximate`` model and returns coordinates in the requested frame. Supported frames are ``eci`` returning ``eci(X,Y,Z)``, ``ecef`` returning ``ecef(X,Y,Z)``, and ``wgs84_3d`` returning ``geographic(Latitude,Longitude,Height)``.',
 		argnames is ['TLE', 'Time', 'Frame', 'Coordinate'],
 		exceptions is [
-			'Any exception defined by the implementing propagator for invalid TLE terms, time specifications, frame identifiers, or propagation-domain failures' - error
+			'``Frame`` is not one of the supported reference frame identifiers' - domain_error(tle_reference_frame, 'Frame'),
+			'``Time`` is not one of the supported time specifications with the required numeric components' - domain_error(tle_time, 'Time')
 		]
 	]).
 
@@ -75,7 +84,9 @@
 		comment is 'Propagates a parsed TLE using the requested propagation model and returns coordinates in the requested frame. Supported models are ``approximate`` for automatic near-earth versus deep-space dispatch, ``approximate_near_earth`` for the low-period approximate branch with J2 secular and short-period corrections plus low-order B* drag handling, ``approximate_deep_space`` for the dedicated deep-space approximate branch with resonance-aware long-period corrections, and ``two_body`` for the legacy Keplerian approximation.',
 		argnames is ['TLE', 'Time', 'Frame', 'Model', 'Coordinate'],
 		exceptions is [
-			'Any exception defined by the implementing propagator for invalid TLE terms, time specifications, frame identifiers, model identifiers, or propagation-domain failures' - error
+			'``Frame`` is not one of the supported reference frame identifiers' - domain_error(tle_reference_frame, 'Frame'),
+			'``Model`` is not one of the supported propagation model identifiers' - domain_error(tle_propagation_model, 'Model'),
+			'``Time`` is not one of the supported time specifications with the required numeric components' - domain_error(tle_time, 'Time')
 		]
 	]).
 
@@ -85,7 +96,8 @@
 		comment is 'Propagates a parsed TLE using the default ``approximate`` model and returns ``state(Position,Velocity)`` in the requested frame. Velocity is derived directly from the propagated orbital elements in ECI and analytically transformed to the requested frame. Supported frames are ``eci`` returning ``state(eci(X,Y,Z), eci(VX,VY,VZ))``, ``ecef`` returning ``state(ecef(X,Y,Z), ecef(VX,VY,VZ))``, and ``wgs84_3d`` returning ``state(geographic(Latitude,Longitude,Height), enu(East,North,Up))``.',
 		argnames is ['TLE', 'Time', 'Frame', 'State'],
 		exceptions is [
-			'Any exception defined by the implementing propagator for invalid TLE terms, time specifications, frame identifiers, or propagation-domain failures' - error
+			'``Frame`` is not one of the supported reference frame identifiers' - domain_error(tle_reference_frame, 'Frame'),
+			'``Time`` is not one of the supported time specifications with the required numeric components' - domain_error(tle_time, 'Time')
 		]
 	]).
 
@@ -95,7 +107,9 @@
 		comment is 'Propagates a parsed TLE using the requested propagation model and returns ``state(Position,Velocity)`` in the requested frame. Velocity is derived directly from the propagated orbital elements in ECI and analytically transformed to the requested frame. Supported models are ``approximate``, ``approximate_near_earth``, ``approximate_deep_space``, and ``two_body``.',
 		argnames is ['TLE', 'Time', 'Frame', 'Model', 'State'],
 		exceptions is [
-			'Any exception defined by the implementing propagator for invalid TLE terms, time specifications, frame identifiers, model identifiers, or propagation-domain failures' - error
+			'``Frame`` is not one of the supported reference frame identifiers' - domain_error(tle_reference_frame, 'Frame'),
+			'``Model`` is not one of the supported propagation model identifiers' - domain_error(tle_propagation_model, 'Model'),
+			'``Time`` is not one of the supported time specifications with the required numeric components' - domain_error(tle_time, 'Time')
 		]
 	]).
 
@@ -105,7 +119,7 @@
 		comment is 'Samples the propagated sub-satellite ground track between two UTC ``date_time/6`` instants separated by a positive step size in seconds using the default ``approximate`` model, returning ``sample(DateTime, geographic(Latitude,Longitude,Height))`` terms.',
 		argnames is ['TLE', 'StartDateTime', 'EndDateTime', 'StepSeconds', 'Samples'],
 		exceptions is [
-			'Any exception defined by the implementing propagator for invalid TLE terms, time intervals, step sizes, or propagation-domain failures' - error
+			'``StartDateTime``, ``EndDateTime``, or ``StepSeconds`` do not define a valid ground-track sampling interval for the default model' - domain_error(tle_ground_track, ['StartDateTime', 'EndDateTime', 'StepSeconds', approximate])
 		]
 	]).
 
@@ -115,7 +129,8 @@
 		comment is 'Samples the propagated sub-satellite ground track between two UTC ``date_time/6`` instants separated by a positive step size in seconds using the requested propagation model. Supported models are ``approximate``, ``approximate_near_earth``, ``approximate_deep_space``, and ``two_body``.',
 		argnames is ['TLE', 'StartDateTime', 'EndDateTime', 'StepSeconds', 'Model', 'Samples'],
 		exceptions is [
-			'Any exception defined by the implementing propagator for invalid TLE terms, time intervals, step sizes, model identifiers, or propagation-domain failures' - error
+			'``Model`` is not one of the supported propagation model identifiers' - domain_error(tle_propagation_model, 'Model'),
+			'``StartDateTime``, ``EndDateTime``, or ``StepSeconds`` do not define a valid ground-track sampling interval for the requested model' - domain_error(tle_ground_track, ['StartDateTime', 'EndDateTime', 'StepSeconds', 'Model'])
 		]
 	]).
 

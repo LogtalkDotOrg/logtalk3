@@ -403,8 +403,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-05-11</div>
+<div class="line"><strong>Version:</strong> 1:1:0</div>
+<div class="line"><strong>Date:</strong> 2026-07-13</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -474,9 +474,17 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Any exception defined by the implementing TLE parser for invalid sources or malformed TLE data:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> is a variable or contains a variable source argument:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> is neither a variable nor a valid source specification:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(tle_source,Source)</span></code></div>
+</div>
+<div class="line">The parsed non-blank lines cannot be grouped into valid TLE records:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(tle_records,Lines)</span></code></div>
 </div>
 </div>
 </div>
@@ -504,9 +512,33 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Any exception defined by the implementing TLE parser for invalid line syntax, checksums, or orbital element ranges:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Name</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Name</span></code> is neither the atom <code class="docutils literal notranslate"><span class="pre">none</span></code> nor an atom name:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(tle_name,Name)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Line1</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Line1</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(tle_line,Line1)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Line2</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Line2</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(tle_line,Line2)</span></code></div>
+</div>
+<div class="line">The given name and lines do not form a valid TLE record because of invalid syntax, checksum, field encoding, or orbital element ranges:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(tle_lines,[Name,Line1,Line2])</span></code></div>
 </div>
 </div>
 </div>
@@ -534,9 +566,9 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Any exception defined by the implementing propagator for invalid TLE terms, time specifications, or propagation-domain failures:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Time</span></code> is not one of the supported time specifications with the required numeric components:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(tle_time,Time)</span></code></div>
 </div>
 </div>
 </div>
@@ -564,9 +596,13 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Any exception defined by the implementing propagator for invalid TLE terms, time specifications, frame identifiers, or propagation-domain failures:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is not one of the supported reference frame identifiers:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(tle_reference_frame,Frame)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Time</span></code> is not one of the supported time specifications with the required numeric components:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(tle_time,Time)</span></code></div>
 </div>
 </div>
 </div>
@@ -594,9 +630,17 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Any exception defined by the implementing propagator for invalid TLE terms, time specifications, frame identifiers, model identifiers, or propagation-domain failures:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is not one of the supported reference frame identifiers:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(tle_reference_frame,Frame)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Model</span></code> is not one of the supported propagation model identifiers:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(tle_propagation_model,Model)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Time</span></code> is not one of the supported time specifications with the required numeric components:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(tle_time,Time)</span></code></div>
 </div>
 </div>
 </div>
@@ -624,9 +668,13 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Any exception defined by the implementing propagator for invalid TLE terms, time specifications, frame identifiers, or propagation-domain failures:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is not one of the supported reference frame identifiers:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(tle_reference_frame,Frame)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Time</span></code> is not one of the supported time specifications with the required numeric components:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(tle_time,Time)</span></code></div>
 </div>
 </div>
 </div>
@@ -654,9 +702,17 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Any exception defined by the implementing propagator for invalid TLE terms, time specifications, frame identifiers, model identifiers, or propagation-domain failures:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Frame</span></code> is not one of the supported reference frame identifiers:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(tle_reference_frame,Frame)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Model</span></code> is not one of the supported propagation model identifiers:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(tle_propagation_model,Model)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Time</span></code> is not one of the supported time specifications with the required numeric components:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(tle_time,Time)</span></code></div>
 </div>
 </div>
 </div>
@@ -684,9 +740,9 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Any exception defined by the implementing propagator for invalid TLE terms, time intervals, step sizes, or propagation-domain failures:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">StartDateTime</span></code>, <code class="docutils literal notranslate"><span class="pre">EndDateTime</span></code>, or <code class="docutils literal notranslate"><span class="pre">StepSeconds</span></code> do not define a valid ground-track sampling interval for the default model:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(tle_ground_track,[StartDateTime,EndDateTime,StepSeconds,approximate])</span></code></div>
 </div>
 </div>
 </div>
@@ -714,9 +770,13 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Any exception defined by the implementing propagator for invalid TLE terms, time intervals, step sizes, model identifiers, or propagation-domain failures:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Model</span></code> is not one of the supported propagation model identifiers:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(tle_propagation_model,Model)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">StartDateTime</span></code>, <code class="docutils literal notranslate"><span class="pre">EndDateTime</span></code>, or <code class="docutils literal notranslate"><span class="pre">StepSeconds</span></code> do not define a valid ground-track sampling interval for the requested model:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(tle_ground_track,[StartDateTime,EndDateTime,StepSeconds,Model])</span></code></div>
 </div>
 </div>
 </div>

@@ -23,9 +23,9 @@
 	implements(tle_orbits_protocol)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-05-20,
+		date is 2026-07-13,
 		comment is 'Parser for Two-Line Element sets with an approximate portable propagator featuring automatic branching between near-earth and deep-space variants, a legacy two-body fallback model, and ground-track sampling.'
 	]).
 
@@ -164,6 +164,9 @@
 	source_codes(Source, _) :-
 		domain_error(tle_source, Source).
 
+	name_codes(Name, _) :-
+		var(Name),
+		instantiation_error.
 	name_codes(none, []) :-
 		!.
 	name_codes(Name, Codes) :-
@@ -173,6 +176,9 @@
 	name_codes(Name, _) :-
 		domain_error(tle_name, Name).
 
+	line_input_codes(Line, _) :-
+		var(Line),
+		instantiation_error.
 	line_input_codes(Line, Codes) :-
 		atom(Line),
 		!,
