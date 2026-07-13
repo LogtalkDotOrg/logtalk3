@@ -403,8 +403,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-02-20</div>
+<div class="line"><strong>Version:</strong> 1:1:0</div>
+<div class="line"><strong>Date:</strong> 2026-07-13</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -470,7 +470,19 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">The importing object is missing <code class="docutils literal notranslate"><span class="pre">name/1</span></code> or returns values with invalid types for the option declaration predicates:</div>
+<div class="line">The importing object does not define the <code class="docutils literal notranslate"><span class="pre">name/1</span></code> predicate:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(procedure,name/1)</span></code></div>
+</div>
+<div class="line">The argument of the <code class="docutils literal notranslate"><span class="pre">name/1</span></code> predicate is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">The argument <code class="docutils literal notranslate"><span class="pre">Name</span></code> of the <code class="docutils literal notranslate"><span class="pre">name/1</span></code> predicate is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Name)</span></code></div>
+</div>
+<div class="line">The importing returns values with invalid types for the option declaration predicates:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
 </div>

@@ -14,8 +14,8 @@ Command line options parsing predicates. Uses object-based option specifications
 |    ``logtalk_load(command_line_options(loader))``
 
 | **Author:** Marcus Uneson and Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-02-20
+| **Version:** 1:1:0
+| **Date:** 2026-07-13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -51,19 +51,43 @@ Public predicates
 ``parse/4``
 ^^^^^^^^^^^
 
-Parses the arguments ``ApplArguments`` according to the option objects ``OptionObjects`` using default parsing options.
+Parses the arguments ``AppArguments`` according to the option objects ``OptionObjects`` using default parsing options.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``parse(OptionObjects,ApplArguments,Options,PositionalArguments)``
+|    ``parse(OptionObjects,AppArguments,Options,PositionalArguments)``
 | **Mode and number of proofs:**
 |    ``parse(+list(object),+list(atom),-list,-list(atom))`` - ``one_or_error``
 
 | **Exceptions:**
-|    Any exception that can be thrown by ``parse/5`` using the default parsing options:
-|        ``error``
+|    ``OptionObjects`` is a variable, a partial list, or contains an option object definition with an insufficiently instantiated value:
+|        ``instantiation_error``
+|    ``OptionObjects`` is neither a variable nor a list of valid object identifiers:
+|        ``type_error(list(object),OptionObjects)``
+|    An option object is missing the ``name/1`` predicate:
+|        ``existence_error(predicate,name/1)``
+|    An option object predicate returns a value with an invalid type:
+|        ``type_error(Type,Term)``
+|    An option object predicate returns a value outside the expected domain:
+|        ``domain_error(Domain,Term)``
+|    The option set contains a duplicate option name:
+|        ``domain_error(unique_key,Name)``
+|    The option set contains a duplicate short flag:
+|        ``domain_error(unique_short_flag,ShortFlag)``
+|    The option set contains a duplicate long flag:
+|        ``domain_error(unique_long_flag,LongFlag)``
+|    ``AppArguments`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``AppArguments`` is neither a variable nor a list of atoms:
+|        ``type_error(list(atom),AppArguments)``
+|    An unknown flag is found:
+|        ``existence_error(command_line_option,Argument)``
+|    A flag value cannot be parsed as the option type:
+|        ``type_error(flag_value,Type)``
+|    A short option is written using the disallowed ``-f=value`` syntax:
+|        ``syntax_error(disallowed: <shortflag>=<value>)``
 
 
 ------------
@@ -74,21 +98,51 @@ Parses the arguments ``ApplArguments`` according to the option objects ``OptionO
 ``parse/5``
 ^^^^^^^^^^^
 
-Parses the arguments ``ApplArguments`` according to the option objects ``OptionObjects`` and the parsing options ``ParseOptions``. ``Options`` is a list of parsed options as ``Name(Value)`` terms by default (or ``Func(Name,Value)`` when the ``output_functor(Func)`` parse option is used). ``PositionalArguments`` are the remaining non-dashed arguments. ``ParseOptions`` include ``output_functor(Func)``, ``duplicated_flags(Keep)`` (one of ``keepfirst``, ``keeplast``, ``keepall``; default ``keeplast``), and ``allow_empty_flag_spec(Bool)`` (default ``true``).
+Parses the arguments ``AppArguments`` according to the option objects ``OptionObjects`` and the parsing options ``ParseOptions``. ``Options`` is a list of parsed options as ``Name(Value)`` terms by default (or ``Func(Name,Value)`` when the ``output_functor(Func)`` parse option is used). ``PositionalArguments`` are the remaining non-dashed arguments. ``ParseOptions`` include ``output_functor(Func)``, ``duplicated_flags(Keep)`` (one of ``keepfirst``, ``keeplast``, ``keepall``; default ``keeplast``), and ``allow_empty_flag_spec(Bool)`` (default ``true``).
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``parse(OptionObjects,ApplArguments,Options,PositionalArguments,ParseOptions)``
+|    ``parse(OptionObjects,AppArguments,Options,PositionalArguments,ParseOptions)``
 | **Mode and number of proofs:**
 |    ``parse(+list(object),+list(atom),-list,-list(atom),+list)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``OptionObjects`` is not a list of valid option objects or the option set contains duplicate names or flags:
-|        ``error``
-|    ``ApplArguments`` is not a list of atoms, an unknown flag is found, a flag value cannot be parsed, or ``ParseOptions`` contains an invalid option:
-|        ``error``
+|    ``ParseOptions`` is a variable, a partial list, or contains a variable option:
+|        ``instantiation_error``
+|    ``ParseOptions`` is neither a variable nor a list:
+|        ``type_error(list,ParseOptions)``
+|    An element of ``ParseOptions`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element of ``ParseOptions`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``OptionObjects`` is a variable, a partial list, or contains an option object definition with an insufficiently instantiated value:
+|        ``instantiation_error``
+|    ``OptionObjects`` is neither a variable nor a list of valid object identifiers:
+|        ``type_error(list(object),OptionObjects)``
+|    An option object is missing the ``name/1`` predicate:
+|        ``existence_error(predicate,name/1)``
+|    An option object predicate returns a value with an invalid type:
+|        ``type_error(Type,Term)``
+|    An option object predicate returns a value outside the expected domain:
+|        ``domain_error(Domain,Term)``
+|    The option set contains a duplicate option name:
+|        ``domain_error(unique_key,Name)``
+|    The option set contains a duplicate short flag:
+|        ``domain_error(unique_short_flag,ShortFlag)``
+|    The option set contains a duplicate long flag:
+|        ``domain_error(unique_long_flag,LongFlag)``
+|    An option has no short or long flags and empty flag specifications are disallowed:
+|        ``domain_error(non_empty_flag_spec,Name)``
+|    ``AppArguments`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``AppArguments`` is neither a variable nor a list of atoms:
+|        ``type_error(list(atom),AppArguments)``
+|    An unknown flag is found:
+|        ``existence_error(command_line_option,Argument)``
+|    A flag value cannot be parsed as the option type:
+|        ``type_error(flag_value,Type)``
 |    A short option is written using the disallowed ``-f=value`` syntax:
 |        ``syntax_error(disallowed: <shortflag>=<value>)``
 
@@ -112,8 +166,22 @@ Synthesizes a help text ``Help`` as an atom from the option objects ``OptionObje
 |    ``help(+list(object),-atom)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Any exception that can be thrown by ``help/3`` using the default help options:
-|        ``error``
+|    ``OptionObjects`` is a variable, a partial list, or contains an option object definition with an insufficiently instantiated value:
+|        ``instantiation_error``
+|    ``OptionObjects`` is neither a variable nor a list of valid object identifiers:
+|        ``type_error(list(object),OptionObjects)``
+|    An option object is missing the ``name/1`` predicate:
+|        ``existence_error(predicate,name/1)``
+|    An option object predicate returns a value with an invalid type:
+|        ``type_error(Type,Term)``
+|    An option object predicate returns a value outside the expected domain:
+|        ``domain_error(Domain,Term)``
+|    The option set contains a duplicate option name:
+|        ``domain_error(unique_key,Name)``
+|    The option set contains a duplicate short flag:
+|        ``domain_error(unique_short_flag,ShortFlag)``
+|    The option set contains a duplicate long flag:
+|        ``domain_error(unique_long_flag,LongFlag)``
 
 
 ------------
@@ -124,7 +192,7 @@ Synthesizes a help text ``Help`` as an atom from the option objects ``OptionObje
 ``help/3``
 ^^^^^^^^^^
 
-Synthesizes a help text ``Help`` as an atom from the option objects ``OptionObjects`` using the given ``HelpOptions``. ``HelpOptions`` include ``line_width(Width)`` (default 80), ``min_help_width(Width)`` (default 40), ``break_long_flags(Boolean)`` (default ``false``), and ``suppress_empty_meta(Boolean)`` (default ``true``).
+Synthesizes a help text ``Help`` as an atom from the option objects ``OptionObjects`` using the given ``HelpOptions``. ``HelpOptions`` include ``line_width(Width)`` (default 80), ``min_help_width(Width)`` (default 40), ``break_long_flags(Boolean)`` (default ``false``), ``suppress_empty_meta(Boolean)`` (default ``true``), and ``allow_empty_flag_spec(Bool)`` (default ``true``).
 
 | **Compilation flags:**
 |    ``static``
@@ -135,10 +203,32 @@ Synthesizes a help text ``Help`` as an atom from the option objects ``OptionObje
 |    ``help(+list(object),-atom,+list)`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``OptionObjects`` is not a list of valid option objects or the option set contains duplicate names or flags:
-|        ``error``
-|    ``HelpOptions`` contains an invalid option or invalid option value:
-|        ``error``
+|    ``HelpOptions`` is a variable, a partial list, or contains a variable option:
+|        ``instantiation_error``
+|    ``HelpOptions`` is neither a variable nor a list:
+|        ``type_error(list,HelpOptions)``
+|    An element of ``HelpOptions`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element of ``HelpOptions`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``OptionObjects`` is a variable, a partial list, or contains an option object definition with an insufficiently instantiated value:
+|        ``instantiation_error``
+|    ``OptionObjects`` is neither a variable nor a list of valid object identifiers:
+|        ``type_error(list(object),OptionObjects)``
+|    An option object is missing the ``name/1`` predicate:
+|        ``existence_error(predicate,name/1)``
+|    An option object predicate returns a value with an invalid type:
+|        ``type_error(Type,Term)``
+|    An option object predicate returns a value outside the expected domain:
+|        ``domain_error(Domain,Term)``
+|    The option set contains a duplicate option name:
+|        ``domain_error(unique_key,Name)``
+|    The option set contains a duplicate short flag:
+|        ``domain_error(unique_short_flag,ShortFlag)``
+|    The option set contains a duplicate long flag:
+|        ``domain_error(unique_long_flag,LongFlag)``
+|    An option has no short or long flags and empty flag specifications are disallowed:
+|        ``domain_error(non_empty_flag_spec,Name)``
 
 
 ------------

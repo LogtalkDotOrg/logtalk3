@@ -403,7 +403,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-07-10</div>
+<div class="line"><strong>Date:</strong> 2026-07-13</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -486,6 +486,59 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">open(+integer,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line">The selected transport object does not exist:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(object,Transport)</span></code></div>
+</div>
+<div class="line">The selected transport object does not conform to the HTTP transport protocol:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_transport_protocol_object,Transport)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> selects incompatible scheme and transport values:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">consistency_error(http_server_options,scheme(Scheme),transport(Transport))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> selects incompatible scheme and listener transport values:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">consistency_error(http_server_options,scheme(Scheme),listener_transport(ListenerTransport))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Port</span></code> is not a non-negative integer or a variable accepted by the selected transport:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Port)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains listener options rejected by the selected transport:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line">The selected transport cannot open the listener:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(http_process_transport_listener)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="open-4">
@@ -505,6 +558,63 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">open(+atom,+integer,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Host</span></code> is not a valid listener host atom for the selected transport:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Host)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Port</span></code> is not a non-negative integer or a variable accepted by the selected transport:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Port)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line">The selected transport object does not exist:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(object,Transport)</span></code></div>
+</div>
+<div class="line">The selected transport object does not conform to the HTTP transport protocol:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_transport_protocol_object,Transport)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> selects incompatible scheme and transport values:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">consistency_error(http_server_options,scheme(Scheme),transport(Transport))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> selects incompatible scheme and listener transport values:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">consistency_error(http_server_options,scheme(Scheme),listener_transport(ListenerTransport))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains listener options rejected by the selected transport:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line">The selected transport cannot open the listener:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(http_process_transport_listener)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -528,6 +638,27 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">close(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Server</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Server</span></code> is not an open HTTP server handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_server,Server)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Server</span></code> refers to a listener rejected by the selected transport:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_transport_listener,Listener)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Server</span></code> refers to a listener that no longer exists for the selected transport:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_socket_transport_listener,Listener)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="request-listener-shutdown-1">
@@ -547,6 +678,27 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">request_listener_shutdown(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Server</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Server</span></code> is not an HTTP server handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_server,Server)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Server</span></code> refers to a listener rejected by the selected transport:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_transport_listener,Listener)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Server</span></code> refers to a listener that no longer exists for the selected transport:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_socket_transport_listener,Listener)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -570,6 +722,27 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">serve_once(+compound,+object_identifier,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Server</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Server</span></code> is not an open HTTP server handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_server,Server)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> does not conform to the HTTP handler protocol:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_handler_protocol,Handler)</span></code></div>
+</div>
+<div class="line">The delegated HTTP server rejects the response stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response_stream,Error)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="serve-websocket-once-5">
@@ -589,6 +762,35 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">serve_websocket_once(+compound,+object_identifier,--compound,--compound,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Server</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Server</span></code> is not an open HTTP server handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_server,Server)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> does not conform to the HTTP handler protocol:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_handler_protocol,Handler)</span></code></div>
+</div>
+<div class="line">The WebSocket opening request does not exist:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_socket_transport_websocket_request,end_of_file)</span></code></div>
+</div>
+<div class="line">The WebSocket opening response is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_transport_websocket_response,Response)</span></code></div>
+</div>
+<div class="line">The delegated HTTP server rejects the response stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response_stream,Error)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -613,6 +815,79 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">serve(+integer,+object_identifier,+integer,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ServerOrPort</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ServerOrPort</span></code> is neither a variable nor a compound or integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom_or_compound,ServerOrPort)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ServerOrPort</span></code> is a compound term but not an open HTTP server handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_server,ServerOrPort)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is not a non-negative integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Count)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ClientInfosOrOptions</span></code> is a variable when opening a listener from a port:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ClientInfosOrOptions</span></code> is neither a variable nor a list when opening a listener from a port:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">ClientInfosOrOptions</span></code> is a variable when opening a listener from a port:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">ClientInfosOrOptions</span></code> is neither a variable nor a compound term when opening a listener from a port:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">ClientInfosOrOptions</span></code> is a compound term but not a valid option when opening a listener from a port:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> does not conform to the HTTP handler protocol:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_handler_protocol,Handler)</span></code></div>
+</div>
+<div class="line">The selected transport object does not exist when opening a listener from a port:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(object,Transport)</span></code></div>
+</div>
+<div class="line">The selected transport object does not conform to the HTTP transport protocol when opening a listener from a port:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_transport_protocol_object,Transport)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ClientInfosOrOptions</span></code> selects incompatible scheme and transport values when opening a listener from a port:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">consistency_error(http_server_options,scheme(Scheme),transport(Transport))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ClientInfosOrOptions</span></code> selects incompatible scheme and listener transport values when opening a listener from a port:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">consistency_error(http_server_options,scheme(Scheme),listener_transport(ListenerTransport))</span></code></div>
+</div>
+<div class="line">The delegated HTTP server rejects the response stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response_stream,Error)</span></code></div>
+</div>
+<div class="line">Thread workers are not available on this backend:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(threads)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="serve-5">
@@ -633,6 +908,87 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">serve(+compound,+object_identifier,+integer,--list,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">serve(+integer,+object_identifier,+integer,--list,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ServerOrPort</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ServerOrPort</span></code> is neither a variable nor a compound or integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom_or_compound,ServerOrPort)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ServerOrPort</span></code> is a compound term but not an open HTTP server handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_server,ServerOrPort)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is not a non-negative integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Count)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains an option that is not valid for serving on an already open server:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_server_serve_option,Option)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> does not conform to the HTTP handler protocol:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_handler_protocol,Handler)</span></code></div>
+</div>
+<div class="line">The selected transport object does not exist when opening a listener from a port:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(object,Transport)</span></code></div>
+</div>
+<div class="line">The selected transport object does not conform to the HTTP transport protocol when opening a listener from a port:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_transport_protocol_object,Transport)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> selects incompatible scheme and transport values when opening a listener from a port:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">consistency_error(http_server_options,scheme(Scheme),transport(Transport))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> selects incompatible scheme and listener transport values when opening a listener from a port:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">consistency_error(http_server_options,scheme(Scheme),listener_transport(ListenerTransport))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains listener-serving options rejected by the selected transport:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_transport_listener_option,Option)</span></code></div>
+</div>
+<div class="line">The delegated HTTP server rejects the response stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response_stream,Error)</span></code></div>
+</div>
+<div class="line">Thread workers are not available on this backend:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(threads)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -656,6 +1012,83 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">serve(+atom,+integer,+object_identifier,+integer,--list,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Host</span></code> is not a valid listener host atom for the selected transport:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Host)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Port</span></code> is not a non-negative integer or a variable accepted by the selected transport:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Port)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is not a non-negative integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Count)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line">The selected transport object does not exist:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(object,Transport)</span></code></div>
+</div>
+<div class="line">The selected transport object does not conform to the HTTP transport protocol:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_transport_protocol_object,Transport)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> selects incompatible scheme and transport values:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">consistency_error(http_server_options,scheme(Scheme),transport(Transport))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> selects incompatible scheme and listener transport values:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">consistency_error(http_server_options,scheme(Scheme),listener_transport(ListenerTransport))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains listener-serving options rejected by the selected transport:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_transport_listener_option,Option)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> does not conform to the HTTP handler protocol:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_handler_protocol,Handler)</span></code></div>
+</div>
+<div class="line">The delegated HTTP server rejects the response stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response_stream,Error)</span></code></div>
+</div>
+<div class="line">Thread workers are not available on this backend:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(threads)</span></code></div>
+</div>
+<div class="line">The selected transport cannot open or close the listener:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(http_process_transport_listener)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="serve-until-shutdown-5">
@@ -675,6 +1108,83 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">serve_until_shutdown(+atom,+integer,+object_identifier,+nonvar,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Host</span></code> is not a valid listener host atom for the selected transport:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Host)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Port</span></code> is not a non-negative integer or a variable accepted by the selected transport:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Port)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Control</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Control</span></code> is already registered for another open-ended server loop:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(open,http_server_shutdown_control,Control)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line">The selected transport object does not exist:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(object,Transport)</span></code></div>
+</div>
+<div class="line">The selected transport object does not conform to the HTTP transport protocol:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_transport_protocol_object,Transport)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> selects incompatible scheme and transport values:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">consistency_error(http_server_options,scheme(Scheme),transport(Transport))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> selects incompatible scheme and listener transport values:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">consistency_error(http_server_options,scheme(Scheme),listener_transport(ListenerTransport))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains listener-serving options rejected by the selected transport:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_transport_listener_option,Option)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> does not conform to the HTTP handler protocol:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_handler_protocol,Handler)</span></code></div>
+</div>
+<div class="line">The delegated HTTP server rejects the response stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response_stream,Error)</span></code></div>
+</div>
+<div class="line">Thread workers are not available on this backend:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(threads)</span></code></div>
+</div>
+<div class="line">The selected transport cannot open the listener:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(http_process_transport_listener)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -702,6 +1212,83 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">serve_until_shutdown(+atom,+integer,+object_identifier,+nonvar,+list,+callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Host</span></code> is not a valid listener host atom for the selected transport:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Host)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Port</span></code> is not a non-negative integer or a variable accepted by the selected transport:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Port)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Control</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Control</span></code> is already registered for another open-ended server loop:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">permission_error(open,http_server_shutdown_control,Control)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line">The selected transport object does not exist:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(object,Transport)</span></code></div>
+</div>
+<div class="line">The selected transport object does not conform to the HTTP transport protocol:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_transport_protocol_object,Transport)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> selects incompatible scheme and transport values:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">consistency_error(http_server_options,scheme(Scheme),transport(Transport))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> selects incompatible scheme and listener transport values:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">consistency_error(http_server_options,scheme(Scheme),listener_transport(ListenerTransport))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains listener-serving options rejected by the selected transport:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_transport_listener_option,Option)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> does not conform to the HTTP handler protocol:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_handler_protocol,Handler)</span></code></div>
+</div>
+<div class="line">The delegated HTTP server rejects the response stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response_stream,Error)</span></code></div>
+</div>
+<div class="line">Thread workers are not available on this backend:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(threads)</span></code></div>
+</div>
+<div class="line">The selected transport cannot open the listener:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(http_process_transport_listener)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="request-shutdown-1">
@@ -721,6 +1308,23 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">request_shutdown(+nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Control</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Control</span></code> is not registered for an open-ended server loop:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_server_shutdown_control,Control)</span></code></div>
+</div>
+<div class="line">Thread-backed shutdown is not available on this backend:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(threads)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -765,6 +1369,75 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">start(+integer,+object_identifier,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Port</span></code> is not a non-negative integer or a variable accepted by the selected transport:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Port)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> specifies a variable shutdown control:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line">The selected transport object does not exist:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(object,Transport)</span></code></div>
+</div>
+<div class="line">The selected transport object does not conform to the HTTP transport protocol:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_transport_protocol_object,Transport)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> selects incompatible scheme and transport values:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">consistency_error(http_server_options,scheme(Scheme),transport(Transport))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> selects incompatible scheme and listener transport values:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">consistency_error(http_server_options,scheme(Scheme),listener_transport(ListenerTransport))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains listener-serving options rejected by the selected transport:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_transport_listener_option,Option)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> does not conform to the HTTP handler protocol:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_handler_protocol,Handler)</span></code></div>
+</div>
+<div class="line">The delegated HTTP server rejects the response stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response_stream,Error)</span></code></div>
+</div>
+<div class="line">The selected transport cannot open the listener:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(http_process_transport_listener)</span></code></div>
+</div>
+<div class="line">Thread support is not available:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(threads)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="start-5">
@@ -786,6 +1459,79 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">start(+atom,+integer,+object_identifier,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Host</span></code> is not a valid listener host atom for the selected transport:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Host)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Port</span></code> is not a non-negative integer or a variable accepted by the selected transport:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Port)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> specifies a variable shutdown control:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Option)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
+<div class="line">The selected transport object does not exist:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(object,Transport)</span></code></div>
+</div>
+<div class="line">The selected transport object does not conform to the HTTP transport protocol:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_transport_protocol_object,Transport)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> selects incompatible scheme and transport values:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">consistency_error(http_server_options,scheme(Scheme),transport(Transport))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> selects incompatible scheme and listener transport values:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">consistency_error(http_server_options,scheme(Scheme),listener_transport(ListenerTransport))</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains listener-serving options rejected by the selected transport:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_transport_listener_option,Option)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> does not conform to the HTTP handler protocol:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_handler_protocol,Handler)</span></code></div>
+</div>
+<div class="line">The delegated HTTP server rejects the response stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response_stream,Error)</span></code></div>
+</div>
+<div class="line">The selected transport cannot open the listener:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(http_process_transport_listener)</span></code></div>
+</div>
+<div class="line">Thread support is not available:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(threads)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="stop-1">
@@ -805,6 +1551,23 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">stop(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Server</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Server</span></code> is not a threaded HTTP server handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_server,Server)</span></code></div>
+</div>
+<div class="line">Thread support is not available:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(threads)</span></code></div>
+</div>
 </div>
 </div>
 </section>

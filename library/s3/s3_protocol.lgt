@@ -24,8 +24,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-09,
-		comment is 'Extracted protocol entity'
+		date is 2026-07-13,
+		comment is 'S3-compatible client facade predicates.'
 	]).
 
 	:- public(list_buckets/2).

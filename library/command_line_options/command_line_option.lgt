@@ -35,9 +35,9 @@
 :- category(command_line_option).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-20,
+		date is 2026-07-13,
 		comment is 'Category for defining command-line options. Import this category into objects that represent individual command-line options and override the predicates as needed.',
 		see_also is [command_line_options]
 	]).
@@ -47,7 +47,10 @@
 	:- info(check/0, [
 		comment is 'Checks if the command-line option definition is valid. Throws an error if the definition is invalid.',
 		exceptions is [
-			'The importing object is missing ``name/1`` or returns values with invalid types for the option declaration predicates' - error
+			'The importing object does not define the ``name/1`` predicate' - existence_error(procedure, name/1),
+			'The argument of the ``name/1`` predicate is a variable' - instantiation_error,
+			'The argument ``Name`` of the ``name/1`` predicate is neither a variable nor an atom' - type_error(atom, 'Name'),
+			'The importing returns values with invalid types for the option declaration predicates' - error
 		]
 	]).
 
@@ -114,10 +117,10 @@
 	% check/0 - type-checks the command-line option definition
 	check :-
 		context(Context),
-		% key/1 must succeed with a ground atom
+		% name/1 must succeed with a ground atom
 		(	::name(Name) ->
 			check(atom, Name, Context)
-		;	existence_error(predicate, name/1)
+		;	existence_error(procedure, name/1)
 		),
 		% short flags must be single-character atoms
 		::short_flags(ShortFlags),

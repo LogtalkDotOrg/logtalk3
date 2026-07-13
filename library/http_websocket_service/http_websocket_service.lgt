@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-09,
+		date is 2026-07-13,
 		comment is 'Auxiliary object defining the supported session-loop options and default values for callback-driven WebSocket services.'
 	]).
 
@@ -126,7 +126,7 @@
 			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
 			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
 			'``Options`` contains an invalid WebSocket service loop option' - domain_error(http_websocket_service_option, 'Option'),
-			'Timed session-loop options are not available on this backend' - not_available(http_websocket_service_timing),
+			'Timed session-loop options are not available on this backend' - existence_error(http_websocket_service, timing),
 			'The session role parameter is neither ``client`` nor ``server``' - domain_error(http_websocket_session_role, '_Role_'),
 			'The inbound frame/message sequence violates RFC 6455 session rules' - domain_error(http_websocket_session_sequence, 'Frame'),
 			'The inbound frame violates the current peer masking policy' - domain_error(http_websocket_session_masking, 'Frame'),
@@ -164,7 +164,7 @@
 			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
 			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
 			'``Options`` contains an invalid WebSocket service loop option' - domain_error(http_websocket_service_option, 'Option'),
-			'Timed session-loop options are not available on this backend' - not_available(http_websocket_service_timing),
+			'Timed session-loop options are not available on this backend' - existence_error(http_websocket_service, timing),
 			'The session role parameter is neither ``client`` nor ``server``' - domain_error(http_websocket_session_role, '_Role_'),
 			'The inbound frame/message sequence violates RFC 6455 session rules' - domain_error(http_websocket_session_sequence, 'Frame'),
 			'The inbound frame violates the current peer masking policy' - domain_error(http_websocket_session_masking, 'Frame'),
@@ -285,9 +285,9 @@
 
 	ensure_timed_session_support(Context) :-
 		(	timed_session_loop_needed(Context) ->
-			(	timed_session_loop_supported ->
+			(	current_logtalk_flag(threads, supported) ->
 				true
-			;	throw(not_available(http_websocket_service_timing))
+			;	existence_error(http_websocket_service, timing)
 			)
 		;	true
 		).
@@ -303,18 +303,6 @@
 	timed_session_loop_needed(Context) :-
 		context_idle_timeout(Context, IdleTimeout),
 		IdleTimeout \== none.
-
-	timed_session_loop_supported :-
-		current_logtalk_flag(threads, supported),
-		current_logtalk_flag(prolog_dialect, Dialect),
-		socket_library_supported_backend(Dialect).
-
-	socket_library_supported_backend(eclipse).
-	socket_library_supported_backend(gnu).
-	socket_library_supported_backend(sicstus).
-	socket_library_supported_backend(swi).
-	socket_library_supported_backend(trealla).
-	socket_library_supported_backend(xvm).
 
 	% loop context accessors
 
@@ -589,7 +577,7 @@
 	:- else.
 
 		ensure_session_reader(_Input, _State0, _Context, _Reader0, _Reader) :-
-			throw(not_available(http_websocket_service_timing)).
+			existence_error(http_websocket_service, timing).
 
 	:- endif.
 
@@ -623,7 +611,7 @@
 	:- else.
 
 		collect_session_reader_event(_Reader, _Event) :-
-			throw(not_available(http_websocket_service_timing)).
+			existence_error(http_websocket_service, timing).
 
 	:- endif.
 

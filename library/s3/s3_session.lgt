@@ -25,8 +25,11 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-09,
-		comment is 'Explicit S3 client sessions carrying default request options.'
+		date is 2026-07-13,
+		comment is 'Explicit S3 client sessions carrying default request options.',
+		parameters is [
+			'HTTPTransport' - 'The object implementing ``http_transport_protocol``.'
+		]
 	]).
 
 	:- public(get_object/6).

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>http_client_session(A) &mdash; Logtalk 3.101.0</title>
+  <title>http_client_session(HTTPTransport) &mdash; Logtalk 3.101.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -181,7 +181,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-server-core"><span class="xref std std-ref">http_server_core</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#http-session"><span class="xref std std-ref">http_session</span></a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="http_client_session_0.html">http_client_session</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">http_client_session(A)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">http_client_session(HTTPTransport)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_cookie_jar_0.html">http_cookie_jar</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_router_server_session_1.html">http_router_server_session(Manager)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_server_core_session_0.html">http_server_core_session</a></li>
@@ -385,7 +385,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">http_client_session(A)</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">http_client_session(HTTPTransport)</span></code></li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/http_client_session_1.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -396,8 +396,11 @@
            <div itemprop="articleBody">
              
   <p class="right" id="http-client-session-1"><span id="index-0"></span><strong>object</strong></p>
-<section id="http-client-session-a">
-<h1><code class="docutils literal notranslate"><span class="pre">http_client_session(A)</span></code><a class="headerlink" href="#http-client-session-a" title="Link to this heading"></a></h1>
+<section id="http-client-session-httptransport">
+<h1><code class="docutils literal notranslate"><span class="pre">http_client_session(HTTPTransport)</span></code><a class="headerlink" href="#http-client-session-httptransport" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">HTTPTransport</span></code> - The object implementing <code class="docutils literal notranslate"><span class="pre">http_transport_protocol</span></code>.</p></li>
+</ul>
 <p>Stateful HTTP client sessions that add cookie persistence on top of the stateless <code class="docutils literal notranslate"><span class="pre">http_client</span></code> facade.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
@@ -408,7 +411,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-07-09</div>
+<div class="line"><strong>Date:</strong> 2026-07-12</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

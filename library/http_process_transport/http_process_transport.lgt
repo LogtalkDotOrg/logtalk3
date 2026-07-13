@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-13,
 		comment is 'Process-backed HTTP transport predicates using the process library and helper processes.'
 	]).
 
@@ -34,14 +34,23 @@
 	:- mode(temporary_tls_credentials(+atom, -atom, -atom), one_or_error).
 	:- info(temporary_tls_credentials/3, [
 		comment is 'Creates or reuses temporary TLS certificate and key files under the system temporary directory using the given file name prefix.',
-		argnames is ['Prefix', 'CertificateFile', 'KeyFile']
+		argnames is ['Prefix', 'CertificateFile', 'KeyFile'],
+		exceptions is [
+			'``Prefix`` is a variable' - instantiation_error,
+			'``Prefix`` is not an atom' - type_error(atom, 'Prefix'),
+			'Temporary TLS credentials cannot be created' - resource_error(http_process_transport_temporary_tls_credentials)
+		]
 	]).
 
 	:- public(temporary_tls_credentials_files/3).
 	:- mode(temporary_tls_credentials_files(+atom, -atom, -atom), one_or_error).
 	:- info(temporary_tls_credentials_files/3, [
 		comment is 'Computes the temporary TLS certificate and key file paths used for a given file name prefix without creating the files.',
-		argnames is ['Prefix', 'CertificateFile', 'KeyFile']
+		argnames is ['Prefix', 'CertificateFile', 'KeyFile'],
+		exceptions is [
+			'``Prefix`` is a variable' - instantiation_error,
+			'``Prefix`` is not an atom' - type_error(atom, 'Prefix')
+		]
 	]).
 
 	:- private(process_connection_state_/3).
@@ -292,7 +301,7 @@
 			(	once((Status == 0; Status == exit(0))) ->
 				true
 			;	cleanup_temporary_tls_credentials(credentials(CertificateFile, KeyFile)),
-				throw(error(resource_error(http_process_transport_temporary_tls_credentials), http_process_transport::temporary_tls_credentials(Prefix, _, _)))
+				resource_error(http_process_transport_temporary_tls_credentials)
 			)
 		).
 
@@ -1654,7 +1663,8 @@
 		normalize_reversed_list(ReversedWorkers, Workers),
 		wait_for_workers(Workers, no_error).
 
-	wait_for_workers([], no_error).
+	wait_for_workers([], no_error) :-
+		!.
 	wait_for_workers([], Error) :-
 		throw(Error).
 	wait_for_workers([worker(Tag, Goal)| Workers], Error0) :-

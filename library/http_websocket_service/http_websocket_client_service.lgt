@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-09,
+		date is 2026-07-13,
 		comment is 'Client-side convenience for callback-driven WebSocket sessions with atom text representation, combining the opening handshake, optional initial outbound messages, and the higher-level session loop.',
 		parnames is ['HTTPTransport']
 	]).
@@ -71,7 +71,7 @@
 			'``Options`` contains an invalid WebSocket HTTP version' - domain_error(http_client_websocket_version, 'Version'),
 			'``Options`` contains reserved WebSocket headers' - domain_error(http_client_websocket_headers, 'Headers'),
 			'``Options`` contains an invalid WebSocket service loop option' - domain_error(http_websocket_service_option, 'Option'),
-			'Timed session-loop options are not available on this backend' - not_available(http_websocket_service_timing),
+			'Timed session-loop options are not available on this backend' - existence_error(http_websocket_service, timing),
 			'The WebSocket server rejects the opening handshake version' - domain_error(http_client_websocket_version_rejection, 'Response'),
 			'The WebSocket server rejects authentication' - domain_error(http_client_websocket_authentication_rejection, 'Response'),
 			'The WebSocket server redirects the opening handshake' - domain_error(http_client_websocket_redirection_rejection, 'Response'),

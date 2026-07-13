@@ -15,7 +15,7 @@ Process-backed HTTP transport predicates using the process library and helper pr
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-07-08
+| **Date:** 2026-07-13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls, threaded``
@@ -68,6 +68,14 @@ Creates or reuses temporary TLS certificate and key files under the system tempo
 | **Mode and number of proofs:**
 |    ``temporary_tls_credentials(+atom,-atom,-atom)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Prefix`` is a variable:
+|        ``instantiation_error``
+|    ``Prefix`` is not an atom:
+|        ``type_error(atom,Prefix)``
+|    Temporary TLS credentials cannot be created:
+|        ``resource_error(http_process_transport_temporary_tls_credentials)``
+
 
 ------------
 
@@ -86,6 +94,12 @@ Computes the temporary TLS certificate and key file paths used for a given file 
 |    ``temporary_tls_credentials_files(Prefix,CertificateFile,KeyFile)``
 | **Mode and number of proofs:**
 |    ``temporary_tls_credentials_files(+atom,-atom,-atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Prefix`` is a variable:
+|        ``instantiation_error``
+|    ``Prefix`` is not an atom:
+|        ``type_error(atom,Prefix)``
 
 
 ------------

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-09,
+		date is 2026-07-13,
 		comment is 'Server-side convenience for callback-driven WebSocket sessions with atom text representation, including registry-backed broadcast helpers.',
 		parnames is ['HTTPTransport']
 	]).
@@ -63,7 +63,7 @@
 			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
 			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
 			'``Options`` contains an invalid WebSocket service loop option' - domain_error(http_websocket_service_option, 'Option'),
-			'Timed session-loop options are not available on this backend' - not_available(http_websocket_service_timing),
+			'Timed session-loop options are not available on this backend' - existence_error(http_websocket_service, timing),
 			'The upgraded connection handle is invalid' - domain_error(http_socket_transport_connection, 'Connection'),
 			'The delegated session loop raises a WebSocket session error' - domain_error(http_websocket_session_sequence, 'Frame'),
 			'``SessionHandler`` returns an invalid reply' - domain_error(http_websocket_service_handler_reply, 'Reply')
@@ -83,7 +83,7 @@
 		comment is 'Accepts WebSocket opening handshakes on the given listener created by the selected transport parameterization until request_shutdown/1 is called for the specified control term, runs one callback-driven session loop per accepted upgraded connection, registers active sessions in the given registry for queued broadcasts, and closes the listener before returning.',
 		argnames is ['Listener', 'HandshakeHandler', 'SessionHandler', 'Registry', 'Control'],
 		exceptions is [
-			'Registry-backed serving is not available on this backend' - not_available(http_websocket_server_service_registry),
+			'Registry-backed serving is not available on this backend' - existence_error(http_websocket_server_service, registry),
 			'``Registry`` is not an open WebSocket service registry handle' - domain_error(http_websocket_service_registry, 'Registry'),
 			'``Registry`` refers to a closed WebSocket service registry handle' - existence_error(http_websocket_service_registry, session_registry('RegistryId')),
 			'``Control`` is a variable' - instantiation_error,
@@ -106,7 +106,7 @@
 		comment is 'Accepts WebSocket opening handshakes on the given listener created by the selected transport parameterization until request_shutdown/1 is called for the specified control term, runs one registry-backed callback session per accepted connection, applies the given session-loop options to every active session, and closes the listener before returning.',
 		argnames is ['Listener', 'HandshakeHandler', 'SessionHandler', 'Registry', 'Control', 'Options'],
 		exceptions is [
-			'Registry-backed serving is not available on this backend' - not_available(http_websocket_server_service_registry),
+			'Registry-backed serving is not available on this backend' - existence_error(http_websocket_server_service, registry),
 			'``Registry`` is not an open WebSocket service registry handle' - domain_error(http_websocket_service_registry, 'Registry'),
 			'``Registry`` refers to a closed WebSocket service registry handle' - existence_error(http_websocket_service_registry, session_registry('RegistryId')),
 			'``Control`` is a variable' - instantiation_error,
@@ -114,7 +114,7 @@
 			'``Options`` is a variable or a partial list' - instantiation_error,
 			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
 			'``Options`` contains an invalid WebSocket service loop option' - domain_error(http_websocket_service_option, 'Option'),
-			'Timed session-loop options are not available on this backend' - not_available(http_websocket_service_timing),
+			'Timed session-loop options are not available on this backend' - existence_error(http_websocket_service, timing),
 			'The WebSocket opening response is invalid' - domain_error(http_socket_transport_websocket_response, 'Response'),
 			'``SessionHandler`` is a variable' - instantiation_error,
 			'``SessionHandler`` is not a valid WebSocket service handler' - domain_error(http_websocket_service_handler, 'SessionHandler'),
@@ -135,7 +135,7 @@
 		comment is 'Requests shutdown of a registry-backed server loop started with serve_until_shutdown/5-6 for the specified control term and wakes any blocked accept call so the loop can terminate portably.',
 		argnames is ['Control'],
 		exceptions is [
-			'Registry-backed serving is not available on this backend' - not_available(http_websocket_server_service_registry),
+			'Registry-backed serving is not available on this backend' - existence_error(http_websocket_server_service, registry),
 			'``Control`` is a variable' - instantiation_error,
 			'``Control`` is not registered for an open-ended WebSocket server loop' - existence_error(http_websocket_service_shutdown_control, 'Control')
 		]
@@ -391,13 +391,13 @@
 	:- else.
 
 	serve_until_shutdown(_Listener, _HandshakeHandler, _SessionHandler, _Registry, _Control) :-
-		throw(not_available(http_websocket_server_service_registry)).
+		existence_error(http_websocket_server_service, registry).
 
 	serve_until_shutdown(_Listener, _HandshakeHandler, _SessionHandler, _Registry, _Control, _Options) :-
-		throw(not_available(http_websocket_server_service_registry)).
+		existence_error(http_websocket_server_service, registry).
 
 	request_shutdown(_Control) :-
-		throw(not_available(http_websocket_server_service_registry)).
+		existence_error(http_websocket_server_service, registry).
 
 	:- endif.
 

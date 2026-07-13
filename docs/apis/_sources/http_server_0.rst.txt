@@ -15,7 +15,7 @@ User-facing HTTP(S) server facade built on top of the HTTP transport libraries.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-07-10
+| **Date:** 2026-07-13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls, threaded``
@@ -55,6 +55,32 @@ Opens a listener on the loopback address using the selected scheme and transport
 | **Mode and number of proofs:**
 |    ``open(+integer,--compound,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    The selected transport object does not exist:
+|        ``existence_error(object,Transport)``
+|    The selected transport object does not conform to the HTTP transport protocol:
+|        ``domain_error(http_transport_protocol_object,Transport)``
+|    ``Options`` selects incompatible scheme and transport values:
+|        ``consistency_error(http_server_options,scheme(Scheme),transport(Transport))``
+|    ``Options`` selects incompatible scheme and listener transport values:
+|        ``consistency_error(http_server_options,scheme(Scheme),listener_transport(ListenerTransport))``
+|    ``Port`` is not a non-negative integer or a variable accepted by the selected transport:
+|        ``domain_error(non_negative_integer,Port)``
+|    ``Options`` contains listener options rejected by the selected transport:
+|        ``domain_error(option,Option)``
+|    The selected transport cannot open the listener:
+|        ``resource_error(http_process_transport_listener)``
+
 
 ------------
 
@@ -73,6 +99,34 @@ Opens a listener on the given host using the selected scheme and transport optio
 |    ``open(Host,Port,Server,Options)``
 | **Mode and number of proofs:**
 |    ``open(+atom,+integer,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Host`` is not a valid listener host atom for the selected transport:
+|        ``type_error(atom,Host)``
+|    ``Port`` is not a non-negative integer or a variable accepted by the selected transport:
+|        ``domain_error(non_negative_integer,Port)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    The selected transport object does not exist:
+|        ``existence_error(object,Transport)``
+|    The selected transport object does not conform to the HTTP transport protocol:
+|        ``domain_error(http_transport_protocol_object,Transport)``
+|    ``Options`` selects incompatible scheme and transport values:
+|        ``consistency_error(http_server_options,scheme(Scheme),transport(Transport))``
+|    ``Options`` selects incompatible scheme and listener transport values:
+|        ``consistency_error(http_server_options,scheme(Scheme),listener_transport(ListenerTransport))``
+|    ``Options`` contains listener options rejected by the selected transport:
+|        ``domain_error(option,Option)``
+|    The selected transport cannot open the listener:
+|        ``resource_error(http_process_transport_listener)``
 
 
 ------------
@@ -93,6 +147,16 @@ Closes an open server listener.
 | **Mode and number of proofs:**
 |    ``close(+compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Server`` is a variable:
+|        ``instantiation_error``
+|    ``Server`` is not an open HTTP server handle:
+|        ``domain_error(http_server,Server)``
+|    ``Server`` refers to a listener rejected by the selected transport:
+|        ``domain_error(http_socket_transport_listener,Listener)``
+|    ``Server`` refers to a listener that no longer exists for the selected transport:
+|        ``existence_error(http_socket_transport_listener,Listener)``
+
 
 ------------
 
@@ -111,6 +175,16 @@ Requests shutdown of a blocking accept operation on an open server listener.
 |    ``request_listener_shutdown(Server)``
 | **Mode and number of proofs:**
 |    ``request_listener_shutdown(+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Server`` is a variable:
+|        ``instantiation_error``
+|    ``Server`` is not an HTTP server handle:
+|        ``domain_error(http_server,Server)``
+|    ``Server`` refers to a listener rejected by the selected transport:
+|        ``domain_error(http_socket_transport_listener,Listener)``
+|    ``Server`` refers to a listener that no longer exists for the selected transport:
+|        ``existence_error(http_socket_transport_listener,Listener)``
 
 
 ------------
@@ -131,6 +205,16 @@ Serves a single request on an open server listener.
 | **Mode and number of proofs:**
 |    ``serve_once(+compound,+object_identifier,--compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Server`` is a variable:
+|        ``instantiation_error``
+|    ``Server`` is not an open HTTP server handle:
+|        ``domain_error(http_server,Server)``
+|    ``Handler`` does not conform to the HTTP handler protocol:
+|        ``domain_error(http_handler_protocol,Handler)``
+|    The delegated HTTP server rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+
 
 ------------
 
@@ -149,6 +233,20 @@ Serves a single WebSocket opening handshake on an open server listener.
 |    ``serve_websocket_once(Server,Handler,Connection,Response,ClientInfo)``
 | **Mode and number of proofs:**
 |    ``serve_websocket_once(+compound,+object_identifier,--compound,--compound,--compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Server`` is a variable:
+|        ``instantiation_error``
+|    ``Server`` is not an open HTTP server handle:
+|        ``domain_error(http_server,Server)``
+|    ``Handler`` does not conform to the HTTP handler protocol:
+|        ``domain_error(http_handler_protocol,Handler)``
+|    The WebSocket opening request does not exist:
+|        ``existence_error(http_socket_transport_websocket_request,end_of_file)``
+|    The WebSocket opening response is invalid:
+|        ``domain_error(http_socket_transport_websocket_response,Response)``
+|    The delegated HTTP server rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
 
 
 ------------
@@ -170,6 +268,42 @@ Serves a bounded number of requests on an open server, or opens a loopback liste
 |    ``serve(+compound,+object_identifier,+integer,--list)`` - ``one_or_error``
 |    ``serve(+integer,+object_identifier,+integer,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``ServerOrPort`` is a variable:
+|        ``instantiation_error``
+|    ``ServerOrPort`` is neither a variable nor a compound or integer:
+|        ``type_error(atom_or_compound,ServerOrPort)``
+|    ``ServerOrPort`` is a compound term but not an open HTTP server handle:
+|        ``domain_error(http_server,ServerOrPort)``
+|    ``Count`` is a variable:
+|        ``instantiation_error``
+|    ``Count`` is not a non-negative integer:
+|        ``domain_error(non_negative_integer,Count)``
+|    ``ClientInfosOrOptions`` is a variable when opening a listener from a port:
+|        ``instantiation_error``
+|    ``ClientInfosOrOptions`` is neither a variable nor a list when opening a listener from a port:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``ClientInfosOrOptions`` is a variable when opening a listener from a port:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``ClientInfosOrOptions`` is neither a variable nor a compound term when opening a listener from a port:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``ClientInfosOrOptions`` is a compound term but not a valid option when opening a listener from a port:
+|        ``domain_error(option,Option)``
+|    ``Handler`` does not conform to the HTTP handler protocol:
+|        ``domain_error(http_handler_protocol,Handler)``
+|    The selected transport object does not exist when opening a listener from a port:
+|        ``existence_error(object,Transport)``
+|    The selected transport object does not conform to the HTTP transport protocol when opening a listener from a port:
+|        ``domain_error(http_transport_protocol_object,Transport)``
+|    ``ClientInfosOrOptions`` selects incompatible scheme and transport values when opening a listener from a port:
+|        ``consistency_error(http_server_options,scheme(Scheme),transport(Transport))``
+|    ``ClientInfosOrOptions`` selects incompatible scheme and listener transport values when opening a listener from a port:
+|        ``consistency_error(http_server_options,scheme(Scheme),listener_transport(ListenerTransport))``
+|    The delegated HTTP server rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+|    Thread workers are not available on this backend:
+|        ``resource_error(threads)``
+
 
 ------------
 
@@ -190,6 +324,46 @@ Serves a bounded number of requests on an open server, or opens a loopback liste
 |    ``serve(+compound,+object_identifier,+integer,--list,+list)`` - ``one_or_error``
 |    ``serve(+integer,+object_identifier,+integer,--list,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``ServerOrPort`` is a variable:
+|        ``instantiation_error``
+|    ``ServerOrPort`` is neither a variable nor a compound or integer:
+|        ``type_error(atom_or_compound,ServerOrPort)``
+|    ``ServerOrPort`` is a compound term but not an open HTTP server handle:
+|        ``domain_error(http_server,ServerOrPort)``
+|    ``Count`` is a variable:
+|        ``instantiation_error``
+|    ``Count`` is not a non-negative integer:
+|        ``domain_error(non_negative_integer,Count)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    ``Options`` contains an option that is not valid for serving on an already open server:
+|        ``domain_error(http_server_serve_option,Option)``
+|    ``Handler`` does not conform to the HTTP handler protocol:
+|        ``domain_error(http_handler_protocol,Handler)``
+|    The selected transport object does not exist when opening a listener from a port:
+|        ``existence_error(object,Transport)``
+|    The selected transport object does not conform to the HTTP transport protocol when opening a listener from a port:
+|        ``domain_error(http_transport_protocol_object,Transport)``
+|    ``Options`` selects incompatible scheme and transport values when opening a listener from a port:
+|        ``consistency_error(http_server_options,scheme(Scheme),transport(Transport))``
+|    ``Options`` selects incompatible scheme and listener transport values when opening a listener from a port:
+|        ``consistency_error(http_server_options,scheme(Scheme),listener_transport(ListenerTransport))``
+|    ``Options`` contains listener-serving options rejected by the selected transport:
+|        ``domain_error(http_socket_transport_listener_option,Option)``
+|    The delegated HTTP server rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+|    Thread workers are not available on this backend:
+|        ``resource_error(threads)``
+
 
 ------------
 
@@ -209,6 +383,44 @@ Opens a listener on the given host, serves a bounded number of requests, and clo
 | **Mode and number of proofs:**
 |    ``serve(+atom,+integer,+object_identifier,+integer,--list,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Host`` is not a valid listener host atom for the selected transport:
+|        ``type_error(atom,Host)``
+|    ``Port`` is not a non-negative integer or a variable accepted by the selected transport:
+|        ``domain_error(non_negative_integer,Port)``
+|    ``Count`` is a variable:
+|        ``instantiation_error``
+|    ``Count`` is not a non-negative integer:
+|        ``domain_error(non_negative_integer,Count)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    The selected transport object does not exist:
+|        ``existence_error(object,Transport)``
+|    The selected transport object does not conform to the HTTP transport protocol:
+|        ``domain_error(http_transport_protocol_object,Transport)``
+|    ``Options`` selects incompatible scheme and transport values:
+|        ``consistency_error(http_server_options,scheme(Scheme),transport(Transport))``
+|    ``Options`` selects incompatible scheme and listener transport values:
+|        ``consistency_error(http_server_options,scheme(Scheme),listener_transport(ListenerTransport))``
+|    ``Options`` contains listener-serving options rejected by the selected transport:
+|        ``domain_error(http_socket_transport_listener_option,Option)``
+|    ``Handler`` does not conform to the HTTP handler protocol:
+|        ``domain_error(http_handler_protocol,Handler)``
+|    The delegated HTTP server rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+|    Thread workers are not available on this backend:
+|        ``resource_error(threads)``
+|    The selected transport cannot open or close the listener:
+|        ``resource_error(http_process_transport_listener)``
+
 
 ------------
 
@@ -227,6 +439,44 @@ Opens a listener on the given host and serves requests until shutdown is request
 |    ``serve_until_shutdown(Host,Port,Handler,Control,Options)``
 | **Mode and number of proofs:**
 |    ``serve_until_shutdown(+atom,+integer,+object_identifier,+nonvar,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Host`` is not a valid listener host atom for the selected transport:
+|        ``type_error(atom,Host)``
+|    ``Port`` is not a non-negative integer or a variable accepted by the selected transport:
+|        ``domain_error(non_negative_integer,Port)``
+|    ``Control`` is a variable:
+|        ``instantiation_error``
+|    ``Control`` is already registered for another open-ended server loop:
+|        ``permission_error(open,http_server_shutdown_control,Control)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    The selected transport object does not exist:
+|        ``existence_error(object,Transport)``
+|    The selected transport object does not conform to the HTTP transport protocol:
+|        ``domain_error(http_transport_protocol_object,Transport)``
+|    ``Options`` selects incompatible scheme and transport values:
+|        ``consistency_error(http_server_options,scheme(Scheme),transport(Transport))``
+|    ``Options`` selects incompatible scheme and listener transport values:
+|        ``consistency_error(http_server_options,scheme(Scheme),listener_transport(ListenerTransport))``
+|    ``Options`` contains listener-serving options rejected by the selected transport:
+|        ``domain_error(http_socket_transport_listener_option,Option)``
+|    ``Handler`` does not conform to the HTTP handler protocol:
+|        ``domain_error(http_handler_protocol,Handler)``
+|    The delegated HTTP server rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+|    Thread workers are not available on this backend:
+|        ``resource_error(threads)``
+|    The selected transport cannot open the listener:
+|        ``resource_error(http_process_transport_listener)``
 
 
 ------------
@@ -249,6 +499,44 @@ Opens a listener on the given host, calls Ready after shutdown control registrat
 | **Mode and number of proofs:**
 |    ``serve_until_shutdown(+atom,+integer,+object_identifier,+nonvar,+list,+callable)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Host`` is not a valid listener host atom for the selected transport:
+|        ``type_error(atom,Host)``
+|    ``Port`` is not a non-negative integer or a variable accepted by the selected transport:
+|        ``domain_error(non_negative_integer,Port)``
+|    ``Control`` is a variable:
+|        ``instantiation_error``
+|    ``Control`` is already registered for another open-ended server loop:
+|        ``permission_error(open,http_server_shutdown_control,Control)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    The selected transport object does not exist:
+|        ``existence_error(object,Transport)``
+|    The selected transport object does not conform to the HTTP transport protocol:
+|        ``domain_error(http_transport_protocol_object,Transport)``
+|    ``Options`` selects incompatible scheme and transport values:
+|        ``consistency_error(http_server_options,scheme(Scheme),transport(Transport))``
+|    ``Options`` selects incompatible scheme and listener transport values:
+|        ``consistency_error(http_server_options,scheme(Scheme),listener_transport(ListenerTransport))``
+|    ``Options`` contains listener-serving options rejected by the selected transport:
+|        ``domain_error(http_socket_transport_listener_option,Option)``
+|    ``Handler`` does not conform to the HTTP handler protocol:
+|        ``domain_error(http_handler_protocol,Handler)``
+|    The delegated HTTP server rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+|    Thread workers are not available on this backend:
+|        ``resource_error(threads)``
+|    The selected transport cannot open the listener:
+|        ``resource_error(http_process_transport_listener)``
+
 
 ------------
 
@@ -267,6 +555,14 @@ Requests shutdown of an open-ended server loop.
 |    ``request_shutdown(Control)``
 | **Mode and number of proofs:**
 |    ``request_shutdown(+nonvar)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Control`` is a variable:
+|        ``instantiation_error``
+|    ``Control`` is not registered for an open-ended server loop:
+|        ``existence_error(http_server_shutdown_control,Control)``
+|    Thread-backed shutdown is not available on this backend:
+|        ``resource_error(threads)``
 
 
 ------------
@@ -306,6 +602,40 @@ Starts an open-ended loopback server in a worker thread and waits until it is re
 | **Mode and number of proofs:**
 |    ``start(+integer,+object_identifier,--compound,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Port`` is not a non-negative integer or a variable accepted by the selected transport:
+|        ``domain_error(non_negative_integer,Port)``
+|    ``Options`` specifies a variable shutdown control:
+|        ``instantiation_error``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    The selected transport object does not exist:
+|        ``existence_error(object,Transport)``
+|    The selected transport object does not conform to the HTTP transport protocol:
+|        ``domain_error(http_transport_protocol_object,Transport)``
+|    ``Options`` selects incompatible scheme and transport values:
+|        ``consistency_error(http_server_options,scheme(Scheme),transport(Transport))``
+|    ``Options`` selects incompatible scheme and listener transport values:
+|        ``consistency_error(http_server_options,scheme(Scheme),listener_transport(ListenerTransport))``
+|    ``Options`` contains listener-serving options rejected by the selected transport:
+|        ``domain_error(http_socket_transport_listener_option,Option)``
+|    ``Handler`` does not conform to the HTTP handler protocol:
+|        ``domain_error(http_handler_protocol,Handler)``
+|    The delegated HTTP server rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+|    The selected transport cannot open the listener:
+|        ``resource_error(http_process_transport_listener)``
+|    Thread support is not available:
+|        ``resource_error(threads)``
+
 
 ------------
 
@@ -325,6 +655,42 @@ Starts an open-ended server in a worker thread and waits until it is ready to ac
 | **Mode and number of proofs:**
 |    ``start(+atom,+integer,+object_identifier,--compound,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Host`` is not a valid listener host atom for the selected transport:
+|        ``type_error(atom,Host)``
+|    ``Port`` is not a non-negative integer or a variable accepted by the selected transport:
+|        ``domain_error(non_negative_integer,Port)``
+|    ``Options`` specifies a variable shutdown control:
+|        ``instantiation_error``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    The selected transport object does not exist:
+|        ``existence_error(object,Transport)``
+|    The selected transport object does not conform to the HTTP transport protocol:
+|        ``domain_error(http_transport_protocol_object,Transport)``
+|    ``Options`` selects incompatible scheme and transport values:
+|        ``consistency_error(http_server_options,scheme(Scheme),transport(Transport))``
+|    ``Options`` selects incompatible scheme and listener transport values:
+|        ``consistency_error(http_server_options,scheme(Scheme),listener_transport(ListenerTransport))``
+|    ``Options`` contains listener-serving options rejected by the selected transport:
+|        ``domain_error(http_socket_transport_listener_option,Option)``
+|    ``Handler`` does not conform to the HTTP handler protocol:
+|        ``domain_error(http_handler_protocol,Handler)``
+|    The delegated HTTP server rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+|    The selected transport cannot open the listener:
+|        ``resource_error(http_process_transport_listener)``
+|    Thread support is not available:
+|        ``resource_error(threads)``
+
 
 ------------
 
@@ -343,6 +709,14 @@ Requests shutdown of a threaded server and waits for the worker thread to finish
 |    ``stop(Server)``
 | **Mode and number of proofs:**
 |    ``stop(+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Server`` is a variable:
+|        ``instantiation_error``
+|    ``Server`` is not a threaded HTTP server handle:
+|        ``domain_error(http_server,Server)``
+|    Thread support is not available:
+|        ``resource_error(threads)``
 
 
 ------------

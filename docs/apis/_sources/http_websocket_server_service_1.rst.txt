@@ -15,7 +15,7 @@ Server-side convenience for callback-driven WebSocket sessions with atom text re
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-07-09
+| **Date:** 2026-07-13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls, threaded``
@@ -115,7 +115,7 @@ Accepts one incoming socket connection on the given listener created by the sele
 |    ``Options`` contains an invalid WebSocket service loop option:
 |        ``domain_error(http_websocket_service_option,Option)``
 |    Timed session-loop options are not available on this backend:
-|        ``not_available(http_websocket_service_timing)``
+|        ``existence_error(http_websocket_service,timing)``
 |    The upgraded connection handle is invalid:
 |        ``domain_error(http_socket_transport_connection,Connection)``
 |    The delegated session loop raises a WebSocket session error:
@@ -152,7 +152,7 @@ Accepts WebSocket opening handshakes on the given listener created by the select
 
 | **Exceptions:**
 |    Registry-backed serving is not available on this backend:
-|        ``not_available(http_websocket_server_service_registry)``
+|        ``existence_error(http_websocket_server_service,registry)``
 |    ``Registry`` is not an open WebSocket service registry handle:
 |        ``domain_error(http_websocket_service_registry,Registry)``
 |    ``Registry`` refers to a closed WebSocket service registry handle:
@@ -198,7 +198,7 @@ Accepts WebSocket opening handshakes on the given listener created by the select
 
 | **Exceptions:**
 |    Registry-backed serving is not available on this backend:
-|        ``not_available(http_websocket_server_service_registry)``
+|        ``existence_error(http_websocket_server_service,registry)``
 |    ``Registry`` is not an open WebSocket service registry handle:
 |        ``domain_error(http_websocket_service_registry,Registry)``
 |    ``Registry`` refers to a closed WebSocket service registry handle:
@@ -214,7 +214,7 @@ Accepts WebSocket opening handshakes on the given listener created by the select
 |    ``Options`` contains an invalid WebSocket service loop option:
 |        ``domain_error(http_websocket_service_option,Option)``
 |    Timed session-loop options are not available on this backend:
-|        ``not_available(http_websocket_service_timing)``
+|        ``existence_error(http_websocket_service,timing)``
 |    The WebSocket opening response is invalid:
 |        ``domain_error(http_socket_transport_websocket_response,Response)``
 |    ``SessionHandler`` is a variable:
@@ -254,7 +254,7 @@ Requests shutdown of a registry-backed server loop started with serve_until_shut
 
 | **Exceptions:**
 |    Registry-backed serving is not available on this backend:
-|        ``not_available(http_websocket_server_service_registry)``
+|        ``existence_error(http_websocket_server_service,registry)``
 |    ``Control`` is a variable:
 |        ``instantiation_error``
 |    ``Control`` is not registered for an open-ended WebSocket server loop:

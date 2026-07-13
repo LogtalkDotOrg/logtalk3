@@ -1,12 +1,15 @@
-.. index:: single: s3_session(A)
+.. index:: single: s3_session(HTTPTransport)
 .. _s3_session/1:
 
 .. rst-class:: right
 
 **object**
 
-``s3_session(A)``
-=================
+``s3_session(HTTPTransport)``
+=============================
+
+* ``HTTPTransport`` - The object implementing ``http_transport_protocol``.
+
 
 Explicit S3 client sessions carrying default request options.
 
@@ -15,7 +18,7 @@ Explicit S3 client sessions carrying default request options.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-07-09
+| **Date:** 2026-07-13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``

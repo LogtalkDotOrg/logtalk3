@@ -15,7 +15,7 @@ Client-side convenience for callback-driven WebSocket sessions with atom text re
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-07-09
+| **Date:** 2026-07-13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -132,7 +132,7 @@ Builds a WebSocket opening handshake from the given absolute WebSocket URL suppo
 |    ``Options`` contains an invalid WebSocket service loop option:
 |        ``domain_error(http_websocket_service_option,Option)``
 |    Timed session-loop options are not available on this backend:
-|        ``not_available(http_websocket_service_timing)``
+|        ``existence_error(http_websocket_service,timing)``
 |    The WebSocket server rejects the opening handshake version:
 |        ``domain_error(http_client_websocket_version_rejection,Response)``
 |    The WebSocket server rejects authentication:

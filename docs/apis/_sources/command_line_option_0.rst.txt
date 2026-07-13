@@ -14,8 +14,8 @@ Category for defining command-line options. Import this category into objects th
 |    ``logtalk_load(command_line_options(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-02-20
+| **Version:** 1:1:0
+| **Date:** 2026-07-13
 
 | **Compilation flags:**
 |    ``static``
@@ -52,7 +52,13 @@ Checks if the command-line option definition is valid. Throws an error if the de
 |    ``check`` - ``one_or_error``
 
 | **Exceptions:**
-|    The importing object is missing ``name/1`` or returns values with invalid types for the option declaration predicates:
+|    The importing object does not define the ``name/1`` predicate:
+|        ``existence_error(procedure,name/1)``
+|    The argument of the ``name/1`` predicate is a variable:
+|        ``instantiation_error``
+|    The argument ``Name`` of the ``name/1`` predicate is neither a variable nor an atom:
+|        ``type_error(atom,Name)``
+|    The importing returns values with invalid types for the option declaration predicates:
 |        ``error``
 
 

@@ -37,9 +37,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Marcus Uneson and Paulo Moura',
-		date is 2026-02-20,
+		date is 2026-07-13,
 		comment is 'Command line options parsing predicates. Uses object-based option specifications with the ``command_line_option`` category.',
 		see_also is [command_line_option]
 	]).
@@ -47,21 +47,48 @@
 	:- public(parse/4).
 	:- mode(parse(+list(object), +list(atom), -list, -list(atom)), one_or_error).
 	:- info(parse/4, [
-		comment is 'Parses the arguments ``ApplArguments`` according to the option objects ``OptionObjects`` using default parsing options.',
-		argnames is ['OptionObjects', 'ApplArguments', 'Options', 'PositionalArguments'],
+		comment is 'Parses the arguments ``AppArguments`` according to the option objects ``OptionObjects`` using default parsing options.',
+		argnames is ['OptionObjects', 'AppArguments', 'Options', 'PositionalArguments'],
 		exceptions is [
-			'Any exception that can be thrown by ``parse/5`` using the default parsing options' - error
+			'``OptionObjects`` is a variable, a partial list, or contains an option object definition with an insufficiently instantiated value' - instantiation_error,
+			'``OptionObjects`` is neither a variable nor a list of valid object identifiers' - type_error(list(object), 'OptionObjects'),
+			'An option object is missing the ``name/1`` predicate' - existence_error(predicate, name/1),
+			'An option object predicate returns a value with an invalid type' - type_error('Type', 'Term'),
+			'An option object predicate returns a value outside the expected domain' - domain_error('Domain', 'Term'),
+			'The option set contains a duplicate option name' - domain_error(unique_key, 'Name'),
+			'The option set contains a duplicate short flag' - domain_error(unique_short_flag, 'ShortFlag'),
+			'The option set contains a duplicate long flag' - domain_error(unique_long_flag, 'LongFlag'),
+			'``AppArguments`` is a variable or a partial list' - instantiation_error,
+			'``AppArguments`` is neither a variable nor a list of atoms' - type_error(list(atom), 'AppArguments'),
+			'An unknown flag is found' - existence_error(command_line_option, 'Argument'),
+			'A flag value cannot be parsed as the option type' - type_error(flag_value, 'Type'),
+			'A short option is written using the disallowed ``-f=value`` syntax' - syntax_error('disallowed: <shortflag>=<value>')
 		]
 	]).
 
 	:- public(parse/5).
 	:- mode(parse(+list(object), +list(atom), -list, -list(atom), +list), one_or_error).
 	:- info(parse/5, [
-		comment is 'Parses the arguments ``ApplArguments`` according to the option objects ``OptionObjects`` and the parsing options ``ParseOptions``. ``Options`` is a list of parsed options as ``Name(Value)`` terms by default (or ``Func(Name,Value)`` when the ``output_functor(Func)`` parse option is used). ``PositionalArguments`` are the remaining non-dashed arguments. ``ParseOptions`` include ``output_functor(Func)``, ``duplicated_flags(Keep)`` (one of ``keepfirst``, ``keeplast``, ``keepall``; default ``keeplast``), and ``allow_empty_flag_spec(Bool)`` (default ``true``).',
-		argnames is ['OptionObjects', 'ApplArguments', 'Options', 'PositionalArguments', 'ParseOptions'],
+		comment is 'Parses the arguments ``AppArguments`` according to the option objects ``OptionObjects`` and the parsing options ``ParseOptions``. ``Options`` is a list of parsed options as ``Name(Value)`` terms by default (or ``Func(Name,Value)`` when the ``output_functor(Func)`` parse option is used). ``PositionalArguments`` are the remaining non-dashed arguments. ``ParseOptions`` include ``output_functor(Func)``, ``duplicated_flags(Keep)`` (one of ``keepfirst``, ``keeplast``, ``keepall``; default ``keeplast``), and ``allow_empty_flag_spec(Bool)`` (default ``true``).',
+		argnames is ['OptionObjects', 'AppArguments', 'Options', 'PositionalArguments', 'ParseOptions'],
 		exceptions is [
-			'``OptionObjects`` is not a list of valid option objects or the option set contains duplicate names or flags' - error,
-			'``ApplArguments`` is not a list of atoms, an unknown flag is found, a flag value cannot be parsed, or ``ParseOptions`` contains an invalid option' - error,
+			'``ParseOptions`` is a variable, a partial list, or contains a variable option' - instantiation_error,
+			'``ParseOptions`` is neither a variable nor a list' - type_error(list, 'ParseOptions'),
+			'An element of ``ParseOptions`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element of ``ParseOptions`` is a compound term but not a valid option' - domain_error(option, 'Option'),
+			'``OptionObjects`` is a variable, a partial list, or contains an option object definition with an insufficiently instantiated value' - instantiation_error,
+			'``OptionObjects`` is neither a variable nor a list of valid object identifiers' - type_error(list(object), 'OptionObjects'),
+			'An option object is missing the ``name/1`` predicate' - existence_error(predicate, name/1),
+			'An option object predicate returns a value with an invalid type' - type_error('Type', 'Term'),
+			'An option object predicate returns a value outside the expected domain' - domain_error('Domain', 'Term'),
+			'The option set contains a duplicate option name' - domain_error(unique_key, 'Name'),
+			'The option set contains a duplicate short flag' - domain_error(unique_short_flag, 'ShortFlag'),
+			'The option set contains a duplicate long flag' - domain_error(unique_long_flag, 'LongFlag'),
+			'An option has no short or long flags and empty flag specifications are disallowed' - domain_error(non_empty_flag_spec, 'Name'),
+			'``AppArguments`` is a variable or a partial list' - instantiation_error,
+			'``AppArguments`` is neither a variable nor a list of atoms' - type_error(list(atom), 'AppArguments'),
+			'An unknown flag is found' - existence_error(command_line_option, 'Argument'),
+			'A flag value cannot be parsed as the option type' - type_error(flag_value, 'Type'),
 			'A short option is written using the disallowed ``-f=value`` syntax' - syntax_error('disallowed: <shortflag>=<value>')
 		]
 	]).
@@ -72,18 +99,36 @@
 		comment is 'Synthesizes a help text ``Help`` as an atom from the option objects ``OptionObjects`` using default help options.',
 		argnames is ['OptionObjects', 'Help'],
 		exceptions is [
-			'Any exception that can be thrown by ``help/3`` using the default help options' - error
+			'``OptionObjects`` is a variable, a partial list, or contains an option object definition with an insufficiently instantiated value' - instantiation_error,
+			'``OptionObjects`` is neither a variable nor a list of valid object identifiers' - type_error(list(object), 'OptionObjects'),
+			'An option object is missing the ``name/1`` predicate' - existence_error(predicate, name/1),
+			'An option object predicate returns a value with an invalid type' - type_error('Type', 'Term'),
+			'An option object predicate returns a value outside the expected domain' - domain_error('Domain', 'Term'),
+			'The option set contains a duplicate option name' - domain_error(unique_key, 'Name'),
+			'The option set contains a duplicate short flag' - domain_error(unique_short_flag, 'ShortFlag'),
+			'The option set contains a duplicate long flag' - domain_error(unique_long_flag, 'LongFlag')
 		]
 	]).
 
 	:- public(help/3).
 	:- mode(help(+list(object), -atom, +list), one_or_error).
 	:- info(help/3, [
-		comment is 'Synthesizes a help text ``Help`` as an atom from the option objects ``OptionObjects`` using the given ``HelpOptions``. ``HelpOptions`` include ``line_width(Width)`` (default 80), ``min_help_width(Width)`` (default 40), ``break_long_flags(Boolean)`` (default ``false``), and ``suppress_empty_meta(Boolean)`` (default ``true``).',
+		comment is 'Synthesizes a help text ``Help`` as an atom from the option objects ``OptionObjects`` using the given ``HelpOptions``. ``HelpOptions`` include ``line_width(Width)`` (default 80), ``min_help_width(Width)`` (default 40), ``break_long_flags(Boolean)`` (default ``false``), ``suppress_empty_meta(Boolean)`` (default ``true``), and ``allow_empty_flag_spec(Bool)`` (default ``true``).',
 		argnames is ['OptionObjects', 'Help', 'HelpOptions'],
 		exceptions is [
-			'``OptionObjects`` is not a list of valid option objects or the option set contains duplicate names or flags' - error,
-			'``HelpOptions`` contains an invalid option or invalid option value' - error
+			'``HelpOptions`` is a variable, a partial list, or contains a variable option' - instantiation_error,
+			'``HelpOptions`` is neither a variable nor a list' - type_error(list, 'HelpOptions'),
+			'An element of ``HelpOptions`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element of ``HelpOptions`` is a compound term but not a valid option' - domain_error(option, 'Option'),
+			'``OptionObjects`` is a variable, a partial list, or contains an option object definition with an insufficiently instantiated value' - instantiation_error,
+			'``OptionObjects`` is neither a variable nor a list of valid object identifiers' - type_error(list(object), 'OptionObjects'),
+			'An option object is missing the ``name/1`` predicate' - existence_error(predicate, name/1),
+			'An option object predicate returns a value with an invalid type' - type_error('Type', 'Term'),
+			'An option object predicate returns a value outside the expected domain' - domain_error('Domain', 'Term'),
+			'The option set contains a duplicate option name' - domain_error(unique_key, 'Name'),
+			'The option set contains a duplicate short flag' - domain_error(unique_short_flag, 'ShortFlag'),
+			'The option set contains a duplicate long flag' - domain_error(unique_long_flag, 'LongFlag'),
+			'An option has no short or long flags and empty flag specifications are disallowed' - domain_error(non_empty_flag_spec, 'Name')
 		]
 	]).
 
@@ -115,15 +160,15 @@
 		atomic_list_concat/2, atomic_list_concat/3
 	]).
 
-	parse(OptionObjects, ApplArguments, Options, PositionalArguments, UserParseOptions) :-
+	parse(OptionObjects, AppArguments, Options, PositionalArguments, UserParseOptions) :-
 		^^check_options(UserParseOptions),
 		^^merge_options(UserParseOptions, ParseOptions),
 		check_option_objects(OptionObjects, SortedOptionObjects, ParseOptions),
 		objects_to_specs(SortedOptionObjects, Specs),
-		parse_(Specs, ApplArguments, Options, PositionalArguments, ParseOptions).
+		parse_(Specs, AppArguments, Options, PositionalArguments, ParseOptions).
 
-	parse(OptionObjects, ApplArguments, Options, PositionalArguments) :-
-		parse(OptionObjects, ApplArguments, Options, PositionalArguments, []).
+	parse(OptionObjects, AppArguments, Options, PositionalArguments) :-
+		parse(OptionObjects, AppArguments, Options, PositionalArguments, []).
 
 	help(OptionObjects, Help, UserHelpOptions) :-
 		^^check_options(UserHelpOptions),
