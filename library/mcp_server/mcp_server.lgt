@@ -23,12 +23,12 @@
 	imports(options)).
 
 	:- info([
-		version is 0:5:1,
+		version is 0:5:2,
 		author is 'Paulo Moura',
-		date is 2026-03-13,
+		date is 2026-07-13,
 		comment is 'MCP (Model Context Protocol) server for Logtalk applications. Exposes Logtalk objects implementing the ``mcp_tool_protocol`` and optionally ``mcp_prompt_protocol`` and ``mcp_resource_protocol`` protocols as MCP tool, prompt, and resource providers over stdio transport with Content-Length framing. Implements the MCP 2025-03-26 specification. Uses the ``json_rpc`` library for JSON-RPC 2.0 message handling.',
 		remarks is [
-			'MCP specification' - 'Implements the Model Context Protocol 2025-03-26: https://spec.modelcontextprotocol.io/specification/2025-03-26/',
+			'MCP specification' - 'Implements the Model Context Protocol 2025-03-26 (https://spec.modelcontextprotocol.io/specification/2025-03-26/).',
 			'Transport' - 'Uses stdio (standard input/output) with Content-Length header framing as defined by the MCP specification.',
 			'Version negotiation' - 'During initialization, the server performs protocol version negotiation. The client sends its highest supported version in the ``initialize`` request. The server selects the highest version it supports that is compatible (i.e., less than or equal to the client version). If no compatible version exists, the server responds with error ``-32602`` (\"Unsupported protocol version\") including a ``data`` field with the list of supported versions.',
 			'Capabilities' - 'Supports the tools capability (``tools/list`` and ``tools/call``). Optionally supports the prompts capability (``prompts/list`` and ``prompts/get``) when the application declares it via ``capabilities/1`` and implements ``mcp_prompt_protocol``. Optionally supports the resources capability (``resources/list`` and ``resources/read``) when the application declares it via ``capabilities/1`` and implements ``mcp_resource_protocol``. Optionally supports the elicitation capability (``elicitation/create``) when the application declares it via ``capabilities/1``.',

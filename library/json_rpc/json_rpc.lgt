@@ -22,12 +22,12 @@
 :- object(json_rpc).
 
 	:- info([
-		version is 1:0:3,
+		version is 1:0:4,
 		author is 'Paulo Moura',
-		date is 2026-07-02,
+		date is 2026-07-13,
 		comment is 'JSON-RPC 2.0 protocol encoding and decoding. Provides predicates for constructing and parsing JSON-RPC 2.0 request, notification, response, and error objects. Uses the ``json`` library for JSON parsing and generation.',
 		remarks is [
-			'Specification' - 'Implements the JSON-RPC 2.0 specification: https://www.jsonrpc.org/specification',
+			'Specification' - 'Implements the JSON-RPC 2.0 specification (https://www.jsonrpc.org/specification).',
 			'JSON representation' - 'Uses the ``json`` library default representation: curly terms for objects, dashes for pairs, and atoms for strings.',
 			'Request' - 'A JSON-RPC 2.0 request is represented as ``{jsonrpc-''2.0'', method-Method, params-Params, id-Id}``.',
 			'Notification' - 'A JSON-RPC 2.0 notification is represented as ``{jsonrpc-''2.0'', method-Method, params-Params}``.',
