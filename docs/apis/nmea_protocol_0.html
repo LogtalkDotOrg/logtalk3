@@ -403,8 +403,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-05-10</div>
+<div class="line"><strong>Version:</strong> 2:0:0</div>
+<div class="line"><strong>Date:</strong> 2026-07-13</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -472,9 +472,17 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Any exception defined by the implementing NMEA parser for invalid sources, options, or malformed sentence data:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> is a variable or contains a variable source argument:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> is neither a variable nor a valid source specification:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(nmea_source,Source)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> is a valid source specification but contains a line that cannot be parsed as a sentence:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(nmea_sentence,Line)</span></code></div>
 </div>
 </div>
 </div>
@@ -492,16 +500,28 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">parse(Source,Options,Sentences)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">parse(Source,Sentences,Options)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">parse(++compound,++list(compound),--list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">parse(++compound,--list(compound),++list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> is a variable or contains a variable source argument:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> is neither a variable nor a valid source specification:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(nmea_source,Source)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Source</span></code> is a valid source specification but contains a line that cannot be parsed as a sentence:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(nmea_sentence,Line)</span></code></div>
+</div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable or a partial list:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
@@ -517,10 +537,6 @@
 <div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is a compound term but not a valid option:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
-</div>
-<div class="line">Any exception defined by the implementing NMEA parser for invalid sources, options, or malformed sentence data:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">error</span></code></div>
 </div>
 </div>
 </div>

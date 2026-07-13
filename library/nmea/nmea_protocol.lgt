@@ -22,9 +22,9 @@
 :- protocol(nmea_protocol).
 
 	:- info([
-		version is 1:0:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-10,
+		date is 2026-07-13,
 		comment is 'Protocol for parsing NMEA 0183 sentences and projecting supported sentence types into typed semantic terms.'
 	]).
 
@@ -34,21 +34,25 @@
 		comment is 'Parses NMEA sentences from a source specification into canonical raw sentence terms. Supported source specifications are ``atom(Atom)``, ``chars(List)``, ``codes(List)``, ``stream(Stream)``, and ``file(Path)``.',
 		argnames is ['Source', 'Sentences'],
 		exceptions is [
-			'Any exception defined by the implementing NMEA parser for invalid sources, options, or malformed sentence data' - error
+			'``Source`` is a variable or contains a variable source argument' - instantiation_error,
+			'``Source`` is neither a variable nor a valid source specification' - domain_error(nmea_source, 'Source'),
+			'``Source`` is a valid source specification but contains a line that cannot be parsed as a sentence' - domain_error(nmea_sentence, 'Line')
 		]
 	]).
 
 	:- public(parse/3).
-	:- mode(parse(++compound, ++list(compound), --list(compound)), one_or_error).
+	:- mode(parse(++compound, --list(compound), ++list(compound)), one_or_error).
 	:- info(parse/3, [
 		comment is 'Parses NMEA sentences from a source specification using parser options. Supported options are ``checksum(required)``, ``checksum(optional)``, ``checksum(ignore)``, ``unknown_type(keep)``, and ``unknown_type(error)``.',
-		argnames is ['Source', 'Options', 'Sentences'],
+		argnames is ['Source', 'Sentences', 'Options'],
 		exceptions is [
+			'``Source`` is a variable or contains a variable source argument' - instantiation_error,
+			'``Source`` is neither a variable nor a valid source specification' - domain_error(nmea_source, 'Source'),
+			'``Source`` is a valid source specification but contains a line that cannot be parsed as a sentence' - domain_error(nmea_sentence, 'Line'),
 			'``Options`` is a variable or a partial list' - instantiation_error,
 			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
 			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
-			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
-			'Any exception defined by the implementing NMEA parser for invalid sources, options, or malformed sentence data' - error
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option')
 		]
 	]).
 

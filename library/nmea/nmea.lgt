@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:1:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-21,
+		date is 2026-07-13,
 		comment is 'Parser for NMEA 0183 sentences with typed semantic decoding for selected GPS/GNSS sentence types.'
 	]).
 
@@ -39,9 +39,9 @@
 	]).
 
 	parse(Source, Sentences) :-
-		parse(Source, [], Sentences).
+		parse(Source, Sentences, []).
 
-	parse(Source, UserOptions, Sentences) :-
+	parse(Source, Sentences, UserOptions) :-
 		source_codes(Source, Codes),
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),

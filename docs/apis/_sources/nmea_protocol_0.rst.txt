@@ -14,8 +14,8 @@ Protocol for parsing NMEA 0183 sentences and projecting supported sentence types
 |    ``logtalk_load(nmea(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-05-10
+| **Version:** 2:0:0
+| **Date:** 2026-07-13
 
 | **Compilation flags:**
 |    ``static``
@@ -55,8 +55,12 @@ Parses NMEA sentences from a source specification into canonical raw sentence te
 |    ``parse(++compound,--list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
-|    Any exception defined by the implementing NMEA parser for invalid sources, options, or malformed sentence data:
-|        ``error``
+|    ``Source`` is a variable or contains a variable source argument:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid source specification:
+|        ``domain_error(nmea_source,Source)``
+|    ``Source`` is a valid source specification but contains a line that cannot be parsed as a sentence:
+|        ``domain_error(nmea_sentence,Line)``
 
 
 ------------
@@ -73,11 +77,17 @@ Parses NMEA sentences from a source specification using parser options. Supporte
 |    ``static``
 
 | **Template:**
-|    ``parse(Source,Options,Sentences)``
+|    ``parse(Source,Sentences,Options)``
 | **Mode and number of proofs:**
-|    ``parse(++compound,++list(compound),--list(compound))`` - ``one_or_error``
+|    ``parse(++compound,--list(compound),++list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
+|    ``Source`` is a variable or contains a variable source argument:
+|        ``instantiation_error``
+|    ``Source`` is neither a variable nor a valid source specification:
+|        ``domain_error(nmea_source,Source)``
+|    ``Source`` is a valid source specification but contains a line that cannot be parsed as a sentence:
+|        ``domain_error(nmea_sentence,Line)``
 |    ``Options`` is a variable or a partial list:
 |        ``instantiation_error``
 |    ``Options`` is neither a variable nor a list:
@@ -86,8 +96,6 @@ Parses NMEA sentences from a source specification using parser options. Supporte
 |        ``type_error(compound,Option)``
 |    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
 |        ``domain_error(option,Option)``
-|    Any exception defined by the implementing NMEA parser for invalid sources, options, or malformed sentence data:
-|        ``error``
 
 
 ------------

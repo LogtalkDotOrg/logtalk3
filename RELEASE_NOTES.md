@@ -42,6 +42,9 @@ the ECLiPSE adapter file.
 Library
 -------
 
+* CHANGED: The `nmea::parse/3` library predicate arguments order so that the
+options argument is in the last position as standard practice.
+
 * CHANGED: The `url` library `generate/2` and `normalize/2` predicates to also
 accept relative reference arguments.
 

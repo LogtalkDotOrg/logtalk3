@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-11,
+		date is 2026-07-13,
 		comment is 'Unit tests for the "nmea" library.'
 	]).
 
@@ -201,15 +201,15 @@
 		data(Sentence, Data).
 
 	test(nmea_parse_missing_checksum_optional_01, deterministic(Provided-Computed == missing-'5C')) :-
-		parse(atom('$GPGLL,4916.45,N,12311.12,W,225444,A,A'), [checksum(optional)], [Sentence]),
+		parse(atom('$GPGLL,4916.45,N,12311.12,W,225444,A,A'), [Sentence], [checksum(optional)]),
 		checksum(Sentence, checksum(Provided, Computed)).
 
 	test(nmea_parse_present_checksum_optional_01, deterministic(Provided-Computed == '47'-'47')) :-
-		parse(atom('$GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,*47'), [checksum(optional)], [Sentence]),
+		parse(atom('$GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,*47'), [Sentence], [checksum(optional)]),
 		checksum(Sentence, checksum(Provided, Computed)).
 
 	test(nmea_parse_bad_checksum_ignore_01, deterministic(Provided-Computed == '48'-'47')) :-
-		parse(atom('$GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,*48'), [checksum(ignore)], [Sentence]),
+		parse(atom('$GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,*48'), [Sentence], [checksum(ignore)]),
 		checksum(Sentence, checksum(Provided, Computed)).
 
 	test(nmea_parse_missing_checksum_required_01, error(domain_error(nmea_sentence, _))) :-
@@ -260,10 +260,10 @@
 		sentence_type(Sentence, Type).
 
 	test(nmea_parse_unknown_type_error_01, error(domain_error(nmea_sentence, _))) :-
-		parse(atom('$GPHDT,123.4,T*31'), [unknown_type(error)], _).
+		parse(atom('$GPHDT,123.4,T*31'), _, [unknown_type(error)]).
 
 	test(nmea_parse_supported_types_with_error_policy_01, deterministic(length(Sentences, 6))) :-
-		parse(atom('$GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,*47\r\n$GPRMC,123519,A,4807.038,N,01131.000,E,022.4,084.4,230394,003.1,W,A*07\r\n$GPGSA,A,3,04,05,09,12,,,,,,,,,1.8,1.0,1.5*35\r\n$GPGSV,2,1,08,01,40,083,41,02,17,273,43,03,13,172,42,04,09,312,39*78\r\n$GPVTG,054.7,T,034.4,M,005.5,N,010.2,K,A*25\r\n$GPGLL,4916.45,N,12311.12,W,225444,A,A*5C'), [unknown_type(error)], Sentences).
+		parse(atom('$GPGGA,123519,4807.038,N,01131.000,E,1,08,0.9,545.4,M,46.9,M,,*47\r\n$GPRMC,123519,A,4807.038,N,01131.000,E,022.4,084.4,230394,003.1,W,A*07\r\n$GPGSA,A,3,04,05,09,12,,,,,,,,,1.8,1.0,1.5*35\r\n$GPGSV,2,1,08,01,40,083,41,02,17,273,43,03,13,172,42,04,09,312,39*78\r\n$GPVTG,054.7,T,034.4,M,005.5,N,010.2,K,A*25\r\n$GPGLL,4916.45,N,12311.12,W,225444,A,A*5C'), Sentences, [unknown_type(error)]).
 
 	test(nmea_parse_proprietary_01, deterministic(Talker-Type-Fields == proprietary-grmz-['93', 'f', '3'])) :-
 		parse(atom('$PGRMZ,93,f,3*21'), [Sentence]),
