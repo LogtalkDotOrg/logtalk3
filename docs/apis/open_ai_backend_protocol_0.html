@@ -409,7 +409,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-07-09</div>
+<div class="line"><strong>Date:</strong> 2026-07-13</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -451,7 +451,7 @@
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
 <section id="handle-open-ai-3">
 <span id="open-ai-backend-protocol-0-handle-open-ai-3"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">handle_open_ai/3</span></code></a><a class="headerlink" href="#handle-open-ai-3" title="Link to this heading"></a></h3>
-<p>Handles an OpenAI operation selected by operation identifier for the normalized HTTP request and returns a REST result term accepted by the <code class="docutils literal notranslate"><span class="pre">rest</span></code> library.</p>
+<p>Handles an OpenAI operation selected by operation identifier for the normalized HTTP request and returns a REST result term accepted by the <code class="docutils literal notranslate"><span class="pre">rest</span></code> library. The predicate is expected to succeed once for both successful and application error outcomes; plain failure or error is a backend contract violation handled by the server facade as an unexpected server error.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -465,7 +465,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">handle_open_ai(+atom,+compound,--term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">handle_open_ai(+atom,+compound,--term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 </section>

@@ -18,7 +18,7 @@ OpenAI-compatible REST server facade backed by an application object.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-07-09
+| **Date:** 2026-07-13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -211,7 +211,7 @@ Hook selecting operations whose responses should be validated against the OpenAP
 ``dispatch_open_ai/2``
 ^^^^^^^^^^^^^^^^^^^^^^
 
-Dispatches a routed OpenAI request to the backend object and returns a REST result.
+Dispatches a routed OpenAI request to the backend object and returns a REST result. Backend application errors should be returned as REST result terms; unexpected backend failure or error is left to the ``rest`` action failure handling.
 
 | **Compilation flags:**
 |    ``static``
@@ -219,7 +219,7 @@ Dispatches a routed OpenAI request to the backend object and returns a REST resu
 | **Template:**
 |    ``dispatch_open_ai(Request,Result)``
 | **Mode and number of proofs:**
-|    ``dispatch_open_ai(+compound,--term)`` - ``one_or_error``
+|    ``dispatch_open_ai(+compound,--term)`` - ``one``
 
 
 ------------

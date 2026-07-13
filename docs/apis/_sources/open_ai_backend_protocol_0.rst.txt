@@ -15,7 +15,7 @@ Protocol implemented by OpenAI-compatible server backends.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-07-09
+| **Date:** 2026-07-13
 
 | **Compilation flags:**
 |    ``static``
@@ -44,7 +44,7 @@ Public predicates
 ``handle_open_ai/3``
 ^^^^^^^^^^^^^^^^^^^^
 
-Handles an OpenAI operation selected by operation identifier for the normalized HTTP request and returns a REST result term accepted by the ``rest`` library.
+Handles an OpenAI operation selected by operation identifier for the normalized HTTP request and returns a REST result term accepted by the ``rest`` library. The predicate is expected to succeed once for both successful and application error outcomes; plain failure or error is a backend contract violation handled by the server facade as an unexpected server error.
 
 | **Compilation flags:**
 |    ``static``
@@ -52,7 +52,7 @@ Handles an OpenAI operation selected by operation identifier for the normalized 
 | **Template:**
 |    ``handle_open_ai(OperationId,Request,Result)``
 | **Mode and number of proofs:**
-|    ``handle_open_ai(+atom,+compound,--term)`` - ``one_or_error``
+|    ``handle_open_ai(+atom,+compound,--term)`` - ``one``
 
 
 ------------

@@ -24,16 +24,15 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-09,
+		date is 2026-07-13,
 		comment is 'Protocol implemented by OpenAI-compatible server backends.'
 	]).
 
 	:- public(handle_open_ai/3).
-	:- mode(handle_open_ai(+atom, +compound, --term), one_or_error).
+	:- mode(handle_open_ai(+atom, +compound, --term), one).
 	:- info(handle_open_ai/3, [
-		comment is 'Handles an OpenAI operation selected by operation identifier for the normalized HTTP request and returns a REST result term accepted by the ``rest`` library.',
+		comment is 'Handles an OpenAI operation selected by operation identifier for the normalized HTTP request and returns a REST result term accepted by the ``rest`` library. The predicate is expected to succeed once for both successful and application error outcomes; plain failure or error is a backend contract violation handled by the server facade as an unexpected server error.',
 		argnames is ['OperationId', 'Request', 'Result']
 	]).
 
 :- end_protocol.
-

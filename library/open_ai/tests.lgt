@@ -79,6 +79,11 @@
 		open_ai_server(sample_open_ai_backend)::handle(Request, Response),
 		status(Response, status(404, 'Not Found')).
 
+	test(open_ai_server_03, deterministic) :-
+		Request = request(post, origin('/responses'), http(1, 1), [], content('application/json', json({model-'gpt-4.1'})), []),
+		open_ai_server(failing_open_ai_backend)::handle(Request, Response),
+		status(Response, status(500, 'Internal Server Error')).
+
 	test(open_ai_server_provider_01, deterministic) :-
 		open_ai_server(sample_open_ai_backend)::api_info(info('OpenAI API', _, _, _)).
 

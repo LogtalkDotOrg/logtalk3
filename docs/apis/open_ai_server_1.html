@@ -412,7 +412,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-07-09</div>
+<div class="line"><strong>Date:</strong> 2026-07-13</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -646,7 +646,7 @@
 </section>
 <section id="dispatch-open-ai-2">
 <span id="open-ai-server-1-dispatch-open-ai-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">dispatch_open_ai/2</span></code></a><a class="headerlink" href="#dispatch-open-ai-2" title="Link to this heading"></a></h3>
-<p>Dispatches a routed OpenAI request to the backend object and returns a REST result.</p>
+<p>Dispatches a routed OpenAI request to the backend object and returns a REST result. Backend application errors should be returned as REST result terms; unexpected backend failure or error is left to the <code class="docutils literal notranslate"><span class="pre">rest</span></code> action failure handling.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -660,7 +660,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dispatch_open_ai(+compound,--term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dispatch_open_ai(+compound,--term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 </section>

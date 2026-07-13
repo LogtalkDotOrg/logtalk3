@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-09,
+		date is 2026-07-13,
 		comment is 'OpenAI-compatible REST server facade backed by an application object.',
 		parameters is ['Backend' - 'Application object implementing ``open_ai_backend_protocol``.']
 	]).
@@ -92,9 +92,9 @@
 	]).
 
 	:- protected(dispatch_open_ai/2).
-	:- mode(dispatch_open_ai(+compound, --term), one_or_error).
+	:- mode(dispatch_open_ai(+compound, --term), one).
 	:- info(dispatch_open_ai/2, [
-		comment is 'Dispatches a routed OpenAI request to the backend object and returns a REST result.',
+		comment is 'Dispatches a routed OpenAI request to the backend object and returns a REST result. Backend application errors should be returned as REST result terms; unexpected backend failure or error is left to the ``rest`` action failure handling.',
 		argnames is ['Request', 'Result']
 	]).
 

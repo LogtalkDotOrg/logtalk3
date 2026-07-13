@@ -34,6 +34,22 @@
 :- end_object.
 
 
+:- object(failing_open_ai_backend,
+	implements(open_ai_backend_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-07-13,
+		comment is 'Failing backend used by the open_ai tests.'
+	]).
+
+	handle_open_ai(_OperationId, _Request, _Result) :-
+		fail.
+
+:- end_object.
+
+
 :- object(open_ai_client_test_handler,
 	implements(http_handler_protocol)).
 

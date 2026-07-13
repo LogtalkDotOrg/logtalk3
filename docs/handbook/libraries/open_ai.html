@@ -436,6 +436,11 @@ compatibility surface.</p></li>
 <span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">handle_open_ai/3</span></code> predicate is expected to succeed once and
+return a REST result term for both successful and application error
+outcomes. Plain failure is treated as a backend contract violation by
+the server facade and is converted by the REST dispatch layer into an
+unexpected server error response.</p>
 <p>Then dispatch normalized HTTP requests through:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>open_ai_server(my_backend)<span class="o">::</span>handle(<span class="nv">Request</span>, <span class="nv">Response</span>).
 </pre></div>

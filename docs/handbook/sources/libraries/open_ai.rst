@@ -82,6 +82,12 @@ Define a backend object implementing ``open_ai_backend_protocol``:
 
    :- end_object.
 
+The ``handle_open_ai/3`` predicate is expected to succeed once and
+return a REST result term for both successful and application error
+outcomes. Plain failure is treated as a backend contract violation by
+the server facade and is converted by the REST dispatch layer into an
+unexpected server error response.
+
 Then dispatch normalized HTTP requests through:
 
 ::
