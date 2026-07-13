@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-09,
+		date is 2026-07-13,
 		comment is 'Portable Gravatar profile client using the Gravatar REST API.'
 	]).
 
@@ -66,7 +66,15 @@
 	:- mode(profile_response(+atom, -compound, +list(compound)), one_or_error).
 	:- info(profile_response/3, [
 		comment is 'Retrieves the raw normalized HTTP response for a Gravatar profile request.',
-		argnames is ['Email', 'Response', 'Options']
+		argnames is ['Email', 'Response', 'Options'],
+		exceptions is [
+			'``Email`` is a variable' - instantiation_error,
+			'``Email`` is neither a variable nor an atom' - type_error(atom, 'Email'),
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option')
+		]
 	]).
 
 	:- public(email_hash/2).

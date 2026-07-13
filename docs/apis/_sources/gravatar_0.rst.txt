@@ -15,7 +15,7 @@ Portable Gravatar profile client using the Gravatar REST API.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-07-09
+| **Date:** 2026-07-13
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -128,6 +128,20 @@ Retrieves the raw normalized HTTP response for a Gravatar profile request.
 |    ``profile_response(Email,Response,Options)``
 | **Mode and number of proofs:**
 |    ``profile_response(+atom,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Email`` is a variable:
+|        ``instantiation_error``
+|    ``Email`` is neither a variable nor an atom:
+|        ``type_error(atom,Email)``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
 
 
 ------------
