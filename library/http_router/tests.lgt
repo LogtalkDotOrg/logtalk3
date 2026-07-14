@@ -29,7 +29,9 @@
 		comment is 'Unit tests for the "http_router" library.'
 	]).
 
-	:- uses(http_core, [body/2, header/3, property/2, status/2]).
+	:- uses(http_core, [
+		body/2, header/3, property/2, status/2
+	]).
 
 	cover(http_router).
 
@@ -484,6 +486,8 @@
 			[tags([examples])]
 	))) :-
 		open_api::operation(example_open_api_http_router, show_nullable_message, Operation).
+
+	% auxiliary predicates
 
 	json_field({Pairs}, Key, Value) :-
 		json_pair(Pairs, Key, Value).

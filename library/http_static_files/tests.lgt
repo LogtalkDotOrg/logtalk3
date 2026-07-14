@@ -30,12 +30,7 @@
 	]).
 
 	:- uses(http_core, [
-		request/7,
-		generate_response/2,
-		status/2,
-		headers/2,
-		header/3,
-		body/2
+		request/7, generate_response/2, status/2, headers/2, header/3, body/2
 	]).
 
 	:- uses(date, [
@@ -764,6 +759,8 @@
 		ensure_docroot(Root),
 		request(get, origin('/'), http(1, 1), [], empty, [], Request),
 		http_static_files::serve('/', Request, Root, [content_disposition(_)], _Response).
+
+	% auxiliary predicates
 
 	ensure_docroot(Root) :-
 		^^file_path('test_docroot', Root),

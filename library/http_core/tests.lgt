@@ -642,6 +642,8 @@
 	test(http_request_7_10, error(domain_error(http_property, websocket_protocol([chat, chat])))) :-
 		request(get, origin('/socket'), http(1, 1), [], empty, [websocket_protocol([chat, chat])], _).
 
+	% auxiliary predicates
+
 	write_file_atom(Name, Atom) :-
 		atom_codes(Atom, Bytes),
 		^^file_path(Name, File),

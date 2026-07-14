@@ -151,6 +151,8 @@
 		close(Input),
 		throw(Error).
 
+	% auxiliary predicates
+
 	repeated_byte_list(0, _Byte, []) :-
 		!.
 	repeated_byte_list(Length, Byte, [Byte| Bytes]) :-

@@ -30,10 +30,7 @@
 	]).
 
 	:- uses(http_core, [
-		request/7,
-		status/2,
-		header/3,
-		body/2
+		request/7, status/2, header/3, body/2
 	]).
 
 	:- uses(date, [

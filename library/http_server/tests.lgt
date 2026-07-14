@@ -229,6 +229,8 @@
 
 	:- endif.
 
+	% auxiliary predicates
+
 	local_http_url(Port, Path, URL) :-
 		atomic_list_concat(['http://127.0.0.1:', Port, Path], URL).
 
