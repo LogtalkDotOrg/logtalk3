@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-07,
+		date is 2026-07-14,
 		comment is 'Router-agnostic static file response helper built on the normalized ``http_core`` library.'
 	]).
 
@@ -293,9 +293,13 @@
 		Encoding == ''.
 
 	precompressed_variant_files(BaseFile, VariantFiles) :-
+		(	precompressed_variant_file(BaseFile, zstd, ZstandardFile) ->
+			ZstandardVariants = [zstd-ZstandardFile]
+		;	ZstandardVariants = []
+		),
 		(	precompressed_variant_file(BaseFile, br, BrotliFile) ->
-			BrotliVariants = [br-BrotliFile]
-		;	BrotliVariants = []
+			append(ZstandardVariants, [br-BrotliFile], BrotliVariants)
+		;	BrotliVariants = ZstandardVariants
 		),
 		(	precompressed_variant_file(BaseFile, gzip, GzipFile) ->
 			append(BrotliVariants, [gzip-GzipFile], VariantFiles)
@@ -308,7 +312,8 @@
 		atom_concat(BaseFile, Suffix, VariantFile),
 		os::file_exists(VariantFile).
 
-	precompressed_variant_suffix(br, '.br').
+	precompressed_variant_suffix(zstd, '.zst').
+	precompressed_variant_suffix(br,   '.br').
 	precompressed_variant_suffix(gzip, '.gz').
 
 	preferred_representation_file(Request, BaseFile, VariantFiles, File) :-
@@ -322,10 +327,12 @@
 		identity_quality(Specs, IdentityQuality),
 		representation_rank(identity, IdentityRank),
 		BestChoice0 = choice(BaseFile, IdentityQuality, IdentityRank),
+		variant_representation_choice(zstd, Specs, VariantFiles, ZstandardChoice),
+		better_representation_choice(ZstandardChoice, BestChoice0, BestChoice1),
 		variant_representation_choice(br, Specs, VariantFiles, BrotliChoice),
-		better_representation_choice(BrotliChoice, BestChoice0, BestChoice1),
+		better_representation_choice(BrotliChoice, BestChoice1, BestChoice2),
 		variant_representation_choice(gzip, Specs, VariantFiles, GzipChoice),
-		better_representation_choice(GzipChoice, BestChoice1, choice(File0, Quality, _Rank)),
+		better_representation_choice(GzipChoice, BestChoice2, choice(File0, Quality, _Rank)),
 		(	Quality > 0.0 ->
 			File = File0
 		;	File = not_acceptable
@@ -349,6 +356,7 @@
 		!.
 	better_representation_choice(_Choice, BestChoice, BestChoice).
 
+	representation_rank(zstd, 4).
 	representation_rank(br, 3).
 	representation_rank(gzip, 2).
 	representation_rank(identity, 1).

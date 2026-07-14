@@ -105,8 +105,8 @@ Supported features:
 - index-file lookup for directory targets
 - optional directory-listing fallback for directory targets without an
   index file, using the ``http_directory_listing`` library
-- precompressed ``.br`` and ``.gz`` asset negotiation driven by
-  ``Accept-Encoding``
+- precompressed ``.zst``, ``.br``, and ``.gz`` asset negotiation driven
+  by ``Accept-Encoding``
 - ``Vary: Accept-Encoding`` responses when negotiated precompressed
   variants exist
 - MIME type and content-encoding guessing
@@ -180,8 +180,8 @@ Current validator and date handling is intentionally conservative:
 - ``If-Range`` mismatches fall back to the full ``200 OK`` response
   before range validation, so malformed or unsupported range syntax is
   ignored in that case
-- precompressed-asset negotiation currently recognizes ``.br`` and
-  ``.gz`` sibling files and selects between them using
+- precompressed-asset negotiation currently recognizes ``.zst``,
+  ``.br``, and ``.gz`` sibling files and selects between them using
   ``Accept-Encoding`` quality values, otherwise falling back to the
   identity representation when it remains acceptable
 - path sandboxing is based on canonicalized absolute-path prefix checks;

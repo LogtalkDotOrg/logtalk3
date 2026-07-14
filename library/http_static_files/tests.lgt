@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-07,
+		date is 2026-07-14,
 		comment is 'Unit tests for the "http_static_files" library.'
 	]).
 
@@ -610,6 +610,23 @@
 		status(Response, status(406, 'Not Acceptable')),
 		\+ header(Response, vary, _),
 		body(Response, content('text/plain', text('Not Acceptable'))).
+
+	test(http_static_files_serve_4_39, deterministic) :-
+		ensure_docroot(Root),
+		os::path_concat(Root, 'hello.txt', File),
+		write_file_atom(File, 'hello'),
+		atom_concat(File, '.gz', GzipFile),
+		write_file_atom(GzipFile, 'gzip'),
+		atom_concat(File, '.br', BrotliFile),
+		write_file_atom(BrotliFile, 'br'),
+		atom_concat(File, '.zst', ZstandardFile),
+		write_file_atom(ZstandardFile, 'zstd'),
+		request(get, origin('/hello.txt'), http(1, 1), [accept_encoding-'gzip;q=0.5, br;q=0.75, zstd;q=1.0'], empty, [], Request),
+		http_static_files::serve('hello.txt', Request, Root, Response),
+		status(Response, status(200, 'OK')),
+		header(Response, content_encoding, zstd),
+		header(Response, vary, 'Accept-Encoding'),
+		body(Response, content('text/plain', file(ZstandardFile, 0, 4))).
 
 	test(http_static_files_serve_5_02, error(domain_error(option, index_files(['index.html'| _])))) :-
 		ensure_docroot(Root),

@@ -461,8 +461,8 @@ targets</p></li>
 <li><p>index-file lookup for directory targets</p></li>
 <li><p>optional directory-listing fallback for directory targets without an
 index file, using the <code class="docutils literal notranslate"><span class="pre">http_directory_listing</span></code> library</p></li>
-<li><p>precompressed <code class="docutils literal notranslate"><span class="pre">.br</span></code> and <code class="docutils literal notranslate"><span class="pre">.gz</span></code> asset negotiation driven by
-<code class="docutils literal notranslate"><span class="pre">Accept-Encoding</span></code></p></li>
+<li><p>precompressed <code class="docutils literal notranslate"><span class="pre">.zst</span></code>, <code class="docutils literal notranslate"><span class="pre">.br</span></code>, and <code class="docutils literal notranslate"><span class="pre">.gz</span></code> asset negotiation driven
+by <code class="docutils literal notranslate"><span class="pre">Accept-Encoding</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Vary:</span> <span class="pre">Accept-Encoding</span></code> responses when negotiated precompressed
 variants exist</p></li>
 <li><p>MIME type and content-encoding guessing</p></li>
@@ -535,8 +535,8 @@ responses; matching <code class="docutils literal notranslate"><span class="pre"
 <li><p><code class="docutils literal notranslate"><span class="pre">If-Range</span></code> mismatches fall back to the full <code class="docutils literal notranslate"><span class="pre">200</span> <span class="pre">OK</span></code> response
 before range validation, so malformed or unsupported range syntax is
 ignored in that case</p></li>
-<li><p>precompressed-asset negotiation currently recognizes <code class="docutils literal notranslate"><span class="pre">.br</span></code> and
-<code class="docutils literal notranslate"><span class="pre">.gz</span></code> sibling files and selects between them using
+<li><p>precompressed-asset negotiation currently recognizes <code class="docutils literal notranslate"><span class="pre">.zst</span></code>,
+<code class="docutils literal notranslate"><span class="pre">.br</span></code>, and <code class="docutils literal notranslate"><span class="pre">.gz</span></code> sibling files and selects between them using
 <code class="docutils literal notranslate"><span class="pre">Accept-Encoding</span></code> quality values, otherwise falling back to the
 identity representation when it remains acceptable</p></li>
 <li><p>path sandboxing is based on canonicalized absolute-path prefix checks;
