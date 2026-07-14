@@ -226,6 +226,11 @@ Tests
 
 * ADDED: Additional test for the `uses/2` directive.
 
+Installers and installation scripts
+-----------------------------------
+
+* UPDATED: The Windows installation script to also detect ECLiPSe 8.0 versions.
+
 
 3.100.1 - May 16, 2026
 ======================
