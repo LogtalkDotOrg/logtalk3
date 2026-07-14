@@ -621,8 +621,8 @@ which are plain database operations.</p></li>
 These policies need a timed session loop that polls a background
 reader, which is implemented using threads. When used on a backend
 without thread support, the loop predicates throw a
-<code class="docutils literal notranslate"><span class="pre">not_available(http_websocket_service_timing)</span></code> error before reading
-or writing any frames.</p></li>
+<code class="docutils literal notranslate"><span class="pre">existence_error(http_websocket_service,timing)</span></code> exception before
+reading or writing any frames.</p></li>
 <li><p>Registry-driven session loops (i.e., sessions run on behalf of the
 registry-backed server helper). These impose a polling interval so
 that messages and broadcasts queued by other sessions can be flushed
@@ -631,10 +631,11 @@ support.</p></li>
 <li><p>The <code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/5-6</span></code> and <code class="docutils literal notranslate"><span class="pre">request_shutdown/1</span></code>
 predicates, which run each accepted session in its own worker thread.
 On backends without thread support, these predicates throw a
-<code class="docutils literal notranslate"><span class="pre">not_available(http_websocket_server_service_registry)</span></code> error.</p></li>
+<code class="docutils literal notranslate"><span class="pre">existence_error(http_websocket_server_service,registry)</span></code> exception.</p></li>
 </ul>
-<p>In all cases, unsupported usage fails fast with a <code class="docutils literal notranslate"><span class="pre">not_available/1</span></code>
-error at validation time instead of hanging or silently misbehaving.</p>
+<p>In all cases, unsupported usage fails fast with a <code class="docutils literal notranslate"><span class="pre">existence_error/2</span></code>
+exceptions at validation time instead of hanging or silently
+misbehaving.</p>
 </section>
 <section id="current-workflow">
 <h2>Current workflow<a class="headerlink" href="#current-workflow" title="Link to this heading"></a></h2>
@@ -671,8 +672,8 @@ synchronous, single-connection callback loops.</p></li>
 <li><p>On backends without thread support, the timed loop options
 <code class="docutils literal notranslate"><span class="pre">keepalive_interval/1</span></code> and <code class="docutils literal notranslate"><span class="pre">idle_timeout/1</span></code>, registry-driven
 session loops, and the <code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/5-6</span></code> helper are not
-available and throw <code class="docutils literal notranslate"><span class="pre">not_available/1</span></code> errors; see the “Backends
-without thread support” section above.</p></li>
+available and throw <code class="docutils literal notranslate"><span class="pre">existence_error/2</span></code> exceptions; see the
+“Backends without thread support” section above.</p></li>
 </ul>
 </section>
 </section>

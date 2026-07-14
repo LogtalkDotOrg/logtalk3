@@ -277,7 +277,7 @@ Requiring thread support:
   policies need a timed session loop that polls a background reader, which
   is implemented using threads. When used on a backend without thread
   support, the loop predicates throw a
-  `not_available(http_websocket_service_timing)` error before reading or
+  `existence_error(http_websocket_service,timing)` exception before reading or
   writing any frames.
 - Registry-driven session loops (i.e., sessions run on behalf of the
   registry-backed server helper). These impose a polling interval so that
@@ -286,10 +286,10 @@ Requiring thread support:
 - The `serve_until_shutdown/5-6` and `request_shutdown/1` predicates, which
   run each accepted session in its own worker thread. On backends without
   thread support, these predicates throw a
-  `not_available(http_websocket_server_service_registry)` error.
+  `existence_error(http_websocket_server_service,registry)` exception.
 
-In all cases, unsupported usage fails fast with a `not_available/1` error
-at validation time instead of hanging or silently misbehaving.
+In all cases, unsupported usage fails fast with a `existence_error/2`
+exceptions at validation time instead of hanging or silently misbehaving.
 
 
 Current workflow
@@ -326,5 +326,5 @@ Current limitations
 - On backends without thread support, the timed loop options
   `keepalive_interval/1` and `idle_timeout/1`, registry-driven session
   loops, and the `serve_until_shutdown/5-6` helper are not available and
-  throw `not_available/1` errors; see the "Backends without thread support"
-  section above.
+  throw `existence_error/2` exceptions; see the "Backends without thread
+  support" section above.
