@@ -403,7 +403,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-07-07</div>
+<div class="line"><strong>Date:</strong> 2026-07-14</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -414,6 +414,7 @@
 <div class="line-block">
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
+<div class="line"><a class="reference internal" href="base64url_no_padding_0.html#base64url-no-padding-0"><span class="std std-ref">base64url_no_padding</span></a></div>
 <div class="line"><a class="reference internal" href="fast_random_1.html#fast-random-1"><span class="std std-ref">fast_random(Algorithm)</span></a></div>
 <div class="line"><a class="reference internal" href="hmac_0.html#hmac-0"><span class="std std-ref">hmac</span></a></div>
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
@@ -439,18 +440,21 @@
 <li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
 <ul>
 <li><p><a class="reference internal" href="#random-bytes-2" id="id2"><code class="docutils literal notranslate"><span class="pre">random_bytes/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#hex-bytes-2" id="id3"><code class="docutils literal notranslate"><span class="pre">hex_bytes/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#secure-compare-2" id="id4"><code class="docutils literal notranslate"><span class="pre">secure_compare/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#hkdf-5" id="id5"><code class="docutils literal notranslate"><span class="pre">hkdf/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#pbkdf2-6" id="id6"><code class="docutils literal notranslate"><span class="pre">pbkdf2/6</span></code></a></p></li>
-<li><p><a class="reference internal" href="#apr1-3" id="id7"><code class="docutils literal notranslate"><span class="pre">apr1/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#password-hash-4" id="id8"><code class="docutils literal notranslate"><span class="pre">password_hash/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#verify-password-hash-2" id="id9"><code class="docutils literal notranslate"><span class="pre">verify_password_hash/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#token-hex-2" id="id3"><code class="docutils literal notranslate"><span class="pre">token_hex/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#token-urlsafe-2" id="id4"><code class="docutils literal notranslate"><span class="pre">token_urlsafe/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#random-below-2" id="id5"><code class="docutils literal notranslate"><span class="pre">random_below/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#hex-bytes-2" id="id6"><code class="docutils literal notranslate"><span class="pre">hex_bytes/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#secure-compare-2" id="id7"><code class="docutils literal notranslate"><span class="pre">secure_compare/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#hkdf-5" id="id8"><code class="docutils literal notranslate"><span class="pre">hkdf/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#pbkdf2-6" id="id9"><code class="docutils literal notranslate"><span class="pre">pbkdf2/6</span></code></a></p></li>
+<li><p><a class="reference internal" href="#apr1-3" id="id10"><code class="docutils literal notranslate"><span class="pre">apr1/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#password-hash-4" id="id11"><code class="docutils literal notranslate"><span class="pre">password_hash/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#verify-password-hash-2" id="id12"><code class="docutils literal notranslate"><span class="pre">verify_password_hash/2</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id10">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id11">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id12">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id13">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id14">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id15">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -493,8 +497,122 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="token-hex-2">
+<span id="crypto-0-token-hex-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">token_hex/2</span></code></a><a class="headerlink" href="#token-hex-2" title="Link to this heading"></a></h3>
+<p>Returns a lowercase hexadecimal token generated from the requested number of random bytes.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">token_hex(Count,Token)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">token_hex(+non_negative_integer,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Count)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is an integer but is less than zero:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Count)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="token-urlsafe-2">
+<span id="crypto-0-token-urlsafe-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">token_urlsafe/2</span></code></a><a class="headerlink" href="#token-urlsafe-2" title="Link to this heading"></a></h3>
+<p>Returns an unpadded Base64URL token generated from the requested number of random bytes.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">token_urlsafe(Count,Token)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">token_urlsafe(+non_negative_integer,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Count)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is an integer but is less than zero:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Count)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="random-below-2">
+<span id="crypto-0-random-below-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">random_below/2</span></code></a><a class="headerlink" href="#random-below-2" title="Link to this heading"></a></h3>
+<p>Returns a uniformly distributed random integer greater than or equal to zero and less than the given exclusive upper bound.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">random_below(UpperBound,Integer)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">random_below(+positive_integer,-non_negative_integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">UpperBound</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">UpperBound</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,UpperBound)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">UpperBound</span></code> is an integer but is not positive:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_integer,UpperBound)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="hex-bytes-2">
-<span id="crypto-0-hex-bytes-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">hex_bytes/2</span></code></a><a class="headerlink" href="#hex-bytes-2" title="Link to this heading"></a></h3>
+<span id="crypto-0-hex-bytes-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">hex_bytes/2</span></code></a><a class="headerlink" href="#hex-bytes-2" title="Link to this heading"></a></h3>
 <p>Relates a hexadecimal atom with the corresponding list of bytes, generating lowercase hexadecimal atoms when converting from bytes.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -549,7 +667,7 @@
 <hr class="docutils" />
 </section>
 <section id="secure-compare-2">
-<span id="crypto-0-secure-compare-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">secure_compare/2</span></code></a><a class="headerlink" href="#secure-compare-2" title="Link to this heading"></a></h3>
+<span id="crypto-0-secure-compare-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">secure_compare/2</span></code></a><a class="headerlink" href="#secure-compare-2" title="Link to this heading"></a></h3>
 <p>Succeeds when both inputs are equal using a constant-time comparison strategy for byte sequences of the same representation.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -604,7 +722,7 @@
 <hr class="docutils" />
 </section>
 <section id="hkdf-5">
-<span id="crypto-0-hkdf-5"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">hkdf/5</span></code></a><a class="headerlink" href="#hkdf-5" title="Link to this heading"></a></h3>
+<span id="crypto-0-hkdf-5"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">hkdf/5</span></code></a><a class="headerlink" href="#hkdf-5" title="Link to this heading"></a></h3>
 <p>Derives a byte sequence of the requested length from input keying material using HKDF with a hash object implementing the <code class="docutils literal notranslate"><span class="pre">hash_digest_protocol</span></code> protocol.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -708,7 +826,7 @@
 <hr class="docutils" />
 </section>
 <section id="pbkdf2-6">
-<span id="crypto-0-pbkdf2-6"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">pbkdf2/6</span></code></a><a class="headerlink" href="#pbkdf2-6" title="Link to this heading"></a></h3>
+<span id="crypto-0-pbkdf2-6"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">pbkdf2/6</span></code></a><a class="headerlink" href="#pbkdf2-6" title="Link to this heading"></a></h3>
 <p>Derives a key from a password byte sequence and a salt using PBKDF2 with a hash object implementing the <code class="docutils literal notranslate"><span class="pre">hash_digest_protocol</span></code> protocol.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -802,7 +920,7 @@
 <hr class="docutils" />
 </section>
 <section id="apr1-3">
-<span id="crypto-0-apr1-3"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">apr1/3</span></code></a><a class="headerlink" href="#apr1-3" title="Link to this heading"></a></h3>
+<span id="crypto-0-apr1-3"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">apr1/3</span></code></a><a class="headerlink" href="#apr1-3" title="Link to this heading"></a></h3>
 <p>Computes the Apache APR1 encoded checksum for a password byte sequence and salt byte sequence.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -864,7 +982,7 @@
 <hr class="docutils" />
 </section>
 <section id="password-hash-4">
-<span id="crypto-0-password-hash-4"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">password_hash/4</span></code></a><a class="headerlink" href="#password-hash-4" title="Link to this heading"></a></h3>
+<span id="crypto-0-password-hash-4"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">password_hash/4</span></code></a><a class="headerlink" href="#password-hash-4" title="Link to this heading"></a></h3>
 <p>Computes a structured password-hash term using PBKDF2, a hash object implementing the <code class="docutils literal notranslate"><span class="pre">hash_digest_protocol</span></code> protocol, and the given derivation options.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -970,7 +1088,7 @@
 <hr class="docutils" />
 </section>
 <section id="verify-password-hash-2">
-<span id="crypto-0-verify-password-hash-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">verify_password_hash/2</span></code></a><a class="headerlink" href="#verify-password-hash-2" title="Link to this heading"></a></h3>
+<span id="crypto-0-verify-password-hash-2"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">verify_password_hash/2</span></code></a><a class="headerlink" href="#verify-password-hash-2" title="Link to this heading"></a></h3>
 <p>Succeeds when the password byte sequence matches the given structured password-hash term or stored digest term.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

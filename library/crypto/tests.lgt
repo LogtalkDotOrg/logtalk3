@@ -25,13 +25,17 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-07,
+		date is 2026-07-14,
 		comment is 'Unit tests for the "crypto" library.'
 	]).
 
 	:- uses(crypto, [
-		apr1/3, hkdf/5, hex_bytes/2, password_hash/4, pbkdf2/6, random_bytes/2, secure_compare/2,
-		verify_password_hash/2
+		apr1/3, hkdf/5, hex_bytes/2, password_hash/4, pbkdf2/6, random_below/2, random_bytes/2,
+		secure_compare/2, token_hex/2, token_urlsafe/2, verify_password_hash/2
+	]).
+
+	:- uses(list, [
+		length/2
 	]).
 
 	cover(crypto).
@@ -54,6 +58,69 @@
 
 	test(crypto_random_bytes_2_05, error(domain_error(non_negative_integer, -1))) :-
 		random_bytes(-1, _).
+
+	% token_hex/2 tests
+
+	test(crypto_token_hex_2_01, deterministic(Token == '')) :-
+		token_hex(0, Token).
+
+	test(crypto_token_hex_2_02, deterministic) :-
+		token_hex(16, Token),
+		atom_codes(Token, Codes),
+		length(Codes, 32),
+		hex_bytes(Token, Bytes),
+		all_bytes(Bytes).
+
+	test(crypto_token_hex_2_03, error(instantiation_error)) :-
+		token_hex(_, _).
+
+	test(crypto_token_hex_2_04, error(type_error(integer, ten))) :-
+		token_hex(ten, _).
+
+	test(crypto_token_hex_2_05, error(domain_error(non_negative_integer, -1))) :-
+		token_hex(-1, _).
+
+	% token_urlsafe/2 tests
+
+	test(crypto_token_urlsafe_2_01, deterministic(Token == '')) :-
+		token_urlsafe(0, Token).
+
+	test(crypto_token_urlsafe_2_02, deterministic) :-
+		token_urlsafe(16, Token),
+		atom_codes(Token, Codes),
+		length(Codes, 22),
+		urlsafe_codes(Codes).
+
+	test(crypto_token_urlsafe_2_03, error(instantiation_error)) :-
+		token_urlsafe(_, _).
+
+	test(crypto_token_urlsafe_2_04, error(type_error(integer, ten))) :-
+		token_urlsafe(ten, _).
+
+	test(crypto_token_urlsafe_2_05, error(domain_error(non_negative_integer, -1))) :-
+		token_urlsafe(-1, _).
+
+	% random_below/2 tests
+
+	test(crypto_random_below_2_01, deterministic(Integer == 0)) :-
+		random_below(1, Integer).
+
+	test(crypto_random_below_2_02, deterministic) :-
+		random_below(10, Integer),
+		Integer >= 0,
+		Integer < 10.
+
+	test(crypto_random_below_2_03, error(instantiation_error)) :-
+		random_below(_, _).
+
+	test(crypto_random_below_2_04, error(type_error(integer, ten))) :-
+		random_below(ten, _).
+
+	test(crypto_random_below_2_05, error(domain_error(positive_integer, 0))) :-
+		random_below(0, _).
+
+	test(crypto_random_below_2_06, error(domain_error(positive_integer, -1))) :-
+		random_below(-1, _).
 
 	% hex_bytes/2 tests
 
@@ -493,11 +560,23 @@
 	test(crypto_verify_password_hash_2_03, error(domain_error(password_hash, foo))) :-
 		verify_password_hash(foo, [112,97,115,115]).
 
+	% auxiliary predicates
+
 	all_bytes([]).
 	all_bytes([Byte| Bytes]) :-
 		integer(Byte),
 		Byte >= 0,
 		Byte =< 255,
 		all_bytes(Bytes).
+
+	urlsafe_codes([]).
+	urlsafe_codes([Code| Codes]) :-
+		(	Code >= 0'a, Code =< 0'z
+		;	Code >= 0'A, Code =< 0'Z
+		;	Code >= 0'0, Code =< 0'9
+		;	Code =:= 0'-
+		;	Code =:= 0'_
+		), !,
+		urlsafe_codes(Codes).
 
 :- end_object.

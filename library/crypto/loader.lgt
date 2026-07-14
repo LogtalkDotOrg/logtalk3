@@ -21,6 +21,7 @@
 
 :- initialization((
 	logtalk_load(basic_types(loader)),
+	logtalk_load(base64(loader)),
 	logtalk_load(hmac(loader)),
 	logtalk_load(os(loader)),
 	logtalk_load(random(loader)),

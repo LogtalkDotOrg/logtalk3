@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-07,
+		date is 2026-07-14,
 		comment is 'Transport-neutral cryptographic helper predicates.'
 	]).
 
@@ -37,6 +37,42 @@
 			'``Count`` is a variable' - instantiation_error,
 			'``Count`` is neither a variable nor an integer' - type_error(integer, 'Count'),
 			'``Count`` is an integer but is less than zero' - domain_error(non_negative_integer, 'Count')
+		]
+	]).
+
+	:- public(token_hex/2).
+	:- mode(token_hex(+non_negative_integer, -atom), one_or_error).
+	:- info(token_hex/2, [
+		comment is 'Returns a lowercase hexadecimal token generated from the requested number of random bytes.',
+		argnames is ['Count', 'Token'],
+		exceptions is [
+			'``Count`` is a variable' - instantiation_error,
+			'``Count`` is neither a variable nor an integer' - type_error(integer, 'Count'),
+			'``Count`` is an integer but is less than zero' - domain_error(non_negative_integer, 'Count')
+		]
+	]).
+
+	:- public(token_urlsafe/2).
+	:- mode(token_urlsafe(+non_negative_integer, -atom), one_or_error).
+	:- info(token_urlsafe/2, [
+		comment is 'Returns an unpadded Base64URL token generated from the requested number of random bytes.',
+		argnames is ['Count', 'Token'],
+		exceptions is [
+			'``Count`` is a variable' - instantiation_error,
+			'``Count`` is neither a variable nor an integer' - type_error(integer, 'Count'),
+			'``Count`` is an integer but is less than zero' - domain_error(non_negative_integer, 'Count')
+		]
+	]).
+
+	:- public(random_below/2).
+	:- mode(random_below(+positive_integer, -non_negative_integer), one_or_error).
+	:- info(random_below/2, [
+		comment is 'Returns a uniformly distributed random integer greater than or equal to zero and less than the given exclusive upper bound.',
+		argnames is ['UpperBound', 'Integer'],
+		exceptions is [
+			'``UpperBound`` is a variable' - instantiation_error,
+			'``UpperBound`` is neither a variable nor an integer' - type_error(integer, 'UpperBound'),
+			'``UpperBound`` is an integer but is not positive' - domain_error(positive_integer, 'UpperBound')
 		]
 	]).
 
@@ -226,6 +262,10 @@
 		digest/4
 	]).
 
+	:- uses(base64url_no_padding, [
+		generate/2
+	]).
+
 	random_bytes(Count, Bytes) :-
 		context(Context),
 		check(non_negative_integer, Count, Context),
@@ -238,6 +278,22 @@
 		fallback_seed(Seed),
 		randomize(Seed),
 		sequence(Count, 0, 255, Bytes).
+
+	token_hex(Count, Token) :-
+		random_bytes(Count, Bytes),
+		hex_bytes(Token, Bytes).
+
+	token_urlsafe(Count, Token) :-
+		random_bytes(Count, Bytes),
+		generate(codes(Codes), Bytes),
+		atom_codes(Token, Codes).
+
+	random_below(UpperBound, Integer) :-
+		context(Context),
+		check(positive_integer, UpperBound, Context),
+		integer_bit_length(UpperBound, BitLength),
+		integer_bits(UpperBound, BitLength, UpperBits),
+		random_below_bits(BitLength, UpperBits, Integer).
 
 	hex_bytes(Hex, Bytes) :-
 		context(Context),
@@ -345,6 +401,46 @@
 		S2 is xor(S1, S1 << 7) /\ W,
 		S3 is xor(S2, S2 >> 17),
 		Seed is xor(S3, (S3 << 5)) /\ W.
+
+	integer_bit_length(Integer, Length) :-
+		integer_bit_length(Integer, 0, Length).
+
+	integer_bit_length(0, Length, Length) :-
+		!.
+	integer_bit_length(Integer, Length0, Length) :-
+		NextInteger is Integer >> 1,
+		NextLength is Length0 + 1,
+		integer_bit_length(NextInteger, NextLength, Length).
+
+	integer_bits(_Integer, 0, []) :-
+		!.
+	integer_bits(Integer, Length, [Bit| Bits]) :-
+		Shift is Length - 1,
+		Bit is (Integer >> Shift) /\ 1,
+		integer_bits(Integer, Shift, Bits).
+
+	random_below_bits(BitLength, UpperBits, Integer) :-
+		random_bytes(BitLength, Bytes),
+		bytes_bits(Bytes, Bits),
+		(	\+ bits_less_than(Bits, UpperBits) ->
+			random_below_bits(BitLength, UpperBits, Integer)
+		;	bits_integer(Bits, 0, Integer)
+		).
+
+	bytes_bits([], []).
+	bytes_bits([Byte| Bytes], [Bit| Bits]) :-
+		Bit is Byte /\ 1,
+		bytes_bits(Bytes, Bits).
+
+	bits_less_than([0| _], [1| _]) :-
+		!.
+	bits_less_than([Bit| Bits], [Bit| UpperBits]) :-
+		bits_less_than(Bits, UpperBits).
+
+	bits_integer([], Integer, Integer).
+	bits_integer([Bit| Bits], Integer0, Integer) :-
+		Integer1 is (Integer0 << 1) \/ Bit,
+		bits_integer(Bits, Integer1, Integer).
 
 	check_hash(Hash, Context) :-
 		(	var(Hash) ->

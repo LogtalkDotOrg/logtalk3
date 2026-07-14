@@ -20103,6 +20103,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`arrangements_protocol <arrangements_protocol/0::random_arrangement/3>`
 
+``random_below/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`crypto <crypto/0::random_below/2>`
+
 ``random_bytes/2``
 ------------------
 
@@ -25709,6 +25719,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`datep <datep/0::today/3>`
+
+``token_hex/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`crypto <crypto/0::token_hex/2>`
+
+``token_urlsafe/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`crypto <crypto/0::token_urlsafe/2>`
 
 ``tolerance_equal/4``
 ---------------------
