@@ -84,7 +84,7 @@ Library groups
 - Logic and symbolic computing:
 	`datalog`.
 - Security and integrity:
-	`crypto`, `hashes`, `hmac`, and `jwt`.
+	`crypto`, `hashes`, `hmac`, `otp`, and `jwt`.
 - Randomness:
 	`arbitrary`, `mutations`, and `random`.
 - Mathematics, statistics, and optimization:
