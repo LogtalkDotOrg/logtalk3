@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>sdbm_32 &mdash; Logtalk 3.101.0</title>
+  <title>sha512 &mdash; Logtalk 3.101.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -32,8 +32,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="sdbm_64" href="sdbm_64_0.html" />
-    <link rel="prev" title="murmurhash3_x86_32" href="murmurhash3_x86_32_0.html" />
+    <link rel="next" title="sha512_256" href="sha512_256_0.html" />
+    <link rel="prev" title="sha3_512" href="sha3_512_0.html" />
    
 </head>
 
@@ -176,7 +176,7 @@
 <li class="toctree-l3"><a class="reference internal" href="murmurhash3_x64_128_0.html">murmurhash3_x64_128</a></li>
 <li class="toctree-l3"><a class="reference internal" href="murmurhash3_x86_128_0.html">murmurhash3_x86_128</a></li>
 <li class="toctree-l3"><a class="reference internal" href="murmurhash3_x86_32_0.html">murmurhash3_x86_32</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">sdbm_32</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdbm_32_0.html">sdbm_32</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sdbm_64_0.html">sdbm_64</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sha1_0.html">sha1</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sha256_0.html">sha256</a></li>
@@ -184,7 +184,7 @@
 <li class="toctree-l3"><a class="reference internal" href="sha3_256_0.html">sha3_256</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sha3_384_0.html">sha3_384</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sha3_512_0.html">sha3_512</a></li>
-<li class="toctree-l3"><a class="reference internal" href="sha512_0.html">sha512</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">sha512</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sha512_256_0.html">sha512_256</a></li>
 <li class="toctree-l3"><a class="reference internal" href="shake128_1.html">shake128(OutputBytes)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="shake256_1.html">shake256(OutputBytes)</a></li>
@@ -415,9 +415,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">sdbm_32</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">sha512</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/sdbm_32_0.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/sha512_0.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -425,10 +425,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="sdbm-32-0"><span id="index-0"></span><strong>object</strong></p>
-<section id="sdbm-32">
-<h1><code class="docutils literal notranslate"><span class="pre">sdbm_32</span></code><a class="headerlink" href="#sdbm-32" title="Link to this heading"></a></h1>
-<p>sdbm 32-bit hash function.</p>
+  <p class="right" id="sha512-0"><span id="index-0"></span><strong>object</strong></p>
+<section id="sha512">
+<h1><code class="docutils literal notranslate"><span class="pre">sha512</span></code><a class="headerlink" href="#sha512" title="Link to this heading"></a></h1>
+<p>SHA-512 hash function.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -438,7 +438,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-04</div>
+<div class="line"><strong>Date:</strong> 2026-07-14</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -449,11 +449,13 @@
 <div class="line-block">
 <div class="line"><strong>Implements:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="hash_protocol_0.html#hash-protocol-0"><span class="std std-ref">hash_protocol</span></a></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="hash_digest_protocol_0.html#hash-digest-protocol-0"><span class="std std-ref">hash_digest_protocol</span></a></div>
 </div>
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
 <div class="line"><a class="reference internal" href="hash_common_32_0.html#hash-common-32-0"><span class="std std-ref">hash_common_32</span></a></div>
+<div class="line"><a class="reference internal" href="hash_common_64_0.html#hash-common-64-0"><span class="std std-ref">hash_common_64</span></a></div>
+<div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -465,7 +467,7 @@
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line"> <a class="reference internal" href="hash_protocol_0.html#hash-protocol-0-hash-2"><span class="std std-ref">hash/2</span></a></div>
+<div class="line"> <a class="reference internal" href="hash_digest_protocol_0.html#hash-digest-protocol-0-block-size-1"><span class="std std-ref">block_size/1</span></a>  <a class="reference internal" href="hash_digest_protocol_0.html#hash-digest-protocol-0-digest-2"><span class="std std-ref">digest/2</span></a>  <a class="reference internal" href="hash_digest_protocol_0.html#hash-digest-protocol-0-digest-size-1"><span class="std std-ref">digest_size/1</span></a>  <a class="reference internal" href="hash_protocol_0.html#hash-protocol-0-hash-2"><span class="std std-ref">hash/2</span></a></div>
 </div>
 </div>
 <nav class="contents local" id="contents">
@@ -493,7 +495,7 @@
 <p>(none)</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="sdbm_64_0.html#sdbm-64-0"><span class="std std-ref">sdbm_64</span></a>, <a class="reference internal" href="djb2_32_0.html#djb2-32-0"><span class="std std-ref">djb2_32</span></a>, <a class="reference internal" href="fnv1a_32_0.html#fnv1a-32-0"><span class="std std-ref">fnv1a_32</span></a></p>
+<p><a class="reference internal" href="sha512_256_0.html#sha512-256-0"><span class="std std-ref">sha512_256</span></a>, <a class="reference internal" href="sha256_0.html#sha256-0"><span class="std std-ref">sha256</span></a>, <a class="reference internal" href="sha1_0.html#sha1-0"><span class="std std-ref">sha1</span></a></p>
 </div>
 </section>
 </section>
@@ -502,8 +504,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="murmurhash3_x86_32_0.html" class="btn btn-neutral float-left" title="murmurhash3_x86_32" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="sdbm_64_0.html" class="btn btn-neutral float-right" title="sdbm_64" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="sha3_512_0.html" class="btn btn-neutral float-left" title="sha3_512" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sha512_256_0.html" class="btn btn-neutral float-right" title="sha512_256" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-05-29,
+		date is 2026-07-14,
 		comment is 'Unit tests for the "hashes" library 64-bit algorithms.'
 	]).
 
@@ -48,6 +48,7 @@
 	cover(shake256(_)).
 	cover(sha1).
 	cover(sha256).
+	cover(sha512).
 	cover(sha512_256).
 
 
@@ -163,6 +164,13 @@
 		atom_codes('The quick brown fox jumps over the lazy dog', Bytes),
 		sha256::hash(Bytes, Hash).
 
+	test(sha512_empty, deterministic(Hash == 'cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e')) :-
+		sha512::hash([], Hash).
+
+	test(sha512_abc, deterministic(Hash == 'ddaf35a193617abacc417349ae20413112e6fa4e89a97ea20a9eeee64b55d39a2192992a274fc1a836ba3c23a3feebbd454d4423643ce80e2a9ac94fa54ca49f')) :-
+		atom_codes('abc', Bytes),
+		sha512::hash(Bytes, Hash).
+
 	test(sha512_256_empty, deterministic(Hash == 'c672b8d1ef56ed28ab87c3622c5114069bdd3ad7b8f9737498d0c01ecef0967a')) :-
 		sha512_256::hash([], Hash).
 
@@ -210,6 +218,13 @@
 		bytes_hex(Digest, Hex),
 		sha256::digest_size(DigestSize),
 		sha256::block_size(BlockSize),
+		Info = info(Hex, DigestSize, BlockSize).
+
+	test(sha512_hash_digest_protocol, deterministic(Info == info('cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e', 64, 128))) :-
+		sha512::digest([], Digest),
+		bytes_hex(Digest, Hex),
+		sha512::digest_size(DigestSize),
+		sha512::block_size(BlockSize),
 		Info = info(Hex, DigestSize, BlockSize).
 
 	test(sha512_256_hash_digest_protocol, deterministic(Info == info('c672b8d1ef56ed28ab87c3622c5114069bdd3ad7b8f9737498d0c01ecef0967a', 32, 128))) :-

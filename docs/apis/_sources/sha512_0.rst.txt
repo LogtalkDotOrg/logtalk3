@@ -1,0 +1,64 @@
+.. index:: single: sha512
+.. _sha512/0:
+
+.. rst-class:: right
+
+**object**
+
+``sha512``
+==========
+
+SHA-512 hash function.
+
+| **Availability:** 
+|    ``logtalk_load(hashes(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-07-14
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`hash_digest_protocol <hash_digest_protocol/0>`
+| **Uses:**
+|    :ref:`hash_common_32 <hash_common_32/0>`
+|    :ref:`hash_common_64 <hash_common_64/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`hash_digest_protocol/0::block_size/1`  :ref:`hash_digest_protocol/0::digest/2`  :ref:`hash_digest_protocol/0::digest_size/1`  :ref:`hash_protocol/0::hash/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`sha512_256 <sha512_256/0>`, :ref:`sha256 <sha256/0>`, :ref:`sha1 <sha1/0>`
+

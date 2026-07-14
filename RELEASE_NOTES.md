@@ -87,7 +87,8 @@ JWK/JWKS key selection, and reusable registered-claim validation predicates.
 
 * ADDED: New `s3` library implementing a portable AWS S3 client.
 
-* ADDED: Support for the SHA-512/256 hash function to the `hashes` library.
+* ADDED: Support for the SHA-512 and SHA-512/256 hash functions to the `hashes`
+library.
 
 * ADDED: Support for computing HMAC-SHA-512/256 digests to the `hmac`
 library.
