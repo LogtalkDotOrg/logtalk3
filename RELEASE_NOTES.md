@@ -43,7 +43,7 @@ Library
 -------
 
 * CHANGED: The `nmea::parse/3` library predicate arguments order so that the
-options argument is in the last position as standard practice.
+options argument is in the last position as common practice.
 
 * CHANGED: The `url` library `generate/2` and `normalize/2` predicates to also
 accept relative reference arguments.
@@ -58,11 +58,12 @@ Gravatar profile information using the Gravatar REST API.
 aggregation, and dependency-aware ordering.
 
 * ADDED: New `http_core`, `http_client_core`, `http_client`, `http_cookies`,
-`http_multipart`, `http_router`, `http_server_core`, `http_session`, `http_socket_transport`,
-`http_process_transport`, `http_websocket`, `http_websocket_messages`,
-`http_websocket_session`, `http_websocket_service`, `http_directory_listing`,
-`http_static_files`, `http_parameters`, `http_htmx`, `http_authenticate`,
-`http_digest`, `http_cors`, `open_api`, and `rest` libraries.
+`http_multipart`, `http_router`, `http_server_core`, `http_server`,
+`http_session`, `http_socket_transport`, `http_process_transport`,
+`http_websocket`, `http_websocket_messages`, `http_websocket_session`,
+`http_websocket_service`, `http_directory_listing`, `http_static_files`,
+`http_parameters`, `http_htmx`, `http_authenticate`, `http_digest`,
+`http_cors`, `open_api`, and `rest` libraries.
 
 * ADDED: New `json_graph` library implementing JSON Graph Format (JGF) V2.
 

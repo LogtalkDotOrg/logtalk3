@@ -268,6 +268,9 @@ Follows a short description of each included example (in alphabetical order):
 - `edcgs`  
 	several examples of Extended Definite Clause Grammars (EDCGs)
 
+- `elephants`  
+    simple example illustrating the concept of _prototypes_
+
 - `encodings`  
 	very simple example of using the experimental `encoding/1`
 	directive (requires Logtalk to be run with a backend supporting
@@ -292,10 +295,9 @@ Follows a short description of each included example (in alphabetical order):
 	alternative version of the `family` example using a family registry
 	implemented using multifile predicates to avoid dynamic binding
 
-- `ncl`  
-	Net-Clause Language (NCL) examples (including the `figures` individual
-	example of network modeling for recognizing polyhedra represented as
-	graphs)
+- `futures`  
+    simple example of defining and using _futures_, a common concurrent
+    programming idiom
 
 - `futures`  
 	simple example of working with futures, a common concurrent programming
@@ -307,6 +309,12 @@ Follows a short description of each included example (in alphabetical order):
 - `haunted_wasteland`  
 	solution for the Advent of Code 2023 Day 8 problem; illustrates the
 	use of the `dictionaries` and `grammars` libraries plus cyclic terms
+
+- `hello_world`  
+	the unavoidable "hello world" programming example
+
+- `hooks`  
+	simple example of using compiler hook objects and predicates
 
 - `http_cookies_counter`  
 	small HTTP cookie example showing how a server preserves a visit
@@ -354,12 +362,6 @@ Follows a short description of each included example (in alphabetical order):
 	small HTTP and WebSocket example showing the opening handshake and a
 	one-message echo exchange
 
-- `hello_world`  
-	the unavoidable "hello world" programming example
-
-- `hooks`  
-	simple example of using compiler hook objects and predicates
-
 - `includes`  
 	simple example of using the `include/1` directive as both a
 	file directive and an entity directive
@@ -405,6 +407,9 @@ Follows a short description of each included example (in alphabetical order):
 	example of the classical naive list reverse benchmark computing
 	million of logical inferences per second
 
+- `list_permutations`  
+    benchmarks based on list permutations
+
 - `lo`  
 	examples adapted from the Francis G. McCabe L&O system
 
@@ -448,11 +453,11 @@ Follows a short description of each included example (in alphabetical order):
 	acquisition, which must be resilient to unexpected events,
 	from data processing, which decides how to handle those events
 
-- `modules`  
-	simple example of compiling Prolog modules as objects
-
 - `module_aliases`  
 	simple examples illustrating the use of module aliases
+
+- `modules`  
+	simple example of compiling Prolog modules as objects
 
 - `msglog`  
 	example of using events and monitors for recording, replaying,
@@ -470,6 +475,11 @@ Follows a short description of each included example (in alphabetical order):
 	example of an implementation of the Lean Prolog API for named
 	databases for Prolog compilers with a module system
 
+- `ncl`  
+	Net-Clause Language (NCL) examples (including the `figures` individual
+	example of network modeling for recognizing polyhedra represented as
+	graphs)
+
 - `neo4j`  
 	example of using the Java library to interface with Neo4j
 
@@ -480,11 +490,11 @@ Follows a short description of each included example (in alphabetical order):
 - `object_aliases`  
 	simple examples illustrating the use of object aliases
 
-- `operators`  
-	example of using operators local to objects and categories
-
 - `ollama_client`  
 	example illustrating the use of the `open_ai` library
+
+- `operators`  
+	example of using operators local to objects and categories
 
 - `parametric`  
 	simple examples of parametric objects
