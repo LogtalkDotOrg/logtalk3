@@ -333,6 +333,9 @@ Follows a short description of each included example (in alphabetical order):
 	small HTTP client and server example showing how to publish and consume
 	an OpenAPI contract
 
+- `http_products_store`  
+	small example illustrating the use of the `http_parameters` library
+
 - `http_rest_greetings`  
 	small HTTP client and server example showing how to define and consume a
 	REST API using the `rest` library

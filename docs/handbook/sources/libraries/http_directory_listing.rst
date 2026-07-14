@@ -150,7 +150,7 @@ Cache-policy configuration uses these option values:
   ``expires(date_time(Year,Month,Day,Hour,Minute,Second))`` for an
   absolute expiry time
 
-The generated HTML now includes stable CSS hooks such as:
+The generated HTML includes stable CSS hooks such as:
 
 - ``body`` class ``http-directory-listing theme-Theme``
 - ``table`` class ``directory-listing-table theme-Theme columns-...``

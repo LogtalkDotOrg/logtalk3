@@ -192,6 +192,9 @@ HTTP libraries to handle HTML forms.
 * ADDED: New `http_open_api` example illustrating the use of the new HTTP and
 OpenAPI libraries.
 
+* ADDED: New `http_products_store` example illustrating the use of the new
+`http_parameters` library.
+
 * ADDED: New `http_rest_greetings` and `http_rest_open_meteo` examples
 illustrating the use of the new HTTP and REST libraries.
 

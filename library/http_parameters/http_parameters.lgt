@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-07-14,
 		comment is 'Typed HTTP query, form, path, header, and cookie parameter extraction helpers plus OpenAPI descriptor generation helpers.'
 	]).
 
@@ -494,32 +494,33 @@
 	resolve_declarations([], _Request, []).
 	resolve_declarations([Declaration| Declarations], Request, Parameters) :-
 		resolve_declaration(Declaration, Request, Parameter, Present),
-		resolve_declarations(Declarations, Request, RestParameters),
 		(	Present == true ->
 			Parameters = [Parameter| RestParameters]
 		;	Parameters = RestParameters
-		).
+		),
+		resolve_declarations(Declarations, Request, RestParameters).
 
-	resolve_declaration(declaration(Name, Source, ScalarType, scalar, Required, Default, _Description, _Schema, Constraints), Request, Name-Value, true) :-
+	resolve_declaration(declaration(Name, Source, ScalarType, scalar, Required, Default, _Description, _Schema, Constraints), Request, Name-Value, Present) :-
 		!,
 		request_parameter_values(Source, Request, Name, Values),
-		resolve_scalar_declaration(Source, Name, ScalarType, Required, Default, Constraints, Values, Value).
+		resolve_scalar_declaration(Source, Name, ScalarType, Required, Default, Constraints, Values, Value, Present).
 	resolve_declaration(declaration(Name, Source, ScalarType, list, Required, Default, _Description, _Schema, Constraints), Request, Name-Values, Present) :-
 		request_parameter_values(Source, Request, Name, RawValues),
 		resolve_list_declaration(Source, Name, ScalarType, Required, Default, Constraints, RawValues, Values, Present).
 
-	resolve_scalar_declaration(Source, Name, _ScalarType, Required, Default, _Constraints, [], Value) :-
+	resolve_scalar_declaration(Source, Name, _ScalarType, Required, Default, _Constraints, [], Value, Present) :-
 		!,
 		(	Default = default(DefaultValue) ->
-			Value = DefaultValue
+			Value = DefaultValue,
+			Present = true
 		;	Required == true ->
 			throw_parameter_validation(Name, Source, missing_parameter(Source, Name))
-		;	fail
+		;	Present = false
 		).
-	resolve_scalar_declaration(Source, Name, _ScalarType, _Required, _Default, _Constraints, [_Value0, _Value1| _], _Value) :-
+	resolve_scalar_declaration(Source, Name, _ScalarType, _Required, _Default, _Constraints, [_Value0, _Value1| _], _Value, _Present) :-
 		!,
 		throw_parameter_validation(Name, Source, duplicate_parameter(Source, Name)).
-	resolve_scalar_declaration(Source, Name, ScalarType, _Required, _Default, Constraints, [Value0], Value) :-
+	resolve_scalar_declaration(Source, Name, ScalarType, _Required, _Default, Constraints, [Value0], Value, true) :-
 		coerce_parameter_value(Source, Name, ScalarType, Constraints, Value0, Value).
 
 	resolve_list_declaration(Source, Name, _ScalarType, Required, Default, _Constraints, [], Values, Present) :-
