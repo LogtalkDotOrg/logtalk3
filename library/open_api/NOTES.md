@@ -309,9 +309,9 @@ security reference validation path:
       )
     ).
 
-  Those local flow declarations are used only for provider-side security
-  reference validation. They are not emitted into the derived OpenAPI document,
-  as OpenID Connect Security Scheme Objects do not define a `flows` field.
+Those local flow declarations are used only for provider-side security
+reference validation. They are not emitted into the derived OpenAPI document,
+as OpenID Connect Security Scheme Objects do not define a `flows` field.
 
 Provider-side validation checks, among other things:
 
