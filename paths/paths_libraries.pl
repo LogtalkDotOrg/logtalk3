@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on July 9, 2026
+%  Last updated on July 14, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -218,6 +218,7 @@ logtalk_library_path(optics_clusterer, library('optics_clusterer/')).
 logtalk_library_path(optionals, library('optionals/')).
 logtalk_library_path(options, library('options/')).
 logtalk_library_path(os, library('os/')).
+logtalk_library_path(otp, library('otp/')).
 logtalk_library_path(partitions, library('partitions/')).
 logtalk_library_path(pattern_mining_protocols, library('pattern_mining_protocols/')).
 logtalk_library_path(pca_projection, library('pca_projection/')).

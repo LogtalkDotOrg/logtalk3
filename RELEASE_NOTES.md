@@ -87,6 +87,9 @@ JWK/JWKS key selection, and reusable registered-claim validation predicates.
 
 * ADDED: New `s3` library implementing a portable AWS S3 client.
 
+* ADDED: New `otp` library supporting generating and verifying HOTP and TOTP
+one-time passwords after RFC 4226 and RFC 6238.
+
 * ADDED: Support for the SHA-512 and SHA-512/256 hash functions to the `hashes`
 library.
 

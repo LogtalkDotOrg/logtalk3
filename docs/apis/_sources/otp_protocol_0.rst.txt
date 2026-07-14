@@ -1,0 +1,135 @@
+.. index:: single: otp_protocol
+.. _otp_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``otp_protocol``
+================
+
+Protocol for HOTP and TOTP generation and verification as specified in RFC 4226 and RFC 6238.
+
+| **Availability:** 
+|    ``logtalk_load(otp(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-07-14
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: hotp/5
+.. _otp_protocol/0::hotp/5:
+
+``hotp/5``
+^^^^^^^^^^
+
+Computes an HOTP value for the given hash object, secret, moving counter, and number of digits. The secret can be either a raw byte list or a Base32 wrapper term of the form ``base32(atom(Atom))``, ``base32(chars(Chars))``, or ``base32(codes(Codes))``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``hotp(Hash,Secret,Counter,Digits,OTP)``
+| **Mode and number of proofs:**
+|    ``hotp(+object_identifier,+term,+integer,+integer,--atom)`` - ``one``
+
+
+------------
+
+.. index:: totp/5
+.. _otp_protocol/0::totp/5:
+
+``totp/5``
+^^^^^^^^^^
+
+Computes a TOTP value using the standard 30-second time step and Unix epoch ``T0 = 0`` for the given hash object, secret, Unix time, and number of digits.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``totp(Hash,Secret,UnixTime,Digits,OTP)``
+| **Mode and number of proofs:**
+|    ``totp(+object_identifier,+term,+integer,+integer,--atom)`` - ``one``
+
+
+------------
+
+.. index:: hotp_verify/7
+.. _otp_protocol/0::hotp_verify/7:
+
+``hotp_verify/7``
+^^^^^^^^^^^^^^^^^
+
+Verifies an HOTP value by searching from the given counter through the bounded forward counter window. Returns the matched counter on success.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``hotp_verify(Hash,Secret,Counter,Window,Digits,OTP,MatchedCounter)``
+| **Mode and number of proofs:**
+|    ``hotp_verify(+object_identifier,+term,+integer,+integer,+integer,+atom,--integer)`` - ``zero_or_one_or_error``
+
+
+------------
+
+.. index:: totp_verify/7
+.. _otp_protocol/0::totp_verify/7:
+
+``totp_verify/7``
+^^^^^^^^^^^^^^^^^
+
+Verifies a TOTP value by searching within the bounded symmetric time-step window around the current time step. Returns the matched time step on success.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``totp_verify(Hash,Secret,UnixTime,Window,Digits,OTP,MatchedTimeStep)``
+| **Mode and number of proofs:**
+|    ``totp_verify(+object_identifier,+term,+integer,+integer,+integer,+atom,--integer)`` - ``zero_or_one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`hmac_protocol <hmac_protocol/0>`
+

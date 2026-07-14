@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on July 9, 2026
+##   Last updated on July 14, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -263,6 +263,7 @@ Foreach-Object {
 (Get-Content ../../../library/optionals/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/optionals.rst
 (Get-Content ../../../library/options/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/options.rst
 (Get-Content ../../../library/os/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/os.rst
+(Get-Content ../../../library/otp/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/otp.rst
 (Get-Content ../../../library/partitions/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/partitions.rst
 (Get-Content ../../../library/pattern_mining_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/pattern_mining_protocols.rst
 (Get-Content ../../../library/pca_projection/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/pca_projection.rst

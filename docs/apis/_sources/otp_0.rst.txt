@@ -1,0 +1,64 @@
+.. index:: single: otp
+.. _otp/0:
+
+.. rst-class:: right
+
+**object**
+
+``otp``
+=======
+
+HOTP and TOTP generation and verification predicates.
+
+| **Availability:** 
+|    ``logtalk_load(otp(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-07-14
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`otp_protocol <otp_protocol/0>`
+| **Uses:**
+|    :ref:`base32 <base32/0>`
+|    :ref:`hmac <hmac/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`otp_protocol/0::hotp/5`  :ref:`otp_protocol/0::hotp_verify/7`  :ref:`otp_protocol/0::totp/5`  :ref:`otp_protocol/0::totp_verify/7`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`base32 <base32/0>`, :ref:`hmac <hmac/0>`, :ref:`sha1 <sha1/0>`, :ref:`sha256 <sha256/0>`, :ref:`sha512_256 <sha512_256/0>`
+

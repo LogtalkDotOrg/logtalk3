@@ -10388,6 +10388,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`application_protocol <application_protocol/0::homepage/1>`
 
+``hotp/5``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`otp_protocol <otp_protocol/0::hotp/5>`
+
+``hotp_verify/7``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`otp_protocol <otp_protocol/0::hotp_verify/7>`
+
 ``hset/5``
 ----------
 
@@ -25840,6 +25860,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`unweighted_directed_graph(Dictionary) <unweighted_directed_graph/1::topological_sort/3>`
+
+``totp/5``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`otp_protocol <otp_protocol/0::totp/5>`
+
+``totp_verify/7``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`otp_protocol <otp_protocol/0::totp_verify/7>`
 
 ``touch/3``
 -----------

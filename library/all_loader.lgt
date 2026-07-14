@@ -176,6 +176,7 @@
 		crypto(loader),
 		hashes(loader),
 		hmac(loader),
+		otp(loader),
 		jwt(loader),
 		ranking_protocols(loader),
 		borda_ranker(loader),
