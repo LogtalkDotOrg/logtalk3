@@ -119,8 +119,12 @@
 		add64/3, or64/3, rol64/3, shl64/3, word64_hex/2, xor64/3
 	]).
 
+	:- uses(list, [
+		append/3, length/2
+	]).
+
 	hash(Bytes, Hash) :-
-		list::length(_Key_, 16),
+		length(_Key_, 16),
 		siphash(Bytes, Value),
 		word64_hex(Value, Hash).
 
@@ -146,7 +150,7 @@
 
 	process_blocks([], Acc, V0, V1, V2, V3, V0, V1, V2, V3, Acc).
 	process_blocks([Byte| Bytes], Acc0, V0, V1, V2, V3, FV0, FV1, FV2, FV3, Last) :-
-		list::append(Acc0, [Byte], Acc1),
+		append(Acc0, [Byte], Acc1),
 		(	Acc1 = [B0, B1, B2, B3, B4, B5, B6, B7] ->
 			little_endian_word64([B0, B1, B2, B3, B4, B5, B6, B7], M),
 			xor64(V3, M, V3_0),
@@ -157,7 +161,7 @@
 		).
 
 	last_word(Bytes, Acc, Word) :-
-		list::length(Bytes, Length),
+		length(Bytes, Length),
 		shl64(Length /\ 0xFF, 56, LastByte),
 		partial_word(Acc, 0, Partial),
 		or64(LastByte, Partial, Word).
@@ -227,6 +231,10 @@
 		add32/3, add32/5, little_endian_word32/2, mul32/3, rol32/3, word32_hex/2
 	]).
 
+	:- uses(list, [
+		length/2
+	]).
+
 	hash(Bytes, Hash) :-
 		murmurhash3_x86_128(Bytes, 0, H1, H2, H3, H4),
 		word32_hex(H1, Hex1),
@@ -239,7 +247,7 @@
 		!.
 
 	murmurhash3_x86_128(Bytes, Seed, H1, H2, H3, H4) :-
-		list::length(Bytes, Length),
+		length(Bytes, Length),
 		body(Bytes, Seed, Seed, Seed, Seed, T1, T2, T3, T4, Tail),
 		tail(Tail, T1, T2, T3, T4, U1, U2, U3, U4),
 		F1_0 is xor(U1, Length),
@@ -378,6 +386,10 @@
 		add64/3, mul64/3, or64/3, rol64/3, shl64/3, shr64/3, word64_hex/2, xor64/3
 	]).
 
+	:- uses(list, [
+		length/2
+	]).
+
 	hash(Bytes, Hash) :-
 		murmurhash3_x64_128(Bytes, 0, H1, H2),
 		word64_hex(H1, Hex1),
@@ -386,7 +398,7 @@
 		!.
 
 	murmurhash3_x64_128(Bytes, Seed, H1, H2) :-
-		list::length(Bytes, Length),
+		length(Bytes, Length),
 		body(Bytes, Seed, Seed, T1, T2, Tail),
 		tail(Tail, T1, T2, U1, U2),
 		xor64(U1, Length, F1_0),
@@ -500,6 +512,10 @@
 		and64/3, mask64/1, not64/2, rol64/3, shl64/3, shr64/3, xor64/3
 	]).
 
+	:- uses(list, [
+		append/3, length/2
+	]).
+
 	hash(Bytes, Hash) :-
 		integer(_OutputBytes_),
 		_OutputBytes_ >= 0,
@@ -524,10 +540,10 @@
 		).
 
 	padding_block(Tail, Block) :-
-		list::length(Tail, TailLength),
+		length(Tail, TailLength),
 		ZeroCount is _RateBytes_ - TailLength - 1,
 		zero_bytes(ZeroCount, Zeros),
-		list::append(Tail, [_Suffix_| Zeros], Block0),
+		append(Tail, [_Suffix_| Zeros], Block0),
 		xor_last_byte(Block0, 0x80, Block).
 
 	squeeze(_, 0, []) :-
@@ -538,7 +554,7 @@
 		;	state_prefix_bytes(State, _RateBytes_, BlockBytes),
 			Remaining is OutputBytes - _RateBytes_,
 			keccak_f1600(State, NextState),
-			list::append(BlockBytes, RestBytes, DigestBytes),
+			append(BlockBytes, RestBytes, DigestBytes),
 			squeeze(NextState, Remaining, RestBytes)
 		).
 
@@ -870,6 +886,223 @@
 :- end_object.
 
 
+:- object(blake2b,
+	implements(hash_digest_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-07-15,
+		comment is 'BLAKE2b hash function.',
+		see_also is [blake2s, sha512, sha512_256]
+	]).
+
+	:- uses(hash_common_32, [
+		bytes_hex/2
+	]).
+
+	:- uses(hash_common_64, [
+		add64/3, or64/3, rol64/3, shl64/3, xor64/3
+	]).
+
+	:- uses(list, [
+		append/3, length/2, nth0/3
+	]).
+
+	digest(Bytes, DigestBytes) :-
+		blake2b_initial_state(State0),
+		blake2b_blocks(Bytes, 0, State0, State),
+		blake2b_state_bytes(State, DigestBytes).
+
+	digest_size(64).
+
+	block_size(128).
+
+	hash(Bytes, Hash) :-
+		digest(Bytes, DigestBytes),
+		bytes_hex(DigestBytes, Hash).
+
+	blake2b_initial_state([H0, 0xBB67AE8584CAA73B, 0x3C6EF372FE94F82B, 0xA54FF53A5F1D36F1, 0x510E527FADE682D1, 0x9B05688C2B3E6C1F, 0x1F83D9ABFB41BD6B, 0x5BE0CD19137E2179]) :-
+		xor64(0x6A09E667F3BCC908, 0x01010040, H0).
+
+	blake2b_blocks(Bytes, Total0, State0, State) :-
+		take_up_to(128, Bytes, BlockBytes, Rest),
+		length(BlockBytes, BlockLength),
+		Total is Total0 + BlockLength,
+		pad_block(BlockBytes, 128, Block),
+		(	Rest == [] ->
+			blake2b_compress(State0, Block, Total, true, State)
+		;	blake2b_compress(State0, Block, Total, false, State1),
+			blake2b_blocks(Rest, Total, State1, State)
+		).
+
+	blake2b_compress(State0, Block, Total, Final, State) :-
+		blake2b_block_words(Block, MessageWords),
+		blake2b_working_vector(State0, Total, Final, Working0),
+		blake2b_rounds(0, MessageWords, Working0, Working),
+		blake2b_finalize(State0, Working, 0, State).
+
+	blake2b_working_vector([H0, H1, H2, H3, H4, H5, H6, H7], Total, Final, [H0, H1, H2, H3, H4, H5, H6, H7, 0x6A09E667F3BCC908, 0xBB67AE8584CAA73B, 0x3C6EF372FE94F82B, 0xA54FF53A5F1D36F1, V12, V13, V14, 0x5BE0CD19137E2179]) :-
+		Two64 is 0x10000000000000000,
+		TotalLow is Total mod Two64,
+		TotalHigh is (Total // Two64) mod Two64,
+		xor64(0x510E527FADE682D1, TotalLow, V12),
+		xor64(0x9B05688C2B3E6C1F, TotalHigh, V13),
+		(	Final == true -> FinalFlag = 0xFFFFFFFFFFFFFFFF
+		;	FinalFlag = 0x0000000000000000
+		),
+		xor64(0x1F83D9ABFB41BD6B, FinalFlag, V14).
+
+	blake2b_rounds(12, _, Working, Working) :-
+		!.
+	blake2b_rounds(Round, MessageWords, Working0, Working) :-
+		blake2b_sigma(Round, S0, S1, S2, S3, S4, S5, S6, S7, S8, S9, S10, S11, S12, S13, S14, S15),
+		nth0(S0, MessageWords, M0),
+		nth0(S1, MessageWords, M1),
+		nth0(S2, MessageWords, M2),
+		nth0(S3, MessageWords, M3),
+		nth0(S4, MessageWords, M4),
+		nth0(S5, MessageWords, M5),
+		nth0(S6, MessageWords, M6),
+		nth0(S7, MessageWords, M7),
+		nth0(S8, MessageWords, M8),
+		nth0(S9, MessageWords, M9),
+		nth0(S10, MessageWords, M10),
+		nth0(S11, MessageWords, M11),
+		nth0(S12, MessageWords, M12),
+		nth0(S13, MessageWords, M13),
+		nth0(S14, MessageWords, M14),
+		nth0(S15, MessageWords, M15),
+		blake2b_g(Working0, 0, 4, 8, 12, M0, M1, Working1),
+		blake2b_g(Working1, 1, 5, 9, 13, M2, M3, Working2),
+		blake2b_g(Working2, 2, 6, 10, 14, M4, M5, Working3),
+		blake2b_g(Working3, 3, 7, 11, 15, M6, M7, Working4),
+		blake2b_g(Working4, 0, 5, 10, 15, M8, M9, Working5),
+		blake2b_g(Working5, 1, 6, 11, 12, M10, M11, Working6),
+		blake2b_g(Working6, 2, 7, 8, 13, M12, M13, Working7),
+		blake2b_g(Working7, 3, 4, 9, 14, M14, M15, Working8),
+		NextRound is Round + 1,
+		blake2b_rounds(NextRound, MessageWords, Working8, Working).
+
+	blake2b_g(Working0, AIndex, BIndex, CIndex, DIndex, X, Y, Working) :-
+		nth0(AIndex, Working0, A0),
+		nth0(BIndex, Working0, B0),
+		nth0(CIndex, Working0, C0),
+		nth0(DIndex, Working0, D0),
+		add64(A0, B0, T0),
+		add64(T0, X, A1),
+		xor64(D0, A1, D1),
+		blake2b_ror64(D1, 32, D2),
+		add64(C0, D2, C1),
+		xor64(B0, C1, B1),
+		blake2b_ror64(B1, 24, B2),
+		add64(A1, B2, T1),
+		add64(T1, Y, A2),
+		xor64(D2, A2, D3),
+		blake2b_ror64(D3, 16, D4),
+		add64(C1, D4, C2),
+		xor64(B2, C2, B3),
+		blake2b_ror64(B3, 63, B4),
+		replace_nth0(AIndex, Working0, A2, Working1),
+		replace_nth0(BIndex, Working1, B4, Working2),
+		replace_nth0(CIndex, Working2, C2, Working3),
+		replace_nth0(DIndex, Working3, D4, Working).
+
+	blake2b_ror64(Value, Shift, Rotated) :-
+		LeftShift is 64 - (Shift /\ 63),
+		rol64(Value, LeftShift, Rotated).
+
+	blake2b_finalize([], _, _, []).
+	blake2b_finalize([HashWord| HashWords], Working, Index0, [StateWord| StateWords]) :-
+		nth0(Index0, Working, Word0),
+		Index8 is Index0 + 8,
+		nth0(Index8, Working, Word8),
+		xor64(Word0, Word8, Mix),
+		xor64(HashWord, Mix, StateWord),
+		Index is Index0 + 1,
+		blake2b_finalize(HashWords, Working, Index, StateWords).
+
+	blake2b_state_bytes(State, DigestBytes) :-
+		blake2b_state_bytes(State, DigestBytes, []).
+
+	blake2b_state_bytes([], Bytes, Bytes).
+	blake2b_state_bytes([Word| Words], Bytes, Tail) :-
+		blake2b_integer_to_little_endian_bytes64(Word, Bytes, Rest),
+		blake2b_state_bytes(Words, Rest, Tail).
+
+	blake2b_integer_to_little_endian_bytes64(Integer, [B0, B1, B2, B3, B4, B5, B6, B7| Tail], Tail) :-
+		B0 is Integer /\ 0xFF,
+		B1 is (Integer >> 8) /\ 0xFF,
+		B2 is (Integer >> 16) /\ 0xFF,
+		B3 is (Integer >> 24) /\ 0xFF,
+		B4 is (Integer >> 32) /\ 0xFF,
+		B5 is (Integer >> 40) /\ 0xFF,
+		B6 is (Integer >> 48) /\ 0xFF,
+		B7 is (Integer >> 56) /\ 0xFF.
+
+	blake2b_block_words([], []).
+	blake2b_block_words([B0, B1, B2, B3, B4, B5, B6, B7| Bytes], [Word| Words]) :-
+		blake2b_little_endian_word64([B0, B1, B2, B3, B4, B5, B6, B7], Word),
+		blake2b_block_words(Bytes, Words).
+
+	blake2b_little_endian_word64([B0, B1, B2, B3, B4, B5, B6, B7], Word) :-
+		shl64(B1, 8, W1),
+		shl64(B2, 16, W2),
+		shl64(B3, 24, W3),
+		shl64(B4, 32, W4),
+		shl64(B5, 40, W5),
+		shl64(B6, 48, W6),
+		shl64(B7, 56, W7),
+		or64(B0, W1, T01),
+		or64(W2, W3, T23),
+		or64(W4, W5, T45),
+		or64(W6, W7, T67),
+		or64(T01, T23, T0123),
+		or64(T45, T67, T4567),
+		or64(T0123, T4567, Word).
+
+	pad_block(BlockBytes, BlockSize, Block) :-
+		length(BlockBytes, Length),
+		Padding is BlockSize - Length,
+		zeros(Padding, ZeroBytes),
+		append(BlockBytes, ZeroBytes, Block).
+
+	zeros(0, []) :-
+		!.
+	zeros(Count, [0| Bytes]) :-
+		NextCount is Count - 1,
+		zeros(NextCount, Bytes).
+
+	take_up_to(0, Rest, [], Rest) :-
+		!.
+	take_up_to(_, [], [], []) :-
+		!.
+	take_up_to(Count, [Byte| Bytes], [Byte| Prefix], Rest) :-
+		NextCount is Count - 1,
+		take_up_to(NextCount, Bytes, Prefix, Rest).
+
+	replace_nth0(0, [_| Values], Value, [Value| Values]) :-
+		!.
+	replace_nth0(Index0, [Head| Values0], Value, [Head| Values]) :-
+		Index is Index0 - 1,
+		replace_nth0(Index, Values0, Value, Values).
+
+	blake2b_sigma(0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15).
+	blake2b_sigma(1, 14, 10, 4, 8, 9, 15, 13, 6, 1, 12, 0, 2, 11, 7, 5, 3).
+	blake2b_sigma(2, 11, 8, 12, 0, 5, 2, 15, 13, 10, 14, 3, 6, 7, 1, 9, 4).
+	blake2b_sigma(3, 7, 9, 3, 1, 13, 12, 11, 14, 2, 6, 5, 10, 4, 0, 15, 8).
+	blake2b_sigma(4, 9, 0, 5, 7, 2, 4, 10, 15, 14, 1, 11, 12, 6, 8, 3, 13).
+	blake2b_sigma(5, 2, 12, 6, 10, 0, 11, 8, 3, 4, 13, 7, 5, 15, 14, 1, 9).
+	blake2b_sigma(6, 12, 5, 1, 15, 14, 13, 4, 10, 0, 7, 6, 3, 9, 2, 8, 11).
+	blake2b_sigma(7, 13, 11, 7, 14, 12, 1, 3, 9, 5, 0, 15, 4, 8, 6, 2, 10).
+	blake2b_sigma(8, 6, 15, 14, 9, 11, 3, 0, 8, 12, 2, 13, 7, 1, 4, 10, 5).
+	blake2b_sigma(9, 10, 2, 8, 4, 7, 6, 1, 5, 15, 11, 9, 14, 3, 12, 13, 0).
+	blake2b_sigma(10, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15).
+	blake2b_sigma(11, 14, 10, 4, 8, 9, 15, 13, 6, 1, 12, 0, 2, 11, 7, 5, 3).
+
+:- end_object.
+
+
 :- object(sha1,
 	implements(hash_digest_protocol)).
 
@@ -883,6 +1116,10 @@
 
 	:- uses(hash_common_32, [
 		pad_md/4, integer_to_big_endian_bytes32/3, bytes_hex/2, add32/3, rol32/3, big_endian_word32/2
+	]).
+
+	:- uses(list, [
+		nth0/3, take/4
 	]).
 
 	digest(Bytes, DigestBytes) :-
@@ -904,7 +1141,7 @@
 
 	sha1_blocks([], H0, H1, H2, H3, H4, H0, H1, H2, H3, H4).
 	sha1_blocks([Byte| Bytes], H0_0, H1_0, H2_0, H3_0, H4_0, H0, H1, H2, H3, H4) :-
-		list::take(64, [Byte| Bytes], Block, Rest),
+		take(64, [Byte| Bytes], Block, Rest),
 		block_words_be(Block, Words0, Tail0),
 		extend_sha1_words(16, Words0, Tail0, Words),
 		sha1_rounds(0, Words, H0_0, H1_0, H2_0, H3_0, H4_0, A, B, C, D, E),
@@ -918,7 +1155,7 @@
 	sha1_rounds(80, _, A, B, C, D, E, A, B, C, D, E) :-
 		!.
 	sha1_rounds(I, W, A0, B0, C0, D0, E0, A, B, C, D, E) :-
-		list::nth0(I, W, WI),
+		nth0(I, W, WI),
 		sha1_f_k(I, B0, C0, D0, F, K),
 		rol32(A0, 5, RA),
 		T is (RA + F + E0 + K + WI) /\ 0xFFFFFFFF,
@@ -947,10 +1184,10 @@
 		I8 is Index - 8,
 		I14 is Index - 14,
 		I16 is Index - 16,
-		list::nth0(I3, Words0, W3),
-		list::nth0(I8, Words0, W8),
-		list::nth0(I14, Words0, W14),
-		list::nth0(I16, Words0, W16),
+		nth0(I3, Words0, W3),
+		nth0(I8, Words0, W8),
+		nth0(I14, Words0, W14),
+		nth0(I16, Words0, W16),
 		Temp is xor(W3, xor(W8, xor(W14, W16))),
 		rol32(Temp, 1, Word),
 		NextIndex is Index + 1,
@@ -984,6 +1221,10 @@
 		rol64/3, shl64/3, shr64/3, xor64/3
 	]).
 
+	:- uses(list, [
+		append/3, length/2, nth0/3, take/4
+	]).
+
 	digest(Bytes, DigestBytes) :-
 		sha512_pad(Bytes, PaddedBytes),
 		sha512_blocks(PaddedBytes, [0x6A09E667F3BCC908,0xBB67AE8584CAA73B,0x3C6EF372FE94F82B,0xA54FF53A5F1D36F1,0x510E527FADE682D1,0x9B05688C2B3E6C1F,0x1F83D9ABFB41BD6B,0x5BE0CD19137E2179], State),
@@ -998,12 +1239,12 @@
 		bytes_hex(DigestBytes, Hash).
 
 	sha512_pad(Bytes, PaddedBytes) :-
-		list::length(Bytes, Length),
+		length(Bytes, Length),
 		BitLength is Length * 8,
 		Zeros is (112 - ((Length + 1) mod 128) + 128) mod 128,
 		sha512_zeros(Zeros, ZeroBytes, LengthBytes),
 		sha512_length_bytes(BitLength, LengthBytes),
-		list::append(Bytes, [0x80| ZeroBytes], PaddedBytes).
+		append(Bytes, [0x80| ZeroBytes], PaddedBytes).
 
 	sha512_zeros(0, Tail, Tail) :-
 		!.
@@ -1020,7 +1261,7 @@
 
 	sha512_blocks([], State, State).
 	sha512_blocks([Byte| Bytes], State0, State) :-
-		list::take(128, [Byte| Bytes], Block, Rest),
+		take(128, [Byte| Bytes], Block, Rest),
 		sha512_block_words(Block, Words0, Tail0),
 		extend_sha512_words(16, Words0, Tail0, Words),
 		sha512_compress(Words, State0, State1),
@@ -1033,7 +1274,7 @@
 	sha512_rounds(80, _, A, B, C, D, E, F, G, H, A, B, C, D, E, F, G, H) :-
 		!.
 	sha512_rounds(I, W, A0, B0, C0, D0, E0, F0, G0, H0, A, B, C, D, E, F, G, H) :-
-		list::nth0(I, W, WI),
+		nth0(I, W, WI),
 		sha512_k(I, KI),
 		sha512_sigma1(E0, S1),
 		and64(E0, F0, EF),
@@ -1100,10 +1341,10 @@
 		I7 is Index - 7,
 		I15 is Index - 15,
 		I16 is Index - 16,
-		list::nth0(I2, Words0, W2),
-		list::nth0(I7, Words0, W7),
-		list::nth0(I15, Words0, W15),
-		list::nth0(I16, Words0, W16),
+		nth0(I2, Words0, W2),
+		nth0(I7, Words0, W7),
+		nth0(I15, Words0, W15),
+		nth0(I16, Words0, W16),
 		sha512_gamma1(W2, G1),
 		sha512_gamma0(W15, G0),
 		add64(G1, W7, T0),
@@ -1247,6 +1488,10 @@
 		rol64/3, shl64/3, shr64/3, xor64/3
 	]).
 
+	:- uses(list, [
+		append/3, length/2, nth0/3, take/4
+	]).
+
 	digest(Bytes, DigestBytes) :-
 		sha512_256_pad(Bytes, PaddedBytes),
 		sha512_256_blocks(PaddedBytes, [0x22312194FC2BF72C,0x9F555FA3C84C64C2,0x2393B86B6F53B151,0x963877195940EABD,0x96283EE2A88EFFE3,0xBE5E1E2553863992,0x2B0199FC2C85B8AA,0x0EB72DDC81C52CA2], State),
@@ -1261,12 +1506,12 @@
 		bytes_hex(DigestBytes, Hash).
 
 	sha512_256_pad(Bytes, PaddedBytes) :-
-		list::length(Bytes, Length),
+		length(Bytes, Length),
 		BitLength is Length * 8,
 		Zeros is (112 - ((Length + 1) mod 128) + 128) mod 128,
 		sha512_256_zeros(Zeros, ZeroBytes, LengthBytes),
 		sha512_256_length_bytes(BitLength, LengthBytes),
-		list::append(Bytes, [0x80| ZeroBytes], PaddedBytes).
+		append(Bytes, [0x80| ZeroBytes], PaddedBytes).
 
 	sha512_256_zeros(0, Tail, Tail) :-
 		!.
@@ -1283,7 +1528,7 @@
 
 	sha512_256_blocks([], State, State).
 	sha512_256_blocks([Byte| Bytes], State0, State) :-
-		list::take(128, [Byte| Bytes], Block, Rest),
+		take(128, [Byte| Bytes], Block, Rest),
 		sha512_256_block_words(Block, Words0, Tail0),
 		extend_sha512_256_words(16, Words0, Tail0, Words),
 		sha512_256_compress(Words, State0, State1),
@@ -1296,7 +1541,7 @@
 	sha512_256_rounds(80, _, A, B, C, D, E, F, G, H, A, B, C, D, E, F, G, H) :-
 		!.
 	sha512_256_rounds(I, W, A0, B0, C0, D0, E0, F0, G0, H0, A, B, C, D, E, F, G, H) :-
-		list::nth0(I, W, WI),
+		nth0(I, W, WI),
 		sha512_256_k(I, KI),
 		sha512_256_sigma1(E0, S1),
 		and64(E0, F0, EF),
@@ -1363,10 +1608,10 @@
 		I7 is Index - 7,
 		I15 is Index - 15,
 		I16 is Index - 16,
-		list::nth0(I2, Words0, W2),
-		list::nth0(I7, Words0, W7),
-		list::nth0(I15, Words0, W15),
-		list::nth0(I16, Words0, W16),
+		nth0(I2, Words0, W2),
+		nth0(I7, Words0, W7),
+		nth0(I15, Words0, W15),
+		nth0(I16, Words0, W16),
 		sha512_256_gamma1(W2, G1),
 		sha512_256_gamma0(W15, G0),
 		add64(G1, W7, T0),
@@ -1501,6 +1746,10 @@
 		pad_md/4, bytes_hex/2, add32/3, ror32/3, integer_to_big_endian_bytes32/3, big_endian_word32/2
 	]).
 
+	:- uses(list, [
+		nth0/3, take/4
+	]).
+
 	digest(Bytes, DigestBytes) :-
 		pad_md(big, Bytes, 8, PaddedBytes),
 		sha256_blocks(PaddedBytes, [0x6A09E667,0xBB67AE85,0x3C6EF372,0xA54FF53A,0x510E527F,0x9B05688C,0x1F83D9AB,0x5BE0CD19], State),
@@ -1516,7 +1765,7 @@
 
 	sha256_blocks([], State, State).
 	sha256_blocks([Byte| Bytes], State0, State) :-
-		list::take(64, [Byte| Bytes], Block, Rest),
+		take(64, [Byte| Bytes], Block, Rest),
 		block_words_be(Block, Words0, Tail0),
 		extend_sha256_words(16, Words0, Tail0, Words),
 		sha256_compress(Words, State0, State1),
@@ -1536,7 +1785,7 @@
 	sha256_rounds(64, _, A, B, C, D, E, F, G, H, A, B, C, D, E, F, G, H) :-
 		!.
 	sha256_rounds(I, W, A0, B0, C0, D0, E0, F0, G0, H0, A, B, C, D, E, F, G, H) :-
-		list::nth0(I, W, WI),
+		nth0(I, W, WI),
 		sha256_k(I, KI),
 		sha256_sigma1(E0, S1),
 		Ch is xor((E0 /\ F0), ((\ E0) /\ G0)) /\ 0xFFFFFFFF,
@@ -1580,10 +1829,10 @@
 		I7 is Index - 7,
 		I15 is Index - 15,
 		I16 is Index - 16,
-		list::nth0(I2, Words0, W2),
-		list::nth0(I7, Words0, W7),
-		list::nth0(I15, Words0, W15),
-		list::nth0(I16, Words0, W16),
+		nth0(I2, Words0, W2),
+		nth0(I7, Words0, W7),
+		nth0(I15, Words0, W15),
+		nth0(I16, Words0, W16),
 		sha256_gamma1(W2, G1),
 		sha256_gamma0(W15, G0),
 		Word is (G1 + W7 + G0 + W16) /\ 0xFFFFFFFF,

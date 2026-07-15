@@ -27,11 +27,11 @@ protocol by providing a `hash/2` predicate that takes a list of bytes and
 returns the computed hash as a lowercase hexadecimal atom.
 
 The fixed-size cryptographic hash objects that can be safely used with HMAC
-(`md5`, `sha1`, `sha256`, `sha512`, `sha512_256`, `sha3_224`, `sha3_256`, `sha3_384`,
-and `sha3_512`) also implement the `hash_digest_protocol` protocol. This protocol
-adds `digest/2`, `digest_size/1`, and `block_size/1` predicates so that
-libraries such as `hmac` can compute keyed digests without duplicating hash
-function internals.
+(`blake2s`, `md5`, `sha1`, `sha256`, `blake2b`, `sha512`, `sha512_256`,
+`sha3_224`, `sha3_256`, `sha3_384`, and `sha3_512`) also implement the
+`hash_digest_protocol` protocol. This protocol adds `digest/2`,
+`digest_size/1`, and `block_size/1` predicates so that libraries such as
+`hmac` can compute keyed digests without duplicating hash function internals.
 
 The library implements the following hashing algorithms:
 
@@ -53,6 +53,7 @@ The library implements the following hashing algorithms:
 - MurmurHash3 x86 32-bit (`murmurhash3_x86_32`)
 - MurmurHash3 x86 128-bit (`murmurhash3_x86_128`)
 - MurmurHash3 x64 128-bit (`murmurhash3_x64_128`)
+- BLAKE2s (`blake2s`)
 - SHA3-224 (`sha3_224`)
 - SHA3-256 (`sha3_256`)
 - SHA3-384 (`sha3_384`)
@@ -62,21 +63,21 @@ The library implements the following hashing algorithms:
 - MD5 (`md5`)
 - SHA1 (`sha1`)
 - SHA256 (`sha256`)
+- BLAKE2b (`blake2b`)
 - SHA-512 (`sha512`)
 - SHA-512/256 (`sha512_256`)
 
 The `djb2_64`, `sdbm_64`, `fnv1a_64`, `siphash_2_4`, `murmurhash3_x86_128`,
-`murmurhash3_x64_128`, `sha3_224`, `sha3_256`, `sha3_384`, `sha3_512`,
-`shake128(OutputBytes)`, `shake256(OutputBytes)`, `sha1`, `sha256`, `sha512`, and
-`sha512_256`
-objects are only loaded on backend Prolog compilers supporting unbounded
-integer arithmetic.
+`murmurhash3_x64_128`, `blake2b`, `sha3_224`, `sha3_256`, `sha3_384`,
+`sha3_512`, `shake128(OutputBytes)`, `shake256(OutputBytes)`, `sha1`,
+`sha256`, `sha512`, and `sha512_256` objects are only loaded on backend
+Prolog compilers supporting unbounded integer arithmetic.
 
 The SHAKE objects are parametric extensible-output functions. Pass the number
 of output bytes to generate when constructing the object.
 
-The `crc32_reflected(Polynomial)` object implements a reflected CRC-32 family using
-initial value `0xFFFFFFFF` and final xor value `0xFFFFFFFF`, where
+The `crc32_reflected(Polynomial)` object implements a reflected CRC-32 family
+using initial value `0xFFFFFFFF` and final xor value `0xFFFFFFFF`, where
 `Polynomial` is the reflected CRC-32 polynomial.
 
 The `crc32_non_reflected(Polynomial, Initial, FinalXor, AppendLength)` object

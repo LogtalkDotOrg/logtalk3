@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-07-14,
+		date is 2026-07-15,
 		comment is 'Unit tests for the "hashes" library 64-bit algorithms.'
 	]).
 
@@ -47,6 +47,7 @@
 	cover(shake128(_)).
 	cover(shake256(_)).
 	cover(sha1).
+	cover(blake2b).
 	cover(sha256).
 	cover(sha512).
 	cover(sha512_256).
@@ -153,6 +154,13 @@
 	test(sha1_empty, deterministic(Hash == 'da39a3ee5e6b4b0d3255bfef95601890afd80709')) :-
 		sha1::hash([], Hash).
 
+	test(blake2b_empty, deterministic(Hash == '786a02f742015903c6c6fd852552d272912f4740e15847618a86e217f71f5419d25e1031afee585313896444934eb04b903a685b1448b755d56f701afe9be2ce')) :-
+		blake2b::hash([], Hash).
+
+	test(blake2b_quick_brown_fox, deterministic(Hash == 'a8add4bdddfd93e4877d2746e62817b116364a1fa7bc148d95090bc7333b3673f82401cf7aa2e4cb1ecd90296e3f14cb5413f8ed77be73045b13914cdcd6a918')) :-
+		atom_codes('The quick brown fox jumps over the lazy dog', Bytes),
+		blake2b::hash(Bytes, Hash).
+
 	test(sha1_quick_brown_fox, deterministic(Hash == '2fd4e1c67a2d28fced849ee1bb76e7391b93eb12')) :-
 		atom_codes('The quick brown fox jumps over the lazy dog', Bytes),
 		sha1::hash(Bytes, Hash).
@@ -211,6 +219,13 @@
 		bytes_hex(Digest, Hex),
 		sha1::digest_size(DigestSize),
 		sha1::block_size(BlockSize),
+		Info = info(Hex, DigestSize, BlockSize).
+
+	test(blake2b_hash_digest_protocol, deterministic(Info == info('786a02f742015903c6c6fd852552d272912f4740e15847618a86e217f71f5419d25e1031afee585313896444934eb04b903a685b1448b755d56f701afe9be2ce', 64, 128))) :-
+		blake2b::digest([], Digest),
+		bytes_hex(Digest, Hex),
+		blake2b::digest_size(DigestSize),
+		blake2b::block_size(BlockSize),
 		Info = info(Hex, DigestSize, BlockSize).
 
 	test(sha256_hash_digest_protocol, deterministic(Info == info('e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855', 32, 64))) :-

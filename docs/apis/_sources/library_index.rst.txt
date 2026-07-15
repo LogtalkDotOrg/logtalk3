@@ -1092,6 +1092,8 @@ To load any library (including developer tools, ports, and contributions), use t
 
 
 
+   blake2b <blake2b_0>
+   blake2s <blake2s_0>
    crc32_non_reflected(Polynomial,Initial,FinalXor,AppendLength) <crc32_non_reflected_4>
    crc32_reflected(Polynomial) <crc32_reflected_1>
    crc32b <crc32b_0>

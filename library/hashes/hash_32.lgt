@@ -22,16 +22,16 @@
 :- object(djb2_32,
 	implements(hash_protocol)).
 
-	:- uses(hash_common_32, [
-		word32_hex/2
-	]).
-
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-04-04,
 		comment is 'DJB2 32-bit hash function.',
 		see_also is [djb2_64, sdbm_32, fnv1a_32]
+	]).
+
+	:- uses(hash_common_32, [
+		word32_hex/2
 	]).
 
 	hash(Bytes, Hash) :-
@@ -49,16 +49,16 @@
 :- object(sdbm_32,
 	implements(hash_protocol)).
 
-	:- uses(hash_common_32, [
-		word32_hex/2
-	]).
-
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-04-04,
 		comment is 'sdbm 32-bit hash function.',
 		see_also is [sdbm_64, djb2_32, fnv1a_32]
+	]).
+
+	:- uses(hash_common_32, [
+		word32_hex/2
 	]).
 
 	hash(Bytes, Hash) :-
@@ -76,16 +76,16 @@
 :- object(fnv1a_32,
 	implements(hash_protocol)).
 
-	:- uses(hash_common_32, [
-		word32_hex/2, mul32/3
-	]).
-
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-04-04,
 		comment is 'FNV-1a 32-bit hash function.',
 		see_also is [fnv1a_64, djb2_32, sdbm_32]
+	]).
+
+	:- uses(hash_common_32, [
+		word32_hex/2, mul32/3
 	]).
 
 	hash(Bytes, Hash) :-
@@ -104,10 +104,6 @@
 :- object(crc32_reflected(_Polynomial_),
 	implements(hash_protocol)).
 
-	:- uses(hash_common_32, [
-		word32_hex/2
-	]).
-
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
@@ -117,6 +113,10 @@
 			'Polynomial' - 'Reflected CRC-32 polynomial.'
 		],
 		see_also is [crc32_non_reflected(_,_,_,_), crc32b, crc32c, crc32posix, crc32mpeg2, crc32bzip2, crc32q, murmurhash3_x86_32, fnv1a_32]
+	]).
+
+	:- uses(hash_common_32, [
+		word32_hex/2
 	]).
 
 	hash(Bytes, Hash) :-
@@ -181,10 +181,6 @@
 :- object(crc32_non_reflected(_Polynomial_, _Initial_, _FinalXor_, _AppendLength_),
 	implements(hash_protocol)).
 
-	:- uses(hash_common_32, [
-		word32_hex/2
-	]).
-
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
@@ -197,6 +193,14 @@
 			'AppendLength' - 'Boolean flag controlling whether the message length is appended as little-endian bytes.'
 		],
 		see_also is [crc32_reflected(_), crc32b, crc32c, crc32posix, crc32mpeg2, crc32bzip2, crc32q, murmurhash3_x86_32, fnv1a_32]
+	]).
+
+	:- uses(hash_common_32, [
+		word32_hex/2
+	]).
+
+	:- uses(list, [
+		length/2
 	]).
 
 	hash(Bytes, Hash) :-
@@ -233,7 +237,7 @@
 		step_bits(NextCount, Acc1, Acc).
 
 	length_bytes(Bytes, LengthBytes) :-
-		list::length(Bytes, Length),
+		length(Bytes, Length),
 		length_bytes(Length, LengthBytes).
 
 	length_bytes(0, []) :-
@@ -306,10 +310,6 @@
 :- object(murmurhash3_x86_32,
 	implements(hash_protocol)).
 
-	:- uses(hash_common_32, [
-		word32_hex/2, little_endian_word32/2, mul32/3, rol32/3
-	]).
-
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
@@ -318,12 +318,20 @@
 		see_also is [murmurhash3_x86_128, murmurhash3_x64_128]
 	]).
 
+	:- uses(hash_common_32, [
+		word32_hex/2, little_endian_word32/2, mul32/3, rol32/3
+	]).
+
+	:- uses(list, [
+		length/2
+	]).
+
 	hash(Bytes, Hash) :-
 		murmurhash3_x86_32(Bytes, 0, Value),
 		word32_hex(Value, Hash).
 
 	murmurhash3_x86_32(Bytes, Seed, Hash) :-
-		list::length(Bytes, Length),
+		length(Bytes, Length),
 		body(Bytes, Seed, Length, H1, Tail),
 		tail(Tail, K1),
 		H2 is xor(H1, K1),
@@ -372,6 +380,186 @@
 :- end_object.
 
 
+:- object(blake2s,
+	implements(hash_digest_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-07-15,
+		comment is 'BLAKE2s hash function.',
+		see_also is [blake2b, md5, sha256]
+	]).
+
+	:- uses(hash_common_32, [
+		add32/3, bytes_hex/2, integer_to_little_endian_bytes32/3,
+		little_endian_word32/2, ror32/3
+	]).
+
+	:- uses(list, [
+		append/3, length/2, nth0/3
+	]).
+
+	digest(Bytes, DigestBytes) :-
+		blake2s_initial_state(State0),
+		blake2s_blocks(Bytes, 0, State0, State),
+		blake2s_state_bytes(State, DigestBytes).
+
+	digest_size(32).
+
+	block_size(64).
+
+	hash(Bytes, Hash) :-
+		digest(Bytes, DigestBytes),
+		bytes_hex(DigestBytes, Hash).
+
+	blake2s_initial_state([H0, 0xBB67AE85, 0x3C6EF372, 0xA54FF53A, 0x510E527F, 0x9B05688C, 0x1F83D9AB, 0x5BE0CD19]) :-
+		H0 is xor(0x6A09E667, 0x01010020) /\ 0xFFFFFFFF.
+
+	blake2s_blocks(Bytes, Total0, State0, State) :-
+		take_up_to(64, Bytes, BlockBytes, Rest),
+		length(BlockBytes, BlockLength),
+		Total is Total0 + BlockLength,
+		pad_block(BlockBytes, 64, Block),
+		(	Rest == [] ->
+			blake2s_compress(State0, Block, Total, true, State)
+		;	blake2s_compress(State0, Block, Total, false, State1),
+			blake2s_blocks(Rest, Total, State1, State)
+		).
+
+	blake2s_compress(State0, Block, Total, Final, State) :-
+		blake2s_block_words(Block, MessageWords),
+		blake2s_working_vector(State0, Total, Final, Working0),
+		blake2s_rounds(0, MessageWords, Working0, Working),
+		blake2s_finalize(State0, Working, 0, State).
+
+	blake2s_working_vector([H0, H1, H2, H3, H4, H5, H6, H7], Total, Final, [H0, H1, H2, H3, H4, H5, H6, H7, 0x6A09E667, 0xBB67AE85, 0x3C6EF372, 0xA54FF53A, V12, V13, V14, 0x5BE0CD19]) :-
+		TotalLow is Total /\ 0xFFFFFFFF,
+		TotalHigh is (Total >> 32) /\ 0xFFFFFFFF,
+		V12 is xor(0x510E527F, TotalLow) /\ 0xFFFFFFFF,
+		V13 is xor(0x9B05688C, TotalHigh) /\ 0xFFFFFFFF,
+		(	Final == true -> FinalFlag = 0xFFFFFFFF
+		;	FinalFlag = 0x00000000
+		),
+		V14 is xor(0x1F83D9AB, FinalFlag) /\ 0xFFFFFFFF.
+
+	blake2s_rounds(10, _, Working, Working) :-
+		!.
+	blake2s_rounds(Round, MessageWords, Working0, Working) :-
+		blake2s_sigma(Round, S0, S1, S2, S3, S4, S5, S6, S7, S8, S9, S10, S11, S12, S13, S14, S15),
+		nth0(S0, MessageWords, M0),
+		nth0(S1, MessageWords, M1),
+		nth0(S2, MessageWords, M2),
+		nth0(S3, MessageWords, M3),
+		nth0(S4, MessageWords, M4),
+		nth0(S5, MessageWords, M5),
+		nth0(S6, MessageWords, M6),
+		nth0(S7, MessageWords, M7),
+		nth0(S8, MessageWords, M8),
+		nth0(S9, MessageWords, M9),
+		nth0(S10, MessageWords, M10),
+		nth0(S11, MessageWords, M11),
+		nth0(S12, MessageWords, M12),
+		nth0(S13, MessageWords, M13),
+		nth0(S14, MessageWords, M14),
+		nth0(S15, MessageWords, M15),
+		blake2s_g(Working0, 0, 4, 8, 12, M0, M1, Working1),
+		blake2s_g(Working1, 1, 5, 9, 13, M2, M3, Working2),
+		blake2s_g(Working2, 2, 6, 10, 14, M4, M5, Working3),
+		blake2s_g(Working3, 3, 7, 11, 15, M6, M7, Working4),
+		blake2s_g(Working4, 0, 5, 10, 15, M8, M9, Working5),
+		blake2s_g(Working5, 1, 6, 11, 12, M10, M11, Working6),
+		blake2s_g(Working6, 2, 7, 8, 13, M12, M13, Working7),
+		blake2s_g(Working7, 3, 4, 9, 14, M14, M15, Working8),
+		NextRound is Round + 1,
+		blake2s_rounds(NextRound, MessageWords, Working8, Working).
+
+	blake2s_g(Working0, AIndex, BIndex, CIndex, DIndex, X, Y, Working) :-
+		nth0(AIndex, Working0, A0),
+		nth0(BIndex, Working0, B0),
+		nth0(CIndex, Working0, C0),
+		nth0(DIndex, Working0, D0),
+		add32(A0, B0, T0),
+		add32(T0, X, A1),
+		D1 is xor(D0, A1) /\ 0xFFFFFFFF,
+		ror32(D1, 16, D2),
+		add32(C0, D2, C1),
+		B1 is xor(B0, C1) /\ 0xFFFFFFFF,
+		ror32(B1, 12, B2),
+		add32(A1, B2, T1),
+		add32(T1, Y, A2),
+		D3 is xor(D2, A2) /\ 0xFFFFFFFF,
+		ror32(D3, 8, D4),
+		add32(C1, D4, C2),
+		B3 is xor(B2, C2) /\ 0xFFFFFFFF,
+		ror32(B3, 7, B4),
+		replace_nth0(AIndex, Working0, A2, Working1),
+		replace_nth0(BIndex, Working1, B4, Working2),
+		replace_nth0(CIndex, Working2, C2, Working3),
+		replace_nth0(DIndex, Working3, D4, Working).
+
+	blake2s_finalize([], _, _, []).
+	blake2s_finalize([HashWord| HashWords], Working, Index0, [StateWord| StateWords]) :-
+		nth0(Index0, Working, Word0),
+		Index8 is Index0 + 8,
+		nth0(Index8, Working, Word8),
+		StateWord is xor(HashWord, xor(Word0, Word8)) /\ 0xFFFFFFFF,
+		Index is Index0 + 1,
+		blake2s_finalize(HashWords, Working, Index, StateWords).
+
+	blake2s_state_bytes(State, DigestBytes) :-
+		blake2s_state_bytes(State, DigestBytes, []).
+
+	blake2s_state_bytes([], Bytes, Bytes).
+	blake2s_state_bytes([Word| Words], Bytes, Tail) :-
+		integer_to_little_endian_bytes32(Word, Bytes, Rest),
+		blake2s_state_bytes(Words, Rest, Tail).
+
+	blake2s_block_words([], []).
+	blake2s_block_words([B0, B1, B2, B3| Bytes], [Word| Words]) :-
+		little_endian_word32([B0, B1, B2, B3], Word),
+		blake2s_block_words(Bytes, Words).
+
+	pad_block(BlockBytes, BlockSize, Block) :-
+		length(BlockBytes, Length),
+		Padding is BlockSize - Length,
+		zeros(Padding, ZeroBytes),
+		append(BlockBytes, ZeroBytes, Block).
+
+	zeros(0, []) :-
+		!.
+	zeros(Count, [0| Bytes]) :-
+		NextCount is Count - 1,
+		zeros(NextCount, Bytes).
+
+	take_up_to(0, Rest, [], Rest) :-
+		!.
+	take_up_to(_, [], [], []) :-
+		!.
+	take_up_to(Count, [Byte| Bytes], [Byte| Prefix], Rest) :-
+		NextCount is Count - 1,
+		take_up_to(NextCount, Bytes, Prefix, Rest).
+
+	replace_nth0(0, [_| Values], Value, [Value| Values]) :-
+		!.
+	replace_nth0(Index0, [Head| Values0], Value, [Head| Values]) :-
+		Index is Index0 - 1,
+		replace_nth0(Index, Values0, Value, Values).
+
+	blake2s_sigma(0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15).
+	blake2s_sigma(1, 14, 10, 4, 8, 9, 15, 13, 6, 1, 12, 0, 2, 11, 7, 5, 3).
+	blake2s_sigma(2, 11, 8, 12, 0, 5, 2, 15, 13, 10, 14, 3, 6, 7, 1, 9, 4).
+	blake2s_sigma(3, 7, 9, 3, 1, 13, 12, 11, 14, 2, 6, 5, 10, 4, 0, 15, 8).
+	blake2s_sigma(4, 9, 0, 5, 7, 2, 4, 10, 15, 14, 1, 11, 12, 6, 8, 3, 13).
+	blake2s_sigma(5, 2, 12, 6, 10, 0, 11, 8, 3, 4, 13, 7, 5, 15, 14, 1, 9).
+	blake2s_sigma(6, 12, 5, 1, 15, 14, 13, 4, 10, 0, 7, 6, 3, 9, 2, 8, 11).
+	blake2s_sigma(7, 13, 11, 7, 14, 12, 1, 3, 9, 5, 0, 15, 4, 8, 6, 2, 10).
+	blake2s_sigma(8, 6, 15, 14, 9, 11, 3, 0, 8, 12, 2, 13, 7, 1, 4, 10, 5).
+	blake2s_sigma(9, 10, 2, 8, 4, 7, 6, 1, 5, 15, 11, 9, 14, 3, 12, 13, 0).
+
+:- end_object.
+
+
 :- object(md5,
 	implements(hash_digest_protocol)).
 
@@ -386,6 +574,10 @@
 	:- uses(hash_common_32, [
 		add32/3, add32/5, bytes_hex/2, integer_to_little_endian_bytes32/3, little_endian_word32/2, pad_md/4,
 		rol32/3
+	]).
+
+	:- uses(list, [
+		nth0/3, take/4
 	]).
 
 	digest(Bytes, DigestBytes) :-
@@ -406,7 +598,7 @@
 
 	md5_blocks([], A, B, C, D, A, B, C, D).
 	md5_blocks([Byte| Bytes], A0, B0, C0, D0, A, B, C, D) :-
-		list::take(64, [Byte| Bytes], Block, Rest),
+		take(64, [Byte| Bytes], Block, Rest),
 		block_words_le(Block, X),
 		md5_rounds(0, X, A0, B0, C0, D0, AA, BB, CC, DD),
 		add32(A0, AA, A1),
@@ -420,7 +612,7 @@
 	md5_rounds(I, X, A0, B0, C0, D0, A, B, C, D) :-
 		md5_f(I, B0, C0, D0, F),
 		md5_g(I, G),
-		list::nth0(G, X, XG),
+		nth0(G, X, XG),
 		md5_k(I, K),
 		add32(A0, F, XG, K, T0),
 		md5_s(I, S),

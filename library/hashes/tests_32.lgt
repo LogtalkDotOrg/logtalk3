@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-15,
+		date is 2026-07-15,
 		comment is 'Unit tests for the "hashes" library 32-bit algorithms.'
 	]).
 
@@ -45,6 +45,7 @@
 	cover(crc32bzip2).
 	cover(crc32q).
 	cover(murmurhash3_x86_32).
+	cover(blake2s).
 	cover(md5).
 
 	test(djb2_32_empty, deterministic(Hash == '00001505')) :-
@@ -123,6 +124,20 @@
 
 	test(murmurhash3_x86_32_empty, deterministic(Hash == '00000000')) :-
 		murmurhash3_x86_32::hash([], Hash).
+
+	test(blake2s_empty, deterministic(Hash == '69217a3079908094e11121d042354a7c1f55b6482ca1a51e1b250dfd1ed0eef9')) :-
+		blake2s::hash([], Hash).
+
+	test(blake2s_quick_brown_fox, deterministic(Hash == '606beeec743ccbeff6cbcdf5d5302aa855c256c29b88c8ed331ea1a6bf3c8812')) :-
+		atom_codes('The quick brown fox jumps over the lazy dog', Bytes),
+		blake2s::hash(Bytes, Hash).
+
+	test(blake2s_hash_digest_protocol, deterministic(Info == info('69217a3079908094e11121d042354a7c1f55b6482ca1a51e1b250dfd1ed0eef9', 32, 64))) :-
+		blake2s::digest([], Digest),
+		bytes_hex(Digest, Hex),
+		blake2s::digest_size(DigestSize),
+		blake2s::block_size(BlockSize),
+		Info = info(Hex, DigestSize, BlockSize).
 
 	test(md5_empty, deterministic(Hash == 'd41d8cd98f00b204e9800998ecf8427e')) :-
 		md5::hash([], Hash).
