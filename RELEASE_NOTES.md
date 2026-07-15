@@ -150,7 +150,8 @@ throw an error when failure was expected.
 messages (as used by LSP style protocols) on Windows when using the SICStus
 Prolog backend by being less strict when writing messages.
 
-* FIXED: A `linda` library timing issue at server shutdown.
+* FIXED: A `linda` library timing issues at server shutdown. Thanks to Andrew
+Davison for helping debugging these issues.
 
 * FIXED: The `ulid` library to encode 80 bits of randomness and to reject
 timestamps outside the 48-bit range required by the ULID specification.

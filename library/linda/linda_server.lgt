@@ -22,9 +22,9 @@
 :- category(linda_server).
 
 	:- info([
-		version is 2:0:3,
+		version is 2:0:4,
 		author is 'Paulo Moura',
-		date is 2026-06-13,
+		date is 2026-07-14,
 		comment is 'Linda server predicates and tuple-space state. Import into a threaded object together with the linda_client category.'
 	]).
 
@@ -509,11 +509,15 @@
 		;	assertz(server_shutdown_)
 		),
 		signal_accept_loop,
+		% wait until the the accept loop confirms it stopped;
+		% only close the listening socket afterwards (closing it earlier races with
+		% the wake-up connection and, on BSD/macOS, close/1 does not interrupt a
+		% blocked accept, leaving the accept loop engine blocked forever)
+		wait_for_accept_loop_to_stop(Outcome),
 		(	retract(server_socket_(ServerSocket)) ->
 			catch(socket::server_close(ServerSocket), Error, dbg('Server shutdown error'-Error))
 		;	true
 		),
-		wait_for_accept_loop_to_stop(Outcome),
 		shutdown_response(Outcome, Output),
 		% Write exit term to all client input streams to terminate engines
 		forall(
