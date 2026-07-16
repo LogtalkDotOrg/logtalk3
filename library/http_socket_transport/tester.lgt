@@ -25,6 +25,7 @@
 )).
 
 	:- initialization((
+		set_logtalk_flag(report, warnings),
 		logtalk_load(sockets(loader)),
 		logtalk_load(http_client_core(loader)),
 		logtalk_load(http_server_core(loader)),
