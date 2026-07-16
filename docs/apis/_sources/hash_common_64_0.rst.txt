@@ -21,9 +21,8 @@ Auxiliary predicates for the hashes library 64-bit algorithms.
 |    ``static, context_switching_calls``
 
 
-| **Dependencies:**
-|   (none)
-
+| **Uses:**
+|    :ref:`list <list/0>`
 
 | **Remarks:**
 |    (none)
@@ -285,15 +284,34 @@ Encodes a 64-bit word into eight bytes in big-endian order.
 
 ------------
 
+.. index:: pad_md_tail/3
+.. _hash_common_64/0::pad_md_tail/3:
+
+``pad_md_tail/3``
+^^^^^^^^^^^^^^^^^
+
+Pads the final, less-than-one-block tail of a message using SHA-512-style MD padding (128-byte blocks, a big-endian 128-bit length field) given the total message length in bytes. For use when the message has already been consumed block by block during segmented/incremental hashing, so that only the unconsumed tail, and not the whole message, needs to be available.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pad_md_tail(TailBytes,TotalLength,PaddedBytes)``
+| **Mode and number of proofs:**
+|    ``pad_md_tail(+list(integer),+integer,-list(integer))`` - ``one``
+
+
+------------
+
 Protected predicates
 --------------------
 
-(none)
+(no local declarations; see entity ancestors if any)
 
 Private predicates
 ------------------
 
-(none)
+(no local declarations; see entity ancestors if any)
 
 Operators
 ---------

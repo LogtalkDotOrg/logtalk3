@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>blake2b &mdash; Logtalk 3.101.0</title>
+  <title>hash_state_protocol &mdash; Logtalk 3.101.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -32,8 +32,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="blake2s" href="blake2s_0.html" />
-    <link rel="prev" title="gsp_pattern_miner" href="gsp_pattern_miner_0.html" />
+    <link rel="next" title="md5" href="md5_0.html" />
+    <link rel="prev" title="hash_protocol" href="hash_protocol_0.html" />
    
 </head>
 
@@ -154,7 +154,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#gravatar"><span class="xref std std-ref">gravatar</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#gsp-pattern-miner"><span class="xref std std-ref">gsp_pattern_miner</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#hashes"><span class="xref std std-ref">hashes</span></a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">blake2b</a></li>
+<li class="toctree-l3"><a class="reference internal" href="blake2b_0.html">blake2b</a></li>
 <li class="toctree-l3"><a class="reference internal" href="blake2s_0.html">blake2s</a></li>
 <li class="toctree-l3"><a class="reference internal" href="crc32_non_reflected_4.html">crc32_non_reflected(Polynomial,Initial,FinalXor,AppendLength)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="crc32_reflected_1.html">crc32_reflected(Polynomial)</a></li>
@@ -174,7 +174,7 @@
 <li class="toctree-l3"><a class="reference internal" href="hash_common_64_0.html">hash_common_64</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hash_digest_protocol_0.html">hash_digest_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="hash_protocol_0.html">hash_protocol</a></li>
-<li class="toctree-l3"><a class="reference internal" href="hash_state_protocol_0.html">hash_state_protocol</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">hash_state_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="md5_0.html">md5</a></li>
 <li class="toctree-l3"><a class="reference internal" href="murmurhash3_x64_128_0.html">murmurhash3_x64_128</a></li>
 <li class="toctree-l3"><a class="reference internal" href="murmurhash3_x86_128_0.html">murmurhash3_x86_128</a></li>
@@ -419,9 +419,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">blake2b</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">hash_state_protocol</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/blake2b_0.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/hash_state_protocol_0.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -429,10 +429,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="blake2b-0"><span id="index-0"></span><strong>object</strong></p>
-<section id="blake2b">
-<h1><code class="docutils literal notranslate"><span class="pre">blake2b</span></code><a class="headerlink" href="#blake2b" title="Link to this heading"></a></h1>
-<p>BLAKE2b hash function.</p>
+  <p class="right" id="hash-state-protocol-0"><span id="index-0"></span><strong>protocol</strong></p>
+<section id="hash-state-protocol">
+<h1><code class="docutils literal notranslate"><span class="pre">hash_state_protocol</span></code><a class="headerlink" href="#hash-state-protocol" title="Link to this heading"></a></h1>
+<p>Protocol for hash functions supporting genuine incremental hash computation via an explicit, caller-driven hashing state. Unlike computing a hash from a single, fully materialized message, this protocol lets the caller feed the message to the hash function one chunk at a time (e.g. as each chunk is read from a file or a network stream), discarding each chunk as soon as it has been folded into the state. Only the current chunk and a small, bounded amount of algorithm state (for block-padded and rate-limited algorithms, a leftover buffer smaller than one block or rate) are ever resident at once, regardless of the total message length.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -447,20 +447,13 @@
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
 </div>
 </div>
 <div class="line-block">
-<div class="line"><strong>Implements:</strong></div>
+<div class="line"><strong>Extends:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="hash_digest_protocol_0.html#hash-digest-protocol-0"><span class="std std-ref">hash_digest_protocol</span></a></div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="hash_state_protocol_0.html#hash-state-protocol-0"><span class="std std-ref">hash_state_protocol</span></a></div>
-</div>
-<div class="line"><strong>Uses:</strong></div>
-<div class="line-block">
-<div class="line"><a class="reference internal" href="hash_common_32_0.html#hash-common-32-0"><span class="std std-ref">hash_common_32</span></a></div>
-<div class="line"><a class="reference internal" href="hash_common_64_0.html#hash-common-64-0"><span class="std std-ref">hash_common_64</span></a></div>
-<div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="hash_protocol_0.html#hash-protocol-0"><span class="std std-ref">hash_protocol</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -472,21 +465,89 @@
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line"> <a class="reference internal" href="hash_digest_protocol_0.html#hash-digest-protocol-0-block-size-1"><span class="std std-ref">block_size/1</span></a>  <a class="reference internal" href="hash_digest_protocol_0.html#hash-digest-protocol-0-digest-2"><span class="std std-ref">digest/2</span></a>  <a class="reference internal" href="hash_digest_protocol_0.html#hash-digest-protocol-0-digest-size-1"><span class="std std-ref">digest_size/1</span></a>  <a class="reference internal" href="hash_state_protocol_0.html#hash-state-protocol-0-final-hash-state-2"><span class="std std-ref">final_hash_state/2</span></a>  <a class="reference internal" href="hash_protocol_0.html#hash-protocol-0-hash-2"><span class="std std-ref">hash/2</span></a>  <a class="reference internal" href="hash_state_protocol_0.html#hash-state-protocol-0-new-hash-state-1"><span class="std std-ref">new_hash_state/1</span></a>  <a class="reference internal" href="hash_state_protocol_0.html#hash-state-protocol-0-update-hash-state-3"><span class="std std-ref">update_hash_state/3</span></a></div>
+<div class="line"> <a class="reference internal" href="hash_protocol_0.html#hash-protocol-0-hash-2"><span class="std std-ref">hash/2</span></a></div>
 </div>
 </div>
 <nav class="contents local" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p></li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id2">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id3">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id4">Operators</a></p></li>
+<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
+<ul>
+<li><p><a class="reference internal" href="#new-hash-state-1" id="id2"><code class="docutils literal notranslate"><span class="pre">new_hash_state/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#update-hash-state-3" id="id3"><code class="docutils literal notranslate"><span class="pre">update_hash_state/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#final-hash-state-2" id="id4"><code class="docutils literal notranslate"><span class="pre">final_hash_state/2</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id5">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id6">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id7">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
-<p>(no local declarations; see entity ancestors if any)</p>
+<section id="new-hash-state-1">
+<span id="hash-state-protocol-0-new-hash-state-1"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">new_hash_state/1</span></code></a><a class="headerlink" href="#new-hash-state-1" title="Link to this heading"></a></h3>
+<p>Creates a fresh hashing state, equivalent to having hashed the empty message so far. The state is an opaque, algorithm-specific term; callers should only pass it to update_hash_state/3 and final_hash_state/2, never inspect or construct it directly.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">new_hash_state(State)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">new_hash_state(--nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
 </section>
+<section id="update-hash-state-3">
+<span id="hash-state-protocol-0-update-hash-state-3"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">update_hash_state/3</span></code></a><a class="headerlink" href="#update-hash-state-3" title="Link to this heading"></a></h3>
+<p>Folds one chunk of bytes into a hashing state, returning the updated state. Can be called repeatedly, once per chunk, to fold in an arbitrarily long message without ever holding more than one chunk and the (bounded-size) state in memory at the same time. The chunks do not need to be the same length, and the empty chunk is allowed and is a no-op.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">update_hash_state(State,Bytes,NewState)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">update_hash_state(+nonvar,+list(byte),--nonvar)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="final-hash-state-2">
+<span id="hash-state-protocol-0-final-hash-state-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">final_hash_state/2</span></code></a><a class="headerlink" href="#final-hash-state-2" title="Link to this heading"></a></h3>
+<p>Finalizes a hashing state and returns the resulting hash, in the same representation as hash/2. The state must not be reused after finalization.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">final_hash_state(State,Hash)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">final_hash_state(+nonvar,--atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
 <section id="protected-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
 <p>(no local declarations; see entity ancestors if any)</p>
@@ -498,10 +559,6 @@
 <section id="operators">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
 <p>(none)</p>
-<div class="admonition seealso">
-<p class="admonition-title">See also</p>
-<p><a class="reference internal" href="blake2s_0.html#blake2s-0"><span class="std std-ref">blake2s</span></a>, <a class="reference internal" href="sha512_0.html#sha512-0"><span class="std std-ref">sha512</span></a>, <a class="reference internal" href="sha512_256_0.html#sha512-256-0"><span class="std std-ref">sha512_256</span></a></p>
-</div>
 </section>
 </section>
 
@@ -509,8 +566,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="gsp_pattern_miner_0.html" class="btn btn-neutral float-left" title="gsp_pattern_miner" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="blake2s_0.html" class="btn btn-neutral float-right" title="blake2s" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="hash_protocol_0.html" class="btn btn-neutral float-left" title="hash_protocol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="md5_0.html" class="btn btn-neutral float-right" title="md5" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

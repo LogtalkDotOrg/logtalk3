@@ -20,12 +20,12 @@
 
 
 :- object(djb2_32,
-	implements(hash_protocol)).
+	implements(hash_state_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-04,
+		date is 2026-07-16,
 		comment is 'DJB2 32-bit hash function.',
 		see_also is [djb2_64, sdbm_32, fnv1a_32]
 	]).
@@ -38,6 +38,14 @@
 		djb2_32(Bytes, 5381, Value),
 		word32_hex(Value, Hash).
 
+	new_hash_state(5381).
+
+	update_hash_state(Acc0, Bytes, Acc) :-
+		djb2_32(Bytes, Acc0, Acc).
+
+	final_hash_state(Acc, Hash) :-
+		word32_hex(Acc, Hash).
+
 	djb2_32([], Acc, Acc).
 	djb2_32([Byte| Bytes], Acc0, Acc) :-
 		Acc1 is ((Acc0 << 5) + Acc0 + Byte) /\ 0xFFFFFFFF,
@@ -47,12 +55,12 @@
 
 
 :- object(sdbm_32,
-	implements(hash_protocol)).
+	implements(hash_state_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-04,
+		date is 2026-07-16,
 		comment is 'sdbm 32-bit hash function.',
 		see_also is [sdbm_64, djb2_32, fnv1a_32]
 	]).
@@ -65,6 +73,14 @@
 		sdbm_32(Bytes, 0, Value),
 		word32_hex(Value, Hash).
 
+	new_hash_state(0).
+
+	update_hash_state(Acc0, Bytes, Acc) :-
+		sdbm_32(Bytes, Acc0, Acc).
+
+	final_hash_state(Acc, Hash) :-
+		word32_hex(Acc, Hash).
+
 	sdbm_32([], Acc, Acc).
 	sdbm_32([Byte| Bytes], Acc0, Acc) :-
 		Acc1 is (Byte + (Acc0 << 6) + (Acc0 << 16) - Acc0) /\ 0xFFFFFFFF,
@@ -74,12 +90,12 @@
 
 
 :- object(fnv1a_32,
-	implements(hash_protocol)).
+	implements(hash_state_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-04,
+		date is 2026-07-16,
 		comment is 'FNV-1a 32-bit hash function.',
 		see_also is [fnv1a_64, djb2_32, sdbm_32]
 	]).
@@ -92,6 +108,14 @@
 		fnv1a_32(Bytes, 0x811C9DC5, Value),
 		word32_hex(Value, Hash).
 
+	new_hash_state(0x811C9DC5).
+
+	update_hash_state(Acc0, Bytes, Acc) :-
+		fnv1a_32(Bytes, Acc0, Acc).
+
+	final_hash_state(Acc, Hash) :-
+		word32_hex(Acc, Hash).
+
 	fnv1a_32([], Acc, Acc).
 	fnv1a_32([Byte| Bytes], Acc0, Acc) :-
 		Acc1 is xor(Acc0, Byte),
@@ -102,17 +126,20 @@
 
 
 :- object(crc32_reflected(_Polynomial_),
-	implements(hash_protocol)).
+	implements(hash_state_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-05,
+		date is 2026-07-16,
 		comment is 'Parametric reflected CRC-32 hash function using initial value 0xFFFFFFFF and final xor 0xFFFFFFFF.',
 		parameters is [
 			'Polynomial' - 'Reflected CRC-32 polynomial.'
 		],
-		see_also is [crc32_non_reflected(_,_,_,_), crc32b, crc32c, crc32posix, crc32mpeg2, crc32bzip2, crc32q, murmurhash3_x86_32, fnv1a_32]
+		see_also is [
+			crc32_non_reflected(_,_,_,_), crc32b, crc32c, crc32posix, crc32mpeg2, crc32bzip2, crc32q,
+			murmurhash3_x86_32, fnv1a_32
+		]
 	]).
 
 	:- uses(hash_common_32, [
@@ -121,6 +148,15 @@
 
 	hash(Bytes, Hash) :-
 		crc32_reflected(Bytes, CRC32),
+		word32_hex(CRC32, Hash).
+
+	new_hash_state(0xFFFFFFFF).
+
+	update_hash_state(Acc0, Bytes, Acc) :-
+		crc32_acc(Bytes, Acc0, Acc).
+
+	final_hash_state(Acc, Hash) :-
+		CRC32 is xor(Acc, 0xFFFFFFFF) /\ 0xFFFFFFFF,
 		word32_hex(CRC32, Hash).
 
 	crc32_reflected(Bytes, CRC32) :-
@@ -158,7 +194,10 @@
 		author is 'Paulo Moura',
 		date is 2026-04-05,
 		comment is 'CRC-32/ISO-HDLC hash function using the reflected polynomial 0xEDB88320, initial value 0xFFFFFFFF, and final xor 0xFFFFFFFF.',
-		see_also is [crc32_reflected(_), crc32c, crc32posix, crc32mpeg2, crc32bzip2, crc32q, murmurhash3_x86_32, fnv1a_32]
+		see_also is [
+			crc32_reflected(_), crc32c, crc32posix, crc32mpeg2, crc32bzip2, crc32q, murmurhash3_x86_32,
+			fnv1a_32
+		]
 	]).
 
 :- end_object.
@@ -172,19 +211,22 @@
 		author is 'Paulo Moura',
 		date is 2026-04-05,
 		comment is 'CRC-32C/Castagnoli hash function using the reflected polynomial 0x82F63B78, initial value 0xFFFFFFFF, and final xor 0xFFFFFFFF.',
-		see_also is [crc32_reflected(_), crc32b, crc32posix, crc32mpeg2, crc32bzip2, crc32q, murmurhash3_x86_32, fnv1a_32]
+		see_also is [
+			crc32_reflected(_), crc32b, crc32posix, crc32mpeg2, crc32bzip2, crc32q, murmurhash3_x86_32,
+			fnv1a_32
+		]
 	]).
 
 :- end_object.
 
 
 :- object(crc32_non_reflected(_Polynomial_, _Initial_, _FinalXor_, _AppendLength_),
-	implements(hash_protocol)).
+	implements(hash_state_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-05,
+		date is 2026-07-16,
 		comment is 'Parametric non-reflected CRC-32 hash function using a canonical polynomial, configurable initial value and final xor value, and optional appended little-endian length bytes.',
 		parameters is [
 			'Polynomial' - 'Canonical non-reflected CRC-32 polynomial.',
@@ -192,7 +234,10 @@
 			'FinalXor' - 'Final xor value.',
 			'AppendLength' - 'Boolean flag controlling whether the message length is appended as little-endian bytes.'
 		],
-		see_also is [crc32_reflected(_), crc32b, crc32c, crc32posix, crc32mpeg2, crc32bzip2, crc32q, murmurhash3_x86_32, fnv1a_32]
+		see_also is [
+			crc32_reflected(_), crc32b, crc32c, crc32posix, crc32mpeg2, crc32bzip2, crc32q,
+			murmurhash3_x86_32, fnv1a_32
+		]
 	]).
 
 	:- uses(hash_common_32, [
@@ -205,6 +250,23 @@
 
 	hash(Bytes, Hash) :-
 		crc32_non_reflected(Bytes, CRC32),
+		word32_hex(CRC32, Hash),
+		!.
+
+	new_hash_state(state(_Initial_, 0)).
+
+	update_hash_state(state(Acc0, Length0), Bytes, state(Acc, Length)) :-
+		crc32_non_reflected_acc(Bytes, Acc0, Acc),
+		length(Bytes, BytesLength),
+		Length is Length0 + BytesLength.
+
+	final_hash_state(state(Acc0, Length), Hash) :-
+		(	_AppendLength_ == true ->
+			length_bytes(Length, LengthBytes),
+			crc32_non_reflected_acc(LengthBytes, Acc0, Acc1)
+		;	Acc1 = Acc0
+		),
+		CRC32 is xor(Acc1, _FinalXor_) /\ 0xFFFFFFFF,
 		word32_hex(CRC32, Hash),
 		!.
 
@@ -259,7 +321,10 @@
 		author is 'Paulo Moura',
 		date is 2026-04-05,
 		comment is 'CRC-32/POSIX (cksum) hash function using the canonical polynomial 0x04C11DB7, initial value 0x00000000, appended little-endian length bytes, and final xor 0xFFFFFFFF.',
-		see_also is [crc32_non_reflected(_,_,_,_), crc32_reflected(_), crc32b, crc32c, crc32mpeg2, crc32bzip2, crc32q, murmurhash3_x86_32, fnv1a_32]
+		see_also is [
+			crc32_non_reflected(_,_,_,_), crc32_reflected(_), crc32b, crc32c, crc32mpeg2, crc32bzip2,
+			crc32q, murmurhash3_x86_32, fnv1a_32
+		]
 	]).
 
 :- end_object.
@@ -273,7 +338,10 @@
 		author is 'Paulo Moura',
 		date is 2026-04-05,
 		comment is 'CRC-32/MPEG-2 hash function using the canonical polynomial 0x04C11DB7, initial value 0xFFFFFFFF, and final xor 0x00000000.',
-		see_also is [crc32_non_reflected(_,_,_,_), crc32posix, crc32bzip2, crc32q, crc32_reflected(_), crc32b, crc32c, murmurhash3_x86_32, fnv1a_32]
+		see_also is [
+			crc32_non_reflected(_,_,_,_), crc32posix, crc32bzip2, crc32q, crc32_reflected(_), crc32b,
+			crc32c, murmurhash3_x86_32, fnv1a_32
+		]
 	]).
 
 :- end_object.
@@ -287,7 +355,10 @@
 		author is 'Paulo Moura',
 		date is 2026-04-05,
 		comment is 'CRC-32/BZIP2 hash function using the canonical polynomial 0x04C11DB7, initial value 0xFFFFFFFF, and final xor 0xFFFFFFFF.',
-		see_also is [crc32_non_reflected(_,_,_,_), crc32mpeg2, crc32posix, crc32q, crc32_reflected(_), crc32b, crc32c, murmurhash3_x86_32, fnv1a_32]
+		see_also is [
+			crc32_non_reflected(_,_,_,_), crc32mpeg2, crc32posix, crc32q, crc32_reflected(_), crc32b,
+			crc32c, murmurhash3_x86_32, fnv1a_32
+		]
 	]).
 
 :- end_object.
@@ -301,19 +372,22 @@
 		author is 'Paulo Moura',
 		date is 2026-04-05,
 		comment is 'CRC-32Q hash function, also used by AIXM-style formats, using the canonical polynomial 0x814141AB, initial value 0x00000000, and final xor 0x00000000.',
-		see_also is [crc32_non_reflected(_,_,_,_), crc32mpeg2, crc32bzip2, crc32posix, crc32_reflected(_), crc32b, crc32c, murmurhash3_x86_32, fnv1a_32]
+		see_also is [
+			crc32_non_reflected(_,_,_,_), crc32mpeg2, crc32bzip2, crc32posix, crc32_reflected(_), crc32b,
+			crc32c, murmurhash3_x86_32, fnv1a_32
+		]
 	]).
 
 :- end_object.
 
 
 :- object(murmurhash3_x86_32,
-	implements(hash_protocol)).
+	implements(hash_state_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-04,
+		date is 2026-07-15,
 		comment is 'MurmurHash3 x86 32-bit hash function with seed 0.',
 		see_also is [murmurhash3_x86_128, murmurhash3_x64_128]
 	]).
@@ -323,11 +397,29 @@
 	]).
 
 	:- uses(list, [
-		length/2
+		append/3, length/2
 	]).
 
 	hash(Bytes, Hash) :-
 		murmurhash3_x86_32(Bytes, 0, Value),
+		word32_hex(Value, Hash).
+
+	% the state buffers the at-most-3 leftover bytes that do not yet form a
+	% complete 4-byte block; Length is the total number of bytes seen so
+	% far, needed only at finalization
+	new_hash_state(state([], 0, 0)).
+
+	update_hash_state(state(Buffer0, Length0, H0), Bytes, state(Buffer1, Length1, H1)) :-
+		append(Buffer0, Bytes, Combined),
+		length(Bytes, BytesLength),
+		Length1 is Length0 + BytesLength,
+		body(Combined, H0, _, H1, Buffer1).
+
+	final_hash_state(state(Buffer, Length, H1), Hash) :-
+		tail(Buffer, K1),
+		H2 is xor(H1, K1),
+		H3 is xor(H2, Length),
+		fmix(H3, Value),
 		word32_hex(Value, Hash).
 
 	murmurhash3_x86_32(Bytes, Seed, Hash) :-
@@ -381,19 +473,18 @@
 
 
 :- object(blake2s,
-	implements(hash_digest_protocol)).
+	implements([hash_digest_protocol, hash_state_protocol])).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-15,
+		date is 2026-07-16,
 		comment is 'BLAKE2s hash function.',
 		see_also is [blake2b, md5, sha256]
 	]).
 
 	:- uses(hash_common_32, [
-		add32/3, bytes_hex/2, integer_to_little_endian_bytes32/3,
-		little_endian_word32/2, ror32/3
+		add32/3, bytes_hex/2, integer_to_little_endian_bytes32/3, little_endian_word32/2, ror32/3
 	]).
 
 	:- uses(list, [
@@ -412,6 +503,43 @@
 	hash(Bytes, Hash) :-
 		digest(Bytes, DigestBytes),
 		bytes_hex(DigestBytes, Hash).
+
+	% unlike the MD-style hashes, BLAKE2's compression function is given an
+	% explicit flag marking whether the block being compressed is the last
+	% one, and that flag changes the digest, not just an appended length
+	% field; the state must therefore always hold back a full block (up to
+	% 64 bytes) that has not yet been compressed, since a block that
+	% currently looks complete may still turn out not to be the last one
+	% once more bytes arrive in a later update_hash_state/3 call. Only at
+	% final_hash_state/2, when no more bytes can arrive, is the held-back
+	% buffer known to be the final block
+	new_hash_state(state([], 0, InitialState)) :-
+		blake2s_initial_state(InitialState).
+
+	update_hash_state(state(Buffer0, Total0, State0), Bytes, state(Buffer1, Total1, State1)) :-
+		append(Buffer0, Bytes, Combined),
+		blake2s_consume_full_blocks(Combined, Total0, State0, Buffer1, Total1, State1).
+
+	final_hash_state(state(Buffer, Total0, State0), Hash) :-
+		length(Buffer, BlockLength),
+		Total is Total0 + BlockLength,
+		pad_block(Buffer, 64, Block),
+		blake2s_compress(State0, Block, Total, true, State),
+		blake2s_state_bytes(State, DigestBytes),
+		bytes_hex(DigestBytes, Hash).
+
+	% consumes complete, definitely-not-final 64-byte blocks from Buffer,
+	% leaving between 1 and 64 bytes (or 0, only if Buffer started empty
+	% and stays empty) as the new held-back buffer
+	blake2s_consume_full_blocks(Buffer, Total, State, Buffer, Total, State) :-
+		length(Buffer, Length),
+		Length =< 64,
+		!.
+	blake2s_consume_full_blocks(Buffer, Total0, State0, FinalBuffer, Total, State) :-
+		take_up_to(64, Buffer, Block, Rest),
+		Total1 is Total0 + 64,
+		blake2s_compress(State0, Block, Total1, false, State1),
+		blake2s_consume_full_blocks(Rest, Total1, State1, FinalBuffer, Total, State).
 
 	blake2s_initial_state([H0, 0xBB67AE85, 0x3C6EF372, 0xA54FF53A, 0x510E527F, 0x9B05688C, 0x1F83D9AB, 0x5BE0CD19]) :-
 		H0 is xor(0x6A09E667, 0x01010020) /\ 0xFFFFFFFF.
@@ -561,23 +689,23 @@
 
 
 :- object(md5,
-	implements(hash_digest_protocol)).
+	implements([hash_digest_protocol, hash_state_protocol])).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-06-01,
+		date is 2026-07-16,
 		comment is 'MD5 hash function.',
 		see_also is [sha1, sha256]
 	]).
 
 	:- uses(hash_common_32, [
 		add32/3, add32/5, bytes_hex/2, integer_to_little_endian_bytes32/3, little_endian_word32/2, pad_md/4,
-		rol32/3
+		pad_md_tail/5, rol32/3
 	]).
 
 	:- uses(list, [
-		nth0/3, take/4
+		append/3, length/2, nth0/3, take/4
 	]).
 
 	digest(Bytes, DigestBytes) :-
@@ -595,6 +723,41 @@
 	hash(Bytes, Hash) :-
 		digest(Bytes, DigestBytes),
 		bytes_hex(DigestBytes, Hash).
+
+	% the state buffers the at-most-63 leftover bytes that do not yet form a
+	% complete 64-byte block; Length is the total number of bytes seen so
+	% far, needed only for the MD padding appended to the final, partial
+	% block at finalization
+	new_hash_state(state([], 0, 0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476)).
+
+	update_hash_state(state(Buffer0, Length0, A0, B0, C0, D0), Bytes, state(Buffer1, Length1, A1, B1, C1, D1)) :-
+		append(Buffer0, Bytes, Combined),
+		length(Bytes, BytesLength),
+		Length1 is Length0 + BytesLength,
+		md5_consume_blocks(Combined, A0, B0, C0, D0, A1, B1, C1, D1, Buffer1).
+
+	final_hash_state(state(Buffer, Length, A, B, C, D), Hash) :-
+		pad_md_tail(little, Buffer, Length, 8, PaddedTail),
+		md5_blocks(PaddedTail, A, B, C, D, FA, FB, FC, FD),
+		integer_to_little_endian_bytes32(FA, DigestBytes, BytesB),
+		integer_to_little_endian_bytes32(FB, BytesB, BytesC),
+		integer_to_little_endian_bytes32(FC, BytesC, BytesD),
+		integer_to_little_endian_bytes32(FD, BytesD, []),
+		bytes_hex(DigestBytes, Hash).
+
+	md5_consume_blocks(Bytes, A, B, C, D, A, B, C, D, Bytes) :-
+		length(Bytes, Length),
+		Length < 64,
+		!.
+	md5_consume_blocks(Bytes, A0, B0, C0, D0, A, B, C, D, Tail) :-
+		take(64, Bytes, Block, Rest),
+		block_words_le(Block, X),
+		md5_rounds(0, X, A0, B0, C0, D0, AA, BB, CC, DD),
+		add32(A0, AA, A1),
+		add32(B0, BB, B1),
+		add32(C0, CC, C1),
+		add32(D0, DD, D1),
+		md5_consume_blocks(Rest, A1, B1, C1, D1, A, B, C, D, Tail).
 
 	md5_blocks([], A, B, C, D, A, B, C, D).
 	md5_blocks([Byte| Bytes], A0, B0, C0, D0, A, B, C, D) :-

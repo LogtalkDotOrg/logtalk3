@@ -22,7 +22,7 @@
 :- object(hash_common_32).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2026-06-01,
 		comment is 'Auxiliary predicates for the hashes library 32-bit algorithms.'
@@ -140,6 +140,17 @@
 		argnames is ['Endian', 'Bytes', 'LengthFieldBytes', 'PaddedBytes']
 	]).
 
+	:- public(pad_md_tail/5).
+	:- mode(pad_md_tail(+little_big, +list(integer), +integer, +integer, -list(integer)), one).
+	:- info(pad_md_tail/5, [
+		comment is 'Pads the final, less-than-one-block tail of a message using MD-style padding given the total message length in bytes. For use when the message has already been consumed block by block during segmented/incremental hashing, so that only the unconsumed tail, and not the whole message, needs to be available.',
+		argnames is ['Endian', 'TailBytes', 'TotalLength', 'LengthFieldBytes', 'PaddedBytes']
+	]).
+
+	:- uses(list, [
+		append/3, length/2, reverse/2
+	]).
+
 	word32_hex(Word, Hex) :-
 		Mask is 0xFFFFFFFF,
 		Value is Word /\ Mask,
@@ -208,19 +219,34 @@
 		integer_to_big_endian_bytes32(Integer, Bytes, []).
 
 	pad_md(little, Bytes, LengthFieldBytes, PaddedBytes) :-
-		list::length(Bytes, Length),
+		length(Bytes, Length),
 		BitLength is Length * 8,
 		Zeros is (56 - ((Length + 1) mod 64) + 64) mod 64,
 		zeros(Zeros, ZeroBytes, LengthBytes),
 		little_endian_length_bytes(BitLength, LengthFieldBytes, LengthBytes),
-		list::append(Bytes, [0x80| ZeroBytes], PaddedBytes).
+		append(Bytes, [0x80| ZeroBytes], PaddedBytes).
 	pad_md(big, Bytes, LengthFieldBytes, PaddedBytes) :-
-		list::length(Bytes, Length),
+		length(Bytes, Length),
 		BitLength is Length * 8,
 		Zeros is (56 - ((Length + 1) mod 64) + 64) mod 64,
 		zeros(Zeros, ZeroBytes, LengthBytes),
 		big_endian_length_bytes(BitLength, LengthFieldBytes, LengthBytes),
-		list::append(Bytes, [0x80| ZeroBytes], PaddedBytes).
+		append(Bytes, [0x80| ZeroBytes], PaddedBytes).
+
+	pad_md_tail(little, TailBytes, TotalLength, LengthFieldBytes, PaddedBytes) :-
+		length(TailBytes, TailLength),
+		BitLength is TotalLength * 8,
+		Zeros is (56 - ((TailLength + 1) mod 64) + 64) mod 64,
+		zeros(Zeros, ZeroBytes, LengthBytes),
+		little_endian_length_bytes(BitLength, LengthFieldBytes, LengthBytes),
+		append(TailBytes, [0x80| ZeroBytes], PaddedBytes).
+	pad_md_tail(big, TailBytes, TotalLength, LengthFieldBytes, PaddedBytes) :-
+		length(TailBytes, TailLength),
+		BitLength is TotalLength * 8,
+		Zeros is (56 - ((TailLength + 1) mod 64) + 64) mod 64,
+		zeros(Zeros, ZeroBytes, LengthBytes),
+		big_endian_length_bytes(BitLength, LengthFieldBytes, LengthBytes),
+		append(TailBytes, [0x80| ZeroBytes], PaddedBytes).
 
 	zeros(0, Tail, Tail) :-
 		!.
@@ -238,7 +264,7 @@
 
 	big_endian_length_bytes(BitLength, Count, Bytes) :-
 		little_endian_length_bytes(BitLength, Count, ReversedBytes),
-		list::reverse(ReversedBytes, Bytes).
+		reverse(ReversedBytes, Bytes).
 
 	bytes_hex_codes([], []).
 	bytes_hex_codes([Byte| Bytes], [HighCode, LowCode| Codes]) :-

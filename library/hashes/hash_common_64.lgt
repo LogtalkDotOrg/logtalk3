@@ -119,6 +119,17 @@
 		argnames is ['Integer', 'Bytes']
 	]).
 
+	:- public(pad_md_tail/3).
+	:- mode(pad_md_tail(+list(integer), +integer, -list(integer)), one).
+	:- info(pad_md_tail/3, [
+		comment is 'Pads the final, less-than-one-block tail of a message using SHA-512-style MD padding (128-byte blocks, a big-endian 128-bit length field) given the total message length in bytes. For use when the message has already been consumed block by block during segmented/incremental hashing, so that only the unconsumed tail, and not the whole message, needs to be available.',
+		argnames is ['TailBytes', 'TotalLength', 'PaddedBytes']
+	]).
+
+	:- uses(list, [
+		append/3, length/2
+	]).
+
 	word64_hex(Word, Hex) :-
 		Mask is 0xFFFFFFFFFFFFFFFF,
 		Value is Word /\ Mask,
@@ -178,6 +189,27 @@
 
 	integer_to_big_endian_bytes64(Integer, Bytes) :-
 		integer_to_big_endian_bytes64(Integer, Bytes, []).
+
+	pad_md_tail(TailBytes, TotalLength, PaddedBytes) :-
+		length(TailBytes, TailLength),
+		BitLength is TotalLength * 8,
+		Zeros is (112 - ((TailLength + 1) mod 128) + 128) mod 128,
+		zeros(Zeros, ZeroBytes, LengthBytes),
+		length_bytes128(BitLength, LengthBytes),
+		append(TailBytes, [0x80| ZeroBytes], PaddedBytes).
+
+	zeros(0, Tail, Tail) :-
+		!.
+	zeros(Count, [0| Zeros], Tail) :-
+		NextCount is Count - 1,
+		zeros(NextCount, Zeros, Tail).
+
+	length_bytes128(BitLength, LengthBytes) :-
+		Two64 is 0x10000000000000000,
+		High is (BitLength // Two64) mod Two64,
+		Low is BitLength mod Two64,
+		integer_to_big_endian_bytes64(High, LengthBytes, LowBytes),
+		integer_to_big_endian_bytes64(Low, LowBytes, []).
 
 	fixed_hex_atom(Digits, Integer, Hex) :-
 		fixed_hex_codes(Digits, Integer, Codes),

@@ -151,6 +151,7 @@
 <li class="toctree-l2"><a class="reference internal" href="gravatar.html"><code class="docutils literal notranslate"><span class="pre">gravatar</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="gsp_pattern_miner.html"><code class="docutils literal notranslate"><span class="pre">gsp_pattern_miner</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">hashes</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#segmented-hashing">Segmented hashing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
@@ -465,6 +466,32 @@ value <code class="docutils literal notranslate"><span class="pre">0x00000000</s
 validate that the input is a list of bytes. When necessary, use the
 <code class="docutils literal notranslate"><span class="pre">types</span></code> library <code class="docutils literal notranslate"><span class="pre">type::check(list(byte),</span> <span class="pre">Input)</span></code> goal before calling
 the <code class="docutils literal notranslate"><span class="pre">hash/2</span></code> predicate.</p>
+<section id="segmented-hashing">
+<h2>Segmented hashing<a class="headerlink" href="#segmented-hashing" title="Link to this heading"></a></h2>
+<p>Objects implementing the <code class="docutils literal notranslate"><span class="pre">hash_state_protocol</span></code> protocol (which extends
+<code class="docutils literal notranslate"><span class="pre">hash_protocol</span></code>) additionally provide <code class="docutils literal notranslate"><span class="pre">new_hash_state/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">update_hash_state/3</span></code>, and <code class="docutils literal notranslate"><span class="pre">final_hash_state/2</span></code> predicates for
+genuine incremental hash computation. Unlike computing a hash from a
+single, fully materialized message, these predicates let the caller feed
+the message to the hash function one chunk at a time (e.g. as each chunk
+is read from a file or a network stream), discarding each chunk as soon
+as it has been folded into the state. Only the current chunk and a
+small, bounded amount of algorithm state (for block-padded and
+rate-limited algorithms, a leftover buffer smaller than one block or
+rate) are ever resident at once, regardless of the total message length.</p>
+<p>All hashing algorithms in this library implement
+<code class="docutils literal notranslate"><span class="pre">hash_state_protocol</span></code>.</p>
+<p>Example, hashing a message fed in three chunks:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> md5<span class="o">::</span>new_hash_state(<span class="nv">S0</span>),
+     md5<span class="o">::</span>update_hash_state(<span class="nv">S0</span>, [<span class="m">84</span>,<span class="m">104</span>,<span class="m">101</span>], <span class="nv">S1</span>),
+     md5<span class="o">::</span>update_hash_state(<span class="nv">S1</span>, [<span class="m">32</span>,<span class="m">113</span>,<span class="m">117</span>,<span class="m">105</span>,<span class="m">99</span>,<span class="m">107</span>], <span class="nv">S2</span>),
+     md5<span class="o">::</span>update_hash_state(<span class="nv">S2</span>, [<span class="m">32</span>,<span class="m">98</span>,<span class="m">114</span>,<span class="m">111</span>,<span class="m">119</span>,<span class="m">110</span>], <span class="nv">S3</span>),
+     md5<span class="o">::</span>final_hash_state(<span class="nv">S3</span>, <span class="nv">Hash</span>).
+<span class="nv">Hash</span> <span class="o">=</span> <span class="s">&#39;5aa207e85988921b8733912c4f526c80&#39;</span>
+yes
+</pre></div>
+</div>
+</section>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the

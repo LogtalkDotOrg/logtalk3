@@ -33,6 +33,14 @@
 		bytes_hex/2
 	]).
 
+	:- uses(list, [
+		append/3, length/2
+	]).
+
+	:- uses(integer, [
+		sequence/3
+	]).
+
 	cover(djb2_64).
 	cover(sdbm_64).
 	cover(fnv1a_64).
@@ -40,6 +48,7 @@
 	cover(siphash_2_4(_)).
 	cover(murmurhash3_x86_128).
 	cover(murmurhash3_x64_128).
+	cover(blake2b).
 	cover(sha3_224).
 	cover(sha3_256).
 	cover(sha3_384).
@@ -47,7 +56,6 @@
 	cover(shake128(_)).
 	cover(shake256(_)).
 	cover(sha1).
-	cover(blake2b).
 	cover(sha256).
 	cover(sha512).
 	cover(sha512_256).
@@ -109,6 +117,20 @@
 		atom_codes('The quick brown fox jumps over the lazy dog', Bytes),
 		murmurhash3_x64_128::hash(Bytes, Hash).
 
+	test(blake2b_empty, deterministic(Hash == '786a02f742015903c6c6fd852552d272912f4740e15847618a86e217f71f5419d25e1031afee585313896444934eb04b903a685b1448b755d56f701afe9be2ce')) :-
+		blake2b::hash([], Hash).
+
+	test(blake2b_abc, deterministic(Hash == 'ba80a53f981c4d0d6a2797b69f12f6e94c212f14685ac4b74b12bb6fdbffa2d17d87c5392aab792dc252d5de4533cc9518d38aa8dbf1925ab92386edd4009923')) :-
+		atom_codes('abc', Bytes),
+		blake2b::hash(Bytes, Hash).
+
+	test(blake2b_hash_digest_protocol, deterministic(Info == info('786a02f742015903c6c6fd852552d272912f4740e15847618a86e217f71f5419d25e1031afee585313896444934eb04b903a685b1448b755d56f701afe9be2ce', 64, 128))) :-
+		blake2b::digest([], Digest),
+		bytes_hex(Digest, Hex),
+		blake2b::digest_size(DigestSize),
+		blake2b::block_size(BlockSize),
+		Info = info(Hex, DigestSize, BlockSize).
+
 	test(sha3_224_empty, deterministic(Hash == '6b4e03423667dbb73b6e15454f0eb1abd4597f9a1b078e3f5b5a6bc7')) :-
 		sha3_224::hash([], Hash).
 
@@ -153,13 +175,6 @@
 
 	test(sha1_empty, deterministic(Hash == 'da39a3ee5e6b4b0d3255bfef95601890afd80709')) :-
 		sha1::hash([], Hash).
-
-	test(blake2b_empty, deterministic(Hash == '786a02f742015903c6c6fd852552d272912f4740e15847618a86e217f71f5419d25e1031afee585313896444934eb04b903a685b1448b755d56f701afe9be2ce')) :-
-		blake2b::hash([], Hash).
-
-	test(blake2b_quick_brown_fox, deterministic(Hash == 'a8add4bdddfd93e4877d2746e62817b116364a1fa7bc148d95090bc7333b3673f82401cf7aa2e4cb1ecd90296e3f14cb5413f8ed77be73045b13914cdcd6a918')) :-
-		atom_codes('The quick brown fox jumps over the lazy dog', Bytes),
-		blake2b::hash(Bytes, Hash).
 
 	test(sha1_quick_brown_fox, deterministic(Hash == '2fd4e1c67a2d28fced849ee1bb76e7391b93eb12')) :-
 		atom_codes('The quick brown fox jumps over the lazy dog', Bytes),
@@ -221,13 +236,6 @@
 		sha1::block_size(BlockSize),
 		Info = info(Hex, DigestSize, BlockSize).
 
-	test(blake2b_hash_digest_protocol, deterministic(Info == info('786a02f742015903c6c6fd852552d272912f4740e15847618a86e217f71f5419d25e1031afee585313896444934eb04b903a685b1448b755d56f701afe9be2ce', 64, 128))) :-
-		blake2b::digest([], Digest),
-		bytes_hex(Digest, Hex),
-		blake2b::digest_size(DigestSize),
-		blake2b::block_size(BlockSize),
-		Info = info(Hex, DigestSize, BlockSize).
-
 	test(sha256_hash_digest_protocol, deterministic(Info == info('e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855', 32, 64))) :-
 		sha256::digest([], Digest),
 		bytes_hex(Digest, Hex),
@@ -248,5 +256,321 @@
 		sha512_256::digest_size(DigestSize),
 		sha512_256::block_size(BlockSize),
 		Info = info(Hex, DigestSize, BlockSize).
+
+	% incremental hashing tests (new_hash_state/1, update_hash_state/3, final_hash_state/2)
+
+	test(djb2_64_incremental_matches_hash, deterministic(Hash1 == Hash2)) :-
+		atom_codes('The quick brown fox jumps over the lazy dog', Bytes),
+		djb2_64::hash(Bytes, Hash1),
+		chunks(1, Bytes, Chunks),
+		run_incremental(djb2_64, Chunks, Hash2).
+
+	test(sdbm_64_incremental_matches_hash, deterministic(Hash1 == Hash2)) :-
+		atom_codes('The quick brown fox jumps over the lazy dog', Bytes),
+		sdbm_64::hash(Bytes, Hash1),
+		chunks(7, Bytes, Chunks),
+		run_incremental(sdbm_64, Chunks, Hash2).
+
+	test(fnv1a_64_incremental_matches_hash, deterministic(Hash1 == Hash2)) :-
+		atom_codes('The quick brown fox jumps over the lazy dog', Bytes),
+		fnv1a_64::hash(Bytes, Hash1),
+		chunks(3, Bytes, Chunks),
+		run_incremental(fnv1a_64, Chunks, Hash2).
+
+	test(siphash_2_4_incremental_empty, deterministic(Hash == '726fdb47dd0e0e31')) :-
+		run_incremental(siphash_2_4, [], Hash).
+
+	test(siphash_2_4_incremental_vector_4, deterministic(Hash == 'cf2794e0277187b7')) :-
+		run_incremental(siphash_2_4, [[0,1], [2,3]], Hash).
+
+	% byte-by-byte chunking exercises the worst case for the internal
+	% leftover buffer, which never accumulates more than 7 bytes at a time
+	test(siphash_2_4_incremental_matches_hash_byte_by_byte, deterministic(Hash1 == Hash2)) :-
+		atom_codes('The quick brown fox jumps over the lazy dog', Bytes),
+		siphash_2_4::hash(Bytes, Hash1),
+		chunks(1, Bytes, Chunks),
+		run_incremental(siphash_2_4, Chunks, Hash2).
+
+	test(siphash_2_4_key_incremental_matches_hash, deterministic(Hash1 == Hash2)) :-
+		atom_codes('The quick brown fox jumps over the lazy dog', Bytes),
+		Key = [15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0],
+		siphash_2_4(Key)::hash(Bytes, Hash1),
+		chunks(5, Bytes, Chunks),
+		run_incremental(siphash_2_4(Key), Chunks, Hash2).
+
+	test(murmurhash3_x86_128_incremental_empty, deterministic(Hash == '00000000000000000000000000000000')) :-
+		run_incremental(murmurhash3_x86_128, [], Hash).
+
+	test(murmurhash3_x86_128_incremental_matches_hash_byte_by_byte, deterministic(Hash1 == Hash2)) :-
+		atom_codes('The quick brown fox jumps over the lazy dog', Bytes),
+		murmurhash3_x86_128::hash(Bytes, Hash1),
+		chunks(1, Bytes, Chunks),
+		run_incremental(murmurhash3_x86_128, Chunks, Hash2).
+
+	test(murmurhash3_x64_128_incremental_empty, deterministic(Hash == '00000000000000000000000000000000')) :-
+		run_incremental(murmurhash3_x64_128, [], Hash).
+
+	test(murmurhash3_x64_128_incremental_matches_hash_byte_by_byte, deterministic(Hash1 == Hash2)) :-
+		atom_codes('The quick brown fox jumps over the lazy dog', Bytes),
+		murmurhash3_x64_128::hash(Bytes, Hash1),
+		chunks(1, Bytes, Chunks),
+		run_incremental(murmurhash3_x64_128, Chunks, Hash2).
+
+	test(blake2b_incremental_empty, deterministic(Hash == '786a02f742015903c6c6fd852552d272912f4740e15847618a86e217f71f5419d25e1031afee585313896444934eb04b903a685b1448b755d56f701afe9be2ce')) :-
+		run_incremental(blake2b, [], Hash).
+
+	test(blake2b_incremental_matches_hash_single_chunk, deterministic(Hash1 == Hash2)) :-
+		atom_codes('abc', Bytes),
+		blake2b::hash(Bytes, Hash1),
+		run_incremental(blake2b, [Bytes], Hash2).
+
+	% exact block boundary: two chunks whose lengths add up to exactly one
+	% 128-byte BLAKE2b block; unlike MD5/SHA, this must still be compressed
+	% as the final block (Final = true), which blake2b_consume_full_blocks/6
+	% only does at final_hash_state/2, never eagerly inside update_hash_state/3
+	test(blake2b_incremental_matches_hash_exact_block_boundary, deterministic(Hash1 == Hash2)) :-
+		sequence(1, 128, Bytes),
+		blake2b::hash(Bytes, Hash1),
+		split_at(50, Bytes, Chunk1, Chunk2),
+		run_incremental(blake2b, [Chunk1, Chunk2], Hash2).
+
+	test(blake2b_incremental_matches_hash_block_boundary_plus_one, deterministic(Hash1 == Hash2)) :-
+		sequence(1, 129, Bytes),
+		blake2b::hash(Bytes, Hash1),
+		split_at(128, Bytes, Chunk1, Chunk2),
+		run_incremental(blake2b, [Chunk1, Chunk2], Hash2).
+
+	test(blake2b_incremental_matches_hash_block_boundary_minus_one, deterministic(Hash1 == Hash2)) :-
+		sequence(1, 127, Bytes),
+		blake2b::hash(Bytes, Hash1),
+		split_at(90, Bytes, Chunk1, Chunk2),
+		run_incremental(blake2b, [Chunk1, Chunk2], Hash2).
+
+	% unaligned chunking across several blocks, exercising the buffer and
+	% block-consuming logic at every offset within a block
+	test(blake2b_incremental_matches_hash_unaligned_chunks, deterministic(Hash1 == Hash2)) :-
+		sequence(1, 260, Bytes),
+		blake2b::hash(Bytes, Hash1),
+		chunks(9, Bytes, Chunks),
+		run_incremental(blake2b, Chunks, Hash2).
+
+	% BLAKE2-specific: the compression of a block differs depending on
+	% whether it is flagged final or not, so a message that is exactly one
+	% block long must hash differently from the same bytes followed by more
+	% data, even though the first block's raw bytes are identical in both
+	% cases; this pins down that update_hash_state/3 never compresses a
+	% held-back block until final_hash_state/2 confirms it really is final
+	test(blake2b_incremental_final_block_is_not_compressed_early, deterministic(Hash128 \== Hash129)) :-
+		sequence(1, 128, Bytes128),
+		blake2b::hash(Bytes128, Hash128),
+		run_incremental(blake2b, [Bytes128, [129]], Hash129).
+
+	% SHA-3 / SHAKE family: byte-by-byte equivalence, plus a test with the
+	% message length exactly matching the rate (block) size to exercise the
+	% absorb_full_blocks/4 and padding_block/2 boundary
+	test(sha3_224_incremental_matches_hash_byte_by_byte, deterministic(Hash1 == Hash2)) :-
+		atom_codes('The quick brown fox jumps over the lazy dog', Bytes),
+		sha3_224::hash(Bytes, Hash1),
+		chunks(1, Bytes, Chunks),
+		run_incremental(sha3_224, Chunks, Hash2).
+
+	test(sha3_224_incremental_matches_hash_rate_boundary, deterministic(Hash1 == Hash2)) :-
+		sequence(0, 143, Bytes),
+		sha3_224::hash(Bytes, Hash1),
+		split_at(100, Bytes, Chunk1, Chunk2),
+		run_incremental(sha3_224, [Chunk1, Chunk2], Hash2).
+
+	test(sha3_256_incremental_matches_hash_byte_by_byte, deterministic(Hash1 == Hash2)) :-
+		atom_codes('The quick brown fox jumps over the lazy dog', Bytes),
+		sha3_256::hash(Bytes, Hash1),
+		chunks(1, Bytes, Chunks),
+		run_incremental(sha3_256, Chunks, Hash2).
+
+	test(sha3_256_incremental_matches_hash_rate_boundary, deterministic(Hash1 == Hash2)) :-
+		sequence(0, 135, Bytes),
+		sha3_256::hash(Bytes, Hash1),
+		split_at(90, Bytes, Chunk1, Chunk2),
+		run_incremental(sha3_256, [Chunk1, Chunk2], Hash2).
+
+	test(sha3_384_incremental_matches_hash_byte_by_byte, deterministic(Hash1 == Hash2)) :-
+		atom_codes('The quick brown fox jumps over the lazy dog', Bytes),
+		sha3_384::hash(Bytes, Hash1),
+		chunks(1, Bytes, Chunks),
+		run_incremental(sha3_384, Chunks, Hash2).
+
+	test(sha3_384_incremental_matches_hash_rate_boundary, deterministic(Hash1 == Hash2)) :-
+		sequence(0, 103, Bytes),
+		sha3_384::hash(Bytes, Hash1),
+		split_at(70, Bytes, Chunk1, Chunk2),
+		run_incremental(sha3_384, [Chunk1, Chunk2], Hash2).
+
+	test(sha3_512_incremental_matches_hash_byte_by_byte, deterministic(Hash1 == Hash2)) :-
+		atom_codes('The quick brown fox jumps over the lazy dog', Bytes),
+		sha3_512::hash(Bytes, Hash1),
+		chunks(1, Bytes, Chunks),
+		run_incremental(sha3_512, Chunks, Hash2).
+
+	test(sha3_512_incremental_matches_hash_rate_boundary, deterministic(Hash1 == Hash2)) :-
+		sequence(0, 71, Bytes),
+		sha3_512::hash(Bytes, Hash1),
+		split_at(50, Bytes, Chunk1, Chunk2),
+		run_incremental(sha3_512, [Chunk1, Chunk2], Hash2).
+
+	test(shake128_32_incremental_matches_hash_byte_by_byte, deterministic(Hash1 == Hash2)) :-
+		atom_codes('The quick brown fox jumps over the lazy dog', Bytes),
+		shake128(32)::hash(Bytes, Hash1),
+		chunks(1, Bytes, Chunks),
+		run_incremental(shake128(32), Chunks, Hash2).
+
+	test(shake128_32_incremental_matches_hash_rate_boundary, deterministic(Hash1 == Hash2)) :-
+		sequence(0, 167, Bytes),
+		shake128(32)::hash(Bytes, Hash1),
+		split_at(120, Bytes, Chunk1, Chunk2),
+		run_incremental(shake128(32), [Chunk1, Chunk2], Hash2).
+
+	test(shake256_64_incremental_matches_hash_byte_by_byte, deterministic(Hash1 == Hash2)) :-
+		atom_codes('The quick brown fox jumps over the lazy dog', Bytes),
+		shake256(64)::hash(Bytes, Hash1),
+		chunks(1, Bytes, Chunks),
+		run_incremental(shake256(64), Chunks, Hash2).
+
+	test(shake256_64_incremental_matches_hash_rate_boundary, deterministic(Hash1 == Hash2)) :-
+		sequence(0, 135, Bytes),
+		shake256(64)::hash(Bytes, Hash1),
+		split_at(90, Bytes, Chunk1, Chunk2),
+		run_incremental(shake256(64), [Chunk1, Chunk2], Hash2).
+
+	test(sha1_incremental_empty, deterministic(Hash == 'da39a3ee5e6b4b0d3255bfef95601890afd80709')) :-
+		run_incremental(sha1, [], Hash).
+
+	test(sha1_incremental_matches_hash_exact_block_boundary, deterministic(Hash1 == Hash2)) :-
+		sequence(1, 64, Bytes),
+		sha1::hash(Bytes, Hash1),
+		split_at(30, Bytes, Chunk1, Chunk2),
+		run_incremental(sha1, [Chunk1, Chunk2], Hash2).
+
+	test(sha1_incremental_matches_hash_block_boundary_plus_one, deterministic(Hash1 == Hash2)) :-
+		sequence(1, 65, Bytes),
+		sha1::hash(Bytes, Hash1),
+		split_at(64, Bytes, Chunk1, Chunk2),
+		run_incremental(sha1, [Chunk1, Chunk2], Hash2).
+
+	test(sha1_incremental_matches_hash_byte_by_byte, deterministic(Hash1 == Hash2)) :-
+		sequence(1, 130, Bytes),
+		sha1::hash(Bytes, Hash1),
+		chunks(1, Bytes, Chunks),
+		run_incremental(sha1, Chunks, Hash2).
+
+	test(sha256_incremental_empty, deterministic(Hash == 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855')) :-
+		run_incremental(sha256, [], Hash).
+
+	test(sha256_incremental_matches_hash_exact_block_boundary, deterministic(Hash1 == Hash2)) :-
+		sequence(1, 64, Bytes),
+		sha256::hash(Bytes, Hash1),
+		split_at(30, Bytes, Chunk1, Chunk2),
+		run_incremental(sha256, [Chunk1, Chunk2], Hash2).
+
+	test(sha256_incremental_matches_hash_block_boundary_minus_one, deterministic(Hash1 == Hash2)) :-
+		sequence(1, 63, Bytes),
+		sha256::hash(Bytes, Hash1),
+		split_at(40, Bytes, Chunk1, Chunk2),
+		run_incremental(sha256, [Chunk1, Chunk2], Hash2).
+
+	test(sha256_incremental_matches_hash_byte_by_byte, deterministic(Hash1 == Hash2)) :-
+		sequence(1, 130, Bytes),
+		sha256::hash(Bytes, Hash1),
+		chunks(1, Bytes, Chunks),
+		run_incremental(sha256, Chunks, Hash2).
+
+	test(sha512_incremental_empty, deterministic(Hash == 'cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e')) :-
+		run_incremental(sha512, [], Hash).
+
+	test(sha512_incremental_matches_hash_exact_block_boundary, deterministic(Hash1 == Hash2)) :-
+		sequence(1, 128, Bytes),
+		sha512::hash(Bytes, Hash1),
+		split_at(50, Bytes, Chunk1, Chunk2),
+		run_incremental(sha512, [Chunk1, Chunk2], Hash2).
+
+	test(sha512_incremental_matches_hash_block_boundary_plus_one, deterministic(Hash1 == Hash2)) :-
+		sequence(1, 129, Bytes),
+		sha512::hash(Bytes, Hash1),
+		split_at(128, Bytes, Chunk1, Chunk2),
+		run_incremental(sha512, [Chunk1, Chunk2], Hash2).
+
+	test(sha512_incremental_matches_hash_unaligned_chunks, deterministic(Hash1 == Hash2)) :-
+		sequence(1, 260, Bytes),
+		sha512::hash(Bytes, Hash1),
+		chunks(9, Bytes, Chunks),
+		run_incremental(sha512, Chunks, Hash2).
+
+	test(sha512_256_incremental_empty, deterministic(Hash == 'c672b8d1ef56ed28ab87c3622c5114069bdd3ad7b8f9737498d0c01ecef0967a')) :-
+		run_incremental(sha512_256, [], Hash).
+
+	test(sha512_256_incremental_matches_hash_exact_block_boundary, deterministic(Hash1 == Hash2)) :-
+		sequence(1, 128, Bytes),
+		sha512_256::hash(Bytes, Hash1),
+		split_at(50, Bytes, Chunk1, Chunk2),
+		run_incremental(sha512_256, [Chunk1, Chunk2], Hash2).
+
+	test(sha512_256_incremental_matches_hash_block_boundary_plus_one, deterministic(Hash1 == Hash2)) :-
+		sequence(1, 129, Bytes),
+		sha512_256::hash(Bytes, Hash1),
+		split_at(128, Bytes, Chunk1, Chunk2),
+		run_incremental(sha512_256, [Chunk1, Chunk2], Hash2).
+
+	test(sha512_256_incremental_matches_hash_unaligned_chunks, deterministic(Hash1 == Hash2)) :-
+		sequence(1, 260, Bytes),
+		sha512_256::hash(Bytes, Hash1),
+		chunks(9, Bytes, Chunks),
+		run_incremental(sha512_256, Chunks, Hash2).
+
+	% the state must not be tied to a single new_hash_state/1 call: two
+	% independent hashing sessions interleaved through the same predicates
+	% must not interfere with each other
+	test(sha256_incremental_independent_sessions, deterministic(HashA-HashB == ExpectedA-ExpectedB)) :-
+		atom_codes('The quick brown fox jumps over the lazy dog', Bytes1),
+		atom_codes('Pack my box with five dozen liquor jugs', Bytes2),
+		sha256::hash(Bytes1, ExpectedA),
+		sha256::hash(Bytes2, ExpectedB),
+		sha256::new_hash_state(StateA0),
+		sha256::new_hash_state(StateB0),
+		sha256::update_hash_state(StateA0, Bytes1, StateA1),
+		sha256::update_hash_state(StateB0, Bytes2, StateB1),
+		sha256::final_hash_state(StateA1, HashA),
+		sha256::final_hash_state(StateB1, HashB).
+
+	% auxiliary predicates
+
+	% splits List into Left (the first N elements) and Right (the remainder)
+	split_at(N, List, Left, Right) :-
+		length(Left, N),
+		append(Left, Right, List).
+
+	% splits List into a list of Chunks of (at most) N elements each,
+	% used to drive update_hash_state/3 one chunk at a time
+	chunks(_, [], []) :-
+		!.
+	chunks(N, List, [Chunk| Chunks]) :-
+		(	length(List, Length),
+			Length =< N ->
+			Chunk = List,
+			Rest = []
+		;	split_at(N, List, Chunk, Rest)
+		),
+		chunks(N, Rest, Chunks).
+
+	% drives Object's new_hash_state/1, update_hash_state/3, and
+	% final_hash_state/2 over a list of chunks, simulating a caller feeding
+	% the message to the hash function one chunk at a time
+	run_incremental(Object, Chunks, Hash) :-
+		Object::new_hash_state(State0),
+		fold_update(Object, Chunks, State0, State),
+		Object::final_hash_state(State, Hash).
+
+	fold_update(_, [], State, State) :-
+		!.
+	fold_update(Object, [Chunk| Chunks], State0, State) :-
+		Object::update_hash_state(State0, Chunk, State1),
+		fold_update(Object, Chunks, State1, State).
 
 :- end_object.

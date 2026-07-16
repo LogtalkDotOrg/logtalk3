@@ -20,12 +20,12 @@
 
 
 :- object(djb2_64,
-	implements(hash_protocol)).
+	implements(hash_state_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-04,
+		date is 2026-07-16,
 		comment is 'DJB2 64-bit hash function.',
 		see_also is [djb2_32, sdbm_64, fnv1a_64]
 	]).
@@ -38,6 +38,14 @@
 		djb2_64(Bytes, 5381, Value),
 		word64_hex(Value, Hash).
 
+	new_hash_state(5381).
+
+	update_hash_state(Acc0, Bytes, Acc) :-
+		djb2_64(Bytes, Acc0, Acc).
+
+	final_hash_state(Acc, Hash) :-
+		word64_hex(Acc, Hash).
+
 	djb2_64([], Acc, Acc).
 	djb2_64([Byte| Bytes], Acc0, Acc) :-
 		Acc1 is ((Acc0 << 5) + Acc0 + Byte) /\ 0xFFFFFFFFFFFFFFFF,
@@ -47,12 +55,12 @@
 
 
 :- object(sdbm_64,
-	implements(hash_protocol)).
+	implements(hash_state_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-04,
+		date is 2026-07-16,
 		comment is 'sdbm 64-bit hash function.',
 		see_also is [sdbm_32, djb2_64, fnv1a_64]
 	]).
@@ -65,6 +73,14 @@
 		sdbm_64(Bytes, 0, Value),
 		word64_hex(Value, Hash).
 
+	new_hash_state(0).
+
+	update_hash_state(Acc0, Bytes, Acc) :-
+		sdbm_64(Bytes, Acc0, Acc).
+
+	final_hash_state(Acc, Hash) :-
+		word64_hex(Acc, Hash).
+
 	sdbm_64([], Acc, Acc).
 	sdbm_64([Byte| Bytes], Acc0, Acc) :-
 		Acc1 is (Byte + (Acc0 << 6) + (Acc0 << 16) - Acc0) /\ 0xFFFFFFFFFFFFFFFF,
@@ -74,12 +90,12 @@
 
 
 :- object(fnv1a_64,
-	implements(hash_protocol)).
+	implements(hash_state_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-04,
+		date is 2026-07-16,
 		comment is 'FNV-1a 64-bit hash function.',
 		see_also is [fnv1a_32, djb2_64, sdbm_64]
 	]).
@@ -92,6 +108,14 @@
 		fnv1a_64(Bytes, 0xCBF29CE484222325, Value),
 		word64_hex(Value, Hash).
 
+	new_hash_state(0xCBF29CE484222325).
+
+	update_hash_state(Acc0, Bytes, Acc) :-
+		fnv1a_64(Bytes, Acc0, Acc).
+
+	final_hash_state(Acc, Hash) :-
+		word64_hex(Acc, Hash).
+
 	fnv1a_64([], Acc, Acc).
 	fnv1a_64([Byte| Bytes], Acc0, Acc) :-
 		Acc1 is xor(Acc0, Byte),
@@ -102,12 +126,12 @@
 
 
 :- object(siphash_2_4(_Key_),
-	implements(hash_protocol)).
+	implements(hash_state_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-04,
+		date is 2026-07-16,
 		comment is 'SipHash-2-4 keyed hash function.',
 		parameters is [
 			'Key' - 'A list of 16 bytes.'
@@ -127,6 +151,39 @@
 		length(_Key_, 16),
 		siphash(Bytes, Value),
 		word64_hex(Value, Hash).
+
+	% the state buffers the at-most-7 leftover bytes that do not yet form a
+	% complete 8-byte block; Length is the total number of bytes seen so
+	% far, needed only for the final block at finalization
+	new_hash_state(state([], 0, V0_0, V1_0, V2_0, V3_0)) :-
+		length(_Key_, 16),
+		key_words(_Key_, K0, K1),
+		xor64(0x736F6D6570736575, K0, V0_0),
+		xor64(0x646F72616E646F6D, K1, V1_0),
+		xor64(0x6C7967656E657261, K0, V2_0),
+		xor64(0x7465646279746573, K1, V3_0).
+
+	update_hash_state(state(Buffer0, Length0, V0_0, V1_0, V2_0, V3_0), Bytes, state(Buffer1, Length1, V0_1, V1_1, V2_1, V3_1)) :-
+		length(Bytes, BytesLength),
+		Length1 is Length0 + BytesLength,
+		process_blocks(Bytes, Buffer0, V0_0, V1_0, V2_0, V3_0, V0_1, V1_1, V2_1, V3_1, Buffer1).
+
+	final_hash_state(state(Buffer, Length, V0_1, V1_1, V2_1, V3_1), Hash) :-
+		last_word_length(Length, Buffer, FinalM),
+		xor64(V3_1, FinalM, V3_2),
+		sip_rounds(2, V0_1, V1_1, V2_1, V3_2, V0_3, V1_3, V2_3, V3_3),
+		xor64(V0_3, FinalM, V0_4),
+		xor64(V2_3, 0xFF, V2_4),
+		sip_rounds(4, V0_4, V1_3, V2_4, V3_3, V0_5, V1_5, V2_5, V3_5),
+		xor64(V0_5, V1_5, T01),
+		xor64(V2_5, V3_5, T23),
+		xor64(T01, T23, Value),
+		word64_hex(Value, Hash).
+
+	last_word_length(Length, Acc, Word) :-
+		shl64(Length /\ 0xFF, 56, LastByte),
+		partial_word(Acc, 0, Partial),
+		or64(LastByte, Partial, Word).
 
 	siphash(Bytes, Hash) :-
 		key_words(_Key_, K0, K1),
@@ -217,12 +274,12 @@
 
 
 :- object(murmurhash3_x86_128,
-	implements(hash_protocol)).
+	implements(hash_state_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-04,
+		date is 2026-07-16,
 		comment is 'MurmurHash3 x86 128-bit hash function with seed 0.',
 		see_also is [murmurhash3_x86_32, murmurhash3_x64_128]
 	]).
@@ -232,11 +289,49 @@
 	]).
 
 	:- uses(list, [
-		length/2
+		append/3, length/2
 	]).
 
 	hash(Bytes, Hash) :-
 		murmurhash3_x86_128(Bytes, 0, H1, H2, H3, H4),
+		word32_hex(H1, Hex1),
+		word32_hex(H2, Hex2),
+		word32_hex(H3, Hex3),
+		word32_hex(H4, Hex4),
+		atom_concat(Hex1, Hex2, Hex12),
+		atom_concat(Hex12, Hex3, Hex123),
+		atom_concat(Hex123, Hex4, Hash),
+		!.
+
+	% the state buffers the at-most-15 leftover bytes that do not yet form a
+	% complete 16-byte block; Length is the total number of bytes seen so
+	% far, needed only at finalization
+	new_hash_state(state([], 0, 0, 0, 0, 0)).
+
+	update_hash_state(state(Buffer0, Length0, H1_0, H2_0, H3_0, H4_0), Bytes, state(Buffer1, Length1, H1_1, H2_1, H3_1, H4_1)) :-
+		append(Buffer0, Bytes, Combined),
+		length(Bytes, BytesLength),
+		Length1 is Length0 + BytesLength,
+		body(Combined, H1_0, H2_0, H3_0, H4_0, H1_1, H2_1, H3_1, H4_1, Buffer1).
+
+	final_hash_state(state(Buffer, Length, T1, T2, T3, T4), Hash) :-
+		tail(Buffer, T1, T2, T3, T4, U1, U2, U3, U4),
+		F1_0 is xor(U1, Length),
+		F2_0 is xor(U2, Length),
+		F3_0 is xor(U3, Length),
+		F4_0 is xor(U4, Length),
+		add32(F1_0, F2_0, F3_0, F4_0, F1_1),
+		add32(F2_0, F1_1, F2_1),
+		add32(F3_0, F1_1, F3_1),
+		add32(F4_0, F1_1, F4_1),
+		fmix32(F1_1, M1),
+		fmix32(F2_1, M2),
+		fmix32(F3_1, M3),
+		fmix32(F4_1, M4),
+		add32(M1, M2, M3, M4, H1),
+		add32(M2, H1, H2),
+		add32(M3, H1, H3),
+		add32(M4, H1, H4),
 		word32_hex(H1, Hex1),
 		word32_hex(H2, Hex2),
 		word32_hex(H3, Hex3),
@@ -372,12 +467,12 @@
 
 
 :- object(murmurhash3_x64_128,
-	implements(hash_protocol)).
+	implements(hash_state_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-04,
+		date is 2026-07-16,
 		comment is 'MurmurHash3 x64 128-bit hash function with seed 0.',
 		see_also is [murmurhash3_x86_32, murmurhash3_x86_128]
 	]).
@@ -387,11 +482,37 @@
 	]).
 
 	:- uses(list, [
-		length/2
+		append/3, length/2
 	]).
 
 	hash(Bytes, Hash) :-
 		murmurhash3_x64_128(Bytes, 0, H1, H2),
+		word64_hex(H1, Hex1),
+		word64_hex(H2, Hex2),
+		atom_concat(Hex1, Hex2, Hash),
+		!.
+
+	% the state buffers the at-most-15 leftover bytes that do not yet form a
+	% complete 16-byte block; Length is the total number of bytes seen so
+	% far, needed only at finalization
+	new_hash_state(state([], 0, 0, 0)).
+
+	update_hash_state(state(Buffer0, Length0, H1_0, H2_0), Bytes, state(Buffer1, Length1, H1_1, H2_1)) :-
+		append(Buffer0, Bytes, Combined),
+		length(Bytes, BytesLength),
+		Length1 is Length0 + BytesLength,
+		body(Combined, H1_0, H2_0, H1_1, H2_1, Buffer1).
+
+	final_hash_state(state(Buffer, Length, T1, T2), Hash) :-
+		tail(Buffer, T1, T2, U1, U2),
+		xor64(U1, Length, F1_0),
+		xor64(U2, Length, F2_0),
+		add64(F1_0, F2_0, F1_1),
+		add64(F2_0, F1_1, F2_1),
+		fmix64(F1_1, M1),
+		fmix64(F2_1, M2),
+		add64(M1, M2, H1),
+		add64(M2, H1, H2),
 		word64_hex(H1, Hex1),
 		word64_hex(H2, Hex2),
 		atom_concat(Hex1, Hex2, Hash),
@@ -481,12 +602,12 @@
 
 
 :- object(fips202_hash(_RateBytes_, _Suffix_, _OutputBytes_),
-	implements(hash_protocol)).
+	implements(hash_state_protocol)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-04-15,
+		date is 2026-07-16,
 		comment is 'Common implementation of the standardized FIPS 202 SHA-3 and SHAKE variants using the Keccak-f[1600] permutation.',
 		parnames is ['RateBytes', 'Suffix', 'OutputBytes']
 	]).
@@ -520,6 +641,26 @@
 		integer(_OutputBytes_),
 		_OutputBytes_ >= 0,
 		absorb(Bytes, State),
+		squeeze(State, _OutputBytes_, DigestBytes),
+		bytes_hex(DigestBytes, Hash).
+
+	% the state buffers the leftover bytes that do not yet form a complete
+	% rate-sized block; Keccak's pad10*1 padding rule depends only on how
+	% many bytes are in that final tail (not on the total message length),
+	% so no running length needs to be tracked, unlike the MD-style hashes
+	new_hash_state(state([], State0)) :-
+		initial_state(State0).
+
+	update_hash_state(state(Buffer0, State0), Bytes, state(Buffer1, State1)) :-
+		append(Buffer0, Bytes, Combined),
+		absorb_full_blocks(Combined, State0, State1, Buffer1).
+
+	final_hash_state(state(Buffer, State0), Hash) :-
+		integer(_OutputBytes_),
+		_OutputBytes_ >= 0,
+		padding_block(Buffer, Block),
+		xor_block(Block, State0, State1),
+		keccak_f1600(State1, State),
 		squeeze(State, _OutputBytes_, DigestBytes),
 		bytes_hex(DigestBytes, Hash).
 
@@ -772,8 +913,8 @@
 
 
 :- object(fips202_fixed_hash(_RateBytes_, _Suffix_, _OutputBytes_),
-	extends(fips202_hash(_RateBytes_, _Suffix_, _OutputBytes_)),
-	implements(hash_digest_protocol)).
+	implements(hash_digest_protocol),
+	extends(fips202_hash(_RateBytes_, _Suffix_, _OutputBytes_))).
 
 	:- info([
 		version is 1:1:0,
@@ -887,12 +1028,12 @@
 
 
 :- object(blake2b,
-	implements(hash_digest_protocol)).
+	implements([hash_digest_protocol, hash_state_protocol])).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-15,
+		date is 2026-07-16,
 		comment is 'BLAKE2b hash function.',
 		see_also is [blake2s, sha512, sha512_256]
 	]).
@@ -921,6 +1062,43 @@
 	hash(Bytes, Hash) :-
 		digest(Bytes, DigestBytes),
 		bytes_hex(DigestBytes, Hash).
+
+	% unlike the MD-style hashes, BLAKE2's compression function is given an
+	% explicit flag marking whether the block being compressed is the last
+	% one, and that flag changes the digest, not just an appended length
+	% field; the state must therefore always hold back a full block (up to
+	% 128 bytes) that has not yet been compressed, since a block that
+	% currently looks complete may still turn out not to be the last one
+	% once more bytes arrive in a later update_hash_state/3 call. Only at
+	% final_hash_state/2, when no more bytes can arrive, is the held-back
+	% buffer known to be the final block
+	new_hash_state(state([], 0, InitialState)) :-
+		blake2b_initial_state(InitialState).
+
+	update_hash_state(state(Buffer0, Total0, State0), Bytes, state(Buffer1, Total1, State1)) :-
+		append(Buffer0, Bytes, Combined),
+		blake2b_consume_full_blocks(Combined, Total0, State0, Buffer1, Total1, State1).
+
+	final_hash_state(state(Buffer, Total0, State0), Hash) :-
+		length(Buffer, BlockLength),
+		Total is Total0 + BlockLength,
+		pad_block(Buffer, 128, Block),
+		blake2b_compress(State0, Block, Total, true, State),
+		blake2b_state_bytes(State, DigestBytes),
+		bytes_hex(DigestBytes, Hash).
+
+	% consumes complete, definitely-not-final 128-byte blocks from Buffer,
+	% leaving between 1 and 128 bytes (or 0, only if Buffer started empty
+	% and stays empty) as the new held-back buffer
+	blake2b_consume_full_blocks(Buffer, Total, State, Buffer, Total, State) :-
+		length(Buffer, Length),
+		Length =< 128,
+		!.
+	blake2b_consume_full_blocks(Buffer, Total0, State0, FinalBuffer, Total, State) :-
+		take_up_to(128, Buffer, Block, Rest),
+		Total1 is Total0 + 128,
+		blake2b_compress(State0, Block, Total1, false, State1),
+		blake2b_consume_full_blocks(Rest, Total1, State1, FinalBuffer, Total, State).
 
 	blake2b_initial_state([H0, 0xBB67AE8584CAA73B, 0x3C6EF372FE94F82B, 0xA54FF53A5F1D36F1, 0x510E527FADE682D1, 0x9B05688C2B3E6C1F, 0x1F83D9ABFB41BD6B, 0x5BE0CD19137E2179]) :-
 		xor64(0x6A09E667F3BCC908, 0x01010040, H0).
@@ -1104,22 +1282,22 @@
 
 
 :- object(sha1,
-	implements(hash_digest_protocol)).
+	implements([hash_digest_protocol, hash_state_protocol])).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-06-01,
+		date is 2026-07-16,
 		comment is 'SHA-1 hash function.',
 		see_also is [md5, sha256]
 	]).
 
 	:- uses(hash_common_32, [
-		pad_md/4, integer_to_big_endian_bytes32/3, bytes_hex/2, add32/3, rol32/3, big_endian_word32/2
+		pad_md/4, pad_md_tail/5, integer_to_big_endian_bytes32/3, bytes_hex/2, add32/3, rol32/3, big_endian_word32/2
 	]).
 
 	:- uses(list, [
-		nth0/3, take/4
+		append/3, length/2, nth0/3, take/4
 	]).
 
 	digest(Bytes, DigestBytes) :-
@@ -1138,6 +1316,44 @@
 	hash(Bytes, Hash) :-
 		digest(Bytes, DigestBytes),
 		bytes_hex(DigestBytes, Hash).
+
+	% the state buffers the at-most-63 leftover bytes that do not yet form a
+	% complete 64-byte block; Length is the total number of bytes seen so
+	% far, needed only for the MD padding appended to the final, partial
+	% block at finalization
+	new_hash_state(state([], 0, 0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476, 0xC3D2E1F0)).
+
+	update_hash_state(state(Buffer0, Length0, H0_0, H1_0, H2_0, H3_0, H4_0), Bytes, state(Buffer1, Length1, H0_1, H1_1, H2_1, H3_1, H4_1)) :-
+		append(Buffer0, Bytes, Combined),
+		length(Bytes, BytesLength),
+		Length1 is Length0 + BytesLength,
+		sha1_consume_blocks(Combined, H0_0, H1_0, H2_0, H3_0, H4_0, H0_1, H1_1, H2_1, H3_1, H4_1, Buffer1).
+
+	final_hash_state(state(Buffer, Length, H0, H1, H2, H3, H4), Hash) :-
+		pad_md_tail(big, Buffer, Length, 8, PaddedTail),
+		sha1_blocks(PaddedTail, H0, H1, H2, H3, H4, FH0, FH1, FH2, FH3, FH4),
+		integer_to_big_endian_bytes32(FH0, DigestBytes, B1),
+		integer_to_big_endian_bytes32(FH1, B1, B2),
+		integer_to_big_endian_bytes32(FH2, B2, B3),
+		integer_to_big_endian_bytes32(FH3, B3, B4),
+		integer_to_big_endian_bytes32(FH4, B4, []),
+		bytes_hex(DigestBytes, Hash).
+
+	sha1_consume_blocks(Bytes, H0, H1, H2, H3, H4, H0, H1, H2, H3, H4, Bytes) :-
+		length(Bytes, Length),
+		Length < 64,
+		!.
+	sha1_consume_blocks(Bytes, H0_0, H1_0, H2_0, H3_0, H4_0, H0, H1, H2, H3, H4, Tail) :-
+		take(64, Bytes, Block, Rest),
+		block_words_be(Block, Words0, Tail0),
+		extend_sha1_words(16, Words0, Tail0, Words),
+		sha1_rounds(0, Words, H0_0, H1_0, H2_0, H3_0, H4_0, A, B, C, D, E),
+		add32(H0_0, A, H0_1),
+		add32(H1_0, B, H1_1),
+		add32(H2_0, C, H2_1),
+		add32(H3_0, D, H3_1),
+		add32(H4_0, E, H4_1),
+		sha1_consume_blocks(Rest, H0_1, H1_1, H2_1, H3_1, H4_1, H0, H1, H2, H3, H4, Tail).
 
 	sha1_blocks([], H0, H1, H2, H3, H4, H0, H1, H2, H3, H4).
 	sha1_blocks([Byte| Bytes], H0_0, H1_0, H2_0, H3_0, H4_0, H0, H1, H2, H3, H4) :-
@@ -1202,12 +1418,12 @@
 
 
 :- object(sha512,
-	implements(hash_digest_protocol)).
+	implements([hash_digest_protocol, hash_state_protocol])).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-14,
+		date is 2026-07-16,
 		comment is 'SHA-512 hash function.',
 		see_also is [sha512_256, sha256, sha1]
 	]).
@@ -1218,7 +1434,7 @@
 
 	:- uses(hash_common_64, [
 		add64/3, and64/3, integer_to_big_endian_bytes64/3, not64/2, or64/3,
-		rol64/3, shl64/3, shr64/3, xor64/3
+		pad_md_tail/3, rol64/3, shl64/3, shr64/3, xor64/3
 	]).
 
 	:- uses(list, [
@@ -1237,6 +1453,35 @@
 	hash(Bytes, Hash) :-
 		digest(Bytes, DigestBytes),
 		bytes_hex(DigestBytes, Hash).
+
+	% the state buffers the at-most-127 leftover bytes that do not yet form
+	% a complete 128-byte block; Length is the total number of bytes seen
+	% so far, needed only for the MD padding appended to the final,
+	% partial block at finalization
+	new_hash_state(state([], 0, [0x6A09E667F3BCC908,0xBB67AE8584CAA73B,0x3C6EF372FE94F82B,0xA54FF53A5F1D36F1,0x510E527FADE682D1,0x9B05688C2B3E6C1F,0x1F83D9ABFB41BD6B,0x5BE0CD19137E2179])).
+
+	update_hash_state(state(Buffer0, Length0, State0), Bytes, state(Buffer1, Length1, State1)) :-
+		append(Buffer0, Bytes, Combined),
+		length(Bytes, BytesLength),
+		Length1 is Length0 + BytesLength,
+		sha512_consume_blocks(Combined, State0, State1, Buffer1).
+
+	final_hash_state(state(Buffer, Length, State), Hash) :-
+		pad_md_tail(Buffer, Length, PaddedTail),
+		sha512_blocks(PaddedTail, State, FinalState),
+		sha512_state_bytes(FinalState, DigestBytes),
+		bytes_hex(DigestBytes, Hash).
+
+	sha512_consume_blocks(Bytes, State, State, Bytes) :-
+		length(Bytes, Length),
+		Length < 128,
+		!.
+	sha512_consume_blocks(Bytes, State0, State, Tail) :-
+		take(128, Bytes, Block, Rest),
+		sha512_block_words(Block, Words0, Tail0),
+		extend_sha512_words(16, Words0, Tail0, Words),
+		sha512_compress(Words, State0, State1),
+		sha512_consume_blocks(Rest, State1, State, Tail).
 
 	sha512_pad(Bytes, PaddedBytes) :-
 		length(Bytes, Length),
@@ -1469,12 +1714,12 @@
 
 
 :- object(sha512_256,
-	implements(hash_digest_protocol)).
+	implements([hash_digest_protocol, hash_state_protocol])).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-06-01,
+		date is 2026-07-16,
 		comment is 'SHA-512/256 hash function.',
 		see_also is [sha256, sha1]
 	]).
@@ -1485,7 +1730,7 @@
 
 	:- uses(hash_common_64, [
 		add64/3, and64/3, integer_to_big_endian_bytes64/3, not64/2, or64/3,
-		rol64/3, shl64/3, shr64/3, xor64/3
+		pad_md_tail/3, rol64/3, shl64/3, shr64/3, xor64/3
 	]).
 
 	:- uses(list, [
@@ -1504,6 +1749,35 @@
 	hash(Bytes, Hash) :-
 		digest(Bytes, DigestBytes),
 		bytes_hex(DigestBytes, Hash).
+
+	% the state buffers the at-most-127 leftover bytes that do not yet form
+	% a complete 128-byte block; Length is the total number of bytes seen
+	% so far, needed only for the MD padding appended to the final,
+	% partial block at finalization
+	new_hash_state(state([], 0, [0x22312194FC2BF72C,0x9F555FA3C84C64C2,0x2393B86B6F53B151,0x963877195940EABD,0x96283EE2A88EFFE3,0xBE5E1E2553863992,0x2B0199FC2C85B8AA,0x0EB72DDC81C52CA2])).
+
+	update_hash_state(state(Buffer0, Length0, State0), Bytes, state(Buffer1, Length1, State1)) :-
+		append(Buffer0, Bytes, Combined),
+		length(Bytes, BytesLength),
+		Length1 is Length0 + BytesLength,
+		sha512_256_consume_blocks(Combined, State0, State1, Buffer1).
+
+	final_hash_state(state(Buffer, Length, State), Hash) :-
+		pad_md_tail(Buffer, Length, PaddedTail),
+		sha512_256_blocks(PaddedTail, State, FinalState),
+		sha512_256_state_bytes(FinalState, DigestBytes),
+		bytes_hex(DigestBytes, Hash).
+
+	sha512_256_consume_blocks(Bytes, State, State, Bytes) :-
+		length(Bytes, Length),
+		Length < 128,
+		!.
+	sha512_256_consume_blocks(Bytes, State0, State, Tail) :-
+		take(128, Bytes, Block, Rest),
+		sha512_256_block_words(Block, Words0, Tail0),
+		extend_sha512_256_words(16, Words0, Tail0, Words),
+		sha512_256_compress(Words, State0, State1),
+		sha512_256_consume_blocks(Rest, State1, State, Tail).
 
 	sha512_256_pad(Bytes, PaddedBytes) :-
 		length(Bytes, Length),
@@ -1732,22 +2006,22 @@
 
 
 :- object(sha256,
-	implements(hash_digest_protocol)).
+	implements([hash_digest_protocol, hash_state_protocol])).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-06-01,
+		date is 2026-07-16,
 		comment is 'SHA-256 hash function.',
 		see_also is [md5, sha1]
 	]).
 
 	:- uses(hash_common_32, [
-		pad_md/4, bytes_hex/2, add32/3, ror32/3, integer_to_big_endian_bytes32/3, big_endian_word32/2
+		pad_md/4, pad_md_tail/5, bytes_hex/2, add32/3, ror32/3, integer_to_big_endian_bytes32/3, big_endian_word32/2
 	]).
 
 	:- uses(list, [
-		nth0/3, take/4
+		append/3, length/2, nth0/3, take/4
 	]).
 
 	digest(Bytes, DigestBytes) :-
@@ -1762,6 +2036,35 @@
 	hash(Bytes, Hash) :-
 		digest(Bytes, DigestBytes),
 		bytes_hex(DigestBytes, Hash).
+
+	% the state buffers the at-most-63 leftover bytes that do not yet form a
+	% complete 64-byte block; Length is the total number of bytes seen so
+	% far, needed only for the MD padding appended to the final, partial
+	% block at finalization
+	new_hash_state(state([], 0, [0x6A09E667,0xBB67AE85,0x3C6EF372,0xA54FF53A,0x510E527F,0x9B05688C,0x1F83D9AB,0x5BE0CD19])).
+
+	update_hash_state(state(Buffer0, Length0, State0), Bytes, state(Buffer1, Length1, State1)) :-
+		append(Buffer0, Bytes, Combined),
+		length(Bytes, BytesLength),
+		Length1 is Length0 + BytesLength,
+		sha256_consume_blocks(Combined, State0, State1, Buffer1).
+
+	final_hash_state(state(Buffer, Length, State), Hash) :-
+		pad_md_tail(big, Buffer, Length, 8, PaddedTail),
+		sha256_blocks(PaddedTail, State, FinalState),
+		state_bytes(FinalState, DigestBytes),
+		bytes_hex(DigestBytes, Hash).
+
+	sha256_consume_blocks(Bytes, State, State, Bytes) :-
+		length(Bytes, Length),
+		Length < 64,
+		!.
+	sha256_consume_blocks(Bytes, State0, State, Tail) :-
+		take(64, Bytes, Block, Rest),
+		block_words_be(Block, Words0, Tail0),
+		extend_sha256_words(16, Words0, Tail0, Words),
+		sha256_compress(Words, State0, State1),
+		sha256_consume_blocks(Rest, State1, State, Tail).
 
 	sha256_blocks([], State, State).
 	sha256_blocks([Byte| Bytes], State0, State) :-

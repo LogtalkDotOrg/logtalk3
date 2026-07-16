@@ -31,7 +31,7 @@ FIPS 202 SHAKE128 extensible-output function.
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`hash_protocol/0::hash/2`  
+|     :ref:`hash_state_protocol/0::final_hash_state/2`  :ref:`hash_protocol/0::hash/2`  :ref:`hash_state_protocol/0::new_hash_state/1`  :ref:`hash_state_protocol/0::update_hash_state/3`  
 
 .. contents::
    :local:

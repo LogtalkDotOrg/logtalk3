@@ -14,7 +14,7 @@ Auxiliary predicates for the hashes library 32-bit algorithms.
 |    ``logtalk_load(hashes(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:1:0
+| **Version:** 1:2:0
 | **Date:** 2026-06-01
 
 | **Compilation flags:**
@@ -337,6 +337,25 @@ Pads a message using MD-style padding with a little-endian or big-endian length 
 |    ``pad_md(Endian,Bytes,LengthFieldBytes,PaddedBytes)``
 | **Mode and number of proofs:**
 |    ``pad_md(+little_big,+list(integer),+integer,-list(integer))`` - ``one``
+
+
+------------
+
+.. index:: pad_md_tail/5
+.. _hash_common_32/0::pad_md_tail/5:
+
+``pad_md_tail/5``
+^^^^^^^^^^^^^^^^^
+
+Pads the final, less-than-one-block tail of a message using MD-style padding given the total message length in bytes. For use when the message has already been consumed block by block during segmented/incremental hashing, so that only the unconsumed tail, and not the whole message, needs to be available.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pad_md_tail(Endian,TailBytes,TotalLength,LengthFieldBytes,PaddedBytes)``
+| **Mode and number of proofs:**
+|    ``pad_md_tail(+little_big,+list(integer),+integer,+integer,-list(integer))`` - ``one``
 
 
 ------------

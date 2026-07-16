@@ -14,15 +14,15 @@ sdbm 32-bit hash function.
 |    ``logtalk_load(hashes(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-04-04
+| **Version:** 1:1:0
+| **Date:** 2026-07-16
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
 | **Implements:**
-|    ``public`` :ref:`hash_protocol <hash_protocol/0>`
+|    ``public`` :ref:`hash_state_protocol <hash_state_protocol/0>`
 | **Uses:**
 |    :ref:`hash_common_32 <hash_common_32/0>`
 
@@ -30,7 +30,7 @@ sdbm 32-bit hash function.
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`hash_protocol/0::hash/2`  
+|     :ref:`hash_state_protocol/0::final_hash_state/2`  :ref:`hash_protocol/0::hash/2`  :ref:`hash_state_protocol/0::new_hash_state/1`  :ref:`hash_state_protocol/0::update_hash_state/3`  
 
 .. contents::
    :local:

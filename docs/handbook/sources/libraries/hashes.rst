@@ -114,6 +114,36 @@ validate that the input is a list of bytes. When necessary, use the
 ``types`` library ``type::check(list(byte), Input)`` goal before calling
 the ``hash/2`` predicate.
 
+Segmented hashing
+-----------------
+
+Objects implementing the ``hash_state_protocol`` protocol (which extends
+``hash_protocol``) additionally provide ``new_hash_state/1``,
+``update_hash_state/3``, and ``final_hash_state/2`` predicates for
+genuine incremental hash computation. Unlike computing a hash from a
+single, fully materialized message, these predicates let the caller feed
+the message to the hash function one chunk at a time (e.g. as each chunk
+is read from a file or a network stream), discarding each chunk as soon
+as it has been folded into the state. Only the current chunk and a
+small, bounded amount of algorithm state (for block-padded and
+rate-limited algorithms, a leftover buffer smaller than one block or
+rate) are ever resident at once, regardless of the total message length.
+
+All hashing algorithms in this library implement
+``hash_state_protocol``.
+
+Example, hashing a message fed in three chunks:
+
+::
+
+   | ?- md5::new_hash_state(S0),
+        md5::update_hash_state(S0, [84,104,101], S1),
+        md5::update_hash_state(S1, [32,113,117,105,99,107], S2),
+        md5::update_hash_state(S2, [32,98,114,111,119,110], S3),
+        md5::final_hash_state(S3, Hash).
+   Hash = '5aa207e85988921b8733912c4f526c80'
+   yes
+
 API documentation
 -----------------
 
