@@ -371,8 +371,11 @@
 <p>This library provides transport-neutral cryptographic predicates. It
 currently exports the <code class="docutils literal notranslate"><span class="pre">crypto</span></code> object with the predicates:</p>
 <ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">random_below/2</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">random_bytes/2</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">hex_bytes/2</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">token_hex/2</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">token_urlsafe/2</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">secure_compare/2</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">hkdf/5</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">pbkdf2/6</span></code></p></li>
@@ -380,12 +383,18 @@ currently exports the <code class="docutils literal notranslate"><span class="pr
 <li><p><code class="docutils literal notranslate"><span class="pre">password_hash/4</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">verify_password_hash/2</span></code></p></li>
 </ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">random_below/2</span></code> predicate returns a uniformly distributed random
+integer greater than or equal to zero and less than the given exclusive
+upper bound.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">random_bytes/2</span></code> predicate returns a list with the requested
 number of random bytes. It tries to read bytes from <code class="docutils literal notranslate"><span class="pre">/dev/urandom</span></code>
 first and falls back to a pseudo-random generator when that source is
 unavailable.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">hex_bytes/2</span></code> predicate relates hexadecimal atoms with lists of
 bytes.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">token_hex/2</span></code> and <code class="docutils literal notranslate"><span class="pre">token_urlsafe/2</span></code> predicates return either a
+lowercase hexadecimal token or a unpadded Base64URL token generated from
+the requested number of random bytes.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">secure_compare/2</span></code> predicate provides constant-time comparison for
 byte sequences represented either as byte lists or atoms.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">hkdf/5</span></code> and <code class="docutils literal notranslate"><span class="pre">pbkdf2/6</span></code> predicates provide portable key

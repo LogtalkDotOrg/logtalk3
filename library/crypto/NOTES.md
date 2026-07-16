@@ -24,8 +24,11 @@ ________________________________________________________________________
 This library provides transport-neutral cryptographic predicates.
 It currently exports the `crypto` object with the predicates:
 
+- `random_below/2`
 - `random_bytes/2`
 - `hex_bytes/2`
+- `token_hex/2`
+- `token_urlsafe/2`
 - `secure_compare/2`
 - `hkdf/5`
 - `pbkdf2/6`
@@ -33,11 +36,18 @@ It currently exports the `crypto` object with the predicates:
 - `password_hash/4`
 - `verify_password_hash/2`
 
+The `random_below/2` predicate returns a uniformly distributed random integer
+greater than or equal to zero and less than the given exclusive upper bound.
+
 The `random_bytes/2` predicate returns a list with the requested number of
 random bytes. It tries to read bytes from `/dev/urandom` first and falls back
 to a pseudo-random generator when that source is unavailable.
 
 The `hex_bytes/2` predicate relates hexadecimal atoms with lists of bytes.
+
+The `token_hex/2` and `token_urlsafe/2` predicates return either a lowercase
+hexadecimal token or a unpadded Base64URL token generated from the requested
+number of random bytes.
 
 The `secure_compare/2` predicate provides constant-time comparison for byte
 sequences represented either as byte lists or atoms.
@@ -45,8 +55,8 @@ sequences represented either as byte lists or atoms.
 The `hkdf/5` and `pbkdf2/6` predicates provide portable key derivation
 implemented on top of the existing `hashes` and `hmac` libraries.
 
-The `apr1/3` predicate computes Apache APR1 encoded checksums for password and
-salt byte sequences using a portable MD5-based implementation.
+The `apr1/3` predicate computes Apache APR1 encoded checksums for password
+and salt byte sequences using a portable MD5-based implementation.
 
 The `password_hash/4` predicate builds on top of `pbkdf2/6` to generate
 structured password-hash terms. The `verify_password_hash/2` predicate
