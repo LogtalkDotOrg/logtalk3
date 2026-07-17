@@ -19,7 +19,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#avro <../../apis/library_index.html#avro>`__
+`../../apis/library_index.html#protobuf <../../apis/library_index.html#protobuf>`__
 link in a web browser.
 
 Loading
@@ -29,7 +29,7 @@ To load all entities in this library, load the ``loader.lgt`` file:
 
 ::
 
-   | ?- logtalk_load(avro(loader)).
+   | ?- logtalk_load(protobuf(loader)).
 
 Testing
 -------
@@ -38,7 +38,7 @@ To test this library predicates, load the ``tester.lgt`` file:
 
 ::
 
-   | ?- logtalk_load(avro(tester)).
+   | ?- logtalk_load(protobuf(tester)).
 
 Protocol Buffers Overview
 -------------------------
