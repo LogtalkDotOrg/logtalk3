@@ -27,27 +27,6 @@ can import it and implement the `http_handler_protocol` protocol directly while
 reusing common method dispatch and path-template matching logic.
 
 
-Layering
---------
-
-`http_router` sits between the normalized `http_core` message layer and higher-level
-API authoring helpers:
-
-- Use `http_server` directly when you only need normalized
-  messages, parsers, generators, or low-level handlers.
-- Use `http_router` when you want the handler object to keep exposing `handle/2`
-  while route matching, metadata annotation, middleware, and content
-  negotiation are derived from `route/4` declarations.
-- Add `rest` when `route/4` is still too low-level and you
-  prefer endpoint descriptors plus small normalized result terms.
-- Pair router objects with `open_api` when you want the
-  route declarations and metadata to derive OpenAPI operations automatically.
-- Add companion libraries such as `http_parameters`, `http_cors`, `http_htmx`,
-  `http_session`, `http_static_files`, and `http_directory_listing` when you need
-  parameter extraction, middleware helpers, sessions, or static-file routing
-  on the same dispatch layer.
-
-
 API documentation
 -----------------
 
@@ -69,6 +48,27 @@ Testing
 To test this library, load the `tester.lgt` file:
 
 	| ?- logtalk_load(http_router(tester)).
+
+
+Layering
+--------
+
+`http_router` sits between the normalized `http_core` message layer and higher-level
+API authoring helpers:
+
+- Use `http_server` directly when you only need normalized
+  messages, parsers, generators, or low-level handlers.
+- Use `http_router` when you want the handler object to keep exposing `handle/2`
+  while route matching, metadata annotation, middleware, and content
+  negotiation are derived from `route/4` declarations.
+- Add `rest` when `route/4` is still too low-level and you
+  prefer endpoint descriptors plus small normalized result terms.
+- Pair router objects with `open_api` when you want the
+  route declarations and metadata to derive OpenAPI operations automatically.
+- Add companion libraries such as `http_parameters`, `http_cors`, `http_htmx`,
+  `http_session`, `http_static_files`, and `http_directory_listing` when you need
+  parameter extraction, middleware helpers, sessions, or static-file routing
+  on the same dispatch layer.
 
 
 Current scope

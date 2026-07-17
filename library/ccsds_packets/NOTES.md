@@ -19,16 +19,42 @@ ________________________________________________________________________
 
 
 `ccsds_packets`
-=======
+===============
 
 The `ccsds_packets` library implements predicates for parsing and generating CCSDS
 (Consultative Committee for Space Data Systems) Space Packets following the
-CCSDS 133.0-B-2 standard (Space Packet Protocol).
-
-Reference documentation:
+CCSDS 133.0-B-2 standard (Space Packet Protocol):
 
 - https://public.ccsds.org/Pubs/133x0b2e1.pdf
 - https://jastoolbox.sandia.gov/topic/communication-specification/jas-packets/ccsds-telecommand-and-telemetry-format-packet-standard/
+
+
+API documentation
+-----------------
+
+Open the [../../apis/library_index.html#ccsds_packets](../../apis/library_index.html#ccsds_packets)
+link in a web browser.
+
+
+Loading
+-------
+
+To load all entities in this library, load the `loader.lgt` file:
+
+    | ?- logtalk_load(ccsds_packets(loader)).
+
+
+Testing
+-------
+
+To test this library predicates, load the `tester.lgt` file:
+
+    | ?- logtalk_load(ccsds_packets(tester)).
+
+To test the performance of the library parsing predicates, load the
+`tester_performance.lgt` file:
+
+    | ?- logtalk_load(ccsds_packets(tester_performance)).
 
 
 Packet Structure
@@ -174,31 +200,3 @@ For example:
     | ?- type::check(ccsds_packet_term, Packet).
 
     | ?- type::arbitrary(ccsds_packet_term(42), Packet).
-
-
-API documentation
------------------
-
-Open the [../../apis/library_index.html#ccsds_packets](../../apis/library_index.html#ccsds_packets)
-link in a web browser.
-
-
-Loading
--------
-
-To load all entities in this library, load the `loader.lgt` file:
-
-    | ?- logtalk_load(ccsds_packets(loader)).
-
-
-Testing
--------
-
-To test this library predicates, load the `tester.lgt` file:
-
-    | ?- logtalk_load(ccsds_packets(tester)).
-
-To test the performance of the library parsing predicates, load the
-`tester_performance.lgt` file:
-
-    | ?- logtalk_load(ccsds_packets(tester_performance)).

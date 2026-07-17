@@ -93,14 +93,14 @@
 <li class="toctree-l2"><a class="reference internal" href="cbor.html"><code class="docutils literal notranslate"><span class="pre">cbor</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="character_sets.html"><code class="docutils literal notranslate"><span class="pre">character_sets</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">ccsds_frames</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#available-entities">Available entities</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#representation">Representation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#parsing-and-generating">Parsing and generating</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#types">Types</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#facade-helpers">Facade helpers</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="ccsds_link_profiles.html"><code class="docutils literal notranslate"><span class="pre">ccsds_link_profiles</span></code></a></li>
@@ -377,6 +377,26 @@ The current implementation includes CCSDS telemetry transfer frames and
 CCSDS telecommand transfer frames, plus CCSDS advanced orbiting systems
 transfer frames, all using fixed frame lengths and optional
 mission-profile fields configured at the object level.</p>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<p>Open the
+<a class="reference external" href="../../apis/library_index.html#ccsds_frames">../../apis/library_index.html#ccsds_frames</a>
+link in a web browser.</p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
+<p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(ccsds_frames(loader)).
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(ccsds_frames(tester)).
+</pre></div>
+</div>
+</section>
 <section id="available-entities">
 <h2>Available entities<a class="headerlink" href="#available-entities" title="Link to this heading"></a></h2>
 <ul class="simple">
@@ -546,26 +566,6 @@ fields unchanged.</p></li>
 <p>| ?- ccsds_frames::update_fecf(tc_transfer_frame(0, 1, 0, 42, 3, 7,
 none, [1,2,3], fecf([0x00,0x00])), UpdatedFrame).</p>
 <p>| ?- ccsds_frames::verify_fecf(UpdatedFrame).</p>
-</section>
-<section id="api-documentation">
-<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
-<p>Open the
-<a class="reference external" href="../../apis/library_index.html#ccsds_frames">../../apis/library_index.html#ccsds_frames</a>
-link in a web browser.</p>
-</section>
-<section id="loading">
-<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
-<p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(ccsds_frames(loader)).
-</pre></div>
-</div>
-</section>
-<section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
-<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(ccsds_frames(tester)).
-</pre></div>
-</div>
 </section>
 </section>
 

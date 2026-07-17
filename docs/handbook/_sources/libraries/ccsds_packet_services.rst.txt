@@ -38,6 +38,31 @@ bridge:
   reassembly predicates so callers can observe dropped fragments,
   skipped frames, and resynchronization points
 
+API documentation
+-----------------
+
+Open the
+`../../apis/library_index.html#ccsds_packet_services <../../apis/library_index.html#ccsds_packet_services>`__
+link in a web browser.
+
+Loading
+-------
+
+To load all entities in this library, load the ``loader.lgt`` file:
+
+::
+
+   | ?- logtalk_load(ccsds_packet_services(loader)).
+
+Testing
+-------
+
+To test this library predicates, load the ``tester.lgt`` file:
+
+::
+
+   | ?- logtalk_load(ccsds_packet_services(tester)).
+
 Representation
 --------------
 
@@ -288,28 +313,3 @@ cross-frame packet reassembly with continuity checks and configurable
 discontinuity recovery. Future milestones can extend the same library
 with segmentation policies, idle packet generation, richer per-channel
 recovery controls, and higher level packetization policies.
-
-API documentation
------------------
-
-Open the
-`../../apis/library_index.html#ccsds_packet_services <../../apis/library_index.html#ccsds_packet_services>`__
-link in a web browser.
-
-Loading
--------
-
-To load all entities in this library, load the ``loader.lgt`` file:
-
-::
-
-   | ?- logtalk_load(ccsds_packet_services(loader)).
-
-Testing
--------
-
-To test this library predicates, load the ``tester.lgt`` file:
-
-::
-
-   | ?- logtalk_load(ccsds_packet_services(tester)).

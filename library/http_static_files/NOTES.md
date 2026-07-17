@@ -25,13 +25,13 @@ The `http_static_files` library provides a router-agnostic helper for serving
 existing files from a configured document root using normalized `http_core`
 request and response terms.
 
-This library resolves a relative request path against a document root, canonicalizes
-the joined target path using `os::absolute_file_name/2`, rejects canonicalized
-escapes with the same outward `404 Not Found` response used for missing files,
-falls back to configurable index files for directory targets, guesses the
-response media type using `mime_types`, emits `ETag`, `Last-Modified`, and
-`Accept-Ranges` metadata, and returns file-backed response bodies that
-`http_server_core` can stream efficiently.
+This library resolves a relative request path against a document root,
+canonicalizes the joined target path using `os::absolute_file_name/2`,
+rejects canonicalized escapes with the same outward `404 Not Found`
+response used for missing files, falls back to configurable index files
+for directory targets, guesses the response media type using `mime_types`,
+emits `ETag`, `Last-Modified`, and `Accept-Ranges` metadata, and returns
+file-backed response bodies that `http_server_core` can stream efficiently.
 
 
 API documentation

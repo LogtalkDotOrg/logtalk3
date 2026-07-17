@@ -19,13 +19,36 @@ ________________________________________________________________________
 
 
 `ccsds_frames`
-===============
+==============
 
 The `ccsds_frames` library provides support for CCSDS transfer frames.
 The current implementation includes CCSDS telemetry transfer frames and CCSDS
 telecommand transfer frames, plus CCSDS advanced orbiting systems transfer
 frames, all using fixed frame lengths and optional mission-profile fields
 configured at the object level.
+
+
+API documentation
+-----------------
+
+Open the [../../apis/library_index.html#ccsds_frames](../../apis/library_index.html#ccsds_frames)
+link in a web browser.
+
+
+Loading
+-------
+
+To load all entities in this library, load the `loader.lgt` file:
+
+    | ?- logtalk_load(ccsds_frames(loader)).
+
+
+Testing
+-------
+
+To test this library predicates, load the `tester.lgt` file:
+
+    | ?- logtalk_load(ccsds_frames(tester)).
 
 
 Available entities
@@ -224,26 +247,3 @@ For example:
   | ?- ccsds_frames::update_fecf(tc_transfer_frame(0, 1, 0, 42, 3, 7, none, [1,2,3], fecf([0x00,0x00])), UpdatedFrame).
 
   | ?- ccsds_frames::verify_fecf(UpdatedFrame).
-
-
-API documentation
------------------
-
-Open the [../../apis/library_index.html#ccsds_frames](../../apis/library_index.html#ccsds_frames)
-link in a web browser.
-
-
-Loading
--------
-
-To load all entities in this library, load the `loader.lgt` file:
-
-    | ?- logtalk_load(ccsds_frames(loader)).
-
-
-Testing
--------
-
-To test this library predicates, load the `tester.lgt` file:
-
-    | ?- logtalk_load(ccsds_frames(tester)).

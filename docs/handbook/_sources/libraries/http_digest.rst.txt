@@ -10,34 +10,6 @@ This library can be used with backend Prolog systems that support
 unbound integer arithmetic and the ``sockets`` library: ECLiPSe, SICStus
 Prolog, SWI-Prolog, Trealla Prolog, and XVM.
 
-The library provides these public entities:
-
-- ``http_digest_verifier_protocol`` server-side verifier protocol for
-  looking up stored Digest HA1 values
-- ``http_digest`` core Digest parsing, generation, request
-  authorization, request protection, challenge building, and
-  ``Authentication-Info`` response decoration
-- ``http_server_core_digest_handler(_, _, _, _)`` portable handler
-  wrapper that applies Digest protection and response decoration around
-  another object implementing ``http_handler_protocol``
-- ``http_router_digest_auth(_, _, _)`` router companion category that
-  protects routes declaring ``digest_auth/1`` metadata and decorates
-  successful protected responses with ``Authentication-Info``
-- ``http_client_digest_session`` stateful client helper that preserves
-  cookies and retries once when the server replies with a ``401`` Digest
-  challenge
-
-The library design keeps the Digest core object stateless and
-deterministic. State is kept only where it is operationally useful: in
-verifier objects supplied by applications and in the optional
-client-side session helper used for cookie storage.
-
-The server-side entities are portable across the backends supported by
-the normalized HTTP library. The ``http_client_digest_session`` helper
-additionally depends on the socket-backed HTTP client stack and is
-therefore available on the same backends supported by the
-``http_client`` and ``http_socket_transport`` libraries.
-
 API documentation
 -----------------
 
@@ -65,6 +37,34 @@ To test this library, load the ``tester.lgt`` file:
 
 Usage overview
 --------------
+
+The library provides these public entities:
+
+- ``http_digest_verifier_protocol`` server-side verifier protocol for
+  looking up stored Digest HA1 values
+- ``http_digest`` core Digest parsing, generation, request
+  authorization, request protection, challenge building, and
+  ``Authentication-Info`` response decoration
+- ``http_server_core_digest_handler(_, _, _, _)`` portable handler
+  wrapper that applies Digest protection and response decoration around
+  another object implementing ``http_handler_protocol``
+- ``http_router_digest_auth(_, _, _)`` router companion category that
+  protects routes declaring ``digest_auth/1`` metadata and decorates
+  successful protected responses with ``Authentication-Info``
+- ``http_client_digest_session`` stateful client helper that preserves
+  cookies and retries once when the server replies with a ``401`` Digest
+  challenge
+
+The library design keeps the Digest core object stateless and
+deterministic. State is kept only where it is operationally useful: in
+verifier objects supplied by applications and in the optional
+client-side session helper used for cookie storage.
+
+The server-side entities are portable across the backends supported by
+the normalized HTTP library. The ``http_client_digest_session`` helper
+additionally depends on the socket-backed HTTP client stack and is
+therefore available on the same backends supported by the
+``http_client`` and ``http_socket_transport`` libraries.
 
 Use ``http_digest`` directly when you need explicit control over Digest
 challenge parsing and request verification:

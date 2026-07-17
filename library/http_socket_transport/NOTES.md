@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `http_socket_transport`
-=============
+=======================
 
 The `http_socket_transport` library is the first transport-aware layer on top of the
 `http_client_core`, `http_server_core`, and `sockets` libraries. It uses TCP sockets

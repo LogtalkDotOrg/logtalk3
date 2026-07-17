@@ -28,6 +28,33 @@ This library can be used with backend Prolog systems that support unbound
 integer arithmetic and the `sockets` library: ECLiPSe, SICStus Prolog,
 SWI-Prolog, Trealla Prolog, and XVM.
 
+
+API documentation
+-----------------
+
+Open the [../../apis/library_index.html#http_digest](../../apis/library_index.html#http_digest)
+link in a web browser.
+
+
+Loading
+-------
+
+To load the library, load the `loader.lgt` file:
+
+	| ?- logtalk_load(http_digest(loader)).
+
+
+Testing
+-------
+
+To test this library, load the `tester.lgt` file:
+
+	| ?- logtalk_load(http_digest(tester)).
+
+
+Usage overview
+--------------
+
 The library provides these public entities:
 
 - `http_digest_verifier_protocol`
@@ -55,33 +82,6 @@ The server-side entities are portable across the backends supported by the
 normalized HTTP library. The `http_client_digest_session` helper additionally
 depends on the socket-backed HTTP client stack and is therefore available on
 the same backends supported by the `http_client` and `http_socket_transport` libraries.
-
-
-API documentation
------------------
-
-Open the [../../apis/library_index.html#http_digest](../../apis/library_index.html#http_digest)
-link in a web browser.
-
-
-Loading
--------
-
-To load the library, load the `loader.lgt` file:
-
-	| ?- logtalk_load(http_digest(loader)).
-
-
-Testing
--------
-
-To test this library, load the `tester.lgt` file:
-
-	| ?- logtalk_load(http_digest(tester)).
-
-
-Usage overview
---------------
 
 Use `http_digest` directly when you need explicit control over Digest
 challenge parsing and request verification:

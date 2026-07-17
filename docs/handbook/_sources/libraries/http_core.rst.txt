@@ -9,8 +9,30 @@ protocols, wire parsing and generation for the message start-lines,
 headers, and bodies, plus semantic normalization for a core set of
 frequently used headers.
 
-The library predicates are currently defined in the ``http_core``
-object.
+API documentation
+-----------------
+
+Open the
+`../../apis/library_index.html#http_core <../../apis/library_index.html#http_core>`__
+link in a web browser.
+
+Loading
+-------
+
+To load all entities in this library, load the ``loader.lgt`` file:
+
+::
+
+   | ?- logtalk_load(http_core(loader)).
+
+Testing
+-------
+
+To test this library predicates, load the ``tester.lgt`` file:
+
+::
+
+   | ?- logtalk_load(http_core(tester)).
 
 Layering
 --------
@@ -31,31 +53,6 @@ stack:
 - Pair any of those layers with `open_api <../open_api/NOTES.md>`__ when
   you want OpenAPI document derivation or request and response contract
   validation.
-
-API documentation
------------------
-
-Open the
-`../../apis/library_index.html#http <../../apis/library_index.html#http>`__
-link in a web browser.
-
-Loading
--------
-
-To load all entities in this library, load the ``loader.lgt`` file:
-
-::
-
-   | ?- logtalk_load(http(loader)).
-
-Testing
--------
-
-To test this library predicates, load the ``tester.lgt`` file:
-
-::
-
-   | ?- logtalk_load(http(tester)).
 
 Current scope
 -------------

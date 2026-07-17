@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `http_server_core`
-=============
+==================
 
 The `http_server_core` library provides a portable stream-oriented server layer on top
 of the `http_core` library. It is designed for the first orchestration step above

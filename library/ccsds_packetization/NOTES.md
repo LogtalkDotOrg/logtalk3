@@ -34,6 +34,30 @@ The current implementation covers:
 - reporting explicit packetization events for buffered fragments and generated
   idle packets
 
+
+API documentation
+-----------------
+
+Open the [../../apis/library_index.html#ccsds_packetization](../../apis/library_index.html#ccsds_packetization)
+link in a web browser.
+
+
+Loading
+-------
+
+To load all entities in this library, load the `loader.lgt` file:
+
+    | ?- logtalk_load(ccsds_packetization(loader)).
+
+
+Testing
+-------
+
+To test this library predicates, load the `tester.lgt` file:
+
+    | ?- logtalk_load(ccsds_packetization(tester)).
+
+
 Representation
 --------------
 
@@ -58,6 +82,7 @@ Where:
 Idle packets are generated as telemetry packets using APID `2047`, standalone
 sequence flags, the requested sequence count, a zero-filled secondary header of
 the requested length, and zero-filled user data.
+
 
 Packetization
 -------------
@@ -90,6 +115,7 @@ To packetize packets across a sequence of TM transfer frames:
 
     | ?- ccsds_packetization::packetize_tm_frames([Frame1, Frame2], 0, packetizer_state([]), Packets, UpdatedFrames, RemainingPackets, UpdatedState).
 
+
 Events
 ------
 
@@ -106,29 +132,10 @@ Where:
 - `generated_idle_packet/4` reports an idle packet synthesized to consume
   remaining frame capacity
 
+
 Idle packets
 ------------
 
 To generate a telemetry idle packet with APID `2047`:
 
     | ?- ccsds_packetization::generate_idle_packet(0, 7, 2, Packet).
-
-API documentation
------------------
-
-Open the [../../apis/library_index.html#ccsds_packetization](../../apis/library_index.html#ccsds_packetization)
-link in a web browser.
-
-Loading
--------
-
-To load all entities in this library, load the `loader.lgt` file:
-
-    | ?- logtalk_load(ccsds_packetization(loader)).
-
-Testing
--------
-
-To test this library predicates, load the `tester.lgt` file:
-
-    | ?- logtalk_load(ccsds_packetization(tester)).

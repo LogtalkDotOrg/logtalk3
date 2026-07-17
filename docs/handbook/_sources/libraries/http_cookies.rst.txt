@@ -8,6 +8,34 @@ This library implements validation, parsing, and generation of HTTP
 syntax. Header values can be represented as atoms, character lists, or
 code lists.
 
+API documentation
+-----------------
+
+Open the
+`../../apis/library_index.html#http_cookies <../../apis/library_index.html#http_cookies>`__
+link in a web browser.
+
+Loading
+-------
+
+To load all entities in this library, load the ``loader.lgt`` file:
+
+::
+
+   | ?- logtalk_load(http_cookies(loader)).
+
+Testing
+-------
+
+To test this library predicates, load the ``tester.lgt`` file:
+
+::
+
+   | ?- logtalk_load(http_cookies(tester)).
+
+Usage
+-----
+
 The library predicates are defined in the
 ``http_cookies(_Representation_)`` parametric object where
 ``_Representation_`` can be one of:
@@ -57,28 +85,3 @@ attribute lists:
 - ``cookie_attribute_value/3-4``
 - ``cookie_expiry/2-3``
 - ``cookie_deletion/3``
-
-API documentation
------------------
-
-Open the
-`../../apis/library_index.html#http_cookies <../../apis/library_index.html#http_cookies>`__
-link in a web browser.
-
-Loading
--------
-
-To load all entities in this library, load the ``loader.lgt`` file:
-
-::
-
-   | ?- logtalk_load(http_cookies(loader)).
-
-Testing
--------
-
-To test this library predicates, load the ``tester.lgt`` file:
-
-::
-
-   | ?- logtalk_load(http_cookies(tester)).

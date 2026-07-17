@@ -19,13 +19,36 @@ ________________________________________________________________________
 
 
 `ccsds_time_codes`
-===================
+==================
 
 The `ccsds_time_codes` library provides support for CCSDS time codes.
 The current implementation includes CCSDS Unsegmented Time Code (CUC) and
 CCSDS Day Segmented Time Code (CDS), and CCSDS Calendar Segmented Time Code
 (CCS), keeping the package small and reusable by the existing `ccsds_packets` packet
 library and by future frame-level libraries.
+
+
+API documentation
+-----------------
+
+Open the [../../apis/library_index.html#ccsds_time_codes](../../apis/library_index.html#ccsds_time_codes)
+link in a web browser.
+
+
+Loading
+-------
+
+To load all entities in this library, load the `loader.lgt` file:
+
+    | ?- logtalk_load(ccsds_time_codes(loader)).
+
+
+Testing
+-------
+
+To test this library predicates, load the `tester.lgt` file:
+
+    | ?- logtalk_load(ccsds_time_codes(tester)).
 
 
 Available entities
@@ -205,26 +228,3 @@ For example:
     | ?- type::check(ccsds_ccs(calendar, 0), [0x20, 0x26, 0x05, 0x08, 0x14, 0x30, 0x45]).
 
     | ?- type::check(ccsds_ccs_time(day_of_year, 1), ccs_ordinal_time(2026, 128, 14, 30, 45, 67)).
-
-
-API documentation
------------------
-
-Open the [../../apis/library_index.html#ccsds_time_codes](../../apis/library_index.html#ccsds_time_codes)
-link in a web browser.
-
-
-Loading
--------
-
-To load all entities in this library, load the `loader.lgt` file:
-
-    | ?- logtalk_load(ccsds_time_codes(loader)).
-
-
-Testing
--------
-
-To test this library predicates, load the `tester.lgt` file:
-
-    | ?- logtalk_load(ccsds_time_codes(tester)).

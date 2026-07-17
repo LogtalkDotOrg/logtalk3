@@ -42,6 +42,30 @@ The current implementation covers:
 - grouping complete telecommand service units into MAP-aware dispatch buckets so
     callers can route them by MAP identifier without rebuilding that bookkeeping
 
+
+API documentation
+-----------------
+
+Open the [../../apis/library_index.html#ccsds_tc_services](../../apis/library_index.html#ccsds_tc_services)
+link in a web browser.
+
+
+Loading
+-------
+
+To load all entities in this library, load the `loader.lgt` file:
+
+    | ?- logtalk_load(ccsds_tc_services(loader)).
+
+
+Testing
+-------
+
+To test this library predicates, load the `tester.lgt` file:
+
+    | ?- logtalk_load(ccsds_tc_services(tester)).
+
+
 Representation
 --------------
 
@@ -183,23 +207,3 @@ To resynchronize on a discontinuous telecommand frame while receiving explicit
 recovery events:
 
     | ?- ccsds_tc_services::reassemble_tc_frame(tc_transfer_frame(0, 1, 0, 42, 3, 9, segment_header([0xC6]), [9], none), resynchronize, tc_reassembly_state([tc_reassembly_channel(42, 3, 8, [tc_pending_segment(5, [1])])]), Segments, UpdatedState, Events).
-
-API documentation
------------------
-
-Open the [../../apis/library_index.html#ccsds_tc_services](../../apis/library_index.html#ccsds_tc_services)
-link in a web browser.
-
-Loading
--------
-
-To load all entities in this library, load the `loader.lgt` file:
-
-    | ?- logtalk_load(ccsds_tc_services(loader)).
-
-Testing
--------
-
-To test this library predicates, load the `tester.lgt` file:
-
-    | ?- logtalk_load(ccsds_tc_services(tester)).

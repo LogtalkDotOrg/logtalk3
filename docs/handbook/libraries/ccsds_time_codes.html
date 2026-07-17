@@ -99,14 +99,14 @@
 <li class="toctree-l2"><a class="reference internal" href="ccsds_packets.html"><code class="docutils literal notranslate"><span class="pre">ccsds_packets</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ccsds_tc_services.html"><code class="docutils literal notranslate"><span class="pre">ccsds_tc_services</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">ccsds_time_codes</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#available-entities">Available entities</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#representation">Representation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#parsing-and-generating">Parsing and generating</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#unix-time-conversion">Unix time conversion</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#types-and-arbitrary-generators">Types and arbitrary generators</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="ccsds_time_fields.html"><code class="docutils literal notranslate"><span class="pre">ccsds_time_fields</span></code></a></li>
@@ -377,6 +377,26 @@ The current implementation includes CCSDS Unsegmented Time Code (CUC)
 and CCSDS Day Segmented Time Code (CDS), and CCSDS Calendar Segmented
 Time Code (CCS), keeping the package small and reusable by the existing
 <code class="docutils literal notranslate"><span class="pre">ccsds_packets</span></code> packet library and by future frame-level libraries.</p>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<p>Open the
+<a class="reference external" href="../../apis/library_index.html#ccsds_time_codes">../../apis/library_index.html#ccsds_time_codes</a>
+link in a web browser.</p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
+<p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(ccsds_time_codes(loader)).
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(ccsds_time_codes(tester)).
+</pre></div>
+</div>
+</section>
 <section id="available-entities">
 <h2>Available entities<a class="headerlink" href="#available-entities" title="Link to this heading"></a></h2>
 <ul class="simple">
@@ -546,26 +566,6 @@ terms</p></li>
 | <span class="o">?-</span> type<span class="o">::</span>check(ccsds_ccs(calendar, <span class="m">0</span>), [<span class="mh">0x20</span>, <span class="mh">0x26</span>, <span class="mh">0x05</span>, <span class="mh">0x08</span>, <span class="mh">0x14</span>, <span class="mh">0x30</span>, <span class="mh">0x45</span>]).
 
 | <span class="o">?-</span> type<span class="o">::</span>check(ccsds_ccs_time(day_of_year, <span class="m">1</span>), ccs_ordinal_time(<span class="m">2026</span>, <span class="m">128</span>, <span class="m">14</span>, <span class="m">30</span>, <span class="m">45</span>, <span class="m">67</span>)).
-</pre></div>
-</div>
-</section>
-<section id="api-documentation">
-<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
-<p>Open the
-<a class="reference external" href="../../apis/library_index.html#ccsds_time_codes">../../apis/library_index.html#ccsds_time_codes</a>
-link in a web browser.</p>
-</section>
-<section id="loading">
-<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
-<p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(ccsds_time_codes(loader)).
-</pre></div>
-</div>
-</section>
-<section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
-<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(ccsds_time_codes(tester)).
 </pre></div>
 </div>
 </section>

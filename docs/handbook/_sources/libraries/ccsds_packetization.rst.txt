@@ -17,6 +17,31 @@ The current implementation covers:
 - reporting explicit packetization events for buffered fragments and
   generated idle packets
 
+API documentation
+-----------------
+
+Open the
+`../../apis/library_index.html#ccsds_packetization <../../apis/library_index.html#ccsds_packetization>`__
+link in a web browser.
+
+Loading
+-------
+
+To load all entities in this library, load the ``loader.lgt`` file:
+
+::
+
+   | ?- logtalk_load(ccsds_packetization(loader)).
+
+Testing
+-------
+
+To test this library predicates, load the ``tester.lgt`` file:
+
+::
+
+   | ?- logtalk_load(ccsds_packetization(tester)).
+
 Representation
 --------------
 
@@ -113,28 +138,3 @@ To generate a telemetry idle packet with APID ``2047``:
 ::
 
    | ?- ccsds_packetization::generate_idle_packet(0, 7, 2, Packet).
-
-API documentation
------------------
-
-Open the
-`../../apis/library_index.html#ccsds_packetization <../../apis/library_index.html#ccsds_packetization>`__
-link in a web browser.
-
-Loading
--------
-
-To load all entities in this library, load the ``loader.lgt`` file:
-
-::
-
-   | ?- logtalk_load(ccsds_packetization(loader)).
-
-Testing
--------
-
-To test this library predicates, load the ``tester.lgt`` file:
-
-::
-
-   | ?- logtalk_load(ccsds_packetization(tester)).

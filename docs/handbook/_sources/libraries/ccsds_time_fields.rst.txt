@@ -17,6 +17,31 @@ This library covers CCSDS binary P-fields for:
 - CCS time fields using either calendar or day-of-year encoding and up
   to 6 BCD fraction octets
 
+API documentation
+-----------------
+
+Open the
+`../../apis/library_index.html#ccsds_time_fields <../../apis/library_index.html#ccsds_time_fields>`__
+link in a web browser.
+
+Loading
+-------
+
+To load all entities in this library, load the ``loader.lgt`` file:
+
+::
+
+   | ?- logtalk_load(ccsds_time_fields(loader)).
+
+Testing
+-------
+
+To test this library predicates, load the ``tester.lgt`` file:
+
+::
+
+   | ?- logtalk_load(ccsds_time_fields(tester)).
+
 Representation
 --------------
 
@@ -98,28 +123,3 @@ For example:
    | ?- ccsds_time_fields::format(cds_descriptor(3, 4, unix_epoch), Format).
 
    | ?- ccsds_time_fields::epoch(ccs_descriptor(calendar, 1), Epoch).
-
-API documentation
------------------
-
-Open the
-`../../apis/library_index.html#ccsds_time_fields <../../apis/library_index.html#ccsds_time_fields>`__
-link in a web browser.
-
-Loading
--------
-
-To load all entities in this library, load the ``loader.lgt`` file:
-
-::
-
-   | ?- logtalk_load(ccsds_time_fields(loader)).
-
-Testing
--------
-
-To test this library predicates, load the ``tester.lgt`` file:
-
-::
-
-   | ?- logtalk_load(ccsds_time_fields(tester)).

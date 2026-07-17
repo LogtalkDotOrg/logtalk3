@@ -94,13 +94,13 @@
 <li class="toctree-l2"><a class="reference internal" href="character_sets.html"><code class="docutils literal notranslate"><span class="pre">character_sets</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ccsds_frames.html"><code class="docutils literal notranslate"><span class="pre">ccsds_frames</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">ccsds_link_profiles</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#representation">Representation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#public-api">Public API</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#parsing-and-generating">Parsing and generating</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#packet-helpers">Packet helpers</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="ccsds_packet_services.html"><code class="docutils literal notranslate"><span class="pre">ccsds_packet_services</span></code></a></li>
@@ -377,6 +377,26 @@ over the existing parametric CCSDS frame objects.</p>
 <code class="docutils literal notranslate"><span class="pre">ccsds_tc_frames(...)</span></code>, or <code class="docutils literal notranslate"><span class="pre">ccsds_aos_frames(...)</span></code> objects directly
 at each call site, callers can work with explicit profile terms and
 generic wrapper predicates.</p>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<p>Open the
+<a class="reference external" href="../../apis/library_index.html#ccsds_link_profiles">../../apis/library_index.html#ccsds_link_profiles</a>
+link in a web browser.</p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
+<p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(ccsds_link_profiles(loader)).
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(ccsds_link_profiles(tester)).
+</pre></div>
+</div>
+</section>
 <section id="representation">
 <h2>Representation<a class="headerlink" href="#representation" title="Link to this heading"></a></h2>
 <p>Link profiles are represented using the compound terms:</p>
@@ -449,26 +469,6 @@ reassembly state and call the generic profile wrapper predicates:</p>
 and <code class="docutils literal notranslate"><span class="pre">insert_packets/5</span></code>, <code class="docutils literal notranslate"><span class="pre">reassemble_packets/6-8</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">reassemble_frames/6-8</span></code>, which throw a
 <code class="docutils literal notranslate"><span class="pre">domain_error(ccsds_packet_link_profile,</span> <span class="pre">tc_profile(...))</span></code> exception.</p>
-</section>
-<section id="api-documentation">
-<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
-<p>Open the
-<a class="reference external" href="../../apis/library_index.html#ccsds_link_profiles">../../apis/library_index.html#ccsds_link_profiles</a>
-link in a web browser.</p>
-</section>
-<section id="loading">
-<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
-<p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(ccsds_link_profiles(loader)).
-</pre></div>
-</div>
-</section>
-<section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
-<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(ccsds_link_profiles(tester)).
-</pre></div>
-</div>
 </section>
 </section>
 

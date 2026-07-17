@@ -11,6 +11,31 @@ Instead of selecting one of the raw ``ccsds_tm_frames(...)``,
 at each call site, callers can work with explicit profile terms and
 generic wrapper predicates.
 
+API documentation
+-----------------
+
+Open the
+`../../apis/library_index.html#ccsds_link_profiles <../../apis/library_index.html#ccsds_link_profiles>`__
+link in a web browser.
+
+Loading
+-------
+
+To load all entities in this library, load the ``loader.lgt`` file:
+
+::
+
+   | ?- logtalk_load(ccsds_link_profiles(loader)).
+
+Testing
+-------
+
+To test this library predicates, load the ``tester.lgt`` file:
+
+::
+
+   | ?- logtalk_load(ccsds_link_profiles(tester)).
+
 Representation
 --------------
 
@@ -97,28 +122,3 @@ Telecommand profiles are intentionally rejected by ``extract_packets/4``
 and ``insert_packets/5``, ``reassemble_packets/6-8``, and
 ``reassemble_frames/6-8``, which throw a
 ``domain_error(ccsds_packet_link_profile, tc_profile(...))`` exception.
-
-API documentation
------------------
-
-Open the
-`../../apis/library_index.html#ccsds_link_profiles <../../apis/library_index.html#ccsds_link_profiles>`__
-link in a web browser.
-
-Loading
--------
-
-To load all entities in this library, load the ``loader.lgt`` file:
-
-::
-
-   | ?- logtalk_load(ccsds_link_profiles(loader)).
-
-Testing
--------
-
-To test this library predicates, load the ``tester.lgt`` file:
-
-::
-
-   | ?- logtalk_load(ccsds_link_profiles(tester)).

@@ -97,15 +97,15 @@
 <li class="toctree-l2"><a class="reference internal" href="ccsds_packet_services.html"><code class="docutils literal notranslate"><span class="pre">ccsds_packet_services</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ccsds_packetization.html"><code class="docutils literal notranslate"><span class="pre">ccsds_packetization</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">ccsds_packets</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#packet-structure">Packet Structure</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#representation">Representation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#parsing">Parsing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#generating">Generating</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#accessor-predicates">Accessor Predicates</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#types-and-arbitrary-generators">Types and arbitrary generators</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="ccsds_tc_services.html"><code class="docutils literal notranslate"><span class="pre">ccsds_tc_services</span></code></a></li>
@@ -375,12 +375,36 @@
 <span id="library-ccsds-packets"></span><h1><code class="docutils literal notranslate"><span class="pre">ccsds_packets</span></code><a class="headerlink" href="#ccsds-packets" title="Link to this heading"></a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">ccsds_packets</span></code> library implements predicates for parsing and
 generating CCSDS (Consultative Committee for Space Data Systems) Space
-Packets following the CCSDS 133.0-B-2 standard (Space Packet Protocol).</p>
-<p>Reference documentation:</p>
+Packets following the CCSDS 133.0-B-2 standard (Space Packet Protocol):</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://public.ccsds.org/Pubs/133x0b2e1.pdf">https://public.ccsds.org/Pubs/133x0b2e1.pdf</a></p></li>
 <li><p><a class="reference external" href="https://jastoolbox.sandia.gov/topic/communication-specification/jas-packets/ccsds-telecommand-and-telemetry-format-packet-standard/">https://jastoolbox.sandia.gov/topic/communication-specification/jas-packets/ccsds-telecommand-and-telemetry-format-packet-standard/</a></p></li>
 </ul>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<p>Open the
+<a class="reference external" href="../../apis/library_index.html#ccsds_packets">../../apis/library_index.html#ccsds_packets</a>
+link in a web browser.</p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
+<p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(ccsds_packets(loader)).
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(ccsds_packets(tester)).
+</pre></div>
+</div>
+<p>To test the performance of the library parsing predicates, load the
+<code class="docutils literal notranslate"><span class="pre">tester_performance.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(ccsds_packets(tester_performance)).
+</pre></div>
+</div>
+</section>
 <section id="packet-structure">
 <h2>Packet Structure<a class="headerlink" href="#packet-structure" title="Link to this heading"></a></h2>
 <p>A CCSDS Space Packet consists of:</p>
@@ -527,31 +551,6 @@ generators. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> type<span class="o">::</span>check(ccsds_packet_term, <span class="nv">Packet</span>).
 
 | <span class="o">?-</span> type<span class="o">::</span>arbitrary(ccsds_packet_term(<span class="m">42</span>), <span class="nv">Packet</span>).
-</pre></div>
-</div>
-</section>
-<section id="api-documentation">
-<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
-<p>Open the
-<a class="reference external" href="../../apis/library_index.html#ccsds_packets">../../apis/library_index.html#ccsds_packets</a>
-link in a web browser.</p>
-</section>
-<section id="loading">
-<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
-<p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(ccsds_packets(loader)).
-</pre></div>
-</div>
-</section>
-<section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
-<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(ccsds_packets(tester)).
-</pre></div>
-</div>
-<p>To test the performance of the library parsing predicates, load the
-<code class="docutils literal notranslate"><span class="pre">tester_performance.lgt</span></code> file:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(ccsds_packets(tester_performance)).
 </pre></div>
 </div>
 </section>

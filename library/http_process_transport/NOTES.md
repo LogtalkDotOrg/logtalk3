@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `http_process_transport`
-=====================
+========================
 
 The `http_process_transport` library provides an alternative implementation
 of the `http_transport_protocol` protocol. Based on the `process` library and

@@ -29,6 +29,30 @@ Instead of selecting one of the raw `ccsds_tm_frames(...)`,
 site, callers can work with explicit profile terms and generic wrapper
 predicates.
 
+
+API documentation
+-----------------
+
+Open the [../../apis/library_index.html#ccsds_link_profiles](../../apis/library_index.html#ccsds_link_profiles)
+link in a web browser.
+
+
+Loading
+-------
+
+To load all entities in this library, load the `loader.lgt` file:
+
+    | ?- logtalk_load(ccsds_link_profiles(loader)).
+
+
+Testing
+-------
+
+To test this library predicates, load the `tester.lgt` file:
+
+    | ?- logtalk_load(ccsds_link_profiles(tester)).
+
+
 Representation
 --------------
 
@@ -44,6 +68,7 @@ Where:
 - `SecondaryHeaderLength`, `SegmentHeaderLength`, and `InsertZoneLength` are
   the mission-profile field lengths in octets
 - `HasOCF` and `HasFECF` are the atoms `true` or `false`
+
 
 Public API
 ----------
@@ -63,6 +88,7 @@ The current implementation provides the predicates:
 - `insert_packets/5`
 - `reassemble_packets/6-8`
 - `reassemble_frames/6-8`
+
 
 Parsing and generating
 ----------------------
@@ -85,6 +111,7 @@ underlying TM, TC, and AOS frame objects selected by the profile.
 To parse or generate multi-frame sources and sinks, use `parse_frames/3` and
 `generate_frames/3`.
 
+
 Packet helpers
 --------------
 
@@ -104,23 +131,3 @@ Telecommand profiles are intentionally rejected by `extract_packets/4` and
 `insert_packets/5`, `reassemble_packets/6-8`, and `reassemble_frames/6-8`,
 which throw a
 `domain_error(ccsds_packet_link_profile, tc_profile(...))` exception.
-
-API documentation
------------------
-
-Open the [../../apis/library_index.html#ccsds_link_profiles](../../apis/library_index.html#ccsds_link_profiles)
-link in a web browser.
-
-Loading
--------
-
-To load all entities in this library, load the `loader.lgt` file:
-
-    | ?- logtalk_load(ccsds_link_profiles(loader)).
-
-Testing
--------
-
-To test this library predicates, load the `tester.lgt` file:
-
-    | ?- logtalk_load(ccsds_link_profiles(tester)).

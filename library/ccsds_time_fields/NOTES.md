@@ -35,6 +35,30 @@ This library covers CCSDS binary P-fields for:
 - CCS time fields using either calendar or day-of-year encoding and up to 6
   BCD fraction octets
 
+
+API documentation
+-----------------
+
+Open the [../../apis/library_index.html#ccsds_time_fields](../../apis/library_index.html#ccsds_time_fields)
+link in a web browser.
+
+
+Loading
+-------
+
+To load all entities in this library, load the `loader.lgt` file:
+
+    | ?- logtalk_load(ccsds_time_fields(loader)).
+
+
+Testing
+-------
+
+To test this library predicates, load the `tester.lgt` file:
+
+    | ?- logtalk_load(ccsds_time_fields(tester)).
+
+
 Representation
 --------------
 
@@ -55,6 +79,7 @@ the T-field bytes once the descriptor has been decoded.
 For the current scope, the agency-defined epoch bit in CUC and CDS descriptors
 is mapped to the existing `unix_epoch` atom so callers can keep using the same
 time-code objects and terms already provided by `ccsds_time_codes`.
+
 
 Parsing and generating
 ----------------------
@@ -83,6 +108,7 @@ To generate a self-describing CCS day-of-year time field:
 
     | ?- ccsds_time_fields::generate(bytes(Bytes), ccs_descriptor(day_of_year, 1), ccs_ordinal_time(2026, 128, 14, 30, 45, 67)).
 
+
 Descriptor helpers
 ------------------
 
@@ -97,23 +123,3 @@ For example:
     | ?- ccsds_time_fields::format(cds_descriptor(3, 4, unix_epoch), Format).
 
     | ?- ccsds_time_fields::epoch(ccs_descriptor(calendar, 1), Epoch).
-
-API documentation
------------------
-
-Open the [../../apis/library_index.html#ccsds_time_fields](../../apis/library_index.html#ccsds_time_fields)
-link in a web browser.
-
-Loading
--------
-
-To load all entities in this library, load the `loader.lgt` file:
-
-    | ?- logtalk_load(ccsds_time_fields(loader)).
-
-Testing
--------
-
-To test this library predicates, load the `tester.lgt` file:
-
-    | ?- logtalk_load(ccsds_time_fields(tester)).

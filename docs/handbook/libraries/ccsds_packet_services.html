@@ -95,15 +95,15 @@
 <li class="toctree-l2"><a class="reference internal" href="ccsds_frames.html"><code class="docutils literal notranslate"><span class="pre">ccsds_frames</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ccsds_link_profiles.html"><code class="docutils literal notranslate"><span class="pre">ccsds_link_profiles</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">ccsds_packet_services</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#representation">Representation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#packet-zone-helpers">Packet-zone helpers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#telemetry-transfer-frame-helpers">Telemetry transfer frame helpers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#advanced-orbiting-systems-helpers">Advanced orbiting systems helpers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#cross-frame-packet-reassembly">Cross-frame packet reassembly</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#scope">Scope</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="ccsds_packetization.html"><code class="docutils literal notranslate"><span class="pre">ccsds_packetization</span></code></a></li>
@@ -407,6 +407,26 @@ frame, or resynchronizing on the current frame</p></li>
 reassembly predicates so callers can observe dropped fragments,
 skipped frames, and resynchronization points</p></li>
 </ul>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<p>Open the
+<a class="reference external" href="../../apis/library_index.html#ccsds_packet_services">../../apis/library_index.html#ccsds_packet_services</a>
+link in a web browser.</p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
+<p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(ccsds_packet_services(loader)).
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(ccsds_packet_services(tester)).
+</pre></div>
+</div>
+</section>
 <section id="representation">
 <h2>Representation<a class="headerlink" href="#representation" title="Link to this heading"></a></h2>
 <p>Packet zones are represented using the compound term:</p>
@@ -600,26 +620,6 @@ cross-frame packet reassembly with continuity checks and configurable
 discontinuity recovery. Future milestones can extend the same library
 with segmentation policies, idle packet generation, richer per-channel
 recovery controls, and higher level packetization policies.</p>
-</section>
-<section id="api-documentation">
-<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
-<p>Open the
-<a class="reference external" href="../../apis/library_index.html#ccsds_packet_services">../../apis/library_index.html#ccsds_packet_services</a>
-link in a web browser.</p>
-</section>
-<section id="loading">
-<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
-<p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(ccsds_packet_services(loader)).
-</pre></div>
-</div>
-</section>
-<section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
-<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(ccsds_packet_services(tester)).
-</pre></div>
-</div>
 </section>
 </section>
 

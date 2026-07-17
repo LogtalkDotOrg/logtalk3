@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `open_api`
-=========
+==========
 
 The `open_api` library provides a first-pass implementation for deriving,
 parsing, generating, and structurally validating OpenAPI 3.1.0 documents.
