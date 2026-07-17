@@ -149,6 +149,7 @@
 <li class="toctree-l2"><a class="reference internal" href="grammars.html"><code class="docutils literal notranslate"><span class="pre">grammars</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="graphs.html"><code class="docutils literal notranslate"><span class="pre">graphs</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">gravatar</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#basic-usage">Basic usage</a></li>
@@ -375,6 +376,12 @@ support and reuses the <code class="docutils literal notranslate"><span class="p
 <p>This library can be used with backend Prolog systems that support
 unbound integer arithmetic and the <code class="docutils literal notranslate"><span class="pre">sockets</span></code> library: ECLiPSe, SICStus
 Prolog, SWI-Prolog, Trealla Prolog, and XVM.</p>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<p>Open the
+<a class="reference external" href="../../apis/library_index.html#gravatar">../../apis/library_index.html#gravatar</a>
+link in a web browser.</p>
+</section>
 <section id="loading">
 <h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
 <p>To load the library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
@@ -400,14 +407,13 @@ not defined.</p>
 </section>
 <section id="basic-usage">
 <h2>Basic usage<a class="headerlink" href="#basic-usage" title="Link to this heading"></a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(gravatar(loader)).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> gravatar<span class="o">::</span>profile(<span class="s">&#39;user@example.com&#39;</span>, <span class="nv">Profile</span>).
 ...
-
-| <span class="o">?-</span> gravatar<span class="o">::</span>profile(<span class="s">&#39;user@example.com&#39;</span>, <span class="nv">Profile</span>).
 </pre></div>
 </div>
 <p>For authenticated requests, pass an API key explicitly:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> gravatar<span class="o">::</span>profile(<span class="s">&#39;user@example.com&#39;</span>, <span class="nv">Profile</span>, [api_key(<span class="s">&#39;...&#39;</span>)]).
+...
 </pre></div>
 </div>
 <p>When the <code class="docutils literal notranslate"><span class="pre">api_key/1</span></code> option is omitted, the client uses the
@@ -419,6 +425,7 @@ are available for common profile fields:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> gravatar<span class="o">::</span>profile(<span class="s">&#39;user@example.com&#39;</span>, <span class="nv">Profile</span>),
      gravatar<span class="o">::</span>display_name(<span class="nv">Profile</span>, <span class="nv">DisplayName</span>),
      gravatar<span class="o">::</span>avatar_url(<span class="nv">Profile</span>, <span class="nv">AvatarURL</span>).
+...
 </pre></div>
 </div>
 <p>The supported helpers are <code class="docutils literal notranslate"><span class="pre">hash/2</span></code>, <code class="docutils literal notranslate"><span class="pre">display_name/2</span></code>,

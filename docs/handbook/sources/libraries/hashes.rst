@@ -9,13 +9,33 @@ commonly used hashing algorithms. All hash objects implement the
 takes a list of bytes and returns the computed hash as a lowercase
 hexadecimal atom.
 
-The fixed-size cryptographic hash objects that can be safely used with
-HMAC (``blake2s``, ``md5``, ``sha1``, ``sha256``, ``blake2b``,
-``sha512``, ``sha512_256``, ``sha3_224``, ``sha3_256``, ``sha3_384``,
-and ``sha3_512``) also implement the ``hash_digest_protocol`` protocol.
-This protocol adds ``digest/2``, ``digest_size/1``, and ``block_size/1``
-predicates so that libraries such as ``hmac`` can compute keyed digests
-without duplicating hash function internals.
+API documentation
+-----------------
+
+Open the
+`../../apis/library_index.html#hashes <../../apis/library_index.html#hashes>`__
+link in a web browser.
+
+Loading
+-------
+
+To load all entities in this library, load the ``loader.lgt`` file:
+
+::
+
+   | ?- logtalk_load(hashes(loader)).
+
+Testing
+-------
+
+To test this library predicates, load the ``tester.lgt`` file:
+
+::
+
+   | ?- logtalk_load(hashes(tester)).
+
+Supported hash algorithms
+-------------------------
 
 The library implements the following hashing algorithms:
 
@@ -114,6 +134,17 @@ validate that the input is a list of bytes. When necessary, use the
 ``types`` library ``type::check(list(byte), Input)`` goal before calling
 the ``hash/2`` predicate.
 
+HMAC compatibility
+------------------
+
+The fixed-size cryptographic hash objects that can be safely used with
+HMAC (``blake2s``, ``md5``, ``sha1``, ``sha256``, ``blake2b``,
+``sha512``, ``sha512_256``, ``sha3_224``, ``sha3_256``, ``sha3_384``,
+and ``sha3_512``) also implement the ``hash_digest_protocol`` protocol.
+This protocol adds ``digest/2``, ``digest_size/1``, and ``block_size/1``
+predicates so that libraries such as ``hmac`` can compute keyed digests
+without duplicating hash function internals.
+
 Segmented hashing
 -----------------
 
@@ -143,31 +174,6 @@ Example, hashing a message fed in three chunks:
         md5::final_hash_state(S3, Hash).
    Hash = '5aa207e85988921b8733912c4f526c80'
    yes
-
-API documentation
------------------
-
-Open the
-`../../apis/library_index.html#hashes <../../apis/library_index.html#hashes>`__
-link in a web browser.
-
-Loading
--------
-
-To load all entities in this library, load the ``loader.lgt`` file:
-
-::
-
-   | ?- logtalk_load(hashes(loader)).
-
-Testing
--------
-
-To test this library predicates, load the ``tester.lgt`` file:
-
-::
-
-   | ?- logtalk_load(hashes(tester)).
 
 Examples
 --------

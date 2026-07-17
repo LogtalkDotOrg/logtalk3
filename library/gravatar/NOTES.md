@@ -31,6 +31,13 @@ integer arithmetic and the `sockets` library: ECLiPSe, SICStus Prolog,
 SWI-Prolog, Trealla Prolog, and XVM.
 
 
+API documentation
+-----------------
+
+Open the [../../apis/library_index.html#gravatar](../../apis/library_index.html#gravatar)
+link in a web browser.
+
+
 Loading
 -------
 
@@ -59,14 +66,13 @@ skipped automatically when the API key environment variable is not defined.
 Basic usage
 -----------
 
-	| ?- logtalk_load(gravatar(loader)).
-	...
-
 	| ?- gravatar::profile('user@example.com', Profile).
+	...
 
 For authenticated requests, pass an API key explicitly:
 
 	| ?- gravatar::profile('user@example.com', Profile, [api_key('...')]).
+	...
 
 When the `api_key/1` option is omitted, the client uses the
 `LOGTALK_GRAVATAR_API_KEY` environment variable when it is defined. If neither
@@ -79,6 +85,7 @@ available for common profile fields:
 	| ?- gravatar::profile('user@example.com', Profile),
 	     gravatar::display_name(Profile, DisplayName),
 	     gravatar::avatar_url(Profile, AvatarURL).
+	...
 
 The supported helpers are `hash/2`, `display_name/2`, `profile_url/2`,
 `avatar_url/2`, `avatar_alt_text/2`, `location/2`, `job_title/2`, `company/2`,

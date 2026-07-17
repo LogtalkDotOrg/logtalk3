@@ -151,10 +151,12 @@
 <li class="toctree-l2"><a class="reference internal" href="gravatar.html"><code class="docutils literal notranslate"><span class="pre">gravatar</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="gsp_pattern_miner.html"><code class="docutils literal notranslate"><span class="pre">gsp_pattern_miner</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">hashes</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#segmented-hashing">Segmented hashing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#supported-hash-algorithms">Supported hash algorithms</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hmac-compatibility">HMAC compatibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#segmented-hashing">Segmented hashing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
 </ul>
 </li>
@@ -374,13 +376,28 @@ commonly used hashing algorithms. All hash objects implement the
 <code class="docutils literal notranslate"><span class="pre">hash_protocol</span></code> protocol by providing a <code class="docutils literal notranslate"><span class="pre">hash/2</span></code> predicate that
 takes a list of bytes and returns the computed hash as a lowercase
 hexadecimal atom.</p>
-<p>The fixed-size cryptographic hash objects that can be safely used with
-HMAC (<code class="docutils literal notranslate"><span class="pre">blake2s</span></code>, <code class="docutils literal notranslate"><span class="pre">md5</span></code>, <code class="docutils literal notranslate"><span class="pre">sha1</span></code>, <code class="docutils literal notranslate"><span class="pre">sha256</span></code>, <code class="docutils literal notranslate"><span class="pre">blake2b</span></code>,
-<code class="docutils literal notranslate"><span class="pre">sha512</span></code>, <code class="docutils literal notranslate"><span class="pre">sha512_256</span></code>, <code class="docutils literal notranslate"><span class="pre">sha3_224</span></code>, <code class="docutils literal notranslate"><span class="pre">sha3_256</span></code>, <code class="docutils literal notranslate"><span class="pre">sha3_384</span></code>,
-and <code class="docutils literal notranslate"><span class="pre">sha3_512</span></code>) also implement the <code class="docutils literal notranslate"><span class="pre">hash_digest_protocol</span></code> protocol.
-This protocol adds <code class="docutils literal notranslate"><span class="pre">digest/2</span></code>, <code class="docutils literal notranslate"><span class="pre">digest_size/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">block_size/1</span></code>
-predicates so that libraries such as <code class="docutils literal notranslate"><span class="pre">hmac</span></code> can compute keyed digests
-without duplicating hash function internals.</p>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<p>Open the
+<a class="reference external" href="../../apis/library_index.html#hashes">../../apis/library_index.html#hashes</a>
+link in a web browser.</p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
+<p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(hashes(loader)).
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(hashes(tester)).
+</pre></div>
+</div>
+</section>
+<section id="supported-hash-algorithms">
+<h2>Supported hash algorithms<a class="headerlink" href="#supported-hash-algorithms" title="Link to this heading"></a></h2>
 <p>The library implements the following hashing algorithms:</p>
 <ul class="simple">
 <li><p>DJB2 32-bit (<code class="docutils literal notranslate"><span class="pre">djb2_32</span></code>)</p></li>
@@ -466,6 +483,17 @@ value <code class="docutils literal notranslate"><span class="pre">0x00000000</s
 validate that the input is a list of bytes. When necessary, use the
 <code class="docutils literal notranslate"><span class="pre">types</span></code> library <code class="docutils literal notranslate"><span class="pre">type::check(list(byte),</span> <span class="pre">Input)</span></code> goal before calling
 the <code class="docutils literal notranslate"><span class="pre">hash/2</span></code> predicate.</p>
+</section>
+<section id="hmac-compatibility">
+<h2>HMAC compatibility<a class="headerlink" href="#hmac-compatibility" title="Link to this heading"></a></h2>
+<p>The fixed-size cryptographic hash objects that can be safely used with
+HMAC (<code class="docutils literal notranslate"><span class="pre">blake2s</span></code>, <code class="docutils literal notranslate"><span class="pre">md5</span></code>, <code class="docutils literal notranslate"><span class="pre">sha1</span></code>, <code class="docutils literal notranslate"><span class="pre">sha256</span></code>, <code class="docutils literal notranslate"><span class="pre">blake2b</span></code>,
+<code class="docutils literal notranslate"><span class="pre">sha512</span></code>, <code class="docutils literal notranslate"><span class="pre">sha512_256</span></code>, <code class="docutils literal notranslate"><span class="pre">sha3_224</span></code>, <code class="docutils literal notranslate"><span class="pre">sha3_256</span></code>, <code class="docutils literal notranslate"><span class="pre">sha3_384</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">sha3_512</span></code>) also implement the <code class="docutils literal notranslate"><span class="pre">hash_digest_protocol</span></code> protocol.
+This protocol adds <code class="docutils literal notranslate"><span class="pre">digest/2</span></code>, <code class="docutils literal notranslate"><span class="pre">digest_size/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">block_size/1</span></code>
+predicates so that libraries such as <code class="docutils literal notranslate"><span class="pre">hmac</span></code> can compute keyed digests
+without duplicating hash function internals.</p>
+</section>
 <section id="segmented-hashing">
 <h2>Segmented hashing<a class="headerlink" href="#segmented-hashing" title="Link to this heading"></a></h2>
 <p>Objects implementing the <code class="docutils literal notranslate"><span class="pre">hash_state_protocol</span></code> protocol (which extends
@@ -489,26 +517,6 @@ rate) are ever resident at once, regardless of the total message length.</p>
      md5<span class="o">::</span>final_hash_state(<span class="nv">S3</span>, <span class="nv">Hash</span>).
 <span class="nv">Hash</span> <span class="o">=</span> <span class="s">&#39;5aa207e85988921b8733912c4f526c80&#39;</span>
 yes
-</pre></div>
-</div>
-</section>
-<section id="api-documentation">
-<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
-<p>Open the
-<a class="reference external" href="../../apis/library_index.html#hashes">../../apis/library_index.html#hashes</a>
-link in a web browser.</p>
-</section>
-<section id="loading">
-<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
-<p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(hashes(loader)).
-</pre></div>
-</div>
-</section>
-<section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
-<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(hashes(tester)).
 </pre></div>
 </div>
 </section>

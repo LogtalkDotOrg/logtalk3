@@ -34,6 +34,13 @@ integer arithmetic and the `sockets` library: ECLiPSe, SICStus Prolog,
 SWI-Prolog, Trealla Prolog, and XVM.
 
 
+API documentation
+-----------------
+
+Open the [../../apis/library_index.html#s3](../../apis/library_index.html#s3)
+link in a web browser.
+
+
 Loading
 -------
 
