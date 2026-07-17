@@ -56,6 +56,13 @@ On Windows, it can be installed using e.g. Chocolatey:
 
    > choco install openssl
 
+API documentation
+-----------------
+
+Open the
+`../../apis/library_index.html#jwt <../../apis/library_index.html#jwt>`__
+link in a web browser.
+
 Loading
 -------
 

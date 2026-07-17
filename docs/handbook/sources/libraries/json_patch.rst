@@ -26,7 +26,7 @@ the ``loader.lgt`` file from this directory:
 
 ::
 
-   | ?- logtalk_load(loader).
+   | ?- logtalk_load(json_patch(loader)).
 
 Testing
 -------
@@ -35,7 +35,7 @@ To test this library predicates, load the ``tester.lgt`` file:
 
 ::
 
-   | ?- logtalk_load(tester).
+   | ?- logtalk_load(json_patch(tester)).
 
 Representation
 --------------

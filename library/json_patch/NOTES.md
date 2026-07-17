@@ -43,7 +43,7 @@ Loading
 To load all entities in this library from the repository checkout, load the
 `loader.lgt` file from this directory:
 
-	| ?- logtalk_load(loader).
+	| ?- logtalk_load(json_patch(loader)).
 
 
 Testing
@@ -51,7 +51,7 @@ Testing
 
 To test this library predicates, load the `tester.lgt` file:
 
-	| ?- logtalk_load(tester).
+	| ?- logtalk_load(json_patch(tester)).
 
 
 Representation

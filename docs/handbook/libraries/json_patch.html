@@ -390,14 +390,14 @@ link in a web browser.</p>
 <h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
 <p>To load all entities in this library from the repository checkout, load
 the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file from this directory:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(loader).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(json_patch(loader)).
 </pre></div>
 </div>
 </section>
 <section id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
 <p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(tester).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(json_patch(tester)).
 </pre></div>
 </div>
 </section>
