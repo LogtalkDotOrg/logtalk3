@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-13,
+		date is 2026-07-17,
 		comment is 'Process-backed HTTP transport predicates using the process library and helper processes.'
 	]).
 
@@ -207,7 +207,7 @@
 
 	:- uses(os, [
 		delete_file/1, file_exists/1, operating_system_type/1, path_concat/3, pid/1, resolve_command_path/2,
-		temporary_directory/1, shell/1
+		temporary_directory/1, shell/1, internal_os_path/2
 	]).
 
 	:- uses(reader, [
@@ -242,12 +242,14 @@
 		normalize_listener_host(Host, NormalizedHost),
 		parse_listener_socket_options(Options, Backlog, Transport, ListenerExecutable, TemporaryTLSCredentialsPrefix, CertificateFile0, KeyFile0),
 		resolve_listener_tls_credentials(Transport, TemporaryTLSCredentialsPrefix, CertificateFile0, KeyFile0, CertificateFile, KeyFile, TemporaryTLSCredentials),
+		internal_os_path(CertificateFile, CertificateFileOS),
+		internal_os_path(KeyFile, KeyFileOS),
 		resolve_listener_executable(ListenerExecutable, ResolvedHelperExecutable, ListenerExecutableKind),
 		select_listener_port(ListenerExecutableKind, NormalizedHost, RequestedPort, SelectedPort),
 		open_loopback_listener(binary, Backlog, RelayPort, RelayListener),
 		atom_number(SelectedPortAtom, SelectedPort),
 		atom_number(RelayPortAtom, RelayPort),
-		listener_process_arguments(ListenerExecutableKind, ResolvedHelperExecutable, NormalizedHost, SelectedPortAtom, Backlog, Transport, CertificateFile, KeyFile, RelayPortAtom, Arguments),
+		listener_process_arguments(ListenerExecutableKind, ResolvedHelperExecutable, NormalizedHost, SelectedPortAtom, Backlog, Transport, CertificateFileOS, KeyFileOS, RelayPortAtom, Arguments),
 		catch(
 			process::create(ResolvedHelperExecutable, Arguments, [stderr(Error), process(Process)]),
 			CreateError,
@@ -290,9 +292,11 @@
 			true
 		;	cleanup_temporary_tls_credentials(credentials(CertificateFile, KeyFile)),
 			resolve_command_path(openssl, Path),
+			internal_os_path(CertificateFile, CertificateFileOS),
+			internal_os_path(KeyFile, KeyFileOS),
 			process::create(
 				Path,
-				['req', '-x509', '-newkey', 'rsa:2048', '-nodes', '-keyout', KeyFile, '-out', CertificateFile, '-subj', '/CN=127.0.0.1', '-days', '1'],
+				['req', '-x509', '-newkey', 'rsa:2048', '-nodes', '-keyout', KeyFileOS, '-out', CertificateFileOS, '-subj', '/CN=127.0.0.1', '-days', '1'],
 				[stdout(Output), stderr(Error), process(Process)]
 			),
 			process::wait(Process, Status),

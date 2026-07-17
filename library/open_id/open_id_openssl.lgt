@@ -12,7 +12,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-17,
 		comment is 'OpenSSL-backed JWT signature verification helpers.'
 	]).
 
@@ -36,7 +36,7 @@
 	]).
 
 	:- uses(os, [
-		delete_file/1, path_concat/3, resolve_command_path/2, temporary_directory/1
+		delete_file/1, path_concat/3, resolve_command_path/2, temporary_directory/1, internal_os_path/2
 	]).
 
 	:- uses(process, [
@@ -87,9 +87,12 @@
 		write_bytes_file(SignatureFile, Signature).
 
 	run_openssl_verify(OpenSSL, PublicKeyFile, DataFile, SignatureFile) :-
+		internal_os_path(PublicKeyFile, PublicKeyFileOS),
+		internal_os_path(DataFile, DataFileOS),
+		internal_os_path(SignatureFile, SignatureFileOS),
 		create(
 			OpenSSL,
-			['dgst', '-sha256', '-verify', PublicKeyFile, '-signature', SignatureFile, DataFile],
+			['dgst', '-sha256', '-verify', PublicKeyFileOS, '-signature', SignatureFileOS, DataFileOS],
 			[stdout(Output), stderr(Error), process(Process)]
 		),
 		wait(Process, Status),
