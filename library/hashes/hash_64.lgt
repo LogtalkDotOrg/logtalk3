@@ -1289,7 +1289,7 @@
 		author is 'Paulo Moura',
 		date is 2026-07-16,
 		comment is 'SHA-1 hash function.',
-		see_also is [md5, sha256]
+		see_also is [md5, sha256, sha224]
 	]).
 
 	:- uses(hash_common_32, [
@@ -1425,7 +1425,7 @@
 		author is 'Paulo Moura',
 		date is 2026-07-16,
 		comment is 'SHA-512 hash function.',
-		see_also is [sha512_256, sha256, sha1]
+		see_also is [sha512_256, sha384, sha256, sha1]
 	]).
 
 	:- uses(hash_common_32, [
@@ -1721,7 +1721,7 @@
 		author is 'Paulo Moura',
 		date is 2026-07-16,
 		comment is 'SHA-512/256 hash function.',
-		see_also is [sha256, sha1]
+		see_also is [sha256, sha1, sha384]
 	]).
 
 	:- uses(hash_common_32, [
@@ -2005,6 +2005,302 @@
 :- end_object.
 
 
+:- object(sha384,
+	implements([hash_digest_protocol, hash_state_protocol])).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-07-17,
+		comment is 'SHA-384 hash function.',
+		see_also is [sha512, sha512_256, sha256, sha224]
+	]).
+
+	:- uses(hash_common_32, [
+		bytes_hex/2
+	]).
+
+	:- uses(hash_common_64, [
+		add64/3, and64/3, integer_to_big_endian_bytes64/3, not64/2, or64/3,
+		pad_md_tail/3, rol64/3, shl64/3, shr64/3, xor64/3
+	]).
+
+	:- uses(list, [
+		append/3, length/2, nth0/3, take/4
+	]).
+
+	digest(Bytes, DigestBytes) :-
+		sha384_pad(Bytes, PaddedBytes),
+		sha384_blocks(PaddedBytes, [0xCBBB9D5DC1059ED8,0x629A292A367CD507,0x9159015A3070DD17,0x152FECD8F70E5939,0x67332667FFC00B31,0x8EB44A8768581511,0xDB0C2E0D64F98FA7,0x47B5481DBEFA4FA4], State),
+		sha384_state_bytes(State, DigestBytes).
+
+	digest_size(48).
+
+	block_size(128).
+
+	hash(Bytes, Hash) :-
+		digest(Bytes, DigestBytes),
+		bytes_hex(DigestBytes, Hash).
+
+	% the state buffers the at-most-127 leftover bytes that do not yet form
+	% a complete 128-byte block; Length is the total number of bytes seen
+	% so far, needed only for the MD padding appended to the final,
+	% partial block at finalization
+	new_hash_state(state([], 0, [0xCBBB9D5DC1059ED8,0x629A292A367CD507,0x9159015A3070DD17,0x152FECD8F70E5939,0x67332667FFC00B31,0x8EB44A8768581511,0xDB0C2E0D64F98FA7,0x47B5481DBEFA4FA4])).
+
+	update_hash_state(state(Buffer0, Length0, State0), Bytes, state(Buffer1, Length1, State1)) :-
+		append(Buffer0, Bytes, Combined),
+		length(Bytes, BytesLength),
+		Length1 is Length0 + BytesLength,
+		sha384_consume_blocks(Combined, State0, State1, Buffer1).
+
+	final_hash_state(state(Buffer, Length, State), Hash) :-
+		pad_md_tail(Buffer, Length, PaddedTail),
+		sha384_blocks(PaddedTail, State, FinalState),
+		sha384_state_bytes(FinalState, DigestBytes),
+		bytes_hex(DigestBytes, Hash).
+
+	sha384_consume_blocks(Bytes, State, State, Bytes) :-
+		length(Bytes, Length),
+		Length < 128,
+		!.
+	sha384_consume_blocks(Bytes, State0, State, Tail) :-
+		take(128, Bytes, Block, Rest),
+		sha384_block_words(Block, Words0, Tail0),
+		extend_sha384_words(16, Words0, Tail0, Words),
+		sha384_compress(Words, State0, State1),
+		sha384_consume_blocks(Rest, State1, State, Tail).
+
+	sha384_pad(Bytes, PaddedBytes) :-
+		length(Bytes, Length),
+		BitLength is Length * 8,
+		Zeros is (112 - ((Length + 1) mod 128) + 128) mod 128,
+		sha384_zeros(Zeros, ZeroBytes, LengthBytes),
+		sha384_length_bytes(BitLength, LengthBytes),
+		append(Bytes, [0x80| ZeroBytes], PaddedBytes).
+
+	sha384_zeros(0, Tail, Tail) :-
+		!.
+	sha384_zeros(Count, [0| Zeros], Tail) :-
+		NextCount is Count - 1,
+		sha384_zeros(NextCount, Zeros, Tail).
+
+	sha384_length_bytes(BitLength, LengthBytes) :-
+		Two64 is 0x10000000000000000,
+		High is (BitLength // Two64) mod Two64,
+		Low is BitLength mod Two64,
+		integer_to_big_endian_bytes64(High, LengthBytes, LowBytes),
+		integer_to_big_endian_bytes64(Low, LowBytes, []).
+
+	sha384_blocks([], State, State).
+	sha384_blocks([Byte| Bytes], State0, State) :-
+		take(128, [Byte| Bytes], Block, Rest),
+		sha384_block_words(Block, Words0, Tail0),
+		extend_sha384_words(16, Words0, Tail0, Words),
+		sha384_compress(Words, State0, State1),
+		sha384_blocks(Rest, State1, State).
+
+	sha384_compress(W, [A0,B0,C0,D0,E0,F0,G0,H0], [A,B,C,D,E,F,G,H]) :-
+		sha384_rounds(0, W, A0, B0, C0, D0, E0, F0, G0, H0, A1, B1, C1, D1, E1, F1, G1, H1),
+		sha384_accumulate_state([A0,B0,C0,D0,E0,F0,G0,H0], [A1,B1,C1,D1,E1,F1,G1,H1], [A,B,C,D,E,F,G,H]).
+
+	sha384_rounds(80, _, A, B, C, D, E, F, G, H, A, B, C, D, E, F, G, H) :-
+		!.
+	sha384_rounds(I, W, A0, B0, C0, D0, E0, F0, G0, H0, A, B, C, D, E, F, G, H) :-
+		nth0(I, W, WI),
+		sha384_k(I, KI),
+		sha384_sigma1(E0, S1),
+		and64(E0, F0, EF),
+		not64(E0, NE),
+		and64(NE, G0, NG),
+		xor64(EF, NG, Ch),
+		add64(H0, S1, T1_0),
+		add64(T1_0, Ch, T1_1),
+		add64(T1_1, KI, T1_2),
+		add64(T1_2, WI, T1),
+		sha384_sigma0(A0, S0),
+		and64(A0, B0, AB),
+		and64(A0, C0, AC),
+		and64(B0, C0, BC),
+		or64(AB, AC, ABAC),
+		or64(ABAC, BC, Maj),
+		add64(S0, Maj, T2),
+		add64(T1, T2, A1),
+		add64(D0, T1, E1),
+		NextI is I + 1,
+		sha384_rounds(NextI, W, A1, A0, B0, C0, E1, E0, F0, G0, A, B, C, D, E, F, G, H).
+
+	sha384_accumulate_state([], [], []).
+	sha384_accumulate_state([StateWord| StateWords], [WorkingWord| WorkingWords], [Word| Words]) :-
+		add64(StateWord, WorkingWord, Word),
+		sha384_accumulate_state(StateWords, WorkingWords, Words).
+
+	sha384_sigma0(X, Sigma) :-
+		sha384_ror64(X, 28, A),
+		sha384_ror64(X, 34, B),
+		sha384_ror64(X, 39, C),
+		xor64(B, C, BC),
+		xor64(A, BC, Sigma).
+
+	sha384_sigma1(X, Sigma) :-
+		sha384_ror64(X, 14, A),
+		sha384_ror64(X, 18, B),
+		sha384_ror64(X, 41, C),
+		xor64(B, C, BC),
+		xor64(A, BC, Sigma).
+
+	sha384_gamma0(X, Gamma) :-
+		sha384_ror64(X, 1, A),
+		sha384_ror64(X, 8, B),
+		shr64(X, 7, C),
+		xor64(B, C, BC),
+		xor64(A, BC, Gamma).
+
+	sha384_gamma1(X, Gamma) :-
+		sha384_ror64(X, 19, A),
+		sha384_ror64(X, 61, B),
+		shr64(X, 6, C),
+		xor64(B, C, BC),
+		xor64(A, BC, Gamma).
+
+	sha384_ror64(Value, Shift, Rotated) :-
+		LeftShift is 64 - (Shift /\ 63),
+		rol64(Value, LeftShift, Rotated).
+
+	extend_sha384_words(80, Words, [], Words) :-
+		!.
+	extend_sha384_words(Index, Words0, [Word| Tail1], Words) :-
+		I2 is Index - 2,
+		I7 is Index - 7,
+		I15 is Index - 15,
+		I16 is Index - 16,
+		nth0(I2, Words0, W2),
+		nth0(I7, Words0, W7),
+		nth0(I15, Words0, W15),
+		nth0(I16, Words0, W16),
+		sha384_gamma1(W2, G1),
+		sha384_gamma0(W15, G0),
+		add64(G1, W7, T0),
+		add64(T0, G0, T1),
+		add64(T1, W16, Word),
+		NextIndex is Index + 1,
+		extend_sha384_words(NextIndex, Words0, Tail1, Words).
+
+	% SHA-384 truncates the final hash value to the first six 64-bit
+	% words (48 bytes), omitting H(N)6 and H(N)7
+	sha384_state_bytes([W0, W1, W2, W3, W4, W5| _], DigestBytes) :-
+		integer_to_big_endian_bytes64(W0, DigestBytes, B1),
+		integer_to_big_endian_bytes64(W1, B1, B2),
+		integer_to_big_endian_bytes64(W2, B2, B3),
+		integer_to_big_endian_bytes64(W3, B3, B4),
+		integer_to_big_endian_bytes64(W4, B4, B5),
+		integer_to_big_endian_bytes64(W5, B5, []).
+
+	sha384_block_words([], Tail, Tail).
+	sha384_block_words([B0, B1, B2, B3, B4, B5, B6, B7| Bytes], [Word| Words], Tail) :-
+		sha384_big_endian_word64([B0, B1, B2, B3, B4, B5, B6, B7], Word),
+		sha384_block_words(Bytes, Words, Tail).
+
+	sha384_big_endian_word64([B0, B1, B2, B3, B4, B5, B6, B7], Word) :-
+		shl64(B0, 56, W0),
+		shl64(B1, 48, W1),
+		shl64(B2, 40, W2),
+		shl64(B3, 32, W3),
+		shl64(B4, 24, W4),
+		shl64(B5, 16, W5),
+		shl64(B6, 8, W6),
+		or64(W0, W1, T01),
+		or64(W2, W3, T23),
+		or64(W4, W5, T45),
+		or64(W6, B7, T67),
+		or64(T01, T23, T0123),
+		or64(T45, T67, T4567),
+		or64(T0123, T4567, Word).
+
+	sha384_k( 0, 0x428A2F98D728AE22).
+	sha384_k( 1, 0x7137449123EF65CD).
+	sha384_k( 2, 0xB5C0FBCFEC4D3B2F).
+	sha384_k( 3, 0xE9B5DBA58189DBBC).
+	sha384_k( 4, 0x3956C25BF348B538).
+	sha384_k( 5, 0x59F111F1B605D019).
+	sha384_k( 6, 0x923F82A4AF194F9B).
+	sha384_k( 7, 0xAB1C5ED5DA6D8118).
+	sha384_k( 8, 0xD807AA98A3030242).
+	sha384_k( 9, 0x12835B0145706FBE).
+	sha384_k(10, 0x243185BE4EE4B28C).
+	sha384_k(11, 0x550C7DC3D5FFB4E2).
+	sha384_k(12, 0x72BE5D74F27B896F).
+	sha384_k(13, 0x80DEB1FE3B1696B1).
+	sha384_k(14, 0x9BDC06A725C71235).
+	sha384_k(15, 0xC19BF174CF692694).
+	sha384_k(16, 0xE49B69C19EF14AD2).
+	sha384_k(17, 0xEFBE4786384F25E3).
+	sha384_k(18, 0x0FC19DC68B8CD5B5).
+	sha384_k(19, 0x240CA1CC77AC9C65).
+	sha384_k(20, 0x2DE92C6F592B0275).
+	sha384_k(21, 0x4A7484AA6EA6E483).
+	sha384_k(22, 0x5CB0A9DCBD41FBD4).
+	sha384_k(23, 0x76F988DA831153B5).
+	sha384_k(24, 0x983E5152EE66DFAB).
+	sha384_k(25, 0xA831C66D2DB43210).
+	sha384_k(26, 0xB00327C898FB213F).
+	sha384_k(27, 0xBF597FC7BEEF0EE4).
+	sha384_k(28, 0xC6E00BF33DA88FC2).
+	sha384_k(29, 0xD5A79147930AA725).
+	sha384_k(30, 0x06CA6351E003826F).
+	sha384_k(31, 0x142929670A0E6E70).
+	sha384_k(32, 0x27B70A8546D22FFC).
+	sha384_k(33, 0x2E1B21385C26C926).
+	sha384_k(34, 0x4D2C6DFC5AC42AED).
+	sha384_k(35, 0x53380D139D95B3DF).
+	sha384_k(36, 0x650A73548BAF63DE).
+	sha384_k(37, 0x766A0ABB3C77B2A8).
+	sha384_k(38, 0x81C2C92E47EDAEE6).
+	sha384_k(39, 0x92722C851482353B).
+	sha384_k(40, 0xA2BFE8A14CF10364).
+	sha384_k(41, 0xA81A664BBC423001).
+	sha384_k(42, 0xC24B8B70D0F89791).
+	sha384_k(43, 0xC76C51A30654BE30).
+	sha384_k(44, 0xD192E819D6EF5218).
+	sha384_k(45, 0xD69906245565A910).
+	sha384_k(46, 0xF40E35855771202A).
+	sha384_k(47, 0x106AA07032BBD1B8).
+	sha384_k(48, 0x19A4C116B8D2D0C8).
+	sha384_k(49, 0x1E376C085141AB53).
+	sha384_k(50, 0x2748774CDF8EEB99).
+	sha384_k(51, 0x34B0BCB5E19B48A8).
+	sha384_k(52, 0x391C0CB3C5C95A63).
+	sha384_k(53, 0x4ED8AA4AE3418ACB).
+	sha384_k(54, 0x5B9CCA4F7763E373).
+	sha384_k(55, 0x682E6FF3D6B2B8A3).
+	sha384_k(56, 0x748F82EE5DEFB2FC).
+	sha384_k(57, 0x78A5636F43172F60).
+	sha384_k(58, 0x84C87814A1F0AB72).
+	sha384_k(59, 0x8CC702081A6439EC).
+	sha384_k(60, 0x90BEFFFA23631E28).
+	sha384_k(61, 0xA4506CEBDE82BDE9).
+	sha384_k(62, 0xBEF9A3F7B2C67915).
+	sha384_k(63, 0xC67178F2E372532B).
+	sha384_k(64, 0xCA273ECEEA26619C).
+	sha384_k(65, 0xD186B8C721C0C207).
+	sha384_k(66, 0xEADA7DD6CDE0EB1E).
+	sha384_k(67, 0xF57D4F7FEE6ED178).
+	sha384_k(68, 0x06F067AA72176FBA).
+	sha384_k(69, 0x0A637DC5A2C898A6).
+	sha384_k(70, 0x113F9804BEF90DAE).
+	sha384_k(71, 0x1B710B35131C471B).
+	sha384_k(72, 0x28DB77F523047D84).
+	sha384_k(73, 0x32CAAB7B40C72493).
+	sha384_k(74, 0x3C9EBE0A15C9BEBC).
+	sha384_k(75, 0x431D67C49C100D4C).
+	sha384_k(76, 0x4CC5D4BECB3E42B6).
+	sha384_k(77, 0x597F299CFC657E2A).
+	sha384_k(78, 0x5FCB6FAB3AD6FAEC).
+	sha384_k(79, 0x6C44198C4A475817).
+
+:- end_object.
+
+
 :- object(sha256,
 	implements([hash_digest_protocol, hash_state_protocol])).
 
@@ -2013,7 +2309,7 @@
 		author is 'Paulo Moura',
 		date is 2026-07-16,
 		comment is 'SHA-256 hash function.',
-		see_also is [md5, sha1]
+		see_also is [md5, sha1, sha224]
 	]).
 
 	:- uses(hash_common_32, [
@@ -2211,6 +2507,227 @@
 	sha256_k(61, 0xA4506CEB).
 	sha256_k(62, 0xBEF9A3F7).
 	sha256_k(63, 0xC67178F2).
+
+	block_words_be([], Tail, Tail).
+	block_words_be([B0, B1, B2, B3| Bytes], [Word| Words], Tail) :-
+		big_endian_word32([B0, B1, B2, B3], Word),
+		block_words_be(Bytes, Words, Tail).
+
+:- end_object.
+
+
+:- object(sha224,
+	implements([hash_digest_protocol, hash_state_protocol])).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-07-17,
+		comment is 'SHA-224 hash function.',
+		see_also is [sha256, sha1, sha384]
+	]).
+
+	:- uses(hash_common_32, [
+		pad_md/4, pad_md_tail/5, bytes_hex/2, add32/3, ror32/3, integer_to_big_endian_bytes32/3, big_endian_word32/2
+	]).
+
+	:- uses(list, [
+		append/3, length/2, nth0/3, take/4
+	]).
+
+	digest(Bytes, DigestBytes) :-
+		pad_md(big, Bytes, 8, PaddedBytes),
+		sha224_blocks(PaddedBytes, [0xC1059ED8,0x367CD507,0x3070DD17,0xF70E5939,0xFFC00B31,0x68581511,0x64F98FA7,0xBEFA4FA4], State),
+		sha224_state_bytes(State, DigestBytes).
+
+	digest_size(28).
+
+	block_size(64).
+
+	hash(Bytes, Hash) :-
+		digest(Bytes, DigestBytes),
+		bytes_hex(DigestBytes, Hash).
+
+	% the state buffers the at-most-63 leftover bytes that do not yet form a
+	% complete 64-byte block; Length is the total number of bytes seen so
+	% far, needed only for the MD padding appended to the final, partial
+	% block at finalization
+	new_hash_state(state([], 0, [0xC1059ED8,0x367CD507,0x3070DD17,0xF70E5939,0xFFC00B31,0x68581511,0x64F98FA7,0xBEFA4FA4])).
+
+	update_hash_state(state(Buffer0, Length0, State0), Bytes, state(Buffer1, Length1, State1)) :-
+		append(Buffer0, Bytes, Combined),
+		length(Bytes, BytesLength),
+		Length1 is Length0 + BytesLength,
+		sha224_consume_blocks(Combined, State0, State1, Buffer1).
+
+	final_hash_state(state(Buffer, Length, State), Hash) :-
+		pad_md_tail(big, Buffer, Length, 8, PaddedTail),
+		sha224_blocks(PaddedTail, State, FinalState),
+		sha224_state_bytes(FinalState, DigestBytes),
+		bytes_hex(DigestBytes, Hash).
+
+	sha224_consume_blocks(Bytes, State, State, Bytes) :-
+		length(Bytes, Length),
+		Length < 64,
+		!.
+	sha224_consume_blocks(Bytes, State0, State, Tail) :-
+		take(64, Bytes, Block, Rest),
+		block_words_be(Block, Words0, Tail0),
+		extend_sha224_words(16, Words0, Tail0, Words),
+		sha224_compress(Words, State0, State1),
+		sha224_consume_blocks(Rest, State1, State, Tail).
+
+	sha224_blocks([], State, State).
+	sha224_blocks([Byte| Bytes], State0, State) :-
+		take(64, [Byte| Bytes], Block, Rest),
+		block_words_be(Block, Words0, Tail0),
+		extend_sha224_words(16, Words0, Tail0, Words),
+		sha224_compress(Words, State0, State1),
+		sha224_blocks(Rest, State1, State).
+
+	sha224_compress(W, [A0,B0,C0,D0,E0,F0,G0,H0], [A,B,C,D,E,F,G,H]) :-
+		sha224_rounds(0, W, A0, B0, C0, D0, E0, F0, G0, H0, A1, B1, C1, D1, E1, F1, G1, H1),
+		add32(A0, A1, A),
+		add32(B0, B1, B),
+		add32(C0, C1, C),
+		add32(D0, D1, D),
+		add32(E0, E1, E),
+		add32(F0, F1, F),
+		add32(G0, G1, G),
+		add32(H0, H1, H).
+
+	sha224_rounds(64, _, A, B, C, D, E, F, G, H, A, B, C, D, E, F, G, H) :-
+		!.
+	sha224_rounds(I, W, A0, B0, C0, D0, E0, F0, G0, H0, A, B, C, D, E, F, G, H) :-
+		nth0(I, W, WI),
+		sha224_k(I, KI),
+		sha224_sigma1(E0, S1),
+		Ch is xor((E0 /\ F0), ((\ E0) /\ G0)) /\ 0xFFFFFFFF,
+		T1 is (H0 + S1 + Ch + KI + WI) /\ 0xFFFFFFFF,
+		sha224_sigma0(A0, S0),
+		Maj is ((A0 /\ B0) \/ (A0 /\ C0) \/ (B0 /\ C0)) /\ 0xFFFFFFFF,
+		T2 is (S0 + Maj) /\ 0xFFFFFFFF,
+		A1 is (T1 + T2) /\ 0xFFFFFFFF,
+		E1 is (D0 + T1) /\ 0xFFFFFFFF,
+		NextI is I + 1,
+		sha224_rounds(NextI, W, A1, A0, B0, C0, E1, E0, F0, G0, A, B, C, D, E, F, G, H).
+
+	sha224_sigma0(X, Sigma) :-
+		ror32(X, 2, A),
+		ror32(X, 13, B),
+		ror32(X, 22, C),
+		Sigma is xor(A, xor(B, C)) /\ 0xFFFFFFFF.
+
+	sha224_sigma1(X, Sigma) :-
+		ror32(X, 6, A),
+		ror32(X, 11, B),
+		ror32(X, 25, C),
+		Sigma is xor(A, xor(B, C)) /\ 0xFFFFFFFF.
+
+	sha224_gamma0(X, Gamma) :-
+		ror32(X, 7, A),
+		ror32(X, 18, B),
+		C is X >> 3,
+		Gamma is xor(A, xor(B, C)) /\ 0xFFFFFFFF.
+
+	sha224_gamma1(X, Gamma) :-
+		ror32(X, 17, A),
+		ror32(X, 19, B),
+		C is X >> 10,
+		Gamma is xor(A, xor(B, C)) /\ 0xFFFFFFFF.
+
+	extend_sha224_words(64, Words, [], Words) :-
+		!.
+	extend_sha224_words(Index, Words0, [Word| Tail1], Words) :-
+		I2 is Index - 2,
+		I7 is Index - 7,
+		I15 is Index - 15,
+		I16 is Index - 16,
+		nth0(I2, Words0, W2),
+		nth0(I7, Words0, W7),
+		nth0(I15, Words0, W15),
+		nth0(I16, Words0, W16),
+		sha224_gamma1(W2, G1),
+		sha224_gamma0(W15, G0),
+		Word is (G1 + W7 + G0 + W16) /\ 0xFFFFFFFF,
+		NextIndex is Index + 1,
+		extend_sha224_words(NextIndex, Words0, Tail1, Words).
+
+	% SHA-224 truncates the final hash value to the first seven 32-bit
+	% words (28 bytes), omitting H(N)7
+	sha224_state_bytes([W0, W1, W2, W3, W4, W5, W6| _], DigestBytes) :-
+		integer_to_big_endian_bytes32(W0, DigestBytes, B1),
+		integer_to_big_endian_bytes32(W1, B1, B2),
+		integer_to_big_endian_bytes32(W2, B2, B3),
+		integer_to_big_endian_bytes32(W3, B3, B4),
+		integer_to_big_endian_bytes32(W4, B4, B5),
+		integer_to_big_endian_bytes32(W5, B5, B6),
+		integer_to_big_endian_bytes32(W6, B6, []).
+
+	sha224_k( 0, 0x428A2F98).
+	sha224_k( 1, 0x71374491).
+	sha224_k( 2, 0xB5C0FBCF).
+	sha224_k( 3, 0xE9B5DBA5).
+	sha224_k( 4, 0x3956C25B).
+	sha224_k( 5, 0x59F111F1).
+	sha224_k( 6, 0x923F82A4).
+	sha224_k( 7, 0xAB1C5ED5).
+	sha224_k( 8, 0xD807AA98).
+	sha224_k( 9, 0x12835B01).
+	sha224_k(10, 0x243185BE).
+	sha224_k(11, 0x550C7DC3).
+	sha224_k(12, 0x72BE5D74).
+	sha224_k(13, 0x80DEB1FE).
+	sha224_k(14, 0x9BDC06A7).
+	sha224_k(15, 0xC19BF174).
+	sha224_k(16, 0xE49B69C1).
+	sha224_k(17, 0xEFBE4786).
+	sha224_k(18, 0x0FC19DC6).
+	sha224_k(19, 0x240CA1CC).
+	sha224_k(20, 0x2DE92C6F).
+	sha224_k(21, 0x4A7484AA).
+	sha224_k(22, 0x5CB0A9DC).
+	sha224_k(23, 0x76F988DA).
+	sha224_k(24, 0x983E5152).
+	sha224_k(25, 0xA831C66D).
+	sha224_k(26, 0xB00327C8).
+	sha224_k(27, 0xBF597FC7).
+	sha224_k(28, 0xC6E00BF3).
+	sha224_k(29, 0xD5A79147).
+	sha224_k(30, 0x06CA6351).
+	sha224_k(31, 0x14292967).
+	sha224_k(32, 0x27B70A85).
+	sha224_k(33, 0x2E1B2138).
+	sha224_k(34, 0x4D2C6DFC).
+	sha224_k(35, 0x53380D13).
+	sha224_k(36, 0x650A7354).
+	sha224_k(37, 0x766A0ABB).
+	sha224_k(38, 0x81C2C92E).
+	sha224_k(39, 0x92722C85).
+	sha224_k(40, 0xA2BFE8A1).
+	sha224_k(41, 0xA81A664B).
+	sha224_k(42, 0xC24B8B70).
+	sha224_k(43, 0xC76C51A3).
+	sha224_k(44, 0xD192E819).
+	sha224_k(45, 0xD6990624).
+	sha224_k(46, 0xF40E3585).
+	sha224_k(47, 0x106AA070).
+	sha224_k(48, 0x19A4C116).
+	sha224_k(49, 0x1E376C08).
+	sha224_k(50, 0x2748774C).
+	sha224_k(51, 0x34B0BCB5).
+	sha224_k(52, 0x391C0CB3).
+	sha224_k(53, 0x4ED8AA4A).
+	sha224_k(54, 0x5B9CCA4F).
+	sha224_k(55, 0x682E6FF3).
+	sha224_k(56, 0x748F82EE).
+	sha224_k(57, 0x78A5636F).
+	sha224_k(58, 0x84C87814).
+	sha224_k(59, 0x8CC70208).
+	sha224_k(60, 0x90BEFFFA).
+	sha224_k(61, 0xA4506CEB).
+	sha224_k(62, 0xBEF9A3F7).
+	sha224_k(63, 0xC67178F2).
 
 	block_words_be([], Tail, Tail).
 	block_words_be([B0, B1, B2, B3| Bytes], [Word| Words], Tail) :-

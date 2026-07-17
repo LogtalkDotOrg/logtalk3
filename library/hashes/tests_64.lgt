@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-07-15,
+		date is 2026-07-17,
 		comment is 'Unit tests for the "hashes" library 64-bit algorithms.'
 	]).
 
@@ -56,7 +56,9 @@
 	cover(shake128(_)).
 	cover(shake256(_)).
 	cover(sha1).
+	cover(sha224).
 	cover(sha256).
+	cover(sha384).
 	cover(sha512).
 	cover(sha512_256).
 
@@ -187,6 +189,13 @@
 		atom_codes('The quick brown fox jumps over the lazy dog', Bytes),
 		sha256::hash(Bytes, Hash).
 
+	test(sha224_empty, deterministic(Hash == 'd14a028c2a3a2bc9476102bb288234c415a2b01f828ea62ac5b3e42f')) :-
+		sha224::hash([], Hash).
+
+	test(sha224_abc, deterministic(Hash == '23097d223405d8228642a477bda255b32aadbce4bda0b3f7e36c9da7')) :-
+		atom_codes('abc', Bytes),
+		sha224::hash(Bytes, Hash).
+
 	test(sha512_empty, deterministic(Hash == 'cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e')) :-
 		sha512::hash([], Hash).
 
@@ -200,6 +209,13 @@
 	test(sha512_256_abc, deterministic(Hash == '53048e2681941ef99b2e29b76b4c7dabe4c2d0c634fc6d46e0e2f13107e7af23')) :-
 		atom_codes('abc', Bytes),
 		sha512_256::hash(Bytes, Hash).
+
+	test(sha384_empty, deterministic(Hash == '38b060a751ac96384cd9327eb1b1e36a21fdb71114be07434c0cc7bf63f6e1da274edebfe76f65fbd51ad2f14898b95b')) :-
+		sha384::hash([], Hash).
+
+	test(sha384_abc, deterministic(Hash == 'cb00753f45a35e8bb5a03d699ac65007272c32ab0eded1631a8b605a43ff5bed8086072ba1e7cc2358baeca134c825a7')) :-
+		atom_codes('abc', Bytes),
+		sha384::hash(Bytes, Hash).
 
 	test(sha3_224_hash_digest_protocol, deterministic(Info == info('6b4e03423667dbb73b6e15454f0eb1abd4597f9a1b078e3f5b5a6bc7', 28, 144))) :-
 		sha3_224::digest([], Digest),
@@ -243,6 +259,13 @@
 		sha256::block_size(BlockSize),
 		Info = info(Hex, DigestSize, BlockSize).
 
+	test(sha224_hash_digest_protocol, deterministic(Info == info('d14a028c2a3a2bc9476102bb288234c415a2b01f828ea62ac5b3e42f', 28, 64))) :-
+		sha224::digest([], Digest),
+		bytes_hex(Digest, Hex),
+		sha224::digest_size(DigestSize),
+		sha224::block_size(BlockSize),
+		Info = info(Hex, DigestSize, BlockSize).
+
 	test(sha512_hash_digest_protocol, deterministic(Info == info('cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e', 64, 128))) :-
 		sha512::digest([], Digest),
 		bytes_hex(Digest, Hex),
@@ -255,6 +278,13 @@
 		bytes_hex(Digest, Hex),
 		sha512_256::digest_size(DigestSize),
 		sha512_256::block_size(BlockSize),
+		Info = info(Hex, DigestSize, BlockSize).
+
+	test(sha384_hash_digest_protocol, deterministic(Info == info('38b060a751ac96384cd9327eb1b1e36a21fdb71114be07434c0cc7bf63f6e1da274edebfe76f65fbd51ad2f14898b95b', 48, 128))) :-
+		sha384::digest([], Digest),
+		bytes_hex(Digest, Hex),
+		sha384::digest_size(DigestSize),
+		sha384::block_size(BlockSize),
 		Info = info(Hex, DigestSize, BlockSize).
 
 	% incremental hashing tests (new_hash_state/1, update_hash_state/3, final_hash_state/2)
@@ -482,6 +512,27 @@
 		chunks(1, Bytes, Chunks),
 		run_incremental(sha256, Chunks, Hash2).
 
+	test(sha224_incremental_empty, deterministic(Hash == 'd14a028c2a3a2bc9476102bb288234c415a2b01f828ea62ac5b3e42f')) :-
+		run_incremental(sha224, [], Hash).
+
+	test(sha224_incremental_matches_hash_exact_block_boundary, deterministic(Hash1 == Hash2)) :-
+		sequence(1, 64, Bytes),
+		sha224::hash(Bytes, Hash1),
+		split_at(30, Bytes, Chunk1, Chunk2),
+		run_incremental(sha224, [Chunk1, Chunk2], Hash2).
+
+	test(sha224_incremental_matches_hash_block_boundary_plus_one, deterministic(Hash1 == Hash2)) :-
+		sequence(1, 65, Bytes),
+		sha224::hash(Bytes, Hash1),
+		split_at(64, Bytes, Chunk1, Chunk2),
+		run_incremental(sha224, [Chunk1, Chunk2], Hash2).
+
+	test(sha224_incremental_matches_hash_byte_by_byte, deterministic(Hash1 == Hash2)) :-
+		sequence(1, 130, Bytes),
+		sha224::hash(Bytes, Hash1),
+		chunks(1, Bytes, Chunks),
+		run_incremental(sha224, Chunks, Hash2).
+
 	test(sha512_incremental_empty, deterministic(Hash == 'cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e')) :-
 		run_incremental(sha512, [], Hash).
 
@@ -523,6 +574,27 @@
 		sha512_256::hash(Bytes, Hash1),
 		chunks(9, Bytes, Chunks),
 		run_incremental(sha512_256, Chunks, Hash2).
+
+	test(sha384_incremental_empty, deterministic(Hash == '38b060a751ac96384cd9327eb1b1e36a21fdb71114be07434c0cc7bf63f6e1da274edebfe76f65fbd51ad2f14898b95b')) :-
+		run_incremental(sha384, [], Hash).
+
+	test(sha384_incremental_matches_hash_exact_block_boundary, deterministic(Hash1 == Hash2)) :-
+		sequence(1, 128, Bytes),
+		sha384::hash(Bytes, Hash1),
+		split_at(50, Bytes, Chunk1, Chunk2),
+		run_incremental(sha384, [Chunk1, Chunk2], Hash2).
+
+	test(sha384_incremental_matches_hash_block_boundary_plus_one, deterministic(Hash1 == Hash2)) :-
+		sequence(1, 129, Bytes),
+		sha384::hash(Bytes, Hash1),
+		split_at(128, Bytes, Chunk1, Chunk2),
+		run_incremental(sha384, [Chunk1, Chunk2], Hash2).
+
+	test(sha384_incremental_matches_hash_unaligned_chunks, deterministic(Hash1 == Hash2)) :-
+		sequence(1, 260, Bytes),
+		sha384::hash(Bytes, Hash1),
+		chunks(9, Bytes, Chunks),
+		run_incremental(sha384, Chunks, Hash2).
 
 	% the state must not be tied to a single new_hash_state/1 call: two
 	% independent hashing sessions interleaved through the same predicates

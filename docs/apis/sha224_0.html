@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>crc32_non_reflected(Polynomial,Initial,FinalXor,AppendLength) &mdash; Logtalk 3.101.0</title>
+  <title>sha224 &mdash; Logtalk 3.101.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -32,8 +32,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="crc32_reflected(Polynomial)" href="crc32_reflected_1.html" />
-    <link rel="prev" title="blake2s" href="blake2s_0.html" />
+    <link rel="next" title="sha256" href="sha256_0.html" />
+    <link rel="prev" title="sha1" href="sha1_0.html" />
    
 </head>
 
@@ -156,7 +156,7 @@
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#hashes"><span class="xref std std-ref">hashes</span></a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="blake2b_0.html">blake2b</a></li>
 <li class="toctree-l3"><a class="reference internal" href="blake2s_0.html">blake2s</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">crc32_non_reflected(Polynomial,Initial,FinalXor,AppendLength)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="crc32_non_reflected_4.html">crc32_non_reflected(Polynomial,Initial,FinalXor,AppendLength)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="crc32_reflected_1.html">crc32_reflected(Polynomial)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="crc32b_0.html">crc32b</a></li>
 <li class="toctree-l3"><a class="reference internal" href="crc32bzip2_0.html">crc32bzip2</a></li>
@@ -182,7 +182,7 @@
 <li class="toctree-l3"><a class="reference internal" href="sdbm_32_0.html">sdbm_32</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sdbm_64_0.html">sdbm_64</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sha1_0.html">sha1</a></li>
-<li class="toctree-l3"><a class="reference internal" href="sha224_0.html">sha224</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">sha224</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sha256_0.html">sha256</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sha384_0.html">sha384</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sha3_224_0.html">sha3_224</a></li>
@@ -421,9 +421,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">crc32_non_reflected(Polynomial,Initial,FinalXor,AppendLength)</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">sha224</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/crc32_non_reflected_4.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/sha224_0.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -431,16 +431,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="crc32-non-reflected-4"><span id="index-0"></span><strong>object</strong></p>
-<section id="crc32-non-reflected-polynomial-initial-finalxor-appendlength">
-<h1><code class="docutils literal notranslate"><span class="pre">crc32_non_reflected(Polynomial,Initial,FinalXor,AppendLength)</span></code><a class="headerlink" href="#crc32-non-reflected-polynomial-initial-finalxor-appendlength" title="Link to this heading"></a></h1>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Polynomial</span></code> - Canonical non-reflected CRC-32 polynomial.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Initial</span></code> - Initial CRC accumulator value.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">FinalXor</span></code> - Final xor value.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">AppendLength</span></code> - Boolean flag controlling whether the message length is appended as little-endian bytes.</p></li>
-</ul>
-<p>Parametric non-reflected CRC-32 hash function using a canonical polynomial, configurable initial value and final xor value, and optional appended little-endian length bytes.</p>
+  <p class="right" id="sha224-0"><span id="index-0"></span><strong>object</strong></p>
+<section id="sha224">
+<h1><code class="docutils literal notranslate"><span class="pre">sha224</span></code><a class="headerlink" href="#sha224" title="Link to this heading"></a></h1>
+<p>SHA-224 hash function.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -449,8 +443,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:1:0</div>
-<div class="line"><strong>Date:</strong> 2026-07-16</div>
+<div class="line"><strong>Version:</strong> 1:0:0</div>
+<div class="line"><strong>Date:</strong> 2026-07-17</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -461,6 +455,7 @@
 <div class="line-block">
 <div class="line"><strong>Implements:</strong></div>
 <div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="hash_digest_protocol_0.html#hash-digest-protocol-0"><span class="std std-ref">hash_digest_protocol</span></a></div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="hash_state_protocol_0.html#hash-state-protocol-0"><span class="std std-ref">hash_state_protocol</span></a></div>
 </div>
 <div class="line"><strong>Uses:</strong></div>
@@ -478,7 +473,7 @@
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line"> <a class="reference internal" href="hash_state_protocol_0.html#hash-state-protocol-0-final-hash-state-2"><span class="std std-ref">final_hash_state/2</span></a>  <a class="reference internal" href="hash_protocol_0.html#hash-protocol-0-hash-2"><span class="std std-ref">hash/2</span></a>  <a class="reference internal" href="hash_state_protocol_0.html#hash-state-protocol-0-new-hash-state-1"><span class="std std-ref">new_hash_state/1</span></a>  <a class="reference internal" href="hash_state_protocol_0.html#hash-state-protocol-0-update-hash-state-3"><span class="std std-ref">update_hash_state/3</span></a></div>
+<div class="line"> <a class="reference internal" href="hash_digest_protocol_0.html#hash-digest-protocol-0-block-size-1"><span class="std std-ref">block_size/1</span></a>  <a class="reference internal" href="hash_digest_protocol_0.html#hash-digest-protocol-0-digest-2"><span class="std std-ref">digest/2</span></a>  <a class="reference internal" href="hash_digest_protocol_0.html#hash-digest-protocol-0-digest-size-1"><span class="std std-ref">digest_size/1</span></a>  <a class="reference internal" href="hash_state_protocol_0.html#hash-state-protocol-0-final-hash-state-2"><span class="std std-ref">final_hash_state/2</span></a>  <a class="reference internal" href="hash_protocol_0.html#hash-protocol-0-hash-2"><span class="std std-ref">hash/2</span></a>  <a class="reference internal" href="hash_state_protocol_0.html#hash-state-protocol-0-new-hash-state-1"><span class="std std-ref">new_hash_state/1</span></a>  <a class="reference internal" href="hash_state_protocol_0.html#hash-state-protocol-0-update-hash-state-3"><span class="std std-ref">update_hash_state/3</span></a></div>
 </div>
 </div>
 <nav class="contents local" id="contents">
@@ -506,7 +501,7 @@
 <p>(none)</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="crc32_reflected_1.html#crc32-reflected-1"><span class="std std-ref">crc32_reflected(Polynomial)</span></a>, <a class="reference internal" href="crc32b_0.html#crc32b-0"><span class="std std-ref">crc32b</span></a>, <a class="reference internal" href="crc32c_0.html#crc32c-0"><span class="std std-ref">crc32c</span></a>, <a class="reference internal" href="crc32posix_0.html#crc32posix-0"><span class="std std-ref">crc32posix</span></a>, <a class="reference internal" href="crc32mpeg2_0.html#crc32mpeg2-0"><span class="std std-ref">crc32mpeg2</span></a>, <a class="reference internal" href="crc32bzip2_0.html#crc32bzip2-0"><span class="std std-ref">crc32bzip2</span></a>, <a class="reference internal" href="crc32q_0.html#crc32q-0"><span class="std std-ref">crc32q</span></a>, <a class="reference internal" href="murmurhash3_x86_32_0.html#murmurhash3-x86-32-0"><span class="std std-ref">murmurhash3_x86_32</span></a>, <a class="reference internal" href="fnv1a_32_0.html#fnv1a-32-0"><span class="std std-ref">fnv1a_32</span></a></p>
+<p><a class="reference internal" href="sha256_0.html#sha256-0"><span class="std std-ref">sha256</span></a>, <a class="reference internal" href="sha1_0.html#sha1-0"><span class="std std-ref">sha1</span></a>, <a class="reference internal" href="sha384_0.html#sha384-0"><span class="std std-ref">sha384</span></a></p>
 </div>
 </section>
 </section>
@@ -515,8 +510,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="blake2s_0.html" class="btn btn-neutral float-left" title="blake2s" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="crc32_reflected_1.html" class="btn btn-neutral float-right" title="crc32_reflected(Polynomial)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="sha1_0.html" class="btn btn-neutral float-left" title="sha1" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sha256_0.html" class="btn btn-neutral float-right" title="sha256" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

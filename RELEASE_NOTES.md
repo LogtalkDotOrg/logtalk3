@@ -90,8 +90,8 @@ JWK/JWKS key selection, and reusable registered-claim validation predicates.
 * ADDED: New `otp` library supporting generating and verifying HOTP and TOTP
 one-time passwords after RFC 4226 and RFC 6238.
 
-* ADDED: Support for the BLAKE2s, BLAKE2b, SHA-512, and SHA-512/256 hash
-functions to the `hashes` library.
+* ADDED: Support for the BLAKE2s, BLAKE2b, SHA-224, SHA-384, SHA-512, and
+SHA-512/256 hash functions to the `hashes` library.
 
 * ADDED: Support for incremental hash computation to the `hashes` library.
 

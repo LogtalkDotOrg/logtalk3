@@ -1,21 +1,21 @@
-.. index:: single: sha1
-.. _sha1/0:
+.. index:: single: sha224
+.. _sha224/0:
 
 .. rst-class:: right
 
 **object**
 
-``sha1``
-========
+``sha224``
+==========
 
-SHA-1 hash function.
+SHA-224 hash function.
 
 | **Availability:** 
 |    ``logtalk_load(hashes(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:3:0
-| **Date:** 2026-07-16
+| **Version:** 1:0:0
+| **Date:** 2026-07-17
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -60,5 +60,5 @@ Operators
 
 .. seealso::
 
-   :ref:`md5 <md5/0>`, :ref:`sha256 <sha256/0>`, :ref:`sha224 <sha224/0>`
+   :ref:`sha256 <sha256/0>`, :ref:`sha1 <sha1/0>`, :ref:`sha384 <sha384/0>`
 
