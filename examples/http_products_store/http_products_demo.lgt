@@ -25,7 +25,7 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-07-14,
-		comment is 'Starts a local HTTP server and drives it with a few client requests to illustrate the full request/response round trip.'
+		comment is 'Starts a local HTTP server and drives it with a few client requests to illustrate the full request/response round trip. Requires threads support.'
 	]).
 
 	:- public(run/0).

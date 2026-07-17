@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-07-17,
 		comment is 'Declarative HTTP router category for objects implementing the http_handler_protocol protocol.'
 	]).
 
@@ -823,7 +823,7 @@
 		atom(Handler),
 		!,
 		Goal =.. [Handler, Request, Action],
-		::Goal,
+		once(::Goal),
 		validate_middleware_action(Action).
 	call_middleware(Handler, _Request, _Action) :-
 		domain_error(http_router_middleware, Handler).
@@ -850,7 +850,7 @@
 		atom(Handler),
 		!,
 		Goal =.. [Handler, Request, Response0, Response],
-		::Goal,
+		once(::Goal),
 		validate_response_middleware_response(Response).
 	call_response_middleware(Handler, _Request, _Response0, _Response) :-
 		domain_error(http_router_response_middleware, Handler).
@@ -1306,7 +1306,7 @@
 		atom(Handler),
 		!,
 		Goal =.. [Handler, Request, Response],
-		::Goal.
+		once(::Goal).
 	call_route_handler(Handler, _Request, _Response) :-
 		domain_error(http_router_handler, Handler).
 

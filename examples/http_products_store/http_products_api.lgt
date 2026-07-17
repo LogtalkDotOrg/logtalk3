@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-14,
+		date is 2026-07-17,
 		comment is 'Sample REST API illustrating the "http_router", "http_parameters", "http_server", and "http_client" libraries working together.'
 	]).
 
@@ -49,7 +49,7 @@
 	]).
 
 	:- uses(list, [
-		memberchk/2
+		member/2, memberchk/2
 	]).
 
 	:- uses(user, [
@@ -143,7 +143,7 @@
 	% variable, meaning "no filter") when the optional parameter is absent
 
 	list_filter(Key, Parameters, Default, Value) :-
-		(	memberchk(Key-Value0, Parameters) ->
+		(	member(Key-Value0, Parameters) ->
 			Value = Value0
 		;	Value = Default
 		).
