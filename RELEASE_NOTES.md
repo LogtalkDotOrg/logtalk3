@@ -95,8 +95,8 @@ functions to the `hashes` library.
 
 * ADDED: Support for incremental hash computation to the `hashes` library.
 
-* ADDED: Support for computing HMAC-SHA-512/256 digests to the `hmac`
-library.
+* ADDED: Support for computing HMAC-SHA-512 and HMAC-SHA-512/256 digests to
+the `hmac` library.
 
 * ADDED: New `os::resolve_command_path/2` library predicate.
 

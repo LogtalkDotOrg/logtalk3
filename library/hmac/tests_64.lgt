@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-05-29,
+		date is 2026-07-16,
 		comment is 'Unit tests for the "hmac" library on unbounded integer backends.'
 	]).
 
@@ -59,6 +59,16 @@
 		repeat_byte(20, 0x0c, Key),
 		atom_codes('Test With Truncation', Message),
 		hex_digest(sha256, Key, Message, 16, HexDigest).
+
+	test(sha512_rfc4231_case_1_hex_digest, deterministic(HexDigest == '87aa7cdea5ef619d4ff0b4241a1d6cb02379f4e2ce4ec2787ad0b30545e17cdedaa833b7d6b8a702038b274eaea3f4e4be9d914eeb61f1702e696c203a126854')) :-
+		repeat_byte(20, 0x0b, Key),
+		atom_codes('Hi There', Message),
+		hex_digest(sha512, Key, Message, HexDigest).
+
+	test(sha512_rfc4231_case_5_truncated_hex_digest, deterministic(HexDigest == '415fad6271580a531d4179bc891d87a6')) :-
+		repeat_byte(20, 0x0c, Key),
+		atom_codes('Test With Truncation', Message),
+		hex_digest(sha512, Key, Message, 16, HexDigest).
 
 	% Reproducible reference value generated with Python's standard hashlib/hmac sha512_256 implementation.
 	test(sha512_256_python_case_1_hex_digest, deterministic(HexDigest == '9f9126c3d9c3c330d760425ca8a217e31feae31bfe70196ff81642b868402eab')) :-

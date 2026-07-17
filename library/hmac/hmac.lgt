@@ -25,9 +25,9 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-29,
+		date is 2026-07-16,
 		comment is 'HMAC (Keyed-Hash Message Authentication Code) implementation as specified in RFC 2104.',
-		see_also is [md5, sha1, sha256, sha512_256, sha3_224, sha3_256, sha3_384, sha3_512]
+		see_also is [md5, sha1, sha256, sha512, sha512_256, sha3_224, sha3_256, sha3_384, sha3_512]
 	]).
 
 	:- uses(hash_common_32, [
