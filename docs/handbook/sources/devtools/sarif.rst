@@ -4,7 +4,9 @@
 =========
 
 The ``sarif`` tool serializes diagnostics produced by tools implementing
-the ``tool_diagnostics_protocol`` protocol into SARIF 2.1.0 reports.
+the ``tool_diagnostics_protocol`` protocol into SARIF 2.1.0 reports:
+
+https://sarifweb.azurewebsites.net/
 
 API documentation
 -----------------
@@ -21,7 +23,6 @@ Load the tool using:
 ::
 
    | ?- logtalk_load(sarif(loader)).
-   ...
 
 Testing
 -------
@@ -70,3 +71,24 @@ Each specification uses the same target and options accepted by the
 corresponding diagnostics producer. The aggregate API is explicit: the
 ``sarif`` tool does not infer producers or merge options across
 specifications.
+
+Diagnostics producers
+---------------------
+
+The following tools produce diagnostics compatible with the ``sarif``
+tool:
+
+- ``dead_code_scanner``
+- ``lgtdoc``
+- ``lgtunit``
+- ``linter_reporter``
+
+See the individual tools documentation for details on how to generate
+diagnostics.
+
+Report visualization
+--------------------
+
+SARIF reports can be visualized using e.g. VSCode extensions or online
+viewers. SARIF reports are also supported in e.g. GitHub, GitLab, and
+BitBucket.

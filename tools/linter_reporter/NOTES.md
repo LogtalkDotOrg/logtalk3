@@ -22,8 +22,8 @@ ________________________________________________________________________
 =================
 
 This tool intercepts compiler linter warnings and caches them as
-machine-readable diagnostics. These diagnostics can be queried directly or
-serialized as SARIF using the standalone `sarif` tool.
+machine-readable diagnostics. These diagnostics can be queried directly
+or serialized as a SARIF report using the standalone `sarif` tool.
 
 
 API documentation
@@ -37,12 +37,29 @@ This tool API documentation is available at:
 Loading
 -------
 
-Load the tool before loading the code to be checked:
+Load the tool using:
 
 	| ?- logtalk_load(linter_reporter(loader)).
     ...
 
-Enable collecting linter warnings data using default options:
+
+Testing
+-------
+
+To test this tool, load the `tester.lgt` file:
+
+	| ?- logtalk_load(linter_reporter(tester)).
+
+The test suite reuses `errors` example files to exercise representative built-in
+linter warnings and validates both the diagnostics API and standalone SARIF
+generation in explanation-disabled and explanation-enabled configurations.
+
+
+Usage
+-----
+
+After loading the tool, enable collecting linter warnings data using default
+options:
 
     | ?- linter_reporter::enable.
     true.
@@ -79,28 +96,7 @@ Or generate a SARIF report using the standalone `sarif` tool:
     | ?- sarif::generate(linter_reporter, all, file('./linter_warnings.sarif'), []).
     true.
 
-
-Testing
--------
-
-To test this tool, load the `tester.lgt` file:
-
-	| ?- logtalk_load(linter_reporter(tester)).
-
-The test suite reuses `errors` example files to exercise representative built-in
-linter warnings and validates both the diagnostics API and standalone SARIF
-generation in explanation-disabled and explanation-enabled configurations.
-
-
-Usage
------
-
-Load the tool, call `enable/0-1` before compiling the code to be checked, call
-`disable/0` when warning collection is finished, and then query the cached
-warnings using either the legacy warning predicates or the diagnostics protocol
-predicates. To generate SARIF from the cached diagnostics, load the standalone
-`sarif` tool and call
-`sarif::generate(linter_reporter, all, file('./linter_warnings.sarif'), []).`
+See the `sarif` tool documentation for more details.
 
 
 Options
