@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-06,
+		date is 2026-07-18,
 		comment is 'Unit tests for the "http_directory_listing" library.'
 	]).
 
@@ -42,32 +42,73 @@
 	cleanup :-
 		^^clean_directory('test_docroot').
 
-	test(http_directory_listing_serve_4_01, deterministic) :-
-		ensure_docroot(Root),
-		os::path_concat(Root, 'alpha.txt', AlphaFile),
-		write_file_atom(AlphaFile, 'alpha'),
-		expected_modified_display(AlphaFile, AlphaModifiedDisplay),
-		os::path_concat(Root, 'docs', DocsDirectory),
-		os::make_directory_path(DocsDirectory),
-		os::path_concat(Root, '.secret', HiddenFile),
-		write_file_atom(HiddenFile, 'secret'),
-		request(get, origin('/'), http(1, 1), [], empty, [], Request),
-		http_directory_listing::serve('/', Request, Root, Response),
-		status(Response, status(200, 'OK')),
-		body(Response, content('text/html', text(HTML))),
-		once(sub_atom(HTML, PosAlpha, _, _, '<a href="alpha.txt">alpha.txt</a>')),
-		once(sub_atom(HTML, PosDocs, _, _, '<a href="docs/">docs/</a>')),
-		PosDocs < PosAlpha,
-		once(sub_atom(HTML, _, _, _, '?sort=name&order=descending')),
-		once(sub_atom(HTML, _, _, _, '?sort=size&order=ascending')),
-		once(sub_atom(HTML, _, _, _, 'Breadcrumbs:')),
-		once(sub_atom(HTML, _, _, _, 'Type')),
-		once(sub_atom(HTML, _, _, _, 'Modified')),
-		once(sub_atom(HTML, _, _, _, 'directory')),
-		once(sub_atom(HTML, _, _, _, '<td>\n5\n</td>')),
-		once(sub_atom(HTML, _, _, _, AlphaModifiedDisplay)),
-		\+ sub_atom(HTML, _, _, _, 'Parent directory'),
-		\+ sub_atom(HTML, _, _, _, '.secret').
+	:- if((
+		os::operating_system_type(windows),
+		\+ current_logtalk_flag(prolog_dialect, b),
+		\+ current_logtalk_flag(prolog_dialect, gnu),
+		\+ current_logtalk_flag(prolog_dialect, ji),
+		\+ current_logtalk_flag(prolog_dialect, sicstus),
+		\+ current_logtalk_flag(prolog_dialect, swi),
+		\+ current_logtalk_flag(prolog_dialect, xsb)
+	)).
+
+		test(http_directory_listing_serve_4_01, deterministic) :-
+			ensure_docroot(Root),
+			os::path_concat(Root, 'alpha.txt', AlphaFile),
+			write_file_atom(AlphaFile, 'alpha'),
+			expected_modified_display(AlphaFile, AlphaModifiedDisplay),
+			os::path_concat(Root, 'docs', DocsDirectory),
+			os::make_directory_path(DocsDirectory),
+			os::path_concat(Root, '.secret', HiddenFile),
+			write_file_atom(HiddenFile, 'secret'),
+			request(get, origin('/'), http(1, 1), [], empty, [], Request),
+			http_directory_listing::serve('/', Request, Root, Response),
+			status(Response, status(200, 'OK')),
+			body(Response, content('text/html', text(HTML))),
+			once(sub_atom(HTML, PosAlpha, _, _, '<a href="alpha.txt">alpha.txt</a>')),
+			once(sub_atom(HTML, PosDocs, _, _, '<a href="docs/">docs/</a>')),
+			PosDocs < PosAlpha,
+			once(sub_atom(HTML, _, _, _, '?sort=name&order=descending')),
+			once(sub_atom(HTML, _, _, _, '?sort=size&order=ascending')),
+			once(sub_atom(HTML, _, _, _, 'Breadcrumbs:')),
+			once(sub_atom(HTML, _, _, _, 'Type')),
+			once(sub_atom(HTML, _, _, _, 'Modified')),
+			once(sub_atom(HTML, _, _, _, 'directory')),
+			once(sub_atom(HTML, _, _, _, '<td>\r\n5\r\n</td>')),
+			once(sub_atom(HTML, _, _, _, AlphaModifiedDisplay)),
+			\+ sub_atom(HTML, _, _, _, 'Parent directory'),
+			\+ sub_atom(HTML, _, _, _, '.secret').
+
+	:- else.
+
+		test(http_directory_listing_serve_4_01, deterministic) :-
+			ensure_docroot(Root),
+			os::path_concat(Root, 'alpha.txt', AlphaFile),
+			write_file_atom(AlphaFile, 'alpha'),
+			expected_modified_display(AlphaFile, AlphaModifiedDisplay),
+			os::path_concat(Root, 'docs', DocsDirectory),
+			os::make_directory_path(DocsDirectory),
+			os::path_concat(Root, '.secret', HiddenFile),
+			write_file_atom(HiddenFile, 'secret'),
+			request(get, origin('/'), http(1, 1), [], empty, [], Request),
+			http_directory_listing::serve('/', Request, Root, Response),
+			status(Response, status(200, 'OK')),
+			body(Response, content('text/html', text(HTML))),
+			once(sub_atom(HTML, PosAlpha, _, _, '<a href="alpha.txt">alpha.txt</a>')),
+			once(sub_atom(HTML, PosDocs, _, _, '<a href="docs/">docs/</a>')),
+			PosDocs < PosAlpha,
+			once(sub_atom(HTML, _, _, _, '?sort=name&order=descending')),
+			once(sub_atom(HTML, _, _, _, '?sort=size&order=ascending')),
+			once(sub_atom(HTML, _, _, _, 'Breadcrumbs:')),
+			once(sub_atom(HTML, _, _, _, 'Type')),
+			once(sub_atom(HTML, _, _, _, 'Modified')),
+			once(sub_atom(HTML, _, _, _, 'directory')),
+			once(sub_atom(HTML, _, _, _, '<td>\n5\n</td>')),
+			once(sub_atom(HTML, _, _, _, AlphaModifiedDisplay)),
+			\+ sub_atom(HTML, _, _, _, 'Parent directory'),
+			\+ sub_atom(HTML, _, _, _, '.secret').
+
+	:- endif.
 
 	test(http_directory_listing_serve_5_01, deterministic) :-
 		ensure_docroot(Root),
@@ -348,17 +389,43 @@
 		request(get, origin('/'), http(1, 1), [], empty, [], Request),
 		http_directory_listing::serve('/', Request, Root, _Response, [exclude([42])]).
 
-	test(http_directory_listing_serve_5_23, deterministic) :-
-		ensure_docroot(Root),
-		os::path_concat(Root, 'chunk.bin', ChunkFile),
-		write_file_bytes(ChunkFile, 1229),
-		request(get, origin('/'), http(1, 1), [], empty, [], Request),
-		http_directory_listing::serve('/', Request, Root, Response, [size_display(kilobytes)]),
-		status(Response, status(200, 'OK')),
-		body(Response, content('text/html', text(HTML))),
-		once(sub_atom(HTML, _, _, _, '<a href="chunk.bin">chunk.bin</a>')),
-		once(sub_atom(HTML, _, _, _, '<td>\n1.2 KB\n</td>')),
-		\+ sub_atom(HTML, _, _, _, '<td>\n1229\n</td>').
+	:- if((
+		os::operating_system_type(windows),
+		\+ current_logtalk_flag(prolog_dialect, b),
+		\+ current_logtalk_flag(prolog_dialect, gnu),
+		\+ current_logtalk_flag(prolog_dialect, ji),
+		\+ current_logtalk_flag(prolog_dialect, sicstus),
+		\+ current_logtalk_flag(prolog_dialect, swi),
+		\+ current_logtalk_flag(prolog_dialect, xsb)
+	)).
+
+		test(http_directory_listing_serve_5_23, deterministic) :-
+			ensure_docroot(Root),
+			os::path_concat(Root, 'chunk.bin', ChunkFile),
+			write_file_bytes(ChunkFile, 1229),
+			request(get, origin('/'), http(1, 1), [], empty, [], Request),
+			http_directory_listing::serve('/', Request, Root, Response, [size_display(kilobytes)]),
+			status(Response, status(200, 'OK')),
+			body(Response, content('text/html', text(HTML))),
+			once(sub_atom(HTML, _, _, _, '<a href="chunk.bin">chunk.bin</a>')),
+			once(sub_atom(HTML, _, _, _, '<td>\r\n1.2 KB\r\n</td>')),
+			\+ sub_atom(HTML, _, _, _, '<td>\r\n1229\r\n</td>').
+
+	:- else.
+
+		test(http_directory_listing_serve_5_23, deterministic) :-
+			ensure_docroot(Root),
+			os::path_concat(Root, 'chunk.bin', ChunkFile),
+			write_file_bytes(ChunkFile, 1229),
+			request(get, origin('/'), http(1, 1), [], empty, [], Request),
+			http_directory_listing::serve('/', Request, Root, Response, [size_display(kilobytes)]),
+			status(Response, status(200, 'OK')),
+			body(Response, content('text/html', text(HTML))),
+			once(sub_atom(HTML, _, _, _, '<a href="chunk.bin">chunk.bin</a>')),
+			once(sub_atom(HTML, _, _, _, '<td>\n1.2 KB\n</td>')),
+			\+ sub_atom(HTML, _, _, _, '<td>\n1229\n</td>').
+
+	:- endif.
 
 	test(http_directory_listing_serve_5_24, error(domain_error(option, size_display(human)))) :-
 		ensure_docroot(Root),
