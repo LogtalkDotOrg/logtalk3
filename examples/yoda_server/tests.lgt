@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-18,
 		comment is 'Unit tests for the "yoda_server" example.'
 	]).
 
@@ -48,6 +48,9 @@
 	cover(yoda_backend).
 	cover(yoda_open_ai_server).
 	cover(yoda_server).
+
+	cleanup :-
+		^^clean_file('yoda_request.json').
 
 	test(yoda_server_words_01, deterministic(YodaWords == [learn, patience, will, you])) :-
 		yoda_backend::yoda_words([you, will, learn, patience], YodaWords).
@@ -115,9 +118,13 @@
 		curl_json(URL, RequestJSON, ResponseJSON) :-
 			os::resolve_command_path(curl, Curl),
 			json::generate(atom(RequestAtom), RequestJSON),
+			% avoid quoting issues on Windows systems by writing and reading the request from a file
+			^^create_text_file('yoda_request.json', RequestAtom),
+			^^file_path('yoda_request.json', RequestFile),
+			atom_concat('@', RequestFile, DataArgument),
 			process::create(
 				Curl,
-				['-sS', '--max-time', '10', '-H', 'Content-Type: application/json', '-H', 'Connection: close', '--data-binary', RequestAtom, URL],
+				['-sS', '--max-time', '10', '-H', 'Content-Type: application/json', '-H', 'Connection: close', '--data-binary', DataArgument, URL],
 				[stdout(Output), process(Process), type(text)]
 			),
 			stream_to_codes(Output, Codes),
