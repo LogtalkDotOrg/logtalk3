@@ -68,8 +68,10 @@ The library implements the following hashing algorithms:
 - SHAKE256 (``shake256(OutputBytes)``)
 - MD5 (``md5``)
 - SHA1 (``sha1``)
+- SHA224 (``sha224``)
 - SHA256 (``sha256``)
 - BLAKE2b (``blake2b``)
+- SHA-384 (``sha384``)
 - SHA-512 (``sha512``)
 - SHA-512/256 (``sha512_256``)
 
@@ -77,8 +79,13 @@ The ``djb2_64``, ``sdbm_64``, ``fnv1a_64``, ``siphash_2_4``,
 ``murmurhash3_x86_128``, ``murmurhash3_x64_128``, ``blake2b``,
 ``sha3_224``, ``sha3_256``, ``sha3_384``, ``sha3_512``,
 ``shake128(OutputBytes)``, ``shake256(OutputBytes)``, ``sha1``,
-``sha256``, ``sha512``, and ``sha512_256`` objects are only loaded on
-backend Prolog compilers supporting unbounded integer arithmetic.
+``sha224``, ``sha256``, ``sha384``, ``sha512``, and ``sha512_256``
+objects are only loaded on backend Prolog compilers supporting unbounded
+integer arithmetic.
+
+SHA-224 and SHA-384 are based on the same block processing as SHA-256
+and SHA-512, respectively, differing only in their initial hash values
+and in truncating the output to 224 or 384 bits.
 
 The SHAKE objects are parametric extensible-output functions. Pass the
 number of output bytes to generate when constructing the object.
@@ -138,12 +145,13 @@ HMAC compatibility
 ------------------
 
 The fixed-size cryptographic hash objects that can be safely used with
-HMAC (``blake2s``, ``md5``, ``sha1``, ``sha256``, ``blake2b``,
-``sha512``, ``sha512_256``, ``sha3_224``, ``sha3_256``, ``sha3_384``,
-and ``sha3_512``) also implement the ``hash_digest_protocol`` protocol.
-This protocol adds ``digest/2``, ``digest_size/1``, and ``block_size/1``
-predicates so that libraries such as ``hmac`` can compute keyed digests
-without duplicating hash function internals.
+HMAC (``blake2s``, ``md5``, ``sha1``, ``sha224``, ``sha256``,
+``blake2b``, ``sha384``, ``sha512``, ``sha512_256``, ``sha3_224``,
+``sha3_256``, ``sha3_384``, and ``sha3_512``) also implement the
+``hash_digest_protocol`` protocol. This protocol adds ``digest/2``,
+``digest_size/1``, and ``block_size/1`` predicates so that libraries
+such as ``hmac`` can compute keyed digests without duplicating hash
+function internals.
 
 Segmented hashing
 -----------------

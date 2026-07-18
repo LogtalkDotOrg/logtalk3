@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-07-16,
+		date is 2026-07-17,
 		comment is 'Unit tests for the "hmac" library on unbounded integer backends.'
 	]).
 
@@ -50,6 +50,16 @@
 		digest(sha1, Key, Message, 12, Digest),
 		bytes_hex(Digest, HexDigest).
 
+	test(sha224_rfc4231_case_1_hex_digest, deterministic(HexDigest == '896fb1128abbdf196832107cd49df33f47b4b1169912ba4f53684b22')) :-
+		repeat_byte(20, 0x0b, Key),
+		atom_codes('Hi There', Message),
+		hex_digest(sha224, Key, Message, HexDigest).
+
+	test(sha224_rfc4231_case_5_truncated_hex_digest, deterministic(HexDigest == '0e2aea68a90c8d37c988bcdb9fca6fa8')) :-
+		repeat_byte(20, 0x0c, Key),
+		atom_codes('Test With Truncation', Message),
+		hex_digest(sha224, Key, Message, 16, HexDigest).
+
 	test(sha256_rfc4231_case_1_hex_digest, deterministic(HexDigest == 'b0344c61d8db38535ca8afceaf0bf12b881dc200c9833da726e9376c2e32cff7')) :-
 		repeat_byte(20, 0x0b, Key),
 		atom_codes('Hi There', Message),
@@ -59,6 +69,16 @@
 		repeat_byte(20, 0x0c, Key),
 		atom_codes('Test With Truncation', Message),
 		hex_digest(sha256, Key, Message, 16, HexDigest).
+
+	test(sha384_rfc4231_case_1_hex_digest, deterministic(HexDigest == 'afd03944d84895626b0825f4ab46907f15f9dadbe4101ec682aa034c7cebc59cfaea9ea9076ede7f4af152e8b2fa9cb6')) :-
+		repeat_byte(20, 0x0b, Key),
+		atom_codes('Hi There', Message),
+		hex_digest(sha384, Key, Message, HexDigest).
+
+	test(sha384_rfc4231_case_5_truncated_hex_digest, deterministic(HexDigest == '3abf34c3503b2a23a46efc619baef897')) :-
+		repeat_byte(20, 0x0c, Key),
+		atom_codes('Test With Truncation', Message),
+		hex_digest(sha384, Key, Message, 16, HexDigest).
 
 	test(sha512_rfc4231_case_1_hex_digest, deterministic(HexDigest == '87aa7cdea5ef619d4ff0b4241a1d6cb02379f4e2ce4ec2787ad0b30545e17cdedaa833b7d6b8a702038b274eaea3f4e4be9d914eeb61f1702e696c203a126854')) :-
 		repeat_byte(20, 0x0b, Key),
