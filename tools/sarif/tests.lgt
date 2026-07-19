@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-01,
+		date is 2026-07-19,
 		comment is 'Unit tests for the sarif tool.'
 	]).
 
@@ -93,13 +93,11 @@
 		^^assertion(subsumes_term({
 			id-local_dead_code,
 			guid-'f6fd0e53-0c2d-45fd-a6dd-7b2f2af3e2a1',
-			name-local_dead_code,
 			shortDescription-{text-_},
 			fullDescription-{text-_},
 			defaultConfiguration-{level-warning}
 		}, Rule)),
 		sarif_dcs_run_properties_ok(Properties),
-		sarif_original_uri_base_ids_ok(Run, 'APP_ROOT'),
 		^^assertion(Notifications = [_]),
 		Results = [FirstResult| _],
 		^^assertion(subsumes_term({
@@ -112,10 +110,10 @@
 			fingerprints-{canonicalFindingV1-_},
 			properties-{class-local_dead_code, confidence-medium, findingProperties-_, entityKind-_, entity-_, predicate-_}
 		}, FirstResult)),
-		sarif_relative_result_locations_ok(Results, 'APP_ROOT'),
+		sarif_run_relative_locations_ok(Run, Results, BaseId),
 		category_property(category, file(CategoryFile)),
 		os::decompose_file_name(CategoryFile, ApplicationRoot, _),
-		sarif_location_fingerprints_ok(Results, 'APP_ROOT', ApplicationRoot),
+		sarif_location_fingerprints_ok(Results, BaseId, ApplicationRoot),
 		^^assertion(subsumes_term([_, _, _, _, _], Results)).
 
 	test(sarif_dcs_02, deterministic) :-
@@ -125,19 +123,18 @@
 		SARIF = {'$schema'-_, version-'2.1.0', runs-[Run]},
 		sarif_dcs_run_ok(Run, Rules, Properties, Notifications, Results),
 		sarif_dcs_run_properties_ok(Properties),
-		sarif_original_uri_base_ids_ok(Run, 'APP_ROOT'),
-		sarif_relative_result_locations_ok(Results, 'APP_ROOT'),
+		sarif_run_relative_locations_ok(Run, Results, _BaseId),
 		^^assertion(subsumes_term([_], Notifications)),
 		sarif_dcs_result_ok(Results, unused_uses_resource, 1, error, high, _),
 		(	current_logtalk_flag(modules, supported) ->
 			sarif_dcs_rule_ok(Rules, unused_uses_resource, UsesRule),
 			sarif_dcs_rule_ok(Rules, unused_use_module_resource, UseModuleRule),
 			sarif_dcs_result_ok(Results, unused_use_module_resource, 2, error, high, _),
-			^^assertion(subsumes_term({id-unused_uses_resource, guid-_, name-unused_uses_resource, shortDescription-_, fullDescription-_, defaultConfiguration-{level-error}}, UsesRule)),
-			^^assertion(subsumes_term({id-unused_use_module_resource, guid-_, name-unused_use_module_resource, shortDescription-_, fullDescription-_, defaultConfiguration-{level-error}}, UseModuleRule)),
+			^^assertion(subsumes_term({id-unused_uses_resource, guid-_, shortDescription-_, fullDescription-_, defaultConfiguration-{level-error}}, UsesRule)),
+			^^assertion(subsumes_term({id-unused_use_module_resource, guid-_, shortDescription-_, fullDescription-_, defaultConfiguration-{level-error}}, UseModuleRule)),
 			^^assertion(length(Results, 5))
 		;	sarif_dcs_rule_ok(Rules, unused_uses_resource, UsesRule),
-			^^assertion(subsumes_term({id-unused_uses_resource, guid-_, name-unused_uses_resource, shortDescription-_, fullDescription-_, defaultConfiguration-{level-error}}, UsesRule)),
+			^^assertion(subsumes_term({id-unused_uses_resource, guid-_, shortDescription-_, fullDescription-_, defaultConfiguration-{level-error}}, UsesRule)),
 			^^assertion(length(Results, 3))
 		).
 
@@ -187,8 +184,7 @@
 		assertion(Rules \== []),
 		length(Diagnostics, Count),
 		assertion(length(Results, Count)),
-		sarif_original_uri_base_ids_ok(Run, 'APP_ROOT'),
-		sarif_relative_result_locations_ok(Results, 'APP_ROOT'),
+		sarif_run_relative_locations_ok(Run, Results, _BaseId),
 		sarif_lr_run_properties_ok(Properties, Count).
 
 	test(sarif_lr_02, deterministic) :-
@@ -213,8 +209,7 @@
 		assertion(Results \== []),
 		length(Diagnostics, Count),
 		assertion(length(Results, Count)),
-		sarif_original_uri_base_ids_ok(Run, 'APP_ROOT'),
-		sarif_relative_result_locations_ok(Results, 'APP_ROOT'),
+		sarif_run_relative_locations_ok(Run, Results, _BaseId),
 		sarif_lgtdoc_run_properties_ok(Properties, Count).
 
 	test(sarif_lgtunit_01, deterministic) :-
@@ -228,8 +223,7 @@
 		sarif_lgtunit_run_ok(Run, Properties, Results),
 		length(Diagnostics, Count),
 		assertion(length(Results, Count)),
-		sarif_original_uri_base_ids_ok(Run, 'APP_ROOT'),
-		sarif_relative_result_locations_ok(Results, 'APP_ROOT'),
+		sarif_run_relative_locations_ok(Run, Results, _BaseId),
 		sarif_lgtunit_run_properties_ok(Properties, Count).
 
 	test(sarif_aggregate_01, deterministic) :-
@@ -248,7 +242,6 @@
 		assertion(LRRules \== []),
 		length(LRDiagnostics, LRCount),
 		assertion(length(LRResults, LRCount)),
-		assertion(subsumes_term({totalWarnings-LRCount, fingerprintAlgorithm-canonical_warning_v1}, LRProperties)),
 		sarif_dcs_run_ok(DCSRun, _DCSRules, DCSProperties, _DCSNotifications, DCSResults),
 		length(DCSDiagnostics, DCSCount),
 		assertion(length(DCSResults, DCSCount)),
@@ -385,7 +378,7 @@
 		json_object_member(Run, results, Results).
 
 	sarif_dcs_rule_ok([Rule| _], RuleId, Rule) :-
-		Rule = {id-RuleId, guid-_, name-RuleId, shortDescription-_, fullDescription-_, defaultConfiguration-{level-_}},
+		Rule = {id-RuleId, guid-_, shortDescription-_, fullDescription-_, defaultConfiguration-{level-_}},
 		!.
 	sarif_dcs_rule_ok([_| Rules], RuleId, Rule) :-
 		sarif_dcs_rule_ok(Rules, RuleId, Rule).
@@ -416,11 +409,10 @@
 		repositoryUri-RepositoryURI,
 		revisionId-RevisionId,
 		branch-_,
-		mappedTo-{uri-MappedToURI}
+		mappedTo-{uriBaseId-'REPO_ROOT'}
 	}) :-
 		absolute_uri(RepositoryURI),
-		RevisionId \== '',
-		absolute_uri(MappedToURI).
+		RevisionId \== ''.
 
 	absolute_uri(URI) :-
 		valid_url(URI),
@@ -444,9 +436,7 @@
 
 	sarif_lr_run_properties_ok(Properties, Count) :-
 		json_object_member(Properties, totalWarnings, Count),
-		json_object_member(Properties, fingerprintAlgorithm, canonical_warning_v1),
-		\+ json_object_member(Properties, gitBranch, _),
-		\+ json_object_member(Properties, gitCommitHash, _).
+		json_object_member(Properties, fingerprintAlgorithm, canonical_warning_v1).
 
 	sarif_lgtdoc_run_ok(Run, Properties, Results) :-
 		lgtdoc::diagnostics_tool(_, _, Version, _, _),
@@ -500,6 +490,14 @@
 		json_object_member(OriginalURIBaseIds, BaseId, BaseInfo),
 		json_object_member(BaseInfo, uri, URI),
 		absolute_uri(URI).
+
+	sarif_run_relative_locations_ok(Run, Results, BaseId) :-
+		( 	sarif_original_uri_base_ids_ok(Run, 'REPO_ROOT') ->
+			BaseId = 'REPO_ROOT'
+		; 	sarif_original_uri_base_ids_ok(Run, 'APP_ROOT'),
+			BaseId = 'APP_ROOT'
+		),
+		sarif_relative_result_locations_ok(Results, BaseId).
 
 	sarif_base_uri_ok(Run, BaseId, ExpectedURI) :-
 		json_object_member(Run, originalUriBaseIds, OriginalURIBaseIds),

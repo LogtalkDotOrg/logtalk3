@@ -22,9 +22,9 @@
 :- object(sarif).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-04-19,
+		date is 2026-07-19,
 		comment is 'Shared SARIF report generator for tools implementing the diagnostics protocol.'
 	]).
 
@@ -164,14 +164,12 @@
 			Pairs = [
 				id-RuleId,
 				guid-Guid,
-				name-RuleId,
 				shortDescription-json([text-ShortDescription]),
 				fullDescription-json([text-FullDescription]),
 				defaultConfiguration-DefaultConfiguration
 			]
 		;	Pairs = [
 				id-RuleId,
-				name-RuleId,
 				shortDescription-json([text-ShortDescription]),
 				fullDescription-json([text-FullDescription]),
 				defaultConfiguration-DefaultConfiguration
@@ -574,13 +572,13 @@
 		repositoryUri-RepositoryURI,
 		revisionId-CommitHash,
 		branch-Branch,
-		mappedTo-json([uri-RepositoryRootURI])
+		mappedTo-json([uriBaseId-'REPO_ROOT'])
 	])| VersionControlProvenance]) :-
 		git_branch(Directory, Branch),
 		git_commit_hash(Directory, CommitHash),
 		git_repository_root(Directory, RepositoryRoot),
 		git_repository_uri(Directory, RepositoryURI),
-		sarif_directory_uri(RepositoryRoot, RepositoryRootURI),
+		RepositoryRoot \== '',
 		!,
 		sarif_version_control_details(Directories, VersionControlProvenance).
 	sarif_version_control_details([_| Directories], VersionControlProvenance) :-
