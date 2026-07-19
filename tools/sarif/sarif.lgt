@@ -56,6 +56,10 @@
 		argnames is ['Tool', 'Target', 'Sink', 'Options']
 	]).
 
+	:- uses(atom, [
+		replace_sub_atom/4
+	]).
+
 	:- uses(git, [
 		branch/2 as git_branch/2, commit_hash/2 as git_commit_hash/2
 	]).
@@ -147,7 +151,7 @@
 
 	tool_driver(diagnostics_tool(_Id, Name, Version, InformationURI, Properties), Rules, json(Pairs)) :-
 		rules_json(Rules, RulesJSON),
-		BasePairs = [name-Name, informationUri-InformationURI, version-Version],
+		BasePairs = [name-Name, fullName-Name, informationUri-InformationURI, version-Version],
 		(	member(guid(Guid), Properties) ->
 			append(BasePairs, [guid-Guid, rules-RulesJSON], Pairs)
 		;	append(BasePairs, [rules-RulesJSON], Pairs)
@@ -159,19 +163,24 @@
 		rules_json(Rules, RulesJSON).
 
 	rule_json(diagnostic_rule(RuleId, ShortDescription, FullDescription, DefaultSeverity, Properties), json(Pairs)) :-
+		replace_sub_atom('_', ' ', RuleId, RuleIdText),
 		DefaultConfiguration = json([level-DefaultSeverity]),
 		(	member(guid(Guid), Properties) ->
 			Pairs = [
 				id-RuleId,
+				name-RuleIdText,
 				guid-Guid,
 				shortDescription-json([text-ShortDescription]),
 				fullDescription-json([text-FullDescription]),
+				help-json([text-FullDescription]),
 				defaultConfiguration-DefaultConfiguration
 			]
 		;	Pairs = [
 				id-RuleId,
+				name-RuleIdText,
 				shortDescription-json([text-ShortDescription]),
 				fullDescription-json([text-FullDescription]),
+				help-json([text-FullDescription]),
 				defaultConfiguration-DefaultConfiguration
 			]
 		).

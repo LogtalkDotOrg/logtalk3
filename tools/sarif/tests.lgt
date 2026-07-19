@@ -92,9 +92,11 @@
 		sarif_dcs_rule_ok(Rules, local_dead_code, Rule),
 		^^assertion(subsumes_term({
 			id-local_dead_code,
+			name-'local dead code',
 			guid-'f6fd0e53-0c2d-45fd-a6dd-7b2f2af3e2a1',
 			shortDescription-{text-_},
 			fullDescription-{text-_},
+			help-{text-_},
 			defaultConfiguration-{level-warning}
 		}, Rule)),
 		sarif_dcs_run_properties_ok(Properties),
@@ -130,11 +132,11 @@
 			sarif_dcs_rule_ok(Rules, unused_uses_resource, UsesRule),
 			sarif_dcs_rule_ok(Rules, unused_use_module_resource, UseModuleRule),
 			sarif_dcs_result_ok(Results, unused_use_module_resource, 2, error, high, _),
-			^^assertion(subsumes_term({id-unused_uses_resource, guid-_, shortDescription-_, fullDescription-_, defaultConfiguration-{level-error}}, UsesRule)),
-			^^assertion(subsumes_term({id-unused_use_module_resource, guid-_, shortDescription-_, fullDescription-_, defaultConfiguration-{level-error}}, UseModuleRule)),
+			^^assertion(subsumes_term({id-unused_uses_resource, name-_, guid-_, shortDescription-_, fullDescription-_, help-_, defaultConfiguration-{level-error}}, UsesRule)),
+			^^assertion(subsumes_term({id-unused_use_module_resource, name-_, guid-_, shortDescription-_, fullDescription-_, help-_, defaultConfiguration-{level-error}}, UseModuleRule)),
 			^^assertion(length(Results, 5))
 		;	sarif_dcs_rule_ok(Rules, unused_uses_resource, UsesRule),
-			^^assertion(subsumes_term({id-unused_uses_resource, guid-_, shortDescription-_, fullDescription-_, defaultConfiguration-{level-error}}, UsesRule)),
+			^^assertion(subsumes_term({id-unused_uses_resource, name-_, guid-_, shortDescription-_, fullDescription-_, help-_, defaultConfiguration-{level-error}}, UsesRule)),
 			^^assertion(length(Results, 3))
 		).
 
@@ -411,7 +413,7 @@
 		json_object_member(Run, results, Results).
 
 	sarif_dcs_rule_ok([Rule| _], RuleId, Rule) :-
-		Rule = {id-RuleId, guid-_, shortDescription-_, fullDescription-_, defaultConfiguration-{level-_}},
+		Rule = {id-RuleId, name-_, guid-_, shortDescription-_, fullDescription-_, help-_, defaultConfiguration-{level-_}},
 		!.
 	sarif_dcs_rule_ok([_| Rules], RuleId, Rule) :-
 		sarif_dcs_rule_ok(Rules, RuleId, Rule).
