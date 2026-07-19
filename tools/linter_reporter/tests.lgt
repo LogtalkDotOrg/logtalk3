@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-02,
+		date is 2026-07-19,
 		comment is 'Unit tests for the linter_reporter tool.'
 	]).
 
@@ -195,6 +195,16 @@
 		assertion(Rules \== []),
 		assertion(member(diagnostic_rule(singleton_variables, _, _, warning, []), Rules)),
 		assertion(diagnostic_rule(singleton_variables, _, _, warning, [])).
+
+	test(lr_rules_02, deterministic) :-
+		prepare_run(true),
+		diagnostic_rules(Rules),
+		findall(RuleId, member(diagnostic_rule(RuleId, _, _, _, _), Rules), RuleIds),
+		findall(RuleId, diagnostic_rule(RuleId, _, _, warning, []), EnumeratedRuleIds),
+		assertion(EnumeratedRuleIds == RuleIds),
+		assertion(RuleIds = [_, _| _]),
+		findall(singleton_variables, diagnostic_rule(singleton_variables, _, _, warning, []), SingletonRules),
+		assertion(SingletonRules == [singleton_variables]).
 
 	test(lr_summary_01, deterministic) :-
 		prepare_run(false),

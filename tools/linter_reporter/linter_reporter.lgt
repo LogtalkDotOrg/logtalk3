@@ -198,14 +198,22 @@
 		atomic_list_concat([Major, Minor, Patch], '.', Version).
 
 	diagnostic_rule(RuleId, ShortDescription, FullDescription, warning, []) :-
-		captured_rule_id(RuleId),
-		!,
+		captured_rule_ids(RuleIds),
+		( 	var(RuleId) ->
+			member(RuleId, RuleIds)
+		; 	member(RuleId, RuleIds),
+			!
+		),
 		rule_descriptions(RuleId, ShortDescription, FullDescription).
 
 	diagnostic_rules(Rules) :-
-		(	setof(RuleId, captured_rule_id(RuleId), RuleIds) ->
-			diagnostic_rules_from_ids(RuleIds, Rules)
-		;	Rules = []
+		captured_rule_ids(RuleIds),
+		diagnostic_rules_from_ids(RuleIds, Rules).
+
+	captured_rule_ids(RuleIds) :-
+		( 	setof(RuleId, captured_rule_id(RuleId), RuleIds) ->
+			true
+		; 	RuleIds = []
 		).
 
 	diagnostic_rules_from_ids([], []).

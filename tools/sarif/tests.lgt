@@ -67,7 +67,7 @@
 	]).
 
 	:- uses(list, [
-		length/2, memberchk/2
+		length/2, member/2, memberchk/2
 	]).
 
 	:- uses(url(atom), [
@@ -212,6 +212,21 @@
 		sarif_run_relative_locations_ok(Run, Results, _BaseId),
 		sarif_lgtdoc_run_properties_ok(Properties, Count).
 
+	test(sarif_lgtdoc_02, deterministic) :-
+		object_property(lgtdoc_diagnostics_fixture(_), file(File)),
+		generate(lgtdoc, file(File), atom(Atom), []),
+		json_parse(atom(Atom), JSON),
+		JSON = {'$schema'-_, version-'2.1.0', runs-[Run]},
+		sarif_lgtdoc_run_ok(Run, _Properties, Results),
+		sarif_results_for_rule(Results, missing_predicate_directive, PredicateDirectiveResults),
+		assertion(length(PredicateDirectiveResults, 2)),
+		PredicateDirectiveResults = [FirstResult, SecondResult],
+		sarif_lgtdoc_warning_result_ok(FirstResult),
+		sarif_lgtdoc_warning_result_ok(SecondResult),
+		sarif_warning_canonical_fingerprint(FirstResult, FirstFingerprint),
+		sarif_warning_canonical_fingerprint(SecondResult, SecondFingerprint),
+		assertion(FirstFingerprint \== SecondFingerprint).
+
 	test(sarif_lgtunit_01, deterministic) :-
 		object_property(lgtunit_diagnostics_fixture, file(File)),
 		lgtunit_diagnostics(file(File), Diagnostics),
@@ -334,6 +349,24 @@
 		JSON = {'$schema'-_, version-'2.1.0', runs-[Run]},
 		sarif_base_uri_ok(Run, 'APP_ROOT', 'file://server/share/app/'),
 		sarif_result_uri_ok(Run, 'APP_ROOT', 'src/file.lgt').
+
+	test(sarif_vcs_app_root_01, deterministic) :-
+		object_property(sarif_provenance_fixture, file(File)),
+		generate(sarif_provenance_fixture, file(File), atom(Atom), []),
+		json_parse(atom(Atom), JSON),
+		sarif_schema(Schema),
+		json_schema_validate(Schema, JSON),
+		JSON = {'$schema'-_, version-'2.1.0', runs-[Run]},
+		sarif_original_uri_base_ids_ok(Run, 'APP_ROOT'),
+		assertion(\+ sarif_original_uri_base_ids_ok(Run, 'REPO_ROOT')),
+		( 	json_object_member(Run, versionControlProvenance, [VersionControl| _]) ->
+			json_object_member(VersionControl, repositoryUri, RepositoryURI),
+			absolute_uri(RepositoryURI),
+			json_object_member(VersionControl, revisionId, RevisionId),
+			assertion(RevisionId \== ''),
+			assertion(\+ json_object_member(VersionControl, mappedTo, _))
+		; 	true
+		).
 
 	test(sarif_error_01, error(domain_error(diagnostics_tool, sarif))) :-
 		generate(sarif, all, atom(_), []).
@@ -462,6 +495,37 @@
 	sarif_lgtdoc_run_properties_ok(Properties, Count) :-
 		json_object_member(Properties, diagnosticsCount, Count).
 
+	sarif_results_for_rule([], _RuleId, []).
+	sarif_results_for_rule([Result| Results], RuleId, RuleResults) :-
+		( 	json_object_member(Result, ruleId, RuleId) ->
+			RuleResults = [Result| Rest]
+		; 	RuleResults = Rest
+		),
+		sarif_results_for_rule(Results, RuleId, Rest).
+
+	sarif_lgtdoc_warning_result_ok(Result) :-
+		json_object_member(Result, partialFingerprints, PartialFingerprints),
+		assertion(json_object_member(PartialFingerprints, ruleLocationV1, _)),
+		assertion(json_object_member(PartialFingerprints, contextV1, _)),
+		assertion(\+ json_object_member(PartialFingerprints, entityPredicateV1, _)),
+		assertion(\+ json_object_member(PartialFingerprints, locationV1, _)),
+		json_object_member(Result, properties, Properties),
+		assertion(json_object_member(Properties, flag, _)),
+		assertion(json_object_member(Properties, context, _)),
+		assertion(json_object_member(Properties, rawTerm, _)),
+		assertion(json_object_member(Properties, details, _)),
+		assertion(json_object_member(Properties, hasExplanation, _)),
+		assertion(json_object_member(Properties, explanation, _)),
+		assertion(json_object_member(Properties, warningProperties, _)),
+		assertion(\+ json_object_member(Properties, findingProperties, _)),
+		assertion(\+ json_object_member(Properties, entityKind, _)),
+		assertion(\+ json_object_member(Properties, entity, _)),
+		assertion(\+ json_object_member(Properties, predicate, _)).
+
+	sarif_warning_canonical_fingerprint(Result, Fingerprint) :-
+		json_object_member(Result, fingerprints, Fingerprints),
+		json_object_member(Fingerprints, canonicalWarningV1, Fingerprint).
+
 	sarif_lgtunit_run_ok(Run, Properties, Results) :-
 		lgtunit::diagnostics_tool(_, _, Version, _, _),
 		json_object_member(Run, tool, Tool),
@@ -566,6 +630,62 @@
 	:- dynamic(logtalk::message_hook/4).
 
 	logtalk::message_hook(_Message, _Kind, lgtdoc, _Tokens).
+
+:- end_object.
+
+
+:- object(sarif_provenance_fixture,
+	imports(tool_diagnostics_common),
+	implements(tool_diagnostics_protocol)).
+
+	:- uses(list, [
+		length/2, member/2
+	]).
+
+	diagnostics_tool(sarif_provenance_fixture, sarif_provenance_fixture, '1.0.0', 'https://logtalk.org/', [
+		count_key(diagnosticsCount),
+		include_version_control_provenance(true)
+	]).
+
+	diagnostic_rule(mock_rule, 'Mock rule.', 'Mock rule for version control provenance regression tests.', warning, []).
+
+	diagnostics(Target, Diagnostics, []) :-
+		findall(Diagnostic, target_diagnostic(Target, Diagnostic), Diagnostics).
+
+	diagnostics(Target, Diagnostics) :-
+		diagnostics(Target, Diagnostics, []).
+
+	diagnostic(Target, Diagnostic, []) :-
+		target_diagnostic(Target, Diagnostic).
+
+	diagnostic(Target, Diagnostic) :-
+		diagnostic(Target, Diagnostic, []).
+
+	diagnostics_summary(Target, diagnostics_summary(Target, TotalContexts, TotalDiagnostics, Breakdown, ContextSummaries), []) :-
+		diagnostics(Target, Diagnostics, []),
+		length(Diagnostics, TotalDiagnostics),
+		^^diagnostics_breakdown(Diagnostics, Breakdown),
+		^^context_summaries(Diagnostics, ContextSummaries),
+		length(ContextSummaries, TotalContexts).
+
+	diagnostics_summary(Target, Summary) :-
+		diagnostics_summary(Target, Summary, []).
+
+	diagnostics_preflight(_Target, [], []).
+
+	diagnostics_preflight(Target, Issues) :-
+		diagnostics_preflight(Target, Issues, []).
+
+	target_diagnostic(file(File), diagnostic(mock_rule, warning, not_applicable, 'Mock provenance diagnostic.', context(file, File), File, 1-1, [])).
+
+	diagnostic_target(file(_)).
+
+	diagnostic_rules(Rules) :-
+		findall(
+			diagnostic_rule(RuleId, ShortDescription, FullDescription, DefaultSeverity, Properties),
+			diagnostic_rule(RuleId, ShortDescription, FullDescription, DefaultSeverity, Properties),
+			Rules
+		).
 
 :- end_object.
 

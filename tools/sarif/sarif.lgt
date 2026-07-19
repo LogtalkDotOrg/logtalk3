@@ -181,7 +181,7 @@
 		automation_id(Target, Id, Properties, AutomationId),
 		original_uri_base_ids_pairs(NormalizationContext, BaseIdPairs),
 		invocations_pairs(Properties, Notifications, InvocationPairs),
-		version_control_pairs(Properties, Diagnostics, VersionControlPairs),
+		version_control_pairs(Properties, Diagnostics, NormalizationContext, VersionControlPairs),
 		BasePairs = [tool-json([driver-Driver]), automationDetails-json([id-AutomationId, guid-RunGUID])],
 		append([BasePairs, BaseIdPairs, InvocationPairs, VersionControlPairs, [properties-RunProperties, results-Results]], Pairs).
 
@@ -213,12 +213,12 @@
 	invocation_json([], json([executionSuccessful- @true])).
 	invocation_json(Notifications, json([executionSuccessful- @true, toolExecutionNotifications-Notifications])).
 
-	version_control_pairs(Properties, Diagnostics, [versionControlProvenance-VersionControl]) :-
+	version_control_pairs(Properties, Diagnostics, NormalizationContext, [versionControlProvenance-VersionControl]) :-
 		memberchk(include_version_control_provenance(true), Properties),
-		sarif_version_control_provenance(Diagnostics, VersionControl),
+		sarif_version_control_provenance(Diagnostics, NormalizationContext, VersionControl),
 		VersionControl \== [],
 		!.
-	version_control_pairs(_Properties, _Diagnostics, []).
+	version_control_pairs(_Properties, _Diagnostics, _NormalizationContext, []).
 
 	run_properties(Diagnostics, diagnostics_tool(_Id, _Name, _Version, _InformationURI, Properties), NormalizationContext, json(Pairs)) :-
 		length(Diagnostics, Count),
@@ -404,9 +404,7 @@
 		stable_diagnostic_identity(RuleId, LocationIdentity, Lines, ContextIdentity, Properties, DiagnosticIdentity),
 		to_atom(DiagnosticIdentity, CanonicalDiagnosticFingerprint),
 		canonical_fingerprint_key(ToolProperties, CanonicalFingerprintKey),
-		(	memberchk(entity_kind(EntityKind), Properties),
-			memberchk(entity(Entity), Properties),
-			memberchk(predicate(Predicate), Properties) ->
+		( 	finding_diagnostic_properties(Properties, EntityKind, Entity, Predicate, _FindingProperties) ->
 			to_atom(diagnostic(EntityKind, Entity, Predicate), EntityPredicateFingerprint),
 			PartialFingerprints = json([entityPredicateV1-EntityPredicateFingerprint, locationV1-RuleLocationFingerprint])
 		;	PartialFingerprints = json([ruleLocationV1-RuleLocationFingerprint, contextV1-ContextFingerprint])
@@ -431,14 +429,23 @@
 	normalized_context_identity(Context, _NormalizationContext, Context).
 
 	stable_diagnostic_identity(RuleId, LocationIdentity, _Lines, _ContextIdentity, Properties, finding(RuleId, LocationIdentity, EntityKind, Entity, Predicate)) :-
-		memberchk(entity_kind(EntityKind), Properties),
-		memberchk(entity(Entity), Properties),
-		memberchk(predicate(Predicate), Properties),
+		finding_diagnostic_properties(Properties, EntityKind, Entity, Predicate, _FindingProperties),
 		!.
 	stable_diagnostic_identity(RuleId, LocationIdentity, Lines, ContextIdentity, Properties, warning(RuleId, LocationIdentity, Lines, ContextIdentity, StableProperties)) :-
 		stable_identity_properties(Properties, StableProperties).
 
+	finding_diagnostic_properties(Properties, EntityKind, Entity, Predicate, FindingProperties) :-
+		member(finding_properties(FindingProperties), Properties),
+		member(entity_kind(EntityKind), Properties),
+		member(entity(Entity), Properties),
+		member(predicate(Predicate), Properties).
+
 	stable_identity_properties([], []).
+	stable_identity_properties([details(Details)| Properties], StableProperties) :-
+		!,
+		stable_identity_properties(Details, StableDetails),
+		stable_identity_properties(Properties, StableProperties0),
+		append(StableDetails, StableProperties0, StableProperties).
 	stable_identity_properties([Property| Properties], [Property| StableProperties]) :-
 		stable_identity_property(Property),
 		!,
@@ -453,6 +460,8 @@
 	stable_identity_property(directive(_)).
 	stable_identity_property(indicator(_)).
 	stable_identity_property(key(_)).
+	stable_identity_property(exception(_)).
+	stable_identity_property(date(_)).
 	stable_identity_property(test(_)).
 	stable_identity_property(option(_)).
 	stable_identity_property(prerequisite(_)).
@@ -464,13 +473,8 @@
 	canonical_fingerprint_key(_Properties, canonicalWarningV1).
 
 	diagnostic_result_properties(RuleId, Confidence, _Context, Properties, _NormalizationContext, json(Pairs)) :-
-		memberchk(entity_kind(EntityKind), Properties),
-		memberchk(entity(Entity), Properties),
-		memberchk(predicate(Predicate), Properties),
-		(	member(finding_properties(FindingProperties), Properties) ->
-			terms_to_atoms(FindingProperties, FindingPropertiesJSON)
-		;	FindingPropertiesJSON = []
-		),
+		finding_diagnostic_properties(Properties, EntityKind, Entity, Predicate, FindingProperties),
+		terms_to_atoms(FindingProperties, FindingPropertiesJSON),
 		to_atom(Entity, EntityAtom),
 		to_atom(Predicate, PredicateAtom),
 		Pairs = [
@@ -554,9 +558,9 @@
 		RuleIndex1 is RuleIndex0 + 1,
 		rule_index(RuleId, Rules, RuleIndex1, RuleIndex).
 
-	sarif_version_control_provenance(Diagnostics, VersionControlProvenance) :-
+	sarif_version_control_provenance(Diagnostics, NormalizationContext, VersionControlProvenance) :-
 		(	setof(Directory, sarif_version_control_directory(Diagnostics, Directory), Directories) ->
-			sarif_version_control_details(Directories, VersionControlProvenance)
+			sarif_version_control_details(Directories, NormalizationContext, VersionControlProvenance)
 		;	VersionControlProvenance = []
 		).
 
@@ -567,22 +571,24 @@
 	sarif_version_control_directory([_| Diagnostics], Directory) :-
 		sarif_version_control_directory(Diagnostics, Directory).
 
-	sarif_version_control_details([], []).
-	sarif_version_control_details([Directory| Directories], [json([
-		repositoryUri-RepositoryURI,
-		revisionId-CommitHash,
-		branch-Branch,
-		mappedTo-json([uriBaseId-'REPO_ROOT'])
-	])| VersionControlProvenance]) :-
+	sarif_version_control_details([], _NormalizationContext, []).
+	sarif_version_control_details([Directory| Directories], NormalizationContext, [json(Pairs)| VersionControlProvenance]) :-
 		git_branch(Directory, Branch),
 		git_commit_hash(Directory, CommitHash),
-		git_repository_root(Directory, RepositoryRoot),
+		git_repository_root(Directory, RepositoryRoot0),
 		git_repository_uri(Directory, RepositoryURI),
-		RepositoryRoot \== '',
+		RepositoryRoot0 \== '',
+		normalized_directory_prefix(RepositoryRoot0, RepositoryRoot),
+		version_control_mapped_to_pairs(NormalizationContext, RepositoryRoot, MappedToPairs),
+		append([repositoryUri-RepositoryURI, revisionId-CommitHash, branch-Branch], MappedToPairs, Pairs),
 		!,
-		sarif_version_control_details(Directories, VersionControlProvenance).
-	sarif_version_control_details([_| Directories], VersionControlProvenance) :-
-		sarif_version_control_details(Directories, VersionControlProvenance).
+		sarif_version_control_details(Directories, NormalizationContext, VersionControlProvenance).
+	sarif_version_control_details([_| Directories], NormalizationContext, VersionControlProvenance) :-
+		sarif_version_control_details(Directories, NormalizationContext, VersionControlProvenance).
+
+	version_control_mapped_to_pairs(repository(RepositoryRoot, _Branch, _CommitHash), RepositoryRoot, [mappedTo-json([uriBaseId-'REPO_ROOT'])]) :-
+		!.
+	version_control_mapped_to_pairs(_NormalizationContext, _RepositoryRoot, []).
 
 	git_repository_root(Directory, RepositoryRoot) :-
 		git_command_clean_output(Directory, 'rev-parse --show-toplevel', RepositoryRoot),
