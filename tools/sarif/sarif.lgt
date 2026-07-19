@@ -580,7 +580,7 @@
 		RepositoryRoot0 \== '',
 		normalized_directory_prefix(RepositoryRoot0, RepositoryRoot),
 		version_control_mapped_to_pairs(NormalizationContext, RepositoryRoot, MappedToPairs),
-		append([repositoryUri-RepositoryURI, revisionId-CommitHash, branch-Branch], MappedToPairs, Pairs),
+		Pairs = [repositoryUri-RepositoryURI, revisionId-CommitHash, branch-Branch| MappedToPairs],
 		!,
 		sarif_version_control_details(Directories, NormalizationContext, VersionControlProvenance).
 	sarif_version_control_details([_| Directories], NormalizationContext, VersionControlProvenance) :-
