@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2025-01-23,
+		date is 2026-07-20,
 		comment is 'Unit tests for the "base58" library.'
 	]).
 
@@ -33,31 +33,31 @@
 
 	% Test vectors based on common Base58 examples
 
-	test(base58_generate_2_empty, true(Base58 == '')) :-
+	test(base58_generate_2_empty, deterministic(Base58 == '')) :-
 		base58::generate(atom(Base58), []).
 
-	test(base58_generate_2_hello, true(Base58 == 'JxF12TrwUP45BMd')) :-
+	test(base58_generate_2_hello, deterministic(Base58 == 'JxF12TrwUP45BMd')) :-
 		atom_codes('Hello World', Bytes),
 		base58::generate(atom(Base58), Bytes).
 
-	test(base58_parse_2_empty, true(Bytes == [])) :-
+	test(base58_parse_2_empty, deterministic(Bytes == [])) :-
 		base58::parse(atom(''), Bytes).
 
-	test(base58_parse_2_hello, true(Atom == 'Hello World')) :-
+	test(base58_parse_2_hello, deterministic(Atom == 'Hello World')) :-
 		base58::parse(atom('JxF12TrwUP45BMd'), Bytes),
 		atom_codes(Atom, Bytes).
 
-	test(base58_roundtrip_01, true(Bytes == Bytes0)) :-
+	test(base58_roundtrip_01, deterministic(Bytes == Bytes0)) :-
 		atom_codes('Hello, World!', Bytes0),
 		base58::generate(codes(Codes), Bytes0),
 		base58::parse(codes(Codes), Bytes).
 
-	test(base58_roundtrip_02, true(Bytes == Bytes0)) :-
+	test(base58_roundtrip_02, deterministic(Bytes == Bytes0)) :-
 		atom_codes('The quick brown fox', Bytes0),
 		base58::generate(atom(Atom), Bytes0),
 		base58::parse(atom(Atom), Bytes).
 
-	test(base58_leading_zeros, true(Bytes == [0, 0, 0, 1, 2, 3])) :-
+	test(base58_leading_zeros, deterministic(Bytes == [0, 0, 0, 1, 2, 3])) :-
 		base58::generate(atom(Base58), [0, 0, 0, 1, 2, 3]),
 		base58::parse(atom(Base58), Bytes).
 
@@ -67,13 +67,13 @@
 		base58::parse(chars(Chars), Bytes2),
 		Bytes == Bytes2.
 
-	test(base58_parse_2_codes, true(Bytes == Bytes2)) :-
+	test(base58_parse_2_codes, deterministic(Bytes == Bytes2)) :-
 		atom_codes('test', Bytes),
 		base58::generate(codes(Codes), Bytes),
 		base58::parse(codes(Codes), Bytes2).
 
 	% Bitcoin address test (leading 1s represent zero bytes)
-	test(base58_leading_ones, true(Base58 == '111Ldp')) :-
+	test(base58_leading_ones, deterministic(Base58 == '111Ldp')) :-
 		base58::generate(atom(Base58), [0, 0, 0, 1, 2, 3]).
 
 :- end_object.

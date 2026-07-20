@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2025-01-23,
+		date is 2025-07-20,
 		comment is 'Unit tests for the "base85" library.'
 	]).
 
@@ -33,34 +33,34 @@
 
 	% Ascii85 test vectors
 
-	test(base85_generate_2_empty, true(Base85 == '')) :-
+	test(base85_generate_2_empty, deterministic(Base85 == '')) :-
 		base85::generate(atom(Base85), []).
 
-	test(base85_generate_2_man, true(Base85 == '9jqo^')) :-
+	test(base85_generate_2_man, deterministic(Base85 == '9jqo^')) :-
 		atom_codes('Man ', Bytes),
 		base85::generate(atom(Base85), Bytes).
 
-	test(base85_parse_2_empty, true(Bytes == [])) :-
+	test(base85_parse_2_empty, deterministic(Bytes == [])) :-
 		base85::parse(atom(''), Bytes).
 
-	test(base85_parse_2_man, true(Atom == 'Man ')) :-
+	test(base85_parse_2_man, deterministic(Atom == 'Man ')) :-
 		base85::parse(atom('9jqo^'), Bytes),
 		atom_codes(Atom, Bytes).
 
-	test(base85_roundtrip_01, true(Bytes == Bytes0)) :-
+	test(base85_roundtrip_01, deterministic(Bytes == Bytes0)) :-
 		atom_codes('Hello, World!', Bytes0),
 		base85::generate(codes(Codes), Bytes0),
 		base85::parse(codes(Codes), Bytes).
 
-	test(base85_roundtrip_02, true(Bytes == Bytes0)) :-
+	test(base85_roundtrip_02, deterministic(Bytes == Bytes0)) :-
 		atom_codes('Test message', Bytes0),
 		base85::generate(atom(Atom), Bytes0),
 		base85::parse(atom(Atom), Bytes).
 
-	test(base85_zeros, true(Base85 == 'z')) :-
+	test(base85_zeros, deterministic(Base85 == 'z')) :-
 		base85::generate(atom(Base85), [0, 0, 0, 0]).
 
-	test(base85_parse_zeros, true(Bytes == [0, 0, 0, 0])) :-
+	test(base85_parse_zeros, deterministic(Bytes == [0, 0, 0, 0])) :-
 		base85::parse(atom('z'), Bytes).
 
 	test(base85_generate_2_chars, true) :-
@@ -69,17 +69,17 @@
 		base85::parse(chars(Chars), Bytes2),
 		Bytes == Bytes2.
 
-	test(base85_parse_2_codes, true(Bytes == Bytes2)) :-
+	test(base85_parse_2_codes, deterministic(Bytes == Bytes2)) :-
 		atom_codes('test', Bytes),
 		base85::generate(codes(Codes), Bytes),
 		base85::parse(codes(Codes), Bytes2).
 
 	% Test with delimiters
-	test(base85_parse_with_delimiters, true(Atom == 'Man ')) :-
+	test(base85_parse_with_delimiters, deterministic(Atom == 'Man ')) :-
 		base85::parse(atom('<~9jqo^~>'), Bytes),
 		atom_codes(Atom, Bytes).
 
-	test(base85_multiple_zeros, true(Base85 == 'zz')) :-
+	test(base85_multiple_zeros, deterministic(Base85 == 'zz')) :-
 		base85::generate(atom(Base85), [0, 0, 0, 0, 0, 0, 0, 0]).
 
 :- end_object.

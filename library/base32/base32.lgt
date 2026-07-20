@@ -22,9 +22,9 @@
 :- object(base32).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:0:2,
 		author is 'Paulo Moura',
-		date is 2026-06-14,
+		date is 2026-07-20,
 		comment is 'Base32 encoder and decoder (RFC 4648).'
 	]).
 
@@ -94,7 +94,8 @@
 		!.
 	generate(chars(Chars), Bytes) :-
 		phrase(encode(Bytes), Codes),
-		codes_to_chars(Codes, Chars).
+		codes_to_chars(Codes, Chars),
+		!.
 	generate(codes(Codes), Bytes) :-
 		phrase(encode(Bytes), Codes),
 		!.
