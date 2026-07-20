@@ -22,9 +22,9 @@
 :- object(ccsds_link_profiles).
 
 	:- info([
-		version is 0:1:0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-09,
+		date is 2026-07-20,
 		comment is 'Ergonomic wrappers around the CCSDS TM, TC, and AOS frame objects using explicit profile terms.'
 	]).
 

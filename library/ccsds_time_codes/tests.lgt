@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-08,
+		date is 2026-07-20,
 		comment is 'Unit tests for the "ccsds_time_codes" library.'
 	]).
 
@@ -60,19 +60,19 @@
 	test(ccsds_time_codes_format_2_03, deterministic(Format == ccs)) :-
 		format(ccs_calendar_time(2026, 5, 8, 14, 30, 45, 0), Format).
 
-	test(ccsds_cuc_parse_2_01, true(TimeCode == cuc_time(256, 128))) :-
+	test(ccsds_cuc_parse_2_01, deterministic(TimeCode == cuc_time(256, 128))) :-
 		ccsds_cuc(4, 2, ccsds_epoch)::parse(bytes([0x00, 0x00, 0x01, 0x00, 0x00, 0x80]), TimeCode).
 
-	test(ccsds_cuc_parse_2_02, true(TimeCode == cuc_time(16909060, 1286))) :-
+	test(ccsds_cuc_parse_2_02, deterministic(TimeCode == cuc_time(16909060, 1286))) :-
 		ccsds_cuc(4, 2, ccsds_epoch)::parse(bytes([0x01, 0x02, 0x03, 0x04, 0x05, 0x06]), TimeCode).
 
 	test(ccsds_cuc_parse_2_03, error(domain_error(ccsds_time_code_byte_sequence, _))) :-
 		ccsds_cuc(4, 2, ccsds_epoch)::parse(bytes([0x00, 0x01]), _).
 
-	test(ccsds_cuc_generate_2_01, true(Bytes == [0x00, 0x00, 0x01, 0x00, 0x00, 0x80])) :-
+	test(ccsds_cuc_generate_2_01, deterministic(Bytes == [0x00, 0x00, 0x01, 0x00, 0x00, 0x80])) :-
 		ccsds_cuc(4, 2, ccsds_epoch)::generate(bytes(Bytes), cuc_time(256, 128)).
 
-	test(ccsds_cuc_generate_3_01, true(Bytes == [0x00, 0x00, 0x01, 0x00, 0x00, 0x80, 0xFF])) :-
+	test(ccsds_cuc_generate_3_01, deterministic(Bytes == [0x00, 0x00, 0x01, 0x00, 0x00, 0x80, 0xFF])) :-
 		ccsds_cuc(4, 2, ccsds_epoch)::generate(cuc_time(256, 128), Bytes, [0xFF]).
 
 	test(ccsds_cuc_valid_1_01, deterministic) :-
@@ -105,33 +105,33 @@
 	test(ccsds_cuc_from_unix_seconds_2_02, error(domain_error(ccsds_time_code_unix_seconds, _))) :-
 		ccsds_cuc(4, 0, unix_epoch)::from_unix_seconds(-1, _).
 
-	test(ccsds_cuc_roundtrip_01, true(Bytes == OriginalBytes)) :-
+	test(ccsds_cuc_roundtrip_01, deterministic(Bytes == OriginalBytes)) :-
 		OriginalBytes = [0x01, 0x02, 0x03, 0x04, 0x05, 0x06],
 		ccsds_cuc(4, 2, ccsds_epoch)::parse(bytes(OriginalBytes), TimeCode),
 		ccsds_cuc(4, 2, ccsds_epoch)::generate(bytes(Bytes), TimeCode).
 
-	test(ccsds_cds_parse_2_01, true(TimeCode == cds_time(1, 2000))) :-
+	test(ccsds_cds_parse_2_01, deterministic(TimeCode == cds_time(1, 2000))) :-
 		ccsds_cds(2, 0, ccsds_epoch)::parse(bytes([0x00, 0x01, 0x00, 0x00, 0x07, 0xD0]), TimeCode).
 
-	test(ccsds_cds_parse_2_02, true(TimeCode == cds_time(1, 2000, 500))) :-
+	test(ccsds_cds_parse_2_02, deterministic(TimeCode == cds_time(1, 2000, 500))) :-
 		ccsds_cds(2, 2, unix_epoch)::parse(bytes([0x00, 0x01, 0x00, 0x00, 0x07, 0xD0, 0x01, 0xF4]), TimeCode).
 
-	test(ccsds_cds_parse_2_03, true(TimeCode == cds_time(1, 2000, 500000000))) :-
+	test(ccsds_cds_parse_2_03, deterministic(TimeCode == cds_time(1, 2000, 500000000))) :-
 		ccsds_cds(3, 4, unix_epoch)::parse(bytes([0x00, 0x00, 0x01, 0x00, 0x00, 0x07, 0xD0, 0x1D, 0xCD, 0x65, 0x00]), TimeCode).
 
 	test(ccsds_cds_parse_2_04, error(domain_error(ccsds_time_code_byte_sequence, _))) :-
 		ccsds_cds(2, 0, ccsds_epoch)::parse(bytes([0x00, 0x01]), _).
 
-	test(ccsds_cds_generate_2_01, true(Bytes == [0x00, 0x01, 0x00, 0x00, 0x07, 0xD0])) :-
+	test(ccsds_cds_generate_2_01, deterministic(Bytes == [0x00, 0x01, 0x00, 0x00, 0x07, 0xD0])) :-
 		ccsds_cds(2, 0, ccsds_epoch)::generate(bytes(Bytes), cds_time(1, 2000)).
 
-	test(ccsds_cds_generate_2_02, true(Bytes == [0x00, 0x01, 0x00, 0x00, 0x07, 0xD0, 0x01, 0xF4])) :-
+	test(ccsds_cds_generate_2_02, deterministic(Bytes == [0x00, 0x01, 0x00, 0x00, 0x07, 0xD0, 0x01, 0xF4])) :-
 		ccsds_cds(2, 2, unix_epoch)::generate(bytes(Bytes), cds_time(1, 2000, 500)).
 
-	test(ccsds_cds_generate_2_03, true(Bytes == [0x00, 0x00, 0x01, 0x00, 0x00, 0x07, 0xD0, 0x1D, 0xCD, 0x65, 0x00])) :-
+	test(ccsds_cds_generate_2_03, deterministic(Bytes == [0x00, 0x00, 0x01, 0x00, 0x00, 0x07, 0xD0, 0x1D, 0xCD, 0x65, 0x00])) :-
 		ccsds_cds(3, 4, unix_epoch)::generate(bytes(Bytes), cds_time(1, 2000, 500000000)).
 
-	test(ccsds_cds_generate_3_01, true(Bytes == [0x00, 0x01, 0x00, 0x00, 0x07, 0xD0, 0xFF])) :-
+	test(ccsds_cds_generate_3_01, deterministic(Bytes == [0x00, 0x01, 0x00, 0x00, 0x07, 0xD0, 0xFF])) :-
 		ccsds_cds(2, 0, ccsds_epoch)::generate(cds_time(1, 2000), Bytes, [0xFF]).
 
 	test(ccsds_cds_valid_1_01, deterministic) :-
@@ -191,35 +191,35 @@
 	test(ccsds_cds_from_unix_seconds_2_04, error(domain_error(ccsds_time_code_unix_seconds, _))) :-
 		ccsds_cds(2, 0, unix_epoch)::from_unix_seconds(-1, _).
 
-	test(ccsds_cds_roundtrip_01, true(Bytes == OriginalBytes)) :-
+	test(ccsds_cds_roundtrip_01, deterministic(Bytes == OriginalBytes)) :-
 		OriginalBytes = [0x00, 0x01, 0x00, 0x00, 0x07, 0xD0, 0x01, 0xF4],
 		ccsds_cds(2, 2, ccsds_epoch)::parse(bytes(OriginalBytes), TimeCode),
 		ccsds_cds(2, 2, ccsds_epoch)::generate(bytes(Bytes), TimeCode).
 
-	test(ccsds_cds_roundtrip_02, true(Bytes == OriginalBytes)) :-
+	test(ccsds_cds_roundtrip_02, deterministic(Bytes == OriginalBytes)) :-
 		OriginalBytes = [0x00, 0x00, 0x01, 0x00, 0x00, 0x07, 0xD0, 0x1D, 0xCD, 0x65, 0x00],
 		ccsds_cds(3, 4, ccsds_epoch)::parse(bytes(OriginalBytes), TimeCode),
 		ccsds_cds(3, 4, ccsds_epoch)::generate(bytes(Bytes), TimeCode).
 
-	test(ccsds_ccs_parse_2_01, true(TimeCode == ccs_calendar_time(2026, 5, 8, 14, 30, 45, 0))) :-
+	test(ccsds_ccs_parse_2_01, deterministic(TimeCode == ccs_calendar_time(2026, 5, 8, 14, 30, 45, 0))) :-
 		ccsds_ccs(calendar, 0)::parse(bytes([0x20, 0x26, 0x05, 0x08, 0x14, 0x30, 0x45]), TimeCode).
 
-	test(ccsds_ccs_parse_2_02, true(TimeCode == ccs_calendar_time(2026, 5, 8, 14, 30, 45, 67))) :-
+	test(ccsds_ccs_parse_2_02, deterministic(TimeCode == ccs_calendar_time(2026, 5, 8, 14, 30, 45, 67))) :-
 		ccsds_ccs(calendar, 1)::parse(bytes([0x20, 0x26, 0x05, 0x08, 0x14, 0x30, 0x45, 0x67]), TimeCode).
 
-	test(ccsds_ccs_parse_2_03, true(TimeCode == ccs_ordinal_time(2026, 128, 14, 30, 45, 0))) :-
+	test(ccsds_ccs_parse_2_03, deterministic(TimeCode == ccs_ordinal_time(2026, 128, 14, 30, 45, 0))) :-
 		ccsds_ccs(day_of_year, 0)::parse(bytes([0x20, 0x26, 0x01, 0x28, 0x14, 0x30, 0x45]), TimeCode).
 
 	test(ccsds_ccs_parse_2_04, error(domain_error(ccs_time_code_byte_sequence, _))) :-
 		ccsds_ccs(calendar, 0)::parse(bytes([0x20, 0x26]), _).
 
-	test(ccsds_ccs_generate_2_01, true(Bytes == [0x20, 0x26, 0x05, 0x08, 0x14, 0x30, 0x45])) :-
+	test(ccsds_ccs_generate_2_01, deterministic(Bytes == [0x20, 0x26, 0x05, 0x08, 0x14, 0x30, 0x45])) :-
 		ccsds_ccs(calendar, 0)::generate(bytes(Bytes), ccs_calendar_time(2026, 5, 8, 14, 30, 45, 0)).
 
-	test(ccsds_ccs_generate_2_02, true(Bytes == [0x20, 0x26, 0x01, 0x28, 0x14, 0x30, 0x45, 0x67])) :-
+	test(ccsds_ccs_generate_2_02, deterministic(Bytes == [0x20, 0x26, 0x01, 0x28, 0x14, 0x30, 0x45, 0x67])) :-
 		ccsds_ccs(day_of_year, 1)::generate(bytes(Bytes), ccs_ordinal_time(2026, 128, 14, 30, 45, 67)).
 
-	test(ccsds_ccs_generate_3_01, true(Bytes == [0x20, 0x26, 0x05, 0x08, 0x14, 0x30, 0x45, 0xFF])) :-
+	test(ccsds_ccs_generate_3_01, deterministic(Bytes == [0x20, 0x26, 0x05, 0x08, 0x14, 0x30, 0x45, 0xFF])) :-
 		ccsds_ccs(calendar, 0)::generate(ccs_calendar_time(2026, 5, 8, 14, 30, 45, 0), Bytes, [0xFF]).
 
 	test(ccsds_ccs_valid_1_01, deterministic) :-
@@ -267,7 +267,7 @@
 	test(ccsds_ccs_from_unix_seconds_2_02, deterministic(TimeCode == ccs_ordinal_time(1970, 1, 0, 0, 1, 50))) :-
 		ccsds_ccs(day_of_year, 1)::from_unix_seconds(1.5, TimeCode).
 
-	test(ccsds_ccs_roundtrip_01, true(Bytes == OriginalBytes)) :-
+	test(ccsds_ccs_roundtrip_01, deterministic(Bytes == OriginalBytes)) :-
 		OriginalBytes = [0x20, 0x26, 0x05, 0x08, 0x14, 0x30, 0x45, 0x67],
 		ccsds_ccs(calendar, 1)::parse(bytes(OriginalBytes), TimeCode),
 		ccsds_ccs(calendar, 1)::generate(bytes(Bytes), TimeCode).

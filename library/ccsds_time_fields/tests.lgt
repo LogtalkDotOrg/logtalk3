@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-09,
+		date is 2026-07-20,
 		comment is 'Unit tests for the "ccsds_time_fields" library.'
 	]).
 
@@ -62,37 +62,37 @@
 	test(ccsds_time_fields_epoch_2_02, deterministic(Epoch == none)) :-
 		epoch(ccs_descriptor(calendar, 1), Epoch).
 
-	test(ccsds_time_fields_parse_3_01, true(Descriptor-TimeCode == cuc_descriptor(4, 2, ccsds_epoch)-cuc_time(256, 128))) :-
+	test(ccsds_time_fields_parse_3_01, deterministic(Descriptor-TimeCode == cuc_descriptor(4, 2, ccsds_epoch)-cuc_time(256, 128))) :-
 		parse(bytes([0x1E, 0x00, 0x00, 0x01, 0x00, 0x00, 0x80]), Descriptor, TimeCode).
 
-	test(ccsds_time_fields_generate_3_01, true(Bytes == [0x1E, 0x00, 0x00, 0x01, 0x00, 0x00, 0x80])) :-
+	test(ccsds_time_fields_generate_3_01, deterministic(Bytes == [0x1E, 0x00, 0x00, 0x01, 0x00, 0x00, 0x80])) :-
 		generate(bytes(Bytes), cuc_descriptor(4, 2, ccsds_epoch), cuc_time(256, 128)).
 
-	test(ccsds_time_fields_parse_3_01b, true(Descriptor-TimeCode == cuc_descriptor(5, 5, ccsds_epoch)-cuc_time(256, 128))) :-
+	test(ccsds_time_fields_parse_3_01b, deterministic(Descriptor-TimeCode == cuc_descriptor(5, 5, ccsds_epoch)-cuc_time(256, 128))) :-
 		parse(bytes([0x9F, 0x28, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80]), Descriptor, TimeCode).
 
-	test(ccsds_time_fields_generate_3_01b, true(Bytes == [0x9F, 0x28, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80])) :-
+	test(ccsds_time_fields_generate_3_01b, deterministic(Bytes == [0x9F, 0x28, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80])) :-
 		generate(bytes(Bytes), cuc_descriptor(5, 5, ccsds_epoch), cuc_time(256, 128)).
 
-	test(ccsds_time_fields_parse_3_02, true(Descriptor-TimeCode == cds_descriptor(2, 0, ccsds_epoch)-cds_time(1, 2000))) :-
+	test(ccsds_time_fields_parse_3_02, deterministic(Descriptor-TimeCode == cds_descriptor(2, 0, ccsds_epoch)-cds_time(1, 2000))) :-
 		parse(bytes([0x40, 0x00, 0x01, 0x00, 0x00, 0x07, 0xD0]), Descriptor, TimeCode).
 
-	test(ccsds_time_fields_generate_3_02, true(Bytes == [0x4D, 0x00, 0x00, 0x01, 0x00, 0x00, 0x07, 0xD0, 0x01, 0xF4])) :-
+	test(ccsds_time_fields_generate_3_02, deterministic(Bytes == [0x4D, 0x00, 0x00, 0x01, 0x00, 0x00, 0x07, 0xD0, 0x01, 0xF4])) :-
 		generate(bytes(Bytes), cds_descriptor(3, 2, unix_epoch), cds_time(1, 2000, 500)).
 
-	test(ccsds_time_fields_parse_3_02b, true(Descriptor-TimeCode == cds_descriptor(3, 4, unix_epoch)-cds_time(1, 2000, 500000000))) :-
+	test(ccsds_time_fields_parse_3_02b, deterministic(Descriptor-TimeCode == cds_descriptor(3, 4, unix_epoch)-cds_time(1, 2000, 500000000))) :-
 		parse(bytes([0x4E, 0x00, 0x00, 0x01, 0x00, 0x00, 0x07, 0xD0, 0x1D, 0xCD, 0x65, 0x00]), Descriptor, TimeCode).
 
-	test(ccsds_time_fields_generate_3_02b, true(Bytes == [0x4E, 0x00, 0x00, 0x01, 0x00, 0x00, 0x07, 0xD0, 0x1D, 0xCD, 0x65, 0x00])) :-
+	test(ccsds_time_fields_generate_3_02b, deterministic(Bytes == [0x4E, 0x00, 0x00, 0x01, 0x00, 0x00, 0x07, 0xD0, 0x1D, 0xCD, 0x65, 0x00])) :-
 		generate(bytes(Bytes), cds_descriptor(3, 4, unix_epoch), cds_time(1, 2000, 500000000)).
 
-	test(ccsds_time_fields_parse_3_03, true(Descriptor-TimeCode == ccs_descriptor(calendar, 1)-ccs_calendar_time(2026, 5, 8, 14, 30, 45, 67))) :-
+	test(ccsds_time_fields_parse_3_03, deterministic(Descriptor-TimeCode == ccs_descriptor(calendar, 1)-ccs_calendar_time(2026, 5, 8, 14, 30, 45, 67))) :-
 		parse(bytes([0x51, 0x20, 0x26, 0x05, 0x08, 0x14, 0x30, 0x45, 0x67]), Descriptor, TimeCode).
 
-	test(ccsds_time_fields_generate_3_03, true(Bytes == [0x59, 0x20, 0x26, 0x01, 0x28, 0x14, 0x30, 0x45, 0x67])) :-
+	test(ccsds_time_fields_generate_3_03, deterministic(Bytes == [0x59, 0x20, 0x26, 0x01, 0x28, 0x14, 0x30, 0x45, 0x67])) :-
 		generate(bytes(Bytes), ccs_descriptor(day_of_year, 1), ccs_ordinal_time(2026, 128, 14, 30, 45, 67)).
 
-	test(ccsds_time_fields_roundtrip_01, true(Bytes == OriginalBytes)) :-
+	test(ccsds_time_fields_roundtrip_01, deterministic(Bytes == OriginalBytes)) :-
 		OriginalBytes = [0x59, 0x20, 0x26, 0x01, 0x28, 0x14, 0x30, 0x45, 0x67],
 		parse(bytes(OriginalBytes), Descriptor, TimeCode),
 		generate(bytes(Bytes), Descriptor, TimeCode).
