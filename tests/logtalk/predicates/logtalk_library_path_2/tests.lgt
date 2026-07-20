@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:2,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2025-05-28,
+		date is 2026-07-20,
 		comment is 'Unit tests for the logtalk_library_path/2 built-in predicate.'
 	]).
 
@@ -54,21 +54,26 @@
 		).
 
 	% library alias paths must exist
-	test(logtalk_library_path_2_03) :-
-		% make sure the packs directory exists
-		(	os::environment_variable('LOGTALKPACKS', Path),
-			os::directory_exists(Path) ->
-			true
-		;	os::environment_variable('HOME', _) ->
-			os::make_directory_path('$HOME/logtalk_packs')
-		;	% assume Windows system
-			os::make_directory_path('$USERPROFILE/logtalk_packs')
-		),
-		forall(
-			logtalk_library_path(Library, _),
-			(	logtalk::expand_library_path(Library, ExpandedPath),
-				assertion(Library, os::directory_exists(ExpandedPath))
-			)
-		).
+	:- if(os::operating_system_type(windows)).
+		test(logtalk_library_path_2_03) :-
+			forall(
+				(	logtalk_library_path(Library, _),
+					% $LOGTALKUSER/coding is a symbolic link but backends
+					% on Windows don't resolve it
+					Library \== coding
+				),
+				(	logtalk::expand_library_path(Library, ExpandedPath),
+					assertion(Library, os::directory_exists(ExpandedPath))
+				)
+			).
+	:- else.
+		test(logtalk_library_path_2_03) :-
+			forall(
+				logtalk_library_path(Library, _),
+				(	logtalk::expand_library_path(Library, ExpandedPath),
+					assertion(Library, os::directory_exists(ExpandedPath))
+				)
+			).
+	:- endif.
 
 :- end_object.

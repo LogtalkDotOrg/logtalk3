@@ -245,6 +245,8 @@ Tests
 
 * ADDED: Additional test for the `uses/2` directive.
 
+* FIXED: Tests for the `logtalk_library_path/2` predicate on Windows.
+
 Installers and installation scripts
 -----------------------------------
 
