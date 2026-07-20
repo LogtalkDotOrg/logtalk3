@@ -15,7 +15,7 @@ Transport-neutral cryptographic helper predicates.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-07-14
+| **Date:** 2026-07-20
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -437,6 +437,82 @@ Computes a structured password-hash term using PBKDF2, a hash object implementin
     - Option ``salt(Bytes)``: Uses the given byte list as the PBKDF2 salt. When this option is present, no random salt is generated and any ``salt_length/1`` option only affects validation, not the selected salt value.
     - Option ``salt_length(Count)``: Generates a random salt with the given non-negative number of bytes when ``salt/1`` is absent. When this option is absent, the generated salt length defaults to ``16`` bytes.
     - Option ``length(Count)``: Uses the given non-negative derived-key length. When this option is absent, the derived-key length defaults to the selected hash digest size.
+
+
+------------
+
+.. index:: password_hash_needs_rehash/3
+.. _crypto/0::password_hash_needs_rehash/3:
+
+``password_hash_needs_rehash/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Succeeds when the given password-hash term does not match the selected PBKDF2 password-hash policy.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``password_hash_needs_rehash(PasswordHash,Hash,Options)``
+| **Mode and number of proofs:**
+|    ``password_hash_needs_rehash(+compound,+object_identifier,+list(compound))`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``PasswordHash`` is not a supported password-hash term:
+|        ``domain_error(password_hash,PasswordHash)``
+|    ``PasswordHash`` contains a variable hash object:
+|        ``instantiation_error``
+|    ``PasswordHash`` contains a hash object that does not implement the ``hash_digest_protocol`` protocol:
+|        ``domain_error(crypto_hash,Hash)``
+|    ``PasswordHash`` contains an ``Iterations`` value that is not an integer:
+|        ``type_error(integer,Iterations)``
+|    ``PasswordHash`` contains an ``Iterations`` value that is not a positive integer:
+|        ``domain_error(positive_integer,Iterations)``
+|    ``PasswordHash`` contains a ``Salt``, ``StoredKey``, ``StoredDigest``, or ``Checksum`` value that is not a list of bytes:
+|        ``type_error(list(byte),Bytes)``
+|    ``PasswordHash`` contains a ``Salt``, ``StoredKey``, ``StoredDigest``, or ``Checksum`` value with a variable byte:
+|        ``instantiation_error``
+|    ``PasswordHash`` contains a ``Salt``, ``StoredKey``, ``StoredDigest``, or ``Checksum`` value with a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``PasswordHash`` contains a ``Salt``, ``StoredKey``, ``StoredDigest``, or ``Checksum`` value with an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``PasswordHash`` contains an invalid APR1 salt:
+|        ``domain_error(apr1_salt,Salt)``
+|    ``PasswordHash`` contains an invalid APR1 checksum:
+|        ``domain_error(apr1_checksum,Checksum)``
+|    ``Hash`` is a variable:
+|        ``instantiation_error``
+|    ``Hash`` is not an object implementing the ``hash_digest_protocol`` protocol:
+|        ``domain_error(crypto_hash,Hash)``
+|    ``Options`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``Options`` is a list but not a list of compound terms:
+|        ``type_error(list(compound),Options)``
+|    ``Options`` contains an invalid option term:
+|        ``domain_error(password_hash_option,Option)``
+|    ``Options`` contains an ``iterations/1`` value that is not an integer:
+|        ``type_error(integer,Iterations)``
+|    ``Options`` contains an ``iterations/1`` value that is not a positive integer:
+|        ``domain_error(positive_integer,Iterations)``
+|    ``Options`` contains a ``salt/1`` value that is not a list of bytes:
+|        ``type_error(list(byte),Salt)``
+|    ``Options`` contains a ``salt/1`` value with a variable byte:
+|        ``instantiation_error``
+|    ``Options`` contains a ``salt/1`` value with a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``Options`` contains a ``salt/1`` value with an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``Options`` contains a ``salt_length/1`` or ``length/1`` value that is not an integer:
+|        ``type_error(integer,Length)``
+|    ``Options`` contains a ``salt_length/1`` or ``length/1`` value that is less than zero:
+|        ``domain_error(non_negative_integer,Length)``
+|    ``Options`` selects a ``length/1`` value that exceeds the maximum PBKDF2 output length:
+|        ``domain_error(pbkdf2_output_length,Length)``
+
+| **Remarks:**
+
+    - Policy: The ``Hash`` and ``Options`` arguments use the same policy options as ``password_hash/4``.
+    - Legacy hashes: Supported non-PBKDF2 password-hash terms need rehashing when valid.
 
 
 ------------

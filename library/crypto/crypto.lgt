@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-14,
+		date is 2026-07-20,
 		comment is 'Transport-neutral cryptographic helper predicates.'
 	]).
 
@@ -218,6 +218,44 @@
 		]
 	]).
 
+	:- public(password_hash_needs_rehash/3).
+	:- mode(password_hash_needs_rehash(+compound, +object_identifier, +list(compound)), zero_or_one_or_error).
+	:- info(password_hash_needs_rehash/3, [
+		comment is 'Succeeds when the given password-hash term does not match the selected PBKDF2 password-hash policy.',
+		argnames is ['PasswordHash', 'Hash', 'Options'],
+		remarks is [
+			'Policy' - 'The ``Hash`` and ``Options`` arguments use the same policy options as ``password_hash/4``.',
+			'Legacy hashes' - 'Supported non-PBKDF2 password-hash terms need rehashing when valid.'
+		],
+		exceptions is [
+			'``PasswordHash`` is not a supported password-hash term' - domain_error(password_hash, 'PasswordHash'),
+			'``PasswordHash`` contains a variable hash object' - instantiation_error,
+			'``PasswordHash`` contains a hash object that does not implement the ``hash_digest_protocol`` protocol' - domain_error(crypto_hash, 'Hash'),
+			'``PasswordHash`` contains an ``Iterations`` value that is not an integer' - type_error(integer, 'Iterations'),
+			'``PasswordHash`` contains an ``Iterations`` value that is not a positive integer' - domain_error(positive_integer, 'Iterations'),
+			'``PasswordHash`` contains a ``Salt``, ``StoredKey``, ``StoredDigest``, or ``Checksum`` value that is not a list of bytes' - type_error(list(byte), 'Bytes'),
+			'``PasswordHash`` contains a ``Salt``, ``StoredKey``, ``StoredDigest``, or ``Checksum`` value with a variable byte' - instantiation_error,
+			'``PasswordHash`` contains a ``Salt``, ``StoredKey``, ``StoredDigest``, or ``Checksum`` value with a non-integer byte' - type_error(integer, 'Byte'),
+			'``PasswordHash`` contains a ``Salt``, ``StoredKey``, ``StoredDigest``, or ``Checksum`` value with an integer outside the byte range' - domain_error(byte, 'Byte'),
+			'``PasswordHash`` contains an invalid APR1 salt' - domain_error(apr1_salt, 'Salt'),
+			'``PasswordHash`` contains an invalid APR1 checksum' - domain_error(apr1_checksum, 'Checksum'),
+			'``Hash`` is a variable' - instantiation_error,
+			'``Hash`` is not an object implementing the ``hash_digest_protocol`` protocol' - domain_error(crypto_hash, 'Hash'),
+			'``Options`` is a partial list or a list with an element which is a variable' - instantiation_error,
+			'``Options`` is a list but not a list of compound terms' - type_error(list(compound), 'Options'),
+			'``Options`` contains an invalid option term' - domain_error(password_hash_option, 'Option'),
+			'``Options`` contains an ``iterations/1`` value that is not an integer' - type_error(integer, 'Iterations'),
+			'``Options`` contains an ``iterations/1`` value that is not a positive integer' - domain_error(positive_integer, 'Iterations'),
+			'``Options`` contains a ``salt/1`` value that is not a list of bytes' - type_error(list(byte), 'Salt'),
+			'``Options`` contains a ``salt/1`` value with a variable byte' - instantiation_error,
+			'``Options`` contains a ``salt/1`` value with a non-integer byte' - type_error(integer, 'Byte'),
+			'``Options`` contains a ``salt/1`` value with an integer outside the byte range' - domain_error(byte, 'Byte'),
+			'``Options`` contains a ``salt_length/1`` or ``length/1`` value that is not an integer' - type_error(integer, 'Length'),
+			'``Options`` contains a ``salt_length/1`` or ``length/1`` value that is less than zero' - domain_error(non_negative_integer, 'Length'),
+			'``Options`` selects a ``length/1`` value that exceeds the maximum PBKDF2 output length' - domain_error(pbkdf2_output_length, 'Length')
+		]
+	]).
+
 	:- public(verify_password_hash/2).
 	:- mode(verify_password_hash(+compound, +list(byte)), zero_or_one_or_error).
 	:- info(verify_password_hash/2, [
@@ -369,6 +407,29 @@
 		parse_password_hash_options(Options, Hash, Iterations, Salt, Length, Context),
 		pbkdf2(Hash, Password, Salt, Iterations, Length, DerivedKey),
 		PasswordHash = pbkdf2(Hash, Iterations, Salt, DerivedKey).
+
+	password_hash_needs_rehash(PasswordHash, Hash, Options) :-
+		context(Context),
+		check_hash(Hash, Context),
+		parse_password_hash_policy_options(Options, Hash, PolicyIterations, PolicySaltLength, PolicyLength, Context),
+		( 	PasswordHash = pbkdf2(_, _, _, _) ->
+			check_password_hash(PasswordHash, StoredHash, Iterations, Salt, StoredKey, Context),
+			( 	StoredHash \== Hash ->
+				true
+			; 	Iterations =\= PolicyIterations ->
+				true
+			; 	length(Salt, SaltLength),
+				SaltLength =\= PolicySaltLength ->
+				true
+			; 	length(StoredKey, StoredKeyLength),
+				StoredKeyLength =\= PolicyLength
+			)
+		; 	PasswordHash = digest(_, _) ->
+			check_digest_password_hash(PasswordHash, _StoredHash, _StoredDigest, Context)
+		; 	PasswordHash = apr1(_, _) ->
+			check_apr1_password_hash(PasswordHash, _Salt, _Checksum, Context)
+		; 	check_password_hash(PasswordHash, _StoredHash, _Iterations, _Salt, _StoredKey, Context)
+		).
 
 	verify_password_hash(PasswordHash, Password) :-
 		context(Context),
@@ -612,6 +673,19 @@
 			SaltLength = SaltLength0,
 			Length = Value
 		;	throw(error(domain_error(password_hash_option, Option), Context))
+		).
+
+	parse_password_hash_policy_options(Options, Hash, Iterations, SaltLength, Length, Context) :-
+		check(list(compound), Options, Context),
+		Hash::digest_size(DefaultLength),
+		( 	var(Options) ->
+			throw(error(instantiation_error, Context))
+		; 	parse_password_hash_options(Options, 131072, none, 16, DefaultLength, Iterations, SaltOption, SaltLength0, Length, Context),
+			check_pbkdf2_output_length(Length, DefaultLength, Context),
+			( 	SaltOption == none ->
+				SaltLength = SaltLength0
+			; 	length(SaltOption, SaltLength)
+			)
 		).
 
 	check_password_hash(PasswordHash, Hash, Iterations, Salt, StoredKey, Context) :-

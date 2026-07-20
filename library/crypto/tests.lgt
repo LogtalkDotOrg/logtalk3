@@ -25,12 +25,12 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-14,
+		date is 2026-07-20,
 		comment is 'Unit tests for the "crypto" library.'
 	]).
 
 	:- uses(crypto, [
-		apr1/3, hkdf/5, hex_bytes/2, password_hash/4, pbkdf2/6, random_below/2, random_bytes/2,
+		apr1/3, hkdf/5, hex_bytes/2, password_hash/4, password_hash_needs_rehash/3, pbkdf2/6, random_below/2, random_bytes/2,
 		secure_compare/2, token_hex/2, token_urlsafe/2, verify_password_hash/2
 	]).
 
@@ -461,6 +461,43 @@
 	test(crypto_password_hash_4_01, deterministic(PasswordHash == pbkdf2(md5, 2, [1,2,3,4], ExpectedBytes))) :-
 		hex_bytes('fd510b4e8ac8db80209ed7da24e932d2', ExpectedBytes),
 		password_hash(md5, [112,97,115,115], PasswordHash, [iterations(2), salt([1,2,3,4]), length(16)]).
+
+	% password_hash_needs_rehash/3 tests
+
+	test(crypto_password_hash_needs_rehash_3_01, fail) :-
+		hex_bytes('fd510b4e8ac8db80209ed7da24e932d2', StoredKey),
+		password_hash_needs_rehash(pbkdf2(md5, 2, [1,2,3,4], StoredKey), md5, [iterations(2), salt_length(4), length(16)]).
+
+	test(crypto_password_hash_needs_rehash_3_02, deterministic) :-
+		hex_bytes('fd510b4e8ac8db80209ed7da24e932d2', StoredKey),
+		password_hash_needs_rehash(pbkdf2(md5, 1, [1,2,3,4], StoredKey), md5, [iterations(2), salt_length(4), length(16)]).
+
+	test(crypto_password_hash_needs_rehash_3_03, deterministic) :-
+		hex_bytes('fd510b4e8ac8db80209ed7da24e932d2', StoredKey),
+		password_hash_needs_rehash(pbkdf2(md5, 2, [1,2,3,4], StoredKey), md5, [iterations(2), salt_length(8), length(16)]).
+
+	test(crypto_password_hash_needs_rehash_3_04, deterministic) :-
+		hex_bytes('fd510b4e8ac8db80209ed7da24e932d2', StoredKey),
+		password_hash_needs_rehash(pbkdf2(md5, 2, [1,2,3,4], StoredKey), md5, [iterations(2), salt_length(4), length(32)]).
+
+	test(crypto_password_hash_needs_rehash_3_05, deterministic) :-
+		password_hash_needs_rehash(digest(md5, [1,2,3,4]), md5, []).
+
+	test(crypto_password_hash_needs_rehash_3_06, deterministic) :-
+		atom_codes('portable', Salt),
+		atom_codes('F/0Ac3GBA/V51P9DJ7acL.', Checksum),
+		password_hash_needs_rehash(apr1(Salt, Checksum), md5, []).
+
+	test(crypto_password_hash_needs_rehash_3_07, error(domain_error(password_hash_option, rounds(2)))) :-
+		hex_bytes('fd510b4e8ac8db80209ed7da24e932d2', StoredKey),
+		password_hash_needs_rehash(pbkdf2(md5, 2, [1,2,3,4], StoredKey), md5, [rounds(2)]).
+
+	test(crypto_password_hash_needs_rehash_3_08, error(domain_error(password_hash, foo))) :-
+		password_hash_needs_rehash(foo, md5, []).
+
+	test(crypto_password_hash_needs_rehash_3_09, deterministic, [condition(current_prolog_flag(bounded, false))]) :-
+		hex_bytes('fd510b4e8ac8db80209ed7da24e932d2', StoredKey),
+		password_hash_needs_rehash(pbkdf2(md5, 2, [1,2,3,4], StoredKey), sha1, [iterations(2), salt_length(4), length(16)]).
 
 	% verify_password_hash/2 tests
 
