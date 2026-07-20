@@ -171,6 +171,10 @@ Tools
 automation scripts for prefixing the `-e` option with `^` to include only
 matching test sets instead of excluding them.
 
+* ADDED: Support to the `logtalk_tester.sh` and `logtalk_tester.ps1` testing
+automation scripts for the `-o quiet` option to suppress all user output (exit
+codes are not affected). Usually combined with the `-f` option.
+
 * IMPROVED: Performance of the `sbom` tool.
 
 * UPDATED: The `lgtdoc` tool linter to report any predicate/non-terminal

@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on June 12, 2026
+##   Last updated on July 20, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -33,7 +33,7 @@ function cleanup {
 trap cleanup EXIT
 
 print_version() {
-	echo "$(basename "$0") 28.0"
+	echo "$(basename "$0") 29.0"
 	exit 0
 }
 
@@ -390,7 +390,7 @@ usage_help() {
 	echo
 	echo "Optional arguments:"
 	echo "  -v print version of $(basename "$0")"
-	echo "  -o output (valid values are verbose and minimal; default is $output)"
+	echo "  -o output (valid values are verbose, minimal, and quiet; default is $output)"
 	echo "  -m compilation mode (default is $mode)"
 	echo "     (valid values are optimal, normal, debug, and all)"
 	echo "  -f format for writing the test results (default is $format)"
@@ -535,6 +535,8 @@ if [ "$o_arg" == "verbose" ] ; then
 	output='verbose'
 elif [ "$o_arg" == "minimal" ] ; then
 	output='minimal'
+elif [ "$o_arg" == "quiet" ] ; then
+	output='quiet'
 elif [ "$o_arg" != "" ] ; then
 	echo "Error! Unknown output verbosity: $o_arg" >&2
 	usage_help
@@ -749,9 +751,11 @@ testsets=$(wc -l < "$drivers_file" | tr -d ' ')
 
 if  [ "$testsets" -eq 0 ] ; then
 	rm -f "$drivers_file"
-	echo "%"
-	echo "% 0 test sets: 0 completed, 0 skipped, 0 broken, 0 timedout, 0 crashed"
-	echo "% 0 tests: 0 skipped, 0 passed, 0 failed"
+	if [ "$output" != 'quiet' ] ; then
+		echo "%"
+		echo "% 0 test sets: 0 completed, 0 skipped, 0 broken, 0 timedout, 0 crashed"
+		echo "% 0 tests: 0 skipped, 0 passed, 0 failed"
+	fi
 	exit 0
 fi
 
@@ -760,7 +764,7 @@ if [ "$jobs" -eq 1 ] ; then
 		while read -r file && [ "$file" != "" ]; do
 			run_testset "$file"
 		done < "$drivers_file"
-	else
+	elif [ "$output" == 'minimal' ] ; then
 		counter=1
 		while read -r file && [ "$file" != "" ]; do
 			echo -ne "% Running $testsets test sets: "
@@ -769,6 +773,10 @@ if [ "$jobs" -eq 1 ] ; then
 			((counter++))
 		done < "$drivers_file"
 		echo
+	else
+		while read -r file && [ "$file" != "" ]; do
+			run_testset "$file"
+		done < "$drivers_file"
 	fi
 else
 	declare -a job_pids
@@ -861,6 +869,10 @@ done < "$temp_file"
 rm -f "$temp_file"
 total=$((skipped+passed+failed))
 
+if [ "$output" == 'quiet' ] ; then
+	exec 4>&1 1>/dev/null
+fi
+
 if grep -q -s -a -h '^!' -- *.errors || grep -q -s -a -h '^!' -- *.results || grep -q -s -a -h '^\*' -- *.errors || grep -q -s -a -h '^\*' -- *.results ; then
 	echo "%"
 	echo "% Compilation errors/warnings and failed unit tests"
@@ -926,6 +938,10 @@ if [ "$output" == 'verbose' ] ; then
 fi
 
 echo "% Batch run took $(printf '%dh:%02dm:%02ds' $hours $minutes $seconds)"
+
+if [ "$output" == 'quiet' ] ; then
+	exec 1>&4 4>&-
+fi
 
 if [ "$crashed" -gt 0 ] ; then
 	exit_code=7

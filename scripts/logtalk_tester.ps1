@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on June 12, 2026
+##   Last updated on July 20, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -56,7 +56,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path "$myFullName" -leaf -Resolve
-	Write-Output "$myName 20.0"
+	Write-Output "$myName 21.0"
 }
 
 Function Format-Decimal {
@@ -414,7 +414,7 @@ Function Write-Usage-Help() {
 	Write-Output "     (valid values are b, cx, eclipse, gnu, gnunc, ji, xvm, sicstus, swi, swipack, tau, trealla, xsb, and yap)"
 	Write-Output ""
 	Write-Output "Optional arguments:"
-	Write-Output "  -o output (valid values are verbose and minimal; default is $o)"
+	Write-Output "  -o output (valid values are verbose, minimal, and quiet; default is $o)"
 	Write-Output "  -m compilation mode (default is $m)"
 	Write-Output "     (valid values are optimal, normal, debug, and all)"
 	Write-Output "  -f format for writing the test results (default is $f)"
@@ -542,7 +542,7 @@ Function Confirm-Parameters() {
 		Exit 1
 	}
 
-	if ($o -ne "verbose" -and $o -ne "minimal") {
+	if ($o -ne "verbose" -and $o -ne "minimal" -and $o -ne "quiet") {
 		Write-Error "Error! Unknown output verbosity: $o"
 		Write-Usage-Help
 		Exit 1
@@ -794,9 +794,11 @@ $driver_files = $driver_files | Sort-Object -Property FullName
 $testsets = ($driver_files | Measure-Object).Count
 
 if ($testsets -eq 0) {
-	Write-Output "%"
-	Write-Output "% 0 test sets: 0 completed, 0 skipped, 0 broken, 0 timedout, 0 crashed"
-	Write-Output "% 0 tests: 0 skipped, 0 passed, 0 failed"
+	if ($o -ne "quiet") {
+		Write-Output "%"
+		Write-Output "% 0 test sets: 0 completed, 0 skipped, 0 broken, 0 timedout, 0 crashed"
+		Write-Output "% 0 tests: 0 skipped, 0 passed, 0 failed"
+	}
 	Exit 0
 }
 
@@ -805,7 +807,7 @@ if ($max_jobs -eq 1) {
 		$driver_files | ForEach-Object {
 			Invoke-TestSet $_.FullName
 		}
-	} else {
+	} elseif ($o -eq "minimal") {
 		$counter = 1
 		$driver_files | ForEach-Object {
 			Write-Host -NoNewline "% Running $testsets test sets: "
@@ -814,6 +816,10 @@ if ($max_jobs -eq 1) {
 			$counter++
 		}
 		Write-Output "%"
+	} else {
+		$driver_files | ForEach-Object {
+			Invoke-TestSet $_.FullName
+		}
 	}
 } else {
 	$worker_arguments = @('-NoProfile', '-File', $PSCommandPath, '-p', $p, '-o', $o, '-m', $m, '-f', $f, '-d', $results, '-t', $t, '-j', '1', '-n', $n, '-c', $c)
@@ -941,102 +947,110 @@ Foreach-Object {
 
 $total = $skipped + $passed + $failed
 
-if ((Get-ChildItem -Path . -Filter *.errors  | Get-Content | Select-String -Pattern '^!' -CaseSensitive -Quiet) -or
-	(Get-ChildItem -Path . -Filter *.results | Get-Content | Select-String -Pattern '^!' -CaseSensitive -Quiet) -or
-	(Get-ChildItem -Path . -Filter *.errors  | Get-Content | Select-String -Pattern '^\*' -CaseSensitive -Quiet) -or
-	(Get-ChildItem -Path . -Filter *.results | Get-Content | Select-String -Pattern '^\*' -CaseSensitive -Quiet)) {
-	Write-Output "%"
-	Write-Output "% Compilation errors/warnings and failed unit tests"
-	Write-Output "% (compilation errors/warnings might be expected depending on the test)"
-	Get-ChildItem -Path . -Filter *.errors  | Get-Content | Select-String -Pattern '^!'  -NoEmphasis | Tee-Object -FilePath errors.all -Append
-	Get-ChildItem -Path . -Filter *.results | Get-Content | Select-String -Pattern '^!'  -NoEmphasis | Tee-Object -FilePath errors.all -Append
-	Get-ChildItem -Path . -Filter *.errors  | Get-Content | Select-String -Pattern '^\*' -NoEmphasis | Tee-Object -FilePath errors.all -Append
-	Get-ChildItem -Path . -Filter *.results | Get-Content | Select-String -Pattern '^\*' -NoEmphasis | Tee-Object -FilePath errors.all -Append
-}
-if ((Get-ChildItem -Path . -Filter *.results | Get-Content | Select-String -Pattern 'tests skipped' -CaseSensitive -SimpleMatch -Quiet) -or
-	(Get-ChildItem -Path . -Filter *.results | Get-Content | Select-String -Pattern '(not applicable)' -CaseSensitive -SimpleMatch -Quiet)) {
-	Write-Output "%"
-	Write-Output "% Skipped test sets"
-	Get-ChildItem -Path . -Filter *.results |
-	Foreach-Object {
-		if (Get-Content -Path $_ | Select-String -Pattern 'tests skipped' -SimpleMatch -Quiet) {
-			($_.BaseName -replace '__', '/') -replace $prefix, ""
-		}
-		if (Get-Content -Path $_ | Select-String -Pattern '(not applicable)' -SimpleMatch -Quiet) {
-			($_.BaseName -replace '__', '/') -replace $prefix, ""
-		}
+$quiet_report = {
+	if ((Get-ChildItem -Path . -Filter *.errors  | Get-Content | Select-String -Pattern '^!' -CaseSensitive -Quiet) -or
+		(Get-ChildItem -Path . -Filter *.results | Get-Content | Select-String -Pattern '^!' -CaseSensitive -Quiet) -or
+		(Get-ChildItem -Path . -Filter *.errors  | Get-Content | Select-String -Pattern '^\*' -CaseSensitive -Quiet) -or
+		(Get-ChildItem -Path . -Filter *.results | Get-Content | Select-String -Pattern '^\*' -CaseSensitive -Quiet)) {
+		Write-Output "%"
+		Write-Output "% Compilation errors/warnings and failed unit tests"
+		Write-Output "% (compilation errors/warnings might be expected depending on the test)"
+		Get-ChildItem -Path . -Filter *.errors  | Get-Content | Select-String -Pattern '^!'  -NoEmphasis | Tee-Object -FilePath errors.all -Append
+		Get-ChildItem -Path . -Filter *.results | Get-Content | Select-String -Pattern '^!'  -NoEmphasis | Tee-Object -FilePath errors.all -Append
+		Get-ChildItem -Path . -Filter *.errors  | Get-Content | Select-String -Pattern '^\*' -NoEmphasis | Tee-Object -FilePath errors.all -Append
+		Get-ChildItem -Path . -Filter *.results | Get-Content | Select-String -Pattern '^\*' -NoEmphasis | Tee-Object -FilePath errors.all -Append
 	}
-}
-if (Get-ChildItem -Path . -Filter *.errors | Get-Content | Select-String -Pattern 'LOGTALK_BROKEN' -CaseSensitive -SimpleMatch -Quiet) {
-	Write-Output "%"
-	Write-Output "% Broken"
-	Get-ChildItem -Path . -Filter *.errors |
-	Foreach-Object {
-		if (Select-String -Path $_.FullName -Pattern 'LOGTALK_BROKEN' -CaseSensitive -SimpleMatch -Quiet) {
-			(($_.BaseName -replace '___', ':') -replace '__', '/') -replace $prefix, ""
-		}
-	}
-}
-if (Get-ChildItem -Path . -Filter *.errors | Get-Content | Select-String -Pattern 'LOGTALK_TIMEOUT' -SimpleMatch -CaseSensitive -Quiet) {
-	Write-Output "%"
-	Write-Output "% Timedout"
-	Get-ChildItem -Path . -Filter *.errors |
-	Foreach-Object {
-		if (Select-String -Path $_.FullName -Pattern 'LOGTALK_TIMEOUT' -CaseSensitive -SimpleMatch -Quiet) {
-			(($_.BaseName -replace '___', ':') -replace '__', '/') -replace $prefix, ""
-		}
-	}
-}
-if (Get-ChildItem -Path . -Filter *.errors | Get-Content | Select-String -Pattern 'LOGTALK_CRASH' -CaseSensitive -SimpleMatch -Quiet) {
-	Write-Output "%"
-	Write-Output "% Crashed"
-	Get-ChildItem -Path . -Filter *.errors |
-	Foreach-Object {
-		if (Select-String -Path $_.FullName -Pattern 'LOGTALK_CRASH' -CaseSensitive -SimpleMatch -Quiet) {
-			(($_.BaseName -replace '___', ':') -replace '__', '/') -replace $prefix, ""
-		}
-	}
-}
-if (Get-ChildItem -Path . -Filter *.totals | Get-Content | Select-String -Pattern '^skipped' -CaseSensitive -Quiet) {
-	Write-Output "%"
-	Write-Output "% Skipped tests"
-	Get-ChildItem -Path . -Filter *.totals |
-	Foreach-Object {
-		Get-Content -Path $_ |
+	if ((Get-ChildItem -Path . -Filter *.results | Get-Content | Select-String -Pattern 'tests skipped' -CaseSensitive -SimpleMatch -Quiet) -or
+		(Get-ChildItem -Path . -Filter *.results | Get-Content | Select-String -Pattern '(not applicable)' -CaseSensitive -SimpleMatch -Quiet)) {
+		Write-Output "%"
+		Write-Output "% Skipped test sets"
+		Get-ChildItem -Path . -Filter *.results |
 		Foreach-Object {
-			if ($_ -match '^skipped') {
-				($_.split("`t")[1] + " - " + $_.split("`t")[2]) -replace $prefix, ""
+			if (Get-Content -Path $_ | Select-String -Pattern 'tests skipped' -SimpleMatch -Quiet) {
+				($_.BaseName -replace '__', '/') -replace $prefix, ""
+			}
+			if (Get-Content -Path $_ | Select-String -Pattern '(not applicable)' -SimpleMatch -Quiet) {
+				($_.BaseName -replace '__', '/') -replace $prefix, ""
 			}
 		}
 	}
-}
-if (Get-ChildItem -Path . -Filter *.totals | Get-Content | Select-String -Pattern '^failed' -CaseSensitive -Quiet) {
-	Write-Output "%"
-	Write-Output "% Failed tests"
-	Get-ChildItem -Path . -Filter *.totals |
-	Foreach-Object {
-		Get-Content -Path $_ |
+	if (Get-ChildItem -Path . -Filter *.errors | Get-Content | Select-String -Pattern 'LOGTALK_BROKEN' -CaseSensitive -SimpleMatch -Quiet) {
+		Write-Output "%"
+		Write-Output "% Broken"
+		Get-ChildItem -Path . -Filter *.errors |
 		Foreach-Object {
-			if ($_ -match '^failed') {
-				($_.split("`t")[1] + " - " + $_.split("`t")[2]) -replace $prefix, ""
+			if (Select-String -Path $_.FullName -Pattern 'LOGTALK_BROKEN' -CaseSensitive -SimpleMatch -Quiet) {
+				(($_.BaseName -replace '___', ':') -replace '__', '/') -replace $prefix, ""
 			}
 		}
 	}
-}
-Write-Output "%"
-Write-Output "% $testsets test sets: $testsetruns completed, $testsetskipped skipped, $broken broken, $timeouts timedout, $crashed crashed"
-Write-Output "% $total tests: $skipped skipped, $passed passed, $failed failed ($flaky flaky)"
-
-$runtime = (Get-Date) - $start_time
-$runtime_str = "{0}h:{1:D2}m:{2:D2}s" -f [int][Math]::Floor($runtime.TotalHours), $runtime.Minutes, $runtime.Seconds
-
-if ($o -eq "verbose") {
-	$end_date = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+	if (Get-ChildItem -Path . -Filter *.errors | Get-Content | Select-String -Pattern 'LOGTALK_TIMEOUT' -SimpleMatch -CaseSensitive -Quiet) {
+		Write-Output "%"
+		Write-Output "% Timedout"
+		Get-ChildItem -Path . -Filter *.errors |
+		Foreach-Object {
+			if (Select-String -Path $_.FullName -Pattern 'LOGTALK_TIMEOUT' -CaseSensitive -SimpleMatch -Quiet) {
+				(($_.BaseName -replace '___', ':') -replace '__', '/') -replace $prefix, ""
+			}
+		}
+	}
+	if (Get-ChildItem -Path . -Filter *.errors | Get-Content | Select-String -Pattern 'LOGTALK_CRASH' -CaseSensitive -SimpleMatch -Quiet) {
+		Write-Output "%"
+		Write-Output "% Crashed"
+		Get-ChildItem -Path . -Filter *.errors |
+		Foreach-Object {
+			if (Select-String -Path $_.FullName -Pattern 'LOGTALK_CRASH' -CaseSensitive -SimpleMatch -Quiet) {
+				(($_.BaseName -replace '___', ':') -replace '__', '/') -replace $prefix, ""
+			}
+		}
+	}
+	if (Get-ChildItem -Path . -Filter *.totals | Get-Content | Select-String -Pattern '^skipped' -CaseSensitive -Quiet) {
+		Write-Output "%"
+		Write-Output "% Skipped tests"
+		Get-ChildItem -Path . -Filter *.totals |
+		Foreach-Object {
+			Get-Content -Path $_ |
+			Foreach-Object {
+				if ($_ -match '^skipped') {
+					($_.split("`t")[1] + " - " + $_.split("`t")[2]) -replace $prefix, ""
+				}
+			}
+		}
+	}
+	if (Get-ChildItem -Path . -Filter *.totals | Get-Content | Select-String -Pattern '^failed' -CaseSensitive -Quiet) {
+		Write-Output "%"
+		Write-Output "% Failed tests"
+		Get-ChildItem -Path . -Filter *.totals |
+		Foreach-Object {
+			Get-Content -Path $_ |
+			Foreach-Object {
+				if ($_ -match '^failed') {
+					($_.split("`t")[1] + " - " + $_.split("`t")[2]) -replace $prefix, ""
+				}
+			}
+		}
+	}
 	Write-Output "%"
-	Write-Output "% Batch testing ended @ $end_date"
+	Write-Output "% $testsets test sets: $testsetruns completed, $testsetskipped skipped, $broken broken, $timeouts timedout, $crashed crashed"
+	Write-Output "% $total tests: $skipped skipped, $passed passed, $failed failed ($flaky flaky)"
+
+	$runtime = (Get-Date) - $start_time
+	$runtime_str = "{0}h:{1:D2}m:{2:D2}s" -f [int][Math]::Floor($runtime.TotalHours), $runtime.Minutes, $runtime.Seconds
+
+	if ($o -eq "verbose") {
+		$end_date = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
+		Write-Output "%"
+		Write-Output "% Batch testing ended @ $end_date"
+	}
+
+	Write-Output "% Batch run took $runtime_str"
 }
 
-Write-Output "% Batch run took $runtime_str"
+if ($o -eq "quiet") {
+	& $quiet_report | Out-Null
+} else {
+	& $quiet_report
+}
 
 Pop-Location
 

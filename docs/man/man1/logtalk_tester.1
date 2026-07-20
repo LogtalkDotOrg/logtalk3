@@ -1,4 +1,4 @@
-.TH logtalk_tester 1 "April 28, 2026" "Logtalk 3.100.0" "Logtalk Documentation"
+.TH logtalk_tester 1 "July 20, 2026" "Logtalk 3.101.0" "Logtalk Documentation"
 
 .SH NAME
 logtalk_tester \- Logtalk script for automating running unit tests
@@ -41,7 +41,7 @@ Print script version.
 Backend Prolog compiler. Required. The following identifiers are used: B-Prolog - \fIb\fR, Ciao Prolog - \fIciao\fR, CxProlog - \fIcx\fR, ECLiPSe - \fIeclipse\fR, GNU Prolog - \fIgnu\fR, GNU Prolog (native code) - \fIgnunc\fR, JIProlog - \fIji\fR, XVM - \fIxvm\fR, SICStus Prolog - \fIsicstus\fR, SWI-Prolog - \fIswi\fR, SWI-Prolog with Logtalk pack - \fIswipack\fR, Tau Prolog - \fItau\fR, Trealla Prolog - \fItrealla\fR, XSB - \fIxsb\fR, YAP - \fIyap\fR.
 .TP
 .BI \-o
-Output verbosity. Default is \fIverbose\fR. Valid values are \fIverbose\fR and \fIminimal\fR.
+Output verbosity. Default is \fIverbose\fR. Valid values are \fIverbose\fR, \fIminimal\fR, and \fIquiet\fR (which suppresses all output).
 .TP
 .BI \-m
 Compilation mode. Default is \fInormal\fR. Valid values are \fIoptimal\fR, \fInormal\fR, \fIdebug\fR, and \fIall\fR. This option only sets the default compilation mode. Code compiled using an explicit mode is not affected.
