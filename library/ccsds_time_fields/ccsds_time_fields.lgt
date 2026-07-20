@@ -22,9 +22,9 @@
 :- object(ccsds_time_fields).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:0:2,
 		author is 'Paulo Moura',
-		date is 2026-06-14,
+		date is 2026-07-20,
 		comment is 'Helpers for parsing and generating self-describing CCSDS time fields using descriptor terms and the existing CCSDS time-code objects.'
 	]).
 
@@ -216,7 +216,7 @@
 	encode_descriptor(cds_descriptor(DaySegmentOctets, SubmillisecondOctets, Epoch), [Byte]) :-
 		cds_epoch_bit(EpochBit, Epoch),
 		DaySegmentBit is DaySegmentOctets - 2,
-		cds_submillisecond_octets(SubCode, SubmillisecondOctets),
+		cds_submillisecond_octets(SubCode, SubmillisecondOctets), !,
 		Byte is (4 << 4) \/ (EpochBit << 3) \/ (DaySegmentBit << 2) \/ SubCode.
 	encode_descriptor(ccs_descriptor(CalendarVariant, FractionOctets), [Byte]) :-
 		ccs_variant_bit(CalendarVariantBit, CalendarVariant),
