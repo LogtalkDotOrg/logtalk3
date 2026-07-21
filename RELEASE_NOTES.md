@@ -167,6 +167,10 @@ identifiers now set the multicast bit as required by RFC 4122.
 Tools
 -----
 
+* CHANGED: The `logtalk_tester.sh` and `logtalk_tester.ps1` testing
+automation scripts `-o minimal` option to also write the Logtalk, backend,
+and operating-system version data.
+
 * ADDED: Support to the `logtalk_tester.sh` and `logtalk_tester.ps1` testing
 automation scripts for prefixing the `-e` option with `^` to include only
 matching test sets instead of excluding them.

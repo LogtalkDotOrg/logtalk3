@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on July 20, 2026
+##   Last updated on July 21, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -33,7 +33,7 @@ function cleanup {
 trap cleanup EXIT
 
 print_version() {
-	echo "$(basename "$0") 29.0"
+	echo "$(basename "$0") 30.0"
 	exit 0
 }
 
@@ -161,7 +161,6 @@ run_testset() {
 		rm -rf ./lgt_tmp
 	fi
 	if [ "$output" == 'verbose' ] ; then
-		echo "%"
 		if [ -f "$unit/VERSION.packs" ] ; then
 			echo -n "% $unit_short (pack version "
 			echo -n "$(cat "$unit/VERSION.packs")"
@@ -706,13 +705,14 @@ rm -f "$results"/tester_versions.txt
 
 start_time=$(date +%s)
 
-if [ "$output" == 'verbose' ] ; then
+if [ "$output" != 'quiet' ] ; then
 	start_date=$(eval date \"+%Y-%m-%d %H:%M:%S\")
 	echo "% Batch testing started @ $start_date"
 	$logtalk_call $versions_goal > "$results"/tester_versions.txt 2> /dev/null
 	grep -a "Logtalk version:" "$results"/tester_versions.txt
 	grep -a "Prolog version:" "$results"/tester_versions.txt | $sed "s/Prolog/$prolog/"
 	grep -a "OS version:" "$results"/tester_versions.txt
+	echo "%"
 fi
 
 declare drivers_file
@@ -752,7 +752,6 @@ testsets=$(wc -l < "$drivers_file" | tr -d ' ')
 if  [ "$testsets" -eq 0 ] ; then
 	rm -f "$drivers_file"
 	if [ "$output" != 'quiet' ] ; then
-		echo "%"
 		echo "% 0 test sets: 0 completed, 0 skipped, 0 broken, 0 timedout, 0 crashed"
 		echo "% 0 tests: 0 skipped, 0 passed, 0 failed"
 	fi
@@ -763,6 +762,7 @@ if [ "$jobs" -eq 1 ] ; then
 	if [ "$output" == 'verbose' ] ; then
 		while read -r file && [ "$file" != "" ]; do
 			run_testset "$file"
+			echo "%"
 		done < "$drivers_file"
 	elif [ "$output" == 'minimal' ] ; then
 		counter=1
@@ -798,6 +798,7 @@ else
 
 				if [ "$output" == 'verbose' ] && [ -f "$results/${job_names[$i]}.console" ] ; then
 					cat "$results/${job_names[$i]}.console"
+					echo "%"
 				fi
 				rm -f "$results/${job_names[$i]}.console"
 
@@ -873,55 +874,58 @@ if [ "$output" == 'quiet' ] ; then
 	exec 4>&1 1>/dev/null
 fi
 
-if grep -q -s -a -h '^!' -- *.errors || grep -q -s -a -h '^!' -- *.results || grep -q -s -a -h '^\*' -- *.errors || grep -q -s -a -h '^\*' -- *.results ; then
+if [ "$output" == 'minimal' ] ; then
 	echo "%"
+fi
+
+if grep -q -s -a -h '^!' -- *.errors || grep -q -s -a -h '^!' -- *.results || grep -q -s -a -h '^\*' -- *.errors || grep -q -s -a -h '^\*' -- *.results ; then
 	echo "% Compilation errors/warnings and failed unit tests"
 	echo "% (compilation errors/warnings might be expected depending on the test)"
+	echo "%"
 	grep -s -a -h '^!' -- *.errors | $sed 's/.errors//' | tee -a errors.all
 	grep -s -a -h '^!' -- *.results | $sed 's/.results//' | tee -a errors.all
 	grep -s -a -h '^\*' -- *.errors | $sed 's/.errors//' | tee -a errors.all
 	grep -s -a -h '^\*' -- *.results | $sed 's/.results//' | tee -a errors.all
 fi
 if grep -q -s -a 'tests skipped' -- *.results || grep -q -s -a '(not applicable)' -- *.results ; then
-	echo "%"
 	echo "% Skipped test sets"
 	grep -s -a 'tests skipped' -- *.results | $sed 's/% tests skipped//' | $sed 's/.results://' | $sed 's|__|/|g' | $sed "s|^$prefix||"
 	grep -s -a '(not applicable)' -- *.results | $sed 's/(not applicable)//' | $sed 's/.results://' | $sed 's|__|/|g' | $sed "s|^$prefix||"
+	echo "%"
 fi
 if grep -q -s -a 'LOGTALK_BROKEN' -- *.errors; then
-	echo "%"
 	echo "% Broken"
 	grep -s -a 'LOGTALK_BROKEN' -- *.errors | $sed 's/LOGTALK_BROKEN//' | $sed 's/.errors://' | $sed 's|__|/|g' | $sed "s|^$prefix||"
+	echo "%"
 fi
 if grep -q -s -a 'LOGTALK_TIMEOUT' -- *.errors; then
-	echo "%"
 	echo "% Timedout"
 	grep -s -a 'LOGTALK_TIMEOUT' -- *.errors | $sed 's/LOGTALK_TIMEOUT//' | $sed 's/.errors://' | $sed 's|__|/|g' | $sed "s|^$prefix||"
+	echo "%"
 fi
 if grep -q -s -a 'LOGTALK_CRASH' -- *.errors; then
-	echo "%"
 	echo "% Crashed"
 	grep -s -a 'LOGTALK_CRASH' -- *.errors | $sed 's/LOGTALK_CRASH//' | $sed 's/.errors://' | $sed 's|__|/|g' | $sed "s|^$prefix||"
+	echo "%"
 fi
 if grep -s -q '^skipped' -- *.totals; then
-	echo "%"
 	echo "% Skipped tests"
 	for file in *.totals; do
 		if grep -s -q '^skipped' "$file"; then
 			grep '^skipped' "$file" | cut -f 2,3 | $sed "s|^$prefix||" | $sed "s|\t| - |"
 		fi
 	done
+	echo "%"
 fi
 if grep -s -q '^failed' -- *.totals; then
-	echo "%"
 	echo "% Failed tests"
 	for file in *.totals; do
 		if grep -s -q '^failed' "$file"; then
 			grep '^failed' "$file" | cut -f 2,3 | $sed "s|^$prefix||" | $sed "s|\t| - |"
 		fi
 	done
+	echo "%"
 fi
-echo "%"
 echo "% $testsets test sets: $testsetruns completed, $testsetskipped skipped, $broken broken, $timeouts timedout, $crashed crashed"
 echo "% $total tests: $skipped skipped, $passed passed, $failed failed ($flaky flaky)"
 
