@@ -175,6 +175,8 @@ matching test sets instead of excluding them.
 automation scripts for the `-o quiet` option to suppress all user output (exit
 codes are not affected). Usually combined with the `-f` option.
 
+* IMPROVED: Tests for the `sarif` tool to be less verbose.
+
 * IMPROVED: Performance of the `sbom` tool.
 
 * UPDATED: The `lgtdoc` tool linter to report any predicate/non-terminal

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-07-19,
+		date is 2026-07-21,
 		comment is 'Unit tests for the sarif tool.'
 	]).
 
@@ -381,7 +381,7 @@
 		^^clean_file(ReportFile),
 		reset,
 		enable([explanations(Explanations)]),
-		logtalk_load([errors(warnings), errors(main_include_compiler_warning)], [reload(always)]),
+		logtalk_load([errors(warnings), errors(main_include_compiler_warning)], [reload(always), report(off)]),
 		disable.
 
 	sarif_schema(Schema) :-

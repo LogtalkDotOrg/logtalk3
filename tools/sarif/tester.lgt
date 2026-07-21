@@ -30,7 +30,7 @@
 	logtalk_load(dead_code_scanner(test_entities), [source_data(on), unknown_entities(silent)]),
 	logtalk_load(linter_reporter(loader)),
 	logtalk_load(lgtdoc(loader)),
-	logtalk_load(lgtdoc(diagnostics_fixture), [source_data(on)]),
+	logtalk_load(lgtdoc(diagnostics_fixture), [source_data(on), report(off)]),
 	logtalk_load(tool_diagnostics(loader)),
 	logtalk_load(git(loader)),
 	logtalk_load(json(loader)),
@@ -42,7 +42,7 @@
 	logtalk_load(uuid(loader)),
 	logtalk_load(sarif, [debug(on), source_data(on)]),
 	logtalk_load(lgtunit(loader)),
-	logtalk_load(lgtunit('test_files/diagnostics_fixture'), [hook(lgtunit)]),
+	logtalk_load(lgtunit('test_files/diagnostics_fixture'), [hook(lgtunit), report(off)]),
 	logtalk_load(tests, [hook(lgtunit), optimize(on)]),
 	tests::run
 )).
