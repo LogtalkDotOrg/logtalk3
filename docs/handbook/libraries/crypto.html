@@ -381,6 +381,7 @@ currently exports the <code class="docutils literal notranslate"><span class="pr
 <li><p><code class="docutils literal notranslate"><span class="pre">pbkdf2/6</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">apr1/3</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">password_hash/4</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">password_hash_needs_rehash/3</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">verify_password_hash/2</span></code></p></li>
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">random_below/2</span></code> predicate returns a uniformly distributed random
@@ -404,7 +405,9 @@ libraries.</p>
 password and salt byte sequences using a portable MD5-based
 implementation.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">password_hash/4</span></code> predicate builds on top of <code class="docutils literal notranslate"><span class="pre">pbkdf2/6</span></code> to
-generate structured password-hash terms. The <code class="docutils literal notranslate"><span class="pre">verify_password_hash/2</span></code>
+generate structured password-hash terms. The
+<code class="docutils literal notranslate"><span class="pre">password_hash_needs_rehash/3</span></code> predicate checks stored password-hash
+terms against the current PBKDF2 policy. The <code class="docutils literal notranslate"><span class="pre">verify_password_hash/2</span></code>
 predicate verifies <code class="docutils literal notranslate"><span class="pre">pbkdf2(Hash,</span> <span class="pre">Iterations,</span> <span class="pre">Salt,</span> <span class="pre">DerivedKey)</span></code>,
 <code class="docutils literal notranslate"><span class="pre">digest(Hash,</span> <span class="pre">StoredDigest)</span></code>, and <code class="docutils literal notranslate"><span class="pre">apr1(Salt,</span> <span class="pre">Checksum)</span></code> terms.</p>
 <section id="api-documentation">

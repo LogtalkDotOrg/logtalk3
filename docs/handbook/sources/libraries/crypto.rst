@@ -16,6 +16,7 @@ currently exports the ``crypto`` object with the predicates:
 - ``pbkdf2/6``
 - ``apr1/3``
 - ``password_hash/4``
+- ``password_hash_needs_rehash/3``
 - ``verify_password_hash/2``
 
 The ``random_below/2`` predicate returns a uniformly distributed random
@@ -46,7 +47,9 @@ password and salt byte sequences using a portable MD5-based
 implementation.
 
 The ``password_hash/4`` predicate builds on top of ``pbkdf2/6`` to
-generate structured password-hash terms. The ``verify_password_hash/2``
+generate structured password-hash terms. The
+``password_hash_needs_rehash/3`` predicate checks stored password-hash
+terms against the current PBKDF2 policy. The ``verify_password_hash/2``
 predicate verifies ``pbkdf2(Hash, Iterations, Salt, DerivedKey)``,
 ``digest(Hash, StoredDigest)``, and ``apr1(Salt, Checksum)`` terms.
 

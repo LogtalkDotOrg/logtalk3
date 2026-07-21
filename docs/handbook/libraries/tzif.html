@@ -316,6 +316,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#zone-identifier-validation">Zone identifier validation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#local-queries">Local Queries</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#known-issues">Known issues</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="ulid.html"><code class="docutils literal notranslate"><span class="pre">ulid</span></code></a></li>
@@ -566,6 +567,14 @@ absence. Instead, they return one of the following results:</p>
 | <span class="o">?-</span> tzif<span class="o">::</span>zones(<span class="nv">Zones</span>).
 </pre></div>
 </div>
+</section>
+<section id="known-issues">
+<h2>Known issues<a class="headerlink" href="#known-issues" title="Link to this heading"></a></h2>
+<p>Some tests may fail on Windows depending on the backend. When using
+SICStus Prolog, test failures result from file name case-normalization
+by this system file and directory library predicates. When using
+SWI-Prolog, the same issues with file name case-normalization are fixed
+in version 10.1.12.</p>
 </section>
 </section>
 

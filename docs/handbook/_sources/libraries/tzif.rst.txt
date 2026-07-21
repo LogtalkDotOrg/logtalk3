@@ -241,3 +241,12 @@ List cached zones directly:
 
    | ?- tzif::load(directory('/usr/share/zoneinfo')).
    | ?- tzif::zones(Zones).
+
+Known issues
+------------
+
+Some tests may fail on Windows depending on the backend. When using
+SICStus Prolog, test failures result from file name case-normalization
+by this system file and directory library predicates. When using
+SWI-Prolog, the same issues with file name case-normalization are fixed
+in version 10.1.12.
