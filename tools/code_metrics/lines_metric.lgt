@@ -31,9 +31,9 @@
 	imports((code_metrics_utilities, code_metric))).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-03-17,
+		date is 2026-07-22,
 		comment is 'Computes the number of lines of code, comments, and blanks by calling cloc and parsing its report file output.',
 		remarks is [
 			'Entity line range' - 'Entity scores are computed by querying entity lines(BeginLine, EndLine) and running cloc on a temporary file containing only that line range.',
@@ -187,21 +187,24 @@
 		BeginLine > EndLine,
 		!.
 	file_range_stats(File, BeginLine, EndLine, Code, Comments, Blanks) :-
+		os::internal_os_path(File, FileOS),
 		temporary_file('stats', BeginLine, EndLine, '.csv', ReportFile),
+		os::internal_os_path(ReportFile, ReportFileOS),
 		( 	os::operating_system_type(windows) ->
 			temporary_file('range', BeginLine, EndLine, '.lgt', RangeFile),
+			os::internal_os_path(RangeFile, RangeFileOS),
 			atomic_list_concat([
-				'sed -n "', BeginLine, ',', EndLine, 'p" "', File, '" > "', RangeFile, '"'
+				'sed -n "', BeginLine, ',', EndLine, 'p" "', FileOS, '" > "', RangeFileOS, '"'
 			], ExtractCommand),
 			shell(ExtractCommand),
 			atomic_list_concat([
-				'cloc --quiet --csv --by-file --report-file="', ReportFile, '" "', RangeFile, '"'
+				'cloc --quiet --csv --by-file --report-file="', ReportFileOS, '" "', RangeFileOS, '"'
 			], ClocCommand),
 			shell(ClocCommand),
 			delete_file(RangeFile)
 		;	atomic_list_concat([
 				'sed -n ''', BeginLine, ',', EndLine, 'p'' "', File,
-				'" | cloc --quiet --csv --by-file --stdin-name=range.lgt --report-file="', ReportFile, '" -'
+				'" | cloc --quiet --csv --by-file --stdin-name=range.lgt --report-file="', ReportFileOS, '" -'
 			], Command),
 			shell(Command)
 		),
@@ -212,9 +215,11 @@
 		parse_sum_line(SumLineCodes, Code, Comments, Blanks).
 
 	file_stats(File, Code, Comments, Blanks) :-
+		os::internal_os_path(File, FileOS),
 		temporary_file('stats', 0, 0, '.csv', ReportFile),
+		os::internal_os_path(ReportFile, ReportFileOS),
 		atomic_list_concat([
-			'cloc --quiet --csv --by-file --report-file="', ReportFile, '" "', File, '"'
+			'cloc --quiet --csv --by-file --report-file="', ReportFileOS, '" "', FileOS, '"'
 		], Command),
 		shell(Command),
 		open(ReportFile, read, Stream),
