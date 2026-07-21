@@ -964,10 +964,10 @@ $quiet_report = {
 		Write-Output "% Compilation errors/warnings and failed unit tests"
 		Write-Output "% (compilation errors/warnings might be expected depending on the test)"
 		Write-Output "%"
-		Get-ChildItem -Path . -Filter *.errors  | Get-Content | Select-String -Pattern '^!'  -NoEmphasis | Tee-Object -FilePath errors.all -Append
-		Get-ChildItem -Path . -Filter *.results | Get-Content | Select-String -Pattern '^!'  -NoEmphasis | Tee-Object -FilePath errors.all -Append
-		Get-ChildItem -Path . -Filter *.errors  | Get-Content | Select-String -Pattern '^\*' -NoEmphasis | Tee-Object -FilePath errors.all -Append
-		Get-ChildItem -Path . -Filter *.results | Get-Content | Select-String -Pattern '^\*' -NoEmphasis | Tee-Object -FilePath errors.all -Append
+		Get-ChildItem -Path . -Filter *.errors  | Get-Content | Select-String -Pattern '^!'  -NoEmphasis | ForEach-Object { $_.Line } | Tee-Object -FilePath errors.all -Append
+		Get-ChildItem -Path . -Filter *.results | Get-Content | Select-String -Pattern '^!'  -NoEmphasis | ForEach-Object { $_.Line } | Tee-Object -FilePath errors.all -Append
+		Get-ChildItem -Path . -Filter *.errors  | Get-Content | Select-String -Pattern '^\*' -NoEmphasis | ForEach-Object { $_.Line } | Tee-Object -FilePath errors.all -Append
+		Get-ChildItem -Path . -Filter *.results | Get-Content | Select-String -Pattern '^\*' -NoEmphasis | ForEach-Object { $_.Line } | Tee-Object -FilePath errors.all -Append
 	}
 	if ((Get-ChildItem -Path . -Filter *.results | Get-Content | Select-String -Pattern 'tests skipped' -CaseSensitive -SimpleMatch -Quiet) -or
 		(Get-ChildItem -Path . -Filter *.results | Get-Content | Select-String -Pattern '(not applicable)' -CaseSensitive -SimpleMatch -Quiet)) {
