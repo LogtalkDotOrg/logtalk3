@@ -23,9 +23,9 @@
 	implements(ulid_protocol)).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:1:2,
 		author is 'Paulo Moura',
-		date is 2026-07-06,
+		date is 2026-07-22,
 		comment is 'Universally Unique Lexicographically Sortable Identifier (ULID) generator.',
 		parameters is [
 			'Representation' - 'Text representation for the ULID. Possible values are ``atom``, ``chars``, and ``codes``.'
@@ -51,9 +51,8 @@
 		check_representation(Context),
 		check_timestamp(Context, Milliseconds),
 		random_bytes(10, Bytes),
-		bytes_integer(Bytes, 0, Randomness),
 		encode_base32(10, Milliseconds, Tail, Codes),
-		encode_base32(16, Randomness, [], Tail),
+		bytes_to_base32(Bytes, Tail),
 		codes_to_ulid(_Representation_, Codes, ULID).
 
 	generate(Year, Month, Day, Hours, Minutes, Seconds, Milliseconds, ULID) :-
@@ -111,10 +110,32 @@
 		;	throw(error(type_error(integer, Milliseconds), Context))
 		).
 
-	bytes_integer([], Integer, Integer).
-	bytes_integer([Byte| Bytes], Integer0, Integer) :-
-		Integer1 is Integer0 * 256 + Byte,
-		bytes_integer(Bytes, Integer1, Integer).
+	% encodes a list of bytes (e.g. the 10 bytes of randomness) directly into
+	% Crockford's Base32 codes using a small bit buffer instead of converting
+	% the whole byte list into a single (potentially very large) integer first;
+	% this avoids int_overflow errors on backends with bounded integer
+	% arithmetic as the buffer never holds more than 12 bits
+	bytes_to_base32(Bytes, Codes) :-
+		bytes_to_base32(Bytes, 0, 0, Codes).
+
+	bytes_to_base32([], 0, 0, []).
+	bytes_to_base32([Byte| Bytes], Buffer0, BufferBits0, Codes) :-
+		Buffer1 is (Buffer0 << 8) \/ Byte,
+		BufferBits1 is BufferBits0 + 8,
+		bytes_to_base32_drain(Buffer1, BufferBits1, Bytes, Codes).
+
+	bytes_to_base32_drain(Buffer, BufferBits, Bytes, Codes) :-
+		(	BufferBits >= 5 ->
+			Shift is BufferBits - 5,
+			Index is Buffer >> Shift,
+			code(Index, Code),
+			Mask is (1 << Shift) - 1,
+			Buffer1 is Buffer /\ Mask,
+			BufferBits1 is Shift,
+			Codes = [Code| Codes1],
+			bytes_to_base32_drain(Buffer1, BufferBits1, Bytes, Codes1)
+		;	bytes_to_base32(Bytes, Buffer, BufferBits, Codes)
+		).
 
 	encode_base32(0, _, Tail, Tail) :-
 		!.
