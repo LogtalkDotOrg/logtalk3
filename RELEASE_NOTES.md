@@ -182,6 +182,9 @@ matching test sets instead of excluding them.
 automation scripts for the `-o quiet` option to suppress all user output (exit
 codes are not affected). Usually combined with the `-f` option.
 
+* IMPROVED: The `mutation_testing` option `print_mutation/1` no longer depends
+on the `verbose/1` option.
+
 * IMPROVED: Tests for the `sarif` tool to be less verbose.
 
 * IMPROVED: Performance of the `sbom` tool.

@@ -189,11 +189,11 @@ Limitations
 Options
 -------
 
-- `include_entities(Entities)`  
-	List of loaded entities to include (default `[]` meaning all).
-
 - `exclude_entities(Entities)`  
 	List of loaded entities to exclude (default `[]`).
+
+- `include_entities(Entities)`  
+	List of loaded entities to include (default `[]` meaning all).
 
 - `max_mutators(Max)`  
 	Maximum number of discovered mutators to use when `mutators/1` is not explicitly provided (`all` or positive integer; default `all`).
@@ -216,8 +216,11 @@ Options
 - `threshold(Threshold)`  
 	Minimum mutation score in range `0.0..100.0` (default `0.0`).
 
+- `print_mutation(Boolean)`  
+	When `true`, prints original and mutated terms with source location for mutators (default `false`).
+
 - `verbose(Boolean)`  
-	Print per-mutant results (default `false`).
+	Print per-mutant test results (default `false`).
 
 - `format(Format)`
 	Controls report formatting output (`none`, `text`, or `json`; default `text`).
@@ -229,9 +232,6 @@ Options
 	Report output file base name or path without extension (atom; default `mutation_test_report`).
 	The extension is inferred from `format/1` (`text` -> `.txt`, `json` -> `.json`).
 	When not absolute, the file is saved in the tests driver directory.
-
-- `print_mutation(Boolean)`  
-	When `true`, prints original and mutated terms with source location for mutators. This option is only effective when `verbose(true)` (default `false`).
 
 - `tester_file_name(Tester)`  
 	Name of the tests driver file for the code being tested (default `tester.lgt`).

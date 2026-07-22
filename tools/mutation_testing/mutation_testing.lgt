@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-06-07,
+		date is 2026-06-22,
 		comment is 'Mutation testing tool.'
 	]).
 
@@ -863,11 +863,11 @@
 		^^option(verbose(Verbose), Options),
 		^^option(print_mutation(PrintMutation), Options),
 		entity_file(Entity, File),
-		% when both verbose(true) and print_mutation(true), apply the
-		% mutator hook in the main process to print original and mutated terms;
-		% reset the random seed first so that the mutation is deterministic and
-		% matches the one produced by the subprocess (which starts fresh)
-		(	Verbose == true, PrintMutation == true ->
+		% when using the print_mutation(true) option, apply the mutator hook in the
+		% main process to print original and mutated terms; reset the random seed
+		% first so that the mutation is deterministic and matches the one produced
+		% by the subprocess (which starts fresh)
+		(	PrintMutation == true ->
 			reset_seed,
 			print_mutations(Entity, Predicate, Target, Mutator, Occurrence, File)
 		;	true
