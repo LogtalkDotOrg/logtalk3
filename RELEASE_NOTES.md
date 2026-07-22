@@ -139,6 +139,9 @@ entries in the `base64` and `base64url` objects and missing Base64URL output
 padding. Added a `base64url_no_padding` object for specifications that require
 unpadded Base64URL encoding.
 
+* FIXED: The `hashes` library implementation of the MurmurHash3 x86 32-bit
+hash function when run on backends with bounded integers.
+
 * FIXED: Compliance issues of the `json` library.
 
 * FIXED: Compliance issues of the `json_ld` library.

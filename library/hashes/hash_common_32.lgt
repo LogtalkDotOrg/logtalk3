@@ -22,9 +22,9 @@
 :- object(hash_common_32).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-06-01,
+		date is 2026-07-22,
 		comment is 'Auxiliary predicates for the hashes library 32-bit algorithms.'
 	]).
 
@@ -73,7 +73,7 @@
 	:- public(mul32/3).
 	:- mode(mul32(+integer, +integer, -integer), one).
 	:- info(mul32/3, [
-		comment is 'Multiplies two integers modulo 2^32.',
+		comment is 'Multiplies two integers modulo 2^32. Computed via 16-bit limb decomposition so that no intermediate result exceeds about 2**49, avoiding integer overflow errors on backends with bounded integer arithmetic.',
 		argnames is ['A', 'B', 'Product']
 	]).
 
@@ -174,9 +174,19 @@
 		Mask is 0xFFFFFFFF,
 		Sum is (A + B + C + D) /\ Mask.
 
+	% computes (A * B) mod 2^32 without ever forming the full A * B product,
+	% which for two near-2^32 operands approaches 2^64 and can trip
+	% int_overflow errors on backends with bounded integer arithmetic (e.g.
+	% no automatic bignum promotion); splitting each operand into 16-bit
+	% halves keeps every intermediate value under about 2^49
 	mul32(A, B, Product) :-
-		Mask is 0xFFFFFFFF,
-		Product is (A * B) /\ Mask.
+		AH is A >> 16,
+		AL is A /\ 0xFFFF,
+		BH is B >> 16,
+		BL is B /\ 0xFFFF,
+		Cross is (AH * BL + AL * BH) /\ 0xFFFF,
+		Low is AL * BL,
+		Product is (Low + (Cross << 16)) /\ 0xFFFFFFFF.
 
 	rol32(Value, Shift, Rotated) :-
 		Mask is 0xFFFFFFFF,

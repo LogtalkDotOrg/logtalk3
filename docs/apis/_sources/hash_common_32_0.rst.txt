@@ -14,8 +14,8 @@ Auxiliary predicates for the hashes library 32-bit algorithms.
 |    ``logtalk_load(hashes(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:2:0
-| **Date:** 2026-06-01
+| **Version:** 1:3:0
+| **Date:** 2026-07-22
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -157,7 +157,7 @@ Adds four integers modulo 2^32.
 ``mul32/3``
 ^^^^^^^^^^^
 
-Multiplies two integers modulo 2^32.
+Multiplies two integers modulo 2^32. Computed via 16-bit limb decomposition so that no intermediate result exceeds about 2**49, avoiding integer overflow errors on backends with bounded integer arithmetic.
 
 | **Compilation flags:**
 |    ``static``

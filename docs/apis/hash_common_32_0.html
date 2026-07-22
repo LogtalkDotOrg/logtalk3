@@ -443,8 +443,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:2:0</div>
-<div class="line"><strong>Date:</strong> 2026-06-01</div>
+<div class="line"><strong>Version:</strong> 1:3:0</div>
+<div class="line"><strong>Date:</strong> 2026-07-22</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -628,7 +628,7 @@
 </section>
 <section id="mul32-3">
 <span id="hash-common-32-0-mul32-3"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">mul32/3</span></code></a><a class="headerlink" href="#mul32-3" title="Link to this heading"></a></h3>
-<p>Multiplies two integers modulo 2^32.</p>
+<p>Multiplies two integers modulo 2^32. Computed via 16-bit limb decomposition so that no intermediate result exceeds about 2**49, avoiding integer overflow errors on backends with bounded integer arithmetic.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
