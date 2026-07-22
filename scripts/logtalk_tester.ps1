@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Unit testing automation script
-##   Last updated on July 21, 2026
+##   Last updated on July 22, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -56,7 +56,7 @@ param(
 Function Write-Script-Version {
 	$myFullName = $MyInvocation.ScriptName
 	$myName = Split-Path -Path "$myFullName" -leaf -Resolve
-	Write-Output "$myName 22.0"
+	Write-Output "$myName 23.0"
 }
 
 Function Format-Decimal {
@@ -843,6 +843,16 @@ if ($max_jobs -eq 1) {
 	$counter = 1
 	$pwsh_executable = (Get-Command pwsh).Source
 
+	# Start-Process resolves a bare 'NUL' as a relative path rather than the
+	# reserved device name, so use a real empty file as the workers' stdin
+	# instead. This keeps each worker from sharing the parent console's
+	# input handle, which is what causes progress/output updates to stall
+	# until the user presses Enter.
+	$stdin_null_file = Join-Path $results '.stdin_null'
+	if (-not (Test-Path -LiteralPath $stdin_null_file)) {
+		New-Item -ItemType File -Path $stdin_null_file -Force | Out-Null
+	}
+
 	$reap_completed_workers = {
 		for ($i = 0; $i -lt $workers.Count; $i++) {
 			$worker = $workers[$i]
@@ -883,35 +893,49 @@ if ($max_jobs -eq 1) {
 		}
 	}
 
-	$driver_files | ForEach-Object {
-		while ((($workers | Where-Object { -not $_.Done -and -not $_.Process.HasExited }) | Measure-Object).Count -ge $max_jobs) {
+	try {
+		$driver_files | ForEach-Object {
+			while ((($workers | Where-Object { -not $_.Done -and -not $_.Process.HasExited }) | Measure-Object).Count -ge $max_jobs) {
+				& $reap_completed_workers
+				Start-Sleep -Milliseconds 100
+			}
 			& $reap_completed_workers
-			Start-Sleep -Milliseconds 100
+			if ($o -eq 'minimal') {
+				Write-Host -NoNewline "% Running $testsets test sets: "
+				Write-Host -NoNewline "$counter`r"
+			}
+			$unit = (Split-Path -Path $_.FullName) -replace '\\', '/'
+			$name = (($unit -replace '/', '__') -replace '\\', '__') -replace ':', '___'
+			$console_file = "$results/$name.console"
+			$error_file = "$results/$name.console.err"
+			$arguments = @($worker_arguments + @('-testset', $_.FullName))
+			$argument_string = ConvertTo-ArgumentString -Arguments $arguments
+			$process = Start-Process -FilePath $pwsh_executable -ArgumentList $argument_string -NoNewWindow -RedirectStandardOutput $console_file -RedirectStandardError $error_file -RedirectStandardInput $stdin_null_file -PassThru
+			$workers += [PSCustomObject]@{ Process = $process; Name = $name; Done = $false }
+			$counter++
 		}
-		& $reap_completed_workers
-		if ($o -eq 'minimal') {
-			Write-Host -NoNewline "% Running $testsets test sets: "
-			Write-Host -NoNewline "$counter`r"
-		}
-		$unit = (Split-Path -Path $_.FullName) -replace '\\', '/'
-		$name = (($unit -replace '/', '__') -replace '\\', '__') -replace ':', '___'
-		$console_file = "$results/$name.console"
-		$error_file = "$results/$name.console.err"
-		$arguments = @($worker_arguments + @('-testset', $_.FullName))
-		$argument_string = ConvertTo-ArgumentString -Arguments $arguments
-		$process = Start-Process -FilePath $pwsh_executable -ArgumentList $argument_string -NoNewWindow -RedirectStandardOutput $console_file -RedirectStandardError $error_file -PassThru
-		$workers += [PSCustomObject]@{ Process = $process; Name = $name; Done = $false }
-		$counter++
-	}
 
-	while ($completed -lt $testsets) {
-		& $reap_completed_workers
-		Start-Sleep -Milliseconds 50
+		while ($completed -lt $testsets) {
+			& $reap_completed_workers
+			Start-Sleep -Milliseconds 50
+		}
+	} finally {
+		foreach ($worker in $workers) {
+			if (-not $worker.Process.HasExited) {
+				try {
+					$worker.Process.Kill()
+				} catch {
+					# process may have exited between the check and the kill; nothing to do
+				}
+			}
+		}
 	}
 
 	if ($o -eq 'minimal') {
 		Write-Output ""
 	}
+
+	Remove-Item -LiteralPath $stdin_null_file -Force -ErrorAction SilentlyContinue
 
 	Get-ChildItem -Path $results -Filter '*.console' -ErrorAction SilentlyContinue | Remove-Item -Force -ErrorAction SilentlyContinue
 	Get-ChildItem -Path $results -Filter '*.console.err' -ErrorAction SilentlyContinue |

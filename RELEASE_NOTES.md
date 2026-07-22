@@ -203,6 +203,10 @@ tool diagnostics metadata.
 metadata, version control, and invocation options in the diagnostic tool
 description.
 
+* FIXED: A `logtalk_tester.ps1` testing automation script bug when using the
+`-j` option where updating the currently running test set or printing the
+final results would sometimes require the user to press enter.
+
 Examples
 --------
 
