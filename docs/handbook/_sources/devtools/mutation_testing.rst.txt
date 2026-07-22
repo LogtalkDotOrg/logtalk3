@@ -31,6 +31,12 @@ To test this tool, load the ``tester.lgt`` file:
 
    | ?- logtalk_load(mutation_testing(tester)).
 
+Some tests depend on the availability of the
+``test_files/mutation-testing-report-schema.json`` file. This file can
+be downloaded from:
+
+https://github.com/stryker-mutator/mutation-testing-elements
+
 Features
 --------
 
