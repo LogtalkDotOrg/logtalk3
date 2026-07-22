@@ -182,8 +182,11 @@ matching test sets instead of excluding them.
 automation scripts for the `-o quiet` option to suppress all user output (exit
 codes are not affected). Usually combined with the `-f` option.
 
-* IMPROVED: The `mutation_testing` option `print_mutation/1` no longer depends
-on the `verbose/1` option.
+* ADDED: New `mutation_testing` tool `tester_options/1` option, allowing
+specifying additional options for the calls to the `logtalk_tester` script.
+
+* IMPROVED: The `mutation_testing` tool option `print_mutation/1` no longer
+depends on the `verbose/1` option.
 
 * IMPROVED: Tests for the `sarif` tool to be less verbose.
 

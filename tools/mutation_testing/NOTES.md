@@ -239,6 +239,14 @@ Options
 - `tester_directory(Directory)`  
 	Full path to the directory containing the tests driver file for the code being tested (no default).
 
+- `tester_options(Options)`  
+    Additional options for the calls to the `logtalk_tester` script that are used to check mutations.
+    Note that the most common options are already covered by explicit options (e.g., `timeout/1`).
+    Options without arguments are specified using the corresponding character. Options that take
+    a value are specified using a compound term whose name is the option character and whose single
+    argument is the option value (default `[o(quiet)]`). Invalid options are ignored. 
+
+
 Sampling semantics
 ------------------
 

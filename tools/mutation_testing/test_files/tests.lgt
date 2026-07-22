@@ -23,7 +23,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2026-07-22,
 		comment is 'Unit tests for the "mutation_testing" tool.'
@@ -756,12 +756,12 @@
 		object_property(mt_sample, file(File)),
 		logtalk::loaded_file_property(File, directory(Directory)).
 
-	% suppress all messages from the "mutation_testing" tool
+	% suppress all error messages from the "mutation_testing" tool
 	% to not pollute the unit tests output
 
 	:- multifile(logtalk::message_hook/4).
 	:- dynamic(logtalk::message_hook/4).
 
-	logtalk::message_hook(_Message, _Kind, mutation_testing, _Tokens).
+	logtalk::message_hook(_Message, error, mutation_testing, _Tokens).
 
 :- end_object.

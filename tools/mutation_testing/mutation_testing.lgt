@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-06-22,
+		date is 2026-07-22,
 		comment is 'Mutation testing tool.'
 	]).
 
@@ -860,7 +860,6 @@
 
 	execute_mutant(mutant(Entity, Predicate, Target, Mutator, Occurrence), Options, Status) :-
 		^^option(timeout(Timeout), Options),
-		^^option(verbose(Verbose), Options),
 		^^option(print_mutation(PrintMutation), Options),
 		entity_file(Entity, File),
 		% when using the print_mutation(true) option, apply the mutator hook in the
@@ -878,7 +877,7 @@
 		write_mutation_config(TempDir, Entity, Predicate, Target, Mutator, Occurrence, File),
 		% build and run the subprocess
 		(	catch(
-				run_subprocess(TempDir, File, Timeout, Verbose, ExitStatus, Options),
+				run_subprocess(TempDir, File, Timeout, ExitStatus, Options),
 				SubprocessError,
 				(	cleanup_temp_dir(TempDir),
 					Status = error(subprocess_error(SubprocessError))
@@ -949,8 +948,7 @@
 		path_concat(TempDir, 'coverage.txt', CoverageFile),
 		write_baseline_coverage_config(TempDir, CoverageFile),
 		^^option(timeout(Timeout), Options),
-		^^option(verbose(Verbose), Options),
-		(   catch(run_coverage_subprocess(TempDir, SourceFile, Timeout, Verbose, _ExitStatus, Options), _, fail) ->
+		(   catch(run_coverage_subprocess(TempDir, SourceFile, Timeout, _ExitStatus, Options), _, fail) ->
 			catch(read_baseline_coverage(CoverageFile, Entity), _, fail),
 			cleanup_temp_dir(TempDir)
 		;   cleanup_temp_dir(TempDir),
@@ -963,7 +961,7 @@
 		writeq(Stream, baseline_coverage_file(CoverageFile)), write(Stream, '.\n'),
 		close(Stream).
 
-	run_coverage_subprocess(TempDir, SourceFile, Timeout, Verbose, ExitStatus, Options) :-
+	run_coverage_subprocess(TempDir, SourceFile, Timeout, ExitStatus, Options) :-
 		tester_directory(SourceFile, Directory, Options),
 		^^option(tester_file_name(Tester), Options),
 		decompose_file_name(Tester, _, TesterName, _),
@@ -973,17 +971,18 @@
 		make_directory_path(LogsDir),
 		initialization_goal_coverage(ConfigFile, Goal),
 		logtalk_tester_script_name(LogtalkTester),
-		redirect(Verbose, Redirect),
 		internal_os_path(Directory, DirectoryOS),
 		internal_os_path(LogsDir, LogsDirOS),
+		^^option(tester_options(TesterOptions0), Options),
+		convert_tester_options(TesterOptions0, TesterOptions),
 		atomic_list_concat([
 			'cd "', DirectoryOS, '" && ', LogtalkTester,
 			' -p ', Dialect,
 			' -n ', TesterName,
 			' -g "', Goal, '"',
 			' -d "', LogsDirOS, '"',
-			' -t ', Timeout,
-			Redirect
+			' -t ', Timeout |
+			TesterOptions
 		], Command),
 		print_message(silent, mutation_testing, subprocess_command(Command)),
 		shell(Command, ExitStatus).
@@ -1020,7 +1019,7 @@
 		;   read_baseline_coverage_terms(Stream, Entity)
 		).
 
-	run_subprocess(TempDir, SourceFile, Timeout, Verbose, ExitStatus, Options) :-
+	run_subprocess(TempDir, SourceFile, Timeout, ExitStatus, Options) :-
 		% derive test directory from source file or startup directory
 		tester_directory(SourceFile, Directory, Options),
 		^^option(tester_file_name(Tester), Options),
@@ -1033,20 +1032,19 @@
 		make_directory_path(LogsDir),
 		% build initialization goal
 		initialization_goal(ConfigFile, Goal),
-		% build the full command; redirect output to /dev/null to silence subprocess
-		% unless verbose mode is enabled
 		logtalk_tester_script_name(LogtalkTester),
-		redirect(Verbose, Redirect),
 		internal_os_path(Directory, DirectoryOS),
 		internal_os_path(LogsDir, LogsDirOS),
+		^^option(tester_options(TesterOptions0), Options),
+		convert_tester_options(TesterOptions0, TesterOptions),
 		atomic_list_concat([
 			'cd "', DirectoryOS, '" && ', LogtalkTester,
 			' -p ', Dialect,
 			' -n ', TesterName,
 			' -g "', Goal, '"',
 			' -d "', LogsDirOS, '"',
-			' -t ', Timeout,
-			Redirect
+			' -t ', Timeout |
+			TesterOptions
 		], Command),
 		print_message(silent, mutation_testing, subprocess_command(Command)),
 		% run subprocess and collect exit status
@@ -1075,13 +1073,6 @@
 		;	LogtalkTester = 'logtalk_tester'
 		).
 
-	redirect(true, '').
-	redirect(false, Redirect) :-
-		(   operating_system_type(windows) ->
-			Redirect = ' > NUL 2>&1'
-		;   Redirect = ' > /dev/null 2>&1'
-		).
-
 	initialization_goal(ConfigFile, Goal) :-
 		atomic_list_concat([
 			'set_logtalk_flag(report,off),',
@@ -1089,6 +1080,18 @@
 			'logtalk_load(mutation_testing(subprocess_mutation_hook)),',
 			'subprocess_mutation_hook::load_config(''', ConfigFile, ''')'
 		], Goal).
+
+	convert_tester_options([], []).
+	convert_tester_options([TesterOption0| TesterOptions0], TesterOptions) :-
+		(	atom(TesterOption0) ->
+			TesterOptions = [TesterOption0| RestTesterOptions]
+		;	TesterOption0 =.. [Name, Value] ->
+			atomic_list_concat([' -', Name, ' '], Option),
+			TesterOptions = [Option, Value| RestTesterOptions]
+		;	% ignore invalid option spec
+			TesterOptions = RestTesterOptions
+		),
+		convert_tester_options(TesterOptions0, RestTesterOptions).
 
 	read_mutant_status(TempDir, ExitStatus, Status) :-
 		path_concat(TempDir, 'status.txt', StatusFile),
@@ -1602,6 +1605,8 @@
 	default_option(report_file_name('mutation_test_report')).
 	% default tester file name
 	default_option(tester_file_name('tester.lgt')).
+	% default logtalk_tester script additional options
+	default_option(tester_options([o(quiet)])).
 
 	valid_option(include_entities(Entities)) :-
 		valid(list(atom), Entities).
@@ -1657,5 +1662,7 @@
 		atom(Tester).
 	valid_option(tester_directory(Directory)) :-
 		atom(Directory).
+	valid_option(tester_options(Options)) :-
+		valid(list(types([character,compound])), Options).
 
 :- end_object.
