@@ -344,13 +344,13 @@ entities (objects/categories), not protocols.</p></li>
 <h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
 <ul>
 <li><div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">include_entities(Entities)</span></code></div>
-<div class="line">List of loaded entities to include (default <code class="docutils literal notranslate"><span class="pre">[]</span></code> meaning all).</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">exclude_entities(Entities)</span></code></div>
+<div class="line">List of loaded entities to exclude (default <code class="docutils literal notranslate"><span class="pre">[]</span></code>).</div>
 </div>
 </li>
 <li><div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">exclude_entities(Entities)</span></code></div>
-<div class="line">List of loaded entities to exclude (default <code class="docutils literal notranslate"><span class="pre">[]</span></code>).</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">include_entities(Entities)</span></code></div>
+<div class="line">List of loaded entities to include (default <code class="docutils literal notranslate"><span class="pre">[]</span></code> meaning all).</div>
 </div>
 </li>
 <li><div class="line-block">
@@ -397,8 +397,14 @@ default <code class="docutils literal notranslate"><span class="pre">300</span><
 </div>
 </li>
 <li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">print_mutation(Boolean)</span></code></div>
+<div class="line">When <code class="docutils literal notranslate"><span class="pre">true</span></code>, prints original and mutated terms with source
+location for mutators (default <code class="docutils literal notranslate"><span class="pre">false</span></code>).</div>
+</div>
+</li>
+<li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">verbose(Boolean)</span></code></div>
-<div class="line">Print per-mutant results (default <code class="docutils literal notranslate"><span class="pre">false</span></code>).</div>
+<div class="line">Print per-mutant test results (default <code class="docutils literal notranslate"><span class="pre">false</span></code>).</div>
 </div>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">format(Format)</span></code> Controls report formatting output (<code class="docutils literal notranslate"><span class="pre">none</span></code>,
@@ -412,13 +418,6 @@ extension is inferred from <code class="docutils literal notranslate"><span clas
 <code class="docutils literal notranslate"><span class="pre">json</span></code> -&gt; <code class="docutils literal notranslate"><span class="pre">.json</span></code>). When not absolute, the file is saved in the
 tests driver directory.</p></li>
 <li><div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">print_mutation(Boolean)</span></code></div>
-<div class="line">When <code class="docutils literal notranslate"><span class="pre">true</span></code>, prints original and mutated terms with source
-location for mutators. This option is only effective when
-<code class="docutils literal notranslate"><span class="pre">verbose(true)</span></code> (default <code class="docutils literal notranslate"><span class="pre">false</span></code>).</div>
-</div>
-</li>
-<li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">tester_file_name(Tester)</span></code></div>
 <div class="line">Name of the tests driver file for the code being tested (default
 <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code>).</div>
@@ -428,6 +427,18 @@ location for mutators. This option is only effective when
 <div class="line"><code class="docutils literal notranslate"><span class="pre">tester_directory(Directory)</span></code></div>
 <div class="line">Full path to the directory containing the tests driver file for the
 code being tested (no default).</div>
+</div>
+</li>
+<li><div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">tester_options(Options)</span></code></div>
+<div class="line">Additional options for the calls to the <code class="docutils literal notranslate"><span class="pre">logtalk_tester</span></code> script
+that are used to check mutations. Note that the most common options
+are already covered by explicit options (e.g., <code class="docutils literal notranslate"><span class="pre">timeout/1</span></code>).
+Options without arguments are specified using the corresponding
+character. Options that take a value are specified using a compound
+term whose name is the option character and whose single argument is
+the option value (default <code class="docutils literal notranslate"><span class="pre">[o(quiet)]</span></code>). Invalid options are
+ignored.</div>
 </div>
 </li>
 </ul>

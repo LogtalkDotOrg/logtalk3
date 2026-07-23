@@ -197,11 +197,11 @@ Limitations
 Options
 -------
 
-- | ``include_entities(Entities)``
-  | List of loaded entities to include (default ``[]`` meaning all).
-
 - | ``exclude_entities(Entities)``
   | List of loaded entities to exclude (default ``[]``).
+
+- | ``include_entities(Entities)``
+  | List of loaded entities to include (default ``[]`` meaning all).
 
 - | ``max_mutators(Max)``
   | Maximum number of discovered mutators to use when ``mutators/1`` is
@@ -232,8 +232,12 @@ Options
 - | ``threshold(Threshold)``
   | Minimum mutation score in range ``0.0..100.0`` (default ``0.0``).
 
+- | ``print_mutation(Boolean)``
+  | When ``true``, prints original and mutated terms with source
+    location for mutators (default ``false``).
+
 - | ``verbose(Boolean)``
-  | Print per-mutant results (default ``false``).
+  | Print per-mutant test results (default ``false``).
 
 - ``format(Format)`` Controls report formatting output (``none``,
   ``text``, or ``json``; default ``text``). When set to ``text`` or
@@ -247,11 +251,6 @@ Options
   ``json`` -> ``.json``). When not absolute, the file is saved in the
   tests driver directory.
 
-- | ``print_mutation(Boolean)``
-  | When ``true``, prints original and mutated terms with source
-    location for mutators. This option is only effective when
-    ``verbose(true)`` (default ``false``).
-
 - | ``tester_file_name(Tester)``
   | Name of the tests driver file for the code being tested (default
     ``tester.lgt``).
@@ -259,6 +258,16 @@ Options
 - | ``tester_directory(Directory)``
   | Full path to the directory containing the tests driver file for the
     code being tested (no default).
+
+- | ``tester_options(Options)``
+  | Additional options for the calls to the ``logtalk_tester`` script
+    that are used to check mutations. Note that the most common options
+    are already covered by explicit options (e.g., ``timeout/1``).
+    Options without arguments are specified using the corresponding
+    character. Options that take a value are specified using a compound
+    term whose name is the option character and whose single argument is
+    the option value (default ``[o(quiet)]``). Invalid options are
+    ignored.
 
 Sampling semantics
 ------------------
