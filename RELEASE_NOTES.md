@@ -25,6 +25,12 @@ RELEASE NOTES
 3.102.0 - September ??, 2026
 ============================
 
+Installers and installation scripts
+-----------------------------------
+
+* UPDATED: The portable Docker image to to compile SWI-Prolog without its
+documentation (to avoid recurrent failures) and in optimized mode.
+
 
 3.101.0 - July 23, 2026
 =======================

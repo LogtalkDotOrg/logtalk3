@@ -1,7 +1,7 @@
 #############################################################################
 ## 
 ##   Logtalk Dockerfile
-##   Last updated on February 27, 2026
+##   Last updated on July 24, 2026
 ## 
 ##   This file is part of Logtalk <https://logtalk.org/>  
 ##   SPDX-FileCopyrightText: 2017-2026 Paulo Moura <pmoura@logtalk.org>
@@ -32,7 +32,7 @@ VOLUME ["/source"]
 
 # Logtalk
 ARG LOGTALK_VERSION=master
-ARG LOGTALK_TEXINFO_VERSION=3.101.0
+ARG LOGTALK_TEXINFO_VERSION=3.102.0
 # Backends
 ARG B_VERSION=81
 ARG CIAO_VERSION=v1.23.0-m1
@@ -122,6 +122,7 @@ RUN rm -rf /var/lib/apt/lists/* \
         libpcre2-dev \
         libreadline-dev \
         libssl-dev \
+        libutf8proc-dev \
         libxext-dev \
         libxft-dev \
         libxinerama-dev \
@@ -247,7 +248,7 @@ RUN if [ "$SWI_VERSION" != "none" ] ; then \
         && git submodule update --init --depth 1 \
         && mkdir -p build \
         && cd build \
-        && cmake -DCMAKE_INSTALL_PREFIX=/usr/local -G Ninja .. \
+        && cmake -DCMAKE_BUILD_TYPE=PGO -DINSTALL_DOCUMENTATION=OFF -DBUILD_PDF_DOCUMENTATION=OFF -DCMAKE_INSTALL_PREFIX=/usr/local -G Ninja .. \
         && ninja && ninja install && ninja clean \
         && rm -rf /downloads/swipl-devel ; \
     fi
