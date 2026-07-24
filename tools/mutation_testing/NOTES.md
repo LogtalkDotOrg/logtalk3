@@ -345,12 +345,14 @@ marker protocols.
 
 For implementation examples, see the default mutators:
 
-- [mutators/fail_insertion.lgt](mutators/fail_insertion.lgt)
-- [mutators/body_goal_negation.lgt](mutators/body_goal_negation.lgt)
-- [mutators/relational_operator_replacement.lgt](mutators/relational_operator_replacement.lgt)
-- [mutators/arithmetic_operator_replacement.lgt](mutators/arithmetic_operator_replacement.lgt)
-- [mutators/truth_literal_flip.lgt](mutators/truth_literal_flip.lgt)
-- [mutators/head_arguments_mutation.lgt](mutators/head_arguments_mutation.lgt)
-- [mutators/head_arguments_reordering.lgt](mutators/head_arguments_reordering.lgt)
-- [mutators/clauses_reordering.lgt](mutators/clauses_reordering.lgt)
-- [mutators/scope_directive_replacement.lgt](mutators/scope_directive_replacement.lgt)
+- `mutators/arithmetic_operator_replacement.lgt`
+- `mutators/body_goal_negation.lgt`
+- `mutators/clauses_reordering.lgt`
+- `mutators/fail_insertion.lgt`
+- `mutators/head_arguments_mutation.lgt`
+- `mutators/head_arguments_reordering.lgt`
+- `mutators/predicate_directive_suppression.lgt`
+- `mutators/relational_operator_replacement.lgt`
+- `mutators/scope_directive_replacement.lgt`
+- `mutators/truth_literal_flip.lgt`
+- `mutators/uses_directive_resource_deletion.lgt`

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>mutation_testing &mdash; Logtalk 3.101.0</title>
+  <title>mutation_testing &mdash; Logtalk 3.102.0</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
@@ -16,7 +16,7 @@
   
         <script src="../_static/jquery.js?v=5d32c60e"></script>
         <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=ab892a5e"></script>
+        <script src="../_static/documentation_options.js?v=39f6f4b5"></script>
         <script src="../_static/doctools.js?v=9a2dae69"></script>
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
@@ -50,7 +50,7 @@
               <img src="../_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.101.0
+                3.102.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -532,15 +532,17 @@ to either the <code class="docutils literal notranslate"><span class="pre">claus
 <code class="docutils literal notranslate"><span class="pre">directive_mutator_protocol</span></code> marker protocols.</p>
 <p>For implementation examples, see the default mutators:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="mutators/fail_insertion.lgt">mutators/fail_insertion.lgt</a></p></li>
-<li><p><a class="reference external" href="mutators/body_goal_negation.lgt">mutators/body_goal_negation.lgt</a></p></li>
-<li><p><a class="reference external" href="mutators/relational_operator_replacement.lgt">mutators/relational_operator_replacement.lgt</a></p></li>
-<li><p><a class="reference external" href="mutators/arithmetic_operator_replacement.lgt">mutators/arithmetic_operator_replacement.lgt</a></p></li>
-<li><p><a class="reference external" href="mutators/truth_literal_flip.lgt">mutators/truth_literal_flip.lgt</a></p></li>
-<li><p><a class="reference external" href="mutators/head_arguments_mutation.lgt">mutators/head_arguments_mutation.lgt</a></p></li>
-<li><p><a class="reference external" href="mutators/head_arguments_reordering.lgt">mutators/head_arguments_reordering.lgt</a></p></li>
-<li><p><a class="reference external" href="mutators/clauses_reordering.lgt">mutators/clauses_reordering.lgt</a></p></li>
-<li><p><a class="reference external" href="mutators/scope_directive_replacement.lgt">mutators/scope_directive_replacement.lgt</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mutators/arithmetic_operator_replacement.lgt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mutators/body_goal_negation.lgt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mutators/clauses_reordering.lgt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mutators/fail_insertion.lgt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mutators/head_arguments_mutation.lgt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mutators/head_arguments_reordering.lgt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mutators/predicate_directive_suppression.lgt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mutators/relational_operator_replacement.lgt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mutators/scope_directive_replacement.lgt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mutators/truth_literal_flip.lgt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mutators/uses_directive_resource_deletion.lgt</span></code></p></li>
 </ul>
 </section>
 </section>
