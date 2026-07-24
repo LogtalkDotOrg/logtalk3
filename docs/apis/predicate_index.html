@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Predicates &mdash; Logtalk 3.101.0</title>
+  <title>Predicates &mdash; Logtalk 3.102.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -16,7 +16,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=ab892a5e"></script>
+        <script src="_static/documentation_options.js?v=39f6f4b5"></script>
         <script src="_static/doctools.js?v=9a2dae69"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -49,7 +49,7 @@
               <img src="_static/logtalk.gif" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                3.101.0
+                3.102.0
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -1461,6 +1461,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#decompile-predicate-indicators-4"><code class="docutils literal notranslate"><span class="pre">decompile_predicate_indicators/4</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#decompose-3"><code class="docutils literal notranslate"><span class="pre">decompose/3</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#decompose-file-name-3"><code class="docutils literal notranslate"><span class="pre">decompose_file_name/3</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -2704,6 +2707,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#from-unix-seconds-2"><code class="docutils literal notranslate"><span class="pre">from_unix_seconds/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#from-uuid-3"><code class="docutils literal notranslate"><span class="pre">from_uuid/3</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#frozen-2"><code class="docutils literal notranslate"><span class="pre">frozen/2</span></code></a><ul class="simple">
@@ -7605,6 +7611,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#to-optional-1"><code class="docutils literal notranslate"><span class="pre">to_optional/1</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#to-uuid-2"><code class="docutils literal notranslate"><span class="pre">to_uuid/2</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#today-3"><code class="docutils literal notranslate"><span class="pre">today/3</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -7962,6 +7971,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#valid-pattern-miner-1"><code class="docutils literal notranslate"><span class="pre">valid_pattern_miner/1</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#valid-prefix-1"><code class="docutils literal notranslate"><span class="pre">valid_prefix/1</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#valid-profile-1"><code class="docutils literal notranslate"><span class="pre">valid_profile/1</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -7984,6 +7996,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#valid-set-cookie-1"><code class="docutils literal notranslate"><span class="pre">valid_set_cookie/1</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#valid-suffix-1"><code class="docutils literal notranslate"><span class="pre">valid_suffix/1</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#valid-until-date-1"><code class="docutils literal notranslate"><span class="pre">valid_until_date/1</span></code></a><ul class="simple">
@@ -11129,6 +11144,7 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="interval_algebra_protocol_0.html#interval-algebra-protocol-0-compose-3"><span class="std std-ref">interval_algebra_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="interval_relation_set_protocol_0.html#interval-relation-set-protocol-0-compose-3"><span class="std std-ref">interval_relation_set_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="typeid_protocol_0.html#typeid-protocol-0-compose-3"><span class="std std-ref">typeid_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="unweighted_directed_graph_1.html#unweighted-directed-graph-1-compose-3"><span class="std std-ref">unweighted_directed_graph(Dictionary)</span></a></p></li>
 </ul>
 </section>
@@ -12207,6 +12223,14 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="logtalk_0.html#logtalk-0-decompile-predicate-indicators-4"><span class="std std-ref">logtalk</span></a></p></li>
+</ul>
+</section>
+<section id="decompose-3">
+<h2><code class="docutils literal notranslate"><span class="pre">decompose/3</span></code><a class="headerlink" href="#decompose-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="typeid_protocol_0.html#typeid-protocol-0-decompose-3"><span class="std std-ref">typeid_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="decompose-file-name-3">
@@ -15672,6 +15696,14 @@
 <li><p><a class="reference internal" href="ccsds_time_code_protocol_0.html#ccsds-time-code-protocol-0-from-unix-seconds-2"><span class="std std-ref">ccsds_time_code_protocol</span></a></p></li>
 </ul>
 </section>
+<section id="from-uuid-3">
+<h2><code class="docutils literal notranslate"><span class="pre">from_uuid/3</span></code><a class="headerlink" href="#from-uuid-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="typeid_protocol_0.html#typeid-protocol-0-from-uuid-3"><span class="std std-ref">typeid_protocol</span></a></p></li>
+</ul>
+</section>
 <section id="frozen-2">
 <h2><code class="docutils literal notranslate"><span class="pre">frozen/2</span></code><a class="headerlink" href="#frozen-2" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -15763,6 +15795,7 @@
 <li><p><a class="reference internal" href="ksuid_protocol_0.html#ksuid-protocol-0-generate-1"><span class="std std-ref">ksuid_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="nanoid_protocol_0.html#nanoid-protocol-0-generate-1"><span class="std std-ref">nanoid_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="snowflakeid_protocol_0.html#snowflakeid-protocol-0-generate-1"><span class="std std-ref">snowflakeid_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="typeid_protocol_0.html#typeid-protocol-0-generate-1"><span class="std std-ref">typeid_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="ulid_protocol_0.html#ulid-protocol-0-generate-1"><span class="std std-ref">ulid_protocol</span></a></p></li>
 </ul>
 </section>
@@ -15796,6 +15829,7 @@
 <li><p><a class="reference internal" href="sarif_0.html#sarif-0-generate-2"><span class="std std-ref">sarif</span></a></p></li>
 <li><p><a class="reference internal" href="toml_protocol_0.html#toml-protocol-0-generate-2"><span class="std std-ref">toml_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="toon_protocol_0.html#toon-protocol-0-generate-2"><span class="std std-ref">toon_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="typeid_protocol_0.html#typeid-protocol-0-generate-2"><span class="std std-ref">typeid_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="ulid_protocol_0.html#ulid-protocol-0-generate-2"><span class="std std-ref">ulid_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="url_1.html#url-1-generate-2"><span class="std std-ref">url(Representation)</span></a></p></li>
 <li><p><a class="reference internal" href="wkt_wkb_protocol_0.html#wkt-wkb-protocol-0-generate-2"><span class="std std-ref">wkt_wkb_protocol</span></a></p></li>
@@ -15815,6 +15849,7 @@
 <li><p><a class="reference internal" href="http_multipart_0.html#http-multipart-0-generate-3"><span class="std std-ref">http_multipart</span></a></p></li>
 <li><p><a class="reference internal" href="ieee_754_protocol_0.html#ieee-754-protocol-0-generate-3"><span class="std std-ref">ieee_754_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="protobuf_0.html#protobuf-0-generate-3"><span class="std std-ref">protobuf</span></a></p></li>
+<li><p><a class="reference internal" href="typeid_protocol_0.html#typeid-protocol-0-generate-3"><span class="std std-ref">typeid_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="generate-4">
@@ -23764,6 +23799,7 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="listp_0.html#listp-0-prefix-2"><span class="std std-ref">listp</span></a></p></li>
+<li><p><a class="reference internal" href="typeid_protocol_0.html#typeid-protocol-0-prefix-2"><span class="std std-ref">typeid_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="varlistp_0.html#varlistp-0-prefix-2"><span class="std std-ref">varlistp</span></a></p></li>
 </ul>
 </section>
@@ -28591,6 +28627,7 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="listp_0.html#listp-0-suffix-2"><span class="std std-ref">listp</span></a></p></li>
+<li><p><a class="reference internal" href="typeid_protocol_0.html#typeid-protocol-0-suffix-2"><span class="std std-ref">typeid_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="varlistp_0.html#varlistp-0-suffix-2"><span class="std std-ref">varlistp</span></a></p></li>
 </ul>
 </section>
@@ -29142,6 +29179,14 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="expected_1.html#expected-1-to-optional-1"><span class="std std-ref">expected(Expected)</span></a></p></li>
 <li><p><a class="reference internal" href="validation_1.html#validation-1-to-optional-1"><span class="std std-ref">validation(Validation)</span></a></p></li>
+</ul>
+</section>
+<section id="to-uuid-2">
+<h2><code class="docutils literal notranslate"><span class="pre">to_uuid/2</span></code><a class="headerlink" href="#to-uuid-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="typeid_protocol_0.html#typeid-protocol-0-to-uuid-2"><span class="std std-ref">typeid_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="today-3">
@@ -29950,6 +29995,7 @@
 <li><p><a class="reference internal" href="interval_protocol_0.html#interval-protocol-0-valid-1"><span class="std std-ref">interval_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="statisticsp_0.html#statisticsp-0-valid-1"><span class="std std-ref">statisticsp</span></a></p></li>
 <li><p><a class="reference internal" href="termp_0.html#termp-0-valid-1"><span class="std std-ref">termp</span></a></p></li>
+<li><p><a class="reference internal" href="typeid_protocol_0.html#typeid-protocol-0-valid-1"><span class="std std-ref">typeid_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="url_1.html#url-1-valid-1"><span class="std std-ref">url(Representation)</span></a></p></li>
 <li><p><a class="reference internal" href="validation_1.html#validation-1-valid-1"><span class="std std-ref">validation(Validation)</span></a></p></li>
 <li><p><a class="reference internal" href="varlistp_0.html#varlistp-0-valid-1"><span class="std std-ref">varlistp</span></a></p></li>
@@ -30134,6 +30180,14 @@
 <li><p><a class="reference internal" href="pattern_miner_protocol_0.html#pattern-miner-protocol-0-valid-pattern-miner-1"><span class="std std-ref">pattern_miner_protocol</span></a></p></li>
 </ul>
 </section>
+<section id="valid-prefix-1">
+<h2><code class="docutils literal notranslate"><span class="pre">valid_prefix/1</span></code><a class="headerlink" href="#valid-prefix-1" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="typeid_protocol_0.html#typeid-protocol-0-valid-prefix-1"><span class="std std-ref">typeid_protocol</span></a></p></li>
+</ul>
+</section>
 <section id="valid-profile-1">
 <h2><code class="docutils literal notranslate"><span class="pre">valid_profile/1</span></code><a class="headerlink" href="#valid-profile-1" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -30198,6 +30252,14 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="http_cookies_1.html#http-cookies-1-valid-set-cookie-1"><span class="std std-ref">http_cookies(Representation)</span></a></p></li>
+</ul>
+</section>
+<section id="valid-suffix-1">
+<h2><code class="docutils literal notranslate"><span class="pre">valid_suffix/1</span></code><a class="headerlink" href="#valid-suffix-1" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="typeid_protocol_0.html#typeid-protocol-0-valid-suffix-1"><span class="std std-ref">typeid_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="valid-until-date-1">

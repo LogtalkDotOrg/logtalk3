@@ -25,6 +25,12 @@ RELEASE NOTES
 3.102.0 - September ??, 2026
 ============================
 
+Library
+-------
+
+* ADDED: New `typeid` library implementing a type-safe, K-sortable, globally
+unique identifier (TypeID) generator.
+
 Installers and installation scripts
 -----------------------------------
 

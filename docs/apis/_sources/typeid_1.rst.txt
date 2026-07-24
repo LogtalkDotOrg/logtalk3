@@ -1,0 +1,66 @@
+.. index:: single: typeid(Representation)
+.. _typeid/1:
+
+.. rst-class:: right
+
+**object**
+
+``typeid(Representation)``
+==========================
+
+* ``Representation`` - Text representation for the TypeID, its type prefix, and its UUID suffix. Possible values are ``atom``, ``chars``, and ``codes``.
+
+
+Type-safe, K-sortable, globally unique identifier (TypeID) generator. Implements the TypeID specification (a type prefix plus a version 7 UUID encoded using a strict, lowercase variant of Crockford base32).
+
+| **Availability:** 
+|    ``logtalk_load(typeid(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-07-24
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`typeid_protocol <typeid_protocol/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`uuid(Representation) <uuid/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`typeid_protocol/0::compose/3`  :ref:`typeid_protocol/0::decompose/3`  :ref:`typeid_protocol/0::from_uuid/3`  :ref:`typeid_protocol/0::generate/1`  :ref:`typeid_protocol/0::generate/2`  :ref:`typeid_protocol/0::generate/3`  :ref:`typeid_protocol/0::prefix/2`  :ref:`typeid_protocol/0::suffix/2`  :ref:`typeid_protocol/0::to_uuid/2`  :ref:`typeid_protocol/0::valid/1`  :ref:`typeid_protocol/0::valid_prefix/1`  :ref:`typeid_protocol/0::valid_suffix/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`typeid <typeid/0>`, :ref:`ids(Representation,Bytes) <ids/2>`, :ref:`cuid2(Representation,Size,Alphabet) <cuid2/3>`, :ref:`ksuid(Representation,Alphabet) <ksuid/2>`, :ref:`nanoid(Representation,Size,Alphabet) <nanoid/3>`, :ref:`snowflakeid(Representation,EpochMilliseconds,TimeUnitMilliseconds,TimestampBits,NodeBits,SequenceBits,Node) <snowflakeid/7>`, :ref:`ulid(Representation) <ulid/1>`, :ref:`uuid(Representation) <uuid/1>`
+

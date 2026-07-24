@@ -3406,6 +3406,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`interval_algebra_protocol <interval_algebra_protocol/0::compose/3>`
 * :ref:`interval_relation_set_protocol <interval_relation_set_protocol/0::compose/3>`
+* :ref:`typeid_protocol <typeid_protocol/0::compose/3>`
 * :ref:`unweighted_directed_graph(Dictionary) <unweighted_directed_graph/1::compose/3>`
 
 ``compress/2``
@@ -4748,6 +4749,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`logtalk <logtalk/0::decompile_predicate_indicators/4>`
+
+``decompose/3``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`typeid_protocol <typeid_protocol/0::decompose/3>`
 
 ``decompose_file_name/3``
 -------------------------
@@ -9042,6 +9053,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ccsds_time_code_protocol <ccsds_time_code_protocol/0::from_unix_seconds/2>`
 
+``from_uuid/3``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`typeid_protocol <typeid_protocol/0::from_uuid/3>`
+
 ``frozen/2``
 ------------
 
@@ -9156,6 +9177,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ksuid_protocol <ksuid_protocol/0::generate/1>`
 * :ref:`nanoid_protocol <nanoid_protocol/0::generate/1>`
 * :ref:`snowflakeid_protocol <snowflakeid_protocol/0::generate/1>`
+* :ref:`typeid_protocol <typeid_protocol/0::generate/1>`
 * :ref:`ulid_protocol <ulid_protocol/0::generate/1>`
 
 ``generate/2``
@@ -9191,6 +9213,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`sarif <sarif/0::generate/2>`
 * :ref:`toml_protocol <toml_protocol/0::generate/2>`
 * :ref:`toon_protocol <toon_protocol/0::generate/2>`
+* :ref:`typeid_protocol <typeid_protocol/0::generate/2>`
 * :ref:`ulid_protocol <ulid_protocol/0::generate/2>`
 * :ref:`url(Representation) <url/1::generate/2>`
 * :ref:`wkt_wkb_protocol <wkt_wkb_protocol/0::generate/2>`
@@ -9212,6 +9235,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`http_multipart <http_multipart/0::generate/3>`
 * :ref:`ieee_754_protocol <ieee_754_protocol/0::generate/3>`
 * :ref:`protobuf <protobuf/0::generate/3>`
+* :ref:`typeid_protocol <typeid_protocol/0::generate/3>`
 
 ``generate/4``
 --------------
@@ -19089,6 +19113,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`listp <listp/0::prefix/2>`
+* :ref:`typeid_protocol <typeid_protocol/0::prefix/2>`
 * :ref:`varlistp <varlistp/0::prefix/2>`
 
 ``prefix/3``
@@ -25092,6 +25117,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`listp <listp/0::suffix/2>`
+* :ref:`typeid_protocol <typeid_protocol/0::suffix/2>`
 * :ref:`varlistp <varlistp/0::suffix/2>`
 
 ``suffix/3``
@@ -25779,6 +25805,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`expected(Expected) <expected/1::to_optional/1>`
 * :ref:`validation(Validation) <validation/1::to_optional/1>`
+
+``to_uuid/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`typeid_protocol <typeid_protocol/0::to_uuid/2>`
 
 ``today/3``
 -----------
@@ -26781,6 +26817,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`interval_protocol <interval_protocol/0::valid/1>`
 * :ref:`statisticsp <statisticsp/0::valid/1>`
 * :ref:`termp <termp/0::valid/1>`
+* :ref:`typeid_protocol <typeid_protocol/0::valid/1>`
 * :ref:`url(Representation) <url/1::valid/1>`
 * :ref:`validation(Validation) <validation/1::valid/1>`
 * :ref:`varlistp <varlistp/0::valid/1>`
@@ -27008,6 +27045,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`pattern_miner_protocol <pattern_miner_protocol/0::valid_pattern_miner/1>`
 
+``valid_prefix/1``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`typeid_protocol <typeid_protocol/0::valid_prefix/1>`
+
 ``valid_profile/1``
 -------------------
 
@@ -27089,6 +27136,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_cookies(Representation) <http_cookies/1::valid_set_cookie/1>`
+
+``valid_suffix/1``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`typeid_protocol <typeid_protocol/0::valid_suffix/1>`
 
 ``valid_until_date/1``
 ----------------------

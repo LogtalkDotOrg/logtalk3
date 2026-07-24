@@ -52,7 +52,7 @@ Library groups
     ``http_websocket_session``.
 
 - Identifiers: ``cuid2``, ``genint``, ``gensym``, ``ids``, ``ksuid``,
-  ``nanoid``, ``snowflakeid``, ``ulid``, and ``uuid``.
+  ``nanoid``, ``snowflakeid``, ``typeid``, ``ulid``, and ``uuid``.
 - Interchange formats and wire protocols: ``amqp``, ``avro``,
   ``base32``, ``base58``, ``base64``, ``base85``, ``cbor``, ``csv``,
   ``json``, ``json_graph``, ``json_ld``, ``json_lines``, ``json_patch``,

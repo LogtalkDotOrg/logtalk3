@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on July 14, 2026
+%  Last updated on July 24, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -345,6 +345,7 @@ logtalk_library_path(toml, library('toml/')).
 logtalk_library_path(toon, library('toon/')).
 logtalk_library_path(truncated_svd_projection, library('truncated_svd_projection/')).
 logtalk_library_path(tsv, library('tsv/')).
+logtalk_library_path(typeid, library('typeid/')).
 logtalk_library_path(types, library('types/')).
 logtalk_library_path(tzif, library('tzif/')).
 logtalk_library_path(ulid, library('ulid/')).

@@ -21,7 +21,7 @@ ULIDs can be generated as atoms, lists of characters, or lists of
 character codes.
 
 See also the ``cuid2``, ``ids``, ``ksuid``, ``snowflakeid``, ``nanoid``,
-and ``uuid`` libraries.
+``typeid``, and ``uuid`` libraries.
 
 API documentation
 -----------------

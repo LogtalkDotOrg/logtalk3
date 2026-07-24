@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on July 14, 2026
+##   Last updated on July 24, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -316,6 +316,7 @@ sed '1,19d' ../../../library/toml/NOTES.md | pandoc -f gfm -t rst -o libraries/t
 sed '1,19d' ../../../library/toon/NOTES.md | pandoc -f gfm -t rst -o libraries/toon.rst
 sed '1,19d' ../../../library/truncated_svd_projection/NOTES.md | pandoc -f gfm -t rst -o libraries/truncated_svd_projection.rst
 sed '1,19d' ../../../library/tsv/NOTES.md | pandoc -f gfm -t rst -o libraries/tsv.rst
+sed '1,19d' ../../../library/typeid/NOTES.md | pandoc -f gfm -t rst -o libraries/typeid.rst
 sed '1,19d' ../../../library/types/NOTES.md | pandoc -f gfm -t rst -o libraries/types.rst
 sed '1,19d' ../../../library/tzif/NOTES.md | pandoc -f gfm -t rst -o libraries/tzif.rst
 sed '1,19d' ../../../library/ulid/NOTES.md | pandoc -f gfm -t rst -o libraries/ulid.rst

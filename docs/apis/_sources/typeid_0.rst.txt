@@ -1,0 +1,60 @@
+.. index:: single: typeid
+.. _typeid/0:
+
+.. rst-class:: right
+
+**object**
+
+``typeid``
+==========
+
+Type-safe, K-sortable, globally unique identifier (TypeID) generator using an atom representation.
+
+| **Availability:** 
+|    ``logtalk_load(typeid(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-07-24
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`typeid(atom) <typeid/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`typeid_protocol/0::compose/3`  :ref:`typeid_protocol/0::decompose/3`  :ref:`typeid_protocol/0::from_uuid/3`  :ref:`typeid_protocol/0::generate/1`  :ref:`typeid_protocol/0::generate/2`  :ref:`typeid_protocol/0::generate/3`  :ref:`typeid_protocol/0::prefix/2`  :ref:`typeid_protocol/0::suffix/2`  :ref:`typeid_protocol/0::to_uuid/2`  :ref:`typeid_protocol/0::valid/1`  :ref:`typeid_protocol/0::valid_prefix/1`  :ref:`typeid_protocol/0::valid_suffix/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`typeid(Representation) <typeid/1>`, :ref:`ids <ids/0>`, :ref:`cuid2 <cuid2/0>`, :ref:`ksuid <ksuid/0>`, :ref:`nanoid <nanoid/0>`, :ref:`snowflakeid <snowflakeid/0>`, :ref:`ulid <ulid/0>`, :ref:`uuid <uuid/0>`
+

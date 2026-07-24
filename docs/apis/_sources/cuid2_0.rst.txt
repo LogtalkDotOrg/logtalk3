@@ -14,8 +14,8 @@ Cuid2 generator using atom representation, 24 symbols, and a lowercase alphanume
 |    ``logtalk_load(cuid2(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-02-26
+| **Version:** 1:1:0
+| **Date:** 2026-07-24
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -56,5 +56,5 @@ Operators
 
 .. seealso::
 
-   :ref:`cuid2(Representation,Size,Alphabet) <cuid2/3>`, :ref:`ids <ids/0>`, :ref:`ksuid <ksuid/0>`, :ref:`nanoid <nanoid/0>`, :ref:`snowflakeid <snowflakeid/0>`, :ref:`ulid <ulid/0>`, :ref:`uuid <uuid/0>`
+   :ref:`cuid2(Representation,Size,Alphabet) <cuid2/3>`, :ref:`ids <ids/0>`, :ref:`ksuid <ksuid/0>`, :ref:`nanoid <nanoid/0>`, :ref:`snowflakeid <snowflakeid/0>`, :ref:`typeid <typeid/0>`, :ref:`ulid <ulid/0>`, :ref:`uuid <uuid/0>`
 

@@ -265,6 +265,7 @@ directory in the ``NOTES.md`` file.
    toon
    truncated_svd_projection
    tsv
+   typeid
    types
    tzif
    ulid

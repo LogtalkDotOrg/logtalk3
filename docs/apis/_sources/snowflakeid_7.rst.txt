@@ -23,8 +23,8 @@ Snowflake ID generic generator.
 |    ``logtalk_load(snowflakeid(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:1
-| **Date:** 2026-03-13
+| **Version:** 1:1:0
+| **Date:** 2026-07-24
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -85,5 +85,5 @@ Operators
 
 .. seealso::
 
-   :ref:`snowflakeid <snowflakeid/0>`, :ref:`snowflakeid_twitter <snowflakeid_twitter/0>`, :ref:`snowflakeid_sonyflake <snowflakeid_sonyflake/0>`, :ref:`snowflakeid_instagram <snowflakeid_instagram/0>`, :ref:`ksuid(Representation,Alphabet) <ksuid/2>`, :ref:`cuid2(Representation,Size,Alphabet) <cuid2/3>`, :ref:`nanoid(Representation,Size,Alphabet) <nanoid/3>`
+   :ref:`snowflakeid <snowflakeid/0>`, :ref:`snowflakeid_twitter <snowflakeid_twitter/0>`, :ref:`snowflakeid_sonyflake <snowflakeid_sonyflake/0>`, :ref:`snowflakeid_instagram <snowflakeid_instagram/0>`, :ref:`cuid2(Representation,Size,Alphabet) <cuid2/3>`, :ref:`ids(Representation,Bytes) <ids/2>`, :ref:`ksuid(Representation,Alphabet) <ksuid/2>`, :ref:`nanoid(Representation,Size,Alphabet) <nanoid/3>`, :ref:`typeid(Representation) <typeid/1>`, :ref:`ulid(Representation) <ulid/1>`, :ref:`uuid(Representation) <uuid/1>`
 

@@ -1,0 +1,283 @@
+.. index:: single: typeid_protocol
+.. _typeid_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``typeid_protocol``
+===================
+
+Type-safe, K-sortable, globally unique identifier (TypeID) generator protocol.
+
+| **Availability:** 
+|    ``logtalk_load(typeid(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-07-24
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: generate/1
+.. _typeid_protocol/0::generate/1:
+
+``generate/1``
+^^^^^^^^^^^^^^
+
+Generates a random TypeID with an empty type prefix. The UUID suffix is a version 7 UUID.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(TypeID)``
+| **Mode and number of proofs:**
+|    ``generate(--text)`` - ``one``
+
+
+------------
+
+.. index:: generate/2
+.. _typeid_protocol/0::generate/2:
+
+``generate/2``
+^^^^^^^^^^^^^^
+
+Generates a random TypeID with the given type prefix. The UUID suffix is a version 7 UUID. Fails if the prefix is not valid per the TypeID specification.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(Prefix,TypeID)``
+| **Mode and number of proofs:**
+|    ``generate(+text,--text)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: generate/3
+.. _typeid_protocol/0::generate/3:
+
+``generate/3``
+^^^^^^^^^^^^^^
+
+Generates a random TypeID with the given type prefix. The UUID suffix is a version 7 UUID computed using the given local UTC offset (``Z`` or ``+HH:MM``/``-HH:MM``) to convert the backend local time to UTC. Fails if the prefix is not valid per the TypeID specification.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(Prefix,Offset,TypeID)``
+| **Mode and number of proofs:**
+|    ``generate(+text,+atom,--text)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: from_uuid/3
+.. _typeid_protocol/0::from_uuid/3:
+
+``from_uuid/3``
+^^^^^^^^^^^^^^^
+
+Returns the TypeID for the given type prefix and UUID. The UUID is not required to be a version 7 UUID, allowing encoding of other UUID versions at the user discretion. Fails if the prefix is not valid per the TypeID specification or if the UUID cannot be parsed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``from_uuid(Prefix,UUID,TypeID)``
+| **Mode and number of proofs:**
+|    ``from_uuid(+text,+text,--text)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: to_uuid/2
+.. _typeid_protocol/0::to_uuid/2:
+
+``to_uuid/2``
+^^^^^^^^^^^^^
+
+Returns the UUID encoded in the suffix of the given TypeID. Fails if the TypeID is not valid per the TypeID specification.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``to_uuid(TypeID,UUID)``
+| **Mode and number of proofs:**
+|    ``to_uuid(+text,--text)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: prefix/2
+.. _typeid_protocol/0::prefix/2:
+
+``prefix/2``
+^^^^^^^^^^^^
+
+Returns the type prefix of the given TypeID. Fails if the TypeID is not valid per the TypeID specification.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``prefix(TypeID,Prefix)``
+| **Mode and number of proofs:**
+|    ``prefix(+text,--text)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: suffix/2
+.. _typeid_protocol/0::suffix/2:
+
+``suffix/2``
+^^^^^^^^^^^^
+
+Returns the base32 encoded UUID suffix of the given TypeID. Fails if the TypeID is not valid per the TypeID specification.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``suffix(TypeID,Suffix)``
+| **Mode and number of proofs:**
+|    ``suffix(+text,--text)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: decompose/3
+.. _typeid_protocol/0::decompose/3:
+
+``decompose/3``
+^^^^^^^^^^^^^^^
+
+Decomposes a TypeID into its type prefix and its base32 encoded UUID suffix. Fails if the TypeID is not valid per the TypeID specification.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decompose(TypeID,Prefix,Suffix)``
+| **Mode and number of proofs:**
+|    ``decompose(+text,--text,--text)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: compose/3
+.. _typeid_protocol/0::compose/3:
+
+``compose/3``
+^^^^^^^^^^^^^
+
+Composes a TypeID from a type prefix and a base32 encoded UUID suffix. Fails if the prefix or the suffix are not valid per the TypeID specification.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``compose(Prefix,Suffix,TypeID)``
+| **Mode and number of proofs:**
+|    ``compose(+text,+text,--text)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid/1
+.. _typeid_protocol/0::valid/1:
+
+``valid/1``
+^^^^^^^^^^^
+
+Succeeds if the given TypeID is valid per the TypeID specification.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid(TypeID)``
+| **Mode and number of proofs:**
+|    ``valid(+text)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_prefix/1
+.. _typeid_protocol/0::valid_prefix/1:
+
+``valid_prefix/1``
+^^^^^^^^^^^^^^^^^^
+
+Succeeds if the given type prefix is valid per the TypeID specification.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_prefix(Prefix)``
+| **Mode and number of proofs:**
+|    ``valid_prefix(+text)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: valid_suffix/1
+.. _typeid_protocol/0::valid_suffix/1:
+
+``valid_suffix/1``
+^^^^^^^^^^^^^^^^^^
+
+Succeeds if the given base32 encoded UUID suffix is valid per the TypeID specification.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_suffix(Suffix)``
+| **Mode and number of proofs:**
+|    ``valid_suffix(+text)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

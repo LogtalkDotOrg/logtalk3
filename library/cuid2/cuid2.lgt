@@ -23,16 +23,16 @@
 	implements(cuid2_protocol)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-06-01,
+		date is 2026-07-24,
 		comment is 'Cuid2 generator.',
 		parameters is [
 			'Representation' - 'Text representation for the Cuid2 identifier. Possible values are ``atom``, ``chars``, and ``codes``.',
 			'Size' - 'Number of symbols in the Cuid2 identifier.',
 			'Alphabet' - 'Alphabet used for generating Cuid2 identifiers represented as an atom, list of characters, or list of character codes.'
 		],
-		see_also is [cuid2, ids(_,_), ksuid(_,_), nanoid(_,_,_), snowflakeid(_,_,_,_,_,_,_), ulid(_), uuid(_)]
+		see_also is [cuid2, ids(_,_), ksuid(_,_), nanoid(_,_,_), snowflakeid(_,_,_,_,_,_,_), typeid(_), ulid(_), uuid(_)]
 	]).
 
 	:- uses(crypto, [
@@ -230,11 +230,11 @@
 	extends(cuid2(atom, 24, 'abcdefghijklmnopqrstuvwxyz0123456789'))).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-26,
+		date is 2026-07-24,
 		comment is 'Cuid2 generator using atom representation, 24 symbols, and a lowercase alphanumeric alphabet.',
-		see_also is [cuid2(_, _, _), ids, ksuid, nanoid, snowflakeid, ulid, uuid]
+		see_also is [cuid2(_, _, _), ids, ksuid, nanoid, snowflakeid, typeid, ulid, uuid]
 	]).
 
 :- end_object.

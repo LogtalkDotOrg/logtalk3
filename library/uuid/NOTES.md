@@ -53,7 +53,8 @@ applications due to improved entropy and sortability characteristics.
 UUIDs can be generated as atoms, lists of characters, or lists of character
 codes.
 
-See also the `cuid2`, `ksuid`, `ids`, `nanoid`, `snowflakeid`, and `ulid` libraries.
+See also the `cuid2`, `ksuid`, `ids`, `nanoid`, `snowflakeid`, `typeid`, and
+`ulid` libraries.
 
 
 API documentation

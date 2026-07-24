@@ -2872,6 +2872,18 @@ To load an entity, always load the library that includes it using the goal ``log
    tsv(Header,Comments) <tsv_2>
    tsv_protocol <tsv_protocol_0>
 
+``library/typeid/``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   typeid <typeid_0>
+   typeid(Representation) <typeid_1>
+   typeid_protocol <typeid_protocol_0>
+
 ``library/types/``
 ------------------
 

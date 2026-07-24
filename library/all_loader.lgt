@@ -220,6 +220,7 @@
 		url(loader),
 		ulid(loader),
 		uuid(loader),
+		typeid(loader),
 		html(loader),
 		http_core(loader),
 		http_client(loader),

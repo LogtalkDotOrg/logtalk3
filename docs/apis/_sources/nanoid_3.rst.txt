@@ -19,8 +19,8 @@ NanoID generator.
 |    ``logtalk_load(nanoid(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:1
-| **Date:** 2026-06-01
+| **Version:** 1:1:0
+| **Date:** 2026-07-24
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -64,5 +64,5 @@ Operators
 
 .. seealso::
 
-   :ref:`nanoid <nanoid/0>`, :ref:`ids(Representation,Bytes) <ids/2>`, :ref:`ulid(Representation) <ulid/1>`, :ref:`uuid(Representation) <uuid/1>`
+   :ref:`nanoid <nanoid/0>`, :ref:`cuid2(Representation,Size,Alphabet) <cuid2/3>`, :ref:`ids(Representation,Bytes) <ids/2>`, :ref:`ksuid(Representation,Alphabet) <ksuid/2>`, :ref:`typeid(Representation) <typeid/1>`, :ref:`ulid(Representation) <ulid/1>`, :ref:`uuid(Representation) <uuid/1>`
 
