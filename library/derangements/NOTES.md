@@ -35,8 +35,9 @@ of predicates are provided:
 * **Random selection** - Predicates for randomly selecting and sampling derangements and distinct derangements.
 
 Dedicated `permutations`, `arrangements`, `cartesian_products`,
-`combinations`, `multisets`, `partitions`, and `subsequences`
-libraries are also available for focused APIs on related operations.
+`combinations`, `multisets`, `partitions`, `subsequences`, and
+`integer_partitions` libraries are also available for focused
+APIs on related operations.
 
 
 API documentation

@@ -1504,6 +1504,17 @@ To load an entity, always load the library that includes it using the goal ``log
    ieee_754_fields_protocol <ieee_754_fields_protocol_0>
    ieee_754_protocol <ieee_754_protocol_0>
 
+``library/integer_partitions/``
+-------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   integer_partitions <integer_partitions_0>
+   integer_partitions_protocol <integer_partitions_protocol_0>
+
 ``library/intervals/``
 ----------------------
 

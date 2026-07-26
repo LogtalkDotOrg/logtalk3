@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on July 25, 2026
+##   Last updated on July 27, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -196,6 +196,7 @@ Foreach-Object {
 (Get-Content ../../../library/ica_projection/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ica_projection.rst
 (Get-Content ../../../library/ids/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ids.rst
 (Get-Content ../../../library/ieee_754/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ieee_754.rst
+(Get-Content ../../../library/integer_partitions/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/integer_partitions.rst
 (Get-Content ../../../library/intervals/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/intervals.rst
 (Get-Content ../../../library/iqr_anomaly_detector/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/iqr_anomaly_detector.rst
 (Get-Content ../../../library/iso_639/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/iso_639.rst

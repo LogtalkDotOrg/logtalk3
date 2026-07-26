@@ -34,8 +34,8 @@ provided:
 * **Random selection** - Predicates for randomly selecting and sampling tuples.
 
 Dedicated `arrangements`, `permutations`, `combinations`, `multisets`,
-`derangements`, `partitions`, and `subsequences` libraries are also
-available for focused APIs on related operations.
+`derangements`, `partitions`, `subsequences`, and `integer_partitions`
+libraries are also available for focused APIs on related operations.
 
 
 API documentation

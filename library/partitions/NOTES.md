@@ -46,8 +46,9 @@ N-element list) and Stirling numbers of the second kind (for partitions with an
 exact number of blocks).
 
 Dedicated `arrangements`, `cartesian_products`, `combinations`,
-`derangements`, `multisets`, `permutations`, and `subsequences`
-libraries are also available for focused APIs on related operations.
+`derangements`, `multisets`, `permutations`, `subsequences`, and
+`integer_partitions` libraries are also available for focused APIs
+on related operations.
 
 
 API documentation

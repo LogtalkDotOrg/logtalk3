@@ -145,6 +145,7 @@ directory in the ``NOTES.md`` file.
    ica_projection
    ids
    ieee_754
+   integer_partitions
    intervals
    iqr_anomaly_detector
    iso_639

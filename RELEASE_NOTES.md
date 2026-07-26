@@ -40,6 +40,9 @@ properties and tautology/falsehood candidates used by the linter.
 Library
 -------
 
+* ADDED: New `integer_partitions` library providing predicates for generating
+and querying integer partitions.
+
 * ADDED: New `sqids` library for encoding lists of non-negative integers into
 short, obfuscated (but not encrypted), URL-safe identifiers.
 

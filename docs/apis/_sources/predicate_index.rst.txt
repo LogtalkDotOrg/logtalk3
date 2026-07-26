@@ -3953,6 +3953,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::count_distinct_partitions/2>`
 * :ref:`partitions_protocol <partitions_protocol/0::count_distinct_partitions/2>`
 
 ``count_distinct_partitions/3``
@@ -3963,6 +3964,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::count_distinct_partitions/3>`
 * :ref:`partitions_protocol <partitions_protocol/0::count_distinct_partitions/3>`
 
 ``count_distinct_permutations/2``
@@ -4013,6 +4015,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::count_partitions/2>`
 * :ref:`partitions_protocol <partitions_protocol/0::count_partitions/2>`
 
 ``count_partitions/3``
@@ -4023,6 +4026,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::count_partitions/3>`
 * :ref:`partitions_protocol <partitions_protocol/0::count_partitions/3>`
 
 ``count_permutations/2``
@@ -6365,6 +6369,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::distinct_partition/2>`
 * :ref:`partitions_protocol <partitions_protocol/0::distinct_partition/2>`
 
 ``distinct_partition/3``
@@ -6375,6 +6380,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::distinct_partition/3>`
 * :ref:`partitions_protocol <partitions_protocol/0::distinct_partition/3>`
 
 ``distinct_partition/4``
@@ -6385,6 +6391,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::distinct_partition/4>`
 * :ref:`partitions_protocol <partitions_protocol/0::distinct_partition/4>`
 
 ``distinct_partition_index/3``
@@ -6395,6 +6402,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::distinct_partition_index/3>`
 * :ref:`partitions_protocol <partitions_protocol/0::distinct_partition_index/3>`
 
 ``distinct_partition_index/4``
@@ -6405,6 +6413,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::distinct_partition_index/4>`
 * :ref:`partitions_protocol <partitions_protocol/0::distinct_partition_index/4>`
 
 ``distinct_partition_index/5``
@@ -6415,6 +6424,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::distinct_partition_index/5>`
 * :ref:`partitions_protocol <partitions_protocol/0::distinct_partition_index/5>`
 
 ``distinct_partitions/2``
@@ -6425,6 +6435,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::distinct_partitions/2>`
 * :ref:`partitions_protocol <partitions_protocol/0::distinct_partitions/2>`
 
 ``distinct_partitions/3``
@@ -6435,6 +6446,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::distinct_partitions/3>`
 * :ref:`partitions_protocol <partitions_protocol/0::distinct_partitions/3>`
 
 ``distinct_partitions/4``
@@ -6445,6 +6457,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::distinct_partitions/4>`
 * :ref:`partitions_protocol <partitions_protocol/0::distinct_partitions/4>`
 
 ``distinct_permutation/2``
@@ -15799,6 +15812,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`derangements_protocol <derangements_protocol/0::next_derangement/3>`
 
+``next_distinct_partition/3``
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::next_distinct_partition/3>`
+
+``next_distinct_partition/4``
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::next_distinct_partition/4>`
+
 ``next_multiset/3``
 -------------------
 
@@ -15817,6 +15850,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::next_partition/3>`
 * :ref:`partitions_protocol <partitions_protocol/0::next_partition/3>`
 
 ``next_partition/4``
@@ -15827,6 +15861,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::next_partition/4>`
 * :ref:`partitions_protocol <partitions_protocol/0::next_partition/4>`
 
 ``next_permutation/2``
@@ -16393,6 +16428,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::nth_distinct_partition/3>`
 * :ref:`partitions_protocol <partitions_protocol/0::nth_distinct_partition/3>`
 
 ``nth_distinct_partition/4``
@@ -16403,6 +16439,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::nth_distinct_partition/4>`
 * :ref:`partitions_protocol <partitions_protocol/0::nth_distinct_partition/4>`
 
 ``nth_distinct_partition/5``
@@ -16413,6 +16450,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::nth_distinct_partition/5>`
 * :ref:`partitions_protocol <partitions_protocol/0::nth_distinct_partition/5>`
 
 ``nth_distinct_permutation/3``
@@ -16453,6 +16491,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::nth_partition/3>`
 * :ref:`partitions_protocol <partitions_protocol/0::nth_partition/3>`
 
 ``nth_partition/4``
@@ -16463,6 +16502,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::nth_partition/4>`
 * :ref:`partitions_protocol <partitions_protocol/0::nth_partition/4>`
 
 ``nth_partition/5``
@@ -16473,6 +16513,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::nth_partition/5>`
 * :ref:`partitions_protocol <partitions_protocol/0::nth_partition/5>`
 
 ``nth_permutation/3``
@@ -18072,6 +18113,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::partition/2>`
 * :ref:`partitions_protocol <partitions_protocol/0::partition/2>`
 
 ``partition/3``
@@ -18083,6 +18125,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`either <either/0::partition/3>`
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::partition/3>`
 * :ref:`partitions_protocol <partitions_protocol/0::partition/3>`
 * :ref:`validated <validated/0::partition/3>`
 
@@ -18094,6 +18137,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::partition/4>`
 * :ref:`metap <metap/0::partition/4>`
 * :ref:`partitions_protocol <partitions_protocol/0::partition/4>`
 
@@ -18125,6 +18169,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::partition_index/3>`
 * :ref:`partitions_protocol <partitions_protocol/0::partition_index/3>`
 
 ``partition_index/4``
@@ -18135,6 +18180,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::partition_index/4>`
 * :ref:`partitions_protocol <partitions_protocol/0::partition_index/4>`
 
 ``partition_index/5``
@@ -18145,6 +18191,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::partition_index/5>`
 * :ref:`partitions_protocol <partitions_protocol/0::partition_index/5>`
 
 ``partition_number/2``
@@ -18165,6 +18212,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::partitions/2>`
 * :ref:`partitions_protocol <partitions_protocol/0::partitions/2>`
 
 ``partitions/3``
@@ -18175,6 +18223,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::partitions/3>`
 * :ref:`partitions_protocol <partitions_protocol/0::partitions/3>`
 
 ``partitions/4``
@@ -18185,6 +18234,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::partitions/4>`
 * :ref:`partitions_protocol <partitions_protocol/0::partitions/4>`
 
 ``parts/2``
@@ -19310,6 +19360,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`derangements_protocol <derangements_protocol/0::previous_derangement/3>`
 
+``previous_distinct_partition/3``
+---------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::previous_distinct_partition/3>`
+
+``previous_distinct_partition/4``
+---------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::previous_distinct_partition/4>`
+
 ``previous_multiset/3``
 -----------------------
 
@@ -19328,6 +19398,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::previous_partition/3>`
 * :ref:`partitions_protocol <partitions_protocol/0::previous_partition/3>`
 
 ``previous_partition/4``
@@ -19338,6 +19409,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::previous_partition/4>`
 * :ref:`partitions_protocol <partitions_protocol/0::previous_partition/4>`
 
 ``previous_permutation/2``
@@ -20310,6 +20382,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::random_distinct_partition/2>`
 * :ref:`partitions_protocol <partitions_protocol/0::random_distinct_partition/2>`
 
 ``random_distinct_partition/3``
@@ -20320,6 +20393,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::random_distinct_partition/3>`
 * :ref:`partitions_protocol <partitions_protocol/0::random_distinct_partition/3>`
 
 ``random_distinct_permutation/2``
@@ -20360,6 +20434,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::random_partition/2>`
 * :ref:`partitions_protocol <partitions_protocol/0::random_partition/2>`
 
 ``random_partition/3``
@@ -20370,6 +20445,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::random_partition/3>`
 * :ref:`partitions_protocol <partitions_protocol/0::random_partition/3>`
 
 ``random_permutation/2``
@@ -22691,6 +22767,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::sample_distinct_partitions/3>`
 * :ref:`partitions_protocol <partitions_protocol/0::sample_distinct_partitions/3>`
 
 ``sample_distinct_partitions/4``
@@ -22701,6 +22778,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::sample_distinct_partitions/4>`
 * :ref:`partitions_protocol <partitions_protocol/0::sample_distinct_partitions/4>`
 
 ``sample_distinct_permutations/3``
@@ -22731,6 +22809,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::sample_partitions/3>`
 * :ref:`partitions_protocol <partitions_protocol/0::sample_partitions/3>`
 
 ``sample_partitions/4``
@@ -22741,6 +22820,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`integer_partitions_protocol <integer_partitions_protocol/0::sample_partitions/4>`
 * :ref:`partitions_protocol <partitions_protocol/0::sample_partitions/4>`
 
 ``sample_permutations/3``

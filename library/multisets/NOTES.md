@@ -34,8 +34,9 @@ repetition allowed. The following categories of predicates are provided:
 * **Lexicographic stepping** - Predicates for stepping to the next or previous multiset in lexicographic order.
 
 Dedicated `arrangements`, `cartesian_products`, `combinations`,
-`permutations`, `derangements`, `partitions`, and `subsequences`
-libraries are also available for focused APIs on related operations.
+`permutations`, `derangements`, `partitions`, `subsequences`, and
+`integer_partitions` libraries are also available for focused APIs
+on related operations.
 
 
 API documentation

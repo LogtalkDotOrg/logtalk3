@@ -36,6 +36,7 @@
 		derangements(loader),
 		arrangements(loader),
 		cartesian_products(loader),
+		integer_partitions(loader),
 		os(loader),
 		process(loader),
 		sockets(loader),

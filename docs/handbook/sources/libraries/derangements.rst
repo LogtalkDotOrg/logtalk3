@@ -24,8 +24,9 @@ position. The following categories of predicates are provided:
   derangements and distinct derangements.
 
 Dedicated ``permutations``, ``arrangements``, ``cartesian_products``,
-``combinations``, ``multisets``, ``partitions``, and ``subsequences``
-libraries are also available for focused APIs on related operations.
+``combinations``, ``multisets``, ``partitions``, ``subsequences``, and
+``integer_partitions`` libraries are also available for focused APIs on
+related operations.
 
 API documentation
 -----------------

@@ -30,8 +30,9 @@ of predicates are provided:
   operations.
 
 Dedicated ``arrangements``, ``cartesian_products``, ``derangements``,
-``combinations``, ``multisets``, and ``permutations`` libraries are also
-available for focused APIs on related operations.
+``combinations``, ``multisets``, ``permutations``, and
+``integer_partitions`` libraries are also available for focused APIs on
+related operations.
 
 API documentation
 -----------------

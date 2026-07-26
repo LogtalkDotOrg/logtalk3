@@ -24,8 +24,9 @@ provided:
   tuples.
 
 Dedicated ``arrangements``, ``permutations``, ``combinations``,
-``multisets``, ``derangements``, ``partitions``, and ``subsequences``
-libraries are also available for focused APIs on related operations.
+``multisets``, ``derangements``, ``partitions``, ``subsequences``, and
+``integer_partitions`` libraries are also available for focused APIs on
+related operations.
 
 API documentation
 -----------------

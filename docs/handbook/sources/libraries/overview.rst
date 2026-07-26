@@ -17,8 +17,8 @@ Library groups
   ``intervals``, ``queues``, ``sets``, ``subsequences``, ``union_find``,
   and ``zippers``.
 - Combinatorics: ``arrangements``, ``cartesian_products``,
-  ``combinations``, ``derangements``, ``multisets``, ``partitions``, and
-  ``permutations``.
+  ``combinations``, ``derangements``, ``integer_partitions``,
+  ``multisets``, ``partitions``, and ``permutations``.
 - Meta-programming: ``meta`` and ``meta_compiler``
 - Monoid implementations: ``expecteds``, ``optionals``, and
   ``validations``.
