@@ -11,9 +11,9 @@
 	imports(jwt_helpers)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-07-06,
+		date is 2026-07-26,
 		comment is 'JSON Web Key normalization and key material helpers.'
 	]).
 
@@ -44,6 +44,10 @@
 	:- info(compatible_key/2, [
 		comment is 'Succeeds when a key is compatible with the requested JWT algorithm.',
 		argnames is ['Key', 'Algorithm']
+	]).
+
+	:- uses(list, [
+		length/2
 	]).
 
 	public_key_pem(Key, PEM) :-

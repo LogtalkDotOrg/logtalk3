@@ -46,6 +46,9 @@ short, obfuscated (but not encrypted), URL-safe identifiers.
 * ADDED: New `typeid` library implementing a type-safe, K-sortable, globally
 unique identifier (TypeID) generator.
 
+* FIXED: Portability of the `jwt` library when using backends that don't
+provide `length/2` as a built-in predicate.
+
 Installers and installation scripts
 -----------------------------------
 
