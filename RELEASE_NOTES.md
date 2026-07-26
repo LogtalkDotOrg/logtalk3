@@ -28,6 +28,9 @@ RELEASE NOTES
 Prolog adapter and integration files
 ------------------------------------
 
+* UPDATED: The SWI-Prolog adapter file table of proprietary predicate
+properties used by the linter.
+
 * UPDATED: The Trealla Prolog adapter file for the tabling support added in
 its 3.0.0 version. Thanks to Andrew Davison for the patch file.
 

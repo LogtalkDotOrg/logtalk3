@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for SWI Prolog 6.6.0 and later versions
-%  Last updated on June 3, 2026
+%  Last updated on July 26, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -293,13 +293,34 @@
 % table of proprietary predicate properties; used by the
 % compiler when checking if a predicate property is valid
 
+'$lgt_prolog_predicate_property'(autoload(_)).
+'$lgt_prolog_predicate_property'(defined).
+'$lgt_prolog_predicate_property'(det).
 '$lgt_prolog_predicate_property'(discontiguous).
+'$lgt_prolog_predicate_property'(exported).
+'$lgt_prolog_predicate_property'(file(_)).
+'$lgt_prolog_predicate_property'(implementation_module(_)).
+'$lgt_prolog_predicate_property'(imported_from(_)).
 '$lgt_prolog_predicate_property'(indexed(_)).
+'$lgt_prolog_predicate_property'(interpreted).
+'$lgt_prolog_predicate_property'(iso).
+'$lgt_prolog_predicate_property'(last_modified_generation(_)).
+'$lgt_prolog_predicate_property'(line_count(_)).
+'$lgt_prolog_predicate_property'(mode(_)).
 '$lgt_prolog_predicate_property'(monotonic).
+'$lgt_prolog_predicate_property'(nodebug).
+'$lgt_prolog_predicate_property'(notrace).
 '$lgt_prolog_predicate_property'(opaque).
+'$lgt_prolog_predicate_property'(primary_index(_)).
+'$lgt_prolog_predicate_property'(quasi_quotation_syntax).
+'$lgt_prolog_predicate_property'(size(_)).
+'$lgt_prolog_predicate_property'(ssu).
 '$lgt_prolog_predicate_property'(tabled).
 '$lgt_prolog_predicate_property'(tabled(_)).
 '$lgt_prolog_predicate_property'(thread_local).
+'$lgt_prolog_predicate_property'(transparent).
+'$lgt_prolog_predicate_property'(undefined).
+'$lgt_prolog_predicate_property'(visible).
 '$lgt_prolog_predicate_property'(volatile).
 
 
