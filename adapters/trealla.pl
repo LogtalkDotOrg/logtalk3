@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Adapter file for Trealla Prolog 2.84.29 and later versions
-%  Last updated on June 3, 2026
+%  Last updated on July 26, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -20,6 +20,14 @@
 %  limitations under the License.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+:- if((
+	current_prolog_flag(version_data, trealla(Major, Minor, Patch, _)),
+	(Major,Minor,Patch) @>= (3,0,0)
+)).
+	:- use_module(library(tabling)).
+:- endif.
 
 
 
@@ -139,8 +147,15 @@
 
 % '$lgt_prolog_meta_directive'(@callable, -callable)
 
-'$lgt_prolog_meta_directive'(_, _) :-
-	fail.
+:- if((
+	current_prolog_flag(version_data, trealla(Major, Minor, Patch, _)),
+	(Major,Minor,Patch) @>= (3,0,0)
+)).
+	'$lgt_prolog_meta_directive'(table(_), table(/)).
+:- else.
+	'$lgt_prolog_meta_directive'(_, _) :-
+		fail.
+:- endif.
 
 
 % '$lgt_prolog_to_logtalk_meta_argument_specifier_hook'(@nonvar, -atom)
@@ -265,7 +280,12 @@
 		Sockets = supported
 	;	Sockets = unsupported
 	).
-'$lgt_prolog_feature'(tabling, unsupported).
+'$lgt_prolog_feature'(tabling, Tabling) :-
+	current_prolog_flag(version_data, trealla(Major, Minor, Patch, _)),
+	(	(Major,Minor,Patch) @>= (3,0,0) ->
+		Tabling = supported
+	;	Tabling = unsupported
+	).
 '$lgt_prolog_feature'(engines, Engines) :-
 	(	predicate_property(message_queue_create(_, _), built_in) ->
 		Engines = supported
@@ -593,6 +613,15 @@
 	% allow first-argument indexing
 	catch('$lgt_trealla_directive_expansion'(Directive, Expanded), _, fail).
 
+:- if((
+	current_prolog_flag(version_data, trealla(Major, Minor, Patch, _)),
+	(Major,Minor,Patch) @>= (3,0,0)
+)).
+	'$lgt_trealla_directive_expansion'(table(Predicates), {:- table(TPredicates)}) :-
+		logtalk_load_context(entity_type, _),
+		'$lgt_trealla_table_directive_expansion'(Predicates, TPredicates).
+:- endif.
+
 '$lgt_trealla_directive_expansion'(use_module(File), (:- use_module(Module, Imports))) :-
 	File \= [_| _],
 	% not the Logtalk use_module/1 directive
@@ -609,6 +638,33 @@
 	% object or category using a Prolog module
 	'$lgt_trealla_list_of_exports'(File, Module, Imports),
 	use_module(File).
+
+
+:- if((
+	current_prolog_flag(version_data, trealla(Major, Minor, Patch, _)),
+	(Major,Minor,Patch) @>= (3,0,0)
+)).
+	'$lgt_trealla_table_directive_expansion'([Predicate| Predicates], [TPredicate| TPredicates]) :-
+		!,
+		'$lgt_trealla_table_directive_predicate'(Predicate, TPredicate),
+		'$lgt_trealla_table_directive_expansion'(Predicates, TPredicates).
+	'$lgt_trealla_table_directive_expansion'((Predicate, Predicates), (TPredicate, TPredicates)) :-
+		!,
+		'$lgt_trealla_table_directive_predicate'(Predicate, TPredicate),
+		'$lgt_trealla_table_directive_expansion'(Predicates, TPredicates).
+	'$lgt_trealla_table_directive_expansion'(Predicate, TPredicate) :-
+		'$lgt_trealla_table_directive_predicate'(Predicate, TPredicate).
+
+	'$lgt_trealla_table_directive_predicate'(F/A, TF/TA) :-
+		!,
+		'$lgt_compile_predicate_indicators'(F/A, _, TF/TA).
+	'$lgt_trealla_table_directive_predicate'(F//A, TF/TA) :-
+		!,
+		A2 is A + 2,
+		'$lgt_compile_predicate_indicators'(F/A2, _, TF/TA).
+	'$lgt_trealla_table_directive_predicate'(Head, THead) :-
+		'$lgt_compile_predicate_heads'(Head, _, THead, _).
+:- endif.
 
 '$lgt_trealla_list_of_exports'(File, Module, Exports) :-
 	logtalk_load_context(directory, Directory),

@@ -25,6 +25,12 @@ RELEASE NOTES
 3.102.0 - September ??, 2026
 ============================
 
+Prolog adapter and integration files
+------------------------------------
+
+* UPDATED: The Trealla Prolog adapter file for the tabling support added in
+its 3.0.0 version. Thanks to Andrew Davison for the patch file.
+
 Library
 -------
 
