@@ -182,10 +182,16 @@
 % side-effects when called with ground arguments
 
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(?=(_, _)).
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(atom_lower(_,_)).
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(atom_number(_, _)).
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(atom_upper(_,_)).
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(cyclic_term(_)).
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(is_list(_)).
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(is_partial_list(_)).
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(is_list_or_partial_list(_)).
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(name(_, _)).
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(plus(_, _, _)).
+'$lgt_candidate_tautology_or_falsehood_goal_hook'(rational(_)).
 '$lgt_candidate_tautology_or_falsehood_goal_hook'(succ(_, _)).
 
 
@@ -207,6 +213,7 @@
 
 '$lgt_prolog_predicate_property'(control_construct).
 '$lgt_prolog_predicate_property'(native_code).
+'$lgt_prolog_predicate_property'(template(_)).
 
 
 % '$lgt_prolog_deprecated_built_in_predicate_hook'(?callable, ?callable)

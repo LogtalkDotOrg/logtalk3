@@ -34,6 +34,9 @@ properties used by the linter.
 * UPDATED: The Trealla Prolog adapter file for the tabling support added in
 its 3.0.0 version. Thanks to Andrew Davison for the patch file.
 
+* UPDATED: The Trealla Prolog adapter file tables of proprietary predicate
+properties and tautology/falsehood candidates used by the linter.
+
 Library
 -------
 
