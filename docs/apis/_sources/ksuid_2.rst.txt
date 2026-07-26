@@ -19,7 +19,7 @@ KSUID generator.
 
 | **Author:** Paulo Moura
 | **Version:** 1:1:0
-| **Date:** 2026-07-24
+| **Date:** 2026-07-25
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -65,5 +65,5 @@ Operators
 
 .. seealso::
 
-   :ref:`ksuid <ksuid/0>`, :ref:`cuid2(Representation,Size,Alphabet) <cuid2/3>`, :ref:`nanoid(Representation,Size,Alphabet) <nanoid/3>`, :ref:`ids(Representation,Bytes) <ids/2>`, :ref:`ulid(Representation) <ulid/1>`, :ref:`snowflakeid(Representation,EpochMilliseconds,TimeUnitMilliseconds,TimestampBits,NodeBits,SequenceBits,Node) <snowflakeid/7>`, :ref:`typeid(Representation) <typeid/1>`, :ref:`uuid(Representation) <uuid/1>`
+   :ref:`ksuid <ksuid/0>`, :ref:`cuid2(Representation,Size,Alphabet) <cuid2/3>`, :ref:`ids(Representation,Bytes) <ids/2>`, :ref:`nanoid(Representation,Size,Alphabet) <nanoid/3>`, :ref:`snowflakeid(Representation,EpochMilliseconds,TimeUnitMilliseconds,TimestampBits,NodeBits,SequenceBits,Node) <snowflakeid/7>`, :ref:`sqids(Representation) <sqids/1>`, :ref:`typeid(Representation) <typeid/1>`, :ref:`ulid(Representation) <ulid/1>`, :ref:`uuid(Representation) <uuid/1>`
 

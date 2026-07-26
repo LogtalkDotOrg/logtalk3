@@ -1,0 +1,60 @@
+.. index:: single: sqids
+.. _sqids/0:
+
+.. rst-class:: right
+
+**object**
+
+``sqids``
+=========
+
+Encoding and decoding of short, obfuscated, URL-safe identifiers from lists of non-negative integers, per the Sqids specification, using an atom representation.
+
+| **Availability:** 
+|    ``logtalk_load(sqids(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-07-25
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`sqids(atom) <sqids/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`sqids/1::decode/2`  :ref:`sqids/1::decode/3`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`sqids/1::encode/2`  :ref:`sqids/1::encode/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`sqids(Representation) <sqids/1>`, :ref:`ids <ids/0>`, :ref:`cuid2 <cuid2/0>`, :ref:`ksuid <ksuid/0>`, :ref:`nanoid <nanoid/0>`, :ref:`snowflakeid <snowflakeid/0>`, :ref:`typeid <typeid/0>`, :ref:`ulid <ulid/0>`, :ref:`uuid <uuid/0>`
+

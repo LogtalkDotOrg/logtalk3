@@ -28,6 +28,9 @@ RELEASE NOTES
 Library
 -------
 
+* ADDED: New `sqids` library for encoding lists of non-negative integers into
+short, obfuscated (but not encrypted), URL-safe identifiers.
+
 * ADDED: New `typeid` library implementing a type-safe, K-sortable, globally
 unique identifier (TypeID) generator.
 

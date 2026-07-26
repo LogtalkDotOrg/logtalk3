@@ -18,7 +18,7 @@ Instagram-style Snowflake profile.
 
 | **Author:** Paulo Moura
 | **Version:** 1:1:0
-| **Date:** 2026-07-24
+| **Date:** 2026-07-25
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -59,5 +59,5 @@ Operators
 
 .. seealso::
 
-   :ref:`snowflakeid(Representation,EpochMilliseconds,TimeUnitMilliseconds,TimestampBits,NodeBits,SequenceBits,Node) <snowflakeid/7>`, :ref:`snowflakeid_twitter <snowflakeid_twitter/0>`, :ref:`snowflakeid_sonyflake <snowflakeid_sonyflake/0>`, :ref:`snowflakeid_instagram <snowflakeid_instagram/0>`, :ref:`cuid2 <cuid2/0>`, :ref:`ids <ids/0>`, :ref:`ksuid <ksuid/0>`, :ref:`nanoid <nanoid/0>`, :ref:`typeid <typeid/0>`, :ref:`ulid <ulid/0>`, :ref:`uuid <uuid/0>`
+   :ref:`snowflakeid(Representation,EpochMilliseconds,TimeUnitMilliseconds,TimestampBits,NodeBits,SequenceBits,Node) <snowflakeid/7>`, :ref:`snowflakeid_twitter <snowflakeid_twitter/0>`, :ref:`snowflakeid_sonyflake <snowflakeid_sonyflake/0>`, :ref:`snowflakeid_instagram <snowflakeid_instagram/0>`, :ref:`cuid2 <cuid2/0>`, :ref:`ids <ids/0>`, :ref:`ksuid <ksuid/0>`, :ref:`nanoid <nanoid/0>`, :ref:`sqids <sqids/0>`, :ref:`typeid <typeid/0>`, :ref:`ulid <ulid/0>`, :ref:`uuid <uuid/0>`
 

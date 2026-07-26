@@ -26,8 +26,8 @@ object and predefined profile objects.
 
 **This library requires a backend supporting unbounded integer arithmetic.**
 
-See also the `cuid2`, `ids`, `ksuid`, `nanoid`, `typeid`, `uuid`, and `ulid`
-libraries.
+See also the `cuid2`, `ids`, `ksuid`, `nanoid`, `sqids`, `typeid`, `uuid`, and
+`ulid` libraries.
 
 
 API documentation

@@ -246,10 +246,11 @@ directory in the ``NOTES.md`` file.
    sequential_pattern_mining_protocols
    sets
    sgd_classifier
+   simulated_annealing
    snowflakeid
    sockets
    spade_pattern_miner
-   simulated_annealing
+   sqids
    statistics
    stemming
    stomp

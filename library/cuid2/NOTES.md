@@ -38,8 +38,8 @@ generator when available. This includes macOS, Linux, *BSD, and other POSIX
 operating systems. On Windows, a pseudo-random generator is used, randomized
 using the current wall time.
 
-See also the `ids`, `nanoid`, `ksuid`, `snowflakeid`, `typeid`, `uuid`, and
-`ulid` libraries.
+See also the `ids`, `nanoid`, `ksuid`, `snowflakeid`, `sqids`, `typeid`,
+`uuid`, and `ulid` libraries.
 
 
 API documentation

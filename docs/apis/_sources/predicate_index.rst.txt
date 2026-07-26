@@ -4645,6 +4645,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`geohash_protocol <geohash_protocol/0::decode/2>`
 * :ref:`json_rpc <json_rpc/0::decode/2>`
+* :ref:`sqids(Representation) <sqids/1::decode/2>`
 
 ``decode/3``
 ------------
@@ -4657,6 +4658,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`jwt <jwt/0::decode/3>`
 * :ref:`jwt_compact <jwt_compact/0::decode/3>`
 * :ref:`open_id_jwt <open_id_jwt/0::decode/3>`
+* :ref:`sqids(Representation) <sqids/1::decode/3>`
 
 ``decode/5``
 ------------
@@ -6869,6 +6871,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`json_rpc <json_rpc/0::encode/2>`
+* :ref:`sqids(Representation) <sqids/1::encode/2>`
 
 ``encode/3``
 ------------
@@ -6879,6 +6882,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`geohash_protocol <geohash_protocol/0::encode/3>`
+* :ref:`sqids(Representation) <sqids/1::encode/3>`
 
 ``encode_bits/3``
 -----------------

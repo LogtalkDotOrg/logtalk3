@@ -15,7 +15,7 @@ KSUID generator using atom representation and the canonical Base62 alphabet.
 
 | **Author:** Paulo Moura
 | **Version:** 1:1:0
-| **Date:** 2026-07-24
+| **Date:** 2026-07-25
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -56,5 +56,5 @@ Operators
 
 .. seealso::
 
-   :ref:`ksuid(Representation,Alphabet) <ksuid/2>`, :ref:`cuid2 <cuid2/0>`, :ref:`nanoid <nanoid/0>`, :ref:`ids <ids/0>`, :ref:`ulid <ulid/0>`, :ref:`snowflakeid <snowflakeid/0>`, :ref:`typeid <typeid/0>`, :ref:`uuid <uuid/0>`
+   :ref:`ksuid(Representation,Alphabet) <ksuid/2>`, :ref:`cuid2 <cuid2/0>`, :ref:`ids <ids/0>`, :ref:`nanoid <nanoid/0>`, :ref:`snowflakeid <snowflakeid/0>`, :ref:`sqids <sqids/0>`, :ref:`typeid <typeid/0>`, :ref:`ulid <ulid/0>`, :ref:`uuid <uuid/0>`
 

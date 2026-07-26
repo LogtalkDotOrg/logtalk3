@@ -20,7 +20,7 @@ Cuid2 generator.
 
 | **Author:** Paulo Moura
 | **Version:** 1:1:0
-| **Date:** 2026-07-24
+| **Date:** 2026-07-25
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -64,5 +64,5 @@ Operators
 
 .. seealso::
 
-   :ref:`cuid2 <cuid2/0>`, :ref:`ids(Representation,Bytes) <ids/2>`, :ref:`ksuid(Representation,Alphabet) <ksuid/2>`, :ref:`nanoid(Representation,Size,Alphabet) <nanoid/3>`, :ref:`snowflakeid(Representation,EpochMilliseconds,TimeUnitMilliseconds,TimestampBits,NodeBits,SequenceBits,Node) <snowflakeid/7>`, :ref:`typeid(Representation) <typeid/1>`, :ref:`ulid(Representation) <ulid/1>`, :ref:`uuid(Representation) <uuid/1>`
+   :ref:`cuid2 <cuid2/0>`, :ref:`ids(Representation,Bytes) <ids/2>`, :ref:`ksuid(Representation,Alphabet) <ksuid/2>`, :ref:`nanoid(Representation,Size,Alphabet) <nanoid/3>`, :ref:`snowflakeid(Representation,EpochMilliseconds,TimeUnitMilliseconds,TimestampBits,NodeBits,SequenceBits,Node) <snowflakeid/7>`, :ref:`sqids(Representation) <sqids/1>`, :ref:`typeid(Representation) <typeid/1>`, :ref:`ulid(Representation) <ulid/1>`, :ref:`uuid(Representation) <uuid/1>`
 

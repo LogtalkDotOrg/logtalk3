@@ -218,6 +218,7 @@
 		spade_pattern_miner(loader),
 		clo_span_pattern_miner(loader),
 		url(loader),
+		sqids(loader),
 		ulid(loader),
 		uuid(loader),
 		typeid(loader),

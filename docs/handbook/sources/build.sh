@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on July 24, 2026
+##   Last updated on July 25, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -301,6 +301,7 @@ sed '1,19d' ../../../library/simulated_annealing/NOTES.md | pandoc -f gfm -t rst
 sed '1,19d' ../../../library/snowflakeid/NOTES.md | pandoc -f gfm -t rst -o libraries/snowflakeid.rst
 sed '1,19d' ../../../library/sockets/NOTES.md | pandoc -f gfm -t rst -o libraries/sockets.rst
 sed '1,19d' ../../../library/spade_pattern_miner/NOTES.md | pandoc -f gfm -t rst -o libraries/spade_pattern_miner.rst
+sed '1,19d' ../../../library/sqids/NOTES.md | pandoc -f gfm -t rst -o libraries/sqids.rst
 sed '1,19d' ../../../library/statistics/NOTES.md | pandoc -f gfm -t rst -o libraries/statistics.rst
 sed '1,19d' ../../../library/stemming/NOTES.md | pandoc -f gfm -t rst -o libraries/stemming.rst
 sed '1,19d' ../../../library/stomp/NOTES.md | pandoc -f gfm -t rst -o libraries/stomp.rst

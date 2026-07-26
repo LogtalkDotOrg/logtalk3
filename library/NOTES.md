@@ -70,7 +70,7 @@ Library groups
         `http_process_transport`, `http_static_files`, `http_websocket_messages`,
 	    `http_websocket_service`, `http_websocket_session`.
 - Identifiers:
-	`cuid2`, `genint`, `gensym`, `ids`, `ksuid`, `nanoid`, `snowflakeid`,
+	`cuid2`, `genint`, `gensym`, `ids`, `ksuid`, `nanoid`, `snowflakeid`, `sqids`
     `typeid`, `ulid`, and `uuid`.
 - Interchange formats and wire protocols:
 	`amqp`, `avro`, `base32`, `base58`, `base64`, `base85`, `cbor`,	`csv`,

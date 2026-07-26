@@ -25,12 +25,12 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-24,
+		date is 2026-07-25,
 		comment is 'Type-safe, K-sortable, globally unique identifier (TypeID) generator. Implements the TypeID specification (a type prefix plus a version 7 UUID encoded using a strict, lowercase variant of Crockford base32).',
 		parameters is [
 			'Representation' - 'Text representation for the TypeID, its type prefix, and its UUID suffix. Possible values are ``atom``, ``chars``, and ``codes``.'
 		],
-		see_also is [typeid, ids(_,_), cuid2(_,_,_), ksuid(_,_), nanoid(_,_,_), snowflakeid(_,_,_,_,_,_,_), ulid(_), uuid(_)]
+		see_also is [typeid, ids(_,_), cuid2(_,_,_), ksuid(_,_), nanoid(_,_,_), snowflakeid(_,_,_,_,_,_,_), sqids(_), ulid(_), uuid(_)]
 	]).
 
 	:- uses(uuid(codes), [
@@ -436,9 +436,9 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-24,
+		date is 2026-07-25,
 		comment is 'Type-safe, K-sortable, globally unique identifier (TypeID) generator using an atom representation.',
-		see_also is [typeid(_), ids, cuid2, ksuid, nanoid, snowflakeid, ulid, uuid]
+		see_also is [typeid(_), ids, cuid2, ksuid, nanoid, snowflakeid, sqids, ulid, uuid]
 	]).
 
 :- end_object.

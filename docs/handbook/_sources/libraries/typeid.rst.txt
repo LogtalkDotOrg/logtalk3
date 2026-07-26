@@ -37,7 +37,7 @@ TypeIDs can be generated as atoms, lists of characters, or lists of
 character codes.
 
 See also the ``cuid2``, ``ksuid``, ``ids``, ``nanoid``, ``snowflakeid``,
-``ulid``, and ``uuid`` libraries.
+``sqids``, ``ulid``, and ``uuid`` libraries.
 
 API documentation
 -----------------

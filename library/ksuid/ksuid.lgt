@@ -25,13 +25,13 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-24,
+		date is 2026-07-25,
 		comment is 'KSUID generator.',
 		parameters is [
 			'Representation' - 'Text representation for the KSUID. Possible values are ``atom``, ``chars``, and ``codes``.',
 			'Alphabet' - 'Base62 alphabet used for encoding KSUIDs represented as an atom, list of characters, or list of character codes.'
 		],
-		see_also is [ksuid, cuid2(_,_,_), nanoid(_,_,_), ids(_,_), ulid(_), snowflakeid(_,_,_,_,_,_,_), typeid(_), uuid(_)]
+		see_also is [ksuid, cuid2(_,_,_), ids(_,_), nanoid(_,_,_), snowflakeid(_,_,_,_,_,_,_), sqids(_), typeid(_), ulid(_), uuid(_)]
 	]).
 
 	:- uses(crypto, [
@@ -186,9 +186,9 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-24,
+		date is 2026-07-25,
 		comment is 'KSUID generator using atom representation and the canonical Base62 alphabet.',
-		see_also is [ksuid(_, _), cuid2, nanoid, ids, ulid, snowflakeid, typeid, uuid]
+		see_also is [ksuid(_, _), cuid2, ids, nanoid, snowflakeid, sqids, typeid, ulid, uuid]
 	]).
 
 :- end_object.

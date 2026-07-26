@@ -1,0 +1,195 @@
+.. index:: single: sqids(Representation)
+.. _sqids/1:
+
+.. rst-class:: right
+
+**object**
+
+``sqids(Representation)``
+=========================
+
+* ``Representation`` - Text representation for identifiers. Possible values are ``atom``, ``chars``, and ``codes``.
+
+
+Encoding and decoding of short, obfuscated, URL-safe ids from lists of non-negative integers, per the Sqids specification.
+
+| **Availability:** 
+|    ``logtalk_load(sqids(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-07-25
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+
+   - Specification: https://github.com/sqids/sqids-spec
+   - Homepage: https://sqids.org
+   - Default blocklist: https://github.com/sqids/sqids-blocklist (not bundled; see blocklist/1 option).
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: encode/2
+.. _sqids/1::encode/2:
+
+``encode/2``
+^^^^^^^^^^^^
+
+Encodes a list of non-negative integers into an identifier using the default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``encode(Numbers,Id)``
+| **Mode and number of proofs:**
+|    ``encode(+list(integer),-text)`` - ``one``
+
+| **Exceptions:**
+|    ``Numbers`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Numbers`` is neither a variable nor a list:
+|        ``type_error(list(non_negative_integer),Numbers)``
+|    An element ``Number`` of the list ``Numbers`` is not an integer:
+|        ``type_error(integer,Number)``
+|    An element ``Number`` of the list ``Numbers`` of Numbers is a negative integer:
+|        ``domain_error(non_negative_integer,Number)``
+|    Too many blocklist collisions occurred while generating the id:
+|        ``sqids_error(blocklist_retries_exhausted)``
+
+
+------------
+
+.. index:: encode/3
+.. _sqids/1::encode/3:
+
+``encode/3``
+^^^^^^^^^^^^
+
+Encodes a list of non-negative integers into an id using the given options. Recognized options are alphabet(Atom) (an atom with at least three unique characters; default is the standard 62-character alphabet), min_length(Integer) (an integer between 0 and 255; default is 0), and blocklist(list(atom)) (words that must not occur in the generated id; default is []). If Numbers is empty, Id is unified with the empty atom regardless of the other options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``encode(Numbers,Id,Options)``
+| **Mode and number of proofs:**
+|    ``encode(+list(integer),-text,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Numbers`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Numbers`` is neither a variable nor a list:
+|        ``type_error(list(non_negative_integer),Numbers)``
+|    An element ``Number`` of the list ``Numbers`` is not an integer:
+|        ``type_error(integer,Number)``
+|    An element ``Number`` of the list ``Numbers`` of Numbers is a negative integer:
+|        ``domain_error(non_negative_integer,Number)``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    Too many blocklist collisions occurred while generating the id:
+|        ``sqids_error(blocklist_retries_exhausted)``
+
+
+------------
+
+.. index:: decode/2
+.. _sqids/1::decode/2:
+
+``decode/2``
+^^^^^^^^^^^^
+
+Decodes an identifier back into a list of non-negative integers using the default options. Equivalent to decode/3 with an empty options list. Numbers is [] if Id is the empty atom or contains a character that is not in the alphabet. Decoding does not check that Id is a canonical (minimal) encoding: ids rejected by encode/2-3 due to the blocklist still decode successfully, as do ids with extraneous minimum-length padding.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode(Id,Numbers)``
+| **Mode and number of proofs:**
+|    ``decode(+text,-list(integer))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Id`` is a variable:
+|        ``instantiation_error``
+|    ``Id`` is neither a variable nor an atom:
+|        ``type_error(atom,Id)``
+
+
+------------
+
+.. index:: decode/3
+.. _sqids/1::decode/3:
+
+``decode/3``
+^^^^^^^^^^^^
+
+Decodes an identifier back into a list of non-negative integers using the given options. The only recognized option is alphabet(Atom); it must be the same alphabet that was used to encode Id. Numbers is [] if Id is the empty atom or contains a character that is not in the alphabet.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode(Id,Numbers,Options)``
+| **Mode and number of proofs:**
+|    ``decode(+text,-list(integer),+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Id`` is a variable:
+|        ``instantiation_error``
+|    ``Id`` is neither a variable nor an atom:
+|        ``type_error(atom,Id)``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`sqids <sqids/0>`, :ref:`ids(Representation,Bytes) <ids/2>`, :ref:`cuid2(Representation,Size,Alphabet) <cuid2/3>`, :ref:`ksuid(Representation,Alphabet) <ksuid/2>`, :ref:`nanoid(Representation,Size,Alphabet) <nanoid/3>`, :ref:`snowflakeid(Representation,EpochMilliseconds,TimeUnitMilliseconds,TimestampBits,NodeBits,SequenceBits,Node) <snowflakeid/7>`, :ref:`typeid(Representation) <typeid/1>`, :ref:`ulid(Representation) <ulid/1>`, :ref:`uuid(Representation) <uuid/1>`
+

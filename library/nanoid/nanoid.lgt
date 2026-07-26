@@ -25,14 +25,14 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-24,
+		date is 2026-07-25,
 		comment is 'NanoID generator.',
 		parameters is [
 			'Representation' - 'Text representation for the NanoID. Possible values are ``atom``, ``chars``, and ``codes``.',
 			'Size' - 'Number of symbols in the NanoID.',
 			'Alphabet' - 'Alphabet used for generating NanoIDs represented as an atom, list of characters, or list of character codes.'
 		],
-		see_also is [nanoid, cuid2(_,_,_), ids(_,_), ksuid(_,_), typeid(_), ulid(_), uuid(_)]
+		see_also is [nanoid, cuid2(_,_,_), ids(_,_), ksuid(_,_), snowflakeid(_, _, _, _, _, _, _), sqids(_), typeid(_), ulid(_), uuid(_)]
 	]).
 
 	:- uses(crypto, [
@@ -195,9 +195,9 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-24,
+		date is 2026-07-25,
 		comment is 'NanoID generator using atom representation, 21 symbols, and the standard URL alphabet.',
-		see_also is [nanoid(_, _, _), cuid2, ids, ksuid, typeid, ulid, uuid]
+		see_also is [nanoid(_, _, _), cuid2, ids, ksuid, snowflakeid, sqids, typeid, ulid, uuid]
 	]).
 
 :- end_object.

@@ -22,8 +22,8 @@ number generator when available. This includes macOS, Linux, \*BSD, and
 other POSIX operating systems. On Windows, a pseudo-random generator is
 used, randomized using the current wall time.
 
-See also the ``cuid2``, ``ksuid``, ``ids``, ``snowflakeid``, ``typeid``,
-``ulid``, and ``uuid`` libraries.
+See also the ``cuid2``, ``ids``, ``ksuid``, ``snowflakeid``, ``sqids``,
+``typeid``, ``ulid``, and ``uuid`` libraries.
 
 API documentation
 -----------------

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-24,
+		date is 2026-07-25,
 		comment is 'Snowflake ID generic generator.',
 		parameters is [
 			'Representation' - 'Snowflake ID representation. Possible values are ``integer``, ``atom``, ``chars``, and ``codes``.',
@@ -38,7 +38,7 @@
 		],
 		see_also is [
 			snowflakeid, snowflakeid_twitter, snowflakeid_sonyflake, snowflakeid_instagram, cuid2(_,_,_),
-			ids(_,_), ksuid(_, _), nanoid(_, _, _), typeid(_), ulid(_), uuid(_)
+			ids(_,_), ksuid(_, _), nanoid(_, _, _), sqids(_), typeid(_), ulid(_), uuid(_)
 		]
 	]).
 
@@ -226,14 +226,14 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-24,
+		date is 2026-07-25,
 		comment is 'Twitter-style Snowflake profile.',
 		parameters is [
 			'Representation' - 'Snowflake ID representation. Possible values are ``integer``, ``atom``, ``chars``, and ``codes``.'
 		],
 		see_also is [
 			snowflakeid(_, _, _, _, _, _, _), snowflakeid_twitter, snowflakeid_sonyflake, snowflakeid_instagram,
-			cuid2, ids, ksuid, nanoid, typeid, ulid, uuid
+			cuid2, ids, ksuid, nanoid, sqids, typeid, ulid, uuid
 		]
 	]).
 
@@ -246,11 +246,11 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-24,
+		date is 2026-04-25,
 		comment is 'Twitter-style Snowflake profile using atom representation.',
 		see_also is [
 			snowflakeid_twitter(_), snowflakeid_sonyflake, snowflakeid_instagram, cuid2, ids, ksuid, nanoid,
-			typeid, ulid, uuid
+			sqids, typeid, ulid, uuid
 		]
 	]).
 
@@ -263,14 +263,14 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-24,
+		date is 2026-07-25,
 		comment is 'Sonyflake-style Snowflake profile.',
 		parameters is [
 			'Representation' - 'Snowflake ID representation. Possible values are ``integer``, ``atom``, ``chars``, and ``codes``.'
 		],
 		see_also is [
 			snowflakeid(_, _, _, _, _, _, _), snowflakeid_twitter, snowflakeid_sonyflake, snowflakeid_instagram,
-			cuid2, ids, ksuid, nanoid, typeid, ulid, uuid
+			cuid2, ids, ksuid, nanoid, sqids, typeid, ulid, uuid
 		]
 	]).
 
@@ -283,11 +283,11 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-24,
+		date is 2026-07-25,
 		comment is 'Sonyflake-style Snowflake profile using atom representation.',
 		see_also is [
 			snowflakeid_sonyflake(_), snowflakeid_twitter, snowflakeid_instagram, cuid2, ids, ksuid, nanoid,
-			typeid, ulid, uuid
+			sqids, typeid, ulid, uuid
 		]
 	]).
 
@@ -300,14 +300,14 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-24,
+		date is 2026-07-25,
 		comment is 'Instagram-style Snowflake profile.',
 		parameters is [
 			'Representation' - 'Snowflake ID representation. Possible values are ``integer``, ``atom``, ``chars``, and ``codes``.'
 		],
 		see_also is [
 			snowflakeid(_, _, _, _, _, _, _), snowflakeid_twitter, snowflakeid_sonyflake, snowflakeid_instagram,
-			cuid2, ids, ksuid, nanoid, typeid, ulid, uuid
+			cuid2, ids, ksuid, nanoid, sqids, typeid, ulid, uuid
 		]
 	]).
 
@@ -320,11 +320,11 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-24,
+		date is 2026-07-25,
 		comment is 'Instagram-style Snowflake profile using atom representation.',
 		see_also is [
 			snowflakeid_instagram(_), snowflakeid_twitter, snowflakeid_sonyflake, cuid2, ids, ksuid, nanoid,
-			typeid, ulid, uuid
+			sqids, typeid, ulid, uuid
 		]
 	]).
 
@@ -337,11 +337,11 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-24,
+		date is 2026-07-25,
 		comment is 'Snowflake ID generator using the Twitter-style profile and atom representation.',
 		see_also is [
 			snowflakeid(_, _, _, _, _, _, _), snowflakeid_twitter, snowflakeid_sonyflake, snowflakeid_instagram,
-			cuid2, ids, ksuid, nanoid, typeid, ulid, uuid
+			cuid2, ids, ksuid, nanoid, sqids, typeid, ulid, uuid
 		]
 	]).
 
