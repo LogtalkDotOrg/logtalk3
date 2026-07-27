@@ -23,9 +23,9 @@
 	implements(geospatial_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-11,
+		date is 2026-07-27,
 		comment is 'Geospatial predicates over geographic coordinates represented as ``geographic(Latitude,Longitude)``.',
 		remarks is [
 			'Distance unit' - 'Kilometers.',
@@ -35,27 +35,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2, memberchk/2, reverse/2
-	]).
-
-	:- public(distance/4).
-	:- mode(distance(+compound, +compound, +atom, -float), zero_or_one).
-	:- info(distance/4, [
-		comment is 'Computes the distance in kilometers between two coordinates using a selected metric. Supported metrics are ``haversine``, ``vincenty``, and ``rhumb``.',
-		argnames is ['Coordinate1', 'Coordinate2', 'Metric', 'Distance']
-	]).
-	:- public(distance/5).
-	:- mode(distance(+compound, +compound, +atom, +atom, -float), zero_or_one).
-	:- info(distance/5, [
-		comment is 'Computes the distance between two coordinates using a selected metric and output unit. Supported metrics are ``haversine``, ``vincenty``, and ``rhumb``. Valid ``Unit`` argument values are ``kilometers``, ``meters``, ``miles``, and ``nautical_miles``.',
-		argnames is ['Coordinate1', 'Coordinate2', 'Metric', 'Unit', 'Distance']
-	]).
-
-	:- public(bbox_overlaps/2).
-	:- mode(bbox_overlaps(+compound, +compound), zero_or_one).
-	:- info(bbox_overlaps/2, [
-		comment is 'True when two bounding boxes have a strict positive-area overlap. Touching only at an edge or corner fails. Antimeridian-crossing bounding boxes are supported.',
-		argnames is ['BoundingBox1', 'BoundingBox2']
+		append/3, last/2 as last_polygon_coordinate/2, length/2, memberchk/2, reverse/2
 	]).
 
 	valid_coordinate(geographic(Latitude, Longitude)) :-
@@ -620,8 +600,6 @@
 		]
 	).
 
-	bbox_intersects_polyline(_BoundingBox, _Previous, []) :-
-		fail.
 	bbox_intersects_polyline(BoundingBox, Previous, [Coordinate| Coordinates]) :-
 		valid_coordinate(Coordinate),
 		(	bbox_contains(BoundingBox, Coordinate) ->
@@ -992,8 +970,6 @@
 		last_polygon_coordinate(Polygon2, Last2),
 		polygon_edges_intersect(Polygon1, Last1, Polygon2, Last2).
 
-	polygon_edges_intersect([], _, _, _) :-
-		fail.
 	polygon_edges_intersect([Coordinate1| Coordinates1], Previous1, Polygon2, Last2) :-
 		(	edge_intersects_polygon(Previous1, Coordinate1, Polygon2, Last2) ->
 			true
@@ -1052,11 +1028,6 @@
 		;	OpenPolygon = Polygon
 		).
 
-	last_polygon_coordinate([Item], Item) :-
-		!.
-	last_polygon_coordinate([_| Items], Last) :-
-		last_polygon_coordinate(Items, Last).
-
 	remove_last_polygon_coordinate([_], []).
 	remove_last_polygon_coordinate([Coordinate| Coordinates], [Coordinate| OpenCoordinates]) :-
 		Coordinates \= [],
@@ -1071,8 +1042,6 @@
 		last_polygon_coordinate(Polygon, Last),
 		point_on_polygon_boundary(Polygon, Last, Point).
 
-	point_on_polygon_boundary([], _, _) :-
-		fail.
 	point_on_polygon_boundary([Coordinate| Coordinates], Previous, Point) :-
 		(	point_on_segment(Point, Previous, Coordinate) ->
 			true
