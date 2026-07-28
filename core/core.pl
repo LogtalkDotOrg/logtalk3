@@ -4414,7 +4414,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 % finds the predicate pointed by an alias and the entity where the alias is declared
 
 '$lgt_find_original_predicate'(Obj, Rnm, Flags, Alias, Pred, Entity) :-
-	% we add a fifth argument to properly handle class hierarchies if necessary
+	% add an additional argument to properly handle class hierarchies if necessary
 	'$lgt_find_original_predicate'(Obj, Rnm, Flags, Alias, Pred, Entity, _),
 	!.
 
