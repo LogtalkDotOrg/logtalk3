@@ -21,10 +21,12 @@ ________________________________________________________________________
 MANUAL INSTALLATION INSTRUCTIONS
 ================================
 
-The recommended way of installing Logtalk is to use, whenever possible,
+The **recommended** way of installing Logtalk is to use, whenever possible,
 one of the provided installers that can be downloaded from the
 [Logtalk website](https://logtalk.org). Installers are provided for macOS,
-Windows, and Linux.
+Windows, and Linux. On macOS, Logtalk can also be installed using the
+Homebrew and MacPorts package managers. On Windows, Logtalk can also be
+installed using the Chocolatey and winget package managers.
 
 This file contains detailed instructions for **manual** installation and
 configuration of Logtalk. You should also consult the
@@ -34,8 +36,8 @@ set of shell scripts that might be used for Logtalk installation on some
 operating-systems and for easy Logtalk integration with popular Prolog
 compilers.
 
-The POSIX shell scripts assume that `bash` is available. The PowerShell
-scripts require version 7.3 or later.
+The POSIX shell scripts assume that `bash` is available in the system `PATH`.
+The PowerShell scripts require version 7.3 or later.
 
 
 Logtalk basic installation
@@ -54,12 +56,12 @@ one of the provided scripts.
 **Using the sources or git clone directory**
 
 In this case, there is no installation procedure other than decompressing the
-sources (or cloning the git repository) into a convenient directory. Simply
-skip to the section below on setting the Logtalk environment variables and
-use the clone directory full path as the value for both the `LOGTALKHOME` and
-`LOGTALKUSER` variables. Note that in this case, on POSIX systems, you will
-need to call the provided scripts without omitting the `.sh` extension (e.g.
-use `swilgt.sh` instead of `swilgt`).
+sources (or cloning the git repository) into a convenient directory. In the
+section below on setting the Logtalk environment variables, use the clone
+directory full path as the value for both the `LOGTALKHOME` and `LOGTALKUSER`
+variables. Note that in this case, on POSIX systems, you will need to call
+the provided scripts without omitting the `.sh` extension (for example, use
+`swilgt.sh` instead of `swilgt`).
 
 **Installing for a single user with no administrative rights**
 
@@ -195,7 +197,8 @@ named `logtalk`. In this case, you may use this symbolic link to define the
 Logtalk.
 
 If you're using Windows, the provided GUI installer (which supports both admin
-and non-admin users) takes care of the definition of the environment variables.
+and non-admin users) takes care of the definition of the environment variables
+(you may need to logout/login after running the installer).
 
 
 Generating documentation in human-readable formats
