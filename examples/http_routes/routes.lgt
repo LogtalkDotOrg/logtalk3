@@ -20,13 +20,12 @@
 
 
 :- object(routes,
-	implements(http_handler_protocol),
 	imports(http_router)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-09,
+		date is 2026-07-29,
 		comment is 'Example HTTP router with three routes, illustrating the http_router, http_server, and http_client libraries.'
 	]).
 

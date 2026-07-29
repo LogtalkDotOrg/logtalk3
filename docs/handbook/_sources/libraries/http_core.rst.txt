@@ -150,8 +150,10 @@ Multipart parts use recursive normalized terms:
 The ``Accept-Query`` response header can be represented directly as a
 typed header value or as a response property:
 
-accept_query-[media_range(MediaRange, Parameters), ...]
-accept_query([media_range(MediaRange, Parameters), ...])
+::
+
+   accept_query-[media_range(MediaRange, Parameters), ...]
+   accept_query([media_range(MediaRange, Parameters), ...])
 
 ``MediaRange`` is a lowercase media range atom such as
 ``application/x-www-form-urlencoded``, ``application/jsonpath``,

@@ -20,13 +20,12 @@
 
 
 :- object(multipart_form_http_handler,
-	implements(http_handler_protocol),
 	imports(http_router)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-09,
+		date is 2026-07-29,
 		comment is 'HTTP handler for the multipart form example.'
 	]).
 

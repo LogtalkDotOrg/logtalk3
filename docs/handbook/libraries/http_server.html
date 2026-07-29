@@ -496,6 +496,34 @@ pattern-match the request and return a plain text response:</p>
 <span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
+<p>For declarative routing, the handler object can instead import the
+<code class="docutils literal notranslate"><span class="pre">http_router</span></code> category and define <code class="docutils literal notranslate"><span class="pre">route/4</span></code> descriptors. The
+imported category implements <code class="docutils literal notranslate"><span class="pre">http_handler_protocol</span></code>, providing the
+<code class="docutils literal notranslate"><span class="pre">handle/2</span></code> predicate expected by the server:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(my_router,
+    <span class="k">imports</span>(http_router)).
+
+<span class="p">    :- </span><span class="k">uses</span>(http_core, [
+        response<span class="o">/</span><span class="m">6</span>
+    ]).
+
+<span class="p">    :- </span><span class="k">protected</span>(hello<span class="o">/</span><span class="m">2</span>).
+
+    route(hello, get, <span class="s">&#39;/hello&#39;</span>, hello).
+
+    hello(<span class="nv">Request</span>, <span class="nv">Response</span>) <span class="o">:-</span>
+        <span class="nv">Request</span> <span class="o">=</span> request(<span class="nv">_Method</span>, <span class="nv">_Target</span>, <span class="nv">Version</span>, <span class="nv">_Headers</span>, <span class="nv">_Body</span>, <span class="nv">_Properties</span>),
+        response(
+            <span class="nv">Version</span>, status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), [],
+            content(<span class="s">&#39;text/plain&#39;</span>, text(<span class="s">&#39;Hello from a route!&#39;</span>)), [], <span class="nv">Response</span>
+        ).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>See the <code class="docutils literal notranslate"><span class="pre">http_router</span></code> library documentation for path templates, route
+annotations, middleware, content negotiation, automatic <code class="docutils literal notranslate"><span class="pre">OPTIONS</span></code>
+handling, and OpenAPI derivation.</p>
 <p>When a server accepts a connection, the selected transport reads the
 request, calls <code class="docutils literal notranslate"><span class="pre">my_handler::handle(Request,</span> <span class="pre">Response)</span></code>, writes the
 response back to the client, and then follows the selected serving

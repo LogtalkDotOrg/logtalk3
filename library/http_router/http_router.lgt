@@ -20,12 +20,13 @@
 
 
 :- category(http_router,
+	implements(http_handler_protocol),
 	extends([http_json_term_helpers, http_text_helpers])).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-17,
+		date is 2026-07-29,
 		comment is 'Declarative HTTP router category for objects implementing the http_handler_protocol protocol.'
 	]).
 

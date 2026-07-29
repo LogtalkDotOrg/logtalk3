@@ -20,13 +20,12 @@
 
 
 :- object(sample_http_router,
-	implements(http_handler_protocol),
 	imports(http_router)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-07-29,
 		comment is 'Sample router object used by the http_router tests.'
 	]).
 
@@ -113,13 +112,12 @@
 
 
 :- object(advanced_path_http_router,
-	implements(http_handler_protocol),
 	imports(http_router)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-07-29,
 		comment is 'Router object used by the http_router tests to exercise typed placeholders and wildcard path segments.'
 	]).
 
@@ -141,13 +139,12 @@
 
 
 :- object(custom_http_router,
-	implements(http_handler_protocol),
 	imports(http_router)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-07-29,
 		comment is 'Router object used by the http_router tests to exercise customizable 404 and 405 hooks.'
 	]).
 
@@ -192,13 +189,12 @@
 
 
 :- object(automatic_options_http_router,
-	implements(http_handler_protocol),
 	imports(http_router)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-25,
+		date is 2026-07-29,
 		comment is 'Router object used by the http_router tests to exercise automatic ``OPTIONS`` customization and annotated synthetic request context.'
 	]).
 
@@ -262,13 +258,12 @@
 
 
 :- object(multi_route_automatic_options_http_router,
-	implements(http_handler_protocol),
 	imports(http_router)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-25,
+		date is 2026-07-29,
 		comment is 'Router object used by the http_router tests to exercise synthetic ``OPTIONS`` metadata when multiple same-path routes match.'
 	]).
 
@@ -336,13 +331,12 @@
 
 
 :- object(middleware_http_router,
-	implements(http_handler_protocol),
 	imports(http_router)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-07-29,
 		comment is 'Router object used by the http_router tests to exercise middleware chaining.'
 	]).
 
@@ -403,13 +397,12 @@
 
 
 :- object(negotiation_http_router,
-	implements(http_handler_protocol),
 	imports(http_router)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-07-29,
 		comment is 'Router object used by the http_router tests to exercise content negotiation.'
 	]).
 
@@ -437,124 +430,121 @@
 :- end_object.
 
 
-	:- object(route_authorization_http_router,
-		implements(http_handler_protocol),
-		imports(http_router)).
-
-		:- info([
-			version is 1:0:0,
-			author is 'Paulo Moura',
-			date is 2026-05-29,
-			comment is 'Router object used by the http_router tests to exercise routed-request authorization hooks.'
-		]).
-
-		:- protected(show_secret/2).
-		:- info(show_secret/2, [
-			comment is 'Route handler used by the route-authorization router object for the ``/secure`` path.',
-			argnames is ['Request', 'Response']
-		]).
-
-		:- protected(add_router_stage/3).
-		:- info(add_router_stage/3, [
-			comment is 'Response middleware handler that marks whether the response was produced for a routed request.',
-			argnames is ['Request', 'Response0', 'Response']
-		]).
-
-		route(show_secret, get, '/secure', show_secret).
-
-		response_middleware(add_router_stage, add_router_stage).
-
-		authorize_routed_request(Request, respond(Response)) :-
-			http_core::property(Request, route(show_secret)),
-			\+ http_core::header(Request, x_allow, yes),
-			!,
-			http_core::version(Request, Version),
-			http_core::response(Version, status(401, 'Unauthorized'), [x_authorization-denied], empty, [], Response).
-		authorize_routed_request(Request, continue(Request)).
-
-		add_router_stage(Request, response(Version, Status, Headers0, Body, Properties), Response) :-
-			( http_core::property(Request, route(show_secret)) -> Stage = routed ; Stage = other ),
-			http_core::response(Version, Status, [x_router_stage-Stage| Headers0], Body, Properties, Response).
-
-		show_secret(Request, Response) :-
-			http_core::property(Request, route(show_secret)),
-			http_core::version(Request, Version),
-			http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(secret)), [], Response).
-
-	:- end_object.
-
-
-	:- object(parameter_validation_http_router,
-		implements(http_handler_protocol),
-		imports(http_router)).
-
-		:- info([
-			version is 1:0:0,
-			author is 'Paulo Moura',
-			date is 2026-05-28,
-			comment is 'Router object used by the http_router tests to exercise default and custom ``400`` responses generated from parameter-validation exceptions.'
-		]).
-
-		:- protected(show_default_bad_request/2).
-		:- info(show_default_bad_request/2, [
-			comment is 'Route handler used by the parameter-validation router object for the default ``400`` response path.',
-			argnames is ['Request', 'Response']
-		]).
-
-		:- protected(show_custom_bad_request/2).
-		:- info(show_custom_bad_request/2, [
-			comment is 'Route handler used by the parameter-validation router object for the custom ``400`` response path.',
-			argnames is ['Request', 'Response']
-		]).
-
-		:- protected(show_handler_error/2).
-		:- info(show_handler_error/2, [
-			comment is 'Route handler used by the parameter-validation router object to confirm unrelated exceptions still propagate.',
-			argnames is ['Request', 'Response']
-		]).
-
-		:- protected(route_bad_request_response/3).
-		:- info(route_bad_request_response/3, [
-			comment is 'Custom ``400`` response hook used by the router tests.',
-			argnames is ['Request', 'Errors', 'Response']
-		]).
-
-		route(show_default_bad_request, get, '/bad-request/default', show_default_bad_request).
-		route(show_custom_bad_request, get, '/bad-request/custom', show_custom_bad_request).
-		route(show_handler_error, get, '/bad-request/error', show_handler_error).
-
-		show_default_bad_request(Request, _Response) :-
-			http_core::property(Request, route(show_default_bad_request)),
-			http_core::property(Request, path_params([])),
-			throw(error(http_parameter_validation([missing_parameter(query, id)]), route_parameters(show_default_bad_request))).
-
-		show_custom_bad_request(Request, _Response) :-
-			http_core::property(Request, route(show_custom_bad_request)),
-			http_core::property(Request, path_params([])),
-			throw(error(http_parameter_validation([duplicate_parameter(query, id)]), route_parameters(show_custom_bad_request))).
-
-		show_handler_error(Request, _Response) :-
-			http_core::property(Request, route(show_handler_error)),
-			http_core::property(Request, path_params([])),
-			throw(error(domain_error(http_router_test, invalid_handler_error), show_handler_error/2)).
-
-		route_bad_request_response(Request, Errors, Response) :-
-			Errors == [duplicate_parameter(query, id)],
-			http_core::property(Request, route(show_custom_bad_request)),
-			http_core::version(Request, Version),
-			http_core::response(Version, status(400, 'Bad Request'), [x_router-custom], content('text/plain', text(custom_bad_request)), [], Response).
-
-	:- end_object.
-
-
-:- object(route_metadata_http_router,
-	implements(http_handler_protocol),
+:- object(route_authorization_http_router,
 	imports(http_router)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-05-29,
+		comment is 'Router object used by the http_router tests to exercise routed-request authorization hooks.'
+	]).
+
+	:- protected(show_secret/2).
+	:- info(show_secret/2, [
+		comment is 'Route handler used by the route-authorization router object for the ``/secure`` path.',
+		argnames is ['Request', 'Response']
+	]).
+
+	:- protected(add_router_stage/3).
+	:- info(add_router_stage/3, [
+		comment is 'Response middleware handler that marks whether the response was produced for a routed request.',
+		argnames is ['Request', 'Response0', 'Response']
+	]).
+
+	route(show_secret, get, '/secure', show_secret).
+
+	response_middleware(add_router_stage, add_router_stage).
+
+	authorize_routed_request(Request, respond(Response)) :-
+		http_core::property(Request, route(show_secret)),
+		\+ http_core::header(Request, x_allow, yes),
+		!,
+		http_core::version(Request, Version),
+		http_core::response(Version, status(401, 'Unauthorized'), [x_authorization-denied], empty, [], Response).
+	authorize_routed_request(Request, continue(Request)).
+
+	add_router_stage(Request, response(Version, Status, Headers0, Body, Properties), Response) :-
+		( http_core::property(Request, route(show_secret)) -> Stage = routed ; Stage = other ),
+		http_core::response(Version, Status, [x_router_stage-Stage| Headers0], Body, Properties, Response).
+
+	show_secret(Request, Response) :-
+		http_core::property(Request, route(show_secret)),
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(secret)), [], Response).
+
+:- end_object.
+
+
+:- object(parameter_validation_http_router,
+	imports(http_router)).
+
+	:- info([
+		version is 1:1:0,
+		author is 'Paulo Moura',
+		date is 2026-07-29,
+		comment is 'Router object used by the http_router tests to exercise default and custom ``400`` responses generated from parameter-validation exceptions.'
+	]).
+
+	:- protected(show_default_bad_request/2).
+	:- info(show_default_bad_request/2, [
+		comment is 'Route handler used by the parameter-validation router object for the default ``400`` response path.',
+		argnames is ['Request', 'Response']
+	]).
+
+	:- protected(show_custom_bad_request/2).
+	:- info(show_custom_bad_request/2, [
+		comment is 'Route handler used by the parameter-validation router object for the custom ``400`` response path.',
+		argnames is ['Request', 'Response']
+	]).
+
+	:- protected(show_handler_error/2).
+	:- info(show_handler_error/2, [
+		comment is 'Route handler used by the parameter-validation router object to confirm unrelated exceptions still propagate.',
+		argnames is ['Request', 'Response']
+	]).
+
+	:- protected(route_bad_request_response/3).
+	:- info(route_bad_request_response/3, [
+		comment is 'Custom ``400`` response hook used by the router tests.',
+		argnames is ['Request', 'Errors', 'Response']
+	]).
+
+	route(show_default_bad_request, get, '/bad-request/default', show_default_bad_request).
+	route(show_custom_bad_request, get, '/bad-request/custom', show_custom_bad_request).
+	route(show_handler_error, get, '/bad-request/error', show_handler_error).
+
+	show_default_bad_request(Request, _Response) :-
+		http_core::property(Request, route(show_default_bad_request)),
+		http_core::property(Request, path_params([])),
+		throw(error(http_parameter_validation([missing_parameter(query, id)]), route_parameters(show_default_bad_request))).
+
+	show_custom_bad_request(Request, _Response) :-
+		http_core::property(Request, route(show_custom_bad_request)),
+		http_core::property(Request, path_params([])),
+		throw(error(http_parameter_validation([duplicate_parameter(query, id)]), route_parameters(show_custom_bad_request))).
+
+	show_handler_error(Request, _Response) :-
+		http_core::property(Request, route(show_handler_error)),
+		http_core::property(Request, path_params([])),
+		throw(error(domain_error(http_router_test, invalid_handler_error), show_handler_error/2)).
+
+	route_bad_request_response(Request, Errors, Response) :-
+		Errors == [duplicate_parameter(query, id)],
+		http_core::property(Request, route(show_custom_bad_request)),
+		http_core::version(Request, Version),
+		http_core::response(Version, status(400, 'Bad Request'), [x_router-custom], content('text/plain', text(custom_bad_request)), [], Response).
+
+:- end_object.
+
+
+:- object(route_metadata_http_router,
+	imports(http_router)).
+
+	:- info([
+		version is 1:1:0,
+		author is 'Paulo Moura',
+		date is 2026-07-29,
 		comment is 'Router object used by the http_router tests to exercise route metadata annotations.'
 	]).
 
@@ -621,13 +611,12 @@
 
 
 :- object(open_api_http_router,
-	implements(http_handler_protocol),
 	imports(http_router)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-07-29,
 		comment is 'Router object used by the http_router tests to exercise automatic OpenAPI provider derivation.'
 	]).
 
@@ -764,13 +753,12 @@
 
 
 :- object(inferred_open_api_http_router,
-	implements(http_handler_protocol),
 	imports(http_router)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-07-29,
 		comment is 'Router object used by the http_router tests to exercise OpenAPI request and response inference from route handlers.'
 	]).
 
@@ -830,13 +818,12 @@
 
 
 :- object(property_scrubbing_http_router,
-	implements(http_handler_protocol),
 	imports(http_router)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-27,
+		date is 2026-07-29,
 		comment is 'Router object used by the http_router tests to exercise scrubbing of internal request properties on the normal routing path.'
 	]).
 
@@ -862,13 +849,12 @@
 
 
 :- object(example_open_api_http_router,
-	implements(http_handler_protocol),
 	imports(http_router)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-07-29,
 		comment is 'Router object used by the http_router tests to exercise example-driven OpenAPI inference.'
 	]).
 
@@ -938,13 +924,12 @@
 
 
 :- object(response_middleware_http_router,
-	implements(http_handler_protocol),
 	imports(http_router)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-07-29,
 		comment is 'Router object used by the http_router tests to exercise response post-processing middleware.'
 	]).
 
@@ -1005,13 +990,12 @@
 
 
 :- object(custom_negotiation_http_router,
-	implements(http_handler_protocol),
 	imports(http_router)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-23,
+		date is 2026-07-29,
 		comment is 'Router object used by the http_router tests to exercise customizable 406 responses for content negotiation failures.'
 	]).
 

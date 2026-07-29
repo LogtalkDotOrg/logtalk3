@@ -509,8 +509,10 @@ wire.</p>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">Accept-Query</span></code> response header can be represented directly as a
 typed header value or as a response property:</p>
-<p>accept_query-[media_range(MediaRange, Parameters), …]
-accept_query([media_range(MediaRange, Parameters), …])</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>accept_query<span class="o">-</span>[media_range(<span class="nv">MediaRange</span>, <span class="nv">Parameters</span>), ...]
+accept_query([media_range(<span class="nv">MediaRange</span>, <span class="nv">Parameters</span>), ...])
+</pre></div>
+</div>
 <p><code class="docutils literal notranslate"><span class="pre">MediaRange</span></code> is a lowercase media range atom such as
 <code class="docutils literal notranslate"><span class="pre">application/x-www-form-urlencoded</span></code>, <code class="docutils literal notranslate"><span class="pre">application/jsonpath</span></code>,
 <code class="docutils literal notranslate"><span class="pre">text/*</span></code>, or <code class="docutils literal notranslate"><span class="pre">*/*</span></code>. <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> is a list of <code class="docutils literal notranslate"><span class="pre">Name-Value</span></code>

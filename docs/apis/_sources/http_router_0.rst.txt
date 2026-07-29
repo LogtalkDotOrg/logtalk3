@@ -14,13 +14,15 @@ Declarative HTTP router category for objects implementing the http_handler_proto
 |    ``logtalk_load(http_router(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-07-17
+| **Version:** 1:1:0
+| **Date:** 2026-07-29
 
 | **Compilation flags:**
 |    ``static``
 
 
+| **Implements:**
+|    ``public`` :ref:`http_handler_protocol <http_handler_protocol/0>`
 | **Extends:**
 |    ``public`` :ref:`http_json_term_helpers <http_json_term_helpers/0>`
 |    ``public`` :ref:`http_text_helpers <http_text_helpers/0>`

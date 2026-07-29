@@ -4,10 +4,10 @@
 ===============
 
 The ``http_router`` library provides the first declarative routing layer
-on top of the ``http_core`` library. It is implemented as a category so
-that router objects can import it and implement the
-``http_handler_protocol`` protocol directly while reusing common method
-dispatch and path-template matching logic.
+on top of the ``http_core`` library. It is implemented as a category
+that implements ``http_handler_protocol`` so that router objects can
+simply import it while reusing common method dispatch and path-template
+matching logic.
 
 API documentation
 -----------------

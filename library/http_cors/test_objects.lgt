@@ -20,13 +20,12 @@
 
 
 :- object(cors_response_http_router,
-	implements(http_handler_protocol),
 	imports(http_router)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-25,
+		date is 2026-07-29,
 		comment is 'Router object used by the http_cors tests to exercise response middleware decoration and route metadata overrides.'
 	]).
 
@@ -86,13 +85,12 @@
 
 
 :- object(cors_automatic_options_http_router,
-	implements(http_handler_protocol),
 	imports(http_router)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-25,
+		date is 2026-07-29,
 		comment is 'Router object used by the http_cors tests to exercise automatic ``OPTIONS`` preflight generation using the router hook and annotated synthetic request context.'
 	]).
 

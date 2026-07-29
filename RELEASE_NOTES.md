@@ -45,6 +45,10 @@ Documentation
 Library
 -------
 
+* CHANGED: The `http_router` library `http_router` category now implements
+`http_handler_protocol` (as a marker protocol) to simplify server code that
+defines routes.
+
 * ADDED: New `http_sse` library implementing HTTP Server-Sent Events.
 
 * ADDED: New `integer_partitions` library providing predicates for generating

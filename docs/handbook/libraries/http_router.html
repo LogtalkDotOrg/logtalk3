@@ -390,10 +390,10 @@
   <section id="http-router">
 <span id="library-http-router"></span><h1><code class="docutils literal notranslate"><span class="pre">http_router</span></code><a class="headerlink" href="#http-router" title="Link to this heading"></a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">http_router</span></code> library provides the first declarative routing layer
-on top of the <code class="docutils literal notranslate"><span class="pre">http_core</span></code> library. It is implemented as a category so
-that router objects can import it and implement the
-<code class="docutils literal notranslate"><span class="pre">http_handler_protocol</span></code> protocol directly while reusing common method
-dispatch and path-template matching logic.</p>
+on top of the <code class="docutils literal notranslate"><span class="pre">http_core</span></code> library. It is implemented as a category
+that implements <code class="docutils literal notranslate"><span class="pre">http_handler_protocol</span></code> so that router objects can
+simply import it while reusing common method dispatch and path-template
+matching logic.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the

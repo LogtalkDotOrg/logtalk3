@@ -152,6 +152,35 @@ plain text response:
 
     :- end_object.
 
+For declarative routing, the handler object can instead import the
+`http_router` category and define `route/4` descriptors. The imported
+category implements `http_handler_protocol`, providing the `handle/2`
+predicate expected by the server:
+
+    :- object(my_router,
+        imports(http_router)).
+
+        :- uses(http_core, [
+            response/6
+        ]).
+
+        :- protected(hello/2).
+
+        route(hello, get, '/hello', hello).
+
+        hello(Request, Response) :-
+            Request = request(_Method, _Target, Version, _Headers, _Body, _Properties),
+            response(
+                Version, status(200, 'OK'), [],
+                content('text/plain', text('Hello from a route!')), [], Response
+            ).
+
+    :- end_object.
+
+See the `http_router` library documentation for path templates, route
+annotations, middleware, content negotiation, automatic `OPTIONS` handling,
+and OpenAPI derivation.
+
 When a server accepts a connection, the selected transport reads the request,
 calls `my_handler::handle(Request, Response)`, writes the response back to the
 client, and then follows the selected serving policy. Parametric objects can be
