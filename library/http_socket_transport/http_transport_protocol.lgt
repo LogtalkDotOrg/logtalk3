@@ -22,9 +22,9 @@
 :- protocol(http_transport_protocol).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-28,
 		comment is 'HTTP transport predicates for client connections and server listeners.'
 	]).
 
@@ -257,6 +257,19 @@
 			'``Handler`` does not conform to the HTTP handler protocol' - domain_error(http_handler_protocol, 'Handler'),
 			'The WebSocket opening request does not exist' - existence_error(http_socket_transport_websocket_request, end_of_file),
 			'The WebSocket opening response is invalid' - domain_error(http_socket_transport_websocket_response, 'Response'),
+			'The delegated HTTP server rejects the response stream' - domain_error(http_response_stream, 'Error')
+		]
+	]).
+
+	:- public(serve_sse_once/5).
+	:- mode(serve_sse_once(+compound, +object_identifier, --compound, --compound, --compound), one_or_error).
+	:- info(serve_sse_once/5, [
+		comment is 'Accepts one incoming socket connection on the given listener, serves exactly one Server-Sent Events request using the given handler, and on success returns a streamed connection handle that remains open together with the accepted response and client information. Rejected or malformed requests are written to the stream, the accepted streams are closed, and the predicate throws.',
+		argnames is ['Listener', 'Handler', 'Connection', 'Response', 'ClientInfo'],
+		exceptions is [
+			'``Handler`` does not conform to the HTTP handler protocol' - domain_error(http_handler_protocol, 'Handler'),
+			'The SSE opening request does not exist' - existence_error(http_socket_transport_sse_request, end_of_file),
+			'The SSE opening response is invalid' - domain_error(http_socket_transport_sse_response, 'Response'),
 			'The delegated HTTP server rejects the response stream' - domain_error(http_response_stream, 'Error')
 		]
 	]).

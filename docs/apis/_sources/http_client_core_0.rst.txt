@@ -14,8 +14,8 @@ Portable stream-based HTTP client core predicates.
 |    ``logtalk_load(http_client_core(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-07-08
+| **Version:** 1:1:0
+| **Date:** 2026-07-28
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -89,6 +89,35 @@ Reads exactly one HTTP response from a binary stream and returns it as a normali
 | **Exceptions:**
 |    The input stream does not contain a valid normalized HTTP response message:
 |        ``domain_error(http_response_stream,malformed_response(Bytes))``
+
+
+------------
+
+.. index:: read_response_head/2
+.. _http_client_core/0::read_response_head/2:
+
+``read_response_head/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Reads exactly one HTTP response status line and header block from a binary stream and returns a normalized response term with an ``empty`` body, leaving the stream positioned at the first body byte, if any. Intended for streamed or indeterminate-length response bodies (for example, Server-Sent Events) that callers read incrementally themselves instead of through ``read_response/2``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``read_response_head(Input,Response)``
+| **Mode and number of proofs:**
+|    ``read_response_head(+stream,--compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The input stream ends before a status line is read:
+|        ``domain_error(http_response_stream,unexpected_end_of_file)``
+|    The input stream does not contain a valid normalized HTTP response status line:
+|        ``domain_error(http_response_stream,malformed_status_line(Bytes))``
+|    The input stream contains an invalid response line ending:
+|        ``domain_error(http_response_stream,invalid_line_ending(CarriageReturn,LineFeed))``
+|    The input stream contains a bare line feed:
+|        ``domain_error(http_response_stream,bare_line_feed)``
 
 
 ------------

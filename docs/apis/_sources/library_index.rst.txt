@@ -1465,6 +1465,18 @@ To load any library (including developer tools, ports, and contributions), use t
    http_socket_transport <http_socket_transport_0>
    http_transport_protocol <http_transport_protocol_0>
 
+:ref:`http_sse <library_http_sse>`
+----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   http_sse <http_sse_0>
+   http_sse_accept_handler(Options) <http_sse_accept_handler_1>
+   http_sse_service_handler_protocol <http_sse_service_handler_protocol_0>
+
 :ref:`http_static_files <library_http_static_files>`
 ----------------------------------------------------
 

@@ -868,6 +868,12 @@
 <li class="toctree-l3"><a class="reference internal" href="http_transport_protocol_0.html">http_transport_protocol</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#http-sse"><span class="xref std std-ref">http_sse</span></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http_sse_0.html">http_sse</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_sse_accept_handler_1.html">http_sse_accept_handler(Options)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_sse_service_handler_protocol_0.html">http_sse_service_handler_protocol</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#http-static-files"><span class="xref std std-ref">http_static_files</span></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="http_static_files_0.html">http_static_files</a></li>
 </ul>
@@ -2518,6 +2524,12 @@
 <li class="toctree-l3"><a class="reference internal" href="http_transport_protocol_0.html">http_transport_protocol</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="directory_index.html#library-http-sse"><code class="docutils literal notranslate"><span class="pre">library/http_sse/</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="http_sse_0.html">http_sse</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_sse_accept_handler_1.html">http_sse_accept_handler(Options)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_sse_service_handler_protocol_0.html">http_sse_service_handler_protocol</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="directory_index.html#library-http-static-files"><code class="docutils literal notranslate"><span class="pre">library/http_static_files/</span></code></a><ul>
 <li class="toctree-l3"><a class="reference internal" href="http_static_files_0.html">http_static_files</a></li>
 </ul>
@@ -3844,6 +3856,8 @@
 <li class="toctree-l3"><a class="reference internal" href="http_server_core_session_0.html">http_server_core_session</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_server_core_session_handler_2.html">http_server_core_session_handler(Manager,Handler)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_socket_transport_0.html">http_socket_transport</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_sse_0.html">http_sse</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_sse_accept_handler_1.html">http_sse_accept_handler(Options)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_static_files_0.html">http_static_files</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_text_body_codec_0.html">http_text_body_codec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_websocket_0.html">http_websocket</a></li>
@@ -4296,6 +4310,7 @@
 <li class="toctree-l3"><a class="reference internal" href="http_handler_protocol_0.html">http_handler_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_request_protocol_0.html">http_request_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_response_protocol_0.html">http_response_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="http_sse_service_handler_protocol_0.html">http_sse_service_handler_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_transport_protocol_0.html">http_transport_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="http_websocket_service_handler_protocol_0.html">http_websocket_service_handler_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ieee_754_fields_protocol_0.html">ieee_754_fields_protocol</a></li>
@@ -4452,6 +4467,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#accept-4"><code class="docutils literal notranslate"><span class="pre">accept/4</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#accept-sse-3"><code class="docutils literal notranslate"><span class="pre">accept_sse/3</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#accept-websocket-3"><code class="docutils literal notranslate"><span class="pre">accept_websocket/3</span></code></a><ul class="simple">
@@ -9350,6 +9368,9 @@
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#open-session-5"><code class="docutils literal notranslate"><span class="pre">open_session/5</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#open-sse-4"><code class="docutils literal notranslate"><span class="pre">open_sse/4</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#open-websocket-4"><code class="docutils literal notranslate"><span class="pre">open_websocket/4</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -10484,6 +10505,9 @@
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#read-response-2"><code class="docutils literal notranslate"><span class="pre">read_response/2</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#read-response-head-2"><code class="docutils literal notranslate"><span class="pre">read_response_head/2</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#read-stream-2"><code class="docutils literal notranslate"><span class="pre">read_stream/2</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -10611,6 +10635,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#receive-binary-2"><code class="docutils literal notranslate"><span class="pre">receive_binary/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#receive-data-2"><code class="docutils literal notranslate"><span class="pre">receive_data/2</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#receive-json-2"><code class="docutils literal notranslate"><span class="pre">receive_json/2</span></code></a><ul class="simple">
@@ -11186,10 +11213,25 @@
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#send-binary-2"><code class="docutils literal notranslate"><span class="pre">send_binary/2</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#send-comment-2"><code class="docutils literal notranslate"><span class="pre">send_comment/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#send-data-2"><code class="docutils literal notranslate"><span class="pre">send_data/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#send-event-3"><code class="docutils literal notranslate"><span class="pre">send_event/3</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#send-heartbeat-1"><code class="docutils literal notranslate"><span class="pre">send_heartbeat/1</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#send-id-data-3"><code class="docutils literal notranslate"><span class="pre">send_id_data/3</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#send-json-2"><code class="docutils literal notranslate"><span class="pre">send_json/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#send-retry-2"><code class="docutils literal notranslate"><span class="pre">send_retry/2</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#send-term-2"><code class="docutils literal notranslate"><span class="pre">send_term/2</span></code></a><ul class="simple">
@@ -11259,6 +11301,12 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#serve-once-7"><code class="docutils literal notranslate"><span class="pre">serve_once/7</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#serve-sse-4"><code class="docutils literal notranslate"><span class="pre">serve_sse/4</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="predicate_index.html#serve-sse-once-5"><code class="docutils literal notranslate"><span class="pre">serve_sse_once/5</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="predicate_index.html#serve-until-shutdown-4"><code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/4</span></code></a><ul class="simple">
@@ -12724,7 +12772,7 @@
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
 <li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
 </ul>
-<p>Generated on Mon Jul 27 12:37:49 WEST 2026</p>
+<p>Generated on Tue Jul 28 16:07:02 WEST 2026</p>
 </section>
 
 

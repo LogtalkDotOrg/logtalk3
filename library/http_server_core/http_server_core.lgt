@@ -23,9 +23,9 @@
 	imports(http_message_helpers)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-28,
 		comment is 'Portable stream-based HTTP server orchestration predicates.'
 	]).
 
@@ -107,6 +107,31 @@
 		]
 	]).
 
+	:- public(accept_sse/3).
+	:- mode(accept_sse(+compound, --compound, +list), one_or_error).
+	:- info(accept_sse/3, [
+		comment is 'Validates a normalized Server-Sent Events request and builds a matching streamed ``200`` ``text/event-stream`` response with an empty declared body. The response headers and body are written by ``serve_sse/4`` without Content-Length or Transfer-Encoding framing so that the caller can continue writing an indeterminate-length event stream on the same connection.',
+		argnames is ['Request', 'Response', 'Options'],
+		exceptions is [
+			'``Options`` contains an invalid SSE acceptance option' - domain_error(http_server_core_sse_option, 'Option'),
+			'``Options`` contains reserved SSE response headers' - domain_error(http_server_core_sse_headers, 'Headers'),
+			'``Request`` is not a valid normalized SSE request' - domain_error(http_server_core_sse_request, 'Request'),
+			'The generated SSE response is not a valid normalized HTTP response term' - domain_error(http_response, 'Response')
+		]
+	]).
+
+	:- public(serve_sse/4).
+	:- mode(serve_sse(+stream, +stream, +object_identifier, --compound), one_or_error).
+	:- info(serve_sse/4, [
+		comment is 'Reads one request from a binary input stream, dispatches it to a handler object, writes one response to a binary output stream, and returns ``accepted(Request, Response)`` when the exchange completed with a valid streamed ``200`` ``text/event-stream`` response. Malformed requests and non-streaming responses are written to the stream and reported as ``rejected(Response)``. Clean end-of-file before any bytes are read is reported as ``end_of_file``.',
+		argnames is ['Input', 'Output', 'Handler', 'Outcome'],
+		exceptions is [
+			'``Handler`` does not conform to the HTTP handler protocol' - domain_error(http_handler_protocol, 'Handler'),
+			'``Output`` is invalid for the delegated HTTP response generator' - domain_error(http_sink, stream('Output')),
+			'The generated response is not a valid normalized HTTP response term' - domain_error(http_response, 'Response')
+		]
+	]).
+
 	:- uses(list, [
 		append/3, member/2, memberchk/2, reverse/2, valid/1 as proper_list/1
 	]).
@@ -124,6 +149,13 @@
 		websocket_accept(Key, Accept),
 		websocket_response_properties(Properties0, Accept, SelectedProtocol, Properties),
 		http_core::response(Version, status(101, 'Switching Protocols'), Headers, empty, Properties, Response).
+
+	accept_sse(Request, Response, Options) :-
+		parse_accept_sse_options(Options, Headers0, Properties),
+		validate_accept_sse_headers(Headers0),
+		validate_sse_request(Request, Version),
+		sse_response_headers(Headers0, Headers),
+		http_core::response(Version, status(200, 'OK'), Headers, empty, Properties, Response).
 
 	read_request(Input, Request) :-
 		read_request_bytes(Input, Bytes),
@@ -171,6 +203,11 @@
 		validate_handler(Handler),
 		try_read_request(Input, Result),
 		serve_websocket_result(Result, Output, Handler, Outcome).
+
+	serve_sse(Input, Output, Handler, Outcome) :-
+		validate_handler(Handler),
+		try_read_request(Input, Result),
+		serve_sse_result(Result, Output, Handler, Outcome).
 
 	parse_accept_websocket_options(Options, Headers, Properties, ProtocolOption) :-
 		check_accept_websocket_options(Options),
@@ -352,6 +389,101 @@
 
 	upgrade_required_response(Response) :-
 		http_core::response(http(1, 1), status(426, 'Upgrade Required'), [], content('text/plain', text('Upgrade Required')), [websocket_version(13)], Response).
+
+	parse_accept_sse_options(Options, Headers, Properties) :-
+		check_accept_sse_options(Options),
+		accept_sse_option(Options, headers, [], Headers),
+		accept_sse_option(Options, properties, [], Properties).
+
+	accept_sse_option([], _Name, Default, Default).
+	accept_sse_option([Option| _Options], Name, _Default, Value) :-
+		Option =.. [Name, Value],
+		!.
+	accept_sse_option([_Option| Options], Name, Default, Value) :-
+		accept_sse_option(Options, Name, Default, Value).
+
+	check_accept_sse_options([]).
+	check_accept_sse_options([Option| Options]) :-
+		check_accept_sse_option(Option),
+		check_accept_sse_options(Options).
+
+	check_accept_sse_option(headers(Headers)) :-
+		proper_list(Headers),
+		!.
+	check_accept_sse_option(properties(Properties)) :-
+		proper_list(Properties),
+		!.
+	check_accept_sse_option(Option) :-
+		domain_error(http_server_core_sse_option, Option).
+
+	validate_accept_sse_headers(Headers) :-
+		(	member(Name-_, Headers),
+			member(Name, [content_type, cache_control]) ->
+			domain_error(http_server_core_sse_headers, Headers)
+		;	true
+		).
+
+	validate_sse_request(Request, Version) :-
+		(	valid_sse_request(Request, Version) ->
+			true
+		;	domain_error(http_server_core_sse_request, Request)
+		).
+
+	valid_sse_request(Request, Version) :-
+		http_core::method(Request, get),
+		http_core::version(Request, Version),
+		sse_http_version(Version).
+
+	sse_http_version(http(1, 1)) :-
+		!.
+
+	sse_response_headers(Headers0, [content_type-media_type('text/event-stream', [charset-'UTF-8']), cache_control-'no-cache'| Headers0]).
+
+	serve_sse_result(end_of_file, _Output, _Handler, end_of_file).
+	serve_sse_result(error(Response), Output, _Handler, rejected(Response)) :-
+		write_response(Output, Response).
+	serve_sse_result(request(Request), Output, Handler, Outcome) :-
+		dispatch_sse(Handler, Request, Response),
+		(	valid_sse_accept_response(Response) ->
+			write_sse_response(Output, Response),
+			Outcome = accepted(Request, Response)
+		;	write_response_for_request(Output, Request, Response),
+			Outcome = rejected(Response)
+		).
+
+	dispatch_sse(Handler, Request, Response) :-
+		validate_handler(Handler),
+		http_core::version(Request, Version),
+		catch(
+			(	Handler::handle(Request, Candidate),
+				(	http_core::is_response(Candidate) ->
+					Response = Candidate
+				;	internal_server_error_response(Version, Response)
+				)
+			),
+			Error,
+			(	sse_handler_error_response(Error, Response) ->
+				true
+			;	internal_server_error_response(Version, Response)
+			)
+		).
+
+	sse_handler_error_response(error(domain_error(http_server_core_sse_request, _Request), _Context), Response) :-
+		bad_request_response(http_server_core_sse_request, Response).
+
+	valid_sse_accept_response(Response) :-
+		http_core::status(Response, status(200, _ReasonPhrase)),
+		http_core::body(Response, empty),
+		http_core::header(Response, content_type, media_type('text/event-stream', _Parameters)).
+
+	write_sse_response(Output, Response) :-
+		Response = response(Version, Status, Headers, _Body, _Properties),
+		http_core::generate_status_line(codes(StatusLineCodes), status_line(Version, Status)),
+		http_core::generate_headers(codes(HeaderCodes), Headers),
+		append(StatusLineCodes, HeaderCodes, PrefixCodes),
+		append(PrefixCodes, [0'\r, 0'\n], Bytes),
+		write_bytes(Bytes, Output),
+		flush_output(Output).
 
 	valid_websocket_upgrade_response(Request, Response) :-
 		http_core::status(Response, status(101, _ReasonPhrase)),

@@ -14,8 +14,8 @@ Portable stream-based HTTP server orchestration predicates.
 |    ``logtalk_load(http_server_core(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-07-08
+| **Version:** 1:1:0
+| **Date:** 2026-07-28
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -218,6 +218,62 @@ Reads one request from a binary input stream, dispatches it to a handler object,
 |        ``domain_error(http_response,Response)``
 |    The response body file range is outside the file contents:
 |        ``domain_error(http_body_file_range,file(File,Offset,Length))``
+
+
+------------
+
+.. index:: accept_sse/3
+.. _http_server_core/0::accept_sse/3:
+
+``accept_sse/3``
+^^^^^^^^^^^^^^^^
+
+Validates a normalized Server-Sent Events request and builds a matching streamed ``200`` ``text/event-stream`` response with an empty declared body. The response headers and body are written by ``serve_sse/4`` without Content-Length or Transfer-Encoding framing so that the caller can continue writing an indeterminate-length event stream on the same connection.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``accept_sse(Request,Response,Options)``
+| **Mode and number of proofs:**
+|    ``accept_sse(+compound,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Options`` contains an invalid SSE acceptance option:
+|        ``domain_error(http_server_core_sse_option,Option)``
+|    ``Options`` contains reserved SSE response headers:
+|        ``domain_error(http_server_core_sse_headers,Headers)``
+|    ``Request`` is not a valid normalized SSE request:
+|        ``domain_error(http_server_core_sse_request,Request)``
+|    The generated SSE response is not a valid normalized HTTP response term:
+|        ``domain_error(http_response,Response)``
+
+
+------------
+
+.. index:: serve_sse/4
+.. _http_server_core/0::serve_sse/4:
+
+``serve_sse/4``
+^^^^^^^^^^^^^^^
+
+Reads one request from a binary input stream, dispatches it to a handler object, writes one response to a binary output stream, and returns ``accepted(Request, Response)`` when the exchange completed with a valid streamed ``200`` ``text/event-stream`` response. Malformed requests and non-streaming responses are written to the stream and reported as ``rejected(Response)``. Clean end-of-file before any bytes are read is reported as ``end_of_file``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serve_sse(Input,Output,Handler,Outcome)``
+| **Mode and number of proofs:**
+|    ``serve_sse(+stream,+stream,+object_identifier,--compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Handler`` does not conform to the HTTP handler protocol:
+|        ``domain_error(http_handler_protocol,Handler)``
+|    ``Output`` is invalid for the delegated HTTP response generator:
+|        ``domain_error(http_sink,stream(Output))``
+|    The generated response is not a valid normalized HTTP response term:
+|        ``domain_error(http_response,Response)``
 
 
 ------------

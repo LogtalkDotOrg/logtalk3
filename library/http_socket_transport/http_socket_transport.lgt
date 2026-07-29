@@ -24,9 +24,9 @@
 	imports([options, http_message_helpers, http_text_helpers])).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-28,
 		comment is 'Sockets-backed HTTP transport predicates built on top of the ``sockets``, ``http_client_core``, and ``http_server_core`` libraries.'
 	]).
 
@@ -246,6 +246,16 @@
 			)
 		).
 
+	serve_sse_once(ServerSocket, Handler, Connection, Response, ClientInfo) :-
+		socket::server_accept(ServerSocket, Input, Output, ClientInfo),
+		catch(
+			serve_accepted_sse(Input, Output, Handler, Connection, Response, ClientInfo),
+			Error,
+			(	catch(socket::close(Input, Output), _, true),
+				throw(Error)
+			)
+		).
+
 	serve_listener(Listener, Handler, Count, ClientInfos) :-
 		serve_listener(Listener, Handler, Count, ClientInfos, []).
 
@@ -264,40 +274,17 @@
 	request_shutdown(Control) :-
 		request_shutdown_impl(Control).
 
-	:- if(current_logtalk_flag(prolog_dialect, xvm)).
-
-		serve_accepted_connection(Input, Output, Handler) :-
-			setup_call_cleanup(
-				adopt_connection_streams(Input, Output),
-				http_server_core::serve_connection(Input, Output, Handler),
-				socket::close(Input, Output)
-			).
-
-	:- else.
-
-		serve_accepted_connection(Input, Output, Handler) :-
-			setup_call_cleanup(
-				true,
-				http_server_core::serve_connection(Input, Output, Handler),
-				socket::close(Input, Output)
-			).
-
-	:- endif.
-
-	:- if(current_logtalk_flag(prolog_dialect, xvm)).
-
-		serve_accepted_websocket(Input, Output, Handler, Connection, Response, ClientInfo) :-
+	serve_accepted_connection(Input, Output, Handler) :-
+		setup_call_cleanup(
 			adopt_connection_streams(Input, Output),
-			http_server_core::serve_websocket(Input, Output, Handler, Outcome),
-			serve_websocket_outcome(Outcome, Input, Output, Connection, Response, ClientInfo).
+			http_server_core::serve_connection(Input, Output, Handler),
+			socket::close(Input, Output)
+		).
 
-	:- else.
-
-		serve_accepted_websocket(Input, Output, Handler, Connection, Response, ClientInfo) :-
-			http_server_core::serve_websocket(Input, Output, Handler, Outcome),
-			serve_websocket_outcome(Outcome, Input, Output, Connection, Response, ClientInfo).
-
-	:- endif.
+	serve_accepted_websocket(Input, Output, Handler, Connection, Response, ClientInfo) :-
+		adopt_connection_streams(Input, Output),
+		http_server_core::serve_websocket(Input, Output, Handler, Outcome),
+		serve_websocket_outcome(Outcome, Input, Output, Connection, Response, ClientInfo).
 
 	serve_websocket_outcome(accepted(_Request, Response), Input, Output, http_websocket_connection(ClientInfo, Input, Output), Response, ClientInfo).
 	serve_websocket_outcome(rejected(Response), _Input, _Output, _Connection, _RejectedResponse, _ClientInfo) :-
@@ -305,10 +292,24 @@
 	serve_websocket_outcome(end_of_file, _Input, _Output, _Connection, _Response, _ClientInfo) :-
 		existence_error(http_socket_transport_websocket_request, end_of_file).
 
+	serve_accepted_sse(Input, Output, Handler, Connection, Response, ClientInfo) :-
+		adopt_connection_streams(Input, Output),
+		http_server_core::serve_sse(Input, Output, Handler, Outcome),
+		serve_sse_outcome(Outcome, Input, Output, Connection, Response, ClientInfo).
+
+	serve_sse_outcome(accepted(_Request, Response), Input, Output, http_sse_connection(ClientInfo, Input, Output), Response, ClientInfo).
+	serve_sse_outcome(rejected(Response), _Input, _Output, _Connection, _RejectedResponse, _ClientInfo) :-
+		domain_error(http_socket_transport_sse_response, Response).
+	serve_sse_outcome(end_of_file, _Input, _Output, _Connection, _Response, _ClientInfo) :-
+		existence_error(http_socket_transport_sse_request, end_of_file).
+
 	connection_streams(http_connection(_Host, _Port, Input, Output), Input, Output) :-
 		adopt_connection_streams(Input, Output),
 		!.
 	connection_streams(http_websocket_connection(_ClientInfo, Input, Output), Input, Output) :-
+		adopt_connection_streams(Input, Output),
+		!.
+	connection_streams(http_sse_connection(_ClientInfo, Input, Output), Input, Output) :-
 		adopt_connection_streams(Input, Output),
 		!.
 	connection_streams(Connection, _Input, _Output) :-
@@ -319,16 +320,16 @@
 
 	:- if(current_logtalk_flag(prolog_dialect, xvm)).
 
-	adopt_connection_streams(Input, Output) :-
-		{adopt_stream(Input)},
-		(	Input == Output ->
-			true
-		;	{adopt_stream(Output)}
-		).
+		adopt_connection_streams(Input, Output) :-
+			{adopt_stream(Input)},
+			(	Input == Output ->
+				true
+			;	{adopt_stream(Output)}
+			).
 
 	:- else.
 
-	adopt_connection_streams(_Input, _Output).
+		adopt_connection_streams(_Input, _Output).
 
 	:- endif.
 

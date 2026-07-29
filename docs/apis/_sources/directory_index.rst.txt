@@ -1386,6 +1386,18 @@ To load an entity, always load the library that includes it using the goal ``log
    http_socket_transport <http_socket_transport_0>
    http_transport_protocol <http_transport_protocol_0>
 
+``library/http_sse/``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   http_sse <http_sse_0>
+   http_sse_accept_handler(Options) <http_sse_accept_handler_1>
+   http_sse_service_handler_protocol <http_sse_service_handler_protocol_0>
+
 ``library/http_static_files/``
 ------------------------------
 

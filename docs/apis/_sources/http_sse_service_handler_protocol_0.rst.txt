@@ -1,0 +1,93 @@
+.. index:: single: http_sse_service_handler_protocol
+.. _http_sse_service_handler_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``http_sse_service_handler_protocol``
+=====================================
+
+Protocol implemented by callback-driven http_sse client and server session handlers.
+
+| **Availability:** 
+|    ``logtalk_load(http_sse(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-07-27
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: handle/2
+.. _http_sse_service_handler_protocol/0::handle/2:
+
+``handle/2``
+^^^^^^^^^^^^
+
+Called by ``open_session/4-5`` for each event dispatched on a client session, in arrival order. ``Continue`` must be unified with ``continue`` to keep listening for further events (reconnecting with the last received event id if the connection drops) or with ``stop`` to end the session.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``handle(Event,Continue)``
+| **Mode and number of proofs:**
+|    ``handle(+compound,-atom)`` - ``one``
+
+
+------------
+
+.. index:: next/4
+.. _http_sse_service_handler_protocol/0::next/4:
+
+``next/4``
+^^^^^^^^^^
+
+Called by ``serve_once/5-6`` to obtain the next batch of outbound SSE records to write on a server session. The first call is made with ``State0`` bound to ``[]``. ``Messages`` must be a list of terms valid for ``send/2``. ``Continue`` must be unified with ``continue`` to have ``Messages`` written and ``next/4`` called again with the updated state, or with ``stop`` to have ``Messages`` written and the session and connection closed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``next(State0,State,Messages,Continue)``
+| **Mode and number of proofs:**
+|    ``next(+term,-term,-list,-atom)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

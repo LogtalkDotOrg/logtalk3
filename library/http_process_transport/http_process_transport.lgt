@@ -24,9 +24,9 @@
 	imports([options, http_message_helpers, http_text_helpers])).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-17,
+		date is 2026-07-28,
 		comment is 'Process-backed HTTP transport predicates using the process library and helper processes.'
 	]).
 
@@ -321,6 +321,10 @@
 		!,
 		connection_streams(http_websocket_connection(_ClientInfo, Input, Output), AdoptedInput, AdoptedOutput),
 		close_stream_pair(AdoptedInput, AdoptedOutput).
+	close_connection(http_sse_connection(_ClientInfo, Input, Output)) :-
+		!,
+		connection_streams(http_sse_connection(_ClientInfo, Input, Output), AdoptedInput, AdoptedOutput),
+		close_stream_pair(AdoptedInput, AdoptedOutput).
 	close_connection(Connection) :-
 		take_process_connection(Connection, Outcome),
 		close_process_connection_outcome(Outcome, Connection).
@@ -332,6 +336,9 @@
 		adopt_connection_streams(Input, Output),
 		!.
 	connection_streams(http_websocket_connection(_ClientInfo, Input, Output), Input, Output) :-
+		adopt_connection_streams(Input, Output),
+		!.
+	connection_streams(http_sse_connection(_ClientInfo, Input, Output), Input, Output) :-
 		adopt_connection_streams(Input, Output),
 		!.
 	connection_streams(Connection, _Input, _Output) :-
@@ -431,6 +438,16 @@
 			)
 		).
 
+	serve_sse_once(Listener, Handler, Connection, Response, ClientInfo) :-
+		accept_process_listener_connection(Listener, Input, Output, ClientInfo),
+		catch(
+			serve_accepted_sse(Input, Output, Handler, Connection, Response, ClientInfo),
+			Error,
+			(	catch(close_stream_pair(Input, Output), _, true),
+				throw(Error)
+			)
+		).
+
 	serve_listener(Listener, Handler, Count, ClientInfos) :-
 		serve_listener(Listener, Handler, Count, ClientInfos, []).
 
@@ -473,6 +490,11 @@
 		http_server_core::serve_websocket(Input, Output, Handler, Outcome),
 		serve_websocket_outcome(Outcome, Input, Output, Connection, Response, ClientInfo).
 
+	serve_accepted_sse(Input, Output, Handler, Connection, Response, ClientInfo) :-
+		adopt_connection_streams(Input, Output),
+		http_server_core::serve_sse(Input, Output, Handler, Outcome),
+		serve_sse_outcome(Outcome, Input, Output, Connection, Response, ClientInfo).
+
 	try_accept_bounded_listener_connection(Listener, Input, Output, ClientInfo, Outcome) :-
 		catch(
 			(	accept_process_listener_connection(Listener, Input, Output, ClientInfo),
@@ -487,6 +509,12 @@
 		domain_error(http_socket_transport_websocket_response, Response).
 	serve_websocket_outcome(end_of_file, _Input, _Output, _Connection, _Response, _ClientInfo) :-
 		existence_error(http_socket_transport_websocket_request, end_of_file).
+
+	serve_sse_outcome(accepted(_Request, Response), Input, Output, http_sse_connection(ClientInfo, Input, Output), Response, ClientInfo).
+	serve_sse_outcome(rejected(Response), _Input, _Output, _Connection, _RejectedResponse, _ClientInfo) :-
+		domain_error(http_socket_transport_sse_response, Response).
+	serve_sse_outcome(end_of_file, _Input, _Output, _Connection, _Response, _ClientInfo) :-
+		existence_error(http_socket_transport_sse_request, end_of_file).
 
 	open_process_connection(Transport, Executable, Arguments, Type, NormalizedHost, Port, Context, Connection) :-
 		% the type/1 option is only effective for the SICStus Prolog and SWI-Prolog backends

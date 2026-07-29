@@ -135,6 +135,7 @@ directory in the ``NOTES.md`` file.
    http_session
    http_socket_transport
    http_process_transport
+   http_sse
    http_static_files
    http_websocket
    http_websocket_frames

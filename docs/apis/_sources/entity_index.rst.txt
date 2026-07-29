@@ -339,6 +339,8 @@ Objects
    http_server_core_session <http_server_core_session_0>
    http_server_core_session_handler(Manager,Handler) <http_server_core_session_handler_2>
    http_socket_transport <http_socket_transport_0>
+   http_sse <http_sse_0>
+   http_sse_accept_handler(Options) <http_sse_accept_handler_1>
    http_static_files <http_static_files_0>
    http_text_body_codec <http_text_body_codec_0>
    http_websocket <http_websocket_0>
@@ -797,6 +799,7 @@ Protocols
    http_handler_protocol <http_handler_protocol_0>
    http_request_protocol <http_request_protocol_0>
    http_response_protocol <http_response_protocol_0>
+   http_sse_service_handler_protocol <http_sse_service_handler_protocol_0>
    http_transport_protocol <http_transport_protocol_0>
    http_websocket_service_handler_protocol <http_websocket_service_handler_protocol_0>
    ieee_754_fields_protocol <ieee_754_fields_protocol_0>

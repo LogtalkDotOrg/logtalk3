@@ -239,6 +239,7 @@
 		http_socket_transport(loader),
 		http_process_transport(loader),
 		http_server(loader),
+	    http_sse(loader),
 		http_websocket_handshake(loader),
 		http_websocket_frames(loader),
 		http_websocket_messages(loader),

@@ -23,9 +23,9 @@
 	imports(http_message_helpers)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-07-28,
 		comment is 'Portable stream-based HTTP client core predicates.',
 		remarks is [
 			'Binary streams' - 'All stream predicates expect binary input and output streams.',
@@ -53,6 +53,19 @@
 		argnames is ['Input', 'Response'],
 		exceptions is [
 			'The input stream does not contain a valid normalized HTTP response message' - domain_error(http_response_stream, malformed_response('Bytes'))
+		]
+	]).
+
+	:- public(read_response_head/2).
+	:- mode(read_response_head(+stream, --compound), one_or_error).
+	:- info(read_response_head/2, [
+		comment is 'Reads exactly one HTTP response status line and header block from a binary stream and returns a normalized response term with an ``empty`` body, leaving the stream positioned at the first body byte, if any. Intended for streamed or indeterminate-length response bodies (for example, Server-Sent Events) that callers read incrementally themselves instead of through ``read_response/2``.',
+		argnames is ['Input', 'Response'],
+		exceptions is [
+			'The input stream ends before a status line is read' - domain_error(http_response_stream, unexpected_end_of_file),
+			'The input stream does not contain a valid normalized HTTP response status line' - domain_error(http_response_stream, malformed_status_line('Bytes')),
+			'The input stream contains an invalid response line ending' - domain_error(http_response_stream, invalid_line_ending('CarriageReturn', 'LineFeed')),
+			'The input stream contains a bare line feed' - domain_error(http_response_stream, bare_line_feed)
 		]
 	]).
 
@@ -169,6 +182,20 @@
 		strip_head_content_length_headers(Headers0, Headers, Properties).
 	strip_head_content_length_headers([Header| Headers0], [Header| Headers], Properties) :-
 		strip_head_content_length_headers(Headers0, Headers, Properties).
+
+	read_response_head(Input, Response) :-
+		read_line_bytes(Input, LineResult),
+		(	LineResult == end_of_file ->
+			domain_error(http_response_stream, unexpected_end_of_file)
+		;	LineResult = line(StatusLineBytes)
+		),
+		append(StatusLineBytes, [0'\r, 0'\n], StatusLineBytesCRLF),
+		(	http_core::parse_status_line(codes(StatusLineBytesCRLF), status_line(Version, Status)) ->
+			true
+		;	domain_error(http_response_stream, malformed_status_line(StatusLineBytesCRLF))
+		),
+		read_header_block(Input, _HeaderBytes, Headers),
+		http_core::response(Version, Status, Headers, empty, [], Response).
 
 	read_response_bytes(Input, Bytes, BodyFraming) :-
 		read_line_bytes(Input, LineResult),

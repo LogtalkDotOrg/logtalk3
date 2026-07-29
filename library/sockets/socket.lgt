@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 0:13:0,
+		version is 0:13:1,
 		author is 'Paulo Moura',
-		date is 2026-04-22,
+		date is 2026-07-28,
 		comment is 'Portable abstraction over TCP sockets. Provides a high-level API for client and server socket operations that works with selected backend Prolog systems.',
 		remarks is [
 			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, and Trealla Prolog.',
@@ -406,7 +406,10 @@
 		peer_to_host_port(Peer, Client).
 
 	peer_to_host_port(Peer, Host) :-
-		socket:ip_name(Peer, Host),
+		catch(socket:ip_name(Peer, Host), _, fail),
+		!.
+	peer_to_host_port(Peer, Host) :-
+		catch(socket:tcp_host_to_address(Host, Peer), _, fail),
 		!.
 	peer_to_host_port(Host, Host) :-
 		atom(Host),

@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on July 27, 2026
+##   Last updated on July 28, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -180,12 +180,13 @@ Foreach-Object {
 (Get-Content ../../../library/http_htmx/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_htmx.rst
 (Get-Content ../../../library/http_multipart/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_multipart.rst
 (Get-Content ../../../library/http_parameters/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_parameters.rst
+(Get-Content ../../../library/http_process_transport/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_process_transport.rst
 (Get-Content ../../../library/http_router/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_router.rst
 (Get-Content ../../../library/http_server/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_server.rst
 (Get-Content ../../../library/http_server_core/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_server_core.rst
 (Get-Content ../../../library/http_session/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_session.rst
 (Get-Content ../../../library/http_socket_transport/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_socket_transport.rst
-(Get-Content ../../../library/http_process_transport/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_process_transport.rst
+(Get-Content ../../../library/http_sse/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_sse.rst
 (Get-Content ../../../library/http_static_files/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_static_files.rst
 (Get-Content ../../../library/http_websocket/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_websocket.rst
 (Get-Content ../../../library/http_websocket_frames/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/http_websocket_frames.rst

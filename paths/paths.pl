@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on July 27, 2026
+%  Last updated on July 28, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -209,12 +209,13 @@ logtalk_library_path(http_directory_listing, library('http_directory_listing/'))
 logtalk_library_path(http_htmx, library('http_htmx/')).
 logtalk_library_path(http_multipart, library('http_multipart/')).
 logtalk_library_path(http_parameters, library('http_parameters/')).
+logtalk_library_path(http_process_transport, library('http_process_transport/')).
 logtalk_library_path(http_router, library('http_router/')).
 logtalk_library_path(http_server, library('http_server/')).
 logtalk_library_path(http_server_core, library('http_server_core/')).
 logtalk_library_path(http_session, library('http_session/')).
 logtalk_library_path(http_socket_transport, library('http_socket_transport/')).
-logtalk_library_path(http_process_transport, library('http_process_transport/')).
+logtalk_library_path(http_sse, library('http_sse/')).
 logtalk_library_path(http_static_files, library('http_static_files/')).
 logtalk_library_path(http_websocket, library('http_websocket/')).
 logtalk_library_path(http_websocket_frames, library('http_websocket_frames/')).

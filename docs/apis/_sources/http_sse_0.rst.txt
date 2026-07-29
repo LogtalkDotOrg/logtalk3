@@ -1,0 +1,709 @@
+.. index:: single: http_sse
+.. _http_sse/0:
+
+.. rst-class:: right
+
+**object**
+
+``http_sse``
+============
+
+High-level Server-Sent Events (SSE) predicates for opening client connections, accepting server connections, exchanging events, and running common client and server session loops.
+
+| **Availability:** 
+|    ``logtalk_load(http_sse(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-07-27
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`http_client <http_client/0>`
+|    :ref:`http_core <http_core/0>`
+|    :ref:`json <json/0>`
+|    :ref:`list <list/0>`
+|    :ref:`term_io <term_io/0>`
+|    :ref:`url(Representation) <url/1>`
+|    :ref:`user <user/0>`
+|    :ref:`utf_8 <utf_8/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: open/2
+.. _http_sse/0::open/2:
+
+``open/2``
+^^^^^^^^^^
+
+Opens a client SSE connection to the given absolute ``http://`` or ``https://`` URL and returns an opaque handle managed by this object. Equivalent to ``open/3`` with an empty options list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open(URL,SSE)``
+| **Mode and number of proofs:**
+|    ``open(+atom,--compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: open/3
+.. _http_sse/0::open/3:
+
+``open/3``
+^^^^^^^^^^
+
+Opens a client SSE connection to the given URL and returns an opaque handle. The ``transport/1`` option selects the transport, with ``transport(default)`` deriving it from the URL scheme (``http`` uses ``http_socket_transport`` and ``https`` uses ``http_process_transport``). The ``max_field_length/1`` option bounds the length, in bytes, of any single field line read from the connection (default ``none``, meaning unbounded). Remaining options, including ``headers/1``, ``query/1``, ``version/1``, ``connection_options/1``, and ``last_event_id/1`` (used to populate an initial ``Last-Event-ID`` request header and the handle ``last_event_id/1`` property), are forwarded to ``http_client::open_sse/4``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open(URL,SSE,Options)``
+| **Mode and number of proofs:**
+|    ``open(+atom,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``URL`` is a variable:
+|        ``instantiation_error``
+|    ``URL`` is not a supported absolute SSE URL:
+|        ``domain_error(http_client_sse_url,URL)``
+|    ``URL`` uses an unsupported SSE scheme:
+|        ``domain_error(http_client_sse_scheme,Scheme)``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    ``Options`` contains an invalid direct SSE option:
+|        ``domain_error(http_sse_option,Option)``
+|    ``Options`` contains an invalid SSE client option:
+|        ``domain_error(http_client_sse_option,Option)``
+|    The SSE server response is not a ``200`` ``text/event-stream`` response:
+|        ``domain_error(http_client_sse_response,Response)``
+
+
+------------
+
+.. index:: accept/3
+.. _http_sse/0::accept/3:
+
+``accept/3``
+^^^^^^^^^^^^
+
+Accepts one incoming SSE request on the given listener using the default response policy and returns an opaque server-side handle together with the accepted client information. Equivalent to ``accept/4`` with an empty options list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``accept(Listener,SSE,ClientInfo)``
+| **Mode and number of proofs:**
+|    ``accept(+compound,--compound,--compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: accept/4
+.. _http_sse/0::accept/4:
+
+``accept/4``
+^^^^^^^^^^^^
+
+Accepts one incoming SSE request on the given listener and returns an opaque server-side handle. The ``transport/1`` and ``max_field_length/1`` options are interpreted as in ``open/3``. Remaining options, including ``headers/1`` (extra response headers) and ``properties/1`` (extra response properties), are forwarded to ``http_server_core::accept_sse/3``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``accept(Listener,SSE,ClientInfo,Options)``
+| **Mode and number of proofs:**
+|    ``accept(+compound,--compound,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    ``Options`` contains an invalid direct SSE option:
+|        ``domain_error(http_sse_option,Option)``
+|    ``Options`` contains an invalid SSE acceptance option:
+|        ``domain_error(http_server_core_sse_option,Option)``
+|    ``Options`` contains reserved SSE response headers:
+|        ``domain_error(http_server_core_sse_headers,Headers)``
+|    The SSE request does not exist:
+|        ``existence_error(http_socket_transport_sse_request,end_of_file)``
+|    The SSE request is not a valid normalized SSE request:
+|        ``domain_error(http_server_core_sse_request,Request)``
+
+
+------------
+
+.. index:: send/2
+.. _http_sse/0::send/2:
+
+``send/2``
+^^^^^^^^^^
+
+Writes one outbound SSE record using the opaque handle. Accepts normalized ``event(Type, Data, Id)`` terms (``Type`` and ``Id`` are the atom ``none`` when absent) and the convenience wrappers ``data(Data)``, ``event(Type, Data)``, ``id_data(Id, Data)``, ``comment(Text)``, ``retry(Millis)``, ``json(JSON)``, and ``term(Term)``. Equivalent to ``send/3`` with an empty options list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``send(SSE,Event)``
+| **Mode and number of proofs:**
+|    ``send(+compound,+term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``SSE`` is a variable:
+|        ``instantiation_error``
+|    ``SSE`` is not an open opaque SSE handle:
+|        ``domain_error(http_sse_handle,SSE)``
+|    ``SSE`` refers to a closed opaque SSE handle:
+|        ``existence_error(http_sse_handle,SSE)``
+|    ``Event`` is not a valid outbound SSE record:
+|        ``domain_error(http_sse_event,Event)``
+
+
+------------
+
+.. index:: send/3
+.. _http_sse/0::send/3:
+
+``send/3``
+^^^^^^^^^^
+
+Writes one outbound SSE record using the opaque handle and the given write options. The direct API accepts a ``flush(on|off)`` option controlling whether the underlying stream is flushed after writing (default ``on``).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``send(SSE,Event,Options)``
+| **Mode and number of proofs:**
+|    ``send(+compound,+term,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``SSE`` is a variable:
+|        ``instantiation_error``
+|    ``SSE`` is not an open opaque SSE handle:
+|        ``domain_error(http_sse_handle,SSE)``
+|    ``SSE`` refers to a closed opaque SSE handle:
+|        ``existence_error(http_sse_handle,SSE)``
+|    ``Event`` is not a valid outbound SSE record:
+|        ``domain_error(http_sse_event,Event)``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    ``Options`` contains an invalid write option:
+|        ``domain_error(http_sse_write_option,Option)``
+
+
+------------
+
+.. index:: receive/2
+.. _http_sse/0::receive/2:
+
+``receive/2``
+^^^^^^^^^^^^^
+
+Reads and dispatches the next SSE event using the opaque handle, following the event stream interpretation algorithm. Comment lines and ``retry`` fields are consumed silently and, for ``retry``, update the handle ``retry/1`` property. Returns ``end_of_file``, and closes and deregisters the handle, when the peer closes the connection before another event is dispatched. Equivalent to ``receive/3`` with an empty options list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``receive(SSE,Event)``
+| **Mode and number of proofs:**
+|    ``receive(+compound,--term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``SSE`` is a variable:
+|        ``instantiation_error``
+|    ``SSE`` is not an open opaque SSE handle:
+|        ``domain_error(http_sse_handle,SSE)``
+|    ``SSE`` refers to a closed opaque SSE handle:
+|        ``existence_error(http_sse_handle,SSE)``
+|    A field line uses a line ending other than a line feed or a carriage return immediately followed by a line feed:
+|        ``domain_error(http_sse_line_ending,Byte)``
+|    A field line exceeds the configured maximum length:
+|        ``domain_error(http_sse_field_length,Length)``
+
+
+------------
+
+.. index:: receive/3
+.. _http_sse/0::receive/3:
+
+``receive/3``
+^^^^^^^^^^^^^
+
+Reads the next SSE event using the opaque handle and the given read options. The direct API accepts a ``max_field_length(Bytes|none)`` override of the handle default set by ``open/3`` or ``accept/4``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``receive(SSE,Event,Options)``
+| **Mode and number of proofs:**
+|    ``receive(+compound,--term,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``SSE`` is a variable:
+|        ``instantiation_error``
+|    ``SSE`` is not an open opaque SSE handle:
+|        ``domain_error(http_sse_handle,SSE)``
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    ``Options`` contains an invalid direct SSE option:
+|        ``domain_error(http_sse_option,Option)``
+|    A field line uses a line ending other than a line feed or a carriage return immediately followed by a line feed:
+|        ``domain_error(http_sse_line_ending,Byte)``
+|    A field line exceeds the configured maximum length:
+|        ``domain_error(http_sse_field_length,Length)``
+
+
+------------
+
+.. index:: close/1
+.. _http_sse/0::close/1:
+
+``close/1``
+^^^^^^^^^^^
+
+Best-effort close of the SSE handle.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``close(SSE)``
+| **Mode and number of proofs:**
+|    ``close(+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``SSE`` is a variable:
+|        ``instantiation_error``
+|    ``SSE`` is not an open opaque SSE handle:
+|        ``domain_error(http_sse_handle,SSE)``
+|    ``SSE`` refers to a closed opaque SSE handle:
+|        ``existence_error(http_sse_handle,SSE)``
+
+
+------------
+
+.. index:: close/2
+.. _http_sse/0::close/2:
+
+``close/2``
+^^^^^^^^^^^
+
+Best-effort close of the SSE handle. First attempts to write the given final record, which must be valid for ``send/2``; the handle is closed and deregistered regardless of whether that write succeeds.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``close(SSE,Event)``
+| **Mode and number of proofs:**
+|    ``close(+compound,+term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``SSE`` is a variable:
+|        ``instantiation_error``
+|    ``SSE`` is not an open opaque SSE handle:
+|        ``domain_error(http_sse_handle,SSE)``
+|    ``Event`` is not a valid outbound SSE record:
+|        ``domain_error(http_sse_event,Event)``
+
+
+------------
+
+.. index:: property/2
+.. _http_sse/0::property/2:
+
+``property/2``
+^^^^^^^^^^^^^^
+
+Enumerates properties of an open opaque SSE handle. Supported properties are ``role(client|server)``, ``transport(Transport)``, ``response(Response)``, ``connection(Connection)``, ``client_info(ClientInfo)`` (server-side handles only), ``last_event_id(Id|none)``, and ``retry(Millis|none)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``property(SSE,Property)``
+| **Mode and number of proofs:**
+|    ``property(+compound,+compound)`` - ``zero_or_one``
+|    ``property(+compound,--compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: send_data/2
+.. _http_sse/0::send_data/2:
+
+``send_data/2``
+^^^^^^^^^^^^^^^
+
+Convenience predicate equivalent to ``send(SSE, data(Data))``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``send_data(SSE,Data)``
+| **Mode and number of proofs:**
+|    ``send_data(+compound,+atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: send_event/3
+.. _http_sse/0::send_event/3:
+
+``send_event/3``
+^^^^^^^^^^^^^^^^
+
+Convenience predicate equivalent to ``send(SSE, event(Type, Data))``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``send_event(SSE,Type,Data)``
+| **Mode and number of proofs:**
+|    ``send_event(+compound,+atom,+atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: send_id_data/3
+.. _http_sse/0::send_id_data/3:
+
+``send_id_data/3``
+^^^^^^^^^^^^^^^^^^
+
+Convenience predicate equivalent to ``send(SSE, id_data(Id, Data))``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``send_id_data(SSE,Id,Data)``
+| **Mode and number of proofs:**
+|    ``send_id_data(+compound,+atom,+atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: send_comment/2
+.. _http_sse/0::send_comment/2:
+
+``send_comment/2``
+^^^^^^^^^^^^^^^^^^
+
+Convenience predicate equivalent to ``send(SSE, comment(Text))``. Commonly used to send an idle keep-alive ping that the peer silently discards.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``send_comment(SSE,Text)``
+| **Mode and number of proofs:**
+|    ``send_comment(+compound,+atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: send_retry/2
+.. _http_sse/0::send_retry/2:
+
+``send_retry/2``
+^^^^^^^^^^^^^^^^
+
+Convenience predicate equivalent to ``send(SSE, retry(Millis))``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``send_retry(SSE,Millis)``
+| **Mode and number of proofs:**
+|    ``send_retry(+compound,+integer)`` - ``one_or_error``
+
+
+------------
+
+.. index:: send_json/2
+.. _http_sse/0::send_json/2:
+
+``send_json/2``
+^^^^^^^^^^^^^^^
+
+Convenience predicate that JSON-encodes ``JSON`` and sends it as a data-only event.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``send_json(SSE,JSON)``
+| **Mode and number of proofs:**
+|    ``send_json(+compound,+term)`` - ``one_or_error``
+
+
+------------
+
+.. index:: receive_json/2
+.. _http_sse/0::receive_json/2:
+
+``receive_json/2``
+^^^^^^^^^^^^^^^^^^
+
+Convenience predicate that reads the next dispatched event and JSON-decodes its data.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``receive_json(SSE,JSON)``
+| **Mode and number of proofs:**
+|    ``receive_json(+compound,--term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The event data is not valid JSON text:
+|        ``domain_error(http_sse_json_text,Text)``
+
+
+------------
+
+.. index:: send_term/2
+.. _http_sse/0::send_term/2:
+
+``send_term/2``
+^^^^^^^^^^^^^^^
+
+Convenience predicate that writes ``Term`` to an atom and sends it as a data-only event.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``send_term(SSE,Term)``
+| **Mode and number of proofs:**
+|    ``send_term(+compound,+term)`` - ``one_or_error``
+
+
+------------
+
+.. index:: receive_term/2
+.. _http_sse/0::receive_term/2:
+
+``receive_term/2``
+^^^^^^^^^^^^^^^^^^
+
+Convenience predicate that reads the next dispatched event and reads its data back as a term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``receive_term(SSE,Term)``
+| **Mode and number of proofs:**
+|    ``receive_term(+compound,--term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The event data does not read back as a term:
+|        ``domain_error(http_sse_term_text,Text)``
+
+
+------------
+
+.. index:: receive_data/2
+.. _http_sse/0::receive_data/2:
+
+``receive_data/2``
+^^^^^^^^^^^^^^^^^^
+
+Convenience predicate that reads the next dispatched event and returns just its data.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``receive_data(SSE,Data)``
+| **Mode and number of proofs:**
+|    ``receive_data(+compound,--atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The received record is not a dispatched event:
+|        ``domain_error(http_sse_event_message,Event)``
+
+
+------------
+
+.. index:: open_session/4
+.. _http_sse/0::open_session/4:
+
+``open_session/4``
+^^^^^^^^^^^^^^^^^^
+
+Convenience wrapper that opens a client SSE connection and runs one callback-driven client session, reconnecting with the last received event id when the connection drops, until the handler signals ``stop`` or reconnection is exhausted. Equivalent to ``open_session/5`` with an empty options list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open_session(URL,Handler,Response,State)``
+| **Mode and number of proofs:**
+|    ``open_session(+atom,+object_identifier,--compound,--compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: open_session/5
+.. _http_sse/0::open_session/5:
+
+``open_session/5``
+^^^^^^^^^^^^^^^^^^
+
+Convenience wrapper over ``open_session/4`` that also accepts ``reconnect(on|off)`` (default ``on``) and ``max_reconnect_attempts(Count|infinite)`` (default ``infinite``) session loop options, in addition to the direct client options accepted by ``open/3``. Reconnection is attempted immediately, without an inter-attempt delay. ``State`` is unified with ``closed(LastEventId)`` when the session ends.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``open_session(URL,Handler,Response,State,Options)``
+| **Mode and number of proofs:**
+|    ``open_session(+atom,+object_identifier,--compound,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Handler`` is a variable:
+|        ``instantiation_error``
+|    ``Handler`` does not conform to ``http_sse_service_handler_protocol``:
+|        ``domain_error(http_sse_service_handler,Handler)``
+|    ``Options`` contains an invalid SSE service loop option:
+|        ``domain_error(http_sse_service_option,Option)``
+
+
+------------
+
+.. index:: serve_once/5
+.. _http_sse/0::serve_once/5:
+
+``serve_once/5``
+^^^^^^^^^^^^^^^^
+
+Convenience wrapper that accepts one incoming SSE request on the given listener using the default response policy and runs one callback-driven server session, repeatedly asking the handler for the next records to write until it signals ``stop``, then closes the connection. Equivalent to ``serve_once/6`` with an empty options list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serve_once(Listener,Handler,Response,State,ClientInfo)``
+| **Mode and number of proofs:**
+|    ``serve_once(+compound,+object_identifier,--compound,--compound,--compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: serve_once/6
+.. _http_sse/0::serve_once/6:
+
+``serve_once/6``
+^^^^^^^^^^^^^^^^
+
+Convenience wrapper that accepts one incoming SSE request on the given listener and runs one callback-driven server session using the given combined acceptance and direct options, as accepted by ``accept/4``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``serve_once(Listener,Handler,Response,State,ClientInfo,Options)``
+| **Mode and number of proofs:**
+|    ``serve_once(+compound,+object_identifier,--compound,--compound,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Handler`` is a variable:
+|        ``instantiation_error``
+|    ``Handler`` does not conform to ``http_sse_service_handler_protocol``:
+|        ``domain_error(http_sse_service_handler,Handler)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: handle_seed_/1
+.. _http_sse/0::handle_seed_/1:
+
+``handle_seed_/1``
+^^^^^^^^^^^^^^^^^^
+
+Last allocated opaque SSE handle identifier.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``handle_seed_(HandleId)``
+| **Mode and number of proofs:**
+|    ``handle_seed_(?positive_integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: handle_state_/9
+.. _http_sse/0::handle_state_/9:
+
+``handle_state_/9``
+^^^^^^^^^^^^^^^^^^^
+
+Stored opaque SSE handle state.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``handle_state_(HandleId,Role,Transport,Connection,Response,ClientInfo,LastEventId,Retry,MaxFieldLength)``
+| **Mode and number of proofs:**
+|    ``handle_state_(?positive_integer,?atom,?object_identifier,?compound,?compound,?term,?atom,?term,?term)`` - ``zero_or_more``
+
+
+------------
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`http_sse_service_handler_protocol <http_sse_service_handler_protocol/0>`
+

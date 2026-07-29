@@ -45,6 +45,8 @@ Documentation
 Library
 -------
 
+* ADDED: New `http_sse` library implementing HTTP Server-Sent Events.
+
 * ADDED: New `integer_partitions` library providing predicates for generating
 and querying integer partitions.
 
@@ -53,6 +55,9 @@ short, obfuscated (but not encrypted), URL-safe identifiers.
 
 * ADDED: New `typeid` library implementing a type-safe, K-sortable, globally
 unique identifier (TypeID) generator.
+
+* IMPROVED: Portability of the `sockets` library with versions of SWI-Prolog
+older than 9.1.5.
 
 * FIXED: Portability of the `jwt` library when using backends that don't
 provide `length/2` as a built-in predicate.

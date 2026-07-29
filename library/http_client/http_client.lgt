@@ -23,9 +23,9 @@
 	imports([options, http_message_helpers, http_text_helpers, http_origin_site_helpers])).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-09,
+		date is 2026-07-28,
 		comment is 'Request-oriented HTTP client facade built on top of the URL and HTTP transport libraries.'
 	]).
 
@@ -316,6 +316,25 @@
 		]
 	]).
 
+	:- public(open_sse/4).
+	:- mode(open_sse(+atom, --compound, --compound, +list), one_or_error).
+	:- info(open_sse/4, [
+		comment is 'Builds a Server-Sent Events request from the given absolute ``http://`` or ``https://`` URL and options, selects a compatible transport, opens a reusable socket connection, writes the request, reads only the response status line and headers, validates the ``200`` ``text/event-stream`` response, and returns both the connection handle and the response. The response body, if any, is left unread on the connection streams for incremental consumption by the caller.',
+		argnames is ['URL', 'Connection', 'Response', 'Options'],
+		exceptions is [
+			'``URL`` is a variable' - instantiation_error,
+			'``URL`` is not a supported absolute SSE URL' - domain_error(http_client_sse_url, 'URL'),
+			'``URL`` uses an unsupported SSE scheme' - domain_error(http_client_sse_scheme, 'Scheme'),
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
+			'``Options`` contains an invalid SSE client option' - domain_error(http_client_sse_option, 'Option'),
+			'``Options`` contains reserved SSE headers' - domain_error(http_client_sse_headers, 'Headers'),
+			'The SSE server response is not a ``200`` ``text/event-stream`` response' - domain_error(http_client_sse_response, 'Response')
+		]
+	]).
+
 	:- uses(list, [
 		member/2, memberchk/2, valid/1 as proper_list/1
 	]).
@@ -409,6 +428,24 @@
 			)
 		).
 
+	open_sse(URL, Connection, Response, Options) :-
+		parse_sse_options(Options, Transport0, Headers, QueryPairs, Version, ConnectionOptions0, LastEventId),
+		build_sse_request(URL, Headers, QueryPairs, Version, LastEventId, Scheme, Host, Port, Request),
+		resolve_request_transport(Scheme, Transport0, Transport),
+		append_tls_transport(Scheme, ConnectionOptions0, ConnectionOptions),
+		Transport::open_connection(Host, Port, Connection, ConnectionOptions),
+		catch(
+			(	Transport::connection_streams(Connection, Input, Output),
+				http_client_core::write_request(Output, Request),
+				http_client_core::read_response_head(Input, Response),
+				validate_sse_response(Response)
+			),
+			Error,
+			(	catch(Transport::close_connection(Connection), _, true),
+				throw(Error)
+			)
+		).
+
 	parse_request_options(Options, Transport, Headers, Body, QueryPairs, Version, Properties, ConnectionOptions) :-
 		^^check_options(Options),
 		check_request_options(Options),
@@ -435,6 +472,54 @@
 		^^option(key(ExplicitKey), MergedOptions),
 		validate_websocket_headers(Headers),
 		resolve_websocket_key(ExplicitKey, Key).
+
+	parse_sse_options(Options, Transport, Headers, QueryPairs, Version, ConnectionOptions, LastEventId) :-
+		^^check_options(Options),
+		check_sse_options(Options),
+		^^merge_options(Options, MergedOptions),
+		^^option(transport(Transport), MergedOptions),
+		^^option(headers(Headers), MergedOptions),
+		^^option(query(QueryPairs), MergedOptions),
+		^^option(version(Version), MergedOptions),
+		^^option(connection_options(ConnectionOptions), MergedOptions),
+		^^option(last_event_id(LastEventId), MergedOptions),
+		validate_sse_headers(Headers).
+
+	build_sse_request(URL, Headers0, QueryPairs, Version, LastEventId, Scheme, Host, Port, Request) :-
+		parse_http_url(URL, Scheme, Host, Port, Path, URLQuery),
+		merge_request_query(URLQuery, QueryPairs, Query),
+		build_origin_target(Path, Query, Target),
+		request_host_property(Scheme, Host, Port, HostProperty),
+		sse_request_headers(Headers0, LastEventId, Headers),
+		http_core::request(get, Target, Version, Headers, empty, [HostProperty], Request).
+
+	sse_request_headers(Headers0, none, [accept-'text/event-stream'| Headers0]) :-
+		!.
+	sse_request_headers(Headers0, LastEventId, [accept-'text/event-stream', last_event_id-LastEventId| Headers0]) :-
+		LastEventId \== none.
+
+	validate_sse_headers(Headers) :-
+		(	member(Name-_, Headers),
+			member(Name, [accept, last_event_id]) ->
+			domain_error(http_client_sse_headers, Headers)
+		;	true
+		).
+
+	validate_sse_response(Response) :-
+		(	valid_sse_response(Response) ->
+			true
+		;	domain_error(http_client_sse_response, Response)
+		).
+
+	valid_sse_response(Response) :-
+		http_core::status(Response, status(200, _ReasonPhrase)),
+		http_core::header(Response, content_type, media_type(MediaType, _Parameters)),
+		same_sse_media_type(MediaType).
+
+	same_sse_media_type(MediaType) :-
+		atom_codes(MediaType, Codes0),
+		lowercase_ascii_codes(Codes0, Codes),
+		atom_codes('text/event-stream', Codes).
 
 	resolve_request_body(form_data(Items), Headers, Properties0, Body, Properties) :-
 		!,
@@ -513,6 +598,26 @@
 	check_websocket_option(Option) :-
 		domain_error(http_client_websocket_option, Option).
 
+	check_sse_options([]).
+	check_sse_options([Option| Options]) :-
+		check_sse_option(Option),
+		check_sse_options(Options).
+
+	check_sse_option(headers(_)) :-
+		!.
+	check_sse_option(query(_)) :-
+		!.
+	check_sse_option(version(_)) :-
+		!.
+	check_sse_option(connection_options(_)) :-
+		!.
+	check_sse_option(transport(_)) :-
+		!.
+	check_sse_option(last_event_id(_)) :-
+		!.
+	check_sse_option(Option) :-
+		domain_error(http_client_sse_option, Option).
+
 	valid_option(transport(Transport)) :-
 		(	Transport == default ->
 			true
@@ -539,6 +644,12 @@
 	valid_option(connection_options(ConnectionOptions)) :-
 		proper_list(ConnectionOptions).
 
+	valid_option(last_event_id(LastEventId)) :-
+		(	LastEventId == none ->
+			true
+		;	atom(LastEventId)
+		).
+
 	default_option(transport(default)).
 	default_option(headers([])).
 	default_option(body(empty)).
@@ -548,6 +659,7 @@
 	default_option(connection_options([])).
 	default_option(protocols([])).
 	default_option(key(none)).
+	default_option(last_event_id(none)).
 
 	build_request(Method, URL, Headers, Body, QueryPairs, Version, Properties0, Scheme, Host, Port, Request) :-
 		parse_http_url(URL, Scheme, Host, Port, Path, URLQuery),
