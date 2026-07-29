@@ -21,12 +21,20 @@ ________________________________________________________________________
 `mqtt`
 ======
 
-Portable MQTT 5.0 client implementation. This initial version provides the
-client-side MQTT transport and packet handling using objects that implement
-the `http_transport_protocol` protocol. It supports MQTT and MQTT-over-TLS
-connections, performs the MQTT 5 CONNECT/CONNACK exchange, provides packet
-encoding and decoding predicates, and implements synchronous publish,
-subscribe, unsubscribe, receive, and ping operations.
+Portable MQTT 5.0 client implementation:
+
+https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html
+
+This initial version provides the client-side MQTT transport and packet
+handling using objects that implement the `http_transport_protocol` protocol.
+It supports MQTT and MQTT-over-TLS connections, performs the MQTT 5.0
+CONNECT/CONNACK exchange, provides packet encoding and decoding predicates,
+and implements synchronous publish, subscribe, unsubscribe, receive, and
+ping operations.
+
+This library can be used with backend Prolog systems that support both
+unbound integer arithmetic and the sockets library: ECLiPSe, SICStus Prolog,
+SWI-Prolog, Trealla Prolog, and XVM.
 
 
 API documentation
@@ -50,14 +58,6 @@ Testing
 To test this library predicates, load the `tester.lgt` file:
 
 	| ?- logtalk_load(mqtt(tester)).
-
-
-Protocol Version
-----------------
-
-This library targets the MQTT 5.0 specification:
-
-https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html
 
 
 Transport Selection

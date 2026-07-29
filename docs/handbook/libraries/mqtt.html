@@ -245,7 +245,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#protocol-version">Protocol Version</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#transport-selection">Transport Selection</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#current-status">Current Status</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
@@ -376,13 +375,17 @@
              
   <section id="mqtt">
 <span id="library-mqtt"></span><h1><code class="docutils literal notranslate"><span class="pre">mqtt</span></code><a class="headerlink" href="#mqtt" title="Link to this heading"></a></h1>
-<p>Portable MQTT 5.0 client implementation. This initial version provides
-the client-side MQTT transport and packet handling using objects that
-implement the <code class="docutils literal notranslate"><span class="pre">http_transport_protocol</span></code> protocol. It supports MQTT and
-MQTT-over-TLS connections, performs the MQTT 5 CONNECT/CONNACK exchange,
-provides packet encoding and decoding predicates, and implements
-synchronous publish, subscribe, unsubscribe, receive, and ping
-operations.</p>
+<p>Portable MQTT 5.0 client implementation:</p>
+<p><a class="reference external" href="https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html">https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html</a></p>
+<p>This initial version provides the client-side MQTT transport and packet
+handling using objects that implement the <code class="docutils literal notranslate"><span class="pre">http_transport_protocol</span></code>
+protocol. It supports MQTT and MQTT-over-TLS connections, performs the
+MQTT 5.0 CONNECT/CONNACK exchange, provides packet encoding and decoding
+predicates, and implements synchronous publish, subscribe, unsubscribe,
+receive, and ping operations.</p>
+<p>This library can be used with backend Prolog systems that support both
+unbound integer arithmetic and the sockets library: ECLiPSe, SICStus
+Prolog, SWI-Prolog, Trealla Prolog, and XVM.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -402,11 +405,6 @@ link in a web browser.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(mqtt(tester)).
 </pre></div>
 </div>
-</section>
-<section id="protocol-version">
-<h2>Protocol Version<a class="headerlink" href="#protocol-version" title="Link to this heading"></a></h2>
-<p>This library targets the MQTT 5.0 specification:</p>
-<p><a class="reference external" href="https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html">https://docs.oasis-open.org/mqtt/mqtt/v5.0/mqtt-v5.0.html</a></p>
 </section>
 <section id="transport-selection">
 <h2>Transport Selection<a class="headerlink" href="#transport-selection" title="Link to this heading"></a></h2>
