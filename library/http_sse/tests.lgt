@@ -59,6 +59,91 @@
 :- end_object.
 
 
+:- object(tests,
+	extends(lgtunit)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-07-29,
+		comment is 'Backend-independent unit tests for the "http_sse" library.'
+	]).
+
+	cover(http_sse).
+
+	cleanup :-
+		^^clean_file('test_http_sse_wire.tmp').
+
+	test(http_sse_write_event_3_01, deterministic(Atom == 'id: id1\nevent: greeting\ndata: line1\ndata: line2\n\n')) :-
+		write_sse_record_atom(event(greeting, 'line1\nline2', id1), Atom).
+
+	test(http_sse_write_comment_3_01, deterministic(Atom == ': heartbeat\n\n')) :-
+		write_sse_record_atom(comment(heartbeat), Atom).
+
+	test(http_sse_write_retry_3_01, deterministic(Atom == 'retry: 4000\n\n')) :-
+		write_sse_record_atom(retry(4000), Atom).
+
+	test(http_sse_read_record_7_01, deterministic((Event == event(update, 'hello\nworld', id42), LastEventId == id42, Retry == 1500))) :-
+		read_sse_record_atom('retry: 1500\nid: id42\nevent: update\ndata: hello\ndata: world\n\n', none, none, none, LastEventId, Retry, Event).
+
+	test(http_sse_read_record_7_02, deterministic((Event == end_of_file, LastEventId == last, Retry == 2000))) :-
+		read_sse_record_atom('', last, 2000, none, LastEventId, Retry, Event).
+
+	test(http_sse_read_record_7_03, error(domain_error(http_sse_field_length, 4))) :-
+		read_sse_record_atom('data: hello\n\n', none, none, 4, _LastEventId, _Retry, _Event).
+
+	write_sse_record_atom(Message, Atom) :-
+		^^file_path('test_http_sse_wire.tmp', File),
+		open(File, write, Output, [type(binary)]),
+		catch(
+			http_sse << write_sse_record(Output, Message, on),
+			Error,
+			( close(Output), throw(Error) )
+		),
+		close(Output),
+		read_file_atom(File, Atom).
+
+	read_sse_record_atom(Atom, LastEventId0, Retry0, MaxFieldLength, LastEventId, Retry, Event) :-
+		^^file_path('test_http_sse_wire.tmp', File),
+		write_file_atom(File, Atom),
+		open(File, read, Input, [type(binary)]),
+		catch(
+			http_sse << read_sse_record(Input, LastEventId0, Retry0, MaxFieldLength, LastEventId, Retry, Event),
+			Error,
+			( close(Input), throw(Error) )
+		),
+		close(Input).
+
+	write_file_atom(File, Atom) :-
+		atom_codes(Atom, Bytes),
+		open(File, write, Output, [type(binary)]),
+		write_bytes(Bytes, Output),
+		close(Output).
+
+	read_file_atom(File, Atom) :-
+		open(File, read, Input, [type(binary)]),
+		read_bytes(Input, Bytes),
+		close(Input),
+		atom_codes(Atom, Bytes).
+
+	write_bytes([], _Output).
+	write_bytes([Byte| Bytes], Output) :-
+		put_byte(Output, Byte),
+		write_bytes(Bytes, Output).
+
+	read_bytes(Input, Bytes) :-
+		get_byte(Input, Byte),
+		read_bytes(Byte, Input, Bytes).
+
+	read_bytes(-1, _Input, []) :-
+		!.
+	read_bytes(Byte, Input, [Byte| Bytes]) :-
+		get_byte(Input, NextByte),
+		read_bytes(NextByte, Input, Bytes).
+
+:- end_object.
+
+
 :- object(tests(_HTTPTransport_),
 	extends(lgtunit)).
 
@@ -81,7 +166,7 @@
 		atomic_list_concat/2
 	]).
 
-	condition(current_object(_HTTPTransport_)).
+	condition((current_object(_HTTPTransport_), current_logtalk_flag(threads, supported))).
 
 	cover(http_sse).
 

@@ -38,6 +38,7 @@
 		logtalk_load(lgtunit(loader)),
 		logtalk_load(tests, [hook(lgtunit)]),
 		lgtunit::run_test_sets([
+			tests,
 			tests(http_socket_transport),
 			tests(http_process_transport)
 		])
