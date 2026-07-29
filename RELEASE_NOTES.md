@@ -62,6 +62,12 @@ older than 9.1.5.
 * FIXED: Portability of the `jwt` library when using backends that don't
 provide `length/2` as a built-in predicate.
 
+Examples
+--------
+
+* ADDED: New `http_sse_ticker` example illustrating the use of the new
+`http_sse` library.
+
 Installers and installation scripts
 -----------------------------------
 

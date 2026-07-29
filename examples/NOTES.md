@@ -347,6 +347,11 @@ Follows a short description of each included example (in alphabetical order):
 - `http_routes`  
      small example illustrating the use of the `http_router` library
 
+- `http_sse_ticker`  
+	small HTTP and Server-Sent Events example showing a server pushing
+    a short sequence of named events to a client, illustrating the use
+    of the `http_sse` library
+
 - `http_static_site`  
 	small HTTP client and server example showing how to combine the
 	`http_static_files` and `http_directory_listing` libraries
