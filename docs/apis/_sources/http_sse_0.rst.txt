@@ -24,8 +24,8 @@ High-level Server-Sent Events (SSE) predicates for opening client connections, a
 | **Imports:**
 |    ``public`` :ref:`options <options/0>`
 | **Uses:**
+|    :ref:`atom <atom/0>`
 |    :ref:`http_client <http_client/0>`
-|    :ref:`http_core <http_core/0>`
 |    :ref:`json <json/0>`
 |    :ref:`list <list/0>`
 |    :ref:`term_io <term_io/0>`
@@ -127,7 +127,7 @@ Accepts one incoming SSE request on the given listener using the default respons
 ``accept/4``
 ^^^^^^^^^^^^
 
-Accepts one incoming SSE request on the given listener and returns an opaque server-side handle. The ``transport/1`` and ``max_field_length/1`` options are interpreted as in ``open/3``. Remaining options, including ``headers/1`` (extra response headers) and ``properties/1`` (extra response properties), are forwarded to ``http_server_core::accept_sse/3``.
+Accepts one incoming SSE request on the given listener and returns an opaque server-side handle. The ``transport/1`` and ``max_field_length/1`` options are interpreted as in ``open/3``. The ``retry/1`` option (default ``none``), when not ``none``, writes a ``retry(Milliseconds)`` record, as accepted by ``send/2``, immediately after acceptance, before returning; this is equivalent to, but saves, a first call to ``send_retry/2``. Remaining options, including ``headers/1`` (extra response headers) and ``properties/1`` (extra response properties), are forwarded to ``http_server_core::accept_sse/3``.
 
 | **Compilation flags:**
 |    ``static``
@@ -162,7 +162,7 @@ Accepts one incoming SSE request on the given listener and returns an opaque ser
 ``send/2``
 ^^^^^^^^^^
 
-Writes one outbound SSE record using the opaque handle. Accepts normalized ``event(Type, Data, Id)`` terms (``Type`` and ``Id`` are the atom ``none`` when absent) and the convenience wrappers ``data(Data)``, ``event(Type, Data)``, ``id_data(Id, Data)``, ``comment(Text)``, ``retry(Millis)``, ``json(JSON)``, and ``term(Term)``. Equivalent to ``send/3`` with an empty options list.
+Writes one outbound SSE record using the opaque handle. Accepts normalized ``event(Type, Data, Id)`` terms (``Type`` and ``Id`` are the atom ``none`` when absent) and the convenience wrappers ``data(Data)``, ``event(Type, Data)``, ``id_data(Id, Data)``, ``comment(Text)``, ``retry(Milliseconds)``, ``json(JSON)``, and ``term(Term)``. Equivalent to ``send/3`` with an empty options list.
 
 | **Compilation flags:**
 |    ``static``
@@ -346,7 +346,7 @@ Best-effort close of the SSE handle. First attempts to write the given final rec
 ``property/2``
 ^^^^^^^^^^^^^^
 
-Enumerates properties of an open opaque SSE handle. Supported properties are ``role(client|server)``, ``transport(Transport)``, ``response(Response)``, ``connection(Connection)``, ``client_info(ClientInfo)`` (server-side handles only), ``last_event_id(Id|none)``, and ``retry(Millis|none)``.
+Enumerates properties of an open opaque SSE handle. Supported properties are ``role(client|server)``, ``transport(Transport)``, ``response(Response)``, ``connection(Connection)``, ``client_info(ClientInfo)`` (server-side handles only), ``last_event_id(Id|none)``, and ``retry(Milliseconds|none)``.
 
 | **Compilation flags:**
 |    ``static``
@@ -442,13 +442,13 @@ Convenience predicate equivalent to ``send(SSE, comment(Text))``. Commonly used 
 ``send_retry/2``
 ^^^^^^^^^^^^^^^^
 
-Convenience predicate equivalent to ``send(SSE, retry(Millis))``.
+Convenience predicate equivalent to ``send(SSE, retry(Milliseconds))``.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``send_retry(SSE,Millis)``
+|    ``send_retry(SSE,Milliseconds)``
 | **Mode and number of proofs:**
 |    ``send_retry(+compound,+integer)`` - ``one_or_error``
 

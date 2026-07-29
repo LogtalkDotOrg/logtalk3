@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-27,
+		date is 2026-07-29,
 		comment is 'Helper server session handler used by http_sse wrapper tests.'
 	]).
 
@@ -41,7 +41,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-27,
+		date is 2026-07-29,
 		comment is 'Helper client session handler used by http_sse wrapper tests.'
 	]).
 
@@ -150,7 +150,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-27,
+		date is 2026-07-29,
 		comment is 'Unit tests for the "http_sse" library.'
 	]).
 
@@ -197,6 +197,23 @@
 			Event2 == event(message, 'line1\nline2', id1),
 			Event3 == event(message, bye, id1),
 			Retry == 4000.
+
+		test(http_sse_accept_retry_4_01, deterministic) :-
+			open_listener('127.0.0.1', Port, Listener, []),
+			threaded_once(server_accept_retry(Listener, RetryAfterAccept), Tag),
+			catch(
+				client_accept_retry(Port, Event, Retry),
+				Error,
+				(	catch(close_listener(Listener), _, true),
+					catch(threaded_exit(server_accept_retry(Listener, _RetryAfterAccept), Tag), _, true),
+					throw(Error)
+				)
+			),
+			threaded_exit(server_accept_retry(Listener, RetryAfterAccept), Tag),
+			catch(close_listener(Listener), _, true),
+			RetryAfterAccept == 2500,
+			Event == event(message, hello, none),
+			Retry == 2500.
 
 		% peer-close detection (`receive/2` returning `end_of_file`) relies on the
 		% transport promptly propagating a closed connection as a read-side end of
@@ -299,6 +316,18 @@
 			http_sse::receive(SSE, Event1),
 			http_sse::receive(SSE, Event2),
 			http_sse::receive(SSE, Event3),
+			http_sse::property(SSE, retry(Retry)).
+
+		server_accept_retry(Listener, RetryAfterAccept) :-
+			http_sse::accept(Listener, SSE, _ClientInfo, [transport(_HTTPTransport_), retry(2500)]),
+			http_sse::property(SSE, retry(RetryAfterAccept)),
+			http_sse::send_data(SSE, hello),
+			http_sse::close(SSE).
+
+		client_accept_retry(Port, Event, Retry) :-
+			sse_url(Port, URL),
+			http_sse::open(URL, SSE, [transport(_HTTPTransport_)]),
+			http_sse::receive(SSE, Event),
 			http_sse::property(SSE, retry(Retry)).
 
 		server_immediate_close(Listener) :-

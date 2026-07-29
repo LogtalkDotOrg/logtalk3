@@ -425,8 +425,8 @@
 </div>
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
+<div class="line"><a class="reference internal" href="atom_0.html#atom-0"><span class="std std-ref">atom</span></a></div>
 <div class="line"><a class="reference internal" href="http_client_0.html#http-client-0"><span class="std std-ref">http_client</span></a></div>
-<div class="line"><a class="reference internal" href="http_core_0.html#http-core-0"><span class="std std-ref">http_core</span></a></div>
 <div class="line"><a class="reference internal" href="json_0.html#json-0"><span class="std std-ref">json</span></a></div>
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
 <div class="line"><a class="reference internal" href="term_io_0.html#term-io-0"><span class="std std-ref">term_io</span></a></div>
@@ -592,7 +592,7 @@
 </section>
 <section id="accept-4">
 <span id="http-sse-0-accept-4"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">accept/4</span></code></a><a class="headerlink" href="#accept-4" title="Link to this heading"></a></h3>
-<p>Accepts one incoming SSE request on the given listener and returns an opaque server-side handle. The <code class="docutils literal notranslate"><span class="pre">transport/1</span></code> and <code class="docutils literal notranslate"><span class="pre">max_field_length/1</span></code> options are interpreted as in <code class="docutils literal notranslate"><span class="pre">open/3</span></code>. Remaining options, including <code class="docutils literal notranslate"><span class="pre">headers/1</span></code> (extra response headers) and <code class="docutils literal notranslate"><span class="pre">properties/1</span></code> (extra response properties), are forwarded to <code class="docutils literal notranslate"><span class="pre">http_server_core::accept_sse/3</span></code>.</p>
+<p>Accepts one incoming SSE request on the given listener and returns an opaque server-side handle. The <code class="docutils literal notranslate"><span class="pre">transport/1</span></code> and <code class="docutils literal notranslate"><span class="pre">max_field_length/1</span></code> options are interpreted as in <code class="docutils literal notranslate"><span class="pre">open/3</span></code>. The <code class="docutils literal notranslate"><span class="pre">retry/1</span></code> option (default <code class="docutils literal notranslate"><span class="pre">none</span></code>), when not <code class="docutils literal notranslate"><span class="pre">none</span></code>, writes a <code class="docutils literal notranslate"><span class="pre">retry(Milliseconds)</span></code> record, as accepted by <code class="docutils literal notranslate"><span class="pre">send/2</span></code>, immediately after acceptance, before returning; this is equivalent to, but saves, a first call to <code class="docutils literal notranslate"><span class="pre">send_retry/2</span></code>. Remaining options, including <code class="docutils literal notranslate"><span class="pre">headers/1</span></code> (extra response headers) and <code class="docutils literal notranslate"><span class="pre">properties/1</span></code> (extra response properties), are forwarded to <code class="docutils literal notranslate"><span class="pre">http_server_core::accept_sse/3</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -646,7 +646,7 @@
 </section>
 <section id="send-2">
 <span id="http-sse-0-send-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">send/2</span></code></a><a class="headerlink" href="#send-2" title="Link to this heading"></a></h3>
-<p>Writes one outbound SSE record using the opaque handle. Accepts normalized <code class="docutils literal notranslate"><span class="pre">event(Type,</span> <span class="pre">Data,</span> <span class="pre">Id)</span></code> terms (<code class="docutils literal notranslate"><span class="pre">Type</span></code> and <code class="docutils literal notranslate"><span class="pre">Id</span></code> are the atom <code class="docutils literal notranslate"><span class="pre">none</span></code> when absent) and the convenience wrappers <code class="docutils literal notranslate"><span class="pre">data(Data)</span></code>, <code class="docutils literal notranslate"><span class="pre">event(Type,</span> <span class="pre">Data)</span></code>, <code class="docutils literal notranslate"><span class="pre">id_data(Id,</span> <span class="pre">Data)</span></code>, <code class="docutils literal notranslate"><span class="pre">comment(Text)</span></code>, <code class="docutils literal notranslate"><span class="pre">retry(Millis)</span></code>, <code class="docutils literal notranslate"><span class="pre">json(JSON)</span></code>, and <code class="docutils literal notranslate"><span class="pre">term(Term)</span></code>. Equivalent to <code class="docutils literal notranslate"><span class="pre">send/3</span></code> with an empty options list.</p>
+<p>Writes one outbound SSE record using the opaque handle. Accepts normalized <code class="docutils literal notranslate"><span class="pre">event(Type,</span> <span class="pre">Data,</span> <span class="pre">Id)</span></code> terms (<code class="docutils literal notranslate"><span class="pre">Type</span></code> and <code class="docutils literal notranslate"><span class="pre">Id</span></code> are the atom <code class="docutils literal notranslate"><span class="pre">none</span></code> when absent) and the convenience wrappers <code class="docutils literal notranslate"><span class="pre">data(Data)</span></code>, <code class="docutils literal notranslate"><span class="pre">event(Type,</span> <span class="pre">Data)</span></code>, <code class="docutils literal notranslate"><span class="pre">id_data(Id,</span> <span class="pre">Data)</span></code>, <code class="docutils literal notranslate"><span class="pre">comment(Text)</span></code>, <code class="docutils literal notranslate"><span class="pre">retry(Milliseconds)</span></code>, <code class="docutils literal notranslate"><span class="pre">json(JSON)</span></code>, and <code class="docutils literal notranslate"><span class="pre">term(Term)</span></code>. Equivalent to <code class="docutils literal notranslate"><span class="pre">send/3</span></code> with an empty options list.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -918,7 +918,7 @@
 </section>
 <section id="property-2">
 <span id="http-sse-0-property-2"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">property/2</span></code></a><a class="headerlink" href="#property-2" title="Link to this heading"></a></h3>
-<p>Enumerates properties of an open opaque SSE handle. Supported properties are <code class="docutils literal notranslate"><span class="pre">role(client|server)</span></code>, <code class="docutils literal notranslate"><span class="pre">transport(Transport)</span></code>, <code class="docutils literal notranslate"><span class="pre">response(Response)</span></code>, <code class="docutils literal notranslate"><span class="pre">connection(Connection)</span></code>, <code class="docutils literal notranslate"><span class="pre">client_info(ClientInfo)</span></code> (server-side handles only), <code class="docutils literal notranslate"><span class="pre">last_event_id(Id|none)</span></code>, and <code class="docutils literal notranslate"><span class="pre">retry(Millis|none)</span></code>.</p>
+<p>Enumerates properties of an open opaque SSE handle. Supported properties are <code class="docutils literal notranslate"><span class="pre">role(client|server)</span></code>, <code class="docutils literal notranslate"><span class="pre">transport(Transport)</span></code>, <code class="docutils literal notranslate"><span class="pre">response(Response)</span></code>, <code class="docutils literal notranslate"><span class="pre">connection(Connection)</span></code>, <code class="docutils literal notranslate"><span class="pre">client_info(ClientInfo)</span></code> (server-side handles only), <code class="docutils literal notranslate"><span class="pre">last_event_id(Id|none)</span></code>, and <code class="docutils literal notranslate"><span class="pre">retry(Milliseconds|none)</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1024,7 +1024,7 @@
 </section>
 <section id="send-retry-2">
 <span id="http-sse-0-send-retry-2"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">send_retry/2</span></code></a><a class="headerlink" href="#send-retry-2" title="Link to this heading"></a></h3>
-<p>Convenience predicate equivalent to <code class="docutils literal notranslate"><span class="pre">send(SSE,</span> <span class="pre">retry(Millis))</span></code>.</p>
+<p>Convenience predicate equivalent to <code class="docutils literal notranslate"><span class="pre">send(SSE,</span> <span class="pre">retry(Milliseconds))</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1034,7 +1034,7 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">send_retry(SSE,Millis)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">send_retry(SSE,Milliseconds)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">

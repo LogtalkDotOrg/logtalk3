@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-27,
+		date is 2026-07-29,
 		comment is 'Protocol implemented by callback-driven http_sse client and server session handlers.'
 	]).
 
@@ -92,7 +92,7 @@
 	:- public(accept/4).
 	:- mode(accept(+compound, --compound, --compound, +list), one_or_error).
 	:- info(accept/4, [
-		comment is 'Accepts one incoming SSE request on the given listener and returns an opaque server-side handle. The ``transport/1`` and ``max_field_length/1`` options are interpreted as in ``open/3``. Remaining options, including ``headers/1`` (extra response headers) and ``properties/1`` (extra response properties), are forwarded to ``http_server_core::accept_sse/3``.',
+		comment is 'Accepts one incoming SSE request on the given listener and returns an opaque server-side handle. The ``transport/1`` and ``max_field_length/1`` options are interpreted as in ``open/3``. The ``retry/1`` option (default ``none``), when not ``none``, writes a ``retry(Milliseconds)`` record, as accepted by ``send/2``, immediately after acceptance, before returning; this is equivalent to, but saves, a first call to ``send_retry/2``. Remaining options, including ``headers/1`` (extra response headers) and ``properties/1`` (extra response properties), are forwarded to ``http_server_core::accept_sse/3``.',
 		argnames is ['Listener', 'SSE', 'ClientInfo', 'Options'],
 		exceptions is [
 			'``Options`` is a variable or a partial list' - instantiation_error,
@@ -108,7 +108,7 @@
 	:- public(send/2).
 	:- mode(send(+compound, +term), one_or_error).
 	:- info(send/2, [
-		comment is 'Writes one outbound SSE record using the opaque handle. Accepts normalized ``event(Type, Data, Id)`` terms (``Type`` and ``Id`` are the atom ``none`` when absent) and the convenience wrappers ``data(Data)``, ``event(Type, Data)``, ``id_data(Id, Data)``, ``comment(Text)``, ``retry(Millis)``, ``json(JSON)``, and ``term(Term)``. Equivalent to ``send/3`` with an empty options list.',
+		comment is 'Writes one outbound SSE record using the opaque handle. Accepts normalized ``event(Type, Data, Id)`` terms (``Type`` and ``Id`` are the atom ``none`` when absent) and the convenience wrappers ``data(Data)``, ``event(Type, Data)``, ``id_data(Id, Data)``, ``comment(Text)``, ``retry(Milliseconds)``, ``json(JSON)``, and ``term(Term)``. Equivalent to ``send/3`` with an empty options list.',
 		argnames is ['SSE', 'Event'],
 		exceptions is [
 			'``SSE`` is a variable' - instantiation_error,
@@ -192,7 +192,7 @@
 	:- mode(property(+compound, +compound), zero_or_one).
 	:- mode(property(+compound, --compound), zero_or_more).
 	:- info(property/2, [
-		comment is 'Enumerates properties of an open opaque SSE handle. Supported properties are ``role(client|server)``, ``transport(Transport)``, ``response(Response)``, ``connection(Connection)``, ``client_info(ClientInfo)`` (server-side handles only), ``last_event_id(Id|none)``, and ``retry(Millis|none)``.',
+		comment is 'Enumerates properties of an open opaque SSE handle. Supported properties are ``role(client|server)``, ``transport(Transport)``, ``response(Response)``, ``connection(Connection)``, ``client_info(ClientInfo)`` (server-side handles only), ``last_event_id(Id|none)``, and ``retry(Milliseconds|none)``.',
 		argnames is ['SSE', 'Property']
 	]).
 
@@ -229,8 +229,8 @@
 	:- public(send_retry/2).
 	:- mode(send_retry(+compound, +integer), one_or_error).
 	:- info(send_retry/2, [
-		comment is 'Convenience predicate equivalent to ``send(SSE, retry(Millis))``.',
-		argnames is ['SSE', 'Millis']
+		comment is 'Convenience predicate equivalent to ``send(SSE, retry(Milliseconds))``.',
+		argnames is ['SSE', 'Milliseconds']
 	]).
 
 	:- public(send_json/2).
@@ -388,15 +388,27 @@
 		accept(Listener, SSE, ClientInfo, []).
 
 	accept(Listener, SSE, ClientInfo, Options) :-
-		parse_direct_server_options(Options, Transport0, MaxFieldLength, AcceptOptions),
+		accept_new_server_handle(Listener, Options, SSE, ClientInfo, _Response).
+
+	accept_new_server_handle(Listener, Options, SSE, ClientInfo, Response) :-
+		parse_direct_server_options(Options, Transport0, MaxFieldLength, RetryOption, AcceptOptions),
 		resolve_server_transport(Transport0, Transport),
 		Transport::serve_sse_once(Listener, http_sse_accept_handler(AcceptOptions), Connection, Response, ClientInfo),
-		default_retry(Retry),
 		catch(
-			register_new_handle(server, Transport, Connection, Response, ClientInfo, none, Retry, MaxFieldLength, SSE),
-			Error,
+			register_new_handle(server, Transport, Connection, Response, ClientInfo, none, none, MaxFieldLength, SSE),
+			Error1,
 			(	catch(Transport::close_connection(Connection), _, true),
-				throw(Error)
+				throw(Error1)
+			)
+		),
+		(	RetryOption == none ->
+			true
+		;	catch(
+				send(SSE, retry(RetryOption)),
+				Error2,
+				(	best_effort_close(SSE),
+					throw(Error2)
+				)
 			)
 		).
 
@@ -476,8 +488,8 @@
 	send_comment(SSE, Text) :-
 		send(SSE, comment(Text)).
 
-	send_retry(SSE, Millis) :-
-		send(SSE, retry(Millis)).
+	send_retry(SSE, Milliseconds) :-
+		send(SSE, retry(Milliseconds)).
 
 	send_json(SSE, JSON) :-
 		json_text(JSON, Text),
@@ -562,11 +574,7 @@
 
 	serve_once(Listener, Handler, Response, State, ClientInfo, Options) :-
 		validate_service_handler(Handler),
-		parse_direct_server_options(Options, Transport0, MaxFieldLength, AcceptOptions),
-		resolve_server_transport(Transport0, Transport),
-		Transport::serve_sse_once(Listener, http_sse_accept_handler(AcceptOptions), Connection, Response, ClientInfo),
-		default_retry(Retry),
-		register_new_handle(server, Transport, Connection, Response, ClientInfo, none, Retry, MaxFieldLength, SSE),
+		accept_new_server_handle(Listener, Options, SSE, ClientInfo, Response),
 		catch(
 			run_server_session(SSE, Handler, [], State),
 			Error,
@@ -642,10 +650,10 @@
 	handle_identifier(SSE, _HandleId) :-
 		domain_error(http_sse_handle, SSE).
 
-	update_after_send(SSE, retry(Millis)) :-
+	update_after_send(SSE, retry(Milliseconds)) :-
 		!,
 		handle_identifier(SSE, HandleId),
-		update_handle_retry(HandleId, Millis).
+		update_handle_retry(HandleId, Milliseconds).
 	update_after_send(_SSE, _Message).
 
 	update_after_receive(SSE, Transport, Connection, _LastEventId, _Retry, end_of_file) :-
@@ -680,13 +688,17 @@
 			validate_last_event_id(LastEventIdSeed0, LastEventIdSeed)
 		;	LastEventIdSeed = none
 		),
-		filter_direct_options(Options, ClientOptions).
+		filter_direct_client_options(Options, ClientOptions).
 
-	parse_direct_server_options(Options, Transport, MaxFieldLength, AcceptOptions) :-
+	parse_direct_server_options(Options, Transport, MaxFieldLength, RetryOption, AcceptOptions) :-
 		validate_options(Options),
 		transport_option(Options, Transport),
 		max_field_length_option(Options, MaxFieldLength),
-		filter_direct_options(Options, AcceptOptions).
+		(	member(retry(RetryOption0), Options) ->
+			validate_retry_option(RetryOption0, RetryOption)
+		;	RetryOption = none
+		),
+		filter_direct_server_options(Options, AcceptOptions).
 
 	parse_write_options(Options, Flush) :-
 		validate_options(Options),
@@ -750,6 +762,15 @@
 		!.
 	validate_last_event_id(LastEventId, _ValidatedLastEventId) :-
 		domain_error(http_sse_option, last_event_id(LastEventId)).
+
+	validate_retry_option(none, none) :-
+		!.
+	validate_retry_option(Milliseconds, Milliseconds) :-
+		integer(Milliseconds),
+		Milliseconds >= 0,
+		!.
+	validate_retry_option(Milliseconds, _ValidatedMilliseconds) :-
+		domain_error(http_sse_option, retry(Milliseconds)).
 
 	validate_flush(on, on) :-
 		!.
@@ -836,15 +857,28 @@
 	default_sse_transport(http, http_socket_transport).
 	default_sse_transport(https, http_process_transport).
 
-	filter_direct_options([], []).
-	filter_direct_options([transport(_)| Options], FilteredOptions) :-
+	filter_direct_client_options([], []).
+	filter_direct_client_options([transport(_)| Options], FilteredOptions) :-
 		!,
-		filter_direct_options(Options, FilteredOptions).
-	filter_direct_options([max_field_length(_)| Options], FilteredOptions) :-
+		filter_direct_client_options(Options, FilteredOptions).
+	filter_direct_client_options([max_field_length(_)| Options], FilteredOptions) :-
 		!,
-		filter_direct_options(Options, FilteredOptions).
-	filter_direct_options([Option| Options], [Option| FilteredOptions]) :-
-		filter_direct_options(Options, FilteredOptions).
+		filter_direct_client_options(Options, FilteredOptions).
+	filter_direct_client_options([Option| Options], [Option| FilteredOptions]) :-
+		filter_direct_client_options(Options, FilteredOptions).
+
+	filter_direct_server_options([], []).
+	filter_direct_server_options([transport(_)| Options], FilteredOptions) :-
+		!,
+		filter_direct_server_options(Options, FilteredOptions).
+	filter_direct_server_options([max_field_length(_)| Options], FilteredOptions) :-
+		!,
+		filter_direct_server_options(Options, FilteredOptions).
+	filter_direct_server_options([retry(_)| Options], FilteredOptions) :-
+		!,
+		filter_direct_server_options(Options, FilteredOptions).
+	filter_direct_server_options([Option| Options], [Option| FilteredOptions]) :-
+		filter_direct_server_options(Options, FilteredOptions).
 
 	filter_session_options([], []).
 	filter_session_options([reconnect(_)| Options], FilteredOptions) :-
@@ -885,9 +919,9 @@
 		valid_event_id(Id).
 	is_sse_record(comment(Text)) :-
 		atom(Text).
-	is_sse_record(retry(Millis)) :-
-		integer(Millis),
-		Millis >= 0.
+	is_sse_record(retry(Milliseconds)) :-
+		integer(Milliseconds),
+		Milliseconds >= 0.
 
 	valid_event_type(none) :-
 		!.
@@ -966,8 +1000,8 @@
 		write_sse_comment_lines(Output, Text),
 		write_sse_bytes([0'\n], Output),
 		maybe_flush(Output, Flush).
-	write_sse_record(Output, retry(Millis), Flush) :-
-		write_sse_integer_field_line(Output, retry, Millis),
+	write_sse_record(Output, retry(Milliseconds), Flush) :-
+		write_sse_integer_field_line(Output, retry, Milliseconds),
 		write_sse_bytes([0'\n], Output),
 		maybe_flush(Output, Flush).
 
