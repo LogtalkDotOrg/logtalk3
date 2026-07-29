@@ -250,6 +250,24 @@ plain TCP and TLS listeners, which allows the higher-level HTTP and
 WebSocket layers to serve HTTPS and WSS requests without depending on
 backend-specific SSL predicates.
 
+Peer close and end-of-file
+--------------------------
+
+The process-backed transport exposes streams owned by external helper
+processes. A peer close is therefore observed by Logtalk through the
+helper process and its pipes, and applications should not assume that it
+is reported as an immediate ``end_of_file`` on every backend Prolog
+compiler and operating system combination.
+
+This is not required for normal HTTP request-response exchanges, nor for
+normal WebSocket sessions, which end through WebSocket close frames. The
+SSE library can also exchange complete events and close handles
+explicitly without depending on raw peer-close detection. Code that
+deliberately uses peer close itself as a control signal, however,
+depends on the selected backend and helper process reporting stream
+exhaustion promptly; that behavior should be tested on the target
+deployment platform.
+
 Live smoke tests
 ----------------
 

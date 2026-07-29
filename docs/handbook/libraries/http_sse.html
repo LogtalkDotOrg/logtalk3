@@ -457,18 +457,12 @@ mixed character and byte output, which is not equally well supported
 across all backend Prolog compilers. Reading a peer-closed connection as
 <code class="docutils literal notranslate"><span class="pre">end_of_file</span></code> on <code class="docutils literal notranslate"><span class="pre">receive/2</span></code> is exercised by the test suite over
 <code class="docutils literal notranslate"><span class="pre">http_socket_transport</span></code>, which propagates a closed connection promptly
-as a read-side end of file condition. Depending on the backend Prolog
-compiler and operating system, <code class="docutils literal notranslate"><span class="pre">http_process_transport</span></code> connections
-may not propagate a peer close as an immediate <code class="docutils literal notranslate"><span class="pre">end_of_file</span></code>, and, on
-some backend and operating system combinations, may not reliably
-complete a connection at all; applications should prefer accepting
-connections with <code class="docutils literal notranslate"><span class="pre">http_socket_transport</span></code>, which is already the default
-for <code class="docutils literal notranslate"><span class="pre">accept/3-4</span></code>, and should test <code class="docutils literal notranslate"><span class="pre">http_process_transport</span></code> client
-connections (the default for <code class="docutils literal notranslate"><span class="pre">https://</span></code> URLs) against their target
-backend Prolog compiler before relying on them in production.</p>
-<p>The test suite exercises both <code class="docutils literal notranslate"><span class="pre">http_socket_transport</span></code> and
-<code class="docutils literal notranslate"><span class="pre">http_process_transport</span></code> by passing the selected transport through the
-<code class="docutils literal notranslate"><span class="pre">transport/1</span></code> option.</p>
+as a read-side end of file condition.</p>
+<p>The test suite includes backend-independent wire-format tests, which do
+not require thread support, and live tests that exercise both
+<code class="docutils literal notranslate"><span class="pre">http_socket_transport</span></code> and <code class="docutils literal notranslate"><span class="pre">http_process_transport</span></code> by passing the
+selected transport through the <code class="docutils literal notranslate"><span class="pre">transport/1</span></code> option on backends
+supporting threads.</p>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>

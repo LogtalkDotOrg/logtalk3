@@ -183,6 +183,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#current-scope">Current scope</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#current-limitations">Current limitations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#peer-close-and-end-of-file">Peer close and end-of-file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#live-smoke-tests">Live smoke tests</a></li>
 </ul>
 </li>
@@ -595,6 +596,22 @@ existing WebSocket layers. The same listener shape is used for both
 plain TCP and TLS listeners, which allows the higher-level HTTP and
 WebSocket layers to serve HTTPS and WSS requests without depending on
 backend-specific SSL predicates.</p>
+</section>
+<section id="peer-close-and-end-of-file">
+<h2>Peer close and end-of-file<a class="headerlink" href="#peer-close-and-end-of-file" title="Link to this heading"></a></h2>
+<p>The process-backed transport exposes streams owned by external helper
+processes. A peer close is therefore observed by Logtalk through the
+helper process and its pipes, and applications should not assume that it
+is reported as an immediate <code class="docutils literal notranslate"><span class="pre">end_of_file</span></code> on every backend Prolog
+compiler and operating system combination.</p>
+<p>This is not required for normal HTTP request-response exchanges, nor for
+normal WebSocket sessions, which end through WebSocket close frames. The
+SSE library can also exchange complete events and close handles
+explicitly without depending on raw peer-close detection. Code that
+deliberately uses peer close itself as a control signal, however,
+depends on the selected backend and helper process reporting stream
+exhaustion promptly; that behavior should be tested on the target
+deployment platform.</p>
 </section>
 <section id="live-smoke-tests">
 <h2>Live smoke tests<a class="headerlink" href="#live-smoke-tests" title="Link to this heading"></a></h2>

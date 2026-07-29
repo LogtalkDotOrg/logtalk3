@@ -97,19 +97,13 @@ mixed character and byte output, which is not equally well supported
 across all backend Prolog compilers. Reading a peer-closed connection as
 ``end_of_file`` on ``receive/2`` is exercised by the test suite over
 ``http_socket_transport``, which propagates a closed connection promptly
-as a read-side end of file condition. Depending on the backend Prolog
-compiler and operating system, ``http_process_transport`` connections
-may not propagate a peer close as an immediate ``end_of_file``, and, on
-some backend and operating system combinations, may not reliably
-complete a connection at all; applications should prefer accepting
-connections with ``http_socket_transport``, which is already the default
-for ``accept/3-4``, and should test ``http_process_transport`` client
-connections (the default for ``https://`` URLs) against their target
-backend Prolog compiler before relying on them in production.
+as a read-side end of file condition.
 
-The test suite exercises both ``http_socket_transport`` and
-``http_process_transport`` by passing the selected transport through the
-``transport/1`` option.
+The test suite includes backend-independent wire-format tests, which do
+not require thread support, and live tests that exercise both
+``http_socket_transport`` and ``http_process_transport`` by passing the
+selected transport through the ``transport/1`` option on backends
+supporting threads.
 
 Usage
 -----
