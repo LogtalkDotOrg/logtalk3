@@ -1,0 +1,856 @@
+.. index:: single: mqtt
+.. _mqtt/0:
+
+.. rst-class:: right
+
+**object**
+
+``mqtt``
+========
+
+Portable MQTT 5 client predicates using ``http_transport_protocol`` implementations.
+
+| **Availability:** 
+|    ``logtalk_load(mqtt(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-07-29
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+|    ``public`` :ref:`http_origin_site_helpers <http_origin_site_helpers/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+|    :ref:`url(Representation) <url/1>`
+|    :ref:`user <user/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: connect/3
+.. _mqtt/0::connect/3:
+
+``connect/3``
+^^^^^^^^^^^^^
+
+Opens a transport connection for an MQTT or MQTT-over-TLS address and completes the MQTT CONNECT/CONNACK exchange.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``connect(Address,Connection,Options)``
+| **Mode and number of proofs:**
+|    ``connect(+atom,--compound,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: connect/4
+.. _mqtt/0::connect/4:
+
+``connect/4``
+^^^^^^^^^^^^^
+
+Opens a transport connection to the given host and port and completes the MQTT CONNECT/CONNACK exchange. The ``scheme/1`` option selects MQTT over TCP or TLS.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``connect(Host,Port,Connection,Options)``
+| **Mode and number of proofs:**
+|    ``connect(+atom,+integer,--compound,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: disconnect/2
+.. _mqtt/0::disconnect/2:
+
+``disconnect/2``
+^^^^^^^^^^^^^^^^
+
+Closes an MQTT transport connection. MQTT DISCONNECT packet exchange will be layered on this transport operation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``disconnect(Connection,Options)``
+| **Mode and number of proofs:**
+|    ``disconnect(+compound,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: connection_alive/1
+.. _mqtt/0::connection_alive/1:
+
+``connection_alive/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+True if the term is an MQTT connection handle created by this object.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``connection_alive(Connection)``
+| **Mode and number of proofs:**
+|    ``connection_alive(+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: packet_type/2
+.. _mqtt/0::packet_type/2:
+
+``packet_type/2``
+^^^^^^^^^^^^^^^^^
+
+Table of MQTT control packet type names and numeric codes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``packet_type(Type,Code)``
+| **Mode and number of proofs:**
+|    ``packet_type(?atom,?integer)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: reason_code/3
+.. _mqtt/0::reason_code/3:
+
+``reason_code/3``
+^^^^^^^^^^^^^^^^^
+
+Table of MQTT reason code names and numeric codes by packet type.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``reason_code(PacketType,Name,Code)``
+| **Mode and number of proofs:**
+|    ``reason_code(?atom,?atom,?integer)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: publish/4
+.. _mqtt/0::publish/4:
+
+``publish/4``
+^^^^^^^^^^^^^
+
+Publishes a message and waits synchronously for the required MQTT acknowledgement.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``publish(Connection,Topic,Payload,Options)``
+| **Mode and number of proofs:**
+|    ``publish(+compound,+atom,+term,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: subscribe/4
+.. _mqtt/0::subscribe/4:
+
+``subscribe/4``
+^^^^^^^^^^^^^^^
+
+Subscribes to topic filters and waits synchronously for the matching SUBACK.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``subscribe(Connection,TopicFilters,Result,Options)``
+| **Mode and number of proofs:**
+|    ``subscribe(+compound,+list,--list,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: unsubscribe/4
+.. _mqtt/0::unsubscribe/4:
+
+``unsubscribe/4``
+^^^^^^^^^^^^^^^^^
+
+Unsubscribes from topic filters and waits synchronously for the matching UNSUBACK.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``unsubscribe(Connection,TopicFilters,Result,Options)``
+| **Mode and number of proofs:**
+|    ``unsubscribe(+compound,+list,--list,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: receive/3
+.. _mqtt/0::receive/3:
+
+``receive/3``
+^^^^^^^^^^^^^
+
+Receives the next MQTT packet.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``receive(Connection,Message,Options)``
+| **Mode and number of proofs:**
+|    ``receive(+compound,--compound,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: send_pingreq/1
+.. _mqtt/0::send_pingreq/1:
+
+``send_pingreq/1``
+^^^^^^^^^^^^^^^^^^
+
+Sends a PINGREQ packet.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``send_pingreq(Connection)``
+| **Mode and number of proofs:**
+|    ``send_pingreq(+compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: ping/2
+.. _mqtt/0::ping/2:
+
+``ping/2``
+^^^^^^^^^^
+
+Sends PINGREQ and waits synchronously for PINGRESP.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``ping(Connection,Options)``
+| **Mode and number of proofs:**
+|    ``ping(+compound,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: encode_packet/2
+.. _mqtt/0::encode_packet/2:
+
+``encode_packet/2``
+^^^^^^^^^^^^^^^^^^^
+
+Encodes a normalized MQTT packet term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``encode_packet(Packet,Bytes)``
+| **Mode and number of proofs:**
+|    ``encode_packet(+compound,--list(integer))`` - ``one_or_error``
+
+
+------------
+
+.. index:: decode_packet/2
+.. _mqtt/0::decode_packet/2:
+
+``decode_packet/2``
+^^^^^^^^^^^^^^^^^^^
+
+Decodes bytes into a normalized MQTT packet term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode_packet(Bytes,Packet)``
+| **Mode and number of proofs:**
+|    ``decode_packet(+list(integer),--compound)`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: resolve_address/4
+.. _mqtt/0::resolve_address/4:
+
+``resolve_address/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+Resolves an MQTT address into scheme, host, and port.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``resolve_address(Address,Scheme,Host,Port)``
+| **Mode and number of proofs:**
+|    ``resolve_address(+atom,-atom,-atom,-integer)`` - ``one_or_error``
+
+
+------------
+
+.. index:: resolve_transport/3
+.. _mqtt/0::resolve_transport/3:
+
+``resolve_transport/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Resolves an explicit or default transport object for the given MQTT scheme.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``resolve_transport(Scheme,Transport0,Transport)``
+| **Mode and number of proofs:**
+|    ``resolve_transport(+atom,+object_identifier,-object_identifier)`` - ``one_or_error``
+
+
+------------
+
+.. index:: append_tls_transport/3
+.. _mqtt/0::append_tls_transport/3:
+
+``append_tls_transport/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Adds ``connection_transport(tls)`` to connection options for MQTT-over-TLS unless already specified.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``append_tls_transport(Scheme,Options,OptionsWithTransport)``
+| **Mode and number of proofs:**
+|    ``append_tls_transport(+atom,+list,-list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: write_packet/2
+.. _mqtt/0::write_packet/2:
+
+``write_packet/2``
+^^^^^^^^^^^^^^^^^^
+
+Encodes and writes an MQTT packet to a binary output stream.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``write_packet(Output,Packet)``
+| **Mode and number of proofs:**
+|    ``write_packet(+stream,+compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: read_packet/2
+.. _mqtt/0::read_packet/2:
+
+``read_packet/2``
+^^^^^^^^^^^^^^^^^
+
+Reads and decodes one MQTT packet from a binary input stream.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``read_packet(Input,Packet)``
+| **Mode and number of proofs:**
+|    ``read_packet(+stream,--compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: encode_uint8/2
+.. _mqtt/0::encode_uint8/2:
+
+``encode_uint8/2``
+^^^^^^^^^^^^^^^^^^
+
+Encodes an unsigned 8-bit integer.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``encode_uint8(Value,Bytes)``
+| **Mode and number of proofs:**
+|    ``encode_uint8(+integer,-list(integer))`` - ``one_or_error``
+
+
+------------
+
+.. index:: decode_uint8/3
+.. _mqtt/0::decode_uint8/3:
+
+``decode_uint8/3``
+^^^^^^^^^^^^^^^^^^
+
+Decodes an unsigned 8-bit integer.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode_uint8(Bytes,Value,Rest)``
+| **Mode and number of proofs:**
+|    ``decode_uint8(+list(integer),-integer,-list(integer))`` - ``one_or_error``
+
+
+------------
+
+.. index:: encode_uint16/2
+.. _mqtt/0::encode_uint16/2:
+
+``encode_uint16/2``
+^^^^^^^^^^^^^^^^^^^
+
+Encodes an unsigned 16-bit integer in network byte order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``encode_uint16(Value,Bytes)``
+| **Mode and number of proofs:**
+|    ``encode_uint16(+integer,-list(integer))`` - ``one_or_error``
+
+
+------------
+
+.. index:: decode_uint16/3
+.. _mqtt/0::decode_uint16/3:
+
+``decode_uint16/3``
+^^^^^^^^^^^^^^^^^^^
+
+Decodes an unsigned 16-bit integer in network byte order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode_uint16(Bytes,Value,Rest)``
+| **Mode and number of proofs:**
+|    ``decode_uint16(+list(integer),-integer,-list(integer))`` - ``one_or_error``
+
+
+------------
+
+.. index:: encode_uint32/2
+.. _mqtt/0::encode_uint32/2:
+
+``encode_uint32/2``
+^^^^^^^^^^^^^^^^^^^
+
+Encodes an unsigned 32-bit integer in network byte order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``encode_uint32(Value,Bytes)``
+| **Mode and number of proofs:**
+|    ``encode_uint32(+integer,-list(integer))`` - ``one_or_error``
+
+
+------------
+
+.. index:: decode_uint32/3
+.. _mqtt/0::decode_uint32/3:
+
+``decode_uint32/3``
+^^^^^^^^^^^^^^^^^^^
+
+Decodes an unsigned 32-bit integer in network byte order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode_uint32(Bytes,Value,Rest)``
+| **Mode and number of proofs:**
+|    ``decode_uint32(+list(integer),-integer,-list(integer))`` - ``one_or_error``
+
+
+------------
+
+.. index:: encode_varint/2
+.. _mqtt/0::encode_varint/2:
+
+``encode_varint/2``
+^^^^^^^^^^^^^^^^^^^
+
+Encodes an MQTT variable byte integer.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``encode_varint(Value,Bytes)``
+| **Mode and number of proofs:**
+|    ``encode_varint(+integer,-list(integer))`` - ``one_or_error``
+
+
+------------
+
+.. index:: decode_varint/3
+.. _mqtt/0::decode_varint/3:
+
+``decode_varint/3``
+^^^^^^^^^^^^^^^^^^^
+
+Decodes an MQTT variable byte integer, rejecting non-minimal encodings and overflows.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode_varint(Bytes,Value,Rest)``
+| **Mode and number of proofs:**
+|    ``decode_varint(+list(integer),-integer,-list(integer))`` - ``one_or_error``
+
+
+------------
+
+.. index:: encode_utf8_string/2
+.. _mqtt/0::encode_utf8_string/2:
+
+``encode_utf8_string/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Encodes an MQTT UTF-8 encoded string with a two-byte length prefix.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``encode_utf8_string(String,Bytes)``
+| **Mode and number of proofs:**
+|    ``encode_utf8_string(+atom,-list(integer))`` - ``one_or_error``
+
+
+------------
+
+.. index:: decode_utf8_string/3
+.. _mqtt/0::decode_utf8_string/3:
+
+``decode_utf8_string/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Decodes an MQTT UTF-8 encoded string with a two-byte length prefix.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode_utf8_string(Bytes,String,Rest)``
+| **Mode and number of proofs:**
+|    ``decode_utf8_string(+list(integer),-atom,-list(integer))`` - ``one_or_error``
+
+
+------------
+
+.. index:: encode_binary_data/2
+.. _mqtt/0::encode_binary_data/2:
+
+``encode_binary_data/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Encodes MQTT binary data with a two-byte length prefix.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``encode_binary_data(Data,Bytes)``
+| **Mode and number of proofs:**
+|    ``encode_binary_data(+list(integer),-list(integer))`` - ``one_or_error``
+
+
+------------
+
+.. index:: decode_binary_data/3
+.. _mqtt/0::decode_binary_data/3:
+
+``decode_binary_data/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Decodes MQTT binary data with a two-byte length prefix.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode_binary_data(Bytes,Data,Rest)``
+| **Mode and number of proofs:**
+|    ``decode_binary_data(+list(integer),-list(integer),-list(integer))`` - ``one_or_error``
+
+
+------------
+
+.. index:: encode_utf8_string_pair/2
+.. _mqtt/0::encode_utf8_string_pair/2:
+
+``encode_utf8_string_pair/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Encodes an MQTT UTF-8 string pair as two MQTT UTF-8 encoded strings.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``encode_utf8_string_pair(Pair,Bytes)``
+| **Mode and number of proofs:**
+|    ``encode_utf8_string_pair(+compound,-list(integer))`` - ``one_or_error``
+
+
+------------
+
+.. index:: decode_utf8_string_pair/3
+.. _mqtt/0::decode_utf8_string_pair/3:
+
+``decode_utf8_string_pair/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Decodes an MQTT UTF-8 string pair from two MQTT UTF-8 encoded strings.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode_utf8_string_pair(Bytes,Pair,Rest)``
+| **Mode and number of proofs:**
+|    ``decode_utf8_string_pair(+list(integer),-compound,-list(integer))`` - ``one_or_error``
+
+
+------------
+
+.. index:: encode_properties/2
+.. _mqtt/0::encode_properties/2:
+
+``encode_properties/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Encodes an MQTT property list with its variable byte integer length prefix.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``encode_properties(Properties,Bytes)``
+| **Mode and number of proofs:**
+|    ``encode_properties(+list,-list(integer))`` - ``one_or_error``
+
+
+------------
+
+.. index:: decode_properties/3
+.. _mqtt/0::decode_properties/3:
+
+``decode_properties/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Decodes an MQTT property list and returns the remaining packet bytes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode_properties(Bytes,Properties,Rest)``
+| **Mode and number of proofs:**
+|    ``decode_properties(+list(integer),-list,-list(integer))`` - ``one_or_error``
+
+
+------------
+
+.. index:: encode_property_list/2
+.. _mqtt/0::encode_property_list/2:
+
+``encode_property_list/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Encodes MQTT properties without the property length prefix.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``encode_property_list(Properties,Bytes)``
+| **Mode and number of proofs:**
+|    ``encode_property_list(+list,-list(integer))`` - ``one_or_error``
+
+
+------------
+
+.. index:: decode_property_list/2
+.. _mqtt/0::decode_property_list/2:
+
+``decode_property_list/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Decodes MQTT properties from a property body byte list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode_property_list(Bytes,Properties)``
+| **Mode and number of proofs:**
+|    ``decode_property_list(+list(integer),-list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: encode_property/2
+.. _mqtt/0::encode_property/2:
+
+``encode_property/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Encodes a single MQTT property.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``encode_property(Property,Bytes)``
+| **Mode and number of proofs:**
+|    ``encode_property(+compound,-list(integer))`` - ``one_or_error``
+
+
+------------
+
+.. index:: decode_property/3
+.. _mqtt/0::decode_property/3:
+
+``decode_property/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Decodes a single MQTT property.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode_property(Bytes,Property,Rest)``
+| **Mode and number of proofs:**
+|    ``decode_property(+list(integer),-compound,-list(integer))`` - ``one_or_error``
+
+
+------------
+
+.. index:: mqtt_property/3
+.. _mqtt/0::mqtt_property/3:
+
+``mqtt_property/3``
+^^^^^^^^^^^^^^^^^^^
+
+Table of MQTT property names, identifiers, and value types.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``mqtt_property(Name,Identifier,Type)``
+| **Mode and number of proofs:**
+|    ``mqtt_property(?atom,?integer,?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: encode_fixed_header/4
+.. _mqtt/0::encode_fixed_header/4:
+
+``encode_fixed_header/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Encodes an MQTT fixed header from packet type, flags, and remaining length.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``encode_fixed_header(Type,Flags,RemainingLength,Bytes)``
+| **Mode and number of proofs:**
+|    ``encode_fixed_header(+atom,+integer,+integer,-list(integer))`` - ``one_or_error``
+
+
+------------
+
+.. index:: decode_fixed_header/5
+.. _mqtt/0::decode_fixed_header/5:
+
+``decode_fixed_header/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Decodes an MQTT fixed header into packet type, flags, remaining length, and remaining bytes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode_fixed_header(Bytes,Type,Flags,RemainingLength,Rest)``
+| **Mode and number of proofs:**
+|    ``decode_fixed_header(+list(integer),-atom,-integer,-integer,-list(integer))`` - ``one_or_error``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

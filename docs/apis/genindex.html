@@ -366,10 +366,10 @@
 </li>
       <li><a href="anomaly_dataset_protocol_0.html#index-0">anomaly_dataset_protocol</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="anomaly_detector_common_0.html#index-0">anomaly_detector_common</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="anomaly_detector_common_0.html#index-1">anomaly_detector_diagnostics_data/2</a>
 </li>
       <li><a href="anomaly_detector_common_0.html#index-2">anomaly_detector_export_template/2</a>
@@ -395,6 +395,8 @@
       <li><a href="redis_0.html#index-8">append/4</a>
 </li>
       <li><a href="open_id_helpers_0.html#index-18">append_query/3</a>
+</li>
+      <li><a href="mqtt_0.html#index-17">append_tls_transport/3</a>
 </li>
       <li><a href="mcp_server_0.html#index-7">application_/1</a>
 </li>
@@ -1414,13 +1416,13 @@
 </li>
       <li><a href="memcached_0.html#index-2">connect/2</a>
 </li>
-      <li><a href="memcached_0.html#index-1">connect/3</a>, <a href="redis_0.html#index-2">[1]</a>
+      <li><a href="memcached_0.html#index-1">connect/3</a>, <a href="mqtt_0.html#index-1">[1]</a>, <a href="redis_0.html#index-2">[2]</a>
 </li>
-      <li><a href="amqp_0.html#index-1">connect/4</a>, <a href="stomp_0.html#index-1">[1]</a>
+      <li><a href="amqp_0.html#index-1">connect/4</a>, <a href="mqtt_0.html#index-2">[1]</a>, <a href="stomp_0.html#index-1">[2]</a>
 </li>
       <li><a href="unweighted_undirected_graph_1.html#index-3">connected_components/2</a>, <a href="weighted_undirected_graph_1.html#index-3">[1]</a>
 </li>
-      <li><a href="amqp_0.html#index-4">connection_alive/1</a>, <a href="stomp_0.html#index-3">[1]</a>
+      <li><a href="amqp_0.html#index-4">connection_alive/1</a>, <a href="mqtt_0.html#index-4">[1]</a>, <a href="stomp_0.html#index-3">[2]</a>
 </li>
       <li><a href="http_message_helpers_0.html#index-1">connection_persistent/2</a>
 </li>
@@ -1828,6 +1830,8 @@
 </li>
       <li><a href="jwt_0.html#index-2">decode/5</a>, <a href="jwt_compact_0.html#index-2">[1]</a>
 </li>
+      <li><a href="mqtt_0.html#index-31">decode_binary_data/3</a>
+</li>
       <li><a href="geohash_protocol_0.html#index-23">decode_bits/3</a>
 </li>
       <li><a href="http_body_codec_protocol_0.html#index-3">decode_body/4</a>, <a href="http_core_0.html#index-21">[1]</a>
@@ -1838,13 +1842,35 @@
 </li>
       <li><a href="amqp_0.html#index-40">decode_field_value/3</a>
 </li>
+      <li><a href="mqtt_0.html#index-42">decode_fixed_header/5</a>
+</li>
       <li><a href="amqp_0.html#index-39">decode_frame/2</a>
 </li>
       <li><a href="geohash_protocol_0.html#index-16">decode_int/3</a>
 </li>
       <li><a href="http_websocket_messages_1.html#index-8">decode_message/3</a>
 </li>
+      <li><a href="mqtt_0.html#index-14">decode_packet/2</a>
+</li>
+      <li><a href="mqtt_0.html#index-35">decode_properties/3</a>
+</li>
+      <li><a href="mqtt_0.html#index-39">decode_property/3</a>
+</li>
+      <li><a href="mqtt_0.html#index-37">decode_property_list/2</a>
+</li>
+      <li><a href="mqtt_0.html#index-23">decode_uint16/3</a>
+</li>
+      <li><a href="mqtt_0.html#index-25">decode_uint32/3</a>
+</li>
+      <li><a href="mqtt_0.html#index-21">decode_uint8/3</a>
+</li>
       <li><a href="packs_common_0.html#index-26">decode_url_spaces/2</a>
+</li>
+      <li><a href="mqtt_0.html#index-29">decode_utf8_string/3</a>
+</li>
+      <li><a href="mqtt_0.html#index-33">decode_utf8_string_pair/3</a>
+</li>
+      <li><a href="mqtt_0.html#index-27">decode_varint/3</a>
 </li>
       <li><a href="logtalk_0.html#index-30">decompile_predicate_heads/4</a>
 </li>
@@ -2014,6 +2040,8 @@
 </li>
       <li><a href="hierarchyp_0.html#index-6">descendants/1</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="packs_0.html#index-17">describe/1</a>, <a href="registries_0.html#index-2">[1]</a>
 </li>
       <li><a href="packs_0.html#index-16">describe/2</a>
@@ -2026,8 +2054,6 @@
 </li>
       <li><a href="amqp_pool_0.html#index-2">destroy/0</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="http_server_core_session_0.html#index-12">destroy/1</a>
 </li>
       <li><a href="linear_algebra_protocol_0.html#index-43">determinant/2</a>
@@ -2172,7 +2198,7 @@
 </li>
       <li><a href="memcached_0.html#index-3">disconnect/1</a>, <a href="redis_0.html#index-3">[1]</a>
 </li>
-      <li><a href="stomp_0.html#index-2">disconnect/2</a>
+      <li><a href="mqtt_0.html#index-3">disconnect/2</a>, <a href="stomp_0.html#index-2">[1]</a>
 </li>
       <li><a href="open_id_0.html#index-1">discover/3</a>, <a href="open_id_client_0.html#index-1">[1]</a>
 </li>
@@ -2418,9 +2444,13 @@
 </li>
       <li><a href="geohash_protocol_0.html#index-2">encode/3</a>, <a href="sqids_1.html#index-2">[1]</a>
 </li>
+      <li><a href="mqtt_0.html#index-30">encode_binary_data/2</a>
+</li>
       <li><a href="geohash_protocol_0.html#index-22">encode_bits/3</a>
 </li>
       <li><a href="http_body_codec_protocol_0.html#index-2">encode_body/4</a>, <a href="http_core_0.html#index-20">[1]</a>
+</li>
+      <li><a href="mqtt_0.html#index-41">encode_fixed_header/4</a>
 </li>
       <li><a href="amqp_0.html#index-38">encode_frame/2</a>
 </li>
@@ -2433,6 +2463,26 @@
       <li><a href="classifier_common_0.html#index-18">encode_linear_instance/3</a>
 </li>
       <li><a href="http_websocket_messages_1.html#index-7">encode_message/4</a>
+</li>
+      <li><a href="mqtt_0.html#index-13">encode_packet/2</a>
+</li>
+      <li><a href="mqtt_0.html#index-34">encode_properties/2</a>
+</li>
+      <li><a href="mqtt_0.html#index-38">encode_property/2</a>
+</li>
+      <li><a href="mqtt_0.html#index-36">encode_property_list/2</a>
+</li>
+      <li><a href="mqtt_0.html#index-22">encode_uint16/2</a>
+</li>
+      <li><a href="mqtt_0.html#index-24">encode_uint32/2</a>
+</li>
+      <li><a href="mqtt_0.html#index-20">encode_uint8/2</a>
+</li>
+      <li><a href="mqtt_0.html#index-28">encode_utf8_string/2</a>
+</li>
+      <li><a href="mqtt_0.html#index-32">encode_utf8_string_pair/2</a>
+</li>
+      <li><a href="mqtt_0.html#index-26">encode_varint/2</a>
 </li>
       <li><a href="regressor_common_0.html#index-18">encoded_feature_count/2</a>
 </li>
@@ -2490,6 +2540,8 @@
 </li>
       <li><a href="logtalk_0.html#index-27">entity_prefix/2</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="code_metrics_utilities_0.html#index-8">entity_property/2</a>
 </li>
       <li><a href="code_metric_0.html#index-14">entity_score/2</a>
@@ -2502,8 +2554,6 @@
 </li>
       <li><a href="ccsds_time_code_protocol_0.html#index-6">epoch/1</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="ccsds_time_fields_0.html#index-5">epoch/2</a>
 </li>
       <li><a href="crs_projections_protocol_0.html#index-7">epsg_crs/2</a>
@@ -4962,10 +5012,10 @@
 </li>
       <li><a href="diagram_1.html#index-53">message_diagram_description/1</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="amqp_0.html#index-36">message_exchange/2</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="http_message_helpers_0.html#index-5">message_has_connection_token/2</a>
 </li>
       <li><a href="http_message_helpers_0.html#index-7">message_header_values/3</a>
@@ -5105,6 +5155,10 @@
       <li><a href="ccsds_ccs_2.html#index-3">month/2</a>
 </li>
       <li><a href="datep_0.html#index-17">month_weekday_date/5</a>
+</li>
+      <li><a href="mqtt_0.html#index-0">mqtt</a>
+</li>
+      <li><a href="mqtt_0.html#index-40">mqtt_property/3</a>
 </li>
       <li><a href="redis_0.html#index-13">mset/3</a>
 </li>
@@ -5772,6 +5826,8 @@
 </li>
       <li><a href="ccsds_tm_frames_3.html#index-6">packet_order_flag/2</a>
 </li>
+      <li><a href="mqtt_0.html#index-5">packet_type/2</a>
+</li>
       <li><a href="ccsds_packetization_0.html#index-9">packetize_aos_frames/7</a>
 </li>
       <li><a href="ccsds_packetization_0.html#index-10">packetize_aos_frames/8</a>
@@ -6059,6 +6115,8 @@
       <li><a href="packs_common_0.html#index-6">pin/0</a>
 </li>
       <li><a href="packs_common_0.html#index-5">pin/1</a>
+</li>
+      <li><a href="mqtt_0.html#index-12">ping/2</a>
 </li>
       <li><a href="packs_common_0.html#index-9">pinned/1</a>
 </li>
@@ -6466,6 +6524,8 @@
 </li>
       <li><a href="jwt_der_0.html#index-1">public_key_pem/2</a>, <a href="jwt_jwk_0.html#index-1">[1]</a>, <a href="open_id_der_0.html#index-1">[2]</a>
 </li>
+      <li><a href="mqtt_0.html#index-7">publish/4</a>
+</li>
       <li><a href="deque_protocol_0.html#index-3">push_back/3</a>
 </li>
       <li><a href="deque_protocol_0.html#index-2">push_front/3</a>
@@ -6696,6 +6756,8 @@
 </li>
       <li><a href="osp_0.html#index-20">read_only_device_path/1</a>
 </li>
+      <li><a href="mqtt_0.html#index-19">read_packet/2</a>
+</li>
       <li><a href="http_server_core_0.html#index-1">read_request/2</a>
 </li>
       <li><a href="http_client_core_0.html#index-2">read_response/2</a>
@@ -6729,6 +6791,8 @@
       <li><a href="packs_common_0.html#index-12">readme/2</a>
 </li>
       <li><a href="packs_common_0.html#index-18">readme_file_path/2</a>
+</li>
+      <li><a href="mqtt_0.html#index-6">reason_code/3</a>
 </li>
       <li><a href="ccsds_packet_services_0.html#index-30">reassemble_aos_frames/5</a>
 </li>
@@ -6790,7 +6854,7 @@
 </li>
       <li><a href="http_sse_0.html#index-7">receive/2</a>, <a href="http_websocket_0.html#index-7">[1]</a>
 </li>
-      <li><a href="amqp_0.html#index-26">receive/3</a>, <a href="http_sse_0.html#index-8">[1]</a>, <a href="http_websocket_0.html#index-8">[2]</a>, <a href="stomp_0.html#index-7">[3]</a>
+      <li><a href="amqp_0.html#index-26">receive/3</a>, <a href="http_sse_0.html#index-8">[1]</a>, <a href="http_websocket_0.html#index-8">[2]</a>, <a href="mqtt_0.html#index-10">[3]</a>, <a href="stomp_0.html#index-7">[4]</a>
 </li>
       <li><a href="http_websocket_0.html#index-15">receive_binary/2</a>
 </li>
@@ -7058,7 +7122,11 @@
 </li>
       <li><a href="url_1.html#index-8">resolve/3</a>
 </li>
+      <li><a href="mqtt_0.html#index-15">resolve_address/4</a>
+</li>
       <li><a href="osp_0.html#index-21">resolve_command_path/2</a>
+</li>
+      <li><a href="mqtt_0.html#index-16">resolve_transport/3</a>
 </li>
       <li><a href="http_docroot_paths_0.html#index-5">resolved_target_path/3</a>
 </li>
@@ -7440,6 +7508,8 @@
 </li>
       <li><a href="http_sse_0.html#index-17">send_json/2</a>, <a href="http_websocket_0.html#index-16">[1]</a>
 </li>
+      <li><a href="mqtt_0.html#index-11">send_pingreq/1</a>
+</li>
       <li><a href="http_sse_0.html#index-16">send_retry/2</a>
 </li>
       <li><a href="http_sse_0.html#index-19">send_term/2</a>, <a href="http_websocket_0.html#index-18">[1]</a>
@@ -7676,10 +7746,10 @@
 </li>
       <li><a href="jwt_0.html#index-11">sign/5</a>, <a href="jwt_jws_0.html#index-2">[1]</a>
 </li>
-      <li><a href="jwt_0.html#index-12">sign_payload/5</a>, <a href="jwt_jws_0.html#index-3">[1]</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="jwt_0.html#index-12">sign_payload/5</a>, <a href="jwt_jws_0.html#index-3">[1]</a>
+</li>
       <li><a href="s3_signing_0.html#index-4">sign_request/8</a>
 </li>
       <li><a href="ccsds_aos_frames_4.html#index-2">signaling_field/2</a>
@@ -8000,7 +8070,7 @@
 </li>
       <li><a href="subprocess_mutation_hook_0.html#index-0">subprocess_mutation_hook</a>
 </li>
-      <li><a href="stomp_0.html#index-5">subscribe/4</a>
+      <li><a href="mqtt_0.html#index-8">subscribe/4</a>, <a href="stomp_0.html#index-5">[1]</a>
 </li>
       <li><a href="subsequences_protocol_0.html#index-2">subsequence/2</a>
 </li>
@@ -8572,6 +8642,8 @@
 </li>
       <li><a href="stomp_0.html#index-6">unsubscribe/3</a>
 </li>
+      <li><a href="mqtt_0.html#index-9">unsubscribe/4</a>
+</li>
       <li><a href="unweighted_directed_graph_0.html#index-0">unweighted_directed_graph</a>
 </li>
       <li><a href="unweighted_directed_graph_1.html#index-0">unweighted_directed_graph(Dictionary)</a>
@@ -9072,10 +9144,10 @@
 </li>
       <li><a href="geospatial_protocol_0.html#index-21">within_distance/4</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="sequence_grammars_0.html#index-7">without//2</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="wkt_wkb_0.html#index-0">wkt_wkb</a>
 </li>
       <li><a href="wkt_wkb_protocol_0.html#index-0">wkt_wkb_protocol</a>
@@ -9117,6 +9189,8 @@
       <li><a href="http_websocket_session_2.html#index-8">write_message/4</a>
 </li>
       <li><a href="http_websocket_session_2.html#index-9">write_message/5</a>
+</li>
+      <li><a href="mqtt_0.html#index-18">write_packet/2</a>
 </li>
       <li><a href="http_client_core_0.html#index-1">write_request/2</a>
 </li>

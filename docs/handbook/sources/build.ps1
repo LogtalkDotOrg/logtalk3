@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on July 28, 2026
+##   Last updated on July 29, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -250,8 +250,9 @@ Foreach-Object {
 (Get-Content ../../../library/meta_compiler/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/meta_compiler.rst
 (Get-Content ../../../library/mime_types/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/mime_types.rst
 (Get-Content ../../../library/modified_z_score_anomaly_detector/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/modified_z_score_anomaly_detector.rst
-(Get-Content ../../../library/mutations/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/mutations.rst
+(Get-Content ../../../library/mqtt/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/mqtt.rst
 (Get-Content ../../../library/multisets/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/multisets.rst
+(Get-Content ../../../library/mutations/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/mutations.rst
 (Get-Content ../../../library/nanoid/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/nanoid.rst
 (Get-Content ../../../library/naive_bayes_classifier/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/naive_bayes_classifier.rst
 (Get-Content ../../../library/nearest_centroid_classifier/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/nearest_centroid_classifier.rst

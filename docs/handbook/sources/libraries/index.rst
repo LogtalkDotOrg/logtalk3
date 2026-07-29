@@ -199,8 +199,9 @@ directory in the ``NOTES.md`` file.
    meta_compiler
    mime_types
    modified_z_score_anomaly_detector
-   mutations
+   mqtt
    multisets
+   mutations
    nanoid
    naive_bayes_classifier
    nearest_centroid_classifier

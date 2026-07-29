@@ -259,6 +259,7 @@
 		mutations(loader),
 		listing(loader),
 		amqp(loader),
+		mqtt(loader),
 		stomp(loader),
 		linda(loader),
 		command_line_options(loader),

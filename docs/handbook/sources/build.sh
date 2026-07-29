@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on July 27, 2026
+##   Last updated on July 29, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -250,8 +250,9 @@ sed '1,19d' ../../../library/meta/NOTES.md | pandoc -f gfm -t rst -o libraries/m
 sed '1,19d' ../../../library/meta_compiler/NOTES.md | pandoc -f gfm -t rst -o libraries/meta_compiler.rst
 sed '1,19d' ../../../library/mime_types/NOTES.md | pandoc -f gfm -t rst -o libraries/mime_types.rst
 sed '1,19d' ../../../library/modified_z_score_anomaly_detector/NOTES.md | pandoc -f gfm -t rst -o libraries/modified_z_score_anomaly_detector.rst
-sed '1,19d' ../../../library/mutations/NOTES.md | pandoc -f gfm -t rst -o libraries/mutations.rst
+sed '1,19d' ../../../library/mqtt/NOTES.md | pandoc -f gfm -t rst -o libraries/mqtt.rst
 sed '1,19d' ../../../library/multisets/NOTES.md | pandoc -f gfm -t rst -o libraries/multisets.rst
+sed '1,19d' ../../../library/mutations/NOTES.md | pandoc -f gfm -t rst -o libraries/mutations.rst
 sed '1,19d' ../../../library/nanoid/NOTES.md | pandoc -f gfm -t rst -o libraries/nanoid.rst
 sed '1,19d' ../../../library/naive_bayes_classifier/NOTES.md | pandoc -f gfm -t rst -o libraries/naive_bayes_classifier.rst
 sed '1,19d' ../../../library/nearest_centroid_classifier/NOTES.md | pandoc -f gfm -t rst -o libraries/nearest_centroid_classifier.rst

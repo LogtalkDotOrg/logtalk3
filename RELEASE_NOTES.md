@@ -50,6 +50,8 @@ Library
 * ADDED: New `integer_partitions` library providing predicates for generating
 and querying integer partitions.
 
+* ADDED: New `mqtt` library implementing a MQTT 5.0 client.
+
 * ADDED: New `sqids` library for encoding lists of non-negative integers into
 short, obfuscated (but not encrypted), URL-safe identifiers.
 

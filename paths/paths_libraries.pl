@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on July 28, 2026
+%  Last updated on July 29, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -204,8 +204,9 @@ logtalk_library_path(meta, library('meta/')).
 logtalk_library_path(meta_compiler, library('meta_compiler/')).
 logtalk_library_path(mime_types, library('mime_types/')).
 logtalk_library_path(modified_z_score_anomaly_detector, library('modified_z_score_anomaly_detector/')).
-logtalk_library_path(mutations, library('mutations/')).
+logtalk_library_path(mqtt, library('mqtt/')).
 logtalk_library_path(multisets, library('multisets/')).
+logtalk_library_path(mutations, library('mutations/')).
 logtalk_library_path(naive_bayes_classifier, library('naive_bayes_classifier/')).
 logtalk_library_path(nanoid, library('nanoid/')).
 logtalk_library_path(nearest_centroid_classifier, library('nearest_centroid_classifier/')).

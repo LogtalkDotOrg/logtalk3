@@ -3471,6 +3471,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`memcached <memcached/0::connect/3>`
+* :ref:`mqtt <mqtt/0::connect/3>`
 * :ref:`redis <redis/0::connect/3>`
 
 ``connect/4``
@@ -3482,6 +3483,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`amqp <amqp/0::connect/4>`
+* :ref:`mqtt <mqtt/0::connect/4>`
 * :ref:`stomp <stomp/0::connect/4>`
 
 ``connected_components/2``
@@ -3504,6 +3506,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`amqp <amqp/0::connection_alive/1>`
+* :ref:`mqtt <mqtt/0::connection_alive/1>`
 * :ref:`stomp <stomp/0::connection_alive/1>`
 
 ``connection_pool_stats/2``
@@ -4748,6 +4751,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`geohash_protocol <geohash_protocol/0::decode_int/3>`
+
+``decode_packet/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mqtt <mqtt/0::decode_packet/2>`
 
 ``decompile_predicate_heads/4``
 -------------------------------
@@ -5999,6 +6012,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`mqtt <mqtt/0::disconnect/2>`
 * :ref:`stomp <stomp/0::disconnect/2>`
 
 ``discover/3``
@@ -6948,6 +6962,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`geohash_protocol <geohash_protocol/0::encode_int/3>`
+
+``encode_packet/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mqtt <mqtt/0::encode_packet/2>`
 
 ``encoding_suffix/2``
 ---------------------
@@ -17453,6 +17477,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ccsds_tm_frames(FrameLength,SecondaryHeaderLength,HasFECF) <ccsds_tm_frames/3::packet_order_flag/2>`
 
+``packet_type/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mqtt <mqtt/0::packet_type/2>`
+
 ``packetize_aos_frames/7``
 --------------------------
 
@@ -18601,6 +18635,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`packs_common <packs_common/0::pin/1>`
+
+``ping/2``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mqtt <mqtt/0::ping/2>`
 
 ``pinned/1``
 ------------
@@ -20030,6 +20074,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`jwt_jwk <jwt_jwk/0::public_key_pem/2>`
 * :ref:`open_id_der <open_id_der/0::public_key_pem/2>`
 
+``publish/4``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mqtt <mqtt/0::publish/4>`
+
 ``push_back/3``
 ---------------
 
@@ -21028,6 +21082,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`packs_common <packs_common/0::readme/2>`
 
+``reason_code/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mqtt <mqtt/0::reason_code/3>`
+
 ``reassemble_aos_frames/5``
 ---------------------------
 
@@ -21340,6 +21404,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`amqp <amqp/0::receive/3>`
 * :ref:`http_sse <http_sse/0::receive/3>`
 * :ref:`http_websocket <http_websocket/0::receive/3>`
+* :ref:`mqtt <mqtt/0::receive/3>`
 * :ref:`stomp <stomp/0::receive/3>`
 
 ``receive_binary/2``
@@ -23390,6 +23455,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`http_sse <http_sse/0::send_json/2>`
 * :ref:`http_websocket <http_websocket/0::send_json/2>`
 
+``send_pingreq/1``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mqtt <mqtt/0::send_pingreq/1>`
+
 ``send_retry/2``
 ----------------
 
@@ -25132,6 +25207,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`mqtt <mqtt/0::subscribe/4>`
 * :ref:`stomp <stomp/0::subscribe/4>`
 
 ``subsequence/2``
@@ -26689,6 +26765,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`stomp <stomp/0::unsubscribe/3>`
+
+``unsubscribe/4``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mqtt <mqtt/0::unsubscribe/4>`
 
 ``unzip/2``
 -----------
