@@ -81,7 +81,9 @@ host, the tests assume this and use the `host('/')` option when calling the
 `"Virtual host 'localhost' access denied"` error message). To enable the
 RabbitMQ's STOMP plugin:
 
+    $ rabbitmqctl stop
 	$ rabbitmq-plugins enable rabbitmq_stomp
+    $ rabbitmq-server start &
 
 RabbitMQ STOMP listens on port 61613 by default.
 

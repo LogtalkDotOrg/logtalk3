@@ -66,7 +66,9 @@ the RabbitMQ's STOMP plugin:
 
 ::
 
+   $ rabbitmqctl stop
    $ rabbitmq-plugins enable rabbitmq_stomp
+   $ rabbitmq-server start &
 
 RabbitMQ STOMP listens on port 61613 by default.
 

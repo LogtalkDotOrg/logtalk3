@@ -452,7 +452,9 @@ option when calling the <code class="docutils literal notranslate"><span class="
 connection would fail with a
 <code class="docutils literal notranslate"><span class="pre">&quot;Virtual</span> <span class="pre">host</span> <span class="pre">'localhost'</span> <span class="pre">access</span> <span class="pre">denied&quot;</span></code> error message). To enable
 the RabbitMQ’s STOMP plugin:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> rabbitmq<span class="o">-</span>plugins enable rabbitmq_stomp
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> rabbitmqctl stop
+<span class="err">$</span> rabbitmq<span class="o">-</span>plugins enable rabbitmq_stomp
+<span class="err">$</span> rabbitmq<span class="o">-</span>server start <span class="err">&amp;</span>
 </pre></div>
 </div>
 <p>RabbitMQ STOMP listens on port 61613 by default.</p>
