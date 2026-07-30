@@ -487,7 +487,9 @@ pattern-match the request and return a plain text response:</p>
     ]).
 
     handle(<span class="nv">Request</span>, <span class="nv">Response</span>) <span class="o">:-</span>
+        <span class="c">% alternatively, we could also have used http_core::version/2</span>
         <span class="nv">Request</span> <span class="o">=</span> request(<span class="nv">_Method</span>, <span class="nv">_Target</span>, <span class="nv">Version</span>, <span class="nv">_Headers</span>, <span class="nv">_Body</span>, <span class="nv">_Properties</span>),
+        <span class="c">% validate and construct the response to the request</span>
         response(
             <span class="nv">Version</span>, status(<span class="m">200</span>, <span class="s">&#39;OK&#39;</span>), [],
             content(<span class="s">&#39;text/plain&#39;</span>, text(<span class="s">&#39;Hello!&#39;</span>)), [], <span class="nv">Response</span>
@@ -496,6 +498,10 @@ pattern-match the request and return a plain text response:</p>
 <span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
 </div>
+<p>See the <code class="docutils literal notranslate"><span class="pre">http_core</span></code> library documentation for details on the
+normalized <code class="docutils literal notranslate"><span class="pre">request/6</span></code> and <code class="docutils literal notranslate"><span class="pre">response/5</span></code> terms plus their handling
+predicates such as the <code class="docutils literal notranslate"><span class="pre">response/6</span></code> constructor used above or the
+alternative <code class="docutils literal notranslate"><span class="pre">version/2</span></code> accessor.</p>
 <p>For declarative routing, the handler object can instead import the
 <code class="docutils literal notranslate"><span class="pre">http_router</span></code> category and define <code class="docutils literal notranslate"><span class="pre">route/4</span></code> descriptors. The
 imported category implements <code class="docutils literal notranslate"><span class="pre">http_handler_protocol</span></code>, providing the

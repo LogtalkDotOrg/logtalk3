@@ -139,13 +139,20 @@ pattern-match the request and return a plain text response:
        ]).
 
        handle(Request, Response) :-
+           % alternatively, we could also have used http_core::version/2 
            Request = request(_Method, _Target, Version, _Headers, _Body, _Properties),
+           % validate and construct the response to the request
            response(
                Version, status(200, 'OK'), [],
                content('text/plain', text('Hello!')), [], Response
            ).
 
    :- end_object.
+
+See the ``http_core`` library documentation for details on the
+normalized ``request/6`` and ``response/5`` terms plus their handling
+predicates such as the ``response/6`` constructor used above or the
+alternative ``version/2`` accessor.
 
 For declarative routing, the handler object can instead import the
 ``http_router`` category and define ``route/4`` descriptors. The
