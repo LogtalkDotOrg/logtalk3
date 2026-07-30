@@ -272,83 +272,83 @@
 :- end_object.
 
 
-	% This alternative server uses the open-ended listener loop. Unlike the
-	% bounded greetings_server object, it does not stop after a fixed number of
-	% accepted connections. Instead it stays up until an explicit call to stop/1.
-	% That makes it a better fit for interactive sessions or longer-running
-	% examples where the total number of requests is not known beforehand.
-	:- object(open_ended_greetings_server).
+% This alternative server uses the open-ended listener loop. Unlike the
+% bounded greetings_server object, it does not stop after a fixed number of
+% accepted connections. Instead it stays up until an explicit call to stop/1.
+% That makes it a better fit for interactive sessions or longer-running
+% examples where the total number of requests is not known beforehand.
+:- object(open_ended_greetings_server).
 
-		:- info([
-			version is 0:1:0,
-			author is 'Paulo Moura',
-			date is 2026-05-21,
-			comment is 'Open-ended local HTTP server used by the HTTP and OpenAPI example.'
+	:- info([
+		version is 0:1:0,
+		author is 'Paulo Moura',
+		date is 2026-05-21,
+		comment is 'Open-ended local HTTP server used by the HTTP and OpenAPI example.'
+	]).
+
+	:- public(serve/2).
+	:- mode(serve(?integer, +nonvar), one_or_error).
+	:- info(serve/2, [
+		comment is 'Opens a local listener and serves accepted connections until stop/1 is called for the given control term.',
+		argnames is ['Port', 'Control']
+	]).
+
+	:- public(stop/1).
+	:- mode(stop(+nonvar), one_or_error).
+	:- info(stop/1, [
+		comment is 'Requests shutdown of an open-ended server loop previously started with serve/2.',
+		argnames is ['Control']
+	]).
+
+	:- if(current_logtalk_flag(threads, supported)).
+		:- public(start/3).
+		:- mode(start(?integer, +nonvar, --compound), one_or_error).
+		:- info(start/3, [
+			comment is 'Starts the open-ended server in a worker thread, waits until the listener is accepting requests, and returns the server handle.',
+			argnames is ['Port', 'Control', 'Server']
 		]).
 
-		:- public(serve/2).
-		:- mode(serve(?integer, +nonvar), one_or_error).
-		:- info(serve/2, [
-			comment is 'Opens a local listener and serves accepted connections until stop/1 is called for the given control term.',
-			argnames is ['Port', 'Control']
+		:- public(stop/2).
+		:- mode(stop(+nonvar, +compound), one_or_error).
+		:- info(stop/2, [
+			comment is 'Requests shutdown of an open-ended server loop and waits for the worker thread to finish.',
+			argnames is ['Control', 'Server']
 		]).
 
-		:- public(stop/1).
-		:- mode(stop(+nonvar), one_or_error).
-		:- info(stop/1, [
-			comment is 'Requests shutdown of an open-ended server loop previously started with serve/2.',
-			argnames is ['Control']
-		]).
+		:- threaded.
+	:- endif.
 
-		:- if(current_logtalk_flag(threads, supported)).
-			:- public(start/3).
-			:- mode(start(?integer, +nonvar, --compound), one_or_error).
-			:- info(start/3, [
-				comment is 'Starts the open-ended server in a worker thread, waits until the listener is accepting requests, and returns the server handle.',
-				argnames is ['Port', 'Control', 'Server']
-			]).
+	% The control term is the handle used later by stop/1. The readiness
+	% notification is emitted by the serving loop after registering the
+	% shutdown control so fast clients can stop the server reliably.
+	serve(Port, Control) :-
+		http_server::serve_until_shutdown('127.0.0.1', Port, greetings_http_handler(Port), Control, [], notify_server_ready(Control, Port)).
 
-			:- public(stop/2).
-			:- mode(stop(+nonvar, +compound), one_or_error).
-			:- info(stop/2, [
-				comment is 'Requests shutdown of an open-ended server loop and waits for the worker thread to finish.',
-				argnames is ['Control', 'Server']
-			]).
+	% Shutdown is explicit for this server alternative instead of count-based.
+	stop(Control) :-
+		http_server::request_shutdown(Control).
 
-			:- threaded.
-		:- endif.
+	:- if(current_logtalk_flag(threads, supported)).
 
-		% The control term is the handle used later by stop/1. The readiness
-		% notification is emitted by the serving loop after registering the
-		% shutdown control so fast clients can stop the server reliably.
-		serve(Port, Control) :-
-			http_server::serve_until_shutdown('127.0.0.1', Port, greetings_http_handler(Port), Control, [], notify_server_ready(Control, Port)).
+		% These helpers keep readiness notifications and worker joins inside the
+		% same object, which is important because the thread notification queue is
+		% object-scoped.
+		start(Port, Control, Server) :-
+			http_server::start(Port, greetings_http_handler(Port), Server, [control(Control)]).
 
-		% Shutdown is explicit for this server alternative instead of count-based.
-		stop(Control) :-
-			http_server::request_shutdown(Control).
+		stop(_Control, Server) :-
+			http_server::stop(Server).
 
-		:- if(current_logtalk_flag(threads, supported)).
+		notify_server_ready(Control, Port) :-
+			threaded_notify(open_ended_greetings_server_ready(Control, Port)).
 
-			% These helpers keep readiness notifications and worker joins inside the
-			% same object, which is important because the thread notification queue is
-			% object-scoped.
-			start(Port, Control, Server) :-
-				http_server::start(Port, greetings_http_handler(Port), Server, [control(Control)]).
+	:- else.
 
-			stop(_Control, Server) :-
-				http_server::stop(Server).
+		notify_server_ready(_Control, _Port).
 
-			notify_server_ready(Control, Port) :-
-				threaded_notify(open_ended_greetings_server_ready(Control, Port)).
+	:- endif.
 
-		:- else.
-
-			notify_server_ready(_Control, _Port).
-
-		:- endif.
-
-	:- end_object.
+:- end_object.
 
 
 % The client object mirrors how a separate consumer would use the API: it
