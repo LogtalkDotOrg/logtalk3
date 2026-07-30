@@ -22,6 +22,7 @@ Categories
    arbitrary <arbitrary_0>
    assertions_messages <assertions_messages_0>
    best_first <best_first_0>
+   blake2_core(Key,DigestSize) <blake2_core_2>
    ccsds_frames_types <ccsds_frames_types_0>
    ccsds_packets_types <ccsds_packets_types_0>
    ccsds_time_codes_types <ccsds_time_codes_types_0>
@@ -153,7 +154,9 @@ Objects
    binary_heap_min <binary_heap_min_0>
    bintree <bintree_0>
    blake2b <blake2b_0>
+   blake2b(Key,DigestSize) <blake2b_2>
    blake2s <blake2s_0>
+   blake2s(Key,DigestSize) <blake2s_2>
    blank_grammars(Format) <blank_grammars_1>
    body_goal_negation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <body_goal_negation_5>
    borda_ranker <borda_ranker_0>

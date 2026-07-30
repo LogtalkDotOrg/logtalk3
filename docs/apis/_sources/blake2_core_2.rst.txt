@@ -1,0 +1,194 @@
+.. index:: single: blake2_core(Key,DigestSize)
+.. _blake2_core/2:
+
+.. rst-class:: right
+
+**category**
+
+``blake2_core(Key,DigestSize)``
+===============================
+
+* ``Key`` - A list of key bytes. Use the empty list for unkeyed hashing.
+* ``DigestSize`` - Number of digest bytes to generate.
+
+
+Common BLAKE2 hash function core.
+
+| **Availability:** 
+|    ``logtalk_load(hashes(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-07-30
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Implements:**
+|    ``public`` :ref:`hash_digest_protocol <hash_digest_protocol/0>`
+|    ``public`` :ref:`hash_state_protocol <hash_state_protocol/0>`
+| **Uses:**
+|    :ref:`hash_common_32 <hash_common_32/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`hash_digest_protocol/0::block_size/1`  :ref:`hash_digest_protocol/0::digest/2`  :ref:`hash_digest_protocol/0::digest_size/1`  :ref:`hash_state_protocol/0::final_hash_state/2`  :ref:`hash_protocol/0::hash/2`  :ref:`hash_state_protocol/0::new_hash_state/1`  :ref:`hash_state_protocol/0::update_hash_state/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: blake2_max_digest_size/1
+.. _blake2_core/2::blake2_max_digest_size/1:
+
+``blake2_max_digest_size/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+.. index:: blake2_max_key_size/1
+.. _blake2_core/2::blake2_max_key_size/1:
+
+``blake2_max_key_size/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+.. index:: blake2_block_size/1
+.. _blake2_core/2::blake2_block_size/1:
+
+``blake2_block_size/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+.. index:: blake2_round_count/1
+.. _blake2_core/2::blake2_round_count/1:
+
+``blake2_round_count/1``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+.. index:: blake2_initial_state/2
+.. _blake2_core/2::blake2_initial_state/2:
+
+``blake2_initial_state/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+.. index:: blake2_working_vector/4
+.. _blake2_core/2::blake2_working_vector/4:
+
+``blake2_working_vector/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+.. index:: blake2_block_words/2
+.. _blake2_core/2::blake2_block_words/2:
+
+``blake2_block_words/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+.. index:: blake2_g/8
+.. _blake2_core/2::blake2_g/8:
+
+``blake2_g/8``
+^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+.. index:: blake2_finalize/4
+.. _blake2_core/2::blake2_finalize/4:
+
+``blake2_finalize/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+.. index:: blake2_state_bytes/2
+.. _blake2_core/2::blake2_state_bytes/2:
+
+``blake2_state_bytes/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+.. index:: replace_nth0/4
+.. _blake2_core/2::replace_nth0/4:
+
+``replace_nth0/4``
+^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

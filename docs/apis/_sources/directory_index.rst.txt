@@ -1023,8 +1023,11 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
 
+   blake2_core(Key,DigestSize) <blake2_core_2>
    blake2b <blake2b_0>
+   blake2b(Key,DigestSize) <blake2b_2>
    blake2s <blake2s_0>
+   blake2s(Key,DigestSize) <blake2s_2>
    crc32_non_reflected(Polynomial,Initial,FinalXor,AppendLength) <crc32_non_reflected_4>
    crc32_reflected(Polynomial) <crc32_reflected_1>
    crc32b <crc32b_0>

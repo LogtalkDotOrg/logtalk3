@@ -1,14 +1,18 @@
-.. index:: single: blake2s
-.. _blake2s/0:
+.. index:: single: blake2b(Key,DigestSize)
+.. _blake2b/2:
 
 .. rst-class:: right
 
 **object**
 
-``blake2s``
-===========
+``blake2b(Key,DigestSize)``
+===========================
 
-BLAKE2s hash function.
+* ``Key`` - A list of 0 to 64 key bytes. Use the empty list for unkeyed hashing.
+* ``DigestSize`` - Number of digest bytes to generate, from 1 to 64.
+
+
+BLAKE2b hash function.
 
 | **Availability:** 
 |    ``logtalk_load(hashes(loader))``
@@ -21,8 +25,11 @@ BLAKE2s hash function.
 |    ``static, context_switching_calls``
 
 
-| **Extends:**
-|    ``public`` :ref:`blake2s([],32) <blake2s/2>`
+| **Imports:**
+|    ``public`` :ref:`blake2_core(Key,DigestSize) <blake2_core/2>`
+| **Uses:**
+|    :ref:`hash_common_64 <hash_common_64/0>`
+|    :ref:`list <list/0>`
 
 | **Remarks:**
 |    (none)
@@ -56,5 +63,5 @@ Operators
 
 .. seealso::
 
-   :ref:`blake2s(Key,DigestSize) <blake2s/2>`, :ref:`blake2b <blake2b/0>`, :ref:`md5 <md5/0>`, :ref:`sha256 <sha256/0>`
+   :ref:`blake2b <blake2b/0>`, :ref:`blake2s(Key,DigestSize) <blake2s/2>`, :ref:`sha512 <sha512/0>`, :ref:`sha512_256 <sha512_256/0>`
 

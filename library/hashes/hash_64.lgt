@@ -1027,19 +1027,19 @@
 :- end_object.
 
 
-:- object(blake2b,
-	implements([hash_digest_protocol, hash_state_protocol])).
+:- object(blake2b(_Key_, _DigestSize_),
+	imports(blake2_core(_Key_, _DigestSize_))).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-16,
+		date is 2026-07-30,
 		comment is 'BLAKE2b hash function.',
-		see_also is [blake2s, sha512, sha512_256]
-	]).
-
-	:- uses(hash_common_32, [
-		bytes_hex/2
+		parameters is [
+			'Key' - 'A list of 0 to 64 key bytes. Use the empty list for unkeyed hashing.',
+			'DigestSize' - 'Number of digest bytes to generate, from 1 to 64.'
+		],
+		see_also is [blake2b, blake2s(_, _), sha512, sha512_256]
 	]).
 
 	:- uses(hash_common_64, [
@@ -1047,80 +1047,21 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2, nth0/3
+		nth0/3
 	]).
 
-	digest(Bytes, DigestBytes) :-
-		blake2b_initial_state(State0),
-		blake2b_blocks(Bytes, 0, State0, State),
-		blake2b_state_bytes(State, DigestBytes).
+	blake2_max_digest_size(64).
 
-	digest_size(64).
+	blake2_max_key_size(64).
 
-	block_size(128).
+	blake2_block_size(128).
 
-	hash(Bytes, Hash) :-
-		digest(Bytes, DigestBytes),
-		bytes_hex(DigestBytes, Hash).
+	blake2_round_count(12).
 
-	% unlike the MD-style hashes, BLAKE2's compression function is given an
-	% explicit flag marking whether the block being compressed is the last
-	% one, and that flag changes the digest, not just an appended length
-	% field; the state must therefore always hold back a full block (up to
-	% 128 bytes) that has not yet been compressed, since a block that
-	% currently looks complete may still turn out not to be the last one
-	% once more bytes arrive in a later update_hash_state/3 call. Only at
-	% final_hash_state/2, when no more bytes can arrive, is the held-back
-	% buffer known to be the final block
-	new_hash_state(state([], 0, InitialState)) :-
-		blake2b_initial_state(InitialState).
+	blake2_initial_state(ParameterWord, [H0, 0xBB67AE8584CAA73B, 0x3C6EF372FE94F82B, 0xA54FF53A5F1D36F1, 0x510E527FADE682D1, 0x9B05688C2B3E6C1F, 0x1F83D9ABFB41BD6B, 0x5BE0CD19137E2179]) :-
+		xor64(0x6A09E667F3BCC908, ParameterWord, H0).
 
-	update_hash_state(state(Buffer0, Total0, State0), Bytes, state(Buffer1, Total1, State1)) :-
-		append(Buffer0, Bytes, Combined),
-		blake2b_consume_full_blocks(Combined, Total0, State0, Buffer1, Total1, State1).
-
-	final_hash_state(state(Buffer, Total0, State0), Hash) :-
-		length(Buffer, BlockLength),
-		Total is Total0 + BlockLength,
-		pad_block(Buffer, 128, Block),
-		blake2b_compress(State0, Block, Total, true, State),
-		blake2b_state_bytes(State, DigestBytes),
-		bytes_hex(DigestBytes, Hash).
-
-	% consumes complete, definitely-not-final 128-byte blocks from Buffer,
-	% leaving between 1 and 128 bytes (or 0, only if Buffer started empty
-	% and stays empty) as the new held-back buffer
-	blake2b_consume_full_blocks(Buffer, Total, State, Buffer, Total, State) :-
-		length(Buffer, Length),
-		Length =< 128,
-		!.
-	blake2b_consume_full_blocks(Buffer, Total0, State0, FinalBuffer, Total, State) :-
-		take_up_to(128, Buffer, Block, Rest),
-		Total1 is Total0 + 128,
-		blake2b_compress(State0, Block, Total1, false, State1),
-		blake2b_consume_full_blocks(Rest, Total1, State1, FinalBuffer, Total, State).
-
-	blake2b_initial_state([H0, 0xBB67AE8584CAA73B, 0x3C6EF372FE94F82B, 0xA54FF53A5F1D36F1, 0x510E527FADE682D1, 0x9B05688C2B3E6C1F, 0x1F83D9ABFB41BD6B, 0x5BE0CD19137E2179]) :-
-		xor64(0x6A09E667F3BCC908, 0x01010040, H0).
-
-	blake2b_blocks(Bytes, Total0, State0, State) :-
-		take_up_to(128, Bytes, BlockBytes, Rest),
-		length(BlockBytes, BlockLength),
-		Total is Total0 + BlockLength,
-		pad_block(BlockBytes, 128, Block),
-		(	Rest == [] ->
-			blake2b_compress(State0, Block, Total, true, State)
-		;	blake2b_compress(State0, Block, Total, false, State1),
-			blake2b_blocks(Rest, Total, State1, State)
-		).
-
-	blake2b_compress(State0, Block, Total, Final, State) :-
-		blake2b_block_words(Block, MessageWords),
-		blake2b_working_vector(State0, Total, Final, Working0),
-		blake2b_rounds(0, MessageWords, Working0, Working),
-		blake2b_finalize(State0, Working, 0, State).
-
-	blake2b_working_vector([H0, H1, H2, H3, H4, H5, H6, H7], Total, Final, [H0, H1, H2, H3, H4, H5, H6, H7, 0x6A09E667F3BCC908, 0xBB67AE8584CAA73B, 0x3C6EF372FE94F82B, 0xA54FF53A5F1D36F1, V12, V13, V14, 0x5BE0CD19137E2179]) :-
+	blake2_working_vector([H0, H1, H2, H3, H4, H5, H6, H7], Total, Final, [H0, H1, H2, H3, H4, H5, H6, H7, 0x6A09E667F3BCC908, 0xBB67AE8584CAA73B, 0x3C6EF372FE94F82B, 0xA54FF53A5F1D36F1, V12, V13, V14, 0x5BE0CD19137E2179]) :-
 		Two64 is 0x10000000000000000,
 		TotalLow is Total mod Two64,
 		TotalHigh is (Total // Two64) mod Two64,
@@ -1131,38 +1072,7 @@
 		),
 		xor64(0x1F83D9ABFB41BD6B, FinalFlag, V14).
 
-	blake2b_rounds(12, _, Working, Working) :-
-		!.
-	blake2b_rounds(Round, MessageWords, Working0, Working) :-
-		blake2b_sigma(Round, S0, S1, S2, S3, S4, S5, S6, S7, S8, S9, S10, S11, S12, S13, S14, S15),
-		nth0(S0, MessageWords, M0),
-		nth0(S1, MessageWords, M1),
-		nth0(S2, MessageWords, M2),
-		nth0(S3, MessageWords, M3),
-		nth0(S4, MessageWords, M4),
-		nth0(S5, MessageWords, M5),
-		nth0(S6, MessageWords, M6),
-		nth0(S7, MessageWords, M7),
-		nth0(S8, MessageWords, M8),
-		nth0(S9, MessageWords, M9),
-		nth0(S10, MessageWords, M10),
-		nth0(S11, MessageWords, M11),
-		nth0(S12, MessageWords, M12),
-		nth0(S13, MessageWords, M13),
-		nth0(S14, MessageWords, M14),
-		nth0(S15, MessageWords, M15),
-		blake2b_g(Working0, 0, 4, 8, 12, M0, M1, Working1),
-		blake2b_g(Working1, 1, 5, 9, 13, M2, M3, Working2),
-		blake2b_g(Working2, 2, 6, 10, 14, M4, M5, Working3),
-		blake2b_g(Working3, 3, 7, 11, 15, M6, M7, Working4),
-		blake2b_g(Working4, 0, 5, 10, 15, M8, M9, Working5),
-		blake2b_g(Working5, 1, 6, 11, 12, M10, M11, Working6),
-		blake2b_g(Working6, 2, 7, 8, 13, M12, M13, Working7),
-		blake2b_g(Working7, 3, 4, 9, 14, M14, M15, Working8),
-		NextRound is Round + 1,
-		blake2b_rounds(NextRound, MessageWords, Working8, Working).
-
-	blake2b_g(Working0, AIndex, BIndex, CIndex, DIndex, X, Y, Working) :-
+	blake2_g(Working0, AIndex, BIndex, CIndex, DIndex, X, Y, Working) :-
 		nth0(AIndex, Working0, A0),
 		nth0(BIndex, Working0, B0),
 		nth0(CIndex, Working0, C0),
@@ -1181,32 +1091,32 @@
 		add64(C1, D4, C2),
 		xor64(B2, C2, B3),
 		blake2b_ror64(B3, 63, B4),
-		replace_nth0(AIndex, Working0, A2, Working1),
-		replace_nth0(BIndex, Working1, B4, Working2),
-		replace_nth0(CIndex, Working2, C2, Working3),
-		replace_nth0(DIndex, Working3, D4, Working).
+		^^replace_nth0(AIndex, Working0, A2, Working1),
+		^^replace_nth0(BIndex, Working1, B4, Working2),
+		^^replace_nth0(CIndex, Working2, C2, Working3),
+		^^replace_nth0(DIndex, Working3, D4, Working).
 
 	blake2b_ror64(Value, Shift, Rotated) :-
 		LeftShift is 64 - (Shift /\ 63),
 		rol64(Value, LeftShift, Rotated).
 
-	blake2b_finalize([], _, _, []).
-	blake2b_finalize([HashWord| HashWords], Working, Index0, [StateWord| StateWords]) :-
+	blake2_finalize([], _, _, []).
+	blake2_finalize([HashWord| HashWords], Working, Index0, [StateWord| StateWords]) :-
 		nth0(Index0, Working, Word0),
 		Index8 is Index0 + 8,
 		nth0(Index8, Working, Word8),
 		xor64(Word0, Word8, Mix),
 		xor64(HashWord, Mix, StateWord),
 		Index is Index0 + 1,
-		blake2b_finalize(HashWords, Working, Index, StateWords).
+		blake2_finalize(HashWords, Working, Index, StateWords).
 
-	blake2b_state_bytes(State, DigestBytes) :-
-		blake2b_state_bytes(State, DigestBytes, []).
+	blake2_state_bytes(State, DigestBytes) :-
+		blake2_state_bytes(State, DigestBytes, []).
 
-	blake2b_state_bytes([], Bytes, Bytes).
-	blake2b_state_bytes([Word| Words], Bytes, Tail) :-
+	blake2_state_bytes([], Bytes, Bytes).
+	blake2_state_bytes([Word| Words], Bytes, Tail) :-
 		blake2b_integer_to_little_endian_bytes64(Word, Bytes, Rest),
-		blake2b_state_bytes(Words, Rest, Tail).
+		blake2_state_bytes(Words, Rest, Tail).
 
 	blake2b_integer_to_little_endian_bytes64(Integer, [B0, B1, B2, B3, B4, B5, B6, B7| Tail], Tail) :-
 		B0 is Integer /\ 0xFF,
@@ -1218,10 +1128,10 @@
 		B6 is (Integer >> 48) /\ 0xFF,
 		B7 is (Integer >> 56) /\ 0xFF.
 
-	blake2b_block_words([], []).
-	blake2b_block_words([B0, B1, B2, B3, B4, B5, B6, B7| Bytes], [Word| Words]) :-
+	blake2_block_words([], []).
+	blake2_block_words([B0, B1, B2, B3, B4, B5, B6, B7| Bytes], [Word| Words]) :-
 		blake2b_little_endian_word64([B0, B1, B2, B3, B4, B5, B6, B7], Word),
-		blake2b_block_words(Bytes, Words).
+		blake2_block_words(Bytes, Words).
 
 	blake2b_little_endian_word64([B0, B1, B2, B3, B4, B5, B6, B7], Word) :-
 		shl64(B1, 8, W1),
@@ -1239,44 +1149,19 @@
 		or64(T45, T67, T4567),
 		or64(T0123, T4567, Word).
 
-	pad_block(BlockBytes, BlockSize, Block) :-
-		length(BlockBytes, Length),
-		Padding is BlockSize - Length,
-		zeros(Padding, ZeroBytes),
-		append(BlockBytes, ZeroBytes, Block).
+:- end_object.
 
-	zeros(0, []) :-
-		!.
-	zeros(Count, [0| Bytes]) :-
-		NextCount is Count - 1,
-		zeros(NextCount, Bytes).
 
-	take_up_to(0, Rest, [], Rest) :-
-		!.
-	take_up_to(_, [], [], []) :-
-		!.
-	take_up_to(Count, [Byte| Bytes], [Byte| Prefix], Rest) :-
-		NextCount is Count - 1,
-		take_up_to(NextCount, Bytes, Prefix, Rest).
+:- object(blake2b,
+	extends(blake2b([], 64))).
 
-	replace_nth0(0, [_| Values], Value, [Value| Values]) :-
-		!.
-	replace_nth0(Index0, [Head| Values0], Value, [Head| Values]) :-
-		Index is Index0 - 1,
-		replace_nth0(Index, Values0, Value, Values).
-
-	blake2b_sigma(0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15).
-	blake2b_sigma(1, 14, 10, 4, 8, 9, 15, 13, 6, 1, 12, 0, 2, 11, 7, 5, 3).
-	blake2b_sigma(2, 11, 8, 12, 0, 5, 2, 15, 13, 10, 14, 3, 6, 7, 1, 9, 4).
-	blake2b_sigma(3, 7, 9, 3, 1, 13, 12, 11, 14, 2, 6, 5, 10, 4, 0, 15, 8).
-	blake2b_sigma(4, 9, 0, 5, 7, 2, 4, 10, 15, 14, 1, 11, 12, 6, 8, 3, 13).
-	blake2b_sigma(5, 2, 12, 6, 10, 0, 11, 8, 3, 4, 13, 7, 5, 15, 14, 1, 9).
-	blake2b_sigma(6, 12, 5, 1, 15, 14, 13, 4, 10, 0, 7, 6, 3, 9, 2, 8, 11).
-	blake2b_sigma(7, 13, 11, 7, 14, 12, 1, 3, 9, 5, 0, 15, 4, 8, 6, 2, 10).
-	blake2b_sigma(8, 6, 15, 14, 9, 11, 3, 0, 8, 12, 2, 13, 7, 1, 4, 10, 5).
-	blake2b_sigma(9, 10, 2, 8, 4, 7, 6, 1, 5, 15, 11, 9, 14, 3, 12, 13, 0).
-	blake2b_sigma(10, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15).
-	blake2b_sigma(11, 14, 10, 4, 8, 9, 15, 13, 6, 1, 12, 0, 2, 11, 7, 5, 3).
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-07-30,
+		comment is 'BLAKE2b hash function.',
+		see_also is [blake2b(_, _), blake2s, sha512, sha512_256]
+	]).
 
 :- end_object.
 

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-07-15,
+		date is 2026-07-30,
 		comment is 'Unit tests for the "hashes" library 32-bit algorithms.'
 	]).
 
@@ -54,6 +54,7 @@
 	cover(crc32q).
 	cover(murmurhash3_x86_32).
 	cover(blake2s).
+	cover(blake2s(_, _)).
 	cover(md5).
 
 	test(djb2_32_empty, deterministic(Hash == '00001505')) :-
@@ -145,6 +146,40 @@
 		bytes_hex(Digest, Hex),
 		blake2s::digest_size(DigestSize),
 		blake2s::block_size(BlockSize),
+		Info = info(Hex, DigestSize, BlockSize).
+
+	test(blake2s_parametric_empty_16, deterministic(Hash == '64550d6ffe2c0a01a14aba1eade0200c')) :-
+		blake2s([], 16)::hash([], Hash).
+
+	test(blake2s_parametric_abc_16, deterministic(Hash == 'aa4938119b1dc7b87cbad0ffd200d0ae')) :-
+		atom_codes('abc', Bytes),
+		blake2s([], 16)::hash(Bytes, Hash).
+
+	test(blake2s_parametric_digest_size_1, deterministic(Hash == 'a1')) :-
+		blake2s([], 1)::hash([], Hash).
+
+	test(blake2s_parametric_digest_size_31, deterministic(Hash == '1f57c56334f1ba2d62275430fdc2d2301017ba6be19864dac5a5eca012da4d')) :-
+		blake2s([], 31)::hash([], Hash).
+
+	test(blake2s_parametric_digest_size_is_domain_separated, deterministic(Hash \== '69217a3079908094e11121d042354a7c')) :-
+		blake2s([], 16)::hash([], Hash).
+
+	test(blake2s_parametric_keyed_empty_16, deterministic(Hash == '01d7f4cea32638032b156c74aec7e87a')) :-
+		blake2s([0], 16)::hash([], Hash).
+
+	test(blake2s_parametric_keyed_abc_16, deterministic(Hash == 'b0b50abcc8035f261e99bc69470f14d3')) :-
+		atom_codes('abc', Bytes),
+		blake2s([0], 16)::hash(Bytes, Hash).
+
+	test(blake2s_parametric_max_key_empty, deterministic(Hash == '48a8997da407876b3d79c0d92325ad3b89cbb754d86ab71aee047ad345fd2c49')) :-
+		sequence(0, 31, Key),
+		blake2s(Key, 32)::hash([], Hash).
+
+	test(blake2s_parametric_hash_digest_protocol, deterministic(Info == info('64550d6ffe2c0a01a14aba1eade0200c', 16, 64))) :-
+		blake2s([], 16)::digest([], Digest),
+		bytes_hex(Digest, Hex),
+		blake2s([], 16)::digest_size(DigestSize),
+		blake2s([], 16)::block_size(BlockSize),
 		Info = info(Hex, DigestSize, BlockSize).
 
 	test(md5_empty, deterministic(Hash == 'd41d8cd98f00b204e9800998ecf8427e')) :-
@@ -278,6 +313,15 @@
 		sequence(1, 64, Bytes64),
 		blake2s::hash(Bytes64, Hash64),
 		run_incremental(blake2s, [Bytes64, [65]], Hash65).
+
+	test(blake2s_parametric_keyed_incremental_empty, deterministic(Hash == '01d7f4cea32638032b156c74aec7e87a')) :-
+		run_incremental(blake2s([0], 16), [], Hash).
+
+	test(blake2s_parametric_keyed_incremental_matches_hash, deterministic(Hash1 == Hash2)) :-
+		atom_codes('The quick brown fox jumps over the lazy dog', Bytes),
+		blake2s([0], 16)::hash(Bytes, Hash1),
+		chunks(7, Bytes, Chunks),
+		run_incremental(blake2s([0], 16), Chunks, Hash2).
 
 	test(md5_incremental_empty, deterministic(Hash == 'd41d8cd98f00b204e9800998ecf8427e')) :-
 		run_incremental(md5, [], Hash).

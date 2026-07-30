@@ -59,7 +59,7 @@ The library implements the following hashing algorithms:
 - MurmurHash3 x86 32-bit (``murmurhash3_x86_32``)
 - MurmurHash3 x86 128-bit (``murmurhash3_x86_128``)
 - MurmurHash3 x64 128-bit (``murmurhash3_x64_128``)
-- BLAKE2s (``blake2s``)
+- BLAKE2s (``blake2s``, ``blake2s(Key,DigestSize)``)
 - SHA3-224 (``sha3_224``)
 - SHA3-256 (``sha3_256``)
 - SHA3-384 (``sha3_384``)
@@ -70,18 +70,18 @@ The library implements the following hashing algorithms:
 - SHA1 (``sha1``)
 - SHA224 (``sha224``)
 - SHA256 (``sha256``)
-- BLAKE2b (``blake2b``)
+- BLAKE2b (``blake2b``, ``blake2b(Key,DigestSize)``)
 - SHA-384 (``sha384``)
 - SHA-512 (``sha512``)
 - SHA-512/256 (``sha512_256``)
 
 The ``djb2_64``, ``sdbm_64``, ``fnv1a_64``, ``siphash_2_4``,
 ``murmurhash3_x86_128``, ``murmurhash3_x64_128``, ``blake2b``,
-``sha3_224``, ``sha3_256``, ``sha3_384``, ``sha3_512``,
-``shake128(OutputBytes)``, ``shake256(OutputBytes)``, ``sha1``,
-``sha224``, ``sha256``, ``sha384``, ``sha512``, and ``sha512_256``
-objects are only loaded on backend Prolog compilers supporting unbounded
-integer arithmetic.
+``blake2b(Key,DigestSize)``, ``sha3_224``, ``sha3_256``, ``sha3_384``,
+``sha3_512``, ``shake128(OutputBytes)``, ``shake256(OutputBytes)``,
+``sha1``, ``sha224``, ``sha256``, ``sha384``, ``sha512``, and
+``sha512_256`` objects are only loaded on backend Prolog compilers
+supporting unbounded integer arithmetic.
 
 SHA-224 and SHA-384 are based on the same block processing as SHA-256
 and SHA-512, respectively, differing only in their initial hash values
@@ -89,6 +89,18 @@ and in truncating the output to 224 or 384 bits.
 
 The SHAKE objects are parametric extensible-output functions. Pass the
 number of output bytes to generate when constructing the object.
+
+The ``blake2s`` and ``blake2b`` objects are unkeyed default instances of
+the parametric ``blake2s(Key,DigestSize)`` and
+``blake2b(Key,DigestSize)`` objects, respectively. For
+``blake2s(Key,DigestSize)``, ``Key`` is a list of 0 to 32 bytes and
+``DigestSize`` is an integer from 1 to 32 bytes. For
+``blake2b(Key,DigestSize)``, ``Key`` is a list of 0 to 64 bytes and
+``DigestSize`` is an integer from 1 to 64 bytes. Use the empty key list
+for unkeyed hashing. Following RFC 7693, both the key length and the
+requested digest size are folded into the initial hash state, so a
+shorter BLAKE2 digest is an independent digest value and not a
+truncation of the default full digest.
 
 The ``crc32_reflected(Polynomial)`` object implements a reflected CRC-32
 family using initial value ``0xFFFFFFFF`` and final xor value

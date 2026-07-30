@@ -49,6 +49,9 @@ Library
 `http_handler_protocol` (as a marker protocol) to simplify server code that
 defines routes.
 
+* ADDED: Support to the `hashes` library for generalized BLAKE2 cryptographic
+hash functions that accept both key an digest size parameters (per RFC 7693).
+
 * ADDED: New `http_sse` library implementing HTTP Server-Sent Events.
 
 * ADDED: New `integer_partitions` library providing predicates for generating

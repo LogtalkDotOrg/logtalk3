@@ -15,19 +15,14 @@ BLAKE2b hash function.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-07-16
+| **Date:** 2026-07-30
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
-| **Implements:**
-|    ``public`` :ref:`hash_digest_protocol <hash_digest_protocol/0>`
-|    ``public`` :ref:`hash_state_protocol <hash_state_protocol/0>`
-| **Uses:**
-|    :ref:`hash_common_32 <hash_common_32/0>`
-|    :ref:`hash_common_64 <hash_common_64/0>`
-|    :ref:`list <list/0>`
+| **Extends:**
+|    ``public`` :ref:`blake2b([],64) <blake2b/2>`
 
 | **Remarks:**
 |    (none)
@@ -61,5 +56,5 @@ Operators
 
 .. seealso::
 
-   :ref:`blake2s <blake2s/0>`, :ref:`sha512 <sha512/0>`, :ref:`sha512_256 <sha512_256/0>`
+   :ref:`blake2b(Key,DigestSize) <blake2b/2>`, :ref:`blake2s <blake2s/0>`, :ref:`sha512 <sha512/0>`, :ref:`sha512_256 <sha512_256/0>`
 

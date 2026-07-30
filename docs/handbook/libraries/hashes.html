@@ -425,7 +425,7 @@ link in a web browser.</p>
 <li><p>MurmurHash3 x86 32-bit (<code class="docutils literal notranslate"><span class="pre">murmurhash3_x86_32</span></code>)</p></li>
 <li><p>MurmurHash3 x86 128-bit (<code class="docutils literal notranslate"><span class="pre">murmurhash3_x86_128</span></code>)</p></li>
 <li><p>MurmurHash3 x64 128-bit (<code class="docutils literal notranslate"><span class="pre">murmurhash3_x64_128</span></code>)</p></li>
-<li><p>BLAKE2s (<code class="docutils literal notranslate"><span class="pre">blake2s</span></code>)</p></li>
+<li><p>BLAKE2s (<code class="docutils literal notranslate"><span class="pre">blake2s</span></code>, <code class="docutils literal notranslate"><span class="pre">blake2s(Key,DigestSize)</span></code>)</p></li>
 <li><p>SHA3-224 (<code class="docutils literal notranslate"><span class="pre">sha3_224</span></code>)</p></li>
 <li><p>SHA3-256 (<code class="docutils literal notranslate"><span class="pre">sha3_256</span></code>)</p></li>
 <li><p>SHA3-384 (<code class="docutils literal notranslate"><span class="pre">sha3_384</span></code>)</p></li>
@@ -436,23 +436,34 @@ link in a web browser.</p>
 <li><p>SHA1 (<code class="docutils literal notranslate"><span class="pre">sha1</span></code>)</p></li>
 <li><p>SHA224 (<code class="docutils literal notranslate"><span class="pre">sha224</span></code>)</p></li>
 <li><p>SHA256 (<code class="docutils literal notranslate"><span class="pre">sha256</span></code>)</p></li>
-<li><p>BLAKE2b (<code class="docutils literal notranslate"><span class="pre">blake2b</span></code>)</p></li>
+<li><p>BLAKE2b (<code class="docutils literal notranslate"><span class="pre">blake2b</span></code>, <code class="docutils literal notranslate"><span class="pre">blake2b(Key,DigestSize)</span></code>)</p></li>
 <li><p>SHA-384 (<code class="docutils literal notranslate"><span class="pre">sha384</span></code>)</p></li>
 <li><p>SHA-512 (<code class="docutils literal notranslate"><span class="pre">sha512</span></code>)</p></li>
 <li><p>SHA-512/256 (<code class="docutils literal notranslate"><span class="pre">sha512_256</span></code>)</p></li>
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">djb2_64</span></code>, <code class="docutils literal notranslate"><span class="pre">sdbm_64</span></code>, <code class="docutils literal notranslate"><span class="pre">fnv1a_64</span></code>, <code class="docutils literal notranslate"><span class="pre">siphash_2_4</span></code>,
 <code class="docutils literal notranslate"><span class="pre">murmurhash3_x86_128</span></code>, <code class="docutils literal notranslate"><span class="pre">murmurhash3_x64_128</span></code>, <code class="docutils literal notranslate"><span class="pre">blake2b</span></code>,
-<code class="docutils literal notranslate"><span class="pre">sha3_224</span></code>, <code class="docutils literal notranslate"><span class="pre">sha3_256</span></code>, <code class="docutils literal notranslate"><span class="pre">sha3_384</span></code>, <code class="docutils literal notranslate"><span class="pre">sha3_512</span></code>,
-<code class="docutils literal notranslate"><span class="pre">shake128(OutputBytes)</span></code>, <code class="docutils literal notranslate"><span class="pre">shake256(OutputBytes)</span></code>, <code class="docutils literal notranslate"><span class="pre">sha1</span></code>,
-<code class="docutils literal notranslate"><span class="pre">sha224</span></code>, <code class="docutils literal notranslate"><span class="pre">sha256</span></code>, <code class="docutils literal notranslate"><span class="pre">sha384</span></code>, <code class="docutils literal notranslate"><span class="pre">sha512</span></code>, and <code class="docutils literal notranslate"><span class="pre">sha512_256</span></code>
-objects are only loaded on backend Prolog compilers supporting unbounded
-integer arithmetic.</p>
+<code class="docutils literal notranslate"><span class="pre">blake2b(Key,DigestSize)</span></code>, <code class="docutils literal notranslate"><span class="pre">sha3_224</span></code>, <code class="docutils literal notranslate"><span class="pre">sha3_256</span></code>, <code class="docutils literal notranslate"><span class="pre">sha3_384</span></code>,
+<code class="docutils literal notranslate"><span class="pre">sha3_512</span></code>, <code class="docutils literal notranslate"><span class="pre">shake128(OutputBytes)</span></code>, <code class="docutils literal notranslate"><span class="pre">shake256(OutputBytes)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">sha1</span></code>, <code class="docutils literal notranslate"><span class="pre">sha224</span></code>, <code class="docutils literal notranslate"><span class="pre">sha256</span></code>, <code class="docutils literal notranslate"><span class="pre">sha384</span></code>, <code class="docutils literal notranslate"><span class="pre">sha512</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">sha512_256</span></code> objects are only loaded on backend Prolog compilers
+supporting unbounded integer arithmetic.</p>
 <p>SHA-224 and SHA-384 are based on the same block processing as SHA-256
 and SHA-512, respectively, differing only in their initial hash values
 and in truncating the output to 224 or 384 bits.</p>
 <p>The SHAKE objects are parametric extensible-output functions. Pass the
 number of output bytes to generate when constructing the object.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">blake2s</span></code> and <code class="docutils literal notranslate"><span class="pre">blake2b</span></code> objects are unkeyed default instances of
+the parametric <code class="docutils literal notranslate"><span class="pre">blake2s(Key,DigestSize)</span></code> and
+<code class="docutils literal notranslate"><span class="pre">blake2b(Key,DigestSize)</span></code> objects, respectively. For
+<code class="docutils literal notranslate"><span class="pre">blake2s(Key,DigestSize)</span></code>, <code class="docutils literal notranslate"><span class="pre">Key</span></code> is a list of 0 to 32 bytes and
+<code class="docutils literal notranslate"><span class="pre">DigestSize</span></code> is an integer from 1 to 32 bytes. For
+<code class="docutils literal notranslate"><span class="pre">blake2b(Key,DigestSize)</span></code>, <code class="docutils literal notranslate"><span class="pre">Key</span></code> is a list of 0 to 64 bytes and
+<code class="docutils literal notranslate"><span class="pre">DigestSize</span></code> is an integer from 1 to 64 bytes. Use the empty key list
+for unkeyed hashing. Following RFC 7693, both the key length and the
+requested digest size are folded into the initial hash state, so a
+shorter BLAKE2 digest is an independent digest value and not a
+truncation of the default full digest.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">crc32_reflected(Polynomial)</span></code> object implements a reflected CRC-32
 family using initial value <code class="docutils literal notranslate"><span class="pre">0xFFFFFFFF</span></code> and final xor value
 <code class="docutils literal notranslate"><span class="pre">0xFFFFFFFF</span></code>, where <code class="docutils literal notranslate"><span class="pre">Polynomial</span></code> is the reflected CRC-32 polynomial.</p>

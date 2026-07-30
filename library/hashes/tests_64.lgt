@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-07-17,
+		date is 2026-07-30,
 		comment is 'Unit tests for the "hashes" library 64-bit algorithms.'
 	]).
 
@@ -49,6 +49,7 @@
 	cover(murmurhash3_x86_128).
 	cover(murmurhash3_x64_128).
 	cover(blake2b).
+	cover(blake2b(_, _)).
 	cover(sha3_224).
 	cover(sha3_256).
 	cover(sha3_384).
@@ -131,6 +132,40 @@
 		bytes_hex(Digest, Hex),
 		blake2b::digest_size(DigestSize),
 		blake2b::block_size(BlockSize),
+		Info = info(Hex, DigestSize, BlockSize).
+
+	test(blake2b_parametric_empty_32, deterministic(Hash == '0e5751c026e543b2e8ab2eb06099daa1d1e5df47778f7787faab45cdf12fe3a8')) :-
+		blake2b([], 32)::hash([], Hash).
+
+	test(blake2b_parametric_abc_32, deterministic(Hash == 'bddd813c634239723171ef3fee98579b94964e3bb1cb3e427262c8c068d52319')) :-
+		atom_codes('abc', Bytes),
+		blake2b([], 32)::hash(Bytes, Hash).
+
+	test(blake2b_parametric_digest_size_1, deterministic(Hash == '2e')) :-
+		blake2b([], 1)::hash([], Hash).
+
+	test(blake2b_parametric_digest_size_63, deterministic(Hash == '4ded8c5fc8b12f3273f877ca585a44ad6503249a2b345d6d9c0e67d85bcb700db4178c0303e93b8f4ad758b8e2c9fd8b3d0c28e585f1928334bb77d36782e8')) :-
+		blake2b([], 63)::hash([], Hash).
+
+	test(blake2b_parametric_digest_size_is_domain_separated, deterministic(Hash \== '786a02f742015903c6c6fd852552d272912f4740e15847618a86e217f71f5419')) :-
+		blake2b([], 32)::hash([], Hash).
+
+	test(blake2b_parametric_keyed_empty_32, deterministic(Hash == '52897a9c27e9781839168d22a76145b07a8a7f8cd85c1d3709e5b09468405099')) :-
+		blake2b([0], 32)::hash([], Hash).
+
+	test(blake2b_parametric_keyed_abc_32, deterministic(Hash == '33d411f854d934a7ef279ed88366304b327e57814385e58fd09660fdc6ac6dc9')) :-
+		atom_codes('abc', Bytes),
+		blake2b([0], 32)::hash(Bytes, Hash).
+
+	test(blake2b_parametric_max_key_empty, deterministic(Hash == '10ebb67700b1868efb4417987acf4690ae9d972fb7a590c2f02871799aaa4786b5e996e8f0f4eb981fc214b005f42d2ff4233499391653df7aefcbc13fc51568')) :-
+		sequence(0, 63, Key),
+		blake2b(Key, 64)::hash([], Hash).
+
+	test(blake2b_parametric_hash_digest_protocol, deterministic(Info == info('0e5751c026e543b2e8ab2eb06099daa1d1e5df47778f7787faab45cdf12fe3a8', 32, 128))) :-
+		blake2b([], 32)::digest([], Digest),
+		bytes_hex(Digest, Hex),
+		blake2b([], 32)::digest_size(DigestSize),
+		blake2b([], 32)::block_size(BlockSize),
 		Info = info(Hex, DigestSize, BlockSize).
 
 	test(sha3_224_empty, deterministic(Hash == '6b4e03423667dbb73b6e15454f0eb1abd4597f9a1b078e3f5b5a6bc7')) :-
@@ -394,6 +429,15 @@
 		sequence(1, 128, Bytes128),
 		blake2b::hash(Bytes128, Hash128),
 		run_incremental(blake2b, [Bytes128, [129]], Hash129).
+
+	test(blake2b_parametric_keyed_incremental_empty, deterministic(Hash == '52897a9c27e9781839168d22a76145b07a8a7f8cd85c1d3709e5b09468405099')) :-
+		run_incremental(blake2b([0], 32), [], Hash).
+
+	test(blake2b_parametric_keyed_incremental_matches_hash, deterministic(Hash1 == Hash2)) :-
+		atom_codes('The quick brown fox jumps over the lazy dog', Bytes),
+		blake2b([0], 32)::hash(Bytes, Hash1),
+		chunks(11, Bytes, Chunks),
+		run_incremental(blake2b([0], 32), Chunks, Hash2).
 
 	% SHA-3 / SHAKE family: byte-by-byte equivalence, plus a test with the
 	% message length exactly matching the rate (block) size to exercise the
