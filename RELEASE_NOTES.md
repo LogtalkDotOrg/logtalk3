@@ -74,6 +74,11 @@ functions and added tests for HMAC-BLAKE2b and HMAC-BLAKE2s.
 * FIXED: Portability of the `jwt` library when using backends that don't
 provide `length/2` as a built-in predicate.
 
+Tools
+-----
+
+* IMPROVED: Tests for the `linter_reporter` tool to be less verbose.
+
 Examples
 --------
 

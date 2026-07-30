@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-07-19,
+		date is 2026-07-30,
 		comment is 'Unit tests for the linter_reporter tool.'
 	]).
 
@@ -251,15 +251,15 @@
 		^^clean_file('linter_warnings.sarif'),
 		reset,
 		enable([explanations(Explanations)]),
-		logtalk_load([errors(warnings), errors(main_include_compiler_warning)], [reload(always)]),
+		logtalk_load([errors(warnings), errors(main_include_compiler_warning)], [reload(always), report(off)]),
 		disable.
 
 	prepare_target_run(Explanations) :-
 		^^clean_file('linter_warnings.sarif'),
 		reset,
 		enable([explanations(Explanations)]),
-		logtalk_load([errors(warnings), errors(main_include_compiler_warning)], [reload(always)]),
-		logtalk_load(lgtunit('test_files/diagnostics_fixture'), [hook(lgtunit), reload(always)]),
+		logtalk_load([errors(warnings), errors(main_include_compiler_warning)], [reload(always), report(off)]),
+		logtalk_load(lgtunit('test_files/diagnostics_fixture'), [hook(lgtunit), reload(always), report(off)]),
 		disable.
 
 	% not all warnings have explanations
