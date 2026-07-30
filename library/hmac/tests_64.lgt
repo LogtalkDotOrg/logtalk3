@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-07-17,
+		date is 2026-07-30,
 		comment is 'Unit tests for the "hmac" library on unbounded integer backends.'
 	]).
 
@@ -91,6 +91,7 @@
 		hex_digest(sha512, Key, Message, 16, HexDigest).
 
 	% Reproducible reference value generated with Python's standard hashlib/hmac sha512_256 implementation.
+
 	test(sha512_256_python_case_1_hex_digest, deterministic(HexDigest == '9f9126c3d9c3c330d760425ca8a217e31feae31bfe70196ff81642b868402eab')) :-
 		repeat_byte(20, 0x0b, Key),
 		atom_codes('Hi There', Message),
@@ -115,6 +116,25 @@
 		repeat_byte(20, 0x0b, Key),
 		atom_codes('Hi There', Message),
 		hex_digest(sha3_512, Key, Message, HexDigest).
+
+	% Reproducible reference values generated with Python's standard hashlib/hmac blake2b implementation.
+
+	test(blake2b_python_case_1_hex_digest, deterministic(HexDigest == '358a6a184924894fc34bee5680eedf57d84a37bb38832f288e3b27dc63a98cc8c91e76da476b508bc6b2d408a248857452906e4a20b48c6b4b55d2df0fe1dd24')) :-
+		repeat_byte(20, 0x0b, Key),
+		atom_codes('Hi There', Message),
+		hex_digest(blake2b, Key, Message, HexDigest).
+
+	test(blake2b_python_case_2_hex_digest, deterministic(HexDigest == '6ff884f8ddc2a6586b3c98a4cd6ebdf14ec10204b6710073eb5865ade37a2643b8807c1335d107ecdb9ffeaeb6828c4625ba172c66379efcd222c2de11727ab4')) :-
+		atom_codes('Jefe', Key),
+		atom_codes('what do ya want for nothing?', Message),
+		hex_digest(blake2b, Key, Message, HexDigest).
+
+	test(blake2b_python_case_5_truncated_hex_digest, deterministic(HexDigest == '7d03e0d2ad83656e5ace6aa9ddf6407a')) :-
+		repeat_byte(20, 0x0c, Key),
+		atom_codes('Test With Truncation', Message),
+		hex_digest(blake2b, Key, Message, 16, HexDigest).
+
+	% auxiliary predicates
 
 	repeat_byte(0, _, []) :-
 		!.

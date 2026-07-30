@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-16,
+		date is 2026-07-30,
 		comment is 'Unit tests for the "hmac" library on bounded integer backends.'
 	]).
 
@@ -51,8 +51,25 @@
 		digest(md5, Key, Message, 12, Digest),
 		bytes_hex(Digest, HexDigest).
 
-	throws(unsupported_hash, error(domain_error(hmac_hash, crc32b), _)) :-
+	% Reproducible reference values generated with Python's standard hashlib/hmac
+	% blake2s implementation. Unlike the other non-md5 hash objects, blake2s is
+	% available on bounded integer arithmetic backends too.
+	test(blake2s_python_case_1_digest, deterministic(HexDigest == '65a8b7c5cc9136d424e82c37e2707e74e913c0655b99c75f40edf387453a3260')) :-
+		repeat_byte(20, 0x0b, Key),
+		atom_codes('Hi There', Message),
+		digest(blake2s, Key, Message, Digest),
+		bytes_hex(Digest, HexDigest).
+
+	test(blake2s_python_case_5_truncated_digest, deterministic(HexDigest == '1825eff4619fb8b20833b9432892c81b')) :-
+		repeat_byte(20, 0x0c, Key),
+		atom_codes('Test With Truncation', Message),
+		digest(blake2s, Key, Message, 16, Digest),
+		bytes_hex(Digest, HexDigest).
+
+	test(unsupported_hash, error(domain_error(hmac_hash, crc32b))) :-
 		digest(crc32b, [], [], _).
+
+	% auxiliary predicates
 
 	repeat_byte(0, _, []) :-
 		!.

@@ -68,6 +68,9 @@ unique identifier (TypeID) generator.
 * IMPROVED: Portability of the `sockets` library with versions of SWI-Prolog
 older than 9.1.5.
 
+* UPDATED: The `hmac` library documentation to mention the BLAKE2 hash
+functions and added tests for HMAC-BLAKE2b and HMAC-BLAKE2s.
+
 * FIXED: Portability of the `jwt` library when using backends that don't
 provide `length/2` as a built-in predicate.
 
