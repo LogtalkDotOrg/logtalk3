@@ -24,7 +24,11 @@
 	set_logtalk_flag(optimize, on),
 	logtalk_load(loader),
 	logtalk_load([
-		'test_files/diagnostics_fixture',
+		'test_files/diagnostics_fixture'
+	], [
+		hook(lgtunit), report(off)
+	]),
+	logtalk_load([
 		'test_files/tests_diagnostics',
 		'test_files/tests_parametric',
 		'test_files/tests_dialects',

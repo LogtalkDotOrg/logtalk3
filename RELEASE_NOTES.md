@@ -79,6 +79,8 @@ Tools
 
 * IMPROVED: Tests for the `linter_reporter` tool to be less verbose.
 
+* IMPROVED: Tests for the `lgtunit` tool to be less verbose.
+
 Examples
 --------
 
