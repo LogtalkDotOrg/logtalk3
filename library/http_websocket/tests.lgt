@@ -61,9 +61,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-09,
+		date is 2026-07-31,
 		comment is 'Unit tests for the "http_websocket" library.'
 	]).
 
@@ -77,6 +77,10 @@
 
 	:- uses(http_websocket_messages, [
 		message/3 as normalized_message/3
+	]).
+
+	:- uses(lgtunit, [
+		assertion/1
 	]).
 
 	:- uses(user, [
@@ -106,10 +110,10 @@
 			catch(close_listener(Listener), _, true),
 			ServerSession = session(ServerResponse, server, chat, message(text, hello), message(close, status(1000, done))),
 			ClientSession = session(ClientResponse, client, chat, message(text, hello), message(text, 'Echo: hello')),
-			status(ServerResponse, status(101, 'Switching Protocols')),
-			property(ServerResponse, websocket_protocol([chat])),
-			status(ClientResponse, status(101, 'Switching Protocols')),
-			property(ClientResponse, websocket_protocol([chat])).
+			assertion(status(ServerResponse, status(101, 'Switching Protocols'))),
+			assertion(property(ServerResponse, websocket_protocol([chat]))),
+			assertion(status(ClientResponse, status(101, 'Switching Protocols'))),
+			assertion(property(ClientResponse, websocket_protocol([chat]))).
 
 		test(http_websocket_direct_json_2_01, deterministic(ReplyJSON == JSON)) :-
 			JSON = {message-hello, count-1},
@@ -154,11 +158,11 @@
 			threaded_exit(server_accept_for_open_session(Listener, ServerSession), Tag),
 			catch(close_listener(Listener), _, true),
 			ServerSession = session(ServerResponse, message(text, hello), message(close, status(1000, done))),
-			status(ServerResponse, status(101, 'Switching Protocols')),
-			property(ServerResponse, websocket_protocol([chat])),
-			status(ClientResponse, status(101, 'Switching Protocols')),
-			property(ClientResponse, websocket_protocol([chat])),
-			ClientState = session_state(idle, closed(status(1000, done), status(1000, done))).
+			assertion(status(ServerResponse, status(101, 'Switching Protocols'))),
+			assertion(property(ServerResponse, websocket_protocol([chat]))),
+			assertion(status(ClientResponse, status(101, 'Switching Protocols'))),
+			assertion(property(ClientResponse, websocket_protocol([chat]))),
+			assertion(ClientState == session_state(idle, closed(status(1000, done), status(1000, done)))).
 
 		test(http_websocket_serve_once_6_01, deterministic) :-
 			open_listener('127.0.0.1', Port, Listener, []),
@@ -174,11 +178,11 @@
 			threaded_exit(server_serve_once_exchange(Listener, ServerResponse, ServerState), Tag),
 			catch(close_listener(Listener), _, true),
 			ClientSession = session(ClientResponse, client, chat, message(text, hello), message(text, hello)),
-			status(ServerResponse, status(101, 'Switching Protocols')),
-			property(ServerResponse, websocket_protocol([chat])),
-			ServerState = session_state(idle, closed(status(1000, done), status(1000, done))),
-			status(ClientResponse, status(101, 'Switching Protocols')),
-			property(ClientResponse, websocket_protocol([chat])).
+			assertion(status(ServerResponse, status(101, 'Switching Protocols'))),
+			assertion(property(ServerResponse, websocket_protocol([chat]))),
+			assertion(ServerState == session_state(idle, closed(status(1000, done), status(1000, done)))),
+			assertion(status(ClientResponse, status(101, 'Switching Protocols'))),
+			assertion(property(ClientResponse, websocket_protocol([chat]))).
 
 		% auxiliary predicates
 
