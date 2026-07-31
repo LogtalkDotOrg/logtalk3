@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-09,
+		date is 2026-07-31,
 		comment is 'Unit tests for the "http_websocket_service" library.'
 	]).
 
@@ -68,9 +68,9 @@
 		http_websocket_service_registry::take_pending(Registry, Session1, Messages1),
 		http_websocket_service_registry::take_pending(Registry, Session2, Messages2),
 		http_websocket_service_registry::session_count(Registry, Count),
-		Messages1 == [message(text, direct)],
-		Messages2 == [message(text, broadcast)],
-		Count == 2.
+		^^assertion(Messages1 == [message(text, direct)]),
+		^^assertion(Messages2 == [message(text, broadcast)]),
+		^^assertion(Count == 2).
 
 	test(http_websocket_service_registry_send_3_01, deterministic, [cleanup(catch(http_websocket_service_registry::close(Registry), _, true))]) :-
 		http_websocket_service_registry::open(Registry),
@@ -81,9 +81,9 @@
 		http_websocket_service_registry::take_pending(Registry, Session, Messages),
 		http_websocket_service_registry::take_pending(Registry, Session, MessagesAfterDrain),
 		http_websocket_service_registry::session_count(Registry, Count),
-		Messages == [message(text, first), message(text, second), message(text, third)],
-		MessagesAfterDrain == [],
-		Count == 1.
+		^^assertion(Messages == [message(text, first), message(text, second), message(text, third)]),
+		^^assertion(MessagesAfterDrain == []),
+		^^assertion(Count == 1).
 
 	:- if(current_logtalk_flag(threads, supported)).
 
@@ -219,8 +219,8 @@
 		close_listener(Listener),
 		status(ServerResponse, status(101, 'Switching Protocols')),
 		status(ClientResponse, status(101, 'Switching Protocols')),
-		ServerState == session_state(idle, closed(status(1000), status(1000))),
-		ClientState == session_state(idle, closed(status(1000), status(1000))).
+		^^assertion(ServerState == session_state(idle, closed(status(1000), status(1000)))),
+		^^assertion(ClientState == session_state(idle, closed(status(1000), status(1000)))).
 
 	test(http_websocket_server_service_serve_once_7_02, deterministic) :-
 		open_listener('127.0.0.1', Port, Listener, []),
@@ -314,10 +314,10 @@
 		safe_close_listener(Listener),
 		status(ServerResponse, status(101, 'Switching Protocols')),
 		status(ClientResponse, status(101, 'Switching Protocols')),
-		ServerState == session_state(idle, closed(status(1000), status(1000))),
-		ClientState == session_state(idle, closed(status(1000), status(1000))),
+		^^assertion(ServerState == session_state(idle, closed(status(1000), status(1000)))),
+		^^assertion(ClientState == session_state(idle, closed(status(1000), status(1000)))),
 		websocket_keepalive_close_handler::captured(Message),
-		Message == message(ping, []).
+		^^assertion(Message == message(ping, [])).
 
 	test(http_websocket_client_service_open_5_03, deterministic) :-
 		open_listener('127.0.0.1', Port, Listener, []),
