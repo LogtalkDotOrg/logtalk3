@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-06-13,
+		date is 2026-07-31,
 		comment is 'Unit tests for the "http_websocket_session" library.'
 	]).
 
@@ -51,8 +51,8 @@
 		write_frames_file('test_http_websocket_session.tmp', [Frame]),
 		http_websocket_server_session::initial_state(State0),
 		open_file_read_stateful_message('test_http_websocket_session.tmp', http_websocket_server_session, State0, State, Message),
-		State == session_state(idle),
-		Message == message(text, hello).
+		^^assertion(State == session_state(idle)),
+		^^assertion(Message == message(text, hello)).
 
 	test(http_websocket_session_read_message_4_02, deterministic) :-
 		http_websocket_frames::frame(more, text, [0'h, 0'e], [masking_key([1, 2, 3, 4])], Frame1),
@@ -65,11 +65,11 @@
 		http_websocket_server_session::read_message(Input, State0, State1, Message1),
 		http_websocket_server_session::read_message(Input, State1, State2, Message2),
 		close(Input),
-		State0 == session_state(idle),
-		State1 == session_state(fragment(text, [[0'h, 0'e]])),
-		State2 == session_state(idle),
-		Message1 == message(ping, [0'!]),
-		Message2 == message(text, hello).
+		^^assertion(State0 == session_state(idle)),
+		^^assertion(State1 == session_state(fragment(text, [[0'h, 0'e]]))),
+		^^assertion(State2 == session_state(idle)),
+		^^assertion(Message1 == message(ping, [0'!])),
+		^^assertion(Message2 == message(text, hello)).
 
 	test(http_websocket_session_read_message_4_03, deterministic) :-
 		http_websocket_frames::frame(more, binary, [1, 2], [], Frame1),
@@ -82,9 +82,9 @@
 		http_websocket_client_session::read_message(Input, State0, State1, Message1),
 		catch(http_websocket_client_session::read_message(Input, State1, _State2, _Message2), Error, true),
 		close(Input),
-		State1 == session_state(idle, close_received(status(1000))),
-		Message1 == message(close, status(1000)),
-		Error = error(domain_error(http_websocket_session_state, session_state(idle, close_received(status(1000)))), _).
+		^^assertion(State1 == session_state(idle, close_received(status(1000)))),
+		^^assertion(Message1 == message(close, status(1000))),
+		^^assertion(Error = error(domain_error(http_websocket_session_state, session_state(idle, close_received(status(1000)))), _)).
 
 	test(http_websocket_session_read_message_4_04, error(domain_error(http_websocket_session_masking, _))) :-
 		http_websocket_frames::frame(final, text, [0'h], [], Frame),
@@ -111,9 +111,9 @@
 		open(File, read, Input, [type(binary)]),
 		http_websocket_client_session::read_message(Input, State1, State2, Message),
 		close(Input),
-		State1 == session_state(idle, close_sent(status(1001))),
-		State2 == session_state(idle, closed(status(1001), status(1000))),
-		Message == message(close, status(1000)).
+		^^assertion(State1 == session_state(idle, close_sent(status(1001)))),
+		^^assertion(State2 == session_state(idle, closed(status(1001), status(1000)))),
+		^^assertion(Message == message(close, status(1000))).
 
 	test(http_websocket_session_read_message_4_07, error(domain_error(http_websocket_session_extensions, _))) :-
 		http_websocket_frames::frame(final, text, [0'h], [masking_key([1, 2, 3, 4]), reserved_bits([rsv1])], Frame),
@@ -231,7 +231,7 @@
 		http_websocket_client_session::write_message(Output, State0, State, Message),
 		close(Output),
 		read_frames_file('test_http_websocket_session.tmp', [Frame]),
-		State == session_state(idle, close_sent(status(1000, bye))),
+		^^assertion(State == session_state(idle, close_sent(status(1000, bye)))),
 		http_websocket_frames::opcode(Frame, close),
 		http_websocket_frames::final(Frame, final),
 		http_websocket_frames::payload(Frame, [0x03, 0xE8, 0'b, 0'y, 0'e]),
@@ -245,8 +245,8 @@
 		catch(http_websocket_client_session::write_message(Output, State0, _State, Message), Error, true),
 		close(Output),
 		read_frames_file('test_http_websocket_session.tmp', Frames),
-		Error = error(domain_error(http_websocket_session_state, session_state(idle, close_received(status(1000)))), _),
-		Frames == [].
+		^^assertion(subsumes_term(error(domain_error(http_websocket_session_state, session_state(idle, close_received(status(1000)))), _), Error)),
+		^^assertion(Frames == []).
 
 	test(http_websocket_session_write_message_4_03, deterministic) :-
 		http_websocket_client_session::message(text, hello, Message),
@@ -256,8 +256,8 @@
 		catch(http_websocket_client_session::write_message(Output, State0, _State, Message), Error, true),
 		close(Output),
 		read_frames_file('test_http_websocket_session.tmp', Frames),
-		Error = error(domain_error(http_websocket_session_state, session_state(idle, close_sent(status(1000)))), _),
-		Frames == [].
+		^^assertion(subsumes_term(error(domain_error(http_websocket_session_state, session_state(idle, close_sent(status(1000)))), _), Error)),
+		^^assertion(Frames == []).
 
 	test(http_websocket_session_read_message_5_01, deterministic) :-
 		http_websocket_frames::frame(final, close, [0x03, 0xE8, 0'b, 0'y, 0'e], [masking_key([1, 2, 3, 4])], Frame),
@@ -271,8 +271,8 @@
 		close(Input),
 		close(Output),
 		read_frames_file('test_http_websocket_session_reply.tmp', [ReplyFrame]),
-		State == session_state(idle, closed(status(1000, bye), status(1000, bye))),
-		Message == message(close, status(1000, bye)),
+		^^assertion(State == session_state(idle, closed(status(1000, bye), status(1000, bye)))),
+		^^assertion(Message == message(close, status(1000, bye))),
 		http_websocket_frames::opcode(ReplyFrame, close),
 		http_websocket_frames::final(ReplyFrame, final),
 		http_websocket_frames::payload(ReplyFrame, [0x03, 0xE8, 0'b, 0'y, 0'e]),
@@ -292,8 +292,8 @@
 		close(Input),
 		close(Output),
 		read_frames_file('test_http_websocket_session_reply.tmp', [ReplyFrame]),
-		State == session_state(idle, closed(status(1000), status(1000))),
-		Message == message(close, status(1000)),
+		^^assertion(State == session_state(idle, closed(status(1000), status(1000)))),
+		^^assertion(Message == message(close, status(1000))),
 		http_websocket_frames::opcode(ReplyFrame, close),
 		http_websocket_frames::final(ReplyFrame, final),
 		http_websocket_frames::payload(ReplyFrame, [0x03, 0xE8]),
@@ -314,10 +314,10 @@
 		close(Input),
 		close(Output),
 		read_frames_file('test_http_websocket_session_reply.tmp', [ReplyFrame]),
-		State1 == session_state(fragment(text, [[0'h, 0'e]])),
-		State2 == session_state(idle),
-		Message1 == message(ping, [0'!]),
-		Message2 == message(text, hello),
+		^^assertion(State1 == session_state(fragment(text, [[0'h, 0'e]]))),
+		^^assertion(State2 == session_state(idle)),
+		^^assertion(Message1 == message(ping, [0'!])),
+		^^assertion(Message2 == message(text, hello)),
 		http_websocket_frames::opcode(ReplyFrame, pong),
 		http_websocket_frames::final(ReplyFrame, final),
 		http_websocket_frames::payload(ReplyFrame, [0'!]),
