@@ -76,7 +76,8 @@ supporting unbound integer arithmetic).
 older than 9.1.5.
 
 * FIXED: A race condition in the `http_process_transport` library when closing
-`ncat`-backed connections that could discard pending output bytes.
+`ncat`-backed connections that could discard pending output bytes. Thanks to
+Andrew Davison for the bug report.
 
 * FIXED: The `http_process_transport` and `sockets` libraries to close the
 output stream before the input stream when they are distinct, preventing
