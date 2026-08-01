@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 0:13:1,
+		version is 0:13:2,
 		author is 'Paulo Moura',
-		date is 2026-07-28,
+		date is 2026-08-01,
 		comment is 'Portable abstraction over TCP sockets. Provides a high-level API for client and server socket operations that works with selected backend Prolog systems.',
 		remarks is [
 			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, and Trealla Prolog.',
@@ -202,8 +202,8 @@
 		catch(
 			(	Input == Output ->
 				close(Input)
-			;	close(Input),
-				close(Output)
+			;	close(Output),
+				close(Input)
 			),
 			Error,
 			throw(error(socket_error(Error), Context))

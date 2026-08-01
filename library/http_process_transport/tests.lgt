@@ -57,9 +57,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-08-01,
 		comment is 'Unit tests for the "http_process_transport" library.'
 	]).
 
@@ -357,8 +357,8 @@
 	close_stream_pair(Input, Output) :-
 		(	Input == Output ->
 			close(Input)
-		;	close(Input),
-			close(Output)
+		;	close(Output),
+			close(Input)
 		).
 
 	tls_listener_available :-

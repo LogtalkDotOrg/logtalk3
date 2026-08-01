@@ -14,8 +14,8 @@ Process-backed HTTP transport predicates using the process library and helper pr
 |    ``logtalk_load(http_process_transport(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:1:0
-| **Date:** 2026-07-28
+| **Version:** 1:1:1
+| **Date:** 2026-08-01
 
 | **Compilation flags:**
 |    ``static, context_switching_calls, threaded``
@@ -124,7 +124,7 @@ Registered helper-process state for open reusable client connections.
 |    ``dynamic``
 
 | **Template:**
-|    ``process_connection_state_(Connection,Process,Error)``
+|    ``process_connection_state_(Connection,TransportProcess,Error)``
 | **Mode and number of proofs:**
 |    ``process_connection_state_(?compound,?ground,?stream)`` - ``zero_or_more``
 

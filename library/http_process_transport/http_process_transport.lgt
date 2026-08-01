@@ -24,9 +24,9 @@
 	imports([options, http_message_helpers, http_text_helpers])).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-07-28,
+		date is 2026-08-01,
 		comment is 'Process-backed HTTP transport predicates using the process library and helper processes.'
 	]).
 
@@ -58,7 +58,7 @@
 	:- mode(process_connection_state_(?compound, ?ground, ?stream), zero_or_more).
 	:- info(process_connection_state_/3, [
 		comment is 'Registered helper-process state for open reusable client connections.',
-		argnames is ['Connection', 'Process', 'Error']
+		argnames is ['Connection', 'TransportProcess', 'Error']
 	]).
 
 	:- private(connection_pool_seed_/1).
@@ -178,7 +178,7 @@
 	:- endif.
 
 	:- synchronized([
-		register_process_connection/3, take_process_connection/2, allocate_connection_pool_id/1,
+		register_process_connection/4, take_process_connection/2, allocate_connection_pool_id/1,
 		register_connection_pool/7, acquire_pool_connection/2, release_pool_connection/3,
 		discard_pool_connection/2, close_connection_pool_state/2, connection_pool_id_outcome/2,
 		allocate_listener_id/1, register_process_listener/5, request_process_listener_shutdown/2,
@@ -524,18 +524,18 @@
 			% for other backends, we need to set the streams type after creating the process
 			setup_process_connection_streams(Type, Input, Output),
 			SetupError,
-			(	cleanup_process_connection(Connection, Process, Error),
+			(	cleanup_process_connection(Connection, Transport, Process, Error),
 				throw(SetupError)
 			)
 		),
 		catch(
 			wait_for_connection_startup(Transport, Error, Context),
 			StartupError,
-			(	cleanup_process_connection(Connection, Process, Error),
+			(	cleanup_process_connection(Connection, Transport, Process, Error),
 				throw(StartupError)
 			)
 		),
-		register_process_connection(Connection, Process, Error).
+		register_process_connection(Connection, Transport, Process, Error).
 
 	wait_for_connection_startup(tcp, Error, Context) :-
 		wait_for_ncat_connection_startup(Error, Context).
@@ -600,23 +600,29 @@
 
 	:- endif.
 
-	register_process_connection(Connection, Process, Error) :-
-		assertz(process_connection_state_(Connection, Process, Error)).
+	register_process_connection(Connection, Transport, Process, Error) :-
+		assertz(process_connection_state_(Connection, process(Transport, Process), Error)).
 
-	take_process_connection(Connection, connection(Process, Error)) :-
-		retract(process_connection_state_(Connection, Process, Error)),
+	take_process_connection(Connection, connection(Transport, Process, Error)) :-
+		retract(process_connection_state_(Connection, process(Transport, Process), Error)),
 		!.
 	take_process_connection(_Connection, missing).
 
-	close_process_connection_outcome(connection(Process, Error), Connection) :-
-		cleanup_process_connection(Connection, Process, Error).
+	close_process_connection_outcome(connection(Transport, Process, Error), Connection) :-
+		cleanup_process_connection(Connection, Transport, Process, Error).
 	close_process_connection_outcome(missing, Connection) :-
 		(	var(Connection) ->
 			instantiation_error
 		;	domain_error(http_socket_transport_connection, Connection)
 		).
 
-	cleanup_process_connection(http_connection(_Host, _Port, Input, Output), Process, Error) :-
+	cleanup_process_connection(http_connection(_Host, _Port, Input, Output), tcp, Process, Error) :-
+		% With ncat -q 0.01, stdin EOF allows pending bytes to drain before exit.
+		close_process_stream(Output),
+		catch(process::wait(Process, _Status), _, catch(process::kill(Process, sigterm), _, true)),
+		close_process_stream(Input),
+		close_process_stream(Error).
+	cleanup_process_connection(http_connection(_Host, _Port, Input, Output), tls, Process, Error) :-
 		close_process_stream(Output),
 		close_process_stream(Input),
 		close_process_stream(Error),
@@ -720,7 +726,7 @@
 		listener_bind_family_option(LoopbackHost, FamilyOption),
 		atomic_list_concat([ncat, '-n', FamilyOption, LoopbackHost, RelayPort], ' ', RelayCommand).
 
-	client_connect_arguments(Host, Port, ['-v', '-n', FamilyOption, Host, PortAtom]) :-
+	client_connect_arguments(Host, Port, ['-v', '-n', FamilyOption, '-q', '0.01', Host, PortAtom]) :-
 		atom_number(PortAtom, Port),
 		listener_bind_family_option(Host, FamilyOption).
 
@@ -1517,8 +1523,8 @@
 	close_stream_pair(Input, Output) :-
 		(	Input == Output ->
 			close(Input)
-		;	close(Input),
-			close(Output)
+		;	close(Output),
+			close(Input)
 		).
 
 	serve_listener_with_workers(serial, Listener, Handler, Count, ClientInfos) :-
