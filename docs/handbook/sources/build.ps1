@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on July 29, 2026
+##   Last updated on August 1, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -304,6 +304,7 @@ Foreach-Object {
 (Get-Content ../../../library/snowflakeid/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/snowflakeid.rst
 (Get-Content ../../../library/sockets/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/sockets.rst
 (Get-Content ../../../library/spade_pattern_miner/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/spade_pattern_miner.rst
+(Get-Content ../../../library/spectral_clusterer/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/spectral_clusterer.rst
 (Get-Content ../../../library/sqids/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/sqids.rst
 (Get-Content ../../../library/statistics/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/statistics.rst
 (Get-Content ../../../library/stemming/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/stemming.rst

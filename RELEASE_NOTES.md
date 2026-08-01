@@ -59,6 +59,9 @@ and querying integer partitions.
 
 * ADDED: New `mqtt` library implementing a MQTT 5.0 client.
 
+* ADDED: New `spectral_clusterer` library implementing a normalized spectral
+clusterer for continuous datasets.
+
 * ADDED: New `sqids` library for encoding lists of non-negative integers into
 short, obfuscated (but not encrypted), URL-safe identifiers.
 

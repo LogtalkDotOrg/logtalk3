@@ -253,6 +253,7 @@ directory in the ``NOTES.md`` file.
    snowflakeid
    sockets
    spade_pattern_miner
+   spectral_clusterer
    sqids
    statistics
    stemming

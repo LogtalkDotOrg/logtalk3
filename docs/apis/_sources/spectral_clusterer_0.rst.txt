@@ -1,0 +1,84 @@
+.. index:: single: spectral_clusterer
+.. _spectral_clusterer/0:
+
+.. rst-class:: right
+
+**object**
+
+``spectral_clusterer``
+======================
+
+Normalized spectral clusterer for continuous datasets using a Gaussian RBF affinity and a Nyström extension for assigning new instances to clusters.
+
+| **Availability:** 
+|    ``logtalk_load(spectral_clusterer(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-01
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`clusterer_common <clusterer_common/0>`
+| **Uses:**
+|    :ref:`format <format/0>`
+|    :ref:`linear_algebra <linear_algebra/0>`
+|    :ref:`list <list/0>`
+|    :ref:`numberlist <numberlist/0>`
+|    :ref:`pairs <pairs/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`clusterer_protocol/0::check_clusterer/1`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`clusterer_protocol/0::cluster/3`  :ref:`clusterer_protocol/0::clusterer_options/2`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`clusterer_protocol/0::diagnostic/2`  :ref:`clusterer_protocol/0::diagnostics/2`  :ref:`clusterer_protocol/0::export_to_clauses/4`  :ref:`clusterer_protocol/0::export_to_file/4`  :ref:`clusterer_protocol/0::learn/2`  :ref:`clusterer_protocol/0::learn/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`clusterer_protocol/0::print_clusterer/1`  :ref:`clusterer_protocol/0::valid_clusterer/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: clusterer_diagnostics_data/2
+.. _spectral_clusterer/0::clusterer_diagnostics_data/2:
+
+``clusterer_diagnostics_data/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Extracts the diagnostics metadata from a learned spectral clusterer.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``clusterer_diagnostics_data(Clusterer,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``clusterer_diagnostics_data(+compound,-list(compound))`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`clusterer_protocol <clusterer_protocol/0>`, :ref:`clustering_dataset_protocol <clustering_dataset_protocol/0>`, :ref:`kmeans_clusterer <kmeans_clusterer/0>`, :ref:`linear_algebra <linear_algebra/0>`
+
