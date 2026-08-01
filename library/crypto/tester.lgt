@@ -19,15 +19,40 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(basic_types(loader)),
-	logtalk_load(base64(loader)),
-	logtalk_load(hmac(loader)),
-	logtalk_load(os(loader)),
-	logtalk_load(random(loader)),
-	logtalk_load(crypto, [debug(on), source_data(on)]),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- if(current_prolog_flag(bounded, false)).
+
+	:- initialization((
+		set_logtalk_flag(report, warnings),
+		logtalk_load(basic_types(loader)),
+		logtalk_load(base64(loader)),
+		logtalk_load(hmac(loader)),
+		logtalk_load(os(loader)),
+		logtalk_load(random(loader)),
+		logtalk_load(crypto, [debug(on), source_data(on), complements(restrict)]),
+		logtalk_load(xchacha20_poly1305, [debug(on), source_data(on)]),
+		logtalk_load(ed25519, [debug(on), source_data(on)]),
+		logtalk_load(lgtunit(loader)),
+		logtalk_load([tests, xchacha20_poly1305_tests, ed25519_tests], [hook(lgtunit)]),
+		lgtunit::run_test_sets([
+			tests,
+			xchacha20_poly1305_tests,
+			ed25519_tests
+		])
+	)).
+
+:- else.
+
+	:- initialization((
+		set_logtalk_flag(report, warnings),
+		logtalk_load(basic_types(loader)),
+		logtalk_load(base64(loader)),
+		logtalk_load(hmac(loader)),
+		logtalk_load(os(loader)),
+		logtalk_load(random(loader)),
+		logtalk_load(crypto, [debug(on), source_data(on)]),
+		logtalk_load(lgtunit(loader)),
+		logtalk_load(tests, [hook(lgtunit)]),
+		tests::run
+	)).
+
+:- endif.

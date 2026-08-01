@@ -555,6 +555,8 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
    crypto <crypto_0>
+   ed25519 <ed25519_0>
+   xchacha20_poly1305 <xchacha20_poly1305_0>
 
 ``library/csv/``
 ----------------

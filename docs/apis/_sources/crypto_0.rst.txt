@@ -18,7 +18,7 @@ Transport-neutral cryptographic helper predicates.
 | **Date:** 2026-07-20
 
 | **Compilation flags:**
-|    ``static, context_switching_calls``
+|    ``static, context_switching_calls, complements(restrict)``
 
 
 | **Uses:**
@@ -34,7 +34,7 @@ Transport-neutral cryptographic helper predicates.
 |    (none)
 
 | **Inherited public predicates:**
-|    (none)
+|     :ref:`ed25519/0::ed25519_keypair/2`  :ref:`ed25519/0::ed25519_public_key/2`  :ref:`ed25519/0::ed25519_sign/3`  :ref:`ed25519/0::ed25519_verify/3`  :ref:`xchacha20_poly1305/0::xchacha20_poly1305_decrypt/5`  :ref:`xchacha20_poly1305/0::xchacha20_poly1305_encrypt/5`  
 
 .. contents::
    :local:
@@ -576,7 +576,43 @@ Protected predicates
 Private predicates
 ------------------
 
-(no local declarations; see entity ancestors if any)
+.. index:: xor_bytes/3
+.. _crypto/0::xor_bytes/3:
+
+``xor_bytes/3``
+^^^^^^^^^^^^^^^
+
+Computes the byte-wise exclusive disjunction of two equal-length byte lists.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``xor_bytes(Bytes1,Bytes2,XorBytes)``
+| **Mode and number of proofs:**
+|    ``xor_bytes(+list(byte),+list(byte),-list(byte))`` - ``one``
+
+
+------------
+
+.. index:: constant_time_equal/2
+.. _crypto/0::constant_time_equal/2:
+
+``constant_time_equal/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Compares two byte lists using a constant-time strategy.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``constant_time_equal(Expected,Candidate)``
+| **Mode and number of proofs:**
+|    ``constant_time_equal(+list(byte),+list(byte))`` - ``zero_or_one``
+
+
+------------
 
 Operators
 ---------

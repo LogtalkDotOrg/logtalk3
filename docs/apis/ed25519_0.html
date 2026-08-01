@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>csv &mdash; Logtalk 3.102.0</title>
+  <title>ed25519 &mdash; Logtalk 3.102.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -32,8 +32,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="csv(Header,Separator,IgnoreQuotes)" href="csv_3.html" />
-    <link rel="prev" title="xchacha20_poly1305" href="xchacha20_poly1305_0.html" />
+    <link rel="next" title="xchacha20_poly1305" href="xchacha20_poly1305_0.html" />
+    <link rel="prev" title="crypto" href="crypto_0.html" />
    
 </head>
 
@@ -105,15 +105,13 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#core"><span class="xref std std-ref">core</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#coroutining"><span class="xref std std-ref">coroutining</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#crs-projections"><span class="xref std std-ref">crs_projections</span></a></li>
-<li class="toctree-l2"><a class="reference internal" href="library_index.html#crypto"><span class="xref std std-ref">crypto</span></a></li>
-<li class="toctree-l2 current"><a class="reference internal" href="library_index.html#csv"><span class="xref std std-ref">csv</span></a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">csv</a></li>
-<li class="toctree-l3"><a class="reference internal" href="csv_3.html">csv(Header,Separator,IgnoreQuotes)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="csv_4.html">csv(Header,Separator,IgnoreQuotes,Comments)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="csv_guess_questions_0.html">csv_guess_questions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="csv_protocol_0.html">csv_protocol</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="library_index.html#crypto"><span class="xref std std-ref">crypto</span></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="crypto_0.html">crypto</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ed25519</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xchacha20_poly1305_0.html">xchacha20_poly1305</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#csv"><span class="xref std std-ref">csv</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#cuid2"><span class="xref std std-ref">cuid2</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#cusum-anomaly-detector"><span class="xref std std-ref">cusum_anomaly_detector</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#datalog"><span class="xref std std-ref">datalog</span></a></li>
@@ -390,9 +388,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">csv</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">ed25519</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/csv_0.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/ed25519_0.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -400,31 +398,37 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="csv-0"><span id="index-0"></span><strong>object</strong></p>
-<section id="csv">
-<h1><code class="docutils literal notranslate"><span class="pre">csv</span></code><a class="headerlink" href="#csv" title="Link to this heading"></a></h1>
-<p>CSV files reading and writing predicates using the options Header - <code class="docutils literal notranslate"><span class="pre">keep</span></code>, Separator - <code class="docutils literal notranslate"><span class="pre">comma</span></code>, and IgnoreQuotes - <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+  <p class="right" id="ed25519-0"><span id="index-0"></span><strong>category</strong></p>
+<section id="ed25519">
+<h1><code class="docutils literal notranslate"><span class="pre">ed25519</span></code><a class="headerlink" href="#ed25519" title="Link to this heading"></a></h1>
+<p>Ed25519 (RFC 8032) public-key signature implementation. Requires exact, unbounded integer arithmetic for arithmetic modulo the 255-bit field prime and modulo the group order.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">logtalk_load(csv(loader))</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">logtalk_load(crypto(loader))</span></code></div>
 </div>
 </div>
 <div class="line-block">
-<div class="line"><strong>Author:</strong> Jacinto Dávila</div>
+<div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2021-02-02</div>
+<div class="line"><strong>Date:</strong> 2026-08-01</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
 </div>
 </div>
 <div class="line-block">
-<div class="line"><strong>Extends:</strong></div>
+<div class="line"><strong>Complements:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="csv_4.html#csv-4"><span class="std std-ref">csv(keep,comma,false,false)</span></a></div>
+<div class="line"><a class="reference internal" href="crypto_0.html#crypto-0"><span class="std std-ref">crypto</span></a></div>
+</div>
+<div class="line"><strong>Uses:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
+<div class="line"><a class="reference internal" href="sha512_0.html#sha512-0"><span class="std std-ref">sha512</span></a></div>
+<div class="line"><a class="reference internal" href="type_0.html#type-0"><span class="std std-ref">type</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -436,21 +440,111 @@
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line"> <a class="reference internal" href="csv_protocol_0.html#csv-protocol-0-guess-arity-2"><span class="std std-ref">guess_arity/2</span></a>  <a class="reference internal" href="csv_protocol_0.html#csv-protocol-0-guess-separator-2"><span class="std std-ref">guess_separator/2</span></a>  <a class="reference internal" href="csv_protocol_0.html#csv-protocol-0-read-file-2"><span class="std std-ref">read_file/2</span></a>  <a class="reference internal" href="csv_protocol_0.html#csv-protocol-0-read-file-3"><span class="std std-ref">read_file/3</span></a>  <a class="reference internal" href="csv_protocol_0.html#csv-protocol-0-read-file-by-line-2"><span class="std std-ref">read_file_by_line/2</span></a>  <a class="reference internal" href="csv_protocol_0.html#csv-protocol-0-read-file-by-line-3"><span class="std std-ref">read_file_by_line/3</span></a>  <a class="reference internal" href="csv_protocol_0.html#csv-protocol-0-read-stream-2"><span class="std std-ref">read_stream/2</span></a>  <a class="reference internal" href="csv_protocol_0.html#csv-protocol-0-read-stream-3"><span class="std std-ref">read_stream/3</span></a>  <a class="reference internal" href="csv_protocol_0.html#csv-protocol-0-read-stream-by-line-2"><span class="std std-ref">read_stream_by_line/2</span></a>  <a class="reference internal" href="csv_protocol_0.html#csv-protocol-0-read-stream-by-line-3"><span class="std std-ref">read_stream_by_line/3</span></a>  <a class="reference internal" href="csv_protocol_0.html#csv-protocol-0-write-file-3"><span class="std std-ref">write_file/3</span></a>  <a class="reference internal" href="csv_protocol_0.html#csv-protocol-0-write-stream-3"><span class="std std-ref">write_stream/3</span></a></div>
+<div class="line">(none)</div>
 </div>
 </div>
 <nav class="contents local" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p></li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id2">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id3">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id4">Operators</a></p></li>
+<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
+<ul>
+<li><p><a class="reference internal" href="#ed25519-keypair-2" id="id2"><code class="docutils literal notranslate"><span class="pre">ed25519_keypair/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#ed25519-public-key-2" id="id3"><code class="docutils literal notranslate"><span class="pre">ed25519_public_key/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#ed25519-sign-3" id="id4"><code class="docutils literal notranslate"><span class="pre">ed25519_sign/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#ed25519-verify-3" id="id5"><code class="docutils literal notranslate"><span class="pre">ed25519_verify/3</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id6">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id7">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id8">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
-<p>(no local declarations; see entity ancestors if any)</p>
+<section id="ed25519-keypair-2">
+<span id="ed25519-0-ed25519-keypair-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ed25519_keypair/2</span></code></a><a class="headerlink" href="#ed25519-keypair-2" title="Link to this heading"></a></h3>
+<p>Generates a fresh random 32-byte Seed and derives the corresponding 32-byte PublicKey. The seed is the value to keep secret and to pass to ed25519_sign/3; it is also sometimes called the “secret key”. Available only on backends with unbounded integer arithmetic.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ed25519_keypair(Seed,PublicKey)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ed25519_keypair(-list(byte),-list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
 </section>
+<section id="ed25519-public-key-2">
+<span id="ed25519-0-ed25519-public-key-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ed25519_public_key/2</span></code></a><a class="headerlink" href="#ed25519-public-key-2" title="Link to this heading"></a></h3>
+<p>Derives the 32-byte PublicKey corresponding to a 32-byte Seed. Available only on backends with unbounded integer arithmetic.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ed25519_public_key(Seed,PublicKey)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ed25519_public_key(+list(byte),-list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="ed25519-sign-3">
+<span id="ed25519-0-ed25519-sign-3"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ed25519_sign/3</span></code></a><a class="headerlink" href="#ed25519-sign-3" title="Link to this heading"></a></h3>
+<p>Computes the 64-byte Ed25519 Signature of Message using Seed. Not constant-time; see the module-level note on this section. Available only on backends with unbounded integer arithmetic.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ed25519_sign(Seed,Message,Signature)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ed25519_sign(+list(byte),+list(byte),-list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="ed25519-verify-3">
+<span id="ed25519-0-ed25519-verify-3"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ed25519_verify/3</span></code></a><a class="headerlink" href="#ed25519-verify-3" title="Link to this heading"></a></h3>
+<p>Succeeds if Signature is a valid Ed25519 signature of Message under PublicKey, and fails otherwise (invalid signature, non-canonical S, non-canonical or small-order PublicKey or R component, or malformed input lengths); see the module-level note on this section for the exact verification policy. Available only on backends with unbounded integer arithmetic.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ed25519_verify(PublicKey,Message,Signature)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ed25519_verify(+list(byte),+list(byte),+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
 <section id="protected-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
 <p>(no local declarations; see entity ancestors if any)</p>
@@ -469,8 +563,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="xchacha20_poly1305_0.html" class="btn btn-neutral float-left" title="xchacha20_poly1305" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="csv_3.html" class="btn btn-neutral float-right" title="csv(Header,Separator,IgnoreQuotes)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="crypto_0.html" class="btn btn-neutral float-left" title="crypto" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="xchacha20_poly1305_0.html" class="btn btn-neutral float-right" title="xchacha20_poly1305" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

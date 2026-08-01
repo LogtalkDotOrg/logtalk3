@@ -34,7 +34,7 @@ Library groups
 - Space communications and telemetry: ``ccsds_frames``,
   ``ccsds_link_profiles``, ``ccsds_packet_services``,
   ``ccsds_packetization``, ``ccsds_packets``, ``ccsds_tc_services``,
-  ``ccsds_time_codes``, ``ccsds_time_fields``,
+  ``ccsds_time_codes``, ``ccsds_time_fields``.
 - Text and NLP: ``character_sets``, ``grammars``, ``stemming``,
   ``string_distance``, and ``strings``.
 - Web and HTTP APIs:

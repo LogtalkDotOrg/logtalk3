@@ -6709,6 +6709,46 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`iso8601 <iso8601/0::easter_day/3>`
 
+``ed25519_keypair/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ed25519 <ed25519/0::ed25519_keypair/2>`
+
+``ed25519_public_key/2``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ed25519 <ed25519/0::ed25519_public_key/2>`
+
+``ed25519_sign/3``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ed25519 <ed25519/0::ed25519_sign/3>`
+
+``ed25519_verify/3``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ed25519 <ed25519/0::ed25519_verify/3>`
+
 ``edge/3``
 ----------
 
@@ -28504,6 +28544,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`term_io_protocol <term_io_protocol/0::write_to_codes/2>`
+
+``xchacha20_poly1305_decrypt/5``
+--------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`xchacha20_poly1305 <xchacha20_poly1305/0::xchacha20_poly1305_decrypt/5>`
+
+``xchacha20_poly1305_encrypt/5``
+--------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`xchacha20_poly1305 <xchacha20_poly1305/0::xchacha20_poly1305_encrypt/5>`
 
 ``xor64/3``
 -----------

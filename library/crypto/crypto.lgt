@@ -280,6 +280,20 @@
 		]
 	]).
 
+	:- private(xor_bytes/3).
+	:- mode(xor_bytes(+list(byte), +list(byte), -list(byte)), one).
+	:- info(xor_bytes/3, [
+		comment is 'Computes the byte-wise exclusive disjunction of two equal-length byte lists.',
+		argnames is ['Bytes1', 'Bytes2', 'XorBytes']
+	]).
+
+	:- private(constant_time_equal/2).
+	:- mode(constant_time_equal(+list(byte), +list(byte)), zero_or_one).
+	:- info(constant_time_equal/2, [
+		comment is 'Compares two byte lists using a constant-time strategy.',
+		argnames is ['Expected', 'Candidate']
+	]).
+
 	:- uses(list, [
 		append/2, append/3, length/2
 	]).

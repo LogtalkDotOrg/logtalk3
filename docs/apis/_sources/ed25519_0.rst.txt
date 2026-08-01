@@ -1,0 +1,134 @@
+.. index:: single: ed25519
+.. _ed25519/0:
+
+.. rst-class:: right
+
+**category**
+
+``ed25519``
+===========
+
+Ed25519 (RFC 8032) public-key signature implementation. Requires exact, unbounded integer arithmetic for arithmetic modulo the 255-bit field prime and modulo the group order.
+
+| **Availability:** 
+|    ``logtalk_load(crypto(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-01
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Complements:**
+|    :ref:`crypto <crypto/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`sha512 <sha512/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: ed25519_keypair/2
+.. _ed25519/0::ed25519_keypair/2:
+
+``ed25519_keypair/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Generates a fresh random 32-byte Seed and derives the corresponding 32-byte PublicKey. The seed is the value to keep secret and to pass to ed25519_sign/3; it is also sometimes called the "secret key". Available only on backends with unbounded integer arithmetic.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``ed25519_keypair(Seed,PublicKey)``
+| **Mode and number of proofs:**
+|    ``ed25519_keypair(-list(byte),-list(byte))`` - ``one_or_error``
+
+
+------------
+
+.. index:: ed25519_public_key/2
+.. _ed25519/0::ed25519_public_key/2:
+
+``ed25519_public_key/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Derives the 32-byte PublicKey corresponding to a 32-byte Seed. Available only on backends with unbounded integer arithmetic.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``ed25519_public_key(Seed,PublicKey)``
+| **Mode and number of proofs:**
+|    ``ed25519_public_key(+list(byte),-list(byte))`` - ``one_or_error``
+
+
+------------
+
+.. index:: ed25519_sign/3
+.. _ed25519/0::ed25519_sign/3:
+
+``ed25519_sign/3``
+^^^^^^^^^^^^^^^^^^
+
+Computes the 64-byte Ed25519 Signature of Message using Seed. Not constant-time; see the module-level note on this section. Available only on backends with unbounded integer arithmetic.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``ed25519_sign(Seed,Message,Signature)``
+| **Mode and number of proofs:**
+|    ``ed25519_sign(+list(byte),+list(byte),-list(byte))`` - ``one_or_error``
+
+
+------------
+
+.. index:: ed25519_verify/3
+.. _ed25519/0::ed25519_verify/3:
+
+``ed25519_verify/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Succeeds if Signature is a valid Ed25519 signature of Message under PublicKey, and fails otherwise (invalid signature, non-canonical S, non-canonical or small-order PublicKey or R component, or malformed input lengths); see the module-level note on this section for the exact verification policy. Available only on backends with unbounded integer arithmetic.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``ed25519_verify(PublicKey,Message,Signature)``
+| **Mode and number of proofs:**
+|    ``ed25519_verify(+list(byte),+list(byte),+list(byte))`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

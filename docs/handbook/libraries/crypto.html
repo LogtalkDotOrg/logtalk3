@@ -373,8 +373,8 @@
              
   <section id="crypto">
 <span id="library-crypto"></span><h1><code class="docutils literal notranslate"><span class="pre">crypto</span></code><a class="headerlink" href="#crypto" title="Link to this heading"></a></h1>
-<p>This library provides transport-neutral cryptographic predicates. It
-currently exports the <code class="docutils literal notranslate"><span class="pre">crypto</span></code> object with the predicates:</p>
+<p>This library provides transport-neutral cryptographic predicates. The
+<code class="docutils literal notranslate"><span class="pre">crypto</span></code> object provides with the following public predicates:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">random_below/2</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">random_bytes/2</span></code></p></li>
@@ -388,6 +388,17 @@ currently exports the <code class="docutils literal notranslate"><span class="pr
 <li><p><code class="docutils literal notranslate"><span class="pre">password_hash/4</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">password_hash_needs_rehash/3</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">verify_password_hash/2</span></code></p></li>
+</ul>
+<p>When using a backend that supports unbound integer arithmetic, the
+following authenticated encryption with associated data and public-key
+signature public predicates are also available:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">xchacha20_poly1305_encrypt/5</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">xchacha20_poly1305_decrypt/5</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ed25519_keypair/2</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ed25519_public_key/2</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ed25519_sign/3</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ed25519_verify/3</span></code></p></li>
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">random_below/2</span></code> predicate returns a uniformly distributed random
 integer greater than or equal to zero and less than the given exclusive
@@ -415,6 +426,41 @@ generate structured password-hash terms. The
 terms against the current PBKDF2 policy. The <code class="docutils literal notranslate"><span class="pre">verify_password_hash/2</span></code>
 predicate verifies <code class="docutils literal notranslate"><span class="pre">pbkdf2(Hash,</span> <span class="pre">Iterations,</span> <span class="pre">Salt,</span> <span class="pre">DerivedKey)</span></code>,
 <code class="docutils literal notranslate"><span class="pre">digest(Hash,</span> <span class="pre">StoredDigest)</span></code>, and <code class="docutils literal notranslate"><span class="pre">apr1(Salt,</span> <span class="pre">Checksum)</span></code> terms.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">xchacha20_poly1305_encrypt/5</span></code> and
+<code class="docutils literal notranslate"><span class="pre">xchacha20_poly1305_decrypt/5</span></code> predicates provide authenticated
+encryption with associated data (AEAD) using XChaCha20-Poly1305:
+ChaCha20 with the 24-byte extended nonce defined by the XChaCha
+construction (via HChaCha20 subkey derivation), combined with a Poly1305
+authentication tag over the associated data and ciphertext, following
+the IETF ChaCha20-Poly1305 construction (RFC 8439). Decryption verifies
+the tag with constant-time comparison before decrypting anything, and
+fails, without producing any plaintext, if the tag does not match. Bare,
+unauthenticated ChaCha20 is intentionally not exposed as a public
+predicate: pairing a stream cipher with its own MAC by hand is a
+well-known source of protocol bugs, so only the authenticated
+construction is part of the public interface. These two predicates are
+only available on backend Prolog compilers supporting unbounded integer
+arithmetic, since Poly1305 requires an exact 130-bit accumulator.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ed25519_keypair/2</span></code>, <code class="docutils literal notranslate"><span class="pre">ed25519_public_key/2</span></code>, <code class="docutils literal notranslate"><span class="pre">ed25519_sign/3</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">ed25519_verify/3</span></code> predicates implement EdDSA signatures over
+Curve25519 (RFC 8032). The 32-byte seed passed to <code class="docutils literal notranslate"><span class="pre">ed25519_sign/3</span></code>
+(and returned by <code class="docutils literal notranslate"><span class="pre">ed25519_keypair/2</span></code>) is what RFC 8032 calls the
+private key; signing is fully deterministic, with no separate nonce to
+generate or protect. <code class="docutils literal notranslate"><span class="pre">ed25519_verify/3</span></code> checks the cofactored group
+equation <code class="docutils literal notranslate"><span class="pre">[8][S]B</span> <span class="pre">=</span> <span class="pre">[8]R</span> <span class="pre">+</span> <span class="pre">[8][k]A</span></code>, as recommended by RFC 8032, and
+additionally requires the public key and the R component of the
+signature to be canonically encoded and of large order, rejecting the
+seven points of order dividing 8 (matching the hardening most
+widely-deployed Ed25519 implementations apply for “strongly binding
+signature” security; see Chalkias, Garillot, and Nikolaenko, “Taming the
+many EdDSAs”, 2020). <code class="docutils literal notranslate"><span class="pre">S</span></code> is required to satisfy <code class="docutils literal notranslate"><span class="pre">0</span> <span class="pre">&lt;=</span> <span class="pre">S</span> <span class="pre">&lt;</span> <span class="pre">L</span></code>, which
+RFC 8032 mandates unconditionally. Signing uses simple double-and-add
+scalar multiplication and is not constant-time, so timing side channels
+on the secret scalar are possible on the signing path; verification
+never touches secret data and is unaffected by that limitation. These
+four predicates are only available on backend Prolog compilers
+supporting unbounded integer arithmetic, since Curve25519 arithmetic is
+carried out modulo a 255-bit prime.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -458,6 +504,23 @@ yes
 <p>Compute an Apache APR1 checksum:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> crypto<span class="o">::</span>apr1([<span class="m">112</span>,<span class="m">97</span>,<span class="m">115</span>,<span class="m">115</span>,<span class="m">119</span>,<span class="m">111</span>,<span class="m">114</span>,<span class="m">100</span>], [<span class="m">112</span>,<span class="m">111</span>,<span class="m">114</span>,<span class="m">116</span>,<span class="m">97</span>,<span class="m">98</span>,<span class="m">108</span>,<span class="m">101</span>], <span class="nv">Checksum</span>).
 <span class="nv">Checksum</span> <span class="o">=</span> [<span class="m">107</span>,<span class="m">117</span>,<span class="m">110</span>,<span class="m">70</span>,<span class="m">78</span>,<span class="m">90</span>,<span class="m">57</span>,<span class="m">114</span>,<span class="m">48</span>,<span class="m">81</span>,<span class="m">57</span>,<span class="m">54</span>,<span class="m">51</span>,<span class="m">88</span>,<span class="m">98</span>,<span class="m">115</span>,<span class="m">116</span>,<span class="m">101</span>,<span class="m">79</span>,<span class="m">79</span>,<span class="m">87</span>,<span class="m">46</span>]
+yes
+</pre></div>
+</div>
+<p>Encrypt and authenticate a short message with XChaCha20-Poly1305, then
+decrypt and verify it:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="nv">Key</span> <span class="o">=</span> [<span class="m">0</span>,<span class="m">1</span>,<span class="m">2</span>,<span class="m">3</span>,<span class="m">4</span>,<span class="m">5</span>,<span class="m">6</span>,<span class="m">7</span>,<span class="m">8</span>,<span class="m">9</span>,<span class="m">10</span>,<span class="m">11</span>,<span class="m">12</span>,<span class="m">13</span>,<span class="m">14</span>,<span class="m">15</span>,<span class="m">16</span>,<span class="m">17</span>,<span class="m">18</span>,<span class="m">19</span>,<span class="m">20</span>,<span class="m">21</span>,<span class="m">22</span>,<span class="m">23</span>,<span class="m">24</span>,<span class="m">25</span>,<span class="m">26</span>,<span class="m">27</span>,<span class="m">28</span>,<span class="m">29</span>,<span class="m">30</span>,<span class="m">31</span>],
+     <span class="nv">Nonce</span> <span class="o">=</span> [<span class="m">0</span>,<span class="m">1</span>,<span class="m">2</span>,<span class="m">3</span>,<span class="m">4</span>,<span class="m">5</span>,<span class="m">6</span>,<span class="m">7</span>,<span class="m">8</span>,<span class="m">9</span>,<span class="m">10</span>,<span class="m">11</span>,<span class="m">12</span>,<span class="m">13</span>,<span class="m">14</span>,<span class="m">15</span>,<span class="m">16</span>,<span class="m">17</span>,<span class="m">18</span>,<span class="m">19</span>,<span class="m">20</span>,<span class="m">21</span>,<span class="m">22</span>,<span class="m">23</span>],
+     crypto<span class="o">::</span>xchacha20_poly1305_encrypt(<span class="nv">Key</span>, <span class="nv">Nonce</span>, [], [<span class="m">72</span>,<span class="m">105</span>], <span class="nv">CiphertextAndTag</span>),
+     crypto<span class="o">::</span>xchacha20_poly1305_decrypt(<span class="nv">Key</span>, <span class="nv">Nonce</span>, [], <span class="nv">CiphertextAndTag</span>, <span class="nv">Plaintext</span>).
+<span class="nv">Plaintext</span> <span class="o">=</span> [<span class="m">72</span>,<span class="m">105</span>]
+yes
+</pre></div>
+</div>
+<p>Generate an Ed25519 keypair, sign a message, and verify the signature:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> crypto<span class="o">::</span>ed25519_keypair(<span class="nv">Seed</span>, <span class="nv">PublicKey</span>),
+     crypto<span class="o">::</span>ed25519_sign(<span class="nv">Seed</span>, [<span class="m">72</span>,<span class="m">105</span>], <span class="nv">Signature</span>),
+     crypto<span class="o">::</span>ed25519_verify(<span class="nv">PublicKey</span>, [<span class="m">72</span>,<span class="m">105</span>], <span class="nv">Signature</span>).
 yes
 </pre></div>
 </div>

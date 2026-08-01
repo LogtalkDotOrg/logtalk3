@@ -1,0 +1,95 @@
+.. index:: single: xchacha20_poly1305
+.. _xchacha20_poly1305/0:
+
+.. rst-class:: right
+
+**category**
+
+``xchacha20_poly1305``
+======================
+
+XChaCha20-Poly1305 authenticated encryption with associated data algorithm implementation. Requires exact, unbounded integer arithmetic for the Poly1305 130-bit accumulator. Bare, unauthenticated ChaCha20 is deliberately not exposed as a public predicate.
+
+| **Availability:** 
+|    ``logtalk_load(crypto(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-01
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Complements:**
+|    :ref:`crypto <crypto/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: xchacha20_poly1305_encrypt/5
+.. _xchacha20_poly1305/0::xchacha20_poly1305_encrypt/5:
+
+``xchacha20_poly1305_encrypt/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Encrypts Plaintext with XChaCha20 and appends a 16-byte Poly1305 authentication tag covering AAD and the ciphertext, following the IETF ChaCha20-Poly1305 AEAD construction (RFC 8439) extended with the 24-byte XChaCha nonce. Available only on backends with unbounded integer arithmetic.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``xchacha20_poly1305_encrypt(Key,Nonce,AAD,Plaintext,CiphertextAndTag)``
+| **Mode and number of proofs:**
+|    ``xchacha20_poly1305_encrypt(+list(byte),+list(byte),+list(byte),+list(byte),-list(byte))`` - ``one_or_error``
+
+
+------------
+
+.. index:: xchacha20_poly1305_decrypt/5
+.. _xchacha20_poly1305/0::xchacha20_poly1305_decrypt/5:
+
+``xchacha20_poly1305_decrypt/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Verifies the trailing 16-byte Poly1305 tag of CiphertextAndTag against AAD using constant-time comparison and, only if it matches, decrypts the ciphertext with XChaCha20. Fails, without decrypting anything, if the tag does not match. Available only on backends with unbounded integer arithmetic.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``xchacha20_poly1305_decrypt(Key,Nonce,AAD,CiphertextAndTag,Plaintext)``
+| **Mode and number of proofs:**
+|    ``xchacha20_poly1305_decrypt(+list(byte),+list(byte),+list(byte),+list(byte),-list(byte))`` - ``zero_or_one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

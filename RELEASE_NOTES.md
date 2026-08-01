@@ -65,6 +65,13 @@ short, obfuscated (but not encrypted), URL-safe identifiers.
 * ADDED: New `typeid` library implementing a type-safe, K-sortable, globally
 unique identifier (TypeID) generator.
 
+* ADDED: Support for Ed25519 (RFC 8032) public-key signatures to the `crypto`
+library (when using a backend supporting unbound integer arithmetic).
+
+* ADDED: Support for the XChaCha20-Poly1305 authenticated encryption with
+associated data algorithm to the `crypto` library (when using a backend
+supporting unbound integer arithmetic).
+
 * IMPROVED: Portability of the `sockets` library with versions of SWI-Prolog
 older than 9.1.5.
 
