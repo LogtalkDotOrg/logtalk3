@@ -144,6 +144,7 @@
 		probabilistic_pca_projection(loader),
 		random_projection(loader),
 		truncated_svd_projection(loader),
+		tsne_projection(loader),
 		clustering_protocols(loader),
 		agglomerative_clusterer(loader),
 		dbscan_clusterer(loader),

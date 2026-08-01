@@ -274,6 +274,7 @@ logtalk_library_path(tle_orbits, library('tle_orbits/')).
 logtalk_library_path(toml, library('toml/')).
 logtalk_library_path(toon, library('toon/')).
 logtalk_library_path(truncated_svd_projection, library('truncated_svd_projection/')).
+logtalk_library_path(tsne_projection, library('tsne_projection/')).
 logtalk_library_path(tsv, library('tsv/')).
 logtalk_library_path(typeid, library('typeid/')).
 logtalk_library_path(types, library('types/')).

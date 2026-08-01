@@ -320,6 +320,7 @@ sed '1,19d' ../../../library/tle_orbits/NOTES.md | pandoc -f gfm -t rst -o libra
 sed '1,19d' ../../../library/toml/NOTES.md | pandoc -f gfm -t rst -o libraries/toml.rst
 sed '1,19d' ../../../library/toon/NOTES.md | pandoc -f gfm -t rst -o libraries/toon.rst
 sed '1,19d' ../../../library/truncated_svd_projection/NOTES.md | pandoc -f gfm -t rst -o libraries/truncated_svd_projection.rst
+sed '1,19d' ../../../library/tsne_projection/NOTES.md | pandoc -f gfm -t rst -o libraries/tsne_projection.rst
 sed '1,19d' ../../../library/tsv/NOTES.md | pandoc -f gfm -t rst -o libraries/tsv.rst
 sed '1,19d' ../../../library/typeid/NOTES.md | pandoc -f gfm -t rst -o libraries/typeid.rst
 sed '1,19d' ../../../library/types/NOTES.md | pandoc -f gfm -t rst -o libraries/types.rst

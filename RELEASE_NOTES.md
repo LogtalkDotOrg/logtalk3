@@ -62,6 +62,9 @@ and querying integer partitions.
 * ADDED: New `spectral_clusterer` library implementing a normalized spectral
 clusterer for continuous datasets.
 
+* ADDED: New `tsne_projection` library implementing exact t-distributed
+Stochastic Neighbor Embedding dimension reduction for continuous datasets.
+
 * ADDED: New `sqids` library for encoding lists of non-negative integers into
 short, obfuscated (but not encrypted), URL-safe identifiers.
 

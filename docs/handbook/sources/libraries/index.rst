@@ -269,6 +269,7 @@ directory in the ``NOTES.md`` file.
    toml
    toon
    truncated_svd_projection
+   tsne_projection
    tsv
    typeid
    types
