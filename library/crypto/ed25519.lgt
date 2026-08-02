@@ -25,12 +25,12 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-01,
+		date is 2026-08-02,
 		comment is 'Ed25519 (RFC 8032) public-key signature implementation. Requires exact, unbounded integer arithmetic for arithmetic modulo the 255-bit field prime and modulo the group order.'
 	]).
 
 	:- public(ed25519_keypair/2).
-	:- mode(ed25519_keypair(-list(byte), -list(byte)), one_or_error).
+	:- mode(ed25519_keypair(-list(byte), -list(byte)), one).
 	:- info(ed25519_keypair/2, [
 		comment is 'Generates a fresh random 32-byte Seed and derives the corresponding 32-byte PublicKey. The seed is the value to keep secret and to pass to ed25519_sign/3; it is also sometimes called the "secret key". Available only on backends with unbounded integer arithmetic.',
 		argnames is ['Seed', 'PublicKey']
@@ -40,14 +40,30 @@
 	:- mode(ed25519_public_key(+list(byte), -list(byte)), one_or_error).
 	:- info(ed25519_public_key/2, [
 		comment is 'Derives the 32-byte PublicKey corresponding to a 32-byte Seed. Available only on backends with unbounded integer arithmetic.',
-		argnames is ['Seed', 'PublicKey']
+		argnames is ['Seed', 'PublicKey'],
+		exceptions is [
+			'``Seed`` is a partial list or a list with an element which is a variable' - instantiation_error,
+			'``Seed`` is neither a variable nor a list of 32 bytes' - type_error(list(byte, 32), 'Seed'),
+			'``Seed`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``Seed`` contains an integer outside the byte range' - domain_error(byte, 'Byte')
+		]
 	]).
 
 	:- public(ed25519_sign/3).
 	:- mode(ed25519_sign(+list(byte), +list(byte), -list(byte)), one_or_error).
 	:- info(ed25519_sign/3, [
 		comment is 'Computes the 64-byte Ed25519 Signature of Message using Seed. Not constant-time; see the module-level note on this section. Available only on backends with unbounded integer arithmetic.',
-		argnames is ['Seed', 'Message', 'Signature']
+		argnames is ['Seed', 'Message', 'Signature'],
+		exceptions is [
+			'``Seed`` is a partial list or a list with an element which is a variable' - instantiation_error,
+			'``Seed`` is neither a variable nor a list of 32 bytes' - type_error(list(byte, 32), 'Seed'),
+			'``Seed`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``Seed`` contains an integer outside the byte range' - domain_error(byte, 'Byte'),
+			'``Message`` is a partial list or a list with an element which is a variable' - instantiation_error,
+			'``Message`` is neither a variable nor a list of bytes' - type_error(list(byte), 'Message'),
+			'``Message`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``Message`` contains an integer outside the byte range' - domain_error(byte, 'Byte')
+		]
 	]).
 
 	:- public(ed25519_verify/3).

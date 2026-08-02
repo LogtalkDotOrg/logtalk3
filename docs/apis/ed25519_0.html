@@ -415,7 +415,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-08-01</div>
+<div class="line"><strong>Date:</strong> 2026-08-02</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -480,7 +480,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">ed25519_keypair(-list(byte),-list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ed25519_keypair(-list(byte),-list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -504,6 +504,27 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">ed25519_public_key(+list(byte),-list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Seed</span></code> is a partial list or a list with an element which is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Seed</span></code> is neither a variable nor a list of 32 bytes:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte,32),Seed)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Seed</span></code> contains a non-integer byte:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Byte)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Seed</span></code> contains an integer outside the byte range:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(byte,Byte)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="ed25519-sign-3">
@@ -523,6 +544,43 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">ed25519_sign(+list(byte),+list(byte),-list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Seed</span></code> is a partial list or a list with an element which is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Seed</span></code> is neither a variable nor a list of 32 bytes:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte,32),Seed)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Seed</span></code> contains a non-integer byte:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Byte)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Seed</span></code> contains an integer outside the byte range:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(byte,Byte)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> is a partial list or a list with an element which is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> is neither a variable nor a list of bytes:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte),Message)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> contains a non-integer byte:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Byte)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> contains an integer outside the byte range:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(byte,Byte)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />

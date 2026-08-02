@@ -15,7 +15,7 @@ XChaCha20-Poly1305 authenticated encryption with associated data algorithm imple
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-01
+| **Date:** 2026-08-02
 
 | **Compilation flags:**
 |    ``static``
@@ -56,6 +56,40 @@ Encrypts Plaintext with XChaCha20 and appends a 16-byte Poly1305 authentication 
 | **Mode and number of proofs:**
 |    ``xchacha20_poly1305_encrypt(+list(byte),+list(byte),+list(byte),+list(byte),-list(byte))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Key`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``Key`` is neither a variable nor a list of 32 bytes:
+|        ``type_error(list(byte,32),Key)``
+|    ``Key`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``Key`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``Nonce`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``Nonce`` is neither a variable nor a list of 24 bytes:
+|        ``type_error(list(byte,24),Nonce)``
+|    ``Nonce`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``Nonce`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``AAD`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``AAD`` is neither a variable nor a list of bytes:
+|        ``type_error(list(byte),AAD)``
+|    ``AAD`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``AAD`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``Plaintext`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``Plaintext`` is neither a variable nor a list of bytes:
+|        ``type_error(list(byte),Plaintext)``
+|    ``Plaintext`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``Plaintext`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+
 
 ------------
 
@@ -74,6 +108,42 @@ Verifies the trailing 16-byte Poly1305 tag of CiphertextAndTag against AAD using
 |    ``xchacha20_poly1305_decrypt(Key,Nonce,AAD,CiphertextAndTag,Plaintext)``
 | **Mode and number of proofs:**
 |    ``xchacha20_poly1305_decrypt(+list(byte),+list(byte),+list(byte),+list(byte),-list(byte))`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``Key`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``Key`` is neither a variable nor a list of 32 bytes:
+|        ``type_error(list(byte,32),Key)``
+|    ``Key`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``Key`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``Nonce`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``Nonce`` is neither a variable nor a list of 24 bytes:
+|        ``type_error(list(byte,24),Nonce)``
+|    ``Nonce`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``Nonce`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``AAD`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``AAD`` is neither a variable nor a list of bytes:
+|        ``type_error(list(byte),AAD)``
+|    ``AAD`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``AAD`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``CiphertextAndTag`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``CiphertextAndTag`` is neither a variable nor a list of bytes:
+|        ``type_error(list(byte),CiphertextAndTag)``
+|    ``CiphertextAndTag`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``CiphertextAndTag`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``CiphertextAndTag`` contains fewer than 16 bytes:
+|        ``domain_error(minimum_byte_length(16),CiphertextAndTag)``
 
 
 ------------

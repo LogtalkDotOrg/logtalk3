@@ -478,7 +478,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-30,
+		date is 2026-08-02,
 		comment is 'Common BLAKE2 hash function core.',
 		parameters is [
 			'Key' - 'A list of key bytes. Use the empty list for unkeyed hashing.',
@@ -494,11 +494,81 @@
 		append/3, length/2, nth0/3
 	]).
 
-	:- protected([
-		blake2_max_digest_size/1, blake2_max_key_size/1, blake2_block_size/1,
-		blake2_round_count/1, blake2_initial_state/2, blake2_working_vector/4,
-		blake2_block_words/2, blake2_g/8, blake2_finalize/4, blake2_state_bytes/2,
-		replace_nth0/4
+	:- protected(blake2_max_digest_size/1).
+	:- mode(blake2_max_digest_size(--integer), one).
+	:- info(blake2_max_digest_size/1, [
+		comment is 'Returns the maximum digest size in bytes for the BLAKE2 variant.',
+		argnames is ['MaxDigestSize']
+	]).
+
+	:- protected(blake2_max_key_size/1).
+	:- mode(blake2_max_key_size(--integer), one).
+	:- info(blake2_max_key_size/1, [
+		comment is 'Returns the maximum key size in bytes for the BLAKE2 variant.',
+		argnames is ['MaxKeySize']
+	]).
+
+	:- protected(blake2_block_size/1).
+	:- mode(blake2_block_size(--integer), one).
+	:- info(blake2_block_size/1, [
+		comment is 'Returns the block size in bytes for the BLAKE2 variant.',
+		argnames is ['BlockSize']
+	]).
+
+	:- protected(blake2_round_count/1).
+	:- mode(blake2_round_count(--integer), one).
+	:- info(blake2_round_count/1, [
+		comment is 'Returns the number of compression rounds for the BLAKE2 variant.',
+		argnames is ['RoundCount']
+	]).
+
+	:- protected(blake2_initial_state/2).
+	:- mode(blake2_initial_state(+integer, --list(integer)), one).
+	:- info(blake2_initial_state/2, [
+		comment is 'Computes the initial hash state from the parameter word.',
+		argnames is ['ParameterWord', 'InitialState']
+	]).
+
+	:- protected(blake2_working_vector/4).
+	:- mode(blake2_working_vector(+list(integer), +integer, +boolean, --list(integer)), one).
+	:- info(blake2_working_vector/4, [
+		comment is 'Initializes the compression working vector from the hash state, byte counter, and final block flag.',
+		argnames is ['State', 'Total', 'Final', 'WorkingVector']
+	]).
+
+	:- protected(blake2_block_words/2).
+	:- mode(blake2_block_words(+list(byte), --list(integer)), one).
+	:- info(blake2_block_words/2, [
+		comment is 'Decodes a block of bytes into the message words used by the compression function.',
+		argnames is ['Block', 'MessageWords']
+	]).
+
+	:- protected(blake2_g/8).
+	:- mode(blake2_g(+list(integer), +integer, +integer, +integer, +integer, +integer, +integer, --list(integer)), one).
+	:- info(blake2_g/8, [
+		comment is 'Applies the BLAKE2 G mixing function to four indexed words of the working vector and two message words.',
+		argnames is ['WorkingVector0', 'AIndex', 'BIndex', 'CIndex', 'DIndex', 'X', 'Y', 'WorkingVector']
+	]).
+
+	:- protected(blake2_finalize/4).
+	:- mode(blake2_finalize(+list(integer), +list(integer), +integer, --list(integer)), one).
+	:- info(blake2_finalize/4, [
+		comment is 'Finalizes the hash state by combining it with the compression working vector.',
+		argnames is ['HashState', 'WorkingVector', 'Index', 'FinalState']
+	]).
+
+	:- protected(blake2_state_bytes/2).
+	:- mode(blake2_state_bytes(+list(integer), --list(byte)), one).
+	:- info(blake2_state_bytes/2, [
+		comment is 'Encodes the hash state words as little-endian bytes.',
+		argnames is ['State', 'Bytes']
+	]).
+
+	:- protected(replace_nth0/4).
+	:- mode(replace_nth0(+integer, +list, +term, --list), one).
+	:- info(replace_nth0/4, [
+		comment is 'Replaces the element at the zero-based index in a list.',
+		argnames is ['Index', 'List0', 'Element', 'List']
 	]).
 
 	digest(Bytes, DigestBytes) :-

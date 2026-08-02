@@ -15,7 +15,7 @@ Ed25519 (RFC 8032) public-key signature implementation. Requires exact, unbounde
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-01
+| **Date:** 2026-08-02
 
 | **Compilation flags:**
 |    ``static``
@@ -55,7 +55,7 @@ Generates a fresh random 32-byte Seed and derives the corresponding 32-byte Publ
 | **Template:**
 |    ``ed25519_keypair(Seed,PublicKey)``
 | **Mode and number of proofs:**
-|    ``ed25519_keypair(-list(byte),-list(byte))`` - ``one_or_error``
+|    ``ed25519_keypair(-list(byte),-list(byte))`` - ``one``
 
 
 ------------
@@ -76,6 +76,16 @@ Derives the 32-byte PublicKey corresponding to a 32-byte Seed. Available only on
 | **Mode and number of proofs:**
 |    ``ed25519_public_key(+list(byte),-list(byte))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Seed`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``Seed`` is neither a variable nor a list of 32 bytes:
+|        ``type_error(list(byte,32),Seed)``
+|    ``Seed`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``Seed`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+
 
 ------------
 
@@ -94,6 +104,24 @@ Computes the 64-byte Ed25519 Signature of Message using Seed. Not constant-time;
 |    ``ed25519_sign(Seed,Message,Signature)``
 | **Mode and number of proofs:**
 |    ``ed25519_sign(+list(byte),+list(byte),-list(byte))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Seed`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``Seed`` is neither a variable nor a list of 32 bytes:
+|        ``type_error(list(byte,32),Seed)``
+|    ``Seed`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``Seed`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``Message`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``Message`` is neither a variable nor a list of bytes:
+|        ``type_error(list(byte),Message)``
+|    ``Message`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``Message`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
 
 
 ------------

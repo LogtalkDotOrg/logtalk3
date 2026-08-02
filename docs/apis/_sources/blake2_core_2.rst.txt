@@ -19,7 +19,7 @@ Common BLAKE2 hash function core.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-07-30
+| **Date:** 2026-08-02
 
 | **Compilation flags:**
 |    ``static``
@@ -56,8 +56,15 @@ Protected predicates
 ``blake2_max_digest_size/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Returns the maximum digest size in bytes for the BLAKE2 variant.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``blake2_max_digest_size(MaxDigestSize)``
+| **Mode and number of proofs:**
+|    ``blake2_max_digest_size(--integer)`` - ``one``
 
 
 ------------
@@ -68,8 +75,15 @@ Protected predicates
 ``blake2_max_key_size/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Returns the maximum key size in bytes for the BLAKE2 variant.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``blake2_max_key_size(MaxKeySize)``
+| **Mode and number of proofs:**
+|    ``blake2_max_key_size(--integer)`` - ``one``
 
 
 ------------
@@ -80,8 +94,15 @@ Protected predicates
 ``blake2_block_size/1``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
+Returns the block size in bytes for the BLAKE2 variant.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``blake2_block_size(BlockSize)``
+| **Mode and number of proofs:**
+|    ``blake2_block_size(--integer)`` - ``one``
 
 
 ------------
@@ -92,8 +113,15 @@ Protected predicates
 ``blake2_round_count/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
+Returns the number of compression rounds for the BLAKE2 variant.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``blake2_round_count(RoundCount)``
+| **Mode and number of proofs:**
+|    ``blake2_round_count(--integer)`` - ``one``
 
 
 ------------
@@ -104,8 +132,15 @@ Protected predicates
 ``blake2_initial_state/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Computes the initial hash state from the parameter word.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``blake2_initial_state(ParameterWord,InitialState)``
+| **Mode and number of proofs:**
+|    ``blake2_initial_state(+integer,--list(integer))`` - ``one``
 
 
 ------------
@@ -116,8 +151,15 @@ Protected predicates
 ``blake2_working_vector/4``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Initializes the compression working vector from the hash state, byte counter, and final block flag.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``blake2_working_vector(State,Total,Final,WorkingVector)``
+| **Mode and number of proofs:**
+|    ``blake2_working_vector(+list(integer),+integer,+boolean,--list(integer))`` - ``one``
 
 
 ------------
@@ -128,8 +170,15 @@ Protected predicates
 ``blake2_block_words/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
+Decodes a block of bytes into the message words used by the compression function.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``blake2_block_words(Block,MessageWords)``
+| **Mode and number of proofs:**
+|    ``blake2_block_words(+list(byte),--list(integer))`` - ``one``
 
 
 ------------
@@ -140,8 +189,15 @@ Protected predicates
 ``blake2_g/8``
 ^^^^^^^^^^^^^^
 
+Applies the BLAKE2 G mixing function to four indexed words of the working vector and two message words.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``blake2_g(WorkingVector0,AIndex,BIndex,CIndex,DIndex,X,Y,WorkingVector)``
+| **Mode and number of proofs:**
+|    ``blake2_g(+list(integer),+integer,+integer,+integer,+integer,+integer,+integer,--list(integer))`` - ``one``
 
 
 ------------
@@ -152,8 +208,15 @@ Protected predicates
 ``blake2_finalize/4``
 ^^^^^^^^^^^^^^^^^^^^^
 
+Finalizes the hash state by combining it with the compression working vector.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``blake2_finalize(HashState,WorkingVector,Index,FinalState)``
+| **Mode and number of proofs:**
+|    ``blake2_finalize(+list(integer),+list(integer),+integer,--list(integer))`` - ``one``
 
 
 ------------
@@ -164,8 +227,15 @@ Protected predicates
 ``blake2_state_bytes/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
+Encodes the hash state words as little-endian bytes.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``blake2_state_bytes(State,Bytes)``
+| **Mode and number of proofs:**
+|    ``blake2_state_bytes(+list(integer),--list(byte))`` - ``one``
 
 
 ------------
@@ -176,8 +246,15 @@ Protected predicates
 ``replace_nth0/4``
 ^^^^^^^^^^^^^^^^^^
 
+Replaces the element at the zero-based index in a list.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``replace_nth0(Index,List0,Element,List)``
+| **Mode and number of proofs:**
+|    ``replace_nth0(+integer,+list,+term,--list)`` - ``one``
 
 
 ------------

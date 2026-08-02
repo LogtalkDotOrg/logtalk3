@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-01,
+		date is 2026-08-02,
 		comment is 'XChaCha20-Poly1305 authenticated encryption with associated data algorithm implementation. Requires exact, unbounded integer arithmetic for the Poly1305 130-bit accumulator. Bare, unauthenticated ChaCha20 is deliberately not exposed as a public predicate.'
 	]).
 
@@ -33,14 +33,51 @@
 	:- mode(xchacha20_poly1305_encrypt(+list(byte), +list(byte), +list(byte), +list(byte), -list(byte)), one_or_error).
 	:- info(xchacha20_poly1305_encrypt/5, [
 		comment is 'Encrypts Plaintext with XChaCha20 and appends a 16-byte Poly1305 authentication tag covering AAD and the ciphertext, following the IETF ChaCha20-Poly1305 AEAD construction (RFC 8439) extended with the 24-byte XChaCha nonce. Available only on backends with unbounded integer arithmetic.',
-		argnames is ['Key', 'Nonce', 'AAD', 'Plaintext', 'CiphertextAndTag']
+		argnames is ['Key', 'Nonce', 'AAD', 'Plaintext', 'CiphertextAndTag'],
+		exceptions is [
+			'``Key`` is a partial list or a list with an element which is a variable' - instantiation_error,
+			'``Key`` is neither a variable nor a list of 32 bytes' - type_error(list(byte, 32), 'Key'),
+			'``Key`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``Key`` contains an integer outside the byte range' - domain_error(byte, 'Byte'),
+			'``Nonce`` is a partial list or a list with an element which is a variable' - instantiation_error,
+			'``Nonce`` is neither a variable nor a list of 24 bytes' - type_error(list(byte, 24), 'Nonce'),
+			'``Nonce`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``Nonce`` contains an integer outside the byte range' - domain_error(byte, 'Byte'),
+			'``AAD`` is a partial list or a list with an element which is a variable' - instantiation_error,
+			'``AAD`` is neither a variable nor a list of bytes' - type_error(list(byte), 'AAD'),
+			'``AAD`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``AAD`` contains an integer outside the byte range' - domain_error(byte, 'Byte'),
+			'``Plaintext`` is a partial list or a list with an element which is a variable' - instantiation_error,
+			'``Plaintext`` is neither a variable nor a list of bytes' - type_error(list(byte), 'Plaintext'),
+			'``Plaintext`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``Plaintext`` contains an integer outside the byte range' - domain_error(byte, 'Byte')
+		]
 	]).
 
 	:- public(xchacha20_poly1305_decrypt/5).
 	:- mode(xchacha20_poly1305_decrypt(+list(byte), +list(byte), +list(byte), +list(byte), -list(byte)), zero_or_one_or_error).
 	:- info(xchacha20_poly1305_decrypt/5, [
 		comment is 'Verifies the trailing 16-byte Poly1305 tag of CiphertextAndTag against AAD using constant-time comparison and, only if it matches, decrypts the ciphertext with XChaCha20. Fails, without decrypting anything, if the tag does not match. Available only on backends with unbounded integer arithmetic.',
-		argnames is ['Key', 'Nonce', 'AAD', 'CiphertextAndTag', 'Plaintext']
+		argnames is ['Key', 'Nonce', 'AAD', 'CiphertextAndTag', 'Plaintext'],
+		exceptions is [
+			'``Key`` is a partial list or a list with an element which is a variable' - instantiation_error,
+			'``Key`` is neither a variable nor a list of 32 bytes' - type_error(list(byte, 32), 'Key'),
+			'``Key`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``Key`` contains an integer outside the byte range' - domain_error(byte, 'Byte'),
+			'``Nonce`` is a partial list or a list with an element which is a variable' - instantiation_error,
+			'``Nonce`` is neither a variable nor a list of 24 bytes' - type_error(list(byte, 24), 'Nonce'),
+			'``Nonce`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``Nonce`` contains an integer outside the byte range' - domain_error(byte, 'Byte'),
+			'``AAD`` is a partial list or a list with an element which is a variable' - instantiation_error,
+			'``AAD`` is neither a variable nor a list of bytes' - type_error(list(byte), 'AAD'),
+			'``AAD`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``AAD`` contains an integer outside the byte range' - domain_error(byte, 'Byte'),
+			'``CiphertextAndTag`` is a partial list or a list with an element which is a variable' - instantiation_error,
+			'``CiphertextAndTag`` is neither a variable nor a list of bytes' - type_error(list(byte), 'CiphertextAndTag'),
+			'``CiphertextAndTag`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``CiphertextAndTag`` contains an integer outside the byte range' - domain_error(byte, 'Byte'),
+			'``CiphertextAndTag`` contains fewer than 16 bytes' - domain_error(minimum_byte_length(16), 'CiphertextAndTag')
+		]
 	]).
 
  	:- uses(list, [
