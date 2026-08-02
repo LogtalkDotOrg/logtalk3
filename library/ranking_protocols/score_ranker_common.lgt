@@ -23,9 +23,9 @@
 	extends(ranker_common)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-04-25,
+		date is 2026-08-02,
 		comment is 'Shared predicates for score-based rankers that order candidates using precomputed item scores.'
 	]).
 
@@ -58,7 +58,6 @@
 
 	rank_candidate_pairs(Candidates, _ScoreDictionary, _SeenCandidates, _Original, _Pairs) :-
 		var(Candidates),
-		!,
 		instantiation_error.
 	rank_candidate_pairs([], _ScoreDictionary, _SeenCandidates, _Original, []) :-
 		!.

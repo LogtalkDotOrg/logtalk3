@@ -23,9 +23,9 @@
 	extends(pattern_miner_common)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-04-29,
+		date is 2026-08-02,
 		comment is 'Shared predicates for frequent itemset miner dataset validation, support accumulation, and itemset ordering/filtering helpers.'
 	]).
 
@@ -81,7 +81,6 @@
 
 	check_transactions(Dataset, _ItemDomain, Transactions, _MaxTransactionLength) :-
 		Transactions == [],
-		!,
 		domain_error(non_empty_dataset, Dataset).
 	check_transactions(_Dataset, ItemDomain, Transactions, MaxTransactionLength) :-
 		check_unique_transaction_ids(Transactions),

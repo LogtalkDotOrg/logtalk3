@@ -23,9 +23,9 @@
 	extends(pattern_miner_common)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-04-29,
+		date is 2026-08-02,
 		comment is 'Shared predicates for sequential pattern miner dataset validation, support counting, and pattern ordering helpers.'
 	]).
 
@@ -94,7 +94,6 @@
 	]).
 
 	check_sequences(Dataset, _ItemDomain, [], _MaxSequenceLength) :-
-		!,
 		domain_error(non_empty_dataset, Dataset).
 	check_sequences(_Dataset, ItemDomain, Sequences, MaxSequenceLength) :-
 		check_unique_sequence_ids(Sequences),
@@ -117,7 +116,6 @@
 		check_sequences_list(Sequences, ItemDomain, MaxSequenceLength1, MaxSequenceLength).
 
 	check_sequence([], _ItemDomain, _SequenceLength) :-
-		!,
 		domain_error(non_empty_sequence, []).
 	check_sequence(Sequence, ItemDomain, SequenceLength) :-
 		check_sequence_itemsets(Sequence, ItemDomain, 0, SequenceLength).
@@ -130,7 +128,6 @@
 		check_sequence_itemsets(Sequence, ItemDomain, SequenceLength1, SequenceLength).
 
 	check_sequence_itemset([], _ItemDomain) :-
-		!,
 		domain_error(non_empty_itemset, []).
 	check_sequence_itemset(Itemset, ItemDomain) :-
 		sort(Itemset, SortedItemset),

@@ -23,9 +23,9 @@
 	imports(clusterer_common)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-05-07,
+		date is 2026-08-02,
 		comment is 'Agglomerative clusterer for continuous datasets. Learns from a dataset object implementing the ``clustering_dataset_protocol`` protocol and returns a clusterer term that can be used for assigning new instances to clusters and exported as predicate clauses.',
 		see_also is [clusterer_protocol, clustering_dataset_protocol, kcenters_clusterer, kmeans_clusterer, kmedoids_clusterer]
 	]).
@@ -236,7 +236,6 @@
 
 	select_closest_pair(pair_queue(_Heap, Size, MaximumSize), _ActiveNodes, _RuntimeStats0, _RuntimeStats, _LeftNodeId, _RightNodeId, _Distance, _PairQueue) :-
 		Size =< 0,
-		!,
 		consistency_error(priority_queue_exhausted, Size, MaximumSize).
 	select_closest_pair(pair_queue(Heap0, Size0, MaximumSize), ActiveNodes, RuntimeStats0, RuntimeStats, LeftNodeId, RightNodeId, Distance, pair_queue(Heap, Size, MaximumSize)) :-
 		(	heap_delete(Heap0, key(PoppedDistance, PoppedLeftNodeId, PoppedRightNodeId), pair(PoppedLeftNodeId, PoppedRightNodeId), Heap1) ->

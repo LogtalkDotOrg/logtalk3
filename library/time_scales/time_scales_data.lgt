@@ -22,16 +22,11 @@
 :- object(time_scales_data).
 
 	:- info([
-		version is 0:2:0,
+		version is 0:2:1,
 		author is 'Paulo Moura',
-		date is 2026-02-26,
+		date is 2026-08-02,
 		comment is 'Bundled and override data plus constants for UTC/TAI/TT/UT1/TDB/TCG/TCB conversions.'
 	]).
-
-	:- dynamic(leap_override_data/2).
-	:- dynamic(dut1_override_data/3).
-	:- dynamic(leap_source_/1).
-	:- dynamic(dut1_source_/1).
 
 	:- initialization(reset_sources).
 
@@ -169,6 +164,18 @@
 		argnames is ['TAISeconds', 'OffsetSeconds']
 	]).
 
+	:- private(leap_override_data_/2).
+	:- dynamic(leap_override_data_/2).
+
+	:- private(dut1_override_data_/3).
+	:- dynamic(dut1_override_data_/3).
+
+	:- private(leap_source_/1).
+	:- dynamic(leap_source_/1).
+
+	:- private(dut1_source_/1).
+	:- dynamic(dut1_source_/1).
+
 	% TT - TAI = 32.184 seconds
 	tt_minus_tai(32184, 1000).
 
@@ -284,13 +291,13 @@
 		load_terms_file(File, Terms),
 		parse_leap_terms(Terms, Pairs),
 		validate_leap_pairs(Pairs),
-		retractall(leap_override_data(_, _)),
+		retractall(leap_override_data_(_, _)),
 		assert_leap_pairs(Pairs),
 		retractall(leap_source_(_)),
 		assertz(leap_source_(override)).
 
 	clear_leap_seconds_override :-
-		retractall(leap_override_data(_, _)),
+		retractall(leap_override_data_(_, _)),
 		retractall(leap_source_(_)),
 		assertz(leap_source_(bundled)).
 
@@ -312,13 +319,13 @@
 		load_terms_file(File, Terms),
 		parse_dut1_terms(Terms, Entries),
 		validate_dut1_entries(Entries),
-		retractall(dut1_override_data(_, _, _)),
+		retractall(dut1_override_data_(_, _, _)),
 		assert_dut1_entries(Entries),
 		retractall(dut1_source_(_)),
 		assertz(dut1_source_(override)).
 
 	clear_dut1_override :-
-		retractall(dut1_override_data(_, _, _)),
+		retractall(dut1_override_data_(_, _, _)),
 		retractall(dut1_source_(_)),
 		assertz(dut1_source_(bundled)).
 
@@ -344,12 +351,12 @@
 	leap_table_entry(bundled, UnixStart, OffsetSeconds) :-
 		utc_start_unix(UnixStart, OffsetSeconds).
 	leap_table_entry(override, UnixStart, OffsetSeconds) :-
-		leap_override_data(UnixStart, OffsetSeconds).
+		leap_override_data_(UnixStart, OffsetSeconds).
 
 	dut1_table_entry(bundled, UnixStart, Numerator, Denominator) :-
 		bundled_dut1_entry(UnixStart, Numerator, Denominator).
 	dut1_table_entry(override, UnixStart, Numerator, Denominator) :-
-		dut1_override_data(UnixStart, Numerator, Denominator).
+		dut1_override_data_(UnixStart, Numerator, Denominator).
 
 	last_leap_offset_at_or_before(Source, UnixSeconds, OffsetSeconds) :-
 		leap_table_entry(Source, Start, Offset),
@@ -364,9 +371,9 @@
 		Numerator = N,
 		Denominator = D.
 	last_dut1_offset_at_or_before(override, UnixSeconds, Numerator, Denominator) :-
-		dut1_override_data(Start, N, D),
+		dut1_override_data_(Start, N, D),
 		Start =< UnixSeconds,
-		\+ (dut1_override_data(Start2, _, _), Start2 =< UnixSeconds, Start2 > Start),
+		\+ (dut1_override_data_(Start2, _, _), Start2 =< UnixSeconds, Start2 > Start),
 		Numerator = N,
 		Denominator = D.
 
@@ -393,7 +400,6 @@
 		rethrow_open_error(File, Error).
 
 	rethrow_open_error(File, error(existence_error(source_sink, _), _)) :-
-		!,
 		existence_error(source_sink, File).
 	rethrow_open_error(_, Error) :-
 		throw(Error).
@@ -479,12 +485,12 @@
 
 	assert_leap_pairs([]).
 	assert_leap_pairs([(UnixSeconds, OffsetSeconds)| Pairs]) :-
-		assertz(leap_override_data(UnixSeconds, OffsetSeconds)),
+		assertz(leap_override_data_(UnixSeconds, OffsetSeconds)),
 		assert_leap_pairs(Pairs).
 
 	assert_dut1_entries([]).
 	assert_dut1_entries([(UnixSeconds, Numerator, Denominator)| Entries]) :-
-		assertz(dut1_override_data(UnixSeconds, Numerator, Denominator)),
+		assertz(dut1_override_data_(UnixSeconds, Numerator, Denominator)),
 		assert_dut1_entries(Entries).
 
 :- end_object.

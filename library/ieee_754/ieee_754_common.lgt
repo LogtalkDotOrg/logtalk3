@@ -22,9 +22,9 @@
 :- category(ieee_754_common(_Precision_, _ByteOrder_)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:0:2,
 		author is 'Paulo Moura',
-		date is 2026-06-14,
+		date is 2026-08-02,
 		comment is 'Shared IEEE 754 exact bit and byte handling predicates for the high-level codec and low-level field inspection objects.',
 		parnames is ['Precision', 'ByteOrder']
 	]).
@@ -170,7 +170,6 @@
 
 	source_bits(Source, _) :-
 		var(Source),
-		!,
 		instantiation_error.
 	source_bits(bytes(Bytes), Bits) :-
 		!,

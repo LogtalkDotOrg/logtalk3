@@ -23,9 +23,9 @@
 	implements(geojson_protocol)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:0:2,
 		author is 'Paulo Moura',
-		date is 2026-07-07,
+		date is 2026-08-02,
 		comment is 'GeoJSON (RFC 7946) parser, generator, and validator built on top of the ``json`` library.',
 		parameters is [
 			'ObjectRepresentation' - 'Object representation to be used when decoding embedded JSON objects. Possible values are ``curly`` (default) and ``list``.',
@@ -52,7 +52,6 @@
 		json_to_geojson(JSON, GeoJSON).
 	parse(Source, _) :-
 		valid_source(Source),
-		!,
 		domain_error(geojson, Source).
 	parse(Source, _) :-
 		domain_error(geojson_source, Source).
@@ -87,7 +86,6 @@
 		!.
 	generate(Sink, GeoJSON) :-
 		valid_sink(Sink),
-		!,
 		domain_error(geojson, GeoJSON).
 	generate(Sink, _) :-
 		domain_error(geojson_sink, Sink).

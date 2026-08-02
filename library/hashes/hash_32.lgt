@@ -681,7 +681,6 @@
 
 	valid_digest_size :-
 		var(_DigestSize_),
-		!,
 		instantiation_error.
 	valid_digest_size :-
 		integer(_DigestSize_),
@@ -702,7 +701,6 @@
 
 	key_length(Key, _) :-
 		var(Key),
-		!,
 		instantiation_error.
 	key_length(Key, Length) :-
 		key_length_checked(Key, Length),

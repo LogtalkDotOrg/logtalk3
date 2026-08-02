@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-29,
+		date is 2026-08-02,
 		comment is 'Portable MQTT 5 client predicates using ``http_transport_protocol`` implementations.'
 	]).
 
@@ -1082,7 +1082,6 @@
 		^^option(retain_handling(RetainHandling), Options).
 
 	build_subscriptions([], _SubscriptionOptions, _Subscriptions) :-
-		!,
 		domain_error(mqtt_subscriptions, []).
 	build_subscriptions([TopicFilter| TopicFilters], SubscriptionOptions, Subscriptions) :-
 		build_subscriptions([TopicFilter| TopicFilters], SubscriptionOptions, [], ReversedSubscriptions),
@@ -1685,7 +1684,6 @@
 		!.
 	accept_connack(packet(connack, Fields)) :-
 		member(reason_code(ReasonCode), Fields),
-		!,
 		domain_error(mqtt_connack_reason_code, ReasonCode).
 	accept_connack(Packet) :-
 		domain_error(mqtt_packet, expected(connack, Packet)).

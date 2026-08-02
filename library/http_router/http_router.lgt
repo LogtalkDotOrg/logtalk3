@@ -24,9 +24,9 @@
 	extends([http_json_term_helpers, http_text_helpers])).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-07-29,
+		date is 2026-08-02,
 		comment is 'Declarative HTTP router category for objects implementing the http_handler_protocol protocol.'
 	]).
 
@@ -1336,7 +1336,6 @@
 		!.
 	template_segment(Segment, _TemplateSegment) :-
 		malformed_placeholder_segment(Segment),
-		!,
 		domain_error(http_router_path_template_segment, Segment).
 	template_segment(Segment, literal(Segment)).
 

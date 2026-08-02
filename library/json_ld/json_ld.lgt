@@ -23,9 +23,9 @@
 	implements(json_ld_protocol)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:2:1,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-08-02,
 		comment is 'JSON-LD 1.1 parser, generator, and processor. Builds on top of the ``json`` library for JSON parsing and generation.',
 		parameters is [
 			'ObjectRepresentation' - 'Object representation to be used when decoding JSON objects. Possible values are ``curly`` (default) and ``list``.',
@@ -1231,10 +1231,8 @@
 	process_context_entry('@version', 1.1, ActiveContext, ActiveContext) :-
 		!.
 	process_context_entry('@version', Value, _ActiveContext, _NewContext) :-
-		!,
 		domain_error(json_ld_context_version, Value).
 	process_context_entry('@import', Value, _ActiveContext, _NewContext) :-
-		!,
 		domain_error(json_ld_context_import, Value).
 	process_context_entry('@propagate', Value, ActiveContext, ActiveContext) :-
 		(	Value == @true
@@ -1242,7 +1240,6 @@
 		),
 		!.
 	process_context_entry('@propagate', Value, _ActiveContext, _NewContext) :-
-		!,
 		domain_error(json_ld_context_propagate, Value).
 	process_context_entry('@protected', Value, ActiveContext, ActiveContext) :-
 		(	Value == @true
@@ -1250,7 +1247,6 @@
 		),
 		!.
 	process_context_entry('@protected', Value, _ActiveContext, _NewContext) :-
-		!,
 		domain_error(json_ld_context_protected, Value).
 	process_context_entry(Term0, Value, ActiveContext, NewContext) :-
 		normalize_key(Term0, Term),

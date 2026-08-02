@@ -23,9 +23,9 @@
 	imports(http_json_term_helpers)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-07-14,
+		date is 2026-08-02,
 		comment is 'Typed HTTP query, form, path, header, and cookie parameter extraction helpers plus OpenAPI descriptor generation helpers.'
 	]).
 
@@ -350,10 +350,8 @@
 	pattern_scalar_type(atom).
 
 	validate_declaration_semantics(Declaration, path, list, _Default) :-
-		!,
 		domain_error(http_parameter_declaration, Declaration).
 	validate_declaration_semantics(Declaration, path, _Cardinality, default(_Default)) :-
-		!,
 		domain_error(http_parameter_declaration, Declaration).
 	validate_declaration_semantics(_Declaration, _Source, _Cardinality, _Default).
 

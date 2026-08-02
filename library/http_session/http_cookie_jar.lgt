@@ -23,9 +23,9 @@
 	imports([http_text_helpers, http_origin_site_helpers, options])).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-08-02,
 		comment is 'HTTP cookie jar implementing explicit storage and request matching on top of the http_cookies parsing and generation predicates, with explicit save and load operations for persisting jar contents.'
 	]).
 
@@ -437,7 +437,6 @@
 
 	normalize_request_context(_URLContext, RequestContext, _NormalizedContext) :-
 		var(RequestContext),
-		!,
 		instantiation_error.
 	normalize_request_context(URLContext, request_context(Method0, Source0, TopLevelNavigation0), cookie_request_context(Method, Source, TopLevelNavigation)) :-
 		!,
@@ -459,7 +458,6 @@
 
 	normalize_request_context_source(_URLContext, Source, _NormalizedSource) :-
 		var(Source),
-		!,
 		instantiation_error.
 	normalize_request_context_source(_URLContext, source_url(SourceURL), SourceContext) :-
 		atom(SourceURL),

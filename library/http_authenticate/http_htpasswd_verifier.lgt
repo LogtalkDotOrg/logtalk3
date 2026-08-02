@@ -24,9 +24,9 @@
 	imports(http_text_helpers)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-07-07,
+		date is 2026-08-02,
 		comment is 'Portable Apache ``.htpasswd`` subset verifier supporting ``{SHA}`` and ``$apr1$`` entries and rejecting unsupported hash markers.',
 		parameters is [
 			'Path' - 'Path of the password file to load on each verification request.'
@@ -56,7 +56,6 @@
 
 	check_path(Path, _CheckedPath) :-
 		var(Path),
-		!,
 		instantiation_error.
 	check_path(Path0, Path) :-
 		atom(Path0),

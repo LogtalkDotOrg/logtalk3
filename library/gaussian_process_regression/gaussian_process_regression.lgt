@@ -23,9 +23,9 @@
 	imports(regressor_common)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-05-20,
+		date is 2026-08-02,
 		comment is 'Gaussian process regression regressor supporting continuous and mixed-feature datasets using an exact mixed Gaussian process with posterior uncertainty estimates. Learns from a dataset object implementing the ``regression_dataset_protocol`` protocol and returns a regressor term that can be used for prediction, predictive-distribution queries, and export as predicate clauses.',
 		see_also is [
 			linear_regression, ridge_regression, lasso_regression, elastic_net_regression, regression_tree,
@@ -488,7 +488,6 @@
 
 	factorize_covariance(_TrainingFeatures, Kernel0, MaxAttempts, _JitterScaleFactor, Attempt, _Kernel, _JitterAttempts, _CholeskyFactor) :-
 		Attempt > MaxAttempts,
-		!,
 		domain_error(positive_definite_covariance, Kernel0).
 	factorize_covariance(TrainingFeatures, Kernel0, MaxAttempts, JitterScaleFactor, Attempt, Kernel, JitterAttempts, CholeskyFactor) :-
 		update_kernel_jitter(Kernel0, JitterScaleFactor, Attempt, CandidateKernel),

@@ -414,8 +414,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:2:0</div>
-<div class="line"><strong>Date:</strong> 2026-02-26</div>
+<div class="line"><strong>Version:</strong> 0:2:1</div>
+<div class="line"><strong>Date:</strong> 2026-08-02</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -443,31 +443,38 @@
 </div>
 <nav class="contents local" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
+<li><p><a class="reference internal" href="#public-predicates" id="id3">Public predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#load-leap-seconds-override-1" id="id2"><code class="docutils literal notranslate"><span class="pre">load_leap_seconds_override/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#clear-leap-seconds-override-0" id="id3"><code class="docutils literal notranslate"><span class="pre">clear_leap_seconds_override/0</span></code></a></p></li>
-<li><p><a class="reference internal" href="#leap-seconds-source-1" id="id4"><code class="docutils literal notranslate"><span class="pre">leap_seconds_source/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#leap-seconds-entries-1" id="id5"><code class="docutils literal notranslate"><span class="pre">leap_seconds_entries/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#save-leap-seconds-entries-1" id="id6"><code class="docutils literal notranslate"><span class="pre">save_leap_seconds_entries/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#load-dut1-override-1" id="id7"><code class="docutils literal notranslate"><span class="pre">load_dut1_override/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#clear-dut1-override-0" id="id8"><code class="docutils literal notranslate"><span class="pre">clear_dut1_override/0</span></code></a></p></li>
-<li><p><a class="reference internal" href="#dut1-source-1" id="id9"><code class="docutils literal notranslate"><span class="pre">dut1_source/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#dut1-entries-1" id="id10"><code class="docutils literal notranslate"><span class="pre">dut1_entries/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#save-dut1-entries-1" id="id11"><code class="docutils literal notranslate"><span class="pre">save_dut1_entries/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#leap-offset-at-utc-unix-2" id="id12"><code class="docutils literal notranslate"><span class="pre">leap_offset_at_utc_unix/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#leap-effective-date-2" id="id13"><code class="docutils literal notranslate"><span class="pre">leap_effective_date/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#tt-minus-tai-2" id="id14"><code class="docutils literal notranslate"><span class="pre">tt_minus_tai/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#dut1-offset-at-utc-unix-3" id="id15"><code class="docutils literal notranslate"><span class="pre">dut1_offset_at_utc_unix/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#tdb-minus-tt-approx-3" id="id16"><code class="docutils literal notranslate"><span class="pre">tdb_minus_tt_approx/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#tcg-minus-tt-approx-3" id="id17"><code class="docutils literal notranslate"><span class="pre">tcg_minus_tt_approx/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#tcb-minus-tdb-approx-3" id="id18"><code class="docutils literal notranslate"><span class="pre">tcb_minus_tdb_approx/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#tai-minus-utc-for-tai-unix-2" id="id19"><code class="docutils literal notranslate"><span class="pre">tai_minus_utc_for_tai_unix/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#load-leap-seconds-override-1" id="id4"><code class="docutils literal notranslate"><span class="pre">load_leap_seconds_override/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#clear-leap-seconds-override-0" id="id5"><code class="docutils literal notranslate"><span class="pre">clear_leap_seconds_override/0</span></code></a></p></li>
+<li><p><a class="reference internal" href="#leap-seconds-source-1" id="id6"><code class="docutils literal notranslate"><span class="pre">leap_seconds_source/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#leap-seconds-entries-1" id="id7"><code class="docutils literal notranslate"><span class="pre">leap_seconds_entries/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#save-leap-seconds-entries-1" id="id8"><code class="docutils literal notranslate"><span class="pre">save_leap_seconds_entries/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#load-dut1-override-1" id="id9"><code class="docutils literal notranslate"><span class="pre">load_dut1_override/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#clear-dut1-override-0" id="id10"><code class="docutils literal notranslate"><span class="pre">clear_dut1_override/0</span></code></a></p></li>
+<li><p><a class="reference internal" href="#dut1-source-1" id="id11"><code class="docutils literal notranslate"><span class="pre">dut1_source/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#dut1-entries-1" id="id12"><code class="docutils literal notranslate"><span class="pre">dut1_entries/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#save-dut1-entries-1" id="id13"><code class="docutils literal notranslate"><span class="pre">save_dut1_entries/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#leap-offset-at-utc-unix-2" id="id14"><code class="docutils literal notranslate"><span class="pre">leap_offset_at_utc_unix/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#leap-effective-date-2" id="id15"><code class="docutils literal notranslate"><span class="pre">leap_effective_date/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#tt-minus-tai-2" id="id16"><code class="docutils literal notranslate"><span class="pre">tt_minus_tai/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#dut1-offset-at-utc-unix-3" id="id17"><code class="docutils literal notranslate"><span class="pre">dut1_offset_at_utc_unix/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#tdb-minus-tt-approx-3" id="id18"><code class="docutils literal notranslate"><span class="pre">tdb_minus_tt_approx/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#tcg-minus-tt-approx-3" id="id19"><code class="docutils literal notranslate"><span class="pre">tcg_minus_tt_approx/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#tcb-minus-tdb-approx-3" id="id20"><code class="docutils literal notranslate"><span class="pre">tcb_minus_tdb_approx/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#tai-minus-utc-for-tai-unix-2" id="id21"><code class="docutils literal notranslate"><span class="pre">tai_minus_utc_for_tai_unix/2</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id20">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id21">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id22">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id22">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id23">Private predicates</a></p>
+<ul>
+<li><p><a class="reference internal" href="#leap-override-data-2" id="id24"><code class="docutils literal notranslate"><span class="pre">leap_override_data_/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#dut1-override-data-3" id="id25"><code class="docutils literal notranslate"><span class="pre">dut1_override_data_/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#leap-source-1" id="id26"><code class="docutils literal notranslate"><span class="pre">leap_source_/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#id1" id="id27"><code class="docutils literal notranslate"><span class="pre">dut1_source_/1</span></code></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#operators" id="id28">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -869,8 +876,47 @@
 </section>
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
-<p>(no local declarations; see entity ancestors if any)</p>
+<section id="leap-override-data-2">
+<span id="time-scales-data-0-leap-override-data-2"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">leap_override_data_/2</span></code></a><a class="headerlink" href="#leap-override-data-2" title="Link to this heading"></a></h3>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
 </section>
+<section id="dut1-override-data-3">
+<span id="time-scales-data-0-dut1-override-data-3"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">dut1_override_data_/3</span></code></a><a class="headerlink" href="#dut1-override-data-3" title="Link to this heading"></a></h3>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="leap-source-1">
+<span id="time-scales-data-0-leap-source-1"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">leap_source_/1</span></code></a><a class="headerlink" href="#leap-source-1" title="Link to this heading"></a></h3>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="id1">
+<span id="index-22"></span><span id="id2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">dut1_source_/1</span></code></a><a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
 <section id="operators">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
 <p>(none)</p>

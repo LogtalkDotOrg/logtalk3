@@ -23,9 +23,9 @@
 	imports(http_text_helpers)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-07-07,
+		date is 2026-08-02,
 		comment is 'Transport-independent normalized HTTP request and response constructors, validators, wire parsers and generators, and body codec dispatch.'
 	]).
 
@@ -839,7 +839,6 @@
 		semantic_property(Property),
 		same_semantic_property(Properties, Property, ExistingProperty),
 		ExistingProperty \== Property,
-		!,
 		domain_error(http_property_semantics, Property).
 	add_unique_property(Property, Properties, [Property| Properties]).
 

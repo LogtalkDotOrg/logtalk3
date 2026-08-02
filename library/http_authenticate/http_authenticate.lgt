@@ -23,9 +23,9 @@
 	imports([options, http_text_helpers])).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-08-02,
 		comment is 'HTTP Basic authentication parsing, generation, challenge building, and request verification helpers.'
 	]).
 
@@ -357,7 +357,6 @@
 
 	check_unauthorized_response_overlay_options(Options, _Options0) :-
 		var(Options),
-		!,
 		instantiation_error.
 	check_unauthorized_response_overlay_options([Option| Options], Options0) :-
 		!,

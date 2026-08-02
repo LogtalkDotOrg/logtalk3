@@ -23,9 +23,9 @@
 	implements(wkt_wkb_protocol)).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:1:2,
 		author is 'Paulo Moura',
-		date is 2026-06-01,
+		date is 2026-08-02,
 		comment is 'Well-Known Text (WKT) and Well-Known Binary (WKB) geometry parser, generator, and validator.',
 		see_also is [wkt_wkb_protocol, geojson, geospatial, cbor, message_pack(_)]
 	]).
@@ -50,7 +50,6 @@
 		!.
 	parse(Source, _) :-
 		valid_source(Source),
-		!,
 		domain_error(wkt_wkb, Source).
 	parse(Source, _) :-
 		domain_error(wkt_wkb_source, Source).
@@ -63,7 +62,6 @@
 		!.
 	generate(Sink, Geometry) :-
 		valid_sink(Sink),
-		!,
 		domain_error(wkt_wkb, Geometry).
 	generate(Sink, _) :-
 		domain_error(wkt_wkb_sink, Sink).
@@ -1248,7 +1246,10 @@
 	first_geometry_arity([], none).
 	first_geometry_arity([Geometry| Geometries], Arity) :-
 		geometry_term_arity(Geometry, GeometryArity),
-		( GeometryArity == none -> first_geometry_arity(Geometries, Arity) ; Arity = GeometryArity ).
+		(	GeometryArity == none ->
+			first_geometry_arity(Geometries, Arity)
+		;	Arity = GeometryArity
+		).
 
 	valid_dimensions(xy).
 	valid_dimensions(z).

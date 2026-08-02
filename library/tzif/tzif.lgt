@@ -23,9 +23,9 @@
 	implements(tzif_protocol)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-04-17,
+		date is 2026-08-02,
 		comment is 'Loader, per-zone cache and snapshot persistence support, and zone-aware UTC lookup predicates for TZif v1/v2/v3 files.'
 	]).
 
@@ -388,7 +388,6 @@
 
 	check_tzif_list(TZifs) :-
 		var(TZifs),
-		!,
 		instantiation_error.
 	check_tzif_list([]) :-
 		!.
@@ -451,7 +450,6 @@
 
 	check_source_zone_id(ZoneId, _) :-
 		var(ZoneId),
-		!,
 		instantiation_error.
 	check_source_zone_id(ZoneId, _) :-
 		atom(ZoneId),
@@ -478,7 +476,6 @@
 
 	check_local_resolution_mode(Mode) :-
 		var(Mode),
-		!,
 		instantiation_error.
 	check_local_resolution_mode(strict) :-
 		!.
@@ -1257,7 +1254,6 @@
 		catch(open(Expanded, read, Stream), Error, rethrow_open_error(File, Error)).
 
 	rethrow_open_error(File, error(existence_error(source_sink, _), _)) :-
-		!,
 		existence_error(source_sink, File).
 	rethrow_open_error(_, Error) :-
 		throw(Error).

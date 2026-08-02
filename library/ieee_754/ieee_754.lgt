@@ -24,9 +24,9 @@
 	imports(ieee_754_common(_Precision_, _ByteOrder_))).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-05-11,
+		date is 2026-08-02,
 		comment is 'IEEE 754 floating-point encoder and decoder.',
 		parameters is [
 			'Precision' - 'Floating-point format precision. Supported values are ``half``, ``single``, and ``double``.',
@@ -76,7 +76,6 @@
 
 	sink_bits(Sink, _) :-
 		var(Sink),
-		!,
 		instantiation_error.
 	sink_bits(bytes(Bytes), Bits) :-
 		!,
@@ -118,7 +117,6 @@
 
 	value_bits(Value, _) :-
 		var(Value),
-		!,
 		domain_error(ieee_754_value, Value).
 	value_bits(@infinity, Bits) :-
 		!,

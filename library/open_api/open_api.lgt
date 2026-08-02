@@ -23,9 +23,9 @@
 	imports(http_json_term_helpers)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:0:2,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-08-02,
 		comment is 'OpenAPI 3.1.0 document derivation, parsing, generation, and validation built on top of the ``json`` and ``json_schema`` libraries.',
 		see_also is [json, json_schema, application_protocol, open_api_provider_protocol]
 	]).
@@ -1738,13 +1738,11 @@
 		(	\+ atom(Path)
 		;	\+ sub_atom(Path, 0, 1, _, '/')
 		),
-		!,
 		domain_error(open_api_path, invalid(Path)).
 	validate_operation_path(Path, SeenSignatures, SeenSignatures) :-
 		path_template_signature(Path, Signature),
 		memberchk(Signature-SeenPath, SeenSignatures),
 		SeenPath \== Path,
-		!,
 		domain_error(open_api_path(Path), duplicate_template(SeenPath)).
 	validate_operation_path(Path, SeenSignatures, [Signature-Path| SeenSignatures]) :-
 		path_template_signature(Path, Signature).
@@ -1953,7 +1951,6 @@
 		validate_open_api_description(Description),
 		info_properties_to_pairs(Properties, yes, Pairs0).
 	info_properties_to_pairs([description(_)| _], yes, _) :-
-		!,
 		domain_error(open_api_info_property, duplicate(description)).
 	info_properties_to_pairs([Property| _], _, _) :-
 		domain_error(open_api_info_property, Property).
@@ -2073,28 +2070,24 @@
 		validate_open_api_description(Description),
 		operation_properties_to_pairs(Properties, yes, TagsSeen, DeprecatedSeen, SecuritySeen, Pairs).
 	operation_properties_to_pairs([description(_)| _], yes, _, _, _, _) :-
-		!,
 		domain_error(open_api_operation_property, duplicate(description)).
 	operation_properties_to_pairs([tags(Tags)| Properties], DescriptionSeen, no, DeprecatedSeen, SecuritySeen, [Pair| Pairs]) :-
 		!,
 		tags_property_pair(Tags, Pair),
 		operation_properties_to_pairs(Properties, DescriptionSeen, yes, DeprecatedSeen, SecuritySeen, Pairs).
 	operation_properties_to_pairs([tags(_)| _], _, yes, _, _, _) :-
-		!,
 		domain_error(open_api_operation_property, duplicate(tags)).
 	operation_properties_to_pairs([deprecated(Deprecated)| Properties], DescriptionSeen, TagsSeen, no, SecuritySeen, [Pair| Pairs]) :-
 		!,
 		deprecated_property_pair(Deprecated, Pair),
 		operation_properties_to_pairs(Properties, DescriptionSeen, TagsSeen, yes, SecuritySeen, Pairs).
 	operation_properties_to_pairs([deprecated(_)| _], _, _, yes, _, _) :-
-		!,
 		domain_error(open_api_operation_property, duplicate(deprecated)).
 	operation_properties_to_pairs([security(Requirements)| Properties], DescriptionSeen, TagsSeen, DeprecatedSeen, no, [Pair| Pairs]) :-
 		!,
 		security_property_pair(Requirements, Pair),
 		operation_properties_to_pairs(Properties, DescriptionSeen, TagsSeen, DeprecatedSeen, yes, Pairs).
 	operation_properties_to_pairs([security(_)| _], _, _, _, yes, _) :-
-		!,
 		domain_error(open_api_operation_property, duplicate(security)).
 	operation_properties_to_pairs([Property| _], _, _, _, _, _) :-
 		domain_error(open_api_operation_property, Property).
@@ -2177,7 +2170,6 @@
 		Parameter = {name-Name, in-In, description-Description, required-JsonRequired, schema-JsonSchema}.
 
 	request_body_to_json(request_body(Description, Required, []), _) :-
-		!,
 		domain_error(open_api_request_body, request_body(Description, Required, [])).
 	request_body_to_json(request_body(Description, Required, MediaTypes), RequestBody) :-
 		validate_open_api_description(Description),
@@ -2186,7 +2178,6 @@
 		RequestBody = {description-Description, required-JsonRequired, content-Content}.
 
 	responses_to_json([], _) :-
-		!,
 		domain_error(open_api_responses, []).
 	responses_to_json(Descriptors, Responses) :-
 		responses_to_json(Descriptors, [], Pairs),
@@ -2361,10 +2352,8 @@
 		!,
 		security_scheme_common_option_pairs(Options, Name, Type, yes, Pairs).
 	security_scheme_common_option_pairs([description(_)| _], Name, Type, yes, _) :-
-		!,
 		domain_error(open_api_security_scheme(Name, Type), duplicate(description)).
 	security_scheme_common_option_pairs([Option| _], Name, Type, _, _) :-
-		!,
 		domain_error(open_api_security_scheme(Name, Type), invalid_option(Option)).
 	security_scheme_common_option_pairs(Options, Name, Type, _, _) :-
 		domain_error(open_api_security_scheme(Name, Type), invalid_options(Options)).
@@ -2377,16 +2366,13 @@
 		!,
 		security_scheme_http_option_pairs(Options, Name, yes, BearerFormatSeen, Pairs).
 	security_scheme_http_option_pairs([description(_)| _], Name, yes, _, _) :-
-		!,
 		domain_error(open_api_security_scheme(Name, http), duplicate(description)).
 	security_scheme_http_option_pairs([bearer_format(Format)| Options], Name, DescriptionSeen, no, [bearerFormat-Format| Pairs]) :-
 		!,
 		security_scheme_http_option_pairs(Options, Name, DescriptionSeen, yes, Pairs).
 	security_scheme_http_option_pairs([bearer_format(_)| _], Name, _, yes, _) :-
-		!,
 		domain_error(open_api_security_scheme(Name, http), duplicate(bearer_format)).
 	security_scheme_http_option_pairs([Option| _], Name, _, _, _) :-
-		!,
 		domain_error(open_api_security_scheme(Name, http), invalid_option(Option)).
 	security_scheme_http_option_pairs(Options, Name, _, _, _) :-
 		domain_error(open_api_security_scheme(Name, http), invalid_options(Options)).
@@ -2399,17 +2385,14 @@
 		!,
 		security_scheme_openid_connect_option_pairs(Options, Name, yes, FlowsSeen, Pairs).
 	security_scheme_openid_connect_option_pairs([description(_)| _], Name, yes, _, _) :-
-		!,
 		domain_error(open_api_security_scheme(Name, openIdConnect), duplicate(description)).
 	security_scheme_openid_connect_option_pairs([flows(FlowDescriptors)| Options], Name, DescriptionSeen, no, ['$localFlows'-JsonFlows| Pairs]) :-
 		!,
 		oauth_flow_descriptors_to_json(Name, openIdConnect, FlowDescriptors, JsonFlows),
 		security_scheme_openid_connect_option_pairs(Options, Name, DescriptionSeen, yes, Pairs).
 	security_scheme_openid_connect_option_pairs([flows(_)| _], Name, _, yes, _) :-
-		!,
 		domain_error(open_api_security_scheme(Name, openIdConnect), duplicate(flows)).
 	security_scheme_openid_connect_option_pairs([Option| _], Name, _, _, _) :-
-		!,
 		domain_error(open_api_security_scheme(Name, openIdConnect), invalid_option(Option)).
 	security_scheme_openid_connect_option_pairs(Options, Name, _, _, _) :-
 		domain_error(open_api_security_scheme(Name, openIdConnect), invalid_options(Options)).
@@ -2475,10 +2458,8 @@
 		!,
 		oauth_flow_option_pairs(Options, Name, Type, FlowName, yes, Pairs).
 	oauth_flow_option_pairs([refresh_url(_)| _], Name, Type, FlowName, yes, _) :-
-		!,
 		domain_error(open_api_security_scheme(Name, Type), duplicate(oauth_flow_field(FlowName, refreshUrl))).
 	oauth_flow_option_pairs([Option| _], Name, Type, FlowName, _, _) :-
-		!,
 		domain_error(open_api_security_scheme(Name, Type), invalid_option(oauth_flow(FlowName, Option))).
 	oauth_flow_option_pairs(Options, Name, Type, FlowName, _, _) :-
 		domain_error(open_api_security_scheme(Name, Type), invalid_options(oauth_flow(FlowName, Options))).

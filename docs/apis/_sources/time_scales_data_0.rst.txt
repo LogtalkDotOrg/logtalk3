@@ -14,8 +14,8 @@ Bundled and override data plus constants for UTC/TAI/TT/UT1/TDB/TCG/TCB conversi
 |    ``logtalk_load(time_scales(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:2:0
-| **Date:** 2026-02-26
+| **Version:** 0:2:1
+| **Date:** 2026-08-02
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -395,7 +395,53 @@ Protected predicates
 Private predicates
 ------------------
 
-(no local declarations; see entity ancestors if any)
+.. index:: leap_override_data_/2
+.. _time_scales_data/0::leap_override_data_/2:
+
+``leap_override_data_/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. index:: dut1_override_data_/3
+.. _time_scales_data/0::dut1_override_data_/3:
+
+``dut1_override_data_/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. index:: leap_source_/1
+.. _time_scales_data/0::leap_source_/1:
+
+``leap_source_/1``
+^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. index:: dut1_source_/1
+.. _time_scales_data/0::dut1_source_/1:
+
+``dut1_source_/1``
+^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
 
 Operators
 ---------

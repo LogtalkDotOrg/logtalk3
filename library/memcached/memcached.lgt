@@ -22,9 +22,9 @@
 :- object(memcached).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:0:2,
 		author is 'Paulo Moura',
-		date is 2026-06-14,
+		date is 2026-08-02,
 		comment is 'Portable Memcached client implementing the text (ASCII) protocol. Uses the sockets library for TCP communication.',
 		remarks is [
 			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, and Trealla Prolog (same as the sockets library).',
@@ -419,17 +419,14 @@
 	handle_storage_response(Response, Context) :-
 		atom_codes('NOT_STORED', NotStoredCodes),
 		starts_with(Response, NotStoredCodes),
-		!,
 		throw(error(memcached_error(not_stored), Context)).
 	handle_storage_response(Response, Context) :-
 		atom_codes('EXISTS', ExistsCodes),
 		starts_with(Response, ExistsCodes),
-		!,
 		throw(error(memcached_error(exists), Context)).
 	handle_storage_response(Response, Context) :-
 		atom_codes('NOT_FOUND', NotFoundCodes),
 		starts_with(Response, NotFoundCodes),
-		!,
 		throw(error(memcached_error(not_found), Context)).
 	handle_storage_response(Response, Context) :-
 		atom_codes(Message, Response),

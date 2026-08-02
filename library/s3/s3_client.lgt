@@ -24,9 +24,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-07-09,
+		date is 2026-08-02,
 		comment is 'Stateless S3-compatible client facade over the normalized HTTP client.',
 		parnames is ['HTTPTransport']
 	]).
@@ -335,7 +335,6 @@
 
 	normalize_list_objects_request(Request, _Options, Context) :-
 		var(Request),
-		!,
 		throw(error(instantiation_error, Context)).
 	normalize_list_objects_request(list_objects_v2_request(Options), Options, Context) :-
 		!,

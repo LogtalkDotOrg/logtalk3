@@ -23,9 +23,9 @@
 	implements(json_patch_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-07-03,
+		date is 2026-08-02,
 		comment is 'JSON Patch (RFC 6902) application predicates for native Logtalk JSON terms.'
 	]).
 
@@ -39,11 +39,9 @@
 
 	apply(Patch, _, _) :-
 		var(Patch),
-		!,
 		instantiation_error.
 	apply(_, OldJSON, _) :-
 		var(OldJSON),
-		!,
 		instantiation_error.
 	apply(Patch, OldJSON, NewJSON) :-
 		proper_list(Patch),

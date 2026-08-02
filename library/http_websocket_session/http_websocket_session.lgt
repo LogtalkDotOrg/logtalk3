@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-08-02,
 		comment is 'Auxiliary object defining the supported read options and default values for HTTP WebSocket sessions.'
 	]).
 
@@ -535,7 +535,6 @@
 		read_idle_opcode(Opcode, Final, PayloadBytes, Frame, Stream, MaxPayloadLength, Pending, Message).
 
 	read_idle_opcode(continuation, _Final, _PayloadBytes, Frame, _Stream, _MaxPayloadLength, _Pending, _Message) :-
-		!,
 		domain_error(http_websocket_session_sequence, Frame).
 	read_idle_opcode(text, final, PayloadBytes, _Frame, _Stream, _MaxPayloadLength, idle, Message) :-
 		!,
@@ -563,7 +562,6 @@
 		read_fragment_frame(Frame, Stream, Type, Chunks0, MaxPayloadLength, Pending, Message).
 
 	read_fragment_frame(end_of_file, _Stream, _Type, _Chunks0, _MaxPayloadLength, _Pending, _Message) :-
-		!,
 		domain_error(http_websocket_session_sequence, end_of_file).
 	read_fragment_frame(Frame, Stream, Type, Chunks0, MaxPayloadLength, Pending, Message) :-
 		validate_incoming_frame(Frame),

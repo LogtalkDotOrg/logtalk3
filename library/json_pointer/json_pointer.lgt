@@ -23,9 +23,9 @@
 	implements(json_pointer_protocol)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-07-04,
+		date is 2026-08-02,
 		comment is 'JSON Pointer (RFC 6901) and Relative JSON Pointer parser, generator, and evaluator.',
 		parameters is [
 			'StringRepresentation' - 'Text representation to be used for reference tokens. Possible values are ``atom`` (default), ``chars``, and ``codes``.'
@@ -50,7 +50,6 @@
 
 	generate(Sink, _) :-
 		var(Sink),
-		!,
 		instantiation_error.
 	generate(Sink, Pointer) :-
 		pointer_codes(Pointer, Codes),
@@ -118,7 +117,6 @@
 
 	parse_source_codes(Source, _) :-
 		var(Source),
-		!,
 		instantiation_error.
 	parse_source_codes(codes(Codes), Codes) :-
 		!.
@@ -133,7 +131,6 @@
 
 	parse_fragment_source_codes(Source, _) :-
 		var(Source),
-		!,
 		instantiation_error.
 	parse_fragment_source_codes(codes(Codes), Codes) :-
 		!.

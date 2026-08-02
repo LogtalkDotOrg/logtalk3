@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-08-02,
 		comment is 'Transport-neutral WebSocket frame predicates for constructing, parsing, generating, reading, and writing normalized frame terms.'
 	]).
 
@@ -366,13 +366,11 @@
 		!,
 		validate_masking_key(Key).
 	parse_property(masking_key(_Key), _MaskingKey, _ReservedBits, _NewMaskingKey, _NewReservedBits) :-
-		!,
 		domain_error(http_websocket_property, masking_key).
 	parse_property(reserved_bits(Bits0), MaskingKey, [], MaskingKey, Bits) :-
 		!,
 		validate_reserved_bits(Bits0, Bits).
 	parse_property(reserved_bits(_Bits), _MaskingKey, _ReservedBits, _NewMaskingKey, _NewReservedBits) :-
-		!,
 		domain_error(http_websocket_property, reserved_bits).
 	parse_property(Property, _MaskingKey, _ReservedBits, _NewMaskingKey, _NewReservedBits) :-
 		domain_error(http_websocket_property, Property).

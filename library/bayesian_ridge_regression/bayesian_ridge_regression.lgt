@@ -23,9 +23,9 @@
 	imports(regressor_common)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-05-07,
+		date is 2026-08-02,
 		comment is 'Bayesian ridge regression regressor supporting continuous and mixed-feature datasets using evidence maximization and posterior uncertainty over coefficients. Learns from a dataset object implementing the ``regression_dataset_protocol`` protocol and returns a regressor term that can be used for prediction, predictive-distribution queries, and export as predicate clauses.',
 		see_also is [
 			linear_regression, ridge_regression, lasso_regression, elastic_net_regression, gaussian_process_regression,
@@ -804,7 +804,6 @@
 
 	factorize_precision_matrix(Matrix, Attempt, MaxAttempts, _BaseJitter, _CholeskyFactor, _Attempts, _Jitter) :-
 		Attempt > MaxAttempts,
-		!,
 		domain_error(positive_definite_precision_matrix, Matrix).
 	factorize_precision_matrix(Matrix0, Attempt, MaxAttempts, BaseJitter, CholeskyFactor, Attempts, Jitter) :-
 		add_precision_jitter(Matrix0, Attempt, BaseJitter, Matrix),

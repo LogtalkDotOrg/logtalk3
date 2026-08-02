@@ -22,9 +22,9 @@
 :- object(s3_xml).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-07-09,
+		date is 2026-08-02,
 		comment is 'Adapter layer mapping S3 XML responses to stable library terms.'
 	]).
 
@@ -142,7 +142,6 @@
 		!.
 	parse_document(Codes, _Content) :-
 		xml::parse(Codes, malformed(_Attributes, _Terms)),
-		!,
 		domain_error(s3_xml_malformed, Codes).
 	parse_document(Codes, _Content) :-
 		domain_error(s3_xml_document, Codes).

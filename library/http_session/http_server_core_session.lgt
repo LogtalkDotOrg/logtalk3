@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-07-09,
+		date is 2026-08-02,
 		comment is 'Server-side HTTP session manager over normalized request and response terms using opaque cookie identifiers and an in-memory session store.'
 	]).
 
@@ -443,7 +443,6 @@
 
 	session_handle_context(Session, _ContextId, _Context) :-
 		var(Session),
-		!,
 		instantiation_error.
 	session_handle_context(http_server_core_session_handle(ManagerId, ContextId), ContextId, Context) :-
 		integer(ManagerId),
