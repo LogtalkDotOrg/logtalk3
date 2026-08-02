@@ -60,6 +60,9 @@ hash functions that accept both key an digest size parameters (per RFC 7693).
 
 * ADDED: New `http_sse` library implementing HTTP Server-Sent Events.
 
+* ADDED: New `bson` library implementing the BSON 1.1 binary interchange
+format.
+
 * ADDED: New `gpx` library implementing the GPX 1.1 GPS data interchange
 format.
 

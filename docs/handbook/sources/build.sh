@@ -97,6 +97,7 @@ sed '1,19d' ../../../library/basic_types/NOTES.md | pandoc -f gfm -t rst -o libr
 sed '1,19d' ../../../library/bayesian_ridge_regression/NOTES.md | pandoc -f gfm -t rst -o libraries/bayesian_ridge_regression.rst
 sed '1,19d' ../../../library/borda_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/borda_ranker.rst
 sed '1,19d' ../../../library/bradley_terry_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/bradley_terry_ranker.rst
+sed '1,19d' ../../../library/bson/NOTES.md | pandoc -f gfm -t rst -o libraries/bson.rst
 sed '1,19d' ../../../library/c45_classifier/NOTES.md | pandoc -f gfm -t rst -o libraries/c45_classifier.rst
 sed '1,19d' ../../../library/cartesian_products/NOTES.md | pandoc -f gfm -t rst -o libraries/cartesian_products.rst
 sed '1,19d' ../../../library/copeland_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/copeland_ranker.rst

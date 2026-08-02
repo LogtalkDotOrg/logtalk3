@@ -284,6 +284,17 @@ To load an entity, always load the library that includes it using the goal ``log
 
    bradley_terry_ranker <bradley_terry_ranker_0>
 
+``library/bson/``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   bson <bson_0>
+   bson(StringRepresentation) <bson_1>
+
 ``library/c45_classifier/``
 ---------------------------
 

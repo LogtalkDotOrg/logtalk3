@@ -88,6 +88,7 @@
 		time_scales(loader),
 		tzif(loader),
 		dates_tz(loader),
+		bson(loader),
 		message_pack(loader),
 		geospatial(loader),
 		geohash(loader),

@@ -1,0 +1,109 @@
+.. index:: single: bson(StringRepresentation)
+.. _bson/1:
+
+.. rst-class:: right
+
+**object**
+
+``bson(StringRepresentation)``
+==============================
+
+* ``StringRepresentation`` - Text representation to be used when decoding BSON strings and keys. Possible values are ``atom`` (default), ``chars``, and ``codes``.
+
+
+BSON format exporter and importer.
+
+| **Availability:** 
+|    ``logtalk_load(bson(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-02
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`ieee_754(Precision,ByteOrder,NaNRepresentation) <ieee_754/3>`
+|    :ref:`list <list/0>`
+|    :ref:`utf_8 <utf_8/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: parse/2
+.. _bson/1::parse/2:
+
+``parse/2``
+^^^^^^^^^^^
+
+Parses a list of bytes in the BSON format returning the corresponding document term. Throws an error when parsing is not possible.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse(Bytes,Document)``
+| **Mode and number of proofs:**
+|    ``parse(@list(byte),-ground)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Bytes`` is not ground:
+|        ``instantiation_error``
+|    ``Bytes`` is ground but not a valid BSON byte sequence:
+|        ``domain_error(bson_byte_sequence,Bytes)``
+
+
+------------
+
+.. index:: generate/2
+.. _bson/1::generate/2:
+
+``generate/2``
+^^^^^^^^^^^^^^
+
+Generates a list of bytes in the BSON format representing the given document term. Throws an error when generating is not possible.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate(Document,Bytes)``
+| **Mode and number of proofs:**
+|    ``generate(@ground,-list(byte))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Document`` is a variable:
+|        ``instantiation_error``
+|    ``Document`` has no corresponding BSON representation:
+|        ``domain_error(bson_term,Document)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

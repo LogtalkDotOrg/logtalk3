@@ -46,6 +46,7 @@ directory in the ``NOTES.md`` file.
    bayesian_ridge_regression
    borda_ranker
    bradley_terry_ranker
+   bson
    c45_classifier
    cartesian_products
    cbor

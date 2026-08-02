@@ -1,0 +1,56 @@
+.. index:: single: bson
+.. _bson/0:
+
+.. rst-class:: right
+
+**object**
+
+``bson``
+========
+
+BSON format exporter and importer using atoms for decoded strings and keys.
+
+| **Availability:** 
+|    ``logtalk_load(bson(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-02
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`bson(atom) <bson/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`bson/1::generate/2`  :ref:`bson/1::parse/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
