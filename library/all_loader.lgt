@@ -200,6 +200,7 @@
 		rank_centrality(loader),
 		ranked_pairs(loader),
 		thurstone_mosteller_ranker(loader),
+		trueskill_ranker(loader),
 		regression_protocols(loader),
 		bayesian_ridge_regression(loader),
 		elastic_net_regression(loader),

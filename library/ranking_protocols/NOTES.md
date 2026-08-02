@@ -26,7 +26,8 @@ learning ranking algorithms. Rankers are represented as objects
 implementing the `ranker_protocol` protocol. Datasets are represented as
 objects implementing the `pairwise_ranking_dataset_protocol`,
 `pairwise_measurement_dataset_protocol`,
-`temporal_pairwise_ranking_dataset_protocol`, or the
+`temporal_pairwise_ranking_dataset_protocol`,
+`multiplayer_ranking_dataset_protocol`, or the
 `ranking_dataset_protocol` protocol.
 
 This library also provides reusable test datasets and smoke tests for the
@@ -56,6 +57,11 @@ and validity expectations:
   1.0}`. A fact `game(Period, Item1, Item2, Score)` records the observed
   result for `Item1` against `Item2`, with the score for `Item2` implicitly
   equal to `1.0 - Score`.
+- `multiplayer_ranking_dataset_protocol` datasets declare matches in
+  chronological order, at least two non-empty teams per match, non-negative
+  integer team ranks, and participation weights in the interval `(0, 1]`.
+  Lower ranks are better, equal ranks denote draws, and a player may occur at
+  most once per match. Disconnected and inactive declared players are valid.
 
 Shared categories
 -----------------
@@ -66,8 +72,12 @@ imported by ranking algorithm implementations:
 - `ranking_dataset_common` — dataset collection, summaries, graph
   connectivity, connected-component analysis, and pairwise/grouped dataset
   correctness checks, including pairwise measurement helpers, temporal
-  pairwise rating-period helpers, and grouped tie-block extraction helpers
-  for algorithms that consume tied rankings directly.
+  pairwise rating-period helpers, ordered multiplayer match helpers, and
+  grouped tie-block extraction helpers for algorithms that consume tied
+  rankings directly.
+- `normal_distribution_common` — portable standard normal density,
+  cumulative distribution, and quantile approximations used by probabilistic
+  ranking models.
 - `glicko2_common` — shared internal Glicko-2 numeric helpers for scale
   conversions, per-period player updates, and volatility root solving used
   by both the batch and periodic Glicko-2 rankers.

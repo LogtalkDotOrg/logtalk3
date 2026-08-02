@@ -12124,6 +12124,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`multiplayer_ranking_dataset_protocol <multiplayer_ranking_dataset_protocol/0::item/1>`
 * :ref:`pairwise_measurement_dataset_protocol <pairwise_measurement_dataset_protocol/0::item/1>`
 * :ref:`pairwise_ranking_dataset_protocol <pairwise_ranking_dataset_protocol/0::item/1>`
 * :ref:`temporal_pairwise_ranking_dataset_protocol <temporal_pairwise_ranking_dataset_protocol/0::item/1>`
@@ -14488,6 +14489,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ccsds_tm_frames(FrameLength,SecondaryHeaderLength,HasFECF) <ccsds_tm_frames/3::master_channel_frame_count/2>`
 
+``match/1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`multiplayer_ranking_dataset_protocol <multiplayer_ranking_dataset_protocol/0::match/1>`
+
 ``materialize/0``
 -----------------
 
@@ -15453,6 +15464,86 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`natural <natural/0::multinomial/2>`
+
+``multiplayer_dataset_connected_components/2``
+----------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::multiplayer_dataset_connected_components/2>`
+
+``multiplayer_dataset_declared_items/2``
+----------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::multiplayer_dataset_declared_items/2>`
+
+``multiplayer_dataset_declared_matches/2``
+------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::multiplayer_dataset_declared_matches/2>`
+
+``multiplayer_dataset_events/2``
+--------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::multiplayer_dataset_events/2>`
+
+``multiplayer_dataset_items/2``
+-------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::multiplayer_dataset_items/2>`
+
+``multiplayer_dataset_match_teams/3``
+-------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::multiplayer_dataset_match_teams/3>`
+
+``multiplayer_dataset_matches/2``
+---------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::multiplayer_dataset_matches/2>`
+
+``multiplayer_dataset_summary/2``
+---------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::multiplayer_dataset_summary/2>`
 
 ``multiset/3``
 --------------
@@ -25853,6 +25944,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`time_scales_data <time_scales_data/0::tdb_minus_tt_approx/3>`
 
+``team/3``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`multiplayer_ranking_dataset_protocol <multiplayer_ranking_dataset_protocol/0::team/3>`
+
+``team_member/4``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`multiplayer_ranking_dataset_protocol <multiplayer_ranking_dataset_protocol/0::team_member/4>`
+
 ``temporal_pairwise_dataset_connected_components/2``
 ----------------------------------------------------
 
@@ -27641,6 +27752,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`open_api <open_api/0::validate_http_response/4>`
+
+``validate_multiplayer_dataset/1``
+----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::validate_multiplayer_dataset/1>`
+
+``validate_multiplayer_dataset/2``
+----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ranking_dataset_common <ranking_dataset_common/0::validate_multiplayer_dataset/2>`
 
 ``validate_pairwise_dataset/1``
 -------------------------------

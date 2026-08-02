@@ -1,0 +1,131 @@
+.. index:: single: multiplayer_ranking_dataset_protocol
+.. _multiplayer_ranking_dataset_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``multiplayer_ranking_dataset_protocol``
+========================================
+
+Protocol for ordered multiplayer ranking datasets with ranked teams and weighted player participation.
+
+| **Availability:** 
+|    ``logtalk_load(ranking_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-02
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: item/1
+.. _multiplayer_ranking_dataset_protocol/0::item/1:
+
+``item/1``
+^^^^^^^^^^
+
+Enumerates by backtracking the items that can be ranked.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``item(Item)``
+| **Mode and number of proofs:**
+|    ``item(-atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: match/1
+.. _multiplayer_ranking_dataset_protocol/0::match/1:
+
+``match/1``
+^^^^^^^^^^^
+
+Enumerates by backtracking the matches in chronological processing order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``match(Match)``
+| **Mode and number of proofs:**
+|    ``match(-atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: team/3
+.. _multiplayer_ranking_dataset_protocol/0::team/3:
+
+``team/3``
+^^^^^^^^^^
+
+Enumerates by backtracking the teams in a match and their non-negative ranks. Lower ranks are better and equal ranks denote a draw.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``team(Match,Team,Rank)``
+| **Mode and number of proofs:**
+|    ``team(-atom,-atom,-integer)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: team_member/4
+.. _multiplayer_ranking_dataset_protocol/0::team_member/4:
+
+``team_member/4``
+^^^^^^^^^^^^^^^^^
+
+Enumerates by backtracking team members and their participation weights, which must be greater than zero and no greater than one.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``team_member(Match,Team,Item,Weight)``
+| **Mode and number of proofs:**
+|    ``team_member(-atom,-atom,-atom,-number)`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

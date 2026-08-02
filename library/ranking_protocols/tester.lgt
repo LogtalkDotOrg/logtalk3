@@ -29,13 +29,15 @@
 		ranker_protocol,
 		ranker_common,
 		score_ranker_common,
+		normal_distribution_common,
 		glicko2_common,
 		condorcet_victory_common,
 		ranking_dataset_common,
 		ranking_dataset_protocol,
 		pairwise_ranking_dataset_protocol,
 		pairwise_measurement_dataset_protocol,
-		temporal_pairwise_ranking_dataset_protocol
+		temporal_pairwise_ranking_dataset_protocol,
+		multiplayer_ranking_dataset_protocol
 	], [
 		source_data(on),
 		debug(on)
@@ -64,6 +66,8 @@
 		'test_datasets/malformed_temporal_unknown_item',
 		'test_datasets/malformed_temporal_self_game',
 		'test_datasets/malformed_temporal_illegal_score',
+		'test_datasets/multiplayer_matches',
+		'test_datasets/malformed_multiplayer_datasets',
 		'test_datasets/malformed_pairwise',
 		'test_datasets/malformed_measurement_unknown_item',
 		'test_datasets/malformed_measurement_duplicate_items',

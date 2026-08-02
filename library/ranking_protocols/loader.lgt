@@ -29,6 +29,7 @@
 		ranker_common,
 		score_ranker_common,
 		score_ranker_model_common,
+		normal_distribution_common,
 		glicko2_common,
 		condorcet_victory_common,
 		grouped_strength_ranker_common,
@@ -38,7 +39,8 @@
 		ranking_dataset_protocol,
 		pairwise_ranking_dataset_protocol,
 		pairwise_measurement_dataset_protocol,
-		temporal_pairwise_ranking_dataset_protocol
+		temporal_pairwise_ranking_dataset_protocol,
+		multiplayer_ranking_dataset_protocol
 	], [
 		optimize(on)
 	])

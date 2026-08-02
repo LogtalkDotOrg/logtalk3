@@ -400,6 +400,158 @@ Returns a summary of a temporal pairwise dataset, including item, period, game, 
 
 ------------
 
+.. index:: multiplayer_dataset_declared_items/2
+.. _ranking_dataset_common/0::multiplayer_dataset_declared_items/2:
+
+``multiplayer_dataset_declared_items/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Collects the multiplayer dataset declared items preserving declaration order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multiplayer_dataset_declared_items(Dataset,Items)``
+| **Mode and number of proofs:**
+|    ``multiplayer_dataset_declared_items(+object_identifier,-list)`` - ``one``
+
+
+------------
+
+.. index:: multiplayer_dataset_items/2
+.. _ranking_dataset_common/0::multiplayer_dataset_items/2:
+
+``multiplayer_dataset_items/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Collects the unique multiplayer dataset items preserving their first declaration order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multiplayer_dataset_items(Dataset,Items)``
+| **Mode and number of proofs:**
+|    ``multiplayer_dataset_items(+object_identifier,-list)`` - ``one``
+
+
+------------
+
+.. index:: multiplayer_dataset_declared_matches/2
+.. _ranking_dataset_common/0::multiplayer_dataset_declared_matches/2:
+
+``multiplayer_dataset_declared_matches/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Collects the multiplayer dataset declared matches preserving chronological declaration order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multiplayer_dataset_declared_matches(Dataset,Matches)``
+| **Mode and number of proofs:**
+|    ``multiplayer_dataset_declared_matches(+object_identifier,-list)`` - ``one``
+
+
+------------
+
+.. index:: multiplayer_dataset_matches/2
+.. _ranking_dataset_common/0::multiplayer_dataset_matches/2:
+
+``multiplayer_dataset_matches/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Collects the unique multiplayer dataset matches preserving their first declaration order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multiplayer_dataset_matches(Dataset,Matches)``
+| **Mode and number of proofs:**
+|    ``multiplayer_dataset_matches(+object_identifier,-list)`` - ``one``
+
+
+------------
+
+.. index:: multiplayer_dataset_match_teams/3
+.. _ranking_dataset_common/0::multiplayer_dataset_match_teams/3:
+
+``multiplayer_dataset_match_teams/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Materializes one match as ordered ``team(Team,Rank,Members)`` terms, where members are ``Item-Weight`` pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multiplayer_dataset_match_teams(Dataset,Match,Teams)``
+| **Mode and number of proofs:**
+|    ``multiplayer_dataset_match_teams(+object_identifier,+term,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: multiplayer_dataset_events/2
+.. _ranking_dataset_common/0::multiplayer_dataset_events/2:
+
+``multiplayer_dataset_events/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Materializes matches in chronological order as ``match(Match,Teams)`` terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multiplayer_dataset_events(Dataset,Events)``
+| **Mode and number of proofs:**
+|    ``multiplayer_dataset_events(+object_identifier,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: multiplayer_dataset_connected_components/2
+.. _ranking_dataset_common/0::multiplayer_dataset_connected_components/2:
+
+``multiplayer_dataset_connected_components/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the connected components induced by players participating in the same match.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multiplayer_dataset_connected_components(Dataset,Components)``
+| **Mode and number of proofs:**
+|    ``multiplayer_dataset_connected_components(+object_identifier,-list(list))`` - ``one``
+
+
+------------
+
+.. index:: multiplayer_dataset_summary/2
+.. _ranking_dataset_common/0::multiplayer_dataset_summary/2:
+
+``multiplayer_dataset_summary/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a summary of a multiplayer dataset, including item, match, team, participation, component, and isolated-item counts.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multiplayer_dataset_summary(Dataset,Summary)``
+| **Mode and number of proofs:**
+|    ``multiplayer_dataset_summary(+object_identifier,-list(compound))`` - ``one``
+
+
+------------
+
 .. index:: grouped_dataset_groups/2
 .. _ranking_dataset_common/0::grouped_dataset_groups/2:
 
@@ -605,6 +757,44 @@ Validates a temporal pairwise ranking dataset and returns its dataset summary wh
 |    ``validate_temporal_pairwise_dataset(Dataset,Summary)``
 | **Mode and number of proofs:**
 |    ``validate_temporal_pairwise_dataset(+object_identifier,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: validate_multiplayer_dataset/1
+.. _ranking_dataset_common/0::validate_multiplayer_dataset/1:
+
+``validate_multiplayer_dataset/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Validates a multiplayer ranking dataset and throws an error if the dataset is malformed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate_multiplayer_dataset(Dataset)``
+| **Mode and number of proofs:**
+|    ``validate_multiplayer_dataset(+object_identifier)`` - ``one``
+
+
+------------
+
+.. index:: validate_multiplayer_dataset/2
+.. _ranking_dataset_common/0::validate_multiplayer_dataset/2:
+
+``validate_multiplayer_dataset/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Validates a multiplayer ranking dataset and returns its dataset summary when validation succeeds.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate_multiplayer_dataset(Dataset,Summary)``
+| **Mode and number of proofs:**
+|    ``validate_multiplayer_dataset(+object_identifier,-list(compound))`` - ``one``
 
 
 ------------

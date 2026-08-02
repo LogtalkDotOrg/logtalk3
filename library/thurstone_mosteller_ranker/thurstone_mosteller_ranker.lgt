@@ -20,7 +20,7 @@
 
 
 :- object(thurstone_mosteller_ranker,
-	imports([ranking_dataset_common, score_ranker_model_common])).
+	imports([ranking_dataset_common, score_ranker_model_common, normal_distribution_common])).
 
 	:- info([
 		version is 1:0:0,
@@ -101,7 +101,7 @@
 		dictionary_lookup(Item2, Index2, IndexDictionary),
 		Weight is Item1Wins + Item2Wins,
 		Probability is (Item1Wins + 0.5) / (Weight + 1.0),
-		probit(Probability, Difference),
+		^^standard_normal_quantile(Probability, Difference),
 		update_system(Index1, Index2, Count, Weight, Difference, Matrix0, Matrix1, Vector0, Vector1),
 		build_system(Matchups, IndexDictionary, Count, Matrix1, Matrix, Vector1, Vector).
 
@@ -258,31 +258,6 @@
 	center_utilities([Utility0| Utilities0], Mean, [Utility| Utilities]) :-
 		Utility is Utility0 - Mean,
 		center_utilities(Utilities0, Mean, Utilities).
-
-	probit(Probability, Quantile) :-
-		Plow = 0.02425,
-		Phigh is 1.0 - Plow,
-		(	Probability < Plow ->
-			Q is sqrt(-2.0 * log(Probability)),
-			inverse_tail(Q, Quantile)
-		;	Probability =< Phigh ->
-			Q is Probability - 0.5,
-			R is Q * Q,
-			inverse_central(Q, R, Quantile)
-		;	Q is sqrt(-2.0 * log(1.0 - Probability)),
-			inverse_tail(Q, TailQuantile),
-			Quantile is -TailQuantile
-		).
-
-	inverse_tail(Q, Quantile) :-
-		Numerator is (((((-0.007784894002430293 * Q - 0.3223964580411365) * Q - 2.400758277161838) * Q - 2.549732539343734) * Q + 4.374664141464968) * Q + 2.938163982698783),
-		Denominator is ((((0.007784695709041462 * Q + 0.3224671290700398) * Q + 2.445134137142996) * Q + 3.754408661907416) * Q + 1.0),
-		Quantile is Numerator / Denominator.
-
-	inverse_central(Q, R, Quantile) :-
-		Numerator is (((((-39.69683028665376 * R + 220.9460984245205) * R - 275.9285104469687) * R + 138.3577518672690) * R - 30.66479806614716) * R + 2.506628277459239) * Q,
-		Denominator is (((((-54.47609879822406 * R + 161.5858368580409) * R - 155.6989798598866) * R + 66.80131188771972) * R - 13.28068155288572) * R + 1.0),
-		Quantile is Numerator / Denominator.
 
 	score_pairs([], [], []).
 	score_pairs([Item| Items], [Score| ScoreValues], [Item-Score| Scores]) :-

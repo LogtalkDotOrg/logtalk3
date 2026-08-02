@@ -69,6 +69,9 @@ Stochastic Neighbor Embedding dimension reduction for continuous datasets.
 Approximation and Projection dimension reduction for continuous, categorical,
 and mixed datasets.
 
+* ADDED: New `trueskill_ranker` library implementing the TrueSkill ranker for
+ordered multiplayer matches.
+
 * ADDED: New `sqids` library for encoding lists of non-negative integers into
 short, obfuscated (but not encrypted), URL-safe identifiers.
 
@@ -82,8 +85,15 @@ library (when using a backend supporting unbound integer arithmetic).
 associated data algorithm to the `crypto` library (when using a backend
 supporting unbound integer arithmetic).
 
+* ADDED: Support to the `ranking_protocols` library for ordered multiplayer
+ranking datasets with ranked teams and weighted player participation, plus
+shared portable standard normal distribution numeric helpers.
+
 * IMPROVED: Portability of the `sockets` library with versions of SWI-Prolog
 older than 9.1.5.
+
+* UPDATED: The `thurstone_mosteller_ranker` library to reuse the new shared
+standard normal quantile implementation.
 
 * FIXED: A race condition in the `http_process_transport` library when closing
 `ncat`-backed connections that could discard pending output bytes. Thanks to

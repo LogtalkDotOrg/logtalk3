@@ -1,0 +1,126 @@
+.. index:: single: normal_distribution_common
+.. _normal_distribution_common/0:
+
+.. rst-class:: right
+
+**category**
+
+``normal_distribution_common``
+==============================
+
+Shared portable standard normal distribution numeric helpers.
+
+| **Availability:** 
+|    ``logtalk_load(ranking_protocols(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-02
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(none)
+
+Protected predicates
+--------------------
+
+.. index:: standard_normal_density/2
+.. _normal_distribution_common/0::standard_normal_density/2:
+
+``standard_normal_density/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the standard normal probability density at the given value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``standard_normal_density(Value,Density)``
+| **Mode and number of proofs:**
+|    ``standard_normal_density(+number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Value`` is not a number:
+|        ``type_error(number,Value)``
+
+
+------------
+
+.. index:: standard_normal_distribution/2
+.. _normal_distribution_common/0::standard_normal_distribution/2:
+
+``standard_normal_distribution/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes an approximation of the standard normal cumulative distribution at the given value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``standard_normal_distribution(Value,Probability)``
+| **Mode and number of proofs:**
+|    ``standard_normal_distribution(+number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Value`` is not a number:
+|        ``type_error(number,Value)``
+
+
+------------
+
+.. index:: standard_normal_quantile/2
+.. _normal_distribution_common/0::standard_normal_quantile/2:
+
+``standard_normal_quantile/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes an approximation of the standard normal quantile for a probability strictly between zero and one.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``standard_normal_quantile(Probability,Quantile)``
+| **Mode and number of proofs:**
+|    ``standard_normal_quantile(+number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Probability`` is not a number:
+|        ``type_error(number,Probability)``
+|    ``Probability`` is not strictly between zero and one:
+|        ``domain_error(open_probability,Probability)``
+
+
+------------
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

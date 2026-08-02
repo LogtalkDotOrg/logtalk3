@@ -98,6 +98,25 @@
 :- end_object.
 
 
+:- object(normal_distribution_test_support,
+	imports(normal_distribution_common)).
+
+	:- public(density/2).
+	:- public(distribution/2).
+	:- public(quantile/2).
+
+	density(Value, Density) :-
+		^^standard_normal_density(Value, Density).
+
+	distribution(Value, Probability) :-
+		^^standard_normal_distribution(Value, Probability).
+
+	quantile(Probability, Quantile) :-
+		^^standard_normal_quantile(Probability, Quantile).
+
+:- end_object.
+
+
 :- object(sample_ranker,
 	implements(ranker_protocol),
 	imports([ranking_dataset_common, ranker_common])).
@@ -178,6 +197,37 @@
 
 	cleanup :-
 		^^clean_file('test_output.pl').
+
+	% Standard normal distribution numeric helper tests.
+
+	test(standard_normal_density_zero, deterministic(abs(Density - 0.3989422804014327) =< 1.0e-15)) :-
+		normal_distribution_test_support::density(0.0, Density).
+
+	test(standard_normal_distribution_zero, deterministic(abs(Probability - 0.5) =< 1.0e-9)) :-
+		normal_distribution_test_support::distribution(0.0, Probability).
+
+	test(standard_normal_distribution_symmetry, deterministic(abs(Sum - 1.0) =< 1.0e-12)) :-
+		normal_distribution_test_support::distribution(1.5, PositiveProbability),
+		normal_distribution_test_support::distribution(-1.5, NegativeProbability),
+		Sum is PositiveProbability + NegativeProbability.
+
+	test(standard_normal_quantile_median, deterministic(abs(Quantile) =< 1.0e-15)) :-
+		normal_distribution_test_support::quantile(0.5, Quantile).
+
+	test(standard_normal_quantile_upper_975, deterministic(abs(Quantile - 1.959963986120195) =< 1.0e-7)) :-
+		normal_distribution_test_support::quantile(0.975, Quantile).
+
+	test(standard_normal_quantile_lower_tail, deterministic(abs(Quantile + 4.753424308822899) =< 1.0e-7)) :-
+		normal_distribution_test_support::quantile(0.000001, Quantile).
+
+	test(standard_normal_quantile_zero_error, error(domain_error(open_probability, 0.0))) :-
+		normal_distribution_test_support::quantile(0.0, _Quantile).
+
+	test(standard_normal_quantile_one_error, error(domain_error(open_probability, 1.0))) :-
+		normal_distribution_test_support::quantile(1.0, _Quantile).
+
+	test(standard_normal_quantile_type_error, error(type_error(number, probability))) :-
+		normal_distribution_test_support::quantile(probability, _Quantile).
 
 	% Pairwise dataset protocol smoke tests.
 
@@ -315,6 +365,47 @@
 
 	test(disconnected_temporal_pairwise_validation, error(domain_error(connected_temporal_pairwise_dataset, [[alpha, beta], [gamma, delta]]))) :-
 		ranking_test_support::validate_temporal_pairwise_dataset(disconnected_temporal_pairwise).
+
+	% Multiplayer dataset protocol smoke tests.
+
+	test(multiplayer_matches_order, deterministic(Matches == [opening, final])) :-
+		ranking_test_support::multiplayer_dataset_matches(multiplayer_matches, Matches).
+
+	test(multiplayer_match_teams_order, deterministic(Teams == [team(red, 0, [alpha-1.0, beta-0.5]), team(blue, 1, [gamma-1.0, delta-1.0])])) :-
+		ranking_test_support::multiplayer_dataset_match_teams(multiplayer_matches, opening, Teams).
+
+	test(multiplayer_events_order, deterministic(Events == [match(opening, [team(red, 0, [alpha-1.0, beta-0.5]), team(blue, 1, [gamma-1.0, delta-1.0])]), match(final, [team(alpha_team, 1, [alpha-1.0]), team(gamma_team, 1, [gamma-1.0])])])) :-
+		ranking_test_support::multiplayer_dataset_events(multiplayer_matches, Events).
+
+	test(multiplayer_matches_validation, deterministic) :-
+		ranking_test_support::validate_multiplayer_dataset(multiplayer_matches).
+
+	test(multiplayer_matches_summary, deterministic(Summary == [items(5), matches(2), teams(4), participations(6), connected_components(2), isolated_items([epsilon])])) :-
+		ranking_test_support::multiplayer_dataset_summary(multiplayer_matches, Summary).
+
+	test(multiplayer_duplicate_matches_validation, error(domain_error(unique_matches, [round, round]))) :-
+		ranking_test_support::validate_multiplayer_dataset(multiplayer_duplicate_matches).
+
+	test(multiplayer_duplicate_teams_validation, error(domain_error(unique_match_teams, round-[first, first]))) :-
+		ranking_test_support::validate_multiplayer_dataset(multiplayer_duplicate_teams).
+
+	test(multiplayer_invalid_rank_validation, error(domain_error(team_rank, -1))) :-
+		ranking_test_support::validate_multiplayer_dataset(multiplayer_invalid_rank).
+
+	test(multiplayer_one_team_validation, error(domain_error(minimum_match_teams, round))) :-
+		ranking_test_support::validate_multiplayer_dataset(multiplayer_one_team).
+
+	test(multiplayer_empty_team_validation, error(domain_error(non_empty_team, round-second))) :-
+		ranking_test_support::validate_multiplayer_dataset(multiplayer_empty_team).
+
+	test(multiplayer_unknown_item_validation, error(existence_error(item, phantom))) :-
+		ranking_test_support::validate_multiplayer_dataset(multiplayer_unknown_item).
+
+	test(multiplayer_invalid_weight_validation, error(domain_error(participation_weight, 1.5))) :-
+		ranking_test_support::validate_multiplayer_dataset(multiplayer_invalid_weight).
+
+	test(multiplayer_duplicate_participant_validation, error(domain_error(unique_match_participants, round-[alpha, alpha, beta]))) :-
+		ranking_test_support::validate_multiplayer_dataset(multiplayer_duplicate_participant).
 
 	% Grouped dataset protocol smoke tests.
 

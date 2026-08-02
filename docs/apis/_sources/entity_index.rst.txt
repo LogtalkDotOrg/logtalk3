@@ -81,6 +81,7 @@ Categories
    mutation_testing_messages <mutation_testing_messages_0>
    mutations <mutations_0>
    mutator_common <mutator_common_0>
+   normal_distribution_common <normal_distribution_common_0>
    observer <observer_0>
    open_id_helpers <open_id_helpers_0>
    options <options_0>
@@ -674,6 +675,7 @@ Objects
    toon(ObjectRepresentation,PairRepresentation,StringRepresentation) <toon_3>
    toychrdb <toychrdb_0>
    treap_set <treap_set_0>
+   trueskill_ranker <trueskill_ranker_0>
    truncated_svd_projection <truncated_svd_projection_0>
    truth_literal_flip(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <truth_literal_flip_5>
    tsne_projection <tsne_projection_0>
@@ -848,6 +850,7 @@ Protocols
    metap <metap_0>
    monitoring <monitoring_0>
    monitorp <monitorp_0>
+   multiplayer_ranking_dataset_protocol <multiplayer_ranking_dataset_protocol_0>
    multisets_protocol <multisets_protocol_0>
    mutator_protocol <mutator_protocol_0>
    nanoid_protocol <nanoid_protocol_0>

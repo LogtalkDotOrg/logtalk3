@@ -268,6 +268,7 @@ directory in the ``NOTES.md`` file.
    tle_orbits
    toml
    toon
+   trueskill_ranker
    truncated_svd_projection
    tsne_projection
    tsv

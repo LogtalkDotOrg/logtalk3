@@ -107,8 +107,8 @@ Library groups
 		`ranking_protocols`, `borda_ranker`, `bradley_terry_ranker`, `colley_ranker`, `copeland_ranker`,
 	    `elo_ranker`, `glicko2_ranker`, `glicko2_periodic_ranker`, `hodge_rank`, `kemeny_young_ranker`,
         `massey_ranker`, `plackett_luce_ranker`, `plackett_luce_last_ranker`, `rank_centrality`,
-        `ranked_pairs`, `regularized_bradley_terry_ranker`, `schulze_ranker`, and
-        `thurstone_mosteller_ranker`.
+	    `ranked_pairs`, `regularized_bradley_terry_ranker`, `schulze_ranker`,
+	    `thurstone_mosteller_ranker`, and `trueskill_ranker`.
 	- Clustering:
 		`clustering_protocols`, `agglomerative_clusterer`, `dbscan_clusterer`,
 		`gaussian_mixture_clusterer`, `hdbscan_clusterer`, `hierarchical_clustering`,

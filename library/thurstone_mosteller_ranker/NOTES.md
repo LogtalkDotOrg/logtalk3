@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `thurstone_mosteller_ranker`
-======================
+============================
 
 Thurstone-Mosteller Case V pairwise preference ranker. It aggregates
 pairwise outcomes into matchup probabilities, applies a fixed

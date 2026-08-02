@@ -161,6 +161,62 @@
 		argnames is ['Dataset', 'Summary']
 	]).
 
+	:- public(multiplayer_dataset_declared_items/2).
+	:- mode(multiplayer_dataset_declared_items(+object_identifier, -list), one).
+	:- info(multiplayer_dataset_declared_items/2, [
+		comment is 'Collects the multiplayer dataset declared items preserving declaration order.',
+		argnames is ['Dataset', 'Items']
+	]).
+
+	:- public(multiplayer_dataset_items/2).
+	:- mode(multiplayer_dataset_items(+object_identifier, -list), one).
+	:- info(multiplayer_dataset_items/2, [
+		comment is 'Collects the unique multiplayer dataset items preserving their first declaration order.',
+		argnames is ['Dataset', 'Items']
+	]).
+
+	:- public(multiplayer_dataset_declared_matches/2).
+	:- mode(multiplayer_dataset_declared_matches(+object_identifier, -list), one).
+	:- info(multiplayer_dataset_declared_matches/2, [
+		comment is 'Collects the multiplayer dataset declared matches preserving chronological declaration order.',
+		argnames is ['Dataset', 'Matches']
+	]).
+
+	:- public(multiplayer_dataset_matches/2).
+	:- mode(multiplayer_dataset_matches(+object_identifier, -list), one).
+	:- info(multiplayer_dataset_matches/2, [
+		comment is 'Collects the unique multiplayer dataset matches preserving their first declaration order.',
+		argnames is ['Dataset', 'Matches']
+	]).
+
+	:- public(multiplayer_dataset_match_teams/3).
+	:- mode(multiplayer_dataset_match_teams(+object_identifier, +term, -list(compound)), one).
+	:- info(multiplayer_dataset_match_teams/3, [
+		comment is 'Materializes one match as ordered ``team(Team,Rank,Members)`` terms, where members are ``Item-Weight`` pairs.',
+		argnames is ['Dataset', 'Match', 'Teams']
+	]).
+
+	:- public(multiplayer_dataset_events/2).
+	:- mode(multiplayer_dataset_events(+object_identifier, -list(compound)), one).
+	:- info(multiplayer_dataset_events/2, [
+		comment is 'Materializes matches in chronological order as ``match(Match,Teams)`` terms.',
+		argnames is ['Dataset', 'Events']
+	]).
+
+	:- public(multiplayer_dataset_connected_components/2).
+	:- mode(multiplayer_dataset_connected_components(+object_identifier, -list(list)), one).
+	:- info(multiplayer_dataset_connected_components/2, [
+		comment is 'Returns the connected components induced by players participating in the same match.',
+		argnames is ['Dataset', 'Components']
+	]).
+
+	:- public(multiplayer_dataset_summary/2).
+	:- mode(multiplayer_dataset_summary(+object_identifier, -list(compound)), one).
+	:- info(multiplayer_dataset_summary/2, [
+		comment is 'Returns a summary of a multiplayer dataset, including item, match, team, participation, component, and isolated-item counts.',
+		argnames is ['Dataset', 'Summary']
+	]).
+
 	:- public(grouped_dataset_groups/2).
 	:- mode(grouped_dataset_groups(+object_identifier, -list), one).
 	:- info(grouped_dataset_groups/2, [
@@ -263,6 +319,20 @@
 	:- mode(validate_temporal_pairwise_dataset(+object_identifier, -list(compound)), one).
 	:- info(validate_temporal_pairwise_dataset/2, [
 		comment is 'Validates a temporal pairwise ranking dataset and returns its dataset summary when validation succeeds.',
+		argnames is ['Dataset', 'Summary']
+	]).
+
+	:- public(validate_multiplayer_dataset/1).
+	:- mode(validate_multiplayer_dataset(+object_identifier), one).
+	:- info(validate_multiplayer_dataset/1, [
+		comment is 'Validates a multiplayer ranking dataset and throws an error if the dataset is malformed.',
+		argnames is ['Dataset']
+	]).
+
+	:- public(validate_multiplayer_dataset/2).
+	:- mode(validate_multiplayer_dataset(+object_identifier, -list(compound)), one).
+	:- info(validate_multiplayer_dataset/2, [
+		comment is 'Validates a multiplayer ranking dataset and returns its dataset summary when validation succeeds.',
 		argnames is ['Dataset', 'Summary']
 	]).
 
@@ -409,6 +479,61 @@
 			isolated_items(IsolatedItems)
 		].
 
+	multiplayer_dataset_declared_items(Dataset, Items) :-
+		findall(Item, Dataset::item(Item), Items).
+
+	multiplayer_dataset_items(Dataset, Items) :-
+		multiplayer_dataset_declared_items(Dataset, RawItems),
+		unique_list(RawItems, Items).
+
+	multiplayer_dataset_declared_matches(Dataset, Matches) :-
+		findall(Match, Dataset::match(Match), Matches).
+
+	multiplayer_dataset_matches(Dataset, Matches) :-
+		multiplayer_dataset_declared_matches(Dataset, RawMatches),
+		unique_list(RawMatches, Matches).
+
+	multiplayer_dataset_match_teams(Dataset, Match, Teams) :-
+		findall(
+			team(Team, Rank, Members),
+			(
+				Dataset::team(Match, Team, Rank),
+				findall(Item-Weight, Dataset::team_member(Match, Team, Item, Weight), Members)
+			),
+			Teams
+		).
+
+	multiplayer_dataset_events(Dataset, Events) :-
+		multiplayer_dataset_matches(Dataset, Matches),
+		multiplayer_dataset_events(Matches, Dataset, Events).
+
+	multiplayer_dataset_connected_components(Dataset, Components) :-
+		multiplayer_dataset_items(Dataset, Items),
+		multiplayer_dataset_events(Dataset, Events),
+		multiplayer_event_edges(Events, Preferences),
+		connected_components(Items, Preferences, Components).
+
+	multiplayer_dataset_summary(Dataset, Summary) :-
+		multiplayer_dataset_items(Dataset, Items),
+		multiplayer_dataset_matches(Dataset, Matches),
+		multiplayer_dataset_events(Dataset, Events),
+		multiplayer_event_counts(Events, 0, NumberOfTeams, 0, NumberOfParticipations),
+		multiplayer_event_edges(Events, Preferences),
+		connected_components(Items, Preferences, Components),
+		length(Items, NumberOfItems),
+		length(Matches, NumberOfMatches),
+		length(Components, NumberOfComponents),
+		isolated_items(Components, Preferences, IsolatedItems),
+		Summary = [
+			items(NumberOfItems),
+			matches(NumberOfMatches),
+			teams(NumberOfTeams),
+			participations(NumberOfParticipations),
+			connected_components(NumberOfComponents),
+			isolated_items(IsolatedItems)
+		],
+		!.
+
 	grouped_dataset_groups(Dataset, Groups) :-
 		findall(Group, Dataset::group(Group), RawGroups),
 		unique_list(RawGroups, Groups).
@@ -520,6 +645,42 @@
 		;	domain_error(connected_temporal_pairwise_dataset, Components)
 		),
 		::temporal_pairwise_dataset_summary(Dataset, Summary).
+
+	validate_multiplayer_dataset(Dataset) :-
+		validate_multiplayer_dataset(Dataset, _Summary).
+
+	validate_multiplayer_dataset(Dataset, Summary) :-
+		::multiplayer_dataset_declared_items(Dataset, RawItems),
+		RawItems \== [],
+		check_unique_items(RawItems),
+		::multiplayer_dataset_declared_matches(Dataset, RawMatches),
+		RawMatches \== [],
+		check_unique_matches(RawMatches),
+		::multiplayer_dataset_items(Dataset, Items),
+		::multiplayer_dataset_matches(Dataset, Matches),
+		findall(team(Match, Team, Rank), Dataset::team(Match, Team, Rank), TeamFacts),
+		forall(
+			member(team(Match, _Team, Rank), TeamFacts),
+			validate_multiplayer_team(Matches, Match, Rank)
+		),
+		forall(
+			member(Match, Matches),
+			validate_multiplayer_match(Dataset, Match)
+		),
+		findall(member(Match, Team, Item, Weight), Dataset::team_member(Match, Team, Item, Weight), MemberFacts),
+		forall(
+			member(member(Match, Team, Item, Weight), MemberFacts),
+			validate_multiplayer_team_member(Dataset, Matches, Items, Match, Team, Item, Weight)
+		),
+		forall(
+			member(team(Match, Team, _Rank), TeamFacts),
+			validate_non_empty_team(Dataset, Match, Team)
+		),
+		forall(
+			member(Match, Matches),
+			validate_unique_match_participants(Dataset, Match)
+		),
+		::multiplayer_dataset_summary(Dataset, Summary).
 
 	validate_grouped_dataset(Dataset, Summary) :-
 		findall(Group, Dataset::group(Group), RawGroups),
@@ -689,6 +850,45 @@
 	temporal_game_edges([game(_Period, Item1, Item2, _Score)| Games], [p(Item1, Item2, 1)| Preferences]) :-
 		temporal_game_edges(Games, Preferences).
 
+	multiplayer_dataset_events([], _Dataset, []).
+	multiplayer_dataset_events([Match| Matches], Dataset, [match(Match, Teams)| Events]) :-
+		::multiplayer_dataset_match_teams(Dataset, Match, Teams),
+		multiplayer_dataset_events(Matches, Dataset, Events).
+
+	multiplayer_event_counts([], TeamCount, TeamCount, ParticipationCount, ParticipationCount).
+	multiplayer_event_counts([match(_Match, Teams)| Events], TeamCount0, TeamCount, ParticipationCount0, ParticipationCount) :-
+		multiplayer_team_counts(Teams, TeamCount0, TeamCount1, ParticipationCount0, ParticipationCount1),
+		multiplayer_event_counts(Events, TeamCount1, TeamCount, ParticipationCount1, ParticipationCount).
+
+	multiplayer_team_counts([], TeamCount, TeamCount, ParticipationCount, ParticipationCount).
+	multiplayer_team_counts([team(_Team, _Rank, Members)| Teams], TeamCount0, TeamCount, ParticipationCount0, ParticipationCount) :-
+		length(Members, MemberCount),
+		TeamCount1 is TeamCount0 + 1,
+		ParticipationCount1 is ParticipationCount0 + MemberCount,
+		multiplayer_team_counts(Teams, TeamCount1, TeamCount, ParticipationCount1, ParticipationCount).
+
+	multiplayer_event_edges([], []).
+	multiplayer_event_edges([match(_Match, Teams)| Events], Preferences) :-
+		multiplayer_team_members(Teams, Participants),
+		multiplayer_participant_edges(Participants, EventPreferences),
+		multiplayer_event_edges(Events, Rest),
+		append(EventPreferences, Rest, Preferences).
+
+	multiplayer_team_members([], []).
+	multiplayer_team_members([team(_Team, _Rank, Members)| Teams], Participants) :-
+		member_items(Members, TeamParticipants),
+		multiplayer_team_members(Teams, Rest),
+		append(TeamParticipants, Rest, Participants).
+
+	member_items([], []).
+	member_items([Item-_Weight| Members], [Item| Items]) :-
+		member_items(Members, Items).
+
+	multiplayer_participant_edges([], []).
+	multiplayer_participant_edges([_Item], []).
+	multiplayer_participant_edges([Item, NextItem| Items], [p(Item, NextItem, 1)| Preferences]) :-
+		multiplayer_participant_edges([NextItem| Items], Preferences).
+
 	check_unique_items([]).
 	check_unique_items([Item| Items]) :-
 		(	member(Item, Items) ->
@@ -701,6 +901,13 @@
 		(	member(Period, Periods) ->
 			domain_error(unique_periods, [Period| Periods])
 		;	check_unique_periods(Periods)
+		).
+
+	check_unique_matches([]).
+	check_unique_matches([Match| Matches]) :-
+		(	member(Match, Matches) ->
+			domain_error(unique_matches, [Match| Matches])
+		;	check_unique_matches(Matches)
 		).
 
 	check_unique_groups([]).
@@ -777,6 +984,66 @@
 		(	number(Score), {Score =:= 0.0; Score =:= 0.5; Score =:= 1.0} ->
 			true
 		;	domain_error(game_score, Score)
+		).
+
+	validate_multiplayer_team(Matches, Match, Rank) :-
+		(	member(Match, Matches) ->
+			true
+		;	existence_error(match, Match)
+		),
+		(	integer(Rank), Rank >= 0 ->
+			true
+		;	domain_error(team_rank, Rank)
+		).
+
+	validate_multiplayer_match(Dataset, Match) :-
+		findall(Team, Dataset::team(Match, Team, _Rank), Teams),
+		(	Teams = [_, _| _] ->
+			true
+		;	domain_error(minimum_match_teams, Match)
+		),
+		check_unique_match_teams(Match, Teams).
+
+	check_unique_match_teams(_Match, []).
+	check_unique_match_teams(Match, [Team| Teams]) :-
+		(	member(Team, Teams) ->
+			domain_error(unique_match_teams, Match-[Team| Teams])
+		;	check_unique_match_teams(Match, Teams)
+		).
+
+	validate_multiplayer_team_member(Dataset, Matches, Items, Match, Team, Item, Weight) :-
+		(	member(Match, Matches) ->
+			true
+		;	existence_error(match, Match)
+		),
+		(	Dataset::team(Match, Team, _Rank) ->
+			true
+		;	existence_error(team, Match-Team)
+		),
+		(	member(Item, Items) ->
+			true
+		;	existence_error(item, Item)
+		),
+		(	number(Weight), Weight > 0.0, Weight =< 1.0 ->
+			true
+		;	domain_error(participation_weight, Weight)
+		).
+
+	validate_non_empty_team(Dataset, Match, Team) :-
+		(	Dataset::team_member(Match, Team, _Item, _Weight) ->
+			true
+		;	domain_error(non_empty_team, Match-Team)
+		).
+
+	validate_unique_match_participants(Dataset, Match) :-
+		findall(Item, Dataset::team_member(Match, _Team, Item, _Weight), Items),
+		check_unique_match_participants(Match, Items).
+
+	check_unique_match_participants(_Match, []).
+	check_unique_match_participants(Match, [Item| Items]) :-
+		(	member(Item, Items) ->
+			domain_error(unique_match_participants, Match-[Item| Items])
+		;	check_unique_match_participants(Match, Items)
 		).
 
 	validate_relevance(Dataset, Groups, Group, Item, Relevance) :-

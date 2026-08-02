@@ -319,6 +319,7 @@ Foreach-Object {
 (Get-Content ../../../library/tle_orbits/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/tle_orbits.rst
 (Get-Content ../../../library/toml/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/toml.rst
 (Get-Content ../../../library/toon/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/toon.rst
+(Get-Content ../../../library/trueskill_ranker/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/trueskill_ranker.rst
 (Get-Content ../../../library/truncated_svd_projection/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/truncated_svd_projection.rst
 (Get-Content ../../../library/tsne_projection/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/tsne_projection.rst
 (Get-Content ../../../library/tsv/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/tsv.rst
