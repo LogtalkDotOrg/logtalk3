@@ -93,6 +93,7 @@
 		geohash(loader),
 		crs_projections(loader),
 		geojson(loader),
+		gpx(loader),
 		wkt_wkb(loader),
 		git(loader),
 		grammars(loader),

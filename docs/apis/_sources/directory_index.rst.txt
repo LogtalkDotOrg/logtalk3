@@ -936,6 +936,17 @@ To load an entity, always load the library that includes it using the goal ``log
 
    glicko2_ranker <glicko2_ranker_0>
 
+``library/gpx/``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   gpx <gpx_0>
+   gpx_protocol <gpx_protocol_0>
+
 ``library/gradient_boosting_classifier/``
 -----------------------------------------
 

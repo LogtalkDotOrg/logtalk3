@@ -102,6 +102,7 @@ directory in the ``NOTES.md`` file.
    git
    glicko2_ranker
    glicko2_periodic_ranker
+   gpx
    gradient_boosting_classifier
    gradient_boosting_regression
    grammars

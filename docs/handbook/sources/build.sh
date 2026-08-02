@@ -153,6 +153,7 @@ sed '1,19d' ../../../library/geospatial/NOTES.md | pandoc -f gfm -t rst -o libra
 sed '1,19d' ../../../library/git/NOTES.md | pandoc -f gfm -t rst -o libraries/git.rst
 sed '1,19d' ../../../library/glicko2_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/glicko2_ranker.rst
 sed '1,19d' ../../../library/glicko2_periodic_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/glicko2_periodic_ranker.rst
+sed '1,19d' ../../../library/gpx/NOTES.md | pandoc -f gfm -t rst -o libraries/gpx.rst
 sed '1,19d' ../../../library/gradient_boosting_classifier/NOTES.md | pandoc -f gfm -t rst -o libraries/gradient_boosting_classifier.rst
 sed '1,19d' ../../../library/gradient_boosting_regression/NOTES.md | pandoc -f gfm -t rst -o libraries/gradient_boosting_regression.rst
 sed '1,19d' ../../../library/grammars/NOTES.md | pandoc -f gfm -t rst -o libraries/grammars.rst

@@ -153,6 +153,7 @@ Foreach-Object {
 (Get-Content ../../../library/git/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/git.rst
 (Get-Content ../../../library/glicko2_ranker/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/glicko2_ranker.rst
 (Get-Content ../../../library/glicko2_periodic_ranker/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/glicko2_periodic_ranker.rst
+(Get-Content ../../../library/gpx/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/gpx.rst
 (Get-Content ../../../library/gradient_boosting_classifier/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/gradient_boosting_classifier.rst
 (Get-Content ../../../library/gradient_boosting_regression/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/gradient_boosting_regression.rst
 (Get-Content ../../../library/grammars/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/grammars.rst

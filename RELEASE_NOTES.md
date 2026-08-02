@@ -60,6 +60,9 @@ hash functions that accept both key an digest size parameters (per RFC 7693).
 
 * ADDED: New `http_sse` library implementing HTTP Server-Sent Events.
 
+* ADDED: New `gpx` library implementing the GPX 1.1 GPS data interchange
+format.
+
 * ADDED: New `integer_partitions` library providing predicates for generating
 and querying integer partitions.
 

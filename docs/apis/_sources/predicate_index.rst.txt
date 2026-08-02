@@ -9291,6 +9291,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::generate/2>`
 * :ref:`ccsds_time_code_protocol <ccsds_time_code_protocol/0::generate/2>`
 * :ref:`geojson_protocol <geojson_protocol/0::generate/2>`
+* :ref:`gpx_protocol <gpx_protocol/0::generate/2>`
 * :ref:`html <html/0::generate/2>`
 * :ref:`http_websocket_frames <http_websocket_frames/0::generate/2>`
 * :ref:`ieee_754_protocol <ieee_754_protocol/0::generate/2>`
@@ -9739,6 +9740,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`expanding <expanding/0::goal_expansion/2>`
+
+``gpx_to_xml/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`gpx_protocol <gpx_protocol/0::gpx_to_xml/2>`
 
 ``gram_matrix/2``
 -----------------
@@ -17968,6 +17979,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::parse/2>`
 * :ref:`ccsds_time_code_protocol <ccsds_time_code_protocol/0::parse/2>`
 * :ref:`geojson_protocol <geojson_protocol/0::parse/2>`
+* :ref:`gpx_protocol <gpx_protocol/0::parse/2>`
 * :ref:`http_websocket_frames <http_websocket_frames/0::parse/2>`
 * :ref:`ieee_754_protocol <ieee_754_protocol/0::parse/2>`
 * :ref:`json_graph_protocol <json_graph_protocol/0::parse/2>`
@@ -27616,6 +27628,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`flags_validator <flags_validator/0::validate/1>`
 * :ref:`geojson_protocol <geojson_protocol/0::validate/1>`
+* :ref:`gpx_protocol <gpx_protocol/0::validate/1>`
 * :ref:`jwt_jwks <jwt_jwks/0::validate/1>`
 * :ref:`wkt_wkb_protocol <wkt_wkb_protocol/0::validate/1>`
 
@@ -27628,6 +27641,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`geojson_protocol <geojson_protocol/0::validate/2>`
+* :ref:`gpx_protocol <gpx_protocol/0::validate/2>`
 * :ref:`json_schema_protocol <json_schema_protocol/0::validate/2>`
 * :ref:`wkt_wkb_protocol <wkt_wkb_protocol/0::validate/2>`
 
@@ -28695,6 +28709,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`xchacha20_poly1305 <xchacha20_poly1305/0::xchacha20_poly1305_encrypt/5>`
+
+``xml_to_gpx/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`gpx_protocol <gpx_protocol/0::xml_to_gpx/2>`
 
 ``xor64/3``
 -----------

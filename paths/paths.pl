@@ -182,6 +182,7 @@ logtalk_library_path(geospatial, library('geospatial/')).
 logtalk_library_path(git, library('git/')).
 logtalk_library_path(glicko2_ranker, library('glicko2_ranker/')).
 logtalk_library_path(glicko2_periodic_ranker, library('glicko2_periodic_ranker/')).
+logtalk_library_path(gpx, library('gpx/')).
 logtalk_library_path(gradient_boosting_classifier, library('gradient_boosting_classifier/')).
 logtalk_library_path(gradient_boosting_regression, library('gradient_boosting_regression/')).
 logtalk_library_path(grammars, library('grammars/')).
