@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on August 1, 2026
+##   Last updated on August 2, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -326,6 +326,7 @@ sed '1,19d' ../../../library/typeid/NOTES.md | pandoc -f gfm -t rst -o libraries
 sed '1,19d' ../../../library/types/NOTES.md | pandoc -f gfm -t rst -o libraries/types.rst
 sed '1,19d' ../../../library/tzif/NOTES.md | pandoc -f gfm -t rst -o libraries/tzif.rst
 sed '1,19d' ../../../library/ulid/NOTES.md | pandoc -f gfm -t rst -o libraries/ulid.rst
+sed '1,19d' ../../../library/umap_projection/NOTES.md | pandoc -f gfm -t rst -o libraries/umap_projection.rst
 cat ../../../library/unicode_data/README.md | pandoc -f gfm -t rst -o libraries/unicode_data.rst
 sed '1,19d' ../../../library/union_find/NOTES.md | pandoc -f gfm -t rst -o libraries/union_find.rst
 sed '1,19d' ../../../library/url/NOTES.md | pandoc -f gfm -t rst -o libraries/url.rst

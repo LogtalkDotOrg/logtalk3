@@ -275,6 +275,7 @@ directory in the ``NOTES.md`` file.
    types
    tzif
    ulid
+   umap_projection
    unicode_data
    union_find
    url

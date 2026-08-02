@@ -117,7 +117,7 @@ Library groups
 	- Dimension reduction:
 		`dimension_reduction_protocols`, `ica_projection`, `kernel_pca_projection`, `lda_projection`,
 	    `nmf_projection`, `pca_projection`, `pls_projection`, `probabilistic_pca_projection`, and
-	    `random_projection`, `truncated_svd_projection`, and `tsne_projection`.
+	    `random_projection`, `truncated_svd_projection`, `tsne_projection`, and `umap_projection`.
 	- Pattern mining:
 		`pattern_mining_protocols`, `frequent_pattern_mining_protocols`,
 		`sequential_pattern_mining_protocols`, `apriori_pattern_miner`, `clo_span_pattern_miner`,

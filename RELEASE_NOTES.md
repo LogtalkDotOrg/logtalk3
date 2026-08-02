@@ -22,8 +22,8 @@ RELEASE NOTES
 =============
 
 
-3.102.0 - September ??, 2026
-============================
+3.102.0 - August ??, 2026
+=========================
 
 Prolog adapter and integration files
 ------------------------------------
@@ -64,6 +64,10 @@ clusterer for continuous datasets.
 
 * ADDED: New `tsne_projection` library implementing exact t-distributed
 Stochastic Neighbor Embedding dimension reduction for continuous datasets.
+
+* ADDED: New `umap_projection` library implementing Uniform Manifold
+Approximation and Projection dimension reduction for continuous, categorical,
+and mixed datasets.
 
 * ADDED: New `sqids` library for encoding lists of non-negative integers into
 short, obfuscated (but not encrypted), URL-safe identifiers.

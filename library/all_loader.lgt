@@ -145,6 +145,7 @@
 		random_projection(loader),
 		truncated_svd_projection(loader),
 		tsne_projection(loader),
+		umap_projection(loader),
 		clustering_protocols(loader),
 		agglomerative_clusterer(loader),
 		dbscan_clusterer(loader),

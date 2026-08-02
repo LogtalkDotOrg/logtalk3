@@ -42,6 +42,8 @@ Features
 - Supports early exaggeration, momentum, and adaptive coordinate gains.
 - Provides reproducible Gaussian initialization without changing caller
   RNG state.
+- Supports missing continuous values represented by variables using mean
+  imputation.
 - Exports learned embeddings as ordinary predicate clauses.
 - Transforms new instances by optimizing one coordinate against the
   fixed training embedding.
@@ -69,8 +71,11 @@ Limitations
   coordinates or model interactions among multiple new points.
 - No inverse transformation from embedding coordinates to original
   attributes is provided.
-- Only complete datasets with continuous, numeric attributes are
-  supported. Missing values and categorical attributes are rejected.
+- Categorical attributes are not supported.
+- Missing continuous values must be represented by variables in present
+  ``Attribute-Value`` bindings. Omitted, duplicate, or undeclared
+  bindings are rejected, as are attributes with no observed training
+  values.
 
 Options
 -------
@@ -104,6 +109,15 @@ Usage
 
    | ?- tsne_projection::transform(DimensionReducer, [x-2.0, y-4.0, z-6.0], ReducedInstance).
 
+Missing continuous values are written as variables. Encoder means and
+scales are computed from observed numeric training values only. A
+missing value is then encoded as normalized zero, which is equivalent to
+imputing the observed training mean:
+
+::
+
+   | ?- tsne_projection::transform(DimensionReducer, [x-_, y-4.0, z-6.0], ReducedInstance).
+
 The out-of-sample transformation is an approximate independent
 extension. Transforming several new instances separately is not
 equivalent to jointly refitting t-SNE with those instances included in
@@ -121,6 +135,8 @@ Learned reducers use the following representation:
 The reducer stores encoded training rows because t-SNE does not learn a
 linear projection matrix. Diagnostics include convergence information
 and the initial and final unexaggerated Kullback-Leibler divergences.
+The preprocessing diagnostics include
+``missing_values(mean_imputation)``.
 
 References
 ----------

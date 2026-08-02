@@ -328,6 +328,7 @@
 <li class="toctree-l2"><a class="reference internal" href="types.html"><code class="docutils literal notranslate"><span class="pre">types</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="tzif.html"><code class="docutils literal notranslate"><span class="pre">tzif</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ulid.html"><code class="docutils literal notranslate"><span class="pre">ulid</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="umap_projection.html"><code class="docutils literal notranslate"><span class="pre">umap_projection</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="unicode_data.html"><code class="docutils literal notranslate"><span class="pre">unicode_data</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="union_find.html"><code class="docutils literal notranslate"><span class="pre">union_find</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="url.html"><code class="docutils literal notranslate"><span class="pre">url</span></code></a></li>
@@ -413,6 +414,8 @@ link in a web browser.</p>
 <li><p>Supports early exaggeration, momentum, and adaptive coordinate gains.</p></li>
 <li><p>Provides reproducible Gaussian initialization without changing caller
 RNG state.</p></li>
+<li><p>Supports missing continuous values represented by variables using mean
+imputation.</p></li>
 <li><p>Exports learned embeddings as ordinary predicate clauses.</p></li>
 <li><p>Transforms new instances by optimizing one coordinate against the
 fixed training embedding.</p></li>
@@ -441,8 +444,11 @@ embedding and is only an approximation; it does not update existing
 coordinates or model interactions among multiple new points.</p></li>
 <li><p>No inverse transformation from embedding coordinates to original
 attributes is provided.</p></li>
-<li><p>Only complete datasets with continuous, numeric attributes are
-supported. Missing values and categorical attributes are rejected.</p></li>
+<li><p>Categorical attributes are not supported.</p></li>
+<li><p>Missing continuous values must be represented by variables in present
+<code class="docutils literal notranslate"><span class="pre">Attribute-Value</span></code> bindings. Omitted, duplicate, or undeclared
+bindings are rejected, as are attributes with no observed training
+values.</p></li>
 </ul>
 </section>
 <section id="options">
@@ -476,6 +482,13 @@ default is <code class="docutils literal notranslate"><span class="pre">1357911<
 | <span class="o">?-</span> tsne_projection<span class="o">::</span>transform(<span class="nv">DimensionReducer</span>, [x<span class="o">-</span><span class="m">2.0</span>, y<span class="o">-</span><span class="m">4.0</span>, z<span class="o">-</span><span class="m">6.0</span>], <span class="nv">ReducedInstance</span>).
 </pre></div>
 </div>
+<p>Missing continuous values are written as variables. Encoder means and
+scales are computed from observed numeric training values only. A
+missing value is then encoded as normalized zero, which is equivalent to
+imputing the observed training mean:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> tsne_projection<span class="o">::</span>transform(<span class="nv">DimensionReducer</span>, [x<span class="o">-</span><span class="nv">_</span>, y<span class="o">-</span><span class="m">4.0</span>, z<span class="o">-</span><span class="m">6.0</span>], <span class="nv">ReducedInstance</span>).
+</pre></div>
+</div>
 <p>The out-of-sample transformation is an approximate independent
 extension. Transforming several new instances separately is not
 equivalent to jointly refitting t-SNE with those instances included in
@@ -489,7 +502,9 @@ the training dataset.</p>
 </div>
 <p>The reducer stores encoded training rows because t-SNE does not learn a
 linear projection matrix. Diagnostics include convergence information
-and the initial and final unexaggerated Kullback-Leibler divergences.</p>
+and the initial and final unexaggerated Kullback-Leibler divergences.
+The preprocessing diagnostics include
+<code class="docutils literal notranslate"><span class="pre">missing_values(mean_imputation)</span></code>.</p>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
