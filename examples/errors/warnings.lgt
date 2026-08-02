@@ -522,6 +522,10 @@
 		;	true
 		).
 
+	redundant :-
+		!,
+		throw(err).
+
 :- end_object.
 
 

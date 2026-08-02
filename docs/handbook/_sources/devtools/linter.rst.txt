@@ -71,6 +71,7 @@ Lint checks include:
 - Missing parentheses around if-then-else and disjunction control
   constructs in the presence of cuts in the first argument
 - Cuts in clauses for multifile predicates
+- Cuts followed by goals that throw an error
 - Missing cut in repeat loops
 - Possible non-steadfast predicate definitions
 - Non-tail recursive predicate definitions

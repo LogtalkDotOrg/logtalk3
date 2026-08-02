@@ -22,9 +22,9 @@
 :- category(tutor_explanations).
 
 	:- info([
-		version is 0:87:0,
+		version is 0:88:0,
 		author is 'Paulo Moura',
-		date is 2026-03-30,
+		date is 2026-08-02,
 		comment is 'This category provides explanations and suggestions to selected compiler and developer tool warning and error messages.'
 	]).
 
@@ -1129,6 +1129,12 @@
 			'loss of precision when converting from decimal to binary representation.'-[], nl,
 			'Check instead if the float values are within a given epsilon. The "float"'-[], nl,
 			'library object provides several predicates for comparing floats.'-[], nl, nl
+		].
+
+	explain(suspicious_call(_, _, _, _, _, reason(useless_cut))) -->
+		[	'Throwing an exception unwinds execution to the nearest matching catch/3 call,'-[], nl,
+			'discarding all intervening choice points. Thus, a cut immediately before a'-[], nl,
+			'goal that is known to throw an exception is useless and should be removed.'-[], nl, nl
 		].
 
 	% encoding/1 directive messages

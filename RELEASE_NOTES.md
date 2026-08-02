@@ -25,6 +25,12 @@ RELEASE NOTES
 3.102.0 - August ??, 2026
 =========================
 
+Logtalk compiler and runtime
+----------------------------
+
+* ADDED: New linter warning when a cut is followed by a goal that throws an
+error. Controlled by the `suspicious_calls` flag.
+
 Prolog adapter and integration files
 ------------------------------------
 
@@ -116,11 +122,17 @@ Tools
 
 * IMPROVED: Tests for the `lgtunit` tool to be less verbose.
 
+* UPDATED: The `tutor` tool to explain the new linter warning on a cut
+followed by a goal that throws an error.
+
 Examples
 --------
 
 * ADDED: New `http_sse_ticker` example illustrating the use of the new
 `http_sse` library.
+
+* UPDATED: The `errors` example to illustrate the new linter warning on a cut
+followed by a goal that throws an error.
 
 Installers and installation scripts
 -----------------------------------

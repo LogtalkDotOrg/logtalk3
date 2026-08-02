@@ -22,9 +22,9 @@
 :- category(core_messages).
 
 	:- info([
-		version is 1:148:0,
+		version is 1:149:0,
 		author is 'Paulo Moura',
-		date is 2026-06-03,
+		date is 2026-08-02,
 		comment is 'Logtalk core (compiler and runtime) default message tokenization.'
 	]).
 
@@ -1058,6 +1058,8 @@
 		['as ~w'-[Text], nl].
 	suspicious_call_reason(due_to(Text)) -->
 		['due to ~w'-[Text], nl].
+	suspicious_call_reason(useless_cut) -->
+		['as a cut followed by a goal that throws an error is useless'-[], nl].
 
 	missing_entities([]) -->
 		[].
