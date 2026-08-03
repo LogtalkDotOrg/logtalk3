@@ -37,6 +37,7 @@ directory in the ``NOTES.md`` file.
    arbitrary
    arrangements
    assignvars
+   association_rule_miner
    avro
    base32
    base58

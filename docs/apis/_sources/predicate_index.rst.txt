@@ -1188,6 +1188,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`assignvarsp <assignvarsp/0::assignable/2>`
 
+``association_rule_miner_options/2``
+------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`association_rule_miner_protocol <association_rule_miner_protocol/0::association_rule_miner_options/2>`
+
 ``atom_string/2``
 -----------------
 
@@ -2473,6 +2483,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::check_anomaly_detector/1>`
+
+``check_association_rule_miner/1``
+----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`association_rule_miner_protocol <association_rule_miner_protocol/0::check_association_rule_miner/1>`
 
 ``check_classifier/1``
 ----------------------
@@ -5569,6 +5589,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::diagnostic/2>`
+* :ref:`association_rule_miner_protocol <association_rule_miner_protocol/0::diagnostic/2>`
 * :ref:`classifier_protocol <classifier_protocol/0::diagnostic/2>`
 * :ref:`clusterer_protocol <clusterer_protocol/0::diagnostic/2>`
 * :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::diagnostic/2>`
@@ -5626,6 +5647,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::diagnostics/2>`
+* :ref:`association_rule_miner_protocol <association_rule_miner_protocol/0::diagnostics/2>`
 * :ref:`classifier_protocol <classifier_protocol/0::diagnostics/2>`
 * :ref:`clusterer_protocol <clusterer_protocol/0::diagnostics/2>`
 * :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::diagnostics/2>`
@@ -7806,6 +7828,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::export_to_clauses/4>`
+* :ref:`association_rule_miner_protocol <association_rule_miner_protocol/0::export_to_clauses/4>`
 * :ref:`classifier_protocol <classifier_protocol/0::export_to_clauses/4>`
 * :ref:`clusterer_protocol <clusterer_protocol/0::export_to_clauses/4>`
 * :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::export_to_clauses/4>`
@@ -7822,6 +7845,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::export_to_file/4>`
+* :ref:`association_rule_miner_protocol <association_rule_miner_protocol/0::export_to_file/4>`
 * :ref:`classifier_protocol <classifier_protocol/0::export_to_file/4>`
 * :ref:`clusterer_protocol <clusterer_protocol/0::export_to_file/4>`
 * :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::export_to_file/4>`
@@ -15417,7 +15441,18 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`association_rule_miner_protocol <association_rule_miner_protocol/0::mine/3>`
 * :ref:`pattern_miner_protocol <pattern_miner_protocol/0::mine/3>`
+
+``mine/4``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`association_rule_miner_protocol <association_rule_miner_protocol/0::mine/4>`
 
 ``minimum_enclosing_circle/3``
 ------------------------------
@@ -19772,6 +19807,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::print_anomaly_detector/1>`
 
+``print_association_rule_miner/1``
+----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`association_rule_miner_protocol <association_rule_miner_protocol/0::print_association_rule_miner/1>`
+
 ``print_classifier/1``
 ----------------------
 
@@ -22962,6 +23007,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`databasep <databasep/0::rule/4>`
+
+``rule_metric/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`association_rule_miner_protocol <association_rule_miner_protocol/0::rule_metric/3>`
 
 ``rules/1``
 -----------
@@ -27490,6 +27545,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`anomaly_detector_protocol <anomaly_detector_protocol/0::valid_anomaly_detector/1>`
+
+``valid_association_rule_miner/1``
+----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`association_rule_miner_protocol <association_rule_miner_protocol/0::valid_association_rule_miner/1>`
 
 ``valid_channel_reassembly_state/1``
 ------------------------------------

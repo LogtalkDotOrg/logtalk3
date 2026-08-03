@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on August 2, 2026
+%  Last updated on August 3, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -42,6 +42,7 @@ logtalk_library_path(apriori_pattern_miner, library('apriori_pattern_miner/')).
 logtalk_library_path(arbitrary, library('arbitrary/')).
 logtalk_library_path(arrangements, library('arrangements/')).
 logtalk_library_path(assignvars, library('assignvars/')).
+logtalk_library_path(association_rule_miner, library('association_rule_miner/')).
 logtalk_library_path(avro, library('avro/')).
 logtalk_library_path(base32, library('base32/')).
 logtalk_library_path(base58, library('base58/')).

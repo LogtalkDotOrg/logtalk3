@@ -1,0 +1,274 @@
+.. index:: single: association_rule_miner_protocol
+.. _association_rule_miner_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``association_rule_miner_protocol``
+===================================
+
+Protocol for association rule miners deriving scored rules from mined frequent patterns.
+
+| **Availability:** 
+|    ``logtalk_load(association_rule_miner(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-03
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: mine/4
+.. _association_rule_miner_protocol/0::mine/4:
+
+``mine/4``
+^^^^^^^^^^
+
+Derives association rules from a mined pattern result and its dataset using the specified options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``mine(Dataset,PatternMiner,AssociationRuleMiner,Options)``
+| **Mode and number of proofs:**
+|    ``mine(+object_identifier,+compound,-compound,+list(compound))`` - ``one``
+
+
+------------
+
+.. index:: mine/3
+.. _association_rule_miner_protocol/0::mine/3:
+
+``mine/3``
+^^^^^^^^^^
+
+Derives association rules from a mined pattern result and its dataset using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``mine(Dataset,PatternMiner,AssociationRuleMiner)``
+| **Mode and number of proofs:**
+|    ``mine(+object_identifier,+compound,-compound)`` - ``one``
+
+
+------------
+
+.. index:: diagnostics/2
+.. _association_rule_miner_protocol/0::diagnostics/2:
+
+``diagnostics/2``
+^^^^^^^^^^^^^^^^^
+
+Returns diagnostics and metadata associated with an association rule miner result.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostics(AssociationRuleMiner,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``diagnostics(+compound,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: diagnostic/2
+.. _association_rule_miner_protocol/0::diagnostic/2:
+
+``diagnostic/2``
+^^^^^^^^^^^^^^^^
+
+Tests or enumerates individual diagnostics metadata terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostic(AssociationRuleMiner,Diagnostic)``
+| **Mode and number of proofs:**
+|    ``diagnostic(+compound,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: association_rule_miner_options/2
+.. _association_rule_miner_protocol/0::association_rule_miner_options/2:
+
+``association_rule_miner_options/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the effective options recorded in an association rule miner result.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``association_rule_miner_options(AssociationRuleMiner,Options)``
+| **Mode and number of proofs:**
+|    ``association_rule_miner_options(+compound,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: rule_metric/3
+.. _association_rule_miner_protocol/0::rule_metric/3:
+
+``rule_metric/3``
+^^^^^^^^^^^^^^^^^
+
+Computes, tests, or enumerates on-demand metrics for a rule in an association rule miner result. The supported metrics are ``leverage(Value)``, ``jaccard(Value)``, ``cosine(Value)``, and ``kulczynski(Value)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rule_metric(AssociationRuleMiner,Rule,Metric)``
+| **Mode and number of proofs:**
+|    ``rule_metric(+compound,+compound,?compound)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: check_association_rule_miner/1
+.. _association_rule_miner_protocol/0::check_association_rule_miner/1:
+
+``check_association_rule_miner/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that the argument is a structurally valid association rule miner result, throwing an exception otherwise.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_association_rule_miner(AssociationRuleMiner)``
+| **Mode and number of proofs:**
+|    ``check_association_rule_miner(@compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``AssociationRuleMiner`` is a variable:
+|        ``instantiation_error``
+|    ``AssociationRuleMiner`` is neither a variable nor a valid association rule miner result:
+|        ``domain_error(association_rule_miner,AssociationRuleMiner)``
+
+
+------------
+
+.. index:: valid_association_rule_miner/1
+.. _association_rule_miner_protocol/0::valid_association_rule_miner/1:
+
+``valid_association_rule_miner/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+True when ``check_association_rule_miner/1`` succeeds for the argument without throwing an exception.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_association_rule_miner(AssociationRuleMiner)``
+| **Mode and number of proofs:**
+|    ``valid_association_rule_miner(@compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: export_to_clauses/4
+.. _association_rule_miner_protocol/0::export_to_clauses/4:
+
+``export_to_clauses/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts an association rule miner result into a list of predicate clauses.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``export_to_clauses(Dataset,AssociationRuleMiner,Functor,Clauses)``
+| **Mode and number of proofs:**
+|    ``export_to_clauses(+object_identifier,+compound,+callable,-list(clause))`` - ``one``
+
+
+------------
+
+.. index:: export_to_file/4
+.. _association_rule_miner_protocol/0::export_to_file/4:
+
+``export_to_file/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Exports an association rule miner result to a file.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``export_to_file(Dataset,AssociationRuleMiner,Functor,File)``
+| **Mode and number of proofs:**
+|    ``export_to_file(+object_identifier,+compound,+callable,+atom)`` - ``one``
+
+
+------------
+
+.. index:: print_association_rule_miner/1
+.. _association_rule_miner_protocol/0::print_association_rule_miner/1:
+
+``print_association_rule_miner/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Prints an association rule miner result to the current output stream in a human-readable format.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_association_rule_miner(AssociationRuleMiner)``
+| **Mode and number of proofs:**
+|    ``print_association_rule_miner(+compound)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`pattern_miner_protocol <pattern_miner_protocol/0>`, :ref:`transaction_dataset_protocol <transaction_dataset_protocol/0>`, :ref:`sequence_dataset_protocol <sequence_dataset_protocol/0>`
+

@@ -88,6 +88,7 @@ Foreach-Object {
 (Get-Content ../../../library/arbitrary/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/arbitrary.rst
 (Get-Content ../../../library/arrangements/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/arrangements.rst
 (Get-Content ../../../library/assignvars/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/assignvars.rst
+(Get-Content ../../../library/association_rule_miner/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/association_rule_miner.rst
 (Get-Content ../../../library/avro/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/avro.rst
 (Get-Content ../../../library/base32/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/base32.rst
 (Get-Content ../../../library/base58/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/base58.rst

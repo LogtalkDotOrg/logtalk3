@@ -120,8 +120,10 @@ Library groups
 	    `random_projection`, `truncated_svd_projection`, `tsne_projection`, and `umap_projection`.
 	- Pattern mining:
 		`pattern_mining_protocols`, `frequent_pattern_mining_protocols`,
-		`sequential_pattern_mining_protocols`, `apriori_pattern_miner`, `clo_span_pattern_miner`,
-		`eclat_pattern_miner`, `fp_growth_pattern_miner`, `gsp_pattern_miner`, `prefix_span_pattern_miner`, and `spade_pattern_miner`.
+		`sequential_pattern_mining_protocols`, `association_rule_miner`,
+        `apriori_pattern_miner`, `clo_span_pattern_miner`, `eclat_pattern_miner`,
+        `fp_growth_pattern_miner`, `gsp_pattern_miner`, `prefix_span_pattern_miner`,
+        and `spade_pattern_miner`.
 
 In addition to the loader-based libraries, this directory also contains a
 small number of standalone reusable entities, namely `attributes`, `cloning`,

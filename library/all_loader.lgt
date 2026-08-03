@@ -218,6 +218,7 @@
 		pattern_mining_protocols(loader),
 		frequent_pattern_mining_protocols(loader),
 		sequential_pattern_mining_protocols(loader),
+		association_rule_miner(loader),
 		apriori_pattern_miner(loader),
 		eclat_pattern_miner(loader),
 		fp_growth_pattern_miner(loader),

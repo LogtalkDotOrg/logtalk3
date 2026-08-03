@@ -74,6 +74,11 @@ and querying integer partitions.
 
 * ADDED: New `mqtt` library implementing a MQTT 5.0 client.
 
+* ADDED: New `association_rule_miner` library implementing a association rule
+miner deriving confidence- and lift-scored rules from frequent itemsets and
+sequential patterns, with leverage and several similarity metrics available
+on demand.
+
 * ADDED: New `spectral_clusterer` library implementing a normalized spectral
 clusterer for continuous datasets.
 

@@ -1,0 +1,98 @@
+.. index:: single: association_rule_miner_common
+.. _association_rule_miner_common/0:
+
+.. rst-class:: right
+
+**category**
+
+``association_rule_miner_common``
+=================================
+
+Shared predicates for association rule miner diagnostics, options, validation, and export.
+
+| **Availability:** 
+|    ``logtalk_load(association_rule_miner(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-03
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Implements:**
+|    ``public`` :ref:`association_rule_miner_protocol <association_rule_miner_protocol/0>`
+| **Extends:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`format <format/0>`
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`association_rule_miner_protocol/0::association_rule_miner_options/2`  :ref:`association_rule_miner_protocol/0::check_association_rule_miner/1`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`association_rule_miner_protocol/0::diagnostic/2`  :ref:`association_rule_miner_protocol/0::diagnostics/2`  :ref:`association_rule_miner_protocol/0::export_to_clauses/4`  :ref:`association_rule_miner_protocol/0::export_to_file/4`  :ref:`association_rule_miner_protocol/0::mine/3`  :ref:`association_rule_miner_protocol/0::mine/4`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`association_rule_miner_protocol/0::print_association_rule_miner/1`  :ref:`association_rule_miner_protocol/0::rule_metric/3`  :ref:`association_rule_miner_protocol/0::valid_association_rule_miner/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: rule_kind/2
+.. _association_rule_miner_common/0::rule_kind/2:
+
+``rule_kind/2``
+^^^^^^^^^^^^^^^
+
+Returns the rule kind implied by a supported source pattern miner.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``rule_kind(SourceMiner,RuleKind)``
+| **Mode and number of proofs:**
+|    ``rule_kind(+atom,-atom)`` - ``one``
+
+
+------------
+
+.. index:: check_rule_options/1
+.. _association_rule_miner_common/0::check_rule_options/1:
+
+``check_rule_options/1``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks cross-option constraints for effective association rule mining options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_rule_options(Options)``
+| **Mode and number of proofs:**
+|    ``check_rule_options(+list(compound))`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

@@ -21,6 +21,7 @@ Categories
    application_common <application_common_0>
    arbitrary <arbitrary_0>
    assertions_messages <assertions_messages_0>
+   association_rule_miner_common <association_rule_miner_common_0>
    best_first <best_first_0>
    blake2_core(Key,DigestSize) <blake2_core_2>
    ccsds_frames_types <ccsds_frames_types_0>
@@ -137,6 +138,7 @@ Objects
    assertions <assertions_0>
    assertions(Mode) <assertions_1>
    assignvars <assignvars_0>
+   association_rule_miner <association_rule_miner_0>
    atom <atom_0>
    atomic <atomic_0>
    automation_report <automation_report_0>
@@ -767,6 +769,7 @@ Protocols
    application_protocol <application_protocol_0>
    arrangements_protocol <arrangements_protocol_0>
    assignvarsp <assignvarsp_0>
+   association_rule_miner_protocol <association_rule_miner_protocol_0>
    cartesian_products_protocol <cartesian_products_protocol_0>
    ccsds_frame_protocol <ccsds_frame_protocol_0>
    ccsds_time_code_protocol <ccsds_time_code_protocol_0>

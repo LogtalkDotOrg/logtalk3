@@ -202,6 +202,18 @@ To load an entity, always load the library that includes it using the goal ``log
    assignvars <assignvars_0>
    assignvarsp <assignvarsp_0>
 
+``library/association_rule_miner/``
+-----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   association_rule_miner <association_rule_miner_0>
+   association_rule_miner_common <association_rule_miner_common_0>
+   association_rule_miner_protocol <association_rule_miner_protocol_0>
+
 ``library/avro/``
 -----------------
 
