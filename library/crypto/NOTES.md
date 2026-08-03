@@ -21,7 +21,36 @@ ________________________________________________________________________
 `crypto`
 ========
 
-This library provides transport-neutral cryptographic predicates.
+This library provides transport-neutral cryptographic predicates. Some of
+its functionality requires a backend supporting unbound integer arithmetic.
+
+
+API documentation
+-----------------
+
+Open the [../../apis/library_index.html#crypto](../../apis/library_index.html#crypto)
+link in a web browser.
+
+
+Loading
+-------
+
+To load the library, load the `loader.lgt` file:
+
+	| ?- logtalk_load(crypto(loader)).
+
+
+Testing
+-------
+
+To test this library, load the `tester.lgt` file:
+
+	| ?- logtalk_load(crypto(tester)).
+
+
+Scope
+-----
+
 The `crypto` object provides with the following public predicates:
 
 - `random_below/2`
@@ -166,29 +195,6 @@ The key-pair predicates use `random_bytes/2`. If `/dev/urandom` is unavailable,
 that predicate falls back to the library pseudo-random generator. Applications
 that require fail-closed cryptographic entropy must generate private key bytes
 externally and call `ed25519_public_key/2` or `x25519_public_key/2` instead.
-
-
-API documentation
------------------
-
-Open the [../../apis/library_index.html#crypto](../../apis/library_index.html#crypto)
-link in a web browser.
-
-
-Loading
--------
-
-To load the library, load the `loader.lgt` file:
-
-	| ?- logtalk_load(crypto(loader)).
-
-
-Testing
--------
-
-To test this library, load the `tester.lgt` file:
-
-	| ?- logtalk_load(crypto(tester)).
 
 
 Examples

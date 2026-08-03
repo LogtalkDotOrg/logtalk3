@@ -1,0 +1,64 @@
+.. index:: single: aes_common(KeySize,Nk,Nr)
+.. _aes_common/3:
+
+.. rst-class:: right
+
+**object**
+
+``aes_common(KeySize,Nk,Nr)``
+=============================
+
+* ``KeySize`` - Key size in bytes.
+* ``Nk`` - Key size in 32-bit words.
+* ``Nr`` - Number of encryption rounds.
+
+
+AES block cipher implementation shared by the AES-128, AES-192, and AES-256 objects.
+
+| **Availability:** 
+|    ``logtalk_load(block_ciphers(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-03
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`block_cipher_protocol <block_cipher_protocol/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`block_cipher_protocol/0::block_size/1`  :ref:`block_cipher_protocol/0::encrypt_block/3`  :ref:`block_cipher_protocol/0::key_size/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

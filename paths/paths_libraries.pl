@@ -50,6 +50,7 @@ logtalk_library_path(base64, library('base64/')).
 logtalk_library_path(base85, library('base85/')).
 logtalk_library_path(basic_types, library('basic_types/')).
 logtalk_library_path(bayesian_ridge_regression, library('bayesian_ridge_regression/')).
+logtalk_library_path(block_ciphers, library('block_ciphers/')).
 logtalk_library_path(borda_ranker, library('borda_ranker/')).
 logtalk_library_path(bradley_terry_ranker, library('bradley_terry_ranker/')).
 logtalk_library_path(bson, library('bson/')).

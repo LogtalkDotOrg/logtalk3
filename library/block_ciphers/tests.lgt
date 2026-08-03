@@ -1,0 +1,148 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
+%
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
+%
+%      http://www.apache.org/licenses/LICENSE-2.0
+%
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+:- object(tests,
+	extends(lgtunit)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-08-03,
+		comment is 'Unit tests for the "block_ciphers" library.'
+	]).
+
+	cover(aes128).
+	cover(aes192).
+	cover(aes256).
+	cover(aes_common(_, _, _)).
+
+	test(aes128_protocol_conformance, deterministic) :-
+		conforms_to_protocol(aes128, block_cipher_protocol).
+
+	test(aes192_protocol_conformance, deterministic) :-
+		conforms_to_protocol(aes192, block_cipher_protocol).
+
+	test(aes256_protocol_conformance, deterministic) :-
+		conforms_to_protocol(aes256, block_cipher_protocol).
+
+	test(aes_block_sizes, deterministic(Sizes == [16, 16, 16])) :-
+		aes128::block_size(Size128),
+		aes192::block_size(Size192),
+		aes256::block_size(Size256),
+		Sizes = [Size128, Size192, Size256].
+
+	test(aes_key_sizes, deterministic(Sizes == [16, 24, 32])) :-
+		aes128::key_size(Size128),
+		aes192::key_size(Size192),
+		aes256::key_size(Size256),
+		Sizes = [Size128, Size192, Size256].
+
+	test(aes128_fips_197, deterministic(Ciphertext == [0x69,0xC4,0xE0,0xD8,0x6A,0x7B,0x04,0x30,0xD8,0xCD,0xB7,0x80,0x70,0xB4,0xC5,0x5A])) :-
+		aes128::encrypt_block(
+			[0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x0A,0x0B,0x0C,0x0D,0x0E,0x0F],
+			[0x00,0x11,0x22,0x33,0x44,0x55,0x66,0x77,0x88,0x99,0xAA,0xBB,0xCC,0xDD,0xEE,0xFF],
+			Ciphertext
+		).
+
+	test(aes192_fips_197, deterministic(Ciphertext == [0xDD,0xA9,0x7C,0xA4,0x86,0x4C,0xDF,0xE0,0x6E,0xAF,0x70,0xA0,0xEC,0x0D,0x71,0x91])) :-
+		aes192::encrypt_block(
+			[0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x0A,0x0B,0x0C,0x0D,0x0E,0x0F,0x10,0x11,0x12,0x13,0x14,0x15,0x16,0x17],
+			[0x00,0x11,0x22,0x33,0x44,0x55,0x66,0x77,0x88,0x99,0xAA,0xBB,0xCC,0xDD,0xEE,0xFF],
+			Ciphertext
+		).
+
+	test(aes256_fips_197, deterministic(Ciphertext == [0x8E,0xA2,0xB7,0xCA,0x51,0x67,0x45,0xBF,0xEA,0xFC,0x49,0x90,0x4B,0x49,0x60,0x89])) :-
+		aes256::encrypt_block(
+			[0x00,0x01,0x02,0x03,0x04,0x05,0x06,0x07,0x08,0x09,0x0A,0x0B,0x0C,0x0D,0x0E,0x0F,0x10,0x11,0x12,0x13,0x14,0x15,0x16,0x17,0x18,0x19,0x1A,0x1B,0x1C,0x1D,0x1E,0x1F],
+			[0x00,0x11,0x22,0x33,0x44,0x55,0x66,0x77,0x88,0x99,0xAA,0xBB,0xCC,0xDD,0xEE,0xFF],
+			Ciphertext
+		).
+
+	test(aes128_nist_sp_800_38a, deterministic(Ciphertext == [0x3A,0xD7,0x7B,0xB4,0x0D,0x7A,0x36,0x60,0xA8,0x9E,0xCA,0xF3,0x24,0x66,0xEF,0x97])) :-
+		aes128::encrypt_block(
+			[0x2B,0x7E,0x15,0x16,0x28,0xAE,0xD2,0xA6,0xAB,0xF7,0x15,0x88,0x09,0xCF,0x4F,0x3C],
+			[0x6B,0xC1,0xBE,0xE2,0x2E,0x40,0x9F,0x96,0xE9,0x3D,0x7E,0x11,0x73,0x93,0x17,0x2A],
+			Ciphertext
+		).
+
+	test(aes192_nist_sp_800_38a, deterministic(Ciphertext == [0xBD,0x33,0x4F,0x1D,0x6E,0x45,0xF2,0x5F,0xF7,0x12,0xA2,0x14,0x57,0x1F,0xA5,0xCC])) :-
+		aes192::encrypt_block(
+			[0x8E,0x73,0xB0,0xF7,0xDA,0x0E,0x64,0x52,0xC8,0x10,0xF3,0x2B,0x80,0x90,0x79,0xE5,0x62,0xF8,0xEA,0xD2,0x52,0x2C,0x6B,0x7B],
+			[0x6B,0xC1,0xBE,0xE2,0x2E,0x40,0x9F,0x96,0xE9,0x3D,0x7E,0x11,0x73,0x93,0x17,0x2A],
+			Ciphertext
+		).
+
+	test(aes256_nist_sp_800_38a, deterministic(Ciphertext == [0xF3,0xEE,0xD1,0xBD,0xB5,0xD2,0xA0,0x3C,0x06,0x4B,0x5A,0x7E,0x3D,0xB1,0x81,0xF8])) :-
+		aes256::encrypt_block(
+			[0x60,0x3D,0xEB,0x10,0x15,0xCA,0x71,0xBE,0x2B,0x73,0xAE,0xF0,0x85,0x7D,0x77,0x81,0x1F,0x35,0x2C,0x07,0x3B,0x61,0x08,0xD7,0x2D,0x98,0x10,0xA3,0x09,0x14,0xDF,0xF4],
+			[0x6B,0xC1,0xBE,0xE2,0x2E,0x40,0x9F,0x96,0xE9,0x3D,0x7E,0x11,0x73,0x93,0x17,0x2A],
+			Ciphertext
+		).
+
+	test(aes128_variable_key, error(instantiation_error)) :-
+		aes128::encrypt_block(_, [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], _).
+
+	test(aes128_partial_key, error(instantiation_error)) :-
+		aes128::encrypt_block([0| _], [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], _).
+
+	test(aes128_non_list_key, error(type_error(list(byte,16), foo))) :-
+		aes128::encrypt_block(foo, [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], _).
+
+	test(aes128_short_key, error(type_error(list(byte,16), [0]))) :-
+		aes128::encrypt_block([0], [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], _).
+
+	test(aes128_long_key, error(type_error(list(byte,16), [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]))) :-
+		aes128::encrypt_block([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], _).
+
+	test(aes192_short_key, error(type_error(list(byte,24), [0]))) :-
+		aes192::encrypt_block([0], [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], _).
+
+	test(aes256_short_key, error(type_error(list(byte,32), [0]))) :-
+		aes256::encrypt_block([0], [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], _).
+
+	test(aes128_non_integer_key_byte, error(type_error(integer, a))) :-
+		aes128::encrypt_block([a,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], _).
+
+	test(aes128_invalid_key_byte, error(domain_error(byte, 256))) :-
+		aes128::encrypt_block([256,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], _).
+
+	test(aes128_variable_plaintext, error(instantiation_error)) :-
+		aes128::encrypt_block([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], _, _).
+
+	test(aes128_partial_plaintext, error(instantiation_error)) :-
+		aes128::encrypt_block([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], [0| _], _).
+
+	test(aes128_non_list_plaintext, error(type_error(list(byte,16), foo))) :-
+		aes128::encrypt_block([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], foo, _).
+
+	test(aes128_short_plaintext, error(type_error(list(byte,16), [0]))) :-
+		aes128::encrypt_block([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], [0], _).
+
+	test(aes128_long_plaintext, error(type_error(list(byte,16), [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]))) :-
+		aes128::encrypt_block([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], _).
+
+	test(aes128_non_integer_plaintext_byte, error(type_error(integer, a))) :-
+		aes128::encrypt_block([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], [a,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], _).
+
+	test(aes128_invalid_plaintext_byte, error(domain_error(byte, 256))) :-
+		aes128::encrypt_block([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], [256,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], _).
+
+:- end_object.

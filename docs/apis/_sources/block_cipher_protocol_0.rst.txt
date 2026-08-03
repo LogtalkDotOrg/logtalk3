@@ -1,0 +1,124 @@
+.. index:: single: block_cipher_protocol
+.. _block_cipher_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``block_cipher_protocol``
+=========================
+
+Protocol for one-shot encryption using a block cipher.
+
+| **Availability:** 
+|    ``logtalk_load(block_ciphers(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-03
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: encrypt_block/3
+.. _block_cipher_protocol/0::encrypt_block/3:
+
+``encrypt_block/3``
+^^^^^^^^^^^^^^^^^^^
+
+Encrypts a plaintext block using the given key.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``encrypt_block(Key,PlaintextBlock,CiphertextBlock)``
+| **Mode and number of proofs:**
+|    ``encrypt_block(+list(byte),+list(byte),--list(byte))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Key`` or ``PlaintextBlock`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Key`` is neither a variable nor a list of the required number of bytes:
+|        ``type_error(list(byte,KeySize),Key)``
+|    ``PlaintextBlock`` is neither a variable nor a list of the required number of bytes:
+|        ``type_error(list(byte,BlockSize),PlaintextBlock)``
+|    ``Key`` or ``PlaintextBlock`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``Key`` or ``PlaintextBlock`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+
+
+------------
+
+.. index:: block_size/1
+.. _block_cipher_protocol/0::block_size/1:
+
+``block_size/1``
+^^^^^^^^^^^^^^^^
+
+Returns the cipher block size in bytes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``block_size(BlockSize)``
+| **Mode and number of proofs:**
+|    ``block_size(--integer)`` - ``one``
+
+
+------------
+
+.. index:: key_size/1
+.. _block_cipher_protocol/0::key_size/1:
+
+``key_size/1``
+^^^^^^^^^^^^^^
+
+Returns the cipher key size in bytes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``key_size(KeySize)``
+| **Mode and number of proofs:**
+|    ``key_size(--integer)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

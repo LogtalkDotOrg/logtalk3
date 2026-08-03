@@ -276,6 +276,20 @@ To load an entity, always load the library that includes it using the goal ``log
 
    bayesian_ridge_regression <bayesian_ridge_regression_0>
 
+``library/block_ciphers/``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   aes128 <aes128_0>
+   aes192 <aes192_0>
+   aes256 <aes256_0>
+   aes_common(KeySize,Nk,Nr) <aes_common_3>
+   block_cipher_protocol <block_cipher_protocol_0>
+
 ``library/borda_ranker/``
 -------------------------
 

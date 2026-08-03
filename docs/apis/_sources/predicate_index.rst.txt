@@ -1867,6 +1867,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`block_cipher_protocol <block_cipher_protocol/0::block_size/1>`
 * :ref:`hash_digest_protocol <hash_digest_protocol/0::block_size/1>`
 
 ``body/1``
@@ -7147,6 +7148,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`paseto <paseto/0::encrypt/4>`
+
+``encrypt_block/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`block_cipher_protocol <block_cipher_protocol/0::encrypt_block/3>`
 
 ``ensure/2``
 ------------
@@ -12619,6 +12630,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`pairs <pairs/0::key/2>`
+
+``key_size/1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`block_cipher_protocol <block_cipher_protocol/0::key_size/1>`
 
 ``key_type/2``
 --------------

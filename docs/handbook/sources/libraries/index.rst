@@ -45,6 +45,7 @@ directory in the ``NOTES.md`` file.
    base85
    basic_types
    bayesian_ridge_regression
+   block_ciphers
    borda_ranker
    bradley_terry_ranker
    bson

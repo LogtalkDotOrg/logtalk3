@@ -131,6 +131,10 @@ Objects
 
    a_star_interpreter(W) <a_star_interpreter_1>
    adaptive_boosting_classifier <adaptive_boosting_classifier_0>
+   aes128 <aes128_0>
+   aes192 <aes192_0>
+   aes256 <aes256_0>
+   aes_common(KeySize,Nk,Nr) <aes_common_3>
    after_event_registry <after_event_registry_0>
    agglomerative_clusterer <agglomerative_clusterer_0>
    amqp <amqp_0>
@@ -772,6 +776,7 @@ Protocols
    arrangements_protocol <arrangements_protocol_0>
    assignvarsp <assignvarsp_0>
    association_rule_miner_protocol <association_rule_miner_protocol_0>
+   block_cipher_protocol <block_cipher_protocol_0>
    cartesian_products_protocol <cartesian_products_protocol_0>
    ccsds_frame_protocol <ccsds_frame_protocol_0>
    ccsds_time_code_protocol <ccsds_time_code_protocol_0>

@@ -87,6 +87,7 @@
 <li class="toctree-l2"><a class="reference internal" href="base85.html"><code class="docutils literal notranslate"><span class="pre">base85</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="basic_types.html"><code class="docutils literal notranslate"><span class="pre">basic_types</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="bayesian_ridge_regression.html"><code class="docutils literal notranslate"><span class="pre">bayesian_ridge_regression</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="block_ciphers.html"><code class="docutils literal notranslate"><span class="pre">block_ciphers</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="borda_ranker.html"><code class="docutils literal notranslate"><span class="pre">borda_ranker</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="bradley_terry_ranker.html"><code class="docutils literal notranslate"><span class="pre">bradley_terry_ranker</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="bson.html"><code class="docutils literal notranslate"><span class="pre">bson</span></code></a></li>
@@ -115,6 +116,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scope">Scope</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
 </ul>
 </li>
@@ -388,8 +390,32 @@
              
   <section id="crypto">
 <span id="library-crypto"></span><h1><code class="docutils literal notranslate"><span class="pre">crypto</span></code><a class="headerlink" href="#crypto" title="Link to this heading"></a></h1>
-<p>This library provides transport-neutral cryptographic predicates. The
-<code class="docutils literal notranslate"><span class="pre">crypto</span></code> object provides with the following public predicates:</p>
+<p>This library provides transport-neutral cryptographic predicates. Some
+of its functionality requires a backend supporting unbound integer
+arithmetic.</p>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<p>Open the
+<a class="reference external" href="../../apis/library_index.html#crypto">../../apis/library_index.html#crypto</a>
+link in a web browser.</p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
+<p>To load the library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(crypto(loader)).
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this library, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(crypto(tester)).
+</pre></div>
+</div>
+</section>
+<section id="scope">
+<h2>Scope<a class="headerlink" href="#scope" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">crypto</span></code> object provides with the following public predicates:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">random_below/2</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">random_bytes/2</span></code></p></li>
@@ -529,25 +555,6 @@ unavailable, that predicate falls back to the library pseudo-random
 generator. Applications that require fail-closed cryptographic entropy
 must generate private key bytes externally and call
 <code class="docutils literal notranslate"><span class="pre">ed25519_public_key/2</span></code> or <code class="docutils literal notranslate"><span class="pre">x25519_public_key/2</span></code> instead.</p>
-<section id="api-documentation">
-<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
-<p>Open the
-<a class="reference external" href="../../apis/library_index.html#crypto">../../apis/library_index.html#crypto</a>
-link in a web browser.</p>
-</section>
-<section id="loading">
-<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
-<p>To load the library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(crypto(loader)).
-</pre></div>
-</div>
-</section>
-<section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
-<p>To test this library, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(crypto(tester)).
-</pre></div>
-</div>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>

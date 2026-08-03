@@ -55,9 +55,6 @@ Library
 `http_handler_protocol` (as a marker protocol) to simplify server code that
 defines routes.
 
-* ADDED: Support to the `hashes` library for generalized BLAKE2 cryptographic
-hash functions that accept both key an digest size parameters (per RFC 7693).
-
 * ADDED: New `http_sse` library implementing HTTP Server-Sent Events.
 
 * ADDED: New `paseto` library implementing Platform-Agnostic Security Tokens
@@ -98,6 +95,8 @@ short, obfuscated (but not encrypted), URL-safe identifiers.
 * ADDED: New `typeid` library implementing a type-safe, K-sortable, globally
 unique identifier (TypeID) generator.
 
+* ADDED: New `block_ciphers` library with AES 128/192/256 implementations.
+
 * ADDED: Support for Ed25519 (RFC 8032) public-key signatures to the `crypto`
 library (when using a backend supporting unbound integer arithmetic).
 
@@ -108,6 +107,9 @@ supporting unbound integer arithmetic).
 * ADDED: Support for X25519 key agreement and identity-authenticated ephemeral
 channels to the `crypto` library (when using a backend supporting unbound
 integer arithmetic).
+
+* ADDED: Support to the `hashes` library for generalized BLAKE2 cryptographic
+hash functions that accept both key an digest size parameters (per RFC 7693).
 
 * ADDED: Support to the `ranking_protocols` library for ordered multiplayer
 ranking datasets with ranked teams and weighted player participation, plus

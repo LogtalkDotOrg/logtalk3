@@ -182,6 +182,7 @@
 		crypto(loader),
 		hashes(loader),
 		hmac(loader),
+		block_ciphers(loader),
 		otp(loader),
 		jwt(loader),
 		paseto(loader),

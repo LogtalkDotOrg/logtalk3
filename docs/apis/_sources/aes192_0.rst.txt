@@ -1,0 +1,60 @@
+.. index:: single: aes192
+.. _aes192/0:
+
+.. rst-class:: right
+
+**object**
+
+``aes192``
+==========
+
+AES-192 block cipher.
+
+| **Availability:** 
+|    ``logtalk_load(block_ciphers(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-03
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`aes_common(24,6,12) <aes_common/3>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`block_cipher_protocol/0::block_size/1`  :ref:`block_cipher_protocol/0::encrypt_block/3`  :ref:`block_cipher_protocol/0::key_size/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`aes128 <aes128/0>`, :ref:`aes256 <aes256/0>`
+
