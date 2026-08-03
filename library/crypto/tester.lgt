@@ -31,12 +31,16 @@
 		logtalk_load(crypto, [debug(on), source_data(on), complements(restrict)]),
 		logtalk_load(xchacha20_poly1305, [debug(on), source_data(on)]),
 		logtalk_load(ed25519, [debug(on), source_data(on)]),
+		logtalk_load(x25519, [debug(on), source_data(on)]),
+		logtalk_load(authenticated_channel, [debug(on), source_data(on)]),
 		logtalk_load(lgtunit(loader)),
-		logtalk_load([tests, xchacha20_poly1305_tests, ed25519_tests], [hook(lgtunit)]),
+		logtalk_load([tests, xchacha20_poly1305_tests, ed25519_tests, x25519_tests, authenticated_channel_tests], [hook(lgtunit)]),
 		lgtunit::run_test_sets([
 			tests,
 			xchacha20_poly1305_tests,
-			ed25519_tests
+			ed25519_tests,
+			x25519_tests,
+			authenticated_channel_tests
 		])
 	)).
 

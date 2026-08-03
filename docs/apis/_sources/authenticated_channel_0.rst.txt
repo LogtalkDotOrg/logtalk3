@@ -1,0 +1,319 @@
+.. index:: single: authenticated_channel
+.. _authenticated_channel/0:
+
+.. rst-class:: right
+
+**category**
+
+``authenticated_channel``
+=========================
+
+Identity-authenticated ephemeral X25519 channels with directional XChaCha20-Poly1305 keys, strict counters, and per-message symmetric key ratcheting.
+
+| **Availability:** 
+|    ``logtalk_load(crypto(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-03
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Complements:**
+|    :ref:`crypto <crypto/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`sha256 <sha256/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: authenticated_channel_initiate/4
+.. _authenticated_channel/0::authenticated_channel_initiate/4:
+
+``authenticated_channel_initiate/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Creates a signed ephemeral-key Offer and PendingState for an initiator using IdentitySeed and the pinned ResponderIdentityPublicKey.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``authenticated_channel_initiate(IdentitySeed,ResponderIdentityPublicKey,Offer,PendingState)``
+| **Mode and number of proofs:**
+|    ``authenticated_channel_initiate(+list(byte),+list(byte),-compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``IdentitySeed`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``IdentitySeed`` is neither a variable nor a list of 32 bytes:
+|        ``type_error(list(byte,32),IdentitySeed)``
+|    ``IdentitySeed`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``IdentitySeed`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``ResponderIdentityPublicKey`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``ResponderIdentityPublicKey`` is neither a variable nor a list of 32 bytes:
+|        ``type_error(list(byte,32),ResponderIdentityPublicKey)``
+|    ``ResponderIdentityPublicKey`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``ResponderIdentityPublicKey`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+
+
+------------
+
+.. index:: authenticated_channel_accept/5
+.. _authenticated_channel/0::authenticated_channel_accept/5:
+
+``authenticated_channel_accept/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Verifies Offer against the pinned InitiatorIdentityPublicKey, creates a signed Response, and returns the responder Channel state.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``authenticated_channel_accept(IdentitySeed,InitiatorIdentityPublicKey,Offer,Response,Channel)``
+| **Mode and number of proofs:**
+|    ``authenticated_channel_accept(+list(byte),+list(byte),+compound,-compound,-compound)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``IdentitySeed`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``IdentitySeed`` is neither a variable nor a list of 32 bytes:
+|        ``type_error(list(byte,32),IdentitySeed)``
+|    ``IdentitySeed`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``IdentitySeed`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``InitiatorIdentityPublicKey`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``InitiatorIdentityPublicKey`` is neither a variable nor a list of 32 bytes:
+|        ``type_error(list(byte,32),InitiatorIdentityPublicKey)``
+|    ``InitiatorIdentityPublicKey`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``InitiatorIdentityPublicKey`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``Offer`` is a variable or contains a partial byte list or a byte list with an element which is a variable:
+|        ``instantiation_error``
+|    ``Offer`` is neither a variable nor a compound term:
+|        ``type_error(compound,Offer)``
+|    ``Offer`` is not a valid authenticated channel offer term:
+|        ``domain_error(authenticated_channel_offer,Offer)``
+|    ``Offer`` contains a key field which is not a list of 32 bytes:
+|        ``type_error(list(byte,32),Bytes)``
+|    ``Offer`` contains a signature field which is not a list of 64 bytes:
+|        ``type_error(list(byte,64),Signature)``
+|    ``Offer`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``Offer`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+
+
+------------
+
+.. index:: authenticated_channel_finalize/3
+.. _authenticated_channel/0::authenticated_channel_finalize/3:
+
+``authenticated_channel_finalize/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Verifies Response against the identity pinned in PendingState and returns the initiator Channel state.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``authenticated_channel_finalize(PendingState,Response,Channel)``
+| **Mode and number of proofs:**
+|    ``authenticated_channel_finalize(+compound,+compound,-compound)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``PendingState`` is a variable or contains a partial byte list or a byte list with an element which is a variable:
+|        ``instantiation_error``
+|    ``PendingState`` is neither a variable nor a compound term:
+|        ``type_error(compound,PendingState)``
+|    ``PendingState`` is not a valid authenticated channel pending-state term:
+|        ``domain_error(authenticated_channel_pending_state,PendingState)``
+|    ``PendingState`` contains a key field which is not a list of 32 bytes:
+|        ``type_error(list(byte,32),Bytes)``
+|    ``PendingState`` contains a signature field which is not a list of 64 bytes:
+|        ``type_error(list(byte,64),Signature)``
+|    ``PendingState`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``PendingState`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``Response`` is a variable or contains a partial byte list or a byte list with an element which is a variable:
+|        ``instantiation_error``
+|    ``Response`` is neither a variable nor a compound term:
+|        ``type_error(compound,Response)``
+|    ``Response`` is not a valid authenticated channel response term:
+|        ``domain_error(authenticated_channel_response,Response)``
+|    ``Response`` contains a key field which is not a list of 32 bytes:
+|        ``type_error(list(byte,32),Bytes)``
+|    ``Response`` contains a signature field which is not a list of 64 bytes:
+|        ``type_error(list(byte,64),Signature)``
+|    ``Response`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``Response`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+
+
+------------
+
+.. index:: authenticated_channel_encrypt/5
+.. _authenticated_channel/0::authenticated_channel_encrypt/5:
+
+``authenticated_channel_encrypt/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Encrypts and authenticates Plaintext and returns Message and the replacement Channel state. The caller must discard the input state.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``authenticated_channel_encrypt(Channel0,AAD,Plaintext,Message,Channel)``
+| **Mode and number of proofs:**
+|    ``authenticated_channel_encrypt(+compound,+list(byte),+list(byte),-compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Channel0`` is a variable or contains a partial byte list, a byte list with an element which is a variable, or a variable counter:
+|        ``instantiation_error``
+|    ``Channel0`` is neither a variable nor a compound term:
+|        ``type_error(compound,Channel0)``
+|    ``Channel0`` is not a valid authenticated channel state term:
+|        ``domain_error(authenticated_channel_state,Channel0)``
+|    ``Channel0`` contains a hash or key field which is not a list of 32 bytes:
+|        ``type_error(list(byte,32),Bytes)``
+|    ``Channel0`` contains a nonce-prefix field which is not a list of 16 bytes:
+|        ``type_error(list(byte,16),Bytes)``
+|    ``Channel0`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``Channel0`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``Channel0`` contains a counter which is not an integer:
+|        ``type_error(integer,Counter)``
+|    ``Channel0`` contains a negative counter:
+|        ``domain_error(non_negative_integer,Counter)``
+|    ``AAD`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``AAD`` is neither a variable nor a list of bytes:
+|        ``type_error(list(byte),AAD)``
+|    ``AAD`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``AAD`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``Plaintext`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``Plaintext`` is neither a variable nor a list of bytes:
+|        ``type_error(list(byte),Plaintext)``
+|    ``Plaintext`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``Plaintext`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``Channel0`` send counter is exhausted:
+|        ``resource_error(authenticated_channel_counter)``
+
+
+------------
+
+.. index:: authenticated_channel_decrypt/5
+.. _authenticated_channel/0::authenticated_channel_decrypt/5:
+
+``authenticated_channel_decrypt/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Authenticates and decrypts the next strictly ordered Message and returns Plaintext and the replacement Channel state. The caller must discard the input state.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``authenticated_channel_decrypt(Channel0,AAD,Message,Plaintext,Channel)``
+| **Mode and number of proofs:**
+|    ``authenticated_channel_decrypt(+compound,+list(byte),+compound,-list(byte),-compound)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``Channel0`` is a variable or contains a partial byte list, a byte list with an element which is a variable, or a variable counter:
+|        ``instantiation_error``
+|    ``Channel0`` is neither a variable nor a compound term:
+|        ``type_error(compound,Channel0)``
+|    ``Channel0`` is not a valid authenticated channel state term:
+|        ``domain_error(authenticated_channel_state,Channel0)``
+|    ``Channel0`` contains a hash or key field which is not a list of 32 bytes:
+|        ``type_error(list(byte,32),Bytes)``
+|    ``Channel0`` contains a nonce-prefix field which is not a list of 16 bytes:
+|        ``type_error(list(byte,16),Bytes)``
+|    ``Channel0`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``Channel0`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``Channel0`` contains a counter which is not an integer:
+|        ``type_error(integer,Counter)``
+|    ``Channel0`` contains a negative counter:
+|        ``domain_error(non_negative_integer,Counter)``
+|    ``AAD`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``AAD`` is neither a variable nor a list of bytes:
+|        ``type_error(list(byte),AAD)``
+|    ``AAD`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``AAD`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``Message`` is a variable or contains a partial byte list, a byte list with an element which is a variable, or a variable counter:
+|        ``instantiation_error``
+|    ``Message`` is neither a variable nor a compound term:
+|        ``type_error(compound,Message)``
+|    ``Message`` is not a valid authenticated channel message term:
+|        ``domain_error(authenticated_channel_message,Message)``
+|    ``Message`` counter is not an integer:
+|        ``type_error(integer,Counter)``
+|    ``Message`` counter is negative:
+|        ``domain_error(non_negative_integer,Counter)``
+|    ``Message`` ciphertext and tag is not a list of bytes:
+|        ``type_error(list(byte),CiphertextAndTag)``
+|    ``Message`` ciphertext and tag contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``Message`` ciphertext and tag contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``Message`` ciphertext and tag is shorter than 16 bytes:
+|        ``domain_error(minimum_byte_length(16),CiphertextAndTag)``
+|    ``Channel0`` receive counter is exhausted:
+|        ``resource_error(authenticated_channel_counter)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

@@ -414,6 +414,14 @@ signature public predicates are also available:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">ed25519_public_key/2</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ed25519_sign/3</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ed25519_verify/3</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x25519_keypair/2</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x25519_public_key/2</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x25519_shared_secret/3</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">authenticated_channel_initiate/4</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">authenticated_channel_accept/5</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">authenticated_channel_finalize/3</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">authenticated_channel_encrypt/5</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">authenticated_channel_decrypt/5</span></code></p></li>
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">random_below/2</span></code> predicate returns a uniformly distributed random
 integer greater than or equal to zero and less than the given exclusive
@@ -476,6 +484,51 @@ never touches secret data and is unaffected by that limitation. These
 four predicates are only available on backend Prolog compilers
 supporting unbounded integer arithmetic, since Curve25519 arithmetic is
 carried out modulo a 255-bit prime.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">x25519_keypair/2</span></code>, <code class="docutils literal notranslate"><span class="pre">x25519_public_key/2</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">x25519_shared_secret/3</span></code> predicates implement X25519 Diffie-Hellman
+key agreement (RFC 7748). Private keys and public keys are represented
+by 32-byte lists. Public-key derivation and shared-secret computation
+apply the RFC 7748 scalar clamping rules and mask the most significant
+bit of received u-coordinates. Shared-secret computation fails for an
+all-zero result, preventing the use of low-order public keys. These
+predicates require unbounded integer arithmetic. Although the Montgomery
+ladder has fixed control flow and uses arithmetic conditional swaps, the
+underlying Prolog big-integer operations are not guaranteed to be
+constant-time.</p>
+<p>The authenticated channel predicates compose Ed25519 identity
+signatures, ephemeral X25519 key agreement, HKDF-SHA-256, and
+XChaCha20-Poly1305. The initiator calls
+<code class="docutils literal notranslate"><span class="pre">authenticated_channel_initiate/4</span></code> with its identity seed and the
+responder Ed25519 public key obtained through a trusted out-of-band
+mechanism. The responder calls <code class="docutils literal notranslate"><span class="pre">authenticated_channel_accept/5</span></code> with
+its identity seed, the pinned initiator identity public key, and the
+offer. The initiator completes the handshake using
+<code class="docutils literal notranslate"><span class="pre">authenticated_channel_finalize/3</span></code>. Both signatures bind the protocol
+version, roles, both identity keys, and the ephemeral keys; the
+responder signature also binds the initiator offer signature.</p>
+<p>The handshake derives independent initiator-to-responder and
+responder-to-initiator chain keys and nonce prefixes. The
+<code class="docutils literal notranslate"><span class="pre">authenticated_channel_encrypt/5</span></code> and
+<code class="docutils literal notranslate"><span class="pre">authenticated_channel_decrypt/5</span></code> predicates are pure state
+transitions: every successful call returns a replacement channel state.
+Messages use strict 64-bit counters and must be received in order. Their
+XChaCha20-Poly1305 associated data binds the protocol version,
+direction, transcript hash, counter, and caller-provided associated
+data. Replay, out-of-order delivery, modified associated data, and
+modified ciphertext therefore fail without advancing the state.</p>
+<p>Each message derives a one-use message key and replacement directional
+chain key. This symmetric ratchet protects already processed messages if
+only the current state is later compromised, provided applications
+discard all prior immutable state terms. Logtalk cannot guarantee that
+discarded key material is immediately overwritten in memory. This
+construction is not a Double Ratchet: compromise of the current state is
+not healed without a new authenticated ephemeral handshake, and
+out-of-order message delivery is not supported.</p>
+<p>The key-pair predicates use <code class="docutils literal notranslate"><span class="pre">random_bytes/2</span></code>. If <code class="docutils literal notranslate"><span class="pre">/dev/urandom</span></code> is
+unavailable, that predicate falls back to the library pseudo-random
+generator. Applications that require fail-closed cryptographic entropy
+must generate private key bytes externally and call
+<code class="docutils literal notranslate"><span class="pre">ed25519_public_key/2</span></code> or <code class="docutils literal notranslate"><span class="pre">x25519_public_key/2</span></code> instead.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -539,6 +592,22 @@ yes
 yes
 </pre></div>
 </div>
+<p>Create an authenticated ephemeral channel between Alice and Bob and send
+a message from Alice to Bob. In an application, <code class="docutils literal notranslate"><span class="pre">AlicePublicKey</span></code> and
+<code class="docutils literal notranslate"><span class="pre">BobPublicKey</span></code> must be obtained through a trusted identity mechanism:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> crypto<span class="o">::</span>ed25519_keypair(<span class="nv">AliceSeed</span>, <span class="nv">AlicePublicKey</span>),
+     crypto<span class="o">::</span>ed25519_keypair(<span class="nv">BobSeed</span>, <span class="nv">BobPublicKey</span>),
+     crypto<span class="o">::</span>authenticated_channel_initiate(<span class="nv">AliceSeed</span>, <span class="nv">BobPublicKey</span>, <span class="nv">Offer</span>, <span class="nv">Pending</span>),
+     crypto<span class="o">::</span>authenticated_channel_accept(<span class="nv">BobSeed</span>, <span class="nv">AlicePublicKey</span>, <span class="nv">Offer</span>, <span class="nv">Response</span>, <span class="nv">BobChannel0</span>),
+     crypto<span class="o">::</span>authenticated_channel_finalize(<span class="nv">Pending</span>, <span class="nv">Response</span>, <span class="nv">AliceChannel0</span>),
+     crypto<span class="o">::</span>authenticated_channel_encrypt(<span class="nv">AliceChannel0</span>, [], [<span class="m">72</span>,<span class="m">105</span>], <span class="nv">Message</span>, <span class="nv">AliceChannel1</span>),
+     crypto<span class="o">::</span>authenticated_channel_decrypt(<span class="nv">BobChannel0</span>, [], <span class="nv">Message</span>, <span class="nv">Plaintext</span>, <span class="nv">BobChannel1</span>).
+<span class="nv">Plaintext</span> <span class="o">=</span> [<span class="m">72</span>,<span class="m">105</span>]
+yes
+</pre></div>
+</div>
+<p>The application must retain <code class="docutils literal notranslate"><span class="pre">AliceChannel1</span></code> and <code class="docutils literal notranslate"><span class="pre">BobChannel1</span></code> for
+subsequent messages and discard the corresponding input states.</p>
 </section>
 </section>
 

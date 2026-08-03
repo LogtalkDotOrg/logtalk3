@@ -29,7 +29,9 @@
 		logtalk_load(random(loader)),
 		logtalk_load(crypto, [optimize(on), complements(restrict)]),
 		logtalk_load(xchacha20_poly1305, [optimize(on)]),
-		logtalk_load(ed25519, [optimize(on)])
+		logtalk_load(ed25519, [optimize(on)]),
+		logtalk_load(x25519, [optimize(on)]),
+		logtalk_load(authenticated_channel, [optimize(on)])
 	)).
 
 :- else.

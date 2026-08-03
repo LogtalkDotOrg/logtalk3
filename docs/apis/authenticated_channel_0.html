@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>xchacha20_poly1305 &mdash; Logtalk 3.102.0</title>
+  <title>authenticated_channel &mdash; Logtalk 3.102.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -32,8 +32,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="csv" href="csv_0.html" />
-    <link rel="prev" title="x25519" href="x25519_0.html" />
+    <link rel="next" title="crypto" href="crypto_0.html" />
+    <link rel="prev" title="crs_projections_protocol" href="crs_projections_protocol_0.html" />
    
 </head>
 
@@ -108,11 +108,11 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#coroutining"><span class="xref std std-ref">coroutining</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#crs-projections"><span class="xref std std-ref">crs_projections</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#crypto"><span class="xref std std-ref">crypto</span></a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="authenticated_channel_0.html">authenticated_channel</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">authenticated_channel</a></li>
 <li class="toctree-l3"><a class="reference internal" href="crypto_0.html">crypto</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ed25519_0.html">ed25519</a></li>
 <li class="toctree-l3"><a class="reference internal" href="x25519_0.html">x25519</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">xchacha20_poly1305</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xchacha20_poly1305_0.html">xchacha20_poly1305</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#csv"><span class="xref std std-ref">csv</span></a></li>
@@ -398,9 +398,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">xchacha20_poly1305</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">authenticated_channel</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/xchacha20_poly1305_0.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/authenticated_channel_0.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -408,10 +408,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="xchacha20-poly1305-0"><span id="index-0"></span><strong>category</strong></p>
-<section id="xchacha20-poly1305">
-<h1><code class="docutils literal notranslate"><span class="pre">xchacha20_poly1305</span></code><a class="headerlink" href="#xchacha20-poly1305" title="Link to this heading"></a></h1>
-<p>XChaCha20 stream cipher and XChaCha20-Poly1305 authenticated encryption with associated data algorithm implementation. Requires exact, unbounded integer arithmetic for the Poly1305 130-bit accumulator.</p>
+  <p class="right" id="authenticated-channel-0"><span id="index-0"></span><strong>category</strong></p>
+<section id="authenticated-channel">
+<h1><code class="docutils literal notranslate"><span class="pre">authenticated_channel</span></code><a class="headerlink" href="#authenticated-channel" title="Link to this heading"></a></h1>
+<p>Identity-authenticated ephemeral X25519 channels with directional XChaCha20-Poly1305 keys, strict counters, and per-message symmetric key ratcheting.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -437,6 +437,7 @@
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
+<div class="line"><a class="reference internal" href="sha256_0.html#sha256-0"><span class="std std-ref">sha256</span></a></div>
 <div class="line"><a class="reference internal" href="type_0.html#type-0"><span class="std std-ref">type</span></a></div>
 </div>
 </div>
@@ -456,24 +457,23 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#xchacha20-4" id="id2"><code class="docutils literal notranslate"><span class="pre">xchacha20/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#xchacha20-subkey-and-nonce-4" id="id3"><code class="docutils literal notranslate"><span class="pre">xchacha20_subkey_and_nonce/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#chacha20-encrypt-5" id="id4"><code class="docutils literal notranslate"><span class="pre">chacha20_encrypt/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#chacha20-block-4" id="id5"><code class="docutils literal notranslate"><span class="pre">chacha20_block/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#xchacha20-poly1305-encrypt-5" id="id6"><code class="docutils literal notranslate"><span class="pre">xchacha20_poly1305_encrypt/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#xchacha20-poly1305-decrypt-5" id="id7"><code class="docutils literal notranslate"><span class="pre">xchacha20_poly1305_decrypt/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#authenticated-channel-initiate-4" id="id2"><code class="docutils literal notranslate"><span class="pre">authenticated_channel_initiate/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#authenticated-channel-accept-5" id="id3"><code class="docutils literal notranslate"><span class="pre">authenticated_channel_accept/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#authenticated-channel-finalize-3" id="id4"><code class="docutils literal notranslate"><span class="pre">authenticated_channel_finalize/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#authenticated-channel-encrypt-5" id="id5"><code class="docutils literal notranslate"><span class="pre">authenticated_channel_encrypt/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#authenticated-channel-decrypt-5" id="id6"><code class="docutils literal notranslate"><span class="pre">authenticated_channel_decrypt/5</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id8">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id9">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id10">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id7">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id8">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id9">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
-<section id="xchacha20-4">
-<span id="xchacha20-poly1305-0-xchacha20-4"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">xchacha20/4</span></code></a><a class="headerlink" href="#xchacha20-4" title="Link to this heading"></a></h3>
-<p>Encrypts or decrypts Input using XChaCha20. Clients should only use this unauthenticated stream cipher as part of a construction that provides its own authentication.</p>
+<section id="authenticated-channel-initiate-4">
+<span id="authenticated-channel-0-authenticated-channel-initiate-4"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">authenticated_channel_initiate/4</span></code></a><a class="headerlink" href="#authenticated-channel-initiate-4" title="Link to this heading"></a></h3>
+<p>Creates a signed ephemeral-key Offer and PendingState for an initiator using IdentitySeed and the pinned ResponderIdentityPublicKey.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -483,61 +483,45 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">xchacha20(Key,Nonce,Input,Output)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">authenticated_channel_initiate(IdentitySeed,ResponderIdentityPublicKey,Offer,PendingState)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">xchacha20(+list(byte),+list(byte),+list(byte),-list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">authenticated_channel_initiate(+list(byte),+list(byte),-compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Key</span></code> is a partial list or a list with an element which is a variable:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">IdentitySeed</span></code> is a partial list or a list with an element which is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Key</span></code> is neither a variable nor a list of 32 bytes:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">IdentitySeed</span></code> is neither a variable nor a list of 32 bytes:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte,32),Key)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte,32),IdentitySeed)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Key</span></code> contains a non-integer byte:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">IdentitySeed</span></code> contains a non-integer byte:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Byte)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Key</span></code> contains an integer outside the byte range:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">IdentitySeed</span></code> contains an integer outside the byte range:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(byte,Byte)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Nonce</span></code> is a partial list or a list with an element which is a variable:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ResponderIdentityPublicKey</span></code> is a partial list or a list with an element which is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Nonce</span></code> is neither a variable nor a list of 24 bytes:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ResponderIdentityPublicKey</span></code> is neither a variable nor a list of 32 bytes:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte,24),Nonce)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte,32),ResponderIdentityPublicKey)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Nonce</span></code> contains a non-integer byte:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Byte)</span></code></div>
-</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Nonce</span></code> contains an integer outside the byte range:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(byte,Byte)</span></code></div>
-</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Input</span></code> is a partial list or a list with an element which is a variable:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
-</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Input</span></code> is neither a variable nor a list of bytes:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte),Input)</span></code></div>
-</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Input</span></code> contains a non-integer byte:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ResponderIdentityPublicKey</span></code> contains a non-integer byte:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Byte)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Input</span></code> contains an integer outside the byte range:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ResponderIdentityPublicKey</span></code> contains an integer outside the byte range:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(byte,Byte)</span></code></div>
 </div>
@@ -545,9 +529,9 @@
 </div>
 <hr class="docutils" />
 </section>
-<section id="xchacha20-subkey-and-nonce-4">
-<span id="xchacha20-poly1305-0-xchacha20-subkey-and-nonce-4"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">xchacha20_subkey_and_nonce/4</span></code></a><a class="headerlink" href="#xchacha20-subkey-and-nonce-4" title="Link to this heading"></a></h3>
-<p>Derives the ChaCha20 subkey words and nonce words for an XChaCha20 key and nonce. The caller is responsible for validating the key and nonce and should only use the result in a construction that provides authentication.</p>
+<section id="authenticated-channel-accept-5">
+<span id="authenticated-channel-0-authenticated-channel-accept-5"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">authenticated_channel_accept/5</span></code></a><a class="headerlink" href="#authenticated-channel-accept-5" title="Link to this heading"></a></h3>
+<p>Verifies Offer against the pinned InitiatorIdentityPublicKey, creates a signed Response, and returns the responder Channel state.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -557,110 +541,219 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">xchacha20_subkey_and_nonce(Key,Nonce,SubkeyWords,NonceWords)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">authenticated_channel_accept(IdentitySeed,InitiatorIdentityPublicKey,Offer,Response,Channel)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">xchacha20_subkey_and_nonce(+list(byte),+list(byte),-list(integer),-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="chacha20-encrypt-5">
-<span id="xchacha20-poly1305-0-chacha20-encrypt-5"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">chacha20_encrypt/5</span></code></a><a class="headerlink" href="#chacha20-encrypt-5" title="Link to this heading"></a></h3>
-<p>Encrypts or decrypts bytes using ChaCha20 words and the given initial block counter. The caller is responsible for validating all arguments and should only use this unauthenticated stream cipher as part of a construction that provides authentication.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">chacha20_encrypt(KeyWords,Counter,NonceWords,Input,Output)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">chacha20_encrypt(+list(integer),+non_negative_integer,+list(integer),+list(byte),-list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="chacha20-block-4">
-<span id="xchacha20-poly1305-0-chacha20-block-4"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">chacha20_block/4</span></code></a><a class="headerlink" href="#chacha20-block-4" title="Link to this heading"></a></h3>
-<p>Computes a 64-byte ChaCha20 block using key words and the given block counter and nonce words. The caller is responsible for validating all arguments and should only use it as part of a construction that provides authentication.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">chacha20_block(KeyWords,Counter,NonceWords,Block)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">chacha20_block(+list(integer),+non_negative_integer,+list(integer),-list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="xchacha20-poly1305-encrypt-5">
-<span id="xchacha20-poly1305-0-xchacha20-poly1305-encrypt-5"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">xchacha20_poly1305_encrypt/5</span></code></a><a class="headerlink" href="#xchacha20-poly1305-encrypt-5" title="Link to this heading"></a></h3>
-<p>Encrypts Plaintext with XChaCha20 and appends a 16-byte Poly1305 authentication tag covering AAD and the ciphertext, following the IETF ChaCha20-Poly1305 AEAD construction (RFC 8439) extended with the 24-byte XChaCha nonce. Available only on backends with unbounded integer arithmetic.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">xchacha20_poly1305_encrypt(Key,Nonce,AAD,Plaintext,CiphertextAndTag)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">xchacha20_poly1305_encrypt(+list(byte),+list(byte),+list(byte),+list(byte),-list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">authenticated_channel_accept(+list(byte),+list(byte),+compound,-compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Key</span></code> is a partial list or a list with an element which is a variable:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">IdentitySeed</span></code> is a partial list or a list with an element which is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Key</span></code> is neither a variable nor a list of 32 bytes:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">IdentitySeed</span></code> is neither a variable nor a list of 32 bytes:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte,32),Key)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte,32),IdentitySeed)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Key</span></code> contains a non-integer byte:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">IdentitySeed</span></code> contains a non-integer byte:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Byte)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Key</span></code> contains an integer outside the byte range:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">IdentitySeed</span></code> contains an integer outside the byte range:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(byte,Byte)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Nonce</span></code> is a partial list or a list with an element which is a variable:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">InitiatorIdentityPublicKey</span></code> is a partial list or a list with an element which is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Nonce</span></code> is neither a variable nor a list of 24 bytes:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">InitiatorIdentityPublicKey</span></code> is neither a variable nor a list of 32 bytes:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte,24),Nonce)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte,32),InitiatorIdentityPublicKey)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Nonce</span></code> contains a non-integer byte:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">InitiatorIdentityPublicKey</span></code> contains a non-integer byte:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Byte)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Nonce</span></code> contains an integer outside the byte range:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">InitiatorIdentityPublicKey</span></code> contains an integer outside the byte range:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(byte,Byte)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Offer</span></code> is a variable or contains a partial byte list or a byte list with an element which is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Offer</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Offer)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Offer</span></code> is not a valid authenticated channel offer term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(authenticated_channel_offer,Offer)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Offer</span></code> contains a key field which is not a list of 32 bytes:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte,32),Bytes)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Offer</span></code> contains a signature field which is not a list of 64 bytes:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte,64),Signature)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Offer</span></code> contains a non-integer byte:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Byte)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Offer</span></code> contains an integer outside the byte range:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(byte,Byte)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="authenticated-channel-finalize-3">
+<span id="authenticated-channel-0-authenticated-channel-finalize-3"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">authenticated_channel_finalize/3</span></code></a><a class="headerlink" href="#authenticated-channel-finalize-3" title="Link to this heading"></a></h3>
+<p>Verifies Response against the identity pinned in PendingState and returns the initiator Channel state.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">authenticated_channel_finalize(PendingState,Response,Channel)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">authenticated_channel_finalize(+compound,+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">PendingState</span></code> is a variable or contains a partial byte list or a byte list with an element which is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">PendingState</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,PendingState)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">PendingState</span></code> is not a valid authenticated channel pending-state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(authenticated_channel_pending_state,PendingState)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">PendingState</span></code> contains a key field which is not a list of 32 bytes:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte,32),Bytes)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">PendingState</span></code> contains a signature field which is not a list of 64 bytes:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte,64),Signature)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">PendingState</span></code> contains a non-integer byte:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Byte)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">PendingState</span></code> contains an integer outside the byte range:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(byte,Byte)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Response</span></code> is a variable or contains a partial byte list or a byte list with an element which is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Response</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Response)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Response</span></code> is not a valid authenticated channel response term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(authenticated_channel_response,Response)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Response</span></code> contains a key field which is not a list of 32 bytes:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte,32),Bytes)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Response</span></code> contains a signature field which is not a list of 64 bytes:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte,64),Signature)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Response</span></code> contains a non-integer byte:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Byte)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Response</span></code> contains an integer outside the byte range:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(byte,Byte)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="authenticated-channel-encrypt-5">
+<span id="authenticated-channel-0-authenticated-channel-encrypt-5"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">authenticated_channel_encrypt/5</span></code></a><a class="headerlink" href="#authenticated-channel-encrypt-5" title="Link to this heading"></a></h3>
+<p>Encrypts and authenticates Plaintext and returns Message and the replacement Channel state. The caller must discard the input state.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">authenticated_channel_encrypt(Channel0,AAD,Plaintext,Message,Channel)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">authenticated_channel_encrypt(+compound,+list(byte),+list(byte),-compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel0</span></code> is a variable or contains a partial byte list, a byte list with an element which is a variable, or a variable counter:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel0</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Channel0)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel0</span></code> is not a valid authenticated channel state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(authenticated_channel_state,Channel0)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel0</span></code> contains a hash or key field which is not a list of 32 bytes:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte,32),Bytes)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel0</span></code> contains a nonce-prefix field which is not a list of 16 bytes:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte,16),Bytes)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel0</span></code> contains a non-integer byte:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Byte)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel0</span></code> contains an integer outside the byte range:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(byte,Byte)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel0</span></code> contains a counter which is not an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Counter)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel0</span></code> contains a negative counter:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Counter)</span></code></div>
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">AAD</span></code> is a partial list or a list with an element which is a variable:</div>
 <div class="line-block">
@@ -694,13 +787,17 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(byte,Byte)</span></code></div>
 </div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel0</span></code> send counter is exhausted:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(authenticated_channel_counter)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
-<section id="xchacha20-poly1305-decrypt-5">
-<span id="xchacha20-poly1305-0-xchacha20-poly1305-decrypt-5"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">xchacha20_poly1305_decrypt/5</span></code></a><a class="headerlink" href="#xchacha20-poly1305-decrypt-5" title="Link to this heading"></a></h3>
-<p>Verifies the trailing 16-byte Poly1305 tag of CiphertextAndTag against AAD using constant-time comparison and, only if it matches, decrypts the ciphertext with XChaCha20. Fails, without decrypting anything, if the tag does not match. Available only on backends with unbounded integer arithmetic.</p>
+<section id="authenticated-channel-decrypt-5">
+<span id="authenticated-channel-0-authenticated-channel-decrypt-5"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">authenticated_channel_decrypt/5</span></code></a><a class="headerlink" href="#authenticated-channel-decrypt-5" title="Link to this heading"></a></h3>
+<p>Authenticates and decrypts the next strictly ordered Message and returns Plaintext and the replacement Channel state. The caller must discard the input state.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -710,47 +807,51 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">xchacha20_poly1305_decrypt(Key,Nonce,AAD,CiphertextAndTag,Plaintext)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">authenticated_channel_decrypt(Channel0,AAD,Message,Plaintext,Channel)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">xchacha20_poly1305_decrypt(+list(byte),+list(byte),+list(byte),+list(byte),-list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">authenticated_channel_decrypt(+compound,+list(byte),+compound,-list(byte),-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Key</span></code> is a partial list or a list with an element which is a variable:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel0</span></code> is a variable or contains a partial byte list, a byte list with an element which is a variable, or a variable counter:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Key</span></code> is neither a variable nor a list of 32 bytes:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel0</span></code> is neither a variable nor a compound term:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte,32),Key)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Channel0)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Key</span></code> contains a non-integer byte:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel0</span></code> is not a valid authenticated channel state term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(authenticated_channel_state,Channel0)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel0</span></code> contains a hash or key field which is not a list of 32 bytes:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte,32),Bytes)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel0</span></code> contains a nonce-prefix field which is not a list of 16 bytes:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte,16),Bytes)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel0</span></code> contains a non-integer byte:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Byte)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Key</span></code> contains an integer outside the byte range:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel0</span></code> contains an integer outside the byte range:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(byte,Byte)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Nonce</span></code> is a partial list or a list with an element which is a variable:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel0</span></code> contains a counter which is not an integer:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Counter)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Nonce</span></code> is neither a variable nor a list of 24 bytes:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel0</span></code> contains a negative counter:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte,24),Nonce)</span></code></div>
-</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Nonce</span></code> contains a non-integer byte:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Byte)</span></code></div>
-</div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Nonce</span></code> contains an integer outside the byte range:</div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(byte,Byte)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Counter)</span></code></div>
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">AAD</span></code> is a partial list or a list with an element which is a variable:</div>
 <div class="line-block">
@@ -768,25 +869,45 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(byte,Byte)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">CiphertextAndTag</span></code> is a partial list or a list with an element which is a variable:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> is a variable or contains a partial byte list, a byte list with an element which is a variable, or a variable counter:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">CiphertextAndTag</span></code> is neither a variable nor a list of bytes:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> is neither a variable nor a compound term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(compound,Message)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> is not a valid authenticated channel message term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(authenticated_channel_message,Message)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> counter is not an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Counter)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> counter is negative:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Counter)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> ciphertext and tag is not a list of bytes:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte),CiphertextAndTag)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">CiphertextAndTag</span></code> contains a non-integer byte:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> ciphertext and tag contains a non-integer byte:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Byte)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">CiphertextAndTag</span></code> contains an integer outside the byte range:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> ciphertext and tag contains an integer outside the byte range:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(byte,Byte)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">CiphertextAndTag</span></code> contains fewer than 16 bytes:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Message</span></code> ciphertext and tag is shorter than 16 bytes:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_byte_length(16),CiphertextAndTag)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Channel0</span></code> receive counter is exhausted:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(authenticated_channel_counter)</span></code></div>
 </div>
 </div>
 </div>
@@ -811,8 +932,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="x25519_0.html" class="btn btn-neutral float-left" title="x25519" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="csv_0.html" class="btn btn-neutral float-right" title="csv" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="crs_projections_protocol_0.html" class="btn btn-neutral float-left" title="crs_projections_protocol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="crypto_0.html" class="btn btn-neutral float-right" title="crypto" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

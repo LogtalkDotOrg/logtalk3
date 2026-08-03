@@ -34,7 +34,7 @@ Transport-neutral cryptographic helper predicates.
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`xchacha20_poly1305/0::chacha20_block/4`  :ref:`xchacha20_poly1305/0::chacha20_encrypt/5`  :ref:`ed25519/0::ed25519_keypair/2`  :ref:`ed25519/0::ed25519_public_key/2`  :ref:`ed25519/0::ed25519_sign/3`  :ref:`ed25519/0::ed25519_verify/3`  :ref:`xchacha20_poly1305/0::xchacha20/4`  :ref:`xchacha20_poly1305/0::xchacha20_poly1305_decrypt/5`  :ref:`xchacha20_poly1305/0::xchacha20_poly1305_encrypt/5`  :ref:`xchacha20_poly1305/0::xchacha20_subkey_and_nonce/4`  
+|     :ref:`authenticated_channel/0::authenticated_channel_accept/5`  :ref:`authenticated_channel/0::authenticated_channel_decrypt/5`  :ref:`authenticated_channel/0::authenticated_channel_encrypt/5`  :ref:`authenticated_channel/0::authenticated_channel_finalize/3`  :ref:`authenticated_channel/0::authenticated_channel_initiate/4`  :ref:`xchacha20_poly1305/0::chacha20_block/4`  :ref:`xchacha20_poly1305/0::chacha20_encrypt/5`  :ref:`ed25519/0::ed25519_keypair/2`  :ref:`ed25519/0::ed25519_public_key/2`  :ref:`ed25519/0::ed25519_sign/3`  :ref:`ed25519/0::ed25519_verify/3`  :ref:`x25519/0::x25519_keypair/2`  :ref:`x25519/0::x25519_public_key/2`  :ref:`x25519/0::x25519_shared_secret/3`  :ref:`xchacha20_poly1305/0::xchacha20/4`  :ref:`xchacha20_poly1305/0::xchacha20_poly1305_decrypt/5`  :ref:`xchacha20_poly1305/0::xchacha20_poly1305_encrypt/5`  :ref:`xchacha20_poly1305/0::xchacha20_subkey_and_nonce/4`  
 
 .. contents::
    :local:

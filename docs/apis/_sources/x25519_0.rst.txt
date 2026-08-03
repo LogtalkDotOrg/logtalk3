@@ -1,0 +1,142 @@
+.. index:: single: x25519
+.. _x25519/0:
+
+.. rst-class:: right
+
+**category**
+
+``x25519``
+==========
+
+X25519 Diffie-Hellman key agreement implementation (RFC 7748). Requires exact, unbounded integer arithmetic for arithmetic modulo the 255-bit field prime.
+
+| **Availability:** 
+|    ``logtalk_load(crypto(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-03
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Complements:**
+|    :ref:`crypto <crypto/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: x25519_keypair/2
+.. _x25519/0::x25519_keypair/2:
+
+``x25519_keypair/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Generates a fresh random 32-byte PrivateKey and derives the corresponding 32-byte PublicKey. Available only on backends with unbounded integer arithmetic.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``x25519_keypair(PrivateKey,PublicKey)``
+| **Mode and number of proofs:**
+|    ``x25519_keypair(-list(byte),-list(byte))`` - ``one``
+
+
+------------
+
+.. index:: x25519_public_key/2
+.. _x25519/0::x25519_public_key/2:
+
+``x25519_public_key/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Derives the 32-byte X25519 PublicKey corresponding to a 32-byte PrivateKey. Available only on backends with unbounded integer arithmetic.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``x25519_public_key(PrivateKey,PublicKey)``
+| **Mode and number of proofs:**
+|    ``x25519_public_key(+list(byte),-list(byte))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``PrivateKey`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``PrivateKey`` is neither a variable nor a list of 32 bytes:
+|        ``type_error(list(byte,32),PrivateKey)``
+|    ``PrivateKey`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``PrivateKey`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+
+
+------------
+
+.. index:: x25519_shared_secret/3
+.. _x25519/0::x25519_shared_secret/3:
+
+``x25519_shared_secret/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the 32-byte X25519 SharedSecret using PrivateKey and PeerPublicKey. Fails when the result is all zeroes. Available only on backends with unbounded integer arithmetic.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``x25519_shared_secret(PrivateKey,PeerPublicKey,SharedSecret)``
+| **Mode and number of proofs:**
+|    ``x25519_shared_secret(+list(byte),+list(byte),-list(byte))`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``PrivateKey`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``PrivateKey`` is neither a variable nor a list of 32 bytes:
+|        ``type_error(list(byte,32),PrivateKey)``
+|    ``PrivateKey`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``PrivateKey`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``PeerPublicKey`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``PeerPublicKey`` is neither a variable nor a list of 32 bytes:
+|        ``type_error(list(byte,32),PeerPublicKey)``
+|    ``PeerPublicKey`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``PeerPublicKey`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

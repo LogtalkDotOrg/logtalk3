@@ -33,7 +33,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="ed25519" href="ed25519_0.html" />
-    <link rel="prev" title="crs_projections_protocol" href="crs_projections_protocol_0.html" />
+    <link rel="prev" title="authenticated_channel" href="authenticated_channel_0.html" />
    
 </head>
 
@@ -108,8 +108,10 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#coroutining"><span class="xref std std-ref">coroutining</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#crs-projections"><span class="xref std std-ref">crs_projections</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#crypto"><span class="xref std std-ref">crypto</span></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="authenticated_channel_0.html">authenticated_channel</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">crypto</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ed25519_0.html">ed25519</a></li>
+<li class="toctree-l3"><a class="reference internal" href="x25519_0.html">x25519</a></li>
 <li class="toctree-l3"><a class="reference internal" href="xchacha20_poly1305_0.html">xchacha20_poly1305</a></li>
 </ul>
 </li>
@@ -448,7 +450,7 @@
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line"> <a class="reference internal" href="xchacha20_poly1305_0.html#xchacha20-poly1305-0-chacha20-block-4"><span class="std std-ref">chacha20_block/4</span></a>  <a class="reference internal" href="xchacha20_poly1305_0.html#xchacha20-poly1305-0-chacha20-encrypt-5"><span class="std std-ref">chacha20_encrypt/5</span></a>  <a class="reference internal" href="ed25519_0.html#ed25519-0-ed25519-keypair-2"><span class="std std-ref">ed25519_keypair/2</span></a>  <a class="reference internal" href="ed25519_0.html#ed25519-0-ed25519-public-key-2"><span class="std std-ref">ed25519_public_key/2</span></a>  <a class="reference internal" href="ed25519_0.html#ed25519-0-ed25519-sign-3"><span class="std std-ref">ed25519_sign/3</span></a>  <a class="reference internal" href="ed25519_0.html#ed25519-0-ed25519-verify-3"><span class="std std-ref">ed25519_verify/3</span></a>  <a class="reference internal" href="xchacha20_poly1305_0.html#xchacha20-poly1305-0-xchacha20-4"><span class="std std-ref">xchacha20/4</span></a>  <a class="reference internal" href="xchacha20_poly1305_0.html#xchacha20-poly1305-0-xchacha20-poly1305-decrypt-5"><span class="std std-ref">xchacha20_poly1305_decrypt/5</span></a>  <a class="reference internal" href="xchacha20_poly1305_0.html#xchacha20-poly1305-0-xchacha20-poly1305-encrypt-5"><span class="std std-ref">xchacha20_poly1305_encrypt/5</span></a>  <a class="reference internal" href="xchacha20_poly1305_0.html#xchacha20-poly1305-0-xchacha20-subkey-and-nonce-4"><span class="std std-ref">xchacha20_subkey_and_nonce/4</span></a></div>
+<div class="line"> <a class="reference internal" href="authenticated_channel_0.html#authenticated-channel-0-authenticated-channel-accept-5"><span class="std std-ref">authenticated_channel_accept/5</span></a>  <a class="reference internal" href="authenticated_channel_0.html#authenticated-channel-0-authenticated-channel-decrypt-5"><span class="std std-ref">authenticated_channel_decrypt/5</span></a>  <a class="reference internal" href="authenticated_channel_0.html#authenticated-channel-0-authenticated-channel-encrypt-5"><span class="std std-ref">authenticated_channel_encrypt/5</span></a>  <a class="reference internal" href="authenticated_channel_0.html#authenticated-channel-0-authenticated-channel-finalize-3"><span class="std std-ref">authenticated_channel_finalize/3</span></a>  <a class="reference internal" href="authenticated_channel_0.html#authenticated-channel-0-authenticated-channel-initiate-4"><span class="std std-ref">authenticated_channel_initiate/4</span></a>  <a class="reference internal" href="xchacha20_poly1305_0.html#xchacha20-poly1305-0-chacha20-block-4"><span class="std std-ref">chacha20_block/4</span></a>  <a class="reference internal" href="xchacha20_poly1305_0.html#xchacha20-poly1305-0-chacha20-encrypt-5"><span class="std std-ref">chacha20_encrypt/5</span></a>  <a class="reference internal" href="ed25519_0.html#ed25519-0-ed25519-keypair-2"><span class="std std-ref">ed25519_keypair/2</span></a>  <a class="reference internal" href="ed25519_0.html#ed25519-0-ed25519-public-key-2"><span class="std std-ref">ed25519_public_key/2</span></a>  <a class="reference internal" href="ed25519_0.html#ed25519-0-ed25519-sign-3"><span class="std std-ref">ed25519_sign/3</span></a>  <a class="reference internal" href="ed25519_0.html#ed25519-0-ed25519-verify-3"><span class="std std-ref">ed25519_verify/3</span></a>  <a class="reference internal" href="x25519_0.html#x25519-0-x25519-keypair-2"><span class="std std-ref">x25519_keypair/2</span></a>  <a class="reference internal" href="x25519_0.html#x25519-0-x25519-public-key-2"><span class="std std-ref">x25519_public_key/2</span></a>  <a class="reference internal" href="x25519_0.html#x25519-0-x25519-shared-secret-3"><span class="std std-ref">x25519_shared_secret/3</span></a>  <a class="reference internal" href="xchacha20_poly1305_0.html#xchacha20-poly1305-0-xchacha20-4"><span class="std std-ref">xchacha20/4</span></a>  <a class="reference internal" href="xchacha20_poly1305_0.html#xchacha20-poly1305-0-xchacha20-poly1305-decrypt-5"><span class="std std-ref">xchacha20_poly1305_decrypt/5</span></a>  <a class="reference internal" href="xchacha20_poly1305_0.html#xchacha20-poly1305-0-xchacha20-poly1305-encrypt-5"><span class="std std-ref">xchacha20_poly1305_encrypt/5</span></a>  <a class="reference internal" href="xchacha20_poly1305_0.html#xchacha20-poly1305-0-xchacha20-subkey-and-nonce-4"><span class="std std-ref">xchacha20_subkey_and_nonce/4</span></a></div>
 </div>
 </div>
 <nav class="contents local" id="contents">
@@ -1390,7 +1392,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="crs_projections_protocol_0.html" class="btn btn-neutral float-left" title="crs_projections_protocol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="authenticated_channel_0.html" class="btn btn-neutral float-left" title="authenticated_channel" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="ed25519_0.html" class="btn btn-neutral float-right" title="ed25519" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

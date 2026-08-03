@@ -49,6 +49,16 @@ predicates are also available:
 - `ed25519_sign/3`
 - `ed25519_verify/3`
 
+- `x25519_keypair/2`
+- `x25519_public_key/2`
+- `x25519_shared_secret/3`
+
+- `authenticated_channel_initiate/4`
+- `authenticated_channel_accept/5`
+- `authenticated_channel_finalize/3`
+- `authenticated_channel_encrypt/5`
+- `authenticated_channel_decrypt/5`
+
 The `random_below/2` predicate returns a uniformly distributed random integer
 greater than or equal to zero and less than the given exclusive upper bound.
 
@@ -110,6 +120,52 @@ touches secret data and is unaffected by that limitation. These four
 predicates are only available on backend Prolog compilers supporting
 unbounded integer arithmetic, since Curve25519 arithmetic is carried out
 modulo a 255-bit prime.
+
+The `x25519_keypair/2`, `x25519_public_key/2`, and `x25519_shared_secret/3`
+predicates implement X25519 Diffie-Hellman key agreement (RFC 7748). Private
+keys and public keys are represented by 32-byte lists. Public-key derivation
+and shared-secret computation apply the RFC 7748 scalar clamping rules and
+mask the most significant bit of received u-coordinates. Shared-secret
+computation fails for an all-zero result, preventing the use of low-order
+public keys. These predicates require unbounded integer arithmetic. Although
+the Montgomery ladder has fixed control flow and uses arithmetic conditional
+swaps, the underlying Prolog big-integer operations are not guaranteed to be
+constant-time.
+
+The authenticated channel predicates compose Ed25519 identity signatures,
+ephemeral X25519 key agreement, HKDF-SHA-256, and XChaCha20-Poly1305. The
+initiator calls `authenticated_channel_initiate/4` with its identity seed and
+the responder Ed25519 public key obtained through a trusted out-of-band
+mechanism. The responder calls `authenticated_channel_accept/5` with its
+identity seed, the pinned initiator identity public key, and the offer. The
+initiator completes the handshake using `authenticated_channel_finalize/3`.
+Both signatures bind the protocol version, roles, both identity keys, and the
+ephemeral keys; the responder signature also binds the initiator offer
+signature.
+
+The handshake derives independent initiator-to-responder and
+responder-to-initiator chain keys and nonce prefixes. The
+`authenticated_channel_encrypt/5` and `authenticated_channel_decrypt/5`
+predicates are pure state transitions: every successful call returns a
+replacement channel state. Messages use strict 64-bit counters and must be
+received in order. Their XChaCha20-Poly1305 associated data binds the protocol
+version, direction, transcript hash, counter, and caller-provided associated
+data. Replay, out-of-order delivery, modified associated data, and modified
+ciphertext therefore fail without advancing the state.
+
+Each message derives a one-use message key and replacement directional chain
+key. This symmetric ratchet protects already processed messages if only the
+current state is later compromised, provided applications discard all prior
+immutable state terms. Logtalk cannot guarantee that discarded key material
+is immediately overwritten in memory. This construction is not a Double
+Ratchet: compromise of the current state is not healed without a new
+authenticated ephemeral handshake, and out-of-order message delivery is not
+supported.
+
+The key-pair predicates use `random_bytes/2`. If `/dev/urandom` is unavailable,
+that predicate falls back to the library pseudo-random generator. Applications
+that require fail-closed cryptographic entropy must generate private key bytes
+externally and call `ed25519_public_key/2` or `x25519_public_key/2` instead.
 
 
 API documentation
@@ -178,3 +234,20 @@ Generate an Ed25519 keypair, sign a message, and verify the signature:
 	     crypto::ed25519_sign(Seed, [72,105], Signature),
 	     crypto::ed25519_verify(PublicKey, [72,105], Signature).
 	yes
+
+Create an authenticated ephemeral channel between Alice and Bob and send a
+message from Alice to Bob. In an application, `AlicePublicKey` and
+`BobPublicKey` must be obtained through a trusted identity mechanism:
+
+	| ?- crypto::ed25519_keypair(AliceSeed, AlicePublicKey),
+	     crypto::ed25519_keypair(BobSeed, BobPublicKey),
+	     crypto::authenticated_channel_initiate(AliceSeed, BobPublicKey, Offer, Pending),
+	     crypto::authenticated_channel_accept(BobSeed, AlicePublicKey, Offer, Response, BobChannel0),
+	     crypto::authenticated_channel_finalize(Pending, Response, AliceChannel0),
+	     crypto::authenticated_channel_encrypt(AliceChannel0, [], [72,105], Message, AliceChannel1),
+	     crypto::authenticated_channel_decrypt(BobChannel0, [], Message, Plaintext, BobChannel1).
+	Plaintext = [72,105]
+	yes
+
+The application must retain `AliceChannel1` and `BobChannel1` for subsequent
+messages and discard the corresponding input states.

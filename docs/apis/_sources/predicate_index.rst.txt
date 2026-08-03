@@ -1242,6 +1242,56 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`dimension_reduction_dataset_protocol <dimension_reduction_dataset_protocol/0::attribute_values/2>`
 * :ref:`regression_dataset_protocol <regression_dataset_protocol/0::attribute_values/2>`
 
+``authenticated_channel_accept/5``
+----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`authenticated_channel <authenticated_channel/0::authenticated_channel_accept/5>`
+
+``authenticated_channel_decrypt/5``
+-----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`authenticated_channel <authenticated_channel/0::authenticated_channel_decrypt/5>`
+
+``authenticated_channel_encrypt/5``
+-----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`authenticated_channel <authenticated_channel/0::authenticated_channel_encrypt/5>`
+
+``authenticated_channel_finalize/3``
+------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`authenticated_channel <authenticated_channel/0::authenticated_channel_finalize/3>`
+
+``authenticated_channel_initiate/4``
+------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`authenticated_channel <authenticated_channel/0::authenticated_channel_initiate/4>`
+
 ``authentication_info/2``
 -------------------------
 
@@ -28948,6 +28998,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`term_io_protocol <term_io_protocol/0::write_to_codes/2>`
+
+``x25519_keypair/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`x25519 <x25519/0::x25519_keypair/2>`
+
+``x25519_public_key/2``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`x25519 <x25519/0::x25519_public_key/2>`
+
+``x25519_shared_secret/3``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`x25519 <x25519/0::x25519_shared_secret/3>`
 
 ``xchacha20/4``
 ---------------

@@ -105,6 +105,10 @@ library (when using a backend supporting unbound integer arithmetic).
 associated data algorithm to the `crypto` library (when using a backend
 supporting unbound integer arithmetic).
 
+* ADDED: Support for X25519 key agreement and identity-authenticated ephemeral
+channels to the `crypto` library (when using a backend supporting unbound
+integer arithmetic).
+
 * ADDED: Support to the `ranking_protocols` library for ordered multiplayer
 ranking datasets with ranked teams and weighted player participation, plus
 shared portable standard normal distribution numeric helpers.
