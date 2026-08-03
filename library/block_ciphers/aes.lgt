@@ -27,7 +27,7 @@
 		author is 'Paulo Moura',
 		date is 2026-08-03,
 		comment is 'AES-128 block cipher.',
-		see_also is [aes192, aes256]
+		see_also is [aes192, aes256, ecb, cbc, ctr]
 	]).
 
 :- end_object.
@@ -41,7 +41,7 @@
 		author is 'Paulo Moura',
 		date is 2026-08-03,
 		comment is 'AES-192 block cipher.',
-		see_also is [aes128, aes256]
+		see_also is [aes128, aes256, ecb, cbc, ctr]
 	]).
 
 :- end_object.
@@ -55,7 +55,7 @@
 		author is 'Paulo Moura',
 		date is 2026-08-03,
 		comment is 'AES-256 block cipher.',
-		see_also is [aes128, aes192]
+		see_also is [aes128, aes192, ecb, cbc, ctr]
 	]).
 
 :- end_object.

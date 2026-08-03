@@ -1347,6 +1347,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#crs-units-2"><code class="docutils literal notranslate"><span class="pre">crs_units/2</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#crypt-5"><code class="docutils literal notranslate"><span class="pre">crypt/5</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#currency-5"><code class="docutils literal notranslate"><span class="pre">currency/5</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -1519,6 +1522,18 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#decrypt-5"><code class="docutils literal notranslate"><span class="pre">decrypt/5</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#decrypt-block-3"><code class="docutils literal notranslate"><span class="pre">decrypt_block/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#decrypt-padded-4"><code class="docutils literal notranslate"><span class="pre">decrypt_padded/4</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#decrypt-padded-5"><code class="docutils literal notranslate"><span class="pre">decrypt_padded/5</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#decrypt-prepared-block-3"><code class="docutils literal notranslate"><span class="pre">decrypt_prepared_block/3</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#default-1"><code class="docutils literal notranslate"><span class="pre">default/1</span></code></a><ul class="simple">
@@ -2151,7 +2166,19 @@
 <li class="toctree-l2"><a class="reference internal" href="#encrypt-4"><code class="docutils literal notranslate"><span class="pre">encrypt/4</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#encrypt-5"><code class="docutils literal notranslate"><span class="pre">encrypt/5</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#encrypt-block-3"><code class="docutils literal notranslate"><span class="pre">encrypt_block/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#encrypt-padded-4"><code class="docutils literal notranslate"><span class="pre">encrypt_padded/4</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#encrypt-padded-5"><code class="docutils literal notranslate"><span class="pre">encrypt_padded/5</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#encrypt-prepared-block-3"><code class="docutils literal notranslate"><span class="pre">encrypt_prepared_block/3</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#ensure-2"><code class="docutils literal notranslate"><span class="pre">ensure/2</span></code></a><ul class="simple">
@@ -5782,6 +5809,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#preorder-2"><code class="docutils literal notranslate"><span class="pre">preorder/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#prepare-key-2"><code class="docutils literal notranslate"><span class="pre">prepare_key/2</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#prepend-3"><code class="docutils literal notranslate"><span class="pre">prepend/3</span></code></a><ul class="simple">
@@ -12163,6 +12193,14 @@
 <li><p><a class="reference internal" href="crs_projections_protocol_0.html#crs-projections-protocol-0-crs-units-2"><span class="std std-ref">crs_projections_protocol</span></a></p></li>
 </ul>
 </section>
+<section id="crypt-5">
+<h2><code class="docutils literal notranslate"><span class="pre">crypt/5</span></code><a class="headerlink" href="#crypt-5" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="ctr_0.html#ctr-0-crypt-5"><span class="std std-ref">ctr</span></a></p></li>
+</ul>
+</section>
 <section id="currency-5">
 <h2><code class="docutils literal notranslate"><span class="pre">currency/5</span></code><a class="headerlink" href="#currency-5" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -12630,6 +12668,7 @@
 <div class="toctree-wrapper compound">
 </div>
 <ul class="simple">
+<li><p><a class="reference internal" href="ecb_0.html#ecb-0-decrypt-4"><span class="std std-ref">ecb</span></a></p></li>
 <li><p><a class="reference internal" href="paseto_0.html#paseto-0-decrypt-4"><span class="std std-ref">paseto</span></a></p></li>
 </ul>
 </section>
@@ -12638,7 +12677,40 @@
 <div class="toctree-wrapper compound">
 </div>
 <ul class="simple">
+<li><p><a class="reference internal" href="cbc_0.html#cbc-0-decrypt-5"><span class="std std-ref">cbc</span></a></p></li>
 <li><p><a class="reference internal" href="paseto_0.html#paseto-0-decrypt-5"><span class="std std-ref">paseto</span></a></p></li>
+</ul>
+</section>
+<section id="decrypt-block-3">
+<h2><code class="docutils literal notranslate"><span class="pre">decrypt_block/3</span></code><a class="headerlink" href="#decrypt-block-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="block_cipher_protocol_0.html#block-cipher-protocol-0-decrypt-block-3"><span class="std std-ref">block_cipher_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="decrypt-padded-4">
+<h2><code class="docutils literal notranslate"><span class="pre">decrypt_padded/4</span></code><a class="headerlink" href="#decrypt-padded-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="ecb_0.html#ecb-0-decrypt-padded-4"><span class="std std-ref">ecb</span></a></p></li>
+</ul>
+</section>
+<section id="decrypt-padded-5">
+<h2><code class="docutils literal notranslate"><span class="pre">decrypt_padded/5</span></code><a class="headerlink" href="#decrypt-padded-5" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="cbc_0.html#cbc-0-decrypt-padded-5"><span class="std std-ref">cbc</span></a></p></li>
+</ul>
+</section>
+<section id="decrypt-prepared-block-3">
+<h2><code class="docutils literal notranslate"><span class="pre">decrypt_prepared_block/3</span></code><a class="headerlink" href="#decrypt-prepared-block-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="block_cipher_prepared_key_protocol_0.html#block-cipher-prepared-key-protocol-0-decrypt-prepared-block-3"><span class="std std-ref">block_cipher_prepared_key_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="default-1">
@@ -14401,7 +14473,16 @@
 <div class="toctree-wrapper compound">
 </div>
 <ul class="simple">
+<li><p><a class="reference internal" href="ecb_0.html#ecb-0-encrypt-4"><span class="std std-ref">ecb</span></a></p></li>
 <li><p><a class="reference internal" href="paseto_0.html#paseto-0-encrypt-4"><span class="std std-ref">paseto</span></a></p></li>
+</ul>
+</section>
+<section id="encrypt-5">
+<h2><code class="docutils literal notranslate"><span class="pre">encrypt/5</span></code><a class="headerlink" href="#encrypt-5" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="cbc_0.html#cbc-0-encrypt-5"><span class="std std-ref">cbc</span></a></p></li>
 </ul>
 </section>
 <section id="encrypt-block-3">
@@ -14410,6 +14491,30 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="block_cipher_protocol_0.html#block-cipher-protocol-0-encrypt-block-3"><span class="std std-ref">block_cipher_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="encrypt-padded-4">
+<h2><code class="docutils literal notranslate"><span class="pre">encrypt_padded/4</span></code><a class="headerlink" href="#encrypt-padded-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="ecb_0.html#ecb-0-encrypt-padded-4"><span class="std std-ref">ecb</span></a></p></li>
+</ul>
+</section>
+<section id="encrypt-padded-5">
+<h2><code class="docutils literal notranslate"><span class="pre">encrypt_padded/5</span></code><a class="headerlink" href="#encrypt-padded-5" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="cbc_0.html#cbc-0-encrypt-padded-5"><span class="std std-ref">cbc</span></a></p></li>
+</ul>
+</section>
+<section id="encrypt-prepared-block-3">
+<h2><code class="docutils literal notranslate"><span class="pre">encrypt_prepared_block/3</span></code><a class="headerlink" href="#encrypt-prepared-block-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="block_cipher_prepared_key_protocol_0.html#block-cipher-prepared-key-protocol-0-encrypt-prepared-block-3"><span class="std std-ref">block_cipher_prepared_key_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="ensure-2">
@@ -24477,6 +24582,14 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="bintree_0.html#bintree-0-preorder-2"><span class="std std-ref">bintree</span></a></p></li>
+</ul>
+</section>
+<section id="prepare-key-2">
+<h2><code class="docutils literal notranslate"><span class="pre">prepare_key/2</span></code><a class="headerlink" href="#prepare-key-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="block_cipher_prepared_key_protocol_0.html#block-cipher-prepared-key-protocol-0-prepare-key-2"><span class="std std-ref">block_cipher_prepared_key_protocol</span></a></p></li>
 </ul>
 </section>
 <section id="prepend-3">

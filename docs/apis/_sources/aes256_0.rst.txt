@@ -28,7 +28,7 @@ AES-256 block cipher.
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`block_cipher_protocol/0::block_size/1`  :ref:`block_cipher_protocol/0::encrypt_block/3`  :ref:`block_cipher_protocol/0::key_size/1`  
+|     :ref:`block_cipher_protocol/0::block_size/1`  :ref:`block_cipher_protocol/0::decrypt_block/3`  :ref:`block_cipher_prepared_key_protocol/0::decrypt_prepared_block/3`  :ref:`block_cipher_protocol/0::encrypt_block/3`  :ref:`block_cipher_prepared_key_protocol/0::encrypt_prepared_block/3`  :ref:`block_cipher_protocol/0::key_size/1`  :ref:`block_cipher_prepared_key_protocol/0::prepare_key/2`  
 
 .. contents::
    :local:
@@ -56,5 +56,5 @@ Operators
 
 .. seealso::
 
-   :ref:`aes128 <aes128/0>`, :ref:`aes192 <aes192/0>`
+   :ref:`aes128 <aes128/0>`, :ref:`aes192 <aes192/0>`, :ref:`ecb <ecb/0>`, :ref:`cbc <cbc/0>`, :ref:`ctr <ctr/0>`
 

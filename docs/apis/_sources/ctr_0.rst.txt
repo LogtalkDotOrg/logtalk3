@@ -1,0 +1,73 @@
+.. index:: single: ctr
+.. _ctr/0:
+
+.. rst-class:: right
+
+**object**
+
+``ctr``
+=======
+
+Generic Counter mode encryption and decryption using a whole-block big-endian counter.
+
+| **Availability:** 
+|    ``logtalk_load(block_ciphers(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-03
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`block_cipher_modes_common <block_cipher_modes_common/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: crypt/5
+.. _ctr/0::crypt/5:
+
+``crypt/5``
+^^^^^^^^^^^
+
+Encrypts or decrypts bytes using an explicit initial whole-block big-endian counter.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``crypt(Cipher,Key,InitialCounter,Input,Output)``
+| **Mode and number of proofs:**
+|    ``crypt(+object_identifier,+list(byte),+list(byte),+list(byte),--list(byte))`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

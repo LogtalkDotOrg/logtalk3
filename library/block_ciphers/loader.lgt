@@ -23,8 +23,13 @@
 	logtalk_load(basic_types(loader)),
 	logtalk_load([
 		block_cipher_protocol,
+		block_cipher_prepared_key_protocol,
 		aes_common,
-		aes
+		aes,
+		block_cipher_modes_common,
+		ecb,
+		cbc,
+		ctr
 	], [
 		optimize(on)
 	])

@@ -25,6 +25,7 @@ Categories
    authenticated_channel <authenticated_channel_0>
    best_first <best_first_0>
    blake2_core(Key,DigestSize) <blake2_core_2>
+   block_cipher_modes_common <block_cipher_modes_common_0>
    ccsds_frames_types <ccsds_frames_types_0>
    ccsds_packets_types <ccsds_packets_types_0>
    ccsds_time_codes_types <ccsds_time_codes_types_0>
@@ -182,6 +183,7 @@ Objects
    caller_diagram <caller_diagram_0>
    caller_diagram(Format) <caller_diagram_1>
    cartesian_products <cartesian_products_0>
+   cbc <cbc_0>
    cbor <cbor_0>
    cbor(StringRepresentation) <cbor_1>
    cc_metric <cc_metric_0>
@@ -228,6 +230,7 @@ Objects
    csv <csv_0>
    csv(Header,Separator,IgnoreQuotes) <csv_3>
    csv(Header,Separator,IgnoreQuotes,Comments) <csv_4>
+   ctr <ctr_0>
    ctrf_output <ctrf_output_0>
    ctrf_report <ctrf_report_0>
    cuid2 <cuid2_0>
@@ -268,6 +271,7 @@ Objects
    doclet <doclet_0>
    dot_graph_language <dot_graph_language_0>
    dump_trace <dump_trace_0>
+   ecb <ecb_0>
    eclat_pattern_miner <eclat_pattern_miner_0>
    edcg <edcg_0>
    either <either_0>
@@ -776,6 +780,7 @@ Protocols
    arrangements_protocol <arrangements_protocol_0>
    assignvarsp <assignvarsp_0>
    association_rule_miner_protocol <association_rule_miner_protocol_0>
+   block_cipher_prepared_key_protocol <block_cipher_prepared_key_protocol_0>
    block_cipher_protocol <block_cipher_protocol_0>
    cartesian_products_protocol <cartesian_products_protocol_0>
    ccsds_frame_protocol <ccsds_frame_protocol_0>

@@ -1,0 +1,132 @@
+.. index:: single: ecb
+.. _ecb/0:
+
+.. rst-class:: right
+
+**object**
+
+``ecb``
+=======
+
+Generic Electronic Codebook mode encryption and decryption.
+
+| **Availability:** 
+|    ``logtalk_load(block_ciphers(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-03
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`block_cipher_modes_common <block_cipher_modes_common/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: encrypt/4
+.. _ecb/0::encrypt/4:
+
+``encrypt/4``
+^^^^^^^^^^^^^
+
+Encrypts block-aligned plaintext without padding.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``encrypt(Cipher,Key,Plaintext,Ciphertext)``
+| **Mode and number of proofs:**
+|    ``encrypt(+object_identifier,+list(byte),+list(byte),--list(byte))`` - ``one_or_error``
+
+
+------------
+
+.. index:: decrypt/4
+.. _ecb/0::decrypt/4:
+
+``decrypt/4``
+^^^^^^^^^^^^^
+
+Decrypts block-aligned ciphertext without removing padding.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decrypt(Cipher,Key,Ciphertext,Plaintext)``
+| **Mode and number of proofs:**
+|    ``decrypt(+object_identifier,+list(byte),+list(byte),--list(byte))`` - ``one_or_error``
+
+
+------------
+
+.. index:: encrypt_padded/4
+.. _ecb/0::encrypt_padded/4:
+
+``encrypt_padded/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Pads plaintext using PKCS#7 and encrypts it.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``encrypt_padded(Cipher,Key,Plaintext,Ciphertext)``
+| **Mode and number of proofs:**
+|    ``encrypt_padded(+object_identifier,+list(byte),+list(byte),--list(byte))`` - ``one_or_error``
+
+
+------------
+
+.. index:: decrypt_padded/4
+.. _ecb/0::decrypt_padded/4:
+
+``decrypt_padded/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Decrypts ciphertext and validates and removes PKCS#7 padding.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decrypt_padded(Cipher,Key,Ciphertext,Plaintext)``
+| **Mode and number of proofs:**
+|    ``decrypt_padded(+object_identifier,+list(byte),+list(byte),--list(byte))`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

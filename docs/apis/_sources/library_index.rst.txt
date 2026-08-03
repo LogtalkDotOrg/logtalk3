@@ -202,7 +202,12 @@ To load any library (including developer tools, ports, and contributions), use t
    aes192 <aes192_0>
    aes256 <aes256_0>
    aes_common(KeySize,Nk,Nr) <aes_common_3>
+   block_cipher_modes_common <block_cipher_modes_common_0>
+   block_cipher_prepared_key_protocol <block_cipher_prepared_key_protocol_0>
    block_cipher_protocol <block_cipher_protocol_0>
+   cbc <cbc_0>
+   ctr <ctr_0>
+   ecb <ecb_0>
 
 :ref:`borda_ranker <library_borda_ranker>`
 ------------------------------------------

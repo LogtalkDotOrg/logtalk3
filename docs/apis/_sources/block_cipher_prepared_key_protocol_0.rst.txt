@@ -1,0 +1,111 @@
+.. index:: single: block_cipher_prepared_key_protocol
+.. _block_cipher_prepared_key_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``block_cipher_prepared_key_protocol``
+======================================
+
+Protocol for block ciphers supporting opaque prepared keys for repeated block operations.
+
+| **Availability:** 
+|    ``logtalk_load(block_ciphers(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-03
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Extends:**
+|    ``public`` :ref:`block_cipher_protocol <block_cipher_protocol/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`block_cipher_protocol/0::block_size/1`  :ref:`block_cipher_protocol/0::decrypt_block/3`  :ref:`block_cipher_protocol/0::encrypt_block/3`  :ref:`block_cipher_protocol/0::key_size/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: prepare_key/2
+.. _block_cipher_prepared_key_protocol/0::prepare_key/2:
+
+``prepare_key/2``
+^^^^^^^^^^^^^^^^^
+
+Validates and prepares a key for repeated block encryption or decryption.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``prepare_key(Key,PreparedKey)``
+| **Mode and number of proofs:**
+|    ``prepare_key(+list(byte),--compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: encrypt_prepared_block/3
+.. _block_cipher_prepared_key_protocol/0::encrypt_prepared_block/3:
+
+``encrypt_prepared_block/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Encrypts a plaintext block using an opaque prepared key created by the same cipher object.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``encrypt_prepared_block(PreparedKey,PlaintextBlock,CiphertextBlock)``
+| **Mode and number of proofs:**
+|    ``encrypt_prepared_block(+compound,+list(byte),--list(byte))`` - ``one_or_error``
+
+
+------------
+
+.. index:: decrypt_prepared_block/3
+.. _block_cipher_prepared_key_protocol/0::decrypt_prepared_block/3:
+
+``decrypt_prepared_block/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Decrypts a ciphertext block using an opaque prepared key created by the same cipher object.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decrypt_prepared_block(PreparedKey,CiphertextBlock,PlaintextBlock)``
+| **Mode and number of proofs:**
+|    ``decrypt_prepared_block(+compound,+list(byte),--list(byte))`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

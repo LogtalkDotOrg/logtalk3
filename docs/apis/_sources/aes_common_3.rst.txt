@@ -27,7 +27,7 @@ AES block cipher implementation shared by the AES-128, AES-192, and AES-256 obje
 
 
 | **Implements:**
-|    ``public`` :ref:`block_cipher_protocol <block_cipher_protocol/0>`
+|    ``public`` :ref:`block_cipher_prepared_key_protocol <block_cipher_prepared_key_protocol/0>`
 | **Uses:**
 |    :ref:`list <list/0>`
 |    :ref:`type <type/0>`
@@ -36,7 +36,7 @@ AES block cipher implementation shared by the AES-128, AES-192, and AES-256 obje
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`block_cipher_protocol/0::block_size/1`  :ref:`block_cipher_protocol/0::encrypt_block/3`  :ref:`block_cipher_protocol/0::key_size/1`  
+|     :ref:`block_cipher_protocol/0::block_size/1`  :ref:`block_cipher_protocol/0::decrypt_block/3`  :ref:`block_cipher_prepared_key_protocol/0::decrypt_prepared_block/3`  :ref:`block_cipher_protocol/0::encrypt_block/3`  :ref:`block_cipher_prepared_key_protocol/0::encrypt_prepared_block/3`  :ref:`block_cipher_protocol/0::key_size/1`  :ref:`block_cipher_prepared_key_protocol/0::prepare_key/2`  
 
 .. contents::
    :local:

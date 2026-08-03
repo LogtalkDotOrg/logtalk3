@@ -8,7 +8,7 @@
 ``block_cipher_protocol``
 =========================
 
-Protocol for one-shot encryption using a block cipher.
+Protocol for one-shot encryption and decryption using a block cipher.
 
 | **Availability:** 
 |    ``logtalk_load(block_ciphers(loader))``
@@ -64,6 +64,37 @@ Encrypts a plaintext block using the given key.
 |    ``Key`` or ``PlaintextBlock`` contains a non-integer byte:
 |        ``type_error(integer,Byte)``
 |    ``Key`` or ``PlaintextBlock`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+
+
+------------
+
+.. index:: decrypt_block/3
+.. _block_cipher_protocol/0::decrypt_block/3:
+
+``decrypt_block/3``
+^^^^^^^^^^^^^^^^^^^
+
+Decrypts a ciphertext block using the given key.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decrypt_block(Key,CiphertextBlock,PlaintextBlock)``
+| **Mode and number of proofs:**
+|    ``decrypt_block(+list(byte),+list(byte),--list(byte))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Key`` or ``CiphertextBlock`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Key`` is neither a variable nor a list of the required number of bytes:
+|        ``type_error(list(byte,KeySize),Key)``
+|    ``CiphertextBlock`` is neither a variable nor a list of the required number of bytes:
+|        ``type_error(list(byte,BlockSize),CiphertextBlock)``
+|    ``Key`` or ``CiphertextBlock`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``Key`` or ``CiphertextBlock`` contains an integer outside the byte range:
 |        ``domain_error(byte,Byte)``
 
 

@@ -4372,6 +4372,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`crs_projections_protocol <crs_projections_protocol/0::crs_units/2>`
 
+``crypt/5``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ctr <ctr/0::crypt/5>`
+
 ``currency/5``
 --------------
 
@@ -4954,6 +4964,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`ecb <ecb/0::decrypt/4>`
 * :ref:`paseto <paseto/0::decrypt/4>`
 
 ``decrypt/5``
@@ -4964,7 +4975,48 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`cbc <cbc/0::decrypt/5>`
 * :ref:`paseto <paseto/0::decrypt/5>`
+
+``decrypt_block/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`block_cipher_protocol <block_cipher_protocol/0::decrypt_block/3>`
+
+``decrypt_padded/4``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ecb <ecb/0::decrypt_padded/4>`
+
+``decrypt_padded/5``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`cbc <cbc/0::decrypt_padded/5>`
+
+``decrypt_prepared_block/3``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`block_cipher_prepared_key_protocol <block_cipher_prepared_key_protocol/0::decrypt_prepared_block/3>`
 
 ``default/1``
 -------------
@@ -7147,7 +7199,18 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`ecb <ecb/0::encrypt/4>`
 * :ref:`paseto <paseto/0::encrypt/4>`
+
+``encrypt/5``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`cbc <cbc/0::encrypt/5>`
 
 ``encrypt_block/3``
 -------------------
@@ -7158,6 +7221,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`block_cipher_protocol <block_cipher_protocol/0::encrypt_block/3>`
+
+``encrypt_padded/4``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ecb <ecb/0::encrypt_padded/4>`
+
+``encrypt_padded/5``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`cbc <cbc/0::encrypt_padded/5>`
+
+``encrypt_prepared_block/3``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`block_cipher_prepared_key_protocol <block_cipher_prepared_key_protocol/0::encrypt_prepared_block/3>`
 
 ``ensure/2``
 ------------
@@ -19645,6 +19738,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`bintree <bintree/0::preorder/2>`
+
+``prepare_key/2``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`block_cipher_prepared_key_protocol <block_cipher_prepared_key_protocol/0::prepare_key/2>`
 
 ``prepend/3``
 -------------

@@ -25,7 +25,7 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-08-03,
-		comment is 'Protocol for one-shot encryption using a block cipher.'
+		comment is 'Protocol for one-shot encryption and decryption using a block cipher.'
 	]).
 
 	:- public(encrypt_block/3).
@@ -39,6 +39,20 @@
 			'``PlaintextBlock`` is neither a variable nor a list of the required number of bytes' - type_error(list(byte, 'BlockSize'), 'PlaintextBlock'),
 			'``Key`` or ``PlaintextBlock`` contains a non-integer byte' - type_error(integer, 'Byte'),
 			'``Key`` or ``PlaintextBlock`` contains an integer outside the byte range' - domain_error(byte, 'Byte')
+		]
+	]).
+
+	:- public(decrypt_block/3).
+	:- mode(decrypt_block(+list(byte), +list(byte), --list(byte)), one_or_error).
+	:- info(decrypt_block/3, [
+		comment is 'Decrypts a ciphertext block using the given key.',
+		argnames is ['Key', 'CiphertextBlock', 'PlaintextBlock'],
+		exceptions is [
+			'``Key`` or ``CiphertextBlock`` is a variable or a partial list' - instantiation_error,
+			'``Key`` is neither a variable nor a list of the required number of bytes' - type_error(list(byte, 'KeySize'), 'Key'),
+			'``CiphertextBlock`` is neither a variable nor a list of the required number of bytes' - type_error(list(byte, 'BlockSize'), 'CiphertextBlock'),
+			'``Key`` or ``CiphertextBlock`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``Key`` or ``CiphertextBlock`` contains an integer outside the byte range' - domain_error(byte, 'Byte')
 		]
 	]).
 
