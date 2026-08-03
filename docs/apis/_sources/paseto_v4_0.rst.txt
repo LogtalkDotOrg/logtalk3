@@ -1,0 +1,80 @@
+.. index:: single: paseto_v4
+.. _paseto_v4/0:
+
+.. rst-class:: right
+
+**object**
+
+``paseto_v4``
+=============
+
+PASETO v4.local and v4.public implementation for byte payloads.
+
+| **Availability:** 
+|    ``logtalk_load(paseto(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-03
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`paseto_protocol <paseto_protocol/0>`
+| **Imports:**
+|    ``public`` :ref:`paseto_helpers <paseto_helpers/0>`
+| **Uses:**
+|    :ref:`blake2b(Key,DigestSize) <blake2b/2>`
+|    :ref:`crypto <crypto/0>`
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`paseto_protocol/0::footer/2`  :ref:`paseto_protocol/0::local_decrypt/3`  :ref:`paseto_protocol/0::local_decrypt/5`  :ref:`paseto_protocol/0::local_encrypt/3`  :ref:`paseto_protocol/0::local_encrypt/5`  :ref:`paseto_protocol/0::local_key/1`  :ref:`paseto_protocol/0::public_keypair/2`  :ref:`paseto_protocol/0::public_sign/3`  :ref:`paseto_protocol/0::public_sign/5`  :ref:`paseto_protocol/0::public_verify/3`  :ref:`paseto_protocol/0::public_verify/5`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: local_encrypt_with_nonce/6
+.. _paseto_v4/0::local_encrypt_with_nonce/6:
+
+``local_encrypt_with_nonce/6``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Encrypts a local payload using an explicit 32-byte nonce. Intended for deterministic conformance tests; production callers must use local_encrypt/3 or local_encrypt/5.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_encrypt_with_nonce(Key,Nonce,Payload,Footer,ImplicitAssertion,Token)``
+| **Mode and number of proofs:**
+|    ``local_encrypt_with_nonce(+list(byte),+list(byte),+list(byte),+list(byte),+list(byte),-atom)`` - ``one_or_error``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

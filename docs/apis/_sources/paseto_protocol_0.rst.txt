@@ -1,0 +1,264 @@
+.. index:: single: paseto_protocol
+.. _paseto_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``paseto_protocol``
+===================
+
+PASETO v4.local and v4.public protocol for byte payloads.
+
+| **Availability:** 
+|    ``logtalk_load(paseto(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-03
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: local_key/1
+.. _paseto_protocol/0::local_key/1:
+
+``local_key/1``
+^^^^^^^^^^^^^^^
+
+Generates a 32-byte v4.local key.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_key(Key)``
+| **Mode and number of proofs:**
+|    ``local_key(-list(byte))`` - ``one``
+
+
+------------
+
+.. index:: public_keypair/2
+.. _paseto_protocol/0::public_keypair/2:
+
+``public_keypair/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Generates an Ed25519 seed and public key for v4.public tokens.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``public_keypair(Seed,PublicKey)``
+| **Mode and number of proofs:**
+|    ``public_keypair(-list(byte),-list(byte))`` - ``one``
+
+
+------------
+
+.. index:: local_encrypt/3
+.. _paseto_protocol/0::local_encrypt/3:
+
+``local_encrypt/3``
+^^^^^^^^^^^^^^^^^^^
+
+Encrypts Payload using a 32-byte local Key and empty footer and implicit assertion.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_encrypt(Key,Payload,Token)``
+| **Mode and number of proofs:**
+|    ``local_encrypt(+list(byte),+list(byte),-atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: local_encrypt/5
+.. _paseto_protocol/0::local_encrypt/5:
+
+``local_encrypt/5``
+^^^^^^^^^^^^^^^^^^^
+
+Encrypts Payload using a 32-byte local Key and authenticates Footer and ImplicitAssertion.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_encrypt(Key,Payload,Footer,ImplicitAssertion,Token)``
+| **Mode and number of proofs:**
+|    ``local_encrypt(+list(byte),+list(byte),+list(byte),+list(byte),-atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: local_decrypt/3
+.. _paseto_protocol/0::local_decrypt/3:
+
+``local_decrypt/3``
+^^^^^^^^^^^^^^^^^^^
+
+Authenticates and decrypts a local Token using an empty implicit assertion.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_decrypt(Token,Key,Payload)``
+| **Mode and number of proofs:**
+|    ``local_decrypt(+atom,+list(byte),-list(byte))`` - ``zero_or_one_or_error``
+
+
+------------
+
+.. index:: local_decrypt/5
+.. _paseto_protocol/0::local_decrypt/5:
+
+``local_decrypt/5``
+^^^^^^^^^^^^^^^^^^^
+
+Authenticates and decrypts a local Token using ImplicitAssertion and returns its authenticated Footer.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``local_decrypt(Token,Key,ImplicitAssertion,Payload,Footer)``
+| **Mode and number of proofs:**
+|    ``local_decrypt(+atom,+list(byte),+list(byte),-list(byte),-list(byte))`` - ``zero_or_one_or_error``
+
+
+------------
+
+.. index:: public_sign/3
+.. _paseto_protocol/0::public_sign/3:
+
+``public_sign/3``
+^^^^^^^^^^^^^^^^^
+
+Signs Payload using an Ed25519 Seed and empty footer and implicit assertion.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``public_sign(Seed,Payload,Token)``
+| **Mode and number of proofs:**
+|    ``public_sign(+list(byte),+list(byte),-atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: public_sign/5
+.. _paseto_protocol/0::public_sign/5:
+
+``public_sign/5``
+^^^^^^^^^^^^^^^^^
+
+Signs Payload using an Ed25519 Seed and authenticates Footer and ImplicitAssertion.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``public_sign(Seed,Payload,Footer,ImplicitAssertion,Token)``
+| **Mode and number of proofs:**
+|    ``public_sign(+list(byte),+list(byte),+list(byte),+list(byte),-atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: public_verify/3
+.. _paseto_protocol/0::public_verify/3:
+
+``public_verify/3``
+^^^^^^^^^^^^^^^^^^^
+
+Authenticates a public Token using an Ed25519 public key and empty implicit assertion.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``public_verify(Token,PublicKey,Payload)``
+| **Mode and number of proofs:**
+|    ``public_verify(+atom,+list(byte),-list(byte))`` - ``zero_or_one_or_error``
+
+
+------------
+
+.. index:: public_verify/5
+.. _paseto_protocol/0::public_verify/5:
+
+``public_verify/5``
+^^^^^^^^^^^^^^^^^^^
+
+Authenticates a public Token using an Ed25519 public key and ImplicitAssertion and returns its authenticated Footer.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``public_verify(Token,PublicKey,ImplicitAssertion,Payload,Footer)``
+| **Mode and number of proofs:**
+|    ``public_verify(+atom,+list(byte),+list(byte),-list(byte),-list(byte))`` - ``zero_or_one_or_error``
+
+
+------------
+
+.. index:: footer/2
+.. _paseto_protocol/0::footer/2:
+
+``footer/2``
+^^^^^^^^^^^^
+
+Extracts a token footer without authenticating it. The result must only be used for pre-authentication key selection.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``footer(Token,Footer)``
+| **Mode and number of proofs:**
+|    ``footer(+atom,-list(byte))`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

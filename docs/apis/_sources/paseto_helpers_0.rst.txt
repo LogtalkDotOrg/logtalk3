@@ -1,0 +1,112 @@
+.. index:: single: paseto_helpers
+.. _paseto_helpers/0:
+
+.. rst-class:: right
+
+**category**
+
+``paseto_helpers``
+==================
+
+Protected PASETO v4 framing, PAE, and encoding helpers.
+
+| **Availability:** 
+|    ``logtalk_load(paseto(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-03
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Uses:**
+|    :ref:`base64url_no_padding <base64url_no_padding/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: pae/2
+.. _paseto_helpers/0::pae/2:
+
+``pae/2``
+^^^^^^^^^
+
+Pre-authentication encodes a list of byte-list pieces.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pae(Pieces,Encoding)``
+| **Mode and number of proofs:**
+|    ``pae(+list(list(byte)),-list(byte))`` - ``one``
+
+
+------------
+
+.. index:: parse_token/4
+.. _paseto_helpers/0::parse_token/4:
+
+``parse_token/4``
+^^^^^^^^^^^^^^^^^
+
+Strictly parses a canonical v4 token for Purpose and decodes its body and optional footer.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse_token(Token,Purpose,Body,Footer)``
+| **Mode and number of proofs:**
+|    ``parse_token(+atom,+atom,-list(byte),-list(byte))`` - ``one_or_error``
+
+
+------------
+
+.. index:: format_token/4
+.. _paseto_helpers/0::format_token/4:
+
+``format_token/4``
+^^^^^^^^^^^^^^^^^^
+
+Formats a canonical v4 token for Purpose from body and footer bytes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``format_token(Purpose,Body,Footer,Token)``
+| **Mode and number of proofs:**
+|    ``format_token(+atom,+list(byte),+list(byte),-atom)`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

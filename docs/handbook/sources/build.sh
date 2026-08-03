@@ -270,6 +270,7 @@ sed '1,19d' ../../../library/options/NOTES.md | pandoc -f gfm -t rst -o librarie
 sed '1,19d' ../../../library/os/NOTES.md | pandoc -f gfm -t rst -o libraries/os.rst
 sed '1,19d' ../../../library/otp/NOTES.md | pandoc -f gfm -t rst -o libraries/otp.rst
 sed '1,19d' ../../../library/partitions/NOTES.md | pandoc -f gfm -t rst -o libraries/partitions.rst
+sed '1,19d' ../../../library/paseto/NOTES.md | pandoc -f gfm -t rst -o libraries/paseto.rst
 sed '1,19d' ../../../library/pattern_mining_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/pattern_mining_protocols.rst
 sed '1,19d' ../../../library/pca_projection/NOTES.md | pandoc -f gfm -t rst -o libraries/pca_projection.rst
 sed '1,19d' ../../../library/permutations/NOTES.md | pandoc -f gfm -t rst -o libraries/permutations.rst

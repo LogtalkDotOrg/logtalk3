@@ -8,14 +8,14 @@
 ``xchacha20_poly1305``
 ======================
 
-XChaCha20-Poly1305 authenticated encryption with associated data algorithm implementation. Requires exact, unbounded integer arithmetic for the Poly1305 130-bit accumulator. Bare, unauthenticated ChaCha20 is deliberately not exposed as a public predicate.
+XChaCha20 stream cipher and XChaCha20-Poly1305 authenticated encryption with associated data algorithm implementation. Requires exact, unbounded integer arithmetic for the Poly1305 130-bit accumulator.
 
 | **Availability:** 
 |    ``logtalk_load(crypto(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-02
+| **Date:** 2026-08-03
 
 | **Compilation flags:**
 |    ``static``
@@ -39,6 +39,108 @@ XChaCha20-Poly1305 authenticated encryption with associated data algorithm imple
 
 Public predicates
 -----------------
+
+.. index:: xchacha20/4
+.. _xchacha20_poly1305/0::xchacha20/4:
+
+``xchacha20/4``
+^^^^^^^^^^^^^^^
+
+Encrypts or decrypts Input using XChaCha20. Clients should only use this unauthenticated stream cipher as part of a construction that provides its own authentication.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``xchacha20(Key,Nonce,Input,Output)``
+| **Mode and number of proofs:**
+|    ``xchacha20(+list(byte),+list(byte),+list(byte),-list(byte))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Key`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``Key`` is neither a variable nor a list of 32 bytes:
+|        ``type_error(list(byte,32),Key)``
+|    ``Key`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``Key`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``Nonce`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``Nonce`` is neither a variable nor a list of 24 bytes:
+|        ``type_error(list(byte,24),Nonce)``
+|    ``Nonce`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``Nonce`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``Input`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``Input`` is neither a variable nor a list of bytes:
+|        ``type_error(list(byte),Input)``
+|    ``Input`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``Input`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+
+
+------------
+
+.. index:: xchacha20_subkey_and_nonce/4
+.. _xchacha20_poly1305/0::xchacha20_subkey_and_nonce/4:
+
+``xchacha20_subkey_and_nonce/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Derives the ChaCha20 subkey words and nonce words for an XChaCha20 key and nonce. The caller is responsible for validating the key and nonce and should only use the result in a construction that provides authentication.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``xchacha20_subkey_and_nonce(Key,Nonce,SubkeyWords,NonceWords)``
+| **Mode and number of proofs:**
+|    ``xchacha20_subkey_and_nonce(+list(byte),+list(byte),-list(integer),-list(integer))`` - ``one``
+
+
+------------
+
+.. index:: chacha20_encrypt/5
+.. _xchacha20_poly1305/0::chacha20_encrypt/5:
+
+``chacha20_encrypt/5``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Encrypts or decrypts bytes using ChaCha20 words and the given initial block counter. The caller is responsible for validating all arguments and should only use this unauthenticated stream cipher as part of a construction that provides authentication.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``chacha20_encrypt(KeyWords,Counter,NonceWords,Input,Output)``
+| **Mode and number of proofs:**
+|    ``chacha20_encrypt(+list(integer),+non_negative_integer,+list(integer),+list(byte),-list(byte))`` - ``one``
+
+
+------------
+
+.. index:: chacha20_block/4
+.. _xchacha20_poly1305/0::chacha20_block/4:
+
+``chacha20_block/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Computes a 64-byte ChaCha20 block using key words and the given block counter and nonce words. The caller is responsible for validating all arguments and should only use it as part of a construction that provides authentication.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``chacha20_block(KeyWords,Counter,NonceWords,Block)``
+| **Mode and number of proofs:**
+|    ``chacha20_block(+list(integer),+non_negative_integer,+list(integer),-list(byte))`` - ``one``
+
+
+------------
 
 .. index:: xchacha20_poly1305_encrypt/5
 .. _xchacha20_poly1305/0::xchacha20_poly1305_encrypt/5:

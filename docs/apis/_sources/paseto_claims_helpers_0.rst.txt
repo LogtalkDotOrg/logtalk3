@@ -1,0 +1,157 @@
+.. index:: single: paseto_claims_helpers
+.. _paseto_claims_helpers/0:
+
+.. rst-class:: right
+
+**category**
+
+``paseto_claims_helpers``
+=========================
+
+Shared JSON and option helpers for PASETO claims workflows.
+
+| **Availability:** 
+|    ``logtalk_load(paseto(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-03
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Extends:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`json <json/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: json_member/3
+.. _paseto_claims_helpers/0::json_member/3:
+
+``json_member/3``
+^^^^^^^^^^^^^^^^^
+
+Enumerates JSON object member values for a key.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``json_member(Key,Object,Value)``
+| **Mode and number of proofs:**
+|    ``json_member(+atom,+term,-term)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: json_object_pairs/2
+.. _paseto_claims_helpers/0::json_object_pairs/2:
+
+``json_object_pairs/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Extracts pairs from a JSON object term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``json_object_pairs(Object,Pairs)``
+| **Mode and number of proofs:**
+|    ``json_object_pairs(+term,-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: json_object/1
+.. _paseto_claims_helpers/0::json_object/1:
+
+``json_object/1``
+^^^^^^^^^^^^^^^^^
+
+Validates a JSON object and rejects duplicate member names.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``json_object(Object)``
+| **Mode and number of proofs:**
+|    ``json_object(+term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Object`` is not a JSON object or contains duplicate members:
+|        ``domain_error(paseto_json_object,Object)``
+
+
+------------
+
+.. index:: json_bytes/2
+.. _paseto_claims_helpers/0::json_bytes/2:
+
+``json_bytes/2``
+^^^^^^^^^^^^^^^^
+
+Converts between a JSON term and its UTF-8-compatible byte representation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``json_bytes(JSON,Bytes)``
+| **Mode and number of proofs:**
+|    ``json_bytes(+term,-list(byte))`` - ``one_or_error``
+|    ``json_bytes(-term,+list(byte))`` - ``one_or_error``
+
+
+------------
+
+.. index:: byte_list/1
+.. _paseto_claims_helpers/0::byte_list/1:
+
+``byte_list/1``
+^^^^^^^^^^^^^^^
+
+Succeeds when the argument is a proper list of bytes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``byte_list(Bytes)``
+| **Mode and number of proofs:**
+|    ``byte_list(+term)`` - ``zero_or_one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

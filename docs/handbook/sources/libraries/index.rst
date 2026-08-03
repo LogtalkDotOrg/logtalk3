@@ -219,6 +219,7 @@ directory in the ``NOTES.md`` file.
    os
    otp
    partitions
+   paseto
    pattern_mining_protocols
    pca_projection
    permutations

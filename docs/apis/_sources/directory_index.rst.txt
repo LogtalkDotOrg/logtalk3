@@ -2356,6 +2356,22 @@ To load an entity, always load the library that includes it using the goal ``log
    partitions <partitions_0>
    partitions_protocol <partitions_protocol_0>
 
+``library/paseto/``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   paseto <paseto_0>
+   paseto_claims <paseto_claims_0>
+   paseto_claims_helpers <paseto_claims_helpers_0>
+   paseto_helpers <paseto_helpers_0>
+   paseto_keys <paseto_keys_0>
+   paseto_protocol <paseto_protocol_0>
+   paseto_v4 <paseto_v4_0>
+
 ``library/pattern_mining_protocols/``
 -------------------------------------
 

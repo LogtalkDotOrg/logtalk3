@@ -25,8 +25,50 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-02,
-		comment is 'XChaCha20-Poly1305 authenticated encryption with associated data algorithm implementation. Requires exact, unbounded integer arithmetic for the Poly1305 130-bit accumulator. Bare, unauthenticated ChaCha20 is deliberately not exposed as a public predicate.'
+		date is 2026-08-03,
+		comment is 'XChaCha20 stream cipher and XChaCha20-Poly1305 authenticated encryption with associated data algorithm implementation. Requires exact, unbounded integer arithmetic for the Poly1305 130-bit accumulator.'
+	]).
+
+	:- public(xchacha20/4).
+	:- mode(xchacha20(+list(byte), +list(byte), +list(byte), -list(byte)), one_or_error).
+	:- info(xchacha20/4, [
+		comment is 'Encrypts or decrypts Input using XChaCha20. Clients should only use this unauthenticated stream cipher as part of a construction that provides its own authentication.',
+		argnames is ['Key', 'Nonce', 'Input', 'Output'],
+		exceptions is [
+			'``Key`` is a partial list or a list with an element which is a variable' - instantiation_error,
+			'``Key`` is neither a variable nor a list of 32 bytes' - type_error(list(byte, 32), 'Key'),
+			'``Key`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``Key`` contains an integer outside the byte range' - domain_error(byte, 'Byte'),
+			'``Nonce`` is a partial list or a list with an element which is a variable' - instantiation_error,
+			'``Nonce`` is neither a variable nor a list of 24 bytes' - type_error(list(byte, 24), 'Nonce'),
+			'``Nonce`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``Nonce`` contains an integer outside the byte range' - domain_error(byte, 'Byte'),
+			'``Input`` is a partial list or a list with an element which is a variable' - instantiation_error,
+			'``Input`` is neither a variable nor a list of bytes' - type_error(list(byte), 'Input'),
+			'``Input`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``Input`` contains an integer outside the byte range' - domain_error(byte, 'Byte')
+		]
+	]).
+
+	:- public(xchacha20_subkey_and_nonce/4).
+	:- mode(xchacha20_subkey_and_nonce(+list(byte), +list(byte), -list(integer), -list(integer)), one).
+	:- info(xchacha20_subkey_and_nonce/4, [
+		comment is 'Derives the ChaCha20 subkey words and nonce words for an XChaCha20 key and nonce. The caller is responsible for validating the key and nonce and should only use the result in a construction that provides authentication.',
+		argnames is ['Key', 'Nonce', 'SubkeyWords', 'NonceWords']
+	]).
+
+	:- public(chacha20_encrypt/5).
+	:- mode(chacha20_encrypt(+list(integer), +non_negative_integer, +list(integer), +list(byte), -list(byte)), one).
+	:- info(chacha20_encrypt/5, [
+		comment is 'Encrypts or decrypts bytes using ChaCha20 words and the given initial block counter. The caller is responsible for validating all arguments and should only use this unauthenticated stream cipher as part of a construction that provides authentication.',
+		argnames is ['KeyWords', 'Counter', 'NonceWords', 'Input', 'Output']
+	]).
+
+	:- public(chacha20_block/4).
+	:- mode(chacha20_block(+list(integer), +non_negative_integer, +list(integer), -list(byte)), one).
+	:- info(chacha20_block/4, [
+		comment is 'Computes a 64-byte ChaCha20 block using key words and the given block counter and nonce words. The caller is responsible for validating all arguments and should only use it as part of a construction that provides authentication.',
+		argnames is ['KeyWords', 'Counter', 'NonceWords', 'Block']
 	]).
 
 	:- public(xchacha20_poly1305_encrypt/5).
@@ -119,16 +161,6 @@
 
 	% -- XChaCha20-Poly1305 AEAD construction (RFC 8439 Section 2.8) --
 
-	xchacha20_subkey_and_nonce(Key, Nonce, SubkeyWords, ChachaNonceWords) :-
-		length(Nonce16, 16),
-		append(Nonce16, Nonce8, Nonce),
-		bytes_to_words32(Key, KeyWords),
-		bytes_to_words32(Nonce16, Nonce16Words),
-		hchacha20(KeyWords, Nonce16Words, SubkeyBytes),
-		bytes_to_words32(SubkeyBytes, SubkeyWords),
-		ChachaNonceBytes = [0, 0, 0, 0| Nonce8],
-		bytes_to_words32(ChachaNonceBytes, ChachaNonceWords).
-
 	aead_chacha20poly1305_encrypt(KeyWords, NonceWords, AAD, Plaintext, Ciphertext, Tag) :-
 		poly1305_key_gen(KeyWords, NonceWords, Otk),
 		chacha20_encrypt(KeyWords, 1, NonceWords, Plaintext, Ciphertext),
@@ -197,25 +229,64 @@
 		Accumulator1 is ((Accumulator0 + N) * R) mod PolyPrime,
 		poly1305_blocks(Rest, R, PolyPrime, Accumulator1, Accumulator).
 
-	% -- ChaCha20 / HChaCha20 (RFC 8439 Section 2; XChaCha draft) --
+	% Little-endian byte list <-> non-negative integer, arbitrary length.
+
+	le_bytes_to_int(Bytes, Int) :-
+		le_bytes_to_int(Bytes, 0, 0, Int).
+	le_bytes_to_int([], _, Accumulator, Accumulator).
+	le_bytes_to_int([Byte| Bytes], Shift, Accumulator0, Int) :-
+		Accumulator1 is Accumulator0 \/ (Byte << Shift),
+		Shift1 is Shift + 8,
+		le_bytes_to_int(Bytes, Shift1, Accumulator1, Int).
+
+	int_to_le_bytes_fixed(Int, Count, Bytes) :-
+		length(Bytes, Count),
+		int_to_le_bytes_fixed_loop(Int, Bytes).
+	int_to_le_bytes_fixed_loop(_, []) :-
+		!.
+	int_to_le_bytes_fixed_loop(Int, [Byte| Bytes]) :-
+		Byte is Int /\ 0xff,
+		Int1 is Int >> 8,
+		int_to_le_bytes_fixed_loop(Int1, Bytes).
+
+	% -- XChaCha20 stream cipher --
+
+	xchacha20(Key, Nonce, Input, Output) :-
+		context(Context),
+		check(list(byte, 32), Key, Context),
+		check(list(byte, 24), Nonce, Context),
+		check(list(byte), Input, Context),
+		xchacha20_subkey_and_nonce(Key, Nonce, SubkeyWords, ChachaNonceWords),
+		chacha20_encrypt(SubkeyWords, 0, ChachaNonceWords, Input, Output).
+
+	xchacha20_subkey_and_nonce(Key, Nonce, SubkeyWords, ChachaNonceWords) :-
+		length(Nonce16, 16),
+		append(Nonce16, Nonce8, Nonce),
+		bytes_to_words32(Key, KeyWords),
+		bytes_to_words32(Nonce16, Nonce16Words),
+		hchacha20(KeyWords, Nonce16Words, SubkeyBytes),
+		bytes_to_words32(SubkeyBytes, SubkeyWords),
+		ChachaNonceBytes = [0, 0, 0, 0| Nonce8],
+		bytes_to_words32(ChachaNonceBytes, ChachaNonceWords).
 
 	chacha20_encrypt(_, _, _, [], []) :-
 		!.
-	chacha20_encrypt(KeyWords, Counter, NonceWords, Plaintext, Ciphertext) :-
+	chacha20_encrypt(KeyWords, Counter, NonceWords, Input, Output) :-
 		chacha20_block(KeyWords, Counter, NonceWords, Keystream),
-		length(Plaintext, Length),
-		(	Length >= 64 ->
+		length(Input, Length),
+		( Length >= 64 ->
 			length(Block, 64),
-			append(Block, Rest, Plaintext),
+			append(Block, Rest, Input),
 			KeystreamBlock = Keystream
-		;	Block = Plaintext, Rest = [],
+		;	Block = Input,
+			Rest = [],
 			length(KeystreamBlock, Length),
 			append(KeystreamBlock, _, Keystream)
 		),
-		@xor_bytes(Block, KeystreamBlock, CipherBlock),
+		xor_bytes(Block, KeystreamBlock, OutputBlock),
 		Counter1 is Counter + 1,
-		chacha20_encrypt(KeyWords, Counter1, NonceWords, Rest, CipherRest),
-		append(CipherBlock, CipherRest, Ciphertext).
+		chacha20_encrypt(KeyWords, Counter1, NonceWords, Rest, OutputRest),
+		append(OutputBlock, OutputRest, Output).
 
 	chacha20_block(KeyWords, Counter, NonceWords, OutBytes) :-
 		chacha20_constants(C0, C1, C2, C3),
@@ -251,10 +322,6 @@
 		N1 is N - 1,
 		chacha20_rounds(N1, V1, V).
 
-	% One column round followed by one diagonal round (RFC 8439 Section 2.3). The 4
-	% working-vector positions touched by each of the 8 calls to the quarter round are
-	% fixed by the algorithm, independent of which round this is, so they are written
-	% out literally.
 	chacha20_double_round(
 		v(V0,V1,V2,V3,V4,V5,V6,V7,V8,V9,V10,V11,V12,V13,V14,V15),
 		v(Vo0,Vo1,Vo2,Vo3,Vo4,Vo5,Vo6,Vo7,Vo8,Vo9,Vo10,Vo11,Vo12,Vo13,Vo14,Vo15)
@@ -281,15 +348,12 @@
 		Mask is (1 << 32) - 1,
 		R is ((X << N) \/ (X >> (32 - N))) /\ Mask.
 
-	bytes_to_words32(Bytes, Words) :-
-		(	Bytes == [] ->
-			Words = []
-		;	length(Chunk, 4),
-			append(Chunk, Rest, Bytes),
-			le_bytes_to_int(Chunk, Word),
-			bytes_to_words32(Rest, Ws),
-			Words = [Word| Ws]
-		).
+	bytes_to_words32([], []).
+	bytes_to_words32([Byte| Bytes], [Word| Words]) :-
+		length(Chunk, 4),
+		append(Chunk, Rest, [Byte| Bytes]),
+		le_bytes_to_int(Chunk, Word),
+		bytes_to_words32(Rest, Words).
 
 	words32_to_bytes([], []).
 	words32_to_bytes([Word| Words], Bytes) :-
@@ -297,24 +361,9 @@
 		words32_to_bytes(Words, Rest),
 		append(WordBytes, Rest, Bytes).
 
-	% Little-endian byte list <-> non-negative integer, arbitrary length.
-
-	le_bytes_to_int(Bytes, Int) :-
-		le_bytes_to_int(Bytes, 0, 0, Int).
-	le_bytes_to_int([], _, Accumulator, Accumulator).
-	le_bytes_to_int([Byte| Bytes], Shift, Accumulator0, Int) :-
-		Accumulator1 is Accumulator0 \/ (Byte << Shift),
-		Shift1 is Shift + 8,
-		le_bytes_to_int(Bytes, Shift1, Accumulator1, Int).
-
-	int_to_le_bytes_fixed(Int, Count, Bytes) :-
-		length(Bytes, Count),
-		int_to_le_bytes_fixed_loop(Int, Bytes).
-	int_to_le_bytes_fixed_loop(_, []) :-
-		!.
-	int_to_le_bytes_fixed_loop(Int, [Byte| Bytes]) :-
-		Byte is Int /\ 0xff,
-		Int1 is Int >> 8,
-		int_to_le_bytes_fixed_loop(Int1, Bytes).
+	xor_bytes([], [], []).
+	xor_bytes([Byte1| Bytes1], [Byte2| Bytes2], [XorByte| XorBytes]) :-
+		XorByte is xor(Byte1, Byte2),
+		xor_bytes(Bytes1, Bytes2, XorBytes).
 
 :- end_category.

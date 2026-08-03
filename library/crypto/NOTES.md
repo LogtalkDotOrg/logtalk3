@@ -84,13 +84,12 @@ by the XChaCha construction (via HChaCha20 subkey derivation), combined with
 a Poly1305 authentication tag over the associated data and ciphertext,
 following the IETF ChaCha20-Poly1305 construction (RFC 8439). Decryption
 verifies the tag with constant-time comparison before decrypting anything,
-and fails, without producing any plaintext, if the tag does not match. Bare,
-unauthenticated ChaCha20 is intentionally not exposed as a public predicate:
-pairing a stream cipher with its own MAC by hand is a well-known source of
-protocol bugs, so only the authenticated construction is part of the public
-interface. These two predicates are only available on backend Prolog
-compilers supporting unbounded integer arithmetic, since Poly1305 requires
-an exact 130-bit accumulator.
+and fails, without producing any plaintext, if the tag does not match. The
+`xchacha20/4` predicate exposes the underlying unauthenticated stream cipher
+for clients such as PASETO that provide their own authentication. It must only
+be used as part of an authenticated construction. These predicates are only
+available on backend Prolog compilers supporting unbounded integer arithmetic,
+since Poly1305 requires an exact 130-bit accumulator.
 
 The `ed25519_keypair/2`, `ed25519_public_key/2`, `ed25519_sign/3`, and
 `ed25519_verify/3` predicates implement EdDSA signatures over Curve25519

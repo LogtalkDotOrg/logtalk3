@@ -184,6 +184,7 @@
 		hmac(loader),
 		otp(loader),
 		jwt(loader),
+		paseto(loader),
 		ranking_protocols(loader),
 		borda_ranker(loader),
 		bradley_terry_ranker(loader),

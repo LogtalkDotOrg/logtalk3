@@ -60,6 +60,9 @@ hash functions that accept both key an digest size parameters (per RFC 7693).
 
 * ADDED: New `http_sse` library implementing HTTP Server-Sent Events.
 
+* ADDED: New `paseto` library implementing Platform-Agnostic Security Tokens
+(PASETO) version 4.
+
 * ADDED: New `bson` library implementing the BSON 1.1 binary interchange
 format.
 

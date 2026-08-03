@@ -2312,6 +2312,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`statisticsp <statisticsp/0::central_moment/3>`
 
+``chacha20_block/4``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`xchacha20_poly1305 <xchacha20_poly1305/0::chacha20_block/4>`
+
+``chacha20_encrypt/5``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`xchacha20_poly1305 <xchacha20_poly1305/0::chacha20_encrypt/5>`
+
 ``challenge/2``
 ---------------
 
@@ -2714,6 +2734,8 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`jwt <jwt/0::claim/3>`
 * :ref:`jwt_claims <jwt_claims/0::claim/3>`
+* :ref:`paseto <paseto/0::claim/3>`
+* :ref:`paseto_claims <paseto_claims/0::claim/3>`
 
 ``claims/2``
 ------------
@@ -2725,6 +2747,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`jwt <jwt/0::claims/2>`
 * :ref:`jwt_compact <jwt_compact/0::claims/2>`
+* :ref:`paseto <paseto/0::claims/2>`
 
 ``class/1``
 -----------
@@ -4851,6 +4874,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`counters <counters/0::decrement_counter/1>`
+
+``decrypt/4``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`paseto <paseto/0::decrypt/4>`
+
+``decrypt/5``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`paseto <paseto/0::decrypt/5>`
 
 ``default/1``
 -------------
@@ -7023,6 +7066,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`mime_types <mime_types/0::encoding_suffix/2>`
 
+``encrypt/4``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`paseto <paseto/0::encrypt/4>`
+
 ``ensure/2``
 ------------
 
@@ -8610,6 +8663,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`metap <metap/0::fold_right_1/3>`
+
+``footer/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`paseto_protocol <paseto_protocol/0::footer/2>`
 
 ``fordownto/3``
 ---------------
@@ -13653,6 +13716,56 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`tzif_protocol <tzif_protocol/0::local_daylight_saving_time_with_resolution/5>`
 
+``local_decrypt/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`paseto_protocol <paseto_protocol/0::local_decrypt/3>`
+
+``local_decrypt/5``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`paseto_protocol <paseto_protocol/0::local_decrypt/5>`
+
+``local_encrypt/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`paseto_protocol <paseto_protocol/0::local_encrypt/3>`
+
+``local_encrypt/5``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`paseto_protocol <paseto_protocol/0::local_encrypt/5>`
+
+``local_key/1``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`paseto_protocol <paseto_protocol/0::local_key/1>`
+
 ``local_offset/2``
 ------------------
 
@@ -18625,6 +18738,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`jwt <jwt/0::peek_key_id/2>`
+* :ref:`paseto <paseto/0::peek_key_id/2>`
 
 ``pending_data/2``
 ------------------
@@ -20218,6 +20332,56 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`jwt_der <jwt_der/0::public_key_pem/2>`
 * :ref:`jwt_jwk <jwt_jwk/0::public_key_pem/2>`
 * :ref:`open_id_der <open_id_der/0::public_key_pem/2>`
+
+``public_keypair/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`paseto_protocol <paseto_protocol/0::public_keypair/2>`
+
+``public_sign/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`paseto_protocol <paseto_protocol/0::public_sign/3>`
+
+``public_sign/5``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`paseto_protocol <paseto_protocol/0::public_sign/5>`
+
+``public_verify/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`paseto_protocol <paseto_protocol/0::public_verify/3>`
+
+``public_verify/5``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`paseto_protocol <paseto_protocol/0::public_verify/5>`
 
 ``publish/4``
 -------------
@@ -23472,6 +23636,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`jwt_jwks <jwt_jwks/0::select_keys/4>`
+* :ref:`paseto_keys <paseto_keys/0::select_keys/4>`
 
 ``selectchk/3``
 ---------------
@@ -24303,6 +24468,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`linda_client <linda_client/0::shutdown_server/1>`
+
+``sign/4``
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`paseto <paseto/0::sign/4>`
 
 ``sign/5``
 ----------
@@ -27632,6 +27807,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`geojson_protocol <geojson_protocol/0::validate/1>`
 * :ref:`gpx_protocol <gpx_protocol/0::validate/1>`
 * :ref:`jwt_jwks <jwt_jwks/0::validate/1>`
+* :ref:`paseto_keys <paseto_keys/0::validate/1>`
 * :ref:`wkt_wkb_protocol <wkt_wkb_protocol/0::validate/1>`
 
 ``validate/2``
@@ -27667,6 +27843,8 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`jwt <jwt/0::validate_claim/3>`
 * :ref:`jwt_claims <jwt_claims/0::validate_claim/3>`
+* :ref:`paseto <paseto/0::validate_claim/3>`
+* :ref:`paseto_claims <paseto_claims/0::validate_claim/3>`
 
 ``validate_claims/3``
 ---------------------
@@ -27678,6 +27856,8 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`jwt <jwt/0::validate_claims/3>`
 * :ref:`jwt_claims <jwt_claims/0::validate_claims/3>`
+* :ref:`paseto <paseto/0::validate_claims/3>`
+* :ref:`paseto_claims <paseto_claims/0::validate_claims/3>`
 
 ``validate_document/1``
 -----------------------
@@ -27768,6 +27948,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`open_api <open_api/0::validate_http_response/4>`
+
+``validate_key_set/1``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`paseto <paseto/0::validate_key_set/1>`
 
 ``validate_multiplayer_dataset/1``
 ----------------------------------
@@ -28040,6 +28230,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`jwt <jwt/0::verify/4>`
+* :ref:`paseto <paseto/0::verify/4>`
 
 ``verify/5``
 ------------
@@ -28053,6 +28244,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`jwt_jws <jwt_jws/0::verify/5>`
 * :ref:`jwt_openssl <jwt_openssl/0::verify/5>`
 * :ref:`open_id_openssl <open_id_openssl/0::verify/5>`
+* :ref:`paseto <paseto/0::verify/5>`
 
 ``verify_commands_availability/0``
 ----------------------------------
@@ -28692,6 +28884,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`term_io_protocol <term_io_protocol/0::write_to_codes/2>`
 
+``xchacha20/4``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`xchacha20_poly1305 <xchacha20_poly1305/0::xchacha20/4>`
+
 ``xchacha20_poly1305_decrypt/5``
 --------------------------------
 
@@ -28711,6 +28913,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`xchacha20_poly1305 <xchacha20_poly1305/0::xchacha20_poly1305_encrypt/5>`
+
+``xchacha20_subkey_and_nonce/4``
+--------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`xchacha20_poly1305 <xchacha20_poly1305/0::xchacha20_subkey_and_nonce/4>`
 
 ``xml_to_gpx/2``
 ----------------

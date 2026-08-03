@@ -1,0 +1,92 @@
+.. index:: single: paseto_keys
+.. _paseto_keys/0:
+
+.. rst-class:: right
+
+**object**
+
+``paseto_keys``
+===============
+
+Validation and selection for native PASETO v4 key sets.
+
+| **Availability:** 
+|    ``logtalk_load(paseto(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-03
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: validate/1
+.. _paseto_keys/0::validate/1:
+
+``validate/1``
+^^^^^^^^^^^^^^
+
+Validates a key_set/1 term containing local/2 and public/2 records.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate(KeySet)``
+| **Mode and number of proofs:**
+|    ``validate(+compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: select_keys/4
+.. _paseto_keys/0::select_keys/4:
+
+``select_keys/4``
+^^^^^^^^^^^^^^^^^
+
+Selects all keys matching Purpose and optional KeyId, preserving key-set order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``select_keys(KeySet,Purpose,KeyId,Keys)``
+| **Mode and number of proofs:**
+|    ``select_keys(+compound,+atom,+term,-list(list(byte)))`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
