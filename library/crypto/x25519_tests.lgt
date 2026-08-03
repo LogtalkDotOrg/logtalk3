@@ -30,11 +30,14 @@
 	]).
 
 	:- uses(crypto, [
-		hex_bytes/2, x25519_keypair/2, x25519_public_key/2, x25519_shared_secret/3
+		hkdf/5, hex_bytes/2,
+		ed25519_keypair/2, ed25519_sign/3, ed25519_verify/3,
+		x25519_keypair/2, x25519_public_key/2, x25519_shared_secret/3,
+		xchacha20_poly1305_encrypt/5, xchacha20_poly1305_decrypt/5
 	]).
 
 	:- uses(list, [
-		length/2
+		append/2, length/2
 	]).
 
 	cover(crypto).
@@ -91,6 +94,31 @@
 		length(PublicKey, 32),
 		x25519_public_key(PrivateKey, DerivedPublicKey),
 		PublicKey == DerivedPublicKey.
+
+	% Authenticated ephemeral exchange using Ed25519 signatures followed by
+	% bidirectional XChaCha20-Poly1305 messaging with derived key material.
+
+	test(crypto_x25519_authenticated_exchange_01, deterministic(AlicePlaintext-BobPlaintext == [98,111,98]-[97,108,105,99,101])) :-
+		ed25519_keypair(AliceIdentitySeed, AliceIdentityPublicKey),
+		ed25519_keypair(BobIdentitySeed, BobIdentityPublicKey),
+		x25519_keypair(AliceEphemeralPrivateKey, AliceEphemeralPublicKey),
+		x25519_keypair(BobEphemeralPrivateKey, BobEphemeralPublicKey),
+		ed25519_sign(AliceIdentitySeed, AliceEphemeralPublicKey, AliceSignature),
+		ed25519_sign(BobIdentitySeed, BobEphemeralPublicKey, BobSignature),
+		ed25519_verify(AliceIdentityPublicKey, AliceEphemeralPublicKey, AliceSignature),
+		ed25519_verify(BobIdentityPublicKey, BobEphemeralPublicKey, BobSignature),
+		x25519_shared_secret(AliceEphemeralPrivateKey, BobEphemeralPublicKey, AliceSharedSecret),
+		x25519_shared_secret(BobEphemeralPrivateKey, AliceEphemeralPublicKey, BobSharedSecret),
+		AliceSharedSecret == BobSharedSecret,
+		append([AliceIdentityPublicKey, BobIdentityPublicKey, AliceEphemeralPublicKey, BobEphemeralPublicKey], Transcript),
+		hkdf(sha256, AliceSharedSecret, 32, AliceToBobKey, [salt(Transcript), info([0])]),
+		hkdf(sha256, AliceSharedSecret, 24, AliceToBobNonce, [salt(Transcript), info([1])]),
+		hkdf(sha256, BobSharedSecret, 32, BobToAliceKey, [salt(Transcript), info([2])]),
+		hkdf(sha256, BobSharedSecret, 24, BobToAliceNonce, [salt(Transcript), info([3])]),
+		xchacha20_poly1305_encrypt(AliceToBobKey, AliceToBobNonce, Transcript, [97,108,105,99,101], AliceToBobCiphertext),
+		xchacha20_poly1305_decrypt(AliceToBobKey, AliceToBobNonce, Transcript, AliceToBobCiphertext, BobPlaintext),
+		xchacha20_poly1305_encrypt(BobToAliceKey, BobToAliceNonce, Transcript, [98,111,98], BobToAliceCiphertext),
+		xchacha20_poly1305_decrypt(BobToAliceKey, BobToAliceNonce, Transcript, BobToAliceCiphertext, AlicePlaintext).
 
 	% RFC 7748 requires masking the most significant input bit and accepting
 	% non-canonical u-coordinates as if reduced modulo the field prime.
