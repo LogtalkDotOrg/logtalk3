@@ -413,6 +413,11 @@ link in a web browser.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(bson(tester)).
 </pre></div>
 </div>
+<p>The test set uses the official MongoDB BSON corpus files in the
+<code class="docutils literal notranslate"><span class="pre">test_files</span></code> directory. Canonical BSON vectors are parsed successfully
+and used for semantic generator round-trip tests, and BSON decode-error
+vectors are checked for rejection. See <code class="docutils literal notranslate"><span class="pre">test_files/NOTES.md</span></code> for
+provenance.</p>
 </section>
 <section id="representation">
 <h2>Representation<a class="headerlink" href="#representation" title="Link to this heading"></a></h2>
@@ -437,7 +442,10 @@ and <code class="docutils literal notranslate"><span class="pre">int64</span></c
 <li><p>BSON doubles are represented by floats. IEEE 754 infinities and NaNs
 use <code class="docutils literal notranslate"><span class="pre">&#64;infinity</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;negative_infinity</span></code>, <code class="docutils literal notranslate"><span class="pre">&#64;not_a_number</span></code>, and
 <code class="docutils literal notranslate"><span class="pre">not_a_number(Bytes)</span></code>, following the <code class="docutils literal notranslate"><span class="pre">ieee_754</span></code> library
-conventions.</p></li>
+conventions. Standard Prolog does not provide a portable distinct
+representation for IEEE 754 negative zero. Depending on the backend,
+parsing negative zero may produce <code class="docutils literal notranslate"><span class="pre">0.0</span></code>, in which case generation
+cannot recover the original sign bit.</p></li>
 <li><p>Binary values use <code class="docutils literal notranslate"><span class="pre">binary(Subtype,</span> <span class="pre">bytes(Bytes))</span></code>. Subtypes 0
 through 9 and user-defined subtypes 128 through 255 are supported. The
 deprecated subtype 2 inner length is parsed and generated

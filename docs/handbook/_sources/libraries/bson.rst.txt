@@ -36,6 +36,12 @@ To test this library predicates, load the ``tester.lgt`` file:
 
    | ?- logtalk_load(bson(tester)).
 
+The test set uses the official MongoDB BSON corpus files in the
+``test_files`` directory. Canonical BSON vectors are parsed successfully
+and used for semantic generator round-trip tests, and BSON decode-error
+vectors are checked for rejection. See ``test_files/NOTES.md`` for
+provenance.
+
 Representation
 --------------
 
@@ -64,7 +70,10 @@ Representation
 - BSON doubles are represented by floats. IEEE 754 infinities and NaNs
   use ``@infinity``, ``@negative_infinity``, ``@not_a_number``, and
   ``not_a_number(Bytes)``, following the ``ieee_754`` library
-  conventions.
+  conventions. Standard Prolog does not provide a portable distinct
+  representation for IEEE 754 negative zero. Depending on the backend,
+  parsing negative zero may produce ``0.0``, in which case generation
+  cannot recover the original sign bit.
 
 - Binary values use ``binary(Subtype, bytes(Bytes))``. Subtypes 0
   through 9 and user-defined subtypes 128 through 255 are supported. The

@@ -32,6 +32,18 @@
 	cover(bson(_)).
 	cover(bson).
 
+	:- uses(os, [
+		directory_files/3
+	]).
+
+	:- uses(list, [
+		member/2
+	]).
+
+	:- uses(lgtunit, [
+		assertion/2
+	]).
+
 	test(bson_empty_document, deterministic(Bytes == [5,0,0,0,0])) :-
 		bson::generate({}, Bytes).
 
@@ -165,5 +177,125 @@
 
 	test(bson_integer_overflow, error(domain_error(bson_term, {n-9223372036854775808}))) :-
 		bson::generate({n-9223372036854775808}, _).
+
+	test(bson_corpus_canonical_bson, true) :-
+		corpus_files(Files),
+		forall(
+			member(File, Files),
+			assertion(File, test_canonical_bson(File))
+		).
+
+	test(bson_corpus_generate_canonical_bson, true) :-
+		corpus_files(Files),
+		forall(
+			member(File, Files),
+			assertion(File, test_generate_canonical_bson(File))
+		).
+
+	test(bson_corpus_decode_errors, true) :-
+		corpus_files(Files),
+		forall(
+			member(File, Files),
+			assertion(File, test_decode_errors(File))
+		).
+
+	corpus_files(Files) :-
+		^^file_path('test_files', Directory),
+		directory_files(Directory, Files, [type(regular), paths(absolute), extensions(['.json'])]).
+
+	test_canonical_bson(File) :-
+		json(curly, dash, codes)::parse(file(File), Corpus),
+		(	json_property(valid, Corpus, Cases) ->
+			forall(
+				member(Case, Cases),
+				test_canonical_bson_case(File, Case)
+			)
+		;	true
+		).
+
+	test_canonical_bson_case(File, Case) :-
+		json_property(description, Case, Description),
+		json_property(canonical_bson, Case, Hexadecimal),
+		hexadecimal_bytes(Hexadecimal, Bytes),
+		assertion(File-Description, bson(codes)::parse(Bytes, _)).
+
+	test_generate_canonical_bson(File) :-
+		json(curly, dash, codes)::parse(file(File), Corpus),
+		(	json_property(valid, Corpus, Cases) ->
+			forall(
+				member(Case, Cases),
+				test_generate_canonical_bson_case(File, Case)
+			)
+		;	true
+		).
+
+	test_generate_canonical_bson_case(File, Case) :-
+		json_property(description, Case, Description),
+		json_property(canonical_bson, Case, Hexadecimal),
+		hexadecimal_bytes(Hexadecimal, Bytes),
+		bson(codes)::parse(Bytes, Document),
+		assertion(
+			File-Description,
+			(	bson(codes)::generate(Document, GeneratedBytes),
+				bson(codes)::parse(GeneratedBytes, GeneratedDocument),
+				GeneratedDocument == Document
+			)
+		).
+
+	test_decode_errors(File) :-
+		json(curly, dash, codes)::parse(file(File), Corpus),
+		(	json_property(decodeErrors, Corpus, Cases) ->
+			forall(
+				member(Case, Cases),
+				test_decode_error_case(File, Case)
+			)
+		;	true
+		).
+
+	test_decode_error_case(File, Case) :-
+		json_property(description, Case, Description),
+		json_property(bson, Case, Hexadecimal),
+		hexadecimal_bytes(Hexadecimal, Bytes),
+		assertion(File-Description, parser_error(Bytes)).
+
+	parser_error(Bytes) :-
+		catch(bson(codes)::parse(Bytes, _), Error, true),
+		nonvar(Error).
+
+	json_property(Key, {Pairs}, Value) :-
+		atom_codes(Key, Codes),
+		json_pair_value(codes(Codes), Pairs, Value).
+
+	json_pair_value(Key, (Key-Value, _), Value) :-
+		!.
+	json_pair_value(Key, (_, Pairs), Value) :-
+		!,
+		json_pair_value(Key, Pairs, Value).
+	json_pair_value(Key, Key-Value, Value).
+
+	hexadecimal_bytes(codes(Codes), Bytes) :-
+		hexadecimal_codes_bytes(Codes, Bytes).
+
+	hexadecimal_codes_bytes([], []).
+	hexadecimal_codes_bytes([High, Low| Codes], [Byte| Bytes]) :-
+		hexadecimal_digit_value(High, HighValue),
+		hexadecimal_digit_value(Low, LowValue),
+		Byte is HighValue * 16 + LowValue,
+		hexadecimal_codes_bytes(Codes, Bytes).
+
+	hexadecimal_digit_value(Code, Value) :-
+		Code >= 0'0,
+		Code =< 0'9,
+		!,
+		Value is Code - 0'0.
+	hexadecimal_digit_value(Code, Value) :-
+		Code >= 0'A,
+		Code =< 0'F,
+		!,
+		Value is Code - 0'A + 10.
+	hexadecimal_digit_value(Code, Value) :-
+		Code >= 0'a,
+		Code =< 0'f,
+		Value is Code - 0'a + 10.
 
 :- end_object.

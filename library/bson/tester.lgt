@@ -30,6 +30,7 @@
 		logtalk_load(basic_types(loader)),
 		logtalk_load(character_sets(loader)),
 		logtalk_load(ieee_754(loader)),
+		logtalk_load(json(loader)),
 		logtalk_load(bson, [source_data(on), debug(on)]),
 		logtalk_load(lgtunit(loader)),
 		logtalk_load(tests, [hook(lgtunit)]),
