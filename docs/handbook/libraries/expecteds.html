@@ -538,6 +538,13 @@ yes
 yes
 </pre></div>
 </div>
+<p>Although the constructor names <code class="docutils literal notranslate"><span class="pre">of_expected/2</span></code> and <code class="docutils literal notranslate"><span class="pre">of_unexpected/2</span></code>
+read as success and failure, an expected term is just an opaque two-case
+term, and this library is equally suited to representing any alternative
+between two cases where neither is an error, such as a value read from a
+primary source versus a fallback one. In such symmetric uses,
+<code class="docutils literal notranslate"><span class="pre">map_both/3</span></code> and <code class="docutils literal notranslate"><span class="pre">swap/1</span></code> let both cases be handled, and relabeled,
+as equal peers rather than as a “good” case and a “bad” case.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">flatten/1</span></code> predicate unwraps a nested expected term:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> expected<span class="o">::</span>of_expected(<span class="m">1</span>, <span class="nv">Inner</span>), expected<span class="o">::</span>of_expected(<span class="nv">Inner</span>, <span class="nv">Outer</span>),
      expected(<span class="nv">Outer</span>)<span class="o">::</span>flatten(<span class="nv">NewExpected</span>).

@@ -181,6 +181,14 @@ The ``swap/1`` predicate swaps expected and unexpected terms:
    NewExpected = expected(error)
    yes
 
+Although the constructor names ``of_expected/2`` and ``of_unexpected/2``
+read as success and failure, an expected term is just an opaque two-case
+term, and this library is equally suited to representing any alternative
+between two cases where neither is an error, such as a value read from a
+primary source versus a fallback one. In such symmetric uses,
+``map_both/3`` and ``swap/1`` let both cases be handled, and relabeled,
+as equal peers rather than as a "good" case and a "bad" case.
+
 The ``flatten/1`` predicate unwraps a nested expected term:
 
 ::
