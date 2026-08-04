@@ -57,6 +57,7 @@
 		loops(loader),
 		random(loader),
 		statistics(loader),
+		multivariate_distributions(loader),
 		ids(loader),
 		intervals(loader),
 		logging(loader),

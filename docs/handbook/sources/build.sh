@@ -257,6 +257,7 @@ sed '1,19d' ../../../library/mime_types/NOTES.md | pandoc -f gfm -t rst -o libra
 sed '1,19d' ../../../library/modified_z_score_anomaly_detector/NOTES.md | pandoc -f gfm -t rst -o libraries/modified_z_score_anomaly_detector.rst
 sed '1,19d' ../../../library/mqtt/NOTES.md | pandoc -f gfm -t rst -o libraries/mqtt.rst
 sed '1,19d' ../../../library/multisets/NOTES.md | pandoc -f gfm -t rst -o libraries/multisets.rst
+sed '1,19d' ../../../library/multivariate_distributions/NOTES.md | pandoc -f gfm -t rst -o libraries/multivariate_distributions.rst
 sed '1,19d' ../../../library/mutations/NOTES.md | pandoc -f gfm -t rst -o libraries/mutations.rst
 sed '1,19d' ../../../library/nanoid/NOTES.md | pandoc -f gfm -t rst -o libraries/nanoid.rst
 sed '1,19d' ../../../library/naive_bayes_classifier/NOTES.md | pandoc -f gfm -t rst -o libraries/naive_bayes_classifier.rst

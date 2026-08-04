@@ -1,0 +1,539 @@
+.. index:: single: multivariate_distributions_protocol
+.. _multivariate_distributions_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``multivariate_distributions_protocol``
+=======================================
+
+Multivariate probability distribution predicates.
+
+| **Availability:** 
+|    ``logtalk_load(multivariate_distributions(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-04
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: multivariate_normal/3
+.. _multivariate_distributions_protocol/0::multivariate_normal/3:
+
+``multivariate_normal/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a multivariate normally distributed random vector using the default numerical tolerance of 1.0e-12. Singular positive-semidefinite covariance matrices are supported.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multivariate_normal(Mean,Covariance,Sample)``
+| **Mode and number of proofs:**
+|    ``multivariate_normal(+list(number),+list(list(number)),-list(float))`` - ``one_or_error``
+
+
+------------
+
+.. index:: multivariate_normal/4
+.. _multivariate_distributions_protocol/0::multivariate_normal/4:
+
+``multivariate_normal/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a multivariate normally distributed random vector using the given non-negative numerical tolerance. Singular positive-semidefinite covariance matrices are supported.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multivariate_normal(Mean,Covariance,Tolerance,Sample)``
+| **Mode and number of proofs:**
+|    ``multivariate_normal(+list(number),+list(list(number)),+number,-list(float))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Mean`` is empty:
+|        ``domain_error(minimum_number_of_values(1),Mean)``
+|    ``Tolerance`` is negative:
+|        ``domain_error(non_negative_number,Tolerance)``
+|    ``Covariance`` dimensions do not match the mean dimension:
+|        ``domain_error(covariance_dimensions(A),Covariance)``
+|    ``Covariance`` is not symmetric:
+|        ``domain_error(symmetric_matrix,Covariance)``
+|    ``Covariance`` is not positive semidefinite:
+|        ``domain_error(positive_semidefinite_matrix,Covariance)``
+
+
+------------
+
+.. index:: multivariate_normal_samples/4
+.. _multivariate_distributions_protocol/0::multivariate_normal_samples/4:
+
+``multivariate_normal_samples/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the requested number of multivariate normally distributed random row vectors using the default numerical tolerance of 1.0e-12.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multivariate_normal_samples(Count,Mean,Covariance,Samples)``
+| **Mode and number of proofs:**
+|    ``multivariate_normal_samples(+integer,+list(number),+list(list(number)),-list(list(float)))`` - ``one_or_error``
+
+
+------------
+
+.. index:: multivariate_normal_samples/5
+.. _multivariate_distributions_protocol/0::multivariate_normal_samples/5:
+
+``multivariate_normal_samples/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the requested number of multivariate normally distributed random row vectors using the given non-negative numerical tolerance.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multivariate_normal_samples(Count,Mean,Covariance,Tolerance,Samples)``
+| **Mode and number of proofs:**
+|    ``multivariate_normal_samples(+integer,+list(number),+list(list(number)),+number,-list(list(float)))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Count`` is negative:
+|        ``domain_error(non_negative_integer,Count)``
+
+
+------------
+
+.. index:: multivariate_normal_density/4
+.. _multivariate_distributions_protocol/0::multivariate_normal_density/4:
+
+``multivariate_normal_density/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the multivariate normal density at a point using the default numerical tolerance of 1.0e-12. For a singular covariance matrix, computes the density on its affine support and returns zero outside it.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multivariate_normal_density(Point,Mean,Covariance,Density)``
+| **Mode and number of proofs:**
+|    ``multivariate_normal_density(+list(number),+list(number),+list(list(number)),-float)`` - ``one_or_error``
+
+
+------------
+
+.. index:: multivariate_normal_density/5
+.. _multivariate_distributions_protocol/0::multivariate_normal_density/5:
+
+``multivariate_normal_density/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the multivariate normal density at a point using the given non-negative numerical tolerance. For a singular covariance matrix, computes the density on its affine support and returns zero outside it.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multivariate_normal_density(Point,Mean,Covariance,Tolerance,Density)``
+| **Mode and number of proofs:**
+|    ``multivariate_normal_density(+list(number),+list(number),+list(list(number)),+number,-float)`` - ``one_or_error``
+
+
+------------
+
+.. index:: multivariate_normal_log_density/4
+.. _multivariate_distributions_protocol/0::multivariate_normal_log_density/4:
+
+``multivariate_normal_log_density/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the multivariate normal log-density at a point using the default numerical tolerance of 1.0e-12. Returns the atom ``negative_infinity`` outside the affine support of a singular covariance matrix.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multivariate_normal_log_density(Point,Mean,Covariance,LogDensity)``
+| **Mode and number of proofs:**
+|    ``multivariate_normal_log_density(+list(number),+list(number),+list(list(number)),-term)`` - ``one_or_error``
+
+
+------------
+
+.. index:: multivariate_normal_log_density/5
+.. _multivariate_distributions_protocol/0::multivariate_normal_log_density/5:
+
+``multivariate_normal_log_density/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the multivariate normal log-density at a point using the given non-negative numerical tolerance. Returns the atom ``negative_infinity`` outside the affine support of a singular covariance matrix.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multivariate_normal_log_density(Point,Mean,Covariance,Tolerance,LogDensity)``
+| **Mode and number of proofs:**
+|    ``multivariate_normal_log_density(+list(number),+list(number),+list(list(number)),+number,-term)`` - ``one_or_error``
+
+
+------------
+
+.. index:: squared_mahalanobis_distance/4
+.. _multivariate_distributions_protocol/0::squared_mahalanobis_distance/4:
+
+``squared_mahalanobis_distance/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the squared Mahalanobis distance using the default numerical tolerance of 1.0e-12.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``squared_mahalanobis_distance(Point,Mean,Covariance,SquaredDistance)``
+| **Mode and number of proofs:**
+|    ``squared_mahalanobis_distance(+list(number),+list(number),+list(list(number)),-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Point`` is outside the affine support of ``Covariance``:
+|        ``domain_error(covariance_support,Point)``
+
+
+------------
+
+.. index:: squared_mahalanobis_distance/5
+.. _multivariate_distributions_protocol/0::squared_mahalanobis_distance/5:
+
+``squared_mahalanobis_distance/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the squared Mahalanobis distance using the given non-negative numerical tolerance.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``squared_mahalanobis_distance(Point,Mean,Covariance,Tolerance,SquaredDistance)``
+| **Mode and number of proofs:**
+|    ``squared_mahalanobis_distance(+list(number),+list(number),+list(list(number)),+number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Point`` is outside the affine support of ``Covariance``:
+|        ``domain_error(covariance_support,Point)``
+
+
+------------
+
+.. index:: mahalanobis_distance/4
+.. _multivariate_distributions_protocol/0::mahalanobis_distance/4:
+
+``mahalanobis_distance/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the Mahalanobis distance using the default numerical tolerance of 1.0e-12.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``mahalanobis_distance(Point,Mean,Covariance,Distance)``
+| **Mode and number of proofs:**
+|    ``mahalanobis_distance(+list(number),+list(number),+list(list(number)),-float)`` - ``one_or_error``
+
+
+------------
+
+.. index:: mahalanobis_distance/5
+.. _multivariate_distributions_protocol/0::mahalanobis_distance/5:
+
+``mahalanobis_distance/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the Mahalanobis distance using the given non-negative numerical tolerance.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``mahalanobis_distance(Point,Mean,Covariance,Tolerance,Distance)``
+| **Mode and number of proofs:**
+|    ``mahalanobis_distance(+list(number),+list(number),+list(list(number)),+number,-float)`` - ``one_or_error``
+
+
+------------
+
+.. index:: multivariate_t/4
+.. _multivariate_distributions_protocol/0::multivariate_t/4:
+
+``multivariate_t/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns a multivariate Student's t distributed random vector using the default numerical tolerance of 1.0e-12.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multivariate_t(DegreesOfFreedom,Location,Scale,Sample)``
+| **Mode and number of proofs:**
+|    ``multivariate_t(+positive_number,+list(number),+list(list(number)),-list(float))`` - ``one_or_error``
+
+
+------------
+
+.. index:: multivariate_t/5
+.. _multivariate_distributions_protocol/0::multivariate_t/5:
+
+``multivariate_t/5``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns a multivariate Student's t distributed random vector using the given non-negative numerical tolerance.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multivariate_t(DegreesOfFreedom,Location,Scale,Tolerance,Sample)``
+| **Mode and number of proofs:**
+|    ``multivariate_t(+positive_number,+list(number),+list(list(number)),+number,-list(float))`` - ``one_or_error``
+
+
+------------
+
+.. index:: multivariate_t_samples/5
+.. _multivariate_distributions_protocol/0::multivariate_t_samples/5:
+
+``multivariate_t_samples/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the requested number of multivariate Student's t distributed random row vectors using the default numerical tolerance of 1.0e-12.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multivariate_t_samples(Count,DegreesOfFreedom,Location,Scale,Samples)``
+| **Mode and number of proofs:**
+|    ``multivariate_t_samples(+integer,+positive_number,+list(number),+list(list(number)),-list(list(float)))`` - ``one_or_error``
+
+
+------------
+
+.. index:: multivariate_t_samples/6
+.. _multivariate_distributions_protocol/0::multivariate_t_samples/6:
+
+``multivariate_t_samples/6``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the requested number of multivariate Student's t distributed random row vectors using the given non-negative numerical tolerance.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multivariate_t_samples(Count,DegreesOfFreedom,Location,Scale,Tolerance,Samples)``
+| **Mode and number of proofs:**
+|    ``multivariate_t_samples(+integer,+positive_number,+list(number),+list(list(number)),+number,-list(list(float)))`` - ``one_or_error``
+
+
+------------
+
+.. index:: multivariate_t_density/5
+.. _multivariate_distributions_protocol/0::multivariate_t_density/5:
+
+``multivariate_t_density/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the multivariate Student's t density using the default numerical tolerance of 1.0e-12. Returns zero outside the affine support of a singular scale matrix.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multivariate_t_density(Point,DegreesOfFreedom,Location,Scale,Density)``
+| **Mode and number of proofs:**
+|    ``multivariate_t_density(+list(number),+positive_number,+list(number),+list(list(number)),-float)`` - ``one_or_error``
+
+
+------------
+
+.. index:: multivariate_t_density/6
+.. _multivariate_distributions_protocol/0::multivariate_t_density/6:
+
+``multivariate_t_density/6``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the multivariate Student's t density using the given non-negative numerical tolerance. Returns zero outside the affine support of a singular scale matrix.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multivariate_t_density(Point,DegreesOfFreedom,Location,Scale,Tolerance,Density)``
+| **Mode and number of proofs:**
+|    ``multivariate_t_density(+list(number),+positive_number,+list(number),+list(list(number)),+number,-float)`` - ``one_or_error``
+
+
+------------
+
+.. index:: multivariate_t_log_density/5
+.. _multivariate_distributions_protocol/0::multivariate_t_log_density/5:
+
+``multivariate_t_log_density/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the multivariate Student's t log-density using the default numerical tolerance of 1.0e-12. Returns ``negative_infinity`` outside singular affine support.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multivariate_t_log_density(Point,DegreesOfFreedom,Location,Scale,LogDensity)``
+| **Mode and number of proofs:**
+|    ``multivariate_t_log_density(+list(number),+positive_number,+list(number),+list(list(number)),-term)`` - ``one_or_error``
+
+
+------------
+
+.. index:: multivariate_t_log_density/6
+.. _multivariate_distributions_protocol/0::multivariate_t_log_density/6:
+
+``multivariate_t_log_density/6``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the multivariate Student's t log-density using the given non-negative numerical tolerance. Returns ``negative_infinity`` outside singular affine support.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multivariate_t_log_density(Point,DegreesOfFreedom,Location,Scale,Tolerance,LogDensity)``
+| **Mode and number of proofs:**
+|    ``multivariate_t_log_density(+list(number),+positive_number,+list(number),+list(list(number)),+number,-term)`` - ``one_or_error``
+
+
+------------
+
+.. index:: logistic_normal/3
+.. _multivariate_distributions_protocol/0::logistic_normal/3:
+
+``logistic_normal/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns an additive-log-ratio logistic-normal random vector using the default numerical tolerance of 1.0e-12. A latent vector of length d maps to a simplex vector of length d+1 using the final component as reference.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``logistic_normal(Mean,Covariance,Sample)``
+| **Mode and number of proofs:**
+|    ``logistic_normal(+list(number),+list(list(number)),-list(float))`` - ``one_or_error``
+
+
+------------
+
+.. index:: logistic_normal/4
+.. _multivariate_distributions_protocol/0::logistic_normal/4:
+
+``logistic_normal/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns an additive-log-ratio logistic-normal random vector using the given non-negative numerical tolerance.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``logistic_normal(Mean,Covariance,Tolerance,Sample)``
+| **Mode and number of proofs:**
+|    ``logistic_normal(+list(number),+list(list(number)),+number,-list(float))`` - ``one_or_error``
+
+
+------------
+
+.. index:: logistic_normal_samples/4
+.. _multivariate_distributions_protocol/0::logistic_normal_samples/4:
+
+``logistic_normal_samples/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the requested number of additive-log-ratio logistic-normal random row vectors using the default numerical tolerance of 1.0e-12.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``logistic_normal_samples(Count,Mean,Covariance,Samples)``
+| **Mode and number of proofs:**
+|    ``logistic_normal_samples(+integer,+list(number),+list(list(number)),-list(list(float)))`` - ``one_or_error``
+
+
+------------
+
+.. index:: logistic_normal_samples/5
+.. _multivariate_distributions_protocol/0::logistic_normal_samples/5:
+
+``logistic_normal_samples/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the requested number of additive-log-ratio logistic-normal random row vectors using the given non-negative numerical tolerance.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``logistic_normal_samples(Count,Mean,Covariance,Tolerance,Samples)``
+| **Mode and number of proofs:**
+|    ``logistic_normal_samples(+integer,+list(number),+list(list(number)),+number,-list(list(float)))`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`multivariate_distributions(Random) <multivariate_distributions/1>`, :ref:`linear_algebra <linear_algebra/0>`, :ref:`sampling_protocol <sampling_protocol/0>`
+

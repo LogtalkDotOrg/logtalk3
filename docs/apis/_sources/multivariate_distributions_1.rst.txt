@@ -1,0 +1,67 @@
+.. index:: single: multivariate_distributions(Random)
+.. _multivariate_distributions/1:
+
+.. rst-class:: right
+
+**object**
+
+``multivariate_distributions(Random)``
+======================================
+
+* ``Random`` - An object implementing the ``sampling_protocol`` protocol.
+
+
+Multivariate probability distributions using an injected random source.
+
+| **Availability:** 
+|    ``logtalk_load(multivariate_distributions(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-04
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0>`
+| **Uses:**
+|    :ref:`linear_algebra <linear_algebra/0>`
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`multivariate_distributions_protocol/0::logistic_normal/3`  :ref:`multivariate_distributions_protocol/0::logistic_normal/4`  :ref:`multivariate_distributions_protocol/0::logistic_normal_samples/4`  :ref:`multivariate_distributions_protocol/0::logistic_normal_samples/5`  :ref:`multivariate_distributions_protocol/0::mahalanobis_distance/4`  :ref:`multivariate_distributions_protocol/0::mahalanobis_distance/5`  :ref:`multivariate_distributions_protocol/0::multivariate_normal/3`  :ref:`multivariate_distributions_protocol/0::multivariate_normal/4`  :ref:`multivariate_distributions_protocol/0::multivariate_normal_density/4`  :ref:`multivariate_distributions_protocol/0::multivariate_normal_density/5`  :ref:`multivariate_distributions_protocol/0::multivariate_normal_log_density/4`  :ref:`multivariate_distributions_protocol/0::multivariate_normal_log_density/5`  :ref:`multivariate_distributions_protocol/0::multivariate_normal_samples/4`  :ref:`multivariate_distributions_protocol/0::multivariate_normal_samples/5`  :ref:`multivariate_distributions_protocol/0::multivariate_t/4`  :ref:`multivariate_distributions_protocol/0::multivariate_t/5`  :ref:`multivariate_distributions_protocol/0::multivariate_t_density/5`  :ref:`multivariate_distributions_protocol/0::multivariate_t_density/6`  :ref:`multivariate_distributions_protocol/0::multivariate_t_log_density/5`  :ref:`multivariate_distributions_protocol/0::multivariate_t_log_density/6`  :ref:`multivariate_distributions_protocol/0::multivariate_t_samples/5`  :ref:`multivariate_distributions_protocol/0::multivariate_t_samples/6`  :ref:`multivariate_distributions_protocol/0::squared_mahalanobis_distance/4`  :ref:`multivariate_distributions_protocol/0::squared_mahalanobis_distance/5`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0>`, :ref:`linear_algebra <linear_algebra/0>`, :ref:`random(Algorithm) <random/1>`, :ref:`fast_random(Algorithm) <fast_random/1>`, :ref:`backend_random <backend_random/0>`
+

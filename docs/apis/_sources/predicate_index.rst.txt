@@ -14268,6 +14268,46 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`sampling_protocol <sampling_protocol/0::logistic/3>`
 
+``logistic_normal/3``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0::logistic_normal/3>`
+
+``logistic_normal/4``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0::logistic_normal/4>`
+
+``logistic_normal_samples/4``
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0::logistic_normal_samples/4>`
+
+``logistic_normal_samples/5``
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0::logistic_normal_samples/5>`
+
 ``lognormal/3``
 ---------------
 
@@ -14549,6 +14589,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`magic <magic/0::magicise/4>`
+
+``mahalanobis_distance/4``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0::mahalanobis_distance/4>`
+
+``mahalanobis_distance/5``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0::mahalanobis_distance/5>`
 
 ``make_directory/1``
 --------------------
@@ -15932,6 +15992,166 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`multisets_protocol <multisets_protocol/0::multisets/4>`
+
+``multivariate_normal/3``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0::multivariate_normal/3>`
+
+``multivariate_normal/4``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0::multivariate_normal/4>`
+
+``multivariate_normal_density/4``
+---------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0::multivariate_normal_density/4>`
+
+``multivariate_normal_density/5``
+---------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0::multivariate_normal_density/5>`
+
+``multivariate_normal_log_density/4``
+-------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0::multivariate_normal_log_density/4>`
+
+``multivariate_normal_log_density/5``
+-------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0::multivariate_normal_log_density/5>`
+
+``multivariate_normal_samples/4``
+---------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0::multivariate_normal_samples/4>`
+
+``multivariate_normal_samples/5``
+---------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0::multivariate_normal_samples/5>`
+
+``multivariate_t/4``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0::multivariate_t/4>`
+
+``multivariate_t/5``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0::multivariate_t/5>`
+
+``multivariate_t_density/5``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0::multivariate_t_density/5>`
+
+``multivariate_t_density/6``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0::multivariate_t_density/6>`
+
+``multivariate_t_log_density/5``
+--------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0::multivariate_t_log_density/5>`
+
+``multivariate_t_log_density/6``
+--------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0::multivariate_t_log_density/6>`
+
+``multivariate_t_samples/5``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0::multivariate_t_samples/5>`
+
+``multivariate_t_samples/6``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0::multivariate_t_samples/6>`
 
 ``mutation/2``
 --------------
@@ -25166,6 +25386,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`debuggerp <debuggerp/0::spying/4>`
+
+``squared_mahalanobis_distance/4``
+----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0::squared_mahalanobis_distance/4>`
+
+``squared_mahalanobis_distance/5``
+----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0::squared_mahalanobis_distance/5>`
 
 ``srem/4``
 ----------

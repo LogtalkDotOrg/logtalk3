@@ -257,6 +257,7 @@ Foreach-Object {
 (Get-Content ../../../library/modified_z_score_anomaly_detector/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/modified_z_score_anomaly_detector.rst
 (Get-Content ../../../library/mqtt/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/mqtt.rst
 (Get-Content ../../../library/multisets/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/multisets.rst
+(Get-Content ../../../library/multivariate_distributions/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/multivariate_distributions.rst
 (Get-Content ../../../library/mutations/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/mutations.rst
 (Get-Content ../../../library/nanoid/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/nanoid.rst
 (Get-Content ../../../library/naive_bayes_classifier/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/naive_bayes_classifier.rst

@@ -69,6 +69,11 @@ format.
 * ADDED: New `integer_partitions` library providing predicates for generating
 and querying integer partitions.
 
+* ADDED: New `multivariate_distributions` library providing singular-aware
+sampling and density predicates for multivariate normal and Student's t
+distributions, additive-log-ratio logistic-normal sampling predicates, and
+Mahalanobis distance predicates.
+
 * ADDED: New `mqtt` library implementing a MQTT 5.0 client.
 
 * ADDED: New `association_rule_miner` library implementing a association rule

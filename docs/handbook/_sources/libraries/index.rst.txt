@@ -206,6 +206,7 @@ directory in the ``NOTES.md`` file.
    modified_z_score_anomaly_detector
    mqtt
    multisets
+   multivariate_distributions
    mutations
    nanoid
    naive_bayes_classifier

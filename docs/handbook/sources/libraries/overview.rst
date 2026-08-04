@@ -69,7 +69,8 @@ Library groups
   ``hashes``, ``hmac``, ``jwt``, ``otp``, and ``paseto``.
 - Randomness: ``arbitrary``, ``mutations``, and ``random``.
 - Mathematics, statistics, and optimization: ``ieee_754``,
-  ``linear_algebra``, ``simulated_annealing``, and ``statistics``.
+  ``linear_algebra``, ``multivariate_distributions``,
+  ``simulated_annealing``, and ``statistics``.
 - Machine learning:
 
   - Classification: ``classification_protocols``,
