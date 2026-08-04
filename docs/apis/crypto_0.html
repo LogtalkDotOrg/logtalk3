@@ -424,7 +424,7 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:0:1</div>
+<div class="line"><strong>Version:</strong> 1:1:0</div>
 <div class="line"><strong>Date:</strong> 2026-08-04</div>
 </div>
 <div class="line-block">
@@ -470,19 +470,21 @@
 <li><p><a class="reference internal" href="#hkdf-5" id="id8"><code class="docutils literal notranslate"><span class="pre">hkdf/5</span></code></a></p></li>
 <li><p><a class="reference internal" href="#pbkdf2-6" id="id9"><code class="docutils literal notranslate"><span class="pre">pbkdf2/6</span></code></a></p></li>
 <li><p><a class="reference internal" href="#apr1-3" id="id10"><code class="docutils literal notranslate"><span class="pre">apr1/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#password-hash-4" id="id11"><code class="docutils literal notranslate"><span class="pre">password_hash/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#password-hash-needs-rehash-3" id="id12"><code class="docutils literal notranslate"><span class="pre">password_hash_needs_rehash/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#verify-password-hash-2" id="id13"><code class="docutils literal notranslate"><span class="pre">verify_password_hash/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#bcrypt-4" id="id11"><code class="docutils literal notranslate"><span class="pre">bcrypt/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#password-hash-4" id="id12"><code class="docutils literal notranslate"><span class="pre">password_hash/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#password-hash-needs-rehash-3" id="id13"><code class="docutils literal notranslate"><span class="pre">password_hash_needs_rehash/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#verify-password-hash-2" id="id14"><code class="docutils literal notranslate"><span class="pre">verify_password_hash/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#password-hash-atom-2" id="id15"><code class="docutils literal notranslate"><span class="pre">password_hash_atom/2</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id14">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id15">Private predicates</a></p>
+<li><p><a class="reference internal" href="#protected-predicates" id="id16">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id17">Private predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#xor-bytes-3" id="id16"><code class="docutils literal notranslate"><span class="pre">xor_bytes/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#constant-time-equal-2" id="id17"><code class="docutils literal notranslate"><span class="pre">constant_time_equal/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#xor-bytes-3" id="id18"><code class="docutils literal notranslate"><span class="pre">xor_bytes/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#constant-time-equal-2" id="id19"><code class="docutils literal notranslate"><span class="pre">constant_time_equal/2</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#operators" id="id18">Operators</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id20">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -1009,9 +1011,9 @@
 </div>
 <hr class="docutils" />
 </section>
-<section id="password-hash-4">
-<span id="crypto-0-password-hash-4"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">password_hash/4</span></code></a><a class="headerlink" href="#password-hash-4" title="Link to this heading"></a></h3>
-<p>Computes a structured password-hash term using PBKDF2, a hash object implementing the <code class="docutils literal notranslate"><span class="pre">hash_digest_protocol</span></code> protocol, and the given derivation options.</p>
+<section id="bcrypt-4">
+<span id="crypto-0-bcrypt-4"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">bcrypt/4</span></code></a><a class="headerlink" href="#bcrypt-4" title="Link to this heading"></a></h3>
+<p>Computes a bcrypt version 2b encoded checksum for a password, cost, and raw 16-byte salt.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1021,21 +1023,92 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">password_hash(Hash,Password,PasswordHash,Options)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">bcrypt(Password,Cost,Salt,Checksum)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">password_hash(+object_identifier,+list(byte),-compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">bcrypt(+list(byte),+integer,+list(byte),-list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Hash</span></code> is a variable:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Password</span></code> is a partial list or a list with an element which is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Hash</span></code> is not an object implementing the <code class="docutils literal notranslate"><span class="pre">hash_digest_protocol</span></code> protocol:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Password</span></code> is a list but not a list of bytes:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte),Password)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Password</span></code> contains a non-integer element:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Byte)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Password</span></code> contains an integer outside the byte range:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(byte,Byte)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Password</span></code> contains more than 72 bytes:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(bcrypt_password_length,Password)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Cost</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Cost</span></code> is not an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Cost)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Cost</span></code> is outside the range 4 through 31:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(bcrypt_cost,Cost)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Salt</span></code> is a partial list or a list with an element which is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Salt</span></code> is a list but not a list of bytes:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte),Salt)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Salt</span></code> is not exactly 16 bytes long:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(bcrypt_salt,Salt)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="password-hash-4">
+<span id="crypto-0-password-hash-4"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">password_hash/4</span></code></a><a class="headerlink" href="#password-hash-4" title="Link to this heading"></a></h3>
+<p>Computes a structured password-hash term using the selected password-hashing method and derivation options.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">password_hash(Method,Password,PasswordHash,Options)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">password_hash(+object_identifier,+list(byte),-compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">password_hash(+compound,+list(byte),-compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Method</span></code> is not a ground term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Method</span></code> is a ground <code class="docutils literal notranslate"><span class="pre">Hash</span></code> or <code class="docutils literal notranslate"><span class="pre">pbkdf2(Hash)</span></code> term but not an object implementing the <code class="docutils literal notranslate"><span class="pre">hash_digest_protocol</span></code> protocol:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(crypto_hash,Hash)</span></code></div>
 </div>
@@ -1054,6 +1127,10 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Password</span></code> contains an integer outside the byte range:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(byte,Byte)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Password</span></code> contains more than 72 bytes when using bcrypt:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(bcrypt_password_length,Password)</span></code></div>
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a partial list or a list with an element which is a variable:</div>
 <div class="line-block">
@@ -1075,6 +1152,14 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_integer,Iterations)</span></code></div>
 </div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains a <code class="docutils literal notranslate"><span class="pre">cost/1</span></code> value that is not an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Cost)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains a <code class="docutils literal notranslate"><span class="pre">cost/1</span></code> value outside the range 4 through 31:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(bcrypt_cost,Cost)</span></code></div>
+</div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains a <code class="docutils literal notranslate"><span class="pre">salt/1</span></code> value that is not a list of bytes:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte),Salt)</span></code></div>
@@ -1091,17 +1176,33 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(byte,Byte)</span></code></div>
 </div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains a bcrypt <code class="docutils literal notranslate"><span class="pre">salt/1</span></code> value that is not exactly 16 bytes long:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(bcrypt_salt,Salt)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains an invalid APR1 <code class="docutils literal notranslate"><span class="pre">salt/1</span></code> value:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(apr1_salt,Salt)</span></code></div>
+</div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains a <code class="docutils literal notranslate"><span class="pre">salt_length/1</span></code> or <code class="docutils literal notranslate"><span class="pre">length/1</span></code> value that is not an integer:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Length)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains a <code class="docutils literal notranslate"><span class="pre">salt_length/1</span></code> value that is less than zero:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains a PBKDF2 <code class="docutils literal notranslate"><span class="pre">salt_length/1</span></code> value that is less than zero:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Length)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains an APR1 <code class="docutils literal notranslate"><span class="pre">salt_length/1</span></code> value outside the range 1 through 8:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(apr1_salt_length,Length)</span></code></div>
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains a <code class="docutils literal notranslate"><span class="pre">length/1</span></code> value that is not positive:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_integer,Length)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> selects a PBKDF2 <code class="docutils literal notranslate"><span class="pre">length/1</span></code> value that exceeds the maximum output length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(pbkdf2_output_length,Length)</span></code></div>
 </div>
 </div>
 </div>
@@ -1110,18 +1211,20 @@
 </div>
 <blockquote>
 <div><ul class="simple">
+<li><p>Method: Supported methods are <code class="docutils literal notranslate"><span class="pre">pbkdf2(Hash)</span></code>, <code class="docutils literal notranslate"><span class="pre">bcrypt</span></code>, and <code class="docutils literal notranslate"><span class="pre">apr1</span></code>. A hash object is interpreted as shorthand for <code class="docutils literal notranslate"><span class="pre">pbkdf2(Hash)</span></code>.</p></li>
 <li><p>Repeated options: When the same password-hash option is given multiple times, the last occurrence is used.</p></li>
 <li><p>Option <code class="docutils literal notranslate"><span class="pre">iterations(Count)</span></code>: Uses the given positive integer PBKDF2 iteration count. When this option is absent, the iteration count defaults to <code class="docutils literal notranslate"><span class="pre">131072</span></code>.</p></li>
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">salt(Bytes)</span></code>: Uses the given byte list as the PBKDF2 salt. When this option is present, no random salt is generated and any <code class="docutils literal notranslate"><span class="pre">salt_length/1</span></code> option only affects validation, not the selected salt value.</p></li>
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">salt_length(Count)</span></code>: Generates a random salt with the given non-negative number of bytes when <code class="docutils literal notranslate"><span class="pre">salt/1</span></code> is absent. When this option is absent, the generated salt length defaults to <code class="docutils literal notranslate"><span class="pre">16</span></code> bytes.</p></li>
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">length(Count)</span></code>: Uses the given positive derived-key length. When this option is absent, the derived-key length defaults to the selected hash digest size.</p></li>
+<li><p>Option <code class="docutils literal notranslate"><span class="pre">cost(Count)</span></code>: Uses the given bcrypt cost from 4 through 31. When this option is absent, the cost defaults to <code class="docutils literal notranslate"><span class="pre">12</span></code>.</p></li>
+<li><p>Option <code class="docutils literal notranslate"><span class="pre">salt(Bytes)</span></code>: Uses the given method-specific salt. Bcrypt requires exactly 16 raw bytes; APR1 requires one through eight characters from its base64 alphabet.</p></li>
+<li><p>Option <code class="docutils literal notranslate"><span class="pre">salt_length(Count)</span></code>: Generates a random PBKDF2 or APR1 salt when <code class="docutils literal notranslate"><span class="pre">salt/1</span></code> is absent. PBKDF2 defaults to 16 bytes and APR1 defaults to 8 characters.</p></li>
+<li><p>Option <code class="docutils literal notranslate"><span class="pre">length(Count)</span></code>: Uses the given positive PBKDF2 derived-key length. When this option is absent, the derived-key length defaults to the selected hash digest size.</p></li>
 </ul>
 </div></blockquote>
 <hr class="docutils" />
 </section>
 <section id="password-hash-needs-rehash-3">
-<span id="crypto-0-password-hash-needs-rehash-3"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">password_hash_needs_rehash/3</span></code></a><a class="headerlink" href="#password-hash-needs-rehash-3" title="Link to this heading"></a></h3>
-<p>Succeeds when the given password-hash term does not match the selected PBKDF2 password-hash policy.</p>
+<span id="crypto-0-password-hash-needs-rehash-3"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">password_hash_needs_rehash/3</span></code></a><a class="headerlink" href="#password-hash-needs-rehash-3" title="Link to this heading"></a></h3>
+<p>Succeeds when the given password-hash term does not match the selected password-hashing method and policy.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -1131,11 +1234,12 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">password_hash_needs_rehash(PasswordHash,Hash,Options)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">password_hash_needs_rehash(PasswordHash,Method,Options)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">password_hash_needs_rehash(+compound,+object_identifier,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">password_hash_needs_rehash(+compound,+compound,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
@@ -1185,11 +1289,27 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(apr1_checksum,Checksum)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Hash</span></code> is a variable:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">PasswordHash</span></code> contains a bcrypt cost that is not an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Cost)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">PasswordHash</span></code> contains a bcrypt cost outside the range 4 through 31:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(bcrypt_cost,Cost)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">PasswordHash</span></code> contains a bcrypt salt that is not exactly 16 bytes long:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(bcrypt_salt,Salt)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">PasswordHash</span></code> contains an invalid bcrypt checksum:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(bcrypt_checksum,Checksum)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Method</span></code> is not a ground term:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Hash</span></code> is not an object implementing the <code class="docutils literal notranslate"><span class="pre">hash_digest_protocol</span></code> protocol:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Method</span></code> is a ground <code class="docutils literal notranslate"><span class="pre">Hash</span></code> or <code class="docutils literal notranslate"><span class="pre">pbkdf2(Hash)</span></code> term but not an object implementing the <code class="docutils literal notranslate"><span class="pre">hash_digest_protocol</span></code> protocol:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(crypto_hash,Hash)</span></code></div>
 </div>
@@ -1213,6 +1333,14 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_integer,Iterations)</span></code></div>
 </div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains a <code class="docutils literal notranslate"><span class="pre">cost/1</span></code> value that is not an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Cost)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains a <code class="docutils literal notranslate"><span class="pre">cost/1</span></code> value outside the range 4 through 31:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(bcrypt_cost,Cost)</span></code></div>
+</div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains a <code class="docutils literal notranslate"><span class="pre">salt/1</span></code> value that is not a list of bytes:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte),Salt)</span></code></div>
@@ -1229,19 +1357,31 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(byte,Byte)</span></code></div>
 </div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains a bcrypt <code class="docutils literal notranslate"><span class="pre">salt/1</span></code> value that is not exactly 16 bytes long:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(bcrypt_salt,Salt)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains an invalid APR1 <code class="docutils literal notranslate"><span class="pre">salt/1</span></code> value:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(apr1_salt,Salt)</span></code></div>
+</div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains a <code class="docutils literal notranslate"><span class="pre">salt_length/1</span></code> or <code class="docutils literal notranslate"><span class="pre">length/1</span></code> value that is not an integer:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Length)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains a <code class="docutils literal notranslate"><span class="pre">salt_length/1</span></code> value that is less than zero:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains a PBKDF2 <code class="docutils literal notranslate"><span class="pre">salt_length/1</span></code> value that is less than zero:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Length)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains an APR1 <code class="docutils literal notranslate"><span class="pre">salt_length/1</span></code> value outside the range 1 through 8:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(apr1_salt_length,Length)</span></code></div>
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains a <code class="docutils literal notranslate"><span class="pre">length/1</span></code> value that is not positive:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_integer,Length)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> selects a <code class="docutils literal notranslate"><span class="pre">length/1</span></code> value that exceeds the maximum PBKDF2 output length:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> selects a PBKDF2 <code class="docutils literal notranslate"><span class="pre">length/1</span></code> value that exceeds the maximum output length:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(pbkdf2_output_length,Length)</span></code></div>
 </div>
@@ -1252,14 +1392,15 @@
 </div>
 <blockquote>
 <div><ul class="simple">
-<li><p>Policy: The <code class="docutils literal notranslate"><span class="pre">Hash</span></code> and <code class="docutils literal notranslate"><span class="pre">Options</span></code> arguments use the same policy options as <code class="docutils literal notranslate"><span class="pre">password_hash/4</span></code>.</p></li>
-<li><p>Legacy hashes: Supported non-PBKDF2 password-hash terms need rehashing when valid.</p></li>
+<li><p>Method: Supported target methods are <code class="docutils literal notranslate"><span class="pre">pbkdf2(Hash)</span></code>, <code class="docutils literal notranslate"><span class="pre">bcrypt</span></code>, and <code class="docutils literal notranslate"><span class="pre">apr1</span></code>. A hash object is interpreted as shorthand for <code class="docutils literal notranslate"><span class="pre">pbkdf2(Hash)</span></code>.</p></li>
+<li><p>Policy: The <code class="docutils literal notranslate"><span class="pre">Method</span></code> and <code class="docutils literal notranslate"><span class="pre">Options</span></code> arguments use the same method and policy options as <code class="docutils literal notranslate"><span class="pre">password_hash/4</span></code>.</p></li>
+<li><p>Method changes: A valid stored hash using a different method always needs rehashing.</p></li>
 </ul>
 </div></blockquote>
 <hr class="docutils" />
 </section>
 <section id="verify-password-hash-2">
-<span id="crypto-0-verify-password-hash-2"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">verify_password_hash/2</span></code></a><a class="headerlink" href="#verify-password-hash-2" title="Link to this heading"></a></h3>
+<span id="crypto-0-verify-password-hash-2"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">verify_password_hash/2</span></code></a><a class="headerlink" href="#verify-password-hash-2" title="Link to this heading"></a></h3>
 <p>Succeeds when the password byte sequence matches the given structured password-hash term or stored digest term.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1280,6 +1421,10 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">PasswordHash</span></code> is not a ground term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">PasswordHash</span></code> is not a supported password-hash term:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(password_hash,PasswordHash)</span></code></div>
@@ -1342,6 +1487,45 @@
 </div>
 </div>
 </div>
+<hr class="docutils" />
+</section>
+<section id="password-hash-atom-2">
+<span id="crypto-0-password-hash-atom-2"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">password_hash_atom/2</span></code></a><a class="headerlink" href="#password-hash-atom-2" title="Link to this heading"></a></h3>
+<p>Converts between a structured bcrypt 2b or APR1 password-hash term and its canonical modular-crypt atom.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">password_hash_atom(PasswordHash,Atom)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">password_hash_atom(+compound,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">password_hash_atom(-compound,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Both arguments are variables:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Atom</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Atom)</span></code></div>
+</div>
+<div class="line">The instantiated argument does not represent a supported canonical password hash:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(password_hash,Value)</span></code></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 <hr class="docutils" />
@@ -1352,7 +1536,7 @@
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
 <section id="xor-bytes-3">
-<span id="crypto-0-xor-bytes-3"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">xor_bytes/3</span></code></a><a class="headerlink" href="#xor-bytes-3" title="Link to this heading"></a></h3>
+<span id="crypto-0-xor-bytes-3"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">xor_bytes/3</span></code></a><a class="headerlink" href="#xor-bytes-3" title="Link to this heading"></a></h3>
 <p>Computes the byte-wise exclusive disjunction of two equal-length byte lists.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -1373,7 +1557,7 @@
 <hr class="docutils" />
 </section>
 <section id="constant-time-equal-2">
-<span id="crypto-0-constant-time-equal-2"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">constant_time_equal/2</span></code></a><a class="headerlink" href="#constant-time-equal-2" title="Link to this heading"></a></h3>
+<span id="crypto-0-constant-time-equal-2"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">constant_time_equal/2</span></code></a><a class="headerlink" href="#constant-time-equal-2" title="Link to this heading"></a></h3>
 <p>Compares two byte lists using a constant-time strategy.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

@@ -23,14 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-20,
+		date is 2026-08-04,
 		comment is 'Unit tests for the "crypto" library.'
 	]).
 
 	:- uses(crypto, [
-		apr1/3, hkdf/5, hex_bytes/2, password_hash/4, password_hash_needs_rehash/3, pbkdf2/6, random_below/2, random_bytes/2,
+		apr1/3, hkdf/5, hex_bytes/2, password_hash/4, password_hash_atom/2, password_hash_needs_rehash/3, pbkdf2/6, random_below/2, random_bytes/2,
 		secure_compare/2, token_hex/2, token_urlsafe/2, verify_password_hash/2
 	]).
 
@@ -425,6 +425,15 @@
 	test(crypto_apr1_3_09, error(domain_error(apr1_salt, [0'$]))) :-
 		apr1([0'p], [0'$], _Checksum).
 
+	% bcrypt/4 tests
+
+	test(crypto_bcrypt_4_01, deterministic(PasswordHash == bcrypt(4, Salt, ExpectedChecksum))) :-
+		atom_codes(allmine, Password),
+		atom_codes('XajjQvNhvvRt5GSeFk1xFe', EncodedSalt),
+		base64_bcrypt_decode(EncodedSalt, Salt),
+		atom_codes('FSjbRlNk/Ta1yxtAEbNtK1N.ZPZVHUu', ExpectedChecksum),
+		password_hash(bcrypt, Password, PasswordHash, [cost(4), salt(Salt)]).
+
 	% password_hash/4 tests
 
 	test(crypto_password_hash_4_02, error(domain_error(password_hash_option, rounds(2)))) :-
@@ -494,6 +503,19 @@
 		hex_bytes('fd510b4e8ac8db80209ed7da24e932d2', ExpectedBytes),
 		password_hash(md5, [112,97,115,115], PasswordHash, [iterations(2), salt([1,2,3,4]), length(16)]).
 
+	test(crypto_password_hash_4_23, deterministic(PasswordHash == pbkdf2(md5, 2, [1,2,3,4], ExpectedBytes))) :-
+		hex_bytes('fd510b4e8ac8db80209ed7da24e932d2', ExpectedBytes),
+		password_hash(pbkdf2(md5), [112,97,115,115], PasswordHash, [iterations(2), salt([1,2,3,4]), length(16)]).
+
+	test(crypto_password_hash_4_25, deterministic(PasswordHash == apr1(Salt, Checksum))) :-
+		atom_codes('Circle Of Life', Password),
+		atom_codes(portable, Salt),
+		atom_codes('F/0Ac3GBA/V51P9DJ7acL.', Checksum),
+		password_hash(apr1, Password, PasswordHash, [salt(Salt)]).
+
+	test(crypto_password_hash_4_26, error(domain_error(password_hash_option, iterations(2)))) :-
+		password_hash(bcrypt, [112], _PasswordHash, [iterations(2)]).
+
 	% password_hash_needs_rehash/3 tests
 
 	test(crypto_password_hash_needs_rehash_3_01, fail) :-
@@ -530,6 +552,46 @@
 	test(crypto_password_hash_needs_rehash_3_09, deterministic, [condition(current_prolog_flag(bounded, false))]) :-
 		hex_bytes('fd510b4e8ac8db80209ed7da24e932d2', StoredKey),
 		password_hash_needs_rehash(pbkdf2(md5, 2, [1,2,3,4], StoredKey), sha1, [iterations(2), salt_length(4), length(16)]).
+
+	test(crypto_password_hash_needs_rehash_3_10, fail) :-
+		hex_bytes('fd510b4e8ac8db80209ed7da24e932d2', StoredKey),
+		password_hash_needs_rehash(pbkdf2(md5, 2, [1,2,3,4], StoredKey), pbkdf2(md5), [iterations(2), salt_length(4), length(16)]).
+
+	test(crypto_password_hash_needs_rehash_3_11, fail) :-
+		bcrypt_test_password_hash(PasswordHash),
+		password_hash_needs_rehash(PasswordHash, bcrypt, [cost(4)]).
+
+	test(crypto_password_hash_needs_rehash_3_12, deterministic) :-
+		bcrypt_test_password_hash(PasswordHash),
+		password_hash_needs_rehash(PasswordHash, bcrypt, [cost(5)]).
+
+	test(crypto_password_hash_needs_rehash_3_13, deterministic) :-
+		bcrypt_test_password_hash(PasswordHash),
+		password_hash_needs_rehash(PasswordHash, md5, [iterations(2), salt_length(16), length(16)]).
+
+	test(crypto_password_hash_needs_rehash_3_14, fail) :-
+		atom_codes(portable, Salt),
+		atom_codes('F/0Ac3GBA/V51P9DJ7acL.', Checksum),
+		password_hash_needs_rehash(apr1(Salt, Checksum), apr1, [salt_length(8)]).
+
+	test(crypto_password_hash_needs_rehash_3_15, deterministic) :-
+		atom_codes(portable, Salt),
+		atom_codes('F/0Ac3GBA/V51P9DJ7acL.', Checksum),
+		password_hash_needs_rehash(apr1(Salt, Checksum), apr1, [salt_length(7)]).
+
+	test(crypto_password_hash_needs_rehash_3_16, error(instantiation_error)) :-
+		hex_bytes('fd510b4e8ac8db80209ed7da24e932d2', StoredKey),
+		password_hash_needs_rehash(pbkdf2(md5, 2, [1,2,3,4], StoredKey), _, []).
+
+	test(crypto_password_hash_needs_rehash_3_17, fail) :-
+		bcrypt_test_password_hash(PasswordHash),
+		PasswordHash = bcrypt(_, Salt, _),
+		password_hash_needs_rehash(PasswordHash, bcrypt, [cost(4), salt(Salt)]).
+
+	test(crypto_password_hash_needs_rehash_3_18, fail) :-
+		atom_codes(portable, Salt),
+		atom_codes('F/0Ac3GBA/V51P9DJ7acL.', Checksum),
+		password_hash_needs_rehash(apr1(Salt, Checksum), apr1, [salt(Salt)]).
 
 	% verify_password_hash/2 tests
 
@@ -629,7 +691,32 @@
 	test(crypto_verify_password_hash_2_03, error(domain_error(password_hash, foo))) :-
 		verify_password_hash(foo, [112,97,115,115]).
 
+	% password_hash_atom/2 tests
+
+	test(crypto_password_hash_atom_2_01, deterministic(Atom == '$2b$04$XajjQvNhvvRt5GSeFk1xFeFSjbRlNk/Ta1yxtAEbNtK1N.ZPZVHUu')) :-
+		bcrypt_test_password_hash(PasswordHash),
+		password_hash_atom(PasswordHash, Atom).
+
+	test(crypto_password_hash_atom_2_02, deterministic(PasswordHash == ExpectedPasswordHash)) :-
+		bcrypt_test_password_hash(ExpectedPasswordHash),
+		password_hash_atom(PasswordHash, '$2b$04$XajjQvNhvvRt5GSeFk1xFeFSjbRlNk/Ta1yxtAEbNtK1N.ZPZVHUu').
+
+	test(crypto_password_hash_atom_2_03, deterministic(Atom == '$apr1$portable$F/0Ac3GBA/V51P9DJ7acL.')) :-
+		atom_codes(portable, Salt),
+		atom_codes('F/0Ac3GBA/V51P9DJ7acL.', Checksum),
+		password_hash_atom(apr1(Salt, Checksum), Atom).
+
+	test(crypto_password_hash_atom_2_04, error(domain_error(password_hash, '$2y$04$XajjQvNhvvRt5GSeFk1xFeFSjbRlNk/Ta1yxtAEbNtK1N.ZPZVHUu'))) :-
+		password_hash_atom(_PasswordHash, '$2y$04$XajjQvNhvvRt5GSeFk1xFeFSjbRlNk/Ta1yxtAEbNtK1N.ZPZVHUu').
+
+	test(crypto_password_hash_atom_2_05, error(instantiation_error)) :-
+		password_hash_atom(_, _).
+
 	% auxiliary predicates
+
+	bcrypt_test_password_hash(bcrypt(4, Salt, Checksum)) :-
+		base64_bcrypt_decode([0'X,0'a,0'j,0'j,0'Q,0'v,0'N,0'h,0'v,0'v,0'R,0't,0'5,0'G,0'S,0'e,0'F,0'k,0'1,0'x,0'F,0'e], Salt),
+		atom_codes('FSjbRlNk/Ta1yxtAEbNtK1N.ZPZVHUu', Checksum).
 
 	all_bytes([]).
 	all_bytes([Byte| Bytes]) :-
@@ -638,6 +725,36 @@
 		Byte =< 255,
 		all_bytes(Bytes).
 
+	base64_bcrypt_decode(Codes, Bytes) :-
+		base64_bcrypt_decode(Codes, 0, 0, Bytes).
+
+	base64_bcrypt_decode([], _Buffer, _Bits, []).
+	base64_bcrypt_decode([Code| Codes], Buffer0, Bits0, Bytes) :-
+		base64_bcrypt_value(Code, Value),
+		Buffer1 is (Buffer0 << 6) \/ Value,
+		Bits1 is Bits0 + 6,
+		base64_bcrypt_bytes(Bits1, Buffer1, Codes, Bytes).
+
+	base64_bcrypt_bytes(Bits, Buffer, Codes, [Byte| Bytes]) :-
+		Bits >= 8,
+		!,
+		RemainingBits is Bits - 8,
+		Byte is (Buffer >> RemainingBits) /\ 0xFF,
+		Mask is (1 << RemainingBits) - 1,
+		RemainingBuffer is Buffer /\ Mask,
+		base64_bcrypt_bytes(RemainingBits, RemainingBuffer, Codes, Bytes).
+	base64_bcrypt_bytes(Bits, Buffer, Codes, Bytes) :-
+		base64_bcrypt_decode(Codes, Buffer, Bits, Bytes).
+
+	base64_bcrypt_value(Code, Value) :-
+		(	Code =:= 0'. -> Value = 0
+		;	Code =:= 0'/ -> Value = 1
+		;	Code >= 0'A, Code =< 0'Z -> Value is Code - 0'A + 2
+		;	Code >= 0'a, Code =< 0'z -> Value is Code - 0'a + 28
+		;	Value is Code - 0'0 + 54
+		),
+		!.
+
 	urlsafe_codes([]).
 	urlsafe_codes([Code| Codes]) :-
 		(	Code >= 0'a, Code =< 0'z
@@ -645,7 +762,8 @@
 		;	Code >= 0'0, Code =< 0'9
 		;	Code =:= 0'-
 		;	Code =:= 0'_
-		), !,
+		),
+		!,
 		urlsafe_codes(Codes).
 
 :- end_object.

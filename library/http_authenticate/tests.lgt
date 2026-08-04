@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-08-04,
 		comment is 'Unit tests for the http_authenticate library.'
 	]).
 
@@ -182,6 +182,18 @@
 	test(http_authenticate_21, fail) :-
 		^^file_path('test_files/apr1_supported.htpasswd', Path),
 		http_htpasswd_verifier(Path)::verify('ignored-realm', 'Mufasa', 'wrong password').
+
+	test(http_authenticate_22, deterministic) :-
+		^^file_path('test_files/bcrypt_2b_supported.htpasswd', Path),
+		http_htpasswd_verifier(Path)::verify('ignored-realm', 'Mufasa', allmine).
+
+	test(http_authenticate_23, fail) :-
+		^^file_path('test_files/bcrypt_2b_supported.htpasswd', Path),
+		http_htpasswd_verifier(Path)::verify('ignored-realm', 'Mufasa', 'wrong password').
+
+	test(http_authenticate_24, error(domain_error(http_password_file(Path), invalid(1)))) :-
+		^^file_path('test_files/bcrypt_2b_invalid.htpasswd', Path),
+		http_htpasswd_verifier(Path)::verify('ignored-realm', 'Mufasa', allmine).
 
 	% auxiliary predicates
 

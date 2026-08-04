@@ -14,7 +14,7 @@ Transport-neutral cryptographic helper predicates.
 |    ``logtalk_load(crypto(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:1
+| **Version:** 1:1:0
 | **Date:** 2026-08-04
 
 | **Compilation flags:**
@@ -378,26 +378,70 @@ Computes the Apache APR1 encoded checksum for a password byte sequence and salt 
 
 ------------
 
+.. index:: bcrypt/4
+.. _crypto/0::bcrypt/4:
+
+``bcrypt/4``
+^^^^^^^^^^^^
+
+Computes a bcrypt version 2b encoded checksum for a password, cost, and raw 16-byte salt.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bcrypt(Password,Cost,Salt,Checksum)``
+| **Mode and number of proofs:**
+|    ``bcrypt(+list(byte),+integer,+list(byte),-list(byte))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Password`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``Password`` is a list but not a list of bytes:
+|        ``type_error(list(byte),Password)``
+|    ``Password`` contains a non-integer element:
+|        ``type_error(integer,Byte)``
+|    ``Password`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``Password`` contains more than 72 bytes:
+|        ``domain_error(bcrypt_password_length,Password)``
+|    ``Cost`` is a variable:
+|        ``instantiation_error``
+|    ``Cost`` is not an integer:
+|        ``type_error(integer,Cost)``
+|    ``Cost`` is outside the range 4 through 31:
+|        ``domain_error(bcrypt_cost,Cost)``
+|    ``Salt`` is a partial list or a list with an element which is a variable:
+|        ``instantiation_error``
+|    ``Salt`` is a list but not a list of bytes:
+|        ``type_error(list(byte),Salt)``
+|    ``Salt`` is not exactly 16 bytes long:
+|        ``domain_error(bcrypt_salt,Salt)``
+
+
+------------
+
 .. index:: password_hash/4
 .. _crypto/0::password_hash/4:
 
 ``password_hash/4``
 ^^^^^^^^^^^^^^^^^^^
 
-Computes a structured password-hash term using PBKDF2, a hash object implementing the ``hash_digest_protocol`` protocol, and the given derivation options.
+Computes a structured password-hash term using the selected password-hashing method and derivation options.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``password_hash(Hash,Password,PasswordHash,Options)``
+|    ``password_hash(Method,Password,PasswordHash,Options)``
 | **Mode and number of proofs:**
 |    ``password_hash(+object_identifier,+list(byte),-compound,+list(compound))`` - ``one_or_error``
+|    ``password_hash(+compound,+list(byte),-compound,+list(compound))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Hash`` is a variable:
+|    ``Method`` is not a ground term:
 |        ``instantiation_error``
-|    ``Hash`` is not an object implementing the ``hash_digest_protocol`` protocol:
+|    ``Method`` is a ground ``Hash`` or ``pbkdf2(Hash)`` term but not an object implementing the ``hash_digest_protocol`` protocol:
 |        ``domain_error(crypto_hash,Hash)``
 |    ``Password`` is a partial list or a list with an element which is a variable:
 |        ``instantiation_error``
@@ -407,6 +451,8 @@ Computes a structured password-hash term using PBKDF2, a hash object implementin
 |        ``type_error(integer,Byte)``
 |    ``Password`` contains an integer outside the byte range:
 |        ``domain_error(byte,Byte)``
+|    ``Password`` contains more than 72 bytes when using bcrypt:
+|        ``domain_error(bcrypt_password_length,Password)``
 |    ``Options`` is a partial list or a list with an element which is a variable:
 |        ``instantiation_error``
 |    ``Options`` is a list but not a list of compound terms:
@@ -417,6 +463,10 @@ Computes a structured password-hash term using PBKDF2, a hash object implementin
 |        ``type_error(integer,Iterations)``
 |    ``Options`` contains an ``iterations/1`` value that is not a positive integer:
 |        ``domain_error(positive_integer,Iterations)``
+|    ``Options`` contains a ``cost/1`` value that is not an integer:
+|        ``type_error(integer,Cost)``
+|    ``Options`` contains a ``cost/1`` value outside the range 4 through 31:
+|        ``domain_error(bcrypt_cost,Cost)``
 |    ``Options`` contains a ``salt/1`` value that is not a list of bytes:
 |        ``type_error(list(byte),Salt)``
 |    ``Options`` contains a ``salt/1`` value with a variable byte:
@@ -425,20 +475,30 @@ Computes a structured password-hash term using PBKDF2, a hash object implementin
 |        ``type_error(integer,Byte)``
 |    ``Options`` contains a ``salt/1`` value with an integer outside the byte range:
 |        ``domain_error(byte,Byte)``
+|    ``Options`` contains a bcrypt ``salt/1`` value that is not exactly 16 bytes long:
+|        ``domain_error(bcrypt_salt,Salt)``
+|    ``Options`` contains an invalid APR1 ``salt/1`` value:
+|        ``domain_error(apr1_salt,Salt)``
 |    ``Options`` contains a ``salt_length/1`` or ``length/1`` value that is not an integer:
 |        ``type_error(integer,Length)``
-|    ``Options`` contains a ``salt_length/1`` value that is less than zero:
+|    ``Options`` contains a PBKDF2 ``salt_length/1`` value that is less than zero:
 |        ``domain_error(non_negative_integer,Length)``
+|    ``Options`` contains an APR1 ``salt_length/1`` value outside the range 1 through 8:
+|        ``domain_error(apr1_salt_length,Length)``
 |    ``Options`` contains a ``length/1`` value that is not positive:
 |        ``domain_error(positive_integer,Length)``
+|    ``Options`` selects a PBKDF2 ``length/1`` value that exceeds the maximum output length:
+|        ``domain_error(pbkdf2_output_length,Length)``
 
 | **Remarks:**
 
+    - Method: Supported methods are ``pbkdf2(Hash)``, ``bcrypt``, and ``apr1``. A hash object is interpreted as shorthand for ``pbkdf2(Hash)``.
     - Repeated options: When the same password-hash option is given multiple times, the last occurrence is used.
     - Option ``iterations(Count)``: Uses the given positive integer PBKDF2 iteration count. When this option is absent, the iteration count defaults to ``131072``.
-    - Option ``salt(Bytes)``: Uses the given byte list as the PBKDF2 salt. When this option is present, no random salt is generated and any ``salt_length/1`` option only affects validation, not the selected salt value.
-    - Option ``salt_length(Count)``: Generates a random salt with the given non-negative number of bytes when ``salt/1`` is absent. When this option is absent, the generated salt length defaults to ``16`` bytes.
-    - Option ``length(Count)``: Uses the given positive derived-key length. When this option is absent, the derived-key length defaults to the selected hash digest size.
+    - Option ``cost(Count)``: Uses the given bcrypt cost from 4 through 31. When this option is absent, the cost defaults to ``12``.
+    - Option ``salt(Bytes)``: Uses the given method-specific salt. Bcrypt requires exactly 16 raw bytes; APR1 requires one through eight characters from its base64 alphabet.
+    - Option ``salt_length(Count)``: Generates a random PBKDF2 or APR1 salt when ``salt/1`` is absent. PBKDF2 defaults to 16 bytes and APR1 defaults to 8 characters.
+    - Option ``length(Count)``: Uses the given positive PBKDF2 derived-key length. When this option is absent, the derived-key length defaults to the selected hash digest size.
 
 
 ------------
@@ -449,15 +509,16 @@ Computes a structured password-hash term using PBKDF2, a hash object implementin
 ``password_hash_needs_rehash/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Succeeds when the given password-hash term does not match the selected PBKDF2 password-hash policy.
+Succeeds when the given password-hash term does not match the selected password-hashing method and policy.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``password_hash_needs_rehash(PasswordHash,Hash,Options)``
+|    ``password_hash_needs_rehash(PasswordHash,Method,Options)``
 | **Mode and number of proofs:**
 |    ``password_hash_needs_rehash(+compound,+object_identifier,+list(compound))`` - ``zero_or_one_or_error``
+|    ``password_hash_needs_rehash(+compound,+compound,+list(compound))`` - ``zero_or_one_or_error``
 
 | **Exceptions:**
 |    ``PasswordHash`` is not a supported password-hash term:
@@ -482,9 +543,17 @@ Succeeds when the given password-hash term does not match the selected PBKDF2 pa
 |        ``domain_error(apr1_salt,Salt)``
 |    ``PasswordHash`` contains an invalid APR1 checksum:
 |        ``domain_error(apr1_checksum,Checksum)``
-|    ``Hash`` is a variable:
+|    ``PasswordHash`` contains a bcrypt cost that is not an integer:
+|        ``type_error(integer,Cost)``
+|    ``PasswordHash`` contains a bcrypt cost outside the range 4 through 31:
+|        ``domain_error(bcrypt_cost,Cost)``
+|    ``PasswordHash`` contains a bcrypt salt that is not exactly 16 bytes long:
+|        ``domain_error(bcrypt_salt,Salt)``
+|    ``PasswordHash`` contains an invalid bcrypt checksum:
+|        ``domain_error(bcrypt_checksum,Checksum)``
+|    ``Method`` is not a ground term:
 |        ``instantiation_error``
-|    ``Hash`` is not an object implementing the ``hash_digest_protocol`` protocol:
+|    ``Method`` is a ground ``Hash`` or ``pbkdf2(Hash)`` term but not an object implementing the ``hash_digest_protocol`` protocol:
 |        ``domain_error(crypto_hash,Hash)``
 |    ``Options`` is a partial list or a list with an element which is a variable:
 |        ``instantiation_error``
@@ -496,6 +565,10 @@ Succeeds when the given password-hash term does not match the selected PBKDF2 pa
 |        ``type_error(integer,Iterations)``
 |    ``Options`` contains an ``iterations/1`` value that is not a positive integer:
 |        ``domain_error(positive_integer,Iterations)``
+|    ``Options`` contains a ``cost/1`` value that is not an integer:
+|        ``type_error(integer,Cost)``
+|    ``Options`` contains a ``cost/1`` value outside the range 4 through 31:
+|        ``domain_error(bcrypt_cost,Cost)``
 |    ``Options`` contains a ``salt/1`` value that is not a list of bytes:
 |        ``type_error(list(byte),Salt)``
 |    ``Options`` contains a ``salt/1`` value with a variable byte:
@@ -504,19 +577,26 @@ Succeeds when the given password-hash term does not match the selected PBKDF2 pa
 |        ``type_error(integer,Byte)``
 |    ``Options`` contains a ``salt/1`` value with an integer outside the byte range:
 |        ``domain_error(byte,Byte)``
+|    ``Options`` contains a bcrypt ``salt/1`` value that is not exactly 16 bytes long:
+|        ``domain_error(bcrypt_salt,Salt)``
+|    ``Options`` contains an invalid APR1 ``salt/1`` value:
+|        ``domain_error(apr1_salt,Salt)``
 |    ``Options`` contains a ``salt_length/1`` or ``length/1`` value that is not an integer:
 |        ``type_error(integer,Length)``
-|    ``Options`` contains a ``salt_length/1`` value that is less than zero:
+|    ``Options`` contains a PBKDF2 ``salt_length/1`` value that is less than zero:
 |        ``domain_error(non_negative_integer,Length)``
+|    ``Options`` contains an APR1 ``salt_length/1`` value outside the range 1 through 8:
+|        ``domain_error(apr1_salt_length,Length)``
 |    ``Options`` contains a ``length/1`` value that is not positive:
 |        ``domain_error(positive_integer,Length)``
-|    ``Options`` selects a ``length/1`` value that exceeds the maximum PBKDF2 output length:
+|    ``Options`` selects a PBKDF2 ``length/1`` value that exceeds the maximum output length:
 |        ``domain_error(pbkdf2_output_length,Length)``
 
 | **Remarks:**
 
-    - Policy: The ``Hash`` and ``Options`` arguments use the same policy options as ``password_hash/4``.
-    - Legacy hashes: Supported non-PBKDF2 password-hash terms need rehashing when valid.
+    - Method: Supported target methods are ``pbkdf2(Hash)``, ``bcrypt``, and ``apr1``. A hash object is interpreted as shorthand for ``pbkdf2(Hash)``.
+    - Policy: The ``Method`` and ``Options`` arguments use the same method and policy options as ``password_hash/4``.
+    - Method changes: A valid stored hash using a different method always needs rehashing.
 
 
 ------------
@@ -538,6 +618,8 @@ Succeeds when the password byte sequence matches the given structured password-h
 |    ``verify_password_hash(+compound,+list(byte))`` - ``zero_or_one_or_error``
 
 | **Exceptions:**
+|    ``PasswordHash`` is not a ground term:
+|        ``instantiation_error``
 |    ``PasswordHash`` is not a supported password-hash term:
 |        ``domain_error(password_hash,PasswordHash)``
 |    ``PasswordHash`` contains a variable hash object:
@@ -568,6 +650,34 @@ Succeeds when the password byte sequence matches the given structured password-h
 |        ``type_error(integer,Byte)``
 |    ``Password`` contains an integer outside the byte range:
 |        ``domain_error(byte,Byte)``
+
+
+------------
+
+.. index:: password_hash_atom/2
+.. _crypto/0::password_hash_atom/2:
+
+``password_hash_atom/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts between a structured bcrypt 2b or APR1 password-hash term and its canonical modular-crypt atom.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``password_hash_atom(PasswordHash,Atom)``
+| **Mode and number of proofs:**
+|    ``password_hash_atom(+compound,?atom)`` - ``zero_or_one_or_error``
+|    ``password_hash_atom(-compound,+atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Both arguments are variables:
+|        ``instantiation_error``
+|    ``Atom`` is neither a variable nor an atom:
+|        ``type_error(atom,Atom)``
+|    The instantiated argument does not represent a supported canonical password hash:
+|        ``domain_error(password_hash,Value)``
 
 
 ------------

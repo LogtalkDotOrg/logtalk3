@@ -429,7 +429,9 @@ link in a web browser.</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">hkdf/5</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">pbkdf2/6</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">apr1/3</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bcrypt/4</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">password_hash/4</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">password_hash_atom/2</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">password_hash_needs_rehash/3</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">verify_password_hash/2</span></code></p></li>
 </ul>
@@ -469,15 +471,19 @@ byte sequences represented either as byte lists or atoms.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">hkdf/5</span></code> and <code class="docutils literal notranslate"><span class="pre">pbkdf2/6</span></code> predicates provide portable key
 derivation conforming to RFC 5869 and RFC 8018, respectively,
 implemented on top of the existing <code class="docutils literal notranslate"><span class="pre">hashes</span></code> and <code class="docutils literal notranslate"><span class="pre">hmac</span></code> libraries.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">apr1/3</span></code> predicate computes Apache APR1 encoded checksums for
-password and salt byte sequences using a portable MD5-based
-implementation.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">password_hash/4</span></code> predicate builds on top of <code class="docutils literal notranslate"><span class="pre">pbkdf2/6</span></code> to
-generate structured password-hash terms. The
-<code class="docutils literal notranslate"><span class="pre">password_hash_needs_rehash/3</span></code> predicate checks stored password-hash
-terms against the current PBKDF2 policy. The <code class="docutils literal notranslate"><span class="pre">verify_password_hash/2</span></code>
-predicate verifies <code class="docutils literal notranslate"><span class="pre">pbkdf2(Hash,</span> <span class="pre">Iterations,</span> <span class="pre">Salt,</span> <span class="pre">DerivedKey)</span></code>,
-<code class="docutils literal notranslate"><span class="pre">digest(Hash,</span> <span class="pre">StoredDigest)</span></code>, and <code class="docutils literal notranslate"><span class="pre">apr1(Salt,</span> <span class="pre">Checksum)</span></code> terms.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">apr1/3</span></code> and <code class="docutils literal notranslate"><span class="pre">bcrypt/4</span></code> predicates compute portable Apache APR1
+and bcrypt 2b checksums. Bcrypt accepts passwords of at most 72 bytes,
+costs from 4 through 31, and exactly 16 raw salt bytes.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">password_hash/4</span></code> predicate generates structured password hashes
+using <code class="docutils literal notranslate"><span class="pre">pbkdf2(Hash)</span></code>, <code class="docutils literal notranslate"><span class="pre">bcrypt</span></code>, or <code class="docutils literal notranslate"><span class="pre">apr1</span></code> method descriptors; a
+bare hash object is PBKDF2/PKCS#5 shorthand. Options are method-specific
+and inapplicable options are rejected. The
+<code class="docutils literal notranslate"><span class="pre">password_hash_needs_rehash/3</span></code> predicate compares a valid stored term
+with the selected target method and its parameters. The
+<code class="docutils literal notranslate"><span class="pre">verify_password_hash/2</span></code> predicate verifies PBKDF2/PKCS#5, digest,
+APR1, and bcrypt terms. The bidirectional <code class="docutils literal notranslate"><span class="pre">password_hash_atom/2</span></code>
+predicate converts canonical <code class="docutils literal notranslate"><span class="pre">$2b$</span></code> bcrypt and <code class="docutils literal notranslate"><span class="pre">$apr1$</span></code> atoms to and
+from their structured terms.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">xchacha20_poly1305_encrypt/5</span></code> and
 <code class="docutils literal notranslate"><span class="pre">xchacha20_poly1305_decrypt/5</span></code> predicates provide authenticated
 encryption with associated data (AEAD) using XChaCha20-Poly1305:

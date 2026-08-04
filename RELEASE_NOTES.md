@@ -112,6 +112,8 @@ Cipher-based Message Authentication Code specified in NIST SP 800-38B.
 * ADDED: Support for Ed25519 (RFC 8032) public-key signatures to the `crypto`
 library (when using a backend supporting unbound integer arithmetic).
 
+* ADDED: Support for the bcrypt b2 version to the `crypto` library.
+
 * ADDED: Support for the XChaCha20-Poly1305 authenticated encryption with
 associated data algorithm to the `crypto` library (when using a backend
 supporting unbound integer arithmetic).
@@ -132,6 +134,9 @@ older than 9.1.5.
 
 * UPDATED: The `amqp`, `character_sets`, `hashes`, `ieee_754`, and `protobuf`
 libraries to use the new `byte_order` library.
+
+* UPDATED: The `http_authenticate` library for the new bcrypt b2 version
+support provided by the `crypto` library.
 
 * UPDATED: The `thurstone_mosteller_ranker` library to reuse the new shared
 standard normal quantile implementation.

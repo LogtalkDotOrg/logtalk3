@@ -1626,6 +1626,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`geospatial_protocol <geospatial_protocol/0::bbox_union/3>`
 
+``bcrypt/4``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`crypto <crypto/0::bcrypt/4>`
+
 ``before/2``
 ------------
 
@@ -18988,6 +18998,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`crypto <crypto/0::password_hash/4>`
+
+``password_hash_atom/2``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`crypto <crypto/0::password_hash_atom/2>`
 
 ``password_hash_needs_rehash/3``
 --------------------------------

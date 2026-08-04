@@ -62,7 +62,9 @@ The `crypto` object provides with the following public predicates:
 - `hkdf/5`
 - `pbkdf2/6`
 - `apr1/3`
+- `bcrypt/4`
 - `password_hash/4`
+- `password_hash_atom/2`
 - `password_hash_needs_rehash/3`
 - `verify_password_hash/2`
 
@@ -108,14 +110,18 @@ The `hkdf/5` and `pbkdf2/6` predicates provide portable key derivation
 conforming to RFC 5869 and RFC 8018, respectively, implemented on top of
 the existing `hashes` and `hmac` libraries.
 
-The `apr1/3` predicate computes Apache APR1 encoded checksums for password
-and salt byte sequences using a portable MD5-based implementation.
+The `apr1/3` and `bcrypt/4` predicates compute portable Apache APR1 and bcrypt
+2b checksums. Bcrypt accepts passwords of at most 72 bytes, costs from 4
+through 31, and exactly 16 raw salt bytes.
 
-The `password_hash/4` predicate builds on top of `pbkdf2/6` to generate
-structured password-hash terms. The `password_hash_needs_rehash/3` predicate
-checks stored password-hash terms against the current PBKDF2 policy. The
-`verify_password_hash/2` predicate verifies `pbkdf2(Hash, Iterations, Salt,
-DerivedKey)`, `digest(Hash, StoredDigest)`, and `apr1(Salt, Checksum)` terms.
+The `password_hash/4` predicate generates structured password hashes using
+`pbkdf2(Hash)`, `bcrypt`, or `apr1` method descriptors; a bare hash object is
+PBKDF2/PKCS#5 shorthand. Options are method-specific and inapplicable options
+are rejected. The `password_hash_needs_rehash/3` predicate compares a valid
+stored term with the selected target method and its parameters. The
+`verify_password_hash/2` predicate verifies PBKDF2/PKCS#5, digest, APR1, and
+bcrypt terms. The bidirectional `password_hash_atom/2` predicate converts
+canonical `$2b$` bcrypt and `$apr1$` atoms to and from their structured terms.
 
 The `xchacha20_poly1305_encrypt/5` and `xchacha20_poly1305_decrypt/5`
 predicates provide authenticated encryption with associated data (AEAD)
