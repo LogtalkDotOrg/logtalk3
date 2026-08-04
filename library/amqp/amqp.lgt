@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-06-16,
+		date is 2026-08-04,
 		comment is 'Portable AMQP 0-9-1 (Advanced Message Queuing Protocol) client. Uses the sockets library for TCP communication.',
 		remarks is [
 			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM (same as the sockets library).',
@@ -540,8 +540,12 @@
 	]).
 
 	% ==========================================================================
-	% Uses directives
+	% Library dependencies
 	% ==========================================================================
+
+	:- uses(byte_order, [
+		bytes_to_integer/5, integer_to_bytes/4
+	]).
 
 	:- uses(list, [
 		append/2, append/3, length/2, member/2, valid/1 as is_list/1
@@ -1462,48 +1466,36 @@
 	% ==========================================================================
 
 	% Encode 8-bit unsigned integer (octet)
-	encode_octet(Value, [Byte]) :-
-		Byte is Value /\ 0xFF.
+	encode_octet(Value, Bytes) :-
+		integer_to_bytes(big, 1, Value, Bytes).
 
 	% Decode 8-bit unsigned integer
-	decode_octet([Byte| Rest], Value, Rest) :-
-		Value is Byte /\ 0xFF.
+	decode_octet(Bytes, Value, Rest) :-
+		bytes_to_integer(big, 1, Bytes, Value, Rest).
 
 	% Encode 16-bit unsigned integer (short) - big endian
-	encode_short(Value, [Hi, Lo]) :-
-		Hi is (Value >> 8) /\ 0xFF,
-		Lo is Value /\ 0xFF.
+	encode_short(Value, Bytes) :-
+		integer_to_bytes(big, 2, Value, Bytes).
 
 	% Decode 16-bit unsigned integer
-	decode_short([Hi, Lo| Rest], Value, Rest) :-
-		Value is (Hi << 8) \/ Lo.
+	decode_short(Bytes, Value, Rest) :-
+		bytes_to_integer(big, 2, Bytes, Value, Rest).
 
 	% Encode 32-bit unsigned integer (long) - big endian
-	encode_long(Value, [B3, B2, B1, B0]) :-
-		B3 is (Value >> 24) /\ 0xFF,
-		B2 is (Value >> 16) /\ 0xFF,
-		B1 is (Value >> 8) /\ 0xFF,
-		B0 is Value /\ 0xFF.
+	encode_long(Value, Bytes) :-
+		integer_to_bytes(big, 4, Value, Bytes).
 
 	% Decode 32-bit unsigned integer
-	decode_long([B3, B2, B1, B0| Rest], Value, Rest) :-
-		Value is (B3 << 24) \/ (B2 << 16) \/ (B1 << 8) \/ B0.
+	decode_long(Bytes, Value, Rest) :-
+		bytes_to_integer(big, 4, Bytes, Value, Rest).
 
 	% Encode 64-bit unsigned integer (long long) - big endian
-	encode_longlong(Value, [B7, B6, B5, B4, B3, B2, B1, B0]) :-
-		B7 is (Value >> 56) /\ 0xFF,
-		B6 is (Value >> 48) /\ 0xFF,
-		B5 is (Value >> 40) /\ 0xFF,
-		B4 is (Value >> 32) /\ 0xFF,
-		B3 is (Value >> 24) /\ 0xFF,
-		B2 is (Value >> 16) /\ 0xFF,
-		B1 is (Value >> 8) /\ 0xFF,
-		B0 is Value /\ 0xFF.
+	encode_longlong(Value, Bytes) :-
+		integer_to_bytes(big, 8, Value, Bytes).
 
 	% Decode 64-bit unsigned integer
-	decode_longlong([B7, B6, B5, B4, B3, B2, B1, B0| Rest], Value, Rest) :-
-		Value is (B7 << 56) \/ (B6 << 48) \/ (B5 << 40) \/ (B4 << 32) \/
-		         (B3 << 24) \/ (B2 << 16) \/ (B1 << 8) \/ B0.
+	decode_longlong(Bytes, Value, Rest) :-
+		bytes_to_integer(big, 8, Bytes, Value, Rest).
 
 	% Encode short string (length <= 255)
 	encode_shortstr(Atom, Bytes) :-

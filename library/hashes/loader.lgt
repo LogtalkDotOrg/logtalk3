@@ -23,6 +23,7 @@
 
 	:- initialization((
 		logtalk_load(basic_types(loader)),
+		logtalk_load(byte_order(loader)),
 		logtalk_load([
 			hash_protocol,
 			hash_digest_protocol,
@@ -40,6 +41,7 @@
 
 	:- initialization((
 		logtalk_load(basic_types(loader)),
+		logtalk_load(byte_order(loader)),
 		logtalk_load([
 			hash_protocol,
 			hash_digest_protocol,

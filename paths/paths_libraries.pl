@@ -54,6 +54,7 @@ logtalk_library_path(block_ciphers, library('block_ciphers/')).
 logtalk_library_path(borda_ranker, library('borda_ranker/')).
 logtalk_library_path(bradley_terry_ranker, library('bradley_terry_ranker/')).
 logtalk_library_path(bson, library('bson/')).
+logtalk_library_path(byte_order, library('byte_order/')).
 logtalk_library_path(c45_classifier, library('c45_classifier/')).
 logtalk_library_path(cartesian_products, library('cartesian_products/')).
 logtalk_library_path(cbor, library('cbor/')).

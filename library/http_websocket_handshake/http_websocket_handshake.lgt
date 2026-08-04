@@ -22,9 +22,9 @@
 :- object(http_websocket_handshake).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-06-11,
+		date is 2026-04-08,
 		comment is 'Shared helpers for WebSocket opening-handshake key generation and accept-value computation.'
 	]).
 
@@ -59,7 +59,7 @@
 	]).
 
 	:- uses(hash_common_32, [
-		add32/3, add32/5, big_endian_word32/2, integer_to_big_endian_bytes32/3, pad_md/4, rol32/3
+		add32/3, add32/5, pad_md/4, rol32/3
 	]).
 
 	websocket_opening_key(Key) :-
@@ -134,11 +134,11 @@
 	websocket_sha1_digest(Bytes, DigestBytes) :-
 		pad_md(big, Bytes, 8, PaddedBytes),
 		websocket_sha1_blocks(PaddedBytes, 0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476, 0xC3D2E1F0, H0, H1, H2, H3, H4),
-		integer_to_big_endian_bytes32(H0, DigestBytes, B1),
-		integer_to_big_endian_bytes32(H1, B1, B2),
-		integer_to_big_endian_bytes32(H2, B2, B3),
-		integer_to_big_endian_bytes32(H3, B3, B4),
-		integer_to_big_endian_bytes32(H4, B4, []).
+		byte_order::integer_to_bytes(big, 4, H0, DigestBytes, B1),
+		byte_order::integer_to_bytes(big, 4, H1, B1, B2),
+		byte_order::integer_to_bytes(big, 4, H2, B2, B3),
+		byte_order::integer_to_bytes(big, 4, H3, B3, B4),
+		byte_order::integer_to_bytes(big, 4, H4, B4, []).
 
 	websocket_sha1_blocks([], H0, H1, H2, H3, H4, H0, H1, H2, H3, H4).
 	websocket_sha1_blocks([Byte0| Bytes0], H0_0, H1_0, H2_0, H3_0, H4_0, H0, H1, H2, H3, H4) :-
@@ -155,7 +155,7 @@
 
 	websocket_sha1_block_words([], []).
 	websocket_sha1_block_words([B0, B1, B2, B3| Bytes], [Word| Words]) :-
-		big_endian_word32([B0, B1, B2, B3], Word),
+		byte_order::bytes_to_integer(big, [B0, B1, B2, B3], Word),
 		websocket_sha1_block_words(Bytes, Words).
 
 	extend_websocket_sha1_words(80, Words, Words) :-

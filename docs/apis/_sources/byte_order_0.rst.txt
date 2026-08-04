@@ -1,0 +1,207 @@
+.. index:: single: byte_order
+.. _byte_order/0:
+
+.. rst-class:: right
+
+**object**
+
+``byte_order``
+==============
+
+Predicates for converting between integers and fixed-size byte lists in big-endian and little-endian order.
+
+| **Availability:** 
+|    ``logtalk_load(byte_order(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-04
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: integer_to_bytes/4
+.. _byte_order/0::integer_to_bytes/4:
+
+``integer_to_bytes/4``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Converts the low-order bytes of an integer into a byte list with the requested byte order and size.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``integer_to_bytes(Order,ByteCount,Integer,Bytes)``
+| **Mode and number of proofs:**
+|    ``integer_to_bytes(+atom,+integer,+integer,-list(integer))`` - ``one``
+
+
+------------
+
+.. index:: integer_to_bytes/5
+.. _byte_order/0::integer_to_bytes/5:
+
+``integer_to_bytes/5``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Converts the low-order bytes of an integer into a byte list with the requested byte order and size, represented as a difference list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``integer_to_bytes(Order,ByteCount,Integer,Bytes,Tail)``
+| **Mode and number of proofs:**
+|    ``integer_to_bytes(+atom,+integer,+integer,-list(integer),--term)`` - ``one``
+
+
+------------
+
+.. index:: bytes_to_integer/3
+.. _byte_order/0::bytes_to_integer/3:
+
+``bytes_to_integer/3``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Converts a byte list with the requested byte order into an unsigned integer.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bytes_to_integer(Order,Bytes,Integer)``
+| **Mode and number of proofs:**
+|    ``bytes_to_integer(+atom,+list(integer),-integer)`` - ``one``
+
+
+------------
+
+.. index:: bytes_to_integer/5
+.. _byte_order/0::bytes_to_integer/5:
+
+``bytes_to_integer/5``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Consumes the requested number of bytes from a list and converts them with the requested byte order into an unsigned integer.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bytes_to_integer(Order,ByteCount,Bytes,Integer,Rest)``
+| **Mode and number of proofs:**
+|    ``bytes_to_integer(+atom,+integer,+list(integer),-integer,-list(integer))`` - ``one``
+
+
+------------
+
+.. index:: signed_integer_to_bytes/4
+.. _byte_order/0::signed_integer_to_bytes/4:
+
+``signed_integer_to_bytes/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts the low-order bytes of a signed integer two's-complement representation into a byte list with the requested byte order and size.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``signed_integer_to_bytes(Order,ByteCount,Integer,Bytes)``
+| **Mode and number of proofs:**
+|    ``signed_integer_to_bytes(+atom,+integer,+integer,-list(integer))`` - ``one``
+
+
+------------
+
+.. index:: signed_integer_to_bytes/5
+.. _byte_order/0::signed_integer_to_bytes/5:
+
+``signed_integer_to_bytes/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts the low-order bytes of a signed integer two's-complement representation into a byte list with the requested byte order and size, represented as a difference list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``signed_integer_to_bytes(Order,ByteCount,Integer,Bytes,Tail)``
+| **Mode and number of proofs:**
+|    ``signed_integer_to_bytes(+atom,+integer,+integer,-list(integer),--term)`` - ``one``
+
+
+------------
+
+.. index:: bytes_to_signed_integer/3
+.. _byte_order/0::bytes_to_signed_integer/3:
+
+``bytes_to_signed_integer/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts a byte list with the requested byte order from a two's-complement representation into a signed integer.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bytes_to_signed_integer(Order,Bytes,Integer)``
+| **Mode and number of proofs:**
+|    ``bytes_to_signed_integer(+atom,+list(integer),-integer)`` - ``one``
+
+
+------------
+
+.. index:: bytes_to_signed_integer/5
+.. _byte_order/0::bytes_to_signed_integer/5:
+
+``bytes_to_signed_integer/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Consumes the requested number of bytes from a list and converts them with the requested byte order from a two's-complement representation into a signed integer.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bytes_to_signed_integer(Order,ByteCount,Bytes,Integer,Rest)``
+| **Mode and number of proofs:**
+|    ``bytes_to_signed_integer(+atom,+integer,+list(integer),-integer,-list(integer))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

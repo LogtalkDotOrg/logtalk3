@@ -23,9 +23,9 @@
 	implements(character_set_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-05,
+		date is 2026-08-04,
 		comment is 'Shared implementation support category for character set objects.'
 	]).
 
@@ -57,32 +57,11 @@
 		argnames is ['Code']
 	]).
 
-	:- protected(word_bytes/4).
-	:- mode(word_bytes(+atom, +integer, -integer, -integer), one).
-	:- info(word_bytes/4, [
-		comment is 'Converts a 16-bit word into two bytes using the given byte order.',
-		argnames is ['Endian', 'Word', 'Byte1', 'Byte2']
-	]).
-
-	:- protected(dword_bytes/6).
-	:- mode(dword_bytes(+atom, +integer, -integer, -integer, -integer, -integer), one).
-	:- info(dword_bytes/6, [
-		comment is 'Converts a 32-bit word into four bytes using the given byte order.',
-		argnames is ['Endian', 'Word', 'Byte1', 'Byte2', 'Byte3', 'Byte4']
-	]).
-
-	:- protected(bytes_word/4).
-	:- mode(bytes_word(+atom, +integer, +integer, -integer), one).
-	:- info(bytes_word/4, [
-		comment is 'Converts two bytes into a 16-bit word using the given byte order.',
-		argnames is ['Endian', 'Byte1', 'Byte2', 'Word']
-	]).
-
-	:- protected(bytes_dword/6).
-	:- mode(bytes_dword(+atom, +integer, +integer, +integer, +integer, -integer), one).
-	:- info(bytes_dword/6, [
-		comment is 'Converts four bytes into a 32-bit word using the given byte order.',
-		argnames is ['Endian', 'Byte1', 'Byte2', 'Byte3', 'Byte4', 'Word']
+	:- protected(endian_order/2).
+	:- mode(endian_order(+atom, -atom), one).
+	:- info(endian_order/2, [
+		comment is 'Maps a character set endian parameter to a byte order.',
+		argnames is ['Endian', 'Order']
 	]).
 
 	valid_unicode_scalar(Code) :-
@@ -106,33 +85,8 @@
 		Code >= 0xDC00,
 		Code =< 0xDFFF.
 
-	word_bytes(little_endian, Word, Byte1, Byte2) :-
-		Byte1 is Word /\ 0xFF,
-		Byte2 is (Word >> 8) /\ 0xFF.
-	word_bytes(big_endian, Word, Byte1, Byte2) :-
-		Byte1 is (Word >> 8) /\ 0xFF,
-		Byte2 is Word /\ 0xFF.
-
-	dword_bytes(little_endian, Word, Byte1, Byte2, Byte3, Byte4) :-
-		Byte1 is Word /\ 0xFF,
-		Byte2 is (Word >> 8) /\ 0xFF,
-		Byte3 is (Word >> 16) /\ 0xFF,
-		Byte4 is (Word >> 24) /\ 0xFF.
-	dword_bytes(big_endian, Word, Byte1, Byte2, Byte3, Byte4) :-
-		Byte1 is (Word >> 24) /\ 0xFF,
-		Byte2 is (Word >> 16) /\ 0xFF,
-		Byte3 is (Word >> 8) /\ 0xFF,
-		Byte4 is Word /\ 0xFF.
-
-	bytes_word(little_endian, Byte1, Byte2, Word) :-
-		Word is Byte1 \/ (Byte2 << 8).
-	bytes_word(big_endian, Byte1, Byte2, Word) :-
-		Word is (Byte1 << 8) \/ Byte2.
-
-	bytes_dword(little_endian, Byte1, Byte2, Byte3, Byte4, Word) :-
-		Word is Byte1 \/ (Byte2 << 8) \/ (Byte3 << 16) \/ (Byte4 << 24).
-	bytes_dword(big_endian, Byte1, Byte2, Byte3, Byte4, Word) :-
-		Word is (Byte1 << 24) \/ (Byte2 << 16) \/ (Byte3 << 8) \/ Byte4.
+	endian_order(little_endian, little).
+	endian_order(big_endian, big).
 
 :- end_category.
 

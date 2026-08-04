@@ -14,14 +14,15 @@ Auxiliary predicates for the hashes library 32-bit algorithms.
 |    ``logtalk_load(hashes(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:3:0
-| **Date:** 2026-07-22
+| **Version:** 1:4:0
+| **Date:** 2026-08-04
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
 | **Uses:**
+|    :ref:`byte_order <byte_order/0>`
 |    :ref:`list <list/0>`
 
 | **Remarks:**
@@ -204,120 +205,6 @@ Rotates a 32-bit word right by the given number of bits.
 |    ``ror32(Value,Shift,Rotated)``
 | **Mode and number of proofs:**
 |    ``ror32(+integer,+integer,-integer)`` - ``one``
-
-
-------------
-
-.. index:: little_endian_word32/2
-.. _hash_common_32/0::little_endian_word32/2:
-
-``little_endian_word32/2``
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Decodes four bytes in little-endian order into a 32-bit word.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``little_endian_word32(Bytes,Word)``
-| **Mode and number of proofs:**
-|    ``little_endian_word32(+list(integer),-integer)`` - ``one``
-
-
-------------
-
-.. index:: big_endian_word32/2
-.. _hash_common_32/0::big_endian_word32/2:
-
-``big_endian_word32/2``
-^^^^^^^^^^^^^^^^^^^^^^^
-
-Decodes four bytes in big-endian order into a 32-bit word.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``big_endian_word32(Bytes,Word)``
-| **Mode and number of proofs:**
-|    ``big_endian_word32(+list(integer),-integer)`` - ``one``
-
-
-------------
-
-.. index:: integer_to_little_endian_bytes32/3
-.. _hash_common_32/0::integer_to_little_endian_bytes32/3:
-
-``integer_to_little_endian_bytes32/3``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Encodes a 32-bit word into four bytes in little-endian order.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``integer_to_little_endian_bytes32(Integer,Bytes,Tail)``
-| **Mode and number of proofs:**
-|    ``integer_to_little_endian_bytes32(+integer,-list(integer),-variable)`` - ``one``
-
-
-------------
-
-.. index:: integer_to_little_endian_bytes32/2
-.. _hash_common_32/0::integer_to_little_endian_bytes32/2:
-
-``integer_to_little_endian_bytes32/2``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Encodes a 32-bit word into four bytes in little-endian order.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``integer_to_little_endian_bytes32(Integer,Bytes)``
-| **Mode and number of proofs:**
-|    ``integer_to_little_endian_bytes32(+integer,-list(integer))`` - ``one``
-
-
-------------
-
-.. index:: integer_to_big_endian_bytes32/3
-.. _hash_common_32/0::integer_to_big_endian_bytes32/3:
-
-``integer_to_big_endian_bytes32/3``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Encodes a 32-bit word into four bytes in big-endian order.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``integer_to_big_endian_bytes32(Integer,Bytes,Tail)``
-| **Mode and number of proofs:**
-|    ``integer_to_big_endian_bytes32(+integer,-list(integer),-variable)`` - ``one``
-
-
-------------
-
-.. index:: integer_to_big_endian_bytes32/2
-.. _hash_common_32/0::integer_to_big_endian_bytes32/2:
-
-``integer_to_big_endian_bytes32/2``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Encodes a 32-bit word into four bytes in big-endian order.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``integer_to_big_endian_bytes32(Integer,Bytes)``
-| **Mode and number of proofs:**
-|    ``integer_to_big_endian_bytes32(+integer,-list(integer))`` - ``one``
 
 
 ------------

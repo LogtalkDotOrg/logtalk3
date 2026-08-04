@@ -21,6 +21,7 @@
 
 :- initialization((
 	logtalk_load(basic_types(loader)),
+	logtalk_load(byte_order(loader)),
 	logtalk_load([
 		character_set_protocol,
 		character_sets,

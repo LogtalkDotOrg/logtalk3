@@ -14,8 +14,8 @@ Shared implementation support category for character set objects.
 |    ``logtalk_load(character_sets(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-04-05
+| **Version:** 1:1:0
+| **Date:** 2026-08-04
 
 | **Compilation flags:**
 |    ``static``
@@ -118,78 +118,21 @@ True if the argument is a UTF-16 low surrogate code point.
 
 ------------
 
-.. index:: word_bytes/4
-.. _character_set/0::word_bytes/4:
+.. index:: endian_order/2
+.. _character_set/0::endian_order/2:
 
-``word_bytes/4``
-^^^^^^^^^^^^^^^^
+``endian_order/2``
+^^^^^^^^^^^^^^^^^^
 
-Converts a 16-bit word into two bytes using the given byte order.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``word_bytes(Endian,Word,Byte1,Byte2)``
-| **Mode and number of proofs:**
-|    ``word_bytes(+atom,+integer,-integer,-integer)`` - ``one``
-
-
-------------
-
-.. index:: dword_bytes/6
-.. _character_set/0::dword_bytes/6:
-
-``dword_bytes/6``
-^^^^^^^^^^^^^^^^^
-
-Converts a 32-bit word into four bytes using the given byte order.
+Maps a character set endian parameter to a byte order.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``dword_bytes(Endian,Word,Byte1,Byte2,Byte3,Byte4)``
+|    ``endian_order(Endian,Order)``
 | **Mode and number of proofs:**
-|    ``dword_bytes(+atom,+integer,-integer,-integer,-integer,-integer)`` - ``one``
-
-
-------------
-
-.. index:: bytes_word/4
-.. _character_set/0::bytes_word/4:
-
-``bytes_word/4``
-^^^^^^^^^^^^^^^^
-
-Converts two bytes into a 16-bit word using the given byte order.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``bytes_word(Endian,Byte1,Byte2,Word)``
-| **Mode and number of proofs:**
-|    ``bytes_word(+atom,+integer,+integer,-integer)`` - ``one``
-
-
-------------
-
-.. index:: bytes_dword/6
-.. _character_set/0::bytes_dword/6:
-
-``bytes_dword/6``
-^^^^^^^^^^^^^^^^^
-
-Converts four bytes into a 32-bit word using the given byte order.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``bytes_dword(Endian,Byte1,Byte2,Byte3,Byte4,Word)``
-| **Mode and number of proofs:**
-|    ``bytes_dword(+atom,+integer,+integer,+integer,+integer,-integer)`` - ``one``
+|    ``endian_order(+atom,-atom)`` - ``one``
 
 
 ------------

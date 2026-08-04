@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-02,
+		date is 2026-08-04,
 		comment is 'Portable MQTT 5 client predicates using ``http_transport_protocol`` implementations.'
 	]).
 
@@ -1356,31 +1356,25 @@
 	decode_uint8([Byte| Rest], Byte, Rest) :-
 		validate_byte(Byte).
 
-	encode_uint16(Value, [Hi, Lo]) :-
+	encode_uint16(Value, Bytes) :-
 		validate_unsigned_integer(Value, 65535),
-		Hi is Value // 256,
-		Lo is Value mod 256.
+		byte_order::integer_to_bytes(big, 2, Value, Bytes).
 
 	decode_uint16([Hi, Lo| Rest], Value, Rest) :-
 		validate_byte(Hi),
 		validate_byte(Lo),
-		Value is Hi * 256 + Lo.
+		byte_order::bytes_to_integer(big, [Hi, Lo], Value).
 
-	encode_uint32(Value, [B3, B2, B1, B0]) :-
+	encode_uint32(Value, Bytes) :-
 		validate_unsigned_integer(Value, 4294967295),
-		B3 is Value // 16777216,
-		R3 is Value mod 16777216,
-		B2 is R3 // 65536,
-		R2 is R3 mod 65536,
-		B1 is R2 // 256,
-		B0 is R2 mod 256.
+		byte_order::integer_to_bytes(big, 4, Value, Bytes).
 
 	decode_uint32([B3, B2, B1, B0| Rest], Value, Rest) :-
 		validate_byte(B3),
 		validate_byte(B2),
 		validate_byte(B1),
 		validate_byte(B0),
-		Value is B3 * 16777216 + B2 * 65536 + B1 * 256 + B0.
+		byte_order::bytes_to_integer(big, [B3, B2, B1, B0], Value).
 
 	encode_varint(Value, Bytes) :-
 		validate_unsigned_integer(Value, 268435455),

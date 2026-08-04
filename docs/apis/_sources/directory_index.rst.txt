@@ -326,6 +326,16 @@ To load an entity, always load the library that includes it using the goal ``log
    bson <bson_0>
    bson(StringRepresentation) <bson_1>
 
+``library/byte_order/``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   byte_order <byte_order_0>
+
 ``library/c45_classifier/``
 ---------------------------
 

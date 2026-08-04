@@ -18,8 +18,8 @@ BLAKE2s hash function.
 |    ``logtalk_load(hashes(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-07-30
+| **Version:** 1:1:0
+| **Date:** 2026-08-04
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -28,6 +28,7 @@ BLAKE2s hash function.
 | **Imports:**
 |    ``public`` :ref:`blake2_core(Key,DigestSize) <blake2_core/2>`
 | **Uses:**
+|    :ref:`byte_order <byte_order/0>`
 |    :ref:`hash_common_32 <hash_common_32/0>`
 |    :ref:`list <list/0>`
 

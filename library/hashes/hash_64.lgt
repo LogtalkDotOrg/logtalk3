@@ -277,15 +277,19 @@
 	implements(hash_state_protocol)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-07-16,
+		date is 2026-08-04,
 		comment is 'MurmurHash3 x86 128-bit hash function with seed 0.',
 		see_also is [murmurhash3_x86_32, murmurhash3_x64_128]
 	]).
 
+	:- uses(byte_order, [
+		bytes_to_integer/3
+	]).
+
 	:- uses(hash_common_32, [
-		add32/3, add32/5, little_endian_word32/2, mul32/3, rol32/3, word32_hex/2
+		add32/3, add32/5, mul32/3, rol32/3, word32_hex/2
 	]).
 
 	:- uses(list, [
@@ -364,10 +368,10 @@
 
 	body([B0, B1, B2, B3, B4, B5, B6, B7, B8, B9, B10, B11, B12, B13, B14, B15| Bytes], H1_0, H2_0, H3_0, H4_0, H1, H2, H3, H4, Tail) :-
 		!,
-		little_endian_word32([B0, B1, B2, B3], K1_0),
-		little_endian_word32([B4, B5, B6, B7], K2_0),
-		little_endian_word32([B8, B9, B10, B11], K3_0),
-		little_endian_word32([B12, B13, B14, B15], K4_0),
+		bytes_to_integer(little, [B0, B1, B2, B3], K1_0),
+		bytes_to_integer(little, [B4, B5, B6, B7], K2_0),
+		bytes_to_integer(little, [B8, B9, B10, B11], K3_0),
+		bytes_to_integer(little, [B12, B13, B14, B15], K4_0),
 		mul32(K1_0, 0x239B961B, K1_1),
 		rol32(K1_1, 15, K1_2),
 		mul32(K1_2, 0xAB0E9789, K1),
@@ -1031,15 +1035,19 @@
 	imports(blake2_core(_Key_, _DigestSize_))).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-30,
+		date is 2026-08-04,
 		comment is 'BLAKE2b hash function.',
 		parameters is [
 			'Key' - 'A list of 0 to 64 key bytes. Use the empty list for unkeyed hashing.',
 			'DigestSize' - 'Number of digest bytes to generate, from 1 to 64.'
 		],
 		see_also is [blake2b, blake2s(_, _), sha512, sha512_256]
+	]).
+
+	:- uses(byte_order, [
+		bytes_to_integer/3, integer_to_bytes/5
 	]).
 
 	:- uses(hash_common_64, [
@@ -1115,39 +1123,13 @@
 
 	blake2_state_bytes([], Bytes, Bytes).
 	blake2_state_bytes([Word| Words], Bytes, Tail) :-
-		blake2b_integer_to_little_endian_bytes64(Word, Bytes, Rest),
+		integer_to_bytes(little, 8, Word, Bytes, Rest),
 		blake2_state_bytes(Words, Rest, Tail).
-
-	blake2b_integer_to_little_endian_bytes64(Integer, [B0, B1, B2, B3, B4, B5, B6, B7| Tail], Tail) :-
-		B0 is Integer /\ 0xFF,
-		B1 is (Integer >> 8) /\ 0xFF,
-		B2 is (Integer >> 16) /\ 0xFF,
-		B3 is (Integer >> 24) /\ 0xFF,
-		B4 is (Integer >> 32) /\ 0xFF,
-		B5 is (Integer >> 40) /\ 0xFF,
-		B6 is (Integer >> 48) /\ 0xFF,
-		B7 is (Integer >> 56) /\ 0xFF.
 
 	blake2_block_words([], []).
 	blake2_block_words([B0, B1, B2, B3, B4, B5, B6, B7| Bytes], [Word| Words]) :-
-		blake2b_little_endian_word64([B0, B1, B2, B3, B4, B5, B6, B7], Word),
+		bytes_to_integer(little, [B0, B1, B2, B3, B4, B5, B6, B7], Word),
 		blake2_block_words(Bytes, Words).
-
-	blake2b_little_endian_word64([B0, B1, B2, B3, B4, B5, B6, B7], Word) :-
-		shl64(B1, 8, W1),
-		shl64(B2, 16, W2),
-		shl64(B3, 24, W3),
-		shl64(B4, 32, W4),
-		shl64(B5, 40, W5),
-		shl64(B6, 48, W6),
-		shl64(B7, 56, W7),
-		or64(B0, W1, T01),
-		or64(W2, W3, T23),
-		or64(W4, W5, T45),
-		or64(W6, W7, T67),
-		or64(T01, T23, T0123),
-		or64(T45, T67, T4567),
-		or64(T0123, T4567, Word).
 
 :- end_object.
 
@@ -1170,15 +1152,19 @@
 	implements([hash_digest_protocol, hash_state_protocol])).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2026-07-16,
+		date is 2026-08-04,
 		comment is 'SHA-1 hash function.',
 		see_also is [md5, sha256, sha224]
 	]).
 
+	:- uses(byte_order, [
+		bytes_to_integer/3, integer_to_bytes/5
+	]).
+
 	:- uses(hash_common_32, [
-		pad_md/4, pad_md_tail/5, integer_to_big_endian_bytes32/3, bytes_hex/2, add32/3, rol32/3, big_endian_word32/2
+		pad_md/4, pad_md_tail/5, bytes_hex/2, add32/3, rol32/3
 	]).
 
 	:- uses(list, [
@@ -1188,11 +1174,11 @@
 	digest(Bytes, DigestBytes) :-
 		pad_md(big, Bytes, 8, PaddedBytes),
 		sha1_blocks(PaddedBytes, 0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476, 0xC3D2E1F0, H0, H1, H2, H3, H4),
-		integer_to_big_endian_bytes32(H0, DigestBytes, B1),
-		integer_to_big_endian_bytes32(H1, B1, B2),
-		integer_to_big_endian_bytes32(H2, B2, B3),
-		integer_to_big_endian_bytes32(H3, B3, B4),
-		integer_to_big_endian_bytes32(H4, B4, []).
+		integer_to_bytes(big, 4, H0, DigestBytes, B1),
+		integer_to_bytes(big, 4, H1, B1, B2),
+		integer_to_bytes(big, 4, H2, B2, B3),
+		integer_to_bytes(big, 4, H3, B3, B4),
+		integer_to_bytes(big, 4, H4, B4, []).
 
 	digest_size(20).
 
@@ -1217,11 +1203,11 @@
 	final_hash_state(state(Buffer, Length, H0, H1, H2, H3, H4), Hash) :-
 		pad_md_tail(big, Buffer, Length, 8, PaddedTail),
 		sha1_blocks(PaddedTail, H0, H1, H2, H3, H4, FH0, FH1, FH2, FH3, FH4),
-		integer_to_big_endian_bytes32(FH0, DigestBytes, B1),
-		integer_to_big_endian_bytes32(FH1, B1, B2),
-		integer_to_big_endian_bytes32(FH2, B2, B3),
-		integer_to_big_endian_bytes32(FH3, B3, B4),
-		integer_to_big_endian_bytes32(FH4, B4, []),
+		integer_to_bytes(big, 4, FH0, DigestBytes, B1),
+		integer_to_bytes(big, 4, FH1, B1, B2),
+		integer_to_bytes(big, 4, FH2, B2, B3),
+		integer_to_bytes(big, 4, FH3, B3, B4),
+		integer_to_bytes(big, 4, FH4, B4, []),
 		bytes_hex(DigestBytes, Hash).
 
 	sha1_consume_blocks(Bytes, H0, H1, H2, H3, H4, H0, H1, H2, H3, H4, Bytes) :-
@@ -1296,7 +1282,7 @@
 
 	block_words_be([], Tail, Tail).
 	block_words_be([B0, B1, B2, B3| Bytes], [Word| Words], Tail) :-
-		big_endian_word32([B0, B1, B2, B3], Word),
+		bytes_to_integer(big, [B0, B1, B2, B3], Word),
 		block_words_be(Bytes, Words, Tail).
 
 :- end_object.
@@ -1306,11 +1292,15 @@
 	implements([hash_digest_protocol, hash_state_protocol])).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-07-16,
+		date is 2026-08-04,
 		comment is 'SHA-512 hash function.',
 		see_also is [sha512_256, sha384, sha256, sha1]
+	]).
+
+	:- uses(byte_order, [
+		bytes_to_integer/3, integer_to_bytes/5
 	]).
 
 	:- uses(hash_common_32, [
@@ -1318,7 +1308,7 @@
 	]).
 
 	:- uses(hash_common_64, [
-		add64/3, and64/3, integer_to_big_endian_bytes64/3, not64/2, or64/3,
+		add64/3, and64/3, not64/2, or64/3,
 		pad_md_tail/3, rol64/3, shl64/3, shr64/3, xor64/3
 	]).
 
@@ -1386,8 +1376,8 @@
 		Two64 is 0x10000000000000000,
 		High is (BitLength // Two64) mod Two64,
 		Low is BitLength mod Two64,
-		integer_to_big_endian_bytes64(High, LengthBytes, LowBytes),
-		integer_to_big_endian_bytes64(Low, LowBytes, []).
+		integer_to_bytes(big, 8, High, LengthBytes, LowBytes),
+		integer_to_bytes(big, 8, Low, LowBytes, []).
 
 	sha512_blocks([], State, State).
 	sha512_blocks([Byte| Bytes], State0, State) :-
@@ -1484,35 +1474,19 @@
 		extend_sha512_words(NextIndex, Words0, Tail1, Words).
 
 	sha512_state_bytes([W0, W1, W2, W3, W4, W5, W6, W7], DigestBytes) :-
-		integer_to_big_endian_bytes64(W0, DigestBytes, B1),
-		integer_to_big_endian_bytes64(W1, B1, B2),
-		integer_to_big_endian_bytes64(W2, B2, B3),
-		integer_to_big_endian_bytes64(W3, B3, B4),
-		integer_to_big_endian_bytes64(W4, B4, B5),
-		integer_to_big_endian_bytes64(W5, B5, B6),
-		integer_to_big_endian_bytes64(W6, B6, B7),
-		integer_to_big_endian_bytes64(W7, B7, []).
+		integer_to_bytes(big, 8, W0, DigestBytes, B1),
+		integer_to_bytes(big, 8, W1, B1, B2),
+		integer_to_bytes(big, 8, W2, B2, B3),
+		integer_to_bytes(big, 8, W3, B3, B4),
+		integer_to_bytes(big, 8, W4, B4, B5),
+		integer_to_bytes(big, 8, W5, B5, B6),
+		integer_to_bytes(big, 8, W6, B6, B7),
+		integer_to_bytes(big, 8, W7, B7, []).
 
 	sha512_block_words([], Tail, Tail).
 	sha512_block_words([B0, B1, B2, B3, B4, B5, B6, B7| Bytes], [Word| Words], Tail) :-
-		sha512_big_endian_word64([B0, B1, B2, B3, B4, B5, B6, B7], Word),
+		bytes_to_integer(big, [B0, B1, B2, B3, B4, B5, B6, B7], Word),
 		sha512_block_words(Bytes, Words, Tail).
-
-	sha512_big_endian_word64([B0, B1, B2, B3, B4, B5, B6, B7], Word) :-
-		shl64(B0, 56, W0),
-		shl64(B1, 48, W1),
-		shl64(B2, 40, W2),
-		shl64(B3, 32, W3),
-		shl64(B4, 24, W4),
-		shl64(B5, 16, W5),
-		shl64(B6, 8, W6),
-		or64(W0, W1, T01),
-		or64(W2, W3, T23),
-		or64(W4, W5, T45),
-		or64(W6, B7, T67),
-		or64(T01, T23, T0123),
-		or64(T45, T67, T4567),
-		or64(T0123, T4567, Word).
 
 	sha512_k( 0, 0x428A2F98D728AE22).
 	sha512_k( 1, 0x7137449123EF65CD).
@@ -1602,11 +1576,15 @@
 	implements([hash_digest_protocol, hash_state_protocol])).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-07-16,
+		date is 2026-08-04,
 		comment is 'SHA-512/256 hash function.',
 		see_also is [sha256, sha1, sha384]
+	]).
+
+	:- uses(byte_order, [
+		bytes_to_integer/3, integer_to_bytes/5
 	]).
 
 	:- uses(hash_common_32, [
@@ -1614,7 +1592,7 @@
 	]).
 
 	:- uses(hash_common_64, [
-		add64/3, and64/3, integer_to_big_endian_bytes64/3, not64/2, or64/3,
+		add64/3, and64/3, not64/2, or64/3,
 		pad_md_tail/3, rol64/3, shl64/3, shr64/3, xor64/3
 	]).
 
@@ -1682,8 +1660,8 @@
 		Two64 is 0x10000000000000000,
 		High is (BitLength // Two64) mod Two64,
 		Low is BitLength mod Two64,
-		integer_to_big_endian_bytes64(High, LengthBytes, LowBytes),
-		integer_to_big_endian_bytes64(Low, LowBytes, []).
+		integer_to_bytes(big, 8, High, LengthBytes, LowBytes),
+		integer_to_bytes(big, 8, Low, LowBytes, []).
 
 	sha512_256_blocks([], State, State).
 	sha512_256_blocks([Byte| Bytes], State0, State) :-
@@ -1780,31 +1758,15 @@
 		extend_sha512_256_words(NextIndex, Words0, Tail1, Words).
 
 	sha512_256_state_bytes([W0, W1, W2, W3| _], DigestBytes) :-
-		integer_to_big_endian_bytes64(W0, DigestBytes, B1),
-		integer_to_big_endian_bytes64(W1, B1, B2),
-		integer_to_big_endian_bytes64(W2, B2, B3),
-		integer_to_big_endian_bytes64(W3, B3, []).
+		integer_to_bytes(big, 8, W0, DigestBytes, B1),
+		integer_to_bytes(big, 8, W1, B1, B2),
+		integer_to_bytes(big, 8, W2, B2, B3),
+		integer_to_bytes(big, 8, W3, B3, []).
 
 	sha512_256_block_words([], Tail, Tail).
 	sha512_256_block_words([B0, B1, B2, B3, B4, B5, B6, B7| Bytes], [Word| Words], Tail) :-
-		sha512_256_big_endian_word64([B0, B1, B2, B3, B4, B5, B6, B7], Word),
+		bytes_to_integer(big, [B0, B1, B2, B3, B4, B5, B6, B7], Word),
 		sha512_256_block_words(Bytes, Words, Tail).
-
-	sha512_256_big_endian_word64([B0, B1, B2, B3, B4, B5, B6, B7], Word) :-
-		shl64(B0, 56, W0),
-		shl64(B1, 48, W1),
-		shl64(B2, 40, W2),
-		shl64(B3, 32, W3),
-		shl64(B4, 24, W4),
-		shl64(B5, 16, W5),
-		shl64(B6, 8, W6),
-		or64(W0, W1, T01),
-		or64(W2, W3, T23),
-		or64(W4, W5, T45),
-		or64(W6, B7, T67),
-		or64(T01, T23, T0123),
-		or64(T45, T67, T4567),
-		or64(T0123, T4567, Word).
 
 	sha512_256_k( 0, 0x428A2F98D728AE22).
 	sha512_256_k( 1, 0x7137449123EF65CD).
@@ -1894,11 +1856,15 @@
 	implements([hash_digest_protocol, hash_state_protocol])).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-17,
+		date is 2026-08-04,
 		comment is 'SHA-384 hash function.',
 		see_also is [sha512, sha512_256, sha256, sha224]
+	]).
+
+	:- uses(byte_order, [
+		bytes_to_integer/3, integer_to_bytes/5
 	]).
 
 	:- uses(hash_common_32, [
@@ -1906,7 +1872,7 @@
 	]).
 
 	:- uses(hash_common_64, [
-		add64/3, and64/3, integer_to_big_endian_bytes64/3, not64/2, or64/3,
+		add64/3, and64/3, not64/2, or64/3,
 		pad_md_tail/3, rol64/3, shl64/3, shr64/3, xor64/3
 	]).
 
@@ -1974,8 +1940,8 @@
 		Two64 is 0x10000000000000000,
 		High is (BitLength // Two64) mod Two64,
 		Low is BitLength mod Two64,
-		integer_to_big_endian_bytes64(High, LengthBytes, LowBytes),
-		integer_to_big_endian_bytes64(Low, LowBytes, []).
+		integer_to_bytes(big, 8, High, LengthBytes, LowBytes),
+		integer_to_bytes(big, 8, Low, LowBytes, []).
 
 	sha384_blocks([], State, State).
 	sha384_blocks([Byte| Bytes], State0, State) :-
@@ -2074,33 +2040,17 @@
 	% SHA-384 truncates the final hash value to the first six 64-bit
 	% words (48 bytes), omitting H(N)6 and H(N)7
 	sha384_state_bytes([W0, W1, W2, W3, W4, W5| _], DigestBytes) :-
-		integer_to_big_endian_bytes64(W0, DigestBytes, B1),
-		integer_to_big_endian_bytes64(W1, B1, B2),
-		integer_to_big_endian_bytes64(W2, B2, B3),
-		integer_to_big_endian_bytes64(W3, B3, B4),
-		integer_to_big_endian_bytes64(W4, B4, B5),
-		integer_to_big_endian_bytes64(W5, B5, []).
+		integer_to_bytes(big, 8, W0, DigestBytes, B1),
+		integer_to_bytes(big, 8, W1, B1, B2),
+		integer_to_bytes(big, 8, W2, B2, B3),
+		integer_to_bytes(big, 8, W3, B3, B4),
+		integer_to_bytes(big, 8, W4, B4, B5),
+		integer_to_bytes(big, 8, W5, B5, []).
 
 	sha384_block_words([], Tail, Tail).
 	sha384_block_words([B0, B1, B2, B3, B4, B5, B6, B7| Bytes], [Word| Words], Tail) :-
-		sha384_big_endian_word64([B0, B1, B2, B3, B4, B5, B6, B7], Word),
+		bytes_to_integer(big, [B0, B1, B2, B3, B4, B5, B6, B7], Word),
 		sha384_block_words(Bytes, Words, Tail).
-
-	sha384_big_endian_word64([B0, B1, B2, B3, B4, B5, B6, B7], Word) :-
-		shl64(B0, 56, W0),
-		shl64(B1, 48, W1),
-		shl64(B2, 40, W2),
-		shl64(B3, 32, W3),
-		shl64(B4, 24, W4),
-		shl64(B5, 16, W5),
-		shl64(B6, 8, W6),
-		or64(W0, W1, T01),
-		or64(W2, W3, T23),
-		or64(W4, W5, T45),
-		or64(W6, B7, T67),
-		or64(T01, T23, T0123),
-		or64(T45, T67, T4567),
-		or64(T0123, T4567, Word).
 
 	sha384_k( 0, 0x428A2F98D728AE22).
 	sha384_k( 1, 0x7137449123EF65CD).
@@ -2190,15 +2140,19 @@
 	implements([hash_digest_protocol, hash_state_protocol])).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2026-07-16,
+		date is 2026-08-04,
 		comment is 'SHA-256 hash function.',
 		see_also is [md5, sha1, sha224]
 	]).
 
+	:- uses(byte_order, [
+		bytes_to_integer/3, integer_to_bytes/5
+	]).
+
 	:- uses(hash_common_32, [
-		pad_md/4, pad_md_tail/5, bytes_hex/2, add32/3, ror32/3, integer_to_big_endian_bytes32/3, big_endian_word32/2
+		pad_md/4, pad_md_tail/5, bytes_hex/2, add32/3, ror32/3
 	]).
 
 	:- uses(list, [
@@ -2325,7 +2279,7 @@
 
 	state_bytes([], []).
 	state_bytes([Word| Words], Bytes) :-
-		integer_to_big_endian_bytes32(Word, Bytes, RestBytes),
+		integer_to_bytes(big, 4, Word, Bytes, RestBytes),
 		state_bytes(Words, RestBytes).
 
 	sha256_k( 0, 0x428A2F98).
@@ -2395,7 +2349,7 @@
 
 	block_words_be([], Tail, Tail).
 	block_words_be([B0, B1, B2, B3| Bytes], [Word| Words], Tail) :-
-		big_endian_word32([B0, B1, B2, B3], Word),
+		bytes_to_integer(big, [B0, B1, B2, B3], Word),
 		block_words_be(Bytes, Words, Tail).
 
 :- end_object.
@@ -2405,15 +2359,19 @@
 	implements([hash_digest_protocol, hash_state_protocol])).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-17,
+		date is 2026-08-04,
 		comment is 'SHA-224 hash function.',
 		see_also is [sha256, sha1, sha384]
 	]).
 
+	:- uses(byte_order, [
+		bytes_to_integer/3, integer_to_bytes/5
+	]).
+
 	:- uses(hash_common_32, [
-		pad_md/4, pad_md_tail/5, bytes_hex/2, add32/3, ror32/3, integer_to_big_endian_bytes32/3, big_endian_word32/2
+		pad_md/4, pad_md_tail/5, bytes_hex/2, add32/3, ror32/3
 	]).
 
 	:- uses(list, [
@@ -2541,13 +2499,13 @@
 	% SHA-224 truncates the final hash value to the first seven 32-bit
 	% words (28 bytes), omitting H(N)7
 	sha224_state_bytes([W0, W1, W2, W3, W4, W5, W6| _], DigestBytes) :-
-		integer_to_big_endian_bytes32(W0, DigestBytes, B1),
-		integer_to_big_endian_bytes32(W1, B1, B2),
-		integer_to_big_endian_bytes32(W2, B2, B3),
-		integer_to_big_endian_bytes32(W3, B3, B4),
-		integer_to_big_endian_bytes32(W4, B4, B5),
-		integer_to_big_endian_bytes32(W5, B5, B6),
-		integer_to_big_endian_bytes32(W6, B6, []).
+		integer_to_bytes(big, 4, W0, DigestBytes, B1),
+		integer_to_bytes(big, 4, W1, B1, B2),
+		integer_to_bytes(big, 4, W2, B2, B3),
+		integer_to_bytes(big, 4, W3, B3, B4),
+		integer_to_bytes(big, 4, W4, B4, B5),
+		integer_to_bytes(big, 4, W5, B5, B6),
+		integer_to_bytes(big, 4, W6, B6, []).
 
 	sha224_k( 0, 0x428A2F98).
 	sha224_k( 1, 0x71374491).
@@ -2616,7 +2574,7 @@
 
 	block_words_be([], Tail, Tail).
 	block_words_be([B0, B1, B2, B3| Bytes], [Word| Words], Tail) :-
-		big_endian_word32([B0, B1, B2, B3], Word),
+		bytes_to_integer(big, [B0, B1, B2, B3], Word),
 		block_words_be(Bytes, Words, Tail).
 
 :- end_object.

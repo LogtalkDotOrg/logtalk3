@@ -163,6 +163,7 @@
 		kprototypes_clusterer(loader),
 		optics_clusterer(loader),
 		spectral_clusterer(loader),
+		byte_order(loader),
 		cbor(loader),
 		ccsds_frames(loader),
 		ccsds_link_profiles(loader),

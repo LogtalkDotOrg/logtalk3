@@ -1788,16 +1788,6 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`iso_9362_protocol <iso_9362_protocol/0::bic/5>`
 
-``big_endian_word32/2``
------------------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`hash_common_32 <hash_common_32/0::big_endian_word32/2>`
-
 ``binary_body/2``
 -----------------
 
@@ -2101,6 +2091,46 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`character_set_protocol <character_set_protocol/0::bytes_to_codes/2>`
+
+``bytes_to_integer/3``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`byte_order <byte_order/0::bytes_to_integer/3>`
+
+``bytes_to_integer/5``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`byte_order <byte_order/0::bytes_to_integer/5>`
+
+``bytes_to_signed_integer/3``
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`byte_order <byte_order/0::bytes_to_signed_integer/3>`
+
+``bytes_to_signed_integer/5``
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`byte_order <byte_order/0::bytes_to_signed_integer/5>`
 
 ``cache/1``
 -----------
@@ -11528,65 +11558,25 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`number_grammars(Format) <number_grammars/1::integer//1>`
 
-``integer_to_big_endian_bytes32/2``
------------------------------------
+``integer_to_bytes/4``
+----------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-* :ref:`hash_common_32 <hash_common_32/0::integer_to_big_endian_bytes32/2>`
+* :ref:`byte_order <byte_order/0::integer_to_bytes/4>`
 
-``integer_to_big_endian_bytes32/3``
------------------------------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`hash_common_32 <hash_common_32/0::integer_to_big_endian_bytes32/3>`
-
-``integer_to_big_endian_bytes64/2``
------------------------------------
+``integer_to_bytes/5``
+----------------------
 
 .. toctree::
    :maxdepth: 1
 
 
 
-* :ref:`hash_common_64 <hash_common_64/0::integer_to_big_endian_bytes64/2>`
-
-``integer_to_big_endian_bytes64/3``
------------------------------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`hash_common_64 <hash_common_64/0::integer_to_big_endian_bytes64/3>`
-
-``integer_to_little_endian_bytes32/2``
---------------------------------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`hash_common_32 <hash_common_32/0::integer_to_little_endian_bytes32/2>`
-
-``integer_to_little_endian_bytes32/3``
---------------------------------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`hash_common_32 <hash_common_32/0::integer_to_little_endian_bytes32/3>`
+* :ref:`byte_order <byte_order/0::integer_to_bytes/5>`
 
 ``internal_error/2``
 --------------------
@@ -13551,16 +13541,6 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`listing <listing/0::listing/1>`
-
-``little_endian_word32/2``
---------------------------
-
-.. toctree::
-   :maxdepth: 1
-
-
-
-* :ref:`hash_common_32 <hash_common_32/0::little_endian_word32/2>`
 
 ``llen/3``
 ----------
@@ -24983,6 +24963,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ccsds_aos_frames(FrameLength,InsertZoneLength,HasOCF,HasFECF) <ccsds_aos_frames/4::signaling_field/2>`
+
+``signed_integer_to_bytes/4``
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`byte_order <byte_order/0::signed_integer_to_bytes/4>`
+
+``signed_integer_to_bytes/5``
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`byte_order <byte_order/0::signed_integer_to_bytes/5>`
 
 ``signing_input/4``
 -------------------

@@ -100,6 +100,7 @@ sed '1,19d' ../../../library/block_ciphers/NOTES.md | pandoc -f gfm -t rst -o li
 sed '1,19d' ../../../library/borda_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/borda_ranker.rst
 sed '1,19d' ../../../library/bradley_terry_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/bradley_terry_ranker.rst
 sed '1,19d' ../../../library/bson/NOTES.md | pandoc -f gfm -t rst -o libraries/bson.rst
+sed '1,19d' ../../../library/byte_order/NOTES.md | pandoc -f gfm -t rst -o libraries/byte_order.rst
 sed '1,19d' ../../../library/c45_classifier/NOTES.md | pandoc -f gfm -t rst -o libraries/c45_classifier.rst
 sed '1,19d' ../../../library/cartesian_products/NOTES.md | pandoc -f gfm -t rst -o libraries/cartesian_products.rst
 sed '1,19d' ../../../library/copeland_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/copeland_ranker.rst

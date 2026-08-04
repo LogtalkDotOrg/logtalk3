@@ -22,19 +22,11 @@
 :- category(ieee_754_common(_Precision_, _ByteOrder_)).
 
 	:- info([
-		version is 1:0:2,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-02,
+		date is 2026-08-04,
 		comment is 'Shared IEEE 754 exact bit and byte handling predicates for the high-level codec and low-level field inspection objects.',
 		parnames is ['Precision', 'ByteOrder']
-	]).
-
-	:- uses(list, [
-		reverse/2
-	]).
-
-	:- uses(type, [
-		valid/2
 	]).
 
 	:- protected(source_bits/2).
@@ -98,48 +90,6 @@
 		argnames is ['Bits']
 	]).
 
-	:- protected(canonical_order_bytes/3).
-	:- mode(canonical_order_bytes(+atom, +list(integer), -list(integer)), one).
-	:- info(canonical_order_bytes/3, [
-		comment is 'Converts byte lists from the selected byte order to canonical big-endian order.',
-		argnames is ['ByteOrder', 'Bytes', 'CanonicalBytes']
-	]).
-
-	:- protected(order_bytes/3).
-	:- mode(order_bytes(+atom, +list(integer), -list(integer)), one).
-	:- info(order_bytes/3, [
-		comment is 'Converts canonical big-endian bytes to the selected byte order.',
-		argnames is ['ByteOrder', 'CanonicalBytes', 'Bytes']
-	]).
-
-	:- protected(bytes_tail/3).
-	:- mode(bytes_tail(+list(integer), -list(integer), ?list(integer)), one).
-	:- info(bytes_tail/3, [
-		comment is 'Builds a difference list from a byte list.',
-		argnames is ['Bytes', 'DifferenceList', 'Tail']
-	]).
-
-	:- protected(bytes_to_unsigned_integer/2).
-	:- mode(bytes_to_unsigned_integer(+list(integer), -integer), one).
-	:- info(bytes_to_unsigned_integer/2, [
-		comment is 'Converts canonical-order bytes into an unsigned integer.',
-		argnames is ['Bytes', 'Integer']
-	]).
-
-	:- protected(bytes_to_unsigned_integer/3).
-	:- mode(bytes_to_unsigned_integer(+list(integer), +integer, -integer), one).
-	:- info(bytes_to_unsigned_integer/3, [
-		comment is 'Worker predicate for converting canonical-order bytes into an unsigned integer.',
-		argnames is ['Bytes', 'Integer0', 'Integer']
-	]).
-
-	:- protected(integer_to_bytes/3).
-	:- mode(integer_to_bytes(+integer, +integer, -list(integer)), one).
-	:- info(integer_to_bytes/3, [
-		comment is 'Converts an unsigned integer into a canonical-order byte list with the requested length.',
-		argnames is ['Count', 'Integer', 'Bytes']
-	]).
-
 	:- protected(zero_bits/2).
 	:- mode(zero_bits(+integer, -integer), one).
 	:- info(zero_bits/2, [
@@ -168,6 +118,14 @@
 		argnames is ['Precision', 'ExponentWidth', 'MantissaWidth', 'Bias', 'ByteCount']
 	]).
 
+	:- uses(byte_order, [
+		bytes_to_integer/3
+	]).
+
+	:- uses(type, [
+		valid/2
+	]).
+
 	source_bits(Source, _) :-
 		var(Source),
 		instantiation_error.
@@ -175,8 +133,7 @@
 		!,
 		precision_spec(_Precision_, _, _, _, Count),
 		(	valid(list(byte, Count), Bytes) ->
-			canonical_order_bytes(_ByteOrder_, Bytes, CanonicalBytes),
-			bytes_to_unsigned_integer(CanonicalBytes, Bits)
+			bytes_to_integer(_ByteOrder_, Bytes, Bits)
 		;	domain_error(ieee_754_encoding, bytes(Bytes))
 		).
 	source_bits(bits(Bits), Bits) :-
@@ -250,35 +207,6 @@
 		precision_spec(_Precision_, _, _, _, Count),
 		BitCount is Count * 8,
 		Bits < (1 << BitCount).
-
-	canonical_order_bytes(big, Bytes, Bytes).
-	canonical_order_bytes(little, Bytes, CanonicalBytes) :-
-		reverse(Bytes, CanonicalBytes).
-
-	order_bytes(big, CanonicalBytes, CanonicalBytes).
-	order_bytes(little, CanonicalBytes, Bytes) :-
-		reverse(CanonicalBytes, Bytes).
-
-	bytes_tail([], Tail, Tail).
-	bytes_tail([Byte| Bytes], [Byte| Rest], Tail) :-
-		bytes_tail(Bytes, Rest, Tail).
-
-	bytes_to_unsigned_integer(Bytes, Integer) :-
-		bytes_to_unsigned_integer(Bytes, 0, Integer).
-
-	bytes_to_unsigned_integer([], Integer, Integer).
-	bytes_to_unsigned_integer([Byte| Bytes], Integer0, Integer) :-
-		Integer1 is (Integer0 << 8) \/ Byte,
-		bytes_to_unsigned_integer(Bytes, Integer1, Integer).
-
-	integer_to_bytes(0, _Integer, []) :-
-		!.
-	integer_to_bytes(Count, Integer, [Byte| Bytes]) :-
-		Count > 0,
-		Shift is (Count - 1) * 8,
-		Byte is (Integer >> Shift) /\ 0xff,
-		NextCount is Count - 1,
-		integer_to_bytes(NextCount, Integer, Bytes).
 
 	zero_bits(Sign, Bits) :-
 		precision_spec(_Precision_, ExponentWidth, MantissaWidth, _, _),

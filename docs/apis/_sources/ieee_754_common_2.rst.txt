@@ -14,15 +14,15 @@ Shared IEEE 754 exact bit and byte handling predicates for the high-level codec 
 |    ``logtalk_load(ieee_754(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:2
-| **Date:** 2026-08-02
+| **Version:** 1:1:0
+| **Date:** 2026-08-04
 
 | **Compilation flags:**
 |    ``static``
 
 
 | **Uses:**
-|    :ref:`list <list/0>`
+|    :ref:`byte_order <byte_order/0>`
 |    :ref:`type <type/0>`
 
 | **Remarks:**
@@ -199,120 +199,6 @@ True when the integer fits in the selected precision bit width.
 |    ``valid_bits(Bits)``
 | **Mode and number of proofs:**
 |    ``valid_bits(+integer)`` - ``zero_or_one``
-
-
-------------
-
-.. index:: canonical_order_bytes/3
-.. _ieee_754_common/2::canonical_order_bytes/3:
-
-``canonical_order_bytes/3``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Converts byte lists from the selected byte order to canonical big-endian order.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``canonical_order_bytes(ByteOrder,Bytes,CanonicalBytes)``
-| **Mode and number of proofs:**
-|    ``canonical_order_bytes(+atom,+list(integer),-list(integer))`` - ``one``
-
-
-------------
-
-.. index:: order_bytes/3
-.. _ieee_754_common/2::order_bytes/3:
-
-``order_bytes/3``
-^^^^^^^^^^^^^^^^^
-
-Converts canonical big-endian bytes to the selected byte order.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``order_bytes(ByteOrder,CanonicalBytes,Bytes)``
-| **Mode and number of proofs:**
-|    ``order_bytes(+atom,+list(integer),-list(integer))`` - ``one``
-
-
-------------
-
-.. index:: bytes_tail/3
-.. _ieee_754_common/2::bytes_tail/3:
-
-``bytes_tail/3``
-^^^^^^^^^^^^^^^^
-
-Builds a difference list from a byte list.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``bytes_tail(Bytes,DifferenceList,Tail)``
-| **Mode and number of proofs:**
-|    ``bytes_tail(+list(integer),-list(integer),?list(integer))`` - ``one``
-
-
-------------
-
-.. index:: bytes_to_unsigned_integer/2
-.. _ieee_754_common/2::bytes_to_unsigned_integer/2:
-
-``bytes_to_unsigned_integer/2``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Converts canonical-order bytes into an unsigned integer.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``bytes_to_unsigned_integer(Bytes,Integer)``
-| **Mode and number of proofs:**
-|    ``bytes_to_unsigned_integer(+list(integer),-integer)`` - ``one``
-
-
-------------
-
-.. index:: bytes_to_unsigned_integer/3
-.. _ieee_754_common/2::bytes_to_unsigned_integer/3:
-
-``bytes_to_unsigned_integer/3``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Worker predicate for converting canonical-order bytes into an unsigned integer.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``bytes_to_unsigned_integer(Bytes,Integer0,Integer)``
-| **Mode and number of proofs:**
-|    ``bytes_to_unsigned_integer(+list(integer),+integer,-integer)`` - ``one``
-
-
-------------
-
-.. index:: integer_to_bytes/3
-.. _ieee_754_common/2::integer_to_bytes/3:
-
-``integer_to_bytes/3``
-^^^^^^^^^^^^^^^^^^^^^^
-
-Converts an unsigned integer into a canonical-order byte list with the requested length.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``integer_to_bytes(Count,Integer,Bytes)``
-| **Mode and number of proofs:**
-|    ``integer_to_bytes(+integer,+integer,-list(integer))`` - ``one``
 
 
 ------------

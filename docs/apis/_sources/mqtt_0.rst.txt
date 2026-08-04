@@ -15,7 +15,7 @@ Portable MQTT 5 client predicates using ``http_transport_protocol`` implementati
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-02
+| **Date:** 2026-08-04
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -25,6 +25,7 @@ Portable MQTT 5 client predicates using ``http_transport_protocol`` implementati
 |    ``public`` :ref:`options <options/0>`
 |    ``public`` :ref:`http_origin_site_helpers <http_origin_site_helpers/0>`
 | **Uses:**
+|    :ref:`byte_order <byte_order/0>`
 |    :ref:`list <list/0>`
 |    :ref:`type <type/0>`
 |    :ref:`url(Representation) <url/1>`

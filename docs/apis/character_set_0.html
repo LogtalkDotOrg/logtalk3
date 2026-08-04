@@ -85,6 +85,7 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#borda-ranker"><span class="xref std std-ref">borda_ranker</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#bradley-terry-ranker"><span class="xref std std-ref">bradley_terry_ranker</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#bson"><span class="xref std std-ref">bson</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="library_index.html#byte-order"><span class="xref std std-ref">byte_order</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#c45-classifier"><span class="xref std std-ref">c45_classifier</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#cartesian-products"><span class="xref std std-ref">cartesian_products</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#cbor"><span class="xref std std-ref">cbor</span></a></li>
@@ -447,8 +448,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-04-05</div>
+<div class="line"><strong>Version:</strong> 1:1:0</div>
+<div class="line"><strong>Date:</strong> 2026-08-04</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -483,14 +484,11 @@
 <li><p><a class="reference internal" href="#continuation-byte-1" id="id4"><code class="docutils literal notranslate"><span class="pre">continuation_byte/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#high-surrogate-1" id="id5"><code class="docutils literal notranslate"><span class="pre">high_surrogate/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#low-surrogate-1" id="id6"><code class="docutils literal notranslate"><span class="pre">low_surrogate/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#word-bytes-4" id="id7"><code class="docutils literal notranslate"><span class="pre">word_bytes/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#dword-bytes-6" id="id8"><code class="docutils literal notranslate"><span class="pre">dword_bytes/6</span></code></a></p></li>
-<li><p><a class="reference internal" href="#bytes-word-4" id="id9"><code class="docutils literal notranslate"><span class="pre">bytes_word/4</span></code></a></p></li>
-<li><p><a class="reference internal" href="#bytes-dword-6" id="id10"><code class="docutils literal notranslate"><span class="pre">bytes_dword/6</span></code></a></p></li>
+<li><p><a class="reference internal" href="#endian-order-2" id="id7"><code class="docutils literal notranslate"><span class="pre">endian_order/2</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#private-predicates" id="id11">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id12">Operators</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id8">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id9">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -583,9 +581,9 @@
 </div>
 <hr class="docutils" />
 </section>
-<section id="word-bytes-4">
-<span id="character-set-0-word-bytes-4"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">word_bytes/4</span></code></a><a class="headerlink" href="#word-bytes-4" title="Link to this heading"></a></h3>
-<p>Converts a 16-bit word into two bytes using the given byte order.</p>
+<section id="endian-order-2">
+<span id="character-set-0-endian-order-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">endian_order/2</span></code></a><a class="headerlink" href="#endian-order-2" title="Link to this heading"></a></h3>
+<p>Maps a character set endian parameter to a byte order.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -595,74 +593,11 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">word_bytes(Endian,Word,Byte1,Byte2)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">endian_order(Endian,Order)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">word_bytes(+atom,+integer,-integer,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="dword-bytes-6">
-<span id="character-set-0-dword-bytes-6"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">dword_bytes/6</span></code></a><a class="headerlink" href="#dword-bytes-6" title="Link to this heading"></a></h3>
-<p>Converts a 32-bit word into four bytes using the given byte order.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dword_bytes(Endian,Word,Byte1,Byte2,Byte3,Byte4)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dword_bytes(+atom,+integer,-integer,-integer,-integer,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="bytes-word-4">
-<span id="character-set-0-bytes-word-4"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">bytes_word/4</span></code></a><a class="headerlink" href="#bytes-word-4" title="Link to this heading"></a></h3>
-<p>Converts two bytes into a 16-bit word using the given byte order.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">bytes_word(Endian,Byte1,Byte2,Word)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">bytes_word(+atom,+integer,+integer,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="bytes-dword-6">
-<span id="character-set-0-bytes-dword-6"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">bytes_dword/6</span></code></a><a class="headerlink" href="#bytes-dword-6" title="Link to this heading"></a></h3>
-<p>Converts four bytes into a 32-bit word using the given byte order.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">bytes_dword(Endian,Byte1,Byte2,Byte3,Byte4,Word)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">bytes_dword(+atom,+integer,+integer,+integer,+integer,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">endian_order(+atom,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 </section>

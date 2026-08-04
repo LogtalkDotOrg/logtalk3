@@ -28,6 +28,7 @@
 	:- initialization((
 		set_logtalk_flag(report, warnings),
 		logtalk_load(basic_types(loader)),
+		logtalk_load(byte_order(loader)),
 		logtalk_load(character_sets(loader)),
 		logtalk_load(ieee_754(loader)),
 		logtalk_load(json(loader)),

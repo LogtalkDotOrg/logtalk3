@@ -22,9 +22,9 @@
 :- object(protobuf).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-05-09,
+		date is 2026-08-04,
 		comment is 'Google Protocol Buffers binary format parser and generator.'
 	]).
 
@@ -580,56 +580,39 @@
 
 	% fixed32 (little-endian 32-bit)
 	encode_fixed32(Value) -->
-		{	B0 is Value /\ 0xff,
-			B1 is (Value >> 8) /\ 0xff,
-			B2 is (Value >> 16) /\ 0xff,
-			B3 is (Value >> 24) /\ 0xff
-		},
-		[B0, B1, B2, B3].
+		{byte_order::integer_to_bytes(little, 4, Value, Bytes)},
+		bytes(Bytes).
 
 	decode_fixed32(Value) -->
 		[B0, B1, B2, B3],
-		{Value is B0 \/ (B1 << 8) \/ (B2 << 16) \/ (B3 << 24)}.
+		{byte_order::bytes_to_integer(little, [B0, B1, B2, B3], Value)}.
 
 	% fixed64 (little-endian 64-bit)
 	encode_fixed64(Value) -->
-		{	B0 is Value /\ 0xff,
-			B1 is (Value >> 8) /\ 0xff,
-			B2 is (Value >> 16) /\ 0xff,
-			B3 is (Value >> 24) /\ 0xff,
-			B4 is (Value >> 32) /\ 0xff,
-			B5 is (Value >> 40) /\ 0xff,
-			B6 is (Value >> 48) /\ 0xff,
-			B7 is (Value >> 56) /\ 0xff
-		},
-		[B0, B1, B2, B3, B4, B5, B6, B7].
+		{byte_order::integer_to_bytes(little, 8, Value, Bytes)},
+		bytes(Bytes).
 
 	decode_fixed64(Value) -->
 		[B0, B1, B2, B3, B4, B5, B6, B7],
-		{Value is B0 \/ (B1 << 8) \/ (B2 << 16) \/ (B3 << 24) \/
-		         (B4 << 32) \/ (B5 << 40) \/ (B6 << 48) \/ (B7 << 56)}.
+		{byte_order::bytes_to_integer(little, [B0, B1, B2, B3, B4, B5, B6, B7], Value)}.
 
 	% sfixed32 (signed fixed32)
 	encode_sfixed32(Value) -->
-		encode_fixed32(Value).
+		{byte_order::signed_integer_to_bytes(little, 4, Value, Bytes)},
+		bytes(Bytes).
 
 	decode_sfixed32(Value) -->
-		decode_fixed32(UValue),
-		{	UValue >= 2147483648 ->
-			Value is UValue - 4294967296
-		;	Value = UValue
-		}.
+		[B0, B1, B2, B3],
+		{byte_order::bytes_to_signed_integer(little, [B0, B1, B2, B3], Value)}.
 
 	% sfixed64 (signed fixed64)
 	encode_sfixed64(Value) -->
-		encode_fixed64(Value).
+		{byte_order::signed_integer_to_bytes(little, 8, Value, Bytes)},
+		bytes(Bytes).
 
 	decode_sfixed64(Value) -->
-		decode_fixed64(UValue),
-		{	UValue >= 9223372036854775808 ->
-			Value is UValue - 18446744073709551616
-		;	Value = UValue
-		}.
+		[B0, B1, B2, B3, B4, B5, B6, B7],
+		{byte_order::bytes_to_signed_integer(little, [B0, B1, B2, B3, B4, B5, B6, B7], Value)}.
 
 	% =========================================================================
 	% Float/Double encoding/decoding DCGs (IEEE 754, little-endian)

@@ -385,15 +385,15 @@
 	implements(hash_state_protocol)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-07-15,
+		date is 2026-08-04,
 		comment is 'MurmurHash3 x86 32-bit hash function with seed 0.',
 		see_also is [murmurhash3_x86_128, murmurhash3_x64_128]
 	]).
 
 	:- uses(hash_common_32, [
-		word32_hex/2, little_endian_word32/2, mul32/3, rol32/3
+		word32_hex/2, mul32/3, rol32/3
 	]).
 
 	:- uses(list, [
@@ -432,7 +432,7 @@
 
 	body([B0, B1, B2, B3| Bytes], H0, Length, H, Tail) :-
 		!,
-		little_endian_word32([B0, B1, B2, B3], K0),
+		byte_order::bytes_to_integer(little, [B0, B1, B2, B3], K0),
 		block(K0, H0, H1),
 		body(Bytes, H1, Length, H, Tail).
 	body(Tail, H, _, H, Tail).
@@ -770,9 +770,9 @@
 	imports(blake2_core(_Key_, _DigestSize_))).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-30,
+		date is 2026-08-04,
 		comment is 'BLAKE2s hash function.',
 		parameters is [
 			'Key' - 'A list of 0 to 32 key bytes. Use the empty list for unkeyed hashing.',
@@ -782,7 +782,7 @@
 	]).
 
 	:- uses(hash_common_32, [
-		add32/3, integer_to_little_endian_bytes32/3, little_endian_word32/2, ror32/3
+		add32/3, ror32/3
 	]).
 
 	:- uses(list, [
@@ -848,12 +848,12 @@
 
 	blake2_state_bytes([], Bytes, Bytes).
 	blake2_state_bytes([Word| Words], Bytes, Tail) :-
-		integer_to_little_endian_bytes32(Word, Bytes, Rest),
+		byte_order::integer_to_bytes(little, 4, Word, Bytes, Rest),
 		blake2_state_bytes(Words, Rest, Tail).
 
 	blake2_block_words([], []).
 	blake2_block_words([B0, B1, B2, B3| Bytes], [Word| Words]) :-
-		little_endian_word32([B0, B1, B2, B3], Word),
+		byte_order::bytes_to_integer(little, [B0, B1, B2, B3], Word),
 		blake2_block_words(Bytes, Words).
 
 :- end_object.
@@ -877,15 +877,15 @@
 	implements([hash_digest_protocol, hash_state_protocol])).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2026-07-16,
+		date is 2026-08-04,
 		comment is 'MD5 hash function.',
 		see_also is [sha1, sha256]
 	]).
 
 	:- uses(hash_common_32, [
-		add32/3, add32/5, bytes_hex/2, integer_to_little_endian_bytes32/3, little_endian_word32/2, pad_md/4,
+		add32/3, add32/5, bytes_hex/2, pad_md/4,
 		pad_md_tail/5, rol32/3
 	]).
 
@@ -896,10 +896,10 @@
 	digest(Bytes, DigestBytes) :-
 		pad_md(little, Bytes, 8, PaddedBytes),
 		md5_blocks(PaddedBytes, 0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476, A, B, C, D),
-		integer_to_little_endian_bytes32(A, DigestBytes, BytesB),
-		integer_to_little_endian_bytes32(B, BytesB, BytesC),
-		integer_to_little_endian_bytes32(C, BytesC, BytesD),
-		integer_to_little_endian_bytes32(D, BytesD, []).
+		byte_order::integer_to_bytes(little, 4, A, DigestBytes, BytesB),
+		byte_order::integer_to_bytes(little, 4, B, BytesB, BytesC),
+		byte_order::integer_to_bytes(little, 4, C, BytesC, BytesD),
+		byte_order::integer_to_bytes(little, 4, D, BytesD, []).
 
 	digest_size(16).
 
@@ -924,10 +924,10 @@
 	final_hash_state(state(Buffer, Length, A, B, C, D), Hash) :-
 		pad_md_tail(little, Buffer, Length, 8, PaddedTail),
 		md5_blocks(PaddedTail, A, B, C, D, FA, FB, FC, FD),
-		integer_to_little_endian_bytes32(FA, DigestBytes, BytesB),
-		integer_to_little_endian_bytes32(FB, BytesB, BytesC),
-		integer_to_little_endian_bytes32(FC, BytesC, BytesD),
-		integer_to_little_endian_bytes32(FD, BytesD, []),
+		byte_order::integer_to_bytes(little, 4, FA, DigestBytes, BytesB),
+		byte_order::integer_to_bytes(little, 4, FB, BytesB, BytesC),
+		byte_order::integer_to_bytes(little, 4, FC, BytesC, BytesD),
+		byte_order::integer_to_bytes(little, 4, FD, BytesD, []),
 		bytes_hex(DigestBytes, Hash).
 
 	md5_consume_blocks(Bytes, A, B, C, D, A, B, C, D, Bytes) :-
@@ -1118,7 +1118,7 @@
 
 	block_words_le([], []).
 	block_words_le([B0, B1, B2, B3| Bytes], [Word| Words]) :-
-		little_endian_word32([B0, B1, B2, B3], Word),
+		byte_order::bytes_to_integer(little, [B0, B1, B2, B3], Word),
 		block_words_le(Bytes, Words).
 
 :- end_object.

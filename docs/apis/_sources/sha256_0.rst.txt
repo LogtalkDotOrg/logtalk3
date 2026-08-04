@@ -14,8 +14,8 @@ SHA-256 hash function.
 |    ``logtalk_load(hashes(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:3:0
-| **Date:** 2026-07-16
+| **Version:** 1:4:0
+| **Date:** 2026-08-04
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -25,6 +25,7 @@ SHA-256 hash function.
 |    ``public`` :ref:`hash_digest_protocol <hash_digest_protocol/0>`
 |    ``public`` :ref:`hash_state_protocol <hash_state_protocol/0>`
 | **Uses:**
+|    :ref:`byte_order <byte_order/0>`
 |    :ref:`hash_common_32 <hash_common_32/0>`
 |    :ref:`list <list/0>`
 

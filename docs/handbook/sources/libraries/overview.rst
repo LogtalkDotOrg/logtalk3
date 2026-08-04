@@ -68,8 +68,8 @@ Library groups
 - Security and integrity: ``block_ciphers``, ``cmac``, ``crypto``,
   ``hashes``, ``hmac``, ``jwt``, ``otp``, and ``paseto``.
 - Randomness: ``arbitrary``, ``mutations``, and ``random``.
-- Mathematics, statistics, and optimization: ``ieee_754``,
-  ``linear_algebra``, ``multivariate_distributions``,
+- Mathematics, statistics, and optimization: ``byte_order``,
+  ``ieee_754``, ``linear_algebra``, ``multivariate_distributions``,
   ``simulated_annealing``, and ``statistics``.
 - Machine learning:
 

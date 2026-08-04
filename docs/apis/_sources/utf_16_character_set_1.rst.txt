@@ -14,8 +14,8 @@ UTF-16 character set implementation parameterized by byte order.
 |    ``logtalk_load(character_sets(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-04-05
+| **Version:** 1:1:0
+| **Date:** 2026-08-04
 
 | **Compilation flags:**
 |    ``static``
@@ -23,6 +23,8 @@ UTF-16 character set implementation parameterized by byte order.
 
 | **Extends:**
 |    ``public`` :ref:`character_set <character_set/0>`
+| **Uses:**
+|    :ref:`byte_order <byte_order/0>`
 
 | **Remarks:**
 |    (none)

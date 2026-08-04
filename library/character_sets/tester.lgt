@@ -21,7 +21,8 @@
 
 :- initialization((
 	set_logtalk_flag(report, warnings),
-		logtalk_load([
+	logtalk_load(byte_order(loader)),
+	logtalk_load([
 		character_set_protocol,
 		character_sets,
 		utf_character_sets,

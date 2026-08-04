@@ -136,11 +136,15 @@
 	extends(character_set)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-05,
+		date is 2026-08-04,
 		comment is 'UTF-16 character set implementation parameterized by byte order.',
 		parnames is ['Endian']
+	]).
+
+	:- uses(byte_order, [
+		bytes_to_integer/5, integer_to_bytes/5
 	]).
 
 	codes_to_bytes(Codes, Bytes) :-
@@ -152,24 +156,23 @@
 	codes_to_bytes([], _, Bytes, Bytes).
 	codes_to_bytes([Code| Codes], Endian, Bytes0, Bytes) :-
 		^^valid_unicode_scalar(Code),
+		^^endian_order(Endian, Order),
 		(	Code =< 0xFFFF ->
-			^^word_bytes(Endian, Code, Byte1, Byte2),
-			Bytes0 = [Byte1, Byte2| Bytes1]
+			integer_to_bytes(Order, 2, Code, Bytes0, Bytes1)
 		;	Pair is Code - 0x10000,
 			High is 0xD800 + (Pair >> 10),
 			Low is 0xDC00 + (Pair /\ 0x3FF),
-			^^word_bytes(Endian, High, Byte1, Byte2),
-			^^word_bytes(Endian, Low, Byte3, Byte4),
-			Bytes0 = [Byte1, Byte2, Byte3, Byte4| Bytes1]
+			integer_to_bytes(Order, 2, High, Bytes0, Bytes2),
+			integer_to_bytes(Order, 2, Low, Bytes2, Bytes1)
 		),
 		codes_to_bytes(Codes, Endian, Bytes1, Bytes).
 
 	bytes_to_codes([], _, []).
-	bytes_to_codes([Byte1, Byte2| Bytes], Endian, [Code| Codes]) :-
-		^^bytes_word(Endian, Byte1, Byte2, Word),
+	bytes_to_codes(Bytes0, Endian, [Code| Codes]) :-
+		^^endian_order(Endian, Order),
+		bytes_to_integer(Order, 2, Bytes0, Word, Bytes),
 		(	^^high_surrogate(Word) ->
-			Bytes = [Byte3, Byte4| Rest],
-			^^bytes_word(Endian, Byte3, Byte4, Low),
+			bytes_to_integer(Order, 2, Bytes, Low, Rest),
 			^^low_surrogate(Low),
 			Code is 0x10000 + ((Word - 0xD800) << 10) + (Low - 0xDC00)
 		;	^^low_surrogate(Word) ->
@@ -187,11 +190,15 @@
 	extends(character_set)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-05,
+		date is 2026-08-04,
 		comment is 'UTF-32 character set implementation parameterized by byte order.',
 		parnames is ['Endian']
+	]).
+
+	:- uses(byte_order, [
+		bytes_to_integer/5, integer_to_bytes/5
 	]).
 
 	codes_to_bytes(Codes, Bytes) :-
@@ -203,13 +210,14 @@
 	codes_to_bytes([], _, Bytes, Bytes).
 	codes_to_bytes([Code| Codes], Endian, Bytes0, Bytes) :-
 		^^valid_unicode_scalar(Code),
-		^^dword_bytes(Endian, Code, Byte1, Byte2, Byte3, Byte4),
-		Bytes0 = [Byte1, Byte2, Byte3, Byte4| Bytes1],
+		^^endian_order(Endian, Order),
+		integer_to_bytes(Order, 4, Code, Bytes0, Bytes1),
 		codes_to_bytes(Codes, Endian, Bytes1, Bytes).
 
 	bytes_to_codes([], _, []).
-	bytes_to_codes([Byte1, Byte2, Byte3, Byte4| Bytes], Endian, [Code| Codes]) :-
-		^^bytes_dword(Endian, Byte1, Byte2, Byte3, Byte4, Code),
+	bytes_to_codes(Bytes0, Endian, [Code| Codes]) :-
+		^^endian_order(Endian, Order),
+		bytes_to_integer(Order, 4, Bytes0, Code, Bytes),
 		^^valid_unicode_scalar(Code),
 		bytes_to_codes(Bytes, Endian, Codes).
 

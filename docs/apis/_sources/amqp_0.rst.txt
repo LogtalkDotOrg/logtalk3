@@ -14,8 +14,8 @@ Portable AMQP 0-9-1 (Advanced Message Queuing Protocol) client. Uses the sockets
 |    ``logtalk_load(amqp(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:2:0
-| **Date:** 2026-06-16
+| **Version:** 1:3:0
+| **Date:** 2026-08-04
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -24,6 +24,7 @@ Portable AMQP 0-9-1 (Advanced Message Queuing Protocol) client. Uses the sockets
 | **Imports:**
 |    ``public`` :ref:`options <options/0>`
 | **Uses:**
+|    :ref:`byte_order <byte_order/0>`
 |    :ref:`list <list/0>`
 |    :ref:`os <os/0>`
 |    :ref:`socket <socket/0>`

@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-02,
+		date is 2026-08-04,
 		comment is 'BSON format exporter and importer.',
 		parameters is [
 			'StringRepresentation' - 'Text representation to be used when decoding BSON strings and keys. Possible values are ``atom`` (default), ``chars``, and ``codes``.'
@@ -418,40 +418,14 @@
 
 	little_endian_signed_integer(Length, Integer) -->
 		bytes(Length, Bytes),
-		{	little_endian_bytes_to_unsigned_integer(Bytes, Unsigned),
-			Bits is Length * 8,
-			SignBit is 1 << (Bits - 1),
-			(	Unsigned /\ SignBit =:= 0 ->
-				Integer = Unsigned
-			;	Integer is Unsigned - (1 << Bits)
-			)
-		}.
+		{byte_order::bytes_to_signed_integer(little, Bytes, Integer)}.
 
 	little_endian_unsigned_integer(Length, Integer) -->
 		bytes(Length, Bytes),
-		{little_endian_bytes_to_unsigned_integer(Bytes, Integer)}.
+		{byte_order::bytes_to_integer(little, Bytes, Integer)}.
 
 	integer_to_little_endian_bytes(Length, Integer, Bytes) :-
-		Bits is Length * 8,
-		( Integer < 0 -> Unsigned is Integer + (1 << Bits); Unsigned = Integer ),
-		integer_to_little_endian_bytes_(Length, Unsigned, Bytes).
-
-	integer_to_little_endian_bytes_(0, _, []) :-
-		!.
-	integer_to_little_endian_bytes_(Length, Integer, [Byte| Bytes]) :-
-		Byte is Integer mod 256,
-		NextInteger is Integer // 256,
-		NextLength is Length - 1,
-		integer_to_little_endian_bytes_(NextLength, NextInteger, Bytes).
-
-	little_endian_bytes_to_unsigned_integer(Bytes, Integer) :-
-		little_endian_bytes_to_unsigned_integer(Bytes, 1, 0, Integer).
-
-	little_endian_bytes_to_unsigned_integer([], _, Integer, Integer).
-	little_endian_bytes_to_unsigned_integer([Byte| Bytes], Multiplier, Integer0, Integer) :-
-		Integer1 is Integer0 + Byte * Multiplier,
-		NextMultiplier is Multiplier * 256,
-		little_endian_bytes_to_unsigned_integer(Bytes, NextMultiplier, Integer1, Integer).
+		byte_order::signed_integer_to_bytes(little, Length, Integer, Bytes).
 
 	valid_signed_integer(32, Integer) :-
 		integer(Integer), Integer >= -2147483648, Integer =< 2147483647.

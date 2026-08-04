@@ -14,8 +14,8 @@ Shared helpers for WebSocket opening-handshake key generation and accept-value c
 |    ``logtalk_load(http_websocket_handshake(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-06-11
+| **Version:** 1:1:0
+| **Date:** 2026-04-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -23,6 +23,7 @@ Shared helpers for WebSocket opening-handshake key generation and accept-value c
 
 | **Uses:**
 |    :ref:`base64 <base64/0>`
+|    :ref:`byte_order <byte_order/0>`
 |    :ref:`crypto <crypto/0>`
 |    :ref:`hash_common_32 <hash_common_32/0>`
 |    :ref:`list <list/0>`

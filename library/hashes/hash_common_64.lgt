@@ -22,9 +22,9 @@
 :- object(hash_common_64).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-06-01,
+		date is 2026-08-04,
 		comment is 'Auxiliary predicates for the hashes library 64-bit algorithms.'
 	]).
 
@@ -105,25 +105,15 @@
 		argnames is ['Value', 'Shift', 'Shifted']
 	]).
 
-	:- public(integer_to_big_endian_bytes64/3).
-	:- mode(integer_to_big_endian_bytes64(+integer, -list(integer), -variable), one).
-	:- info(integer_to_big_endian_bytes64/3, [
-		comment is 'Encodes a 64-bit word into eight bytes in big-endian order.',
-		argnames is ['Integer', 'Bytes', 'Tail']
-	]).
-
-	:- public(integer_to_big_endian_bytes64/2).
-	:- mode(integer_to_big_endian_bytes64(+integer, -list(integer)), one).
-	:- info(integer_to_big_endian_bytes64/2, [
-		comment is 'Encodes a 64-bit word into eight bytes in big-endian order.',
-		argnames is ['Integer', 'Bytes']
-	]).
-
 	:- public(pad_md_tail/3).
 	:- mode(pad_md_tail(+list(integer), +integer, -list(integer)), one).
 	:- info(pad_md_tail/3, [
 		comment is 'Pads the final, less-than-one-block tail of a message using SHA-512-style MD padding (128-byte blocks, a big-endian 128-bit length field) given the total message length in bytes. For use when the message has already been consumed block by block during segmented/incremental hashing, so that only the unconsumed tail, and not the whole message, needs to be available.',
 		argnames is ['TailBytes', 'TotalLength', 'PaddedBytes']
+	]).
+
+	:- uses(byte_order, [
+		integer_to_bytes/5
 	]).
 
 	:- uses(list, [
@@ -177,19 +167,6 @@
 		Mask is 0xFFFFFFFFFFFFFFFF,
 		Shifted is (Value /\ Mask) >> Shift.
 
-	integer_to_big_endian_bytes64(Integer, [B0, B1, B2, B3, B4, B5, B6, B7| Tail], Tail) :-
-		B0 is (Integer >> 56) /\ 0xFF,
-		B1 is (Integer >> 48) /\ 0xFF,
-		B2 is (Integer >> 40) /\ 0xFF,
-		B3 is (Integer >> 32) /\ 0xFF,
-		B4 is (Integer >> 24) /\ 0xFF,
-		B5 is (Integer >> 16) /\ 0xFF,
-		B6 is (Integer >> 8) /\ 0xFF,
-		B7 is Integer /\ 0xFF.
-
-	integer_to_big_endian_bytes64(Integer, Bytes) :-
-		integer_to_big_endian_bytes64(Integer, Bytes, []).
-
 	pad_md_tail(TailBytes, TotalLength, PaddedBytes) :-
 		length(TailBytes, TailLength),
 		BitLength is TotalLength * 8,
@@ -208,8 +185,8 @@
 		Two64 is 0x10000000000000000,
 		High is (BitLength // Two64) mod Two64,
 		Low is BitLength mod Two64,
-		integer_to_big_endian_bytes64(High, LengthBytes, LowBytes),
-		integer_to_big_endian_bytes64(Low, LowBytes, []).
+		integer_to_bytes(big, 8, High, LengthBytes, LowBytes),
+		integer_to_bytes(big, 8, Low, LowBytes, []).
 
 	fixed_hex_atom(Digits, Integer, Hex) :-
 		fixed_hex_codes(Digits, Integer, Codes),

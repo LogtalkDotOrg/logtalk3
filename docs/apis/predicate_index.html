@@ -588,9 +588,6 @@
 <li class="toctree-l2"><a class="reference internal" href="#bic-5"><code class="docutils literal notranslate"><span class="pre">bic/5</span></code></a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#big-endian-word32-2"><code class="docutils literal notranslate"><span class="pre">big_endian_word32/2</span></code></a><ul class="simple">
-</ul>
-</li>
 <li class="toctree-l2"><a class="reference internal" href="#binary-body-2"><code class="docutils literal notranslate"><span class="pre">binary_body/2</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -679,6 +676,18 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#bytes-to-codes-2"><code class="docutils literal notranslate"><span class="pre">bytes_to_codes/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#bytes-to-integer-3"><code class="docutils literal notranslate"><span class="pre">bytes_to_integer/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#bytes-to-integer-5"><code class="docutils literal notranslate"><span class="pre">bytes_to_integer/5</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#bytes-to-signed-integer-3"><code class="docutils literal notranslate"><span class="pre">bytes_to_signed_integer/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#bytes-to-signed-integer-5"><code class="docutils literal notranslate"><span class="pre">bytes_to_signed_integer/5</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#cache-1"><code class="docutils literal notranslate"><span class="pre">cache/1</span></code></a><ul class="simple">
@@ -3417,22 +3426,10 @@
 <li class="toctree-l2"><a class="reference internal" href="#integer-1"><code class="docutils literal notranslate"><span class="pre">integer//1</span></code></a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#integer-to-big-endian-bytes32-2"><code class="docutils literal notranslate"><span class="pre">integer_to_big_endian_bytes32/2</span></code></a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="#integer-to-bytes-4"><code class="docutils literal notranslate"><span class="pre">integer_to_bytes/4</span></code></a><ul class="simple">
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#integer-to-big-endian-bytes32-3"><code class="docutils literal notranslate"><span class="pre">integer_to_big_endian_bytes32/3</span></code></a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#integer-to-big-endian-bytes64-2"><code class="docutils literal notranslate"><span class="pre">integer_to_big_endian_bytes64/2</span></code></a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#integer-to-big-endian-bytes64-3"><code class="docutils literal notranslate"><span class="pre">integer_to_big_endian_bytes64/3</span></code></a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#integer-to-little-endian-bytes32-2"><code class="docutils literal notranslate"><span class="pre">integer_to_little_endian_bytes32/2</span></code></a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#integer-to-little-endian-bytes32-3"><code class="docutils literal notranslate"><span class="pre">integer_to_little_endian_bytes32/3</span></code></a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="#integer-to-bytes-5"><code class="docutils literal notranslate"><span class="pre">integer_to_bytes/5</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#internal-error-2"><code class="docutils literal notranslate"><span class="pre">internal_error/2</span></code></a><ul class="simple">
@@ -4006,9 +4003,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#listing-1"><code class="docutils literal notranslate"><span class="pre">listing/1</span></code></a><ul class="simple">
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#little-endian-word32-2"><code class="docutils literal notranslate"><span class="pre">little_endian_word32/2</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#llen-3"><code class="docutils literal notranslate"><span class="pre">llen/3</span></code></a><ul class="simple">
@@ -7344,6 +7338,12 @@
 <li class="toctree-l2"><a class="reference internal" href="#signaling-field-2"><code class="docutils literal notranslate"><span class="pre">signaling_field/2</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#signed-integer-to-bytes-4"><code class="docutils literal notranslate"><span class="pre">signed_integer_to_bytes/4</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#signed-integer-to-bytes-5"><code class="docutils literal notranslate"><span class="pre">signed_integer_to_bytes/5</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#signing-input-4"><code class="docutils literal notranslate"><span class="pre">signing_input/4</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -10187,14 +10187,6 @@
 <li><p><a class="reference internal" href="iso_9362_protocol_0.html#iso-9362-protocol-0-bic-5"><span class="std std-ref">iso_9362_protocol</span></a></p></li>
 </ul>
 </section>
-<section id="big-endian-word32-2">
-<h2><code class="docutils literal notranslate"><span class="pre">big_endian_word32/2</span></code><a class="headerlink" href="#big-endian-word32-2" title="Link to this heading"></a></h2>
-<div class="toctree-wrapper compound">
-</div>
-<ul class="simple">
-<li><p><a class="reference internal" href="hash_common_32_0.html#hash-common-32-0-big-endian-word32-2"><span class="std std-ref">hash_common_32</span></a></p></li>
-</ul>
-</section>
 <section id="binary-body-2">
 <h2><code class="docutils literal notranslate"><span class="pre">binary_body/2</span></code><a class="headerlink" href="#binary-body-2" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -10437,6 +10429,38 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="character_set_protocol_0.html#character-set-protocol-0-bytes-to-codes-2"><span class="std std-ref">character_set_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="bytes-to-integer-3">
+<h2><code class="docutils literal notranslate"><span class="pre">bytes_to_integer/3</span></code><a class="headerlink" href="#bytes-to-integer-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="byte_order_0.html#byte-order-0-bytes-to-integer-3"><span class="std std-ref">byte_order</span></a></p></li>
+</ul>
+</section>
+<section id="bytes-to-integer-5">
+<h2><code class="docutils literal notranslate"><span class="pre">bytes_to_integer/5</span></code><a class="headerlink" href="#bytes-to-integer-5" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="byte_order_0.html#byte-order-0-bytes-to-integer-5"><span class="std std-ref">byte_order</span></a></p></li>
+</ul>
+</section>
+<section id="bytes-to-signed-integer-3">
+<h2><code class="docutils literal notranslate"><span class="pre">bytes_to_signed_integer/3</span></code><a class="headerlink" href="#bytes-to-signed-integer-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="byte_order_0.html#byte-order-0-bytes-to-signed-integer-3"><span class="std std-ref">byte_order</span></a></p></li>
+</ul>
+</section>
+<section id="bytes-to-signed-integer-5">
+<h2><code class="docutils literal notranslate"><span class="pre">bytes_to_signed_integer/5</span></code><a class="headerlink" href="#bytes-to-signed-integer-5" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="byte_order_0.html#byte-order-0-bytes-to-signed-integer-5"><span class="std std-ref">byte_order</span></a></p></li>
 </ul>
 </section>
 <section id="cache-1">
@@ -18041,52 +18065,20 @@
 <li><p><a class="reference internal" href="number_grammars_1.html#number-grammars-1-integer-1"><span class="std std-ref">number_grammars(Format)</span></a></p></li>
 </ul>
 </section>
-<section id="integer-to-big-endian-bytes32-2">
-<h2><code class="docutils literal notranslate"><span class="pre">integer_to_big_endian_bytes32/2</span></code><a class="headerlink" href="#integer-to-big-endian-bytes32-2" title="Link to this heading"></a></h2>
+<section id="integer-to-bytes-4">
+<h2><code class="docutils literal notranslate"><span class="pre">integer_to_bytes/4</span></code><a class="headerlink" href="#integer-to-bytes-4" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 </div>
 <ul class="simple">
-<li><p><a class="reference internal" href="hash_common_32_0.html#hash-common-32-0-integer-to-big-endian-bytes32-2"><span class="std std-ref">hash_common_32</span></a></p></li>
+<li><p><a class="reference internal" href="byte_order_0.html#byte-order-0-integer-to-bytes-4"><span class="std std-ref">byte_order</span></a></p></li>
 </ul>
 </section>
-<section id="integer-to-big-endian-bytes32-3">
-<h2><code class="docutils literal notranslate"><span class="pre">integer_to_big_endian_bytes32/3</span></code><a class="headerlink" href="#integer-to-big-endian-bytes32-3" title="Link to this heading"></a></h2>
+<section id="integer-to-bytes-5">
+<h2><code class="docutils literal notranslate"><span class="pre">integer_to_bytes/5</span></code><a class="headerlink" href="#integer-to-bytes-5" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
 </div>
 <ul class="simple">
-<li><p><a class="reference internal" href="hash_common_32_0.html#hash-common-32-0-integer-to-big-endian-bytes32-3"><span class="std std-ref">hash_common_32</span></a></p></li>
-</ul>
-</section>
-<section id="integer-to-big-endian-bytes64-2">
-<h2><code class="docutils literal notranslate"><span class="pre">integer_to_big_endian_bytes64/2</span></code><a class="headerlink" href="#integer-to-big-endian-bytes64-2" title="Link to this heading"></a></h2>
-<div class="toctree-wrapper compound">
-</div>
-<ul class="simple">
-<li><p><a class="reference internal" href="hash_common_64_0.html#hash-common-64-0-integer-to-big-endian-bytes64-2"><span class="std std-ref">hash_common_64</span></a></p></li>
-</ul>
-</section>
-<section id="integer-to-big-endian-bytes64-3">
-<h2><code class="docutils literal notranslate"><span class="pre">integer_to_big_endian_bytes64/3</span></code><a class="headerlink" href="#integer-to-big-endian-bytes64-3" title="Link to this heading"></a></h2>
-<div class="toctree-wrapper compound">
-</div>
-<ul class="simple">
-<li><p><a class="reference internal" href="hash_common_64_0.html#hash-common-64-0-integer-to-big-endian-bytes64-3"><span class="std std-ref">hash_common_64</span></a></p></li>
-</ul>
-</section>
-<section id="integer-to-little-endian-bytes32-2">
-<h2><code class="docutils literal notranslate"><span class="pre">integer_to_little_endian_bytes32/2</span></code><a class="headerlink" href="#integer-to-little-endian-bytes32-2" title="Link to this heading"></a></h2>
-<div class="toctree-wrapper compound">
-</div>
-<ul class="simple">
-<li><p><a class="reference internal" href="hash_common_32_0.html#hash-common-32-0-integer-to-little-endian-bytes32-2"><span class="std std-ref">hash_common_32</span></a></p></li>
-</ul>
-</section>
-<section id="integer-to-little-endian-bytes32-3">
-<h2><code class="docutils literal notranslate"><span class="pre">integer_to_little_endian_bytes32/3</span></code><a class="headerlink" href="#integer-to-little-endian-bytes32-3" title="Link to this heading"></a></h2>
-<div class="toctree-wrapper compound">
-</div>
-<ul class="simple">
-<li><p><a class="reference internal" href="hash_common_32_0.html#hash-common-32-0-integer-to-little-endian-bytes32-3"><span class="std std-ref">hash_common_32</span></a></p></li>
+<li><p><a class="reference internal" href="byte_order_0.html#byte-order-0-integer-to-bytes-5"><span class="std std-ref">byte_order</span></a></p></li>
 </ul>
 </section>
 <section id="internal-error-2">
@@ -19669,14 +19661,6 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="listing_0.html#listing-0-listing-1"><span class="std std-ref">listing</span></a></p></li>
-</ul>
-</section>
-<section id="little-endian-word32-2">
-<h2><code class="docutils literal notranslate"><span class="pre">little_endian_word32/2</span></code><a class="headerlink" href="#little-endian-word32-2" title="Link to this heading"></a></h2>
-<div class="toctree-wrapper compound">
-</div>
-<ul class="simple">
-<li><p><a class="reference internal" href="hash_common_32_0.html#hash-common-32-0-little-endian-word32-2"><span class="std std-ref">hash_common_32</span></a></p></li>
 </ul>
 </section>
 <section id="llen-3">
@@ -28877,6 +28861,22 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="ccsds_aos_frames_4.html#ccsds-aos-frames-4-signaling-field-2"><span class="std std-ref">ccsds_aos_frames(FrameLength,InsertZoneLength,HasOCF,HasFECF)</span></a></p></li>
+</ul>
+</section>
+<section id="signed-integer-to-bytes-4">
+<h2><code class="docutils literal notranslate"><span class="pre">signed_integer_to_bytes/4</span></code><a class="headerlink" href="#signed-integer-to-bytes-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="byte_order_0.html#byte-order-0-signed-integer-to-bytes-4"><span class="std std-ref">byte_order</span></a></p></li>
+</ul>
+</section>
+<section id="signed-integer-to-bytes-5">
+<h2><code class="docutils literal notranslate"><span class="pre">signed_integer_to_bytes/5</span></code><a class="headerlink" href="#signed-integer-to-bytes-5" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="byte_order_0.html#byte-order-0-signed-integer-to-bytes-5"><span class="std std-ref">byte_order</span></a></p></li>
 </ul>
 </section>
 <section id="signing-input-4">

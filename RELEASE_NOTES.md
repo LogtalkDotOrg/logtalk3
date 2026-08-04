@@ -66,6 +66,10 @@ format.
 * ADDED: New `gpx` library implementing the GPX 1.1 GPS data interchange
 format.
 
+* ADDED: New `byte_order` library providing predicates for converting between
+integers and fixed-size byte lists in big-endian and little-endian order. Both
+unsigned and signed two's-complement conversions are supported.
+
 * ADDED: New `integer_partitions` library providing predicates for generating
 and querying integer partitions.
 
@@ -125,6 +129,9 @@ shared portable standard normal distribution numeric helpers.
 
 * IMPROVED: Portability of the `sockets` library with versions of SWI-Prolog
 older than 9.1.5.
+
+* UPDATED: The `amqp`, `character_sets`, `hashes`, `ieee_754`, and `protobuf`
+libraries to use the new `byte_order` library.
 
 * UPDATED: The `thurstone_mosteller_ranker` library to reuse the new shared
 standard normal quantile implementation.

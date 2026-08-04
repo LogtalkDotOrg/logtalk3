@@ -100,6 +100,7 @@ Foreach-Object {
 (Get-Content ../../../library/borda_ranker/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/borda_ranker.rst
 (Get-Content ../../../library/bradley_terry_ranker/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/bradley_terry_ranker.rst
 (Get-Content ../../../library/bson/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/bson.rst
+(Get-Content ../../../library/byte_order/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/byte_order.rst
 (Get-Content ../../../library/c45_classifier/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/c45_classifier.rst
 (Get-Content ../../../library/cartesian_products/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/cartesian_products.rst
 (Get-Content ../../../library/cbor/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/cbor.rst

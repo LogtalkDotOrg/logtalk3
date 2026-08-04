@@ -24,15 +24,19 @@
 	imports(ieee_754_common(_Precision_, _ByteOrder_))).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-02,
+		date is 2026-08-04,
 		comment is 'IEEE 754 floating-point encoder and decoder.',
 		parameters is [
 			'Precision' - 'Floating-point format precision. Supported values are ``half``, ``single``, and ``double``.',
 			'ByteOrder' - 'Byte order used when parsing and generating byte sequences. Supported values are ``big`` and ``little``.',
 			'NaNRepresentation' - 'NaN decoding and generation policy. Supported values are ``canonical`` and ``payloads``.'
 		]
+	]).
+
+	:- uses(byte_order, [
+		bytes_to_integer/3, integer_to_bytes/4, integer_to_bytes/5
 	]).
 
 	:- uses(type, [
@@ -50,9 +54,7 @@
 	generate(Value, Bytes, Tail) :-
 		value_bits(Value, Bits),
 		byte_count(Count),
-		^^integer_to_bytes(Count, Bits, CanonicalBytes),
-		^^order_bytes(_ByteOrder_, CanonicalBytes, OrderedBytes),
-		^^bytes_tail(OrderedBytes, Bytes, Tail).
+		integer_to_bytes(_ByteOrder_, Count, Bits, Bytes, Tail).
 
 	valid(Value) :-
 		valid_value(Value).
@@ -80,8 +82,7 @@
 	sink_bits(bytes(Bytes), Bits) :-
 		!,
 		byte_count(Count),
-		^^integer_to_bytes(Count, Bits, CanonicalBytes),
-		^^order_bytes(_ByteOrder_, CanonicalBytes, Bytes).
+		integer_to_bytes(_ByteOrder_, Count, Bits, Bytes).
 	sink_bits(bits(Bits), Bits) :-
 		!.
 	sink_bits(Sink, _) :-
@@ -131,7 +132,7 @@
 		!,
 		(	_NaNRepresentation_ == payloads,
 			valid_nan_bytes(Bytes) ->
-			^^bytes_to_unsigned_integer(Bytes, Bits)
+			bytes_to_integer(big, Bytes, Bits)
 		;	domain_error(ieee_754_value, not_a_number(Bytes))
 		).
 	value_bits(Value, Bits) :-
@@ -274,7 +275,7 @@
 			Value = @not_a_number
 		;	^^canonical_nan_bits(CanonicalBits),
 			canonical_nan_bytes(ByteCount, CanonicalBits, CanonicalBytes),
-			^^integer_to_bytes(ByteCount, Bits, Bytes),
+			integer_to_bytes(big, ByteCount, Bits, Bytes),
 			(	Bytes == CanonicalBytes ->
 				Value = @not_a_number
 			;	Value = not_a_number(Bytes)
@@ -293,12 +294,12 @@
 		^^canonical_nan_bits(Bits).
 
 	canonical_nan_bytes(ByteCount, Bits, Bytes) :-
-		^^integer_to_bytes(ByteCount, Bits, Bytes).
+		integer_to_bytes(big, ByteCount, Bits, Bytes).
 
 	valid_nan_bytes(Bytes) :-
 		byte_count(Count),
 		valid(list(byte, Count), Bytes),
-		^^bytes_to_unsigned_integer(Bytes, Bits),
+		bytes_to_integer(big, Bytes, Bits),
 		^^nan_bits(Bits).
 
 	integer_floor_log2(Integer, Log2) :-

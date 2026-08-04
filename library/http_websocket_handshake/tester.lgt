@@ -25,6 +25,7 @@
 		set_logtalk_flag(report, warnings),
 		logtalk_load(basic_types(loader)),
 		logtalk_load(base64(loader)),
+		logtalk_load(byte_order(loader)),
 		logtalk_load(crypto(loader)),
 		logtalk_load(hashes(loader)),
 		logtalk_load([http_websocket_handshake], [debug(on), source_data(on)]),

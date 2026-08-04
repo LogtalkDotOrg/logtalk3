@@ -49,6 +49,7 @@ directory in the ``NOTES.md`` file.
    borda_ranker
    bradley_terry_ranker
    bson
+   byte_order
    c45_classifier
    cartesian_products
    cbor
