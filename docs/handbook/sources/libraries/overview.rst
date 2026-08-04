@@ -65,8 +65,8 @@ Library groups
 - System and external integration: ``git``, ``java``, ``os``, and
   ``sockets``.
 - Logic and symbolic computing: ``datalog``.
-- Security and integrity: ``block_ciphers``, ``crypto``, ``hashes``,
-  ``hmac``, ``jwt``, ``otp``, and ``paseto``.
+- Security and integrity: ``block_ciphers``, ``cmac``, ``crypto``,
+  ``hashes``, ``hmac``, ``jwt``, ``otp``, and ``paseto``.
 - Randomness: ``arbitrary``, ``mutations``, and ``random``.
 - Mathematics, statistics, and optimization: ``ieee_754``,
   ``linear_algebra``, ``simulated_annealing``, and ``statistics``.

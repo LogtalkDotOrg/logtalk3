@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on August 3, 2026
+##   Last updated on August 4, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -115,6 +115,7 @@ Foreach-Object {
 (Get-Content ../../../library/classification_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/classification_protocols.rst
 (Get-Content ../../../library/clo_span_pattern_miner/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/clo_span_pattern_miner.rst
 (Get-Content ../../../library/clustering_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/clustering_protocols.rst
+(Get-Content ../../../library/cmac/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/cmac.rst
 (Get-Content ../../../library/colley_ranker/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/colley_ranker.rst
 (Get-Content ../../../library/combinations/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/combinations.rst
 (Get-Content ../../../library/command_line_options/NOTES.md | Select-Object -Skip 32) | pandoc -f gfm -t rst -o libraries/command_line_options.rst

@@ -64,6 +64,7 @@ directory in the ``NOTES.md`` file.
    classification_protocols
    clo_span_pattern_miner
    clustering_protocols
+   cmac
    colley_ranker
    combinations
    command_line_options

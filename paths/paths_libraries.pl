@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on August 3, 2026
+%  Last updated on August 4, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -61,6 +61,7 @@ logtalk_library_path(character_sets, library('character_sets/')).
 logtalk_library_path(classification_protocols, library('classification_protocols/')).
 logtalk_library_path(clo_span_pattern_miner, library('clo_span_pattern_miner/')).
 logtalk_library_path(clustering_protocols, library('clustering_protocols/')).
+logtalk_library_path(cmac, library('cmac/')).
 logtalk_library_path(combinations, library('combinations/')).
 logtalk_library_path(command_line_options, library('command_line_options/')).
 logtalk_library_path(colley_ranker, library('colley_ranker/')).

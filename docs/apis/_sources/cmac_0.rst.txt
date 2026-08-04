@@ -1,0 +1,63 @@
+.. index:: single: cmac
+.. _cmac/0:
+
+.. rst-class:: right
+
+**object**
+
+``cmac``
+========
+
+CMAC (Cipher-based Message Authentication Code) implementation as specified in NIST SP 800-38B.
+
+| **Availability:** 
+|    ``logtalk_load(cmac(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-04
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`cmac_protocol <cmac_protocol/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`cmac_protocol/0::digest/4`  :ref:`cmac_protocol/0::digest/5`  :ref:`cmac_protocol/0::hex_digest/4`  :ref:`cmac_protocol/0::hex_digest/5`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`aes128 <aes128/0>`, :ref:`aes192 <aes192/0>`, :ref:`aes256 <aes256/0>`
+

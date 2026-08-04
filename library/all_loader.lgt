@@ -183,6 +183,7 @@
 		hashes(loader),
 		hmac(loader),
 		block_ciphers(loader),
+		cmac(loader),
 		otp(loader),
 		jwt(loader),
 		paseto(loader),

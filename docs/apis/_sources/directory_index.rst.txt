@@ -525,6 +525,17 @@ To load an entity, always load the library that includes it using the goal ``log
    clustering_dataset_protocol <clustering_dataset_protocol_0>
    search_indexing <search_indexing_0>
 
+``library/cmac/``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   cmac <cmac_0>
+   cmac_protocol <cmac_protocol_0>
+
 ``library/colley_ranker/``
 --------------------------
 

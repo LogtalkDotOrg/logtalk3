@@ -97,6 +97,9 @@ unique identifier (TypeID) generator.
 
 * ADDED: New `block_ciphers` library with AES 128/192/256 implementations.
 
+* ADDED: New `cmac` library providing a portable implementation of the
+Cipher-based Message Authentication Code specified in NIST SP 800-38B.
+
 * ADDED: Support for Ed25519 (RFC 8032) public-key signatures to the `crypto`
 library (when using a backend supporting unbound integer arithmetic).
 
