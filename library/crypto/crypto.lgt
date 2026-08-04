@@ -22,9 +22,9 @@
 :- object(crypto).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-07-20,
+		date is 2026-08-04,
 		comment is 'Transport-neutral cryptographic helper predicates.'
 	]).
 
@@ -142,7 +142,7 @@
 	]).
 
 	:- public(pbkdf2/6).
-	:- mode(pbkdf2(+object_identifier, +list(byte), +list(byte), +integer, +non_negative_integer, -list(byte)), one_or_error).
+	:- mode(pbkdf2(+object_identifier, +list(byte), +list(byte), +integer, +positive_integer, -list(byte)), one_or_error).
 	:- info(pbkdf2/6, [
 		comment is 'Derives a key from a password byte sequence and a salt using PBKDF2 with a hash object implementing the ``hash_digest_protocol`` protocol.',
 		argnames is ['Hash', 'Password', 'Salt', 'Iterations', 'Length', 'DerivedKey'],
@@ -162,7 +162,7 @@
 			'``Iterations`` is an integer but not a positive integer' - domain_error(positive_integer, 'Iterations'),
 			'``Length`` is a variable' - instantiation_error,
 			'``Length`` is neither a variable nor an integer' - type_error(integer, 'Length'),
-			'``Length`` is an integer but is less than zero' - domain_error(non_negative_integer, 'Length'),
+			'``Length`` is an integer but is not positive' - domain_error(positive_integer, 'Length'),
 			'``Length`` exceeds the maximum PBKDF2 output length' - domain_error(pbkdf2_output_length, 'Length')
 		]
 	]).
@@ -195,7 +195,7 @@
 			'Option ``iterations(Count)``' - 'Uses the given positive integer PBKDF2 iteration count. When this option is absent, the iteration count defaults to ``131072``.',
 			'Option ``salt(Bytes)``' - 'Uses the given byte list as the PBKDF2 salt. When this option is present, no random salt is generated and any ``salt_length/1`` option only affects validation, not the selected salt value.',
 			'Option ``salt_length(Count)``' - 'Generates a random salt with the given non-negative number of bytes when ``salt/1`` is absent. When this option is absent, the generated salt length defaults to ``16`` bytes.',
-			'Option ``length(Count)``' - 'Uses the given non-negative derived-key length. When this option is absent, the derived-key length defaults to the selected hash digest size.'
+			'Option ``length(Count)``' - 'Uses the given positive derived-key length. When this option is absent, the derived-key length defaults to the selected hash digest size.'
 		],
 		exceptions is [
 			'``Hash`` is a variable' - instantiation_error,
@@ -214,7 +214,8 @@
 			'``Options`` contains a ``salt/1`` value with a non-integer byte' - type_error(integer, 'Byte'),
 			'``Options`` contains a ``salt/1`` value with an integer outside the byte range' - domain_error(byte, 'Byte'),
 			'``Options`` contains a ``salt_length/1`` or ``length/1`` value that is not an integer' - type_error(integer, 'Length'),
-			'``Options`` contains a ``salt_length/1`` or ``length/1`` value that is less than zero' - domain_error(non_negative_integer, 'Length')
+			'``Options`` contains a ``salt_length/1`` value that is less than zero' - domain_error(non_negative_integer, 'Length'),
+			'``Options`` contains a ``length/1`` value that is not positive' - domain_error(positive_integer, 'Length')
 		]
 	]).
 
@@ -251,7 +252,8 @@
 			'``Options`` contains a ``salt/1`` value with a non-integer byte' - type_error(integer, 'Byte'),
 			'``Options`` contains a ``salt/1`` value with an integer outside the byte range' - domain_error(byte, 'Byte'),
 			'``Options`` contains a ``salt_length/1`` or ``length/1`` value that is not an integer' - type_error(integer, 'Length'),
-			'``Options`` contains a ``salt_length/1`` or ``length/1`` value that is less than zero' - domain_error(non_negative_integer, 'Length'),
+			'``Options`` contains a ``salt_length/1`` value that is less than zero' - domain_error(non_negative_integer, 'Length'),
+			'``Options`` contains a ``length/1`` value that is not positive' - domain_error(positive_integer, 'Length'),
 			'``Options`` selects a ``length/1`` value that exceeds the maximum PBKDF2 output length' - domain_error(pbkdf2_output_length, 'Length')
 		]
 	]).
@@ -397,13 +399,10 @@
 		check(list(byte), Password, Context),
 		check(list(byte), Salt, Context),
 		check(positive_integer, Iterations, Context),
-		check(non_negative_integer, Length, Context),
+		check(positive_integer, Length, Context),
 		Hash::digest_size(DigestSize),
 		check_pbkdf2_output_length(Length, DigestSize, Context),
-		(	Length =:= 0 ->
-			DerivedKey = []
-		;	pbkdf2_blocks(Hash, Password, Salt, Iterations, 1, Length, DerivedKey, [])
-		).
+		pbkdf2_blocks(Hash, Password, Salt, Iterations, 1, Length, DerivedKey, []).
 
 	apr1(Password, Salt, Checksum) :-
 		context(Context),
@@ -535,8 +534,6 @@
 		;	throw(error(domain_error(hkdf_output_length(0, MaxLength), Length), Context))
 		).
 
-	check_pbkdf2_output_length(0, _, _) :-
-		!.
 	check_pbkdf2_output_length(Length, DigestSize, Context) :-
 		BlockCount is ((Length - 1) // DigestSize) + 1,
 		(	BlockCount =< 0xFFFFFFFF ->
@@ -681,7 +678,7 @@
 			SaltLength = Value,
 			Length = Length0
 		;	Option = length(Value) ->
-			check(non_negative_integer, Value, Context),
+			check(positive_integer, Value, Context),
 			Iterations = Iterations0,
 			Salt = Salt0,
 			SaltLength = SaltLength0,

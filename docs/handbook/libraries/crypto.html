@@ -465,8 +465,8 @@ the requested number of random bytes.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">secure_compare/2</span></code> predicate provides constant-time comparison for
 byte sequences represented either as byte lists or atoms.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">hkdf/5</span></code> and <code class="docutils literal notranslate"><span class="pre">pbkdf2/6</span></code> predicates provide portable key
-derivation implemented on top of the existing <code class="docutils literal notranslate"><span class="pre">hashes</span></code> and <code class="docutils literal notranslate"><span class="pre">hmac</span></code>
-libraries.</p>
+derivation conforming to RFC 5869 and RFC 8018, respectively,
+implemented on top of the existing <code class="docutils literal notranslate"><span class="pre">hashes</span></code> and <code class="docutils literal notranslate"><span class="pre">hmac</span></code> libraries.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">apr1/3</span></code> predicate computes Apache APR1 encoded checksums for
 password and salt byte sequences using a portable MD5-based
 implementation.</p>

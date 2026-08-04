@@ -124,6 +124,8 @@ older than 9.1.5.
 * UPDATED: The `thurstone_mosteller_ranker` library to reuse the new shared
 standard normal quantile implementation.
 
+* FIXED: The `crypto` library PBKDF2 implementation conformance with RFC 8018.
+
 * FIXED: A race condition in the `http_process_transport` library when closing
 `ncat`-backed connections that could discard pending output bytes. Thanks to
 Andrew Davison for the bug report.

@@ -422,8 +422,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-07-20</div>
+<div class="line"><strong>Version:</strong> 1:0:1</div>
+<div class="line"><strong>Date:</strong> 2026-08-04</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -867,7 +867,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">pbkdf2(+object_identifier,+list(byte),+list(byte),+integer,+non_negative_integer,-list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">pbkdf2(+object_identifier,+list(byte),+list(byte),+integer,+positive_integer,-list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
@@ -933,9 +933,9 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Length)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Length</span></code> is an integer but is less than zero:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Length</span></code> is an integer but is not positive:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Length)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_integer,Length)</span></code></div>
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Length</span></code> exceeds the maximum PBKDF2 output length:</div>
 <div class="line-block">
@@ -1093,9 +1093,13 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Length)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains a <code class="docutils literal notranslate"><span class="pre">salt_length/1</span></code> or <code class="docutils literal notranslate"><span class="pre">length/1</span></code> value that is less than zero:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains a <code class="docutils literal notranslate"><span class="pre">salt_length/1</span></code> value that is less than zero:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Length)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains a <code class="docutils literal notranslate"><span class="pre">length/1</span></code> value that is not positive:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_integer,Length)</span></code></div>
 </div>
 </div>
 </div>
@@ -1108,7 +1112,7 @@
 <li><p>Option <code class="docutils literal notranslate"><span class="pre">iterations(Count)</span></code>: Uses the given positive integer PBKDF2 iteration count. When this option is absent, the iteration count defaults to <code class="docutils literal notranslate"><span class="pre">131072</span></code>.</p></li>
 <li><p>Option <code class="docutils literal notranslate"><span class="pre">salt(Bytes)</span></code>: Uses the given byte list as the PBKDF2 salt. When this option is present, no random salt is generated and any <code class="docutils literal notranslate"><span class="pre">salt_length/1</span></code> option only affects validation, not the selected salt value.</p></li>
 <li><p>Option <code class="docutils literal notranslate"><span class="pre">salt_length(Count)</span></code>: Generates a random salt with the given non-negative number of bytes when <code class="docutils literal notranslate"><span class="pre">salt/1</span></code> is absent. When this option is absent, the generated salt length defaults to <code class="docutils literal notranslate"><span class="pre">16</span></code> bytes.</p></li>
-<li><p>Option <code class="docutils literal notranslate"><span class="pre">length(Count)</span></code>: Uses the given non-negative derived-key length. When this option is absent, the derived-key length defaults to the selected hash digest size.</p></li>
+<li><p>Option <code class="docutils literal notranslate"><span class="pre">length(Count)</span></code>: Uses the given positive derived-key length. When this option is absent, the derived-key length defaults to the selected hash digest size.</p></li>
 </ul>
 </div></blockquote>
 <hr class="docutils" />
@@ -1227,9 +1231,13 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Length)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains a <code class="docutils literal notranslate"><span class="pre">salt_length/1</span></code> or <code class="docutils literal notranslate"><span class="pre">length/1</span></code> value that is less than zero:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains a <code class="docutils literal notranslate"><span class="pre">salt_length/1</span></code> value that is less than zero:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Length)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains a <code class="docutils literal notranslate"><span class="pre">length/1</span></code> value that is not positive:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_integer,Length)</span></code></div>
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> selects a <code class="docutils literal notranslate"><span class="pre">length/1</span></code> value that exceeds the maximum PBKDF2 output length:</div>
 <div class="line-block">

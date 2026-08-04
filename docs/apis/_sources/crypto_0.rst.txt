@@ -14,8 +14,8 @@ Transport-neutral cryptographic helper predicates.
 |    ``logtalk_load(crypto(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-07-20
+| **Version:** 1:0:1
+| **Date:** 2026-08-04
 
 | **Compilation flags:**
 |    ``static, context_switching_calls, complements(restrict)``
@@ -298,7 +298,7 @@ Derives a key from a password byte sequence and a salt using PBKDF2 with a hash 
 | **Template:**
 |    ``pbkdf2(Hash,Password,Salt,Iterations,Length,DerivedKey)``
 | **Mode and number of proofs:**
-|    ``pbkdf2(+object_identifier,+list(byte),+list(byte),+integer,+non_negative_integer,-list(byte))`` - ``one_or_error``
+|    ``pbkdf2(+object_identifier,+list(byte),+list(byte),+integer,+positive_integer,-list(byte))`` - ``one_or_error``
 
 | **Exceptions:**
 |    ``Hash`` is a variable:
@@ -331,8 +331,8 @@ Derives a key from a password byte sequence and a salt using PBKDF2 with a hash 
 |        ``instantiation_error``
 |    ``Length`` is neither a variable nor an integer:
 |        ``type_error(integer,Length)``
-|    ``Length`` is an integer but is less than zero:
-|        ``domain_error(non_negative_integer,Length)``
+|    ``Length`` is an integer but is not positive:
+|        ``domain_error(positive_integer,Length)``
 |    ``Length`` exceeds the maximum PBKDF2 output length:
 |        ``domain_error(pbkdf2_output_length,Length)``
 
@@ -427,8 +427,10 @@ Computes a structured password-hash term using PBKDF2, a hash object implementin
 |        ``domain_error(byte,Byte)``
 |    ``Options`` contains a ``salt_length/1`` or ``length/1`` value that is not an integer:
 |        ``type_error(integer,Length)``
-|    ``Options`` contains a ``salt_length/1`` or ``length/1`` value that is less than zero:
+|    ``Options`` contains a ``salt_length/1`` value that is less than zero:
 |        ``domain_error(non_negative_integer,Length)``
+|    ``Options`` contains a ``length/1`` value that is not positive:
+|        ``domain_error(positive_integer,Length)``
 
 | **Remarks:**
 
@@ -436,7 +438,7 @@ Computes a structured password-hash term using PBKDF2, a hash object implementin
     - Option ``iterations(Count)``: Uses the given positive integer PBKDF2 iteration count. When this option is absent, the iteration count defaults to ``131072``.
     - Option ``salt(Bytes)``: Uses the given byte list as the PBKDF2 salt. When this option is present, no random salt is generated and any ``salt_length/1`` option only affects validation, not the selected salt value.
     - Option ``salt_length(Count)``: Generates a random salt with the given non-negative number of bytes when ``salt/1`` is absent. When this option is absent, the generated salt length defaults to ``16`` bytes.
-    - Option ``length(Count)``: Uses the given non-negative derived-key length. When this option is absent, the derived-key length defaults to the selected hash digest size.
+    - Option ``length(Count)``: Uses the given positive derived-key length. When this option is absent, the derived-key length defaults to the selected hash digest size.
 
 
 ------------
@@ -504,8 +506,10 @@ Succeeds when the given password-hash term does not match the selected PBKDF2 pa
 |        ``domain_error(byte,Byte)``
 |    ``Options`` contains a ``salt_length/1`` or ``length/1`` value that is not an integer:
 |        ``type_error(integer,Length)``
-|    ``Options`` contains a ``salt_length/1`` or ``length/1`` value that is less than zero:
+|    ``Options`` contains a ``salt_length/1`` value that is less than zero:
 |        ``domain_error(non_negative_integer,Length)``
+|    ``Options`` contains a ``length/1`` value that is not positive:
+|        ``domain_error(positive_integer,Length)``
 |    ``Options`` selects a ``length/1`` value that exceeds the maximum PBKDF2 output length:
 |        ``domain_error(pbkdf2_output_length,Length)``
 

@@ -281,6 +281,28 @@
 			hex_bytes('085a01ea1b10f36933068b56efa5ad81a4f14b822f5b091568a9cdd4f155fda2c22e422478d305f3f896', ExpectedBytes),
 			hkdf(sha1, [11,11,11,11,11,11,11,11,11,11,11], 42, Bytes, [salt([0,1,2,3,4,5,6,7,8,9,10,11,12]), info([240,241,242,243,244,245,246,247,248,249])]).
 
+		test(crypto_hkdf_5_27, deterministic(Bytes == ExpectedBytes)) :-
+			hex_bytes('000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f', KeyMaterial),
+			hex_bytes('606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeaf', Salt),
+			hex_bytes('b0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdcdddedfe0e1e2e3e4e5e6e7e8e9eaebecedeeeff0f1f2f3f4f5f6f7f8f9fafbfcfdfeff', Info),
+			hex_bytes('b11e398dc80327a1c8e7f78c596a49344f012eda2d4efad8a050cc4c19afa97c59045a99cac7827271cb41c65e590e09da3275600c2f09b8367793a9aca3db71cc30c58179ec3e87c14c01d5c1f3434f1d87', ExpectedBytes),
+			hkdf(sha256, KeyMaterial, 82, Bytes, [salt(Salt), info(Info)]).
+
+		test(crypto_hkdf_5_28, deterministic(Bytes == ExpectedBytes)) :-
+			hex_bytes('000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f', KeyMaterial),
+			hex_bytes('606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeaf', Salt),
+			hex_bytes('b0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdcdddedfe0e1e2e3e4e5e6e7e8e9eaebecedeeeff0f1f2f3f4f5f6f7f8f9fafbfcfdfeff', Info),
+			hex_bytes('0bd770a74d1160f7c9f12cd5912a06ebff6adcae899d92191fe4305673ba2ffe8fa3f1a4e5ad79f3f334b3b202b2173c486ea37ce3d397ed034c7f9dfeb15c5e927336d0441f4c4300e2cff0d0900b52d3b4', ExpectedBytes),
+			hkdf(sha1, KeyMaterial, 82, Bytes, [salt(Salt), info(Info)]).
+
+		test(crypto_hkdf_5_29, deterministic(Bytes == ExpectedBytes)) :-
+			hex_bytes('0ac1af7002b3d761d1e55298da9d0506b9ae52057220a306e07b6b87e8df21d0ea00033de03984d34918', ExpectedBytes),
+			hkdf(sha1, [11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11,11], 42, Bytes, [salt([]), info([])]).
+
+		test(crypto_hkdf_5_30, deterministic(Bytes == ExpectedBytes)) :-
+			hex_bytes('2c91117204d745f3500d636a62f64f0ab3bae548aa53d423b0d1f27ebba6f5e5673a081d70cce7acfc48', ExpectedBytes),
+			hkdf(sha1, [12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12,12], 42, Bytes, []).
+
 	:- endif.
 
 	% pbkdf2/6 tests
@@ -330,8 +352,11 @@
 	test(crypto_pbkdf2_6_15, error(type_error(integer, ten))) :-
 		pbkdf2(md5, [1,2,3], [4,5,6], 1, ten, _DerivedKey).
 
-	test(crypto_pbkdf2_6_16, error(domain_error(non_negative_integer, -1))) :-
+	test(crypto_pbkdf2_6_16, error(domain_error(positive_integer, -1))) :-
 		pbkdf2(md5, [1,2,3], [4,5,6], 1, -1, _DerivedKey).
+
+	test(crypto_pbkdf2_6_16a, error(domain_error(positive_integer, 0))) :-
+		pbkdf2(md5, [1,2,3], [4,5,6], 1, 0, _DerivedKey).
 
 	test(crypto_pbkdf2_6_17, deterministic(DerivedKey == ExpectedBytes)) :-
 		hex_bytes('fd510b4e8ac8db80209ed7da24e932d2', ExpectedBytes),
@@ -347,13 +372,17 @@
 			hex_bytes('ea6c014dc72d6f8ccd1ed92ace1d41f0d8de8957', ExpectedBytes),
 			pbkdf2(sha1, [112,97,115,115,119,111,114,100], [115,97,108,116], 2, 20, DerivedKey).
 
+		test(crypto_pbkdf2_6_20, deterministic(DerivedKey == ExpectedBytes)) :-
+			hex_bytes('4b007901b765489abead49d926f721d065a429c1', ExpectedBytes),
+			pbkdf2(sha1, [112,97,115,115,119,111,114,100], [115,97,108,116], 4096, 20, DerivedKey).
+
 		test(crypto_pbkdf2_6_21, deterministic(DerivedKey == ExpectedBytes)) :-
-			hex_bytes('8f2c3482e40bdbe537935153ef1692de0c7f4740bef78dd940', ExpectedBytes),
-			pbkdf2(sha1, [112,97,115,115,119,111,114,100,80,65,83,83,87,79,82,68,112,97,115,115,119,111,114,100], [115,97,108,116,83,65,76,84,115,97,108,116,83,65,76,84,115,97,108,116,83,65,76,84,115,97,108,116,83,65,76,84,115,97,108,116], 2, 25, DerivedKey).
+			hex_bytes('3d2eec4fe41c849b80c8d83662c0e44a8b291a964cf2f07038', ExpectedBytes),
+			pbkdf2(sha1, [112,97,115,115,119,111,114,100,80,65,83,83,87,79,82,68,112,97,115,115,119,111,114,100], [115,97,108,116,83,65,76,84,115,97,108,116,83,65,76,84,115,97,108,116,83,65,76,84,115,97,108,116,83,65,76,84,115,97,108,116], 4096, 25, DerivedKey).
 
 		test(crypto_pbkdf2_6_22, deterministic(DerivedKey == ExpectedBytes)) :-
-			hex_bytes('7fb49ccc3b30c609d1d1bc86ac5acf87', ExpectedBytes),
-			pbkdf2(sha1, [112,97,115,115,0,119,111,114,100], [115,97,0,108,116], 1, 16, DerivedKey).
+			hex_bytes('56fa6aa75548099dcc37d7f03425e0c3', ExpectedBytes),
+			pbkdf2(sha1, [112,97,115,115,0,119,111,114,100], [115,97,0,108,116], 4096, 16, DerivedKey).
 
 		test(crypto_pbkdf2_6_23, error(domain_error(pbkdf2_output_length, 68719476721))) :-
 			pbkdf2(md5, [1,2,3], [4,5,6], 1, 68719476721, _DerivedKey).
@@ -455,8 +484,11 @@
 	test(crypto_password_hash_4_20, error(type_error(integer, ten))) :-
 		password_hash(md5, [112,97,115,115], _PasswordHash, [length(ten)]).
 
-	test(crypto_password_hash_4_21, error(domain_error(non_negative_integer, -1))) :-
+	test(crypto_password_hash_4_21, error(domain_error(positive_integer, -1))) :-
 		password_hash(md5, [112,97,115,115], _PasswordHash, [length(-1)]).
+
+	test(crypto_password_hash_4_22, error(domain_error(positive_integer, 0))) :-
+		password_hash(md5, [112,97,115,115], _PasswordHash, [length(0)]).
 
 	test(crypto_password_hash_4_01, deterministic(PasswordHash == pbkdf2(md5, 2, [1,2,3,4], ExpectedBytes))) :-
 		hex_bytes('fd510b4e8ac8db80209ed7da24e932d2', ExpectedBytes),

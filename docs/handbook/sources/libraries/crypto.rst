@@ -102,8 +102,8 @@ The ``secure_compare/2`` predicate provides constant-time comparison for
 byte sequences represented either as byte lists or atoms.
 
 The ``hkdf/5`` and ``pbkdf2/6`` predicates provide portable key
-derivation implemented on top of the existing ``hashes`` and ``hmac``
-libraries.
+derivation conforming to RFC 5869 and RFC 8018, respectively,
+implemented on top of the existing ``hashes`` and ``hmac`` libraries.
 
 The ``apr1/3`` predicate computes Apache APR1 encoded checksums for
 password and salt byte sequences using a portable MD5-based
