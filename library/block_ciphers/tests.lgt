@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-03,
+		date is 2026-08-04,
 		comment is 'Unit tests for the "block_ciphers" library.'
 	]).
 
@@ -274,6 +274,27 @@
 		Plaintext = [1,2,3,4,5],
 		ctr::crypt(aes128, Key, Counter, Plaintext, Ciphertext),
 		ctr::crypt(aes128, Key, Counter, Ciphertext, Decrypted).
+
+	test(ctr_empty_final_counter, deterministic(FinalCounter == InitialCounter)) :-
+		zero_key(Key),
+		zero_key(InitialCounter),
+		ctr::crypt(aes128, Key, InitialCounter, [], FinalCounter, []).
+
+	test(ctr_partial_block_final_counter, deterministic(FinalCounter == [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1])) :-
+		zero_key(Key),
+		zero_key(InitialCounter),
+		ctr::crypt(aes128, Key, InitialCounter, [1,2,3,4,5], FinalCounter, _).
+
+	test(ctr_two_blocks_final_counter, deterministic(FinalCounter == [0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1])) :-
+		zero_key(Key),
+		InitialCounter = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,255],
+		zero_blocks(Input),
+		ctr::crypt(aes128, Key, InitialCounter, Input, FinalCounter, _).
+
+	test(ctr_final_counter_wrap, deterministic(FinalCounter == [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0])) :-
+		zero_key(Key),
+		InitialCounter = [255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255],
+		ctr::crypt(aes128, Key, InitialCounter, [0], FinalCounter, _).
 
 	test(ctr_whole_counter_wrap, deterministic(Output == Expected)) :-
 		zero_key(Key),

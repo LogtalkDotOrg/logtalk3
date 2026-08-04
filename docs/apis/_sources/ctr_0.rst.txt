@@ -15,7 +15,7 @@ Generic Counter mode encryption and decryption using a whole-block big-endian co
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-03
+| **Date:** 2026-08-04
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -43,7 +43,7 @@ Public predicates
 ``crypt/5``
 ^^^^^^^^^^^
 
-Encrypts or decrypts bytes using an explicit initial whole-block big-endian counter.
+Encrypts or decrypts bytes using an explicit initial whole-block big-endian counter. The counter is incremented internally while processing the input but is not returned. The client is responsible for managing initial counters across calls and preventing reuse of a counter sequence with the same key.
 
 | **Compilation flags:**
 |    ``static``
@@ -52,6 +52,25 @@ Encrypts or decrypts bytes using an explicit initial whole-block big-endian coun
 |    ``crypt(Cipher,Key,InitialCounter,Input,Output)``
 | **Mode and number of proofs:**
 |    ``crypt(+object_identifier,+list(byte),+list(byte),+list(byte),--list(byte))`` - ``one_or_error``
+
+
+------------
+
+.. index:: crypt/6
+.. _ctr/0::crypt/6:
+
+``crypt/6``
+^^^^^^^^^^^
+
+Encrypts or decrypts bytes using an explicit initial whole-block big-endian counter and returns the next unused counter. The final counter equals the initial counter for empty input and is otherwise incremented once per processed input block, modulo the counter width.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``crypt(Cipher,Key,InitialCounter,Input,FinalCounter,Output)``
+| **Mode and number of proofs:**
+|    ``crypt(+object_identifier,+list(byte),+list(byte),+list(byte),--list(byte),--list(byte))`` - ``one_or_error``
 
 
 ------------

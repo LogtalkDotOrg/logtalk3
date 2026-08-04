@@ -24,32 +24,42 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-03,
+		date is 2026-08-04,
 		comment is 'Generic Counter mode encryption and decryption using a whole-block big-endian counter.'
 	]).
 
 	:- public(crypt/5).
 	:- mode(crypt(+object_identifier, +list(byte), +list(byte), +list(byte), --list(byte)), one_or_error).
 	:- info(crypt/5, [
-		comment is 'Encrypts or decrypts bytes using an explicit initial whole-block big-endian counter.',
+		comment is 'Encrypts or decrypts bytes using an explicit initial whole-block big-endian counter. The counter is incremented internally while processing the input but is not returned. The client is responsible for managing initial counters across calls and preventing reuse of a counter sequence with the same key.',
 		argnames is ['Cipher', 'Key', 'InitialCounter', 'Input', 'Output']
 	]).
 
+	:- public(crypt/6).
+	:- mode(crypt(+object_identifier, +list(byte), +list(byte), +list(byte), --list(byte), --list(byte)), one_or_error).
+	:- info(crypt/6, [
+		comment is 'Encrypts or decrypts bytes using an explicit initial whole-block big-endian counter and returns the next unused counter. The final counter equals the initial counter for empty input and is otherwise incremented once per processed input block, modulo the counter width.',
+		argnames is ['Cipher', 'Key', 'InitialCounter', 'Input', 'FinalCounter', 'Output']
+	]).
+
 	crypt(Cipher, Key, InitialCounter, Input, Output) :-
+		crypt(Cipher, Key, InitialCounter, Input, _, Output).
+
+	crypt(Cipher, Key, InitialCounter, Input, FinalCounter, Output) :-
 		^^prepare_cipher(Cipher, Key, BlockSize, PreparedKey),
 		^^check_block(BlockSize, InitialCounter),
 		^^check_bytes(Input),
-		crypt_bytes(Input, BlockSize, Cipher, PreparedKey, InitialCounter, Output).
+		crypt_bytes(Input, BlockSize, Cipher, PreparedKey, InitialCounter, FinalCounter, Output).
 
-	crypt_bytes([], _, _, _, _, []) :-
+	crypt_bytes([], _, _, _, Counter, Counter, []) :-
 		!.
-	crypt_bytes(Input, BlockSize, Cipher, PreparedKey, Counter, Output) :-
+	crypt_bytes(Input, BlockSize, Cipher, PreparedKey, Counter, FinalCounter, Output) :-
 		Input = [_| _],
 		take_up_to(BlockSize, Input, Chunk, RestInput),
 		Cipher::encrypt_prepared_block(PreparedKey, Counter, Keystream),
 		xor_prefix(Chunk, Keystream, Output, RestOutput),
 		increment_counter(Counter, NextCounter),
-		crypt_bytes(RestInput, BlockSize, Cipher, PreparedKey, NextCounter, RestOutput).
+		crypt_bytes(RestInput, BlockSize, Cipher, PreparedKey, NextCounter, FinalCounter, RestOutput).
 
 	take_up_to(0, Bytes, [], Bytes) :-
 		!.
