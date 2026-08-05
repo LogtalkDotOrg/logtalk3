@@ -132,6 +132,9 @@ shared portable standard normal distribution numeric helpers.
 * ADDED: NYSIIS phonetic encoding and matching support to the
 `string_distance` library.
 
+* IMPROVED: Performance of the `list::nth0/3` and `list::nth1/3` library
+predicates. Thanks to Andrew Davison for the performance bug report.
+
 * IMPROVED: Portability of the `sockets` library with versions of SWI-Prolog
 older than 9.1.5.
 

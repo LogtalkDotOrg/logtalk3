@@ -24,9 +24,9 @@
 	extends(compound)).
 
 	:- info([
-		version is 4:4:0,
+		version is 4:5:0,
 		author is 'Paulo Moura',
-		date is 2026-02-03,
+		date is 2026-08-05,
 		comment is 'List predicates.',
 		see_also is [list(_), numberlist, varlist, difflist],
 		remarks is [
@@ -228,14 +228,36 @@
 	nextto(X, Y, [_| Tail]) :-
 		nextto(X, Y, Tail).
 
-	nth0(Nth, List, Element) :-
-		nth(Element, List, 0, Nth, _).
+	nth0(Nth, [Head| Tail], Element) :-
+		(	integer(Nth) ->
+			nth0_find(Nth, Head, Tail, Element)
+		;	var(Nth),
+			nth_enumerate(Tail, 0, Nth, Head, Element)
+		).
 
 	nth0(Nth, List, Element, Rest) :-
 		nth(Element, List, 0, Nth, Rest).
 
-	nth1(Nth, List, Element) :-
-		nth(Element, List, 1, Nth, _).
+	nth1(Nth, [Head| Tail], Element) :-
+		(	integer(Nth) ->
+			N is Nth - 1,
+			nth0_find(N, Head, Tail, Element)
+		;	var(Nth),
+			nth_enumerate(Tail, 1, Nth, Head, Element)
+		).
+
+	nth0_find(0, Head, _, Element) :-
+		!,
+		Head = Element.
+	nth0_find(N, _, [Head| Tail], Element) :-
+		N > 0,
+		M is N - 1,
+		nth0_find(M, Head, Tail, Element).
+
+	nth_enumerate(_, Nth, Nth, Element, Element).
+	nth_enumerate([Head| Tail], N, Nth, _, Element) :-
+		M is N + 1,
+		nth_enumerate(Tail, M, Nth, Head, Element).
 
 	nth1(Nth, List, Element, Rest) :-
 		nth(Element, List, 1, Nth, Rest).
