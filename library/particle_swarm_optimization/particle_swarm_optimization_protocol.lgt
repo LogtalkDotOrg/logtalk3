@@ -25,7 +25,7 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-08-05,
-		comment is 'Protocol for continuous bounded particle swarm optimization problem definitions. A problem object must define the three required predicates and may optionally define predicates for stopping and progress reporting.',
+		comment is 'Protocol for continuous bounded particle swarm optimization problem definitions. A problem object must define the three required predicates and may optionally define predicates for initial velocities, stopping, and progress reporting.',
 		see_also is [particle_swarm_optimization(_)]
 	]).
 
@@ -43,10 +43,17 @@
 		argnames is ['Bounds']
 	]).
 
+	:- public(initial_velocities/1).
+	:- mode(initial_velocities(-list(list(number))), zero_or_one).
+	:- info(initial_velocities/1, [
+		comment is 'Returns one initial velocity vector per initial position. Each vector must have the same dimensions as the position bounds, with every component between plus or minus the corresponding position range. Optional. When not defined or when it fails, velocities are initialized randomly.',
+		argnames is ['Velocities']
+	]).
+
 	:- public(fitness/2).
 	:- mode(fitness(+list(number), -number), one).
 	:- info(fitness/2, [
-		comment is 'Computes the fitness of a particle position. The algorithm minimizes this value.',
+		comment is 'Computes the fitness of a particle position. The optimization direction is selected using the optimizer ``objective/1`` option.',
 		argnames is ['Position', 'Fitness']
 	]).
 

@@ -273,10 +273,14 @@
 <li class="toctree-l3"><a class="reference internal" href="#defining-a-problem">Defining a problem</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#run-statistics">Run statistics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#defining-a-problem-1">Defining a problem</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#running-the-algorithm">Running the algorithm</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#reproducible-runs-with-statistics">Reproducible runs with statistics</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maximization">Maximization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#stopping-after-stagnation">Stopping after stagnation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#stopping-at-a-target-fitness">Stopping at a target fitness</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#using-a-custom-random-number-generator">Using a custom random number generator</a></li>
 </ul>
 </li>
@@ -406,7 +410,7 @@
 <p>Particle swarm optimization (PSO) is a population-based meta-heuristic
 for approximating the global optimum of a function. This library
 implements continuous, bounded, synchronous global-best PSO for
-minimization problems.</p>
+minimization and maximization problems.</p>
 <p>The library provides the parametric object
 <code class="docutils literal notranslate"><span class="pre">particle_swarm_optimization(Problem,</span> <span class="pre">RandomAlgorithm)</span></code>, where
 <code class="docutils literal notranslate"><span class="pre">Problem</span></code> is an object implementing the
@@ -447,10 +451,16 @@ as:</p>
 social coefficients, and <code class="docutils literal notranslate"><span class="pre">R1</span></code> and <code class="docutils literal notranslate"><span class="pre">R2</span></code> are independent random values
 in <code class="docutils literal notranslate"><span class="pre">[0,1)</span></code>. Updates are synchronous: all particles in an iteration use
 the global best known at the start of that iteration.</p>
-<p>Initial velocities are sampled uniformly from plus or minus each
-dimension range. Velocities remain limited to this range. When a
-position crosses a bound, it is clamped to the bound and the
-corresponding velocity component is set to zero.</p>
+<p>By default, initial velocities are sampled uniformly from plus or minus
+each dimension range. A problem may instead supply initial velocities.
+Velocities remain limited to this range. When a position crosses a
+bound, it is clamped to the bound and the corresponding velocity
+component is set to zero.</p>
+<p>Optionally, the run can stop after a configured number of consecutive
+iterations without a strict global-best improvement. Improvement follows
+the selected objective direction; equal fitness values count as
+non-improvements. Stagnation stopping returns the best result found
+without restarting or reinitializing the swarm.</p>
 </section>
 <section id="defining-a-problem">
 <h2>Defining a problem<a class="headerlink" href="#defining-a-problem" title="Link to this heading"></a></h2>
@@ -464,10 +474,16 @@ same length.</p></li>
 pair per dimension, with <code class="docutils literal notranslate"><span class="pre">Lower</span> <span class="pre">=&lt;</span> <span class="pre">Upper</span></code>. Initial positions must be
 within bounds.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">fitness(+Position,</span> <span class="pre">-Fitness)</span></code> — computes a numeric fitness value.
-The algorithm minimizes this value.</p></li>
+The optimizer minimizes this value by default; use
+<code class="docutils literal notranslate"><span class="pre">objective(maximize)</span></code> to maximize it instead.</p></li>
 </ul>
 <p>Optionally, a problem object may define:</p>
 <ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">initial_velocities(-Velocities)</span></code> — returns exactly one numeric
+velocity vector per initial position, with the same dimensions. Every
+component must be between plus or minus the corresponding position
+range, inclusively. When this predicate is not defined or fails,
+velocities are initialized randomly.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">stop_condition(+Iteration,</span> <span class="pre">+BestPosition,</span> <span class="pre">+BestFitness)</span></code> — succeeds
 when the search should terminate early.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">progress(+Iteration,</span> <span class="pre">+BestPosition,</span> <span class="pre">+BestFitness,</span> <span class="pre">+MeanFitness,</span> <span class="pre">+Diversity)</span></code>
@@ -480,8 +496,17 @@ final report is produced when progress reporting is enabled.</p></li>
 <h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
 <p>Options for the <code class="docutils literal notranslate"><span class="pre">run/3-4</span></code> predicates:</p>
 <ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">objective(Objective)</span></code> — optimization direction, either <code class="docutils literal notranslate"><span class="pre">minimize</span></code>
+or <code class="docutils literal notranslate"><span class="pre">maximize</span></code> (default: <code class="docutils literal notranslate"><span class="pre">minimize</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">target_fitness(Fitness)</span></code> — numeric target that stops the run when
+the best fitness reaches or passes it in the selected objective
+direction. Use <code class="docutils literal notranslate"><span class="pre">none</span></code> to disable target stopping (default:
+<code class="docutils literal notranslate"><span class="pre">none</span></code>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">max_iterations(N)</span></code> — maximum number of swarm iterations (default:
 <code class="docutils literal notranslate"><span class="pre">1000</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">stagnation_iterations(N)</span></code> — number of consecutive iterations
+without a strict global-best improvement before stopping. Set to <code class="docutils literal notranslate"><span class="pre">0</span></code>
+to disable stagnation stopping (default: <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">inertia_weight(W)</span></code> — non-negative float velocity inertia weight
 (default: <code class="docutils literal notranslate"><span class="pre">0.7298</span></code>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">cognitive_coefficient(C)</span></code> — non-negative float personal-best
@@ -505,6 +530,23 @@ best.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">final_mean_fitness(M)</span></code> — mean fitness of the final swarm positions.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">final_diversity(D)</span></code> — diversity of the final swarm positions.</p></li>
 </ul>
+<p>Fitness values are reported unchanged. Thus, <code class="docutils literal notranslate"><span class="pre">BestFitness</span></code>,
+<code class="docutils literal notranslate"><span class="pre">final_mean_fitness(M)</span></code>, and the fitness values passed to
+<code class="docutils literal notranslate"><span class="pre">stop_condition/3</span></code> and <code class="docutils literal notranslate"><span class="pre">progress/5</span></code> are always the values returned
+by the problem <code class="docutils literal notranslate"><span class="pre">fitness/2</span></code> predicate. The <code class="docutils literal notranslate"><span class="pre">objective/1</span></code> option only
+controls which values are considered better and the meaning of an
+improvement.</p>
+</section>
+<section id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Continuous numeric vectors only.</p></li>
+<li><p>Synchronous global-best topology only.</p></li>
+<li><p>No restarts, discrete particles, or custom topology.</p></li>
+<li><p>Problems supply positions, bounds, and optionally initial velocities.
+The optimizer owns subsequent velocity updates and cognitive/social
+randomness.</p></li>
+</ul>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
@@ -521,6 +563,13 @@ best.</p></li>
     ]).
 
     position_bounds([(<span class="o">-</span><span class="m">5.0</span>)<span class="o">-</span><span class="m">5.0</span>, (<span class="o">-</span><span class="m">5.0</span>)<span class="o">-</span><span class="m">5.0</span>]).
+
+    initial_velocities([
+        [ <span class="m">0.0</span>,  <span class="m">0.0</span>],
+        [ <span class="m">0.0</span>,  <span class="m">0.0</span>],
+        [<span class="o">-</span><span class="m">0.1</span>,  <span class="m">0.1</span>],
+        [<span class="o">-</span><span class="m">0.2</span>,  <span class="m">0.2</span>]
+    ]).
 
     fitness([<span class="nv">X</span>, <span class="nv">Y</span>], <span class="nv">Fitness</span>) <span class="o">:-</span>
         <span class="nv">Fitness</span> <span class="k">is</span> <span class="nv">X</span><span class="o">*</span><span class="nv">X</span> <span class="o">+</span> <span class="nv">Y</span><span class="o">*</span><span class="nv">Y</span>.
@@ -541,6 +590,33 @@ best.</p></li>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> particle_swarm_optimization(sphere)<span class="o">::</span>run(
          <span class="nv">Position</span>, <span class="nv">Fitness</span>, <span class="nv">Statistics</span>,
          [seed(<span class="m">42</span>), max_iterations(<span class="m">500</span>)]
+     ).
+</pre></div>
+</div>
+</section>
+<section id="maximization">
+<h3>Maximization<a class="headerlink" href="#maximization" title="Link to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> particle_swarm_optimization(<span class="nv">Problem</span>)<span class="o">::</span>run(
+         <span class="nv">Position</span>, <span class="nv">Fitness</span>,
+         [objective(maximize), seed(<span class="m">42</span>)]
+     ).
+</pre></div>
+</div>
+</section>
+<section id="stopping-after-stagnation">
+<h3>Stopping after stagnation<a class="headerlink" href="#stopping-after-stagnation" title="Link to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> particle_swarm_optimization(<span class="nv">Problem</span>)<span class="o">::</span>run(
+         <span class="nv">Position</span>, <span class="nv">Fitness</span>, <span class="nv">Statistics</span>,
+         [stagnation_iterations(<span class="m">25</span>), seed(<span class="m">42</span>)]
+     ).
+</pre></div>
+</div>
+</section>
+<section id="stopping-at-a-target-fitness">
+<h3>Stopping at a target fitness<a class="headerlink" href="#stopping-at-a-target-fitness" title="Link to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> particle_swarm_optimization(<span class="nv">Problem</span>)<span class="o">::</span>run(
+         <span class="nv">Position</span>, <span class="nv">Fitness</span>, <span class="nv">Statistics</span>,
+         [target_fitness(<span class="m">0.001</span>), seed(<span class="m">42</span>)]
      ).
 </pre></div>
 </div>

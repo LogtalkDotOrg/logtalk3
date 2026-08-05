@@ -19,31 +19,18 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(basic_types(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load(random(loader)),
-	logtalk_load([
-		particle_swarm_optimization_protocol,
-		particle_swarm_optimization
-	], [
-		debug(on),
-		source_data(on)
-	]),
-	logtalk_load([
-		'test_files/sphere',
-		'test_files/negative_sphere',
-		'test_files/constant_fitness',
-		'test_files/supplied_velocities',
-		'test_files/sphere_stop',
-		'test_files/sphere_progress',
-		'test_files/boundary_progress',
-		'test_files/malformed_problems'
-	], [
-		optimize(on)
-	]),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- object(constant_fitness,
+	implements(particle_swarm_optimization_protocol)).
+
+	initial_positions([
+		[0.1],
+		[0.3],
+		[0.7],
+		[0.9]
+	]).
+
+	position_bounds([0.0-1.0]).
+
+	fitness(_Position, 1.0).
+
+:- end_object.

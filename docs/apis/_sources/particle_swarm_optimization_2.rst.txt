@@ -12,7 +12,7 @@
 * ``RandomAlgorithm`` - Random number generator algorithm for the ``fast_random`` library.
 
 
-Continuous bounded global-best particle swarm optimization algorithm. Parameterized by a problem object implementing the ``particle_swarm_optimization_protocol`` protocol and by a random number generator algorithm for the ``fast_random`` library. The algorithm minimizes the fitness function defined by the problem.
+Continuous bounded global-best particle swarm optimization algorithm. Parameterized by a problem object implementing the ``particle_swarm_optimization_protocol`` protocol and by a random number generator algorithm for the ``fast_random`` library. The algorithm minimizes or maximizes the fitness function defined by the problem.
 
 | **Availability:** 
 |    ``logtalk_load(particle_swarm_optimization(loader))``
@@ -34,6 +34,10 @@ Continuous bounded global-best particle swarm optimization algorithm. Parameteri
 | **Remarks:**
 
    - Algorithm: Uses synchronous global-best particle swarm optimization. Every particle update in an iteration uses the global best from the start of that iteration.
+   - Optimization objective: The ``objective(minimize|maximize)`` option selects the fitness ordering. Fitness values are otherwise used unchanged.
+   - Target fitness: The ``target_fitness(Fitness)`` option stops the run when the best fitness reaches or passes the target in the selected objective direction.
+   - Stagnation stopping: The ``stagnation_iterations(N)`` option stops the run after ``N`` consecutive iterations without a strict global-best improvement; zero disables this condition.
+   - Initial velocities: If the problem defines ``initial_velocities/1``, its velocities are validated and used. Otherwise, velocities are sampled randomly.
    - Boundary handling: Velocities are limited to plus or minus the range of each dimension. A position crossing a bound is clamped to that bound and its velocity component is set to zero.
    - Progress reporting: If the problem object defines ``progress/5``, it is called periodically and once when the loop terminates.
    - Seed control: The ``seed(S)`` option initializes the random number generator for reproducible runs.
@@ -85,7 +89,10 @@ Runs the particle swarm optimization algorithm using the given options and retur
 
 | **Remarks:**
 
+    - ``objective(Objective)`` option: Optimization objective, either ``minimize`` or ``maximize`` (default: ``minimize``).
+    - ``target_fitness(Fitness)`` option: Numeric target that stops the run when reached or passed in the selected objective direction (default: ``none``).
     - ``max_iterations(N)`` option: Maximum number of swarm iterations (default: ``1000``).
+    - ``stagnation_iterations(N)`` option: Number of consecutive iterations without a strict global-best improvement before stopping; zero disables this condition (default: ``0``).
     - ``inertia_weight(W)`` option: Velocity inertia weight (default: ``0.7298``).
     - ``cognitive_coefficient(C)`` option: Personal-best acceleration coefficient (default: ``1.49618``).
     - ``social_coefficient(C)`` option: Global-best acceleration coefficient (default: ``1.49618``).
@@ -113,7 +120,7 @@ Runs the particle swarm optimization algorithm using the given options and retur
 
 | **Remarks:**
 
-    - Statistics list: A list containing ``iterations(N)``, ``evaluations(E)``, ``improvements(I)``, ``final_mean_fitness(M)``, and ``final_diversity(D)``.
+    - Statistics list: A list containing ``iterations(N)``, ``evaluations(E)``, ``improvements(I)``, ``final_mean_fitness(M)``, and ``final_diversity(D)``. Improvements are measured in the selected objective direction.
 
 
 ------------

@@ -8,7 +8,7 @@
 ``particle_swarm_optimization_protocol``
 ========================================
 
-Protocol for continuous bounded particle swarm optimization problem definitions. A problem object must define the three required predicates and may optionally define predicates for stopping and progress reporting.
+Protocol for continuous bounded particle swarm optimization problem definitions. A problem object must define the three required predicates and may optionally define predicates for initial velocities, stopping, and progress reporting.
 
 | **Availability:** 
 |    ``logtalk_load(particle_swarm_optimization(loader))``
@@ -76,13 +76,32 @@ Returns one ``Lower-Upper`` numeric bound pair per position dimension, with ``Lo
 
 ------------
 
+.. index:: initial_velocities/1
+.. _particle_swarm_optimization_protocol/0::initial_velocities/1:
+
+``initial_velocities/1``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns one initial velocity vector per initial position. Each vector must have the same dimensions as the position bounds, with every component between plus or minus the corresponding position range. Optional. When not defined or when it fails, velocities are initialized randomly.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``initial_velocities(Velocities)``
+| **Mode and number of proofs:**
+|    ``initial_velocities(-list(list(number)))`` - ``zero_or_one``
+
+
+------------
+
 .. index:: fitness/2
 .. _particle_swarm_optimization_protocol/0::fitness/2:
 
 ``fitness/2``
 ^^^^^^^^^^^^^
 
-Computes the fitness of a particle position. The algorithm minimizes this value.
+Computes the fitness of a particle position. The optimization direction is selected using the optimizer ``objective/1`` option.
 
 | **Compilation flags:**
 |    ``static``

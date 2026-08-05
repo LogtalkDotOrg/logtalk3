@@ -26,13 +26,17 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-08-05,
-		comment is 'Continuous bounded global-best particle swarm optimization algorithm. Parameterized by a problem object implementing the ``particle_swarm_optimization_protocol`` protocol and by a random number generator algorithm for the ``fast_random`` library. The algorithm minimizes the fitness function defined by the problem.',
+		comment is 'Continuous bounded global-best particle swarm optimization algorithm. Parameterized by a problem object implementing the ``particle_swarm_optimization_protocol`` protocol and by a random number generator algorithm for the ``fast_random`` library. The algorithm minimizes or maximizes the fitness function defined by the problem.',
 		parameters is [
 			'Problem' - 'Problem object implementing ``particle_swarm_optimization_protocol``.',
 			'RandomAlgorithm' - 'Random number generator algorithm for the ``fast_random`` library.'
 		],
 		remarks is [
 			'Algorithm' - 'Uses synchronous global-best particle swarm optimization. Every particle update in an iteration uses the global best from the start of that iteration.',
+			'Optimization objective' - 'The ``objective(minimize|maximize)`` option selects the fitness ordering. Fitness values are otherwise used unchanged.',
+			'Target fitness' - 'The ``target_fitness(Fitness)`` option stops the run when the best fitness reaches or passes the target in the selected objective direction.',
+			'Stagnation stopping' - 'The ``stagnation_iterations(N)`` option stops the run after ``N`` consecutive iterations without a strict global-best improvement; zero disables this condition.',
+			'Initial velocities' - 'If the problem defines ``initial_velocities/1``, its velocities are validated and used. Otherwise, velocities are sampled randomly.',
 			'Boundary handling' - 'Velocities are limited to plus or minus the range of each dimension. A position crossing a bound is clamped to that bound and its velocity component is set to zero.',
 			'Progress reporting' - 'If the problem object defines ``progress/5``, it is called periodically and once when the loop terminates.',
 			'Seed control' - 'The ``seed(S)`` option initializes the random number generator for reproducible runs.'
@@ -53,7 +57,10 @@
 		comment is 'Runs the particle swarm optimization algorithm using the given options and returns the best position and fitness found.',
 		argnames is ['BestPosition', 'BestFitness', 'Options'],
 		remarks is [
+			'``objective(Objective)`` option' - 'Optimization objective, either ``minimize`` or ``maximize`` (default: ``minimize``).',
+			'``target_fitness(Fitness)`` option' - 'Numeric target that stops the run when reached or passed in the selected objective direction (default: ``none``).',
 			'``max_iterations(N)`` option' - 'Maximum number of swarm iterations (default: ``1000``).',
+			'``stagnation_iterations(N)`` option' - 'Number of consecutive iterations without a strict global-best improvement before stopping; zero disables this condition (default: ``0``).',
 			'``inertia_weight(W)`` option' - 'Velocity inertia weight (default: ``0.7298``).',
 			'``cognitive_coefficient(C)`` option' - 'Personal-best acceleration coefficient (default: ``1.49618``).',
 			'``social_coefficient(C)`` option' - 'Global-best acceleration coefficient (default: ``1.49618``).',
@@ -68,12 +75,12 @@
 		comment is 'Runs the particle swarm optimization algorithm using the given options and returns the best position, best fitness, and run statistics.',
 		argnames is ['BestPosition', 'BestFitness', 'Statistics', 'Options'],
 		remarks is [
-			'Statistics list' - 'A list containing ``iterations(N)``, ``evaluations(E)``, ``improvements(I)``, ``final_mean_fitness(M)``, and ``final_diversity(D)``.'
+			'Statistics list' - 'A list containing ``iterations(N)``, ``evaluations(E)``, ``improvements(I)``, ``final_mean_fitness(M)``, and ``final_diversity(D)``. Improvements are measured in the selected objective direction.'
 		]
 	]).
 
 	:- uses(_Problem_, [
-		initial_positions/1, position_bounds/1, fitness/2, stop_condition/3, progress/5
+		initial_positions/1, position_bounds/1, initial_velocities/1, fitness/2, stop_condition/3, progress/5
 	]).
 
 	:- uses(fast_random(_RandomAlgorithm_), [
@@ -100,8 +107,12 @@
 		initial_positions(Positions),
 		position_bounds(Bounds),
 		validate_problem(Positions, Bounds),
-		initialize_swarm(Positions, Bounds, Swarm0, InitialBestPosition, InitialBestFitness, SwarmSize),
+		swarm_initial_velocities(Positions, Bounds, Velocities),
+		^^option(objective(Objective), Options),
+		^^option(target_fitness(TargetFitness), Options),
+		initialize_swarm(Positions, Velocities, Objective, Swarm0, InitialBestPosition, InitialBestFitness, SwarmSize),
 		^^option(max_iterations(MaxIterations), Options),
+		^^option(stagnation_iterations(StagnationIterations), Options),
 		^^option(inertia_weight(InertiaWeight), Options),
 		^^option(cognitive_coefficient(CognitiveCoefficient), Options),
 		^^option(social_coefficient(SocialCoefficient), Options),
@@ -111,9 +122,9 @@
 		;	UpdateInterval is 0
 		),
 		loop(
-			0, MaxIterations, UpdateInterval, Bounds,
+			0, MaxIterations, UpdateInterval, Bounds, Objective, TargetFitness,
 			InertiaWeight, CognitiveCoefficient, SocialCoefficient,
-			Swarm0, InitialBestPosition, InitialBestFitness, 0,
+			StagnationIterations, 0, Swarm0, InitialBestPosition, InitialBestFitness, 0,
 			FinalSwarm, BestPosition, BestFitness, Iterations, Improvements
 		),
 		swarm_metrics(FinalSwarm, MeanFitness, Diversity),
@@ -129,11 +140,11 @@
 	validate_problem(Positions, Bounds) :-
 		( 	valid_bounds(Bounds) ->
 			true
-		;	throw(error(domain_error(position_bounds, Bounds), run/4))
+		;	domain_error(position_bounds, Bounds)
 		),
 		( 	valid_positions(Positions, Bounds) ->
 			true
-		;	throw(error(domain_error(initial_positions, Positions), run/4))
+		;	domain_error(initial_positions, Positions)
 		).
 
 	valid_bounds([Lower-Upper| Bounds]) :-
@@ -165,30 +176,60 @@
 		Value =< Upper,
 		valid_position(Position, Bounds).
 
-	initialize_swarm([Position| Positions], Bounds, [Particle| Particles], BestPosition, BestFitness, SwarmSize) :-
-		initialize_particle(Position, Bounds, Particle),
-		Particle = particle(_, _, Fitness, _, _),
-		initialize_remaining_swarm(Positions, Bounds, Particles, Position, Fitness, BestPosition, BestFitness, 1, SwarmSize).
+	swarm_initial_velocities(Positions, Bounds, Velocities) :-
+		( 	initial_velocities(SuppliedVelocities) ->
+			( 	valid_velocities(SuppliedVelocities, Positions, Bounds) ->
+				Velocities = SuppliedVelocities
+			;	domain_error(initial_velocities, SuppliedVelocities)
+			)
+		;	random_initial_velocities(Positions, Bounds, Velocities)
+		).
 
-	initialize_remaining_swarm([], _Bounds, [], BestPosition, BestFitness, BestPosition, BestFitness, SwarmSize, SwarmSize).
-	initialize_remaining_swarm([Position| Positions], Bounds, [Particle| Particles], BestPosition0, BestFitness0, BestPosition, BestFitness, SwarmSize0, SwarmSize) :-
-		initialize_particle(Position, Bounds, Particle),
+	valid_velocities(Velocities, Positions, Bounds) :-
+		ground(Velocities),
+		valid_velocities_list(Velocities, Positions, Bounds).
+
+	valid_velocities_list([], [], _Bounds).
+	valid_velocities_list([Velocity| Velocities], [_Position| Positions], Bounds) :-
+		valid_velocity(Velocity, Bounds),
+		valid_velocities_list(Velocities, Positions, Bounds).
+
+	valid_velocity([], []).
+	valid_velocity([Value| Velocity], [Lower-Upper| Bounds]) :-
+		number(Value),
+		Range is Upper - Lower,
+		Value >= -Range,
+		Value =< Range,
+		valid_velocity(Velocity, Bounds).
+
+	random_initial_velocities([], _Bounds, []).
+	random_initial_velocities([_Position| Positions], Bounds, [Velocity| Velocities]) :-
+		initial_velocity(Bounds, Velocity),
+		random_initial_velocities(Positions, Bounds, Velocities).
+
+	initialize_swarm([Position| Positions], [Velocity| Velocities], Objective, [Particle| Particles], BestPosition, BestFitness, SwarmSize) :-
+		initialize_particle(Position, Velocity, Particle),
 		Particle = particle(_, _, Fitness, _, _),
-		( 	Fitness < BestFitness0 ->
+		initialize_remaining_swarm(Positions, Velocities, Objective, Particles, Position, Fitness, BestPosition, BestFitness, 1, SwarmSize).
+
+	initialize_remaining_swarm([], [], _Objective, [], BestPosition, BestFitness, BestPosition, BestFitness, SwarmSize, SwarmSize).
+	initialize_remaining_swarm([Position| Positions], [Velocity| Velocities], Objective, [Particle| Particles], BestPosition0, BestFitness0, BestPosition, BestFitness, SwarmSize0, SwarmSize) :-
+		initialize_particle(Position, Velocity, Particle),
+		Particle = particle(_, _, Fitness, _, _),
+		( 	better_fitness(Objective, Fitness, BestFitness0) ->
 			BestPosition1 = Position,
 			BestFitness1 = Fitness
 		;	BestPosition1 = BestPosition0,
 			BestFitness1 = BestFitness0
 		),
 		SwarmSize1 is SwarmSize0 + 1,
-		initialize_remaining_swarm(Positions, Bounds, Particles, BestPosition1, BestFitness1, BestPosition, BestFitness, SwarmSize1, SwarmSize).
+		initialize_remaining_swarm(Positions, Velocities, Objective, Particles, BestPosition1, BestFitness1, BestPosition, BestFitness, SwarmSize1, SwarmSize).
 
-	initialize_particle(Position, Bounds, particle(Position, Velocity, Fitness, Position, Fitness)) :-
-		initial_velocity(Bounds, Velocity),
+	initialize_particle(Position, Velocity, particle(Position, Velocity, Fitness, Position, Fitness)) :-
 		fitness(Position, Fitness),
 		( 	number(Fitness) ->
 			true
-		;	throw(error(domain_error(fitness, Fitness), run/4))
+		;	domain_error(fitness, Fitness)
 		).
 
 	initial_velocity([], []).
@@ -199,51 +240,73 @@
 		random(MinimumVelocity, MaximumVelocity, Velocity),
 		initial_velocity(Bounds, Velocities).
 
-	loop(Iteration, MaxIterations, UpdateInterval, _Bounds, _InertiaWeight, _CognitiveCoefficient, _SocialCoefficient,
+	loop(Iteration, MaxIterations, UpdateInterval, _Bounds, _Objective, _TargetFitness, _InertiaWeight, _CognitiveCoefficient, _SocialCoefficient, _StagnationIterations, _StagnationCount,
 			Swarm, BestPosition, BestFitness, Improvements,
 			Swarm, BestPosition, BestFitness, Iteration, Improvements) :-
 		Iteration >= MaxIterations,
 		!,
 		report_final(Iteration, UpdateInterval, Swarm, BestPosition, BestFitness).
-	loop(Iteration, _MaxIterations, UpdateInterval, _Bounds, _InertiaWeight, _CognitiveCoefficient, _SocialCoefficient,
+	loop(Iteration, _MaxIterations, UpdateInterval, _Bounds, Objective, TargetFitness, _InertiaWeight, _CognitiveCoefficient, _SocialCoefficient, _StagnationIterations, _StagnationCount,
+			Swarm, BestPosition, BestFitness, Improvements,
+			Swarm, BestPosition, BestFitness, Iteration, Improvements) :-
+		target_fitness_reached(Objective, BestFitness, TargetFitness),
+		!,
+		report_final(Iteration, UpdateInterval, Swarm, BestPosition, BestFitness).
+	loop(Iteration, _MaxIterations, UpdateInterval, _Bounds, _Objective, _TargetFitness, _InertiaWeight, _CognitiveCoefficient, _SocialCoefficient, StagnationIterations, StagnationCount,
+			Swarm, BestPosition, BestFitness, Improvements,
+			Swarm, BestPosition, BestFitness, Iteration, Improvements) :-
+		StagnationIterations > 0,
+		StagnationCount >= StagnationIterations,
+		!,
+		report_final(Iteration, UpdateInterval, Swarm, BestPosition, BestFitness).
+	loop(Iteration, _MaxIterations, UpdateInterval, _Bounds, _Objective, _TargetFitness, _InertiaWeight, _CognitiveCoefficient, _SocialCoefficient, _StagnationIterations, _StagnationCount,
 			Swarm, BestPosition, BestFitness, Improvements,
 			Swarm, BestPosition, BestFitness, Iteration, Improvements) :-
 		stop_condition(Iteration, BestPosition, BestFitness),
 		!,
 		report_final(Iteration, UpdateInterval, Swarm, BestPosition, BestFitness).
-	loop(Iteration, MaxIterations, UpdateInterval, Bounds, InertiaWeight, CognitiveCoefficient, SocialCoefficient,
+	loop(Iteration, MaxIterations, UpdateInterval, Bounds, Objective, TargetFitness, InertiaWeight, CognitiveCoefficient, SocialCoefficient, StagnationIterations, StagnationCount0,
 			Swarm0, BestPosition0, BestFitness0, Improvements0,
 			FinalSwarm, BestPosition, BestFitness, Iterations, Improvements) :-
-		update_swarm(Swarm0, Bounds, BestPosition0, InertiaWeight, CognitiveCoefficient, SocialCoefficient, Swarm1),
-		swarm_best(Swarm1, CandidatePosition, CandidateFitness),
-		( 	CandidateFitness < BestFitness0 ->
+		update_swarm(Swarm0, Bounds, Objective, BestPosition0, InertiaWeight, CognitiveCoefficient, SocialCoefficient, Swarm1),
+		swarm_best(Swarm1, Objective, CandidatePosition, CandidateFitness),
+		( 	better_fitness(Objective, CandidateFitness, BestFitness0) ->
 			BestPosition1 = CandidatePosition,
 			BestFitness1 = CandidateFitness,
-			Improvements1 is Improvements0 + 1
+			Improvements1 is Improvements0 + 1,
+			StagnationCount1 = 0
 		;	BestPosition1 = BestPosition0,
 			BestFitness1 = BestFitness0,
-			Improvements1 = Improvements0
+			Improvements1 = Improvements0,
+			StagnationCount1 is StagnationCount0 + 1
 		),
 		Iteration1 is Iteration + 1,
 		report_progress(Iteration1, UpdateInterval, Swarm1, BestPosition1, BestFitness1),
-		loop(Iteration1, MaxIterations, UpdateInterval, Bounds, InertiaWeight, CognitiveCoefficient, SocialCoefficient,
+		loop(Iteration1, MaxIterations, UpdateInterval, Bounds, Objective, TargetFitness, InertiaWeight, CognitiveCoefficient, SocialCoefficient, StagnationIterations, StagnationCount1,
 			Swarm1, BestPosition1, BestFitness1, Improvements1,
 			FinalSwarm, BestPosition, BestFitness, Iterations, Improvements).
 
-	update_swarm([], _Bounds, _GlobalBest, _InertiaWeight, _CognitiveCoefficient, _SocialCoefficient, []).
-	update_swarm([Particle0| Particles0], Bounds, GlobalBest, InertiaWeight, CognitiveCoefficient, SocialCoefficient, [Particle| Particles]) :-
-		update_particle(Particle0, Bounds, GlobalBest, InertiaWeight, CognitiveCoefficient, SocialCoefficient, Particle),
-		update_swarm(Particles0, Bounds, GlobalBest, InertiaWeight, CognitiveCoefficient, SocialCoefficient, Particles).
+	target_fitness_reached(minimize, Fitness, TargetFitness) :-
+		number(TargetFitness),
+		Fitness =< TargetFitness.
+	target_fitness_reached(maximize, Fitness, TargetFitness) :-
+		number(TargetFitness),
+		Fitness >= TargetFitness.
 
-	update_particle(particle(Position0, Velocity0, _Fitness0, PersonalBest0, PersonalBestFitness0), Bounds, GlobalBest, InertiaWeight, CognitiveCoefficient, SocialCoefficient,
+	update_swarm([], _Bounds, _Objective, _GlobalBest, _InertiaWeight, _CognitiveCoefficient, _SocialCoefficient, []).
+	update_swarm([Particle0| Particles0], Bounds, Objective, GlobalBest, InertiaWeight, CognitiveCoefficient, SocialCoefficient, [Particle| Particles]) :-
+		update_particle(Particle0, Bounds, Objective, GlobalBest, InertiaWeight, CognitiveCoefficient, SocialCoefficient, Particle),
+		update_swarm(Particles0, Bounds, Objective, GlobalBest, InertiaWeight, CognitiveCoefficient, SocialCoefficient, Particles).
+
+	update_particle(particle(Position0, Velocity0, _Fitness0, PersonalBest0, PersonalBestFitness0), Bounds, Objective, GlobalBest, InertiaWeight, CognitiveCoefficient, SocialCoefficient,
 			particle(Position, Velocity, Fitness, PersonalBest, PersonalBestFitness)) :-
 		update_components(Position0, Velocity0, PersonalBest0, GlobalBest, Bounds, InertiaWeight, CognitiveCoefficient, SocialCoefficient, Position, Velocity),
 		fitness(Position, Fitness),
 		( 	number(Fitness) ->
 			true
-		;	throw(error(domain_error(fitness, Fitness), run/4))
+		;	domain_error(fitness, Fitness)
 		),
-		( 	Fitness < PersonalBestFitness0 ->
+		( 	better_fitness(Objective, Fitness, PersonalBestFitness0) ->
 			PersonalBest = Position,
 			PersonalBestFitness = Fitness
 		;	PersonalBest = PersonalBest0,
@@ -278,18 +341,23 @@
 		!.
 	bound_position(Value, Velocity, _Lower, _Upper, Value, Velocity).
 
-	swarm_best([particle(_, _, _, PersonalBest, PersonalBestFitness)| Particles], BestPosition, BestFitness) :-
-		swarm_best(Particles, PersonalBest, PersonalBestFitness, BestPosition, BestFitness).
+	swarm_best([particle(_, _, _, PersonalBest, PersonalBestFitness)| Particles], Objective, BestPosition, BestFitness) :-
+		swarm_best(Particles, Objective, PersonalBest, PersonalBestFitness, BestPosition, BestFitness).
 
-	swarm_best([], BestPosition, BestFitness, BestPosition, BestFitness).
-	swarm_best([particle(_, _, _, PersonalBest, PersonalBestFitness)| Particles], BestPosition0, BestFitness0, BestPosition, BestFitness) :-
-		( 	PersonalBestFitness < BestFitness0 ->
+	swarm_best([], _Objective, BestPosition, BestFitness, BestPosition, BestFitness).
+	swarm_best([particle(_, _, _, PersonalBest, PersonalBestFitness)| Particles], Objective, BestPosition0, BestFitness0, BestPosition, BestFitness) :-
+		( 	better_fitness(Objective, PersonalBestFitness, BestFitness0) ->
 			BestPosition1 = PersonalBest,
 			BestFitness1 = PersonalBestFitness
 		;	BestPosition1 = BestPosition0,
 			BestFitness1 = BestFitness0
 		),
-		swarm_best(Particles, BestPosition1, BestFitness1, BestPosition, BestFitness).
+		swarm_best(Particles, Objective, BestPosition1, BestFitness1, BestPosition, BestFitness).
+
+	better_fitness(minimize, Fitness, ReferenceFitness) :-
+		Fitness < ReferenceFitness.
+	better_fitness(maximize, Fitness, ReferenceFitness) :-
+		Fitness > ReferenceFitness.
 
 	report_progress(Iteration, UpdateInterval, Swarm, BestPosition, BestFitness) :-
 		UpdateInterval > 0,
@@ -301,6 +369,10 @@
 
 	report_final(Iteration, UpdateInterval, Swarm, BestPosition, BestFitness) :-
 		UpdateInterval > 0,
+		( 	Iteration =:= 0 ->
+			true
+		;	Iteration mod UpdateInterval =\= 0
+		),
 		!,
 		call_progress(Iteration, Swarm, BestPosition, BestFitness).
 	report_final(_Iteration, _UpdateInterval, _Swarm, _BestPosition, _BestFitness).
@@ -357,14 +429,23 @@
 		Sum1 is Sum0 + Difference * Difference,
 		squared_distance(Values, CentroidValues, Sum1, Sum).
 
+	default_option(objective(minimize)).
+	default_option(target_fitness(none)).
 	default_option(max_iterations(1000)).
+	default_option(stagnation_iterations(0)).
 	default_option(inertia_weight(0.7298)).
 	default_option(cognitive_coefficient(1.49618)).
 	default_option(social_coefficient(1.49618)).
 	default_option(updates(0)).
 
+	valid_option(objective(Objective)) :-
+		once((Objective == minimize; Objective == maximize)).
+	valid_option(target_fitness(TargetFitness)) :-
+		once((TargetFitness == none; number(TargetFitness))).
 	valid_option(max_iterations(N)) :-
 		valid(positive_integer, N).
+	valid_option(stagnation_iterations(N)) :-
+		valid(non_negative_integer, N).
 	valid_option(inertia_weight(Weight)) :-
 		valid(non_negative_float, Weight).
 	valid_option(cognitive_coefficient(Coefficient)) :-

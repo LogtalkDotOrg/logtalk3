@@ -19,31 +19,31 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(basic_types(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load(random(loader)),
-	logtalk_load([
-		particle_swarm_optimization_protocol,
-		particle_swarm_optimization
-	], [
-		debug(on),
-		source_data(on)
-	]),
-	logtalk_load([
-		'test_files/sphere',
-		'test_files/negative_sphere',
-		'test_files/constant_fitness',
-		'test_files/supplied_velocities',
-		'test_files/sphere_stop',
-		'test_files/sphere_progress',
-		'test_files/boundary_progress',
-		'test_files/malformed_problems'
-	], [
-		optimize(on)
-	]),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
-)).
+:- object(negative_sphere,
+	implements(particle_swarm_optimization_protocol)).
+
+	initial_positions([
+		[-4.0, -4.0],
+		[ 4.0,  4.0],
+		[ 0.5, -0.5],
+		[ 3.0, -3.0]
+	]).
+
+	position_bounds([
+		(-5.0)-5.0,
+		(-5.0)-5.0
+	]).
+
+	fitness([X, Y], Fitness) :-
+		Fitness is -(X * X + Y * Y).
+
+:- end_object.
+
+
+:- object(negative_sphere_stop,
+	extends(negative_sphere)).
+
+	stop_condition(Iteration, _BestPosition, _BestFitness) :-
+		Iteration =:= 0.
+
+:- end_object.
