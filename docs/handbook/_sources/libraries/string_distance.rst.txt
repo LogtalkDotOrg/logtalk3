@@ -102,3 +102,20 @@ General advice: use Levenshtein or Damerau-Levenshtein for
 general-purpose edit distance, Jaro-Winkler for short strings like
 names, LCS for diff-style comparisons, and cosine/Jaccard when working
 at the word or document level rather than character level.
+
+Metaphone validation
+--------------------
+
+The primary reference for Double Metaphone is Lawrence Philips' C++
+source, as modified by Kevin Atkinson to fix bugs and permit keys longer
+than four characters:
+
+- `Double Metaphone reference
+  source <https://aspell.net/metaphone/dmetaph.cpp>`__
+- `Archived reference
+  source <https://web.archive.org/web/20240223000000id_/https://aspell.net/metaphone/dmetaph.cpp>`__
+
+This library retains Atkinson's unlimited-key behavior. Consequently,
+comparisons with implementations using the conventional four-character
+limit must configure a sufficiently large limit or compare only rule
+behavior, not truncated output.

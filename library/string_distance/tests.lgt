@@ -144,9 +144,26 @@
 	test(metaphone_2_03, true(Key == "KTN")) :-
 		string_distance::metaphone("kitten", Key).
 
-	% double_metaphone/3 tests
+	test(metaphone_2_04, true(Key == "APL")) :-
+		string_distance::metaphone("apple", Key).
 
-	test(double_metaphone_3_01, true((Primary == "JS", Alternative == "HS"))) :-
+	test(metaphone_2_05, true(Key == "BK")) :-
+		string_distance::metaphone("back", Key).
+
+	test(metaphone_2_06, true(Key == "TM")) :-
+		string_distance::metaphone("dumb", Key).
+
+	test(metaphone_2_07, true(Key == "KX")) :-
+		string_distance::metaphone("catch", Key).
+
+	test(metaphone_2_08, true(Key == "SFR")) :-
+		string_distance::metaphone("xavier", Key).
+
+	% double_metaphone/3 tests
+	% Expected encodings are derived from the Philips/Atkinson C++ reference
+	% implementation. Other implementations are secondary cross-checks only.
+
+	test(double_metaphone_3_01, true((Primary == "HS", Alternative == "HS"))) :-
 		string_distance::double_metaphone("jose", Primary, Alternative).
 
 	test(double_metaphone_3_02, true((Primary == "HS", Alternative == "HS"))) :-
@@ -173,6 +190,18 @@
 	test(double_metaphone_3_09, true((Primary == "STFN", Alternative == "STFN"))) :-
 		string_distance::double_metaphone("stephen", Primary, Alternative).
 
+	test(double_metaphone_3_10, true((Primary == "AP", Alternative == "AP"))) :-
+		string_distance::double_metaphone("Abbe", Primary, Alternative).
+
+	test(double_metaphone_3_11, true((Primary == "SM0", Alternative == "XMT"))) :-
+		string_distance::double_metaphone("Smith", Primary, Alternative).
+
+	test(double_metaphone_3_12, true((Primary == "XMT", Alternative == "SMT"))) :-
+		string_distance::double_metaphone("Schmidt", Primary, Alternative).
+
+	test(double_metaphone_3_13, true((Primary == "AKXN", Alternative == "AKXN"))) :-
+		string_distance::double_metaphone("action", Primary, Alternative).
+
 	% soundex_match/2 tests
 
 	test(soundex_match_2_01, true) :-
@@ -180,7 +209,7 @@
 
 	% metaphone_match/2 tests
 
-	test(metaphone_match_2_01, true) :-
+	test(metaphone_match_2_01, false) :-
 		string_distance::metaphone_match("kitten", "sitting").
 
 	test(metaphone_match_2_02, false) :-

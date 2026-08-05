@@ -26,9 +26,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-05,
+		date is 2026-08-05,
 		comment is 'Unit tests for the "string_distance" library using a character code list representation.'
 	]).
 

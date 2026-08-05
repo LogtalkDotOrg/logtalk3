@@ -22,9 +22,9 @@
 :- object(string_distance(_Representation_)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-05-21,
+		date is 2026-08-05,
 		comment is 'String distance predicates.',
 		parameters is [
 			'Representation' - 'String representation. Valid values are ``atom``, ``codes``, and ``chars``.'
@@ -913,15 +913,7 @@
 		).
 
 	% -----------------------------------------------------------------
-	% Metaphone (core rule subset)
-	%
-	% 1. Strip initial silent letter-pairs (AE, GN, KN, PN, WR).
-	% 2. Encode remaining characters left-to-right using context-
-	%    sensitive rules.  Each rule consumes one or more characters
-	%    from the head of the list and either emits a code atom or
-	%    emits nothing ([]).
-	% 3. Vowels are always dropped (significance at the start is
-	%    handled by step 1).
+	% Metaphone
 	% -----------------------------------------------------------------
 	metaphone(String, Encoding) :-
 		metaphone(_Representation_, String, Encoding).
@@ -935,138 +927,253 @@
 		metaphone(chars, Chars, Encoding0),
 		chars_to_codes(Encoding0, Encoding).
 	metaphone(chars, String, Encoding) :-
-		(	String == []
-		->	Encoding = ''
+		(	String == [] ->
+			Encoding = []
 		;	upcase_chars(String, Upper),
-			metaphone_drop_initial(Upper, Encoding0),
-			metaphone_encode(Encoding0, Encoding1),
-			metaphone_deduplicate(Encoding1, Encoding)
+			metaphone_transform_initial(Upper, Word),
+			length(Word, Length),
+			metaphone_encode(Word, 0, Length, Encoding)
 		).
 
-	metaphone_drop_initial(['A','E'| Chars], Chars) :-
+	metaphone_transform_initial(['A','E'| Chars], ['E'| Chars]) :-
 		!.
-	metaphone_drop_initial(['G','N'| Chars], Chars) :-
+	metaphone_transform_initial(['G','N'| Chars], ['N'| Chars]) :-
 		!.
-	metaphone_drop_initial(['K','N'| Chars], Chars) :-
+	metaphone_transform_initial(['K','N'| Chars], ['N'| Chars]) :-
 		!.
-	metaphone_drop_initial(['P','N'| Chars], Chars) :-
+	metaphone_transform_initial(['P','N'| Chars], ['N'| Chars]) :-
 		!.
-	metaphone_drop_initial(['W','R'| Chars], Chars) :-
+	metaphone_transform_initial(['W','R'| Chars], ['R'| Chars]) :-
 		!.
-	metaphone_drop_initial(Chars, Chars).
+	metaphone_transform_initial(['W','H'| Chars], ['W'| Chars]) :-
+		!.
+	metaphone_transform_initial(['X'| Chars], ['S'| Chars]) :-
+		!.
+	metaphone_transform_initial(Chars, Chars).
 
-	metaphone_encode([], []).
-	metaphone_encode([Char| Chars], Encoded) :-
-		metaphone_char(Char, Chars, Code, Rest),
-		(	Code == []
-		->	metaphone_encode(Rest, Encoded)
-		;	Encoded = [Code| RestEnc],
-			metaphone_encode(Rest, RestEnc)
-		).
+		metaphone_encode(_, Index, Length, []) :-
+			Index >= Length,
+			!.
+		metaphone_encode(Word, Index, Length, Encoding) :-
+			nth0(Index, Word, Char),
+			(	metaphone_duplicate(Word, Index, Char) ->
+				Fragment = [],
+				NextIndex is Index + 1
+			; 	metaphone_rule(Char, Word, Index, Length, Fragment, NextIndex)
+			),
+			append(Fragment, Rest, Encoding),
+			metaphone_encode(Word, NextIndex, Length, Rest).
 
-	% Vowels — dropped.
-	metaphone_char('A', Chars, [], Chars).
-	metaphone_char('E', Chars, [], Chars).
-	metaphone_char('I', Chars, [], Chars).
-	metaphone_char('O', Chars, [], Chars).
-	metaphone_char('U', Chars, [], Chars).
-	% B
-	metaphone_char('B', Chars, 'B', Chars).
-	% C — S before E/I/Y; K otherwise.
-	metaphone_char('C', ['E'| Chars], 'S', Chars) :-
-		!.
-	metaphone_char('C', ['I'| Chars], 'S', Chars) :-
-		!.
-	metaphone_char('C', ['Y'| Chars], 'S', Chars) :-
-		!.
-	metaphone_char('C', Chars,        'K', Chars).
-	% D — J before G+vowel-ish; T otherwise.
-	metaphone_char('D', ['G','E'| Chars], 'J', Chars) :-
-		!.
-	metaphone_char('D', ['G','I'| Chars], 'J', Chars) :-
-		!.
-	metaphone_char('D', ['G','Y'| Chars], 'J', Chars) :-
-		!.
-	metaphone_char('D', Chars,            'T', Chars).
-	% F
-	metaphone_char('F', Chars, 'F', Chars).
-	% G — silent before H; J before E/I/Y; K otherwise.
-	metaphone_char('G', ['H'| Chars], [], Chars) :-
-		!.
-	metaphone_char('G', ['E'| Chars], 'J', Chars) :-
-		!.
-	metaphone_char('G', ['I'| Chars], 'J', Chars) :-
-		!.
-	metaphone_char('G', ['Y'| Chars], 'J', Chars) :-
-		!.
-	metaphone_char('G', Chars,        'K', Chars).
-	% H — kept only before a vowel.
-	metaphone_char('H', [Char| Chars], 'H', Chars) :-
-		member(Char, ['A','E','I','O','U']),
-		!.
-	metaphone_char('H', Chars, [], Chars).
-	% J
-	metaphone_char('J', Chars, 'J', Chars).
-	% K
-	metaphone_char('K', Chars, 'K', Chars).
-	% L
-	metaphone_char('L', Chars, 'L', Chars).
-	% M
-	metaphone_char('M', Chars, 'M', Chars).
-	% N
-	metaphone_char('N', Chars, 'N', Chars).
-	% P — F before H; P otherwise.
-	metaphone_char('P', ['H'| Chars], 'F', Chars) :-
-		!.
-	metaphone_char('P', Chars,       'P', Chars).
-	% Q → K
-	metaphone_char('Q', Chars, 'K', Chars).
-	% R
-	metaphone_char('R', Chars, 'R', Chars).
-	% S — X (sh) before H / IA / IO; S otherwise.
-	metaphone_char('S', ['H'| Chars],     'X', Chars) :-
-		!.
-	metaphone_char('S', ['I','A'| Chars], 'X', Chars) :-
-		!.
-	metaphone_char('S', ['I','O'| Chars], 'X', Chars) :-
-		!.
-	metaphone_char('S', Chars,            'S', Chars).
-	% T — 0 (theta) before H; X before IA/IO; T otherwise.
-	metaphone_char('T', ['H'| Chars],     '0', Chars) :-
-		!.
-	metaphone_char('T', ['I','A'| Chars], 'X', Chars) :-
-		!.
-	metaphone_char('T', ['I','O'| Chars], 'X', Chars) :-
-		!.
-	metaphone_char('T', Chars,            'T', Chars).
-	% V → F
-	metaphone_char('V', Chars, 'F', Chars).
-	% W — kept only before a vowel.
-	metaphone_char('W', [Char| Chars], 'W', Chars) :-
-		member(Char, ['A','E','I','O','U']),
-		!.
-	metaphone_char('W', Chars, [], Chars).
-	% X → K, push S back onto input.
-	metaphone_char('X', Chars, 'K', ['S'| Chars]).
-	% Y — kept only before a vowel.
-	metaphone_char('Y', [Char| Chars], 'Y', Chars) :-
-		member(Char, ['A','E','I','O','U']),
-		!.
-	metaphone_char('Y', Chars, [], Chars).
-	% Z → S
-	metaphone_char('Z', Chars, 'S', Chars).
-	% Fallback
-	metaphone_char(_, Chars, [], Chars).
+		metaphone_duplicate(Word, Index, Char) :-
+			Char \== 'C',
+			Index > 0,
+			PreviousIndex is Index - 1,
+			nth0(PreviousIndex, Word, Char).
 
-	% Deduplicate consecutive identical phonetic codes
-	metaphone_deduplicate([], []).
-	metaphone_deduplicate([X], [X]) :-
-		!.
-	metaphone_deduplicate([X,X| Tail], Result) :-
-		!,
-		metaphone_deduplicate([X| Tail], Result).
-	metaphone_deduplicate([X,Y| Tail], [X| Result]) :-
-		metaphone_deduplicate([Y| Tail], Result).
+		metaphone_rule(Char, _, 0, _, [Char], 1) :-
+			metaphone_vowel(Char),
+			!.
+		metaphone_rule(Char, _, Index, _, [], NextIndex) :-
+			metaphone_vowel(Char),
+			!,
+			NextIndex is Index + 1.
+		metaphone_rule('B', Word, Index, Length, Fragment, NextIndex) :-
+			!,
+			NextIndex is Index + 1,
+			( NextIndex =:= Length, metaphone_previous_char(Word, Index, 'M') -> Fragment = [] ; Fragment = ['B'] ).
+		metaphone_rule('C', Word, Index, _, Fragment, NextIndex) :-
+			!,
+			metaphone_c_rule(Word, Index, Fragment, NextIndex).
+		metaphone_rule('D', Word, Index, _, Fragment, NextIndex) :-
+			!,
+			(	(	metaphone_region(Word, Index, ['D','G','E'])
+				;	metaphone_region(Word, Index, ['D','G','I'])
+				;	metaphone_region(Word, Index, ['D','G','Y'])
+				) ->
+				Fragment = ['J'],
+				NextIndex is Index + 3
+			;	Fragment = ['T'],
+				NextIndex is Index + 1
+			).
+		metaphone_rule('G', Word, Index, Length, Fragment, NextIndex) :-
+			!,
+			metaphone_g_rule(Word, Index, Length, Fragment, NextIndex).
+		metaphone_rule('H', Word, Index, Length, Fragment, NextIndex) :-
+			!,
+			NextIndex is Index + 1,
+			(	NextIndex < Length,
+				\+ metaphone_previous_one_of(Word, Index, ['C','S','P','T','G']),
+				metaphone_char_at(Word, NextIndex, Next), metaphone_vowel(Next) ->
+				Fragment = ['H']
+			;	Fragment = []
+			).
+		metaphone_rule('K', Word, Index, _, Fragment, NextIndex) :-
+			!,
+			NextIndex is Index + 1,
+			(	metaphone_previous_char(Word, Index, 'C') ->
+				Fragment = []
+			;	Fragment = ['K']
+			).
+		metaphone_rule('P', Word, Index, _, Fragment, NextIndex) :-
+			!,
+			(	metaphone_next_char(Word, Index, 'H') ->
+				Fragment = ['F'],
+				NextIndex is Index + 2
+			;	Fragment = ['P'],
+				NextIndex is Index + 1
+			).
+		metaphone_rule('Q', _, Index, _, ['K'], NextIndex) :-
+			!,
+			NextIndex is Index + 1.
+		metaphone_rule('S', Word, Index, _, Fragment, NextIndex) :-
+			!,
+			(	metaphone_region(Word, Index, ['S','H']) ->
+				Fragment = ['X'],
+				NextIndex is Index + 2
+			;	metaphone_region(Word, Index, ['S','I','A']) ->
+				Fragment = ['X'],
+				NextIndex is Index + 3
+			;	metaphone_region(Word, Index, ['S','I','O']) ->
+				Fragment = ['X'],
+				NextIndex is Index + 3
+			;	Fragment = ['S'],
+				NextIndex is Index + 1
+			).
+		metaphone_rule('T', Word, Index, _, Fragment, NextIndex) :-
+			!,
+			(	metaphone_region(Word, Index, ['T','I','A']) ->
+				Fragment = ['X'],
+				NextIndex is Index + 3
+			;	metaphone_region(Word, Index, ['T','I','O']) ->
+				Fragment = ['X'],
+				NextIndex is Index + 3
+			;	metaphone_region(Word, Index, ['T','C','H']) ->
+				Fragment = [],
+				NextIndex is Index + 1
+			;	metaphone_region(Word, Index, ['T','H']) ->
+				Fragment = ['0'],
+				NextIndex is Index + 2
+			;	Fragment = ['T'],
+				NextIndex is Index + 1
+			).
+		metaphone_rule('V', _, Index, _, ['F'], NextIndex) :-
+			!,
+			NextIndex is Index + 1.
+		metaphone_rule(Char, Word, Index, Length, Fragment, NextIndex) :-
+			member(Char, ['W','Y']),
+			!,
+			NextIndex is Index + 1,
+			(	NextIndex < Length,
+				metaphone_char_at(Word, NextIndex, Next),
+				metaphone_vowel(Next) ->
+				Fragment = [Char]
+			;	Fragment = []
+			).
+		metaphone_rule('X', _, Index, _, ['K','S'], NextIndex) :-
+			!,
+			NextIndex is Index + 1.
+		metaphone_rule('Z', _, Index, _, ['S'], NextIndex) :-
+			!,
+			NextIndex is Index + 1.
+		metaphone_rule(Char, _, Index, _, Fragment, NextIndex) :-
+			NextIndex is Index + 1,
+			(	member(Char, ['F','J','L','M','N','R']) ->
+				Fragment = [Char]
+			;	Fragment = []
+			).
+
+		metaphone_c_rule(Word, Index, [], NextIndex) :-
+			metaphone_previous_char(Word, Index, 'S'),
+			metaphone_next_one_of(Word, Index, ['E','I','Y']),
+			!,
+			NextIndex is Index + 1.
+		metaphone_c_rule(Word, Index, ['K'], NextIndex) :-
+			metaphone_previous_char(Word, Index, 'S'),
+			metaphone_next_char(Word, Index, 'H'),
+			!,
+			NextIndex is Index + 2.
+		metaphone_c_rule(Word, Index, ['X'], NextIndex) :-
+			(	metaphone_region(Word, Index, ['C','I','A']) -> NextIndex is Index + 3
+			;	metaphone_region(Word, Index, ['C','H']), NextIndex is Index + 2
+			),
+			!.
+		metaphone_c_rule(Word, Index, ['S'], NextIndex) :-
+			metaphone_next_one_of(Word, Index, ['E','I','Y']),
+			!,
+			NextIndex is Index + 1.
+		metaphone_c_rule(Word, Index, ['K'], NextIndex) :-
+			(	metaphone_next_char(Word, Index, 'K') ->
+				NextIndex is Index + 2
+			;	NextIndex is Index + 1
+			).
+
+		metaphone_g_rule(Word, Index, Length, [], NextIndex) :-
+			metaphone_next_char(Word, Index, 'H'),
+			AfterH is Index + 2,
+			(	AfterH >= Length
+			;	metaphone_char_at(Word, AfterH, Char), \+ metaphone_vowel(Char)
+			),
+			!,
+			NextIndex is Index + 2.
+		metaphone_g_rule(Word, Index, Length, [], NextIndex) :-
+			Index > 0,
+			(	metaphone_region_at_end(Word, Index, Length, ['G','N'])
+			;	metaphone_region_at_end(Word, Index, Length, ['G','N','E','D'])
+			),
+			!,
+			NextIndex is Index + 1.
+		metaphone_g_rule(Word, Index, _, ['J'], NextIndex) :-
+			metaphone_next_one_of(Word, Index, ['E','I','Y']),
+			\+ metaphone_previous_char(Word, Index, 'G'),
+			!,
+			NextIndex is Index + 1.
+		metaphone_g_rule(_, Index, _, ['K'], NextIndex) :-
+			NextIndex is Index + 1.
+
+		metaphone_vowel(Char) :-
+			member(Char, ['A','E','I','O','U']).
+
+		metaphone_char_at(Word, Index, Char) :-
+			Index >= 0,
+			nth0(Index, Word, Char).
+
+		metaphone_previous_char(Word, Index, Char) :-
+			PreviousIndex is Index - 1,
+			metaphone_char_at(Word, PreviousIndex, Char).
+
+		metaphone_next_char(Word, Index, Char) :-
+			NextIndex is Index + 1,
+			metaphone_char_at(Word, NextIndex, Char).
+
+		metaphone_previous_one_of(Word, Index, Chars) :-
+			metaphone_previous_char(Word, Index, Char),
+			member(Char, Chars).
+
+		metaphone_next_one_of(Word, Index, Chars) :-
+			metaphone_next_char(Word, Index, Char),
+			member(Char, Chars).
+
+		metaphone_region(Word, Index, Pattern) :-
+			drop(Index, Word, Rest),
+			metaphone_prefix(Pattern, Rest).
+
+		metaphone_region_at_end(Word, Index, Length, Pattern) :-
+			length(Pattern, PatternLength),
+			Index + PatternLength =:= Length,
+			metaphone_region(Word, Index, Pattern).
+
+		metaphone_prefix([], _).
+		metaphone_prefix([Head| Pattern], [Head| Word]) :-
+			metaphone_prefix(Pattern, Word).
+
+		metaphone_deduplicate([], []).
+		metaphone_deduplicate([X], [X]) :-
+			!.
+		metaphone_deduplicate([X,X| Tail], Result) :-
+			!,
+			metaphone_deduplicate([X| Tail], Result).
+		metaphone_deduplicate([X,Y| Tail], [X| Result]) :-
+			metaphone_deduplicate([Y| Tail], Result).
 
 	% -----------------------------------------------------------------
 	% Double Metaphone (simplified variant)
@@ -1088,14 +1195,24 @@
 		chars_to_codes(Primary0, Primary),
 		chars_to_codes(Alternative0, Alternative).
 	double_metaphone(chars, String, Primary, Alternative) :-
-		(	String == []
-		->	Primary = '', Alternative = ''
-		;	upcase_chars(String, Upper),
+		(	String == [] ->
+			Primary = [], Alternative = []
+		; 	upcase_chars(String, Upper),
 			is_slavo_germanic(Upper, IsSlavoGermanic),
-			double_metaphone_encode(Upper, IsSlavoGermanic, Primary0, Alternative0),
+			double_metaphone_initial(Upper, IsSlavoGermanic, Primary0, Alternative0),
 			metaphone_deduplicate(Primary0, Primary),
 			metaphone_deduplicate(Alternative0, Alternative)
 		).
+
+	double_metaphone_initial(['J','O','S','E'], IsSlavoGermanic, ['H'| Primary], ['H'| Alternative]) :-
+		!,
+		double_metaphone_encode(['O','S','E'], IsSlavoGermanic, Primary, Alternative).
+	double_metaphone_initial([Char| Chars], IsSlavoGermanic, ['A'| Primary], ['A'| Alternative]) :-
+		metaphone_vowel(Char),
+		!,
+		double_metaphone_encode(Chars, IsSlavoGermanic, Primary, Alternative).
+	double_metaphone_initial(Chars, IsSlavoGermanic, Primary, Alternative) :-
+		double_metaphone_encode(Chars, IsSlavoGermanic, Primary, Alternative).
 
 	% Detect Slavo-Germanic language patterns
 	is_slavo_germanic(Chars, true) :-
@@ -1191,7 +1308,9 @@
 	double_metaphone_char('Q', Chars, _, 'K', [], Chars).
 	% R
 	double_metaphone_char('R', Chars, _, 'R', [], Chars).
-	% S — X before H/IA/IO; S otherwise
+	% S — X before H/IA/IO; S/X for initial SM; S otherwise
+	double_metaphone_char('S', ['M'| Chars], _, 'S', 'X', ['M'| Chars]) :-
+		!.
 	double_metaphone_char('S', ['H'| Chars], _, 'X', [], Chars) :-
 		!.
 	double_metaphone_char('S', ['I','A'| Chars], _, 'X', 'S', Chars) :-
@@ -1201,12 +1320,14 @@
 	double_metaphone_char('S', ['C','H'| Chars], _, 'X', 'S', Chars) :-
 		!.
 	double_metaphone_char('S', Chars, _, 'S', [], Chars).
-	% T — 0 before H; X before IA/IO; T otherwise
+	% T — 0 before H; X before ION/IA/IO; T otherwise
+	double_metaphone_char('T', ['I','O','N'| Chars], _, 'X', [], ['N'| Chars]) :-
+		!.
 	double_metaphone_char('T', ['H'| Chars], _, '0', 'T', Chars) :-
 		!.
 	double_metaphone_char('T', ['I','A'| Chars], _, 'X', 'T', Chars) :-
 		!.
-	double_metaphone_char('T', ['I','O'| Chars], _, 'X', 'T', Chars) :-
+	double_metaphone_char('T', ['I','O'| Chars], _, 'X', [], Chars) :-
 		!.
 	double_metaphone_char('T', Chars, _, 'T', [], Chars).
 	% V → F

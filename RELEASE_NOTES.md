@@ -132,6 +132,9 @@ shared portable standard normal distribution numeric helpers.
 * IMPROVED: Portability of the `sockets` library with versions of SWI-Prolog
 older than 9.1.5.
 
+* IMPROVED: The `string_distance` library Metaphone and Double Metaphone
+implementations and expanded conformance tests.
+
 * UPDATED: The `amqp`, `character_sets`, `hashes`, `ieee_754`, and `protobuf`
 libraries to use the new `byte_order` library.
 

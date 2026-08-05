@@ -62,24 +62,72 @@ Algorithms
 
 This library implements the following string distance algorithms:
 
-- **Levenshtein** distance is probably the most well-known. It counts the minimum number of single-character edits — insertions, deletions, or substitutions — needed to transform one string into another. For example, the distance between "kitten" and "sitting" is 3.
+- **Levenshtein** distance is probably the most well-known. It counts the
+minimum number of single-character edits — insertions, deletions, or
+substitutions — needed to transform one string into another. For example,
+the distance between "kitten" and "sitting" is 3.
 
-- **Damerau-Levenshtein** distance extends Levenshtein by also allowing transpositions of two adjacent characters as a single edit operation. This makes it more practical for catching common typos like "ab" -> "ba".
+- **Damerau-Levenshtein** distance extends Levenshtein by also allowing
+transpositions of two adjacent characters as a single edit operation.
+This makes it more practical for catching common typos like "ab" -> "ba".
 
-- **Hamming** distance only works on strings of equal length and counts the number of positions where the corresponding characters differ. It's very fast but limited by that equal-length constraint, making it useful for things like comparing binary codes or fixed-format identifiers.
+- **Hamming** distance only works on strings of equal length and counts the
+number of positions where the corresponding characters differ. It's very fast
+but limited by that equal-length constraint, making it useful for things like
+comparing binary codes or fixed-format identifiers.
   
-- **Jaro and Jaro-Winkler** distance produce a similarity score between 0 and 1 rather than a raw edit count. Jaro considers matching characters and transpositions, while Jaro-Winkler adds a prefix-weighting boost — the idea being that strings matching at the start are more likely to be the same (useful for name matching).
+- **Jaro and Jaro-Winkler** distance produce a similarity score between
+0 and 1 rather than a raw edit count. Jaro considers matching characters
+and transpositions, while Jaro-Winkler adds a prefix-weighting boost — the
+idea being that strings matching at the start are more likely to be the
+same (useful for name matching).
 
-- **Edit similarity** is a normalized version of the edit distance, defined as 1 - (edit distance / max length of the two strings). It produces a similarity score between 0 and 1. Can be computed from Levenshtein, Damerau-Levenshtein, Hamming, or Longest Common Subsequence distances.
+- **Edit similarity** is a normalized version of the edit distance,
+defined as 1 - (edit distance / max length of the two strings). It
+produces a similarity score between 0 and 1. Can be computed from
+Levenshtein, Damerau-Levenshtein, Hamming, or Longest Common Subsequence
+distances.
 
-- **Longest Common Subsequence** (LCS) finds the length of the longest sequence of characters that appears in both strings in the same relative order (not necessarily contiguous). It's heavily used in diff tools for comparing files.
+- **Longest Common Subsequence** (LCS) finds the length of the longest
+sequence of characters that appears in both strings in the same relative
+order (not necessarily contiguous). It's heavily used in diff tools for
+comparing files.
 
-- **Longest Common Substring** is similar to LCS but requires the shared characters to be contiguous. Useful when caring about shared blocks of text rather than scattered matches.
+- **Longest Common Substring** is similar to LCS but requires the shared
+characters to be contiguous. Useful when caring about shared blocks of text
+rather than scattered matches.
 
-- **Cosine Similarity** shifts the approach from character edits to vector-based comparison. Strings are converted into vectors (often using character n-grams or word tokens), and then the cosine of the angle between them is computed. It's widely used in NLP and information retrieval.
+- **Cosine Similarity** shifts the approach from character edits to
+vector-based comparison. Strings are converted into vectors (often using
+character n-grams or word tokens), and then the cosine of the angle between
+them is computed. It's widely used in NLP and information retrieval.
 
-- **Jaccard Index** compares two sets of tokens (often words or n-grams) by dividing the size of their intersection by the size of their union. Simple and intuitive, though it ignores term frequency.
+- **Jaccard Index** compares two sets of tokens (often words or n-grams)
+by dividing the size of their intersection by the size of their union.
+Simple and intuitive, though it ignores term frequency.
 
-- **Soundex/Metaphone** are phonetic algorithms rather than strict string comparisons. They encode strings based on how they sound, so "Smith" and "Smythe" would match. Useful for name deduplication where spelling varies but pronunciation is similar.
+- **Soundex/Metaphone** are phonetic algorithms rather than strict string
+comparisons. They encode strings based on how they sound, so "Smith" and
+"Smythe" would match. Useful for name deduplication where spelling varies
+but pronunciation is similar.
 
-General advice: use Levenshtein or Damerau-Levenshtein for general-purpose edit distance, Jaro-Winkler for short strings like names, LCS for diff-style comparisons, and cosine/Jaccard when working at the word or document level rather than character level.
+General advice: use Levenshtein or Damerau-Levenshtein for general-purpose
+edit distance, Jaro-Winkler for short strings like names, LCS for diff-style
+comparisons, and cosine/Jaccard when working at the word or document level
+rather than character level.
+
+
+Metaphone validation
+--------------------
+
+The primary reference for Double Metaphone is Lawrence Philips' C++ source,
+as modified by Kevin Atkinson to fix bugs and permit keys longer than four
+characters:
+
+- [Double Metaphone reference source](https://aspell.net/metaphone/dmetaph.cpp)
+- [Archived reference source](https://web.archive.org/web/20240223000000id_/https://aspell.net/metaphone/dmetaph.cpp)
+
+This library retains Atkinson's unlimited-key behavior. Consequently,
+comparisons with implementations using the conventional four-character limit
+must configure a sufficiently large limit or compare only rule behavior, not
+truncated output.
