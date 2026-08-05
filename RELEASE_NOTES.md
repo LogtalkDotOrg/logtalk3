@@ -190,7 +190,7 @@ followed by a goal that throws an error.
 Installers and installation scripts
 -----------------------------------
 
-* UPDATED: The portable Docker image to to compile SWI-Prolog without its
+* UPDATED: The portable Docker image to compile SWI-Prolog without its
 documentation (to avoid recurrent failures) and in optimized mode.
 
 
