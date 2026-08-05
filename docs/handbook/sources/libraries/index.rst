@@ -223,6 +223,7 @@ directory in the ``NOTES.md`` file.
    options
    os
    otp
+   particle_swarm_optimization
    partitions
    paseto
    pattern_mining_protocols

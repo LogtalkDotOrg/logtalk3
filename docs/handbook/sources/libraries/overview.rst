@@ -70,7 +70,8 @@ Library groups
 - Randomness: ``arbitrary``, ``mutations``, and ``random``.
 - Mathematics, statistics, and optimization: ``byte_order``,
   ``ieee_754``, ``linear_algebra``, ``multivariate_distributions``,
-  ``simulated_annealing``, and ``statistics``.
+  ``particle_swarm_optimization``, ``simulated_annealing``, and
+  ``statistics``.
 - Machine learning:
 
   - Classification: ``classification_protocols``,

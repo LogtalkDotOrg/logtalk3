@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on August 4, 2026
+%  Last updated on August 5, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -304,6 +304,7 @@ logtalk_library_path(optionals, library('optionals/')).
 logtalk_library_path(options, library('options/')).
 logtalk_library_path(os, library('os/')).
 logtalk_library_path(otp, library('otp/')).
+logtalk_library_path(particle_swarm_optimization, library('particle_swarm_optimization/')).
 logtalk_library_path(partitions, library('partitions/')).
 logtalk_library_path(paseto, library('paseto/')).
 logtalk_library_path(pattern_mining_protocols, library('pattern_mining_protocols/')).

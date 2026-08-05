@@ -574,6 +574,8 @@ Objects
    pairing_heap_max <pairing_heap_max_0>
    pairing_heap_min <pairing_heap_min_0>
    pairs <pairs_0>
+   particle_swarm_optimization(Problem) <particle_swarm_optimization_1>
+   particle_swarm_optimization(Problem,RandomAlgorithm) <particle_swarm_optimization_2>
    partitions <partitions_0>
    paseto <paseto_0>
    paseto_claims <paseto_claims_0>
@@ -895,6 +897,7 @@ Protocols
    pack_protocol <pack_protocol_0>
    pairwise_measurement_dataset_protocol <pairwise_measurement_dataset_protocol_0>
    pairwise_ranking_dataset_protocol <pairwise_ranking_dataset_protocol_0>
+   particle_swarm_optimization_protocol <particle_swarm_optimization_protocol_0>
    partitions_protocol <partitions_protocol_0>
    paseto_protocol <paseto_protocol_0>
    pattern_miner_protocol <pattern_miner_protocol_0>

@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on August 4, 2026
+##   Last updated on August 5, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -274,6 +274,7 @@ sed '1,19d' ../../../library/optionals/NOTES.md | pandoc -f gfm -t rst -o librar
 sed '1,19d' ../../../library/options/NOTES.md | pandoc -f gfm -t rst -o libraries/options.rst
 sed '1,19d' ../../../library/os/NOTES.md | pandoc -f gfm -t rst -o libraries/os.rst
 sed '1,19d' ../../../library/otp/NOTES.md | pandoc -f gfm -t rst -o libraries/otp.rst
+sed '1,19d' ../../../library/particle_swarm_optimization/NOTES.md | pandoc -f gfm -t rst -o libraries/particle_swarm_optimization.rst
 sed '1,19d' ../../../library/partitions/NOTES.md | pandoc -f gfm -t rst -o libraries/partitions.rst
 sed '1,19d' ../../../library/paseto/NOTES.md | pandoc -f gfm -t rst -o libraries/paseto.rst
 sed '1,19d' ../../../library/pattern_mining_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/pattern_mining_protocols.rst

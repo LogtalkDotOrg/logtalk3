@@ -2627,6 +2627,18 @@ To load any library (including developer tools, ports, and contributions), use t
    registry_loader_hook <registry_loader_hook_0>
    registry_protocol <registry_protocol_0>
 
+:ref:`particle_swarm_optimization <library_particle_swarm_optimization>`
+------------------------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   particle_swarm_optimization(Problem) <particle_swarm_optimization_1>
+   particle_swarm_optimization(Problem,RandomAlgorithm) <particle_swarm_optimization_2>
+   particle_swarm_optimization_protocol <particle_swarm_optimization_protocol_0>
+
 :ref:`partitions <library_partitions>`
 --------------------------------------
 

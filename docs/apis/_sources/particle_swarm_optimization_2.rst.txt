@@ -1,0 +1,139 @@
+.. index:: single: particle_swarm_optimization(Problem,RandomAlgorithm)
+.. _particle_swarm_optimization/2:
+
+.. rst-class:: right
+
+**object**
+
+``particle_swarm_optimization(Problem,RandomAlgorithm)``
+========================================================
+
+* ``Problem`` - Problem object implementing ``particle_swarm_optimization_protocol``.
+* ``RandomAlgorithm`` - Random number generator algorithm for the ``fast_random`` library.
+
+
+Continuous bounded global-best particle swarm optimization algorithm. Parameterized by a problem object implementing the ``particle_swarm_optimization_protocol`` protocol and by a random number generator algorithm for the ``fast_random`` library. The algorithm minimizes the fitness function defined by the problem.
+
+| **Availability:** 
+|    ``logtalk_load(particle_swarm_optimization(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-05
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`fast_random(Algorithm) <fast_random/1>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+
+   - Algorithm: Uses synchronous global-best particle swarm optimization. Every particle update in an iteration uses the global best from the start of that iteration.
+   - Boundary handling: Velocities are limited to plus or minus the range of each dimension. A position crossing a bound is clamped to that bound and its velocity component is set to zero.
+   - Progress reporting: If the problem object defines ``progress/5``, it is called periodically and once when the loop terminates.
+   - Seed control: The ``seed(S)`` option initializes the random number generator for reproducible runs.
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: run/2
+.. _particle_swarm_optimization/2::run/2:
+
+``run/2``
+^^^^^^^^^
+
+Runs the particle swarm optimization algorithm using default options and returns the best position and fitness found.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``run(BestPosition,BestFitness)``
+| **Mode and number of proofs:**
+|    ``run(-list(number),-number)`` - ``one``
+
+
+------------
+
+.. index:: run/3
+.. _particle_swarm_optimization/2::run/3:
+
+``run/3``
+^^^^^^^^^
+
+Runs the particle swarm optimization algorithm using the given options and returns the best position and fitness found.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``run(BestPosition,BestFitness,Options)``
+| **Mode and number of proofs:**
+|    ``run(-list(number),-number,+list(compound))`` - ``one``
+
+| **Remarks:**
+
+    - ``max_iterations(N)`` option: Maximum number of swarm iterations (default: ``1000``).
+    - ``inertia_weight(W)`` option: Velocity inertia weight (default: ``0.7298``).
+    - ``cognitive_coefficient(C)`` option: Personal-best acceleration coefficient (default: ``1.49618``).
+    - ``social_coefficient(C)`` option: Global-best acceleration coefficient (default: ``1.49618``).
+    - ``updates(N)`` option: Number of progress reports during the run; zero disables reporting (default: ``0``).
+    - ``seed(S)`` option: Positive integer random seed for reproducible runs.
+
+
+------------
+
+.. index:: run/4
+.. _particle_swarm_optimization/2::run/4:
+
+``run/4``
+^^^^^^^^^
+
+Runs the particle swarm optimization algorithm using the given options and returns the best position, best fitness, and run statistics.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``run(BestPosition,BestFitness,Statistics,Options)``
+| **Mode and number of proofs:**
+|    ``run(-list(number),-number,-list(compound),+list(compound))`` - ``one``
+
+| **Remarks:**
+
+    - Statistics list: A list containing ``iterations(N)``, ``evaluations(E)``, ``improvements(I)``, ``final_mean_fitness(M)``, and ``final_diversity(D)``.
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`particle_swarm_optimization(Problem) <particle_swarm_optimization/1>`, :ref:`particle_swarm_optimization_protocol <particle_swarm_optimization_protocol/0>`
+

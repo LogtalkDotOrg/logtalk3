@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on August 4, 2026
+##   Last updated on August 5, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -274,6 +274,7 @@ Foreach-Object {
 (Get-Content ../../../library/options/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/options.rst
 (Get-Content ../../../library/os/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/os.rst
 (Get-Content ../../../library/otp/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/otp.rst
+(Get-Content ../../../library/particle_swarm_optimization/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/particle_swarm_optimization.rst
 (Get-Content ../../../library/partitions/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/partitions.rst
 (Get-Content ../../../library/paseto/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/paseto.rst
 (Get-Content ../../../library/pattern_mining_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/pattern_mining_protocols.rst

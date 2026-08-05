@@ -2410,6 +2410,18 @@ To load an entity, always load the library that includes it using the goal ``log
    otp <otp_0>
    otp_protocol <otp_protocol_0>
 
+``library/particle_swarm_optimization/``
+----------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   particle_swarm_optimization(Problem) <particle_swarm_optimization_1>
+   particle_swarm_optimization(Problem,RandomAlgorithm) <particle_swarm_optimization_2>
+   particle_swarm_optimization_protocol <particle_swarm_optimization_protocol_0>
+
 ``library/partitions/``
 -----------------------
 

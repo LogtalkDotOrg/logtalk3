@@ -1,0 +1,154 @@
+.. index:: single: particle_swarm_optimization_protocol
+.. _particle_swarm_optimization_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``particle_swarm_optimization_protocol``
+========================================
+
+Protocol for continuous bounded particle swarm optimization problem definitions. A problem object must define the three required predicates and may optionally define predicates for stopping and progress reporting.
+
+| **Availability:** 
+|    ``logtalk_load(particle_swarm_optimization(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-05
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: initial_positions/1
+.. _particle_swarm_optimization_protocol/0::initial_positions/1:
+
+``initial_positions/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a non-empty list of initial particle positions. All positions must be non-empty lists of numbers with the same dimensions as the position bounds.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``initial_positions(Positions)``
+| **Mode and number of proofs:**
+|    ``initial_positions(-list(list(number)))`` - ``one``
+
+
+------------
+
+.. index:: position_bounds/1
+.. _particle_swarm_optimization_protocol/0::position_bounds/1:
+
+``position_bounds/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns one ``Lower-Upper`` numeric bound pair per position dimension, with ``Lower =< Upper``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``position_bounds(Bounds)``
+| **Mode and number of proofs:**
+|    ``position_bounds(-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: fitness/2
+.. _particle_swarm_optimization_protocol/0::fitness/2:
+
+``fitness/2``
+^^^^^^^^^^^^^
+
+Computes the fitness of a particle position. The algorithm minimizes this value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fitness(Position,Fitness)``
+| **Mode and number of proofs:**
+|    ``fitness(+list(number),-number)`` - ``one``
+
+
+------------
+
+.. index:: stop_condition/3
+.. _particle_swarm_optimization_protocol/0::stop_condition/3:
+
+``stop_condition/3``
+^^^^^^^^^^^^^^^^^^^^
+
+True when the search should stop given the completed iteration count, best position, and best fitness. Optional. When not defined, the search runs for the configured maximum number of iterations.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``stop_condition(Iteration,BestPosition,BestFitness)``
+| **Mode and number of proofs:**
+|    ``stop_condition(+non_negative_integer,+list(number),+number)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: progress/5
+.. _particle_swarm_optimization_protocol/0::progress/5:
+
+``progress/5``
+^^^^^^^^^^^^^^
+
+Called periodically to report the completed iteration count, best position, best fitness, mean swarm fitness, and swarm diversity. Diversity is the mean Euclidean distance from the swarm centroid. Optional.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``progress(Iteration,BestPosition,BestFitness,MeanFitness,Diversity)``
+| **Mode and number of proofs:**
+|    ``progress(+non_negative_integer,+list(number),+number,+number,+number)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`particle_swarm_optimization(Problem) <particle_swarm_optimization/1>`
+
