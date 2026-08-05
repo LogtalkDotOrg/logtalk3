@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-04,
+		date is 2026-08-05,
 		comment is 'Unit tests for the "crypto" library.'
 	]).
 
@@ -373,18 +373,14 @@
 			pbkdf2(sha1, [112,97,115,115,119,111,114,100], [115,97,108,116], 2, 20, DerivedKey).
 
 		test(crypto_pbkdf2_6_20, deterministic(DerivedKey == ExpectedBytes)) :-
-			hex_bytes('4b007901b765489abead49d926f721d065a429c1', ExpectedBytes),
-			pbkdf2(sha1, [112,97,115,115,119,111,114,100], [115,97,108,116], 4096, 20, DerivedKey).
+			hex_bytes('8f2c3482e40bdbe537935153ef1692de0c7f4740bef78dd940', ExpectedBytes),
+			pbkdf2(sha1, [112,97,115,115,119,111,114,100,80,65,83,83,87,79,82,68,112,97,115,115,119,111,114,100], [115,97,108,116,83,65,76,84,115,97,108,116,83,65,76,84,115,97,108,116,83,65,76,84,115,97,108,116,83,65,76,84,115,97,108,116], 2, 25, DerivedKey).
 
 		test(crypto_pbkdf2_6_21, deterministic(DerivedKey == ExpectedBytes)) :-
-			hex_bytes('3d2eec4fe41c849b80c8d83662c0e44a8b291a964cf2f07038', ExpectedBytes),
-			pbkdf2(sha1, [112,97,115,115,119,111,114,100,80,65,83,83,87,79,82,68,112,97,115,115,119,111,114,100], [115,97,108,116,83,65,76,84,115,97,108,116,83,65,76,84,115,97,108,116,83,65,76,84,115,97,108,116,83,65,76,84,115,97,108,116], 4096, 25, DerivedKey).
+			hex_bytes('7fb49ccc3b30c609d1d1bc86ac5acf87', ExpectedBytes),
+			pbkdf2(sha1, [112,97,115,115,0,119,111,114,100], [115,97,0,108,116], 1, 16, DerivedKey).
 
-		test(crypto_pbkdf2_6_22, deterministic(DerivedKey == ExpectedBytes)) :-
-			hex_bytes('56fa6aa75548099dcc37d7f03425e0c3', ExpectedBytes),
-			pbkdf2(sha1, [112,97,115,115,0,119,111,114,100], [115,97,0,108,116], 4096, 16, DerivedKey).
-
-		test(crypto_pbkdf2_6_23, error(domain_error(pbkdf2_output_length, 68719476721))) :-
+		test(crypto_pbkdf2_6_22, error(domain_error(pbkdf2_output_length, 68719476721))) :-
 			pbkdf2(md5, [1,2,3], [4,5,6], 1, 68719476721, _DerivedKey).
 
 	:- endif.

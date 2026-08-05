@@ -32,6 +32,13 @@ To test this library, load the ``tester.lgt`` file:
 
    | ?- logtalk_load(crypto(tester)).
 
+Some of the official test vectors for PBKDF2 use 4096 and 16777216
+iterations. Those test vectors are not used as they that don't increase
+code coverage: in PBKDF2, iteration count is a work factor, not an
+algorithmic requirement. Instead, tests with much smaller number of
+iterations are used to speedup testing on slower backends without
+loosing code coverage.
+
 Scope
 -----
 
