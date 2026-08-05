@@ -22,7 +22,7 @@
 :- object(string_distance(_Representation_)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
 		date is 2026-08-05,
 		comment is 'String distance predicates.',
@@ -204,6 +204,26 @@
 		]
 	]).
 
+	:- public(nysiis/2).
+	:- mode(nysiis(+text, -atom), one).
+	:- info(nysiis/2, [
+		comment is 'Computes the NYSIIS phonetic key for a string.',
+		arguments is [
+			'String' - 'Input string (typically a name).',
+			'Encoding' - 'The NYSIIS phonetic encoding, limited to six characters.'
+		]
+	]).
+
+	:- public(nysiis_match/2).
+	:- mode(nysiis_match(+text, +text), zero_or_one).
+	:- info(nysiis_match/2, [
+		comment is 'Succeeds if two strings share the same NYSIIS key.',
+		arguments is [
+			'String1' - 'First input string.',
+			'String2' - 'Second input string.'
+		]
+	]).
+
 	:- public(metaphone/2).
 	:- mode(metaphone(+text, -atom), one).
 	:- info(metaphone/2, [
@@ -296,8 +316,8 @@
 
 	lev_row([], _, _, _, _, []).
 	lev_row([H2| T2], H1, [Above| AboveRest], Left, Diag, [Val| Row]) :-
-		(	H1 == H2
-		->	Cost = 0
+		(	H1 == H2 ->
+			Cost = 0
 		;	Cost = 1
 		),
 		Sub is Diag  + Cost,
@@ -338,8 +358,8 @@
 	dl_rows([H1| T1], Codes2, RowPrev, RowPrevPrev, PrevCode, RowFinal) :-
 		RowPrev = [RowIdx0| RowVals],
 		RowIdx is RowIdx0 + 1,
-		(	RowPrevPrev == []
-		->	RowPrevPrevVals = []
+		(	RowPrevPrev == [] ->
+			RowPrevPrevVals = []
 		;	RowPrevPrev = [_| RowPrevPrevVals]
 		),
 		dl_row(Codes2, H1, PrevCode, RowVals, RowPrevPrevVals, RowIdx, RowIdx0, 0, RowCur0),
@@ -348,8 +368,8 @@
 
 	dl_row([], _, _, _, _, _, _, _, []).
 	dl_row([H2| T2], H1, PrevCode, [Above| AboveRest], PrevPrevRow, Left, Diag, ColIdx, [Val| Row]) :-
-		(	H1 == H2
-		->	Cost = 0
+		(	H1 == H2 ->
+			Cost = 0
 		;	Cost = 1
 		),
 		Sub is Diag  + Cost,
@@ -365,8 +385,8 @@
 			ColIdx > 0,
 			PrevPrevRow \= [],
 			ColIdx1 is ColIdx - 1,
-			nth0(ColIdx1, PrevPrevRow, PPVal)
-		->	Trans is PPVal + 1,
+			nth0(ColIdx1, PrevPrevRow, PPVal) ->
+			Trans is PPVal + 1,
 			Val is min(Val0, Trans)
 		;	Val = Val0
 		),
@@ -392,8 +412,8 @@
 
 	hamming_count([], [], Distance, Distance).
 	hamming_count([Code1| Codes1], [Code2| Codes2], Distance0, Distance) :-
-		(	Code1 == Code2
-		->	Distance1 = Distance0
+		(	Code1 == Code2 ->
+			Distance1 = Distance0
 		;	Distance1 is Distance0 + 1
 		),
 		hamming_count(Codes1, Codes2, Distance1, Distance).
@@ -426,18 +446,18 @@
 	jaro(codes, Codes1, Codes2, Similarity) :-
 		length(Codes1, Length1),
 		length(Codes2, Length2),
-		(	Length1 =:= 0, Length2 =:= 0
-		->	Similarity = 1.0
-		;	(Length1 =:= 0 ; Length2 =:= 0)
-		->	Similarity = 0.0
+		(	Length1 =:= 0, Length2 =:= 0 ->
+			Similarity = 1.0
+		;	(Length1 =:= 0 ; Length2 =:= 0) ->
+			Similarity = 0.0
 		;	MW is max(max(Length1, Length2) // 2 - 1, 0),
 			length(Used0, Length2),
 			maplist_eq(Used0, false),
 			jaro_match_s1(Codes1, 0, Codes2, Length2, MW, Used0, Matches1, UsedFinal),
 			jaro_match_s2(Codes2, 0, UsedFinal, Matches2),
 			length(Matches1, M1Length),
-			(	M1Length =:= 0
-			->	Similarity = 0.0
+			(	M1Length =:= 0 ->
+				Similarity = 0.0
 			;	jaro_count_trans(Matches1, Matches2, 0, Count),
 				Similarity is (M1Length / Length1 + M1Length / Length2 + (M1Length - Count / 2) / M1Length) / 3.0
 			)
@@ -447,8 +467,8 @@
 	jaro_match_s1([H1| T1], I, Codes2, Length2, MW, Used0, Matches, UsedOut) :-
 		Low  is max(0,        I - MW),
 		High is min(Length2 - 1, I + MW),
-		(	jaro_find_unused(H1, Codes2, Low, High, Used0, Pos)
-		->	Matches = [H1| RestM],
+		(	jaro_find_unused(H1, Codes2, Low, High, Used0, Pos) ->
+			Matches = [H1| RestM],
 			set_nth0(Pos, Used0, true, Used1),
 			I1 is I + 1,
 			jaro_match_s1(T1, I1, Codes2, Length2, MW, Used1, RestM, UsedOut)
@@ -461,8 +481,9 @@
 		Low =< High,
 		nth0(Low, Codes2,  Code2),
 		nth0(Low, Used, Flag),
-		(	Code2 == Code, Flag == false
-		->	Pos = Low
+		(	Code2 == Code,
+			Flag == false ->
+			Pos = Low
 		;	Low1 is Low + 1,
 			jaro_find_unused(Code, Codes2, Low1, High, Used, Pos)
 		).
@@ -470,8 +491,8 @@
 	jaro_match_s2([], _, _, []).
 	jaro_match_s2([Head| Tail], I, Used, Matches) :-
 		nth0(I, Used, Flag),
-		(	Flag == true
-		->	Matches = [Head| Rest]
+		(	Flag == true ->
+			Matches = [Head| Rest]
 		;	Matches = Rest
 		),
 		I1 is I + 1,
@@ -479,8 +500,8 @@
 
 	jaro_count_trans([], [], Count, Count).
 	jaro_count_trans([Head1| Tail1], [Head2| Tail2], Count0, Count) :-
-		(	Head1 \== Head2
-		->	Count1 is Count0 + 1
+		(	Head1 \== Head2 ->
+			Count1 is Count0 + 1
 		;	Count1 = Count0
 		),
 		jaro_count_trans(Tail1, Tail2, Count1, Count).
@@ -518,22 +539,22 @@
 	% sim = 1 - (edit_distance / max(|s1|, |s2|))
 	% -----------------------------------------------------------------
 	edit_similarity(String1, String2, Similarity) :-
-		edit_similarity(_Representation_, String1, String2, Similarity).
+		edit_similarity_(_Representation_, String1, String2, Similarity).
 
-	edit_similarity(atom, String1, String2, Similarity) :-
+	edit_similarity_(atom, String1, String2, Similarity) :-
 		atom_codes(String1, Codes1),
 		atom_codes(String2, Codes2),
-		edit_similarity(codes, Codes1, Codes2, Similarity).
-	edit_similarity(chars, String1, String2, Similarity) :-
-		edit_similarity(codes, String1, String2, Similarity).
-	edit_similarity(codes, String1, String2, Similarity) :-
+		edit_similarity_(codes, Codes1, Codes2, Similarity).
+	edit_similarity_(chars, String1, String2, Similarity) :-
+		edit_similarity_(codes, String1, String2, Similarity).
+	edit_similarity_(codes, String1, String2, Similarity) :-
 		levenshtein(codes, String1, String2, Distance),
 		length(String1, Length1),
 		length(String2, Length2),
 		MaxLength is max(Length1, Length2),
-		(	MaxLength =:= 0
+		(	MaxLength =:= 0 ->
 			% both empty
-		->	Similarity = 1.0
+			Similarity = 1.0
 		;	Similarity is 1.0 - (Distance / MaxLength)
 		).
 
@@ -547,22 +568,22 @@
 	edit_similarity(chars, Algorithm, String1, String2, Similarity) :-
 		edit_similarity(codes, Algorithm, String1, String2, Similarity).
 	edit_similarity(codes, Algorithm, String1, String2, Similarity) :-
-		(	Algorithm == levenshtein
-		->	levenshtein(codes, String1, String2, Distance)
-		;	Algorithm == damerau_levenshtein
-		->	damerau_levenshtein(codes, String1, String2, Distance)
-		;	Algorithm == hamming
-		->	hamming(codes, String1, String2, Distance)
-		;	Algorithm == longest_common_subsequence
-		->	longest_common_subsequence_length(codes, String1, String2, Distance)
+		(	Algorithm == levenshtein ->
+			levenshtein(codes, String1, String2, Distance)
+		;	Algorithm == damerau_levenshtein ->
+			damerau_levenshtein(codes, String1, String2, Distance)
+		;	Algorithm == hamming ->
+			hamming(codes, String1, String2, Distance)
+		;	Algorithm == longest_common_subsequence ->
+			longest_common_subsequence_length(codes, String1, String2, Distance)
 		;	fail
 		),
 		length(String1, Length1),
 		length(String2, Length2),
 		MaxLength is max(Length1, Length2),
-		(	MaxLength =:= 0
-		->	Similarity = 1.0
+		(	MaxLength =:= 0 ->
 			% both empty
+			Similarity = 1.0
 		;	Similarity is 1.0 - (Distance / MaxLength)
 		).
 
@@ -608,8 +629,8 @@
 	longest_common_subsequence_length_row([], _, _, _, Acc, Row) :-
 		reverse(Acc, Row).
 	longest_common_subsequence_length_row([H2| T2], H1, [Above| AboveRest], Diag, Acc, Row) :-
-		(	H1 == H2
-		->	Val is Diag + 1
+		(	H1 == H2 ->
+			Val is Diag + 1
 		;	Acc = [Left| _],
 			Val is max(Above, Left)
 		),
@@ -660,15 +681,15 @@
 		J1 is J - 1,
 		nth0(I1, Codes1, CodeI),
 		nth0(J1, Codes2, CodeJ),
-		(	CodeI == CodeJ
-		->	Seq = [CodeI|RestSeq],
+		(	CodeI == CodeJ ->
+			Seq = [CodeI|RestSeq],
 			lcs_backtrack(Table, Codes1, Codes2, I1, J1, RestSeq)
 		;	nth0(I1, Table, RowUp),
 			nth0(J,  RowUp,  ValUp),
 			nth0(I,  Table, RowCur),
 			nth0(J1, RowCur, ValLeft),
-			(	ValUp >= ValLeft
-			->	lcs_backtrack(Table, Codes1, Codes2, I1, J, Seq)
+			(	ValUp >= ValLeft ->
+				lcs_backtrack(Table, Codes1, Codes2, I1, J, Seq)
 			;	lcs_backtrack(Table, Codes1, Codes2, I, J1, Seq)
 			)
 		).
@@ -703,8 +724,8 @@
 		length(Row0, Cols1),
 		maplist_eq(Row0, 0),
 		lcsub_rows(Codes1, Codes2, Row0, 0, 0, 0, MaxLen, EndI),
-		(	MaxLen =:= 0
-		->	Substring = ''
+		(	MaxLen =:= 0 ->
+			Substring = ''
 		;	StartI is EndI - MaxLen,
 			lcsub_slice(Codes1, StartI, MaxLen, Substring)
 		).
@@ -719,15 +740,17 @@
 
 	lcsub_row([], _, _, _, ML, EI, _, ML, EI, []).
 	lcsub_row([H2| T2], H1, [Above| AboveRest], Diag, ML0, EI0, RowIdx, ML, EI, [Val| RestRow]) :-
-		(	H1 == H2
-		->	Val is Diag + 1
+		(	H1 == H2 ->
+			Val is Diag + 1
 		;	Val = 0
 		),
 		% 1-based end position in Codes1
 		RowIdxEnd is RowIdx + 1,
-		(	Val > ML0
-		->	ML1 = Val, EI1 = RowIdxEnd
-		;	ML1 = ML0, EI1 = EI0
+		(	Val > ML0 ->
+			ML1 = Val,
+			EI1 = RowIdxEnd
+		;	ML1 = ML0,
+			EI1 = EI0
 		),
 		lcsub_row(T2, H1, AboveRest, Above, ML1, EI1, RowIdx, ML, EI, RestRow).
 
@@ -759,8 +782,8 @@
 		magnitude(AllTokens, Tokens1, Magnitude1),
 		magnitude(AllTokens, Tokens2, Magnitude2),
 		Denominator is Magnitude1 * Magnitude2,
-		(	Denominator =:= 0
-		->  Similarity = 0.0
+		(	Denominator =:= 0 ->
+			Similarity = 0.0
 		;	Similarity is DotProduct / Denominator
 		).
 
@@ -806,8 +829,8 @@
 		union(SortedTokens1, SortedTokens2, Union),
 		length(Intersection, IntersectionLength),
 		length(Union, UnionLength),
-		(	UnionLength =:= 0
-		->	Index = 1.0
+		(	UnionLength =:= 0 ->
+			Index = 1.0
 		;	Index is IntersectionLength / UnionLength
 		).
 
@@ -840,8 +863,8 @@
 		soundex(chars, Chars, Encoding0),
 		chars_to_codes(Encoding0, Encoding).
 	soundex(chars, String, Encoding) :-
-		(	String == []
-		->	Encoding = ''
+		(	String == [] ->
+			Encoding = ''
 		;	String = [First| Rest],
 			upcase_char(First, FirstUp),
 			atom_chars(FirstUp, [FirstChar]),
@@ -862,8 +885,8 @@
 		soundex_encode(Chars, Codes).
 
 	soundex_char_code(Char, Code) :-
-		(	soundex_char_code_(Char, Code)
-		->	true
+		(	soundex_char_code_(Char, Code) ->
+			true
 		;	Code = '0'
 		).
 
@@ -903,14 +926,153 @@
 
 	soundex_pad(List, N, Padded) :-
 		length(List, Length),
-		(	Length >= N
-		->  length(Padded, N),
+		(	Length >= N ->
+			length(Padded, N),
 			append(Padded, _, List)
 		;	Rem is N - Length,
 			length(Zeros, Rem),
 			maplist_eq(Zeros, '0'),
 			append(List, Zeros, Padded)
 		).
+
+	% -----------------------------------------------------------------
+	% NYSIIS
+	% -----------------------------------------------------------------
+	nysiis(String, Encoding) :-
+		nysiis(_Representation_, String, Encoding).
+
+	nysiis(atom, String, Encoding) :-
+		atom_chars(String, Chars),
+		nysiis(chars, Chars, Encoding0),
+		atom_chars(Encoding, Encoding0).
+	nysiis(codes, String, Encoding) :-
+		codes_to_chars(String, Chars),
+		nysiis(chars, Chars, Encoding0),
+		chars_to_codes(Encoding0, Encoding).
+	nysiis(chars, String, Encoding) :-
+		upcase_chars(String, Upper),
+		nysiis_letters(Upper, Letters),
+		(	Letters == [] ->
+			Encoding = []
+		;	nysiis_prepare_prefix(Letters, PrefixPrepared),
+			nysiis_prepare_suffix(PrefixPrepared, Prepared),
+			Prepared = [First| Rest],
+			nysiis_encode(Rest, First, EncodedRest),
+			nysiis_cleanup([First| EncodedRest], Cleaned),
+			nysiis_truncate(Cleaned, 6, Encoding)
+		).
+
+	nysiis_letters([], []).
+	nysiis_letters([Char| Chars], Letters) :-
+		(	Char @>= 'A', Char @=< 'Z' ->
+			Letters = [Char| Rest]
+		;	Letters = Rest
+		),
+		nysiis_letters(Chars, Rest).
+
+	nysiis_prepare_prefix(['M','A','C'| Chars], ['M','C','C'| Chars]) :-
+		!.
+	nysiis_prepare_prefix(['K','N'| Chars], ['N','N'| Chars]) :-
+		!.
+	nysiis_prepare_prefix(['K'| Chars], ['C'| Chars]) :-
+		!.
+	nysiis_prepare_prefix(['P','H'| Chars], ['F','F'| Chars]) :-
+		!.
+	nysiis_prepare_prefix(['P','F'| Chars], ['F','F'| Chars]) :-
+		!.
+	nysiis_prepare_prefix(['S','C','H'| Chars], ['S','S','S'| Chars]) :-
+		!.
+	nysiis_prepare_prefix(Chars, Chars).
+
+	nysiis_prepare_suffix(Chars, Prepared) :-
+		reverse(Chars, Reversed),
+		nysiis_prepare_reversed_suffix(Reversed, ReversedPrepared),
+		reverse(ReversedPrepared, Prepared).
+
+	nysiis_prepare_reversed_suffix(['E','E'| Chars], ['Y'| Chars]) :-
+		!.
+	nysiis_prepare_reversed_suffix(['E','I'| Chars], ['Y'| Chars]) :-
+		!.
+	nysiis_prepare_reversed_suffix(['T','D'| Chars], ['D'| Chars]) :-
+		!.
+	nysiis_prepare_reversed_suffix(['T','R'| Chars], ['D'| Chars]) :-
+		!.
+	nysiis_prepare_reversed_suffix(['D','R'| Chars], ['D'| Chars]) :-
+		!.
+	nysiis_prepare_reversed_suffix(['T','N'| Chars], ['D'| Chars]) :-
+		!.
+	nysiis_prepare_reversed_suffix(['D','N'| Chars], ['D'| Chars]) :-
+		!.
+	nysiis_prepare_reversed_suffix(Chars, Chars).
+
+	nysiis_encode([], _, []).
+	nysiis_encode([Char| Chars], Previous, Encoding) :-
+		nysiis_transcode(Previous, Char, Chars, Transcoded, Rest),
+		(	Transcoded == Previous ->
+			Encoding = EncodedRest
+		;	Encoding = [Transcoded| EncodedRest]
+		),
+		nysiis_encode(Rest, Transcoded, EncodedRest).
+
+	nysiis_transcode(_, 'E', ['V'| Chars], 'A', ['F'| Chars]) :-
+		!.
+	nysiis_transcode(_, Char, Chars, 'A', Chars) :-
+		nysiis_vowel(Char),
+		!.
+	nysiis_transcode(_, 'Q', Chars, 'G', Chars) :-
+		!.
+	nysiis_transcode(_, 'Z', Chars, 'S', Chars) :-
+		!.
+	nysiis_transcode(_, 'M', Chars, 'N', Chars) :-
+		!.
+	nysiis_transcode(_, 'K', ['N'| Chars], 'N', ['N'| Chars]) :-
+		!.
+	nysiis_transcode(_, 'K', Chars, 'C', Chars) :-
+		!.
+	nysiis_transcode(_, 'S', ['C','H'| Chars], 'S', ['S','S'| Chars]) :-
+		!.
+	nysiis_transcode(_, 'P', ['H'| Chars], 'F', ['F'| Chars]) :-
+		!.
+	nysiis_transcode(Previous, 'H', Chars, Previous, Chars) :-
+		(	\+ nysiis_vowel(Previous)
+		;	Chars = [Next| _], \+ nysiis_vowel(Next)
+		;	Chars == []
+		),
+		!.
+	nysiis_transcode(Previous, 'W', Chars, Previous, Chars) :-
+		nysiis_vowel(Previous),
+		!.
+	nysiis_transcode(_, Char, Chars, Char, Chars).
+
+	nysiis_vowel(Char) :-
+		member(Char, ['A','E','I','O','U']).
+
+	nysiis_cleanup(Key, Cleaned) :-
+		nysiis_remove_terminal('S', Key, Key1),
+		nysiis_replace_terminal_ay(Key1, Key2),
+		nysiis_remove_terminal('A', Key2, Cleaned).
+
+	nysiis_remove_terminal(Char, Key, Result) :-
+		reverse(Key, Reversed),
+		(	Reversed = [Char| Rest],
+			Rest \== [] ->
+			reverse(Rest, Result)
+		;	Result = Key
+		).
+
+	nysiis_replace_terminal_ay(Key, Result) :-
+		reverse(Key, Reversed),
+		(	Reversed = ['Y','A'| Rest] ->
+			reverse(['Y'| Rest], Result)
+		;	Result = Key
+		).
+
+	nysiis_truncate(_, 0, []) :-
+		!.
+	nysiis_truncate([], _, []).
+	nysiis_truncate([Char| Chars], Length, [Char| Truncated]) :-
+		Length1 is Length - 1,
+		nysiis_truncate(Chars, Length1, Truncated).
 
 	% -----------------------------------------------------------------
 	% Metaphone
@@ -980,7 +1142,11 @@
 		metaphone_rule('B', Word, Index, Length, Fragment, NextIndex) :-
 			!,
 			NextIndex is Index + 1,
-			( NextIndex =:= Length, metaphone_previous_char(Word, Index, 'M') -> Fragment = [] ; Fragment = ['B'] ).
+			(	NextIndex =:= Length,
+				metaphone_previous_char(Word, Index, 'M') ->
+				Fragment = []
+			;	Fragment = ['B']
+			).
 		metaphone_rule('C', Word, Index, _, Fragment, NextIndex) :-
 			!,
 			metaphone_c_rule(Word, Index, Fragment, NextIndex).
@@ -1228,12 +1394,12 @@
 	% Handles some common alternative pronunciations
 	double_metaphone_encode([], _, [], []).
 	double_metaphone_encode([Char| Chars], IsSlavoGermanic, Primary, Alternative) :-
-		double_metaphone_char(Char, Chars, IsSlavoGermanic, PCode, ACode, Rest),
-		(	PCode == []
-		->	double_metaphone_encode(Rest, IsSlavoGermanic, Primary, Alternative)
+		double_metaphone_char(Char, Chars, IsSlavoGermanic, PCode, ACode, Rest), !,
+		(	PCode == [] ->
+			double_metaphone_encode(Rest, IsSlavoGermanic, Primary, Alternative)
 		;	Primary = [PCode| RestP],
-			(	ACode == []
-			->	Alternative = [PCode| RestA]
+			(	ACode == [] ->
+				Alternative = [PCode| RestA]
 			;	Alternative = [ACode| RestA]
 			),
 			double_metaphone_encode(Rest, IsSlavoGermanic, RestP, RestA)
@@ -1355,6 +1521,10 @@
 	soundex_match(String1, String2) :-
 		soundex(String1, Code),
 		soundex(String2, Code).
+
+	nysiis_match(String1, String2) :-
+		nysiis(String1, Key),
+		nysiis(String2, Key).
 
 	metaphone_match(String1, String2) :-
 		metaphone(String1, Key),

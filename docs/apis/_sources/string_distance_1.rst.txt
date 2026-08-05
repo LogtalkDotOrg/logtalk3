@@ -17,7 +17,7 @@ String distance predicates.
 |    ``logtalk_load(string_distance(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:2:0
+| **Version:** 1:3:0
 | **Date:** 2026-08-05
 
 | **Compilation flags:**
@@ -345,6 +345,48 @@ Succeeds if two strings share the same Soundex code.
 |        ``String2`` - Second input string.
 | **Mode and number of proofs:**
 |    ``soundex_match(+text,+text)`` - ``one``
+
+
+------------
+
+.. index:: nysiis/2
+.. _string_distance/1::nysiis/2:
+
+``nysiis/2``
+^^^^^^^^^^^^
+
+Computes the NYSIIS phonetic key for a string.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``nysiis(String,Encoding)``
+|        ``String`` - Input string (typically a name).
+|        ``Encoding`` - The NYSIIS phonetic encoding, limited to six characters.
+| **Mode and number of proofs:**
+|    ``nysiis(+text,-atom)`` - ``one``
+
+
+------------
+
+.. index:: nysiis_match/2
+.. _string_distance/1::nysiis_match/2:
+
+``nysiis_match/2``
+^^^^^^^^^^^^^^^^^^
+
+Succeeds if two strings share the same NYSIIS key.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``nysiis_match(String1,String2)``
+|        ``String1`` - First input string.
+|        ``String2`` - Second input string.
+| **Mode and number of proofs:**
+|    ``nysiis_match(+text,+text)`` - ``zero_or_one``
 
 
 ------------

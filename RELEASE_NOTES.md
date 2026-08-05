@@ -129,6 +129,9 @@ hash functions that accept both key an digest size parameters (per RFC 7693).
 ranking datasets with ranked teams and weighted player participation, plus
 shared portable standard normal distribution numeric helpers.
 
+* ADDED: NYSIIS phonetic encoding and matching support to the
+`string_distance` library.
+
 * IMPROVED: Portability of the `sockets` library with versions of SWI-Prolog
 older than 9.1.5.
 

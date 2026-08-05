@@ -26,7 +26,7 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2026-08-05,
 		comment is 'Unit tests for the "string_distance" library using an atom representation.'
