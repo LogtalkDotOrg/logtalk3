@@ -387,10 +387,16 @@
 <li class="toctree-l2"><a class="reference internal" href="#as-list-2"><code class="docutils literal notranslate"><span class="pre">as_list/2</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#as-list-3"><code class="docutils literal notranslate"><span class="pre">as_list/3</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#as-nested-dictionary-2"><code class="docutils literal notranslate"><span class="pre">as_nested_dictionary/2</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#as-set-2"><code class="docutils literal notranslate"><span class="pre">as_set/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#as-trie-2"><code class="docutils literal notranslate"><span class="pre">as_trie/2</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#ask-question-5"><code class="docutils literal notranslate"><span class="pre">ask_question/5</span></code></a><ul class="simple">
@@ -1657,6 +1663,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#delete-object-5"><code class="docutils literal notranslate"><span class="pre">delete_object/5</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#delete-prefix-3"><code class="docutils literal notranslate"><span class="pre">delete_prefix/3</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#delete-vertex-3"><code class="docutils literal notranslate"><span class="pre">delete_vertex/3</span></code></a><ul class="simple">
@@ -4278,6 +4287,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#longest-increasing-subsequence-2"><code class="docutils literal notranslate"><span class="pre">longest_increasing_subsequence/2</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#longest-prefix-4"><code class="docutils literal notranslate"><span class="pre">longest_prefix/4</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#longest-repeating-subsequence-2"><code class="docutils literal notranslate"><span class="pre">longest_repeating_subsequence/2</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -4291,6 +4303,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#lookup-in-3"><code class="docutils literal notranslate"><span class="pre">lookup_in/3</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#lookup-prefix-4"><code class="docutils literal notranslate"><span class="pre">lookup_prefix/4</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#lower-triangular-part-2"><code class="docutils literal notranslate"><span class="pre">lower_triangular_part/2</span></code></a><ul class="simple">
@@ -5890,6 +5905,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#prefix-data-2"><code class="docutils literal notranslate"><span class="pre">prefix_data/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#prefixes-3"><code class="docutils literal notranslate"><span class="pre">prefixes/3</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#preflight-response-3"><code class="docutils literal notranslate"><span class="pre">preflight_response/3</span></code></a><ul class="simple">
@@ -7641,6 +7659,12 @@
 <li class="toctree-l2"><a class="reference internal" href="#string-upper-2"><code class="docutils literal notranslate"><span class="pre">string_upper/2</span></code></a><ul class="simple">
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#strings-2"><code class="docutils literal notranslate"><span class="pre">strings/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#strings-3"><code class="docutils literal notranslate"><span class="pre">strings/3</span></code></a><ul class="simple">
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#strlen-3"><code class="docutils literal notranslate"><span class="pre">strlen/3</span></code></a><ul class="simple">
 </ul>
 </li>
@@ -8434,6 +8458,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#values-2"><code class="docutils literal notranslate"><span class="pre">values/2</span></code></a><ul class="simple">
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#values-3"><code class="docutils literal notranslate"><span class="pre">values/3</span></code></a><ul class="simple">
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#variables-2"><code class="docutils literal notranslate"><span class="pre">variables/2</span></code></a><ul class="simple">
@@ -9664,6 +9691,15 @@
 <li><p><a class="reference internal" href="heap_protocol_0.html#heap-protocol-0-as-list-2"><span class="std std-ref">heap_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="queuep_0.html#queuep-0-as-list-2"><span class="std std-ref">queuep</span></a></p></li>
 <li><p><a class="reference internal" href="setp_0.html#setp-0-as-list-2"><span class="std std-ref">setp</span></a></p></li>
+<li><p><a class="reference internal" href="trie_1.html#trie-1-as-list-2"><span class="std std-ref">trie(Representation)</span></a></p></li>
+</ul>
+</section>
+<section id="as-list-3">
+<h2><code class="docutils literal notranslate"><span class="pre">as_list/3</span></code><a class="headerlink" href="#as-list-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="trie_1.html#trie-1-as-list-3"><span class="std std-ref">trie(Representation)</span></a></p></li>
 </ul>
 </section>
 <section id="as-nested-dictionary-2">
@@ -9680,6 +9716,14 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="setp_0.html#setp-0-as-set-2"><span class="std std-ref">setp</span></a></p></li>
+</ul>
+</section>
+<section id="as-trie-2">
+<h2><code class="docutils literal notranslate"><span class="pre">as_trie/2</span></code><a class="headerlink" href="#as-trie-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="trie_1.html#trie-1-as-trie-2"><span class="std std-ref">trie(Representation)</span></a></p></li>
 </ul>
 </section>
 <section id="ask-question-5">
@@ -12989,6 +13033,7 @@
 <li><p><a class="reference internal" href="http_client_0.html#http-client-0-delete-4"><span class="std std-ref">http_client</span></a></p></li>
 <li><p><a class="reference internal" href="http_client_digest_session_1.html#http-client-digest-session-1-delete-4"><span class="std std-ref">http_client_digest_session(HTTPTransport)</span></a></p></li>
 <li><p><a class="reference internal" href="http_client_session_1.html#http-client-session-1-delete-4"><span class="std std-ref">http_client_session(HTTPTransport)</span></a></p></li>
+<li><p><a class="reference internal" href="trie_1.html#trie-1-delete-4"><span class="std std-ref">trie(Representation)</span></a></p></li>
 </ul>
 </section>
 <section id="delete-all-after-2">
@@ -13149,6 +13194,14 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="s3_session_1.html#s3-session-1-delete-object-5"><span class="std std-ref">s3_session(HTTPTransport)</span></a></p></li>
+</ul>
+</section>
+<section id="delete-prefix-3">
+<h2><code class="docutils literal notranslate"><span class="pre">delete_prefix/3</span></code><a class="headerlink" href="#delete-prefix-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="trie_1.html#trie-1-delete-prefix-3"><span class="std std-ref">trie(Representation)</span></a></p></li>
 </ul>
 </section>
 <section id="delete-vertex-3">
@@ -14490,6 +14543,7 @@
 <li><p><a class="reference internal" href="optional_0.html#optional-0-empty-1"><span class="std std-ref">optional</span></a></p></li>
 <li><p><a class="reference internal" href="queuep_0.html#queuep-0-empty-1"><span class="std std-ref">queuep</span></a></p></li>
 <li><p><a class="reference internal" href="setp_0.html#setp-0-empty-1"><span class="std std-ref">setp</span></a></p></li>
+<li><p><a class="reference internal" href="trie_1.html#trie-1-empty-1"><span class="std std-ref">trie(Representation)</span></a></p></li>
 <li><p><a class="reference internal" href="varlistp_0.html#varlistp-0-empty-1"><span class="std std-ref">varlistp</span></a></p></li>
 </ul>
 </section>
@@ -17937,6 +17991,7 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="dictionaryp_0.html#dictionaryp-0-insert-4"><span class="std std-ref">dictionaryp</span></a></p></li>
 <li><p><a class="reference internal" href="heap_protocol_0.html#heap-protocol-0-insert-4"><span class="std std-ref">heap_protocol</span></a></p></li>
+<li><p><a class="reference internal" href="trie_1.html#trie-1-insert-4"><span class="std std-ref">trie(Representation)</span></a></p></li>
 </ul>
 </section>
 <section id="insert-after-3">
@@ -20426,6 +20481,14 @@
 <li><p><a class="reference internal" href="subsequences_protocol_0.html#subsequences-protocol-0-longest-increasing-subsequence-2"><span class="std std-ref">subsequences_protocol</span></a></p></li>
 </ul>
 </section>
+<section id="longest-prefix-4">
+<h2><code class="docutils literal notranslate"><span class="pre">longest_prefix/4</span></code><a class="headerlink" href="#longest-prefix-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="trie_1.html#trie-1-longest-prefix-4"><span class="std std-ref">trie(Representation)</span></a></p></li>
+</ul>
+</section>
 <section id="longest-repeating-subsequence-2">
 <h2><code class="docutils literal notranslate"><span class="pre">longest_repeating_subsequence/2</span></code><a class="headerlink" href="#longest-repeating-subsequence-2" title="Link to this heading"></a></h2>
 <div class="toctree-wrapper compound">
@@ -20448,6 +20511,7 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="dictionaryp_0.html#dictionaryp-0-lookup-3"><span class="std std-ref">dictionaryp</span></a></p></li>
+<li><p><a class="reference internal" href="trie_1.html#trie-1-lookup-3"><span class="std std-ref">trie(Representation)</span></a></p></li>
 </ul>
 </section>
 <section id="lookup-4">
@@ -20464,6 +20528,14 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="nested_dictionary_protocol_0.html#nested-dictionary-protocol-0-lookup-in-3"><span class="std std-ref">nested_dictionary_protocol</span></a></p></li>
+</ul>
+</section>
+<section id="lookup-prefix-4">
+<h2><code class="docutils literal notranslate"><span class="pre">lookup_prefix/4</span></code><a class="headerlink" href="#lookup-prefix-4" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="trie_1.html#trie-1-lookup-prefix-4"><span class="std std-ref">trie(Representation)</span></a></p></li>
 </ul>
 </section>
 <section id="lower-triangular-part-2">
@@ -21986,6 +22058,7 @@
 <li><p><a class="reference internal" href="nested_dictionary_protocol_0.html#nested-dictionary-protocol-0-new-1"><span class="std std-ref">nested_dictionary_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="streamvars_0.html#streamvars-0-new-1"><span class="std std-ref">streamvars</span></a></p></li>
 <li><p><a class="reference internal" href="termp_0.html#termp-0-new-1"><span class="std std-ref">termp</span></a></p></li>
+<li><p><a class="reference internal" href="trie_1.html#trie-1-new-1"><span class="std std-ref">trie(Representation)</span></a></p></li>
 </ul>
 </section>
 <section id="new-2">
@@ -24901,6 +24974,14 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="ccsds_packet_services_0.html#ccsds-packet-services-0-prefix-data-2"><span class="std std-ref">ccsds_packet_services</span></a></p></li>
+</ul>
+</section>
+<section id="prefixes-3">
+<h2><code class="docutils literal notranslate"><span class="pre">prefixes/3</span></code><a class="headerlink" href="#prefixes-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="trie_1.html#trie-1-prefixes-3"><span class="std std-ref">trie(Representation)</span></a></p></li>
 </ul>
 </section>
 <section id="preflight-response-3">
@@ -29022,6 +29103,7 @@
 <li><p><a class="reference internal" href="dictionaryp_0.html#dictionaryp-0-size-2"><span class="std std-ref">dictionaryp</span></a></p></li>
 <li><p><a class="reference internal" href="heap_protocol_0.html#heap-protocol-0-size-2"><span class="std std-ref">heap_protocol</span></a></p></li>
 <li><p><a class="reference internal" href="setp_0.html#setp-0-size-2"><span class="std std-ref">setp</span></a></p></li>
+<li><p><a class="reference internal" href="trie_1.html#trie-1-size-2"><span class="std std-ref">trie(Representation)</span></a></p></li>
 </ul>
 </section>
 <section id="skewness-2">
@@ -29707,6 +29789,22 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="string_1.html#string-1-string-upper-2"><span class="std std-ref">string(Representation)</span></a></p></li>
+</ul>
+</section>
+<section id="strings-2">
+<h2><code class="docutils literal notranslate"><span class="pre">strings/2</span></code><a class="headerlink" href="#strings-2" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="trie_1.html#trie-1-strings-2"><span class="std std-ref">trie(Representation)</span></a></p></li>
+</ul>
+</section>
+<section id="strings-3">
+<h2><code class="docutils literal notranslate"><span class="pre">strings/3</span></code><a class="headerlink" href="#strings-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="trie_1.html#trie-1-strings-3"><span class="std std-ref">trie(Representation)</span></a></p></li>
 </ul>
 </section>
 <section id="strlen-3">
@@ -31127,6 +31225,7 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="dictionaryp_0.html#dictionaryp-0-update-4"><span class="std std-ref">dictionaryp</span></a></p></li>
+<li><p><a class="reference internal" href="trie_1.html#trie-1-update-4"><span class="std std-ref">trie(Representation)</span></a></p></li>
 </ul>
 </section>
 <section id="update-5">
@@ -31135,6 +31234,7 @@
 </div>
 <ul class="simple">
 <li><p><a class="reference internal" href="dictionaryp_0.html#dictionaryp-0-update-5"><span class="std std-ref">dictionaryp</span></a></p></li>
+<li><p><a class="reference internal" href="trie_1.html#trie-1-update-5"><span class="std std-ref">trie(Representation)</span></a></p></li>
 </ul>
 </section>
 <section id="update-fecf-2">
@@ -31900,6 +32000,15 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="dictionaryp_0.html#dictionaryp-0-values-2"><span class="std std-ref">dictionaryp</span></a></p></li>
 <li><p><a class="reference internal" href="pairs_0.html#pairs-0-values-2"><span class="std std-ref">pairs</span></a></p></li>
+<li><p><a class="reference internal" href="trie_1.html#trie-1-values-2"><span class="std std-ref">trie(Representation)</span></a></p></li>
+</ul>
+</section>
+<section id="values-3">
+<h2><code class="docutils literal notranslate"><span class="pre">values/3</span></code><a class="headerlink" href="#values-3" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+</div>
+<ul class="simple">
+<li><p><a class="reference internal" href="trie_1.html#trie-1-values-3"><span class="std std-ref">trie(Representation)</span></a></p></li>
 </ul>
 </section>
 <section id="variables-2">

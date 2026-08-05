@@ -1105,6 +1105,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`heap_protocol <heap_protocol/0::as_list/2>`
 * :ref:`queuep <queuep/0::as_list/2>`
 * :ref:`setp <setp/0::as_list/2>`
+* :ref:`trie(Representation) <trie/1::as_list/2>`
+
+``as_list/3``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`trie(Representation) <trie/1::as_list/3>`
 
 ``as_nested_dictionary/2``
 --------------------------
@@ -1125,6 +1136,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`setp <setp/0::as_set/2>`
+
+``as_trie/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`trie(Representation) <trie/1::as_trie/2>`
 
 ``ask_question/5``
 ------------------
@@ -5238,6 +5259,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`http_client <http_client/0::delete/4>`
 * :ref:`http_client_digest_session(HTTPTransport) <http_client_digest_session/1::delete/4>`
 * :ref:`http_client_session(HTTPTransport) <http_client_session/1::delete/4>`
+* :ref:`trie(Representation) <trie/1::delete/4>`
 
 ``delete_all_after/2``
 ----------------------
@@ -5438,6 +5460,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`s3_session(HTTPTransport) <s3_session/1::delete_object/5>`
+
+``delete_prefix/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`trie(Representation) <trie/1::delete_prefix/3>`
 
 ``delete_vertex/3``
 -------------------
@@ -7097,6 +7129,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`optional <optional/0::empty/1>`
 * :ref:`queuep <queuep/0::empty/1>`
 * :ref:`setp <setp/0::empty/1>`
+* :ref:`trie(Representation) <trie/1::empty/1>`
 * :ref:`varlistp <varlistp/0::empty/1>`
 
 ``enable/0``
@@ -11366,6 +11399,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`dictionaryp <dictionaryp/0::insert/4>`
 * :ref:`heap_protocol <heap_protocol/0::insert/4>`
+* :ref:`trie(Representation) <trie/1::insert/4>`
 
 ``insert_after/3``
 ------------------
@@ -14460,6 +14494,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`subsequences_protocol <subsequences_protocol/0::longest_increasing_subsequence/2>`
 
+``longest_prefix/4``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`trie(Representation) <trie/1::longest_prefix/4>`
+
 ``longest_repeating_subsequence/2``
 -----------------------------------
 
@@ -14489,6 +14533,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`dictionaryp <dictionaryp/0::lookup/3>`
+* :ref:`trie(Representation) <trie/1::lookup/3>`
 
 ``lookup/4``
 ------------
@@ -14509,6 +14554,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`nested_dictionary_protocol <nested_dictionary_protocol/0::lookup_in/3>`
+
+``lookup_prefix/4``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`trie(Representation) <trie/1::lookup_prefix/4>`
 
 ``lower_triangular_part/2``
 ---------------------------
@@ -16401,6 +16456,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`nested_dictionary_protocol <nested_dictionary_protocol/0::new/1>`
 * :ref:`streamvars <streamvars/0::new/1>`
 * :ref:`termp <termp/0::new/1>`
+* :ref:`trie(Representation) <trie/1::new/1>`
 
 ``new/2``
 ---------
@@ -20012,6 +20068,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ccsds_packet_services <ccsds_packet_services/0::prefix_data/2>`
+
+``prefixes/3``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`trie(Representation) <trie/1::prefixes/3>`
 
 ``preflight_response/3``
 ------------------------
@@ -25129,6 +25195,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`dictionaryp <dictionaryp/0::size/2>`
 * :ref:`heap_protocol <heap_protocol/0::size/2>`
 * :ref:`setp <setp/0::size/2>`
+* :ref:`trie(Representation) <trie/1::size/2>`
 
 ``skewness/2``
 --------------
@@ -25984,6 +26051,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`string(Representation) <string/1::string_upper/2>`
+
+``strings/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`trie(Representation) <trie/1::strings/2>`
+
+``strings/3``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`trie(Representation) <trie/1::strings/3>`
 
 ``strlen/3``
 ------------
@@ -27750,6 +27837,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`dictionaryp <dictionaryp/0::update/4>`
+* :ref:`trie(Representation) <trie/1::update/4>`
 
 ``update/5``
 ------------
@@ -27760,6 +27848,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`dictionaryp <dictionaryp/0::update/5>`
+* :ref:`trie(Representation) <trie/1::update/5>`
 
 ``update_fecf/2``
 -----------------
@@ -28707,6 +28796,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`dictionaryp <dictionaryp/0::values/2>`
 * :ref:`pairs <pairs/0::values/2>`
+* :ref:`trie(Representation) <trie/1::values/2>`
+
+``values/3``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`trie(Representation) <trie/1::values/3>`
 
 ``variables/2``
 ---------------

@@ -3025,6 +3025,16 @@ To load an entity, always load the library that includes it using the goal ``log
    toon(ObjectRepresentation,PairRepresentation,StringRepresentation) <toon_3>
    toon_protocol <toon_protocol_0>
 
+``library/tries/``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   trie(Representation) <trie_1>
+
 ``library/trueskill_ranker/``
 -----------------------------
 

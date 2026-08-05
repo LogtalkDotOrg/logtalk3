@@ -357,6 +357,7 @@ logtalk_library_path(timeout, library('timeout/')).
 logtalk_library_path(tle_orbits, library('tle_orbits/')).
 logtalk_library_path(toml, library('toml/')).
 logtalk_library_path(toon, library('toon/')).
+logtalk_library_path(tries, library('tries/')).
 logtalk_library_path(trueskill_ranker, library('trueskill_ranker/')).
 logtalk_library_path(truncated_svd_projection, library('truncated_svd_projection/')).
 logtalk_library_path(tsne_projection, library('tsne_projection/')).

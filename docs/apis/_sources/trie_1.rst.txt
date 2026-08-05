@@ -1,0 +1,421 @@
+.. index:: single: trie(Representation)
+.. _trie/1:
+
+.. rst-class:: right
+
+**object**
+
+``trie(Representation)``
+========================
+
+* ``Representation`` - String representation. Valid values are ``atom``, ``codes``, and ``chars``.
+
+
+Persistent trie predicates supporting different string representations.
+
+| **Availability:** 
+|    ``logtalk_load(tries(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-05
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`pairs <pairs/0>`
+|    :ref:`string(Representation) <string/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: new/1
+.. _trie/1::new/1:
+
+``new/1``
+^^^^^^^^^
+
+Creates an empty trie.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``new(Trie)``
+| **Mode and number of proofs:**
+|    ``new(-trie)`` - ``one``
+
+
+------------
+
+.. index:: as_trie/2
+.. _trie/1::as_trie/2:
+
+``as_trie/2``
+^^^^^^^^^^^^^
+
+Converts a list of string-value pairs to a trie. When a string occurs multiple times, the last value is retained.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``as_trie(Pairs,Trie)``
+| **Mode and number of proofs:**
+|    ``as_trie(@list(pairs),-trie)`` - ``one``
+
+
+------------
+
+.. index:: as_list/2
+.. _trie/1::as_list/2:
+
+``as_list/2``
+^^^^^^^^^^^^^
+
+Converts a trie to a lexicographically ordered list of string-value pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``as_list(Trie,Pairs)``
+| **Mode and number of proofs:**
+|    ``as_list(@trie,-list(pairs))`` - ``one``
+
+
+------------
+
+.. index:: as_list/3
+.. _trie/1::as_list/3:
+
+``as_list/3``
+^^^^^^^^^^^^^
+
+Returns a lexicographically ordered list of all string-value pairs whose strings start with the given prefix. Fails if no string starts with the prefix.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``as_list(Trie,Prefix,Pairs)``
+| **Mode and number of proofs:**
+|    ``as_list(@trie,+text,-list(pairs))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: strings/2
+.. _trie/1::strings/2:
+
+``strings/2``
+^^^^^^^^^^^^^
+
+Returns all strings in a trie in lexicographic order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``strings(Trie,Strings)``
+| **Mode and number of proofs:**
+|    ``strings(@trie,-list(text))`` - ``one``
+
+
+------------
+
+.. index:: strings/3
+.. _trie/1::strings/3:
+
+``strings/3``
+^^^^^^^^^^^^^
+
+Returns all strings that start with the given prefix in lexicographic order. Fails if no string starts with the prefix.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``strings(Trie,Prefix,Strings)``
+| **Mode and number of proofs:**
+|    ``strings(@trie,+text,-list(text))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: values/2
+.. _trie/1::values/2:
+
+``values/2``
+^^^^^^^^^^^^
+
+Returns all values in lexicographic order of their associated strings.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``values(Trie,Values)``
+| **Mode and number of proofs:**
+|    ``values(@trie,-list)`` - ``one``
+
+
+------------
+
+.. index:: values/3
+.. _trie/1::values/3:
+
+``values/3``
+^^^^^^^^^^^^
+
+Returns all values associated with strings that start with the given prefix, in lexicographic order of the strings. Fails if no string starts with the prefix.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``values(Trie,Prefix,Values)``
+| **Mode and number of proofs:**
+|    ``values(@trie,+text,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: empty/1
+.. _trie/1::empty/1:
+
+``empty/1``
+^^^^^^^^^^^
+
+True iff the trie is empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``empty(Trie)``
+| **Mode and number of proofs:**
+|    ``empty(@trie)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: insert/4
+.. _trie/1::insert/4:
+
+``insert/4``
+^^^^^^^^^^^^
+
+Inserts a string-value pair into a trie, returning the updated trie. When the string already exists, its associated value is updated.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``insert(OldTrie,String,Value,NewTrie)``
+| **Mode and number of proofs:**
+|    ``insert(+trie,+text,@term,-trie)`` - ``one``
+
+
+------------
+
+.. index:: lookup/3
+.. _trie/1::lookup/3:
+
+``lookup/3``
+^^^^^^^^^^^^
+
+Looks up a matching string-value pair. With an unbound string, enumerates all pairs in lexicographic order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``lookup(String,Value,Trie)``
+| **Mode and number of proofs:**
+|    ``lookup(+text,?term,@trie)`` - ``zero_or_one``
+|    ``lookup(-text,?term,@trie)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: update/4
+.. _trie/1::update/4:
+
+``update/4``
+^^^^^^^^^^^^
+
+Updates the value associated with a string, returning the updated trie. Fails if the string is not stored.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``update(OldTrie,String,NewValue,NewTrie)``
+| **Mode and number of proofs:**
+|    ``update(+trie,+text,+term,-trie)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: update/5
+.. _trie/1::update/5:
+
+``update/5``
+^^^^^^^^^^^^
+
+Updates the value associated with a string, returning the updated trie. Fails if the string is not stored or its value does not unify with the expected old value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``update(OldTrie,String,OldValue,NewValue,NewTrie)``
+| **Mode and number of proofs:**
+|    ``update(+trie,+text,?term,+term,-trie)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: delete/4
+.. _trie/1::delete/4:
+
+``delete/4``
+^^^^^^^^^^^^
+
+Deletes a matching string-value pair, returning the updated trie. Descendant strings are preserved.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete(OldTrie,String,Value,NewTrie)``
+| **Mode and number of proofs:**
+|    ``delete(+trie,+text,?term,-trie)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: lookup_prefix/4
+.. _trie/1::lookup_prefix/4:
+
+``lookup_prefix/4``
+^^^^^^^^^^^^^^^^^^^
+
+Enumerates all string-value pairs whose strings start with the given prefix, in lexicographic order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``lookup_prefix(Prefix,String,Value,Trie)``
+| **Mode and number of proofs:**
+|    ``lookup_prefix(+text,-text,?term,@trie)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: prefixes/3
+.. _trie/1::prefixes/3:
+
+``prefixes/3``
+^^^^^^^^^^^^^^
+
+Returns all stored string-value pairs whose strings are prefixes of the query, ordered from shortest to longest.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``prefixes(Trie,Query,Pairs)``
+| **Mode and number of proofs:**
+|    ``prefixes(@trie,+text,-list(pairs))`` - ``one``
+
+
+------------
+
+.. index:: longest_prefix/4
+.. _trie/1::longest_prefix/4:
+
+``longest_prefix/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns the longest stored string that is a prefix of the query and its associated value. Fails if no stored string is a prefix.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``longest_prefix(Trie,Query,Prefix,Value)``
+| **Mode and number of proofs:**
+|    ``longest_prefix(@trie,+text,-text,-term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: delete_prefix/3
+.. _trie/1::delete_prefix/3:
+
+``delete_prefix/3``
+^^^^^^^^^^^^^^^^^^^
+
+Deletes all string-value pairs whose strings start with the given prefix, returning the updated trie. Fails if no string starts with the prefix.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete_prefix(OldTrie,Prefix,NewTrie)``
+| **Mode and number of proofs:**
+|    ``delete_prefix(+trie,+text,-trie)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: size/2
+.. _trie/1::size/2:
+
+``size/2``
+^^^^^^^^^^
+
+Number of string-value pairs stored in a trie.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``size(Trie,Size)``
+| **Mode and number of proofs:**
+|    ``size(@trie,?integer)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

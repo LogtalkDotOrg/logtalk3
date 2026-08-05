@@ -47,6 +47,7 @@
 		dictionaries(loader),
 		deques(loader),
 		nested_dictionaries(loader),
+		tries(loader),
 		heaps(loader),
 		queues(loader),
 		sets(loader),

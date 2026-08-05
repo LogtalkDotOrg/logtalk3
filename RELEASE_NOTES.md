@@ -106,6 +106,9 @@ short, obfuscated (but not encrypted), URL-safe identifiers.
 * ADDED: New `typeid` library implementing a type-safe, K-sortable, globally
 unique identifier (TypeID) generator.
 
+* ADDED: New `tries` library implementing prefix trees that associate complete
+strings with values.
+
 * ADDED: New `block_ciphers` library with AES 128/192/256 implementations.
 
 * ADDED: New `cmac` library providing a portable implementation of the

@@ -328,6 +328,7 @@ sed '1,19d' ../../../library/timeout/NOTES.md | pandoc -f gfm -t rst -o librarie
 sed '1,19d' ../../../library/tle_orbits/NOTES.md | pandoc -f gfm -t rst -o libraries/tle_orbits.rst
 sed '1,19d' ../../../library/toml/NOTES.md | pandoc -f gfm -t rst -o libraries/toml.rst
 sed '1,19d' ../../../library/toon/NOTES.md | pandoc -f gfm -t rst -o libraries/toon.rst
+sed '1,19d' ../../../library/tries/NOTES.md | pandoc -f gfm -t rst -o libraries/tries.rst
 sed '1,19d' ../../../library/trueskill_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/trueskill_ranker.rst
 sed '1,19d' ../../../library/truncated_svd_projection/NOTES.md | pandoc -f gfm -t rst -o libraries/truncated_svd_projection.rst
 sed '1,19d' ../../../library/tsne_projection/NOTES.md | pandoc -f gfm -t rst -o libraries/tsne_projection.rst

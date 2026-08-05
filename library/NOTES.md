@@ -34,7 +34,7 @@ Library groups
 - Types, collections and generic data processing:
 	`basic_types`, `types`, `assignvars`, `deques`,
 	`dictionaries`, `nested_dictionaries`, `graphs`, `heaps`, `hierarchies`,
-	`intervals`, `queues`, `sets`, `subsequences`, `union_find`, and `zippers`.
+	`intervals`, `queues`, `sets`, `subsequences`, `tries`, `union_find`, and `zippers`.
 - Combinatorics:
 	`arrangements`, `cartesian_products`, `combinations`, `derangements`,
     `integer_partitions`, `multisets`, `partitions`, and `permutations`.
