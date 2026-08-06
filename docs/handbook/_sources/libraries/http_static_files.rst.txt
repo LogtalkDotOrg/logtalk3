@@ -20,7 +20,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#http_static_files <../../apis/library_index.html#http_static_files>`__
+`../../apis/library_index.html#http-static-files <../../apis/library_index.html#http-static-files>`__
 link in a web browser.
 
 Loading

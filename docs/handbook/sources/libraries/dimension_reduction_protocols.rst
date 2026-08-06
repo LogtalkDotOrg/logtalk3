@@ -42,7 +42,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#dimension_reduction_protocols <../../apis/library_index.html#dimension_reduction_protocols>`__
+`../../apis/library_index.html#dimension-reduction-protocols <../../apis/library_index.html#dimension-reduction-protocols>`__
 link in a web browser.
 
 Loading

@@ -31,7 +31,7 @@ threshold maximizing variance reduction.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#regression_tree](../../apis/library_index.html#regression_tree)
+Open the [../../apis/library_index.html#regression-tree](../../apis/library_index.html#regression-tree)
 link in a web browser.
 
 

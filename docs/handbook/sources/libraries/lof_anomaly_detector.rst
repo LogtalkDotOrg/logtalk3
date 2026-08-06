@@ -25,7 +25,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#lof_anomaly_detector <../../apis/library_index.html#lof_anomaly_detector>`__
+`../../apis/library_index.html#lof-anomaly-detector <../../apis/library_index.html#lof-anomaly-detector>`__
 link in a web browser.
 
 Loading

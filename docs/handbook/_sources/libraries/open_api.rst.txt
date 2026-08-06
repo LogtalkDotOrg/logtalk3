@@ -46,7 +46,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#open_api <../../apis/library_index.html#open_api>`__
+`../../apis/library_index.html#open-api <../../apis/library_index.html#open-api>`__
 link in a web browser.
 
 Loading

@@ -30,7 +30,7 @@ the number of training examples.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#tsne_projection](../../apis/library_index.html#tsne_projection)
+Open the [../../apis/library_index.html#tsne-projection](../../apis/library_index.html#tsne-projection)
 link in a web browser.
 
 

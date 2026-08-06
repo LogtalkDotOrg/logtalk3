@@ -28,7 +28,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#iqr_anomaly_detector <../../apis/library_index.html#iqr_anomaly_detector>`__
+`../../apis/library_index.html#iqr-anomaly-detector <../../apis/library_index.html#iqr-anomaly-detector>`__
 link in a web browser.
 
 Loading

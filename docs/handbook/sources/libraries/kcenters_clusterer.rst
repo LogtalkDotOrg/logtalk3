@@ -20,7 +20,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#kcenters_clusterer <../../apis/library_index.html#kcenters_clusterer>`__
+`../../apis/library_index.html#kcenters-clusterer <../../apis/library_index.html#kcenters-clusterer>`__
 link in a web browser.
 
 Loading

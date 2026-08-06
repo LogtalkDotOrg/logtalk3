@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `gaussian_mixture_clusterer`
-==================
+============================
 
 Gaussian mixture model clusterer. It uses deterministic
 expectation-maximization with diagonal covariance matrices.
@@ -40,7 +40,7 @@ library.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#gaussian_mixture_clusterer](../../apis/library_index.html#gaussian_mixture_clusterer)
+Open the [../../apis/library_index.html#gaussian-mixture-clusterer](../../apis/library_index.html#gaussian-mixture-clusterer)
 link in a web browser.
 
 

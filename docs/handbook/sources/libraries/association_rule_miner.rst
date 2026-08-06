@@ -15,7 +15,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#association_rule_miner <../../apis/library_index.html#association_rule_miner>`__
+`../../apis/library_index.html#association-rule-miner <../../apis/library_index.html#association-rule-miner>`__
 link in a web browser.
 
 Loading

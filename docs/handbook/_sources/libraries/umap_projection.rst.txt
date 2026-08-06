@@ -13,7 +13,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#umap_projection <../../apis/library_index.html#umap_projection>`__
+`../../apis/library_index.html#umap-projection <../../apis/library_index.html#umap-projection>`__
 link in a web browser.
 
 Loading

@@ -37,7 +37,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#glicko2_periodic_ranker <../../apis/library_index.html#glicko2_periodic_ranker>`__
+`../../apis/library_index.html#glicko2-periodic-ranker <../../apis/library_index.html#glicko2-periodic-ranker>`__
 link in a web browser.
 
 Loading

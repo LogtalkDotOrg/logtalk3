@@ -17,7 +17,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#linear_regression <../../apis/library_index.html#linear_regression>`__
+`../../apis/library_index.html#linear-regression <../../apis/library_index.html#linear-regression>`__
 link in a web browser.
 
 Loading

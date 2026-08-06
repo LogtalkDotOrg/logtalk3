@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `ica_projection`
-=====
+================
 
 Independent Component Analysis reducer for continuous datasets (missing
 or non-numeric values are rejected). The library implements the
@@ -33,7 +33,7 @@ deterministic cubic FastICA fixed-point iteration with orthogonal deflation.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#ica_projection](../../apis/library_index.html#ica_projection)
+Open the [../../apis/library_index.html#ica-projection](../../apis/library_index.html#ica-projection)
 link in a web browser.
 
 

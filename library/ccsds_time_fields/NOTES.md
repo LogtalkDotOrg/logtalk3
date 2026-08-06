@@ -39,7 +39,7 @@ This library covers CCSDS binary P-fields for:
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#ccsds_time_fields](../../apis/library_index.html#ccsds_time_fields)
+Open the [../../apis/library_index.html#ccsds-time-fields](../../apis/library_index.html#ccsds-time-fields)
 link in a web browser.
 
 

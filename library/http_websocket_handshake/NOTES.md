@@ -28,7 +28,7 @@ Requires a backend supporting unbound integer arithmetic.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#http_websocket_handshake](../../apis/library_index.html#http_websocket_handshake)
+Open the [../../apis/library_index.html#http-websocket-handshake](../../apis/library_index.html#http-websocket-handshake)
 link in a web browser.
 
 

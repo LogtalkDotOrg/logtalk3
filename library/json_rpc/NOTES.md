@@ -33,7 +33,7 @@ Server Protocol (LSP) and the Model Context Protocol (MCP). Uses the
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#json_rpc](../../apis/library_index.html#json_rpc)
+Open the [../../apis/library_index.html#json-rpc](../../apis/library_index.html#json-rpc)
 link in a web browser.
 
 

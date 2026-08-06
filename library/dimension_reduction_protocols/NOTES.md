@@ -59,7 +59,7 @@ predicates and validates serialized reducers using
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#dimension_reduction_protocols](../../apis/library_index.html#dimension_reduction_protocols)
+Open the [../../apis/library_index.html#dimension-reduction-protocols](../../apis/library_index.html#dimension-reduction-protocols)
 link in a web browser.
 
 

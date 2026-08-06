@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `elo_ranker`
-=======
+============
 
 Elo pairwise preference ranker. Processes the pairwise preference stream
 in dataset enumeration order using the standard Elo expected-score formula
@@ -40,7 +40,7 @@ learned ratings remain globally comparable across all ranked items.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#elo_ranker](../../apis/library_index.html#elo_ranker)
+Open the [../../apis/library_index.html#elo-ranker](../../apis/library_index.html#elo-ranker)
 link in a web browser.
 
 

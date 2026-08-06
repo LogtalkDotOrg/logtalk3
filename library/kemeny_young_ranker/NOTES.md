@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `kemeny_young_ranker`
-==============
+=====================
 
 Kemeny-Young pairwise preference ranker. It aggregates head-to-head
 preference weights, then performs an exact branch-and-bound search over
@@ -42,7 +42,7 @@ all ranked items remain part of a single comparison graph.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#kemeny_young_ranker](../../apis/library_index.html#kemeny_young_ranker)
+Open the [../../apis/library_index.html#kemeny-young-ranker](../../apis/library_index.html#kemeny-young-ranker)
 link in a web browser.
 
 

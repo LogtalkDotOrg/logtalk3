@@ -17,7 +17,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#apriori_pattern_miner <../../apis/library_index.html#apriori_pattern_miner>`__
+`../../apis/library_index.html#apriori-pattern-miner <../../apis/library_index.html#apriori-pattern-miner>`__
 link in a web browser.
 
 Loading

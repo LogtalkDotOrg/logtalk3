@@ -22,7 +22,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#hierarchical_clustering <../../apis/library_index.html#hierarchical_clustering>`__
+`../../apis/library_index.html#hierarchical-clustering <../../apis/library_index.html#hierarchical-clustering>`__
 link in a web browser.
 
 Loading

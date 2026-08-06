@@ -77,7 +77,7 @@ On Windows, both commands can be installed using e.g. Chocolatey:
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#http_process_transport](../../apis/library_index.html#http_process_transport)
+Open the [../../apis/library_index.html#http-process-transport](../../apis/library_index.html#http-process-transport)
 link in a web browser.
 
 

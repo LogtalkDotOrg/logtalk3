@@ -22,7 +22,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#tle_orbits <../../apis/library_index.html#tle_orbits>`__
+`../../apis/library_index.html#tle-orbits <../../apis/library_index.html#tle-orbits>`__
 link in a web browser.
 
 Loading

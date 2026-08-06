@@ -17,7 +17,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#json_lines <../../apis/library_index.html#json_lines>`__
+`../../apis/library_index.html#json-lines <../../apis/library_index.html#json-lines>`__
 link in a web browser.
 
 Loading

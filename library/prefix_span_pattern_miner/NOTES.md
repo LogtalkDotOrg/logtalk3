@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `prefix_span_pattern_miner`
-=============
+===========================
 
 PrefixSpan sequential pattern miner for sequence datasets. The library
 depends on the `sequential_pattern_mining_protocols` support library,
@@ -36,7 +36,7 @@ over a declared item domain.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#prefix_span_pattern_miner](../../apis/library_index.html#prefix_span_pattern_miner)
+Open the [../../apis/library_index.html#prefix-span-pattern-miner](../../apis/library_index.html#prefix-span-pattern-miner)
 link in a web browser.
 
 

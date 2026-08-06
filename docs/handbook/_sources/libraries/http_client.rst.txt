@@ -32,7 +32,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#http_client <../../apis/library_index.html#http_client>`__
+`../../apis/library_index.html#http-client <../../apis/library_index.html#http-client>`__
 link in a web browser.
 
 Loading

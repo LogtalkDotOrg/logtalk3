@@ -13,7 +13,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#ccsds_frames <../../apis/library_index.html#ccsds_frames>`__
+`../../apis/library_index.html#ccsds-frames <../../apis/library_index.html#ccsds-frames>`__
 link in a web browser.
 
 Loading

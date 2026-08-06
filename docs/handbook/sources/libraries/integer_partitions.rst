@@ -54,7 +54,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#integer_partitions <../../apis/library_index.html#integer_partitions>`__
+`../../apis/library_index.html#integer-partitions <../../apis/library_index.html#integer-partitions>`__
 link in a web browser.
 
 Loading

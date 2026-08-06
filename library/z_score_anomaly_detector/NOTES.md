@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `z_score_anomaly_detector`
-=========
+==========================
 
 Statistical Z-score anomaly detector for continuous datasets. It is a
 statistical anomaly-detection method based on standard scores: the
@@ -43,7 +43,7 @@ for examples.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#z-score](../../apis/library_index.html#z-score)
+Open the [../../apis/library_index.html#z-score-anomaly-detector](../../apis/library_index.html#z-score-anomaly-detector)
 link in a web browser.
 
 

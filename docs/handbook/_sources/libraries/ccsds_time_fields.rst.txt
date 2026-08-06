@@ -21,7 +21,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#ccsds_time_fields <../../apis/library_index.html#ccsds_time_fields>`__
+`../../apis/library_index.html#ccsds-time-fields <../../apis/library_index.html#ccsds-time-fields>`__
 link in a web browser.
 
 Loading

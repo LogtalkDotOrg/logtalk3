@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `bradley_terry_ranker`
-===============
+======================
 
 Bradley-Terry pairwise preference ranker. Uses a deterministic
 minorization-maximization update to estimate one relative strength
@@ -42,7 +42,7 @@ a finite Bradley-Terry maximum-likelihood estimate exists.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#bradley_terry_ranker](../../apis/library_index.html#bradley_terry_ranker)
+Open the [../../apis/library_index.html#bradley-terry-ranker](../../apis/library_index.html#bradley-terry-ranker)
 link in a web browser.
 
 Loading

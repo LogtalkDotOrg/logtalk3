@@ -39,7 +39,7 @@ and therefore uses class labels during training.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#lda_projection](../../apis/library_index.html#lda_projection)
+Open the [../../apis/library_index.html#lda-projection](../../apis/library_index.html#lda-projection)
 link in a web browser.
 
 

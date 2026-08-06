@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `optics_clusterer`
-========
+==================
 
 OPTICS clusterer. It uses deterministic OPTICS ordering with
 epsilon-based cluster extraction for the fixed clusterer protocol.
@@ -39,7 +39,7 @@ library.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#optics_clusterer](../../apis/library_index.html#optics_clusterer)
+Open the [../../apis/library_index.html#optics-clusterer](../../apis/library_index.html#optics-clusterer)
 link in a web browser.
 
 Loading

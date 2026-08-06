@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `cusum_anomaly_detector`
-=======
+========================
 
 CUSUM (Cumulative Sum Control Chart) anomaly detector for continuous
 sequence-like datasets. This is a statistical anomaly-detection method
@@ -41,7 +41,7 @@ example datasets.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#cusum_anomaly_detector](../../apis/library_index.html#cusum_anomaly_detector)
+Open the [../../apis/library_index.html#cusum-anomaly-detector](../../apis/library_index.html#cusum-anomaly-detector)
 link in a web browser.
 
 

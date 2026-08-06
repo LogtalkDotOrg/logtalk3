@@ -32,7 +32,7 @@ patterns and when the source is a closed sequential pattern result.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#association_rule_miner](../../apis/library_index.html#association_rule_miner)
+Open the [../../apis/library_index.html#association-rule-miner](../../apis/library_index.html#association-rule-miner)
 link in a web browser.
 
 

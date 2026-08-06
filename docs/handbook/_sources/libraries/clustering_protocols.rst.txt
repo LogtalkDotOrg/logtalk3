@@ -22,7 +22,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#clustering_protocols <../../apis/library_index.html#clustering_protocols>`__
+`../../apis/library_index.html#clustering-protocols <../../apis/library_index.html#clustering-protocols>`__
 link in a web browser.
 
 Loading

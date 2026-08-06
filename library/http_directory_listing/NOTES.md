@@ -35,7 +35,7 @@ targets.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#http_directory_listing](../../apis/library_index.html#http_directory_listing)
+Open the [../../apis/library_index.html#http-directory-listing](../../apis/library_index.html#http-directory-listing)
 link in a web browser.
 
 

@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `kprototypes_clusterer`
-=============
+=======================
 
 k-Prototypes clusterer. It uses an iterative prototype-update
 algorithm with deterministic initialization and deterministic cluster
@@ -40,7 +40,7 @@ library.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#kprototypes_clusterer](../../apis/library_index.html#kprototypes_clusterer)
+Open the [../../apis/library_index.html#kprototypes-clusterer](../../apis/library_index.html#kprototypes-clusterer)
 link in a web browser.
 
 

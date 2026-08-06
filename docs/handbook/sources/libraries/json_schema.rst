@@ -16,7 +16,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#json_schema <../../apis/library_index.html#json_schema>`__
+`../../apis/library_index.html#json-schema <../../apis/library_index.html#json-schema>`__
 link in a web browser.
 
 Loading

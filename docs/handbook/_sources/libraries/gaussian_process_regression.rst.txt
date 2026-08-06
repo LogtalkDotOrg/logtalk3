@@ -23,7 +23,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#gaussian_process_regression <../../apis/library_index.html#gaussian_process_regression>`__
+`../../apis/library_index.html#gaussian-process-regression <../../apis/library_index.html#gaussian-process-regression>`__
 link in a web browser.
 
 Loading

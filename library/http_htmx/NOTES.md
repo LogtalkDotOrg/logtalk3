@@ -37,7 +37,7 @@ Currently this library provides:
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#http_htmx](../../apis/library_index.html#http_htmx)
+Open the [../../apis/library_index.html#http-htmx](../../apis/library_index.html#http-htmx)
 link in a web browser.
 
 

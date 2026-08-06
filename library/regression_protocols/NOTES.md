@@ -40,7 +40,7 @@ This library also provides regression test datasets under the
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#regression_protocols](../../apis/library_index.html#regression_protocols)
+Open the [../../apis/library_index.html#regression-protocols](../../apis/library_index.html#regression-protocols)
 link in a web browser.
 
 

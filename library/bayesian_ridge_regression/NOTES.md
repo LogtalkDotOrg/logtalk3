@@ -31,7 +31,7 @@ with Gamma hyperpriors over both precision terms.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#bayesian_ridge_regression](../../apis/library_index.html#bayesian_ridge_regression)
+Open the [../../apis/library_index.html#bayesian-ridge-regression](../../apis/library_index.html#bayesian-ridge-regression)
 link in a web browser.
 
 

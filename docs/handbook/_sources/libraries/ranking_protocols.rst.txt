@@ -120,7 +120,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#ranking_protocols <../../apis/library_index.html#ranking_protocols>`__
+`../../apis/library_index.html#ranking-protocols <../../apis/library_index.html#ranking-protocols>`__
 link in a web browser.
 
 Loading

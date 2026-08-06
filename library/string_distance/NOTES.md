@@ -37,7 +37,7 @@ The parameter must be bound when sending messages to the object.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#string_distance](../../apis/library_index.html#string_distance)
+Open the [../../apis/library_index.html#string-distance](../../apis/library_index.html#string-distance)
 link in a web browser.
 
 

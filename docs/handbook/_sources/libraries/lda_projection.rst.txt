@@ -22,7 +22,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#lda_projection <../../apis/library_index.html#lda_projection>`__
+`../../apis/library_index.html#lda-projection <../../apis/library_index.html#lda-projection>`__
 link in a web browser.
 
 Loading

@@ -33,7 +33,7 @@ the repository native JSON term representation.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#json_patch](../../apis/library_index.html#json_patch)
+Open the [../../apis/library_index.html#json-patch](../../apis/library_index.html#json-patch)
 link in a web browser.
 
 

@@ -32,7 +32,7 @@ CCSDS 133.0-B-2 standard (Space Packet Protocol):
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#ccsds_packets](../../apis/library_index.html#ccsds_packets)
+Open the [../../apis/library_index.html#ccsds-packets](../../apis/library_index.html#ccsds-packets)
 link in a web browser.
 
 

@@ -16,7 +16,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#spectral_clusterer <../../apis/library_index.html#spectral_clusterer>`__
+`../../apis/library_index.html#spectral-clusterer <../../apis/library_index.html#spectral-clusterer>`__
 link in a web browser.
 
 Loading

@@ -49,7 +49,7 @@ SWI-Prolog, Trealla Prolog, and XVM.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#http_sse](../../apis/library_index.html#http_sse)
+Open the [../../apis/library_index.html#http-sse](../../apis/library_index.html#http-sse)
 link in a web browser.
 
 

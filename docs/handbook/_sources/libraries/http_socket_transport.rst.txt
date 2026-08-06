@@ -17,7 +17,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#http_socket_transport <../../apis/library_index.html#http_socket_transport>`__
+`../../apis/library_index.html#http-socket-transport <../../apis/library_index.html#http-socket-transport>`__
 link in a web browser.
 
 Loading

@@ -34,7 +34,7 @@ handlers or from router hooks and response middleware.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#http_cors](../../apis/library_index.html#http_cors)
+Open the [../../apis/library_index.html#http-cors](../../apis/library_index.html#http-cors)
 link in a web browser.
 
 

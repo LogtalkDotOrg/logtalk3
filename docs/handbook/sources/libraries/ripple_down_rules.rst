@@ -27,7 +27,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#ripple_down_rules <../../apis/library_index.html#ripple_down_rules>`__
+`../../apis/library_index.html#ripple-down-rules <../../apis/library_index.html#ripple-down-rules>`__
 link in a web browser.
 
 Loading

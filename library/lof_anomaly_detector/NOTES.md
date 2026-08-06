@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `lof_anomaly_detector`
-=====
+======================
 
 Local Outlier Factor anomaly detector supporting multiple distance metrics,
 mixed continuous and categorical features, and missing values. The detector
@@ -42,7 +42,7 @@ for examples.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#lof_anomaly_detector](../../apis/library_index.html#lof_anomaly_detector)
+Open the [../../apis/library_index.html#lof-anomaly-detector](../../apis/library_index.html#lof-anomaly-detector)
 link in a web browser.
 
 

@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `isolation_forest_anomaly_detector`
-==================
+===================================
 
 This library implements the Extended Isolation Forest (EIF) algorithm for
 anomaly detection as described by Hariri et al. (2019). The Extended

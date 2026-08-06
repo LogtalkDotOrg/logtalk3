@@ -16,7 +16,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#ridge_regression <../../apis/library_index.html#ridge_regression>`__
+`../../apis/library_index.html#ridge-regression <../../apis/library_index.html#ridge-regression>`__
 link in a web browser.
 
 Loading

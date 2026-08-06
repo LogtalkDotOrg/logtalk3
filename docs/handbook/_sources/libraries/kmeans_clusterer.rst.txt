@@ -20,7 +20,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#kmeans_clusterer <../../apis/library_index.html#kmeans_clusterer>`__
+`../../apis/library_index.html#kmeans-clusterer <../../apis/library_index.html#kmeans-clusterer>`__
 link in a web browser.
 
 Loading

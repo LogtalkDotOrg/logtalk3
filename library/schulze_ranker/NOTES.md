@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `schulze_ranker`
-=========
+================
 
 Schulze pairwise preference ranker. It builds the direct pairwise
 strength graph from aggregated matchups and applies the Schulze
@@ -41,7 +41,7 @@ all ranked items remain comparable in the aggregated matchup graph.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#schulze_ranker](../../apis/library_index.html#schulze_ranker)
+Open the [../../apis/library_index.html#schulze-ranker](../../apis/library_index.html#schulze-ranker)
 link in a web browser.
 
 

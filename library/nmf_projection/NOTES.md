@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `nmf_projection`
-=====
+================
 
 This library implements Non-negative Matrix Factorization (NMF) for
 continuous datasets whose attribute values are all non-negative. It
@@ -31,7 +31,7 @@ component weights.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#nmf_projection](../../apis/library_index.html#nmf_projection)
+Open the [../../apis/library_index.html#nmf-projection](../../apis/library_index.html#nmf-projection)
 link in a web browser.
 
 

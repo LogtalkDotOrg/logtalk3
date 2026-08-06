@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `regularized_bradley_terry_ranker`
-===========================
+==================================
 
 Regularized Bradley-Terry MAP pairwise preference ranker. It uses a
 deterministic MM-style posterior-mode update for a Bradley-Terry
@@ -44,7 +44,7 @@ strongly connected.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#regularized_bradley_terry_ranker](../../apis/library_index.html#regularized_bradley_terry_ranker)
+Open the [../../apis/library_index.html#regularized-bradley-terry-ranker](../../apis/library_index.html#regularized-bradley-terry-ranker)
 link in a web browser.
 
 

@@ -42,7 +42,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#ccsds_packet_services <../../apis/library_index.html#ccsds_packet_services>`__
+`../../apis/library_index.html#ccsds-packet-services <../../apis/library_index.html#ccsds-packet-services>`__
 link in a web browser.
 
 Loading

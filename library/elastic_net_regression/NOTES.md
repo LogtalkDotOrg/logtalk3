@@ -32,7 +32,7 @@ elastic net penalty.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#elastic_net_regression](../../apis/library_index.html#elastic_net_regression)
+Open the [../../apis/library_index.html#elastic-net-regression](../../apis/library_index.html#elastic-net-regression)
 link in a web browser.
 
 

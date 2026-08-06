@@ -18,7 +18,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#http_cors <../../apis/library_index.html#http_cors>`__
+`../../apis/library_index.html#http-cors <../../apis/library_index.html#http-cors>`__
 link in a web browser.
 
 Loading

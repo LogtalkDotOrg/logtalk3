@@ -14,7 +14,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#http_multipart <../../apis/library_index.html#http_multipart>`__
+`../../apis/library_index.html#http-multipart <../../apis/library_index.html#http-multipart>`__
 link in a web browser.
 
 Loading

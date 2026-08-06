@@ -19,7 +19,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#json_pointer <../../apis/library_index.html#json_pointer>`__
+`../../apis/library_index.html#json-pointer <../../apis/library_index.html#json-pointer>`__
 link in a web browser.
 
 Loading

@@ -62,7 +62,7 @@ dispatch layer:
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#open_api](../../apis/library_index.html#open_api)
+Open the [../../apis/library_index.html#open-api](../../apis/library_index.html#open-api)
 link in a web browser.
 
 

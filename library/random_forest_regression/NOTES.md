@@ -31,7 +31,7 @@ predicting with the arithmetic mean of the individual tree predictions.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#random_forest_regression](../../apis/library_index.html#random_forest_regression)
+Open the [../../apis/library_index.html#random-forest-regression](../../apis/library_index.html#random-forest-regression)
 link in a web browser.
 
 

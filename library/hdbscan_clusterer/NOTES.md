@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `hdbscan_clusterer`
-=========
+===================
 
 Simplified HDBSCAN-style clusterer. It builds the mutual-reachability
 graph, computes a minimum spanning tree, derives the single-linkage
@@ -41,7 +41,7 @@ library.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#hdbscan_clusterer](../../apis/library_index.html#hdbscan_clusterer)
+Open the [../../apis/library_index.html#hdbscan-clusterer](../../apis/library_index.html#hdbscan-clusterer)
 link in a web browser.
 
 

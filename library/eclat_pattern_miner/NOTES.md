@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `eclat_pattern_miner`
-========
+=====================
 
 Eclat frequent itemset miner for transaction datasets. Normalizes dataset
 transaction identifiers to internal ascending ordinals, builds vertical
@@ -39,7 +39,7 @@ and normalized to internal ordinals before tidset construction.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#eclat_pattern_miner](../../apis/library_index.html#eclat_pattern_miner)
+Open the [../../apis/library_index.html#eclat-pattern-miner](../../apis/library_index.html#eclat-pattern-miner)
 link in a web browser.
 
 

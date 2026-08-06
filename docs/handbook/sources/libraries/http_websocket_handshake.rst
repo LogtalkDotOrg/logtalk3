@@ -11,7 +11,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#http_websocket_handshake <../../apis/library_index.html#http_websocket_handshake>`__
+`../../apis/library_index.html#http-websocket-handshake <../../apis/library_index.html#http-websocket-handshake>`__
 link in a web browser.
 
 Loading

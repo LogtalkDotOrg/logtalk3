@@ -36,7 +36,7 @@ transport, and listener transport combinations are rejected with a
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#http_server](../../apis/library_index.html#http_server)
+Open the [../../apis/library_index.html#http-server](../../apis/library_index.html#http-server)
 link in a web browser.
 
 

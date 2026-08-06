@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `pca_projection`
-=====
+================
 
 Principal Component Analysis reducer for continuous datasets. The
 library implements the `dimension_reducer_protocol` defined in the
@@ -32,7 +32,7 @@ components using deterministic power iteration with deflation.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#pca_projection](../../apis/library_index.html#pca_projection)
+Open the [../../apis/library_index.html#pca-projection](../../apis/library_index.html#pca-projection)
 link in a web browser.
 
 

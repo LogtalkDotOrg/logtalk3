@@ -25,7 +25,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#kemeny_young_ranker <../../apis/library_index.html#kemeny_young_ranker>`__
+`../../apis/library_index.html#kemeny-young-ranker <../../apis/library_index.html#kemeny-young-ranker>`__
 link in a web browser.
 
 Loading

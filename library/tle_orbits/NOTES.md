@@ -39,7 +39,7 @@ outputs in inertial, Earth-fixed, or local ENU frames.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#tle_orbits](../../apis/library_index.html#tle_orbits)
+Open the [../../apis/library_index.html#tle-orbits](../../apis/library_index.html#tle-orbits)
 link in a web browser.
 
 

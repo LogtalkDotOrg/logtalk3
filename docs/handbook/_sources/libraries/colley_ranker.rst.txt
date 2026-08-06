@@ -20,7 +20,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#colley_ranker <../../apis/library_index.html#colley_ranker>`__
+`../../apis/library_index.html#colley-ranker <../../apis/library_index.html#colley-ranker>`__
 link in a web browser.
 
 Loading

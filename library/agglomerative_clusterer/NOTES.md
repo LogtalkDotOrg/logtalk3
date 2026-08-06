@@ -37,7 +37,7 @@ library.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#agglomerative_clusterer](../../apis/library_index.html#agglomerative_clusterer)
+Open the [../../apis/library_index.html#agglomerative-clusterer](../../apis/library_index.html#agglomerative-clusterer)
 link in a web browser.
 
 

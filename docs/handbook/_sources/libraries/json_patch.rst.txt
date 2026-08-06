@@ -15,7 +15,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#json_patch <../../apis/library_index.html#json_patch>`__
+`../../apis/library_index.html#json-patch <../../apis/library_index.html#json-patch>`__
 link in a web browser.
 
 Loading

@@ -58,7 +58,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#character_sets <../../apis/library_index.html#character_sets>`__
+`../../apis/library_index.html#character-sets <../../apis/library_index.html#character-sets>`__
 link in a web browser.
 
 Loading

@@ -20,7 +20,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#pls_projection <../../apis/library_index.html#pls_projection>`__
+`../../apis/library_index.html#pls-projection <../../apis/library_index.html#pls-projection>`__
 link in a web browser.
 
 Loading

@@ -24,7 +24,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#http_htmx <../../apis/library_index.html#http_htmx>`__
+`../../apis/library_index.html#http-htmx <../../apis/library_index.html#http-htmx>`__
 link in a web browser.
 
 Loading

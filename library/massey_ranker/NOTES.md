@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `massey_ranker`
-========
+===============
 
 Massey pairwise preference ranker. It builds the Massey coefficient
 matrix with diagonal entries `games_i`, off-diagonal entries
@@ -42,7 +42,7 @@ that learned rankings remain globally comparable across all ranked items.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#massey_ranker](../../apis/library_index.html#massey_ranker)
+Open the [../../apis/library_index.html#massey-ranker](../../apis/library_index.html#massey-ranker)
 link in a web browser.
 
 

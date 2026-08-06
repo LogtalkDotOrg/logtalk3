@@ -34,7 +34,7 @@ of the nearest encoded neighbors.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#knn_regression](../../apis/library_index.html#knn_regression)
+Open the [../../apis/library_index.html#knn-regression](../../apis/library_index.html#knn-regression)
 link in a web browser.
 
 

@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `probabilistic_pca_projection`
-===================
+==============================
 
 Probabilistic Principal Component Analysis reducer for continuous
 datasets. The library implements the `dimension_reducer_protocol`
@@ -35,7 +35,7 @@ projection.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#probabilistic_pca_projection](../../apis/library_index.html#probabilistic_pca_projection)
+Open the [../../apis/library_index.html#probabilistic-pca-projection](../../apis/library_index.html#probabilistic-pca-projection)
 link in a web browser.
 
 

@@ -24,7 +24,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#http_authenticate <../../apis/library_index.html#http_authenticate>`__
+`../../apis/library_index.html#http-authenticate <../../apis/library_index.html#http-authenticate>`__
 link in a web browser.
 
 Loading

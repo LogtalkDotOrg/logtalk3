@@ -39,7 +39,7 @@ library.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#hierarchical_clustering](../../apis/library_index.html#hierarchical_clustering)
+Open the [../../apis/library_index.html#hierarchical-clustering](../../apis/library_index.html#hierarchical-clustering)
 link in a web browser.
 
 

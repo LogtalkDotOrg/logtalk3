@@ -37,7 +37,7 @@ file-backed response bodies that `http_server_core` can stream efficiently.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#http_static_files](../../apis/library_index.html#http_static_files)
+Open the [../../apis/library_index.html#http-static-files](../../apis/library_index.html#http-static-files)
 link in a web browser.
 
 

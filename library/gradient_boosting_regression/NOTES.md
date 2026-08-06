@@ -36,7 +36,7 @@ squared-error loss.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#gradient_boosting_regression](../../apis/library_index.html#gradient_boosting_regression)
+Open the [../../apis/library_index.html#gradient-boosting-regression](../../apis/library_index.html#gradient-boosting-regression)
 link in a web browser.
 
 

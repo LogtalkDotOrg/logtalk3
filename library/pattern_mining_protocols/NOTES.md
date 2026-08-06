@@ -36,7 +36,7 @@ are provided by the `frequent_pattern_mining_protocols` and
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#pattern_mining_protocols](../../apis/library_index.html#pattern_mining_protocols)
+Open the [../../apis/library_index.html#pattern-mining-protocols](../../apis/library_index.html#pattern-mining-protocols)
 link in a web browser.
 
 

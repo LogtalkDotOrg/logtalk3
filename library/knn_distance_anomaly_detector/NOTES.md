@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `knn_distance_anomaly_detector`
-==============
+===============================
 
 k-nearest-neighbor distance anomaly detector supporting multiple distance
 metrics, mixed continuous and categorical features, and missing values.
@@ -42,7 +42,7 @@ for examples.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#knn_distance_anomaly_detector](../../apis/library_index.html#knn_distance_anomaly_detector)
+Open the [../../apis/library_index.html#knn-distance-anomaly-detector](../../apis/library_index.html#knn-distance-anomaly-detector)
 link in a web browser.
 
 

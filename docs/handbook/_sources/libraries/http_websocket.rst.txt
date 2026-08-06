@@ -23,7 +23,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#http_websocket <../../apis/library_index.html#http_websocket>`__
+`../../apis/library_index.html#http-websocket <../../apis/library_index.html#http-websocket>`__
 link in a web browser.
 
 Loading

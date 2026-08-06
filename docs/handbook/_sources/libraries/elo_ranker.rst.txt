@@ -23,7 +23,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#elo_ranker <../../apis/library_index.html#elo_ranker>`__
+`../../apis/library_index.html#elo-ranker <../../apis/library_index.html#elo-ranker>`__
 link in a web browser.
 
 Loading

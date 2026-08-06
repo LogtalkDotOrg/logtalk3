@@ -34,7 +34,7 @@ implementing the `clustering_dataset_protocol` protocol.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#spectral_clusterer](../../apis/library_index.html#spectral_clusterer)
+Open the [../../apis/library_index.html#spectral-clusterer](../../apis/library_index.html#spectral-clusterer)
 link in a web browser.
 
 

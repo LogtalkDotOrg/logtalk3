@@ -56,7 +56,7 @@ SWI-Prolog, Trealla Prolog, and XVM.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#http_session](../../apis/library_index.html#http_session)
+Open the [../../apis/library_index.html#http-session](../../apis/library_index.html#http-session)
 link in a web browser.
 
 

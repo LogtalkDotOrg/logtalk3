@@ -50,7 +50,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#json_path <../../apis/library_index.html#json_path>`__
+`../../apis/library_index.html#json-path <../../apis/library_index.html#json-path>`__
 link in a web browser.
 
 Loading

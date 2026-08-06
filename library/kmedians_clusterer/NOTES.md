@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `kmedians_clusterer`
-==========
+====================
 
 k-Medians clusterer. It uses an iterative median-update algorithm with
 deterministic initialization. Supports continuous attributes only.
@@ -38,7 +38,7 @@ library.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#kmedians_clusterer](../../apis/library_index.html#kmedians_clusterer)
+Open the [../../apis/library_index.html#kmedians-clusterer](../../apis/library_index.html#kmedians-clusterer)
 link in a web browser.
 
 

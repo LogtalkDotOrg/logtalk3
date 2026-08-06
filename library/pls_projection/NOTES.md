@@ -38,7 +38,7 @@ uses a numeric target during training.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#pls_projection](../../apis/library_index.html#pls_projection)
+Open the [../../apis/library_index.html#pls-projection](../../apis/library_index.html#pls-projection)
 link in a web browser.
 
 

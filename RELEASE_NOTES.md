@@ -48,6 +48,8 @@ Documentation
 
 * IMPROVED: The manual installation instructions.
 
+* FIXED: Some Handbook library links to their API documentation.
+
 Library
 -------
 

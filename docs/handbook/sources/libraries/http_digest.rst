@@ -14,7 +14,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#http_digest <../../apis/library_index.html#http_digest>`__
+`../../apis/library_index.html#http-digest <../../apis/library_index.html#http-digest>`__
 link in a web browser.
 
 Loading

@@ -39,7 +39,7 @@ judgments, and assign non-negative integer relevance values.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#borda_ranker](../../apis/library_index.html#borda_ranker)
+Open the [../../apis/library_index.html#borda-ranker](../../apis/library_index.html#borda-ranker)
 link in a web browser.
 
 

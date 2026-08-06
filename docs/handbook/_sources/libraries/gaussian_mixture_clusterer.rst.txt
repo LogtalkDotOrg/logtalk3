@@ -22,7 +22,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#gaussian_mixture_clusterer <../../apis/library_index.html#gaussian_mixture_clusterer>`__
+`../../apis/library_index.html#gaussian-mixture-clusterer <../../apis/library_index.html#gaussian-mixture-clusterer>`__
 link in a web browser.
 
 Loading

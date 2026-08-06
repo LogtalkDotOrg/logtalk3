@@ -21,7 +21,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#ccsds_packetization <../../apis/library_index.html#ccsds_packetization>`__
+`../../apis/library_index.html#ccsds-packetization <../../apis/library_index.html#ccsds-packetization>`__
 link in a web browser.
 
 Loading

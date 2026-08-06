@@ -33,7 +33,7 @@ predicates.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#ccsds_link_profiles](../../apis/library_index.html#ccsds_link_profiles)
+Open the [../../apis/library_index.html#ccsds-link-profiles](../../apis/library_index.html#ccsds-link-profiles)
 link in a web browser.
 
 

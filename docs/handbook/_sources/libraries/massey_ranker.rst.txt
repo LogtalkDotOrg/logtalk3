@@ -25,7 +25,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#massey_ranker <../../apis/library_index.html#massey_ranker>`__
+`../../apis/library_index.html#massey-ranker <../../apis/library_index.html#massey-ranker>`__
 link in a web browser.
 
 Loading

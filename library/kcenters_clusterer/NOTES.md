@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `kcenters_clusterer`
-==========
+====================
 
 k-Centers clusterer. It uses a deterministic farthest-first center
 selection heuristic. Supports continuous attributes only.
@@ -38,7 +38,7 @@ library.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#kcenters_clusterer](../../apis/library_index.html#kcenters_clusterer)
+Open the [../../apis/library_index.html#kcenters-clusterer](../../apis/library_index.html#kcenters-clusterer)
 link in a web browser.
 
 

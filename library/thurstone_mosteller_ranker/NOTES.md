@@ -42,7 +42,7 @@ that all learned utilities remain comparable across the ranked items.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#thurstone_mosteller_ranker](../../apis/library_index.html#thurstone_mosteller_ranker)
+Open the [../../apis/library_index.html#thurstone-mosteller-ranker](../../apis/library_index.html#thurstone-mosteller-ranker)
 link in a web browser.
 
 

@@ -62,7 +62,7 @@ iteration bound.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#linear_algebra](../../apis/library_index.html#linear_algebra)
+Open the [../../apis/library_index.html#linear-algebra](../../apis/library_index.html#linear-algebra)
 link in a web browser.
 
 

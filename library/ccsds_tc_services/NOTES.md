@@ -46,7 +46,7 @@ The current implementation covers:
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#ccsds_tc_services](../../apis/library_index.html#ccsds_tc_services)
+Open the [../../apis/library_index.html#ccsds-tc-services](../../apis/library_index.html#ccsds-tc-services)
 link in a web browser.
 
 

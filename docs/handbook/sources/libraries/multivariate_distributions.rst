@@ -12,7 +12,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#multivariate_distributions <../../apis/library_index.html#multivariate_distributions>`__
+`../../apis/library_index.html#multivariate-distributions <../../apis/library_index.html#multivariate-distributions>`__
 link in a web browser.
 
 Loading

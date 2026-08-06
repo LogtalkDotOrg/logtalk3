@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `modified_z_score_anomaly_detector`
-==================
+===================================
 
 Statistical modified Z-score anomaly detector for continuous datasets.
 It is a statistical anomaly-detection method based on the modified
@@ -44,7 +44,7 @@ for examples.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#modified-z-score](../../apis/library_index.html#modified-z-score)
+Open the [../../apis/library_index.html#modified-z-score-anomaly-detector](../../apis/library_index.html#modified-z-score-anomaly-detector)
 link in a web browser.
 
 

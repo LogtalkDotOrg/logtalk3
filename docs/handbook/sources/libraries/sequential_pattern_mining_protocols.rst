@@ -21,7 +21,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#sequential_pattern_mining_protocols <../../apis/library_index.html#sequential_pattern_mining_protocols>`__
+`../../apis/library_index.html#sequential-pattern-mining-protocols <../../apis/library_index.html#sequential-pattern-mining-protocols>`__
 link in a web browser.
 
 Loading

@@ -57,7 +57,7 @@ packet-zone handling above the raw `ccsds_frames` payload bridge:
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#ccsds_packet_services](../../apis/library_index.html#ccsds_packet_services)
+Open the [../../apis/library_index.html#ccsds-packet-services](../../apis/library_index.html#ccsds-packet-services)
 link in a web browser.
 
 

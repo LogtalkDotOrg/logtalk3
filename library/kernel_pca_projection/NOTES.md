@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `kernel_pca_projection`
-============
+=======================
 
 Kernel Principal Component Analysis reducer for continuous datasets. The
 library implements the `dimension_reducer_protocol` defined in the
@@ -33,7 +33,7 @@ portable power iteration with deflation.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#kernel_pca_projection](../../apis/library_index.html#kernel_pca_projection)
+Open the [../../apis/library_index.html#kernel-pca-projection](../../apis/library_index.html#kernel-pca-projection)
 link in a web browser.
 
 

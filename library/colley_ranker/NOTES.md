@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `colley_ranker`
-==========
+===============
 
 Colley pairwise preference ranker.
 
@@ -38,7 +38,7 @@ comparable across all ranked items.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#colley_ranker](../../apis/library_index.html#colley_ranker)
+Open the [../../apis/library_index.html#colley-ranker](../../apis/library_index.html#colley-ranker)
 link in a web browser.
 
 

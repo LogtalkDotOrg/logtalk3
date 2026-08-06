@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `plackett_luce_last_ranker`
-====================
+===========================
 
 Tie-aware Plackett-Luce-last grouped-ranking ranker. It processes each
 group as a sequence of last-choice eliminations from lowest relevance to
@@ -43,7 +43,7 @@ finite Plackett-Luce-last maximum-likelihood estimate exists.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#plackett_luce_last_ranker](../../apis/library_index.html#plackett_luce_last_ranker)
+Open the [../../apis/library_index.html#plackett-luce-last-ranker](../../apis/library_index.html#plackett-luce-last-ranker)
 link in a web browser.
 
 

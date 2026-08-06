@@ -24,7 +24,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#http_websocket_session <../../apis/library_index.html#http_websocket_session>`__
+`../../apis/library_index.html#http-websocket-session <../../apis/library_index.html#http-websocket-session>`__
 link in a web browser.
 
 Loading

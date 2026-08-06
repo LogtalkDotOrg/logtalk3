@@ -18,7 +18,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#trueskill_ranker <../../apis/library_index.html#trueskill_ranker>`__
+`../../apis/library_index.html#trueskill-ranker <../../apis/library_index.html#trueskill-ranker>`__
 link in a web browser.
 
 Loading

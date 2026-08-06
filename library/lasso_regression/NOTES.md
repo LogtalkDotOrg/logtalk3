@@ -36,7 +36,7 @@ L1 penalty on the encoded coefficient vector.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#lasso_regression](../../apis/library_index.html#lasso_regression)
+Open the [../../apis/library_index.html#lasso-regression](../../apis/library_index.html#lasso-regression)
 link in a web browser.
 
 

@@ -24,7 +24,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#schulze_ranker <../../apis/library_index.html#schulze_ranker>`__
+`../../apis/library_index.html#schulze-ranker <../../apis/library_index.html#schulze-ranker>`__
 link in a web browser.
 
 Loading

@@ -21,7 +21,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#kmedoids_clusterer <../../apis/library_index.html#kmedoids_clusterer>`__
+`../../apis/library_index.html#kmedoids-clusterer <../../apis/library_index.html#kmedoids-clusterer>`__
 link in a web browser.
 
 Loading

@@ -40,7 +40,7 @@ paths, and recognizes common compound suffixes such as `.tgz` and `.svgz`.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#mime_types](../../apis/library_index.html#mime_types)
+Open the [../../apis/library_index.html#mime-types](../../apis/library_index.html#mime-types)
 link in a web browser.
 
 

@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `kmodes_clusterer`
-========
+==================
 
 k-Modes clusterer. It uses an iterative mode-update algorithm with
 deterministic initialization and deterministic cluster assignments.
@@ -39,7 +39,7 @@ library.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#kmodes_clusterer](../../apis/library_index.html#kmodes_clusterer)
+Open the [../../apis/library_index.html#kmodes-clusterer](../../apis/library_index.html#kmodes-clusterer)
 link in a web browser.
 
 

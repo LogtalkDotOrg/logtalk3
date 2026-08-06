@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `ewma_anomaly_detector`
-======
+=======================
 
 EWMA (Exponentially Weighted Moving Average) anomaly detector for
 continuous sequence-like datasets. It is a statistical anomaly-detection
@@ -44,7 +44,7 @@ datasets.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#ewma_anomaly_detector](../../apis/library_index.html#ewma_anomaly_detector)
+Open the [../../apis/library_index.html#ewma-anomaly-detector](../../apis/library_index.html#ewma-anomaly-detector)
 link in a web browser.
 
 

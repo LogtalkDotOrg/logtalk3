@@ -60,7 +60,7 @@ Dedicated `partitions` (set partitions), `combinations`, `permutations`,
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#integer_partitions](../../apis/library_index.html#integer_partitions)
+Open the [../../apis/library_index.html#integer-partitions](../../apis/library_index.html#integer-partitions)
 link in a web browser.
 
 

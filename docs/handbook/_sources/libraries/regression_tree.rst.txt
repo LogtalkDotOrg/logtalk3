@@ -13,7 +13,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#regression_tree <../../apis/library_index.html#regression_tree>`__
+`../../apis/library_index.html#regression-tree <../../apis/library_index.html#regression-tree>`__
 link in a web browser.
 
 Loading

@@ -31,7 +31,7 @@ Both 2D and explicit 3D WGS84 geodetic coordinates are supported.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#crs_projections](../../apis/library_index.html#crs_projections)
+Open the [../../apis/library_index.html#crs-projections](../../apis/library_index.html#crs-projections)
 link in a web browser.
 
 

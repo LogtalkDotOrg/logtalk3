@@ -23,7 +23,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#c45_classifier <../../apis/library_index.html#c45_classifier>`__
+`../../apis/library_index.html#c45-classifier <../../apis/library_index.html#c45-classifier>`__
 link in a web browser.
 
 Loading

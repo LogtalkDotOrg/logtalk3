@@ -24,7 +24,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#mime_types <../../apis/library_index.html#mime_types>`__
+`../../apis/library_index.html#mime-types <../../apis/library_index.html#mime-types>`__
 link in a web browser.
 
 Loading

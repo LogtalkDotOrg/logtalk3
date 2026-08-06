@@ -21,7 +21,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#kprototypes_clusterer <../../apis/library_index.html#kprototypes_clusterer>`__
+`../../apis/library_index.html#kprototypes-clusterer <../../apis/library_index.html#kprototypes-clusterer>`__
 link in a web browser.
 
 Loading

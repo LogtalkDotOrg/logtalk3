@@ -35,7 +35,7 @@ represented as canonical sorted lists of unique declared items.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#apriori_pattern_miner](../../apis/library_index.html#apriori_pattern_miner)
+Open the [../../apis/library_index.html#apriori-pattern-miner](../../apis/library_index.html#apriori-pattern-miner)
 link in a web browser.
 
 

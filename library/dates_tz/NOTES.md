@@ -18,24 +18,24 @@ limitations under the License.
 ________________________________________________________________________
 
 
-``dates_tz``
-============
+`dates_tz`
+==========
 
-Bridge library linking the ``dates`` and ``tzif`` libraries for zone-aware
+Bridge library linking the `dates` and `tzif` libraries for zone-aware
 date-time conversions. Provides predicates that convert UTC date-times to
 civil local date-times and vice-versa, handling DST transitions including
 ambiguous (fold) and non-existent (gap) times. Also provides cross-zone
 conversion that routes through UTC as an intermediate representation.
 
 This library requires unbounded integer arithmetic support from the backend
-Prolog compiler (as does the ``tzif`` library it depends on). It is not
-available on backends where the ``bounded`` Prolog flag is ``true``.
+Prolog compiler (as does the `tzif` library it depends on). It is not
+available on backends where the `bounded` Prolog flag is `true`.
 
 
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#dates_tz](../../apis/library_index.html#dates_tz)
+Open the [../../apis/library_index.html#dates-tz](../../apis/library_index.html#dates-tz)
 link in a web browser.
 
 
@@ -58,8 +58,8 @@ To test this library predicates, load the `tester.lgt` file:
 Usage
 -----
 
-Zone data must be loaded separately into the ``tzif`` cache before calling
-any ``dates_tz`` predicates. For example:
+Zone data must be loaded separately into the `tzif` cache before calling
+any `dates_tz` predicates. For example:
 
     :- initialization((
         logtalk_load(dates_tz(loader)),
@@ -71,13 +71,13 @@ any ``dates_tz`` predicates. For example:
 Examples
 --------
 
-Convert a UTC ``date_time/6`` compound to the civil local date-time in the
+Convert a UTC `date_time/6` compound to the civil local date-time in the
 named IANA zone. The UTC instant always has exactly one local representation.
 
     |?- dates_tz::utc_to_local_tz(date_time(2024,1,15,12,0,0), 'America/New_York', Local).
     Local = date_time(2024,1,15,7,0,0).
 
-Convert a civil local ``date_time/6`` compound in the named zone to UTC using
+Convert a civil local `date_time/6` compound in the named zone to UTC using
 strict interpretation. Fails silently if the local time falls in a DST gap
 (non-existent) or a DST fold (ambiguous). Throws an error if the zone is not
 cached.
@@ -87,10 +87,10 @@ cached.
 
 Convert a civil local date-time to UTC with an explicit resolution mode. The mode can be:
 
-- ``strict`` — fail unless exactly one interpretation exists
-- ``first`` — prefer the earliest valid interpretation (earliest UTC instant)
-- ``second`` — prefer the latest valid interpretation (latest UTC instant)
-- ``all`` — enumerate all valid interpretations in chronological order (non-deterministic)
+- `strict` — fail unless exactly one interpretation exists
+- `first` — prefer the earliest valid interpretation (earliest UTC instant)
+- `second` — prefer the latest valid interpretation (latest UTC instant)
+- `all` — enumerate all valid interpretations in chronological order (non-deterministic)
 
 Fall-back fold in New York: 2024-11-03 01:30 occurs twice:
 
@@ -122,14 +122,14 @@ due to a DST transition.
 Notes
 -----
 
-- Date-time values are represented as ``date_time(Year, Month, Day, Hour, Minute, Second)``
-compounds, consistent with the ``dates`` library.
+- Date-time values are represented as `date_time(Year, Month, Day, Hour, Minute, Second)`
+compounds, consistent with the `dates` library.
 
-- UTC offset arithmetic is performed via integer seconds using ``date::add_duration/3``
-and ``date::subtract_duration/3``.
+- UTC offset arithmetic is performed via integer seconds using `date::add_duration/3`
+and `date::subtract_duration/3`.
 
 - This library does not provide a system clock or current-time predicate. Use
-the ``dates`` library's ``date::now/6`` or equivalent for the current time.
+the `dates` library's `date::now/6` or equivalent for the current time.
 
 - For performance when converting many instants in the same zone, load all
-required zones once at startup and keep them in the ``tzif`` cache.
+required zones once at startup and keep them in the `tzif` cache.

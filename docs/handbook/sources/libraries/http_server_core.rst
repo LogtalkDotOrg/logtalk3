@@ -20,7 +20,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#http_server_core <../../apis/library_index.html#http_server_core>`__
+`../../apis/library_index.html#http-server-core <../../apis/library_index.html#http-server-core>`__
 link in a web browser.
 
 Loading

@@ -19,7 +19,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#agglomerative_clusterer <../../apis/library_index.html#agglomerative_clusterer>`__
+`../../apis/library_index.html#agglomerative-clusterer <../../apis/library_index.html#agglomerative-clusterer>`__
 link in a web browser.
 
 Loading

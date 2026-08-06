@@ -39,7 +39,7 @@ bytes.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#block_ciphers](../../apis/library_index.html#block_ciphers)
+Open the [../../apis/library_index.html#block-ciphers](../../apis/library_index.html#block-ciphers)
 link in a web browser.
 
 

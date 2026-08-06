@@ -22,7 +22,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#regression_protocols <../../apis/library_index.html#regression_protocols>`__
+`../../apis/library_index.html#regression-protocols <../../apis/library_index.html#regression-protocols>`__
 link in a web browser.
 
 Loading

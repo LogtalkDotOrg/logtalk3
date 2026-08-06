@@ -14,7 +14,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#pca_projection <../../apis/library_index.html#pca_projection>`__
+`../../apis/library_index.html#pca-projection <../../apis/library_index.html#pca-projection>`__
 link in a web browser.
 
 Loading

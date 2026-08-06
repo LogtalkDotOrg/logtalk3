@@ -26,7 +26,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#z-score <../../apis/library_index.html#z-score>`__
+`../../apis/library_index.html#z-score-anomaly-detector <../../apis/library_index.html#z-score-anomaly-detector>`__
 link in a web browser.
 
 Loading

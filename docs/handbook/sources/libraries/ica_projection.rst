@@ -17,7 +17,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#ica_projection <../../apis/library_index.html#ica_projection>`__
+`../../apis/library_index.html#ica-projection <../../apis/library_index.html#ica-projection>`__
 link in a web browser.
 
 Loading

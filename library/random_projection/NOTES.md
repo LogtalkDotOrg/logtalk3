@@ -34,7 +34,7 @@ dimensionality.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#random_projection](../../apis/library_index.html#random_projection)
+Open the [../../apis/library_index.html#random-projection](../../apis/library_index.html#random-projection)
 link in a web browser.
 
 

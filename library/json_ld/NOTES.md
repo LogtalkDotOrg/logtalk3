@@ -38,7 +38,7 @@ or `colon`).
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#json_ld](../../apis/library_index.html#json_ld)
+Open the [../../apis/library_index.html#json-ld](../../apis/library_index.html#json-ld)
 link in a web browser.
 
 

@@ -15,7 +15,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#kernel_pca_projection <../../apis/library_index.html#kernel_pca_projection>`__
+`../../apis/library_index.html#kernel-pca-projection <../../apis/library_index.html#kernel-pca-projection>`__
 link in a web browser.
 
 Loading

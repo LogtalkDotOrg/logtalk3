@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `kmedoids_clusterer`
-==========
+====================
 
 k-Medoids clusterer. It uses an iterative medoid-update algorithm with
 deterministic initialization and deterministic cluster assignments.
@@ -39,7 +39,7 @@ library.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#kmedoids_clusterer](../../apis/library_index.html#kmedoids_clusterer)
+Open the [../../apis/library_index.html#kmedoids-clusterer](../../apis/library_index.html#kmedoids-clusterer)
 link in a web browser.
 
 

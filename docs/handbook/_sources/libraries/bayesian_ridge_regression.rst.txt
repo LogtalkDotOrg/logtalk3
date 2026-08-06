@@ -14,7 +14,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#bayesian_ridge_regression <../../apis/library_index.html#bayesian_ridge_regression>`__
+`../../apis/library_index.html#bayesian-ridge-regression <../../apis/library_index.html#bayesian-ridge-regression>`__
 link in a web browser.
 
 Loading

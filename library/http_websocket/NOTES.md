@@ -40,7 +40,7 @@ SWI-Prolog, Trealla Prolog, and XVM.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#http_websocket](../../apis/library_index.html#http_websocket)
+Open the [../../apis/library_index.html#http-websocket](../../apis/library_index.html#http-websocket)
 link in a web browser.
 
 

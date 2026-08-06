@@ -55,7 +55,7 @@ that protocol and locally declare the `graph/2`, `node/3`, `edge/5`,
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#json_graph](../../apis/library_index.html#json_graph)
+Open the [../../apis/library_index.html#json-graph](../../apis/library_index.html#json-graph)
 link in a web browser.
 
 

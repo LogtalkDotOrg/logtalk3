@@ -14,7 +14,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#elastic_net_regression <../../apis/library_index.html#elastic_net_regression>`__
+`../../apis/library_index.html#elastic-net-regression <../../apis/library_index.html#elastic-net-regression>`__
 link in a web browser.
 
 Loading

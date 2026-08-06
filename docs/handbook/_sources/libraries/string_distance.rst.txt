@@ -20,7 +20,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#string_distance <../../apis/library_index.html#string_distance>`__
+`../../apis/library_index.html#string-distance <../../apis/library_index.html#string-distance>`__
 link in a web browser.
 
 Loading

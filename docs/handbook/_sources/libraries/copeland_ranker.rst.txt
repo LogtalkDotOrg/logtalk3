@@ -24,7 +24,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#copeland_ranker <../../apis/library_index.html#copeland_ranker>`__
+`../../apis/library_index.html#copeland-ranker <../../apis/library_index.html#copeland-ranker>`__
 link in a web browser.
 
 Loading

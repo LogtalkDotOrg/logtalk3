@@ -37,7 +37,7 @@ Reference tokens can be represented as atoms, `chars(List)`, or
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#json_pointer](../../apis/library_index.html#json_pointer)
+Open the [../../apis/library_index.html#json-pointer](../../apis/library_index.html#json-pointer)
 link in a web browser.
 
 

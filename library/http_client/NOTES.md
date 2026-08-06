@@ -48,7 +48,7 @@ for secure schemes via the same `http_transport_protocol` interface.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#http_client](../../apis/library_index.html#http_client)
+Open the [../../apis/library_index.html#http-client](../../apis/library_index.html#http-client)
 link in a web browser.
 
 

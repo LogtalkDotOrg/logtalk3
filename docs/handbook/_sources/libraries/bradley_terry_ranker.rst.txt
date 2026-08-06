@@ -25,7 +25,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#bradley_terry_ranker <../../apis/library_index.html#bradley_terry_ranker>`__
+`../../apis/library_index.html#bradley-terry-ranker <../../apis/library_index.html#bradley-terry-ranker>`__
 link in a web browser.
 
 Loading

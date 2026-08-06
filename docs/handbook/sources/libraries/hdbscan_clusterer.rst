@@ -23,7 +23,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#hdbscan_clusterer <../../apis/library_index.html#hdbscan_clusterer>`__
+`../../apis/library_index.html#hdbscan-clusterer <../../apis/library_index.html#hdbscan-clusterer>`__
 link in a web browser.
 
 Loading

@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `copeland_ranker`
-===========
+=================
 
 Copeland pairwise preference ranker. Ranks each item by its number of matchup
 wins minus losses after aggregating weighted pairwise preferences per observed
@@ -41,7 +41,7 @@ and induce a connected undirected comparison graph.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#copeland_ranker](../../apis/library_index.html#copeland_ranker)
+Open the [../../apis/library_index.html#copeland-ranker](../../apis/library_index.html#copeland-ranker)
 link in a web browser.
 
 

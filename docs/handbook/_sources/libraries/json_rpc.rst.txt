@@ -15,7 +15,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#json_rpc <../../apis/library_index.html#json_rpc>`__
+`../../apis/library_index.html#json-rpc <../../apis/library_index.html#json-rpc>`__
 link in a web browser.
 
 Loading

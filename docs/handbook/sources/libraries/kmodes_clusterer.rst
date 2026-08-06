@@ -21,7 +21,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#kmodes_clusterer <../../apis/library_index.html#kmodes_clusterer>`__
+`../../apis/library_index.html#kmodes-clusterer <../../apis/library_index.html#kmodes-clusterer>`__
 link in a web browser.
 
 Loading

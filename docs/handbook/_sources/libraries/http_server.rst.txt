@@ -17,7 +17,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#http_server <../../apis/library_index.html#http_server>`__
+`../../apis/library_index.html#http-server <../../apis/library_index.html#http-server>`__
 link in a web browser.
 
 Loading

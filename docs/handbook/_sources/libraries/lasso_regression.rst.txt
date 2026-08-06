@@ -18,7 +18,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#lasso_regression <../../apis/library_index.html#lasso_regression>`__
+`../../apis/library_index.html#lasso-regression <../../apis/library_index.html#lasso-regression>`__
 link in a web browser.
 
 Loading

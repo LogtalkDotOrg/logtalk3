@@ -24,7 +24,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#ranked_pairs <../../apis/library_index.html#ranked_pairs>`__
+`../../apis/library_index.html#ranked-pairs <../../apis/library_index.html#ranked-pairs>`__
 link in a web browser.
 
 Loading

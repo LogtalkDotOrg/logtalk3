@@ -31,7 +31,7 @@ layout optimization.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#umap_projection](../../apis/library_index.html#umap_projection)
+Open the [../../apis/library_index.html#umap-projection](../../apis/library_index.html#umap-projection)
 link in a web browser.
 
 

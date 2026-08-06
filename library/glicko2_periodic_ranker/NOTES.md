@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `glicko2_periodic_ranker`
-==================
+=========================
 
 Multi-period Glicko-2 ranker over temporal pairwise game datasets. Applies
 the standard Glicko-2 rating, rating-deviation, and volatility update
@@ -52,7 +52,7 @@ Datasets are represented as objects implementing the
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#glicko2_periodic_ranker](../../apis/library_index.html#glicko2_periodic_ranker)
+Open the [../../apis/library_index.html#glicko2-periodic-ranker](../../apis/library_index.html#glicko2-periodic-ranker)
 link in a web browser.
 
 

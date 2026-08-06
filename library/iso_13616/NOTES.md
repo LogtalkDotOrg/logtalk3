@@ -48,7 +48,7 @@ existence data beyond the public registry pattern definitions.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#iso_13616](../../apis/library_index.html#iso_13616)
+Open the [../../apis/library_index.html#iso-13616](../../apis/library_index.html#iso-13616)
 link in a web browser.
 
 

@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `glicko2_ranker`
-=========
+================
 
 Glicko-2 pairwise preference ranker. It applies the standard Glicko-2
 rating, rating-deviation, and volatility update equations over a single
@@ -41,7 +41,7 @@ learned ratings remain globally comparable across all ranked items.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#glicko2_ranker](../../apis/library_index.html#glicko2_ranker)
+Open the [../../apis/library_index.html#glicko2-ranker](../../apis/library_index.html#glicko2-ranker)
 link in a web browser.
 
 

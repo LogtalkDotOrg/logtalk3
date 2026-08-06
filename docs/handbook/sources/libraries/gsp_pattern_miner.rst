@@ -19,7 +19,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#gsp_pattern_miner <../../apis/library_index.html#gsp_pattern_miner>`__
+`../../apis/library_index.html#gsp-pattern-miner <../../apis/library_index.html#gsp-pattern-miner>`__
 link in a web browser.
 
 Loading

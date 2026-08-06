@@ -21,7 +21,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#dbscan_clusterer <../../apis/library_index.html#dbscan_clusterer>`__
+`../../apis/library_index.html#dbscan-clusterer <../../apis/library_index.html#dbscan-clusterer>`__
 link in a web browser.
 
 Loading

@@ -38,7 +38,7 @@ The current implementation covers:
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#ccsds_packetization](../../apis/library_index.html#ccsds_packetization)
+Open the [../../apis/library_index.html#ccsds-packetization](../../apis/library_index.html#ccsds-packetization)
 link in a web browser.
 
 

@@ -31,7 +31,7 @@ API documentation
 -----------------
 
 Open the
-[../../apis/library_index.html#multivariate_distributions](../../apis/library_index.html#multivariate_distributions)
+[../../apis/library_index.html#multivariate-distributions](../../apis/library_index.html#multivariate-distributions)
 link in a web browser.
 
 

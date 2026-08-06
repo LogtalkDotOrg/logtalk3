@@ -16,7 +16,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#wkt_wkb <../../apis/library_index.html#wkt_wkb>`__
+`../../apis/library_index.html#wkt-wkb <../../apis/library_index.html#wkt-wkb>`__
 link in a web browser.
 
 Loading

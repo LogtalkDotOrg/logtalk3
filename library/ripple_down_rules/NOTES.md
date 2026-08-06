@@ -44,7 +44,7 @@ construct, revise, classify, validate, and inspect them.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#ripple_down_rules](../../apis/library_index.html#ripple_down_rules)
+Open the [../../apis/library_index.html#ripple-down-rules](../../apis/library_index.html#ripple-down-rules)
 link in a web browser.
 
 

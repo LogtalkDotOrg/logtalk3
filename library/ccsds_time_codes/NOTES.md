@@ -31,7 +31,7 @@ library and by future frame-level libraries.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#ccsds_time_codes](../../apis/library_index.html#ccsds_time_codes)
+Open the [../../apis/library_index.html#ccsds-time-codes](../../apis/library_index.html#ccsds-time-codes)
 link in a web browser.
 
 

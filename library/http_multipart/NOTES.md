@@ -31,7 +31,7 @@ parsing and generation to the existing `http_core` predicates.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#http_multipart](../../apis/library_index.html#http_multipart)
+Open the [../../apis/library_index.html#http-multipart](../../apis/library_index.html#http-multipart)
 link in a web browser.
 
 

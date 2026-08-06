@@ -32,7 +32,7 @@ integer arithmetic.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#http_websocket_frames](../../apis/library_index.html#http_websocket_frames)
+Open the [../../apis/library_index.html#http-websocket-frames](../../apis/library_index.html#http-websocket-frames)
 link in a web browser.
 
 

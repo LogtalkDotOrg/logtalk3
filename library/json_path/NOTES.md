@@ -60,7 +60,7 @@ Still pending:
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#json_path](../../apis/library_index.html#json_path)
+Open the [../../apis/library_index.html#json-path](../../apis/library_index.html#json-path)
 link in a web browser.
 
 

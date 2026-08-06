@@ -21,7 +21,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#json_ld <../../apis/library_index.html#json_ld>`__
+`../../apis/library_index.html#json-ld <../../apis/library_index.html#json-ld>`__
 link in a web browser.
 
 Loading

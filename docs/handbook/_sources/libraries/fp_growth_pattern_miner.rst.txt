@@ -20,7 +20,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#fp_growth_pattern_miner <../../apis/library_index.html#fp_growth_pattern_miner>`__
+`../../apis/library_index.html#fp-growth-pattern-miner <../../apis/library_index.html#fp-growth-pattern-miner>`__
 link in a web browser.
 
 Loading

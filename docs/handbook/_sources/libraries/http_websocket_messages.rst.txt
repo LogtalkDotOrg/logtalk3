@@ -16,7 +16,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#http_websocket_messages <../../apis/library_index.html#http_websocket_messages>`__
+`../../apis/library_index.html#http-websocket-messages <../../apis/library_index.html#http-websocket-messages>`__
 link in a web browser.
 
 Loading

@@ -41,7 +41,7 @@ To refresh the generated subdivision table, run:
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#iso_3166](../../apis/library_index.html#iso_3166)
+Open the [../../apis/library_index.html#iso-3166](../../apis/library_index.html#iso-3166)
 link in a web browser.
 
 

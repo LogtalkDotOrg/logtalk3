@@ -13,7 +13,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#http_router <../../apis/library_index.html#http_router>`__
+`../../apis/library_index.html#http-router <../../apis/library_index.html#http-router>`__
 link in a web browser.
 
 Loading

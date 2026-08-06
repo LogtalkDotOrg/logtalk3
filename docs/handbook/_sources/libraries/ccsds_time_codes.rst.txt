@@ -13,7 +13,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#ccsds_time_codes <../../apis/library_index.html#ccsds_time_codes>`__
+`../../apis/library_index.html#ccsds-time-codes <../../apis/library_index.html#ccsds-time-codes>`__
 link in a web browser.
 
 Loading

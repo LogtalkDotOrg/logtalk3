@@ -26,7 +26,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#plackett_luce_last_ranker <../../apis/library_index.html#plackett_luce_last_ranker>`__
+`../../apis/library_index.html#plackett-luce-last-ranker <../../apis/library_index.html#plackett-luce-last-ranker>`__
 link in a web browser.
 
 Loading

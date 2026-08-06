@@ -22,7 +22,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#block_ciphers <../../apis/library_index.html#block_ciphers>`__
+`../../apis/library_index.html#block-ciphers <../../apis/library_index.html#block-ciphers>`__
 link in a web browser.
 
 Loading

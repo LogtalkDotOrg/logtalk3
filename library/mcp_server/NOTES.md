@@ -34,7 +34,7 @@ as currently required by the MCP specification.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#mcp_server](../../apis/library_index.html#mcp_server)
+Open the [../../apis/library_index.html#mcp-server](../../apis/library_index.html#mcp-server)
 link in a web browser.
 
 

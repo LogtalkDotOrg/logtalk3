@@ -33,7 +33,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#http_sse <../../apis/library_index.html#http_sse>`__
+`../../apis/library_index.html#http-sse <../../apis/library_index.html#http-sse>`__
 link in a web browser.
 
 Loading

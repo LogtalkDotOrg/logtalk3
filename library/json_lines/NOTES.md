@@ -35,7 +35,7 @@ or `colon`).
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#json_lines](../../apis/library_index.html#json_lines)
+Open the [../../apis/library_index.html#json-lines](../../apis/library_index.html#json-lines)
 link in a web browser.
 
 

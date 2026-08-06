@@ -17,7 +17,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#message_pack <../../apis/library_index.html#message_pack>`__
+`../../apis/library_index.html#message-pack <../../apis/library_index.html#message-pack>`__
 link in a web browser.
 
 Loading

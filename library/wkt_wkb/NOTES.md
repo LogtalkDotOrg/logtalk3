@@ -33,7 +33,7 @@ geometry encodings widely used by spatial databases and GIS tooling.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#wkt_wkb](../../apis/library_index.html#wkt_wkb)
+Open the [../../apis/library_index.html#wkt-wkb](../../apis/library_index.html#wkt-wkb)
 link in a web browser.
 
 

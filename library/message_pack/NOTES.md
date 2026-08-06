@@ -35,7 +35,7 @@ libraries whenever practical.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#message_pack](../../apis/library_index.html#message_pack)
+Open the [../../apis/library_index.html#message-pack](../../apis/library_index.html#message-pack)
 link in a web browser.
 
 

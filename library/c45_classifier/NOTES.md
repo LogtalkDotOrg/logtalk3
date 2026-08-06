@@ -20,7 +20,7 @@ ________________________________________________________________________
 
 
 `c45_classifier`
-=====
+================
 
 This library implements the C4.5 decision tree learning algorithm. C4.5
 is an extension of the ID3 algorithm that uses information gain ratio
@@ -40,7 +40,7 @@ directory for examples.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#c45_classifier](../../apis/library_index.html#c45_classifier)
+Open the [../../apis/library_index.html#c45-classifier](../../apis/library_index.html#c45-classifier)
 link in a web browser.
 
 

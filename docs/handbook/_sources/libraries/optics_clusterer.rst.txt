@@ -21,7 +21,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#optics_clusterer <../../apis/library_index.html#optics_clusterer>`__
+`../../apis/library_index.html#optics-clusterer <../../apis/library_index.html#optics-clusterer>`__
 link in a web browser.
 
 Loading

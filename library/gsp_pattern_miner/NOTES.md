@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `gsp_pattern_miner`
-=====
+===================
 
 GSP sequential pattern miner for sequence datasets. The library depends
 on the `sequential_pattern_mining_protocols` support library,
@@ -37,7 +37,7 @@ item domain.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#gsp_pattern_miner](../../apis/library_index.html#gsp_pattern_miner)
+Open the [../../apis/library_index.html#gsp-pattern-miner](../../apis/library_index.html#gsp-pattern-miner)
 link in a web browser.
 
 

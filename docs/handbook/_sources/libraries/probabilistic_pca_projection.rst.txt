@@ -17,7 +17,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#probabilistic_pca_projection <../../apis/library_index.html#probabilistic_pca_projection>`__
+`../../apis/library_index.html#probabilistic-pca-projection <../../apis/library_index.html#probabilistic-pca-projection>`__
 link in a web browser.
 
 Loading

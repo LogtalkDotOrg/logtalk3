@@ -30,7 +30,7 @@ reusing common method dispatch and path-template matching logic.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#http_router](../../apis/library_index.html#http_router)
+Open the [../../apis/library_index.html#http-router](../../apis/library_index.html#http-router)
 link in a web browser.
 
 

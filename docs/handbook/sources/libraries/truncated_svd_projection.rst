@@ -15,7 +15,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#truncated_svd_projection <../../apis/library_index.html#truncated_svd_projection>`__
+`../../apis/library_index.html#truncated-svd-projection <../../apis/library_index.html#truncated-svd-projection>`__
 link in a web browser.
 
 Loading

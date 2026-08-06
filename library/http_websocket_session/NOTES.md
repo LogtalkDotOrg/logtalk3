@@ -41,7 +41,7 @@ integer arithmetic.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#http_websocket_session](../../apis/library_index.html#http_websocket_session)
+Open the [../../apis/library_index.html#http-websocket-session](../../apis/library_index.html#http-websocket-session)
 link in a web browser.
 
 

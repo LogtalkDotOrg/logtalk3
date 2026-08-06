@@ -29,7 +29,7 @@ can be represented as atoms, character lists, or code lists.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#http_cookies](../../apis/library_index.html#http_cookies)
+Open the [../../apis/library_index.html#http-cookies](../../apis/library_index.html#http-cookies)
 link in a web browser.
 
 Loading

@@ -16,7 +16,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#random_projection <../../apis/library_index.html#random_projection>`__
+`../../apis/library_index.html#random-projection <../../apis/library_index.html#random-projection>`__
 link in a web browser.
 
 Loading

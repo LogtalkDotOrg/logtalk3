@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `truncated_svd_projection`
-===============
+==========================
 
 Truncated singular value decomposition reducer for continuous datasets.
 The library implements the `dimension_reducer_protocol` defined in the
@@ -33,7 +33,7 @@ the data matrix.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#truncated_svd_projection](../../apis/library_index.html#truncated_svd_projection)
+Open the [../../apis/library_index.html#truncated-svd-projection](../../apis/library_index.html#truncated-svd-projection)
 link in a web browser.
 
 

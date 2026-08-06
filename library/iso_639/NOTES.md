@@ -38,7 +38,7 @@ scripts only.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#iso_639](../../apis/library_index.html#iso_639)
+Open the [../../apis/library_index.html#iso-639](../../apis/library_index.html#iso-639)
 link in a web browser.
 
 

@@ -45,7 +45,7 @@ The library currently provides these public entities:
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#http_authenticate](../../apis/library_index.html#http_authenticate)
+Open the [../../apis/library_index.html#http-authenticate](../../apis/library_index.html#http-authenticate)
 link in a web browser.
 
 

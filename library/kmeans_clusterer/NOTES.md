@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `kmeans_clusterer`
-========
+==================
 
 k-Means clusterer. It uses Lloyd's algorithm with deterministic
 initialization. Supports continuous attributes only.
@@ -38,7 +38,7 @@ library.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#kmeans_clusterer](../../apis/library_index.html#kmeans_clusterer)
+Open the [../../apis/library_index.html#kmeans-clusterer](../../apis/library_index.html#kmeans-clusterer)
 link in a web browser.
 
 

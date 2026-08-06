@@ -25,7 +25,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#knn_distance_anomaly_detector <../../apis/library_index.html#knn_distance_anomaly_detector>`__
+`../../apis/library_index.html#knn-distance-anomaly-detector <../../apis/library_index.html#knn-distance-anomaly-detector>`__
 link in a web browser.
 
 Loading

@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `ranked_pairs`
-===============
+==============
 
 Ranked Pairs pairwise preference ranker. It builds the direct pairwise
 victory graph from aggregated matchups, considers victories in
@@ -41,7 +41,7 @@ all ranked items remain part of a single comparison graph.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#ranked_pairs](../../apis/library_index.html#ranked_pairs)
+Open the [../../apis/library_index.html#ranked-pairs](../../apis/library_index.html#ranked-pairs)
 link in a web browser.
 
 

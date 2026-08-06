@@ -39,7 +39,7 @@ over a declared item domain.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#clo_span_pattern_miner](../../apis/library_index.html#clo_span_pattern_miner)
+Open the [../../apis/library_index.html#clo-span-pattern-miner](../../apis/library_index.html#clo-span-pattern-miner)
 link in a web browser.
 
 

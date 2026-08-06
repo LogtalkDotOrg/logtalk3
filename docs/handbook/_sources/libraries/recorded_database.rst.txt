@@ -12,7 +12,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#recorded_database <../../apis/library_index.html#recorded_database>`__
+`../../apis/library_index.html#recorded-database <../../apis/library_index.html#recorded-database>`__
 link in a web browser.
 
 Loading

@@ -19,7 +19,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#dates_tz <../../apis/library_index.html#dates_tz>`__
+`../../apis/library_index.html#dates-tz <../../apis/library_index.html#dates-tz>`__
 link in a web browser.
 
 Loading

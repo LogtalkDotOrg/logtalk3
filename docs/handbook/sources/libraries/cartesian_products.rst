@@ -32,7 +32,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#cartesian_products <../../apis/library_index.html#cartesian_products>`__
+`../../apis/library_index.html#cartesian-products <../../apis/library_index.html#cartesian-products>`__
 link in a web browser.
 
 Loading

@@ -73,7 +73,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#classification_protocols <../../apis/library_index.html#classification_protocols>`__
+`../../apis/library_index.html#classification-protocols <../../apis/library_index.html#classification-protocols>`__
 link in a web browser.
 
 Loading

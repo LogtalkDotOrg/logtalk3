@@ -23,7 +23,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#command_line_options <../../apis/library_index.html#command_line_options>`__
+`../../apis/library_index.html#command-line-options <../../apis/library_index.html#command-line-options>`__
 file in a web browser.
 
 Loading

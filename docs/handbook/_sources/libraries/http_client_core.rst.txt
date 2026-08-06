@@ -15,7 +15,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#http_client_core <../../apis/library_index.html#http_client_core>`__
+`../../apis/library_index.html#http-client-core <../../apis/library_index.html#http-client-core>`__
 link in a web browser.
 
 Loading

@@ -45,7 +45,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#linear_algebra <../../apis/library_index.html#linear_algebra>`__
+`../../apis/library_index.html#linear-algebra <../../apis/library_index.html#linear-algebra>`__
 link in a web browser.
 
 Loading

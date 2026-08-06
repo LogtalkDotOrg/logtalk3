@@ -74,7 +74,7 @@ predicates.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#character_sets](../../apis/library_index.html#character_sets)
+Open the [../../apis/library_index.html#character-sets](../../apis/library_index.html#character-sets)
 link in a web browser.
 
 

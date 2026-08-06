@@ -45,7 +45,7 @@ transition graph so that the learned stationary distribution is unique.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#rank_centrality](../../apis/library_index.html#rank_centrality)
+Open the [../../apis/library_index.html#rank-centrality](../../apis/library_index.html#rank-centrality)
 link in a web browser.
 
 

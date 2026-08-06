@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `plackett_luce_ranker`
-===============
+======================
 
 Tie-aware Plackett-Luce grouped-ranking ranker. It processes each group
 as a sequence of top-choice selections from highest relevance to lowest
@@ -43,7 +43,7 @@ finite Plackett-Luce maximum-likelihood estimate exists.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#plackett_luce_ranker](../../apis/library_index.html#plackett_luce_ranker)
+Open the [../../apis/library_index.html#plackett-luce-ranker](../../apis/library_index.html#plackett-luce-ranker)
 link in a web browser.
 
 

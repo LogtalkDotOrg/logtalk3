@@ -14,7 +14,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#random_forest_regression <../../apis/library_index.html#random_forest_regression>`__
+`../../apis/library_index.html#random-forest-regression <../../apis/library_index.html#random-forest-regression>`__
 link in a web browser.
 
 Loading

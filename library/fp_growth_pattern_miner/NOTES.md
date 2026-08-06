@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `fp_growth_pattern_miner`
-===========
+=========================
 
 FP-growth frequent itemset miner for transaction datasets. The library
 depends on the `frequent_pattern_mining_protocols` support library,
@@ -38,7 +38,7 @@ items.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#fp_growth_pattern_miner](../../apis/library_index.html#fp_growth_pattern_miner)
+Open the [../../apis/library_index.html#fp-growth-pattern-miner](../../apis/library_index.html#fp-growth-pattern-miner)
 link in a web browser.
 
 

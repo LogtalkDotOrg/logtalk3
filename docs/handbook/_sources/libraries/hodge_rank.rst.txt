@@ -26,7 +26,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#hodge_rank <../../apis/library_index.html#hodge_rank>`__
+`../../apis/library_index.html#hodge-rank <../../apis/library_index.html#hodge-rank>`__
 link in a web browser.
 
 Loading

@@ -41,7 +41,7 @@ space.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#gaussian_process_regression](../../apis/library_index.html#gaussian_process_regression)
+Open the [../../apis/library_index.html#gaussian-process-regression](../../apis/library_index.html#gaussian-process-regression)
 link in a web browser.
 
 

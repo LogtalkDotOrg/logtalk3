@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `dbscan_clusterer`
-========
+==================
 
 DBSCAN clusterer. Uses deterministic density-based clustering based on
 epsilon neighborhoods and minimum point counts. Supports continuous
@@ -39,7 +39,7 @@ library.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#dbscan_clusterer](../../apis/library_index.html#dbscan_clusterer)
+Open the [../../apis/library_index.html#dbscan-clusterer](../../apis/library_index.html#dbscan-clusterer)
 link in a web browser.
 
 

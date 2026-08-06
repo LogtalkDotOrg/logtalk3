@@ -30,7 +30,7 @@ survive backtracking.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#recorded_database](../../apis/library_index.html#recorded_database)
+Open the [../../apis/library_index.html#recorded-database](../../apis/library_index.html#recorded-database)
 link in a web browser.
 
 

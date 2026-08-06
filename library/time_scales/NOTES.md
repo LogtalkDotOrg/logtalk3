@@ -36,7 +36,7 @@ libraries:
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#time_scales](../../apis/library_index.html#time_scales)
+Open the [../../apis/library_index.html#time-scales](../../apis/library_index.html#time-scales)
 link in a web browser.
 
 

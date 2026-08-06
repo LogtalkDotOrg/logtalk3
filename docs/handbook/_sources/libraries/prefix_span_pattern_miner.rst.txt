@@ -18,7 +18,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#prefix_span_pattern_miner <../../apis/library_index.html#prefix_span_pattern_miner>`__
+`../../apis/library_index.html#prefix-span-pattern-miner <../../apis/library_index.html#prefix-span-pattern-miner>`__
 link in a web browser.
 
 Loading

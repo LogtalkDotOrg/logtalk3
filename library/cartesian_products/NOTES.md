@@ -41,7 +41,7 @@ libraries are also available for focused APIs on related operations.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#cartesian_products](../../apis/library_index.html#cartesian_products)
+Open the [../../apis/library_index.html#cartesian-products](../../apis/library_index.html#cartesian-products)
 link in a web browser.
 
 

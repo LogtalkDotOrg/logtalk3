@@ -30,7 +30,7 @@ plus semantic normalization for a core set of frequently used headers.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#http_core](../../apis/library_index.html#http_core)
+Open the [../../apis/library_index.html#http-core](../../apis/library_index.html#http-core)
 link in a web browser.
 
 

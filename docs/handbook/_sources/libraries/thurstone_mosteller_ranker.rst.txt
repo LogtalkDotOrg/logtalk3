@@ -25,7 +25,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#thurstone_mosteller_ranker <../../apis/library_index.html#thurstone_mosteller_ranker>`__
+`../../apis/library_index.html#thurstone-mosteller-ranker <../../apis/library_index.html#thurstone-mosteller-ranker>`__
 link in a web browser.
 
 Loading

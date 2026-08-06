@@ -19,7 +19,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#time_scales <../../apis/library_index.html#time_scales>`__
+`../../apis/library_index.html#time-scales <../../apis/library_index.html#time-scales>`__
 link in a web browser.
 
 Loading

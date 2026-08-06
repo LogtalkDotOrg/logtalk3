@@ -12,7 +12,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#http_cookies <../../apis/library_index.html#http_cookies>`__
+`../../apis/library_index.html#http-cookies <../../apis/library_index.html#http-cookies>`__
 link in a web browser.
 
 Loading

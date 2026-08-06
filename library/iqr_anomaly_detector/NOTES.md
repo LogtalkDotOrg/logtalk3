@@ -19,7 +19,7 @@ ________________________________________________________________________
 
 
 `iqr_anomaly_detector`
-=======
+======================
 
 Statistical interquartile-range anomaly detector for continuous
 datasets. It is a statistical anomaly-detection method based on Tukey
@@ -45,7 +45,7 @@ for examples.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#iqr_anomaly_detector](../../apis/library_index.html#iqr_anomaly_detector)
+Open the [../../apis/library_index.html#iqr-anomaly-detector](../../apis/library_index.html#iqr-anomaly-detector)
 link in a web browser.
 
 

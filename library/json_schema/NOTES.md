@@ -34,7 +34,7 @@ uses the same representation choices for JSON data.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#json_schema](../../apis/library_index.html#json_schema)
+Open the [../../apis/library_index.html#json-schema](../../apis/library_index.html#json-schema)
 link in a web browser.
 
 

@@ -39,7 +39,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#json_graph <../../apis/library_index.html#json_graph>`__
+`../../apis/library_index.html#json-graph <../../apis/library_index.html#json-graph>`__
 link in a web browser.
 
 Loading

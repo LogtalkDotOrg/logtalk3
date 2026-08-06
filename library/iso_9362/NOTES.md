@@ -40,7 +40,7 @@ source snapshot in the same way as the ISO 4217 and ISO 639 libraries.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#iso_9362](../../apis/library_index.html#iso_9362)
+Open the [../../apis/library_index.html#iso-9362](../../apis/library_index.html#iso-9362)
 link in a web browser.
 
 

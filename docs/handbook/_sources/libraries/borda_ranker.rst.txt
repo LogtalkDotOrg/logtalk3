@@ -22,7 +22,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#borda_ranker <../../apis/library_index.html#borda_ranker>`__
+`../../apis/library_index.html#borda-ranker <../../apis/library_index.html#borda-ranker>`__
 link in a web browser.
 
 Loading

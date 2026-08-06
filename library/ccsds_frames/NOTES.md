@@ -31,7 +31,7 @@ configured at the object level.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#ccsds_frames](../../apis/library_index.html#ccsds_frames)
+Open the [../../apis/library_index.html#ccsds-frames](../../apis/library_index.html#ccsds-frames)
 link in a web browser.
 
 

@@ -46,7 +46,7 @@ section below for the details.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#http_websocket_service](../../apis/library_index.html#http_websocket_service)
+Open the [../../apis/library_index.html#http-websocket-service](../../apis/library_index.html#http-websocket-service)
 link in a web browser.
 
 

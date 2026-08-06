@@ -33,7 +33,7 @@ match standardizing penalized columns before applying the L2 penalty.
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#ridge_regression](../../apis/library_index.html#ridge_regression)
+Open the [../../apis/library_index.html#ridge-regression](../../apis/library_index.html#ridge-regression)
 link in a web browser.
 
 

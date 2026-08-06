@@ -37,7 +37,7 @@ to non-fund entries. Minor units are represented either as integers or the atom
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#iso_4217](../../apis/library_index.html#iso_4217)
+Open the [../../apis/library_index.html#iso-4217](../../apis/library_index.html#iso-4217)
 link in a web browser.
 
 

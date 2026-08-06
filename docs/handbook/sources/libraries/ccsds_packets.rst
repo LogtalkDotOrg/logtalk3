@@ -14,7 +14,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#ccsds_packets <../../apis/library_index.html#ccsds_packets>`__
+`../../apis/library_index.html#ccsds-packets <../../apis/library_index.html#ccsds-packets>`__
 link in a web browser.
 
 Loading
