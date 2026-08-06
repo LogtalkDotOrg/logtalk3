@@ -1,0 +1,90 @@
+.TH logtalk_http_server 1 "August 6, 2026" "Logtalk 3.102.0" "Logtalk Documentation"
+
+.SH NAME
+logtalk_http_server \- Logtalk script for serving a directory over HTTP
+
+.SH SYNOPSIS
+.B logtalk_http_server -v
+.br
+.B logtalk_http_server -p \fIprolog\fR
+[\fB-n \fIport\fR]
+[\fIdirectory\fR]
+.br
+.B logtalk_http_server -h
+
+.SH DESCRIPTION
+\fBlogtalk_http_server\fR starts a local HTTP server using the Logtalk \fIhttp_socket_transport\fR transport. The server listens on the loopback address \fI127.0.0.1\fR and serves static files from the selected document root. Requests for directories return HTML directory listings. The server URL is printed after the listener is ready. Stop the server by interrupting the script, usually by typing Control-C.
+
+.SH OPTIONS
+.TP
+.BI \-v
+Print script version.
+.TP
+.BI \-p
+Backend Prolog compiler. Required. The following identifiers are used: ECLiPSe - \fIeclipse\fR, SICStus Prolog - \fIsicstus\fR, SWI-Prolog - \fIswi\fR, Trealla Prolog - \fItrealla\fR, and XVM - \fIxvm\fR.
+.TP
+.BI \-n
+Server port. Must be an integer between 1 and 65535. Default is \fI8080\fR.
+.TP
+.B \-h
+Provide help on script usage.
+
+.SH ARGUMENTS
+.TP
+.I directory
+Absolute or relative path to the directory to serve. Default is the current directory.
+
+.SH "EXIT STATUS"
+.TP
+.B 0
+The version or help information was printed, or the server terminated normally.
+.TP
+.B 1
+An invalid option, backend, port, or document root was specified, or a required integration script or Logtalk driver could not be found.
+.TP
+.B other
+Exit status returned by the selected backend Prolog integration script.
+
+.SH EXAMPLES
+.TP
+Serve the current directory on the default port using SWI-Prolog:
+\fBlogtalk_http_server -p swi\fR
+.PP
+.TP
+Serve the relative directory \fIpublic\fR on port 8000 using Trealla Prolog:
+\fBlogtalk_http_server -p trealla -n 8000 public\fR
+.PP
+.TP
+Serve an absolute directory path using SICStus Prolog:
+\fBlogtalk_http_server -p sicstus /srv/www\fR
+
+.SH IMPLEMENTATION NOTES
+The ECLiPSe and SICStus Prolog backends serve requests serially without requiring thread support. Backends with thread support use the open-ended server loop provided by the \fIhttp_server\fR library. Responses close their HTTP connections so that subsequent browser requests can be accepted portably by all supported backends.
+.TP
+The SICStus Prolog integration script is invoked with \fI--noinfo\fR. The SWI-Prolog, Trealla Prolog, and XVM integration scripts are invoked with \fI-q\fR. ECLiPSe does not provide an equivalent quiet option.
+.TP
+The server binds only to the IPv4 loopback address and is not directly reachable from other hosts.
+
+.SH ENVIRONMENT
+.TP
+.B LOGTALKHOME
+Specifies the location of the Logtalk installation. The script uses it to locate its Logtalk driver.
+.TP
+.B LOGTALKUSER
+Specifies the location of the Logtalk user directory and its scratch directory.
+
+.SH FILES
+.TP
+.BI $LOGTALKHOME/scripts/logtalk_http_server.lgt
+Logtalk source file defining the static-file handler and server loop used by the script.
+
+.SH "SEE ALSO"
+The Logtalk website at https://logtalk.org/
+.PP
+The Logtalk Handbook at \fB$LOGTALKHOME/docs/handbook/index.html\fR
+
+.SH AUTHOR
+Paulo Moura <pmoura@logtalk.org>
+
+.SH COPYRIGHT
+Copyright (c) 1998-2026 Paulo Moura.

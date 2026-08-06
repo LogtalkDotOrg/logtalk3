@@ -69,6 +69,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/local/bin/lgt2txt
 /usr/local/bin/lgtenv
 /usr/local/bin/logtalk_allure_report
+/usr/local/bin/logtalk_http_server
 /usr/local/bin/logtalk_tester
 /usr/local/bin/logtalk_doclet
 /usr/local/bin/logtalk_version_select
@@ -109,6 +110,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/local/share/man/man1/logtalk_backend_select.1.gz
 /usr/local/share/man/man1/logtalk_tester.1.gz
 /usr/local/share/man/man1/logtalk_doclet.1.gz
+/usr/local/share/man/man1/logtalk_http_server.1.gz
 /usr/local/share/man/man1/logtalk_user_setup.1.gz
 /usr/local/share/man/man1/logtalk_version_select.1.gz
 /usr/local/share/man/man1/xvmlgt.1.gz
@@ -129,9 +131,9 @@ echo
 echo "Links to the following scripts have been created in /usr/local/bin:"
 echo
 echo "- logtalk_user_setup, logtalk_backend_select, logtalk_version_select"
-echo "- logtalk_tester, logtalk_allure_report, logtalk_doclet"
+echo "- logtalk_tester, logtalk_allure_report, logtalk_doclet, lgtenv"
 echo "- lgt2svg, lgt2pdf, lgt2html, lgt2xml, lgt2md, lgt2rst, lgt2txt"
-echo "- lgtenv"
+echo "- logtalk_http_server"
 echo
 echo "The following integration scripts are installed for running Logtalk"
 echo "with selected backend Prolog compilers:"

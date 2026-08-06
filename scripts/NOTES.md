@@ -112,6 +112,10 @@ also available in the Logtalk website.
 	alias is created in the same directory where the `*lgt` integration
 	scripts are found
 
+- `logtalk_http_server.sh`  
+	shell script for starting a HTTP server using Logtalk HTTP libraries;
+    supports ECLiPSe, SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM
+
 - `debian`  
 	directory containing support files for building the Debian package
 

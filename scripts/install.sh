@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Logtalk installation script
-##   Last updated on November 15, 2025
+##   Last updated on August 6, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -42,7 +42,7 @@ default_directory=logtalk-$version
 
 print_version() {
 	echo "Current $(basename "$0") version:"
-	echo "  0.15"
+	echo "  0.16"
 	exit 0
 }
 
@@ -122,6 +122,7 @@ cd "$prefix/bin" || exit 1
 ln -sf ../share/logtalk/scripts/logtalk_allure_report.sh logtalk_allure_report
 ln -sf ../share/logtalk/scripts/logtalk_tester.sh logtalk_tester
 ln -sf ../share/logtalk/scripts/logtalk_doclet.sh logtalk_doclet
+ln -sf ../share/logtalk/scripts/logtalk_http_server.sh logtalk_http_server
 ln -sf ../share/logtalk/scripts/logtalk_user_setup.sh logtalk_user_setup
 cp -f ../share/logtalk/scripts/logtalk_version_select.sh logtalk_version_select
 ln -sf ../share/logtalk/scripts/logtalk_backend_select.sh logtalk_backend_select
@@ -139,6 +140,7 @@ echo
 echo "- logtalk_user_setup, logtalk_backend_select, logtalk_version_select"
 echo "- logtalk_tester, logtalk_allure_report, logtalk_doclet, lgtenv"
 echo "- lgt2svg, lgt2pdf, lgt2html, lgt2xml, lgt2md, lgt2rst, lgt2txt"
+echo "- logtalk_http_server"
 echo
 echo "Ensure that the \"$prefix/bin\" directory is in your PATH."
 

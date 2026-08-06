@@ -178,6 +178,10 @@ provide `length/2` as a built-in predicate.
 Tools
 -----
 
+* ADDED: New `logtalk_http_server.sh` and `logtalk_http_server.ps1` scripts
+for starting a HTTP server using Logtalk HTTP libraries. Supports ECLiPSe,
+SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM.
+
 * IMPROVED: Tests for the `linter_reporter` tool to be less verbose.
 
 * IMPROVED: Tests for the `lgtunit` tool to be less verbose.

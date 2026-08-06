@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Logtalk uninstall script
-##   Last updated on March 22, 2025
+##   Last updated on August 6, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -82,6 +82,7 @@ rm -f logtalk_allure_report
 rm -f logtalk_backend_select
 rm -f logtalk_tester
 rm -f logtalk_doclet
+rm -f logtalk_http_server
 rm -f logtalk_user_setup
 rm -f logtalk_version_select
 rm -f xvmlgt
@@ -110,6 +111,7 @@ rm -f logtalk_allure_report.1.gz
 rm -f logtalk_backend_select.1.gz
 rm -f logtalk_tester.1.gz
 rm -f logtalk_doclet.1.gz
+rm -f logtalk_http_server.1.gz
 rm -f logtalk_user_setup.1.gz
 rm -f logtalk_version_select.1.gz
 rm -f quintuslgt.1.gz
