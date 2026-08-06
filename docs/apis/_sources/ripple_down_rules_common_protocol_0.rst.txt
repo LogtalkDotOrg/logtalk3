@@ -1,0 +1,240 @@
+.. index:: single: ripple_down_rules_common_protocol
+.. _ripple_down_rules_common_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``ripple_down_rules_common_protocol``
+=====================================
+
+Common orotocol for Ripple-Down Rules models.
+
+| **Availability:** 
+|    ``logtalk_load(ripple_down_rules(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-06
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: new/1
+.. _ripple_down_rules_common_protocol/0::new/1:
+
+``new/1``
+^^^^^^^^^
+
+Creates an empty Ripple-Down Rules model using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``new(Model)``
+| **Mode and number of proofs:**
+|    ``new(-compound)`` - ``one``
+
+
+------------
+
+.. index:: new/2
+.. _ripple_down_rules_common_protocol/0::new/2:
+
+``new/2``
+^^^^^^^^^
+
+Creates an empty Ripple-Down Rules model using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``new(Model,Options)``
+| **Mode and number of proofs:**
+|    ``new(-compound,+list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: classify/3
+.. _ripple_down_rules_common_protocol/0::classify/3:
+
+``classify/3``
+^^^^^^^^^^^^^^
+
+Classifies a case using a Ripple-Down Rules model.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``classify(Model,Case,Conclusion)``
+| **Mode and number of proofs:**
+|    ``classify(+compound,@term,--term)`` - ``one``
+
+
+------------
+
+.. index:: classify/4
+.. _ripple_down_rules_common_protocol/0::classify/4:
+
+``classify/4``
+^^^^^^^^^^^^^^
+
+Classifies a case and returns an ordered inference trace.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``classify(Model,Case,Conclusion,Trace)``
+| **Mode and number of proofs:**
+|    ``classify(+compound,@term,--term,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: revise/6
+.. _ripple_down_rules_common_protocol/0::revise/6:
+
+``revise/6``
+^^^^^^^^^^^^
+
+Returns a new model after applying one correction. The ``scrdr`` implementation accepts the correction atom ``replace``. The ``mcrdr`` implementation accepts the correction atoms ``add``, ``remove``, and ``filter``. The ``grdr`` implementation accepts the correction atoms supported by the keyed submodel and requires the second argument to be a ``Key-Case`` pair. The condition closure is called with the case and current conclusions. The conclusion closure is called with the case and current conclusions plus an output argument.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``revise(Model,Case,Correction,Condition,Conclusion,NewRDR)``
+| **Meta-predicate template:**
+|    ``revise(*,*,*,2,3,*)``
+| **Mode and number of proofs:**
+|    ``revise(+compound,@term,+atom,+callable,+callable,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Correction`` is a variable:
+|        ``instantiation_error``
+|    ``Correction`` is not supported by the receiving implementation or keyed submodel:
+|        ``domain_error(ripple_down_rule_correction,Correction)``
+
+
+------------
+
+.. index:: as_list/2
+.. _ripple_down_rules_common_protocol/0::as_list/2:
+
+``as_list/2``
+^^^^^^^^^^^^^
+
+Returns stable preorder descriptors for all rules in a model.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``as_list(Model,Rules)``
+| **Mode and number of proofs:**
+|    ``as_list(+compound,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: size/2
+.. _ripple_down_rules_common_protocol/0::size/2:
+
+``size/2``
+^^^^^^^^^^
+
+Returns the number of rules in a model.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``size(Model,Size)``
+| **Mode and number of proofs:**
+|    ``size(+compound,-integer)`` - ``one``
+
+
+------------
+
+.. index:: check_model/1
+.. _ripple_down_rules_common_protocol/0::check_model/1:
+
+``check_model/1``
+^^^^^^^^^^^^^^^^^
+
+Checks that a term is a structurally valid model for the receiving implementation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_model(Model)``
+| **Mode and number of proofs:**
+|    ``check_model(@compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Model`` is a variable:
+|        ``instantiation_error``
+|    ``Model`` is neither a variable nor a valid model:
+|        ``domain_error(ripple_down_rules_model,Model)``
+
+
+------------
+
+.. index:: valid_model/1
+.. _ripple_down_rules_common_protocol/0::valid_model/1:
+
+``valid_model/1``
+^^^^^^^^^^^^^^^^^
+
+True iff the argument is a structurally valid model for the receiving implementation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_model(Model)``
+| **Mode and number of proofs:**
+|    ``valid_model(@compound)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

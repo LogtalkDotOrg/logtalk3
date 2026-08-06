@@ -1,6 +1,18 @@
 .. _library_trueskill_ranker:
 
-order is preserved within equal ranks.
+``trueskill_ranker``
+====================
+
+TrueSkill ranker for ordered multiplayer matches. The library supports
+two-player games, free-for-all matches, teams, tied team ranks, and
+weighted partial participation. It implements the ``ranker_protocol``
+and consumes datasets implementing
+``multiplayer_ranking_dataset_protocol``.
+
+Matches are processed sequentially in ``match/1`` declaration order.
+Each match updates independent Gaussian player skills using expectation
+propagation over adjacent ranked-team comparison factors. Team
+declaration order is preserved within equal ranks.
 
 API documentation
 -----------------

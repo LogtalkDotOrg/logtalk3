@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>API documentation &mdash; Logtalk 3.102.0</title>
+  <title>trueskill_ranker &mdash; Logtalk 3.102.0</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=396eccfe" />
@@ -295,6 +295,7 @@
 <li class="toctree-l2"><a class="reference internal" href="regularized_bradley_terry_ranker.html"><code class="docutils literal notranslate"><span class="pre">regularized_bradley_terry_ranker</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="rest.html"><code class="docutils literal notranslate"><span class="pre">rest</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="ridge_regression.html"><code class="docutils literal notranslate"><span class="pre">ridge_regression</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="ripple_down_rules.html"><code class="docutils literal notranslate"><span class="pre">ripple_down_rules</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="s3.html"><code class="docutils literal notranslate"><span class="pre">s3</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="schulze_ranker.html"><code class="docutils literal notranslate"><span class="pre">schulze_ranker</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="sequential_pattern_mining_protocols.html"><code class="docutils literal notranslate"><span class="pre">sequential_pattern_mining_protocols</span></code></a></li>
@@ -320,14 +321,17 @@
 <li class="toctree-l2"><a class="reference internal" href="toml.html"><code class="docutils literal notranslate"><span class="pre">toml</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="toon.html"><code class="docutils literal notranslate"><span class="pre">toon</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="tries.html"><code class="docutils literal notranslate"><span class="pre">tries</span></code></a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">API documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#loading">Loading</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#testing">Testing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#dataset-representation">Dataset representation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#options">Options</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#scores-and-diagnostics">Scores and diagnostics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#limitations">Limitations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">trueskill_ranker</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dataset-representation">Dataset representation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scores-and-diagnostics">Scores and diagnostics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="truncated_svd_projection.html"><code class="docutils literal notranslate"><span class="pre">truncated_svd_projection</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="tsne_projection.html"><code class="docutils literal notranslate"><span class="pre">tsne_projection</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="tsv.html"><code class="docutils literal notranslate"><span class="pre">tsv</span></code></a></li>
@@ -376,7 +380,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="index.html">Libraries</a></li>
-      <li class="breadcrumb-item active">API documentation</li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">trueskill_ranker</span></code></li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/LogtalkDotOrg/logtalk3/blob/master/docs/handbook/sources/libraries/trueskill_ranker.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -386,29 +390,39 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p id="library-trueskill-ranker">order is preserved within equal ranks.</p>
+  <section id="trueskill-ranker">
+<span id="library-trueskill-ranker"></span><h1><code class="docutils literal notranslate"><span class="pre">trueskill_ranker</span></code><a class="headerlink" href="#trueskill-ranker" title="Link to this heading"></a></h1>
+<p>TrueSkill ranker for ordered multiplayer matches. The library supports
+two-player games, free-for-all matches, teams, tied team ranks, and
+weighted partial participation. It implements the <code class="docutils literal notranslate"><span class="pre">ranker_protocol</span></code>
+and consumes datasets implementing
+<code class="docutils literal notranslate"><span class="pre">multiplayer_ranking_dataset_protocol</span></code>.</p>
+<p>Matches are processed sequentially in <code class="docutils literal notranslate"><span class="pre">match/1</span></code> declaration order.
+Each match updates independent Gaussian player skills using expectation
+propagation over adjacent ranked-team comparison factors. Team
+declaration order is preserved within equal ranks.</p>
 <section id="api-documentation">
-<h1>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h1>
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
 <a class="reference external" href="../../apis/library_index.html#trueskill_ranker">../../apis/library_index.html#trueskill_ranker</a>
 link in a web browser.</p>
 </section>
 <section id="loading">
-<h1>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h1>
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
 <p>To load this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(trueskill_ranker(loader)).
 </pre></div>
 </div>
 </section>
 <section id="testing">
-<h1>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h1>
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
 <p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(trueskill_ranker(tester)).
 </pre></div>
 </div>
 </section>
 <section id="dataset-representation">
-<h1>Dataset representation<a class="headerlink" href="#dataset-representation" title="Link to this heading"></a></h1>
+<h2>Dataset representation<a class="headerlink" href="#dataset-representation" title="Link to this heading"></a></h2>
 <p>Datasets define:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>item(<span class="nv">Player</span>).
 match(<span class="nv">Match</span>).
@@ -423,7 +437,7 @@ match. Every match must contain at least two non-empty teams and a
 player may occur only once in each match.</p>
 </section>
 <section id="options">
-<h1>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h1>
+<h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
 <p>The values shown below are the defaults. The effective options,
 including defaults not explicitly supplied to <code class="docutils literal notranslate"><span class="pre">learn/3</span></code>, are recorded
 in the learned ranker diagnostics.</p>
@@ -462,7 +476,7 @@ than zero.</p></li>
 </ul>
 </section>
 <section id="scores-and-diagnostics">
-<h1>Scores and diagnostics<a class="headerlink" href="#scores-and-diagnostics" title="Link to this heading"></a></h1>
+<h2>Scores and diagnostics<a class="headerlink" href="#scores-and-diagnostics" title="Link to this heading"></a></h2>
 <p>The learned ranker is represented as:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>trueskill_ranker(<span class="nv">Items</span>, <span class="nv">Exposures</span>, <span class="nv">Diagnostics</span>)
 </pre></div>
@@ -478,7 +492,7 @@ Disconnected participation components are valid and are learned
 independently.</p>
 </section>
 <section id="limitations">
-<h1>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h1>
+<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>This library implements the original TrueSkill model, not TrueSkill 2.</p></li>
 <li><p>Match declaration order is semantically significant. Training is an
@@ -499,11 +513,12 @@ APIs.</p></li>
 </ul>
 </section>
 <section id="references">
-<h1>References<a class="headerlink" href="#references" title="Link to this heading"></a></h1>
+<h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
 <ol class="arabic simple">
 <li><p>Herbrich, R., Minka, T., and Graepel, T. (2007). <em>TrueSkill: A
 Bayesian Skill Rating System</em>.</p></li>
 </ol>
+</section>
 </section>
 
 

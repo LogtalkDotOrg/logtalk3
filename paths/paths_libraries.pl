@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on August 5, 2026
+%  Last updated on August 6, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -223,7 +223,6 @@ logtalk_library_path(nmf_projection, library('nmf_projection/')).
 logtalk_library_path(open_api, library('open_api/')).
 logtalk_library_path(open_ai, library('open_ai/')).
 logtalk_library_path(open_id, library('open_id/')).
-logtalk_library_path(s3, library('s3/')).
 logtalk_library_path(optics_clusterer, library('optics_clusterer/')).
 logtalk_library_path(optionals, library('optionals/')).
 logtalk_library_path(options, library('options/')).
@@ -259,6 +258,8 @@ logtalk_library_path(regression_tree, library('regression_tree/')).
 logtalk_library_path(regularized_bradley_terry_ranker, library('regularized_bradley_terry_ranker/')).
 logtalk_library_path(rest, library('rest/')).
 logtalk_library_path(ridge_regression, library('ridge_regression/')).
+logtalk_library_path(ripple_down_rules, library('ripple_down_rules/')).
+logtalk_library_path(s3, library('s3/')).
 logtalk_library_path(schulze_ranker, library('schulze_ranker/')).
 logtalk_library_path(sequential_pattern_mining_protocols, library('sequential_pattern_mining_protocols/')).
 logtalk_library_path(sets, library('sets/')).

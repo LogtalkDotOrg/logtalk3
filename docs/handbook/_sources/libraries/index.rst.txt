@@ -253,6 +253,7 @@ directory in the ``NOTES.md`` file.
    regularized_bradley_terry_ranker
    rest
    ridge_regression
+   ripple_down_rules
    s3
    schulze_ranker
    sequential_pattern_mining_protocols

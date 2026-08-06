@@ -106,6 +106,10 @@ short, obfuscated (but not encrypted), URL-safe identifiers.
 * ADDED: New `typeid` library implementing a type-safe, K-sortable, globally
 unique identifier (TypeID) generator.
 
+* ADDED: New `ripple_down_rules` library implementing Single Classification
+Ripple-Down Rules (SCRDR), Multi Classification Ripple-Down Rules (MCRDR), and
+Generalized Ripple-Down Rules (GRDR).
+
 * ADDED: New `tries` library implementing prefix trees that associate complete
 strings with values.
 

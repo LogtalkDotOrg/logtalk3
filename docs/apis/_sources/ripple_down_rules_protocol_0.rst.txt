@@ -1,0 +1,73 @@
+.. index:: single: ripple_down_rules_protocol
+.. _ripple_down_rules_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``ripple_down_rules_protocol``
+==============================
+
+Protocol for Ripple-Down Rules models.
+
+| **Availability:** 
+|    ``logtalk_load(ripple_down_rules(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-06
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Extends:**
+|    ``public`` :ref:`ripple_down_rules_common_protocol <ripple_down_rules_common_protocol/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`ripple_down_rules_common_protocol/0::as_list/2`  :ref:`ripple_down_rules_common_protocol/0::check_model/1`  :ref:`ripple_down_rules_common_protocol/0::classify/3`  :ref:`ripple_down_rules_common_protocol/0::classify/4`  :ref:`ripple_down_rules_common_protocol/0::new/1`  :ref:`ripple_down_rules_common_protocol/0::new/2`  :ref:`ripple_down_rules_common_protocol/0::revise/6`  :ref:`ripple_down_rules_common_protocol/0::size/2`  :ref:`ripple_down_rules_common_protocol/0::valid_model/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: classify_with_context/5
+.. _ripple_down_rules_protocol/0::classify_with_context/5:
+
+``classify_with_context/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Classifies a case while making external keyed conclusions visible to rule closures.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``classify_with_context(Model,Case,Context,Conclusion,Trace)``
+| **Mode and number of proofs:**
+|    ``classify_with_context(+compound,@term,+list(pair),--term,-list(compound))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

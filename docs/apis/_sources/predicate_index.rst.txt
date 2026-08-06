@@ -1104,6 +1104,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`difflist <difflist/0::as_list/2>`
 * :ref:`heap_protocol <heap_protocol/0::as_list/2>`
 * :ref:`queuep <queuep/0::as_list/2>`
+* :ref:`ripple_down_rules_common_protocol <ripple_down_rules_common_protocol/0::as_list/2>`
 * :ref:`setp <setp/0::as_list/2>`
 * :ref:`trie(Representation) <trie/1::as_list/2>`
 
@@ -2666,6 +2667,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`time_scales_protocol <time_scales_protocol/0::check_instant/1>`
 
+``check_model/1``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ripple_down_rules_common_protocol <ripple_down_rules_common_protocol/0::check_model/1>`
+
 ``check_offset/3``
 ------------------
 
@@ -2935,6 +2946,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ieee_754_fields_protocol <ieee_754_fields_protocol/0::classify/2>`
+
+``classify/3``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ripple_down_rules_common_protocol <ripple_down_rules_common_protocol/0::classify/3>`
+
+``classify/4``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ripple_down_rules_common_protocol <ripple_down_rules_common_protocol/0::classify/4>`
+
+``classify_with_context/5``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ripple_down_rules_protocol <ripple_down_rules_protocol/0::classify_with_context/5>`
 
 ``clause/5``
 ------------
@@ -9949,6 +9990,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`generalized_ripple_down_rules <generalized_ripple_down_rules/0::get/3>`
 * :ref:`http_client <http_client/0::get/3>`
 * :ref:`http_server_core_session <http_server_core_session/0::get/3>`
 * :ref:`memcached <memcached/0::get/3>`
@@ -16454,6 +16496,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`graph_protocol <graph_protocol/0::new/1>`
 * :ref:`java_access_protocol <java_access_protocol/0::new/1>`
 * :ref:`nested_dictionary_protocol <nested_dictionary_protocol/0::new/1>`
+* :ref:`ripple_down_rules_common_protocol <ripple_down_rules_common_protocol/0::new/1>`
 * :ref:`streamvars <streamvars/0::new/1>`
 * :ref:`termp <termp/0::new/1>`
 * :ref:`trie(Representation) <trie/1::new/1>`
@@ -16469,6 +16512,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`graph_protocol <graph_protocol/0::new/2>`
 * :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::new/2>`
 * :ref:`java_access_protocol <java_access_protocol/0::new/2>`
+* :ref:`ripple_down_rules_common_protocol <ripple_down_rules_common_protocol/0::new/2>`
 * :ref:`streamvars <streamvars/0::new/2>`
 * :ref:`union_find_protocol <union_find_protocol/0::new/2>`
 
@@ -21001,6 +21045,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`generalized_ripple_down_rules <generalized_ripple_down_rules/0::put/4>`
 * :ref:`http_client <http_client/0::put/4>`
 
 ``put/5``
@@ -22597,6 +22642,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`generalized_ripple_down_rules <generalized_ripple_down_rules/0::remove/3>`
 * :ref:`http_server_core_session <http_server_core_session/0::remove/3>`
 
 ``removeDependent/1``
@@ -23274,6 +23320,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`listp <listp/0::reverse/2>`
 * :ref:`varlistp <varlistp/0::reverse/2>`
+
+``revise/6``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ripple_down_rules_common_protocol <ripple_down_rules_common_protocol/0::revise/6>`
 
 ``rewind/2``
 ------------
@@ -25194,6 +25250,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`dictionaryp <dictionaryp/0::size/2>`
 * :ref:`heap_protocol <heap_protocol/0::size/2>`
+* :ref:`ripple_down_rules_common_protocol <ripple_down_rules_common_protocol/0::size/2>`
 * :ref:`setp <setp/0::size/2>`
 * :ref:`trie(Representation) <trie/1::size/2>`
 
@@ -28319,6 +28376,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ccsds_tc_services <ccsds_tc_services/0::valid_map_dispatch/1>`
+
+``valid_model/1``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ripple_down_rules_common_protocol <ripple_down_rules_common_protocol/0::valid_model/1>`
 
 ``valid_option/1``
 ------------------

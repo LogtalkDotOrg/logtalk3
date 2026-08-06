@@ -52,6 +52,7 @@
 		queues(loader),
 		sets(loader),
 		graphs(loader),
+		ripple_down_rules(loader),
 		hierarchies(loader),
 		nanoid(loader),
 		meta(loader),

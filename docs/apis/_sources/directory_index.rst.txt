@@ -2747,6 +2747,20 @@ To load an entity, always load the library that includes it using the goal ``log
 
    ridge_regression <ridge_regression_0>
 
+``library/ripple_down_rules/``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   generalized_ripple_down_rules <generalized_ripple_down_rules_0>
+   multi_classification_ripple_down_rules <multi_classification_ripple_down_rules_0>
+   ripple_down_rules_common_protocol <ripple_down_rules_common_protocol_0>
+   ripple_down_rules_protocol <ripple_down_rules_protocol_0>
+   single_classification_ripple_down_rules <single_classification_ripple_down_rules_0>
+
 ``library/s3/``
 ---------------
 

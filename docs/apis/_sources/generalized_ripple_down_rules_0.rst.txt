@@ -1,0 +1,117 @@
+.. index:: single: generalized_ripple_down_rules
+.. _generalized_ripple_down_rules/0:
+
+.. rst-class:: right
+
+**object**
+
+``generalized_ripple_down_rules``
+=================================
+
+Generalized Ripple-Down Rules implementation using keyed Single-Classification Ripple-Down Rules and Multi-Classification Ripple-Down Rules submodels.
+
+| **Availability:** 
+|    ``logtalk_load(ripple_down_rules(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-06
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`ripple_down_rules_common_protocol <ripple_down_rules_common_protocol/0>`
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`avltree <avltree/0>`
+|    :ref:`multi_classification_ripple_down_rules <multi_classification_ripple_down_rules/0>`
+|    :ref:`single_classification_ripple_down_rules <single_classification_ripple_down_rules/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`ripple_down_rules_common_protocol/0::as_list/2`  :ref:`ripple_down_rules_common_protocol/0::check_model/1`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`ripple_down_rules_common_protocol/0::classify/3`  :ref:`ripple_down_rules_common_protocol/0::classify/4`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`ripple_down_rules_common_protocol/0::new/1`  :ref:`ripple_down_rules_common_protocol/0::new/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`ripple_down_rules_common_protocol/0::revise/6`  :ref:`ripple_down_rules_common_protocol/0::size/2`  :ref:`ripple_down_rules_common_protocol/0::valid_model/1`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: put/4
+.. _generalized_ripple_down_rules/0::put/4:
+
+``put/4``
+^^^^^^^^^
+
+Returns a new Generalized Ripple-Down Rules model with the keyed Single-Classification Ripple-Down Rules or Multi-Classification Ripple-Down Rules submodel added or replaced.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``put(Model,Key,Submodel,NewModel)``
+| **Mode and number of proofs:**
+|    ``put(+compound,+term,+compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: get/3
+.. _generalized_ripple_down_rules/0::get/3:
+
+``get/3``
+^^^^^^^^^
+
+Returns the submodel stored under a key.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``get(Model,Key,Submodel)``
+| **Mode and number of proofs:**
+|    ``get(+compound,+term,-compound)`` - ``zero_or_one_or_error``
+
+
+------------
+
+.. index:: remove/3
+.. _generalized_ripple_down_rules/0::remove/3:
+
+``remove/3``
+^^^^^^^^^^^^
+
+Returns a new Generalized Ripple-Down Rules model with the keyed submodel removed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``remove(Model,Key,NewModel)``
+| **Mode and number of proofs:**
+|    ``remove(+compound,+term,-compound)`` - ``zero_or_one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

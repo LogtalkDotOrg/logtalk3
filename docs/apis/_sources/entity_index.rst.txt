@@ -303,6 +303,7 @@ Objects
    fp_growth_pattern_miner <fp_growth_pattern_miner_0>
    gaussian_mixture_clusterer <gaussian_mixture_clusterer_0>
    gaussian_process_regression <gaussian_process_regression_0>
+   generalized_ripple_down_rules <generalized_ripple_down_rules_0>
    genint <genint_0>
    gensym <gensym_0>
    geohash <geohash_0>
@@ -520,6 +521,7 @@ Objects
    modified_z_score_anomaly_detector <modified_z_score_anomaly_detector_0>
    modules_diagram_support <modules_diagram_support_0>
    mqtt <mqtt_0>
+   multi_classification_ripple_down_rules <multi_classification_ripple_down_rules_0>
    multisets <multisets_0>
    multivariate_distributions(Random) <multivariate_distributions_1>
    murmurhash3_x64_128 <murmurhash3_x64_128_0>
@@ -654,6 +656,7 @@ Objects
    shell_expansion(Mode) <shell_expansion_1>
    simulated_annealing(Problem) <simulated_annealing_1>
    simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing_2>
+   single_classification_ripple_down_rules <single_classification_ripple_down_rules_0>
    siphash_2_4 <siphash_2_4_0>
    siphash_2_4(Key) <siphash_2_4_1>
    size_metric <size_metric_0>
@@ -913,6 +916,8 @@ Protocols
    registry_protocol <registry_protocol_0>
    regression_dataset_protocol <regression_dataset_protocol_0>
    regressor_protocol <regressor_protocol_0>
+   ripple_down_rules_common_protocol <ripple_down_rules_common_protocol_0>
+   ripple_down_rules_protocol <ripple_down_rules_protocol_0>
    s3_protocol <s3_protocol_0>
    sampling_protocol <sampling_protocol_0>
    sequence_dataset_protocol <sequence_dataset_protocol_0>
