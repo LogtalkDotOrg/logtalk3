@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-08-07,
 		comment is 'Unit tests for the "http_server_core" library.'
 	]).
 
@@ -627,6 +627,28 @@
 		http_core::generate_response(atom(ExpectedAtom2), ExpectedResponse2),
 		atom_concat(ExpectedAtom1, ExpectedAtom2, ExpectedAtom),
 		read_file_atom('test_http_server_core_duplicate_keep_alive_output.tmp', ExpectedAtom).
+
+	test(http_server_core_serve_connection_3_09, deterministic) :-
+		write_file_atom('test_http_server_core_truncated_request_input.tmp', 'GET /'),
+		^^file_path('test_http_server_core_truncated_request_input.tmp', InputFile),
+		^^file_path('test_http_server_core_truncated_request_output.tmp', OutputFile),
+		open(InputFile, read, Input, [type(binary)]),
+		open(OutputFile, write, Output, [type(binary)]),
+		http_server_core::serve_connection(Input, Output, echo_http_handler),
+		close(Input),
+		close(Output),
+		read_file_atom('test_http_server_core_truncated_request_output.tmp', '').
+
+	test(http_server_core_serve_connection_3_10, deterministic) :-
+		write_file_atom('test_http_server_core_truncated_cr_input.tmp', 'GET / HTTP/1.1\r'),
+		^^file_path('test_http_server_core_truncated_cr_input.tmp', InputFile),
+		^^file_path('test_http_server_core_truncated_cr_output.tmp', OutputFile),
+		open(InputFile, read, Input, [type(binary)]),
+		open(OutputFile, write, Output, [type(binary)]),
+		http_server_core::serve_connection(Input, Output, echo_http_handler),
+		close(Input),
+		close(Output),
+		read_file_atom('test_http_server_core_truncated_cr_output.tmp', '').
 
 	test(http_server_core_read_request_2_03, false, [cleanup(close(in))]) :-
 		^^file_path('test_http_server_core_empty.tmp', File),

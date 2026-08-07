@@ -171,6 +171,9 @@ Andrew Davison for the bug report.
 output stream before the input stream when they are distinct, preventing
 connection teardown before buffered output is flushed.
 
+* FIXED: The `http_server_core` library handling of client connections closed
+while reading a partial HTTP request.
+
 * UPDATED: The `hmac` library documentation to mention the BLAKE2 hash
 functions and added tests for HMAC-BLAKE2b and HMAC-BLAKE2s.
 

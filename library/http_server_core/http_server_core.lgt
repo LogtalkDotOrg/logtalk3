@@ -23,9 +23,9 @@
 	imports(http_message_helpers)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-07-28,
+		date is 2026-08-07,
 		comment is 'Portable stream-based HTTP server orchestration predicates.'
 	]).
 
@@ -564,10 +564,13 @@
 			;	Result = end_of_file
 			),
 			Error,
-			(	bad_request_response(Error, Response),
-				Result = error(Response)
-			)
+			request_read_error(Error, Result)
 		).
+
+	request_read_error(error(domain_error(http_request_stream, unexpected_end_of_file), _), end_of_file) :-
+		!.
+	request_read_error(Error, error(Response)) :-
+		bad_request_response(Error, Response).
 
 	connection_action(_Request, Response, upgrade) :-
 		switching_protocols_response(Response),
@@ -734,7 +737,9 @@
 	read_crlf(Input) :-
 		get_byte(Input, CarriageReturn),
 		get_byte(Input, LineFeed),
-		(	CarriageReturn =:= 0'\r,
+		(	(CarriageReturn =:= -1; LineFeed =:= -1) ->
+			domain_error(http_request_stream, unexpected_end_of_file)
+		;	CarriageReturn =:= 0'\r,
 			LineFeed =:= 0'\n ->
 			true
 		;	domain_error(http_request_stream, invalid_line_ending(CarriageReturn, LineFeed))
@@ -747,10 +752,14 @@
 		;	read_line_bytes(Input, Byte, [], Result)
 		).
 
+	read_line_bytes(_Input, -1, _Acc, _Result) :-
+		domain_error(http_request_stream, unexpected_end_of_file).
 	read_line_bytes(Input, Byte, Acc, Result) :-
 		(	Byte =:= 0'\r ->
 			get_byte(Input, NextByte),
-			(	NextByte =:= 0'\n ->
+			(	NextByte =:= -1 ->
+				domain_error(http_request_stream, unexpected_end_of_file)
+			;	NextByte =:= 0'\n ->
 				reverse(Acc, Bytes),
 				Result = line(Bytes)
 			;	domain_error(http_request_stream, invalid_line_ending(Byte, NextByte))
