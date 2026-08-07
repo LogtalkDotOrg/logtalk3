@@ -31,7 +31,7 @@ API documentation
 
 This tool API documentation is available at:
 
-[../../apis/library_index.html#linter_reporter](../../apis/library_index.html#linter_reporter)
+[../../apis/library_index.html#linter-reporter](../../apis/library_index.html#linter-reporter)
 
 
 Loading

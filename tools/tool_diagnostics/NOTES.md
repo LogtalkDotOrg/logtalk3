@@ -36,7 +36,7 @@ API documentation
 
 This tool API documentation is available at:
 
-[../../apis/library_index.html#tool_diagnostics_protocol](../../apis/library_index.html#tool_diagnostics_protocol)
+[../../apis/library_index.html#tool-diagnostics-protocol](../../apis/library_index.html#tool-diagnostics-protocol)
 
 
 Loading
