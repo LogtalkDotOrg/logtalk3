@@ -23,9 +23,9 @@
 	imports([options, http_docroot_paths])).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-07-14,
+		date is 2026-08-07,
 		comment is 'Router-agnostic static file response helper built on the normalized ``http_core`` library.'
 	]).
 
@@ -151,9 +151,15 @@
 		).
 
 	resolved_document_root(DocumentRoot, Root) :-
-		os::absolute_file_name(DocumentRoot, AbsoluteDocumentRoot),
-		(	os::directory_exists(AbsoluteDocumentRoot) ->
-			os::path_concat(AbsoluteDocumentRoot, '', Root)
+		% make sure the path ends with the path separator before expanding to
+		% workaround obscure and quirky behavior with the SWI-Prolog backend
+		% path expansion built-in predicates (used by the "os" library) when
+		% the root directory is a symbolic link where different expansions are
+		% returned depending on the presence of absence of a trailing slash
+		os::path_concat(DocumentRoot, '', DocumentRootWithSeparator),
+		os::absolute_file_name(DocumentRootWithSeparator, Root),
+		(	os::directory_exists(Root) ->
+			true
 		;	domain_error(http_static_files_document_root, DocumentRoot)
 		).
 

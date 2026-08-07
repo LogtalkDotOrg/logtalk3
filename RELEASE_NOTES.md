@@ -174,6 +174,9 @@ connection teardown before buffered output is flushed.
 * FIXED: The `http_server_core` library handling of client connections closed
 while reading a partial HTTP request.
 
+* FIXED: The `http_static_files` and `http_directory_listing` libraries handling
+of document roots accessed through symbolic links when using SWI-Prolog.
+
 * UPDATED: The `hmac` library documentation to mention the BLAKE2 hash
 functions and added tests for HMAC-BLAKE2b and HMAC-BLAKE2s.
 
