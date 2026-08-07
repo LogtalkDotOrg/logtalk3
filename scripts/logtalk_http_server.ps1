@@ -69,7 +69,7 @@ Function ConvertTo-PrologAtom {
 		[String]$Text
 	)
 
-	return $Text.Replace("'", "''")
+	return $Text.Replace("\", "/").Replace("'", "''")
 }
 
 Function Resolve-DocumentRoot {
@@ -179,7 +179,8 @@ if (-not (Test-Path -LiteralPath $driver -PathType Leaf)) {
 
 $documentRootAtom = ConvertTo-PrologAtom $documentRoot
 $driverAtom = ConvertTo-PrologAtom $driver
-$goal = "set_logtalk_flag(report,warnings),logtalk_load(http_server(loader)),logtalk_load(http_static_files(loader)),logtalk_load('$driverAtom',[scratch_directory('$LOGTALKUSER/scratch')]),logtalk_http_server::serve($port,'$documentRootAtom'),halt$dot"
+$scratchDirectoryAtom = ConvertTo-PrologAtom (Join-Path $env:LOGTALKUSER "scratch")
+$goal = "set_logtalk_flag(report,warnings),logtalk_load(http_server(loader)),logtalk_load(http_static_files(loader)),logtalk_load('$driverAtom',[scratch_directory('$scratchDirectoryAtom')]),logtalk_http_server::serve($port,'$documentRootAtom'),halt$dot"
 
 & $logtalk @goalOptions $goal
 Exit $LASTEXITCODE
