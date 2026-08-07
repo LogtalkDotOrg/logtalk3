@@ -24,9 +24,9 @@
 	imports([options, http_message_helpers, http_text_helpers])).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:1:2,
 		author is 'Paulo Moura',
-		date is 2026-08-01,
+		date is 2026-08-07,
 		comment is 'Process-backed HTTP transport predicates using the process library and helper processes.'
 	]).
 
@@ -426,7 +426,7 @@
 
 	serve_once(Listener, Handler, ClientInfo) :-
 		accept_process_listener_connection(Listener, Input, Output, ClientInfo),
-		serve_accepted_connection(Input, Output, Handler).
+		catch(serve_accepted_connection(Input, Output, Handler), _, true).
 
 	serve_websocket_once(Listener, Handler, Connection, Response, ClientInfo) :-
 		accept_process_listener_connection(Listener, Input, Output, ClientInfo),
@@ -472,7 +472,7 @@
 		try_accept_bounded_listener_connection(Listener, Input, Output, ClientInfo, Outcome),
 		(	Outcome == shutdown ->
 			ClientInfos = []
-		;	serve_accepted_connection(Input, Output, Handler),
+		;	catch(serve_accepted_connection(Input, Output, Handler), _, true),
 			NextCount is Count - 1,
 			ClientInfos = [ClientInfo| RemainingClientInfos],
 			serve_listener_serial(Listener, Handler, NextCount, RemainingClientInfos)
@@ -1674,7 +1674,7 @@
 		).
 
 	spawn_connection_worker(Input, Output, Handler, worker(Tag, Goal)) :-
-		Goal = serve_accepted_connection(Input, Output, Handler),
+		Goal = catch(serve_accepted_connection(Input, Output, Handler), _, true),
 		catch(
 			threaded_once(Goal, Tag),
 			Error,
@@ -1686,7 +1686,7 @@
 	spawn_notifying_connection_worker(Notification, Input, Output, Handler, worker(Tag, Goal)) :-
 		Goal = setup_call_cleanup(
 			true,
-			serve_accepted_connection(Input, Output, Handler),
+			catch(serve_accepted_connection(Input, Output, Handler), _, true),
 			threaded_notify(Notification)
 		),
 		catch(
@@ -1769,13 +1769,7 @@
 		;	try_process_listener_accept(Listener, Control, RunId, Input, Output) ->
 			(	shutdown_requested(Control, RunId) ->
 				catch(close_stream_pair(Input, Output), _, true)
-			;	catch(
-					serve_accepted_connection(Input, Output, Handler),
-					Error,
-					(	force_shutdown_control(Control, RunId),
-						throw(Error)
-					)
-				),
+			;	catch(serve_accepted_connection(Input, Output, Handler), _, true),
 				serve_until_shutdown_serial(Listener, Handler, Control, RunId)
 			)
 		;	true
@@ -1840,14 +1834,8 @@
 
 	spawn_open_connection_worker(Control, RunId, Input, Output, Handler) :-
 		Goal = setup_call_cleanup(
-			catch(
-				true,
-				serve_accepted_connection(Input, Output, Handler),
-				Error,
-				(	force_shutdown_control(Control, RunId),
-					throw(Error)
-				)
-			),
+			true,
+			catch(serve_accepted_connection(Input, Output, Handler), _, true),
 			threaded_notify(listener_worker_finished(Control, RunId))
 		),
 		catch(

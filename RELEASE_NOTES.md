@@ -177,6 +177,10 @@ while reading a partial HTTP request.
 * FIXED: The `http_static_files` and `http_directory_listing` libraries handling
 of document roots accessed through symbolic links when using SWI-Prolog.
 
+* FIXED: The `http_process_transport` and `http_socket_transport` libraries
+handling of per-connection errors to keep listeners serving subsequent
+connections.
+
 * UPDATED: The `hmac` library documentation to mention the BLAKE2 hash
 functions and added tests for HMAC-BLAKE2b and HMAC-BLAKE2s.
 

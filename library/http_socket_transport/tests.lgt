@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-08,
+		date is 2026-08-07,
 		comment is 'Unit tests for the "http_socket_transport" library.'
 	]).
 
@@ -68,6 +68,19 @@
 		threaded_ignore(client_exchange_ignore('127.0.0.1', Port, Request)),
 		http_socket_transport::serve_once(Listener, echo_http_socket_transport_handler, ClientInfo),
 		http_socket_transport::close_listener(Listener).
+
+	test(http_socket_transport_serve_once_3_02, deterministic) :-
+		ErrorRequest = request(get, origin('/error'), http(1, 1), [host-host('example.com')], empty, []),
+		OkRequest = request(get, origin('/ok'), http(1, 1), [host-host('example.com')], empty, []),
+		http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
+		threaded_ignore(client_exchange_ignore('127.0.0.1', Port, ErrorRequest)),
+		http_socket_transport::serve_once(Listener, failing_response_http_socket_transport_handler, _ClientInfo1),
+		threaded_once(client_exchange_response('127.0.0.1', Port, OkRequest, Response), ClientTag),
+		http_socket_transport::serve_once(Listener, failing_response_http_socket_transport_handler, _ClientInfo2),
+		threaded_exit(client_exchange_response('127.0.0.1', Port, OkRequest, Response), ClientTag),
+		http_socket_transport::close_listener(Listener),
+		status(Response, status(200, 'OK')),
+		body(Response, content('text/plain', text(ok))).
 
 	test(http_socket_transport_serve_websocket_once_5_01, deterministic) :-
 		Host = '127.0.0.1',
@@ -419,6 +432,38 @@
 		body(Response1, content('text/plain', text(alpha))),
 		status(Response2, status(200, 'OK')),
 		body(Response2, content('text/plain', text(beta))),
+		client_connection_state('127.0.0.1', Port, closed).
+
+	test(http_socket_transport_serve_until_shutdown_4_05, deterministic) :-
+		Control = serial_connection_error_control,
+		ErrorRequest = request(get, origin('/error'), http(1, 1), [host-host('example.com')], empty, []),
+		OkRequest = request(get, origin('/ok'), http(1, 1), [host-host('example.com')], empty, []),
+		http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
+		threaded_once(http_socket_transport::serve_until_shutdown(Listener, failing_response_http_socket_transport_handler, Control, [workers(serial)]), ServeTag),
+		threaded_once(client_exchange_ignore('127.0.0.1', Port, ErrorRequest), ErrorTag),
+		threaded_exit(client_exchange_ignore('127.0.0.1', Port, ErrorRequest), ErrorTag),
+		threaded_once(client_exchange_response('127.0.0.1', Port, OkRequest, Response), ClientTag),
+		threaded_exit(client_exchange_response('127.0.0.1', Port, OkRequest, Response), ClientTag),
+		http_socket_transport::request_shutdown(Control),
+		threaded_exit(http_socket_transport::serve_until_shutdown(Listener, failing_response_http_socket_transport_handler, Control, [workers(serial)]), ServeTag),
+		status(Response, status(200, 'OK')),
+		body(Response, content('text/plain', text(ok))),
+		client_connection_state('127.0.0.1', Port, closed).
+
+	test(http_socket_transport_serve_until_shutdown_4_06, deterministic) :-
+		Control = threaded_connection_error_control,
+		ErrorRequest = request(get, origin('/error'), http(1, 1), [host-host('example.com')], empty, []),
+		OkRequest = request(get, origin('/ok'), http(1, 1), [host-host('example.com')], empty, []),
+		http_socket_transport::open_listener('127.0.0.1', Port, Listener, []),
+		threaded_once(http_socket_transport::serve_until_shutdown(Listener, failing_response_http_socket_transport_handler, Control, [workers(per_connection)]), ServeTag),
+		threaded_once(client_exchange_ignore('127.0.0.1', Port, ErrorRequest), ErrorTag),
+		threaded_exit(client_exchange_ignore('127.0.0.1', Port, ErrorRequest), ErrorTag),
+		threaded_once(client_exchange_response('127.0.0.1', Port, OkRequest, Response), ClientTag),
+		threaded_exit(client_exchange_response('127.0.0.1', Port, OkRequest, Response), ClientTag),
+		http_socket_transport::request_shutdown(Control),
+		threaded_exit(http_socket_transport::serve_until_shutdown(Listener, failing_response_http_socket_transport_handler, Control, [workers(per_connection)]), ServeTag),
+		status(Response, status(200, 'OK')),
+		body(Response, content('text/plain', text(ok))),
 		client_connection_state('127.0.0.1', Port, closed).
 
 	test(http_socket_transport_serve_until_shutdown_5_01, deterministic) :-

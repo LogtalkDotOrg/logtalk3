@@ -35,6 +35,28 @@
 :- end_object.
 
 
+:- object(failing_response_http_socket_transport_handler,
+	implements(http_handler_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-08-07,
+		comment is 'Handler used by the http_socket_transport tests to trigger a response-stream error.'
+	]).
+
+	handle(Request, Response) :-
+		http_core::version(Request, Version),
+		http_core::target(Request, origin('/error')),
+		!,
+		http_core::response(Version, status(200, 'OK'), [], content('application/octet-stream', file('missing_http_socket_transport_test_file.tmp', 0, 1)), [], Response).
+	handle(Request, Response) :-
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(ok)), [], Response).
+
+:- end_object.
+
+
 :- object(echo_http_socket_transport_handler,
 	implements(http_handler_protocol)).
 

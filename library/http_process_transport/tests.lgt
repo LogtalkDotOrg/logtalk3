@@ -53,13 +53,35 @@
 :- end_object.
 
 
+:- object(failing_response_http_process_transport_handler,
+	implements(http_handler_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-08-07,
+		comment is 'Handler used by the "http_process_transport" library tests to trigger a response-stream error.'
+	]).
+
+	handle(Request, Response) :-
+		http_core::version(Request, Version),
+		http_core::target(Request, origin('/error')),
+		!,
+		http_core::response(Version, status(200, 'OK'), [], content('application/octet-stream', file('missing_http_process_transport_test_file.tmp', 0, 1)), [], Response).
+	handle(Request, Response) :-
+		http_core::version(Request, Version),
+		http_core::response(Version, status(200, 'OK'), [], content('text/plain', text(ok)), [], Response).
+
+:- end_object.
+
+
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-01,
+		date is 2026-08-07,
 		comment is 'Unit tests for the "http_process_transport" library.'
 	]).
 
@@ -189,6 +211,29 @@
 			http_process_transport::close_listener(Listener)
 		).
 
+	test(http_process_transport_serve_once_3_02, deterministic, [condition(executable_available(ncat))]) :-
+		ErrorRequest = request(get, origin('/error'), http(1, 1), [host-host('example.com')], empty, [connection([close])]),
+		OkRequest = request(get, origin('/ok'), http(1, 1), [host-host('example.com')], empty, [connection([close])]),
+		setup_call_cleanup(
+			http_process_transport::open_listener('127.0.0.1', Port, Listener, []),
+			( setup_call_cleanup(
+				open_pending_raw_connection('127.0.0.1', Port, ErrorRequest, ErrorInput, ErrorOutput),
+				http_process_transport::serve_once(Listener, failing_response_http_process_transport_handler, _ClientInfo1),
+				close_stream_pair_silently(ErrorInput, ErrorOutput)
+			),
+			setup_call_cleanup(
+				open_pending_raw_connection('127.0.0.1', Port, OkRequest, Input, Output),
+				( http_process_transport::serve_once(Listener, failing_response_http_process_transport_handler, _ClientInfo2),
+					http_client_core::read_response(Input, Response),
+					http_core::status(Response, status(200, 'OK')),
+					http_core::body(Response, content('text/plain', text(ok)))
+				),
+				close_stream_pair_silently(Input, Output)
+			)
+			),
+			http_process_transport::close_listener(Listener)
+		).
+
 	test(http_process_transport_serve_websocket_once_5_01, deterministic, [condition(executable_available(ncat))]) :-
 		Host = '127.0.0.1',
 		Path = '/socket',
@@ -298,6 +343,36 @@
 			http_core::status(Response, status(200, 'OK')),
 			http_core::body(Response, content('text/plain', text(serial))).
 
+		test(http_process_transport_serve_until_shutdown_4_01, deterministic, [condition(executable_available(ncat))]) :-
+			Control = serial_connection_error_control,
+			ErrorRequest = request(get, origin('/error'), http(1, 1), [host-host('example.com')], empty, []),
+			OkRequest = request(get, origin('/ok'), http(1, 1), [host-host('example.com')], empty, []),
+			http_process_transport::open_listener('127.0.0.1', Port, Listener, []),
+			threaded_once(http_process_transport::serve_until_shutdown(Listener, failing_response_http_process_transport_handler, Control, [workers(serial)]), ServeTag),
+			threaded_once(client_exchange_ignore('127.0.0.1', Port, ErrorRequest), ErrorTag),
+			threaded_exit(client_exchange_ignore('127.0.0.1', Port, ErrorRequest), ErrorTag),
+			threaded_once(http_process_transport::exchange('127.0.0.1', Port, OkRequest, Response), ClientTag),
+			threaded_exit(http_process_transport::exchange('127.0.0.1', Port, OkRequest, Response), ClientTag),
+			http_process_transport::request_shutdown(Control),
+			threaded_exit(http_process_transport::serve_until_shutdown(Listener, failing_response_http_process_transport_handler, Control, [workers(serial)]), ServeTag),
+			http_core::status(Response, status(200, 'OK')),
+			http_core::body(Response, content('text/plain', text(ok))).
+
+		test(http_process_transport_serve_until_shutdown_4_02, deterministic, [condition(executable_available(ncat))]) :-
+			Control = threaded_connection_error_control,
+			ErrorRequest = request(get, origin('/error'), http(1, 1), [host-host('example.com')], empty, []),
+			OkRequest = request(get, origin('/ok'), http(1, 1), [host-host('example.com')], empty, []),
+			http_process_transport::open_listener('127.0.0.1', Port, Listener, []),
+			threaded_once(http_process_transport::serve_until_shutdown(Listener, failing_response_http_process_transport_handler, Control, [workers(per_connection)]), ServeTag),
+			threaded_once(client_exchange_ignore('127.0.0.1', Port, ErrorRequest), ErrorTag),
+			threaded_exit(client_exchange_ignore('127.0.0.1', Port, ErrorRequest), ErrorTag),
+			threaded_once(http_process_transport::exchange('127.0.0.1', Port, OkRequest, Response), ClientTag),
+			threaded_exit(http_process_transport::exchange('127.0.0.1', Port, OkRequest, Response), ClientTag),
+			http_process_transport::request_shutdown(Control),
+			threaded_exit(http_process_transport::serve_until_shutdown(Listener, failing_response_http_process_transport_handler, Control, [workers(per_connection)]), ServeTag),
+			http_core::status(Response, status(200, 'OK')),
+			http_core::body(Response, content('text/plain', text(ok))).
+
 		test(http_process_transport_serve_until_shutdown_5_01, deterministic, [condition(executable_available(ncat))]) :-
 			Control = control_ready,
 			http_process_transport::open_listener('127.0.0.1', _Port, Listener, []),
@@ -310,7 +385,7 @@
 	client_exchange_ignore(Host, Port, Request) :-
 		setup_call_cleanup(
 			open_raw_connection(Host, Port, Input, Output),
-			http_client_core::exchange(Input, Output, Request, _Response),
+			catch(http_client_core::exchange(Input, Output, Request, _Response), _, true),
 			close_stream_pair_silently(Input, Output)
 		).
 
