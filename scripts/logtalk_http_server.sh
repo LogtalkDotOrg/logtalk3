@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Local HTTP server script
-##   Last updated on August 6, 2026
+##   Last updated on August 7, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -95,6 +95,10 @@ operating_system=$(uname -s)
 if [ "${operating_system:0:10}" == "MINGW32_NT" ] || [ "${operating_system:0:10}" == "MINGW64_NT" ] ; then
 	extension='.sh'
 	document_root=$(cd "$document_root" && pwd -W)
+elif [ "$LOGTALKHOME" != "" ] && [ "$LOGTALKUSER" != "" ] && [ "$LOGTALKHOME" == "$LOGTALKUSER" ] ; then
+	# assume that we're running Logtalk without using the installer scripts
+	extension='.sh'
+	document_root=$(cd "$document_root" && pwd -P)
 else
 	extension=''
 	document_root=$(cd "$document_root" && pwd -P)
@@ -123,7 +127,16 @@ fi
 if [ "$LOGTALKHOME" != "" ] && [ -f "$LOGTALKHOME/scripts/logtalk_http_server.lgt" ] ; then
 	driver="$LOGTALKHOME/scripts/logtalk_http_server.lgt"
 else
-	script_directory=$(cd "$(dirname "$0")" && pwd -P)
+	script_path=$0
+	while [ -h "$script_path" ] ; do
+		script_directory=$(cd "$(dirname "$script_path")" && pwd -P)
+		script_path=$(readlink "$script_path")
+		case "$script_path" in
+			/*) ;;
+			*) script_path="$script_directory/$script_path";;
+		esac
+	done
+	script_directory=$(cd "$(dirname "$script_path")" && pwd -P)
 	driver="$script_directory/logtalk_http_server.lgt"
 fi
 

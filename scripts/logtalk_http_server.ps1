@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Local HTTP server script
-##   Last updated on August 6, 2026
+##   Last updated on August 7, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -72,6 +72,29 @@ Function ConvertTo-PrologAtom {
 	return $Text.Replace("'", "''")
 }
 
+Function Resolve-DocumentRoot {
+	param(
+		[Parameter(Mandatory = $true)]
+		[String]$Path
+	)
+
+	$resolvedPath = (Resolve-Path -LiteralPath $Path).ProviderPath
+	$root = [System.IO.Path]::GetPathRoot($resolvedPath)
+	$current = Get-Item -Force -LiteralPath $root
+	$relativePath = $resolvedPath.Substring($root.Length)
+	$components = $relativePath.Split([System.IO.Path]::DirectorySeparatorChar, [System.StringSplitOptions]::RemoveEmptyEntries)
+	foreach ($component in $components) {
+		$item = Get-Item -Force -LiteralPath (Join-Path $current.FullName $component)
+		$target = $item.ResolveLinkTarget($true)
+		if ($null -ne $target) {
+			$current = Get-Item -Force -LiteralPath (Resolve-DocumentRoot $target.FullName)
+		} else {
+			$current = $item
+		}
+	}
+	return $current.FullName
+}
+
 if ($v) {
 	Write-Script-Version
 	Exit 0
@@ -98,7 +121,7 @@ if (-not (Test-Path -LiteralPath $Path -PathType Container)) {
 	Write-Error "Error! Directory does not exist: $Path"
 	Exit 1
 }
-$documentRoot = (Resolve-Path -LiteralPath $Path).ProviderPath
+$documentRoot = Resolve-DocumentRoot $Path
 
 $dot = ""
 switch ($p) {
