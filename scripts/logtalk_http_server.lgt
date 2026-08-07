@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-06,
+		date is 2026-08-07,
 		comment is 'HTTP handler for the ``logtalk_http_server`` scripts.'
 	]).
 
@@ -34,7 +34,10 @@
 		http_static_files::serve(Path, Request, _DocumentRoot_, [directory_listing(true)], Response0),
 		close_connection(Response0, Response).
 
-	close_connection(response(Version, Status, Headers, Body, Properties), response(Version, Status, Headers, Body, [connection([close])| Properties])).
+	close_connection(
+		response(Version, Status, Headers, Body, Properties),
+		response(Version, Status, Headers, Body, [connection([close])| Properties])
+	).
 
 	request_path(Request, '/') :-
 		http_core::target(Request, origin('/')),
@@ -62,7 +65,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-06,
+		date is 2026-08-07,
 		comment is 'Local HTTP server used by the ``logtalk_http_server`` scripts.'
 	]).
 
@@ -80,36 +83,24 @@
 		argnames is ['Port']
 	]).
 
-	:- if(current_logtalk_flag(threads, supported)).
-
-		serve(Port, DocumentRoot) :-
-			http_server::serve_until_shutdown(
-				'127.0.0.1', Port, logtalk_http_server_handler(DocumentRoot), logtalk_http_server,
-				[transport(http_socket_transport)], logtalk_http_server::server_ready(Port)
-			).
-
-	:- else.
-
-		serve(Port, DocumentRoot) :-
-			http_server::open('127.0.0.1', Port, Server, [transport(http_socket_transport)]),
-			server_ready(Port),
-			catch(
-				serve_requests(Server, logtalk_http_server_handler(DocumentRoot)),
-				Error,
-				(catch(http_server::close(Server), _, true), throw(Error))
-			),
-			http_server::close(Server).
-
-		serve_requests(Server, Handler) :-
-			http_server::serve_once(Server, Handler, _),
-			serve_requests(Server, Handler).
-
-	:- endif.
+	serve(Port, DocumentRoot) :-
+		http_server::open('127.0.0.1', Port, Server, [transport(http_socket_transport)]),
+		server_ready(Port),
+		catch(
+			serve_requests(Server, logtalk_http_server_handler(DocumentRoot)),
+			Error,
+			(catch(http_server::close(Server), _, true), throw(Error))
+		),
+		http_server::close(Server).
 
 	server_ready(Port) :-
 		write('Server URL: http://127.0.0.1:'),
 		write(Port),
 		write('/'),
 		nl.
+
+	serve_requests(Server, Handler) :-
+		http_server::serve_once(Server, Handler, _),
+		serve_requests(Server, Handler).
 
 :- end_object.
