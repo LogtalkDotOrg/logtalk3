@@ -72,7 +72,11 @@
 		^^clean_file('test_http_server_core_head_connection_output.tmp'),
 		^^clean_file('test_http_server_core_upgrade_connection_input.tmp'),
 		^^clean_file('test_http_server_core_upgrade_connection_output.tmp'),
-		^^clean_file('test_http_server_core_query.tmp').
+		^^clean_file('test_http_server_core_query.tmp'),
+		^^clean_file('test_http_server_core_truncated_cr_input.tmp'),
+		^^clean_file('test_http_server_core_truncated_cr_output.tmp'),
+		^^clean_file('test_http_server_core_truncated_request_input.tmp'),
+		^^clean_file('test_http_server_core_truncated_request_output.tmp').
 
 	test(http_server_core_read_request_2_01, deterministic) :-
 		write_file_atom(
