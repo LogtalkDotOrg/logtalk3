@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:6:1,
+		version is 1:6:2,
 		author is 'Paulo Moura',
-		date is 2026-06-16,
+		date is 2026-08-07,
 		comment is 'Unit tests for the "linda" library.'
 	]).
 
@@ -71,7 +71,6 @@
 		test_server_address_(_),
 		!.
 	wait_for_server(0) :-
-		!,
 		throw(linda_error(server_start_timeout)).
 	wait_for_server(Attempts) :-
 		sleep(0.1),
@@ -85,7 +84,6 @@
 		catch(server<<client_engine_(_, _), _, fail),
 		!.
 	wait_for_client(0) :-
-		!,
 		throw(linda_error(client_start_timeout)).
 	wait_for_client(Attempts) :-
 		sleep(0.1),
@@ -99,7 +97,6 @@
 		\+ server<<client_connection_(_, _, _),
 		!.
 	wait_for_no_client_connections(0) :-
-		!,
 		throw(linda_error(wait_for_no_client_connections_timeout)).
 	wait_for_no_client_connections(Attempts) :-
 		sleep(0.1),
@@ -115,7 +112,6 @@
 		Count =< Maximum,
 		!.
 	wait_for_max_client_connections(Maximum, 0) :-
-		!,
 		throw(linda_error(wait_for_max_client_connections_timeout(Maximum))).
 	wait_for_max_client_connections(Maximum, Attempts) :-
 		sleep(0.1),
