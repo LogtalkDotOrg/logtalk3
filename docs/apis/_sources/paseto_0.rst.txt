@@ -15,7 +15,7 @@ Facade for PASETO v4 JSON claims encryption, signing, authentication, validation
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-03
+| **Date:** 2026-08-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -59,6 +59,24 @@ Encrypts a JSON claims object as a v4.local token.
 | **Mode and number of proofs:**
 |    ``encrypt(+term,+list(byte),-atom,+list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Claims`` is not a JSON object or contains duplicate members:
+|        ``domain_error(paseto_json_object,Claims)``
+|    ``Key`` is not a list of 32 bytes:
+|        ``type_error(list(byte,32),Key)``
+|    The footer ``kid`` conflicts with the ``key_id/1`` option:
+|        ``domain_error(paseto_footer_key_id,Existing-KeyId)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+
 
 ------------
 
@@ -77,6 +95,28 @@ Authenticates and decrypts a v4.local claims token using a key or key set.
 |    ``decrypt(Token,KeyOrKeySet,Claims,Options)``
 | **Mode and number of proofs:**
 |    ``decrypt(+atom,+term,-term,+list(compound))`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``Token`` is not a canonical v4.local token:
+|        ``domain_error(paseto_v4_token,Token)``
+|    ``KeyOrKeySet`` is an invalid key set:
+|        ``domain_error(paseto_key_set,KeyOrKeySet)``
+|    No key can be selected from ``KeyOrKeySet``:
+|        ``existence_error(paseto_key,local-KeyId)``
+|    The authenticated payload is not a JSON object:
+|        ``domain_error(paseto_json_object,Claims)``
+|    The claims do not satisfy the validation policy:
+|        ``domain_error(paseto_claims,Reason)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
 
 
 ------------
@@ -97,6 +137,28 @@ Authenticates and decrypts a v4.local claims token and returns its authenticated
 | **Mode and number of proofs:**
 |    ``decrypt(+atom,+term,-term,-term,+list(compound))`` - ``zero_or_one_or_error``
 
+| **Exceptions:**
+|    ``Token`` is not a canonical v4.local token:
+|        ``domain_error(paseto_v4_token,Token)``
+|    ``KeyOrKeySet`` is an invalid key set:
+|        ``domain_error(paseto_key_set,KeyOrKeySet)``
+|    No key can be selected from ``KeyOrKeySet``:
+|        ``existence_error(paseto_key,local-KeyId)``
+|    The authenticated payload or footer is not a JSON object:
+|        ``domain_error(paseto_json_object,JSON)``
+|    The claims do not satisfy the validation policy:
+|        ``domain_error(paseto_claims,Reason)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+
 
 ------------
 
@@ -115,6 +177,24 @@ Signs a JSON claims object as a v4.public token using an Ed25519 seed.
 |    ``sign(Claims,Seed,Token,Options)``
 | **Mode and number of proofs:**
 |    ``sign(+term,+list(byte),-atom,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Claims`` is not a JSON object or contains duplicate members:
+|        ``domain_error(paseto_json_object,Claims)``
+|    ``Seed`` is not a list of 32 bytes:
+|        ``type_error(list(byte,32),Seed)``
+|    The footer ``kid`` conflicts with the ``key_id/1`` option:
+|        ``domain_error(paseto_footer_key_id,Existing-KeyId)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
 
 
 ------------
@@ -135,6 +215,28 @@ Authenticates and validates a v4.public claims token using a public key or key s
 | **Mode and number of proofs:**
 |    ``verify(+atom,+term,-term,+list(compound))`` - ``zero_or_one_or_error``
 
+| **Exceptions:**
+|    ``Token`` is not a canonical v4.public token:
+|        ``domain_error(paseto_v4_token,Token)``
+|    ``KeyOrKeySet`` is an invalid key set:
+|        ``domain_error(paseto_key_set,KeyOrKeySet)``
+|    No key can be selected from ``KeyOrKeySet``:
+|        ``existence_error(paseto_key,(public-KeyId))``
+|    The authenticated payload is not a JSON object:
+|        ``domain_error(paseto_json_object,Claims)``
+|    The claims do not satisfy the validation policy:
+|        ``domain_error(paseto_claims,Reason)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+
 
 ------------
 
@@ -154,6 +256,28 @@ Authenticates and validates a v4.public claims token and returns its authenticat
 | **Mode and number of proofs:**
 |    ``verify(+atom,+term,-term,-term,+list(compound))`` - ``zero_or_one_or_error``
 
+| **Exceptions:**
+|    ``Token`` is not a canonical v4.public token:
+|        ``domain_error(paseto_v4_token,Token)``
+|    ``KeyOrKeySet`` is an invalid key set:
+|        ``domain_error(paseto_key_set,KeyOrKeySet)``
+|    No key can be selected from ``KeyOrKeySet``:
+|        ``existence_error(paseto_key,(public-KeyId))``
+|    The authenticated payload or footer is not a JSON object:
+|        ``domain_error(paseto_json_object,JSON)``
+|    The claims do not satisfy the validation policy:
+|        ``domain_error(paseto_claims,Reason)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+
 
 ------------
 
@@ -172,6 +296,18 @@ Decodes claims from a v4.public token without authenticating them. Rejects local
 |    ``claims(Token,Claims)``
 | **Mode and number of proofs:**
 |    ``claims(+atom,-term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Token`` is a variable:
+|        ``instantiation_error``
+|    ``Token`` is neither a variable nor an atom:
+|        ``type_error(atom,Token)``
+|    ``Token`` is not a canonical v4.public token:
+|        ``domain_error(paseto_v4_token,Token)``
+|    ``Token`` has a malformed public payload:
+|        ``domain_error(paseto_v4_public_payload,Token)``
+|    ``Token`` payload is not a JSON object:
+|        ``domain_error(paseto_json_object,Claims)``
 
 
 ------------
@@ -211,6 +347,26 @@ Validates a claims object using a policy list and options.
 | **Mode and number of proofs:**
 |    ``validate_claims(+term,+list(compound),+list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Claims`` is not a JSON object or contains duplicate members:
+|        ``domain_error(paseto_json_object,Claims)``
+|    ``Claims`` is missing a required claim ``Name``:
+|        ``domain_error(paseto_claims,missing(Name))``
+|    ``Policy`` contains an invalid claim policy:
+|        ``domain_error(paseto_claim_policy,ClaimPolicy)``
+|    A time claim has a non-numeric value:
+|        ``type_error(time_number,Name-Value)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+
 
 ------------
 
@@ -232,6 +388,28 @@ Validates one claim policy.
 | **Mode and number of proofs:**
 |    ``validate_claim(+term,+compound,+list(compound))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Claims`` is missing the required claim ``Name``:
+|        ``domain_error(paseto_claims,missing(Name))``
+|    The value of claim ``Name`` does not satisfy the policy:
+|        ``domain_error(paseto_claim(Name),Value)``
+|    ``ClaimPolicy`` is not a supported claim policy:
+|        ``domain_error(paseto_claim_policy,ClaimPolicy)``
+|    A time claim has an unknown validation kind:
+|        ``domain_error(paseto_time_claim_kind,Kind)``
+|    A time claim has a non-numeric value:
+|        ``type_error(time_number,Name-Value)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+
 
 ------------
 
@@ -251,6 +429,16 @@ Reads a kid value from the unauthenticated token footer for key selection. The r
 | **Mode and number of proofs:**
 |    ``peek_key_id(+atom,-atom)`` - ``zero_or_one_or_error``
 
+| **Exceptions:**
+|    ``Token`` is a variable:
+|        ``instantiation_error``
+|    ``Token`` is neither a variable nor an atom:
+|        ``type_error(atom,Token)``
+|    ``Token`` is not a canonical v4 token:
+|        ``domain_error(paseto_v4_token,Token)``
+|    ``Token`` footer is not a JSON object:
+|        ``domain_error(paseto_json_object,Footer)``
+
 
 ------------
 
@@ -269,6 +457,12 @@ Validates a native PASETO key_set/1 term.
 |    ``validate_key_set(KeySet)``
 | **Mode and number of proofs:**
 |    ``validate_key_set(+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``KeySet`` is not a valid ``key_set/1`` term:
+|        ``domain_error(paseto_key_set,KeySet)``
+|    ``KeySet`` contains an invalid key record ``Record``:
+|        ``domain_error(paseto_key_record,Record)``
 
 
 ------------

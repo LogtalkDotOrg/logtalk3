@@ -425,7 +425,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-08-04</div>
+<div class="line"><strong>Date:</strong> 2026-08-08</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -507,6 +507,39 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">multivariate_normal(+list(number),+list(list(number)),-list(float))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),Mean)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(list(number)),Covariance)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Covariance</span></code> list is neither a variable nor a list of numbers:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(number),Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> dimensions do not match the mean dimension:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(covariance_dimensions(A),Covariance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is not symmetric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(symmetric_matrix,Covariance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is not positive semidefinite:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_semidefinite_matrix,Covariance)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="multivariate-normal-4">
@@ -531,6 +564,18 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Mean)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Mean</span></code> list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is empty:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),Mean)</span></code></div>
@@ -538,6 +583,18 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is negative:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_number,Tolerance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(list(number)),Covariance)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Covariance</span></code> list is neither a variable nor a list of numbers:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(number),Element)</span></code></div>
 </div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> dimensions do not match the mean dimension:</div>
 <div class="line-block">
@@ -550,6 +607,18 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is not positive semidefinite:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_semidefinite_matrix,Covariance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Tolerance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a nuber but not a non-negative number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_number,Tolerance)</span></code></div>
 </div>
 </div>
 </div>
@@ -572,6 +641,63 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">multivariate_normal_samples(+integer,+list(number),+list(list(number)),-list(list(float)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Count)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is an integer but not a non-negative integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Count)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Mean)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Mean</span></code> list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),Mean)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(list(number)),Covariance)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Covariance</span></code> list is neither a variable nor a list of numbers:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(number),Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> dimensions do not match the mean dimension:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(covariance_dimensions(A),Covariance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is not symmetric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(symmetric_matrix,Covariance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is not positive semidefinite:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_semidefinite_matrix,Covariance)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -598,9 +724,53 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is negative:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Count)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is an integer but not a non-negative integer:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Count)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Mean)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Mean</span></code> list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(list(number)),Covariance)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Covariance</span></code> list is neither a variable nor a list of numbers:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(number),Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Tolerance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a nuber but not a non-negative number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_number,Tolerance)</span></code></div>
 </div>
 </div>
 </div>
@@ -625,6 +795,67 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">multivariate_normal_density(+list(number),+list(number),+list(list(number)),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Mean)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Mean</span></code> list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),Mean)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(list(number)),Covariance)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Covariance</span></code> list is neither a variable nor a list of numbers:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(number),Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> dimensions do not match the mean dimension:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(covariance_dimensions(A),Covariance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is not symmetric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(symmetric_matrix,Covariance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is not positive semidefinite:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_semidefinite_matrix,Covariance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Point)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Point</span></code> list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> dimensions do not match the mean dimension:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(point_dimensions(A),Point)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="multivariate-normal-density-5">
@@ -644,6 +875,79 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">multivariate_normal_density(+list(number),+list(number),+list(list(number)),+number,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Point)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Point</span></code> list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> dimensions do not match the mean dimension:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(point_dimensions(A),Point)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Mean)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Mean</span></code> list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),Mean)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(list(number)),Covariance)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Covariance</span></code> list is neither a variable nor a list of numbers:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(number),Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> dimensions do not match the mean dimension:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(covariance_dimensions(A),Covariance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is not symmetric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(symmetric_matrix,Covariance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is not positive semidefinite:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_semidefinite_matrix,Covariance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Tolerance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a nuber but not a non-negative number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_number,Tolerance)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -667,6 +971,67 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">multivariate_normal_log_density(+list(number),+list(number),+list(list(number)),-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Point)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Point</span></code> list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> dimensions do not match the mean dimension:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(point_dimensions(A),Point)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Mean)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Mean</span></code> list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),Mean)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(list(number)),Covariance)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Covariance</span></code> list is neither a variable nor a list of numbers:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(number),Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> dimensions do not match the mean dimension:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(covariance_dimensions(A),Covariance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is not symmetric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(symmetric_matrix,Covariance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is not positive semidefinite:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_semidefinite_matrix,Covariance)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="multivariate-normal-log-density-5">
@@ -686,6 +1051,83 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">multivariate_normal_log_density(+list(number),+list(number),+list(list(number)),+number,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Point)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Point</span></code> list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> dimensions do not match the mean dimension:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(point_dimensions(A),Point)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is negative:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_number,Tolerance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Mean)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Mean</span></code> list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),Mean)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(list(number)),Covariance)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Covariance</span></code> list is neither a variable nor a list of numbers:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(number),Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> dimensions do not match the mean dimension:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(covariance_dimensions(A),Covariance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is not symmetric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(symmetric_matrix,Covariance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is not positive semidefinite:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_semidefinite_matrix,Covariance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Tolerance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a nuber but not a non-negative number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_number,Tolerance)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -712,9 +1154,45 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Point)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Point</span></code> list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> is outside the affine support of <code class="docutils literal notranslate"><span class="pre">Covariance</span></code>:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(covariance_support,Point)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Mean)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Mean</span></code> list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(list(number)),Covariance)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Covariance</span></code> list is neither a variable nor a list of numbers:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(number),Element)</span></code></div>
 </div>
 </div>
 </div>
@@ -742,9 +1220,57 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Point)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Point</span></code> list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> is outside the affine support of <code class="docutils literal notranslate"><span class="pre">Covariance</span></code>:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(covariance_support,Point)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Mean)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Mean</span></code> list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(list(number)),Covariance)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Covariance</span></code> list is neither a variable nor a list of numbers:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(number),Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Tolerance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a nuber but not a non-negative number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_number,Tolerance)</span></code></div>
 </div>
 </div>
 </div>
@@ -769,6 +1295,55 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">mahalanobis_distance(+list(number),+list(number),+list(list(number)),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Point)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Point</span></code> list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> is outside the affine support of <code class="docutils literal notranslate"><span class="pre">Covariance</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(covariance_support,Point)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> dimensions do not match the mean dimension:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(point_dimensions(A),Point)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Mean)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Mean</span></code> list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(list(number)),Covariance)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Covariance</span></code> list is neither a variable nor a list of numbers:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(number),Element)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="mahalanobis-distance-5">
@@ -788,6 +1363,67 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">mahalanobis_distance(+list(number),+list(number),+list(list(number)),+number,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Point)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Point</span></code> list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> is outside the affine support of <code class="docutils literal notranslate"><span class="pre">Covariance</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(covariance_support,Point)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> dimensions do not match the mean dimension:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(point_dimensions(A),Point)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Mean)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Mean</span></code> list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(list(number)),Covariance)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Covariance</span></code> list is neither a variable nor a list of numbers:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(number),Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Tolerance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a nuber but not a non-negative number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_number,Tolerance)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -811,6 +1447,39 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">multivariate_t(+positive_number,+list(number),+list(list(number)),-list(float))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">DegreesOfFreedom</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">DegreesOfFreedom</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,DegreesOfFreedom)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">DegreesOfFreedom</span></code> is not a positive integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_number,DegreesOfFreedom)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Location</span></code> is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),Location)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Scale</span></code> dimensions do not match the location dimension:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(covariance_dimensions(A),Scale)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Scale</span></code> is not symmetric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(symmetric_matrix,Scale)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Scale</span></code> is not positive semidefinite:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_semidefinite_matrix,Scale)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="multivariate-t-5">
@@ -830,6 +1499,55 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">multivariate_t(+positive_number,+list(number),+list(list(number)),+number,-list(float))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">DegreesOfFreedom</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">DegreesOfFreedom</span></code> is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,DegreesOfFreedom)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">DegreesOfFreedom</span></code> is a number but not a positive number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_number,DegreesOfFreedom)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is negative:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_number,Tolerance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Location</span></code> is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),Location)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Scale</span></code> dimensions do not match the location dimension:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(covariance_dimensions(A),Scale)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Scale</span></code> is not symmetric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(symmetric_matrix,Scale)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Scale</span></code> is not positive semidefinite:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_semidefinite_matrix,Scale)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Tolerance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a nuber but not a non-negative number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_number,Tolerance)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -853,6 +1571,51 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">multivariate_t_samples(+integer,+positive_number,+list(number),+list(list(number)),-list(list(float)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Count)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is an integer but not a non-negative integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Count)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">DegreesOfFreedom</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">DegreesOfFreedom</span></code> is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,DegreesOfFreedom)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">DegreesOfFreedom</span></code> is a number but not a positive number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_number,DegreesOfFreedom)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Location</span></code> is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),Location)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Scale</span></code> dimensions do not match the location dimension:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(covariance_dimensions(A),Scale)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Scale</span></code> is not symmetric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(symmetric_matrix,Scale)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Scale</span></code> is not positive semidefinite:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_semidefinite_matrix,Scale)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="multivariate-t-samples-6">
@@ -872,6 +1635,67 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">multivariate_t_samples(+integer,+positive_number,+list(number),+list(list(number)),+number,-list(list(float)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Count)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is a negative integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Count)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">DegreesOfFreedom</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">DegreesOfFreedom</span></code> is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,DegreesOfFreedom)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">DegreesOfFreedom</span></code> is a number but not a positive number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_number,DegreesOfFreedom)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is negative:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_number,Tolerance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Location</span></code> is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),Location)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Scale</span></code> dimensions do not match the location dimension:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(covariance_dimensions(A),Scale)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Scale</span></code> is not symmetric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(symmetric_matrix,Scale)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Scale</span></code> is not positive semidefinite:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_semidefinite_matrix,Scale)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Tolerance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a nuber but not a non-negative number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_number,Tolerance)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -895,6 +1719,55 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">multivariate_t_density(+list(number),+positive_number,+list(number),+list(list(number)),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Point)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Point</span></code> list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> dimensions do not match the location dimension:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(point_dimensions(A),Point)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">DegreesOfFreedom</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">DegreesOfFreedom</span></code> is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,DegreesOfFreedom)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">DegreesOfFreedom</span></code> is a number but not a positive number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_number,DegreesOfFreedom)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Location</span></code> is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),Location)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Scale</span></code> dimensions do not match the location dimension:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(covariance_dimensions(A),Scale)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Scale</span></code> is not symmetric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(symmetric_matrix,Scale)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Scale</span></code> is not positive semidefinite:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_semidefinite_matrix,Scale)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="multivariate-t-density-6">
@@ -914,6 +1787,67 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">multivariate_t_density(+list(number),+positive_number,+list(number),+list(list(number)),+number,-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Point)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Point</span></code> list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> dimensions do not match the location dimension:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(point_dimensions(A),Point)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">DegreesOfFreedom</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">DegreesOfFreedom</span></code> is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,DegreesOfFreedom)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">DegreesOfFreedom</span></code> is a number but not a positive number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_number,DegreesOfFreedom)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Location</span></code> is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),Location)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Scale</span></code> dimensions do not match the location dimension:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(covariance_dimensions(A),Scale)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Scale</span></code> is not symmetric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(symmetric_matrix,Scale)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Scale</span></code> is not positive semidefinite:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_semidefinite_matrix,Scale)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Tolerance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a nuber but not a non-negative number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_number,Tolerance)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -937,6 +1871,55 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">multivariate_t_log_density(+list(number),+positive_number,+list(number),+list(list(number)),-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Point)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Point</span></code> list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> dimensions do not match the location dimension:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(point_dimensions(A),Point)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">DegreesOfFreedom</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">DegreesOfFreedom</span></code> is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,DegreesOfFreedom)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">DegreesOfFreedom</span></code> is a number but not a positive number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_number,DegreesOfFreedom)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Location</span></code> is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),Location)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Scale</span></code> dimensions do not match the location dimension:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(covariance_dimensions(A),Scale)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Scale</span></code> is not symmetric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(symmetric_matrix,Scale)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Scale</span></code> is not positive semidefinite:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_semidefinite_matrix,Scale)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="multivariate-t-log-density-6">
@@ -956,6 +1939,67 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">multivariate_t_log_density(+list(number),+positive_number,+list(number),+list(list(number)),+number,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Point)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Point</span></code> list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> dimensions do not match the location dimension:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(point_dimensions(A),Point)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">DegreesOfFreedom</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">DegreesOfFreedom</span></code> is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,DegreesOfFreedom)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">DegreesOfFreedom</span></code> is a number but not a positive number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_number,DegreesOfFreedom)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Location</span></code> is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),Location)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Scale</span></code> dimensions do not match the location dimension:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(covariance_dimensions(A),Scale)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Scale</span></code> is not symmetric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(symmetric_matrix,Scale)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Scale</span></code> is not positive semidefinite:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_semidefinite_matrix,Scale)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Tolerance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a nuber but not a non-negative number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_number,Tolerance)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -979,6 +2023,51 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">logistic_normal(+list(number),+list(list(number)),-list(float))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Mean)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Mean</span></code> list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),Mean)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(list(number)),Covariance)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Covariance</span></code> list is neither a variable nor a list of numbers:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(number),Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> dimensions do not match the mean dimension:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(covariance_dimensions(A),Covariance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is not symmetric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(symmetric_matrix,Covariance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is not positive semidefinite:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_semidefinite_matrix,Covariance)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="logistic-normal-4">
@@ -998,6 +2087,63 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">logistic_normal(+list(number),+list(list(number)),+number,-list(float))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Mean)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Mean</span></code> list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),Mean)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(list(number)),Covariance)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Covariance</span></code> list is neither a variable nor a list of numbers:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(number),Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> dimensions do not match the mean dimension:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(covariance_dimensions(A),Covariance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is not symmetric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(symmetric_matrix,Covariance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is not positive semidefinite:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_semidefinite_matrix,Covariance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Tolerance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a nuber but not a non-negative number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_number,Tolerance)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1021,6 +2167,63 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">logistic_normal_samples(+integer,+list(number),+list(list(number)),-list(list(float)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Count)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is an integer but not a non-negative integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Count)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Mean)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Mean</span></code> list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),Mean)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(list(number)),Covariance)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Covariance</span></code> list is neither a variable nor a list of numbers:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(number),Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> dimensions do not match the mean dimension:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(covariance_dimensions(A),Covariance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is not symmetric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(symmetric_matrix,Covariance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is not positive semidefinite:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_semidefinite_matrix,Covariance)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="logistic-normal-samples-5">
@@ -1040,6 +2243,75 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">logistic_normal_samples(+integer,+list(number),+list(list(number)),+number,-list(list(float)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Count)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is an integer but not a non-negative integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Count)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Mean)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Mean</span></code> list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Mean</span></code> is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),Mean)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(list(number)),Covariance)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Covariance</span></code> list is neither a variable nor a list of numbers:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(number),Element)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> dimensions do not match the mean dimension:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(covariance_dimensions(A),Covariance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is not symmetric:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(symmetric_matrix,Covariance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Covariance</span></code> is not positive semidefinite:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_semidefinite_matrix,Covariance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Tolerance)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a nuber but not a non-negative number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_number,Tolerance)</span></code></div>
+</div>
 </div>
 </div>
 </section>

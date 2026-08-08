@@ -15,7 +15,7 @@ Shared JSON and option helpers for PASETO claims workflows.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-03
+| **Date:** 2026-08-08
 
 | **Compilation flags:**
 |    ``static``
@@ -122,6 +122,12 @@ Converts between a JSON term and its UTF-8-compatible byte representation.
 | **Mode and number of proofs:**
 |    ``json_bytes(+term,-list(byte))`` - ``one_or_error``
 |    ``json_bytes(-term,+list(byte))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``JSON`` cannot be generated as JSON text:
+|        ``domain_error(json_term,JSON)``
+|    ``Bytes`` cannot be parsed as JSON text:
+|        ``domain_error(json_text,Bytes)``
 
 
 ------------

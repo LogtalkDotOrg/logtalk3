@@ -15,7 +15,7 @@ Protocol for HOTP and TOTP generation and verification as specified in RFC 4226 
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-07-14
+| **Date:** 2026-08-08
 
 | **Compilation flags:**
 |    ``static``
@@ -92,6 +92,34 @@ Verifies an HOTP value by searching from the given counter through the bounded f
 | **Mode and number of proofs:**
 |    ``hotp_verify(+object_identifier,+term,+integer,+integer,+integer,+atom,--integer)`` - ``zero_or_one_or_error``
 
+| **Exceptions:**
+|    ``Hash``, ``Secret``, ``Counter``, ``Window``, ``Digits``, or ``OTP`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Hash`` is not a supported OTP hash object:
+|        ``domain_error(otp_hash,Hash)``
+|    ``Secret`` is neither a partial list nor a list:
+|        ``type_error(list,Secret)``
+|    An element ``Byte`` of the `Secret`` list is neither a variable nor an integer:
+|        ``type_error(integer,Byte)``
+|    An element ``Byte`` of the ``Secret`` list is an integer but not a valid byte:
+|        ``domain_error(byte,Byte)``
+|    ``Secret`` is not a valid Base32 source:
+|        ``domain_error(base32_source,Secret)``
+|    ``Counter`` or ``Window`` is neither a variable nor an integer:
+|        ``type_error(integer,Integer)``
+|    ``Counter`` or ``Window`` is an integer but not a non-negative integer:
+|        ``domain_error(non_negative_integer,Integer)``
+|    ``Digits`` is neither a variable nor an integer:
+|        ``type_error(integer,Digits)``
+|    ``Digits`` is an integer but not a positive integer:
+|        ``domain_error(positive_integer,Digits)``
+|    ``OTP`` neither a variable nor an atom:
+|        ``type_error(atom,OTP)``
+|    ``OTP`` does not contain exactly ``Digits`` decimal digits:
+|        ``domain_error(otp_value,OTP)``
+|    A searched counter exceeds the 64-bit HOTP moving-factor range:
+|        ``domain_error(otp_moving_factor,Counter)``
+
 
 ------------
 
@@ -110,6 +138,34 @@ Verifies a TOTP value by searching within the bounded symmetric time-step window
 |    ``totp_verify(Hash,Secret,UnixTime,Window,Digits,OTP,MatchedTimeStep)``
 | **Mode and number of proofs:**
 |    ``totp_verify(+object_identifier,+term,+integer,+integer,+integer,+atom,--integer)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``Hash``, ``Secret``, ``UnixTime``, ``Window``, ``Digits``, or ``OTP`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Hash`` is not a supported OTP hash object:
+|        ``domain_error(otp_hash,Hash)``
+|    ``Secret`` is neither a partial list nor a list:
+|        ``type_error(list,Secret)``
+|    An element ``Byte`` of the `Secret`` list is neither a variable nor an integer:
+|        ``type_error(integer,Byte)``
+|    An element ``Byte`` of the ``Secret`` list is an integer but not a valid byte:
+|        ``domain_error(byte,Byte)``
+|    ``Secret`` is not a valid Base32 source:
+|        ``domain_error(base32_source,Secret)``
+|    ``UnixTime`` or ``Window`` is neither a variable nor an integer:
+|        ``type_error(integer,Integer)``
+|    ``UnixTime`` or ``Window`` is an integer but not a non-negative integer:
+|        ``domain_error(non_negative_integer,Integer)``
+|    ``Digits`` is neither a variable nor an integer:
+|        ``type_error(integer,Digits)``
+|    ``Digits`` is an integer but not a positive integer:
+|        ``domain_error(positive_integer,Digits)``
+|    ``OTP`` is neither a variable nor an atom:
+|        ``type_error(atom,OTP)``
+|    ``OTP`` does not contain exactly ``Digits`` decimal digits:
+|        ``domain_error(otp_value,OTP)``
+|    A searched time step exceeds the 64-bit HOTP moving-factor range:
+|        ``domain_error(otp_moving_factor,TimeStep)``
 
 
 ------------

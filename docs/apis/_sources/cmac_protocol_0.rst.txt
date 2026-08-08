@@ -15,7 +15,7 @@ Protocol for one-shot CMAC digest computation using block cipher objects impleme
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-04
+| **Date:** 2026-08-08
 
 | **Compilation flags:**
 |    ``static``
@@ -61,7 +61,7 @@ Computes the full CMAC digest for a block cipher object, key bytes, and message 
 |        ``domain_error(cmac_cipher,Cipher)``
 |    ``Cipher`` reports a block size other than 8 or 16 bytes:
 |        ``domain_error(cmac_block_size,BlockSize)``
-|    ``MessageBytes`` is neither a variable nor a list of bytes:
+|    ``MessageBytes`` is neither a variable nor a list:
 |        ``type_error(list(byte),MessageBytes)``
 |    ``MessageBytes`` contains a non-integer byte:
 |        ``type_error(integer,Byte)``
@@ -87,6 +87,20 @@ Computes the full CMAC digest for a block cipher object, key bytes, and message 
 | **Mode and number of proofs:**
 |    ``hex_digest(+object_identifier,+list(byte),+list(byte),--atom)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Cipher`` or ``MessageBytes`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Cipher`` does not implement the required prepared-key block cipher protocol:
+|        ``domain_error(cmac_cipher,Cipher)``
+|    ``Cipher`` reports a block size other than 8 or 16 bytes:
+|        ``domain_error(cmac_block_size,BlockSize)``
+|    ``MessageBytes`` is neither a variable nor a list:
+|        ``type_error(list(byte),MessageBytes)``
+|    An element ``Byte`` of the `MessageBytes`` list is neither a variable nor an integer:
+|        ``type_error(integer,Byte)``
+|    An element ``Byte`` of the ``MessageBytes`` list is an integer but not a valid byte:
+|        ``domain_error(byte,Byte)``
+
 
 ------------
 
@@ -109,9 +123,9 @@ Computes a truncated CMAC digest containing the requested number of leftmost byt
 | **Exceptions:**
 |    ``Length`` is a variable:
 |        ``instantiation_error``
-|    ``Length`` is not an integer:
+|    ``Length`` is neither a variable nor an integer:
 |        ``type_error(integer,Length)``
-|    ``Length`` is outside the range from one through the cipher block size:
+|    ``Length`` is an integer outside the range from one through the cipher block size:
 |        ``domain_error(cmac_output_length(1,BlockSize),Length)``
 
 
@@ -132,6 +146,24 @@ Computes a truncated CMAC digest containing the requested number of leftmost byt
 |    ``hex_digest(Cipher,KeyBytes,MessageBytes,Length,HexDigest)``
 | **Mode and number of proofs:**
 |    ``hex_digest(+object_identifier,+list(byte),+list(byte),+integer,--atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Cipher``, ``MessageBytes``, or ``Length`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Cipher`` does not implement the required prepared-key block cipher protocol:
+|        ``domain_error(cmac_cipher,Cipher)``
+|    ``Cipher`` reports a block size other than 8 or 16 bytes:
+|        ``domain_error(cmac_block_size,BlockSize)``
+|    ``MessageBytes`` is neither a variable nor a list:
+|        ``type_error(list(byte),MessageBytes)``
+|    An element ``Byte`` of the `MessageBytes`` list is neither a variable nor an integer:
+|        ``type_error(integer,Byte)``
+|    An element ``Byte`` of the ``MessageBytes`` list is an integer but not a valid byte:
+|        ``domain_error(byte,Byte)``
+|    ``Length`` is neither a variable nor an integer:
+|        ``type_error(integer,Length)``
+|    ``Length`` is an integer outside the range from one through the cipher block size:
+|        ``domain_error(cmac_output_length(1,BlockSize),Length)``
 
 
 ------------

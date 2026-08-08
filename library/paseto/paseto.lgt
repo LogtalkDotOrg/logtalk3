@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-03,
+		date is 2026-08-08,
 		comment is 'Facade for PASETO v4 JSON claims encryption, signing, authentication, validation, and key selection.'
 	]).
 
@@ -33,49 +33,124 @@
 	:- mode(encrypt(+term, +list(byte), -atom, +list(compound)), one_or_error).
 	:- info(encrypt/4, [
 		comment is 'Encrypts a JSON claims object as a v4.local token.',
-		argnames is ['Claims', 'Key', 'Token', 'Options']
+		argnames is ['Claims', 'Key', 'Token', 'Options'],
+		exceptions is [
+			'``Claims`` is not a JSON object or contains duplicate members' - domain_error(paseto_json_object, 'Claims'),
+			'``Key`` is not a list of 32 bytes' - type_error(list(byte, 32), 'Key'),
+			'The footer ``kid`` conflicts with the ``key_id/1`` option' - domain_error(paseto_footer_key_id, 'Existing'-'KeyId'),
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option')
+		]
 	]).
 
 	:- public(decrypt/4).
 	:- mode(decrypt(+atom, +term, -term, +list(compound)), zero_or_one_or_error).
 	:- info(decrypt/4, [
 		comment is 'Authenticates and decrypts a v4.local claims token using a key or key set.',
-		argnames is ['Token', 'KeyOrKeySet', 'Claims', 'Options']
+		argnames is ['Token', 'KeyOrKeySet', 'Claims', 'Options'],
+		exceptions is [
+			'``Token`` is not a canonical v4.local token' - domain_error(paseto_v4_token, 'Token'),
+			'``KeyOrKeySet`` is an invalid key set' - domain_error(paseto_key_set, 'KeyOrKeySet'),
+			'No key can be selected from ``KeyOrKeySet``' - existence_error(paseto_key, local-'KeyId'),
+			'The authenticated payload is not a JSON object' - domain_error(paseto_json_object, 'Claims'),
+			'The claims do not satisfy the validation policy' - domain_error(paseto_claims, 'Reason'),
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option')
+		]
 	]).
 
 	:- public(decrypt/5).
 	:- mode(decrypt(+atom, +term, -term, -term, +list(compound)), zero_or_one_or_error).
 	:- info(decrypt/5, [
 		comment is 'Authenticates and decrypts a v4.local claims token and returns its authenticated footer JSON object.',
-		argnames is ['Token', 'KeyOrKeySet', 'Claims', 'Footer', 'Options']
+		argnames is ['Token', 'KeyOrKeySet', 'Claims', 'Footer', 'Options'],
+		exceptions is [
+			'``Token`` is not a canonical v4.local token' - domain_error(paseto_v4_token, 'Token'),
+			'``KeyOrKeySet`` is an invalid key set' - domain_error(paseto_key_set, 'KeyOrKeySet'),
+			'No key can be selected from ``KeyOrKeySet``' - existence_error(paseto_key, local-'KeyId'),
+			'The authenticated payload or footer is not a JSON object' - domain_error(paseto_json_object, 'JSON'),
+			'The claims do not satisfy the validation policy' - domain_error(paseto_claims, 'Reason'),
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option')
+		]
 	]).
 
 	:- public(sign/4).
 	:- mode(sign(+term, +list(byte), -atom, +list(compound)), one_or_error).
 	:- info(sign/4, [
 		comment is 'Signs a JSON claims object as a v4.public token using an Ed25519 seed.',
-		argnames is ['Claims', 'Seed', 'Token', 'Options']
+		argnames is ['Claims', 'Seed', 'Token', 'Options'],
+		exceptions is [
+			'``Claims`` is not a JSON object or contains duplicate members' - domain_error(paseto_json_object, 'Claims'),
+			'``Seed`` is not a list of 32 bytes' - type_error(list(byte, 32), 'Seed'),
+			'The footer ``kid`` conflicts with the ``key_id/1`` option' - domain_error(paseto_footer_key_id, 'Existing'-'KeyId'),
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option')
+		]
 	]).
 
 	:- public(verify/4).
 	:- mode(verify(+atom, +term, -term, +list(compound)), zero_or_one_or_error).
 	:- info(verify/4, [
 		comment is 'Authenticates and validates a v4.public claims token using a public key or key set.',
-		argnames is ['Token', 'KeyOrKeySet', 'Claims', 'Options']
+		argnames is ['Token', 'KeyOrKeySet', 'Claims', 'Options'],
+		exceptions is [
+			'``Token`` is not a canonical v4.public token' - domain_error(paseto_v4_token, 'Token'),
+			'``KeyOrKeySet`` is an invalid key set' - domain_error(paseto_key_set, 'KeyOrKeySet'),
+			'No key can be selected from ``KeyOrKeySet``' - existence_error(paseto_key, public-'KeyId'),
+			'The authenticated payload is not a JSON object' - domain_error(paseto_json_object, 'Claims'),
+			'The claims do not satisfy the validation policy' - domain_error(paseto_claims, 'Reason'),
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option')
+		]
 	]).
 
 	:- public(verify/5).
 	:- mode(verify(+atom, +term, -term, -term, +list(compound)), zero_or_one_or_error).
 	:- info(verify/5, [
 		comment is 'Authenticates and validates a v4.public claims token and returns its authenticated footer JSON object.',
-		argnames is ['Token', 'KeyOrKeySet', 'Claims', 'Footer', 'Options']
+		argnames is ['Token', 'KeyOrKeySet', 'Claims', 'Footer', 'Options'],
+		exceptions is [
+			'``Token`` is not a canonical v4.public token' - domain_error(paseto_v4_token, 'Token'),
+			'``KeyOrKeySet`` is an invalid key set' - domain_error(paseto_key_set, 'KeyOrKeySet'),
+			'No key can be selected from ``KeyOrKeySet``' - existence_error(paseto_key, public-'KeyId'),
+			'The authenticated payload or footer is not a JSON object' - domain_error(paseto_json_object, 'JSON'),
+			'The claims do not satisfy the validation policy' - domain_error(paseto_claims, 'Reason'),
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option')
+		]
 	]).
 
 	:- public(claims/2).
 	:- mode(claims(+atom, -term), one_or_error).
 	:- info(claims/2, [
 		comment is 'Decodes claims from a v4.public token without authenticating them. Rejects local tokens. The result must not be trusted.',
-		argnames is ['Token', 'Claims']
+		argnames is ['Token', 'Claims'],
+		exceptions is [
+			'``Token`` is a variable' - instantiation_error,
+			'``Token`` is neither a variable nor an atom' - type_error(atom, 'Token'),
+			'``Token`` is not a canonical v4.public token' - domain_error(paseto_v4_token, 'Token'),
+			'``Token`` has a malformed public payload' - domain_error(paseto_v4_public_payload, 'Token'),
+			'``Token`` payload is not a JSON object' - domain_error(paseto_json_object, 'Claims')
+		]
 	]).
 
 	:- public(claim/3).
@@ -89,7 +164,18 @@
 	:- mode(validate_claims(+term, +list(compound), +list(compound)), one_or_error).
 	:- info(validate_claims/3, [
 		comment is 'Validates a claims object using a policy list and options.',
-		argnames is ['Claims', 'Policy', 'Options']
+		argnames is ['Claims', 'Policy', 'Options'],
+		exceptions is [
+			'``Claims`` is not a JSON object or contains duplicate members' - domain_error(paseto_json_object, 'Claims'),
+			'``Claims`` is missing a required claim ``Name``' - domain_error(paseto_claims, missing('Name')),
+			'``Policy`` contains an invalid claim policy' - domain_error(paseto_claim_policy, 'ClaimPolicy'),
+			'A time claim has a non-numeric value' - type_error(time_number, 'Name'-'Value'),
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option')
+		]
 	]).
 
 	:- public(validate_claim/3).
@@ -97,21 +183,43 @@
 	:- meta_predicate(validate_claim(*, *, *)).
 	:- info(validate_claim/3, [
 		comment is 'Validates one claim policy.',
-		argnames is ['Claims', 'ClaimPolicy', 'Options']
+		argnames is ['Claims', 'ClaimPolicy', 'Options'],
+		exceptions is [
+			'``Claims`` is missing the required claim ``Name``' - domain_error(paseto_claims, missing('Name')),
+			'The value of claim ``Name`` does not satisfy the policy' - domain_error(paseto_claim('Name'), 'Value'),
+			'``ClaimPolicy`` is not a supported claim policy' - domain_error(paseto_claim_policy, 'ClaimPolicy'),
+			'A time claim has an unknown validation kind' - domain_error(paseto_time_claim_kind, 'Kind'),
+			'A time claim has a non-numeric value' - type_error(time_number, 'Name'-'Value'),
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option')
+		]
 	]).
 
 	:- public(peek_key_id/2).
 	:- mode(peek_key_id(+atom, -atom), zero_or_one_or_error).
 	:- info(peek_key_id/2, [
 		comment is 'Reads a kid value from the unauthenticated token footer for key selection. The result must not be trusted.',
-		argnames is ['Token', 'KeyId']
+		argnames is ['Token', 'KeyId'],
+		exceptions is [
+			'``Token`` is a variable' - instantiation_error,
+			'``Token`` is neither a variable nor an atom' - type_error(atom, 'Token'),
+			'``Token`` is not a canonical v4 token' - domain_error(paseto_v4_token, 'Token'),
+			'``Token`` footer is not a JSON object' - domain_error(paseto_json_object, 'Footer')
+		]
 	]).
 
 	:- public(validate_key_set/1).
 	:- mode(validate_key_set(+compound), one_or_error).
 	:- info(validate_key_set/1, [
 		comment is 'Validates a native PASETO key_set/1 term.',
-		argnames is ['KeySet']
+		argnames is ['KeySet'],
+		exceptions is [
+			'``KeySet`` is not a valid ``key_set/1`` term' - domain_error(paseto_key_set, 'KeySet'),
+			'``KeySet`` contains an invalid key record ``Record``' - domain_error(paseto_key_record, 'Record')
+		]
 	]).
 
 	:- uses(list, [

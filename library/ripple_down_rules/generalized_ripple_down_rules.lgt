@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-06,
+		date is 2026-08-08,
 		comment is 'Generalized Ripple-Down Rules implementation using keyed Single-Classification Ripple-Down Rules and Multi-Classification Ripple-Down Rules submodels.'
 	]).
 
@@ -34,21 +34,38 @@
 	:- mode(put(+compound, +term, +compound, -compound), one_or_error).
 	:- info(put/4, [
 		comment is 'Returns a new Generalized Ripple-Down Rules model with the keyed Single-Classification Ripple-Down Rules or Multi-Classification Ripple-Down Rules submodel added or replaced.',
-		argnames is ['Model', 'Key', 'Submodel', 'NewModel']
+		argnames is ['Model', 'Key', 'Submodel', 'NewModel'],
+		exceptions is [
+			'``Model`` is a variable' - instantiation_error,
+			'``Model`` is neither a variable nor a valid model' - domain_error(ripple_down_rules, 'Model'),
+			'``Key`` is a variable' - instantiation_error,
+			'``Submodel`` is a variable' - instantiation_error,
+			'``Submodel`` is neither a variable nor a valid submodel' - domain_error(ripple_down_rules_submodel, 'Submodel')
+		]
 	]).
 
 	:- public(get/3).
 	:- mode(get(+compound, +term, -compound), zero_or_one_or_error).
 	:- info(get/3, [
 		comment is 'Returns the submodel stored under a key.',
-		argnames is ['Model', 'Key', 'Submodel']
+		argnames is ['Model', 'Key', 'Submodel'],
+		exceptions is [
+			'``Model`` is a variable' - instantiation_error,
+			'``Model`` is neither a variable nor a valid model' - domain_error(ripple_down_rules, 'Model'),
+			'``Key`` is a variable' - instantiation_error
+		]
 	]).
 
 	:- public(remove/3).
 	:- mode(remove(+compound, +term, -compound), zero_or_one_or_error).
 	:- info(remove/3, [
 		comment is 'Returns a new Generalized Ripple-Down Rules model with the keyed submodel removed.',
-		argnames is ['Model', 'Key', 'NewModel']
+		argnames is ['Model', 'Key', 'NewModel'],
+		exceptions is [
+			'``Model`` is a variable' - instantiation_error,
+			'``Model`` is neither a variable nor a valid model' - domain_error(ripple_down_rules, 'Model'),
+			'``Key`` is a variable' - instantiation_error
+		]
 	]).
 
 	new(Model) :-

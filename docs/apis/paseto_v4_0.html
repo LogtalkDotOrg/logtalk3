@@ -430,7 +430,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-08-03</div>
+<div class="line"><strong>Date:</strong> 2026-08-08</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -502,6 +502,91 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">local_encrypt_with_nonce(+list(byte),+list(byte),+list(byte),+list(byte),+list(byte),-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Key</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Key</span></code> is not a list of the required number of bytes:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte,32),Key)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Key</span></code> contains a non-integer byte:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Byte)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Key</span></code> contains an integer outside the byte range:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(byte,Byte)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Nonce</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Nonce</span></code> is not a list of the required number of bytes:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte,32),Nonce)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Nonce</span></code> contains a non-integer byte:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Byte)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Nonce</span></code> contains an integer outside the byte range:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(byte,Byte)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Payload</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Payload</span></code> is not a list of the required number of bytes:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte,32),Payload)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Payload</span></code> contains a non-integer byte:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Byte)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Payload</span></code> contains an integer outside the byte range:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(byte,Byte)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Footer</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Footer</span></code> is not a list of the required number of bytes:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte,32),Footer)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Footer</span></code> contains a non-integer byte:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Byte)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Footer</span></code> contains an integer outside the byte range:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(byte,Byte)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ImplicitAssertion</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ImplicitAssertion</span></code> is not a list of the required number of bytes:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte,32),ImplicitAssertion)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ImplicitAssertion</span></code> contains a non-integer byte:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Byte)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ImplicitAssertion</span></code> contains an integer outside the byte range:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(byte,Byte)</span></code></div>
+</div>
 </div>
 </div>
 </section>

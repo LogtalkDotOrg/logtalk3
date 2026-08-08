@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-04,
+		date is 2026-08-08,
 		comment is 'Protocol for one-shot CMAC digest computation using block cipher objects implementing ``block_cipher_prepared_key_protocol``.',
 		see_also is [block_cipher_prepared_key_protocol]
 	]).
@@ -38,7 +38,7 @@
 			'``Cipher`` or ``MessageBytes`` is a variable or a partial list' - instantiation_error,
 			'``Cipher`` does not implement the required prepared-key block cipher protocol' - domain_error(cmac_cipher, 'Cipher'),
 			'``Cipher`` reports a block size other than 8 or 16 bytes' - domain_error(cmac_block_size, 'BlockSize'),
-			'``MessageBytes`` is neither a variable nor a list of bytes' - type_error(list(byte), 'MessageBytes'),
+			'``MessageBytes`` is neither a variable nor a list' - type_error(list(byte), 'MessageBytes'),
 			'``MessageBytes`` contains a non-integer byte' - type_error(integer, 'Byte'),
 			'``MessageBytes`` contains an integer outside the byte range' - domain_error(byte, 'Byte')
 		]
@@ -48,7 +48,15 @@
 	:- mode(hex_digest(+object_identifier, +list(byte), +list(byte), --atom), one_or_error).
 	:- info(hex_digest/4, [
 		comment is 'Computes the full CMAC digest for a block cipher object, key bytes, and message bytes, returning a lowercase hexadecimal atom.',
-		argnames is ['Cipher', 'KeyBytes', 'MessageBytes', 'HexDigest']
+		argnames is ['Cipher', 'KeyBytes', 'MessageBytes', 'HexDigest'],
+		exceptions is [
+			'``Cipher`` or ``MessageBytes`` is a variable or a partial list' - instantiation_error,
+			'``Cipher`` does not implement the required prepared-key block cipher protocol' - domain_error(cmac_cipher, 'Cipher'),
+			'``Cipher`` reports a block size other than 8 or 16 bytes' - domain_error(cmac_block_size, 'BlockSize'),
+			'``MessageBytes`` is neither a variable nor a list' - type_error(list(byte), 'MessageBytes'),
+			'An element ``Byte`` of the `MessageBytes`` list is neither a variable nor an integer' - type_error(integer, 'Byte'),
+			'An element ``Byte`` of the ``MessageBytes`` list is an integer but not a valid byte' - domain_error(byte, 'Byte')
+		]
 	]).
 
 	:- public(digest/5).
@@ -58,8 +66,8 @@
 		argnames is ['Cipher', 'KeyBytes', 'MessageBytes', 'Length', 'DigestBytes'],
 		exceptions is [
 			'``Length`` is a variable' - instantiation_error,
-			'``Length`` is not an integer' - type_error(integer, 'Length'),
-			'``Length`` is outside the range from one through the cipher block size' - domain_error(cmac_output_length(1, 'BlockSize'), 'Length')
+			'``Length`` is neither a variable nor an integer' - type_error(integer, 'Length'),
+			'``Length`` is an integer outside the range from one through the cipher block size' - domain_error(cmac_output_length(1, 'BlockSize'), 'Length')
 		]
 	]).
 
@@ -67,7 +75,17 @@
 	:- mode(hex_digest(+object_identifier, +list(byte), +list(byte), +integer, --atom), one_or_error).
 	:- info(hex_digest/5, [
 		comment is 'Computes a truncated CMAC digest containing the requested number of leftmost bytes and returns it as a lowercase hexadecimal atom.',
-		argnames is ['Cipher', 'KeyBytes', 'MessageBytes', 'Length', 'HexDigest']
+		argnames is ['Cipher', 'KeyBytes', 'MessageBytes', 'Length', 'HexDigest'],
+		exceptions is [
+			'``Cipher``, ``MessageBytes``, or ``Length`` is a variable or a partial list' - instantiation_error,
+			'``Cipher`` does not implement the required prepared-key block cipher protocol' - domain_error(cmac_cipher, 'Cipher'),
+			'``Cipher`` reports a block size other than 8 or 16 bytes' - domain_error(cmac_block_size, 'BlockSize'),
+			'``MessageBytes`` is neither a variable nor a list' - type_error(list(byte), 'MessageBytes'),
+			'An element ``Byte`` of the `MessageBytes`` list is neither a variable nor an integer' - type_error(integer, 'Byte'),
+			'An element ``Byte`` of the ``MessageBytes`` list is an integer but not a valid byte' - domain_error(byte, 'Byte'),
+			'``Length`` is neither a variable nor an integer' - type_error(integer, 'Length'),
+			'``Length`` is an integer outside the range from one through the cipher block size' - domain_error(cmac_output_length(1, 'BlockSize'), 'Length')
+		]
 	]).
 
 :- end_protocol.

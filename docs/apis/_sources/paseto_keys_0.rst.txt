@@ -15,7 +15,7 @@ Validation and selection for native PASETO v4 key sets.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-03
+| **Date:** 2026-08-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -53,6 +53,12 @@ Validates a key_set/1 term containing local/2 and public/2 records.
 | **Mode and number of proofs:**
 |    ``validate(+compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``KeySet`` is not a valid ``key_set/1`` term:
+|        ``domain_error(paseto_key_set,KeySet)``
+|    ``KeySet`` contains an invalid key record ``Record``:
+|        ``domain_error(paseto_key_record,Record)``
+
 
 ------------
 
@@ -71,6 +77,14 @@ Selects all keys matching Purpose and optional KeyId, preserving key-set order.
 |    ``select_keys(KeySet,Purpose,KeyId,Keys)``
 | **Mode and number of proofs:**
 |    ``select_keys(+compound,+atom,+term,-list(list(byte)))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``KeySet`` is not a valid ``key_set/1`` term:
+|        ``domain_error(paseto_key_set,KeySet)``
+|    ``KeySet`` contains an invalid key record ``Record``:
+|        ``domain_error(paseto_key_record,Record)``
+|    No key matches ``Purpose`` and ``KeyId``:
+|        ``existence_error(paseto_key,Purpose-KeyId)``
 
 
 ------------

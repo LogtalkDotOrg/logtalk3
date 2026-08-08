@@ -15,7 +15,7 @@ Portable MQTT 5 client predicates using ``http_transport_protocol`` implementati
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-04
+| **Date:** 2026-08-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -60,6 +60,18 @@ Opens a transport connection for an MQTT or MQTT-over-TLS address and completes 
 | **Mode and number of proofs:**
 |    ``connect(+atom,--compound,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Address`` is a variable:
+|        ``instantiation_error``
+|    ``Address`` is neither a variable nor an atom:
+|        ``type_error(atom,Address)``
+|    ``Address`` is an atom but not a valid MQTT address:
+|        ``domain_error(mqtt_address,Address)``
+|    The server rejects the MQTT connection:
+|        ``domain_error(mqtt_connack_reason_code,ReasonCode)``
+|    The server response is not a CONNACK packet:
+|        ``domain_error(mqtt_packet,expected(connack,Packet))``
+
 
 ------------
 
@@ -79,6 +91,20 @@ Opens a transport connection to the given host and port and completes the MQTT C
 | **Mode and number of proofs:**
 |    ``connect(+atom,+integer,--compound,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Host`` or ``Port`` is a variable:
+|        ``instantiation_error``
+|    ``Host`` is neither a variable nor an atom:
+|        ``type_error(atom,Host)``
+|    ``Port`` is neither a variable nor an integer:
+|        ``type_error(integer,Port)``
+|    ``Port`` is a negative integer:
+|        ``domain_error(non_negative_integer,Port)``
+|    The server rejects the MQTT connection:
+|        ``domain_error(mqtt_connack_reason_code,ReasonCode)``
+|    The server response is not a CONNACK packet:
+|        ``domain_error(mqtt_packet,expected(connack,Packet))``
+
 
 ------------
 
@@ -97,6 +123,14 @@ Closes an MQTT transport connection. MQTT DISCONNECT packet exchange will be lay
 |    ``disconnect(Connection,Options)``
 | **Mode and number of proofs:**
 |    ``disconnect(+compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Options`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is not a valid option:
+|        ``domain_error(option,Option)``
 
 
 ------------
@@ -174,6 +208,16 @@ Publishes a message and waits synchronously for the required MQTT acknowledgemen
 | **Mode and number of proofs:**
 |    ``publish(+compound,+atom,+term,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Topic`` is not a valid MQTT topic name:
+|        ``domain_error(mqtt_topic_name,Topic)``
+|    ``Options`` contains an invalid packet identifier:
+|        ``domain_error(mqtt_packet_identifier,PacketIdentifier)``
+|    ``Options`` contains an invalid QoS value:
+|        ``domain_error(mqtt_qos,QoS)``
+|    The server response is not the expected acknowledgement packet:
+|        ``domain_error(mqtt_packet,expected(Type-PacketIdentifier,Packet))``
+
 
 ------------
 
@@ -192,6 +236,16 @@ Subscribes to topic filters and waits synchronously for the matching SUBACK.
 |    ``subscribe(Connection,TopicFilters,Result,Options)``
 | **Mode and number of proofs:**
 |    ``subscribe(+compound,+list,--list,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``TopicFilters`` is empty:
+|        ``domain_error(mqtt_subscriptions,[])``
+|    An element ``TopicFilter`` is not a valid MQTT topic filter:
+|        ``domain_error(mqtt_topic_filter,TopicFilter)``
+|    ``Options`` contains invalid subscription options:
+|        ``domain_error(mqtt_subscription_options,Byte)``
+|    The server response is not the expected SUBACK packet:
+|        ``domain_error(mqtt_packet,expected(suback-PacketIdentifier,Packet))``
 
 
 ------------
@@ -212,6 +266,14 @@ Unsubscribes from topic filters and waits synchronously for the matching UNSUBAC
 | **Mode and number of proofs:**
 |    ``unsubscribe(+compound,+list,--list,+list)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``TopicFilters`` is empty:
+|        ``domain_error(mqtt_topic_filters,[])``
+|    An element ``TopicFilter`` is not a valid MQTT topic filter:
+|        ``domain_error(mqtt_topic_filter,TopicFilter)``
+|    The server response is not the expected UNSUBACK packet:
+|        ``domain_error(mqtt_packet,expected(unsuback-PacketIdentifier,Packet))``
+
 
 ------------
 
@@ -230,6 +292,12 @@ Receives the next MQTT packet.
 |    ``receive(Connection,Message,Options)``
 | **Mode and number of proofs:**
 |    ``receive(+compound,--compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The connection input ends before a complete packet is read:
+|        ``domain_error(mqtt_packet_stream,unexpected_end_of_file)``
+|    The received bytes do not encode a valid MQTT packet:
+|        ``domain_error(mqtt_packet,Packet)``
 
 
 ------------
@@ -250,6 +318,10 @@ Sends a PINGREQ packet.
 | **Mode and number of proofs:**
 |    ``send_pingreq(+compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    The PINGREQ packet cannot be written to the connection output stream:
+|        ``resource_error(mqtt_packet_stream)``
+
 
 ------------
 
@@ -268,6 +340,12 @@ Sends PINGREQ and waits synchronously for PINGRESP.
 |    ``ping(Connection,Options)``
 | **Mode and number of proofs:**
 |    ``ping(+compound,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The connection input ends before a complete packet is read:
+|        ``domain_error(mqtt_packet_stream,unexpected_end_of_file)``
+|    The server response is not a PINGRESP packet:
+|        ``domain_error(mqtt_packet,expected(pingresp,Packet))``
 
 
 ------------
@@ -288,6 +366,12 @@ Encodes a normalized MQTT packet term.
 | **Mode and number of proofs:**
 |    ``encode_packet(+compound,--list(integer))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Packet`` contains an invalid MQTT field value:
+|        ``domain_error(mqtt_packet,Packet)``
+|    ``Packet`` has a packet type that is not yet supported:
+|        ``resource_error(mqtt_packet_support)``
+
 
 ------------
 
@@ -306,6 +390,14 @@ Decodes bytes into a normalized MQTT packet term.
 |    ``decode_packet(Bytes,Packet)``
 | **Mode and number of proofs:**
 |    ``decode_packet(+list(integer),--compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Bytes`` contains an invalid MQTT packet encoding:
+|        ``domain_error(mqtt_packet,Bytes)``
+|    ``Bytes`` contains bytes after the encoded packet:
+|        ``domain_error(mqtt_packet_trailing_bytes,Rest)``
+|    ``Bytes`` encodes a packet type that is not yet supported:
+|        ``resource_error(mqtt_packet_support)``
 
 
 ------------
@@ -334,6 +426,16 @@ Resolves an MQTT address into scheme, host, and port.
 | **Mode and number of proofs:**
 |    ``resolve_address(+atom,-atom,-atom,-integer)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Address`` is a variable:
+|        ``instantiation_error``
+|    ``Address`` is neither a variable nor an atom:
+|        ``type_error(atom,Address)``
+|    ``Address`` is an atom but not a valid MQTT address:
+|        ``domain_error(mqtt_address,Address)``
+|    ``Address`` contains an invalid authority:
+|        ``domain_error(mqtt_address_authority,Authority)``
+
 
 ------------
 
@@ -352,6 +454,16 @@ Resolves an explicit or default transport object for the given MQTT scheme.
 |    ``resolve_transport(Scheme,Transport0,Transport)``
 | **Mode and number of proofs:**
 |    ``resolve_transport(+atom,+object_identifier,-object_identifier)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Transport0`` is a variable:
+|        ``instantiation_error``
+|    ``Transport0`` is neither a variable nor an existing object:
+|        ``existence_error(object,Transport0)``
+|    ``Transport0`` does not implement ``http_transport_protocol``:
+|        ``domain_error(http_transport_protocol_object,Transport0)``
+|    ``Transport0`` does not support ``Scheme``:
+|        ``consistency_error(mqtt_options,scheme(Scheme),transport(Transport0))``
 
 
 ------------
@@ -391,6 +503,12 @@ Encodes and writes an MQTT packet to a binary output stream.
 | **Mode and number of proofs:**
 |    ``write_packet(+stream,+compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Packet`` is not a supported normalized MQTT packet:
+|        ``resource_error(mqtt_packet_support)``
+|    ``Output`` cannot be written or flushed:
+|        ``resource_error(mqtt_packet_stream)``
+
 
 ------------
 
@@ -409,6 +527,12 @@ Reads and decodes one MQTT packet from a binary input stream.
 |    ``read_packet(Input,Packet)``
 | **Mode and number of proofs:**
 |    ``read_packet(+stream,--compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Input`` ends before a complete packet is read:
+|        ``domain_error(mqtt_packet_stream,unexpected_end_of_file)``
+|    ``Input`` contains an invalid MQTT packet encoding:
+|        ``domain_error(mqtt_packet,Packet)``
 
 
 ------------
@@ -429,6 +553,14 @@ Encodes an unsigned 8-bit integer.
 | **Mode and number of proofs:**
 |    ``encode_uint8(+integer,-list(integer))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Value`` is a variable:
+|        ``instantiation_error``
+|    ``Value`` is neither a variable nor an integer:
+|        ``type_error(integer,Value)``
+|    ``Value`` is outside the unsigned 8-bit integer range:
+|        ``domain_error(between(0,255),Value)``
+
 
 ------------
 
@@ -447,6 +579,10 @@ Decodes an unsigned 8-bit integer.
 |    ``decode_uint8(Bytes,Value,Rest)``
 | **Mode and number of proofs:**
 |    ``decode_uint8(+list(integer),-integer,-list(integer))`` - ``one_or_error``
+
+| **Exceptions:**
+|    The first element of ``Bytes`` is not a byte:
+|        ``type_error(byte,Byte)``
 
 
 ------------
@@ -467,6 +603,14 @@ Encodes an unsigned 16-bit integer in network byte order.
 | **Mode and number of proofs:**
 |    ``encode_uint16(+integer,-list(integer))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Value`` is a variable:
+|        ``instantiation_error``
+|    ``Value`` is neither a variable nor an integer:
+|        ``type_error(integer,Value)``
+|    ``Value`` is outside the unsigned 16-bit integer range:
+|        ``domain_error(between(0,65535),Value)``
+
 
 ------------
 
@@ -485,6 +629,10 @@ Decodes an unsigned 16-bit integer in network byte order.
 |    ``decode_uint16(Bytes,Value,Rest)``
 | **Mode and number of proofs:**
 |    ``decode_uint16(+list(integer),-integer,-list(integer))`` - ``one_or_error``
+
+| **Exceptions:**
+|    One of the first two elements of ``Bytes`` is not a byte:
+|        ``type_error(byte,Byte)``
 
 
 ------------
@@ -505,6 +653,14 @@ Encodes an unsigned 32-bit integer in network byte order.
 | **Mode and number of proofs:**
 |    ``encode_uint32(+integer,-list(integer))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Value`` is a variable:
+|        ``instantiation_error``
+|    ``Value`` is neither a variable nor an integer:
+|        ``type_error(integer,Value)``
+|    ``Value`` is outside the unsigned 32-bit integer range:
+|        ``domain_error(between(0,4294967295),Value)``
+
 
 ------------
 
@@ -523,6 +679,10 @@ Decodes an unsigned 32-bit integer in network byte order.
 |    ``decode_uint32(Bytes,Value,Rest)``
 | **Mode and number of proofs:**
 |    ``decode_uint32(+list(integer),-integer,-list(integer))`` - ``one_or_error``
+
+| **Exceptions:**
+|    One of the first four elements of ``Bytes`` is not a byte:
+|        ``type_error(byte,Byte)``
 
 
 ------------
@@ -543,6 +703,14 @@ Encodes an MQTT variable byte integer.
 | **Mode and number of proofs:**
 |    ``encode_varint(+integer,-list(integer))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Value`` is a variable:
+|        ``instantiation_error``
+|    ``Value`` is neither a variable nor an integer:
+|        ``type_error(integer,Value)``
+|    ``Value`` is outside the MQTT variable byte integer range:
+|        ``domain_error(between(0,268435455),Value)``
+
 
 ------------
 
@@ -561,6 +729,10 @@ Decodes an MQTT variable byte integer, rejecting non-minimal encodings and overf
 |    ``decode_varint(Bytes,Value,Rest)``
 | **Mode and number of proofs:**
 |    ``decode_varint(+list(integer),-integer,-list(integer))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Bytes`` does not start with a valid, minimally encoded MQTT variable byte integer:
+|        ``domain_error(mqtt_variable_byte_integer,Consumed)``
 
 
 ------------
@@ -581,6 +753,14 @@ Encodes an MQTT UTF-8 encoded string with a two-byte length prefix.
 | **Mode and number of proofs:**
 |    ``encode_utf8_string(+atom,-list(integer))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``String`` is a variable:
+|        ``instantiation_error``
+|    ``String`` is neither a variable nor atom:
+|        ``type_error(atom,String)``
+|    ``String`` is not a valid MQTT UTF-8 string:
+|        ``domain_error(mqtt_utf8_string,Codes)``
+
 
 ------------
 
@@ -599,6 +779,10 @@ Decodes an MQTT UTF-8 encoded string with a two-byte length prefix.
 |    ``decode_utf8_string(Bytes,String,Rest)``
 | **Mode and number of proofs:**
 |    ``decode_utf8_string(+list(integer),-atom,-list(integer))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Bytes`` does not start with a valid MQTT UTF-8 string:
+|        ``domain_error(mqtt_utf8_string,Codes)``
 
 
 ------------
@@ -619,6 +803,12 @@ Encodes MQTT binary data with a two-byte length prefix.
 | **Mode and number of proofs:**
 |    ``encode_binary_data(+list(integer),-list(integer))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Data`` is not a list of bytes:
+|        ``type_error(list(byte),Data)``
+|    ``Data`` is longer than 65535 bytes:
+|        ``domain_error(between(0,65535),Length)``
+
 
 ------------
 
@@ -637,6 +827,10 @@ Decodes MQTT binary data with a two-byte length prefix.
 |    ``decode_binary_data(Bytes,Data,Rest)``
 | **Mode and number of proofs:**
 |    ``decode_binary_data(+list(integer),-list(integer),-list(integer))`` - ``one_or_error``
+
+| **Exceptions:**
+|    The first two elements of ``Bytes`` do not encode a valid length:
+|        ``type_error(byte,Byte)``
 
 
 ------------
@@ -657,6 +851,12 @@ Encodes an MQTT UTF-8 string pair as two MQTT UTF-8 encoded strings.
 | **Mode and number of proofs:**
 |    ``encode_utf8_string_pair(+compound,-list(integer))`` - ``one_or_error``
 
+| **Exceptions:**
+|    An element of ``Pair`` is not an atom:
+|        ``type_error(atom,String)``
+|    An element of ``Pair`` is not a valid MQTT UTF-8 string:
+|        ``domain_error(mqtt_utf8_string,Codes)``
+
 
 ------------
 
@@ -675,6 +875,10 @@ Decodes an MQTT UTF-8 string pair from two MQTT UTF-8 encoded strings.
 |    ``decode_utf8_string_pair(Bytes,Pair,Rest)``
 | **Mode and number of proofs:**
 |    ``decode_utf8_string_pair(+list(integer),-compound,-list(integer))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Bytes`` does not start with two valid MQTT UTF-8 strings:
+|        ``domain_error(mqtt_utf8_string,Codes)``
 
 
 ------------
@@ -695,6 +899,14 @@ Encodes an MQTT property list with its variable byte integer length prefix.
 | **Mode and number of proofs:**
 |    ``encode_properties(+list,-list(integer))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Properties`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Properties`` is neither a variable nor a list:
+|        ``type_error(list,Properties)``
+|    An element ``Property`` is not a supported MQTT property:
+|        ``domain_error(mqtt_property,Property)``
+
 
 ------------
 
@@ -713,6 +925,12 @@ Decodes an MQTT property list and returns the remaining packet bytes.
 |    ``decode_properties(Bytes,Properties,Rest)``
 | **Mode and number of proofs:**
 |    ``decode_properties(+list(integer),-list,-list(integer))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Bytes`` does not contain the declared property bytes:
+|        ``domain_error(mqtt_properties,Bytes)``
+|    ``Bytes`` contains an unknown property identifier:
+|        ``domain_error(mqtt_property_identifier,Identifier)``
 
 
 ------------
@@ -733,6 +951,10 @@ Encodes MQTT properties without the property length prefix.
 | **Mode and number of proofs:**
 |    ``encode_property_list(+list,-list(integer))`` - ``one_or_error``
 
+| **Exceptions:**
+|    An element ``Property`` is not a supported MQTT property:
+|        ``domain_error(mqtt_property,Property)``
+
 
 ------------
 
@@ -751,6 +973,10 @@ Decodes MQTT properties from a property body byte list.
 |    ``decode_property_list(Bytes,Properties)``
 | **Mode and number of proofs:**
 |    ``decode_property_list(+list(integer),-list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Bytes`` contains an unknown property identifier:
+|        ``domain_error(mqtt_property_identifier,Identifier)``
 
 
 ------------
@@ -771,6 +997,12 @@ Encodes a single MQTT property.
 | **Mode and number of proofs:**
 |    ``encode_property(+compound,-list(integer))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Property`` is not a supported MQTT property:
+|        ``domain_error(mqtt_property,Property)``
+|    ``Property`` contains an invalid value:
+|        ``domain_error(mqtt_property_value,Name-Value)``
+
 
 ------------
 
@@ -789,6 +1021,12 @@ Decodes a single MQTT property.
 |    ``decode_property(Bytes,Property,Rest)``
 | **Mode and number of proofs:**
 |    ``decode_property(+list(integer),-compound,-list(integer))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Bytes`` starts with an unknown property identifier:
+|        ``domain_error(mqtt_property_identifier,Identifier)``
+|    ``Bytes`` contains an invalid property value:
+|        ``domain_error(mqtt_property_value,Name-Value)``
 
 
 ------------
@@ -828,6 +1066,14 @@ Encodes an MQTT fixed header from packet type, flags, and remaining length.
 | **Mode and number of proofs:**
 |    ``encode_fixed_header(+atom,+integer,+integer,-list(integer))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Type`` is not a supported MQTT packet type:
+|        ``domain_error(mqtt_packet_type,Type)``
+|    ``Flags`` is invalid for ``Type``:
+|        ``domain_error(mqtt_fixed_header_flags,Type-Flags)``
+|    ``RemainingLength`` is outside the MQTT variable byte integer range:
+|        ``domain_error(between(0,268435455),RemainingLength)``
+
 
 ------------
 
@@ -846,6 +1092,14 @@ Decodes an MQTT fixed header into packet type, flags, remaining length, and rema
 |    ``decode_fixed_header(Bytes,Type,Flags,RemainingLength,Rest)``
 | **Mode and number of proofs:**
 |    ``decode_fixed_header(+list(integer),-atom,-integer,-integer,-list(integer))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Bytes`` starts with an unsupported MQTT packet type:
+|        ``domain_error(mqtt_packet_type,Code)``
+|    ``Bytes`` contains invalid fixed header flags:
+|        ``domain_error(mqtt_fixed_header_flags,Type-Flags)``
+|    ``Bytes`` contains an invalid MQTT variable byte integer:
+|        ``domain_error(mqtt_variable_byte_integer,Consumed)``
 
 
 ------------

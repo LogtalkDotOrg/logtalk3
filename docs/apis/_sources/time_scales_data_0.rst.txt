@@ -14,8 +14,8 @@ Bundled and override data plus constants for UTC/TAI/TT/UT1/TDB/TCG/TCB conversi
 |    ``logtalk_load(time_scales(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:2:1
-| **Date:** 2026-08-02
+| **Version:** 0:3:0
+| **Date:** 2026-08-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -401,8 +401,15 @@ Private predicates
 ``leap_override_data_/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Table of leap seconds override data.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``leap_override_data_(UnixStart,OffsetSeconds)``
+| **Mode and number of proofs:**
+|    ``leap_override_data_(?integer,?integer)`` - ``zero_or_more``
 
 
 ------------
@@ -413,8 +420,15 @@ Private predicates
 ``dut1_override_data_/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Table of DUT1 override data.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``dut1_override_data_(UnixStart,Numerator,Denominator)``
+| **Mode and number of proofs:**
+|    ``dut1_override_data_(?integer,?integer,?integer)`` - ``zero_or_more``
 
 
 ------------
@@ -425,8 +439,15 @@ Private predicates
 ``leap_source_/1``
 ^^^^^^^^^^^^^^^^^^
 
+Source of leap seconds data (either ``override`` or ``bundled``).
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``leap_source_(Source)``
+| **Mode and number of proofs:**
+|    ``leap_source_(?atom)`` - ``zero_or_one``
 
 
 ------------
@@ -437,8 +458,15 @@ Private predicates
 ``dut1_source_/1``
 ^^^^^^^^^^^^^^^^^^
 
+Source of DUT1 data (either ``override`` or ``bundled``).
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``dut1_source_(Source)``
+| **Mode and number of proofs:**
+|    ``dut1_source_(?atom)`` - ``zero_or_one``
 
 
 ------------

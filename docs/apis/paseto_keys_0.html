@@ -430,7 +430,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-08-03</div>
+<div class="line"><strong>Date:</strong> 2026-08-08</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -490,6 +490,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">validate(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">KeySet</span></code> is not a valid <code class="docutils literal notranslate"><span class="pre">key_set/1</span></code> term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(paseto_key_set,KeySet)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">KeySet</span></code> contains an invalid key record <code class="docutils literal notranslate"><span class="pre">Record</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(paseto_key_record,Record)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="select-keys-4">
@@ -509,6 +522,23 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">select_keys(+compound,+atom,+term,-list(list(byte)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">KeySet</span></code> is not a valid <code class="docutils literal notranslate"><span class="pre">key_set/1</span></code> term:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(paseto_key_set,KeySet)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">KeySet</span></code> contains an invalid key record <code class="docutils literal notranslate"><span class="pre">Record</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(paseto_key_record,Record)</span></code></div>
+</div>
+<div class="line">No key matches <code class="docutils literal notranslate"><span class="pre">Purpose</span></code> and <code class="docutils literal notranslate"><span class="pre">KeyId</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(paseto_key,Purpose-KeyId)</span></code></div>
+</div>
 </div>
 </div>
 </section>

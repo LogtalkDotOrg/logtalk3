@@ -22,9 +22,9 @@
 :- object(time_scales_data).
 
 	:- info([
-		version is 0:2:1,
+		version is 0:3:0,
 		author is 'Paulo Moura',
-		date is 2026-08-02,
+		date is 2026-08-08,
 		comment is 'Bundled and override data plus constants for UTC/TAI/TT/UT1/TDB/TCG/TCB conversions.'
 	]).
 
@@ -166,15 +166,35 @@
 
 	:- private(leap_override_data_/2).
 	:- dynamic(leap_override_data_/2).
+	:- mode(leap_override_data_(?integer, ?integer), zero_or_more).
+	:- info(leap_override_data_/2, [
+		comment is 'Table of leap seconds override data.',
+		argnames is ['UnixStart', 'OffsetSeconds']
+	]).
 
 	:- private(dut1_override_data_/3).
 	:- dynamic(dut1_override_data_/3).
+	:- mode(dut1_override_data_(?integer, ?integer, ?integer), zero_or_more).
+	:- info(dut1_override_data_/3, [
+		comment is 'Table of DUT1 override data.',
+		argnames is ['UnixStart', 'Numerator', 'Denominator']
+	]).
 
 	:- private(leap_source_/1).
 	:- dynamic(leap_source_/1).
+	:- mode(leap_source_(?atom), zero_or_one).
+	:- info(leap_source_/1, [
+		comment is 'Source of leap seconds data (either ``override`` or ``bundled``).',
+		argnames is ['Source']
+	]).
 
 	:- private(dut1_source_/1).
 	:- dynamic(dut1_source_/1).
+	:- mode(dut1_source_(?atom), zero_or_one).
+	:- info(dut1_source_/1, [
+		comment is 'Source of DUT1 data (either ``override`` or ``bundled``).',
+		argnames is ['Source']
+	]).
 
 	% TT - TAI = 32.184 seconds
 	tt_minus_tai(32184, 1000).

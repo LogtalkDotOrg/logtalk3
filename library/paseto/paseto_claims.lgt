@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-03,
+		date is 2026-08-08,
 		comment is 'PASETO JSON claims lookup and validation predicates.'
 	]).
 
@@ -33,7 +33,18 @@
 	:- mode(validate_claims(+term, +list(compound), +list(compound)), one_or_error).
 	:- info(validate_claims/3, [
 		comment is 'Validates claims using registered-claim defaults, a policy list, and options.',
-		argnames is ['Claims', 'Policy', 'Options']
+		argnames is ['Claims', 'Policy', 'Options'],
+		exceptions is [
+			'``Claims`` is not a JSON object or contains duplicate members' - domain_error(paseto_json_object, 'Claims'),
+			'``Claims`` is missing a required claim ``Name``' - domain_error(paseto_claims, missing('Name')),
+			'``Policy`` contains an invalid claim policy' - domain_error(paseto_claim_policy, 'ClaimPolicy'),
+			'A time claim has a non-numeric value' - type_error(time_number, 'Name'-'Value'),
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option')
+		]
 	]).
 
 	:- public(validate_claim/3).
@@ -41,7 +52,19 @@
 	:- meta_predicate(validate_claim(*, *, *)).
 	:- info(validate_claim/3, [
 		comment is 'Validates one claim policy against a claims object.',
-		argnames is ['Claims', 'ClaimPolicy', 'Options']
+		argnames is ['Claims', 'ClaimPolicy', 'Options'],
+		exceptions is [
+			'``Claims`` is missing the required claim ``Name``' - domain_error(paseto_claims, missing('Name')),
+			'The value of claim ``Name`` does not satisfy the policy' - domain_error(paseto_claim('Name'), 'Value'),
+			'``ClaimPolicy`` is not a supported claim policy' - domain_error(paseto_claim_policy, 'ClaimPolicy'),
+			'A time claim has an unknown validation kind' - domain_error(paseto_time_claim_kind, 'Kind'),
+			'A time claim has a non-numeric value' - type_error(time_number, 'Name'-'Value'),
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option')
+		]
 	]).
 
 	:- public(claim/3).

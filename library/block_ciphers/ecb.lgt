@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-03,
+		date is 2026-08-08,
 		comment is 'Generic Electronic Codebook mode encryption and decryption.'
 	]).
 
@@ -32,28 +32,68 @@
 	:- mode(encrypt(+object_identifier, +list(byte), +list(byte), --list(byte)), one_or_error).
 	:- info(encrypt/4, [
 		comment is 'Encrypts block-aligned plaintext without padding.',
-		argnames is ['Cipher', 'Key', 'Plaintext', 'Ciphertext']
+		argnames is ['Cipher', 'Key', 'Plaintext', 'Ciphertext'],
+		exceptions is [
+			'``Cipher`` is a variable' - instantiation_error,
+			'``Cipher`` is neither a variable nor a prepared-key block cipher object' - domain_error(block_cipher, 'Cipher'),
+			'``Plaintext`` is a variable or a partial list' - instantiation_error,
+			'``Plaintext`` is neither a partial list nor a list' - type_error(list, 'Plaintext'),
+			'An element ``Byte`` of the ``Plaintext`` list is neither a variable nor an integer' - type_error(integer, 'Byte'),
+			'An element ``Byte`` of the ``Plaintext`` list is an integer but not a valid byte' - domain_error(byte, 'Byte'),
+			'``Plaintext`` length is not block aligned' - domain_error(block_aligned_byte_length('BlockSize'), 'Plaintext')
+		]
 	]).
 
 	:- public(decrypt/4).
 	:- mode(decrypt(+object_identifier, +list(byte), +list(byte), --list(byte)), one_or_error).
 	:- info(decrypt/4, [
 		comment is 'Decrypts block-aligned ciphertext without removing padding.',
-		argnames is ['Cipher', 'Key', 'Ciphertext', 'Plaintext']
+		argnames is ['Cipher', 'Key', 'Ciphertext', 'Plaintext'],
+		exceptions is [
+			'``Cipher`` is a variable' - instantiation_error,
+			'``Cipher`` is neither a variable nor a prepared-key block cipher object' - domain_error(block_cipher, 'Cipher'),
+			'``Ciphertext`` is a variable or a partial list' - instantiation_error,
+			'``Ciphertext`` is neither a partial list nor a list' - type_error(list, 'Ciphertext'),
+			'An element ``Byte`` of the ``Ciphertext`` list is neither a variable nor an integer' - type_error(integer, 'Byte'),
+			'An element ``Byte`` of the ``Ciphertext`` list is an integer but not a valid byte' - domain_error(byte, 'Byte'),
+			'``Ciphertext`` length is not block aligned' - domain_error(block_aligned_byte_length('BlockSize'), 'Ciphertext')
+		]
 	]).
 
 	:- public(encrypt_padded/4).
 	:- mode(encrypt_padded(+object_identifier, +list(byte), +list(byte), --list(byte)), one_or_error).
 	:- info(encrypt_padded/4, [
 		comment is 'Pads plaintext using PKCS#7 and encrypts it.',
-		argnames is ['Cipher', 'Key', 'Plaintext', 'Ciphertext']
+		argnames is ['Cipher', 'Key', 'Plaintext', 'Ciphertext'],
+		exceptions is [
+			'``Cipher`` is a variable' - instantiation_error,
+			'``Cipher`` is neither a variable nor a prepared-key block cipher object' - domain_error(block_cipher, 'Cipher'),
+			'``Plaintext`` is a variable or a partial list' - instantiation_error,
+			'``Plaintext`` is neither a partial list nor a list' - type_error(list, 'Plaintext'),
+			'An element ``Byte`` of the ``Plaintext`` list is neither a variable nor an integer' - type_error(integer, 'Byte'),
+			'An element ``Byte`` of the ``Plaintext`` list is an integer but not a valid byte' - domain_error(byte, 'Byte'),
+			'``Cipher`` block size exceeds the PKCS#7 limit' - domain_error(pkcs7_block_size, 'BlockSize')
+		]
 	]).
 
 	:- public(decrypt_padded/4).
 	:- mode(decrypt_padded(+object_identifier, +list(byte), +list(byte), --list(byte)), one_or_error).
 	:- info(decrypt_padded/4, [
 		comment is 'Decrypts ciphertext and validates and removes PKCS#7 padding.',
-		argnames is ['Cipher', 'Key', 'Ciphertext', 'Plaintext']
+		argnames is ['Cipher', 'Key', 'Ciphertext', 'Plaintext'],
+		exceptions is [
+			'``Cipher`` is a variable' - instantiation_error,
+			'``Cipher`` is neither a variable nor a prepared-key block cipher object' - domain_error(block_cipher, 'Cipher'),
+			'``Cipher`` is a variable' - instantiation_error,
+			'``Cipher`` is neither a variable nor a prepared-key block cipher object' - domain_error(block_cipher, 'Cipher'),
+			'``Ciphertext`` is a variable or a partial list' - instantiation_error,
+			'``Ciphertext`` is neither a partial list nor a list' - type_error(list, 'Ciphertext'),
+			'An element ``Byte`` of the ``Ciphertext`` list is neither a variable nor an integer' - type_error(integer, 'Byte'),
+			'An element ``Byte`` of the ``Ciphertext`` list is an integer but not a valid byte' - domain_error(byte, 'Byte'),
+			'``Ciphertext`` is empty' - domain_error(non_empty_ciphertext, 'Ciphertext'),
+			'``Ciphertext`` length is not block aligned' - domain_error(block_aligned_byte_length('BlockSize'), 'Ciphertext'),
+			'``Ciphertext`` does not contain valid PKCS#7 padding' - domain_error(pkcs7_padding, 'Ciphertext')
+		]
 	]).
 
 	:- uses(list, [

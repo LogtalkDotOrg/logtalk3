@@ -425,7 +425,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-08-04</div>
+<div class="line"><strong>Date:</strong> 2026-08-08</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -502,7 +502,7 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(cmac_block_size,BlockSize)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">MessageBytes</span></code> is neither a variable nor a list of bytes:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">MessageBytes</span></code> is neither a variable nor a list:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte),MessageBytes)</span></code></div>
 </div>
@@ -537,6 +537,35 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">hex_digest(+object_identifier,+list(byte),+list(byte),--atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Cipher</span></code> or <code class="docutils literal notranslate"><span class="pre">MessageBytes</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Cipher</span></code> does not implement the required prepared-key block cipher protocol:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(cmac_cipher,Cipher)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Cipher</span></code> reports a block size other than 8 or 16 bytes:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(cmac_block_size,BlockSize)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">MessageBytes</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte),MessageBytes)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Byte</span></code> of the <cite>MessageBytes`</cite> list is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Byte)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Byte</span></code> of the <code class="docutils literal notranslate"><span class="pre">MessageBytes</span></code> list is an integer but not a valid byte:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(byte,Byte)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="digest-5">
@@ -565,11 +594,11 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Length</span></code> is not an integer:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Length</span></code> is neither a variable nor an integer:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Length)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Length</span></code> is outside the range from one through the cipher block size:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Length</span></code> is an integer outside the range from one through the cipher block size:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(cmac_output_length(1,BlockSize),Length)</span></code></div>
 </div>
@@ -594,6 +623,43 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">hex_digest(+object_identifier,+list(byte),+list(byte),+integer,--atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Cipher</span></code>, <code class="docutils literal notranslate"><span class="pre">MessageBytes</span></code>, or <code class="docutils literal notranslate"><span class="pre">Length</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Cipher</span></code> does not implement the required prepared-key block cipher protocol:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(cmac_cipher,Cipher)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Cipher</span></code> reports a block size other than 8 or 16 bytes:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(cmac_block_size,BlockSize)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">MessageBytes</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte),MessageBytes)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Byte</span></code> of the <cite>MessageBytes`</cite> list is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Byte)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Byte</span></code> of the <code class="docutils literal notranslate"><span class="pre">MessageBytes</span></code> list is an integer but not a valid byte:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(byte,Byte)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Length</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Length)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Length</span></code> is an integer outside the range from one through the cipher block size:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(cmac_output_length(1,BlockSize),Length)</span></code></div>
+</div>
 </div>
 </div>
 </section>

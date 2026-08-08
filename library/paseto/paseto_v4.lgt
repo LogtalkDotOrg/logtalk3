@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-03,
+		date is 2026-08-08,
 		comment is 'PASETO v4.local and v4.public implementation for byte payloads.'
 	]).
 
@@ -34,7 +34,29 @@
 	:- mode(local_encrypt_with_nonce(+list(byte), +list(byte), +list(byte), +list(byte), +list(byte), -atom), one_or_error).
 	:- info(local_encrypt_with_nonce/6, [
 		comment is 'Encrypts a local payload using an explicit 32-byte nonce. Intended for deterministic conformance tests; production callers must use local_encrypt/3 or local_encrypt/5.',
-		argnames is ['Key', 'Nonce', 'Payload', 'Footer', 'ImplicitAssertion', 'Token']
+		argnames is ['Key', 'Nonce', 'Payload', 'Footer', 'ImplicitAssertion', 'Token'],
+		exceptions is [
+			'``Key`` is a variable or a partial list' - instantiation_error,
+			'``Key`` is not a list of the required number of bytes' - type_error(list(byte, 32), 'Key'),
+			'``Key`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``Key`` contains an integer outside the byte range' - domain_error(byte, 'Byte'),
+			'``Nonce`` is a variable or a partial list' - instantiation_error,
+			'``Nonce`` is not a list of the required number of bytes' - type_error(list(byte, 32), 'Nonce'),
+			'``Nonce`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``Nonce`` contains an integer outside the byte range' - domain_error(byte, 'Byte'),
+			'``Payload`` is a variable or a partial list' - instantiation_error,
+			'``Payload`` is not a list of the required number of bytes' - type_error(list(byte, 32), 'Payload'),
+			'``Payload`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``Payload`` contains an integer outside the byte range' - domain_error(byte, 'Byte'),
+			'``Footer`` is a variable or a partial list' - instantiation_error,
+			'``Footer`` is not a list of the required number of bytes' - type_error(list(byte, 32), 'Footer'),
+			'``Footer`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``Footer`` contains an integer outside the byte range' - domain_error(byte, 'Byte'),
+			'``ImplicitAssertion`` is a variable or a partial list' - instantiation_error,
+			'``ImplicitAssertion`` is not a list of the required number of bytes' - type_error(list(byte, 32), 'ImplicitAssertion'),
+			'``ImplicitAssertion`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``ImplicitAssertion`` contains an integer outside the byte range' - domain_error(byte, 'Byte')
+		]
 	]).
 
 	:- uses(list, [

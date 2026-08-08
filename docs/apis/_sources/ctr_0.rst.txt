@@ -15,7 +15,7 @@ Generic Counter mode encryption and decryption using a whole-block big-endian co
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-04
+| **Date:** 2026-08-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -53,6 +53,22 @@ Encrypts or decrypts bytes using an explicit initial whole-block big-endian coun
 | **Mode and number of proofs:**
 |    ``crypt(+object_identifier,+list(byte),+list(byte),+list(byte),--list(byte))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Cipher`` is a variable:
+|        ``instantiation_error``
+|    ``Cipher`` is neither a variable nor a prepared-key block cipher object:
+|        ``domain_error(block_cipher,Cipher)``
+|    ``InitialCounter`` is not a byte list of exactly one block:
+|        ``type_error(list(byte,BlockSize),InitialCounter)``
+|    ``Input`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Input`` is neither a partial list nor a list:
+|        ``type_error(list,Input)``
+|    An element ``Byte`` of the ``Input`` list is neither a variable nor an integer:
+|        ``type_error(integer,Byte)``
+|    An element ``Byte`` of the ``Input`` list is an integer but not a valid byte:
+|        ``domain_error(byte,Byte)``
+
 
 ------------
 
@@ -71,6 +87,22 @@ Encrypts or decrypts bytes using an explicit initial whole-block big-endian coun
 |    ``crypt(Cipher,Key,InitialCounter,Input,FinalCounter,Output)``
 | **Mode and number of proofs:**
 |    ``crypt(+object_identifier,+list(byte),+list(byte),+list(byte),--list(byte),--list(byte))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Cipher`` is a variable:
+|        ``instantiation_error``
+|    ``Cipher`` is neither a variable nor a prepared-key block cipher object:
+|        ``domain_error(block_cipher,Cipher)``
+|    ``InitialCounter`` is not a byte list of exactly one block:
+|        ``type_error(list(byte,BlockSize),InitialCounter)``
+|    ``Input`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Input`` is neither a partial list nor a list:
+|        ``type_error(list,Input)``
+|    An element ``Byte`` of the ``Input`` list is neither a variable nor an integer:
+|        ``type_error(integer,Byte)``
+|    An element ``Byte`` of the ``Input`` list is an integer but not a valid byte:
+|        ``domain_error(byte,Byte)``
 
 
 ------------

@@ -15,7 +15,7 @@ Generalized Ripple-Down Rules implementation using keyed Single-Classification R
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-06
+| **Date:** 2026-08-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -59,6 +59,18 @@ Returns a new Generalized Ripple-Down Rules model with the keyed Single-Classifi
 | **Mode and number of proofs:**
 |    ``put(+compound,+term,+compound,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Model`` is a variable:
+|        ``instantiation_error``
+|    ``Model`` is neither a variable nor a valid model:
+|        ``domain_error(ripple_down_rules,Model)``
+|    ``Key`` is a variable:
+|        ``instantiation_error``
+|    ``Submodel`` is a variable:
+|        ``instantiation_error``
+|    ``Submodel`` is neither a variable nor a valid submodel:
+|        ``domain_error(ripple_down_rules_submodel,Submodel)``
+
 
 ------------
 
@@ -78,6 +90,14 @@ Returns the submodel stored under a key.
 | **Mode and number of proofs:**
 |    ``get(+compound,+term,-compound)`` - ``zero_or_one_or_error``
 
+| **Exceptions:**
+|    ``Model`` is a variable:
+|        ``instantiation_error``
+|    ``Model`` is neither a variable nor a valid model:
+|        ``domain_error(ripple_down_rules,Model)``
+|    ``Key`` is a variable:
+|        ``instantiation_error``
+
 
 ------------
 
@@ -96,6 +116,14 @@ Returns a new Generalized Ripple-Down Rules model with the keyed submodel remove
 |    ``remove(Model,Key,NewModel)``
 | **Mode and number of proofs:**
 |    ``remove(+compound,+term,-compound)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``Model`` is a variable:
+|        ``instantiation_error``
+|    ``Model`` is neither a variable nor a valid model:
+|        ``domain_error(ripple_down_rules,Model)``
+|    ``Key`` is a variable:
+|        ``instantiation_error``
 
 
 ------------

@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-04,
+		date is 2026-08-08,
 		comment is 'Generic Counter mode encryption and decryption using a whole-block big-endian counter.'
 	]).
 
@@ -32,14 +32,32 @@
 	:- mode(crypt(+object_identifier, +list(byte), +list(byte), +list(byte), --list(byte)), one_or_error).
 	:- info(crypt/5, [
 		comment is 'Encrypts or decrypts bytes using an explicit initial whole-block big-endian counter. The counter is incremented internally while processing the input but is not returned. The client is responsible for managing initial counters across calls and preventing reuse of a counter sequence with the same key.',
-		argnames is ['Cipher', 'Key', 'InitialCounter', 'Input', 'Output']
+		argnames is ['Cipher', 'Key', 'InitialCounter', 'Input', 'Output'],
+		exceptions is [
+			'``Cipher`` is a variable' - instantiation_error,
+			'``Cipher`` is neither a variable nor a prepared-key block cipher object' - domain_error(block_cipher, 'Cipher'),
+			'``InitialCounter`` is not a byte list of exactly one block' - type_error(list(byte, 'BlockSize'), 'InitialCounter'),
+			'``Input`` is a variable or a partial list' - instantiation_error,
+			'``Input`` is neither a partial list nor a list' - type_error(list, 'Input'),
+			'An element ``Byte`` of the ``Input`` list is neither a variable nor an integer' - type_error(integer, 'Byte'),
+			'An element ``Byte`` of the ``Input`` list is an integer but not a valid byte' - domain_error(byte, 'Byte')
+		]
 	]).
 
 	:- public(crypt/6).
 	:- mode(crypt(+object_identifier, +list(byte), +list(byte), +list(byte), --list(byte), --list(byte)), one_or_error).
 	:- info(crypt/6, [
 		comment is 'Encrypts or decrypts bytes using an explicit initial whole-block big-endian counter and returns the next unused counter. The final counter equals the initial counter for empty input and is otherwise incremented once per processed input block, modulo the counter width.',
-		argnames is ['Cipher', 'Key', 'InitialCounter', 'Input', 'FinalCounter', 'Output']
+		argnames is ['Cipher', 'Key', 'InitialCounter', 'Input', 'FinalCounter', 'Output'],
+		exceptions is [
+			'``Cipher`` is a variable' - instantiation_error,
+			'``Cipher`` is neither a variable nor a prepared-key block cipher object' - domain_error(block_cipher, 'Cipher'),
+			'``InitialCounter`` is not a byte list of exactly one block' - type_error(list(byte, 'BlockSize'), 'InitialCounter'),
+			'``Input`` is a variable or a partial list' - instantiation_error,
+			'``Input`` is neither a partial list nor a list' - type_error(list, 'Input'),
+			'An element ``Byte`` of the ``Input`` list is neither a variable nor an integer' - type_error(integer, 'Byte'),
+			'An element ``Byte`` of the ``Input`` list is an integer but not a valid byte' - domain_error(byte, 'Byte')
+		]
 	]).
 
 	crypt(Cipher, Key, InitialCounter, Input, Output) :-

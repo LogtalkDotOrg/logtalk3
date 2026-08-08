@@ -424,7 +424,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-08-04</div>
+<div class="line"><strong>Date:</strong> 2026-08-08</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -536,6 +536,31 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">connect(+atom,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Address</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Address</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Address)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Address</span></code> is an atom but not a valid MQTT address:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_address,Address)</span></code></div>
+</div>
+<div class="line">The server rejects the MQTT connection:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_connack_reason_code,ReasonCode)</span></code></div>
+</div>
+<div class="line">The server response is not a CONNACK packet:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_packet,expected(connack,Packet))</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="connect-4">
@@ -557,6 +582,35 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">connect(+atom,+integer,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Host</span></code> or <code class="docutils literal notranslate"><span class="pre">Port</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Host</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Host)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Port</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Port)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Port</span></code> is a negative integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Port)</span></code></div>
+</div>
+<div class="line">The server rejects the MQTT connection:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_connack_reason_code,ReasonCode)</span></code></div>
+</div>
+<div class="line">The server response is not a CONNACK packet:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_packet,expected(connack,Packet))</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="disconnect-2">
@@ -576,6 +630,23 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">disconnect(+compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Options)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Option</span></code> of the list <code class="docutils literal notranslate"><span class="pre">Options</span></code> is not a valid option:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(option,Option)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -662,6 +733,27 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">publish(+compound,+atom,+term,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Topic</span></code> is not a valid MQTT topic name:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_topic_name,Topic)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains an invalid packet identifier:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_packet_identifier,PacketIdentifier)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains an invalid QoS value:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_qos,QoS)</span></code></div>
+</div>
+<div class="line">The server response is not the expected acknowledgement packet:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_packet,expected(Type-PacketIdentifier,Packet))</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="subscribe-4">
@@ -681,6 +773,27 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">subscribe(+compound,+list,--list,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">TopicFilters</span></code> is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_subscriptions,[])</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">TopicFilter</span></code> is not a valid MQTT topic filter:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_topic_filter,TopicFilter)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Options</span></code> contains invalid subscription options:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_subscription_options,Byte)</span></code></div>
+</div>
+<div class="line">The server response is not the expected SUBACK packet:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_packet,expected(suback-PacketIdentifier,Packet))</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -704,6 +817,23 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">unsubscribe(+compound,+list,--list,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">TopicFilters</span></code> is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_topic_filters,[])</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">TopicFilter</span></code> is not a valid MQTT topic filter:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_topic_filter,TopicFilter)</span></code></div>
+</div>
+<div class="line">The server response is not the expected UNSUBACK packet:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_packet,expected(unsuback-PacketIdentifier,Packet))</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="receive-3">
@@ -723,6 +853,19 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">receive(+compound,--compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The connection input ends before a complete packet is read:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_packet_stream,unexpected_end_of_file)</span></code></div>
+</div>
+<div class="line">The received bytes do not encode a valid MQTT packet:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_packet,Packet)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -746,6 +889,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">send_pingreq(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The PINGREQ packet cannot be written to the connection output stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(mqtt_packet_stream)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="ping-2">
@@ -765,6 +917,19 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">ping(+compound,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The connection input ends before a complete packet is read:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_packet_stream,unexpected_end_of_file)</span></code></div>
+</div>
+<div class="line">The server response is not a PINGRESP packet:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_packet,expected(pingresp,Packet))</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -788,6 +953,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">encode_packet(+compound,--list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Packet</span></code> contains an invalid MQTT field value:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_packet,Packet)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Packet</span></code> has a packet type that is not yet supported:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(mqtt_packet_support)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="decode-packet-2">
@@ -807,6 +985,23 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">decode_packet(+list(integer),--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Bytes</span></code> contains an invalid MQTT packet encoding:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_packet,Bytes)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Bytes</span></code> contains bytes after the encoded packet:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_packet_trailing_bytes,Rest)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Bytes</span></code> encodes a packet type that is not yet supported:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(mqtt_packet_support)</span></code></div>
+</div>
 </div>
 </div>
 </section>
@@ -837,6 +1032,27 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">resolve_address(+atom,-atom,-atom,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Address</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Address</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Address)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Address</span></code> is an atom but not a valid MQTT address:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_address,Address)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Address</span></code> contains an invalid authority:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_address_authority,Authority)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="resolve-transport-3">
@@ -856,6 +1072,27 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">resolve_transport(+atom,+object_identifier,-object_identifier)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Transport0</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Transport0</span></code> is neither a variable nor an existing object:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(object,Transport0)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Transport0</span></code> does not implement <code class="docutils literal notranslate"><span class="pre">http_transport_protocol</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_transport_protocol_object,Transport0)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Transport0</span></code> does not support <code class="docutils literal notranslate"><span class="pre">Scheme</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">consistency_error(mqtt_options,scheme(Scheme),transport(Transport0))</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -900,6 +1137,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">write_packet(+stream,+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Packet</span></code> is not a supported normalized MQTT packet:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(mqtt_packet_support)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Output</span></code> cannot be written or flushed:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(mqtt_packet_stream)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="read-packet-2">
@@ -919,6 +1169,19 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">read_packet(+stream,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Input</span></code> ends before a complete packet is read:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_packet_stream,unexpected_end_of_file)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Input</span></code> contains an invalid MQTT packet encoding:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_packet,Packet)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -942,6 +1205,23 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">encode_uint8(+integer,-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Value</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Value</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Value)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Value</span></code> is outside the unsigned 8-bit integer range:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(between(0,255),Value)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="decode-uint8-3">
@@ -961,6 +1241,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">decode_uint8(+list(integer),-integer,-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The first element of <code class="docutils literal notranslate"><span class="pre">Bytes</span></code> is not a byte:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(byte,Byte)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -984,6 +1273,23 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">encode_uint16(+integer,-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Value</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Value</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Value)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Value</span></code> is outside the unsigned 16-bit integer range:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(between(0,65535),Value)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="decode-uint16-3">
@@ -1003,6 +1309,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">decode_uint16(+list(integer),-integer,-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">One of the first two elements of <code class="docutils literal notranslate"><span class="pre">Bytes</span></code> is not a byte:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(byte,Byte)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1026,6 +1341,23 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">encode_uint32(+integer,-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Value</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Value</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Value)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Value</span></code> is outside the unsigned 32-bit integer range:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(between(0,4294967295),Value)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="decode-uint32-3">
@@ -1045,6 +1377,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">decode_uint32(+list(integer),-integer,-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">One of the first four elements of <code class="docutils literal notranslate"><span class="pre">Bytes</span></code> is not a byte:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(byte,Byte)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1068,6 +1409,23 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">encode_varint(+integer,-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Value</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Value</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Value)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Value</span></code> is outside the MQTT variable byte integer range:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(between(0,268435455),Value)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="decode-varint-3">
@@ -1087,6 +1445,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">decode_varint(+list(integer),-integer,-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Bytes</span></code> does not start with a valid, minimally encoded MQTT variable byte integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_variable_byte_integer,Consumed)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1110,6 +1477,23 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">encode_utf8_string(+atom,-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">String</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">String</span></code> is neither a variable nor atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,String)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">String</span></code> is not a valid MQTT UTF-8 string:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_utf8_string,Codes)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="decode-utf8-string-3">
@@ -1129,6 +1513,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">decode_utf8_string(+list(integer),-atom,-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Bytes</span></code> does not start with a valid MQTT UTF-8 string:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_utf8_string,Codes)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1152,6 +1545,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">encode_binary_data(+list(integer),-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Data</span></code> is not a list of bytes:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte),Data)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Data</span></code> is longer than 65535 bytes:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(between(0,65535),Length)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="decode-binary-data-3">
@@ -1171,6 +1577,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">decode_binary_data(+list(integer),-list(integer),-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The first two elements of <code class="docutils literal notranslate"><span class="pre">Bytes</span></code> do not encode a valid length:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(byte,Byte)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1194,6 +1609,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">encode_utf8_string_pair(+compound,-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">An element of <code class="docutils literal notranslate"><span class="pre">Pair</span></code> is not an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,String)</span></code></div>
+</div>
+<div class="line">An element of <code class="docutils literal notranslate"><span class="pre">Pair</span></code> is not a valid MQTT UTF-8 string:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_utf8_string,Codes)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="decode-utf8-string-pair-3">
@@ -1213,6 +1641,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">decode_utf8_string_pair(+list(integer),-compound,-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Bytes</span></code> does not start with two valid MQTT UTF-8 strings:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_utf8_string,Codes)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1236,6 +1673,23 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">encode_properties(+list,-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Properties</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Properties</span></code> is neither a variable nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Properties)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Property</span></code> is not a supported MQTT property:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_property,Property)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="decode-properties-3">
@@ -1255,6 +1709,19 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">decode_properties(+list(integer),-list,-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Bytes</span></code> does not contain the declared property bytes:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_properties,Bytes)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Bytes</span></code> contains an unknown property identifier:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_property_identifier,Identifier)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1278,6 +1745,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">encode_property_list(+list,-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Property</span></code> is not a supported MQTT property:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_property,Property)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="decode-property-list-2">
@@ -1297,6 +1773,15 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">decode_property_list(+list(integer),-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Bytes</span></code> contains an unknown property identifier:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_property_identifier,Identifier)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1320,6 +1805,19 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">encode_property(+compound,-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Property</span></code> is not a supported MQTT property:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_property,Property)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Property</span></code> contains an invalid value:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_property_value,Name-Value)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="decode-property-3">
@@ -1339,6 +1837,19 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">decode_property(+list(integer),-compound,-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Bytes</span></code> starts with an unknown property identifier:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_property_identifier,Identifier)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Bytes</span></code> contains an invalid property value:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_property_value,Name-Value)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1383,6 +1894,23 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">encode_fixed_header(+atom,+integer,+integer,-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Type</span></code> is not a supported MQTT packet type:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_packet_type,Type)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Flags</span></code> is invalid for <code class="docutils literal notranslate"><span class="pre">Type</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_fixed_header_flags,Type-Flags)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">RemainingLength</span></code> is outside the MQTT variable byte integer range:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(between(0,268435455),RemainingLength)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="decode-fixed-header-5">
@@ -1402,6 +1930,23 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">decode_fixed_header(+list(integer),-atom,-integer,-integer,-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Bytes</span></code> starts with an unsupported MQTT packet type:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_packet_type,Code)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Bytes</span></code> contains invalid fixed header flags:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_fixed_header_flags,Type-Flags)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Bytes</span></code> contains an invalid MQTT variable byte integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mqtt_variable_byte_integer,Consumed)</span></code></div>
+</div>
 </div>
 </div>
 </section>

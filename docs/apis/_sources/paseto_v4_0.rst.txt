@@ -15,7 +15,7 @@ PASETO v4.local and v4.public implementation for byte payloads.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-03
+| **Date:** 2026-08-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -64,6 +64,48 @@ Encrypts a local payload using an explicit 32-byte nonce. Intended for determini
 |    ``local_encrypt_with_nonce(Key,Nonce,Payload,Footer,ImplicitAssertion,Token)``
 | **Mode and number of proofs:**
 |    ``local_encrypt_with_nonce(+list(byte),+list(byte),+list(byte),+list(byte),+list(byte),-atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Key`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Key`` is not a list of the required number of bytes:
+|        ``type_error(list(byte,32),Key)``
+|    ``Key`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``Key`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``Nonce`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Nonce`` is not a list of the required number of bytes:
+|        ``type_error(list(byte,32),Nonce)``
+|    ``Nonce`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``Nonce`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``Payload`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Payload`` is not a list of the required number of bytes:
+|        ``type_error(list(byte,32),Payload)``
+|    ``Payload`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``Payload`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``Footer`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Footer`` is not a list of the required number of bytes:
+|        ``type_error(list(byte,32),Footer)``
+|    ``Footer`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``Footer`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+|    ``ImplicitAssertion`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``ImplicitAssertion`` is not a list of the required number of bytes:
+|        ``type_error(list(byte,32),ImplicitAssertion)``
+|    ``ImplicitAssertion`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``ImplicitAssertion`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
 
 
 ------------

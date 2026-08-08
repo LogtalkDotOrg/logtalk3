@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-03,
+		date is 2026-08-08,
 		comment is 'Shared JSON and option helpers for PASETO claims workflows.'
 	]).
 
@@ -58,7 +58,11 @@
 	:- mode(json_bytes(-term, +list(byte)), one_or_error).
 	:- info(json_bytes/2, [
 		comment is 'Converts between a JSON term and its UTF-8-compatible byte representation.',
-		argnames is ['JSON', 'Bytes']
+		argnames is ['JSON', 'Bytes'],
+		exceptions is [
+			'``JSON`` cannot be generated as JSON text' - domain_error(json_term, 'JSON'),
+			'``Bytes`` cannot be parsed as JSON text' - domain_error(json_text, 'Bytes')
+		]
 	]).
 
 	:- protected(byte_list/1).

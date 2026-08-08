@@ -15,7 +15,7 @@ Generic Electronic Codebook mode encryption and decryption.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-03
+| **Date:** 2026-08-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -55,6 +55,22 @@ Encrypts block-aligned plaintext without padding.
 | **Mode and number of proofs:**
 |    ``encrypt(+object_identifier,+list(byte),+list(byte),--list(byte))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Cipher`` is a variable:
+|        ``instantiation_error``
+|    ``Cipher`` is neither a variable nor a prepared-key block cipher object:
+|        ``domain_error(block_cipher,Cipher)``
+|    ``Plaintext`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Plaintext`` is neither a partial list nor a list:
+|        ``type_error(list,Plaintext)``
+|    An element ``Byte`` of the ``Plaintext`` list is neither a variable nor an integer:
+|        ``type_error(integer,Byte)``
+|    An element ``Byte`` of the ``Plaintext`` list is an integer but not a valid byte:
+|        ``domain_error(byte,Byte)``
+|    ``Plaintext`` length is not block aligned:
+|        ``domain_error(block_aligned_byte_length(BlockSize),Plaintext)``
+
 
 ------------
 
@@ -73,6 +89,22 @@ Decrypts block-aligned ciphertext without removing padding.
 |    ``decrypt(Cipher,Key,Ciphertext,Plaintext)``
 | **Mode and number of proofs:**
 |    ``decrypt(+object_identifier,+list(byte),+list(byte),--list(byte))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Cipher`` is a variable:
+|        ``instantiation_error``
+|    ``Cipher`` is neither a variable nor a prepared-key block cipher object:
+|        ``domain_error(block_cipher,Cipher)``
+|    ``Ciphertext`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Ciphertext`` is neither a partial list nor a list:
+|        ``type_error(list,Ciphertext)``
+|    An element ``Byte`` of the ``Ciphertext`` list is neither a variable nor an integer:
+|        ``type_error(integer,Byte)``
+|    An element ``Byte`` of the ``Ciphertext`` list is an integer but not a valid byte:
+|        ``domain_error(byte,Byte)``
+|    ``Ciphertext`` length is not block aligned:
+|        ``domain_error(block_aligned_byte_length(BlockSize),Ciphertext)``
 
 
 ------------
@@ -93,6 +125,22 @@ Pads plaintext using PKCS#7 and encrypts it.
 | **Mode and number of proofs:**
 |    ``encrypt_padded(+object_identifier,+list(byte),+list(byte),--list(byte))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Cipher`` is a variable:
+|        ``instantiation_error``
+|    ``Cipher`` is neither a variable nor a prepared-key block cipher object:
+|        ``domain_error(block_cipher,Cipher)``
+|    ``Plaintext`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Plaintext`` is neither a partial list nor a list:
+|        ``type_error(list,Plaintext)``
+|    An element ``Byte`` of the ``Plaintext`` list is neither a variable nor an integer:
+|        ``type_error(integer,Byte)``
+|    An element ``Byte`` of the ``Plaintext`` list is an integer but not a valid byte:
+|        ``domain_error(byte,Byte)``
+|    ``Cipher`` block size exceeds the PKCS#7 limit:
+|        ``domain_error(pkcs7_block_size,BlockSize)``
+
 
 ------------
 
@@ -111,6 +159,30 @@ Decrypts ciphertext and validates and removes PKCS#7 padding.
 |    ``decrypt_padded(Cipher,Key,Ciphertext,Plaintext)``
 | **Mode and number of proofs:**
 |    ``decrypt_padded(+object_identifier,+list(byte),+list(byte),--list(byte))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Cipher`` is a variable:
+|        ``instantiation_error``
+|    ``Cipher`` is neither a variable nor a prepared-key block cipher object:
+|        ``domain_error(block_cipher,Cipher)``
+|    ``Cipher`` is a variable:
+|        ``instantiation_error``
+|    ``Cipher`` is neither a variable nor a prepared-key block cipher object:
+|        ``domain_error(block_cipher,Cipher)``
+|    ``Ciphertext`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Ciphertext`` is neither a partial list nor a list:
+|        ``type_error(list,Ciphertext)``
+|    An element ``Byte`` of the ``Ciphertext`` list is neither a variable nor an integer:
+|        ``type_error(integer,Byte)``
+|    An element ``Byte`` of the ``Ciphertext`` list is an integer but not a valid byte:
+|        ``domain_error(byte,Byte)``
+|    ``Ciphertext`` is empty:
+|        ``domain_error(non_empty_ciphertext,Ciphertext)``
+|    ``Ciphertext`` length is not block aligned:
+|        ``domain_error(block_aligned_byte_length(BlockSize),Ciphertext)``
+|    ``Ciphertext`` does not contain valid PKCS#7 padding:
+|        ``domain_error(pkcs7_padding,Ciphertext)``
 
 
 ------------

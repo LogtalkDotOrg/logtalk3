@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-29,
+		date is 2026-08-08,
 		comment is 'Protocol implemented by callback-driven http_sse client and server session handlers.'
 	]).
 
@@ -51,7 +51,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-27,
+		date is 2026-08-08,
 		comment is 'High-level Server-Sent Events (SSE) predicates for opening client connections, accepting server connections, exchanging events, and running common client and server session loops.',
 		see_also is [http_sse_service_handler_protocol]
 	]).
@@ -62,7 +62,13 @@
 	:- mode(open(+atom, --compound), one_or_error).
 	:- info(open/2, [
 		comment is 'Opens a client SSE connection to the given absolute ``http://`` or ``https://`` URL and returns an opaque handle managed by this object. Equivalent to ``open/3`` with an empty options list.',
-		argnames is ['URL', 'SSE']
+		argnames is ['URL', 'SSE'],
+		exceptions is [
+			'``URL`` is a variable' - instantiation_error,
+			'``URL`` is neither a variable nor a supported absolute SSE URL' - domain_error(http_client_sse_url, 'URL'),
+			'``URL`` is a supported absolute SSE URL but uses an unsupported SSE scheme' - domain_error(http_client_sse_scheme, 'Scheme'),
+			'The SSE server response is not a ``200`` ``text/event-stream`` response' - domain_error(http_client_sse_response, 'Response')
+		]
 	]).
 
 	:- public(open/3).
@@ -72,8 +78,8 @@
 		argnames is ['URL', 'SSE', 'Options'],
 		exceptions is [
 			'``URL`` is a variable' - instantiation_error,
-			'``URL`` is not a supported absolute SSE URL' - domain_error(http_client_sse_url, 'URL'),
-			'``URL`` uses an unsupported SSE scheme' - domain_error(http_client_sse_scheme, 'Scheme'),
+			'``URL`` is neither a variable nor a supported absolute SSE URL' - domain_error(http_client_sse_url, 'URL'),
+			'``URL`` is a supported absolute SSE URL but uses an unsupported SSE scheme' - domain_error(http_client_sse_scheme, 'Scheme'),
 			'``Options`` is a variable or a partial list' - instantiation_error,
 			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
 			'``Options`` contains an invalid direct SSE option' - domain_error(http_sse_option, 'Option'),
@@ -86,7 +92,11 @@
 	:- mode(accept(+compound, --compound, --compound), one_or_error).
 	:- info(accept/3, [
 		comment is 'Accepts one incoming SSE request on the given listener using the default response policy and returns an opaque server-side handle together with the accepted client information. Equivalent to ``accept/4`` with an empty options list.',
-		argnames is ['Listener', 'SSE', 'ClientInfo']
+		argnames is ['Listener', 'SSE', 'ClientInfo'],
+		exceptions is [
+			'The SSE request does not exist' - existence_error(http_socket_transport_sse_request, end_of_file),
+			'The SSE request is not a valid normalized SSE request' - domain_error(http_server_core_sse_request, 'Request')
+		]
 	]).
 
 	:- public(accept/4).
@@ -112,8 +122,8 @@
 		argnames is ['SSE', 'Event'],
 		exceptions is [
 			'``SSE`` is a variable' - instantiation_error,
-			'``SSE`` is not an open opaque SSE handle' - domain_error(http_sse_handle, 'SSE'),
-			'``SSE`` refers to a closed opaque SSE handle' - existence_error(http_sse_handle, 'SSE'),
+			'``SSE`` is neither a variable nor an open opaque SSE handle' - domain_error(http_sse_handle, 'SSE'),
+			'``SSE`` is an open opaque SSE handle but refers to a closed opaque SSE handle' - existence_error(http_sse_handle, 'SSE'),
 			'``Event`` is not a valid outbound SSE record' - domain_error(http_sse_event, 'Event')
 		]
 	]).
@@ -125,8 +135,8 @@
 		argnames is ['SSE', 'Event', 'Options'],
 		exceptions is [
 			'``SSE`` is a variable' - instantiation_error,
-			'``SSE`` is not an open opaque SSE handle' - domain_error(http_sse_handle, 'SSE'),
-			'``SSE`` refers to a closed opaque SSE handle' - existence_error(http_sse_handle, 'SSE'),
+			'``SSE`` is neither a variable nor an open opaque SSE handle' - domain_error(http_sse_handle, 'SSE'),
+			'``SSE`` is an open opaque SSE handle but refers to a closed opaque SSE handle' - existence_error(http_sse_handle, 'SSE'),
 			'``Event`` is not a valid outbound SSE record' - domain_error(http_sse_event, 'Event'),
 			'``Options`` is a variable or a partial list' - instantiation_error,
 			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
@@ -141,8 +151,8 @@
 		argnames is ['SSE', 'Event'],
 		exceptions is [
 			'``SSE`` is a variable' - instantiation_error,
-			'``SSE`` is not an open opaque SSE handle' - domain_error(http_sse_handle, 'SSE'),
-			'``SSE`` refers to a closed opaque SSE handle' - existence_error(http_sse_handle, 'SSE'),
+			'``SSE`` is neither a variable nor an open opaque SSE handle' - domain_error(http_sse_handle, 'SSE'),
+			'``SSE`` is an open opaque SSE handle but refers to a closed opaque SSE handle' - existence_error(http_sse_handle, 'SSE'),
 			'A field line uses a line ending other than a line feed or a carriage return immediately followed by a line feed' - domain_error(http_sse_line_ending, 'Byte'),
 			'A field line exceeds the configured maximum length' - domain_error(http_sse_field_length, 'Length')
 		]
@@ -155,7 +165,7 @@
 		argnames is ['SSE', 'Event', 'Options'],
 		exceptions is [
 			'``SSE`` is a variable' - instantiation_error,
-			'``SSE`` is not an open opaque SSE handle' - domain_error(http_sse_handle, 'SSE'),
+			'``SSE`` is neither a variable nor an open opaque SSE handle' - domain_error(http_sse_handle, 'SSE'),
 			'``Options`` is a variable or a partial list' - instantiation_error,
 			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
 			'``Options`` contains an invalid direct SSE option' - domain_error(http_sse_option, 'Option'),
@@ -171,7 +181,7 @@
 		argnames is ['SSE'],
 		exceptions is [
 			'``SSE`` is a variable' - instantiation_error,
-			'``SSE`` is not an open opaque SSE handle' - domain_error(http_sse_handle, 'SSE'),
+			'``SSE`` is neither a variable nor an open opaque SSE handle' - domain_error(http_sse_handle, 'SSE'),
 			'``SSE`` refers to a closed opaque SSE handle' - existence_error(http_sse_handle, 'SSE')
 		]
 	]).
@@ -183,7 +193,7 @@
 		argnames is ['SSE', 'Event'],
 		exceptions is [
 			'``SSE`` is a variable' - instantiation_error,
-			'``SSE`` is not an open opaque SSE handle' - domain_error(http_sse_handle, 'SSE'),
+			'``SSE`` is neither a variable nor an open opaque SSE handle' - domain_error(http_sse_handle, 'SSE'),
 			'``Event`` is not a valid outbound SSE record' - domain_error(http_sse_event, 'Event')
 		]
 	]).
@@ -202,42 +212,77 @@
 	:- mode(send_data(+compound, +atom), one_or_error).
 	:- info(send_data/2, [
 		comment is 'Convenience predicate equivalent to ``send(SSE, data(Data))``.',
-		argnames is ['SSE', 'Data']
+		argnames is ['SSE', 'Data'],
+		exceptions is [
+			'``SSE`` is a variable' - instantiation_error,
+			'``SSE`` is neither a variable nor an open opaque SSE handle' - domain_error(http_sse_handle, 'SSE'),
+			'``SSE`` is an open opaque SSE handle but refers to a closed opaque SSE handle' - existence_error(http_sse_handle, 'SSE'),
+			'``data(Data)`` is not a valid outbound SSE record' - domain_error(http_sse_event, 'Event')
+		]
 	]).
 
 	:- public(send_event/3).
 	:- mode(send_event(+compound, +atom, +atom), one_or_error).
 	:- info(send_event/3, [
 		comment is 'Convenience predicate equivalent to ``send(SSE, event(Type, Data))``.',
-		argnames is ['SSE', 'Type', 'Data']
+		argnames is ['SSE', 'Type', 'Data'],
+		exceptions is [
+			'``SSE`` is a variable' - instantiation_error,
+			'``SSE`` is neither a variable nor an open opaque SSE handle' - domain_error(http_sse_handle, 'SSE'),
+			'``SSE`` is an open opaque SSE handle but refers to a closed opaque SSE handle' - existence_error(http_sse_handle, 'SSE'),
+			'``event(Type, Data)`` is not a valid outbound SSE record' - domain_error(http_sse_event, 'Event')
+		]
 	]).
 
 	:- public(send_id_data/3).
 	:- mode(send_id_data(+compound, +atom, +atom), one_or_error).
 	:- info(send_id_data/3, [
 		comment is 'Convenience predicate equivalent to ``send(SSE, id_data(Id, Data))``.',
-		argnames is ['SSE', 'Id', 'Data']
+		argnames is ['SSE', 'Id', 'Data'],
+		exceptions is [
+			'``SSE`` is a variable' - instantiation_error,
+			'``SSE`` is neither a variable nor an open opaque SSE handle' - domain_error(http_sse_handle, 'SSE'),
+			'``SSE`` is an open opaque SSE handle but refers to a closed opaque SSE handle' - existence_error(http_sse_handle, 'SSE'),
+			'``send(SSE, id_data(Id, Data))`` is not a valid outbound SSE record' - domain_error(http_sse_event, 'Event')
+		]
 	]).
 
 	:- public(send_comment/2).
 	:- mode(send_comment(+compound, +atom), one_or_error).
 	:- info(send_comment/2, [
 		comment is 'Convenience predicate equivalent to ``send(SSE, comment(Text))``. Commonly used to send an idle keep-alive ping that the peer silently discards.',
-		argnames is ['SSE', 'Text']
+		argnames is ['SSE', 'Text'],
+		exceptions is [
+			'``SSE`` is a variable' - instantiation_error,
+			'``SSE`` is neither a variable nor an open opaque SSE handle' - domain_error(http_sse_handle, 'SSE'),
+			'``SSE`` is an open opaque SSE handle but refers to a closed opaque SSE handle' - existence_error(http_sse_handle, 'SSE'),
+			'``send(SSE, comment(Text))`` is not a valid outbound SSE record' - domain_error(http_sse_event, 'Event')
+		]
 	]).
 
 	:- public(send_retry/2).
 	:- mode(send_retry(+compound, +integer), one_or_error).
 	:- info(send_retry/2, [
 		comment is 'Convenience predicate equivalent to ``send(SSE, retry(Milliseconds))``.',
-		argnames is ['SSE', 'Milliseconds']
+		argnames is ['SSE', 'Milliseconds'],
+		exceptions is [
+			'``SSE`` is a variable' - instantiation_error,
+			'``SSE`` is neither a variable nor an open opaque SSE handle' - domain_error(http_sse_handle, 'SSE'),
+			'``SSE`` is an open opaque SSE handle but refers to a closed opaque SSE handle' - existence_error(http_sse_handle, 'SSE'),
+			'``send(SSE, retry(Milliseconds))`` is not a valid outbound SSE record' - domain_error(http_sse_event, 'Event')
+		]
 	]).
 
 	:- public(send_json/2).
 	:- mode(send_json(+compound, +term), one_or_error).
 	:- info(send_json/2, [
 		comment is 'Convenience predicate that JSON-encodes ``JSON`` and sends it as a data-only event.',
-		argnames is ['SSE', 'JSON']
+		argnames is ['SSE', 'JSON'],
+		exceptions is [
+			'``SSE`` is a variable' - instantiation_error,
+			'``SSE`` is neither a variable nor an open opaque SSE handle' - domain_error(http_sse_handle, 'SSE'),
+			'``SSE`` refers to a closed opaque SSE handle' - existence_error(http_sse_handle, 'SSE')
+		]
 	]).
 
 	:- public(receive_json/2).
@@ -246,6 +291,9 @@
 		comment is 'Convenience predicate that reads the next dispatched event and JSON-decodes its data.',
 		argnames is ['SSE', 'JSON'],
 		exceptions is [
+			'``SSE`` is a variable' - instantiation_error,
+			'``SSE`` is neither a variable nor an open opaque SSE handle' - domain_error(http_sse_handle, 'SSE'),
+			'``SSE`` is an open opaque SSE handle but refers to a closed opaque SSE handle' - existence_error(http_sse_handle, 'SSE'),
 			'The event data is not valid JSON text' - domain_error(http_sse_json_text, 'Text')
 		]
 	]).
@@ -254,7 +302,13 @@
 	:- mode(send_term(+compound, +term), one_or_error).
 	:- info(send_term/2, [
 		comment is 'Convenience predicate that writes ``Term`` to an atom and sends it as a data-only event.',
-		argnames is ['SSE', 'Term']
+		argnames is ['SSE', 'Term'],
+		exceptions is [
+			'``SSE`` is a variable' - instantiation_error,
+			'``SSE`` is neither a variable nor an open opaque SSE handle' - domain_error(http_sse_handle, 'SSE'),
+			'``SSE`` is an open opaque SSE handle but refers to a closed opaque SSE handle' - existence_error(http_sse_handle, 'SSE'),
+			'``term(Term)`` is not a valid outbound SSE record' - domain_error(http_sse_event, 'Event')
+		]
 	]).
 
 	:- public(receive_term/2).
@@ -283,7 +337,18 @@
 	:- mode(open_session(+atom, +object_identifier, --compound, --compound), one_or_error).
 	:- info(open_session/4, [
 		comment is 'Convenience wrapper that opens a client SSE connection and runs one callback-driven client session, reconnecting with the last received event id when the connection drops, until the handler signals ``stop`` or reconnection is exhausted. Equivalent to ``open_session/5`` with an empty options list.',
-		argnames is ['URL', 'Handler', 'Response', 'State']
+		argnames is ['URL', 'Handler', 'Response', 'State'],
+		exceptions is [
+			'``URL`` is a variable' - instantiation_error,
+			'``URL`` is neither a variable nor a supported absolute SSE URL' - domain_error(http_client_sse_url, 'URL'),
+			'``URL`` is a supported absolute SSE URL but uses an unsupported SSE scheme' - domain_error(http_client_sse_scheme, 'Scheme'),
+			'``Handler`` is a variable' - instantiation_error,
+			'``Handler`` is neither a variable nor an existing object' - existence_error(object, 'Handler'),
+			'``Handler`` does not conform to ``http_sse_service_handler_protocol``' - domain_error(http_sse_service_handler, 'Handler'),
+			'``URL`` is not a supported absolute SSE URL' - domain_error(http_client_sse_url, 'URL'),
+			'``URL`` uses an unsupported SSE scheme' - domain_error(http_client_sse_scheme, 'Scheme'),
+			'The SSE server response is not a ``200`` ``text/event-stream`` response' - domain_error(http_client_sse_response, 'Response')
+		]
 	]).
 
 	:- public(open_session/5).
@@ -292,8 +357,12 @@
 		comment is 'Convenience wrapper over ``open_session/4`` that also accepts ``reconnect(on|off)`` (default ``on``) and ``max_reconnect_attempts(Count|infinite)`` (default ``infinite``) session loop options, in addition to the direct client options accepted by ``open/3``. Reconnection is attempted immediately, without an inter-attempt delay. ``State`` is unified with ``closed(LastEventId)`` when the session ends.',
 		argnames is ['URL', 'Handler', 'Response', 'State', 'Options'],
 		exceptions is [
+			'``URL`` is a variable' - instantiation_error,
+			'``URL`` is neither a variable nor a supported absolute SSE URL' - domain_error(http_client_sse_url, 'URL'),
+			'``URL`` is a supported absolute SSE URL but uses an unsupported SSE scheme' - domain_error(http_client_sse_scheme, 'Scheme'),
 			'``Handler`` is a variable' - instantiation_error,
-			'``Handler`` does not conform to ``http_sse_service_handler_protocol``' - domain_error(http_sse_service_handler, 'Handler'),
+			'``Handler`` is neither a variable nor an existing object' - existence_error(object, 'Handler'),
+			'``Handler`` is an object but does not conform to ``http_sse_service_handler_protocol``' - domain_error(http_sse_service_handler, 'Handler'),
 			'``Options`` contains an invalid SSE service loop option' - domain_error(http_sse_service_option, 'Option')
 		]
 	]).
@@ -302,7 +371,15 @@
 	:- mode(serve_once(+compound, +object_identifier, --compound, --compound, --compound), one_or_error).
 	:- info(serve_once/5, [
 		comment is 'Convenience wrapper that accepts one incoming SSE request on the given listener using the default response policy and runs one callback-driven server session, repeatedly asking the handler for the next records to write until it signals ``stop``, then closes the connection. Equivalent to ``serve_once/6`` with an empty options list.',
-		argnames is ['Listener', 'Handler', 'Response', 'State', 'ClientInfo']
+		argnames is ['Listener', 'Handler', 'Response', 'State', 'ClientInfo'],
+		exceptions is [
+			'``Handler`` is a variable' - instantiation_error,
+			'``Handler`` is neither a variable nor an existing object' - existence_error(object, 'Handler'),
+			'``Handler`` is an object but does not conform to ``http_sse_service_handler_protocol``' - domain_error(http_sse_service_handler, 'Handler'),
+			'The SSE opening request does not exist' - existence_error(http_socket_transport_sse_request, end_of_file),
+			'The SSE opening response is invalid' - domain_error(http_socket_transport_sse_response, 'Response'),
+			'The delegated HTTP server rejects the response stream' - domain_error(http_response_stream, 'Error')
+		]
 	]).
 
 	:- public(serve_once/6).
@@ -312,7 +389,8 @@
 		argnames is ['Listener', 'Handler', 'Response', 'State', 'ClientInfo', 'Options'],
 		exceptions is [
 			'``Handler`` is a variable' - instantiation_error,
-			'``Handler`` does not conform to ``http_sse_service_handler_protocol``' - domain_error(http_sse_service_handler, 'Handler')
+			'``Handler`` is neither a variable nor an existing object' - existence_error(object, 'Handler'),
+			'``Handler`` is an object but does not conform to ``http_sse_service_handler_protocol``' - domain_error(http_sse_service_handler, 'Handler')
 		]
 	]).
 

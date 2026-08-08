@@ -15,7 +15,7 @@ Multivariate probability distribution predicates.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-04
+| **Date:** 2026-08-08
 
 | **Compilation flags:**
 |    ``static``
@@ -54,6 +54,22 @@ Returns a multivariate normally distributed random vector using the default nume
 | **Mode and number of proofs:**
 |    ``multivariate_normal(+list(number),+list(list(number)),-list(float))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Mean`` is empty:
+|        ``domain_error(minimum_number_of_values(1),Mean)``
+|    ``Covariance`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Covariance`` is neither a partial list nor a list:
+|        ``type_error(list(list(number)),Covariance)``
+|    An element ``Element`` of the ``Covariance`` list is neither a variable nor a list of numbers:
+|        ``type_error(list(number),Element)``
+|    ``Covariance`` dimensions do not match the mean dimension:
+|        ``domain_error(covariance_dimensions(A),Covariance)``
+|    ``Covariance`` is not symmetric:
+|        ``domain_error(symmetric_matrix,Covariance)``
+|    ``Covariance`` is not positive semidefinite:
+|        ``domain_error(positive_semidefinite_matrix,Covariance)``
+
 
 ------------
 
@@ -74,16 +90,34 @@ Returns a multivariate normally distributed random vector using the given non-ne
 |    ``multivariate_normal(+list(number),+list(list(number)),+number,-list(float))`` - ``one_or_error``
 
 | **Exceptions:**
+|    ``Mean`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Mean`` is neither a partial list nor a list:
+|        ``type_error(list,Mean)``
+|    An element ``Element`` of the ``Mean`` list is neither a variable nor a number:
+|        ``type_error(number,Element)``
 |    ``Mean`` is empty:
 |        ``domain_error(minimum_number_of_values(1),Mean)``
 |    ``Tolerance`` is negative:
 |        ``domain_error(non_negative_number,Tolerance)``
+|    ``Covariance`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Covariance`` is neither a partial list nor a list:
+|        ``type_error(list(list(number)),Covariance)``
+|    An element ``Element`` of the ``Covariance`` list is neither a variable nor a list of numbers:
+|        ``type_error(list(number),Element)``
 |    ``Covariance`` dimensions do not match the mean dimension:
 |        ``domain_error(covariance_dimensions(A),Covariance)``
 |    ``Covariance`` is not symmetric:
 |        ``domain_error(symmetric_matrix,Covariance)``
 |    ``Covariance`` is not positive semidefinite:
 |        ``domain_error(positive_semidefinite_matrix,Covariance)``
+|    ``Tolerance`` is a variable:
+|        ``instantiation_error``
+|    ``Tolerance`` is neither a variable nor a number:
+|        ``type_error(number,Tolerance)``
+|    ``Tolerance`` is a nuber but not a non-negative number:
+|        ``domain_error(non_negative_number,Tolerance)``
 
 
 ------------
@@ -103,6 +137,34 @@ Returns the requested number of multivariate normally distributed random row vec
 |    ``multivariate_normal_samples(Count,Mean,Covariance,Samples)``
 | **Mode and number of proofs:**
 |    ``multivariate_normal_samples(+integer,+list(number),+list(list(number)),-list(list(float)))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Count`` is a variable:
+|        ``instantiation_error``
+|    ``Count`` is neither a variable nor an integer:
+|        ``type_error(integer,Count)``
+|    ``Count`` is an integer but not a non-negative integer:
+|        ``domain_error(non_negative_integer,Count)``
+|    ``Mean`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Mean`` is neither a partial list nor a list:
+|        ``type_error(list,Mean)``
+|    An element ``Element`` of the ``Mean`` list is neither a variable nor a number:
+|        ``type_error(number,Element)``
+|    ``Mean`` is empty:
+|        ``domain_error(minimum_number_of_values(1),Mean)``
+|    ``Covariance`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Covariance`` is neither a partial list nor a list:
+|        ``type_error(list(list(number)),Covariance)``
+|    An element ``Element`` of the ``Covariance`` list is neither a variable nor a list of numbers:
+|        ``type_error(list(number),Element)``
+|    ``Covariance`` dimensions do not match the mean dimension:
+|        ``domain_error(covariance_dimensions(A),Covariance)``
+|    ``Covariance`` is not symmetric:
+|        ``domain_error(symmetric_matrix,Covariance)``
+|    ``Covariance`` is not positive semidefinite:
+|        ``domain_error(positive_semidefinite_matrix,Covariance)``
 
 
 ------------
@@ -124,8 +186,30 @@ Returns the requested number of multivariate normally distributed random row vec
 |    ``multivariate_normal_samples(+integer,+list(number),+list(list(number)),+number,-list(list(float)))`` - ``one_or_error``
 
 | **Exceptions:**
-|    ``Count`` is negative:
+|    ``Count`` is a variable:
+|        ``instantiation_error``
+|    ``Count`` is neither a variable nor an integer:
+|        ``type_error(integer,Count)``
+|    ``Count`` is an integer but not a non-negative integer:
 |        ``domain_error(non_negative_integer,Count)``
+|    ``Mean`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Mean`` is neither a partial list nor a list:
+|        ``type_error(list,Mean)``
+|    An element ``Element`` of the ``Mean`` list is neither a variable nor a number:
+|        ``type_error(number,Element)``
+|    ``Covariance`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Covariance`` is neither a partial list nor a list:
+|        ``type_error(list(list(number)),Covariance)``
+|    An element ``Element`` of the ``Covariance`` list is neither a variable nor a list of numbers:
+|        ``type_error(list(number),Element)``
+|    ``Tolerance`` is a variable:
+|        ``instantiation_error``
+|    ``Tolerance`` is neither a variable nor a number:
+|        ``type_error(number,Tolerance)``
+|    ``Tolerance`` is a nuber but not a non-negative number:
+|        ``domain_error(non_negative_number,Tolerance)``
 
 
 ------------
@@ -146,6 +230,36 @@ Computes the multivariate normal density at a point using the default numerical 
 | **Mode and number of proofs:**
 |    ``multivariate_normal_density(+list(number),+list(number),+list(list(number)),-float)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Mean`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Mean`` is neither a partial list nor a list:
+|        ``type_error(list,Mean)``
+|    An element ``Element`` of the ``Mean`` list is neither a variable nor a number:
+|        ``type_error(number,Element)``
+|    ``Mean`` is empty:
+|        ``domain_error(minimum_number_of_values(1),Mean)``
+|    ``Covariance`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Covariance`` is neither a partial list nor a list:
+|        ``type_error(list(list(number)),Covariance)``
+|    An element ``Element`` of the ``Covariance`` list is neither a variable nor a list of numbers:
+|        ``type_error(list(number),Element)``
+|    ``Covariance`` dimensions do not match the mean dimension:
+|        ``domain_error(covariance_dimensions(A),Covariance)``
+|    ``Covariance`` is not symmetric:
+|        ``domain_error(symmetric_matrix,Covariance)``
+|    ``Covariance`` is not positive semidefinite:
+|        ``domain_error(positive_semidefinite_matrix,Covariance)``
+|    ``Point`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Point`` is neither a partial list nor a list:
+|        ``type_error(list,Point)``
+|    An element ``Element`` of the ``Point`` list is neither a variable nor a number:
+|        ``type_error(number,Element)``
+|    ``Point`` dimensions do not match the mean dimension:
+|        ``domain_error(point_dimensions(A),Point)``
+
 
 ------------
 
@@ -164,6 +278,42 @@ Computes the multivariate normal density at a point using the given non-negative
 |    ``multivariate_normal_density(Point,Mean,Covariance,Tolerance,Density)``
 | **Mode and number of proofs:**
 |    ``multivariate_normal_density(+list(number),+list(number),+list(list(number)),+number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Point`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Point`` is neither a partial list nor a list:
+|        ``type_error(list,Point)``
+|    An element ``Element`` of the ``Point`` list is neither a variable nor a number:
+|        ``type_error(number,Element)``
+|    ``Point`` dimensions do not match the mean dimension:
+|        ``domain_error(point_dimensions(A),Point)``
+|    ``Mean`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Mean`` is neither a partial list nor a list:
+|        ``type_error(list,Mean)``
+|    An element ``Element`` of the ``Mean`` list is neither a variable nor a number:
+|        ``type_error(number,Element)``
+|    ``Mean`` is empty:
+|        ``domain_error(minimum_number_of_values(1),Mean)``
+|    ``Covariance`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Covariance`` is neither a partial list nor a list:
+|        ``type_error(list(list(number)),Covariance)``
+|    An element ``Element`` of the ``Covariance`` list is neither a variable nor a list of numbers:
+|        ``type_error(list(number),Element)``
+|    ``Covariance`` dimensions do not match the mean dimension:
+|        ``domain_error(covariance_dimensions(A),Covariance)``
+|    ``Covariance`` is not symmetric:
+|        ``domain_error(symmetric_matrix,Covariance)``
+|    ``Covariance`` is not positive semidefinite:
+|        ``domain_error(positive_semidefinite_matrix,Covariance)``
+|    ``Tolerance`` is a variable:
+|        ``instantiation_error``
+|    ``Tolerance`` is neither a variable nor a number:
+|        ``type_error(number,Tolerance)``
+|    ``Tolerance`` is a nuber but not a non-negative number:
+|        ``domain_error(non_negative_number,Tolerance)``
 
 
 ------------
@@ -184,6 +334,36 @@ Computes the multivariate normal log-density at a point using the default numeri
 | **Mode and number of proofs:**
 |    ``multivariate_normal_log_density(+list(number),+list(number),+list(list(number)),-term)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Point`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Point`` is neither a partial list nor a list:
+|        ``type_error(list,Point)``
+|    An element ``Element`` of the ``Point`` list is neither a variable nor a number:
+|        ``type_error(number,Element)``
+|    ``Point`` dimensions do not match the mean dimension:
+|        ``domain_error(point_dimensions(A),Point)``
+|    ``Mean`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Mean`` is neither a partial list nor a list:
+|        ``type_error(list,Mean)``
+|    An element ``Element`` of the ``Mean`` list is neither a variable nor a number:
+|        ``type_error(number,Element)``
+|    ``Mean`` is empty:
+|        ``domain_error(minimum_number_of_values(1),Mean)``
+|    ``Covariance`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Covariance`` is neither a partial list nor a list:
+|        ``type_error(list(list(number)),Covariance)``
+|    An element ``Element`` of the ``Covariance`` list is neither a variable nor a list of numbers:
+|        ``type_error(list(number),Element)``
+|    ``Covariance`` dimensions do not match the mean dimension:
+|        ``domain_error(covariance_dimensions(A),Covariance)``
+|    ``Covariance`` is not symmetric:
+|        ``domain_error(symmetric_matrix,Covariance)``
+|    ``Covariance`` is not positive semidefinite:
+|        ``domain_error(positive_semidefinite_matrix,Covariance)``
+
 
 ------------
 
@@ -202,6 +382,44 @@ Computes the multivariate normal log-density at a point using the given non-nega
 |    ``multivariate_normal_log_density(Point,Mean,Covariance,Tolerance,LogDensity)``
 | **Mode and number of proofs:**
 |    ``multivariate_normal_log_density(+list(number),+list(number),+list(list(number)),+number,-term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Point`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Point`` is neither a partial list nor a list:
+|        ``type_error(list,Point)``
+|    An element ``Element`` of the ``Point`` list is neither a variable nor a number:
+|        ``type_error(number,Element)``
+|    ``Point`` dimensions do not match the mean dimension:
+|        ``domain_error(point_dimensions(A),Point)``
+|    ``Tolerance`` is negative:
+|        ``domain_error(non_negative_number,Tolerance)``
+|    ``Mean`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Mean`` is neither a partial list nor a list:
+|        ``type_error(list,Mean)``
+|    An element ``Element`` of the ``Mean`` list is neither a variable nor a number:
+|        ``type_error(number,Element)``
+|    ``Mean`` is empty:
+|        ``domain_error(minimum_number_of_values(1),Mean)``
+|    ``Covariance`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Covariance`` is neither a partial list nor a list:
+|        ``type_error(list(list(number)),Covariance)``
+|    An element ``Element`` of the ``Covariance`` list is neither a variable nor a list of numbers:
+|        ``type_error(list(number),Element)``
+|    ``Covariance`` dimensions do not match the mean dimension:
+|        ``domain_error(covariance_dimensions(A),Covariance)``
+|    ``Covariance`` is not symmetric:
+|        ``domain_error(symmetric_matrix,Covariance)``
+|    ``Covariance`` is not positive semidefinite:
+|        ``domain_error(positive_semidefinite_matrix,Covariance)``
+|    ``Tolerance`` is a variable:
+|        ``instantiation_error``
+|    ``Tolerance`` is neither a variable nor a number:
+|        ``type_error(number,Tolerance)``
+|    ``Tolerance`` is a nuber but not a non-negative number:
+|        ``domain_error(non_negative_number,Tolerance)``
 
 
 ------------
@@ -223,8 +441,26 @@ Computes the squared Mahalanobis distance using the default numerical tolerance 
 |    ``squared_mahalanobis_distance(+list(number),+list(number),+list(list(number)),-float)`` - ``one_or_error``
 
 | **Exceptions:**
+|    ``Point`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Point`` is neither a partial list nor a list:
+|        ``type_error(list,Point)``
+|    An element ``Element`` of the ``Point`` list is neither a variable nor a number:
+|        ``type_error(number,Element)``
 |    ``Point`` is outside the affine support of ``Covariance``:
 |        ``domain_error(covariance_support,Point)``
+|    ``Mean`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Mean`` is neither a partial list nor a list:
+|        ``type_error(list,Mean)``
+|    An element ``Element`` of the ``Mean`` list is neither a variable nor a number:
+|        ``type_error(number,Element)``
+|    ``Covariance`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Covariance`` is neither a partial list nor a list:
+|        ``type_error(list(list(number)),Covariance)``
+|    An element ``Element`` of the ``Covariance`` list is neither a variable nor a list of numbers:
+|        ``type_error(list(number),Element)``
 
 
 ------------
@@ -246,8 +482,32 @@ Computes the squared Mahalanobis distance using the given non-negative numerical
 |    ``squared_mahalanobis_distance(+list(number),+list(number),+list(list(number)),+number,-float)`` - ``one_or_error``
 
 | **Exceptions:**
+|    ``Point`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Point`` is neither a partial list nor a list:
+|        ``type_error(list,Point)``
+|    An element ``Element`` of the ``Point`` list is neither a variable nor a number:
+|        ``type_error(number,Element)``
 |    ``Point`` is outside the affine support of ``Covariance``:
 |        ``domain_error(covariance_support,Point)``
+|    ``Mean`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Mean`` is neither a partial list nor a list:
+|        ``type_error(list,Mean)``
+|    An element ``Element`` of the ``Mean`` list is neither a variable nor a number:
+|        ``type_error(number,Element)``
+|    ``Covariance`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Covariance`` is neither a partial list nor a list:
+|        ``type_error(list(list(number)),Covariance)``
+|    An element ``Element`` of the ``Covariance`` list is neither a variable nor a list of numbers:
+|        ``type_error(list(number),Element)``
+|    ``Tolerance`` is a variable:
+|        ``instantiation_error``
+|    ``Tolerance`` is neither a variable nor a number:
+|        ``type_error(number,Tolerance)``
+|    ``Tolerance`` is a nuber but not a non-negative number:
+|        ``domain_error(non_negative_number,Tolerance)``
 
 
 ------------
@@ -268,6 +528,30 @@ Computes the Mahalanobis distance using the default numerical tolerance of 1.0e-
 | **Mode and number of proofs:**
 |    ``mahalanobis_distance(+list(number),+list(number),+list(list(number)),-float)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Point`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Point`` is neither a partial list nor a list:
+|        ``type_error(list,Point)``
+|    An element ``Element`` of the ``Point`` list is neither a variable nor a number:
+|        ``type_error(number,Element)``
+|    ``Point`` is outside the affine support of ``Covariance``:
+|        ``domain_error(covariance_support,Point)``
+|    ``Point`` dimensions do not match the mean dimension:
+|        ``domain_error(point_dimensions(A),Point)``
+|    ``Mean`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Mean`` is neither a partial list nor a list:
+|        ``type_error(list,Mean)``
+|    An element ``Element`` of the ``Mean`` list is neither a variable nor a number:
+|        ``type_error(number,Element)``
+|    ``Covariance`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Covariance`` is neither a partial list nor a list:
+|        ``type_error(list(list(number)),Covariance)``
+|    An element ``Element`` of the ``Covariance`` list is neither a variable nor a list of numbers:
+|        ``type_error(list(number),Element)``
+
 
 ------------
 
@@ -286,6 +570,36 @@ Computes the Mahalanobis distance using the given non-negative numerical toleran
 |    ``mahalanobis_distance(Point,Mean,Covariance,Tolerance,Distance)``
 | **Mode and number of proofs:**
 |    ``mahalanobis_distance(+list(number),+list(number),+list(list(number)),+number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Point`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Point`` is neither a partial list nor a list:
+|        ``type_error(list,Point)``
+|    An element ``Element`` of the ``Point`` list is neither a variable nor a number:
+|        ``type_error(number,Element)``
+|    ``Point`` is outside the affine support of ``Covariance``:
+|        ``domain_error(covariance_support,Point)``
+|    ``Point`` dimensions do not match the mean dimension:
+|        ``domain_error(point_dimensions(A),Point)``
+|    ``Mean`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Mean`` is neither a partial list nor a list:
+|        ``type_error(list,Mean)``
+|    An element ``Element`` of the ``Mean`` list is neither a variable nor a number:
+|        ``type_error(number,Element)``
+|    ``Covariance`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Covariance`` is neither a partial list nor a list:
+|        ``type_error(list(list(number)),Covariance)``
+|    An element ``Element`` of the ``Covariance`` list is neither a variable nor a list of numbers:
+|        ``type_error(list(number),Element)``
+|    ``Tolerance`` is a variable:
+|        ``instantiation_error``
+|    ``Tolerance`` is neither a variable nor a number:
+|        ``type_error(number,Tolerance)``
+|    ``Tolerance`` is a nuber but not a non-negative number:
+|        ``domain_error(non_negative_number,Tolerance)``
 
 
 ------------
@@ -306,6 +620,22 @@ Returns a multivariate Student's t distributed random vector using the default n
 | **Mode and number of proofs:**
 |    ``multivariate_t(+positive_number,+list(number),+list(list(number)),-list(float))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``DegreesOfFreedom`` is a variable:
+|        ``instantiation_error``
+|    ``DegreesOfFreedom`` is neither a variable nor an integer:
+|        ``type_error(integer,DegreesOfFreedom)``
+|    ``DegreesOfFreedom`` is not a positive integer:
+|        ``domain_error(positive_number,DegreesOfFreedom)``
+|    ``Location`` is empty:
+|        ``domain_error(minimum_number_of_values(1),Location)``
+|    ``Scale`` dimensions do not match the location dimension:
+|        ``domain_error(covariance_dimensions(A),Scale)``
+|    ``Scale`` is not symmetric:
+|        ``domain_error(symmetric_matrix,Scale)``
+|    ``Scale`` is not positive semidefinite:
+|        ``domain_error(positive_semidefinite_matrix,Scale)``
+
 
 ------------
 
@@ -324,6 +654,30 @@ Returns a multivariate Student's t distributed random vector using the given non
 |    ``multivariate_t(DegreesOfFreedom,Location,Scale,Tolerance,Sample)``
 | **Mode and number of proofs:**
 |    ``multivariate_t(+positive_number,+list(number),+list(list(number)),+number,-list(float))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``DegreesOfFreedom`` is a variable:
+|        ``instantiation_error``
+|    ``DegreesOfFreedom`` is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom)``
+|    ``DegreesOfFreedom`` is a number but not a positive number:
+|        ``domain_error(positive_number,DegreesOfFreedom)``
+|    ``Tolerance`` is negative:
+|        ``domain_error(non_negative_number,Tolerance)``
+|    ``Location`` is empty:
+|        ``domain_error(minimum_number_of_values(1),Location)``
+|    ``Scale`` dimensions do not match the location dimension:
+|        ``domain_error(covariance_dimensions(A),Scale)``
+|    ``Scale`` is not symmetric:
+|        ``domain_error(symmetric_matrix,Scale)``
+|    ``Scale`` is not positive semidefinite:
+|        ``domain_error(positive_semidefinite_matrix,Scale)``
+|    ``Tolerance`` is a variable:
+|        ``instantiation_error``
+|    ``Tolerance`` is neither a variable nor a number:
+|        ``type_error(number,Tolerance)``
+|    ``Tolerance`` is a nuber but not a non-negative number:
+|        ``domain_error(non_negative_number,Tolerance)``
 
 
 ------------
@@ -344,6 +698,28 @@ Returns the requested number of multivariate Student's t distributed random row 
 | **Mode and number of proofs:**
 |    ``multivariate_t_samples(+integer,+positive_number,+list(number),+list(list(number)),-list(list(float)))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Count`` is a variable:
+|        ``instantiation_error``
+|    ``Count`` is neither a variable nor an integer:
+|        ``type_error(integer,Count)``
+|    ``Count`` is an integer but not a non-negative integer:
+|        ``domain_error(non_negative_integer,Count)``
+|    ``DegreesOfFreedom`` is a variable:
+|        ``instantiation_error``
+|    ``DegreesOfFreedom`` is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom)``
+|    ``DegreesOfFreedom`` is a number but not a positive number:
+|        ``domain_error(positive_number,DegreesOfFreedom)``
+|    ``Location`` is empty:
+|        ``domain_error(minimum_number_of_values(1),Location)``
+|    ``Scale`` dimensions do not match the location dimension:
+|        ``domain_error(covariance_dimensions(A),Scale)``
+|    ``Scale`` is not symmetric:
+|        ``domain_error(symmetric_matrix,Scale)``
+|    ``Scale`` is not positive semidefinite:
+|        ``domain_error(positive_semidefinite_matrix,Scale)``
+
 
 ------------
 
@@ -362,6 +738,36 @@ Returns the requested number of multivariate Student's t distributed random row 
 |    ``multivariate_t_samples(Count,DegreesOfFreedom,Location,Scale,Tolerance,Samples)``
 | **Mode and number of proofs:**
 |    ``multivariate_t_samples(+integer,+positive_number,+list(number),+list(list(number)),+number,-list(list(float)))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Count`` is a variable:
+|        ``instantiation_error``
+|    ``Count`` is neither a variable nor an integer:
+|        ``type_error(integer,Count)``
+|    ``Count`` is a negative integer:
+|        ``domain_error(non_negative_integer,Count)``
+|    ``DegreesOfFreedom`` is a variable:
+|        ``instantiation_error``
+|    ``DegreesOfFreedom`` is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom)``
+|    ``DegreesOfFreedom`` is a number but not a positive number:
+|        ``domain_error(positive_number,DegreesOfFreedom)``
+|    ``Tolerance`` is negative:
+|        ``domain_error(non_negative_number,Tolerance)``
+|    ``Location`` is empty:
+|        ``domain_error(minimum_number_of_values(1),Location)``
+|    ``Scale`` dimensions do not match the location dimension:
+|        ``domain_error(covariance_dimensions(A),Scale)``
+|    ``Scale`` is not symmetric:
+|        ``domain_error(symmetric_matrix,Scale)``
+|    ``Scale`` is not positive semidefinite:
+|        ``domain_error(positive_semidefinite_matrix,Scale)``
+|    ``Tolerance`` is a variable:
+|        ``instantiation_error``
+|    ``Tolerance`` is neither a variable nor a number:
+|        ``type_error(number,Tolerance)``
+|    ``Tolerance`` is a nuber but not a non-negative number:
+|        ``domain_error(non_negative_number,Tolerance)``
 
 
 ------------
@@ -382,6 +788,30 @@ Computes the multivariate Student's t density using the default numerical tolera
 | **Mode and number of proofs:**
 |    ``multivariate_t_density(+list(number),+positive_number,+list(number),+list(list(number)),-float)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Point`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Point`` is neither a partial list nor a list:
+|        ``type_error(list,Point)``
+|    An element ``Element`` of the ``Point`` list is neither a variable nor a number:
+|        ``type_error(number,Element)``
+|    ``Point`` dimensions do not match the location dimension:
+|        ``domain_error(point_dimensions(A),Point)``
+|    ``DegreesOfFreedom`` is a variable:
+|        ``instantiation_error``
+|    ``DegreesOfFreedom`` is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom)``
+|    ``DegreesOfFreedom`` is a number but not a positive number:
+|        ``domain_error(positive_number,DegreesOfFreedom)``
+|    ``Location`` is empty:
+|        ``domain_error(minimum_number_of_values(1),Location)``
+|    ``Scale`` dimensions do not match the location dimension:
+|        ``domain_error(covariance_dimensions(A),Scale)``
+|    ``Scale`` is not symmetric:
+|        ``domain_error(symmetric_matrix,Scale)``
+|    ``Scale`` is not positive semidefinite:
+|        ``domain_error(positive_semidefinite_matrix,Scale)``
+
 
 ------------
 
@@ -400,6 +830,36 @@ Computes the multivariate Student's t density using the given non-negative numer
 |    ``multivariate_t_density(Point,DegreesOfFreedom,Location,Scale,Tolerance,Density)``
 | **Mode and number of proofs:**
 |    ``multivariate_t_density(+list(number),+positive_number,+list(number),+list(list(number)),+number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Point`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Point`` is neither a partial list nor a list:
+|        ``type_error(list,Point)``
+|    An element ``Element`` of the ``Point`` list is neither a variable nor a number:
+|        ``type_error(number,Element)``
+|    ``Point`` dimensions do not match the location dimension:
+|        ``domain_error(point_dimensions(A),Point)``
+|    ``DegreesOfFreedom`` is a variable:
+|        ``instantiation_error``
+|    ``DegreesOfFreedom`` is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom)``
+|    ``DegreesOfFreedom`` is a number but not a positive number:
+|        ``domain_error(positive_number,DegreesOfFreedom)``
+|    ``Location`` is empty:
+|        ``domain_error(minimum_number_of_values(1),Location)``
+|    ``Scale`` dimensions do not match the location dimension:
+|        ``domain_error(covariance_dimensions(A),Scale)``
+|    ``Scale`` is not symmetric:
+|        ``domain_error(symmetric_matrix,Scale)``
+|    ``Scale`` is not positive semidefinite:
+|        ``domain_error(positive_semidefinite_matrix,Scale)``
+|    ``Tolerance`` is a variable:
+|        ``instantiation_error``
+|    ``Tolerance`` is neither a variable nor a number:
+|        ``type_error(number,Tolerance)``
+|    ``Tolerance`` is a nuber but not a non-negative number:
+|        ``domain_error(non_negative_number,Tolerance)``
 
 
 ------------
@@ -420,6 +880,30 @@ Computes the multivariate Student's t log-density using the default numerical to
 | **Mode and number of proofs:**
 |    ``multivariate_t_log_density(+list(number),+positive_number,+list(number),+list(list(number)),-term)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Point`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Point`` is neither a partial list nor a list:
+|        ``type_error(list,Point)``
+|    An element ``Element`` of the ``Point`` list is neither a variable nor a number:
+|        ``type_error(number,Element)``
+|    ``Point`` dimensions do not match the location dimension:
+|        ``domain_error(point_dimensions(A),Point)``
+|    ``DegreesOfFreedom`` is a variable:
+|        ``instantiation_error``
+|    ``DegreesOfFreedom`` is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom)``
+|    ``DegreesOfFreedom`` is a number but not a positive number:
+|        ``domain_error(positive_number,DegreesOfFreedom)``
+|    ``Location`` is empty:
+|        ``domain_error(minimum_number_of_values(1),Location)``
+|    ``Scale`` dimensions do not match the location dimension:
+|        ``domain_error(covariance_dimensions(A),Scale)``
+|    ``Scale`` is not symmetric:
+|        ``domain_error(symmetric_matrix,Scale)``
+|    ``Scale`` is not positive semidefinite:
+|        ``domain_error(positive_semidefinite_matrix,Scale)``
+
 
 ------------
 
@@ -438,6 +922,36 @@ Computes the multivariate Student's t log-density using the given non-negative n
 |    ``multivariate_t_log_density(Point,DegreesOfFreedom,Location,Scale,Tolerance,LogDensity)``
 | **Mode and number of proofs:**
 |    ``multivariate_t_log_density(+list(number),+positive_number,+list(number),+list(list(number)),+number,-term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Point`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Point`` is neither a partial list nor a list:
+|        ``type_error(list,Point)``
+|    An element ``Element`` of the ``Point`` list is neither a variable nor a number:
+|        ``type_error(number,Element)``
+|    ``Point`` dimensions do not match the location dimension:
+|        ``domain_error(point_dimensions(A),Point)``
+|    ``DegreesOfFreedom`` is a variable:
+|        ``instantiation_error``
+|    ``DegreesOfFreedom`` is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom)``
+|    ``DegreesOfFreedom`` is a number but not a positive number:
+|        ``domain_error(positive_number,DegreesOfFreedom)``
+|    ``Location`` is empty:
+|        ``domain_error(minimum_number_of_values(1),Location)``
+|    ``Scale`` dimensions do not match the location dimension:
+|        ``domain_error(covariance_dimensions(A),Scale)``
+|    ``Scale`` is not symmetric:
+|        ``domain_error(symmetric_matrix,Scale)``
+|    ``Scale`` is not positive semidefinite:
+|        ``domain_error(positive_semidefinite_matrix,Scale)``
+|    ``Tolerance`` is a variable:
+|        ``instantiation_error``
+|    ``Tolerance`` is neither a variable nor a number:
+|        ``type_error(number,Tolerance)``
+|    ``Tolerance`` is a nuber but not a non-negative number:
+|        ``domain_error(non_negative_number,Tolerance)``
 
 
 ------------
@@ -458,6 +972,28 @@ Returns an additive-log-ratio logistic-normal random vector using the default nu
 | **Mode and number of proofs:**
 |    ``logistic_normal(+list(number),+list(list(number)),-list(float))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Mean`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Mean`` is neither a partial list nor a list:
+|        ``type_error(list,Mean)``
+|    An element ``Element`` of the ``Mean`` list is neither a variable nor a number:
+|        ``type_error(number,Element)``
+|    ``Mean`` is empty:
+|        ``domain_error(minimum_number_of_values(1),Mean)``
+|    ``Covariance`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Covariance`` is neither a partial list nor a list:
+|        ``type_error(list(list(number)),Covariance)``
+|    An element ``Element`` of the ``Covariance`` list is neither a variable nor a list of numbers:
+|        ``type_error(list(number),Element)``
+|    ``Covariance`` dimensions do not match the mean dimension:
+|        ``domain_error(covariance_dimensions(A),Covariance)``
+|    ``Covariance`` is not symmetric:
+|        ``domain_error(symmetric_matrix,Covariance)``
+|    ``Covariance`` is not positive semidefinite:
+|        ``domain_error(positive_semidefinite_matrix,Covariance)``
+
 
 ------------
 
@@ -476,6 +1012,34 @@ Returns an additive-log-ratio logistic-normal random vector using the given non-
 |    ``logistic_normal(Mean,Covariance,Tolerance,Sample)``
 | **Mode and number of proofs:**
 |    ``logistic_normal(+list(number),+list(list(number)),+number,-list(float))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Mean`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Mean`` is neither a partial list nor a list:
+|        ``type_error(list,Mean)``
+|    An element ``Element`` of the ``Mean`` list is neither a variable nor a number:
+|        ``type_error(number,Element)``
+|    ``Mean`` is empty:
+|        ``domain_error(minimum_number_of_values(1),Mean)``
+|    ``Covariance`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Covariance`` is neither a partial list nor a list:
+|        ``type_error(list(list(number)),Covariance)``
+|    An element ``Element`` of the ``Covariance`` list is neither a variable nor a list of numbers:
+|        ``type_error(list(number),Element)``
+|    ``Covariance`` dimensions do not match the mean dimension:
+|        ``domain_error(covariance_dimensions(A),Covariance)``
+|    ``Covariance`` is not symmetric:
+|        ``domain_error(symmetric_matrix,Covariance)``
+|    ``Covariance`` is not positive semidefinite:
+|        ``domain_error(positive_semidefinite_matrix,Covariance)``
+|    ``Tolerance`` is a variable:
+|        ``instantiation_error``
+|    ``Tolerance`` is neither a variable nor a number:
+|        ``type_error(number,Tolerance)``
+|    ``Tolerance`` is a nuber but not a non-negative number:
+|        ``domain_error(non_negative_number,Tolerance)``
 
 
 ------------
@@ -496,6 +1060,34 @@ Returns the requested number of additive-log-ratio logistic-normal random row ve
 | **Mode and number of proofs:**
 |    ``logistic_normal_samples(+integer,+list(number),+list(list(number)),-list(list(float)))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Count`` is a variable:
+|        ``instantiation_error``
+|    ``Count`` is neither a variable nor an integer:
+|        ``type_error(integer,Count)``
+|    ``Count`` is an integer but not a non-negative integer:
+|        ``domain_error(non_negative_integer,Count)``
+|    ``Mean`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Mean`` is neither a partial list nor a list:
+|        ``type_error(list,Mean)``
+|    An element ``Element`` of the ``Mean`` list is neither a variable nor a number:
+|        ``type_error(number,Element)``
+|    ``Mean`` is empty:
+|        ``domain_error(minimum_number_of_values(1),Mean)``
+|    ``Covariance`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Covariance`` is neither a partial list nor a list:
+|        ``type_error(list(list(number)),Covariance)``
+|    An element ``Element`` of the ``Covariance`` list is neither a variable nor a list of numbers:
+|        ``type_error(list(number),Element)``
+|    ``Covariance`` dimensions do not match the mean dimension:
+|        ``domain_error(covariance_dimensions(A),Covariance)``
+|    ``Covariance`` is not symmetric:
+|        ``domain_error(symmetric_matrix,Covariance)``
+|    ``Covariance`` is not positive semidefinite:
+|        ``domain_error(positive_semidefinite_matrix,Covariance)``
+
 
 ------------
 
@@ -514,6 +1106,40 @@ Returns the requested number of additive-log-ratio logistic-normal random row ve
 |    ``logistic_normal_samples(Count,Mean,Covariance,Tolerance,Samples)``
 | **Mode and number of proofs:**
 |    ``logistic_normal_samples(+integer,+list(number),+list(list(number)),+number,-list(list(float)))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Count`` is a variable:
+|        ``instantiation_error``
+|    ``Count`` is neither a variable nor an integer:
+|        ``type_error(integer,Count)``
+|    ``Count`` is an integer but not a non-negative integer:
+|        ``domain_error(non_negative_integer,Count)``
+|    ``Mean`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Mean`` is neither a partial list nor a list:
+|        ``type_error(list,Mean)``
+|    An element ``Element`` of the ``Mean`` list is neither a variable nor a number:
+|        ``type_error(number,Element)``
+|    ``Mean`` is empty:
+|        ``domain_error(minimum_number_of_values(1),Mean)``
+|    ``Covariance`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Covariance`` is neither a partial list nor a list:
+|        ``type_error(list(list(number)),Covariance)``
+|    An element ``Element`` of the ``Covariance`` list is neither a variable nor a list of numbers:
+|        ``type_error(list(number),Element)``
+|    ``Covariance`` dimensions do not match the mean dimension:
+|        ``domain_error(covariance_dimensions(A),Covariance)``
+|    ``Covariance`` is not symmetric:
+|        ``domain_error(symmetric_matrix,Covariance)``
+|    ``Covariance`` is not positive semidefinite:
+|        ``domain_error(positive_semidefinite_matrix,Covariance)``
+|    ``Tolerance`` is a variable:
+|        ``instantiation_error``
+|    ``Tolerance`` is neither a variable nor a number:
+|        ``type_error(number,Tolerance)``
+|    ``Tolerance`` is a nuber but not a non-negative number:
+|        ``domain_error(non_negative_number,Tolerance)``
 
 
 ------------

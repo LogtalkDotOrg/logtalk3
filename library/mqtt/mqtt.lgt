@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-04,
+		date is 2026-08-08,
 		comment is 'Portable MQTT 5 client predicates using ``http_transport_protocol`` implementations.'
 	]).
 
@@ -33,21 +33,41 @@
 	:- mode(connect(+atom, --compound, +list), one_or_error).
 	:- info(connect/3, [
 		comment is 'Opens a transport connection for an MQTT or MQTT-over-TLS address and completes the MQTT CONNECT/CONNACK exchange.',
-		argnames is ['Address', 'Connection', 'Options']
+		argnames is ['Address', 'Connection', 'Options'],
+		exceptions is [
+			'``Address`` is a variable' - instantiation_error,
+			'``Address`` is neither a variable nor an atom' - type_error(atom, 'Address'),
+			'``Address`` is an atom but not a valid MQTT address' - domain_error(mqtt_address, 'Address'),
+			'The server rejects the MQTT connection' - domain_error(mqtt_connack_reason_code, 'ReasonCode'),
+			'The server response is not a CONNACK packet' - domain_error(mqtt_packet, expected(connack, 'Packet'))
+		]
 	]).
 
 	:- public(connect/4).
 	:- mode(connect(+atom, +integer, --compound, +list), one_or_error).
 	:- info(connect/4, [
 		comment is 'Opens a transport connection to the given host and port and completes the MQTT CONNECT/CONNACK exchange. The ``scheme/1`` option selects MQTT over TCP or TLS.',
-		argnames is ['Host', 'Port', 'Connection', 'Options']
+		argnames is ['Host', 'Port', 'Connection', 'Options'],
+		exceptions is [
+			'``Host`` or ``Port`` is a variable' - instantiation_error,
+			'``Host`` is neither a variable nor an atom' - type_error(atom, 'Host'),
+			'``Port`` is neither a variable nor an integer' - type_error(integer, 'Port'),
+			'``Port`` is a negative integer' - domain_error(non_negative_integer, 'Port'),
+			'The server rejects the MQTT connection' - domain_error(mqtt_connack_reason_code, 'ReasonCode'),
+			'The server response is not a CONNACK packet' - domain_error(mqtt_packet, expected(connack, 'Packet'))
+		]
 	]).
 
 	:- public(disconnect/2).
 	:- mode(disconnect(+compound, +list), one_or_error).
 	:- info(disconnect/2, [
 		comment is 'Closes an MQTT transport connection. MQTT DISCONNECT packet exchange will be layered on this transport operation.',
-		argnames is ['Connection', 'Options']
+		argnames is ['Connection', 'Options'],
+		exceptions is [
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is not a valid option' - domain_error(option, 'Option')
+		]
 	]).
 
 	:- public(connection_alive/1).
@@ -75,70 +95,119 @@
 	:- mode(publish(+compound, +atom, +term, +list), one_or_error).
 	:- info(publish/4, [
 		comment is 'Publishes a message and waits synchronously for the required MQTT acknowledgement.',
-		argnames is ['Connection', 'Topic', 'Payload', 'Options']
+		argnames is ['Connection', 'Topic', 'Payload', 'Options'],
+		exceptions is [
+			'``Topic`` is not a valid MQTT topic name' - domain_error(mqtt_topic_name, 'Topic'),
+			'``Options`` contains an invalid packet identifier' - domain_error(mqtt_packet_identifier, 'PacketIdentifier'),
+			'``Options`` contains an invalid QoS value' - domain_error(mqtt_qos, 'QoS'),
+			'The server response is not the expected acknowledgement packet' - domain_error(mqtt_packet, expected('Type'-'PacketIdentifier', 'Packet'))
+		]
 	]).
 
 	:- public(subscribe/4).
 	:- mode(subscribe(+compound, +list, --list, +list), one_or_error).
 	:- info(subscribe/4, [
 		comment is 'Subscribes to topic filters and waits synchronously for the matching SUBACK.',
-		argnames is ['Connection', 'TopicFilters', 'Result', 'Options']
+		argnames is ['Connection', 'TopicFilters', 'Result', 'Options'],
+		exceptions is [
+			'``TopicFilters`` is empty' - domain_error(mqtt_subscriptions, []),
+			'An element ``TopicFilter`` is not a valid MQTT topic filter' - domain_error(mqtt_topic_filter, 'TopicFilter'),
+			'``Options`` contains invalid subscription options' - domain_error(mqtt_subscription_options, 'Byte'),
+			'The server response is not the expected SUBACK packet' - domain_error(mqtt_packet, expected(suback-'PacketIdentifier', 'Packet'))
+		]
 	]).
 
 	:- public(unsubscribe/4).
 	:- mode(unsubscribe(+compound, +list, --list, +list), one_or_error).
 	:- info(unsubscribe/4, [
 		comment is 'Unsubscribes from topic filters and waits synchronously for the matching UNSUBACK.',
-		argnames is ['Connection', 'TopicFilters', 'Result', 'Options']
+		argnames is ['Connection', 'TopicFilters', 'Result', 'Options'],
+		exceptions is [
+			'``TopicFilters`` is empty' - domain_error(mqtt_topic_filters, []),
+			'An element ``TopicFilter`` is not a valid MQTT topic filter' - domain_error(mqtt_topic_filter, 'TopicFilter'),
+			'The server response is not the expected UNSUBACK packet' - domain_error(mqtt_packet, expected(unsuback-'PacketIdentifier', 'Packet'))
+		]
 	]).
 
 	:- public(receive/3).
 	:- mode(receive(+compound, --compound, +list), one_or_error).
 	:- info(receive/3, [
 		comment is 'Receives the next MQTT packet.',
-		argnames is ['Connection', 'Message', 'Options']
+		argnames is ['Connection', 'Message', 'Options'],
+		exceptions is [
+			'The connection input ends before a complete packet is read' - domain_error(mqtt_packet_stream, unexpected_end_of_file),
+			'The received bytes do not encode a valid MQTT packet' - domain_error(mqtt_packet, 'Packet')
+		]
 	]).
 
 	:- public(send_pingreq/1).
 	:- mode(send_pingreq(+compound), one_or_error).
 	:- info(send_pingreq/1, [
 		comment is 'Sends a PINGREQ packet.',
-		argnames is ['Connection']
+		argnames is ['Connection'],
+		exceptions is [
+			'The PINGREQ packet cannot be written to the connection output stream' - resource_error(mqtt_packet_stream)
+		]
 	]).
 
 	:- public(ping/2).
 	:- mode(ping(+compound, +list), one_or_error).
 	:- info(ping/2, [
 		comment is 'Sends PINGREQ and waits synchronously for PINGRESP.',
-		argnames is ['Connection', 'Options']
+		argnames is ['Connection', 'Options'],
+		exceptions is [
+			'The connection input ends before a complete packet is read' - domain_error(mqtt_packet_stream, unexpected_end_of_file),
+			'The server response is not a PINGRESP packet' - domain_error(mqtt_packet, expected(pingresp, 'Packet'))
+		]
 	]).
 
 	:- public(encode_packet/2).
 	:- mode(encode_packet(+compound, --list(integer)), one_or_error).
 	:- info(encode_packet/2, [
 		comment is 'Encodes a normalized MQTT packet term.',
-		argnames is ['Packet', 'Bytes']
+		argnames is ['Packet', 'Bytes'],
+		exceptions is [
+			'``Packet`` contains an invalid MQTT field value' - domain_error(mqtt_packet, 'Packet'),
+			'``Packet`` has a packet type that is not yet supported' - resource_error(mqtt_packet_support)
+		]
 	]).
 
 	:- public(decode_packet/2).
 	:- mode(decode_packet(+list(integer), --compound), one_or_error).
 	:- info(decode_packet/2, [
 		comment is 'Decodes bytes into a normalized MQTT packet term.',
-		argnames is ['Bytes', 'Packet']
+		argnames is ['Bytes', 'Packet'],
+		exceptions is [
+			'``Bytes`` contains an invalid MQTT packet encoding' - domain_error(mqtt_packet, 'Bytes'),
+			'``Bytes`` contains bytes after the encoded packet' - domain_error(mqtt_packet_trailing_bytes, 'Rest'),
+			'``Bytes`` encodes a packet type that is not yet supported' - resource_error(mqtt_packet_support)
+		]
 	]).
 
 	:- private(resolve_address/4).
 	:- mode(resolve_address(+atom, -atom, -atom, -integer), one_or_error).
 	:- info(resolve_address/4, [
 		comment is 'Resolves an MQTT address into scheme, host, and port.',
-		argnames is ['Address', 'Scheme', 'Host', 'Port']
+		argnames is ['Address', 'Scheme', 'Host', 'Port'],
+		exceptions is [
+			'``Address`` is a variable' - instantiation_error,
+			'``Address`` is neither a variable nor an atom' - type_error(atom, 'Address'),
+			'``Address`` is an atom but not a valid MQTT address' - domain_error(mqtt_address, 'Address'),
+			'``Address`` contains an invalid authority' - domain_error(mqtt_address_authority, 'Authority')
+		]
 	]).
 
 	:- private(resolve_transport/3).
 	:- mode(resolve_transport(+atom, +object_identifier, -object_identifier), one_or_error).
 	:- info(resolve_transport/3, [
 		comment is 'Resolves an explicit or default transport object for the given MQTT scheme.',
-		argnames is ['Scheme', 'Transport0', 'Transport']
+		argnames is ['Scheme', 'Transport0', 'Transport'],
+		exceptions is [
+			'``Transport0`` is a variable' - instantiation_error,
+			'``Transport0`` is neither a variable nor an existing object' - existence_error(object, 'Transport0'),
+			'``Transport0`` does not implement ``http_transport_protocol``' - domain_error(http_transport_protocol_object, 'Transport0'),
+			'``Transport0`` does not support ``Scheme``' - consistency_error(mqtt_options, scheme('Scheme'), transport('Transport0'))
+		]
 	]).
 
 	:- private(append_tls_transport/3).
@@ -152,154 +221,239 @@
 	:- mode(write_packet(+stream, +compound), one_or_error).
 	:- info(write_packet/2, [
 		comment is 'Encodes and writes an MQTT packet to a binary output stream.',
-		argnames is ['Output', 'Packet']
+		argnames is ['Output', 'Packet'],
+		exceptions is [
+			'``Packet`` is not a supported normalized MQTT packet' - resource_error(mqtt_packet_support),
+			'``Output`` cannot be written or flushed' - resource_error(mqtt_packet_stream)
+		]
 	]).
 
 	:- private(read_packet/2).
 	:- mode(read_packet(+stream, --compound), one_or_error).
 	:- info(read_packet/2, [
 		comment is 'Reads and decodes one MQTT packet from a binary input stream.',
-		argnames is ['Input', 'Packet']
+		argnames is ['Input', 'Packet'],
+		exceptions is [
+			'``Input`` ends before a complete packet is read' - domain_error(mqtt_packet_stream, unexpected_end_of_file),
+			'``Input`` contains an invalid MQTT packet encoding' - domain_error(mqtt_packet, 'Packet')
+		]
 	]).
 
 	:- private(encode_uint8/2).
 	:- mode(encode_uint8(+integer, -list(integer)), one_or_error).
 	:- info(encode_uint8/2, [
 		comment is 'Encodes an unsigned 8-bit integer.',
-		argnames is ['Value', 'Bytes']
+		argnames is ['Value', 'Bytes'],
+		exceptions is [
+			'``Value`` is a variable' - instantiation_error,
+			'``Value`` is neither a variable nor an integer' - type_error(integer, 'Value'),
+			'``Value`` is outside the unsigned 8-bit integer range' - domain_error(between(0, 255), 'Value')
+		]
 	]).
 
 	:- private(decode_uint8/3).
 	:- mode(decode_uint8(+list(integer), -integer, -list(integer)), one_or_error).
 	:- info(decode_uint8/3, [
 		comment is 'Decodes an unsigned 8-bit integer.',
-		argnames is ['Bytes', 'Value', 'Rest']
+		argnames is ['Bytes', 'Value', 'Rest'],
+		exceptions is [
+			'The first element of ``Bytes`` is not a byte' - type_error(byte, 'Byte')
+		]
 	]).
 
 	:- private(encode_uint16/2).
 	:- mode(encode_uint16(+integer, -list(integer)), one_or_error).
 	:- info(encode_uint16/2, [
 		comment is 'Encodes an unsigned 16-bit integer in network byte order.',
-		argnames is ['Value', 'Bytes']
+		argnames is ['Value', 'Bytes'],
+		exceptions is [
+			'``Value`` is a variable' - instantiation_error,
+			'``Value`` is neither a variable nor an integer' - type_error(integer, 'Value'),
+			'``Value`` is outside the unsigned 16-bit integer range' - domain_error(between(0, 65535), 'Value')
+		]
 	]).
 
 	:- private(decode_uint16/3).
 	:- mode(decode_uint16(+list(integer), -integer, -list(integer)), one_or_error).
 	:- info(decode_uint16/3, [
 		comment is 'Decodes an unsigned 16-bit integer in network byte order.',
-		argnames is ['Bytes', 'Value', 'Rest']
+		argnames is ['Bytes', 'Value', 'Rest'],
+		exceptions is [
+			'One of the first two elements of ``Bytes`` is not a byte' - type_error(byte, 'Byte')
+		]
 	]).
 
 	:- private(encode_uint32/2).
 	:- mode(encode_uint32(+integer, -list(integer)), one_or_error).
 	:- info(encode_uint32/2, [
 		comment is 'Encodes an unsigned 32-bit integer in network byte order.',
-		argnames is ['Value', 'Bytes']
+		argnames is ['Value', 'Bytes'],
+		exceptions is [
+			'``Value`` is a variable' - instantiation_error,
+			'``Value`` is neither a variable nor an integer' - type_error(integer, 'Value'),
+			'``Value`` is outside the unsigned 32-bit integer range' - domain_error(between(0, 4294967295), 'Value')
+		]
 	]).
 
 	:- private(decode_uint32/3).
 	:- mode(decode_uint32(+list(integer), -integer, -list(integer)), one_or_error).
 	:- info(decode_uint32/3, [
 		comment is 'Decodes an unsigned 32-bit integer in network byte order.',
-		argnames is ['Bytes', 'Value', 'Rest']
+		argnames is ['Bytes', 'Value', 'Rest'],
+		exceptions is [
+			'One of the first four elements of ``Bytes`` is not a byte' - type_error(byte, 'Byte')
+		]
 	]).
 
 	:- private(encode_varint/2).
 	:- mode(encode_varint(+integer, -list(integer)), one_or_error).
 	:- info(encode_varint/2, [
 		comment is 'Encodes an MQTT variable byte integer.',
-		argnames is ['Value', 'Bytes']
+		argnames is ['Value', 'Bytes'],
+		exceptions is [
+			'``Value`` is a variable' - instantiation_error,
+			'``Value`` is neither a variable nor an integer' - type_error(integer, 'Value'),
+			'``Value`` is outside the MQTT variable byte integer range' - domain_error(between(0, 268435455), 'Value')
+		]
 	]).
 
 	:- private(decode_varint/3).
 	:- mode(decode_varint(+list(integer), -integer, -list(integer)), one_or_error).
 	:- info(decode_varint/3, [
 		comment is 'Decodes an MQTT variable byte integer, rejecting non-minimal encodings and overflows.',
-		argnames is ['Bytes', 'Value', 'Rest']
+		argnames is ['Bytes', 'Value', 'Rest'],
+		exceptions is [
+			'``Bytes`` does not start with a valid, minimally encoded MQTT variable byte integer' - domain_error(mqtt_variable_byte_integer, 'Consumed')
+		]
 	]).
 
 	:- private(encode_utf8_string/2).
 	:- mode(encode_utf8_string(+atom, -list(integer)), one_or_error).
 	:- info(encode_utf8_string/2, [
 		comment is 'Encodes an MQTT UTF-8 encoded string with a two-byte length prefix.',
-		argnames is ['String', 'Bytes']
+		argnames is ['String', 'Bytes'],
+		exceptions is [
+			'``String`` is a variable' - instantiation_error,
+			'``String`` is neither a variable nor atom' - type_error(atom, 'String'),
+			'``String`` is not a valid MQTT UTF-8 string' - domain_error(mqtt_utf8_string, 'Codes')
+		]
 	]).
 
 	:- private(decode_utf8_string/3).
 	:- mode(decode_utf8_string(+list(integer), -atom, -list(integer)), one_or_error).
 	:- info(decode_utf8_string/3, [
 		comment is 'Decodes an MQTT UTF-8 encoded string with a two-byte length prefix.',
-		argnames is ['Bytes', 'String', 'Rest']
+		argnames is ['Bytes', 'String', 'Rest'],
+		exceptions is [
+			'``Bytes`` does not start with a valid MQTT UTF-8 string' - domain_error(mqtt_utf8_string, 'Codes')
+		]
 	]).
 
 	:- private(encode_binary_data/2).
 	:- mode(encode_binary_data(+list(integer), -list(integer)), one_or_error).
 	:- info(encode_binary_data/2, [
 		comment is 'Encodes MQTT binary data with a two-byte length prefix.',
-		argnames is ['Data', 'Bytes']
+		argnames is ['Data', 'Bytes'],
+		exceptions is [
+			'``Data`` is not a list of bytes' - type_error(list(byte), 'Data'),
+			'``Data`` is longer than 65535 bytes' - domain_error(between(0, 65535), 'Length')
+		]
 	]).
 
 	:- private(decode_binary_data/3).
 	:- mode(decode_binary_data(+list(integer), -list(integer), -list(integer)), one_or_error).
 	:- info(decode_binary_data/3, [
 		comment is 'Decodes MQTT binary data with a two-byte length prefix.',
-		argnames is ['Bytes', 'Data', 'Rest']
+		argnames is ['Bytes', 'Data', 'Rest'],
+		exceptions is [
+			'The first two elements of ``Bytes`` do not encode a valid length' - type_error(byte, 'Byte')
+		]
 	]).
 
 	:- private(encode_utf8_string_pair/2).
 	:- mode(encode_utf8_string_pair(+compound, -list(integer)), one_or_error).
 	:- info(encode_utf8_string_pair/2, [
 		comment is 'Encodes an MQTT UTF-8 string pair as two MQTT UTF-8 encoded strings.',
-		argnames is ['Pair', 'Bytes']
+		argnames is ['Pair', 'Bytes'],
+		exceptions is [
+			'An element of ``Pair`` is not an atom' - type_error(atom, 'String'),
+			'An element of ``Pair`` is not a valid MQTT UTF-8 string' - domain_error(mqtt_utf8_string, 'Codes')
+		]
 	]).
 
 	:- private(decode_utf8_string_pair/3).
 	:- mode(decode_utf8_string_pair(+list(integer), -compound, -list(integer)), one_or_error).
 	:- info(decode_utf8_string_pair/3, [
 		comment is 'Decodes an MQTT UTF-8 string pair from two MQTT UTF-8 encoded strings.',
-		argnames is ['Bytes', 'Pair', 'Rest']
+		argnames is ['Bytes', 'Pair', 'Rest'],
+		exceptions is [
+			'``Bytes`` does not start with two valid MQTT UTF-8 strings' - domain_error(mqtt_utf8_string, 'Codes')
+		]
 	]).
 
 	:- private(encode_properties/2).
 	:- mode(encode_properties(+list, -list(integer)), one_or_error).
 	:- info(encode_properties/2, [
 		comment is 'Encodes an MQTT property list with its variable byte integer length prefix.',
-		argnames is ['Properties', 'Bytes']
+		argnames is ['Properties', 'Bytes'],
+		exceptions is [
+			'``Properties`` is a variable or a partial list' - instantiation_error,
+			'``Properties`` is neither a variable nor a list' - type_error(list, 'Properties'),
+			'An element ``Property`` is not a supported MQTT property' - domain_error(mqtt_property, 'Property')
+		]
 	]).
 
 	:- private(decode_properties/3).
 	:- mode(decode_properties(+list(integer), -list, -list(integer)), one_or_error).
 	:- info(decode_properties/3, [
 		comment is 'Decodes an MQTT property list and returns the remaining packet bytes.',
-		argnames is ['Bytes', 'Properties', 'Rest']
+		argnames is ['Bytes', 'Properties', 'Rest'],
+		exceptions is [
+			'``Bytes`` does not contain the declared property bytes' - domain_error(mqtt_properties, 'Bytes'),
+			'``Bytes`` contains an unknown property identifier' - domain_error(mqtt_property_identifier, 'Identifier')
+		]
 	]).
 
 	:- private(encode_property_list/2).
 	:- mode(encode_property_list(+list, -list(integer)), one_or_error).
 	:- info(encode_property_list/2, [
 		comment is 'Encodes MQTT properties without the property length prefix.',
-		argnames is ['Properties', 'Bytes']
+		argnames is ['Properties', 'Bytes'],
+		exceptions is [
+			'An element ``Property`` is not a supported MQTT property' - domain_error(mqtt_property, 'Property')
+		]
 	]).
 
 	:- private(decode_property_list/2).
 	:- mode(decode_property_list(+list(integer), -list), one_or_error).
 	:- info(decode_property_list/2, [
 		comment is 'Decodes MQTT properties from a property body byte list.',
-		argnames is ['Bytes', 'Properties']
+		argnames is ['Bytes', 'Properties'],
+		exceptions is [
+			'``Bytes`` contains an unknown property identifier' - domain_error(mqtt_property_identifier, 'Identifier')
+		]
 	]).
 
 	:- private(encode_property/2).
 	:- mode(encode_property(+compound, -list(integer)), one_or_error).
 	:- info(encode_property/2, [
 		comment is 'Encodes a single MQTT property.',
-		argnames is ['Property', 'Bytes']
+		argnames is ['Property', 'Bytes'],
+		exceptions is [
+			'``Property`` is not a supported MQTT property' - domain_error(mqtt_property, 'Property'),
+			'``Property`` contains an invalid value' - domain_error(mqtt_property_value, 'Name'-'Value')
+		]
 	]).
 
 	:- private(decode_property/3).
 	:- mode(decode_property(+list(integer), -compound, -list(integer)), one_or_error).
 	:- info(decode_property/3, [
 		comment is 'Decodes a single MQTT property.',
-		argnames is ['Bytes', 'Property', 'Rest']
+		argnames is ['Bytes', 'Property', 'Rest'],
+		exceptions is [
+			'``Bytes`` starts with an unknown property identifier' - domain_error(mqtt_property_identifier, 'Identifier'),
+			'``Bytes`` contains an invalid property value' - domain_error(mqtt_property_value, 'Name'-'Value')
+		]
 	]).
 
 	:- private(mqtt_property/3).
@@ -313,14 +467,24 @@
 	:- mode(encode_fixed_header(+atom, +integer, +integer, -list(integer)), one_or_error).
 	:- info(encode_fixed_header/4, [
 		comment is 'Encodes an MQTT fixed header from packet type, flags, and remaining length.',
-		argnames is ['Type', 'Flags', 'RemainingLength', 'Bytes']
+		argnames is ['Type', 'Flags', 'RemainingLength', 'Bytes'],
+		exceptions is [
+			'``Type`` is not a supported MQTT packet type' - domain_error(mqtt_packet_type, 'Type'),
+			'``Flags`` is invalid for ``Type``' - domain_error(mqtt_fixed_header_flags, 'Type'-'Flags'),
+			'``RemainingLength`` is outside the MQTT variable byte integer range' - domain_error(between(0, 268435455), 'RemainingLength')
+		]
 	]).
 
 	:- private(decode_fixed_header/5).
 	:- mode(decode_fixed_header(+list(integer), -atom, -integer, -integer, -list(integer)), one_or_error).
 	:- info(decode_fixed_header/5, [
 		comment is 'Decodes an MQTT fixed header into packet type, flags, remaining length, and remaining bytes.',
-		argnames is ['Bytes', 'Type', 'Flags', 'RemainingLength', 'Rest']
+		argnames is ['Bytes', 'Type', 'Flags', 'RemainingLength', 'Rest'],
+		exceptions is [
+			'``Bytes`` starts with an unsupported MQTT packet type' - domain_error(mqtt_packet_type, 'Code'),
+			'``Bytes`` contains invalid fixed header flags' - domain_error(mqtt_fixed_header_flags, 'Type'-'Flags'),
+			'``Bytes`` contains an invalid MQTT variable byte integer' - domain_error(mqtt_variable_byte_integer, 'Consumed')
+		]
 	]).
 
 	:- uses(list, [

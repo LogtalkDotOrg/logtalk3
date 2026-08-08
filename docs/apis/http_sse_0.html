@@ -426,7 +426,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-07-27</div>
+<div class="line"><strong>Date:</strong> 2026-08-08</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -525,6 +525,27 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">open(+atom,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">URL</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">URL</span></code> is neither a variable nor a supported absolute SSE URL:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_client_sse_url,URL)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">URL</span></code> is a supported absolute SSE URL but uses an unsupported SSE scheme:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_client_sse_scheme,Scheme)</span></code></div>
+</div>
+<div class="line">The SSE server response is not a <code class="docutils literal notranslate"><span class="pre">200</span></code> <code class="docutils literal notranslate"><span class="pre">text/event-stream</span></code> response:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_client_sse_response,Response)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="open-3">
@@ -553,11 +574,11 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">URL</span></code> is not a supported absolute SSE URL:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">URL</span></code> is neither a variable nor a supported absolute SSE URL:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_client_sse_url,URL)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">URL</span></code> uses an unsupported SSE scheme:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">URL</span></code> is a supported absolute SSE URL but uses an unsupported SSE scheme:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_client_sse_scheme,Scheme)</span></code></div>
 </div>
@@ -602,6 +623,19 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">accept(+compound,--compound,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The SSE request does not exist:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_socket_transport_sse_request,end_of_file)</span></code></div>
+</div>
+<div class="line">The SSE request is not a valid normalized SSE request:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_server_core_sse_request,Request)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -686,11 +720,11 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is not an open opaque SSE handle:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is neither a variable nor an open opaque SSE handle:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sse_handle,SSE)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> refers to a closed opaque SSE handle:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is an open opaque SSE handle but refers to a closed opaque SSE handle:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_sse_handle,SSE)</span></code></div>
 </div>
@@ -728,11 +762,11 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is not an open opaque SSE handle:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is neither a variable nor an open opaque SSE handle:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sse_handle,SSE)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> refers to a closed opaque SSE handle:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is an open opaque SSE handle but refers to a closed opaque SSE handle:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_sse_handle,SSE)</span></code></div>
 </div>
@@ -782,11 +816,11 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is not an open opaque SSE handle:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is neither a variable nor an open opaque SSE handle:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sse_handle,SSE)</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> refers to a closed opaque SSE handle:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is an open opaque SSE handle but refers to a closed opaque SSE handle:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_sse_handle,SSE)</span></code></div>
 </div>
@@ -828,7 +862,7 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is not an open opaque SSE handle:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is neither a variable nor an open opaque SSE handle:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sse_handle,SSE)</span></code></div>
 </div>
@@ -882,7 +916,7 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is not an open opaque SSE handle:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is neither a variable nor an open opaque SSE handle:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sse_handle,SSE)</span></code></div>
 </div>
@@ -920,7 +954,7 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is not an open opaque SSE handle:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is neither a variable nor an open opaque SSE handle:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sse_handle,SSE)</span></code></div>
 </div>
@@ -973,6 +1007,27 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">send_data(+compound,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is neither a variable nor an open opaque SSE handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sse_handle,SSE)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is an open opaque SSE handle but refers to a closed opaque SSE handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_sse_handle,SSE)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">data(Data)</span></code> is not a valid outbound SSE record:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sse_event,Event)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="send-event-3">
@@ -992,6 +1047,27 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">send_event(+compound,+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is neither a variable nor an open opaque SSE handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sse_handle,SSE)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is an open opaque SSE handle but refers to a closed opaque SSE handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_sse_handle,SSE)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">event(Type,</span> <span class="pre">Data)</span></code> is not a valid outbound SSE record:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sse_event,Event)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1015,6 +1091,27 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">send_id_data(+compound,+atom,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is neither a variable nor an open opaque SSE handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sse_handle,SSE)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is an open opaque SSE handle but refers to a closed opaque SSE handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_sse_handle,SSE)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">send(SSE,</span> <span class="pre">id_data(Id,</span> <span class="pre">Data))</span></code> is not a valid outbound SSE record:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sse_event,Event)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="send-comment-2">
@@ -1034,6 +1131,27 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">send_comment(+compound,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is neither a variable nor an open opaque SSE handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sse_handle,SSE)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is an open opaque SSE handle but refers to a closed opaque SSE handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_sse_handle,SSE)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">send(SSE,</span> <span class="pre">comment(Text))</span></code> is not a valid outbound SSE record:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sse_event,Event)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1057,6 +1175,27 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">send_retry(+compound,+integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is neither a variable nor an open opaque SSE handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sse_handle,SSE)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is an open opaque SSE handle but refers to a closed opaque SSE handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_sse_handle,SSE)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">send(SSE,</span> <span class="pre">retry(Milliseconds))</span></code> is not a valid outbound SSE record:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sse_event,Event)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="send-json-2">
@@ -1076,6 +1215,23 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">send_json(+compound,+term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is neither a variable nor an open opaque SSE handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sse_handle,SSE)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> refers to a closed opaque SSE handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_sse_handle,SSE)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1102,6 +1258,18 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is neither a variable nor an open opaque SSE handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sse_handle,SSE)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is an open opaque SSE handle but refers to a closed opaque SSE handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_sse_handle,SSE)</span></code></div>
+</div>
 <div class="line">The event data is not valid JSON text:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sse_json_text,Text)</span></code></div>
@@ -1127,6 +1295,27 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">send_term(+compound,+term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is neither a variable nor an open opaque SSE handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sse_handle,SSE)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">SSE</span></code> is an open opaque SSE handle but refers to a closed opaque SSE handle:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_sse_handle,SSE)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">term(Term)</span></code> is not a valid outbound SSE record:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sse_event,Event)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -1210,6 +1399,47 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">open_session(+atom,+object_identifier,--compound,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">URL</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">URL</span></code> is neither a variable nor a supported absolute SSE URL:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_client_sse_url,URL)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">URL</span></code> is a supported absolute SSE URL but uses an unsupported SSE scheme:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_client_sse_scheme,Scheme)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> is neither a variable nor an existing object:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(object,Handler)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> does not conform to <code class="docutils literal notranslate"><span class="pre">http_sse_service_handler_protocol</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sse_service_handler,Handler)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">URL</span></code> is not a supported absolute SSE URL:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_client_sse_url,URL)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">URL</span></code> uses an unsupported SSE scheme:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_client_sse_scheme,Scheme)</span></code></div>
+</div>
+<div class="line">The SSE server response is not a <code class="docutils literal notranslate"><span class="pre">200</span></code> <code class="docutils literal notranslate"><span class="pre">text/event-stream</span></code> response:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_client_sse_response,Response)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="open-session-5">
@@ -1234,11 +1464,27 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">URL</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">URL</span></code> is neither a variable nor a supported absolute SSE URL:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_client_sse_url,URL)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">URL</span></code> is a supported absolute SSE URL but uses an unsupported SSE scheme:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_client_sse_scheme,Scheme)</span></code></div>
+</div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> does not conform to <code class="docutils literal notranslate"><span class="pre">http_sse_service_handler_protocol</span></code>:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> is neither a variable nor an existing object:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(object,Handler)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> is an object but does not conform to <code class="docutils literal notranslate"><span class="pre">http_sse_service_handler_protocol</span></code>:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sse_service_handler,Handler)</span></code></div>
 </div>
@@ -1269,6 +1515,35 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">serve_once(+compound,+object_identifier,--compound,--compound,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> is neither a variable nor an existing object:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(object,Handler)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> is an object but does not conform to <code class="docutils literal notranslate"><span class="pre">http_sse_service_handler_protocol</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sse_service_handler,Handler)</span></code></div>
+</div>
+<div class="line">The SSE opening request does not exist:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(http_socket_transport_sse_request,end_of_file)</span></code></div>
+</div>
+<div class="line">The SSE opening response is invalid:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_socket_transport_sse_response,Response)</span></code></div>
+</div>
+<div class="line">The delegated HTTP server rejects the response stream:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_response_stream,Error)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="serve-once-6">
@@ -1297,7 +1572,11 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> does not conform to <code class="docutils literal notranslate"><span class="pre">http_sse_service_handler_protocol</span></code>:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> is neither a variable nor an existing object:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">existence_error(object,Handler)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Handler</span></code> is an object but does not conform to <code class="docutils literal notranslate"><span class="pre">http_sse_service_handler_protocol</span></code>:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(http_sse_service_handler,Handler)</span></code></div>
 </div>

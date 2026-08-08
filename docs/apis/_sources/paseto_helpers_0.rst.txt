@@ -15,7 +15,7 @@ Protected PASETO v4 framing, PAE, and encoding helpers.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-03
+| **Date:** 2026-08-08
 
 | **Compilation flags:**
 |    ``static``
@@ -77,6 +77,18 @@ Strictly parses a canonical v4 token for Purpose and decodes its body and option
 |    ``parse_token(Token,Purpose,Body,Footer)``
 | **Mode and number of proofs:**
 |    ``parse_token(+atom,+atom,-list(byte),-list(byte))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Token`` is a variable:
+|        ``instantiation_error``
+|    ``Token`` is neither a variable nor an atom:
+|        ``type_error(atom,Token)``
+|    ``Token`` is an atom but does not have the expected PASETO v4 header:
+|        ``domain_error(paseto_v4_token,Token)``
+|    ``Token`` is a PASETO v4 header but has a malformed compact serialization:
+|        ``domain_error(paseto_compact_serialization,malformed)``
+|    ``Token`` contains non-canonical base64url data:
+|        ``representation_error(base64)``
 
 
 ------------

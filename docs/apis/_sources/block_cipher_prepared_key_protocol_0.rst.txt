@@ -15,7 +15,7 @@ Protocol for block ciphers supporting opaque prepared keys for repeated block op
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-03
+| **Date:** 2026-08-08
 
 | **Compilation flags:**
 |    ``static``
@@ -53,6 +53,16 @@ Validates and prepares a key for repeated block encryption or decryption.
 | **Mode and number of proofs:**
 |    ``prepare_key(+list(byte),--compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Key`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Key`` is a list but not with the required number of bytes:
+|        ``type_error(list(byte,KeySize),Key)``
+|    ``Key`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``Key`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+
 
 ------------
 
@@ -72,6 +82,18 @@ Encrypts a plaintext block using an opaque prepared key created by the same ciph
 | **Mode and number of proofs:**
 |    ``encrypt_prepared_block(+compound,+list(byte),--list(byte))`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``PreparedKey`` was not created by this cipher object:
+|        ``domain_error(block_cipher_prepared_key,PreparedKey)``
+|    ``PlaintextBlock`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``PlaintextBlock`` is not a list of the required number of bytes:
+|        ``type_error(list(byte,BlockSize),PlaintextBlock)``
+|    ``PlaintextBlock`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``PlaintextBlock`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
+
 
 ------------
 
@@ -90,6 +112,18 @@ Decrypts a ciphertext block using an opaque prepared key created by the same cip
 |    ``decrypt_prepared_block(PreparedKey,CiphertextBlock,PlaintextBlock)``
 | **Mode and number of proofs:**
 |    ``decrypt_prepared_block(+compound,+list(byte),--list(byte))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``PreparedKey`` was not created by this cipher object:
+|        ``domain_error(block_cipher_prepared_key,PreparedKey)``
+|    ``CiphertextBlock`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``CiphertextBlock`` is not a list of the required number of bytes:
+|        ``type_error(list(byte,BlockSize),CiphertextBlock)``
+|    ``CiphertextBlock`` contains a non-integer byte:
+|        ``type_error(integer,Byte)``
+|    ``CiphertextBlock`` contains an integer outside the byte range:
+|        ``domain_error(byte,Byte)``
 
 
 ------------

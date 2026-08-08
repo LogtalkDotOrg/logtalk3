@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-06,
+		date is 2026-08-08,
 		comment is 'Common orotocol for Ripple-Down Rules models.'
 	]).
 
@@ -39,7 +39,13 @@
 	:- mode(new(-compound, +list(compound)), one_or_error).
 	:- info(new/2, [
 		comment is 'Creates an empty Ripple-Down Rules model using the given options.',
-		argnames is ['Model', 'Options']
+		argnames is ['Model', 'Options'],
+		exceptions is [
+			'``Options`` is a variable or a partial list' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option')
+		]
 	]).
 
 	:- public(classify/3).

@@ -23,7 +23,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-03,
+		date is 2026-08-08,
 		comment is 'Shared validation, block, XOR, and PKCS#7 predicates for block cipher modes.'
 	]).
 
@@ -31,28 +31,55 @@
 	:- mode(prepare_cipher(+object_identifier, +list(byte), --positive_integer, --compound), one_or_error).
 	:- info(prepare_cipher/4, [
 		comment is 'Validates a cipher object, queries its block size, and prepares a key.',
-		argnames is ['Cipher', 'Key', 'BlockSize', 'PreparedKey']
+		argnames is ['Cipher', 'Key', 'BlockSize', 'PreparedKey'],
+		exceptions is [
+			'``Cipher`` is a variable' - instantiation_error,
+			'``Cipher`` is not a variable but does not implement the prepared-key block cipher protocol' - domain_error(block_cipher, 'Cipher'),
+			'``Cipher`` implements he prepared-key block cipher protocol but reports an invalid block size' - domain_error(block_cipher_block_size, 'BlockSize'),
+			'``Key`` is invalid for ``Cipher``' - type_error(list(byte, 'KeySize'), 'Key')
+		]
 	]).
 
 	:- protected(check_bytes/1).
 	:- mode(check_bytes(+list(byte)), one_or_error).
 	:- info(check_bytes/1, [
 		comment is 'Checks a list of bytes.',
-		argnames is ['Bytes']
+		argnames is ['Bytes'],
+		exceptions is [
+			'``Bytes`` is a variable or a partial list' - instantiation_error,
+			'``Bytes`` is neither a partial list nor a list' - type_error(list, 'Bytes'),
+			'An element ``Byte`` of the ``Bytes`` list is neither a variable nor an integer' - type_error(integer, 'Byte'),
+			'An element ``Byte`` of the ``Bytes`` list is an integer but not a valid byte' - domain_error(byte, 'Byte')
+		]
 	]).
 
 	:- protected(check_block/2).
 	:- mode(check_block(+positive_integer, +list(byte)), one_or_error).
 	:- info(check_block/2, [
 		comment is 'Checks a byte list whose length is exactly one block.',
-		argnames is ['BlockSize', 'Block']
+		argnames is ['BlockSize', 'Block'],
+		exceptions is [
+			'``BlockSize`` is a variable' - instantiation_error,
+			'``BlockSize`` is neither a variable nor an integer' - type_error(integer, 'BlockSize'),
+			'``BlockSize`` is an integer but not a positive integer' - domain_error(positive_integer, 'BlockSize'),
+			'``Block`` is a variable or a partial list' - instantiation_error,
+			'``Block`` is not a list of exactly ``BlockSize`` bytes' - type_error(list(byte, 'BlockSize'), 'Block'),
+			'An element ``Byte`` of the `Block`` list is neither a variable nor an integer' - type_error(integer, 'Byte'),
+			'An element ``Byte`` of the ``Block`` list is an integer but not a valid byte' - domain_error(byte, 'Byte')
+		]
 	]).
 
 	:- protected(check_aligned/2).
 	:- mode(check_aligned(+positive_integer, +list(byte)), one_or_error).
 	:- info(check_aligned/2, [
 		comment is 'Checks that a byte-list length is a multiple of the block size.',
-		argnames is ['BlockSize', 'Bytes']
+		argnames is ['BlockSize', 'Bytes'],
+		exceptions is [
+			'``BlockSize`` is a variable' - instantiation_error,
+			'``BlockSize`` is neither a variable nor an integer' - type_error(integer, 'BlockSize'),
+			'``BlockSize`` is an integer but not a positive integer' - domain_error(positive_integer, 'BlockSize'),
+			'``Bytes`` length is not a multiple of ``BlockSize``' - domain_error(block_aligned_byte_length('BlockSize'), 'Bytes')
+		]
 	]).
 
 	:- protected(blocks/3).
@@ -73,14 +100,21 @@
 	:- mode(pkcs7_pad(+positive_integer, +list(byte), --list(byte)), one_or_error).
 	:- info(pkcs7_pad/3, [
 		comment is 'Pads bytes using PKCS#7.',
-		argnames is ['BlockSize', 'Bytes', 'PaddedBytes']
+		argnames is ['BlockSize', 'Bytes', 'PaddedBytes'],
+		exceptions is [
+			'``BlockSize`` exceeds the maximum PKCS#7 block size' - domain_error(pkcs7_block_size, 'BlockSize')
+		]
 	]).
 
 	:- protected(pkcs7_unpad/4).
 	:- mode(pkcs7_unpad(+positive_integer, +list(byte), +term, --list(byte)), one_or_error).
 	:- info(pkcs7_unpad/4, [
 		comment is 'Validates and removes PKCS#7 padding, reporting the supplied error value when padding is invalid.',
-		argnames is ['BlockSize', 'PaddedBytes', 'ErrorValue', 'Bytes']
+		argnames is ['BlockSize', 'PaddedBytes', 'ErrorValue', 'Bytes'],
+		exceptions is [
+			'``BlockSize`` exceeds the maximum PKCS#7 block size' - domain_error(pkcs7_block_size, 'BlockSize'),
+			'``PaddedBytes`` does not contain valid PKCS#7 padding' - domain_error(pkcs7_padding, 'ErrorValue')
+		]
 	]).
 
 	:- uses(list, [
@@ -109,9 +143,12 @@
 
 	check_block(BlockSize, Block) :-
 		context(Context),
+		check(positive_integer, BlockSize, Context),
 		check(list(byte, BlockSize), Block, Context).
 
 	check_aligned(BlockSize, Bytes) :-
+		context(Context),
+		check(positive_integer, BlockSize, Context),
 		length(Bytes, Length),
 		(	Length mod BlockSize =:= 0 ->
 			true

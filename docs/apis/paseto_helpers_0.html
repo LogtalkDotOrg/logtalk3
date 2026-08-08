@@ -430,7 +430,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-08-03</div>
+<div class="line"><strong>Date:</strong> 2026-08-08</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -515,6 +515,31 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">parse_token(+atom,+atom,-list(byte),-list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Token</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Token</span></code> is neither a variable nor an atom:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(atom,Token)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Token</span></code> is an atom but does not have the expected PASETO v4 header:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(paseto_v4_token,Token)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Token</span></code> is a PASETO v4 header but has a malformed compact serialization:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(paseto_compact_serialization,malformed)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Token</span></code> contains non-canonical base64url data:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">representation_error(base64)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />

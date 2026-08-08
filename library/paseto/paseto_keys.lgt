@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-03,
+		date is 2026-08-08,
 		comment is 'Validation and selection for native PASETO v4 key sets.'
 	]).
 
@@ -32,14 +32,23 @@
 	:- mode(validate(+compound), one_or_error).
 	:- info(validate/1, [
 		comment is 'Validates a key_set/1 term containing local/2 and public/2 records.',
-		argnames is ['KeySet']
+		argnames is ['KeySet'],
+		exceptions is [
+			'``KeySet`` is not a valid ``key_set/1`` term' - domain_error(paseto_key_set, 'KeySet'),
+			'``KeySet`` contains an invalid key record ``Record``' - domain_error(paseto_key_record, 'Record')
+		]
 	]).
 
 	:- public(select_keys/4).
 	:- mode(select_keys(+compound, +atom, +term, -list(list(byte))), one_or_error).
 	:- info(select_keys/4, [
 		comment is 'Selects all keys matching Purpose and optional KeyId, preserving key-set order.',
-		argnames is ['KeySet', 'Purpose', 'KeyId', 'Keys']
+		argnames is ['KeySet', 'Purpose', 'KeyId', 'Keys'],
+		exceptions is [
+			'``KeySet`` is not a valid ``key_set/1`` term' - domain_error(paseto_key_set, 'KeySet'),
+			'``KeySet`` contains an invalid key record ``Record``' - domain_error(paseto_key_record, 'Record'),
+			'No key matches ``Purpose`` and ``KeyId``' - existence_error(paseto_key, 'Purpose'-'KeyId')
+		]
 	]).
 
 	:- uses(list, [

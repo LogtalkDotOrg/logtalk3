@@ -433,7 +433,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-08-03</div>
+<div class="line"><strong>Date:</strong> 2026-08-08</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -504,6 +504,27 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">prepare_cipher(+object_identifier,+list(byte),--positive_integer,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Cipher</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Cipher</span></code> is not a variable but does not implement the prepared-key block cipher protocol:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(block_cipher,Cipher)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Cipher</span></code> implements he prepared-key block cipher protocol but reports an invalid block size:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(block_cipher_block_size,BlockSize)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Key</span></code> is invalid for <code class="docutils literal notranslate"><span class="pre">Cipher</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte,KeySize),Key)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="check-bytes-1">
@@ -523,6 +544,27 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">check_bytes(+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Bytes</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Bytes</span></code> is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Bytes)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Byte</span></code> of the <code class="docutils literal notranslate"><span class="pre">Bytes</span></code> list is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Byte)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Byte</span></code> of the <code class="docutils literal notranslate"><span class="pre">Bytes</span></code> list is an integer but not a valid byte:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(byte,Byte)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -546,6 +588,39 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">check_block(+positive_integer,+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">BlockSize</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">BlockSize</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,BlockSize)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">BlockSize</span></code> is an integer but not a positive integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_integer,BlockSize)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Block</span></code> is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Block</span></code> is not a list of exactly <code class="docutils literal notranslate"><span class="pre">BlockSize</span></code> bytes:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list(byte,BlockSize),Block)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Byte</span></code> of the <cite>Block`</cite> list is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Byte)</span></code></div>
+</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Byte</span></code> of the <code class="docutils literal notranslate"><span class="pre">Block</span></code> list is an integer but not a valid byte:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(byte,Byte)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="check-aligned-2">
@@ -565,6 +640,27 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">check_aligned(+positive_integer,+list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">BlockSize</span></code> is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">BlockSize</span></code> is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,BlockSize)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">BlockSize</span></code> is an integer but not a positive integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_integer,BlockSize)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Bytes</span></code> length is not a multiple of <code class="docutils literal notranslate"><span class="pre">BlockSize</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(block_aligned_byte_length(BlockSize),Bytes)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -630,6 +726,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">pkcs7_pad(+positive_integer,+list(byte),--list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">BlockSize</span></code> exceeds the maximum PKCS#7 block size:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(pkcs7_block_size,BlockSize)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="pkcs7-unpad-4">
@@ -649,6 +754,19 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">pkcs7_unpad(+positive_integer,+list(byte),+term,--list(byte))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">BlockSize</span></code> exceeds the maximum PKCS#7 block size:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(pkcs7_block_size,BlockSize)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">PaddedBytes</span></code> does not contain valid PKCS#7 padding:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(pkcs7_padding,ErrorValue)</span></code></div>
+</div>
 </div>
 </div>
 </section>

@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-03,
+		date is 2026-08-08,
 		comment is 'PASETO v4.local and v4.public protocol for byte payloads.'
 	]).
 
@@ -46,63 +46,176 @@
 	:- mode(local_encrypt(+list(byte), +list(byte), -atom), one_or_error).
 	:- info(local_encrypt/3, [
 		comment is 'Encrypts Payload using a 32-byte local Key and empty footer and implicit assertion.',
-		argnames is ['Key', 'Payload', 'Token']
+		argnames is ['Key', 'Payload', 'Token'],
+		exceptions is [
+			'``Key`` is a variable or a partial list' - instantiation_error,
+			'``Key`` is not a list of the required number of bytes' - type_error(list(byte, 32), 'Key'),
+			'``Key`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``Key`` contains an integer outside the byte range' - domain_error(byte, 'Byte'),
+			'``Payload`` is a variable or a partial list' - instantiation_error,
+			'``Payload`` is not a list of the required number of bytes' - type_error(list(byte, 32), 'Payload'),
+			'``Payload`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``Payload`` contains an integer outside the byte range' - domain_error(byte, 'Byte')
+		]
 	]).
 
 	:- public(local_encrypt/5).
 	:- mode(local_encrypt(+list(byte), +list(byte), +list(byte), +list(byte), -atom), one_or_error).
 	:- info(local_encrypt/5, [
 		comment is 'Encrypts Payload using a 32-byte local Key and authenticates Footer and ImplicitAssertion.',
-		argnames is ['Key', 'Payload', 'Footer', 'ImplicitAssertion', 'Token']
+		argnames is ['Key', 'Payload', 'Footer', 'ImplicitAssertion', 'Token'],
+		exceptions is [
+			'``Key`` is a variable or a partial list' - instantiation_error,
+			'``Key`` is not a list of the required number of bytes' - type_error(list(byte, 32), 'Key'),
+			'``Key`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``Key`` contains an integer outside the byte range' - domain_error(byte, 'Byte'),
+			'``Payload`` is a variable or a partial list' - instantiation_error,
+			'``Payload`` is not a list of the required number of bytes' - type_error(list(byte, 32), 'Payload'),
+			'``Payload`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``Payload`` contains an integer outside the byte range' - domain_error(byte, 'Byte'),
+			'``Footer`` is a variable or a partial list' - instantiation_error,
+			'``Footer`` is not a list of the required number of bytes' - type_error(list(byte, 32), 'Footer'),
+			'``Footer`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``Footer`` contains an integer outside the byte range' - domain_error(byte, 'Byte'),
+			'``ImplicitAssertion`` is a variable or a partial list' - instantiation_error,
+			'``ImplicitAssertion`` is not a list of the required number of bytes' - type_error(list(byte, 32), 'ImplicitAssertion'),
+			'``ImplicitAssertion`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``ImplicitAssertion`` contains an integer outside the byte range' - domain_error(byte, 'Byte')
+		]
 	]).
 
 	:- public(local_decrypt/3).
 	:- mode(local_decrypt(+atom, +list(byte), -list(byte)), zero_or_one_or_error).
 	:- info(local_decrypt/3, [
 		comment is 'Authenticates and decrypts a local Token using an empty implicit assertion.',
-		argnames is ['Token', 'Key', 'Payload']
+		argnames is ['Token', 'Key', 'Payload'],
+		exceptions is [
+			'``Token`` is a variable' - instantiation_error,
+			'``Token`` is neither a variable nor an atom' - type_error(atom, 'Token'),
+			'``Token`` is an atom but not a canonical v4.local token' - domain_error(paseto_v4_token, 'Token'),
+			'``Key`` is a variable or a partial list' - instantiation_error,
+			'``Key`` is not a list of the required number of bytes' - type_error(list(byte, 32), 'Key'),
+			'``Key`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``Key`` contains an integer outside the byte range' - domain_error(byte, 'Byte')
+		]
 	]).
 
 	:- public(local_decrypt/5).
 	:- mode(local_decrypt(+atom, +list(byte), +list(byte), -list(byte), -list(byte)), zero_or_one_or_error).
 	:- info(local_decrypt/5, [
 		comment is 'Authenticates and decrypts a local Token using ImplicitAssertion and returns its authenticated Footer.',
-		argnames is ['Token', 'Key', 'ImplicitAssertion', 'Payload', 'Footer']
+		argnames is ['Token', 'Key', 'ImplicitAssertion', 'Payload', 'Footer'],
+		exceptions is [
+			'``Token`` is a variable' - instantiation_error,
+			'``Token`` is neither a variable nor an atom' - type_error(atom, 'Token'),
+			'``Token`` is an atom but not a canonical v4.local token' - domain_error(paseto_v4_token, 'Token'),
+			'``Token`` is a v4.local token but has a malformed compact serialization' - domain_error(paseto_compact_serialization, malformed),
+			'``Token`` contains non-canonical base64url data' - representation_error(base64),
+			'``Token`` has a malformed local payload' - domain_error(paseto_v4_local_payload, 'Token'),
+			'``Key`` is a variable or a partial list' - instantiation_error,
+			'``Key`` is not a list of the required number of bytes' - type_error(list(byte, 32), 'Key'),
+			'``Key`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``Key`` contains an integer outside the byte range' - domain_error(byte, 'Byte'),
+			'``ImplicitAssertion`` is a variable or a partial list' - instantiation_error,
+			'``ImplicitAssertion`` is not a list of the required number of bytes' - type_error(list(byte, 32), 'ImplicitAssertion'),
+			'``ImplicitAssertion`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``ImplicitAssertion`` contains an integer outside the byte range' - domain_error(byte, 'Byte')
+		]
 	]).
 
 	:- public(public_sign/3).
 	:- mode(public_sign(+list(byte), +list(byte), -atom), one_or_error).
 	:- info(public_sign/3, [
 		comment is 'Signs Payload using an Ed25519 Seed and empty footer and implicit assertion.',
-		argnames is ['Seed', 'Payload', 'Token']
+		argnames is ['Seed', 'Payload', 'Token'],
+		exceptions is [
+			'``Seed`` is a variable or a partial list' - instantiation_error,
+			'``Seed`` is not a list of the required number of bytes' - type_error(list(byte, 32), 'Seed'),
+			'``Seed`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``Seed`` contains an integer outside the byte range' - domain_error(byte, 'Byte'),
+			'``Payload`` is a variable or a partial list' - instantiation_error,
+			'``Payload`` is not a list of the required number of bytes' - type_error(list(byte, 32), 'Payload'),
+			'``Payload`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``Payload`` contains an integer outside the byte range' - domain_error(byte, 'Byte')
+		]
 	]).
 
 	:- public(public_sign/5).
 	:- mode(public_sign(+list(byte), +list(byte), +list(byte), +list(byte), -atom), one_or_error).
 	:- info(public_sign/5, [
 		comment is 'Signs Payload using an Ed25519 Seed and authenticates Footer and ImplicitAssertion.',
-		argnames is ['Seed', 'Payload', 'Footer', 'ImplicitAssertion', 'Token']
+		argnames is ['Seed', 'Payload', 'Footer', 'ImplicitAssertion', 'Token'],
+		exceptions is [
+			'``Seed`` is a variable or a partial list' - instantiation_error,
+			'``Seed`` is not a list of the required number of bytes' - type_error(list(byte, 32), 'Seed'),
+			'``Seed`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``Seed`` contains an integer outside the byte range' - domain_error(byte, 'Byte'),
+			'``Payload`` is a variable or a partial list' - instantiation_error,
+			'``Payload`` is not a list of the required number of bytes' - type_error(list(byte, 32), 'Payload'),
+			'``Payload`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``Payload`` contains an integer outside the byte range' - domain_error(byte, 'Byte'),
+			'``Footer`` is a variable or a partial list' - instantiation_error,
+			'``Footer`` is not a list of the required number of bytes' - type_error(list(byte, 32), 'Footer'),
+			'``Footer`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``Footer`` contains an integer outside the byte range' - domain_error(byte, 'Byte'),
+			'``ImplicitAssertion`` is a variable or a partial list' - instantiation_error,
+			'``ImplicitAssertion`` is not a list of the required number of bytes' - type_error(list(byte, 32), 'ImplicitAssertion'),
+			'``ImplicitAssertion`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``ImplicitAssertion`` contains an integer outside the byte range' - domain_error(byte, 'Byte')
+		]
 	]).
 
 	:- public(public_verify/3).
 	:- mode(public_verify(+atom, +list(byte), -list(byte)), zero_or_one_or_error).
 	:- info(public_verify/3, [
 		comment is 'Authenticates a public Token using an Ed25519 public key and empty implicit assertion.',
-		argnames is ['Token', 'PublicKey', 'Payload']
+		argnames is ['Token', 'PublicKey', 'Payload'],
+		exceptions is [
+			'``Token`` is a variable' - instantiation_error,
+			'``Token`` is neither a variable nor an atom' - type_error(atom, 'Token'),
+			'``Token`` is an atom but not a canonical v4.public token' - domain_error(paseto_v4_token, 'Token'),
+			'``PublicKey`` is a variable or a partial list' - instantiation_error,
+			'``PublicKey`` is not a list of the required number of bytes' - type_error(list(byte, 32), 'PublicKey'),
+			'``PublicKey`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``PublicKey`` contains an integer outside the byte range' - domain_error(byte, 'Byte')
+		]
 	]).
 
 	:- public(public_verify/5).
 	:- mode(public_verify(+atom, +list(byte), +list(byte), -list(byte), -list(byte)), zero_or_one_or_error).
 	:- info(public_verify/5, [
 		comment is 'Authenticates a public Token using an Ed25519 public key and ImplicitAssertion and returns its authenticated Footer.',
-		argnames is ['Token', 'PublicKey', 'ImplicitAssertion', 'Payload', 'Footer']
+		argnames is ['Token', 'PublicKey', 'ImplicitAssertion', 'Payload', 'Footer'],
+		exceptions is [
+			'``Token`` is a variable' - instantiation_error,
+			'``Token`` is neither a variable nor an atom' - type_error(atom, 'Token'),
+			'``Token`` is an atom but not a canonical v4 token' - domain_error(paseto_v4_token, 'Token'),
+			'``Token`` is a canonical v4 token but has a malformed compact serialization' - domain_error(paseto_compact_serialization, malformed),
+			'``Token`` contains non-canonical base64url data' - representation_error(base64),
+			'``Token`` has a malformed public payload' - domain_error(paseto_v4_public_payload, 'Token'),
+			'``PublicKey`` is a variable or a partial list' - instantiation_error,
+			'``PublicKey`` is not a list of the required number of bytes' - type_error(list(byte, 32), 'PublicKey'),
+			'``PublicKey`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``PublicKey`` contains an integer outside the byte range' - domain_error(byte, 'Byte'),
+			'``ImplicitAssertion`` is a variable or a partial list' - instantiation_error,
+			'``ImplicitAssertion`` is not a list of the required number of bytes' - type_error(list(byte, 32), 'ImplicitAssertion'),
+			'``ImplicitAssertion`` contains a non-integer byte' - type_error(integer, 'Byte'),
+			'``ImplicitAssertion`` contains an integer outside the byte range' - domain_error(byte, 'Byte')
+		]
 	]).
 
 	:- public(footer/2).
 	:- mode(footer(+atom, -list(byte)), one_or_error).
 	:- info(footer/2, [
 		comment is 'Extracts a token footer without authenticating it. The result must only be used for pre-authentication key selection.',
-		argnames is ['Token', 'Footer']
+		argnames is ['Token', 'Footer'],
+		exceptions is [
+			'``Token`` is a variable' - instantiation_error,
+			'``Token`` is neither a variable nor an atom' - type_error(atom, 'Token'),
+			'``Token`` is an atom but not a canonical v4 token' - domain_error(paseto_v4_token, 'Token'),
+			'``Token`` is a canonical v4 token but has a malformed compact serialization' - domain_error(paseto_compact_serialization, malformed),
+			'``Token`` contains non-canonical base64url data' - representation_error(base64)
+		]
 	]).
 
 :- end_protocol.

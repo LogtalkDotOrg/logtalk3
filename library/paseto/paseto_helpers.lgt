@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-03,
+		date is 2026-08-08,
 		comment is 'Protected PASETO v4 framing, PAE, and encoding helpers.'
 	]).
 
@@ -39,7 +39,14 @@
 	:- mode(parse_token(+atom, +atom, -list(byte), -list(byte)), one_or_error).
 	:- info(parse_token/4, [
 		comment is 'Strictly parses a canonical v4 token for Purpose and decodes its body and optional footer.',
-		argnames is ['Token', 'Purpose', 'Body', 'Footer']
+		argnames is ['Token', 'Purpose', 'Body', 'Footer'],
+		exceptions is [
+			'``Token`` is a variable' - instantiation_error,
+			'``Token`` is neither a variable nor an atom' - type_error(atom, 'Token'),
+			'``Token`` is an atom but does not have the expected PASETO v4 header' - domain_error(paseto_v4_token, 'Token'),
+			'``Token`` is a PASETO v4 header but has a malformed compact serialization' - domain_error(paseto_compact_serialization, malformed),
+			'``Token`` contains non-canonical base64url data' - representation_error(base64)
+		]
 	]).
 
 	:- protected(format_token/4).

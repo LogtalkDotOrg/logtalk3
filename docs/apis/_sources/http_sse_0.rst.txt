@@ -15,7 +15,7 @@ High-level Server-Sent Events (SSE) predicates for opening client connections, a
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-07-27
+| **Date:** 2026-08-08
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -62,6 +62,16 @@ Opens a client SSE connection to the given absolute ``http://`` or ``https://`` 
 | **Mode and number of proofs:**
 |    ``open(+atom,--compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``URL`` is a variable:
+|        ``instantiation_error``
+|    ``URL`` is neither a variable nor a supported absolute SSE URL:
+|        ``domain_error(http_client_sse_url,URL)``
+|    ``URL`` is a supported absolute SSE URL but uses an unsupported SSE scheme:
+|        ``domain_error(http_client_sse_scheme,Scheme)``
+|    The SSE server response is not a ``200`` ``text/event-stream`` response:
+|        ``domain_error(http_client_sse_response,Response)``
+
 
 ------------
 
@@ -84,9 +94,9 @@ Opens a client SSE connection to the given URL and returns an opaque handle. The
 | **Exceptions:**
 |    ``URL`` is a variable:
 |        ``instantiation_error``
-|    ``URL`` is not a supported absolute SSE URL:
+|    ``URL`` is neither a variable nor a supported absolute SSE URL:
 |        ``domain_error(http_client_sse_url,URL)``
-|    ``URL`` uses an unsupported SSE scheme:
+|    ``URL`` is a supported absolute SSE URL but uses an unsupported SSE scheme:
 |        ``domain_error(http_client_sse_scheme,Scheme)``
 |    ``Options`` is a variable or a partial list:
 |        ``instantiation_error``
@@ -117,6 +127,12 @@ Accepts one incoming SSE request on the given listener using the default respons
 |    ``accept(Listener,SSE,ClientInfo)``
 | **Mode and number of proofs:**
 |    ``accept(+compound,--compound,--compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The SSE request does not exist:
+|        ``existence_error(http_socket_transport_sse_request,end_of_file)``
+|    The SSE request is not a valid normalized SSE request:
+|        ``domain_error(http_server_core_sse_request,Request)``
 
 
 ------------
@@ -175,9 +191,9 @@ Writes one outbound SSE record using the opaque handle. Accepts normalized ``eve
 | **Exceptions:**
 |    ``SSE`` is a variable:
 |        ``instantiation_error``
-|    ``SSE`` is not an open opaque SSE handle:
+|    ``SSE`` is neither a variable nor an open opaque SSE handle:
 |        ``domain_error(http_sse_handle,SSE)``
-|    ``SSE`` refers to a closed opaque SSE handle:
+|    ``SSE`` is an open opaque SSE handle but refers to a closed opaque SSE handle:
 |        ``existence_error(http_sse_handle,SSE)``
 |    ``Event`` is not a valid outbound SSE record:
 |        ``domain_error(http_sse_event,Event)``
@@ -204,9 +220,9 @@ Writes one outbound SSE record using the opaque handle and the given write optio
 | **Exceptions:**
 |    ``SSE`` is a variable:
 |        ``instantiation_error``
-|    ``SSE`` is not an open opaque SSE handle:
+|    ``SSE`` is neither a variable nor an open opaque SSE handle:
 |        ``domain_error(http_sse_handle,SSE)``
-|    ``SSE`` refers to a closed opaque SSE handle:
+|    ``SSE`` is an open opaque SSE handle but refers to a closed opaque SSE handle:
 |        ``existence_error(http_sse_handle,SSE)``
 |    ``Event`` is not a valid outbound SSE record:
 |        ``domain_error(http_sse_event,Event)``
@@ -239,9 +255,9 @@ Reads and dispatches the next SSE event using the opaque handle, following the e
 | **Exceptions:**
 |    ``SSE`` is a variable:
 |        ``instantiation_error``
-|    ``SSE`` is not an open opaque SSE handle:
+|    ``SSE`` is neither a variable nor an open opaque SSE handle:
 |        ``domain_error(http_sse_handle,SSE)``
-|    ``SSE`` refers to a closed opaque SSE handle:
+|    ``SSE`` is an open opaque SSE handle but refers to a closed opaque SSE handle:
 |        ``existence_error(http_sse_handle,SSE)``
 |    A field line uses a line ending other than a line feed or a carriage return immediately followed by a line feed:
 |        ``domain_error(http_sse_line_ending,Byte)``
@@ -270,7 +286,7 @@ Reads the next SSE event using the opaque handle and the given read options. The
 | **Exceptions:**
 |    ``SSE`` is a variable:
 |        ``instantiation_error``
-|    ``SSE`` is not an open opaque SSE handle:
+|    ``SSE`` is neither a variable nor an open opaque SSE handle:
 |        ``domain_error(http_sse_handle,SSE)``
 |    ``Options`` is a variable or a partial list:
 |        ``instantiation_error``
@@ -305,7 +321,7 @@ Best-effort close of the SSE handle.
 | **Exceptions:**
 |    ``SSE`` is a variable:
 |        ``instantiation_error``
-|    ``SSE`` is not an open opaque SSE handle:
+|    ``SSE`` is neither a variable nor an open opaque SSE handle:
 |        ``domain_error(http_sse_handle,SSE)``
 |    ``SSE`` refers to a closed opaque SSE handle:
 |        ``existence_error(http_sse_handle,SSE)``
@@ -332,7 +348,7 @@ Best-effort close of the SSE handle. First attempts to write the given final rec
 | **Exceptions:**
 |    ``SSE`` is a variable:
 |        ``instantiation_error``
-|    ``SSE`` is not an open opaque SSE handle:
+|    ``SSE`` is neither a variable nor an open opaque SSE handle:
 |        ``domain_error(http_sse_handle,SSE)``
 |    ``Event`` is not a valid outbound SSE record:
 |        ``domain_error(http_sse_event,Event)``
@@ -376,6 +392,16 @@ Convenience predicate equivalent to ``send(SSE, data(Data))``.
 | **Mode and number of proofs:**
 |    ``send_data(+compound,+atom)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``SSE`` is a variable:
+|        ``instantiation_error``
+|    ``SSE`` is neither a variable nor an open opaque SSE handle:
+|        ``domain_error(http_sse_handle,SSE)``
+|    ``SSE`` is an open opaque SSE handle but refers to a closed opaque SSE handle:
+|        ``existence_error(http_sse_handle,SSE)``
+|    ``data(Data)`` is not a valid outbound SSE record:
+|        ``domain_error(http_sse_event,Event)``
+
 
 ------------
 
@@ -394,6 +420,16 @@ Convenience predicate equivalent to ``send(SSE, event(Type, Data))``.
 |    ``send_event(SSE,Type,Data)``
 | **Mode and number of proofs:**
 |    ``send_event(+compound,+atom,+atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``SSE`` is a variable:
+|        ``instantiation_error``
+|    ``SSE`` is neither a variable nor an open opaque SSE handle:
+|        ``domain_error(http_sse_handle,SSE)``
+|    ``SSE`` is an open opaque SSE handle but refers to a closed opaque SSE handle:
+|        ``existence_error(http_sse_handle,SSE)``
+|    ``event(Type, Data)`` is not a valid outbound SSE record:
+|        ``domain_error(http_sse_event,Event)``
 
 
 ------------
@@ -414,6 +450,16 @@ Convenience predicate equivalent to ``send(SSE, id_data(Id, Data))``.
 | **Mode and number of proofs:**
 |    ``send_id_data(+compound,+atom,+atom)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``SSE`` is a variable:
+|        ``instantiation_error``
+|    ``SSE`` is neither a variable nor an open opaque SSE handle:
+|        ``domain_error(http_sse_handle,SSE)``
+|    ``SSE`` is an open opaque SSE handle but refers to a closed opaque SSE handle:
+|        ``existence_error(http_sse_handle,SSE)``
+|    ``send(SSE, id_data(Id, Data))`` is not a valid outbound SSE record:
+|        ``domain_error(http_sse_event,Event)``
+
 
 ------------
 
@@ -432,6 +478,16 @@ Convenience predicate equivalent to ``send(SSE, comment(Text))``. Commonly used 
 |    ``send_comment(SSE,Text)``
 | **Mode and number of proofs:**
 |    ``send_comment(+compound,+atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``SSE`` is a variable:
+|        ``instantiation_error``
+|    ``SSE`` is neither a variable nor an open opaque SSE handle:
+|        ``domain_error(http_sse_handle,SSE)``
+|    ``SSE`` is an open opaque SSE handle but refers to a closed opaque SSE handle:
+|        ``existence_error(http_sse_handle,SSE)``
+|    ``send(SSE, comment(Text))`` is not a valid outbound SSE record:
+|        ``domain_error(http_sse_event,Event)``
 
 
 ------------
@@ -452,6 +508,16 @@ Convenience predicate equivalent to ``send(SSE, retry(Milliseconds))``.
 | **Mode and number of proofs:**
 |    ``send_retry(+compound,+integer)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``SSE`` is a variable:
+|        ``instantiation_error``
+|    ``SSE`` is neither a variable nor an open opaque SSE handle:
+|        ``domain_error(http_sse_handle,SSE)``
+|    ``SSE`` is an open opaque SSE handle but refers to a closed opaque SSE handle:
+|        ``existence_error(http_sse_handle,SSE)``
+|    ``send(SSE, retry(Milliseconds))`` is not a valid outbound SSE record:
+|        ``domain_error(http_sse_event,Event)``
+
 
 ------------
 
@@ -470,6 +536,14 @@ Convenience predicate that JSON-encodes ``JSON`` and sends it as a data-only eve
 |    ``send_json(SSE,JSON)``
 | **Mode and number of proofs:**
 |    ``send_json(+compound,+term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``SSE`` is a variable:
+|        ``instantiation_error``
+|    ``SSE`` is neither a variable nor an open opaque SSE handle:
+|        ``domain_error(http_sse_handle,SSE)``
+|    ``SSE`` refers to a closed opaque SSE handle:
+|        ``existence_error(http_sse_handle,SSE)``
 
 
 ------------
@@ -491,6 +565,12 @@ Convenience predicate that reads the next dispatched event and JSON-decodes its 
 |    ``receive_json(+compound,--term)`` - ``one_or_error``
 
 | **Exceptions:**
+|    ``SSE`` is a variable:
+|        ``instantiation_error``
+|    ``SSE`` is neither a variable nor an open opaque SSE handle:
+|        ``domain_error(http_sse_handle,SSE)``
+|    ``SSE`` is an open opaque SSE handle but refers to a closed opaque SSE handle:
+|        ``existence_error(http_sse_handle,SSE)``
 |    The event data is not valid JSON text:
 |        ``domain_error(http_sse_json_text,Text)``
 
@@ -512,6 +592,16 @@ Convenience predicate that writes ``Term`` to an atom and sends it as a data-onl
 |    ``send_term(SSE,Term)``
 | **Mode and number of proofs:**
 |    ``send_term(+compound,+term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``SSE`` is a variable:
+|        ``instantiation_error``
+|    ``SSE`` is neither a variable nor an open opaque SSE handle:
+|        ``domain_error(http_sse_handle,SSE)``
+|    ``SSE`` is an open opaque SSE handle but refers to a closed opaque SSE handle:
+|        ``existence_error(http_sse_handle,SSE)``
+|    ``term(Term)`` is not a valid outbound SSE record:
+|        ``domain_error(http_sse_event,Event)``
 
 
 ------------
@@ -578,6 +668,26 @@ Convenience wrapper that opens a client SSE connection and runs one callback-dri
 | **Mode and number of proofs:**
 |    ``open_session(+atom,+object_identifier,--compound,--compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``URL`` is a variable:
+|        ``instantiation_error``
+|    ``URL`` is neither a variable nor a supported absolute SSE URL:
+|        ``domain_error(http_client_sse_url,URL)``
+|    ``URL`` is a supported absolute SSE URL but uses an unsupported SSE scheme:
+|        ``domain_error(http_client_sse_scheme,Scheme)``
+|    ``Handler`` is a variable:
+|        ``instantiation_error``
+|    ``Handler`` is neither a variable nor an existing object:
+|        ``existence_error(object,Handler)``
+|    ``Handler`` does not conform to ``http_sse_service_handler_protocol``:
+|        ``domain_error(http_sse_service_handler,Handler)``
+|    ``URL`` is not a supported absolute SSE URL:
+|        ``domain_error(http_client_sse_url,URL)``
+|    ``URL`` uses an unsupported SSE scheme:
+|        ``domain_error(http_client_sse_scheme,Scheme)``
+|    The SSE server response is not a ``200`` ``text/event-stream`` response:
+|        ``domain_error(http_client_sse_response,Response)``
+
 
 ------------
 
@@ -598,9 +708,17 @@ Convenience wrapper over ``open_session/4`` that also accepts ``reconnect(on|off
 |    ``open_session(+atom,+object_identifier,--compound,--compound,+list)`` - ``one_or_error``
 
 | **Exceptions:**
+|    ``URL`` is a variable:
+|        ``instantiation_error``
+|    ``URL`` is neither a variable nor a supported absolute SSE URL:
+|        ``domain_error(http_client_sse_url,URL)``
+|    ``URL`` is a supported absolute SSE URL but uses an unsupported SSE scheme:
+|        ``domain_error(http_client_sse_scheme,Scheme)``
 |    ``Handler`` is a variable:
 |        ``instantiation_error``
-|    ``Handler`` does not conform to ``http_sse_service_handler_protocol``:
+|    ``Handler`` is neither a variable nor an existing object:
+|        ``existence_error(object,Handler)``
+|    ``Handler`` is an object but does not conform to ``http_sse_service_handler_protocol``:
 |        ``domain_error(http_sse_service_handler,Handler)``
 |    ``Options`` contains an invalid SSE service loop option:
 |        ``domain_error(http_sse_service_option,Option)``
@@ -624,6 +742,20 @@ Convenience wrapper that accepts one incoming SSE request on the given listener 
 | **Mode and number of proofs:**
 |    ``serve_once(+compound,+object_identifier,--compound,--compound,--compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Handler`` is a variable:
+|        ``instantiation_error``
+|    ``Handler`` is neither a variable nor an existing object:
+|        ``existence_error(object,Handler)``
+|    ``Handler`` is an object but does not conform to ``http_sse_service_handler_protocol``:
+|        ``domain_error(http_sse_service_handler,Handler)``
+|    The SSE opening request does not exist:
+|        ``existence_error(http_socket_transport_sse_request,end_of_file)``
+|    The SSE opening response is invalid:
+|        ``domain_error(http_socket_transport_sse_response,Response)``
+|    The delegated HTTP server rejects the response stream:
+|        ``domain_error(http_response_stream,Error)``
+
 
 ------------
 
@@ -646,7 +778,9 @@ Convenience wrapper that accepts one incoming SSE request on the given listener 
 | **Exceptions:**
 |    ``Handler`` is a variable:
 |        ``instantiation_error``
-|    ``Handler`` does not conform to ``http_sse_service_handler_protocol``:
+|    ``Handler`` is neither a variable nor an existing object:
+|        ``existence_error(object,Handler)``
+|    ``Handler`` is an object but does not conform to ``http_sse_service_handler_protocol``:
 |        ``domain_error(http_sse_service_handler,Handler)``
 
 
