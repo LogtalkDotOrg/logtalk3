@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-08-05,
+		date is 2026-08-08,
 		comment is 'String distance predicates.',
 		parameters is [
 			'Representation' - 'String representation. Valid values are ``atom``, ``codes``, and ``chars``.'
@@ -910,7 +910,8 @@
 	soundex_char_code_('R', '6').
 
 	soundex_dedup([], []).
-	soundex_dedup([X], [X]).
+	soundex_dedup([X], [X]) :-
+		!.
 	soundex_dedup([X,X| Tail], Result) :-
 		!,
 		soundex_dedup([X| Tail], Result).
