@@ -24,9 +24,9 @@
 	imports([options, http_message_helpers, http_text_helpers])).
 
 	:- info([
-		version is 1:1:2,
+		version is 1:1:3,
 		author is 'Paulo Moura',
-		date is 2026-08-07,
+		date is 2026-08-08,
 		comment is 'Process-backed HTTP transport predicates using the process library and helper processes.'
 	]).
 
@@ -524,14 +524,14 @@
 			% for other backends, we need to set the streams type after creating the process
 			setup_process_connection_streams(Type, Input, Output),
 			SetupError,
-			(	cleanup_process_connection(Connection, Transport, Process, Error),
+			(	cleanup_process_connection(Transport, Connection, Process, Error),
 				throw(SetupError)
 			)
 		),
 		catch(
 			wait_for_connection_startup(Transport, Error, Context),
 			StartupError,
-			(	cleanup_process_connection(Connection, Transport, Process, Error),
+			(	cleanup_process_connection(Transport, Connection, Process, Error),
 				throw(StartupError)
 			)
 		),
@@ -609,20 +609,20 @@
 	take_process_connection(_Connection, missing).
 
 	close_process_connection_outcome(connection(Transport, Process, Error), Connection) :-
-		cleanup_process_connection(Connection, Transport, Process, Error).
+		cleanup_process_connection(Transport, Connection, Process, Error).
 	close_process_connection_outcome(missing, Connection) :-
 		(	var(Connection) ->
 			instantiation_error
 		;	domain_error(http_socket_transport_connection, Connection)
 		).
 
-	cleanup_process_connection(http_connection(_Host, _Port, Input, Output), tcp, Process, Error) :-
+	cleanup_process_connection(tcp, http_connection(_Host, _Port, Input, Output), Process, Error) :-
 		% With ncat -q 0.01, stdin EOF allows pending bytes to drain before exit.
 		close_process_stream(Output),
 		catch(process::wait(Process, _Status), _, catch(process::kill(Process, sigterm), _, true)),
 		close_process_stream(Input),
 		close_process_stream(Error).
-	cleanup_process_connection(http_connection(_Host, _Port, Input, Output), tls, Process, Error) :-
+	cleanup_process_connection(tls, http_connection(_Host, _Port, Input, Output), Process, Error) :-
 		close_process_stream(Output),
 		close_process_stream(Input),
 		close_process_stream(Error),
