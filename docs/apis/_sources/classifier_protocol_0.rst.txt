@@ -14,8 +14,8 @@ Protocol for machine learning classifiers.
 |    ``logtalk_load(classification_protocols(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 2:0:0
-| **Date:** 2026-05-07
+| **Version:** 2:1:0
+| **Date:** 2026-08-09
 
 | **Compilation flags:**
 |    ``static``
@@ -270,5 +270,5 @@ Operators
 
 .. seealso::
 
-   :ref:`adaptive_boosting_classifier <adaptive_boosting_classifier/0>`, :ref:`c45_classifier <c45_classifier/0>`, :ref:`gradient_boosting_classifier <gradient_boosting_classifier/0>`, :ref:`isolation_forest_anomaly_detector <isolation_forest_anomaly_detector/0>`, :ref:`kernel_svm_classifier <kernel_svm_classifier/0>`, :ref:`knn_classifier <knn_classifier/0>`, :ref:`lda_classifier <lda_classifier/0>`, :ref:`linear_svm_classifier <linear_svm_classifier/0>`, :ref:`logistic_regression_classifier <logistic_regression_classifier/0>`, :ref:`naive_bayes_classifier <naive_bayes_classifier/0>`, :ref:`nearest_centroid_classifier <nearest_centroid_classifier/0>`, :ref:`qda_classifier <qda_classifier/0>`, :ref:`random_forest_classifier <random_forest_classifier/0>`, :ref:`sgd_classifier <sgd_classifier/0>`
+   :ref:`adaptive_boosting_classifier <adaptive_boosting_classifier/0>`, :ref:`c45_classifier <c45_classifier/0>`, :ref:`gradient_boosting_classifier <gradient_boosting_classifier/0>`, :ref:`isolation_forest_anomaly_detector <isolation_forest_anomaly_detector/0>`, :ref:`kernel_svm_classifier <kernel_svm_classifier/0>`, :ref:`knn_classifier <knn_classifier/0>`, :ref:`lda_classifier <lda_classifier/0>`, :ref:`linear_svm_classifier <linear_svm_classifier/0>`, :ref:`logistic_regression_classifier <logistic_regression_classifier/0>`, :ref:`mlp_classifier <mlp_classifier/0>`, :ref:`naive_bayes_classifier <naive_bayes_classifier/0>`, :ref:`nearest_centroid_classifier <nearest_centroid_classifier/0>`, :ref:`qda_classifier <qda_classifier/0>`, :ref:`random_forest_classifier <random_forest_classifier/0>`, :ref:`sgd_classifier <sgd_classifier/0>`
 

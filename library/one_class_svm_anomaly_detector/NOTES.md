@@ -36,7 +36,7 @@ bounded anomaly scores using their empirical rank among the training values.
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#one_class_svm_anomaly_detector](../../docs/library_index.html#one_class_svm_anomaly_detector)
+Open the [../../docs/library_index.html#one-class-svm-anomaly-detector](../../docs/library_index.html#one-class-svm-anomaly-detector)
 link in a web browser.
 
 

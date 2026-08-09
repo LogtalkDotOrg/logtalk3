@@ -22,11 +22,11 @@
 :- protocol(classifier_protocol).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-07,
+		date is 2026-08-09,
 		comment is 'Protocol for machine learning classifiers.',
-		see_also is [adaptive_boosting_classifier, c45_classifier, gradient_boosting_classifier, isolation_forest_anomaly_detector, kernel_svm_classifier, knn_classifier, lda_classifier, linear_svm_classifier, logistic_regression_classifier, naive_bayes_classifier, nearest_centroid_classifier, qda_classifier, random_forest_classifier, sgd_classifier]
+		see_also is [adaptive_boosting_classifier, c45_classifier, gradient_boosting_classifier, isolation_forest_anomaly_detector, kernel_svm_classifier, knn_classifier, lda_classifier, linear_svm_classifier, logistic_regression_classifier, mlp_classifier, naive_bayes_classifier, nearest_centroid_classifier, qda_classifier, random_forest_classifier, sgd_classifier]
 	]).
 
 	:- public(learn/3).

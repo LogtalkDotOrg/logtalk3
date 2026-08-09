@@ -124,6 +124,7 @@
 		kernel_svm_classifier(loader),
 		knn_classifier(loader),
 		lda_classifier(loader),
+		mlp_classifier(loader),
 		naive_bayes_classifier(loader),
 		nearest_centroid_classifier(loader),
 		qda_classifier(loader),

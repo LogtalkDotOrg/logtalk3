@@ -94,6 +94,9 @@ miner deriving confidence- and lift-scored rules from frequent itemsets and
 sequential patterns, with leverage and several similarity metrics available
 on demand.
 
+* ADDED: New `mlp_classifier` library implementing a multi-layer perceptron
+classifier for continuous, categorical, and mixed tabular datasets.
+
 * ADDED: New `one_class_svm_anomaly_detector` library implementing one-class
 support vector machine anomaly detector for continuous, categorical, and
 mixed-feature datasets.

@@ -40,7 +40,7 @@ Datasets are represented as objects implementing the
 API documentation
 -----------------
 
-Open the [../../apis/library_index.html#svr_regression](../../apis/library_index.html#svr_regression)
+Open the [../../apis/library_index.html#svr-regression](../../apis/library_index.html#svr-regression)
 link in a web browser.
 
 

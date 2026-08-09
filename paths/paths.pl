@@ -284,6 +284,7 @@ logtalk_library_path(message_pack, library('message_pack/')).
 logtalk_library_path(meta, library('meta/')).
 logtalk_library_path(meta_compiler, library('meta_compiler/')).
 logtalk_library_path(mime_types, library('mime_types/')).
+logtalk_library_path(mlp_classifier, library('mlp_classifier/')).
 logtalk_library_path(modified_z_score_anomaly_detector, library('modified_z_score_anomaly_detector/')).
 logtalk_library_path(mqtt, library('mqtt/')).
 logtalk_library_path(multisets, library('multisets/')).

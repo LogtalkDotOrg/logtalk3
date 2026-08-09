@@ -23,7 +23,7 @@ API documentation
 -----------------
 
 Open the
-`../../apis/library_index.html#svr_regression <../../apis/library_index.html#svr_regression>`__
+`../../apis/library_index.html#svr-regression <../../apis/library_index.html#svr-regression>`__
 link in a web browser.
 
 Loading

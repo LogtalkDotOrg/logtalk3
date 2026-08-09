@@ -23,11 +23,11 @@
 	extends(classifier_protocol)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-11,
+		date is 2026-08-09,
 		comment is 'Protocol for classifiers that can estimate class probabilities.',
-		see_also is [classifier_protocol, adaptive_boosting_classifier, gradient_boosting_classifier, kernel_svm_classifier, knn_classifier, logistic_regression_classifier, naive_bayes_classifier, nearest_centroid_classifier, random_forest_classifier, sgd_classifier]
+		see_also is [classifier_protocol, adaptive_boosting_classifier, gradient_boosting_classifier, kernel_svm_classifier, knn_classifier, logistic_regression_classifier, mlp_classifier, naive_bayes_classifier, nearest_centroid_classifier, random_forest_classifier, sgd_classifier]
 	]).
 
 	:- public(predict_probabilities/3).

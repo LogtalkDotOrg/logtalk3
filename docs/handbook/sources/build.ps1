@@ -255,6 +255,7 @@ Foreach-Object {
 (Get-Content ../../../library/meta/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/meta.rst
 (Get-Content ../../../library/meta_compiler/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/meta_compiler.rst
 (Get-Content ../../../library/mime_types/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/mime_types.rst
+(Get-Content ../../../library/mlp_classifier/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/mlp_classifier.rst
 (Get-Content ../../../library/modified_z_score_anomaly_detector/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/modified_z_score_anomaly_detector.rst
 (Get-Content ../../../library/mqtt/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/mqtt.rst
 (Get-Content ../../../library/multisets/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/multisets.rst
