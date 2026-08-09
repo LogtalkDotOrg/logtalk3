@@ -94,6 +94,10 @@ miner deriving confidence- and lift-scored rules from frequent itemsets and
 sequential patterns, with leverage and several similarity metrics available
 on demand.
 
+* ADDED: New `one_class_svm_anomaly_detector` library implementing one-class
+support vector machine anomaly detector for continuous, categorical, and
+mixed-feature datasets.
+
 * ADDED: New `spectral_clusterer` library implementing a normalized spectral
 clusterer for continuous datasets.
 

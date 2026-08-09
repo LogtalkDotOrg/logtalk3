@@ -99,7 +99,7 @@ Library groups
 		`random_forest_classifier`, and `sgd_classifier`.
 	- Anomaly detection:
 		`anomaly_detection_protocols`, `cusum_anomaly_detector`, `ewma_anomaly_detector`, `iqr_anomaly_detector`, `isolation_forest_anomaly_detector`,
-		`knn_distance_anomaly_detector`, `lof_anomaly_detector`, `modified_z_score_anomaly_detector`, and `z_score_anomaly_detector`.
+		`knn_distance_anomaly_detector`, `lof_anomaly_detector`, `modified_z_score_anomaly_detector`, `one_class_svm_anomaly_detector`, and `z_score_anomaly_detector`.
 	- Regression:
 		`regression_protocols`, `bayesian_ridge_regression`, `elastic_net_regression`,
         `gradient_boosting_regression`, `gaussian_process_regression`, `knn_regression`,

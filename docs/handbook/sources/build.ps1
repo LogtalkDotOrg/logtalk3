@@ -266,6 +266,7 @@ Foreach-Object {
 (Get-Content ../../../library/nested_dictionaries/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/nested_dictionaries.rst
 (Get-Content ../../../library/nmea/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/nmea.rst
 (Get-Content ../../../library/nmf_projection/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/nmf_projection.rst
+(Get-Content ../../../library/one_class_svm_anomaly_detector/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/one_class_svm_anomaly_detector.rst
 (Get-Content ../../../library/open_api/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/open_api.rst
 (Get-Content ../../../library/open_ai/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/open_ai.rst
 (Get-Content ../../../library/open_id/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/open_id.rst

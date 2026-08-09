@@ -138,6 +138,7 @@
 		knn_distance_anomaly_detector(loader),
 		lof_anomaly_detector(loader),
 		modified_z_score_anomaly_detector(loader),
+		one_class_svm_anomaly_detector(loader),
 		z_score_anomaly_detector(loader),
 		dimension_reduction_protocols(loader),
 		ica_projection(loader),

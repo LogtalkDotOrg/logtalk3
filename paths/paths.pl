@@ -295,6 +295,7 @@ logtalk_library_path(nearest_centroid_classifier, library('nearest_centroid_clas
 logtalk_library_path(nested_dictionaries, library('nested_dictionaries/')).
 logtalk_library_path(nmea, library('nmea/')).
 logtalk_library_path(nmf_projection, library('nmf_projection/')).
+logtalk_library_path(one_class_svm_anomaly_detector, library('one_class_svm_anomaly_detector/')).
 logtalk_library_path(open_api, library('open_api/')).
 logtalk_library_path(open_ai, library('open_ai/')).
 logtalk_library_path(open_id, library('open_id/')).

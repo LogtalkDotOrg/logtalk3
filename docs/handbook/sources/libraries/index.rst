@@ -204,6 +204,7 @@ directory in the ``NOTES.md`` file.
    meta
    meta_compiler
    mime_types
+   mlp_classifier
    modified_z_score_anomaly_detector
    mqtt
    multisets
@@ -215,6 +216,7 @@ directory in the ``NOTES.md`` file.
    nested_dictionaries
    nmea
    nmf_projection
+   one_class_svm_anomaly_detector
    open_api
    open_ai
    open_id
