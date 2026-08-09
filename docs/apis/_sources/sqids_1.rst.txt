@@ -18,7 +18,7 @@ Encoding and decoding of short, obfuscated, URL-safe ids from lists of non-negat
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-07-25
+| **Date:** 2026-08-09
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -72,7 +72,7 @@ Encodes a list of non-negative integers into an identifier using the default opt
 |    An element ``Number`` of the list ``Numbers`` of Numbers is a negative integer:
 |        ``domain_error(non_negative_integer,Number)``
 |    Too many blocklist collisions occurred while generating the id:
-|        ``sqids_error(blocklist_retries_exhausted)``
+|        ``resource_error(blocklist_retries)``
 
 
 ------------
@@ -111,7 +111,7 @@ Encodes a list of non-negative integers into an id using the given options. Reco
 |    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
 |        ``domain_error(option,Option)``
 |    Too many blocklist collisions occurred while generating the id:
-|        ``sqids_error(blocklist_retries_exhausted)``
+|        ``resource_error(blocklist_retries)``
 
 
 ------------

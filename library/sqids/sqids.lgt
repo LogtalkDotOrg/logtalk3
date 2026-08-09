@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-07-25,
+		date is 2026-08-09,
 		comment is 'Encoding and decoding of short, obfuscated, URL-safe ids from lists of non-negative integers, per the Sqids specification.',
 		remarks is [
 			'Specification' - 'https://github.com/sqids/sqids-spec',
@@ -48,7 +48,7 @@
 			'``Numbers`` is neither a variable nor a list' - type_error(list(non_negative_integer), 'Numbers'),
 			'An element ``Number`` of the list ``Numbers`` is not an integer' - type_error(integer, 'Number'),
 			'An element ``Number`` of the list ``Numbers`` of Numbers is a negative integer' - domain_error(non_negative_integer, 'Number'),
-			'Too many blocklist collisions occurred while generating the id' - sqids_error(blocklist_retries_exhausted)
+			'Too many blocklist collisions occurred while generating the id' - resource_error(blocklist_retries)
 		]
 	]).
 
@@ -66,7 +66,7 @@
 			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
 			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
 			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option'),
-			'Too many blocklist collisions occurred while generating the id' - sqids_error(blocklist_retries_exhausted)
+			'Too many blocklist collisions occurred while generating the id' - resource_error(blocklist_retries)
 		]
 	]).
 
@@ -175,7 +175,7 @@
 	encode_numbers(Numbers, Alphabet, MinLength, Blocklist, Increment, IdChars) :-
 		length(Alphabet, Length),
 		(	Increment > Length ->
-			throw(error(sqids_error(blocklist_retries_exhausted), sqids::encode/3))
+			resource_error(blocklist_retries)
 		;	numbers_offset(Numbers, Alphabet, Length, Offset0),
 			Offset is (Offset0 + Increment) mod Length,
 			rotate(Alphabet, Offset, RotatedAlphabet),
