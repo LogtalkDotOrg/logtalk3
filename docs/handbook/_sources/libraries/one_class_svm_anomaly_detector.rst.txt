@@ -19,7 +19,7 @@ API documentation
 -----------------
 
 Open the
-`../../docs/library_index.html#one-class-svm-anomaly-detector <../../docs/library_index.html#one-class-svm-anomaly-detector>`__
+`../../apis/library_index.html#one-class-svm-anomaly-detector <../../apis/library_index.html#one-class-svm-anomaly-detector>`__
 link in a web browser.
 
 Loading

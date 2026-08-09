@@ -17,7 +17,7 @@ API documentation
 -----------------
 
 Open the
-`../../docs/library_index.html#mlp-classifier <../../docs/library_index.html#mlp-classifier>`__
+`../../apis/library_index.html#mlp-classifier <../../apis/library_index.html#mlp-classifier>`__
 link in a web browser.
 
 Loading

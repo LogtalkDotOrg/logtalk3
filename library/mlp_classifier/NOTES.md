@@ -33,7 +33,7 @@ The library implements the probabilistic classifier protocol from the
 API documentation
 -----------------
 
-Open the [../../docs/library_index.html#mlp-classifier](../../docs/library_index.html#mlp-classifier)
+Open the [../../apis/library_index.html#mlp-classifier](../../apis/library_index.html#mlp-classifier)
 link in a web browser.
 
 
