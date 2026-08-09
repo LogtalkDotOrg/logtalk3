@@ -158,6 +158,9 @@ libraries to use the new `byte_order` library.
 * UPDATED: The `http_authenticate` library for the new bcrypt b2 version
 support provided by the `crypto` library.
 
+* UPDATED: The `http_parameters` and `http_router` libraries to use a standard
+domain error for parameter validation errors.
+
 * UPDATED: The `thurstone_mosteller_ranker` library to reuse the new shared
 standard normal quantile implementation.
 

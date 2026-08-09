@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-07,
+		date is 2026-08-09,
 		comment is 'Unit tests for the "http_router" library.'
 	]).
 
@@ -277,7 +277,7 @@
 		header(Response, x_router, custom),
 		body(Response, content('text/plain', text(custom_bad_request))).
 
-	test(http_router_handle_2_30, error(domain_error(http_router_test, invalid_handler_error))) :-
+	test(http_router_handle_2_30, error(domain_error(http_router_handler, invalid_handler_error))) :-
 		Request = request(get, origin('/bad-request/error'), http(1, 1), [], empty, []),
 		parameter_validation_http_router::handle(Request, _Response).
 

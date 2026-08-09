@@ -14,8 +14,8 @@ Declarative HTTP router category for objects implementing the http_handler_proto
 |    ``logtalk_load(http_router(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:1:1
-| **Date:** 2026-08-02
+| **Version:** 1:2:0
+| **Date:** 2026-08-09
 
 | **Compilation flags:**
 |    ``static``
@@ -87,7 +87,7 @@ Routes a normalized HTTP request using the importing object ``route/4`` clauses.
 |    A request path is invalid:
 |        ``domain_error(http_router_path,Path)``
 |    The route handler reports parameter validation errors:
-|        ``error(http_parameter_validation(Errors),Context)``
+|        ``domain_error(http_parameter_validation,Errors)``
 
 
 ------------

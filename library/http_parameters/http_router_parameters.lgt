@@ -23,9 +23,9 @@
 	extends(http_router)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-08-09,
 		comment is 'Declarative router companion category that reuses ``http_parameters`` declarations for request extraction and OpenAPI metadata generation.',
 		remarks is [
 			'Route declarations' - 'Importing objects define parameter declarations per route using ``route_parameter_declarations/2``.',
@@ -45,7 +45,7 @@
 			'The route parameter declarations are invalid' - domain_error(http_parameter_declaration, 'Declaration'),
 			'A path parameter declaration is not declared by the route path template' - domain_error(http_parameter_declaration('Name', path), not_in_route_path('RouteId')),
 			'A path parameter declaration type is incompatible with the route path template' - domain_error(http_parameter_declaration('Name', path), incompatible_route_path_type('Type', 'PathTemplateType')),
-			'The request parameters fail declared type or constraint validation' - error(http_parameter_validation('Errors'), 'Context')
+			'The request parameters fail declared type or constraint validation' - domain_error(http_parameter_validation, 'Errors')
 		]
 	]).
 

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-11,
+		date is 2026-08-09,
 		comment is 'Unit tests for the "http_parameters" library.'
 	]).
 
@@ -81,25 +81,25 @@
 			parameter(q, query, string, [])
 		], Parameters).
 
-	test(http_parameters_parameters_3_05, error(http_parameter_validation([duplicate_parameter(query, id)]))) :-
+	test(http_parameters_parameters_3_05, error(domain_error(http_parameter_validation, [duplicate_parameter(query, id)]))) :-
 		Request = request(get, origin('/items', 'id=1&id=2'), http(1, 1), [], empty, []),
 		http_parameters::parameters(Request, [
 			parameter(id, query, integer, [])
 		], _Parameters).
 
-	test(http_parameters_parameters_3_06, error(http_parameter_validation([invalid_parameter_value(query, id, abc, expected(integer))]))) :-
+	test(http_parameters_parameters_3_06, error(domain_error(http_parameter_validation, [invalid_parameter_value(query, id, abc, expected(integer))]))) :-
 		Request = request(get, origin('/items', 'id=abc'), http(1, 1), [], empty, []),
 		http_parameters::parameters(Request, [
 			parameter(id, query, integer, [])
 		], _Parameters).
 
-	test(http_parameters_parameters_3_06a, error(http_parameter_validation([invalid_parameter_value(query, id, two, invalid_list_item(2, expected(integer)))]))) :-
+	test(http_parameters_parameters_3_06a, error(domain_error(http_parameter_validation, [invalid_parameter_value(query, id, two, invalid_list_item(2, expected(integer)))]))) :-
 		Request = request(get, origin('/items', 'id=1&id=two&id=3'), http(1, 1), [], empty, []),
 		http_parameters::parameters(Request, [
 			parameter(id, query, list(integer), [])
 		], _Parameters).
 
-	test(http_parameters_parameters_3_07, error(http_parameter_validation([invalid_parameter_value(path, id, 42, incompatible_type(string))]))) :-
+	test(http_parameters_parameters_3_07, error(domain_error(http_parameter_validation, [invalid_parameter_value(path, id, 42, incompatible_type(string))]))) :-
 		Request = request(get, origin('/items/42'), http(1, 1), [], empty, [path_params([id-42])]),
 		http_parameters::parameters(Request, [
 			parameter(id, path, string, [])
@@ -126,7 +126,7 @@
 			parameter(session, cookie, string, [])
 		], Parameters).
 
-	test(http_parameters_parameters_3_11, error(http_parameter_validation([duplicate_parameter(header, etag)]))) :-
+	test(http_parameters_parameters_3_11, error(domain_error(http_parameter_validation, [duplicate_parameter(header, etag)]))) :-
 		request(get, origin('/session'), http(1, 1), [etag-one, etag-two], empty, [], Request),
 		http_parameters::parameters(Request, [
 			parameter(etag, header, string, [])
@@ -140,25 +140,25 @@
 			parameter(score, query, number, [minimum(0), maximum(5)])
 		], Parameters).
 
-	test(http_parameters_parameters_3_13, error(http_parameter_validation([invalid_parameter_value(query, status, archived, not_in_enum([draft, published]))]))) :-
+	test(http_parameters_parameters_3_13, error(domain_error(http_parameter_validation, [invalid_parameter_value(query, status, archived, not_in_enum([draft, published]))]))) :-
 		Request = request(get, origin('/reports', 'status=archived'), http(1, 1), [], empty, []),
 		http_parameters::parameters(Request, [
 			parameter(status, query, atom, [enum([draft, published])])
 		], _Parameters).
 
-	test(http_parameters_parameters_3_14, error(http_parameter_validation([invalid_parameter_value(query, page, '0', below_minimum(1))]))) :-
+	test(http_parameters_parameters_3_14, error(domain_error(http_parameter_validation, [invalid_parameter_value(query, page, '0', below_minimum(1))]))) :-
 		Request = request(get, origin('/reports', 'page=0'), http(1, 1), [], empty, []),
 		http_parameters::parameters(Request, [
 			parameter(page, query, integer, [minimum(1)])
 		], _Parameters).
 
-	test(http_parameters_parameters_3_15, error(http_parameter_validation([invalid_parameter_value(query, page, '101', above_maximum(100))]))) :-
+	test(http_parameters_parameters_3_15, error(domain_error(http_parameter_validation, [invalid_parameter_value(query, page, '101', above_maximum(100))]))) :-
 		Request = request(get, origin('/reports', 'page=101'), http(1, 1), [], empty, []),
 		http_parameters::parameters(Request, [
 			parameter(page, query, integer, [maximum(100)])
 		], _Parameters).
 
-	test(http_parameters_parameters_3_16, error(http_parameter_validation([invalid_parameter_value(query, id, '0', invalid_list_item(2, below_minimum(1)))]))) :-
+	test(http_parameters_parameters_3_16, error(domain_error(http_parameter_validation, [invalid_parameter_value(query, id, '0', invalid_list_item(2, below_minimum(1)))]))) :-
 		Request = request(get, origin('/items', 'id=1&id=0&id=3'), http(1, 1), [], empty, []),
 		http_parameters::parameters(Request, [
 			parameter(id, query, list(integer), [minimum(1)])
@@ -223,27 +223,27 @@
 	test(http_parameters_parameters_3_20, error(domain_error(http_request, invalid_request))) :-
 		http_parameters::parameters(invalid_request, [], _Parameters).
 
-	test(http_parameters_parameter_3_03, error(http_parameter_validation([invalid_parameter_value(query, score, oops, expected(number))]))) :-
+	test(http_parameters_parameter_3_03, error(domain_error(http_parameter_validation, [invalid_parameter_value(query, score, oops, expected(number))]))) :-
 		Request = request(get, origin('/scores', 'score=oops'), http(1, 1), [], empty, []),
 		http_parameters::parameter(Request, parameter(score, query, number, []), _Score).
 
-	test(http_parameters_parameter_3_04, error(http_parameter_validation([invalid_parameter_value(query, enabled, maybe, expected(boolean))]))) :-
+	test(http_parameters_parameter_3_04, error(domain_error(http_parameter_validation, [invalid_parameter_value(query, enabled, maybe, expected(boolean))]))) :-
 		Request = request(get, origin('/flags', 'enabled=maybe'), http(1, 1), [], empty, []),
 		http_parameters::parameter(Request, parameter(enabled, query, boolean, []), _Enabled).
 
-	test(http_parameters_parameter_3_05, error(http_parameter_validation([invalid_parameter_value(path, caption, 42, incompatible_type(text))]))) :-
+	test(http_parameters_parameter_3_05, error(domain_error(http_parameter_validation, [invalid_parameter_value(path, caption, 42, incompatible_type(text))]))) :-
 		Request = request(get, origin('/path'), http(1, 1), [], empty, [path_params([caption-42, alias-42, weight-oops, published-maybe])]),
 		http_parameters::parameter(Request, parameter(caption, path, text, []), _Caption).
 
-	test(http_parameters_parameter_3_06, error(http_parameter_validation([invalid_parameter_value(path, alias, 42, incompatible_type(atom))]))) :-
+	test(http_parameters_parameter_3_06, error(domain_error(http_parameter_validation, [invalid_parameter_value(path, alias, 42, incompatible_type(atom))]))) :-
 		Request = request(get, origin('/path'), http(1, 1), [], empty, [path_params([caption-42, alias-42, weight-oops, published-maybe])]),
 		http_parameters::parameter(Request, parameter(alias, path, atom, []), _Alias).
 
-	test(http_parameters_parameter_3_07, error(http_parameter_validation([invalid_parameter_value(path, weight, oops, incompatible_type(number))]))) :-
+	test(http_parameters_parameter_3_07, error(domain_error(http_parameter_validation, [invalid_parameter_value(path, weight, oops, incompatible_type(number))]))) :-
 		Request = request(get, origin('/path'), http(1, 1), [], empty, [path_params([caption-42, alias-42, weight-oops, published-maybe])]),
 		http_parameters::parameter(Request, parameter(weight, path, number, []), _Weight).
 
-	test(http_parameters_parameter_3_08, error(http_parameter_validation([invalid_parameter_value(path, published, maybe, incompatible_type(boolean))]))) :-
+	test(http_parameters_parameter_3_08, error(domain_error(http_parameter_validation, [invalid_parameter_value(path, published, maybe, incompatible_type(boolean))]))) :-
 		Request = request(get, origin('/path'), http(1, 1), [], empty, [path_params([caption-42, alias-42, weight-oops, published-maybe])]),
 		http_parameters::parameter(Request, parameter(published, path, boolean, []), _Published).
 

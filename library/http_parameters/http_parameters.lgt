@@ -23,16 +23,16 @@
 	imports(http_json_term_helpers)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-02,
+		date is 2026-08-09,
 		comment is 'Typed HTTP query, form, path, header, and cookie parameter extraction helpers plus OpenAPI descriptor generation helpers.'
 	]).
 
 	:- public(parameters/3).
 	:- mode(parameters(+compound, +list(compound), -list(compound)), one_or_error).
 	:- info(parameters/3, [
-		comment is 'Extracts typed parameters from a normalized HTTP request using the given declaration list. Client-input failures throw ``error(http_parameter_validation(Errors), Context)`` where ``Errors`` is a non-empty list of structured parameter errors.',
+		comment is 'Extracts typed parameters from a normalized HTTP request using the given declaration list. Client-input failures throw ``domain_error(http_parameter_validation, Errors)`` where ``Errors`` is a non-empty list of structured parameter errors.',
 		argnames is ['Request', 'Declarations', 'Parameters'],
 		exceptions is [
 			'``Request`` is not a valid normalized HTTP request term' - domain_error(http_request, 'Request'),
@@ -47,7 +47,7 @@
 			'An element ``Declaration`` of the list ``Declarations`` has an invalid description' - domain_error(http_parameter_description, 'Description'),
 			'An element ``Declaration`` of the list ``Declarations`` has an invalid default value' - domain_error(http_parameter_default('Type'), invalid_default('Name', 'Value')),
 			'``Declarations`` contains duplicated declarations for a parameter source' - domain_error(http_parameter_declaration('Name', 'Source'), duplicate),
-			'The request parameters fail declared type or constraint validation' - error(http_parameter_validation('Errors'), 'Context')
+			'The request parameters fail declared type or constraint validation' - domain_error(http_parameter_validation, 'Errors')
 		]
 	]).
 
@@ -726,8 +726,8 @@
 		lowercase_ascii_atom(Name1, LowerName1),
 		LowerName0 == LowerName1.
 
-	throw_parameter_validation(Name, Source, Error) :-
-		throw(error(http_parameter_validation([Error]), parameter(Name, Source))).
+	throw_parameter_validation(_Name, _Source, Error) :-
+		domain_error(http_parameter_validation, [Error]).
 
 	open_api_parameter_descriptors([], []).
 	open_api_parameter_descriptors([declaration(Name, Source, _ScalarType, _Cardinality, Required, _Default, Description0, Schema, _Constraints)| Declarations], Parameters) :-

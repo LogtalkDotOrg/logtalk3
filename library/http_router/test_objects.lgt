@@ -480,9 +480,9 @@
 	imports(http_router)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-07-29,
+		date is 2026-08-09,
 		comment is 'Router object used by the http_router tests to exercise default and custom ``400`` responses generated from parameter-validation exceptions.'
 	]).
 
@@ -517,17 +517,17 @@
 	show_default_bad_request(Request, _Response) :-
 		http_core::property(Request, route(show_default_bad_request)),
 		http_core::property(Request, path_params([])),
-		throw(error(http_parameter_validation([missing_parameter(query, id)]), route_parameters(show_default_bad_request))).
+		domain_error(http_parameter_validation, [missing_parameter(query, id)]).
 
 	show_custom_bad_request(Request, _Response) :-
 		http_core::property(Request, route(show_custom_bad_request)),
 		http_core::property(Request, path_params([])),
-		throw(error(http_parameter_validation([duplicate_parameter(query, id)]), route_parameters(show_custom_bad_request))).
+		domain_error(http_parameter_validation, [duplicate_parameter(query, id)]).
 
 	show_handler_error(Request, _Response) :-
 		http_core::property(Request, route(show_handler_error)),
 		http_core::property(Request, path_params([])),
-		throw(error(domain_error(http_router_test, invalid_handler_error), show_handler_error/2)).
+		domain_error(http_router_handler, invalid_handler_error).
 
 	route_bad_request_response(Request, Errors, Response) :-
 		Errors == [duplicate_parameter(query, id)],

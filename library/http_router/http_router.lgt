@@ -24,9 +24,9 @@
 	extends([http_json_term_helpers, http_text_helpers])).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-08-02,
+		date is 2026-08-09,
 		comment is 'Declarative HTTP router category for objects implementing the http_handler_protocol protocol.'
 	]).
 
@@ -49,7 +49,7 @@
 			'A route path template is invalid' - domain_error(http_router_path_template, 'Template'),
 			'A route path template segment is invalid' - domain_error(http_router_path_template_segment, 'Segment'),
 			'A request path is invalid' - domain_error(http_router_path, 'Path'),
-			'The route handler reports parameter validation errors' - error(http_parameter_validation('Errors'), 'Context')
+			'The route handler reports parameter validation errors' - domain_error(http_parameter_validation, 'Errors')
 		]
 	]).
 
@@ -912,7 +912,7 @@
 			handle_not_acceptable_response(RouteId, Request, Response)
 		).
 
-	handle_route_handler_error(error(http_parameter_validation(Errors), _Context), Request, Response) :-
+	handle_route_handler_error(error(domain_error(http_parameter_validation, Errors), _Context), Request, Response) :-
 		Errors = [_| _],
 		!,
 		bad_request_response(Request, Errors, Response).
