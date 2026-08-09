@@ -97,6 +97,10 @@ on demand.
 * ADDED: New `spectral_clusterer` library implementing a normalized spectral
 clusterer for continuous datasets.
 
+* ADDED: New `svr_regression` library implementing Support vector regression
+(SVR) using an epsilon-insensitive dual margin model with linear, polynomial,
+and radial basis function kernels.
+
 * ADDED: New `tsne_projection` library implementing exact t-distributed
 Stochastic Neighbor Embedding dimension reduction for continuous datasets.
 

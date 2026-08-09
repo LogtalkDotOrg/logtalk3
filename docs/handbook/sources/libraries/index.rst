@@ -271,6 +271,7 @@ directory in the ``NOTES.md`` file.
    string_distance
    strings
    subsequences
+   svr_regression
    term_io
    thurstone_mosteller_ranker
    time_scales

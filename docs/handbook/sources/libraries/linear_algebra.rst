@@ -18,6 +18,28 @@ helpers, and Cholesky-based linear solves.
 Vectors are represented as lists of numbers. Matrices are represented as
 lists of row lists, where each row is a numeric vector.
 
+Empty vector semantics
+----------------------
+
+The ``linear_algebra`` library treats the empty list as a valid
+zero-dimensional vector. Consequently, the dot product and all supported
+norms of an empty vector return the floating-point identity ``0.0``.
+These semantics also apply to derived operations such as vector
+normalization, difference norms, zero-width matrix-vector products, and
+Gram matrices of zero-width rows.
+
+This differs intentionally from the ``numberlist`` library, whose
+``scalar_product/3`` and norm predicates fail for empty lists. Those
+predicates preserve an integer or floating-point result according to
+their input element types, but an empty list provides no element type
+from which to choose the result representation. For non-empty vectors,
+``linear_algebra`` delegates to ``numberlist`` and preserves its
+result-type semantics.
+
+Predicates whose result inherently requires an observation or an index,
+such as ``matrix_row_means/2``, Gram centering predicates, and
+``vector_value/3``, still require non-empty input where applicable.
+
 Predicates that index into vectors or matrices use one-based indices.
 Matrix access predicates use one-based row and column indices.
 

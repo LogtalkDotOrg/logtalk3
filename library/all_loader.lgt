@@ -221,6 +221,7 @@
 		ridge_regression(loader),
 		random_forest_regression(loader),
 		regression_tree(loader),
+		svr_regression(loader),
 		pattern_mining_protocols(loader),
 		frequent_pattern_mining_protocols(loader),
 		sequential_pattern_mining_protocols(loader),

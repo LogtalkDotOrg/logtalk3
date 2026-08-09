@@ -232,6 +232,7 @@
 <li class="toctree-l2"><a class="reference internal" href="lda_projection.html"><code class="docutils literal notranslate"><span class="pre">lda_projection</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="linda.html"><code class="docutils literal notranslate"><span class="pre">linda</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">linear_algebra</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#empty-vector-semantics">Empty vector semantics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
@@ -318,6 +319,7 @@
 <li class="toctree-l2"><a class="reference internal" href="string_distance.html"><code class="docutils literal notranslate"><span class="pre">string_distance</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="strings.html"><code class="docutils literal notranslate"><span class="pre">strings</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="subsequences.html"><code class="docutils literal notranslate"><span class="pre">subsequences</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="svr_regression.html"><code class="docutils literal notranslate"><span class="pre">svr_regression</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="term_io.html"><code class="docutils literal notranslate"><span class="pre">term_io</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="thurstone_mosteller_ranker.html"><code class="docutils literal notranslate"><span class="pre">thurstone_mosteller_ranker</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="time_scales.html"><code class="docutils literal notranslate"><span class="pre">time_scales</span></code></a></li>
@@ -400,6 +402,24 @@ eigendecomposition, pseudo-inverse and null-space helpers, covariance
 helpers, and Cholesky-based linear solves.</p>
 <p>Vectors are represented as lists of numbers. Matrices are represented as
 lists of row lists, where each row is a numeric vector.</p>
+<section id="empty-vector-semantics">
+<h2>Empty vector semantics<a class="headerlink" href="#empty-vector-semantics" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">linear_algebra</span></code> library treats the empty list as a valid
+zero-dimensional vector. Consequently, the dot product and all supported
+norms of an empty vector return the floating-point identity <code class="docutils literal notranslate"><span class="pre">0.0</span></code>.
+These semantics also apply to derived operations such as vector
+normalization, difference norms, zero-width matrix-vector products, and
+Gram matrices of zero-width rows.</p>
+<p>This differs intentionally from the <code class="docutils literal notranslate"><span class="pre">numberlist</span></code> library, whose
+<code class="docutils literal notranslate"><span class="pre">scalar_product/3</span></code> and norm predicates fail for empty lists. Those
+predicates preserve an integer or floating-point result according to
+their input element types, but an empty list provides no element type
+from which to choose the result representation. For non-empty vectors,
+<code class="docutils literal notranslate"><span class="pre">linear_algebra</span></code> delegates to <code class="docutils literal notranslate"><span class="pre">numberlist</span></code> and preserves its
+result-type semantics.</p>
+<p>Predicates whose result inherently requires an observation or an index,
+such as <code class="docutils literal notranslate"><span class="pre">matrix_row_means/2</span></code>, Gram centering predicates, and
+<code class="docutils literal notranslate"><span class="pre">vector_value/3</span></code>, still require non-empty input where applicable.</p>
 <p>Predicates that index into vectors or matrices use one-based indices.
 Matrix access predicates use one-based row and column indices.</p>
 <p>Square-system predicates include <code class="docutils literal notranslate"><span class="pre">solve_linear_system/3</span></code>,
@@ -420,6 +440,7 @@ include <code class="docutils literal notranslate"><span class="pre">normalize_v
 <p>The <code class="docutils literal notranslate"><span class="pre">symmetric_eigen/5</span></code> predicate can be used when callers need to
 control the power-iteration budget explicitly instead of relying on the
 default iteration bound.</p>
+</section>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the

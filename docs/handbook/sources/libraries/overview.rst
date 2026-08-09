@@ -91,8 +91,8 @@ Library groups
     ``elastic_net_regression``, ``gradient_boosting_regression``,
     ``gaussian_process_regression``, ``knn_regression``,
     ``lasso_regression``, ``linear_regression``,
-    ``random_forest_regression``, ``regression_tree``, and
-    ``ridge_regression``.
+    ``random_forest_regression``, ``regression_tree``,
+    ``ridge_regression``, and ``svr_regression``.
   - Ranking: ``ranking_protocols``, ``borda_ranker``,
     ``bradley_terry_ranker``, ``colley_ranker``, ``copeland_ranker``,
     ``elo_ranker``, ``glicko2_ranker``, ``glicko2_periodic_ranker``,
