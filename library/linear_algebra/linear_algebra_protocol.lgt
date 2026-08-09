@@ -1,9 +1,9 @@
 :- protocol(linear_algebra_protocol).
 
 	:- info([
-		version is 1:0:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-05,
+		date is 2026-08-09,
 		comment is 'Linear algebra protocol.'
 	]).
 
@@ -65,23 +65,23 @@
 	]).
 
 	:- public(dot_product/3).
-	:- mode(dot_product(+list(number), +list(number), -number), one).
+	:- mode(dot_product(+list(number), +list(number), -number), zero_or_one).
 	:- info(dot_product/3, [
-		comment is 'Computes the dot product of two numeric vectors.',
+		comment is 'Computes the dot product of two numeric vectors of the same length. Returns the floating-point identity 0.0 for two empty vectors. Fails when the vectors have different lengths.',
 		argnames is ['Vector1', 'Vector2', 'Product']
 	]).
 
 	:- public(euclidean_norm/2).
 	:- mode(euclidean_norm(+list(number), -float), one).
 	:- info(euclidean_norm/2, [
-		comment is 'Computes the Euclidean norm of a numeric vector.',
+		comment is 'Computes the Euclidean norm of a numeric vector. Returns the floating-point identity 0.0 for an empty vector.',
 		argnames is ['Vector', 'Norm']
 	]).
 
 	:- public(vector_norm/3).
 	:- mode(vector_norm(+list(number), @term, -number), one_or_error).
 	:- info(vector_norm/3, [
-		comment is 'Computes the norm of a numeric vector for a positive numeric order or the atoms `inf` and `infinity`.',
+		comment is 'Computes the norm of a numeric vector for a positive numeric order or the atoms `inf` and `infinity`. Returns the floating-point identity 0.0 for an empty vector and a valid order.',
 		argnames is ['Vector', 'Order', 'Norm'],
 		exceptions is [
 			'``Order`` is a variable' - instantiation_error,
@@ -135,9 +135,9 @@
 	]).
 
 	:- public(matrix_vector_product/3).
-	:- mode(matrix_vector_product(+list(list(number)), +list(number), -list(number)), one).
+	:- mode(matrix_vector_product(+list(list(number)), +list(number), -list(number)), zero_or_one).
 	:- info(matrix_vector_product/3, [
-		comment is 'Computes the matrix-vector product for a numeric matrix and vector, returning the list of row-wise dot products between each matrix row and the vector.',
+		comment is 'Computes the matrix-vector product for a numeric matrix and vector, returning the list of row-wise dot products between each matrix row and the vector. Zero-width rows multiplied by an empty vector produce 0.0 values. Fails when a row and the vector have different lengths.',
 		argnames is ['Matrix', 'Vector', 'Product']
 	]).
 
@@ -149,9 +149,9 @@
 	]).
 
 	:- public(gram_matrix/2).
-	:- mode(gram_matrix(+list(list(number)), -list(list(number))), one).
+	:- mode(gram_matrix(+list(list(number)), -list(list(number))), zero_or_one).
 	:- info(gram_matrix/2, [
-		comment is 'Computes the row Gram matrix of a numeric row matrix by taking all row-wise dot products.',
+		comment is 'Computes the row Gram matrix of a numeric row matrix by taking all row-wise dot products. For N zero-width rows, returns an N by N matrix filled with 0.0. Fails when the input rows have different lengths.',
 		argnames is ['Rows', 'GramMatrix']
 	]).
 

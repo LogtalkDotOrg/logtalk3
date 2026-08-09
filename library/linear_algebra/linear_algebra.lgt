@@ -23,9 +23,9 @@
 	implements(linear_algebra_protocol)).
 
 	:- info([
-		version is 1:1:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-21,
+		date is 2026-08-09,
 		comment is 'Linear algebra predicates for numeric vectors and matrices implemented without dependencies on machine learning libraries.'
 	]).
 
@@ -85,9 +85,13 @@
 		check(number, Scale, Context),
 		rescale(Vector, Scale, ScaledVector).
 
+	dot_product([], [], 0.0) :-
+		!.
 	dot_product(Vector1, Vector2, Product) :-
 		numberlist_dot_product(Vector1, Vector2, Product).
 
+	euclidean_norm([], 0.0) :-
+		!.
 	euclidean_norm(Vector, Norm) :-
 		numberlist_euclidean_norm(Vector, Norm).
 
@@ -96,13 +100,22 @@
 		;	Order == infinity
 		),
 		!,
-		numberlist_chebyshev_norm(Vector, Norm).
+		(	Vector == [] ->
+			Norm = 0.0
+		;	numberlist_chebyshev_norm(Vector, Norm)
+		).
 
 	vector_norm(Vector, Order, Norm) :-
 		context(Context),
 		check(number, Order, Context),
 		vector_norm_for_order(Vector, Order, Norm).
 
+	vector_norm_for_order([], Order, Norm) :-
+		!,
+		(	Order > 0.0 ->
+			Norm = 0.0
+		;	domain_error(positive_number_or_infinity, Order)
+		).
 	vector_norm_for_order(Vector, Order, Norm) :-
 		(	Order =:= 1 ->
 			numberlist_manhattan_norm(Vector, Norm)
@@ -177,9 +190,18 @@
 		transpose_matrix(Matrix2, TransposedMatrix2),
 		matrix_matrix_product_rows(Matrix1, TransposedMatrix2, Product).
 
+	gram_matrix([[]| Rows], GramMatrix) :-
+		!,
+		empty_rows(Rows),
+		length([[]| Rows], RowCount),
+		new_matrix(RowCount, RowCount, 0.0, GramMatrix).
 	gram_matrix(Rows, GramMatrix) :-
 		transpose_matrix(Rows, Columns),
 		matrix_matrix_product(Rows, Columns, GramMatrix).
+
+	empty_rows([]).
+	empty_rows([[]| Rows]) :-
+		empty_rows(Rows).
 
 	matrix_row_means([], []).
 	matrix_row_means([Row| Rows], [Mean| Means]) :-

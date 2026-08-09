@@ -37,13 +37,28 @@
 :- end_object.
 
 
+:- object(featureless_dataset,
+	implements(dataset_protocol)).
+
+	class(label).
+
+	class_values([negative, positive]).
+
+	example(1, negative, []).
+	example(2, positive, []).
+	example(3, negative, []).
+	example(4, positive, []).
+
+:- end_object.
+
+
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-08-09,
 		comment is 'Unit tests for the "kernel_svm_classifier" library.'
 	]).
 
@@ -92,6 +107,15 @@
 		kernel_svm_classifier::learn(xor_dataset, Classifier, [kernel(rbf(2.0)), learning_rate(1.0), maximum_iterations(40), l2_regularization(0.0), feature_scaling(false)]),
 		kernel_svm_classifier::predict(Classifier, [x1-0.0, x2-1.0], Prediction).
 
+	test(kernel_svm_featureless_linear, deterministic(Total =~= 1.0)) :-
+		featureless_kernel_probabilities(linear, Total).
+
+	test(kernel_svm_featureless_polynomial, deterministic(Total =~= 1.0)) :-
+		featureless_kernel_probabilities(polynomial(2, 0.5, 1.0), Total).
+
+	test(kernel_svm_featureless_rbf, deterministic(Total =~= 1.0)) :-
+		featureless_kernel_probabilities(rbf(0.5), Total).
+
 	test(kernel_svm_export_to_clauses_4, deterministic(Prediction == yes)) :-
 		kernel_svm_classifier::learn(weather, Classifier),
 		kernel_svm_classifier::export_to_clauses(weather, Classifier, classifier, [classifier(ExportedClassifier)]),
@@ -118,5 +142,15 @@
 		^^suppress_text_output,
 		kernel_svm_classifier::learn(weather, Classifier),
 		kernel_svm_classifier::print_classifier(Classifier).
+
+	% auxiliary predicates
+
+	featureless_kernel_probabilities(Kernel, Total) :-
+		kernel_svm_classifier::learn(featureless_dataset, Classifier, [kernel(Kernel)]),
+		kernel_svm_classifier::valid_classifier(Classifier),
+		kernel_svm_classifier::predict_probabilities(Classifier, [], Probabilities),
+		memberchk(negative-Negative, Probabilities),
+		memberchk(positive-Positive, Probabilities),
+		Total is Negative + Positive.
 
 :- end_object.

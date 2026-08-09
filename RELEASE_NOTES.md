@@ -53,6 +53,11 @@ Documentation
 Library
 -------
 
+* CHANGED: The `linear_algebra` library to return `0.0` for empty-vector dot
+products and norms, propagate these semantics to normalization, difference
+norms, and zero-width matrix-vector products, and return correctly shaped
+square zero Gram matrices for zero-width row matrices.
+
 * CHANGED: The `http_router` library `http_router` category now implements
 `http_handler_protocol` (as a marker protocol) to simplify server code that
 defines routes.

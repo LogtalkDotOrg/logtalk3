@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-05-04,
+		date is 2026-08-09,
 		comment is 'Unit tests for the "linear_algebra" library.'
 	]).
 
@@ -50,17 +50,47 @@
 	test(linear_algebra_dot_product_3, deterministic(Value == 11.0)) :-
 		linear_algebra::dot_product([1.0, 2.0], [3.0, 4.0], Value).
 
+	test(linear_algebra_dot_product_3_empty, deterministic(Value == 0.0)) :-
+		linear_algebra::dot_product([], [], Value).
+
+	test(linear_algebra_dot_product_3_mismatched, fail) :-
+		linear_algebra::dot_product([], [1.0], _).
+
+	test(linear_algebra_dot_product_3_mismatched_reverse, fail) :-
+		linear_algebra::dot_product([1.0], [], _).
+
 	test(linear_algebra_euclidean_norm_2, deterministic(Norm =~= 5.0)) :-
 		linear_algebra::euclidean_norm([3.0, 4.0], Norm).
+
+	test(linear_algebra_euclidean_norm_2_empty, deterministic(Norm == 0.0)) :-
+		linear_algebra::euclidean_norm([], Norm).
 
 	test(linear_algebra_vector_norm_3_order_1, deterministic(Norm == 7.0)) :-
 		linear_algebra::vector_norm([3.0, 4.0], 1, Norm).
 
+	test(linear_algebra_vector_norm_3_empty_order_1, deterministic(Norm == 0.0)) :-
+		linear_algebra::vector_norm([], 1, Norm).
+
+	test(linear_algebra_vector_norm_3_empty_order_2, deterministic(Norm == 0.0)) :-
+		linear_algebra::vector_norm([], 2, Norm).
+
+	test(linear_algebra_vector_norm_3_empty_order_3_5, deterministic(Norm == 0.0)) :-
+		linear_algebra::vector_norm([], 3.5, Norm).
+
 	test(linear_algebra_vector_norm_3_order_inf, deterministic(Norm == 4.0)) :-
 		linear_algebra::vector_norm([3.0, 4.0], inf, Norm).
 
+	test(linear_algebra_vector_norm_3_empty_order_inf, deterministic(Norm == 0.0)) :-
+		linear_algebra::vector_norm([], inf, Norm).
+
+	test(linear_algebra_vector_norm_3_empty_order_infinity, deterministic(Norm == 0.0)) :-
+		linear_algebra::vector_norm([], infinity, Norm).
+
 	test(linear_algebra_vector_norm_3_invalid_order, error(domain_error(positive_number_or_infinity, 0))) :-
 		linear_algebra::vector_norm([3.0, 4.0], 0, _).
+
+	test(linear_algebra_vector_norm_3_empty_invalid_order, error(domain_error(positive_number_or_infinity, 0))) :-
+		linear_algebra::vector_norm([], 0, _).
 
 	test(linear_algebra_basis_vector_3, deterministic(Vector == [0.0, 1.0, 0.0])) :-
 		linear_algebra::basis_vector(3, 2, Vector).
@@ -80,11 +110,23 @@
 	test(linear_algebra_normalize_vector_2, deterministic((X =~= 0.6, Y =~= 0.8))) :-
 		linear_algebra::normalize_vector([3.0, 4.0], [X, Y]).
 
+	test(linear_algebra_normalize_vector_2_empty, deterministic(Vector == [])) :-
+		linear_algebra::normalize_vector([], Vector).
+
 	test(linear_algebra_normalize_vector_3_large_tolerance, deterministic(Vector == [3.0, 4.0])) :-
 		linear_algebra::normalize_vector([3.0, 4.0], 10.0, Vector).
 
+	test(linear_algebra_normalize_vector_3_empty, deterministic(Vector == [])) :-
+		linear_algebra::normalize_vector([], 1.0e-12, Vector).
+
 	test(linear_algebra_normalize_vector_3_negative_tolerance, error(domain_error(non_negative_number, -1.0))) :-
 		linear_algebra::normalize_vector([3.0, 4.0], -1.0, _).
+
+	test(linear_algebra_normalize_vector_3_empty_negative_tolerance, error(domain_error(non_negative_number, -1.0))) :-
+		linear_algebra::normalize_vector([], -1.0, _).
+
+	test(linear_algebra_difference_norm_3_empty, deterministic(Norm == 0.0)) :-
+		linear_algebra::difference_norm([], [], Norm).
 
 	test(linear_algebra_first_significant_component_2, deterministic(Value == 0.5)) :-
 		linear_algebra::first_significant_component([1.0e-13, 0.5, -0.2], Value).
@@ -106,6 +148,12 @@
 
 	test(linear_algebra_matrix_vector_product_3, deterministic(Product == [2.0, 4.0])) :-
 		linear_algebra::matrix_vector_product([[1.0, 2.0], [3.0, 4.0]], [0.0, 1.0], Product).
+
+	test(linear_algebra_matrix_vector_product_3_empty_rows, deterministic(Product == [0.0, 0.0])) :-
+		linear_algebra::matrix_vector_product([[], []], [], Product).
+
+	test(linear_algebra_matrix_vector_product_3_mismatched, fail) :-
+		linear_algebra::matrix_vector_product([[1.0], [2.0]], [], _).
 
 	test(linear_algebra_identity_matrix_2, deterministic(Matrix == [[1.0, 0.0], [0.0, 1.0]])) :-
 		linear_algebra::identity_matrix(2, Matrix).
@@ -230,6 +278,21 @@
 
 	test(linear_algebra_gram_matrix_2, deterministic(GramMatrix == [[5.0, 11.0], [11.0, 25.0]])) :-
 		linear_algebra::gram_matrix([[1.0, 2.0], [3.0, 4.0]], GramMatrix).
+
+	test(linear_algebra_gram_matrix_2_empty, deterministic(GramMatrix == [])) :-
+		linear_algebra::gram_matrix([], GramMatrix).
+
+	test(linear_algebra_gram_matrix_2_one_empty_row, deterministic(GramMatrix == [[0.0]])) :-
+		linear_algebra::gram_matrix([[]], GramMatrix).
+
+	test(linear_algebra_gram_matrix_2_empty_rows, deterministic(GramMatrix == [[0.0, 0.0], [0.0, 0.0]])) :-
+		linear_algebra::gram_matrix([[], []], GramMatrix).
+
+	test(linear_algebra_gram_matrix_2_malformed_empty_rows, fail) :-
+		linear_algebra::gram_matrix([[], [1.0]], _).
+
+	test(linear_algebra_gram_matrix_2_malformed_empty_rows_reverse, fail) :-
+		linear_algebra::gram_matrix([[1.0], []], _).
 
 	test(linear_algebra_matrix_row_means_2, deterministic(Means == [1.5, 3.5])) :-
 		linear_algebra::matrix_row_means([[1.0, 2.0], [3.0, 4.0]], Means).

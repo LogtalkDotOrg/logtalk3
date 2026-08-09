@@ -117,13 +117,23 @@
 :- end_object.
 
 
+:- object(featureless_kernel_pca_dataset,
+	implements(dimension_reduction_dataset_protocol)).
+
+	example(1, []).
+	example(2, []).
+	example(3, []).
+
+:- end_object.
+
+
 :- object(tests,
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-18,
+		date is 2026-08-09,
 		comment is 'Unit tests for the "kernel_pca_projection" library.'
 	]).
 
@@ -178,6 +188,15 @@
 
 	test(kernel_pca_learn_3_shortfall_policy_error, error(domain_error(component_count, 1-0))) :-
 		kernel_pca_projection::learn(shortfall_kernel_pca_dataset, _DimensionReducer, [n_components(1), feature_scaling(false), shortfall_policy(error), kernel(linear)]).
+
+	test(kernel_pca_featureless_linear, deterministic) :-
+		featureless_kernel_reducer(linear).
+
+	test(kernel_pca_featureless_polynomial, deterministic) :-
+		featureless_kernel_reducer(polynomial(2, 0.5, 1.0)).
+
+	test(kernel_pca_featureless_rbf, deterministic) :-
+		featureless_kernel_reducer(rbf(0.5)).
 
 	test(kernel_pca_learn_3_shortfall_policy_unbound_value, error(domain_error(option, shortfall_policy(_)))) :-
 		kernel_pca_projection::learn(correlated_plane, _DimensionReducer, [shortfall_policy(_Policy)]).
@@ -315,5 +334,17 @@
 
 	test(kernel_pca_learn_3_negative_polynomial_offset, error(domain_error(option, kernel(polynomial(2, 0.5, -1.0))))) :-
 		kernel_pca_projection::learn(correlated_plane, _DimensionReducer, [kernel(polynomial(2, 0.5, -1.0))]).
+
+	% auxiliary predicates
+
+	featureless_kernel_reducer(Kernel) :-
+		kernel_pca_projection::learn(featureless_kernel_pca_dataset, DimensionReducer, [n_components(1), feature_scaling(false), shortfall_policy(truncate), kernel(Kernel)]),
+		kernel_pca_projection::check_dimension_reducer(DimensionReducer),
+		kernel_pca_projection::diagnostics(DimensionReducer, Diagnostics),
+		memberchk(component_count(0), Diagnostics),
+		memberchk(shortfall(truncated(1, 0, ResidualEigenvalue, 1.0e-8)), Diagnostics),
+		ResidualEigenvalue >= 0.0,
+		kernel_pca_projection::transform(DimensionReducer, [], ReducedInstance),
+		ReducedInstance == [].
 
 :- end_object.

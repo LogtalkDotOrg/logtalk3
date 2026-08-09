@@ -23,9 +23,9 @@
 	imports(dimension_reducer_common)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-08-09,
 		comment is 'Kernel Principal Component Analysis reducer for continuous datasets using a portable power-iteration eigensolver over centered kernel Gram matrices.',
 		see_also is [pca_projection, random_projection]
 	]).
@@ -39,7 +39,7 @@
 	]).
 
 	:- uses(numberlist, [
-		rescale/3, scalar_product/3 as dot_product/3
+		rescale/3
 	]).
 
 	:- uses(pairs, [
@@ -51,7 +51,8 @@
 	]).
 
 	:- uses(linear_algebra, [
-		center_gram_matrix/4, center_gram_vector/4, outer_product/3, scale_matrix/3, subtract_matrices/3, subtract_vectors/3
+		center_gram_matrix/4, center_gram_vector/4, dot_product/3, outer_product/3, scale_matrix/3,
+		subtract_matrices/3, subtract_vectors/3
 	]).
 
 	learn(Dataset, DimensionReducer, UserOptions) :-

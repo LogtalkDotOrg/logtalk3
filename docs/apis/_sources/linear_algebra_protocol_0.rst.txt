@@ -14,8 +14,8 @@ Linear algebra protocol.
 |    ``logtalk_load(linear_algebra(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-05-05
+| **Version:** 2:0:0
+| **Date:** 2026-08-09
 
 | **Compilation flags:**
 |    ``static``
@@ -182,7 +182,7 @@ Scales a numeric vector by the given factor.
 ``dot_product/3``
 ^^^^^^^^^^^^^^^^^
 
-Computes the dot product of two numeric vectors.
+Computes the dot product of two numeric vectors of the same length. Returns the floating-point identity 0.0 for two empty vectors. Fails when the vectors have different lengths.
 
 | **Compilation flags:**
 |    ``static``
@@ -190,7 +190,7 @@ Computes the dot product of two numeric vectors.
 | **Template:**
 |    ``dot_product(Vector1,Vector2,Product)``
 | **Mode and number of proofs:**
-|    ``dot_product(+list(number),+list(number),-number)`` - ``one``
+|    ``dot_product(+list(number),+list(number),-number)`` - ``zero_or_one``
 
 
 ------------
@@ -201,7 +201,7 @@ Computes the dot product of two numeric vectors.
 ``euclidean_norm/2``
 ^^^^^^^^^^^^^^^^^^^^
 
-Computes the Euclidean norm of a numeric vector.
+Computes the Euclidean norm of a numeric vector. Returns the floating-point identity 0.0 for an empty vector.
 
 | **Compilation flags:**
 |    ``static``
@@ -220,7 +220,7 @@ Computes the Euclidean norm of a numeric vector.
 ``vector_norm/3``
 ^^^^^^^^^^^^^^^^^
 
-Computes the norm of a numeric vector for a positive numeric order or the atoms `inf` and `infinity`.
+Computes the norm of a numeric vector for a positive numeric order or the atoms `inf` and `infinity`. Returns the floating-point identity 0.0 for an empty vector and a valid order.
 
 | **Compilation flags:**
 |    ``static``
@@ -344,7 +344,7 @@ Constructs a square identity matrix with the requested size.
 ``matrix_vector_product/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Computes the matrix-vector product for a numeric matrix and vector, returning the list of row-wise dot products between each matrix row and the vector.
+Computes the matrix-vector product for a numeric matrix and vector, returning the list of row-wise dot products between each matrix row and the vector. Zero-width rows multiplied by an empty vector produce 0.0 values. Fails when a row and the vector have different lengths.
 
 | **Compilation flags:**
 |    ``static``
@@ -352,7 +352,7 @@ Computes the matrix-vector product for a numeric matrix and vector, returning th
 | **Template:**
 |    ``matrix_vector_product(Matrix,Vector,Product)``
 | **Mode and number of proofs:**
-|    ``matrix_vector_product(+list(list(number)),+list(number),-list(number))`` - ``one``
+|    ``matrix_vector_product(+list(list(number)),+list(number),-list(number))`` - ``zero_or_one``
 
 
 ------------
@@ -382,7 +382,7 @@ Computes the matrix-matrix product for two numeric matrices.
 ``gram_matrix/2``
 ^^^^^^^^^^^^^^^^^
 
-Computes the row Gram matrix of a numeric row matrix by taking all row-wise dot products.
+Computes the row Gram matrix of a numeric row matrix by taking all row-wise dot products. For N zero-width rows, returns an N by N matrix filled with 0.0. Fails when the input rows have different lengths.
 
 | **Compilation flags:**
 |    ``static``
@@ -390,7 +390,7 @@ Computes the row Gram matrix of a numeric row matrix by taking all row-wise dot 
 | **Template:**
 |    ``gram_matrix(Rows,GramMatrix)``
 | **Mode and number of proofs:**
-|    ``gram_matrix(+list(list(number)),-list(list(number)))`` - ``one``
+|    ``gram_matrix(+list(list(number)),-list(list(number)))`` - ``zero_or_one``
 
 
 ------------
