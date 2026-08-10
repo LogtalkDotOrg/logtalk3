@@ -30,7 +30,7 @@
 		comment is 'Generated ISO 3166-1 country facts extracted from the UN M49 overview page, which republishes ISO alpha-2 and alpha-3 codes together with M49 numeric codes.',
 		remarks is [
 			'Source URL' - 'https://unstats.un.org/unsd/methodology/m49/overview/',
-			'Generated entries' - '248'
+			'Generated entries' - '248.'
 		]
 	]).
 

@@ -29,8 +29,8 @@
 		date is 2026-05-05,
 		comment is 'Generated ISO 639-3 fact table.',
 		remarks is [
-			'Source update' - '2026-04-15',
-			'Generated entries' - '7929',
+			'Source update' - '2026-04-15.',
+			'Generated entries' - '7929.',
 			'Source' - 'SIL ISO 639-3 tab-delimited code set.'
 		]
 	]).

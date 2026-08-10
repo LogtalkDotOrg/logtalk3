@@ -30,7 +30,7 @@
 		comment is 'Generated ISO 3166-2 subdivision facts extracted from the Debian iso-codes machine-readable JSON snapshot.',
 		remarks is [
 			'Source URL' - 'https://salsa.debian.org/iso-codes-team/iso-codes/-/raw/main/data/iso_3166-2.json',
-			'Generated entries' - '5046'
+			'Generated entries' - '5046.'
 		]
 	]).
 

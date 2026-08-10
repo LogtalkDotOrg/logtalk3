@@ -30,9 +30,9 @@
 		date is 2026-05-05,
 		comment is 'Generated ISO 4217 active currency and fund facts extracted from the SIX list-one.xml snapshot.',
 		remarks is [
-			'Source publication' - '2026-01-01',
-			'Generated currency entries' - '269',
-			'Generated fund entries' - '8'
+			'Source publication' - '2026-01-01.',
+			'Generated currency entries' - '269.',
+			'Generated fund entries' - '8.'
 		]
 	]).
 

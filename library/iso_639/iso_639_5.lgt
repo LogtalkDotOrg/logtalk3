@@ -29,8 +29,8 @@
 		date is 2026-05-05,
 		comment is 'Generated ISO 639-5 fact table.',
 		remarks is [
-			'Source update' - '2026-04-15',
-			'Generated entries' - '115',
+			'Source update' - '2026-04-15.',
+			'Generated entries' - '115.',
 			'Source' - 'Library of Congress ISO 639-5 identifier list.'
 		]
 	]).
