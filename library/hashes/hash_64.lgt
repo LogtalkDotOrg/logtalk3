@@ -1037,7 +1037,7 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-04,
+		date is 2026-08-10,
 		comment is 'BLAKE2b hash function.',
 		parameters is [
 			'Key' - 'A list of 0 to 64 key bytes. Use the empty list for unkeyed hashing.',
@@ -1051,7 +1051,7 @@
 	]).
 
 	:- uses(hash_common_64, [
-		add64/3, or64/3, rol64/3, shl64/3, xor64/3
+		add64/3, rol64/3, xor64/3
 	]).
 
 	:- uses(list, [
@@ -1294,7 +1294,7 @@
 	:- info([
 		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-08-04,
+		date is 2026-08-10,
 		comment is 'SHA-512 hash function.',
 		see_also is [sha512_256, sha384, sha256, sha1]
 	]).
@@ -1309,7 +1309,7 @@
 
 	:- uses(hash_common_64, [
 		add64/3, and64/3, not64/2, or64/3,
-		pad_md_tail/3, rol64/3, shl64/3, shr64/3, xor64/3
+		pad_md_tail/3, rol64/3, shr64/3, xor64/3
 	]).
 
 	:- uses(list, [
@@ -1578,7 +1578,7 @@
 	:- info([
 		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-08-04,
+		date is 2026-08-10,
 		comment is 'SHA-512/256 hash function.',
 		see_also is [sha256, sha1, sha384]
 	]).
@@ -1593,7 +1593,7 @@
 
 	:- uses(hash_common_64, [
 		add64/3, and64/3, not64/2, or64/3,
-		pad_md_tail/3, rol64/3, shl64/3, shr64/3, xor64/3
+		pad_md_tail/3, rol64/3, shr64/3, xor64/3
 	]).
 
 	:- uses(list, [
@@ -1858,7 +1858,7 @@
 	:- info([
 		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-04,
+		date is 2026-08-10,
 		comment is 'SHA-384 hash function.',
 		see_also is [sha512, sha512_256, sha256, sha224]
 	]).
@@ -1873,7 +1873,7 @@
 
 	:- uses(hash_common_64, [
 		add64/3, and64/3, not64/2, or64/3,
-		pad_md_tail/3, rol64/3, shl64/3, shr64/3, xor64/3
+		pad_md_tail/3, rol64/3, shr64/3, xor64/3
 	]).
 
 	:- uses(list, [
