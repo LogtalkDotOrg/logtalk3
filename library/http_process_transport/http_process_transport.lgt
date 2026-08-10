@@ -24,9 +24,9 @@
 	imports([options, http_message_helpers, http_text_helpers])).
 
 	:- info([
-		version is 1:1:3,
+		version is 1:1:4,
 		author is 'Paulo Moura',
-		date is 2026-08-08,
+		date is 2026-08-10,
 		comment is 'Process-backed HTTP transport predicates using the process library and helper processes.'
 	]).
 
@@ -302,7 +302,7 @@
 			process::wait(Process, Status),
 			close_process_stream(Output),
 			close_process_stream(Error),
-			(	once((Status == 0; Status == exit(0))) ->
+			(	(Status == 0; Status == exit(0)) ->
 				true
 			;	cleanup_temporary_tls_credentials(credentials(CertificateFile, KeyFile)),
 				resource_error(http_process_transport_temporary_tls_credentials)
