@@ -22,9 +22,9 @@
 :- protocol(sampling_protocol).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2025-02-25,
+		date is 2026-08-10,
 		comment is 'Predicates for sampling probability distributions.',
 		see_also is [random_protocol, pseudo_random_protocol]
 	]).
@@ -65,23 +65,23 @@
 	]).
 
 	:- public(logseries/2).
-	:- mode(logseries(+non_negative_integer, -positive_integer), zero_or_one).
+	:- mode(logseries(+positive_float, -positive_integer), zero_or_one).
 	:- info(logseries/2, [
 		comment is 'Returns a logseries distributed random value. Requires ``0.0 < Shape < 1`` and fails otherwise.',
 		argnames is ['Shape', 'Value']
 	]).
 
 	:- public(geometric/2).
-	:- mode(geometric(+probability, -positive_integer), one).
+	:- mode(geometric(+probability, -positive_integer), zero_or_one).
 	:- info(geometric/2, [
-		comment is 'Returns a geometric distributed random value (trials until the first success).',
+		comment is 'Returns a geometric distributed random value (trials until the first success). Requires ``0.0 < Probability =< 1.0`` and fails otherwise.',
 		argnames is ['Probability', 'Value']
 	]).
 
 	:- public(hypergeometric/4).
-	:- mode(hypergeometric(+non_negative_integer, +non_negative_integer, +non_negative_integer, -non_negative_integer), one).
+	:- mode(hypergeometric(+non_negative_integer, +non_negative_integer, +non_negative_integer, -non_negative_integer), zero_or_one).
 	:- info(hypergeometric/4, [
-		comment is 'Returns a hypergeometric distributed random value.',
+		comment is 'Returns a hypergeometric distributed random value. Requires ``Successes =< Population`` and ``Draws =< Population`` and fails otherwise.',
 		argnames is ['Population', 'Successes', 'Draws', 'Value']
 	]).
 
@@ -93,14 +93,14 @@
 	]).
 
 	:- public(binomial/3).
-	:- mode(binomial(+positive_integer, +positive_float, -float), one).
+	:- mode(binomial(+non_negative_integer, +probability, -non_negative_integer), one).
 	:- info(binomial/3, [
 		comment is 'Returns a binomial distributed random value.',
 		argnames is ['Trials', 'Probability', 'Value']
 	]).
 
 	:- public(bernoulli/2).
-	:- mode(bernoulli(+positive_integer, -float), one).
+	:- mode(bernoulli(+probability, -non_negative_integer), one).
 	:- info(bernoulli/2, [
 		comment is 'Returns a Bernoulli distributed random value.',
 		argnames is ['Probability', 'Value']
@@ -142,7 +142,7 @@
 	]).
 
 	:- public(weibull/3).
-	:- mode(weibull(+float, +positive_float, -float), one).
+	:- mode(weibull(+positive_float, +positive_float, -float), one).
 	:- info(weibull/3, [
 		comment is 'Returns a scaled Weibull distributed random value.',
 		argnames is ['Shape', 'Scale', 'Value']
@@ -151,35 +151,35 @@
 	:- public(uniform/3).
 	:- mode(uniform(+float, +float, -float), zero_or_one).
 	:- info(uniform/3, [
-		comment is 'Returns a uniform distributed random value in the interval``[Lower, Upper[``. Fails if ``Lower`` or ``Upper`` are not integers or if ``Lower > Upper``. Same as ``random/3``.',
+		comment is 'Returns a uniform distributed random value in the interval ``[Lower, Upper[``. Fails if ``Lower`` or ``Upper`` are not floats or if ``Lower > Upper``. Same as ``random/3``.',
 		argnames is ['Lower', 'Upper', 'Value']
 	]).
 
 	:- public(uniform/1).
 	:- mode(uniform(-float), one).
 	:- info(uniform/1, [
-		comment is 'Returns a uniform distributed random value in the interval``[0.0, 1.0[``. Same as ``random/1``.',
+		comment is 'Returns a uniform distributed random value in the interval ``[0.0, 1.0[``. Same as ``random/1``.',
 		argnames is ['Value']
 	]).
 
 	:- public(triangular/4).
 	:- mode(triangular(+float, +float, +float, -float), zero_or_one).
 	:- info(triangular/4, [
-		comment is 'Returns a triangular distributed random value. Fails if the ``Left =< Mode =< Right`` condition does not hold.',
+		comment is 'Returns a triangular distributed random value. Returns ``Left`` when ``Left``, ``Mode``, and ``Right`` are equal. Fails if the ``Left =< Mode =< Right`` condition does not hold.',
 		argnames is ['Left', 'Mode', 'Right', 'Value']
 	]).
 
 	:- public(von_mises/3).
-	:- mode(von_mises(+float, +non_negative_float, -float), zero_or_one).
+	:- mode(von_mises(+float, +non_negative_float, -float), one).
 	:- info(von_mises/3, [
 		comment is 'Returns a von Mises distributed random value.',
 		argnames is ['Mode', 'Concentration', 'Value']
 	]).
 
 	:- public(gumbel/3).
-	:- mode(gumbel(+float, +non_negative_float, -float), zero_or_one).
+	:- mode(gumbel(+float, +positive_float, -float), one).
 	:- info(gumbel/3, [
-		comment is 'Returns a Gumbel distributed random value.',
+		comment is 'Returns a Gumbel distributed random value. Fails if ``Scale`` is not positive.',
 		argnames is ['Location', 'Scale', 'Value']
 	]).
 
@@ -191,14 +191,14 @@
 	]).
 
 	:- public(circular_uniform_polar/3).
-	:- mode(circular_uniform_polar(+float, +float, -float), one).
+	:- mode(circular_uniform_polar(+non_negative_float, -float, -float), one).
 	:- info(circular_uniform_polar/3, [
 		comment is 'Returns a circular uniform distributed random point in polar coordinates given the circle radius.',
 		argnames is ['Radius', 'Rho', 'Theta']
 	]).
 
 	:- public(circular_uniform_cartesian/3).
-	:- mode(circular_uniform_cartesian(+float, +float, -float), one).
+	:- mode(circular_uniform_cartesian(+non_negative_float, -float, -float), one).
 	:- info(circular_uniform_cartesian/3, [
 		comment is 'Returns a circular uniform distributed random point in cartesian coordinates given the circle radius.',
 		argnames is ['Radius', 'X', 'Y']
@@ -212,7 +212,7 @@
 	]).
 
 	:- public(standard_cauchy/3).
-	:- mode(standard_cauchy(+float, +float, -float), one).
+	:- mode(standard_cauchy(+float, +positive_float, -float), one).
 	:- info(standard_cauchy/3, [
 		comment is 'Returns a standard Cauchy distributed random value.',
 		argnames is ['Location', 'Scale', 'Value']

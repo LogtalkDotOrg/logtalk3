@@ -40,7 +40,7 @@
 	logtalk_load(tool_diagnostics(loader)),
 	logtalk_load(tutor(tutor_explanations), [optimize(on)]),
 	logtalk_load([lgtunit(lgtunit_messages), lgtunit(lgtunit)], [optimize(on)]),
-	logtalk_load(tests, [hook(lgtunit)]),
+	logtalk_load([tests, tests_sampling], [hook(lgtunit)]),
 	(	current_prolog_flag(bounded, false) ->
 		lgtunit::run_test_sets([
 			tests(random),
@@ -59,7 +59,8 @@
 			tests(fast_random(xoshiro256ss)),
 			tests(fast_random(splitmix64)),
 			tests(fast_random(well512a)),
-			tests(backend_random)
+			tests(backend_random),
+			sampling_tests
 		])
 	;	lgtunit::run_test_sets([
 			tests(random),
@@ -72,7 +73,8 @@
 			tests(fast_random(xoshiro128pp)),
 			tests(fast_random(xoshiro128ss)),
 			tests(fast_random(well512a)),
-			tests(backend_random)
+			tests(backend_random),
+			sampling_tests
 		])
 	)
 )).

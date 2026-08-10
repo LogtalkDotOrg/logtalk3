@@ -24,7 +24,7 @@
 		Scaled is Mean + Deviation * Value.
 
 	lognormal(Mean, Deviation, Scaled) :-
-		normal(Mean, Deviation, Value),
+		standard_normal(Value),
 		Scaled is exp(Mean + Deviation * Value).
 
 	wald(Mean, Scale, Value) :-
@@ -41,13 +41,20 @@
 
 	:- set_logtalk_flag(suspicious_calls, silent).
 	geometric(Probability, Value) :-
-		(	Probability =:= 0.0 ->
-			Value is 0
+		Probability > 0.0,
+		Probability =< 1.0,
+		(	Probability =:= 1.0 ->
+			Value = 1
 		;	random(Random),
-			Value is ceiling(log(1 - Random) / log(1 - Probability))
+			(	Random =:= 0.0 ->
+				Value = 1
+			;	Value is ceiling(log(1 - Random) / log(1 - Probability))
+			)
 		).
 
 	hypergeometric(Population, Successes, Draws, Value) :-
+		Successes =< Population,
+		Draws =< Population,
 		hypergeometric(Draws, Population, Successes, 0, Value).
 
 	hypergeometric(0, _, _, Value, Value) :-
@@ -99,7 +106,10 @@
 	logistic(Location, Scale, Value) :-
 		Scale > 0.0,
 		random(Random),
-		Value is Location + Scale * log(Random / (1 - Random)).
+		(	Random =:= 0.0 ->
+			logistic(Location, Scale, Value)
+		;	Value is Location + Scale * log(Random / (1 - Random))
+		).
 
 	poisson(Mean, Value) :-
 		Mean >= 0,
@@ -115,8 +125,9 @@
 		poisson(Mean, N, Product, Value).
 
 	power(Exponent, Value) :-
+		Exponent > 0.0,
 		random(Random),
-		Value is Exponent * Random ** (1 / Exponent) / Exponent.
+		Value is Random ** (1 / Exponent).
 
 	weibull(Shape, Scale, Value) :-
 		Shape > 0,
@@ -135,13 +146,17 @@
 
 	triangular(Left, Mode, Right, Value) :-
 		Left =< Mode, Mode =< Right,
-		random(Random),
-		(	Random < (Mode - Left) / (Right - Left) ->
-			Value is Left + sqrt(Random * (Right - Left) * (Mode - Left))
-		;	Value is Right - sqrt((1 - Random) * (Right - Left) * (Right - Mode))
+		(	Left =:= Right ->
+			Value = Left
+		;	random(Random),
+			(	Random < (Mode - Left) / (Right - Left) ->
+				Value is Left + sqrt(Random * (Right - Left) * (Mode - Left))
+			;	Value is Right - sqrt((1 - Random) * (Right - Left) * (Right - Mode))
+			)
 		).
 
 	circular_uniform_polar(Radius, Rho, Theta) :-
+		Radius >= 0.0,
 		random(Random),
 		Rho is Radius * sqrt(Random),
 		DoublePi is 2 * pi,
@@ -166,10 +181,14 @@
 
 	standard_t(DegreesOfFreedom, Value) :-
 		chi_squared(DegreesOfFreedom, ChiSquared),
-		standard_normal(Normal),
-		Value is Normal / sqrt(ChiSquared / DegreesOfFreedom).
+		(	ChiSquared =:= 0.0 ->
+			standard_t(DegreesOfFreedom, Value)
+		;	standard_normal(Normal),
+			Value is Normal / sqrt(ChiSquared / DegreesOfFreedom)
+		).
 
 	standard_cauchy(Location, Scale, Value) :-
+		Scale > 0.0,
 		random(Uniform),
 		Value is Location + Scale * tan(pi * (Uniform - 0.5)).
 
@@ -184,10 +203,13 @@
 	standard_gamma_(Shape, Value) :-
 		(	Shape < 1.0 ->
 			random(Uniform),
-			standard_gamma(Shape + 1.0, Value0),
-			Value is Value0 * Uniform ** (1.0 / Shape)
+			(	Uniform =:= 0.0 ->
+				standard_gamma_(Shape, Value)
+			;	standard_gamma(Shape + 1.0, Value0),
+				Value is Value0 * Uniform ** (1.0 / Shape)
+			)
 		;	D is Shape - 1.0 / 3.0,
-        	C is 1.0 / sqrt(9.0 * D),
+			C is 1.0 / sqrt(9.0 * D),
 			standard_gamma(D, C, 0.0, 0.0, Value)
 		).
 
@@ -240,9 +262,14 @@
 		).
 
 	von_mises(Mode, Concentration, Value) :-
-		S is 0.5 / Concentration,
-		R is S + sqrt(1.0 + S * S),
-		von_mises(Mode, Concentration, S, R, Value).
+		Concentration >= 0.0,
+		(	Concentration =:= 0.0 ->
+			random(Uniform),
+			Value is Uniform * 2*pi
+		;	S is 0.5 / Concentration,
+			R is S + sqrt(1.0 + S * S),
+			von_mises(Mode, Concentration, S, R, Value)
+		).
 
 	von_mises(Mode, Concentration, S, R, Value) :-
 		random(Uniform1),
@@ -253,13 +280,16 @@
 		(	(Uniform2 < C * (2 - C); Uniform2 =< C * exp(1 - C)) ->
 			random(Uniform3),
 			(	Uniform3 > 0.5 ->
-				Value is Mode + acos(F) - truncate((Mode + acos(F) / (2*pi))) * 2*pi
-			;	Value is Mode - acos(F) - truncate((Mode - acos(F) / (2*pi))) * 2*pi
-			)
+				Angle is Mode + acos(F)
+			;	Angle is Mode - acos(F)
+			),
+			TwoPi is 2*pi,
+			Value is Angle - floor(Angle / TwoPi) * TwoPi
 		;	von_mises(Mode, Concentration, S, R, Value)
 		).
 
 	gumbel(Location, Scale, Value) :-
+		Scale > 0.0,
 		random(Uniform),
 		(	Uniform =:= 0.0 ->
 			gumbel(Location, Scale, Value)
