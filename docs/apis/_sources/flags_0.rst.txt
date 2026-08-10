@@ -350,8 +350,15 @@ Table of flag values.
 ``validate/3``
 ^^^^^^^^^^^^^^
 
+Validates a flag value against its type, throwing an error identifying the flag if validation fails.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``validate(Type,Value,Flag)``
+| **Mode and number of proofs:**
+|    ``validate(+atom,@term,+atom)`` - ``zero_or_one``
 
 
 ------------
@@ -362,8 +369,15 @@ Table of flag values.
 ``validate_type/1``
 ^^^^^^^^^^^^^^^^^^^
 
+True if the argument is a valid flag type, either a built-in type or a custom validator object that validates itself.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``validate_type(Type)``
+| **Mode and number of proofs:**
+|    ``validate_type(+atom)`` - ``zero_or_one``
 
 
 ------------
@@ -374,8 +388,15 @@ Table of flag values.
 ``is_validator/1``
 ^^^^^^^^^^^^^^^^^^
 
+True if the argument is a built-in flag type or an object implementing the flags_validator protocol.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``is_validator(Type)``
+| **Mode and number of proofs:**
+|    ``is_validator(+atom)`` - ``zero_or_one``
 
 
 ------------

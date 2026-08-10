@@ -203,9 +203,9 @@
 :- protocol(flags_validator).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Theofrastos Mantadelis',
-		date is 2010-11-27,
+		date is 2026-08-10,
 		comment is 'Flag validation protocol. Must be implemented by validator objects.'
 	]).
 
@@ -347,10 +347,25 @@
 		argnames is ['Flag', 'Value']
 	]).
 
-	:- private([
-		validate/3,
-		validate_type/1,
-		is_validator/1
+	:- private(validate/3).
+	:- mode(validate(+atom, @term, +atom), zero_or_one).
+	:- info(validate/3, [
+		comment is 'Validates a flag value against its type, throwing an error identifying the flag if validation fails.',
+		argnames is ['Type', 'Value', 'Flag']
+	]).
+
+	:- private(validate_type/1).
+	:- mode(validate_type(+atom), zero_or_one).
+	:- info(validate_type/1, [
+		comment is 'True if the argument is a valid flag type, either a built-in type or a custom validator object that validates itself.',
+		argnames is ['Type']
+	]).
+
+	:- private(is_validator/1).
+	:- mode(is_validator(+atom), zero_or_one).
+	:- info(is_validator/1, [
+		comment is 'True if the argument is a built-in flag type or an object implementing the flags_validator protocol.',
+		argnames is ['Type']
 	]).
 
 	get_flag_value(Flag, Value) :-
