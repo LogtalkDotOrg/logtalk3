@@ -14,8 +14,8 @@ Inductive logic programming (ILP) system based on meta-interpretive learning.
 |    ``logtalk_load(metagol(loader))``
 
 | **Author:** Metagol authors; adapted to Logtalk by Paulo Moura.
-| **Version:** 0:24:4
-| **Date:** 2024-03-15
+| **Version:** 0:25:0
+| **Date:** 2026-08-10
 
 | **Copyright:** Copyright 2016 Metagol authors; Copyright 2018-2024 Paulo Moura
 | **License:** BSD-3-Clause
@@ -175,8 +175,15 @@ Pretty prints a learned program.
 ``metarule/6``
 ^^^^^^^^^^^^^^
 
+Compiled metarule, generated from a user-defined metarule/3 or metarule/4 clause, relating a name, its substitutions, a head atom, a body, a recursion flag, and the current call path.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``metarule(Name,Subs,Head,Body,Recursive,Path)``
+| **Mode and number of proofs:**
+|    ``metarule(?atom,?list,?callable,?list,?atom,?list)`` - ``zero_or_more``
 
 
 ------------
@@ -187,20 +194,15 @@ Pretty prints a learned program.
 ``head_pred/1``
 ^^^^^^^^^^^^^^^
 
+Declares a predicate indicator that can be used in the head of a learned clause.
+
 | **Compilation flags:**
 |    ``static``
 
-
-------------
-
-.. index:: body_pred/1
-.. _metagol/0::body_pred/1:
-
-``body_pred/1``
-^^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``dynamic``
+| **Template:**
+|    ``head_pred(PredicateIndicator)``
+| **Mode and number of proofs:**
+|    ``head_pred(?predicate_indicator)`` - ``zero_or_more``
 
 
 ------------
@@ -211,8 +213,15 @@ Pretty prints a learned program.
 ``ibk/3``
 ^^^^^^^^^
 
+Interpreted background knowledge clause, generated from a user-defined ibk/2 fact or rule, relating a head atom (as a list) to a body (as a list of atoms) and the current call path.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``ibk(Head,Body,Path)``
+| **Mode and number of proofs:**
+|    ``ibk(?list,?list,?list)`` - ``zero_or_more``
 
 
 ------------
@@ -223,8 +232,34 @@ Pretty prints a learned program.
 ``func_test/3``
 ^^^^^^^^^^^^^^^
 
+Relates an atom to a test atom and a condition used to check that the learned program is functional.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``func_test(Atom,TestAtom,Condition)``
+| **Mode and number of proofs:**
+|    ``func_test(@callable,-callable,-callable)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: body_pred/1
+.. _metagol/0::body_pred/1:
+
+``body_pred/1``
+^^^^^^^^^^^^^^^
+
+Declares a predicate indicator that can be used in the body of a learned clause.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``body_pred(PredicateIndicator)``
+| **Mode and number of proofs:**
+|    ``body_pred(?predicate_indicator)`` - ``zero_or_more``
 
 
 ------------
@@ -235,8 +270,13 @@ Pretty prints a learned program.
 ``functional/0``
 ^^^^^^^^^^^^^^^^
 
+True when the learned program is required to be functional (deterministic).
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Mode and number of proofs:**
+|    ``functional`` - ``zero_or_one``
 
 
 ------------
@@ -247,8 +287,15 @@ Pretty prints a learned program.
 ``min_clauses/1``
 ^^^^^^^^^^^^^^^^^
 
+Minimum number of clauses to try when searching for a learned program.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``min_clauses(MinClauses)``
+| **Mode and number of proofs:**
+|    ``min_clauses(?integer)`` - ``zero_or_one``
 
 
 ------------
@@ -259,8 +306,15 @@ Pretty prints a learned program.
 ``max_clauses/1``
 ^^^^^^^^^^^^^^^^^
 
+Maximum number of clauses to try when searching for a learned program.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``max_clauses(MaxClauses)``
+| **Mode and number of proofs:**
+|    ``max_clauses(?integer)`` - ``zero_or_one``
 
 
 ------------
@@ -271,8 +325,15 @@ Pretty prints a learned program.
 ``max_inv_preds/1``
 ^^^^^^^^^^^^^^^^^^^
 
+Maximum number of invented predicate symbols allowed per learning task.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``max_inv_preds(MaxInventedPredicates)``
+| **Mode and number of proofs:**
+|    ``max_inv_preds(?integer)`` - ``zero_or_one``
 
 
 ------------
@@ -283,8 +344,15 @@ Pretty prints a learned program.
 ``metarule_next_id/1``
 ^^^^^^^^^^^^^^^^^^^^^^
 
+Next identifier to use when generating a name for an anonymous metarule.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``metarule_next_id(Id)``
+| **Mode and number of proofs:**
+|    ``metarule_next_id(?integer)`` - ``zero_or_one``
 
 
 ------------
@@ -295,8 +363,15 @@ Pretty prints a learned program.
 ``timeout/1``
 ^^^^^^^^^^^^^
 
+Default timeout, in seconds, used when learning a program.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``timeout(Timeout)``
+| **Mode and number of proofs:**
+|    ``timeout(?number)`` - ``zero_or_one``
 
 
 ------------
@@ -310,20 +385,15 @@ Protected predicates
 ``pprint_clause/1``
 ^^^^^^^^^^^^^^^^^^^
 
-| **Compilation flags:**
-|    ``static``
-
-
-------------
-
-.. index:: pprint_clauses/1
-.. _metagol/0::pprint_clauses/1:
-
-``pprint_clauses/1``
-^^^^^^^^^^^^^^^^^^^^
+Pretty prints a single learned clause. Can be redefined to customize the printing of learned clauses.
 
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``pprint_clause(Clause)``
+| **Mode and number of proofs:**
+|    ``pprint_clause(@clause)`` - ``one``
 
 
 ------------
@@ -334,8 +404,15 @@ Protected predicates
 ``compiled_pred_call/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
+Asserted clause used to call a compiled (pre-existing) predicate given its name and list of arguments.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``compiled_pred_call(Predicate,Arguments)``
+| **Mode and number of proofs:**
+|    ``compiled_pred_call(?atom,?list)`` - ``zero_or_more``
 
 
 ------------
@@ -346,8 +423,15 @@ Protected predicates
 ``body_pred_call/2``
 ^^^^^^^^^^^^^^^^^^^^
 
+Asserted clause used to call a background knowledge predicate given its name and list of arguments.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``body_pred_call(Predicate,Arguments)``
+| **Mode and number of proofs:**
+|    ``body_pred_call(?atom,?list)`` - ``zero_or_more``
 
 
 ------------
@@ -358,8 +442,15 @@ Protected predicates
 ``type/3``
 ^^^^^^^^^^
 
+Asserted fact classifying a predicate, given by its name and arity, by its role (head_pred, body_pred, ibk_head_pred, or compiled_pred).
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``type(Name,Arity,Type)``
+| **Mode and number of proofs:**
+|    ``type(?atom,?integer,?atom)`` - ``zero_or_more``
 
 
 ------------

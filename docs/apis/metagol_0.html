@@ -427,8 +427,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Metagol authors; adapted to Logtalk by Paulo Moura.</div>
-<div class="line"><strong>Version:</strong> 0:24:4</div>
-<div class="line"><strong>Date:</strong> 2024-03-15</div>
+<div class="line"><strong>Version:</strong> 0:25:0</div>
+<div class="line"><strong>Date:</strong> 2026-08-10</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Copyright:</strong> Copyright 2016 Metagol authors; Copyright 2018-2024 Paulo Moura</div>
@@ -484,9 +484,9 @@
 <li><p><a class="reference internal" href="#pprint-1" id="id7"><code class="docutils literal notranslate"><span class="pre">pprint/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#metarule-6" id="id8"><code class="docutils literal notranslate"><span class="pre">metarule/6</span></code></a></p></li>
 <li><p><a class="reference internal" href="#head-pred-1" id="id9"><code class="docutils literal notranslate"><span class="pre">head_pred/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#body-pred-1" id="id10"><code class="docutils literal notranslate"><span class="pre">body_pred/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#ibk-3" id="id11"><code class="docutils literal notranslate"><span class="pre">ibk/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#func-test-3" id="id12"><code class="docutils literal notranslate"><span class="pre">func_test/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#ibk-3" id="id10"><code class="docutils literal notranslate"><span class="pre">ibk/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#func-test-3" id="id11"><code class="docutils literal notranslate"><span class="pre">func_test/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#body-pred-1" id="id12"><code class="docutils literal notranslate"><span class="pre">body_pred/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#functional-0" id="id13"><code class="docutils literal notranslate"><span class="pre">functional/0</span></code></a></p></li>
 <li><p><a class="reference internal" href="#min-clauses-1" id="id14"><code class="docutils literal notranslate"><span class="pre">min_clauses/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#max-clauses-1" id="id15"><code class="docutils literal notranslate"><span class="pre">max_clauses/1</span></code></a></p></li>
@@ -498,14 +498,13 @@
 <li><p><a class="reference internal" href="#protected-predicates" id="id19">Protected predicates</a></p>
 <ul>
 <li><p><a class="reference internal" href="#pprint-clause-1" id="id20"><code class="docutils literal notranslate"><span class="pre">pprint_clause/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#pprint-clauses-1" id="id21"><code class="docutils literal notranslate"><span class="pre">pprint_clauses/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#compiled-pred-call-2" id="id22"><code class="docutils literal notranslate"><span class="pre">compiled_pred_call/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#body-pred-call-2" id="id23"><code class="docutils literal notranslate"><span class="pre">body_pred_call/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#type-3" id="id24"><code class="docutils literal notranslate"><span class="pre">type/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#compiled-pred-call-2" id="id21"><code class="docutils literal notranslate"><span class="pre">compiled_pred_call/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#body-pred-call-2" id="id22"><code class="docutils literal notranslate"><span class="pre">body_pred_call/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#type-3" id="id23"><code class="docutils literal notranslate"><span class="pre">type/3</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#private-predicates" id="id25">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id26">Operators</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id24">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id25">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -648,110 +647,227 @@
 </section>
 <section id="metarule-6">
 <span id="metagol-0-metarule-6"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">metarule/6</span></code></a><a class="headerlink" href="#metarule-6" title="Link to this heading"></a></h3>
+<p>Compiled metarule, generated from a user-defined metarule/3 or metarule/4 clause, relating a name, its substitutions, a head atom, a body, a recursion flag, and the current call path.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">metarule(Name,Subs,Head,Body,Recursive,Path)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">metarule(?atom,?list,?callable,?list,?atom,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="head-pred-1">
 <span id="metagol-0-head-pred-1"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">head_pred/1</span></code></a><a class="headerlink" href="#head-pred-1" title="Link to this heading"></a></h3>
+<p>Declares a predicate indicator that can be used in the head of a learned clause.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">head_pred(PredicateIndicator)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">head_pred(?predicate_indicator)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="ibk-3">
+<span id="metagol-0-ibk-3"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ibk/3</span></code></a><a class="headerlink" href="#ibk-3" title="Link to this heading"></a></h3>
+<p>Interpreted background knowledge clause, generated from a user-defined ibk/2 fact or rule, relating a head atom (as a list) to a body (as a list of atoms) and the current call path.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ibk(Head,Body,Path)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">ibk(?list,?list,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="func-test-3">
+<span id="metagol-0-func-test-3"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">func_test/3</span></code></a><a class="headerlink" href="#func-test-3" title="Link to this heading"></a></h3>
+<p>Relates an atom to a test atom and a condition used to check that the learned program is functional.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">func_test(Atom,TestAtom,Condition)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">func_test(&#64;callable,-callable,-callable)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="body-pred-1">
-<span id="metagol-0-body-pred-1"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">body_pred/1</span></code></a><a class="headerlink" href="#body-pred-1" title="Link to this heading"></a></h3>
+<span id="metagol-0-body-pred-1"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">body_pred/1</span></code></a><a class="headerlink" href="#body-pred-1" title="Link to this heading"></a></h3>
+<p>Declares a predicate indicator that can be used in the body of a learned clause.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
 </div>
 </div>
-<hr class="docutils" />
-</section>
-<section id="ibk-3">
-<span id="metagol-0-ibk-3"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">ibk/3</span></code></a><a class="headerlink" href="#ibk-3" title="Link to this heading"></a></h3>
 <div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">body_pred(PredicateIndicator)</span></code></div>
 </div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="func-test-3">
-<span id="metagol-0-func-test-3"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">func_test/3</span></code></a><a class="headerlink" href="#func-test-3" title="Link to this heading"></a></h3>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">body_pred(?predicate_indicator)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="functional-0">
 <span id="metagol-0-functional-0"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">functional/0</span></code></a><a class="headerlink" href="#functional-0" title="Link to this heading"></a></h3>
+<p>True when the learned program is required to be functional (deterministic).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">functional</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="min-clauses-1">
 <span id="metagol-0-min-clauses-1"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">min_clauses/1</span></code></a><a class="headerlink" href="#min-clauses-1" title="Link to this heading"></a></h3>
+<p>Minimum number of clauses to try when searching for a learned program.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">min_clauses(MinClauses)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">min_clauses(?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="max-clauses-1">
 <span id="metagol-0-max-clauses-1"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">max_clauses/1</span></code></a><a class="headerlink" href="#max-clauses-1" title="Link to this heading"></a></h3>
+<p>Maximum number of clauses to try when searching for a learned program.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">max_clauses(MaxClauses)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">max_clauses(?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="max-inv-preds-1">
 <span id="metagol-0-max-inv-preds-1"></span><span id="index-15"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">max_inv_preds/1</span></code></a><a class="headerlink" href="#max-inv-preds-1" title="Link to this heading"></a></h3>
+<p>Maximum number of invented predicate symbols allowed per learning task.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">max_inv_preds(MaxInventedPredicates)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">max_inv_preds(?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="metarule-next-id-1">
 <span id="metagol-0-metarule-next-id-1"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">metarule_next_id/1</span></code></a><a class="headerlink" href="#metarule-next-id-1" title="Link to this heading"></a></h3>
+<p>Next identifier to use when generating a name for an anonymous metarule.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">metarule_next_id(Id)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">metarule_next_id(?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="timeout-1">
 <span id="metagol-0-timeout-1"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">timeout/1</span></code></a><a class="headerlink" href="#timeout-1" title="Link to this heading"></a></h3>
+<p>Default timeout, in seconds, used when learning a program.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">timeout(Timeout)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">timeout(?number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 </section>
@@ -761,50 +877,84 @@
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
 <section id="pprint-clause-1">
 <span id="metagol-0-pprint-clause-1"></span><span id="index-18"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">pprint_clause/1</span></code></a><a class="headerlink" href="#pprint-clause-1" title="Link to this heading"></a></h3>
+<p>Pretty prints a single learned clause. Can be redefined to customize the printing of learned clauses.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
 </div>
 </div>
-<hr class="docutils" />
-</section>
-<section id="pprint-clauses-1">
-<span id="metagol-0-pprint-clauses-1"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">pprint_clauses/1</span></code></a><a class="headerlink" href="#pprint-clauses-1" title="Link to this heading"></a></h3>
 <div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">pprint_clause(Clause)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">pprint_clause(&#64;clause)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="compiled-pred-call-2">
-<span id="metagol-0-compiled-pred-call-2"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">compiled_pred_call/2</span></code></a><a class="headerlink" href="#compiled-pred-call-2" title="Link to this heading"></a></h3>
+<span id="metagol-0-compiled-pred-call-2"></span><span id="index-19"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">compiled_pred_call/2</span></code></a><a class="headerlink" href="#compiled-pred-call-2" title="Link to this heading"></a></h3>
+<p>Asserted clause used to call a compiled (pre-existing) predicate given its name and list of arguments.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">compiled_pred_call(Predicate,Arguments)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">compiled_pred_call(?atom,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="body-pred-call-2">
-<span id="metagol-0-body-pred-call-2"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">body_pred_call/2</span></code></a><a class="headerlink" href="#body-pred-call-2" title="Link to this heading"></a></h3>
+<span id="metagol-0-body-pred-call-2"></span><span id="index-20"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">body_pred_call/2</span></code></a><a class="headerlink" href="#body-pred-call-2" title="Link to this heading"></a></h3>
+<p>Asserted clause used to call a background knowledge predicate given its name and list of arguments.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">body_pred_call(Predicate,Arguments)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">body_pred_call(?atom,?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
 <section id="type-3">
-<span id="metagol-0-type-3"></span><span id="index-22"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">type/3</span></code></a><a class="headerlink" href="#type-3" title="Link to this heading"></a></h3>
+<span id="metagol-0-type-3"></span><span id="index-21"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">type/3</span></code></a><a class="headerlink" href="#type-3" title="Link to this heading"></a></h3>
+<p>Asserted fact classifying a predicate, given by its name and arity, by its role (head_pred, body_pred, ibk_head_pred, or compiled_pred).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type(Name,Arity,Type)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type(?atom,?integer,?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
 </div>
 </div>
 </section>

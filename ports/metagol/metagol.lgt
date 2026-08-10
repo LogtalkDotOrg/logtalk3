@@ -38,9 +38,9 @@
 	implements(expanding)).
 
 	:- info([
-		version is 0:24:4,
+		version is 0:25:0,
 		author is 'Metagol authors; adapted to Logtalk by Paulo Moura.',
-		date is 2024-03-15,
+		date is 2026-08-10,
 		copyright is 'Copyright 2016 Metagol authors; Copyright 2018-2024 Paulo Moura',
 		license is 'BSD-3-Clause',
 		comment is 'Inductive logic programming (ILP) system based on meta-interpretive learning.'
@@ -93,28 +93,156 @@
 	]).
 
 	% example definition
-	:- public([metarule/6, head_pred/1, body_pred/1, ibk/3, func_test/3]).
-	:- dynamic([body_pred/1]).
+
+	:- public(metarule/6).
+	:- mode(metarule(?atom, ?list, ?callable, ?list, ?atom, ?list), zero_or_more).
+	:- info(metarule/6, [
+		comment is 'Compiled metarule, generated from a user-defined metarule/3 or metarule/4 clause, relating a name, its substitutions, a head atom, a body, a recursion flag, and the current call path.',
+		argnames is ['Name', 'Subs', 'Head', 'Body', 'Recursive', 'Path']
+	]).
+
+	:- public(head_pred/1).
+	:- mode(head_pred(?predicate_indicator), zero_or_more).
+	:- info(head_pred/1, [
+		comment is 'Declares a predicate indicator that can be used in the head of a learned clause.',
+		argnames is ['PredicateIndicator']
+	]).
+
+	:- public(ibk/3).
+	:- mode(ibk(?list, ?list, ?list), zero_or_more).
+	:- info(ibk/3, [
+		comment is 'Interpreted background knowledge clause, generated from a user-defined ibk/2 fact or rule, relating a head atom (as a list) to a body (as a list of atoms) and the current call path.',
+		argnames is ['Head', 'Body', 'Path']
+	]).
+
+	:- public(func_test/3).
+	:- mode(func_test(@callable, -callable, -callable), zero_or_more).
+	:- info(func_test/3, [
+		comment is 'Relates an atom to a test atom and a condition used to check that the learned program is functional.',
+		argnames is ['Atom', 'TestAtom', 'Condition']
+	]).
+
+	:- public(body_pred/1).
+	:- dynamic(body_pred/1).
+	:- mode(body_pred(?predicate_indicator), zero_or_more).
+	:- info(body_pred/1, [
+		comment is 'Declares a predicate indicator that can be used in the body of a learned clause.',
+		argnames is ['PredicateIndicator']
+	]).
 
 	% example options
-	:- public([functional/0, min_clauses/1, max_clauses/1, max_inv_preds/1, metarule_next_id/1, timeout/1]).
-	:- dynamic([functional/0, min_clauses/1, max_clauses/1, max_inv_preds/1, metarule_next_id/1, timeout/1]).
 
-	:- protected([pprint_clause/1, pprint_clauses/1, compiled_pred_call/2, body_pred_call/2, type/3]).
-	:- dynamic([compiled_pred_call/2, body_pred_call/2, type/3]).
+	:- public(functional/0).
+	:- dynamic(functional/0).
+	:- mode(functional, zero_or_one).
+	:- info(functional/0, [
+		comment is 'True when the learned program is required to be functional (deterministic).'
+	]).
 
-	:- uses(coroutining, [when/2]).
-	:- uses(integer, [between/3, succ/2]).
-	:- uses(list, [append/3, flatten/2, last/2, length/2, member/2, remove_duplicates/2 as list_to_set/2, reverse/2]).
-	:- uses(logtalk, [print_message/3]).
-	:- uses(meta, [include/3, maplist/2, maplist/3]).
-	:- uses(timeout, [call_with_timeout/2]).
+	:- public(min_clauses/1).
+	:- dynamic(min_clauses/1).
+	:- mode(min_clauses(?integer), zero_or_one).
+	:- info(min_clauses/1, [
+		comment is 'Minimum number of clauses to try when searching for a learned program.',
+		argnames is ['MinClauses']
+	]).
+
+	:- public(max_clauses/1).
+	:- dynamic(max_clauses/1).
+	:- mode(max_clauses(?integer), zero_or_one).
+	:- info(max_clauses/1, [
+		comment is 'Maximum number of clauses to try when searching for a learned program.',
+		argnames is ['MaxClauses']
+	]).
+
+	:- public(max_inv_preds/1).
+	:- dynamic(max_inv_preds/1).
+	:- mode(max_inv_preds(?integer), zero_or_one).
+	:- info(max_inv_preds/1, [
+		comment is 'Maximum number of invented predicate symbols allowed per learning task.',
+		argnames is ['MaxInventedPredicates']
+	]).
+
+	:- public(metarule_next_id/1).
+	:- dynamic(metarule_next_id/1).
+	:- mode(metarule_next_id(?integer), zero_or_one).
+	:- info(metarule_next_id/1, [
+		comment is 'Next identifier to use when generating a name for an anonymous metarule.',
+		argnames is ['Id']
+	]).
+
+	:- public(timeout/1).
+	:- dynamic(timeout/1).
+	:- mode(timeout(?number), zero_or_one).
+	:- info(timeout/1, [
+		comment is 'Default timeout, in seconds, used when learning a program.',
+		argnames is ['Timeout']
+	]).
+
+	:- protected(pprint_clause/1).
+	:- mode(pprint_clause(@clause), one).
+	:- info(pprint_clause/1, [
+		comment is 'Pretty prints a single learned clause. Can be redefined to customize the printing of learned clauses.',
+		argnames is ['Clause']
+	]).
+
+	:- protected(compiled_pred_call/2).
+	:- dynamic(compiled_pred_call/2).
+	:- mode(compiled_pred_call(?atom, ?list), zero_or_more).
+	:- info(compiled_pred_call/2, [
+		comment is 'Asserted clause used to call a compiled (pre-existing) predicate given its name and list of arguments.',
+		argnames is ['Predicate', 'Arguments']
+	]).
+
+	:- protected(body_pred_call/2).
+	:- dynamic(body_pred_call/2).
+	:- mode(body_pred_call(?atom, ?list), zero_or_more).
+	:- info(body_pred_call/2, [
+		comment is 'Asserted clause used to call a background knowledge predicate given its name and list of arguments.',
+		argnames is ['Predicate', 'Arguments']
+	]).
+
+	:- protected(type/3).
+	:- dynamic(type/3).
+	:- mode(type(?atom, ?integer, ?atom), zero_or_more).
+	:- info(type/3, [
+		comment is 'Asserted fact classifying a predicate, given by its name and arity, by its role (head_pred, body_pred, ibk_head_pred, or compiled_pred).',
+		argnames is ['Name', 'Arity', 'Type']
+	]).
+
+	:- uses(coroutining, [
+		when/2
+	]).
+
+	:- uses(integer, [
+		between/3, succ/2
+	]).
+
+	:- uses(list, [
+		append/3, flatten/2, last/2, length/2, member/2, remove_duplicates/2 as list_to_set/2, reverse/2
+	]).
+
+	:- uses(logtalk, [
+		print_message/3
+	]).
+
+	:- uses(meta, [
+		include/3, maplist/2, maplist/3
+	]).
+
+	:- uses(timeout, [
+		call_with_timeout/2
+	]).
 
 	% defaults
 	min_clauses(1).
+
 	max_clauses(10).
+
 	timeout(600). % 10 minutes
+
 	metarule_next_id(0).
+
 	max_inv_preds(9).
 
 	learn(Pos, Neg) :-
