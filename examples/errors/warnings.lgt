@@ -460,6 +460,10 @@
 	p :-
 		(! -> q; r).
 
+	% once/1 used as conditional
+	o :-
+		(once(a) -> q; r).
+
 	% missing parenthesis in the presence of cuts
 	qux :-
 		!,

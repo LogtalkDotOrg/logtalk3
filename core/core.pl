@@ -13792,8 +13792,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compiler_flag'(conditionals, warning),
 	(	If == ! ->
 		Message = suspicious_cut_in_if_then_else(File, Lines, Type, Entity, Head)
-	;	If = (Goal, _), Goal == !,
+	;	If = (Goal, _), Goal == ! ->
 		Message = suspicious_cut_in_if_then_else(File, Lines, Type, Entity, Head, If)
+	;	If = once(_),
+		Message = suspicious_once_in_if_then_else(File, Lines, Type, Entity, Head, If)
 	),
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_comp_ctx_head'(Ctx, Head),
@@ -13836,8 +13838,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compiler_flag'(conditionals, warning),
 	(	If == ! ->
 		Message = suspicious_cut_in_soft_cut(File, Lines, Type, Entity, Head)
-	;	If = (Goal, _), Goal == !,
+	;	If = (Goal, _), Goal == ! ->
 		Message = suspicious_cut_in_soft_cut(File, Lines, Type, Entity, Head, If)
+	;	If = once(_),
+		Message = suspicious_once_in_soft_cut(File, Lines, Type, Entity, Head, If)
 	),
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_comp_ctx_head'(Ctx, Head),
@@ -14004,8 +14008,10 @@ create_logtalk_flag(Flag, Value, Options) :-
 	'$lgt_compiler_flag'(conditionals, warning),
 	(	If == ! ->
 		Message = suspicious_cut_in_if_then_else(File, Lines, Type, Entity, Head)
-	;	If = (Goal, _), Goal == !,
+	;	If = (Goal, _), Goal == ! ->
 		Message = suspicious_cut_in_if_then_else(File, Lines, Type, Entity, Head, If)
+	;	If = once(_),
+		Message = suspicious_once_in_if_then_else(File, Lines, Type, Entity, Head, If)
 	),
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_comp_ctx_head'(Ctx, Head),

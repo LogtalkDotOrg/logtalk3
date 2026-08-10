@@ -22,9 +22,9 @@
 :- category(tutor_explanations).
 
 	:- info([
-		version is 0:88:0,
+		version is 0:89:0,
 		author is 'Paulo Moura',
-		date is 2026-08-02,
+		date is 2026-08-10,
 		comment is 'This category provides explanations and suggestions to selected compiler and developer tool warning and error messages.'
 	]).
 
@@ -864,6 +864,12 @@
 			'if-then-else control construct before the cut to fix its scope.'-[], nl, nl
 		].
 
+	explain(suspicious_once_in_if_then_else(_, _, _, _, _, _)) -->
+		[	'A once/1 goal used as a conditional in an if-then-else control construct is'-[], nl,
+			'redundant as any condition choice-point is cut by the construct. It can thus'-[], nl,
+			'be replaced by its argument.'-[], nl, nl
+		].
+
 	explain(suspicious_cut_in_soft_cut(_, _, _, _, _)) -->
 		[	'A cut in the if part of a soft-cut control construct is local to the if'-[], nl,
 			'part. It can thus be replaced by a call to the true/0 control construct.'-[], nl,
@@ -875,6 +881,12 @@
 		[	'A cut in the if part of a soft-cut control construct is local to the if'-[], nl,
 			'part. If the cut is meant to commit to the clause, add parenthesis around'-[], nl,
 			'the soft-cut control construct before the cut to fix its scope.'-[], nl, nl
+		].
+
+	explain(suspicious_once_in_soft_cut(_, _, _, _, _, _)) -->
+		[	'A once/1 goal used as a condition in a soft-cut control construct effectively'-[], nl,
+			'converts the soft-cut in an if-then control construct as there will never be'-[], nl,
+			'a choice-point to backtrack to.'-[], nl, nl
 		].
 
 	explain(suspicious_cut_in_disjunction(_, _, _, _, _)) -->

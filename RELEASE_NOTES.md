@@ -31,6 +31,9 @@ Logtalk compiler and runtime
 * ADDED: New linter warning when a cut is followed by a goal that throws an
 error. Controlled by the `suspicious_calls` flag.
 
+* ADDED: New linter warning when using a `once/1` goal as an if-then-else or
+soft-cut conditional. Controlled by the `suspicious_calls` flag.
+
 Prolog adapter and integration files
 ------------------------------------
 
@@ -217,8 +220,9 @@ SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM.
 
 * IMPROVED: Tests for the `lgtunit` tool to be less verbose.
 
-* UPDATED: The `tutor` tool to explain the new linter warning on a cut
-followed by a goal that throws an error.
+* UPDATED: The `tutor` tool to explain the new linter warnings on cuts
+followed by goals that throws an error and the use of `once/1` goals
+as if-then-else or soft-cut conditionals.
 
 Examples
 --------
@@ -226,8 +230,7 @@ Examples
 * ADDED: New `http_sse_ticker` example illustrating the use of the new
 `http_sse` library.
 
-* UPDATED: The `errors` example to illustrate the new linter warning on a cut
-followed by a goal that throws an error.
+* UPDATED: The `errors` example to illustrate the new linter warnings.
 
 Installers and installation scripts
 -----------------------------------
