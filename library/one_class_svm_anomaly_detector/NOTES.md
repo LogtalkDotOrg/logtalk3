@@ -8,7 +8,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-    http://www.apache.org/licenses/LICENSE-2.0
+	http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -108,11 +108,15 @@ Limitations
 Usage
 -----
 
-	| ?- one_class_svm_anomaly_detector::learn(gaussian_anomalies, Detector, [baseline_selection_policy(filter)]),
-	     one_class_svm_anomaly_detector::predict(Detector, [x-4.5, y-4.2], Prediction).
+	| ?- one_class_svm_anomaly_detector::(
+			learn(gaussian_anomalies, Detector, [baseline_selection_policy(filter)]),
+			predict(Detector, [x-4.5, y-4.2], Prediction)
+		 ).
 
-	| ?- one_class_svm_anomaly_detector::learn(mixed_anomalies, Detector, [baseline_selection_policy(filter), kernel(rbf(0.25))]),
-	     one_class_svm_anomaly_detector::score(Detector, [age-19, income-150000, student-no, credit_rating-excellent], Score).
+	| ?- one_class_svm_anomaly_detector::(
+			learn(mixed_anomalies, Detector, [baseline_selection_policy(filter), kernel(rbf(0.25))]),
+			score(Detector, [age-19, income-150000, student-no, credit_rating-excellent], Score)
+		 ).
 
 
 Detector representation
@@ -121,6 +125,26 @@ Detector representation
 The learned detector is represented by:
 
 	one_class_svm_detector(Encoders, Kernel, SupportVectors, Coefficients, ReferenceScores, Diagnostics)
+
+Where:
+
+- `Encoders`: feature encoders learned from the training dataset, including
+	continuous-attribute scaling parameters and categorical-attribute values
+- `Kernel`: kernel specification used for training and prediction
+- `SupportVectors`: retained training examples represented as encoded feature
+	vectors
+- `Coefficients`: learned dual coefficients corresponding to the retained
+	support vectors
+- `ReferenceScores`: raw decision values for all baseline training examples,
+	used to compute empirical anomaly scores
+- `Diagnostics`: learned metadata terms including `model/1`,
+	`training_dataset/1`, `kernel/1`, `example_count/1`, `support_vectors/1`,
+	`iterations/1`, `final_delta/1`, and `options/1`
+
+When exported using `export_to_clauses/4` or
+`export_to_file/4`, this detector term is serialized directly as
+the single argument of the generated predicate clause so that the exported
+model can be loaded and reused as-is.
 
 
 References

@@ -496,11 +496,15 @@ and contamination of the selected baseline examples.</p></li>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> one_class_svm_anomaly_detector<span class="o">::</span>learn(gaussian_anomalies, <span class="nv">Detector</span>, [baseline_selection_policy(filter)]),
-     one_class_svm_anomaly_detector<span class="o">::</span>predict(<span class="nv">Detector</span>, [x<span class="o">-</span><span class="m">4.5</span>, y<span class="o">-</span><span class="m">4.2</span>], <span class="nv">Prediction</span>).
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> one_class_svm_anomaly_detector<span class="o">::</span>(
+        learn(gaussian_anomalies, <span class="nv">Detector</span>, [baseline_selection_policy(filter)]),
+        predict(<span class="nv">Detector</span>, [x<span class="o">-</span><span class="m">4.5</span>, y<span class="o">-</span><span class="m">4.2</span>], <span class="nv">Prediction</span>)
+     ).
 
-| <span class="o">?-</span> one_class_svm_anomaly_detector<span class="o">::</span>learn(mixed_anomalies, <span class="nv">Detector</span>, [baseline_selection_policy(filter), kernel(rbf(<span class="m">0.25</span>))]),
-     one_class_svm_anomaly_detector<span class="o">::</span>score(<span class="nv">Detector</span>, [age<span class="o">-</span><span class="m">19</span>, income<span class="o">-</span><span class="m">150000</span>, student<span class="o">-</span>no, credit_rating<span class="o">-</span>excellent], <span class="nv">Score</span>).
+| <span class="o">?-</span> one_class_svm_anomaly_detector<span class="o">::</span>(
+        learn(mixed_anomalies, <span class="nv">Detector</span>, [baseline_selection_policy(filter), kernel(rbf(<span class="m">0.25</span>))]),
+        score(<span class="nv">Detector</span>, [age<span class="o">-</span><span class="m">19</span>, income<span class="o">-</span><span class="m">150000</span>, student<span class="o">-</span>no, credit_rating<span class="o">-</span>excellent], <span class="nv">Score</span>)
+     ).
 </pre></div>
 </div>
 </section>
@@ -510,6 +514,27 @@ and contamination of the selected baseline examples.</p></li>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>one_class_svm_detector(<span class="nv">Encoders</span>, <span class="nv">Kernel</span>, <span class="nv">SupportVectors</span>, <span class="nv">Coefficients</span>, <span class="nv">ReferenceScores</span>, <span class="nv">Diagnostics</span>)
 </pre></div>
 </div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Encoders</span></code>: feature encoders learned from the training dataset,
+including continuous-attribute scaling parameters and
+categorical-attribute values</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Kernel</span></code>: kernel specification used for training and prediction</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SupportVectors</span></code>: retained training examples represented as encoded
+feature vectors</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Coefficients</span></code>: learned dual coefficients corresponding to the
+retained support vectors</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ReferenceScores</span></code>: raw decision values for all baseline training
+examples, used to compute empirical anomaly scores</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Diagnostics</span></code>: learned metadata terms including <code class="docutils literal notranslate"><span class="pre">model/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">training_dataset/1</span></code>, <code class="docutils literal notranslate"><span class="pre">kernel/1</span></code>, <code class="docutils literal notranslate"><span class="pre">example_count/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">support_vectors/1</span></code>, <code class="docutils literal notranslate"><span class="pre">iterations/1</span></code>, <code class="docutils literal notranslate"><span class="pre">final_delta/1</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">options/1</span></code></p></li>
+</ul>
+<p>When exported using <code class="docutils literal notranslate"><span class="pre">export_to_clauses/4</span></code> or <code class="docutils literal notranslate"><span class="pre">export_to_file/4</span></code>,
+this detector term is serialized directly as the single argument of the
+generated predicate clause so that the exported model can be loaded and
+reused as-is.</p>
 </section>
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
