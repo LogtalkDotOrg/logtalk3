@@ -14,8 +14,8 @@ User frontend to start the application.
 |    ``logtalk_load(verdi_neruda(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2019-03-20
+| **Version:** 1:1:0
+| **Date:** 2026-08-10
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -43,8 +43,13 @@ Public predicates
 ``welcome/0``
 ^^^^^^^^^^^^^
 
+Prints a welcome message.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Mode and number of proofs:**
+|    ``welcome`` - ``one``
 
 
 ------------
@@ -55,8 +60,13 @@ Public predicates
 ``start/0``
 ^^^^^^^^^^^
 
+Starts the application shell with the available interpreters.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Mode and number of proofs:**
+|    ``start`` - ``one``
 
 
 ------------

@@ -35,6 +35,13 @@
 :- object(demodb,
 	implements(databasep)).
 
+	:- info([
+		version is 1:0:0,
+		author is 'Victor Lagerkvist',
+		date is 2026-08-10,
+		comment is 'Sample database of simple test programs.'
+	]).
+
 	%%Some simple test programs.
 
 	append([], Ys, Ys) if true.

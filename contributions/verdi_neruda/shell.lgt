@@ -35,14 +35,18 @@
 :- object(shell(_Interpreters_)).
 
 	:- info([
-		version is 1:1:3,
+		version is 1:2:0,
 		author is 'Victor Lagerkvist and Paulo Moura',
-		date is 2024-03-15,
+		date is 2026-08-10,
 		comment is 'Prolog shell for the interpreters.',
 		parnames is ['Interpreters']
 	]).
 
 	:- public(init/0).
+	:- mode(init, one).
+	:- info(init/0, [
+		comment is 'Starts the read-eval-print loop for the interpreters.'
+	]).
 
 	init :-
 		write('Welcome, noble adventurer, your destiny awaits you!'), nl,
@@ -337,13 +341,17 @@
 :- object(shell).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2019-03-20,
+		date is 2026-08-10,
 		comment is 'User frontend to start the application.'
 	]).
 
 	:- public(welcome/0).
+	:- mode(welcome, one).
+	:- info(welcome/0, [
+		comment is 'Prints a welcome message.'
+	]).
 
 	welcome :-
 		Version = '1.0',
@@ -356,6 +364,10 @@
 		write('Type shell::start to start.'), nl, nl.
 
 	:- public(start/0).
+	:- mode(start, one).
+	:- info(start/0, [
+		comment is 'Starts the application shell with the available interpreters.'
+	]).
 
 	start :-
 		Interpreters = [
