@@ -14,8 +14,8 @@ Simple CHR interpreter/debugger based on the refined operational semantics of CH
 |    ``logtalk_load(toychr(loader))``
 
 | **Author:** Gregory J. Duck; adapted to Logtalk by Paulo Moura.
-| **Version:** 0:7:2
-| **Date:** 2026-04-06
+| **Version:** 0:8:0
+| **Date:** 2026-08-10
 
 | **Copyright:** Copright 2004 Gregory J. Duck; Copyright 2019-2024 Paulo Moura
 | **License:** GPL-2.0-or-later
@@ -49,8 +49,15 @@ Public predicates
 ``chr_is/2``
 ^^^^^^^^^^^^
 
+Runs a goal against the entity CHR program and returns the resulting constraint store as a conjunction.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``chr_is(Result,Goal)``
+| **Mode and number of proofs:**
+|    ``chr_is(?nonvar,+callable)`` - ``zero_or_one``
 
 
 ------------
@@ -61,8 +68,13 @@ Public predicates
 ``chr_trace/0``
 ^^^^^^^^^^^^^^^
 
+Enables the CHR interactive trace debugger. Similar to the trace/0 standard predicate.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Mode and number of proofs:**
+|    ``chr_trace`` - ``one``
 
 
 ------------
@@ -73,8 +85,13 @@ Public predicates
 ``chr_notrace/0``
 ^^^^^^^^^^^^^^^^^
 
+Disables the CHR interactive trace debugger. Similar to the notrace/0 standard predicate.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Mode and number of proofs:**
+|    ``chr_notrace`` - ``one``
 
 
 ------------
@@ -85,8 +102,15 @@ Public predicates
 ``chr_spy/1``
 ^^^^^^^^^^^^^
 
+Sets a spy point on the activation of constraints matching the given pattern.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``chr_spy(Pattern)``
+| **Mode and number of proofs:**
+|    ``chr_spy(@callable)`` - ``one``
 
 
 ------------
@@ -97,8 +121,13 @@ Public predicates
 ``chr_nospy/0``
 ^^^^^^^^^^^^^^^
 
+Disables all spy points.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Mode and number of proofs:**
+|    ``chr_nospy`` - ``one``
 
 
 ------------
@@ -109,8 +138,15 @@ Public predicates
 ``chr_no_spy/1``
 ^^^^^^^^^^^^^^^^
 
+Not yet implemented; disables the spy point on constraints matching the given pattern.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``chr_no_spy(Pattern)``
+| **Mode and number of proofs:**
+|    ``chr_no_spy(@callable)`` - ``zero``
 
 
 ------------
@@ -121,8 +157,15 @@ Public predicates
 ``chr_option/2``
 ^^^^^^^^^^^^^^^^
 
+Sets a debugger or compiler option. See the file documentation for the supported options and their values.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``chr_option(Option,Value)``
+| **Mode and number of proofs:**
+|    ``chr_option(+atom,+atom)`` - ``zero_or_one``
 
 
 ------------
@@ -136,8 +179,15 @@ Protected predicates
 ``current_prog/1``
 ^^^^^^^^^^^^^^^^^^
 
+Compiled CHR program generated from the entity chr_constraint, handler, and rules terms.
+
 | **Compilation flags:**
 |    ``static``
+
+| **Template:**
+|    ``current_prog(Program)``
+| **Mode and number of proofs:**
+|    ``current_prog(?callable)`` - ``zero_or_one``
 
 
 ------------
@@ -148,8 +198,13 @@ Protected predicates
 ``chr_option_print_trace/0``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+True when trace printing is enabled.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Mode and number of proofs:**
+|    ``chr_option_print_trace`` - ``zero_or_one``
 
 
 ------------
@@ -160,8 +215,13 @@ Protected predicates
 ``chr_option_trace_interactive/0``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+True when interactive tracing is enabled.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Mode and number of proofs:**
+|    ``chr_option_trace_interactive`` - ``zero_or_one``
 
 
 ------------
@@ -172,8 +232,15 @@ Protected predicates
 ``chr_option_optimization_level/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Current compiler optimization level.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``chr_option_optimization_level(Level)``
+| **Mode and number of proofs:**
+|    ``chr_option_optimization_level(?integer)`` - ``zero_or_one``
 
 
 ------------
@@ -184,8 +251,13 @@ Protected predicates
 ``chr_option_show_stack/0``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+True when the execution stack is shown while tracing.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Mode and number of proofs:**
+|    ``chr_option_show_stack`` - ``zero_or_one``
 
 
 ------------
@@ -196,8 +268,13 @@ Protected predicates
 ``chr_option_show_store/0``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+True when the constraint store is shown while tracing.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Mode and number of proofs:**
+|    ``chr_option_show_store`` - ``zero_or_one``
 
 
 ------------
@@ -208,8 +285,13 @@ Protected predicates
 ``chr_option_show_history/0``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+True when the propagation history is shown while tracing.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Mode and number of proofs:**
+|    ``chr_option_show_history`` - ``zero_or_one``
 
 
 ------------
@@ -220,8 +302,13 @@ Protected predicates
 ``chr_option_show_id/0``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
+True when the current constraint identifier is shown while tracing.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Mode and number of proofs:**
+|    ``chr_option_show_id`` - ``zero_or_one``
 
 
 ------------
@@ -232,8 +319,13 @@ Protected predicates
 ``chr_option_allow_deep_guards/0``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+True when CHR constraints are allowed in rule guards or if-conditions.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Mode and number of proofs:**
+|    ``chr_option_allow_deep_guards`` - ``zero_or_one``
 
 
 ------------
@@ -244,8 +336,15 @@ Protected predicates
 ``chr_next_state/1``
 ^^^^^^^^^^^^^^^^^^^^
 
+Stack length recorded to detect when the next debugger step is reached.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``chr_next_state(Length)``
+| **Mode and number of proofs:**
+|    ``chr_next_state(?integer)`` - ``zero_or_one``
 
 
 ------------
@@ -256,8 +355,15 @@ Protected predicates
 ``chr_spy_point/1``
 ^^^^^^^^^^^^^^^^^^^
 
+Asserted clause matching constraints on which a spy point is set.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``chr_spy_point(Constraint)``
+| **Mode and number of proofs:**
+|    ``chr_spy_point(@callable)`` - ``zero_or_more``
 
 
 ------------
@@ -271,8 +377,15 @@ Private predicates
 ``chr_rule_/1``
 ^^^^^^^^^^^^^^^
 
+Asserted CHR rule term collected during term-expansion, consumed when compiling the entity program.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``chr_rule_(Rule)``
+| **Mode and number of proofs:**
+|    ``chr_rule_(?callable)`` - ``zero_or_more``
 
 
 ------------

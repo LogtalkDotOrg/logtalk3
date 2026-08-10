@@ -121,20 +121,66 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 	implements(expanding)).
 
 	:- info([
-		version is 0:7:2,
+		version is 0:8:0,
 		author is 'Gregory J. Duck; adapted to Logtalk by Paulo Moura.',
-		date is 2026-04-06,
+		date is 2026-08-10,
 		copyright is 'Copright 2004 Gregory J. Duck; Copyright 2019-2024 Paulo Moura',
 		license is 'GPL-2.0-or-later',
 		comment is 'Simple CHR interpreter/debugger based on the refined operational semantics of CHRs.'
 	]).
 
-	:- public([
-		chr_is/2,
-		chr_trace/0, chr_notrace/0, chr_spy/1, chr_nospy/0, chr_no_spy/1, chr_option/2
+	:- public(chr_is/2).
+	:- mode(chr_is(?nonvar, +callable), zero_or_one).
+	:- info(chr_is/2, [
+		comment is 'Runs a goal against the entity CHR program and returns the resulting constraint store as a conjunction.',
+		argnames is ['Result', 'Goal']
+	]).
+
+	:- public(chr_trace/0).
+	:- mode(chr_trace, one).
+	:- info(chr_trace/0, [
+		comment is 'Enables the CHR interactive trace debugger. Similar to the trace/0 standard predicate.'
+	]).
+
+	:- public(chr_notrace/0).
+	:- mode(chr_notrace, one).
+	:- info(chr_notrace/0, [
+		comment is 'Disables the CHR interactive trace debugger. Similar to the notrace/0 standard predicate.'
+	]).
+
+	:- public(chr_spy/1).
+	:- mode(chr_spy(@callable), one).
+	:- info(chr_spy/1, [
+		comment is 'Sets a spy point on the activation of constraints matching the given pattern.',
+		argnames is ['Pattern']
+	]).
+
+	:- public(chr_nospy/0).
+	:- mode(chr_nospy, one).
+	:- info(chr_nospy/0, [
+		comment is 'Disables all spy points.'
+	]).
+
+	:- public(chr_no_spy/1).
+	:- mode(chr_no_spy(@callable), zero).
+	:- info(chr_no_spy/1, [
+		comment is 'Not yet implemented; disables the spy point on constraints matching the given pattern.',
+		argnames is ['Pattern']
+	]).
+
+	:- public(chr_option/2).
+	:- mode(chr_option(+atom, +atom), zero_or_one).
+	:- info(chr_option/2, [
+		comment is 'Sets a debugger or compiler option. See the file documentation for the supported options and their values.',
+		argnames is ['Option', 'Value']
 	]).
 
 	:- protected(current_prog/1).
+	:- mode(current_prog(?callable), zero_or_one).
+	:- info(current_prog/1, [
+		comment is 'Compiled CHR program generated from the entity chr_constraint, handler, and rules terms.',
+		argnames is ['Program']
+	]).
 
 	:- uses(list, [
 		append/3, length/2, member/2, reverse/2
@@ -169,6 +215,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 	:- private(chr_rule_/1).
 	:- dynamic(chr_rule_/1).
+	:- mode(chr_rule_(?callable), zero_or_more).
+	:- info(chr_rule_/1, [
+		comment is 'Asserted CHR rule term collected during term-expansion, consumed when compiling the entity program.',
+		argnames is ['Rule']
+	]).
 
 	term_expansion('@'(Name,Rule), []) :-
 		assertz(chr_rule_('@'(Name,Rule))).
@@ -611,27 +662,60 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 	:- protected(chr_option_print_trace/0).
 	:- dynamic(chr_option_print_trace/0).
+	:- mode(chr_option_print_trace, zero_or_one).
+	:- info(chr_option_print_trace/0, [
+		comment is 'True when trace printing is enabled.'
+	]).
 
 	:- protected(chr_option_trace_interactive/0).
 	:- dynamic(chr_option_trace_interactive/0).
+	:- mode(chr_option_trace_interactive, zero_or_one).
+	:- info(chr_option_trace_interactive/0, [
+		comment is 'True when interactive tracing is enabled.'
+	]).
 
 	:- protected(chr_option_optimization_level/1).
 	:- dynamic(chr_option_optimization_level/1).
+	:- mode(chr_option_optimization_level(?integer), zero_or_one).
+	:- info(chr_option_optimization_level/1, [
+		comment is 'Current compiler optimization level.',
+		argnames is ['Level']
+	]).
 
 	:- protected(chr_option_show_stack/0).
 	:- dynamic(chr_option_show_stack/0).
+	:- mode(chr_option_show_stack, zero_or_one).
+	:- info(chr_option_show_stack/0, [
+		comment is 'True when the execution stack is shown while tracing.'
+	]).
 
 	:- protected(chr_option_show_store/0).
 	:- dynamic(chr_option_show_store/0).
+	:- mode(chr_option_show_store, zero_or_one).
+	:- info(chr_option_show_store/0, [
+		comment is 'True when the constraint store is shown while tracing.'
+	]).
 
 	:- protected(chr_option_show_history/0).
 	:- dynamic(chr_option_show_history/0).
+	:- mode(chr_option_show_history, zero_or_one).
+	:- info(chr_option_show_history/0, [
+		comment is 'True when the propagation history is shown while tracing.'
+	]).
 
 	:- protected(chr_option_show_id/0).
 	:- dynamic(chr_option_show_id/0).
+	:- mode(chr_option_show_id, zero_or_one).
+	:- info(chr_option_show_id/0, [
+		comment is 'True when the current constraint identifier is shown while tracing.'
+	]).
 
 	:- protected(chr_option_allow_deep_guards/0).
 	:- dynamic(chr_option_allow_deep_guards/0).
+	:- mode(chr_option_allow_deep_guards, zero_or_one).
+	:- info(chr_option_allow_deep_guards/0, [
+		comment is 'True when CHR constraints are allowed in rule guards or if-conditions.'
+	]).
 
 	chr_option_show_store.
 
@@ -714,6 +798,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 	:- protected(chr_next_state/1).
 	:- dynamic(chr_next_state/1).
+	:- mode(chr_next_state(?integer), zero_or_one).
+	:- info(chr_next_state/1, [
+		comment is 'Stack length recorded to detect when the next debugger step is reached.',
+		argnames is ['Length']
+	]).
 
 	do_next(state(A,_,_,_)) :-
 		::retractall(chr_next_state(_)),
@@ -964,6 +1053,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 	:- protected(chr_spy_point/1).
 	:- dynamic(chr_spy_point/1).
+	:- mode(chr_spy_point(@callable), zero_or_more).
+	:- info(chr_spy_point/1, [
+		comment is 'Asserted clause matching constraints on which a spy point is set.',
+		argnames is ['Constraint']
+	]).
 
 	chr_nospy :-
 		::retractall(chr_spy_point(_)).
