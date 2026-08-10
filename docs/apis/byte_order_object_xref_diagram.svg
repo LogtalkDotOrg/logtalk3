@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-508.75 2143,-508.75 2143,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object byte_order</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;08&#45;10, 18:40</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;08&#45;10, 22:36</text>
 <g id="clust1" class="cluster">
 <title>cluster_byte_order_object</title>
 <g id="a_clust1"><a xlink:title="byte_order">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 2119,-54.25 2119,-54.25 2125,-54.25 2131,-60.25 2131,-66.25 2131,-66.25 2131,-484.75 2131,-484.75 2131,-490.75 2125,-496.75 2119,-496.75 2119,-496.75 20,-496.75 20,-496.75 14,-496.75 8,-490.75 8,-484.75 8,-484.75 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-479" font-family="Monospace" font-size="10.00" fill="dimgray">byte_order</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>integer_to_bytes/4</title>
 <polygon fill="springgreen" stroke="black" points="166,-338.75 18,-338.75 18,-302.75 166,-302.75 166,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="26" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L31">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L31">
 <text xml:space="preserve" text-anchor="start" x="31.25" y="-322.62" font-family="Monospace" font-size="11.00">integer_to_bytes/4</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>integer_to_bytes/5</title>
 <polygon fill="springgreen" stroke="black" points="276,-219.5 128,-219.5 128,-183.5 276,-183.5 276,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="136" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L38" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L38">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L38" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L38">
 <text xml:space="preserve" text-anchor="start" x="141.25" y="-203.38" font-family="Monospace" font-size="11.00">integer_to_bytes/5</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- integer_to_bytes/4&#45;&gt;integer_to_bytes/5 -->
 <g id="edge1" class="edge">
 <title>integer_to_bytes/4&#45;&gt;integer_to_bytes/5</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L87" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L87" xlink:title="calls">
 <path fill="none" stroke="black" d="M108.23,-302.45C126.67,-282.79 156.95,-250.52 178.09,-227.99"/>
 <polygon fill="black" stroke="black" points="180.38,-230.66 184.67,-220.98 175.27,-225.87 180.38,-230.66"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L87">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L87">
 <text xml:space="preserve" text-anchor="start" x="150.3" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>integer_to_little_endian_bytes/4</title>
 <polygon fill="cornsilk" stroke="black" points="296.25,-100.25 53.75,-100.25 53.75,-64.25 296.25,-64.25 296.25,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="61.75" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node9_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L123" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L123">
+<g id="a_node9_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L123" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L123">
 <text xml:space="preserve" text-anchor="start" x="67" y="-84.12" font-family="Monospace" font-size="11.00">integer_to_little_endian_bytes/4</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- integer_to_bytes/5&#45;&gt;integer_to_little_endian_bytes/4 -->
 <g id="edge2" class="edge">
 <title>integer_to_bytes/5&#45;&gt;integer_to_little_endian_bytes/4</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L90" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L90" xlink:title="calls">
 <path fill="none" stroke="black" d="M198.02,-183.2C193.69,-164.41 186.71,-134.09 181.57,-111.77"/>
 <polygon fill="black" stroke="black" points="184.99,-111.06 179.34,-102.1 178.17,-112.63 184.99,-111.06"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L90">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L90" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L90">
 <text xml:space="preserve" text-anchor="start" x="189.31" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -97,7 +97,7 @@
 <title>integer_to_big_endian_bytes/4</title>
 <polygon fill="cornsilk" stroke="black" points="536.12,-100.25 313.88,-100.25 313.88,-64.25 536.12,-64.25 536.12,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="321.88" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node10_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L131">
+<g id="a_node10_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L131" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L131">
 <text xml:space="preserve" text-anchor="start" x="327.12" y="-84.12" font-family="Monospace" font-size="11.00">integer_to_big_endian_bytes/4</text>
 </a>
 </g>
@@ -109,12 +109,12 @@
 <!-- integer_to_bytes/5&#45;&gt;integer_to_big_endian_bytes/4 -->
 <g id="edge3" class="edge">
 <title>integer_to_bytes/5&#45;&gt;integer_to_big_endian_bytes/4</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L92" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L92" xlink:title="calls">
 <path fill="none" stroke="black" d="M234.9,-183.2C273.85,-162.72 338.84,-128.55 381.81,-105.96"/>
 <polygon fill="black" stroke="black" points="383.4,-109.08 390.62,-101.33 380.14,-102.88 383.4,-109.08"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L92">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L92">
 <text xml:space="preserve" text-anchor="start" x="320.19" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -124,7 +124,7 @@
 <title>bytes_to_integer/3</title>
 <polygon fill="springgreen" stroke="black" points="749,-458 601,-458 601,-422 749,-422 749,-458"/>
 <text xml:space="preserve" text-anchor="start" x="609" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L45">
+<g id="a_node3_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="614.25" y="-441.88" font-family="Monospace" font-size="11.00">bytes_to_integer/3</text>
 </a>
 </g>
@@ -138,7 +138,7 @@
 <title>little_endian_bytes_to_integer/2</title>
 <polygon fill="cornsilk" stroke="black" points="640.25,-338.75 397.75,-338.75 397.75,-302.75 640.25,-302.75 640.25,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="405.75" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node11_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L139" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L139">
+<g id="a_node11_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L139" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L139">
 <text xml:space="preserve" text-anchor="start" x="411" y="-322.62" font-family="Monospace" font-size="11.00">little_endian_bytes_to_integer/2</text>
 </a>
 </g>
@@ -150,12 +150,12 @@
 <!-- bytes_to_integer/3&#45;&gt;little_endian_bytes_to_integer/2 -->
 <g id="edge4" class="edge">
 <title>bytes_to_integer/3&#45;&gt;little_endian_bytes_to_integer/2</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L95" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L95" xlink:title="calls">
 <path fill="none" stroke="black" d="M651.98,-421.7C625.25,-401.61 581,-368.35 550.95,-345.76"/>
 <polygon fill="black" stroke="black" points="553.42,-343.24 543.32,-340.03 549.21,-348.84 553.42,-343.24"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L95">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L95">
 <text xml:space="preserve" text-anchor="start" x="601.68" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -165,7 +165,7 @@
 <title>big_endian_bytes_to_integer/3</title>
 <polygon fill="cornsilk" stroke="black" points="880.12,-338.75 657.88,-338.75 657.88,-302.75 880.12,-302.75 880.12,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="665.88" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node13_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L151">
+<g id="a_node13_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L151" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L151">
 <text xml:space="preserve" text-anchor="start" x="671.12" y="-322.62" font-family="Monospace" font-size="11.00">big_endian_bytes_to_integer/3</text>
 </a>
 </g>
@@ -177,12 +177,12 @@
 <!-- bytes_to_integer/3&#45;&gt;big_endian_bytes_to_integer/3 -->
 <g id="edge5" class="edge">
 <title>bytes_to_integer/3&#45;&gt;big_endian_bytes_to_integer/3</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L97" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L97" xlink:title="calls">
 <path fill="none" stroke="black" d="M688.87,-421.7C704.49,-402.22 730.04,-370.34 748.09,-347.83"/>
 <polygon fill="black" stroke="black" points="750.6,-350.29 754.13,-340.3 745.14,-345.92 750.6,-350.29"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L97" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L97">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L97" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L97">
 <text xml:space="preserve" text-anchor="start" x="724.82" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -192,7 +192,7 @@
 <title>bytes_to_integer/5</title>
 <polygon fill="springgreen" stroke="black" points="1588,-458 1440,-458 1440,-422 1588,-422 1588,-458"/>
 <text xml:space="preserve" text-anchor="start" x="1448" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L52">
+<g id="a_node4_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L52">
 <text xml:space="preserve" text-anchor="start" x="1453.25" y="-441.88" font-family="Monospace" font-size="11.00">bytes_to_integer/5</text>
 </a>
 </g>
@@ -206,7 +206,7 @@
 <title>little_endian_bytes_to_integer/4</title>
 <polygon fill="cornsilk" stroke="black" points="1511.25,-338.75 1268.75,-338.75 1268.75,-302.75 1511.25,-302.75 1511.25,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="1276.75" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node12_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L144">
+<g id="a_node12_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L144" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L144">
 <text xml:space="preserve" text-anchor="start" x="1282" y="-322.62" font-family="Monospace" font-size="11.00">little_endian_bytes_to_integer/4</text>
 </a>
 </g>
@@ -218,12 +218,12 @@
 <!-- bytes_to_integer/5&#45;&gt;little_endian_bytes_to_integer/4 -->
 <g id="edge6" class="edge">
 <title>bytes_to_integer/5&#45;&gt;little_endian_bytes_to_integer/4</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L100" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L100" xlink:title="calls">
 <path fill="none" stroke="black" d="M1495.7,-421.7C1474.82,-401.96 1440.49,-369.49 1416.64,-346.94"/>
 <polygon fill="black" stroke="black" points="1419.14,-344.49 1409.47,-340.16 1414.33,-349.58 1419.14,-344.49"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L100">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L100" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L100">
 <text xml:space="preserve" text-anchor="start" x="1455.72" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -233,7 +233,7 @@
 <title>big_endian_bytes_to_integer/5</title>
 <polygon fill="cornsilk" stroke="black" points="1751.12,-338.75 1528.88,-338.75 1528.88,-302.75 1751.12,-302.75 1751.12,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="1536.88" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node14_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L156" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L156">
+<g id="a_node14_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L156" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L156">
 <text xml:space="preserve" text-anchor="start" x="1542.12" y="-322.62" font-family="Monospace" font-size="11.00">big_endian_bytes_to_integer/5</text>
 </a>
 </g>
@@ -245,12 +245,12 @@
 <!-- bytes_to_integer/5&#45;&gt;big_endian_bytes_to_integer/5 -->
 <g id="edge7" class="edge">
 <title>bytes_to_integer/5&#45;&gt;big_endian_bytes_to_integer/5</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L102" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L102" xlink:title="calls">
 <path fill="none" stroke="black" d="M1532.59,-421.7C1553.81,-401.96 1588.7,-369.49 1612.93,-346.94"/>
 <polygon fill="black" stroke="black" points="1615.29,-349.53 1620.22,-340.15 1610.52,-344.4 1615.29,-349.53"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L102">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L102" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L102">
 <text xml:space="preserve" text-anchor="start" x="1580.78" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -260,7 +260,7 @@
 <title>signed_integer_to_bytes/4</title>
 <polygon fill="springgreen" stroke="black" points="379.62,-458 184.38,-458 184.38,-422 379.62,-422 379.62,-458"/>
 <text xml:space="preserve" text-anchor="start" x="192.38" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L59">
+<g id="a_node5_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="197.62" y="-441.88" font-family="Monospace" font-size="11.00">signed_integer_to_bytes/4</text>
 </a>
 </g>
@@ -274,7 +274,7 @@
 <title>signed_integer_to_bytes/5</title>
 <polygon fill="springgreen" stroke="black" points="379.62,-338.75 184.38,-338.75 184.38,-302.75 379.62,-302.75 379.62,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="192.38" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L66">
+<g id="a_node6_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L66" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L66">
 <text xml:space="preserve" text-anchor="start" x="197.62" y="-322.62" font-family="Monospace" font-size="11.00">signed_integer_to_bytes/5</text>
 </a>
 </g>
@@ -286,12 +286,12 @@
 <!-- signed_integer_to_bytes/4&#45;&gt;signed_integer_to_bytes/5 -->
 <g id="edge8" class="edge">
 <title>signed_integer_to_bytes/4&#45;&gt;signed_integer_to_bytes/5</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L105" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L105" xlink:title="calls">
 <path fill="none" stroke="black" d="M282,-421.7C282,-403 282,-372.87 282,-350.58"/>
 <polygon fill="black" stroke="black" points="285.5,-350.64 282,-340.64 278.5,-350.64 285.5,-350.64"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L105">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L105">
 <text xml:space="preserve" text-anchor="start" x="282" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -299,12 +299,12 @@
 <!-- signed_integer_to_bytes/5&#45;&gt;integer_to_bytes/5 -->
 <g id="edge9" class="edge">
 <title>signed_integer_to_bytes/5&#45;&gt;integer_to_bytes/5</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L108" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L108" xlink:title="calls">
 <path fill="none" stroke="black" d="M270.2,-302.45C257.02,-283.14 235.54,-251.66 220.21,-229.19"/>
 <polygon fill="black" stroke="black" points="223.23,-227.41 214.71,-221.12 217.45,-231.35 223.23,-227.41"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L108">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L108" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L108">
 <text xml:space="preserve" text-anchor="start" x="244.4" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -314,7 +314,7 @@
 <title>bytes_to_signed_integer/3</title>
 <polygon fill="springgreen" stroke="black" points="1140.62,-458 945.38,-458 945.38,-422 1140.62,-422 1140.62,-458"/>
 <text xml:space="preserve" text-anchor="start" x="953.38" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L73">
+<g id="a_node7_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L73">
 <text xml:space="preserve" text-anchor="start" x="958.62" y="-441.88" font-family="Monospace" font-size="11.00">bytes_to_signed_integer/3</text>
 </a>
 </g>
@@ -326,12 +326,12 @@
 <!-- bytes_to_signed_integer/3&#45;&gt;big_endian_bytes_to_integer/3 -->
 <g id="edge12" class="edge">
 <title>bytes_to_signed_integer/3&#45;&gt;big_endian_bytes_to_integer/3</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L113" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L113" xlink:title="calls">
 <path fill="none" stroke="black" d="M1002.28,-421.57C953.74,-400.8 872.61,-366.09 819.96,-343.56"/>
 <polygon fill="black" stroke="black" points="821.46,-340.39 810.89,-339.68 818.71,-346.83 821.46,-340.39"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L113">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L113">
 <text xml:space="preserve" text-anchor="start" x="914.22" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -341,7 +341,7 @@
 <title>little_endian_bytes_to_signed_integer/2</title>
 <polygon fill="cornsilk" stroke="black" points="1187.88,-338.75 898.12,-338.75 898.12,-302.75 1187.88,-302.75 1187.88,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="906.12" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node15_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L163">
+<g id="a_node15_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L163">
 <text xml:space="preserve" text-anchor="start" x="911.38" y="-322.62" font-family="Monospace" font-size="11.00">little_endian_bytes_to_signed_integer/2</text>
 </a>
 </g>
@@ -353,12 +353,12 @@
 <!-- bytes_to_signed_integer/3&#45;&gt;little_endian_bytes_to_signed_integer/2 -->
 <g id="edge10" class="edge">
 <title>bytes_to_signed_integer/3&#45;&gt;little_endian_bytes_to_signed_integer/2</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L111" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L111" xlink:title="calls">
 <path fill="none" stroke="black" d="M1043,-421.7C1043,-403 1043,-372.87 1043,-350.58"/>
 <polygon fill="black" stroke="black" points="1046.5,-350.64 1043,-340.64 1039.5,-350.64 1046.5,-350.64"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L111">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L111">
 <text xml:space="preserve" text-anchor="start" x="1043" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -368,7 +368,7 @@
 <title>sign_accumulator/2</title>
 <polygon fill="cornsilk" stroke="black" points="1477,-219.5 1329,-219.5 1329,-183.5 1477,-183.5 1477,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="1337" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node17_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L180" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L180">
+<g id="a_node17_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L180" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L180">
 <text xml:space="preserve" text-anchor="start" x="1342.25" y="-203.38" font-family="Monospace" font-size="11.00">sign_accumulator/2</text>
 </a>
 </g>
@@ -380,12 +380,12 @@
 <!-- bytes_to_signed_integer/3&#45;&gt;sign_accumulator/2 -->
 <g id="edge11" class="edge">
 <title>bytes_to_signed_integer/3&#45;&gt;sign_accumulator/2</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L113" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L113" xlink:title="calls">
 <path fill="none" stroke="black" d="M1073.44,-421.63C1105.41,-402.84 1156.56,-371.19 1197,-338.75 1214.83,-324.44 1215.62,-316.68 1233.75,-302.75 1273.44,-272.27 1323.15,-243.84 1358.4,-225.09"/>
 <polygon fill="black" stroke="black" points="1359.83,-228.29 1367.05,-220.54 1356.57,-222.1 1359.83,-228.29"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L113">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L113">
 <text xml:space="preserve" text-anchor="start" x="1233.75" y="-317.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -395,7 +395,7 @@
 <title>bytes_to_signed_integer/5</title>
 <polygon fill="springgreen" stroke="black" points="2011.62,-458 1816.38,-458 1816.38,-422 2011.62,-422 2011.62,-458"/>
 <text xml:space="preserve" text-anchor="start" x="1824.38" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L80">
+<g id="a_node8_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L80">
 <text xml:space="preserve" text-anchor="start" x="1829.62" y="-441.88" font-family="Monospace" font-size="11.00">bytes_to_signed_integer/5</text>
 </a>
 </g>
@@ -407,12 +407,12 @@
 <!-- bytes_to_signed_integer/5&#45;&gt;big_endian_bytes_to_integer/5 -->
 <g id="edge15" class="edge">
 <title>bytes_to_signed_integer/5&#45;&gt;big_endian_bytes_to_integer/5</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L119" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L119" xlink:title="calls">
 <path fill="none" stroke="black" d="M1873.28,-421.57C1824.74,-400.8 1743.61,-366.09 1690.96,-343.56"/>
 <polygon fill="black" stroke="black" points="1692.46,-340.39 1681.89,-339.68 1689.71,-346.83 1692.46,-340.39"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L119" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L119">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L119" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L119">
 <text xml:space="preserve" text-anchor="start" x="1785.22" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -422,7 +422,7 @@
 <title>little_endian_bytes_to_signed_integer/4</title>
 <polygon fill="cornsilk" stroke="black" points="2058.88,-338.75 1769.12,-338.75 1769.12,-302.75 2058.88,-302.75 2058.88,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="1777.12" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node16_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L171">
+<g id="a_node16_17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L171">
 <text xml:space="preserve" text-anchor="start" x="1782.38" y="-322.62" font-family="Monospace" font-size="11.00">little_endian_bytes_to_signed_integer/4</text>
 </a>
 </g>
@@ -434,12 +434,12 @@
 <!-- bytes_to_signed_integer/5&#45;&gt;little_endian_bytes_to_signed_integer/4 -->
 <g id="edge13" class="edge">
 <title>bytes_to_signed_integer/5&#45;&gt;little_endian_bytes_to_signed_integer/4</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L117" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L117" xlink:title="calls">
 <path fill="none" stroke="black" d="M1914,-421.7C1914,-403 1914,-372.87 1914,-350.58"/>
 <polygon fill="black" stroke="black" points="1917.5,-350.64 1914,-340.64 1910.5,-350.64 1917.5,-350.64"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L117">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L117">
 <text xml:space="preserve" text-anchor="start" x="1914" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -447,12 +447,12 @@
 <!-- bytes_to_signed_integer/5&#45;&gt;sign_accumulator/2 -->
 <g id="edge14" class="edge">
 <title>bytes_to_signed_integer/5&#45;&gt;sign_accumulator/2</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L119" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L119" xlink:title="calls">
 <path fill="none" stroke="black" d="M1961.22,-421.56C2020.32,-397.18 2109.1,-350.51 2068,-302.75 1994.23,-217.03 1651.29,-203.64 1488.81,-202.19"/>
 <polygon fill="black" stroke="black" points="1488.97,-198.69 1478.95,-202.12 1488.92,-205.69 1488.97,-198.69"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L119" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L119">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L119" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L119">
 <text xml:space="preserve" text-anchor="start" x="2078.5" y="-317.38" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -460,12 +460,12 @@
 <!-- little_endian_bytes_to_signed_integer/2&#45;&gt;sign_accumulator/2 -->
 <g id="edge16" class="edge">
 <title>little_endian_bytes_to_signed_integer/2&#45;&gt;sign_accumulator/2</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L163" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L163" xlink:title="calls">
 <path fill="none" stroke="black" d="M1079.29,-302.25C1109.23,-288.29 1153.09,-268.91 1192.75,-255.5 1233.16,-241.83 1278.99,-229.88 1317.52,-220.8"/>
 <polygon fill="black" stroke="black" points="1318.29,-224.22 1327.23,-218.54 1316.7,-217.4 1318.29,-224.22"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L163">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L163" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L163">
 <text xml:space="preserve" text-anchor="start" x="1192.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -473,12 +473,12 @@
 <!-- little_endian_bytes_to_signed_integer/4&#45;&gt;sign_accumulator/2 -->
 <g id="edge17" class="edge">
 <title>little_endian_bytes_to_signed_integer/4&#45;&gt;sign_accumulator/2</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L171" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L171" xlink:title="calls">
 <path fill="none" stroke="black" d="M1837.77,-302.26C1744.14,-280.78 1585.76,-244.44 1488.2,-222.05"/>
 <polygon fill="black" stroke="black" points="1489.21,-218.69 1478.68,-219.86 1487.64,-225.51 1489.21,-218.69"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/8bddcb3f5ca86487d435ff79046d6b17cd45f06f/library/byte_order/byte_order.lgt#L171">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L171" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/cf052981e351bf4d25318b99431a172ca352ebcc/library/byte_order/byte_order.lgt#L171">
 <text xml:space="preserve" text-anchor="start" x="1673.82" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
