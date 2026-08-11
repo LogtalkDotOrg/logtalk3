@@ -34,8 +34,11 @@
 	]).
 
 	:- uses(_Random_, [
-		standard_normal/1, standard_gamma/2,
-		dirichlet/2 as random_dirichlet/2, uniform/1 as random_uniform/1
+		standard_normal/1, standard_gamma/2, dirichlet/2 as random_dirichlet/2, uniform/1 as random_uniform/1
+	]).
+
+	:- uses(integer, [
+		between/3
 	]).
 
 	:- uses(linear_algebra, [
@@ -44,7 +47,11 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2
+		append/3, length/2, member/2, sort/4
+	]).
+
+	:- uses(natural, [
+		factorial/2
 	]).
 
 	:- uses(type, [
@@ -72,7 +79,7 @@
 
 	multivariate_normal_density(Point, Mean, Covariance, Tolerance, Density) :-
 		normal_evaluation(Point, Mean, Covariance, Tolerance, Evaluation),
-		(Evaluation = on_support(LogDensity, _SquaredDistance) ->
+		(	Evaluation = on_support(LogDensity, _SquaredDistance) ->
 			Density is exp(LogDensity)
 		;	Density = 0.0
 		).
@@ -172,7 +179,10 @@
 
 	dirichlet_density(Point, Alphas, Density) :-
 		dirichlet_log_density(Point, Alphas, LogDensity),
-		( LogDensity == negative_infinity -> Density = 0.0; Density is exp(LogDensity) ).
+		(	LogDensity == negative_infinity ->
+			Density = 0.0
+		;	Density is exp(LogDensity)
+		).
 
 	dirichlet_log_density(Point, Alphas, LogDensity) :-
 		context(Context),
@@ -180,14 +190,14 @@
 		check_dirichlet_alphas(Alphas),
 		length(Point, PointLength),
 		length(Alphas, AlphasLength),
-		( PointLength =:= AlphasLength ->
+		(	PointLength =:= AlphasLength ->
 			dirichlet_log_terms(Point, Alphas, Evaluation),
-			( Evaluation = inside(PointSum, AlphaSum, LogGammaAlphas, LogKernel), abs(PointSum - 1.0) =< 1.0e-12 ->
+			(	Evaluation = inside(PointSum, AlphaSum, LogGammaAlphas, LogKernel), abs(PointSum - 1.0) =< 1.0e-12 ->
 				log_gamma(AlphaSum, LogGammaSum),
 				LogDensity is LogGammaSum - LogGammaAlphas + LogKernel
-			; LogDensity = negative_infinity
+			;	LogDensity = negative_infinity
 			)
-		; domain_error(dimension_mismatch, Point)
+		;	domain_error(dimension_mismatch, Point)
 		).
 
 	multinomial(Trials, Probabilities, Counts) :-
@@ -204,7 +214,10 @@
 
 	multinomial_density(Counts, Trials, Probabilities, Density) :-
 		multinomial_log_density(Counts, Trials, Probabilities, LogDensity),
-		( LogDensity == negative_infinity -> Density = 0.0; Density is exp(LogDensity) ).
+		(	LogDensity == negative_infinity ->
+			Density = 0.0
+		;	Density is exp(LogDensity)
+		).
 
 	multinomial_log_density(Counts, Trials, Probabilities, LogDensity) :-
 		context(Context),
@@ -213,15 +226,42 @@
 		check(list(probability), Probabilities, Context),
 		length(Counts, CountsLength),
 		length(Probabilities, ProbabilitiesLength),
-		( CountsLength =:= ProbabilitiesLength ->
+		(	CountsLength =:= ProbabilitiesLength ->
 			sum_counts(Counts, 0, Total),
-			( Total =:= Trials ->
+			(	Total =:= Trials ->
 				log_gamma(Trials + 1.0, LogCoefficient),
 				multinomial_log_terms(Counts, Probabilities, LogCoefficient, LogDensity)
-			; LogDensity = negative_infinity
+			;	LogDensity = negative_infinity
 			)
-		; domain_error(dimension_mismatch, Counts)
+		;	domain_error(dimension_mismatch, Counts)
 		).
+
+	multinomial_quantile(Probability, Trials, Probabilities, Quantile) :-
+		context(Context),
+		check(open_probability, Probability, Context),
+		check(non_negative_integer, Trials, Context),
+		check(list(probability), Probabilities, Context),
+		(	Probabilities == [] ->
+			domain_error(minimum_number_of_values(1), Probabilities)
+		;	true
+		),
+		(	Trials =:= 0 ->
+			% trivial cases
+			findall(0, member(_, Probabilities), Quantile)
+		;	% main computation
+			findall(
+				Prob-Counts,
+				(	multinomial_composition(Trials, Probabilities, Counts),
+					multinomial_pmf(Counts, Trials, Probabilities, Prob)
+				),
+				Pairs0
+			),
+			% sort by probability descending, break ties by lexicographic order of Counts
+			sort(1, @>=, Pairs0, Pairs),
+			accumulate_to_quantile(Pairs, Probability, 0.0, Quantile)
+		).
+
+	% auxiliary predicates
 
 	generate_multivariate_normal_samples(0, _Mean, _Factorization, []) :-
 		!.
@@ -295,40 +335,50 @@
 		context(Context),
 		check(list(positive_number), Alphas, Context),
 		length(Alphas, Length),
-		( Length >= 2 -> true; domain_error(minimum_number_of_values(2), Alphas) ).
+		(	Length >= 2 ->
+			true
+		;	domain_error(minimum_number_of_values(2), Alphas)
+		).
 
 	check_multinomial_parameters(Trials, Probabilities) :-
 		context(Context),
 		check(non_negative_integer, Trials, Context),
 		check(list(probability), Probabilities, Context),
-		( Probabilities == [] -> domain_error(minimum_number_of_values(1), Probabilities); true ).
+		(	Probabilities == [] ->
+			domain_error(minimum_number_of_values(1), Probabilities)
+		;	true
+		).
 
 	dirichlet_log_terms([], [], inside(0.0, 0.0, 0.0, 0.0)).
 	dirichlet_log_terms([Value| Values], [Alpha| Alphas], Evaluation) :-
-		( Value > 0.0, Value =< 1.0 ->
+		(	Value > 0.0, Value =< 1.0 ->
 			log_gamma(Alpha, LogGammaAlpha),
 			dirichlet_log_terms(Values, Alphas, RestEvaluation),
-			( RestEvaluation = inside(PointSum0, AlphaSum0, LogGammaAlphas0, LogKernel0) ->
+			(	RestEvaluation = inside(PointSum0, AlphaSum0, LogGammaAlphas0, LogKernel0) ->
 				PointSum is PointSum0 + Value,
 				AlphaSum is AlphaSum0 + Alpha,
 				LogGammaAlphas is LogGammaAlphas0 + LogGammaAlpha,
 				LogKernel is LogKernel0 + (Alpha - 1.0) * log(Value),
 				Evaluation = inside(PointSum, AlphaSum, LogGammaAlphas, LogKernel)
-			; Evaluation = outside
+			;	Evaluation = outside
 			)
 		; Evaluation = outside
 		).
 
 	sum_counts([], Total, Total).
-	sum_counts([Count| Counts], Total0, Total) :- Total1 is Total0 + Count, sum_counts(Counts, Total1, Total).
+	sum_counts([Count| Counts], Total0, Total) :-
+		Total1 is Total0 + Count, sum_counts(Counts, Total1, Total).
 
 	multinomial_log_terms([], [], LogDensity, LogDensity).
 	multinomial_log_terms([Count| Counts], [Probability| Probabilities], LogDensity0, LogDensity) :-
-		( Count > 0, Probability =< 0.0 ->
+		(	Count > 0, Probability =< 0.0 ->
 			LogDensity = negative_infinity
-		; log_gamma(Count + 1.0, LogFactorial),
-		  ( Count =:= 0 -> LogDensity1 is LogDensity0 - LogFactorial; LogDensity1 is LogDensity0 - LogFactorial + Count * log(Probability) ),
-		  multinomial_log_terms(Counts, Probabilities, LogDensity1, LogDensity)
+		;	log_gamma(Count + 1.0, LogFactorial),
+		  	(	Count =:= 0 ->
+				LogDensity1 is LogDensity0 - LogFactorial
+			;	LogDensity1 is LogDensity0 - LogFactorial + Count * log(Probability)
+			),
+		  	multinomial_log_terms(Counts, Probabilities, LogDensity1, LogDensity)
 		).
 
 	covariance_factorization(Mean, Covariance, Tolerance, factorization(Dimension, Tolerance, PositiveEigenpairs, NullEigenvectors, LogPseudoDeterminant)) :-
@@ -501,5 +551,59 @@
 		9.9843695780195716e-6,
 		1.5056327351493116e-7
 	]).
+
+	% Generate a composition of N into K non-negative integers
+	% (K = length of Probabilities).  Uses a simple recursive generator.
+	multinomial_composition(N, Probabilities, Counts) :-
+		length(Probabilities, K),
+		length(Counts, K),
+		composition(N, K, Counts).
+
+	composition(0, 0, []) :-
+		!.
+	composition(N, 1, [N]) :-
+		!.
+	composition(N, K, [C|Cs]) :-
+		K > 1,
+		between(0, N, C),
+		N1 is N - C,
+		K1 is K - 1,
+		composition(N1, K1, Cs).
+
+	% Multinomial probability mass function
+	multinomial_pmf(Counts, Trials, Probabilities, Prob) :-
+		multinomial_coefficient(Trials, Counts, Coeff),
+		pow_product(Counts, Probabilities, 1.0, Prod),
+		Prob is Coeff * Prod.
+
+	multinomial_coefficient(N, Counts, Coeff) :-
+		factorial(N, NFact),
+		findall(Fact, (member(Count, Counts), factorial(Count, Fact)), Facts),
+		product_list(Facts, 1, Denom),
+		Coeff is NFact / Denom.
+
+	product_list([], Acc, Acc).
+	product_list([X|Xs], Acc0, Acc) :-
+		Acc1 is Acc0 * X,
+		product_list(Xs, Acc1, Acc).
+
+	pow_product([], [], Acc, Acc).
+	pow_product([C|Cs], [P|Ps], Acc0, Acc) :-
+		(	C =:= 0 ->
+			Term = 1.0
+		;	Term is P ** C
+		),
+		Acc1 is Acc0 * Term,
+		pow_product(Cs, Ps, Acc1, Acc).
+
+	% Walk the probability-sorted list until the cumulative mass
+	% reaches or exceeds the requested probability.
+	accumulate_to_quantile([Prob-Counts|_], Target, Cum0, Counts) :-
+		Cum is Cum0 + Prob,
+		Cum >= Target,
+		!.
+	accumulate_to_quantile([Prob-_|Pairs], Target, Cum0, Quantile) :-
+		Cum is Cum0 + Prob,
+		accumulate_to_quantile(Pairs, Target, Cum, Quantile).
 
 :- end_object.

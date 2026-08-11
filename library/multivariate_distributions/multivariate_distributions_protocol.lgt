@@ -716,4 +716,23 @@
 		]
 	]).
 
+	:- public(multinomial_quantile/4).
+	:- mode(multinomial_quantile(+number, +non_negative_integer, +list(probability), -list(non_negative_integer)), one_or_error).
+	:- info(multinomial_quantile/4, [
+		comment is 'Computes a multinomial quantile (count vector) for a probability strictly between zero and one. The returned vector is the smallest count vector (under lexicographic order of the probability-sorted categories) whose cumulative probability mass is at least the requested probability.',
+		argnames is ['Probability', 'Trials', 'Probabilities', 'Quantile'],
+		exceptions is [
+			'Probability is not a number' - type_error(number, 'Probability'),
+			'Probability is not strictly between zero and one' - domain_error(open_probability, 'Probability'),
+			'Trials is a variable' - instantiation_error,
+			'Trials is neither a variable nor an integer' - type_error(integer, 'Trials'),
+			'Trials is a negative integer' - domain_error(non_negative_integer, 'Trials'),
+			'Probabilities is a variable or a partial list' - instantiation_error,
+			'Probabilities is neither a partial list nor a list' - type_error(list, 'Probabilities'),
+			'An element Element of the Probabilities list is neither a variable nor a number' - type_error(number, 'Element'),
+			'An element Element of the Probabilities list is not a probability' - domain_error(probability, 'Element'),
+			'Probabilities is empty' - domain_error(minimum_number_of_values(1), 'Probabilities')
+		]
+	]).
+
 :- end_protocol.

@@ -208,17 +208,14 @@
 		^^assertion(FirstLength =:= 2),
 		^^assertion(SecondLength =:= 2).
 
-	test(dirichlet_density_3, deterministic) :-
-		multivariate_distributions(fast_random)::dirichlet_density([0.25, 0.75], [1.0, 1.0], Density),
-		^^assertion(Density =~= 1.0).
+	test(dirichlet_density_3, deterministic(Density =~= 1.0)) :-
+		multivariate_distributions(fast_random)::dirichlet_density([0.25, 0.75], [1.0, 1.0], Density).
 
-	test(dirichlet_log_density_3, deterministic) :-
-		multivariate_distributions(fast_random)::dirichlet_log_density([0.25, 0.75], [1.0, 1.0], LogDensity),
-		^^assertion(LogDensity =~= 0.0).
+	test(dirichlet_log_density_3, deterministic(LogDensity =~= 0.0)) :-
+		multivariate_distributions(fast_random)::dirichlet_log_density([0.25, 0.75], [1.0, 1.0], LogDensity).
 
-	test(dirichlet_density_off_simplex, deterministic) :-
-		multivariate_distributions(fast_random)::dirichlet_density([0.25, 0.25], [1.0, 1.0], Density),
-		^^assertion(Density =~= 0.0).
+	test(dirichlet_density_off_simplex, deterministic(Density =~= 0.0)) :-
+		multivariate_distributions(fast_random)::dirichlet_density([0.25, 0.25], [1.0, 1.0], Density).
 
 	test(multinomial_3, deterministic) :-
 		multivariate_distributions(fast_random)::multinomial(10, [0.25, 0.75], [First, Second]),
@@ -234,16 +231,19 @@
 		^^assertion(FirstLength =:= 2),
 		^^assertion(SecondLength =:= 2).
 
-	test(multinomial_density_4, deterministic) :-
-		multivariate_distributions(fast_random)::multinomial_density([1, 1], 2, [0.5, 0.5], Density),
-		^^assertion(Density =~= 0.5).
+	test(multinomial_density_4, deterministic(Density =~= 0.5)) :-
+		multivariate_distributions(fast_random)::multinomial_density([1, 1], 2, [0.5, 0.5], Density).
 
-	test(multinomial_log_density_4, deterministic) :-
-		multivariate_distributions(fast_random)::multinomial_log_density([1, 1], 2, [0.5, 0.5], LogDensity),
-		^^assertion(LogDensity =~= -0.6931471805599453).
+	test(multinomial_log_density_4, deterministic(LogDensity =~= -0.6931471805599453)) :-
+		multivariate_distributions(fast_random)::multinomial_log_density([1, 1], 2, [0.5, 0.5], LogDensity).
 
-	test(multinomial_density_counts_mismatch, deterministic) :-
-		multivariate_distributions(fast_random)::multinomial_density([1, 0], 2, [0.5, 0.5], Density),
-		^^assertion(Density =~= 0.0).
+	test(multinomial_density_counts_mismatch, deterministic(Density =~= 0.0)) :-
+		multivariate_distributions(fast_random)::multinomial_density([1, 0], 2, [0.5, 0.5], Density).
+
+	test(multinomial_quantile_trivial_case, deterministic(Quantile == [0, 0])) :-
+		multivariate_distributions(fast_random)::multinomial_quantile(0.5, 0, [0.3, 0.7], Quantile).
+
+	test(multinomial_quantile_general_case, deterministic(Quantile == [1, 1])) :-
+		multivariate_distributions(fast_random)::multinomial_quantile(0.4, 2, [0.5, 0.5], Quantile).
 
 :- end_object.
