@@ -27,9 +27,9 @@
 :- object(type).
 
 	:- info([
-		version is 2:8:0,
+		version is 2:9:0,
 		author is 'Paulo Moura',
-		date is 2026-02-28,
+		date is 2026-08-11,
 		comment is 'Type checking predicates. User extensible. New types can be defined by adding clauses for the ``type/1`` and ``check/2`` multifile predicates.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``.',
@@ -38,7 +38,7 @@
 			'Atom derived types' - '``non_quoted_atom``, ``non_empty_atom``, ``boolean``, ``character``, ``in_character``, ``char``, ``operator_specifier``, ``hex_char``.',
 			'Atom derived parametric types' - '``atom(CharSet)``, ``atom(CharSet,Length)``, ``non_empty_atom(CharSet)``, ``character(CharSet)``, ``in_character(CharSet)``, ``char(CharSet)``.',
 			'Number derived types' - '``positive_number``, ``negative_number``, ``non_positive_number``, ``non_negative_number``.',
-			'Float derived types' - '``positive_float``, ``negative_float``, ``non_positive_float``, ``non_negative_float, probability``.',
+			'Float derived types' - '``positive_float``, ``negative_float``, ``non_positive_float``, ``non_negative_float, probability``, ``open_probability``.',
 			'Integer derived types' - '``positive_integer``, ``negative_integer``, ``non_positive_integer``, ``non_negative_integer``, ``byte``, ``in_byte``, ``character_code``, ``in_character_code``, ``code``, ``operator_priority``, ``hex_code``.',
 			'Integer derived parametric types' - '``character_code(CharSet)``, ``in_character_code(CharSet)``, ``code(CharSet)``.',
 			'List types (compound derived types)' - '``list``, ``non_empty_list``, ``partial_list``, ``list_or_partial_list``, ``list(Type)``, ``list(Type,Length)``, ``list(Type,Min,Max)``, ``list(Type,Length,Min,Max)``, ``non_empty_list(Type)``, ``codes``, ``chars``.',
@@ -169,6 +169,7 @@
 	type(non_positive_float).
 	type(non_negative_float).
 	type(probability).
+	type(open_probability).
 	% integer derived types
 	type(positive_integer).
 	type(negative_integer).
@@ -793,6 +794,16 @@
 		;	0.0 =< Term, Term =< 1.0 ->
 			true
 		;	throw(domain_error(probability, Term))
+		).
+
+	check(open_probability, Term) :-
+		(	var(Term) ->
+			throw(instantiation_error)
+		;	\+ float(Term) ->
+			throw(type_error(float, Term))
+		;	0.0 < Term, Term < 1.0 ->
+			true
+		;	throw(domain_error(open_probability, Term))
 		).
 
 	% integer derived types

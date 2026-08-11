@@ -166,6 +166,9 @@ shared portable standard normal distribution numeric helpers.
 * ADDED: NYSIIS phonetic encoding and matching support to the
 `string_distance` library.
 
+* ADDED: Support for the `open_probability` type to the `types` and `arbitrary`
+libraries.
+
 * IMPROVED: Performance of the `list::nth0/3` and `list::nth1/3` library
 predicates. Thanks to Andrew Davison for the performance bug report.
 

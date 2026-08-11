@@ -14,8 +14,8 @@ Adds predicates for generating and shrinking random values for selected types to
 |    ``logtalk_load(arbitrary(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 2:38:0
-| **Date:** 2026-02-28
+| **Version:** 2:39:0
+| **Date:** 2026-08-11
 
 | **Compilation flags:**
 |    ``static``
@@ -37,7 +37,7 @@ Adds predicates for generating and shrinking random values for selected types to
    - Atom derived types: ``non_quoted_atom``, ``non_empty_atom``, ``non_empty_atom(CharSet)``, ``boolean``, ``character``, ``in_character``, ``char``, ``operator_specifier``, ``hex_char``.
    - Atom derived parametric types: ``atom(CharSet)``, ``atom(CharSet,Length)``, ``non_empty_atom(CharSet)``, ``character(CharSet)``, ``in_character(CharSet)``, ``char(CharSet)``.
    - Number derived types: ``positive_number``, ``negative_number``, ``non_positive_number``, ``non_negative_number``.
-   - Float derived types: ``positive_float``, ``negative_float``, ``non_positive_float``, ``non_negative_float``, ``probability``.
+   - Float derived types: ``positive_float``, ``negative_float``, ``non_positive_float``, ``non_negative_float``, ``probability``, ``open_probability``.
    - Integer derived types: ``positive_integer``, ``negative_integer``, ``non_positive_integer``, ``non_negative_integer``, ``byte``, ``in_byte``, ``character_code``, ``in_character_code``, ``code``, ``operator_priority``, ``hex_code``.
    - Integer derived parametric types: ``character_code(CharSet)``, ``in_character_code(CharSet)``, ``code(CharSet)``.
    - List types (compound derived types): ``list``, ``non_empty_list``, ``partial_list``, ``list_or_partial_list``, ``list(Type)``, ``list(Type,Length)``, ``list(Type,Min,Max)``, ``list(Type,Length,Min,Max)``, ``non_empty_list(Type)``, ``codes``, ``chars``.

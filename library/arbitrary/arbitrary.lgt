@@ -28,9 +28,9 @@
 	complements(type)).
 
 	:- info([
-		version is 2:38:0,
+		version is 2:39:0,
 		author is 'Paulo Moura',
-		date is 2026-02-28,
+		date is 2026-08-11,
 		comment is 'Adds predicates for generating and shrinking random values for selected types to the library ``type`` object. User extensible.',
 		remarks is [
 			'Logtalk specific types' - '``entity``, ``object``, ``protocol``, ``category``, ``entity_identifier``, ``object_identifier``, ``protocol_identifier``, ``category_identifier``, ``event``, ``predicate``.',
@@ -39,7 +39,7 @@
 			'Atom derived types' - '``non_quoted_atom``, ``non_empty_atom``, ``non_empty_atom(CharSet)``, ``boolean``, ``character``, ``in_character``, ``char``, ``operator_specifier``, ``hex_char``.',
 			'Atom derived parametric types' - '``atom(CharSet)``, ``atom(CharSet,Length)``, ``non_empty_atom(CharSet)``, ``character(CharSet)``, ``in_character(CharSet)``, ``char(CharSet)``.',
 			'Number derived types' - '``positive_number``, ``negative_number``, ``non_positive_number``, ``non_negative_number``.',
-			'Float derived types' - '``positive_float``, ``negative_float``, ``non_positive_float``, ``non_negative_float``, ``probability``.',
+			'Float derived types' - '``positive_float``, ``negative_float``, ``non_positive_float``, ``non_negative_float``, ``probability``, ``open_probability``.',
 			'Integer derived types' - '``positive_integer``, ``negative_integer``, ``non_positive_integer``, ``non_negative_integer``, ``byte``, ``in_byte``, ``character_code``, ``in_character_code``, ``code``, ``operator_priority``, ``hex_code``.',
 			'Integer derived parametric types' - '``character_code(CharSet)``, ``in_character_code(CharSet)``, ``code(CharSet)``.',
 			'List types (compound derived types)' - '``list``, ``non_empty_list``, ``partial_list``, ``list_or_partial_list``, ``list(Type)``, ``list(Type,Length)``, ``list(Type,Min,Max)``, ``list(Type,Length,Min,Max)``, ``non_empty_list(Type)``, ``codes``, ``chars``.',
@@ -186,6 +186,7 @@
 	arbitrary(non_positive_float).
 	arbitrary(non_negative_float).
 	arbitrary(probability).
+	arbitrary(open_probability).
 	% integer derived types
 	arbitrary(positive_integer).
 	arbitrary(negative_integer).
@@ -497,6 +498,10 @@
 
 	arbitrary(probability, Arbitrary) :-
 		between(0, 1000, Integer),
+		Arbitrary is Integer / 1000.0.
+
+	arbitrary(open_probability, Arbitrary) :-
+		between(1, 999, Integer),
 		Arbitrary is Integer / 1000.0.
 
 	arbitrary(byte, Arbitrary) :-
@@ -957,6 +962,10 @@
 		float(Large),
 		catch(Small is Large / 2.0, _, fail),
 		Small =\= Large.
+
+	shrink(open_probability, Large, Small) :-
+		shrink(probability, Large, Small),
+		0.0 < Small, Small < 1.0.
 
 	shrink(nonvar, Large, Small) :-
 		(	atom(Large) ->
