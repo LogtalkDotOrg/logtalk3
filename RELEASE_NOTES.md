@@ -134,6 +134,10 @@ Generalized Ripple-Down Rules (GRDR).
 * ADDED: New `tries` library implementing prefix trees that associate complete
 strings with values.
 
+* ADDED: New `univariate_distributions` library providing normal distribution
+sampling, density, log-density, cumulative distribution, and quantile
+predicates.
+
 * ADDED: New `block_ciphers` library with AES 128/192/256 implementations.
 
 * ADDED: New `cmac` library providing a portable implementation of the
@@ -211,6 +215,9 @@ provide `length/2` as a built-in predicate.
 
 * FIXED: Several `random` library sampling API declaration, formula,
 parameter validation, and edge case handling issues.
+
+* UPDATED: The `thurstone_mosteller_ranker` and `trueskill_ranker` libraries to
+use the new `univariate_distributions` library.
 
 Tools
 -----

@@ -1,0 +1,67 @@
+.. index:: single: univariate_distributions(Random)
+.. _univariate_distributions/1:
+
+.. rst-class:: right
+
+**object**
+
+``univariate_distributions(Random)``
+====================================
+
+* ``Random`` - An object implementing the ``sampling_protocol`` protocol.
+
+
+Univariate probability distributions using an injected random source.
+
+| **Availability:** 
+|    ``logtalk_load(univariate_distributions(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-11
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0>`
+| **Uses:**
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+
+   - Normal cumulative distribution: Uses the Abramowitz and Stegun formula 26.2.17 approximation.
+   - Normal quantile: Uses the Peter J. Acklam rational approximation.
+
+| **Inherited public predicates:**
+|     :ref:`univariate_distributions_protocol/0::normal/3`  :ref:`univariate_distributions_protocol/0::normal_density/4`  :ref:`univariate_distributions_protocol/0::normal_distribution/4`  :ref:`univariate_distributions_protocol/0::normal_log_density/4`  :ref:`univariate_distributions_protocol/0::normal_quantile/4`  :ref:`univariate_distributions_protocol/0::normal_samples/4`  :ref:`univariate_distributions_protocol/0::standard_normal/1`  :ref:`univariate_distributions_protocol/0::standard_normal_density/2`  :ref:`univariate_distributions_protocol/0::standard_normal_distribution/2`  :ref:`univariate_distributions_protocol/0::standard_normal_log_density/2`  :ref:`univariate_distributions_protocol/0::standard_normal_quantile/2`  :ref:`univariate_distributions_protocol/0::standard_normal_samples/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0>`, :ref:`multivariate_distributions(Random) <multivariate_distributions/1>`, :ref:`random(Algorithm) <random/1>`, :ref:`fast_random(Algorithm) <fast_random/1>`, :ref:`fast_random <fast_random/0>`, :ref:`backend_random <backend_random/0>`
+

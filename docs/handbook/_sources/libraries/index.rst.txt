@@ -293,6 +293,7 @@ directory in the ``NOTES.md`` file.
    umap_projection
    unicode_data
    union_find
+   univariate_distributions
    url
    uuid
    validations

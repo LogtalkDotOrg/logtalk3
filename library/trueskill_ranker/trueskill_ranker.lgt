@@ -20,12 +20,12 @@
 
 
 :- object(trueskill_ranker,
-	imports([ranking_dataset_common, score_ranker_model_common, normal_distribution_common])).
+	imports([ranking_dataset_common, score_ranker_model_common])).
 
 	:- info([
-		version is 0:1:0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-02,
+		date is 2026-08-11,
 		comment is 'TrueSkill ranker for ordered multiplayer matches with ranked teams, draws, and weighted player participation.',
 		see_also is [multiplayer_ranking_dataset_protocol, ranker_protocol, glicko2_periodic_ranker]
 	]).
@@ -36,6 +36,10 @@
 
 	:- uses(list, [
 		length/2, memberchk/2, reverse/2
+	]).
+
+	:- uses(univariate_distributions(fast_random), [
+		standard_normal_density/2, standard_normal_distribution/2, standard_normal_quantile/2
 	]).
 
 	learn(Dataset, Ranker) :-
@@ -213,7 +217,7 @@
 		!.
 	draw_margin(DrawProbability, PerformanceDeviation, WeightSquares, DrawMargin) :-
 		Probability is (DrawProbability + 1.0) / 2.0,
-		^^standard_normal_quantile(Probability, Quantile),
+		standard_normal_quantile(Probability, Quantile),
 		DrawMargin is Quantile * PerformanceDeviation * sqrt(WeightSquares).
 
 	comparison_correction(LeftRank, RightRank, DifferenceMean, DifferenceDeviation, DrawMargin, VCorrection, WCorrection) :-
@@ -231,8 +235,8 @@
 		;	X > 8.0 ->
 			VCorrection = 0.0,
 			WCorrection = 0.0
-		;	^^standard_normal_density(X, Density),
-			^^standard_normal_distribution(X, Probability0),
+		;	standard_normal_density(X, Density),
+			standard_normal_distribution(X, Probability0),
 			positive_denominator(Probability0, Probability),
 			VCorrection is Density / Probability,
 			RawWCorrection is VCorrection * (VCorrection + X),
@@ -242,12 +246,12 @@
 	draw_correction(DifferenceMean, DifferenceDeviation, DrawMargin, VCorrection, WCorrection) :-
 		Lower is (-DrawMargin - DifferenceMean) / DifferenceDeviation,
 		Upper is (DrawMargin - DifferenceMean) / DifferenceDeviation,
-		^^standard_normal_distribution(Upper, UpperProbability),
-		^^standard_normal_distribution(Lower, LowerProbability),
+		standard_normal_distribution(Upper, UpperProbability),
+		standard_normal_distribution(Lower, LowerProbability),
 		Probability0 is UpperProbability - LowerProbability,
 		positive_denominator(Probability0, Probability),
-		^^standard_normal_density(Lower, LowerDensity),
-		^^standard_normal_density(Upper, UpperDensity),
+		standard_normal_density(Lower, LowerDensity),
+		standard_normal_density(Upper, UpperDensity),
 		VCorrection is (LowerDensity - UpperDensity) / Probability,
 		RawWCorrection is VCorrection * VCorrection + (Upper * UpperDensity - Lower * LowerDensity) / Probability,
 		bounded_w_correction(RawWCorrection, WCorrection).

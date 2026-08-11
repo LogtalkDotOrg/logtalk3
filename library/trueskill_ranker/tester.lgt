@@ -23,6 +23,7 @@
 	set_logtalk_flag(report, warnings),
 	logtalk_load(types(loader)),
 	logtalk_load(format(loader)),
+	logtalk_load(univariate_distributions(loader)),
 	logtalk_load(ranking_protocols(loader)),
 	logtalk_load([
 		ranking_protocols('test_datasets/multiplayer_matches'),

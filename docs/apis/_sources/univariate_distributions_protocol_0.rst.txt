@@ -1,0 +1,385 @@
+.. index:: single: univariate_distributions_protocol
+.. _univariate_distributions_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``univariate_distributions_protocol``
+=====================================
+
+Univariate probability distribution predicates.
+
+| **Availability:** 
+|    ``logtalk_load(univariate_distributions(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-11
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: standard_normal/1
+.. _univariate_distributions_protocol/0::standard_normal/1:
+
+``standard_normal/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns a standard normally distributed random value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``standard_normal(Value)``
+| **Mode and number of proofs:**
+|    ``standard_normal(-float)`` - ``one``
+
+
+------------
+
+.. index:: standard_normal_samples/2
+.. _univariate_distributions_protocol/0::standard_normal_samples/2:
+
+``standard_normal_samples/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the requested number of standard normally distributed random values.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``standard_normal_samples(Count,Samples)``
+| **Mode and number of proofs:**
+|    ``standard_normal_samples(+integer,-list(float))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Count`` is a variable:
+|        ``instantiation_error``
+|    ``Count`` is neither a variable nor an integer:
+|        ``type_error(integer,Count)``
+|    ``Count`` is an integer but not a non-negative integer:
+|        ``domain_error(non_negative_integer,Count)``
+
+
+------------
+
+.. index:: normal/3
+.. _univariate_distributions_protocol/0::normal/3:
+
+``normal/3``
+^^^^^^^^^^^^
+
+Returns a normally distributed random value with the given mean and standard deviation. A zero deviation returns the mean.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``normal(Mean,Deviation,Value)``
+| **Mode and number of proofs:**
+|    ``normal(+float,+non_negative_float,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Mean`` is a variable:
+|        ``instantiation_error``
+|    ``Mean`` is neither a variable nor a float:
+|        ``type_error(float,Mean)``
+|    ``Deviation`` is a variable:
+|        ``instantiation_error``
+|    ``Deviation`` is neither a variable nor a float:
+|        ``type_error(float,Deviation)``
+|    ``Deviation`` is a negative float:
+|        ``domain_error(non_negative_float,Deviation)``
+
+
+------------
+
+.. index:: normal_samples/4
+.. _univariate_distributions_protocol/0::normal_samples/4:
+
+``normal_samples/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns the requested number of normally distributed random values with the given mean and standard deviation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``normal_samples(Count,Mean,Deviation,Samples)``
+| **Mode and number of proofs:**
+|    ``normal_samples(+integer,+float,+non_negative_float,-list(float))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Count`` is a variable:
+|        ``instantiation_error``
+|    ``Count`` is neither a variable nor an integer:
+|        ``type_error(integer,Count)``
+|    ``Count`` is an integer but not a non-negative integer:
+|        ``domain_error(non_negative_integer,Count)``
+|    ``Mean`` is a variable:
+|        ``instantiation_error``
+|    ``Mean`` is neither a variable nor a float:
+|        ``type_error(float,Mean)``
+|    ``Deviation`` is a variable:
+|        ``instantiation_error``
+|    ``Deviation`` is neither a variable nor a float:
+|        ``type_error(float,Deviation)``
+|    ``Deviation`` is a negative float:
+|        ``domain_error(non_negative_float,Deviation)``
+
+
+------------
+
+.. index:: standard_normal_density/2
+.. _univariate_distributions_protocol/0::standard_normal_density/2:
+
+``standard_normal_density/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the standard normal probability density at the given value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``standard_normal_density(Value,Density)``
+| **Mode and number of proofs:**
+|    ``standard_normal_density(+number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Value`` is not a number:
+|        ``type_error(number,Value)``
+
+
+------------
+
+.. index:: standard_normal_log_density/2
+.. _univariate_distributions_protocol/0::standard_normal_log_density/2:
+
+``standard_normal_log_density/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the standard normal log-density at the given value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``standard_normal_log_density(Value,LogDensity)``
+| **Mode and number of proofs:**
+|    ``standard_normal_log_density(+number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Value`` is not a number:
+|        ``type_error(number,Value)``
+
+
+------------
+
+.. index:: standard_normal_distribution/2
+.. _univariate_distributions_protocol/0::standard_normal_distribution/2:
+
+``standard_normal_distribution/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes an approximation of the standard normal cumulative distribution at the given value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``standard_normal_distribution(Value,Probability)``
+| **Mode and number of proofs:**
+|    ``standard_normal_distribution(+number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Value`` is not a number:
+|        ``type_error(number,Value)``
+
+
+------------
+
+.. index:: standard_normal_quantile/2
+.. _univariate_distributions_protocol/0::standard_normal_quantile/2:
+
+``standard_normal_quantile/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes an approximation of the standard normal quantile for a probability strictly between zero and one.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``standard_normal_quantile(Probability,Quantile)``
+| **Mode and number of proofs:**
+|    ``standard_normal_quantile(+number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Probability`` is not a number:
+|        ``type_error(number,Probability)``
+|    ``Probability`` is not strictly between zero and one:
+|        ``domain_error(open_probability,Probability)``
+
+
+------------
+
+.. index:: normal_density/4
+.. _univariate_distributions_protocol/0::normal_density/4:
+
+``normal_density/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Computes the normal probability density at a value for the given mean and positive standard deviation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``normal_density(Value,Mean,Deviation,Density)``
+| **Mode and number of proofs:**
+|    ``normal_density(+number,+number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Value`` is not a number:
+|        ``type_error(number,Value)``
+|    ``Mean`` is not a number:
+|        ``type_error(number,Mean)``
+|    ``Deviation`` is not a number:
+|        ``type_error(number,Deviation)``
+|    ``Deviation`` is not positive:
+|        ``domain_error(positive_number,Deviation)``
+
+
+------------
+
+.. index:: normal_log_density/4
+.. _univariate_distributions_protocol/0::normal_log_density/4:
+
+``normal_log_density/4``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the normal log-density at a value for the given mean and positive standard deviation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``normal_log_density(Value,Mean,Deviation,LogDensity)``
+| **Mode and number of proofs:**
+|    ``normal_log_density(+number,+number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Value`` is not a number:
+|        ``type_error(number,Value)``
+|    ``Mean`` is not a number:
+|        ``type_error(number,Mean)``
+|    ``Deviation`` is not a number:
+|        ``type_error(number,Deviation)``
+|    ``Deviation`` is not positive:
+|        ``domain_error(positive_number,Deviation)``
+
+
+------------
+
+.. index:: normal_distribution/4
+.. _univariate_distributions_protocol/0::normal_distribution/4:
+
+``normal_distribution/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes an approximation of the normal cumulative distribution at a value for the given mean and positive standard deviation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``normal_distribution(Value,Mean,Deviation,Probability)``
+| **Mode and number of proofs:**
+|    ``normal_distribution(+number,+number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Value`` is not a number:
+|        ``type_error(number,Value)``
+|    ``Mean`` is not a number:
+|        ``type_error(number,Mean)``
+|    ``Deviation`` is not a number:
+|        ``type_error(number,Deviation)``
+|    ``Deviation`` is not positive:
+|        ``domain_error(positive_number,Deviation)``
+
+
+------------
+
+.. index:: normal_quantile/4
+.. _univariate_distributions_protocol/0::normal_quantile/4:
+
+``normal_quantile/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+Computes an approximation of the normal quantile for a probability strictly between zero and one and the given mean and positive standard deviation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``normal_quantile(Probability,Mean,Deviation,Quantile)``
+| **Mode and number of proofs:**
+|    ``normal_quantile(+number,+number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Probability`` is not a number:
+|        ``type_error(number,Probability)``
+|    ``Probability`` is not strictly between zero and one:
+|        ``domain_error(open_probability,Probability)``
+|    ``Mean`` is not a number:
+|        ``type_error(number,Mean)``
+|    ``Deviation`` is not a number:
+|        ``type_error(number,Deviation)``
+|    ``Deviation`` is not positive:
+|        ``domain_error(positive_number,Deviation)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`univariate_distributions(Random) <univariate_distributions/1>`, :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0>`, :ref:`sampling_protocol <sampling_protocol/0>`
+

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:1:0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-02,
+		date is 2026-08-11,
 		comment is 'Unit tests for the "trueskill_ranker" library.'
 	]).
 

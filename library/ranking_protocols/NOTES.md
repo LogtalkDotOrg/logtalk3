@@ -75,9 +75,6 @@ imported by ranking algorithm implementations:
   pairwise rating-period helpers, ordered multiplayer match helpers, and
   grouped tie-block extraction helpers for algorithms that consume tied
   rankings directly.
-- `normal_distribution_common` — portable standard normal density,
-  cumulative distribution, and quantile approximations used by probabilistic
-  ranking models.
 - `glicko2_common` — shared internal Glicko-2 numeric helpers for scale
   conversions, per-period player updates, and volatility root solving used
   by both the batch and periodic Glicko-2 rankers.

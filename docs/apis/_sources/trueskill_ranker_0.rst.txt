@@ -14,8 +14,8 @@ TrueSkill ranker for ordered multiplayer matches with ranked teams, draws, and w
 |    ``logtalk_load(trueskill_ranker(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:1:0
-| **Date:** 2026-08-02
+| **Version:** 1:0:0
+| **Date:** 2026-08-11
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -24,10 +24,10 @@ TrueSkill ranker for ordered multiplayer matches with ranked teams, draws, and w
 | **Imports:**
 |    ``public`` :ref:`ranking_dataset_common <ranking_dataset_common/0>`
 |    ``public`` :ref:`score_ranker_model_common <score_ranker_model_common/0>`
-|    ``public`` :ref:`normal_distribution_common <normal_distribution_common/0>`
 | **Uses:**
 |    :ref:`avltree <avltree/0>`
 |    :ref:`list <list/0>`
+|    :ref:`univariate_distributions(Random) <univariate_distributions/1>`
 
 | **Remarks:**
 |    (none)

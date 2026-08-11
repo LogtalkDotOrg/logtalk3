@@ -29,7 +29,6 @@
 		ranker_protocol,
 		ranker_common,
 		score_ranker_common,
-		normal_distribution_common,
 		glicko2_common,
 		condorcet_victory_common,
 		ranking_dataset_common,

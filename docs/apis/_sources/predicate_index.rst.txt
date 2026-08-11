@@ -16860,6 +16860,27 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`sampling_protocol <sampling_protocol/0::normal/3>`
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::normal/3>`
+
+``normal_density/4``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::normal_density/4>`
+
+``normal_distribution/4``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::normal_distribution/4>`
 
 ``normal_element/2``
 --------------------
@@ -16870,6 +16891,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`html <html/0::normal_element/2>`
+
+``normal_log_density/4``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::normal_log_density/4>`
+
+``normal_quantile/4``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::normal_quantile/4>`
+
+``normal_samples/4``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::normal_samples/4>`
 
 ``normalize/2``
 ---------------
@@ -25714,6 +25765,57 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`sampling_protocol <sampling_protocol/0::standard_normal/1>`
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::standard_normal/1>`
+
+``standard_normal_density/2``
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::standard_normal_density/2>`
+
+``standard_normal_distribution/2``
+----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::standard_normal_distribution/2>`
+
+``standard_normal_log_density/2``
+---------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::standard_normal_log_density/2>`
+
+``standard_normal_quantile/2``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::standard_normal_quantile/2>`
+
+``standard_normal_samples/2``
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::standard_normal_samples/2>`
 
 ``standard_t/2``
 ----------------

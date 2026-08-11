@@ -55,8 +55,8 @@ Scope
 -----
 
 The `multivariate_distributions(Random)` parametric object accepts a random
-source implementing the `sampling_protocol` protocol. Common choices include
-`random(xoshiro128pp)`, `fast_random(xoshiro128pp)`, and `backend_random`.
+source implementing the `sampling_protocol` protocol. Common choices are
+`random(xoshiro128pp)` and `fast_random(xoshiro128pp)`.
 
 Covariance and scale matrices may be singular positive-semidefinite matrices.
 The predicates use eigendecomposition to operate on their affine support and

@@ -14,8 +14,8 @@ Thurstone-Mosteller Case V pairwise preference ranker. Learns one real-valued la
 |    ``logtalk_load(thurstone_mosteller_ranker(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-05-06
+| **Version:** 1:1:0
+| **Date:** 2026-08-11
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -24,11 +24,11 @@ Thurstone-Mosteller Case V pairwise preference ranker. Learns one real-valued la
 | **Imports:**
 |    ``public`` :ref:`ranking_dataset_common <ranking_dataset_common/0>`
 |    ``public`` :ref:`score_ranker_model_common <score_ranker_model_common/0>`
-|    ``public`` :ref:`normal_distribution_common <normal_distribution_common/0>`
 | **Uses:**
 |    :ref:`avltree <avltree/0>`
 |    :ref:`list <list/0>`
 |    :ref:`numberlist <numberlist/0>`
+|    :ref:`univariate_distributions(Random) <univariate_distributions/1>`
 
 | **Remarks:**
 |    (none)

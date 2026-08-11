@@ -84,7 +84,6 @@ Categories
    mutation_testing_messages <mutation_testing_messages_0>
    mutations <mutations_0>
    mutator_common <mutator_common_0>
-   normal_distribution_common <normal_distribution_common_0>
    observer <observer_0>
    open_id_helpers <open_id_helpers_0>
    options <options_0>
@@ -726,6 +725,7 @@ Objects
    ulid(Representation) <ulid_1>
    umap_projection <umap_projection_0>
    union_find <union_find_0>
+   univariate_distributions(Random) <univariate_distributions_1>
    unweighted_directed_graph <unweighted_directed_graph_0>
    unweighted_directed_graph(Dictionary) <unweighted_directed_graph_1>
    unweighted_undirected_graph <unweighted_undirected_graph_0>
@@ -947,6 +947,7 @@ Protocols
    tzif_protocol <tzif_protocol_0>
    ulid_protocol <ulid_protocol_0>
    union_find_protocol <union_find_protocol_0>
+   univariate_distributions_protocol <univariate_distributions_protocol_0>
    unweighted_graph_protocol <unweighted_graph_protocol_0>
    uuid_protocol <uuid_protocol_0>
    varlistp <varlistp_0>

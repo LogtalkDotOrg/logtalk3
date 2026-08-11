@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on August 9, 2026
+%  Last updated on August 11, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -297,6 +297,7 @@ logtalk_library_path(tzif, library('tzif/')).
 logtalk_library_path(ulid, library('ulid/')).
 logtalk_library_path(umap_projection, library('umap_projection/')).
 logtalk_library_path(union_find, library('union_find/')).
+logtalk_library_path(univariate_distributions, library('univariate_distributions/')).
 logtalk_library_path(url, library('url/')).
 logtalk_library_path(uuid, library('uuid/')).
 logtalk_library_path(validations, library('validations/')).

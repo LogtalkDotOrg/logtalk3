@@ -20,12 +20,12 @@
 
 
 :- object(thurstone_mosteller_ranker,
-	imports([ranking_dataset_common, score_ranker_model_common, normal_distribution_common])).
+	imports([ranking_dataset_common, score_ranker_model_common])).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-08-11,
 		comment is 'Thurstone-Mosteller Case V pairwise preference ranker. Learns one real-valued latent utility per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol by fitting continuity-corrected empirical paired-comparison probabilities with a deterministic weighted least-squares normal model, and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
 		see_also is [pairwise_ranking_dataset_protocol, ranker_protocol, bradley_terry_ranker, regularized_bradley_terry_ranker]
 	]).
@@ -40,6 +40,10 @@
 
 	:- uses(numberlist, [
 		scalar_product/3 as dot_product/3, sum/2
+	]).
+
+	:- uses(univariate_distributions(fast_random), [
+		standard_normal_quantile/2
 	]).
 
 	learn(Dataset, Ranker) :-
@@ -101,7 +105,7 @@
 		dictionary_lookup(Item2, Index2, IndexDictionary),
 		Weight is Item1Wins + Item2Wins,
 		Probability is (Item1Wins + 0.5) / (Weight + 1.0),
-		^^standard_normal_quantile(Probability, Difference),
+		standard_normal_quantile(Probability, Difference),
 		update_system(Index1, Index2, Count, Weight, Difference, Matrix0, Matrix1, Vector0, Vector1),
 		build_system(Matchups, IndexDictionary, Count, Matrix1, Matrix, Vector1, Vector).
 

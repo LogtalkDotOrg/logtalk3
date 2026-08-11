@@ -2671,7 +2671,6 @@ To load an entity, always load the library that includes it using the goal ``log
    glicko2_common <glicko2_common_0>
    grouped_strength_ranker_common <grouped_strength_ranker_common_0>
    multiplayer_ranking_dataset_protocol <multiplayer_ranking_dataset_protocol_0>
-   normal_distribution_common <normal_distribution_common_0>
    pairwise_measurement_dataset_protocol <pairwise_measurement_dataset_protocol_0>
    pairwise_ranking_dataset_protocol <pairwise_ranking_dataset_protocol_0>
    pairwise_strength_ranker_common <pairwise_strength_ranker_common_0>
@@ -3211,6 +3210,17 @@ To load an entity, always load the library that includes it using the goal ``log
 
    union_find <union_find_0>
    union_find_protocol <union_find_protocol_0>
+
+``library/univariate_distributions/``
+-------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   univariate_distributions(Random) <univariate_distributions_1>
+   univariate_distributions_protocol <univariate_distributions_protocol_0>
 
 ``library/url/``
 ----------------

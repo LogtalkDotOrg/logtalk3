@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on August 9, 2026
+##   Last updated on August 11, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -344,6 +344,7 @@ sed '1,19d' ../../../library/ulid/NOTES.md | pandoc -f gfm -t rst -o libraries/u
 sed '1,19d' ../../../library/umap_projection/NOTES.md | pandoc -f gfm -t rst -o libraries/umap_projection.rst
 cat ../../../library/unicode_data/README.md | pandoc -f gfm -t rst -o libraries/unicode_data.rst
 sed '1,19d' ../../../library/union_find/NOTES.md | pandoc -f gfm -t rst -o libraries/union_find.rst
+sed '1,19d' ../../../library/univariate_distributions/NOTES.md | pandoc -f gfm -t rst -o libraries/univariate_distributions.rst
 sed '1,19d' ../../../library/url/NOTES.md | pandoc -f gfm -t rst -o libraries/url.rst
 sed '1,19d' ../../../library/uuid/NOTES.md | pandoc -f gfm -t rst -o libraries/uuid.rst
 sed '1,19d' ../../../library/validations/NOTES.md | pandoc -f gfm -t rst -o libraries/validations.rst

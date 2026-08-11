@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on August 9, 2026
+##   Last updated on August 11, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -344,6 +344,7 @@ Foreach-Object {
 (Get-Content ../../../library/umap_projection/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/umap_projection.rst
 (Get-Content ../../../library/unicode_data/README.md) | pandoc -f gfm -t rst -o libraries/unicode_data.rst
 (Get-Content ../../../library/union_find/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/union_find.rst
+(Get-Content ../../../library/univariate_distributions/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/univariate_distributions.rst
 (Get-Content ../../../library/url/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/url.rst
 (Get-Content ../../../library/uuid/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/uuid.rst
 (Get-Content ../../../library/validations/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/validations.rst

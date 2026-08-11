@@ -342,6 +342,7 @@
 <li class="toctree-l2"><a class="reference internal" href="umap_projection.html"><code class="docutils literal notranslate"><span class="pre">umap_projection</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="unicode_data.html"><code class="docutils literal notranslate"><span class="pre">unicode_data</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="union_find.html"><code class="docutils literal notranslate"><span class="pre">union_find</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="univariate_distributions.html"><code class="docutils literal notranslate"><span class="pre">univariate_distributions</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="url.html"><code class="docutils literal notranslate"><span class="pre">url</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="uuid.html"><code class="docutils literal notranslate"><span class="pre">uuid</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="validations.html"><code class="docutils literal notranslate"><span class="pre">validations</span></code></a></li>
@@ -420,8 +421,7 @@ link in a web browser.</p>
 <h2>Scope<a class="headerlink" href="#scope" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">multivariate_distributions(Random)</span></code> parametric object accepts a
 random source implementing the <code class="docutils literal notranslate"><span class="pre">sampling_protocol</span></code> protocol. Common
-choices include <code class="docutils literal notranslate"><span class="pre">random(xoshiro128pp)</span></code>, <code class="docutils literal notranslate"><span class="pre">fast_random(xoshiro128pp)</span></code>,
-and <code class="docutils literal notranslate"><span class="pre">backend_random</span></code>.</p>
+choices are <code class="docutils literal notranslate"><span class="pre">random(xoshiro128pp)</span></code> and <code class="docutils literal notranslate"><span class="pre">fast_random(xoshiro128pp)</span></code>.</p>
 <p>Covariance and scale matrices may be singular positive-semidefinite
 matrices. The predicates use eigendecomposition to operate on their
 affine support and do not add diagonal jitter. Density predicates return
