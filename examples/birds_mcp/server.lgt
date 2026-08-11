@@ -21,7 +21,7 @@
 
 %  Entry point for running the birds expert system as an MCP server.
 %  Load the example then start the server, which reads from stdin and
-%  writes to stdout using Content-Length framing.
+%  writes newline-delimited JSON-RPC messages to stdout.
 %
 %  Example usage with SWI-Prolog backend:
 %

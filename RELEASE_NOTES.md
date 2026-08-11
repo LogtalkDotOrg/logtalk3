@@ -210,6 +210,9 @@ of document roots accessed through symbolic links when using SWI-Prolog.
 handling of per-connection errors to keep listeners serving subsequent
 connections.
 
+* FIXED: Inconsistencies in the `mcp_server` library implementation of the
+MCP 2025-06-18 specification.
+
 * UPDATED: The `hmac` library documentation to mention the BLAKE2 hash
 functions and added tests for HMAC-BLAKE2b and HMAC-BLAKE2s.
 
@@ -219,8 +222,8 @@ provide `length/2` as a built-in predicate.
 * FIXED: Several `random` library sampling API declaration, formula,
 parameter validation, and edge case handling issues.
 
-* UPDATED: The `thurstone_mosteller_ranker` and `trueskill_ranker` libraries to
-use the new `univariate_distributions` library.
+* UPDATED: The `thurstone_mosteller_ranker` and `trueskill_ranker` libraries
+to use the new `univariate_distributions` library.
 
 Tools
 -----
@@ -242,6 +245,8 @@ Examples
 
 * ADDED: New `http_sse_ticker` example illustrating the use of the new
 `http_sse` library.
+
+* ADDED: Tests to the `birds_mcp` server example.
 
 * UPDATED: The `errors` example to illustrate the new linter warnings.
 

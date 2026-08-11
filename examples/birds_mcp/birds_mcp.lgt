@@ -23,12 +23,12 @@
 	implements(mcp_tool_protocol)).
 
 	:- info([
-		version is 0:1:0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-24,
+		date is 2026-08-11,
 		comment is 'MCP tool provider for the bird identification expert system. Uses MCP elicitation to ask the user questions during bird identification, replacing the terminal I/O of the original birds example.',
 		remarks is [
-			'Elicitation' - 'This tool provider declares the ``elicitation`` capability so that the MCP server advertises it to the client. During bird identification, the server sends ``elicitation/create`` requests to ask the user about bird characteristics (yes/no questions and multiple-choice menus).',
+			'Elicitation' - 'This tool provider declares that it requires the client ``elicitation`` capability. When the client advertises support during initialization, the server sends ``elicitation/create`` requests to ask the user about bird characteristics (yes/no questions and multiple-choice menus).',
 			'Knowledge base' - 'Uses the bird taxonomy from the ``birds`` example (the ``order`` prototype hierarchy). The ``descriptors`` category defines the askable attributes.'
 		]
 	]).

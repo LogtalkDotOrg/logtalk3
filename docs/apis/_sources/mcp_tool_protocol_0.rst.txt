@@ -14,8 +14,8 @@ Protocol for Logtalk objects that provide tools to be exposed via an MCP (Model 
 |    ``logtalk_load(mcp_server(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:3:0
-| **Date:** 2026-02-24
+| **Version:** 0:3:1
+| **Date:** 2026-08-11
 
 | **Compilation flags:**
 |    ``static``
@@ -27,7 +27,7 @@ Protocol for Logtalk objects that provide tools to be exposed via an MCP (Model 
 
 | **Remarks:**
 
-   - Capabilities: Objects can optionally define ``capabilities/1`` to declare which MCP capabilities they require. Currently supported: ``elicitation`` (allows the server to ask the user questions during tool execution via MCP elicitation). If ``capabilities/1`` is not defined, only the ``tools`` capability is advertised.
+   - Capabilities: Objects can optionally define ``capabilities/1`` to declare additional application features. Currently supported: ``prompts`` and ``resources`` (server capabilities advertised during initialization) and ``elicitation`` (a required client capability that allows the server to ask the user questions during tool execution). If ``capabilities/1`` is not defined, only the ``tools`` server capability is advertised.
    - Tool title: The tool title (human-friendly display name) is derived from a ``title`` key in the predicate ``info/2`` directive. If not specified, the predicate name (functor) is used as the title.
    - Structured output: Tools can declare an output schema via ``output_schema/2`` and return ``structured(StructuredContent)`` or ``structured(ContentItems, StructuredContent)`` results. The structured content is included in the ``structuredContent`` field of the tool call response alongside the ``content`` array.
    - Resource links: Tool results can include ``resource_link(URI, Name)`` or ``resource_link(URI, Name, Description, MimeType)`` content items in ``results/1`` lists.
@@ -49,7 +49,7 @@ Public predicates
 ``capabilities/1``
 ^^^^^^^^^^^^^^^^^^
 
-Returns a list of MCP capabilities required by this tool provider. Currently supported capabilities: ``elicitation`` (server can ask the user questions during tool execution). If not defined, only the ``tools`` capability is advertised. The server uses this to build the ``capabilities`` field in the ``initialize`` response.
+Returns a list of additional MCP features used by this provider. ``prompts`` and ``resources`` are advertised as server capabilities. ``elicitation`` declares that the provider may ask the user questions and is enabled only when the client advertises the corresponding client capability. If not defined, only the ``tools`` server capability is advertised.
 
 | **Compilation flags:**
 |    ``static``
@@ -106,7 +106,7 @@ Handles a tool call. ``Name`` is the MCP tool name (as declared in ``tools/1``),
 ``tool_call/4``
 ^^^^^^^^^^^^^^^
 
-Handles a tool call with elicitation support. Same as ``tool_call/3`` but receives an ``Elicit`` closure as the third argument. The closure can be called as ``call(Elicit, Message, Schema, Answer)`` where ``Message`` is a prompt text (an atom), ``Schema`` is a curly-term JSON Schema describing the requested input (e.g., ``{type-object, properties-{answer-{type-string, enum-[yes, no]}}, required-[answer]}``), and ``Answer`` is unified with ``accept(Content)`` (where ``Content`` is the user response as a curly-term), ``decline``, or ``cancel``. Only available when the application declares ``elicitation`` in its ``capabilities/1``. Falls back to ``tool_call/3`` and then auto-dispatch if not defined.
+Handles a tool call with elicitation support. Same as ``tool_call/3`` but receives an ``Elicit`` closure as the third argument. The closure can be called as ``call(Elicit, Message, Schema, Answer)`` where ``Message`` is a prompt text (an atom), ``Schema`` is a curly-term JSON Schema describing the requested input (e.g., ``{type-object, properties-{answer-{type-string, enum-[yes, no]}}, required-[answer]}``), and ``Answer`` is unified with ``accept(Content)`` (where ``Content`` is the user response as a curly-term), ``decline``, or ``cancel``. Only available when the application declares ``elicitation`` in its ``capabilities/1`` and the client advertises elicitation support during initialization. Falls back to ``tool_call/3`` and then auto-dispatch if not defined.
 
 | **Compilation flags:**
 |    ``static``

@@ -33,7 +33,8 @@ but over the MCP protocol instead of terminal I/O.
 
 ## Key concepts demonstrated
 
-- Implementing `mcp_tool_protocol` with the `elicitation` capability
+- Implementing `mcp_tool_protocol` with a requirement for the client
+  `elicitation` capability
 - Using `tool_call/4` with the `Elicit` closure for interactive tools
 - Building JSON Schema for yes/no and enum elicitation requests
 - Adapting an existing interactive application for MCP without
@@ -45,8 +46,8 @@ The example reuses the bird taxonomy from `examples/birds/` (the
 `order` prototype hierarchy (the `descriptors` category, the `birds` objects).
 The expert system's user interaction is reimplemented in `birds_mcp.lgt`:
 
-- `birds_mcp` implements `mcp_tool_protocol` and declares the
-  `elicitation` capability
+- `birds_mcp` implements `mcp_tool_protocol` and declares that it requires
+  the client `elicitation` capability
 - A single tool `identify_bird` is exposed
 - The `check/2` predicate threads the `Elicit` closure through the
   identification logic
@@ -58,6 +59,12 @@ The expert system's user interaction is reimplemented in `birds_mcp.lgt`:
 
 The server reads/writes JSON-RPC 2.0 messages from/to stdin/stdout as
 required by MCP.
+
+## Testing
+
+To run the example tests, load the `tester.lgt` file:
+
+  | ?- logtalk_load(birds_mcp(tester)).
 
 ## MCP client configuration
 
@@ -97,8 +104,9 @@ above) depend on the Prolog backend.
 A typical identification session involves the following MCP message
 exchange:
 
-1. Client sends `initialize` request
-2. Server responds with capabilities including `elicitation`
+1. Client sends an `initialize` request advertising the `elicitation`
+  client capability
+2. Server responds with the `tools` server capability
 3. Client sends `tools/list` request
 4. Server responds with the `identify_bird` tool
 5. Client sends `tools/call` for `identify_bird`

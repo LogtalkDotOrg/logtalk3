@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:6:1,
+		version is 0:6:2,
 		author is 'Paulo Moura',
-		date is 2026-06-24,
+		date is 2026-08-11,
 		comment is 'Unit tests for the "mcp_server" library.'
 	]).
 
@@ -48,7 +48,7 @@
 		^^clean_file('mcp_input_5.tmp'),
 		^^clean_file('mcp_output.tmp').
 
-	% json_rpc Content-Length framing tests
+	% json_rpc newline-delimited message tests
 
 	test(json_rpc_write_read_message_01, true(json_rpc::is_request(ReadMsg))) :-
 		^^file_path('mcp_input_1.tmp', File),
@@ -226,7 +226,7 @@
 		has_pair(Caps, tools, {}),
 		\+ has_pair(Caps, elicitation, _).
 
-	% With elicitation, capabilities should include both tools and elicitation
+	% Elicitation is a client capability and must not be advertised by the server
 	test(mcp_server_initialize_elicit_capabilities_01, true) :-
 		run_mcp_exchange_with(
 			test_elicit_tools,
@@ -236,7 +236,7 @@
 		result(Response, Result),
 		has_pair(Result, capabilities, Caps),
 		has_pair(Caps, tools, _),
-		has_pair(Caps, elicitation, _).
+		\+ has_pair(Caps, elicitation, _).
 
 	% Elicitation tests
 
@@ -244,7 +244,7 @@
 	test(mcp_server_elicitation_accept_01, true(sub_atom(Text, _, _, _, 'Hello, Alice!'))) :-
 		run_mcp_exchange_with(
 			test_elicit_tools,
-			[initialize_request(1),
+			[initialize_elicitation_request(1),
 			 tools_call_request(ask_name, {}, 2),
 			 elicit_accept_response(elicit_1, {name-'Alice'})],
 			Responses
@@ -264,7 +264,7 @@
 	test(mcp_server_elicitation_request_structure_01, true(Message == 'What is your name?')) :-
 		run_mcp_exchange_with(
 			test_elicit_tools,
-			[initialize_request(1),
+			[initialize_elicitation_request(1),
 			 tools_call_request(ask_name, {}, 2),
 			 elicit_accept_response(elicit_1, {name-test})],
 			[_, ElicitReq, _]
@@ -281,7 +281,7 @@
 	test(mcp_server_elicitation_decline_01, true(Text == 'User declined.')) :-
 		run_mcp_exchange_with(
 			test_elicit_tools,
-			[initialize_request(1),
+			[initialize_elicitation_request(1),
 			 tools_call_request(ask_name, {}, 2),
 			 elicit_decline_response(elicit_1)],
 			[_, _, ToolResponse]
@@ -295,7 +295,7 @@
 	test(mcp_server_elicitation_cancel_01, true(Text == 'Cancelled.')) :-
 		run_mcp_exchange_with(
 			test_elicit_tools,
-			[initialize_request(1),
+			[initialize_elicitation_request(1),
 			 tools_call_request(ask_name, {}, 2),
 			 elicit_cancel_response(elicit_1)],
 			[_, _, ToolResponse]
@@ -304,6 +304,18 @@
 		result(ToolResponse, Result),
 		has_pair(Result, content, [ContentItem| _]),
 		has_pair(ContentItem, text, Text).
+
+	% The server must not elicit when the client did not advertise support
+	test(mcp_server_elicitation_client_capability_required_01, true) :-
+		run_mcp_exchange_with(
+			test_elicit_tools,
+			[initialize_request(1),
+			 tools_call_request(ask_name, {}, 2)],
+			[_, ToolResponse]
+		),
+		is_response(ToolResponse),
+		result(ToolResponse, Result),
+		has_pair(Result, isError, @true).
 
 	% Elicitation fallback tests
 
@@ -910,7 +922,7 @@
 		has_pair(Result, serverInfo, ServerInfo),
 		has_pair(ServerInfo, title, Title).
 
-	% Server without explicit title should not include title in serverInfo
+	% Server without explicit title should use the default title in serverInfo
 	test(mcp_server_server_no_title_01, true) :-
 		run_mcp_exchange(
 			[initialize_request(1)],
@@ -919,7 +931,7 @@
 		is_response(Response),
 		result(Response, Result),
 		has_pair(Result, serverInfo, ServerInfo),
-		\+ has_pair(ServerInfo, title, _).
+		has_pair(ServerInfo, title, 'logtalk-mcp-server').
 
 	% Test auxiliary predicates
 
@@ -962,6 +974,13 @@
 		request(
 			initialize,
 			{protocolVersion-'2025-06-18', capabilities-{}, clientInfo-{name-test, version-'1.0'}},
+			Id,
+			Message
+		).
+	spec_to_message(initialize_elicitation_request(Id), Message) :-
+		request(
+			initialize,
+			{protocolVersion-'2025-06-18', capabilities-{elicitation-{}}, clientInfo-{name-test, version-'1.0'}},
 			Id,
 			Message
 		).

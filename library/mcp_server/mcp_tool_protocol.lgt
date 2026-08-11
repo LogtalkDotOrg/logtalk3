@@ -22,12 +22,12 @@
 :- protocol(mcp_tool_protocol).
 
 	:- info([
-		version is 0:3:0,
+		version is 0:3:1,
 		author is 'Paulo Moura',
-		date is 2026-02-24,
+		date is 2026-08-11,
 		comment is 'Protocol for Logtalk objects that provide tools to be exposed via an MCP (Model Context Protocol) server. Implements the MCP 2025-06-18 specification. Implementing objects must define the set of tools available and handle tool calls. Tool metadata (names, titles, descriptions, parameter schemas) can be derived automatically from ``info/2`` and ``mode/2`` directives on the tool predicates, or can be specified explicitly via the ``tool/1`` predicate.',
 		remarks is [
-			'Capabilities' - 'Objects can optionally define ``capabilities/1`` to declare which MCP capabilities they require. Currently supported: ``elicitation`` (allows the server to ask the user questions during tool execution via MCP elicitation). If ``capabilities/1`` is not defined, only the ``tools`` capability is advertised.',
+			'Capabilities' - 'Objects can optionally define ``capabilities/1`` to declare additional application features. Currently supported: ``prompts`` and ``resources`` (server capabilities advertised during initialization) and ``elicitation`` (a required client capability that allows the server to ask the user questions during tool execution). If ``capabilities/1`` is not defined, only the ``tools`` server capability is advertised.',
 			'Tool title' - 'The tool title (human-friendly display name) is derived from a ``title`` key in the predicate ``info/2`` directive. If not specified, the predicate name (functor) is used as the title.',
 			'Structured output' - 'Tools can declare an output schema via ``output_schema/2`` and return ``structured(StructuredContent)`` or ``structured(ContentItems, StructuredContent)`` results. The structured content is included in the ``structuredContent`` field of the tool call response alongside the ``content`` array.',
 			'Resource links' - 'Tool results can include ``resource_link(URI, Name)`` or ``resource_link(URI, Name, Description, MimeType)`` content items in ``results/1`` lists.',
@@ -38,7 +38,7 @@
 	:- public(capabilities/1).
 	:- mode(capabilities(-list(atom)), one).
 	:- info(capabilities/1, [
-		comment is 'Returns a list of MCP capabilities required by this tool provider. Currently supported capabilities: ``elicitation`` (server can ask the user questions during tool execution). If not defined, only the ``tools`` capability is advertised. The server uses this to build the ``capabilities`` field in the ``initialize`` response.',
+		comment is 'Returns a list of additional MCP features used by this provider. ``prompts`` and ``resources`` are advertised as server capabilities. ``elicitation`` declares that the provider may ask the user questions and is enabled only when the client advertises the corresponding client capability. If not defined, only the ``tools`` server capability is advertised.',
 		argnames is ['Capabilities']
 	]).
 
@@ -59,7 +59,7 @@
 	:- public(tool_call/4).
 	:- mode(tool_call(+atom, +list(pair), +callable, --compound), one).
 	:- info(tool_call/4, [
-		comment is 'Handles a tool call with elicitation support. Same as ``tool_call/3`` but receives an ``Elicit`` closure as the third argument. The closure can be called as ``call(Elicit, Message, Schema, Answer)`` where ``Message`` is a prompt text (an atom), ``Schema`` is a curly-term JSON Schema describing the requested input (e.g., ``{type-object, properties-{answer-{type-string, enum-[yes, no]}}, required-[answer]}``), and ``Answer`` is unified with ``accept(Content)`` (where ``Content`` is the user response as a curly-term), ``decline``, or ``cancel``. Only available when the application declares ``elicitation`` in its ``capabilities/1``. Falls back to ``tool_call/3`` and then auto-dispatch if not defined.',
+		comment is 'Handles a tool call with elicitation support. Same as ``tool_call/3`` but receives an ``Elicit`` closure as the third argument. The closure can be called as ``call(Elicit, Message, Schema, Answer)`` where ``Message`` is a prompt text (an atom), ``Schema`` is a curly-term JSON Schema describing the requested input (e.g., ``{type-object, properties-{answer-{type-string, enum-[yes, no]}}, required-[answer]}``), and ``Answer`` is unified with ``accept(Content)`` (where ``Content`` is the user response as a curly-term), ``decline``, or ``cancel``. Only available when the application declares ``elicitation`` in its ``capabilities/1`` and the client advertises elicitation support during initialization. Falls back to ``tool_call/3`` and then auto-dispatch if not defined.',
 		argnames is ['Name', 'Arguments', 'Elicit', 'Result']
 	]).
 

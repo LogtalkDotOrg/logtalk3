@@ -27,6 +27,8 @@ transport. Implements the MCP 2025-06-18 specification (tools, prompts,
 resources, elicitation, structured output, and resource links).
 Supports version negotiation.
 
+https://modelcontextprotocol.io/specification/2025-06-18
+
 The library uses the `json_rpc` library for JSON-RPC 2.0 message handling
 as currently required by the MCP specification.
 
@@ -178,9 +180,9 @@ With options:
 | ?- mcp_server::start('my-server', my_tools, [version('2.0.0'), server_title('My Server')]).
 ```
 
-There should either be no output or only a Prolog backend term input prompt.
-Other than that, any spurious output will break the connection between a MCP
-client and the MCP server.
+There should either be no standard output or only a Prolog backend term input
+prompt. Other than that, any spurious standard output will break the connection
+between a MCP client and the MCP server.
 
 ### MCP client configuration
 
@@ -236,8 +238,9 @@ above) depend on the Prolog backend. For example, XVM requires instead:
 
 Tools that need to ask the user questions during execution can use MCP
 elicitation **if** the MCP client supports it (tested and working with
-VSCode Copilot). The application declares the `elicitation` capability
-and implements `tool_call/4` instead of `tool_call/3`:
+VSCode Copilot). The application declares that it requires the client
+`elicitation` capability and implements `tool_call/4` instead of
+`tool_call/3`:
 
 ```logtalk
 :- object(interactive_tools,
@@ -457,9 +460,11 @@ Protocol
 
 The `mcp_tool_protocol` protocol defines the following predicates:
 
-- `capabilities/1` — returns the list of additional capabilities needed
-  by the application (e.g. `[elicitation]`, `[prompts]`, `[resources]`,
-  or `[prompts, resources, elicitation]`); optional, defaults to `[]`
+- `capabilities/1` — returns the list of additional features needed by the
+	application (e.g. `[elicitation]`, `[prompts]`, `[resources]`, or
+	`[prompts, resources, elicitation]`); `prompts` and `resources` are server
+	capabilities while `elicitation` is a required client capability; optional,
+	defaults to `[]`
 - `tools/1` — returns the list of tool descriptors
 - `tool_call/3` — handles a tool call (optional; auto-dispatch is used
   when not defined)
@@ -483,15 +488,15 @@ The `mcp_resource_protocol` protocol defines the following predicates:
 Supported MCP methods
 ---------------------
 
-| Method              | Type         | Description                       |
-|---------------------|--------------|-----------------------------------|
-| `initialize`        | Request      | MCP handshake                     |
-| `initialized`       | Notification | Client acknowledgment             |
-| `ping`              | Request      | Server liveness check             |
-| `tools/list`        | Request      | Lists available tools             |
-| `tools/call`        | Request      | Calls a tool                      |
-| `prompts/list`      | Request      | Lists available prompts           |
-| `prompts/get`       | Request      | Gets a prompt with arguments      |
-| `resources/list`    | Request      | Lists available resources         |
-| `resources/read`    | Request      | Reads a resource by URI           |
-| `elicitation/create`| Request (=>) | Asks the client for user input    |
+| Method                      | Type         | Description                       |
+|-----------------------------|--------------|-----------------------------------|
+| `initialize`                | Request      | MCP handshake                     |
+| `notifications/initialized` | Notification | Client acknowledgment             |
+| `ping`                      | Request      | Server liveness check             |
+| `tools/list`                | Request      | Lists available tools             |
+| `tools/call`                | Request      | Calls a tool                      |
+| `prompts/list`              | Request      | Lists available prompts           |
+| `prompts/get`               | Request      | Gets a prompt with arguments      |
+| `resources/list`            | Request      | Lists available resources         |
+| `resources/read`            | Request      | Reads a resource by URI           |
+| `elicitation/create`        | Request (=>) | Asks the client for user input    |

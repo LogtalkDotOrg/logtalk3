@@ -23,20 +23,20 @@
 	imports(options)).
 
 	:- info([
-		version is 0:5:2,
+		version is 0:5:3,
 		author is 'Paulo Moura',
-		date is 2026-07-13,
-		comment is 'MCP (Model Context Protocol) server for Logtalk applications. Exposes Logtalk objects implementing the ``mcp_tool_protocol`` and optionally ``mcp_prompt_protocol`` and ``mcp_resource_protocol`` protocols as MCP tool, prompt, and resource providers over stdio transport with Content-Length framing. Implements the MCP 2025-03-26 specification. Uses the ``json_rpc`` library for JSON-RPC 2.0 message handling.',
+		date is 2026-08-11,
+		comment is 'MCP (Model Context Protocol) server for Logtalk applications. Exposes Logtalk objects implementing the ``mcp_tool_protocol`` and optionally ``mcp_prompt_protocol`` and ``mcp_resource_protocol`` protocols as MCP tool, prompt, and resource providers over stdio transport with newline-delimited JSON-RPC messages. Implements the MCP 2025-06-18 specification. Uses the ``json_rpc`` library for JSON-RPC 2.0 message handling.',
 		remarks is [
-			'MCP specification' - 'Implements the Model Context Protocol 2025-03-26 (https://spec.modelcontextprotocol.io/specification/2025-03-26/).',
-			'Transport' - 'Uses stdio (standard input/output) with Content-Length header framing as defined by the MCP specification.',
-			'Version negotiation' - 'During initialization, the server performs protocol version negotiation. The client sends its highest supported version in the ``initialize`` request. The server selects the highest version it supports that is compatible (i.e., less than or equal to the client version). If no compatible version exists, the server responds with error ``-32602`` (\"Unsupported protocol version\") including a ``data`` field with the list of supported versions.',
-			'Capabilities' - 'Supports the tools capability (``tools/list`` and ``tools/call``). Optionally supports the prompts capability (``prompts/list`` and ``prompts/get``) when the application declares it via ``capabilities/1`` and implements ``mcp_prompt_protocol``. Optionally supports the resources capability (``resources/list`` and ``resources/read``) when the application declares it via ``capabilities/1`` and implements ``mcp_resource_protocol``. Optionally supports the elicitation capability (``elicitation/create``) when the application declares it via ``capabilities/1``.',
+			'MCP specification' - 'Implements the Model Context Protocol 2025-06-18 (https://modelcontextprotocol.io/specification/2025-06-18).',
+			'Transport' - 'Uses stdio (standard input/output) with one newline-delimited JSON-RPC message per line as defined by the MCP specification.',
+			'Version negotiation' - 'During initialization, the client sends its preferred protocol version. The server responds with that version when supported or with its latest supported version otherwise. A client that does not support the returned version should disconnect.',
+			'Capabilities' - 'Supports the tools capability (``tools/list`` and ``tools/call``). Optionally supports the prompts capability (``prompts/list`` and ``prompts/get``) when the application declares it via ``capabilities/1`` and implements ``mcp_prompt_protocol``. Optionally supports the resources capability (``resources/list`` and ``resources/read``) when the application declares it via ``capabilities/1`` and implements ``mcp_resource_protocol``. Elicitation is a client capability and is used only when both the application requires it and the client advertises it during initialization.',
 			'Tool discovery' - 'Tools are discovered from objects implementing the ``mcp_tool_protocol``. Tool metadata (descriptions, parameter schemas) is derived from ``info/2`` and ``mode/2`` directives.',
 			'Prompt discovery' - 'Prompts are discovered from objects implementing the ``mcp_prompt_protocol``. Prompt metadata (names, descriptions, arguments) is declared via the ``prompts/1`` predicate.',
 			'Resource discovery' - 'Resources are discovered from objects implementing the ``mcp_resource_protocol``. Resource metadata (URIs, names, descriptions, MIME types) is declared via the ``resources/1`` predicate.',
 			'Auto-dispatch' - 'When an object does not define ``tool_call/3`` or ``tool_call/4`` for a tool, the server auto-dispatches: it calls the predicate as a message to the object, collects output-mode arguments, and returns them as text content.',
-			'Elicitation' - 'When the application declares ``elicitation`` in its ``capabilities/1``, the server constructs an elicit closure and passes it to ``tool_call/4``. The closure sends ``elicitation/create`` requests to the client and reads back the user response. This enables interactive tools that can ask the user questions during execution.',
+			'Elicitation' - 'When the application declares ``elicitation`` in its ``capabilities/1`` and the client advertises elicitation support during initialization, the server constructs an elicit closure and passes it to ``tool_call/4``. The closure sends ``elicitation/create`` requests to the client and reads back the user response. This enables interactive tools that can ask the user questions during execution.',
 			'Error handling' - 'Predicate failures and exceptions both result in MCP tool-level errors with ``isError`` set to ``true``.'
 		]
 	]).
@@ -44,14 +44,14 @@
 	:- public(start/2).
 	:- mode(start(+atom, +object_identifier), one).
 	:- info(start/2, [
-		comment is 'Starts the MCP server with the given server name and application object. The application object must implement the ``mcp_tool_protocol`` protocol. Reads JSON-RPC messages from standard input and writes responses to standard output using Content-Length framing. Blocks until the client disconnects or an exit signal is received.',
+		comment is 'Starts the MCP server with the given server name and application object. The application object must implement the ``mcp_tool_protocol`` protocol. Reads and writes newline-delimited JSON-RPC messages using standard input and standard output. Blocks until the client disconnects or an exit signal is received.',
 		argnames is ['Name', 'Application']
 	]).
 
 	:- public(start/3).
 	:- mode(start(+atom, +object_identifier, +list), one).
 	:- info(start/3, [
-		comment is 'Starts the MCP server with the given server name, application object, and options. Currently supported options: ``server_version(Version)`` to set the server version (default ``''1.0.0''``), ``server_title(Title)`` to set the server display title (default ``''''``, omitted when empty).',
+		comment is 'Starts the MCP server with the given server name, application object, and options. Currently supported options: ``server_version(Version)`` to set the server version (default ``''1.0.0''``), ``server_title(Title)`` to set the server display title (default ``''logtalk-mcp-server''``, omitted when empty).',
 		argnames is ['Name', 'Application', 'Options']
 	]).
 
@@ -131,6 +131,14 @@
 		argnames is ['Capabilities']
 	]).
 
+	:- private(client_capabilities_/1).
+	:- dynamic(client_capabilities_/1).
+	:- mode(client_capabilities_(?compound), zero_or_one).
+	:- info(client_capabilities_/1, [
+		comment is 'Client capabilities advertised during initialization.',
+		argnames is ['Capabilities']
+	]).
+
 	:- uses(json_rpc, [
 		request/4, response/3, error_response/4, method_not_found/2, invalid_params/2, is_request/1,
 		is_notification/1, is_response/1, id/2, method/2, params/2, result/2, write_message/2,
@@ -181,14 +189,15 @@
 		retractall(server_title_(_)),
 		retractall(elicit_counter_(_)),
 		retractall(application_capabilities_(_)),
+		retractall(client_capabilities_(_)),
 		assertz(application_(Application)),
 		assertz(server_name_(Name)),
-%		^^option(server_name(Name), Options),
 		^^option(server_version(Version), Options),
 		assertz(server_version_(Version)),
 		^^option(server_title(Title), Options),
 		assertz(server_title_(Title)),
 		assertz(elicit_counter_(0)),
+		assertz(client_capabilities_({})),
 		% Query application capabilities (default: no extra capabilities)
 		(	catch(Application::capabilities(ApplicationCapabilities), _, fail) ->
 			assertz(application_capabilities_(ApplicationCapabilities))
@@ -202,7 +211,8 @@
 		retractall(server_version_(_)),
 		retractall(server_title_(_)),
 		retractall(elicit_counter_(_)),
-		retractall(application_capabilities_(_)).
+		retractall(application_capabilities_(_)),
+		retractall(client_capabilities_(_)).
 
 	% Main server loop
 
@@ -232,7 +242,6 @@
 	% Request handlers
 
 	handle_request(Message, Input, Output) :-
-		writeq(user_error, Message), nl(user_error),
 		method(Message, Method),
 		id(Message, Id),
 		(	Method == initialize ->
@@ -260,8 +269,9 @@
 
 	handle_notification(Message) :-
 		method(Message, Method),
-		(	Method == initialized ->
-			true  % Client acknowledged initialization
+		(	Method == 'notifications/initialized' ->
+			retractall(initialized_),
+			assertz(initialized_)
 		;	Method == 'notifications/cancelled' ->
 			true  % TODO: cancel pending engine if supported
 		;	% Unknown notification: ignore
@@ -280,6 +290,11 @@
 			true
 		;	ClientVersion = ''
 		),
+		(	has_pair(Params, capabilities, ClientCapabilities) ->
+			retractall(client_capabilities_(_)),
+			assertz(client_capabilities_(ClientCapabilities))
+		;	true
+		),
 		supported_protocol_versions(Supported),
 		% Check if the client version is compatible:
 		% the client sends the highest version it supports; the server
@@ -291,7 +306,6 @@
 		;	% Client version older than all supported; respond with latest
 			last(Supported, NegotiatedVersion)
 		),
-		assertz(initialized_),
 		server_name_(Name),
 		server_version_(Version),
 		server_title_(Title),
@@ -338,12 +352,7 @@
 			Capabilities2 = [resources-{}| Capabilities1]
 		;	Capabilities2 = Capabilities1
 		),
-		% Add elicitation if requested
-		(	member(elicitation, ApplicationCapabilities) ->
-			Capabilities3 = [elicitation-{}| Capabilities2]
-		;	Capabilities3 = Capabilities2
-		),
-		pairs_to_curly(Capabilities3, Capabilities).
+		pairs_to_curly(Capabilities2, Capabilities).
 
 	% Server ping
 
@@ -479,7 +488,9 @@
 	execute_tool(Application, ToolName, Functor, Arity, ToolArguments, Input, Output, Result) :-
 		curly_to_pairs(ToolArguments, ArgPairs),
 		application_capabilities_(ApplicationCapabilities),
-		(	member(elicitation, ApplicationCapabilities) ->
+		client_capabilities_(ClientCapabilities),
+		(	member(elicitation, ApplicationCapabilities),
+			has_pair(ClientCapabilities, elicitation, _) ->
 			% Try tool_call/4 with elicit closure first
 			(	catch(
 					(Application::tool_call(ToolName, ArgPairs, {Input, Output}/[Message, Schema, Answer]>>(mcp_server::elicit_request(Input, Output, Message, Schema, Answer)), Result)),
@@ -966,12 +977,9 @@
 			atomic_list_concat([Line, '\n', PairsText], Text)
 		).
 
-	default_option(server_name('logtalk-mcp-server')).
 	default_option(server_version('1.0.0')).
-	default_option(server_title('')).
+	default_option(server_title('logtalk-mcp-server')).
 
-	valid_option(server_name(Name)) :-
-		atom(Name).
 	valid_option(server_version(Version)) :-
 		atom(Version).
 	valid_option(server_title(Title)) :-
