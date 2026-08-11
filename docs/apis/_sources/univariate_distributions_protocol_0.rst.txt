@@ -364,6 +364,1408 @@ Computes an approximation of the normal quantile for a probability strictly betw
 
 ------------
 
+.. index:: standard_t/2
+.. _univariate_distributions_protocol/0::standard_t/2:
+
+``standard_t/2``
+^^^^^^^^^^^^^^^^
+
+Returns a standard Student's t distributed random value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``standard_t(DegreesOfFreedom,Value)``
+| **Mode and number of proofs:**
+|    ``standard_t(+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    DegreesOfFreedom is a variable:
+|        ``instantiation_error``
+|    DegreesOfFreedom is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom)``
+|    DegreesOfFreedom is not positive:
+|        ``domain_error(positive_number,DegreesOfFreedom)``
+
+
+------------
+
+.. index:: standard_t_samples/3
+.. _univariate_distributions_protocol/0::standard_t_samples/3:
+
+``standard_t_samples/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the requested number of standard Student's t distributed random values.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``standard_t_samples(Count,DegreesOfFreedom,Samples)``
+| **Mode and number of proofs:**
+|    ``standard_t_samples(+integer,+positive_number,-list(float))`` - ``one_or_error``
+
+| **Exceptions:**
+|    Count is a variable:
+|        ``instantiation_error``
+|    Count is neither a variable nor an integer:
+|        ``type_error(integer,Count)``
+|    Count is an integer but not a non-negative integer:
+|        ``domain_error(non_negative_integer,Count)``
+|    DegreesOfFreedom is a variable:
+|        ``instantiation_error``
+|    DegreesOfFreedom is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom)``
+|    DegreesOfFreedom is not positive:
+|        ``domain_error(positive_number,DegreesOfFreedom)``
+
+
+------------
+
+.. index:: standard_t_density/3
+.. _univariate_distributions_protocol/0::standard_t_density/3:
+
+``standard_t_density/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the standard Student's t probability density at the given value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``standard_t_density(Value,DegreesOfFreedom,Density)``
+| **Mode and number of proofs:**
+|    ``standard_t_density(+number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Value is not a number:
+|        ``type_error(number,Value)``
+|    DegreesOfFreedom is a variable:
+|        ``instantiation_error``
+|    DegreesOfFreedom is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom)``
+|    DegreesOfFreedom is not positive:
+|        ``domain_error(positive_number,DegreesOfFreedom)``
+
+
+------------
+
+.. index:: standard_t_log_density/3
+.. _univariate_distributions_protocol/0::standard_t_log_density/3:
+
+``standard_t_log_density/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the standard Student's t log-density at the given value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``standard_t_log_density(Value,DegreesOfFreedom,LogDensity)``
+| **Mode and number of proofs:**
+|    ``standard_t_log_density(+number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Value is not a number:
+|        ``type_error(number,Value)``
+|    DegreesOfFreedom is a variable:
+|        ``instantiation_error``
+|    DegreesOfFreedom is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom)``
+|    DegreesOfFreedom is not positive:
+|        ``domain_error(positive_number,DegreesOfFreedom)``
+
+
+------------
+
+.. index:: standard_t_distribution/3
+.. _univariate_distributions_protocol/0::standard_t_distribution/3:
+
+``standard_t_distribution/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes an approximation of the standard Student's t cumulative distribution at the given value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``standard_t_distribution(Value,DegreesOfFreedom,Probability)``
+| **Mode and number of proofs:**
+|    ``standard_t_distribution(+number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Value is not a number:
+|        ``type_error(number,Value)``
+|    DegreesOfFreedom is a variable:
+|        ``instantiation_error``
+|    DegreesOfFreedom is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom)``
+|    DegreesOfFreedom is not positive:
+|        ``domain_error(positive_number,DegreesOfFreedom)``
+
+
+------------
+
+.. index:: standard_t_quantile/3
+.. _univariate_distributions_protocol/0::standard_t_quantile/3:
+
+``standard_t_quantile/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes an approximation of the standard Student's t quantile for a probability strictly between zero and one.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``standard_t_quantile(Probability,DegreesOfFreedom,Quantile)``
+| **Mode and number of proofs:**
+|    ``standard_t_quantile(+number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Probability is not a number:
+|        ``type_error(number,Probability)``
+|    Probability is not strictly between zero and one:
+|        ``domain_error(open_probability,Probability)``
+|    DegreesOfFreedom is a variable:
+|        ``instantiation_error``
+|    DegreesOfFreedom is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom)``
+|    DegreesOfFreedom is not positive:
+|        ``domain_error(positive_number,DegreesOfFreedom)``
+
+
+------------
+
+.. index:: t/4
+.. _univariate_distributions_protocol/0::t/4:
+
+``t/4``
+^^^^^^^
+
+Returns a location-scale Student's t distributed random value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``t(Location,Scale,DegreesOfFreedom,Value)``
+| **Mode and number of proofs:**
+|    ``t(+number,+positive_number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Location is not a number:
+|        ``type_error(number,Location)``
+|    Scale is a variable:
+|        ``instantiation_error``
+|    Scale is neither a variable nor a number:
+|        ``type_error(number,Scale)``
+|    Scale is not positive:
+|        ``domain_error(positive_number,Scale)``
+|    DegreesOfFreedom is a variable:
+|        ``instantiation_error``
+|    DegreesOfFreedom is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom)``
+|    DegreesOfFreedom is not positive:
+|        ``domain_error(positive_number,DegreesOfFreedom)``
+
+
+------------
+
+.. index:: t_samples/5
+.. _univariate_distributions_protocol/0::t_samples/5:
+
+``t_samples/5``
+^^^^^^^^^^^^^^^
+
+Returns the requested number of location-scale Student's t distributed random values.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``t_samples(Count,Location,Scale,DegreesOfFreedom,Samples)``
+| **Mode and number of proofs:**
+|    ``t_samples(+integer,+number,+positive_number,+positive_number,-list(float))`` - ``one_or_error``
+
+| **Exceptions:**
+|    Count is a variable:
+|        ``instantiation_error``
+|    Count is neither a variable nor an integer:
+|        ``type_error(integer,Count)``
+|    Count is an integer but not a non-negative integer:
+|        ``domain_error(non_negative_integer,Count)``
+|    Location is not a number:
+|        ``type_error(number,Location)``
+|    Scale is a variable:
+|        ``instantiation_error``
+|    Scale is neither a variable nor a number:
+|        ``type_error(number,Scale)``
+|    Scale is not positive:
+|        ``domain_error(positive_number,Scale)``
+|    DegreesOfFreedom is a variable:
+|        ``instantiation_error``
+|    DegreesOfFreedom is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom)``
+|    DegreesOfFreedom is not positive:
+|        ``domain_error(positive_number,DegreesOfFreedom)``
+
+
+------------
+
+.. index:: t_density/5
+.. _univariate_distributions_protocol/0::t_density/5:
+
+``t_density/5``
+^^^^^^^^^^^^^^^
+
+Computes the location-scale Student's t probability density.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``t_density(Value,Location,Scale,DegreesOfFreedom,Density)``
+| **Mode and number of proofs:**
+|    ``t_density(+number,+number,+positive_number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Value is not a number:
+|        ``type_error(number,Value)``
+|    Location is not a number:
+|        ``type_error(number,Location)``
+|    Scale is a variable:
+|        ``instantiation_error``
+|    Scale is neither a variable nor a number:
+|        ``type_error(number,Scale)``
+|    Scale is not positive:
+|        ``domain_error(positive_number,Scale)``
+|    DegreesOfFreedom is a variable:
+|        ``instantiation_error``
+|    DegreesOfFreedom is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom)``
+|    DegreesOfFreedom is not positive:
+|        ``domain_error(positive_number,DegreesOfFreedom)``
+
+
+------------
+
+.. index:: t_log_density/5
+.. _univariate_distributions_protocol/0::t_log_density/5:
+
+``t_log_density/5``
+^^^^^^^^^^^^^^^^^^^
+
+Computes the location-scale Student's t log-density.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``t_log_density(Value,Location,Scale,DegreesOfFreedom,LogDensity)``
+| **Mode and number of proofs:**
+|    ``t_log_density(+number,+number,+positive_number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Value is not a number:
+|        ``type_error(number,Value)``
+|    Location is not a number:
+|        ``type_error(number,Location)``
+|    Scale is a variable:
+|        ``instantiation_error``
+|    Scale is neither a variable nor a number:
+|        ``type_error(number,Scale)``
+|    Scale is not positive:
+|        ``domain_error(positive_number,Scale)``
+|    DegreesOfFreedom is a variable:
+|        ``instantiation_error``
+|    DegreesOfFreedom is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom)``
+|    DegreesOfFreedom is not positive:
+|        ``domain_error(positive_number,DegreesOfFreedom)``
+
+
+------------
+
+.. index:: t_distribution/5
+.. _univariate_distributions_protocol/0::t_distribution/5:
+
+``t_distribution/5``
+^^^^^^^^^^^^^^^^^^^^
+
+Computes an approximation of the location-scale Student's t cumulative distribution.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``t_distribution(Value,Location,Scale,DegreesOfFreedom,Probability)``
+| **Mode and number of proofs:**
+|    ``t_distribution(+number,+number,+positive_number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Value is not a number:
+|        ``type_error(number,Value)``
+|    Location is not a number:
+|        ``type_error(number,Location)``
+|    Scale is a variable:
+|        ``instantiation_error``
+|    Scale is neither a variable nor a number:
+|        ``type_error(number,Scale)``
+|    Scale is not positive:
+|        ``domain_error(positive_number,Scale)``
+|    DegreesOfFreedom is a variable:
+|        ``instantiation_error``
+|    DegreesOfFreedom is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom)``
+|    DegreesOfFreedom is not positive:
+|        ``domain_error(positive_number,DegreesOfFreedom)``
+
+
+------------
+
+.. index:: t_quantile/5
+.. _univariate_distributions_protocol/0::t_quantile/5:
+
+``t_quantile/5``
+^^^^^^^^^^^^^^^^
+
+Computes an approximation of the location-scale Student's t quantile for a probability strictly between zero and one.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``t_quantile(Probability,Location,Scale,DegreesOfFreedom,Quantile)``
+| **Mode and number of proofs:**
+|    ``t_quantile(+number,+number,+positive_number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Probability is not a number:
+|        ``type_error(number,Probability)``
+|    Probability is not strictly between zero and one:
+|        ``domain_error(open_probability,Probability)``
+|    Location is not a number:
+|        ``type_error(number,Location)``
+|    Scale is a variable:
+|        ``instantiation_error``
+|    Scale is neither a variable nor a number:
+|        ``type_error(number,Scale)``
+|    Scale is not positive:
+|        ``domain_error(positive_number,Scale)``
+|    DegreesOfFreedom is a variable:
+|        ``instantiation_error``
+|    DegreesOfFreedom is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom)``
+|    DegreesOfFreedom is not positive:
+|        ``domain_error(positive_number,DegreesOfFreedom)``
+
+
+------------
+
+.. index:: chi_squared/2
+.. _univariate_distributions_protocol/0::chi_squared/2:
+
+``chi_squared/2``
+^^^^^^^^^^^^^^^^^
+
+Returns a chi-squared distributed random value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``chi_squared(DegreesOfFreedom,Value)``
+| **Mode and number of proofs:**
+|    ``chi_squared(+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    DegreesOfFreedom is a variable:
+|        ``instantiation_error``
+|    DegreesOfFreedom is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom)``
+|    DegreesOfFreedom is not positive:
+|        ``domain_error(positive_number,DegreesOfFreedom)``
+
+
+------------
+
+.. index:: chi_squared_samples/3
+.. _univariate_distributions_protocol/0::chi_squared_samples/3:
+
+``chi_squared_samples/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the requested number of chi-squared distributed random values.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``chi_squared_samples(Count,DegreesOfFreedom,Samples)``
+| **Mode and number of proofs:**
+|    ``chi_squared_samples(+integer,+positive_number,-list(float))`` - ``one_or_error``
+
+| **Exceptions:**
+|    Count is a variable:
+|        ``instantiation_error``
+|    Count is neither a variable nor an integer:
+|        ``type_error(integer,Count)``
+|    Count is an integer but not a non-negative integer:
+|        ``domain_error(non_negative_integer,Count)``
+|    DegreesOfFreedom is a variable:
+|        ``instantiation_error``
+|    DegreesOfFreedom is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom)``
+|    DegreesOfFreedom is not positive:
+|        ``domain_error(positive_number,DegreesOfFreedom)``
+
+
+------------
+
+.. index:: chi_squared_density/3
+.. _univariate_distributions_protocol/0::chi_squared_density/3:
+
+``chi_squared_density/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the chi-squared probability density at the given value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``chi_squared_density(Value,DegreesOfFreedom,Density)``
+| **Mode and number of proofs:**
+|    ``chi_squared_density(+number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Value is not a number:
+|        ``type_error(number,Value)``
+|    DegreesOfFreedom is a variable:
+|        ``instantiation_error``
+|    DegreesOfFreedom is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom)``
+|    DegreesOfFreedom is not positive:
+|        ``domain_error(positive_number,DegreesOfFreedom)``
+
+
+------------
+
+.. index:: chi_squared_log_density/3
+.. _univariate_distributions_protocol/0::chi_squared_log_density/3:
+
+``chi_squared_log_density/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the chi-squared log-density at the given value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``chi_squared_log_density(Value,DegreesOfFreedom,LogDensity)``
+| **Mode and number of proofs:**
+|    ``chi_squared_log_density(+number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Value is not a number:
+|        ``type_error(number,Value)``
+|    DegreesOfFreedom is a variable:
+|        ``instantiation_error``
+|    DegreesOfFreedom is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom)``
+|    DegreesOfFreedom is not positive:
+|        ``domain_error(positive_number,DegreesOfFreedom)``
+
+
+------------
+
+.. index:: chi_squared_distribution/3
+.. _univariate_distributions_protocol/0::chi_squared_distribution/3:
+
+``chi_squared_distribution/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes an approximation of the chi-squared cumulative distribution at the given value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``chi_squared_distribution(Value,DegreesOfFreedom,Probability)``
+| **Mode and number of proofs:**
+|    ``chi_squared_distribution(+number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Value is not a number:
+|        ``type_error(number,Value)``
+|    DegreesOfFreedom is a variable:
+|        ``instantiation_error``
+|    DegreesOfFreedom is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom)``
+|    DegreesOfFreedom is not positive:
+|        ``domain_error(positive_number,DegreesOfFreedom)``
+
+
+------------
+
+.. index:: chi_squared_quantile/3
+.. _univariate_distributions_protocol/0::chi_squared_quantile/3:
+
+``chi_squared_quantile/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes an approximation of the chi-squared quantile for a probability strictly between zero and one.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``chi_squared_quantile(Probability,DegreesOfFreedom,Quantile)``
+| **Mode and number of proofs:**
+|    ``chi_squared_quantile(+number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Probability is not a number:
+|        ``type_error(number,Probability)``
+|    Probability is not strictly between zero and one:
+|        ``domain_error(open_probability,Probability)``
+|    DegreesOfFreedom is a variable:
+|        ``instantiation_error``
+|    DegreesOfFreedom is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom)``
+|    DegreesOfFreedom is not positive:
+|        ``domain_error(positive_number,DegreesOfFreedom)``
+
+
+------------
+
+.. index:: gamma/3
+.. _univariate_distributions_protocol/0::gamma/3:
+
+``gamma/3``
+^^^^^^^^^^^
+
+Returns a gamma distributed random value (shape-scale parameterization).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``gamma(Shape,Scale,Value)``
+| **Mode and number of proofs:**
+|    ``gamma(+positive_number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Shape is a variable:
+|        ``instantiation_error``
+|    Shape is neither a variable nor a number:
+|        ``type_error(number,Shape)``
+|    Shape is not positive:
+|        ``domain_error(positive_number,Shape)``
+|    Scale is a variable:
+|        ``instantiation_error``
+|    Scale is neither a variable nor a number:
+|        ``type_error(number,Scale)``
+|    Scale is not positive:
+|        ``domain_error(positive_number,Scale)``
+
+
+------------
+
+.. index:: gamma_samples/4
+.. _univariate_distributions_protocol/0::gamma_samples/4:
+
+``gamma_samples/4``
+^^^^^^^^^^^^^^^^^^^
+
+Returns the requested number of gamma distributed random values.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``gamma_samples(Count,Shape,Scale,Samples)``
+| **Mode and number of proofs:**
+|    ``gamma_samples(+integer,+positive_number,+positive_number,-list(float))`` - ``one_or_error``
+
+| **Exceptions:**
+|    Count is a variable:
+|        ``instantiation_error``
+|    Count is neither a variable nor an integer:
+|        ``type_error(integer,Count)``
+|    Count is an integer but not a non-negative integer:
+|        ``domain_error(non_negative_integer,Count)``
+|    Shape is a variable:
+|        ``instantiation_error``
+|    Shape is neither a variable nor a number:
+|        ``type_error(number,Shape)``
+|    Shape is not positive:
+|        ``domain_error(positive_number,Shape)``
+|    Scale is a variable:
+|        ``instantiation_error``
+|    Scale is neither a variable nor a number:
+|        ``type_error(number,Scale)``
+|    Scale is not positive:
+|        ``domain_error(positive_number,Scale)``
+
+
+------------
+
+.. index:: gamma_density/4
+.. _univariate_distributions_protocol/0::gamma_density/4:
+
+``gamma_density/4``
+^^^^^^^^^^^^^^^^^^^
+
+Computes the gamma probability density at the given value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``gamma_density(Value,Shape,Scale,Density)``
+| **Mode and number of proofs:**
+|    ``gamma_density(+number,+positive_number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Value is not a number:
+|        ``type_error(number,Value)``
+|    Shape is a variable:
+|        ``instantiation_error``
+|    Shape is neither a variable nor a number:
+|        ``type_error(number,Shape)``
+|    Shape is not positive:
+|        ``domain_error(positive_number,Shape)``
+|    Scale is a variable:
+|        ``instantiation_error``
+|    Scale is neither a variable nor a number:
+|        ``type_error(number,Scale)``
+|    Scale is not positive:
+|        ``domain_error(positive_number,Scale)``
+
+
+------------
+
+.. index:: gamma_log_density/4
+.. _univariate_distributions_protocol/0::gamma_log_density/4:
+
+``gamma_log_density/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the gamma log-density at the given value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``gamma_log_density(Value,Shape,Scale,LogDensity)``
+| **Mode and number of proofs:**
+|    ``gamma_log_density(+number,+positive_number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Value is not a number:
+|        ``type_error(number,Value)``
+|    Shape is a variable:
+|        ``instantiation_error``
+|    Shape is neither a variable nor a number:
+|        ``type_error(number,Shape)``
+|    Shape is not positive:
+|        ``domain_error(positive_number,Shape)``
+|    Scale is a variable:
+|        ``instantiation_error``
+|    Scale is neither a variable nor a number:
+|        ``type_error(number,Scale)``
+|    Scale is not positive:
+|        ``domain_error(positive_number,Scale)``
+
+
+------------
+
+.. index:: gamma_distribution/4
+.. _univariate_distributions_protocol/0::gamma_distribution/4:
+
+``gamma_distribution/4``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes an approximation of the gamma cumulative distribution at the given value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``gamma_distribution(Value,Shape,Scale,Probability)``
+| **Mode and number of proofs:**
+|    ``gamma_distribution(+number,+positive_number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Value is not a number:
+|        ``type_error(number,Value)``
+|    Shape is a variable:
+|        ``instantiation_error``
+|    Shape is neither a variable nor a number:
+|        ``type_error(number,Shape)``
+|    Shape is not positive:
+|        ``domain_error(positive_number,Shape)``
+|    Scale is a variable:
+|        ``instantiation_error``
+|    Scale is neither a variable nor a number:
+|        ``type_error(number,Scale)``
+|    Scale is not positive:
+|        ``domain_error(positive_number,Scale)``
+
+
+------------
+
+.. index:: gamma_quantile/4
+.. _univariate_distributions_protocol/0::gamma_quantile/4:
+
+``gamma_quantile/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Computes an approximation of the gamma quantile for a probability strictly between zero and one.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``gamma_quantile(Probability,Shape,Scale,Quantile)``
+| **Mode and number of proofs:**
+|    ``gamma_quantile(+number,+positive_number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Probability is not a number:
+|        ``type_error(number,Probability)``
+|    Probability is not strictly between zero and one:
+|        ``domain_error(open_probability,Probability)``
+|    Shape is a variable:
+|        ``instantiation_error``
+|    Shape is neither a variable nor a number:
+|        ``type_error(number,Shape)``
+|    Shape is not positive:
+|        ``domain_error(positive_number,Shape)``
+|    Scale is a variable:
+|        ``instantiation_error``
+|    Scale is neither a variable nor a number:
+|        ``type_error(number,Scale)``
+|    Scale is not positive:
+|        ``domain_error(positive_number,Scale)``
+
+
+------------
+
+.. index:: beta/3
+.. _univariate_distributions_protocol/0::beta/3:
+
+``beta/3``
+^^^^^^^^^^
+
+Returns a beta distributed random value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``beta(Alpha,Beta,Value)``
+| **Mode and number of proofs:**
+|    ``beta(+positive_number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Alpha is a variable:
+|        ``instantiation_error``
+|    Alpha is neither a variable nor a number:
+|        ``type_error(number,Alpha)``
+|    Alpha is not positive:
+|        ``domain_error(positive_number,Alpha)``
+|    Beta is a variable:
+|        ``instantiation_error``
+|    Beta is neither a variable nor a number:
+|        ``type_error(number,Beta)``
+|    Beta is not positive:
+|        ``domain_error(positive_number,Beta)``
+
+
+------------
+
+.. index:: beta_samples/4
+.. _univariate_distributions_protocol/0::beta_samples/4:
+
+``beta_samples/4``
+^^^^^^^^^^^^^^^^^^
+
+Returns the requested number of beta distributed random values.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``beta_samples(Count,Alpha,Beta,Samples)``
+| **Mode and number of proofs:**
+|    ``beta_samples(+integer,+positive_number,+positive_number,-list(float))`` - ``one_or_error``
+
+| **Exceptions:**
+|    Count is a variable:
+|        ``instantiation_error``
+|    Count is neither a variable nor an integer:
+|        ``type_error(integer,Count)``
+|    Count is an integer but not a non-negative integer:
+|        ``domain_error(non_negative_integer,Count)``
+|    Alpha is a variable:
+|        ``instantiation_error``
+|    Alpha is neither a variable nor a number:
+|        ``type_error(number,Alpha)``
+|    Alpha is not positive:
+|        ``domain_error(positive_number,Alpha)``
+|    Beta is a variable:
+|        ``instantiation_error``
+|    Beta is neither a variable nor a number:
+|        ``type_error(number,Beta)``
+|    Beta is not positive:
+|        ``domain_error(positive_number,Beta)``
+
+
+------------
+
+.. index:: beta_density/4
+.. _univariate_distributions_protocol/0::beta_density/4:
+
+``beta_density/4``
+^^^^^^^^^^^^^^^^^^
+
+Computes the beta probability density at the given value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``beta_density(Value,Alpha,Beta,Density)``
+| **Mode and number of proofs:**
+|    ``beta_density(+number,+positive_number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Value is not a number:
+|        ``type_error(number,Value)``
+|    Alpha is a variable:
+|        ``instantiation_error``
+|    Alpha is neither a variable nor a number:
+|        ``type_error(number,Alpha)``
+|    Alpha is not positive:
+|        ``domain_error(positive_number,Alpha)``
+|    Beta is a variable:
+|        ``instantiation_error``
+|    Beta is neither a variable nor a number:
+|        ``type_error(number,Beta)``
+|    Beta is not positive:
+|        ``domain_error(positive_number,Beta)``
+
+
+------------
+
+.. index:: beta_log_density/4
+.. _univariate_distributions_protocol/0::beta_log_density/4:
+
+``beta_log_density/4``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the beta log-density at the given value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``beta_log_density(Value,Alpha,Beta,LogDensity)``
+| **Mode and number of proofs:**
+|    ``beta_log_density(+number,+positive_number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Value is not a number:
+|        ``type_error(number,Value)``
+|    Alpha is a variable:
+|        ``instantiation_error``
+|    Alpha is neither a variable nor a number:
+|        ``type_error(number,Alpha)``
+|    Alpha is not positive:
+|        ``domain_error(positive_number,Alpha)``
+|    Beta is a variable:
+|        ``instantiation_error``
+|    Beta is neither a variable nor a number:
+|        ``type_error(number,Beta)``
+|    Beta is not positive:
+|        ``domain_error(positive_number,Beta)``
+
+
+------------
+
+.. index:: beta_distribution/4
+.. _univariate_distributions_protocol/0::beta_distribution/4:
+
+``beta_distribution/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes an approximation of the beta cumulative distribution at the given value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``beta_distribution(Value,Alpha,Beta,Probability)``
+| **Mode and number of proofs:**
+|    ``beta_distribution(+number,+positive_number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Value is not a number:
+|        ``type_error(number,Value)``
+|    Alpha is a variable:
+|        ``instantiation_error``
+|    Alpha is neither a variable nor a number:
+|        ``type_error(number,Alpha)``
+|    Alpha is not positive:
+|        ``domain_error(positive_number,Alpha)``
+|    Beta is a variable:
+|        ``instantiation_error``
+|    Beta is neither a variable nor a number:
+|        ``type_error(number,Beta)``
+|    Beta is not positive:
+|        ``domain_error(positive_number,Beta)``
+
+
+------------
+
+.. index:: beta_quantile/4
+.. _univariate_distributions_protocol/0::beta_quantile/4:
+
+``beta_quantile/4``
+^^^^^^^^^^^^^^^^^^^
+
+Computes an approximation of the beta quantile for a probability strictly between zero and one.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``beta_quantile(Probability,Alpha,Beta,Quantile)``
+| **Mode and number of proofs:**
+|    ``beta_quantile(+number,+positive_number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Probability is not a number:
+|        ``type_error(number,Probability)``
+|    Probability is not strictly between zero and one:
+|        ``domain_error(open_probability,Probability)``
+|    Alpha is a variable:
+|        ``instantiation_error``
+|    Alpha is neither a variable nor a number:
+|        ``type_error(number,Alpha)``
+|    Alpha is not positive:
+|        ``domain_error(positive_number,Alpha)``
+|    Beta is a variable:
+|        ``instantiation_error``
+|    Beta is neither a variable nor a number:
+|        ``type_error(number,Beta)``
+|    Beta is not positive:
+|        ``domain_error(positive_number,Beta)``
+
+
+------------
+
+.. index:: exponential/2
+.. _univariate_distributions_protocol/0::exponential/2:
+
+``exponential/2``
+^^^^^^^^^^^^^^^^^
+
+Returns an exponentially distributed random value (scale parameterization).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``exponential(Scale,Value)``
+| **Mode and number of proofs:**
+|    ``exponential(+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Scale is a variable:
+|        ``instantiation_error``
+|    Scale is neither a variable nor a number:
+|        ``type_error(number,Scale)``
+|    Scale is not positive:
+|        ``domain_error(positive_number,Scale)``
+
+
+------------
+
+.. index:: exponential_samples/3
+.. _univariate_distributions_protocol/0::exponential_samples/3:
+
+``exponential_samples/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the requested number of exponentially distributed random values.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``exponential_samples(Count,Scale,Samples)``
+| **Mode and number of proofs:**
+|    ``exponential_samples(+integer,+positive_number,-list(float))`` - ``one_or_error``
+
+| **Exceptions:**
+|    Count is a variable:
+|        ``instantiation_error``
+|    Count is neither a variable nor an integer:
+|        ``type_error(integer,Count)``
+|    Count is an integer but not a non-negative integer:
+|        ``domain_error(non_negative_integer,Count)``
+|    Scale is a variable:
+|        ``instantiation_error``
+|    Scale is neither a variable nor a number:
+|        ``type_error(number,Scale)``
+|    Scale is not positive:
+|        ``domain_error(positive_number,Scale)``
+
+
+------------
+
+.. index:: exponential_density/3
+.. _univariate_distributions_protocol/0::exponential_density/3:
+
+``exponential_density/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the exponential probability density at the given value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``exponential_density(Value,Scale,Density)``
+| **Mode and number of proofs:**
+|    ``exponential_density(+number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Value is not a number:
+|        ``type_error(number,Value)``
+|    Scale is a variable:
+|        ``instantiation_error``
+|    Scale is neither a variable nor a number:
+|        ``type_error(number,Scale)``
+|    Scale is not positive:
+|        ``domain_error(positive_number,Scale)``
+
+
+------------
+
+.. index:: exponential_log_density/3
+.. _univariate_distributions_protocol/0::exponential_log_density/3:
+
+``exponential_log_density/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the exponential log-density at the given value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``exponential_log_density(Value,Scale,LogDensity)``
+| **Mode and number of proofs:**
+|    ``exponential_log_density(+number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Value is not a number:
+|        ``type_error(number,Value)``
+|    Scale is a variable:
+|        ``instantiation_error``
+|    Scale is neither a variable nor a number:
+|        ``type_error(number,Scale)``
+|    Scale is not positive:
+|        ``domain_error(positive_number,Scale)``
+
+
+------------
+
+.. index:: exponential_distribution/3
+.. _univariate_distributions_protocol/0::exponential_distribution/3:
+
+``exponential_distribution/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the exponential cumulative distribution at the given value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``exponential_distribution(Value,Scale,Probability)``
+| **Mode and number of proofs:**
+|    ``exponential_distribution(+number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Value is not a number:
+|        ``type_error(number,Value)``
+|    Scale is a variable:
+|        ``instantiation_error``
+|    Scale is neither a variable nor a number:
+|        ``type_error(number,Scale)``
+|    Scale is not positive:
+|        ``domain_error(positive_number,Scale)``
+
+
+------------
+
+.. index:: exponential_quantile/3
+.. _univariate_distributions_protocol/0::exponential_quantile/3:
+
+``exponential_quantile/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the exponential quantile for a probability strictly between zero and one.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``exponential_quantile(Probability,Scale,Quantile)``
+| **Mode and number of proofs:**
+|    ``exponential_quantile(+number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Probability is not a number:
+|        ``type_error(number,Probability)``
+|    Probability is not strictly between zero and one:
+|        ``domain_error(open_probability,Probability)``
+|    Scale is a variable:
+|        ``instantiation_error``
+|    Scale is neither a variable nor a number:
+|        ``type_error(number,Scale)``
+|    Scale is not positive:
+|        ``domain_error(positive_number,Scale)``
+
+
+------------
+
+.. index:: fisher/3
+.. _univariate_distributions_protocol/0::fisher/3:
+
+``fisher/3``
+^^^^^^^^^^^^
+
+Returns a Fisher-Snedecor (F) distributed random value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fisher(DegreesOfFreedom1,DegreesOfFreedom2,Value)``
+| **Mode and number of proofs:**
+|    ``fisher(+positive_number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    DegreesOfFreedom1 is a variable:
+|        ``instantiation_error``
+|    DegreesOfFreedom1 is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom1)``
+|    DegreesOfFreedom1 is not positive:
+|        ``domain_error(positive_number,DegreesOfFreedom1)``
+|    DegreesOfFreedom2 is a variable:
+|        ``instantiation_error``
+|    DegreesOfFreedom2 is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom2)``
+|    DegreesOfFreedom2 is not positive:
+|        ``domain_error(positive_number,DegreesOfFreedom2)``
+
+
+------------
+
+.. index:: fisher_samples/4
+.. _univariate_distributions_protocol/0::fisher_samples/4:
+
+``fisher_samples/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns the requested number of Fisher-Snedecor (F) distributed random values.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fisher_samples(Count,DegreesOfFreedom1,DegreesOfFreedom2,Samples)``
+| **Mode and number of proofs:**
+|    ``fisher_samples(+integer,+positive_number,+positive_number,-list(float))`` - ``one_or_error``
+
+| **Exceptions:**
+|    Count is a variable:
+|        ``instantiation_error``
+|    Count is neither a variable nor an integer:
+|        ``type_error(integer,Count)``
+|    Count is an integer but not a non-negative integer:
+|        ``domain_error(non_negative_integer,Count)``
+|    DegreesOfFreedom1 is a variable:
+|        ``instantiation_error``
+|    DegreesOfFreedom1 is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom1)``
+|    DegreesOfFreedom1 is not positive:
+|        ``domain_error(positive_number,DegreesOfFreedom1)``
+|    DegreesOfFreedom2 is a variable:
+|        ``instantiation_error``
+|    DegreesOfFreedom2 is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom2)``
+|    DegreesOfFreedom2 is not positive:
+|        ``domain_error(positive_number,DegreesOfFreedom2)``
+
+
+------------
+
+.. index:: fisher_density/4
+.. _univariate_distributions_protocol/0::fisher_density/4:
+
+``fisher_density/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Computes the Fisher-Snedecor (F) probability density at the given value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fisher_density(Value,DegreesOfFreedom1,DegreesOfFreedom2,Density)``
+| **Mode and number of proofs:**
+|    ``fisher_density(+number,+positive_number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Value is not a number:
+|        ``type_error(number,Value)``
+|    DegreesOfFreedom1 is a variable:
+|        ``instantiation_error``
+|    DegreesOfFreedom1 is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom1)``
+|    DegreesOfFreedom1 is not positive:
+|        ``domain_error(positive_number,DegreesOfFreedom1)``
+|    DegreesOfFreedom2 is a variable:
+|        ``instantiation_error``
+|    DegreesOfFreedom2 is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom2)``
+|    DegreesOfFreedom2 is not positive:
+|        ``domain_error(positive_number,DegreesOfFreedom2)``
+
+
+------------
+
+.. index:: fisher_log_density/4
+.. _univariate_distributions_protocol/0::fisher_log_density/4:
+
+``fisher_log_density/4``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the Fisher-Snedecor (F) log-density at the given value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fisher_log_density(Value,DegreesOfFreedom1,DegreesOfFreedom2,LogDensity)``
+| **Mode and number of proofs:**
+|    ``fisher_log_density(+number,+positive_number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Value is not a number:
+|        ``type_error(number,Value)``
+|    DegreesOfFreedom1 is a variable:
+|        ``instantiation_error``
+|    DegreesOfFreedom1 is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom1)``
+|    DegreesOfFreedom1 is not positive:
+|        ``domain_error(positive_number,DegreesOfFreedom1)``
+|    DegreesOfFreedom2 is a variable:
+|        ``instantiation_error``
+|    DegreesOfFreedom2 is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom2)``
+|    DegreesOfFreedom2 is not positive:
+|        ``domain_error(positive_number,DegreesOfFreedom2)``
+
+
+------------
+
+.. index:: fisher_distribution/4
+.. _univariate_distributions_protocol/0::fisher_distribution/4:
+
+``fisher_distribution/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes an approximation of the Fisher-Snedecor (F) cumulative distribution at the given value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fisher_distribution(Value,DegreesOfFreedom1,DegreesOfFreedom2,Probability)``
+| **Mode and number of proofs:**
+|    ``fisher_distribution(+number,+positive_number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Value is not a number:
+|        ``type_error(number,Value)``
+|    DegreesOfFreedom1 is a variable:
+|        ``instantiation_error``
+|    DegreesOfFreedom1 is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom1)``
+|    DegreesOfFreedom1 is not positive:
+|        ``domain_error(positive_number,DegreesOfFreedom1)``
+|    DegreesOfFreedom2 is a variable:
+|        ``instantiation_error``
+|    DegreesOfFreedom2 is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom2)``
+|    DegreesOfFreedom2 is not positive:
+|        ``domain_error(positive_number,DegreesOfFreedom2)``
+
+
+------------
+
+.. index:: fisher_quantile/4
+.. _univariate_distributions_protocol/0::fisher_quantile/4:
+
+``fisher_quantile/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+Computes an approximation of the Fisher-Snedecor (F) quantile for a probability strictly between zero and one.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fisher_quantile(Probability,DegreesOfFreedom1,DegreesOfFreedom2,Quantile)``
+| **Mode and number of proofs:**
+|    ``fisher_quantile(+number,+positive_number,+positive_number,-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Probability is not a number:
+|        ``type_error(number,Probability)``
+|    Probability is not strictly between zero and one:
+|        ``domain_error(open_probability,Probability)``
+|    DegreesOfFreedom1 is a variable:
+|        ``instantiation_error``
+|    DegreesOfFreedom1 is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom1)``
+|    DegreesOfFreedom1 is not positive:
+|        ``domain_error(positive_number,DegreesOfFreedom1)``
+|    DegreesOfFreedom2 is a variable:
+|        ``instantiation_error``
+|    DegreesOfFreedom2 is neither a variable nor a number:
+|        ``type_error(number,DegreesOfFreedom2)``
+|    DegreesOfFreedom2 is not positive:
+|        ``domain_error(positive_number,DegreesOfFreedom2)``
+
+
+------------
+
 Protected predicates
 --------------------
 

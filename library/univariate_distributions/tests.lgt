@@ -106,4 +106,103 @@
 	test(normal_samples_negative_count_error, error(domain_error(non_negative_integer, -1))) :-
 		univariate_distributions(fast_random)::normal_samples(-1, 0.0, 1.0, _).
 
+	test(standard_t_predicates, deterministic) :-
+		univariate_distributions(fast_random)::standard_t(1.5, Sample),
+		univariate_distributions(fast_random)::standard_t_samples(2, 1.5, Samples),
+		univariate_distributions(fast_random)::standard_t_density(0.0, 1.0, Density),
+		univariate_distributions(fast_random)::standard_t_log_density(0.0, 1.0, LogDensity),
+		univariate_distributions(fast_random)::standard_t_distribution(0.0, 1.0, Distribution),
+		univariate_distributions(fast_random)::standard_t_quantile(0.5, 1.0, Quantile),
+		^^assertion(number(Sample)),
+		^^assertion((ground(Samples), Samples = [_, _])),
+		^^assertion(abs(Density - 0.3183098861837907) =< 1.0e-12),
+		^^assertion(abs(LogDensity + 1.1447298858494002) =< 1.0e-12),
+		^^assertion(abs(Distribution - 0.5) =< 1.0e-12),
+		^^assertion(abs(Quantile) =< 1.0e-12).
+
+	test(location_scale_t_predicates, deterministic) :-
+		univariate_distributions(fast_random)::t(3.0, 2.0, 1.5, Sample),
+		univariate_distributions(fast_random)::t_samples(2, 3.0, 2.0, 1.5, Samples),
+		univariate_distributions(fast_random)::t_density(3.0, 3.0, 2.0, 1.0, Density),
+		univariate_distributions(fast_random)::t_log_density(3.0, 3.0, 2.0, 1.0, LogDensity),
+		univariate_distributions(fast_random)::t_distribution(3.0, 3.0, 2.0, 1.0, Distribution),
+		univariate_distributions(fast_random)::t_quantile(0.5, 3.0, 2.0, 1.0, Quantile),
+		^^assertion(number(Sample)),
+		^^assertion((ground(Samples), Samples = [_, _])),
+		^^assertion(abs(Density - 0.15915494309189535) =< 1.0e-12),
+		^^assertion(abs(LogDensity + 1.8378770664093453) =< 1.0e-12),
+		^^assertion(abs(Distribution - 0.5) =< 1.0e-12),
+		^^assertion(abs(Quantile - 3.0) =< 1.0e-12).
+
+	test(chi_squared_predicates, deterministic) :-
+		univariate_distributions(fast_random)::chi_squared(2.5, Sample),
+		univariate_distributions(fast_random)::chi_squared_samples(2, 2.5, Samples),
+		univariate_distributions(fast_random)::chi_squared_density(2.0, 2.0, Density),
+		univariate_distributions(fast_random)::chi_squared_log_density(2.0, 2.0, LogDensity),
+		univariate_distributions(fast_random)::chi_squared_distribution(2.0, 2.0, Distribution),
+		univariate_distributions(fast_random)::chi_squared_quantile(0.5, 2.0, Quantile),
+		^^assertion(number(Sample)),
+		^^assertion((ground(Samples), Samples = [_, _])),
+		^^assertion(abs(Density - 0.18393972058572117) =< 1.0e-12),
+		^^assertion(abs(LogDensity + 1.6931471805599453) =< 1.0e-12),
+		^^assertion(abs(Distribution - 0.6321205588285577) =< 1.0e-12),
+		^^assertion(abs(Quantile - 1.3862943611198906) =< 1.0e-10).
+
+	test(gamma_predicates, deterministic) :-
+		univariate_distributions(fast_random)::gamma(2.0, 3.0, Sample),
+		univariate_distributions(fast_random)::gamma_samples(2, 2.0, 3.0, Samples),
+		univariate_distributions(fast_random)::gamma_density(3.0, 2.0, 3.0, Density),
+		univariate_distributions(fast_random)::gamma_log_density(3.0, 2.0, 3.0, LogDensity),
+		univariate_distributions(fast_random)::gamma_distribution(3.0, 2.0, 3.0, Distribution),
+		univariate_distributions(fast_random)::gamma_quantile(0.5, 2.0, 3.0, Quantile),
+		univariate_distributions(fast_random)::gamma_distribution(Quantile, 2.0, 3.0, RoundTrip),
+		^^assertion(number(Sample)),
+		^^assertion((ground(Samples), Samples = [_, _])),
+		^^assertion(abs(Density - 0.12262648039048077) =< 1.0e-12),
+		^^assertion(abs(exp(LogDensity) - Density) =< 1.0e-12),
+		^^assertion(abs(Distribution - 0.26424111765711533) =< 1.0e-12),
+		^^assertion(abs(RoundTrip - 0.5) =< 1.0e-10).
+
+	test(beta_predicates, deterministic) :-
+		univariate_distributions(fast_random)::beta(2.0, 2.0, Sample),
+		univariate_distributions(fast_random)::beta_samples(2, 2.0, 2.0, Samples),
+		univariate_distributions(fast_random)::beta_density(0.5, 2.0, 2.0, Density),
+		univariate_distributions(fast_random)::beta_log_density(0.5, 2.0, 2.0, LogDensity),
+		univariate_distributions(fast_random)::beta_distribution(0.5, 2.0, 2.0, Distribution),
+		univariate_distributions(fast_random)::beta_quantile(0.5, 2.0, 2.0, Quantile),
+		^^assertion(number(Sample)),
+		^^assertion((ground(Samples), Samples = [_, _])),
+		^^assertion(abs(Density - 1.5) =< 1.0e-12),
+		^^assertion(abs(LogDensity - 0.4054651081081644) =< 1.0e-12),
+		^^assertion(abs(Distribution - 0.5) =< 1.0e-12),
+		^^assertion(abs(Quantile - 0.5) =< 1.0e-12).
+
+	test(exponential_predicates, deterministic) :-
+		univariate_distributions(fast_random)::exponential(2.0, Sample),
+		univariate_distributions(fast_random)::exponential_samples(2, 2.0, Samples),
+		univariate_distributions(fast_random)::exponential_density(2.0, 2.0, Density),
+		univariate_distributions(fast_random)::exponential_log_density(2.0, 2.0, LogDensity),
+		univariate_distributions(fast_random)::exponential_distribution(2.0, 2.0, Distribution),
+		univariate_distributions(fast_random)::exponential_quantile(0.5, 2.0, Quantile),
+		^^assertion(number(Sample)),
+		^^assertion((ground(Samples), Samples = [_, _])),
+		^^assertion(abs(Density - 0.18393972058572117) =< 1.0e-12),
+		^^assertion(abs(LogDensity + 1.6931471805599453) =< 1.0e-12),
+		^^assertion(abs(Distribution - 0.6321205588285577) =< 1.0e-12),
+		^^assertion(abs(Quantile - 1.3862943611198906) =< 1.0e-12).
+
+	test(fisher_predicates, deterministic) :-
+		univariate_distributions(fast_random)::fisher(2.5, 3.5, Sample),
+		univariate_distributions(fast_random)::fisher_samples(2, 2.5, 3.5, Samples),
+		univariate_distributions(fast_random)::fisher_density(1.0, 2.0, 2.0, Density),
+		univariate_distributions(fast_random)::fisher_log_density(1.0, 2.0, 2.0, LogDensity),
+		univariate_distributions(fast_random)::fisher_distribution(1.0, 2.0, 2.0, Distribution),
+		univariate_distributions(fast_random)::fisher_quantile(0.5, 2.0, 2.0, Quantile),
+		^^assertion(number(Sample)),
+		^^assertion((ground(Samples), Samples = [_, _])),
+		^^assertion(abs(Density - 0.25) =< 1.0e-12),
+		^^assertion(abs(LogDensity + 1.3862943611198906) =< 1.0e-12),
+		^^assertion(abs(Distribution - 0.5) =< 1.0e-12),
+		^^assertion(abs(Quantile - 1.0) =< 1.0e-10).
+
 :- end_object.

@@ -21,10 +21,12 @@ ________________________________________________________________________
 `multivariate_distributions`
 ============================
 
-This library provides multivariate normal and Student's t sampling and
-density predicates, Mahalanobis distance predicates, and additive-log-ratio
-logistic-normal sampling predicates. Batch predicates return samples as lists
-of row vectors.
+This library provides sampling, density, and log-density predicates for
+multivariate normal and Student's t distributions, Mahalanobis distance
+predicates, additive-log-ratio logistic-normal sampling predicates, Dirichlet
+sampling, density, and log-density predicates, and multinomial sampling,
+probability mass, and log-probability mass predicates. Batch predicates return
+samples as lists of row vectors.
 
 
 API documentation

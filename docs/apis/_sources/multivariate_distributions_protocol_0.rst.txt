@@ -15,7 +15,7 @@ Multivariate probability distribution predicates.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-08
+| **Date:** 2026-08-11
 
 | **Compilation flags:**
 |    ``static``
@@ -1140,6 +1140,322 @@ Returns the requested number of additive-log-ratio logistic-normal random row ve
 |        ``type_error(number,Tolerance)``
 |    ``Tolerance`` is a nuber but not a non-negative number:
 |        ``domain_error(non_negative_number,Tolerance)``
+
+
+------------
+
+.. index:: dirichlet/2
+.. _multivariate_distributions_protocol/0::dirichlet/2:
+
+``dirichlet/2``
+^^^^^^^^^^^^^^^
+
+Returns a Dirichlet distributed random vector on the simplex.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dirichlet(Alphas,Sample)``
+| **Mode and number of proofs:**
+|    ``dirichlet(+list(positive_number),-list(float))`` - ``one_or_error``
+
+| **Exceptions:**
+|    Alphas is a variable or a partial list:
+|        ``instantiation_error``
+|    Alphas is neither a partial list nor a list:
+|        ``type_error(list,Alphas)``
+|    An element Element of the Alphas list is neither a variable nor a number:
+|        ``type_error(number,Element)``
+|    An element Element of the Alphas list is not positive:
+|        ``domain_error(positive_number,Element)``
+|    Alphas has fewer than two elements:
+|        ``domain_error(minimum_number_of_values(2),Alphas)``
+
+
+------------
+
+.. index:: dirichlet_samples/3
+.. _multivariate_distributions_protocol/0::dirichlet_samples/3:
+
+``dirichlet_samples/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the requested number of Dirichlet distributed random vectors.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dirichlet_samples(Count,Alphas,Samples)``
+| **Mode and number of proofs:**
+|    ``dirichlet_samples(+integer,+list(positive_number),-list(list(float)))`` - ``one_or_error``
+
+| **Exceptions:**
+|    Count is a variable:
+|        ``instantiation_error``
+|    Count is neither a variable nor an integer:
+|        ``type_error(integer,Count)``
+|    Count is an integer but not a non-negative integer:
+|        ``domain_error(non_negative_integer,Count)``
+|    Alphas is a variable or a partial list:
+|        ``instantiation_error``
+|    Alphas is neither a partial list nor a list:
+|        ``type_error(list,Alphas)``
+|    An element Element of the Alphas list is neither a variable nor a number:
+|        ``type_error(number,Element)``
+|    An element Element of the Alphas list is not positive:
+|        ``domain_error(positive_number,Element)``
+|    Alphas has fewer than two elements:
+|        ``domain_error(minimum_number_of_values(2),Alphas)``
+
+
+------------
+
+.. index:: dirichlet_density/3
+.. _multivariate_distributions_protocol/0::dirichlet_density/3:
+
+``dirichlet_density/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the Dirichlet density at a point on the simplex.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dirichlet_density(Point,Alphas,Density)``
+| **Mode and number of proofs:**
+|    ``dirichlet_density(+list(number),+list(positive_number),-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Point is a variable or a partial list:
+|        ``instantiation_error``
+|    Point is neither a partial list nor a list:
+|        ``type_error(list,Point)``
+|    An element Element of the Point list is neither a variable nor a number:
+|        ``type_error(number,Element)``
+|    Alphas is a variable or a partial list:
+|        ``instantiation_error``
+|    Alphas is neither a partial list nor a list:
+|        ``type_error(list,Alphas)``
+|    An element Element of the Alphas list is neither a variable nor a number:
+|        ``type_error(number,Element)``
+|    An element Element of the Alphas list is not positive:
+|        ``domain_error(positive_number,Element)``
+|    Point and Alphas have different lengths:
+|        ``domain_error(dimension_mismatch,Point)``
+|    Alphas has fewer than two elements:
+|        ``domain_error(minimum_number_of_values(2),Alphas)``
+
+
+------------
+
+.. index:: dirichlet_log_density/3
+.. _multivariate_distributions_protocol/0::dirichlet_log_density/3:
+
+``dirichlet_log_density/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the Dirichlet log-density at a point on the simplex.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``dirichlet_log_density(Point,Alphas,LogDensity)``
+| **Mode and number of proofs:**
+|    ``dirichlet_log_density(+list(number),+list(positive_number),-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Point is a variable or a partial list:
+|        ``instantiation_error``
+|    Point is neither a partial list nor a list:
+|        ``type_error(list,Point)``
+|    An element Element of the Point list is neither a variable nor a number:
+|        ``type_error(number,Element)``
+|    Alphas is a variable or a partial list:
+|        ``instantiation_error``
+|    Alphas is neither a partial list nor a list:
+|        ``type_error(list,Alphas)``
+|    An element Element of the Alphas list is neither a variable nor a number:
+|        ``type_error(number,Element)``
+|    An element Element of the Alphas list is not positive:
+|        ``domain_error(positive_number,Element)``
+|    Point and Alphas have different lengths:
+|        ``domain_error(dimension_mismatch,Point)``
+|    Alphas has fewer than two elements:
+|        ``domain_error(minimum_number_of_values(2),Alphas)``
+
+
+------------
+
+.. index:: multinomial/3
+.. _multivariate_distributions_protocol/0::multinomial/3:
+
+``multinomial/3``
+^^^^^^^^^^^^^^^^^
+
+Returns a multinomial distributed random count vector.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multinomial(Trials,Probabilities,Counts)``
+| **Mode and number of proofs:**
+|    ``multinomial(+non_negative_integer,+list(probability),-list(non_negative_integer))`` - ``one_or_error``
+
+| **Exceptions:**
+|    Trials is a variable:
+|        ``instantiation_error``
+|    Trials is neither a variable nor an integer:
+|        ``type_error(integer,Trials)``
+|    Trials is a negative integer:
+|        ``domain_error(non_negative_integer,Trials)``
+|    Probabilities is a variable or a partial list:
+|        ``instantiation_error``
+|    Probabilities is neither a partial list nor a list:
+|        ``type_error(list,Probabilities)``
+|    An element Element of the Probabilities list is neither a variable nor a number:
+|        ``type_error(number,Element)``
+|    An element Element of the Probabilities list is not a probability:
+|        ``domain_error(probability,Element)``
+|    Probabilities is empty:
+|        ``domain_error(minimum_number_of_values(1),Probabilities)``
+
+
+------------
+
+.. index:: multinomial_samples/4
+.. _multivariate_distributions_protocol/0::multinomial_samples/4:
+
+``multinomial_samples/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the requested number of multinomial distributed random count vectors.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multinomial_samples(Count,Trials,Probabilities,Samples)``
+| **Mode and number of proofs:**
+|    ``multinomial_samples(+integer,+non_negative_integer,+list(probability),-list(list(non_negative_integer)))`` - ``one_or_error``
+
+| **Exceptions:**
+|    Count is a variable:
+|        ``instantiation_error``
+|    Count is neither a variable nor an integer:
+|        ``type_error(integer,Count)``
+|    Count is an integer but not a non-negative integer:
+|        ``domain_error(non_negative_integer,Count)``
+|    Trials is a variable:
+|        ``instantiation_error``
+|    Trials is neither a variable nor an integer:
+|        ``type_error(integer,Trials)``
+|    Trials is a negative integer:
+|        ``domain_error(non_negative_integer,Trials)``
+|    Probabilities is a variable or a partial list:
+|        ``instantiation_error``
+|    Probabilities is neither a partial list nor a list:
+|        ``type_error(list,Probabilities)``
+|    An element Element of the Probabilities list is neither a variable nor a number:
+|        ``type_error(number,Element)``
+|    An element Element of the Probabilities list is not a probability:
+|        ``domain_error(probability,Element)``
+|    Probabilities is empty:
+|        ``domain_error(minimum_number_of_values(1),Probabilities)``
+
+
+------------
+
+.. index:: multinomial_density/4
+.. _multivariate_distributions_protocol/0::multinomial_density/4:
+
+``multinomial_density/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the multinomial probability mass at the given count vector.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multinomial_density(Counts,Trials,Probabilities,Density)``
+| **Mode and number of proofs:**
+|    ``multinomial_density(+list(non_negative_integer),+non_negative_integer,+list(probability),-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Counts is a variable or a partial list:
+|        ``instantiation_error``
+|    Counts is neither a partial list nor a list:
+|        ``type_error(list,Counts)``
+|    An element Element of the Counts list is neither a variable nor an integer:
+|        ``type_error(integer,Element)``
+|    An element Element of the Counts list is negative:
+|        ``domain_error(non_negative_integer,Element)``
+|    Trials is a variable:
+|        ``instantiation_error``
+|    Trials is neither a variable nor an integer:
+|        ``type_error(integer,Trials)``
+|    Trials is a negative integer:
+|        ``domain_error(non_negative_integer,Trials)``
+|    Probabilities is a variable or a partial list:
+|        ``instantiation_error``
+|    Probabilities is neither a partial list nor a list:
+|        ``type_error(list,Probabilities)``
+|    An element Element of the Probabilities list is neither a variable nor a number:
+|        ``type_error(number,Element)``
+|    An element Element of the Probabilities list is not a probability:
+|        ``domain_error(probability,Element)``
+|    Counts and Probabilities have different lengths:
+|        ``domain_error(dimension_mismatch,Counts)``
+
+
+------------
+
+.. index:: multinomial_log_density/4
+.. _multivariate_distributions_protocol/0::multinomial_log_density/4:
+
+``multinomial_log_density/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the multinomial log-probability mass at the given count vector.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``multinomial_log_density(Counts,Trials,Probabilities,LogDensity)``
+| **Mode and number of proofs:**
+|    ``multinomial_log_density(+list(non_negative_integer),+non_negative_integer,+list(probability),-float)`` - ``one_or_error``
+
+| **Exceptions:**
+|    Counts is a variable or a partial list:
+|        ``instantiation_error``
+|    Counts is neither a partial list nor a list:
+|        ``type_error(list,Counts)``
+|    An element Element of the Counts list is neither a variable nor an integer:
+|        ``type_error(integer,Element)``
+|    An element Element of the Counts list is negative:
+|        ``domain_error(non_negative_integer,Element)``
+|    Trials is a variable:
+|        ``instantiation_error``
+|    Trials is neither a variable nor an integer:
+|        ``type_error(integer,Trials)``
+|    Trials is a negative integer:
+|        ``domain_error(non_negative_integer,Trials)``
+|    Probabilities is a variable or a partial list:
+|        ``instantiation_error``
+|    Probabilities is neither a partial list nor a list:
+|        ``type_error(list,Probabilities)``
+|    An element Element of the Probabilities list is neither a variable nor a number:
+|        ``type_error(number,Element)``
+|    An element Element of the Probabilities list is not a probability:
+|        ``domain_error(probability,Element)``
+|    Counts and Probabilities have different lengths:
+|        ``domain_error(dimension_mismatch,Counts)``
 
 
 ------------

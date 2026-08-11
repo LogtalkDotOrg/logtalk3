@@ -1788,6 +1788,57 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`sampling_protocol <sampling_protocol/0::beta/3>`
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::beta/3>`
+
+``beta_density/4``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::beta_density/4>`
+
+``beta_distribution/4``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::beta_distribution/4>`
+
+``beta_log_density/4``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::beta_log_density/4>`
+
+``beta_quantile/4``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::beta_quantile/4>`
+
+``beta_samples/4``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::beta_samples/4>`
 
 ``between/3``
 -------------
@@ -2756,6 +2807,57 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`sampling_protocol <sampling_protocol/0::chi_squared/2>`
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::chi_squared/2>`
+
+``chi_squared_density/3``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::chi_squared_density/3>`
+
+``chi_squared_distribution/3``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::chi_squared_distribution/3>`
+
+``chi_squared_log_density/3``
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::chi_squared_log_density/3>`
+
+``chi_squared_quantile/3``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::chi_squared_quantile/3>`
+
+``chi_squared_samples/3``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::chi_squared_samples/3>`
 
 ``children/2``
 --------------
@@ -6244,7 +6346,38 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0::dirichlet/2>`
 * :ref:`sampling_protocol <sampling_protocol/0::dirichlet/2>`
+
+``dirichlet_density/3``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0::dirichlet_density/3>`
+
+``dirichlet_log_density/3``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0::dirichlet_log_density/3>`
+
+``dirichlet_samples/3``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0::dirichlet_samples/3>`
 
 ``disable/0``
 -------------
@@ -8078,6 +8211,57 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`sampling_protocol <sampling_protocol/0::exponential/2>`
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::exponential/2>`
+
+``exponential_density/3``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::exponential_density/3>`
+
+``exponential_distribution/3``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::exponential_distribution/3>`
+
+``exponential_log_density/3``
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::exponential_log_density/3>`
+
+``exponential_quantile/3``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::exponential_quantile/3>`
+
+``exponential_samples/3``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::exponential_samples/3>`
 
 ``export/1``
 ------------
@@ -8841,6 +9025,57 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`sampling_protocol <sampling_protocol/0::fisher/3>`
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::fisher/3>`
+
+``fisher_density/4``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::fisher_density/4>`
+
+``fisher_distribution/4``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::fisher_distribution/4>`
+
+``fisher_log_density/4``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::fisher_log_density/4>`
+
+``fisher_quantile/4``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::fisher_quantile/4>`
+
+``fisher_samples/4``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::fisher_samples/4>`
 
 ``fitness/2``
 -------------
@@ -9602,6 +9837,57 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`sampling_protocol <sampling_protocol/0::gamma/3>`
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::gamma/3>`
+
+``gamma_density/4``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::gamma_density/4>`
+
+``gamma_distribution/4``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::gamma_distribution/4>`
+
+``gamma_log_density/4``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::gamma_log_density/4>`
+
+``gamma_quantile/4``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::gamma_quantile/4>`
+
+``gamma_samples/4``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::gamma_samples/4>`
 
 ``gat/4``
 ---------
@@ -15979,6 +16265,46 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`natural <natural/0::multinomial/2>`
+
+``multinomial/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0::multinomial/3>`
+
+``multinomial_density/4``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0::multinomial_density/4>`
+
+``multinomial_log_density/4``
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0::multinomial_log_density/4>`
+
+``multinomial_samples/4``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0::multinomial_samples/4>`
 
 ``multiplayer_dataset_connected_components/2``
 ----------------------------------------------
@@ -25826,6 +26152,57 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`sampling_protocol <sampling_protocol/0::standard_t/2>`
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::standard_t/2>`
+
+``standard_t_density/3``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::standard_t_density/3>`
+
+``standard_t_distribution/3``
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::standard_t_distribution/3>`
+
+``standard_t_log_density/3``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::standard_t_log_density/3>`
+
+``standard_t_quantile/3``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::standard_t_quantile/3>`
+
+``standard_t_samples/3``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::standard_t_samples/3>`
 
 ``start/0``
 -----------
@@ -26783,6 +27160,66 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ccsds_tm_frames(FrameLength,SecondaryHeaderLength,HasFECF) <ccsds_tm_frames/3::synchronization_flag/2>`
+
+``t/4``
+-------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::t/4>`
+
+``t_density/5``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::t_density/5>`
+
+``t_distribution/5``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::t_distribution/5>`
+
+``t_log_density/5``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::t_log_density/5>`
+
+``t_quantile/5``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::t_quantile/5>`
+
+``t_samples/5``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::t_samples/5>`
 
 ``tab//0``
 ----------

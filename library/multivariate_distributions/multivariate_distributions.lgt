@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-04,
+		date is 2026-08-11,
 		comment is 'Multivariate probability distributions using an injected random source.',
 		parameters is [
 			'Random' - 'An object implementing the ``sampling_protocol`` protocol.'
@@ -34,7 +34,8 @@
 	]).
 
 	:- uses(_Random_, [
-		standard_normal/1, standard_gamma/2
+		standard_normal/1, standard_gamma/2,
+		dirichlet/2 as random_dirichlet/2, uniform/1 as random_uniform/1
 	]).
 
 	:- uses(linear_algebra, [
@@ -159,6 +160,69 @@
 		covariance_factorization(Mean, Covariance, Tolerance, Factorization),
 		generate_logistic_normal_samples(Count, Mean, Factorization, Samples).
 
+	dirichlet(Alphas, Sample) :-
+		check_dirichlet_alphas(Alphas),
+		random_dirichlet(Alphas, Sample).
+
+	dirichlet_samples(Count, Alphas, Samples) :-
+		context(Context),
+		check(non_negative_integer, Count, Context),
+		check_dirichlet_alphas(Alphas),
+		generate_dirichlet_samples(Count, Alphas, Samples).
+
+	dirichlet_density(Point, Alphas, Density) :-
+		dirichlet_log_density(Point, Alphas, LogDensity),
+		( LogDensity == negative_infinity -> Density = 0.0; Density is exp(LogDensity) ).
+
+	dirichlet_log_density(Point, Alphas, LogDensity) :-
+		context(Context),
+		check(list(number), Point, Context),
+		check_dirichlet_alphas(Alphas),
+		length(Point, PointLength),
+		length(Alphas, AlphasLength),
+		( PointLength =:= AlphasLength ->
+			dirichlet_log_terms(Point, Alphas, Evaluation),
+			( Evaluation = inside(PointSum, AlphaSum, LogGammaAlphas, LogKernel), abs(PointSum - 1.0) =< 1.0e-12 ->
+				log_gamma(AlphaSum, LogGammaSum),
+				LogDensity is LogGammaSum - LogGammaAlphas + LogKernel
+			; LogDensity = negative_infinity
+			)
+		; domain_error(dimension_mismatch, Point)
+		).
+
+	multinomial(Trials, Probabilities, Counts) :-
+		check_multinomial_parameters(Trials, Probabilities),
+		length(Probabilities, Dimension),
+		new_counts(Dimension, Counts0),
+		generate_multinomial_trials(Trials, Probabilities, Counts0, Counts).
+
+	multinomial_samples(Count, Trials, Probabilities, Samples) :-
+		context(Context),
+		check(non_negative_integer, Count, Context),
+		check_multinomial_parameters(Trials, Probabilities),
+		generate_multinomial_samples(Count, Trials, Probabilities, Samples).
+
+	multinomial_density(Counts, Trials, Probabilities, Density) :-
+		multinomial_log_density(Counts, Trials, Probabilities, LogDensity),
+		( LogDensity == negative_infinity -> Density = 0.0; Density is exp(LogDensity) ).
+
+	multinomial_log_density(Counts, Trials, Probabilities, LogDensity) :-
+		context(Context),
+		check(list(non_negative_integer), Counts, Context),
+		check(non_negative_integer, Trials, Context),
+		check(list(probability), Probabilities, Context),
+		length(Counts, CountsLength),
+		length(Probabilities, ProbabilitiesLength),
+		( CountsLength =:= ProbabilitiesLength ->
+			sum_counts(Counts, 0, Total),
+			( Total =:= Trials ->
+				log_gamma(Trials + 1.0, LogCoefficient),
+				multinomial_log_terms(Counts, Probabilities, LogCoefficient, LogDensity)
+			; LogDensity = negative_infinity
+			)
+		; domain_error(dimension_mismatch, Counts)
+		).
+
 	generate_multivariate_normal_samples(0, _Mean, _Factorization, []) :-
 		!.
 	generate_multivariate_normal_samples(Count, Mean, Factorization, [Sample| Samples]) :-
@@ -180,6 +244,92 @@
 		inverse_additive_log_ratio(LatentSample, Sample),
 		Remaining is Count - 1,
 		generate_logistic_normal_samples(Remaining, Mean, Factorization, Samples).
+
+	generate_dirichlet_samples(0, _Alphas, []) :-
+		!.
+	generate_dirichlet_samples(Count, Alphas, [Sample| Samples]) :-
+		random_dirichlet(Alphas, Sample),
+		Remaining is Count - 1,
+		generate_dirichlet_samples(Remaining, Alphas, Samples).
+
+	generate_multinomial_samples(0, _Trials, _Probabilities, []) :-
+		!.
+	generate_multinomial_samples(Count, Trials, Probabilities, [Sample| Samples]) :-
+		multinomial(Trials, Probabilities, Sample),
+		Remaining is Count - 1,
+		generate_multinomial_samples(Remaining, Trials, Probabilities, Samples).
+
+	generate_multinomial_trials(0, _Probabilities, Counts, Counts) :-
+		!.
+	generate_multinomial_trials(Trials, Probabilities, Counts0, Counts) :-
+		random_uniform(Uniform),
+		select_category(Probabilities, Uniform, 0, Index),
+		increment_count(Counts0, Index, Counts1),
+		Remaining is Trials - 1,
+		generate_multinomial_trials(Remaining, Probabilities, Counts1, Counts).
+
+	select_category([_Probability], _Uniform, Index, Index) :-
+		!.
+	select_category([Probability| _Probabilities], Uniform, Index, Index) :-
+		Uniform < Probability,
+		!.
+	select_category([Probability| Probabilities], Uniform, Index0, Index) :-
+		RemainingUniform is Uniform - Probability,
+		Index1 is Index0 + 1,
+		select_category(Probabilities, RemainingUniform, Index1, Index).
+
+	new_counts(0, []) :-
+		!.
+	new_counts(Dimension, [0| Counts]) :-
+		Remaining is Dimension - 1,
+		new_counts(Remaining, Counts).
+
+	increment_count([Count| Counts], 0, [Incremented| Counts]) :-
+		!,
+		Incremented is Count + 1.
+	increment_count([Count| Counts0], Index, [Count| Counts]) :-
+		Previous is Index - 1,
+		increment_count(Counts0, Previous, Counts).
+
+	check_dirichlet_alphas(Alphas) :-
+		context(Context),
+		check(list(positive_number), Alphas, Context),
+		length(Alphas, Length),
+		( Length >= 2 -> true; domain_error(minimum_number_of_values(2), Alphas) ).
+
+	check_multinomial_parameters(Trials, Probabilities) :-
+		context(Context),
+		check(non_negative_integer, Trials, Context),
+		check(list(probability), Probabilities, Context),
+		( Probabilities == [] -> domain_error(minimum_number_of_values(1), Probabilities); true ).
+
+	dirichlet_log_terms([], [], inside(0.0, 0.0, 0.0, 0.0)).
+	dirichlet_log_terms([Value| Values], [Alpha| Alphas], Evaluation) :-
+		( Value > 0.0, Value =< 1.0 ->
+			log_gamma(Alpha, LogGammaAlpha),
+			dirichlet_log_terms(Values, Alphas, RestEvaluation),
+			( RestEvaluation = inside(PointSum0, AlphaSum0, LogGammaAlphas0, LogKernel0) ->
+				PointSum is PointSum0 + Value,
+				AlphaSum is AlphaSum0 + Alpha,
+				LogGammaAlphas is LogGammaAlphas0 + LogGammaAlpha,
+				LogKernel is LogKernel0 + (Alpha - 1.0) * log(Value),
+				Evaluation = inside(PointSum, AlphaSum, LogGammaAlphas, LogKernel)
+			; Evaluation = outside
+			)
+		; Evaluation = outside
+		).
+
+	sum_counts([], Total, Total).
+	sum_counts([Count| Counts], Total0, Total) :- Total1 is Total0 + Count, sum_counts(Counts, Total1, Total).
+
+	multinomial_log_terms([], [], LogDensity, LogDensity).
+	multinomial_log_terms([Count| Counts], [Probability| Probabilities], LogDensity0, LogDensity) :-
+		( Count > 0, Probability =< 0.0 ->
+			LogDensity = negative_infinity
+		; log_gamma(Count + 1.0, LogFactorial),
+		  ( Count =:= 0 -> LogDensity1 is LogDensity0 - LogFactorial; LogDensity1 is LogDensity0 - LogFactorial + Count * log(Probability) ),
+		  multinomial_log_terms(Counts, Probabilities, LogDensity1, LogDensity)
+		).
 
 	covariance_factorization(Mean, Covariance, Tolerance, factorization(Dimension, Tolerance, PositiveEigenpairs, NullEigenvectors, LogPseudoDeterminant)) :-
 		context(Context),

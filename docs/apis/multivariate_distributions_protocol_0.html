@@ -429,7 +429,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-08-08</div>
+<div class="line"><strong>Date:</strong> 2026-08-11</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -483,11 +483,19 @@
 <li><p><a class="reference internal" href="#logistic-normal-4" id="id23"><code class="docutils literal notranslate"><span class="pre">logistic_normal/4</span></code></a></p></li>
 <li><p><a class="reference internal" href="#logistic-normal-samples-4" id="id24"><code class="docutils literal notranslate"><span class="pre">logistic_normal_samples/4</span></code></a></p></li>
 <li><p><a class="reference internal" href="#logistic-normal-samples-5" id="id25"><code class="docutils literal notranslate"><span class="pre">logistic_normal_samples/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#dirichlet-2" id="id26"><code class="docutils literal notranslate"><span class="pre">dirichlet/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#dirichlet-samples-3" id="id27"><code class="docutils literal notranslate"><span class="pre">dirichlet_samples/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#dirichlet-density-3" id="id28"><code class="docutils literal notranslate"><span class="pre">dirichlet_density/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#dirichlet-log-density-3" id="id29"><code class="docutils literal notranslate"><span class="pre">dirichlet_log_density/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#multinomial-3" id="id30"><code class="docutils literal notranslate"><span class="pre">multinomial/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#multinomial-samples-4" id="id31"><code class="docutils literal notranslate"><span class="pre">multinomial_samples/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#multinomial-density-4" id="id32"><code class="docutils literal notranslate"><span class="pre">multinomial_density/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#multinomial-log-density-4" id="id33"><code class="docutils literal notranslate"><span class="pre">multinomial_log_density/4</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id26">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id27">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id28">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id34">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id35">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id36">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -2315,6 +2323,510 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">Tolerance</span></code> is a nuber but not a non-negative number:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_number,Tolerance)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="dirichlet-2">
+<span id="multivariate-distributions-protocol-0-dirichlet-2"></span><span id="index-25"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">dirichlet/2</span></code></a><a class="headerlink" href="#dirichlet-2" title="Link to this heading"></a></h3>
+<p>Returns a Dirichlet distributed random vector on the simplex.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dirichlet(Alphas,Sample)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dirichlet(+list(positive_number),-list(float))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Alphas is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Alphas is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Alphas)</span></code></div>
+</div>
+<div class="line">An element Element of the Alphas list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
+<div class="line">An element Element of the Alphas list is not positive:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_number,Element)</span></code></div>
+</div>
+<div class="line">Alphas has fewer than two elements:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(2),Alphas)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="dirichlet-samples-3">
+<span id="multivariate-distributions-protocol-0-dirichlet-samples-3"></span><span id="index-26"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">dirichlet_samples/3</span></code></a><a class="headerlink" href="#dirichlet-samples-3" title="Link to this heading"></a></h3>
+<p>Returns the requested number of Dirichlet distributed random vectors.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dirichlet_samples(Count,Alphas,Samples)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dirichlet_samples(+integer,+list(positive_number),-list(list(float)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Count is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Count is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Count)</span></code></div>
+</div>
+<div class="line">Count is an integer but not a non-negative integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Count)</span></code></div>
+</div>
+<div class="line">Alphas is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Alphas is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Alphas)</span></code></div>
+</div>
+<div class="line">An element Element of the Alphas list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
+<div class="line">An element Element of the Alphas list is not positive:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_number,Element)</span></code></div>
+</div>
+<div class="line">Alphas has fewer than two elements:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(2),Alphas)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="dirichlet-density-3">
+<span id="multivariate-distributions-protocol-0-dirichlet-density-3"></span><span id="index-27"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">dirichlet_density/3</span></code></a><a class="headerlink" href="#dirichlet-density-3" title="Link to this heading"></a></h3>
+<p>Computes the Dirichlet density at a point on the simplex.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dirichlet_density(Point,Alphas,Density)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dirichlet_density(+list(number),+list(positive_number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Point is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Point is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Point)</span></code></div>
+</div>
+<div class="line">An element Element of the Point list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
+<div class="line">Alphas is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Alphas is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Alphas)</span></code></div>
+</div>
+<div class="line">An element Element of the Alphas list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
+<div class="line">An element Element of the Alphas list is not positive:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_number,Element)</span></code></div>
+</div>
+<div class="line">Point and Alphas have different lengths:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(dimension_mismatch,Point)</span></code></div>
+</div>
+<div class="line">Alphas has fewer than two elements:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(2),Alphas)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="dirichlet-log-density-3">
+<span id="multivariate-distributions-protocol-0-dirichlet-log-density-3"></span><span id="index-28"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">dirichlet_log_density/3</span></code></a><a class="headerlink" href="#dirichlet-log-density-3" title="Link to this heading"></a></h3>
+<p>Computes the Dirichlet log-density at a point on the simplex.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dirichlet_log_density(Point,Alphas,LogDensity)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dirichlet_log_density(+list(number),+list(positive_number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Point is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Point is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Point)</span></code></div>
+</div>
+<div class="line">An element Element of the Point list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
+<div class="line">Alphas is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Alphas is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Alphas)</span></code></div>
+</div>
+<div class="line">An element Element of the Alphas list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
+<div class="line">An element Element of the Alphas list is not positive:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_number,Element)</span></code></div>
+</div>
+<div class="line">Point and Alphas have different lengths:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(dimension_mismatch,Point)</span></code></div>
+</div>
+<div class="line">Alphas has fewer than two elements:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(2),Alphas)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="multinomial-3">
+<span id="multivariate-distributions-protocol-0-multinomial-3"></span><span id="index-29"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">multinomial/3</span></code></a><a class="headerlink" href="#multinomial-3" title="Link to this heading"></a></h3>
+<p>Returns a multinomial distributed random count vector.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">multinomial(Trials,Probabilities,Counts)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">multinomial(+non_negative_integer,+list(probability),-list(non_negative_integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Trials is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Trials is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Trials)</span></code></div>
+</div>
+<div class="line">Trials is a negative integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Trials)</span></code></div>
+</div>
+<div class="line">Probabilities is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Probabilities is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Probabilities)</span></code></div>
+</div>
+<div class="line">An element Element of the Probabilities list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
+<div class="line">An element Element of the Probabilities list is not a probability:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(probability,Element)</span></code></div>
+</div>
+<div class="line">Probabilities is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),Probabilities)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="multinomial-samples-4">
+<span id="multivariate-distributions-protocol-0-multinomial-samples-4"></span><span id="index-30"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">multinomial_samples/4</span></code></a><a class="headerlink" href="#multinomial-samples-4" title="Link to this heading"></a></h3>
+<p>Returns the requested number of multinomial distributed random count vectors.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">multinomial_samples(Count,Trials,Probabilities,Samples)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">multinomial_samples(+integer,+non_negative_integer,+list(probability),-list(list(non_negative_integer)))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Count is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Count is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Count)</span></code></div>
+</div>
+<div class="line">Count is an integer but not a non-negative integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Count)</span></code></div>
+</div>
+<div class="line">Trials is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Trials is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Trials)</span></code></div>
+</div>
+<div class="line">Trials is a negative integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Trials)</span></code></div>
+</div>
+<div class="line">Probabilities is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Probabilities is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Probabilities)</span></code></div>
+</div>
+<div class="line">An element Element of the Probabilities list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
+<div class="line">An element Element of the Probabilities list is not a probability:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(probability,Element)</span></code></div>
+</div>
+<div class="line">Probabilities is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),Probabilities)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="multinomial-density-4">
+<span id="multivariate-distributions-protocol-0-multinomial-density-4"></span><span id="index-31"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">multinomial_density/4</span></code></a><a class="headerlink" href="#multinomial-density-4" title="Link to this heading"></a></h3>
+<p>Computes the multinomial probability mass at the given count vector.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">multinomial_density(Counts,Trials,Probabilities,Density)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">multinomial_density(+list(non_negative_integer),+non_negative_integer,+list(probability),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Counts is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Counts is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Counts)</span></code></div>
+</div>
+<div class="line">An element Element of the Counts list is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Element)</span></code></div>
+</div>
+<div class="line">An element Element of the Counts list is negative:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Element)</span></code></div>
+</div>
+<div class="line">Trials is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Trials is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Trials)</span></code></div>
+</div>
+<div class="line">Trials is a negative integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Trials)</span></code></div>
+</div>
+<div class="line">Probabilities is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Probabilities is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Probabilities)</span></code></div>
+</div>
+<div class="line">An element Element of the Probabilities list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
+<div class="line">An element Element of the Probabilities list is not a probability:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(probability,Element)</span></code></div>
+</div>
+<div class="line">Counts and Probabilities have different lengths:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(dimension_mismatch,Counts)</span></code></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="multinomial-log-density-4">
+<span id="multivariate-distributions-protocol-0-multinomial-log-density-4"></span><span id="index-32"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">multinomial_log_density/4</span></code></a><a class="headerlink" href="#multinomial-log-density-4" title="Link to this heading"></a></h3>
+<p>Computes the multinomial log-probability mass at the given count vector.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">multinomial_log_density(Counts,Trials,Probabilities,LogDensity)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">multinomial_log_density(+list(non_negative_integer),+non_negative_integer,+list(probability),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">Counts is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Counts is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Counts)</span></code></div>
+</div>
+<div class="line">An element Element of the Counts list is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Element)</span></code></div>
+</div>
+<div class="line">An element Element of the Counts list is negative:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Element)</span></code></div>
+</div>
+<div class="line">Trials is a variable:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Trials is neither a variable nor an integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Trials)</span></code></div>
+</div>
+<div class="line">Trials is a negative integer:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Trials)</span></code></div>
+</div>
+<div class="line">Probabilities is a variable or a partial list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
+</div>
+<div class="line">Probabilities is neither a partial list nor a list:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Probabilities)</span></code></div>
+</div>
+<div class="line">An element Element of the Probabilities list is neither a variable nor a number:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+</div>
+<div class="line">An element Element of the Probabilities list is not a probability:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(probability,Element)</span></code></div>
+</div>
+<div class="line">Counts and Probabilities have different lengths:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(dimension_mismatch,Counts)</span></code></div>
 </div>
 </div>
 </div>

@@ -3,8 +3,10 @@
 ``univariate_distributions``
 ============================
 
-This library provides normal distribution sampling, density,
-log-density, cumulative distribution, and quantile predicates.
+This library provides sampling, density, log-density, cumulative
+distribution, and quantile predicates for normal, Student's t,
+chi-squared, gamma, beta, exponential, and Fisher-Snedecor
+distributions.
 
 API documentation
 -----------------
