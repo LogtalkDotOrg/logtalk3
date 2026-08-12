@@ -41,9 +41,9 @@
 :- object(iso8601).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Daniel L. Dudley and Paulo Moura',
-		date is 2026-04-08,
+		date is 2026-08-12,
 		comment is 'ISO 8601 (and European civil calendar) compliant library of date and time predicates.',
 		remarks is [
 			'Scope' - 'This object currently provides a powerful, versatile and efficient set of date-handling predicates, which--thanks to Logtalk--may be used as is on a wide range of Prolog compilers. Besides taking time to familiarize oneself with each predicate, the user should take note of the following information.',
@@ -626,13 +626,38 @@
 			atom_codes(String, Codes)
 		).
 
-	parse_duration_codes([0'P| Codes], duration(Years, Months, Days, Hours, Minutes, Seconds)) :-
+	parse_duration_codes(Codes, Duration) :-
+		( 	Codes = [0'-,0'P| Rest] ->
+			parse_duration_codes_positive(Rest, Duration0),
+			negate_duration(Duration0, Duration)
+		; 	Codes = [0'P| Rest],
+			parse_duration_codes_positive(Rest, Duration)
+		).
+
+	parse_duration_codes_positive(Codes, duration(Years, Months, Days, Hours, Minutes, Seconds)) :-
 		split_duration_codes(Codes, DateCodes, TimeCodes),
 		parse_duration_date_codes(DateCodes, Years, Months, Days, DatePresent),
 		parse_duration_time_codes(TimeCodes, Hours, Minutes, Seconds, TimePresent),
-		(DatePresent == true; TimePresent == true).
+		(   DatePresent == true ->
+			true
+		;   TimePresent == true
+		).
 
 	format_duration_codes(duration(Years, Months, Days, Hours, Minutes, Seconds), Codes) :-
+		duration_sign(Years, Months, Days, Hours, Minutes, Seconds, Sign),
+		( 	Sign == negative ->
+			Years1 is abs(Years),
+			Months1 is abs(Months),
+			Days1 is abs(Days),
+			Hours1 is abs(Hours),
+			Minutes1 is abs(Minutes),
+			Seconds1 is abs(Seconds),
+			format_duration_codes_positive(duration(Years1, Months1, Days1, Hours1, Minutes1, Seconds1), Codes0),
+			Codes = [0'-| Codes0]
+		; 	format_duration_codes_positive(duration(Years, Months, Days, Hours, Minutes, Seconds), Codes)
+		).
+
+	format_duration_codes_positive(duration(Years, Months, Days, Hours, Minutes, Seconds), Codes) :-
 		integer(Years), Years >= 0,
 		integer(Months), Months >= 0,
 		integer(Days), Days >= 0,
@@ -650,6 +675,30 @@
 			)
 		).
 
+	negate_duration(duration(Years, Months, Days, Hours, Minutes, Seconds), duration(NYears, NMonths, NDays, NHours, NMinutes, NSeconds)) :-
+		NYears is -Years,
+		NMonths is -Months,
+		NDays is -Days,
+		NHours is -Hours,
+		NMinutes is -Minutes,
+		NSeconds is -Seconds.
+
+	duration_sign(Years, Months, Days, Hours, Minutes, Seconds, non_negative) :-
+		Years >= 0,
+		Months >= 0,
+		Days >= 0,
+		Hours >= 0,
+		Minutes >= 0,
+		Seconds >= 0,
+		!.
+	duration_sign(Years, Months, Days, Hours, Minutes, Seconds, negative) :-
+		Years =< 0,
+		Months =< 0,
+		Days =< 0,
+		Hours =< 0,
+		Minutes =< 0,
+		Seconds =< 0.
+
 	split_duration_codes(Codes, DateCodes, TimeCodes) :-
 		( 	append(DateCodes, [0'T| TimeCodes], Codes) ->
 			true
@@ -662,27 +711,42 @@
 		parse_duration_component(Codes1, 0'M, Months, Codes2, PresentMonths),
 		parse_duration_component(Codes2, 0'D, Days, Codes3, PresentDays),
 		Codes3 == [],
-		((PresentYears ; PresentMonths ; PresentDays) -> Present = true ; Present = false).
+		(   PresentYears == true ->
+			Present = true
+		;   PresentMonths == true ->
+			Present = true
+		;   PresentDays == true ->
+			Present = true
+		;   Present = false
+		).
 
 	parse_duration_time_codes(Codes, Hours, Minutes, Seconds, Present) :-
 		parse_duration_component(Codes, 0'H, Hours, Codes1, PresentHours),
 		parse_duration_component(Codes1, 0'M, Minutes, Codes2, PresentMinutes),
 		parse_duration_component(Codes2, 0'S, Seconds, Codes3, PresentSeconds),
 		Codes3 == [],
-		((PresentHours ; PresentMinutes ; PresentSeconds) -> Present = true ; Present = false).
+		(   PresentHours == true ->
+			Present = true
+		;   PresentMinutes == true ->
+			Present = true
+		;   PresentSeconds == true ->
+			Present = true
+		;   Present = false
+		).
 
 	parse_duration_component(Codes, Unit, Value, Rest, Present) :-
 		extract_leading_digits(Codes, Digits, AfterDigits),
-		(	Digits == [] ->
+		(   Digits == [] ->
 			Value = 0,
 			Rest = Codes,
 			Present = false
-		;	AfterDigits = [Unit| Rest] ->
-			number_codes(Value, Digits),
-			Present = true
-		;	Value = 0,
-			Rest = Codes,
-			Present = false
+		;   (   AfterDigits = [Unit| Rest] ->
+				number_codes(Value, Digits),
+				Present = true
+			;   Value = 0,
+				Rest = Codes,
+				Present = false
+			)
 		).
 
 	format_duration_date_codes(Years, Months, Days, Codes) :-

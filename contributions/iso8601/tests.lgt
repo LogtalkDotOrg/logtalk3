@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura and Daniel L. Dudley',
-		date is 2026-04-08,
+		date is 2026-08-12,
 		comment is 'Unit tests for the iso8601 library.'
 	]).
 
@@ -374,6 +374,30 @@
 	test(iso8601_duration_string_2_03, deterministic(String == 'PT0S')) :-
 		duration_string(duration(0, 0, 0, 0, 0, 0), String).
 
+	test(iso8601_duration_string_2_04, deterministic(String == '-PT45M')) :-
+		duration_string(duration(0, 0, 0, 0, -45, 0), String).
+
+	test(iso8601_duration_string_2_05, deterministic(Duration == duration(0, 0, 0, 0, -45, 0))) :-
+		duration_string(Duration, '-PT45M').
+
+	test(iso8601_duration_string_2_06, deterministic(String == '-P1Y2M3DT4H5M6S')) :-
+		duration_string(duration(-1, -2, -3, -4, -5, -6), String).
+
+	test(iso8601_duration_string_2_07, deterministic(Duration == duration(-1, -2, -3, -4, -5, -6))) :-
+		duration_string(Duration, '-P1Y2M3DT4H5M6S').
+
+	test(iso8601_duration_string_2_08, deterministic(String == '-P3D')) :-
+		duration_string(duration(0, 0, -3, 0, 0, 0), String).
+
+	test(iso8601_duration_string_2_09, deterministic(Duration == duration(0, 0, -3, 0, 0, 0))) :-
+		duration_string(Duration, '-P3D').
+
+	test(iso8601_duration_string_2_10, false) :-
+		duration_string(duration(0, 0, 3, 0, -45, 0), _).
+
+	test(iso8601_duration_string_2_11, false) :-
+		duration_string(duration(0, 0, -3, 0, 45, 0), _).
+
 	% interval_string/2 tests
 
 	test(iso8601_interval_string_2_01, deterministic(String == '2026-02-25/2026-03-01')) :-
@@ -408,6 +432,15 @@
 
 	test(iso8601_interval_string_2_11, deterministic(Interval == interval(date_time(2026,4,7,14,30,0.125,0), date_time(2026,4,7,15,0,0.25,0)))) :-
 		interval_string(Interval, '2026-04-07T14:30:00,125Z/2026-04-07T15:00:00,25Z').
+
+	test(iso8601_interval_string_2_12, deterministic(String == '2026-02-25/-P3D')) :-
+		interval_string(interval([2026,2,25], duration(0, 0, -3, 0, 0, 0)), String).
+
+	test(iso8601_interval_string_2_13, deterministic(Interval == interval([2026,2,25], duration(0, 0, -3, 0, 0, 0)))) :-
+		interval_string(Interval, '2026-02-25/-P3D').
+
+	test(iso8601_interval_string_2_14, false) :-
+		interval_string(interval([2026,2,25], duration(0, 0, 3, 0, -45, 0)), _).
 
 	% valid_date/3 tests
 

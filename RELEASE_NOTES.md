@@ -250,6 +250,12 @@ Examples
 
 * UPDATED: The `errors` example to illustrate the new linter warnings.
 
+Contributions
+-------------
+
+* ADDED: Support for negative durations to the `iso8601` contribution
+`duration_string/2` and `interval_string/2` predicates.
+
 Installers and installation scripts
 -----------------------------------
 
