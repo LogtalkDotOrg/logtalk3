@@ -23,9 +23,9 @@
 	imports((tool_diagnostics_common, tutor_explanations, options))).
 
 	:- info([
-		version is 1:0:2,
+		version is 1:0:3,
 		author is 'Paulo Moura',
-		date is 2026-07-19,
+		date is 2026-08-12,
 		comment is 'Intercepts compiler linter warnings and caches them as machine-readable diagnostics.',
 		remarks is [
 			'Usage' - 'Load this tool before compiling code to be checked by the built-in linter. Call ``enable/0-1`` before compiling code, ``disable/0`` when finished collecting warnings, and then query the cached warnings using either the legacy warning predicates or the diagnostics protocol predicates. The standalone ``sarif`` tool can generate SARIF reports by querying these diagnostics.',
@@ -419,10 +419,8 @@
 
 	rule_descriptions(RuleId, ShortDescription, FullDescription) :-
 		atomic_list_concat(['Logtalk linter warning: ', RuleId, '.'], ShortDescription),
-		( 	once((
-				warning(linter_warning(_Flag, RuleId, _File, _Lines, _Context, Properties)),
-				member(explanation(Explanation), Properties)
-			)) ->
+		( 	warning(linter_warning(_Flag, RuleId, _File, _Lines, _Context, Properties)),
+			member(explanation(Explanation), Properties) ->
 			FullDescription = Explanation
 		;	atomic_list_concat(['Warnings emitted by the Logtalk compiler linter for rule family ', RuleId, '.'], FullDescription)
 		).
