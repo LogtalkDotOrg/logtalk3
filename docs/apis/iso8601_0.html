@@ -1072,7 +1072,7 @@
 </div>
 <blockquote>
 <div><ul class="simple">
-<li><p>Duration string: An ISO 8601 duration string encodes a length of time (not a calendar date), starting with <code class="docutils literal notranslate"><span class="pre">P</span></code> and optionally using date and time parts such as <code class="docutils literal notranslate"><span class="pre">P3D</span></code> or <code class="docutils literal notranslate"><span class="pre">P1Y2M3DT4H5M6S</span></code>.</p></li>
+<li><p>Duration string: An ISO 8601 duration string encodes a length of time (not a calendar date), starting with <code class="docutils literal notranslate"><span class="pre">P</span></code> (or <code class="docutils literal notranslate"><span class="pre">-P</span></code> for negative durations) and optionally using date and time parts such as <code class="docutils literal notranslate"><span class="pre">P3D</span></code> or <code class="docutils literal notranslate"><span class="pre">P1Y2M3DT4H5M6S</span></code>.</p></li>
 </ul>
 </div></blockquote>
 <div class="line-block">
@@ -1087,6 +1087,11 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">duration_string(duration(1,2,3,4,5,6),String)</span></code></div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">String='P1Y2M3DT4H5M6S'</span></code></div>
+</div>
+<div class="line">Format a negative duration term</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">duration_string(duration(0,0,-3,0,0,0),String)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">String='-P3D'</span></code></div>
 </div>
 </div>
 </div>
@@ -1137,6 +1142,11 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">interval_string(interval(date_time(2026,4,7,14,30,0,0),date_time(2026,4,7,15,0,0,0)),String)</span></code></div>
 <div class="line"><code class="docutils literal notranslate"><span class="pre">String='2026-04-07T14:30:00Z/2026-04-07T15:00:00Z'</span></code></div>
+</div>
+<div class="line">Format with a negative duration term</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">interval_string(interval([2026,2,25],duration(0,0,-3,0,0,0)),String)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">String='2026-02-25/-P3D'</span></code></div>
 </div>
 </div>
 </div>

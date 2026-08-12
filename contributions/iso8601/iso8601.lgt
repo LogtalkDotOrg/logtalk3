@@ -231,11 +231,12 @@
 		comment is 'Conversion between an ISO 8601 duration string and a ``duration(Years,Months,Days,Hours,Minutes,Seconds)`` term.',
 		argnames is ['Duration', 'String'],
 		remarks is [
-			'Duration string' - 'An ISO 8601 duration string encodes a length of time (not a calendar date), starting with ``P`` and optionally using date and time parts such as ``P3D`` or ``P1Y2M3DT4H5M6S``.'
+			'Duration string' - 'An ISO 8601 duration string encodes a length of time (not a calendar date), starting with ``P`` (or ``-P`` for negative durations) and optionally using date and time parts such as ``P3D`` or ``P1Y2M3DT4H5M6S``.'
 		],
 		examples is [
 			'Parse a duration string' - duration_string(Duration, 'PT45M') - {Duration = duration(0,0,0,0,45,0)},
-			'Format a duration term' - duration_string(duration(1,2,3,4,5,6), String) - {String = 'P1Y2M3DT4H5M6S'}
+			'Format a duration term' - duration_string(duration(1,2,3,4,5,6), String) - {String = 'P1Y2M3DT4H5M6S'},
+			'Format a negative duration term' - duration_string(duration(0, 0, -3, 0, 0, 0), String) - {String = '-P3D'}
 		]
 	]).
 
@@ -251,7 +252,8 @@
 		examples is [
 			'Parse a start/date + duration interval' - interval_string(Interval, '2026-02-25/P3D') - {Interval = interval([2026,2,25],duration(0,0,3,0,0,0))},
 			'Format a date/date interval' - interval_string(interval([2026,2,25],[2026,3,1]), String) - {String = '2026-02-25/2026-03-01'},
-			'Format a date-time/date-time interval' - interval_string(interval(date_time(2026,4,7,14,30,0,0),date_time(2026,4,7,15,0,0,0)), String) - {String = '2026-04-07T14:30:00Z/2026-04-07T15:00:00Z'}
+			'Format a date-time/date-time interval' - interval_string(interval(date_time(2026,4,7,14,30,0,0),date_time(2026,4,7,15,0,0,0)), String) - {String = '2026-04-07T14:30:00Z/2026-04-07T15:00:00Z'},
+			'Format with a negative duration term' - interval_string(interval([2026,2,25], duration(0,0,-3,0,0,0)), String) - {String = '2026-02-25/-P3D'}
 		]
 	]).
 

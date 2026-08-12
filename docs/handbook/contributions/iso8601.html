@@ -76,6 +76,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#scope">Scope</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="pddl_parser.html"><code class="docutils literal notranslate"><span class="pre">pddl_parser</span></code></a></li>
@@ -124,6 +125,28 @@
 <span id="library-iso8601"></span><h1><code class="docutils literal notranslate"><span class="pre">iso8601</span></code><a class="headerlink" href="#iso8601" title="Link to this heading"></a></h1>
 <p>ISO 8601 (and European civil calendar) compliant library of date and
 time (clock) related predicates. That is, an ISO 8601 handler.</p>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<p>Open the
+<a class="reference external" href="../../apis/library_index.html#iso8601">../../apis/library_index.html#iso8601</a>
+link in a web browser.</p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
+<p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(iso8601(loader)).
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(iso8601(tester)).
+</pre></div>
+</div>
+</section>
+<section id="scope">
+<h2>Scope<a class="headerlink" href="#scope" title="Link to this heading"></a></h2>
 <p>The library supports date and time-of-day representations plus ISO 8601
 duration and interval string conversions using <code class="docutils literal notranslate"><span class="pre">time_string/3</span></code>,
 <code class="docutils literal notranslate"><span class="pre">date_time_string/3</span></code>, <code class="docutils literal notranslate"><span class="pre">duration_string/2</span></code>, and
@@ -148,44 +171,15 @@ date-time strings</p></li>
 UTC or offset date-time strings, using an offset in seconds from UTC</p></li>
 </ul>
 <p>An <strong>ISO 8601 duration string</strong> represents a time amount (e.g. <code class="docutils literal notranslate"><span class="pre">P3D</span></code>
-for three days or <code class="docutils literal notranslate"><span class="pre">P1Y2M3DT4H5M6S</span></code> for a mixed date/time duration).</p>
+for three days or <code class="docutils literal notranslate"><span class="pre">P1Y2M3DT4H5M6S</span></code> for a mixed date/time duration).
+Support negative durations.</p>
 <p>An <strong>ISO 8601 interval string</strong> represents a time interval using two
 parts separated by <code class="docutils literal notranslate"><span class="pre">/</span></code>, where each part can be a date, a date-time, or
 a duration (e.g. <code class="docutils literal notranslate"><span class="pre">2026-02-25/2026-03-01</span></code>,
 <code class="docutils literal notranslate"><span class="pre">2026-04-07T14:30:00Z/2026-04-07T15:00:00Z</span></code>,
 <code class="docutils literal notranslate"><span class="pre">2026-097T14:30:00Z/2026-097T15:00:00Z</span></code>,
-<code class="docutils literal notranslate"><span class="pre">2026-W15-2T14:30:00Z/PT30M</span></code>, or <code class="docutils literal notranslate"><span class="pre">2026-02-25/P3D</span></code>).</p>
-<p>Author: Daniel L. Dudley Created: 2004-02-18</p>
-<div class="line-block">
-<div class="line">Modified: 2014-09-26 (to use the <code class="docutils literal notranslate"><span class="pre">os</span></code> library object to get the
-current date)</div>
-<div class="line">Modified: 2026-02-25 (to add <code class="docutils literal notranslate"><span class="pre">duration_string/2</span></code> and
-<code class="docutils literal notranslate"><span class="pre">interval_string/2</span></code> predicates) Modified: 2026-04-07 (to add
-<code class="docutils literal notranslate"><span class="pre">time_string/3</span></code> and <code class="docutils literal notranslate"><span class="pre">date_time_string/3</span></code> predicates and extend
-<code class="docutils literal notranslate"><span class="pre">interval_string/2</span></code>, including ordinal-date and week-date date-time
-forms) Modified: 2026-04-08 (to add support for comma as fractional
-separator in <code class="docutils literal notranslate"><span class="pre">time_string/3</span></code> and <code class="docutils literal notranslate"><span class="pre">date_time_string/3</span></code> and for
-corresponding interval parsing)</div>
-</div>
-<section id="api-documentation">
-<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
-<p>Open the
-<a class="reference external" href="../../apis/library_index.html#iso8601">../../apis/library_index.html#iso8601</a>
-link in a web browser.</p>
-</section>
-<section id="loading">
-<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
-<p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(iso8601(loader)).
-</pre></div>
-</div>
-</section>
-<section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
-<p>To test this library predicates, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(iso8601(tester)).
-</pre></div>
-</div>
+<code class="docutils literal notranslate"><span class="pre">2026-W15-2T14:30:00Z/PT30M</span></code>, or <code class="docutils literal notranslate"><span class="pre">2026-02-25/P3D</span></code>). Support negative
+durations.</p>
 </section>
 </section>
 

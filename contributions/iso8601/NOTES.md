@@ -25,6 +25,33 @@ ________________________________________________________________________
 ISO 8601 (and European civil calendar) compliant library of date and time
 (clock) related predicates. That is, an ISO 8601 handler.
 
+
+API documentation
+-----------------
+
+Open the [../../apis/library_index.html#iso8601](../../apis/library_index.html#iso8601)
+link in a web browser.
+
+
+Loading
+-------
+
+To load all entities in this library, load the `loader.lgt` file:
+
+	| ?- logtalk_load(iso8601(loader)).
+
+
+Testing
+-------
+
+To test this library predicates, load the `tester.lgt` file:
+
+	| ?- logtalk_load(iso8601(tester)).
+
+
+Scope
+-----
+
 The library supports date and time-of-day representations plus ISO 8601
 duration and interval string conversions using `time_string/3`,
 `date_time_string/3`, `duration_string/2`, and `interval_string/2`.
@@ -49,41 +76,11 @@ Normalized term shapes are:
 	offset date-time strings, using an offset in seconds from UTC
 
 An **ISO 8601 duration string** represents a time amount (e.g. `P3D` for three
-days or `P1Y2M3DT4H5M6S` for a mixed date/time duration).
+days or `P1Y2M3DT4H5M6S` for a mixed date/time duration). Support negative
+durations.
 
 An **ISO 8601 interval string** represents a time interval using two parts
 separated by `/`, where each part can be a date, a date-time, or a duration
 (e.g. `2026-02-25/2026-03-01`, `2026-04-07T14:30:00Z/2026-04-07T15:00:00Z`,
 `2026-097T14:30:00Z/2026-097T15:00:00Z`, `2026-W15-2T14:30:00Z/PT30M`, or
-`2026-02-25/P3D`).
-
-Author:  Daniel L. Dudley
-Created: 2004-02-18
-
-Modified: 2014-09-26 (to use the `os` library object to get the current date)  
-Modified: 2026-02-25 (to add `duration_string/2` and `interval_string/2` predicates)
-Modified: 2026-04-07 (to add `time_string/3` and `date_time_string/3` predicates and extend `interval_string/2`, including ordinal-date and week-date date-time forms)
-Modified: 2026-04-08 (to add support for comma as fractional separator in `time_string/3` and `date_time_string/3` and for corresponding interval parsing)
-
-
-API documentation
------------------
-
-Open the [../../apis/library_index.html#iso8601](../../apis/library_index.html#iso8601)
-link in a web browser.
-
-
-Loading
--------
-
-To load all entities in this library, load the `loader.lgt` file:
-
-	| ?- logtalk_load(iso8601(loader)).
-
-
-Testing
--------
-
-To test this library predicates, load the `tester.lgt` file:
-
-	| ?- logtalk_load(iso8601(tester)).
+`2026-02-25/P3D`). Support negative durations.
