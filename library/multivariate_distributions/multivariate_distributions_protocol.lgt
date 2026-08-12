@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-11,
+		date is 2026-08-12,
 		comment is 'Multivariate probability distribution predicates.',
 		see_also is [multivariate_distributions(_), linear_algebra, sampling_protocol]
 	]).
@@ -598,9 +598,9 @@
 	]).
 
 	:- public(dirichlet_density/3).
-	:- mode(dirichlet_density(+list(number), +list(positive_number), -float), one_or_error).
+	:- mode(dirichlet_density(+list(number), +list(positive_number), -term), one_or_error).
 	:- info(dirichlet_density/3, [
-		comment is 'Computes the Dirichlet density at a point on the simplex.',
+		comment is 'Computes the Dirichlet density at a point on the simplex. At a boundary, returns the atom ``positive_infinity`` when all non-unit alphas corresponding to zero components are smaller than one, zero when they are all greater than one, or ``undefined`` when both cases occur.',
 		argnames is ['Point', 'Alphas', 'Density'],
 		exceptions is [
 			'Point is a variable or a partial list' - instantiation_error,
@@ -616,9 +616,9 @@
 	]).
 
 	:- public(dirichlet_log_density/3).
-	:- mode(dirichlet_log_density(+list(number), +list(positive_number), -float), one_or_error).
+	:- mode(dirichlet_log_density(+list(number), +list(positive_number), -term), one_or_error).
 	:- info(dirichlet_log_density/3, [
-		comment is 'Computes the Dirichlet log-density at a point on the simplex.',
+		comment is 'Computes the Dirichlet log-density at a point on the simplex. At a boundary, returns the atom ``positive_infinity`` when all non-unit alphas corresponding to zero components are smaller than one, ``negative_infinity`` when they are all greater than one, or ``undefined`` when both cases occur.',
 		argnames is ['Point', 'Alphas', 'LogDensity'],
 		exceptions is [
 			'Point is a variable or a partial list' - instantiation_error,
@@ -650,7 +650,8 @@
 			'Probabilities is neither a partial list nor a list' - type_error(list, 'Probabilities'),
 			'An element Element of the Probabilities list is neither a variable nor a number' - type_error(number, 'Element'),
 			'An element Element of the Probabilities list is not a probability' - domain_error(probability, 'Element'),
-			'Probabilities is empty' - domain_error(minimum_number_of_values(1), 'Probabilities')
+			'Probabilities is empty' - domain_error(minimum_number_of_values(1), 'Probabilities'),
+			'Probabilities do not sum to one' - domain_error(probability_distribution, 'Probabilities')
 		]
 	]).
 
@@ -670,7 +671,8 @@
 			'Probabilities is neither a partial list nor a list' - type_error(list, 'Probabilities'),
 			'An element Element of the Probabilities list is neither a variable nor a number' - type_error(number, 'Element'),
 			'An element Element of the Probabilities list is not a probability' - domain_error(probability, 'Element'),
-			'Probabilities is empty' - domain_error(minimum_number_of_values(1), 'Probabilities')
+			'Probabilities is empty' - domain_error(minimum_number_of_values(1), 'Probabilities'),
+			'Probabilities do not sum to one' - domain_error(probability_distribution, 'Probabilities')
 		]
 	]).
 
@@ -691,14 +693,16 @@
 			'Probabilities is neither a partial list nor a list' - type_error(list, 'Probabilities'),
 			'An element Element of the Probabilities list is neither a variable nor a number' - type_error(number, 'Element'),
 			'An element Element of the Probabilities list is not a probability' - domain_error(probability, 'Element'),
+			'Probabilities is empty' - domain_error(minimum_number_of_values(1), 'Probabilities'),
+			'Probabilities do not sum to one' - domain_error(probability_distribution, 'Probabilities'),
 			'Counts and Probabilities have different lengths' - domain_error(dimension_mismatch, 'Counts')
 		]
 	]).
 
 	:- public(multinomial_log_density/4).
-	:- mode(multinomial_log_density(+list(non_negative_integer), +non_negative_integer, +list(probability), -float), one_or_error).
+	:- mode(multinomial_log_density(+list(non_negative_integer), +non_negative_integer, +list(probability), -term), one_or_error).
 	:- info(multinomial_log_density/4, [
-		comment is 'Computes the multinomial log-probability mass at the given count vector.',
+		comment is 'Computes the multinomial log-probability mass at the given count vector. Returns the atom ``negative_infinity`` for an impossible count vector.',
 		argnames is ['Counts', 'Trials', 'Probabilities', 'LogDensity'],
 		exceptions is [
 			'Counts is a variable or a partial list' - instantiation_error,
@@ -712,6 +716,8 @@
 			'Probabilities is neither a partial list nor a list' - type_error(list, 'Probabilities'),
 			'An element Element of the Probabilities list is neither a variable nor a number' - type_error(number, 'Element'),
 			'An element Element of the Probabilities list is not a probability' - domain_error(probability, 'Element'),
+			'Probabilities is empty' - domain_error(minimum_number_of_values(1), 'Probabilities'),
+			'Probabilities do not sum to one' - domain_error(probability_distribution, 'Probabilities'),
 			'Counts and Probabilities have different lengths' - domain_error(dimension_mismatch, 'Counts')
 		]
 	]).
@@ -719,7 +725,7 @@
 	:- public(multinomial_quantile/4).
 	:- mode(multinomial_quantile(+number, +non_negative_integer, +list(probability), -list(non_negative_integer)), one_or_error).
 	:- info(multinomial_quantile/4, [
-		comment is 'Computes a multinomial quantile (count vector) for a probability strictly between zero and one. The returned vector is the smallest count vector (under lexicographic order of the probability-sorted categories) whose cumulative probability mass is at least the requested probability.',
+		comment is 'Computes a multinomial quantile (count vector) for a probability strictly between zero and one. Count vectors are ordered by decreasing probability mass and then by increasing lexicographic order for log-probabilities equal within a relative tolerance of 1.0e-12. The returned vector is the first whose cumulative probability mass is at least the requested probability. The exact computation is limited to 100000 count vectors.',
 		argnames is ['Probability', 'Trials', 'Probabilities', 'Quantile'],
 		exceptions is [
 			'Probability is not a number' - type_error(number, 'Probability'),
@@ -731,7 +737,9 @@
 			'Probabilities is neither a partial list nor a list' - type_error(list, 'Probabilities'),
 			'An element Element of the Probabilities list is neither a variable nor a number' - type_error(number, 'Element'),
 			'An element Element of the Probabilities list is not a probability' - domain_error(probability, 'Element'),
-			'Probabilities is empty' - domain_error(minimum_number_of_values(1), 'Probabilities')
+			'Probabilities is empty' - domain_error(minimum_number_of_values(1), 'Probabilities'),
+			'Probabilities do not sum to one' - domain_error(probability_distribution, 'Probabilities'),
+			'The number of count vectors exceeds the supported limit' - resource_error(multinomial_quantile_compositions)
 		]
 	]).
 

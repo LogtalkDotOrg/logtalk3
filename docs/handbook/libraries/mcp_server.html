@@ -410,6 +410,7 @@ Makes any Logtalk application available as a local MCP server using
 stdio transport. Implements the MCP 2025-06-18 specification (tools,
 prompts, resources, elicitation, structured output, and resource links).
 Supports version negotiation.</p>
+<p><a class="reference external" href="https://modelcontextprotocol.io/specification/2025-06-18">https://modelcontextprotocol.io/specification/2025-06-18</a></p>
 <p>The library uses the <code class="docutils literal notranslate"><span class="pre">json_rpc</span></code> library for JSON-RPC 2.0 message
 handling as currently required by the MCP specification.</p>
 <section id="api-documentation">
@@ -578,9 +579,9 @@ their application object:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> mcp_server<span class="o">::</span>start(<span class="s">&#39;my-server&#39;</span>, my_tools, [version(<span class="s">&#39;2.0.0&#39;</span>), server_title(<span class="s">&#39;My Server&#39;</span>)]).
 </pre></div>
 </div>
-<p>There should either be no output or only a Prolog backend term input
-prompt. Other than that, any spurious output will break the connection
-between a MCP client and the MCP server.</p>
+<p>There should either be no standard output or only a Prolog backend term
+input prompt. Other than that, any spurious standard output will break
+the connection between a MCP client and the MCP server.</p>
 </section>
 <section id="mcp-client-configuration">
 <h3>MCP client configuration<a class="headerlink" href="#mcp-client-configuration" title="Link to this heading"></a></h3>
@@ -633,8 +634,9 @@ instead:</p>
 <h3>Elicitation (interactive tools)<a class="headerlink" href="#elicitation-interactive-tools" title="Link to this heading"></a></h3>
 <p>Tools that need to ask the user questions during execution can use MCP
 elicitation <strong>if</strong> the MCP client supports it (tested and working with
-VSCode Copilot). The application declares the <code class="docutils literal notranslate"><span class="pre">elicitation</span></code> capability
-and implements <code class="docutils literal notranslate"><span class="pre">tool_call/4</span></code> instead of <code class="docutils literal notranslate"><span class="pre">tool_call/3</span></code>:</p>
+VSCode Copilot). The application declares that it requires the client
+<code class="docutils literal notranslate"><span class="pre">elicitation</span></code> capability and implements <code class="docutils literal notranslate"><span class="pre">tool_call/4</span></code> instead of
+<code class="docutils literal notranslate"><span class="pre">tool_call/3</span></code>:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(interactive_tools,
     <span class="k">implements</span>(mcp_tool_protocol)).
 
@@ -847,10 +849,12 @@ term serialized as the error text.</p></li>
 <h2>Protocol<a class="headerlink" href="#protocol" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">mcp_tool_protocol</span></code> protocol defines the following predicates:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">capabilities/1</span></code> — returns the list of additional capabilities
-needed by the application (e.g. <code class="docutils literal notranslate"><span class="pre">[elicitation]</span></code>, <code class="docutils literal notranslate"><span class="pre">[prompts]</span></code>,
-<code class="docutils literal notranslate"><span class="pre">[resources]</span></code>, or <code class="docutils literal notranslate"><span class="pre">[prompts,</span> <span class="pre">resources,</span> <span class="pre">elicitation]</span></code>); optional,
-defaults to <code class="docutils literal notranslate"><span class="pre">[]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">capabilities/1</span></code> — returns the list of additional features needed by
+the application (e.g. <code class="docutils literal notranslate"><span class="pre">[elicitation]</span></code>, <code class="docutils literal notranslate"><span class="pre">[prompts]</span></code>,
+<code class="docutils literal notranslate"><span class="pre">[resources]</span></code>, or <code class="docutils literal notranslate"><span class="pre">[prompts,</span> <span class="pre">resources,</span> <span class="pre">elicitation]</span></code>);
+<code class="docutils literal notranslate"><span class="pre">prompts</span></code> and <code class="docutils literal notranslate"><span class="pre">resources</span></code> are server capabilities while
+<code class="docutils literal notranslate"><span class="pre">elicitation</span></code> is a required client capability; optional, defaults to
+<code class="docutils literal notranslate"><span class="pre">[]</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tools/1</span></code> — returns the list of tool descriptors</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tool_call/3</span></code> — handles a tool call (optional; auto-dispatch is used
 when not defined)</p></li>
@@ -886,7 +890,7 @@ output (optional; when defined, the tool descriptor includes
 <td><p>Request</p></td>
 <td><p>MCP handshake</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">initialized</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">notifications/initialized</span></code></p></td>
 <td><p>Notification</p></td>
 <td><p>Client acknowledgment</p></td>
 </tr>
@@ -908,7 +912,8 @@ output (optional; when defined, the tool descriptor includes
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">prompts/get</span></code></p></td>
 <td><p>Request</p></td>
-<td><p>Gets a prompt with arguments</p></td>
+<td><p>Gets a prompt with
+arguments</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">resources/list</span></code></p></td>
 <td><p>Request</p></td>
@@ -920,7 +925,8 @@ output (optional; when defined, the tool descriptor includes
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">elicitation/create</span></code></p></td>
 <td><p>Request (=&gt;)</p></td>
-<td><p>Asks the client for user input</p></td>
+<td><p>Asks the client for user
+input</p></td>
 </tr>
 </tbody>
 </table>

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-11,
+		date is 2026-08-12,
 		comment is 'Unit tests for the "multivariate_distributions" library.'
 	]).
 
@@ -217,6 +217,34 @@
 	test(dirichlet_density_off_simplex, deterministic(Density =~= 0.0)) :-
 		multivariate_distributions(fast_random)::dirichlet_density([0.25, 0.25], [1.0, 1.0], Density).
 
+	test(dirichlet_density_uniform_boundary, deterministic(Density =~= 1.0)) :-
+		multivariate_distributions(fast_random)::dirichlet_density([0.0, 1.0], [1.0, 1.0], Density).
+
+	test(dirichlet_log_density_uniform_boundary, deterministic(LogDensity =~= 0.0)) :-
+		multivariate_distributions(fast_random)::dirichlet_log_density([0.0, 1.0], [1.0, 1.0], LogDensity).
+
+	test(dirichlet_density_zero_boundary, deterministic(Density == 0.0)) :-
+		multivariate_distributions(fast_random)::dirichlet_density([0.0, 1.0], [2.0, 1.0], Density).
+
+	test(dirichlet_log_density_zero_boundary, deterministic(LogDensity == negative_infinity)) :-
+		multivariate_distributions(fast_random)::dirichlet_log_density([0.0, 1.0], [2.0, 1.0], LogDensity).
+
+	test(dirichlet_density_infinite_boundary, deterministic(Density == positive_infinity)) :-
+		multivariate_distributions(fast_random)::dirichlet_density([0.0, 1.0], [0.5, 1.0], Density).
+
+	test(dirichlet_log_density_infinite_boundary, deterministic(LogDensity == positive_infinity)) :-
+		multivariate_distributions(fast_random)::dirichlet_log_density([0.0, 1.0], [0.5, 1.0], LogDensity).
+
+	test(dirichlet_density_mixed_boundary, deterministic(Density == undefined)) :-
+		multivariate_distributions(fast_random)::dirichlet_density([0.0, 0.0, 1.0], [0.5, 2.0, 1.0], Density).
+
+	test(dirichlet_log_density_mixed_boundary_order_independent, deterministic((LogDensity1 == undefined, LogDensity2 == undefined))) :-
+		multivariate_distributions(fast_random)::dirichlet_log_density([0.0, 0.0, 1.0], [0.5, 2.0, 1.0], LogDensity1),
+		multivariate_distributions(fast_random)::dirichlet_log_density([0.0, 0.0, 1.0], [2.0, 0.5, 1.0], LogDensity2).
+
+	test(dirichlet_log_density_mixed_boundary_absorbing, deterministic(LogDensity == undefined)) :-
+		multivariate_distributions(fast_random)::dirichlet_log_density([0.0, 0.0, 0.0, 1.0], [0.5, 2.0, 0.5, 1.0], LogDensity).
+
 	test(multinomial_3, deterministic) :-
 		multivariate_distributions(fast_random)::multinomial(10, [0.25, 0.75], [First, Second]),
 		^^assertion(First >= 0),
@@ -237,6 +265,21 @@
 	test(multinomial_log_density_4, deterministic(LogDensity =~= -0.6931471805599453)) :-
 		multivariate_distributions(fast_random)::multinomial_log_density([1, 1], 2, [0.5, 0.5], LogDensity).
 
+	test(multinomial_3_probability_distribution_error, error(domain_error(probability_distribution, [0.2, 0.2]))) :-
+		multivariate_distributions(fast_random)::multinomial(2, [0.2, 0.2], _).
+
+	test(multinomial_samples_4_probability_distribution_error, error(domain_error(probability_distribution, [0.2, 0.2]))) :-
+		multivariate_distributions(fast_random)::multinomial_samples(1, 2, [0.2, 0.2], _).
+
+	test(multinomial_density_4_probability_distribution_error, error(domain_error(probability_distribution, [0.2, 0.2]))) :-
+		multivariate_distributions(fast_random)::multinomial_density([1, 1], 2, [0.2, 0.2], _).
+
+	test(multinomial_log_density_4_probability_distribution_error, error(domain_error(probability_distribution, [0.2, 0.2]))) :-
+		multivariate_distributions(fast_random)::multinomial_log_density([1, 1], 2, [0.2, 0.2], _).
+
+	test(multinomial_density_4_empty_probabilities, error(domain_error(minimum_number_of_values(1), []))) :-
+		multivariate_distributions(fast_random)::multinomial_density([], 0, [], _).
+
 	test(multinomial_density_counts_mismatch, deterministic(Density =~= 0.0)) :-
 		multivariate_distributions(fast_random)::multinomial_density([1, 0], 2, [0.5, 0.5], Density).
 
@@ -245,5 +288,20 @@
 
 	test(multinomial_quantile_general_case, deterministic(Quantile == [1, 1])) :-
 		multivariate_distributions(fast_random)::multinomial_quantile(0.4, 2, [0.5, 0.5], Quantile).
+
+	test(multinomial_quantile_tie_lexicographic_order, deterministic(Quantile == [0, 2])) :-
+		multivariate_distributions(fast_random)::multinomial_quantile(0.6, 2, [0.5, 0.5], Quantile).
+
+	test(multinomial_quantile_approximate_tie_lexicographic_order, deterministic(Quantile == [0, 1, 4])) :-
+		multivariate_distributions(fast_random)::multinomial_quantile(0.87, 5, [0.3333333333333333, 0.3333333333333333, 0.3333333333333333], Quantile).
+
+	test(multinomial_quantile_zero_probability_category, deterministic(Quantile == [0, 2])) :-
+		multivariate_distributions(fast_random)::multinomial_quantile(0.5, 2, [0.0, 1.0], Quantile).
+
+	test(multinomial_quantile_probability_distribution_error, error(domain_error(probability_distribution, [0.2, 0.2]))) :-
+		multivariate_distributions(fast_random)::multinomial_quantile(0.5, 2, [0.2, 0.2], _).
+
+	test(multinomial_quantile_composition_resource_error, error(resource_error(multinomial_quantile_compositions))) :-
+		multivariate_distributions(fast_random)::multinomial_quantile(0.5, 20, [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1], _).
 
 :- end_object.

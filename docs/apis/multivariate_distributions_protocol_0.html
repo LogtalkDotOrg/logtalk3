@@ -429,7 +429,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-08-11</div>
+<div class="line"><strong>Date:</strong> 2026-08-12</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -2435,7 +2435,7 @@
 </section>
 <section id="dirichlet-density-3">
 <span id="multivariate-distributions-protocol-0-dirichlet-density-3"></span><span id="index-27"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">dirichlet_density/3</span></code></a><a class="headerlink" href="#dirichlet-density-3" title="Link to this heading"></a></h3>
-<p>Computes the Dirichlet density at a point on the simplex.</p>
+<p>Computes the Dirichlet density at a point on the simplex. At a boundary, returns the atom <code class="docutils literal notranslate"><span class="pre">positive_infinity</span></code> when all non-unit alphas corresponding to zero components are smaller than one, zero when they are all greater than one, or <code class="docutils literal notranslate"><span class="pre">undefined</span></code> when both cases occur.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -2449,7 +2449,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dirichlet_density(+list(number),+list(positive_number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dirichlet_density(+list(number),+list(positive_number),-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
@@ -2497,7 +2497,7 @@
 </section>
 <section id="dirichlet-log-density-3">
 <span id="multivariate-distributions-protocol-0-dirichlet-log-density-3"></span><span id="index-28"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">dirichlet_log_density/3</span></code></a><a class="headerlink" href="#dirichlet-log-density-3" title="Link to this heading"></a></h3>
-<p>Computes the Dirichlet log-density at a point on the simplex.</p>
+<p>Computes the Dirichlet log-density at a point on the simplex. At a boundary, returns the atom <code class="docutils literal notranslate"><span class="pre">positive_infinity</span></code> when all non-unit alphas corresponding to zero components are smaller than one, <code class="docutils literal notranslate"><span class="pre">negative_infinity</span></code> when they are all greater than one, or <code class="docutils literal notranslate"><span class="pre">undefined</span></code> when both cases occur.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -2511,7 +2511,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dirichlet_log_density(+list(number),+list(positive_number),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dirichlet_log_density(+list(number),+list(positive_number),-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
@@ -2611,6 +2611,10 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),Probabilities)</span></code></div>
 </div>
+<div class="line">Probabilities do not sum to one:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(probability_distribution,Probabilities)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -2680,6 +2684,10 @@
 <div class="line">Probabilities is empty:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),Probabilities)</span></code></div>
+</div>
+<div class="line">Probabilities do not sum to one:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(probability_distribution,Probabilities)</span></code></div>
 </div>
 </div>
 </div>
@@ -2751,6 +2759,14 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(probability,Element)</span></code></div>
 </div>
+<div class="line">Probabilities is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),Probabilities)</span></code></div>
+</div>
+<div class="line">Probabilities do not sum to one:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(probability_distribution,Probabilities)</span></code></div>
+</div>
 <div class="line">Counts and Probabilities have different lengths:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(dimension_mismatch,Counts)</span></code></div>
@@ -2761,7 +2777,7 @@
 </section>
 <section id="multinomial-log-density-4">
 <span id="multivariate-distributions-protocol-0-multinomial-log-density-4"></span><span id="index-32"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">multinomial_log_density/4</span></code></a><a class="headerlink" href="#multinomial-log-density-4" title="Link to this heading"></a></h3>
-<p>Computes the multinomial log-probability mass at the given count vector.</p>
+<p>Computes the multinomial log-probability mass at the given count vector. Returns the atom <code class="docutils literal notranslate"><span class="pre">negative_infinity</span></code> for an impossible count vector.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -2775,7 +2791,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">multinomial_log_density(+list(non_negative_integer),+non_negative_integer,+list(probability),-float)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">multinomial_log_density(+list(non_negative_integer),+non_negative_integer,+list(probability),-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
@@ -2825,6 +2841,14 @@
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(probability,Element)</span></code></div>
 </div>
+<div class="line">Probabilities is empty:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),Probabilities)</span></code></div>
+</div>
+<div class="line">Probabilities do not sum to one:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(probability_distribution,Probabilities)</span></code></div>
+</div>
 <div class="line">Counts and Probabilities have different lengths:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(dimension_mismatch,Counts)</span></code></div>
@@ -2835,7 +2859,7 @@
 </section>
 <section id="multinomial-quantile-4">
 <span id="multivariate-distributions-protocol-0-multinomial-quantile-4"></span><span id="index-33"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">multinomial_quantile/4</span></code></a><a class="headerlink" href="#multinomial-quantile-4" title="Link to this heading"></a></h3>
-<p>Computes a multinomial quantile (count vector) for a probability strictly between zero and one. The returned vector is the smallest count vector (under lexicographic order of the probability-sorted categories) whose cumulative probability mass is at least the requested probability.</p>
+<p>Computes a multinomial quantile (count vector) for a probability strictly between zero and one. Count vectors are ordered by decreasing probability mass and then by increasing lexicographic order for log-probabilities equal within a relative tolerance of 1.0e-12. The returned vector is the first whose cumulative probability mass is at least the requested probability. The exact computation is limited to 100000 count vectors.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -2894,6 +2918,14 @@
 <div class="line">Probabilities is empty:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),Probabilities)</span></code></div>
+</div>
+<div class="line">Probabilities do not sum to one:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(probability_distribution,Probabilities)</span></code></div>
+</div>
+<div class="line">The number of count vectors exceeds the supported limit:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_error(multinomial_quantile_compositions)</span></code></div>
 </div>
 </div>
 </div>

@@ -438,6 +438,29 @@ covariance is the scale matrix multiplied by
 representation. A latent vector of length d maps to a simplex vector of
 length d+1, with the last simplex component used as the fixed reference
 component.</p>
+<p>Dirichlet densities support simplex boundary points. Depending on the
+alpha parameters, boundary density and log-density values may be
+represented by the atoms <code class="docutils literal notranslate"><span class="pre">positive_infinity</span></code> and
+<code class="docutils literal notranslate"><span class="pre">negative_infinity</span></code>. When zero components have both alphas smaller
+than one and alphas greater than one, the boundary limit is
+path-dependent and both predicates return <code class="docutils literal notranslate"><span class="pre">undefined</span></code>.</p>
+<p>Multinomial probability lists must be nonempty and sum to one within a
+tolerance of <code class="docutils literal notranslate"><span class="pre">1.0e-12</span></code>. Multinomial quantiles order count vectors by
+decreasing probability mass and use increasing lexicographic order to
+break log-probability ties within a relative tolerance of <code class="docutils literal notranslate"><span class="pre">1.0e-12</span></code>.</p>
+<p>Multinomial sampling performs one linear category selection and one
+count-vector update per trial, requiring time proportional to the
+product of the trial and category counts. Multinomial quantiles
+enumerate and sort the complete count-vector state space. For <code class="docutils literal notranslate"><span class="pre">Trials</span></code>
+trials and <code class="docutils literal notranslate"><span class="pre">Categories</span></code> categories, this space contains
+<code class="docutils literal notranslate"><span class="pre">binomial(Trials</span> <span class="pre">+</span> <span class="pre">Categories</span> <span class="pre">-</span> <span class="pre">1,</span> <span class="pre">Categories</span> <span class="pre">-</span> <span class="pre">1)</span></code> vectors; the
+implementation therefore requires combinatorial time and memory and
+rejects queries exceeding 100000 vectors. Inputs near that limit can
+still require substantial runtime and memory.</p>
+<p>Normal, Student’s t, and logistic-normal sampling requires an
+eigendecomposition of the covariance or scale matrix. Batch sampling
+predicates factorize the matrix once and should be preferred when
+generating multiple samples.</p>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>

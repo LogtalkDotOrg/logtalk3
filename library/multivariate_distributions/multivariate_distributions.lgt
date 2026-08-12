@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-11,
+		date is 2026-08-12,
 		comment is 'Multivariate probability distributions using an injected random source.',
 		parameters is [
 			'Random' - 'An object implementing the ``sampling_protocol`` protocol.'
@@ -47,11 +47,11 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2, member/2, sort/4
+		append/3, length/2, member/2, sort/3
 	]).
 
-	:- uses(natural, [
-		factorial/2
+	:- uses(numberlist, [
+		sum/2
 	]).
 
 	:- uses(type, [
@@ -181,6 +181,10 @@
 		dirichlet_log_density(Point, Alphas, LogDensity),
 		(	LogDensity == negative_infinity ->
 			Density = 0.0
+		;	LogDensity == positive_infinity ->
+			Density = positive_infinity
+		;	LogDensity == undefined ->
+			Density = undefined
 		;	Density is exp(LogDensity)
 		).
 
@@ -192,9 +196,12 @@
 		length(Alphas, AlphasLength),
 		(	PointLength =:= AlphasLength ->
 			dirichlet_log_terms(Point, Alphas, Evaluation),
-			(	Evaluation = inside(PointSum, AlphaSum, LogGammaAlphas, LogKernel), abs(PointSum - 1.0) =< 1.0e-12 ->
-				log_gamma(AlphaSum, LogGammaSum),
-				LogDensity is LogGammaSum - LogGammaAlphas + LogKernel
+			(	Evaluation = inside(PointSum, AlphaSum, LogGammaAlphas, Boundary, LogKernel), abs(PointSum - 1.0) =< 1.0e-12 ->
+				(	Boundary == finite ->
+					log_gamma(AlphaSum, LogGammaSum),
+					LogDensity is LogGammaSum - LogGammaAlphas + LogKernel
+				;	LogDensity = Boundary
+				)
 			;	LogDensity = negative_infinity
 			)
 		;	domain_error(dimension_mismatch, Point)
@@ -223,14 +230,13 @@
 		context(Context),
 		check(list(non_negative_integer), Counts, Context),
 		check(non_negative_integer, Trials, Context),
-		check(list(probability), Probabilities, Context),
+		check_multinomial_probabilities(Probabilities),
 		length(Counts, CountsLength),
 		length(Probabilities, ProbabilitiesLength),
 		(	CountsLength =:= ProbabilitiesLength ->
 			sum_counts(Counts, 0, Total),
 			(	Total =:= Trials ->
-				log_gamma(Trials + 1.0, LogCoefficient),
-				multinomial_log_terms(Counts, Probabilities, LogCoefficient, LogDensity)
+				multinomial_log_probability(Counts, Trials, Probabilities, LogDensity)
 			;	LogDensity = negative_infinity
 			)
 		;	domain_error(dimension_mismatch, Counts)
@@ -240,25 +246,24 @@
 		context(Context),
 		check(open_probability, Probability, Context),
 		check(non_negative_integer, Trials, Context),
-		check(list(probability), Probabilities, Context),
-		(	Probabilities == [] ->
-			domain_error(minimum_number_of_values(1), Probabilities)
-		;	true
-		),
+		check_multinomial_probabilities(Probabilities),
 		(	Trials =:= 0 ->
 			% trivial cases
 			findall(0, member(_, Probabilities), Quantile)
 		;	% main computation
+			length(Probabilities, Categories),
+			check_multinomial_composition_count(Trials, Categories),
+			log_gamma(Trials + 1.0, LogCoefficient),
 			findall(
-				Prob-Counts,
+				LogProbability-Counts,
 				(	multinomial_composition(Trials, Probabilities, Counts),
-					multinomial_pmf(Counts, Trials, Probabilities, Prob)
+					multinomial_log_terms(Counts, Probabilities, LogCoefficient, LogProbability)
 				),
 				Pairs0
 			),
-			% sort by probability descending, break ties by lexicographic order of Counts
-			sort(1, @>=, Pairs0, Pairs),
-			accumulate_to_quantile(Pairs, Probability, 0.0, Quantile)
+			sort(compare_multinomial_quantile_pairs, Pairs0, Pairs),
+			LogTarget is log(Probability),
+			accumulate_to_quantile(Pairs, LogTarget, negative_infinity, Quantile)
 		).
 
 	% auxiliary predicates
@@ -343,26 +348,54 @@
 	check_multinomial_parameters(Trials, Probabilities) :-
 		context(Context),
 		check(non_negative_integer, Trials, Context),
+		check_multinomial_probabilities(Probabilities).
+
+	check_multinomial_probabilities(Probabilities) :-
+		context(Context),
 		check(list(probability), Probabilities, Context),
 		(	Probabilities == [] ->
 			domain_error(minimum_number_of_values(1), Probabilities)
-		;	true
+		;	sum(Probabilities, Sum),
+			(	abs(Sum - 1.0) =< 1.0e-12 ->
+				true
+			;	domain_error(probability_distribution, Probabilities)
+			)
 		).
 
-	dirichlet_log_terms([], [], inside(0.0, 0.0, 0.0, 0.0)).
+	dirichlet_log_terms([], [], inside(0.0, 0.0, 0.0, finite, 0.0)).
 	dirichlet_log_terms([Value| Values], [Alpha| Alphas], Evaluation) :-
-		(	Value > 0.0, Value =< 1.0 ->
+		(	Value >= 0.0, Value =< 1.0 ->
 			log_gamma(Alpha, LogGammaAlpha),
 			dirichlet_log_terms(Values, Alphas, RestEvaluation),
-			(	RestEvaluation = inside(PointSum0, AlphaSum0, LogGammaAlphas0, LogKernel0) ->
+			(	RestEvaluation = inside(PointSum0, AlphaSum0, LogGammaAlphas0, Boundary0, LogKernel0) ->
 				PointSum is PointSum0 + Value,
 				AlphaSum is AlphaSum0 + Alpha,
 				LogGammaAlphas is LogGammaAlphas0 + LogGammaAlpha,
-				LogKernel is LogKernel0 + (Alpha - 1.0) * log(Value),
-				Evaluation = inside(PointSum, AlphaSum, LogGammaAlphas, LogKernel)
+				dirichlet_boundary(Value, Alpha, Boundary0, Boundary, LogKernel0, LogKernel),
+				Evaluation = inside(PointSum, AlphaSum, LogGammaAlphas, Boundary, LogKernel)
 			;	Evaluation = outside
 			)
-		; Evaluation = outside
+		;	Evaluation = outside
+		).
+
+	dirichlet_boundary(Value, Alpha, Boundary, Boundary, LogKernel0, LogKernel) :-
+		Value > 0.0,
+		!,
+		LogKernel is LogKernel0 + (Alpha - 1.0) * log(Value).
+	dirichlet_boundary(_Value, Alpha, Boundary0, Boundary, LogKernel, LogKernel) :-
+		(	Boundary0 == undefined ->
+			Boundary = undefined
+		;	Alpha < 1.0 ->
+			(	Boundary0 == negative_infinity ->
+				Boundary = undefined
+			;	Boundary = positive_infinity
+			)
+		;	Alpha > 1.0 ->
+			(	Boundary0 == positive_infinity ->
+				Boundary = undefined
+			;	Boundary = negative_infinity
+			)
+		;	Boundary = Boundary0
 		).
 
 	sum_counts([], Total, Total).
@@ -552,8 +585,8 @@
 		1.5056327351493116e-7
 	]).
 
-	% Generate a composition of N into K non-negative integers
-	% (K = length of Probabilities).  Uses a simple recursive generator.
+	% generate a composition of N into K non-negative integers
+	% (K = length of Probabilities); uses a simple recursive generator
 	multinomial_composition(N, Probabilities, Counts) :-
 		length(Probabilities, K),
 		length(Counts, K),
@@ -563,47 +596,71 @@
 		!.
 	composition(N, 1, [N]) :-
 		!.
-	composition(N, K, [C|Cs]) :-
+	composition(N, K, [Count| Counts]) :-
 		K > 1,
-		between(0, N, C),
-		N1 is N - C,
+		between(0, N, Count),
+		N1 is N - Count,
 		K1 is K - 1,
-		composition(N1, K1, Cs).
+		composition(N1, K1, Counts).
 
-	% Multinomial probability mass function
-	multinomial_pmf(Counts, Trials, Probabilities, Prob) :-
-		multinomial_coefficient(Trials, Counts, Coeff),
-		pow_product(Counts, Probabilities, 1.0, Prod),
-		Prob is Coeff * Prod.
+	multinomial_log_probability(Counts, Trials, Probabilities, LogProbability) :-
+		log_gamma(Trials + 1.0, LogCoefficient),
+		multinomial_log_terms(Counts, Probabilities, LogCoefficient, LogProbability).
 
-	multinomial_coefficient(N, Counts, Coeff) :-
-		factorial(N, NFact),
-		findall(Fact, (member(Count, Counts), factorial(Count, Fact)), Facts),
-		product_list(Facts, 1, Denom),
-		Coeff is NFact / Denom.
+	compare_multinomial_quantile_pairs(Order, LogProbability1-Counts1, LogProbability2-Counts2) :-
+		(	LogProbability1 == negative_infinity ->
+			(	LogProbability2 == negative_infinity ->
+				compare(Order, Counts1, Counts2)
+			;	Order = (>)
+			)
+		;	LogProbability2 == negative_infinity ->
+			Order = (<)
+		;	approximately_equal_log_probabilities(LogProbability1, LogProbability2) ->
+			compare(Order, Counts1, Counts2)
+		;	LogProbability1 > LogProbability2 ->
+			Order = (<)
+		;	Order = (>)
+		).
 
-	product_list([], Acc, Acc).
-	product_list([X|Xs], Acc0, Acc) :-
-		Acc1 is Acc0 * X,
-		product_list(Xs, Acc1, Acc).
+	approximately_equal_log_probabilities(LogProbability1, LogProbability2) :-
+		Scale is max(1.0, max(abs(LogProbability1), abs(LogProbability2))),
+		abs(LogProbability1 - LogProbability2) =< Scale * 1.0e-12.
 
-	pow_product([], [], Acc, Acc).
-	pow_product([C|Cs], [P|Ps], Acc0, Acc) :-
-		(	C =:= 0 ->
-			Term = 1.0
-		;	Term is P ** C
-		),
-		Acc1 is Acc0 * Term,
-		pow_product(Cs, Ps, Acc1, Acc).
+	accumulate_to_quantile([LogProbability-Counts| Pairs], LogTarget, LogCumulativeMass0, Quantile) :-
+		log_sum_exp(LogCumulativeMass0, LogProbability, LogCumulativeMass),
+		(	LogCumulativeMass >= LogTarget ->
+			Quantile = Counts
+		;	accumulate_to_quantile(Pairs, LogTarget, LogCumulativeMass, Quantile)
+		).
 
-	% Walk the probability-sorted list until the cumulative mass
-	% reaches or exceeds the requested probability.
-	accumulate_to_quantile([Prob-Counts|_], Target, Cum0, Counts) :-
-		Cum is Cum0 + Prob,
-		Cum >= Target,
+	log_sum_exp(negative_infinity, LogValue, LogValue) :-
 		!.
-	accumulate_to_quantile([Prob-_|Pairs], Target, Cum0, Quantile) :-
-		Cum is Cum0 + Prob,
-		accumulate_to_quantile(Pairs, Target, Cum, Quantile).
+	log_sum_exp(LogValue, negative_infinity, LogValue) :-
+		!.
+	log_sum_exp(LogValue1, LogValue2, LogSum) :-
+		(	LogValue1 >= LogValue2 ->
+			LogSum is LogValue1 + log(1.0 + exp(LogValue2 - LogValue1))
+		;	LogSum is LogValue2 + log(1.0 + exp(LogValue1 - LogValue2))
+		).
+
+	check_multinomial_composition_count(Trials, Categories) :-
+		Total is Trials + Categories - 1,
+		Choices0 is Categories - 1,
+		(	Choices0 =< Trials ->
+			Choices = Choices0
+		;	Choices = Trials
+		),
+		check_binomial_count(1, Choices, Total, 1).
+
+	check_binomial_count(Index, Choices, _Total, _Count) :-
+		Index > Choices,
+		!.
+	check_binomial_count(Index, Choices, Total, Count0) :-
+		Count is Count0 * (Total - Index + 1) // Index,
+		(	Count =< 100000 ->
+			NextIndex is Index + 1,
+			check_binomial_count(NextIndex, Choices, Total, Count)
+		;	resource_error(multinomial_quantile_compositions)
+		).
 
 :- end_object.

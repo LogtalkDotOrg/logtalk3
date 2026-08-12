@@ -15,7 +15,7 @@ Multivariate probability distribution predicates.
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-11
+| **Date:** 2026-08-12
 
 | **Compilation flags:**
 |    ``static``
@@ -1218,7 +1218,7 @@ Returns the requested number of Dirichlet distributed random vectors.
 ``dirichlet_density/3``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Computes the Dirichlet density at a point on the simplex.
+Computes the Dirichlet density at a point on the simplex. At a boundary, returns the atom ``positive_infinity`` when all non-unit alphas corresponding to zero components are smaller than one, zero when they are all greater than one, or ``undefined`` when both cases occur.
 
 | **Compilation flags:**
 |    ``static``
@@ -1226,7 +1226,7 @@ Computes the Dirichlet density at a point on the simplex.
 | **Template:**
 |    ``dirichlet_density(Point,Alphas,Density)``
 | **Mode and number of proofs:**
-|    ``dirichlet_density(+list(number),+list(positive_number),-float)`` - ``one_or_error``
+|    ``dirichlet_density(+list(number),+list(positive_number),-term)`` - ``one_or_error``
 
 | **Exceptions:**
 |    Point is a variable or a partial list:
@@ -1257,7 +1257,7 @@ Computes the Dirichlet density at a point on the simplex.
 ``dirichlet_log_density/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Computes the Dirichlet log-density at a point on the simplex.
+Computes the Dirichlet log-density at a point on the simplex. At a boundary, returns the atom ``positive_infinity`` when all non-unit alphas corresponding to zero components are smaller than one, ``negative_infinity`` when they are all greater than one, or ``undefined`` when both cases occur.
 
 | **Compilation flags:**
 |    ``static``
@@ -1265,7 +1265,7 @@ Computes the Dirichlet log-density at a point on the simplex.
 | **Template:**
 |    ``dirichlet_log_density(Point,Alphas,LogDensity)``
 | **Mode and number of proofs:**
-|    ``dirichlet_log_density(+list(number),+list(positive_number),-float)`` - ``one_or_error``
+|    ``dirichlet_log_density(+list(number),+list(positive_number),-term)`` - ``one_or_error``
 
 | **Exceptions:**
 |    Point is a variable or a partial list:
@@ -1323,6 +1323,8 @@ Returns a multinomial distributed random count vector.
 |        ``domain_error(probability,Element)``
 |    Probabilities is empty:
 |        ``domain_error(minimum_number_of_values(1),Probabilities)``
+|    Probabilities do not sum to one:
+|        ``domain_error(probability_distribution,Probabilities)``
 
 
 ------------
@@ -1366,6 +1368,8 @@ Returns the requested number of multinomial distributed random count vectors.
 |        ``domain_error(probability,Element)``
 |    Probabilities is empty:
 |        ``domain_error(minimum_number_of_values(1),Probabilities)``
+|    Probabilities do not sum to one:
+|        ``domain_error(probability_distribution,Probabilities)``
 
 
 ------------
@@ -1409,6 +1413,10 @@ Computes the multinomial probability mass at the given count vector.
 |        ``type_error(number,Element)``
 |    An element Element of the Probabilities list is not a probability:
 |        ``domain_error(probability,Element)``
+|    Probabilities is empty:
+|        ``domain_error(minimum_number_of_values(1),Probabilities)``
+|    Probabilities do not sum to one:
+|        ``domain_error(probability_distribution,Probabilities)``
 |    Counts and Probabilities have different lengths:
 |        ``domain_error(dimension_mismatch,Counts)``
 
@@ -1421,7 +1429,7 @@ Computes the multinomial probability mass at the given count vector.
 ``multinomial_log_density/4``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Computes the multinomial log-probability mass at the given count vector.
+Computes the multinomial log-probability mass at the given count vector. Returns the atom ``negative_infinity`` for an impossible count vector.
 
 | **Compilation flags:**
 |    ``static``
@@ -1429,7 +1437,7 @@ Computes the multinomial log-probability mass at the given count vector.
 | **Template:**
 |    ``multinomial_log_density(Counts,Trials,Probabilities,LogDensity)``
 | **Mode and number of proofs:**
-|    ``multinomial_log_density(+list(non_negative_integer),+non_negative_integer,+list(probability),-float)`` - ``one_or_error``
+|    ``multinomial_log_density(+list(non_negative_integer),+non_negative_integer,+list(probability),-term)`` - ``one_or_error``
 
 | **Exceptions:**
 |    Counts is a variable or a partial list:
@@ -1454,6 +1462,10 @@ Computes the multinomial log-probability mass at the given count vector.
 |        ``type_error(number,Element)``
 |    An element Element of the Probabilities list is not a probability:
 |        ``domain_error(probability,Element)``
+|    Probabilities is empty:
+|        ``domain_error(minimum_number_of_values(1),Probabilities)``
+|    Probabilities do not sum to one:
+|        ``domain_error(probability_distribution,Probabilities)``
 |    Counts and Probabilities have different lengths:
 |        ``domain_error(dimension_mismatch,Counts)``
 
@@ -1466,7 +1478,7 @@ Computes the multinomial log-probability mass at the given count vector.
 ``multinomial_quantile/4``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Computes a multinomial quantile (count vector) for a probability strictly between zero and one. The returned vector is the smallest count vector (under lexicographic order of the probability-sorted categories) whose cumulative probability mass is at least the requested probability.
+Computes a multinomial quantile (count vector) for a probability strictly between zero and one. Count vectors are ordered by decreasing probability mass and then by increasing lexicographic order for log-probabilities equal within a relative tolerance of 1.0e-12. The returned vector is the first whose cumulative probability mass is at least the requested probability. The exact computation is limited to 100000 count vectors.
 
 | **Compilation flags:**
 |    ``static``
@@ -1497,6 +1509,10 @@ Computes a multinomial quantile (count vector) for a probability strictly betwee
 |        ``domain_error(probability,Element)``
 |    Probabilities is empty:
 |        ``domain_error(minimum_number_of_values(1),Probabilities)``
+|    Probabilities do not sum to one:
+|        ``domain_error(probability_distribution,Probabilities)``
+|    The number of count vectors exceeds the supported limit:
+|        ``resource_error(multinomial_quantile_compositions)``
 
 
 ------------

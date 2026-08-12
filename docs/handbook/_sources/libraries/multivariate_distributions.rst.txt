@@ -59,6 +59,33 @@ representation. A latent vector of length d maps to a simplex vector of
 length d+1, with the last simplex component used as the fixed reference
 component.
 
+Dirichlet densities support simplex boundary points. Depending on the
+alpha parameters, boundary density and log-density values may be
+represented by the atoms ``positive_infinity`` and
+``negative_infinity``. When zero components have both alphas smaller
+than one and alphas greater than one, the boundary limit is
+path-dependent and both predicates return ``undefined``.
+
+Multinomial probability lists must be nonempty and sum to one within a
+tolerance of ``1.0e-12``. Multinomial quantiles order count vectors by
+decreasing probability mass and use increasing lexicographic order to
+break log-probability ties within a relative tolerance of ``1.0e-12``.
+
+Multinomial sampling performs one linear category selection and one
+count-vector update per trial, requiring time proportional to the
+product of the trial and category counts. Multinomial quantiles
+enumerate and sort the complete count-vector state space. For ``Trials``
+trials and ``Categories`` categories, this space contains
+``binomial(Trials + Categories - 1, Categories - 1)`` vectors; the
+implementation therefore requires combinatorial time and memory and
+rejects queries exceeding 100000 vectors. Inputs near that limit can
+still require substantial runtime and memory.
+
+Normal, Student's t, and logistic-normal sampling requires an
+eigendecomposition of the covariance or scale matrix. Batch sampling
+predicates factorize the matrix once and should be preferred when
+generating multiple samples.
+
 Examples
 --------
 
