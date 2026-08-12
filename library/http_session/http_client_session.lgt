@@ -23,9 +23,9 @@
 	imports([options, http_origin_site_helpers])).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-07-12,
+		date is 2026-08-12,
 		comment is 'Stateful HTTP client sessions that add cookie persistence on top of the stateless ``http_client`` facade.',
 		parameters is [
 			'HTTPTransport' - 'The object implementing ``http_transport_protocol``.'
@@ -280,32 +280,27 @@
 	default_option(connection_options([])).
 	default_option(properties([])).
 
-	valid_option(cookie_jar(new)) :-
-		!.
-	valid_option(cookie_jar(none)) :-
-		!.
-	valid_option(cookie_jar(Jar)) :-
-		nonvar(Jar),
-		http_cookie_jar::cookie_count(Jar, _Count),
-		!.
+	valid_option(cookie_jar(CookieJar)) :-
+		(	CookieJar == new ->
+			true
+		;	CookieJar == none ->
+			true
+		;	nonvar(CookieJar),
+			http_cookie_jar::cookie_count(CookieJar, _Count)
+		).
 	valid_option(cookies_file(File)) :-
-		atom(File),
-		!.
+		atom(File).
 	valid_option(headers(Headers)) :-
-		proper_list(Headers),
-		!.
+		proper_list(Headers).
 	valid_option(query(QueryPairs)) :-
-		proper_list(QueryPairs),
-		!.
+		proper_list(QueryPairs).
 	valid_option(version(http(Major, Minor))) :-
 		integer(Major),
 		Major >= 0,
 		integer(Minor),
-		Minor >= 0,
-		!.
+		Minor >= 0.
 	valid_option(connection_options(ConnectionOptions)) :-
-		proper_list(ConnectionOptions),
-		!.
+		proper_list(ConnectionOptions).
 	valid_option(properties(Properties)) :-
 		proper_list(Properties).
 

@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-07-13,
+		date is 2026-08-12,
 		comment is 'Auxiliary object defining the supported session-loop options and default values for callback-driven WebSocket services.'
 	]).
 
@@ -36,20 +36,26 @@
 		argnames is ['UserOptions', 'MergedOptions']
 	]).
 
-	valid_option(auto_pong(on)).
-	valid_option(auto_pong(off)).
-	valid_option(keepalive_interval(none)).
+	valid_option(auto_pong(AutoPong)) :-
+		once((AutoPong == on; AutoPong == off)).
 	valid_option(keepalive_interval(Interval)) :-
-		number(Interval),
-		Interval > 0.
-	valid_option(idle_timeout(none)).
-	valid_option(idle_timeout(Interval)) :-
-		number(Interval),
-		Interval > 0.
-	valid_option(max_payload_length(none)).
+		(	Interval == none ->
+			true
+		;	number(Interval),
+			Interval > 0
+		).
+	valid_option(idle_timeout(Timeout)) :-
+		(	Timeout == none ->
+			true
+		;	number(Timeout),
+			Timeout > 0
+		).
 	valid_option(max_payload_length(MaxPayloadLength)) :-
-		integer(MaxPayloadLength),
-		MaxPayloadLength >= 0.
+		(	MaxPayloadLength == none ->
+			true
+		;	integer(MaxPayloadLength),
+			MaxPayloadLength >= 0
+		).
 
 	default_option(auto_pong(off)).
 	default_option(keepalive_interval(none)).

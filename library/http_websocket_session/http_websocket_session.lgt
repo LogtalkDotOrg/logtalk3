@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:0:2,
 		author is 'Paulo Moura',
-		date is 2026-08-02,
+		date is 2026-08-12,
 		comment is 'Auxiliary object defining the supported read options and default values for HTTP WebSocket sessions.'
 	]).
 
@@ -36,12 +36,14 @@
 		argnames is ['UserOptions', 'MergedOptions']
 	]).
 
-	valid_option(auto_pong(on)).
-	valid_option(auto_pong(off)).
-	valid_option(max_payload_length(none)).
+	valid_option(auto_pong(AutoPong)) :-
+		once((AutoPong == on; AutoPong == off)).
 	valid_option(max_payload_length(MaxPayloadLength)) :-
-		integer(MaxPayloadLength),
-		MaxPayloadLength >= 0.
+		(	MaxPayloadLength == none ->
+			true
+		;	integer(MaxPayloadLength),
+			MaxPayloadLength >= 0
+		).
 
 	default_option(auto_pong(off)).
 	default_option(max_payload_length(none)).
@@ -56,9 +58,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-08-12,
 		comment is 'Auxiliary object defining the supported write options and default values for HTTP WebSocket sessions.'
 	]).
 
@@ -69,10 +71,12 @@
 		argnames is ['UserOptions', 'MergedOptions']
 	]).
 
-	valid_option(fragment_size(none)).
 	valid_option(fragment_size(Size)) :-
-		integer(Size),
-		Size > 0.
+		(	Size == none ->
+			true
+		;	integer(Size),
+			Size > 0
+		).
 
 	default_option(fragment_size(none)).
 

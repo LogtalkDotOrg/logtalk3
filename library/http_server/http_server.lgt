@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-07-13,
+		date is 2026-08-12,
 		comment is 'User-facing HTTP(S) server facade built on top of the HTTP transport libraries.'
 	]).
 
@@ -647,9 +647,11 @@
 
 	valid_option(scheme(Scheme)) :-
 		once((Scheme == http; Scheme == https)).
-	valid_option(transport(default)).
 	valid_option(transport(Transport)) :-
-		nonvar(Transport).
+		(	Transport == default ->
+			true
+		;	nonvar(Transport)
+		).
 	valid_option(listener_options(ListenerOptions)) :-
 		proper_list(ListenerOptions).
 	valid_option(serve_options(ServeOptions)) :-

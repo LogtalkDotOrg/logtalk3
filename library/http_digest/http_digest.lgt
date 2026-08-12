@@ -23,9 +23,9 @@
 	imports([options, http_text_helpers])).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-07-07,
+		date is 2026-08-12,
 		comment is 'HTTP Digest authentication parsing, generation, request decoration, and verification helpers.'
 	]).
 
@@ -496,7 +496,6 @@
 			true
 		;	valid_non_empty_atom(Nonce)
 		).
-	valid_option(cnonce(auto)).
 	valid_option(cnonce(CNonce)) :-
 		(	CNonce == auto ->
 			true

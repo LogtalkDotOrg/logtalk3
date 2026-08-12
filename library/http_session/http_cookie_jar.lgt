@@ -23,9 +23,9 @@
 	imports([http_text_helpers, http_origin_site_helpers, options])).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:0:2,
 		author is 'Paulo Moura',
-		date is 2026-08-02,
+		date is 2026-08-12,
 		comment is 'HTTP cookie jar implementing explicit storage and request matching on top of the http_cookies parsing and generation predicates, with explicit save and load operations for persisting jar contents.'
 	]).
 
@@ -247,9 +247,12 @@
 
 	default_option(cookies_file(none)).
 
-	valid_option(cookies_file(none)).
 	valid_option(cookies_file(File)) :-
-		atom(File).
+		(	File == none ->
+			% just for documenting the 'none' value
+			true
+		;	atom(File)
+		).
 
 	close(Jar) :-
 		close_jar(Jar).

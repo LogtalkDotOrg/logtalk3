@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-06-15,
+		date is 2026-08-12,
 		comment is 'This tool generates a Software Bill of Materials (SBOM) for an application.'
 	]).
 
@@ -1083,8 +1083,8 @@
 
 	valid_option(name(Name)) :-
 		atom(Name).
-	valid_option(format(spdx)).
-	valid_option(format(cdx)).
+	valid_option(format(Format)) :-
+		once((Format == spdx; Format == cdx)).
 	valid_option(version(Version)) :-
 		atom(Version).
 	valid_option(application_license(License)) :-
@@ -1157,9 +1157,12 @@
 		atom(Pack),
 		atom(Originator),
 		Originator \== none.
-	valid_option(backend_license(default)).
 	valid_option(backend_license(License)) :-
-		atom(License).
+		(	License == default ->
+			% just to help document the 'default' value
+			true
+		;	atom(License)
+		).
 	valid_option(backend_built_date(BuiltDate)) :-
 		atom(BuiltDate),
 		BuiltDate \== none.
@@ -1179,8 +1182,8 @@
 		atom(Namespace).
 	valid_option(creators(Creators)) :-
 		valid_creators(Creators).
-	valid_option(validate_export(true)).
-	valid_option(validate_export(false)).
+	valid_option(validate_export(Export)) :-
+		once((Export == true; Export == false)).
 
 	valid_application_external_reference_locator(Type, _Locator) :-
 		application_external_reference_type(Type, MappedType),
