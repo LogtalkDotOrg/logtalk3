@@ -165,7 +165,7 @@
 	]).
 
 	:- public(multivariate_normal_log_density/4).
-	:- mode(multivariate_normal_log_density(+list(number), +list(number), +list(list(number)), -term), one_or_error).
+	:- mode(multivariate_normal_log_density(+list(number), +list(number), +list(list(number)), -atomic), one_or_error).
 	:- info(multivariate_normal_log_density/4, [
 		comment is 'Computes the multivariate normal log-density at a point using the default numerical tolerance of 1.0e-12. Returns the atom ``negative_infinity`` outside the affine support of a singular covariance matrix.',
 		argnames is ['Point', 'Mean', 'Covariance', 'LogDensity'],
@@ -188,7 +188,7 @@
 	]).
 
 	:- public(multivariate_normal_log_density/5).
-	:- mode(multivariate_normal_log_density(+list(number), +list(number), +list(list(number)), +number, -term), one_or_error).
+	:- mode(multivariate_normal_log_density(+list(number), +list(number), +list(list(number)), +number, -atomic), one_or_error).
 	:- info(multivariate_normal_log_density/5, [
 		comment is 'Computes the multivariate normal log-density at a point using the given non-negative numerical tolerance. Returns the atom ``negative_infinity`` outside the affine support of a singular covariance matrix.',
 		argnames is ['Point', 'Mean', 'Covariance', 'Tolerance', 'LogDensity'],
@@ -428,7 +428,7 @@
 	]).
 
 	:- public(multivariate_t_log_density/5).
-	:- mode(multivariate_t_log_density(+list(number), +positive_number, +list(number), +list(list(number)), -term), one_or_error).
+	:- mode(multivariate_t_log_density(+list(number), +positive_number, +list(number), +list(list(number)), -atomic), one_or_error).
 	:- info(multivariate_t_log_density/5, [
 		comment is 'Computes the multivariate Student\'s t log-density using the default numerical tolerance of 1.0e-12. Returns ``negative_infinity`` outside singular affine support.',
 		argnames is ['Point', 'DegreesOfFreedom', 'Location', 'Scale', 'LogDensity'],
@@ -448,7 +448,7 @@
 	]).
 
 	:- public(multivariate_t_log_density/6).
-	:- mode(multivariate_t_log_density(+list(number), +positive_number, +list(number), +list(list(number)), +number, -term), one_or_error).
+	:- mode(multivariate_t_log_density(+list(number), +positive_number, +list(number), +list(list(number)), +number, -atomic), one_or_error).
 	:- info(multivariate_t_log_density/6, [
 		comment is 'Computes the multivariate Student\'s t log-density using the given non-negative numerical tolerance. Returns ``negative_infinity`` outside singular affine support.',
 		argnames is ['Point', 'DegreesOfFreedom', 'Location', 'Scale', 'Tolerance', 'LogDensity'],
@@ -572,11 +572,11 @@
 		comment is 'Returns a Dirichlet distributed random vector on the simplex.',
 		argnames is ['Alphas', 'Sample'],
 		exceptions is [
-			'Alphas is a variable or a partial list' - instantiation_error,
-			'Alphas is neither a partial list nor a list' - type_error(list, 'Alphas'),
-			'An element Element of the Alphas list is neither a variable nor a number' - type_error(number, 'Element'),
-			'An element Element of the Alphas list is not positive' - domain_error(positive_number, 'Element'),
-			'Alphas has fewer than two elements' - domain_error(minimum_number_of_values(2), 'Alphas')
+			'``Alphas`` is a variable or a partial list' - instantiation_error,
+			'``Alphas`` is neither a partial list nor a list' - type_error(list, 'Alphas'),
+			'An element ``Element`` of the ``Alphas`` list is neither a variable nor a number' - type_error(number, 'Element'),
+			'An element ``Element`` of the ``Alphas`` list is not positive' - domain_error(positive_number, 'Element'),
+			'``Alphas`` has fewer than two elements' - domain_error(minimum_number_of_values(2), 'Alphas')
 		]
 	]).
 
@@ -586,50 +586,50 @@
 		comment is 'Returns the requested number of Dirichlet distributed random vectors.',
 		argnames is ['Count', 'Alphas', 'Samples'],
 		exceptions is [
-			'Count is a variable' - instantiation_error,
-			'Count is neither a variable nor an integer' - type_error(integer, 'Count'),
-			'Count is an integer but not a non-negative integer' - domain_error(non_negative_integer, 'Count'),
-			'Alphas is a variable or a partial list' - instantiation_error,
-			'Alphas is neither a partial list nor a list' - type_error(list, 'Alphas'),
-			'An element Element of the Alphas list is neither a variable nor a number' - type_error(number, 'Element'),
-			'An element Element of the Alphas list is not positive' - domain_error(positive_number, 'Element'),
-			'Alphas has fewer than two elements' - domain_error(minimum_number_of_values(2), 'Alphas')
+			'``Count`` is a variable' - instantiation_error,
+			'``Count`` is neither a variable nor an integer' - type_error(integer, 'Count'),
+			'``Count`` is an integer but not a non-negative integer' - domain_error(non_negative_integer, 'Count'),
+			'``Alphas`` is a variable or a partial list' - instantiation_error,
+			'``Alphas`` is neither a partial list nor a list' - type_error(list, 'Alphas'),
+			'An element ``Element`` of the ``Alphas`` list is neither a variable nor a number' - type_error(number, 'Element'),
+			'An element ``Element`` of the ``Alphas`` list is not positive' - domain_error(positive_number, 'Element'),
+			'``Alphas`` has fewer than two elements' - domain_error(minimum_number_of_values(2), 'Alphas')
 		]
 	]).
 
 	:- public(dirichlet_density/3).
-	:- mode(dirichlet_density(+list(number), +list(positive_number), -term), one_or_error).
+	:- mode(dirichlet_density(+list(number), +list(positive_number), -atomic), one_or_error).
 	:- info(dirichlet_density/3, [
 		comment is 'Computes the Dirichlet density at a point on the simplex. At a boundary, returns the atom ``positive_infinity`` when all non-unit alphas corresponding to zero components are smaller than one, zero when they are all greater than one, or ``undefined`` when both cases occur.',
 		argnames is ['Point', 'Alphas', 'Density'],
 		exceptions is [
-			'Point is a variable or a partial list' - instantiation_error,
-			'Point is neither a partial list nor a list' - type_error(list, 'Point'),
-			'An element Element of the Point list is neither a variable nor a number' - type_error(number, 'Element'),
-			'Alphas is a variable or a partial list' - instantiation_error,
-			'Alphas is neither a partial list nor a list' - type_error(list, 'Alphas'),
-			'An element Element of the Alphas list is neither a variable nor a number' - type_error(number, 'Element'),
-			'An element Element of the Alphas list is not positive' - domain_error(positive_number, 'Element'),
-			'Point and Alphas have different lengths' - domain_error(dimension_mismatch, 'Point'),
-			'Alphas has fewer than two elements' - domain_error(minimum_number_of_values(2), 'Alphas')
+			'``Point`` is a variable or a partial list' - instantiation_error,
+			'``Point`` is neither a partial list nor a list' - type_error(list, 'Point'),
+			'An element ``Element`` of the ``Point`` list is neither a variable nor a number' - type_error(number, 'Element'),
+			'``Alphas`` is a variable or a partial list' - instantiation_error,
+			'``Alphas`` is neither a partial list nor a list' - type_error(list, 'Alphas'),
+			'An element ``Element`` of the ``Alphas`` list is neither a variable nor a number' - type_error(number, 'Element'),
+			'An element ``Element`` of the ``Alphas`` list is not positive' - domain_error(positive_number, 'Element'),
+			'``Point`` and ``Alphas`` have different lengths' - domain_error(dimension_mismatch, 'Point'),
+			'``Alphas`` has fewer than two elements' - domain_error(minimum_number_of_values(2), 'Alphas')
 		]
 	]).
 
 	:- public(dirichlet_log_density/3).
-	:- mode(dirichlet_log_density(+list(number), +list(positive_number), -term), one_or_error).
+	:- mode(dirichlet_log_density(+list(number), +list(positive_number), -atomic), one_or_error).
 	:- info(dirichlet_log_density/3, [
 		comment is 'Computes the Dirichlet log-density at a point on the simplex. At a boundary, returns the atom ``positive_infinity`` when all non-unit alphas corresponding to zero components are smaller than one, ``negative_infinity`` when they are all greater than one, or ``undefined`` when both cases occur.',
 		argnames is ['Point', 'Alphas', 'LogDensity'],
 		exceptions is [
-			'Point is a variable or a partial list' - instantiation_error,
-			'Point is neither a partial list nor a list' - type_error(list, 'Point'),
-			'An element Element of the Point list is neither a variable nor a number' - type_error(number, 'Element'),
-			'Alphas is a variable or a partial list' - instantiation_error,
-			'Alphas is neither a partial list nor a list' - type_error(list, 'Alphas'),
-			'An element Element of the Alphas list is neither a variable nor a number' - type_error(number, 'Element'),
-			'An element Element of the Alphas list is not positive' - domain_error(positive_number, 'Element'),
-			'Point and Alphas have different lengths' - domain_error(dimension_mismatch, 'Point'),
-			'Alphas has fewer than two elements' - domain_error(minimum_number_of_values(2), 'Alphas')
+			'``Point`` is a variable or a partial list' - instantiation_error,
+			'``Point`` is neither a partial list nor a list' - type_error(list, 'Point'),
+			'An element ``Element`` of the ``Point`` list is neither a variable nor a number' - type_error(number, 'Element'),
+			'``Alphas`` is a variable or a partial list' - instantiation_error,
+			'``Alphas`` is neither a partial list nor a list' - type_error(list, 'Alphas'),
+			'An element ``Element`` of the ``Alphas`` list is neither a variable nor a number' - type_error(number, 'Element'),
+			'An element ``Element`` of the ``Alphas`` list is not positive' - domain_error(positive_number, 'Element'),
+			'``Point`` and ``Alphas`` have different lengths' - domain_error(dimension_mismatch, 'Point'),
+			'``Alphas`` has fewer than two elements' - domain_error(minimum_number_of_values(2), 'Alphas')
 		]
 	]).
 
@@ -643,15 +643,15 @@
 		comment is 'Returns a multinomial distributed random count vector.',
 		argnames is ['Trials', 'Probabilities', 'Counts'],
 		exceptions is [
-			'Trials is a variable' - instantiation_error,
-			'Trials is neither a variable nor an integer' - type_error(integer, 'Trials'),
-			'Trials is a negative integer' - domain_error(non_negative_integer, 'Trials'),
-			'Probabilities is a variable or a partial list' - instantiation_error,
-			'Probabilities is neither a partial list nor a list' - type_error(list, 'Probabilities'),
-			'An element Element of the Probabilities list is neither a variable nor a number' - type_error(number, 'Element'),
-			'An element Element of the Probabilities list is not a probability' - domain_error(probability, 'Element'),
-			'Probabilities is empty' - domain_error(minimum_number_of_values(1), 'Probabilities'),
-			'Probabilities do not sum to one' - domain_error(probability_distribution, 'Probabilities')
+			'``Trials`` is a variable' - instantiation_error,
+			'``Trials`` is neither a variable nor an integer' - type_error(integer, 'Trials'),
+			'``Trials`` is a negative integer' - domain_error(non_negative_integer, 'Trials'),
+			'``Probabilities`` is a variable or a partial list' - instantiation_error,
+			'``Probabilities`` is neither a partial list nor a list' - type_error(list, 'Probabilities'),
+			'An element ``Element`` of the ``Probabilities`` list is neither a variable nor a float' - type_error(float, 'Element'),
+			'An element ``Element`` of the ``Probabilities`` list is a float but not a probability' - domain_error(probability, 'Element'),
+			'``Probabilities`` is empty' - domain_error(minimum_number_of_values(1), 'Probabilities'),
+			'``Probabilities`` do not sum to one' - domain_error(probability_distribution, 'Probabilities')
 		]
 	]).
 
@@ -661,18 +661,18 @@
 		comment is 'Returns the requested number of multinomial distributed random count vectors.',
 		argnames is ['Count', 'Trials', 'Probabilities', 'Samples'],
 		exceptions is [
-			'Count is a variable' - instantiation_error,
-			'Count is neither a variable nor an integer' - type_error(integer, 'Count'),
-			'Count is an integer but not a non-negative integer' - domain_error(non_negative_integer, 'Count'),
-			'Trials is a variable' - instantiation_error,
-			'Trials is neither a variable nor an integer' - type_error(integer, 'Trials'),
-			'Trials is a negative integer' - domain_error(non_negative_integer, 'Trials'),
-			'Probabilities is a variable or a partial list' - instantiation_error,
-			'Probabilities is neither a partial list nor a list' - type_error(list, 'Probabilities'),
-			'An element Element of the Probabilities list is neither a variable nor a number' - type_error(number, 'Element'),
-			'An element Element of the Probabilities list is not a probability' - domain_error(probability, 'Element'),
-			'Probabilities is empty' - domain_error(minimum_number_of_values(1), 'Probabilities'),
-			'Probabilities do not sum to one' - domain_error(probability_distribution, 'Probabilities')
+			'``Count`` is a variable' - instantiation_error,
+			'``Count`` is neither a variable nor an integer' - type_error(integer, 'Count'),
+			'``Count`` is an integer but not a non-negative integer' - domain_error(non_negative_integer, 'Count'),
+			'``Trials`` is a variable' - instantiation_error,
+			'``Trials`` is neither a variable nor an integer' - type_error(integer, 'Trials'),
+			'``Trials`` is a negative integer' - domain_error(non_negative_integer, 'Trials'),
+			'``Probabilities`` is a variable or a partial list' - instantiation_error,
+			'``Probabilities`` is neither a partial list nor a list' - type_error(list, 'Probabilities'),
+			'An element ``Element`` of the ``Probabilities`` list is neither a variable nor a float' - type_error(float, 'Element'),
+			'An element ``Element`` of the ``Probabilities`` list is a float but not a probability' - domain_error(probability, 'Element'),
+			'``Probabilities`` is empty' - domain_error(minimum_number_of_values(1), 'Probabilities'),
+			'``Probabilities`` do not sum to one' - domain_error(probability_distribution, 'Probabilities')
 		]
 	]).
 
@@ -682,63 +682,64 @@
 		comment is 'Computes the multinomial probability mass at the given count vector.',
 		argnames is ['Counts', 'Trials', 'Probabilities', 'Density'],
 		exceptions is [
-			'Counts is a variable or a partial list' - instantiation_error,
-			'Counts is neither a partial list nor a list' - type_error(list, 'Counts'),
-			'An element Element of the Counts list is neither a variable nor an integer' - type_error(integer, 'Element'),
-			'An element Element of the Counts list is negative' - domain_error(non_negative_integer, 'Element'),
-			'Trials is a variable' - instantiation_error,
-			'Trials is neither a variable nor an integer' - type_error(integer, 'Trials'),
-			'Trials is a negative integer' - domain_error(non_negative_integer, 'Trials'),
-			'Probabilities is a variable or a partial list' - instantiation_error,
-			'Probabilities is neither a partial list nor a list' - type_error(list, 'Probabilities'),
-			'An element Element of the Probabilities list is neither a variable nor a number' - type_error(number, 'Element'),
-			'An element Element of the Probabilities list is not a probability' - domain_error(probability, 'Element'),
-			'Probabilities is empty' - domain_error(minimum_number_of_values(1), 'Probabilities'),
-			'Probabilities do not sum to one' - domain_error(probability_distribution, 'Probabilities'),
-			'Counts and Probabilities have different lengths' - domain_error(dimension_mismatch, 'Counts')
+			'``Counts`` is a variable or a partial list' - instantiation_error,
+			'``Counts`` is neither a partial list nor a list' - type_error(list, 'Counts'),
+			'An element ``Element`` of the ``Counts`` list is neither a variable nor an integer' - type_error(integer, 'Element'),
+			'An element ``Element`` of the ``Counts`` list is an integer but not a non-negative integer' - domain_error(non_negative_integer, 'Element'),
+			'``Trials`` is a variable' - instantiation_error,
+			'``Trials`` is neither a variable nor an integer' - type_error(integer, 'Trials'),
+			'``Trials`` is a negative integer' - domain_error(non_negative_integer, 'Trials'),
+			'``Probabilities`` is a variable or a partial list' - instantiation_error,
+			'``Probabilities`` is neither a partial list nor a list' - type_error(list, 'Probabilities'),
+			'An element ``Element`` of the ``Probabilities`` list is neither a variable nor a float' - type_error(float, 'Element'),
+			'An element ``Element`` of the ``Probabilities`` list is a float but not a probability' - domain_error(probability, 'Element'),
+			'``Probabilities`` is empty' - domain_error(minimum_number_of_values(1), 'Probabilities'),
+			'``Probabilities`` do not sum to one' - domain_error(probability_distribution, 'Probabilities'),
+			'``Counts`` and ``Probabilities`` have different lengths' - domain_error(dimension_mismatch, 'Counts')
 		]
 	]).
 
 	:- public(multinomial_log_density/4).
-	:- mode(multinomial_log_density(+list(non_negative_integer), +non_negative_integer, +list(probability), -term), one_or_error).
+	:- mode(multinomial_log_density(+list(non_negative_integer), +non_negative_integer, +list(probability), -atomic), one_or_error).
 	:- info(multinomial_log_density/4, [
 		comment is 'Computes the multinomial log-probability mass at the given count vector. Returns the atom ``negative_infinity`` for an impossible count vector.',
 		argnames is ['Counts', 'Trials', 'Probabilities', 'LogDensity'],
 		exceptions is [
-			'Counts is a variable or a partial list' - instantiation_error,
-			'Counts is neither a partial list nor a list' - type_error(list, 'Counts'),
-			'An element Element of the Counts list is neither a variable nor an integer' - type_error(integer, 'Element'),
-			'An element Element of the Counts list is negative' - domain_error(non_negative_integer, 'Element'),
-			'Trials is a variable' - instantiation_error,
-			'Trials is neither a variable nor an integer' - type_error(integer, 'Trials'),
-			'Trials is a negative integer' - domain_error(non_negative_integer, 'Trials'),
-			'Probabilities is a variable or a partial list' - instantiation_error,
-			'Probabilities is neither a partial list nor a list' - type_error(list, 'Probabilities'),
-			'An element Element of the Probabilities list is neither a variable nor a number' - type_error(number, 'Element'),
-			'An element Element of the Probabilities list is not a probability' - domain_error(probability, 'Element'),
-			'Probabilities is empty' - domain_error(minimum_number_of_values(1), 'Probabilities'),
-			'Probabilities do not sum to one' - domain_error(probability_distribution, 'Probabilities'),
-			'Counts and Probabilities have different lengths' - domain_error(dimension_mismatch, 'Counts')
+			'``Counts`` is a variable or a partial list' - instantiation_error,
+			'``Counts`` is neither a partial list nor a list' - type_error(list, 'Counts'),
+			'An element ``Element`` of the ``Counts`` list is neither a variable nor an integer' - type_error(integer, 'Element'),
+			'An element ``Element`` of the ``Counts`` list is an integer but not a non-negative integer' - domain_error(non_negative_integer, 'Element'),
+			'``Trials`` is a variable' - instantiation_error,
+			'``Trials`` is neither a variable nor an integer' - type_error(integer, 'Trials'),
+			'``Trials`` is a negative integer' - domain_error(non_negative_integer, 'Trials'),
+			'``Probabilities`` is a variable or a partial list' - instantiation_error,
+			'``Probabilities`` is neither a partial list nor a list' - type_error(list, 'Probabilities'),
+			'An element ``Element`` of the ``Probabilities`` list is neither a variable nor a float' - type_error(float, 'Element'),
+			'An element ``Element`` of the ``Probabilities`` list is a float but not a probability' - domain_error(probability, 'Element'),
+			'``Probabilities`` is empty' - domain_error(minimum_number_of_values(1), 'Probabilities'),
+			'``Probabilities`` do not sum to one' - domain_error(probability_distribution, 'Probabilities'),
+			'``Counts`` and ``Probabilities`` have different lengths' - domain_error(dimension_mismatch, 'Counts')
 		]
 	]).
 
 	:- public(multinomial_quantile/4).
-	:- mode(multinomial_quantile(+number, +non_negative_integer, +list(probability), -list(non_negative_integer)), one_or_error).
+	:- mode(multinomial_quantile(+open_probability, +non_negative_integer, +list(probability), -list(non_negative_integer)), one_or_error).
 	:- info(multinomial_quantile/4, [
 		comment is 'Computes a multinomial quantile (count vector) for a probability strictly between zero and one. Count vectors are ordered by decreasing probability mass and then by increasing lexicographic order for log-probabilities equal within a relative tolerance of 1.0e-12. The returned vector is the first whose cumulative probability mass is at least the requested probability. The exact computation is limited to 100000 count vectors.',
 		argnames is ['Probability', 'Trials', 'Probabilities', 'Quantile'],
 		exceptions is [
-			'Probability is not a number' - type_error(number, 'Probability'),
-			'Probability is not strictly between zero and one' - domain_error(open_probability, 'Probability'),
-			'Trials is a variable' - instantiation_error,
-			'Trials is neither a variable nor an integer' - type_error(integer, 'Trials'),
-			'Trials is a negative integer' - domain_error(non_negative_integer, 'Trials'),
-			'Probabilities is a variable or a partial list' - instantiation_error,
-			'Probabilities is neither a partial list nor a list' - type_error(list, 'Probabilities'),
-			'An element Element of the Probabilities list is neither a variable nor a number' - type_error(number, 'Element'),
-			'An element Element of the Probabilities list is not a probability' - domain_error(probability, 'Element'),
-			'Probabilities is empty' - domain_error(minimum_number_of_values(1), 'Probabilities'),
-			'Probabilities do not sum to one' - domain_error(probability_distribution, 'Probabilities'),
+			'``Probability`` is a variable' - instantiation_error,
+			'``Probability`` is neither a variable nor a float' - type_error(float, 'Probability'),
+			'``Probability`` is a float but not strictly between zero and one' - domain_error(open_probability, 'Probability'),
+			'``Trials`` is a variable' - instantiation_error,
+			'``Trials`` is neither a variable nor an integer' - type_error(integer, 'Trials'),
+			'``Trials`` is a negative integer' - domain_error(non_negative_integer, 'Trials'),
+			'``Probabilities`` is a variable or a partial list' - instantiation_error,
+			'``Probabilities`` is neither a partial list nor a list' - type_error(list, 'Probabilities'),
+			'An element ``Element`` of the ``Probabilities`` list is neither a variable nor a float' - type_error(float, 'Element'),
+			'An element ``Element`` of the ``Probabilities`` list is a float but not a probability' - domain_error(probability, 'Element'),
+			'``Probabilities`` is empty' - domain_error(minimum_number_of_values(1), 'Probabilities'),
+			'``Probabilities`` do not sum to one' - domain_error(probability_distribution, 'Probabilities'),
 			'The number of count vectors exceeds the supported limit' - resource_error(multinomial_quantile_compositions)
 		]
 	]).

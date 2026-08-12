@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-11,
+		date is 2026-08-12,
 		comment is 'Univariate probability distribution predicates.',
 		see_also is [univariate_distributions(_), multivariate_distributions_protocol, sampling_protocol]
 	]).
@@ -89,7 +89,8 @@
 		comment is 'Computes the standard normal probability density at the given value.',
 		argnames is ['Value', 'Density'],
 		exceptions is [
-			'``Value`` is not a number' - type_error(number, 'Value')
+			'``Value`` is a variable' - instantiation_error,
+			'``Value`` is neither a variable nor a number' - type_error(number, 'Value')
 		]
 	]).
 
@@ -99,7 +100,8 @@
 		comment is 'Computes the standard normal log-density at the given value.',
 		argnames is ['Value', 'LogDensity'],
 		exceptions is [
-			'``Value`` is not a number' - type_error(number, 'Value')
+			'``Value`` is a variable' - instantiation_error,
+			'``Value`` is neither a variable nor a number' - type_error(number, 'Value')
 		]
 	]).
 
@@ -109,18 +111,20 @@
 		comment is 'Computes an approximation of the standard normal cumulative distribution at the given value.',
 		argnames is ['Value', 'Probability'],
 		exceptions is [
-			'``Value`` is not a number' - type_error(number, 'Value')
+			'``Value`` is a variable' - instantiation_error,
+			'``Value`` is neither a variable nor a number' - type_error(number, 'Value')
 		]
 	]).
 
 	:- public(standard_normal_quantile/2).
-	:- mode(standard_normal_quantile(+number, -float), one_or_error).
+	:- mode(standard_normal_quantile(+open_probability, -float), one_or_error).
 	:- info(standard_normal_quantile/2, [
 		comment is 'Computes an approximation of the standard normal quantile for a probability strictly between zero and one.',
 		argnames is ['Probability', 'Quantile'],
 		exceptions is [
-			'``Probability`` is not a number' - type_error(number, 'Probability'),
-			'``Probability`` is not strictly between zero and one' - domain_error(open_probability, 'Probability')
+			'``Probability`` is a variable' - instantiation_error,
+			'``Probability`` is neither a variable nor a float' - type_error(float, 'Probability'),
+			'``Probability`` is a float but not strictly between zero and one' - domain_error(open_probability, 'Probability')
 		]
 	]).
 
@@ -130,10 +134,13 @@
 		comment is 'Computes the normal probability density at a value for the given mean and positive standard deviation.',
 		argnames is ['Value', 'Mean', 'Deviation', 'Density'],
 		exceptions is [
-			'``Value`` is not a number' - type_error(number, 'Value'),
-			'``Mean`` is not a number' - type_error(number, 'Mean'),
-			'``Deviation`` is not a number' - type_error(number, 'Deviation'),
-			'``Deviation`` is not positive' - domain_error(positive_number, 'Deviation')
+			'``Value`` is a variable' - instantiation_error,
+			'``Value`` is neither a variable nor a number' - type_error(number, 'Value'),
+			'``Mean`` is a variable' - instantiation_error,
+			'``Mean`` is neither a variable nor a number' - type_error(number, 'Mean'),
+			'``Deviation`` is a variable' - instantiation_error,
+			'``Deviation`` is neither a variable nor a number' - type_error(number, 'Deviation'),
+			'``Deviation`` is a number but not a positive number' - domain_error(positive_number, 'Deviation')
 		]
 	]).
 
@@ -143,10 +150,13 @@
 		comment is 'Computes the normal log-density at a value for the given mean and positive standard deviation.',
 		argnames is ['Value', 'Mean', 'Deviation', 'LogDensity'],
 		exceptions is [
-			'``Value`` is not a number' - type_error(number, 'Value'),
-			'``Mean`` is not a number' - type_error(number, 'Mean'),
-			'``Deviation`` is not a number' - type_error(number, 'Deviation'),
-			'``Deviation`` is not positive' - domain_error(positive_number, 'Deviation')
+			'``Value`` is a variable' - instantiation_error,
+			'``Value`` is neither a variable nor a number' - type_error(number, 'Value'),
+			'``Mean`` is a variable' - instantiation_error,
+			'``Mean`` is neither a variable nor a number' - type_error(number, 'Mean'),
+			'``Deviation`` is a variable' - instantiation_error,
+			'``Deviation`` is neither a variable nor a number' - type_error(number, 'Deviation'),
+			'``Deviation`` is a number but not a positive number' - domain_error(positive_number, 'Deviation')
 		]
 	]).
 
@@ -156,24 +166,30 @@
 		comment is 'Computes an approximation of the normal cumulative distribution at a value for the given mean and positive standard deviation.',
 		argnames is ['Value', 'Mean', 'Deviation', 'Probability'],
 		exceptions is [
-			'``Value`` is not a number' - type_error(number, 'Value'),
-			'``Mean`` is not a number' - type_error(number, 'Mean'),
-			'``Deviation`` is not a number' - type_error(number, 'Deviation'),
-			'``Deviation`` is not positive' - domain_error(positive_number, 'Deviation')
+			'``Value`` is a variable' - instantiation_error,
+			'``Value`` is neither a variable nor a number' - type_error(number, 'Value'),
+			'``Mean`` is a variable' - instantiation_error,
+			'``Mean`` is neither a variable nor a number' - type_error(number, 'Mean'),
+			'``Deviation`` is a variable' - instantiation_error,
+			'``Deviation`` is neither a variable nor a number' - type_error(number, 'Deviation'),
+			'``Deviation`` is a number but not a positive number' - domain_error(positive_number, 'Deviation')
 		]
 	]).
 
 	:- public(normal_quantile/4).
-	:- mode(normal_quantile(+number, +number, +positive_number, -float), one_or_error).
+	:- mode(normal_quantile(+open_probability, +number, +positive_number, -float), one_or_error).
 	:- info(normal_quantile/4, [
 		comment is 'Computes an approximation of the normal quantile for a probability strictly between zero and one and the given mean and positive standard deviation.',
 		argnames is ['Probability', 'Mean', 'Deviation', 'Quantile'],
 		exceptions is [
-			'``Probability`` is not a number' - type_error(number, 'Probability'),
-			'``Probability`` is not strictly between zero and one' - domain_error(open_probability, 'Probability'),
-			'``Mean`` is not a number' - type_error(number, 'Mean'),
-			'``Deviation`` is not a number' - type_error(number, 'Deviation'),
-			'``Deviation`` is not positive' - domain_error(positive_number, 'Deviation')
+			'``Probability`` is a variable' - instantiation_error,
+			'``Probability`` is neither a variable nor a float' - type_error(float, 'Probability'),
+			'``Probability`` is a float but not strictly between zero and one' - domain_error(open_probability, 'Probability'),
+			'``Mean`` is a variable' - instantiation_error,
+			'``Mean`` is neither a variable nor a number' - type_error(number, 'Mean'),
+			'``Deviation`` is a variable' - instantiation_error,
+			'``Deviation`` is neither a variable nor a number' - type_error(number, 'Deviation'),
+			'``Deviation`` is a number but not a positive number' - domain_error(positive_number, 'Deviation')
 		]
 	]).
 
@@ -187,9 +203,9 @@
 		comment is 'Returns a standard Student\'s t distributed random value.',
 		argnames is ['DegreesOfFreedom', 'Value'],
 		exceptions is [
-			'DegreesOfFreedom is a variable' - instantiation_error,
-			'DegreesOfFreedom is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
-			'DegreesOfFreedom is not positive' - domain_error(positive_number, 'DegreesOfFreedom')
+			'``DegreesOfFreedom`` is a variable' - instantiation_error,
+			'``DegreesOfFreedom`` is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
+			'``DegreesOfFreedom`` is a number but not a positive number' - domain_error(positive_number, 'DegreesOfFreedom')
 		]
 	]).
 
@@ -199,12 +215,12 @@
 		comment is 'Returns the requested number of standard Student\'s t distributed random values.',
 		argnames is ['Count', 'DegreesOfFreedom', 'Samples'],
 		exceptions is [
-			'Count is a variable' - instantiation_error,
-			'Count is neither a variable nor an integer' - type_error(integer, 'Count'),
-			'Count is an integer but not a non-negative integer' - domain_error(non_negative_integer, 'Count'),
-			'DegreesOfFreedom is a variable' - instantiation_error,
-			'DegreesOfFreedom is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
-			'DegreesOfFreedom is not positive' - domain_error(positive_number, 'DegreesOfFreedom')
+			'``Count`` is a variable' - instantiation_error,
+			'``Count`` is neither a variable nor an integer' - type_error(integer, 'Count'),
+			'``Count`` is an integer but not a non-negative integer' - domain_error(non_negative_integer, 'Count'),
+			'``DegreesOfFreedom`` is a variable' - instantiation_error,
+			'``DegreesOfFreedom`` is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
+			'``DegreesOfFreedom`` is a number but not a positive number' - domain_error(positive_number, 'DegreesOfFreedom')
 		]
 	]).
 
@@ -214,10 +230,11 @@
 		comment is 'Computes the standard Student\'s t probability density at the given value.',
 		argnames is ['Value', 'DegreesOfFreedom', 'Density'],
 		exceptions is [
-			'Value is not a number' - type_error(number, 'Value'),
-			'DegreesOfFreedom is a variable' - instantiation_error,
-			'DegreesOfFreedom is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
-			'DegreesOfFreedom is not positive' - domain_error(positive_number, 'DegreesOfFreedom')
+			'``Value`` is a variable' - instantiation_error,
+			'``Value`` is neither a variable nor a number' - type_error(number, 'Value'),
+			'``DegreesOfFreedom`` is a variable' - instantiation_error,
+			'``DegreesOfFreedom`` is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
+			'``DegreesOfFreedom`` is a number but not a positive number' - domain_error(positive_number, 'DegreesOfFreedom')
 		]
 	]).
 
@@ -227,10 +244,11 @@
 		comment is 'Computes the standard Student\'s t log-density at the given value.',
 		argnames is ['Value', 'DegreesOfFreedom', 'LogDensity'],
 		exceptions is [
-			'Value is not a number' - type_error(number, 'Value'),
-			'DegreesOfFreedom is a variable' - instantiation_error,
-			'DegreesOfFreedom is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
-			'DegreesOfFreedom is not positive' - domain_error(positive_number, 'DegreesOfFreedom')
+			'``Value`` is a variable' - instantiation_error,
+			'``Value`` is neither a variable nor a number' - type_error(number, 'Value'),
+			'``DegreesOfFreedom`` is a variable' - instantiation_error,
+			'``DegreesOfFreedom`` is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
+			'``DegreesOfFreedom`` is a number but not a positive number' - domain_error(positive_number, 'DegreesOfFreedom')
 		]
 	]).
 
@@ -240,24 +258,26 @@
 		comment is 'Computes an approximation of the standard Student\'s t cumulative distribution at the given value.',
 		argnames is ['Value', 'DegreesOfFreedom', 'Probability'],
 		exceptions is [
-			'Value is not a number' - type_error(number, 'Value'),
-			'DegreesOfFreedom is a variable' - instantiation_error,
-			'DegreesOfFreedom is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
-			'DegreesOfFreedom is not positive' - domain_error(positive_number, 'DegreesOfFreedom')
+			'``Value`` is a variable' - instantiation_error,
+			'``Value`` is neither a variable nor a number' - type_error(number, 'Value'),
+			'``DegreesOfFreedom`` is a variable' - instantiation_error,
+			'``DegreesOfFreedom`` is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
+			'``DegreesOfFreedom`` is a number but not a positive number' - domain_error(positive_number, 'DegreesOfFreedom')
 		]
 	]).
 
 	:- public(standard_t_quantile/3).
-	:- mode(standard_t_quantile(+number, +positive_number, -float), one_or_error).
+	:- mode(standard_t_quantile(+open_probability, +positive_number, -float), one_or_error).
 	:- info(standard_t_quantile/3, [
 		comment is 'Computes an approximation of the standard Student\'s t quantile for a probability strictly between zero and one.',
 		argnames is ['Probability', 'DegreesOfFreedom', 'Quantile'],
 		exceptions is [
-			'Probability is not a number' - type_error(number, 'Probability'),
-			'Probability is not strictly between zero and one' - domain_error(open_probability, 'Probability'),
-			'DegreesOfFreedom is a variable' - instantiation_error,
-			'DegreesOfFreedom is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
-			'DegreesOfFreedom is not positive' - domain_error(positive_number, 'DegreesOfFreedom')
+			'``Probability`` is a variable' - instantiation_error,
+			'``Probability`` is neither a variable nor a float' - type_error(float, 'Probability'),
+			'``Probability`` is a float but not strictly between zero and one' - domain_error(open_probability, 'Probability'),
+			'``DegreesOfFreedom`` is a variable' - instantiation_error,
+			'``DegreesOfFreedom`` is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
+			'``DegreesOfFreedom`` is a number but not a positive number' - domain_error(positive_number, 'DegreesOfFreedom')
 		]
 	]).
 
@@ -267,13 +287,14 @@
 		comment is 'Returns a location-scale Student\'s t distributed random value.',
 		argnames is ['Location', 'Scale', 'DegreesOfFreedom', 'Value'],
 		exceptions is [
-			'Location is not a number' - type_error(number, 'Location'),
-			'Scale is a variable' - instantiation_error,
-			'Scale is neither a variable nor a number' - type_error(number, 'Scale'),
-			'Scale is not positive' - domain_error(positive_number, 'Scale'),
-			'DegreesOfFreedom is a variable' - instantiation_error,
-			'DegreesOfFreedom is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
-			'DegreesOfFreedom is not positive' - domain_error(positive_number, 'DegreesOfFreedom')
+			'``Location`` is a variable' - instantiation_error,
+			'``Location`` is neither a variable nor a number' - type_error(number, 'Location'),
+			'``Scale`` is a variable' - instantiation_error,
+			'``Scale`` is neither a variable nor a number' - type_error(number, 'Scale'),
+			'``Scale`` is not positive' - domain_error(positive_number, 'Scale'),
+			'``DegreesOfFreedom`` is a variable' - instantiation_error,
+			'``DegreesOfFreedom`` is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
+			'``DegreesOfFreedom`` is a number but not a positive number' - domain_error(positive_number, 'DegreesOfFreedom')
 		]
 	]).
 
@@ -283,16 +304,17 @@
 		comment is 'Returns the requested number of location-scale Student\'s t distributed random values.',
 		argnames is ['Count', 'Location', 'Scale', 'DegreesOfFreedom', 'Samples'],
 		exceptions is [
-			'Count is a variable' - instantiation_error,
-			'Count is neither a variable nor an integer' - type_error(integer, 'Count'),
-			'Count is an integer but not a non-negative integer' - domain_error(non_negative_integer, 'Count'),
-			'Location is not a number' - type_error(number, 'Location'),
-			'Scale is a variable' - instantiation_error,
-			'Scale is neither a variable nor a number' - type_error(number, 'Scale'),
-			'Scale is not positive' - domain_error(positive_number, 'Scale'),
-			'DegreesOfFreedom is a variable' - instantiation_error,
-			'DegreesOfFreedom is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
-			'DegreesOfFreedom is not positive' - domain_error(positive_number, 'DegreesOfFreedom')
+			'``Count`` is a variable' - instantiation_error,
+			'``Count`` is neither a variable nor an integer' - type_error(integer, 'Count'),
+			'``Count`` is an integer but not a non-negative integer' - domain_error(non_negative_integer, 'Count'),
+			'``Location`` is a variable' - instantiation_error,
+			'``Location`` is neither a variable nor a number' - type_error(number, 'Location'),
+			'``Scale`` is a variable' - instantiation_error,
+			'``Scale`` is neither a variable nor a number' - type_error(number, 'Scale'),
+			'``Scale`` is not positive' - domain_error(positive_number, 'Scale'),
+			'``DegreesOfFreedom`` is a variable' - instantiation_error,
+			'``DegreesOfFreedom`` is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
+			'``DegreesOfFreedom`` is a number but not a positive number' - domain_error(positive_number, 'DegreesOfFreedom')
 		]
 	]).
 
@@ -302,14 +324,16 @@
 		comment is 'Computes the location-scale Student\'s t probability density.',
 		argnames is ['Value', 'Location', 'Scale', 'DegreesOfFreedom', 'Density'],
 		exceptions is [
-			'Value is not a number' - type_error(number, 'Value'),
-			'Location is not a number' - type_error(number, 'Location'),
-			'Scale is a variable' - instantiation_error,
-			'Scale is neither a variable nor a number' - type_error(number, 'Scale'),
-			'Scale is not positive' - domain_error(positive_number, 'Scale'),
-			'DegreesOfFreedom is a variable' - instantiation_error,
-			'DegreesOfFreedom is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
-			'DegreesOfFreedom is not positive' - domain_error(positive_number, 'DegreesOfFreedom')
+			'``Value`` is a variable' - instantiation_error,
+			'``Value`` is neither a variable nor a number' - type_error(number, 'Value'),
+			'``Location`` is a variable' - instantiation_error,
+			'``Location`` is neither a variable nor a number' - type_error(number, 'Location'),
+			'``Scale`` is a variable' - instantiation_error,
+			'``Scale`` is neither a variable nor a number' - type_error(number, 'Scale'),
+			'``Scale`` is not positive' - domain_error(positive_number, 'Scale'),
+			'``DegreesOfFreedom`` is a variable' - instantiation_error,
+			'``DegreesOfFreedom`` is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
+			'``DegreesOfFreedom`` is a number but not a positive number' - domain_error(positive_number, 'DegreesOfFreedom')
 		]
 	]).
 
@@ -319,14 +343,16 @@
 		comment is 'Computes the location-scale Student\'s t log-density.',
 		argnames is ['Value', 'Location', 'Scale', 'DegreesOfFreedom', 'LogDensity'],
 		exceptions is [
-			'Value is not a number' - type_error(number, 'Value'),
-			'Location is not a number' - type_error(number, 'Location'),
-			'Scale is a variable' - instantiation_error,
-			'Scale is neither a variable nor a number' - type_error(number, 'Scale'),
-			'Scale is not positive' - domain_error(positive_number, 'Scale'),
-			'DegreesOfFreedom is a variable' - instantiation_error,
-			'DegreesOfFreedom is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
-			'DegreesOfFreedom is not positive' - domain_error(positive_number, 'DegreesOfFreedom')
+			'``Value`` is a variable' - instantiation_error,
+			'``Value`` is neither a variable nor a number' - type_error(number, 'Value'),
+			'``Location`` is a variable' - instantiation_error,
+			'``Location`` is neither a variable nor a number' - type_error(number, 'Location'),
+			'``Scale`` is a variable' - instantiation_error,
+			'``Scale`` is neither a variable nor a number' - type_error(number, 'Scale'),
+			'``Scale`` is not positive' - domain_error(positive_number, 'Scale'),
+			'``DegreesOfFreedom`` is a variable' - instantiation_error,
+			'``DegreesOfFreedom`` is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
+			'``DegreesOfFreedom`` is a number but not a positive number' - domain_error(positive_number, 'DegreesOfFreedom')
 		]
 	]).
 
@@ -336,32 +362,36 @@
 		comment is 'Computes an approximation of the location-scale Student\'s t cumulative distribution.',
 		argnames is ['Value', 'Location', 'Scale', 'DegreesOfFreedom', 'Probability'],
 		exceptions is [
-			'Value is not a number' - type_error(number, 'Value'),
-			'Location is not a number' - type_error(number, 'Location'),
-			'Scale is a variable' - instantiation_error,
-			'Scale is neither a variable nor a number' - type_error(number, 'Scale'),
-			'Scale is not positive' - domain_error(positive_number, 'Scale'),
-			'DegreesOfFreedom is a variable' - instantiation_error,
-			'DegreesOfFreedom is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
-			'DegreesOfFreedom is not positive' - domain_error(positive_number, 'DegreesOfFreedom')
+			'``Value`` is a variable' - instantiation_error,
+			'``Value`` is neither a variable nor a number' - type_error(number, 'Value'),
+			'``Location`` is a variable' - instantiation_error,
+			'``Location`` is neither a variable nor a number' - type_error(number, 'Location'),
+			'``Scale`` is a variable' - instantiation_error,
+			'``Scale`` is neither a variable nor a number' - type_error(number, 'Scale'),
+			'``Scale`` is not positive' - domain_error(positive_number, 'Scale'),
+			'``DegreesOfFreedom`` is a variable' - instantiation_error,
+			'``DegreesOfFreedom`` is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
+			'``DegreesOfFreedom`` is a number but not a positive number' - domain_error(positive_number, 'DegreesOfFreedom')
 		]
 	]).
 
 	:- public(t_quantile/5).
-	:- mode(t_quantile(+number, +number, +positive_number, +positive_number, -float), one_or_error).
+	:- mode(t_quantile(+open_probability, +number, +positive_number, +positive_number, -float), one_or_error).
 	:- info(t_quantile/5, [
 		comment is 'Computes an approximation of the location-scale Student\'s t quantile for a probability strictly between zero and one.',
 		argnames is ['Probability', 'Location', 'Scale', 'DegreesOfFreedom', 'Quantile'],
 		exceptions is [
-			'Probability is not a number' - type_error(number, 'Probability'),
-			'Probability is not strictly between zero and one' - domain_error(open_probability, 'Probability'),
-			'Location is not a number' - type_error(number, 'Location'),
-			'Scale is a variable' - instantiation_error,
-			'Scale is neither a variable nor a number' - type_error(number, 'Scale'),
-			'Scale is not positive' - domain_error(positive_number, 'Scale'),
-			'DegreesOfFreedom is a variable' - instantiation_error,
-			'DegreesOfFreedom is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
-			'DegreesOfFreedom is not positive' - domain_error(positive_number, 'DegreesOfFreedom')
+			'``Probability`` is a variable' - instantiation_error,
+			'``Probability`` is neither a variable nor a float' - type_error(float, 'Probability'),
+			'``Probability`` is a float but not strictly between zero and one' - domain_error(open_probability, 'Probability'),
+			'``Location`` is a variable' - instantiation_error,
+			'``Location`` is neither a variable nor a number' - type_error(number, 'Location'),
+			'``Scale`` is a variable' - instantiation_error,
+			'``Scale`` is neither a variable nor a number' - type_error(number, 'Scale'),
+			'``Scale`` is not positive' - domain_error(positive_number, 'Scale'),
+			'``DegreesOfFreedom`` is a variable' - instantiation_error,
+			'``DegreesOfFreedom`` is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
+			'``DegreesOfFreedom`` is a number but not a positive number' - domain_error(positive_number, 'DegreesOfFreedom')
 		]
 	]).
 
@@ -375,9 +405,9 @@
 		comment is 'Returns a chi-squared distributed random value.',
 		argnames is ['DegreesOfFreedom', 'Value'],
 		exceptions is [
-			'DegreesOfFreedom is a variable' - instantiation_error,
-			'DegreesOfFreedom is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
-			'DegreesOfFreedom is not positive' - domain_error(positive_number, 'DegreesOfFreedom')
+			'``DegreesOfFreedom`` is a variable' - instantiation_error,
+			'``DegreesOfFreedom`` is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
+			'``DegreesOfFreedom`` is a number but not a positive number' - domain_error(positive_number, 'DegreesOfFreedom')
 		]
 	]).
 
@@ -387,38 +417,40 @@
 		comment is 'Returns the requested number of chi-squared distributed random values.',
 		argnames is ['Count', 'DegreesOfFreedom', 'Samples'],
 		exceptions is [
-			'Count is a variable' - instantiation_error,
-			'Count is neither a variable nor an integer' - type_error(integer, 'Count'),
-			'Count is an integer but not a non-negative integer' - domain_error(non_negative_integer, 'Count'),
-			'DegreesOfFreedom is a variable' - instantiation_error,
-			'DegreesOfFreedom is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
-			'DegreesOfFreedom is not positive' - domain_error(positive_number, 'DegreesOfFreedom')
+			'``Count`` is a variable' - instantiation_error,
+			'``Count`` is neither a variable nor an integer' - type_error(integer, 'Count'),
+			'``Count`` is an integer but not a non-negative integer' - domain_error(non_negative_integer, 'Count'),
+			'``DegreesOfFreedom`` is a variable' - instantiation_error,
+			'``DegreesOfFreedom`` is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
+			'``DegreesOfFreedom`` is a number but not a positive number' - domain_error(positive_number, 'DegreesOfFreedom')
 		]
 	]).
 
 	:- public(chi_squared_density/3).
-	:- mode(chi_squared_density(+number, +positive_number, -float), one_or_error).
+	:- mode(chi_squared_density(+number, +positive_number, -atomic), one_or_error).
 	:- info(chi_squared_density/3, [
-		comment is 'Computes the chi-squared probability density at the given value.',
+		comment is 'Computes the chi-squared probability density at the given value. At zero, returns the atom ``positive_infinity`` when the degrees of freedom are smaller than two.',
 		argnames is ['Value', 'DegreesOfFreedom', 'Density'],
 		exceptions is [
-			'Value is not a number' - type_error(number, 'Value'),
-			'DegreesOfFreedom is a variable' - instantiation_error,
-			'DegreesOfFreedom is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
-			'DegreesOfFreedom is not positive' - domain_error(positive_number, 'DegreesOfFreedom')
+			'``Value`` is a variable' - instantiation_error,
+			'``Value`` is neither a variable nor a number' - type_error(number, 'Value'),
+			'``DegreesOfFreedom`` is a variable' - instantiation_error,
+			'``DegreesOfFreedom`` is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
+			'``DegreesOfFreedom`` is a number but not a positive number' - domain_error(positive_number, 'DegreesOfFreedom')
 		]
 	]).
 
 	:- public(chi_squared_log_density/3).
-	:- mode(chi_squared_log_density(+number, +positive_number, -float), one_or_error).
+	:- mode(chi_squared_log_density(+number, +positive_number, -atomic), one_or_error).
 	:- info(chi_squared_log_density/3, [
-		comment is 'Computes the chi-squared log-density at the given value.',
+		comment is 'Computes the chi-squared log-density at the given value. Returns the atoms ``positive_infinity`` or ``negative_infinity`` when the density is respectively infinite or zero.',
 		argnames is ['Value', 'DegreesOfFreedom', 'LogDensity'],
 		exceptions is [
-			'Value is not a number' - type_error(number, 'Value'),
-			'DegreesOfFreedom is a variable' - instantiation_error,
-			'DegreesOfFreedom is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
-			'DegreesOfFreedom is not positive' - domain_error(positive_number, 'DegreesOfFreedom')
+			'``Value`` is a variable' - instantiation_error,
+			'``Value`` is neither a variable nor a number' - type_error(number, 'Value'),
+			'``DegreesOfFreedom`` is a variable' - instantiation_error,
+			'``DegreesOfFreedom`` is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
+			'``DegreesOfFreedom`` is a number but not a positive number' - domain_error(positive_number, 'DegreesOfFreedom')
 		]
 	]).
 
@@ -428,24 +460,26 @@
 		comment is 'Computes an approximation of the chi-squared cumulative distribution at the given value.',
 		argnames is ['Value', 'DegreesOfFreedom', 'Probability'],
 		exceptions is [
-			'Value is not a number' - type_error(number, 'Value'),
-			'DegreesOfFreedom is a variable' - instantiation_error,
-			'DegreesOfFreedom is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
-			'DegreesOfFreedom is not positive' - domain_error(positive_number, 'DegreesOfFreedom')
+			'``Value`` is a variable' - instantiation_error,
+			'``Value`` is neither a variable nor a number' - type_error(number, 'Value'),
+			'``DegreesOfFreedom`` is a variable' - instantiation_error,
+			'``DegreesOfFreedom`` is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
+			'``DegreesOfFreedom`` is a number but not a positive number' - domain_error(positive_number, 'DegreesOfFreedom')
 		]
 	]).
 
 	:- public(chi_squared_quantile/3).
-	:- mode(chi_squared_quantile(+number, +positive_number, -float), one_or_error).
+	:- mode(chi_squared_quantile(+open_probability, +positive_number, -float), one_or_error).
 	:- info(chi_squared_quantile/3, [
 		comment is 'Computes an approximation of the chi-squared quantile for a probability strictly between zero and one.',
 		argnames is ['Probability', 'DegreesOfFreedom', 'Quantile'],
 		exceptions is [
-			'Probability is not a number' - type_error(number, 'Probability'),
-			'Probability is not strictly between zero and one' - domain_error(open_probability, 'Probability'),
-			'DegreesOfFreedom is a variable' - instantiation_error,
-			'DegreesOfFreedom is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
-			'DegreesOfFreedom is not positive' - domain_error(positive_number, 'DegreesOfFreedom')
+			'``Probability`` is a variable' - instantiation_error,
+			'``Probability`` is neither a variable nor a float' - type_error(float, 'Probability'),
+			'``Probability`` is a float but not strictly between zero and one' - domain_error(open_probability, 'Probability'),
+			'``DegreesOfFreedom`` is a variable' - instantiation_error,
+			'``DegreesOfFreedom`` is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom'),
+			'``DegreesOfFreedom`` is a number but not a positive number' - domain_error(positive_number, 'DegreesOfFreedom')
 		]
 	]).
 
@@ -459,12 +493,12 @@
 		comment is 'Returns a gamma distributed random value (shape-scale parameterization).',
 		argnames is ['Shape', 'Scale', 'Value'],
 		exceptions is [
-			'Shape is a variable' - instantiation_error,
-			'Shape is neither a variable nor a number' - type_error(number, 'Shape'),
-			'Shape is not positive' - domain_error(positive_number, 'Shape'),
-			'Scale is a variable' - instantiation_error,
-			'Scale is neither a variable nor a number' - type_error(number, 'Scale'),
-			'Scale is not positive' - domain_error(positive_number, 'Scale')
+			'``Shape`` is a variable' - instantiation_error,
+			'``Shape`` is neither a variable nor a number' - type_error(number, 'Shape'),
+			'``Shape`` is not positive' - domain_error(positive_number, 'Shape'),
+			'``Scale`` is a variable' - instantiation_error,
+			'``Scale`` is neither a variable nor a number' - type_error(number, 'Scale'),
+			'``Scale`` is not positive' - domain_error(positive_number, 'Scale')
 		]
 	]).
 
@@ -474,47 +508,49 @@
 		comment is 'Returns the requested number of gamma distributed random values.',
 		argnames is ['Count', 'Shape', 'Scale', 'Samples'],
 		exceptions is [
-			'Count is a variable' - instantiation_error,
-			'Count is neither a variable nor an integer' - type_error(integer, 'Count'),
-			'Count is an integer but not a non-negative integer' - domain_error(non_negative_integer, 'Count'),
-			'Shape is a variable' - instantiation_error,
-			'Shape is neither a variable nor a number' - type_error(number, 'Shape'),
-			'Shape is not positive' - domain_error(positive_number, 'Shape'),
-			'Scale is a variable' - instantiation_error,
-			'Scale is neither a variable nor a number' - type_error(number, 'Scale'),
-			'Scale is not positive' - domain_error(positive_number, 'Scale')
+			'``Count`` is a variable' - instantiation_error,
+			'``Count`` is neither a variable nor an integer' - type_error(integer, 'Count'),
+			'``Count`` is an integer but not a non-negative integer' - domain_error(non_negative_integer, 'Count'),
+			'``Shape`` is a variable' - instantiation_error,
+			'``Shape`` is neither a variable nor a number' - type_error(number, 'Shape'),
+			'``Shape`` is not positive' - domain_error(positive_number, 'Shape'),
+			'``Scale`` is a variable' - instantiation_error,
+			'``Scale`` is neither a variable nor a number' - type_error(number, 'Scale'),
+			'``Scale`` is not positive' - domain_error(positive_number, 'Scale')
 		]
 	]).
 
 	:- public(gamma_density/4).
-	:- mode(gamma_density(+number, +positive_number, +positive_number, -float), one_or_error).
+	:- mode(gamma_density(+number, +positive_number, +positive_number, -atomic), one_or_error).
 	:- info(gamma_density/4, [
-		comment is 'Computes the gamma probability density at the given value.',
+		comment is 'Computes the gamma probability density at the given value. At zero, returns the atom ``positive_infinity`` when the shape is smaller than one.',
 		argnames is ['Value', 'Shape', 'Scale', 'Density'],
 		exceptions is [
-			'Value is not a number' - type_error(number, 'Value'),
-			'Shape is a variable' - instantiation_error,
-			'Shape is neither a variable nor a number' - type_error(number, 'Shape'),
-			'Shape is not positive' - domain_error(positive_number, 'Shape'),
-			'Scale is a variable' - instantiation_error,
-			'Scale is neither a variable nor a number' - type_error(number, 'Scale'),
-			'Scale is not positive' - domain_error(positive_number, 'Scale')
+			'``Value`` is a variable' - instantiation_error,
+			'``Value`` is neither a variable nor a number' - type_error(number, 'Value'),
+			'``Shape`` is a variable' - instantiation_error,
+			'``Shape`` is neither a variable nor a number' - type_error(number, 'Shape'),
+			'``Shape`` is not positive' - domain_error(positive_number, 'Shape'),
+			'``Scale`` is a variable' - instantiation_error,
+			'``Scale`` is neither a variable nor a number' - type_error(number, 'Scale'),
+			'``Scale`` is not positive' - domain_error(positive_number, 'Scale')
 		]
 	]).
 
 	:- public(gamma_log_density/4).
-	:- mode(gamma_log_density(+number, +positive_number, +positive_number, -float), one_or_error).
+	:- mode(gamma_log_density(+number, +positive_number, +positive_number, -atomic), one_or_error).
 	:- info(gamma_log_density/4, [
-		comment is 'Computes the gamma log-density at the given value.',
+		comment is 'Computes the gamma log-density at the given value. Returns the atoms ``positive_infinity`` or ``negative_infinity`` when the density is respectively infinite or zero.',
 		argnames is ['Value', 'Shape', 'Scale', 'LogDensity'],
 		exceptions is [
-			'Value is not a number' - type_error(number, 'Value'),
-			'Shape is a variable' - instantiation_error,
-			'Shape is neither a variable nor a number' - type_error(number, 'Shape'),
-			'Shape is not positive' - domain_error(positive_number, 'Shape'),
-			'Scale is a variable' - instantiation_error,
-			'Scale is neither a variable nor a number' - type_error(number, 'Scale'),
-			'Scale is not positive' - domain_error(positive_number, 'Scale')
+			'``Value`` is a variable' - instantiation_error,
+			'``Value`` is neither a variable nor a number' - type_error(number, 'Value'),
+			'``Shape`` is a variable' - instantiation_error,
+			'``Shape`` is neither a variable nor a number' - type_error(number, 'Shape'),
+			'``Shape`` is not positive' - domain_error(positive_number, 'Shape'),
+			'``Scale`` is a variable' - instantiation_error,
+			'``Scale`` is neither a variable nor a number' - type_error(number, 'Scale'),
+			'``Scale`` is not positive' - domain_error(positive_number, 'Scale')
 		]
 	]).
 
@@ -524,30 +560,32 @@
 		comment is 'Computes an approximation of the gamma cumulative distribution at the given value.',
 		argnames is ['Value', 'Shape', 'Scale', 'Probability'],
 		exceptions is [
-			'Value is not a number' - type_error(number, 'Value'),
-			'Shape is a variable' - instantiation_error,
-			'Shape is neither a variable nor a number' - type_error(number, 'Shape'),
-			'Shape is not positive' - domain_error(positive_number, 'Shape'),
-			'Scale is a variable' - instantiation_error,
-			'Scale is neither a variable nor a number' - type_error(number, 'Scale'),
-			'Scale is not positive' - domain_error(positive_number, 'Scale')
+			'``Value`` is a variable' - instantiation_error,
+			'``Value`` is neither a variable nor a number' - type_error(number, 'Value'),
+			'``Shape`` is a variable' - instantiation_error,
+			'``Shape`` is neither a variable nor a number' - type_error(number, 'Shape'),
+			'``Shape`` is not positive' - domain_error(positive_number, 'Shape'),
+			'``Scale`` is a variable' - instantiation_error,
+			'``Scale`` is neither a variable nor a number' - type_error(number, 'Scale'),
+			'``Scale`` is not positive' - domain_error(positive_number, 'Scale')
 		]
 	]).
 
 	:- public(gamma_quantile/4).
-	:- mode(gamma_quantile(+number, +positive_number, +positive_number, -float), one_or_error).
+	:- mode(gamma_quantile(+open_probability, +positive_number, +positive_number, -float), one_or_error).
 	:- info(gamma_quantile/4, [
 		comment is 'Computes an approximation of the gamma quantile for a probability strictly between zero and one.',
 		argnames is ['Probability', 'Shape', 'Scale', 'Quantile'],
 		exceptions is [
-			'Probability is not a number' - type_error(number, 'Probability'),
-			'Probability is not strictly between zero and one' - domain_error(open_probability, 'Probability'),
-			'Shape is a variable' - instantiation_error,
-			'Shape is neither a variable nor a number' - type_error(number, 'Shape'),
-			'Shape is not positive' - domain_error(positive_number, 'Shape'),
-			'Scale is a variable' - instantiation_error,
-			'Scale is neither a variable nor a number' - type_error(number, 'Scale'),
-			'Scale is not positive' - domain_error(positive_number, 'Scale')
+			'``Probability`` is a variable' - instantiation_error,
+			'``Probability`` is neither a variable nor a float' - type_error(float, 'Probability'),
+			'``Probability`` is a float but not strictly between zero and one' - domain_error(open_probability, 'Probability'),
+			'``Shape`` is a variable' - instantiation_error,
+			'``Shape`` is neither a variable nor a number' - type_error(number, 'Shape'),
+			'``Shape`` is not positive' - domain_error(positive_number, 'Shape'),
+			'``Scale`` is a variable' - instantiation_error,
+			'``Scale`` is neither a variable nor a number' - type_error(number, 'Scale'),
+			'``Scale`` is not positive' - domain_error(positive_number, 'Scale')
 		]
 	]).
 
@@ -561,12 +599,12 @@
 		comment is 'Returns a beta distributed random value.',
 		argnames is ['Alpha', 'Beta', 'Value'],
 		exceptions is [
-			'Alpha is a variable' - instantiation_error,
-			'Alpha is neither a variable nor a number' - type_error(number, 'Alpha'),
-			'Alpha is not positive' - domain_error(positive_number, 'Alpha'),
-			'Beta is a variable' - instantiation_error,
-			'Beta is neither a variable nor a number' - type_error(number, 'Beta'),
-			'Beta is not positive' - domain_error(positive_number, 'Beta')
+			'``Alpha`` is a variable' - instantiation_error,
+			'``Alpha`` is neither a variable nor a number' - type_error(number, 'Alpha'),
+			'``Alpha`` is not positive' - domain_error(positive_number, 'Alpha'),
+			'``Beta`` is a variable' - instantiation_error,
+			'``Beta`` is neither a variable nor a number' - type_error(number, 'Beta'),
+			'``Beta`` is not positive' - domain_error(positive_number, 'Beta')
 		]
 	]).
 
@@ -576,47 +614,49 @@
 		comment is 'Returns the requested number of beta distributed random values.',
 		argnames is ['Count', 'Alpha', 'Beta', 'Samples'],
 		exceptions is [
-			'Count is a variable' - instantiation_error,
-			'Count is neither a variable nor an integer' - type_error(integer, 'Count'),
-			'Count is an integer but not a non-negative integer' - domain_error(non_negative_integer, 'Count'),
-			'Alpha is a variable' - instantiation_error,
-			'Alpha is neither a variable nor a number' - type_error(number, 'Alpha'),
-			'Alpha is not positive' - domain_error(positive_number, 'Alpha'),
-			'Beta is a variable' - instantiation_error,
-			'Beta is neither a variable nor a number' - type_error(number, 'Beta'),
-			'Beta is not positive' - domain_error(positive_number, 'Beta')
+			'``Count`` is a variable' - instantiation_error,
+			'``Count`` is neither a variable nor an integer' - type_error(integer, 'Count'),
+			'``Count`` is an integer but not a non-negative integer' - domain_error(non_negative_integer, 'Count'),
+			'``Alpha`` is a variable' - instantiation_error,
+			'``Alpha`` is neither a variable nor a number' - type_error(number, 'Alpha'),
+			'``Alpha`` is not positive' - domain_error(positive_number, 'Alpha'),
+			'``Beta`` is a variable' - instantiation_error,
+			'``Beta`` is neither a variable nor a number' - type_error(number, 'Beta'),
+			'``Beta`` is not positive' - domain_error(positive_number, 'Beta')
 		]
 	]).
 
 	:- public(beta_density/4).
-	:- mode(beta_density(+number, +positive_number, +positive_number, -float), one_or_error).
+	:- mode(beta_density(+number, +positive_number, +positive_number, -atomic), one_or_error).
 	:- info(beta_density/4, [
-		comment is 'Computes the beta probability density at the given value.',
+		comment is 'Computes the beta probability density at the given value. At either endpoint, returns the atom ``positive_infinity`` when the corresponding shape parameter is smaller than one.',
 		argnames is ['Value', 'Alpha', 'Beta', 'Density'],
 		exceptions is [
-			'Value is not a number' - type_error(number, 'Value'),
-			'Alpha is a variable' - instantiation_error,
-			'Alpha is neither a variable nor a number' - type_error(number, 'Alpha'),
-			'Alpha is not positive' - domain_error(positive_number, 'Alpha'),
-			'Beta is a variable' - instantiation_error,
-			'Beta is neither a variable nor a number' - type_error(number, 'Beta'),
-			'Beta is not positive' - domain_error(positive_number, 'Beta')
+			'``Value`` is a variable' - instantiation_error,
+			'``Value`` is neither a variable nor a number' - type_error(number, 'Value'),
+			'``Alpha`` is a variable' - instantiation_error,
+			'``Alpha`` is neither a variable nor a number' - type_error(number, 'Alpha'),
+			'``Alpha`` is not positive' - domain_error(positive_number, 'Alpha'),
+			'``Beta`` is a variable' - instantiation_error,
+			'``Beta`` is neither a variable nor a number' - type_error(number, 'Beta'),
+			'``Beta`` is not positive' - domain_error(positive_number, 'Beta')
 		]
 	]).
 
 	:- public(beta_log_density/4).
-	:- mode(beta_log_density(+number, +positive_number, +positive_number, -float), one_or_error).
+	:- mode(beta_log_density(+number, +positive_number, +positive_number, -atomic), one_or_error).
 	:- info(beta_log_density/4, [
-		comment is 'Computes the beta log-density at the given value.',
+		comment is 'Computes the beta log-density at the given value. Returns the atoms ``positive_infinity`` or ``negative_infinity`` when the density is respectively infinite or zero.',
 		argnames is ['Value', 'Alpha', 'Beta', 'LogDensity'],
 		exceptions is [
-			'Value is not a number' - type_error(number, 'Value'),
-			'Alpha is a variable' - instantiation_error,
-			'Alpha is neither a variable nor a number' - type_error(number, 'Alpha'),
-			'Alpha is not positive' - domain_error(positive_number, 'Alpha'),
-			'Beta is a variable' - instantiation_error,
-			'Beta is neither a variable nor a number' - type_error(number, 'Beta'),
-			'Beta is not positive' - domain_error(positive_number, 'Beta')
+			'``Value`` is a variable' - instantiation_error,
+			'``Value`` is neither a variable nor a number' - type_error(number, 'Value'),
+			'``Alpha`` is a variable' - instantiation_error,
+			'``Alpha`` is neither a variable nor a number' - type_error(number, 'Alpha'),
+			'``Alpha`` is not positive' - domain_error(positive_number, 'Alpha'),
+			'``Beta`` is a variable' - instantiation_error,
+			'``Beta`` is neither a variable nor a number' - type_error(number, 'Beta'),
+			'``Beta`` is not positive' - domain_error(positive_number, 'Beta')
 		]
 	]).
 
@@ -626,30 +666,32 @@
 		comment is 'Computes an approximation of the beta cumulative distribution at the given value.',
 		argnames is ['Value', 'Alpha', 'Beta', 'Probability'],
 		exceptions is [
-			'Value is not a number' - type_error(number, 'Value'),
-			'Alpha is a variable' - instantiation_error,
-			'Alpha is neither a variable nor a number' - type_error(number, 'Alpha'),
-			'Alpha is not positive' - domain_error(positive_number, 'Alpha'),
-			'Beta is a variable' - instantiation_error,
-			'Beta is neither a variable nor a number' - type_error(number, 'Beta'),
-			'Beta is not positive' - domain_error(positive_number, 'Beta')
+			'``Value`` is a variable' - instantiation_error,
+			'``Value`` is neither a variable nor a number' - type_error(number, 'Value'),
+			'``Alpha`` is a variable' - instantiation_error,
+			'``Alpha`` is neither a variable nor a number' - type_error(number, 'Alpha'),
+			'``Alpha`` is not positive' - domain_error(positive_number, 'Alpha'),
+			'``Beta`` is a variable' - instantiation_error,
+			'``Beta`` is neither a variable nor a number' - type_error(number, 'Beta'),
+			'``Beta`` is not positive' - domain_error(positive_number, 'Beta')
 		]
 	]).
 
 	:- public(beta_quantile/4).
-	:- mode(beta_quantile(+number, +positive_number, +positive_number, -float), one_or_error).
+	:- mode(beta_quantile(+open_probability, +positive_number, +positive_number, -float), one_or_error).
 	:- info(beta_quantile/4, [
 		comment is 'Computes an approximation of the beta quantile for a probability strictly between zero and one.',
 		argnames is ['Probability', 'Alpha', 'Beta', 'Quantile'],
 		exceptions is [
-			'Probability is not a number' - type_error(number, 'Probability'),
-			'Probability is not strictly between zero and one' - domain_error(open_probability, 'Probability'),
-			'Alpha is a variable' - instantiation_error,
-			'Alpha is neither a variable nor a number' - type_error(number, 'Alpha'),
-			'Alpha is not positive' - domain_error(positive_number, 'Alpha'),
-			'Beta is a variable' - instantiation_error,
-			'Beta is neither a variable nor a number' - type_error(number, 'Beta'),
-			'Beta is not positive' - domain_error(positive_number, 'Beta')
+			'``Probability`` is a variable' - instantiation_error,
+			'``Probability`` is neither a variable nor a float' - type_error(float, 'Probability'),
+			'``Probability`` is a float but not strictly between zero and one' - domain_error(open_probability, 'Probability'),
+			'``Alpha`` is a variable' - instantiation_error,
+			'``Alpha`` is neither a variable nor a number' - type_error(number, 'Alpha'),
+			'``Alpha`` is not positive' - domain_error(positive_number, 'Alpha'),
+			'``Beta`` is a variable' - instantiation_error,
+			'``Beta`` is neither a variable nor a number' - type_error(number, 'Beta'),
+			'``Beta`` is not positive' - domain_error(positive_number, 'Beta')
 		]
 	]).
 
@@ -663,9 +705,9 @@
 		comment is 'Returns an exponentially distributed random value (scale parameterization).',
 		argnames is ['Scale', 'Value'],
 		exceptions is [
-			'Scale is a variable' - instantiation_error,
-			'Scale is neither a variable nor a number' - type_error(number, 'Scale'),
-			'Scale is not positive' - domain_error(positive_number, 'Scale')
+			'``Scale`` is a variable' - instantiation_error,
+			'``Scale`` is neither a variable nor a number' - type_error(number, 'Scale'),
+			'``Scale`` is not positive' - domain_error(positive_number, 'Scale')
 		]
 	]).
 
@@ -675,12 +717,12 @@
 		comment is 'Returns the requested number of exponentially distributed random values.',
 		argnames is ['Count', 'Scale', 'Samples'],
 		exceptions is [
-			'Count is a variable' - instantiation_error,
-			'Count is neither a variable nor an integer' - type_error(integer, 'Count'),
-			'Count is an integer but not a non-negative integer' - domain_error(non_negative_integer, 'Count'),
-			'Scale is a variable' - instantiation_error,
-			'Scale is neither a variable nor a number' - type_error(number, 'Scale'),
-			'Scale is not positive' - domain_error(positive_number, 'Scale')
+			'``Count`` is a variable' - instantiation_error,
+			'``Count`` is neither a variable nor an integer' - type_error(integer, 'Count'),
+			'``Count`` is an integer but not a non-negative integer' - domain_error(non_negative_integer, 'Count'),
+			'``Scale`` is a variable' - instantiation_error,
+			'``Scale`` is neither a variable nor a number' - type_error(number, 'Scale'),
+			'``Scale`` is not positive' - domain_error(positive_number, 'Scale')
 		]
 	]).
 
@@ -690,10 +732,11 @@
 		comment is 'Computes the exponential probability density at the given value.',
 		argnames is ['Value', 'Scale', 'Density'],
 		exceptions is [
-			'Value is not a number' - type_error(number, 'Value'),
-			'Scale is a variable' - instantiation_error,
-			'Scale is neither a variable nor a number' - type_error(number, 'Scale'),
-			'Scale is not positive' - domain_error(positive_number, 'Scale')
+			'``Value`` is a variable' - instantiation_error,
+			'``Value`` is neither a variable nor a number' - type_error(number, 'Value'),
+			'``Scale`` is a variable' - instantiation_error,
+			'``Scale`` is neither a variable nor a number' - type_error(number, 'Scale'),
+			'``Scale`` is not positive' - domain_error(positive_number, 'Scale')
 		]
 	]).
 
@@ -703,10 +746,11 @@
 		comment is 'Computes the exponential log-density at the given value.',
 		argnames is ['Value', 'Scale', 'LogDensity'],
 		exceptions is [
-			'Value is not a number' - type_error(number, 'Value'),
-			'Scale is a variable' - instantiation_error,
-			'Scale is neither a variable nor a number' - type_error(number, 'Scale'),
-			'Scale is not positive' - domain_error(positive_number, 'Scale')
+			'``Value`` is a variable' - instantiation_error,
+			'``Value`` is neither a variable nor a number' - type_error(number, 'Value'),
+			'``Scale`` is a variable' - instantiation_error,
+			'``Scale`` is neither a variable nor a number' - type_error(number, 'Scale'),
+			'``Scale`` is not positive' - domain_error(positive_number, 'Scale')
 		]
 	]).
 
@@ -716,24 +760,26 @@
 		comment is 'Computes the exponential cumulative distribution at the given value.',
 		argnames is ['Value', 'Scale', 'Probability'],
 		exceptions is [
-			'Value is not a number' - type_error(number, 'Value'),
-			'Scale is a variable' - instantiation_error,
-			'Scale is neither a variable nor a number' - type_error(number, 'Scale'),
-			'Scale is not positive' - domain_error(positive_number, 'Scale')
+			'``Value`` is a variable' - instantiation_error,
+			'``Value`` is neither a variable nor a number' - type_error(number, 'Value'),
+			'``Scale`` is a variable' - instantiation_error,
+			'``Scale`` is neither a variable nor a number' - type_error(number, 'Scale'),
+			'``Scale`` is not positive' - domain_error(positive_number, 'Scale')
 		]
 	]).
 
 	:- public(exponential_quantile/3).
-	:- mode(exponential_quantile(+number, +positive_number, -float), one_or_error).
+	:- mode(exponential_quantile(+open_probability, +positive_number, -float), one_or_error).
 	:- info(exponential_quantile/3, [
 		comment is 'Computes the exponential quantile for a probability strictly between zero and one.',
 		argnames is ['Probability', 'Scale', 'Quantile'],
 		exceptions is [
-			'Probability is not a number' - type_error(number, 'Probability'),
-			'Probability is not strictly between zero and one' - domain_error(open_probability, 'Probability'),
-			'Scale is a variable' - instantiation_error,
-			'Scale is neither a variable nor a number' - type_error(number, 'Scale'),
-			'Scale is not positive' - domain_error(positive_number, 'Scale')
+			'``Probability`` is a variable' - instantiation_error,
+			'``Probability`` is neither a variable nor a float' - type_error(float, 'Probability'),
+			'``Probability`` is a float but not strictly between zero and one' - domain_error(open_probability, 'Probability'),
+			'``Scale`` is a variable' - instantiation_error,
+			'``Scale`` is neither a variable nor a number' - type_error(number, 'Scale'),
+			'``Scale`` is not positive' - domain_error(positive_number, 'Scale')
 		]
 	]).
 
@@ -747,12 +793,12 @@
 		comment is 'Returns a Fisher-Snedecor (F) distributed random value.',
 		argnames is ['DegreesOfFreedom1', 'DegreesOfFreedom2', 'Value'],
 		exceptions is [
-			'DegreesOfFreedom1 is a variable' - instantiation_error,
-			'DegreesOfFreedom1 is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom1'),
-			'DegreesOfFreedom1 is not positive' - domain_error(positive_number, 'DegreesOfFreedom1'),
-			'DegreesOfFreedom2 is a variable' - instantiation_error,
-			'DegreesOfFreedom2 is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom2'),
-			'DegreesOfFreedom2 is not positive' - domain_error(positive_number, 'DegreesOfFreedom2')
+			'``DegreesOfFreedom1`` is a variable' - instantiation_error,
+			'``DegreesOfFreedom1`` is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom1'),
+			'``DegreesOfFreedom1`` is not positive' - domain_error(positive_number, 'DegreesOfFreedom1'),
+			'``DegreesOfFreedom2`` is a variable' - instantiation_error,
+			'``DegreesOfFreedom2`` is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom2'),
+			'``DegreesOfFreedom2`` is not positive' - domain_error(positive_number, 'DegreesOfFreedom2')
 		]
 	]).
 
@@ -762,47 +808,49 @@
 		comment is 'Returns the requested number of Fisher-Snedecor (F) distributed random values.',
 		argnames is ['Count', 'DegreesOfFreedom1', 'DegreesOfFreedom2', 'Samples'],
 		exceptions is [
-			'Count is a variable' - instantiation_error,
-			'Count is neither a variable nor an integer' - type_error(integer, 'Count'),
-			'Count is an integer but not a non-negative integer' - domain_error(non_negative_integer, 'Count'),
-			'DegreesOfFreedom1 is a variable' - instantiation_error,
-			'DegreesOfFreedom1 is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom1'),
-			'DegreesOfFreedom1 is not positive' - domain_error(positive_number, 'DegreesOfFreedom1'),
-			'DegreesOfFreedom2 is a variable' - instantiation_error,
-			'DegreesOfFreedom2 is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom2'),
-			'DegreesOfFreedom2 is not positive' - domain_error(positive_number, 'DegreesOfFreedom2')
+			'``Count`` is a variable' - instantiation_error,
+			'``Count`` is neither a variable nor an integer' - type_error(integer, 'Count'),
+			'``Count`` is an integer but not a non-negative integer' - domain_error(non_negative_integer, 'Count'),
+			'``DegreesOfFreedom1`` is a variable' - instantiation_error,
+			'``DegreesOfFreedom1`` is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom1'),
+			'``DegreesOfFreedom1`` is not positive' - domain_error(positive_number, 'DegreesOfFreedom1'),
+			'``DegreesOfFreedom2`` is a variable' - instantiation_error,
+			'``DegreesOfFreedom2`` is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom2'),
+			'``DegreesOfFreedom2`` is not positive' - domain_error(positive_number, 'DegreesOfFreedom2')
 		]
 	]).
 
 	:- public(fisher_density/4).
-	:- mode(fisher_density(+number, +positive_number, +positive_number, -float), one_or_error).
+	:- mode(fisher_density(+number, +positive_number, +positive_number, -atomic), one_or_error).
 	:- info(fisher_density/4, [
-		comment is 'Computes the Fisher-Snedecor (F) probability density at the given value.',
+		comment is 'Computes the Fisher-Snedecor (F) probability density at the given value. At zero, returns the atom ``positive_infinity`` when the first degrees of freedom are smaller than two.',
 		argnames is ['Value', 'DegreesOfFreedom1', 'DegreesOfFreedom2', 'Density'],
 		exceptions is [
-			'Value is not a number' - type_error(number, 'Value'),
-			'DegreesOfFreedom1 is a variable' - instantiation_error,
-			'DegreesOfFreedom1 is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom1'),
-			'DegreesOfFreedom1 is not positive' - domain_error(positive_number, 'DegreesOfFreedom1'),
-			'DegreesOfFreedom2 is a variable' - instantiation_error,
-			'DegreesOfFreedom2 is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom2'),
-			'DegreesOfFreedom2 is not positive' - domain_error(positive_number, 'DegreesOfFreedom2')
+			'``Value`` is a variable' - instantiation_error,
+			'``Value`` is neither a variable nor a number' - type_error(number, 'Value'),
+			'``DegreesOfFreedom1`` is a variable' - instantiation_error,
+			'``DegreesOfFreedom1`` is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom1'),
+			'``DegreesOfFreedom1`` is not positive' - domain_error(positive_number, 'DegreesOfFreedom1'),
+			'``DegreesOfFreedom2`` is a variable' - instantiation_error,
+			'``DegreesOfFreedom2`` is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom2'),
+			'``DegreesOfFreedom2`` is not positive' - domain_error(positive_number, 'DegreesOfFreedom2')
 		]
 	]).
 
 	:- public(fisher_log_density/4).
-	:- mode(fisher_log_density(+number, +positive_number, +positive_number, -float), one_or_error).
+	:- mode(fisher_log_density(+number, +positive_number, +positive_number, -atomic), one_or_error).
 	:- info(fisher_log_density/4, [
-		comment is 'Computes the Fisher-Snedecor (F) log-density at the given value.',
+		comment is 'Computes the Fisher-Snedecor (F) log-density at the given value. Returns the atoms ``positive_infinity`` or ``negative_infinity`` when the density is respectively infinite or zero.',
 		argnames is ['Value', 'DegreesOfFreedom1', 'DegreesOfFreedom2', 'LogDensity'],
 		exceptions is [
-			'Value is not a number' - type_error(number, 'Value'),
-			'DegreesOfFreedom1 is a variable' - instantiation_error,
-			'DegreesOfFreedom1 is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom1'),
-			'DegreesOfFreedom1 is not positive' - domain_error(positive_number, 'DegreesOfFreedom1'),
-			'DegreesOfFreedom2 is a variable' - instantiation_error,
-			'DegreesOfFreedom2 is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom2'),
-			'DegreesOfFreedom2 is not positive' - domain_error(positive_number, 'DegreesOfFreedom2')
+			'``Value`` is a variable' - instantiation_error,
+			'``Value`` is neither a variable nor a number' - type_error(number, 'Value'),
+			'``DegreesOfFreedom1`` is a variable' - instantiation_error,
+			'``DegreesOfFreedom1`` is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom1'),
+			'``DegreesOfFreedom1`` is not positive' - domain_error(positive_number, 'DegreesOfFreedom1'),
+			'``DegreesOfFreedom2`` is a variable' - instantiation_error,
+			'``DegreesOfFreedom2`` is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom2'),
+			'``DegreesOfFreedom2`` is not positive' - domain_error(positive_number, 'DegreesOfFreedom2')
 		]
 	]).
 
@@ -812,30 +860,32 @@
 		comment is 'Computes an approximation of the Fisher-Snedecor (F) cumulative distribution at the given value.',
 		argnames is ['Value', 'DegreesOfFreedom1', 'DegreesOfFreedom2', 'Probability'],
 		exceptions is [
-			'Value is not a number' - type_error(number, 'Value'),
-			'DegreesOfFreedom1 is a variable' - instantiation_error,
-			'DegreesOfFreedom1 is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom1'),
-			'DegreesOfFreedom1 is not positive' - domain_error(positive_number, 'DegreesOfFreedom1'),
-			'DegreesOfFreedom2 is a variable' - instantiation_error,
-			'DegreesOfFreedom2 is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom2'),
-			'DegreesOfFreedom2 is not positive' - domain_error(positive_number, 'DegreesOfFreedom2')
+			'``Value`` is a variable' - instantiation_error,
+			'``Value`` is neither a variable nor a number' - type_error(number, 'Value'),
+			'``DegreesOfFreedom1`` is a variable' - instantiation_error,
+			'``DegreesOfFreedom1`` is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom1'),
+			'``DegreesOfFreedom1`` is not positive' - domain_error(positive_number, 'DegreesOfFreedom1'),
+			'``DegreesOfFreedom2`` is a variable' - instantiation_error,
+			'``DegreesOfFreedom2`` is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom2'),
+			'``DegreesOfFreedom2`` is not positive' - domain_error(positive_number, 'DegreesOfFreedom2')
 		]
 	]).
 
 	:- public(fisher_quantile/4).
-	:- mode(fisher_quantile(+number, +positive_number, +positive_number, -float), one_or_error).
+	:- mode(fisher_quantile(+open_probability, +positive_number, +positive_number, -float), one_or_error).
 	:- info(fisher_quantile/4, [
 		comment is 'Computes an approximation of the Fisher-Snedecor (F) quantile for a probability strictly between zero and one.',
 		argnames is ['Probability', 'DegreesOfFreedom1', 'DegreesOfFreedom2', 'Quantile'],
 		exceptions is [
-			'Probability is not a number' - type_error(number, 'Probability'),
-			'Probability is not strictly between zero and one' - domain_error(open_probability, 'Probability'),
-			'DegreesOfFreedom1 is a variable' - instantiation_error,
-			'DegreesOfFreedom1 is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom1'),
-			'DegreesOfFreedom1 is not positive' - domain_error(positive_number, 'DegreesOfFreedom1'),
-			'DegreesOfFreedom2 is a variable' - instantiation_error,
-			'DegreesOfFreedom2 is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom2'),
-			'DegreesOfFreedom2 is not positive' - domain_error(positive_number, 'DegreesOfFreedom2')
+			'``Probability`` is a variable' - instantiation_error,
+			'``Probability`` is neither a variable nor a float' - type_error(float, 'Probability'),
+			'``Probability`` is a float but not strictly between zero and one' - domain_error(open_probability, 'Probability'),
+			'``DegreesOfFreedom1`` is a variable' - instantiation_error,
+			'``DegreesOfFreedom1`` is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom1'),
+			'``DegreesOfFreedom1`` is not positive' - domain_error(positive_number, 'DegreesOfFreedom1'),
+			'``DegreesOfFreedom2`` is a variable' - instantiation_error,
+			'``DegreesOfFreedom2`` is neither a variable nor a number' - type_error(number, 'DegreesOfFreedom2'),
+			'``DegreesOfFreedom2`` is not positive' - domain_error(positive_number, 'DegreesOfFreedom2')
 		]
 	]).
 

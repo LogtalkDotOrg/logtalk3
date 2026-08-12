@@ -61,6 +61,11 @@ Sampling predicates accept a zero standard deviation, producing the mean as a
 degenerate sample. Density, log-density, cumulative distribution, and quantile
 predicates require a positive standard deviation.
 
+At support boundaries, chi-squared, gamma, beta, and Fisher-Snedecor densities
+return the atom `positive_infinity` when the mathematical density is infinite.
+Log-density predicates return the atoms `positive_infinity` and
+`negative_infinity` for infinite and zero densities, respectively.
+
 
 Examples
 --------

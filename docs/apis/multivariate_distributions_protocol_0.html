@@ -981,7 +981,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">multivariate_normal_log_density(+list(number),+list(number),+list(list(number)),-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">multivariate_normal_log_density(+list(number),+list(number),+list(list(number)),-atomic)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
@@ -1063,7 +1063,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">multivariate_normal_log_density(+list(number),+list(number),+list(list(number)),+number,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">multivariate_normal_log_density(+list(number),+list(number),+list(list(number)),+number,-atomic)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
@@ -1881,7 +1881,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">multivariate_t_log_density(+list(number),+positive_number,+list(number),+list(list(number)),-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">multivariate_t_log_density(+list(number),+positive_number,+list(number),+list(list(number)),-atomic)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
@@ -1951,7 +1951,7 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">multivariate_t_log_density(+list(number),+positive_number,+list(number),+list(list(number)),+number,-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">multivariate_t_log_density(+list(number),+positive_number,+list(number),+list(list(number)),+number,-atomic)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
@@ -2351,23 +2351,23 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Alphas is a variable or a partial list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Alphas</span></code> is a variable or a partial list:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line">Alphas is neither a partial list nor a list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Alphas</span></code> is neither a partial list nor a list:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Alphas)</span></code></div>
 </div>
-<div class="line">An element Element of the Alphas list is neither a variable nor a number:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Alphas</span></code> list is neither a variable nor a number:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
 </div>
-<div class="line">An element Element of the Alphas list is not positive:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Alphas</span></code> list is not positive:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_number,Element)</span></code></div>
 </div>
-<div class="line">Alphas has fewer than two elements:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Alphas</span></code> has fewer than two elements:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(2),Alphas)</span></code></div>
 </div>
@@ -2397,35 +2397,35 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Count is a variable:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line">Count is neither a variable nor an integer:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is neither a variable nor an integer:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Count)</span></code></div>
 </div>
-<div class="line">Count is an integer but not a non-negative integer:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is an integer but not a non-negative integer:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Count)</span></code></div>
 </div>
-<div class="line">Alphas is a variable or a partial list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Alphas</span></code> is a variable or a partial list:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line">Alphas is neither a partial list nor a list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Alphas</span></code> is neither a partial list nor a list:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Alphas)</span></code></div>
 </div>
-<div class="line">An element Element of the Alphas list is neither a variable nor a number:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Alphas</span></code> list is neither a variable nor a number:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
 </div>
-<div class="line">An element Element of the Alphas list is not positive:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Alphas</span></code> list is not positive:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_number,Element)</span></code></div>
 </div>
-<div class="line">Alphas has fewer than two elements:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Alphas</span></code> has fewer than two elements:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(2),Alphas)</span></code></div>
 </div>
@@ -2449,45 +2449,45 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dirichlet_density(+list(number),+list(positive_number),-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dirichlet_density(+list(number),+list(positive_number),-atomic)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Point is a variable or a partial list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> is a variable or a partial list:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line">Point is neither a partial list nor a list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> is neither a partial list nor a list:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Point)</span></code></div>
 </div>
-<div class="line">An element Element of the Point list is neither a variable nor a number:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Point</span></code> list is neither a variable nor a number:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
 </div>
-<div class="line">Alphas is a variable or a partial list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Alphas</span></code> is a variable or a partial list:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line">Alphas is neither a partial list nor a list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Alphas</span></code> is neither a partial list nor a list:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Alphas)</span></code></div>
 </div>
-<div class="line">An element Element of the Alphas list is neither a variable nor a number:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Alphas</span></code> list is neither a variable nor a number:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
 </div>
-<div class="line">An element Element of the Alphas list is not positive:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Alphas</span></code> list is not positive:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_number,Element)</span></code></div>
 </div>
-<div class="line">Point and Alphas have different lengths:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> and <code class="docutils literal notranslate"><span class="pre">Alphas</span></code> have different lengths:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(dimension_mismatch,Point)</span></code></div>
 </div>
-<div class="line">Alphas has fewer than two elements:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Alphas</span></code> has fewer than two elements:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(2),Alphas)</span></code></div>
 </div>
@@ -2511,45 +2511,45 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dirichlet_log_density(+list(number),+list(positive_number),-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">dirichlet_log_density(+list(number),+list(positive_number),-atomic)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Point is a variable or a partial list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> is a variable or a partial list:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line">Point is neither a partial list nor a list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> is neither a partial list nor a list:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Point)</span></code></div>
 </div>
-<div class="line">An element Element of the Point list is neither a variable nor a number:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Point</span></code> list is neither a variable nor a number:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
 </div>
-<div class="line">Alphas is a variable or a partial list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Alphas</span></code> is a variable or a partial list:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line">Alphas is neither a partial list nor a list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Alphas</span></code> is neither a partial list nor a list:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Alphas)</span></code></div>
 </div>
-<div class="line">An element Element of the Alphas list is neither a variable nor a number:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Alphas</span></code> list is neither a variable nor a number:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
 </div>
-<div class="line">An element Element of the Alphas list is not positive:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Alphas</span></code> list is not positive:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(positive_number,Element)</span></code></div>
 </div>
-<div class="line">Point and Alphas have different lengths:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Point</span></code> and <code class="docutils literal notranslate"><span class="pre">Alphas</span></code> have different lengths:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(dimension_mismatch,Point)</span></code></div>
 </div>
-<div class="line">Alphas has fewer than two elements:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Alphas</span></code> has fewer than two elements:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(2),Alphas)</span></code></div>
 </div>
@@ -2579,39 +2579,39 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Trials is a variable:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Trials</span></code> is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line">Trials is neither a variable nor an integer:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Trials</span></code> is neither a variable nor an integer:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Trials)</span></code></div>
 </div>
-<div class="line">Trials is a negative integer:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Trials</span></code> is a negative integer:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Trials)</span></code></div>
 </div>
-<div class="line">Probabilities is a variable or a partial list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Probabilities</span></code> is a variable or a partial list:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line">Probabilities is neither a partial list nor a list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Probabilities</span></code> is neither a partial list nor a list:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Probabilities)</span></code></div>
 </div>
-<div class="line">An element Element of the Probabilities list is neither a variable nor a number:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Probabilities</span></code> list is neither a variable nor a float:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(float,Element)</span></code></div>
 </div>
-<div class="line">An element Element of the Probabilities list is not a probability:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Probabilities</span></code> list is a float but not a probability:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(probability,Element)</span></code></div>
 </div>
-<div class="line">Probabilities is empty:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Probabilities</span></code> is empty:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),Probabilities)</span></code></div>
 </div>
-<div class="line">Probabilities do not sum to one:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Probabilities</span></code> do not sum to one:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(probability_distribution,Probabilities)</span></code></div>
 </div>
@@ -2641,51 +2641,51 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Count is a variable:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line">Count is neither a variable nor an integer:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is neither a variable nor an integer:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Count)</span></code></div>
 </div>
-<div class="line">Count is an integer but not a non-negative integer:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Count</span></code> is an integer but not a non-negative integer:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Count)</span></code></div>
 </div>
-<div class="line">Trials is a variable:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Trials</span></code> is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line">Trials is neither a variable nor an integer:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Trials</span></code> is neither a variable nor an integer:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Trials)</span></code></div>
 </div>
-<div class="line">Trials is a negative integer:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Trials</span></code> is a negative integer:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Trials)</span></code></div>
 </div>
-<div class="line">Probabilities is a variable or a partial list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Probabilities</span></code> is a variable or a partial list:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line">Probabilities is neither a partial list nor a list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Probabilities</span></code> is neither a partial list nor a list:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Probabilities)</span></code></div>
 </div>
-<div class="line">An element Element of the Probabilities list is neither a variable nor a number:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Probabilities</span></code> list is neither a variable nor a float:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(float,Element)</span></code></div>
 </div>
-<div class="line">An element Element of the Probabilities list is not a probability:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Probabilities</span></code> list is a float but not a probability:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(probability,Element)</span></code></div>
 </div>
-<div class="line">Probabilities is empty:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Probabilities</span></code> is empty:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),Probabilities)</span></code></div>
 </div>
-<div class="line">Probabilities do not sum to one:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Probabilities</span></code> do not sum to one:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(probability_distribution,Probabilities)</span></code></div>
 </div>
@@ -2715,59 +2715,59 @@
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Counts is a variable or a partial list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Counts</span></code> is a variable or a partial list:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line">Counts is neither a partial list nor a list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Counts</span></code> is neither a partial list nor a list:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Counts)</span></code></div>
 </div>
-<div class="line">An element Element of the Counts list is neither a variable nor an integer:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Counts</span></code> list is neither a variable nor an integer:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Element)</span></code></div>
 </div>
-<div class="line">An element Element of the Counts list is negative:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Counts</span></code> list is an integer but not a non-negative integer:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Element)</span></code></div>
 </div>
-<div class="line">Trials is a variable:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Trials</span></code> is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line">Trials is neither a variable nor an integer:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Trials</span></code> is neither a variable nor an integer:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Trials)</span></code></div>
 </div>
-<div class="line">Trials is a negative integer:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Trials</span></code> is a negative integer:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Trials)</span></code></div>
 </div>
-<div class="line">Probabilities is a variable or a partial list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Probabilities</span></code> is a variable or a partial list:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line">Probabilities is neither a partial list nor a list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Probabilities</span></code> is neither a partial list nor a list:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Probabilities)</span></code></div>
 </div>
-<div class="line">An element Element of the Probabilities list is neither a variable nor a number:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Probabilities</span></code> list is neither a variable nor a float:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(float,Element)</span></code></div>
 </div>
-<div class="line">An element Element of the Probabilities list is not a probability:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Probabilities</span></code> list is a float but not a probability:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(probability,Element)</span></code></div>
 </div>
-<div class="line">Probabilities is empty:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Probabilities</span></code> is empty:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),Probabilities)</span></code></div>
 </div>
-<div class="line">Probabilities do not sum to one:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Probabilities</span></code> do not sum to one:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(probability_distribution,Probabilities)</span></code></div>
 </div>
-<div class="line">Counts and Probabilities have different lengths:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Counts</span></code> and <code class="docutils literal notranslate"><span class="pre">Probabilities</span></code> have different lengths:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(dimension_mismatch,Counts)</span></code></div>
 </div>
@@ -2791,65 +2791,65 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">multinomial_log_density(+list(non_negative_integer),+non_negative_integer,+list(probability),-term)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">multinomial_log_density(+list(non_negative_integer),+non_negative_integer,+list(probability),-atomic)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Counts is a variable or a partial list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Counts</span></code> is a variable or a partial list:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line">Counts is neither a partial list nor a list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Counts</span></code> is neither a partial list nor a list:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Counts)</span></code></div>
 </div>
-<div class="line">An element Element of the Counts list is neither a variable nor an integer:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Counts</span></code> list is neither a variable nor an integer:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Element)</span></code></div>
 </div>
-<div class="line">An element Element of the Counts list is negative:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Counts</span></code> list is an integer but not a non-negative integer:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Element)</span></code></div>
 </div>
-<div class="line">Trials is a variable:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Trials</span></code> is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line">Trials is neither a variable nor an integer:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Trials</span></code> is neither a variable nor an integer:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Trials)</span></code></div>
 </div>
-<div class="line">Trials is a negative integer:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Trials</span></code> is a negative integer:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Trials)</span></code></div>
 </div>
-<div class="line">Probabilities is a variable or a partial list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Probabilities</span></code> is a variable or a partial list:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line">Probabilities is neither a partial list nor a list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Probabilities</span></code> is neither a partial list nor a list:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Probabilities)</span></code></div>
 </div>
-<div class="line">An element Element of the Probabilities list is neither a variable nor a number:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Probabilities</span></code> list is neither a variable nor a float:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(float,Element)</span></code></div>
 </div>
-<div class="line">An element Element of the Probabilities list is not a probability:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Probabilities</span></code> list is a float but not a probability:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(probability,Element)</span></code></div>
 </div>
-<div class="line">Probabilities is empty:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Probabilities</span></code> is empty:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),Probabilities)</span></code></div>
 </div>
-<div class="line">Probabilities do not sum to one:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Probabilities</span></code> do not sum to one:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(probability_distribution,Probabilities)</span></code></div>
 </div>
-<div class="line">Counts and Probabilities have different lengths:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Counts</span></code> and <code class="docutils literal notranslate"><span class="pre">Probabilities</span></code> have different lengths:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(dimension_mismatch,Counts)</span></code></div>
 </div>
@@ -2873,53 +2873,57 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">multinomial_quantile(+number,+non_negative_integer,+list(probability),-list(non_negative_integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">multinomial_quantile(+open_probability,+non_negative_integer,+list(probability),-list(non_negative_integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Exceptions:</strong></div>
 <div class="line-block">
-<div class="line">Probability is not a number:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Probability</span></code> is a variable:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Probability)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line">Probability is not strictly between zero and one:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Probability</span></code> is neither a variable nor a float:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(float,Probability)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Probability</span></code> is a float but not strictly between zero and one:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(open_probability,Probability)</span></code></div>
 </div>
-<div class="line">Trials is a variable:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Trials</span></code> is a variable:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line">Trials is neither a variable nor an integer:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Trials</span></code> is neither a variable nor an integer:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(integer,Trials)</span></code></div>
 </div>
-<div class="line">Trials is a negative integer:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Trials</span></code> is a negative integer:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(non_negative_integer,Trials)</span></code></div>
 </div>
-<div class="line">Probabilities is a variable or a partial list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Probabilities</span></code> is a variable or a partial list:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">instantiation_error</span></code></div>
 </div>
-<div class="line">Probabilities is neither a partial list nor a list:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Probabilities</span></code> is neither a partial list nor a list:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(list,Probabilities)</span></code></div>
 </div>
-<div class="line">An element Element of the Probabilities list is neither a variable nor a number:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Probabilities</span></code> list is neither a variable nor a float:</div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(number,Element)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">type_error(float,Element)</span></code></div>
 </div>
-<div class="line">An element Element of the Probabilities list is not a probability:</div>
+<div class="line">An element <code class="docutils literal notranslate"><span class="pre">Element</span></code> of the <code class="docutils literal notranslate"><span class="pre">Probabilities</span></code> list is a float but not a probability:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(probability,Element)</span></code></div>
 </div>
-<div class="line">Probabilities is empty:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Probabilities</span></code> is empty:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(minimum_number_of_values(1),Probabilities)</span></code></div>
 </div>
-<div class="line">Probabilities do not sum to one:</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Probabilities</span></code> do not sum to one:</div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(probability_distribution,Probabilities)</span></code></div>
 </div>

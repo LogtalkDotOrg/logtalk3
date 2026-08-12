@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-11,
+		date is 2026-08-12,
 		comment is 'Unit tests for the "univariate_distributions" library.'
 	]).
 
@@ -97,7 +97,7 @@
 	test(standard_normal_quantile_one_error, error(domain_error(open_probability, 1.0))) :-
 		univariate_distributions(fast_random)::standard_normal_quantile(1.0, _).
 
-	test(standard_normal_quantile_type_error, error(type_error(number, probability))) :-
+	test(standard_normal_quantile_type_error, error(type_error(float, probability))) :-
 		univariate_distributions(fast_random)::standard_normal_quantile(probability, _).
 
 	test(normal_density_zero_deviation_error, error(domain_error(positive_number, 0.0))) :-
@@ -120,6 +120,14 @@
 		^^assertion(abs(Distribution - 0.5) =< 1.0e-12),
 		^^assertion(abs(Quantile) =< 1.0e-12).
 
+	test(standard_t_samples_match_individual_samples, deterministic(Samples == [Sample1, Sample2, Sample3])) :-
+		fast_random(xoshiro128pp)::reset_seed,
+		univariate_distributions(fast_random(xoshiro128pp))::standard_t_samples(3, 1.5, Samples),
+		fast_random(xoshiro128pp)::reset_seed,
+		univariate_distributions(fast_random(xoshiro128pp))::standard_t(1.5, Sample1),
+		univariate_distributions(fast_random(xoshiro128pp))::standard_t(1.5, Sample2),
+		univariate_distributions(fast_random(xoshiro128pp))::standard_t(1.5, Sample3).
+
 	test(location_scale_t_predicates, deterministic) :-
 		univariate_distributions(fast_random)::t(3.0, 2.0, 1.5, Sample),
 		univariate_distributions(fast_random)::t_samples(2, 3.0, 2.0, 1.5, Samples),
@@ -134,6 +142,14 @@
 		^^assertion(abs(Distribution - 0.5) =< 1.0e-12),
 		^^assertion(abs(Quantile - 3.0) =< 1.0e-12).
 
+	test(t_samples_match_individual_samples, deterministic(Samples == [Sample1, Sample2, Sample3])) :-
+		fast_random(xoshiro128pp)::reset_seed,
+		univariate_distributions(fast_random(xoshiro128pp))::t_samples(3, 3.0, 2.0, 1.5, Samples),
+		fast_random(xoshiro128pp)::reset_seed,
+		univariate_distributions(fast_random(xoshiro128pp))::t(3.0, 2.0, 1.5, Sample1),
+		univariate_distributions(fast_random(xoshiro128pp))::t(3.0, 2.0, 1.5, Sample2),
+		univariate_distributions(fast_random(xoshiro128pp))::t(3.0, 2.0, 1.5, Sample3).
+
 	test(chi_squared_predicates, deterministic) :-
 		univariate_distributions(fast_random)::chi_squared(2.5, Sample),
 		univariate_distributions(fast_random)::chi_squared_samples(2, 2.5, Samples),
@@ -147,6 +163,22 @@
 		^^assertion(abs(LogDensity + 1.6931471805599453) =< 1.0e-12),
 		^^assertion(abs(Distribution - 0.6321205588285577) =< 1.0e-12),
 		^^assertion(abs(Quantile - 1.3862943611198906) =< 1.0e-10).
+
+	test(chi_squared_density_zero_boundary, deterministic) :-
+		univariate_distributions(fast_random)::chi_squared_density(0.0, 1.0, InfiniteDensity),
+		univariate_distributions(fast_random)::chi_squared_density(0.0, 2.0, FiniteDensity),
+		univariate_distributions(fast_random)::chi_squared_density(0.0, 3.0, ZeroDensity),
+		^^assertion(InfiniteDensity == positive_infinity),
+		^^assertion(abs(FiniteDensity - 0.5) =< 1.0e-15),
+		^^assertion(ZeroDensity =:= 0.0).
+
+	test(chi_squared_samples_match_individual_samples, deterministic(Samples == [Sample1, Sample2, Sample3])) :-
+		fast_random(xoshiro128pp)::reset_seed,
+		univariate_distributions(fast_random(xoshiro128pp))::chi_squared_samples(3, 2.5, Samples),
+		fast_random(xoshiro128pp)::reset_seed,
+		univariate_distributions(fast_random(xoshiro128pp))::chi_squared(2.5, Sample1),
+		univariate_distributions(fast_random(xoshiro128pp))::chi_squared(2.5, Sample2),
+		univariate_distributions(fast_random(xoshiro128pp))::chi_squared(2.5, Sample3).
 
 	test(gamma_predicates, deterministic) :-
 		univariate_distributions(fast_random)::gamma(2.0, 3.0, Sample),
@@ -163,6 +195,14 @@
 		^^assertion(abs(Distribution - 0.26424111765711533) =< 1.0e-12),
 		^^assertion(abs(RoundTrip - 0.5) =< 1.0e-10).
 
+	test(gamma_density_zero_boundary, deterministic) :-
+		univariate_distributions(fast_random)::gamma_density(0.0, 0.5, 2.0, InfiniteDensity),
+		univariate_distributions(fast_random)::gamma_density(0.0, 1.0, 2.0, FiniteDensity),
+		univariate_distributions(fast_random)::gamma_density(0.0, 2.0, 2.0, ZeroDensity),
+		^^assertion(InfiniteDensity == positive_infinity),
+		^^assertion(abs(FiniteDensity - 0.5) =< 1.0e-15),
+		^^assertion(ZeroDensity =:= 0.0).
+
 	test(beta_predicates, deterministic) :-
 		univariate_distributions(fast_random)::beta(2.0, 2.0, Sample),
 		univariate_distributions(fast_random)::beta_samples(2, 2.0, 2.0, Samples),
@@ -176,6 +216,20 @@
 		^^assertion(abs(LogDensity - 0.4054651081081644) =< 1.0e-12),
 		^^assertion(abs(Distribution - 0.5) =< 1.0e-12),
 		^^assertion(abs(Quantile - 0.5) =< 1.0e-12).
+
+	test(beta_density_boundaries, deterministic) :-
+		univariate_distributions(fast_random)::beta_density(0.0, 0.5, 2.0, InfiniteLowerDensity),
+		univariate_distributions(fast_random)::beta_density(0.0, 1.0, 3.0, FiniteLowerDensity),
+		univariate_distributions(fast_random)::beta_density(0.0, 2.0, 3.0, ZeroLowerDensity),
+		univariate_distributions(fast_random)::beta_density(1.0, 2.0, 0.5, InfiniteUpperDensity),
+		univariate_distributions(fast_random)::beta_density(1.0, 3.0, 1.0, FiniteUpperDensity),
+		univariate_distributions(fast_random)::beta_density(1.0, 3.0, 2.0, ZeroUpperDensity),
+		^^assertion(InfiniteLowerDensity == positive_infinity),
+		^^assertion(abs(FiniteLowerDensity - 3.0) =< 1.0e-15),
+		^^assertion(ZeroLowerDensity =:= 0.0),
+		^^assertion(InfiniteUpperDensity == positive_infinity),
+		^^assertion(abs(FiniteUpperDensity - 3.0) =< 1.0e-15),
+		^^assertion(ZeroUpperDensity =:= 0.0).
 
 	test(exponential_predicates, deterministic) :-
 		univariate_distributions(fast_random)::exponential(2.0, Sample),
@@ -204,5 +258,41 @@
 		^^assertion(abs(LogDensity + 1.3862943611198906) =< 1.0e-12),
 		^^assertion(abs(Distribution - 0.5) =< 1.0e-12),
 		^^assertion(abs(Quantile - 1.0) =< 1.0e-10).
+
+	test(fisher_density_zero_boundary, deterministic) :-
+		univariate_distributions(fast_random)::fisher_density(0.0, 1.0, 3.0, InfiniteDensity),
+		univariate_distributions(fast_random)::fisher_density(0.0, 2.0, 3.0, FiniteDensity),
+		univariate_distributions(fast_random)::fisher_density(0.0, 3.0, 3.0, ZeroDensity),
+		^^assertion(InfiniteDensity == positive_infinity),
+		^^assertion(abs(FiniteDensity - 1.0) =< 1.0e-15),
+		^^assertion(ZeroDensity =:= 0.0).
+
+	test(fisher_samples_match_individual_samples, deterministic(Samples == [Sample1, Sample2, Sample3])) :-
+		fast_random(xoshiro128pp)::reset_seed,
+		univariate_distributions(fast_random(xoshiro128pp))::fisher_samples(3, 2.5, 3.5, Samples),
+		fast_random(xoshiro128pp)::reset_seed,
+		univariate_distributions(fast_random(xoshiro128pp))::fisher(2.5, 3.5, Sample1),
+		univariate_distributions(fast_random(xoshiro128pp))::fisher(2.5, 3.5, Sample2),
+		univariate_distributions(fast_random(xoshiro128pp))::fisher(2.5, 3.5, Sample3).
+
+	test(numerical_quantile_round_trips, deterministic) :-
+		univariate_distributions(fast_random)::standard_t_quantile(0.1, 5.0, TQuantile),
+		univariate_distributions(fast_random)::standard_t_distribution(TQuantile, 5.0, TProbability),
+		univariate_distributions(fast_random)::t_quantile(0.9, 3.0, 2.0, 5.0, LocationScaleTQuantile),
+		univariate_distributions(fast_random)::t_distribution(LocationScaleTQuantile, 3.0, 2.0, 5.0, LocationScaleTProbability),
+		univariate_distributions(fast_random)::chi_squared_quantile(0.9, 4.0, ChiSquaredQuantile),
+		univariate_distributions(fast_random)::chi_squared_distribution(ChiSquaredQuantile, 4.0, ChiSquaredProbability),
+		univariate_distributions(fast_random)::gamma_quantile(0.1, 2.0, 3.0, GammaQuantile),
+		univariate_distributions(fast_random)::gamma_distribution(GammaQuantile, 2.0, 3.0, GammaProbability),
+		univariate_distributions(fast_random)::beta_quantile(0.9, 2.0, 5.0, BetaQuantile),
+		univariate_distributions(fast_random)::beta_distribution(BetaQuantile, 2.0, 5.0, BetaProbability),
+		univariate_distributions(fast_random)::fisher_quantile(0.1, 5.0, 7.0, FisherQuantile),
+		univariate_distributions(fast_random)::fisher_distribution(FisherQuantile, 5.0, 7.0, FisherProbability),
+		^^assertion(abs(TProbability - 0.1) =< 1.0e-12),
+		^^assertion(abs(LocationScaleTProbability - 0.9) =< 1.0e-12),
+		^^assertion(abs(ChiSquaredProbability - 0.9) =< 1.0e-12),
+		^^assertion(abs(GammaProbability - 0.1) =< 1.0e-12),
+		^^assertion(abs(BetaProbability - 0.9) =< 1.0e-12),
+		^^assertion(abs(FisherProbability - 0.1) =< 1.0e-12).
 
 :- end_object.

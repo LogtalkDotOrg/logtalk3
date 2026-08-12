@@ -425,6 +425,11 @@ choices are <code class="docutils literal notranslate"><span class="pre">random(
 <p>Sampling predicates accept a zero standard deviation, producing the mean
 as a degenerate sample. Density, log-density, cumulative distribution,
 and quantile predicates require a positive standard deviation.</p>
+<p>At support boundaries, chi-squared, gamma, beta, and Fisher-Snedecor
+densities return the atom <code class="docutils literal notranslate"><span class="pre">positive_infinity</span></code> when the mathematical
+density is infinite. Log-density predicates return the atoms
+<code class="docutils literal notranslate"><span class="pre">positive_infinity</span></code> and <code class="docutils literal notranslate"><span class="pre">negative_infinity</span></code> for infinite and zero
+densities, respectively.</p>
 </section>
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>

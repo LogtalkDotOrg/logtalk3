@@ -332,7 +332,7 @@ Computes the multivariate normal log-density at a point using the default numeri
 | **Template:**
 |    ``multivariate_normal_log_density(Point,Mean,Covariance,LogDensity)``
 | **Mode and number of proofs:**
-|    ``multivariate_normal_log_density(+list(number),+list(number),+list(list(number)),-term)`` - ``one_or_error``
+|    ``multivariate_normal_log_density(+list(number),+list(number),+list(list(number)),-atomic)`` - ``one_or_error``
 
 | **Exceptions:**
 |    ``Point`` is a variable or a partial list:
@@ -381,7 +381,7 @@ Computes the multivariate normal log-density at a point using the given non-nega
 | **Template:**
 |    ``multivariate_normal_log_density(Point,Mean,Covariance,Tolerance,LogDensity)``
 | **Mode and number of proofs:**
-|    ``multivariate_normal_log_density(+list(number),+list(number),+list(list(number)),+number,-term)`` - ``one_or_error``
+|    ``multivariate_normal_log_density(+list(number),+list(number),+list(list(number)),+number,-atomic)`` - ``one_or_error``
 
 | **Exceptions:**
 |    ``Point`` is a variable or a partial list:
@@ -878,7 +878,7 @@ Computes the multivariate Student's t log-density using the default numerical to
 | **Template:**
 |    ``multivariate_t_log_density(Point,DegreesOfFreedom,Location,Scale,LogDensity)``
 | **Mode and number of proofs:**
-|    ``multivariate_t_log_density(+list(number),+positive_number,+list(number),+list(list(number)),-term)`` - ``one_or_error``
+|    ``multivariate_t_log_density(+list(number),+positive_number,+list(number),+list(list(number)),-atomic)`` - ``one_or_error``
 
 | **Exceptions:**
 |    ``Point`` is a variable or a partial list:
@@ -921,7 +921,7 @@ Computes the multivariate Student's t log-density using the given non-negative n
 | **Template:**
 |    ``multivariate_t_log_density(Point,DegreesOfFreedom,Location,Scale,Tolerance,LogDensity)``
 | **Mode and number of proofs:**
-|    ``multivariate_t_log_density(+list(number),+positive_number,+list(number),+list(list(number)),+number,-term)`` - ``one_or_error``
+|    ``multivariate_t_log_density(+list(number),+positive_number,+list(number),+list(list(number)),+number,-atomic)`` - ``one_or_error``
 
 | **Exceptions:**
 |    ``Point`` is a variable or a partial list:
@@ -1161,15 +1161,15 @@ Returns a Dirichlet distributed random vector on the simplex.
 |    ``dirichlet(+list(positive_number),-list(float))`` - ``one_or_error``
 
 | **Exceptions:**
-|    Alphas is a variable or a partial list:
+|    ``Alphas`` is a variable or a partial list:
 |        ``instantiation_error``
-|    Alphas is neither a partial list nor a list:
+|    ``Alphas`` is neither a partial list nor a list:
 |        ``type_error(list,Alphas)``
-|    An element Element of the Alphas list is neither a variable nor a number:
+|    An element ``Element`` of the ``Alphas`` list is neither a variable nor a number:
 |        ``type_error(number,Element)``
-|    An element Element of the Alphas list is not positive:
+|    An element ``Element`` of the ``Alphas`` list is not positive:
 |        ``domain_error(positive_number,Element)``
-|    Alphas has fewer than two elements:
+|    ``Alphas`` has fewer than two elements:
 |        ``domain_error(minimum_number_of_values(2),Alphas)``
 
 
@@ -1192,21 +1192,21 @@ Returns the requested number of Dirichlet distributed random vectors.
 |    ``dirichlet_samples(+integer,+list(positive_number),-list(list(float)))`` - ``one_or_error``
 
 | **Exceptions:**
-|    Count is a variable:
+|    ``Count`` is a variable:
 |        ``instantiation_error``
-|    Count is neither a variable nor an integer:
+|    ``Count`` is neither a variable nor an integer:
 |        ``type_error(integer,Count)``
-|    Count is an integer but not a non-negative integer:
+|    ``Count`` is an integer but not a non-negative integer:
 |        ``domain_error(non_negative_integer,Count)``
-|    Alphas is a variable or a partial list:
+|    ``Alphas`` is a variable or a partial list:
 |        ``instantiation_error``
-|    Alphas is neither a partial list nor a list:
+|    ``Alphas`` is neither a partial list nor a list:
 |        ``type_error(list,Alphas)``
-|    An element Element of the Alphas list is neither a variable nor a number:
+|    An element ``Element`` of the ``Alphas`` list is neither a variable nor a number:
 |        ``type_error(number,Element)``
-|    An element Element of the Alphas list is not positive:
+|    An element ``Element`` of the ``Alphas`` list is not positive:
 |        ``domain_error(positive_number,Element)``
-|    Alphas has fewer than two elements:
+|    ``Alphas`` has fewer than two elements:
 |        ``domain_error(minimum_number_of_values(2),Alphas)``
 
 
@@ -1226,26 +1226,26 @@ Computes the Dirichlet density at a point on the simplex. At a boundary, returns
 | **Template:**
 |    ``dirichlet_density(Point,Alphas,Density)``
 | **Mode and number of proofs:**
-|    ``dirichlet_density(+list(number),+list(positive_number),-term)`` - ``one_or_error``
+|    ``dirichlet_density(+list(number),+list(positive_number),-atomic)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Point is a variable or a partial list:
+|    ``Point`` is a variable or a partial list:
 |        ``instantiation_error``
-|    Point is neither a partial list nor a list:
+|    ``Point`` is neither a partial list nor a list:
 |        ``type_error(list,Point)``
-|    An element Element of the Point list is neither a variable nor a number:
+|    An element ``Element`` of the ``Point`` list is neither a variable nor a number:
 |        ``type_error(number,Element)``
-|    Alphas is a variable or a partial list:
+|    ``Alphas`` is a variable or a partial list:
 |        ``instantiation_error``
-|    Alphas is neither a partial list nor a list:
+|    ``Alphas`` is neither a partial list nor a list:
 |        ``type_error(list,Alphas)``
-|    An element Element of the Alphas list is neither a variable nor a number:
+|    An element ``Element`` of the ``Alphas`` list is neither a variable nor a number:
 |        ``type_error(number,Element)``
-|    An element Element of the Alphas list is not positive:
+|    An element ``Element`` of the ``Alphas`` list is not positive:
 |        ``domain_error(positive_number,Element)``
-|    Point and Alphas have different lengths:
+|    ``Point`` and ``Alphas`` have different lengths:
 |        ``domain_error(dimension_mismatch,Point)``
-|    Alphas has fewer than two elements:
+|    ``Alphas`` has fewer than two elements:
 |        ``domain_error(minimum_number_of_values(2),Alphas)``
 
 
@@ -1265,26 +1265,26 @@ Computes the Dirichlet log-density at a point on the simplex. At a boundary, ret
 | **Template:**
 |    ``dirichlet_log_density(Point,Alphas,LogDensity)``
 | **Mode and number of proofs:**
-|    ``dirichlet_log_density(+list(number),+list(positive_number),-term)`` - ``one_or_error``
+|    ``dirichlet_log_density(+list(number),+list(positive_number),-atomic)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Point is a variable or a partial list:
+|    ``Point`` is a variable or a partial list:
 |        ``instantiation_error``
-|    Point is neither a partial list nor a list:
+|    ``Point`` is neither a partial list nor a list:
 |        ``type_error(list,Point)``
-|    An element Element of the Point list is neither a variable nor a number:
+|    An element ``Element`` of the ``Point`` list is neither a variable nor a number:
 |        ``type_error(number,Element)``
-|    Alphas is a variable or a partial list:
+|    ``Alphas`` is a variable or a partial list:
 |        ``instantiation_error``
-|    Alphas is neither a partial list nor a list:
+|    ``Alphas`` is neither a partial list nor a list:
 |        ``type_error(list,Alphas)``
-|    An element Element of the Alphas list is neither a variable nor a number:
+|    An element ``Element`` of the ``Alphas`` list is neither a variable nor a number:
 |        ``type_error(number,Element)``
-|    An element Element of the Alphas list is not positive:
+|    An element ``Element`` of the ``Alphas`` list is not positive:
 |        ``domain_error(positive_number,Element)``
-|    Point and Alphas have different lengths:
+|    ``Point`` and ``Alphas`` have different lengths:
 |        ``domain_error(dimension_mismatch,Point)``
-|    Alphas has fewer than two elements:
+|    ``Alphas`` has fewer than two elements:
 |        ``domain_error(minimum_number_of_values(2),Alphas)``
 
 
@@ -1307,23 +1307,23 @@ Returns a multinomial distributed random count vector.
 |    ``multinomial(+non_negative_integer,+list(probability),-list(non_negative_integer))`` - ``one_or_error``
 
 | **Exceptions:**
-|    Trials is a variable:
+|    ``Trials`` is a variable:
 |        ``instantiation_error``
-|    Trials is neither a variable nor an integer:
+|    ``Trials`` is neither a variable nor an integer:
 |        ``type_error(integer,Trials)``
-|    Trials is a negative integer:
+|    ``Trials`` is a negative integer:
 |        ``domain_error(non_negative_integer,Trials)``
-|    Probabilities is a variable or a partial list:
+|    ``Probabilities`` is a variable or a partial list:
 |        ``instantiation_error``
-|    Probabilities is neither a partial list nor a list:
+|    ``Probabilities`` is neither a partial list nor a list:
 |        ``type_error(list,Probabilities)``
-|    An element Element of the Probabilities list is neither a variable nor a number:
-|        ``type_error(number,Element)``
-|    An element Element of the Probabilities list is not a probability:
+|    An element ``Element`` of the ``Probabilities`` list is neither a variable nor a float:
+|        ``type_error(float,Element)``
+|    An element ``Element`` of the ``Probabilities`` list is a float but not a probability:
 |        ``domain_error(probability,Element)``
-|    Probabilities is empty:
+|    ``Probabilities`` is empty:
 |        ``domain_error(minimum_number_of_values(1),Probabilities)``
-|    Probabilities do not sum to one:
+|    ``Probabilities`` do not sum to one:
 |        ``domain_error(probability_distribution,Probabilities)``
 
 
@@ -1346,29 +1346,29 @@ Returns the requested number of multinomial distributed random count vectors.
 |    ``multinomial_samples(+integer,+non_negative_integer,+list(probability),-list(list(non_negative_integer)))`` - ``one_or_error``
 
 | **Exceptions:**
-|    Count is a variable:
+|    ``Count`` is a variable:
 |        ``instantiation_error``
-|    Count is neither a variable nor an integer:
+|    ``Count`` is neither a variable nor an integer:
 |        ``type_error(integer,Count)``
-|    Count is an integer but not a non-negative integer:
+|    ``Count`` is an integer but not a non-negative integer:
 |        ``domain_error(non_negative_integer,Count)``
-|    Trials is a variable:
+|    ``Trials`` is a variable:
 |        ``instantiation_error``
-|    Trials is neither a variable nor an integer:
+|    ``Trials`` is neither a variable nor an integer:
 |        ``type_error(integer,Trials)``
-|    Trials is a negative integer:
+|    ``Trials`` is a negative integer:
 |        ``domain_error(non_negative_integer,Trials)``
-|    Probabilities is a variable or a partial list:
+|    ``Probabilities`` is a variable or a partial list:
 |        ``instantiation_error``
-|    Probabilities is neither a partial list nor a list:
+|    ``Probabilities`` is neither a partial list nor a list:
 |        ``type_error(list,Probabilities)``
-|    An element Element of the Probabilities list is neither a variable nor a number:
-|        ``type_error(number,Element)``
-|    An element Element of the Probabilities list is not a probability:
+|    An element ``Element`` of the ``Probabilities`` list is neither a variable nor a float:
+|        ``type_error(float,Element)``
+|    An element ``Element`` of the ``Probabilities`` list is a float but not a probability:
 |        ``domain_error(probability,Element)``
-|    Probabilities is empty:
+|    ``Probabilities`` is empty:
 |        ``domain_error(minimum_number_of_values(1),Probabilities)``
-|    Probabilities do not sum to one:
+|    ``Probabilities`` do not sum to one:
 |        ``domain_error(probability_distribution,Probabilities)``
 
 
@@ -1391,33 +1391,33 @@ Computes the multinomial probability mass at the given count vector.
 |    ``multinomial_density(+list(non_negative_integer),+non_negative_integer,+list(probability),-float)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Counts is a variable or a partial list:
+|    ``Counts`` is a variable or a partial list:
 |        ``instantiation_error``
-|    Counts is neither a partial list nor a list:
+|    ``Counts`` is neither a partial list nor a list:
 |        ``type_error(list,Counts)``
-|    An element Element of the Counts list is neither a variable nor an integer:
+|    An element ``Element`` of the ``Counts`` list is neither a variable nor an integer:
 |        ``type_error(integer,Element)``
-|    An element Element of the Counts list is negative:
+|    An element ``Element`` of the ``Counts`` list is an integer but not a non-negative integer:
 |        ``domain_error(non_negative_integer,Element)``
-|    Trials is a variable:
+|    ``Trials`` is a variable:
 |        ``instantiation_error``
-|    Trials is neither a variable nor an integer:
+|    ``Trials`` is neither a variable nor an integer:
 |        ``type_error(integer,Trials)``
-|    Trials is a negative integer:
+|    ``Trials`` is a negative integer:
 |        ``domain_error(non_negative_integer,Trials)``
-|    Probabilities is a variable or a partial list:
+|    ``Probabilities`` is a variable or a partial list:
 |        ``instantiation_error``
-|    Probabilities is neither a partial list nor a list:
+|    ``Probabilities`` is neither a partial list nor a list:
 |        ``type_error(list,Probabilities)``
-|    An element Element of the Probabilities list is neither a variable nor a number:
-|        ``type_error(number,Element)``
-|    An element Element of the Probabilities list is not a probability:
+|    An element ``Element`` of the ``Probabilities`` list is neither a variable nor a float:
+|        ``type_error(float,Element)``
+|    An element ``Element`` of the ``Probabilities`` list is a float but not a probability:
 |        ``domain_error(probability,Element)``
-|    Probabilities is empty:
+|    ``Probabilities`` is empty:
 |        ``domain_error(minimum_number_of_values(1),Probabilities)``
-|    Probabilities do not sum to one:
+|    ``Probabilities`` do not sum to one:
 |        ``domain_error(probability_distribution,Probabilities)``
-|    Counts and Probabilities have different lengths:
+|    ``Counts`` and ``Probabilities`` have different lengths:
 |        ``domain_error(dimension_mismatch,Counts)``
 
 
@@ -1437,36 +1437,36 @@ Computes the multinomial log-probability mass at the given count vector. Returns
 | **Template:**
 |    ``multinomial_log_density(Counts,Trials,Probabilities,LogDensity)``
 | **Mode and number of proofs:**
-|    ``multinomial_log_density(+list(non_negative_integer),+non_negative_integer,+list(probability),-term)`` - ``one_or_error``
+|    ``multinomial_log_density(+list(non_negative_integer),+non_negative_integer,+list(probability),-atomic)`` - ``one_or_error``
 
 | **Exceptions:**
-|    Counts is a variable or a partial list:
+|    ``Counts`` is a variable or a partial list:
 |        ``instantiation_error``
-|    Counts is neither a partial list nor a list:
+|    ``Counts`` is neither a partial list nor a list:
 |        ``type_error(list,Counts)``
-|    An element Element of the Counts list is neither a variable nor an integer:
+|    An element ``Element`` of the ``Counts`` list is neither a variable nor an integer:
 |        ``type_error(integer,Element)``
-|    An element Element of the Counts list is negative:
+|    An element ``Element`` of the ``Counts`` list is an integer but not a non-negative integer:
 |        ``domain_error(non_negative_integer,Element)``
-|    Trials is a variable:
+|    ``Trials`` is a variable:
 |        ``instantiation_error``
-|    Trials is neither a variable nor an integer:
+|    ``Trials`` is neither a variable nor an integer:
 |        ``type_error(integer,Trials)``
-|    Trials is a negative integer:
+|    ``Trials`` is a negative integer:
 |        ``domain_error(non_negative_integer,Trials)``
-|    Probabilities is a variable or a partial list:
+|    ``Probabilities`` is a variable or a partial list:
 |        ``instantiation_error``
-|    Probabilities is neither a partial list nor a list:
+|    ``Probabilities`` is neither a partial list nor a list:
 |        ``type_error(list,Probabilities)``
-|    An element Element of the Probabilities list is neither a variable nor a number:
-|        ``type_error(number,Element)``
-|    An element Element of the Probabilities list is not a probability:
+|    An element ``Element`` of the ``Probabilities`` list is neither a variable nor a float:
+|        ``type_error(float,Element)``
+|    An element ``Element`` of the ``Probabilities`` list is a float but not a probability:
 |        ``domain_error(probability,Element)``
-|    Probabilities is empty:
+|    ``Probabilities`` is empty:
 |        ``domain_error(minimum_number_of_values(1),Probabilities)``
-|    Probabilities do not sum to one:
+|    ``Probabilities`` do not sum to one:
 |        ``domain_error(probability_distribution,Probabilities)``
-|    Counts and Probabilities have different lengths:
+|    ``Counts`` and ``Probabilities`` have different lengths:
 |        ``domain_error(dimension_mismatch,Counts)``
 
 
@@ -1486,30 +1486,32 @@ Computes a multinomial quantile (count vector) for a probability strictly betwee
 | **Template:**
 |    ``multinomial_quantile(Probability,Trials,Probabilities,Quantile)``
 | **Mode and number of proofs:**
-|    ``multinomial_quantile(+number,+non_negative_integer,+list(probability),-list(non_negative_integer))`` - ``one_or_error``
+|    ``multinomial_quantile(+open_probability,+non_negative_integer,+list(probability),-list(non_negative_integer))`` - ``one_or_error``
 
 | **Exceptions:**
-|    Probability is not a number:
-|        ``type_error(number,Probability)``
-|    Probability is not strictly between zero and one:
+|    ``Probability`` is a variable:
+|        ``instantiation_error``
+|    ``Probability`` is neither a variable nor a float:
+|        ``type_error(float,Probability)``
+|    ``Probability`` is a float but not strictly between zero and one:
 |        ``domain_error(open_probability,Probability)``
-|    Trials is a variable:
+|    ``Trials`` is a variable:
 |        ``instantiation_error``
-|    Trials is neither a variable nor an integer:
+|    ``Trials`` is neither a variable nor an integer:
 |        ``type_error(integer,Trials)``
-|    Trials is a negative integer:
+|    ``Trials`` is a negative integer:
 |        ``domain_error(non_negative_integer,Trials)``
-|    Probabilities is a variable or a partial list:
+|    ``Probabilities`` is a variable or a partial list:
 |        ``instantiation_error``
-|    Probabilities is neither a partial list nor a list:
+|    ``Probabilities`` is neither a partial list nor a list:
 |        ``type_error(list,Probabilities)``
-|    An element Element of the Probabilities list is neither a variable nor a number:
-|        ``type_error(number,Element)``
-|    An element Element of the Probabilities list is not a probability:
+|    An element ``Element`` of the ``Probabilities`` list is neither a variable nor a float:
+|        ``type_error(float,Element)``
+|    An element ``Element`` of the ``Probabilities`` list is a float but not a probability:
 |        ``domain_error(probability,Element)``
-|    Probabilities is empty:
+|    ``Probabilities`` is empty:
 |        ``domain_error(minimum_number_of_values(1),Probabilities)``
-|    Probabilities do not sum to one:
+|    ``Probabilities`` do not sum to one:
 |        ``domain_error(probability_distribution,Probabilities)``
 |    The number of count vectors exceeds the supported limit:
 |        ``resource_error(multinomial_quantile_compositions)``
