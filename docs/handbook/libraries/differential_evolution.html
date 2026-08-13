@@ -410,7 +410,7 @@
 <span id="library-differential-evolution"></span><h1><code class="docutils literal notranslate"><span class="pre">differential_evolution</span></code><a class="headerlink" href="#differential-evolution" title="Link to this heading"></a></h1>
 <p>Differential Evolution (DE) is a population-based meta-heuristic for
 approximating the global optimum of a continuous function. This library
-implements the classic DE/rand/1/bin, DE/best/1/bin, and
+implements the classic DE/rand/1/bin, DE/rand/1/exp, DE/best/1/bin, and
 DE/current-to-best/1/bin strategies for bounded minimization and
 maximization problems.</p>
 <p>The library provides the parametric object
@@ -496,7 +496,16 @@ noisy, or
 unknown
 landscapes</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">current-to-best/1/bin</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">rand/1/exp</span></code></p></td>
+<td><p>Slowest</p></td>
+<td><p>Highest</p></td>
+<td><p>Lowest</p></td>
+<td><p>Multimodal,
+noisy, or
+unknown
+landscapes</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">current-to-best/1/bin</span></code></p></td>
 <td><p>Medium–Fast</p></td>
 <td><p>Medium</p></td>
 <td><p>Medium</p></td>
@@ -504,7 +513,7 @@ landscapes</p></td>
 continuous
 problems</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">best/1/bin</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">best/1/bin</span></code></p></td>
 <td><p>Fastest</p></td>
 <td><p>Lowest</p></td>
 <td><p>Highest</p></td>
@@ -516,7 +525,9 @@ problems</p></td>
 </tbody>
 </table>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">rand/1/bin</span></code> keeps diversity longer and is the most robust choice.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rand/1/bin</span></code> and <code class="docutils literal notranslate"><span class="pre">rand/1/exp</span></code> share the same mutation operator and
+therefore the same exploration/exploitation balance; they differ only
+in the crossover mechanism (binomial vs. exponential).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">best/1/bin</span></code> converges quickly but can stagnate on local optima.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">current-to-best/1/bin</span></code> is usually the best practical compromise and
 a good default for many engineering problems.</p></li>
@@ -603,9 +614,11 @@ penalty/barrier methods.</p></li>
 crossover probability (<code class="docutils literal notranslate"><span class="pre">CR</span></code>) are fixed for the whole run;
 self-adaptive variants (jDE, SHADE, L-SHADE, …) are not yet
 implemented.</p></li>
-<li><p>Only three mutation strategies are provided: <code class="docutils literal notranslate"><span class="pre">rand/1/bin</span></code>,
-<code class="docutils literal notranslate"><span class="pre">best/1/bin</span></code>, and <code class="docutils literal notranslate"><span class="pre">current-to-best/1/bin</span></code>. Other classic variants
-(<code class="docutils literal notranslate"><span class="pre">rand/2</span></code>, <code class="docutils literal notranslate"><span class="pre">best/2</span></code>, exponential crossover, …) are absent.</p></li>
+<li><p>Only four mutation strategies are provided: <code class="docutils literal notranslate"><span class="pre">rand/1/bin</span></code>
+<code class="docutils literal notranslate"><span class="pre">rand/1/exp</span></code>,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">best/1/bin</span></code>, and <code class="docutils literal notranslate"><span class="pre">current-to-best/1/bin</span></code>. Other classic variants
+(<code class="docutils literal notranslate"><span class="pre">rand/2</span></code>, <code class="docutils literal notranslate"><span class="pre">best/2</span></code>, exponential crossover, …) are currently
+absent.</p></li>
 <li><p>Synchronous generational replacement only.</p></li>
 <li><p>No automatic restarts, diversity preservation, or stagnation-triggered
 population re-initialization beyond the simple

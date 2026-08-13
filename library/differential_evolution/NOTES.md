@@ -23,7 +23,7 @@ ________________________________________________________________________
 
 Differential Evolution (DE) is a population-based meta-heuristic for
 approximating the global optimum of a continuous function. This library
-implements the classic DE/rand/1/bin, DE/best/1/bin, and
+implements the classic DE/rand/1/bin, DE/rand/1/exp, DE/best/1/bin, and
 DE/current-to-best/1/bin strategies for bounded minimization and
 maximization problems.
 
@@ -94,10 +94,13 @@ control parameters):
 | Strategy                | Convergence speed | Exploration | Risk of premature convergence | Best suited for                          |
 |-------------------------|-------------------|-------------|-------------------------------|------------------------------------------|
 | `rand/1/bin`            | Slowest           | Highest     | Lowest                        | Multimodal, noisy, or unknown landscapes |
+| `rand/1/exp`            | Slowest           | Highest     | Lowest                        | Multimodal, noisy, or unknown landscapes |
 | `current-to-best/1/bin` | Medium–Fast       | Medium      | Medium                        | General-purpose continuous problems      |
 | `best/1/bin`            | Fastest           | Lowest      | Highest                       | Unimodal or mildly multimodal problems   |
 
-- `rand/1/bin` keeps diversity longer and is the most robust choice.
+- `rand/1/bin` and `rand/1/exp` share the same mutation operator and
+  therefore the same exploration/exploitation balance; they differ only
+  in the crossover mechanism (binomial vs. exponential).
 - `best/1/bin` converges quickly but can stagnate on local optima.
 - `current-to-best/1/bin` is usually the best practical compromise and a
   good default for many engineering problems.
@@ -185,9 +188,9 @@ Limitations
 - Static control parameters. The differential weight (`F`) and crossover
   probability (`CR`) are fixed for the whole run; self-adaptive variants
   (jDE, SHADE, L-SHADE, ...) are not yet implemented.
-- Only three mutation strategies are provided: `rand/1/bin`, `best/1/bin`,
-  and `current-to-best/1/bin`. Other classic variants (`rand/2`, `best/2`,
-  exponential crossover, ...) are absent.
+- Only four mutation strategies are provided: `rand/1/bin` `rand/1/exp`,
+- `best/1/bin`, and `current-to-best/1/bin`. Other classic variants
+  (`rand/2`, `best/2`, exponential crossover, ...) are currently absent.
 - Synchronous generational replacement only.
 - No automatic restarts, diversity preservation, or stagnation-triggered
   population re-initialization beyond the simple `stagnation_generations/1`

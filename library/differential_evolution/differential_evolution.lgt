@@ -26,13 +26,13 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-08-13,
-		comment is 'Differential Evolution (DE/rand/1/bin, DE/best/1/bin, and DE/current-to-best/1/bin) metaheuristic for continuous bounded optimization.',
+		comment is 'Differential Evolution (DE/rand/1/bin, DE/rand/1/exp, DE/best/1/bin, and DE/current-to-best/1/bin) metaheuristic for continuous bounded optimization.',
 		parameters is [
 			'Problem' - 'Problem object implementing ``differential_evolution_protocol``.',
 			'RandomAlgorithm' - 'Random number generator algorithm for the ``fast_random`` library.'
 		],
 		remarks is [
-			'Strategies' - 'The ``strategy(rand/1/bin)`` (default), ``strategy(best/1/bin)``, and ``strategy(current-to-best/1/bin)`` options select the classic mutation strategies.',
+			'Strategies' - 'The ``strategy(rand/1/bin)`` (default), ``strategy(rand/1/exp)``, ``strategy(best/1/bin)``, and ``strategy(current-to-best/1/bin)`` options select the classic mutation strategies.',
 			'Optimization objective' - 'The ``objective(minimize|maximize)`` option selects the fitness ordering.',
 			'Boundary handling' - 'Trial vectors that leave the bounds are clamped to the nearest bound.',
 			'Seed control' - 'The ``seed(S)`` option initializes the random number generator for reproducible runs.'
@@ -213,7 +213,11 @@
 	generation_step(rand/1/bin, Population, Dimension, Bounds, CR, F, _Best, Trials) :-
 		!,
 		length(Population, NP),
-		generation_rand(1, NP, Population, Dimension, Bounds, CR, F, Trials).
+		generation_rand(1, NP, Population, Dimension, Bounds, CR, F, bin, Trials).
+	generation_step(rand/1/exp, Population, Dimension, Bounds, CR, F, _Best, Trials) :-
+		!,
+		length(Population, NP),
+		generation_rand(1, NP, Population, Dimension, Bounds, CR, F, exp, Trials).
 	generation_step(best/1/bin, Population, Dimension, Bounds, CR, F, Best, Trials) :-
 		!,
 		length(Population, NP),
@@ -222,12 +226,12 @@
 		length(Population, NP),
 		generation_current_to_best(1, NP, Population, Dimension, Bounds, CR, F, Best, Trials).
 
-	%----- DE/rand/1/bin --------------------------------------------------
+	%----- DE/rand/1/bin and DE/rand/1/exp -------------------------------
 
-	generation_rand(I, NP, _Population, _Dimension, _Bounds, _CR, _F, []) :-
+	generation_rand(I, NP, _Population, _Dimension, _Bounds, _CR, _F, _Xover, []) :-
 		I > NP,
 		!.
-	generation_rand(I, NP, Population, Dimension, Bounds, CR, F, [Trial| Trials]) :-
+	generation_rand(I, NP, Population, Dimension, Bounds, CR, F, Xover, [Trial| Trials]) :-
 		nth1(I, Population, Target-_),
 		random_distinct_indices_3(NP, I, R1, R2, R3),
 		nth1(R1, Population, Xr1-_),
@@ -235,10 +239,9 @@
 		nth1(R3, Population, Xr3-_),
 		mutate_rand(Xr1, Xr2, Xr3, F, Dimension, Mutant0),
 		repair_bounds(Mutant0, Bounds, Mutant),
-		random(1, Dimension, Jrand),
-		crossover(Target, Mutant, CR, Jrand, Dimension, Trial),
+		crossover(Xover, Target, Mutant, CR, Dimension, Trial),
 		I1 is I + 1,
-		generation_rand(I1, NP, Population, Dimension, Bounds, CR, F, Trials).
+		generation_rand(I1, NP, Population, Dimension, Bounds, CR, F, Xover, Trials).
 
 	mutate_rand(Xr1, Xr2, Xr3, F, Dimension, Mutant) :-
 		mutate_rand_(1, Dimension, Xr1, Xr2, Xr3, F, Mutant).
@@ -266,8 +269,7 @@
 		nth1(R2, Population, Xr2-_),
 		mutate_best(Best, Xr1, Xr2, F, Dimension, Mutant0),
 		repair_bounds(Mutant0, Bounds, Mutant),
-		random(1, Dimension, Jrand),
-		crossover(Target, Mutant, CR, Jrand, Dimension, Trial),
+		crossover(bin, Target, Mutant, CR, Dimension, Trial),
 		I1 is I + 1,
 		generation_best(I1, NP, Population, Dimension, Bounds, CR, F, Best, Trials).
 
@@ -297,8 +299,7 @@
 		nth1(R2, Population, Xr2-_),
 		mutate_current_to_best(Target, Best, Xr1, Xr2, F, Dimension, Mutant0),
 		repair_bounds(Mutant0, Bounds, Mutant),
-		random(1, Dimension, Jrand),
-		crossover(Target, Mutant, CR, Jrand, Dimension, Trial),
+		crossover(bin, Target, Mutant, CR, Dimension, Trial),
 		I1 is I + 1,
 		generation_current_to_best(I1, NP, Population, Dimension, Bounds, CR, F, Best, Trials).
 
@@ -319,16 +320,25 @@
 		mutate_current_to_best_(J1, Dimension, Xi, Best, Xr1, Xr2, F, Vs).
 
 	%---------------------------------------------------------------------
-	% Binary crossover
+	% Crossover (binomial and exponential)
 	%---------------------------------------------------------------------
 
-	crossover(Target, Mutant, CR, Jrand, Dimension, Trial) :-
-		crossover_(1, Dimension, Target, Mutant, CR, Jrand, Trial).
+	crossover(bin, Target, Mutant, CR, Dimension, Trial) :-
+		random(1, Dimension, Jrand),
+		crossover_bin(1, Dimension, Target, Mutant, CR, Jrand, Trial).
 
-	crossover_(J, Dimension, _, _, _, _, []) :-
+	crossover(exp, Target, Mutant, CR, Dimension, Trial) :-
+		random(1, Dimension, Jstart),
+		% copy target first, then overwrite a consecutive segment from the mutant
+		Trial0 = Target,
+		crossover_exp(Jstart, Dimension, Mutant, CR, 0, Trial0, Trial).
+
+	%----- binomial -------------------------------------------------------
+
+	crossover_bin(J, Dimension, _, _, _, _, []) :-
 		J > Dimension,
 		!.
-	crossover_(J, Dimension, Target, Mutant, CR, Jrand, [Uj| Ujs]) :-
+	crossover_bin(J, Dimension, Target, Mutant, CR, Jrand, [Uj| Ujs]) :-
 		nth1(J, Target, Xj),
 		nth1(J, Mutant, Vj),
 		random(R),
@@ -337,7 +347,32 @@
 		;	Uj = Xj
 		),
 		J1 is J + 1,
-		crossover_(J1, Dimension, Target, Mutant, CR, Jrand, Ujs).
+		crossover_bin(J1, Dimension, Target, Mutant, CR, Jrand, Ujs).
+
+	%----- exponential ----------------------------------------------------
+	% Starting at Jstart, take consecutive components from the mutant
+	% while rand < CR (and not a full cycle).  At least one component is taken.
+
+	crossover_exp(J, Dimension, Mutant, CR, L, Trial0, Trial) :-
+		nth1(J, Mutant, Vj),
+		replace_nth1(J, Trial0, Vj, Trial1),
+		L1 is L + 1,
+		(	L1 >= Dimension ->
+			Trial = Trial1				% whole vector taken from mutant
+		;	random(R),
+			(	R < CR ->
+				J1 is (J mod Dimension) + 1,
+				crossover_exp(J1, Dimension, Mutant, CR, L1, Trial1, Trial)
+			;	Trial = Trial1
+			)
+		).
+
+	replace_nth1(1, [_|T], V, [V|T]) :-
+		!.
+	replace_nth1(N, [H|T], V, [H|T2]) :-
+		N > 1,
+		N1 is N - 1,
+		replace_nth1(N1, T, V, T2).
 
 	%---------------------------------------------------------------------
 	% Selection (one-to-one)
@@ -560,7 +595,11 @@
 	default_option(updates(0)).
 
 	valid_option(strategy(Strategy)) :-
-		once((Strategy == rand/1/bin; Strategy == best/1/bin; Strategy == current-to-best/1/bin)).
+		once((	Strategy == rand/1/bin
+			;	Strategy == rand/1/exp
+			;	Strategy == best/1/bin
+			;	Strategy == current-to-best/1/bin
+		)).
 	valid_option(objective(Objective)) :-
 		once((Objective == minimize; Objective == maximize)).
 	valid_option(target_fitness(Target)) :-

@@ -49,6 +49,9 @@
 	test(de_strategy_rand_1_bin, deterministic(Fitness < 0.5)) :-
 		differential_evolution(sphere)::run(_Position, Fitness, [strategy(rand/1/bin), seed(42), max_generations(100)]).
 
+	test(de_strategy_rand_1_exp, deterministic(Fitness < 0.5)) :-
+		differential_evolution(sphere)::run(_Position, Fitness, [strategy(rand/1/exp), seed(42), max_generations(100)]).
+
 	test(de_strategy_best_1_bin, deterministic(Fitness < 1.0)) :-
 		differential_evolution(sphere)::run(_Position, Fitness, [strategy(best/1/bin), seed(42), max_generations(100)]).
 
@@ -62,6 +65,14 @@
 	test(de_seed_reproducible, deterministic((Position1 == Position2, Fitness1 =:= Fitness2, Statistics1 == Statistics2))) :-
 		differential_evolution(sphere)::run(Position1, Fitness1, Statistics1, [seed(42), max_generations(50)]),
 		differential_evolution(sphere)::run(Position2, Fitness2, Statistics2, [seed(42), max_generations(50)]).
+
+	test(de_seed_reproducible_rand_1_bin, deterministic((Position1 == Position2, Fitness1 =:= Fitness2))) :-
+		differential_evolution(sphere)::run(Position1, Fitness1, [strategy(rand/1/bin), seed(42), max_generations(40)]),
+		differential_evolution(sphere)::run(Position2, Fitness2, [strategy(rand/1/bin), seed(42), max_generations(40)]).
+
+	test(de_seed_reproducible_rand_1_exp, deterministic((Position1 == Position2, Fitness1 =:= Fitness2))) :-
+		differential_evolution(sphere)::run(Position1, Fitness1, [strategy(rand/1/exp), seed(42), max_generations(40)]),
+		differential_evolution(sphere)::run(Position2, Fitness2, [strategy(rand/1/exp), seed(42), max_generations(40)]).
 
 	test(de_seed_reproducible_best, deterministic((Position1 == Position2, Fitness1 =:= Fitness2))) :-
 		differential_evolution(sphere)::run(Position1, Fitness1, [strategy(best/1/bin), seed(42), max_generations(40)]),
