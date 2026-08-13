@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on August 11, 2026
+##   Last updated on August 13, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -136,6 +136,7 @@ sed '1,19d' ../../../library/deques/NOTES.md | pandoc -f gfm -t rst -o libraries
 sed '1,19d' ../../../library/derangements/NOTES.md | pandoc -f gfm -t rst -o libraries/derangements.rst
 sed '1,19d' ../../../library/dictionaries/NOTES.md | pandoc -f gfm -t rst -o libraries/dictionaries.rst
 sed '1,19d' ../../../library/dif/NOTES.md | pandoc -f gfm -t rst -o libraries/dif.rst
+sed '1,19d' ../../../library/differential_evolution/NOTES.md | pandoc -f gfm -t rst -o libraries/differential_evolution.rst
 sed '1,19d' ../../../library/dimension_reduction_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/dimension_reduction_protocols.rst
 sed '1,19d' ../../../library/eclat_pattern_miner/NOTES.md | pandoc -f gfm -t rst -o libraries/eclat_pattern_miner.rst
 sed '1,19d' ../../../library/edcg/NOTES.md | pandoc -f gfm -t rst -o libraries/edcg.rst

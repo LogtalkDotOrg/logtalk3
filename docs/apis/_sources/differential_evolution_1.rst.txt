@@ -1,0 +1,63 @@
+.. index:: single: differential_evolution(Problem)
+.. _differential_evolution/1:
+
+.. rst-class:: right
+
+**object**
+
+``differential_evolution(Problem)``
+===================================
+
+* ``Problem`` - Problem object implementing ``differential_evolution_protocol``.
+
+
+Differential Evolution using the Xoshiro128++ random number generator.
+
+| **Availability:** 
+|    ``logtalk_load(differential_evolution(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-13
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`differential_evolution(Problem,xoshiro128pp) <differential_evolution/2>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`differential_evolution/2::run/2`  :ref:`differential_evolution/2::run/3`  :ref:`differential_evolution/2::run/4`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`differential_evolution(Problem,RandomAlgorithm) <differential_evolution/2>`, :ref:`differential_evolution_problem_protocol <differential_evolution_problem_protocol/0>`
+

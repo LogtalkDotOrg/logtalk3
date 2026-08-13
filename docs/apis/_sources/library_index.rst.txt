@@ -800,6 +800,18 @@ To load any library (including developer tools, ports, and contributions), use t
 
    dif <dif_0>
 
+:ref:`differential_evolution <library_differential_evolution>`
+--------------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   differential_evolution(Problem) <differential_evolution_1>
+   differential_evolution(Problem,RandomAlgorithm) <differential_evolution_2>
+   differential_evolution_problem_protocol <differential_evolution_problem_protocol_0>
+
 :ref:`dimension_reduction_protocols <library_dimension_reduction_protocols>`
 ----------------------------------------------------------------------------
 

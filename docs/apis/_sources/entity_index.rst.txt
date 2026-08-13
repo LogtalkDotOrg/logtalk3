@@ -260,6 +260,8 @@ Objects
    diagrams <diagrams_0>
    diagrams(Format) <diagrams_1>
    dif <dif_0>
+   differential_evolution(Problem) <differential_evolution_1>
+   differential_evolution(Problem,RandomAlgorithm) <differential_evolution_2>
    difflist <difflist_0>
    directory_dependency_diagram <directory_dependency_diagram_0>
    directory_dependency_diagram(Format) <directory_dependency_diagram_1>
@@ -820,6 +822,7 @@ Protocols
    deque_protocol <deque_protocol_0>
    derangements_protocol <derangements_protocol_0>
    dictionaryp <dictionaryp_0>
+   differential_evolution_problem_protocol <differential_evolution_problem_protocol_0>
    dimension_reducer_protocol <dimension_reducer_protocol_0>
    dimension_reduction_dataset_protocol <dimension_reduction_dataset_protocol_0>
    directed_graph_protocol <directed_graph_protocol_0>

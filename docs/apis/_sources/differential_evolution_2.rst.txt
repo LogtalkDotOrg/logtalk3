@@ -1,0 +1,132 @@
+.. index:: single: differential_evolution(Problem,RandomAlgorithm)
+.. _differential_evolution/2:
+
+.. rst-class:: right
+
+**object**
+
+``differential_evolution(Problem,RandomAlgorithm)``
+===================================================
+
+* ``Problem`` - Problem object implementing ``differential_evolution_protocol``.
+* ``RandomAlgorithm`` - Random number generator algorithm for the ``fast_random`` library.
+
+
+Differential Evolution (DE/rand/1/bin, DE/best/1/bin, and DE/current-to-best/1/bin) metaheuristic for continuous bounded optimization.
+
+| **Availability:** 
+|    ``logtalk_load(differential_evolution(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-13
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`fast_random(Algorithm) <fast_random/1>`
+|    :ref:`integer <integer/0>`
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+
+   - Strategies: The ``strategy(rand/1/bin)`` (default), ``strategy(best/1/bin)``, and ``strategy(current-to-best/1/bin)`` options select the classic mutation strategies.
+   - Optimization objective: The ``objective(minimize|maximize)`` option selects the fitness ordering.
+   - Boundary handling: Trial vectors that leave the bounds are clamped to the nearest bound.
+   - Seed control: The ``seed(S)`` option initializes the random number generator for reproducible runs.
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: run/2
+.. _differential_evolution/2::run/2:
+
+``run/2``
+^^^^^^^^^
+
+Runs Differential Evolution with default options and returns the best position and fitness found.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``run(BestPosition,BestFitness)``
+| **Mode and number of proofs:**
+|    ``run(-list(number),-number)`` - ``one``
+
+
+------------
+
+.. index:: run/3
+.. _differential_evolution/2::run/3:
+
+``run/3``
+^^^^^^^^^
+
+Runs Differential Evolution with the given options and returns the best position and fitness found.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``run(BestPosition,BestFitness,Options)``
+| **Mode and number of proofs:**
+|    ``run(-list(number),-number,+list(compound))`` - ``one``
+
+
+------------
+
+.. index:: run/4
+.. _differential_evolution/2::run/4:
+
+``run/4``
+^^^^^^^^^
+
+Runs Differential Evolution with the given options and returns the best position, best fitness, and run statistics.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``run(BestPosition,BestFitness,Statistics,Options)``
+| **Mode and number of proofs:**
+|    ``run(-list(number),-number,-list(compound),+list(compound))`` - ``one``
+
+| **Remarks:**
+
+    - Statistics list: Contains ``generations(N)``, ``evaluations(E)``, ``improvements(I)``, ``final_mean_fitness(M)``, and ``final_diversity(D)``.
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`differential_evolution(Problem) <differential_evolution/1>`, :ref:`differential_evolution_problem_protocol <differential_evolution_problem_protocol/0>`
+

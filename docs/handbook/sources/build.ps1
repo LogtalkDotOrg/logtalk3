@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on August 11, 2026
+##   Last updated on August 13, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -136,6 +136,7 @@ Foreach-Object {
 (Get-Content ../../../library/derangements/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/derangements.rst
 (Get-Content ../../../library/dictionaries/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/dictionaries.rst
 (Get-Content ../../../library/dif/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/dif.rst
+(Get-Content ../../../library/differential_evolution/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/differential_evolution.rst
 (Get-Content ../../../library/dimension_reduction_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/dimension_reduction_protocols.rst
 (Get-Content ../../../library/eclat_pattern_miner/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/eclat_pattern_miner.rst
 (Get-Content ../../../library/edcg/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/edcg.rst

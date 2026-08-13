@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on August 11, 2026
+%  Last updated on August 13, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -90,6 +90,7 @@ logtalk_library_path(deques, library('deques/')).
 logtalk_library_path(derangements, library('derangements/')).
 logtalk_library_path(dictionaries, library('dictionaries/')).
 logtalk_library_path(dif, library('dif/')).
+logtalk_library_path(differential_evolution, library('differential_evolution/')).
 logtalk_library_path(dimension_reduction_protocols, library('dimension_reduction_protocols/')).
 logtalk_library_path(eclat_pattern_miner, library('eclat_pattern_miner/')).
 logtalk_library_path(edcg, library('edcg/')).

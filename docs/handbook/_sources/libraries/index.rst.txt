@@ -86,6 +86,7 @@ directory in the ``NOTES.md`` file.
    derangements
    dictionaries
    dif
+   differential_evolution
    dimension_reduction_protocols
    eclat_pattern_miner
    edcg

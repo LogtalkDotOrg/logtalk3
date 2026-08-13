@@ -1,0 +1,154 @@
+.. index:: single: differential_evolution_problem_protocol
+.. _differential_evolution_problem_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``differential_evolution_problem_protocol``
+===========================================
+
+Protocol for continuous bounded Differential Evolution problem definitions.
+
+| **Availability:** 
+|    ``logtalk_load(differential_evolution(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-13
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: position_bounds/1
+.. _differential_evolution_problem_protocol/0::position_bounds/1:
+
+``position_bounds/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns one ``Lower-Upper`` numeric bound pair per dimension, with ``Lower =< Upper``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``position_bounds(Bounds)``
+| **Mode and number of proofs:**
+|    ``position_bounds(-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: fitness/2
+.. _differential_evolution_problem_protocol/0::fitness/2:
+
+``fitness/2``
+^^^^^^^^^^^^^
+
+Computes the fitness of a candidate solution. The optimization direction is selected by the ``objective/1`` option.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fitness(Position,Fitness)``
+| **Mode and number of proofs:**
+|    ``fitness(+list(number),-number)`` - ``one``
+
+
+------------
+
+.. index:: initial_positions/1
+.. _differential_evolution_problem_protocol/0::initial_positions/1:
+
+``initial_positions/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Optional. Returns a non-empty list of initial positions. When not defined, the algorithm generates a random initial population inside the position bounds.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``initial_positions(Positions)``
+| **Mode and number of proofs:**
+|    ``initial_positions(-list(list(number)))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: stop_condition/3
+.. _differential_evolution_problem_protocol/0::stop_condition/3:
+
+``stop_condition/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Optional. True when the search should stop given the completed generation, best position, and best fitness.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``stop_condition(Generation,BestPosition,BestFitness)``
+| **Mode and number of proofs:**
+|    ``stop_condition(+non_negative_integer,+list(number),+number)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: progress/5
+.. _differential_evolution_problem_protocol/0::progress/5:
+
+``progress/5``
+^^^^^^^^^^^^^^
+
+Optional. Called periodically with generation, best position, best fitness, mean population fitness, and population diversity (mean Euclidean distance from the centroid).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``progress(Generation,BestPosition,BestFitness,MeanFitness,Diversity)``
+| **Mode and number of proofs:**
+|    ``progress(+non_negative_integer,+list(number),+number,+number,+number)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`differential_evolution(Problem) <differential_evolution/1>`, :ref:`differential_evolution(Problem,RandomAlgorithm) <differential_evolution/2>`
+

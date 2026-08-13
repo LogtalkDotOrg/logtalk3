@@ -762,6 +762,18 @@ To load an entity, always load the library that includes it using the goal ``log
 
    dif <dif_0>
 
+``library/differential_evolution/``
+-----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   differential_evolution(Problem) <differential_evolution_1>
+   differential_evolution(Problem,RandomAlgorithm) <differential_evolution_2>
+   differential_evolution_problem_protocol <differential_evolution_problem_protocol_0>
+
 ``library/dimension_reduction_protocols/``
 ------------------------------------------
 

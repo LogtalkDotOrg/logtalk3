@@ -281,6 +281,7 @@
 		stomp(loader),
 		linda(loader),
 		command_line_options(loader),
+		differential_evolution(loader),
 		particle_swarm_optimization(loader),
 		simulated_annealing(loader),
 		mcp_server(loader),
