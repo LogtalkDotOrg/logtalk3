@@ -24,9 +24,9 @@
 	imports([options, http_message_helpers, http_text_helpers])).
 
 	:- info([
-		version is 1:1:4,
+		version is 1:1:6,
 		author is 'Paulo Moura',
-		date is 2026-08-10,
+		date is 2026-08-13,
 		comment is 'Process-backed HTTP transport predicates using the process library and helper processes.'
 	]).
 
@@ -313,9 +313,9 @@
 		context(Context),
 		parse_connection_options(Options, Type, Transport, Executable, ServerNameOption, OpensslArguments),
 		normalize_connection_endpoint(Host, Port, NormalizedHost),
-		build_connection_arguments(Transport, Host, Port, ServerNameOption, OpensslArguments, Arguments),
+		build_connection_arguments(Transport, Executable, Host, Port, ServerNameOption, OpensslArguments, Arguments),
 		resolve_command_path(Executable, ExecutablePath),
-		open_process_connection(Transport, ExecutablePath, Arguments, Type, NormalizedHost, Port, Context, Connection).
+		open_process_connection(Transport, Executable, ExecutablePath, Arguments, Type, NormalizedHost, Port, Context, Connection).
 
 	close_connection(http_websocket_connection(_ClientInfo, Input, Output)) :-
 		!,
@@ -516,9 +516,9 @@
 	serve_sse_outcome(end_of_file, _Input, _Output, _Connection, _Response, _ClientInfo) :-
 		existence_error(http_socket_transport_sse_request, end_of_file).
 
-	open_process_connection(Transport, Executable, Arguments, Type, NormalizedHost, Port, Context, Connection) :-
+	open_process_connection(Transport, ExecutableKind, ExecutablePath, Arguments, Type, NormalizedHost, Port, Context, Connection) :-
 		% the type/1 option is only effective for the SICStus Prolog and SWI-Prolog backends
-		process::create(Executable, Arguments, [stdin(Output), stdout(Input), stderr(Error), process(Process), type(Type)]),
+		process::create(ExecutablePath, Arguments, [stdin(Output), stdout(Input), stderr(Error), process(Process), type(Type)]),
 		Connection = http_connection(NormalizedHost, Port, Input, Output),
 		catch(
 			% for other backends, we need to set the streams type after creating the process
@@ -529,7 +529,7 @@
 			)
 		),
 		catch(
-			wait_for_connection_startup(Transport, Error, Context),
+			wait_for_connection_startup(Transport, ExecutableKind, Error, Context),
 			StartupError,
 			(	cleanup_process_connection(Transport, Connection, Process, Error),
 				throw(StartupError)
@@ -537,9 +537,12 @@
 		),
 		register_process_connection(Connection, Transport, Process, Error).
 
-	wait_for_connection_startup(tcp, Error, Context) :-
+	wait_for_connection_startup(tcp, ncat, Error, Context) :-
+		!,
 		wait_for_ncat_connection_startup(Error, Context).
-	wait_for_connection_startup(tls, _Error, _Context).
+	wait_for_connection_startup(tcp, socat, Error, Context) :-
+		wait_for_socat_connection_startup(Error, Context).
+	wait_for_connection_startup(tls, _ExecutableKind, _Error, _Context).
 
 	wait_for_ncat_connection_startup(Error, Context) :-
 		line_to_codes(Error, Codes),
@@ -562,6 +565,31 @@
 		atom(Line),
 		atom_length('Ncat: Version ', PrefixLength),
 		sub_atom(Line, 0, PrefixLength, _, 'Ncat: Version ').
+
+	% with "-d -d" verbosity, a socat client reports several informational
+	% lines (e.g. "reading from and writing to stdio", "opening connection
+	% to ...") before the connection either succeeds ("successfully
+	% connected ...") or fails (an "E" level diagnostic); anything else is
+	% treated as ignorable startup chatter and simply read past
+	wait_for_socat_connection_startup(Error, Context) :-
+		line_to_codes(Error, Codes),
+		codes_line_atom(Codes, Line),
+		(	Line == end_of_file ->
+			throw(error(resource_error(http_process_transport_connection), Context))
+		;	socat_connection_ready_line(Line) ->
+			true
+		;	socat_connection_error_line(Line) ->
+			throw(error(socket_error(Line), Context))
+		;	wait_for_socat_connection_startup(Error, Context)
+		).
+
+	socat_connection_ready_line(Line) :-
+		atom(Line),
+		sub_atom(Line, _, _, _, 'successfully connected').
+
+	socat_connection_error_line(Line) :-
+		atom(Line),
+		sub_atom(Line, _, _, _, '] E ').
 
 	:- if(current_logtalk_flag(prolog_dialect, eclipse)).
 
@@ -617,7 +645,7 @@
 		).
 
 	cleanup_process_connection(tcp, http_connection(_Host, _Port, Input, Output), Process, Error) :-
-		% With ncat -q 0.01, stdin EOF allows pending bytes to drain before exit.
+		% With ncat -q 0.1, stdin EOF allows pending bytes to drain before exit.
 		close_process_stream(Output),
 		catch(process::wait(Process, _Status), _, catch(process::kill(Process, sigterm), _, true)),
 		close_process_stream(Input),
@@ -726,9 +754,30 @@
 		listener_bind_family_option(LoopbackHost, FamilyOption),
 		atomic_list_concat([ncat, '-n', FamilyOption, LoopbackHost, RelayPort], ' ', RelayCommand).
 
-	client_connect_arguments(Host, Port, ['-v', '-n', FamilyOption, '-q', '0.01', Host, PortAtom]) :-
+	client_connect_arguments(ncat, Host, Port, ['-v', '-n', FamilyOption, '-q', '0.1', Host, PortAtom]) :-
 		atom_number(PortAtom, Port),
 		listener_bind_family_option(Host, FamilyOption).
+	client_connect_arguments(socat, Host, Port, ['-d', '-d', '-t', '0.1', '-', ConnectAddress]) :-
+		atom_number(PortAtom, Port),
+		client_socat_connect_address(Host, PortAtom, ConnectAddress).
+
+	client_socat_connect_address(Host, PortAtom, ConnectAddress) :-
+		client_socat_connect_family_prefix(Host, FamilyPrefix),
+		client_socat_connect_host(Host, ConnectHost),
+		atomic_list_concat([FamilyPrefix, ConnectHost, ':', PortAtom], ConnectAddress).
+
+	client_socat_connect_family_prefix(Host, 'TCP6-CONNECT:') :-
+		sub_atom(Host, _, _, _, ':'),
+		!.
+	client_socat_connect_family_prefix(_Host, 'TCP4-CONNECT:').
+
+	% bracket IPv6 literal addresses to disambiguate the trailing ":port" suffix,
+	% mirroring openssl_connect_argument/3 below
+	client_socat_connect_host(Host, WrappedHost) :-
+		sub_atom(Host, _, _, _, ':'),
+		!,
+		atomic_list_concat(['[', Host, ']'], WrappedHost).
+	client_socat_connect_host(Host, Host).
 
 	startup_listener_response(ListenerExecutableKind, Error, Context, BoundPort) :-
 		line_to_codes(Error, Codes),
@@ -1087,16 +1136,20 @@
 		;	Transport = tcp
 		).
 
-	resolve_connection_executable(tcp, ncat, _Options, _MergedOptions).
+	resolve_connection_executable(tcp, Executable, Options, MergedOptions) :-
+		(	member(connection_helper_executable(Executable0), Options) ->
+			Executable = Executable0
+		;	^^option(connection_helper_executable(Executable), MergedOptions)
+		).
 	resolve_connection_executable(tls, Executable, Options, MergedOptions) :-
 		(	member(openssl_executable(Executable0), Options) ->
 			Executable = Executable0
 		;	^^option(openssl_executable(Executable), MergedOptions)
 		).
 
-	build_connection_arguments(tcp, Host, Port, _ServerNameOption, _OpensslArguments, Arguments) :-
-		client_connect_arguments(Host, Port, Arguments).
-	build_connection_arguments(tls, Host, Port, ServerNameOption, OpensslArguments, Arguments) :-
+	build_connection_arguments(tcp, Executable, Host, Port, _ServerNameOption, _OpensslArguments, Arguments) :-
+		client_connect_arguments(Executable, Host, Port, Arguments).
+	build_connection_arguments(tls, _Executable, Host, Port, ServerNameOption, OpensslArguments, Arguments) :-
 		build_openssl_arguments(Host, Port, ServerNameOption, OpensslArguments, Arguments).
 
 	build_openssl_arguments(Host, Port, ServerNameOption, OpensslArguments, Arguments) :-
@@ -1251,6 +1304,8 @@
 		valid_stream_type_option(Type).
 	valid_option(connection_transport(Transport)) :-
 		once((Transport == tcp; Transport == tls)).
+	valid_option(connection_helper_executable(Executable)) :-
+		once((Executable == ncat; Executable == socat)).
 	valid_option(backlog(Backlog)) :-
 		integer(Backlog),
 		Backlog > 0.
@@ -1288,6 +1343,7 @@
 
 	default_option(type(binary)).
 	default_option(connection_transport(tcp)).
+	default_option(connection_helper_executable(ncat)).
 	default_option(openssl_executable(openssl)).
 	default_option(server_name(default)).
 	default_option(backlog(5)).
@@ -1319,6 +1375,7 @@
 
 	connection_compatibility_option(type(_)).
 	connection_compatibility_option(connection_transport(_)).
+	connection_compatibility_option(connection_helper_executable(_)).
 	connection_compatibility_option(openssl_executable(_)).
 	connection_compatibility_option(server_name(_)).
 	connection_compatibility_option(openssl_arguments(_)).
@@ -1364,6 +1421,8 @@
 	valid_connection_compatibility_option(Option) :-
 		valid_process_connection_option(Option).
 
+	valid_process_connection_option(connection_helper_executable(Executable)) :-
+		once((Executable == ncat; Executable == socat)).
 	valid_process_connection_option(openssl_executable(Executable)) :-
 		atom(Executable).
 	valid_process_connection_option(server_name(ServerName)) :-

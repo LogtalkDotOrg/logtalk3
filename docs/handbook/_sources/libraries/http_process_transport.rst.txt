@@ -28,45 +28,50 @@ still require backend thread support.
 Requirements
 ------------
 
-The ``openssl`` and ``ncat`` commands must be available on the current
-``PATH``.
+The ``openssl`` (version 1.0.2 or later), ``ncat`` (version 7.96 or
+later), and ``socat`` (version 1.7.3.0 or later) commands must be
+available on the system ``PATH``.
 
-On macOS, both commands can be installed using e.g. Homebrew:
+On macOS, these commands can be installed using e.g. Homebrew:
 
 ::
 
-   $ brew install openssl nmap
+   $ brew install openssl nmap socat
 
 Or using MacPorts:
 
 ::
 
-   $ sudo port install openssl nmap
+   $ sudo port install openssl nmap socat
 
 On Ubuntu, both commands can be installed using:
 
 ::
 
-   $ sudo apt install openssl ncat
+   $ sudo apt install openssl ncat socat
 
 On RedHat distributions (8.x and later):
 
 ::
 
-   $ sudo dnf install openssl nmap-ncat
+   $ sudo dnf install openssl nmap-ncat socat
 
 For older RedHat distributions:
 
 ::
 
-   $ sudo yum install openssl nmap-ncat
+   $ sudo yum install openssl nmap-ncat socat
 
-On Windows, both commands can be installed using e.g. Chocolatey:
+On Windows, ``openssl`` and ``ncat`` commands can be installed using
+e.g. Chocolatey:
 
 ::
 
    > choco install openssl
    > choco install nmap
+
+The ``socat`` command doesn't have an easy install solution on Windows;
+use ``ncat`` instead.
 
 API documentation
 -----------------
@@ -133,13 +138,15 @@ Current limitations
 
 Connection options accepted by ``open_connection/4``:
 
-- ``type(binary)``
+- ``type(binary)`` (default)
 - ``type(text)``
-- ``connection_transport(tcp)``
+- ``connection_transport(tcp)`` (default)
 - ``connection_transport(tls)``
-- ``openssl_executable(Executable)``
-- ``server_name(Name)``
-- ``openssl_arguments(Arguments)``
+- ``connection_helper_executable(ncat)`` (default)
+- ``connection_helper_executable(socat)``
+- ``openssl_executable(Executable)`` (default ``openssl``)
+- ``server_name(Name)`` (default ``default``)
+- ``openssl_arguments(Arguments)`` (default ``[]``)
 
 Notes on those options:
 
@@ -160,18 +167,19 @@ Notes on those options:
 
 Connection-pool options accepted by ``open_connection_pool/4``:
 
-- ``min_size(N)``
-- ``max_size(N)``
-- ``connection_options(Options)``
+- ``min_size(N)`` (default ``0``)
+- ``max_size(N)`` (default ``10``)
+- ``connection_options(Options)`` (default ``[]``)
 
 Listener options accepted by ``open_listener/4``:
 
-- ``backlog(N)``
-- ``type(binary)``
+- ``backlog(N)`` (default ``5``)
+- ``type(binary)`` (default)
 - ``type(text)``
-- ``listener_transport(tcp)``
+- ``listener_transport(tcp)`` (default)
 - ``listener_transport(tls)``
-- ``listener_helper_executable(Executable)``
+- ``listener_helper_executable(ncat)`` (default)
+- ``listener_helper_executable(socat)``
 - ``temporary_tls_credentials(Prefix)``
 - ``tls_certificate_file(File)``
 - ``tls_key_file(File)``
@@ -205,16 +213,16 @@ Helper predicate:
 
 Serving options accepted by ``serve_listener/5``:
 
-- ``shutdown(keep_open)``
+- ``shutdown(keep_open)`` (default)
 - ``shutdown(close)``
-- ``workers(serial)``
+- ``workers(serial)`` (default)
 - ``workers(per_connection)``
 - ``workers(pool(Size))``
 - ``workers(pool(Size, rolling))``
 
 Serving options accepted by ``serve_until_shutdown/4``:
 
-- ``workers(serial)``
+- ``workers(serial)`` (default)
 - ``workers(per_connection)``
 - ``workers(pool(Size))``
 - ``workers(pool(Size, rolling))``
@@ -311,3 +319,10 @@ certificate, open local loopback listeners, and then verify:
 - TLS ``serve_once/3``
 - WSS ``serve_websocket_once/5`` plus a small frame round-trip on the
   upgraded streams
+
+Known issues
+------------
+
+The ``ncat`` version provided by ``nmap`` 7.991 causes the HTTP
+libraries tests to crash on exit (usually printing a "Terminated: 15"
+message). Either use the previous version (7.99) or ``socat``.

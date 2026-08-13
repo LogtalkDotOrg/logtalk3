@@ -191,6 +191,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#current-limitations">Current limitations</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#peer-close-and-end-of-file">Peer close and end-of-file</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#live-smoke-tests">Live smoke tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#known-issues">Known issues</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="http_sse.html"><code class="docutils literal notranslate"><span class="pre">http_sse</span></code></a></li>
@@ -417,33 +418,37 @@ HTTPS and WSS serving. Worker-based serving modes and shutdown control
 still require backend thread support.</p>
 <section id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">openssl</span></code> and <code class="docutils literal notranslate"><span class="pre">ncat</span></code> commands must be available on the current
-<code class="docutils literal notranslate"><span class="pre">PATH</span></code>.</p>
-<p>On macOS, both commands can be installed using e.g. Homebrew:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> brew install openssl nmap
+<p>The <code class="docutils literal notranslate"><span class="pre">openssl</span></code> (version 1.0.2 or later), <code class="docutils literal notranslate"><span class="pre">ncat</span></code> (version 7.96 or
+later), and <code class="docutils literal notranslate"><span class="pre">socat</span></code> (version 1.7.3.0 or later) commands must be
+available on the system <code class="docutils literal notranslate"><span class="pre">PATH</span></code>.</p>
+<p>On macOS, these commands can be installed using e.g. Homebrew:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> brew install openssl nmap socat
 </pre></div>
 </div>
 <p>Or using MacPorts:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo port install openssl nmap
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo port install openssl nmap socat
 </pre></div>
 </div>
 <p>On Ubuntu, both commands can be installed using:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo apt install openssl ncat
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo apt install openssl ncat socat
 </pre></div>
 </div>
 <p>On RedHat distributions (8.x and later):</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo dnf install openssl nmap<span class="o">-</span>ncat
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo dnf install openssl nmap<span class="o">-</span>ncat socat
 </pre></div>
 </div>
 <p>For older RedHat distributions:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo yum install openssl nmap<span class="o">-</span>ncat
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="err">$</span> sudo yum install openssl nmap<span class="o">-</span>ncat socat
 </pre></div>
 </div>
-<p>On Windows, both commands can be installed using e.g. Chocolatey:</p>
+<p>On Windows, <code class="docutils literal notranslate"><span class="pre">openssl</span></code> and <code class="docutils literal notranslate"><span class="pre">ncat</span></code> commands can be installed using
+e.g. Chocolatey:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> choco install openssl
 <span class="o">&gt;</span> choco install nmap
 </pre></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">socat</span></code> command doesn’t have an easy install solution on Windows;
+use <code class="docutils literal notranslate"><span class="pre">ncat</span></code> instead.</p>
 </section>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
@@ -503,13 +508,15 @@ provided</p></li>
 </ul>
 <p>Connection options accepted by <code class="docutils literal notranslate"><span class="pre">open_connection/4</span></code>:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">type(binary)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">type(binary)</span></code> (default)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">type(text)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">connection_transport(tcp)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">connection_transport(tcp)</span></code> (default)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">connection_transport(tls)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">openssl_executable(Executable)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">server_name(Name)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">openssl_arguments(Arguments)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">connection_helper_executable(ncat)</span></code> (default)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">connection_helper_executable(socat)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">openssl_executable(Executable)</span></code> (default <code class="docutils literal notranslate"><span class="pre">openssl</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">server_name(Name)</span></code> (default <code class="docutils literal notranslate"><span class="pre">default</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">openssl_arguments(Arguments)</span></code> (default <code class="docutils literal notranslate"><span class="pre">[]</span></code>)</p></li>
 </ul>
 <p>Notes on those options:</p>
 <ul class="simple">
@@ -530,18 +537,19 @@ client certificate flags directly to <code class="docutils literal notranslate">
 </ul>
 <p>Connection-pool options accepted by <code class="docutils literal notranslate"><span class="pre">open_connection_pool/4</span></code>:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">min_size(N)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">max_size(N)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">connection_options(Options)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">min_size(N)</span></code> (default <code class="docutils literal notranslate"><span class="pre">0</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">max_size(N)</span></code> (default <code class="docutils literal notranslate"><span class="pre">10</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">connection_options(Options)</span></code> (default <code class="docutils literal notranslate"><span class="pre">[]</span></code>)</p></li>
 </ul>
 <p>Listener options accepted by <code class="docutils literal notranslate"><span class="pre">open_listener/4</span></code>:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">backlog(N)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">type(binary)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">backlog(N)</span></code> (default <code class="docutils literal notranslate"><span class="pre">5</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">type(binary)</span></code> (default)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">type(text)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">listener_transport(tcp)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">listener_transport(tcp)</span></code> (default)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">listener_transport(tls)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">listener_helper_executable(Executable)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">listener_helper_executable(ncat)</span></code> (default)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">listener_helper_executable(socat)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">temporary_tls_credentials(Prefix)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tls_certificate_file(File)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tls_key_file(File)</span></code></p></li>
@@ -575,16 +583,16 @@ via <code class="docutils literal notranslate"><span class="pre">temporary_tls_c
 </ul>
 <p>Serving options accepted by <code class="docutils literal notranslate"><span class="pre">serve_listener/5</span></code>:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">shutdown(keep_open)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">shutdown(keep_open)</span></code> (default)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">shutdown(close)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">workers(serial)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">workers(serial)</span></code> (default)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">workers(per_connection)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">workers(pool(Size))</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">workers(pool(Size,</span> <span class="pre">rolling))</span></code></p></li>
 </ul>
 <p>Serving options accepted by <code class="docutils literal notranslate"><span class="pre">serve_until_shutdown/4</span></code>:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">workers(serial)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">workers(serial)</span></code> (default)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">workers(per_connection)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">workers(pool(Size))</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">workers(pool(Size,</span> <span class="pre">rolling))</span></code></p></li>
@@ -673,6 +681,12 @@ certificate, open local loopback listeners, and then verify:</p>
 <li><p>WSS <code class="docutils literal notranslate"><span class="pre">serve_websocket_once/5</span></code> plus a small frame round-trip on the
 upgraded streams</p></li>
 </ul>
+</section>
+<section id="known-issues">
+<h2>Known issues<a class="headerlink" href="#known-issues" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">ncat</span></code> version provided by <code class="docutils literal notranslate"><span class="pre">nmap</span></code> 7.991 causes the HTTP
+libraries tests to crash on exit (usually printing a “Terminated: 15”
+message). Either use the previous version (7.99) or <code class="docutils literal notranslate"><span class="pre">socat</span></code>.</p>
 </section>
 </section>
 

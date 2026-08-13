@@ -159,6 +159,9 @@ integer arithmetic).
 * ADDED: Support to the `hashes` library for generalized BLAKE2 cryptographic
 hash functions that accept both key an digest size parameters (per RFC 7693).
 
+* ADDED: Full support for `socat` to the `http_process_transport` library and
+a new `connection_helper_executable/1` option (defaulting to `ncat`).
+
 * ADDED: Support to the `ranking_protocols` library for ordered multiplayer
 ranking datasets with ranked teams and weighted player participation, plus
 shared portable standard normal distribution numeric helpers.

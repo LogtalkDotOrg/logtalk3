@@ -79,9 +79,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-08-07,
+		date is 2026-08-13,
 		comment is 'Unit tests for the "http_process_transport" library.'
 	]).
 
@@ -305,6 +305,56 @@
 				),
 				http_process_transport::close_listener(Listener)
 			).
+
+		test(http_process_transport_open_connection_4_ncat_ncat_01, deterministic, [condition(executable_available(ncat))]) :-
+			setup_call_cleanup(
+				http_process_transport::open_listener('127.0.0.1', Port, Listener, [listener_helper_executable(ncat)]),
+				(	threaded_once(server_accept_and_close_once(Listener), Tag),
+					setup_call_cleanup(
+						http_process_transport::open_connection('127.0.0.1', Port, Connection, [connection_helper_executable(ncat)]),
+						threaded_exit(server_accept_and_close_once(Listener), Tag),
+						http_process_transport::close_connection(Connection)
+					)
+				),
+				http_process_transport::close_listener(Listener)
+			).
+
+		test(http_process_transport_open_connection_4_ncat_socat_01, deterministic, [condition((executable_available(ncat), executable_available(socat)))]) :-
+			setup_call_cleanup(
+				http_process_transport::open_listener('127.0.0.1', Port, Listener, [listener_helper_executable(ncat)]),
+				(	threaded_once(server_accept_and_close_once(Listener), Tag),
+					setup_call_cleanup(
+						http_process_transport::open_connection('127.0.0.1', Port, Connection, [connection_helper_executable(socat)]),
+						threaded_exit(server_accept_and_close_once(Listener), Tag),
+						http_process_transport::close_connection(Connection)
+					)
+				),
+				http_process_transport::close_listener(Listener)
+			).
+
+		test(http_process_transport_open_connection_4_socat_socat_01, deterministic, [condition(executable_available(socat))]) :-
+			setup_call_cleanup(
+				http_process_transport::open_listener('127.0.0.1', Port, Listener, [listener_helper_executable(socat)]),
+				(	threaded_once(server_accept_and_close_once(Listener), Tag),
+					setup_call_cleanup(
+						http_process_transport::open_connection('127.0.0.1', Port, Connection, [connection_helper_executable(socat)]),
+						threaded_exit(server_accept_and_close_once(Listener), Tag),
+						http_process_transport::close_connection(Connection)
+					)
+				),
+				http_process_transport::close_listener(Listener)
+			).
+
+		test(http_process_transport_exchange_5_ncat_socat_01, deterministic, [condition((executable_available(ncat), executable_available(socat)))]) :-
+			Host = '127.0.0.1',
+			Request = request(get, origin('/ping'), http(1, 1), [host-host(Host)], empty, [listener_helper_executable(ncat)]),
+			http_process_transport::open_listener(Host, Port, Listener, []),
+			threaded_once(http_process_transport::exchange(Host, Port, Request, Response, [connection_helper_executable(socat)]), Tag),
+			http_process_transport::serve_once(Listener, echo_http_process_transport_handler, ClientInfo),
+			threaded_exit(http_process_transport::exchange(Host, Port, Request, Response, [connection_helper_executable(socat)]), Tag),
+			http_process_transport::close_listener(Listener),
+			compound(ClientInfo),
+			http_core::status(Response, status(200, 'OK')).
 
 		test(http_process_transport_serve_listener_5_01, deterministic, [condition(executable_available(ncat))]) :-
 			Host = '127.0.0.1',
