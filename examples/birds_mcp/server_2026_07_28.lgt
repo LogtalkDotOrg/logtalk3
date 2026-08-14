@@ -19,23 +19,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+%  Entry point for running the birds expert system as an MCP 2026-07-28 server.
+%  Requires Logtalk thread support.
+
 :- initialization((
-	logtalk_load(basic_types(loader)),
-	logtalk_load(json_rpc(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load(term_io(loader)),
-	logtalk_load([
-		mcp_tool_protocol,
-		mcp_prompt_protocol,
-		mcp_resource_protocol,
-		mcp_multiround_protocol,
-		mcp_cache_protocol,
-		mcp_server_adapter_protocol,
-		mcp_server_application,
-		mcp_server_2025_06_18_adapter,
-		mcp_server_2026_07_28_adapter,
-		mcp_server
-	], [
-		optimize(on)
+	logtalk_load(loader),
+	mcp_server::start('birds-expert', birds_mcp, [
+		protocol_adapter(mcp_server_2026_07_28_adapter),
+		server_title('Birds Expert (2026-07-28)'),
+		instructions('Identify a bird by answering characteristic questions over multiple rounds.')
 	])
 )).

@@ -27,6 +27,7 @@
 	logtalk_load(birds(loader)),
 	logtalk_load(birds_mcp, [debug(on), source_data(on)]),
 	logtalk_load(lgtunit(loader)),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
+	logtalk_load(tests_2025_06_18, [hook(lgtunit)]),
+	logtalk_load(tests_2026_07_28, [hook(lgtunit)]),
+	lgtunit::run_test_sets([tests_2025_06_18, tests_2026_07_28])
 )).

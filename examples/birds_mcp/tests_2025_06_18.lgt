@@ -19,13 +19,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(tests,
+:- object(tests_2025_06_18,
 	extends(lgtunit)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-11,
+		date is 2026-08-14,
 		comment is 'Unit tests for the "birds_mcp" example.'
 	]).
 

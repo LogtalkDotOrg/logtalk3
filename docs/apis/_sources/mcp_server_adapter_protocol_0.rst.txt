@@ -1,0 +1,129 @@
+.. index:: single: mcp_server_adapter_protocol
+.. _mcp_server_adapter_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``mcp_server_adapter_protocol``
+===============================
+
+Protocol for MCP specification adapters. Each adapter implements one MCP protocol version (e.g. 2025-06-18 or 2026-07-28). The ``mcp_server`` facade selects an adapter via the ``protocol_adapter/1`` option and delegates the server lifecycle to it.
+
+| **Availability:** 
+|    ``logtalk_load(mcp_server(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-14
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: protocol_version/1
+.. _mcp_server_adapter_protocol/0::protocol_version/1:
+
+``protocol_version/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the MCP protocol version string implemented by this adapter (e.g. ``'2025-06-18'`` or ``'2026-07-28'``).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``protocol_version(Version)``
+| **Mode and number of proofs:**
+|    ``protocol_version(-atom)`` - ``one``
+
+
+------------
+
+.. index:: start/4
+.. _mcp_server_adapter_protocol/0::start/4:
+
+``start/4``
+^^^^^^^^^^^
+
+Starts the adapter against the given application object, input/output streams, and normalized server configuration options. Blocks until the client disconnects (EOF) or an exit condition is reached. The adapter is responsible for all request handling, capability negotiation, and cleanup of adapter-owned state.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``start(Application,Input,Output,Options)``
+| **Mode and number of proofs:**
+|    ``start(+object_identifier,+stream,+stream,+list)`` - ``one``
+
+
+------------
+
+.. index:: notify/1
+.. _mcp_server_adapter_protocol/0::notify/1:
+
+``notify/1``
+^^^^^^^^^^^^
+
+Publishes an application event to interested clients. Canonical event terms are ``tools_list_changed``, ``prompts_list_changed``, ``resources_list_changed``, and ``resource_updated(URI)``. The 2025-06-18 adapter may ignore or reject events not supported by that specification; the 2026-07-28 adapter filters events through active subscriptions.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``notify(Event)``
+| **Mode and number of proofs:**
+|    ``notify(+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: cleanup/0
+.. _mcp_server_adapter_protocol/0::cleanup/0:
+
+``cleanup/0``
+^^^^^^^^^^^^^
+
+Releases any adapter-owned dynamic state. Called by the facade after the server loop terminates (success, failure, exception, or EOF).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``cleanup`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

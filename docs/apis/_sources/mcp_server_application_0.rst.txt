@@ -1,0 +1,267 @@
+.. index:: single: mcp_server_application
+.. _mcp_server_application/0:
+
+.. rst-class:: right
+
+**category**
+
+``mcp_server_application``
+==========================
+
+Specification-independent application logic for MCP servers: tool/prompt/resource descriptor conversion, schema derivation from info/2 and mode/2, auto-dispatch, canonical complete-result terms, and curly-term helpers. Imported by both the 2025-06-18 and 2026-07-28 adapters.
+
+| **Availability:** 
+|    ``logtalk_load(mcp_server(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-14
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Extends:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`term_io <term_io/0>`
+|    :ref:`user <user/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: tool_descriptors_to_json/3
+.. _mcp_server_application/0::tool_descriptors_to_json/3:
+
+``tool_descriptors_to_json/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts a list of tool(Name, Functor, Arity) descriptors into MCP JSON tool definitions, deriving titles, descriptions and input schemas from the application object's info/2 and mode/2 directives.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``tool_descriptors_to_json(ToolDescriptors,Application,JsonTools)``
+| **Mode and number of proofs:**
+|    ``tool_descriptors_to_json(+list,+object_identifier,-list)`` - ``one``
+
+
+------------
+
+.. index:: prompt_descriptors_to_json/2
+.. _mcp_server_application/0::prompt_descriptors_to_json/2:
+
+``prompt_descriptors_to_json/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts prompt descriptors (3-arg or 4-arg) into MCP JSON prompt definitions.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``prompt_descriptors_to_json(PromptDescriptors,JsonPrompts)``
+| **Mode and number of proofs:**
+|    ``prompt_descriptors_to_json(+list,-list)`` - ``one``
+
+
+------------
+
+.. index:: resource_descriptors_to_json/2
+.. _mcp_server_application/0::resource_descriptors_to_json/2:
+
+``resource_descriptors_to_json/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts resource descriptors (4-arg or 5-arg) into MCP JSON resource definitions.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``resource_descriptors_to_json(Descriptors,Resources)``
+| **Mode and number of proofs:**
+|    ``resource_descriptors_to_json(+list,-list)`` - ``one``
+
+
+------------
+
+.. index:: auto_dispatch_tool/5
+.. _mcp_server_application/0::auto_dispatch_tool/5:
+
+``auto_dispatch_tool/5``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Auto-dispatches a tool call by calling the predicate on the application, collecting output-mode arguments, and returning a text result.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``auto_dispatch_tool(Application,Functor,Arity,ToolArguments,Result)``
+| **Mode and number of proofs:**
+|    ``auto_dispatch_tool(+object_identifier,+atom,+integer,+compound,-compound)`` - ``one``
+
+
+------------
+
+.. index:: try_tool_call_3/7
+.. _mcp_server_application/0::try_tool_call_3/7:
+
+``try_tool_call_3/7``
+^^^^^^^^^^^^^^^^^^^^^
+
+Tries tool_call/3; on existence_error falls back to auto-dispatch.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``try_tool_call_3(Application,ToolName,Functor,Arity,ArgPairs,ToolArguments,Result)``
+| **Mode and number of proofs:**
+|    ``try_tool_call_3(+object_identifier,+atom,+atom,+integer,+list,+compound,-compound)`` - ``one``
+
+
+------------
+
+.. index:: format_content_items/2
+.. _mcp_server_application/0::format_content_items/2:
+
+``format_content_items/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts canonical content item terms into MCP JSON content array elements.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``format_content_items(Items,Elements)``
+| **Mode and number of proofs:**
+|    ``format_content_items(+list,-list)`` - ``one``
+
+
+------------
+
+.. index:: format_prompt_messages/2
+.. _mcp_server_application/0::format_prompt_messages/2:
+
+``format_prompt_messages/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts message(Role, text(Text)) terms into MCP JSON prompt message objects.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``format_prompt_messages(Messages,JsonMessages)``
+| **Mode and number of proofs:**
+|    ``format_prompt_messages(+list,-list)`` - ``one``
+
+
+------------
+
+.. index:: format_resource_contents/2
+.. _mcp_server_application/0::format_resource_contents/2:
+
+``format_resource_contents/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts text_content/3 and blob_content/3 terms into MCP JSON resource content objects.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``format_resource_contents(Contents,JsonContents)``
+| **Mode and number of proofs:**
+|    ``format_resource_contents(+list,-list)`` - ``one``
+
+
+------------
+
+.. index:: has_pair/3
+.. _mcp_server_application/0::has_pair/3:
+
+``has_pair/3``
+^^^^^^^^^^^^^^
+
+Looks up a Key-Value pair inside a curly-term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``has_pair(Curly,Key,Value)``
+| **Mode and number of proofs:**
+|    ``has_pair(+compound,+atom,?term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: curly_to_pairs/2
+.. _mcp_server_application/0::curly_to_pairs/2:
+
+``curly_to_pairs/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Converts a curly-term to a list of Key-Value pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``curly_to_pairs(Curly,Pairs)``
+| **Mode and number of proofs:**
+|    ``curly_to_pairs(+compound,-list)`` - ``one``
+
+
+------------
+
+.. index:: pairs_to_curly/2
+.. _mcp_server_application/0::pairs_to_curly/2:
+
+``pairs_to_curly/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Converts a list of Key-Value pairs to a curly-term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``pairs_to_curly(Pairs,Curly)``
+| **Mode and number of proofs:**
+|    ``pairs_to_curly(+list,-compound)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

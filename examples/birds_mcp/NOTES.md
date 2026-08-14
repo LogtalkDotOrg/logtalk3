@@ -22,64 +22,73 @@ ________________________________________________________________________
 
 This example demonstrates the `mcp_server` library by exposing the
 bird identification expert system (from the `birds` example) as an
-MCP (Model Context Protocol) server with **elicitation** support.
+MCP (Model Context Protocol) server.
 
-When an MCP client asks to identify a bird, the server uses the
-`elicitation/create` MCP method to ask the user questions about bird
-characteristics (yes/no questions and multiple-choice menus). The
-answers guide the expert system through the bird taxonomy to identify
-the species — exactly as the original interactive expert system does,
-but over the MCP protocol instead of terminal I/O.
+It supports **both** specifications:
+
+| Specification | Interaction model | Entry point |
+|---------------|-------------------|-------------|
+| **2025-06-18** | Synchronous `elicitation/create` via `tool_call/4` | `server.lgt` (default) |
+| **2026-07-28** | Multi-round `input_required` / `complete` via `tool_call_round/4` | `server_2026_07_28.lgt` |
+
+When an MCP client asks to identify a bird, the server asks the user
+questions about bird characteristics (yes/no and multiple-choice menus).
+The answers guide the expert system through the bird taxonomy.
+
 
 ## Key concepts demonstrated
+
+### 2025-06-18
 
 - Implementing `mcp_tool_protocol` with a requirement for the client
   `elicitation` capability
 - Using `tool_call/4` with the `Elicit` closure for interactive tools
 - Building JSON Schema for yes/no and enum elicitation requests
-- Adapting an existing interactive application for MCP without
-  modifying the original knowledge base
+
+### 2026-07-28
+
+- Implementing `mcp_multiround_protocol` alongside `mcp_tool_protocol`
+- Using `tool_call_round/4` that returns `input_required(Requests, State)`
+  or `complete(Result)`
+- Carrying known answers in opaque, JSON-friendly `requestState`
+- Selecting the adapter with `protocol_adapter(mcp_server_2026_07_28_adapter)`
+
 
 ## Architecture
 
 The example reuses the bird taxonomy from `examples/birds/` (the
-`order` prototype hierarchy (the `descriptors` category, the `birds` objects).
-The expert system's user interaction is reimplemented in `birds_mcp.lgt`:
+`order` prototype hierarchy and descriptors). User interaction is
+implemented in `birds_mcp.lgt`:
 
-- `birds_mcp` implements `mcp_tool_protocol` and declares that it requires
-  the client `elicitation` capability
 - A single tool `identify_bird` is exposed
-- The `check/2` predicate threads the `Elicit` closure through the
-  identification logic
-- `ask_descriptor/2` dispatches each bird descriptor to either a
-  yes/no elicitation (`ask/3`) or a multiple-choice menu
-  (`menuask/4`), based on `menu_attribute/2` facts
-- Previous answers are memoized in `known_/3` to avoid redundant
-  questions (matching the original expert system behavior)
+- **2025 path:** `tool_call/4` threads an `Elicit` closure through
+  `ask/3` and `menuask/4`; answers are memoized in `known_/3`
+- **2026 path:** `tool_call_round/4` asks one question per round,
+  encodes known facts + pending question in `requestState`, and
+  resumes from `inputResponses` on the next call
 
-The server reads/writes JSON-RPC 2.0 messages from/to stdin/stdout as
-required by MCP.
 
 ## Testing
 
-To run the example tests, load the `tester.lgt` file:
+Run both specification suites:
 
-  | ?- logtalk_load(birds_mcp(tester)).
+```text
+| ?- logtalk_load(birds_mcp(tester)).
+```
+
 
 ## MCP client configuration
 
-MCP client configuration depends on the MCP client. For example, to add
-this MCP server to Claude Desktop or VSCode, edit (respectively) the
-`claude_desktop_config.json` or `mcp.json` files and add:
+### 2025-06-18 (default)
 
 ```json
 {
 	"mcpServers": {
-		"my-server": {
+		"birds-expert-2025": {
 			"command": "swilgt",
 			"args": [
-                "-q",
-				"-g", "logtalk_load(birds_mcp(server))",
+				"-q",
+				"-g", "logtalk_load(birds_mcp(server_2025_06_18))",
 				"-t", "halt"
 			],
 			"env": {
@@ -91,60 +100,60 @@ this MCP server to Claude Desktop or VSCode, edit (respectively) the
 }
 ```
 
-The `env` definition of the `LOGTALKHOME` and `LOGTALKUSER` environment
-variables may or may not be required (it's usually necessary on macOS).
-When required, replace the values above with the actual values on your
-Logtalk setup.
-
-The actual arguments to the integration script (`swilgt` in the example
-above) depend on the Prolog backend.
-
-## Protocol interaction example
-
-A typical identification session involves the following MCP message
-exchange:
-
-1. Client sends an `initialize` request advertising the `elicitation`
-  client capability
-2. Server responds with the `tools` server capability
-3. Client sends `tools/list` request
-4. Server responds with the `identify_bird` tool
-5. Client sends `tools/call` for `identify_bird`
-6. Server sends `elicitation/create` requests asking about bird
-   characteristics (e.g., "eats: meat?", "What is the value for
-   size?")
-7. Client responds to each elicitation with the user's answer
-8. Server returns the identification result
-
-Example elicitation request (server -> client):
+### 2026-07-28
 
 ```json
 {
-  "jsonrpc": "2.0",
-  "id": "elicit_1",
-  "method": "elicitation/create",
-  "params": {
-    "message": "bill: sharp_hooked?",
-    "requestedSchema": {
-      "type": "object",
-      "properties": {
-        "answer": {"type": "string", "enum": ["yes", "no"]}
-      },
-      "required": ["answer"]
-    }
-  }
+	"mcpServers": {
+		"birds-expert-2026": {
+			"command": "swilgt",
+			"args": [
+				"-q",
+				"-g", "logtalk_load(birds_mcp(server_2026_07_28))",
+				"-t", "halt"
+			],
+			"env": {
+				"LOGTALKHOME": "/usr/local/share/logtalk",
+				"LOGTALKUSER": "/Users/jdoe/logtalk"
+			}
+		}
+	}
 }
 ```
 
-Client response:
+Replace `LOGTALKHOME` / `LOGTALKUSER` with the values on your system
+when required (often needed on macOS).
 
-```json
-{
-  "jsonrpc": "2.0",
-  "id": "elicit_1",
-  "result": {
-    "action": "accept",
-    "content": {"answer": "yes"}
-  }
-}
-```
+
+## Protocol interaction examples
+
+### 2025-06-18 (synchronous elicitation)
+
+1. Client sends `initialize` advertising the `elicitation` capability
+2. Server responds with the `tools` capability
+3. Client calls `tools/call` for `identify_bird`
+4. Server sends one or more `elicitation/create` requests
+5. Client answers each; server returns the identification result
+
+### 2026-07-28 (multi-round)
+
+1. Client sends `server/discover` with required `_meta`
+2. Client calls `tools/call` for `identify_bird`
+3. Server responds with `resultType: input_required`, an
+   `inputRequests` list, and `requestState`
+4. Client calls `tools/call` again with `inputResponses` and the
+   echoed `requestState`
+5. Steps 3–4 repeat until the server returns `resultType: complete`
+
+
+## Files
+
+| File | Role |
+|------|------|
+| `birds_mcp.lgt` | Tool provider (2025 elicitation + 2026 MRTR) |
+| `server.lgt` | 2025-06-18 server entry point |
+| `server_2026_07_28.lgt` | 2026-07-28 server entry point |
+| `loader.lgt` | Example loader |
+| `tests.lgt` | 2025-06-18 unit tests |
+| `tests_2026_07_28.lgt` | 2026-07-28 MRTR unit tests |
+| `tester.lgt` | Runs both test suites |

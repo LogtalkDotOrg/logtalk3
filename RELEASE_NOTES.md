@@ -161,6 +161,8 @@ integer arithmetic).
 * ADDED: Support to the `hashes` library for generalized BLAKE2 cryptographic
 hash functions that accept both key an digest size parameters (per RFC 7693).
 
+* ADDED: Support for the MCP 2026-07-28 spec to the `mcp_server` library.
+
 * ADDED: Full support for `socat` to the `http_process_transport` library and
 a new `connection_helper_executable/1` option (defaulting to `ncat`).
 
@@ -251,7 +253,8 @@ Examples
 * ADDED: New `http_sse_ticker` example illustrating the use of the new
 `http_sse` library.
 
-* ADDED: Tests to the `birds_mcp` server example.
+* UPDATED: The `birds_mcp` example to also illustrate the MCP 2026-07-28
+spec and add tests covering both MCP 2025-06-18 and 2026-07-28 specs.
 
 * UPDATED: The `errors` example to illustrate the new linter warnings.
 

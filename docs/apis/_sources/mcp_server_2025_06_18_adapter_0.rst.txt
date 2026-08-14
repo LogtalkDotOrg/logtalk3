@@ -1,0 +1,113 @@
+.. index:: single: mcp_server_2025_06_18_adapter
+.. _mcp_server_2025_06_18_adapter/0:
+
+.. rst-class:: right
+
+**object**
+
+``mcp_server_2025_06_18_adapter``
+=================================
+
+MCP 2025-06-18 specification adapter. Owns the initialize handshake, version negotiation, client capability storage, notifications/initialized, synchronous server-initiated elicitation, and the 2025-06-18 result shapes. Does not add resultType, cache fields, or per-request metadata requirements.
+
+| **Availability:** 
+|    ``logtalk_load(mcp_server(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-14
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`mcp_server_adapter_protocol <mcp_server_adapter_protocol/0>`
+| **Imports:**
+|    ``public`` :ref:`mcp_server_application <mcp_server_application/0>`
+| **Uses:**
+|    :ref:`json_rpc <json_rpc/0>`
+|    :ref:`list <list/0>`
+|    :ref:`term_io <term_io/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`mcp_server_application/0::auto_dispatch_tool/5`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`mcp_server_adapter_protocol/0::cleanup/0`  :ref:`mcp_server_application/0::curly_to_pairs/2`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`mcp_server_application/0::format_content_items/2`  :ref:`mcp_server_application/0::format_prompt_messages/2`  :ref:`mcp_server_application/0::format_resource_contents/2`  :ref:`mcp_server_application/0::has_pair/3`  :ref:`mcp_server_adapter_protocol/0::notify/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`mcp_server_application/0::pairs_to_curly/2`  :ref:`mcp_server_application/0::prompt_descriptors_to_json/2`  :ref:`mcp_server_adapter_protocol/0::protocol_version/1`  :ref:`mcp_server_application/0::resource_descriptors_to_json/2`  :ref:`mcp_server_adapter_protocol/0::start/4`  :ref:`mcp_server_application/0::tool_descriptors_to_json/3`  :ref:`mcp_server_application/0::try_tool_call_3/7`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: elicit_request/5
+.. _mcp_server_2025_06_18_adapter/0::elicit_request/5:
+
+``elicit_request/5``
+^^^^^^^^^^^^^^^^^^^^
+
+Sends an elicitation/create request to the client and reads the response (2025-06-18 synchronous model).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``elicit_request(Input,Output,Message,RequestedSchema,Answer)``
+| **Mode and number of proofs:**
+|    ``elicit_request(+stream,+stream,+atom,+compound,--compound)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: initialized_/0
+.. _mcp_server_2025_06_18_adapter/0::initialized_/0:
+
+``initialized_/0``
+^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. index:: elicit_counter_/1
+.. _mcp_server_2025_06_18_adapter/0::elicit_counter_/1:
+
+``elicit_counter_/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. index:: client_capabilities_/1
+.. _mcp_server_2025_06_18_adapter/0::client_capabilities_/1:
+
+``client_capabilities_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

@@ -22,12 +22,12 @@
 %  Entry point for running the birds expert system as an MCP server.
 %  Load the example then start the server, which reads from stdin and
 %  writes newline-delimited JSON-RPC messages to stdout.
-%
-%  Example usage with SWI-Prolog backend:
-%
-%    swilgt -g "logtalk_load('loader'), mcp_server::start('birds-expert', birds_mcp)."
 
 :- initialization((
 	logtalk_load(loader),
-	mcp_server::start('birds-expert', birds_mcp)
+	mcp_server::start('birds-expert', birds_mcp, [
+		protocol_adapter(mcp_server_2025_06_18_adapter),
+		server_title('Birds Expert (2025-67-18)'),
+		instructions('Identify a bird by answering characteristic questions over multiple rounds.')
+	])
 )).

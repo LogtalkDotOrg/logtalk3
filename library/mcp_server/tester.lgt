@@ -29,13 +29,24 @@
 		mcp_tool_protocol,
 		mcp_prompt_protocol,
 		mcp_resource_protocol,
+		mcp_multiround_protocol,
+		mcp_cache_protocol,
+		mcp_server_adapter_protocol,
+		mcp_server_application,
+		mcp_server_2025_06_18_adapter,
+		mcp_server_2026_07_28_adapter,
 		mcp_server
 	], [
 		source_data(on),
 		debug(on)
 	]),
-	logtalk_load(test_tools, [source_data(on), debug(on)]),
+	logtalk_load(test_tools_2025_06_18, [source_data(on), debug(on)]),
+	logtalk_load(test_tools_2026_07_28, [source_data(on), debug(on)]),
 	logtalk_load(lgtunit(loader)),
-	logtalk_load(tests, [hook(lgtunit)]),
-	tests::run
+	logtalk_load(tests_2025_06_18, [hook(lgtunit)]),
+	logtalk_load(tests_2026_07_28, [hook(lgtunit)]),
+	lgtunit::run_test_sets([
+		tests_2025_06_18,
+		tests_2026_07_28
+	])
 )).

@@ -22,14 +22,16 @@
 :- protocol(mcp_resource_protocol).
 
 	:- info([
-		version is 0:2:0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-02-24,
-		comment is 'Protocol for Logtalk objects that provide resources to be exposed via an MCP (Model Context Protocol) server. Implements the MCP 2025-06-18 specification. Implementing objects must define the set of resources available and handle resource read requests. Resources expose data and content from the application that MCP clients can access.',
+		date is 2026-08-14,
+		comment is 'Protocol for Logtalk objects that provide resources to be exposed via an MCP (Model Context Protocol) server. Implementing objects must define the set of resources available and handle resource read requests. Resources expose data and content from the application that MCP clients can access. Used by both the 2025-06-18 and 2026-07-28 adapters.',
 		remarks is [
 			'Capabilities' - 'Objects providing resources must declare ``resources`` in their ``capabilities/1`` predicate (from the ``mcp_tool_protocol`` protocol). The server will then advertise the ``resources`` capability and handle ``resources/list`` and ``resources/read`` requests.',
 			'Resource descriptors' - 'Each resource is described by a ``resource(URI, Name, Description, MimeType)`` or ``resource(URI, Name, Title, Description, MimeType)`` term where ``URI`` is the resource identifier (an atom), ``Name`` is a human-readable name (an atom), ``Title`` is an optional human-friendly display name (an atom), ``Description`` is a human-readable description (an atom), and ``MimeType`` is the MIME type of the resource content (an atom, e.g. ``''text/plain''``).',
-			'Resource contents' - 'The ``resource_read/3`` predicate must return a result term. The result must be ``contents(ContentList)`` where each item is ``text_content(URI, MimeType, Text)`` for text resources or ``blob_content(URI, MimeType, Base64Data)`` for binary resources encoded as base64.'
+			'Resource contents' - 'The ``resource_read/3`` predicate must return a result term. The result must be ``contents(ContentList)`` where each item is ``text_content(URI, MimeType, Text)`` for text resources or ``blob_content(URI, MimeType, Base64Data)`` for binary resources encoded as base64.',
+			'Multi-round (2026-07-28)' - 'For the 2026-07-28 adapter, applications that need additional input during a resource read implement ``resource_read_round/4`` from the ``mcp_multiround_protocol``. Existing ``resource_read/3`` remains valid and is wrapped as a ``complete`` result when the round hook is absent.',
+			'Caching (2026-07-28)' - 'Complete ``resources/read`` results may include cache fields (``ttlMs``, ``cacheScope``) derived from ``mcp_cache_protocol`` or server options. Cache fields are never attached to ``input_required`` results.'
 		]
 	]).
 

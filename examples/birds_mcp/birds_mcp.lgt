@@ -20,21 +20,26 @@
 
 
 :- object(birds_mcp,
-	implements(mcp_tool_protocol)).
+	implements([mcp_tool_protocol, mcp_multiround_protocol])).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-11,
-		comment is 'MCP tool provider for the bird identification expert system. Uses MCP elicitation to ask the user questions during bird identification, replacing the terminal I/O of the original birds example.',
+		date is 2026-08-14,
+		comment is 'MCP tool provider for the bird identification expert system. Supports both the 2025-06-18 synchronous elicitation API (``tool_call/4``) and the 2026-07-28 multi-round tool results API (``tool_call_round/4``).',
 		remarks is [
-			'Elicitation' - 'This tool provider declares that it requires the client ``elicitation`` capability. When the client advertises support during initialization, the server sends ``elicitation/create`` requests to ask the user about bird characteristics (yes/no questions and multiple-choice menus).',
-			'Knowledge base' - 'Uses the bird taxonomy from the ``birds`` example (the ``order`` prototype hierarchy). The ``descriptors`` category defines the askable attributes.'
+			'2025-06-18 elicitation' - 'Declares the client ``elicitation`` capability. When the client advertises support, the server sends ``elicitation/create`` requests via the ``Elicit`` closure passed to ``tool_call/4``.',
+			'2026-07-28 MRTR' - 'Implements ``tool_call_round/4`` from ``mcp_multiround_protocol``. Each round either returns ``input_required`` with the next yes/no or menu question, or ``complete`` with the identification result. Known answers are carried in opaque ``requestState``.',
+			'Knowledge base' - 'Uses the bird taxonomy from the ``birds`` example (the ``order`` prototype hierarchy).'
 		]
 	]).
 
 	:- private(known_/3).
 	:- dynamic(known_/3).
+
+	:- uses(list, [
+		member/2
+	]).
 
 	:- uses(term_io, [
 		write_to_atom/2
@@ -53,14 +58,186 @@
 	:- public(identify_bird/0).
 	:- mode(identify_bird, one).
 	:- info(identify_bird/0, [
-		comment is 'Identifies a bird by asking the user questions about its characteristics. Uses MCP elicitation to present yes/no questions and multiple-choice menus. Returns the identified bird species or a message that no bird could be identified.'
+		comment is 'Identifies a bird by asking the user questions about its characteristics. Under 2025-06-18 uses synchronous MCP elicitation; under 2026-07-28 uses multi-round input_required results.'
 	]).
 
+	% 2025-06-18 path
 	tool_call(identify_bird, _Arguments, Elicit, Result) :-
 		identify(Elicit, Result).
 
 	% ==========================================================================
-	% Bird identification logic
+	% 2026-07-28 multi-round path
+	% ==========================================================================
+	%
+	% requestState encoding:
+	%   none                             — first round
+	%   bird_state(Known, Pending)       — Known = [known(Answer,Attr,Val)|...]
+	%                                      Pending = ask(Attr,Val) | menu(Attr,Val,Menu)
+
+	tool_call_round(identify_bird, _Arguments, Context, RoundResult) :-
+		Context = request_context(_ClientCaps, InputResponses, RequestState, _Progress),
+		(	RequestState == none ->
+			next_round([], RoundResult)
+		;	decode_state(RequestState, Known0, Pending) ->
+			apply_responses(Pending, InputResponses, Known0, Known1, Status),
+			(	Status == continue ->
+				next_round(Known1, RoundResult)
+			;	RoundResult = complete(text('No bird could be identified from the given characteristics.'))
+			)
+		;	next_round([], RoundResult)
+		).
+
+	% State is a curly-term: {known-[...], pending-{type-..., ...}}
+	decode_state(State, Known, Pending) :-
+		has_pair(State, known, KnownRaw),
+		has_pair(State, pending, PendingRaw),
+		decode_known(KnownRaw, Known),
+		decode_pending(PendingRaw, Pending).
+
+	decode_known([], []).
+	decode_known([{Pairs}| Rest], [known(A, Attr, V)| Out]) :-
+		curly_member(answer-A, Pairs),
+		curly_member(attribute-Attr, Pairs),
+		curly_member(value-V, Pairs),
+		decode_known(Rest, Out).
+
+	decode_pending(P, ask(Attr, Val)) :-
+		has_pair(P, type, ask),
+		has_pair(P, attribute, Attr),
+		has_pair(P, value, Val), !.
+	decode_pending(P, menu(Attr, Val, Menu)) :-
+		has_pair(P, type, menu),
+		has_pair(P, attribute, Attr),
+		has_pair(P, value, Val),
+		has_pair(P, menu, Menu).
+
+	encode_state(Known, Pending, State) :-
+		encode_known(Known, KnownJson),
+		encode_pending(Pending, PendingJson),
+		State = {known-KnownJson, pending-PendingJson}.
+
+	encode_known([], []).
+	encode_known([known(A, Attr, V)| Rest], [{answer-A, attribute-Attr, value-V}| Out]) :-
+		encode_known(Rest, Out).
+
+	encode_pending(ask(Attr, Val), {type-ask, attribute-Attr, value-Val}).
+	encode_pending(menu(Attr, Val, Menu), {type-menu, attribute-Attr, value-Val, menu-Menu}).
+
+	apply_responses(ask(Attribute, Value), Responses, Known0, Known, Status) :-
+		(	member(input_response(q, accept(Content)), Responses),
+			has_pair(Content, answer, UserAnswer) ->
+			Known = [known(UserAnswer, Attribute, Value)| Known0],
+			Status = continue
+		;	member(input_response(q, decline), Responses) ->
+			Known = Known0, Status = declined
+		;	member(input_response(q, cancel), Responses) ->
+			Known = Known0, Status = cancelled
+		;	Known = [known(no, Attribute, Value)| Known0],
+			Status = continue
+		).
+	apply_responses(menu(Attribute, _AskValue, _Menu), Responses, Known0, Known, Status) :-
+		(	member(input_response(q, accept(Content)), Responses),
+			has_pair(Content, answer, AnswerValue) ->
+			Known = [known(yes, Attribute, AnswerValue)| Known0],
+			Status = continue
+		;	member(input_response(q, decline), Responses) ->
+			Known = Known0, Status = declined
+		;	member(input_response(q, cancel), Responses) ->
+			Known = Known0, Status = cancelled
+		;	Known = Known0, Status = continue
+		).
+
+	next_round(Known, RoundResult) :-
+		setup_known(Known),
+		(	catch(find_next(Known, Outcome), _, fail) ->
+			(	Outcome = identified(Bird) ->
+				bird_name(Bird, Name),
+				atom_concat('Identified bird: ', Name, Text),
+				RoundResult = complete(text(Text))
+			;	Outcome = need_ask(Attribute, Value) ->
+				atom_concat(Attribute, ': ', T1),
+				atom_concat(T1, Value, T2),
+				atom_concat(T2, '?', Message),
+				Schema = {
+					type-object,
+					properties-{answer-{type-string, enum-[yes, no]}},
+					required-[answer]
+				},
+				encode_state(Known, ask(Attribute, Value), State),
+				RoundResult = input_required(
+					[input_request(q, form_elicitation(Message, Schema))],
+					State
+				)
+			;	Outcome = need_menu(Attribute, Value, Menu),
+				atom_concat('What is the value for ', Attribute, Temp),
+				atom_concat(Temp, '?', Message),
+				atoms_to_enum(Menu, EnumList),
+				Schema = {
+					type-object,
+					properties-{answer-{type-string, enum-EnumList}},
+					required-[answer]
+				},
+				encode_state(Known, menu(Attribute, Value, Menu), State),
+				RoundResult = input_required(
+					[input_request(q, form_elicitation(Message, Schema))],
+					State
+				)
+			)
+		;	RoundResult = complete(text('No bird could be identified from the given characteristics.'))
+		),
+		clear_known.
+
+	% Find either a fully matching bird or the next unanswered descriptor
+	find_next(_Known, Outcome) :-
+		order::leaf(Bird),
+		(	bird_fully_matched(Bird) ->
+			Outcome = identified(Bird)
+		;	next_unanswered(Bird, Question) ->
+			(	Question = ask(A, V) -> Outcome = need_ask(A, V)
+			;	Question = menu(A, V, M) -> Outcome = need_menu(A, V, M)
+			;	fail
+			)
+		;	fail
+		),
+		!.
+	find_next(_, none).
+
+	bird_fully_matched(Bird) :-
+		forall(
+			(order::descriptor(Name/Arity), functor(Predicate, Name, Arity), Bird::Predicate),
+			descriptor_satisfied(Predicate)
+		).
+
+	next_unanswered(Bird, Question) :-
+		order::descriptor(Name/Arity),
+		functor(Predicate, Name, Arity),
+		Bird::Predicate,
+		\+ descriptor_satisfied(Predicate),
+		!,
+		Predicate =.. [Attribute, Value],
+		(	menu_attribute(Attribute, Menu) ->
+			Question = menu(Attribute, Value, Menu)
+		;	Question = ask(Attribute, Value)
+		).
+
+	descriptor_satisfied(Predicate) :-
+		Predicate =.. [Attribute, Value],
+		known_(yes, Attribute, Value).
+
+	setup_known(Known) :-
+		retractall(known_(_, _, _)),
+		assert_known_list(Known).
+
+	assert_known_list([]).
+	assert_known_list([known(A, Attr, V)| Rest]) :-
+		asserta(known_(A, Attr, V)),
+		assert_known_list(Rest).
+
+	clear_known :-
+		retractall(known_(_, _, _)).
+
+	% ==========================================================================
+	% 2025-06-18 Bird identification logic (synchronous elicitation)
 	% ==========================================================================
 
 	identify(Elicit, Result) :-
@@ -73,18 +250,12 @@
 		;	Result = text('No bird could be identified from the given characteristics.')
 		).
 
-	% Check if a candidate bird matches by asking about each of its descriptors
 	check(Elicit, Bird) :-
 		forall(
 			(order::descriptor(Name/Arity), functor(Predicate, Name, Arity), Bird::Predicate),
 			ask_descriptor(Elicit, Predicate)
 		).
 
-	% ==========================================================================
-	% Descriptor-based elicitation dispatch
-	% ==========================================================================
-
-	% Route each descriptor predicate to the appropriate question type
 	ask_descriptor(Elicit, Predicate) :-
 		Predicate =.. [Attribute, Value],
 		(	menu_attribute(Attribute, Menu) ->
@@ -92,15 +263,10 @@
 		;	ask(Elicit, Attribute, Value)
 		).
 
-	% Attributes that use multiple-choice menus (matching the original expert)
 	menu_attribute(flight, [ponderous, powerful, agile, flap_glide, other]).
 	menu_attribute(flight_profile, [flat, v_shaped, other]).
 	menu_attribute(size, [large, plump, medium, small]).
 	menu_attribute(tail, [narrow_at_tip, forked, long_rusty, square, other]).
-
-	% ==========================================================================
-	% Yes/No questions via elicitation
-	% ==========================================================================
 
 	:- meta_predicate(ask(3, *, *)).
 
@@ -119,19 +285,16 @@
 			has_pair(Content, answer, UserAnswer) ->
 			asserta(known_(UserAnswer, Attribute, Value)),
 			UserAnswer == yes
-		;	% decline or cancel: treat as no
-			asserta(known_(no, Attribute, Value)),
+		;	asserta(known_(no, Attribute, Value)),
 			fail
 		).
 
 	:- meta_predicate(ask_question(3, *, *, *)).
 
 	ask_question(Elicit, Attribute, Value, Answer) :-
-		% Build the question message
 		atom_concat(Attribute, ': ', Temp1),
 		atom_concat(Temp1, Value, Temp2),
 		atom_concat(Temp2, '?', Message),
-		% Build a yes/no schema
 		Schema = {
 			type-object,
 			properties-{
@@ -140,10 +303,6 @@
 			required-[answer]
 		},
 		call(Elicit, Message, Schema, Answer).
-
-	% ==========================================================================
-	% Multiple-choice menus via elicitation
-	% ==========================================================================
 
 	:- meta_predicate(menuask(3, *, *, *)).
 
@@ -154,10 +313,8 @@
 		known_(yes, Attribute, _),
 		!, fail.
 	menuask(Elicit, Attribute, AskValue, Menu) :-
-		% Build the question message
 		atom_concat('What is the value for ', Attribute, Temp),
 		atom_concat(Temp, '?', Message),
-		% Build an enum schema with the menu options
 		atoms_to_enum(Menu, EnumList),
 		Schema = {
 			type-object,
@@ -171,25 +328,20 @@
 			has_pair(Content, answer, AnswerValue) ->
 			asserta(known_(yes, Attribute, AnswerValue)),
 			AskValue = AnswerValue
-		;	% decline or cancel: fail
-			fail
+		;	fail
 		).
 
 	% ==========================================================================
 	% Auxiliary predicates
 	% ==========================================================================
 
-	% Convert a bird object name to a display name
-	% (replace underscores with spaces)
 	bird_name(Bird, Name) :-
 		write_to_atom(Bird, Name).
 
-	% Convert a list of atoms to the same list (already suitable for JSON enum)
 	atoms_to_enum([], []).
 	atoms_to_enum([Atom| Rest], [Atom| EnumRest]) :-
 		atoms_to_enum(Rest, EnumRest).
 
-	% curly-term pair lookup
 	has_pair({Pairs}, Key, Value) :-
 		curly_member(Key-Value, Pairs).
 

@@ -32,7 +32,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="mcp_tool_protocol" href="mcp_tool_protocol_0.html" />
+    <link rel="next" title="mcp_server_2025_06_18_adapter" href="mcp_server_2025_06_18_adapter_0.html" />
     <link rel="prev" title="mcp_resource_protocol" href="mcp_resource_protocol_0.html" />
    
 </head>
@@ -252,9 +252,15 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#loops"><span class="xref std std-ref">loops</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#massey-ranker"><span class="xref std std-ref">massey_ranker</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#mcp-server"><span class="xref std std-ref">mcp_server</span></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="mcp_cache_protocol_0.html">mcp_cache_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcp_multiround_protocol_0.html">mcp_multiround_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_prompt_protocol_0.html">mcp_prompt_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_resource_protocol_0.html">mcp_resource_protocol</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">mcp_server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcp_server_2025_06_18_adapter_0.html">mcp_server_2025_06_18_adapter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcp_server_2026_07_28_adapter_0.html">mcp_server_2026_07_28_adapter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcp_server_adapter_protocol_0.html">mcp_server_adapter_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcp_server_application_0.html">mcp_server_application</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_tool_protocol_0.html">mcp_tool_protocol</a></li>
 </ul>
 </li>
@@ -422,7 +428,7 @@
   <p class="right" id="mcp-server-0"><span id="index-0"></span><strong>object</strong></p>
 <section id="mcp-server">
 <h1><code class="docutils literal notranslate"><span class="pre">mcp_server</span></code><a class="headerlink" href="#mcp-server" title="Link to this heading"></a></h1>
-<p>MCP (Model Context Protocol) server for Logtalk applications. Exposes Logtalk objects implementing the <code class="docutils literal notranslate"><span class="pre">mcp_tool_protocol</span></code> and optionally <code class="docutils literal notranslate"><span class="pre">mcp_prompt_protocol</span></code> and <code class="docutils literal notranslate"><span class="pre">mcp_resource_protocol</span></code> protocols as MCP tool, prompt, and resource providers over stdio transport with newline-delimited JSON-RPC messages. Implements the MCP 2025-06-18 specification. Uses the <code class="docutils literal notranslate"><span class="pre">json_rpc</span></code> library for JSON-RPC 2.0 message handling.</p>
+<p>MCP (Model Context Protocol) server facade for Logtalk applications. Selects a specification adapter (default <code class="docutils literal notranslate"><span class="pre">mcp_server_2025_06_18_adapter</span></code>) and delegates the server lifecycle to it. Preserves the public <code class="docutils literal notranslate"><span class="pre">start/2-5</span></code> entry points. Implements adapter selection via the <code class="docutils literal notranslate"><span class="pre">protocol_adapter(Adapter)</span></code> option.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -431,8 +437,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:5:3</div>
-<div class="line"><strong>Date:</strong> 2026-08-11</div>
+<div class="line"><strong>Version:</strong> 1:0:0</div>
+<div class="line"><strong>Date:</strong> 2026-08-14</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -447,10 +453,7 @@
 </div>
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
-<div class="line"><a class="reference internal" href="json_rpc_0.html#json-rpc-0"><span class="std std-ref">json_rpc</span></a></div>
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
-<div class="line"><a class="reference internal" href="term_io_0.html#term-io-0"><span class="std std-ref">term_io</span></a></div>
-<div class="line"><a class="reference internal" href="user_0.html#user-0"><span class="std std-ref">user</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -458,16 +461,10 @@
 </div>
 <blockquote>
 <div><ul class="simple">
-<li><p>MCP specification: Implements the Model Context Protocol 2025-06-18 (<a class="reference external" href="https://modelcontextprotocol.io/specification/2025-06-18">https://modelcontextprotocol.io/specification/2025-06-18</a>).</p></li>
+<li><p>MCP specifications: Supports the Model Context Protocol 2025-06-18 (default) and 2026-07-28 (via <code class="docutils literal notranslate"><span class="pre">protocol_adapter(mcp_server_2026_07_28_adapter)</span></code>).</p></li>
 <li><p>Transport: Uses stdio (standard input/output) with one newline-delimited JSON-RPC message per line as defined by the MCP specification.</p></li>
-<li><p>Version negotiation: During initialization, the client sends its preferred protocol version. The server responds with that version when supported or with its latest supported version otherwise. A client that does not support the returned version should disconnect.</p></li>
-<li><p>Capabilities: Supports the tools capability (<code class="docutils literal notranslate"><span class="pre">tools/list</span></code> and <code class="docutils literal notranslate"><span class="pre">tools/call</span></code>). Optionally supports the prompts capability (<code class="docutils literal notranslate"><span class="pre">prompts/list</span></code> and <code class="docutils literal notranslate"><span class="pre">prompts/get</span></code>) when the application declares it via <code class="docutils literal notranslate"><span class="pre">capabilities/1</span></code> and implements <code class="docutils literal notranslate"><span class="pre">mcp_prompt_protocol</span></code>. Optionally supports the resources capability (<code class="docutils literal notranslate"><span class="pre">resources/list</span></code> and <code class="docutils literal notranslate"><span class="pre">resources/read</span></code>) when the application declares it via <code class="docutils literal notranslate"><span class="pre">capabilities/1</span></code> and implements <code class="docutils literal notranslate"><span class="pre">mcp_resource_protocol</span></code>. Elicitation is a client capability and is used only when both the application requires it and the client advertises it during initialization.</p></li>
-<li><p>Tool discovery: Tools are discovered from objects implementing the <code class="docutils literal notranslate"><span class="pre">mcp_tool_protocol</span></code>. Tool metadata (descriptions, parameter schemas) is derived from <code class="docutils literal notranslate"><span class="pre">info/2</span></code> and <code class="docutils literal notranslate"><span class="pre">mode/2</span></code> directives.</p></li>
-<li><p>Prompt discovery: Prompts are discovered from objects implementing the <code class="docutils literal notranslate"><span class="pre">mcp_prompt_protocol</span></code>. Prompt metadata (names, descriptions, arguments) is declared via the <code class="docutils literal notranslate"><span class="pre">prompts/1</span></code> predicate.</p></li>
-<li><p>Resource discovery: Resources are discovered from objects implementing the <code class="docutils literal notranslate"><span class="pre">mcp_resource_protocol</span></code>. Resource metadata (URIs, names, descriptions, MIME types) is declared via the <code class="docutils literal notranslate"><span class="pre">resources/1</span></code> predicate.</p></li>
-<li><p>Auto-dispatch: When an object does not define <code class="docutils literal notranslate"><span class="pre">tool_call/3</span></code> or <code class="docutils literal notranslate"><span class="pre">tool_call/4</span></code> for a tool, the server auto-dispatches: it calls the predicate as a message to the object, collects output-mode arguments, and returns them as text content.</p></li>
-<li><p>Elicitation: When the application declares <code class="docutils literal notranslate"><span class="pre">elicitation</span></code> in its <code class="docutils literal notranslate"><span class="pre">capabilities/1</span></code> and the client advertises elicitation support during initialization, the server constructs an elicit closure and passes it to <code class="docutils literal notranslate"><span class="pre">tool_call/4</span></code>. The closure sends <code class="docutils literal notranslate"><span class="pre">elicitation/create</span></code> requests to the client and reads back the user response. This enables interactive tools that can ask the user questions during execution.</p></li>
-<li><p>Error handling: Predicate failures and exceptions both result in MCP tool-level errors with <code class="docutils literal notranslate"><span class="pre">isError</span></code> set to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
+<li><p>Adapter selection: A server instance is pinned to one specification adapter. Existing <code class="docutils literal notranslate"><span class="pre">start/2-5</span></code> calls default to the 2025-06-18 adapter, preserving source and wire compatibility.</p></li>
+<li><p>Options: Common options: <code class="docutils literal notranslate"><span class="pre">server_version(Version)</span></code>, <code class="docutils literal notranslate"><span class="pre">server_title(Title)</span></code>, <code class="docutils literal notranslate"><span class="pre">protocol_adapter(Adapter)</span></code>. Additional options may be interpreted by the chosen adapter.</p></li>
 </ul>
 </div></blockquote>
 <div class="line-block">
@@ -484,30 +481,23 @@
 <li><p><a class="reference internal" href="#start-3" id="id3"><code class="docutils literal notranslate"><span class="pre">start/3</span></code></a></p></li>
 <li><p><a class="reference internal" href="#start-4" id="id4"><code class="docutils literal notranslate"><span class="pre">start/4</span></code></a></p></li>
 <li><p><a class="reference internal" href="#start-5" id="id5"><code class="docutils literal notranslate"><span class="pre">start/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#elicit-request-5" id="id6"><code class="docutils literal notranslate"><span class="pre">elicit_request/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#notify-1" id="id6"><code class="docutils literal notranslate"><span class="pre">notify/1</span></code></a></p></li>
 </ul>
 </li>
 <li><p><a class="reference internal" href="#protected-predicates" id="id7">Protected predicates</a></p></li>
 <li><p><a class="reference internal" href="#private-predicates" id="id8">Private predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#initialized-0" id="id9"><code class="docutils literal notranslate"><span class="pre">initialized_/0</span></code></a></p></li>
-<li><p><a class="reference internal" href="#application-1" id="id10"><code class="docutils literal notranslate"><span class="pre">application_/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#server-name-1" id="id11"><code class="docutils literal notranslate"><span class="pre">server_name_/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#server-version-1" id="id12"><code class="docutils literal notranslate"><span class="pre">server_version_/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#server-title-1" id="id13"><code class="docutils literal notranslate"><span class="pre">server_title_/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#elicit-counter-1" id="id14"><code class="docutils literal notranslate"><span class="pre">elicit_counter_/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#application-capabilities-1" id="id15"><code class="docutils literal notranslate"><span class="pre">application_capabilities_/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#client-capabilities-1" id="id16"><code class="docutils literal notranslate"><span class="pre">client_capabilities_/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#active-adapter-1" id="id9"><code class="docutils literal notranslate"><span class="pre">active_adapter_/1</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#operators" id="id17">Operators</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id10">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
 <section id="start-2">
 <span id="mcp-server-0-start-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">start/2</span></code></a><a class="headerlink" href="#start-2" title="Link to this heading"></a></h3>
-<p>Starts the MCP server with the given server name and application object. The application object must implement the <code class="docutils literal notranslate"><span class="pre">mcp_tool_protocol</span></code> protocol. Reads and writes newline-delimited JSON-RPC messages using standard input and standard output. Blocks until the client disconnects or an exit signal is received.</p>
+<p>Starts the MCP server with the given server name and application object using the default 2025-06-18 adapter and default options. Blocks until the client disconnects.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -528,7 +518,7 @@
 </section>
 <section id="start-3">
 <span id="mcp-server-0-start-3"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">start/3</span></code></a><a class="headerlink" href="#start-3" title="Link to this heading"></a></h3>
-<p>Starts the MCP server with the given server name, application object, and options. Currently supported options: <code class="docutils literal notranslate"><span class="pre">server_version(Version)</span></code> to set the server version (default <code class="docutils literal notranslate"><span class="pre">'1.0.0'</span></code>), <code class="docutils literal notranslate"><span class="pre">server_title(Title)</span></code> to set the server display title (default <code class="docutils literal notranslate"><span class="pre">'logtalk-mcp-server'</span></code>, omitted when empty).</p>
+<p>Starts the MCP server with the given server name, application object, and options. Supported options include <code class="docutils literal notranslate"><span class="pre">server_version(Version)</span></code>, <code class="docutils literal notranslate"><span class="pre">server_title(Title)</span></code>, and <code class="docutils literal notranslate"><span class="pre">protocol_adapter(Adapter)</span></code> (defaults to <code class="docutils literal notranslate"><span class="pre">mcp_server_2025_06_18_adapter</span></code>).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -549,7 +539,7 @@
 </section>
 <section id="start-4">
 <span id="mcp-server-0-start-4"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">start/4</span></code></a><a class="headerlink" href="#start-4" title="Link to this heading"></a></h3>
-<p>Starts the MCP server with custom input and output streams. Useful for testing or non-stdio transports. Uses default options.</p>
+<p>Starts the MCP server with custom input and output streams using default options and the default adapter.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -589,9 +579,9 @@
 </div>
 <hr class="docutils" />
 </section>
-<section id="elicit-request-5">
-<span id="mcp-server-0-elicit-request-5"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">elicit_request/5</span></code></a><a class="headerlink" href="#elicit-request-5" title="Link to this heading"></a></h3>
-<p>Sends an <code class="docutils literal notranslate"><span class="pre">elicitation/create</span></code> request to the MCP client and reads the response. <code class="docutils literal notranslate"><span class="pre">Input</span></code> and <code class="docutils literal notranslate"><span class="pre">Output</span></code> are the I/O streams. <code class="docutils literal notranslate"><span class="pre">Message</span></code> is the prompt text (an atom). <code class="docutils literal notranslate"><span class="pre">RequestedSchema</span></code> is a curly-term JSON Schema describing the input to request from the user (e.g., <code class="docutils literal notranslate"><span class="pre">{type-object,</span> <span class="pre">properties-{answer-{type-string,</span> <span class="pre">enum-[yes,</span> <span class="pre">no]}},</span> <span class="pre">required-[answer]}</span></code>). <code class="docutils literal notranslate"><span class="pre">Answer</span></code> is unified with <code class="docutils literal notranslate"><span class="pre">accept(Content)</span></code> (where <code class="docutils literal notranslate"><span class="pre">Content</span></code> is the user response as a curly-term), <code class="docutils literal notranslate"><span class="pre">decline</span></code>, or <code class="docutils literal notranslate"><span class="pre">cancel</span></code>. This predicate is typically not called directly but through the elicit closure passed to <code class="docutils literal notranslate"><span class="pre">tool_call/4</span></code>.</p>
+<section id="notify-1">
+<span id="mcp-server-0-notify-1"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">notify/1</span></code></a><a class="headerlink" href="#notify-1" title="Link to this heading"></a></h3>
+<p>Publishes an application event to the active adapter. Canonical events: <code class="docutils literal notranslate"><span class="pre">tools_list_changed</span></code>, <code class="docutils literal notranslate"><span class="pre">prompts_list_changed</span></code>, <code class="docutils literal notranslate"><span class="pre">resources_list_changed</span></code>, <code class="docutils literal notranslate"><span class="pre">resource_updated(URI)</span></code>. Delegated to the currently active adapter (if any).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -601,11 +591,11 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">elicit_request(Input,Output,Message,RequestedSchema,Answer)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">notify(Event)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">elicit_request(+stream,+stream,+atom,+compound,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">notify(+compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 </section>
@@ -617,26 +607,9 @@
 </section>
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
-<section id="initialized-0">
-<span id="mcp-server-0-initialized-0"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">initialized_/0</span></code></a><a class="headerlink" href="#initialized-0" title="Link to this heading"></a></h3>
-<p>Flag indicating that the server has been initialized.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">initialized_</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="application-1">
-<span id="mcp-server-0-application-1"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">application_/1</span></code></a><a class="headerlink" href="#application-1" title="Link to this heading"></a></h3>
-<p>Current application object.</p>
+<section id="active-adapter-1">
+<span id="mcp-server-0-active-adapter-1"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">active_adapter_/1</span></code></a><a class="headerlink" href="#active-adapter-1" title="Link to this heading"></a></h3>
+<p>Currently active adapter object.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -646,137 +619,11 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">application_(Application)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">active_adapter_(Adapter)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">application_(?object_identifier)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="server-name-1">
-<span id="mcp-server-0-server-name-1"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">server_name_/1</span></code></a><a class="headerlink" href="#server-name-1" title="Link to this heading"></a></h3>
-<p>Current server name.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">server_name_(Name)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">server_name_(?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="server-version-1">
-<span id="mcp-server-0-server-version-1"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">server_version_/1</span></code></a><a class="headerlink" href="#server-version-1" title="Link to this heading"></a></h3>
-<p>Current server version.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">server_version_(Version)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">server_version_(?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="server-title-1">
-<span id="mcp-server-0-server-title-1"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">server_title_/1</span></code></a><a class="headerlink" href="#server-title-1" title="Link to this heading"></a></h3>
-<p>Current server display title.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">server_title_(Title)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">server_title_(?atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="elicit-counter-1">
-<span id="mcp-server-0-elicit-counter-1"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">elicit_counter_/1</span></code></a><a class="headerlink" href="#elicit-counter-1" title="Link to this heading"></a></h3>
-<p>Counter for elicitation request identifiers.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">elicit_counter_(Counter)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">elicit_counter_(?integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="application-capabilities-1">
-<span id="mcp-server-0-application-capabilities-1"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">application_capabilities_/1</span></code></a><a class="headerlink" href="#application-capabilities-1" title="Link to this heading"></a></h3>
-<p>Cached application capabilities list.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">application_capabilities_(Capabilities)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">application_capabilities_(?list)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="client-capabilities-1">
-<span id="mcp-server-0-client-capabilities-1"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">client_capabilities_/1</span></code></a><a class="headerlink" href="#client-capabilities-1" title="Link to this heading"></a></h3>
-<p>Client capabilities advertised during initialization.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">dynamic</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">client_capabilities_(Capabilities)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">client_capabilities_(?compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">active_adapter_(?object_identifier)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 </section>
@@ -793,7 +640,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="mcp_resource_protocol_0.html" class="btn btn-neutral float-left" title="mcp_resource_protocol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="mcp_tool_protocol_0.html" class="btn btn-neutral float-right" title="mcp_tool_protocol" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="mcp_server_2025_06_18_adapter_0.html" class="btn btn-neutral float-right" title="mcp_server_2025_06_18_adapter" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

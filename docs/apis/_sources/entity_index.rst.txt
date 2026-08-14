@@ -80,6 +80,7 @@ Categories
    listing <listing_0>
    logging <logging_0>
    mapped_single_byte_character_set <mapped_single_byte_character_set_0>
+   mcp_server_application <mcp_server_application_0>
    monitor <monitor_0>
    mutation_testing_messages <mutation_testing_messages_0>
    mutations <mutations_0>
@@ -507,6 +508,8 @@ Objects
    maxheap <maxheap_0>
    maybe <maybe_0>
    mcp_server <mcp_server_0>
+   mcp_server_2025_06_18_adapter <mcp_server_2025_06_18_adapter_0>
+   mcp_server_2026_07_28_adapter <mcp_server_2026_07_28_adapter_0>
    md5 <md5_0>
    memcached <memcached_0>
    mermaid_graph_language <mermaid_graph_language_0>
@@ -884,8 +887,11 @@ Protocols
    listp <listp_0>
    loggingp <loggingp_0>
    loopp <loopp_0>
+   mcp_cache_protocol <mcp_cache_protocol_0>
+   mcp_multiround_protocol <mcp_multiround_protocol_0>
    mcp_prompt_protocol <mcp_prompt_protocol_0>
    mcp_resource_protocol <mcp_resource_protocol_0>
+   mcp_server_adapter_protocol <mcp_server_adapter_protocol_0>
    mcp_tool_protocol <mcp_tool_protocol_0>
    metagol_example_protocol <metagol_example_protocol_0>
    metap <metap_0>

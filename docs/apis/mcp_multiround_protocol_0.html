@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>mcp_resource_protocol &mdash; Logtalk 3.102.0</title>
+  <title>mcp_multiround_protocol &mdash; Logtalk 3.102.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -32,8 +32,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="mcp_server" href="mcp_server_0.html" />
-    <link rel="prev" title="mcp_prompt_protocol" href="mcp_prompt_protocol_0.html" />
+    <link rel="next" title="mcp_prompt_protocol" href="mcp_prompt_protocol_0.html" />
+    <link rel="prev" title="mcp_cache_protocol" href="mcp_cache_protocol_0.html" />
    
 </head>
 
@@ -253,9 +253,9 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#massey-ranker"><span class="xref std std-ref">massey_ranker</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#mcp-server"><span class="xref std std-ref">mcp_server</span></a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="mcp_cache_protocol_0.html">mcp_cache_protocol</a></li>
-<li class="toctree-l3"><a class="reference internal" href="mcp_multiround_protocol_0.html">mcp_multiround_protocol</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">mcp_multiround_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_prompt_protocol_0.html">mcp_prompt_protocol</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">mcp_resource_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcp_resource_protocol_0.html">mcp_resource_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_server_0.html">mcp_server</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_server_2025_06_18_adapter_0.html">mcp_server_2025_06_18_adapter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_server_2026_07_28_adapter_0.html">mcp_server_2026_07_28_adapter</a></li>
@@ -415,9 +415,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">mcp_resource_protocol</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">mcp_multiround_protocol</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/mcp_resource_protocol_0.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/mcp_multiround_protocol_0.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -425,10 +425,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="mcp-resource-protocol-0"><span id="index-0"></span><strong>protocol</strong></p>
-<section id="mcp-resource-protocol">
-<h1><code class="docutils literal notranslate"><span class="pre">mcp_resource_protocol</span></code><a class="headerlink" href="#mcp-resource-protocol" title="Link to this heading"></a></h1>
-<p>Protocol for Logtalk objects that provide resources to be exposed via an MCP (Model Context Protocol) server. Implementing objects must define the set of resources available and handle resource read requests. Resources expose data and content from the application that MCP clients can access. Used by both the 2025-06-18 and 2026-07-28 adapters.</p>
+  <p class="right" id="mcp-multiround-protocol-0"><span id="index-0"></span><strong>protocol</strong></p>
+<section id="mcp-multiround-protocol">
+<h1><code class="docutils literal notranslate"><span class="pre">mcp_multiround_protocol</span></code><a class="headerlink" href="#mcp-multiround-protocol" title="Link to this heading"></a></h1>
+<p>Protocol for multi-round tool/prompt/resource operations (MRTR) used by the MCP 2026-07-28 specification. Implementing objects may define the round hooks to request additional input from the client (elicitation, sampling, roots) and to resume with input responses and opaque request state. Existing applications that do not implement these hooks continue to use <code class="docutils literal notranslate"><span class="pre">tool_call/3</span></code>, <code class="docutils literal notranslate"><span class="pre">prompt_get/3</span></code>, <code class="docutils literal notranslate"><span class="pre">resource_read/3</span></code>, or auto-dispatch; the 2026 adapter wraps those results as <code class="docutils literal notranslate"><span class="pre">complete(Result)</span></code>. The 2026 adapter never invokes the 2025-06-18 <code class="docutils literal notranslate"><span class="pre">tool_call/4</span></code> elicitation API.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -457,11 +457,12 @@
 </div>
 <blockquote>
 <div><ul class="simple">
-<li><p>Capabilities: Objects providing resources must declare <code class="docutils literal notranslate"><span class="pre">resources</span></code> in their <code class="docutils literal notranslate"><span class="pre">capabilities/1</span></code> predicate (from the <code class="docutils literal notranslate"><span class="pre">mcp_tool_protocol</span></code> protocol). The server will then advertise the <code class="docutils literal notranslate"><span class="pre">resources</span></code> capability and handle <code class="docutils literal notranslate"><span class="pre">resources/list</span></code> and <code class="docutils literal notranslate"><span class="pre">resources/read</span></code> requests.</p></li>
-<li><p>Resource descriptors: Each resource is described by a <code class="docutils literal notranslate"><span class="pre">resource(URI,</span> <span class="pre">Name,</span> <span class="pre">Description,</span> <span class="pre">MimeType)</span></code> or <code class="docutils literal notranslate"><span class="pre">resource(URI,</span> <span class="pre">Name,</span> <span class="pre">Title,</span> <span class="pre">Description,</span> <span class="pre">MimeType)</span></code> term where <code class="docutils literal notranslate"><span class="pre">URI</span></code> is the resource identifier (an atom), <code class="docutils literal notranslate"><span class="pre">Name</span></code> is a human-readable name (an atom), <code class="docutils literal notranslate"><span class="pre">Title</span></code> is an optional human-friendly display name (an atom), <code class="docutils literal notranslate"><span class="pre">Description</span></code> is a human-readable description (an atom), and <code class="docutils literal notranslate"><span class="pre">MimeType</span></code> is the MIME type of the resource content (an atom, e.g. <code class="docutils literal notranslate"><span class="pre">'text/plain'</span></code>).</p></li>
-<li><p>Resource contents: The <code class="docutils literal notranslate"><span class="pre">resource_read/3</span></code> predicate must return a result term. The result must be <code class="docutils literal notranslate"><span class="pre">contents(ContentList)</span></code> where each item is <code class="docutils literal notranslate"><span class="pre">text_content(URI,</span> <span class="pre">MimeType,</span> <span class="pre">Text)</span></code> for text resources or <code class="docutils literal notranslate"><span class="pre">blob_content(URI,</span> <span class="pre">MimeType,</span> <span class="pre">Base64Data)</span></code> for binary resources encoded as base64.</p></li>
-<li><p>Multi-round (2026-07-28): For the 2026-07-28 adapter, applications that need additional input during a resource read implement <code class="docutils literal notranslate"><span class="pre">resource_read_round/4</span></code> from the <code class="docutils literal notranslate"><span class="pre">mcp_multiround_protocol</span></code>. Existing <code class="docutils literal notranslate"><span class="pre">resource_read/3</span></code> remains valid and is wrapped as a <code class="docutils literal notranslate"><span class="pre">complete</span></code> result when the round hook is absent.</p></li>
-<li><p>Caching (2026-07-28): Complete <code class="docutils literal notranslate"><span class="pre">resources/read</span></code> results may include cache fields (<code class="docutils literal notranslate"><span class="pre">ttlMs</span></code>, <code class="docutils literal notranslate"><span class="pre">cacheScope</span></code>) derived from <code class="docutils literal notranslate"><span class="pre">mcp_cache_protocol</span></code> or server options. Cache fields are never attached to <code class="docutils literal notranslate"><span class="pre">input_required</span></code> results.</p></li>
+<li><p>Request context: Each round hook receives a <code class="docutils literal notranslate"><span class="pre">request_context(ClientCapabilities,</span> <span class="pre">InputResponses,</span> <span class="pre">RequestState,</span> <span class="pre">Progress)</span></code> term. <code class="docutils literal notranslate"><span class="pre">ClientCapabilities</span></code> is the curly-term advertised by the client. <code class="docutils literal notranslate"><span class="pre">InputResponses</span></code> is a list of <code class="docutils literal notranslate"><span class="pre">input_response(Key,</span> <span class="pre">Response)</span></code> terms (or empty on the first round). <code class="docutils literal notranslate"><span class="pre">RequestState</span></code> is application-owned opaque data (or <code class="docutils literal notranslate"><span class="pre">none</span></code>). <code class="docutils literal notranslate"><span class="pre">Progress</span></code> is a callable closure for emitting progress notifications when the client supplied a progress token; it is only meaningful under the 2026 adapter.</p></li>
+<li><p>Complete results: A hook returns <code class="docutils literal notranslate"><span class="pre">complete(Result)</span></code> where <code class="docutils literal notranslate"><span class="pre">Result</span></code> uses the existing canonical vocabulary: <code class="docutils literal notranslate"><span class="pre">text(Atom)</span></code>, <code class="docutils literal notranslate"><span class="pre">error(Atom)</span></code>, <code class="docutils literal notranslate"><span class="pre">results(List)</span></code>, <code class="docutils literal notranslate"><span class="pre">structured(StructuredContent)</span></code>, <code class="docutils literal notranslate"><span class="pre">structured(Items,</span> <span class="pre">StructuredContent)</span></code> for tools; <code class="docutils literal notranslate"><span class="pre">messages(MessageList)</span></code> or <code class="docutils literal notranslate"><span class="pre">messages(Description,</span> <span class="pre">MessageList)</span></code> for prompts; <code class="docutils literal notranslate"><span class="pre">contents(ContentList)</span></code> for resources.</p></li>
+<li><p>Input-required results: A hook returns <code class="docutils literal notranslate"><span class="pre">input_required(InputRequests,</span> <span class="pre">RequestState)</span></code>. <code class="docutils literal notranslate"><span class="pre">InputRequests</span></code> is a nonempty list of uniquely keyed <code class="docutils literal notranslate"><span class="pre">input_request(Key,</span> <span class="pre">Request)</span></code> terms, and/or <code class="docutils literal notranslate"><span class="pre">RequestState</span></code> is non-<code class="docutils literal notranslate"><span class="pre">none</span></code>. An input-required result must contain a nonempty request list, non-<code class="docutils literal notranslate"><span class="pre">none</span></code> state, or both.</p></li>
+<li><p>Allowed request forms: <code class="docutils literal notranslate"><span class="pre">Request</span></code> may be <code class="docutils literal notranslate"><span class="pre">form_elicitation(Message,</span> <span class="pre">Schema)</span></code>, <code class="docutils literal notranslate"><span class="pre">url_elicitation(Message,</span> <span class="pre">URL)</span></code>, <code class="docutils literal notranslate"><span class="pre">sampling(Messages,</span> <span class="pre">ModelPreferences,</span> <span class="pre">SystemPrompt,</span> <span class="pre">IncludeContext)</span></code>, or <code class="docutils literal notranslate"><span class="pre">roots</span></code>.</p></li>
+<li><p>Input responses: On a subsequent round the adapter supplies <code class="docutils literal notranslate"><span class="pre">InputResponses</span></code> with the same keys. Response values are <code class="docutils literal notranslate"><span class="pre">accept(Content)</span></code>, <code class="docutils literal notranslate"><span class="pre">decline</span></code>, <code class="docutils literal notranslate"><span class="pre">cancel</span></code> (elicitation), sampling results, or roots results. Unrecognized keys are ignored. Malformed known values yield a <code class="docutils literal notranslate"><span class="pre">-32602</span></code> error. Missing required responses cause the adapter to re-issue the corresponding input requests.</p></li>
+<li><p>State integrity: <code class="docutils literal notranslate"><span class="pre">RequestState</span></code> is opaque to the adapter. Applications that use it for authorization or business decisions must integrity-protect, bind, and validate it themselves.</p></li>
 </ul>
 </div></blockquote>
 <div class="line-block">
@@ -474,20 +475,21 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#resources-1" id="id2"><code class="docutils literal notranslate"><span class="pre">resources/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#resource-read-3" id="id3"><code class="docutils literal notranslate"><span class="pre">resource_read/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#tool-call-round-4" id="id2"><code class="docutils literal notranslate"><span class="pre">tool_call_round/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#prompt-get-round-4" id="id3"><code class="docutils literal notranslate"><span class="pre">prompt_get_round/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#resource-read-round-4" id="id4"><code class="docutils literal notranslate"><span class="pre">resource_read_round/4</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id4">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id5">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id6">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id5">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id6">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id7">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
-<section id="resources-1">
-<span id="mcp-resource-protocol-0-resources-1"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">resources/1</span></code></a><a class="headerlink" href="#resources-1" title="Link to this heading"></a></h3>
-<p>Returns a list of resource descriptors available from this object. Each descriptor is a compound term <code class="docutils literal notranslate"><span class="pre">resource(URI,</span> <span class="pre">Name,</span> <span class="pre">Description,</span> <span class="pre">MimeType)</span></code> or <code class="docutils literal notranslate"><span class="pre">resource(URI,</span> <span class="pre">Name,</span> <span class="pre">Title,</span> <span class="pre">Description,</span> <span class="pre">MimeType)</span></code> where <code class="docutils literal notranslate"><span class="pre">URI</span></code> is the resource identifier (an atom, typically a URI like <code class="docutils literal notranslate"><span class="pre">logtalk://my-app/data</span></code>), <code class="docutils literal notranslate"><span class="pre">Name</span></code> is a human-readable name (an atom), <code class="docutils literal notranslate"><span class="pre">Title</span></code> is an optional human-friendly display name (an atom), <code class="docutils literal notranslate"><span class="pre">Description</span></code> is a human-readable description (an atom), and <code class="docutils literal notranslate"><span class="pre">MimeType</span></code> is the MIME type (an atom, e.g. <code class="docutils literal notranslate"><span class="pre">'text/plain'</span></code>, <code class="docutils literal notranslate"><span class="pre">'application/json'</span></code>).</p>
+<section id="tool-call-round-4">
+<span id="mcp-multiround-protocol-0-tool-call-round-4"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">tool_call_round/4</span></code></a><a class="headerlink" href="#tool-call-round-4" title="Link to this heading"></a></h3>
+<p>Handles one round of a multi-round tool call. <code class="docutils literal notranslate"><span class="pre">Name</span></code> is the MCP tool name, <code class="docutils literal notranslate"><span class="pre">Arguments</span></code> is a list of <code class="docutils literal notranslate"><span class="pre">ArgumentName-Value</span></code> pairs, <code class="docutils literal notranslate"><span class="pre">Context</span></code> is a <code class="docutils literal notranslate"><span class="pre">request_context(ClientCapabilities,</span> <span class="pre">InputResponses,</span> <span class="pre">RequestState,</span> <span class="pre">Progress)</span></code> term, and <code class="docutils literal notranslate"><span class="pre">RoundResult</span></code> is unified with either <code class="docutils literal notranslate"><span class="pre">complete(Result)</span></code> or <code class="docutils literal notranslate"><span class="pre">input_required(InputRequests,</span> <span class="pre">RequestState)</span></code>. If not defined, the 2026 adapter falls back to <code class="docutils literal notranslate"><span class="pre">tool_call/3</span></code> (or auto-dispatch) and wraps the outcome as <code class="docutils literal notranslate"><span class="pre">complete</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -497,18 +499,18 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">resources(Resources)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">tool_call_round(Name,Arguments,Context,RoundResult)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">resources(-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">tool_call_round(+atom,+list(pair),+compound,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
-<section id="resource-read-3">
-<span id="mcp-resource-protocol-0-resource-read-3"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">resource_read/3</span></code></a><a class="headerlink" href="#resource-read-3" title="Link to this heading"></a></h3>
-<p>Handles a resource read request. <code class="docutils literal notranslate"><span class="pre">URI</span></code> is the resource identifier (as declared in <code class="docutils literal notranslate"><span class="pre">resources/1</span></code>), <code class="docutils literal notranslate"><span class="pre">Arguments</span></code> is a list of <code class="docutils literal notranslate"><span class="pre">ArgumentName-Value</span></code> pairs (currently unused but reserved for future use), and <code class="docutils literal notranslate"><span class="pre">Result</span></code> is unified with the resource result. The result must be <code class="docutils literal notranslate"><span class="pre">contents(ContentList)</span></code> where each content item is either <code class="docutils literal notranslate"><span class="pre">text_content(URI,</span> <span class="pre">MimeType,</span> <span class="pre">Text)</span></code> for text resources or <code class="docutils literal notranslate"><span class="pre">blob_content(URI,</span> <span class="pre">MimeType,</span> <span class="pre">Base64Data)</span></code> for binary resources encoded as base64. <code class="docutils literal notranslate"><span class="pre">Text</span></code> and <code class="docutils literal notranslate"><span class="pre">Base64Data</span></code> must be atoms.</p>
+<section id="prompt-get-round-4">
+<span id="mcp-multiround-protocol-0-prompt-get-round-4"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">prompt_get_round/4</span></code></a><a class="headerlink" href="#prompt-get-round-4" title="Link to this heading"></a></h3>
+<p>Handles one round of a multi-round prompt get. <code class="docutils literal notranslate"><span class="pre">Name</span></code> is the MCP prompt name, <code class="docutils literal notranslate"><span class="pre">Arguments</span></code> is a list of <code class="docutils literal notranslate"><span class="pre">ArgumentName-Value</span></code> pairs, <code class="docutils literal notranslate"><span class="pre">Context</span></code> is a <code class="docutils literal notranslate"><span class="pre">request_context/4</span></code> term, and <code class="docutils literal notranslate"><span class="pre">RoundResult</span></code> is unified with either <code class="docutils literal notranslate"><span class="pre">complete(Result)</span></code> or <code class="docutils literal notranslate"><span class="pre">input_required(InputRequests,</span> <span class="pre">RequestState)</span></code>. If not defined, the 2026 adapter falls back to <code class="docutils literal notranslate"><span class="pre">prompt_get/3</span></code> and wraps the outcome as <code class="docutils literal notranslate"><span class="pre">complete</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -518,11 +520,32 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_read(URI,Arguments,Result)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">prompt_get_round(Name,Arguments,Context,RoundResult)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_read(+atom,+list(pair),--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">prompt_get_round(+atom,+list(pair),+compound,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="resource-read-round-4">
+<span id="mcp-multiround-protocol-0-resource-read-round-4"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">resource_read_round/4</span></code></a><a class="headerlink" href="#resource-read-round-4" title="Link to this heading"></a></h3>
+<p>Handles one round of a multi-round resource read. <code class="docutils literal notranslate"><span class="pre">URI</span></code> is the resource identifier, <code class="docutils literal notranslate"><span class="pre">Arguments</span></code> is a list of <code class="docutils literal notranslate"><span class="pre">ArgumentName-Value</span></code> pairs (currently unused by most applications), <code class="docutils literal notranslate"><span class="pre">Context</span></code> is a <code class="docutils literal notranslate"><span class="pre">request_context/4</span></code> term, and <code class="docutils literal notranslate"><span class="pre">RoundResult</span></code> is unified with either <code class="docutils literal notranslate"><span class="pre">complete(Result)</span></code> or <code class="docutils literal notranslate"><span class="pre">input_required(InputRequests,</span> <span class="pre">RequestState)</span></code>. If not defined, the 2026 adapter falls back to <code class="docutils literal notranslate"><span class="pre">resource_read/3</span></code> and wraps the outcome as <code class="docutils literal notranslate"><span class="pre">complete</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_read_round(URI,Arguments,Context,RoundResult)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_read_round(+atom,+list(pair),+compound,--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
 </div>
 </div>
 </section>
@@ -546,8 +569,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="mcp_prompt_protocol_0.html" class="btn btn-neutral float-left" title="mcp_prompt_protocol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="mcp_server_0.html" class="btn btn-neutral float-right" title="mcp_server" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="mcp_cache_protocol_0.html" class="btn btn-neutral float-left" title="mcp_cache_protocol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mcp_prompt_protocol_0.html" class="btn btn-neutral float-right" title="mcp_prompt_protocol" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

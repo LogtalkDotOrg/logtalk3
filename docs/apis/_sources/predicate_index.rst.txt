@@ -1378,6 +1378,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http_digest <http_digest/0::authorize_request/6>`
 
+``auto_dispatch_tool/5``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mcp_server_application <mcp_server_application/0::auto_dispatch_tool/5>`
+
 ``available/0``
 ---------------
 
@@ -2224,6 +2234,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`tzif_protocol <tzif_protocol/0::cache/1>`
+
+``cache_policy/4``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mcp_cache_protocol <mcp_cache_protocol/0::cache_policy/4>`
 
 ``cache_source/1``
 ------------------
@@ -3130,6 +3150,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`packs <packs/0::clean/2>`
+
+``cleanup/0``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mcp_server_adapter_protocol <mcp_server_adapter_protocol/0::cleanup/0>`
 
 ``clear/0``
 -----------
@@ -4595,6 +4625,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ctr <ctr/0::crypt/6>`
+
+``curly_to_pairs/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mcp_server_application <mcp_server_application/0::curly_to_pairs/2>`
 
 ``currency/5``
 --------------
@@ -7273,7 +7313,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`mcp_server <mcp_server/0::elicit_request/5>`
+* :ref:`mcp_server_2025_06_18_adapter <mcp_server_2025_06_18_adapter/0::elicit_request/5>`
 
 ``email_hash/2``
 ----------------
@@ -7284,6 +7324,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`gravatar <gravatar/0::email_hash/2>`
+
+``emit_progress/6``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mcp_server_2026_07_28_adapter <mcp_server_2026_07_28_adapter/0::emit_progress/6>`
 
 ``empty/1``
 -----------
@@ -9326,6 +9376,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`format <format/0::format/3>`
 
+``format_content_items/2``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mcp_server_application <mcp_server_application/0::format_content_items/2>`
+
 ``format_date_time/4``
 ----------------------
 
@@ -9356,6 +9416,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`diagram(Format) <diagram/1::format_object/1>`
 
+``format_prompt_messages/2``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mcp_server_application <mcp_server_application/0::format_prompt_messages/2>`
+
 ``format_report/1``
 -------------------
 
@@ -9385,6 +9455,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`mutation_testing <mutation_testing/0::format_report/3>`
+
+``format_resource_contents/2``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mcp_server_application <mcp_server_application/0::format_resource_contents/2>`
 
 ``format_to_atom/3``
 --------------------
@@ -10810,6 +10890,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`weighted_graph_protocol <weighted_graph_protocol/0::has_negative_cycle/1>`
+
+``has_pair/3``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mcp_server_application <mcp_server_application/0::has_pair/3>`
 
 ``has_path/3``
 --------------
@@ -17461,6 +17551,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`json_rpc <json_rpc/0::notification/3>`
 
+``notify/1``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mcp_server <mcp_server/0::notify/1>`
+* :ref:`mcp_server_adapter_protocol <mcp_server_adapter_protocol/0::notify/1>`
+
 ``notrace/0``
 -------------
 
@@ -18844,6 +18945,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_htmx <http_htmx/0::page_fragment_reply/5>`
+
+``pairs_to_curly/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mcp_server_application <mcp_server_application/0::pairs_to_curly/2>`
 
 ``pairwise_dataset_connected_components/2``
 -------------------------------------------
@@ -21029,6 +21140,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http_htmx <http_htmx/0::prompt/2>`
 
+``prompt_descriptors_to_json/2``
+--------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mcp_server_application <mcp_server_application/0::prompt_descriptors_to_json/2>`
+
 ``prompt_get/3``
 ----------------
 
@@ -21038,6 +21159,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`mcp_prompt_protocol <mcp_prompt_protocol/0::prompt_get/3>`
+
+``prompt_get_round/4``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mcp_multiround_protocol <mcp_multiround_protocol/0::prompt_get_round/4>`
 
 ``prompts/1``
 -------------
@@ -21245,6 +21376,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http_authenticate <http_authenticate/0::protect_request/4>`
 * :ref:`http_digest <http_digest/0::protect_request/4>`
+
+``protocol_version/1``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mcp_server_adapter_protocol <mcp_server_adapter_protocol/0::protocol_version/1>`
 
 ``prove/2``
 -----------
@@ -23601,6 +23742,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`osp <osp/0::resolve_command_path/2>`
 
+``resource_descriptors_to_json/2``
+----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mcp_server_application <mcp_server_application/0::resource_descriptors_to_json/2>`
+
 ``resource_read/3``
 -------------------
 
@@ -23610,6 +23761,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`mcp_resource_protocol <mcp_resource_protocol/0::resource_read/3>`
+
+``resource_read_round/4``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mcp_multiround_protocol <mcp_multiround_protocol/0::resource_read_round/4>`
 
 ``resources/1``
 ---------------
@@ -26262,6 +26423,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http_server <http_server/0::start/4>`
 * :ref:`mcp_server <mcp_server/0::start/4>`
+* :ref:`mcp_server_adapter_protocol <mcp_server_adapter_protocol/0::start/4>`
 
 ``start/5``
 -----------
@@ -27784,6 +27946,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`mcp_tool_protocol <mcp_tool_protocol/0::tool_call/4>`
 
+``tool_call_round/4``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mcp_multiround_protocol <mcp_multiround_protocol/0::tool_call_round/4>`
+
+``tool_descriptors_to_json/3``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mcp_server_application <mcp_server_application/0::tool_descriptors_to_json/3>`
+
 ``tools/0``
 -----------
 
@@ -28086,6 +28268,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`java_utils_protocol <java_utils_protocol/0::true/1>`
+
+``try_tool_call_3/7``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mcp_server_application <mcp_server_application/0::try_tool_call_3/7>`
 
 ``tt_minus_tai/2``
 ------------------

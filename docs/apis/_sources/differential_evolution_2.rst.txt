@@ -12,7 +12,7 @@
 * ``RandomAlgorithm`` - Random number generator algorithm for the ``fast_random`` library.
 
 
-Differential Evolution (DE/rand/1/bin, DE/best/1/bin, and DE/current-to-best/1/bin) metaheuristic for continuous bounded optimization.
+Differential Evolution (DE/rand/1/bin, DE/rand/1/exp, DE/best/1/bin, and DE/current-to-best/1/bin) metaheuristic for continuous bounded optimization.
 
 | **Availability:** 
 |    ``logtalk_load(differential_evolution(loader))``
@@ -35,7 +35,7 @@ Differential Evolution (DE/rand/1/bin, DE/best/1/bin, and DE/current-to-best/1/b
 
 | **Remarks:**
 
-   - Strategies: The ``strategy(rand/1/bin)`` (default), ``strategy(best/1/bin)``, and ``strategy(current-to-best/1/bin)`` options select the classic mutation strategies.
+   - Strategies: The ``strategy(rand/1/bin)`` (default), ``strategy(rand/1/exp)``, ``strategy(best/1/bin)``, and ``strategy(current-to-best/1/bin)`` options select the classic mutation strategies.
    - Optimization objective: The ``objective(minimize|maximize)`` option selects the fitness ordering.
    - Boundary handling: Trial vectors that leave the bounds are clamped to the nearest bound.
    - Seed control: The ``seed(S)`` option initializes the random number generator for reproducible runs.

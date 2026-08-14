@@ -1,0 +1,77 @@
+.. index:: single: mcp_cache_protocol
+.. _mcp_cache_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``mcp_cache_protocol``
+======================
+
+Optional protocol for per-operation cache policy used by the MCP 2026-07-28 specification. An application may implement ``cache_policy/4`` to choose TTL (milliseconds) and scope (``public`` or ``private``) for complete results of ``server/discover``, list operations (``tools/list``, ``prompts/list``, ``resources/list``), and ``resources/read``. Cache fields are never attached to ``input_required`` results or MRTR retries. When the predicate is not defined, or for an operation it does not cover, the server falls back to the options ``cache_ttl(0)`` and ``cache_scope(private)``.
+
+| **Availability:** 
+|    ``logtalk_load(mcp_server(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-14
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+
+   - TTL: A non-negative integer number of milliseconds. ``0`` means the result must not be cached.
+   - Scope: Either ``public`` (may be shared across clients) or ``private`` (client-specific).
+   - Applicability: Only complete final results of discover, list, and resource-read operations receive cache fields. Tool calls, prompt gets that return ``input_required``, and any MRTR continuation never include ``ttlMs`` / ``cacheScope``.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: cache_policy/4
+.. _mcp_cache_protocol/0::cache_policy/4:
+
+``cache_policy/4``
+^^^^^^^^^^^^^^^^^^
+
+Returns the cache policy for a given operation and request. ``Operation`` is one of ``discover``, ``tools_list``, ``prompts_list``, ``resources_list``, or ``resources_read``. ``Request`` is the request-specific identifier or arguments (e.g. a resource URI for ``resources_read``, or a free term for list/discover). ``TTL`` is a non-negative integer (milliseconds). ``Scope`` is ``public`` or ``private``. Failure means the server should use its configured defaults.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cache_policy(Operation,Request,TTL,Scope)``
+| **Mode and number of proofs:**
+|    ``cache_policy(+atom,+term,-integer,-atom)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

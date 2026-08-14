@@ -2138,9 +2138,15 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
 
+   mcp_cache_protocol <mcp_cache_protocol_0>
+   mcp_multiround_protocol <mcp_multiround_protocol_0>
    mcp_prompt_protocol <mcp_prompt_protocol_0>
    mcp_resource_protocol <mcp_resource_protocol_0>
    mcp_server <mcp_server_0>
+   mcp_server_2025_06_18_adapter <mcp_server_2025_06_18_adapter_0>
+   mcp_server_2026_07_28_adapter <mcp_server_2026_07_28_adapter_0>
+   mcp_server_adapter_protocol <mcp_server_adapter_protocol_0>
+   mcp_server_application <mcp_server_application_0>
    mcp_tool_protocol <mcp_tool_protocol_0>
 
 ``library/memcached/``

@@ -33,7 +33,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="mcp_resource_protocol" href="mcp_resource_protocol_0.html" />
-    <link rel="prev" title="massey_ranker" href="massey_ranker_0.html" />
+    <link rel="prev" title="mcp_multiround_protocol" href="mcp_multiround_protocol_0.html" />
    
 </head>
 
@@ -252,9 +252,15 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#loops"><span class="xref std std-ref">loops</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#massey-ranker"><span class="xref std std-ref">massey_ranker</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#mcp-server"><span class="xref std std-ref">mcp_server</span></a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="mcp_cache_protocol_0.html">mcp_cache_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcp_multiround_protocol_0.html">mcp_multiround_protocol</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">mcp_prompt_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_resource_protocol_0.html">mcp_resource_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_server_0.html">mcp_server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcp_server_2025_06_18_adapter_0.html">mcp_server_2025_06_18_adapter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcp_server_2026_07_28_adapter_0.html">mcp_server_2026_07_28_adapter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcp_server_adapter_protocol_0.html">mcp_server_adapter_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcp_server_application_0.html">mcp_server_application</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_tool_protocol_0.html">mcp_tool_protocol</a></li>
 </ul>
 </li>
@@ -422,7 +428,7 @@
   <p class="right" id="mcp-prompt-protocol-0"><span id="index-0"></span><strong>protocol</strong></p>
 <section id="mcp-prompt-protocol">
 <h1><code class="docutils literal notranslate"><span class="pre">mcp_prompt_protocol</span></code><a class="headerlink" href="#mcp-prompt-protocol" title="Link to this heading"></a></h1>
-<p>Protocol for Logtalk objects that provide prompts to be exposed via an MCP (Model Context Protocol) server. Implements the MCP 2025-06-18 specification. Implementing objects must define the set of prompts available and handle prompt get requests. Prompts are templates for structured LLM interactions that can accept arguments to customize their behavior.</p>
+<p>Protocol for Logtalk objects that provide prompts to be exposed via an MCP (Model Context Protocol) server. Implementing objects must define the set of prompts available and handle prompt get requests. Prompts are templates for structured LLM interactions that can accept arguments to customize their behavior. Used by both the 2025-06-18 and 2026-07-28 adapters.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -431,8 +437,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:2:0</div>
-<div class="line"><strong>Date:</strong> 2026-02-24</div>
+<div class="line"><strong>Version:</strong> 1:0:0</div>
+<div class="line"><strong>Date:</strong> 2026-08-14</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -454,6 +460,7 @@
 <li><p>Capabilities: Objects providing prompts must declare <code class="docutils literal notranslate"><span class="pre">prompts</span></code> in their <code class="docutils literal notranslate"><span class="pre">capabilities/1</span></code> predicate (from the <code class="docutils literal notranslate"><span class="pre">mcp_tool_protocol</span></code> protocol). The server will then advertise the <code class="docutils literal notranslate"><span class="pre">prompts</span></code> capability and handle <code class="docutils literal notranslate"><span class="pre">prompts/list</span></code> and <code class="docutils literal notranslate"><span class="pre">prompts/get</span></code> requests.</p></li>
 <li><p>Prompt descriptors: Each prompt is described by a <code class="docutils literal notranslate"><span class="pre">prompt(Name,</span> <span class="pre">Description,</span> <span class="pre">Arguments)</span></code> or <code class="docutils literal notranslate"><span class="pre">prompt(Name,</span> <span class="pre">Title,</span> <span class="pre">Description,</span> <span class="pre">Arguments)</span></code> term where <code class="docutils literal notranslate"><span class="pre">Name</span></code> is an atom, <code class="docutils literal notranslate"><span class="pre">Title</span></code> is an optional human-friendly display name (an atom), <code class="docutils literal notranslate"><span class="pre">Description</span></code> is a human-readable atom, and <code class="docutils literal notranslate"><span class="pre">Arguments</span></code> is a list of <code class="docutils literal notranslate"><span class="pre">argument(ArgName,</span> <span class="pre">ArgDescription,</span> <span class="pre">Required)</span></code> terms.</p></li>
 <li><p>Prompt messages: The <code class="docutils literal notranslate"><span class="pre">prompt_get/3</span></code> predicate must return a result term containing a list of messages. Each message is a <code class="docutils literal notranslate"><span class="pre">message(Role,</span> <span class="pre">Content)</span></code> term where <code class="docutils literal notranslate"><span class="pre">Role</span></code> is <code class="docutils literal notranslate"><span class="pre">user</span></code> or <code class="docutils literal notranslate"><span class="pre">assistant</span></code> and <code class="docutils literal notranslate"><span class="pre">Content</span></code> is <code class="docutils literal notranslate"><span class="pre">text(Text)</span></code> where <code class="docutils literal notranslate"><span class="pre">Text</span></code> is an atom.</p></li>
+<li><p>Multi-round (2026-07-28): For the 2026-07-28 adapter, applications that need additional input during a prompt get implement <code class="docutils literal notranslate"><span class="pre">prompt_get_round/4</span></code> from the <code class="docutils literal notranslate"><span class="pre">mcp_multiround_protocol</span></code>. Existing <code class="docutils literal notranslate"><span class="pre">prompt_get/3</span></code> remains valid and is wrapped as a <code class="docutils literal notranslate"><span class="pre">complete</span></code> result when the round hook is absent.</p></li>
 </ul>
 </div></blockquote>
 <div class="line-block">
@@ -538,7 +545,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="massey_ranker_0.html" class="btn btn-neutral float-left" title="massey_ranker" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mcp_multiround_protocol_0.html" class="btn btn-neutral float-left" title="mcp_multiround_protocol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="mcp_resource_protocol_0.html" class="btn btn-neutral float-right" title="mcp_resource_protocol" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

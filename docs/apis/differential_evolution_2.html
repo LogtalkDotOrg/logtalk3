@@ -425,7 +425,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">Problem</span></code> - Problem object implementing <code class="docutils literal notranslate"><span class="pre">differential_evolution_protocol</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">RandomAlgorithm</span></code> - Random number generator algorithm for the <code class="docutils literal notranslate"><span class="pre">fast_random</span></code> library.</p></li>
 </ul>
-<p>Differential Evolution (DE/rand/1/bin, DE/best/1/bin, and DE/current-to-best/1/bin) metaheuristic for continuous bounded optimization.</p>
+<p>Differential Evolution (DE/rand/1/bin, DE/rand/1/exp, DE/best/1/bin, and DE/current-to-best/1/bin) metaheuristic for continuous bounded optimization.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -461,7 +461,7 @@
 </div>
 <blockquote>
 <div><ul class="simple">
-<li><p>Strategies: The <code class="docutils literal notranslate"><span class="pre">strategy(rand/1/bin)</span></code> (default), <code class="docutils literal notranslate"><span class="pre">strategy(best/1/bin)</span></code>, and <code class="docutils literal notranslate"><span class="pre">strategy(current-to-best/1/bin)</span></code> options select the classic mutation strategies.</p></li>
+<li><p>Strategies: The <code class="docutils literal notranslate"><span class="pre">strategy(rand/1/bin)</span></code> (default), <code class="docutils literal notranslate"><span class="pre">strategy(rand/1/exp)</span></code>, <code class="docutils literal notranslate"><span class="pre">strategy(best/1/bin)</span></code>, and <code class="docutils literal notranslate"><span class="pre">strategy(current-to-best/1/bin)</span></code> options select the classic mutation strategies.</p></li>
 <li><p>Optimization objective: The <code class="docutils literal notranslate"><span class="pre">objective(minimize|maximize)</span></code> option selects the fitness ordering.</p></li>
 <li><p>Boundary handling: Trial vectors that leave the bounds are clamped to the nearest bound.</p></li>
 <li><p>Seed control: The <code class="docutils literal notranslate"><span class="pre">seed(S)</span></code> option initializes the random number generator for reproducible runs.</p></li>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>mcp_resource_protocol &mdash; Logtalk 3.102.0</title>
+  <title>mcp_server_application &mdash; Logtalk 3.102.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -32,8 +32,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="mcp_server" href="mcp_server_0.html" />
-    <link rel="prev" title="mcp_prompt_protocol" href="mcp_prompt_protocol_0.html" />
+    <link rel="next" title="mcp_tool_protocol" href="mcp_tool_protocol_0.html" />
+    <link rel="prev" title="mcp_server_adapter_protocol" href="mcp_server_adapter_protocol_0.html" />
    
 </head>
 
@@ -255,12 +255,12 @@
 <li class="toctree-l3"><a class="reference internal" href="mcp_cache_protocol_0.html">mcp_cache_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_multiround_protocol_0.html">mcp_multiround_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_prompt_protocol_0.html">mcp_prompt_protocol</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">mcp_resource_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcp_resource_protocol_0.html">mcp_resource_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_server_0.html">mcp_server</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_server_2025_06_18_adapter_0.html">mcp_server_2025_06_18_adapter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_server_2026_07_28_adapter_0.html">mcp_server_2026_07_28_adapter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_server_adapter_protocol_0.html">mcp_server_adapter_protocol</a></li>
-<li class="toctree-l3"><a class="reference internal" href="mcp_server_application_0.html">mcp_server_application</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">mcp_server_application</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_tool_protocol_0.html">mcp_tool_protocol</a></li>
 </ul>
 </li>
@@ -415,9 +415,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">mcp_resource_protocol</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">mcp_server_application</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/mcp_resource_protocol_0.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/mcp_server_application_0.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -425,10 +425,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="mcp-resource-protocol-0"><span id="index-0"></span><strong>protocol</strong></p>
-<section id="mcp-resource-protocol">
-<h1><code class="docutils literal notranslate"><span class="pre">mcp_resource_protocol</span></code><a class="headerlink" href="#mcp-resource-protocol" title="Link to this heading"></a></h1>
-<p>Protocol for Logtalk objects that provide resources to be exposed via an MCP (Model Context Protocol) server. Implementing objects must define the set of resources available and handle resource read requests. Resources expose data and content from the application that MCP clients can access. Used by both the 2025-06-18 and 2026-07-28 adapters.</p>
+  <p class="right" id="mcp-server-application-0"><span id="index-0"></span><strong>category</strong></p>
+<section id="mcp-server-application">
+<h1><code class="docutils literal notranslate"><span class="pre">mcp_server_application</span></code><a class="headerlink" href="#mcp-server-application" title="Link to this heading"></a></h1>
+<p>Specification-independent application logic for MCP servers: tool/prompt/resource descriptor conversion, schema derivation from info/2 and mode/2, auto-dispatch, canonical complete-result terms, and curly-term helpers. Imported by both the 2025-06-18 and 2026-07-28 adapters.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -447,47 +447,56 @@
 </div>
 </div>
 <div class="line-block">
-<div class="line"><strong>Dependencies:</strong></div>
+<div class="line"><strong>Extends:</strong></div>
 <div class="line-block">
-<div class="line">(none)</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="options_0.html#options-0"><span class="std std-ref">options</span></a></div>
+</div>
+<div class="line"><strong>Uses:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
+<div class="line"><a class="reference internal" href="term_io_0.html#term-io-0"><span class="std std-ref">term_io</span></a></div>
+<div class="line"><a class="reference internal" href="user_0.html#user-0"><span class="std std-ref">user</span></a></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
+<div class="line-block">
+<div class="line">(none)</div>
 </div>
-<blockquote>
-<div><ul class="simple">
-<li><p>Capabilities: Objects providing resources must declare <code class="docutils literal notranslate"><span class="pre">resources</span></code> in their <code class="docutils literal notranslate"><span class="pre">capabilities/1</span></code> predicate (from the <code class="docutils literal notranslate"><span class="pre">mcp_tool_protocol</span></code> protocol). The server will then advertise the <code class="docutils literal notranslate"><span class="pre">resources</span></code> capability and handle <code class="docutils literal notranslate"><span class="pre">resources/list</span></code> and <code class="docutils literal notranslate"><span class="pre">resources/read</span></code> requests.</p></li>
-<li><p>Resource descriptors: Each resource is described by a <code class="docutils literal notranslate"><span class="pre">resource(URI,</span> <span class="pre">Name,</span> <span class="pre">Description,</span> <span class="pre">MimeType)</span></code> or <code class="docutils literal notranslate"><span class="pre">resource(URI,</span> <span class="pre">Name,</span> <span class="pre">Title,</span> <span class="pre">Description,</span> <span class="pre">MimeType)</span></code> term where <code class="docutils literal notranslate"><span class="pre">URI</span></code> is the resource identifier (an atom), <code class="docutils literal notranslate"><span class="pre">Name</span></code> is a human-readable name (an atom), <code class="docutils literal notranslate"><span class="pre">Title</span></code> is an optional human-friendly display name (an atom), <code class="docutils literal notranslate"><span class="pre">Description</span></code> is a human-readable description (an atom), and <code class="docutils literal notranslate"><span class="pre">MimeType</span></code> is the MIME type of the resource content (an atom, e.g. <code class="docutils literal notranslate"><span class="pre">'text/plain'</span></code>).</p></li>
-<li><p>Resource contents: The <code class="docutils literal notranslate"><span class="pre">resource_read/3</span></code> predicate must return a result term. The result must be <code class="docutils literal notranslate"><span class="pre">contents(ContentList)</span></code> where each item is <code class="docutils literal notranslate"><span class="pre">text_content(URI,</span> <span class="pre">MimeType,</span> <span class="pre">Text)</span></code> for text resources or <code class="docutils literal notranslate"><span class="pre">blob_content(URI,</span> <span class="pre">MimeType,</span> <span class="pre">Base64Data)</span></code> for binary resources encoded as base64.</p></li>
-<li><p>Multi-round (2026-07-28): For the 2026-07-28 adapter, applications that need additional input during a resource read implement <code class="docutils literal notranslate"><span class="pre">resource_read_round/4</span></code> from the <code class="docutils literal notranslate"><span class="pre">mcp_multiround_protocol</span></code>. Existing <code class="docutils literal notranslate"><span class="pre">resource_read/3</span></code> remains valid and is wrapped as a <code class="docutils literal notranslate"><span class="pre">complete</span></code> result when the round hook is absent.</p></li>
-<li><p>Caching (2026-07-28): Complete <code class="docutils literal notranslate"><span class="pre">resources/read</span></code> results may include cache fields (<code class="docutils literal notranslate"><span class="pre">ttlMs</span></code>, <code class="docutils literal notranslate"><span class="pre">cacheScope</span></code>) derived from <code class="docutils literal notranslate"><span class="pre">mcp_cache_protocol</span></code> or server options. Cache fields are never attached to <code class="docutils literal notranslate"><span class="pre">input_required</span></code> results.</p></li>
-</ul>
-</div></blockquote>
+</div>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line">(none)</div>
+<div class="line"> <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-option-1"><span class="std std-ref">check_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-options-1"><span class="std std-ref">check_options/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-option-1"><span class="std std-ref">default_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-options-1"><span class="std std-ref">default_options/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-2"><span class="std std-ref">option/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-3"><span class="std std-ref">option/3</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-option-1"><span class="std std-ref">valid_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-options-1"><span class="std std-ref">valid_options/1</span></a></div>
 </div>
 </div>
 <nav class="contents local" id="contents">
 <ul class="simple">
 <li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#resources-1" id="id2"><code class="docutils literal notranslate"><span class="pre">resources/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#resource-read-3" id="id3"><code class="docutils literal notranslate"><span class="pre">resource_read/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#tool-descriptors-to-json-3" id="id2"><code class="docutils literal notranslate"><span class="pre">tool_descriptors_to_json/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#prompt-descriptors-to-json-2" id="id3"><code class="docutils literal notranslate"><span class="pre">prompt_descriptors_to_json/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#resource-descriptors-to-json-2" id="id4"><code class="docutils literal notranslate"><span class="pre">resource_descriptors_to_json/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#auto-dispatch-tool-5" id="id5"><code class="docutils literal notranslate"><span class="pre">auto_dispatch_tool/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#try-tool-call-3-7" id="id6"><code class="docutils literal notranslate"><span class="pre">try_tool_call_3/7</span></code></a></p></li>
+<li><p><a class="reference internal" href="#format-content-items-2" id="id7"><code class="docutils literal notranslate"><span class="pre">format_content_items/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#format-prompt-messages-2" id="id8"><code class="docutils literal notranslate"><span class="pre">format_prompt_messages/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#format-resource-contents-2" id="id9"><code class="docutils literal notranslate"><span class="pre">format_resource_contents/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#has-pair-3" id="id10"><code class="docutils literal notranslate"><span class="pre">has_pair/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#curly-to-pairs-2" id="id11"><code class="docutils literal notranslate"><span class="pre">curly_to_pairs/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#pairs-to-curly-2" id="id12"><code class="docutils literal notranslate"><span class="pre">pairs_to_curly/2</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id4">Protected predicates</a></p></li>
-<li><p><a class="reference internal" href="#private-predicates" id="id5">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id6">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id13">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id14">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id15">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
-<section id="resources-1">
-<span id="mcp-resource-protocol-0-resources-1"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">resources/1</span></code></a><a class="headerlink" href="#resources-1" title="Link to this heading"></a></h3>
-<p>Returns a list of resource descriptors available from this object. Each descriptor is a compound term <code class="docutils literal notranslate"><span class="pre">resource(URI,</span> <span class="pre">Name,</span> <span class="pre">Description,</span> <span class="pre">MimeType)</span></code> or <code class="docutils literal notranslate"><span class="pre">resource(URI,</span> <span class="pre">Name,</span> <span class="pre">Title,</span> <span class="pre">Description,</span> <span class="pre">MimeType)</span></code> where <code class="docutils literal notranslate"><span class="pre">URI</span></code> is the resource identifier (an atom, typically a URI like <code class="docutils literal notranslate"><span class="pre">logtalk://my-app/data</span></code>), <code class="docutils literal notranslate"><span class="pre">Name</span></code> is a human-readable name (an atom), <code class="docutils literal notranslate"><span class="pre">Title</span></code> is an optional human-friendly display name (an atom), <code class="docutils literal notranslate"><span class="pre">Description</span></code> is a human-readable description (an atom), and <code class="docutils literal notranslate"><span class="pre">MimeType</span></code> is the MIME type (an atom, e.g. <code class="docutils literal notranslate"><span class="pre">'text/plain'</span></code>, <code class="docutils literal notranslate"><span class="pre">'application/json'</span></code>).</p>
+<section id="tool-descriptors-to-json-3">
+<span id="mcp-server-application-0-tool-descriptors-to-json-3"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">tool_descriptors_to_json/3</span></code></a><a class="headerlink" href="#tool-descriptors-to-json-3" title="Link to this heading"></a></h3>
+<p>Converts a list of tool(Name, Functor, Arity) descriptors into MCP JSON tool definitions, deriving titles, descriptions and input schemas from the application object’s info/2 and mode/2 directives.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -497,18 +506,18 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">resources(Resources)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">tool_descriptors_to_json(ToolDescriptors,Application,JsonTools)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">resources(-list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">tool_descriptors_to_json(+list,+object_identifier,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
 </section>
-<section id="resource-read-3">
-<span id="mcp-resource-protocol-0-resource-read-3"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">resource_read/3</span></code></a><a class="headerlink" href="#resource-read-3" title="Link to this heading"></a></h3>
-<p>Handles a resource read request. <code class="docutils literal notranslate"><span class="pre">URI</span></code> is the resource identifier (as declared in <code class="docutils literal notranslate"><span class="pre">resources/1</span></code>), <code class="docutils literal notranslate"><span class="pre">Arguments</span></code> is a list of <code class="docutils literal notranslate"><span class="pre">ArgumentName-Value</span></code> pairs (currently unused but reserved for future use), and <code class="docutils literal notranslate"><span class="pre">Result</span></code> is unified with the resource result. The result must be <code class="docutils literal notranslate"><span class="pre">contents(ContentList)</span></code> where each content item is either <code class="docutils literal notranslate"><span class="pre">text_content(URI,</span> <span class="pre">MimeType,</span> <span class="pre">Text)</span></code> for text resources or <code class="docutils literal notranslate"><span class="pre">blob_content(URI,</span> <span class="pre">MimeType,</span> <span class="pre">Base64Data)</span></code> for binary resources encoded as base64. <code class="docutils literal notranslate"><span class="pre">Text</span></code> and <code class="docutils literal notranslate"><span class="pre">Base64Data</span></code> must be atoms.</p>
+<section id="prompt-descriptors-to-json-2">
+<span id="mcp-server-application-0-prompt-descriptors-to-json-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">prompt_descriptors_to_json/2</span></code></a><a class="headerlink" href="#prompt-descriptors-to-json-2" title="Link to this heading"></a></h3>
+<p>Converts prompt descriptors (3-arg or 4-arg) into MCP JSON prompt definitions.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -518,11 +527,200 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_read(URI,Arguments,Result)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">prompt_descriptors_to_json(PromptDescriptors,JsonPrompts)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_read(+atom,+list(pair),--compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">prompt_descriptors_to_json(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="resource-descriptors-to-json-2">
+<span id="mcp-server-application-0-resource-descriptors-to-json-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">resource_descriptors_to_json/2</span></code></a><a class="headerlink" href="#resource-descriptors-to-json-2" title="Link to this heading"></a></h3>
+<p>Converts resource descriptors (4-arg or 5-arg) into MCP JSON resource definitions.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_descriptors_to_json(Descriptors,Resources)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_descriptors_to_json(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="auto-dispatch-tool-5">
+<span id="mcp-server-application-0-auto-dispatch-tool-5"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">auto_dispatch_tool/5</span></code></a><a class="headerlink" href="#auto-dispatch-tool-5" title="Link to this heading"></a></h3>
+<p>Auto-dispatches a tool call by calling the predicate on the application, collecting output-mode arguments, and returning a text result.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">auto_dispatch_tool(Application,Functor,Arity,ToolArguments,Result)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">auto_dispatch_tool(+object_identifier,+atom,+integer,+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="try-tool-call-3-7">
+<span id="mcp-server-application-0-try-tool-call-3-7"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">try_tool_call_3/7</span></code></a><a class="headerlink" href="#try-tool-call-3-7" title="Link to this heading"></a></h3>
+<p>Tries tool_call/3; on existence_error falls back to auto-dispatch.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">try_tool_call_3(Application,ToolName,Functor,Arity,ArgPairs,ToolArguments,Result)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">try_tool_call_3(+object_identifier,+atom,+atom,+integer,+list,+compound,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="format-content-items-2">
+<span id="mcp-server-application-0-format-content-items-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">format_content_items/2</span></code></a><a class="headerlink" href="#format-content-items-2" title="Link to this heading"></a></h3>
+<p>Converts canonical content item terms into MCP JSON content array elements.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">format_content_items(Items,Elements)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">format_content_items(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="format-prompt-messages-2">
+<span id="mcp-server-application-0-format-prompt-messages-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">format_prompt_messages/2</span></code></a><a class="headerlink" href="#format-prompt-messages-2" title="Link to this heading"></a></h3>
+<p>Converts message(Role, text(Text)) terms into MCP JSON prompt message objects.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">format_prompt_messages(Messages,JsonMessages)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">format_prompt_messages(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="format-resource-contents-2">
+<span id="mcp-server-application-0-format-resource-contents-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">format_resource_contents/2</span></code></a><a class="headerlink" href="#format-resource-contents-2" title="Link to this heading"></a></h3>
+<p>Converts text_content/3 and blob_content/3 terms into MCP JSON resource content objects.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">format_resource_contents(Contents,JsonContents)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">format_resource_contents(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="has-pair-3">
+<span id="mcp-server-application-0-has-pair-3"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">has_pair/3</span></code></a><a class="headerlink" href="#has-pair-3" title="Link to this heading"></a></h3>
+<p>Looks up a Key-Value pair inside a curly-term.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">has_pair(Curly,Key,Value)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">has_pair(+compound,+atom,?term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="curly-to-pairs-2">
+<span id="mcp-server-application-0-curly-to-pairs-2"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">curly_to_pairs/2</span></code></a><a class="headerlink" href="#curly-to-pairs-2" title="Link to this heading"></a></h3>
+<p>Converts a curly-term to a list of Key-Value pairs.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">curly_to_pairs(Curly,Pairs)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">curly_to_pairs(+compound,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="pairs-to-curly-2">
+<span id="mcp-server-application-0-pairs-to-curly-2"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">pairs_to_curly/2</span></code></a><a class="headerlink" href="#pairs-to-curly-2" title="Link to this heading"></a></h3>
+<p>Converts a list of Key-Value pairs to a curly-term.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">pairs_to_curly(Pairs,Curly)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">pairs_to_curly(+list,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 </section>
@@ -530,11 +728,11 @@
 <hr class="docutils" />
 <section id="protected-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
-<p>(none)</p>
+<p>(no local declarations; see entity ancestors if any)</p>
 </section>
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
-<p>(none)</p>
+<p>(no local declarations; see entity ancestors if any)</p>
 </section>
 <section id="operators">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
@@ -546,8 +744,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="mcp_prompt_protocol_0.html" class="btn btn-neutral float-left" title="mcp_prompt_protocol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="mcp_server_0.html" class="btn btn-neutral float-right" title="mcp_server" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="mcp_server_adapter_protocol_0.html" class="btn btn-neutral float-left" title="mcp_server_adapter_protocol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mcp_tool_protocol_0.html" class="btn btn-neutral float-right" title="mcp_tool_protocol" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
