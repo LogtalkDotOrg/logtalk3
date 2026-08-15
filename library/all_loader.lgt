@@ -284,6 +284,7 @@
 		differential_evolution(loader),
 		particle_swarm_optimization(loader),
 		simulated_annealing(loader),
+		tabu_search(loader),
 		mcp_server(loader),
 		nmea(loader),
 		tle_orbits(loader),

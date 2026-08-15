@@ -693,6 +693,8 @@ Objects
    subunit_v2_report <subunit_v2_report_0>
    suppress_goal_hook <suppress_goal_hook_0>
    svr_regression <svr_regression_0>
+   tabu_search(Problem) <tabu_search_1>
+   tabu_search(Problem,RandomAlgorithm) <tabu_search_2>
    tap_output <tap_output_0>
    tap_report <tap_report_0>
    term <term_0>
@@ -940,6 +942,7 @@ Protocols
    stemmer_protocol <stemmer_protocol_0>
    subsequences_protocol <subsequences_protocol_0>
    supervised_dimension_reduction_dataset_protocol <supervised_dimension_reduction_dataset_protocol_0>
+   tabu_search_problem_protocol <tabu_search_problem_protocol_0>
    target_supervised_dimension_reduction_dataset_protocol <target_supervised_dimension_reduction_dataset_protocol_0>
    temporal_pairwise_ranking_dataset_protocol <temporal_pairwise_ranking_dataset_protocol_0>
    term_io_protocol <term_io_protocol_0>

@@ -1,0 +1,192 @@
+.. index:: single: tabu_search_problem_protocol
+.. _tabu_search_problem_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``tabu_search_problem_protocol``
+================================
+
+Protocol for tabu search problem definitions. A problem object must define the three required predicates and may optionally define predicates to override neighbor generation with delta energy, full neighborhood enumeration, stopping, and progress reporting defaults.
+
+| **Availability:** 
+|    ``logtalk_load(tabu_search(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-15
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: initial_state/1
+.. _tabu_search_problem_protocol/0::initial_state/1:
+
+``initial_state/1``
+^^^^^^^^^^^^^^^^^^^
+
+Returns an initial state for the optimization problem.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``initial_state(State)``
+| **Mode and number of proofs:**
+|    ``initial_state(-nonvar)`` - ``one``
+
+
+------------
+
+.. index:: neighbor_state/2
+.. _tabu_search_problem_protocol/0::neighbor_state/2:
+
+``neighbor_state/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Generates a neighboring state from the given state. This is the most problem-specific predicate and its definition determines the quality of the search. Used both for candidate sampling and (when ``neighbors/2`` is not defined) as the sole neighborhood operator.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``neighbor_state(State,Neighbor)``
+| **Mode and number of proofs:**
+|    ``neighbor_state(+nonvar,-nonvar)`` - ``one``
+
+
+------------
+
+.. index:: neighbor_state/3
+.. _tabu_search_problem_protocol/0::neighbor_state/3:
+
+``neighbor_state/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Generates a neighboring state and returns the energy change (delta) directly, avoiding a full energy recomputation. Optional. When not defined by the problem, the algorithm calls ``neighbor_state/2`` and ``state_energy/2`` instead.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``neighbor_state(State,Neighbor,DeltaEnergy)``
+| **Mode and number of proofs:**
+|    ``neighbor_state(+nonvar,-nonvar,-number)`` - ``one``
+
+
+------------
+
+.. index:: neighbors/2
+.. _tabu_search_problem_protocol/0::neighbors/2:
+
+``neighbors/2``
+^^^^^^^^^^^^^^^
+
+Optionally returns the complete list of neighboring states. When defined, the algorithm uses this list (or a random sample of it controlled by the ``candidates(N)`` option) instead of repeated calls to ``neighbor_state/2``. Useful for small, enumerable neighborhoods.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``neighbors(State,Neighbors)``
+| **Mode and number of proofs:**
+|    ``neighbors(+nonvar,-list(nonvar))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: state_energy/2
+.. _tabu_search_problem_protocol/0::state_energy/2:
+
+``state_energy/2``
+^^^^^^^^^^^^^^^^^^
+
+Computes the energy (cost) of the given state. The algorithm minimizes this value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``state_energy(State,Energy)``
+| **Mode and number of proofs:**
+|    ``state_energy(+nonvar,-number)`` - ``one``
+
+
+------------
+
+.. index:: stop_condition/3
+.. _tabu_search_problem_protocol/0::stop_condition/3:
+
+``stop_condition/3``
+^^^^^^^^^^^^^^^^^^^^
+
+True when the search should stop given the current step, best energy found so far, and current energy. Optional. When not defined by the problem, the search runs until the maximum number of steps is reached.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``stop_condition(Step,BestEnergy,CurrentEnergy)``
+| **Mode and number of proofs:**
+|    ``stop_condition(+non_negative_integer,+number,+number)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: progress/5
+.. _tabu_search_problem_protocol/0::progress/5:
+
+``progress/5``
+^^^^^^^^^^^^^^
+
+Called periodically to report optimization progress. Optional. When not defined by the problem, progress reporting is skipped. The acceptance and improvement rates are values between 0.0 and 1.0 computed over the interval since the last progress report.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``progress(Step,BestEnergy,CurrentEnergy,AcceptanceRate,ImprovementRate)``
+| **Mode and number of proofs:**
+|    ``progress(+non_negative_integer,+number,+number,+number,+number)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`tabu_search(Problem) <tabu_search/1>`
+

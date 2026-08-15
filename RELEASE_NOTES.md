@@ -94,6 +94,8 @@ Mahalanobis distance predicates.
 
 * ADDED: New `particle_swarm_optimization` meta-heuristic optimizer library.
 
+* ADDED: New `tabu_search` meta-heuristic optimizer library.
+
 * ADDED: New `association_rule_miner` library implementing a association rule
 miner deriving confidence- and lift-scored rules from frequent itemsets and
 sequential patterns, with leverage and several similarity metrics available

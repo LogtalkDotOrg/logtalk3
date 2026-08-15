@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on August 13, 2026
+##   Last updated on August 15, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -326,6 +326,7 @@ Foreach-Object {
 (Get-Content ../../../library/strings/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/strings.rst
 (Get-Content ../../../library/subsequences/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/subsequences.rst
 (Get-Content ../../../library/svr_regression/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/svr_regression.rst
+(Get-Content ../../../library/tabu_search/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/tabu_search.rst
 (Get-Content ../../../library/term_io/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/term_io.rst
 (Get-Content ../../../library/thurstone_mosteller_ranker/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/thurstone_mosteller_ranker.rst
 (Get-Content ../../../library/time_scales/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/time_scales.rst

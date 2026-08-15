@@ -11738,6 +11738,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ccsds_packetization <ccsds_packetization/0::initial_state/1>`
 * :ref:`http_websocket_session(Role,TextRepresentation) <http_websocket_session/2::initial_state/1>`
 * :ref:`simulated_annealing_protocol <simulated_annealing_protocol/0::initial_state/1>`
+* :ref:`tabu_search_problem_protocol <tabu_search_problem_protocol/0::initial_state/1>`
 
 ``initial_temperature/1``
 -------------------------
@@ -16852,6 +16853,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`simulated_annealing_protocol <simulated_annealing_protocol/0::neighbor_state/2>`
+* :ref:`tabu_search_problem_protocol <tabu_search_problem_protocol/0::neighbor_state/2>`
 
 ``neighbor_state/3``
 --------------------
@@ -16862,6 +16864,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`simulated_annealing_protocol <simulated_annealing_protocol/0::neighbor_state/3>`
+* :ref:`tabu_search_problem_protocol <tabu_search_problem_protocol/0::neighbor_state/3>`
 
 ``neighbors/2``
 ---------------
@@ -16872,6 +16875,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`geohash_protocol <geohash_protocol/0::neighbors/2>`
+* :ref:`tabu_search_problem_protocol <tabu_search_problem_protocol/0::neighbors/2>`
 
 ``neighbors/3``
 ---------------
@@ -21129,6 +21133,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`differential_evolution_problem_protocol <differential_evolution_problem_protocol/0::progress/5>`
 * :ref:`particle_swarm_optimization_protocol <particle_swarm_optimization_protocol/0::progress/5>`
 * :ref:`simulated_annealing_protocol <simulated_annealing_protocol/0::progress/5>`
+* :ref:`tabu_search_problem_protocol <tabu_search_problem_protocol/0::progress/5>`
 
 ``prompt/2``
 ------------
@@ -24203,6 +24208,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`lgtunit <lgtunit/0::run/2>`
 * :ref:`particle_swarm_optimization(Problem,RandomAlgorithm) <particle_swarm_optimization/2::run/2>`
 * :ref:`simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing/2::run/2>`
+* :ref:`tabu_search(Problem,RandomAlgorithm) <tabu_search/2::run/2>`
 
 ``run/3``
 ---------
@@ -24215,6 +24221,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`differential_evolution(Problem,RandomAlgorithm) <differential_evolution/2::run/3>`
 * :ref:`particle_swarm_optimization(Problem,RandomAlgorithm) <particle_swarm_optimization/2::run/3>`
 * :ref:`simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing/2::run/3>`
+* :ref:`tabu_search(Problem,RandomAlgorithm) <tabu_search/2::run/3>`
 
 ``run/4``
 ---------
@@ -24227,6 +24234,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`differential_evolution(Problem,RandomAlgorithm) <differential_evolution/2::run/4>`
 * :ref:`particle_swarm_optimization(Problem,RandomAlgorithm) <particle_swarm_optimization/2::run/4>`
 * :ref:`simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing/2::run/4>`
+* :ref:`tabu_search(Problem,RandomAlgorithm) <tabu_search/2::run/4>`
 
 ``run_session/3``
 -----------------
@@ -26475,6 +26483,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`simulated_annealing_protocol <simulated_annealing_protocol/0::state_energy/2>`
+* :ref:`tabu_search_problem_protocol <tabu_search_problem_protocol/0::state_energy/2>`
 
 ``stats/1``
 -----------
@@ -26597,6 +26606,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`differential_evolution_problem_protocol <differential_evolution_problem_protocol/0::stop_condition/3>`
 * :ref:`particle_swarm_optimization_protocol <particle_swarm_optimization_protocol/0::stop_condition/3>`
 * :ref:`simulated_annealing_protocol <simulated_annealing_protocol/0::stop_condition/3>`
+* :ref:`tabu_search_problem_protocol <tabu_search_problem_protocol/0::stop_condition/3>`
 
 ``stop_redirect_to_file/0``
 ---------------------------

@@ -275,6 +275,7 @@ directory in the ``NOTES.md`` file.
    strings
    subsequences
    svr_regression
+   tabu_search
    term_io
    thurstone_mosteller_ranker
    time_scales

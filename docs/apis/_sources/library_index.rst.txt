@@ -3264,6 +3264,18 @@ To load any library (including developer tools, ports, and contributions), use t
 
    svr_regression <svr_regression_0>
 
+:ref:`tabu_search <library_tabu_search>`
+----------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   tabu_search(Problem) <tabu_search_1>
+   tabu_search(Problem,RandomAlgorithm) <tabu_search_2>
+   tabu_search_problem_protocol <tabu_search_problem_protocol_0>
+
 :ref:`term_io <library_term_io>`
 --------------------------------
 

@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on August 13, 2026
+##   Last updated on August 15, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -326,6 +326,7 @@ sed '1,19d' ../../../library/string_distance/NOTES.md | pandoc -f gfm -t rst -o 
 sed '1,19d' ../../../library/strings/NOTES.md | pandoc -f gfm -t rst -o libraries/strings.rst
 sed '1,19d' ../../../library/subsequences/NOTES.md | pandoc -f gfm -t rst -o libraries/subsequences.rst
 sed '1,19d' ../../../library/svr_regression/NOTES.md | pandoc -f gfm -t rst -o libraries/svr_regression.rst
+sed '1,19d' ../../../library/tabu_search/NOTES.md | pandoc -f gfm -t rst -o libraries/tabu_search.rst
 sed '1,19d' ../../../library/term_io/NOTES.md | pandoc -f gfm -t rst -o libraries/term_io.rst
 sed '1,19d' ../../../library/thurstone_mosteller_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/thurstone_mosteller_ranker.rst
 sed '1,19d' ../../../library/time_scales/NOTES.md | pandoc -f gfm -t rst -o libraries/time_scales.rst

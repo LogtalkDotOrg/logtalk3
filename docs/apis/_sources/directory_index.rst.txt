@@ -3006,6 +3006,18 @@ To load an entity, always load the library that includes it using the goal ``log
 
    svr_regression <svr_regression_0>
 
+``library/tabu_search/``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   tabu_search(Problem) <tabu_search_1>
+   tabu_search(Problem,RandomAlgorithm) <tabu_search_2>
+   tabu_search_problem_protocol <tabu_search_problem_protocol_0>
+
 ``library/term_io/``
 --------------------
 

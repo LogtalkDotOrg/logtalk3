@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on August 13, 2026
+%  Last updated on August 15, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -280,6 +280,7 @@ logtalk_library_path(string_distance, library('string_distance/')).
 logtalk_library_path(strings, library('strings/')).
 logtalk_library_path(subsequences, library('subsequences/')).
 logtalk_library_path(svr_regression, library('svr_regression/')).
+logtalk_library_path(tabu_search, library('tabu_search/')).
 logtalk_library_path(term_io, library('term_io/')).
 logtalk_library_path(thurstone_mosteller_ranker, library('thurstone_mosteller_ranker/')).
 logtalk_library_path(time_scales, library('time_scales/')).

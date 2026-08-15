@@ -71,8 +71,8 @@ Library groups
 - Mathematics, statistics, and optimization: ``byte_order``,
   ``ieee_754``, ``linear_algebra``, ``univariate_distributions``,
   ``multivariate_distributions``, ``differential_evolution``,
-  ``particle_swarm_optimization``, ``simulated_annealing``, and
-  ``statistics``.
+  ``particle_swarm_optimization``, ``simulated_annealing``,
+  ``statistics``, and ``tabu_search``.
 - Machine learning:
 
   - Classification: ``classification_protocols``,
