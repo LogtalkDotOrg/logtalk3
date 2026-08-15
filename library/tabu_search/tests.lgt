@@ -101,6 +101,32 @@
 		tabu_search(quadratic)::run(_State, _Energy, Statistics, [tabu_tenure(5), max_steps(50)]),
 		memberchk(final_tabu_size(Size), Statistics).
 
+	test(ts_tabu_tenure_range_runs, deterministic((number(Energy), Energy < 5.0))) :-
+		tabu_search(quadratic)::run(_State, Energy, [tabu_tenure_range(3, 9), max_steps(400)]).
+
+	test(ts_tabu_tenure_range_overrides_fixed, deterministic((number(Energy), Energy < 5.0))) :-
+		% range present → fixed tenure is ignored
+		tabu_search(quadratic)::run(_State, Energy, [tabu_tenure(2), tabu_tenure_range(4, 8), max_steps(300)]).
+
+	test(ts_tabu_tenure_range_statistics, deterministic) :-
+		tabu_search(quadratic)::run(_State, _Energy, Statistics, [tabu_tenure_range(2, 6), max_steps(100)]),
+		memberchk(steps(Steps), Statistics),
+		^^assertion(Steps =:= 100),
+		memberchk(final_tabu_size(Size), Statistics),
+		^^assertion((integer(Size), Size >= 0)).
+
+	test(ts_tabu_tenure_range_seed_reproducible, deterministic(E1 =:= E2)) :-
+		quadratic::reset_seed,
+		tabu_search(quadratic)::run(_S1, E1, [seed(55), tabu_tenure_range(3, 7), max_steps(200)]),
+		quadratic::reset_seed,
+		tabu_search(quadratic)::run(_S2, E2, [seed(55), tabu_tenure_range(3, 7), max_steps(200)]).
+
+	test(ts_invalid_option_tabu_tenure_range_min, error(domain_error(option, tabu_tenure_range(0, 5)))) :-
+		tabu_search(quadratic)::run(_State, _Energy, [tabu_tenure_range(0, 5)]).
+
+	test(ts_invalid_option_tabu_tenure_range_order, error(domain_error(option, tabu_tenure_range(9, 3)))) :-
+		tabu_search(quadratic)::run(_State, _Energy, [tabu_tenure_range(9, 3)]).
+
 	% seed option for reproducibility
 
 	test(ts_seed_reproducible_results, deterministic(Energy1 =:= Energy2)) :-

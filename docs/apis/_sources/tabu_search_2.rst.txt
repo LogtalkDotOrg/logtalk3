@@ -35,7 +35,7 @@ Tabu search optimization algorithm. Parameterized by a problem object implementi
 | **Remarks:**
 
    - Algorithm: Tabu search is a metaheuristic that guides a local search procedure using a short-term memory structure (the tabu list) to avoid cycling and to escape local minima. At each iteration a set of candidate neighbors is examined and the best admissible (non-tabu or aspiration-allowed) neighbor is selected.
-   - Tabu list: A FIFO list of recently visited states of fixed maximum length (``tabu_tenure``). A candidate is forbidden if it appears in the list, unless the aspiration criterion is satisfied.
+   - Tabu list: A list of recently visited states paired with expiration steps. With fixed tenure the list behaves as a FIFO of maximum length ``tabu_tenure``. With ``tabu_tenure_range(Min, Max)`` each accepted move is assigned a random tenure drawn uniformly from the inclusive range.
    - Aspiration criterion: A tabu candidate is accepted when its energy is strictly better than the best energy found so far. This is the classic "best-so-far" aspiration criterion.
    - Candidate generation: By default the algorithm samples ``candidates(N)`` neighbors using ``neighbor_state/2`` (or ``neighbor_state/3`` when defined). If the problem defines ``neighbors/2``, that complete list is used instead (or a random sample of it when larger than the candidate limit).
    - Delta-energy optimization: If the problem object defines ``neighbor_state/3``, the algorithm uses the returned delta energy directly instead of calling ``state_energy/2`` on the neighbor. This is useful when computing the energy change is cheaper than recomputing the full energy.
@@ -92,7 +92,8 @@ Runs the tabu search algorithm using the given options and returns the best stat
 | **Remarks:**
 
     - ``max_steps(N)`` option: Maximum number of iterations per cycle (default: ``10000``).
-    - ``tabu_tenure(T)`` option: Maximum length of the tabu list (default: ``7``).
+    - ``tabu_tenure(T)`` option: Fixed tabu tenure: maximum lifetime (in steps) of each tabu entry (default: ``7``). Ignored when ``tabu_tenure_range/2`` is also present.
+    - ``tabu_tenure_range(Min, Max)`` option: Random tabu tenure: on each accepted move a tenure is drawn uniformly from the inclusive integer range ``Min..Max``. Overrides ``tabu_tenure/1`` when present.
     - ``candidates(N)`` option: Number of candidate neighbors examined per iteration (default: ``20``).
     - ``updates(N)`` option: Number of progress reports during the run. Set to ``0`` to disable. Progress is reported by calling ``progress/5`` on the problem object (default: ``0``).
     - ``seed(S)`` option: Positive integer seed for the random number generator, enabling reproducible runs (default: none).
@@ -119,7 +120,7 @@ Runs the tabu search algorithm using the given options, returns the best state f
 
 | **Remarks:**
 
-    - Statistics list: A list of ``Key(Value)`` pairs: ``steps(N)`` is the number of steps executed, ``acceptances(A)`` is the number of accepted moves, ``improvements(I)`` is the number of moves that improved the best energy, and ``final_tabu_size(S)`` is the size of the tabu list at termination.
+    - Statistics list: A list of ``Key(Value)`` pairs: ``steps(N)`` is the number of steps executed, ``acceptances(A)`` is the number of accepted moves, ``improvements(I)`` is the number of moves that improved the best energy, and ``final_tabu_size(S)`` is the number of non-expired tabu entries at termination.
 
 
 ------------

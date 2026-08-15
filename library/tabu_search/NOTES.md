@@ -68,9 +68,12 @@ Features
   `xoshiro128ss`, `xoshiro256pp`, `xoshiro256ss`, `well512a`, `splitmix64`,
   and `as183`. The convenience object `tabu_search(Problem)` defaults
   to `xoshiro128pp`.
-- **Tabu list (short-term memory)** — a FIFO list of recently visited states
-  of configurable maximum length (`tabu_tenure`). Candidates that appear in
-  the list are forbidden unless the aspiration criterion is met.
+- **Tabu list (short-term memory)** — recently visited states are stored with
+  an expiration step. With fixed tenure (`tabu_tenure(T)`) the list behaves
+  as a FIFO of maximum length `T`. With `tabu_tenure_range(Min, Max)` each
+  accepted move receives a random tenure drawn uniformly from the inclusive
+  range. Candidates that appear in the active (non-expired) list are
+  forbidden unless the aspiration criterion is met.
 - **Aspiration criterion** — a tabu candidate is accepted when its energy is
   strictly better than the best energy found so far (classic “best-so-far”
   aspiration).
@@ -130,7 +133,11 @@ Options
 Options for the `run/3-4` predicates:
 
 - `max_steps(N)` — maximum number of iterations per cycle (default: `10000`).
-- `tabu_tenure(T)` — maximum length of the tabu list (default: `7`).
+- `tabu_tenure(T)` — fixed tabu tenure: lifetime in steps of each tabu entry
+  (default: `7`). Ignored when `tabu_tenure_range/2` is also present.
+- `tabu_tenure_range(Min, Max)` — random tabu tenure: on each accepted move a
+  tenure is drawn uniformly from the inclusive integer range `Min..Max`.
+  Overrides `tabu_tenure/1` when present.
 - `candidates(N)` — number of candidate neighbors examined per iteration
   (default: `20`).
 - `updates(N)` — number of progress reports during the run. Progress is
@@ -166,8 +173,9 @@ run:
   forbidden features are local (e.g. edges in TSP, variable assignments in
   scheduling).
 
-- **Fixed tabu tenure** — the tenure is a constant given by the `tabu_tenure`
-  option. There is no reactive, random, or adaptive tenure schedule.
+- **Limited tenure schedules** — fixed tenure and uniform random tenure in a
+  static range are supported. Reactive or adaptive tenure schedules (e.g.
+  tenure that grows after repeated cycling) are not implemented.
 
 - **Single aspiration criterion** — only the classic "best-so-far" rule is
   implemented (a tabu candidate is accepted when it improves the global best
@@ -221,6 +229,11 @@ For example, a simple quadratic minimization problem:
 ### Running with custom options
 
 	| ?- tabu_search(quadratic)::run(State, Energy, [max_steps(5000), tabu_tenure(10), candidates(30)]).
+	State = 3.00..., Energy = 0.000...
+
+### Random tabu tenure
+
+	| ?- tabu_search(quadratic)::run(State, Energy, [tabu_tenure_range(5, 12), max_steps(5000)]).
 	State = 3.00..., Energy = 0.000...
 
 ### Running with statistics

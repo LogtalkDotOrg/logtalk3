@@ -330,6 +330,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#defining-a-problem-1">Defining a problem</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#running-the-algorithm">Running the algorithm</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#running-with-custom-options">Running with custom options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#random-tabu-tenure">Random tabu tenure</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#running-with-statistics">Running with statistics</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#reproducible-runs-with-seed">Reproducible runs with seed</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#restarts">Restarts</a></li>
@@ -451,10 +452,13 @@ include <code class="docutils literal notranslate"><span class="pre">xoshiro128p
 <code class="docutils literal notranslate"><span class="pre">xoshiro256ss</span></code>, <code class="docutils literal notranslate"><span class="pre">well512a</span></code>, <code class="docutils literal notranslate"><span class="pre">splitmix64</span></code>, and <code class="docutils literal notranslate"><span class="pre">as183</span></code>. The
 convenience object <code class="docutils literal notranslate"><span class="pre">tabu_search(Problem)</span></code> defaults to
 <code class="docutils literal notranslate"><span class="pre">xoshiro128pp</span></code>.</p></li>
-<li><p><strong>Tabu list (short-term memory)</strong> — a FIFO list of recently visited
-states of configurable maximum length (<code class="docutils literal notranslate"><span class="pre">tabu_tenure</span></code>). Candidates
-that appear in the list are forbidden unless the aspiration criterion
-is met.</p></li>
+<li><p><strong>Tabu list (short-term memory)</strong> — recently visited states are stored
+with an expiration step. With fixed tenure (<code class="docutils literal notranslate"><span class="pre">tabu_tenure(T)</span></code>) the
+list behaves as a FIFO of maximum length <code class="docutils literal notranslate"><span class="pre">T</span></code>. With
+<code class="docutils literal notranslate"><span class="pre">tabu_tenure_range(Min,</span> <span class="pre">Max)</span></code> each accepted move receives a random
+tenure drawn uniformly from the inclusive range. Candidates that
+appear in the active (non-expired) list are forbidden unless the
+aspiration criterion is met.</p></li>
 <li><p><strong>Aspiration criterion</strong> — a tabu candidate is accepted when its
 energy is strictly better than the best energy found so far (classic
 “best-so-far” aspiration).</p></li>
@@ -515,7 +519,12 @@ the search should terminate early.</p></li>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">max_steps(N)</span></code> — maximum number of iterations per cycle (default:
 <code class="docutils literal notranslate"><span class="pre">10000</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">tabu_tenure(T)</span></code> — maximum length of the tabu list (default: <code class="docutils literal notranslate"><span class="pre">7</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tabu_tenure(T)</span></code> — fixed tabu tenure: lifetime in steps of each tabu
+entry (default: <code class="docutils literal notranslate"><span class="pre">7</span></code>). Ignored when <code class="docutils literal notranslate"><span class="pre">tabu_tenure_range/2</span></code> is also
+present.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tabu_tenure_range(Min,</span> <span class="pre">Max)</span></code> — random tabu tenure: on each accepted
+move a tenure is drawn uniformly from the inclusive integer range
+<code class="docutils literal notranslate"><span class="pre">Min..Max</span></code>. Overrides <code class="docutils literal notranslate"><span class="pre">tabu_tenure/1</span></code> when present.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">candidates(N)</span></code> — number of candidate neighbors examined per
 iteration (default: <code class="docutils literal notranslate"><span class="pre">20</span></code>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">updates(N)</span></code> — number of progress reports during the run. Progress
@@ -549,9 +558,9 @@ problem-agnostic, but can be memory-intensive for large or richly
 structured states, and is often less effective than attribute-based
 tabu for problems where the relevant forbidden features are local
 (e.g. edges in TSP, variable assignments in scheduling).</p></li>
-<li><p><strong>Fixed tabu tenure</strong> — the tenure is a constant given by the
-<code class="docutils literal notranslate"><span class="pre">tabu_tenure</span></code> option. There is no reactive, random, or adaptive
-tenure schedule.</p></li>
+<li><p><strong>Limited tenure schedules</strong> — fixed tenure and uniform random tenure
+in a static range are supported. Reactive or adaptive tenure schedules
+(e.g. tenure that grows after repeated cycling) are not implemented.</p></li>
 <li><p><strong>Single aspiration criterion</strong> — only the classic “best-so-far” rule
 is implemented (a tabu candidate is accepted when it improves the
 global best energy). Other aspiration strategies are not supported.</p></li>
@@ -603,6 +612,13 @@ protocol. For example, a simple quadratic minimization problem:</p>
 <section id="running-with-custom-options">
 <h3>Running with custom options<a class="headerlink" href="#running-with-custom-options" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> tabu_search(quadratic)<span class="o">::</span>run(<span class="nv">State</span>, <span class="nv">Energy</span>, [max_steps(<span class="m">5000</span>), tabu_tenure(<span class="m">10</span>), candidates(<span class="m">30</span>)]).
+<span class="nv">State</span> <span class="o">=</span> <span class="m">3.00</span>..., <span class="nv">Energy</span> <span class="o">=</span> <span class="m">0.000</span>...
+</pre></div>
+</div>
+</section>
+<section id="random-tabu-tenure">
+<h3>Random tabu tenure<a class="headerlink" href="#random-tabu-tenure" title="Link to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> tabu_search(quadratic)<span class="o">::</span>run(<span class="nv">State</span>, <span class="nv">Energy</span>, [tabu_tenure_range(<span class="m">5</span>, <span class="m">12</span>), max_steps(<span class="m">5000</span>)]).
 <span class="nv">State</span> <span class="o">=</span> <span class="m">3.00</span>..., <span class="nv">Energy</span> <span class="o">=</span> <span class="m">0.000</span>...
 </pre></div>
 </div>
