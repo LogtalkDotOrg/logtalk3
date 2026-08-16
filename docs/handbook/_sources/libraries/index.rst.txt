@@ -102,6 +102,7 @@ directory in the ``NOTES.md`` file.
    frequent_pattern_mining_protocols
    gaussian_mixture_clusterer
    gaussian_process_regression
+   genetic_algorithm
    genint
    gensym
    geojson

@@ -106,6 +106,7 @@ logtalk_library_path(fp_growth_pattern_miner, library('fp_growth_pattern_miner/'
 logtalk_library_path(frequent_pattern_mining_protocols, library('frequent_pattern_mining_protocols/')).
 logtalk_library_path(gaussian_mixture_clusterer, library('gaussian_mixture_clusterer/')).
 logtalk_library_path(gaussian_process_regression, library('gaussian_process_regression/')).
+logtalk_library_path(genetic_algorithm, library('genetic_algorithm/')).
 logtalk_library_path(genint, library('genint/')).
 logtalk_library_path(gensym, library('gensym/')).
 logtalk_library_path(geojson, library('geojson/')).

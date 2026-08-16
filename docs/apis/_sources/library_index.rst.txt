@@ -1007,6 +1007,18 @@ To load any library (including developer tools, ports, and contributions), use t
 
    gaussian_process_regression <gaussian_process_regression_0>
 
+:ref:`genetic_algorithm <library_genetic_algorithm>`
+----------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   genetic_algorithm(Problem) <genetic_algorithm_1>
+   genetic_algorithm(Problem,RandomAlgorithm) <genetic_algorithm_2>
+   genetic_algorithm_problem_protocol <genetic_algorithm_problem_protocol_0>
+
 :ref:`genint <library_genint>`
 ------------------------------
 

@@ -92,6 +92,8 @@ Mahalanobis distance predicates.
 
 * ADDED: New `ant_colony` meta-heuristic optimizer library.
 
+* ADDED: New `genetic_algorithm` meta-heuristic optimizer library.
+
 * ADDED: New `differential_evolution` meta-heuristic optimizer library.
 
 * ADDED: New `particle_swarm_optimization` meta-heuristic optimizer library.

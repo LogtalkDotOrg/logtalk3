@@ -152,6 +152,7 @@ Foreach-Object {
 (Get-Content ../../../library/frequent_pattern_mining_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/frequent_pattern_mining_protocols.rst
 (Get-Content ../../../library/gaussian_mixture_clusterer/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/gaussian_mixture_clusterer.rst
 (Get-Content ../../../library/gaussian_process_regression/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/gaussian_process_regression.rst
+(Get-Content ../../../library/genetic_algorithm/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/genetic_algorithm.rst
 (Get-Content ../../../library/genint/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/genint.rst
 (Get-Content ../../../library/gensym/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/gensym.rst
 (Get-Content ../../../library/geojson/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/geojson.rst

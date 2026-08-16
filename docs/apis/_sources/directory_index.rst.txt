@@ -938,6 +938,18 @@ To load an entity, always load the library that includes it using the goal ``log
 
    gaussian_process_regression <gaussian_process_regression_0>
 
+``library/genetic_algorithm/``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   genetic_algorithm(Problem) <genetic_algorithm_1>
+   genetic_algorithm(Problem,RandomAlgorithm) <genetic_algorithm_2>
+   genetic_algorithm_problem_protocol <genetic_algorithm_problem_protocol_0>
+
 ``library/genint/``
 -------------------
 

@@ -92,8 +92,8 @@ Library groups
 	`byte_order`, `ieee_754`, `linear_algebra`,
     `univariate_distributions`, `multivariate_distributions`, and `statistics`,
 - Meta-heuristic optimization:
-    `ant_colony`, `differential_evolution`, `particle_swarm_optimization`,
-    `simulated_annealing`, and `tabu_search`.
+    `ant_colony`, `differential_evolution`, `genetic_algorithm`,
+    `particle_swarm_optimization`, `simulated_annealing`, and `tabu_search`.
 - Machine learning:
 	- Classification:
 		`classification_protocols`, `adaptive_boosting_classifier`, `c45_classifier`, `gradient_boosting_classifier`,

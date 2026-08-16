@@ -308,6 +308,8 @@ Objects
    gaussian_mixture_clusterer <gaussian_mixture_clusterer_0>
    gaussian_process_regression <gaussian_process_regression_0>
    generalized_ripple_down_rules <generalized_ripple_down_rules_0>
+   genetic_algorithm(Problem) <genetic_algorithm_1>
+   genetic_algorithm(Problem,RandomAlgorithm) <genetic_algorithm_2>
    genint <genint_0>
    gensym <gensym_0>
    geohash <geohash_0>
@@ -839,6 +841,7 @@ Protocols
    expanding <expanding_0>
    flags_validator <flags_validator_0>
    forwarding <forwarding_0>
+   genetic_algorithm_problem_protocol <genetic_algorithm_problem_protocol_0>
    geohash_protocol <geohash_protocol_0>
    geojson_protocol <geojson_protocol_0>
    geospatial_protocol <geospatial_protocol_0>

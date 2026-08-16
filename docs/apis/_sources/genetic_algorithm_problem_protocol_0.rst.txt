@@ -1,0 +1,249 @@
+.. index:: single: genetic_algorithm_problem_protocol
+.. _genetic_algorithm_problem_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``genetic_algorithm_problem_protocol``
+======================================
+
+Protocol for genetic algorithm problem definitions. A problem object must define the required predicates for individuals, fitness (energy), crossover, and mutation, and may optionally define initial population generation, stopping, progress reporting, diversity, and adaptive rate hooks.
+
+| **Availability:** 
+|    ``logtalk_load(genetic_algorithm(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-16
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: random_individual/1
+.. _genetic_algorithm_problem_protocol/0::random_individual/1:
+
+``random_individual/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates a random individual (candidate solution). Used to build the initial population when ``initial_population/1`` is not defined and to replace individuals when needed.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``random_individual(Individual)``
+| **Mode and number of proofs:**
+|    ``random_individual(-nonvar)`` - ``one``
+
+
+------------
+
+.. index:: initial_population/1
+.. _genetic_algorithm_problem_protocol/0::initial_population/1:
+
+``initial_population/1``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Optionally returns a non-empty list of initial individuals. When not defined, the algorithm generates a random initial population of the requested size by repeated calls to ``random_individual/1``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``initial_population(Population)``
+| **Mode and number of proofs:**
+|    ``initial_population(-list(nonvar))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: state_energy/2
+.. _genetic_algorithm_problem_protocol/0::state_energy/2:
+
+``state_energy/2``
+^^^^^^^^^^^^^^^^^^
+
+Computes the energy (cost / fitness) of the given individual. The algorithm minimizes this value by default; use the ``objective(maximize)`` option to maximize it instead.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``state_energy(Individual,Energy)``
+| **Mode and number of proofs:**
+|    ``state_energy(+nonvar,-number)`` - ``one``
+
+
+------------
+
+.. index:: crossover/4
+.. _genetic_algorithm_problem_protocol/0::crossover/4:
+
+``crossover/4``
+^^^^^^^^^^^^^^^
+
+Recombines two parent individuals into two offspring. This is the most problem-specific operator after representation and strongly influences search quality.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``crossover(Parent1,Parent2,Offspring1,Offspring2)``
+| **Mode and number of proofs:**
+|    ``crossover(+nonvar,+nonvar,-nonvar,-nonvar)`` - ``one``
+
+
+------------
+
+.. index:: mutate/2
+.. _genetic_algorithm_problem_protocol/0::mutate/2:
+
+``mutate/2``
+^^^^^^^^^^^^
+
+Produces a mutated version of the given individual. Mutation introduces diversity and helps escape local optima.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``mutate(Individual,Mutated)``
+| **Mode and number of proofs:**
+|    ``mutate(+nonvar,-nonvar)`` - ``one``
+
+
+------------
+
+.. index:: stop_condition/3
+.. _genetic_algorithm_problem_protocol/0::stop_condition/3:
+
+``stop_condition/3``
+^^^^^^^^^^^^^^^^^^^^
+
+True when the search should stop given the current generation, best individual found so far, and its energy. Optional. When not defined by the problem, the search runs until the maximum number of generations is reached.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``stop_condition(Generation,BestIndividual,BestEnergy)``
+| **Mode and number of proofs:**
+|    ``stop_condition(+non_negative_integer,+nonvar,+number)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: progress/5
+.. _genetic_algorithm_problem_protocol/0::progress/5:
+
+``progress/5``
+^^^^^^^^^^^^^^
+
+Called periodically to report optimization progress. Optional. When not defined by the problem, progress reporting is skipped. The mean energy and diversity are population statistics; diversity is problem-defined when ``diversity/2`` is present, otherwise a simple placeholder.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``progress(Generation,BestIndividual,BestEnergy,MeanEnergy,Diversity)``
+| **Mode and number of proofs:**
+|    ``progress(+non_negative_integer,+nonvar,+number,+number,+number)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: diversity/2
+.. _genetic_algorithm_problem_protocol/0::diversity/2:
+
+``diversity/2``
+^^^^^^^^^^^^^^^
+
+Optionally computes a numeric diversity measure for the current population. When not defined, progress reporting uses 0.0 for diversity.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diversity(Population,Diversity)``
+| **Mode and number of proofs:**
+|    ``diversity(+list(nonvar),-number)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: crossover_rate/4
+.. _genetic_algorithm_problem_protocol/0::crossover_rate/4:
+
+``crossover_rate/4``
+^^^^^^^^^^^^^^^^^^^^
+
+Optional adaptive crossover-rate hook. Called once per generation with the current generation index, the maximum number of generations, and the current crossover rate. When defined and successful, the returned rate (clamped to ``[0.0, 1.0]``) is used for that generation and overrides any ``crossover_schedule/1`` option. When not defined or when it fails, the configured schedule is applied instead.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``crossover_rate(Generation,MaxGenerations,CurrentRate,NewRate)``
+| **Mode and number of proofs:**
+|    ``crossover_rate(+non_negative_integer,+positive_integer,+float,-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: mutation_rate/4
+.. _genetic_algorithm_problem_protocol/0::mutation_rate/4:
+
+``mutation_rate/4``
+^^^^^^^^^^^^^^^^^^^
+
+Optional adaptive mutation-rate hook. Called once per generation with the current generation index, the maximum number of generations, and the current mutation rate. When defined and successful, the returned rate (clamped to ``[0.0, 1.0]``) is used for that generation and overrides any ``mutation_schedule/1`` option. When not defined or when it fails, the configured schedule is applied instead.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``mutation_rate(Generation,MaxGenerations,CurrentRate,NewRate)``
+| **Mode and number of proofs:**
+|    ``mutation_rate(+non_negative_integer,+positive_integer,+float,-float)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`genetic_algorithm(Problem) <genetic_algorithm/1>`, :ref:`genetic_algorithm(Problem,RandomAlgorithm) <genetic_algorithm/2>`
+

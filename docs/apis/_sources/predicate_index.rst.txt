@@ -4556,6 +4556,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`geospatial_protocol <geospatial_protocol/0::cross_track_distance/4>`
 
+``crossover/4``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`genetic_algorithm_problem_protocol <genetic_algorithm_problem_protocol/0::crossover/4>`
+
+``crossover_rate/4``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`genetic_algorithm_problem_protocol <genetic_algorithm_problem_protocol/0::crossover_rate/4>`
+
 ``crs_dimensions/2``
 --------------------
 
@@ -7010,6 +7030,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`application_protocol <application_protocol/0::distribution/1>`
+
+``diversity/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`genetic_algorithm_problem_protocol <genetic_algorithm_problem_protocol/0::diversity/2>`
 
 ``doc_goal/1``
 --------------
@@ -11713,6 +11743,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ccsds_packet_services <ccsds_packet_services/0::initial_channel_reassembly_state/1>`
+
+``initial_population/1``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`genetic_algorithm_problem_protocol <genetic_algorithm_problem_protocol/0::initial_population/1>`
 
 ``initial_positions/1``
 -----------------------
@@ -16719,6 +16759,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`multivariate_distributions_protocol <multivariate_distributions_protocol/0::multivariate_t_samples/6>`
 
+``mutate/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`genetic_algorithm_problem_protocol <genetic_algorithm_problem_protocol/0::mutate/2>`
+
 ``mutation/2``
 --------------
 
@@ -16739,6 +16789,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`mutations <mutations/0::mutation/3>`
 * :ref:`mutations_store <mutations_store/0::mutation/3>`
+
+``mutation_rate/4``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`genetic_algorithm_problem_protocol <genetic_algorithm_problem_protocol/0::mutation_rate/4>`
 
 ``nack/3``
 ----------
@@ -21152,6 +21212,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ant_colony_problem_protocol <ant_colony_problem_protocol/0::progress/5>`
 * :ref:`differential_evolution_problem_protocol <differential_evolution_problem_protocol/0::progress/5>`
+* :ref:`genetic_algorithm_problem_protocol <genetic_algorithm_problem_protocol/0::progress/5>`
 * :ref:`particle_swarm_optimization_protocol <particle_swarm_optimization_protocol/0::progress/5>`
 * :ref:`simulated_annealing_protocol <simulated_annealing_protocol/0::progress/5>`
 * :ref:`tabu_search_problem_protocol <tabu_search_problem_protocol/0::progress/5>`
@@ -21979,6 +22040,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`permutations_protocol <permutations_protocol/0::random_distinct_permutation/2>`
+
+``random_individual/1``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`genetic_algorithm_problem_protocol <genetic_algorithm_problem_protocol/0::random_individual/1>`
 
 ``random_multiset/3``
 ---------------------
@@ -24227,6 +24298,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ant_colony(Problem,RandomAlgorithm) <ant_colony/2::run/2>`
 * :ref:`differential_evolution(Problem,RandomAlgorithm) <differential_evolution/2::run/2>`
+* :ref:`genetic_algorithm(Problem,RandomAlgorithm) <genetic_algorithm/2::run/2>`
 * :ref:`lgtunit <lgtunit/0::run/2>`
 * :ref:`particle_swarm_optimization(Problem,RandomAlgorithm) <particle_swarm_optimization/2::run/2>`
 * :ref:`simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing/2::run/2>`
@@ -24242,6 +24314,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ant_colony(Problem,RandomAlgorithm) <ant_colony/2::run/3>`
 * :ref:`differential_evolution(Problem,RandomAlgorithm) <differential_evolution/2::run/3>`
+* :ref:`genetic_algorithm(Problem,RandomAlgorithm) <genetic_algorithm/2::run/3>`
 * :ref:`particle_swarm_optimization(Problem,RandomAlgorithm) <particle_swarm_optimization/2::run/3>`
 * :ref:`simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing/2::run/3>`
 * :ref:`tabu_search(Problem,RandomAlgorithm) <tabu_search/2::run/3>`
@@ -24256,6 +24329,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ant_colony(Problem,RandomAlgorithm) <ant_colony/2::run/4>`
 * :ref:`differential_evolution(Problem,RandomAlgorithm) <differential_evolution/2::run/4>`
+* :ref:`genetic_algorithm(Problem,RandomAlgorithm) <genetic_algorithm/2::run/4>`
 * :ref:`particle_swarm_optimization(Problem,RandomAlgorithm) <particle_swarm_optimization/2::run/4>`
 * :ref:`simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing/2::run/4>`
 * :ref:`tabu_search(Problem,RandomAlgorithm) <tabu_search/2::run/4>`
@@ -26516,6 +26590,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`genetic_algorithm_problem_protocol <genetic_algorithm_problem_protocol/0::state_energy/2>`
 * :ref:`simulated_annealing_protocol <simulated_annealing_protocol/0::state_energy/2>`
 * :ref:`tabu_search_problem_protocol <tabu_search_problem_protocol/0::state_energy/2>`
 
@@ -26639,6 +26714,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ant_colony_problem_protocol <ant_colony_problem_protocol/0::stop_condition/3>`
 * :ref:`differential_evolution_problem_protocol <differential_evolution_problem_protocol/0::stop_condition/3>`
+* :ref:`genetic_algorithm_problem_protocol <genetic_algorithm_problem_protocol/0::stop_condition/3>`
 * :ref:`particle_swarm_optimization_protocol <particle_swarm_optimization_protocol/0::stop_condition/3>`
 * :ref:`simulated_annealing_protocol <simulated_annealing_protocol/0::stop_condition/3>`
 * :ref:`tabu_search_problem_protocol <tabu_search_problem_protocol/0::stop_condition/3>`

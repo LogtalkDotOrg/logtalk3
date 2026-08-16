@@ -283,6 +283,7 @@
 		command_line_options(loader),
 		ant_colony(loader),
 		differential_evolution(loader),
+		genetic_algorithm(loader),
 		particle_swarm_optimization(loader),
 		simulated_annealing(loader),
 		tabu_search(loader),

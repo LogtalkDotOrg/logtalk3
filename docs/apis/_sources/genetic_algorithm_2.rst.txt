@@ -1,0 +1,149 @@
+.. index:: single: genetic_algorithm(Problem,RandomAlgorithm)
+.. _genetic_algorithm/2:
+
+.. rst-class:: right
+
+**object**
+
+``genetic_algorithm(Problem,RandomAlgorithm)``
+==============================================
+
+* ``Problem`` - Problem object implementing ``genetic_algorithm_problem_protocol``.
+* ``RandomAlgorithm`` - Random number generator algorithm for the ``fast_random`` library (e.g. ``xoshiro128pp``, ``xoshiro256ss``, ``well512a``, ...).
+
+
+Genetic algorithm meta-heuristic optimizer. Parameterized by a problem object implementing the ``genetic_algorithm_problem_protocol`` protocol and by a random number generator algorithm for the ``fast_random`` library. The algorithm minimizes the energy (cost) function defined by the problem by default; maximization is supported via options. Custom stop conditions, diversity measures, progress reporting, and selection pressure can be defined by the problem object or configured via options; suitable defaults are used otherwise.
+
+| **Availability:** 
+|    ``logtalk_load(genetic_algorithm(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-16
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`fast_random(Algorithm) <fast_random/1>`
+|    :ref:`list <list/0>`
+|    :ref:`numberlist <numberlist/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+
+   - Algorithm: A generational genetic algorithm that maintains a population of individuals. Each generation applies selection, crossover, and mutation to produce the next population. Optional elitism preserves the best individuals across generations.
+   - Selection: Parent selection is controlled by the ``selection/1`` option. Supported schemes are ``tournament(K)`` (default ``tournament(3)``), ``roulette``, and ``rank``. Tournament samples K individuals and keeps the best; roulette selects proportionally to fitness derived from energy; rank selects proportionally to rank after sorting by objective.
+   - Crossover and mutation: Both operators are defined by the problem object. Crossover is applied with probability ``crossover_rate``; mutation is applied independently to each offspring with probability ``mutation_rate``. Rates may be held constant or adapted each generation via ``crossover_schedule/1`` and ``mutation_schedule/1`` options, or via optional problem hooks ``crossover_rate/4`` and ``mutation_rate/4`` (hooks take precedence over schedules).
+   - Elitism: When ``elite_size(N)`` is greater than zero, the best N individuals of the current population (clamped to the population size) are copied unchanged into the next generation. This preserves the best solutions found so far against disruption by crossover and mutation. Set ``elite_size(0)`` to disable elitism.
+   - Best individual tracking: The algorithm tracks the best individual found across all generations, not just the final population.
+   - Seed control: The ``seed(S)`` option initializes the random number generator for reproducible runs.
+   - Progress reporting: If the problem object defines ``progress/5``, it is called periodically with the current generation, best individual, best energy, mean population energy, and diversity. A final report is always produced when the loop terminates when updates are enabled.
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: run/2
+.. _genetic_algorithm/2::run/2:
+
+``run/2``
+^^^^^^^^^
+
+Runs the genetic algorithm using default options and returns the best individual found and its energy.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``run(BestIndividual,BestEnergy)``
+| **Mode and number of proofs:**
+|    ``run(-nonvar,-number)`` - ``one``
+
+
+------------
+
+.. index:: run/3
+.. _genetic_algorithm/2::run/3:
+
+``run/3``
+^^^^^^^^^
+
+Runs the genetic algorithm using the given options and returns the best individual found and its energy.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``run(BestIndividual,BestEnergy,Options)``
+| **Mode and number of proofs:**
+|    ``run(-nonvar,-number,+list(compound))`` - ``one``
+
+| **Remarks:**
+
+    - ``max_generations(N)`` option: Maximum number of generations (default: ``200``).
+    - ``population_size(N)`` option: Number of individuals in the population; must be at least 2 (default: ``50``).
+    - ``crossover_rate(P)`` option: Initial probability of applying crossover to a selected pair of parents (default: ``0.8``). Used as the constant rate when the schedule is ``constant``, and as the starting value for adaptive schedules.
+    - ``mutation_rate(P)`` option: Initial probability of mutating each offspring (default: ``0.1``). Used as the constant rate when the schedule is ``constant``, and as the starting value for adaptive schedules.
+    - ``crossover_schedule(Schedule)`` option: How the crossover rate evolves across generations: ``constant`` (default), ``linear(Initial, Final)`` interpolates from ``Initial`` to ``Final``, or ``geometric(Factor)`` multiplies the rate by ``Factor`` each generation (clamped to ``[0.0, 1.0]``). Overridden when the problem defines ``crossover_rate/4``.
+    - ``mutation_schedule(Schedule)`` option: How the mutation rate evolves across generations: ``constant`` (default), ``linear(Initial, Final)`` interpolates from ``Initial`` to ``Final``, or ``geometric(Factor)`` multiplies the rate by ``Factor`` each generation (clamped to ``[0.0, 1.0]``). Overridden when the problem defines ``mutation_rate/4``.
+    - ``selection(Scheme)`` option: Parent selection scheme: ``tournament(K)`` with positive integer K (default: ``tournament(3)``), ``roulette``, or ``rank``.
+    - ``elite_size(N)`` option: Number of best individuals preserved unchanged into the next generation (default: ``1``). Set to ``0`` to disable elitism.
+    - ``objective(Direction)`` option: Optimization direction: ``minimize`` (default) or ``maximize``.
+    - ``updates(N)`` option: Number of progress reports during the run. Set to ``0`` to disable. Progress is reported by calling ``progress/5`` on the problem object (default: ``0``).
+    - ``seed(S)`` option: Positive integer seed for the random number generator, enabling reproducible runs (default: none).
+
+
+------------
+
+.. index:: run/4
+.. _genetic_algorithm/2::run/4:
+
+``run/4``
+^^^^^^^^^
+
+Runs the genetic algorithm using the given options, returns the best individual found and its energy, and returns run statistics.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``run(BestIndividual,BestEnergy,Statistics,Options)``
+| **Mode and number of proofs:**
+|    ``run(-nonvar,-number,-list(compound),+list(compound))`` - ``one``
+
+| **Remarks:**
+
+    - Statistics list: A list of ``Key(Value)`` pairs: ``generations(N)`` is the number of generations executed, ``evaluations(E)`` is the total number of fitness evaluations, ``improvements(I)`` is the number of generations that improved the best energy, and ``final_population_size(S)`` is the size of the final population.
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`genetic_algorithm(Problem) <genetic_algorithm/1>`, :ref:`genetic_algorithm_problem_protocol <genetic_algorithm_problem_protocol/0>`
+
