@@ -139,6 +139,8 @@ Objects
    after_event_registry <after_event_registry_0>
    agglomerative_clusterer <agglomerative_clusterer_0>
    amqp <amqp_0>
+   ant_colony(Problem) <ant_colony_1>
+   ant_colony(Problem,RandomAlgorithm) <ant_colony_2>
    apriori_pattern_miner <apriori_pattern_miner_0>
    arithmetic_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <arithmetic_operator_replacement_5>
    arrangements <arrangements_0>
@@ -795,6 +797,7 @@ Protocols
 
    anomaly_dataset_protocol <anomaly_dataset_protocol_0>
    anomaly_detector_protocol <anomaly_detector_protocol_0>
+   ant_colony_problem_protocol <ant_colony_problem_protocol_0>
    application_protocol <application_protocol_0>
    arrangements_protocol <arrangements_protocol_0>
    assignvarsp <assignvarsp_0>

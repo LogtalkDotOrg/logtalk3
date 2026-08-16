@@ -1,0 +1,154 @@
+.. index:: single: ant_colony_problem_protocol
+.. _ant_colony_problem_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``ant_colony_problem_protocol``
+===============================
+
+Protocol for ant colony optimization problem definitions. A problem object must define the required predicates for constructive solution building on a construction graph (typically a complete graph over a set of nodes, as in the TSP). Optional predicates allow custom stopping and progress reporting.
+
+| **Availability:** 
+|    ``logtalk_load(ant_colony(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-16
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: nodes/1
+.. _ant_colony_problem_protocol/0::nodes/1:
+
+``nodes/1``
+^^^^^^^^^^^
+
+Returns the ordered list of nodes that form the construction graph. Solutions are permutations (or paths) over these nodes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``nodes(Nodes)``
+| **Mode and number of proofs:**
+|    ``nodes(-list)`` - ``one``
+
+
+------------
+
+.. index:: heuristic/3
+.. _ant_colony_problem_protocol/0::heuristic/3:
+
+``heuristic/3``
+^^^^^^^^^^^^^^^
+
+Returns the heuristic desirability ``Eta`` of moving from ``From`` to ``To``. Typically the reciprocal of a distance or cost. Must be strictly positive for every pair that can appear in a solution.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``heuristic(From,To,Eta)``
+| **Mode and number of proofs:**
+|    ``heuristic(+nonvar,+nonvar,-number)`` - ``one``
+
+
+------------
+
+.. index:: solution_cost/2
+.. _ant_colony_problem_protocol/0::solution_cost/2:
+
+``solution_cost/2``
+^^^^^^^^^^^^^^^^^^^
+
+Computes the cost (energy) of a complete solution (tour/path). The algorithm minimizes this value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``solution_cost(Solution,Cost)``
+| **Mode and number of proofs:**
+|    ``solution_cost(+list,-number)`` - ``one``
+
+
+------------
+
+.. index:: stop_condition/3
+.. _ant_colony_problem_protocol/0::stop_condition/3:
+
+``stop_condition/3``
+^^^^^^^^^^^^^^^^^^^^
+
+True when the search should stop given the current iteration, best cost found so far, and the cost of the iteration-best solution. Optional. When not defined by the problem, the search runs until the maximum number of iterations is reached.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``stop_condition(Iteration,BestCost,IterationBestCost)``
+| **Mode and number of proofs:**
+|    ``stop_condition(+non_negative_integer,+number,+number)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: progress/5
+.. _ant_colony_problem_protocol/0::progress/5:
+
+``progress/5``
+^^^^^^^^^^^^^^
+
+Called periodically to report optimization progress. Optional. When not defined by the problem, progress reporting is skipped. The rates are values between 0.0 and 1.0.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``progress(Iteration,BestCost,IterationBestCost,AcceptanceRate,ImprovementRate)``
+| **Mode and number of proofs:**
+|    ``progress(+non_negative_integer,+number,+number,+number,+number)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`ant_colony(Problem) <ant_colony/1>`
+

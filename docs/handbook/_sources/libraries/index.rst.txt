@@ -32,6 +32,7 @@ directory in the ``NOTES.md`` file.
    agglomerative_clusterer
    amqp
    anomaly_detection_protocols
+   ant_colony
    application
    apriori_pattern_miner
    arbitrary

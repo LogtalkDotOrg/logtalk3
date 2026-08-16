@@ -1,0 +1,150 @@
+.. index:: single: ant_colony(Problem,RandomAlgorithm)
+.. _ant_colony/2:
+
+.. rst-class:: right
+
+**object**
+
+``ant_colony(Problem,RandomAlgorithm)``
+=======================================
+
+* ``Problem`` - Problem object implementing ``ant_colony_problem_protocol``.
+* ``RandomAlgorithm`` - Random number generator algorithm for the ``fast_random`` library (e.g. ``xoshiro128pp``, ``xoshiro256ss``, ``well512a``, ...).
+
+
+Ant Colony Optimization (Ant System) metaheuristic. Parameterized by a problem object implementing the ``ant_colony_problem_protocol`` protocol and by a random number generator algorithm for the ``fast_random`` library. The algorithm minimizes the solution cost defined by the problem. Classic Ant System pheromone update, optional MAX-MIN pheromone bounds, candidate construction by probabilistic state transition, optional elitist reinforcement, progress reporting, and seed control are supported; suitable defaults are used otherwise.
+
+| **Availability:** 
+|    ``logtalk_load(ant_colony(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-16
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`fast_random(Algorithm) <fast_random/1>`
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+
+   - Algorithm: Ant Colony Optimization is a constructive metaheuristic inspired by the foraging behaviour of real ants. Artificial ants build solutions component by component on a construction graph, guided by pheromone trails and heuristic information. After each iteration the pheromone is evaporated and reinforced according to the quality of the constructed solutions.
+   - Pheromone model: Pheromone is stored on directed edges (From-To). Undirected problems should return symmetric heuristic values; the library treats edges as directed for generality.
+   - State transition: The probability of choosing next node ``j`` from ``i`` is proportional to ``Tau_ij^Alpha * Eta_ij^Beta``. Roulette-wheel selection is used among the yet-unvisited nodes.
+   - Pheromone update: Classic Ant System: every edge evaporates by factor ``(1-Rho)``, then each ant deposits ``Q / Cost`` on the edges of its tour. When ``elite(E)`` is greater than zero the global-best tour receives an extra ``E * Q / BestCost`` deposit. After each update every trail is clamped to the interval ``[tau_min, tau_max]`` (MAX-MIN style bounds).
+   - Candidate generation: Each ant constructs a complete tour by starting at a random node and repeatedly selecting the next unvisited node until the tour is closed.
+   - Progress reporting: If the problem object defines ``progress/5``, it is called periodically with the current iteration, best cost, iteration-best cost, a placeholder acceptance rate, and improvement rate. The reporting interval is controlled by the ``updates(N)`` option. A final report is always produced when the loop terminates.
+   - Best solution tracking: The algorithm tracks the best solution found across all iterations.
+   - Seed control: The ``seed(S)`` option initializes the random number generator for reproducible runs.
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: run/2
+.. _ant_colony/2::run/2:
+
+``run/2``
+^^^^^^^^^
+
+Runs the ant colony algorithm using default options and returns the best solution found and its cost.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``run(BestSolution,BestCost)``
+| **Mode and number of proofs:**
+|    ``run(-list,-number)`` - ``one``
+
+
+------------
+
+.. index:: run/3
+.. _ant_colony/2::run/3:
+
+``run/3``
+^^^^^^^^^
+
+Runs the ant colony algorithm using the given options and returns the best solution found and its cost.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``run(BestSolution,BestCost,Options)``
+| **Mode and number of proofs:**
+|    ``run(-list,-number,+list(compound))`` - ``one``
+
+| **Remarks:**
+
+    - ``max_iterations(N)`` option: Maximum number of iterations (default: ``100``).
+    - ``ants(N)`` option: Number of ants (solutions constructed) per iteration (default: ``10``).
+    - ``alpha(A)`` option: Pheromone importance exponent (default: ``1.0``).
+    - ``beta(B)`` option: Heuristic importance exponent (default: ``2.0``).
+    - ``rho(R)`` option: Evaporation rate in ``(0,1]`` (default: ``0.5``).
+    - ``q(Q)`` option: Pheromone deposit constant (default: ``100.0``).
+    - ``elite(E)`` option: Elitist weight: extra deposit factor for the global-best tour (default: ``0``).
+    - ``tau0(T)`` option: Initial pheromone level on every edge (default: ``1.0``). Clamped into ``[tau_min, tau_max]`` at initialization.
+    - ``tau_min(T)`` option: Lower bound on pheromone trails; must be strictly positive (default: ``1.0e-12``).
+    - ``tau_max(T)`` option: Upper bound on pheromone trails; must be strictly positive and at least ``tau_min`` (default: ``1.0e300``).
+    - ``updates(N)`` option: Number of progress reports during the run. Set to ``0`` to disable (default: ``0``).
+    - ``seed(S)`` option: Positive integer seed for the random number generator, enabling reproducible runs (default: none).
+
+
+------------
+
+.. index:: run/4
+.. _ant_colony/2::run/4:
+
+``run/4``
+^^^^^^^^^
+
+Runs the ant colony algorithm using the given options, returns the best solution found and its cost, and returns run statistics.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``run(BestSolution,BestCost,Statistics,Options)``
+| **Mode and number of proofs:**
+|    ``run(-list,-number,-list(compound),+list(compound))`` - ``one``
+
+| **Remarks:**
+
+    - Statistics list: A list of ``Key(Value)`` pairs: ``iterations(N)`` is the number of iterations executed, ``solutions(S)`` is the total number of solutions constructed, ``improvements(I)`` is the number of times the global best was improved, and ``final_best_cost(C)`` is the best cost found.
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`ant_colony(Problem) <ant_colony/1>`, :ref:`ant_colony_problem_protocol <ant_colony_problem_protocol/0>`
+

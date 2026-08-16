@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on August 15, 2026
+##   Last updated on August 16, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -83,6 +83,7 @@ Foreach-Object {
 (Get-Content ../../../library/agglomerative_clusterer/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/agglomerative_clusterer.rst
 (Get-Content ../../../library/amqp/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/amqp.rst
 (Get-Content ../../../library/anomaly_detection_protocols/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/anomaly_detection_protocols.rst
+(Get-Content ../../../library/ant_colony/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ant_colony.rst
 (Get-Content ../../../library/application/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/application.rst
 (Get-Content ../../../library/apriori_pattern_miner/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/apriori_pattern_miner.rst
 (Get-Content ../../../library/arbitrary/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/arbitrary.rst

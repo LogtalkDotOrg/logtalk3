@@ -11141,6 +11141,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`command_line_options <command_line_options/0::help/3>`
 
+``heuristic/3``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ant_colony_problem_protocol <ant_colony_problem_protocol/0::heuristic/3>`
+
 ``hex_bytes/2``
 ---------------
 
@@ -17203,6 +17213,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`debuggerp <debuggerp/0::nodebug/0>`
 
+``nodes/1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ant_colony_problem_protocol <ant_colony_problem_protocol/0::nodes/1>`
+
 ``nodes/2``
 -----------
 
@@ -21130,6 +21150,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`ant_colony_problem_protocol <ant_colony_problem_protocol/0::progress/5>`
 * :ref:`differential_evolution_problem_protocol <differential_evolution_problem_protocol/0::progress/5>`
 * :ref:`particle_swarm_optimization_protocol <particle_swarm_optimization_protocol/0::progress/5>`
 * :ref:`simulated_annealing_protocol <simulated_annealing_protocol/0::progress/5>`
@@ -24204,6 +24225,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`ant_colony(Problem,RandomAlgorithm) <ant_colony/2::run/2>`
 * :ref:`differential_evolution(Problem,RandomAlgorithm) <differential_evolution/2::run/2>`
 * :ref:`lgtunit <lgtunit/0::run/2>`
 * :ref:`particle_swarm_optimization(Problem,RandomAlgorithm) <particle_swarm_optimization/2::run/2>`
@@ -24218,6 +24240,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`ant_colony(Problem,RandomAlgorithm) <ant_colony/2::run/3>`
 * :ref:`differential_evolution(Problem,RandomAlgorithm) <differential_evolution/2::run/3>`
 * :ref:`particle_swarm_optimization(Problem,RandomAlgorithm) <particle_swarm_optimization/2::run/3>`
 * :ref:`simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing/2::run/3>`
@@ -24231,6 +24254,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`ant_colony(Problem,RandomAlgorithm) <ant_colony/2::run/4>`
 * :ref:`differential_evolution(Problem,RandomAlgorithm) <differential_evolution/2::run/4>`
 * :ref:`particle_swarm_optimization(Problem,RandomAlgorithm) <particle_swarm_optimization/2::run/4>`
 * :ref:`simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing/2::run/4>`
@@ -25887,6 +25911,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`application_protocol <application_protocol/0::software_heritage_identifier/1>`
 
+``solution_cost/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ant_colony_problem_protocol <ant_colony_problem_protocol/0::solution_cost/2>`
+
 ``solve_cholesky/3``
 --------------------
 
@@ -26603,6 +26637,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`ant_colony_problem_protocol <ant_colony_problem_protocol/0::stop_condition/3>`
 * :ref:`differential_evolution_problem_protocol <differential_evolution_problem_protocol/0::stop_condition/3>`
 * :ref:`particle_swarm_optimization_protocol <particle_swarm_optimization_protocol/0::stop_condition/3>`
 * :ref:`simulated_annealing_protocol <simulated_annealing_protocol/0::stop_condition/3>`

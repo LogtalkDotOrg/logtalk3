@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on August 15, 2026
+%  Last updated on August 16, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -112,6 +112,7 @@ logtalk_library_path(adaptive_boosting_classifier, library('adaptive_boosting_cl
 logtalk_library_path(agglomerative_clusterer, library('agglomerative_clusterer/')).
 logtalk_library_path(amqp, library('amqp/')).
 logtalk_library_path(anomaly_detection_protocols, library('anomaly_detection_protocols/')).
+logtalk_library_path(ant_colony, library('ant_colony/')).
 logtalk_library_path(application, library('application/')).
 logtalk_library_path(apriori_pattern_miner, library('apriori_pattern_miner/')).
 logtalk_library_path(arbitrary, library('arbitrary/')).

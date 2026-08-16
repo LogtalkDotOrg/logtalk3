@@ -88,10 +88,12 @@ Library groups
 	`block_ciphers`, `cmac`, `crypto`, `hashes`, `hmac`, `jwt`, `otp`, and `paseto`.
 - Randomness:
 	`arbitrary`, `mutations`, and `random`.
-- Mathematics, statistics, and optimization:
+- Mathematics and statistics:
 	`byte_order`, `ieee_754`, `linear_algebra`,
-    `univariate_distributions`, `multivariate_distributions`,
-    `differential_evolution`, `particle_swarm_optimization`, `simulated_annealing`, `statistics`, and `tabu_search`.
+    `univariate_distributions`, `multivariate_distributions`, and `statistics`,
+- Meta-heuristic optimization:
+    `ant_colony`, `differential_evolution`, `particle_swarm_optimization`,
+    `simulated_annealing`, and `tabu_search`.
 - Machine learning:
 	- Classification:
 		`classification_protocols`, `adaptive_boosting_classifier`, `c45_classifier`, `gradient_boosting_classifier`,

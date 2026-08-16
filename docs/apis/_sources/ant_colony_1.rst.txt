@@ -1,0 +1,63 @@
+.. index:: single: ant_colony(Problem)
+.. _ant_colony/1:
+
+.. rst-class:: right
+
+**object**
+
+``ant_colony(Problem)``
+=======================
+
+* ``Problem`` - Problem object implementing ``ant_colony_problem_protocol``.
+
+
+Ant colony optimization algorithm using the Xoshiro128++ random number generator. Convenience object that extends ``ant_colony/2`` with the random algorithm bound to ``xoshiro128pp``.
+
+| **Availability:** 
+|    ``logtalk_load(ant_colony(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-16
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`ant_colony(Problem,xoshiro128pp) <ant_colony/2>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`ant_colony/2::run/2`  :ref:`ant_colony/2::run/3`  :ref:`ant_colony/2::run/4`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`ant_colony(Problem,RandomAlgorithm) <ant_colony/2>`, :ref:`ant_colony_problem_protocol <ant_colony_problem_protocol/0>`
+

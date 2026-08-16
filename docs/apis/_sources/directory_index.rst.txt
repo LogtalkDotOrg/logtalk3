@@ -149,6 +149,18 @@ To load an entity, always load the library that includes it using the goal ``log
    anomaly_detector_common <anomaly_detector_common_0>
    anomaly_detector_protocol <anomaly_detector_protocol_0>
 
+``library/ant_colony/``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   ant_colony(Problem) <ant_colony_1>
+   ant_colony(Problem,RandomAlgorithm) <ant_colony_2>
+   ant_colony_problem_protocol <ant_colony_problem_protocol_0>
+
 ``library/application/``
 ------------------------
 

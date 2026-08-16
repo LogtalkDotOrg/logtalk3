@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on August 15, 2026
+##   Last updated on August 16, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -83,6 +83,7 @@ sed '1,19d' ../../../library/adaptive_boosting_classifier/NOTES.md | pandoc -f g
 sed '1,19d' ../../../library/agglomerative_clusterer/NOTES.md | pandoc -f gfm -t rst -o libraries/agglomerative_clusterer.rst
 sed '1,19d' ../../../library/amqp/NOTES.md | pandoc -f gfm -t rst -o libraries/amqp.rst
 sed '1,19d' ../../../library/anomaly_detection_protocols/NOTES.md | pandoc -f gfm -t rst -o libraries/anomaly_detection_protocols.rst
+sed '1,19d' ../../../library/ant_colony/NOTES.md | pandoc -f gfm -t rst -o libraries/ant_colony.rst
 sed '1,19d' ../../../library/application/NOTES.md | pandoc -f gfm -t rst -o libraries/application.rst
 sed '1,19d' ../../../library/apriori_pattern_miner/NOTES.md | pandoc -f gfm -t rst -o libraries/apriori_pattern_miner.rst
 sed '1,19d' ../../../library/arbitrary/NOTES.md | pandoc -f gfm -t rst -o libraries/arbitrary.rst
