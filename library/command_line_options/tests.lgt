@@ -219,7 +219,7 @@
 :- object(no_key_option,
 	imports(command_line_option)).
 
-	% Invalid: missing key/1 definition
+	% Invalid: missing name/1 definition
 	type(atom).
 
 	default(foo).

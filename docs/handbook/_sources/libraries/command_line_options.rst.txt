@@ -78,7 +78,7 @@ properties.
 Create an object that imports ``command_line_option`` and override the
 following predicates:
 
-- ``key/1``: The key used to identify this option in the result. This
+- ``name/1``: The name used to identify this option in the result. This
   predicate must be overridden.
 
 - ``short_flags/1``: List of single-character short flags (e.g., ``[v]``
