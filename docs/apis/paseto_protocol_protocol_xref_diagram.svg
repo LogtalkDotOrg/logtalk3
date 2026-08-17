@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-151 1531,-151 1531,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol paseto_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;08&#45;17, 19:57</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;08&#45;18, 00:25</text>
 <g id="clust1" class="cluster">
 <title>cluster_paseto_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="paseto_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 1507,-54.25 1507,-54.25 1513,-54.25 1519,-60.25 1519,-66.25 1519,-66.25 1519,-127 1519,-127 1519,-133 1513,-139 1507,-139 1507,-139 20,-139 20,-139 14,-139 8,-133 8,-127 8,-127 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e83be2462cf0e72b9ce5fbc67bda00f1b52b8d1d/library/paseto/paseto_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e83be2462cf0e72b9ce5fbc67bda00f1b52b8d1d/library/paseto/paseto_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/338c730f600f91490d21cf70a4c8adbe4b30b8f6/library/paseto/paseto_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/338c730f600f91490d21cf70a4c8adbe4b30b8f6/library/paseto/paseto_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-121.25" font-family="Monospace" font-size="10.00" fill="dimgray">paseto_protocol</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>local_key/1</title>
 <polygon fill="springgreen" stroke="black" points="118.38,-100.25 17.62,-100.25 17.62,-64.25 118.38,-64.25 118.38,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="25.62" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e83be2462cf0e72b9ce5fbc67bda00f1b52b8d1d/library/paseto/paseto_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e83be2462cf0e72b9ce5fbc67bda00f1b52b8d1d/library/paseto/paseto_protocol.lgt#L31">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/338c730f600f91490d21cf70a4c8adbe4b30b8f6/library/paseto/paseto_protocol.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/338c730f600f91490d21cf70a4c8adbe4b30b8f6/library/paseto/paseto_protocol.lgt#L31">
 <text xml:space="preserve" text-anchor="start" x="30.88" y="-84.12" font-family="Monospace" font-size="11.00">local_key/1</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>public_keypair/2</title>
 <polygon fill="springgreen" stroke="black" points="271.25,-100.25 136.75,-100.25 136.75,-64.25 271.25,-64.25 271.25,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="144.75" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e83be2462cf0e72b9ce5fbc67bda00f1b52b8d1d/library/paseto/paseto_protocol.lgt#L38" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e83be2462cf0e72b9ce5fbc67bda00f1b52b8d1d/library/paseto/paseto_protocol.lgt#L38">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/338c730f600f91490d21cf70a4c8adbe4b30b8f6/library/paseto/paseto_protocol.lgt#L38" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/338c730f600f91490d21cf70a4c8adbe4b30b8f6/library/paseto/paseto_protocol.lgt#L38">
 <text xml:space="preserve" text-anchor="start" x="150" y="-84.12" font-family="Monospace" font-size="11.00">public_keypair/2</text>
 </a>
 </g>
@@ -57,7 +57,7 @@
 <title>local_encrypt/3</title>
 <polygon fill="springgreen" stroke="black" points="416.88,-100.25 289.12,-100.25 289.12,-64.25 416.88,-64.25 416.88,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="297.12" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e83be2462cf0e72b9ce5fbc67bda00f1b52b8d1d/library/paseto/paseto_protocol.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e83be2462cf0e72b9ce5fbc67bda00f1b52b8d1d/library/paseto/paseto_protocol.lgt#L45">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/338c730f600f91490d21cf70a4c8adbe4b30b8f6/library/paseto/paseto_protocol.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/338c730f600f91490d21cf70a4c8adbe4b30b8f6/library/paseto/paseto_protocol.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="302.38" y="-84.12" font-family="Monospace" font-size="11.00">local_encrypt/3</text>
 </a>
 </g>
@@ -71,7 +71,7 @@
 <title>local_encrypt/5</title>
 <polygon fill="springgreen" stroke="black" points="562.88,-100.25 435.12,-100.25 435.12,-64.25 562.88,-64.25 562.88,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="443.12" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e83be2462cf0e72b9ce5fbc67bda00f1b52b8d1d/library/paseto/paseto_protocol.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e83be2462cf0e72b9ce5fbc67bda00f1b52b8d1d/library/paseto/paseto_protocol.lgt#L62">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/338c730f600f91490d21cf70a4c8adbe4b30b8f6/library/paseto/paseto_protocol.lgt#L62" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/338c730f600f91490d21cf70a4c8adbe4b30b8f6/library/paseto/paseto_protocol.lgt#L62">
 <text xml:space="preserve" text-anchor="start" x="448.38" y="-84.12" font-family="Monospace" font-size="11.00">local_encrypt/5</text>
 </a>
 </g>
@@ -85,7 +85,7 @@
 <title>local_decrypt/3</title>
 <polygon fill="springgreen" stroke="black" points="708.88,-100.25 581.12,-100.25 581.12,-64.25 708.88,-64.25 708.88,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="589.12" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e83be2462cf0e72b9ce5fbc67bda00f1b52b8d1d/library/paseto/paseto_protocol.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e83be2462cf0e72b9ce5fbc67bda00f1b52b8d1d/library/paseto/paseto_protocol.lgt#L87">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/338c730f600f91490d21cf70a4c8adbe4b30b8f6/library/paseto/paseto_protocol.lgt#L87" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/338c730f600f91490d21cf70a4c8adbe4b30b8f6/library/paseto/paseto_protocol.lgt#L87">
 <text xml:space="preserve" text-anchor="start" x="594.38" y="-84.12" font-family="Monospace" font-size="11.00">local_decrypt/3</text>
 </a>
 </g>
@@ -99,7 +99,7 @@
 <title>local_decrypt/5</title>
 <polygon fill="springgreen" stroke="black" points="854.88,-100.25 727.12,-100.25 727.12,-64.25 854.88,-64.25 854.88,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="735.12" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e83be2462cf0e72b9ce5fbc67bda00f1b52b8d1d/library/paseto/paseto_protocol.lgt#L103" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e83be2462cf0e72b9ce5fbc67bda00f1b52b8d1d/library/paseto/paseto_protocol.lgt#L103">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/338c730f600f91490d21cf70a4c8adbe4b30b8f6/library/paseto/paseto_protocol.lgt#L103" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/338c730f600f91490d21cf70a4c8adbe4b30b8f6/library/paseto/paseto_protocol.lgt#L103">
 <text xml:space="preserve" text-anchor="start" x="740.38" y="-84.12" font-family="Monospace" font-size="11.00">local_decrypt/5</text>
 </a>
 </g>
@@ -113,7 +113,7 @@
 <title>public_sign/3</title>
 <polygon fill="springgreen" stroke="black" points="987.12,-100.25 872.88,-100.25 872.88,-64.25 987.12,-64.25 987.12,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="880.88" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e83be2462cf0e72b9ce5fbc67bda00f1b52b8d1d/library/paseto/paseto_protocol.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e83be2462cf0e72b9ce5fbc67bda00f1b52b8d1d/library/paseto/paseto_protocol.lgt#L126">
+<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/338c730f600f91490d21cf70a4c8adbe4b30b8f6/library/paseto/paseto_protocol.lgt#L126" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/338c730f600f91490d21cf70a4c8adbe4b30b8f6/library/paseto/paseto_protocol.lgt#L126">
 <text xml:space="preserve" text-anchor="start" x="886.12" y="-84.12" font-family="Monospace" font-size="11.00">public_sign/3</text>
 </a>
 </g>
@@ -127,7 +127,7 @@
 <title>public_sign/5</title>
 <polygon fill="springgreen" stroke="black" points="1119.12,-100.25 1004.88,-100.25 1004.88,-64.25 1119.12,-64.25 1119.12,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="1012.88" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e83be2462cf0e72b9ce5fbc67bda00f1b52b8d1d/library/paseto/paseto_protocol.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e83be2462cf0e72b9ce5fbc67bda00f1b52b8d1d/library/paseto/paseto_protocol.lgt#L143">
+<g id="a_node8_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/338c730f600f91490d21cf70a4c8adbe4b30b8f6/library/paseto/paseto_protocol.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/338c730f600f91490d21cf70a4c8adbe4b30b8f6/library/paseto/paseto_protocol.lgt#L143">
 <text xml:space="preserve" text-anchor="start" x="1018.12" y="-84.12" font-family="Monospace" font-size="11.00">public_sign/5</text>
 </a>
 </g>
@@ -141,7 +141,7 @@
 <title>public_verify/3</title>
 <polygon fill="springgreen" stroke="black" points="1264.88,-100.25 1137.12,-100.25 1137.12,-64.25 1264.88,-64.25 1264.88,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="1145.12" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e83be2462cf0e72b9ce5fbc67bda00f1b52b8d1d/library/paseto/paseto_protocol.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e83be2462cf0e72b9ce5fbc67bda00f1b52b8d1d/library/paseto/paseto_protocol.lgt#L168">
+<g id="a_node9_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/338c730f600f91490d21cf70a4c8adbe4b30b8f6/library/paseto/paseto_protocol.lgt#L168" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/338c730f600f91490d21cf70a4c8adbe4b30b8f6/library/paseto/paseto_protocol.lgt#L168">
 <text xml:space="preserve" text-anchor="start" x="1150.38" y="-84.12" font-family="Monospace" font-size="11.00">public_verify/3</text>
 </a>
 </g>
@@ -155,7 +155,7 @@
 <title>public_verify/5</title>
 <polygon fill="springgreen" stroke="black" points="1410.88,-100.25 1283.12,-100.25 1283.12,-64.25 1410.88,-64.25 1410.88,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="1291.12" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e83be2462cf0e72b9ce5fbc67bda00f1b52b8d1d/library/paseto/paseto_protocol.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e83be2462cf0e72b9ce5fbc67bda00f1b52b8d1d/library/paseto/paseto_protocol.lgt#L184">
+<g id="a_node10_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/338c730f600f91490d21cf70a4c8adbe4b30b8f6/library/paseto/paseto_protocol.lgt#L184" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/338c730f600f91490d21cf70a4c8adbe4b30b8f6/library/paseto/paseto_protocol.lgt#L184">
 <text xml:space="preserve" text-anchor="start" x="1296.38" y="-84.12" font-family="Monospace" font-size="11.00">public_verify/5</text>
 </a>
 </g>
@@ -169,7 +169,7 @@
 <title>footer/2</title>
 <polygon fill="springgreen" stroke="black" points="1509.25,-100.25 1428.75,-100.25 1428.75,-64.25 1509.25,-64.25 1509.25,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="1436.75" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/e83be2462cf0e72b9ce5fbc67bda00f1b52b8d1d/library/paseto/paseto_protocol.lgt#L207" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/e83be2462cf0e72b9ce5fbc67bda00f1b52b8d1d/library/paseto/paseto_protocol.lgt#L207">
+<g id="a_node11_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/338c730f600f91490d21cf70a4c8adbe4b30b8f6/library/paseto/paseto_protocol.lgt#L207" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/338c730f600f91490d21cf70a4c8adbe4b30b8f6/library/paseto/paseto_protocol.lgt#L207">
 <text xml:space="preserve" text-anchor="start" x="1442" y="-84.12" font-family="Monospace" font-size="11.00">footer/2</text>
 </a>
 </g>
