@@ -2109,6 +2109,7 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
 
+   bfgs(Problem) <bfgs_1>
    conjugate_gradient(Problem) <conjugate_gradient_1>
    gradient_descent(Problem) <gradient_descent_1>
    local_optimization_problem_protocol <local_optimization_problem_protocol_0>

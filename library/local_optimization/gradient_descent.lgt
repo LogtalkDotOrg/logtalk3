@@ -36,7 +36,7 @@
 			'Direction' - 'For minimization the search direction is ``-gradient``; for maximization it is ``+gradient``.'
 		],
 		see_also is [
-			local_optimization_problem_protocol, local_optimization_solver, nelder_mead(_), conjugate_gradient(_)
+			local_optimization_problem_protocol, local_optimization_solver, bfgs(_), conjugate_gradient(_), nelder_mead(_)
 		]
 	]).
 

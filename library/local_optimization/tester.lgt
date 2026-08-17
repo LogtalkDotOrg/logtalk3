@@ -28,15 +28,16 @@
 	logtalk_load([
 		local_optimization_problem_protocol,
 		local_optimization_solver,
-		nelder_mead,
-		gradient_descent,
+		bfgs,
 		conjugate_gradient,
+		gradient_descent,
+		nelder_mead,
 		test_objects
 	], [
 		debug(on),
 		source_data(on)
 	]),
-	logtalk_load([tests, gradient_tests], [hook(lgtunit)]),
+	logtalk_load([tests, gradient_tests, bfgs_tests], [hook(lgtunit)]),
 	lgtunit::run_test_sets([
 		% derivative-free solvers (shared tests/1 suite)
 		tests(nelder_mead),
@@ -44,8 +45,9 @@
 		tests(gradient_descent),
 		gradient_tests(gradient_descent),
 		tests(conjugate_gradient),
-		gradient_tests(conjugate_gradient)
-		% tests(bfgs),
-		% gradient_tests(bfgs)
+		gradient_tests(conjugate_gradient),
+		tests(bfgs),
+		gradient_tests(bfgs),
+		bfgs_tests
 	])
 )).

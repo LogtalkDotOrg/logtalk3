@@ -34,6 +34,7 @@
 		length/2, memberchk/2
 	]).
 
+	cover(bfgs(_)).
 	cover(conjugate_gradient(_)).
 	cover(gradient_descent(_)).
 	cover(nelder_mead(_)).
@@ -180,6 +181,7 @@
 	% auxiliary predicates
 
 	no_gradient_solver :-
+		_Solver_ \== bfgs,
 		_Solver_ \== conjugate_gradient,
 		_Solver_ \== gradient_descent.
 

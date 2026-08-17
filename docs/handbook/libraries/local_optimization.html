@@ -248,6 +248,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#neldermead">Nelder–Mead</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gradient-descent">Gradient descent</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conjugate-gradient">Conjugate gradient</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bfgs">BFGS</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#common-options">Common options</a></li>
@@ -255,6 +256,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#neldermead-1">Nelder–Mead</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gradient-descent-1">Gradient descent</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conjugate-gradient-1">Conjugate gradient</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bfgs-1">BFGS</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#run-statistics">Run statistics</a></li>
@@ -265,6 +267,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#neldermead-2">Nelder–Mead</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gradient-descent-2">Gradient descent</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conjugate-gradient-2">Conjugate gradient</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bfgs-2">BFGS</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#maximization">Maximization</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#box-constrained-problem">Box-constrained problem</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#using-as-a-local-polisher-after-a-global-search">Using as a local polisher after a global search</a></li>
@@ -427,8 +430,8 @@
 <span id="library-local-optimization"></span><h1><code class="docutils literal notranslate"><span class="pre">local_optimization</span></code><a class="headerlink" href="#local-optimization" title="Link to this heading"></a></h1>
 <p>Classical local optimization methods for continuous problems. The
 library is intended both for standalone use and as a local polisher
-after a global metaheuristic (PSO, differential evolution, genetic
-algorithm, simulated annealing, tabu search, ant colony, \ldots).</p>
+after a global meta-heuristic (PSO, differential evolution, genetic
+algorithm, simulated annealing, tabu search, ant colony, …).</p>
 <p>Available solvers:</p>
 <ul class="simple">
 <li><p><strong>Nelder–Mead</strong> — derivative-free downhill simplex</p></li>
@@ -436,9 +439,10 @@ algorithm, simulated annealing, tabu search, ant colony, \ldots).</p>
 search</p></li>
 <li><p><strong>Conjugate gradient</strong> — Fletcher–Reeves or Polak–Ribière with
 restarts</p></li>
+<li><p><strong>BFGS</strong> — dense quasi-Newton with Armijo line search</p></li>
 </ul>
 <p>All solvers share the same problem protocol and the same <code class="docutils literal notranslate"><span class="pre">run/2-4</span></code>
-API. BFGS / L-BFGS are planned.</p>
+API. L-BFGS is planned.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -473,6 +477,7 @@ handling, bound projection, vector utilities, and progress reporting.</p></li>
 <code class="docutils literal notranslate"><span class="pre">gradient/2</span></code>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">conjugate_gradient(Problem)</span></code> — nonlinear CG (requires
 <code class="docutils literal notranslate"><span class="pre">gradient/2</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bfgs(Problem)</span></code> — dense quasi-Newton (requires <code class="docutils literal notranslate"><span class="pre">gradient/2</span></code>).</p></li>
 </ul>
 </section>
 <section id="defining-a-problem">
@@ -504,15 +509,16 @@ termination.</p></li>
 <h2>Solvers<a class="headerlink" href="#solvers" title="Link to this heading"></a></h2>
 <section id="neldermead">
 <h3>Nelder–Mead<a class="headerlink" href="#neldermead" title="Link to this heading"></a></h3>
-<p>Derivative-free simplex method. Maintains a simplex of (n+1) vertices in
-(n) dimensions. Each iteration reflects the worst vertex through the
-centroid of the remaining vertices and may expand, contract, or shrink.</p>
+<p>Derivative-free simplex method. Maintains a simplex of <code class="docutils literal notranslate"><span class="pre">N+1</span></code> vertices
+in <code class="docutils literal notranslate"><span class="pre">N</span></code> dimensions. Each iteration reflects the worst vertex through
+the centroid of the remaining vertices and may expand, contract, or
+shrink.</p>
 <p>Standard coefficients (overridable):</p>
 <ul class="simple">
-<li><p>reflection (\alpha = 1)</p></li>
-<li><p>expansion (\gamma = 2)</p></li>
-<li><p>contraction (\rho = 0.5)</p></li>
-<li><p>shrink (\sigma = 0.5)</p></li>
+<li><p>reflection <code class="docutils literal notranslate"><span class="pre">Alpha</span> <span class="pre">=</span> <span class="pre">1</span></code></p></li>
+<li><p>expansion <code class="docutils literal notranslate"><span class="pre">Gamma</span> <span class="pre">=</span> <span class="pre">2</span></code></p></li>
+<li><p>contraction <code class="docutils literal notranslate"><span class="pre">Rho</span> <span class="pre">=</span> <span class="pre">0.5</span></code></p></li>
+<li><p>shrink <code class="docutils literal notranslate"><span class="pre">Sigma</span> <span class="pre">=</span> <span class="pre">0.5</span></code></p></li>
 </ul>
 <p>The initial simplex is built from <code class="docutils literal notranslate"><span class="pre">initial_point/1</span></code> by perturbing each
 coordinate. The relative step size is controlled by <code class="docutils literal notranslate"><span class="pre">initial_step(S)</span></code>
@@ -520,8 +526,9 @@ coordinate. The relative step size is controlled by <code class="docutils litera
 </section>
 <section id="gradient-descent">
 <h3>Gradient descent<a class="headerlink" href="#gradient-descent" title="Link to this heading"></a></h3>
-<p>Steepest descent. The search direction is (-\nabla f) for minimization
-and (+\nabla f) for maximization. Requires <code class="docutils literal notranslate"><span class="pre">gradient/2</span></code>.</p>
+<p>Steepest descent. The search direction is the negative gradient of the
+objective for minimization and the positive gradient for maximization.
+Requires <code class="docutils literal notranslate"><span class="pre">gradient/2</span></code>.</p>
 <p>Line search options:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">line_search(armijo)</span></code> (default) — backtracking Armijo sufficient
@@ -536,13 +543,32 @@ decrease</p></li>
 conjugacy coefficients. Requires <code class="docutils literal notranslate"><span class="pre">gradient/2</span></code>.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">beta(polak_ribiere)</span></code> (default) — uses the standard PR+ truncation
-(\max(\beta, 0))</p></li>
+<code class="docutils literal notranslate"><span class="pre">max(Beta,</span> <span class="pre">0)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">beta(fletcher_reeves)</span></code> — classical FR formula</p></li>
 </ul>
 <p>The direction is reset to steepest descent every <code class="docutils literal notranslate"><span class="pre">restart(N)</span></code>
 iterations (default: problem dimension) and whenever the new direction
 is not sufficiently downhill (or uphill for maximization). Line search
 is backtracking Armijo.</p>
+</section>
+<section id="bfgs">
+<h3>BFGS<a class="headerlink" href="#bfgs" title="Link to this heading"></a></h3>
+<p>Dense quasi-Newton method. Maintains an approximation to the inverse
+Hessian, updated after every accepted step with the standard BFGS
+rank-two formula; the approximation starts at the identity matrix (so
+the first step is plain steepest descent). Requires <code class="docutils literal notranslate"><span class="pre">gradient/2</span></code>.</p>
+<p>Internally, maximization is handled by minimizing the negated objective
+and gradient, so the quasi-Newton direction, curvature test, and Armijo
+condition are always expressed in minimization form — this sidesteps the
+sign-handling pitfalls of an explicit minimize/maximize branch in the
+line search.</p>
+<p>The inverse-Hessian update is skipped, keeping the previous
+approximation, whenever the curvature condition is not comfortably
+satisfied, to preserve positive definiteness. An optional <code class="docutils literal notranslate"><span class="pre">restart(N)</span></code>
+periodically resets the approximation to the identity matrix, mirroring
+<code class="docutils literal notranslate"><span class="pre">conjugate_gradient</span></code>’s direction restarts (off by default).</p>
+<p>Line search is backtracking Armijo, with the same options and defaults
+as gradient descent and conjugate gradient.</p>
 </section>
 </section>
 <section id="common-options">
@@ -592,7 +618,17 @@ the target; use <code class="docutils literal notranslate"><span class="pre">non
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">beta(polak_ribiere|fletcher_reeves)</span></code> — default <code class="docutils literal notranslate"><span class="pre">polak_ribiere</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">restart(dimension|N)</span></code> — reset interval; <code class="docutils literal notranslate"><span class="pre">dimension</span></code> means every
-(n) iterations (default <code class="docutils literal notranslate"><span class="pre">dimension</span></code>)</p></li>
+<code class="docutils literal notranslate"><span class="pre">N</span></code> iterations (default <code class="docutils literal notranslate"><span class="pre">dimension</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">step_size(S)</span></code>, <code class="docutils literal notranslate"><span class="pre">armijo_c(C)</span></code>, <code class="docutils literal notranslate"><span class="pre">armijo_tau(T)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">armijo_max_backtracks(N)</span></code> — same meaning as for gradient descent</p></li>
+</ul>
+</section>
+<section id="bfgs-1">
+<span id="id4"></span><h3>BFGS<a class="headerlink" href="#bfgs-1" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">restart(none|dimension|N)</span></code> — periodic inverse-Hessian reset
+interval; <code class="docutils literal notranslate"><span class="pre">none</span></code> disables periodic resets (default), <code class="docutils literal notranslate"><span class="pre">dimension</span></code>
+means every <code class="docutils literal notranslate"><span class="pre">N</span></code> iterations</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">step_size(S)</span></code>, <code class="docutils literal notranslate"><span class="pre">armijo_c(C)</span></code>, <code class="docutils literal notranslate"><span class="pre">armijo_tau(T)</span></code>,
 <code class="docutils literal notranslate"><span class="pre">armijo_max_backtracks(N)</span></code> — same meaning as for gradient descent</p></li>
 </ul>
@@ -611,7 +647,7 @@ all solvers:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">final_simplex_size(S)</span></code> — maximum edge length of the final simplex</p></li>
 </ul>
-<p>Gradient descent and conjugate gradient additionally report:</p>
+<p>Gradient descent, conjugate gradient, and BFGS additionally report:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">gradient_evaluations(G)</span></code> — number of gradient evaluations</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">final_gradient_norm(N)</span></code> — Euclidean norm of the final gradient</p></li>
@@ -629,7 +665,10 @@ active.</p></li>
 <li><p>Projected steps after a conjugate-gradient update can weaken
 conjugacy; a pure bound-constrained CG formulation is not yet
 implemented.</p></li>
-<li><p>BFGS / L-BFGS are not yet available.</p></li>
+<li><p>Projected steps after a BFGS update can similarly weaken the
+quasi-Newton model; a pure bound-constrained formulation (L-BFGS-B
+style) is not yet implemented.</p></li>
+<li><p>L-BFGS is not yet available.</p></li>
 </ul>
 </section>
 <section id="usage">
@@ -667,7 +706,7 @@ implemented.</p></li>
 </div>
 </section>
 <section id="neldermead-2">
-<span id="id4"></span><h3>Nelder–Mead<a class="headerlink" href="#neldermead-2" title="Link to this heading"></a></h3>
+<span id="id5"></span><h3>Nelder–Mead<a class="headerlink" href="#neldermead-2" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> nelder_mead(rosenbrock)<span class="o">::</span>run(<span class="nv">Point</span>, <span class="nv">Value</span>).
 
 | <span class="o">?-</span> nelder_mead(rosenbrock)<span class="o">::</span>run(
@@ -678,7 +717,7 @@ implemented.</p></li>
 </div>
 </section>
 <section id="gradient-descent-2">
-<span id="id5"></span><h3>Gradient descent<a class="headerlink" href="#gradient-descent-2" title="Link to this heading"></a></h3>
+<span id="id6"></span><h3>Gradient descent<a class="headerlink" href="#gradient-descent-2" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> gradient_descent(sphere)<span class="o">::</span>run(<span class="nv">Point</span>, <span class="nv">Value</span>).
 
 | <span class="o">?-</span> gradient_descent(sphere)<span class="o">::</span>run(
@@ -694,7 +733,7 @@ implemented.</p></li>
 </div>
 </section>
 <section id="conjugate-gradient-2">
-<span id="id6"></span><h3>Conjugate gradient<a class="headerlink" href="#conjugate-gradient-2" title="Link to this heading"></a></h3>
+<span id="id7"></span><h3>Conjugate gradient<a class="headerlink" href="#conjugate-gradient-2" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> conjugate_gradient(rosenbrock)<span class="o">::</span>run(<span class="nv">Point</span>, <span class="nv">Value</span>).
 
 | <span class="o">?-</span> conjugate_gradient(rosenbrock)<span class="o">::</span>run(
@@ -705,6 +744,22 @@ implemented.</p></li>
 | <span class="o">?-</span> conjugate_gradient(sphere)<span class="o">::</span>run(
          <span class="nv">Point</span>, <span class="nv">Value</span>,
          [beta(fletcher_reeves), restart(<span class="m">10</span>), max_iterations(<span class="m">100</span>)]
+     ).
+</pre></div>
+</div>
+</section>
+<section id="bfgs-2">
+<span id="id8"></span><h3>BFGS<a class="headerlink" href="#bfgs-2" title="Link to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> bfgs(rosenbrock)<span class="o">::</span>run(<span class="nv">Point</span>, <span class="nv">Value</span>).
+
+| <span class="o">?-</span> bfgs(rosenbrock)<span class="o">::</span>run(
+         <span class="nv">Point</span>, <span class="nv">Value</span>, <span class="nv">Statistics</span>,
+         [max_iterations(<span class="m">200</span>), tol_g(<span class="m">1.0e-10</span>)]
+     ).
+
+| <span class="o">?-</span> bfgs(sphere)<span class="o">::</span>run(
+         <span class="nv">Point</span>, <span class="nv">Value</span>,
+         [restart(dimension), max_iterations(<span class="m">100</span>)]
      ).
 </pre></div>
 </div>
@@ -759,10 +814,9 @@ implemented.</p></li>
 <section id="planned-solvers">
 <h2>Planned solvers<a class="headerlink" href="#planned-solvers" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>BFGS (dense quasi-Newton)</p></li>
 <li><p>L-BFGS (limited-memory quasi-Newton)</p></li>
 </ul>
-<p>Both will implement the same <code class="docutils literal notranslate"><span class="pre">run/2-4</span></code> API and reuse
+<p>Will implement the same <code class="docutils literal notranslate"><span class="pre">run/2-4</span></code> API and reuse
 <code class="docutils literal notranslate"><span class="pre">local_optimization_problem_protocol</span></code> and
 <code class="docutils literal notranslate"><span class="pre">local_optimization_solver</span></code>.</p>
 </section>

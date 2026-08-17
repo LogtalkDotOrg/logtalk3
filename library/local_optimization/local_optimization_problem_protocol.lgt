@@ -26,7 +26,7 @@
 		author is 'Paulo Moura',
 		date is 2026-08-17,
 		comment is 'Protocol for continuous local-optimization problem definitions. A problem object must define the required predicates and may optionally define gradient, Hessian, bounds, stopping, and progress predicates. The same problem object can be used by any solver in the local_optimization library and by the existing global metaheuristics (PSO, DE, ...).',
-		see_also is [local_optimization_solver, nelder_mead(_), gradient_descent(_), conjugate_gradient(_)]
+		see_also is [local_optimization_solver, bfgs(_), conjugate_gradient(_), gradient_descent(_), nelder_mead(_)]
 	]).
 
 	% required predicates

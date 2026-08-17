@@ -31,9 +31,10 @@ Available solvers:
 - **Nelder–Mead** — derivative-free downhill simplex
 - **Gradient descent** — steepest descent with Armijo or fixed line search
 - **Conjugate gradient** — Fletcher–Reeves or Polak–Ribière with restarts
+- **BFGS** — dense quasi-Newton with Armijo line search
 
 All solvers share the same problem protocol and the same `run/2-4` API.
-BFGS / L-BFGS are planned.
+L-BFGS is planned.
 
 
 API documentation
@@ -70,6 +71,7 @@ Architecture
 - `nelder_mead(Problem)` — Nelder–Mead simplex solver (derivative-free).
 - `gradient_descent(Problem)` — steepest descent (requires `gradient/2`).
 - `conjugate_gradient(Problem)` — nonlinear CG (requires `gradient/2`).
+- `bfgs(Problem)` — dense quasi-Newton (requires `gradient/2`).
 
 
 Defining a problem
@@ -101,16 +103,16 @@ Solvers
 
 ### Nelder–Mead
 
-Derivative-free simplex method. Maintains a simplex of \(n+1\) vertices in
-\(n\) dimensions. Each iteration reflects the worst vertex through the
+Derivative-free simplex method. Maintains a simplex of `N+1` vertices in
+`N` dimensions. Each iteration reflects the worst vertex through the
 centroid of the remaining vertices and may expand, contract, or shrink.
 
 Standard coefficients (overridable):
 
-- reflection \(\alpha = 1\)
-- expansion \(\gamma = 2\)
-- contraction \(\rho = 0.5\)
-- shrink \(\sigma = 0.5\)
+- reflection `Alpha = 1`
+- expansion `Gamma = 2`
+- contraction `Rho = 0.5`
+- shrink `Sigma = 0.5`
 
 The initial simplex is built from `initial_point/1` by perturbing each
 coordinate. The relative step size is controlled by `initial_step(S)`
@@ -119,8 +121,9 @@ coordinate. The relative step size is controlled by `initial_step(S)`
 
 ### Gradient descent
 
-Steepest descent. The search direction is \(-\nabla f\) for minimization
-and \(+\nabla f\) for maximization. Requires `gradient/2`.
+Steepest descent. The search direction is the negative gradient of the
+objective for minimization and the positive gradient for maximization.
+Requires `gradient/2`.
 
 Line search options:
 
@@ -136,13 +139,36 @@ Nonlinear conjugate gradient with Fletcher–Reeves or Polak–Ribière
 conjugacy coefficients. Requires `gradient/2`.
 
 - `beta(polak_ribiere)` (default) — uses the standard PR+ truncation
-  \(\max(\beta, 0)\)
+  `max(Beta, 0)`
 - `beta(fletcher_reeves)` — classical FR formula
 
 The direction is reset to steepest descent every `restart(N)` iterations
 (default: problem dimension) and whenever the new direction is not
 sufficiently downhill (or uphill for maximization). Line search is
 backtracking Armijo.
+
+
+### BFGS
+
+Dense quasi-Newton method. Maintains an approximation to the inverse
+Hessian, updated after every accepted step with the standard BFGS
+rank-two formula; the approximation starts at the identity matrix (so
+the first step is plain steepest descent). Requires `gradient/2`.
+
+Internally, maximization is handled by minimizing the negated objective
+and gradient, so the quasi-Newton direction, curvature test, and Armijo
+condition are always expressed in minimization form — this sidesteps
+the sign-handling pitfalls of an explicit minimize/maximize branch in
+the line search.
+
+The inverse-Hessian update is skipped, keeping the previous approximation,
+whenever the curvature condition is not comfortably satisfied, to preserve
+positive definiteness. An optional `restart(N)` periodically resets the
+approximation to the identity matrix, mirroring `conjugate_gradient`'s
+direction restarts (off by default).
+
+Line search is backtracking Armijo, with the same options and defaults
+as gradient descent and conjugate gradient.
 
 
 Common options
@@ -187,8 +213,16 @@ Solver-specific options
 ### Conjugate gradient
 
 - `beta(polak_ribiere|fletcher_reeves)` — default `polak_ribiere`
-- `restart(dimension|N)` — reset interval; `dimension` means every \(n\)
+- `restart(dimension|N)` — reset interval; `dimension` means every `N`
   iterations (default `dimension`)
+- `step_size(S)`, `armijo_c(C)`, `armijo_tau(T)`,
+  `armijo_max_backtracks(N)` — same meaning as for gradient descent
+
+### BFGS
+
+- `restart(none|dimension|N)` — periodic inverse-Hessian reset interval;
+  `none` disables periodic resets (default), `dimension` means every
+  `N` iterations
 - `step_size(S)`, `armijo_c(C)`, `armijo_tau(T)`,
   `armijo_max_backtracks(N)` — same meaning as for gradient descent
 
@@ -207,7 +241,7 @@ Nelder–Mead additionally reports:
 
 - `final_simplex_size(S)` — maximum edge length of the final simplex
 
-Gradient descent and conjugate gradient additionally report:
+Gradient descent, conjugate gradient, and BFGS additionally report:
 
 - `gradient_evaluations(G)` — number of gradient evaluations
 - `final_gradient_norm(N)` — Euclidean norm of the final gradient
@@ -223,7 +257,10 @@ Limitations
 - Nelder–Mead adaptive (Gao–Han) coefficients are stubbed but not active.
 - Projected steps after a conjugate-gradient update can weaken conjugacy;
   a pure bound-constrained CG formulation is not yet implemented.
-- BFGS / L-BFGS are not yet available.
+- Projected steps after a BFGS update can similarly weaken the
+  quasi-Newton model; a pure bound-constrained formulation
+  (L-BFGS-B style) is not yet implemented.
+- L-BFGS is not yet available.
 
 
 Usage
@@ -294,6 +331,20 @@ Usage
 	         [beta(fletcher_reeves), restart(10), max_iterations(100)]
 	     ).
 
+### BFGS
+
+	| ?- bfgs(rosenbrock)::run(Point, Value).
+
+	| ?- bfgs(rosenbrock)::run(
+	         Point, Value, Statistics,
+	         [max_iterations(200), tol_g(1.0e-10)]
+	     ).
+
+	| ?- bfgs(sphere)::run(
+	         Point, Value,
+	         [restart(dimension), max_iterations(100)]
+	     ).
+
 ### Maximization
 
 	| ?- gradient_descent(negative_sphere)::run(
@@ -338,8 +389,7 @@ Usage
 Planned solvers
 ---------------
 
-- BFGS (dense quasi-Newton)
 - L-BFGS (limited-memory quasi-Newton)
 
-Both will implement the same `run/2-4` API and reuse
+Will implement the same `run/2-4` API and reuse
 `local_optimization_problem_protocol` and `local_optimization_solver`.

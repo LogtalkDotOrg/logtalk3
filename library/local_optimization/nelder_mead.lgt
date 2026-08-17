@@ -47,7 +47,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, last/2, length/2, nth1/3, member/2, reverse/2
+		append/3, last/2, length/2, nth1/3, reverse/2
 	]).
 
 	% public entry point

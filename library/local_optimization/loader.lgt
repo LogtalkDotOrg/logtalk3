@@ -26,9 +26,10 @@
 	logtalk_load([
 		local_optimization_problem_protocol,
 		local_optimization_solver,
-		nelder_mead,
+		bfgs,
+		conjugate_gradient,
 		gradient_descent,
-		conjugate_gradient
+		nelder_mead
 	], [
 		optimize(on)
 	])

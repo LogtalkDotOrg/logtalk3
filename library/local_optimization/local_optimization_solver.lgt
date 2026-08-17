@@ -88,7 +88,7 @@
 	:- mode(report_final(+non_negative_integer, +non_negative_integer, +list(number), +number, +number), one).
 
 	:- uses(list, [
-		member/2
+		length/2, member/2
 	]).
 
 	% default public entry points (solvers may override)

@@ -37,7 +37,7 @@
 			'Bounds' - 'When the problem defines ``position_bounds/1``, trial points are projected onto the box after each step.'
 		],
 		see_also is [
-			local_optimization_problem_protocol, local_optimization_solver, gradient_descent(_), nelder_mead(_)
+			local_optimization_problem_protocol, local_optimization_solver, bfgs(_), gradient_descent(_), nelder_mead(_)
 		]
 	]).
 
