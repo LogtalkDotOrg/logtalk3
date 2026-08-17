@@ -196,6 +196,7 @@ directory in the ``NOTES.md`` file.
    linear_regression
    linear_svm_classifier
    listing
+   local_optimization
    lof_anomaly_detector
    logging
    logistic_regression_classifier

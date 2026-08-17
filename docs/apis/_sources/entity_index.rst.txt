@@ -78,6 +78,7 @@ Categories
    linda_client <linda_client_0>
    linda_server <linda_server_0>
    listing <listing_0>
+   local_optimization_solver <local_optimization_solver_0>
    logging <logging_0>
    mapped_single_byte_character_set <mapped_single_byte_character_set_0>
    mcp_server_application <mcp_server_application_0>
@@ -216,6 +217,7 @@ Objects
    combinations <combinations_0>
    command_line_options <command_line_options_0>
    compound <compound_0>
+   conjugate_gradient(Problem) <conjugate_gradient_1>
    copeland_ranker <copeland_ranker_0>
    coroutining <coroutining_0>
    counter <counter_0>
@@ -322,6 +324,7 @@ Objects
    gpx <gpx_0>
    gradient_boosting_classifier <gradient_boosting_classifier_0>
    gradient_boosting_regression <gradient_boosting_regression_0>
+   gradient_descent(Problem) <gradient_descent_1>
    grammar_rules_hook <grammar_rules_hook_0>
    graph_language_registry <graph_language_registry_0>
    gravatar <gravatar_0>
@@ -545,6 +548,7 @@ Objects
    navltree <navltree_0>
    nbintree <nbintree_0>
    nearest_centroid_classifier <nearest_centroid_classifier_0>
+   nelder_mead(Problem) <nelder_mead_1>
    nmea <nmea_0>
    nmf_projection <nmf_projection_0>
    noc_metric <noc_metric_0>
@@ -893,6 +897,7 @@ Protocols
    lgtdocp <lgtdocp_0>
    linear_algebra_protocol <linear_algebra_protocol_0>
    listp <listp_0>
+   local_optimization_problem_protocol <local_optimization_problem_protocol_0>
    loggingp <loggingp_0>
    loopp <loopp_0>
    mcp_cache_protocol <mcp_cache_protocol_0>

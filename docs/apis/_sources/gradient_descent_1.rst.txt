@@ -1,0 +1,69 @@
+.. index:: single: gradient_descent(Problem)
+.. _gradient_descent/1:
+
+.. rst-class:: right
+
+**object**
+
+``gradient_descent(Problem)``
+=============================
+
+* ``Problem`` - Problem object implementing ``local_optimization_problem_protocol`` and defining ``gradient/2``.
+
+
+Gradient descent (steepest descent) local optimizer with optional backtracking Armijo line search. Requires the problem to define ``gradient/2``. Supports box constraints via projection, minimization and maximization.
+
+| **Availability:** 
+|    ``logtalk_load(local_optimization(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-17
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`local_optimization_solver <local_optimization_solver/0>`
+| **Uses:**
+|    :ref:`linear_algebra <linear_algebra/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+
+   - Line search: The ``line_search(armijo)`` option (default) uses backtracking Armijo line search. The ``line_search(fixed)`` option uses a constant step size given by ``step_size(S)``.
+   - Bounds: When the problem defines ``position_bounds/1``, the gradient step is projected onto the box (projected gradient descent).
+   - Direction: For minimization the search direction is ``-gradient``; for maximization it is ``+gradient``.
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`local_optimization_solver/0::run/2`  :ref:`local_optimization_solver/0::run/3`  :ref:`local_optimization_solver/0::run/4`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`local_optimization_problem_protocol <local_optimization_problem_protocol/0>`, :ref:`local_optimization_solver <local_optimization_solver/0>`, :ref:`nelder_mead(Problem) <nelder_mead/1>`, :ref:`conjugate_gradient(Problem) <conjugate_gradient/1>`
+

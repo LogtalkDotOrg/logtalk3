@@ -1,0 +1,192 @@
+.. index:: single: local_optimization_problem_protocol
+.. _local_optimization_problem_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``local_optimization_problem_protocol``
+=======================================
+
+Protocol for continuous local-optimization problem definitions. A problem object must define the required predicates and may optionally define gradient, Hessian, bounds, stopping, and progress predicates. The same problem object can be used by any solver in the local_optimization library and by the existing global metaheuristics (PSO, DE, ...).
+
+| **Availability:** 
+|    ``logtalk_load(local_optimization(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-17
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: initial_point/1
+.. _local_optimization_problem_protocol/0::initial_point/1:
+
+``initial_point/1``
+^^^^^^^^^^^^^^^^^^^
+
+Returns a starting point for the local search. The point must be a non-empty list of numbers. When position bounds are defined, the point must lie inside those bounds.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``initial_point(Point)``
+| **Mode and number of proofs:**
+|    ``initial_point(-list(number))`` - ``one``
+
+
+------------
+
+.. index:: objective/2
+.. _local_optimization_problem_protocol/0::objective/2:
+
+``objective/2``
+^^^^^^^^^^^^^^^
+
+Computes the objective (cost) value of a point. Solvers minimize this value by default; use the ``objective(maximize)`` option to maximize it instead. The returned value must be a number.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``objective(Point,Value)``
+| **Mode and number of proofs:**
+|    ``objective(+list(number),-number)`` - ``one``
+
+
+------------
+
+.. index:: gradient/2
+.. _local_optimization_problem_protocol/0::gradient/2:
+
+``gradient/2``
+^^^^^^^^^^^^^^
+
+Optional. Computes the gradient of the objective at a point. Required by gradient-based solvers (gradient descent, conjugate gradient, BFGS, ...). When not defined those solvers raise an existence error. The returned vector must have the same length as the point.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``gradient(Point,Gradient)``
+| **Mode and number of proofs:**
+|    ``gradient(+list(number),-list(number))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: hessian/2
+.. _local_optimization_problem_protocol/0::hessian/2:
+
+``hessian/2``
+^^^^^^^^^^^^^
+
+Optional. Computes the Hessian matrix of the objective at a point (list of rows). Useful for Newton methods and for verifying quasi-Newton approximations. Not required by the current solvers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``hessian(Point,Hessian)``
+| **Mode and number of proofs:**
+|    ``hessian(+list(number),-list(list(number)))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: position_bounds/1
+.. _local_optimization_problem_protocol/0::position_bounds/1:
+
+``position_bounds/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Optional. Returns one ``Lower-Upper`` numeric bound pair per dimension, with ``Lower =< Upper``. When defined, solvers that support bounds project or clamp trial points onto the box. When not defined the search is treated as unbounded.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``position_bounds(Bounds)``
+| **Mode and number of proofs:**
+|    ``position_bounds(-list(pair))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: stop_condition/3
+.. _local_optimization_problem_protocol/0::stop_condition/3:
+
+``stop_condition/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Optional. True when the search should stop given the completed iteration count, the current best point, and its objective value. When not defined the solver runs until its own termination criteria (maximum iterations, tolerances, ...) are met.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``stop_condition(Iteration,BestPoint,BestValue)``
+| **Mode and number of proofs:**
+|    ``stop_condition(+non_negative_integer,+list(number),+number)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: progress/5
+.. _local_optimization_problem_protocol/0::progress/5:
+
+``progress/5``
+^^^^^^^^^^^^^^
+
+Optional. Called periodically to report progress. Arguments are the completed iteration count, current best point, best objective value, a solver-specific measure of step size or gradient norm, and the number of objective evaluations so far. A final call is made when the solver terminates if progress reporting is enabled.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``progress(Iteration,BestPoint,BestValue,Measure,Evaluations)``
+| **Mode and number of proofs:**
+|    ``progress(+non_negative_integer,+list(number),+number,+number,+number)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`local_optimization_solver <local_optimization_solver/0>`, :ref:`nelder_mead(Problem) <nelder_mead/1>`, :ref:`gradient_descent(Problem) <gradient_descent/1>`, :ref:`conjugate_gradient(Problem) <conjugate_gradient/1>`
+

@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on August 16, 2026
+%  Last updated on August 17, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -201,6 +201,7 @@ logtalk_library_path(linear_algebra, library('linear_algebra/')).
 logtalk_library_path(linear_regression, library('linear_regression/')).
 logtalk_library_path(linear_svm_classifier, library('linear_svm_classifier/')).
 logtalk_library_path(listing, library('listing/')).
+logtalk_library_path(local_optimization, library('local_optimization/')).
 logtalk_library_path(lof_anomaly_detector, library('lof_anomaly_detector/')).
 logtalk_library_path(logging, library('logging/')).
 logtalk_library_path(logistic_regression_classifier, library('logistic_regression_classifier/')).

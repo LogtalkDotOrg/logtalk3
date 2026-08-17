@@ -10527,6 +10527,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`gpx_protocol <gpx_protocol/0::gpx_to_xml/2>`
 
+``gradient/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`local_optimization_problem_protocol <local_optimization_problem_protocol/0::gradient/2>`
+
 ``gram_matrix/2``
 -----------------
 
@@ -11171,6 +11181,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`command_line_options <command_line_options/0::help/3>`
 
+``hessian/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`local_optimization_problem_protocol <local_optimization_problem_protocol/0::hessian/2>`
+
 ``heuristic/3``
 ---------------
 
@@ -11743,6 +11763,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ccsds_packet_services <ccsds_packet_services/0::initial_channel_reassembly_state/1>`
+
+``initial_point/1``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`local_optimization_problem_protocol <local_optimization_problem_protocol/0::initial_point/1>`
 
 ``initial_population/1``
 ------------------------
@@ -18086,6 +18116,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`string_distance(Representation) <string_distance/1::nysiis_match/2>`
 
+``objective/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`local_optimization_problem_protocol <local_optimization_problem_protocol/0::objective/2>`
+
 ``occurrences/2``
 -----------------
 
@@ -20311,6 +20351,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`differential_evolution_problem_protocol <differential_evolution_problem_protocol/0::position_bounds/1>`
+* :ref:`local_optimization_problem_protocol <local_optimization_problem_protocol/0::position_bounds/1>`
 * :ref:`particle_swarm_optimization_protocol <particle_swarm_optimization_protocol/0::position_bounds/1>`
 
 ``possible/4``
@@ -21213,6 +21254,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ant_colony_problem_protocol <ant_colony_problem_protocol/0::progress/5>`
 * :ref:`differential_evolution_problem_protocol <differential_evolution_problem_protocol/0::progress/5>`
 * :ref:`genetic_algorithm_problem_protocol <genetic_algorithm_problem_protocol/0::progress/5>`
+* :ref:`local_optimization_problem_protocol <local_optimization_problem_protocol/0::progress/5>`
 * :ref:`particle_swarm_optimization_protocol <particle_swarm_optimization_protocol/0::progress/5>`
 * :ref:`simulated_annealing_protocol <simulated_annealing_protocol/0::progress/5>`
 * :ref:`tabu_search_problem_protocol <tabu_search_problem_protocol/0::progress/5>`
@@ -24300,6 +24342,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`differential_evolution(Problem,RandomAlgorithm) <differential_evolution/2::run/2>`
 * :ref:`genetic_algorithm(Problem,RandomAlgorithm) <genetic_algorithm/2::run/2>`
 * :ref:`lgtunit <lgtunit/0::run/2>`
+* :ref:`local_optimization_solver <local_optimization_solver/0::run/2>`
 * :ref:`particle_swarm_optimization(Problem,RandomAlgorithm) <particle_swarm_optimization/2::run/2>`
 * :ref:`simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing/2::run/2>`
 * :ref:`tabu_search(Problem,RandomAlgorithm) <tabu_search/2::run/2>`
@@ -24315,6 +24358,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ant_colony(Problem,RandomAlgorithm) <ant_colony/2::run/3>`
 * :ref:`differential_evolution(Problem,RandomAlgorithm) <differential_evolution/2::run/3>`
 * :ref:`genetic_algorithm(Problem,RandomAlgorithm) <genetic_algorithm/2::run/3>`
+* :ref:`local_optimization_solver <local_optimization_solver/0::run/3>`
 * :ref:`particle_swarm_optimization(Problem,RandomAlgorithm) <particle_swarm_optimization/2::run/3>`
 * :ref:`simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing/2::run/3>`
 * :ref:`tabu_search(Problem,RandomAlgorithm) <tabu_search/2::run/3>`
@@ -24330,6 +24374,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ant_colony(Problem,RandomAlgorithm) <ant_colony/2::run/4>`
 * :ref:`differential_evolution(Problem,RandomAlgorithm) <differential_evolution/2::run/4>`
 * :ref:`genetic_algorithm(Problem,RandomAlgorithm) <genetic_algorithm/2::run/4>`
+* :ref:`local_optimization_solver <local_optimization_solver/0::run/4>`
 * :ref:`particle_swarm_optimization(Problem,RandomAlgorithm) <particle_swarm_optimization/2::run/4>`
 * :ref:`simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing/2::run/4>`
 * :ref:`tabu_search(Problem,RandomAlgorithm) <tabu_search/2::run/4>`
@@ -26715,6 +26760,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ant_colony_problem_protocol <ant_colony_problem_protocol/0::stop_condition/3>`
 * :ref:`differential_evolution_problem_protocol <differential_evolution_problem_protocol/0::stop_condition/3>`
 * :ref:`genetic_algorithm_problem_protocol <genetic_algorithm_problem_protocol/0::stop_condition/3>`
+* :ref:`local_optimization_problem_protocol <local_optimization_problem_protocol/0::stop_condition/3>`
 * :ref:`particle_swarm_optimization_protocol <particle_swarm_optimization_protocol/0::stop_condition/3>`
 * :ref:`simulated_annealing_protocol <simulated_annealing_protocol/0::stop_condition/3>`
 * :ref:`tabu_search_problem_protocol <tabu_search_problem_protocol/0::stop_condition/3>`

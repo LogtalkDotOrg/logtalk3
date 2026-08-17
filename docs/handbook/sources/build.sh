@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on August 16, 2026
+##   Last updated on August 17, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -247,6 +247,7 @@ sed '1,19d' ../../../library/linear_algebra/NOTES.md | pandoc -f gfm -t rst -o l
 sed '1,19d' ../../../library/linear_regression/NOTES.md | pandoc -f gfm -t rst -o libraries/linear_regression.rst
 sed '1,19d' ../../../library/linear_svm_classifier/NOTES.md | pandoc -f gfm -t rst -o libraries/linear_svm_classifier.rst
 sed '1,19d' ../../../library/listing/NOTES.md | pandoc -f gfm -t rst -o libraries/listing.rst
+sed '1,19d' ../../../library/local_optimization/NOTES.md | pandoc -f gfm -t rst -o libraries/local_optimization.rst
 sed '1,19d' ../../../library/lof_anomaly_detector/NOTES.md | pandoc -f gfm -t rst -o libraries/lof_anomaly_detector.rst
 sed '1,19d' ../../../library/logging/NOTES.md | pandoc -f gfm -t rst -o libraries/logging.rst
 sed '1,19d' ../../../library/logistic_regression_classifier/NOTES.md | pandoc -f gfm -t rst -o libraries/logistic_regression_classifier.rst

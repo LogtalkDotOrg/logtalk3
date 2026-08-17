@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on August 16, 2026
+##   Last updated on August 17, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -247,6 +247,7 @@ Foreach-Object {
 (Get-Content ../../../library/linear_regression/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/linear_regression.rst
 (Get-Content ../../../library/linear_svm_classifier/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/linear_svm_classifier.rst
 (Get-Content ../../../library/listing/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/listing.rst
+(Get-Content ../../../library/local_optimization/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/local_optimization.rst
 (Get-Content ../../../library/lof_anomaly_detector/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/lof_anomaly_detector.rst
 (Get-Content ../../../library/logging/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/logging.rst
 (Get-Content ../../../library/logistic_regression_classifier/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/logistic_regression_classifier.rst

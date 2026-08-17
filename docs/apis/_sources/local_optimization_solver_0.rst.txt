@@ -1,0 +1,245 @@
+.. index:: single: local_optimization_solver
+.. _local_optimization_solver/0:
+
+.. rst-class:: right
+
+**category**
+
+``local_optimization_solver``
+=============================
+
+Common code for local-optimization solvers: option handling, objective-direction helpers, bound projection, vector utilities, progress reporting, and basic validation. Concrete solvers import this category and implement the search loop.
+
+| **Availability:** 
+|    ``logtalk_load(local_optimization(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-17
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Extends:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: run/2
+.. _local_optimization_solver/0::run/2:
+
+``run/2``
+^^^^^^^^^
+
+Runs the solver with default options and returns the best point and objective value found.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``run(BestPoint,BestValue)``
+| **Mode and number of proofs:**
+|    ``run(-list(number),-number)`` - ``one``
+
+
+------------
+
+.. index:: run/3
+.. _local_optimization_solver/0::run/3:
+
+``run/3``
+^^^^^^^^^
+
+Runs the solver with the given options and returns the best point and objective value found.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``run(BestPoint,BestValue,Options)``
+| **Mode and number of proofs:**
+|    ``run(-list(number),-number,+list(compound))`` - ``one``
+
+
+------------
+
+.. index:: run/4
+.. _local_optimization_solver/0::run/4:
+
+``run/4``
+^^^^^^^^^
+
+Runs the solver with the given options and returns the best point, objective value, and run statistics.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``run(BestPoint,BestValue,Statistics,Options)``
+| **Mode and number of proofs:**
+|    ``run(-list(number),-number,-list(compound),+list(compound))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+.. index:: better_value/3
+.. _local_optimization_solver/0::better_value/3:
+
+``better_value/3``
+^^^^^^^^^^^^^^^^^^
+
+True when ``Value`` is strictly better than ``Reference`` according to the optimization direction.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``better_value(Objective,Value,Reference)``
+| **Mode and number of proofs:**
+|    ``better_value(+atom,+number,+number)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: target_reached/3
+.. _local_optimization_solver/0::target_reached/3:
+
+``target_reached/3``
+^^^^^^^^^^^^^^^^^^^^
+
+True when the current value has reached or passed the optional target in the selected direction.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``target_reached(Objective,Value,Target)``
+| **Mode and number of proofs:**
+|    ``target_reached(+atom,+number,+term)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: project_to_bounds/3
+.. _local_optimization_solver/0::project_to_bounds/3:
+
+``project_to_bounds/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Clamps each component of a point to the corresponding ``Low-High`` interval. When ``Bounds`` is empty the point is returned unchanged.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``project_to_bounds(Point,Bounds,Projected)``
+| **Mode and number of proofs:**
+|    ``project_to_bounds(+list(number),+list(pair),-list(number))`` - ``one``
+
+
+------------
+
+.. index:: validate_bounds/1
+.. _local_optimization_solver/0::validate_bounds/1:
+
+``validate_bounds/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``validate_bounds(+list(pair))`` - ``one_or_error``
+
+
+------------
+
+.. index:: validate_point/2
+.. _local_optimization_solver/0::validate_point/2:
+
+``validate_point/2``
+^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``validate_point(+list(number),+list(pair))`` - ``one_or_error``
+
+
+------------
+
+.. index:: report_progress/6
+.. _local_optimization_solver/0::report_progress/6:
+
+``report_progress/6``
+^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``report_progress(+non_negative_integer,+non_negative_integer,+list(number),+number,+number,+non_negative_integer)`` - ``one``
+
+
+------------
+
+.. index:: progress_hook/5
+.. _local_optimization_solver/0::progress_hook/5:
+
+``progress_hook/5``
+^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+
+------------
+
+.. index:: report_final/5
+.. _local_optimization_solver/0::report_final/5:
+
+``report_final/5``
+^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``report_final(+non_negative_integer,+non_negative_integer,+list(number),+number,+number)`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`local_optimization_problem_protocol <local_optimization_problem_protocol/0>`
+
