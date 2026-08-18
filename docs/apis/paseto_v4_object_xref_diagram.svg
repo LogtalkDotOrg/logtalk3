@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-628 2400,-628 2400,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object paseto_v4</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;08&#45;18, 15:41</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;08&#45;18, 22:00</text>
 <g id="clust1" class="cluster">
 <title>cluster_paseto_v4_object</title>
 <g id="a_clust1"><a xlink:title="paseto_v4">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 2376,-54.25 2376,-54.25 2382,-54.25 2388,-60.25 2388,-66.25 2388,-66.25 2388,-604 2388,-604 2388,-610 2382,-616 2376,-616 2376,-616 20,-616 20,-616 14,-616 8,-610 8,-604 8,-604 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-598.25" font-family="Monospace" font-size="10.00" fill="dimgray">paseto_v4</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>local_encrypt_with_nonce/6</title>
 <polygon fill="yellow" stroke="black" points="953,-338.75 751,-338.75 751,-302.75 953,-302.75 953,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="759" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L33" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L33">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L33" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L33">
 <text xml:space="preserve" text-anchor="start" x="764.25" y="-322.62" font-family="Monospace" font-size="11.00">local_encrypt_with_nonce/6</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>local_keys/5</title>
 <polygon fill="cornsilk" stroke="black" points="1193.75,-219.5 1086.25,-219.5 1086.25,-183.5 1193.75,-183.5 1193.75,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="1094.25" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node13_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L148" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L148">
+<g id="a_node13_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L148" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L148">
 <text xml:space="preserve" text-anchor="start" x="1099.5" y="-203.38" font-family="Monospace" font-size="11.00">local_keys/5</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- local_encrypt_with_nonce/6&#45;&gt;local_keys/5 -->
 <g id="edge3" class="edge">
 <title>local_encrypt_with_nonce/6&#45;&gt;local_keys/5</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L83" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L83" xlink:title="calls">
 <path fill="none" stroke="black" d="M875.17,-302.4C895.12,-288.15 925.14,-268.28 953.75,-255.5 959.56,-252.9 1023.63,-234.84 1075.03,-220.52"/>
 <polygon fill="black" stroke="black" points="1075.96,-223.89 1084.65,-217.84 1074.08,-217.15 1075.96,-223.89"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L83">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L83">
 <text xml:space="preserve" text-anchor="start" x="953.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>local_header/1</title>
 <polygon fill="cornsilk" stroke="black" points="1068.5,-219.5 947.5,-219.5 947.5,-183.5 1068.5,-183.5 1068.5,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="955.5" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node16_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L180" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L180">
+<g id="a_node16_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L180" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L180">
 <text xml:space="preserve" text-anchor="start" x="960.75" y="-203.38" font-family="Monospace" font-size="11.00">local_header/1</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- local_encrypt_with_nonce/6&#45;&gt;local_header/1 -->
 <g id="edge4" class="edge">
 <title>local_encrypt_with_nonce/6&#45;&gt;local_header/1</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L83" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L83" xlink:title="calls">
 <path fill="none" stroke="black" d="M863.37,-302.25C873.09,-288.29 888.13,-268.91 904.75,-255.5 919.62,-243.5 937.64,-233.12 954.44,-224.81"/>
 <polygon fill="black" stroke="black" points="955.82,-228.03 963.33,-220.55 952.8,-221.71 955.82,-228.03"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L83">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L83">
 <text xml:space="preserve" text-anchor="start" x="904.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -109,12 +109,12 @@
 <!-- local_encrypt_with_nonce/6&#45;&gt;type::check/3 -->
 <g id="edge26" class="edge">
 <title>local_encrypt_with_nonce/6&#45;&gt;type::check/3</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L83" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L83" xlink:title="calls">
 <path fill="none" stroke="black" d="M953.32,-304.17C956.58,-303.69 959.82,-303.21 963,-302.75 1079.32,-285.85 1125.01,-328.53 1225,-266.75 1238.98,-258.12 1249.6,-243.2 1256.9,-229.92"/>
 <polygon fill="black" stroke="black" points="1259.96,-231.61 1261.36,-221.11 1253.72,-228.45 1259.96,-231.61"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L83">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L83">
 <text xml:space="preserve" text-anchor="start" x="1237.99" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -133,12 +133,12 @@
 <!-- local_encrypt_with_nonce/6&#45;&gt;crypto::xchacha20/4 -->
 <g id="edge27" class="edge">
 <title>local_encrypt_with_nonce/6&#45;&gt;crypto::xchacha20/4</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L83" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L83" xlink:title="calls">
 <path fill="none" stroke="black" d="M852,-302.45C852,-283.75 852,-253.62 852,-231.33"/>
 <polygon fill="black" stroke="black" points="855.5,-231.39 852,-221.39 848.5,-231.39 855.5,-231.39"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L83">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L83">
 <text xml:space="preserve" text-anchor="start" x="852" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -160,12 +160,12 @@
 <!-- local_encrypt_with_nonce/6&#45;&gt;blake2b(Key,DigestSize)::digest/2 -->
 <g id="edge28" class="edge">
 <title>local_encrypt_with_nonce/6&#45;&gt;blake2b(Key,DigestSize)::digest/2</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L83" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L83" xlink:title="calls">
 <path fill="none" stroke="black" d="M750.55,-303.38C657.48,-284.04 541.43,-246.3 593.75,-183.5 643.41,-123.89 846.51,-99.61 990.5,-89.8"/>
 <polygon fill="black" stroke="black" points="990.38,-93.31 1000.12,-89.16 989.91,-86.33 990.38,-93.31"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L83">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L83">
 <text xml:space="preserve" text-anchor="start" x="593.75" y="-198.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -187,12 +187,12 @@
 <!-- local_encrypt_with_nonce/6&#45;&gt;list::append/2 -->
 <g id="edge29" class="edge">
 <title>local_encrypt_with_nonce/6&#45;&gt;list::append/2</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L83" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L83" xlink:title="calls">
 <path fill="none" stroke="black" d="M750.56,-316.59C690.51,-311.19 614.55,-298.01 553.75,-266.75 535.94,-257.59 519.78,-241.97 507.95,-228.42"/>
 <polygon fill="black" stroke="black" points="510.89,-226.49 501.79,-221.07 505.53,-230.99 510.89,-226.49"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L83">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L83">
 <text xml:space="preserve" text-anchor="start" x="553.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -211,12 +211,12 @@
 <!-- local_encrypt_with_nonce/6&#45;&gt;^^pae/2 -->
 <g id="edge14" class="edge">
 <title>local_encrypt_with_nonce/6&#45;&gt;^^pae/2</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L83" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L83" xlink:title="calls">
 <path fill="none" stroke="black" d="M953.31,-304.09C956.57,-303.63 959.81,-303.18 963,-302.75 1098.26,-284.42 1138.31,-309.33 1268,-266.75 1296.63,-257.35 1326.14,-240.27 1347.83,-226.08"/>
 <polygon fill="black" stroke="black" points="1349.58,-229.12 1355.95,-220.65 1345.69,-223.3 1349.58,-229.12"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L83">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L83">
 <text xml:space="preserve" text-anchor="start" x="1294.34" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -235,12 +235,12 @@
 <!-- local_encrypt_with_nonce/6&#45;&gt;^^format_token/4 -->
 <g id="edge15" class="edge">
 <title>local_encrypt_with_nonce/6&#45;&gt;^^format_token/4</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L83" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L83" xlink:title="calls">
 <path fill="none" stroke="black" d="M750.7,-310.13C681.25,-302.09 587.43,-288.39 506.75,-266.75 484.95,-260.9 433.85,-240.58 394.3,-224.34"/>
 <polygon fill="black" stroke="black" points="395.72,-221.14 385.14,-220.56 393.05,-227.61 395.72,-221.14"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L83">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L83">
 <text xml:space="preserve" text-anchor="start" x="506.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -250,7 +250,7 @@
 <title>public_sign/3</title>
 <polygon fill="cornsilk" stroke="black" points="444.12,-458 329.88,-458 329.88,-422 444.12,-422 444.12,-458"/>
 <text xml:space="preserve" text-anchor="start" x="337.88" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L114" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L114">
+<g id="a_node2_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L114" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L114">
 <text xml:space="preserve" text-anchor="start" x="343.12" y="-441.88" font-family="Monospace" font-size="11.00">public_sign/3</text>
 </a>
 </g>
@@ -264,7 +264,7 @@
 <title>public_sign/5</title>
 <polygon fill="cornsilk" stroke="black" points="444.12,-338.75 329.88,-338.75 329.88,-302.75 444.12,-302.75 444.12,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="337.88" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node9_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L117">
+<g id="a_node9_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L117">
 <text xml:space="preserve" text-anchor="start" x="343.12" y="-322.62" font-family="Monospace" font-size="11.00">public_sign/5</text>
 </a>
 </g>
@@ -276,12 +276,12 @@
 <!-- public_sign/3&#45;&gt;public_sign/5 -->
 <g id="edge9" class="edge">
 <title>public_sign/3&#45;&gt;public_sign/5</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L114" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L114" xlink:title="calls">
 <path fill="none" stroke="black" d="M387,-421.7C387,-403 387,-372.87 387,-350.58"/>
 <polygon fill="black" stroke="black" points="390.5,-350.64 387,-340.64 383.5,-350.64 390.5,-350.64"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L114" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L114">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L114" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L114">
 <text xml:space="preserve" text-anchor="start" x="387" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -291,7 +291,7 @@
 <title>local_encrypt/3</title>
 <polygon fill="cornsilk" stroke="black" points="950.88,-577.25 823.12,-577.25 823.12,-541.25 950.88,-541.25 950.88,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="831.12" y="-561.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L76">
+<g id="a_node3_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L76">
 <text xml:space="preserve" text-anchor="start" x="836.38" y="-561.12" font-family="Monospace" font-size="11.00">local_encrypt/3</text>
 </a>
 </g>
@@ -305,7 +305,7 @@
 <title>local_encrypt/5</title>
 <polygon fill="cornsilk" stroke="black" points="950.88,-458 823.12,-458 823.12,-422 950.88,-422 950.88,-458"/>
 <text xml:space="preserve" text-anchor="start" x="831.12" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L79">
+<g id="a_node6_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L79">
 <text xml:space="preserve" text-anchor="start" x="836.38" y="-441.88" font-family="Monospace" font-size="11.00">local_encrypt/5</text>
 </a>
 </g>
@@ -317,12 +317,12 @@
 <!-- local_encrypt/3&#45;&gt;local_encrypt/5 -->
 <g id="edge1" class="edge">
 <title>local_encrypt/3&#45;&gt;local_encrypt/5</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L76" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L76" xlink:title="calls">
 <path fill="none" stroke="black" d="M887,-540.95C887,-522.25 887,-492.12 887,-469.83"/>
 <polygon fill="black" stroke="black" points="890.5,-469.89 887,-459.89 883.5,-469.89 890.5,-469.89"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L76">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L76" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L76">
 <text xml:space="preserve" text-anchor="start" x="887" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -332,7 +332,7 @@
 <title>local_key/1</title>
 <polygon fill="cornsilk" stroke="black" points="1106.38,-458 1005.62,-458 1005.62,-422 1106.38,-422 1106.38,-458"/>
 <text xml:space="preserve" text-anchor="start" x="1013.62" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L70">
+<g id="a_node4_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L70">
 <text xml:space="preserve" text-anchor="start" x="1018.88" y="-441.88" font-family="Monospace" font-size="11.00">local_key/1</text>
 </a>
 </g>
@@ -358,12 +358,12 @@
 <!-- local_key/1&#45;&gt;crypto::random_bytes/2 -->
 <g id="edge23" class="edge">
 <title>local_key/1&#45;&gt;crypto::random_bytes/2</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L70" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L70" xlink:title="calls">
 <path fill="none" stroke="black" d="M1056.44,-421.7C1056.92,-403 1057.69,-372.87 1058.26,-350.58"/>
 <polygon fill="black" stroke="black" points="1061.76,-350.72 1058.52,-340.63 1054.76,-350.54 1061.76,-350.72"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L70">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L70" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L70">
 <text xml:space="preserve" text-anchor="start" x="1057.59" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -373,7 +373,7 @@
 <title>public_keypair/2</title>
 <polygon fill="cornsilk" stroke="black" points="1289.25,-577.25 1154.75,-577.25 1154.75,-541.25 1289.25,-541.25 1289.25,-577.25"/>
 <text xml:space="preserve" text-anchor="start" x="1162.75" y="-561.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L73">
+<g id="a_node5_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L73">
 <text xml:space="preserve" text-anchor="start" x="1168" y="-561.12" font-family="Monospace" font-size="11.00">public_keypair/2</text>
 </a>
 </g>
@@ -396,12 +396,12 @@
 <!-- public_keypair/2&#45;&gt;crypto::ed25519_keypair/2 -->
 <g id="edge24" class="edge">
 <title>public_keypair/2&#45;&gt;crypto::ed25519_keypair/2</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L73" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L73" xlink:title="calls">
 <path fill="none" stroke="black" d="M1222,-540.95C1222,-522.25 1222,-492.12 1222,-469.83"/>
 <polygon fill="black" stroke="black" points="1225.5,-469.89 1222,-459.89 1218.5,-469.89 1225.5,-469.89"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L73">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L73" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L73">
 <text xml:space="preserve" text-anchor="start" x="1222" y="-496.25" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -409,12 +409,12 @@
 <!-- local_encrypt/5&#45;&gt;local_encrypt_with_nonce/6 -->
 <g id="edge2" class="edge">
 <title>local_encrypt/5&#45;&gt;local_encrypt_with_nonce/6</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L79" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L79" xlink:title="calls">
 <path fill="none" stroke="black" d="M881.84,-421.7C876.2,-402.82 867.09,-372.31 860.42,-349.96"/>
 <polygon fill="black" stroke="black" points="863.83,-349.15 857.62,-340.57 857.13,-351.16 863.83,-349.15"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L79">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L79">
 <text xml:space="preserve" text-anchor="start" x="870.55" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -422,12 +422,12 @@
 <!-- local_encrypt/5&#45;&gt;crypto::random_bytes/2 -->
 <g id="edge25" class="edge">
 <title>local_encrypt/5&#45;&gt;crypto::random_bytes/2</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L79" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L79" xlink:title="calls">
 <path fill="none" stroke="black" d="M912.38,-421.7C941.98,-401.52 991.07,-368.06 1024.2,-345.47"/>
 <polygon fill="black" stroke="black" points="1025.97,-348.5 1032.27,-339.97 1022.03,-342.71 1025.97,-348.5"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L79">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L79" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L79">
 <text xml:space="preserve" text-anchor="start" x="978.16" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -437,7 +437,7 @@
 <title>local_decrypt/3</title>
 <polygon fill="cornsilk" stroke="black" points="1465.88,-458 1338.12,-458 1338.12,-422 1465.88,-422 1465.88,-458"/>
 <text xml:space="preserve" text-anchor="start" x="1346.12" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L98" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L98">
+<g id="a_node7_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L98" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L98">
 <text xml:space="preserve" text-anchor="start" x="1351.38" y="-441.88" font-family="Monospace" font-size="11.00">local_decrypt/3</text>
 </a>
 </g>
@@ -451,7 +451,7 @@
 <title>local_decrypt/5</title>
 <polygon fill="cornsilk" stroke="black" points="1458.88,-338.75 1331.12,-338.75 1331.12,-302.75 1458.88,-302.75 1458.88,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="1339.12" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L101">
+<g id="a_node8_15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L101">
 <text xml:space="preserve" text-anchor="start" x="1344.38" y="-322.62" font-family="Monospace" font-size="11.00">local_decrypt/5</text>
 </a>
 </g>
@@ -463,12 +463,12 @@
 <!-- local_decrypt/3&#45;&gt;local_decrypt/5 -->
 <g id="edge5" class="edge">
 <title>local_decrypt/3&#45;&gt;local_decrypt/5</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L98" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L98" xlink:title="calls">
 <path fill="none" stroke="black" d="M1400.97,-421.7C1399.85,-403 1398.05,-372.87 1396.72,-350.58"/>
 <polygon fill="black" stroke="black" points="1400.22,-350.41 1396.13,-340.63 1393.23,-350.82 1400.22,-350.41"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L98" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L98">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L98" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L98">
 <text xml:space="preserve" text-anchor="start" x="1398.71" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -476,12 +476,12 @@
 <!-- local_decrypt/5&#45;&gt;local_keys/5 -->
 <g id="edge7" class="edge">
 <title>local_decrypt/5&#45;&gt;local_keys/5</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L101" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L101" xlink:title="calls">
 <path fill="none" stroke="black" d="M1330.84,-311.79C1290.63,-304.61 1238.99,-291.25 1198.75,-266.75 1182.96,-257.14 1168.85,-242.04 1158.41,-228.9"/>
 <polygon fill="black" stroke="black" points="1161.24,-226.84 1152.41,-220.99 1155.67,-231.07 1161.24,-226.84"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L101">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L101">
 <text xml:space="preserve" text-anchor="start" x="1198.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -491,7 +491,7 @@
 <title>split_local_body/5</title>
 <polygon fill="cornsilk" stroke="black" points="1853,-219.5 1705,-219.5 1705,-183.5 1853,-183.5 1853,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="1713" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node14_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L158">
+<g id="a_node14_16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L158">
 <text xml:space="preserve" text-anchor="start" x="1718.25" y="-203.38" font-family="Monospace" font-size="11.00">split_local_body/5</text>
 </a>
 </g>
@@ -503,12 +503,12 @@
 <!-- local_decrypt/5&#45;&gt;split_local_body/5 -->
 <g id="edge6" class="edge">
 <title>local_decrypt/5&#45;&gt;split_local_body/5</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L101" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L101" xlink:title="calls">
 <path fill="none" stroke="black" d="M1459.17,-318.78C1524.05,-315.56 1625.79,-304.25 1705,-266.75 1724.48,-257.53 1742.81,-241.69 1756.35,-228.05"/>
 <polygon fill="black" stroke="black" points="1758.7,-230.66 1763.08,-221.02 1753.64,-225.82 1758.7,-230.66"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L101">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L101">
 <text xml:space="preserve" text-anchor="start" x="1723.41" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -516,12 +516,12 @@
 <!-- local_decrypt/5&#45;&gt;local_header/1 -->
 <g id="edge8" class="edge">
 <title>local_decrypt/5&#45;&gt;local_header/1</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L101" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L101" xlink:title="calls">
 <path fill="none" stroke="black" d="M1330.84,-309.25C1281.68,-300.35 1212.55,-285.96 1153.75,-266.75 1148.73,-265.11 1097.75,-242.53 1057.48,-224.59"/>
 <polygon fill="black" stroke="black" points="1058.92,-221.4 1048.36,-220.53 1056.07,-227.8 1058.92,-221.4"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L101">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L101">
 <text xml:space="preserve" text-anchor="start" x="1153.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -529,12 +529,12 @@
 <!-- local_decrypt/5&#45;&gt;type::check/3 -->
 <g id="edge30" class="edge">
 <title>local_decrypt/5&#45;&gt;type::check/3</title>
-<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L101" xlink:title="calls">
+<g id="a_edge30"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L101" xlink:title="calls">
 <path fill="none" stroke="black" d="M1376.41,-302.45C1355.19,-282.71 1320.3,-250.24 1296.07,-227.69"/>
 <polygon fill="black" stroke="black" points="1298.48,-225.15 1288.78,-220.9 1293.71,-230.28 1298.48,-225.15"/>
 </a>
 </g>
-<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L101">
+<g id="a_edge30&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L101">
 <text xml:space="preserve" text-anchor="start" x="1335.78" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -542,12 +542,12 @@
 <!-- local_decrypt/5&#45;&gt;crypto::xchacha20/4 -->
 <g id="edge33" class="edge">
 <title>local_decrypt/5&#45;&gt;crypto::xchacha20/4</title>
-<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L101" xlink:title="calls">
+<g id="a_edge33"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L101" xlink:title="calls">
 <path fill="none" stroke="black" d="M1330.8,-314.24C1269.75,-307.61 1176.05,-293.82 1098.75,-266.75 1088.85,-263.28 1087.8,-259.23 1078,-255.5 1052.9,-245.95 992.69,-231.98 940.72,-220.78"/>
 <polygon fill="black" stroke="black" points="941.76,-217.42 931.25,-218.75 940.3,-224.27 941.76,-217.42"/>
 </a>
 </g>
-<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L101">
+<g id="a_edge33&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L101">
 <text xml:space="preserve" text-anchor="start" x="1098.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -555,12 +555,12 @@
 <!-- local_decrypt/5&#45;&gt;blake2b(Key,DigestSize)::digest/2 -->
 <g id="edge31" class="edge">
 <title>local_decrypt/5&#45;&gt;blake2b(Key,DigestSize)::digest/2</title>
-<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L101" xlink:title="calls">
+<g id="a_edge31"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L101" xlink:title="calls">
 <path fill="none" stroke="black" d="M1407.02,-302.58C1424.72,-274.99 1453.02,-220.15 1427,-183.5 1395.2,-138.7 1341.8,-113.76 1289.64,-99.93"/>
 <polygon fill="black" stroke="black" points="1290.55,-96.55 1280,-97.52 1288.85,-103.34 1290.55,-96.55"/>
 </a>
 </g>
-<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L101">
+<g id="a_edge31&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L101">
 <text xml:space="preserve" text-anchor="start" x="1437.52" y="-198.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -582,12 +582,12 @@
 <!-- local_decrypt/5&#45;&gt;crypto::secure_compare/2 -->
 <g id="edge32" class="edge">
 <title>local_decrypt/5&#45;&gt;crypto::secure_compare/2</title>
-<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L101" xlink:title="calls">
+<g id="a_edge32"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L101" xlink:title="calls">
 <path fill="none" stroke="black" d="M1424.22,-302.45C1458.58,-282.1 1515.77,-248.23 1553.92,-225.64"/>
 <polygon fill="black" stroke="black" points="1555.54,-228.75 1562.36,-220.64 1551.97,-222.73 1555.54,-228.75"/>
 </a>
 </g>
-<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L101">
+<g id="a_edge32&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L101">
 <text xml:space="preserve" text-anchor="start" x="1499.94" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -595,12 +595,12 @@
 <!-- local_decrypt/5&#45;&gt;^^pae/2 -->
 <g id="edge17" class="edge">
 <title>local_decrypt/5&#45;&gt;^^pae/2</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L101" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L101" xlink:title="calls">
 <path fill="none" stroke="black" d="M1392.93,-302.45C1390.69,-283.66 1387.07,-253.34 1384.41,-231.02"/>
 <polygon fill="black" stroke="black" points="1387.91,-230.89 1383.25,-221.37 1380.96,-231.72 1387.91,-230.89"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L101">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L101">
 <text xml:space="preserve" text-anchor="start" x="1388.42" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -619,12 +619,12 @@
 <!-- local_decrypt/5&#45;&gt;^^parse_token/4 -->
 <g id="edge16" class="edge">
 <title>local_decrypt/5&#45;&gt;^^parse_token/4</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L101" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L101" xlink:title="calls">
 <path fill="none" stroke="black" d="M1458.99,-314.49C1554.12,-306.32 1738.36,-289.16 1894,-266.75 1921.61,-262.77 1928.18,-259.75 1955.75,-255.5 2078.47,-236.59 2113.26,-241.7 2238.77,-219.79"/>
 <polygon fill="black" stroke="black" points="2239.26,-223.26 2248.49,-218.07 2238.04,-216.36 2239.26,-223.26"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L101">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L101" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L101">
 <text xml:space="preserve" text-anchor="start" x="1955.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -634,7 +634,7 @@
 <title>public_header/1</title>
 <polygon fill="cornsilk" stroke="black" points="756.88,-219.5 629.12,-219.5 629.12,-183.5 756.88,-183.5 756.88,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="637.12" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node17_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L182">
+<g id="a_node17_18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L182" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L182">
 <text xml:space="preserve" text-anchor="start" x="642.38" y="-203.38" font-family="Monospace" font-size="11.00">public_header/1</text>
 </a>
 </g>
@@ -646,12 +646,12 @@
 <!-- public_sign/5&#45;&gt;public_header/1 -->
 <g id="edge10" class="edge">
 <title>public_sign/5&#45;&gt;public_header/1</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L117" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L117" xlink:title="calls">
 <path fill="none" stroke="black" d="M397.61,-302.48C407.64,-287.67 424.07,-266.96 443.75,-255.5 510.96,-216.37 538.95,-235.78 615,-219.5 615.84,-219.32 616.68,-219.14 617.53,-218.96"/>
 <polygon fill="black" stroke="black" points="618.22,-222.39 627.26,-216.86 616.74,-215.55 618.22,-222.39"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L117">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L117">
 <text xml:space="preserve" text-anchor="start" x="443.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -659,12 +659,12 @@
 <!-- public_sign/5&#45;&gt;type::check/3 -->
 <g id="edge34" class="edge">
 <title>public_sign/5&#45;&gt;type::check/3</title>
-<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L117" xlink:title="calls">
+<g id="a_edge34"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L117" xlink:title="calls">
 <path fill="none" stroke="black" d="M444.46,-317.31C573,-311.43 880.25,-294.81 980,-266.75 990.86,-263.7 992.04,-259.03 1002.75,-255.5 1085.27,-228.28 1112.53,-237.94 1200.44,-219.93"/>
 <polygon fill="black" stroke="black" points="1200.93,-223.4 1209.99,-217.9 1199.48,-216.55 1200.93,-223.4"/>
 </a>
 </g>
-<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L117">
+<g id="a_edge34&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L117">
 <text xml:space="preserve" text-anchor="start" x="1002.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -683,12 +683,12 @@
 <!-- public_sign/5&#45;&gt;crypto::ed25519_sign/3 -->
 <g id="edge35" class="edge">
 <title>public_sign/5&#45;&gt;crypto::ed25519_sign/3</title>
-<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L117" xlink:title="calls">
+<g id="a_edge35"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L117" xlink:title="calls">
 <path fill="none" stroke="black" d="M329.65,-308.79C291.41,-300.25 240.68,-286.5 198.75,-266.75 176.11,-256.09 152.97,-240.07 135.47,-226.7"/>
 <polygon fill="black" stroke="black" points="138.1,-224.3 128.06,-220.92 133.79,-229.83 138.1,-224.3"/>
 </a>
 </g>
-<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L117">
+<g id="a_edge35&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L117">
 <text xml:space="preserve" text-anchor="start" x="198.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -710,12 +710,12 @@
 <!-- public_sign/5&#45;&gt;list::append/3 -->
 <g id="edge36" class="edge">
 <title>public_sign/5&#45;&gt;list::append/3</title>
-<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L117" xlink:title="calls">
+<g id="a_edge36"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L117" xlink:title="calls">
 <path fill="none" stroke="black" d="M343.06,-302.38C285.74,-277.34 197.47,-229.08 239.75,-183.5 250.55,-171.86 1220.9,-106.42 1496.66,-88.05"/>
 <polygon fill="black" stroke="black" points="1496.85,-91.54 1506.6,-87.39 1496.39,-84.56 1496.85,-91.54"/>
 </a>
 </g>
-<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L117">
+<g id="a_edge36&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L117">
 <text xml:space="preserve" text-anchor="start" x="239.75" y="-198.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -723,12 +723,12 @@
 <!-- public_sign/5&#45;&gt;^^pae/2 -->
 <g id="edge18" class="edge">
 <title>public_sign/5&#45;&gt;^^pae/2</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L117" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L117" xlink:title="calls">
 <path fill="none" stroke="black" d="M444.36,-316.51C591.41,-307.99 974.14,-284.41 1029,-266.75 1038.25,-263.77 1038.56,-258.67 1047.75,-255.5 1165.92,-214.69 1207.64,-248 1332.67,-219.69"/>
 <polygon fill="black" stroke="black" points="1333.42,-223.11 1342.34,-217.4 1331.81,-216.3 1333.42,-223.11"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L117">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L117">
 <text xml:space="preserve" text-anchor="start" x="1047.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -736,12 +736,12 @@
 <!-- public_sign/5&#45;&gt;^^format_token/4 -->
 <g id="edge19" class="edge">
 <title>public_sign/5&#45;&gt;^^format_token/4</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L117" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L117" xlink:title="calls">
 <path fill="none" stroke="black" d="M380.36,-302.45C373.08,-283.49 361.3,-252.78 352.71,-230.4"/>
 <polygon fill="black" stroke="black" points="356.06,-229.37 349.21,-221.28 349.53,-231.87 356.06,-229.37"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L117">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L117" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L117">
 <text xml:space="preserve" text-anchor="start" x="365.85" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -751,7 +751,7 @@
 <title>public_verify/3</title>
 <polygon fill="cornsilk" stroke="black" points="1832.88,-458 1705.12,-458 1705.12,-422 1832.88,-422 1832.88,-458"/>
 <text xml:space="preserve" text-anchor="start" x="1713.12" y="-442.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node10_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L129">
+<g id="a_node10_20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L129">
 <text xml:space="preserve" text-anchor="start" x="1718.38" y="-441.88" font-family="Monospace" font-size="11.00">public_verify/3</text>
 </a>
 </g>
@@ -765,7 +765,7 @@
 <title>public_verify/5</title>
 <polygon fill="cornsilk" stroke="black" points="1832.88,-338.75 1705.12,-338.75 1705.12,-302.75 1832.88,-302.75 1832.88,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="1713.12" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node11_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L132">
+<g id="a_node11_21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L132">
 <text xml:space="preserve" text-anchor="start" x="1718.38" y="-322.62" font-family="Monospace" font-size="11.00">public_verify/5</text>
 </a>
 </g>
@@ -777,12 +777,12 @@
 <!-- public_verify/3&#45;&gt;public_verify/5 -->
 <g id="edge11" class="edge">
 <title>public_verify/3&#45;&gt;public_verify/5</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L129" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L129" xlink:title="calls">
 <path fill="none" stroke="black" d="M1769,-421.7C1769,-403 1769,-372.87 1769,-350.58"/>
 <polygon fill="black" stroke="black" points="1772.5,-350.64 1769,-340.64 1765.5,-350.64 1772.5,-350.64"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L129">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L129">
 <text xml:space="preserve" text-anchor="start" x="1769" y="-377" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -792,7 +792,7 @@
 <title>split_public_body/4</title>
 <polygon fill="cornsilk" stroke="black" points="2025.38,-219.5 1870.62,-219.5 1870.62,-183.5 2025.38,-183.5 2025.38,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="1878.62" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node15_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L170">
+<g id="a_node15_22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L170">
 <text xml:space="preserve" text-anchor="start" x="1883.88" y="-203.38" font-family="Monospace" font-size="11.00">split_public_body/4</text>
 </a>
 </g>
@@ -804,12 +804,12 @@
 <!-- public_verify/5&#45;&gt;split_public_body/4 -->
 <g id="edge12" class="edge">
 <title>public_verify/5&#45;&gt;split_public_body/4</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L132" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L132" xlink:title="calls">
 <path fill="none" stroke="black" d="M1795.41,-302.45C1826.35,-282.19 1877.74,-248.52 1912.23,-225.93"/>
 <polygon fill="black" stroke="black" points="1913.77,-229.11 1920.21,-220.7 1909.93,-223.25 1913.77,-229.11"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L132">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L132">
 <text xml:space="preserve" text-anchor="start" x="1863.87" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -817,12 +817,12 @@
 <!-- public_verify/5&#45;&gt;public_header/1 -->
 <g id="edge13" class="edge">
 <title>public_verify/5&#45;&gt;public_header/1</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L132" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L132" xlink:title="calls">
 <path fill="none" stroke="black" d="M1704.65,-306.38C1662.18,-296.9 1605.58,-283.01 1556.75,-266.75 1544.51,-262.68 1542.58,-258.35 1530,-255.5 1202.02,-181.26 1104.79,-264.42 768.41,-219.66"/>
 <polygon fill="black" stroke="black" points="769.25,-216.24 758.87,-218.36 768.3,-223.18 769.25,-216.24"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L132">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L132">
 <text xml:space="preserve" text-anchor="start" x="1556.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -830,12 +830,12 @@
 <!-- public_verify/5&#45;&gt;type::check/3 -->
 <g id="edge37" class="edge">
 <title>public_verify/5&#45;&gt;type::check/3</title>
-<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L132" xlink:title="calls">
+<g id="a_edge37"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L132" xlink:title="calls">
 <path fill="none" stroke="black" d="M1719.59,-302.34C1690.28,-292.01 1652.39,-278.64 1618.75,-266.75 1604.64,-261.76 1601.54,-259.08 1587,-255.5 1480.68,-229.34 1448.04,-240.84 1337.79,-219.91"/>
 <polygon fill="black" stroke="black" points="1338.48,-216.48 1327.99,-218 1337.14,-223.35 1338.48,-216.48"/>
 </a>
 </g>
-<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L132">
+<g id="a_edge37&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L132">
 <text xml:space="preserve" text-anchor="start" x="1618.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -854,12 +854,12 @@
 <!-- public_verify/5&#45;&gt;crypto::ed25519_verify/3 -->
 <g id="edge38" class="edge">
 <title>public_verify/5&#45;&gt;crypto::ed25519_verify/3</title>
-<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L132" xlink:title="calls">
+<g id="a_edge38"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L132" xlink:title="calls">
 <path fill="none" stroke="black" d="M1832.9,-306.97C1876.53,-297.56 1935.38,-283.51 1986,-266.75 2021.97,-254.84 2061.34,-238.09 2091,-224.67"/>
 <polygon fill="black" stroke="black" points="2092.45,-227.86 2100.09,-220.53 2089.54,-221.5 2092.45,-227.86"/>
 </a>
 </g>
-<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L132">
+<g id="a_edge38&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L132">
 <text xml:space="preserve" text-anchor="start" x="2015.73" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -867,12 +867,12 @@
 <!-- public_verify/5&#45;&gt;^^pae/2 -->
 <g id="edge21" class="edge">
 <title>public_verify/5&#45;&gt;^^pae/2</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L132" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L132" xlink:title="calls">
 <path fill="none" stroke="black" d="M1739.13,-302.3C1709.83,-285.46 1667.01,-261.63 1649,-255.5 1556.45,-224.01 1526.89,-243.03 1432,-219.5 1431.01,-219.25 1430.01,-219 1429,-218.73"/>
 <polygon fill="black" stroke="black" points="1430.16,-215.42 1419.58,-216.04 1428.23,-222.15 1430.16,-215.42"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L132">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L132">
 <text xml:space="preserve" text-anchor="start" x="1672.48" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -880,12 +880,12 @@
 <!-- public_verify/5&#45;&gt;^^parse_token/4 -->
 <g id="edge20" class="edge">
 <title>public_verify/5&#45;&gt;^^parse_token/4</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L132" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L132" xlink:title="calls">
 <path fill="none" stroke="black" d="M1833.26,-308.33C1889.51,-298.12 1973.37,-282.4 2046,-266.75 2111.28,-252.69 2185.04,-234.86 2238.63,-221.55"/>
 <polygon fill="black" stroke="black" points="2239.42,-224.96 2248.28,-219.15 2237.73,-218.17 2239.42,-224.96"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L132">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L132" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L132">
 <text xml:space="preserve" text-anchor="start" x="2090.03" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -895,7 +895,7 @@
 <title>footer/2</title>
 <polygon fill="cornsilk" stroke="black" points="2354.25,-338.75 2273.75,-338.75 2273.75,-302.75 2354.25,-302.75 2354.25,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="2281.75" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node12_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L142">
+<g id="a_node12_23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L142">
 <text xml:space="preserve" text-anchor="start" x="2287" y="-322.62" font-family="Monospace" font-size="11.00">footer/2</text>
 </a>
 </g>
@@ -907,12 +907,12 @@
 <!-- footer/2&#45;&gt;^^parse_token/4 -->
 <g id="edge22" class="edge">
 <title>footer/2&#45;&gt;^^parse_token/4</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L142" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L142" xlink:title="calls">
 <path fill="none" stroke="black" d="M2314,-302.45C2314,-283.75 2314,-253.62 2314,-231.33"/>
 <polygon fill="black" stroke="black" points="2317.5,-231.39 2314,-221.39 2310.5,-231.39 2317.5,-231.39"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L142">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L142">
 <text xml:space="preserve" text-anchor="start" x="2314" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -920,12 +920,12 @@
 <!-- local_keys/5&#45;&gt;blake2b(Key,DigestSize)::digest/2 -->
 <g id="edge40" class="edge">
 <title>local_keys/5&#45;&gt;blake2b(Key,DigestSize)::digest/2</title>
-<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L148" xlink:title="calls">
+<g id="a_edge40"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L148" xlink:title="calls">
 <path fill="none" stroke="black" d="M1140,-183.2C1140,-164.5 1140,-134.37 1140,-112.08"/>
 <polygon fill="black" stroke="black" points="1143.5,-112.14 1140,-102.14 1136.5,-112.14 1143.5,-112.14"/>
 </a>
 </g>
-<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L148" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L148">
+<g id="a_edge40&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L148" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L148">
 <text xml:space="preserve" text-anchor="start" x="1140" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -933,12 +933,12 @@
 <!-- local_keys/5&#45;&gt;list::append/3 -->
 <g id="edge39" class="edge">
 <title>local_keys/5&#45;&gt;list::append/3</title>
-<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L148" xlink:title="calls">
+<g id="a_edge39"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L148" xlink:title="calls">
 <path fill="none" stroke="black" d="M1193.9,-185.77C1270.65,-164.79 1411.59,-126.27 1497.14,-102.89"/>
 <polygon fill="black" stroke="black" points="1497.88,-106.32 1506.6,-100.3 1496.04,-99.56 1497.88,-106.32"/>
 </a>
 </g>
-<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L148" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L148">
+<g id="a_edge39&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L148" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L148">
 <text xml:space="preserve" text-anchor="start" x="1367.36" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -960,12 +960,12 @@
 <!-- local_keys/5&#45;&gt;list::length/2 -->
 <g id="edge41" class="edge">
 <title>local_keys/5&#45;&gt;list::length/2</title>
-<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L148" xlink:title="calls">
+<g id="a_edge41"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L148" xlink:title="calls">
 <path fill="none" stroke="black" d="M1194.22,-185.53C1197.18,-184.82 1200.12,-184.14 1203,-183.5 1251.55,-172.75 1563.22,-119.72 1706.79,-95.44"/>
 <polygon fill="black" stroke="black" points="1707.3,-98.9 1716.58,-93.78 1706.14,-92 1707.3,-98.9"/>
 </a>
 </g>
-<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L148" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L148">
+<g id="a_edge41&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L148" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L148">
 <text xml:space="preserve" text-anchor="start" x="1465.66" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -973,12 +973,12 @@
 <!-- split_local_body/5&#45;&gt;list::append/3 -->
 <g id="edge43" class="edge">
 <title>split_local_body/5&#45;&gt;list::append/3</title>
-<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L158" xlink:title="calls">
+<g id="a_edge43"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L158" xlink:title="calls">
 <path fill="none" stroke="black" d="M1748.01,-183.2C1711.41,-162.76 1650.4,-128.7 1609.93,-106.1"/>
 <polygon fill="black" stroke="black" points="1611.87,-103.18 1601.43,-101.36 1608.46,-109.29 1611.87,-103.18"/>
 </a>
 </g>
-<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L158">
+<g id="a_edge43&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L158">
 <text xml:space="preserve" text-anchor="start" x="1680.3" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -986,12 +986,12 @@
 <!-- split_local_body/5&#45;&gt;list::length/2 -->
 <g id="edge42" class="edge">
 <title>split_local_body/5&#45;&gt;list::length/2</title>
-<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L158" xlink:title="calls">
+<g id="a_edge42"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L158" xlink:title="calls">
 <path fill="none" stroke="black" d="M1779,-183.2C1779,-164.5 1779,-134.37 1779,-112.08"/>
 <polygon fill="black" stroke="black" points="1782.5,-112.14 1779,-102.14 1775.5,-112.14 1782.5,-112.14"/>
 </a>
 </g>
-<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L158">
+<g id="a_edge42&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L158" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L158">
 <text xml:space="preserve" text-anchor="start" x="1779" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -999,12 +999,12 @@
 <!-- split_public_body/4&#45;&gt;list::append/3 -->
 <g id="edge45" class="edge">
 <title>split_public_body/4&#45;&gt;list::append/3</title>
-<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L170" xlink:title="calls">
+<g id="a_edge45"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L170" xlink:title="calls">
 <path fill="none" stroke="black" d="M1915.68,-183.13C1888.02,-168.86 1846.79,-148.99 1809,-136.25 1753.88,-117.67 1689.41,-103.85 1641.17,-94.99"/>
 <polygon fill="black" stroke="black" points="1641.85,-91.55 1631.39,-93.22 1640.61,-98.44 1641.85,-91.55"/>
 </a>
 </g>
-<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L170">
+<g id="a_edge45&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L170">
 <text xml:space="preserve" text-anchor="start" x="1836.44" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -1012,12 +1012,12 @@
 <!-- split_public_body/4&#45;&gt;list::length/2 -->
 <g id="edge44" class="edge">
 <title>split_public_body/4&#45;&gt;list::length/2</title>
-<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L170" xlink:title="calls">
+<g id="a_edge44"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L170" xlink:title="calls">
 <path fill="none" stroke="black" d="M1936.34,-183.14C1926.2,-169.07 1910.43,-149.47 1893,-136.25 1876.64,-123.84 1856.92,-113.4 1838.5,-105.15"/>
 <polygon fill="black" stroke="black" points="1840.1,-102.03 1829.53,-101.27 1837.32,-108.45 1840.1,-102.03"/>
 </a>
 </g>
-<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/paseto/paseto_v4.lgt#L170">
+<g id="a_edge44&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L170" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/fe68e336d9f3eeaf6fa41f93e5fb9a1f892974ac/library/paseto/paseto_v4.lgt#L170">
 <text xml:space="preserve" text-anchor="start" x="1905.23" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
