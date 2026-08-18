@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-151 996,-151 996,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol tabu_search_problem_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;08&#45;18, 05:06</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;08&#45;18, 15:42</text>
 <g id="clust1" class="cluster">
 <title>cluster_tabu_search_problem_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="tabu_search_problem_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 972,-54.25 972,-54.25 978,-54.25 984,-60.25 984,-66.25 984,-66.25 984,-127 984,-127 984,-133 978,-139 972,-139 972,-139 20,-139 20,-139 14,-139 8,-133 8,-127 8,-127 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d59e62d79f79f6190311e45a8f7ba762400f39f4/library/tabu_search/tabu_search_problem_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d59e62d79f79f6190311e45a8f7ba762400f39f4/library/tabu_search/tabu_search_problem_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/tabu_search/tabu_search_problem_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/tabu_search/tabu_search_problem_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-121.25" font-family="Monospace" font-size="10.00" fill="dimgray">tabu_search_problem_protocol</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>initial_state/1</title>
 <polygon fill="springgreen" stroke="black" points="145.88,-100.25 18.12,-100.25 18.12,-64.25 145.88,-64.25 145.88,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="26.12" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d59e62d79f79f6190311e45a8f7ba762400f39f4/library/tabu_search/tabu_search_problem_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d59e62d79f79f6190311e45a8f7ba762400f39f4/library/tabu_search/tabu_search_problem_protocol.lgt#L32">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/tabu_search/tabu_search_problem_protocol.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/tabu_search/tabu_search_problem_protocol.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="31.38" y="-84.12" font-family="Monospace" font-size="11.00">initial_state/1</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>neighbor_state/2</title>
 <polygon fill="springgreen" stroke="black" points="298.25,-100.25 163.75,-100.25 163.75,-64.25 298.25,-64.25 298.25,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="171.75" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d59e62d79f79f6190311e45a8f7ba762400f39f4/library/tabu_search/tabu_search_problem_protocol.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d59e62d79f79f6190311e45a8f7ba762400f39f4/library/tabu_search/tabu_search_problem_protocol.lgt#L39">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/tabu_search/tabu_search_problem_protocol.lgt#L39" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/tabu_search/tabu_search_problem_protocol.lgt#L39">
 <text xml:space="preserve" text-anchor="start" x="177" y="-84.12" font-family="Monospace" font-size="11.00">neighbor_state/2</text>
 </a>
 </g>
@@ -57,7 +57,7 @@
 <title>neighbor_state/3</title>
 <polygon fill="springgreen" stroke="black" points="451.25,-100.25 316.75,-100.25 316.75,-64.25 451.25,-64.25 451.25,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="324.75" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d59e62d79f79f6190311e45a8f7ba762400f39f4/library/tabu_search/tabu_search_problem_protocol.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d59e62d79f79f6190311e45a8f7ba762400f39f4/library/tabu_search/tabu_search_problem_protocol.lgt#L46">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/tabu_search/tabu_search_problem_protocol.lgt#L46" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/tabu_search/tabu_search_problem_protocol.lgt#L46">
 <text xml:space="preserve" text-anchor="start" x="330" y="-84.12" font-family="Monospace" font-size="11.00">neighbor_state/3</text>
 </a>
 </g>
@@ -71,7 +71,7 @@
 <title>neighbors/2</title>
 <polygon fill="springgreen" stroke="black" points="570.38,-100.25 469.62,-100.25 469.62,-64.25 570.38,-64.25 570.38,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="477.62" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d59e62d79f79f6190311e45a8f7ba762400f39f4/library/tabu_search/tabu_search_problem_protocol.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d59e62d79f79f6190311e45a8f7ba762400f39f4/library/tabu_search/tabu_search_problem_protocol.lgt#L53">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/tabu_search/tabu_search_problem_protocol.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/tabu_search/tabu_search_problem_protocol.lgt#L53">
 <text xml:space="preserve" text-anchor="start" x="482.88" y="-84.12" font-family="Monospace" font-size="11.00">neighbors/2</text>
 </a>
 </g>
@@ -85,7 +85,7 @@
 <title>state_energy/2</title>
 <polygon fill="springgreen" stroke="black" points="709.5,-100.25 588.5,-100.25 588.5,-64.25 709.5,-64.25 709.5,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="596.5" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d59e62d79f79f6190311e45a8f7ba762400f39f4/library/tabu_search/tabu_search_problem_protocol.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d59e62d79f79f6190311e45a8f7ba762400f39f4/library/tabu_search/tabu_search_problem_protocol.lgt#L60">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/tabu_search/tabu_search_problem_protocol.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/tabu_search/tabu_search_problem_protocol.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="601.75" y="-84.12" font-family="Monospace" font-size="11.00">state_energy/2</text>
 </a>
 </g>
@@ -99,7 +99,7 @@
 <title>stop_condition/3</title>
 <polygon fill="springgreen" stroke="black" points="862.25,-100.25 727.75,-100.25 727.75,-64.25 862.25,-64.25 862.25,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="735.75" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d59e62d79f79f6190311e45a8f7ba762400f39f4/library/tabu_search/tabu_search_problem_protocol.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d59e62d79f79f6190311e45a8f7ba762400f39f4/library/tabu_search/tabu_search_problem_protocol.lgt#L67">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/tabu_search/tabu_search_problem_protocol.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/tabu_search/tabu_search_problem_protocol.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="741" y="-84.12" font-family="Monospace" font-size="11.00">stop_condition/3</text>
 </a>
 </g>
@@ -113,7 +113,7 @@
 <title>progress/5</title>
 <polygon fill="springgreen" stroke="black" points="974,-100.25 880,-100.25 880,-64.25 974,-64.25 974,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="888" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d59e62d79f79f6190311e45a8f7ba762400f39f4/library/tabu_search/tabu_search_problem_protocol.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d59e62d79f79f6190311e45a8f7ba762400f39f4/library/tabu_search/tabu_search_problem_protocol.lgt#L74">
+<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/tabu_search/tabu_search_problem_protocol.lgt#L74" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/f482b4b09fa90c8564063b325e7634eb63c4ce77/library/tabu_search/tabu_search_problem_protocol.lgt#L74">
 <text xml:space="preserve" text-anchor="start" x="893.25" y="-84.12" font-family="Monospace" font-size="11.00">progress/5</text>
 </a>
 </g>
