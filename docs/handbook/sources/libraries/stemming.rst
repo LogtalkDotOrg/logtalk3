@@ -115,10 +115,10 @@ one of the most widely used stemming algorithms for the English
 language. It operates through a series of steps that progressively
 remove suffixes from words:
 
-1. **Step 1a**: Handle plurals (e.g., "caresses" → "caress", "ponies" →
-   "poni")
+1. **Step 1a**: Handle plurals (e.g., "caresses" -> "caress", "ponies"
+   -> "poni")
 2. **Step 1b**: Handle past tense and progressive forms (e.g., "agreed"
-   → "agree")
+   -> "agree")
 3. **Step 1c**: Replace terminal "y" with "i" when preceded by a vowel
 4. **Steps 2-4**: Remove various suffixes based on the "measure" of the
    stem
@@ -146,7 +146,7 @@ approach from Porter:
 
 2. **Transformation rules**: After removing the ending, spelling
    transformations are applied to fix common irregularities (e.g., "iev"
-   → "ief", "uct" → "uc").
+   -> "ief", "uct" -> "uc").
 
 The Lovins algorithm tends to be more aggressive than Porter, sometimes
 producing stems that are not actual words but are consistent across

@@ -245,9 +245,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#architecture">Architecture</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#defining-a-problem">Defining a problem</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#solvers">Solvers</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#neldermead">Nelder–Mead</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nelder-mead">Nelder-Mead</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gradient-descent">Gradient descent</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#barzilaiborwein">Barzilai–Borwein</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#barzilai-borwein">Barzilai-Borwein</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conjugate-gradient">Conjugate gradient</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#bfgs">BFGS</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#l-bfgs">L-BFGS</a></li>
@@ -256,9 +256,9 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#common-options">Common options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#solver-specific-options">Solver-specific options</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#neldermead-1">Nelder–Mead</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nelder-mead-1">Nelder-Mead</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gradient-descent-1">Gradient descent</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#barzilaiborwein-1">Barzilai–Borwein</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#barzilai-borwein-1">Barzilai-Borwein</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conjugate-gradient-1">Conjugate gradient</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#bfgs-1">BFGS</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#l-bfgs-1">L-BFGS</a></li>
@@ -270,8 +270,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#defining-a-problem-derivative-free">Defining a problem (derivative-free)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#defining-a-problem-with-analytic-gradient">Defining a problem with analytic gradient</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#barzilai-borwein">Barzilai-Borwein</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#neldermead-2">Nelder–Mead</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#barzilai-borwein-2">Barzilai-Borwein</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#nelder-mead-2">Nelder-Mead</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gradient-descent-2">Gradient descent</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conjugate-gradient-2">Conjugate gradient</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#bfgs-2">BFGS</a></li>
@@ -442,13 +442,13 @@ after a global meta-heuristic (PSO, differential evolution, genetic
 algorithm, simulated annealing, tabu search, ant colony, …).</p>
 <p>Available solvers:</p>
 <ul class="simple">
-<li><p><strong>Nelder–Mead</strong> - derivative-free downhill simplex</p></li>
+<li><p><strong>Nelder-Mead</strong> - derivative-free downhill simplex</p></li>
 <li><p><strong>Gradient descent</strong> - steepest descent with Armijo or fixed line
 search</p></li>
-<li><p><strong>Barzilai–Borwein</strong> - adaptive-step gradient method (BB1 / BB2 /
-alternate)</p></li>
 <li><p><strong>Conjugate gradient</strong> - Fletcher–Reeves or Polak–Ribière with
 restarts</p></li>
+<li><p><strong>Barzilai-Borwein</strong> - adaptive-step gradient method (BB1 / BB2 /
+alternate)</p></li>
 <li><p><strong>BFGS</strong> - dense quasi-Newton with Armijo line search</p></li>
 <li><p><strong>L-BFGS</strong> - limited-memory quasi-Newton with Armijo line search</p></li>
 <li><p><strong>L-BFGS-B</strong> - bound-constrained L-BFGS (projected gradient + free
@@ -484,11 +484,11 @@ link in a web browser.</p>
 bounds, stop condition, and progress).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">local_optimization_solver</span></code> - category providing shared option
 handling, bound projection, vector utilities, and progress reporting.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">nelder_mead(Problem)</span></code> - Nelder–Mead simplex solver
+<li><p><code class="docutils literal notranslate"><span class="pre">nelder_mead(Problem)</span></code> - Nelder-Mead simplex solver
 (derivative-free).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">gradient_descent(Problem)</span></code> - steepest descent (requires
 <code class="docutils literal notranslate"><span class="pre">gradient/2</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">barzilai_borwein(Problem)</span></code> - Barzilai–Borwein adaptive step
+<li><p><code class="docutils literal notranslate"><span class="pre">barzilai_borwein(Problem)</span></code> - Barzilai-Borwein adaptive step
 (requires <code class="docutils literal notranslate"><span class="pre">gradient/2</span></code>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">conjugate_gradient(Problem)</span></code> - nonlinear CG (requires
 <code class="docutils literal notranslate"><span class="pre">gradient/2</span></code>).</p></li>
@@ -512,7 +512,7 @@ minimize by default; use <code class="docutils literal notranslate"><span class=
 <p>Optionally a problem may also define:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">gradient(+Point,</span> <span class="pre">-Gradient)</span></code> - <strong>required</strong> by all gradient-based
-solvers (gradient descent, Barzilai–Borwein, conjugate gradient, BFGS,
+solvers (gradient descent, Barzilai-Borwein, conjugate gradient, BFGS,
 L-BFGS, L-BFGS-B). When missing those solvers raise an existence
 error.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">hessian(+Point,</span> <span class="pre">-Hessian)</span></code> - optional second-order information (for
@@ -527,8 +527,8 @@ termination.</p></li>
 </section>
 <section id="solvers">
 <h2>Solvers<a class="headerlink" href="#solvers" title="Link to this heading"></a></h2>
-<section id="neldermead">
-<h3>Nelder–Mead<a class="headerlink" href="#neldermead" title="Link to this heading"></a></h3>
+<section id="nelder-mead">
+<h3>Nelder-Mead<a class="headerlink" href="#nelder-mead" title="Link to this heading"></a></h3>
 <p>Derivative-free simplex method. Maintains a simplex of <code class="docutils literal notranslate"><span class="pre">N+1</span></code> vertices
 in <code class="docutils literal notranslate"><span class="pre">N</span></code> dimensions. Each iteration reflects the worst vertex through
 the centroid of the remaining vertices and may expand, contract, or
@@ -557,8 +557,8 @@ decrease</p></li>
 </ul>
 <p>When bounds are present the method becomes projected gradient descent.</p>
 </section>
-<section id="barzilaiborwein">
-<h3>Barzilai–Borwein<a class="headerlink" href="#barzilaiborwein" title="Link to this heading"></a></h3>
+<section id="barzilai-borwein">
+<h3>Barzilai-Borwein<a class="headerlink" href="#barzilai-borwein" title="Link to this heading"></a></h3>
 <p>Adaptive-step gradient method. After each accepted step it forms
 <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">=</span> <span class="pre">x_new</span> <span class="pre">-</span> <span class="pre">x_old</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">g_new</span> <span class="pre">-</span> <span class="pre">g_old</span></code> and chooses the next
 step length from one of:</p>
@@ -677,15 +677,15 @@ the target; use <code class="docutils literal notranslate"><span class="pre">non
 </section>
 <section id="solver-specific-options">
 <h2>Solver-specific options<a class="headerlink" href="#solver-specific-options" title="Link to this heading"></a></h2>
-<section id="neldermead-1">
-<span id="id1"></span><h3>Nelder–Mead<a class="headerlink" href="#neldermead-1" title="Link to this heading"></a></h3>
+<section id="nelder-mead-1">
+<span id="id1"></span><h3>Nelder-Mead<a class="headerlink" href="#nelder-mead-1" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">reflection(Alpha)</span></code> - default <code class="docutils literal notranslate"><span class="pre">1.0</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">expansion(Gamma)</span></code> - default <code class="docutils literal notranslate"><span class="pre">2.0</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">contraction(Rho)</span></code> - default <code class="docutils literal notranslate"><span class="pre">0.5</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">shrink(Sigma)</span></code> - default <code class="docutils literal notranslate"><span class="pre">0.5</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">initial_step(S)</span></code> - relative initial simplex step (default <code class="docutils literal notranslate"><span class="pre">0.05</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">adaptive(false|true)</span></code> - reserved for a future Gao–Han variant
+<li><p><code class="docutils literal notranslate"><span class="pre">adaptive(false|true)</span></code> - reserved for a future Gao-Han variant
 (default <code class="docutils literal notranslate"><span class="pre">false</span></code>)</p></li>
 </ul>
 </section>
@@ -699,8 +699,8 @@ the target; use <code class="docutils literal notranslate"><span class="pre">non
 <li><p><code class="docutils literal notranslate"><span class="pre">armijo_max_backtracks(N)</span></code> - default <code class="docutils literal notranslate"><span class="pre">20</span></code></p></li>
 </ul>
 </section>
-<section id="barzilaiborwein-1">
-<span id="id3"></span><h3>Barzilai–Borwein<a class="headerlink" href="#barzilaiborwein-1" title="Link to this heading"></a></h3>
+<section id="barzilai-borwein-1">
+<span id="id3"></span><h3>Barzilai-Borwein<a class="headerlink" href="#barzilai-borwein-1" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">formula(bb1|bb2|alternate)</span></code> - default <code class="docutils literal notranslate"><span class="pre">alternate</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">step_size(S)</span></code> - initial / fallback step (default <code class="docutils literal notranslate"><span class="pre">1.0</span></code>)</p></li>
@@ -758,11 +758,11 @@ all solvers:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">evaluations(E)</span></code> - objective function evaluations</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">final_value(V)</span></code> - best objective value found</p></li>
 </ul>
-<p>Nelder–Mead additionally reports:</p>
+<p>Nelder-Mead additionally reports:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">final_simplex_size(S)</span></code> - maximum edge length of the final simplex</p></li>
 </ul>
-<p>Gradient descent, Barzilai–Borwein, conjugate gradient, BFGS, L-BFGS,
+<p>Gradient descent, Barzilai-Borwein, conjugate gradient, BFGS, L-BFGS,
 and L-BFGS-B additionally report:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">gradient_evaluations(G)</span></code> - number of gradient evaluations</p></li>
@@ -776,7 +776,7 @@ and L-BFGS-B additionally report:</p>
 <li><p>Continuous numeric vectors only.</p></li>
 <li><p>Box constraints only; no general equality or inequality constraints.</p></li>
 <li><p>Single starting point (no multi-start wrapper yet).</p></li>
-<li><p>Nelder–Mead adaptive (Gao–Han) coefficients are stubbed but not
+<li><p>Nelder-Mead adaptive (Gao-Han) coefficients are stubbed but not
 active.</p></li>
 <li><p>Projected steps after a conjugate-gradient update can weaken
 conjugacy; a pure bound-constrained CG formulation is not yet
@@ -822,8 +822,8 @@ a possible future refinement.</p></li>
 </pre></div>
 </div>
 </section>
-<section id="barzilai-borwein">
-<h3>Barzilai-Borwein<a class="headerlink" href="#barzilai-borwein" title="Link to this heading"></a></h3>
+<section id="barzilai-borwein-2">
+<span id="id8"></span><h3>Barzilai-Borwein<a class="headerlink" href="#barzilai-borwein-2" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> barzilai_borwein(sphere)<span class="o">::</span>run(<span class="nv">Point</span>, <span class="nv">Value</span>, <span class="nv">Statistics</span>, [
         formula(alternate),
         max_iterations(<span class="m">200</span>),
@@ -838,8 +838,8 @@ a possible future refinement.</p></li>
 </pre></div>
 </div>
 </section>
-<section id="neldermead-2">
-<span id="id8"></span><h3>Nelder–Mead<a class="headerlink" href="#neldermead-2" title="Link to this heading"></a></h3>
+<section id="nelder-mead-2">
+<span id="id9"></span><h3>Nelder-Mead<a class="headerlink" href="#nelder-mead-2" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> nelder_mead(rosenbrock)<span class="o">::</span>run(<span class="nv">Point</span>, <span class="nv">Value</span>).
 
 | <span class="o">?-</span> nelder_mead(rosenbrock)<span class="o">::</span>run(
@@ -850,7 +850,7 @@ a possible future refinement.</p></li>
 </div>
 </section>
 <section id="gradient-descent-2">
-<span id="id9"></span><h3>Gradient descent<a class="headerlink" href="#gradient-descent-2" title="Link to this heading"></a></h3>
+<span id="id10"></span><h3>Gradient descent<a class="headerlink" href="#gradient-descent-2" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> gradient_descent(sphere)<span class="o">::</span>run(<span class="nv">Point</span>, <span class="nv">Value</span>).
 
 | <span class="o">?-</span> gradient_descent(sphere)<span class="o">::</span>run(
@@ -866,7 +866,7 @@ a possible future refinement.</p></li>
 </div>
 </section>
 <section id="conjugate-gradient-2">
-<span id="id10"></span><h3>Conjugate gradient<a class="headerlink" href="#conjugate-gradient-2" title="Link to this heading"></a></h3>
+<span id="id11"></span><h3>Conjugate gradient<a class="headerlink" href="#conjugate-gradient-2" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> conjugate_gradient(rosenbrock)<span class="o">::</span>run(<span class="nv">Point</span>, <span class="nv">Value</span>).
 
 | <span class="o">?-</span> conjugate_gradient(rosenbrock)<span class="o">::</span>run(
@@ -882,7 +882,7 @@ a possible future refinement.</p></li>
 </div>
 </section>
 <section id="bfgs-2">
-<span id="id11"></span><h3>BFGS<a class="headerlink" href="#bfgs-2" title="Link to this heading"></a></h3>
+<span id="id12"></span><h3>BFGS<a class="headerlink" href="#bfgs-2" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> bfgs(rosenbrock)<span class="o">::</span>run(<span class="nv">Point</span>, <span class="nv">Value</span>).
 
 | <span class="o">?-</span> bfgs(rosenbrock)<span class="o">::</span>run(
@@ -898,7 +898,7 @@ a possible future refinement.</p></li>
 </div>
 </section>
 <section id="l-bfgs-2">
-<span id="id12"></span><h3>L-BFGS<a class="headerlink" href="#l-bfgs-2" title="Link to this heading"></a></h3>
+<span id="id13"></span><h3>L-BFGS<a class="headerlink" href="#l-bfgs-2" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> lbfgs(rosenbrock)<span class="o">::</span>run(<span class="nv">Point</span>, <span class="nv">Value</span>).
 
 | <span class="o">?-</span> lbfgs(rosenbrock)<span class="o">::</span>run(

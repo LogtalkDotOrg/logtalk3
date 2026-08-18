@@ -4,7 +4,7 @@
 ================
 
 This library provides a dictionary (also known as associative array,
-map, or symbol table) protocol and binary tree, AVL tree, Red–Black
+map, or symbol table) protocol and binary tree, AVL tree, Red-Black
 tree, splay tree, ad 2-3 tree implementations. The different
 representations of a dictionary should be regarded as opaque terms and
 only accessed using the library predicates.
@@ -103,7 +103,7 @@ SWI-Prolog library authored by R.A.O'Keefe, L.Damas, V.S.Costa, Glenn
 Burgess, Jiri Spitz, and Jan Wielemaker. Additional predicates authored
 by Paulo Moura.
 
-The Red–Black tree implementation is an adaptation to Logtalk of the
+The Red-Black tree implementation is an adaptation to Logtalk of the
 ``rbtrees`` Prolog library authored by Vitor Santos Costa.
 
 The 2-3 tree implementation is a contribution by Michael T. Richter.

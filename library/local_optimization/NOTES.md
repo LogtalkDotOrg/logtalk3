@@ -28,10 +28,10 @@ annealing, tabu search, ant colony, ...).
 
 Available solvers:
 
-- **Nelder–Mead** - derivative-free downhill simplex
+- **Nelder-Mead** - derivative-free downhill simplex
 - **Gradient descent** - steepest descent with Armijo or fixed line search
-- **Barzilai–Borwein** - adaptive-step gradient method (BB1 / BB2 / alternate)
 - **Conjugate gradient** - Fletcher–Reeves or Polak–Ribière with restarts
+- **Barzilai-Borwein** - adaptive-step gradient method (BB1 / BB2 / alternate)
 - **BFGS** - dense quasi-Newton with Armijo line search
 - **L-BFGS** - limited-memory quasi-Newton with Armijo line search
 - **L-BFGS-B** - bound-constrained L-BFGS (projected gradient + free set)
@@ -70,9 +70,9 @@ Architecture
   stop condition, and progress).
 - `local_optimization_solver` - category providing shared option handling,
   bound projection, vector utilities, and progress reporting.
-- `nelder_mead(Problem)` - Nelder–Mead simplex solver (derivative-free).
+- `nelder_mead(Problem)` - Nelder-Mead simplex solver (derivative-free).
 - `gradient_descent(Problem)` - steepest descent (requires `gradient/2`).
-- `barzilai_borwein(Problem)` - Barzilai–Borwein adaptive step (requires `gradient/2`).
+- `barzilai_borwein(Problem)` - Barzilai-Borwein adaptive step (requires `gradient/2`).
 - `conjugate_gradient(Problem)` - nonlinear CG (requires `gradient/2`).
 - `bfgs(Problem)` - dense quasi-Newton (requires `gradient/2`).
 - `lbfgs(Problem)` - limited-memory quasi-Newton (requires `gradient/2`).
@@ -94,7 +94,7 @@ defining at least:
 Optionally a problem may also define:
 
 - `gradient(+Point, -Gradient)` - **required** by all gradient-based
-  solvers (gradient descent, Barzilai–Borwein, conjugate gradient, BFGS,
+  solvers (gradient descent, Barzilai-Borwein, conjugate gradient, BFGS,
   L-BFGS, L-BFGS-B). When missing those solvers raise an existence error.
 - `hessian(+Point, -Hessian)` - optional second-order information (for
   future Newton / verification use).
@@ -108,7 +108,7 @@ Optionally a problem may also define:
 Solvers
 -------
 
-### Nelder–Mead
+### Nelder-Mead
 
 Derivative-free simplex method. Maintains a simplex of `N+1` vertices in
 `N` dimensions. Each iteration reflects the worst vertex through the
@@ -140,7 +140,7 @@ Line search options:
 When bounds are present the method becomes projected gradient descent.
 
 
-### Barzilai–Borwein
+### Barzilai-Borwein
 
 Adaptive-step gradient method. After each accepted step it forms
 `s = x_new - x_old` and `y = g_new - g_old` and chooses the next step
@@ -270,14 +270,14 @@ Inherited from the solver category and available to every solver:
 Solver-specific options
 -----------------------
 
-### Nelder–Mead
+### Nelder-Mead
 
 - `reflection(Alpha)` - default `1.0`
 - `expansion(Gamma)` - default `2.0`
 - `contraction(Rho)` - default `0.5`
 - `shrink(Sigma)` - default `0.5`
 - `initial_step(S)` - relative initial simplex step (default `0.05`)
-- `adaptive(false|true)` - reserved for a future Gao–Han variant
+- `adaptive(false|true)` - reserved for a future Gao-Han variant
   (default `false`)
 
 ### Gradient descent
@@ -288,7 +288,7 @@ Solver-specific options
 - `armijo_tau(T)` - backtracking factor (default `0.5`)
 - `armijo_max_backtracks(N)` - default `20`
 
-### Barzilai–Borwein
+### Barzilai-Borwein
 
 - `formula(bb1|bb2|alternate)` - default `alternate`
 - `step_size(S)` - initial / fallback step (default `1.0`)
@@ -340,11 +340,11 @@ solvers:
 - `evaluations(E)` - objective function evaluations
 - `final_value(V)` - best objective value found
 
-Nelder–Mead additionally reports:
+Nelder-Mead additionally reports:
 
 - `final_simplex_size(S)` - maximum edge length of the final simplex
 
-Gradient descent, Barzilai–Borwein, conjugate gradient, BFGS, L-BFGS, and
+Gradient descent, Barzilai-Borwein, conjugate gradient, BFGS, L-BFGS, and
 L-BFGS-B additionally report:
 
 - `gradient_evaluations(G)` - number of gradient evaluations
@@ -358,7 +358,7 @@ Limitations
 - Continuous numeric vectors only.
 - Box constraints only; no general equality or inequality constraints.
 - Single starting point (no multi-start wrapper yet).
-- Nelder–Mead adaptive (Gao–Han) coefficients are stubbed but not active.
+- Nelder-Mead adaptive (Gao-Han) coefficients are stubbed but not active.
 - Projected steps after a conjugate-gradient update can weaken conjugacy;
   a pure bound-constrained CG formulation is not yet implemented.
 - Projected steps after a BFGS or unconstrained L-BFGS update can weaken
@@ -413,7 +413,7 @@ Usage
             max_iterations(500)
         ]).
 
-### Nelder–Mead
+### Nelder-Mead
 
 	| ?- nelder_mead(rosenbrock)::run(Point, Value).
 
