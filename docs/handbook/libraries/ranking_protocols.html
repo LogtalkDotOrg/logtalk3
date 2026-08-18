@@ -449,23 +449,23 @@ inactive declared players are valid.</p></li>
 <p>The library includes a small family of reusable categories intended to
 be imported by ranking algorithm implementations:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">ranking_dataset_common</span></code> — dataset collection, summaries, graph
+<li><p><code class="docutils literal notranslate"><span class="pre">ranking_dataset_common</span></code> - dataset collection, summaries, graph
 connectivity, connected-component analysis, and pairwise/grouped
 dataset correctness checks, including pairwise measurement helpers,
 temporal pairwise rating-period helpers, ordered multiplayer match
 helpers, and grouped tie-block extraction helpers for algorithms that
 consume tied rankings directly.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">glicko2_common</span></code> — shared internal Glicko-2 numeric helpers for
+<li><p><code class="docutils literal notranslate"><span class="pre">glicko2_common</span></code> - shared internal Glicko-2 numeric helpers for
 scale conversions, per-period player updates, and volatility root
 solving used by both the batch and periodic Glicko-2 rankers.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">condorcet_victory_common</span></code> — shared direct-victory preprocessing
+<li><p><code class="docutils literal notranslate"><span class="pre">condorcet_victory_common</span></code> - shared direct-victory preprocessing
 helpers for Condorcet-family rankers that derive dense directed
 victory strengths from aggregated pairwise matchups under the
 <code class="docutils literal notranslate"><span class="pre">victory_strength(...)</span></code> option semantics.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ranker_common</span></code> — representation-independent access to
+<li><p><code class="docutils literal notranslate"><span class="pre">ranker_common</span></code> - representation-independent access to
 learned-ranker diagnostics plus reusable helpers for exporting learned
 rankers.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">grouped_strength_ranker_common</span></code> — reusable positive-strength,
+<li><p><code class="docutils literal notranslate"><span class="pre">grouped_strength_ranker_common</span></code> - reusable positive-strength,
 strong-connectivity, and iterative-update helpers for grouped ranking
 models that estimate one latent strength parameter per item.</p></li>
 </ul>
@@ -528,64 +528,64 @@ file:</p>
 <h2>Test datasets<a class="headerlink" href="#test-datasets" title="Link to this heading"></a></h2>
 <p>Several sample datasets are included in the <code class="docutils literal notranslate"><span class="pre">test_datasets</span></code> directory:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">head_to_head.lgt</span></code> — A compact pairwise-comparison dataset with four
+<li><p><code class="docutils literal notranslate"><span class="pre">head_to_head.lgt</span></code> - A compact pairwise-comparison dataset with four
 items and weighted preferences suitable for smoke testing
 deterministic ranking.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">search_results.lgt</span></code> — A grouped ranking dataset with two query
+<li><p><code class="docutils literal notranslate"><span class="pre">search_results.lgt</span></code> - A grouped ranking dataset with two query
 groups, three items per group, and non-negative integer relevance
 judgments.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">malformed_pairwise.lgt</span></code> — A negative fixture where a preference
+<li><p><code class="docutils literal notranslate"><span class="pre">malformed_pairwise.lgt</span></code> - A negative fixture where a preference
 mentions an undeclared item.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">malformed_duplicate_items.lgt</span></code> — A negative pairwise fixture where
+<li><p><code class="docutils literal notranslate"><span class="pre">malformed_duplicate_items.lgt</span></code> - A negative pairwise fixture where
 an item is declared more than once.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">malformed_self_preference.lgt</span></code> — A negative pairwise fixture where
+<li><p><code class="docutils literal notranslate"><span class="pre">malformed_self_preference.lgt</span></code> - A negative pairwise fixture where
 an item is preferred over itself.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">malformed_non_positive_weight.lgt</span></code> — A negative pairwise fixture
+<li><p><code class="docutils literal notranslate"><span class="pre">malformed_non_positive_weight.lgt</span></code> - A negative pairwise fixture
 where a preference weight is not positive.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">disconnected_pairwise.lgt</span></code> — A pairwise fixture with more than one
+<li><p><code class="docutils literal notranslate"><span class="pre">disconnected_pairwise.lgt</span></code> - A pairwise fixture with more than one
 connected component, useful for testing algorithms that require
 identifiable global scores.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">cyclic_pairwise.lgt</span></code> — A connected pairwise fixture with a
+<li><p><code class="docutils literal notranslate"><span class="pre">cyclic_pairwise.lgt</span></code> - A connected pairwise fixture with a
 preference cycle, useful for smoke testing algorithms on
 non-transitive data.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">condorcet_divergence_pairwise.lgt</span></code> — A compact connected pairwise
+<li><p><code class="docutils literal notranslate"><span class="pre">condorcet_divergence_pairwise.lgt</span></code> - A compact connected pairwise
 fixture where the current <code class="docutils literal notranslate"><span class="pre">schulze_ranker</span></code> and <code class="docutils literal notranslate"><span class="pre">ranked_pairs</span></code>
 implementations produce different rankings, useful for cross-method
 regression tests.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">malformed_grouped.lgt</span></code> — A negative fixture where a grouped
+<li><p><code class="docutils literal notranslate"><span class="pre">malformed_grouped.lgt</span></code> - A negative fixture where a grouped
 relevance value is not a non-negative integer.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">sparse_preferences.lgt</span></code> — A sparse pairwise dataset with an
+<li><p><code class="docutils literal notranslate"><span class="pre">sparse_preferences.lgt</span></code> - A sparse pairwise dataset with an
 isolated item, useful for testing dataset summaries and
 disconnected-graph detection.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">two_item_measurements.lgt</span></code> — A compact pairwise measurement dataset
+<li><p><code class="docutils literal notranslate"><span class="pre">two_item_measurements.lgt</span></code> - A compact pairwise measurement dataset
 with two items and one signed measurement, useful for smoke testing
 exact two-item least-squares fits.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">regular_measurements.lgt</span></code> — A compact connected pairwise
+<li><p><code class="docutils literal notranslate"><span class="pre">regular_measurements.lgt</span></code> - A compact connected pairwise
 measurement dataset whose measurements are perfectly explained by a
 zero-sum score potential, useful for regression tests with zero
 residuals.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">cyclic_measurements.lgt</span></code> — A compact connected pairwise measurement
+<li><p><code class="docutils literal notranslate"><span class="pre">cyclic_measurements.lgt</span></code> - A compact connected pairwise measurement
 dataset with cyclic inconsistency, useful for smoke testing zero
 global scores with non-zero residuals.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">disconnected_measurements.lgt</span></code> — A pairwise measurement fixture
+<li><p><code class="docutils literal notranslate"><span class="pre">disconnected_measurements.lgt</span></code> - A pairwise measurement fixture
 with more than one connected component, useful for testing
 identifiable-score checks.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">malformed_measurement_unknown_item.lgt</span></code> — A negative measurement
+<li><p><code class="docutils literal notranslate"><span class="pre">malformed_measurement_unknown_item.lgt</span></code> - A negative measurement
 fixture where a measurement mentions an undeclared item.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">malformed_measurement_duplicate_items.lgt</span></code> — A negative measurement
+<li><p><code class="docutils literal notranslate"><span class="pre">malformed_measurement_duplicate_items.lgt</span></code> - A negative measurement
 fixture where an item is declared more than once.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">malformed_measurement_self.lgt</span></code> — A negative measurement fixture
+<li><p><code class="docutils literal notranslate"><span class="pre">malformed_measurement_self.lgt</span></code> - A negative measurement fixture
 where an item is measured against itself.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">malformed_measurement_non_numeric.lgt</span></code> — A negative measurement
+<li><p><code class="docutils literal notranslate"><span class="pre">malformed_measurement_non_numeric.lgt</span></code> - A negative measurement
 fixture where a measurement value is not numeric.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">malformed_measurement_non_positive_weight.lgt</span></code> — A negative
+<li><p><code class="docutils literal notranslate"><span class="pre">malformed_measurement_non_positive_weight.lgt</span></code> - A negative
 measurement fixture where a measurement weight is not positive.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">temporal_two_period_chain.lgt</span></code> — A compact temporal pairwise
+<li><p><code class="docutils literal notranslate"><span class="pre">temporal_two_period_chain.lgt</span></code> - A compact temporal pairwise
 dataset with two rating periods and three players, useful for smoke
 testing periodic rating carryover.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">temporal_draws.lgt</span></code> — A compact temporal pairwise dataset with a
+<li><p><code class="docutils literal notranslate"><span class="pre">temporal_draws.lgt</span></code> - A compact temporal pairwise dataset with a
 draw, useful for testing score handling in temporal game results.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">temporal_idle_periods.lgt</span></code> — A temporal pairwise dataset with an
+<li><p><code class="docutils literal notranslate"><span class="pre">temporal_idle_periods.lgt</span></code> - A temporal pairwise dataset with an
 empty period between two played periods, useful for testing inactivity
 handling.</p></li>
 </ul>

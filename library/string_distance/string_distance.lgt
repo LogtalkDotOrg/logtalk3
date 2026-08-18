@@ -282,7 +282,7 @@
 	% =================================================================
 
 	% -----------------------------------------------------------------
-	% Levenshtein — Wagner-Fischer, one row at a time.
+	% Levenshtein - Wagner-Fischer, one row at a time.
 	%
 	% RowPrev holds the previous row.  The first element of RowPrev is
 	% the row index minus one, so RowIdx = RowPrev[0] + 1.
@@ -327,12 +327,12 @@
 		lev_row(T2, H1, AboveRest, Val, Above, Row).
 
 	% -----------------------------------------------------------------
-	% Damerau-Levenshtein — optimal string alignment (OSA) variant.
+	% Damerau-Levenshtein - optimal string alignment (OSA) variant.
 	%
 	% Same row DP as Levenshtein, but we also carry:
-	%   RowPrevPrev  – the row two steps back
-	%   PrevCode     – the previous character of String1
-	%   ColIdx       – current 0-based column index
+	%   RowPrevPrev  - the row two steps back
+	%   PrevCode     - the previous character of String1
+	%   ColIdx       - current 0-based column index
 	%
 	% Transposition condition at (i,j):
 	%   s1[i] == s2[j-1]  AND  s1[i-1] == s2[j]
@@ -378,7 +378,7 @@
 		Val0 is min(Sub, min(Ins, Del)),
 		% Transposition: s1[i]==s2[j-1] and s1[i-1]==s2[j].
 		% H1 = s1[i], PrevCode = s1[i-1], H2 = s2[j].
-		% s2[j-1] is the element just before H2 — we detect this by
+		% s2[j-1] is the element just before H2 - we detect this by
 		% checking H1 == the previous s2 char.  We approximate this
 		% with the standard OSA condition using PrevPrevRow.
 		(	PrevCode \== none,
@@ -592,7 +592,7 @@
 	% =================================================================
 
 	% -----------------------------------------------------------------
-	% LCS length — row-by-row DP.
+	% LCS length - row-by-row DP.
 	%
 	% Each row is length |s2|+1.  Row0 is all zeros.
 	% For each character of s1 we compute a new row:
@@ -1410,7 +1410,7 @@
 	% Returns primary code, alternative code (or [] if same as primary), and remaining chars
 	% Signature: double_metaphone_char(Char, Rest, IsSlavoGermanic, PrimaryCode, AltCode, NewRest)
 
-	% Vowels — dropped (except initial)
+	% Vowels - dropped (except initial)
 	double_metaphone_char('A', Chars, _, [], [], Chars).
 	double_metaphone_char('E', Chars, _, [], [], Chars).
 	double_metaphone_char('I', Chars, _, [], [], Chars).
@@ -1418,7 +1418,7 @@
 	double_metaphone_char('U', Chars, _, [], [], Chars).
 	% B
 	double_metaphone_char('B', Chars, _, 'P', [], Chars).
-	% C — S before E/I/Y; X before H; K otherwise
+	% C - S before E/I/Y; X before H; K otherwise
 	double_metaphone_char('C', ['H'| Chars], _, 'X', [], Chars) :-
 		!.
 	double_metaphone_char('C', ['E'| Chars], _, 'S', [], Chars) :-
@@ -1428,7 +1428,7 @@
 	double_metaphone_char('C', ['Y'| Chars], _, 'S', [], Chars) :-
 		!.
 	double_metaphone_char('C', Chars, _, 'K', [], Chars).
-	% D — J before G+vowel; T otherwise
+	% D - J before G+vowel; T otherwise
 	double_metaphone_char('D', ['G','E'| Chars], _, 'J', [], Chars) :-
 		!.
 	double_metaphone_char('D', ['G','I'| Chars], _, 'J', [], Chars) :-
@@ -1438,7 +1438,7 @@
 	double_metaphone_char('D', Chars, _, 'T', [], Chars).
 	% F
 	double_metaphone_char('F', Chars, _, 'F', [], Chars).
-	% G — F before H; J before E/I/Y; K otherwise
+	% G - F before H; J before E/I/Y; K otherwise
 	double_metaphone_char('G', ['H'| Chars], _, 'F', [], Chars) :-
 		!.
 	double_metaphone_char('G', ['E'| Chars], _, 'J', 'K', Chars) :-
@@ -1450,12 +1450,12 @@
 	double_metaphone_char('G', ['N'| Chars], _, 'K', 'N', Chars) :-
 		!.
 	double_metaphone_char('G', Chars, _, 'K', [], Chars).
-	% H — kept only before a vowel
+	% H - kept only before a vowel
 	double_metaphone_char('H', [Char| Chars], _, 'H', [], Chars) :-
 		member(Char, ['A','E','I','O','U']),
 		!.
 	double_metaphone_char('H', Chars, _, [], [], Chars).
-	% J — Context-dependent alternative (H for Spanish Jose-like, A otherwise)
+	% J - Context-dependent alternative (H for Spanish Jose-like, A otherwise)
 	double_metaphone_char('J', ['O','S','E'| Rest], _, 'J', 'H', ['O','S','E'| Rest]) :-
 		!.
 	double_metaphone_char('J', Chars, _, 'J', 'A', Chars).
@@ -1467,15 +1467,15 @@
 	double_metaphone_char('M', Chars, _, 'M', [], Chars).
 	% N
 	double_metaphone_char('N', Chars, _, 'N', [], Chars).
-	% P — F before H; P otherwise
+	% P - F before H; P otherwise
 	double_metaphone_char('P', ['H'| Chars], _, 'F', [], Chars) :-
 		!.
 	double_metaphone_char('P', Chars, _, 'P', [], Chars).
-	% Q → K
+	% Q -> K
 	double_metaphone_char('Q', Chars, _, 'K', [], Chars).
 	% R
 	double_metaphone_char('R', Chars, _, 'R', [], Chars).
-	% S — X before H/IA/IO; S/X for initial SM; S otherwise
+	% S - X before H/IA/IO; S/X for initial SM; S otherwise
 	double_metaphone_char('S', ['M'| Chars], _, 'S', 'X', ['M'| Chars]) :-
 		!.
 	double_metaphone_char('S', ['H'| Chars], _, 'X', [], Chars) :-
@@ -1487,7 +1487,7 @@
 	double_metaphone_char('S', ['C','H'| Chars], _, 'X', 'S', Chars) :-
 		!.
 	double_metaphone_char('S', Chars, _, 'S', [], Chars).
-	% T — 0 before H; X before ION/IA/IO; T otherwise
+	% T - 0 before H; X before ION/IA/IO; T otherwise
 	double_metaphone_char('T', ['I','O','N'| Chars], _, 'X', [], ['N'| Chars]) :-
 		!.
 	double_metaphone_char('T', ['H'| Chars], _, '0', 'T', Chars) :-
@@ -1497,21 +1497,21 @@
 	double_metaphone_char('T', ['I','O'| Chars], _, 'X', [], Chars) :-
 		!.
 	double_metaphone_char('T', Chars, _, 'T', [], Chars).
-	% V → F
+	% V -> F
 	double_metaphone_char('V', Chars, _, 'F', [], Chars).
-	% W — kept only before a vowel
+	% W - kept only before a vowel
 	double_metaphone_char('W', [Char| Chars], _, 'W', 'F', Chars) :-
 		member(Char, ['A','E','I','O','U']),
 		!.
 	double_metaphone_char('W', Chars, _, [], [], Chars).
-	% X → K, push S back onto input
+	% X -> K, push S back onto input
 	double_metaphone_char('X', Chars, _, 'K', [], ['S'| Chars]).
-	% Y — kept only before a vowel
+	% Y - kept only before a vowel
 	double_metaphone_char('Y', [Char| Chars], _, 'Y', [], Chars) :-
 		member(Char, ['A','E','I','O','U']),
 		!.
 	double_metaphone_char('Y', Chars, _, [], [], Chars).
-	% Z → S
+	% Z -> S
 	double_metaphone_char('Z', Chars, _, 'S', 'X', Chars).
 	% Fallback
 	double_metaphone_char(_, Chars, _, [], [], Chars).

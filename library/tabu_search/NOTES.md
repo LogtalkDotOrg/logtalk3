@@ -63,39 +63,39 @@ To test this library predicates, load the `tester.lgt` file:
 Features
 --------
 
-- **Configurable random number generator** — the algorithm is parameterized
+- **Configurable random number generator** - the algorithm is parameterized
   by a `fast_random` algorithm. Available algorithms include `xoshiro128pp`,
   `xoshiro128ss`, `xoshiro256pp`, `xoshiro256ss`, `well512a`, `splitmix64`,
   and `as183`. The convenience object `tabu_search(Problem)` defaults
   to `xoshiro128pp`.
-- **Tabu list (short-term memory)** — recently visited states are stored with
+- **Tabu list (short-term memory)** - recently visited states are stored with
   an expiration step. With fixed tenure (`tabu_tenure(T)`) the list behaves
   as a FIFO of maximum length `T`. With `tabu_tenure_range(Min, Max)` each
   accepted move receives a random tenure drawn uniformly from the inclusive
   range. Candidates that appear in the active (non-expired) list are
   forbidden unless the aspiration criterion is met.
-- **Aspiration criterion** — a tabu candidate is accepted when its energy is
+- **Aspiration criterion** - a tabu candidate is accepted when its energy is
   strictly better than the best energy found so far (classic “best-so-far”
   aspiration).
-- **Candidate sampling** — by default the algorithm samples `candidates(N)`
+- **Candidate sampling** - by default the algorithm samples `candidates(N)`
   neighbors per iteration using `neighbor_state/2` (or `neighbor_state/3`).
   If the problem defines `neighbors/2`, that complete list is used (or a
   random sample of it when larger than the candidate limit).
-- **Delta-energy optimization** — when the problem object defines
+- **Delta-energy optimization** - when the problem object defines
   `neighbor_state/3`, the algorithm uses the returned energy delta directly
   instead of recomputing the full energy.
-- **Best state tracking** — the algorithm tracks the best state found across
+- **Best state tracking** - the algorithm tracks the best state found across
   all iterations and across all restart cycles, not just the final state.
-- **Progress reporting** — if the problem object defines `progress/5`, it is
+- **Progress reporting** - if the problem object defines `progress/5`, it is
   called periodically with the current step, best energy, current energy,
   acceptance rate, and improvement rate. A final report is always produced
   when the loop terminates.
-- **Run statistics** — the `run/4` predicate returns a list of statistics
+- **Run statistics** - the `run/4` predicate returns a list of statistics
   including the number of steps, acceptances, improvements, and the final
   tabu-list size.
-- **Seed control** — the `seed(S)` option initializes the random number
+- **Seed control** - the `seed(S)` option initializes the random number
   generator for reproducible runs.
-- **Restarts** — the `restarts(N)` option runs N additional tabu-search
+- **Restarts** - the `restarts(N)` option runs N additional tabu-search
   cycles after the first. Each restart begins from the best state found so
   far with a cleared tabu list, allowing the search to escape deep local
   minima. Statistics accumulate across all cycles.
@@ -107,24 +107,24 @@ Defining a problem
 A problem object must implement the `tabu_search_problem_protocol` protocol
 by defining (at least) the following three predicates:
 
-- `initial_state(-State)` — returns the starting state.
-- `neighbor_state(+State, -Neighbor)` — generates a neighboring state.
-- `state_energy(+State, -Energy)` — computes the cost of a state (to be
+- `initial_state(-State)` - returns the starting state.
+- `neighbor_state(+State, -Neighbor)` - generates a neighboring state.
+- `state_energy(+State, -Energy)` - computes the cost of a state (to be
   minimized).
 
 Optionally, the problem object may also define:
 
-- `neighbor_state(+State, -Neighbor, -DeltaEnergy)` — generates a
+- `neighbor_state(+State, -Neighbor, -DeltaEnergy)` - generates a
   neighboring state and returns the energy change directly, avoiding a full
   energy recomputation.
-- `neighbors(+State, -Neighbors)` — returns the complete list of neighboring
+- `neighbors(+State, -Neighbors)` - returns the complete list of neighboring
   states. When defined, the algorithm uses this list (or a random sample
   controlled by `candidates(N)`) instead of repeated calls to
   `neighbor_state/2`.
-- `stop_condition(+Step, +BestEnergy, +CurrentEnergy)` — succeeds when the
+- `stop_condition(+Step, +BestEnergy, +CurrentEnergy)` - succeeds when the
   search should terminate early.
 - `progress(+Step, +BestEnergy, +CurrentEnergy, +AcceptanceRate, +ImprovementRate)`
-  — called periodically during the optimization to report progress.
+  - called periodically during the optimization to report progress.
 
 
 Options
@@ -132,20 +132,20 @@ Options
 
 Options for the `run/3-4` predicates:
 
-- `max_steps(N)` — maximum number of iterations per cycle (default: `10000`).
-- `tabu_tenure(T)` — fixed tabu tenure: lifetime in steps of each tabu entry
+- `max_steps(N)` - maximum number of iterations per cycle (default: `10000`).
+- `tabu_tenure(T)` - fixed tabu tenure: lifetime in steps of each tabu entry
   (default: `7`). Ignored when `tabu_tenure_range/2` is also present.
-- `tabu_tenure_range(Min, Max)` — random tabu tenure: on each accepted move a
+- `tabu_tenure_range(Min, Max)` - random tabu tenure: on each accepted move a
   tenure is drawn uniformly from the inclusive integer range `Min..Max`.
   Overrides `tabu_tenure/1` when present.
-- `candidates(N)` — number of candidate neighbors examined per iteration
+- `candidates(N)` - number of candidate neighbors examined per iteration
   (default: `20`).
-- `updates(N)` — number of progress reports during the run. Progress is
+- `updates(N)` - number of progress reports during the run. Progress is
   reported by calling `progress/5` on the problem object. Set to `0` to
   disable (default: `0`).
-- `seed(S)` — positive integer seed for the random number generator,
+- `seed(S)` - positive integer seed for the random number generator,
   enabling reproducible runs (default: none).
-- `restarts(N)` — number of additional tabu-search cycles after the first.
+- `restarts(N)` - number of additional tabu-search cycles after the first.
   Each restart begins from the best state found so far with a cleared tabu
   list (default: `0`).
 
@@ -156,48 +156,48 @@ Run statistics
 The `run/4` predicate returns a list of statistics about the completed
 run:
 
-- `steps(N)` — total number of steps executed.
-- `acceptances(A)` — number of accepted moves.
-- `improvements(I)` — number of moves that strictly improved the best
+- `steps(N)` - total number of steps executed.
+- `acceptances(A)` - number of accepted moves.
+- `improvements(I)` - number of moves that strictly improved the best
   energy found.
-- `final_tabu_size(S)` — size of the tabu list at termination.
+- `final_tabu_size(S)` - size of the tabu list at termination.
 
 
 **Limitations**
 -------------
 
-- **Solution-based tabu memory only** — the tabu list stores complete states
+- **Solution-based tabu memory only** - the tabu list stores complete states
   rather than move attributes. This is simple and problem-agnostic, but can
   be memory-intensive for large or richly structured states, and is often
   less effective than attribute-based tabu for problems where the relevant
   forbidden features are local (e.g. edges in TSP, variable assignments in
   scheduling).
 
-- **Limited tenure schedules** — fixed tenure and uniform random tenure in a
+- **Limited tenure schedules** - fixed tenure and uniform random tenure in a
   static range are supported. Reactive or adaptive tenure schedules (e.g.
   tenure that grows after repeated cycling) are not implemented.
 
-- **Single aspiration criterion** — only the classic "best-so-far" rule is
+- **Single aspiration criterion** - only the classic "best-so-far" rule is
   implemented (a tabu candidate is accepted when it improves the global best
   energy). Other aspiration strategies are not supported.
 
-- **Neighborhood exploration** — when the problem does not define
+- **Neighborhood exploration** - when the problem does not define
   `neighbors/2`, the algorithm samples a fixed number of candidates via
   repeated calls to `neighbor_state/2`. Systematic or exhaustive enumeration
   of large neighborhoods is left to the problem object.
 
-- **Short-term memory only** — there is no intermediate-term or long-term
+- **Short-term memory only** - there is no intermediate-term or long-term
   memory (frequency-based or elite-set structures) and therefore no built-in
   intensification or diversification beyond the optional `restarts(N)`
   mechanism, which simply clears the tabu list and resumes from the best
   state found so far.
 
-- **State identity** — tabu membership is decided by ordinary term equality
+- **State identity** - tabu membership is decided by ordinary term equality
   (`member/2`). States that are semantically equivalent but not term-identical
   (e.g. rotations or reflections of a tour) are treated as distinct unless
   the problem normalizes them.
 
-- **Single trajectory** — the search follows one solution path at a time;
+- **Single trajectory** - the search follows one solution path at a time;
   population-based or multi-threaded variants are not currently implemented.
 
 

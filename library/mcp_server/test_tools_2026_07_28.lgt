@@ -79,7 +79,7 @@
 			RoundResult = complete(text('Declined.'))
 		;	member(input_response(name_key, cancel), InputResponses) ->
 			RoundResult = complete(text('Cancelled.'))
-		;	% Missing required response — re-request
+		;	% Missing required response - re-request
 			RoundResult = input_required(
 				[input_request(name_key, form_elicitation('What is your name?', {type-object, properties-{name-{type-string}}, required-[name]}))],
 				waiting_for_name

@@ -510,7 +510,7 @@ unknown
 landscapes</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">current-to-best/1/bin</span></code></p></td>
-<td><p>Medium–Fast</p></td>
+<td><p>Medium-Fast</p></td>
 <td><p>Medium</p></td>
 <td><p>Medium</p></td>
 <td><p>General-purpose
@@ -537,71 +537,74 @@ in the crossover mechanism (binomial vs. exponential).</p></li>
 a good default for many engineering problems.</p></li>
 </ul>
 <p>More exploitative strategies often benefit from a modestly larger
-population or a slightly smaller differential weight (<code class="docutils literal notranslate"><span class="pre">F</span></code> in 0.5–0.7).</p>
+population or a slightly smaller differential weight (<code class="docutils literal notranslate"><span class="pre">F</span></code> in 0.5-0.7).</p>
 </section>
 <section id="defining-a-problem">
 <h2>Defining a problem<a class="headerlink" href="#defining-a-problem" title="Link to this heading"></a></h2>
 <p>Problem objects must implement
 <code class="docutils literal notranslate"><span class="pre">differential_evolution_problem_protocol</span></code> by defining:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">position_bounds(-Bounds)</span></code> — returns one numeric <code class="docutils literal notranslate"><span class="pre">Lower-Upper</span></code>
+<li><p><code class="docutils literal notranslate"><span class="pre">position_bounds(-Bounds)</span></code> - returns one numeric <code class="docutils literal notranslate"><span class="pre">Lower-Upper</span></code>
 pair per dimension, with <code class="docutils literal notranslate"><span class="pre">Lower</span> <span class="pre">=&lt;</span> <span class="pre">Upper</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">fitness(+Position,</span> <span class="pre">-Fitness)</span></code> — computes a numeric fitness value.
+<li><p><code class="docutils literal notranslate"><span class="pre">fitness(+Position,</span> <span class="pre">-Fitness)</span></code> - computes a numeric fitness value.
 The optimizer minimizes this value by default; use
 <code class="docutils literal notranslate"><span class="pre">objective(maximize)</span></code> to maximize it instead.</p></li>
 </ul>
 <p>Optionally, a problem object may also define:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">initial_positions(-Positions)</span></code> — returns a non-empty list of
+<li><p><code class="docutils literal notranslate"><span class="pre">initial_positions(-Positions)</span></code> - returns a non-empty list of
 initial positions lying inside the bounds. When not defined, the
 algorithm generates a random initial population.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">stop_condition(+Generation,</span> <span class="pre">+BestPosition,</span> <span class="pre">+BestFitness)</span></code> —
+<li><p><code class="docutils literal notranslate"><span class="pre">stop_condition(+Generation,</span> <span class="pre">+BestPosition,</span> <span class="pre">+BestFitness)</span></code> -
 succeeds when the search should terminate early.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">progress(+Generation,</span> <span class="pre">+BestPosition,</span> <span class="pre">+BestFitness,</span> <span class="pre">+MeanFitness,</span> <span class="pre">+Diversity)</span></code>
-— called periodically during optimization. Diversity is the mean
+<li><p><code class="docutils literal notranslate"><span class="pre">progress(+Generation,</span> <span class="pre">+BestPosition,</span> <span class="pre">+BestFitness,</span> <span class="pre">+MeanFitness,</span> <span class="pre">+Diversity)</span></code></p>
+<ul>
+<li><p>called periodically during optimization. Diversity is the mean
 Euclidean distance of population members from the centroid. A final
 report is produced when progress reporting is enabled.</p></li>
+</ul>
+</li>
 </ul>
 </section>
 <section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
 <p>Options for the <code class="docutils literal notranslate"><span class="pre">run/3-4</span></code> predicates:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">strategy(Strategy)</span></code> — mutation strategy: <code class="docutils literal notranslate"><span class="pre">rand/1/bin</span></code> (default),
+<li><p><code class="docutils literal notranslate"><span class="pre">strategy(Strategy)</span></code> - mutation strategy: <code class="docutils literal notranslate"><span class="pre">rand/1/bin</span></code> (default),
 <code class="docutils literal notranslate"><span class="pre">best/1/bin</span></code>, or <code class="docutils literal notranslate"><span class="pre">current-to-best/1/bin</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">objective(Objective)</span></code> — optimization direction, either <code class="docutils literal notranslate"><span class="pre">minimize</span></code>
+<li><p><code class="docutils literal notranslate"><span class="pre">objective(Objective)</span></code> - optimization direction, either <code class="docutils literal notranslate"><span class="pre">minimize</span></code>
 or <code class="docutils literal notranslate"><span class="pre">maximize</span></code> (default: <code class="docutils literal notranslate"><span class="pre">minimize</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">target_fitness(Fitness)</span></code> — numeric target that stops the run when
+<li><p><code class="docutils literal notranslate"><span class="pre">target_fitness(Fitness)</span></code> - numeric target that stops the run when
 the best fitness reaches or passes it in the selected objective
 direction. Use <code class="docutils literal notranslate"><span class="pre">none</span></code> to disable target stopping (default:
 <code class="docutils literal notranslate"><span class="pre">none</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">population_size(N)</span></code> — population size; must be at least 4 (default:
+<li><p><code class="docutils literal notranslate"><span class="pre">population_size(N)</span></code> - population size; must be at least 4 (default:
 <code class="docutils literal notranslate"><span class="pre">30</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">max_generations(N)</span></code> — maximum number of generations (default:
+<li><p><code class="docutils literal notranslate"><span class="pre">max_generations(N)</span></code> - maximum number of generations (default:
 <code class="docutils literal notranslate"><span class="pre">100</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">crossover_probability(CR)</span></code> — binomial crossover probability in
+<li><p><code class="docutils literal notranslate"><span class="pre">crossover_probability(CR)</span></code> - binomial crossover probability in
 <code class="docutils literal notranslate"><span class="pre">[0,1]</span></code> (default: <code class="docutils literal notranslate"><span class="pre">0.9</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">differential_weight(F)</span></code> — positive scale factor for difference
+<li><p><code class="docutils literal notranslate"><span class="pre">differential_weight(F)</span></code> - positive scale factor for difference
 vectors (default: <code class="docutils literal notranslate"><span class="pre">0.8</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">stagnation_generations(N)</span></code> — number of consecutive generations
+<li><p><code class="docutils literal notranslate"><span class="pre">stagnation_generations(N)</span></code> - number of consecutive generations
 without a strict best-fitness improvement before stopping. Set to
 <code class="docutils literal notranslate"><span class="pre">0</span></code> to disable (default: <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">updates(N)</span></code> — number of progress reports during the run. Set to
+<li><p><code class="docutils literal notranslate"><span class="pre">updates(N)</span></code> - number of progress reports during the run. Set to
 <code class="docutils literal notranslate"><span class="pre">0</span></code> to disable progress reporting (default: <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">seed(S)</span></code> — positive integer random seed for reproducible runs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">seed(S)</span></code> - positive integer random seed for reproducible runs.</p></li>
 </ul>
 </section>
 <section id="run-statistics">
 <h2>Run statistics<a class="headerlink" href="#run-statistics" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">run/4</span></code> predicate returns:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">generations(N)</span></code> — number of completed generations.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">evaluations(E)</span></code> — number of fitness evaluations, including the
+<li><p><code class="docutils literal notranslate"><span class="pre">generations(N)</span></code> - number of completed generations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">evaluations(E)</span></code> - number of fitness evaluations, including the
 initial population.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">improvements(I)</span></code> — number of generations that improved the global
+<li><p><code class="docutils literal notranslate"><span class="pre">improvements(I)</span></code> - number of generations that improved the global
 best.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">final_mean_fitness(M)</span></code> — mean fitness of the final population.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">final_diversity(D)</span></code> — diversity of the final population.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">final_mean_fitness(M)</span></code> - mean fitness of the final population.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">final_diversity(D)</span></code> - diversity of the final population.</p></li>
 </ul>
 <p>Fitness values are reported unchanged. The <code class="docutils literal notranslate"><span class="pre">objective/1</span></code> option only
 controls which values are considered better.</p>

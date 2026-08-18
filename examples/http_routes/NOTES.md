@@ -43,13 +43,13 @@ routes and a client that calls each of them:
   implements the `http_handler_protocol` protocol. It declares three
   routes using `route/4` facts:
 
-  - `GET /hello` — a plain static route that returns a fixed text
+  - `GET /hello` - a plain static route that returns a fixed text
     response.
-  - `GET /users/{id:integer}` — a route using a typed path-template
+  - `GET /users/{id:integer}` - a route using a typed path-template
     placeholder; the router extracts and types the path parameter and
     annotates the request with a `path_params/1` property before
     calling the handler.
-  - `POST /echo` — a route that reads the request body and echoes it
+  - `POST /echo` - a route that reads the request body and echoes it
     back, prefixed with `"Echo: "`.
 
 - `routes_demo` is an object that starts a local, loopback HTTP

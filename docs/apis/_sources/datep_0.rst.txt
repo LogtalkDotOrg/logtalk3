@@ -253,7 +253,7 @@ Computes the difference between two datetimes as integer seconds, as ``duration(
 ``utc_to_local/3``
 ^^^^^^^^^^^^^^^^^^
 
-Converts a UTC datetime to a local datetime using an explicit timezone offset atom (``Z`` or ``±HH:MM``).
+Converts a UTC datetime to a local datetime using an explicit timezone offset atom (``Z`` or ``+/-HH:MM``).
 
 | **Compilation flags:**
 |    ``static``
@@ -272,7 +272,7 @@ Converts a UTC datetime to a local datetime using an explicit timezone offset at
 ``local_to_utc/3``
 ^^^^^^^^^^^^^^^^^^
 
-Converts a local datetime to UTC using an explicit timezone offset atom (``Z`` or ``±HH:MM``).
+Converts a local datetime to UTC using an explicit timezone offset atom (``Z`` or ``+/-HH:MM``).
 
 | **Compilation flags:**
 |    ``static``

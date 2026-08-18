@@ -113,7 +113,7 @@
 		^^assertion((number(Diversity), Diversity >= 0.0)).
 
 	test(de_evaluation_count, deterministic(Evaluations =:= 30 * 31)) :-
-		% population_size(30) default, max_generations(30) → 30 * (30+1)
+		% population_size(30) default, max_generations(30) -> 30 * (30+1)
 		differential_evolution(sphere)::run(_Position, _Fitness, Statistics, [seed(42), max_generations(30)]),
 		memberchk(evaluations(Evaluations), Statistics).
 

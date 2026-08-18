@@ -434,8 +434,8 @@ link in a web browser.</p>
 <p>This library implements the following string distance algorithms:</p>
 <ul class="simple">
 <li><p><strong>Levenshtein</strong> distance is probably the most well-known. It counts
-the minimum number of single-character edits — insertions, deletions,
-or substitutions — needed to transform one string into another. For
+the minimum number of single-character edits - insertions, deletions,
+or substitutions - needed to transform one string into another. For
 example, the distance between “kitten” and “sitting” is 3.</p></li>
 <li><p><strong>Damerau-Levenshtein</strong> distance extends Levenshtein by also allowing
 transpositions of two adjacent characters as a single edit operation.
@@ -449,7 +449,7 @@ identifiers.</p></li>
 <li><p><strong>Jaro and Jaro-Winkler</strong> distance produce a similarity score between
 0 and 1 rather than a raw edit count. Jaro considers matching
 characters and transpositions, while Jaro-Winkler adds a
-prefix-weighting boost — the idea being that strings matching at the
+prefix-weighting boost - the idea being that strings matching at the
 start are more likely to be the same (useful for name matching).</p></li>
 <li><p><strong>Edit similarity</strong> is a normalized version of the edit distance,
 defined as 1 - (edit distance / max length of the two strings). It

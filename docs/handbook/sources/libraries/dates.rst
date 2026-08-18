@@ -25,9 +25,9 @@ It also provides portable predicates for date-time handling, including:
 
 The duration predicates accept two duration representations:
 
-- ``duration(Days, Hours, Minutes, Seconds)`` — a fixed-length duration
+- ``duration(Days, Hours, Minutes, Seconds)`` - a fixed-length duration
   converted to seconds
-- ``duration(Years, Months, Days, Hours, Minutes, Seconds)`` — a
+- ``duration(Years, Months, Days, Hours, Minutes, Seconds)`` - a
   calendar-aware period where the year and month delta is applied first
   using calendar arithmetic, clamping the day to the last valid day of
   the resulting month when necessary (e.g. adding one month to January

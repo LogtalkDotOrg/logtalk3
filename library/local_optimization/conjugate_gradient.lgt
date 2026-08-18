@@ -31,7 +31,7 @@
 			'Problem' - 'Problem object implementing ``local_optimization_problem_protocol`` and defining ``gradient/2``.'
 		],
 		remarks is [
-			'Beta formulas' - 'The ``beta(fletcher_reeves)`` and ``beta(polak_ribiere)`` options select the conjugacy coefficient. Polak-Ribière uses the standard non-negative truncation ``max(β, 0)``.',
+			'Beta formulas' - 'The ``beta(fletcher_reeves)`` and ``beta(polak_ribiere)`` options select the conjugacy coefficient. Polak-Ribière uses the standard non-negative truncation ``max(Beta, 0)``.',
 			'Restarts' - 'The search direction is reset to steepest descent every ``restart(N)`` iterations (default: dimension) and whenever the new direction is insufficiently downhill.',
 			'Line search' - 'Backtracking Armijo line search (same parameters as gradient descent).',
 			'Bounds' - 'When the problem defines ``position_bounds/1``, trial points are projected onto the box after each step.'
@@ -211,7 +211,7 @@
 		Dir = Grad.
 
 	new_direction(Iter, _Dim, Restart, _BetaFormula, ObjDir, _Grad0, Grad1, _GradNorm1, _Dir0, Dir1) :-
-		% periodic restart → steepest descent
+		% periodic restart -> steepest descent
 		Restart > 0,
 		Iter mod Restart =:= 0,
 		!,
@@ -222,8 +222,8 @@
 			Beta is max(0.0, Beta0)		% standard PR+ truncation
 		;	Beta = Beta0
 		),
-		% d_new = -g_new + β d_old   (minimize)
-		% d_new = +g_new + β d_old   (maximize)
+		% d_new = -g_new + beta d_old   (minimize)
+		% d_new = +g_new + beta d_old   (maximize)
 		steepest_direction(ObjDir, Grad1, Steep),
 		scale_vector(Dir0, Beta, ScaledDir),
 		add_vectors(Steep, ScaledDir, DirCandidate),
@@ -240,7 +240,7 @@
 			)
 		).
 
-	% Fletcher–Reeves: β = ||g1||² / ||g0||²
+	% Fletcher–Reeves: beta = ||g1||^2 / ||g0||^2
 	beta(fletcher_reeves, Grad0, _Grad1, GradNorm1, Beta) :-
 		euclidean_norm(Grad0, GradNorm0),
 		(	GradNorm0 =:= 0 ->
@@ -248,7 +248,7 @@
 		;	Beta is (GradNorm1 * GradNorm1) / (GradNorm0 * GradNorm0)
 		).
 
-	% Polak–Ribière: β = g1·(g1 - g0) / ||g0||²
+	% Polak–Ribière: beta = g1·(g1 - g0) / ||g0||^2
 	beta(polak_ribiere, Grad0, Grad1, _GradNorm1, Beta) :-
 		subtract_vectors(Grad1, Grad0, Diff),
 		dot_product(Grad1, Diff, Num),

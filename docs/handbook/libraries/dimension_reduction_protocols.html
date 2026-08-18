@@ -470,28 +470,28 @@ learned feature representation must remain non-negative.</p>
 <h2>Test datasets<a class="headerlink" href="#test-datasets" title="Link to this heading"></a></h2>
 <p>Several sample datasets are included in the <code class="docutils literal notranslate"><span class="pre">test_datasets</span></code> directory:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">correlated_plane.lgt</span></code> — A compact continuous dataset with 8
+<li><p><code class="docutils literal notranslate"><span class="pre">correlated_plane.lgt</span></code> - A compact continuous dataset with 8
 examples and 3 continuous attributes (<code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>, <code class="docutils literal notranslate"><span class="pre">z</span></code>) where the
 features are strongly correlated. It is intended for PCA and
 projection smoke tests.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">high_dimensional_measurements.lgt</span></code> — A small continuous dataset
+<li><p><code class="docutils literal notranslate"><span class="pre">high_dimensional_measurements.lgt</span></code> - A small continuous dataset
 with 10 examples and 6 continuous attributes (<code class="docutils literal notranslate"><span class="pre">f1</span></code> through <code class="docutils literal notranslate"><span class="pre">f6</span></code>).
 It is intended for testing projected dimensionality and reducer output
 shape.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">low_rank_rectangular.lgt</span></code> — A compact continuous dataset with 4
+<li><p><code class="docutils literal notranslate"><span class="pre">low_rank_rectangular.lgt</span></code> - A compact continuous dataset with 4
 examples and 3 continuous attributes whose third feature is the sum of
 the first two. It is intended for testing matrix-rank truncation and
 singular-value-based reducers such as <code class="docutils literal notranslate"><span class="pre">truncated_svd_projection</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">labeled_measurements.lgt</span></code> — A compact labeled continuous dataset
+<li><p><code class="docutils literal notranslate"><span class="pre">labeled_measurements.lgt</span></code> - A compact labeled continuous dataset
 with 9 examples, 4 continuous attributes (<code class="docutils literal notranslate"><span class="pre">length</span></code>, <code class="docutils literal notranslate"><span class="pre">width</span></code>,
 <code class="docutils literal notranslate"><span class="pre">height</span></code>, <code class="docutils literal notranslate"><span class="pre">weight</span></code>), and 3 class labels (<code class="docutils literal notranslate"><span class="pre">alpha</span></code>, <code class="docutils literal notranslate"><span class="pre">beta</span></code>,
 <code class="docutils literal notranslate"><span class="pre">gamma</span></code>). It is intended for testing supervised reducers such as
 <code class="docutils literal notranslate"><span class="pre">lda_projection</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">parts_based_measurements.lgt</span></code> — A compact non-negative continuous
+<li><p><code class="docutils literal notranslate"><span class="pre">parts_based_measurements.lgt</span></code> - A compact non-negative continuous
 dataset with 5 examples and 4 continuous attributes (<code class="docutils literal notranslate"><span class="pre">f1</span></code> through
 <code class="docutils literal notranslate"><span class="pre">f4</span></code>) built from two latent additive parts. It is intended for
 testing parts-based reducers such as <code class="docutils literal notranslate"><span class="pre">nmf_projection</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">target_latent_measurements.lgt</span></code> — A compact target-valued
+<li><p><code class="docutils literal notranslate"><span class="pre">target_latent_measurements.lgt</span></code> - A compact target-valued
 continuous dataset with 6 examples, 4 continuous attributes (<code class="docutils literal notranslate"><span class="pre">f1</span></code>
 through <code class="docutils literal notranslate"><span class="pre">f4</span></code>), and a numeric target attribute (<code class="docutils literal notranslate"><span class="pre">score</span></code>) influenced
 by two latent directions. It is intended for testing target-supervised

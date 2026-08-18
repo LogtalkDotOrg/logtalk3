@@ -106,31 +106,31 @@ Test datasets
 
 Several sample datasets are included in the `test_datasets` directory:
 
-- `correlated_plane.lgt` — A compact continuous dataset with 8 examples
+- `correlated_plane.lgt` - A compact continuous dataset with 8 examples
   and 3 continuous attributes (`x`, `y`, `z`) where the features are
   strongly correlated. It is intended for PCA and projection smoke
   tests.
 
-- `high_dimensional_measurements.lgt` — A small continuous dataset with 10
+- `high_dimensional_measurements.lgt` - A small continuous dataset with 10
   examples and 6 continuous attributes (`f1` through `f6`). It is
   intended for testing projected dimensionality and reducer output shape.
 
-- `low_rank_rectangular.lgt` — A compact continuous dataset with 4
+- `low_rank_rectangular.lgt` - A compact continuous dataset with 4
   examples and 3 continuous attributes whose third feature is the sum of
   the first two. It is intended for testing matrix-rank truncation and
   singular-value-based reducers such as `truncated_svd_projection`.
 
-- `labeled_measurements.lgt` — A compact labeled continuous dataset with 9
+- `labeled_measurements.lgt` - A compact labeled continuous dataset with 9
   examples, 4 continuous attributes (`length`, `width`, `height`,
   `weight`), and 3 class labels (`alpha`, `beta`, `gamma`). It is
   intended for testing supervised reducers such as `lda_projection`.
 
-- `parts_based_measurements.lgt` — A compact non-negative continuous
+- `parts_based_measurements.lgt` - A compact non-negative continuous
   dataset with 5 examples and 4 continuous attributes (`f1` through
   `f4`) built from two latent additive parts. It is intended for testing
   parts-based reducers such as `nmf_projection`.
 
-- `target_latent_measurements.lgt` — A compact target-valued continuous
+- `target_latent_measurements.lgt` - A compact target-valued continuous
   dataset with 6 examples, 4 continuous attributes (`f1` through `f4`),
   and a numeric target attribute (`score`) influenced by two latent
   directions. It is intended for testing target-supervised reducers such

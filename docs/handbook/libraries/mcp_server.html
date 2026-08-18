@@ -262,7 +262,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#elicitation-2025-06-18-spec">Elicitation (2025-06-18 spec)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#multi-round-tool-results-mrtr-2026-07-28-spec">Multi-round tool results — MRTR (2026-07-28 spec)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multi-round-tool-results-mrtr-2026-07-28-spec">Multi-round tool results - MRTR (2026-07-28 spec)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#caching-2026-07-28-spec">Caching (2026-07-28 spec)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#progress-2026-07-28-spec">Progress (2026-07-28 spec)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#subscriptions-and-notifications-2026-07-28-spec">Subscriptions and notifications (2026-07-28 spec)</a></li>
@@ -270,7 +270,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#resources">Resources</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#mcp-client-configuration">MCP client configuration</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#error-handling">Error handling</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id5">2025-06-18 spec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">2025-06-18 spec</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#spec-1">2026-07-28 spec</a></li>
 </ul>
 </li>
@@ -283,7 +283,7 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#supported-mcp-methods-per-spec">Supported MCP methods per spec</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id8">2025-06-18 spec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">2025-06-18 spec</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#spec-2">2026-07-28 spec</a></li>
 </ul>
 </li>
@@ -441,9 +441,9 @@ Makes any Logtalk application available as a local MCP server using
 stdio transport.</p>
 <p>Supports two specification dates via dedicated adapters:</p>
 <ul class="simple">
-<li><p><strong>2025-06-18</strong> (default) — tools, prompts, resources, synchronous
+<li><p><strong>2025-06-18</strong> (default) - tools, prompts, resources, synchronous
 elicitation, structured output, resource links, version negotiation.</p></li>
-<li><p><strong>2026-07-28</strong> — discovery, tools/prompts/resources, multi-round tool
+<li><p><strong>2026-07-28</strong> - discovery, tools/prompts/resources, multi-round tool
 results (MRTR), caching, progress, subscriptions, cancellation.</p></li>
 </ul>
 <p>The adapter used by a server instance can be selected using the
@@ -685,12 +685,12 @@ returns them as text content.</p>
 <p>For custom result formatting, implement <code class="docutils literal notranslate"><span class="pre">tool_call/3</span></code>. The <code class="docutils literal notranslate"><span class="pre">Result</span></code>
 term can be:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">text(Atom)</span></code> — a text result</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">error(Atom)</span></code> — a tool-level error (<code class="docutils literal notranslate"><span class="pre">isError:</span> <span class="pre">true</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">results(List)</span></code> — content items (<code class="docutils literal notranslate"><span class="pre">text/1</span></code>, <code class="docutils literal notranslate"><span class="pre">error/1</span></code>,
+<li><p><code class="docutils literal notranslate"><span class="pre">text(Atom)</span></code> - a text result</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">error(Atom)</span></code> - a tool-level error (<code class="docutils literal notranslate"><span class="pre">isError:</span> <span class="pre">true</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">results(List)</span></code> - content items (<code class="docutils literal notranslate"><span class="pre">text/1</span></code>, <code class="docutils literal notranslate"><span class="pre">error/1</span></code>,
 <code class="docutils literal notranslate"><span class="pre">resource_link/2</span></code>, <code class="docutils literal notranslate"><span class="pre">resource_link/4</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">structured(StructuredContent)</span></code> — structured output with auto text</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">structured(Items,</span> <span class="pre">StructuredContent)</span></code> — structured output with
+<li><p><code class="docutils literal notranslate"><span class="pre">structured(StructuredContent)</span></code> - structured output with auto text</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">structured(Items,</span> <span class="pre">StructuredContent)</span></code> - structured output with
 explicit content items</p></li>
 </ul>
 <p>For example:</p>
@@ -772,9 +772,9 @@ argument is an elicitation closure. For example:</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">Elicit</span></code> closure is called as
 <code class="docutils literal notranslate"><span class="pre">call(Elicit,</span> <span class="pre">Message,</span> <span class="pre">Schema,</span> <span class="pre">Answer)</span></code> where:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Message</span></code> — an atom with the prompt text</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Schema</span></code> — a curly-term JSON Schema for the requested input</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Answer</span></code> — unified with <code class="docutils literal notranslate"><span class="pre">accept(Content)</span></code>, <code class="docutils literal notranslate"><span class="pre">decline</span></code>, or
+<li><p><code class="docutils literal notranslate"><span class="pre">Message</span></code> - an atom with the prompt text</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Schema</span></code> - a curly-term JSON Schema for the requested input</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Answer</span></code> - unified with <code class="docutils literal notranslate"><span class="pre">accept(Content)</span></code>, <code class="docutils literal notranslate"><span class="pre">decline</span></code>, or
 <code class="docutils literal notranslate"><span class="pre">cancel</span></code></p></li>
 </ul>
 <p>When <code class="docutils literal notranslate"><span class="pre">accept(Content)</span></code> is returned, <code class="docutils literal notranslate"><span class="pre">Content</span></code> is a curly-term with
@@ -786,7 +786,7 @@ Multi-round interaction for the 2026-07-28 spec uses
 <code class="docutils literal notranslate"><span class="pre">mcp_multiround_protocol</span></code> instead.</p>
 </section>
 <section id="multi-round-tool-results-mrtr-2026-07-28-spec">
-<span id="id4"></span><h2>Multi-round tool results — MRTR (2026-07-28 spec)<a class="headerlink" href="#multi-round-tool-results-mrtr-2026-07-28-spec" title="Link to this heading"></a></h2>
+<h2>Multi-round tool results - MRTR (2026-07-28 spec)<a class="headerlink" href="#multi-round-tool-results-mrtr-2026-07-28-spec" title="Link to this heading"></a></h2>
 <p>Implement <code class="docutils literal notranslate"><span class="pre">mcp_multiround_protocol</span></code> and define round hooks:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">tool_call_round/4</span></code></p></li>
@@ -797,8 +797,8 @@ Multi-round interaction for the 2026-07-28 spec uses
 <code class="docutils literal notranslate"><span class="pre">request_context(ClientCapabilities,</span> <span class="pre">InputResponses,</span> <span class="pre">RequestState,</span> <span class="pre">Progress)</span></code>
 term and returns either:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">complete(Result)</span></code> — using the existing canonical result vocabulary</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">input_required(InputRequests,</span> <span class="pre">RequestState)</span></code> — request more input</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">complete(Result)</span></code> - using the existing canonical result vocabulary</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">input_required(InputRequests,</span> <span class="pre">RequestState)</span></code> - request more input</p></li>
 </ul>
 <p><code class="docutils literal notranslate"><span class="pre">InputRequests</span></code> is a list of uniquely keyed
 <code class="docutils literal notranslate"><span class="pre">input_request(Key,</span> <span class="pre">Request)</span></code> terms. Allowed request forms:</p>
@@ -917,29 +917,29 @@ capabilities:</p>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">prompts/1</span></code> predicate returns a list of prompt descriptors:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">prompt(Name,</span> <span class="pre">Description,</span> <span class="pre">Arguments)</span></code> — without title</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">prompt(Name,</span> <span class="pre">Title,</span> <span class="pre">Description,</span> <span class="pre">Arguments)</span></code> — with title</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prompt(Name,</span> <span class="pre">Description,</span> <span class="pre">Arguments)</span></code> - without title</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prompt(Name,</span> <span class="pre">Title,</span> <span class="pre">Description,</span> <span class="pre">Arguments)</span></code> - with title</p></li>
 </ul>
 <p>Where:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Name</span></code> — the MCP prompt name (an atom)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Title</span></code> — a human-friendly display name (an atom, optional)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Description</span></code> — a human-readable description (an atom)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Arguments</span></code> — a list of
+<li><p><code class="docutils literal notranslate"><span class="pre">Name</span></code> - the MCP prompt name (an atom)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Title</span></code> - a human-friendly display name (an atom, optional)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Description</span></code> - a human-readable description (an atom)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Arguments</span></code> - a list of
 <code class="docutils literal notranslate"><span class="pre">argument(ArgName,</span> <span class="pre">ArgDescription,</span> <span class="pre">Required)</span></code> terms where
 <code class="docutils literal notranslate"><span class="pre">Required</span></code> is <code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code></p></li>
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">prompt_get/3</span></code> predicate handles prompt get requests. Its result
 term can be:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">messages(MessageList)</span></code> — a list of prompt messages</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">messages(Description,</span> <span class="pre">MessageList)</span></code> — a list of messages with a
+<li><p><code class="docutils literal notranslate"><span class="pre">messages(MessageList)</span></code> - a list of prompt messages</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">messages(Description,</span> <span class="pre">MessageList)</span></code> - a list of messages with a
 description</p></li>
 </ul>
 <p>Each message in the list is a <code class="docutils literal notranslate"><span class="pre">message(Role,</span> <span class="pre">Content)</span></code> term where:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Role</span></code> — <code class="docutils literal notranslate"><span class="pre">user</span></code> or <code class="docutils literal notranslate"><span class="pre">assistant</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Content</span></code> — <code class="docutils literal notranslate"><span class="pre">text(Text)</span></code> where <code class="docutils literal notranslate"><span class="pre">Text</span></code> is an atom</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Role</span></code> - <code class="docutils literal notranslate"><span class="pre">user</span></code> or <code class="docutils literal notranslate"><span class="pre">assistant</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Content</span></code> - <code class="docutils literal notranslate"><span class="pre">text(Text)</span></code> where <code class="docutils literal notranslate"><span class="pre">Text</span></code> is an atom</p></li>
 </ul>
 <p>Multi-turn prompts can return multiple messages:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>prompt_get(debate, <span class="nv">Arguments</span>, <span class="nv">Result</span>) <span class="o">:-</span>
@@ -986,25 +986,25 @@ declare <code class="docutils literal notranslate"><span class="pre">resources</
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">resources/1</span></code> predicate returns a list of resource descriptors:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">resource(URI,</span> <span class="pre">Name,</span> <span class="pre">Description,</span> <span class="pre">MimeType)</span></code> — without title</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">resource(URI,</span> <span class="pre">Name,</span> <span class="pre">Title,</span> <span class="pre">Description,</span> <span class="pre">MimeType)</span></code> — with title</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">resource(URI,</span> <span class="pre">Name,</span> <span class="pre">Description,</span> <span class="pre">MimeType)</span></code> - without title</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">resource(URI,</span> <span class="pre">Name,</span> <span class="pre">Title,</span> <span class="pre">Description,</span> <span class="pre">MimeType)</span></code> - with title</p></li>
 </ul>
 <p>Where:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">URI</span></code> — the resource identifier (an atom, typically a URI like
+<li><p><code class="docutils literal notranslate"><span class="pre">URI</span></code> - the resource identifier (an atom, typically a URI like
 <code class="docutils literal notranslate"><span class="pre">logtalk://my-app/data</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Name</span></code> — a human-readable name (an atom)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Title</span></code> — a human-friendly display name (an atom, optional)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Description</span></code> — a human-readable description (an atom)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">MimeType</span></code> — the MIME type of the resource content (an atom, e.g.
+<li><p><code class="docutils literal notranslate"><span class="pre">Name</span></code> - a human-readable name (an atom)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Title</span></code> - a human-friendly display name (an atom, optional)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Description</span></code> - a human-readable description (an atom)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MimeType</span></code> - the MIME type of the resource content (an atom, e.g.
 <code class="docutils literal notranslate"><span class="pre">'text/plain'</span></code>, <code class="docutils literal notranslate"><span class="pre">'application/json'</span></code>)</p></li>
 </ul>
 <p>The <code class="docutils literal notranslate"><span class="pre">resource_read/3</span></code> predicate handles resource read requests. Its
 result term must be <code class="docutils literal notranslate"><span class="pre">contents(ContentList)</span></code> where each content item
 is:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">text_content(URI,</span> <span class="pre">MimeType,</span> <span class="pre">Text)</span></code> — for text resources</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">blob_content(URI,</span> <span class="pre">MimeType,</span> <span class="pre">Base64Data)</span></code> — for binary resources
+<li><p><code class="docutils literal notranslate"><span class="pre">text_content(URI,</span> <span class="pre">MimeType,</span> <span class="pre">Text)</span></code> - for text resources</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">blob_content(URI,</span> <span class="pre">MimeType,</span> <span class="pre">Base64Data)</span></code> - for binary resources
 encoded as base64</p></li>
 </ul>
 <p>A resource can return multiple content items. For example:</p>
@@ -1067,8 +1067,8 @@ instead:</p>
 </section>
 <section id="error-handling">
 <h2>Error handling<a class="headerlink" href="#error-handling" title="Link to this heading"></a></h2>
-<section id="id5">
-<span id="id6"></span><h3>2025-06-18 spec<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<section id="id4">
+<span id="id5"></span><h3>2025-06-18 spec<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Predicate failures result in a tool-level error with
 <code class="docutils literal notranslate"><span class="pre">isError:</span> <span class="pre">true</span></code>.</p></li>
@@ -1079,7 +1079,7 @@ term serialized as the error text.</p></li>
 </ul>
 </section>
 <section id="spec-1">
-<span id="id7"></span><h3>2026-07-28 spec<a class="headerlink" href="#spec-1" title="Link to this heading"></a></h3>
+<span id="id6"></span><h3>2026-07-28 spec<a class="headerlink" href="#spec-1" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Code</p></th>
@@ -1117,19 +1117,19 @@ details.</p>
 <section id="mcp-tool-protocol">
 <h3><code class="docutils literal notranslate"><span class="pre">mcp_tool_protocol</span></code><a class="headerlink" href="#mcp-tool-protocol" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">capabilities/1</span></code> — returns the list of additional features needed by
+<li><p><code class="docutils literal notranslate"><span class="pre">capabilities/1</span></code> - returns the list of additional features needed by
 the application (e.g. <code class="docutils literal notranslate"><span class="pre">[elicitation]</span></code>, <code class="docutils literal notranslate"><span class="pre">[prompts]</span></code>,
 <code class="docutils literal notranslate"><span class="pre">[resources]</span></code>, or <code class="docutils literal notranslate"><span class="pre">[prompts,</span> <span class="pre">resources,</span> <span class="pre">elicitation]</span></code>);
 <code class="docutils literal notranslate"><span class="pre">prompts</span></code> and <code class="docutils literal notranslate"><span class="pre">resources</span></code> are server capabilities while
 <code class="docutils literal notranslate"><span class="pre">elicitation</span></code> is a required client capability; optional, defaults to
 <code class="docutils literal notranslate"><span class="pre">[]</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">tools/1</span></code> — returns the list of tool descriptors</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">tool_call/3</span></code> — handles a tool call (optional; auto-dispatch is used
+<li><p><code class="docutils literal notranslate"><span class="pre">tools/1</span></code> - returns the list of tool descriptors</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tool_call/3</span></code> - handles a tool call (optional; auto-dispatch is used
 when not defined)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">tool_call/4</span></code> — handles a tool call with an elicitation closure
+<li><p><code class="docutils literal notranslate"><span class="pre">tool_call/4</span></code> - handles a tool call with an elicitation closure
 (optional; requires <code class="docutils literal notranslate"><span class="pre">capabilities([elicitation])</span></code> or
 <code class="docutils literal notranslate"><span class="pre">capabilities([...,</span> <span class="pre">elicitation])</span></code>; <strong>2025-06-18 only</strong>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">output_schema/2</span></code> — declares a JSON Schema for structured tool
+<li><p><code class="docutils literal notranslate"><span class="pre">output_schema/2</span></code> - declares a JSON Schema for structured tool
 output (optional; when defined, the tool descriptor includes
 <code class="docutils literal notranslate"><span class="pre">outputSchema</span></code>)</p></li>
 </ul>
@@ -1137,15 +1137,15 @@ output (optional; when defined, the tool descriptor includes
 <section id="mcp-prompt-protocol">
 <h3><code class="docutils literal notranslate"><span class="pre">mcp_prompt_protocol</span></code><a class="headerlink" href="#mcp-prompt-protocol" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">prompts/1</span></code> — returns the list of prompt descriptors</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">prompt_get/3</span></code> — handles a prompt get request</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prompts/1</span></code> - returns the list of prompt descriptors</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">prompt_get/3</span></code> - handles a prompt get request</p></li>
 </ul>
 </section>
 <section id="mcp-resource-protocol">
 <h3><code class="docutils literal notranslate"><span class="pre">mcp_resource_protocol</span></code><a class="headerlink" href="#mcp-resource-protocol" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">resources/1</span></code> — returns the list of resource descriptors</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">resource_read/3</span></code> — handles a resource read request</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">resources/1</span></code> - returns the list of resource descriptors</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">resource_read/3</span></code> - handles a resource read request</p></li>
 </ul>
 </section>
 <section id="mcp-multiround-protocol-2026-07-28">
@@ -1160,14 +1160,14 @@ resource read</p></li>
 <section id="mcp-cache-protocol-2026-07-28">
 <h3><code class="docutils literal notranslate"><span class="pre">mcp_cache_protocol</span></code> (2026-07-28)<a class="headerlink" href="#mcp-cache-protocol-2026-07-28" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">cache_policy/4</span></code> — optional per-operation TTL and scope</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cache_policy/4</span></code> - optional per-operation TTL and scope</p></li>
 </ul>
 </section>
 </section>
 <section id="supported-mcp-methods-per-spec">
 <h2>Supported MCP methods per spec<a class="headerlink" href="#supported-mcp-methods-per-spec" title="Link to this heading"></a></h2>
-<section id="id8">
-<span id="id9"></span><h3>2025-06-18 spec<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<section id="id7">
+<span id="id8"></span><h3>2025-06-18 spec<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Method</p></th>
@@ -1224,7 +1224,7 @@ input</p></td>
 </table>
 </section>
 <section id="spec-2">
-<span id="id10"></span><h3>2026-07-28 spec<a class="headerlink" href="#spec-2" title="Link to this heading"></a></h3>
+<span id="id9"></span><h3>2026-07-28 spec<a class="headerlink" href="#spec-2" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Method</p></th>

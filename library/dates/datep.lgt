@@ -109,14 +109,14 @@
 	:- public(utc_to_local/3).
 	:- mode(utc_to_local(+compound, +atom, -compound), zero_or_one).
 	:- info(utc_to_local/3, [
-		comment is 'Converts a UTC datetime to a local datetime using an explicit timezone offset atom (``Z`` or ``±HH:MM``).',
+		comment is 'Converts a UTC datetime to a local datetime using an explicit timezone offset atom (``Z`` or ``+/-HH:MM``).',
 		argnames is ['UTCDateTime', 'Offset', 'LocalDateTime']
 	]).
 
 	:- public(local_to_utc/3).
 	:- mode(local_to_utc(+compound, +atom, -compound), zero_or_one).
 	:- info(local_to_utc/3, [
-		comment is 'Converts a local datetime to UTC using an explicit timezone offset atom (``Z`` or ``±HH:MM``).',
+		comment is 'Converts a local datetime to UTC using an explicit timezone offset atom (``Z`` or ``+/-HH:MM``).',
 		argnames is ['LocalDateTime', 'Offset', 'UTCDateTime']
 	]).
 

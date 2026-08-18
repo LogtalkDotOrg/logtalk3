@@ -487,19 +487,21 @@ which is directly sensitive to how tightly training has converged.</p>
 <p>Empirically, training with the constant learning-rate schedule
 (<code class="docutils literal notranslate"><span class="pre">learning_schedule(constant)</span></code>) plateaus quickly and stays noisy even
 with many more epochs. Using
-<code class="docutils literal notranslate"><span class="pre">learning_schedule(inverse_scaling(Power))</span></code> instead — which decays the
-step size over epochs, satisfying the standard Robbins-Monro conditions
-for stochastic-approximation convergence — reduced prediction error by
-roughly an order of magnitude in testing against the same dataset and
-epoch budget. For this reason <code class="docutils literal notranslate"><span class="pre">inverse_scaling(0.5)</span></code> is the library
-default (rather than <code class="docutils literal notranslate"><span class="pre">kernel_svm_classifier</span></code>’s
-<code class="docutils literal notranslate"><span class="pre">learning_schedule(constant)</span></code> default), paired with a larger default
-<code class="docutils literal notranslate"><span class="pre">maximum_iterations</span></code> (<code class="docutils literal notranslate"><span class="pre">200</span></code> rather than <code class="docutils literal notranslate"><span class="pre">kernel_svm_classifier</span></code>’s
-<code class="docutils literal notranslate"><span class="pre">25</span></code>). When tighter fits are needed, raising <code class="docutils literal notranslate"><span class="pre">maximum_iterations</span></code>
-well into the hundreds or low thousands, optionally combined with a
-smaller <code class="docutils literal notranslate"><span class="pre">epsilon</span></code> and a larger initial <code class="docutils literal notranslate"><span class="pre">learning_rate</span></code> to compensate
-for the decaying schedule, converges substantially further; how far
-depends on the dataset.</p>
+<code class="docutils literal notranslate"><span class="pre">learning_schedule(inverse_scaling(Power))</span></code> instead</p>
+<ul class="simple">
+<li><p>which decays the step size over epochs, satisfying the standard
+Robbins-Monro conditions for stochastic-approximation convergence -
+reduced prediction error by roughly an order of magnitude in testing
+against the same dataset and epoch budget. For this reason
+<code class="docutils literal notranslate"><span class="pre">inverse_scaling(0.5)</span></code> is the library default (rather than
+<code class="docutils literal notranslate"><span class="pre">kernel_svm_classifier</span></code>’s <code class="docutils literal notranslate"><span class="pre">learning_schedule(constant)</span></code> default),
+paired with a larger default <code class="docutils literal notranslate"><span class="pre">maximum_iterations</span></code> (<code class="docutils literal notranslate"><span class="pre">200</span></code> rather
+than <code class="docutils literal notranslate"><span class="pre">kernel_svm_classifier</span></code>’s <code class="docutils literal notranslate"><span class="pre">25</span></code>). When tighter fits are
+needed, raising <code class="docutils literal notranslate"><span class="pre">maximum_iterations</span></code> well into the hundreds or low
+thousands, optionally combined with a smaller <code class="docutils literal notranslate"><span class="pre">epsilon</span></code> and a larger
+initial <code class="docutils literal notranslate"><span class="pre">learning_rate</span></code> to compensate for the decaying schedule,
+converges substantially further; how far depends on the dataset.</p></li>
+</ul>
 <p>Because <code class="docutils literal notranslate"><span class="pre">epsilon</span></code> is compared directly against residuals in the target
 variable’s own units, it is scale-dependent: an <code class="docutils literal notranslate"><span class="pre">epsilon</span></code> of <code class="docutils literal notranslate"><span class="pre">0.1</span></code>
 is a tight tolerance for a target ranging in the thousands and a loose
@@ -601,7 +603,7 @@ the form:</p>
 <p>Where <code class="docutils literal notranslate"><span class="pre">convergence(Status)</span></code> is <code class="docutils literal notranslate"><span class="pre">tolerance</span></code> when the maximum
 parameter update in a full epoch fell within the configured tolerance,
 and <code class="docutils literal notranslate"><span class="pre">maximum_iterations_exhausted</span></code> when training stopped because the
-epoch cap was reached — see the convergence note above for why the
+epoch cap was reached - see the convergence note above for why the
 latter is the common case with the default options.
 <code class="docutils literal notranslate"><span class="pre">final_delta(FinalDelta)</span></code> stores the maximum parameter change observed
 during the final epoch. The remaining fields follow the same conventions

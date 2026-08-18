@@ -76,68 +76,69 @@ Defining a problem
 A problem object must implement the
 ``particle_swarm_optimization_protocol`` protocol by defining:
 
-- ``initial_positions(-Positions)`` — returns a non-empty list of
+- ``initial_positions(-Positions)`` - returns a non-empty list of
   particle positions. Every position is a non-empty numeric list of the
   same length.
-- ``position_bounds(-Bounds)`` — returns one numeric ``Lower-Upper``
+- ``position_bounds(-Bounds)`` - returns one numeric ``Lower-Upper``
   pair per dimension, with ``Lower =< Upper``. Initial positions must be
   within bounds.
-- ``fitness(+Position, -Fitness)`` — computes a numeric fitness value.
+- ``fitness(+Position, -Fitness)`` - computes a numeric fitness value.
   The optimizer minimizes this value by default; use
   ``objective(maximize)`` to maximize it instead.
 
 Optionally, a problem object may define:
 
-- ``initial_velocities(-Velocities)`` — returns exactly one numeric
+- ``initial_velocities(-Velocities)`` - returns exactly one numeric
   velocity vector per initial position, with the same dimensions. Every
   component must be between plus or minus the corresponding position
   range, inclusively. When this predicate is not defined or fails,
   velocities are initialized randomly.
-- ``stop_condition(+Iteration, +BestPosition, +BestFitness)`` — succeeds
+- ``stop_condition(+Iteration, +BestPosition, +BestFitness)`` - succeeds
   when the search should terminate early.
 - ``progress(+Iteration, +BestPosition, +BestFitness, +MeanFitness, +Diversity)``
-  — called periodically during optimization. Diversity is the mean
-  Euclidean distance of particle positions from the swarm centroid. A
-  final report is produced when progress reporting is enabled.
+
+  - called periodically during optimization. Diversity is the mean
+    Euclidean distance of particle positions from the swarm centroid. A
+    final report is produced when progress reporting is enabled.
 
 Options
 -------
 
 Options for the ``run/3-4`` predicates:
 
-- ``objective(Objective)`` — optimization direction, either ``minimize``
+- ``objective(Objective)`` - optimization direction, either ``minimize``
   or ``maximize`` (default: ``minimize``).
-- ``target_fitness(Fitness)`` — numeric target that stops the run when
+- ``target_fitness(Fitness)`` - numeric target that stops the run when
   the best fitness reaches or passes it in the selected objective
   direction. Use ``none`` to disable target stopping (default:
   ``none``).
-- ``max_iterations(N)`` — maximum number of swarm iterations (default:
+- ``max_iterations(N)`` - maximum number of swarm iterations (default:
   ``1000``).
-- ``stagnation_iterations(N)`` — number of consecutive iterations
+- ``stagnation_iterations(N)`` - number of consecutive iterations
   without a strict global-best improvement before stopping. Set to ``0``
   to disable stagnation stopping (default: ``0``).
-- ``inertia_weight(W)`` — non-negative float velocity inertia weight
+- ``inertia_weight(W)`` - non-negative float velocity inertia weight
   (default: ``0.7298``).
-- ``cognitive_coefficient(C)`` — non-negative float personal-best
+- ``cognitive_coefficient(C)`` - non-negative float personal-best
   acceleration coefficient (default: ``1.49618``).
-- ``social_coefficient(C)`` — non-negative float global-best
+- ``social_coefficient(C)`` - non-negative float global-best
   acceleration coefficient (default: ``1.49618``).
-- ``updates(N)`` — number of progress reports during the run. Set to
+- ``updates(N)`` - number of progress reports during the run. Set to
   ``0`` to disable progress reporting (default: ``0``).
-- ``seed(S)`` — positive integer random seed for reproducible runs.
+- ``seed(S)`` - positive integer random seed for reproducible runs.
 
 Run statistics
 --------------
 
 The ``run/4`` predicate returns:
 
-- ``iterations(N)`` — number of completed swarm iterations.
-- ``evaluations(E)`` — number of fitness evaluations, including initial
+- ``iterations(N)`` - number of completed swarm iterations.
+- ``evaluations(E)`` - number of fitness evaluations, including initial
   positions.
-- ``improvements(I)`` — number of iterations that improved the global
+- ``improvements(I)`` - number of iterations that improved the global
   best.
-- ``final_mean_fitness(M)`` — mean fitness of the final swarm positions.
-- ``final_diversity(D)`` — diversity of the final swarm positions.
+- ``final_mean_fitness(M)`` - mean fitness of the final swarm positions.
+- ``final_diversity(D)`` - diversity of the final swarm positions.
 
 Fitness values are reported unchanged. Thus, ``BestFitness``,
 ``final_mean_fitness(M)``, and the fitness values passed to

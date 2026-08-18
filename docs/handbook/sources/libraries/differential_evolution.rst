@@ -97,7 +97,7 @@ control parameters):
 |                           |             |             |             | unknown         |
 |                           |             |             |             | landscapes      |
 +---------------------------+-------------+-------------+-------------+-----------------+
-| ``current-to-best/1/bin`` | Medium–Fast | Medium      | Medium      | General-purpose |
+| ``current-to-best/1/bin`` | Medium-Fast | Medium      | Medium      | General-purpose |
 |                           |             |             |             | continuous      |
 |                           |             |             |             | problems        |
 +---------------------------+-------------+-------------+-------------+-----------------+
@@ -115,7 +115,7 @@ control parameters):
   a good default for many engineering problems.
 
 More exploitative strategies often benefit from a modestly larger
-population or a slightly smaller differential weight (``F`` in 0.5–0.7).
+population or a slightly smaller differential weight (``F`` in 0.5-0.7).
 
 Defining a problem
 ------------------
@@ -123,64 +123,65 @@ Defining a problem
 Problem objects must implement
 ``differential_evolution_problem_protocol`` by defining:
 
-- ``position_bounds(-Bounds)`` — returns one numeric ``Lower-Upper``
+- ``position_bounds(-Bounds)`` - returns one numeric ``Lower-Upper``
   pair per dimension, with ``Lower =< Upper``.
-- ``fitness(+Position, -Fitness)`` — computes a numeric fitness value.
+- ``fitness(+Position, -Fitness)`` - computes a numeric fitness value.
   The optimizer minimizes this value by default; use
   ``objective(maximize)`` to maximize it instead.
 
 Optionally, a problem object may also define:
 
-- ``initial_positions(-Positions)`` — returns a non-empty list of
+- ``initial_positions(-Positions)`` - returns a non-empty list of
   initial positions lying inside the bounds. When not defined, the
   algorithm generates a random initial population.
-- ``stop_condition(+Generation, +BestPosition, +BestFitness)`` —
+- ``stop_condition(+Generation, +BestPosition, +BestFitness)`` -
   succeeds when the search should terminate early.
 - ``progress(+Generation, +BestPosition, +BestFitness, +MeanFitness, +Diversity)``
-  — called periodically during optimization. Diversity is the mean
-  Euclidean distance of population members from the centroid. A final
-  report is produced when progress reporting is enabled.
+
+  - called periodically during optimization. Diversity is the mean
+    Euclidean distance of population members from the centroid. A final
+    report is produced when progress reporting is enabled.
 
 Options
 -------
 
 Options for the ``run/3-4`` predicates:
 
-- ``strategy(Strategy)`` — mutation strategy: ``rand/1/bin`` (default),
+- ``strategy(Strategy)`` - mutation strategy: ``rand/1/bin`` (default),
   ``best/1/bin``, or ``current-to-best/1/bin``.
-- ``objective(Objective)`` — optimization direction, either ``minimize``
+- ``objective(Objective)`` - optimization direction, either ``minimize``
   or ``maximize`` (default: ``minimize``).
-- ``target_fitness(Fitness)`` — numeric target that stops the run when
+- ``target_fitness(Fitness)`` - numeric target that stops the run when
   the best fitness reaches or passes it in the selected objective
   direction. Use ``none`` to disable target stopping (default:
   ``none``).
-- ``population_size(N)`` — population size; must be at least 4 (default:
+- ``population_size(N)`` - population size; must be at least 4 (default:
   ``30``).
-- ``max_generations(N)`` — maximum number of generations (default:
+- ``max_generations(N)`` - maximum number of generations (default:
   ``100``).
-- ``crossover_probability(CR)`` — binomial crossover probability in
+- ``crossover_probability(CR)`` - binomial crossover probability in
   ``[0,1]`` (default: ``0.9``).
-- ``differential_weight(F)`` — positive scale factor for difference
+- ``differential_weight(F)`` - positive scale factor for difference
   vectors (default: ``0.8``).
-- ``stagnation_generations(N)`` — number of consecutive generations
+- ``stagnation_generations(N)`` - number of consecutive generations
   without a strict best-fitness improvement before stopping. Set to
   ``0`` to disable (default: ``0``).
-- ``updates(N)`` — number of progress reports during the run. Set to
+- ``updates(N)`` - number of progress reports during the run. Set to
   ``0`` to disable progress reporting (default: ``0``).
-- ``seed(S)`` — positive integer random seed for reproducible runs.
+- ``seed(S)`` - positive integer random seed for reproducible runs.
 
 Run statistics
 --------------
 
 The ``run/4`` predicate returns:
 
-- ``generations(N)`` — number of completed generations.
-- ``evaluations(E)`` — number of fitness evaluations, including the
+- ``generations(N)`` - number of completed generations.
+- ``evaluations(E)`` - number of fitness evaluations, including the
   initial population.
-- ``improvements(I)`` — number of generations that improved the global
+- ``improvements(I)`` - number of generations that improved the global
   best.
-- ``final_mean_fitness(M)`` — mean fitness of the final population.
-- ``final_diversity(D)`` — diversity of the final population.
+- ``final_mean_fitness(M)`` - mean fitness of the final population.
+- ``final_diversity(D)`` - diversity of the final population.
 
 Fitness values are reported unchanged. The ``objective/1`` option only
 controls which values are considered better.

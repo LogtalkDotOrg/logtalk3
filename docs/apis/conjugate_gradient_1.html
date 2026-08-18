@@ -466,7 +466,7 @@
 </div>
 <blockquote>
 <div><ul class="simple">
-<li><p>Beta formulas: The <code class="docutils literal notranslate"><span class="pre">beta(fletcher_reeves)</span></code> and <code class="docutils literal notranslate"><span class="pre">beta(polak_ribiere)</span></code> options select the conjugacy coefficient. Polak-Ribière uses the standard non-negative truncation <code class="docutils literal notranslate"><span class="pre">max(β,</span> <span class="pre">0)</span></code>.</p></li>
+<li><p>Beta formulas: The <code class="docutils literal notranslate"><span class="pre">beta(fletcher_reeves)</span></code> and <code class="docutils literal notranslate"><span class="pre">beta(polak_ribiere)</span></code> options select the conjugacy coefficient. Polak-Ribière uses the standard non-negative truncation <code class="docutils literal notranslate"><span class="pre">max(Beta,</span> <span class="pre">0)</span></code>.</p></li>
 <li><p>Restarts: The search direction is reset to steepest descent every <code class="docutils literal notranslate"><span class="pre">restart(N)</span></code> iterations (default: dimension) and whenever the new direction is insufficiently downhill.</p></li>
 <li><p>Line search: Backtracking Armijo line search (same parameters as gradient descent).</p></li>
 <li><p>Bounds: When the problem defines <code class="docutils literal notranslate"><span class="pre">position_bounds/1</span></code>, trial points are projected onto the box after each step.</p></li>

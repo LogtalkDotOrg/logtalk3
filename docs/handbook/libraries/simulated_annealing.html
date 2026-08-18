@@ -447,46 +447,46 @@ link in a web browser.</p>
 <section id="features">
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p><strong>Configurable random number generator</strong> — the algorithm is
+<li><p><strong>Configurable random number generator</strong> - the algorithm is
 parameterized by a <code class="docutils literal notranslate"><span class="pre">fast_random</span></code> algorithm. Available algorithms
 include <code class="docutils literal notranslate"><span class="pre">xoshiro128pp</span></code>, <code class="docutils literal notranslate"><span class="pre">xoshiro128ss</span></code>, <code class="docutils literal notranslate"><span class="pre">xoshiro256pp</span></code>,
 <code class="docutils literal notranslate"><span class="pre">xoshiro256ss</span></code>, <code class="docutils literal notranslate"><span class="pre">well512a</span></code>, <code class="docutils literal notranslate"><span class="pre">splitmix64</span></code>, and <code class="docutils literal notranslate"><span class="pre">as183</span></code>. The
 convenience object <code class="docutils literal notranslate"><span class="pre">simulated_annealing(Problem)</span></code> defaults to
 <code class="docutils literal notranslate"><span class="pre">xoshiro128pp</span></code>.</p></li>
-<li><p><strong>Boltzmann acceptance criterion</strong> — a worse neighbor is accepted with
+<li><p><strong>Boltzmann acceptance criterion</strong> - a worse neighbor is accepted with
 probability <code class="docutils literal notranslate"><span class="pre">exp(-DeltaE</span> <span class="pre">/</span> <span class="pre">Temperature)</span></code>, allowing the search to
 escape local minima early in the run while converging as the
 temperature cools.</p></li>
-<li><p><strong>Configurable cooling schedule</strong> — default geometric cooling
+<li><p><strong>Configurable cooling schedule</strong> - default geometric cooling
 (<code class="docutils literal notranslate"><span class="pre">NewTemp</span> <span class="pre">is</span> <span class="pre">Temp</span> <span class="pre">*</span> <span class="pre">0.995</span></code>), overridable by defining
 <code class="docutils literal notranslate"><span class="pre">cooling_schedule/3</span></code> in the problem object.</p></li>
-<li><p><strong>Custom stop conditions</strong> — the search stops when the maximum number
+<li><p><strong>Custom stop conditions</strong> - the search stops when the maximum number
 of steps is reached or the temperature drops below the minimum
 temperature. A problem object can define <code class="docutils literal notranslate"><span class="pre">stop_condition/3</span></code> to
 terminate early (e.g. when a good-enough solution is found).</p></li>
-<li><p><strong>Delta-energy optimization</strong> — when the problem object defines
+<li><p><strong>Delta-energy optimization</strong> - when the problem object defines
 <code class="docutils literal notranslate"><span class="pre">neighbor_state/3</span></code>, the algorithm uses the returned energy delta
 directly instead of recomputing the full energy. This is useful when
 computing the change is cheaper than evaluating the full cost (e.g. a
 2-opt swap in TSP).</p></li>
-<li><p><strong>Best state tracking</strong> — the algorithm tracks the best state found
+<li><p><strong>Best state tracking</strong> - the algorithm tracks the best state found
 across all iterations and across all restart cycles, not just the
 final state.</p></li>
-<li><p><strong>Progress reporting</strong> — if the problem object defines <code class="docutils literal notranslate"><span class="pre">progress/5</span></code>,
+<li><p><strong>Progress reporting</strong> - if the problem object defines <code class="docutils literal notranslate"><span class="pre">progress/5</span></code>,
 it is called periodically with the current step, temperature, best
 energy, acceptance rate, and improvement rate. A final report is
 always produced when the loop terminates.</p></li>
-<li><p><strong>Run statistics</strong> — the <code class="docutils literal notranslate"><span class="pre">run/4</span></code> predicate returns a list of
+<li><p><strong>Run statistics</strong> - the <code class="docutils literal notranslate"><span class="pre">run/4</span></code> predicate returns a list of
 statistics including the number of steps, acceptances, improvements,
 and the final temperature.</p></li>
-<li><p><strong>Seed control</strong> — the <code class="docutils literal notranslate"><span class="pre">seed(S)</span></code> option initializes the random
+<li><p><strong>Seed control</strong> - the <code class="docutils literal notranslate"><span class="pre">seed(S)</span></code> option initializes the random
 number generator for reproducible runs.</p></li>
-<li><p><strong>Reheating restarts</strong> — the <code class="docutils literal notranslate"><span class="pre">restarts(N)</span></code> option runs N additional
+<li><p><strong>Reheating restarts</strong> - the <code class="docutils literal notranslate"><span class="pre">restarts(N)</span></code> option runs N additional
 SA cycles after the first. Each restart reheats the temperature to the
 initial value and begins from the best state found so far, allowing
 the search to escape deep local minima. Statistics accumulate across
 all cycles.</p></li>
-<li><p><strong>Auto-temperature estimation</strong> — the <code class="docutils literal notranslate"><span class="pre">estimate_temperature/1-2</span></code>
+<li><p><strong>Auto-temperature estimation</strong> - the <code class="docutils literal notranslate"><span class="pre">estimate_temperature/1-2</span></code>
 predicates sample random neighbor transitions and compute an initial
 temperature that would produce a target acceptance rate, avoiding
 manual tuning.</p></li>
@@ -497,55 +497,58 @@ manual tuning.</p></li>
 <p>A problem object must implement the <code class="docutils literal notranslate"><span class="pre">simulated_annealing_protocol</span></code>
 protocol by defining (at least) the following four predicates:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">initial_state(-State)</span></code> — returns the starting state.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">neighbor_state(+State,</span> <span class="pre">-Neighbor)</span></code> — generates a neighboring state.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">state_energy(+State,</span> <span class="pre">-Energy)</span></code> — computes the cost of a state (to
+<li><p><code class="docutils literal notranslate"><span class="pre">initial_state(-State)</span></code> - returns the starting state.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">neighbor_state(+State,</span> <span class="pre">-Neighbor)</span></code> - generates a neighboring state.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">state_energy(+State,</span> <span class="pre">-Energy)</span></code> - computes the cost of a state (to
 be minimized).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">initial_temperature(-Temperature)</span></code> — returns the starting
+<li><p><code class="docutils literal notranslate"><span class="pre">initial_temperature(-Temperature)</span></code> - returns the starting
 temperature.</p></li>
 </ul>
 <p>Optionally, the problem object may also define:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">neighbor_state(+State,</span> <span class="pre">-Neighbor,</span> <span class="pre">-DeltaEnergy)</span></code> — generates a
+<li><p><code class="docutils literal notranslate"><span class="pre">neighbor_state(+State,</span> <span class="pre">-Neighbor,</span> <span class="pre">-DeltaEnergy)</span></code> - generates a
 neighboring state and returns the energy change directly, avoiding a
 full energy recomputation. Useful when computing the delta is cheaper
 than recomputing the full energy (e.g. TSP with a 2-opt swap).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">cooling_schedule(+Temperature,</span> <span class="pre">+Step,</span> <span class="pre">-NewTemperature)</span></code> — computes
+<li><p><code class="docutils literal notranslate"><span class="pre">cooling_schedule(+Temperature,</span> <span class="pre">+Step,</span> <span class="pre">-NewTemperature)</span></code> - computes
 the next temperature. Default: geometric cooling
 (<code class="docutils literal notranslate"><span class="pre">NewTemp</span> <span class="pre">is</span> <span class="pre">Temp</span> <span class="pre">*</span> <span class="pre">0.995</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">stop_condition(+Step,</span> <span class="pre">+Temperature,</span> <span class="pre">+BestEnergy)</span></code> — succeeds when
+<li><p><code class="docutils literal notranslate"><span class="pre">stop_condition(+Step,</span> <span class="pre">+Temperature,</span> <span class="pre">+BestEnergy)</span></code> - succeeds when
 the search should terminate early (e.g. when a good-enough solution is
 found). Default: the search runs until the maximum number of steps is
 reached or the temperature drops below the minimum temperature.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">progress(+Step,</span> <span class="pre">+Temperature,</span> <span class="pre">+BestEnergy,</span> <span class="pre">+AcceptanceRate,</span> <span class="pre">+ImprovementRate)</span></code>
-— called periodically during the optimization to report progress. A
+<li><p><code class="docutils literal notranslate"><span class="pre">progress(+Step,</span> <span class="pre">+Temperature,</span> <span class="pre">+BestEnergy,</span> <span class="pre">+AcceptanceRate,</span> <span class="pre">+ImprovementRate)</span></code></p>
+<ul>
+<li><p>called periodically during the optimization to report progress. A
 final report is always produced when the loop terminates. The
 acceptance and improvement rates are floats between 0.0 and 1.0.</p></li>
+</ul>
+</li>
 </ul>
 </section>
 <section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
 <p>Options for the <code class="docutils literal notranslate"><span class="pre">run/3-4</span></code> predicates:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">max_steps(N)</span></code> — maximum number of iterations per cycle (default:
+<li><p><code class="docutils literal notranslate"><span class="pre">max_steps(N)</span></code> - maximum number of iterations per cycle (default:
 <code class="docutils literal notranslate"><span class="pre">10000</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">min_temperature(T)</span></code> — minimum temperature floor; the search stops
+<li><p><code class="docutils literal notranslate"><span class="pre">min_temperature(T)</span></code> - minimum temperature floor; the search stops
 when the temperature drops below this value (default: <code class="docutils literal notranslate"><span class="pre">0.001</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">updates(N)</span></code> — number of progress reports during the run. Progress
+<li><p><code class="docutils literal notranslate"><span class="pre">updates(N)</span></code> - number of progress reports during the run. Progress
 is reported by calling <code class="docutils literal notranslate"><span class="pre">progress/5</span></code> on the problem object. Set to
 <code class="docutils literal notranslate"><span class="pre">0</span></code> to disable (default: <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">seed(S)</span></code> — positive integer seed for the random number generator,
+<li><p><code class="docutils literal notranslate"><span class="pre">seed(S)</span></code> - positive integer seed for the random number generator,
 enabling reproducible runs (default: none).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">restarts(N)</span></code> — number of additional SA cycles after the first. Each
+<li><p><code class="docutils literal notranslate"><span class="pre">restarts(N)</span></code> - number of additional SA cycles after the first. Each
 restart reheats the temperature to the initial value and begins from
 the best state found so far, allowing the search to escape local
 minima (default: <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p></li>
 </ul>
 <p>Options for the <code class="docutils literal notranslate"><span class="pre">estimate_temperature/2</span></code> predicate:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">samples(N)</span></code> — number of random neighbor transitions to sample
+<li><p><code class="docutils literal notranslate"><span class="pre">samples(N)</span></code> - number of random neighbor transitions to sample
 (default: <code class="docutils literal notranslate"><span class="pre">200</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">acceptance_rate(P)</span></code> — target initial acceptance rate as an integer
+<li><p><code class="docutils literal notranslate"><span class="pre">acceptance_rate(P)</span></code> - target initial acceptance rate as an integer
 percentage between 1 and 99 (default: <code class="docutils literal notranslate"><span class="pre">80</span></code>).</p></li>
 </ul>
 </section>
@@ -554,12 +557,12 @@ percentage between 1 and 99 (default: <code class="docutils literal notranslate"
 <p>The <code class="docutils literal notranslate"><span class="pre">run/4</span></code> predicate returns a list of statistics about the completed
 run:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">steps(N)</span></code> — total number of steps executed.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">acceptances(A)</span></code> — number of accepted moves (both improving and
+<li><p><code class="docutils literal notranslate"><span class="pre">steps(N)</span></code> - total number of steps executed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">acceptances(A)</span></code> - number of accepted moves (both improving and
 uphill).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">improvements(I)</span></code> — number of moves that strictly improved the best
+<li><p><code class="docutils literal notranslate"><span class="pre">improvements(I)</span></code> - number of moves that strictly improved the best
 energy found.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">final_temperature(T)</span></code> — temperature at termination.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">final_temperature(T)</span></code> - temperature at termination.</p></li>
 </ul>
 </section>
 <section id="usage">

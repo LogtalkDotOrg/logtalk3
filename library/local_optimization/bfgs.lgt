@@ -347,7 +347,7 @@
 	validate_gradient(_Point, Gradient) :-
 		domain_error(gradient, Gradient).
 
-	% progress hook → problem progress/5
+	% progress hook -> problem progress/5
 	progress_hook(Iteration, BestPoint, BestValue, Measure, Evaluations) :-
 		ignore(progress(Iteration, BestPoint, BestValue, Measure, Evaluations)).
 

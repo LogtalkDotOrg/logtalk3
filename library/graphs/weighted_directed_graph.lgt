@@ -114,8 +114,8 @@
 		select_zeros(Counts1, Vertices, Zeros),
 		top_sort_loop(Zeros, Sorted, [], UGraph, Vertices, Counts1).
 
-	% === Min Path (Dijkstra) — from weighted_graph_common ===
-	% === Max Path (DFS) — from weighted_graph_common ===
+	% === Min Path (Dijkstra) - from weighted_graph_common ===
+	% === Max Path (DFS) - from weighted_graph_common ===
 
 	% === Min Paths (single source shortest paths) ===
 

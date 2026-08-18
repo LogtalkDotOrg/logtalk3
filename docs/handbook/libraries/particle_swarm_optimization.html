@@ -471,68 +471,71 @@ without restarting or reinitializing the swarm.</p>
 <p>A problem object must implement the
 <code class="docutils literal notranslate"><span class="pre">particle_swarm_optimization_protocol</span></code> protocol by defining:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">initial_positions(-Positions)</span></code> — returns a non-empty list of
+<li><p><code class="docutils literal notranslate"><span class="pre">initial_positions(-Positions)</span></code> - returns a non-empty list of
 particle positions. Every position is a non-empty numeric list of the
 same length.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">position_bounds(-Bounds)</span></code> — returns one numeric <code class="docutils literal notranslate"><span class="pre">Lower-Upper</span></code>
+<li><p><code class="docutils literal notranslate"><span class="pre">position_bounds(-Bounds)</span></code> - returns one numeric <code class="docutils literal notranslate"><span class="pre">Lower-Upper</span></code>
 pair per dimension, with <code class="docutils literal notranslate"><span class="pre">Lower</span> <span class="pre">=&lt;</span> <span class="pre">Upper</span></code>. Initial positions must be
 within bounds.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">fitness(+Position,</span> <span class="pre">-Fitness)</span></code> — computes a numeric fitness value.
+<li><p><code class="docutils literal notranslate"><span class="pre">fitness(+Position,</span> <span class="pre">-Fitness)</span></code> - computes a numeric fitness value.
 The optimizer minimizes this value by default; use
 <code class="docutils literal notranslate"><span class="pre">objective(maximize)</span></code> to maximize it instead.</p></li>
 </ul>
 <p>Optionally, a problem object may define:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">initial_velocities(-Velocities)</span></code> — returns exactly one numeric
+<li><p><code class="docutils literal notranslate"><span class="pre">initial_velocities(-Velocities)</span></code> - returns exactly one numeric
 velocity vector per initial position, with the same dimensions. Every
 component must be between plus or minus the corresponding position
 range, inclusively. When this predicate is not defined or fails,
 velocities are initialized randomly.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">stop_condition(+Iteration,</span> <span class="pre">+BestPosition,</span> <span class="pre">+BestFitness)</span></code> — succeeds
+<li><p><code class="docutils literal notranslate"><span class="pre">stop_condition(+Iteration,</span> <span class="pre">+BestPosition,</span> <span class="pre">+BestFitness)</span></code> - succeeds
 when the search should terminate early.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">progress(+Iteration,</span> <span class="pre">+BestPosition,</span> <span class="pre">+BestFitness,</span> <span class="pre">+MeanFitness,</span> <span class="pre">+Diversity)</span></code>
-— called periodically during optimization. Diversity is the mean
+<li><p><code class="docutils literal notranslate"><span class="pre">progress(+Iteration,</span> <span class="pre">+BestPosition,</span> <span class="pre">+BestFitness,</span> <span class="pre">+MeanFitness,</span> <span class="pre">+Diversity)</span></code></p>
+<ul>
+<li><p>called periodically during optimization. Diversity is the mean
 Euclidean distance of particle positions from the swarm centroid. A
 final report is produced when progress reporting is enabled.</p></li>
+</ul>
+</li>
 </ul>
 </section>
 <section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
 <p>Options for the <code class="docutils literal notranslate"><span class="pre">run/3-4</span></code> predicates:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">objective(Objective)</span></code> — optimization direction, either <code class="docutils literal notranslate"><span class="pre">minimize</span></code>
+<li><p><code class="docutils literal notranslate"><span class="pre">objective(Objective)</span></code> - optimization direction, either <code class="docutils literal notranslate"><span class="pre">minimize</span></code>
 or <code class="docutils literal notranslate"><span class="pre">maximize</span></code> (default: <code class="docutils literal notranslate"><span class="pre">minimize</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">target_fitness(Fitness)</span></code> — numeric target that stops the run when
+<li><p><code class="docutils literal notranslate"><span class="pre">target_fitness(Fitness)</span></code> - numeric target that stops the run when
 the best fitness reaches or passes it in the selected objective
 direction. Use <code class="docutils literal notranslate"><span class="pre">none</span></code> to disable target stopping (default:
 <code class="docutils literal notranslate"><span class="pre">none</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">max_iterations(N)</span></code> — maximum number of swarm iterations (default:
+<li><p><code class="docutils literal notranslate"><span class="pre">max_iterations(N)</span></code> - maximum number of swarm iterations (default:
 <code class="docutils literal notranslate"><span class="pre">1000</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">stagnation_iterations(N)</span></code> — number of consecutive iterations
+<li><p><code class="docutils literal notranslate"><span class="pre">stagnation_iterations(N)</span></code> - number of consecutive iterations
 without a strict global-best improvement before stopping. Set to <code class="docutils literal notranslate"><span class="pre">0</span></code>
 to disable stagnation stopping (default: <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">inertia_weight(W)</span></code> — non-negative float velocity inertia weight
+<li><p><code class="docutils literal notranslate"><span class="pre">inertia_weight(W)</span></code> - non-negative float velocity inertia weight
 (default: <code class="docutils literal notranslate"><span class="pre">0.7298</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">cognitive_coefficient(C)</span></code> — non-negative float personal-best
+<li><p><code class="docutils literal notranslate"><span class="pre">cognitive_coefficient(C)</span></code> - non-negative float personal-best
 acceleration coefficient (default: <code class="docutils literal notranslate"><span class="pre">1.49618</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">social_coefficient(C)</span></code> — non-negative float global-best
+<li><p><code class="docutils literal notranslate"><span class="pre">social_coefficient(C)</span></code> - non-negative float global-best
 acceleration coefficient (default: <code class="docutils literal notranslate"><span class="pre">1.49618</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">updates(N)</span></code> — number of progress reports during the run. Set to
+<li><p><code class="docutils literal notranslate"><span class="pre">updates(N)</span></code> - number of progress reports during the run. Set to
 <code class="docutils literal notranslate"><span class="pre">0</span></code> to disable progress reporting (default: <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">seed(S)</span></code> — positive integer random seed for reproducible runs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">seed(S)</span></code> - positive integer random seed for reproducible runs.</p></li>
 </ul>
 </section>
 <section id="run-statistics">
 <h2>Run statistics<a class="headerlink" href="#run-statistics" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">run/4</span></code> predicate returns:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">iterations(N)</span></code> — number of completed swarm iterations.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">evaluations(E)</span></code> — number of fitness evaluations, including initial
+<li><p><code class="docutils literal notranslate"><span class="pre">iterations(N)</span></code> - number of completed swarm iterations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">evaluations(E)</span></code> - number of fitness evaluations, including initial
 positions.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">improvements(I)</span></code> — number of iterations that improved the global
+<li><p><code class="docutils literal notranslate"><span class="pre">improvements(I)</span></code> - number of iterations that improved the global
 best.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">final_mean_fitness(M)</span></code> — mean fitness of the final swarm positions.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">final_diversity(D)</span></code> — diversity of the final swarm positions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">final_mean_fitness(M)</span></code> - mean fitness of the final swarm positions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">final_diversity(D)</span></code> - diversity of the final swarm positions.</p></li>
 </ul>
 <p>Fitness values are reported unchanged. Thus, <code class="docutils literal notranslate"><span class="pre">BestFitness</span></code>,
 <code class="docutils literal notranslate"><span class="pre">final_mean_fitness(M)</span></code>, and the fitness values passed to

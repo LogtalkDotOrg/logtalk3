@@ -8,7 +8,7 @@
 ``spectral_clusterer``
 ======================
 
-Normalized spectral clusterer for continuous datasets using a Gaussian RBF affinity and a Nyström extension for assigning new instances to clusters.
+Normalized spectral clusterer for continuous datasets using a Gaussian RBF affinity and a Nystroem extension for assigning new instances to clusters.
 
 | **Availability:** 
 |    ``logtalk_load(spectral_clusterer(loader))``

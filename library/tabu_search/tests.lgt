@@ -24,7 +24,7 @@
 	cover(tabu_search(_, _)).
 	cover(tabu_search(_)).
 
-	% quadratic problem — modest step budgets keep CI fast while still
+	% quadratic problem - modest step budgets keep CI fast while still
 	% exercising the core search loop and energy improvement
 
 	test(ts_quadratic_run_2, deterministic((number(Energy), Energy < 5.0))) :-
@@ -105,7 +105,7 @@
 		tabu_search(quadratic)::run(_State, Energy, [tabu_tenure_range(3, 9), max_steps(400)]).
 
 	test(ts_tabu_tenure_range_overrides_fixed, deterministic((number(Energy), Energy < 5.0))) :-
-		% range present → fixed tenure is ignored
+		% range present -> fixed tenure is ignored
 		tabu_search(quadratic)::run(_State, Energy, [tabu_tenure(2), tabu_tenure_range(4, 8), max_steps(300)]).
 
 	test(ts_tabu_tenure_range_statistics, deterministic) :-

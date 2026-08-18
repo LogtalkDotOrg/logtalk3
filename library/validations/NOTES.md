@@ -29,9 +29,9 @@ of errors (`invalid(Errors)`).
 The library follows the same design pattern as the `optionals` and `expecteds`
 libraries:
 
-- `validation` — factory object for constructing validation terms
-- `validation/1` — parametric object wrapping a validation term
-- `validated` — companion helper object for list operations, type-checking,
+- `validation` - factory object for constructing validation terms
+- `validation/1` - parametric object wrapping a validation term
+- `validated` - companion helper object for list operations, type-checking,
   and QuickCheck support
 
 The naming follows the convention used in Scala Cats and Kotlin Arrow, where
@@ -201,7 +201,7 @@ short-circuits at the first failure:
 	     expected(Result)::or_else_throw(_).
 	uncaught exception: invalid_name
 
-Only `invalid_name` is reported — `either::sequence/2` stops at the first
+Only `invalid_name` is reported - `either::sequence/2` stops at the first
 unexpected term.
 
 The two libraries are complementary. Use `expecteds` for sequential

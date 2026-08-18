@@ -32,7 +32,7 @@ Nonlinear conjugate-gradient local optimizer (Fletcher-Reeves and Polak-Ribière
 
 | **Remarks:**
 
-   - Beta formulas: The ``beta(fletcher_reeves)`` and ``beta(polak_ribiere)`` options select the conjugacy coefficient. Polak-Ribière uses the standard non-negative truncation ``max(β, 0)``.
+   - Beta formulas: The ``beta(fletcher_reeves)`` and ``beta(polak_ribiere)`` options select the conjugacy coefficient. Polak-Ribière uses the standard non-negative truncation ``max(Beta, 0)``.
    - Restarts: The search direction is reset to steepest descent every ``restart(N)`` iterations (default: dimension) and whenever the new direction is insufficiently downhill.
    - Line search: Backtracking Armijo line search (same parameters as gradient descent).
    - Bounds: When the problem defines ``position_bounds/1``, trial points are projected onto the box after each step.

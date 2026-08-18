@@ -80,12 +80,12 @@ zone is not cached.
 Convert a civil local date-time to UTC with an explicit resolution mode.
 The mode can be:
 
-- ``strict`` — fail unless exactly one interpretation exists
-- ``first`` — prefer the earliest valid interpretation (earliest UTC
+- ``strict`` - fail unless exactly one interpretation exists
+- ``first`` - prefer the earliest valid interpretation (earliest UTC
   instant)
-- ``second`` — prefer the latest valid interpretation (latest UTC
+- ``second`` - prefer the latest valid interpretation (latest UTC
   instant)
-- ``all`` — enumerate all valid interpretations in chronological order
+- ``all`` - enumerate all valid interpretations in chronological order
   (non-deterministic)
 
 Fall-back fold in New York: 2024-11-03 01:30 occurs twice:

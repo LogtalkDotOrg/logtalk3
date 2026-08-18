@@ -36,8 +36,8 @@ It also provides portable predicates for date-time handling, including:
 
 The duration predicates accept two duration representations:
 
-- `duration(Days, Hours, Minutes, Seconds)` — a fixed-length duration converted to seconds
-- `duration(Years, Months, Days, Hours, Minutes, Seconds)` — a calendar-aware period where the year and month delta is applied first using calendar arithmetic, clamping the day to the last valid day of the resulting month when necessary (e.g. adding one month to January 31 gives February 28 or 29 depending on the year), with the remaining day and time delta applied via fixed-length arithmetic. The `duration_between/3` predicate returns this form when called with a 6-arity skeleton such as `duration(Yr, Mo, Da, Hr, Mi, Se)`.
+- `duration(Days, Hours, Minutes, Seconds)` - a fixed-length duration converted to seconds
+- `duration(Years, Months, Days, Hours, Minutes, Seconds)` - a calendar-aware period where the year and month delta is applied first using calendar arithmetic, clamping the day to the last valid day of the resulting month when necessary (e.g. adding one month to January 31 gives February 28 or 29 depending on the year), with the remaining day and time delta applied via fixed-length arithmetic. The `duration_between/3` predicate returns this form when called with a 6-arity skeleton such as `duration(Yr, Mo, Da, Hr, Mi, Se)`.
 
 Date-time values are represented using the `date_time/6` compound term:
 

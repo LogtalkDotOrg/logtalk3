@@ -72,16 +72,16 @@ Options
 The ``encode/3`` and ``decode/3`` predicates take an options list. The
 common option is:
 
-- ``alphabet(Atom)`` — an atom with at least three unique characters.
+- ``alphabet(Atom)`` - an atom with at least three unique characters.
   The default value is the standard 62-character alphabet. In the case
   of the ``decode/3`` predicate, it must be the same alphabet used to
   encode.
 
 THere are also two ``encode/3`` only options:
 
-- ``min_length(Integer)`` — an integer between 0 and 255 (default: 0).
+- ``min_length(Integer)`` - an integer between 0 and 255 (default: 0).
 
-- ``blocklist(list(atom))`` — words that must not occur in the generated
+- ``blocklist(list(atom))`` - words that must not occur in the generated
   identifier. When the canonical encoding contains a blocked word, an
   alternative encoding is tried. The default value is ``[]``. See the
   note below on the default blocklist.

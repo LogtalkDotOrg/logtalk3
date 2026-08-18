@@ -458,15 +458,15 @@ link in a web browser.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">encode/3</span></code> and <code class="docutils literal notranslate"><span class="pre">decode/3</span></code> predicates take an options list. The
 common option is:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">alphabet(Atom)</span></code> — an atom with at least three unique characters.
+<li><p><code class="docutils literal notranslate"><span class="pre">alphabet(Atom)</span></code> - an atom with at least three unique characters.
 The default value is the standard 62-character alphabet. In the case
 of the <code class="docutils literal notranslate"><span class="pre">decode/3</span></code> predicate, it must be the same alphabet used to
 encode.</p></li>
 </ul>
 <p>THere are also two <code class="docutils literal notranslate"><span class="pre">encode/3</span></code> only options:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">min_length(Integer)</span></code> — an integer between 0 and 255 (default: 0).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">blocklist(list(atom))</span></code> — words that must not occur in the generated
+<li><p><code class="docutils literal notranslate"><span class="pre">min_length(Integer)</span></code> - an integer between 0 and 255 (default: 0).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">blocklist(list(atom))</span></code> - words that must not occur in the generated
 identifier. When the canonical encoding contains a blocked word, an
 alternative encoding is tried. The default value is <code class="docutils literal notranslate"><span class="pre">[]</span></code>. See the
 note below on the default blocklist.</p></li>

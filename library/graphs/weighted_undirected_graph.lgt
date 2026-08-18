@@ -136,8 +136,8 @@
 		dict_keys(Graph, Vertices),
 		connected_components_loop(Vertices, Graph, [], Components).
 
-	% === Min Path (Dijkstra) — from weighted_graph_common ===
-	% === Max Path (DFS) — from weighted_graph_common ===
+	% === Min Path (Dijkstra) - from weighted_graph_common ===
+	% === Max Path (DFS) - from weighted_graph_common ===
 
 	% === Minimum Spanning Tree (Kruskal) ===
 

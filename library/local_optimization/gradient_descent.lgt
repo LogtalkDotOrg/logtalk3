@@ -230,7 +230,7 @@
 		(	number(TrialVal) -> true ; domain_error(objective, TrialVal) ),
 		Evals1_try is Evals0 + 1,
 		% Armijo condition (minimization form):
-		%   f(x + α d) ≤ f(x) + c · α · (g·d)
+		%   f(x + alpha d) =< f(x) + c · alpha · (g·d)
 		Sufficient is Value0 + C * Step * DirDeriv,
 		(	(	ObjDir == minimize,
 				TrialVal =< Sufficient
@@ -276,7 +276,7 @@
 	validate_gradient(_Point, Gradient) :-
 		domain_error(gradient, Gradient).
 
-	% progress hook → problem progress/5
+	% progress hook -> problem progress/5
 	progress_hook(Iteration, BestPoint, BestValue, Measure, Evaluations) :-
 		ignore(progress(Iteration, BestPoint, BestValue, Measure, Evaluations)).
 

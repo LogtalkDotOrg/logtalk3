@@ -63,8 +63,8 @@ Algorithms
 This library implements the following string distance algorithms:
 
 - **Levenshtein** distance is probably the most well-known. It counts the
-minimum number of single-character edits — insertions, deletions, or
-substitutions — needed to transform one string into another. For example,
+minimum number of single-character edits - insertions, deletions, or
+substitutions - needed to transform one string into another. For example,
 the distance between "kitten" and "sitting" is 3.
 
 - **Damerau-Levenshtein** distance extends Levenshtein by also allowing
@@ -78,7 +78,7 @@ comparing binary codes or fixed-format identifiers.
   
 - **Jaro and Jaro-Winkler** distance produce a similarity score between
 0 and 1 rather than a raw edit count. Jaro considers matching characters
-and transpositions, while Jaro-Winkler adds a prefix-weighting boost — the
+and transpositions, while Jaro-Winkler adds a prefix-weighting boost - the
 idea being that strings matching at the start are more likely to be the
 same (useful for name matching).
 

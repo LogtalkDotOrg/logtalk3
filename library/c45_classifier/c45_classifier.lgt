@@ -657,7 +657,7 @@
 
 	% upper_confidence_bound/4 - C4.5 upper confidence bound formula
 	% Computes the upper bound of the binomial distribution confidence interval
-	% Formula: UCF = (f + z²/(2N) + z*sqrt(f*(1-f)/N + z²/(4N²))) / (1 + z²/N)
+	% Formula: UCF = (f + z^2/(2N) + z*sqrt(f*(1-f)/N + z^2/(4N^2))) / (1 + z^2/N)
 	% where f = E/N is the observed error rate and z is the z-score
 	upper_confidence_bound(Errors, Total, ZScore, UCB) :-
 		(	Total =:= 0 ->

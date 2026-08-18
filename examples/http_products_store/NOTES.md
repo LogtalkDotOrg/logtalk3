@@ -55,23 +55,23 @@ The API is a tiny in-memory product catalog with three routes:
 
 ## Files
 
-- `http_products_store.lgt` — an in-memory product catalog: plain facts plus a
+- `http_products_store.lgt` - an in-memory product catalog: plain facts plus a
   few filtering and pagination helper predicates.
-- `http_products_api.lgt` — the router object. It implements
+- `http_products_api.lgt` - the router object. It implements
   `http_handler_protocol` and imports the `http_router_parameters`
   category, declaring `parameter/4` descriptors per route that are reused
   both for extraction (`route_parameters/2`) and for automatic
   type/range/enum validation.
-- `http_products_demo.lgt` — starts a local server with `http_server`, issues a
+- `http_products_demo.lgt` - starts a local server with `http_server`, issues a
   handful of `http_client` requests against it (including one that fails
   parameter validation on purpose), prints the results, and stops the
   server; it's only loaded with backends supporting threads.
-- `tests.lgt` — `lgtunit` tests. Most tests dispatch synthetic request
+- `tests.lgt` - `lgtunit` tests. Most tests dispatch synthetic request
   terms directly to `http_products_api::handle/2`. One test performs a full
   round trip through real `http_server`/`http_client` sockets; it is
   skipped on backends without threading support.
-- `tester.lgt` — loads the example, its dependencies, and runs `tests.lgt`.
-- `loader.lgt` — loads the example and its dependencies.
+- `tester.lgt` - loads the example, its dependencies, and runs `tests.lgt`.
+- `loader.lgt` - loads the example and its dependencies.
 
 ## Loading and running the demo
 
@@ -109,7 +109,7 @@ logtalk_load(http_products_api(tester)).
   declared with `http_parameters` options (`default/1`, `minimum/1`,
   `maximum/1`, `enum/1`, `list/1`) so that out-of-range or invalid values
   are rejected with a `400 Bad Request` response before the route handler
-  ever runs — see `route_parameter_declarations/2` in `http_products_api.lgt`.
+  ever runs - see `route_parameter_declarations/2` in `http_products_api.lgt`.
 - The `GET /products/{id}` route uses a typed path placeholder,
   `{id:integer}`; a non-numeric `id` segment simply does not match the
   route (`404 Not Found`) rather than failing parameter validation

@@ -54,23 +54,23 @@ Shared categories
 The library includes a small family of reusable categories intended to
 be imported by ranking algorithm implementations:
 
-- ``ranking_dataset_common`` — dataset collection, summaries, graph
+- ``ranking_dataset_common`` - dataset collection, summaries, graph
   connectivity, connected-component analysis, and pairwise/grouped
   dataset correctness checks, including pairwise measurement helpers,
   temporal pairwise rating-period helpers, ordered multiplayer match
   helpers, and grouped tie-block extraction helpers for algorithms that
   consume tied rankings directly.
-- ``glicko2_common`` — shared internal Glicko-2 numeric helpers for
+- ``glicko2_common`` - shared internal Glicko-2 numeric helpers for
   scale conversions, per-period player updates, and volatility root
   solving used by both the batch and periodic Glicko-2 rankers.
-- ``condorcet_victory_common`` — shared direct-victory preprocessing
+- ``condorcet_victory_common`` - shared direct-victory preprocessing
   helpers for Condorcet-family rankers that derive dense directed
   victory strengths from aggregated pairwise matchups under the
   ``victory_strength(...)`` option semantics.
-- ``ranker_common`` — representation-independent access to
+- ``ranker_common`` - representation-independent access to
   learned-ranker diagnostics plus reusable helpers for exporting learned
   rankers.
-- ``grouped_strength_ranker_common`` — reusable positive-strength,
+- ``grouped_strength_ranker_common`` - reusable positive-strength,
   strong-connectivity, and iterative-update helpers for grouped ranking
   models that estimate one latent strength parameter per item.
 
@@ -144,85 +144,85 @@ Test datasets
 
 Several sample datasets are included in the ``test_datasets`` directory:
 
-- ``head_to_head.lgt`` — A compact pairwise-comparison dataset with four
+- ``head_to_head.lgt`` - A compact pairwise-comparison dataset with four
   items and weighted preferences suitable for smoke testing
   deterministic ranking.
 
-- ``search_results.lgt`` — A grouped ranking dataset with two query
+- ``search_results.lgt`` - A grouped ranking dataset with two query
   groups, three items per group, and non-negative integer relevance
   judgments.
 
-- ``malformed_pairwise.lgt`` — A negative fixture where a preference
+- ``malformed_pairwise.lgt`` - A negative fixture where a preference
   mentions an undeclared item.
 
-- ``malformed_duplicate_items.lgt`` — A negative pairwise fixture where
+- ``malformed_duplicate_items.lgt`` - A negative pairwise fixture where
   an item is declared more than once.
 
-- ``malformed_self_preference.lgt`` — A negative pairwise fixture where
+- ``malformed_self_preference.lgt`` - A negative pairwise fixture where
   an item is preferred over itself.
 
-- ``malformed_non_positive_weight.lgt`` — A negative pairwise fixture
+- ``malformed_non_positive_weight.lgt`` - A negative pairwise fixture
   where a preference weight is not positive.
 
-- ``disconnected_pairwise.lgt`` — A pairwise fixture with more than one
+- ``disconnected_pairwise.lgt`` - A pairwise fixture with more than one
   connected component, useful for testing algorithms that require
   identifiable global scores.
 
-- ``cyclic_pairwise.lgt`` — A connected pairwise fixture with a
+- ``cyclic_pairwise.lgt`` - A connected pairwise fixture with a
   preference cycle, useful for smoke testing algorithms on
   non-transitive data.
 
-- ``condorcet_divergence_pairwise.lgt`` — A compact connected pairwise
+- ``condorcet_divergence_pairwise.lgt`` - A compact connected pairwise
   fixture where the current ``schulze_ranker`` and ``ranked_pairs``
   implementations produce different rankings, useful for cross-method
   regression tests.
 
-- ``malformed_grouped.lgt`` — A negative fixture where a grouped
+- ``malformed_grouped.lgt`` - A negative fixture where a grouped
   relevance value is not a non-negative integer.
 
-- ``sparse_preferences.lgt`` — A sparse pairwise dataset with an
+- ``sparse_preferences.lgt`` - A sparse pairwise dataset with an
   isolated item, useful for testing dataset summaries and
   disconnected-graph detection.
 
-- ``two_item_measurements.lgt`` — A compact pairwise measurement dataset
+- ``two_item_measurements.lgt`` - A compact pairwise measurement dataset
   with two items and one signed measurement, useful for smoke testing
   exact two-item least-squares fits.
 
-- ``regular_measurements.lgt`` — A compact connected pairwise
+- ``regular_measurements.lgt`` - A compact connected pairwise
   measurement dataset whose measurements are perfectly explained by a
   zero-sum score potential, useful for regression tests with zero
   residuals.
 
-- ``cyclic_measurements.lgt`` — A compact connected pairwise measurement
+- ``cyclic_measurements.lgt`` - A compact connected pairwise measurement
   dataset with cyclic inconsistency, useful for smoke testing zero
   global scores with non-zero residuals.
 
-- ``disconnected_measurements.lgt`` — A pairwise measurement fixture
+- ``disconnected_measurements.lgt`` - A pairwise measurement fixture
   with more than one connected component, useful for testing
   identifiable-score checks.
 
-- ``malformed_measurement_unknown_item.lgt`` — A negative measurement
+- ``malformed_measurement_unknown_item.lgt`` - A negative measurement
   fixture where a measurement mentions an undeclared item.
 
-- ``malformed_measurement_duplicate_items.lgt`` — A negative measurement
+- ``malformed_measurement_duplicate_items.lgt`` - A negative measurement
   fixture where an item is declared more than once.
 
-- ``malformed_measurement_self.lgt`` — A negative measurement fixture
+- ``malformed_measurement_self.lgt`` - A negative measurement fixture
   where an item is measured against itself.
 
-- ``malformed_measurement_non_numeric.lgt`` — A negative measurement
+- ``malformed_measurement_non_numeric.lgt`` - A negative measurement
   fixture where a measurement value is not numeric.
 
-- ``malformed_measurement_non_positive_weight.lgt`` — A negative
+- ``malformed_measurement_non_positive_weight.lgt`` - A negative
   measurement fixture where a measurement weight is not positive.
 
-- ``temporal_two_period_chain.lgt`` — A compact temporal pairwise
+- ``temporal_two_period_chain.lgt`` - A compact temporal pairwise
   dataset with two rating periods and three players, useful for smoke
   testing periodic rating carryover.
 
-- ``temporal_draws.lgt`` — A compact temporal pairwise dataset with a
+- ``temporal_draws.lgt`` - A compact temporal pairwise dataset with a
   draw, useful for testing score handling in temporal game results.
 
-- ``temporal_idle_periods.lgt`` — A temporal pairwise dataset with an
+- ``temporal_idle_periods.lgt`` - A temporal pairwise dataset with an
   empty period between two played periods, useful for testing inactivity
   handling.

@@ -104,7 +104,7 @@
 			exclude_segment(Cities, Segment, Remaining1)
 		).
 
-	% Swap mutation — swap two distinct positions when the tour is long enough
+	% Swap mutation - swap two distinct positions when the tour is long enough
 	mutate(Tour, Tour) :-
 		length(Tour, Length),
 		Length < 2,

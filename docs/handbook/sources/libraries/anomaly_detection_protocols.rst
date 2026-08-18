@@ -79,36 +79,36 @@ Test datasets
 
 Several sample datasets are included in the ``test_datasets`` directory:
 
-- ``gaussian_anomalies.lgt`` — A synthetic 2D anomaly detection dataset
+- ``gaussian_anomalies.lgt`` - A synthetic 2D anomaly detection dataset
   with 48 examples and 2 continuous attributes (x, y). Normal points are
   sampled from a standard normal distribution centered at the origin.
   Anomalous points are placed far from the cluster center. Inspired by
   the canonical test case used in the Extended Isolation Forest paper by
   Hariri et al. (2019).
 
-- ``malformed_anomalies.lgt`` — A negative fixture with invalid class
+- ``malformed_anomalies.lgt`` - A negative fixture with invalid class
   labels for testing family-level dataset validation.
 
-- ``mixed_anomalies.lgt`` — A small mixed-feature anomaly dataset with
+- ``mixed_anomalies.lgt`` - A small mixed-feature anomaly dataset with
   16 examples, 2 continuous attributes (age, income), and 2 categorical
   attributes (student, credit_rating). Includes missing values and
   uncommon feature combinations to exercise anomaly-detection code on
   heterogeneous data.
 
-- ``mixed_distance_behaviors.lgt`` — A compact mixed-feature anomaly
+- ``mixed_distance_behaviors.lgt`` - A compact mixed-feature anomaly
   fixture with 8 examples, 2 continuous attributes (size, weight), and 2
   categorical attributes (color, shape). Intended for smoke-testing
   continuous plus categorical distance behavior and basic mixed-data
   handling.
 
-- ``sensor_anomalies.lgt`` — A synthetic industrial sensor anomaly
+- ``sensor_anomalies.lgt`` - A synthetic industrial sensor anomaly
   dataset with 40 examples and 3 continuous attributes (temperature,
   pressure, vibration). Contains missing values (14 examples with
   missing values, represented using anonymous variables). Normal
   readings cluster around typical operating ranges. Anomalous readings
   show extreme values indicating equipment malfunction.
 
-- ``shuttle_anomalies.lgt`` — A subset of the Statlog Shuttle dataset
+- ``shuttle_anomalies.lgt`` - A subset of the Statlog Shuttle dataset
   with 50 examples and 9 continuous attributes representing sensor
   readings from the NASA Space Shuttle. Class 1 (Rad Flow) is the
   majority class (normal), while all other classes are treated as
@@ -116,7 +116,7 @@ Several sample datasets are included in the ``test_datasets`` directory:
   Machine Learning Repository:
   https://archive.ics.uci.edu/dataset/148/statlog+shuttle
 
-- ``water_potability.lgt`` — A water potability dataset with 48 examples
+- ``water_potability.lgt`` - A water potability dataset with 48 examples
   and 9 continuous attributes (pH, hardness, solids, chloramines,
   sulfate, conductivity, organic carbon, trihalomethanes, turbidity).
   Normal instances represent potable water samples within acceptable

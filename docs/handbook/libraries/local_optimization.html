@@ -436,13 +436,13 @@ after a global meta-heuristic (PSO, differential evolution, genetic
 algorithm, simulated annealing, tabu search, ant colony, …).</p>
 <p>Available solvers:</p>
 <ul class="simple">
-<li><p><strong>Nelder–Mead</strong> — derivative-free downhill simplex</p></li>
-<li><p><strong>Gradient descent</strong> — steepest descent with Armijo or fixed line
+<li><p><strong>Nelder–Mead</strong> - derivative-free downhill simplex</p></li>
+<li><p><strong>Gradient descent</strong> - steepest descent with Armijo or fixed line
 search</p></li>
-<li><p><strong>Conjugate gradient</strong> — Fletcher–Reeves or Polak–Ribière with
+<li><p><strong>Conjugate gradient</strong> - Fletcher–Reeves or Polak–Ribière with
 restarts</p></li>
-<li><p><strong>BFGS</strong> — dense quasi-Newton with Armijo line search</p></li>
-<li><p><strong>L-BFGS</strong> — limited-memory quasi-Newton with Armijo line search</p></li>
+<li><p><strong>BFGS</strong> - dense quasi-Newton with Armijo line search</p></li>
+<li><p><strong>L-BFGS</strong> - limited-memory quasi-Newton with Armijo line search</p></li>
 </ul>
 <p>All solvers share the same problem protocol and the same <code class="docutils literal notranslate"><span class="pre">run/2-4</span></code>
 API.</p>
@@ -469,19 +469,19 @@ link in a web browser.</p>
 <section id="architecture">
 <h2>Architecture<a class="headerlink" href="#architecture" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">local_optimization_problem_protocol</span></code> — problem interface (required
+<li><p><code class="docutils literal notranslate"><span class="pre">local_optimization_problem_protocol</span></code> - problem interface (required
 <code class="docutils literal notranslate"><span class="pre">initial_point/1</span></code> and <code class="docutils literal notranslate"><span class="pre">objective/2</span></code>; optional gradient, Hessian,
 bounds, stop condition, and progress).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">local_optimization_solver</span></code> — category providing shared option
+<li><p><code class="docutils literal notranslate"><span class="pre">local_optimization_solver</span></code> - category providing shared option
 handling, bound projection, vector utilities, and progress reporting.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">nelder_mead(Problem)</span></code> — Nelder–Mead simplex solver
+<li><p><code class="docutils literal notranslate"><span class="pre">nelder_mead(Problem)</span></code> - Nelder–Mead simplex solver
 (derivative-free).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">gradient_descent(Problem)</span></code> — steepest descent (requires
+<li><p><code class="docutils literal notranslate"><span class="pre">gradient_descent(Problem)</span></code> - steepest descent (requires
 <code class="docutils literal notranslate"><span class="pre">gradient/2</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">conjugate_gradient(Problem)</span></code> — nonlinear CG (requires
+<li><p><code class="docutils literal notranslate"><span class="pre">conjugate_gradient(Problem)</span></code> - nonlinear CG (requires
 <code class="docutils literal notranslate"><span class="pre">gradient/2</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">bfgs(Problem)</span></code> — dense quasi-Newton (requires <code class="docutils literal notranslate"><span class="pre">gradient/2</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">lbfgs(Problem)</span></code> — limited-memory quasi-Newton (requires
+<li><p><code class="docutils literal notranslate"><span class="pre">bfgs(Problem)</span></code> - dense quasi-Newton (requires <code class="docutils literal notranslate"><span class="pre">gradient/2</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lbfgs(Problem)</span></code> - limited-memory quasi-Newton (requires
 <code class="docutils literal notranslate"><span class="pre">gradient/2</span></code>).</p></li>
 </ul>
 </section>
@@ -490,24 +490,24 @@ handling, bound projection, vector utilities, and progress reporting.</p></li>
 <p>A problem object must implement <code class="docutils literal notranslate"><span class="pre">local_optimization_problem_protocol</span></code>
 by defining at least:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">initial_point(-Point)</span></code> — non-empty list of numbers used as the
+<li><p><code class="docutils literal notranslate"><span class="pre">initial_point(-Point)</span></code> - non-empty list of numbers used as the
 starting point.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">objective(+Point,</span> <span class="pre">-Value)</span></code> — numeric objective value. Solvers
+<li><p><code class="docutils literal notranslate"><span class="pre">objective(+Point,</span> <span class="pre">-Value)</span></code> - numeric objective value. Solvers
 minimize by default; use <code class="docutils literal notranslate"><span class="pre">objective(maximize)</span></code> to maximize.</p></li>
 </ul>
 <p>Optionally a problem may also define:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">gradient(+Point,</span> <span class="pre">-Gradient)</span></code> — <strong>required</strong> by gradient descent and
+<li><p><code class="docutils literal notranslate"><span class="pre">gradient(+Point,</span> <span class="pre">-Gradient)</span></code> - <strong>required</strong> by gradient descent and
 conjugate gradient. When missing those solvers raise an existence
 error.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">hessian(+Point,</span> <span class="pre">-Hessian)</span></code> — optional second-order information (for
+<li><p><code class="docutils literal notranslate"><span class="pre">hessian(+Point,</span> <span class="pre">-Hessian)</span></code> - optional second-order information (for
 future Newton / verification use).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">position_bounds(-Bounds)</span></code> — list of <code class="docutils literal notranslate"><span class="pre">Lower-Upper</span></code> pairs (box
+<li><p><code class="docutils literal notranslate"><span class="pre">position_bounds(-Bounds)</span></code> - list of <code class="docutils literal notranslate"><span class="pre">Lower-Upper</span></code> pairs (box
 constraints). When present, trial points are projected onto the box.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">stop_condition(+Iteration,</span> <span class="pre">+BestPoint,</span> <span class="pre">+BestValue)</span></code> — early
+<li><p><code class="docutils literal notranslate"><span class="pre">stop_condition(+Iteration,</span> <span class="pre">+BestPoint,</span> <span class="pre">+BestValue)</span></code> - early
 termination.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">progress(+Iteration,</span> <span class="pre">+BestPoint,</span> <span class="pre">+BestValue,</span> <span class="pre">+Measure,</span> <span class="pre">+Evaluations)</span></code>
-— periodic progress callback.</p></li>
+- periodic progress callback.</p></li>
 </ul>
 </section>
 <section id="solvers">
@@ -536,9 +536,9 @@ objective for minimization and the positive gradient for maximization.
 Requires <code class="docutils literal notranslate"><span class="pre">gradient/2</span></code>.</p>
 <p>Line search options:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">line_search(armijo)</span></code> (default) — backtracking Armijo sufficient
+<li><p><code class="docutils literal notranslate"><span class="pre">line_search(armijo)</span></code> (default) - backtracking Armijo sufficient
 decrease</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">line_search(fixed)</span></code> — constant step size given by <code class="docutils literal notranslate"><span class="pre">step_size(S)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">line_search(fixed)</span></code> - constant step size given by <code class="docutils literal notranslate"><span class="pre">step_size(S)</span></code></p></li>
 </ul>
 <p>When bounds are present the method becomes projected gradient descent.</p>
 </section>
@@ -547,9 +547,9 @@ decrease</p></li>
 <p>Nonlinear conjugate gradient with Fletcher–Reeves or Polak–Ribière
 conjugacy coefficients. Requires <code class="docutils literal notranslate"><span class="pre">gradient/2</span></code>.</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">beta(polak_ribiere)</span></code> (default) — uses the standard PR+ truncation
+<li><p><code class="docutils literal notranslate"><span class="pre">beta(polak_ribiere)</span></code> (default) - uses the standard PR+ truncation
 <code class="docutils literal notranslate"><span class="pre">max(Beta,</span> <span class="pre">0)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">beta(fletcher_reeves)</span></code> — classical FR formula</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">beta(fletcher_reeves)</span></code> - classical FR formula</p></li>
 </ul>
 <p>The direction is reset to steepest descent every <code class="docutils literal notranslate"><span class="pre">restart(N)</span></code>
 iterations (default: problem dimension) and whenever the new direction
@@ -564,7 +564,7 @@ rank-two formula; the approximation starts at the identity matrix (so
 the first step is plain steepest descent). Requires <code class="docutils literal notranslate"><span class="pre">gradient/2</span></code>.</p>
 <p>Internally, maximization is handled by minimizing the negated objective
 and gradient, so the quasi-Newton direction, curvature test, and Armijo
-condition are always expressed in minimization form — this sidesteps the
+condition are always expressed in minimization form - this sidesteps the
 sign-handling pitfalls of an explicit minimize/maximize branch in the
 line search.</p>
 <p>The inverse-Hessian update is skipped, keeping the previous
@@ -581,19 +581,19 @@ as gradient descent and conjugate gradient.</p>
 <p>Limited-memory quasi-Newton method. Instead of a dense inverse-Hessian
 matrix, only the last <code class="docutils literal notranslate"><span class="pre">memory_size(M)</span></code> step/gradient-difference pairs
 are kept, and the search direction is recovered from them with the
-standard two-loop recursion — <code class="docutils literal notranslate"><span class="pre">O(M*n)</span></code> time and memory per iteration
+standard two-loop recursion - <code class="docutils literal notranslate"><span class="pre">O(M*n)</span></code> time and memory per iteration
 instead of <code class="docutils literal notranslate"><span class="pre">bfgs(_)</span></code>’s <code class="docutils literal notranslate"><span class="pre">O(n^2)</span></code>. Requires <code class="docutils literal notranslate"><span class="pre">gradient/2</span></code>.</p>
 <p>Uses the same phi-space (always-minimize) formulation as <code class="docutils literal notranslate"><span class="pre">bfgs(_)</span></code> for
 maximization, the same curvature safeguard (a pair is dropped rather
 than risking a non-descent direction), and the same optional periodic
-<code class="docutils literal notranslate"><span class="pre">restart(N)</span></code> — here clearing the pair history instead of resetting a
+<code class="docutils literal notranslate"><span class="pre">restart(N)</span></code> - here clearing the pair history instead of resetting a
 matrix. With an empty history the search direction is plain steepest
 descent, so the first step (and every step right after a restart)
 matches <code class="docutils literal notranslate"><span class="pre">bfgs(_)</span></code>’s first step exactly. With a longer history, the
 two-loop recursion also rescales the initial direction by a factor
 <code class="docutils literal notranslate"><span class="pre">gamma_k</span></code>, computed from the most recent pair as
-<code class="docutils literal notranslate"><span class="pre">(s</span> <span class="pre">.</span> <span class="pre">y)</span> <span class="pre">/</span> <span class="pre">(y</span> <span class="pre">.</span> <span class="pre">y)</span></code>, on every iteration — a standard conditioning
-heuristic — so, unlike the first step, later steps are not expected to
+<code class="docutils literal notranslate"><span class="pre">(s</span> <span class="pre">.</span> <span class="pre">y)</span> <span class="pre">/</span> <span class="pre">(y</span> <span class="pre">.</span> <span class="pre">y)</span></code>, on every iteration - a standard conditioning
+heuristic - so, unlike the first step, later steps are not expected to
 exactly retrace <code class="docutils literal notranslate"><span class="pre">bfgs(_)</span></code>’s trajectory even with a large
 <code class="docutils literal notranslate"><span class="pre">memory_size</span></code>.</p>
 <p>Line search is backtracking Armijo, with the same options and defaults
@@ -604,17 +604,17 @@ as the other gradient-based solvers.</p>
 <h2>Common options<a class="headerlink" href="#common-options" title="Link to this heading"></a></h2>
 <p>Inherited from the solver category and available to every solver:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">objective(minimize|maximize)</span></code> — optimization direction (default:
+<li><p><code class="docutils literal notranslate"><span class="pre">objective(minimize|maximize)</span></code> - optimization direction (default:
 <code class="docutils literal notranslate"><span class="pre">minimize</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">target_value(Value)</span></code> — stop when the best value reaches or passes
+<li><p><code class="docutils literal notranslate"><span class="pre">target_value(Value)</span></code> - stop when the best value reaches or passes
 the target; use <code class="docutils literal notranslate"><span class="pre">none</span></code> to disable (default: <code class="docutils literal notranslate"><span class="pre">none</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">max_iterations(N)</span></code> — iteration limit (default: <code class="docutils literal notranslate"><span class="pre">1000</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">tol_x(T)</span></code> — step-size / simplex-size tolerance (default:
+<li><p><code class="docutils literal notranslate"><span class="pre">max_iterations(N)</span></code> - iteration limit (default: <code class="docutils literal notranslate"><span class="pre">1000</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tol_x(T)</span></code> - step-size / simplex-size tolerance (default:
 <code class="docutils literal notranslate"><span class="pre">1.0e-8</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">tol_f(T)</span></code> — objective-change tolerance (default: <code class="docutils literal notranslate"><span class="pre">1.0e-8</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">tol_g(T)</span></code> — gradient-norm tolerance; used by gradient-based solvers
+<li><p><code class="docutils literal notranslate"><span class="pre">tol_f(T)</span></code> - objective-change tolerance (default: <code class="docutils literal notranslate"><span class="pre">1.0e-8</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tol_g(T)</span></code> - gradient-norm tolerance; used by gradient-based solvers
 (default: <code class="docutils literal notranslate"><span class="pre">1.0e-6</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">updates(N)</span></code> — number of progress reports; <code class="docutils literal notranslate"><span class="pre">0</span></code> disables reporting
+<li><p><code class="docutils literal notranslate"><span class="pre">updates(N)</span></code> - number of progress reports; <code class="docutils literal notranslate"><span class="pre">0</span></code> disables reporting
 (default: <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p></li>
 </ul>
 </section>
@@ -623,55 +623,55 @@ the target; use <code class="docutils literal notranslate"><span class="pre">non
 <section id="neldermead-1">
 <span id="id1"></span><h3>Nelder–Mead<a class="headerlink" href="#neldermead-1" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">reflection(Alpha)</span></code> — default <code class="docutils literal notranslate"><span class="pre">1.0</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">expansion(Gamma)</span></code> — default <code class="docutils literal notranslate"><span class="pre">2.0</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">contraction(Rho)</span></code> — default <code class="docutils literal notranslate"><span class="pre">0.5</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">shrink(Sigma)</span></code> — default <code class="docutils literal notranslate"><span class="pre">0.5</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">initial_step(S)</span></code> — relative initial simplex step (default <code class="docutils literal notranslate"><span class="pre">0.05</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">adaptive(false|true)</span></code> — reserved for a future Gao–Han variant
+<li><p><code class="docutils literal notranslate"><span class="pre">reflection(Alpha)</span></code> - default <code class="docutils literal notranslate"><span class="pre">1.0</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">expansion(Gamma)</span></code> - default <code class="docutils literal notranslate"><span class="pre">2.0</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">contraction(Rho)</span></code> - default <code class="docutils literal notranslate"><span class="pre">0.5</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">shrink(Sigma)</span></code> - default <code class="docutils literal notranslate"><span class="pre">0.5</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">initial_step(S)</span></code> - relative initial simplex step (default <code class="docutils literal notranslate"><span class="pre">0.05</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">adaptive(false|true)</span></code> - reserved for a future Gao–Han variant
 (default <code class="docutils literal notranslate"><span class="pre">false</span></code>)</p></li>
 </ul>
 </section>
 <section id="gradient-descent-1">
 <span id="id2"></span><h3>Gradient descent<a class="headerlink" href="#gradient-descent-1" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">line_search(armijo|fixed)</span></code> — default <code class="docutils literal notranslate"><span class="pre">armijo</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">step_size(S)</span></code> — initial / fixed step (default <code class="docutils literal notranslate"><span class="pre">1.0</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">armijo_c(C)</span></code> — sufficient-decrease constant (default <code class="docutils literal notranslate"><span class="pre">1.0e-4</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">armijo_tau(T)</span></code> — backtracking factor (default <code class="docutils literal notranslate"><span class="pre">0.5</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">armijo_max_backtracks(N)</span></code> — default <code class="docutils literal notranslate"><span class="pre">20</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">line_search(armijo|fixed)</span></code> - default <code class="docutils literal notranslate"><span class="pre">armijo</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">step_size(S)</span></code> - initial / fixed step (default <code class="docutils literal notranslate"><span class="pre">1.0</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">armijo_c(C)</span></code> - sufficient-decrease constant (default <code class="docutils literal notranslate"><span class="pre">1.0e-4</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">armijo_tau(T)</span></code> - backtracking factor (default <code class="docutils literal notranslate"><span class="pre">0.5</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">armijo_max_backtracks(N)</span></code> - default <code class="docutils literal notranslate"><span class="pre">20</span></code></p></li>
 </ul>
 </section>
 <section id="conjugate-gradient-1">
 <span id="id3"></span><h3>Conjugate gradient<a class="headerlink" href="#conjugate-gradient-1" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">beta(polak_ribiere|fletcher_reeves)</span></code> — default <code class="docutils literal notranslate"><span class="pre">polak_ribiere</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">restart(dimension|N)</span></code> — reset interval; <code class="docutils literal notranslate"><span class="pre">dimension</span></code> means every
+<li><p><code class="docutils literal notranslate"><span class="pre">beta(polak_ribiere|fletcher_reeves)</span></code> - default <code class="docutils literal notranslate"><span class="pre">polak_ribiere</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">restart(dimension|N)</span></code> - reset interval; <code class="docutils literal notranslate"><span class="pre">dimension</span></code> means every
 <code class="docutils literal notranslate"><span class="pre">N</span></code> iterations (default <code class="docutils literal notranslate"><span class="pre">dimension</span></code>)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">step_size(S)</span></code>, <code class="docutils literal notranslate"><span class="pre">armijo_c(C)</span></code>, <code class="docutils literal notranslate"><span class="pre">armijo_tau(T)</span></code>,
-<code class="docutils literal notranslate"><span class="pre">armijo_max_backtracks(N)</span></code> — same meaning as for gradient descent</p></li>
+<code class="docutils literal notranslate"><span class="pre">armijo_max_backtracks(N)</span></code> - same meaning as for gradient descent</p></li>
 </ul>
 </section>
 <section id="bfgs-1">
 <span id="id4"></span><h3>BFGS<a class="headerlink" href="#bfgs-1" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">restart(none|dimension|N)</span></code> — periodic inverse-Hessian reset
+<li><p><code class="docutils literal notranslate"><span class="pre">restart(none|dimension|N)</span></code> - periodic inverse-Hessian reset
 interval; <code class="docutils literal notranslate"><span class="pre">none</span></code> disables periodic resets (default), <code class="docutils literal notranslate"><span class="pre">dimension</span></code>
 means every <code class="docutils literal notranslate"><span class="pre">N</span></code> iterations</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">step_size(S)</span></code>, <code class="docutils literal notranslate"><span class="pre">armijo_c(C)</span></code>, <code class="docutils literal notranslate"><span class="pre">armijo_tau(T)</span></code>,
-<code class="docutils literal notranslate"><span class="pre">armijo_max_backtracks(N)</span></code> — same meaning as for gradient descent</p></li>
+<code class="docutils literal notranslate"><span class="pre">armijo_max_backtracks(N)</span></code> - same meaning as for gradient descent</p></li>
 </ul>
 </section>
 <section id="l-bfgs-1">
 <span id="id5"></span><h3>L-BFGS<a class="headerlink" href="#l-bfgs-1" title="Link to this heading"></a></h3>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">memory_size(M)</span></code> — number of step/gradient-difference pairs kept
+<li><p><code class="docutils literal notranslate"><span class="pre">memory_size(M)</span></code> - number of step/gradient-difference pairs kept
 (default <code class="docutils literal notranslate"><span class="pre">10</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">restart(none|dimension|N)</span></code> — periodic pair-history reset interval;
+<li><p><code class="docutils literal notranslate"><span class="pre">restart(none|dimension|N)</span></code> - periodic pair-history reset interval;
 <code class="docutils literal notranslate"><span class="pre">none</span></code> disables periodic resets (default), <code class="docutils literal notranslate"><span class="pre">dimension</span></code> means every
 <code class="docutils literal notranslate"><span class="pre">N</span></code> iterations</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">step_size(S)</span></code>, <code class="docutils literal notranslate"><span class="pre">armijo_c(C)</span></code>, <code class="docutils literal notranslate"><span class="pre">armijo_tau(T)</span></code>,
-<code class="docutils literal notranslate"><span class="pre">armijo_max_backtracks(N)</span></code> — same meaning as for gradient descent</p></li>
+<code class="docutils literal notranslate"><span class="pre">armijo_max_backtracks(N)</span></code> - same meaning as for gradient descent</p></li>
 </ul>
 </section>
 </section>
@@ -680,19 +680,19 @@ means every <code class="docutils literal notranslate"><span class="pre">N</span
 <p>The <code class="docutils literal notranslate"><span class="pre">run/4</span></code> predicate returns a list of statistics. Fields common to
 all solvers:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">iterations(N)</span></code> — completed iterations</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">evaluations(E)</span></code> — objective function evaluations</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">final_value(V)</span></code> — best objective value found</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">iterations(N)</span></code> - completed iterations</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">evaluations(E)</span></code> - objective function evaluations</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">final_value(V)</span></code> - best objective value found</p></li>
 </ul>
 <p>Nelder–Mead additionally reports:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">final_simplex_size(S)</span></code> — maximum edge length of the final simplex</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">final_simplex_size(S)</span></code> - maximum edge length of the final simplex</p></li>
 </ul>
 <p>Gradient descent, conjugate gradient, BFGS, and L-BFGS additionally
 report:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">gradient_evaluations(G)</span></code> — number of gradient evaluations</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">final_gradient_norm(N)</span></code> — Euclidean norm of the final gradient</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gradient_evaluations(G)</span></code> - number of gradient evaluations</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">final_gradient_norm(N)</span></code> - Euclidean norm of the final gradient</p></li>
 </ul>
 </section>
 <section id="limitations">

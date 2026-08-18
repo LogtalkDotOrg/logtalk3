@@ -10,13 +10,13 @@ algorithm, simulated annealing, tabu search, ant colony, ...).
 
 Available solvers:
 
-- **Nelder–Mead** — derivative-free downhill simplex
-- **Gradient descent** — steepest descent with Armijo or fixed line
+- **Nelder–Mead** - derivative-free downhill simplex
+- **Gradient descent** - steepest descent with Armijo or fixed line
   search
-- **Conjugate gradient** — Fletcher–Reeves or Polak–Ribière with
+- **Conjugate gradient** - Fletcher–Reeves or Polak–Ribière with
   restarts
-- **BFGS** — dense quasi-Newton with Armijo line search
-- **L-BFGS** — limited-memory quasi-Newton with Armijo line search
+- **BFGS** - dense quasi-Newton with Armijo line search
+- **L-BFGS** - limited-memory quasi-Newton with Armijo line search
 
 All solvers share the same problem protocol and the same ``run/2-4``
 API.
@@ -49,19 +49,19 @@ To test this library predicates, load the ``tester.lgt`` file:
 Architecture
 ------------
 
-- ``local_optimization_problem_protocol`` — problem interface (required
+- ``local_optimization_problem_protocol`` - problem interface (required
   ``initial_point/1`` and ``objective/2``; optional gradient, Hessian,
   bounds, stop condition, and progress).
-- ``local_optimization_solver`` — category providing shared option
+- ``local_optimization_solver`` - category providing shared option
   handling, bound projection, vector utilities, and progress reporting.
-- ``nelder_mead(Problem)`` — Nelder–Mead simplex solver
+- ``nelder_mead(Problem)`` - Nelder–Mead simplex solver
   (derivative-free).
-- ``gradient_descent(Problem)`` — steepest descent (requires
+- ``gradient_descent(Problem)`` - steepest descent (requires
   ``gradient/2``).
-- ``conjugate_gradient(Problem)`` — nonlinear CG (requires
+- ``conjugate_gradient(Problem)`` - nonlinear CG (requires
   ``gradient/2``).
-- ``bfgs(Problem)`` — dense quasi-Newton (requires ``gradient/2``).
-- ``lbfgs(Problem)`` — limited-memory quasi-Newton (requires
+- ``bfgs(Problem)`` - dense quasi-Newton (requires ``gradient/2``).
+- ``lbfgs(Problem)`` - limited-memory quasi-Newton (requires
   ``gradient/2``).
 
 Defining a problem
@@ -70,24 +70,24 @@ Defining a problem
 A problem object must implement ``local_optimization_problem_protocol``
 by defining at least:
 
-- ``initial_point(-Point)`` — non-empty list of numbers used as the
+- ``initial_point(-Point)`` - non-empty list of numbers used as the
   starting point.
-- ``objective(+Point, -Value)`` — numeric objective value. Solvers
+- ``objective(+Point, -Value)`` - numeric objective value. Solvers
   minimize by default; use ``objective(maximize)`` to maximize.
 
 Optionally a problem may also define:
 
-- ``gradient(+Point, -Gradient)`` — **required** by gradient descent and
+- ``gradient(+Point, -Gradient)`` - **required** by gradient descent and
   conjugate gradient. When missing those solvers raise an existence
   error.
-- ``hessian(+Point, -Hessian)`` — optional second-order information (for
+- ``hessian(+Point, -Hessian)`` - optional second-order information (for
   future Newton / verification use).
-- ``position_bounds(-Bounds)`` — list of ``Lower-Upper`` pairs (box
+- ``position_bounds(-Bounds)`` - list of ``Lower-Upper`` pairs (box
   constraints). When present, trial points are projected onto the box.
-- ``stop_condition(+Iteration, +BestPoint, +BestValue)`` — early
+- ``stop_condition(+Iteration, +BestPoint, +BestValue)`` - early
   termination.
 - ``progress(+Iteration, +BestPoint, +BestValue, +Measure, +Evaluations)``
-  — periodic progress callback.
+  - periodic progress callback.
 
 Solvers
 -------
@@ -120,9 +120,9 @@ Requires ``gradient/2``.
 
 Line search options:
 
-- ``line_search(armijo)`` (default) — backtracking Armijo sufficient
+- ``line_search(armijo)`` (default) - backtracking Armijo sufficient
   decrease
-- ``line_search(fixed)`` — constant step size given by ``step_size(S)``
+- ``line_search(fixed)`` - constant step size given by ``step_size(S)``
 
 When bounds are present the method becomes projected gradient descent.
 
@@ -132,9 +132,9 @@ Conjugate gradient
 Nonlinear conjugate gradient with Fletcher–Reeves or Polak–Ribière
 conjugacy coefficients. Requires ``gradient/2``.
 
-- ``beta(polak_ribiere)`` (default) — uses the standard PR+ truncation
+- ``beta(polak_ribiere)`` (default) - uses the standard PR+ truncation
   ``max(Beta, 0)``
-- ``beta(fletcher_reeves)`` — classical FR formula
+- ``beta(fletcher_reeves)`` - classical FR formula
 
 The direction is reset to steepest descent every ``restart(N)``
 iterations (default: problem dimension) and whenever the new direction
@@ -151,7 +151,7 @@ the first step is plain steepest descent). Requires ``gradient/2``.
 
 Internally, maximization is handled by minimizing the negated objective
 and gradient, so the quasi-Newton direction, curvature test, and Armijo
-condition are always expressed in minimization form — this sidesteps the
+condition are always expressed in minimization form - this sidesteps the
 sign-handling pitfalls of an explicit minimize/maximize branch in the
 line search.
 
@@ -171,20 +171,20 @@ L-BFGS
 Limited-memory quasi-Newton method. Instead of a dense inverse-Hessian
 matrix, only the last ``memory_size(M)`` step/gradient-difference pairs
 are kept, and the search direction is recovered from them with the
-standard two-loop recursion — ``O(M*n)`` time and memory per iteration
+standard two-loop recursion - ``O(M*n)`` time and memory per iteration
 instead of ``bfgs(_)``'s ``O(n^2)``. Requires ``gradient/2``.
 
 Uses the same phi-space (always-minimize) formulation as ``bfgs(_)`` for
 maximization, the same curvature safeguard (a pair is dropped rather
 than risking a non-descent direction), and the same optional periodic
-``restart(N)`` — here clearing the pair history instead of resetting a
+``restart(N)`` - here clearing the pair history instead of resetting a
 matrix. With an empty history the search direction is plain steepest
 descent, so the first step (and every step right after a restart)
 matches ``bfgs(_)``'s first step exactly. With a longer history, the
 two-loop recursion also rescales the initial direction by a factor
 ``gamma_k``, computed from the most recent pair as
-``(s . y) / (y . y)``, on every iteration — a standard conditioning
-heuristic — so, unlike the first step, later steps are not expected to
+``(s . y) / (y . y)``, on every iteration - a standard conditioning
+heuristic - so, unlike the first step, later steps are not expected to
 exactly retrace ``bfgs(_)``'s trajectory even with a large
 ``memory_size``.
 
@@ -196,17 +196,17 @@ Common options
 
 Inherited from the solver category and available to every solver:
 
-- ``objective(minimize|maximize)`` — optimization direction (default:
+- ``objective(minimize|maximize)`` - optimization direction (default:
   ``minimize``).
-- ``target_value(Value)`` — stop when the best value reaches or passes
+- ``target_value(Value)`` - stop when the best value reaches or passes
   the target; use ``none`` to disable (default: ``none``).
-- ``max_iterations(N)`` — iteration limit (default: ``1000``).
-- ``tol_x(T)`` — step-size / simplex-size tolerance (default:
+- ``max_iterations(N)`` - iteration limit (default: ``1000``).
+- ``tol_x(T)`` - step-size / simplex-size tolerance (default:
   ``1.0e-8``).
-- ``tol_f(T)`` — objective-change tolerance (default: ``1.0e-8``).
-- ``tol_g(T)`` — gradient-norm tolerance; used by gradient-based solvers
+- ``tol_f(T)`` - objective-change tolerance (default: ``1.0e-8``).
+- ``tol_g(T)`` - gradient-norm tolerance; used by gradient-based solvers
   (default: ``1.0e-6``).
-- ``updates(N)`` — number of progress reports; ``0`` disables reporting
+- ``updates(N)`` - number of progress reports; ``0`` disables reporting
   (default: ``0``).
 
 Solver-specific options
@@ -217,12 +217,12 @@ Solver-specific options
 Nelder–Mead
 ~~~~~~~~~~~
 
-- ``reflection(Alpha)`` — default ``1.0``
-- ``expansion(Gamma)`` — default ``2.0``
-- ``contraction(Rho)`` — default ``0.5``
-- ``shrink(Sigma)`` — default ``0.5``
-- ``initial_step(S)`` — relative initial simplex step (default ``0.05``)
-- ``adaptive(false|true)`` — reserved for a future Gao–Han variant
+- ``reflection(Alpha)`` - default ``1.0``
+- ``expansion(Gamma)`` - default ``2.0``
+- ``contraction(Rho)`` - default ``0.5``
+- ``shrink(Sigma)`` - default ``0.5``
+- ``initial_step(S)`` - relative initial simplex step (default ``0.05``)
+- ``adaptive(false|true)`` - reserved for a future Gao–Han variant
   (default ``false``)
 
 .. _gradient-descent-1:
@@ -230,46 +230,46 @@ Nelder–Mead
 Gradient descent
 ~~~~~~~~~~~~~~~~
 
-- ``line_search(armijo|fixed)`` — default ``armijo``
-- ``step_size(S)`` — initial / fixed step (default ``1.0``)
-- ``armijo_c(C)`` — sufficient-decrease constant (default ``1.0e-4``)
-- ``armijo_tau(T)`` — backtracking factor (default ``0.5``)
-- ``armijo_max_backtracks(N)`` — default ``20``
+- ``line_search(armijo|fixed)`` - default ``armijo``
+- ``step_size(S)`` - initial / fixed step (default ``1.0``)
+- ``armijo_c(C)`` - sufficient-decrease constant (default ``1.0e-4``)
+- ``armijo_tau(T)`` - backtracking factor (default ``0.5``)
+- ``armijo_max_backtracks(N)`` - default ``20``
 
 .. _conjugate-gradient-1:
 
 Conjugate gradient
 ~~~~~~~~~~~~~~~~~~
 
-- ``beta(polak_ribiere|fletcher_reeves)`` — default ``polak_ribiere``
-- ``restart(dimension|N)`` — reset interval; ``dimension`` means every
+- ``beta(polak_ribiere|fletcher_reeves)`` - default ``polak_ribiere``
+- ``restart(dimension|N)`` - reset interval; ``dimension`` means every
   ``N`` iterations (default ``dimension``)
 - ``step_size(S)``, ``armijo_c(C)``, ``armijo_tau(T)``,
-  ``armijo_max_backtracks(N)`` — same meaning as for gradient descent
+  ``armijo_max_backtracks(N)`` - same meaning as for gradient descent
 
 .. _bfgs-1:
 
 BFGS
 ~~~~
 
-- ``restart(none|dimension|N)`` — periodic inverse-Hessian reset
+- ``restart(none|dimension|N)`` - periodic inverse-Hessian reset
   interval; ``none`` disables periodic resets (default), ``dimension``
   means every ``N`` iterations
 - ``step_size(S)``, ``armijo_c(C)``, ``armijo_tau(T)``,
-  ``armijo_max_backtracks(N)`` — same meaning as for gradient descent
+  ``armijo_max_backtracks(N)`` - same meaning as for gradient descent
 
 .. _l-bfgs-1:
 
 L-BFGS
 ~~~~~~
 
-- ``memory_size(M)`` — number of step/gradient-difference pairs kept
+- ``memory_size(M)`` - number of step/gradient-difference pairs kept
   (default ``10``)
-- ``restart(none|dimension|N)`` — periodic pair-history reset interval;
+- ``restart(none|dimension|N)`` - periodic pair-history reset interval;
   ``none`` disables periodic resets (default), ``dimension`` means every
   ``N`` iterations
 - ``step_size(S)``, ``armijo_c(C)``, ``armijo_tau(T)``,
-  ``armijo_max_backtracks(N)`` — same meaning as for gradient descent
+  ``armijo_max_backtracks(N)`` - same meaning as for gradient descent
 
 Run statistics
 --------------
@@ -277,19 +277,19 @@ Run statistics
 The ``run/4`` predicate returns a list of statistics. Fields common to
 all solvers:
 
-- ``iterations(N)`` — completed iterations
-- ``evaluations(E)`` — objective function evaluations
-- ``final_value(V)`` — best objective value found
+- ``iterations(N)`` - completed iterations
+- ``evaluations(E)`` - objective function evaluations
+- ``final_value(V)`` - best objective value found
 
 Nelder–Mead additionally reports:
 
-- ``final_simplex_size(S)`` — maximum edge length of the final simplex
+- ``final_simplex_size(S)`` - maximum edge length of the final simplex
 
 Gradient descent, conjugate gradient, BFGS, and L-BFGS additionally
 report:
 
-- ``gradient_evaluations(G)`` — number of gradient evaluations
-- ``final_gradient_norm(N)`` — Euclidean norm of the final gradient
+- ``gradient_evaluations(G)`` - number of gradient evaluations
+- ``final_gradient_norm(N)`` - Euclidean norm of the final gradient
 
 Limitations
 -----------

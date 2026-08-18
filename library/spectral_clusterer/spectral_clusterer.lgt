@@ -26,7 +26,7 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-08-01,
-		comment is 'Normalized spectral clusterer for continuous datasets using a Gaussian RBF affinity and a Nyström extension for assigning new instances to clusters.',
+		comment is 'Normalized spectral clusterer for continuous datasets using a Gaussian RBF affinity and a Nystroem extension for assigning new instances to clusters.',
 		see_also is [clusterer_protocol, clustering_dataset_protocol, kmeans_clusterer, linear_algebra]
 	]).
 

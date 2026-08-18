@@ -41,7 +41,7 @@ Shared category
 The library includes one reusable category intended to be imported by
 classifier algorithm implementations:
 
-- `classifier_common` — shared diagnostics accessors and classifier export
+- `classifier_common` - shared diagnostics accessors and classifier export
   helpers.
 
 This category keeps diagnostics access and file export behavior separate
@@ -114,14 +114,14 @@ Test datasets
 
 Several sample datasets are included in the `test_datasets` directory:
 
-- `play_tennis.lgt` — The classic weather/tennis dataset with 14 examples
+- `play_tennis.lgt` - The classic weather/tennis dataset with 14 examples
   and 4 discrete attributes (outlook, temperature, humidity, wind).
   Originally from Quinlan (1986) and widely used in machine learning
   textbooks including Mitchell (1997). Also available from the UCI
   Machine Learning Repository:
   https://archive.ics.uci.edu/dataset/349/tennis+major+tournament+match+statistics
 
-- `contact_lenses.lgt` — A dataset with 24 examples and 4 discrete
+- `contact_lenses.lgt` - A dataset with 24 examples and 4 discrete
   attributes (age, spectacle prescription, astigmatism, tear production
   rate) for deciding the type of contact lenses to prescribe. Originally
   from Cendrowska, J. (1987). PRISM: An algorithm for inducing modular
@@ -129,7 +129,7 @@ Several sample datasets are included in the `test_datasets` directory:
   Available from the UCI Machine Learning Repository:
   https://archive.ics.uci.edu/dataset/58/lenses
 
-- `iris.lgt` — The classic Iris flower dataset with 150 examples and 4
+- `iris.lgt` - The classic Iris flower dataset with 150 examples and 4
   continuous attributes (sepal length, sepal width, petal length, petal
   width) for classifying iris species (setosa, versicolor, virginica).
   Originally from Fisher, R.A. (1936). The use of multiple measurements
@@ -137,7 +137,7 @@ Several sample datasets are included in the `test_datasets` directory:
   from the UCI Machine Learning Repository:
   https://archive.ics.uci.edu/dataset/53/iris
 
-- `breast_cancer.lgt` — A dataset with 286 examples and 9 discrete
+- `breast_cancer.lgt` - A dataset with 286 examples and 9 discrete
   attributes (age, menopause, tumor size, inv-nodes, node-caps, degree
   of malignancy, breast, breast quadrant, irradiation) for predicting
   breast cancer recurrence events. Contains missing values (9 examples

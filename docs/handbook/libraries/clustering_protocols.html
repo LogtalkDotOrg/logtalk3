@@ -434,59 +434,59 @@ link in a web browser.</p>
 <h2>Test datasets<a class="headerlink" href="#test-datasets" title="Link to this heading"></a></h2>
 <p>Several sample datasets are included in the <code class="docutils literal notranslate"><span class="pre">test_datasets</span></code> directory:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">all_noise.lgt</span></code> — A synthetic 2D continuous dataset with 4 examples
+<li><p><code class="docutils literal notranslate"><span class="pre">all_noise.lgt</span></code> - A synthetic 2D continuous dataset with 4 examples
 and 2 continuous attributes (<code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>). The examples are well
 separated, making the dataset useful for all-noise tests where a
 density-based clusterer should reject every point under a small
 epsilon radius.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">bridge_noise.lgt</span></code> — A synthetic 2D continuous dataset with 10
+<li><p><code class="docutils literal notranslate"><span class="pre">bridge_noise.lgt</span></code> - A synthetic 2D continuous dataset with 10
 examples and 2 continuous attributes (<code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>). The examples form
 two dense blobs connected by two sparse bridge points, making the
 dataset suitable for testing density-based algorithms that should keep
 the blobs separate while treating the bridge as noise.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">dead_component_blobs.lgt</span></code> — A synthetic 2D continuous dataset with
+<li><p><code class="docutils literal notranslate"><span class="pre">dead_component_blobs.lgt</span></code> - A synthetic 2D continuous dataset with
 6 examples and 2 continuous attributes (<code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>). The examples
 form two tiny ordered blobs sized so an over-specified Gaussian
 mixture with <code class="docutils literal notranslate"><span class="pre">first_k</span></code> initialization can drive one component fully
 dead, making the dataset useful for dead-component policy regression
 tests.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">duplicate_points.lgt</span></code> — A synthetic 2D continuous dataset with 6
+<li><p><code class="docutils literal notranslate"><span class="pre">duplicate_points.lgt</span></code> - A synthetic 2D continuous dataset with 6
 examples and 2 continuous attributes (<code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>). The examples
 include repeated coordinates forming a dense local cluster plus one
 isolated outlier, making the dataset useful for duplicate-point and
 density-threshold tests.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">imbalanced_three_modes.lgt</span></code> — A synthetic 2D continuous dataset
+<li><p><code class="docutils literal notranslate"><span class="pre">imbalanced_three_modes.lgt</span></code> - A synthetic 2D continuous dataset
 with 9 examples and 2 continuous attributes (<code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>). The
 examples form one dense blob plus two much sparser distant modes,
 making the dataset useful for imbalanced-cluster and Gaussian mixture
 stress tests.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">iris_unlabeled.lgt</span></code> — A compact Iris-derived dataset with 9
+<li><p><code class="docutils literal notranslate"><span class="pre">iris_unlabeled.lgt</span></code> - A compact Iris-derived dataset with 9
 examples and 4 continuous attributes (<code class="docutils literal notranslate"><span class="pre">sepal_length</span></code>,
 <code class="docutils literal notranslate"><span class="pre">sepal_width</span></code>, <code class="docutils literal notranslate"><span class="pre">petal_length</span></code>, <code class="docutils literal notranslate"><span class="pre">petal_width</span></code>). It is derived
 from the classic Iris dataset but intentionally omits species labels
 so it can be used with unsupervised algorithms.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">large_two_blobs.lgt</span></code> — A synthetic 2D continuous dataset with 100
+<li><p><code class="docutils literal notranslate"><span class="pre">large_two_blobs.lgt</span></code> - A synthetic 2D continuous dataset with 100
 examples and 2 continuous attributes (<code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>). The examples form
 two dense 5x10 grids that are well separated, making the dataset
 useful for performance benchmarks that need a larger deterministic
 density-based clustering workload than the small smoke-test datasets.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mixed_profiles.lgt</span></code> — A mixed-feature dataset with 6 examples, 2
+<li><p><code class="docutils literal notranslate"><span class="pre">mixed_profiles.lgt</span></code> - A mixed-feature dataset with 6 examples, 2
 continuous attributes (<code class="docutils literal notranslate"><span class="pre">age</span></code>, <code class="docutils literal notranslate"><span class="pre">income</span></code>), and 2 discrete attributes
 (<code class="docutils literal notranslate"><span class="pre">channel</span></code>, <code class="docutils literal notranslate"><span class="pre">region</span></code>). This dataset is intended for clustering
 algorithms that support both numeric and categorical features.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">scaling_bands.lgt</span></code> — A synthetic 2D continuous dataset with 6
+<li><p><code class="docutils literal notranslate"><span class="pre">scaling_bands.lgt</span></code> - A synthetic 2D continuous dataset with 6
 examples and 2 continuous attributes (<code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>). The examples form
 two horizontal bands with large variation along <code class="docutils literal notranslate"><span class="pre">x</span></code>, making the
 dataset useful for tests that compare clustering behavior with feature
 scaling turned on versus off.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">shopping_profiles.lgt</span></code> — A categorical dataset with 6 examples and
+<li><p><code class="docutils literal notranslate"><span class="pre">shopping_profiles.lgt</span></code> - A categorical dataset with 6 examples and
 4 discrete attributes (<code class="docutils literal notranslate"><span class="pre">channel</span></code>, <code class="docutils literal notranslate"><span class="pre">region</span></code>, <code class="docutils literal notranslate"><span class="pre">loyalty</span></code>,
 <code class="docutils literal notranslate"><span class="pre">device</span></code>). The examples form two clear shopping-profile segments
 suitable for categorical clustering smoke tests.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">single_blob.lgt</span></code> — A synthetic 2D continuous dataset with 6
+<li><p><code class="docutils literal notranslate"><span class="pre">single_blob.lgt</span></code> - A synthetic 2D continuous dataset with 6
 examples and 2 continuous attributes (<code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>). The examples form
 a single compact blob suitable for one-cluster smoke tests.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">two_blobs.lgt</span></code> — A synthetic 2D continuous dataset with 8 examples
+<li><p><code class="docutils literal notranslate"><span class="pre">two_blobs.lgt</span></code> - A synthetic 2D continuous dataset with 8 examples
 and 2 continuous attributes (<code class="docutils literal notranslate"><span class="pre">x</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code>). The examples form two
 compact, well-separated blobs suitable for deterministic clustering
 smoke tests.</p></li>

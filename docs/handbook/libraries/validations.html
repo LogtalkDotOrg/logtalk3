@@ -409,9 +409,9 @@ opaque compound term that either contains a valid value
 <p>The library follows the same design pattern as the <code class="docutils literal notranslate"><span class="pre">optionals</span></code> and
 <code class="docutils literal notranslate"><span class="pre">expecteds</span></code> libraries:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">validation</span></code> — factory object for constructing validation terms</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">validation/1</span></code> — parametric object wrapping a validation term</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">validated</span></code> — companion helper object for list operations,
+<li><p><code class="docutils literal notranslate"><span class="pre">validation</span></code> - factory object for constructing validation terms</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">validation/1</span></code> - parametric object wrapping a validation term</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">validated</span></code> - companion helper object for list operations,
 type-checking, and QuickCheck support</p></li>
 </ul>
 <p>The naming follows the convention used in Scala Cats and Kotlin Arrow,
@@ -574,7 +574,7 @@ short-circuits at the first failure:</p>
 uncaught exception<span class="o">:</span> invalid_name
 </pre></div>
 </div>
-<p>Only <code class="docutils literal notranslate"><span class="pre">invalid_name</span></code> is reported — <code class="docutils literal notranslate"><span class="pre">either::sequence/2</span></code> stops at the
+<p>Only <code class="docutils literal notranslate"><span class="pre">invalid_name</span></code> is reported - <code class="docutils literal notranslate"><span class="pre">either::sequence/2</span></code> stops at the
 first unexpected term.</p>
 <p>The two libraries are complementary. Use <code class="docutils literal notranslate"><span class="pre">expecteds</span></code> for sequential
 pipelines where only the first error matters. Use <code class="docutils literal notranslate"><span class="pre">validations</span></code> with

@@ -460,38 +460,38 @@ checks, load the <code class="docutils literal notranslate"><span class="pre">te
 <h2>Test datasets<a class="headerlink" href="#test-datasets" title="Link to this heading"></a></h2>
 <p>Several sample datasets are included in the <code class="docutils literal notranslate"><span class="pre">test_datasets</span></code> directory:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">gaussian_anomalies.lgt</span></code> — A synthetic 2D anomaly detection dataset
+<li><p><code class="docutils literal notranslate"><span class="pre">gaussian_anomalies.lgt</span></code> - A synthetic 2D anomaly detection dataset
 with 48 examples and 2 continuous attributes (x, y). Normal points are
 sampled from a standard normal distribution centered at the origin.
 Anomalous points are placed far from the cluster center. Inspired by
 the canonical test case used in the Extended Isolation Forest paper by
 Hariri et al. (2019).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">malformed_anomalies.lgt</span></code> — A negative fixture with invalid class
+<li><p><code class="docutils literal notranslate"><span class="pre">malformed_anomalies.lgt</span></code> - A negative fixture with invalid class
 labels for testing family-level dataset validation.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mixed_anomalies.lgt</span></code> — A small mixed-feature anomaly dataset with
+<li><p><code class="docutils literal notranslate"><span class="pre">mixed_anomalies.lgt</span></code> - A small mixed-feature anomaly dataset with
 16 examples, 2 continuous attributes (age, income), and 2 categorical
 attributes (student, credit_rating). Includes missing values and
 uncommon feature combinations to exercise anomaly-detection code on
 heterogeneous data.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mixed_distance_behaviors.lgt</span></code> — A compact mixed-feature anomaly
+<li><p><code class="docutils literal notranslate"><span class="pre">mixed_distance_behaviors.lgt</span></code> - A compact mixed-feature anomaly
 fixture with 8 examples, 2 continuous attributes (size, weight), and 2
 categorical attributes (color, shape). Intended for smoke-testing
 continuous plus categorical distance behavior and basic mixed-data
 handling.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">sensor_anomalies.lgt</span></code> — A synthetic industrial sensor anomaly
+<li><p><code class="docutils literal notranslate"><span class="pre">sensor_anomalies.lgt</span></code> - A synthetic industrial sensor anomaly
 dataset with 40 examples and 3 continuous attributes (temperature,
 pressure, vibration). Contains missing values (14 examples with
 missing values, represented using anonymous variables). Normal
 readings cluster around typical operating ranges. Anomalous readings
 show extreme values indicating equipment malfunction.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">shuttle_anomalies.lgt</span></code> — A subset of the Statlog Shuttle dataset
+<li><p><code class="docutils literal notranslate"><span class="pre">shuttle_anomalies.lgt</span></code> - A subset of the Statlog Shuttle dataset
 with 50 examples and 9 continuous attributes representing sensor
 readings from the NASA Space Shuttle. Class 1 (Rad Flow) is the
 majority class (normal), while all other classes are treated as
 anomalies. Originally from Catlett, J. (1991). Available from the UCI
 Machine Learning Repository:
 <a class="reference external" href="https://archive.ics.uci.edu/dataset/148/statlog+shuttle">https://archive.ics.uci.edu/dataset/148/statlog+shuttle</a></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">water_potability.lgt</span></code> — A water potability dataset with 48 examples
+<li><p><code class="docutils literal notranslate"><span class="pre">water_potability.lgt</span></code> - A water potability dataset with 48 examples
 and 9 continuous attributes (pH, hardness, solids, chloramines,
 sulfate, conductivity, organic carbon, trihalomethanes, turbidity).
 Normal instances represent potable water samples within acceptable

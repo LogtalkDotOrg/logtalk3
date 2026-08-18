@@ -70,8 +70,8 @@
 	% ==========================================================================
 	%
 	% requestState encoding:
-	%   none                             — first round
-	%   bird_state(Known, Pending)       — Known = [known(Answer,Attr,Val)|...]
+	%   none                             - first round
+	%   bird_state(Known, Pending)       - Known = [known(Answer,Attr,Val)|...]
 	%                                      Pending = ask(Attr,Val) | menu(Attr,Val,Menu)
 
 	tool_call_round(identify_bird, _Arguments, Context, RoundResult) :-

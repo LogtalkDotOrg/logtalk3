@@ -207,7 +207,7 @@
 			FinalPopulation, BestPosition, BestFitness, Generations, Improvements).
 
 	%---------------------------------------------------------------------
-	% Generation step – strategy dispatch
+	% Generation step - strategy dispatch
 	%---------------------------------------------------------------------
 
 	generation_step(rand/1/bin, Population, Dimension, Bounds, CR, F, _Best, Trials) :-

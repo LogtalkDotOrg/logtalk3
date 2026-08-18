@@ -450,44 +450,44 @@ link in a web browser.</p>
 <section id="features">
 <h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p><strong>Configurable random number generator</strong> — the algorithm is
+<li><p><strong>Configurable random number generator</strong> - the algorithm is
 parameterized by a <code class="docutils literal notranslate"><span class="pre">fast_random</span></code> algorithm. Available algorithms
 include <code class="docutils literal notranslate"><span class="pre">xoshiro128pp</span></code>, <code class="docutils literal notranslate"><span class="pre">xoshiro128ss</span></code>, <code class="docutils literal notranslate"><span class="pre">xoshiro256pp</span></code>,
 <code class="docutils literal notranslate"><span class="pre">xoshiro256ss</span></code>, <code class="docutils literal notranslate"><span class="pre">well512a</span></code>, <code class="docutils literal notranslate"><span class="pre">splitmix64</span></code>, and <code class="docutils literal notranslate"><span class="pre">as183</span></code>. The
 convenience object <code class="docutils literal notranslate"><span class="pre">genetic_algorithm(Problem)</span></code> defaults to
 <code class="docutils literal notranslate"><span class="pre">xoshiro128pp</span></code>.</p></li>
-<li><p><strong>Configurable selection</strong> — parent selection is controlled by the
+<li><p><strong>Configurable selection</strong> - parent selection is controlled by the
 <code class="docutils literal notranslate"><span class="pre">selection/1</span></code> option. Supported schemes are <code class="docutils literal notranslate"><span class="pre">tournament(K)</span></code>
 (default <code class="docutils literal notranslate"><span class="pre">tournament(3)</span></code>), <code class="docutils literal notranslate"><span class="pre">roulette</span></code> (fitness-proportionate), and
 <code class="docutils literal notranslate"><span class="pre">rank</span></code> (linear rank weights after sorting by objective).</p></li>
-<li><p><strong>Adaptive rates</strong> — crossover and mutation rates can be held constant
+<li><p><strong>Adaptive rates</strong> - crossover and mutation rates can be held constant
 or adapted each generation. Built-in schedules are <code class="docutils literal notranslate"><span class="pre">constant</span></code>,
 <code class="docutils literal notranslate"><span class="pre">linear(Initial,</span> <span class="pre">Final)</span></code>, and <code class="docutils literal notranslate"><span class="pre">geometric(Factor)</span></code>. Optional
 problem hooks <code class="docutils literal notranslate"><span class="pre">crossover_rate/4</span></code> and <code class="docutils literal notranslate"><span class="pre">mutation_rate/4</span></code> override
 the configured schedules when defined.</p></li>
-<li><p><strong>Problem-defined genetic operators</strong> — crossover (<code class="docutils literal notranslate"><span class="pre">crossover/4</span></code>)
+<li><p><strong>Problem-defined genetic operators</strong> - crossover (<code class="docutils literal notranslate"><span class="pre">crossover/4</span></code>)
 and mutation (<code class="docutils literal notranslate"><span class="pre">mutate/2</span></code>) are supplied by the problem object,
 allowing arbitrary representations (permutations, real vectors,
 bit-strings, trees, etc.).</p></li>
-<li><p><strong>Elitism preservation</strong> — the best <code class="docutils literal notranslate"><span class="pre">elite_size(N)</span></code> individuals are
+<li><p><strong>Elitism preservation</strong> - the best <code class="docutils literal notranslate"><span class="pre">elite_size(N)</span></code> individuals are
 copied unchanged into the next generation (default N = 1), protecting
 them from crossover and mutation. N is clamped to the population size.
 Set to 0 to disable.</p></li>
-<li><p><strong>Minimization or maximization</strong> — controlled by the <code class="docutils literal notranslate"><span class="pre">objective/1</span></code>
+<li><p><strong>Minimization or maximization</strong> - controlled by the <code class="docutils literal notranslate"><span class="pre">objective/1</span></code>
 option (<code class="docutils literal notranslate"><span class="pre">minimize</span></code> by default).</p></li>
-<li><p><strong>Best individual tracking</strong> — the algorithm tracks the best
+<li><p><strong>Best individual tracking</strong> - the algorithm tracks the best
 individual found across all generations, not just the final
 population.</p></li>
-<li><p><strong>Progress reporting</strong> — if the problem object defines <code class="docutils literal notranslate"><span class="pre">progress/5</span></code>,
+<li><p><strong>Progress reporting</strong> - if the problem object defines <code class="docutils literal notranslate"><span class="pre">progress/5</span></code>,
 it is called periodically with the current generation, best
 individual, best energy, mean population energy, and diversity. A
 final report is always produced when updates are enabled.</p></li>
-<li><p><strong>Run statistics</strong> — the <code class="docutils literal notranslate"><span class="pre">run/4</span></code> predicate returns a list of
+<li><p><strong>Run statistics</strong> - the <code class="docutils literal notranslate"><span class="pre">run/4</span></code> predicate returns a list of
 statistics including the number of generations, fitness evaluations,
 improvements, and the final population size.</p></li>
-<li><p><strong>Seed control</strong> — the <code class="docutils literal notranslate"><span class="pre">seed(S)</span></code> option initializes the random
+<li><p><strong>Seed control</strong> - the <code class="docutils literal notranslate"><span class="pre">seed(S)</span></code> option initializes the random
 number generator for reproducible runs.</p></li>
-<li><p><strong>Optional initial population</strong> — when the problem defines
+<li><p><strong>Optional initial population</strong> - when the problem defines
 <code class="docutils literal notranslate"><span class="pre">initial_population/1</span></code> that list is used (padded or truncated to the
 requested size); otherwise individuals are generated via
 <code class="docutils literal notranslate"><span class="pre">random_individual/1</span></code>.</p></li>
@@ -499,29 +499,32 @@ requested size); otherwise individuals are generated via
 <code class="docutils literal notranslate"><span class="pre">genetic_algorithm_problem_protocol</span></code> protocol by defining (at least)
 the following predicates:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">random_individual(-Individual)</span></code> — generates a random candidate
+<li><p><code class="docutils literal notranslate"><span class="pre">random_individual(-Individual)</span></code> - generates a random candidate
 solution.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">state_energy(+Individual,</span> <span class="pre">-Energy)</span></code> — computes the cost/fitness of
+<li><p><code class="docutils literal notranslate"><span class="pre">state_energy(+Individual,</span> <span class="pre">-Energy)</span></code> - computes the cost/fitness of
 an individual (minimized by default).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">crossover(+Parent1,</span> <span class="pre">+Parent2,</span> <span class="pre">-Offspring1,</span> <span class="pre">-Offspring2)</span></code> —
+<li><p><code class="docutils literal notranslate"><span class="pre">crossover(+Parent1,</span> <span class="pre">+Parent2,</span> <span class="pre">-Offspring1,</span> <span class="pre">-Offspring2)</span></code> -
 recombines two parents into two offspring.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mutate(+Individual,</span> <span class="pre">-Mutated)</span></code> — produces a mutated individual.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mutate(+Individual,</span> <span class="pre">-Mutated)</span></code> - produces a mutated individual.</p></li>
 </ul>
 <p>Optionally, the problem object may also define:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">initial_population(-Population)</span></code> — returns a non-empty list of
+<li><p><code class="docutils literal notranslate"><span class="pre">initial_population(-Population)</span></code> - returns a non-empty list of
 initial individuals.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">stop_condition(+Generation,</span> <span class="pre">+BestIndividual,</span> <span class="pre">+BestEnergy)</span></code> —
+<li><p><code class="docutils literal notranslate"><span class="pre">stop_condition(+Generation,</span> <span class="pre">+BestIndividual,</span> <span class="pre">+BestEnergy)</span></code> -
 succeeds when the search should terminate early.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">progress(+Generation,</span> <span class="pre">+BestIndividual,</span> <span class="pre">+BestEnergy,</span> <span class="pre">+MeanEnergy,</span> <span class="pre">+Diversity)</span></code>
-— called periodically to report progress.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">diversity(+Population,</span> <span class="pre">-Diversity)</span></code> — computes a numeric diversity
+<li><p><code class="docutils literal notranslate"><span class="pre">progress(+Generation,</span> <span class="pre">+BestIndividual,</span> <span class="pre">+BestEnergy,</span> <span class="pre">+MeanEnergy,</span> <span class="pre">+Diversity)</span></code></p>
+<ul>
+<li><p>called periodically to report progress.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">diversity(+Population,</span> <span class="pre">-Diversity)</span></code> - computes a numeric diversity
 measure for progress reporting.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">crossover_rate(+Generation,</span> <span class="pre">+MaxGenerations,</span> <span class="pre">+CurrentRate,</span> <span class="pre">-NewRate)</span></code>
-— optional adaptive crossover-rate hook (overrides
+- optional adaptive crossover-rate hook (overrides
 <code class="docutils literal notranslate"><span class="pre">crossover_schedule/1</span></code>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">mutation_rate(+Generation,</span> <span class="pre">+MaxGenerations,</span> <span class="pre">+CurrentRate,</span> <span class="pre">-NewRate)</span></code>
-— optional adaptive mutation-rate hook (overrides
+- optional adaptive mutation-rate hook (overrides
 <code class="docutils literal notranslate"><span class="pre">mutation_schedule/1</span></code>).</p></li>
 </ul>
 </section>
@@ -529,29 +532,29 @@ measure for progress reporting.</p></li>
 <h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
 <p>Options for the <code class="docutils literal notranslate"><span class="pre">run/3-4</span></code> predicates:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">max_generations(N)</span></code> — maximum number of generations (default:
+<li><p><code class="docutils literal notranslate"><span class="pre">max_generations(N)</span></code> - maximum number of generations (default:
 <code class="docutils literal notranslate"><span class="pre">200</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">population_size(N)</span></code> — population size; must be at least 2 (default:
+<li><p><code class="docutils literal notranslate"><span class="pre">population_size(N)</span></code> - population size; must be at least 2 (default:
 <code class="docutils literal notranslate"><span class="pre">50</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">crossover_rate(P)</span></code> — initial crossover probability (default:
+<li><p><code class="docutils literal notranslate"><span class="pre">crossover_rate(P)</span></code> - initial crossover probability (default:
 <code class="docutils literal notranslate"><span class="pre">0.8</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mutation_rate(P)</span></code> — initial mutation probability (default:
+<li><p><code class="docutils literal notranslate"><span class="pre">mutation_rate(P)</span></code> - initial mutation probability (default:
 <code class="docutils literal notranslate"><span class="pre">0.1</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">crossover_schedule(Schedule)</span></code> — <code class="docutils literal notranslate"><span class="pre">constant</span></code> (default),
+<li><p><code class="docutils literal notranslate"><span class="pre">crossover_schedule(Schedule)</span></code> - <code class="docutils literal notranslate"><span class="pre">constant</span></code> (default),
 <code class="docutils literal notranslate"><span class="pre">linear(Initial,</span> <span class="pre">Final)</span></code>, or <code class="docutils literal notranslate"><span class="pre">geometric(Factor)</span></code>. Overridden by a
 problem <code class="docutils literal notranslate"><span class="pre">crossover_rate/4</span></code> hook when defined.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">mutation_schedule(Schedule)</span></code> — <code class="docutils literal notranslate"><span class="pre">constant</span></code> (default),
+<li><p><code class="docutils literal notranslate"><span class="pre">mutation_schedule(Schedule)</span></code> - <code class="docutils literal notranslate"><span class="pre">constant</span></code> (default),
 <code class="docutils literal notranslate"><span class="pre">linear(Initial,</span> <span class="pre">Final)</span></code>, or <code class="docutils literal notranslate"><span class="pre">geometric(Factor)</span></code>. Overridden by a
 problem <code class="docutils literal notranslate"><span class="pre">mutation_rate/4</span></code> hook when defined.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">selection(Scheme)</span></code> — parent selection scheme: <code class="docutils literal notranslate"><span class="pre">tournament(K)</span></code>
+<li><p><code class="docutils literal notranslate"><span class="pre">selection(Scheme)</span></code> - parent selection scheme: <code class="docutils literal notranslate"><span class="pre">tournament(K)</span></code>
 with positive integer K (default: <code class="docutils literal notranslate"><span class="pre">tournament(3)</span></code>), <code class="docutils literal notranslate"><span class="pre">roulette</span></code>, or
 <code class="docutils literal notranslate"><span class="pre">rank</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">elite_size(N)</span></code> — number of elite individuals preserved each
+<li><p><code class="docutils literal notranslate"><span class="pre">elite_size(N)</span></code> - number of elite individuals preserved each
 generation (default: <code class="docutils literal notranslate"><span class="pre">1</span></code>). Use <code class="docutils literal notranslate"><span class="pre">0</span></code> to disable elitism.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">objective(Direction)</span></code> — <code class="docutils literal notranslate"><span class="pre">minimize</span></code> (default) or <code class="docutils literal notranslate"><span class="pre">maximize</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">updates(N)</span></code> — number of progress reports during the run. Set to
+<li><p><code class="docutils literal notranslate"><span class="pre">objective(Direction)</span></code> - <code class="docutils literal notranslate"><span class="pre">minimize</span></code> (default) or <code class="docutils literal notranslate"><span class="pre">maximize</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">updates(N)</span></code> - number of progress reports during the run. Set to
 <code class="docutils literal notranslate"><span class="pre">0</span></code> to disable (default: <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">seed(S)</span></code> — positive integer seed for the random number generator,
+<li><p><code class="docutils literal notranslate"><span class="pre">seed(S)</span></code> - positive integer seed for the random number generator,
 enabling reproducible runs (default: none).</p></li>
 </ul>
 </section>
@@ -560,29 +563,29 @@ enabling reproducible runs (default: none).</p></li>
 <p>The <code class="docutils literal notranslate"><span class="pre">run/4</span></code> predicate returns a list of statistics about the completed
 run:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">generations(N)</span></code> — number of generations executed.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">evaluations(E)</span></code> — total number of fitness evaluations.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">improvements(I)</span></code> — number of generations that strictly improved the
+<li><p><code class="docutils literal notranslate"><span class="pre">generations(N)</span></code> - number of generations executed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">evaluations(E)</span></code> - total number of fitness evaluations.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">improvements(I)</span></code> - number of generations that strictly improved the
 best energy found.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">final_population_size(S)</span></code> — size of the final population.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">final_population_size(S)</span></code> - size of the final population.</p></li>
 </ul>
 </section>
 <section id="limitations">
 <h2><strong>Limitations</strong><a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p><strong>Single population, generational model</strong> — a classic generational GA
+<li><p><strong>Single population, generational model</strong> - a classic generational GA
 is implemented. Steady-state replacement, multi-population (island)
 models, and coevolution are not provided.</p></li>
-<li><p><strong>Limited selection schemes</strong> — tournament, roulette-wheel, and linear
+<li><p><strong>Limited selection schemes</strong> - tournament, roulette-wheel, and linear
 rank selection are implemented. Other schemes (e.g. stochastic
 universal sampling, Boltzmann selection) are not provided.</p></li>
-<li><p><strong>Limited adaptive schedules</strong> — constant, linear, and geometric rate
+<li><p><strong>Limited adaptive schedules</strong> - constant, linear, and geometric rate
 schedules are supported, plus optional problem hooks. Other adaptive
 policies (e.g. diversity-triggered rates) require a custom hook.</p></li>
-<li><p><strong>No built-in representation</strong> — chromosomes, real vectors, and other
+<li><p><strong>No built-in representation</strong> - chromosomes, real vectors, and other
 encodings must be defined by the problem together with suitable
 crossover and mutation operators.</p></li>
-<li><p><strong>Diversity is optional</strong> — a problem-specific <code class="docutils literal notranslate"><span class="pre">diversity/2</span></code>
+<li><p><strong>Diversity is optional</strong> - a problem-specific <code class="docutils literal notranslate"><span class="pre">diversity/2</span></code>
 predicate is required for meaningful diversity reporting; otherwise a
 placeholder value of 0.0 is used.</p></li>
 </ul>

@@ -94,19 +94,20 @@ which is directly sensitive to how tightly training has converged.
 Empirically, training with the constant learning-rate schedule
 (``learning_schedule(constant)``) plateaus quickly and stays noisy even
 with many more epochs. Using
-``learning_schedule(inverse_scaling(Power))`` instead — which decays the
-step size over epochs, satisfying the standard Robbins-Monro conditions
-for stochastic-approximation convergence — reduced prediction error by
-roughly an order of magnitude in testing against the same dataset and
-epoch budget. For this reason ``inverse_scaling(0.5)`` is the library
-default (rather than ``kernel_svm_classifier``'s
-``learning_schedule(constant)`` default), paired with a larger default
-``maximum_iterations`` (``200`` rather than ``kernel_svm_classifier``'s
-``25``). When tighter fits are needed, raising ``maximum_iterations``
-well into the hundreds or low thousands, optionally combined with a
-smaller ``epsilon`` and a larger initial ``learning_rate`` to compensate
-for the decaying schedule, converges substantially further; how far
-depends on the dataset.
+``learning_schedule(inverse_scaling(Power))`` instead
+
+- which decays the step size over epochs, satisfying the standard
+  Robbins-Monro conditions for stochastic-approximation convergence -
+  reduced prediction error by roughly an order of magnitude in testing
+  against the same dataset and epoch budget. For this reason
+  ``inverse_scaling(0.5)`` is the library default (rather than
+  ``kernel_svm_classifier``'s ``learning_schedule(constant)`` default),
+  paired with a larger default ``maximum_iterations`` (``200`` rather
+  than ``kernel_svm_classifier``'s ``25``). When tighter fits are
+  needed, raising ``maximum_iterations`` well into the hundreds or low
+  thousands, optionally combined with a smaller ``epsilon`` and a larger
+  initial ``learning_rate`` to compensate for the decaying schedule,
+  converges substantially further; how far depends on the dataset.
 
 Because ``epsilon`` is compared directly against residuals in the target
 variable's own units, it is scale-dependent: an ``epsilon`` of ``0.1``
@@ -218,7 +219,7 @@ the form:
 Where ``convergence(Status)`` is ``tolerance`` when the maximum
 parameter update in a full epoch fell within the configured tolerance,
 and ``maximum_iterations_exhausted`` when training stopped because the
-epoch cap was reached — see the convergence note above for why the
+epoch cap was reached - see the convergence note above for why the
 latter is the common case with the default options.
 ``final_delta(FinalDelta)`` stores the maximum parameter change observed
 during the final epoch. The remaining fields follow the same conventions

@@ -51,7 +51,7 @@
 		Solver::run(Point, Value, [max_iterations(50)]).
 
 	test(local_opt_sphere_improves, deterministic(Value < 20.0)) :-
-		% start at (3,4) → f=25; after optimization should be clearly better
+		% start at (3,4) -> f=25; after optimization should be clearly better
 		Solver =.. [_Solver_, sphere],
 		Solver::run(_Point, Value, [max_iterations(200)]).
 

@@ -27,9 +27,9 @@ transport.
 
 Supports two specification dates via dedicated adapters:
 
-- **2025-06-18** (default) — tools, prompts, resources, synchronous
+- **2025-06-18** (default) - tools, prompts, resources, synchronous
   elicitation, structured output, resource links, version negotiation.
-- **2026-07-28** — discovery, tools/prompts/resources, multi-round tool
+- **2026-07-28** - discovery, tools/prompts/resources, multi-round tool
   results (MRTR), caching, progress, subscriptions, cancellation.
 
 The adapter used by a server instance can be selected using the
@@ -215,11 +215,11 @@ them as text content.
 For custom result formatting, implement `tool_call/3`. The `Result` term
 can be:
 
-- `text(Atom)` — a text result
-- `error(Atom)` — a tool-level error (`isError: true`)
-- `results(List)` — content items (`text/1`, `error/1`, `resource_link/2`, `resource_link/4`)
-- `structured(StructuredContent)` — structured output with auto text
-- `structured(Items, StructuredContent)` — structured output with explicit content items
+- `text(Atom)` - a text result
+- `error(Atom)` - a tool-level error (`isError: true`)
+- `results(List)` - content items (`text/1`, `error/1`, `resource_link/2`, `resource_link/4`)
+- `structured(StructuredContent)` - structured output with auto text
+- `structured(Items, StructuredContent)` - structured output with explicit content items
 
 For example:
 
@@ -301,9 +301,9 @@ example:
 The `Elicit` closure is called as `call(Elicit, Message, Schema, Answer)`
 where:
 
-- `Message` — an atom with the prompt text
-- `Schema` — a curly-term JSON Schema for the requested input
-- `Answer` — unified with `accept(Content)`, `decline`, or `cancel`
+- `Message` - an atom with the prompt text
+- `Schema` - a curly-term JSON Schema for the requested input
+- `Answer` - unified with `accept(Content)`, `decline`, or `cancel`
 
 When `accept(Content)` is returned, `Content` is a curly-term with the
 user's response matching the requested schema.
@@ -315,7 +315,7 @@ Note that the 2026-07-28 adapter **never** invokes `tool_call/4`. Multi-round
 interaction for the 2026-07-28 spec uses `mcp_multiround_protocol` instead.
 
 
-Multi-round tool results — MRTR (2026-07-28 spec)
+Multi-round tool results - MRTR (2026-07-28 spec)
 -------------------------------------------------
 
 Implement `mcp_multiround_protocol` and define round hooks:
@@ -327,8 +327,8 @@ Implement `mcp_multiround_protocol` and define round hooks:
 Each receives a `request_context(ClientCapabilities, InputResponses, RequestState, Progress)`
 term and returns either:
 
-- `complete(Result)` — using the existing canonical result vocabulary
-- `input_required(InputRequests, RequestState)` — request more input
+- `complete(Result)` - using the existing canonical result vocabulary
+- `input_required(InputRequests, RequestState)` - request more input
 
 `InputRequests` is a list of uniquely keyed `input_request(Key, Request)`
 terms. Allowed request forms:
@@ -457,28 +457,28 @@ addition to `mcp_tool_protocol`, and declare `prompts` in capabilities:
 
 The `prompts/1` predicate returns a list of prompt descriptors:
 
-- `prompt(Name, Description, Arguments)` — without title
-- `prompt(Name, Title, Description, Arguments)` — with title
+- `prompt(Name, Description, Arguments)` - without title
+- `prompt(Name, Title, Description, Arguments)` - with title
 
 Where:
 
-- `Name` — the MCP prompt name (an atom)
-- `Title` — a human-friendly display name (an atom, optional)
-- `Description` — a human-readable description (an atom)
-- `Arguments` — a list of `argument(ArgName, ArgDescription, Required)`
+- `Name` - the MCP prompt name (an atom)
+- `Title` - a human-friendly display name (an atom, optional)
+- `Description` - a human-readable description (an atom)
+- `Arguments` - a list of `argument(ArgName, ArgDescription, Required)`
   terms where `Required` is `true` or `false`
 
 The `prompt_get/3` predicate handles prompt get requests. Its result
 term can be:
 
-- `messages(MessageList)` — a list of prompt messages
-- `messages(Description, MessageList)` — a list of messages with a
+- `messages(MessageList)` - a list of prompt messages
+- `messages(Description, MessageList)` - a list of messages with a
   description
 
 Each message in the list is a `message(Role, Content)` term where:
 
-- `Role` — `user` or `assistant`
-- `Content` — `text(Text)` where `Text` is an atom
+- `Role` - `user` or `assistant`
+- `Content` - `text(Text)` where `Text` is an atom
 
 Multi-turn prompts can return multiple messages:
 
@@ -527,24 +527,24 @@ capabilities:
 
 The `resources/1` predicate returns a list of resource descriptors:
 
-- `resource(URI, Name, Description, MimeType)` — without title
-- `resource(URI, Name, Title, Description, MimeType)` — with title
+- `resource(URI, Name, Description, MimeType)` - without title
+- `resource(URI, Name, Title, Description, MimeType)` - with title
 
 Where:
 
-- `URI` — the resource identifier (an atom, typically a URI like
+- `URI` - the resource identifier (an atom, typically a URI like
   `logtalk://my-app/data`)
-- `Name` — a human-readable name (an atom)
-- `Title` — a human-friendly display name (an atom, optional)
-- `Description` — a human-readable description (an atom)
-- `MimeType` — the MIME type of the resource content (an atom, e.g.
+- `Name` - a human-readable name (an atom)
+- `Title` - a human-friendly display name (an atom, optional)
+- `Description` - a human-readable description (an atom)
+- `MimeType` - the MIME type of the resource content (an atom, e.g.
   `'text/plain'`, `'application/json'`)
 
 The `resource_read/3` predicate handles resource read requests. Its
 result term must be `contents(ContentList)` where each content item is:
 
-- `text_content(URI, MimeType, Text)` — for text resources
-- `blob_content(URI, MimeType, Base64Data)` — for binary resources
+- `text_content(URI, MimeType, Text)` - for text resources
+- `blob_content(URI, MimeType, Base64Data)` - for binary resources
   encoded as base64
 
 A resource can return multiple content items. For example:
@@ -638,29 +638,29 @@ implemented by an application. See the API documentation for full details.
 
 ### `mcp_tool_protocol`
 
-- `capabilities/1` — returns the list of additional features needed by the
+- `capabilities/1` - returns the list of additional features needed by the
 	application (e.g. `[elicitation]`, `[prompts]`, `[resources]`, or
 	`[prompts, resources, elicitation]`); `prompts` and `resources` are server
 	capabilities while `elicitation` is a required client capability; optional,
 	defaults to `[]`
-- `tools/1` — returns the list of tool descriptors
-- `tool_call/3` — handles a tool call (optional; auto-dispatch is used
+- `tools/1` - returns the list of tool descriptors
+- `tool_call/3` - handles a tool call (optional; auto-dispatch is used
   when not defined)
-- `tool_call/4` — handles a tool call with an elicitation closure
+- `tool_call/4` - handles a tool call with an elicitation closure
   (optional; requires `capabilities([elicitation])` or
   `capabilities([..., elicitation])`; **2025-06-18 only**)
-- `output_schema/2` — declares a JSON Schema for structured tool output
+- `output_schema/2` - declares a JSON Schema for structured tool output
   (optional; when defined, the tool descriptor includes `outputSchema`)
 
 ### `mcp_prompt_protocol`
 
-- `prompts/1` — returns the list of prompt descriptors
-- `prompt_get/3` — handles a prompt get request
+- `prompts/1` - returns the list of prompt descriptors
+- `prompt_get/3` - handles a prompt get request
 
 ### `mcp_resource_protocol`
 
-- `resources/1` — returns the list of resource descriptors
-- `resource_read/3` — handles a resource read request
+- `resources/1` - returns the list of resource descriptors
+- `resource_read/3` - handles a resource read request
 
 ### `mcp_multiround_protocol` (2026-07-28)
 
@@ -670,7 +670,7 @@ implemented by an application. See the API documentation for full details.
 
 ### `mcp_cache_protocol` (2026-07-28)
 
-- `cache_policy/4` — optional per-operation TTL and scope
+- `cache_policy/4` - optional per-operation TTL and scope
 
 
 Supported MCP methods per spec

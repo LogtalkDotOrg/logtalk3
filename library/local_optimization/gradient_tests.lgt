@@ -45,7 +45,7 @@
 		]).
 
 	test(grad_rosenbrock_improves, deterministic(Value < 5.0)) :-
-		% classic start (-1.2, 1.0) → f≈24.2; should improve substantially
+		% classic start (-1.2, 1.0) -> f≈24.2; should improve substantially
 		Solver =.. [_Solver_, rosenbrock],
 		Solver::run(_Point, Value, [
 			max_iterations(1000),
