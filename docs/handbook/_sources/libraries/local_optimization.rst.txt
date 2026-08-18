@@ -13,10 +13,14 @@ Available solvers:
 - **Nelder–Mead** - derivative-free downhill simplex
 - **Gradient descent** - steepest descent with Armijo or fixed line
   search
+- **Barzilai–Borwein** - adaptive-step gradient method (BB1 / BB2 /
+  alternate)
 - **Conjugate gradient** - Fletcher–Reeves or Polak–Ribière with
   restarts
 - **BFGS** - dense quasi-Newton with Armijo line search
 - **L-BFGS** - limited-memory quasi-Newton with Armijo line search
+- **L-BFGS-B** - bound-constrained L-BFGS (projected gradient + free
+  set)
 
 All solvers share the same problem protocol and the same ``run/2-4``
 API.
@@ -58,11 +62,15 @@ Architecture
   (derivative-free).
 - ``gradient_descent(Problem)`` - steepest descent (requires
   ``gradient/2``).
+- ``barzilai_borwein(Problem)`` - Barzilai–Borwein adaptive step
+  (requires ``gradient/2``).
 - ``conjugate_gradient(Problem)`` - nonlinear CG (requires
   ``gradient/2``).
 - ``bfgs(Problem)`` - dense quasi-Newton (requires ``gradient/2``).
 - ``lbfgs(Problem)`` - limited-memory quasi-Newton (requires
   ``gradient/2``).
+- ``lbfgs_b(Problem)`` - bound-constrained L-BFGS (requires
+  ``gradient/2``; uses ``position_bounds/1`` when defined).
 
 Defining a problem
 ------------------
@@ -77,8 +85,9 @@ by defining at least:
 
 Optionally a problem may also define:
 
-- ``gradient(+Point, -Gradient)`` - **required** by gradient descent and
-  conjugate gradient. When missing those solvers raise an existence
+- ``gradient(+Point, -Gradient)`` - **required** by all gradient-based
+  solvers (gradient descent, Barzilai–Borwein, conjugate gradient, BFGS,
+  L-BFGS, L-BFGS-B). When missing those solvers raise an existence
   error.
 - ``hessian(+Point, -Hessian)`` - optional second-order information (for
   future Newton / verification use).
@@ -126,6 +135,32 @@ Line search options:
 
 When bounds are present the method becomes projected gradient descent.
 
+Barzilai–Borwein
+~~~~~~~~~~~~~~~~
+
+Adaptive-step gradient method. After each accepted step it forms
+``s = x_new - x_old`` and ``y = g_new - g_old`` and chooses the next
+step length from one of:
+
+- ``formula(bb1)`` - long step ``alpha = (s*s) / (s*y)``
+- ``formula(bb2)`` - short step ``alpha = (s*y) / (y*y)``
+- ``formula(alternate)`` (default) - switches between BB1 and BB2 each
+  iteration
+
+Requires ``gradient/2``. The first step uses ``step_size(S)`` (default
+``1.0``). When the denominator is near zero, the computed step is
+non-positive, or the step falls outside ``[step_min, step_max]``, the
+previous accepted step is reused.
+
+Line search options:
+
+- ``line_search(none)`` (default) - accept the pure BB step
+- ``line_search(armijo)`` - optional backtracking Armijo on top of the
+  BB step length
+
+When bounds are present, trial points are projected onto the box after
+each step.
+
 Conjugate gradient
 ~~~~~~~~~~~~~~~~~~
 
@@ -156,7 +191,7 @@ sign-handling pitfalls of an explicit minimize/maximize branch in the
 line search.
 
 The inverse-Hessian update is skipped, keeping the previous
-approximation, whenever the curvature condition ``y . s > 0`` is not
+approximation, whenever the curvature condition ``y*s > 0`` is not
 comfortably satisfied, to preserve positive definiteness. An optional
 ``restart(N)`` periodically resets the approximation to the identity
 matrix, mirroring ``conjugate_gradient``'s direction restarts (off by
@@ -182,14 +217,34 @@ matrix. With an empty history the search direction is plain steepest
 descent, so the first step (and every step right after a restart)
 matches ``bfgs(_)``'s first step exactly. With a longer history, the
 two-loop recursion also rescales the initial direction by a factor
-``gamma_k``, computed from the most recent pair as
-``(s . y) / (y . y)``, on every iteration - a standard conditioning
-heuristic - so, unlike the first step, later steps are not expected to
-exactly retrace ``bfgs(_)``'s trajectory even with a large
-``memory_size``.
+``gamma_k``, computed from the most recent pair as ``(s*y) / (y*y)``, on
+every iteration - a standard conditioning heuristic - so, unlike the
+first step, later steps are not expected to exactly retrace
+``bfgs(_)``'s trajectory even with a large ``memory_size``.
 
 Line search is backtracking Armijo, with the same options and defaults
 as the other gradient-based solvers.
+
+L-BFGS-B
+~~~~~~~~
+
+Bound-constrained L-BFGS. Unlike plain ``lbfgs(_)``, which only clamps
+trial points after an unconstrained step, this solver:
+
+1. Builds the **projected gradient** and identifies the free set
+2. Computes an L-BFGS direction via the two-loop recursion
+3. **Masks** direction components that would leave the box
+4. Limits the Armijo step to the largest **feasible** step along that
+   direction
+5. Stops on the projected gradient norm
+
+Requires ``gradient/2``. When ``position_bounds/1`` is absent it behaves
+like unconstrained ``lbfgs(_)``. Prefer this solver whenever box
+constraints are present; prefer plain ``lbfgs(_)`` for purely
+unconstrained problems.
+
+Options match ``lbfgs(_)`` (``memory_size``, ``restart``, Armijo
+parameters).
 
 Common options
 --------------
@@ -236,6 +291,19 @@ Gradient descent
 - ``armijo_tau(T)`` - backtracking factor (default ``0.5``)
 - ``armijo_max_backtracks(N)`` - default ``20``
 
+.. _barzilaiborwein-1:
+
+Barzilai–Borwein
+~~~~~~~~~~~~~~~~
+
+- ``formula(bb1|bb2|alternate)`` - default ``alternate``
+- ``step_size(S)`` - initial / fallback step (default ``1.0``)
+- ``step_min(S)`` - lower clamp for the BB step (default ``1.0e-10``)
+- ``step_max(S)`` - upper clamp for the BB step (default ``1.0e10``)
+- ``line_search(none|armijo)`` - default ``none``
+- ``armijo_c(C)``, ``armijo_tau(T)``, ``armijo_max_backtracks(N)`` -
+  used only when ``line_search(armijo)`` is selected
+
 .. _conjugate-gradient-1:
 
 Conjugate gradient
@@ -271,6 +339,14 @@ L-BFGS
 - ``step_size(S)``, ``armijo_c(C)``, ``armijo_tau(T)``,
   ``armijo_max_backtracks(N)`` - same meaning as for gradient descent
 
+.. _l-bfgs-b-1:
+
+L-BFGS-B
+~~~~~~~~
+
+Same options as L-BFGS (``memory_size``, ``restart``, ``step_size``,
+Armijo parameters).
+
 Run statistics
 --------------
 
@@ -285,27 +361,29 @@ Nelder–Mead additionally reports:
 
 - ``final_simplex_size(S)`` - maximum edge length of the final simplex
 
-Gradient descent, conjugate gradient, BFGS, and L-BFGS additionally
-report:
+Gradient descent, Barzilai–Borwein, conjugate gradient, BFGS, L-BFGS,
+and L-BFGS-B additionally report:
 
 - ``gradient_evaluations(G)`` - number of gradient evaluations
 - ``final_gradient_norm(N)`` - Euclidean norm of the final gradient
+  (projected gradient norm for L-BFGS-B)
 
 Limitations
 -----------
 
 - Continuous numeric vectors only.
-- Box constraints only (projection / clamping); no general equality or
-  inequality constraint handling.
+- Box constraints only; no general equality or inequality constraints.
 - Single starting point (no multi-start wrapper yet).
 - Nelder–Mead adaptive (Gao–Han) coefficients are stubbed but not
   active.
 - Projected steps after a conjugate-gradient update can weaken
   conjugacy; a pure bound-constrained CG formulation is not yet
   implemented.
-- Projected steps after a BFGS or L-BFGS update can similarly weaken the
-  quasi-Newton model; a pure bound-constrained formulation (L-BFGS-B
-  style) is not yet implemented.
+- Projected steps after a BFGS or unconstrained L-BFGS update can weaken
+  the quasi-Newton model; use ``lbfgs_b(_)`` for box constraints.
+- L-BFGS-B uses free-set masking and feasible-step limiting rather than
+  a full generalized Cauchy point + subspace minimization; that remains
+  a possible future refinement.
 
 Usage
 -----
@@ -343,6 +421,23 @@ Defining a problem with analytic gradient
            GY is 2*Y.
 
    :- end_object.
+
+Barzilai-Borwein
+~~~~~~~~~~~~~~~~
+
+::
+
+   | ?- barzilai_borwein(sphere)::run(Point, Value, Statistics, [
+           formula(alternate),
+           max_iterations(200),
+           tol_g(1.0e-8)
+       ]).
+
+   | ?- barzilai_borwein(rosenbrock)::run(Point, Value, [
+           formula(bb2),
+           line_search(armijo),
+           max_iterations(500)
+       ]).
 
 .. _neldermead-2:
 
@@ -432,6 +527,18 @@ L-BFGS
    | ?- lbfgs(sphere)::run(
             Point, Value,
             [memory_size(5), restart(dimension), max_iterations(100)]
+        ).
+
+L-BFGS-B (box constraints)
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+   | ?- lbfgs_b(bounded_sphere)::run(Point, Value).
+
+   | ?- lbfgs_b(bounded_sphere)::run(
+            Point, Value, Statistics,
+            [memory_size(10), max_iterations(200), tol_g(1.0e-10)]
         ).
 
 Maximization

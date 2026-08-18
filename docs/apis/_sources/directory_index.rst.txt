@@ -2109,10 +2109,12 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
 
+   barzilai_borwein(Problem) <barzilai_borwein_1>
    bfgs(Problem) <bfgs_1>
    conjugate_gradient(Problem) <conjugate_gradient_1>
    gradient_descent(Problem) <gradient_descent_1>
    lbfgs(Problem) <lbfgs_1>
+   lbfgs_b(Problem) <lbfgs_b_1>
    local_optimization_problem_protocol <local_optimization_problem_protocol_0>
    local_optimization_solver <local_optimization_solver_0>
    nelder_mead(Problem) <nelder_mead_1>

@@ -34,6 +34,7 @@
 		length/2, memberchk/2
 	]).
 
+	cover(barzilai_borwein(_)).
 	cover(bfgs(_)).
 	cover(conjugate_gradient(_)).
 	cover(gradient_descent(_)).
@@ -182,9 +183,11 @@
 	% auxiliary predicates
 
 	no_gradient_solver :-
+		_Solver_ \== barzilai_borwein,
 		_Solver_ \== bfgs,
 		_Solver_ \== conjugate_gradient,
 		_Solver_ \== gradient_descent,
-		_Solver_ \== lbfgs.
+		_Solver_ \== lbfgs,
+		_Solver_ \== lbfgs_b.
 
 :- end_object.
