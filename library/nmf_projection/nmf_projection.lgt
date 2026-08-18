@@ -23,9 +23,9 @@
 	imports(dimension_reducer_common)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-08-18,
 		comment is 'Non-negative Matrix Factorization dimension reduction for non-negative continuous datasets.'
 	]).
 
@@ -388,7 +388,8 @@
 
 	valid_option(n_components(Components)) :-
 		valid(positive_integer, Components).
-	valid_option(center(false)).
+	valid_option(center(Center)) :-
+		Center == false.
 	valid_option(feature_scaling(FeatureScaling)) :-
 		valid(boolean, FeatureScaling).
 	valid_option(maximum_iterations(MaximumIterations)) :-

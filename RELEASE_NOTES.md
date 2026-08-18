@@ -83,6 +83,10 @@ unsigned and signed two's-complement conversions are supported.
 * ADDED: New `integer_partitions` library providing predicates for generating
 and querying integer partitions.
 
+* ADDED: New `univariate_distributions` library providing normal distribution
+sampling, density, log-density, cumulative distribution, and quantile
+predicates.
+
 * ADDED: New `multivariate_distributions` library providing singular-aware
 sampling and density predicates for multivariate normal and Student's t
 distributions, additive-log-ratio logistic-normal sampling predicates, and
@@ -143,10 +147,6 @@ Generalized Ripple-Down Rules (GRDR).
 
 * ADDED: New `tries` library implementing prefix trees that associate complete
 strings with values.
-
-* ADDED: New `univariate_distributions` library providing normal distribution
-sampling, density, log-density, cumulative distribution, and quantile
-predicates.
 
 * ADDED: New `block_ciphers` library with AES 128/192/256 implementations.
 

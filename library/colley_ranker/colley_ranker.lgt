@@ -23,9 +23,9 @@
 	imports([ranking_dataset_common, score_ranker_model_common, pairwise_strength_ranker_common])).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-05-21,
+		date is 2026-08-18,
 		comment is 'Colley pairwise preference ranker. Learns one deterministic rating per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol by solving the Colley linear system built from aggregated pairwise outcomes and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
 		see_also is [pairwise_ranking_dataset_protocol, ranker_protocol, copeland_ranker, rank_centrality]
 	]).
@@ -235,14 +235,5 @@
 		number(Score),
 		Score >= -1.0e-6,
 		Score =< 1.0 + 1.0e-6.
-
-	valid_option(_Option) :-
-		fail.
-
-	default_option(_Option) :-
-		fail.
-
-	fix_option(_Option, _FixedOption) :-
-		fail.
 
 :- end_object.

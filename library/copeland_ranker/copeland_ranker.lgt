@@ -23,9 +23,9 @@
 	imports([ranking_dataset_common, score_ranker_model_common])).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-05-06,
+		date is 2026-08-18,
 		comment is 'Copeland pairwise preference ranker. Learns one deterministic score per item from a dataset object implementing the ``pairwise_ranking_dataset_protocol`` protocol by comparing aggregated head-to-head outcomes for each observed matchup and returns a self-describing ranker term with diagnostics that can be used for ranking and export.',
 		see_also is [pairwise_ranking_dataset_protocol, ranker_protocol, bradley_terry_ranker]
 	]).
@@ -71,14 +71,5 @@
 
 	valid_score(Score) :-
 		integer(Score).
-
-	valid_option(_Option) :-
-		fail.
-
-	default_option(_Option) :-
-		fail.
-
-	fix_option(_Option, _FixedOption) :-
-		fail.
 
 :- end_object.

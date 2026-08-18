@@ -23,9 +23,9 @@
 	imports([ranking_dataset_common, score_ranker_model_common, pairwise_strength_ranker_common])).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-05-21,
+		date is 2026-08-18,
 		comment is 'HodgeRank pairwise measurement ranker. Learns one deterministic zero-sum score per item from a dataset object implementing the ``pairwise_measurement_dataset_protocol`` protocol by solving the weighted graph-Laplacian least-squares system induced by signed edge measurements and returns a self-describing ranker term with diagnostics and residuals.',
 		see_also is [pairwise_measurement_dataset_protocol, ranker_protocol, massey_ranker]
 	]).
@@ -386,14 +386,5 @@
 
 	valid_score(Score) :-
 		number(Score).
-
-	valid_option(_Option) :-
-		fail.
-
-	default_option(_Option) :-
-		fail.
-
-	fix_option(_Option, _FixedOption) :-
-		fail.
 
 :- end_object.

@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:0:2,
 		author is 'Paulo Moura',
-		date is 2026-08-02,
+		date is 2026-08-18,
 		comment is 'Server-side HTTP session manager over normalized request and response terms using opaque cookie identifiers and an in-memory session store.'
 	]).
 
@@ -363,7 +363,8 @@
 		;	integer(Interval),
 			Interval >= 0
 		).
-	valid_option(store(memory)).
+	valid_option(store(Store)) :-
+		Store == memory.
 
 	normalize_cookie_template_attributes(Attributes, CookieAttributes) :-
 		http_cookies(atom)::normalize_cookie_attributes(Attributes, NormalizedAttributes),
