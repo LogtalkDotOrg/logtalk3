@@ -37,6 +37,7 @@
 	cover(bfgs(_)).
 	cover(conjugate_gradient(_)).
 	cover(gradient_descent(_)).
+	cover(lbfgs(_)).
 	cover(nelder_mead(_)).
 
 	% basic runs
@@ -183,6 +184,7 @@
 	no_gradient_solver :-
 		_Solver_ \== bfgs,
 		_Solver_ \== conjugate_gradient,
-		_Solver_ \== gradient_descent.
+		_Solver_ \== gradient_descent,
+		_Solver_ \== lbfgs.
 
 :- end_object.

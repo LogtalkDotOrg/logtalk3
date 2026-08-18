@@ -1,0 +1,71 @@
+.. index:: single: lbfgs(Problem)
+.. _lbfgs/1:
+
+.. rst-class:: right
+
+**object**
+
+``lbfgs(Problem)``
+==================
+
+* ``Problem`` - Problem object implementing ``local_optimization_problem_protocol`` and defining ``gradient/2``.
+
+
+L-BFGS (limited-memory Broyden-Fletcher-Goldfarb-Shanno) quasi-Newton local optimizer with backtracking Armijo line search. Requires the problem to define ``gradient/2``. Supports optional box constraints via projection, minimization and maximization.
+
+| **Availability:** 
+|    ``logtalk_load(local_optimization(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-17
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`local_optimization_solver <local_optimization_solver/0>`
+| **Uses:**
+|    :ref:`linear_algebra <linear_algebra/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+
+   - Update: Instead of maintaining a dense inverse-Hessian approximation like ``bfgs(_)``, only the last ``memory_size(M)`` step/gradient-difference pairs ``(s, y)`` are kept, and the search direction is recovered from them with the standard two-loop recursion (Nocedal and Wright, Algorithm 7.4). Memory and per-iteration cost are ``O(M*n)`` instead of ``bfgs(_)``'s ``O(n^2)``.
+   - Internal minimization form: Maximization is handled by internally minimizing the negated objective and gradient, so the two-loop recursion, curvature test, and Armijo condition are always expressed in minimization form, which avoids sign errors in the line search.
+   - Curvature safeguard: Whenever the curvature condition ``y . s > 0`` is not comfortably satisfied (possible here since the line search only enforces sufficient decrease, not a Wolfe curvature condition), the pair history is cleared and the next step falls back to steepest descent, rather than keeping a stale history that would otherwise keep producing the same near-zero-progress direction.
+   - Restarts: The ``restart(N)`` option (off by default) periodically clears the pair history, exactly as ``bfgs(_)`` resets its inverse-Hessian approximation to the identity.
+   - Bounds: When the problem defines ``position_bounds/1``, trial points are projected onto the box after each step. Projection can weaken the quasi-Newton model; a pure bound-constrained formulation (L-BFGS-B style) is not implemented.
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`local_optimization_solver/0::run/2`  :ref:`local_optimization_solver/0::run/3`  :ref:`local_optimization_solver/0::run/4`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`local_optimization_problem_protocol <local_optimization_problem_protocol/0>`, :ref:`local_optimization_solver <local_optimization_solver/0>`, :ref:`gradient_descent(Problem) <gradient_descent/1>`, :ref:`conjugate_gradient(Problem) <conjugate_gradient/1>`, :ref:`bfgs(Problem) <bfgs/1>`
+

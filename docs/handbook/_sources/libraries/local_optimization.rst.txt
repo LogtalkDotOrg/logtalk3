@@ -16,9 +16,10 @@ Available solvers:
 - **Conjugate gradient** — Fletcher–Reeves or Polak–Ribière with
   restarts
 - **BFGS** — dense quasi-Newton with Armijo line search
+- **L-BFGS** — limited-memory quasi-Newton with Armijo line search
 
 All solvers share the same problem protocol and the same ``run/2-4``
-API. L-BFGS is planned.
+API.
 
 API documentation
 -----------------
@@ -60,6 +61,8 @@ Architecture
 - ``conjugate_gradient(Problem)`` — nonlinear CG (requires
   ``gradient/2``).
 - ``bfgs(Problem)`` — dense quasi-Newton (requires ``gradient/2``).
+- ``lbfgs(Problem)`` — limited-memory quasi-Newton (requires
+  ``gradient/2``).
 
 Defining a problem
 ------------------
@@ -153,13 +156,40 @@ sign-handling pitfalls of an explicit minimize/maximize branch in the
 line search.
 
 The inverse-Hessian update is skipped, keeping the previous
-approximation, whenever the curvature condition is not comfortably
-satisfied, to preserve positive definiteness. An optional ``restart(N)``
-periodically resets the approximation to the identity matrix, mirroring
-``conjugate_gradient``'s direction restarts (off by default).
+approximation, whenever the curvature condition ``y . s > 0`` is not
+comfortably satisfied, to preserve positive definiteness. An optional
+``restart(N)`` periodically resets the approximation to the identity
+matrix, mirroring ``conjugate_gradient``'s direction restarts (off by
+default).
 
 Line search is backtracking Armijo, with the same options and defaults
 as gradient descent and conjugate gradient.
+
+L-BFGS
+~~~~~~
+
+Limited-memory quasi-Newton method. Instead of a dense inverse-Hessian
+matrix, only the last ``memory_size(M)`` step/gradient-difference pairs
+are kept, and the search direction is recovered from them with the
+standard two-loop recursion — ``O(M*n)`` time and memory per iteration
+instead of ``bfgs(_)``'s ``O(n^2)``. Requires ``gradient/2``.
+
+Uses the same phi-space (always-minimize) formulation as ``bfgs(_)`` for
+maximization, the same curvature safeguard (a pair is dropped rather
+than risking a non-descent direction), and the same optional periodic
+``restart(N)`` — here clearing the pair history instead of resetting a
+matrix. With an empty history the search direction is plain steepest
+descent, so the first step (and every step right after a restart)
+matches ``bfgs(_)``'s first step exactly. With a longer history, the
+two-loop recursion also rescales the initial direction by a factor
+``gamma_k``, computed from the most recent pair as
+``(s . y) / (y . y)``, on every iteration — a standard conditioning
+heuristic — so, unlike the first step, later steps are not expected to
+exactly retrace ``bfgs(_)``'s trajectory even with a large
+``memory_size``.
+
+Line search is backtracking Armijo, with the same options and defaults
+as the other gradient-based solvers.
 
 Common options
 --------------
@@ -228,6 +258,19 @@ BFGS
 - ``step_size(S)``, ``armijo_c(C)``, ``armijo_tau(T)``,
   ``armijo_max_backtracks(N)`` — same meaning as for gradient descent
 
+.. _l-bfgs-1:
+
+L-BFGS
+~~~~~~
+
+- ``memory_size(M)`` — number of step/gradient-difference pairs kept
+  (default ``10``)
+- ``restart(none|dimension|N)`` — periodic pair-history reset interval;
+  ``none`` disables periodic resets (default), ``dimension`` means every
+  ``N`` iterations
+- ``step_size(S)``, ``armijo_c(C)``, ``armijo_tau(T)``,
+  ``armijo_max_backtracks(N)`` — same meaning as for gradient descent
+
 Run statistics
 --------------
 
@@ -242,7 +285,8 @@ Nelder–Mead additionally reports:
 
 - ``final_simplex_size(S)`` — maximum edge length of the final simplex
 
-Gradient descent, conjugate gradient, and BFGS additionally report:
+Gradient descent, conjugate gradient, BFGS, and L-BFGS additionally
+report:
 
 - ``gradient_evaluations(G)`` — number of gradient evaluations
 - ``final_gradient_norm(N)`` — Euclidean norm of the final gradient
@@ -259,10 +303,9 @@ Limitations
 - Projected steps after a conjugate-gradient update can weaken
   conjugacy; a pure bound-constrained CG formulation is not yet
   implemented.
-- Projected steps after a BFGS update can similarly weaken the
+- Projected steps after a BFGS or L-BFGS update can similarly weaken the
   quasi-Newton model; a pure bound-constrained formulation (L-BFGS-B
   style) is not yet implemented.
-- L-BFGS is not yet available.
 
 Usage
 -----
@@ -372,6 +415,25 @@ BFGS
             [restart(dimension), max_iterations(100)]
         ).
 
+.. _l-bfgs-2:
+
+L-BFGS
+~~~~~~
+
+::
+
+   | ?- lbfgs(rosenbrock)::run(Point, Value).
+
+   | ?- lbfgs(rosenbrock)::run(
+            Point, Value, Statistics,
+            [memory_size(20), max_iterations(200), tol_g(1.0e-10)]
+        ).
+
+   | ?- lbfgs(sphere)::run(
+            Point, Value,
+            [memory_size(5), restart(dimension), max_iterations(100)]
+        ).
+
 Maximization
 ~~~~~~~~~~~~
 
@@ -420,12 +482,3 @@ Using as a local polisher after a global search
             Refined, Value,
             [max_iterations(200), tol_g(1.0e-10)]
         ).
-
-Planned solvers
----------------
-
-- L-BFGS (limited-memory quasi-Newton)
-
-Will implement the same ``run/2-4`` API and reuse
-``local_optimization_problem_protocol`` and
-``local_optimization_solver``.

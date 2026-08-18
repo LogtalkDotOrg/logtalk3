@@ -249,6 +249,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#gradient-descent">Gradient descent</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conjugate-gradient">Conjugate gradient</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#bfgs">BFGS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#l-bfgs">L-BFGS</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#common-options">Common options</a></li>
@@ -257,6 +258,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#gradient-descent-1">Gradient descent</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conjugate-gradient-1">Conjugate gradient</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#bfgs-1">BFGS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#l-bfgs-1">L-BFGS</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#run-statistics">Run statistics</a></li>
@@ -268,12 +270,12 @@
 <li class="toctree-l4"><a class="reference internal" href="#gradient-descent-2">Gradient descent</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#conjugate-gradient-2">Conjugate gradient</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#bfgs-2">BFGS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#l-bfgs-2">L-BFGS</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#maximization">Maximization</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#box-constrained-problem">Box-constrained problem</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#using-as-a-local-polisher-after-a-global-search">Using as a local polisher after a global search</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#planned-solvers">Planned solvers</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="lof_anomaly_detector.html"><code class="docutils literal notranslate"><span class="pre">lof_anomaly_detector</span></code></a></li>
@@ -440,9 +442,10 @@ search</p></li>
 <li><p><strong>Conjugate gradient</strong> — Fletcher–Reeves or Polak–Ribière with
 restarts</p></li>
 <li><p><strong>BFGS</strong> — dense quasi-Newton with Armijo line search</p></li>
+<li><p><strong>L-BFGS</strong> — limited-memory quasi-Newton with Armijo line search</p></li>
 </ul>
 <p>All solvers share the same problem protocol and the same <code class="docutils literal notranslate"><span class="pre">run/2-4</span></code>
-API. L-BFGS is planned.</p>
+API.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -478,6 +481,8 @@ handling, bound projection, vector utilities, and progress reporting.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">conjugate_gradient(Problem)</span></code> — nonlinear CG (requires
 <code class="docutils literal notranslate"><span class="pre">gradient/2</span></code>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">bfgs(Problem)</span></code> — dense quasi-Newton (requires <code class="docutils literal notranslate"><span class="pre">gradient/2</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lbfgs(Problem)</span></code> — limited-memory quasi-Newton (requires
+<code class="docutils literal notranslate"><span class="pre">gradient/2</span></code>).</p></li>
 </ul>
 </section>
 <section id="defining-a-problem">
@@ -563,12 +568,36 @@ condition are always expressed in minimization form — this sidesteps the
 sign-handling pitfalls of an explicit minimize/maximize branch in the
 line search.</p>
 <p>The inverse-Hessian update is skipped, keeping the previous
-approximation, whenever the curvature condition is not comfortably
-satisfied, to preserve positive definiteness. An optional <code class="docutils literal notranslate"><span class="pre">restart(N)</span></code>
-periodically resets the approximation to the identity matrix, mirroring
-<code class="docutils literal notranslate"><span class="pre">conjugate_gradient</span></code>’s direction restarts (off by default).</p>
+approximation, whenever the curvature condition <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">.</span> <span class="pre">s</span> <span class="pre">&gt;</span> <span class="pre">0</span></code> is not
+comfortably satisfied, to preserve positive definiteness. An optional
+<code class="docutils literal notranslate"><span class="pre">restart(N)</span></code> periodically resets the approximation to the identity
+matrix, mirroring <code class="docutils literal notranslate"><span class="pre">conjugate_gradient</span></code>’s direction restarts (off by
+default).</p>
 <p>Line search is backtracking Armijo, with the same options and defaults
 as gradient descent and conjugate gradient.</p>
+</section>
+<section id="l-bfgs">
+<h3>L-BFGS<a class="headerlink" href="#l-bfgs" title="Link to this heading"></a></h3>
+<p>Limited-memory quasi-Newton method. Instead of a dense inverse-Hessian
+matrix, only the last <code class="docutils literal notranslate"><span class="pre">memory_size(M)</span></code> step/gradient-difference pairs
+are kept, and the search direction is recovered from them with the
+standard two-loop recursion — <code class="docutils literal notranslate"><span class="pre">O(M*n)</span></code> time and memory per iteration
+instead of <code class="docutils literal notranslate"><span class="pre">bfgs(_)</span></code>’s <code class="docutils literal notranslate"><span class="pre">O(n^2)</span></code>. Requires <code class="docutils literal notranslate"><span class="pre">gradient/2</span></code>.</p>
+<p>Uses the same phi-space (always-minimize) formulation as <code class="docutils literal notranslate"><span class="pre">bfgs(_)</span></code> for
+maximization, the same curvature safeguard (a pair is dropped rather
+than risking a non-descent direction), and the same optional periodic
+<code class="docutils literal notranslate"><span class="pre">restart(N)</span></code> — here clearing the pair history instead of resetting a
+matrix. With an empty history the search direction is plain steepest
+descent, so the first step (and every step right after a restart)
+matches <code class="docutils literal notranslate"><span class="pre">bfgs(_)</span></code>’s first step exactly. With a longer history, the
+two-loop recursion also rescales the initial direction by a factor
+<code class="docutils literal notranslate"><span class="pre">gamma_k</span></code>, computed from the most recent pair as
+<code class="docutils literal notranslate"><span class="pre">(s</span> <span class="pre">.</span> <span class="pre">y)</span> <span class="pre">/</span> <span class="pre">(y</span> <span class="pre">.</span> <span class="pre">y)</span></code>, on every iteration — a standard conditioning
+heuristic — so, unlike the first step, later steps are not expected to
+exactly retrace <code class="docutils literal notranslate"><span class="pre">bfgs(_)</span></code>’s trajectory even with a large
+<code class="docutils literal notranslate"><span class="pre">memory_size</span></code>.</p>
+<p>Line search is backtracking Armijo, with the same options and defaults
+as the other gradient-based solvers.</p>
 </section>
 </section>
 <section id="common-options">
@@ -633,6 +662,18 @@ means every <code class="docutils literal notranslate"><span class="pre">N</span
 <code class="docutils literal notranslate"><span class="pre">armijo_max_backtracks(N)</span></code> — same meaning as for gradient descent</p></li>
 </ul>
 </section>
+<section id="l-bfgs-1">
+<span id="id5"></span><h3>L-BFGS<a class="headerlink" href="#l-bfgs-1" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">memory_size(M)</span></code> — number of step/gradient-difference pairs kept
+(default <code class="docutils literal notranslate"><span class="pre">10</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">restart(none|dimension|N)</span></code> — periodic pair-history reset interval;
+<code class="docutils literal notranslate"><span class="pre">none</span></code> disables periodic resets (default), <code class="docutils literal notranslate"><span class="pre">dimension</span></code> means every
+<code class="docutils literal notranslate"><span class="pre">N</span></code> iterations</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">step_size(S)</span></code>, <code class="docutils literal notranslate"><span class="pre">armijo_c(C)</span></code>, <code class="docutils literal notranslate"><span class="pre">armijo_tau(T)</span></code>,
+<code class="docutils literal notranslate"><span class="pre">armijo_max_backtracks(N)</span></code> — same meaning as for gradient descent</p></li>
+</ul>
+</section>
 </section>
 <section id="run-statistics">
 <h2>Run statistics<a class="headerlink" href="#run-statistics" title="Link to this heading"></a></h2>
@@ -647,7 +688,8 @@ all solvers:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">final_simplex_size(S)</span></code> — maximum edge length of the final simplex</p></li>
 </ul>
-<p>Gradient descent, conjugate gradient, and BFGS additionally report:</p>
+<p>Gradient descent, conjugate gradient, BFGS, and L-BFGS additionally
+report:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">gradient_evaluations(G)</span></code> — number of gradient evaluations</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">final_gradient_norm(N)</span></code> — Euclidean norm of the final gradient</p></li>
@@ -665,10 +707,9 @@ active.</p></li>
 <li><p>Projected steps after a conjugate-gradient update can weaken
 conjugacy; a pure bound-constrained CG formulation is not yet
 implemented.</p></li>
-<li><p>Projected steps after a BFGS update can similarly weaken the
+<li><p>Projected steps after a BFGS or L-BFGS update can similarly weaken the
 quasi-Newton model; a pure bound-constrained formulation (L-BFGS-B
 style) is not yet implemented.</p></li>
-<li><p>L-BFGS is not yet available.</p></li>
 </ul>
 </section>
 <section id="usage">
@@ -706,7 +747,7 @@ style) is not yet implemented.</p></li>
 </div>
 </section>
 <section id="neldermead-2">
-<span id="id5"></span><h3>Nelder–Mead<a class="headerlink" href="#neldermead-2" title="Link to this heading"></a></h3>
+<span id="id6"></span><h3>Nelder–Mead<a class="headerlink" href="#neldermead-2" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> nelder_mead(rosenbrock)<span class="o">::</span>run(<span class="nv">Point</span>, <span class="nv">Value</span>).
 
 | <span class="o">?-</span> nelder_mead(rosenbrock)<span class="o">::</span>run(
@@ -717,7 +758,7 @@ style) is not yet implemented.</p></li>
 </div>
 </section>
 <section id="gradient-descent-2">
-<span id="id6"></span><h3>Gradient descent<a class="headerlink" href="#gradient-descent-2" title="Link to this heading"></a></h3>
+<span id="id7"></span><h3>Gradient descent<a class="headerlink" href="#gradient-descent-2" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> gradient_descent(sphere)<span class="o">::</span>run(<span class="nv">Point</span>, <span class="nv">Value</span>).
 
 | <span class="o">?-</span> gradient_descent(sphere)<span class="o">::</span>run(
@@ -733,7 +774,7 @@ style) is not yet implemented.</p></li>
 </div>
 </section>
 <section id="conjugate-gradient-2">
-<span id="id7"></span><h3>Conjugate gradient<a class="headerlink" href="#conjugate-gradient-2" title="Link to this heading"></a></h3>
+<span id="id8"></span><h3>Conjugate gradient<a class="headerlink" href="#conjugate-gradient-2" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> conjugate_gradient(rosenbrock)<span class="o">::</span>run(<span class="nv">Point</span>, <span class="nv">Value</span>).
 
 | <span class="o">?-</span> conjugate_gradient(rosenbrock)<span class="o">::</span>run(
@@ -749,7 +790,7 @@ style) is not yet implemented.</p></li>
 </div>
 </section>
 <section id="bfgs-2">
-<span id="id8"></span><h3>BFGS<a class="headerlink" href="#bfgs-2" title="Link to this heading"></a></h3>
+<span id="id9"></span><h3>BFGS<a class="headerlink" href="#bfgs-2" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> bfgs(rosenbrock)<span class="o">::</span>run(<span class="nv">Point</span>, <span class="nv">Value</span>).
 
 | <span class="o">?-</span> bfgs(rosenbrock)<span class="o">::</span>run(
@@ -760,6 +801,22 @@ style) is not yet implemented.</p></li>
 | <span class="o">?-</span> bfgs(sphere)<span class="o">::</span>run(
          <span class="nv">Point</span>, <span class="nv">Value</span>,
          [restart(dimension), max_iterations(<span class="m">100</span>)]
+     ).
+</pre></div>
+</div>
+</section>
+<section id="l-bfgs-2">
+<span id="id10"></span><h3>L-BFGS<a class="headerlink" href="#l-bfgs-2" title="Link to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> lbfgs(rosenbrock)<span class="o">::</span>run(<span class="nv">Point</span>, <span class="nv">Value</span>).
+
+| <span class="o">?-</span> lbfgs(rosenbrock)<span class="o">::</span>run(
+         <span class="nv">Point</span>, <span class="nv">Value</span>, <span class="nv">Statistics</span>,
+         [memory_size(<span class="m">20</span>), max_iterations(<span class="m">200</span>), tol_g(<span class="m">1.0e-10</span>)]
+     ).
+
+| <span class="o">?-</span> lbfgs(sphere)<span class="o">::</span>run(
+         <span class="nv">Point</span>, <span class="nv">Value</span>,
+         [memory_size(<span class="m">5</span>), restart(dimension), max_iterations(<span class="m">100</span>)]
      ).
 </pre></div>
 </div>
@@ -810,15 +867,6 @@ style) is not yet implemented.</p></li>
 </pre></div>
 </div>
 </section>
-</section>
-<section id="planned-solvers">
-<h2>Planned solvers<a class="headerlink" href="#planned-solvers" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>L-BFGS (limited-memory quasi-Newton)</p></li>
-</ul>
-<p>Will implement the same <code class="docutils literal notranslate"><span class="pre">run/2-4</span></code> API and reuse
-<code class="docutils literal notranslate"><span class="pre">local_optimization_problem_protocol</span></code> and
-<code class="docutils literal notranslate"><span class="pre">local_optimization_solver</span></code>.</p>
 </section>
 </section>
 

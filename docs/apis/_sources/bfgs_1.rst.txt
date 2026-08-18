@@ -34,7 +34,7 @@ BFGS (Broyden-Fletcher-Goldfarb-Shanno) dense quasi-Newton local optimizer with 
 
    - Update: Maintains a dense approximation to the inverse Hessian, updated after every accepted step with the standard BFGS rank-two formula. The approximation starts at the identity matrix.
    - Internal minimization form: Maximization is handled by internally minimizing the negated objective and gradient; the quasi-Newton direction, curvature test, and Armijo condition are therefore always expressed in minimization form, which avoids sign errors in the line search.
-   - Curvature safeguard: The inverse-Hessian update is skipped (the previous approximation is kept) whenever the curvature condition ``y . s > 0`` is not comfortably satisfied, which keeps the approximation positive definite.
+   - Curvature safeguard: Whenever the curvature condition ``y . s > 0`` is not comfortably satisfied (possible here since the line search only enforces sufficient decrease, not a Wolfe curvature condition), the inverse-Hessian approximation is reset to the identity matrix and the next step falls back to steepest descent, rather than keeping a stale approximation that would otherwise keep producing the same near-zero-progress direction.
    - Restarts: The ``restart(N)`` option (off by default) periodically resets the inverse-Hessian approximation to the identity matrix, exactly as ``conjugate_gradient(_)`` resets its search direction.
    - Bounds: When the problem defines ``position_bounds/1``, trial points are projected onto the box after each step. Projection can weaken the quasi-Newton model; a pure bound-constrained formulation (L-BFGS-B style) is not implemented.
 
@@ -67,5 +67,5 @@ Operators
 
 .. seealso::
 
-   :ref:`local_optimization_problem_protocol <local_optimization_problem_protocol/0>`, :ref:`local_optimization_solver <local_optimization_solver/0>`, :ref:`gradient_descent(Problem) <gradient_descent/1>`, :ref:`conjugate_gradient(Problem) <conjugate_gradient/1>`, :ref:`nelder_mead(Problem) <nelder_mead/1>`
+   :ref:`local_optimization_problem_protocol <local_optimization_problem_protocol/0>`, :ref:`local_optimization_solver <local_optimization_solver/0>`, :ref:`gradient_descent(Problem) <gradient_descent/1>`, :ref:`conjugate_gradient(Problem) <conjugate_gradient/1>`
 

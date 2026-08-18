@@ -252,6 +252,7 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">bfgs(Problem)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="conjugate_gradient_1.html">conjugate_gradient(Problem)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="gradient_descent_1.html">gradient_descent(Problem)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lbfgs_1.html">lbfgs(Problem)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="local_optimization_problem_protocol_0.html">local_optimization_problem_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="local_optimization_solver_0.html">local_optimization_solver</a></li>
 <li class="toctree-l3"><a class="reference internal" href="nelder_mead_1.html">nelder_mead(Problem)</a></li>
@@ -467,7 +468,7 @@
 <div><ul class="simple">
 <li><p>Update: Maintains a dense approximation to the inverse Hessian, updated after every accepted step with the standard BFGS rank-two formula. The approximation starts at the identity matrix.</p></li>
 <li><p>Internal minimization form: Maximization is handled by internally minimizing the negated objective and gradient; the quasi-Newton direction, curvature test, and Armijo condition are therefore always expressed in minimization form, which avoids sign errors in the line search.</p></li>
-<li><p>Curvature safeguard: The inverse-Hessian update is skipped (the previous approximation is kept) whenever the curvature condition <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">.</span> <span class="pre">s</span> <span class="pre">&gt;</span> <span class="pre">0</span></code> is not comfortably satisfied, which keeps the approximation positive definite.</p></li>
+<li><p>Curvature safeguard: Whenever the curvature condition <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">.</span> <span class="pre">s</span> <span class="pre">&gt;</span> <span class="pre">0</span></code> is not comfortably satisfied (possible here since the line search only enforces sufficient decrease, not a Wolfe curvature condition), the inverse-Hessian approximation is reset to the identity matrix and the next step falls back to steepest descent, rather than keeping a stale approximation that would otherwise keep producing the same near-zero-progress direction.</p></li>
 <li><p>Restarts: The <code class="docutils literal notranslate"><span class="pre">restart(N)</span></code> option (off by default) periodically resets the inverse-Hessian approximation to the identity matrix, exactly as <code class="docutils literal notranslate"><span class="pre">conjugate_gradient(_)</span></code> resets its search direction.</p></li>
 <li><p>Bounds: When the problem defines <code class="docutils literal notranslate"><span class="pre">position_bounds/1</span></code>, trial points are projected onto the box after each step. Projection can weaken the quasi-Newton model; a pure bound-constrained formulation (L-BFGS-B style) is not implemented.</p></li>
 </ul>
@@ -503,7 +504,7 @@
 <p>(none)</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="local_optimization_problem_protocol_0.html#local-optimization-problem-protocol-0"><span class="std std-ref">local_optimization_problem_protocol</span></a>, <a class="reference internal" href="local_optimization_solver_0.html#local-optimization-solver-0"><span class="std std-ref">local_optimization_solver</span></a>, <a class="reference internal" href="gradient_descent_1.html#gradient-descent-1"><span class="std std-ref">gradient_descent(Problem)</span></a>, <a class="reference internal" href="conjugate_gradient_1.html#conjugate-gradient-1"><span class="std std-ref">conjugate_gradient(Problem)</span></a>, <a class="reference internal" href="nelder_mead_1.html#nelder-mead-1"><span class="std std-ref">nelder_mead(Problem)</span></a></p>
+<p><a class="reference internal" href="local_optimization_problem_protocol_0.html#local-optimization-problem-protocol-0"><span class="std std-ref">local_optimization_problem_protocol</span></a>, <a class="reference internal" href="local_optimization_solver_0.html#local-optimization-solver-0"><span class="std std-ref">local_optimization_solver</span></a>, <a class="reference internal" href="gradient_descent_1.html#gradient-descent-1"><span class="std std-ref">gradient_descent(Problem)</span></a>, <a class="reference internal" href="conjugate_gradient_1.html#conjugate-gradient-1"><span class="std std-ref">conjugate_gradient(Problem)</span></a></p>
 </div>
 </section>
 </section>

@@ -29,6 +29,7 @@
 		bfgs,
 		conjugate_gradient,
 		gradient_descent,
+		lbfgs,
 		nelder_mead
 	], [
 		optimize(on)

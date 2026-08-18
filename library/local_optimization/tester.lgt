@@ -31,13 +31,14 @@
 		bfgs,
 		conjugate_gradient,
 		gradient_descent,
+		lbfgs,
 		nelder_mead,
 		test_objects
 	], [
 		debug(on),
 		source_data(on)
 	]),
-	logtalk_load([tests, gradient_tests, bfgs_tests], [hook(lgtunit)]),
+	logtalk_load([tests, gradient_tests, bfgs_tests, lbfgs_tests], [hook(lgtunit)]),
 	lgtunit::run_test_sets([
 		% derivative-free solvers (shared tests/1 suite)
 		tests(nelder_mead),
@@ -48,6 +49,9 @@
 		gradient_tests(conjugate_gradient),
 		tests(bfgs),
 		gradient_tests(bfgs),
-		bfgs_tests
+		bfgs_tests,
+		tests(lbfgs),
+		gradient_tests(lbfgs),
+		lbfgs_tests
 	])
 )).
