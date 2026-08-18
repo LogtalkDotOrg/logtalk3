@@ -8,10 +8,10 @@
 ``lbfgs_b(Problem)``
 ====================
 
-* ``Problem`` - Problem object implementing ``local_optimization_problem_protocol`` with ``gradient/2`` and ``position_bounds/1``.
+* ``Problem`` - Problem object implementing ``local_optimization_problem_protocol`` with ``gradient/2`` (and ``position_bounds/1`` when box constraints are present).
 
 
-L-BFGS-B bound-constrained limited-memory quasi-Newton optimizer. Uses a projected-gradient free-set identification, feasible-step limiting, and the standard L-BFGS two-loop recursion on the free variables. Requires ``gradient/2`` and ``position_bounds/1``.
+L-BFGS-B bound-constrained limited-memory quasi-Newton optimizer with a level-B approximate generalized Cauchy point (first-segment quadratic min along the projected gradient path), free-set identification at the Cauchy point, feasible-step limiting, and L-BFGS two-loop recursion. Requires ``gradient/2``.
 
 | **Availability:** 
 |    ``logtalk_load(local_optimization(loader))``
@@ -32,10 +32,11 @@ L-BFGS-B bound-constrained limited-memory quasi-Newton optimizer. Uses a project
 
 | **Remarks:**
 
-   - Algorithm: Each iteration (1) projects the current point onto the box, (2) builds the projected gradient and free set, (3) computes an L-BFGS direction via the two-loop recursion and zeroes components that would leave the feasible region, (4) takes the largest feasible step length as the Armijo upper bound, and (5) updates the limited-memory history only when the curvature condition holds.
-   - Versus ``lbfgs(_)``: Plain ``lbfgs(_)`` only clamps trial points after an unconstrained step, which can weaken the quasi-Newton model. This solver never proposes an infeasible step and stops on the projected gradient norm.
+   - Algorithm: Each iteration (1) builds an approximate generalized Cauchy point by minimizing a quadratic model of the limited-memory BFGS Hessian along the first segment of the projected steepest-descent path, (2) identifies the free set at that point, (3) computes an L-BFGS direction via the two-loop recursion and zeroes components outside the free set or that would leave the box, (4) uses the largest feasible step as the Armijo upper bound, and (5) updates the pair history only when the curvature condition holds.
+   - Approximate GCP: Level-B approximation: breakpoints along ``x(t) = P(x - t g)``, univariate quadratic minimization on ``[0, t1]`` (first breakpoint), with curvature ``d'Bd`` estimated from the most recent L-BFGS pair (``gamma``). Full multi-segment BLNZ Cauchy search is not implemented.
+   - Versus ``lbfgs(_)``: Plain ``lbfgs(_)`` only clamps trial points after an unconstrained step. This solver never proposes an infeasible step, stops on the projected gradient norm, and chooses the free set from an approximate Cauchy point.
    - Internal minimization form: Maximization is handled by minimizing the negated objective and gradient (phi-space), as in ``bfgs(_)`` and ``lbfgs(_)``.
-   - Unbounded problems: When the problem does not define ``position_bounds/1``, the solver behaves like unconstrained ``lbfgs(_)`` (no free-set masking). Prefer ``lbfgs(_)`` for purely unconstrained work; prefer this solver when box constraints are present.
+   - Unbounded problems: When the problem does not define ``position_bounds/1``, the solver behaves like unconstrained ``lbfgs(_)`` (no GCP / free-set masking). Prefer ``lbfgs(_)`` for purely unconstrained work; prefer this solver when box constraints are present.
 
 | **Inherited public predicates:**
 |     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`local_optimization_solver/0::run/2`  :ref:`local_optimization_solver/0::run/3`  :ref:`local_optimization_solver/0::run/4`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  

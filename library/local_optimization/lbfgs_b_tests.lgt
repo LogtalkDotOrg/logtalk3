@@ -56,6 +56,14 @@
 		^^assertion(abs(Y) < 0.05),
 		^^assertion(Value < 1.0e-3).
 
+	% approximate GCP path still improves from near a corner of the box
+
+	test(lbfgs_b_gcp_improves_from_corner, deterministic) :-
+		lbfgs_b(bounded_sphere)::run(_Point, Value, [
+			max_iterations(5), tol_g(1.0e-12)
+		]),
+		^^assertion(Value < 1.28).
+
 	% unconstrained problems still work (falls back to plain L-BFGS)
 
 	test(lbfgs_b_unconstrained_sphere, deterministic(Value < 1.0e-4)) :-

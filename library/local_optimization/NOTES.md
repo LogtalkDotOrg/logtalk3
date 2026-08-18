@@ -34,7 +34,7 @@ Available solvers:
 - **Barzilai-Borwein** - adaptive-step gradient method (BB1 / BB2 / alternate)
 - **BFGS** - dense quasi-Newton with Armijo line search
 - **L-BFGS** - limited-memory quasi-Newton with Armijo line search
-- **L-BFGS-B** - bound-constrained L-BFGS (projected gradient + free set)
+- **L-BFGS-B** - bound-constrained L-BFGS with approximate Cauchy point
 
 All solvers share the same problem protocol and the same `run/2-4` API.
 
@@ -146,8 +146,8 @@ Adaptive-step gradient method. After each accepted step it forms
 `s = x_new - x_old` and `y = g_new - g_old` and chooses the next step
 length from one of:
 
-- `formula(bb1)` - long step `alpha = (s*s) / (s*y)`
-- `formula(bb2)` - short step `alpha = (s*y) / (y*y)`
+- `formula(bb1)` - long step `alpha = (s.s) / (s.y)`
+- `formula(bb2)` - short step `alpha = (s.y) / (y.y)`
 - `formula(alternate)` (default) - switches between BB1 and BB2 each
   iteration
 
@@ -195,7 +195,7 @@ the sign-handling pitfalls of an explicit minimize/maximize branch in
 the line search.
 
 The inverse-Hessian update is skipped, keeping the previous
-approximation, whenever the curvature condition `y*s > 0` is not
+approximation, whenever the curvature condition `y.s > 0` is not
 comfortably satisfied, to preserve positive definiteness. An optional
 `restart(N)` periodically resets the approximation to the identity
 matrix, mirroring `conjugate_gradient`'s direction restarts (off by
@@ -221,7 +221,7 @@ matrix. With an empty history the search direction is plain steepest
 descent, so the first step (and every step right after a restart)
 matches `bfgs(_)`'s first step exactly. With a longer history, the
 two-loop recursion also rescales the initial direction by a factor
-`gamma_k`, computed from the most recent pair as `(s*y) / (y*y)`,
+`gamma_k`, computed from the most recent pair as `(s.y) / (y.y)`,
 on every iteration - a standard conditioning heuristic - so, unlike
 the first step, later steps are not expected to exactly retrace
 `bfgs(_)`'s trajectory even with a large `memory_size`.
@@ -232,21 +232,31 @@ as the other gradient-based solvers.
 
 ### L-BFGS-B
 
-Bound-constrained L-BFGS. Unlike plain `lbfgs(_)`, which only clamps trial
-points after an unconstrained step, this solver:
+Bound-constrained L-BFGS with a **level-B approximate generalized Cauchy
+point** (first-segment quadratic minimization along the projected gradient
+path). Unlike plain `lbfgs(_)`, which only clamps trial points after an
+unconstrained step, this solver:
 
-1. Builds the **projected gradient** and identifies the free set
-2. Computes an L-BFGS direction via the two-loop recursion
-3. **Masks** direction components that would leave the box
+1. Builds an **approximate GCP** `x^c`: breakpoints of
+   `x(t)=P(x-tg)`, minimize a quadratic model of the limited-memory
+   BFGS Hessian on the first segment `[0,t_1]`, with curvature from the
+   most recent pair (`gamma = (s.y)/(y.y)`)
+2. Identifies the **free set** at `x^c`
+3. Computes an L-BFGS direction via the two-loop recursion and **masks**
+   components outside the free set or that would leave the box
 4. Limits the Armijo step to the largest **feasible** step along that
    direction
-5. Stops on the projected gradient norm
+5. Stops on the **projected gradient** norm
 
 Requires `gradient/2`. When `position_bounds/1` is absent it behaves like
 unconstrained `lbfgs(_)`. Prefer this solver whenever box constraints are
 present; prefer plain `lbfgs(_)` for purely unconstrained problems.
 
 Options match `lbfgs(_)` (`memory_size`, `restart`, Armijo parameters).
+
+Full multi-segment Byrd-Lu-Nocedal-Zhu Cauchy search and free-subspace
+minimization of the quadratic model are not implemented (possible future
+refinement).
 
 
 Common options
@@ -363,9 +373,10 @@ Limitations
   a pure bound-constrained CG formulation is not yet implemented.
 - Projected steps after a BFGS or unconstrained L-BFGS update can weaken
   the quasi-Newton model; use `lbfgs_b(_)` for box constraints.
-- L-BFGS-B uses free-set masking and feasible-step limiting rather than
-  a full generalized Cauchy point + subspace minimization; that remains
-  a possible future refinement.
+- L-BFGS-B uses a **level-B approximate GCP** (first segment only) plus
+  free-set masking and feasible-step limiting. Full multi-segment BLNZ
+  Cauchy search and quadratic subspace minimization on free variables
+  remain possible future refinements.
 
 
 Usage

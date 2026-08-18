@@ -26,15 +26,16 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-08-18,
-		comment is 'L-BFGS-B bound-constrained limited-memory quasi-Newton optimizer. Uses a projected-gradient free-set identification, feasible-step limiting, and the standard L-BFGS two-loop recursion on the free variables. Requires ``gradient/2`` and ``position_bounds/1``.',
+		comment is 'L-BFGS-B bound-constrained limited-memory quasi-Newton optimizer with a level-B approximate generalized Cauchy point (first-segment quadratic min along the projected gradient path), free-set identification at the Cauchy point, feasible-step limiting, and L-BFGS two-loop recursion. Requires ``gradient/2``.',
 		parameters is [
-			'Problem' - 'Problem object implementing ``local_optimization_problem_protocol`` with ``gradient/2`` and ``position_bounds/1``.'
+			'Problem' - 'Problem object implementing ``local_optimization_problem_protocol`` with ``gradient/2`` (and ``position_bounds/1`` when box constraints are present).'
 		],
 		remarks is [
-			'Algorithm' - 'Each iteration (1) projects the current point onto the box, (2) builds the projected gradient and free set, (3) computes an L-BFGS direction via the two-loop recursion and zeroes components that would leave the feasible region, (4) takes the largest feasible step length as the Armijo upper bound, and (5) updates the limited-memory history only when the curvature condition holds.',
-			'Versus ``lbfgs(_)``' - 'Plain ``lbfgs(_)`` only clamps trial points after an unconstrained step, which can weaken the quasi-Newton model. This solver never proposes an infeasible step and stops on the projected gradient norm.',
+			'Algorithm' - 'Each iteration (1) builds an approximate generalized Cauchy point by minimizing a quadratic model of the limited-memory BFGS Hessian along the first segment of the projected steepest-descent path, (2) identifies the free set at that point, (3) computes an L-BFGS direction via the two-loop recursion and zeroes components outside the free set or that would leave the box, (4) uses the largest feasible step as the Armijo upper bound, and (5) updates the pair history only when the curvature condition holds.',
+			'Approximate GCP' - 'Level-B approximation: breakpoints along ``x(t) = P(x - t g)``, univariate quadratic minimization on ``[0, t1]`` (first breakpoint), with curvature ``d''Bd`` estimated from the most recent L-BFGS pair (``gamma``). Full multi-segment BLNZ Cauchy search is not implemented.',
+			'Versus ``lbfgs(_)``' - 'Plain ``lbfgs(_)`` only clamps trial points after an unconstrained step. This solver never proposes an infeasible step, stops on the projected gradient norm, and chooses the free set from an approximate Cauchy point.',
 			'Internal minimization form' - 'Maximization is handled by minimizing the negated objective and gradient (phi-space), as in ``bfgs(_)`` and ``lbfgs(_)``.',
-			'Unbounded problems' - 'When the problem does not define ``position_bounds/1``, the solver behaves like unconstrained ``lbfgs(_)`` (no free-set masking). Prefer ``lbfgs(_)`` for purely unconstrained work; prefer this solver when box constraints are present.'
+			'Unbounded problems' - 'When the problem does not define ``position_bounds/1``, the solver behaves like unconstrained ``lbfgs(_)`` (no GCP / free-set masking). Prefer ``lbfgs(_)`` for purely unconstrained work; prefer this solver when box constraints are present.'
 		],
 		see_also is [
 			local_optimization_problem_protocol, local_optimization_solver, lbfgs(_), bfgs(_), gradient_descent(_)
@@ -171,21 +172,18 @@
 		Evals0, GradEvals0,
 		BestPoint, BestValue, Iterations, Evaluations, GradEvaluations, FinalGradNorm
 	) :-
-		% L-BFGS direction, then restrict to the free face
-		two_loop_recursion(History0, PhiGrad0, Dir0),
-		mask_direction(Point0, PhiGrad0, Dir0, Bounds, Direction0),
+		% approximate GCP -> free set -> masked L-BFGS direction
+		search_direction(Point0, PhiGrad0, Bounds, History0, Direction0),
 		dot_product(PhiGrad0, Direction0, DirDeriv0),
 		(	DirDeriv0 < 0.0 ->
 			Direction = Direction0,
 			DirDeriv = DirDeriv0
-		;	% fall back to projected steepest descent on phi
-			projected_gradient(Point0, PhiGrad0, Bounds, ProjG),
+		;	projected_gradient(Point0, PhiGrad0, Bounds, ProjG),
 			scale_vector(ProjG, -1.0, Direction),
 			dot_product(PhiGrad0, Direction, DirDeriv)
 		),
 		max_feasible_step(Point0, Direction, Bounds, StepSize, AlphaMax),
 		(	AlphaMax =< 0.0 ->
-			% no feasible descent direction; stop
 			^^report_final(Iter, UpdInt, Point0, Value0, GradNorm0),
 			BestPoint = Point0,
 			BestValue = Value0,
@@ -230,6 +228,17 @@
 			)
 		).
 
+	% search direction: approx GCP free set + two-loop (or unconstrained)
+
+	search_direction(_Point, PhiGrad, [], History, Direction) :-
+		!,
+		two_loop_recursion(History, PhiGrad, Direction).
+	search_direction(Point, PhiGrad, Bounds, History, Direction) :-
+		approximate_gcp(Point, PhiGrad, Bounds, History, XC),
+		two_loop_recursion(History, PhiGrad, Dir0),
+		% free set / feasibility mask at the Cauchy point
+		mask_direction(XC, PhiGrad, Dir0, Bounds, Direction).
+
 	direction_sign(minimize, 1.0).
 	direction_sign(maximize, -1.0).
 
@@ -258,7 +267,9 @@
 	mask_direction(_Point, _G, Direction, [], Direction) :-
 		!.
 	% zero direction components that would leave the feasible set, and
-	% zero components that are fixed by the projected-gradient rule
+	% zero components that are fixed by the projected-gradient rule;
+	% when called with the approximate Cauchy point, this encodes the
+	% free set at that point.
 	mask_direction([], [], [], [], []).
 	mask_direction([X| Xs], [G| Gs], [D| Ds], [L-U| Bounds], [MD| MDs]) :-
 		(	X =< L, G > 0.0 ->
@@ -292,6 +303,83 @@
 		;	Cap1 = Cap0
 		),
 		max_feasible_step_(Xs, Ds, Bounds, Cap1, Cap).
+
+	% approximate generalized Cauchy point
+	%
+	% path: x(t) = P(x - t * PhiGrad). On the first segment [0, t1] the
+	% direction is constant. Approximate
+	%   q(t) = c0 + t * q1 + (1/2) t^2 * q2
+	% with q1 = g.d, q2 = d.B.d = ||d||^2 / gamma, where d = -g on the
+	% free coordinates of the projected path and gamma comes from the
+	% most recent L-BFGS pair (same scaling as two-loop initial scaling)
+
+	approximate_gcp(Point, PhiGrad, Bounds, History, XC) :-
+		projected_gradient(Point, PhiGrad, Bounds, ProjG),
+		scale_vector(ProjG, -1.0, Dir),
+		first_breakpoint(Point, Dir, Bounds, T1),
+		dot_product(PhiGrad, Dir, Q1),
+		dot_product(Dir, Dir, DirNormSq),
+		history_gamma(History, Gamma),
+		(	DirNormSq > 0.0, Gamma > 0.0 ->
+			Q2 is DirNormSq / Gamma
+		;	Q2 = 1.0
+		),
+		% unconstrained minimizer of q on the ray: t* = -q1/q2 if q2 > 0
+		(	Q2 > 1.0e-16, Q1 < 0.0 ->
+			TStar is -Q1 / Q2
+		;	TStar = 0.0
+		),
+		(	T1 < 1.0e30 ->
+			T is max(0.0, min(TStar, T1))
+		;	T is max(0.0, TStar)
+		),
+		(	T =< 0.0 ->
+			XC = Point
+		;	scale_vector(Dir, T, Step),
+			add_vectors(Point, Step, Trial),
+			^^project_to_bounds(Trial, Bounds, XC)
+		).
+
+	% smallest t > 0 at which x + t*d hits a bound (or a large sentinel)
+	first_breakpoint(Point, Direction, Bounds, T1) :-
+		breakpoint_times(Point, Direction, Bounds, Raw0),
+		include_positive(Raw0, Raw),
+		(	Raw == [] ->
+			T1 = 1.0e30
+		;	sort(Raw, [T1| _])
+		).
+
+	include_positive([], []).
+	include_positive([T| Ts], [T| Rest]) :-
+		T > 1.0e-16,
+		!,
+		include_positive(Ts, Rest).
+	include_positive([_| Ts], Rest) :-
+		include_positive(Ts, Rest).
+
+	breakpoint_times([], [], [], []).
+	breakpoint_times([X| Xs], [D| Ds], [Lower-Upper| Bounds], Ts) :-
+		breakpoint_times(Xs, Ds, Bounds, Rest),
+		(	D > 1.0e-16 ->
+			TU is (Upper - X) / D,
+			Ts = [TU| Rest]
+		;	D < -1.0e-16 ->
+			TL is (Lower - X) / D,
+			Ts = [TL| Rest]
+		;	Ts = Rest
+		).
+
+	history_gamma([], 1.0).
+	history_gamma([s(S, Y, _)| _], Gamma) :-
+		dot_product(Y, Y, YY),
+		(	YY > 0.0 ->
+			dot_product(S, Y, SY),
+			(	SY > 0.0 ->
+				Gamma is SY / YY
+			;	Gamma = 1.0
+			)
+		;	Gamma = 1.0
+		).
 
 	% Armijo (phi-space) with feasible upper bound
 

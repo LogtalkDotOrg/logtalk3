@@ -451,8 +451,7 @@ restarts</p></li>
 alternate)</p></li>
 <li><p><strong>BFGS</strong> - dense quasi-Newton with Armijo line search</p></li>
 <li><p><strong>L-BFGS</strong> - limited-memory quasi-Newton with Armijo line search</p></li>
-<li><p><strong>L-BFGS-B</strong> - bound-constrained L-BFGS (projected gradient + free
-set)</p></li>
+<li><p><strong>L-BFGS-B</strong> - bound-constrained L-BFGS with approximate Cauchy point</p></li>
 </ul>
 <p>All solvers share the same problem protocol and the same <code class="docutils literal notranslate"><span class="pre">run/2-4</span></code>
 API.</p>
@@ -563,8 +562,8 @@ decrease</p></li>
 <code class="docutils literal notranslate"><span class="pre">s</span> <span class="pre">=</span> <span class="pre">x_new</span> <span class="pre">-</span> <span class="pre">x_old</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">g_new</span> <span class="pre">-</span> <span class="pre">g_old</span></code> and chooses the next
 step length from one of:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">formula(bb1)</span></code> - long step <code class="docutils literal notranslate"><span class="pre">alpha</span> <span class="pre">=</span> <span class="pre">(s*s)</span> <span class="pre">/</span> <span class="pre">(s*y)</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">formula(bb2)</span></code> - short step <code class="docutils literal notranslate"><span class="pre">alpha</span> <span class="pre">=</span> <span class="pre">(s*y)</span> <span class="pre">/</span> <span class="pre">(y*y)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">formula(bb1)</span></code> - long step <code class="docutils literal notranslate"><span class="pre">alpha</span> <span class="pre">=</span> <span class="pre">(s.s)</span> <span class="pre">/</span> <span class="pre">(s.y)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">formula(bb2)</span></code> - short step <code class="docutils literal notranslate"><span class="pre">alpha</span> <span class="pre">=</span> <span class="pre">(s.y)</span> <span class="pre">/</span> <span class="pre">(y.y)</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">formula(alternate)</span></code> (default) - switches between BB1 and BB2 each
 iteration</p></li>
 </ul>
@@ -607,7 +606,7 @@ condition are always expressed in minimization form - this sidesteps the
 sign-handling pitfalls of an explicit minimize/maximize branch in the
 line search.</p>
 <p>The inverse-Hessian update is skipped, keeping the previous
-approximation, whenever the curvature condition <code class="docutils literal notranslate"><span class="pre">y*s</span> <span class="pre">&gt;</span> <span class="pre">0</span></code> is not
+approximation, whenever the curvature condition <code class="docutils literal notranslate"><span class="pre">y.s</span> <span class="pre">&gt;</span> <span class="pre">0</span></code> is not
 comfortably satisfied, to preserve positive definiteness. An optional
 <code class="docutils literal notranslate"><span class="pre">restart(N)</span></code> periodically resets the approximation to the identity
 matrix, mirroring <code class="docutils literal notranslate"><span class="pre">conjugate_gradient</span></code>’s direction restarts (off by
@@ -630,7 +629,7 @@ matrix. With an empty history the search direction is plain steepest
 descent, so the first step (and every step right after a restart)
 matches <code class="docutils literal notranslate"><span class="pre">bfgs(_)</span></code>’s first step exactly. With a longer history, the
 two-loop recursion also rescales the initial direction by a factor
-<code class="docutils literal notranslate"><span class="pre">gamma_k</span></code>, computed from the most recent pair as <code class="docutils literal notranslate"><span class="pre">(s*y)</span> <span class="pre">/</span> <span class="pre">(y*y)</span></code>, on
+<code class="docutils literal notranslate"><span class="pre">gamma_k</span></code>, computed from the most recent pair as <code class="docutils literal notranslate"><span class="pre">(s.y)</span> <span class="pre">/</span> <span class="pre">(y.y)</span></code>, on
 every iteration - a standard conditioning heuristic - so, unlike the
 first step, later steps are not expected to exactly retrace
 <code class="docutils literal notranslate"><span class="pre">bfgs(_)</span></code>’s trajectory even with a large <code class="docutils literal notranslate"><span class="pre">memory_size</span></code>.</p>
@@ -639,15 +638,21 @@ as the other gradient-based solvers.</p>
 </section>
 <section id="l-bfgs-b">
 <h3>L-BFGS-B<a class="headerlink" href="#l-bfgs-b" title="Link to this heading"></a></h3>
-<p>Bound-constrained L-BFGS. Unlike plain <code class="docutils literal notranslate"><span class="pre">lbfgs(_)</span></code>, which only clamps
-trial points after an unconstrained step, this solver:</p>
+<p>Bound-constrained L-BFGS with a <strong>level-B approximate generalized Cauchy
+point</strong> (first-segment quadratic minimization along the projected
+gradient path). Unlike plain <code class="docutils literal notranslate"><span class="pre">lbfgs(_)</span></code>, which only clamps trial
+points after an unconstrained step, this solver:</p>
 <ol class="arabic simple">
-<li><p>Builds the <strong>projected gradient</strong> and identifies the free set</p></li>
-<li><p>Computes an L-BFGS direction via the two-loop recursion</p></li>
-<li><p><strong>Masks</strong> direction components that would leave the box</p></li>
+<li><p>Builds an <strong>approximate GCP</strong> <code class="docutils literal notranslate"><span class="pre">x^c</span></code>: breakpoints of
+<code class="docutils literal notranslate"><span class="pre">x(t)=P(x-tg)</span></code>, minimize a quadratic model of the limited-memory
+BFGS Hessian on the first segment <code class="docutils literal notranslate"><span class="pre">[0,t_1]</span></code>, with curvature from
+the most recent pair (<code class="docutils literal notranslate"><span class="pre">gamma</span> <span class="pre">=</span> <span class="pre">(s.y)/(y.y)</span></code>)</p></li>
+<li><p>Identifies the <strong>free set</strong> at <code class="docutils literal notranslate"><span class="pre">x^c</span></code></p></li>
+<li><p>Computes an L-BFGS direction via the two-loop recursion and <strong>masks</strong>
+components outside the free set or that would leave the box</p></li>
 <li><p>Limits the Armijo step to the largest <strong>feasible</strong> step along that
 direction</p></li>
-<li><p>Stops on the projected gradient norm</p></li>
+<li><p>Stops on the <strong>projected gradient</strong> norm</p></li>
 </ol>
 <p>Requires <code class="docutils literal notranslate"><span class="pre">gradient/2</span></code>. When <code class="docutils literal notranslate"><span class="pre">position_bounds/1</span></code> is absent it behaves
 like unconstrained <code class="docutils literal notranslate"><span class="pre">lbfgs(_)</span></code>. Prefer this solver whenever box
@@ -655,6 +660,9 @@ constraints are present; prefer plain <code class="docutils literal notranslate"
 unconstrained problems.</p>
 <p>Options match <code class="docutils literal notranslate"><span class="pre">lbfgs(_)</span></code> (<code class="docutils literal notranslate"><span class="pre">memory_size</span></code>, <code class="docutils literal notranslate"><span class="pre">restart</span></code>, Armijo
 parameters).</p>
+<p>Full multi-segment Byrd-Lu-Nocedal-Zhu Cauchy search and free-subspace
+minimization of the quadratic model are not implemented (possible future
+refinement).</p>
 </section>
 </section>
 <section id="common-options">
@@ -783,9 +791,10 @@ conjugacy; a pure bound-constrained CG formulation is not yet
 implemented.</p></li>
 <li><p>Projected steps after a BFGS or unconstrained L-BFGS update can weaken
 the quasi-Newton model; use <code class="docutils literal notranslate"><span class="pre">lbfgs_b(_)</span></code> for box constraints.</p></li>
-<li><p>L-BFGS-B uses free-set masking and feasible-step limiting rather than
-a full generalized Cauchy point + subspace minimization; that remains
-a possible future refinement.</p></li>
+<li><p>L-BFGS-B uses a <strong>level-B approximate GCP</strong> (first segment only) plus
+free-set masking and feasible-step limiting. Full multi-segment BLNZ
+Cauchy search and quadratic subspace minimization on free variables
+remain possible future refinements.</p></li>
 </ul>
 </section>
 <section id="usage">
