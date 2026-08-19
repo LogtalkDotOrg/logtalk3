@@ -19,7 +19,9 @@ Available solvers:
   alternate)
 - **BFGS** - dense quasi-Newton with Armijo line search
 - **L-BFGS** - limited-memory quasi-Newton with Armijo line search
-- **L-BFGS-B** - bound-constrained L-BFGS with approximate Cauchy point
+- **L-BFGS-B** - bound-constrained L-BFGS (projected gradient + free
+  set)
+- **Trust-region Newton-CG** - full Newton with a Steihaug-CG subproblem
 
 All solvers share the same problem protocol and the same ``run/2-4``
 API.
@@ -70,6 +72,8 @@ Architecture
   ``gradient/2``).
 - ``lbfgs_b(Problem)`` - bound-constrained L-BFGS (requires
   ``gradient/2``; uses ``position_bounds/1`` when defined).
+- ``trust_region_newton_cg(Problem)`` - trust-region Newton-CG (requires
+  ``gradient/2`` and ``hessian/2``).
 
 Defining a problem
 ------------------
@@ -86,10 +90,12 @@ Optionally a problem may also define:
 
 - ``gradient(+Point, -Gradient)`` - **required** by all gradient-based
   solvers (gradient descent, Barzilai-Borwein, conjugate gradient, BFGS,
-  L-BFGS, L-BFGS-B). When missing those solvers raise an existence
-  error.
-- ``hessian(+Point, -Hessian)`` - optional second-order information (for
-  future Newton / verification use).
+  L-BFGS, L-BFGS-B, trust-region Newton-CG). When missing those solvers
+  raise an existence error.
+- ``hessian(+Point, -Hessian)`` - second-order information, as a dense
+  ``N x N`` matrix (list of rows). **Required** by trust-region
+  Newton-CG; optional and unused by every other solver. When missing,
+  trust-region Newton-CG raises an existence error.
 - ``position_bounds(-Bounds)`` - list of ``Lower-Upper`` pairs (box
   constraints). When present, trial points are projected onto the box.
 - ``stop_condition(+Iteration, +BestPoint, +BestValue)`` - early
@@ -255,6 +261,39 @@ Full multi-segment Byrd-Lu-Nocedal-Zhu Cauchy search and free-subspace
 minimization of the quadratic model are not implemented (possible future
 refinement).
 
+Trust-region Newton-CG
+~~~~~~~~~~~~~~~~~~~~~~
+
+Full Newton's method with a Steihaug-CG (truncated conjugate gradient)
+trust-region subproblem. Requires both ``gradient/2`` and ``hessian/2``,
+the latter as a dense ``N x N`` matrix (list of rows).
+
+Unlike every other gradient-based solver here, there is no line search.
+At each outer iteration, the step is obtained by approximately
+minimizing the local quadratic model (built from the gradient and
+Hessian at the current point) within a ball of radius ``trust_radius``,
+using Steihaug-CG: plain conjugate gradient on the model, stopped early
+either by a direction of non-positive curvature or by reaching the
+ball's boundary, in which case the step is extended to the boundary
+along the current CG direction. Whenever an unconstrained Newton step
+lies inside the trust region, Steihaug-CG recovers it directly, so
+convergence is quadratic near a well-behaved minimum (typically far
+fewer iterations than the quasi-Newton solvers above, at the cost of
+requiring an explicit Hessian).
+
+The trust-region radius itself is grown or shrunk each iteration based
+on how well the quadratic model predicted the actual objective change
+(the ratio ``rho`` of actual to predicted reduction, Nocedal and Wright
+Algorithm 4.1): ``rho < 0.25`` shrinks the radius, ``rho > 0.75`` with
+the step at the boundary grows it (up to ``trust_radius_max``), and a
+step is accepted only when ``rho > eta``. A rejected step still counts
+as a completed iteration (only the radius shrinks; gradient and Hessian
+are not re-evaluated).
+
+Uses the same phi-space (always-minimize) formulation as ``bfgs(_)`` and
+``lbfgs(_)`` for maximization, so the subproblem and acceptance test are
+always expressed in minimization form.
+
 Common options
 --------------
 
@@ -356,6 +395,23 @@ L-BFGS-B
 Same options as L-BFGS (``memory_size``, ``restart``, ``step_size``,
 Armijo parameters).
 
+.. _trust-region-newton-cg-1:
+
+Trust-region Newton-CG
+~~~~~~~~~~~~~~~~~~~~~~
+
+- ``trust_radius_initial(R)`` - starting trust-region radius (default
+  ``1.0``)
+- ``trust_radius_max(R)`` - upper bound on the trust-region radius
+  (default ``100.0``); ``trust_radius_initial`` must not exceed it
+- ``eta(Eta)`` - minimum actual-to-predicted reduction ratio for a step
+  to be accepted, in ``[0, 0.25)`` (default ``0.15``)
+- ``cg_tol(T)`` - relative residual tolerance that stops the inner
+  Steihaug-CG early (default ``0.1``)
+- ``cg_max_iterations(dimension|N)`` - cap on inner Steihaug-CG
+  iterations per outer step; ``dimension`` means ``N`` (default
+  ``dimension``)
+
 Run statistics
 --------------
 
@@ -371,11 +427,15 @@ Nelder-Mead additionally reports:
 - ``final_simplex_size(S)`` - maximum edge length of the final simplex
 
 Gradient descent, Barzilai-Borwein, conjugate gradient, BFGS, L-BFGS,
-and L-BFGS-B additionally report:
+L-BFGS-B, and trust-region Newton-CG additionally report:
 
 - ``gradient_evaluations(G)`` - number of gradient evaluations
 - ``final_gradient_norm(N)`` - Euclidean norm of the final gradient
   (projected gradient norm for L-BFGS-B)
+
+Trust-region Newton-CG additionally reports:
+
+- ``hessian_evaluations(H)`` - number of Hessian evaluations
 
 Limitations
 -----------
@@ -394,6 +454,11 @@ Limitations
   free-set masking and feasible-step limiting. Full multi-segment BLNZ
   Cauchy search and quadratic subspace minimization on free variables
   remain possible future refinements.
+- Trust-region Newton-CG requires a dense ``N x N`` Hessian; there is no
+  Hessian-free (matrix-vector-product-only) variant, and a projected
+  step can weaken agreement between the model and the actual objective
+  change, which can trigger more trust-region shrinkage than an
+  unconstrained problem would.
 
 Usage
 -----
@@ -429,6 +494,27 @@ Defining a problem with analytic gradient
        gradient([X, Y], [GX, GY]) :-
            GX is 2*X,
            GY is 2*Y.
+
+   :- end_object.
+
+Defining a problem with an analytic Hessian (for trust-region Newton-CG)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+   :- object(sphere,
+       implements(local_optimization_problem_protocol)).
+
+       initial_point([3.0, 4.0]).
+
+       objective([X, Y], Value) :-
+           Value is X*X + Y*Y.
+
+       gradient([X, Y], [GX, GY]) :-
+           GX is 2*X,
+           GY is 2*Y.
+
+       hessian(_Point, [[2.0, 0.0], [0.0, 2.0]]).
 
    :- end_object.
 
@@ -551,6 +637,25 @@ L-BFGS-B (box constraints)
    | ?- lbfgs_b(bounded_sphere)::run(
             Point, Value, Statistics,
             [memory_size(10), max_iterations(200), tol_g(1.0e-10)]
+        ).
+
+.. _trust-region-newton-cg-2:
+
+Trust-region Newton-CG
+~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+   | ?- trust_region_newton_cg(rosenbrock)::run(Point, Value).
+
+   | ?- trust_region_newton_cg(rosenbrock)::run(
+            Point, Value, Statistics,
+            [max_iterations(100), tol_g(1.0e-10)]
+        ).
+
+   | ?- trust_region_newton_cg(sphere)::run(
+            Point, Value,
+            [trust_radius_initial(0.5), cg_max_iterations(2)]
         ).
 
 Maximization

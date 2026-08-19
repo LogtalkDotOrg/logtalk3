@@ -32,7 +32,8 @@
 		gradient_descent,
 		lbfgs,
 		lbfgs_b,
-		nelder_mead
+		nelder_mead,
+		trust_region_newton_cg
 	], [
 		optimize(on)
 	])

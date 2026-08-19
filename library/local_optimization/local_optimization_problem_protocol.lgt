@@ -26,7 +26,7 @@
 		author is 'Paulo Moura',
 		date is 2026-08-17,
 		comment is 'Protocol for continuous local-optimization problem definitions. A problem object must define the required predicates and may optionally define gradient, Hessian, bounds, stopping, and progress predicates. The same problem object can be used by any solver in the local_optimization library and by the existing global metaheuristics (PSO, DE, ...).',
-		see_also is [local_optimization_solver, bfgs(_), conjugate_gradient(_), gradient_descent(_), nelder_mead(_)]
+		see_also is [local_optimization_solver, barzilai_borwein(_), bfgs(_), conjugate_gradient(_), gradient_descent(_), lbfgs(_), lbfgs_b(_), nelder_mead(_), trust_region_newton_cg(_)]
 	]).
 
 	% required predicates
@@ -57,7 +57,7 @@
 	:- public(hessian/2).
 	:- mode(hessian(+list(number), -list(list(number))), zero_or_one).
 	:- info(hessian/2, [
-		comment is 'Optional. Computes the Hessian matrix of the objective at a point (list of rows). Useful for Newton methods and for verifying quasi-Newton approximations. Not required by the current solvers.',
+		comment is 'Optional for most solvers. Computes the Hessian matrix of the objective at a point (list of rows). Required by trust-region Newton-CG; when not defined that solver raises an existence error. Not used by any other solver.',
 		argnames is ['Point', 'Hessian']
 	]).
 

@@ -2279,6 +2279,7 @@ To load any library (including developer tools, ports, and contributions), use t
    local_optimization_problem_protocol <local_optimization_problem_protocol_0>
    local_optimization_solver <local_optimization_solver_0>
    nelder_mead(Problem) <nelder_mead_1>
+   trust_region_newton_cg(Problem) <trust_region_newton_cg_1>
 
 :ref:`lof_anomaly_detector <library_lof_anomaly_detector>`
 ----------------------------------------------------------

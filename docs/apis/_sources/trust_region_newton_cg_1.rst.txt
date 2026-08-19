@@ -1,0 +1,71 @@
+.. index:: single: trust_region_newton_cg(Problem)
+.. _trust_region_newton_cg/1:
+
+.. rst-class:: right
+
+**object**
+
+``trust_region_newton_cg(Problem)``
+===================================
+
+* ``Problem`` - Problem object implementing ``local_optimization_problem_protocol`` and defining ``gradient/2`` and ``hessian/2``.
+
+
+Trust-region Newton-CG local optimizer (Steihaug-CG for the subproblem). Requires the problem to define ``gradient/2`` and ``hessian/2``. Supports optional box constraints via projection, minimization and maximization.
+
+| **Availability:** 
+|    ``logtalk_load(local_optimization(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-19
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`local_optimization_solver <local_optimization_solver/0>`
+| **Uses:**
+|    :ref:`linear_algebra <linear_algebra/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+
+   - Subproblem: At each outer iteration, the step is obtained by approximately minimizing the local quadratic model within a ball of radius ``trust_radius``, using the Steihaug-CG method (Nocedal and Wright, Algorithm 7.2): plain conjugate gradient on the model, terminated early either by a negative-curvature direction or by reaching the trust-region boundary, in which case the step is extended to the boundary along the current CG direction.
+   - No line search: Unlike the other gradient-based solvers in this library, this solver never backtracks a step size; the trust-region radius itself is grown or shrunk each iteration based on how well the quadratic model predicted the actual objective change, and a step is accepted only when that agreement is good enough.
+   - Internal minimization form: Maximization is handled by internally minimizing the negated objective, gradient, and Hessian, so the subproblem and acceptance test are always expressed in minimization form, which avoids sign errors.
+   - Convergence: Because it uses exact second-order information, this solver typically converges in far fewer iterations than ``gradient_descent(_)``, ``bfgs(_)``, or ``lbfgs(_)`` on well-behaved problems, at the cost of requiring an explicit ``hessian/2``.
+   - Bounds: When the problem defines ``position_bounds/1``, trial points are projected onto the box after each step. Projection can weaken the trust-region model agreement (the accepted step may differ from the one the subproblem solved for), which can trigger more radius shrinkage than an unconstrained problem would; a pure bound-constrained formulation is not implemented.
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`local_optimization_solver/0::run/2`  :ref:`local_optimization_solver/0::run/3`  :ref:`local_optimization_solver/0::run/4`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`local_optimization_problem_protocol <local_optimization_problem_protocol/0>`, :ref:`local_optimization_solver <local_optimization_solver/0>`, :ref:`gradient_descent(Problem) <gradient_descent/1>`, :ref:`conjugate_gradient(Problem) <conjugate_gradient/1>`, :ref:`bfgs(Problem) <bfgs/1>`, :ref:`lbfgs(Problem) <lbfgs/1>`
+

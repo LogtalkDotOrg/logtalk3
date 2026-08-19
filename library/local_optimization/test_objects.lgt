@@ -38,6 +38,11 @@
 		GX is -400*X*(Y - X*X) - 2*(1 - X),
 		GY is  200*(Y - X*X).
 
+	hessian([X, Y], [[HXX, HXY], [HXY, HYY]]) :-
+		HXX is 1200*X*X - 400*Y + 2,
+		HXY is -400*X,
+		HYY is 200.
+
 :- end_object.
 
 
@@ -60,6 +65,11 @@
 	gradient([X, Y], [GX, GY]) :-
 		GX is -400*X*(Y - X*X) - 2*(1 - X),
 		GY is  200*(Y - X*X).
+
+	hessian([X, Y], [[HXX, HXY], [HXY, HYY]]) :-
+		HXX is 1200*X*X - 400*Y + 2,
+		HXY is -400*X,
+		HYY is 200.
 
 	stop_condition(Iteration, _BestPoint, _BestValue) :-
 		Iteration >= 5.
@@ -86,6 +96,8 @@
 		GX is 2*X,
 		GY is 2*Y.
 
+	hessian(_Point, [[2.0, 0.0], [0.0, 2.0]]).
+
 :- end_object.
 
 
@@ -107,6 +119,8 @@
 	gradient([X, Y], [GX, GY]) :-
 		GX is -2*X,
 		GY is -2*Y.
+
+	hessian(_Point, [[-2.0, 0.0], [0.0, -2.0]]).
 
 :- end_object.
 
@@ -132,6 +146,8 @@
 		GX is 2*X,
 		GY is 2*Y.
 
+	hessian(_Point, [[2.0, 0.0], [0.0, 2.0]]).
+
 :- end_object.
 
 
@@ -154,6 +170,8 @@
 		GX is 2*X,
 		GY is 2*Y.
 
+	hessian(_Point, [[2.0, 0.0], [0.0, 2.0]]).
+
 	stop_condition(Iteration, _BestPoint, _BestValue) :-
 		Iteration >= 5.
 
@@ -174,6 +192,53 @@
 
 	objective([X, Y], Value) :-
 		Value is X*X + Y*Y.
+
+:- end_object.
+
+
+:- object(sphere_no_hessian,
+	implements(local_optimization_problem_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-08-19,
+		comment is 'Sphere with gradient/2 but without hessian/2 - used to test Hessian-based solvers error handling.'
+	]).
+
+	initial_point([3.0, 4.0]).
+
+	objective([X, Y], Value) :-
+		Value is X*X + Y*Y.
+
+	gradient([X, Y], [GX, GY]) :-
+		GX is 2*X,
+		GY is 2*Y.
+
+:- end_object.
+
+
+:- object(double_well,
+	implements(local_optimization_problem_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-08-19,
+		comment is '2-D double well, x^4 - 2x^2 + y^2. Saddle point at the origin (negative curvature along x, positive along y); global minima at (-1,0) and (1,0) with value -1. Used to exercise negative-curvature handling in Hessian-based solvers.'
+	]).
+
+	initial_point([0.1, 0.5]).
+
+	objective([X, Y], Value) :-
+		Value is X*X*X*X - 2*X*X + Y*Y.
+
+	gradient([X, Y], [GX, GY]) :-
+		GX is 4*X*X*X - 4*X,
+		GY is 2*Y.
+
+	hessian([X, _Y], [[HXX, 0.0], [0.0, 2.0]]) :-
+		HXX is 12*X*X - 4.
 
 :- end_object.
 

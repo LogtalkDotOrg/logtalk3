@@ -258,6 +258,7 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">local_optimization_problem_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="local_optimization_solver_0.html">local_optimization_solver</a></li>
 <li class="toctree-l3"><a class="reference internal" href="nelder_mead_1.html">nelder_mead(Problem)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="trust_region_newton_cg_1.html">trust_region_newton_cg(Problem)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lof-anomaly-detector"><span class="xref std std-ref">lof_anomaly_detector</span></a></li>
@@ -552,7 +553,7 @@
 </section>
 <section id="hessian-2">
 <span id="local-optimization-problem-protocol-0-hessian-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">hessian/2</span></code></a><a class="headerlink" href="#hessian-2" title="Link to this heading"></a></h3>
-<p>Optional. Computes the Hessian matrix of the objective at a point (list of rows). Useful for Newton methods and for verifying quasi-Newton approximations. Not required by the current solvers.</p>
+<p>Optional for most solvers. Computes the Hessian matrix of the objective at a point (list of rows). Required by trust-region Newton-CG; when not defined that solver raises an existence error. Not used by any other solver.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -648,7 +649,7 @@
 <p>(none)</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="local_optimization_solver_0.html#local-optimization-solver-0"><span class="std std-ref">local_optimization_solver</span></a>, <a class="reference internal" href="bfgs_1.html#bfgs-1"><span class="std std-ref">bfgs(Problem)</span></a>, <a class="reference internal" href="conjugate_gradient_1.html#conjugate-gradient-1"><span class="std std-ref">conjugate_gradient(Problem)</span></a>, <a class="reference internal" href="gradient_descent_1.html#gradient-descent-1"><span class="std std-ref">gradient_descent(Problem)</span></a>, <a class="reference internal" href="nelder_mead_1.html#nelder-mead-1"><span class="std std-ref">nelder_mead(Problem)</span></a></p>
+<p><a class="reference internal" href="local_optimization_solver_0.html#local-optimization-solver-0"><span class="std std-ref">local_optimization_solver</span></a>, <a class="reference internal" href="barzilai_borwein_1.html#barzilai-borwein-1"><span class="std std-ref">barzilai_borwein(Problem)</span></a>, <a class="reference internal" href="bfgs_1.html#bfgs-1"><span class="std std-ref">bfgs(Problem)</span></a>, <a class="reference internal" href="conjugate_gradient_1.html#conjugate-gradient-1"><span class="std std-ref">conjugate_gradient(Problem)</span></a>, <a class="reference internal" href="gradient_descent_1.html#gradient-descent-1"><span class="std std-ref">gradient_descent(Problem)</span></a>, <a class="reference internal" href="lbfgs_1.html#lbfgs-1"><span class="std std-ref">lbfgs(Problem)</span></a>, <a class="reference internal" href="lbfgs_b_1.html#lbfgs-b-1"><span class="std std-ref">lbfgs_b(Problem)</span></a>, <a class="reference internal" href="nelder_mead_1.html#nelder-mead-1"><span class="std std-ref">nelder_mead(Problem)</span></a>, <a class="reference internal" href="trust_region_newton_cg_1.html#trust-region-newton-cg-1"><span class="std std-ref">trust_region_newton_cg(Problem)</span></a></p>
 </div>
 </section>
 </section>

@@ -252,6 +252,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#bfgs">BFGS</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#l-bfgs">L-BFGS</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#l-bfgs-b">L-BFGS-B</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trust-region-newton-cg">Trust-region Newton-CG</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#common-options">Common options</a></li>
@@ -263,6 +264,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#bfgs-1">BFGS</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#l-bfgs-1">L-BFGS</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#l-bfgs-b-1">L-BFGS-B</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trust-region-newton-cg-1">Trust-region Newton-CG</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#run-statistics">Run statistics</a></li>
@@ -270,6 +272,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#defining-a-problem-derivative-free">Defining a problem (derivative-free)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#defining-a-problem-with-analytic-gradient">Defining a problem with analytic gradient</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#defining-a-problem-with-an-analytic-hessian-for-trust-region-newton-cg">Defining a problem with an analytic Hessian (for trust-region Newton-CG)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#barzilai-borwein-2">Barzilai-Borwein</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#nelder-mead-2">Nelder-Mead</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#gradient-descent-2">Gradient descent</a></li>
@@ -277,6 +280,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#bfgs-2">BFGS</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#l-bfgs-2">L-BFGS</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#l-bfgs-b-box-constraints">L-BFGS-B (box constraints)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#trust-region-newton-cg-2">Trust-region Newton-CG</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#maximization">Maximization</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#box-constrained-problem">Box-constrained problem</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#using-as-a-local-polisher-after-a-global-search">Using as a local polisher after a global search</a></li>
@@ -451,7 +455,9 @@ restarts</p></li>
 alternate)</p></li>
 <li><p><strong>BFGS</strong> - dense quasi-Newton with Armijo line search</p></li>
 <li><p><strong>L-BFGS</strong> - limited-memory quasi-Newton with Armijo line search</p></li>
-<li><p><strong>L-BFGS-B</strong> - bound-constrained L-BFGS with approximate Cauchy point</p></li>
+<li><p><strong>L-BFGS-B</strong> - bound-constrained L-BFGS (projected gradient + free
+set)</p></li>
+<li><p><strong>Trust-region Newton-CG</strong> - full Newton with a Steihaug-CG subproblem</p></li>
 </ul>
 <p>All solvers share the same problem protocol and the same <code class="docutils literal notranslate"><span class="pre">run/2-4</span></code>
 API.</p>
@@ -496,6 +502,8 @@ handling, bound projection, vector utilities, and progress reporting.</p></li>
 <code class="docutils literal notranslate"><span class="pre">gradient/2</span></code>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">lbfgs_b(Problem)</span></code> - bound-constrained L-BFGS (requires
 <code class="docutils literal notranslate"><span class="pre">gradient/2</span></code>; uses <code class="docutils literal notranslate"><span class="pre">position_bounds/1</span></code> when defined).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trust_region_newton_cg(Problem)</span></code> - trust-region Newton-CG (requires
+<code class="docutils literal notranslate"><span class="pre">gradient/2</span></code> and <code class="docutils literal notranslate"><span class="pre">hessian/2</span></code>).</p></li>
 </ul>
 </section>
 <section id="defining-a-problem">
@@ -512,10 +520,12 @@ minimize by default; use <code class="docutils literal notranslate"><span class=
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">gradient(+Point,</span> <span class="pre">-Gradient)</span></code> - <strong>required</strong> by all gradient-based
 solvers (gradient descent, Barzilai-Borwein, conjugate gradient, BFGS,
-L-BFGS, L-BFGS-B). When missing those solvers raise an existence
-error.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">hessian(+Point,</span> <span class="pre">-Hessian)</span></code> - optional second-order information (for
-future Newton / verification use).</p></li>
+L-BFGS, L-BFGS-B, trust-region Newton-CG). When missing those solvers
+raise an existence error.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hessian(+Point,</span> <span class="pre">-Hessian)</span></code> - second-order information, as a dense
+<code class="docutils literal notranslate"><span class="pre">N</span> <span class="pre">x</span> <span class="pre">N</span></code> matrix (list of rows). <strong>Required</strong> by trust-region
+Newton-CG; optional and unused by every other solver. When missing,
+trust-region Newton-CG raises an existence error.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">position_bounds(-Bounds)</span></code> - list of <code class="docutils literal notranslate"><span class="pre">Lower-Upper</span></code> pairs (box
 constraints). When present, trial points are projected onto the box.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">stop_condition(+Iteration,</span> <span class="pre">+BestPoint,</span> <span class="pre">+BestValue)</span></code> - early
@@ -664,6 +674,35 @@ parameters).</p>
 minimization of the quadratic model are not implemented (possible future
 refinement).</p>
 </section>
+<section id="trust-region-newton-cg">
+<h3>Trust-region Newton-CG<a class="headerlink" href="#trust-region-newton-cg" title="Link to this heading"></a></h3>
+<p>Full Newton’s method with a Steihaug-CG (truncated conjugate gradient)
+trust-region subproblem. Requires both <code class="docutils literal notranslate"><span class="pre">gradient/2</span></code> and <code class="docutils literal notranslate"><span class="pre">hessian/2</span></code>,
+the latter as a dense <code class="docutils literal notranslate"><span class="pre">N</span> <span class="pre">x</span> <span class="pre">N</span></code> matrix (list of rows).</p>
+<p>Unlike every other gradient-based solver here, there is no line search.
+At each outer iteration, the step is obtained by approximately
+minimizing the local quadratic model (built from the gradient and
+Hessian at the current point) within a ball of radius <code class="docutils literal notranslate"><span class="pre">trust_radius</span></code>,
+using Steihaug-CG: plain conjugate gradient on the model, stopped early
+either by a direction of non-positive curvature or by reaching the
+ball’s boundary, in which case the step is extended to the boundary
+along the current CG direction. Whenever an unconstrained Newton step
+lies inside the trust region, Steihaug-CG recovers it directly, so
+convergence is quadratic near a well-behaved minimum (typically far
+fewer iterations than the quasi-Newton solvers above, at the cost of
+requiring an explicit Hessian).</p>
+<p>The trust-region radius itself is grown or shrunk each iteration based
+on how well the quadratic model predicted the actual objective change
+(the ratio <code class="docutils literal notranslate"><span class="pre">rho</span></code> of actual to predicted reduction, Nocedal and Wright
+Algorithm 4.1): <code class="docutils literal notranslate"><span class="pre">rho</span> <span class="pre">&lt;</span> <span class="pre">0.25</span></code> shrinks the radius, <code class="docutils literal notranslate"><span class="pre">rho</span> <span class="pre">&gt;</span> <span class="pre">0.75</span></code> with
+the step at the boundary grows it (up to <code class="docutils literal notranslate"><span class="pre">trust_radius_max</span></code>), and a
+step is accepted only when <code class="docutils literal notranslate"><span class="pre">rho</span> <span class="pre">&gt;</span> <span class="pre">eta</span></code>. A rejected step still counts
+as a completed iteration (only the radius shrinks; gradient and Hessian
+are not re-evaluated).</p>
+<p>Uses the same phi-space (always-minimize) formulation as <code class="docutils literal notranslate"><span class="pre">bfgs(_)</span></code> and
+<code class="docutils literal notranslate"><span class="pre">lbfgs(_)</span></code> for maximization, so the subproblem and acceptance test are
+always expressed in minimization form.</p>
+</section>
 </section>
 <section id="common-options">
 <h2>Common options<a class="headerlink" href="#common-options" title="Link to this heading"></a></h2>
@@ -756,6 +795,22 @@ means every <code class="docutils literal notranslate"><span class="pre">N</span
 <p>Same options as L-BFGS (<code class="docutils literal notranslate"><span class="pre">memory_size</span></code>, <code class="docutils literal notranslate"><span class="pre">restart</span></code>, <code class="docutils literal notranslate"><span class="pre">step_size</span></code>,
 Armijo parameters).</p>
 </section>
+<section id="trust-region-newton-cg-1">
+<span id="id8"></span><h3>Trust-region Newton-CG<a class="headerlink" href="#trust-region-newton-cg-1" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">trust_radius_initial(R)</span></code> - starting trust-region radius (default
+<code class="docutils literal notranslate"><span class="pre">1.0</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trust_radius_max(R)</span></code> - upper bound on the trust-region radius
+(default <code class="docutils literal notranslate"><span class="pre">100.0</span></code>); <code class="docutils literal notranslate"><span class="pre">trust_radius_initial</span></code> must not exceed it</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">eta(Eta)</span></code> - minimum actual-to-predicted reduction ratio for a step
+to be accepted, in <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">0.25)</span></code> (default <code class="docutils literal notranslate"><span class="pre">0.15</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cg_tol(T)</span></code> - relative residual tolerance that stops the inner
+Steihaug-CG early (default <code class="docutils literal notranslate"><span class="pre">0.1</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cg_max_iterations(dimension|N)</span></code> - cap on inner Steihaug-CG
+iterations per outer step; <code class="docutils literal notranslate"><span class="pre">dimension</span></code> means <code class="docutils literal notranslate"><span class="pre">N</span></code> (default
+<code class="docutils literal notranslate"><span class="pre">dimension</span></code>)</p></li>
+</ul>
+</section>
 </section>
 <section id="run-statistics">
 <h2>Run statistics<a class="headerlink" href="#run-statistics" title="Link to this heading"></a></h2>
@@ -771,11 +826,15 @@ all solvers:</p>
 <li><p><code class="docutils literal notranslate"><span class="pre">final_simplex_size(S)</span></code> - maximum edge length of the final simplex</p></li>
 </ul>
 <p>Gradient descent, Barzilai-Borwein, conjugate gradient, BFGS, L-BFGS,
-and L-BFGS-B additionally report:</p>
+L-BFGS-B, and trust-region Newton-CG additionally report:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">gradient_evaluations(G)</span></code> - number of gradient evaluations</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">final_gradient_norm(N)</span></code> - Euclidean norm of the final gradient
 (projected gradient norm for L-BFGS-B)</p></li>
+</ul>
+<p>Trust-region Newton-CG additionally reports:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">hessian_evaluations(H)</span></code> - number of Hessian evaluations</p></li>
 </ul>
 </section>
 <section id="limitations">
@@ -795,6 +854,11 @@ the quasi-Newton model; use <code class="docutils literal notranslate"><span cla
 free-set masking and feasible-step limiting. Full multi-segment BLNZ
 Cauchy search and quadratic subspace minimization on free variables
 remain possible future refinements.</p></li>
+<li><p>Trust-region Newton-CG requires a dense <code class="docutils literal notranslate"><span class="pre">N</span> <span class="pre">x</span> <span class="pre">N</span></code> Hessian; there is no
+Hessian-free (matrix-vector-product-only) variant, and a projected
+step can weaken agreement between the model and the actual objective
+change, which can trigger more trust-region shrinkage than an
+unconstrained problem would.</p></li>
 </ul>
 </section>
 <section id="usage">
@@ -831,8 +895,28 @@ remain possible future refinements.</p></li>
 </pre></div>
 </div>
 </section>
+<section id="defining-a-problem-with-an-analytic-hessian-for-trust-region-newton-cg">
+<h3>Defining a problem with an analytic Hessian (for trust-region Newton-CG)<a class="headerlink" href="#defining-a-problem-with-an-analytic-hessian-for-trust-region-newton-cg" title="Link to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(sphere,
+    <span class="k">implements</span>(local_optimization_problem_protocol)).
+
+    initial_point([<span class="m">3.0</span>, <span class="m">4.0</span>]).
+
+    objective([<span class="nv">X</span>, <span class="nv">Y</span>], <span class="nv">Value</span>) <span class="o">:-</span>
+        <span class="nv">Value</span> <span class="k">is</span> <span class="nv">X</span><span class="o">*</span><span class="nv">X</span> <span class="o">+</span> <span class="nv">Y</span><span class="o">*</span><span class="nv">Y</span>.
+
+    gradient([<span class="nv">X</span>, <span class="nv">Y</span>], [<span class="nv">GX</span>, <span class="nv">GY</span>]) <span class="o">:-</span>
+        <span class="nv">GX</span> <span class="k">is</span> <span class="m">2</span><span class="o">*</span><span class="nv">X</span>,
+        <span class="nv">GY</span> <span class="k">is</span> <span class="m">2</span><span class="o">*</span><span class="nv">Y</span>.
+
+    hessian(<span class="nv">_Point</span>, [[<span class="m">2.0</span>, <span class="m">0.0</span>], [<span class="m">0.0</span>, <span class="m">2.0</span>]]).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+</section>
 <section id="barzilai-borwein-2">
-<span id="id8"></span><h3>Barzilai-Borwein<a class="headerlink" href="#barzilai-borwein-2" title="Link to this heading"></a></h3>
+<span id="id9"></span><h3>Barzilai-Borwein<a class="headerlink" href="#barzilai-borwein-2" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> barzilai_borwein(sphere)<span class="o">::</span>run(<span class="nv">Point</span>, <span class="nv">Value</span>, <span class="nv">Statistics</span>, [
         formula(alternate),
         max_iterations(<span class="m">200</span>),
@@ -848,7 +932,7 @@ remain possible future refinements.</p></li>
 </div>
 </section>
 <section id="nelder-mead-2">
-<span id="id9"></span><h3>Nelder-Mead<a class="headerlink" href="#nelder-mead-2" title="Link to this heading"></a></h3>
+<span id="id10"></span><h3>Nelder-Mead<a class="headerlink" href="#nelder-mead-2" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> nelder_mead(rosenbrock)<span class="o">::</span>run(<span class="nv">Point</span>, <span class="nv">Value</span>).
 
 | <span class="o">?-</span> nelder_mead(rosenbrock)<span class="o">::</span>run(
@@ -859,7 +943,7 @@ remain possible future refinements.</p></li>
 </div>
 </section>
 <section id="gradient-descent-2">
-<span id="id10"></span><h3>Gradient descent<a class="headerlink" href="#gradient-descent-2" title="Link to this heading"></a></h3>
+<span id="id11"></span><h3>Gradient descent<a class="headerlink" href="#gradient-descent-2" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> gradient_descent(sphere)<span class="o">::</span>run(<span class="nv">Point</span>, <span class="nv">Value</span>).
 
 | <span class="o">?-</span> gradient_descent(sphere)<span class="o">::</span>run(
@@ -875,7 +959,7 @@ remain possible future refinements.</p></li>
 </div>
 </section>
 <section id="conjugate-gradient-2">
-<span id="id11"></span><h3>Conjugate gradient<a class="headerlink" href="#conjugate-gradient-2" title="Link to this heading"></a></h3>
+<span id="id12"></span><h3>Conjugate gradient<a class="headerlink" href="#conjugate-gradient-2" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> conjugate_gradient(rosenbrock)<span class="o">::</span>run(<span class="nv">Point</span>, <span class="nv">Value</span>).
 
 | <span class="o">?-</span> conjugate_gradient(rosenbrock)<span class="o">::</span>run(
@@ -891,7 +975,7 @@ remain possible future refinements.</p></li>
 </div>
 </section>
 <section id="bfgs-2">
-<span id="id12"></span><h3>BFGS<a class="headerlink" href="#bfgs-2" title="Link to this heading"></a></h3>
+<span id="id13"></span><h3>BFGS<a class="headerlink" href="#bfgs-2" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> bfgs(rosenbrock)<span class="o">::</span>run(<span class="nv">Point</span>, <span class="nv">Value</span>).
 
 | <span class="o">?-</span> bfgs(rosenbrock)<span class="o">::</span>run(
@@ -907,7 +991,7 @@ remain possible future refinements.</p></li>
 </div>
 </section>
 <section id="l-bfgs-2">
-<span id="id13"></span><h3>L-BFGS<a class="headerlink" href="#l-bfgs-2" title="Link to this heading"></a></h3>
+<span id="id14"></span><h3>L-BFGS<a class="headerlink" href="#l-bfgs-2" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> lbfgs(rosenbrock)<span class="o">::</span>run(<span class="nv">Point</span>, <span class="nv">Value</span>).
 
 | <span class="o">?-</span> lbfgs(rosenbrock)<span class="o">::</span>run(
@@ -929,6 +1013,22 @@ remain possible future refinements.</p></li>
 | <span class="o">?-</span> lbfgs_b(bounded_sphere)<span class="o">::</span>run(
          <span class="nv">Point</span>, <span class="nv">Value</span>, <span class="nv">Statistics</span>,
          [memory_size(<span class="m">10</span>), max_iterations(<span class="m">200</span>), tol_g(<span class="m">1.0e-10</span>)]
+     ).
+</pre></div>
+</div>
+</section>
+<section id="trust-region-newton-cg-2">
+<span id="id15"></span><h3>Trust-region Newton-CG<a class="headerlink" href="#trust-region-newton-cg-2" title="Link to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> trust_region_newton_cg(rosenbrock)<span class="o">::</span>run(<span class="nv">Point</span>, <span class="nv">Value</span>).
+
+| <span class="o">?-</span> trust_region_newton_cg(rosenbrock)<span class="o">::</span>run(
+         <span class="nv">Point</span>, <span class="nv">Value</span>, <span class="nv">Statistics</span>,
+         [max_iterations(<span class="m">100</span>), tol_g(<span class="m">1.0e-10</span>)]
+     ).
+
+| <span class="o">?-</span> trust_region_newton_cg(sphere)<span class="o">::</span>run(
+         <span class="nv">Point</span>, <span class="nv">Value</span>,
+         [trust_radius_initial(<span class="m">0.5</span>), cg_max_iterations(<span class="m">2</span>)]
      ).
 </pre></div>
 </div>

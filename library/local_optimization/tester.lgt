@@ -35,12 +35,13 @@
 		lbfgs,
 		lbfgs_b,
 		nelder_mead,
+		trust_region_newton_cg,
 		test_objects
 	], [
 		debug(on),
 		source_data(on)
 	]),
-	logtalk_load([tests, gradient_tests, barzilai_borwein_tests, bfgs_tests, lbfgs_tests, lbfgs_b_tests], [hook(lgtunit)]),
+	logtalk_load([tests, gradient_tests, barzilai_borwein_tests, bfgs_tests, lbfgs_tests, lbfgs_b_tests, trust_region_newton_cg_tests], [hook(lgtunit)]),
 	lgtunit::run_test_sets([
 		% derivative-free solvers (shared tests/1 suite)
 		tests(nelder_mead),
@@ -60,6 +61,11 @@
 		lbfgs_tests,
 		tests(lbfgs_b),
 		gradient_tests(lbfgs_b),
-		lbfgs_b_tests
+		lbfgs_b_tests,
+		% trust_region_newton_cg has no Armijo-based options (step_size,
+		% armijo_c, ...), so it does not use the shared gradient_tests/1
+		% suite; only tests/1 (generic API) plus its own dedicated suite
+		tests(trust_region_newton_cg),
+		trust_region_newton_cg_tests
 	])
 )).

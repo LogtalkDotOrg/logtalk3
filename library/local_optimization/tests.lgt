@@ -40,6 +40,7 @@
 	cover(gradient_descent(_)).
 	cover(lbfgs(_)).
 	cover(nelder_mead(_)).
+	cover(trust_region_newton_cg(_)).
 
 	% basic runs
 
@@ -188,6 +189,7 @@
 		_Solver_ \== conjugate_gradient,
 		_Solver_ \== gradient_descent,
 		_Solver_ \== lbfgs,
-		_Solver_ \== lbfgs_b.
+		_Solver_ \== lbfgs_b,
+		_Solver_ \== trust_region_newton_cg.
 
 :- end_object.

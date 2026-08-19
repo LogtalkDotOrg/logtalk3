@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>local_optimization_solver &mdash; Logtalk 3.102.0</title>
+  <title>trust_region_newton_cg(Problem) &mdash; Logtalk 3.102.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -32,8 +32,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="nelder_mead(Problem)" href="nelder_mead_1.html" />
-    <link rel="prev" title="local_optimization_problem_protocol" href="local_optimization_problem_protocol_0.html" />
+    <link rel="next" title="lof_anomaly_detector" href="lof_anomaly_detector_0.html" />
+    <link rel="prev" title="nelder_mead(Problem)" href="nelder_mead_1.html" />
    
 </head>
 
@@ -256,9 +256,9 @@
 <li class="toctree-l3"><a class="reference internal" href="lbfgs_1.html">lbfgs(Problem)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lbfgs_b_1.html">lbfgs_b(Problem)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="local_optimization_problem_protocol_0.html">local_optimization_problem_protocol</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">local_optimization_solver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="local_optimization_solver_0.html">local_optimization_solver</a></li>
 <li class="toctree-l3"><a class="reference internal" href="nelder_mead_1.html">nelder_mead(Problem)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="trust_region_newton_cg_1.html">trust_region_newton_cg(Problem)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">trust_region_newton_cg(Problem)</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#lof-anomaly-detector"><span class="xref std std-ref">lof_anomaly_detector</span></a></li>
@@ -419,9 +419,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">local_optimization_solver</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">trust_region_newton_cg(Problem)</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/local_optimization_solver_0.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/trust_region_newton_cg_1.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -429,10 +429,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="local-optimization-solver-0"><span id="index-0"></span><strong>category</strong></p>
-<section id="local-optimization-solver">
-<h1><code class="docutils literal notranslate"><span class="pre">local_optimization_solver</span></code><a class="headerlink" href="#local-optimization-solver" title="Link to this heading"></a></h1>
-<p>Common code for local-optimization solvers: option handling, objective-direction helpers, bound projection, vector utilities, progress reporting, and basic validation. Concrete solvers import this category and implement the search loop.</p>
+  <p class="right" id="trust-region-newton-cg-1"><span id="index-0"></span><strong>object</strong></p>
+<section id="trust-region-newton-cg-problem">
+<h1><code class="docutils literal notranslate"><span class="pre">trust_region_newton_cg(Problem)</span></code><a class="headerlink" href="#trust-region-newton-cg-problem" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Problem</span></code> - Problem object implementing <code class="docutils literal notranslate"><span class="pre">local_optimization_problem_protocol</span></code> and defining <code class="docutils literal notranslate"><span class="pre">gradient/2</span></code> and <code class="docutils literal notranslate"><span class="pre">hessian/2</span></code>.</p></li>
+</ul>
+<p>Trust-region Newton-CG local optimizer (Steihaug-CG for the subproblem). Requires the problem to define <code class="docutils literal notranslate"><span class="pre">gradient/2</span></code> and <code class="docutils literal notranslate"><span class="pre">hessian/2</span></code>. Supports optional box constraints via projection, minimization and maximization.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -442,268 +445,59 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-08-17</div>
+<div class="line"><strong>Date:</strong> 2026-08-19</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></div>
 </div>
 </div>
 <div class="line-block">
-<div class="line"><strong>Extends:</strong></div>
+<div class="line"><strong>Imports:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="options_0.html#options-0"><span class="std std-ref">options</span></a></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="local_optimization_solver_0.html#local-optimization-solver-0"><span class="std std-ref">local_optimization_solver</span></a></div>
 </div>
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
+<div class="line"><a class="reference internal" href="linear_algebra_0.html#linear-algebra-0"><span class="std std-ref">linear_algebra</span></a></div>
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
-<div class="line"><a class="reference internal" href="type_0.html#type-0"><span class="std std-ref">type</span></a></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
-<div class="line-block">
-<div class="line">(none)</div>
 </div>
-</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Subproblem: At each outer iteration, the step is obtained by approximately minimizing the local quadratic model within a ball of radius <code class="docutils literal notranslate"><span class="pre">trust_radius</span></code>, using the Steihaug-CG method (Nocedal and Wright, Algorithm 7.2): plain conjugate gradient on the model, terminated early either by a negative-curvature direction or by reaching the trust-region boundary, in which case the step is extended to the boundary along the current CG direction.</p></li>
+<li><p>No line search: Unlike the other gradient-based solvers in this library, this solver never backtracks a step size; the trust-region radius itself is grown or shrunk each iteration based on how well the quadratic model predicted the actual objective change, and a step is accepted only when that agreement is good enough.</p></li>
+<li><p>Internal minimization form: Maximization is handled by internally minimizing the negated objective, gradient, and Hessian, so the subproblem and acceptance test are always expressed in minimization form, which avoids sign errors.</p></li>
+<li><p>Convergence: Because it uses exact second-order information, this solver typically converges in far fewer iterations than <code class="docutils literal notranslate"><span class="pre">gradient_descent(_)</span></code>, <code class="docutils literal notranslate"><span class="pre">bfgs(_)</span></code>, or <code class="docutils literal notranslate"><span class="pre">lbfgs(_)</span></code> on well-behaved problems, at the cost of requiring an explicit <code class="docutils literal notranslate"><span class="pre">hessian/2</span></code>.</p></li>
+<li><p>Bounds: When the problem defines <code class="docutils literal notranslate"><span class="pre">position_bounds/1</span></code>, trial points are projected onto the box after each step. Projection can weaken the trust-region model agreement (the accepted step may differ from the one the subproblem solved for), which can trigger more radius shrinkage than an unconstrained problem would; a pure bound-constrained formulation is not implemented.</p></li>
+</ul>
+</div></blockquote>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line"> <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-option-1"><span class="std std-ref">check_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-options-1"><span class="std std-ref">check_options/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-option-1"><span class="std std-ref">default_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-options-1"><span class="std std-ref">default_options/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-2"><span class="std std-ref">option/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-3"><span class="std std-ref">option/3</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-option-1"><span class="std std-ref">valid_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-options-1"><span class="std std-ref">valid_options/1</span></a></div>
+<div class="line"> <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-option-1"><span class="std std-ref">check_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-options-1"><span class="std std-ref">check_options/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-option-1"><span class="std std-ref">default_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-options-1"><span class="std std-ref">default_options/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-2"><span class="std std-ref">option/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-3"><span class="std std-ref">option/3</span></a>  <a class="reference internal" href="local_optimization_solver_0.html#local-optimization-solver-0-run-2"><span class="std std-ref">run/2</span></a>  <a class="reference internal" href="local_optimization_solver_0.html#local-optimization-solver-0-run-3"><span class="std std-ref">run/3</span></a>  <a class="reference internal" href="local_optimization_solver_0.html#local-optimization-solver-0-run-4"><span class="std std-ref">run/4</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-option-1"><span class="std std-ref">valid_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-options-1"><span class="std std-ref">valid_options/1</span></a></div>
 </div>
 </div>
 <nav class="contents local" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
-<ul>
-<li><p><a class="reference internal" href="#run-2" id="id2"><code class="docutils literal notranslate"><span class="pre">run/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#run-3" id="id3"><code class="docutils literal notranslate"><span class="pre">run/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#run-4" id="id4"><code class="docutils literal notranslate"><span class="pre">run/4</span></code></a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id5">Protected predicates</a></p>
-<ul>
-<li><p><a class="reference internal" href="#better-value-3" id="id6"><code class="docutils literal notranslate"><span class="pre">better_value/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#target-reached-3" id="id7"><code class="docutils literal notranslate"><span class="pre">target_reached/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#project-to-bounds-3" id="id8"><code class="docutils literal notranslate"><span class="pre">project_to_bounds/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#validate-bounds-1" id="id9"><code class="docutils literal notranslate"><span class="pre">validate_bounds/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#validate-point-2" id="id10"><code class="docutils literal notranslate"><span class="pre">validate_point/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#report-progress-6" id="id11"><code class="docutils literal notranslate"><span class="pre">report_progress/6</span></code></a></p></li>
-<li><p><a class="reference internal" href="#progress-hook-5" id="id12"><code class="docutils literal notranslate"><span class="pre">progress_hook/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#report-final-5" id="id13"><code class="docutils literal notranslate"><span class="pre">report_final/5</span></code></a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#private-predicates" id="id14">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id15">Operators</a></p></li>
+<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id2">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id3">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id4">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
-<section id="run-2">
-<span id="local-optimization-solver-0-run-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">run/2</span></code></a><a class="headerlink" href="#run-2" title="Link to this heading"></a></h3>
-<p>Runs the solver with default options and returns the best point and objective value found.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">run(BestPoint,BestValue)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">run(-list(number),-number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
+<p>(no local declarations; see entity ancestors if any)</p>
 </section>
-<section id="run-3">
-<span id="local-optimization-solver-0-run-3"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">run/3</span></code></a><a class="headerlink" href="#run-3" title="Link to this heading"></a></h3>
-<p>Runs the solver with the given options and returns the best point and objective value found.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">run(BestPoint,BestValue,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">run(-list(number),-number,+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="run-4">
-<span id="local-optimization-solver-0-run-4"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">run/4</span></code></a><a class="headerlink" href="#run-4" title="Link to this heading"></a></h3>
-<p>Runs the solver with the given options and returns the best point, objective value, and run statistics.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">run(BestPoint,BestValue,Statistics,Options)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">run(-list(number),-number,-list(compound),+list(compound))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-</section>
-</section>
-<hr class="docutils" />
 <section id="protected-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
-<section id="better-value-3">
-<span id="local-optimization-solver-0-better-value-3"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">better_value/3</span></code></a><a class="headerlink" href="#better-value-3" title="Link to this heading"></a></h3>
-<p>True when <code class="docutils literal notranslate"><span class="pre">Value</span></code> is strictly better than <code class="docutils literal notranslate"><span class="pre">Reference</span></code> according to the optimization direction.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">better_value(Objective,Value,Reference)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">better_value(+atom,+number,+number)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
+<p>(no local declarations; see entity ancestors if any)</p>
 </section>
-<section id="target-reached-3">
-<span id="local-optimization-solver-0-target-reached-3"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">target_reached/3</span></code></a><a class="headerlink" href="#target-reached-3" title="Link to this heading"></a></h3>
-<p>True when the current value has reached or passed the optional target in the selected direction.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">target_reached(Objective,Value,Target)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">target_reached(+atom,+number,+term)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="project-to-bounds-3">
-<span id="local-optimization-solver-0-project-to-bounds-3"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">project_to_bounds/3</span></code></a><a class="headerlink" href="#project-to-bounds-3" title="Link to this heading"></a></h3>
-<p>Clamps each component of a point to the corresponding <code class="docutils literal notranslate"><span class="pre">Low-High</span></code> interval. When <code class="docutils literal notranslate"><span class="pre">Bounds</span></code> is empty the point is returned unchanged.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">project_to_bounds(Point,Bounds,Projected)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">project_to_bounds(+list(number),+list(pair),-list(number))</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="validate-bounds-1">
-<span id="local-optimization-solver-0-validate-bounds-1"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">validate_bounds/1</span></code></a><a class="headerlink" href="#validate-bounds-1" title="Link to this heading"></a></h3>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">validate_bounds(+list(pair))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="validate-point-2">
-<span id="local-optimization-solver-0-validate-point-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">validate_point/2</span></code></a><a class="headerlink" href="#validate-point-2" title="Link to this heading"></a></h3>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">validate_point(+list(number),+list(pair))</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="report-progress-6">
-<span id="local-optimization-solver-0-report-progress-6"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">report_progress/6</span></code></a><a class="headerlink" href="#report-progress-6" title="Link to this heading"></a></h3>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">report_progress(+non_negative_integer,+non_negative_integer,+list(number),+number,+number,+non_negative_integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="progress-hook-5">
-<span id="local-optimization-solver-0-progress-hook-5"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">progress_hook/5</span></code></a><a class="headerlink" href="#progress-hook-5" title="Link to this heading"></a></h3>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="report-final-5">
-<span id="local-optimization-solver-0-report-final-5"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">report_final/5</span></code></a><a class="headerlink" href="#report-final-5" title="Link to this heading"></a></h3>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">report_final(+non_negative_integer,+non_negative_integer,+list(number),+number,+number)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-</section>
-</section>
-<hr class="docutils" />
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
 <p>(no local declarations; see entity ancestors if any)</p>
@@ -713,7 +507,7 @@
 <p>(none)</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
-<p><a class="reference internal" href="local_optimization_problem_protocol_0.html#local-optimization-problem-protocol-0"><span class="std std-ref">local_optimization_problem_protocol</span></a></p>
+<p><a class="reference internal" href="local_optimization_problem_protocol_0.html#local-optimization-problem-protocol-0"><span class="std std-ref">local_optimization_problem_protocol</span></a>, <a class="reference internal" href="local_optimization_solver_0.html#local-optimization-solver-0"><span class="std std-ref">local_optimization_solver</span></a>, <a class="reference internal" href="gradient_descent_1.html#gradient-descent-1"><span class="std std-ref">gradient_descent(Problem)</span></a>, <a class="reference internal" href="conjugate_gradient_1.html#conjugate-gradient-1"><span class="std std-ref">conjugate_gradient(Problem)</span></a>, <a class="reference internal" href="bfgs_1.html#bfgs-1"><span class="std std-ref">bfgs(Problem)</span></a>, <a class="reference internal" href="lbfgs_1.html#lbfgs-1"><span class="std std-ref">lbfgs(Problem)</span></a></p>
 </div>
 </section>
 </section>
@@ -722,8 +516,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="local_optimization_problem_protocol_0.html" class="btn btn-neutral float-left" title="local_optimization_problem_protocol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="nelder_mead_1.html" class="btn btn-neutral float-right" title="nelder_mead(Problem)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="nelder_mead_1.html" class="btn btn-neutral float-left" title="nelder_mead(Problem)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="lof_anomaly_detector_0.html" class="btn btn-neutral float-right" title="lof_anomaly_detector" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
