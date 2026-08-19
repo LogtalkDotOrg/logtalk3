@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-13,
+		date is 2026-08-19,
 		comment is 'Differential Evolution (DE/rand/1/bin, DE/rand/1/exp, DE/best/1/bin, and DE/current-to-best/1/bin) metaheuristic for continuous bounded optimization.',
 		parameters is [
 			'Problem' - 'Problem object implementing ``differential_evolution_protocol``.',
@@ -76,17 +76,23 @@
 		between/3
 	]).
 
-	:- uses(type, [
-		valid/2
+	:- uses(linear_algebra, [
+		add_vectors/3, new_vector_like/2
 	]).
 
 	:- uses(list, [
 		length/2, nth1/3
 	]).
 
-	%---------------------------------------------------------------------
-	% Public entry points
-	%---------------------------------------------------------------------
+	:- uses(numberlist, [
+		rescale/3
+	]).
+
+	:- uses(type, [
+		valid/2
+	]).
+
+	% public entry points
 
 	run(BestPosition, BestFitness) :-
 		run(BestPosition, BestFitness, _Statistics, []).
@@ -135,9 +141,7 @@
 			final_diversity(Diversity)
 		].
 
-	%---------------------------------------------------------------------
-	% Main generational loop
-	%---------------------------------------------------------------------
+	% main generational loop
 
 	loop(
 		Generation, MaxGenerations, UpdateInterval, _Dimension, _Bounds,
@@ -206,9 +210,7 @@
 			Population1, BestPosition1, BestFitness1, Improvements1,
 			FinalPopulation, BestPosition, BestFitness, Generations, Improvements).
 
-	%---------------------------------------------------------------------
-	% Generation step - strategy dispatch
-	%---------------------------------------------------------------------
+	% generation step - strategy dispatch
 
 	generation_step(rand/1/bin, Population, Dimension, Bounds, CR, F, _Best, Trials) :-
 		!,
@@ -226,7 +228,7 @@
 		length(Population, NP),
 		generation_current_to_best(1, NP, Population, Dimension, Bounds, CR, F, Best, Trials).
 
-	%----- DE/rand/1/bin and DE/rand/1/exp -------------------------------
+	% DE/rand/1/bin and DE/rand/1/exp
 
 	generation_rand(I, NP, _Population, _Dimension, _Bounds, _CR, _F, _Xover, []) :-
 		I > NP,
@@ -257,7 +259,7 @@
 		J1 is J + 1,
 		mutate_rand_(J1, Dimension, Xr1, Xr2, Xr3, F, Vs).
 
-	%----- DE/best/1/bin --------------------------------------------------
+	% DE/best/1/bin
 
 	generation_best(I, NP, _Population, _Dimension, _Bounds, _CR, _F, _Best, []) :-
 		I > NP,
@@ -287,7 +289,7 @@
 		J1 is J + 1,
 		mutate_best_(J1, Dimension, Best, Xr1, Xr2, F, Vs).
 
-	%----- DE/current-to-best/1/bin ---------------------------------------
+	% DE/current-to-best/1/bin
 
 	generation_current_to_best(I, NP, _Population, _Dimension, _Bounds, _CR, _F, _Best, []) :-
 		I > NP,
@@ -319,9 +321,7 @@
 		J1 is J + 1,
 		mutate_current_to_best_(J1, Dimension, Xi, Best, Xr1, Xr2, F, Vs).
 
-	%---------------------------------------------------------------------
 	% Crossover (binomial and exponential)
-	%---------------------------------------------------------------------
 
 	crossover(bin, Target, Mutant, CR, Dimension, Trial) :-
 		random(1, Dimension, Jrand),
@@ -333,7 +333,7 @@
 		Trial0 = Target,
 		crossover_exp(Jstart, Dimension, Mutant, CR, 0, Trial0, Trial).
 
-	%----- binomial -------------------------------------------------------
+	% binomial
 
 	crossover_bin(J, Dimension, _, _, _, _, []) :-
 		J > Dimension,
@@ -349,9 +349,10 @@
 		J1 is J + 1,
 		crossover_bin(J1, Dimension, Target, Mutant, CR, Jrand, Ujs).
 
-	%----- exponential ----------------------------------------------------
-	% Starting at Jstart, take consecutive components from the mutant
-	% while rand < CR (and not a full cycle).  At least one component is taken.
+	% exponential
+	%
+	% starting at Jstart, take consecutive components from the mutant
+	% while rand < CR (and not a full cycle); at least one component is taken
 
 	crossover_exp(J, Dimension, Mutant, CR, L, Trial0, Trial) :-
 		nth1(J, Mutant, Vj),
@@ -374,9 +375,7 @@
 		N1 is N - 1,
 		replace_nth1(N1, T, V, T2).
 
-	%---------------------------------------------------------------------
-	% Selection (one-to-one)
-	%---------------------------------------------------------------------
+	% selection (one-to-one)
 
 	select_population([], [], _Objective, []).
 	select_population([Target-TargetFit| Targets], [Trial| Trials], Objective, [Selected| Selecteds]) :-
@@ -391,9 +390,7 @@
 		),
 		select_population(Targets, Trials, Objective, Selecteds).
 
-	%---------------------------------------------------------------------
-	% Population helpers
-	%---------------------------------------------------------------------
+	% population predicates
 
 	initial_population(NP, Dimension, Bounds, Population) :-
 		(	initial_positions(Positions) ->
@@ -454,9 +451,7 @@
 		;	population_best_(Rest, Objective, BestPos0, BestFit0, BestPos, BestFit)
 		).
 
-	%---------------------------------------------------------------------
-	% Utilities
-	%---------------------------------------------------------------------
+	% auxiliary predicates
 
 	repair_bounds([], [], []).
 	repair_bounds([X| Xs], [Low-High| Bounds], [Y| Ys]) :-
@@ -512,15 +507,16 @@
 		number(V), V >= Low, V =< High,
 		valid_position(Vs, Bounds).
 
-	%----- Metrics & progress ---------------------------------------------
+	% metrics and progress
 
 	population_metrics(Population, MeanFitness, Diversity) :-
 		sum_fitnesses(Population, 0.0, FitSum, 0, Count),
 		MeanFitness is FitSum / Count,
 		Population = [First-_| _],
-		zero_vector(First, Zeros),
+		new_vector_like(First, Zeros),
 		sum_positions(Population, Zeros, Sums),
-		divide_vector(Sums, Count, Centroid),
+		Scale is 1.0 / Count,
+		rescale(Sums, Scale, Centroid),
 		sum_distances(Population, Centroid, 0.0, DistSum),
 		Diversity is DistSum / Count.
 
@@ -530,24 +526,10 @@
 		C1 is C0 + 1,
 		sum_fitnesses(Ps, S1, S, C1, C).
 
-	zero_vector([], []).
-	zero_vector([_| Vs], [0.0| Zs]) :-
-		zero_vector(Vs, Zs).
-
 	sum_positions([], Sums, Sums).
 	sum_positions([Position-_| Positions], Sums0, Sums) :-
 		add_vectors(Position, Sums0, Sums1),
 		sum_positions(Positions, Sums1, Sums).
-
-	add_vectors([], [], []).
-	add_vectors([A| As], [B| Bs], [C| Cs]) :-
-		C is A + B,
-		add_vectors(As, Bs, Cs).
-
-	divide_vector([], _, []).
-	divide_vector([V| Vs], D, [Q| Qs]) :-
-		Q is V / D,
-		divide_vector(Vs, D, Qs).
 
 	sum_distances([], _, Sum, Sum).
 	sum_distances([Position-_| Positions], Centroid, Sum0, Sum) :-
@@ -580,9 +562,7 @@
 		population_metrics(Population, MeanFitness, Diversity),
 		ignore(progress(Generation, BestPos, BestFit, MeanFitness, Diversity)).
 
-	%---------------------------------------------------------------------
-	% Options
-	%---------------------------------------------------------------------
+	% options
 
 	default_option(strategy(rand/1/bin)).
 	default_option(objective(minimize)).

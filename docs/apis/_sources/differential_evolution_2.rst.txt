@@ -19,7 +19,7 @@ Differential Evolution (DE/rand/1/bin, DE/rand/1/exp, DE/best/1/bin, and DE/curr
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-13
+| **Date:** 2026-08-19
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -30,7 +30,9 @@ Differential Evolution (DE/rand/1/bin, DE/rand/1/exp, DE/best/1/bin, and DE/curr
 | **Uses:**
 |    :ref:`fast_random(Algorithm) <fast_random/1>`
 |    :ref:`integer <integer/0>`
+|    :ref:`linear_algebra <linear_algebra/0>`
 |    :ref:`list <list/0>`
+|    :ref:`numberlist <numberlist/0>`
 |    :ref:`type <type/0>`
 
 | **Remarks:**

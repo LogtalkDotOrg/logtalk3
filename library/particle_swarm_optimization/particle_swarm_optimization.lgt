@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-05,
+		date is 2026-08-19,
 		comment is 'Continuous bounded global-best particle swarm optimization algorithm. Parameterized by a problem object implementing the ``particle_swarm_optimization_protocol`` protocol and by a random number generator algorithm for the ``fast_random`` library. The algorithm minimizes or maximizes the fitness function defined by the problem.',
 		parameters is [
 			'Problem' - 'Problem object implementing ``particle_swarm_optimization_protocol``.',
@@ -85,6 +85,14 @@
 
 	:- uses(fast_random(_RandomAlgorithm_), [
 		random/1, random/3, randomize/1
+	]).
+
+	:- uses(linear_algebra, [
+		add_vectors/3, new_vector_like/2
+	]).
+
+	:- uses(numberlist, [
+		rescale/3
 	]).
 
 	:- uses(type, [
@@ -385,9 +393,10 @@
 		sum_fitnesses(Swarm, 0.0, FitnessSum, 0, Count),
 		MeanFitness is FitnessSum / Count,
 		Swarm = [particle(FirstPosition, _, _, _, _)| _],
-		zero_vector(FirstPosition, Zeros),
+		new_vector_like(FirstPosition, Zeros),
 		sum_positions(Swarm, Zeros, PositionSums),
-		divide_vector(PositionSums, Count, Centroid),
+		Scale is 1.0 / Count,
+		rescale(PositionSums, Scale, Centroid),
 		sum_distances(Swarm, Centroid, 0.0, DistanceSum),
 		Diversity is DistanceSum / Count.
 
@@ -397,24 +406,10 @@
 		Count1 is Count0 + 1,
 		sum_fitnesses(Particles, Sum1, Sum, Count1, Count).
 
-	zero_vector([], []).
-	zero_vector([_| Values], [0.0| Zeros]) :-
-		zero_vector(Values, Zeros).
-
 	sum_positions([], Sums, Sums).
 	sum_positions([particle(Position, _, _, _, _)| Particles], Sums0, Sums) :-
 		add_vectors(Position, Sums0, Sums1),
 		sum_positions(Particles, Sums1, Sums).
-
-	add_vectors([], [], []).
-	add_vectors([Value| Values], [Sum0| Sums0], [Sum| Sums]) :-
-		Sum is Sum0 + Value,
-		add_vectors(Values, Sums0, Sums).
-
-	divide_vector([], _Divisor, []).
-	divide_vector([Value| Values], Divisor, [Quotient| Quotients]) :-
-		Quotient is Value / Divisor,
-		divide_vector(Values, Divisor, Quotients).
 
 	sum_distances([], _Centroid, Sum, Sum).
 	sum_distances([particle(Position, _, _, _, _)| Particles], Centroid, Sum0, Sum) :-

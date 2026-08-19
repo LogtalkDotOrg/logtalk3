@@ -18,7 +18,7 @@ Nelder-Mead (downhill simplex) derivative-free local optimizer for continuous pr
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-17
+| **Date:** 2026-08-19
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -29,6 +29,7 @@ Nelder-Mead (downhill simplex) derivative-free local optimizer for continuous pr
 | **Uses:**
 |    :ref:`linear_algebra <linear_algebra/0>`
 |    :ref:`list <list/0>`
+|    :ref:`pairs <pairs/0>`
 
 | **Remarks:**
 

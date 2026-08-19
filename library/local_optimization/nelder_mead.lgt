@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-17,
+		date is 2026-08-19,
 		comment is 'Nelder-Mead (downhill simplex) derivative-free local optimizer for continuous problems. Supports optional box constraints via projection, minimization and maximization, and the standard reflection / expansion / contraction / shrink operators.',
 		parameters is [
 			'Problem' - 'Problem object implementing ``local_optimization_problem_protocol``.'
@@ -43,11 +43,15 @@
 	]).
 
 	:- uses(linear_algebra, [
-		add_vectors/3, euclidean_norm/2, scale_vector/3, subtract_vectors/3
+		add_vectors/3, euclidean_norm/2, new_vector/3, scale_vector/3, subtract_vectors/3
 	]).
 
 	:- uses(list, [
 		append/3, last/2, length/2, nth1/3, reverse/2
+	]).
+
+	:- uses(pairs, [
+		keys/2
 	]).
 
 	% public entry point
@@ -168,7 +172,7 @@
 	nm_step(Simplex, Dim, Bounds, ObjDir, Alpha, Gamma, Rho, Sigma, _Adaptive, NewSimplex, Evals0, Evals) :-
 		Simplex = [Best-BestVal| Rest],
 		once(append(MiddlePairs, [Worst-_WorstVal], Rest)),
-		pairs_points(MiddlePairs, MiddlePoints),
+		keys(MiddlePairs, MiddlePoints),
 		centroid([Best| MiddlePoints], Dim, Centroid0),
 		^^project_to_bounds(Centroid0, Bounds, Centroid),
 		reflect(Worst, Centroid, Alpha, Reflected0),
@@ -299,13 +303,9 @@
 		append(Front, [NewPair], NewSimplex),
 		!.
 
-	pairs_points([], []).
-	pairs_points([P-_| Rest], [P| Ps]) :-
-		pairs_points(Rest, Ps).
-
 	centroid(Points, Dim, Centroid) :-
 		length(Points, N),
-		zero_vector(Dim, Zeros),
+		new_vector(Dim, 0.0, Zeros),
 		sum_points(Points, Zeros, Sum),
 		Scale is 1.0 / N,
 		scale_vector(Sum, Scale, Centroid).
@@ -314,13 +314,6 @@
 	sum_points([Point| Points], Sum0, Sum) :-
 		add_vectors(Point, Sum0, Sum1),
 		sum_points(Points, Sum1, Sum).
-
-	zero_vector(0, []) :-
-		!.
-	zero_vector(N, [0.0| Rest]) :-
-		N > 0,
-		N1 is N - 1,
-		zero_vector(N1, Rest).
 
 	simplex_size([Best-_| Rest], Size) :-
 		max_distance(Rest, Best, 0.0, Size).
