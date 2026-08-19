@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-09,
+		date is 2026-08-19,
 		comment is 'Multi-layer perceptron classifier with configurable hidden layers and activation function, softmax output, and backpropagation training.',
 		see_also is [dataset_protocol, logistic_regression_classifier, sgd_classifier]
 	]).
@@ -39,7 +39,7 @@
 	]).
 
 	:- uses(linear_algebra, [
-		matrix_vector_product/3, outer_product/3, transpose_matrix/2
+		matrix_vector_product/3, new_vector/3, new_vector_like/2, outer_product/3, transpose_matrix/2
 	]).
 
 	:- uses(list, [
@@ -97,7 +97,7 @@
 	initialize_layers([InputSize, OutputSize| Sizes], Activation, [layer(Weights, Biases)| Layers]) :-
 		initialization_scale(Activation, InputSize, Scale),
 		initialize_matrix(OutputSize, InputSize, Scale, Weights),
-		zero_vector(OutputSize, Biases),
+		new_vector(OutputSize, 0.0, Biases),
 		initialize_layers([OutputSize| Sizes], Activation, Layers).
 
 	initialization_scale(relu, InputSize, Scale) :-
@@ -122,23 +122,16 @@
 		Remaining is Count - 1,
 		initialize_vector(Remaining, Scale, Values).
 
-	zero_vector(0, []) :-
-		!.
-	zero_vector(Count, [0.0| Values]) :-
-		Remaining is Count - 1,
-		zero_vector(Remaining, Values).
-
 	initialize_velocities([], []).
 	initialize_velocities([layer(Weights, Biases)| Layers], [layer(WeightVelocities, BiasVelocities)| Velocities]) :-
 		zero_matrix_like(Weights, WeightVelocities),
 		length(Biases, BiasCount),
-		zero_vector(BiasCount, BiasVelocities),
+		new_vector(BiasCount, 0.0, BiasVelocities),
 		initialize_velocities(Layers, Velocities).
 
 	zero_matrix_like([], []).
 	zero_matrix_like([Row| Rows], [ZeroRow| ZeroRows]) :-
-		length(Row, ColumnCount),
-		zero_vector(ColumnCount, ZeroRow),
+		new_vector_like(Row, ZeroRow),
 		zero_matrix_like(Rows, ZeroRows).
 
 	optimize(Rows, Classes, Activation, Options, Epoch, PreviousLoss, Layers0, Velocities0, Layers, Iterations) :-

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-01,
+		date is 2026-08-19,
 		comment is 'Exact t-distributed Stochastic Neighbor Embedding dimension reducer for continuous datasets.',
 		see_also is [kernel_pca_projection, pca_projection, random_projection]
 	]).
@@ -41,7 +41,7 @@
 	]).
 
 	:- uses(linear_algebra, [
-		transpose_matrix/2
+		new_vector_like/2, transpose_matrix/2
 	]).
 
 	:- uses(list, [
@@ -507,7 +507,7 @@
 
 	gradient_rows([], [], [], [], _Embedding, _ProbabilityScale, []).
 	gradient_rows([ProbabilityRow| ProbabilityRows], [QRow| QRows], [WeightRow| WeightRows], [Coordinates| CoordinateRows], Embedding, ProbabilityScale, [Gradient| Gradients]) :-
-		zero_vector(Coordinates, ZeroGradient),
+		new_vector_like(Coordinates, ZeroGradient),
 		gradient_row(ProbabilityRow, QRow, WeightRow, Embedding, Coordinates, ProbabilityScale, ZeroGradient, Gradient),
 		gradient_rows(ProbabilityRows, QRows, WeightRows, CoordinateRows, Embedding, ProbabilityScale, Gradients).
 
@@ -519,17 +519,13 @@
 
 	zero_matrix_like([], []).
 	zero_matrix_like([Row| Rows], [ZeroRow| ZeroRows]) :-
-		zero_vector(Row, ZeroRow),
+		new_vector_like(Row, ZeroRow),
 		zero_matrix_like(Rows, ZeroRows).
 
 	constant_matrix_like([], _Constant, []).
 	constant_matrix_like([Row| Rows], Constant, [ConstantRow| ConstantRows]) :-
 		constant_vector(Row, Constant, ConstantRow),
 		constant_matrix_like(Rows, Constant, ConstantRows).
-
-	zero_vector([], []).
-	zero_vector([_Value| Values], [0.0| Zeroes]) :-
-		zero_vector(Values, Zeroes).
 
 	constant_vector([], _Constant, []).
 	constant_vector([_Value| Values], Constant, [Constant| Constants]) :-
@@ -593,7 +589,7 @@
 
 	weighted_embedding_mean(Probabilities, EmbeddingRows, Mean) :-
 		EmbeddingRows = [FirstRow| _],
-		zero_vector(FirstRow, Zero),
+		new_vector_like(FirstRow, Zero),
 		weighted_embedding_sum(Probabilities, EmbeddingRows, Zero, Mean).
 
 	weighted_embedding_sum([], [], Mean, Mean).
@@ -607,7 +603,7 @@
 		add_scaled_row(Values, Scale, Accumulators, Results).
 
 	optimize_new_coordinates(Probabilities, EmbeddingRows, Options, Coordinates0, Coordinates) :-
-		zero_vector(Coordinates0, PreviousUpdate),
+		new_vector_like(Coordinates0, PreviousUpdate),
 		iterate_new_coordinates(Probabilities, EmbeddingRows, Options, 0, Coordinates0, PreviousUpdate, Coordinates).
 
 	iterate_new_coordinates(Probabilities, EmbeddingRows, Options, Iteration0, Coordinates0, PreviousUpdate0, Coordinates) :-
@@ -627,7 +623,7 @@
 	new_point_gradient(Probabilities, EmbeddingRows, Coordinates, Gradient) :-
 		new_point_weights(EmbeddingRows, Coordinates, Weights, 0.0, WeightSum),
 		normalize_values(Weights, WeightSum, QProbabilities),
-		zero_vector(Coordinates, ZeroGradient),
+		new_vector_like(Coordinates, ZeroGradient),
 		gradient_row(Probabilities, QProbabilities, Weights, EmbeddingRows, Coordinates, 1.0, ZeroGradient, Gradient).
 
 	new_point_weights([], _Coordinates, [], Sum, Sum).
