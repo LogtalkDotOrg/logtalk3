@@ -25,13 +25,13 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-17,
+		date is 2026-08-19,
 		comment is 'Unit tests specific to gradient-based local_optimization solvers (gradient descent, conjugate gradient, BFGS, ...). Parameterized by the solver functor.',
 		parnames is ['Solver']
 	]).
 
 	:- uses(list, [
-		length/2, memberchk/2
+		memberchk/2
 	]).
 
 	% basic convergence on smooth problems with analytic gradient

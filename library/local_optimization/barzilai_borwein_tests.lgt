@@ -25,15 +25,11 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-18,
+		date is 2026-08-19,
 		comment is 'Unit tests specific to the barzilai_borwein(_) solver: formula variants, line-search modes, step clamping, and option validation. The shared tests(barzilai_borwein) and gradient_tests(barzilai_borwein) suites cover the common solver API and are not repeated here.'
 	]).
 
 	cover(barzilai_borwein(_)).
-
-	:- uses(list, [
-		memberchk/2
-	]).
 
 	% formula variants all converge on the sphere
 
