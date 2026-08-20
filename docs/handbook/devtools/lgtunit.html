@@ -540,13 +540,15 @@ and satisfy the <code class="docutils literal notranslate"><span class="pre">Ass
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">subsumes(Expected,</span> <span class="pre">Result)</span></code></div>
 <div class="line">The test is expected to succeed by binding <code class="docutils literal notranslate"><span class="pre">Result</span></code> to a term that
-is subsumed by the <code class="docutils literal notranslate"><span class="pre">Expected</span></code> term.</div>
+is subsumed by the <code class="docutils literal notranslate"><span class="pre">Expected</span></code> term. The test i not expected to be
+deterministic.</div>
 </div>
 </li>
 <li><div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">variant(Term1,</span> <span class="pre">Term2)</span></code></div>
 <div class="line">The test is expected to succeed by binding <code class="docutils literal notranslate"><span class="pre">Term1</span></code> to a term that
-is a variant of the <code class="docutils literal notranslate"><span class="pre">Term2</span></code> term.</div>
+is a variant of the <code class="docutils literal notranslate"><span class="pre">Term2</span></code> term. The test i not expected to be
+deterministic.</div>
 </div>
 </li>
 <li><div class="line-block">
@@ -1112,10 +1114,12 @@ goals in test outcome assertions. In the rare cases that a unification
 goal is intended, wrapping the <code class="docutils literal notranslate"><span class="pre">(=)/2</span></code> goal using the <code class="docutils literal notranslate"><span class="pre">{}/1</span></code> control
 construct avoids the linter warning.</p>
 <p>When the meta-argument of the <code class="docutils literal notranslate"><span class="pre">assertion/1-2</span></code> predicates is call to a
-local predicate (in the tests object), you need to call them using the
-<code class="docutils literal notranslate"><span class="pre">(::)/2</span></code> message-sending control construct instead of the <code class="docutils literal notranslate"><span class="pre">(^^)/2</span></code>
-<em>super</em> call control construct. This is necessary as <em>super</em> calls
-preserve the <em>sender</em>, and the tests are implicitly run by the
+local predicate (in the tests object), an implicit message-sending goal
+(via a <code class="docutils literal notranslate"><span class="pre">uses/2</span></code> directive), or an implicitly-qualified module
+predicate call, (via a <code class="docutils literal notranslate"><span class="pre">ues_module/2</span></code> directive) you need to call them
+using the <code class="docutils literal notranslate"><span class="pre">(::)/2</span></code> message-sending control construct instead of the
+<code class="docutils literal notranslate"><span class="pre">(^^)/2</span></code> <em>super</em> call control construct. This is necessary as <em>super</em>
+calls preserve the <em>sender</em>, and the tests are implicitly run by the
 <code class="docutils literal notranslate"><span class="pre">lgtunit</span></code> object sending a message to the tests object. For example:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">uses</span>(lgtunit, [
     assertion<span class="o">/</span><span class="m">1</span>

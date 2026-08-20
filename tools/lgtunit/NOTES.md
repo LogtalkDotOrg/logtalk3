@@ -382,9 +382,11 @@ The possible values of the outcome argument are:
 
 - `subsumes(Expected, Result)`  
 	The test is expected to succeed by binding `Result` to a term that is subsumed by the `Expected` term.
+    The test is not expected to be deterministic.
 
 - `variant(Term1, Term2)`  
 	The test is expected to succeed by binding `Term1` to a term that is a variant of the `Term2` term.
+    The test is not expected to be deterministic.
 
 - `exists(Assertion)`  
 	A solution exists for the test goal that satisfies the `Assertion` goal.
@@ -908,7 +910,9 @@ In the rare cases that a unification goal is intended, wrapping the `(=)/2`
 goal using the `{}/1` control construct avoids the linter warning.
 
 When the meta-argument of the `assertion/1-2` predicates is call to a local
-predicate (in the tests object), you need to call them using the `(::)/2`
+predicate (in the tests object), an implicit message-sending goal (via a
+`uses/2` directive), or an implicitly-qualified module predicate call, (via
+a `ues_module/2` directive) you need to call them using the `(::)/2`
 message-sending control construct instead of the `(^^)/2` _super_ call
 control construct. This is necessary as _super_ calls preserve the _sender_,
 and the tests are implicitly run by the `lgtunit` object sending a message
