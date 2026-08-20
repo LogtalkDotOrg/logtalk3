@@ -23,15 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-10,
+		date is 2026-08-20,
 		comment is 'Unit tests for the "crs_projections" library.'
 	]).
 
-	:- uses(lgtunit, [
-		op(700, xfx, =~=), (=~=)/2
-	]).
+	% silence linter warnings about float equality tests
+	:- set_logtalk_flag(suspicious_calls, silent).
 
 	:- uses(crs_projections, [
 		valid_crs/1, crs_name/2, crs_kind/2, crs_units/2, crs_dimensions/2, crs_epsg/2, epsg_crs/2,

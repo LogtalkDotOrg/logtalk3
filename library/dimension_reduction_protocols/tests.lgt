@@ -104,10 +104,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-04-20,
+		date is 2026-08-20,
 		comment is 'Smoke tests for the "dimension_reduction_protocols" library.'
+	]).
+
+	:- uses(lgtunit, [
+		op(700, xfx, =~=), (=~=)/2
 	]).
 
 	:- uses(list, [
@@ -140,7 +144,7 @@
 	test(target_measurements_target_attribute, deterministic(Target == score)) :-
 		target_measurements::target(Target).
 
-	test(target_measurements_example_3, deterministic((Score == 1.5, memberchk(weight-5.0, Values)))) :-
+	test(target_measurements_example_3, deterministic((Score =~= 1.5, memberchk(weight-5.0, Values)))) :-
 		target_measurements::example(2, Score, Values).
 
 	test(sample_dimension_reducer_learn_2, deterministic(sample_dimension_reducer::valid_dimension_reducer(DimensionReducer))) :-

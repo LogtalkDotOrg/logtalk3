@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-03,
+		date is 2026-08-20,
 		comment is 'Unit tests for the "bayesian_ridge_regression" library.'
 	]).
 
@@ -165,12 +165,12 @@
 		assertion(Beta > 0.0),
 		assertion(StabilizationAttempts >= 0),
 		assertion(StabilizationJitter >= 0.0),
-		assertion(MinimumPrecision =:= 1.0e-12),
-		assertion(MaximumPrecision =:= 1.0e12),
-		assertion(LambdaShape =:= 1.0e-6),
-		assertion(LambdaRate =:= 1.0e-6),
-		assertion(AlphaShape =:= 1.0e-6),
-		assertion(AlphaRate =:= 1.0e-6),
+		assertion(MinimumPrecision =~= 1.0e-12),
+		assertion(MaximumPrecision =~= 1.0e12),
+		assertion(LambdaShape =~= 1.0e-6),
+		assertion(LambdaRate =~= 1.0e-6),
+		assertion(AlphaShape =~= 1.0e-6),
+		assertion(AlphaRate =~= 1.0e-6),
 		assertion(NoiseVariance >= 0.0),
 		assertion(LogEvidence =< 1.0e12),
 		assertion(BiasVariance =~= 0.0),

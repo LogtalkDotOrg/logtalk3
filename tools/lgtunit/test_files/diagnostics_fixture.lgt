@@ -23,11 +23,15 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-03-31,
+		date is 2026-08-20,
 		comment is 'Fixture object that triggers compile-time lgtunit linter warnings for diagnostics and SARIF testing.'
 	]).
+
+	% disable compiler linter warnings that overlap
+	% with the "lgtunit" own linter warnings
+	:- set_logtalk_flag(always_true_or_false_goals, silent).
 
 	cover(monitoring).
 	cover(missing_entity).

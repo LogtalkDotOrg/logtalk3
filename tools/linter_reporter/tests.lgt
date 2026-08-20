@@ -26,7 +26,7 @@
 		version is 1:2:0,
 		author is 'Paulo Moura',
 		date is 2026-07-30,
-		comment is 'Unit tests for the linter_reporter tool.'
+		comment is 'Unit tests for the "linter_reporter" tool.'
 	]).
 
 	:- uses(linter_reporter, [
@@ -247,6 +247,8 @@
 			)
 		).
 
+	% auxiliary predicates
+
 	prepare_run(Explanations) :-
 		^^clean_file('linter_warnings.sarif'),
 		reset,
@@ -268,6 +270,7 @@
 		memberchk(explanation(_), Properties),
 		!.
 
+	% not all diagnostics have explanations
 	diagnostic_with_explanation(Diagnostics) :-
 		member(diagnostic(_RuleId, _Severity, _Confidence, _Message, _Context, _File, _Lines, Properties), Diagnostics),
 		memberchk(explanation(_), Properties),

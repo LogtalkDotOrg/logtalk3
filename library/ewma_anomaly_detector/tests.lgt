@@ -137,10 +137,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-07,
+		date is 2026-08-20,
 		comment is 'Unit tests for the "ewma_anomaly_detector" library.'
+	]).
+
+	:- uses(lgtunit, [
+		op(700, xfx, =~=), (=~=)/2
 	]).
 
 	:- uses(list, [
@@ -211,7 +215,7 @@
 		learn_filtered_shift_sequences(Detector),
 		score(Detector, [t1-_, t2-_, t3-_, t4-_, t5-_, t6-_], _Score).
 
-	test(ewma_score_3_singleton_dataset_matching_point, true(Score =:= 0.0)) :-
+	test(ewma_score_3_singleton_dataset_matching_point, true(Score =~= 0.0)) :-
 		learn(ewma_singleton_sequences, Detector),
 		score(Detector, [t1-1.00], Score).
 
@@ -299,12 +303,12 @@
 		memberchk(control_limit_multiplier(ControlLimitMultiplier), Options),
 		memberchk(smoothing_factor(SmoothingFactor), Options).
 
-	test(ewma_anomaly_detector_options_2_custom_control_limit_multiplier, deterministic(ControlLimitMultiplier == 5.0)) :-
+	test(ewma_anomaly_detector_options_2_custom_control_limit_multiplier, deterministic(ControlLimitMultiplier =~= 5.0)) :-
 		learn_filtered_shift_sequences([control_limit_multiplier(5.0)], Detector),
 		anomaly_detector_options(Detector, Options),
 		memberchk(control_limit_multiplier(ControlLimitMultiplier), Options).
 
-	test(ewma_anomaly_detector_options_2_custom_smoothing_factor, deterministic(SmoothingFactor == 0.4)) :-
+	test(ewma_anomaly_detector_options_2_custom_smoothing_factor, deterministic(SmoothingFactor =~= 0.4)) :-
 		learn_filtered_shift_sequences([smoothing_factor(0.4)], Detector),
 		anomaly_detector_options(Detector, Options),
 		memberchk(smoothing_factor(SmoothingFactor), Options).

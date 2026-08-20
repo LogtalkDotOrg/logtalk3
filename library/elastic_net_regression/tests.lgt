@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-07,
+		date is 2026-08-20,
 		comment is 'Unit tests for the "elastic_net_regression" library.'
 	]).
 
@@ -66,16 +66,16 @@
 		elastic_net_regression::learn(simple_line, elastic_net_regressor([continuous(x, 0.0, 1.0)], _UnregularizedBias, [UnregularizedWeight, _UnregularizedMissingWeight], _UnregularizedDiagnostics), [feature_scaling(false), maximum_iterations(8000), tolerance(1.0e-10), regularization(0.0)]),
 		elastic_net_regression::learn(simple_line, elastic_net_regressor([continuous(x, 0.0, 1.0)], _ShrunkBias, [ShrunkWeight, _ShrunkMissingWeight], _ShrunkDiagnostics), [feature_scaling(false), maximum_iterations(8000), tolerance(1.0e-10), regularization(0.1), l1_ratio(0.5)]).
 
-	test(elastic_net_regression_ridge_endpoint_shrinks_weight, deterministic((abs(RidgeWeight) < abs(UnregularizedWeight), abs(RidgeWeight) > 0.0, L1Ratio == 0.0))) :-
+	test(elastic_net_regression_ridge_endpoint_shrinks_weight, deterministic((abs(RidgeWeight) < abs(UnregularizedWeight), abs(RidgeWeight) > 0.0, L1Ratio =~= 0.0))) :-
 		elastic_net_regression::learn(simple_line, elastic_net_regressor([continuous(x, 0.0, 1.0)], _UnregularizedBias, [UnregularizedWeight, _UnregularizedMissingWeight], _UnregularizedDiagnostics), [feature_scaling(false), maximum_iterations(8000), tolerance(1.0e-10), regularization(0.0)]),
 		elastic_net_regression::learn(simple_line, elastic_net_regressor([continuous(x, 0.0, 1.0)], _RidgeBias, [RidgeWeight, _RidgeMissingWeight], Diagnostics), [feature_scaling(false), maximum_iterations(8000), tolerance(1.0e-10), regularization(0.1), l1_ratio(0.0)]),
 		memberchk(options(Options), Diagnostics),
 		memberchk(l1_ratio(L1Ratio), Options).
 
-	test(elastic_net_regression_regularization_sets_irrelevant_weight_to_zero, deterministic((NoiseWeight =:= 0.0, abs(SignalWeight) > 0.0))) :-
+	test(elastic_net_regression_regularization_sets_irrelevant_weight_to_zero, deterministic((NoiseWeight =~= 0.0, abs(SignalWeight) > 0.0))) :-
 		elastic_net_regression::learn(sparse_signal, elastic_net_regressor([continuous(signal, 0.0, 1.0), continuous(noise, 0.0, 1.0)], _Bias, [SignalWeight, _SignalMissingWeight, NoiseWeight, _NoiseMissingWeight], _Diagnostics), [feature_scaling(false), maximum_iterations(500), tolerance(1.0e-10), regularization(0.5), l1_ratio(1.0)]).
 
-	test(elastic_net_regression_regularization_sets_irrelevant_categorical_coefficients_to_zero, deterministic((NoiseBWeight =:= 0.0, NoiseCWeight =:= 0.0, NoiseMissingWeight =:= 0.0, abs(SignalWeight) > 0.0))) :-
+	test(elastic_net_regression_regularization_sets_irrelevant_categorical_coefficients_to_zero, deterministic((NoiseBWeight =~= 0.0, NoiseCWeight =~= 0.0, NoiseMissingWeight =~= 0.0, abs(SignalWeight) > 0.0))) :-
 		elastic_net_regression::learn(grouped_categorical_signal, elastic_net_regressor([continuous(signal, 0.0, 1.0), categorical(noise, [a, b, c])], _Bias, [SignalWeight, _SignalMissingWeight, NoiseBWeight, NoiseCWeight, NoiseMissingWeight], _Diagnostics), [feature_scaling(false), maximum_iterations(500), tolerance(1.0e-10), regularization(0.1), l1_ratio(1.0)]).
 
 	test(elastic_net_regression_predict_3_plane, deterministic(Prediction =~= 3.0)) :-

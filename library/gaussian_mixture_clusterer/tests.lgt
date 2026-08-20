@@ -35,10 +35,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-05-07,
+		date is 2026-08-20,
 		comment is 'Unit tests for the "gaussian_mixture_clusterer" library.'
+	]).
+
+	:- uses(lgtunit, [
+		op(700, xfx, =~=), (=~=)/2
 	]).
 
 	:- uses(lgtunit, [
@@ -158,12 +162,12 @@
 		learn(dead_component_blobs, ReseedClusterer, [dead_component_policy(reseed)| Options]),
 		ZeroClusterer = gaussian_mixture_clusterer(_ZeroEncoders, _ZeroComponents, ZeroWeights, _ZeroEffectiveOptions, _ZeroDiagnostics),
 		ReseedClusterer = gaussian_mixture_clusterer(_ReseedEncoders, _ReseedComponents, ReseedWeights, _ReseedEffectiveOptions, _ReseedDiagnostics),
-		assertion(\+ (member(ReseedWeight, ReseedWeights), ReseedWeight == 0.0)),
+		assertion(\+ (member(ReseedWeight, ReseedWeights), ReseedWeight =~= 0.0)),
 		training_assignments(dead_component_blobs, ZeroClusterer, ZeroAssignments),
 		training_assignments(dead_component_blobs, ReseedClusterer, ReseedAssignments),
 		clusterer_options(ZeroClusterer, ZeroOptions),
 		clusterer_options(ReseedClusterer, ReseedOptions),
-		assertion((member(ZeroWeight, ZeroWeights), ZeroWeight == 0.0)),
+		assertion((member(ZeroWeight, ZeroWeights), ZeroWeight =~= 0.0)),
 		memberchk(dead_component_policy(ZeroPolicy), ZeroOptions),
 		memberchk(dead_component_policy(ReseedPolicy), ReseedOptions).
 
