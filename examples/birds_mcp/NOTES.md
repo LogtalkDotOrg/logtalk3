@@ -26,11 +26,11 @@ MCP (Model Context Protocol) server.
 
 It supports **three** entry points:
 
-| Specification / transport | Interaction model | Entry point |
-|---------------------------|-------------------|-------------|
-| **2025-06-18** (stdio) | Synchronous `elicitation/create` via `tool_call/4` | `server_2025_06_18.lgt` |
-| **2026-07-28** (stdio) | Multi-round `input_required` / `complete` via `tool_call_round/4` | `server_2026_07_28.lgt` |
-| **2026-07-28** (Streamable HTTP) | Same 2026 protocol over HTTP POST + optional SSE | `server_streamable_http.lgt` |
+| Specification / transport    | Interaction model                                                 | Entry point                  |
+|------------------------------|-------------------------------------------------------------------|------------------------------|
+| 2025-06-18 (stdio)           | Synchronous `elicitation/create` via `tool_call/4`                | `server_2025_06_18.lgt`      |
+| 2026-07-28 (stdio)           | Multi-round `input_required` / `complete` via `tool_call_round/4` | `server_2026_07_28.lgt`      |
+| 2026-07-28 (Streamable HTTP) | Same 2026 protocol over HTTP POST + optional SSE                  | `server_streamable_http.lgt` |
 
 When an MCP client asks to identify a bird, the server asks the user
 questions about bird characteristics (yes/no and multiple-choice menus).
@@ -52,11 +52,11 @@ The answers guide the expert system through the bird taxonomy.
 - Using `tool_call_round/4` that returns `input_required(Requests, State)`
   or `complete(Result)`
 - Carrying known answers in opaque, JSON-friendly `requestState`
-- Selecting the adapter with `protocol_adapter(mcp_server_2026_07_28_adapter)`
+- Selecting the spec and transport using the `spec('2026-07-28')` option
 
 ### 2026-07-28 (Streamable HTTP)
 
-- Selecting `protocol_adapter(mcp_server_streamable_http_adapter)`
+- Using the `spec('2026-07-28')` and `transport(streamable_http)` options
 - HTTP options: `http_port/1`, `http_bind/1`, `http_path/1`, `http_origin_check/1`
 - Stateless JSON-RPC over `POST` with required `MCP-Protocol-Version` header
 - Optional SSE responses when the client supplies a `progressToken`
@@ -94,6 +94,9 @@ entry point below and an HTTP client.
 
 
 ## Starting the servers
+
+Here exemplified using the SWI-Prolog backend. Other backends provide
+similar command-line options; see their documentation for details.
 
 ### 2025-06-18 (stdio)
 
@@ -257,13 +260,14 @@ same JSON-RPC messages are newline-delimited on the process streams.
 
 ## Files
 
-| File | Role |
-|------|------|
-| `birds_mcp.lgt` | Tool provider (2025 elicitation + 2026 MRTR) |
-| `server_2025_06_18.lgt` | 2025-06-18 stdio server entry point |
-| `server_2026_07_28.lgt` | 2026-07-28 stdio server entry point |
-| `server_streamable_http.lgt` | 2026-07-28 Streamable HTTP server entry point |
-| `loader.lgt` | Example loader |
-| `tests_2025_06_18.lgt` | 2025-06-18 unit tests |
-| `tests_2026_07_28.lgt` | 2026-07-28 MRTR unit tests |
-| `tester.lgt` | Runs both stdio test suites |
+| File                          | Role                                             |
+|-------------------------------|--------------------------------------------------|
+| `birds_mcp.lgt`               | Tool provider (2025 elicitation + 2026 MRTR)     |
+| `server_2025_06_18.lgt`       | 2025-06-18 stdio server entry point              |
+| `server_2026_07_28.lgt`       | 2026-07-28 stdio server entry point              |
+| `server_streamable_http.lgt`  | 2026-07-28 Streamable HTTP server entry point    |
+| `loader.lgt`                  | Example loader                                   |
+| `tests_2025_06_18.lgt`        | 2025-06-18 unit tests                            |
+| `tests_2026_07_28.lgt`        | 2026-07-28 MRTR unit tests using stdio           |
+| `tests_streamable_http.lgt`   | 2026-07-28 MRTR unit tests using Streamable HTTP |
+| `tester.lgt`                  | Runs both stdio test suites                      |
