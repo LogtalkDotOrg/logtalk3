@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-14,
+		date is 2026-08-21,
 		comment is 'MCP 2026-07-28 specification adapter. Synchronous request engine over stdio. Implements discovery, tools/prompts/resources, multi-round tool results (MRTR), caching, progress, and subscriptions. Cancellation of ``subscriptions/listen`` is supported when ``notifications/cancelled`` is read after the listen acknowledgment; mid-request cancellation of ordinary calls is best-effort only under synchronous dispatch. Never writes JSON-RPC requests to stdout.'
 	]).
 
@@ -71,7 +71,6 @@
 		;	Capabilities = []
 		),
 		Options = [application(Application), application_capabilities(Capabilities)| Options0],
-		writeq(Options), nl,
 		setup_state(Output),
 		catch(
 			server_loop(Input, Output, Options),
