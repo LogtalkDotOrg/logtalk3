@@ -56,7 +56,8 @@
 		assertz(active_protocol_(Protocol)),
 		Options = [stdio_input(Input), stdio_output(Output)| UserOptions],
 		Protocol::prepare(Application, Options),
-		(	catch(Application::capabilities(Capabilities), _, fail) -> true
+		(	catch(Application::capabilities(Capabilities), _, fail) ->
+			true
 		;	Capabilities = []
 		),
 		% Session options first so member/2 prefers them over trailing defaults

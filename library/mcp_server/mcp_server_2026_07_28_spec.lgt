@@ -43,9 +43,7 @@
 		write_to_atom/2
 	]).
 
-	% -----------------------------------------------------------------
-	% Dynamic state
-	% -----------------------------------------------------------------
+	% dynamic state
 
 	:- private(output_stream_/1).
 	:- dynamic(output_stream_/1).
@@ -66,9 +64,7 @@
 	:- private(current_options_/1).
 	:- dynamic(current_options_/1).
 
-	% -----------------------------------------------------------------
-	% Adapter protocol
-	% -----------------------------------------------------------------
+	% implemented spec
 
 	spec('2026-07-28').
 
@@ -142,13 +138,11 @@
 		retractall(progress_buffer_(_)),
 		retractall(current_options_(_)).
 
-	% -----------------------------------------------------------------
-	% Setup
-	% -----------------------------------------------------------------
+	% setup
 
 	setup_state(Output) :-
-		% Do not call full cleanup/0 here: run_stdio_loop/prepare may have
-		% already installed current_options_/1 and other session state.
+		% do not call full cleanup/0 here: run_stdio_loop/prepare may have
+		% already installed current_options_/1 and other session state
 		retractall(running_),
 		retractall(output_stream_(_)),
 		retractall(reply_outcome_(_)),
@@ -156,11 +150,10 @@
 		assertz(output_stream_(Output)),
 		assertz(running_).
 
-	% -----------------------------------------------------------------
-	% Synchronous server loop
-	% Reader accepts one message at a time and dispatches requests to
-	% completion before reading the next message.
-	% -----------------------------------------------------------------
+	% synchronous server loop
+	%
+	% reader accepts one message at a time and dispatches requests to
+	% completion before reading the next message
 
 	server_loop(Input, Output, Options) :-
 		(	running_ ->
@@ -207,9 +200,7 @@
 		!.
 	render_stdio_outcome(_, _).
 
-	% -----------------------------------------------------------------
-	% Request handling with validation
-	% -----------------------------------------------------------------
+	% request handling with validation
 
 	handle_request(Message, _Input, Output, Options) :-
 		id(Message, Id),
@@ -234,9 +225,7 @@
 		;	fail
 		).
 
-	% -----------------------------------------------------------------
 	% 2026 request validation
-	% -----------------------------------------------------------------
 
 	validate_2026_request(Method, Params, Id, Output) :-
 		% _meta is required
@@ -290,9 +279,7 @@
 	has_capability(ClientCaps, Cap) :-
 		^^has_pair(ClientCaps, Cap, _).
 
-	% -----------------------------------------------------------------
-	% Method dispatch
-	% -----------------------------------------------------------------
+	% method dispatch
 
 	dispatch_method(Method, Params, Id, Output, Options) :-
 		catch(
@@ -301,57 +288,49 @@
 			send_error(Id, -32603, Error, Output)
 		).
 
-	do_dispatch('server/discover', Params, Id, Output, Options) :-
-		!,
-		handle_discover(Params, Id, Output, Options).
-	do_dispatch(initialize, _Params, Id, Output, _) :-
-		!,
-		send_error(Id, -32600, 'initialize is not used in MCP 2026-07-28; use server/discover', Output).
-	do_dispatch(ping, _Params, Id, Output, _) :-
-		!,
-		send_complete(Id, {}, Output).
-	do_dispatch('tools/list', Params, Id, Output, Options) :-
-		!,
-		handle_tools_list(Params, Id, Output, Options).
-	do_dispatch('tools/call', Params, Id, Output, Options) :-
-		!,
-		handle_tools_call(Params, Id, Output, Options).
-	do_dispatch('prompts/list', Params, Id, Output, Options) :-
-		!,
-		handle_prompts_list(Params, Id, Output, Options).
-	do_dispatch('prompts/get', Params, Id, Output, Options) :-
-		!,
-		handle_prompts_get(Params, Id, Output, Options).
-	do_dispatch('resources/list', Params, Id, Output, Options) :-
-		!,
-		handle_resources_list(Params, Id, Output, Options).
-	do_dispatch('resources/read', Params, Id, Output, Options) :-
-		!,
-		handle_resources_read(Params, Id, Output, Options).
-	do_dispatch('subscriptions/listen', Params, Id, Output, _) :-
-		!,
-		handle_subscriptions_listen(Params, Id, Output).
-	do_dispatch(_Method, _Params, Id, Output, _) :-
-		method_not_found(Id, ErrorResponse),
-		write_locked(Output, ErrorResponse).
+	do_dispatch(Method, Params, Id, Output, Options) :-
+		(	do_dispatch_(Method, Params, Id, Output, Options) ->
+			true
+		;	method_not_found(Id, ErrorResponse),
+			write_locked(Output, ErrorResponse)
+		).
 
-	% -----------------------------------------------------------------
-	% Notifications
-	% -----------------------------------------------------------------
+	do_dispatch_('server/discover', Params, Id, Output, Options) :-
+		handle_discover(Params, Id, Output, Options).
+	do_dispatch_(initialize, _Params, Id, Output, _) :-
+		send_error(Id, -32600, 'initialize is not used in MCP 2026-07-28; use server/discover', Output).
+	do_dispatch_(ping, _Params, Id, Output, _) :-
+		send_complete(Id, {}, Output).
+	do_dispatch_('tools/list', Params, Id, Output, Options) :-
+		handle_tools_list(Params, Id, Output, Options).
+	do_dispatch_('tools/call', Params, Id, Output, Options) :-
+		handle_tools_call(Params, Id, Output, Options).
+	do_dispatch_('prompts/list', Params, Id, Output, Options) :-
+		handle_prompts_list(Params, Id, Output, Options).
+	do_dispatch_('prompts/get', Params, Id, Output, Options) :-
+		handle_prompts_get(Params, Id, Output, Options).
+	do_dispatch_('resources/list', Params, Id, Output, Options) :-
+		handle_resources_list(Params, Id, Output, Options).
+	do_dispatch_('resources/read', Params, Id, Output, Options) :-
+		handle_resources_read(Params, Id, Output, Options).
+	do_dispatch_('subscriptions/listen', Params, Id, Output, _) :-
+		handle_subscriptions_listen(Params, Id, Output).
+
+	% notifications
 
 	handle_notification(Message, _Output) :-
 		method(Message, Method),
 		(	Method == 'notifications/cancelled' ->
 			handle_cancelled(Message)
 		;	Method == 'notifications/initialized' ->
-			% Not used in 2026; ignore
+			% not used in 2026; ignore
 			true
 		;	true
 		).
 
-	% Best-effort cancellation: drop any subscription opened under this request id.
-	% Under synchronous dispatch, ordinary in-flight requests cannot be interrupted
-	% mid-handler; their responses may already have been written.
+	% best-effort cancellation: drop any subscription opened under this request id;
+	% under synchronous dispatch, ordinary in-flight requests cannot be interrupted
+	% mid-handler; their responses may already have been written
 	handle_cancelled(Message) :-
 		(	params(Message, Params),
 			^^has_pair(Params, requestId, ReqId) ->
@@ -359,9 +338,7 @@
 		;	true
 		).
 
-	% -----------------------------------------------------------------
 	% server/discover
-	% -----------------------------------------------------------------
 
 	handle_discover(_Params, Id, Output, Options) :-
 		^^option(server_name(Name), Options, server_name('logtalk-mcp-server')),
@@ -397,20 +374,18 @@
 	build_server_capabilities(ApplicationCapabilities, Capabilities) :-
 		Base = [tools-{}],
 		(	member(prompts, ApplicationCapabilities) ->
-			C1 = [prompts-{}| Base]
-		;	C1 = Base
+			Capabilities0 = [prompts-{}| Base]
+		;	Capabilities0 = Base
 		),
 		(	member(resources, ApplicationCapabilities) ->
-			C2 = [resources-{}| C1]
-		;	C2 = C1
+			Capabilities1 = [resources-{}| Capabilities0]
+		;	Capabilities1 = Capabilities0
 		),
 		% subscriptions are always offered by the 2026 adapter
-		C3 = [subscriptions-{}| C2],
-		^^pairs_to_curly(C3, Capabilities).
+		Capabilities2 = [subscriptions-{}| Capabilities1],
+		^^pairs_to_curly(Capabilities2, Capabilities).
 
-	% -----------------------------------------------------------------
 	% tools/list
-	% -----------------------------------------------------------------
 
 	handle_tools_list(_Params, Id, Output, Options) :-
 		^^option(application(Application), Options),
@@ -425,9 +400,7 @@
 		},
 		send_result(Id, Result, Output).
 
-	% -----------------------------------------------------------------
 	% tools/call (with MRTR)
-	% -----------------------------------------------------------------
 
 	handle_tools_call(Params, Id, Output, Options) :-
 		(	^^has_pair(Params, name, ToolName) ->
@@ -476,9 +449,7 @@
 			)
 		).
 
-	% -----------------------------------------------------------------
 	% prompts/list
-	% -----------------------------------------------------------------
 
 	handle_prompts_list(_Params, Id, Output, Options) :-
 		^^option(application(Application), Options),
@@ -495,9 +466,7 @@
 		},
 		send_result(Id, Result, Output).
 
-	% -----------------------------------------------------------------
 	% prompts/get (with MRTR)
-	% -----------------------------------------------------------------
 
 	handle_prompts_get(Params, Id, Output, Options) :-
 		(	^^has_pair(Params, name, PromptName) ->
@@ -546,9 +515,7 @@
 			)
 		).
 
-	% -----------------------------------------------------------------
 	% resources/list
-	% -----------------------------------------------------------------
 
 	handle_resources_list(_Params, Id, Output, Options) :-
 		^^option(application(Application), Options),
@@ -565,9 +532,7 @@
 		},
 		send_result(Id, Result, Output).
 
-	% -----------------------------------------------------------------
 	% resources/read (with MRTR + cache)
-	% -----------------------------------------------------------------
 
 	handle_resources_read(Params, Id, Output, Options) :-
 		^^has_pair(Params, uri, URI),
@@ -610,9 +575,7 @@
 			)
 		).
 
-	% -----------------------------------------------------------------
-	% Round result handling (complete vs input_required)
-	% -----------------------------------------------------------------
+	% round result handling (complete vs input_required)
 
 	handle_round_result(complete(Result), Kind, Key, Id, Output, Options) :-
 		!,
@@ -669,9 +632,7 @@
 	request_to_json(roots, Key, Json) :-
 		Json = {key-Key, method-'roots/list', params-{}}.
 
-	% -----------------------------------------------------------------
-	% Format complete results for 2026 wire shape
-	% -----------------------------------------------------------------
+	% format complete results for 2026 wire shape
 
 	format_complete_result(text(Text), tool, _, Id, Output, _) :-
 		!,
@@ -741,9 +702,7 @@
 	format_complete_result(Other, _, _, Id, Output, _) :-
 		send_error(Id, -32603, Other, Output).
 
-	% -----------------------------------------------------------------
-	% Progress
-	% -----------------------------------------------------------------
+	% progress
 
 	make_progress_closure(none, _, _, Progress) :-
 		!,
@@ -780,9 +739,7 @@
 			assertz(progress_buffer_(Events1))
 		).
 
-	% -----------------------------------------------------------------
-	% Subscriptions
-	% -----------------------------------------------------------------
+	% subscriptions
 
 	handle_subscriptions_listen(Params, Id, _Output) :-
 		(	^^has_pair(Params, filters, Filters0) ->
@@ -856,9 +813,7 @@
 			params-{uri-URI, '_meta'-{'io.modelcontextprotocol/subscriptionId'-SubId}}
 		}.
 
-	% -----------------------------------------------------------------
-	% Cache resolution
-	% -----------------------------------------------------------------
+	% cache resolution
 
 	resolve_cache(Operation, Request, TTL, Scope, Options) :-
 		(	member(application(Application), Options) ->
@@ -873,9 +828,7 @@
 			^^option(cache_scope(Scope), Options, cache_scope(private))
 		).
 
-	% -----------------------------------------------------------------
-	% Parameter extraction helpers
-	% -----------------------------------------------------------------
+	% parameter extraction helpers
 
 	extract_input_responses(Params, Responses) :-
 		(	^^has_pair(Params, inputResponses, Raw) ->
@@ -928,11 +881,9 @@
 		;	Caps = {}
 		).
 
-	% -----------------------------------------------------------------
-	% Output helpers
-	% -----------------------------------------------------------------
+	% output predicates
 
-	% Record final JSON-RPC response (or non-progress notification) as outcome.
+	% record final JSON-RPC response (or non-progress notification) as outcome
 	write_locked(_Output, Message) :-
 		retractall(reply_outcome_(_)),
 		assertz(reply_outcome_(reply(Message))).
@@ -994,7 +945,7 @@
 		TTL >= 0.
 	valid_option(cache_scope(Scope)) :-
 		once((Scope == (public); Scope == private)).
-
+	% pass-through options
 	valid_option(stdio_input(_)).
 	valid_option(stdio_output(_)).
 	valid_option(application(_)).

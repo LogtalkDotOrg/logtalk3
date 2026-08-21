@@ -110,9 +110,9 @@
 		has_pair(Result, serverInfo, ServerInfo),
 		has_pair(ServerInfo, name, 'test-server').
 
-	% Protocol version negotiation tests
+	% protocol version negotiation tests
 
-	% Client sends a newer version; server should negotiate down to its supported version
+	% client sends a newer version; server should negotiate down to its supported version
 	test(mcp_server_initialize_newer_version_01, deterministic) :-
 		run_mcp_exchange(
 			[initialize_version_request('2026-01-01', 1)],
@@ -124,7 +124,7 @@
 		result(Response, Result),
 		has_pair(Result, protocolVersion, '2025-06-18').
 
-	% Client sends an older unsupported version; server should respond with its latest version
+	% client sends an older unsupported version; server should respond with its latest version
 	test(mcp_server_initialize_older_version_01, deterministic) :-
 		run_mcp_exchange(
 			[initialize_version_request('2024-11-05', 1)],
@@ -136,7 +136,7 @@
 		result(Response, Result),
 		has_pair(Result, protocolVersion, '2025-06-18').
 
-	% Client sends the exact supported version; should succeed
+	% client sends the exact supported version; should succeed
 	test(mcp_server_initialize_exact_version_01, deterministic) :-
 		run_mcp_exchange(
 			[initialize_version_request('2025-06-18', 1)],
@@ -213,9 +213,9 @@
 		),
 		is_error_response(Response).
 
-	% Initialize capability tests
+	% initialize capability tests
 
-	% Without elicitation, capabilities should only include tools
+	% without elicitation, capabilities should only include tools
 	test(mcp_server_initialize_capabilities_01, deterministic) :-
 		run_mcp_exchange(
 			[initialize_request(1)],
@@ -226,7 +226,7 @@
 		has_pair(Caps, tools, {}),
 		\+ has_pair(Caps, elicitation, _).
 
-	% Elicitation is a client capability and must not be advertised by the server
+	% elicitation is a client capability and must not be advertised by the server
 	test(mcp_server_initialize_elicit_capabilities_01, deterministic) :-
 		run_mcp_exchange_with(
 			test_elicit_tools,
@@ -238,9 +238,9 @@
 		has_pair(Caps, tools, _),
 		\+ has_pair(Caps, elicitation, _).
 
-	% Elicitation tests
+	% elicitation tests
 
-	% Full elicitation round-trip: tool asks for name, client accepts
+	% full elicitation round-trip: tool asks for name, client accepts
 	test(mcp_server_elicitation_accept_01, deterministic(sub_atom(Text, _, _, _, 'Hello, Alice!'))) :-
 		run_mcp_exchange_with(
 			test_elicit_tools,
@@ -250,17 +250,17 @@
 			Responses
 		),
 		Responses = [_InitResponse, ElicitReq, ToolResponse],
-		% The middle message should be the elicitation request from server
+		% the middle message should be the elicitation request from server
 		is_request(ElicitReq),
 		method(ElicitReq, 'elicitation/create'),
-		% The final message should be the tool result
+		% the final message should be the tool result
 		is_response(ToolResponse),
 		id(ToolResponse, 2),
 		result(ToolResponse, Result),
 		has_pair(Result, content, [ContentItem| _]),
 		has_pair(ContentItem, text, Text).
 
-	% Verify the structure of the elicitation/create request
+	% verify the structure of the elicitation/create request
 	test(mcp_server_elicitation_request_structure_01, deterministic(Message == 'What is your name?')) :-
 		run_mcp_exchange_with(
 			test_elicit_tools,
@@ -277,7 +277,7 @@
 		has_pair(Params, requestedSchema, Schema),
 		has_pair(Schema, type, object).
 
-	% Elicitation with decline response
+	% elicitation with decline response
 	test(mcp_server_elicitation_decline_01, deterministic(Text == 'User declined.')) :-
 		run_mcp_exchange_with(
 			test_elicit_tools,
@@ -291,7 +291,7 @@
 		has_pair(Result, content, [ContentItem| _]),
 		has_pair(ContentItem, text, Text).
 
-	% Elicitation with cancel response
+	% elicitation with cancel response
 	test(mcp_server_elicitation_cancel_01, deterministic(Text == 'Cancelled.')) :-
 		run_mcp_exchange_with(
 			test_elicit_tools,
@@ -305,7 +305,7 @@
 		has_pair(Result, content, [ContentItem| _]),
 		has_pair(ContentItem, text, Text).
 
-	% The server must not elicit when the client did not advertise support
+	% the server must not elicit when the client did not advertise support
 	test(mcp_server_elicitation_client_capability_required_01, deterministic) :-
 		run_mcp_exchange_with(
 			test_elicit_tools,
@@ -317,9 +317,9 @@
 		result(ToolResponse, Result),
 		has_pair(Result, isError, @true).
 
-	% Elicitation fallback tests
+	% elicitation fallback tests
 
-	% Non-eliciting tool in elicit-capable app falls back to auto-dispatch
+	% non-eliciting tool in elicit-capable app falls back to auto-dispatch
 	test(mcp_server_elicit_fallback_auto_dispatch_01, deterministic(sub_atom(Text, _, _, _, hello))) :-
 		run_mcp_exchange_with(
 			test_elicit_tools,
@@ -332,9 +332,9 @@
 		has_pair(Result, content, [ContentItem| _]),
 		has_pair(ContentItem, text, Text).
 
-	% Result format tests
+	% result format tests
 
-	% Multi-content result from results/1 format
+	% multi-content result from results/1 format
 	test(mcp_server_results_format_01, deterministic(list::length(Content, 2))) :-
 		run_mcp_exchange_with(
 			test_result_tools,
@@ -346,7 +346,7 @@
 		result(ToolResponse, Result),
 		has_pair(Result, content, Content).
 
-	% Tool exception results in isError response
+	% tool exception results in isError response
 	test(mcp_server_tool_exception_01, deterministic) :-
 		run_mcp_exchange_with(
 			test_result_tools,
@@ -358,9 +358,9 @@
 		result(ToolResponse, Result),
 		has_pair(Result, isError, @true).
 
-	% Sequential tool call tests
+	% sequential tool call tests
 
-	% Multiple tool calls in a single session
+	% multiple tool calls in a single session
 	test(mcp_server_multiple_calls_01, true) :-
 		run_mcp_exchange(
 			[initialize_request(1),
@@ -381,9 +381,9 @@
 		has_pair(AddContent, text, AddText),
 		sub_atom(AddText, _, _, _, '7').
 
-	% Prompt capability tests
+	% prompt capability tests
 
-	% With prompts capability, capabilities should include prompts
+	% with prompts capability, capabilities should include prompts
 	test(mcp_server_initialize_prompt_capabilities_01, deterministic) :-
 		run_mcp_exchange_with(
 			test_prompt_tools,
@@ -395,7 +395,7 @@
 		has_pair(Caps, tools, _),
 		has_pair(Caps, prompts, _).
 
-	% Without prompts capability, capabilities should not include prompts
+	% without prompts capability, capabilities should not include prompts
 	test(mcp_server_initialize_no_prompt_capabilities_01, deterministic) :-
 		run_mcp_exchange(
 			[initialize_request(1)],
@@ -405,9 +405,9 @@
 		has_pair(Result, capabilities, Caps),
 		\+ has_pair(Caps, prompts, _).
 
-	% Prompts/list tests
+	% prompts/list tests
 
-	% List prompts from prompt-capable application
+	% list prompts from prompt-capable application
 	test(mcp_server_prompts_list_01, true) :-
 		run_mcp_exchange_with(
 			test_prompt_tools,
@@ -421,7 +421,7 @@
 		member(Prompt, Prompts),
 		has_pair(Prompt, name, greet_prompt).
 
-	% Prompts list includes all declared prompts
+	% prompts list includes all declared prompts
 	test(mcp_server_prompts_list_02, deterministic(list::length(Prompts, 3))) :-
 		run_mcp_exchange_with(
 			test_prompt_tools,
@@ -432,7 +432,7 @@
 		result(Response, Result),
 		has_pair(Result, prompts, Prompts).
 
-	% Prompts list from non-prompt application returns empty list
+	% prompts list from non-prompt application returns empty list
 	test(mcp_server_prompts_list_03, deterministic(Prompts == [])) :-
 		run_mcp_exchange(
 			[prompts_list_request(1)],
@@ -442,7 +442,7 @@
 		result(Response, Result),
 		has_pair(Result, prompts, Prompts).
 
-	% Prompt descriptor includes arguments
+	% prompt descriptor includes arguments
 	test(mcp_server_prompts_list_arguments_01, true) :-
 		run_mcp_exchange_with(
 			test_prompt_tools,
@@ -459,7 +459,7 @@
 		has_pair(Arg, name, name),
 		has_pair(Arg, required, @true).
 
-	% Prompt with no arguments has empty arguments list
+	% prompt with no arguments has empty arguments list
 	test(mcp_server_prompts_list_no_args_01, true(Arguments == [])) :-
 		run_mcp_exchange_with(
 			test_prompt_tools,
@@ -472,9 +472,9 @@
 		has_pair(Prompt, name, simple_prompt),
 		has_pair(Prompt, arguments, Arguments).
 
-	% Prompts/get tests
+	% prompts/get tests
 
-	% Get a prompt with arguments
+	% get a prompt with arguments
 	test(mcp_server_prompts_get_01, deterministic(sub_atom(Text, _, _, _, 'Alice'))) :-
 		run_mcp_exchange_with(
 			test_prompt_tools,
@@ -489,7 +489,7 @@
 		has_pair(Content, type, text),
 		has_pair(Content, text, Text).
 
-	% Get a simple prompt without arguments
+	% get a simple prompt without arguments
 	test(mcp_server_prompts_get_02, deterministic) :-
 		run_mcp_exchange_with(
 			test_prompt_tools,
@@ -504,7 +504,7 @@
 		has_pair(Message, content, Content),
 		has_pair(Content, text, 'This is a simple test prompt.').
 
-	% Get a prompt without providing arguments object
+	% get a prompt without providing arguments object
 	test(mcp_server_prompts_get_03, deterministic) :-
 		run_mcp_exchange_with(
 			test_prompt_tools,
@@ -515,7 +515,7 @@
 		result(Response, Result),
 		has_pair(Result, messages, [_]).
 
-	% Get a multi-turn prompt
+	% get a multi-turn prompt
 	test(mcp_server_prompts_get_multi_turn_01, deterministic(list::length(Messages, 2))) :-
 		run_mcp_exchange_with(
 			test_prompt_tools,
@@ -529,7 +529,7 @@
 		has_pair(Msg1, role, user),
 		has_pair(Msg2, role, assistant).
 
-	% Prompt not found returns error
+	% prompt not found returns error
 	test(mcp_server_prompts_get_not_found_01, deterministic) :-
 		run_mcp_exchange_with(
 			test_prompt_tools,
@@ -538,9 +538,9 @@
 		),
 		is_error_response(Response).
 
-	% Combined tools and prompts tests
+	% combined tools and prompts tests
 
-	% Application with both tools and prompts: both capabilities advertised
+	% application with both tools and prompts: both capabilities advertised
 	test(mcp_server_tools_and_prompts_capabilities_01, deterministic) :-
 		run_mcp_exchange_with(
 			test_tools_and_prompts,
@@ -552,7 +552,7 @@
 		has_pair(Caps, tools, _),
 		has_pair(Caps, prompts, _).
 
-	% Application with both tools and prompts: tools work
+	% application with both tools and prompts: tools work
 	test(mcp_server_tools_and_prompts_tool_call_01, deterministic(sub_atom(Text, _, _, _, '7'))) :-
 		run_mcp_exchange_with(
 			test_tools_and_prompts,
@@ -564,7 +564,7 @@
 		has_pair(Result, content, [ContentItem| _]),
 		has_pair(ContentItem, text, Text).
 
-	% Application with both tools and prompts: prompts work
+	% application with both tools and prompts: prompts work
 	test(mcp_server_tools_and_prompts_prompt_get_01, deterministic(sub_atom(Text, _, _, _, 'summarize'))) :-
 		run_mcp_exchange_with(
 			test_tools_and_prompts,
@@ -577,9 +577,9 @@
 		has_pair(Message, content, Content),
 		has_pair(Content, text, Text).
 
-	% Resource capability tests
+	% resource capability tests
 
-	% With resources capability, capabilities should include resources
+	% with resources capability, capabilities should include resources
 	test(mcp_server_initialize_resource_capabilities_01, deterministic) :-
 		run_mcp_exchange_with(
 			test_resource_tools,
@@ -591,7 +591,7 @@
 		has_pair(Caps, tools, _),
 		has_pair(Caps, resources, _).
 
-	% Without resources capability, capabilities should not include resources
+	% without resources capability, capabilities should not include resources
 	test(mcp_server_initialize_no_resource_capabilities_01, deterministic) :-
 		run_mcp_exchange(
 			[initialize_request(1)],
@@ -601,9 +601,9 @@
 		has_pair(Result, capabilities, Caps),
 		\+ has_pair(Caps, resources, _).
 
-	% Resources/list tests
+	% resources/list tests
 
-	% List resources from resource-capable application
+	% list resources from resource-capable application
 	test(mcp_server_resources_list_01, true) :-
 		run_mcp_exchange_with(
 			test_resource_tools,
@@ -617,7 +617,7 @@
 		member(Resource, Resources),
 		has_pair(Resource, uri, 'logtalk://test/greeting').
 
-	% Resources list includes all declared resources
+	% resources list includes all declared resources
 	test(mcp_server_resources_list_02, deterministic(list::length(Resources, 3))) :-
 		run_mcp_exchange_with(
 			test_resource_tools,
@@ -628,7 +628,7 @@
 		result(Response, Result),
 		has_pair(Result, resources, Resources).
 
-	% Resources list from non-resource application returns empty list
+	% resources list from non-resource application returns empty list
 	test(mcp_server_resources_list_03, deterministic(Resources == [])) :-
 		run_mcp_exchange(
 			[resources_list_request(1)],
@@ -638,7 +638,7 @@
 		result(Response, Result),
 		has_pair(Result, resources, Resources).
 
-	% Resource descriptor includes all fields
+	% resource descriptor includes all fields
 	test(mcp_server_resources_list_fields_01, true) :-
 		run_mcp_exchange_with(
 			test_resource_tools,
@@ -653,9 +653,9 @@
 		has_pair(Resource, description, 'A greeting message'),
 		has_pair(Resource, mimeType, 'text/plain').
 
-	% Resources/read tests
+	% resources/read tests
 
-	% Read a text resource
+	% read a text resource
 	test(mcp_server_resources_read_01, deterministic(Text == 'Hello from Logtalk!')) :-
 		run_mcp_exchange_with(
 			test_resource_tools,
@@ -669,7 +669,7 @@
 		has_pair(ContentItem, mimeType, 'text/plain'),
 		has_pair(ContentItem, text, Text).
 
-	% Read a JSON resource
+	% read a JSON resource
 	test(mcp_server_resources_read_02, deterministic) :-
 		run_mcp_exchange_with(
 			test_resource_tools,
@@ -682,7 +682,7 @@
 		has_pair(ContentItem, mimeType, 'application/json'),
 		has_pair(ContentItem, text, _).
 
-	% Read a resource with multiple content items
+	% read a resource with multiple content items
 	test(mcp_server_resources_read_multi_01, deterministic(list::length(Contents, 2))) :-
 		run_mcp_exchange_with(
 			test_resource_tools,
@@ -693,7 +693,7 @@
 		result(Response, Result),
 		has_pair(Result, contents, Contents).
 
-	% Resource not found returns error
+	% resource not found returns error
 	test(mcp_server_resources_read_not_found_01, deterministic) :-
 		run_mcp_exchange_with(
 			test_resource_tools,
@@ -702,9 +702,9 @@
 		),
 		is_error_response(Response).
 
-	% Combined tools, prompts, and resources tests
+	% combined tools, prompts, and resources tests
 
-	% Application with all capabilities: all advertised
+	% application with all capabilities: all advertised
 	test(mcp_server_all_capabilities_01, deterministic) :-
 		run_mcp_exchange_with(
 			test_all_capabilities,
@@ -717,7 +717,7 @@
 		has_pair(Caps, prompts, _),
 		has_pair(Caps, resources, _).
 
-	% Application with all capabilities: resources work
+	% application with all capabilities: resources work
 	test(mcp_server_all_capabilities_resource_read_01, deterministic(Text == 'Some test data')) :-
 		run_mcp_exchange_with(
 			test_all_capabilities,
@@ -731,7 +731,7 @@
 
 	% MCP 2025-06-18: Tool title tests
 
-	% Tool with title in info/2 should include title in descriptor
+	% tool with title in info/2 should include title in descriptor
 	test(mcp_server_tool_title_from_info_01, true(Title == 'Division Tool')) :-
 		run_mcp_exchange_with(
 			test_structured_tools,
@@ -745,7 +745,7 @@
 		has_pair(Tool, name, divide),
 		has_pair(Tool, title, Title).
 
-	% Tool without explicit title in info/2 should use the predicate name as title
+	% tool without explicit title in info/2 should use the predicate name as title
 	test(mcp_server_tool_title_fallback_01, true(Title == square)) :-
 		run_mcp_exchange_with(
 			test_structured_tools,
@@ -759,7 +759,7 @@
 		has_pair(Tool, name, square),
 		has_pair(Tool, title, Title).
 
-	% All tools should have a title field
+	% all tools should have a title field
 	test(mcp_server_tool_title_always_present_01, deterministic) :-
 		run_mcp_exchange(
 			[tools_list_request(1)],
@@ -773,7 +773,7 @@
 
 	% MCP 2025-06-18: Output schema tests
 
-	% Tool with output_schema should include outputSchema in descriptor
+	% tool with output_schema should include outputSchema in descriptor
 	test(mcp_server_tool_output_schema_01, true) :-
 		run_mcp_exchange_with(
 			test_structured_tools,
@@ -788,7 +788,7 @@
 		has_pair(Tool, outputSchema, Schema),
 		has_pair(Schema, type, object).
 
-	% Tool without output_schema should not include outputSchema
+	% tool without output_schema should not include outputSchema
 	test(mcp_server_tool_no_output_schema_01, true) :-
 		run_mcp_exchange(
 			[tools_list_request(1)],
@@ -909,7 +909,7 @@
 
 	% MCP 2025-06-18: Server title tests
 
-	% Server title should be included in serverInfo when provided
+	% server title should be included in serverInfo when provided
 	test(mcp_server_server_title_01, deterministic(Title == 'Test Server Title')) :-
 		run_mcp_exchange_with_options(
 			test_tools,
@@ -922,7 +922,7 @@
 		has_pair(Result, serverInfo, ServerInfo),
 		has_pair(ServerInfo, title, Title).
 
-	% Server without explicit title should use the default title in serverInfo
+	% server without explicit title should use the default title in serverInfo
 	test(mcp_server_server_no_title_01, deterministic) :-
 		run_mcp_exchange(
 			[initialize_request(1)],
@@ -933,17 +933,17 @@
 		has_pair(Result, serverInfo, ServerInfo),
 		has_pair(ServerInfo, title, 'logtalk-mcp-server').
 
-	% Test auxiliary predicates
+	% test auxiliary predicates
 
-	% Run an MCP exchange using the public start/4 API with file streams
+	% run an MCP exchange using the public start/4 API with file streams
 	run_mcp_exchange(RequestSpecs, Responses) :-
 		run_mcp_exchange_with(test_tools, RequestSpecs, Responses).
 
-	% Run an MCP exchange with a specific application object
+	% run an MCP exchange with a specific application object
 	run_mcp_exchange_with(Application, RequestSpecs, Responses) :-
 		run_mcp_exchange_with_options(Application, [], RequestSpecs, Responses).
 
-	% Run an MCP exchange with a specific application object and options
+	% run an MCP exchange with a specific application object and options
 	run_mcp_exchange_with_options(Application, Options, RequestSpecs, Responses) :-
 		^^file_path('mcp_input_5.tmp', InputFile),
 		^^file_path('mcp_output.tmp', OutputFile),
@@ -951,25 +951,25 @@
 		open(InputFile, write, Out),
 		write_request_specs(RequestSpecs, Out),
 		close(Out),
-		% Run server with file streams using the public API
+		% run server with file streams using the public API
 		open(InputFile, read, In),
 		open(OutputFile, write, OutStream),
 		mcp_server::start('test-server', Application, In, OutStream, Options),
 		close(In),
 		close(OutStream),
-		% Read all responses from output file
+		% read all responses from output file
 		open(OutputFile, read, InStream),
 		read_all_framed(InStream, Responses),
 		close(InStream).
 
-	% Write request specs to a stream
+	% write request specs to a stream
 	write_request_specs([], _).
 	write_request_specs([Spec| Specs], Stream) :-
 		spec_to_message(Spec, Message),
 		write_message(Stream, Message),
 		write_request_specs(Specs, Stream).
 
-	% Convert test request specs to JSON-RPC messages
+	% convert test request specs to JSON-RPC messages
 	spec_to_message(initialize_request(Id), Message) :-
 		request(
 			initialize,
@@ -1016,7 +1016,7 @@
 	spec_to_message(resources_read_request(URI, Id), Message) :-
 		request('resources/read', {uri-URI}, Id, Message).
 
-	% Read all framed messages from a stream
+	% read all framed messages from a stream
 	read_all_framed(Stream, Messages) :-
 		(	catch(read_message(Stream, Message), _, fail) ->
 			Messages = [Message| Rest],

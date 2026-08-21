@@ -34,7 +34,8 @@
 	start(Application, Input, Output, UserOptions) :-
 		Options = [stdio_input(Input), stdio_output(Output)| UserOptions],
 		mcp_server_2026_07_28_spec::prepare(Application, Options),
-		(	catch(Application::capabilities(Capabilities), _, fail) -> true
+		(	catch(Application::capabilities(Capabilities), _, fail) ->
+			true
 		;	Capabilities = []
 		),
 		LoopOptions = [

@@ -30,8 +30,7 @@
 	]).
 
 	:- uses(json_rpc, [
-		request/4, response/3, is_response/1, is_error_response/1,
-		result/2, id/2, error_code/2
+		request/4, response/3, is_response/1, is_error_response/1, result/2, id/2, error_code/2
 	]).
 
 	:- uses(list, [
@@ -368,7 +367,7 @@
 		'Content-Type'-'application/json'
 	]).
 
-	% Decode http_response/3 carrying application/json into a JSON-RPC term
+	% decode http_response/3 carrying application/json into a JSON-RPC term
 	http_json_response(http_response(200, Headers, Body), Message) :-
 		memberchk('Content-Type'-CT, Headers),
 		sub_atom(CT, _, _, _, 'application/json'),
@@ -391,7 +390,8 @@
 		Lines = [_| _],
 		last(Lines, JSON).
 
-	sse_data_lines([]) --> [].
+	sse_data_lines([]) -->
+		[].
 	sse_data_lines(Lines) -->
 		[0'd,0'a,0't,0'a,0':,32], sse_line(LineCodes), [0'\n],
 		{atom_codes(Line, LineCodes)},
@@ -404,15 +404,22 @@
 	sse_data_lines_rest(Line, [Line| Rest]) -->
 		sse_data_lines(Rest).
 
-	sse_line([]) --> [].
-	sse_line([]) --> [0'\n], !.
-	sse_line([C|Cs]) --> [C], {C =\= 0'\n}, sse_line(Cs).
+	sse_line([]) -->
+		[].
+	sse_line([]) -->
+		[0'\n], !.
+	sse_line([C|Cs]) -->
+		[C], {C =\= 0'\n}, sse_line(Cs).
 
-	sse_skip_line --> [0'\n], !.
-	sse_skip_line --> [_], sse_skip_line.
-	sse_skip_line --> [].
+	sse_skip_line -->
+		[0'\n], !.
+	sse_skip_line -->
+		[_], sse_skip_line.
+	sse_skip_line -->
+		[].
 
-	last([X], X) :- !.
+	last([X], X) :-
+		!.
 	last([_|Xs], X) :-
 		last(Xs, X).
 

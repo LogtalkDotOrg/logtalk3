@@ -27,13 +27,13 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-08-21,
-		comment is 'MCP 2025-06-18 protocol handler. Transport-agnostic message handling; returns abstract outcomes for stdio or Streamable HTTP transports to render. Synchronous elicitation requires stdio_input/1 and stdio_output/1 in Options.'
+		comment is 'MCP 2025-06-18 protocol handler. Transport-agnostic message handling; returns abstract outcomes for stdio or Streamable HTTP transports to render. Synchronous elicitation requires ``stdio_input/1`` and ``stdio_output/1`` options.'
 	]).
 
 	:- uses(json_rpc, [
-		request/4, response/3, error_response/4, method_not_found/2, invalid_params/2,
-		is_request/1, is_notification/1, is_response/1, id/2, method/2, params/2, result/2,
-		write_message/2, read_message/2
+		request/4, response/3, error_response/4, method_not_found/2, invalid_params/2, is_request/1,
+		is_notification/1, is_response/1, id/2, method/2, params/2, result/2, write_message/2,
+		read_message/2
 	]).
 	:- uses(list, [
 		last/2, member/2
@@ -43,10 +43,14 @@
 		write_to_atom/2
 	]).
 
-	% Dynamic state (adapter-owned)
+	% dynamic state (spec-owned)
 
 	:- private(initialized_/0).
 	:- dynamic(initialized_/0).
+	:- mode(initialized_, zero_or_one).
+	:- info(initialized_/0, [
+		commnet is 'Initialization completed flag.'
+	]).
 
 	:- private(elicit_counter_/1).
 	:- dynamic(elicit_counter_/1).
@@ -54,7 +58,7 @@
 	:- private(client_capabilities_/1).
 	:- dynamic(client_capabilities_/1).
 
-	% Protocol handler API
+	% implemented spec
 
 	spec('2025-06-18').
 
@@ -147,11 +151,11 @@
 		;	true
 		).
 
-	% Supported protocol versions
+	% supported protocol versions
 
 	supported_protocol_versions(['2025-06-18']).
 
-	% Initialize
+	% initialize
 
 	handle_initialize(Message, Id, Options, Outcome) :-
 		(	params(Message, Params),
@@ -209,7 +213,7 @@
 		),
 		^^pairs_to_curly(Capabilities2, Capabilities).
 
-	% Ping
+	% ping
 
 	handle_ping(Id, Outcome) :-
 		response({}, Id, Response),
@@ -273,7 +277,7 @@
 		;	^^try_tool_call_3(Application, ToolName, Functor, Arity, ArgPairs, ToolArguments, Result)
 		).
 
-	% Tool result formatting (2025 shape)
+	% tool result formatting (2025 shape)
 
 	format_tool_result(text(Text), Id, Response) :-
 		Content = [{type-text, text-Text}],
@@ -399,7 +403,7 @@
 		),
 		error_response(-32603, ErrorText, Id, Response).
 
-	% Elicitation (synchronous, 2025 style)
+	% elicitation (synchronous, 2025 style)
 
 	:- public(elicit_request/5).
 	:- mode(elicit_request(+stream, +stream, +atom, +compound, --compound), one).
@@ -452,7 +456,7 @@
 		atom(Version).
 	valid_option(server_title(Title)) :-
 		atom(Title).
-
+	% pass-through options
 	valid_option(stdio_input(_)).
 	valid_option(stdio_output(_)).
 	valid_option(application(_)).

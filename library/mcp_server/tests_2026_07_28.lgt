@@ -30,8 +30,8 @@
 	]).
 
 	:- uses(json_rpc, [
-		request/4, response/3, notification/3, is_request/1, is_response/1, is_error_response/1,
-		method/2, params/2, result/2, id/2, error_code/2, write_message/2, read_message/2
+		request/4, response/3, notification/3, is_request/1, is_response/1, is_error_response/1, method/2,
+		params/2, result/2, id/2, error_code/2, write_message/2, read_message/2
 	]).
 
 	:- uses(lgtunit, [
@@ -51,9 +51,7 @@
 		^^clean_file('mcp26_in.tmp'),
 		^^clean_file('mcp26_out.tmp').
 
-	% -----------------------------------------------------------------
-	% Facade adapter selection
-	% -----------------------------------------------------------------
+	% facade adapter selection
 
 	test(mcp26_facade_default_adapter_01, deterministic) :-
 		% Default is protocol_version + transport matrix (stdio / 2025), not protocol_adapter/1
@@ -68,9 +66,7 @@
 		mcp_server::valid_option(protocol_adapter(mcp_server_2026_07_28_adapter)),
 		memberchk(protocol_adapter(mcp_server_2026_07_28_adapter), Options).
 
-	% -----------------------------------------------------------------
 	% server/discover
-	% -----------------------------------------------------------------
 
 	test(mcp26_discover_01, deterministic) :-
 		run_2026(
@@ -109,9 +105,7 @@
 		has_pair(Result, ttlMs, TTL),
 		has_pair(Result, cacheScope, Scope).
 
-	% -----------------------------------------------------------------
-	% Required metadata validation
-	% -----------------------------------------------------------------
+	% required metadata validation
 
 	test(mcp26_missing_meta_01, deterministic) :-
 		run_2026(
@@ -139,9 +133,7 @@
 		),
 		is_error_response(Response).
 
-	% -----------------------------------------------------------------
 	% tools/list and tools/call
-	% -----------------------------------------------------------------
 
 	test(mcp26_tools_list_01, deterministic) :-
 		run_2026(
@@ -178,9 +170,7 @@
 		is_error_response(Response),
 		error_code(Response, -32602).
 
-	% -----------------------------------------------------------------
 	% MRTR: one-round input_required then complete
-	% -----------------------------------------------------------------
 
 	test(mcp26_mrtr_first_round_01, deterministic) :-
 		run_2026(
@@ -232,9 +222,7 @@
 		has_pair(Result, content, [Item| _]),
 		has_pair(Item, text, Text).
 
-	% -----------------------------------------------------------------
 	% prompts
-	% -----------------------------------------------------------------
 
 	test(mcp26_prompts_list_01, deterministic) :-
 		run_2026(
@@ -269,9 +257,7 @@
 		result(Response, Result),
 		has_pair(Result, resultType, input_required).
 
-	% -----------------------------------------------------------------
 	% resources
-	% -----------------------------------------------------------------
 
 	test(mcp26_resources_list_01, deterministic) :-
 		run_2026(
@@ -320,9 +306,7 @@
 		is_error_response(Response),
 		error_code(Response, -32602).
 
-	% -----------------------------------------------------------------
-	% Unknown method
-	% -----------------------------------------------------------------
+	% unknown method
 
 	test(mcp26_unknown_method_01, deterministic) :-
 		run_2026(
@@ -333,9 +317,7 @@
 		is_error_response(Response),
 		error_code(Response, -32601).
 
-	% -----------------------------------------------------------------
-	% Ping
-	% -----------------------------------------------------------------
+	% ping
 
 	test(mcp26_ping_01, deterministic) :-
 		run_2026(
@@ -346,9 +328,7 @@
 		assertion(is_response(Response)),
 		assertion(\+ is_error_response(Response)).
 
-	% -----------------------------------------------------------------
-	% Combined capabilities
-	% -----------------------------------------------------------------
+	% combined capabilities
 
 	test(mcp26_all_capabilities_discover_01, deterministic) :-
 		run_2026(
@@ -363,9 +343,7 @@
 		assertion(has_pair(Caps, resources, _)),
 		assertion(has_pair(Caps, subscriptions, _)).
 
-	% -----------------------------------------------------------------
-	% ResultType present on every success
-	% -----------------------------------------------------------------
+	% resultType present on every success
 
 	test(mcp26_result_type_always_present_01, deterministic) :-
 		run_2026(
@@ -378,9 +356,9 @@
 			(result(R, Res), has_pair(Res, resultType, _))
 		).
 
-	% -----------------------------------------------------------------
-	% Auxiliary: run exchanges against the 2026 adapter
-	% -----------------------------------------------------------------
+	% auxiliary predicates
+
+	% run exchanges against the 2026 adapter
 
 	run_2026(Application, Specs, Responses) :-
 		^^file_path('mcp26_in.tmp', InFile),
@@ -416,7 +394,8 @@
 		;	Messages = []
 		).
 
-	% Meta builder for 2026 requests
+	% meta builder for 2026 requests
+
 	meta_2026(Meta) :-
 		Meta = {
 			'io.modelcontextprotocol/protocolVersion'-'2026-07-28',
@@ -477,7 +456,8 @@
 		meta_2026(Meta),
 		request(totally_unknown, {'_meta'-Meta}, Id, Message).
 
-	% curly-term helpers
+	% curly-term predicates
+
 	has_pair({Pairs}, Key, Value) :-
 		curly_member(Key-Value, Pairs).
 

@@ -466,38 +466,32 @@
 			json_error(Id, -32603, Error, HTTPResponse)
 		).
 
-	do_dispatch('server/discover', Params, Id, HTTPResponse) :-
-		!,
+	do_dispatch(Method, Params, Id, HTTPResponse) :-
+		(	do_dispatch_(Method, Params, Id, HTTPResponse) ->
+			true
+		;	json_error(Id, -32601, 'Method not found', HTTPResponse)
+		).
+
+	do_dispatch_('server/discover', Params, Id, HTTPResponse) :-
 		handle_discover(Params, Id, HTTPResponse).
-	do_dispatch(initialize, _, Id, HTTPResponse) :-
-		!,
+	do_dispatch_(initialize, _, Id, HTTPResponse) :-
 		json_error(Id, -32600, 'initialize is not used in MCP 2026-07-28; use server/discover', HTTPResponse).
-	do_dispatch(ping, _, Id, HTTPResponse) :-
-		!,
+	do_dispatch_(ping, _, Id, HTTPResponse) :-
 		json_result(Id, {resultType-complete}, HTTPResponse).
-	do_dispatch('tools/list', Params, Id, HTTPResponse) :-
-		!,
+	do_dispatch_('tools/list', Params, Id, HTTPResponse) :-
 		handle_tools_list(Params, Id, HTTPResponse).
-	do_dispatch('tools/call', Params, Id, HTTPResponse) :-
-		!,
+	do_dispatch_('tools/call', Params, Id, HTTPResponse) :-
 		handle_tools_call(Params, Id, HTTPResponse).
-	do_dispatch('prompts/list', Params, Id, HTTPResponse) :-
-		!,
+	do_dispatch_('prompts/list', Params, Id, HTTPResponse) :-
 		handle_prompts_list(Params, Id, HTTPResponse).
-	do_dispatch('prompts/get', Params, Id, HTTPResponse) :-
-		!,
+	do_dispatch_('prompts/get', Params, Id, HTTPResponse) :-
 		handle_prompts_get(Params, Id, HTTPResponse).
-	do_dispatch('resources/list', Params, Id, HTTPResponse) :-
-		!,
+	do_dispatch_('resources/list', Params, Id, HTTPResponse) :-
 		handle_resources_list(Params, Id, HTTPResponse).
-	do_dispatch('resources/read', Params, Id, HTTPResponse) :-
-		!,
+	do_dispatch_('resources/read', Params, Id, HTTPResponse) :-
 		handle_resources_read(Params, Id, HTTPResponse).
-	do_dispatch('subscriptions/listen', Params, Id, HTTPResponse) :-
-		!,
+	do_dispatch_('subscriptions/listen', Params, Id, HTTPResponse) :-
 		handle_subscriptions_listen(Params, Id, HTTPResponse).
-	do_dispatch(_, _, Id, HTTPResponse) :-
-		json_error(Id, -32601, 'Method not found', HTTPResponse).
 
 	handle_notification(Message) :-
 		method(Message, Method),
@@ -524,7 +518,7 @@
 		^^option(server_title(Title), Options),
 		^^option(instructions(Instructions), Options),
 		^^option(application_capabilities(Caps), Options),
-		build_caps(Caps, Capabilities),
+		build_capabilities(Caps, Capabilities),
 		resolve_cache(discover, {}, TTL, Scope, Options),
 		ServerInfo = {name-Name, title-Title, version-Version},
 		Meta = {'io.modelcontextprotocol/serverInfo'-ServerInfo},
@@ -541,18 +535,18 @@
 		),
 		json_result(Id, Result, HTTPResponse).
 
-	build_caps(AppCaps, Capabilities) :-
+	build_capabilities(AppCaps, Capabilities) :-
 		Base = [tools-{}],
 		(	member(prompts, AppCaps) ->
-			C1 = [prompts-{}| Base]
-		;	C1 = Base
+			Capabilities0 = [prompts-{}| Base]
+		;	Capabilities0 = Base
 		),
 		(	member(resources, AppCaps) ->
-			C2 = [resources-{}|C1]
-		;	C2 = C1
+			Capabilities1 = [resources-{}|Capabilities0]
+		;	Capabilities1 = Capabilities0
 		),
-		C3 = [subscriptions-{}|C2],
-		^^pairs_to_curly(C3, Capabilities).
+		Capabilities2 = [subscriptions-{}|Capabilities1],
+		^^pairs_to_curly(Capabilities2, Capabilities).
 
 	handle_tools_list(_, Id, HTTPResponse) :-
 		server_options_(Options),
@@ -573,10 +567,12 @@
 			(	catch(
 					do_tools_call(ToolName, Args, ClientCaps, InputResponses, RequestState, ProgressToken, Id, HTTPResponse),
 					Error,
-					(	json_error(Id, -32603, Error, HTTPResponse), Fail = true)
+					(json_error(Id, -32603, Error, HTTPResponse), Fail = true)
 				) ->
-				(	nonvar(Fail) -> true
-				;	nonvar(HTTPResponse) -> true
+				(	nonvar(Fail) ->
+					true
+				;	nonvar(HTTPResponse) ->
+					true
 				;	json_error(Id, -32603, 'Tool execution failed', HTTPResponse)
 				)
 			;	json_error(Id, -32603, 'Tool execution failed', HTTPResponse)
@@ -598,8 +594,11 @@
 					fail
 				) ->
 				handle_round_tool_result(RoundResult, Id, ProgressToken, HTTPResponse)
-			;	(	catch(^^try_tool_call_3(App, ToolName, Functor, Arity, ArgPairs, Args, Result),
-						Error, Result = error(Error)) ->
+			;	(	catch(
+						^^try_tool_call_3(App, ToolName, Functor, Arity, ArgPairs, Args, Result),
+						Error,
+						Result = error(Error)
+					) ->
 					format_tool_result(Result, Id, ProgressToken, HTTPResponse)
 				;	json_error(Id, -32603, 'Tool execution failed', HTTPResponse)
 				)
@@ -702,7 +701,10 @@
 		% do not clear sse_output_/sse_mode_ — handler may have attached already
 		assertz(progress_token_(none)),
 		assertz(progress_events_([])),
-		(	sse_mode_(_) -> true ; assertz(sse_mode_(none)) ).
+		(	sse_mode_(_) ->
+			true
+		;	assertz(sse_mode_(none))
+		).
 	begin_progress(Token) :-
 		retractall(progress_events_(_)),
 		retractall(progress_token_(_)),
@@ -769,20 +771,19 @@
 		put_codes(Suffix, Stream).
 
 	put_codes([], _Stream).
-	put_codes([C|Cs], Stream) :-
-		(	catch(put_byte(Stream, C), _, fail) -> true
-		;	put_code(Stream, C)
+	put_codes([Code| Codes], Stream) :-
+		(	catch(put_byte(Stream, Code), _, fail) ->
+			true
+		;	put_code(Stream, Code)
 		),
-		put_codes(Cs, Stream).
+		put_codes(Codes, Stream).
 
 	% finalize: live mode writes the final event to the stream; buffered mode
 	% returns a complete SSE body; no-token mode returns application/json
 	finalize_response(_Id, FinalMsg, none, HTTPResponse) :-
 		!,
 		json_serialize(FinalMsg, Body),
-		HTTPResponse = http_response(200,
-			['Content-Type'-'application/json; charset=utf-8'],
-			Body).
+		HTTPResponse = http_response(200, ['Content-Type'-'application/json; charset=utf-8'], Body).
 	finalize_response(_Id, FinalMsg, _Token, HTTPResponse) :-
 		sse_mode_(live),
 		sse_output_(Stream),
@@ -795,7 +796,10 @@
 		HTTPResponse = http_response(already_sent, Headers, '').
 	finalize_response(_Id, FinalMsg, _Token, HTTPResponse) :-
 		% buffered fallback
-		(	progress_events_(Events) -> true ; Events = [] ),
+		(	progress_events_(Events) ->
+			true
+		;	Events = []
+		),
 		sse_body(Events, FinalMsg, Body),
 		sse_headers(Headers),
 		HTTPResponse = http_response(200, Headers, Body).
@@ -893,22 +897,32 @@
 		response({description-Desc, messages-Json, resultType-complete}, Id, Msg).
 	prompt_result_body(error(E), Id, Msg) :-
 		!,
-		(atom(E) -> T = E ; write_to_atom(E, T)),
+		(	atom(E) ->
+			T = E
+		;	write_to_atom(E, T)
+		),
 		error_response(-32603, T, Id, Msg).
 	prompt_result_body(Other, Id, Msg) :-
-		(atom(Other) -> T = Other ; write_to_atom(Other, T)),
+		(	atom(Other) ->
+			T = Other
+		;	write_to_atom(Other, T)
+		),
 		error_response(-32603, T, Id, Msg).
 
 	handle_resources_list(_, Id, HTTPResponse) :-
 		server_options_(Options),
 		^^option(application(App), Options),
-		(catch(App::resources(Descs), _, fail) -> ^^resource_descriptors_to_json(Descs, Json) ; Json = []),
+		(	catch(App::resources(Descs), _, fail) ->
+			^^resource_descriptors_to_json(Descs, Json)
+		;	Json = []
+		),
 		resolve_cache(resources_list, {}, TTL, Scope, Options),
 		json_result(Id, {resources-Json, resultType-complete, ttlMs-TTL, cacheScope-Scope}, HTTPResponse).
 
 	handle_resources_read(Params, Id, HTTPResponse) :-
-		(	^^has_pair(Params, uri, URI) -> true
-		;	json_error(Id, -32602, 'Missing resource uri', HTTPResponse), !
+		(	^^has_pair(Params, uri, URI) ->
+			true
+		;	json_error(Id, -32602, 'Missing resource uri', HTTPResponse)
 		),
 		extract_progress_token(Params, ProgressToken),
 		begin_progress(ProgressToken),
@@ -948,10 +962,16 @@
 		response({contents-Json, resultType-complete, ttlMs-TTL, cacheScope-Scope}, Id, Msg).
 	resource_result_body(error(E), _, Id, _, Msg) :-
 		!,
-		(atom(E) -> T = E ; write_to_atom(E, T)),
+		(	atom(E) ->
+			T = E
+		;	write_to_atom(E, T)
+		),
 		error_response(-32603, T, Id, Msg).
 	resource_result_body(Other, _, Id, _, Msg) :-
-		(atom(Other) -> T = Other ; write_to_atom(Other, T)),
+		(	atom(Other) ->
+			T = Other
+		;	write_to_atom(Other, T)
+		),
 		error_response(-32603, T, Id, Msg).
 
 	% subscriptions/listen — long-lived SSE stream
@@ -965,10 +985,12 @@
 	% 5. The wait loop writes matching events to the live SSE stream.
 
 	handle_subscriptions_listen(Params, Id, HTTPResponse) :-
-		(	^^has_pair(Params, filters, Filters0) -> Filters = Filters0
+		(	^^has_pair(Params, filters, Filters0) ->
+			Filters = Filters0
 		;	Filters = []
 		),
-		(	atom(Id) -> S0 = Id
+		(	atom(Id) ->
+			S0 = Id
 		;	number_codes(Id, Codes), atom_codes(S0, Codes)
 		),
 		atom_concat('sub_', S0, SubscriptionId),
@@ -1039,9 +1061,9 @@
 
 	% notify/1 fan-out — never fails; drops dead subscriptions
 	dispatch_event([], _).
-	dispatch_event([Sub| Rest], Event) :-
-		catch(dispatch_one(Sub, Event), Error, log_notify_error(Event, Error)),
-		dispatch_event(Rest, Event).
+	dispatch_event([Subscription| Subscriptions], Event) :-
+		catch(dispatch_one(Subscription, Event), Error, log_notify_error(Event, Error)),
+		dispatch_event(Subscriptions, Event).
 
 	dispatch_one(subscription_(SubId, ReqId, Filters, Stream), Event) :-
 		(	event_matches(Event, Filters) ->
@@ -1087,10 +1109,13 @@
 	event_matches(Event, Filters) :-
 		event_type(Event, Type),
 		member(F, Filters),
-		(	^^has_pair(F, type, Type) -> true
-		;	F == Type -> true
+		(	^^has_pair(F, type, Type) ->
+			true
+		;	F == Type ->
+			true
 		;	fail
-		), !.
+		),
+		!.
 
 	event_type(tools_list_changed, tools).
 	event_type(prompts_list_changed, prompts).
@@ -1136,17 +1161,24 @@
 		json_serialize(Msg, Body).
 
 	json_error(Id, Code, Message, http_response(200, ['Content-Type'-'application/json; charset=utf-8'], Body)) :-
-		(atom(Message) -> Msg = Message ; write_to_atom(Message, Msg)),
+		(	atom(Message) ->
+			Msg = Message
+		;	write_to_atom(Message, Msg)
+		),
 		error_response(Code, Msg, Id, JSON),
 		json_serialize(JSON, Body).
 
 	json_error_data(Id, Code, Message, Data, http_response(200, ['Content-Type'-'application/json; charset=utf-8'], Body)) :-
-		(atom(Message) -> Msg = Message ; write_to_atom(Message, Msg)),
+		(	atom(Message) ->
+			Msg = Message
+		;	write_to_atom(Message, Msg)
+		),
 		JSON = {jsonrpc-'2.0', id-Id, error-{code-Code, message-Msg, data-Data}},
 		json_serialize(JSON, Body).
 
 	header_value(Headers, Name, Value) :-
-		member(Name-Value, Headers), !.
+		member(Name-Value, Headers),
+		!.
 	header_value(Headers, Name, Value) :-
 		atom_codes(Name, NC), maplist_lower(NC, NL), atom_codes(LN, NL),
 		member(H-Value, Headers),
@@ -1432,11 +1464,11 @@
 		(C >= 97, C =< 122 -> U is C - 32 ; U = C), map_upper(Cs, Us).
 
 	body_atom(B0, B) :-
-		(atom(B0) -> B = B0
-		; var(B0) -> B = ''
-		; B0 == [] -> B = ''
-		; is_list(B0) -> atom_codes(B, B0)
-		; write_to_atom(B0, B)
+		(	atom(B0) -> B = B0
+		;	var(B0) -> B = ''
+		;	B0 == [] -> B = ''
+		;	is_list(B0) -> atom_codes(B, B0)
+		;	write_to_atom(B0, B)
 		).
 
 :- end_object.
