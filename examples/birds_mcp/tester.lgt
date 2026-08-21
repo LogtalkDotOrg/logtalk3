@@ -19,15 +19,42 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	set_logtalk_flag(report, warnings),
-	logtalk_load(hierarchies(loader)),
-	logtalk_load(mcp_server(loader)),
-	logtalk_load(term_io(loader)),
-	logtalk_load(birds(loader)),
-	logtalk_load(birds_mcp, [debug(on), source_data(on)]),
-	logtalk_load(lgtunit(loader)),
-	logtalk_load(tests_2025_06_18, [hook(lgtunit)]),
-	logtalk_load(tests_2026_07_28, [hook(lgtunit)]),
-	lgtunit::run_test_sets([tests_2025_06_18, tests_2026_07_28])
-)).
+:- if(current_logtalk_flag(threads, supported)).
+
+	:- initialization((
+		set_logtalk_flag(report, warnings),
+		logtalk_load(hierarchies(loader)),
+		logtalk_load(mcp_server(loader)),
+		logtalk_load(term_io(loader)),
+		logtalk_load(birds(loader)),
+		logtalk_load(birds_mcp, [debug(on), source_data(on)]),
+		logtalk_load(lgtunit(loader)),
+		logtalk_load(tests_2025_06_18, [hook(lgtunit)]),
+		logtalk_load(tests_2026_07_28, [hook(lgtunit)]),
+		logtalk_load(tests_streamable_http, [hook(lgtunit)]),
+		lgtunit::run_test_sets([
+			tests_2025_06_18,
+			tests_2026_07_28,
+			tests_streamable_http
+		])
+	)).
+
+:- else.
+
+	:- initialization((
+		set_logtalk_flag(report, warnings),
+		logtalk_load(hierarchies(loader)),
+		logtalk_load(mcp_server(loader)),
+		logtalk_load(term_io(loader)),
+		logtalk_load(birds(loader)),
+		logtalk_load(birds_mcp, [debug(on), source_data(on)]),
+		logtalk_load(lgtunit(loader)),
+		logtalk_load(tests_2025_06_18, [hook(lgtunit)]),
+		logtalk_load(tests_2026_07_28, [hook(lgtunit)]),
+		lgtunit::run_test_sets([
+			tests_2025_06_18,
+			tests_2026_07_28
+		])
+	)).
+
+:- endif.

@@ -32,7 +32,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="mcp_tool_protocol" href="mcp_tool_protocol_0.html" />
+    <link rel="next" title="mcp_server_spec_protocol" href="mcp_server_spec_protocol_0.html" />
     <link rel="prev" title="mcp_server_adapter_protocol" href="mcp_server_adapter_protocol_0.html" />
    
 </head>
@@ -261,9 +261,15 @@
 <li class="toctree-l3"><a class="reference internal" href="mcp_resource_protocol_0.html">mcp_resource_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_server_0.html">mcp_server</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_server_2025_06_18_adapter_0.html">mcp_server_2025_06_18_adapter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcp_server_2025_06_18_spec_0.html">mcp_server_2025_06_18_spec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_server_2026_07_28_adapter_0.html">mcp_server_2026_07_28_adapter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcp_server_2026_07_28_spec_0.html">mcp_server_2026_07_28_spec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_server_adapter_protocol_0.html">mcp_server_adapter_protocol</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">mcp_server_application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcp_server_spec_protocol_0.html">mcp_server_spec_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcp_server_stdio_transport_0.html">mcp_server_stdio_transport</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcp_server_streamable_http_transport_0.html">mcp_server_streamable_http_transport</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcp_streamable_http_handler_0.html">mcp_streamable_http_handler</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_tool_protocol_0.html">mcp_tool_protocol</a></li>
 </ul>
 </li>
@@ -479,19 +485,22 @@
 <li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
 <ul>
 <li><p><a class="reference internal" href="#tool-descriptors-to-json-3" id="id2"><code class="docutils literal notranslate"><span class="pre">tool_descriptors_to_json/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#prompt-descriptors-to-json-2" id="id3"><code class="docutils literal notranslate"><span class="pre">prompt_descriptors_to_json/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#resource-descriptors-to-json-2" id="id4"><code class="docutils literal notranslate"><span class="pre">resource_descriptors_to_json/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#auto-dispatch-tool-5" id="id5"><code class="docutils literal notranslate"><span class="pre">auto_dispatch_tool/5</span></code></a></p></li>
-<li><p><a class="reference internal" href="#try-tool-call-3-7" id="id6"><code class="docutils literal notranslate"><span class="pre">try_tool_call_3/7</span></code></a></p></li>
-<li><p><a class="reference internal" href="#format-content-items-2" id="id7"><code class="docutils literal notranslate"><span class="pre">format_content_items/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#format-prompt-messages-2" id="id8"><code class="docutils literal notranslate"><span class="pre">format_prompt_messages/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#format-resource-contents-2" id="id9"><code class="docutils literal notranslate"><span class="pre">format_resource_contents/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#has-pair-3" id="id10"><code class="docutils literal notranslate"><span class="pre">has_pair/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#curly-to-pairs-2" id="id11"><code class="docutils literal notranslate"><span class="pre">curly_to_pairs/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#pairs-to-curly-2" id="id12"><code class="docutils literal notranslate"><span class="pre">pairs_to_curly/2</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id13">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id3">Protected predicates</a></p>
+<ul>
+<li><p><a class="reference internal" href="#prompt-descriptors-to-json-2" id="id4"><code class="docutils literal notranslate"><span class="pre">prompt_descriptors_to_json/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#resource-descriptors-to-json-2" id="id5"><code class="docutils literal notranslate"><span class="pre">resource_descriptors_to_json/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#auto-dispatch-tool-5" id="id6"><code class="docutils literal notranslate"><span class="pre">auto_dispatch_tool/5</span></code></a></p></li>
+<li><p><a class="reference internal" href="#try-tool-call-3-7" id="id7"><code class="docutils literal notranslate"><span class="pre">try_tool_call_3/7</span></code></a></p></li>
+<li><p><a class="reference internal" href="#format-content-items-2" id="id8"><code class="docutils literal notranslate"><span class="pre">format_content_items/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#format-prompt-messages-2" id="id9"><code class="docutils literal notranslate"><span class="pre">format_prompt_messages/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#format-resource-contents-2" id="id10"><code class="docutils literal notranslate"><span class="pre">format_resource_contents/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#has-pair-3" id="id11"><code class="docutils literal notranslate"><span class="pre">has_pair/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#curly-to-pairs-2" id="id12"><code class="docutils literal notranslate"><span class="pre">curly_to_pairs/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#pairs-to-curly-2" id="id13"><code class="docutils literal notranslate"><span class="pre">pairs_to_curly/2</span></code></a></p></li>
+</ul>
+</li>
 <li><p><a class="reference internal" href="#private-predicates" id="id14">Private predicates</a></p></li>
 <li><p><a class="reference internal" href="#operators" id="id15">Operators</a></p></li>
 </ul>
@@ -517,8 +526,11 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">tool_descriptors_to_json(+list,+object_identifier,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
-<hr class="docutils" />
 </section>
+</section>
+<hr class="docutils" />
+<section id="protected-predicates">
+<h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
 <section id="prompt-descriptors-to-json-2">
 <span id="mcp-server-application-0-prompt-descriptors-to-json-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">prompt_descriptors_to_json/2</span></code></a><a class="headerlink" href="#prompt-descriptors-to-json-2" title="Link to this heading"></a></h3>
 <p>Converts prompt descriptors (3-arg or 4-arg) into MCP JSON prompt definitions.</p>
@@ -730,10 +742,6 @@
 </section>
 </section>
 <hr class="docutils" />
-<section id="protected-predicates">
-<h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
-<p>(no local declarations; see entity ancestors if any)</p>
-</section>
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
 <p>(no local declarations; see entity ancestors if any)</p>
@@ -749,7 +757,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="mcp_server_adapter_protocol_0.html" class="btn btn-neutral float-left" title="mcp_server_adapter_protocol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="mcp_tool_protocol_0.html" class="btn btn-neutral float-right" title="mcp_tool_protocol" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="mcp_server_spec_protocol_0.html" class="btn btn-neutral float-right" title="mcp_server_spec_protocol" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

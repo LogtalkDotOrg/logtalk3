@@ -24,6 +24,7 @@
 	logtalk_load(json_rpc(loader)),
 	logtalk_load(options(loader)),
 	logtalk_load(term_io(loader)),
+	logtalk_load(http_server(loader)),
 	logtalk_load([
 		mcp_tool_protocol,
 		mcp_prompt_protocol,
@@ -31,7 +32,11 @@
 		mcp_multiround_protocol,
 		mcp_cache_protocol,
 		mcp_server_adapter_protocol,
+		mcp_server_spec_protocol,
 		mcp_server_application,
+		mcp_server_2025_06_18_spec,
+		mcp_server_2026_07_28_spec,
+		mcp_server_stdio_transport,
 		mcp_server_2025_06_18_adapter,
 		mcp_server_2026_07_28_adapter,
 		mcp_server
@@ -39,3 +44,17 @@
 		optimize(on)
 	])
 )).
+
+:- if(current_logtalk_flag(threads, supported)).
+
+	:- initialization((
+		logtalk_load(format(loader)),
+		logtalk_load(http_server(loader)),
+		logtalk_load([
+			mcp_server_streamable_http_transport
+		], [
+			optimize(on)
+		])
+	)).
+
+:- endif.

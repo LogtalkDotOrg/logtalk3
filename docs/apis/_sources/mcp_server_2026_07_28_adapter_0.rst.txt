@@ -8,14 +8,14 @@
 ``mcp_server_2026_07_28_adapter``
 =================================
 
-MCP 2026-07-28 specification adapter. Synchronous request engine over stdio. Implements discovery, tools/prompts/resources, multi-round tool results (MRTR), caching, progress, and subscriptions. Cancellation of ``subscriptions/listen`` is supported when ``notifications/cancelled`` is read after the listen acknowledgment; mid-request cancellation of ordinary calls is best-effort only under synchronous dispatch. Never writes JSON-RPC requests to stdout.
+Legacy MCP 2026-07-28 stdio transport adapter for backwards compatibility. Delegates protocol handling to ``mcp_server_2026_07_28_spec``.
 
 | **Availability:** 
 |    ``logtalk_load(mcp_server(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-08-14
+| **Version:** 2:0:0
+| **Date:** 2026-08-21
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -23,18 +23,14 @@ MCP 2026-07-28 specification adapter. Synchronous request engine over stdio. Imp
 
 | **Implements:**
 |    ``public`` :ref:`mcp_server_adapter_protocol <mcp_server_adapter_protocol/0>`
-| **Imports:**
-|    ``public`` :ref:`mcp_server_application <mcp_server_application/0>`
 | **Uses:**
-|    :ref:`json_rpc <json_rpc/0>`
-|    :ref:`list <list/0>`
-|    :ref:`term_io <term_io/0>`
+|    :ref:`mcp_server_2026_07_28_spec <mcp_server_2026_07_28_spec/0>`
 
 | **Remarks:**
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`mcp_server_application/0::auto_dispatch_tool/5`  :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`mcp_server_adapter_protocol/0::cleanup/0`  :ref:`mcp_server_application/0::curly_to_pairs/2`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`mcp_server_application/0::format_content_items/2`  :ref:`mcp_server_application/0::format_prompt_messages/2`  :ref:`mcp_server_application/0::format_resource_contents/2`  :ref:`mcp_server_application/0::has_pair/3`  :ref:`mcp_server_adapter_protocol/0::notify/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`mcp_server_application/0::pairs_to_curly/2`  :ref:`mcp_server_application/0::prompt_descriptors_to_json/2`  :ref:`mcp_server_adapter_protocol/0::protocol_version/1`  :ref:`mcp_server_application/0::resource_descriptors_to_json/2`  :ref:`mcp_server_adapter_protocol/0::start/4`  :ref:`mcp_server_application/0::tool_descriptors_to_json/3`  :ref:`mcp_server_application/0::try_tool_call_3/7`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+|     :ref:`mcp_server_adapter_protocol/0::cleanup/0`  :ref:`mcp_server_adapter_protocol/0::notify/1`  :ref:`mcp_server_adapter_protocol/0::spec/1`  :ref:`mcp_server_adapter_protocol/0::start/4`  
 
 .. contents::
    :local:
@@ -43,24 +39,7 @@ MCP 2026-07-28 specification adapter. Synchronous request engine over stdio. Imp
 Public predicates
 -----------------
 
-.. index:: emit_progress/6
-.. _mcp_server_2026_07_28_adapter/0::emit_progress/6:
-
-``emit_progress/6``
-^^^^^^^^^^^^^^^^^^^
-
-Emits a notifications/progress notification for the current request.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``emit_progress(Token,RequestId,Output,ProgressValue,Total,Message)``
-| **Mode and number of proofs:**
-|    ``emit_progress(+term,+term,+stream,+number,+number,+atom)`` - ``one``
-
-
-------------
+(no local declarations; see entity ancestors if any)
 
 Protected predicates
 --------------------
@@ -70,41 +49,7 @@ Protected predicates
 Private predicates
 ------------------
 
-.. index:: output_stream_/1
-.. _mcp_server_2026_07_28_adapter/0::output_stream_/1:
-
-``output_stream_/1``
-^^^^^^^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``dynamic``
-
-
-------------
-
-.. index:: subscription_/3
-.. _mcp_server_2026_07_28_adapter/0::subscription_/3:
-
-``subscription_/3``
-^^^^^^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``dynamic``
-
-
-------------
-
-.. index:: running_/0
-.. _mcp_server_2026_07_28_adapter/0::running_/0:
-
-``running_/0``
-^^^^^^^^^^^^^^
-
-| **Compilation flags:**
-|    ``dynamic``
-
-
-------------
+(no local declarations; see entity ancestors if any)
 
 Operators
 ---------

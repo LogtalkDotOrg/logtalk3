@@ -249,13 +249,16 @@
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#architecture">Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#stdio-versus-streamable-http-transports">stdio versus Streamable HTTP transports</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#starting-a-mcp-server">Starting a MCP server</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#spec-default">2025-06-18 spec (default)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#spec">2026-07-28 spec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#spec-and-stdio-transport-default">2025-06-18 spec and stdio transport (default)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#spec-and-stdio-transport">2026-07-28 spec and stdio transport</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#streamable-http">2026-07-28 Streamable HTTP</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#common-options">Common options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spec-specific-options">2026-07-28 spec specific options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#streamable-http-adapter-options">Streamable HTTP adapter options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#implementing-the-tool-protocol">Implementing the tool protocol</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#auto-dispatch-vs-custom-tool-call-3">Auto-dispatch vs. custom <code class="docutils literal notranslate"><span class="pre">tool_call/3</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#output-schemas-structured-tool-output">Output schemas (structured tool output)</a></li>
@@ -270,8 +273,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#resources">Resources</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#mcp-client-configuration">MCP client configuration</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#error-handling">Error handling</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id4">2025-06-18 spec</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#spec-1">2026-07-28 spec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#spec">2025-06-18 spec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">2026-07-28 spec</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#protocols-overview">Protocols overview</a><ul>
@@ -283,8 +286,8 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#supported-mcp-methods-per-spec">Supported MCP methods per spec</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id7">2025-06-18 spec</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#spec-2">2026-07-28 spec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#spec-1">2025-06-18 spec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">2026-07-28 spec</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
@@ -438,22 +441,27 @@
 <span id="library-mcp-server"></span><h1><code class="docutils literal notranslate"><span class="pre">mcp_server</span></code><a class="headerlink" href="#mcp-server" title="Link to this heading"></a></h1>
 <p>MCP (Model Context Protocol) server library for Logtalk applications.
 Makes any Logtalk application available as a local MCP server using
-stdio transport.</p>
-<p>Supports two specification dates via dedicated adapters:</p>
+stdio transport or Streamable HTTP transport.</p>
+<p>Supports two specs, 2025-06-18 and 2026-07-28, and two transports, stdio
+and streamable HTTP (with optional SSE for progress and long-lived
+subscriptions).</p>
 <ul class="simple">
-<li><p><strong>2025-06-18</strong> (default) - tools, prompts, resources, synchronous
-elicitation, structured output, resource links, version negotiation.</p></li>
-<li><p><strong>2026-07-28</strong> - discovery, tools/prompts/resources, multi-round tool
-results (MRTR), caching, progress, subscriptions, cancellation.</p></li>
+<li><p><strong>2025-06-18</strong> (default, stdio) - tools, prompts, resources,
+synchronous elicitation, structured output, resource links, version
+negotiation. Spec: <code class="docutils literal notranslate"><span class="pre">mcp_server_2025_06_18_spec</span></code>.</p></li>
+<li><p><strong>2026-07-28</strong> (stdio) - discovery, tools/prompts/resources,
+multi-round tool results (MRTR), caching, progress, subscriptions,
+cancellation. Adapter: <code class="docutils literal notranslate"><span class="pre">mcp_server_2026_07_28_spec</span></code>.</p></li>
+<li><p><strong>2026-07-28</strong> (Streamable HTTP) - same protocol semantics as the 2026
+stdio adapter, over HTTP POST with optional SSE for progress and
+long-lived subscriptions. Transport:
+<code class="docutils literal notranslate"><span class="pre">mcp_server_streamable_http_transport</span></code>.</p></li>
 </ul>
-<p>The adapter used by a server instance can be selected using the
-<code class="docutils literal notranslate"><span class="pre">protocol_adapter(Adapter)</span></code> option. The default adapter is
-<code class="docutils literal notranslate"><span class="pre">mcp_server_2025_06_18_adapter</span></code>, preserving compatibility with the
-initial library version.</p>
-<p>Both adapters implement a simple synchronous handling of server
+<p>The stdio adapters implement simple synchronous handling of server
 requests. As a consequence, client <code class="docutils literal notranslate"><span class="pre">notifications/cancelled</span></code> can only
-be used to drop matching subscriptions entries (i.e., listen cancel) and
-cannot be used to cancel in-flight request.</p>
+be used to drop matching subscription entries (i.e., listen cancel) and
+cannot cancel in-flight work. The Streamable HTTP adapter supports
+request-scoped SSE progress and subscription fan-out via <code class="docutils literal notranslate"><span class="pre">notify/1</span></code>.</p>
 <p>Specification references:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://modelcontextprotocol.io/specification/2025-06-18">https://modelcontextprotocol.io/specification/2025-06-18</a></p></li>
@@ -480,17 +488,20 @@ link in a web browser.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(mcp_server(tester)).
 </pre></div>
 </div>
-<p>This runs both 2025-06-18 and 2026-07-28 test sets.</p>
+<p>This runs the 2025-06-18, 2026-07-28 (stdio), and Streamable HTTP test
+sets.</p>
 </section>
 <section id="architecture">
 <h2>Architecture<a class="headerlink" href="#architecture" title="Link to this heading"></a></h2>
-<p>This library is designed to support adding new MCP specs by implementing
-<code class="docutils literal notranslate"><span class="pre">mcp_server_adapter_protocol</span></code>. Common server code is provided using
-the <code class="docutils literal notranslate"><span class="pre">mcp_server_application</span></code> category, which is imported by the
-current <code class="docutils literal notranslate"><span class="pre">mcp_server_2025_06_18_adapter</span></code> and
-<code class="docutils literal notranslate"><span class="pre">mcp_server_2026_07_28_adapter</span></code> adapters. A facade object,
-<code class="docutils literal notranslate"><span class="pre">mcp_server</span></code> allow selecting a specific spec/adapter using a predicate
-option.</p>
+<p>This library is designed to support adding new MCP specs and transports
+by implementing <code class="docutils literal notranslate"><span class="pre">mcp_server_adapter_protocol</span></code>. Common server code is
+provided using the <code class="docutils literal notranslate"><span class="pre">mcp_server_application</span></code> category. A facade object,
+<code class="docutils literal notranslate"><span class="pre">mcp_server</span></code>, allows selecting specific spec and transport using the
+<code class="docutils literal notranslate"><span class="pre">spec/1</span></code> and <code class="docutils literal notranslate"><span class="pre">transport/1</span></code> options. The legacy
+<code class="docutils literal notranslate"><span class="pre">protocol_adapter/1</span></code> option is still supported for backwards
+compatibility.</p>
+<p>The Streamable HTTP adapter additionally depends on the <code class="docutils literal notranslate"><span class="pre">http_server</span></code>
+library (and optionally <code class="docutils literal notranslate"><span class="pre">http_sse</span></code> helpers) for listening and framing.</p>
 <p>There’s also a set of protocols for the different MCP facets:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">mcp_tool_protocol</span></code></p></li>
@@ -502,6 +513,94 @@ option.</p>
 <p>An application object is only required to implement protocols for the
 features it provides.</p>
 </section>
+<section id="stdio-versus-streamable-http-transports">
+<h2>stdio versus Streamable HTTP transports<a class="headerlink" href="#stdio-versus-streamable-http-transports" title="Link to this heading"></a></h2>
+<p>Both transports implement <code class="docutils literal notranslate"><span class="pre">mcp_server_adapter_protocol</span></code>. What differs
+is how JSON-RPC is carried and a few transport-only features.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>stdio transport</p></th>
+<th class="head"><p>Streamable HTTP transport</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Objects</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mcp_server_stdio_transport</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">mcp_server_streamable_http_transport</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Transport</p></td>
+<td><p>Process stdin/stdout
+(newline-delimited JSON-RPC)</p></td>
+<td><p>HTTP <code class="docutils literal notranslate"><span class="pre">POST</span></code> to a path (default
+<code class="docutils literal notranslate"><span class="pre">/mcp</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p>Spec versions</p></td>
+<td><p>2025-06-18 or 2026-07-28</p></td>
+<td><p>2026-07-28 only</p></td>
+</tr>
+<tr class="row-odd"><td><p>Client model</p></td>
+<td><p>Client spawns the server as a
+subprocess</p></td>
+<td><p>Client talks to a listening URL</p></td>
+</tr>
+<tr class="row-even"><td><p>I/O in <code class="docutils literal notranslate"><span class="pre">start/4</span></code></p></td>
+<td><p>Reads and writes the given
+streams</p></td>
+<td><p>Opens an <code class="docutils literal notranslate"><span class="pre">http_server</span></code> listener;
+stream arguments are unused</p></td>
+</tr>
+<tr class="row-odd"><td><p>Progress</p></td>
+<td><p>Stdio notifications when
+applicable</p></td>
+<td><p>Optional SSE (<code class="docutils literal notranslate"><span class="pre">text/event-stream</span></code>)
+when a <code class="docutils literal notranslate"><span class="pre">progressToken</span></code> is present</p></td>
+</tr>
+<tr class="row-even"><td><p>Subscriptions</p></td>
+<td><p>Stdio listen loop</p></td>
+<td><p>Long-lived SSE plus <code class="docutils literal notranslate"><span class="pre">notify/1</span></code> fan-out</p></td>
+</tr>
+<tr class="row-odd"><td><p>Extra options</p></td>
+<td><p>Spec options
+(<code class="docutils literal notranslate"><span class="pre">instructions</span></code>,
+<code class="docutils literal notranslate"><span class="pre">cache_*</span></code>, …)</p></td>
+<td><p>Plus <code class="docutils literal notranslate"><span class="pre">http_port</span></code>, <code class="docutils literal notranslate"><span class="pre">http_bind</span></code>,
+<code class="docutils literal notranslate"><span class="pre">http_path</span></code>, <code class="docutils literal notranslate"><span class="pre">http_origin_check</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>Application objects do <strong>not</strong> change between transports. Only the
+<code class="docutils literal notranslate"><span class="pre">spec/1</span></code> and <code class="docutils literal notranslate"><span class="pre">transport/1</span></code> options selects the path:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% stdio, 2025</span>
+<span class="err">``</span>spec(<span class="s">&#39;2025-06-18&#39;</span>), <span class="err">``</span>transport(stdio)<span class="err">``</span>
+
+<span class="c">% stdio, 2026</span>
+<span class="err">``</span>spec(<span class="s">&#39;2026-07-28&#39;</span>), <span class="err">``</span>transport(stdio)<span class="err">``</span>
+
+<span class="c">% HTTP, 2026 protocol semantics</span>
+<span class="err">``</span>spec(<span class="s">&#39;2026-07-28&#39;</span>), <span class="err">``</span>transport(streamable_http)<span class="err">``</span>
+</pre></div>
+</div>
+<p>Use <strong>stdio</strong> with desktop MCP clients that launch a command and speak
+MCP on pipes. Use <strong>Streamable HTTP</strong> for remote or multi-client access,
+reverse proxies, or clients that <code class="docutils literal notranslate"><span class="pre">POST</span></code> JSON-RPC (with optional SSE
+for progress and subscriptions).</p>
+<p>Mental model:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="nv">Application</span> (mcp_<span class="o">*</span><span class="nv">_protocol</span>)
+        |
+        v
+mcp_server_application   (shared dispatch, <span class="nv">MRTR</span>, schemas, ...)
+        |
+        <span class="o">+--&gt;</span> <span class="m">2025</span> stdio spec <span class="o">--------&gt;</span> stdin<span class="o">/</span>stdout
+        <span class="o">+--&gt;</span> <span class="m">2026</span> stdio spec <span class="o">--------&gt;</span> stdin<span class="o">/</span>stdout
+        <span class="o">+--&gt;</span> <span class="nv">Streamable</span> <span class="nv">HTTP</span> adapter <span class="o">---&gt;</span> http_server <span class="o">+</span> optional <span class="nv">SSE</span>
+</pre></div>
+</div>
+<p>Always start servers through the <code class="docutils literal notranslate"><span class="pre">mcp_server</span></code> facade. For unit tests
+or an external HTTP stack, the Streamable HTTP adapter also exposes
+<code class="docutils literal notranslate"><span class="pre">prepare/2</span></code>, <code class="docutils literal notranslate"><span class="pre">handle_mcp_request/4</span></code>, and <code class="docutils literal notranslate"><span class="pre">cleanup/0</span></code> without
+opening a listener.</p>
+</section>
 <section id="starting-a-mcp-server">
 <h2>Starting a MCP server<a class="headerlink" href="#starting-a-mcp-server" title="Link to this heading"></a></h2>
 <p>Starting a MCP server requires at least a server name and the
@@ -509,8 +608,8 @@ application server object and optionally a list of options to customize
 the server. Always use the <code class="docutils literal notranslate"><span class="pre">mcp_server</span></code> facade object to start a
 server (the adapters are not meant to be used directly). Some examples,
 assuming a <code class="docutils literal notranslate"><span class="pre">my_tools</span></code> application object:</p>
-<section id="spec-default">
-<span id="id1"></span><h3>2025-06-18 spec (default)<a class="headerlink" href="#spec-default" title="Link to this heading"></a></h3>
+<section id="spec-and-stdio-transport-default">
+<span id="id1"></span><h3>2025-06-18 spec and stdio transport (default)<a class="headerlink" href="#spec-and-stdio-transport-default" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> mcp_server<span class="o">::</span>start(<span class="s">&#39;my-server&#39;</span>, my_tools).
 </pre></div>
 </div>
@@ -522,10 +621,10 @@ assuming a <code class="docutils literal notranslate"><span class="pre">my_tools
 </pre></div>
 </div>
 </section>
-<section id="spec">
-<span id="id2"></span><h3>2026-07-28 spec<a class="headerlink" href="#spec" title="Link to this heading"></a></h3>
+<section id="spec-and-stdio-transport">
+<span id="id2"></span><h3>2026-07-28 spec and stdio transport<a class="headerlink" href="#spec-and-stdio-transport" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> mcp_server<span class="o">::</span>start(<span class="s">&#39;my-server&#39;</span>, my_tools, [
-        protocol_adapter(mcp_server_2026_07_28_adapter),
+        spec(<span class="s">&#39;2026-07-28&#39;</span>),
         server_version(<span class="s">&#39;2.0.0&#39;</span>),
         server_title(<span class="s">&#39;My Server&#39;</span>),
         instructions(<span class="s">&#39;Optional server instructions for clients.&#39;</span>),
@@ -534,9 +633,35 @@ assuming a <code class="docutils literal notranslate"><span class="pre">my_tools
     ]).
 </pre></div>
 </div>
-<p>There should either be no standard output or only a Prolog backend term
-input prompt. Spurious standard output will break the connection between
-an MCP client and the MCP server.</p>
+<p>For stdio transports there should either be no standard output or only a
+Prolog backend term input prompt. Spurious standard output will break
+the connection between an MCP client and the MCP server.</p>
+</section>
+<section id="streamable-http">
+<span id="id3"></span><h3>2026-07-28 Streamable HTTP<a class="headerlink" href="#streamable-http" title="Link to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> mcp_server<span class="o">::</span>start(<span class="s">&#39;my-server&#39;</span>, my_tools, [
+        spec(<span class="s">&#39;2026-07-28&#39;</span>),
+        transport(streamable_http),
+        server_version(<span class="s">&#39;2.0.0&#39;</span>),
+        server_title(<span class="s">&#39;My Server&#39;</span>),
+        instructions(<span class="s">&#39;Optional server instructions for clients.&#39;</span>),
+        http_port(<span class="m">8080</span>),
+        http_bind(<span class="s">&#39;127.0.0.1&#39;</span>),
+        http_path(<span class="s">&#39;/mcp&#39;</span>),
+        http_origin_check(<span class="k">true</span>)
+    ]).
+</pre></div>
+</div>
+<p>The server listens for <code class="docutils literal notranslate"><span class="pre">POST</span></code> requests at the configured bind address,
+port, and path (default <code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8080/mcp</span></code>). Clients must
+send <code class="docutils literal notranslate"><span class="pre">MCP-Protocol-Version:</span> <span class="pre">2026-07-28</span></code> and a JSON-RPC body using the
+2026 <code class="docutils literal notranslate"><span class="pre">_meta</span></code> conventions. When a <code class="docutils literal notranslate"><span class="pre">progressToken</span></code> is present, the
+response may use <code class="docutils literal notranslate"><span class="pre">text/event-stream</span></code> (SSE) for progress events and the
+final result.</p>
+<p>For unit tests and embedded HTTP stacks, call
+<code class="docutils literal notranslate"><span class="pre">mcp_server_streamable_http_transport::prepare/2</span></code> then
+<code class="docutils literal notranslate"><span class="pre">handle_mcp_request/4</span></code> without starting the listener, and finish with
+<code class="docutils literal notranslate"><span class="pre">cleanup/0</span></code>.</p>
 </section>
 </section>
 <section id="common-options">
@@ -549,17 +674,20 @@ an MCP client and the MCP server.</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">protocol_adapter(Adapter)</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">mcp_server_2025_06_18_adapter</span></code></p></td>
-<td><p>Specification
-adapter</p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">spec(Spec)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'2025-06-18'</span></code></p></td>
+<td><p>Spec selection</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">server_version(Version)</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">transport(Transport)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">stdio</span></code></p></td>
+<td><p>Transport selection</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">server_version(Version)</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">'1.0.0'</span></code></p></td>
 <td><p>Server version
 string</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">server_title(Title)</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">server_title(Title)</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">'logtalk-mcp-server'</span></code></p></td>
 <td><p>Display title</p></td>
 </tr>
@@ -567,7 +695,7 @@ string</p></td>
 </table>
 </section>
 <section id="spec-specific-options">
-<span id="id3"></span><h2>2026-07-28 spec specific options<a class="headerlink" href="#spec-specific-options" title="Link to this heading"></a></h2>
+<span id="id4"></span><h2>2026-07-28 spec specific options<a class="headerlink" href="#spec-specific-options" title="Link to this heading"></a></h2>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Option</p></th>
@@ -593,6 +721,41 @@ milliseconds (2026)</p></td>
 </tr>
 </tbody>
 </table>
+</section>
+<section id="streamable-http-adapter-options">
+<h2>Streamable HTTP adapter options<a class="headerlink" href="#streamable-http-adapter-options" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Option</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">http_port(Port)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">8080</span></code></p></td>
+<td><p>TCP port to listen on</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">http_bind(Address)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'127.0.0.1'</span></code></p></td>
+<td><p>Bind address</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">http_path(Path)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">'/mcp'</span></code></p></td>
+<td><p>HTTP path for MCP POST
+requests</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">http_origin_check(Flag)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td><p>Reject disallowed
+<code class="docutils literal notranslate"><span class="pre">Origin</span></code> headers when
+<code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>These options are validated by the <code class="docutils literal notranslate"><span class="pre">mcp_server</span></code> facade and applied
+only when <code class="docutils literal notranslate"><span class="pre">protocol_adapter(mcp_server_streamable_http_transport)</span></code> is
+selected.</p>
 </section>
 <section id="implementing-the-tool-protocol">
 <h2>Implementing the tool protocol<a class="headerlink" href="#implementing-the-tool-protocol" title="Link to this heading"></a></h2>
@@ -869,8 +1032,11 @@ mcp_server<span class="o">::</span>notify(resource_updated(<span class="s">&#39;
 </pre></div>
 </div>
 <p>The facade delegates to the active adapter. The 2025-06-18 adapter
-ignores these events. The 2026-07-28 adapter routes them through active
-subscriptions.</p>
+ignores these events. The 2026-07-28 stdio adapter and the Streamable
+HTTP adapter route them through active subscriptions. On HTTP,
+long-lived SSE connections from <code class="docutils literal notranslate"><span class="pre">subscriptions/listen</span></code> receive
+matching events; <code class="docutils literal notranslate"><span class="pre">notify/1</span></code> isolates per-subscriber failures so a dead
+stream does not abort delivery to others.</p>
 </section>
 <section id="prompts">
 <h2>Prompts<a class="headerlink" href="#prompts" title="Link to this heading"></a></h2>
@@ -1062,13 +1228,22 @@ instead:</p>
 <span class="k">}</span>
 </pre></div>
 </div>
-<p>For a 2026-07-28 server, the application loader or start goal must pass
-<code class="docutils literal notranslate"><span class="pre">protocol_adapter(mcp_server_2026_07_28_adapter)</span></code>.</p>
+<p>For a 2026-07-28 stdio server, the application loader or start goal must
+pass <code class="docutils literal notranslate"><span class="pre">protocol_adapter(mcp_server_2026_07_28_adapter)</span></code>.</p>
+<p>For Streamable HTTP, start the server with
+<code class="docutils literal notranslate"><span class="pre">protocol_adapter(mcp_server_streamable_http_transport)</span></code> and point the
+MCP client at the listen URL (for example
+<code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8080/mcp</span></code>). Each request should include:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Content-Type:</span> <span class="pre">application/json</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Accept:</span> <span class="pre">application/json,</span> <span class="pre">text/event-stream</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MCP-Protocol-Version:</span> <span class="pre">2026-07-28</span></code></p></li>
+</ul>
 </section>
 <section id="error-handling">
 <h2>Error handling<a class="headerlink" href="#error-handling" title="Link to this heading"></a></h2>
-<section id="id4">
-<span id="id5"></span><h3>2025-06-18 spec<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<section id="spec">
+<span id="id5"></span><h3>2025-06-18 spec<a class="headerlink" href="#spec" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Predicate failures result in a tool-level error with
 <code class="docutils literal notranslate"><span class="pre">isError:</span> <span class="pre">true</span></code>.</p></li>
@@ -1078,8 +1253,8 @@ term serialized as the error text.</p></li>
 <li><p>Resource read failures result in a JSON-RPC error response.</p></li>
 </ul>
 </section>
-<section id="spec-1">
-<span id="id6"></span><h3>2026-07-28 spec<a class="headerlink" href="#spec-1" title="Link to this heading"></a></h3>
+<section id="id6">
+<span id="id7"></span><h3>2026-07-28 spec<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Code</p></th>
@@ -1166,8 +1341,8 @@ resource read</p></li>
 </section>
 <section id="supported-mcp-methods-per-spec">
 <h2>Supported MCP methods per spec<a class="headerlink" href="#supported-mcp-methods-per-spec" title="Link to this heading"></a></h2>
-<section id="id7">
-<span id="id8"></span><h3>2025-06-18 spec<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<section id="spec-1">
+<span id="id8"></span><h3>2025-06-18 spec<a class="headerlink" href="#spec-1" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Method</p></th>
@@ -1223,8 +1398,8 @@ input</p></td>
 </tbody>
 </table>
 </section>
-<section id="spec-2">
-<span id="id9"></span><h3>2026-07-28 spec<a class="headerlink" href="#spec-2" title="Link to this heading"></a></h3>
+<section id="id9">
+<span id="id10"></span><h3>2026-07-28 spec<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Method</p></th>
@@ -1310,15 +1485,19 @@ request</p></td>
 </tr>
 </tbody>
 </table>
-<p>The 2026-07-28 adapter never writes JSON-RPC <strong>requests</strong> to stdout
-(only responses and notifications).</p>
+<p>The 2026-07-28 stdio adapter never writes JSON-RPC <strong>requests</strong> to
+stdout (only responses and notifications). The Streamable HTTP adapter
+likewise only returns responses and server-initiated notifications
+(progress and subscription events), never client-bound requests over the
+HTTP response channel.</p>
 </section>
 </section>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
-<p>Resource templates, completion, Streamable HTTP transport,
-authorization, and optional extensions/tasks are not currently
-implemented.</p>
+<p>Resource templates, completion, authorization, and optional
+extensions/tasks are not currently implemented. Streamable HTTP
+transport is implemented by <code class="docutils literal notranslate"><span class="pre">mcp_server_streamable_http_transport</span></code>
+(2026-07-28 protocol semantics over HTTP POST with optional SSE).</p>
 </section>
 </section>
 

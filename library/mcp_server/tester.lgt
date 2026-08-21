@@ -32,7 +32,11 @@
 		mcp_multiround_protocol,
 		mcp_cache_protocol,
 		mcp_server_adapter_protocol,
+		mcp_server_spec_protocol,
 		mcp_server_application,
+		mcp_server_2025_06_18_spec,
+		mcp_server_2026_07_28_spec,
+		mcp_server_stdio_transport,
 		mcp_server_2025_06_18_adapter,
 		mcp_server_2026_07_28_adapter,
 		mcp_server
@@ -45,8 +49,37 @@
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(tests_2025_06_18, [hook(lgtunit)]),
 	logtalk_load(tests_2026_07_28, [hook(lgtunit)]),
-	lgtunit::run_test_sets([
-		tests_2025_06_18,
-		tests_2026_07_28
-	])
+	logtalk_load(tests_stdio, [hook(lgtunit)])
 )).
+
+:- if(current_logtalk_flag(threads, supported)).
+
+	:- initialization((
+		logtalk_load(format(loader)),
+		logtalk_load(http_server(loader)),
+		logtalk_load([
+			mcp_server_streamable_http_transport
+		], [
+			source_data(on),
+			debug(on)
+		]),
+		logtalk_load(tests_streamable_http, [hook(lgtunit)]),
+		lgtunit::run_test_sets([
+			tests_2025_06_18,
+			tests_2026_07_28,
+			tests_stdio,
+			tests_streamable_http
+		])
+	)).
+
+:- else.
+
+	:- initialization((
+		lgtunit::run_test_sets([
+			tests_2025_06_18,
+			tests_2026_07_28,
+			tests_stdio
+		])
+	)).
+
+:- endif.

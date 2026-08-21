@@ -60,6 +60,9 @@ Converts a list of tool(Name, Functor, Arity) descriptors into MCP JSON tool def
 
 ------------
 
+Protected predicates
+--------------------
+
 .. index:: prompt_descriptors_to_json/2
 .. _mcp_server_application/0::prompt_descriptors_to_json/2:
 
@@ -249,11 +252,6 @@ Converts a list of Key-Value pairs to a curly-term.
 
 
 ------------
-
-Protected predicates
---------------------
-
-(no local declarations; see entity ancestors if any)
 
 Private predicates
 ------------------

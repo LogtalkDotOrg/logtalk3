@@ -36,9 +36,7 @@
 		]
 	]).
 
-	% ---------------------------------------------------------------------
-	% Round hooks
-	% ---------------------------------------------------------------------
+	% round hooks
 
 	:- public(tool_call_round/4).
 	:- mode(tool_call_round(+atom, +list(pair), +compound, --compound), zero_or_one).

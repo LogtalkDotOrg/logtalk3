@@ -1,0 +1,1442 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
+%
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
+%
+%      http://www.apache.org/licenses/LICENSE-2.0
+%
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+:- object(mcp_server_streamable_http_transport,
+	implements(mcp_server_adapter_protocol),
+	imports(mcp_server_application)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-08-21,
+		comment is 'MCP Streamable HTTP transport (2026-07-28). Uses Logtalk ``http_server::serve_until_shutdown/5`` and a dedicated ``http_handler_protocol`` handler object. Supports specs 2025-06-18 and 2026-07-28 selected via the ``spec/1`` option and delegated to ``mcp_server_2025_06_18_spec`` or ``mcp_server_2026_07_28_spec``. Requires a multi-threaded backend for subscriptions/listen.'
+	]).
+
+	:- threaded.
+
+	:- uses(format, [
+		format/3
+	]).
+
+	:- uses(json_rpc, [
+		response/3, error_response/4, is_request/1, is_notification/1, id/2, method/2, params/2
+	]).
+
+	:- uses(json, [
+		parse/2, generate/2
+	]).
+
+	:- uses(list, [
+		append/3, member/2, memberchk/2
+	]).
+
+	:- uses(term_io, [
+		write_to_atom/2
+	]).
+
+	:- private(running_/0).
+	:- dynamic(running_/0).
+	:- mode(running_, zero_or_one).
+	:- info(running_/0, [
+		comment is 'True while the adapter has been prepared or is serving requests.'
+	]).
+
+	:- private(server_options_/1).
+	:- dynamic(server_options_/1).
+	:- mode(server_options_(-list), zero_or_one).
+	:- info(server_options_/1, [
+		comment is 'Merged server options for the active prepare/start session.',
+		argnames is ['Options']
+	]).
+
+	:- private(shutdown_control_/1).
+	:- dynamic(shutdown_control_/1).
+	:- mode(shutdown_control_(-nonvar), zero_or_one).
+
+	:- info(shutdown_control_/1, [
+		comment is 'Token passed to http_server::request_shutdown/1 when stopping the listener.',
+		argnames is ['Control']
+	]).
+
+	% subscription_(SubscriptionId, RequestId, Filters, Stream)
+	% The listen worker blocks with threaded_wait(subscription_msg(SubscriptionId, Msg)).
+	% notify/1 and cancellation use threaded_notify/1 with the same message term.
+	:- private(subscription_/4).
+	:- dynamic(subscription_/4).
+	:- mode(subscription_(-atom, -nonvar, -list, -nonvar), zero_or_more).
+	:- info(subscription_/4, [
+		comment is 'Active subscriptions/listen registration. Synchronization uses threaded_wait/1 and threaded_notify/1 tagged by SubscriptionId.',
+		argnames is ['SubscriptionId', 'RequestId', 'Filters', 'Stream']
+	]).
+
+	:- private(progress_events_/1).
+	:- dynamic(progress_events_/1).
+	:- mode(progress_events_(-list), zero_or_one).
+	:- info(progress_events_/1, [
+		comment is 'Buffered notifications/progress events when SSE mode is not live.',
+		argnames is ['Events']
+	]).
+
+	:- private(progress_token_/1).
+	:- dynamic(progress_token_/1).
+	:- mode(progress_token_(-nonvar), zero_or_one).
+	:- info(progress_token_/1, [
+		comment is 'progressToken from the current request, or none.',
+		argnames is ['Token']
+	]).
+
+	:- private(sse_output_/1).
+	:- dynamic(sse_output_/1).
+	:- mode(sse_output_(-stream), zero_or_one).
+	:- info(sse_output_/1, [
+		comment is 'Live response stream for incremental SSE writes.',
+		argnames is ['Stream']
+	]).
+
+	:- private(sse_mode_/1).
+	:- dynamic(sse_mode_/1).
+	:- mode(sse_mode_(-atom), zero_or_one).
+	:- info(sse_mode_/1, [
+		comment is 'Current SSE delivery mode: live, buffered, or none.',
+		argnames is ['Mode']
+	]).
+
+	spec(Version) :-
+		(	server_options_(Options),
+			member(spec(Version), Options) ->
+			true
+		;	Version = '2026-07-28'
+		).
+
+	start(Application, _Input, _Output, UserOptions) :-
+		prepare(Application, UserOptions),
+		server_options_(Options),
+		catch(http_server_loop(Options), Error, (cleanup, throw(Error))),
+		cleanup.
+
+	% prepare/2 sets up adapter state without starting the HTTP listener.
+	% Used by unit tests and by embeddings that drive handle_mcp_request/4
+	% from an external HTTP stack.
+	:- public(prepare/2).
+	:- mode(prepare(+object_identifier, +list), one_or_error).
+	:- info(prepare/2, [
+		comment is 'Initializes adapter state for Application with Options without opening a listener. Pair with handle_mcp_request/4 and cleanup/0.',
+		argnames is ['Application', 'Options']
+	]).
+
+	prepare(Application, UserOptions) :-
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options0),
+		(	catch(Application::capabilities(Capabilities), _, fail) ->
+			true
+		;	Capabilities = []
+		),
+		Options = [application(Application), application_capabilities(Capabilities)| Options0],
+		setup_state(Options),
+		(	member(spec('2025-06-18'), Options) ->
+			mcp_server_2025_06_18_spec::prepare(Application, Options)
+		;	mcp_server_2026_07_28_spec::prepare(Application, Options)
+		).
+
+	% notify/1 never fails the caller. Per-subscriber errors are isolated:
+	% a dead stream or queue causes that subscription to be dropped; other
+	% subscribers still receive the event.
+	notify(Event) :-
+		catch(
+			(	findall(
+					subscription_(SubId, ReqId, Filters, Stream),
+					subscription_(SubId, ReqId, Filters, Stream),
+					Subs
+				),
+				dispatch_event(Subs, Event)
+			),
+			Error,
+			log_notify_error(Event, Error)
+		),
+		!.
+	notify(_Event).
+
+	log_notify_error(Event, Error) :-
+		catch(
+			format(user_error,
+				'~w: notify(~w) failed: ~w~n',
+				[mcp_server_streamable_http_transport, Event, Error]),
+			_,
+			true
+		).
+
+	cleanup :-
+		catch(mcp_server_2025_06_18_spec::cleanup, _, true),
+		catch(mcp_server_2026_07_28_spec::cleanup, _, true),
+		(	retract(shutdown_control_(Control)) ->
+			catch(http_server::request_shutdown(Control), _, true)
+		;	true
+		),
+		% Stop all live subscriptions
+		findall(SubId, subscription_(SubId, _, _, _), SubIds),
+		stop_all_subscriptions(SubIds),
+		retractall(running_),
+		retractall(server_options_(_)),
+		retractall(subscription_(_,_,_,_)),
+		retractall(progress_events_(_)),
+		retractall(progress_token_(_)),
+		retractall(sse_output_(_)),
+		retractall(sse_mode_(_)).
+
+	stop_all_subscriptions([]).
+	stop_all_subscriptions([SubId| Rest]) :-
+		signal_subscription_stop(SubId),
+		stop_all_subscriptions(Rest).
+
+	signal_subscription_stop(SubId) :-
+		catch(threaded_notify(subscription_msg(SubId, stop)), _, true).
+
+	setup_state(Options) :-
+		cleanup,
+		assertz(server_options_(Options)),
+		assertz(running_).
+
+	% live SSE stream registration (called by the HTTP handler)
+
+	:- public(attach_sse_stream/1).
+	:- mode(attach_sse_stream(+stream), one).
+	:- info(attach_sse_stream/1, [
+		comment is 'Registers a live output stream for incremental SSE writes. Headers must already have been written. Each emit_progress/5 call writes and flushes immediately.',
+		argnames is ['Stream']
+	]).
+
+	attach_sse_stream(Stream) :-
+		retractall(sse_output_(_)),
+		retractall(sse_mode_(_)),
+		assertz(sse_output_(Stream)),
+		assertz(sse_mode_(live)).
+
+	:- public(detach_sse_stream/0).
+	:- mode(detach_sse_stream, one).
+	:- info(detach_sse_stream/0, [
+		comment is 'Clears any live SSE output stream registration.'
+	]).
+
+	detach_sse_stream :-
+		retractall(sse_output_(_)),
+		retractall(sse_mode_(_)).
+
+	:- public(sse_headers/1).
+	:- mode(sse_headers(-list), one).
+	:- info(sse_headers/1, [
+		comment is 'HTTP headers for an SSE response body.',
+		argnames is ['Headers']
+	]).
+
+	sse_headers([
+		'Content-Type'-'text/event-stream; charset=utf-8',
+		'Cache-Control'-'no-cache',
+		'X-Accel-Buffering'-'no',
+		'Connection'-'close'
+	]).
+
+	% HTTP listener via Logtalk http_server library
+
+	http_server_loop(Options) :-
+		^^option(http_port(Port), Options),
+		^^option(http_bind(Bind), Options),
+		^^option(http_path(Path), Options),
+		Control = mcp_http_shutdown(Port),
+		retractall(shutdown_control_(_)),
+		assertz(shutdown_control_(Control)),
+		format(
+			user_error,
+			'~w: listening on http://~w:~w~w~n',
+			[mcp_server_streamable_http_transport, Bind, Port, Path]
+		),
+		% per_connection workers so subscriptions/listen can block while
+		% other requests (e.g. notifications/cancelled, notify side-effects)
+		% are still accepted on the same port
+		http_server::serve_until_shutdown(
+			Bind, Port,
+			mcp_streamable_http_handler,
+			Control,
+			[scheme(http), transport(default), workers(per_connection)]
+		).
+
+	:- public(current_options/1).
+	:- mode(current_options(-list), zero_or_one).
+	:- info(current_options/1, [
+		comment is 'Unified with the options list established by prepare/2 or start/4.',
+		argnames is ['Options']
+	]).
+
+	current_options(Options) :-
+		server_options_(Options).
+
+	:- public(handle_mcp_request/4).
+	:- mode(handle_mcp_request(+atom, +list, +atom, -compound), one).
+	:- info(handle_mcp_request/4, [
+		comment is 'Handles one MCP HTTP request. Method is an uppercase HTTP method atom. Headers is a list of Name-Value pairs. Body is the raw request body atom. HTTPResponse is http_response(Status, Headers, BodyAtom) or http_response(already_sent, Headers, BodyAtom).',
+		argnames is ['Method', 'Headers', 'Body', 'HTTPResponse']
+	]).
+
+	handle_mcp_request(Method, Headers, Body, HTTPResponse) :-
+		(	Method == 'POST' ->
+			handle_post(Headers, Body, HTTPResponse)
+		;	HTTPResponse = http_response(405,
+				['Allow'-'POST', 'Content-Type'-'text/plain; charset=utf-8'],
+				'Method Not Allowed')
+		).
+
+	handle_post(Headers, Body, HTTPResponse) :-
+		(	\+ validate_origin(Headers) ->
+			HTTPResponse = http_response(403, ['Content-Type'-'text/plain; charset=utf-8'], 'Forbidden')
+		;	catch(parse(atom(Body), Message), _, fail) ->
+			handle_http_message(Message, Headers, HTTPResponse)
+		;	HTTPResponse = http_response(400, ['Content-Type'-'text/plain; charset=utf-8'], 'Invalid JSON-RPC body')
+		).
+
+	handle_http_message(Message, Headers, HTTPResponse) :-
+		(	is_notification(Message) ->
+			handle_notification(Message),
+			HTTPResponse = http_response(202, [], '')
+		;	is_request(Message) ->
+			id(Message, Id),
+			(	valid_request_id(Id) ->
+				method(Message, Method),
+				(	params(Message, Params0) ->
+					Params = Params0
+				;	Params = {}
+				),
+				spec(Version),
+				(	Version == '2025-06-18' ->
+					handle_via_protocol_2025(Message, HTTPResponse)
+				;	http_needs_stream_path(Method, Params, Headers) ->
+					(	validate_2026(Method, Headers, Params, Id, Err) ->
+						HTTPResponse = Err
+					;	dispatch_method(Method, Params, Id, HTTPResponse)
+					)
+				;	handle_via_protocol_2026(Message, Headers, HTTPResponse)
+				)
+			;	HTTPResponse = http_response(400, ['Content-Type'-'text/plain; charset=utf-8'], 'Invalid request id')
+			)
+		;	HTTPResponse = http_response(400, ['Content-Type'-'text/plain; charset=utf-8'], 'Not a JSON-RPC request or notification')
+		).
+
+	valid_request_id(Id) :-
+		(	atom(Id) ->
+			Id \== ''
+		;	integer(Id)
+		).
+
+	% protocol-handler bridge (non-SSE path)
+
+	% SSE path: progressToken, subscriptions/listen, or Accept: text/event-stream
+	http_needs_stream_path('subscriptions/listen', _, _) :-
+		!.
+	http_needs_stream_path(_Method, Params, Headers) :-
+		(	^^has_pair(Params, '_meta', Meta),
+			^^has_pair(Meta, progressToken, _) ->
+			true
+		;	header_value(Headers, 'Accept', Accept),
+			sub_atom(Accept, _, _, _, 'text/event-stream') ->
+			true
+		;	fail
+		).
+
+	handle_via_protocol_2025(Message, HTTPResponse) :-
+		server_options_(Options),
+		mcp_server_2025_06_18_spec::handle_message(Message, Options, Outcome),
+		render_protocol_outcome(Outcome, HTTPResponse).
+
+	handle_via_protocol_2026(Message, Headers, HTTPResponse) :-
+		(	is_request(Message) ->
+			id(Message, Id),
+			method(Message, Method),
+			(params(Message, Params0) -> Params = Params0 ; Params = {}),
+			(	validate_2026(Method, Headers, Params, Id, ErrorResponse) ->
+				HTTPResponse = ErrorResponse
+			;	server_options_(Options),
+				mcp_server_2026_07_28_spec::handle_message(Message, Options, Outcome),
+				render_protocol_outcome_2026(Outcome, HTTPResponse)
+			)
+		;	server_options_(Options),
+			mcp_server_2026_07_28_spec::handle_message(Message, Options, Outcome),
+			render_protocol_outcome_2026(Outcome, HTTPResponse)
+		).
+
+	render_protocol_outcome(reply(Response), http_response(200, ['Content-Type'-'application/json; charset=utf-8'], Body)) :-
+		!,
+		json_serialize(Response, Body).
+	render_protocol_outcome(accepted, http_response(202, [], '')) :-
+		!.
+	render_protocol_outcome(no_reply, http_response(202, [], '')) :-
+		!.
+	render_protocol_outcome(_, http_response(500, ['Content-Type'-'text/plain; charset=utf-8'], 'Internal protocol outcome error')).
+
+	render_protocol_outcome_2026(reply(Response), http_response(200, ['Content-Type'-'application/json; charset=utf-8'], Body)) :-
+		!,
+		json_serialize(Response, Body).
+	render_protocol_outcome_2026(reply_with_progress(_Events, Final), HTTPResponse) :-
+		!,
+		render_protocol_outcome_2026(reply(Final), HTTPResponse).
+	render_protocol_outcome_2026(subscribe(_SubId, _Filters, Messages), HTTPResponse) :-
+		!,
+		(	Messages = [AckResponse| _] ->
+			render_protocol_outcome_2026(reply(AckResponse), HTTPResponse)
+		;	HTTPResponse = http_response(202, [], '')
+		).
+	render_protocol_outcome_2026(accepted, http_response(202, [], '')) :-
+		!.
+	render_protocol_outcome_2026(no_reply, http_response(202, [], '')) :-
+		!.
+	render_protocol_outcome_2026(_, http_response(500, ['Content-Type'-'text/plain; charset=utf-8'], 'Internal protocol outcome error')).
+
+	% succeeds when the request is invalid, binding ErrorResponse
+	% fails when the request passes 2026 transport/metadata checks
+	validate_2026(Method, Headers, Params, Id, ErrorResponse) :-
+		(	^^has_pair(Params, '_meta', Meta) ->
+			validate_2026_meta(Method, Headers, Meta, Id, ErrorResponse)
+		;	json_error(Id, -32602, 'Missing required params._meta', ErrorResponse)
+		).
+
+	validate_2026_meta(Method, Headers, Meta, Id, ErrorResponse) :-
+		(	^^has_pair(Meta, 'io.modelcontextprotocol/protocolVersion', Version) ->
+			validate_2026_version(Method, Headers, Meta, Version, Id, ErrorResponse)
+		;	json_error(Id, -32602, 'Missing required protocolVersion in _meta', ErrorResponse)
+		).
+
+	validate_2026_version(Method, Headers, Meta, Version, Id, ErrorResponse) :-
+		(	Version == '2026-07-28' ->
+			validate_2026_header(Method, Headers, Meta, Version, Id, ErrorResponse)
+		;	json_error_data(Id, -32022, 'Unsupported protocol version', {supported-['2026-07-28'], requested-Version}, ErrorResponse)
+		).
+
+	validate_2026_header(Method, Headers, Meta, Version, Id, ErrorResponse) :-
+		(	header_value(Headers, 'MCP-Protocol-Version', HV) ->
+			(	HV == Version ->
+				validate_2026_caps(Method, Meta, Id, ErrorResponse)
+			;	json_error(Id, -32602, 'HeaderMismatch: MCP-Protocol-Version', ErrorResponse)
+			)
+		;	json_error(Id, -32602, 'Missing required MCP-Protocol-Version header', ErrorResponse)
+		).
+
+	validate_2026_caps(Method, Meta, Id, ErrorResponse) :-
+		(	^^has_pair(Meta, 'io.modelcontextprotocol/clientCapabilities', _) ->
+			check_caps(Method, Meta, Id, ErrorResponse)
+		;	json_error(Id, -32602, 'Missing required clientCapabilities in _meta', ErrorResponse)
+		).
+
+	check_caps(Method, Meta, Id, ErrorResponse) :-
+		^^has_pair(Meta, 'io.modelcontextprotocol/clientCapabilities', ClientCaps),
+		(	method_requires_capability(Method, Required) ->
+			(	^^has_pair(ClientCaps, Required, _) ->
+				fail
+			;	json_error_data(Id, -32021, 'Missing required client capability', {requiredCapabilities-[Required]}, ErrorResponse)
+			)
+		;	fail
+		).
+
+	method_requires_capability('tools/call', tools).
+	method_requires_capability('tools/list', tools).
+	method_requires_capability('prompts/get', prompts).
+	method_requires_capability('prompts/list', prompts).
+	method_requires_capability('resources/read', resources).
+	method_requires_capability('resources/list', resources).
+	method_requires_capability('subscriptions/listen', subscriptions).
+
+	dispatch_method(Method, Params, Id, HTTPResponse) :-
+		catch(
+			do_dispatch(Method, Params, Id, HTTPResponse),
+			Error,
+			json_error(Id, -32603, Error, HTTPResponse)
+		).
+
+	do_dispatch('server/discover', Params, Id, HTTPResponse) :-
+		!,
+		handle_discover(Params, Id, HTTPResponse).
+	do_dispatch(initialize, _, Id, HTTPResponse) :-
+		!,
+		json_error(Id, -32600, 'initialize is not used in MCP 2026-07-28; use server/discover', HTTPResponse).
+	do_dispatch(ping, _, Id, HTTPResponse) :-
+		!,
+		json_result(Id, {resultType-complete}, HTTPResponse).
+	do_dispatch('tools/list', Params, Id, HTTPResponse) :-
+		!,
+		handle_tools_list(Params, Id, HTTPResponse).
+	do_dispatch('tools/call', Params, Id, HTTPResponse) :-
+		!,
+		handle_tools_call(Params, Id, HTTPResponse).
+	do_dispatch('prompts/list', Params, Id, HTTPResponse) :-
+		!,
+		handle_prompts_list(Params, Id, HTTPResponse).
+	do_dispatch('prompts/get', Params, Id, HTTPResponse) :-
+		!,
+		handle_prompts_get(Params, Id, HTTPResponse).
+	do_dispatch('resources/list', Params, Id, HTTPResponse) :-
+		!,
+		handle_resources_list(Params, Id, HTTPResponse).
+	do_dispatch('resources/read', Params, Id, HTTPResponse) :-
+		!,
+		handle_resources_read(Params, Id, HTTPResponse).
+	do_dispatch('subscriptions/listen', Params, Id, HTTPResponse) :-
+		!,
+		handle_subscriptions_listen(Params, Id, HTTPResponse).
+	do_dispatch(_, _, Id, HTTPResponse) :-
+		json_error(Id, -32601, 'Method not found', HTTPResponse).
+
+	handle_notification(Message) :-
+		method(Message, Method),
+		(	Method == 'notifications/cancelled' ->
+			handle_cancelled(Message)
+		;	true
+		).
+
+	handle_cancelled(Message) :-
+		(	params(Message, Params),
+			^^has_pair(Params, requestId, ReqId) ->
+			forall(
+				subscription_(SubId, ReqId, _, _),
+				signal_subscription_stop(SubId)
+			),
+			retractall(subscription_(_, ReqId, _, _))
+		;	true
+		).
+
+	handle_discover(_, Id, HTTPResponse) :-
+		server_options_(Options),
+		^^option(server_name(Name), Options),
+		^^option(server_version(Version), Options),
+		^^option(server_title(Title), Options),
+		^^option(instructions(Instructions), Options),
+		^^option(application_capabilities(Caps), Options),
+		build_caps(Caps, Capabilities),
+		resolve_cache(discover, {}, TTL, Scope, Options),
+		ServerInfo = {name-Name, title-Title, version-Version},
+		Meta = {'io.modelcontextprotocol/serverInfo'-ServerInfo},
+		(	Instructions == '' ->
+			Result = {
+				supportedVersions-['2026-07-28'], capabilities-Capabilities,
+				resultType-complete, ttlMs-TTL, cacheScope-Scope, '_meta'-Meta
+			}
+		;	Result = {
+				supportedVersions-['2026-07-28'], capabilities-Capabilities,
+				instructions-Instructions, resultType-complete, ttlMs-TTL,
+				cacheScope-Scope, '_meta'-Meta
+			}
+		),
+		json_result(Id, Result, HTTPResponse).
+
+	build_caps(AppCaps, Capabilities) :-
+		Base = [tools-{}],
+		(	member(prompts, AppCaps) ->
+			C1 = [prompts-{}| Base]
+		;	C1 = Base
+		),
+		(	member(resources, AppCaps) ->
+			C2 = [resources-{}|C1]
+		;	C2 = C1
+		),
+		C3 = [subscriptions-{}|C2],
+		^^pairs_to_curly(C3, Capabilities).
+
+	handle_tools_list(_, Id, HTTPResponse) :-
+		server_options_(Options),
+		^^option(application(App), Options),
+		App::tools(Descs),
+		^^tool_descriptors_to_json(Descs, App, JsonTools),
+		resolve_cache(tools_list, {}, TTL, Scope, Options),
+		json_result(Id, {tools-JsonTools, resultType-complete, ttlMs-TTL, cacheScope-Scope}, HTTPResponse).
+
+	handle_tools_call(Params, Id, HTTPResponse) :-
+		(	^^has_pair(Params, name, ToolName) ->
+			(	^^has_pair(Params, arguments, Args) -> true ; Args = {} ),
+			extract_progress_token(Params, ProgressToken),
+			extract_client_capabilities(Params, ClientCaps),
+			extract_input_responses(Params, InputResponses),
+			extract_request_state(Params, RequestState),
+			begin_progress(ProgressToken),
+			(	catch(
+					do_tools_call(ToolName, Args, ClientCaps, InputResponses, RequestState, ProgressToken, Id, HTTPResponse),
+					Error,
+					(	json_error(Id, -32603, Error, HTTPResponse), Fail = true)
+				) ->
+				(	nonvar(Fail) -> true
+				;	nonvar(HTTPResponse) -> true
+				;	json_error(Id, -32603, 'Tool execution failed', HTTPResponse)
+				)
+			;	json_error(Id, -32603, 'Tool execution failed', HTTPResponse)
+			),
+			end_progress
+		;	json_error(Id, -32602, 'Missing tool name', HTTPResponse)
+		).
+
+	do_tools_call(ToolName, Args, ClientCaps, InputResponses, RequestState, ProgressToken, Id, HTTPResponse) :-
+		server_options_(Options),
+		^^option(application(App), Options),
+		(	App::tools(Descs), member(tool(ToolName, Functor, Arity), Descs) ->
+			^^curly_to_pairs(Args, ArgPairs),
+			make_progress_closure(ProgressToken, Id, Progress),
+			Context = request_context(ClientCaps, InputResponses, RequestState, Progress),
+			(	catch(
+					App::tool_call_round(ToolName, ArgPairs, Context, RoundResult),
+					error(existence_error(procedure, _), _),
+					fail
+				) ->
+				handle_round_tool_result(RoundResult, Id, ProgressToken, HTTPResponse)
+			;	(	catch(^^try_tool_call_3(App, ToolName, Functor, Arity, ArgPairs, Args, Result),
+						Error, Result = error(Error)) ->
+					format_tool_result(Result, Id, ProgressToken, HTTPResponse)
+				;	json_error(Id, -32603, 'Tool execution failed', HTTPResponse)
+				)
+			)
+		;	json_error(Id, -32602, 'Unknown tool', HTTPResponse)
+		).
+
+	handle_round_tool_result(complete(Result), Id, ProgressToken, HTTPResponse) :-
+		!,
+		format_tool_result(Result, Id, ProgressToken, HTTPResponse).
+	handle_round_tool_result(input_required(InputRequests, RequestState), Id, _ProgressToken, HTTPResponse) :-
+		!,
+		% input_required is returned as JSON (not SSE) per 2026 rules for non-complete
+		(	(	InputRequests = [_| _] ; RequestState \== none
+			),
+			catch(input_requests_to_json(InputRequests, JsonRequests), _, fail) ->
+			(	RequestState == none ->
+				Result = {resultType-input_required, inputRequests-JsonRequests}
+			;	Result = {resultType-input_required, inputRequests-JsonRequests, requestState-RequestState}
+			),
+			json_result(Id, Result, HTTPResponse)
+		;	json_error(Id, -32602, 'input_required must have nonempty requests or non-none state', HTTPResponse)
+		).
+	handle_round_tool_result(Other, Id, _, HTTPResponse) :-
+		json_error(Id, -32603, Other, HTTPResponse).
+
+	format_tool_result(Result, Id, ProgressToken, HTTPResponse) :-
+		tool_result_body(Result, Id, BodyTerm),
+		finalize_response(Id, BodyTerm, ProgressToken, HTTPResponse).
+
+	tool_result_body(text(Text), Id, Msg) :-
+		!,
+		response({content-[{type-text, text-Text}], resultType-complete}, Id, Msg).
+	tool_result_body(error(E), Id, Msg) :-
+		!,
+		(atom(E) -> T = E ; write_to_atom(E, T)),
+		response({content-[{type-text, text-T}], isError- @true, resultType-complete}, Id, Msg).
+	tool_result_body(results(Items), Id, Msg) :-
+		!,
+		^^format_content_items(Items, Content),
+		response({content-Content, resultType-complete}, Id, Msg).
+	tool_result_body(structured(SC), Id, Msg) :-
+		!,
+		write_to_atom(SC, T),
+		response({content-[{type-text, text-T}], structuredContent-SC, resultType-complete}, Id, Msg).
+	tool_result_body(structured(Items, SC), Id, Msg) :-
+		!,
+		^^format_content_items(Items, Content),
+		response({content-Content, structuredContent-SC, resultType-complete}, Id, Msg).
+	tool_result_body(Other, Id, Msg) :-
+		(atom(Other) -> T = Other ; write_to_atom(Other, T)),
+		error_response(-32603, T, Id, Msg).
+
+	% progress / SSE
+
+	extract_progress_token(Params, Token) :-
+		(	^^has_pair(Params, '_meta', Meta),
+			^^has_pair(Meta, progressToken, Token0) ->
+			Token = Token0
+		;	Token = none
+		).
+
+	extract_client_capabilities(Params, Caps) :-
+		(	^^has_pair(Params, '_meta', Meta),
+			^^has_pair(Meta, 'io.modelcontextprotocol/clientCapabilities', Caps0) ->
+			Caps = Caps0
+		;	Caps = {}
+		).
+
+	extract_input_responses(Params, Responses) :-
+		(	^^has_pair(Params, inputResponses, Raw) ->
+			normalize_input_responses(Raw, Responses)
+		;	Responses = []
+		).
+
+	normalize_input_responses([], []) :-
+		!.
+	normalize_input_responses([Item| Rest], [input_response(Key, Value)| Out]) :-
+		!,
+		(	^^has_pair(Item, key, Key) -> true ; Key = unknown),
+		(	^^has_pair(Item, value, Value) -> true
+		;	^^has_pair(Item, action, Action) ->
+			(	Action == accept, ^^has_pair(Item, content, Content) -> Value = accept(Content)
+			;	Action == accept -> Value = accept({})
+			;	Action == decline -> Value = decline
+			;	Value = cancel
+			)
+		;	Value = Item
+		),
+		normalize_input_responses(Rest, Out).
+	normalize_input_responses(_, []).
+
+	extract_request_state(Params, State) :-
+		(	^^has_pair(Params, requestState, State0) -> State = State0 ; State = none ).
+
+	begin_progress(none) :-
+		!,
+		retractall(progress_events_(_)),
+		retractall(progress_token_(_)),
+		% do not clear sse_output_/sse_mode_ — handler may have attached already
+		assertz(progress_token_(none)),
+		assertz(progress_events_([])),
+		(	sse_mode_(_) -> true ; assertz(sse_mode_(none)) ).
+	begin_progress(Token) :-
+		retractall(progress_events_(_)),
+		retractall(progress_token_(_)),
+		assertz(progress_token_(Token)),
+		assertz(progress_events_([])),
+		(	sse_output_(_) ->
+			retractall(sse_mode_(_)),
+			assertz(sse_mode_(live))
+		;	retractall(sse_mode_(_)),
+			assertz(sse_mode_(buffered))
+		).
+
+	% sse_output_/sse_mode_ are cleared by the handler via detach_sse_stream/0
+	end_progress :-
+		retractall(progress_events_(_)),
+		retractall(progress_token_(_)).
+
+	make_progress_closure(none, _, Progress) :-
+		!,
+		Progress = [_,_,_]>>(true).
+	make_progress_closure(Token, RequestId, Progress) :-
+		Progress = {Token, RequestId}/[ProgressValue, Total, Message]>>(
+			mcp_server_streamable_http_transport::emit_progress(Token, RequestId, ProgressValue, Total, Message)
+		).
+
+	:- public(emit_progress/5).
+	:- mode(emit_progress(+term, +term, +number, +number, +atom), one).
+	:- info(emit_progress/5, [
+		comment is 'Emits a notifications/progress event. In live mode the SSE record is written and flushed immediately on the attached stream. In buffered mode the event is queued until finalize_response/4.',
+		argnames is ['Token', 'RequestId', 'ProgressValue', 'Total', 'Message']
+	]).
+
+	emit_progress(Token, _RequestId, ProgressValue, Total, Message) :-
+		Notification = {
+			jsonrpc-'2.0',
+			method-'notifications/progress',
+			params-{
+				progressToken-Token,
+				progress-ProgressValue,
+				total-Total,
+				message-Message
+			}
+		},
+		(	sse_mode_(live),
+			sse_output_(Stream) ->
+			write_sse_data_event(Stream, Notification),
+			flush_output(Stream)
+		;	(	retract(progress_events_(Events0)) ->
+				append(Events0, [Notification], Events1),
+				assertz(progress_events_(Events1))
+			;	assertz(progress_events_([Notification]))
+			)
+		).
+
+	% write a single SSE data record and optionally flush
+	write_sse_data_event(Stream, Term) :-
+		json_serialize(Term, Atom),
+		atom_codes(Atom, Codes),
+		atom_codes('data: ', Prefix),
+		% SSE record terminator: blank line (LF LF)
+		Suffix = [10, 10],
+		put_codes(Prefix, Stream),
+		put_codes(Codes, Stream),
+		put_codes(Suffix, Stream).
+
+	put_codes([], _Stream).
+	put_codes([C|Cs], Stream) :-
+		(	catch(put_byte(Stream, C), _, fail) -> true
+		;	put_code(Stream, C)
+		),
+		put_codes(Cs, Stream).
+
+	% finalize: live mode writes the final event to the stream; buffered mode
+	% returns a complete SSE body; no-token mode returns application/json
+	finalize_response(_Id, FinalMsg, none, HTTPResponse) :-
+		!,
+		json_serialize(FinalMsg, Body),
+		HTTPResponse = http_response(200,
+			['Content-Type'-'application/json; charset=utf-8'],
+			Body).
+	finalize_response(_Id, FinalMsg, _Token, HTTPResponse) :-
+		sse_mode_(live),
+		sse_output_(Stream),
+		!,
+		% final JSON-RPC response as last SSE event
+		write_sse_data_event(Stream, FinalMsg),
+		flush_output(Stream),
+		% body already streamed; signal handler that response was sent
+		sse_headers(Headers),
+		HTTPResponse = http_response(already_sent, Headers, '').
+	finalize_response(_Id, FinalMsg, _Token, HTTPResponse) :-
+		% buffered fallback
+		(	progress_events_(Events) -> true ; Events = [] ),
+		sse_body(Events, FinalMsg, Body),
+		sse_headers(Headers),
+		HTTPResponse = http_response(200, Headers, Body).
+
+	sse_body(Events, FinalMsg, Body) :-
+		sse_events_codes(Events, FinalMsg, Codes),
+		atom_codes(Body, Codes).
+
+	sse_events_codes([], FinalMsg, Codes) :-
+		sse_data_event_codes(FinalMsg, Codes).
+	sse_events_codes([Ev| Evs], FinalMsg, Codes) :-
+		sse_data_event_codes(Ev, Codes0),
+		sse_events_codes(Evs, FinalMsg, Codes1),
+		append(Codes0, Codes1, Codes).
+
+	sse_data_event_codes(Term, Codes) :-
+		json_serialize(Term, Atom),
+		atom_codes(Atom, JSONCodes),
+		atom_codes('data: ', Prefix),
+		% SSE record terminator: blank line (LF LF)
+		Suffix = [10, 10],
+		append(Prefix, JSONCodes, Tmp),
+		append(Tmp, Suffix, Codes).
+
+	input_requests_to_json([], []).
+	input_requests_to_json([input_request(Key, Request)| Rest], [Json| JsonRest]) :-
+		request_to_json(Request, Key, Json),
+		input_requests_to_json(Rest, JsonRest).
+
+	request_to_json(form_elicitation(Message, Schema), Key, Json) :-
+		Json = {key-Key, method-'elicitation/create', params-{message-Message, requestedSchema-Schema}}.
+	request_to_json(url_elicitation(Message, URL), Key, Json) :-
+		Json = {key-Key, method-'elicitation/create', params-{message-Message, url-URL}}.
+	request_to_json(sampling(Messages, ModelPreferences, SystemPrompt, IncludeContext), Key, Json) :-
+		Json = {key-Key, method-'sampling/createMessage', params-{
+			messages-Messages,
+			modelPreferences-ModelPreferences,
+			systemPrompt-SystemPrompt,
+			includeContext-IncludeContext
+		}}.
+	request_to_json(roots, Key, Json) :-
+		Json = {key-Key, method-'roots/list', params-{}}.
+
+	handle_prompts_list(_, Id, HTTPResponse) :-
+		server_options_(Options),
+		^^option(application(App), Options),
+		(catch(App::prompts(Descs), _, fail) -> ^^prompt_descriptors_to_json(Descs, Json) ; Json = []),
+		resolve_cache(prompts_list, {}, TTL, Scope, Options),
+		json_result(Id, {prompts-Json, resultType-complete, ttlMs-TTL, cacheScope-Scope}, HTTPResponse).
+
+	handle_prompts_get(Params, Id, HTTPResponse) :-
+		(	^^has_pair(Params, name, Name) -> true
+		;	json_error(Id, -32602, 'Missing prompt name', HTTPResponse), !
+		),
+		(	^^has_pair(Params, arguments, Args) -> true ; Args = {} ),
+		extract_progress_token(Params, ProgressToken),
+		begin_progress(ProgressToken),
+		server_options_(Options),
+		^^option(application(App), Options),
+		^^curly_to_pairs(Args, ArgPairs),
+		make_progress_closure(ProgressToken, Id, Progress),
+		extract_client_capabilities(Params, ClientCaps),
+		extract_input_responses(Params, InputResponses),
+		extract_request_state(Params, RequestState),
+		Context = request_context(ClientCaps, InputResponses, RequestState, Progress),
+		(	catch(
+				App::prompt_get_round(Name, ArgPairs, Context, RoundResult),
+				error(existence_error(procedure, _), _),
+				fail
+			) ->
+			(	RoundResult = complete(Result) ->
+				format_prompt_result(Result, Id, ProgressToken, HTTPResponse)
+			;	RoundResult = input_required(Reqs, State) ->
+				handle_round_tool_result(input_required(Reqs, State), Id, ProgressToken, HTTPResponse)
+			;	json_error(Id, -32603, RoundResult, HTTPResponse)
+			)
+		;	(	catch(App::prompt_get(Name, ArgPairs, Result), Error, Result = error(Error)) ->
+				format_prompt_result(Result, Id, ProgressToken, HTTPResponse)
+			;	json_error(Id, -32603, 'Prompt execution failed', HTTPResponse)
+			)
+		),
+		end_progress.
+
+	format_prompt_result(Result, Id, ProgressToken, HTTPResponse) :-
+		prompt_result_body(Result, Id, BodyTerm),
+		finalize_response(Id, BodyTerm, ProgressToken, HTTPResponse).
+
+	prompt_result_body(messages(Ms), Id, Msg) :-
+		!,
+		^^format_prompt_messages(Ms, Json),
+		response({messages-Json, resultType-complete}, Id, Msg).
+	prompt_result_body(messages(Desc, Ms), Id, Msg) :-
+		!,
+		^^format_prompt_messages(Ms, Json),
+		response({description-Desc, messages-Json, resultType-complete}, Id, Msg).
+	prompt_result_body(error(E), Id, Msg) :-
+		!,
+		(atom(E) -> T = E ; write_to_atom(E, T)),
+		error_response(-32603, T, Id, Msg).
+	prompt_result_body(Other, Id, Msg) :-
+		(atom(Other) -> T = Other ; write_to_atom(Other, T)),
+		error_response(-32603, T, Id, Msg).
+
+	handle_resources_list(_, Id, HTTPResponse) :-
+		server_options_(Options),
+		^^option(application(App), Options),
+		(catch(App::resources(Descs), _, fail) -> ^^resource_descriptors_to_json(Descs, Json) ; Json = []),
+		resolve_cache(resources_list, {}, TTL, Scope, Options),
+		json_result(Id, {resources-Json, resultType-complete, ttlMs-TTL, cacheScope-Scope}, HTTPResponse).
+
+	handle_resources_read(Params, Id, HTTPResponse) :-
+		(	^^has_pair(Params, uri, URI) -> true
+		;	json_error(Id, -32602, 'Missing resource uri', HTTPResponse), !
+		),
+		extract_progress_token(Params, ProgressToken),
+		begin_progress(ProgressToken),
+		server_options_(Options),
+		^^option(application(App), Options),
+		make_progress_closure(ProgressToken, Id, Progress),
+		extract_client_capabilities(Params, ClientCaps),
+		extract_input_responses(Params, InputResponses),
+		extract_request_state(Params, RequestState),
+		Context = request_context(ClientCaps, InputResponses, RequestState, Progress),
+		(	catch(
+				App::resource_read_round(URI, [], Context, RoundResult),
+				error(existence_error(procedure, _), _),
+				fail
+			) ->
+			(	RoundResult = complete(Result) ->
+				format_resource_result(Result, URI, Id, Options, ProgressToken, HTTPResponse)
+			;	RoundResult = input_required(Reqs, State) ->
+				handle_round_tool_result(input_required(Reqs, State), Id, ProgressToken, HTTPResponse)
+			;	json_error(Id, -32603, RoundResult, HTTPResponse)
+			)
+		;	(	catch(App::resource_read(URI, [], Result), Error, Result = error(Error)) ->
+				format_resource_result(Result, URI, Id, Options, ProgressToken, HTTPResponse)
+			;	json_error(Id, -32603, 'Resource read failed', HTTPResponse)
+			)
+		),
+		end_progress.
+
+	format_resource_result(Result, URI, Id, Options, ProgressToken, HTTPResponse) :-
+		resource_result_body(Result, URI, Id, Options, BodyTerm),
+		finalize_response(Id, BodyTerm, ProgressToken, HTTPResponse).
+
+	resource_result_body(contents(Cs), URI, Id, Options, Msg) :-
+		!,
+		^^format_resource_contents(Cs, Json),
+		resolve_cache(resources_read, URI, TTL, Scope, Options),
+		response({contents-Json, resultType-complete, ttlMs-TTL, cacheScope-Scope}, Id, Msg).
+	resource_result_body(error(E), _, Id, _, Msg) :-
+		!,
+		(atom(E) -> T = E ; write_to_atom(E, T)),
+		error_response(-32603, T, Id, Msg).
+	resource_result_body(Other, _, Id, _, Msg) :-
+		(atom(Other) -> T = Other ; write_to_atom(Other, T)),
+		error_response(-32603, T, Id, Msg).
+
+	% subscriptions/listen — long-lived SSE stream
+	%
+	% Flow:
+	% 1. Require a live SSE output stream (handler attaches it for listen).
+	% 2. Acknowledge with a JSON-RPC result (SSE data event) and an optional
+	%    notifications/subscriptions/acknowledged notification.
+	% 3. Register the subscription and block on threaded_wait/1.
+	% 4. Other workers call threaded_notify/1 for events or stop (cancel/cleanup).
+	% 5. The wait loop writes matching events to the live SSE stream.
+
+	handle_subscriptions_listen(Params, Id, HTTPResponse) :-
+		(	^^has_pair(Params, filters, Filters0) -> Filters = Filters0
+		;	Filters = []
+		),
+		(	atom(Id) -> S0 = Id
+		;	number_codes(Id, Codes), atom_codes(S0, Codes)
+		),
+		atom_concat('sub_', S0, SubscriptionId),
+		% live stream is required for a useful subscription
+		(	sse_output_(Stream),
+			sse_mode_(live) ->
+			true
+		;	% attempt buffered-only acknowledgment (client gets id but no push)
+			Stream = none
+		),
+		AckResult = {
+			resultType-complete,
+			subscriptionId-SubscriptionId
+		},
+		response(AckResult, Id, AckMsg),
+		AckNotification = {
+			jsonrpc-'2.0',
+			method-'notifications/subscriptions/acknowledged',
+			params-{'subscriptionId'-SubscriptionId}
+		},
+		(	Stream \== none ->
+			write_sse_data_event(Stream, AckMsg),
+			flush_output(Stream),
+			write_sse_data_event(Stream, AckNotification),
+			flush_output(Stream),
+			assertz(subscription_(SubscriptionId, Id, Filters, Stream)),
+			% block until cancelled / stream dies / cleanup (other threads notify)
+			subscription_wait_loop(SubscriptionId, Stream),
+			retractall(subscription_(SubscriptionId, _, _, _)),
+			sse_headers(Headers),
+			HTTPResponse = http_response(already_sent, Headers, '')
+		;	% no stream: return JSON ack only (notify/1 cannot push)
+			assertz(subscription_(SubscriptionId, Id, Filters, none)),
+			json_result(Id, AckResult, HTTPResponse)
+		).
+
+	% block until stop or stream write failure; requires multi-threading:
+	% notify/1 and cancellation call threaded_notify/1 from other workers
+	subscription_wait_loop(SubId, Stream) :-
+		catch(
+			threaded_wait(subscription_msg(SubId, Msg)),
+			_,
+			Msg = stop
+		),
+		(	Msg == stop ->
+			true
+		;	Msg = event(Event) ->
+			(	push_subscription_event(SubId, Stream, Event) ->
+				subscription_wait_loop(SubId, Stream)
+			;	true  % stream dead
+			)
+		;	subscription_wait_loop(SubId, Stream)
+		).
+
+	% succeeds if the SSE write+flush completed; fails on stream errors
+	push_subscription_event(SubId, Stream, Event) :-
+		Stream \== none,
+		event_to_notification(Event, SubId, Notification),
+		catch(
+			(	write_sse_data_event(Stream, Notification),
+				flush_output(Stream)
+			),
+			Error,
+			(	log_subscription_error(SubId, push, Error),
+				fail
+			)
+		).
+
+	% notify/1 fan-out — never fails; drops dead subscriptions
+	dispatch_event([], _).
+	dispatch_event([Sub| Rest], Event) :-
+		catch(dispatch_one(Sub, Event), Error, log_notify_error(Event, Error)),
+		dispatch_event(Rest, Event).
+
+	dispatch_one(subscription_(SubId, ReqId, Filters, Stream), Event) :-
+		(	event_matches(Event, Filters) ->
+			(	deliver_subscription_event(SubId, Stream, Event) ->
+				true
+			;	drop_subscription(SubId, ReqId),
+				log_subscription_error(SubId, drop, delivery_failed)
+			)
+		;	true
+		).
+
+	% true on successful delivery; false if the subscriber is dead
+	deliver_subscription_event(SubId, Stream, Event) :-
+		(	Stream == none ->
+			fail
+		;	catch(threaded_notify(subscription_msg(SubId, event(Event))), SendError, true) ->
+			(	nonvar(SendError) ->
+				log_subscription_error(SubId, notify, SendError),
+				% Fallback: one direct write attempt
+				push_subscription_event(SubId, Stream, Event)
+			;	true
+			)
+		;	fail
+		).
+
+	% best-effort removal of a dead subscription
+	drop_subscription(SubId, ReqId) :-
+		catch(signal_subscription_stop(SubId), _, true),
+		retractall(subscription_(SubId, ReqId, _, _)),
+		retractall(subscription_(SubId, _, _, _)).
+
+	log_subscription_error(SubId, Op, Error) :-
+		catch(
+			format(user_error,
+				'~w: subscription ~w ~w error: ~w~n',
+				[mcp_server_streamable_http_transport, SubId, Op, Error]),
+			_,
+			true
+		).
+
+	event_matches(_, []) :-
+		!.
+	event_matches(Event, Filters) :-
+		event_type(Event, Type),
+		member(F, Filters),
+		(	^^has_pair(F, type, Type) -> true
+		;	F == Type -> true
+		;	fail
+		), !.
+
+	event_type(tools_list_changed, tools).
+	event_type(prompts_list_changed, prompts).
+	event_type(resources_list_changed, resources).
+	event_type(resource_updated(_), resources).
+
+	event_to_notification(tools_list_changed, SubId, Notification) :-
+		Notification = {
+			jsonrpc-'2.0',
+			method-'notifications/tools/list_changed',
+			params-{'_meta'-{'io.modelcontextprotocol/subscriptionId'-SubId}}
+		}.
+	event_to_notification(prompts_list_changed, SubId, Notification) :-
+		Notification = {
+			jsonrpc-'2.0',
+			method-'notifications/prompts/list_changed',
+			params-{'_meta'-{'io.modelcontextprotocol/subscriptionId'-SubId}}
+		}.
+	event_to_notification(resources_list_changed, SubId, Notification) :-
+		Notification = {
+			jsonrpc-'2.0',
+			method-'notifications/resources/list_changed',
+			params-{'_meta'-{'io.modelcontextprotocol/subscriptionId'-SubId}}
+		}.
+	event_to_notification(resource_updated(URI), SubId, Notification) :-
+		Notification = {
+			jsonrpc-'2.0',
+			method-'notifications/resources/updated',
+			params-{uri-URI, '_meta'-{'io.modelcontextprotocol/subscriptionId'-SubId}}
+		}.
+
+	resolve_cache(Op, Req, TTL, Scope, Options) :-
+		^^option(application(App), Options),
+		(	catch(App::cache_policy(Op, Req, T0, S0), _, fail),
+			integer(T0), T0 >= 0, memberchk(S0, [public, private]) ->
+			TTL = T0, Scope = S0
+		;	^^option(cache_ttl(TTL), Options),
+			^^option(cache_scope(Scope), Options)
+		).
+
+	json_result(Id, Result, http_response(200, ['Content-Type'-'application/json; charset=utf-8'], Body)) :-
+		response(Result, Id, Msg),
+		json_serialize(Msg, Body).
+
+	json_error(Id, Code, Message, http_response(200, ['Content-Type'-'application/json; charset=utf-8'], Body)) :-
+		(atom(Message) -> Msg = Message ; write_to_atom(Message, Msg)),
+		error_response(Code, Msg, Id, JSON),
+		json_serialize(JSON, Body).
+
+	json_error_data(Id, Code, Message, Data, http_response(200, ['Content-Type'-'application/json; charset=utf-8'], Body)) :-
+		(atom(Message) -> Msg = Message ; write_to_atom(Message, Msg)),
+		JSON = {jsonrpc-'2.0', id-Id, error-{code-Code, message-Msg, data-Data}},
+		json_serialize(JSON, Body).
+
+	header_value(Headers, Name, Value) :-
+		member(Name-Value, Headers), !.
+	header_value(Headers, Name, Value) :-
+		atom_codes(Name, NC), maplist_lower(NC, NL), atom_codes(LN, NL),
+		member(H-Value, Headers),
+		atom_codes(H, HC), maplist_lower(HC, HL), atom_codes(LH, HL),
+		LN == LH, !.
+
+	maplist_lower([], []).
+	maplist_lower([C|Cs], [L|Ls]) :-
+		(C >= 65, C =< 90 -> L is C + 32 ; L = C),
+		maplist_lower(Cs, Ls).
+
+	validate_origin(Headers) :-
+		server_options_(Options),
+		^^option(http_origin_check(Check), Options),
+		(	Check == false -> true
+		;	(	header_value(Headers, 'Origin', Origin) ->
+				(	sub_atom(Origin, 0, _, _, 'http://localhost') -> true
+				;	sub_atom(Origin, 0, _, _, 'http://127.0.0.1') -> true
+				;	sub_atom(Origin, 0, _, _, 'https://localhost') -> true
+				;	fail
+				)
+			;	true
+			)
+		).
+
+	json_serialize(Term, Atom) :-
+		generate(atom(Atom), Term).
+
+	default_option(server_name('logtalk-mcp-server')).
+	default_option(server_version('1.0.0')).
+	default_option(server_title('logtalk-mcp-server')).
+	default_option(instructions('')).
+	default_option(cache_ttl(0)).
+	default_option(cache_scope(private)).
+	default_option(spec('2026-07-28')).
+	default_option(http_port(8080)).
+	default_option(http_bind('127.0.0.1')).
+	default_option(http_path('/mcp')).
+	default_option(http_origin_check(true)).
+
+	valid_option(protocol_adapter(A)) :-
+		callable(A), conforms_to_protocol(A, mcp_server_adapter_protocol).
+	valid_option(server_name(N)) :-
+		atom(N).
+	valid_option(server_version(V)) :-
+		atom(V).
+	valid_option(server_title(T)) :-
+		atom(T).
+	valid_option(instructions(I)) :-
+		atom(I).
+	valid_option(cache_ttl(T)) :-
+		number(T), T >= 0.
+	valid_option(cache_scope(S)) :-
+		once((S == (public) ; S == private)).
+	valid_option(spec(V)) :-
+		once((V == '2025-06-18'; V == '2026-07-28')).
+	valid_option(http_port(P)) :-
+		integer(P), P > 0, P =< 65535.
+	valid_option(http_bind(B)) :-
+		atom(B).
+	valid_option(http_path(P)) :-
+		atom(P).
+	valid_option(http_origin_check(F)) :-
+		once((F == true ; F == false)).
+
+:- end_object.
+
+
+:- object(mcp_streamable_http_handler,
+	implements(http_handler_protocol)).
+
+	:- info([
+		version is 0:3:5,
+		author is 'Paulo Moura',
+		date is 2026-08-20,
+		comment is 'HTTP handler bridging http_server to mcp_server_streamable_http_transport. Supports live incremental SSE flushing when a response body stream is available.'
+	]).
+
+	:- uses(term_io, [
+		write_to_atom/2
+	]).
+	:- uses(list, [
+		member/2, valid/1 as is_list/1
+	]).
+
+	handle(Request, Response) :-
+		extract(Request, Method, Path, Headers, Body),
+		(	mcp_server_streamable_http_transport::current_options(Opts),
+			member(http_path(Expected), Opts) -> true
+		;	Expected = '/mcp'
+		),
+		(	Path == Expected ->
+			handle_path(Request, Method, Headers, Body, Response)
+		;	Response = response(404, ['Content-Type'-'text/plain; charset=utf-8'], 'Not Found')
+		).
+
+	handle_path(Request, Method, Headers, Body, Response) :-
+		(	wants_sse(Headers, Body),
+			open_live_sse_stream(Request, Stream, StreamKind) ->
+			mcp_server_streamable_http_transport::sse_headers(SSEHeaders),
+			% Start the HTTP response with SSE headers; body is written live.
+			start_streaming_response(Stream, StreamKind, SSEHeaders, Response0),
+			mcp_server_streamable_http_transport::attach_sse_stream(Stream),
+			catch(
+				mcp_server_streamable_http_transport::handle_mcp_request(Method, Headers, Body, HTTPResp),
+				Error,
+				(	mcp_server_streamable_http_transport::detach_sse_stream,
+					throw(Error)
+				)
+			),
+			mcp_server_streamable_http_transport::detach_sse_stream,
+			finish_streaming_response(Stream, StreamKind, HTTPResp, Response0, Response)
+		;	% Non-SSE / no live stream: buffered path
+			mcp_server_streamable_http_transport::handle_mcp_request(Method, Headers, Body, HTTPResp),
+			HTTPResp = http_response(Status, RespHeaders, RespBody),
+			(	Status == already_sent ->
+				Response = response(200, RespHeaders, '')
+			;	Response = response(Status, RespHeaders, RespBody)
+			)
+		).
+
+	% True when the client requested SSE (progress token, subscription listen, or Accept).
+	wants_sse(Headers, Body) :-
+		(	sub_atom(Body, _, _, _, 'progressToken') -> true
+		;	sub_atom(Body, _, _, _, 'subscriptions/listen') -> true
+		;	header_has(Headers, 'Accept', Accept),
+			sub_atom(Accept, _, _, _, 'text/event-stream')
+		).
+
+	header_has(Headers, Name, Value) :-
+		member(Name-Value, Headers), !.
+	header_has(Headers, Name, Value) :-
+		atom_codes(Name, NC), lower_codes(NC, NL), atom_codes(LN, NL),
+		member(H-Value, Headers),
+		atom_codes(H, HC), lower_codes(HC, HL), atom_codes(LH, HL),
+		LN == LH, !.
+
+	lower_codes([], []).
+	lower_codes([C|Cs], [L|Ls]) :-
+		(C >= 65, C =< 90 -> L is C + 32 ; L = C),
+		lower_codes(Cs, Ls).
+
+	% Acquire a writable stream for the response body.
+	% StreamKind = connection — Stream is the socket output (headers must be written here).
+	% StreamKind = pipe(Read) — Stream is the write end; Response body is stream(Read).
+	open_live_sse_stream(Request, Stream, StreamKind) :-
+		(	request_output_stream(Request, Out) ->
+			Stream = Out,
+			StreamKind = connection
+		;	open_response_pipe(Read, Write) ->
+			Stream = Write,
+			StreamKind = pipe(Read)
+		;	fail
+		).
+
+	% Try common Request shapes for an already-open connection output stream.
+	request_output_stream(Request, Output) :-
+		(	Request = request(_M, _P, _H, _B, connection(Connection)) ->
+			connection_output(Connection, Output)
+		;	Request = request(_M, _P, _H, _B, _Rest),
+			arg(5, Request, Extra),
+			extra_connection(Extra, Connection) ->
+			connection_output(Connection, Output)
+		;	functor(Request, _, Arity), Arity >= 5,
+			arg(5, Request, MaybeConn),
+			MaybeConn = connection(Connection) ->
+			connection_output(Connection, Output)
+		;	fail
+		).
+
+	extra_connection(connection(C), C) :-
+		!.
+	extra_connection(Extra, C) :-
+		compound(Extra),
+		arg(1, Extra, C0),
+		C0 = C.
+
+	connection_output(Connection, Output) :-
+		(	current_object(http_socket_transport),
+			catch(http_socket_transport::connection_streams(Connection, _In, Output), _, fail) ->
+			true
+		;	current_object(http_process_transport),
+			catch(http_process_transport::connection_streams(Connection, _In, Output), _, fail) ->
+			true
+		;	% Generic: Connection may itself be a stream pair
+			Connection = connection(_Sock, _In, Output) -> true
+		;	fail
+		).
+
+	% Portable pipe for streaming response bodies when the transport supports stream(Read).
+	open_response_pipe(Read, Write) :-
+		(	current_predicate(pipe/2) ->
+			{pipe(Read, Write)}
+		;	% SWI-Prolog style
+			current_predicate(open_pipe_stream/2) ->
+			{open_pipe_stream(Read, Write)}
+		;	fail
+		).
+
+	% Write status + headers on a connection stream, or build a stream-body Response.
+	start_streaming_response(Stream, connection, Headers, response(already_sent, Headers, '')) :-
+		!,
+		write_status_and_headers(Stream, 200, Headers),
+		flush_output(Stream).
+	start_streaming_response(_Stream, pipe(Read), Headers, response(200, Headers, stream(Read))).
+
+	finish_streaming_response(Stream, connection, HTTPResp, Response0, Response) :-
+		!,
+		(	HTTPResp = http_response(already_sent, _, _) ->
+			true
+		;	% Handler returned a full body (e.g. early error before live attach took effect)
+			HTTPResp = http_response(_, _, Body),
+			atom(Body), Body \== '' ->
+			atom_codes(Body, Codes),
+			write_codes(Codes, Stream),
+			flush_output(Stream)
+		;	true
+		),
+		Response = Response0.
+	finish_streaming_response(Stream, pipe(_Read), HTTPResp, Response0, Response) :-
+		(	HTTPResp = http_response(already_sent, _, _) ->
+			true
+		;	HTTPResp = http_response(_, _, Body),
+			atom(Body), Body \== '' ->
+			atom_codes(Body, Codes),
+			write_codes(Codes, Stream)
+		;	true
+		),
+		catch(close(Stream), _, true),
+		Response = Response0.
+
+	write_status_and_headers(Stream, Status, Headers) :-
+		% HTTP/1.1 status line
+		number_codes(Status, StatusCodes),
+		atom_codes('HTTP/1.1 ', Prefix),
+		% Space + OK + CR LF
+		Ok = [32, 79, 75, 13, 10],
+		% CR LF
+		CRLF = [13, 10],
+		write_codes(Prefix, Stream),
+		write_codes(StatusCodes, Stream),
+		write_codes(Ok, Stream),
+		write_header_lines(Headers, Stream),
+		write_codes(CRLF, Stream).
+
+	write_header_lines([], _Stream).
+	write_header_lines([Name-Value| Rest], Stream) :-
+		atom_codes(Name, NC),
+		atom_codes(Value, VC),
+		atom_codes(': ', Colon),
+		CRLF = [13, 10],
+		write_codes(NC, Stream),
+		write_codes(Colon, Stream),
+		write_codes(VC, Stream),
+		write_codes(CRLF, Stream),
+		write_header_lines(Rest, Stream).
+
+	write_codes([], _Stream) :-
+		!.
+	write_codes([C|Cs], Stream) :-
+		(	catch(put_byte(Stream, C), _, fail) -> true
+		;	put_code(Stream, C)
+		),
+		write_codes(Cs, Stream).
+
+	extract(Request, Method, Path, Headers, Body) :-
+		(	Request = request(M0, Path, Headers, Body0) ->
+			upcase(M0, Method), body_atom(Body0, Body)
+		;	Request = request(M0, Path, Headers, Body0, _) ->
+			upcase(M0, Method), body_atom(Body0, Body)
+		;	arg(1, Request, M0), arg(2, Request, Path),
+			(arg(3, Request, Headers) -> true ; Headers = []),
+			(arg(4, Request, Body0) -> true ; Body0 = ''),
+			upcase(M0, Method), body_atom(Body0, Body)
+		).
+
+	upcase(A0, A) :-
+		(atom(A0) -> atom_codes(A0, C) ; write_to_atom(A0, T), atom_codes(T, C)),
+		map_upper(C, U), atom_codes(A, U).
+
+	map_upper([], []).
+	map_upper([C|Cs], [U|Us]) :-
+		(C >= 97, C =< 122 -> U is C - 32 ; U = C), map_upper(Cs, Us).
+
+	body_atom(B0, B) :-
+		(atom(B0) -> B = B0
+		; var(B0) -> B = ''
+		; B0 == [] -> B = ''
+		; is_list(B0) -> atom_codes(B, B0)
+		; write_to_atom(B0, B)
+		).
+
+:- end_object.

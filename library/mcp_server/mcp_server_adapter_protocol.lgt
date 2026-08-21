@@ -28,9 +28,9 @@
 		comment is 'Protocol for MCP specification adapters. Each adapter implements one MCP protocol version (e.g. 2025-06-18 or 2026-07-28). The ``mcp_server`` facade selects an adapter via the ``protocol_adapter/1`` option and delegates the server lifecycle to it.'
 	]).
 
-	:- public(protocol_version/1).
-	:- mode(protocol_version(-atom), one).
-	:- info(protocol_version/1, [
+	:- public(spec/1).
+	:- mode(spec(-atom), one).
+	:- info(spec/1, [
 		comment is 'Returns the MCP protocol version string implemented by this adapter (e.g. ``''2025-06-18''`` or ``''2026-07-28''``).',
 		argnames is ['Version']
 	]).

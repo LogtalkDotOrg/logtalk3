@@ -38,11 +38,11 @@ Protocol for MCP specification adapters. Each adapter implements one MCP protoco
 Public predicates
 -----------------
 
-.. index:: protocol_version/1
-.. _mcp_server_adapter_protocol/0::protocol_version/1:
+.. index:: spec/1
+.. _mcp_server_adapter_protocol/0::spec/1:
 
-``protocol_version/1``
-^^^^^^^^^^^^^^^^^^^^^^
+``spec/1``
+^^^^^^^^^^
 
 Returns the MCP protocol version string implemented by this adapter (e.g. ``'2025-06-18'`` or ``'2026-07-28'``).
 
@@ -50,9 +50,9 @@ Returns the MCP protocol version string implemented by this adapter (e.g. ``'202
 |    ``static``
 
 | **Template:**
-|    ``protocol_version(Version)``
+|    ``spec(Version)``
 | **Mode and number of proofs:**
-|    ``protocol_version(-atom)`` - ``one``
+|    ``spec(-atom)`` - ``one``
 
 
 ------------

@@ -1,0 +1,144 @@
+.. index:: single: mcp_server_2025_06_18_spec
+.. _mcp_server_2025_06_18_spec/0:
+
+.. rst-class:: right
+
+**object**
+
+``mcp_server_2025_06_18_spec``
+==============================
+
+MCP 2025-06-18 protocol handler. Transport-agnostic message handling; returns abstract outcomes for stdio or Streamable HTTP transports to render. Synchronous elicitation requires stdio_input/1 and stdio_output/1 in Options.
+
+| **Availability:** 
+|    ``logtalk_load(mcp_server(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-21
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`mcp_server_spec_protocol <mcp_server_spec_protocol/0>`
+| **Imports:**
+|    ``public`` :ref:`mcp_server_application <mcp_server_application/0>`
+| **Uses:**
+|    :ref:`json_rpc <json_rpc/0>`
+|    :ref:`list <list/0>`
+|    :ref:`term_io <term_io/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`mcp_server_spec_protocol/0::cleanup/0`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`mcp_server_spec_protocol/0::handle_message/3`  :ref:`mcp_server_spec_protocol/0::notify/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`mcp_server_spec_protocol/0::prepare/2`  :ref:`mcp_server_spec_protocol/0::spec/1`  :ref:`mcp_server_application/0::tool_descriptors_to_json/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: current_options/1
+.. _mcp_server_2025_06_18_spec/0::current_options/1:
+
+``current_options/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Merged options established by prepare/2.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``current_options(Options)``
+| **Mode and number of proofs:**
+|    ``current_options(-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: elicit_request/5
+.. _mcp_server_2025_06_18_spec/0::elicit_request/5:
+
+``elicit_request/5``
+^^^^^^^^^^^^^^^^^^^^
+
+Sends an elicitation/create request to the client and reads the response (2025-06-18 synchronous model).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``elicit_request(Input,Output,Message,RequestedSchema,Answer)``
+| **Mode and number of proofs:**
+|    ``elicit_request(+stream,+stream,+atom,+compound,--compound)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: initialized_/0
+.. _mcp_server_2025_06_18_spec/0::initialized_/0:
+
+``initialized_/0``
+^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. index:: elicit_counter_/1
+.. _mcp_server_2025_06_18_spec/0::elicit_counter_/1:
+
+``elicit_counter_/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. index:: client_capabilities_/1
+.. _mcp_server_2025_06_18_spec/0::client_capabilities_/1:
+
+``client_capabilities_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. index:: server_options_/1
+.. _mcp_server_2025_06_18_spec/0::server_options_/1:
+
+``server_options_/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

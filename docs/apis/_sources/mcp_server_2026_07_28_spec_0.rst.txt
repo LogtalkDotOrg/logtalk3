@@ -1,0 +1,168 @@
+.. index:: single: mcp_server_2026_07_28_spec
+.. _mcp_server_2026_07_28_spec/0:
+
+.. rst-class:: right
+
+**object**
+
+``mcp_server_2026_07_28_spec``
+==============================
+
+MCP 2026-07-28 protocol handler. Returns reply/1, reply_with_progress/2, subscribe/3, accepted, or no_reply outcomes. Does not write to streams; transports render outcomes.
+
+| **Availability:** 
+|    ``logtalk_load(mcp_server(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-21
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`mcp_server_spec_protocol <mcp_server_spec_protocol/0>`
+| **Imports:**
+|    ``public`` :ref:`mcp_server_application <mcp_server_application/0>`
+| **Uses:**
+|    :ref:`json_rpc <json_rpc/0>`
+|    :ref:`list <list/0>`
+|    :ref:`term_io <term_io/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`mcp_server_spec_protocol/0::cleanup/0`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`mcp_server_spec_protocol/0::handle_message/3`  :ref:`mcp_server_spec_protocol/0::notify/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`mcp_server_spec_protocol/0::prepare/2`  :ref:`mcp_server_spec_protocol/0::spec/1`  :ref:`mcp_server_application/0::tool_descriptors_to_json/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: run_stdio_loop/3
+.. _mcp_server_2026_07_28_spec/0::run_stdio_loop/3:
+
+``run_stdio_loop/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Stdio read/dispatch loop used by mcp_server_2026_07_28_adapter.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``run_stdio_loop(Input,Output,Options)``
+| **Mode and number of proofs:**
+|    ``run_stdio_loop(+stream,+stream,+list)`` - ``one``
+
+
+------------
+
+.. index:: emit_progress/6
+.. _mcp_server_2026_07_28_spec/0::emit_progress/6:
+
+``emit_progress/6``
+^^^^^^^^^^^^^^^^^^^
+
+Buffers a notifications/progress event or invokes progress_hook/1 from current options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``emit_progress(Token,RequestId,Output,ProgressValue,Total,Message)``
+| **Mode and number of proofs:**
+|    ``emit_progress(+term,+term,+stream,+number,+number,+atom)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: output_stream_/1
+.. _mcp_server_2026_07_28_spec/0::output_stream_/1:
+
+``output_stream_/1``
+^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. index:: subscription_/3
+.. _mcp_server_2026_07_28_spec/0::subscription_/3:
+
+``subscription_/3``
+^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. index:: running_/0
+.. _mcp_server_2026_07_28_spec/0::running_/0:
+
+``running_/0``
+^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. index:: reply_outcome_/1
+.. _mcp_server_2026_07_28_spec/0::reply_outcome_/1:
+
+``reply_outcome_/1``
+^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. index:: progress_buffer_/1
+.. _mcp_server_2026_07_28_spec/0::progress_buffer_/1:
+
+``progress_buffer_/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+.. index:: current_options_/1
+.. _mcp_server_2026_07_28_spec/0::current_options_/1:
+
+``current_options_/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+| **Compilation flags:**
+|    ``dynamic``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

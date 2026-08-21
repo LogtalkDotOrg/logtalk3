@@ -1,0 +1,148 @@
+.. index:: single: mcp_server_spec_protocol
+.. _mcp_server_spec_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``mcp_server_spec_protocol``
+============================
+
+Protocol for MCP spec (version) handlers independent of transport. A handler validates and dispatches JSON-RPC messages and returns abstract outcomes that a transport (stdio or Streamable HTTP) renders to the wire.
+
+| **Availability:** 
+|    ``logtalk_load(mcp_server(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-21
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: spec/1
+.. _mcp_server_spec_protocol/0::spec/1:
+
+``spec/1``
+^^^^^^^^^^
+
+MCP protocol version string implemented by this handler (e.g. ``'2025-06-18'`` or ``'2026-07-28'``).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``spec(Version)``
+| **Mode and number of proofs:**
+|    ``spec(-atom)`` - ``one``
+
+
+------------
+
+.. index:: prepare/2
+.. _mcp_server_spec_protocol/0::prepare/2:
+
+``prepare/2``
+^^^^^^^^^^^^^
+
+Initializes handler state for Application with merged Options. Does not open any transport.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``prepare(Application,Options)``
+| **Mode and number of proofs:**
+|    ``prepare(+object_identifier,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: handle_message/3
+.. _mcp_server_spec_protocol/0::handle_message/3:
+
+``handle_message/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Handles one JSON-RPC Message under Options and returns an Outcome for the transport to render. Outcomes include ``reply(JsonRpcTerm)``, ``accepted``, ``no_reply``, and transport-agnostic error replies already encoded as JSON-RPC error objects inside ``reply/1``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``handle_message(Message,Options,Outcome)``
+| **Mode and number of proofs:**
+|    ``handle_message(+nonvar,+list,-nonvar)`` - ``one``
+
+
+------------
+
+.. index:: notify/1
+.. _mcp_server_spec_protocol/0::notify/1:
+
+``notify/1``
+^^^^^^^^^^^^
+
+Publishes an application event. Transports that support server-initiated notifications deliver it; others may ignore it.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``notify(Event)``
+| **Mode and number of proofs:**
+|    ``notify(+compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: cleanup/0
+.. _mcp_server_spec_protocol/0::cleanup/0:
+
+``cleanup/0``
+^^^^^^^^^^^^^
+
+Releases handler-owned dynamic state.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``cleanup`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

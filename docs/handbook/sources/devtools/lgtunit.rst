@@ -419,12 +419,12 @@ The possible values of the outcome argument are:
 
 - | ``subsumes(Expected, Result)``
   | The test is expected to succeed by binding ``Result`` to a term that
-    is subsumed by the ``Expected`` term. The test i not expected to be
+    is subsumed by the ``Expected`` term. The test is not expected to be
     deterministic.
 
 - | ``variant(Term1, Term2)``
   | The test is expected to succeed by binding ``Term1`` to a term that
-    is a variant of the ``Term2`` term. The test i not expected to be
+    is a variant of the ``Term2`` term. The test is not expected to be
     deterministic.
 
 - | ``exists(Assertion)``

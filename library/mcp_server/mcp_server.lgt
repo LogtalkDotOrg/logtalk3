@@ -23,50 +23,49 @@
 	imports(options)).
 
 	:- info([
-		version is 1:0:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-14,
-		comment is 'MCP (Model Context Protocol) server facade for Logtalk applications. Selects a specification adapter (default ``mcp_server_2025_06_18_adapter``) and delegates the server lifecycle to it. Preserves the public ``start/2-5`` entry points. Implements adapter selection via the ``protocol_adapter(Adapter)`` option.',
+		date is 2026-08-21,
+		comment is 'MCP server facade. Selects spec and transport (stdio or Streamable HTTP). Legacy ``protocol_adapter/1`` remains supported.',
 		remarks is [
-			'MCP specifications' - 'Supports the Model Context Protocol 2025-06-18 (default) and 2026-07-28 (via ``protocol_adapter(mcp_server_2026_07_28_adapter)``).',
-			'Transport' - 'Uses stdio (standard input/output) with one newline-delimited JSON-RPC message per line as defined by the MCP specification.',
-			'Adapter selection' - 'A server instance is pinned to one specification adapter. Existing ``start/2-5`` calls default to the 2025-06-18 adapter, preserving source and wire compatibility.',
-			'Options' - 'Common options: ``server_version(Version)``, ``server_title(Title)``, ``protocol_adapter(Adapter)``. Additional options may be interpreted by the chosen adapter.'
+			'Specs' - '``\'2025-06-18``\' (default) and ``\'2026-07-28\'`` via ``spec/1``.',
+			'Transports' - '``stdio`` (default) and ``streamable_http`` via ``transport/1``.',
+			'Legacy' - '``protocol_adapter(Adapter)`` overrides the spec/transport matrix when present.'
 		]
 	]).
 
 	:- public(start/2).
 	:- mode(start(+atom, +object_identifier), one).
 	:- info(start/2, [
-		comment is 'Starts the MCP server with the given server name and application object using the default 2025-06-18 adapter and default options. Blocks until the client disconnects.',
+		comment is 'Starts the MCP server with default options.',
 		argnames is ['Name', 'Application']
 	]).
 
 	:- public(start/3).
 	:- mode(start(+atom, +object_identifier, +list), one).
 	:- info(start/3, [
-		comment is 'Starts the MCP server with the given server name, application object, and options. Supported options include ``server_version(Version)``, ``server_title(Title)``, and ``protocol_adapter(Adapter)`` (defaults to ``mcp_server_2025_06_18_adapter``).',
+		comment is 'Starts the MCP server with options (spec/1, transport/1, protocol_adapter/1, HTTP options, ...).',
 		argnames is ['Name', 'Application', 'Options']
 	]).
 
 	:- public(start/4).
 	:- mode(start(+atom, +object_identifier, +stream, +stream), one).
 	:- info(start/4, [
-		comment is 'Starts the MCP server with custom input and output streams using default options and the default adapter.',
+		comment is 'Starts with custom streams and default options.',
 		argnames is ['Name', 'Application', 'Input', 'Output']
 	]).
 
 	:- public(start/5).
 	:- mode(start(+atom, +object_identifier, +stream, +stream, +list), one).
 	:- info(start/5, [
-		comment is 'Starts the MCP server with custom input and output streams and options.',
+		comment is 'Starts with custom streams and options.',
 		argnames is ['Name', 'Application', 'Input', 'Output', 'Options']
 	]).
 
 	:- public(notify/1).
 	:- mode(notify(+compound), zero_or_one).
 	:- info(notify/1, [
-		comment is 'Publishes an application event to the active adapter. Canonical events: ``tools_list_changed``, ``prompts_list_changed``, ``resources_list_changed``, ``resource_updated(URI)``. Delegated to the currently active adapter (if any).',
+		comment is 'Publishes an application event to the active adapter.',
 		argnames is ['Event']
 	]).
 
@@ -78,9 +77,9 @@
 		argnames is ['Adapter']
 	]).
 
-	:- uses(list, [member/2]).
-
-	% Public entry points
+	:- uses(list, [
+		member/2
+	]).
 
 	start(Name, Application) :-
 		start(Name, Application, []).
@@ -108,8 +107,6 @@
 		;	true
 		).
 
-	% Adapter selection and lifecycle
-
 	run_adapter(Application, Input, Output, Options) :-
 		select_adapter(Options, Adapter),
 		retractall(active_adapter_(_)),
@@ -129,8 +126,34 @@
 				Adapter = Adapter0
 			;	throw(error(domain_error(mcp_server_adapter, Adapter0), mcp_server::start/5))
 			)
-		;	Adapter = mcp_server_2025_06_18_adapter
+		;	protocol_version_option(Options, Version),
+			transport_option(Options, Transport),
+			resolve_adapter(Version, Transport, Adapter)
 		).
+
+	protocol_version_option(Options, Version) :-
+		(	member(spec(Version), Options) -> true
+		;	Version = '2025-06-18'
+		).
+
+	transport_option(Options, Transport) :-
+		(	member(transport(Transport), Options) -> true
+		;	Transport = stdio
+		).
+
+	resolve_adapter('2025-06-18', stdio, mcp_server_stdio_transport) :-
+		!.
+	resolve_adapter('2026-07-28', stdio, mcp_server_stdio_transport) :-
+		!.
+	resolve_adapter('2025-06-18', streamable_http, mcp_server_streamable_http_transport) :-
+		!.
+	resolve_adapter('2026-07-28', streamable_http, mcp_server_streamable_http_transport) :-
+		!.
+	resolve_adapter(Version, Transport, _) :-
+		throw(error(
+			domain_error(mcp_server_configuration, Version-Transport),
+			mcp_server::start/5
+		)).
 
 	cleanup_adapter(Adapter) :-
 		retractall(active_adapter_(_)),
@@ -142,11 +165,11 @@
 		;	Options = [server_name(Name)| Options0]
 		).
 
-	% Options
-
 	default_option(server_version('1.0.0')).
 	default_option(server_title('logtalk-mcp-server')).
-	default_option(protocol_adapter(mcp_server_2025_06_18_adapter)).
+	default_option(spec('2025-06-18')).
+	default_option(transport(stdio)).
+	% protocol_adapter/1 is optional; when omitted, version × transport selects the adapter.
 
 	valid_option(server_name(Name)) :-
 		atom(Name).
@@ -154,6 +177,10 @@
 		atom(Version).
 	valid_option(server_title(Title)) :-
 		atom(Title).
+	valid_option(spec(Version)) :-
+		once((Version == '2025-06-18'; Version == '2026-07-28')).
+	valid_option(transport(Transport)) :-
+		once((Transport == stdio; Transport == streamable_http)).
 	valid_option(protocol_adapter(Adapter)) :-
 		callable(Adapter),
 		conforms_to_protocol(Adapter, mcp_server_adapter_protocol).
@@ -164,5 +191,13 @@
 		TTL >= 0.
 	valid_option(cache_scope(Scope)) :-
 		once((Scope == (public); Scope == private)).
+	valid_option(http_port(Port)) :-
+		integer(Port), 0 < Port, Port =< 65535.
+	valid_option(http_bind(Bind)) :-
+		atom(Bind).
+	valid_option(http_path(Path)) :-
+		atom(Path).
+	valid_option(http_origin_check(Flag)) :-
+		once((Flag == true; Flag == false)).
 
 :- end_object.

@@ -8,14 +8,14 @@
 ``mcp_server``
 ==============
 
-MCP (Model Context Protocol) server facade for Logtalk applications. Selects a specification adapter (default ``mcp_server_2025_06_18_adapter``) and delegates the server lifecycle to it. Preserves the public ``start/2-5`` entry points. Implements adapter selection via the ``protocol_adapter(Adapter)`` option.
+MCP server facade. Selects spec and transport (stdio or Streamable HTTP). Legacy ``protocol_adapter/1`` remains supported.
 
 | **Availability:** 
 |    ``logtalk_load(mcp_server(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:0
-| **Date:** 2026-08-14
+| **Version:** 2:0:0
+| **Date:** 2026-08-21
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -28,10 +28,9 @@ MCP (Model Context Protocol) server facade for Logtalk applications. Selects a s
 
 | **Remarks:**
 
-   - MCP specifications: Supports the Model Context Protocol 2025-06-18 (default) and 2026-07-28 (via ``protocol_adapter(mcp_server_2026_07_28_adapter)``).
-   - Transport: Uses stdio (standard input/output) with one newline-delimited JSON-RPC message per line as defined by the MCP specification.
-   - Adapter selection: A server instance is pinned to one specification adapter. Existing ``start/2-5`` calls default to the 2025-06-18 adapter, preserving source and wire compatibility.
-   - Options: Common options: ``server_version(Version)``, ``server_title(Title)``, ``protocol_adapter(Adapter)``. Additional options may be interpreted by the chosen adapter.
+   - Specs: ``'2025-06-18``' (default) and ``'2026-07-28'`` via ``spec/1``.
+   - Transports: ``stdio`` (default) and ``streamable_http`` via ``transport/1``.
+   - Legacy: ``protocol_adapter(Adapter)`` overrides the spec/transport matrix when present.
 
 | **Inherited public predicates:**
 |     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
@@ -49,7 +48,7 @@ Public predicates
 ``start/2``
 ^^^^^^^^^^^
 
-Starts the MCP server with the given server name and application object using the default 2025-06-18 adapter and default options. Blocks until the client disconnects.
+Starts the MCP server with default options.
 
 | **Compilation flags:**
 |    ``static``
@@ -68,7 +67,7 @@ Starts the MCP server with the given server name and application object using th
 ``start/3``
 ^^^^^^^^^^^
 
-Starts the MCP server with the given server name, application object, and options. Supported options include ``server_version(Version)``, ``server_title(Title)``, and ``protocol_adapter(Adapter)`` (defaults to ``mcp_server_2025_06_18_adapter``).
+Starts the MCP server with options (spec/1, transport/1, protocol_adapter/1, HTTP options, ...).
 
 | **Compilation flags:**
 |    ``static``
@@ -87,7 +86,7 @@ Starts the MCP server with the given server name, application object, and option
 ``start/4``
 ^^^^^^^^^^^
 
-Starts the MCP server with custom input and output streams using default options and the default adapter.
+Starts with custom streams and default options.
 
 | **Compilation flags:**
 |    ``static``
@@ -106,7 +105,7 @@ Starts the MCP server with custom input and output streams using default options
 ``start/5``
 ^^^^^^^^^^^
 
-Starts the MCP server with custom input and output streams and options.
+Starts with custom streams and options.
 
 | **Compilation flags:**
 |    ``static``
@@ -125,7 +124,7 @@ Starts the MCP server with custom input and output streams and options.
 ``notify/1``
 ^^^^^^^^^^^^
 
-Publishes an application event to the active adapter. Canonical events: ``tools_list_changed``, ``prompts_list_changed``, ``resources_list_changed``, ``resource_updated(URI)``. Delegated to the currently active adapter (if any).
+Publishes an application event to the active adapter.
 
 | **Compilation flags:**
 |    ``static``

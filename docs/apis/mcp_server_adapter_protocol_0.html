@@ -33,7 +33,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="mcp_server_application" href="mcp_server_application_0.html" />
-    <link rel="prev" title="mcp_server_2026_07_28_adapter" href="mcp_server_2026_07_28_adapter_0.html" />
+    <link rel="prev" title="mcp_server_2026_07_28_spec" href="mcp_server_2026_07_28_spec_0.html" />
    
 </head>
 
@@ -261,9 +261,15 @@
 <li class="toctree-l3"><a class="reference internal" href="mcp_resource_protocol_0.html">mcp_resource_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_server_0.html">mcp_server</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_server_2025_06_18_adapter_0.html">mcp_server_2025_06_18_adapter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcp_server_2025_06_18_spec_0.html">mcp_server_2025_06_18_spec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_server_2026_07_28_adapter_0.html">mcp_server_2026_07_28_adapter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcp_server_2026_07_28_spec_0.html">mcp_server_2026_07_28_spec</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">mcp_server_adapter_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_server_application_0.html">mcp_server_application</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcp_server_spec_protocol_0.html">mcp_server_spec_protocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcp_server_stdio_transport_0.html">mcp_server_stdio_transport</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcp_server_streamable_http_transport_0.html">mcp_server_streamable_http_transport</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcp_streamable_http_handler_0.html">mcp_streamable_http_handler</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_tool_protocol_0.html">mcp_tool_protocol</a></li>
 </ul>
 </li>
@@ -472,7 +478,7 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#protocol-version-1" id="id2"><code class="docutils literal notranslate"><span class="pre">protocol_version/1</span></code></a></p></li>
+<li><p><a class="reference internal" href="#spec-1" id="id2"><code class="docutils literal notranslate"><span class="pre">spec/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#start-4" id="id3"><code class="docutils literal notranslate"><span class="pre">start/4</span></code></a></p></li>
 <li><p><a class="reference internal" href="#notify-1" id="id4"><code class="docutils literal notranslate"><span class="pre">notify/1</span></code></a></p></li>
 <li><p><a class="reference internal" href="#cleanup-0" id="id5"><code class="docutils literal notranslate"><span class="pre">cleanup/0</span></code></a></p></li>
@@ -485,8 +491,8 @@
 </nav>
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
-<section id="protocol-version-1">
-<span id="mcp-server-adapter-protocol-0-protocol-version-1"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">protocol_version/1</span></code></a><a class="headerlink" href="#protocol-version-1" title="Link to this heading"></a></h3>
+<section id="spec-1">
+<span id="mcp-server-adapter-protocol-0-spec-1"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">spec/1</span></code></a><a class="headerlink" href="#spec-1" title="Link to this heading"></a></h3>
 <p>Returns the MCP protocol version string implemented by this adapter (e.g. <code class="docutils literal notranslate"><span class="pre">'2025-06-18'</span></code> or <code class="docutils literal notranslate"><span class="pre">'2026-07-28'</span></code>).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -497,11 +503,11 @@
 <div class="line-block">
 <div class="line"><strong>Template:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">protocol_version(Version)</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">spec(Version)</span></code></div>
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">protocol_version(-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">spec(-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
 </div>
 </div>
 <hr class="docutils" />
@@ -584,7 +590,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="mcp_server_2026_07_28_adapter_0.html" class="btn btn-neutral float-left" title="mcp_server_2026_07_28_adapter" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mcp_server_2026_07_28_spec_0.html" class="btn btn-neutral float-left" title="mcp_server_2026_07_28_spec" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="mcp_server_application_0.html" class="btn btn-neutral float-right" title="mcp_server_application" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

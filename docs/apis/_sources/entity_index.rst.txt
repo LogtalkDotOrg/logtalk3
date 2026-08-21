@@ -520,7 +520,12 @@ Objects
    maybe <maybe_0>
    mcp_server <mcp_server_0>
    mcp_server_2025_06_18_adapter <mcp_server_2025_06_18_adapter_0>
+   mcp_server_2025_06_18_spec <mcp_server_2025_06_18_spec_0>
    mcp_server_2026_07_28_adapter <mcp_server_2026_07_28_adapter_0>
+   mcp_server_2026_07_28_spec <mcp_server_2026_07_28_spec_0>
+   mcp_server_stdio_transport <mcp_server_stdio_transport_0>
+   mcp_server_streamable_http_transport <mcp_server_streamable_http_transport_0>
+   mcp_streamable_http_handler <mcp_streamable_http_handler_0>
    md5 <md5_0>
    memcached <memcached_0>
    mermaid_graph_language <mermaid_graph_language_0>
@@ -910,6 +915,7 @@ Protocols
    mcp_prompt_protocol <mcp_prompt_protocol_0>
    mcp_resource_protocol <mcp_resource_protocol_0>
    mcp_server_adapter_protocol <mcp_server_adapter_protocol_0>
+   mcp_server_spec_protocol <mcp_server_spec_protocol_0>
    mcp_tool_protocol <mcp_tool_protocol_0>
    metagol_example_protocol <metagol_example_protocol_0>
    metap <metap_0>

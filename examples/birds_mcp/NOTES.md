@@ -24,12 +24,13 @@ This example demonstrates the `mcp_server` library by exposing the
 bird identification expert system (from the `birds` example) as an
 MCP (Model Context Protocol) server.
 
-It supports **both** specifications:
+It supports **three** entry points:
 
-| Specification | Interaction model | Entry point |
-|---------------|-------------------|-------------|
-| **2025-06-18** | Synchronous `elicitation/create` via `tool_call/4` | `server.lgt` (default) |
-| **2026-07-28** | Multi-round `input_required` / `complete` via `tool_call_round/4` | `server_2026_07_28.lgt` |
+| Specification / transport | Interaction model | Entry point |
+|---------------------------|-------------------|-------------|
+| **2025-06-18** (stdio) | Synchronous `elicitation/create` via `tool_call/4` | `server_2025_06_18.lgt` |
+| **2026-07-28** (stdio) | Multi-round `input_required` / `complete` via `tool_call_round/4` | `server_2026_07_28.lgt` |
+| **2026-07-28** (Streamable HTTP) | Same 2026 protocol over HTTP POST + optional SSE | `server_streamable_http.lgt` |
 
 When an MCP client asks to identify a bird, the server asks the user
 questions about bird characteristics (yes/no and multiple-choice menus).
@@ -45,13 +46,21 @@ The answers guide the expert system through the bird taxonomy.
 - Using `tool_call/4` with the `Elicit` closure for interactive tools
 - Building JSON Schema for yes/no and enum elicitation requests
 
-### 2026-07-28
+### 2026-07-28 (stdio)
 
 - Implementing `mcp_multiround_protocol` alongside `mcp_tool_protocol`
 - Using `tool_call_round/4` that returns `input_required(Requests, State)`
   or `complete(Result)`
 - Carrying known answers in opaque, JSON-friendly `requestState`
 - Selecting the adapter with `protocol_adapter(mcp_server_2026_07_28_adapter)`
+
+### 2026-07-28 (Streamable HTTP)
+
+- Selecting `protocol_adapter(mcp_server_streamable_http_adapter)`
+- HTTP options: `http_port/1`, `http_bind/1`, `http_path/1`, `http_origin_check/1`
+- Stateless JSON-RPC over `POST` with required `MCP-Protocol-Version` header
+- Optional SSE responses when the client supplies a `progressToken`
+- Multi-round bird identification works unchanged (state in `requestState`)
 
 
 ## Architecture
@@ -66,20 +75,102 @@ implemented in `birds_mcp.lgt`:
 - **2026 path:** `tool_call_round/4` asks one question per round,
   encodes known facts + pending question in `requestState`, and
   resumes from `inputResponses` on the next call
+- **HTTP path:** same 2026 application code; only the transport adapter
+  changes
 
 
 ## Testing
 
-Run both specification suites:
+Run the stdio specification suites:
 
 ```text
 | ?- logtalk_load(birds_mcp(tester)).
 ```
 
+Streamable HTTP unit tests for the library adapter live in the
+`mcp_server` library (`tests_streamable_http`). This example focuses on
+stdio tests for the bird knowledge base; exercise HTTP with the server
+entry point below and an HTTP client.
+
+
+## Starting the servers
+
+### 2025-06-18 (stdio)
+
+```text
+$ swilgt -q -g "logtalk_load(birds_mcp(server_2025_06_18))" -t halt
+```
+
+### 2026-07-28 (stdio)
+
+```text
+$ swilgt -q -g "logtalk_load(birds_mcp(server_2026_07_28))" -t halt
+```
+
+### Streamable HTTP
+
+```text
+$ swilgt -q -g "logtalk_load(birds_mcp(server_streamable_http))"
+```
+
+Default listen address: `http://127.0.0.1:8080/mcp`.
+
+Example discovery request:
+
+```bash
+curl -sS -X POST 'http://127.0.0.1:8080/mcp' \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json, text/event-stream' \
+  -H 'MCP-Protocol-Version: 2026-07-28' \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": 1,
+    "method": "server/discover",
+    "params": {
+      "_meta": {
+        "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+        "io.modelcontextprotocol/clientCapabilities": {
+          "tools": {},
+          "elicitation": {}
+        }
+      }
+    }
+  }'
+```
+
+First identification round:
+
+```bash
+curl -sS -X POST 'http://127.0.0.1:8080/mcp' \
+  -H 'Content-Type: application/json' \
+  -H 'Accept: application/json, text/event-stream' \
+  -H 'MCP-Protocol-Version: 2026-07-28' \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": 2,
+    "method": "tools/call",
+    "params": {
+      "name": "identify_bird",
+      "arguments": {},
+      "_meta": {
+        "io.modelcontextprotocol/protocolVersion": "2026-07-28",
+        "io.modelcontextprotocol/clientCapabilities": {
+          "tools": {},
+          "elicitation": {}
+        }
+      }
+    }
+  }'
+```
+
+The response is `resultType: input_required` with `inputRequests` and
+`requestState`. Send the next `tools/call` with `inputResponses` and the
+echoed `requestState` until `resultType: complete`.
+
 
 ## MCP client configuration
 
-### 2025-06-18 (default)
+### 2025-06-18 (stdio)
 
 ```json
 {
@@ -100,7 +191,7 @@ Run both specification suites:
 }
 ```
 
-### 2026-07-28
+### 2026-07-28 (stdio)
 
 ```json
 {
@@ -121,6 +212,21 @@ Run both specification suites:
 }
 ```
 
+### Streamable HTTP
+
+HTTP MCP clients typically point at a URL rather than a command. After
+starting `server_streamable_http.lgt`, configure the client with:
+
+```text
+http://127.0.0.1:8080/mcp
+```
+
+Headers required on each request:
+
+- `MCP-Protocol-Version: 2026-07-28`
+- `Content-Type: application/json`
+- `Accept: application/json, text/event-stream` (recommended)
+
 Replace `LOGTALKHOME` / `LOGTALKUSER` with the values on your system
 when required (often needed on macOS).
 
@@ -135,7 +241,7 @@ when required (often needed on macOS).
 4. Server sends one or more `elicitation/create` requests
 5. Client answers each; server returns the identification result
 
-### 2026-07-28 (multi-round)
+### 2026-07-28 (multi-round, stdio or HTTP)
 
 1. Client sends `server/discover` with required `_meta`
 2. Client calls `tools/call` for `identify_bird`
@@ -145,15 +251,19 @@ when required (often needed on macOS).
    echoed `requestState`
 5. Steps 3–4 repeat until the server returns `resultType: complete`
 
+Over HTTP, each step is a separate `POST` to `/mcp`. Over stdio, the
+same JSON-RPC messages are newline-delimited on the process streams.
+
 
 ## Files
 
 | File | Role |
 |------|------|
 | `birds_mcp.lgt` | Tool provider (2025 elicitation + 2026 MRTR) |
-| `server.lgt` | 2025-06-18 server entry point |
-| `server_2026_07_28.lgt` | 2026-07-28 server entry point |
+| `server_2025_06_18.lgt` | 2025-06-18 stdio server entry point |
+| `server_2026_07_28.lgt` | 2026-07-28 stdio server entry point |
+| `server_streamable_http.lgt` | 2026-07-28 Streamable HTTP server entry point |
 | `loader.lgt` | Example loader |
-| `tests.lgt` | 2025-06-18 unit tests |
+| `tests_2025_06_18.lgt` | 2025-06-18 unit tests |
 | `tests_2026_07_28.lgt` | 2026-07-28 MRTR unit tests |
-| `tester.lgt` | Runs both test suites |
+| `tester.lgt` | Runs both stdio test suites |

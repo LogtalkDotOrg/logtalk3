@@ -1,0 +1,344 @@
+.. index:: single: mcp_server_streamable_http_transport
+.. _mcp_server_streamable_http_transport/0:
+
+.. rst-class:: right
+
+**object**
+
+``mcp_server_streamable_http_transport``
+========================================
+
+MCP Streamable HTTP transport (2026-07-28). Uses Logtalk ``http_server::serve_until_shutdown/5`` and a dedicated ``http_handler_protocol`` handler object. Supports specs 2025-06-18 and 2026-07-28 selected via the ``spec/1`` option and delegated to ``mcp_server_2025_06_18_spec`` or ``mcp_server_2026_07_28_spec``. Requires a multi-threaded backend for subscriptions/listen.
+
+| **Availability:** 
+|    ``logtalk_load(mcp_server(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-21
+
+| **Compilation flags:**
+|    ``static, context_switching_calls, threaded``
+
+
+| **Implements:**
+|    ``public`` :ref:`mcp_server_adapter_protocol <mcp_server_adapter_protocol/0>`
+| **Imports:**
+|    ``public`` :ref:`mcp_server_application <mcp_server_application/0>`
+| **Uses:**
+|    :ref:`format <format/0>`
+|    :ref:`http_server <http_server/0>`
+|    :ref:`json <json/0>`
+|    :ref:`json_rpc <json_rpc/0>`
+|    :ref:`list <list/0>`
+|    :ref:`mcp_server_2025_06_18_spec <mcp_server_2025_06_18_spec/0>`
+|    :ref:`mcp_server_2026_07_28_spec <mcp_server_2026_07_28_spec/0>`
+|    :ref:`term_io <term_io/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`mcp_server_adapter_protocol/0::cleanup/0`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`mcp_server_adapter_protocol/0::notify/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`mcp_server_adapter_protocol/0::spec/1`  :ref:`mcp_server_adapter_protocol/0::start/4`  :ref:`mcp_server_application/0::tool_descriptors_to_json/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: prepare/2
+.. _mcp_server_streamable_http_transport/0::prepare/2:
+
+``prepare/2``
+^^^^^^^^^^^^^
+
+Initializes adapter state for Application with Options without opening a listener. Pair with handle_mcp_request/4 and cleanup/0.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``prepare(Application,Options)``
+| **Mode and number of proofs:**
+|    ``prepare(+object_identifier,+list)`` - ``one_or_error``
+
+
+------------
+
+.. index:: attach_sse_stream/1
+.. _mcp_server_streamable_http_transport/0::attach_sse_stream/1:
+
+``attach_sse_stream/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Registers a live output stream for incremental SSE writes. Headers must already have been written. Each emit_progress/5 call writes and flushes immediately.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``attach_sse_stream(Stream)``
+| **Mode and number of proofs:**
+|    ``attach_sse_stream(+stream)`` - ``one``
+
+
+------------
+
+.. index:: detach_sse_stream/0
+.. _mcp_server_streamable_http_transport/0::detach_sse_stream/0:
+
+``detach_sse_stream/0``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Clears any live SSE output stream registration.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Mode and number of proofs:**
+|    ``detach_sse_stream`` - ``one``
+
+
+------------
+
+.. index:: sse_headers/1
+.. _mcp_server_streamable_http_transport/0::sse_headers/1:
+
+``sse_headers/1``
+^^^^^^^^^^^^^^^^^
+
+HTTP headers for an SSE response body.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sse_headers(Headers)``
+| **Mode and number of proofs:**
+|    ``sse_headers(-list)`` - ``one``
+
+
+------------
+
+.. index:: current_options/1
+.. _mcp_server_streamable_http_transport/0::current_options/1:
+
+``current_options/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Unified with the options list established by prepare/2 or start/4.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``current_options(Options)``
+| **Mode and number of proofs:**
+|    ``current_options(-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: handle_mcp_request/4
+.. _mcp_server_streamable_http_transport/0::handle_mcp_request/4:
+
+``handle_mcp_request/4``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Handles one MCP HTTP request. Method is an uppercase HTTP method atom. Headers is a list of Name-Value pairs. Body is the raw request body atom. HTTPResponse is http_response(Status, Headers, BodyAtom) or http_response(already_sent, Headers, BodyAtom).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``handle_mcp_request(Method,Headers,Body,HTTPResponse)``
+| **Mode and number of proofs:**
+|    ``handle_mcp_request(+atom,+list,+atom,-compound)`` - ``one``
+
+
+------------
+
+.. index:: emit_progress/5
+.. _mcp_server_streamable_http_transport/0::emit_progress/5:
+
+``emit_progress/5``
+^^^^^^^^^^^^^^^^^^^
+
+Emits a notifications/progress event. In live mode the SSE record is written and flushed immediately on the attached stream. In buffered mode the event is queued until finalize_response/4.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``emit_progress(Token,RequestId,ProgressValue,Total,Message)``
+| **Mode and number of proofs:**
+|    ``emit_progress(+term,+term,+number,+number,+atom)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+.. index:: running_/0
+.. _mcp_server_streamable_http_transport/0::running_/0:
+
+``running_/0``
+^^^^^^^^^^^^^^
+
+True while the adapter has been prepared or is serving requests.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Mode and number of proofs:**
+|    ``running_`` - ``zero_or_one``
+
+
+------------
+
+.. index:: server_options_/1
+.. _mcp_server_streamable_http_transport/0::server_options_/1:
+
+``server_options_/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Merged server options for the active prepare/start session.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``server_options_(Options)``
+| **Mode and number of proofs:**
+|    ``server_options_(-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: shutdown_control_/1
+.. _mcp_server_streamable_http_transport/0::shutdown_control_/1:
+
+``shutdown_control_/1``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Token passed to http_server::request_shutdown/1 when stopping the listener.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``shutdown_control_(Control)``
+| **Mode and number of proofs:**
+|    ``shutdown_control_(-nonvar)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: subscription_/4
+.. _mcp_server_streamable_http_transport/0::subscription_/4:
+
+``subscription_/4``
+^^^^^^^^^^^^^^^^^^^
+
+Active subscriptions/listen registration. Synchronization uses threaded_wait/1 and threaded_notify/1 tagged by SubscriptionId.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``subscription_(SubscriptionId,RequestId,Filters,Stream)``
+| **Mode and number of proofs:**
+|    ``subscription_(-atom,-nonvar,-list,-nonvar)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: progress_events_/1
+.. _mcp_server_streamable_http_transport/0::progress_events_/1:
+
+``progress_events_/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Buffered notifications/progress events when SSE mode is not live.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``progress_events_(Events)``
+| **Mode and number of proofs:**
+|    ``progress_events_(-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: progress_token_/1
+.. _mcp_server_streamable_http_transport/0::progress_token_/1:
+
+``progress_token_/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+progressToken from the current request, or none.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``progress_token_(Token)``
+| **Mode and number of proofs:**
+|    ``progress_token_(-nonvar)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: sse_output_/1
+.. _mcp_server_streamable_http_transport/0::sse_output_/1:
+
+``sse_output_/1``
+^^^^^^^^^^^^^^^^^
+
+Live response stream for incremental SSE writes.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``sse_output_(Stream)``
+| **Mode and number of proofs:**
+|    ``sse_output_(-stream)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: sse_mode_/1
+.. _mcp_server_streamable_http_transport/0::sse_mode_/1:
+
+``sse_mode_/1``
+^^^^^^^^^^^^^^^
+
+Current SSE delivery mode: live, buffered, or none.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``sse_mode_(Mode)``
+| **Mode and number of proofs:**
+|    ``sse_mode_(-atom)`` - ``zero_or_one``
+
+
+------------
+
+Operators
+---------
+
+(none)
+

@@ -22,25 +22,28 @@ ________________________________________________________________________
 ============
 
 MCP (Model Context Protocol) server library for Logtalk applications.
-Makes any Logtalk application available as a local MCP server using stdio
-transport.
+Makes any Logtalk application available as a local MCP server using
+stdio transport or Streamable HTTP transport.
 
-Supports two specification dates via dedicated adapters:
+Supports two specs, 2025-06-18 and 2026-07-28, and two transports, stdio
+and streamable HTTP (with optional SSE for progress and long-lived
+subscriptions).
 
-- **2025-06-18** (default) - tools, prompts, resources, synchronous
+- **2025-06-18** (default, stdio) - tools, prompts, resources, synchronous
   elicitation, structured output, resource links, version negotiation.
-- **2026-07-28** - discovery, tools/prompts/resources, multi-round tool
-  results (MRTR), caching, progress, subscriptions, cancellation.
+  Spec: `mcp_server_2025_06_18_spec`.
+- **2026-07-28** (stdio) - discovery, tools/prompts/resources, multi-round
+  tool results (MRTR), caching, progress, subscriptions, cancellation.
+  Adapter: `mcp_server_2026_07_28_spec`.
+- **2026-07-28** (Streamable HTTP) - same protocol semantics as the 2026
+  stdio adapter, over HTTP POST with optional SSE for progress and
+  long-lived subscriptions. Transport: `mcp_server_streamable_http_transport`.
 
-The adapter used by a server instance can be selected using the
-`protocol_adapter(Adapter)` option. The default 
-adapter is `mcp_server_2025_06_18_adapter`, preserving compatibility
-with the initial library version.
-
-Both adapters implement a simple synchronous handling of server requests.
-As a consequence, client `notifications/cancelled` can only be used to drop
-matching subscriptions entries (i.e., listen cancel) and cannot be used
-to cancel in-flight request.
+The stdio adapters implement simple synchronous handling of server
+requests. As a consequence, client `notifications/cancelled` can only
+be used to drop matching subscription entries (i.e., listen cancel) and
+cannot cancel in-flight work. The Streamable HTTP adapter supports
+request-scoped SSE progress and subscription fan-out via `notify/1`.
 
 Specification references:
 
@@ -72,18 +75,21 @@ To test this library predicates, load the `tester.lgt` file:
 
 	| ?- logtalk_load(mcp_server(tester)).
 
-This runs both 2025-06-18 and 2026-07-28 test sets.
+This runs the 2025-06-18, 2026-07-28 (stdio), and Streamable HTTP test sets.
 
 
 Architecture
 ------------
 
-This library is designed to support adding new MCP specs by implementing
-`mcp_server_adapter_protocol`. Common server code is provided using the
-`mcp_server_application` category, which is imported by the current
-`mcp_server_2025_06_18_adapter` and `mcp_server_2026_07_28_adapter`
-adapters. A facade object, `mcp_server` allow selecting a specific
-spec/adapter using a predicate option.
+This library is designed to support adding new MCP specs and transports
+by implementing `mcp_server_adapter_protocol`. Common server code is
+provided using the `mcp_server_application` category. A facade object,
+`mcp_server`, allows selecting specific spec and transport using the
+`spec/1` and `transport/1` options. The legacy `protocol_adapter/1`
+option is still supported for backwards compatibility.
+
+The Streamable HTTP adapter additionally depends on the `http_server`
+library (and optionally `http_sse` helpers) for listening and framing.
 
 There's also a set of protocols for the different MCP facets:
 
@@ -97,6 +103,57 @@ An application object is only required to implement protocols for the
 features it provides.
 
 
+stdio versus Streamable HTTP transports
+---------------------------------------
+
+Both transports implement `mcp_server_adapter_protocol`. What differs
+is how JSON-RPC is carried and a few transport-only features.
+
+|                  | stdio transport                                   | Streamable HTTP transport                                            |
+|------------------|---------------------------------------------------|----------------------------------------------------------------------|
+| Objects          | `mcp_server_stdio_transport`                      | `mcp_server_streamable_http_transport`                               |
+| Transport        | Process stdin/stdout (newline-delimited JSON-RPC) | HTTP `POST` to a path (default `/mcp`)                               |
+| Spec versions    | 2025-06-18 or 2026-07-28                          | 2026-07-28 only                                                      |
+| Client model     | Client spawns the server as a subprocess          | Client talks to a listening URL                                      |
+| I/O in `start/4` | Reads and writes the given streams                | Opens an `http_server` listener; stream arguments are unused         |
+| Progress         | Stdio notifications when applicable               | Optional SSE (`text/event-stream`) when a `progressToken` is present |
+| Subscriptions    | Stdio listen loop                                 | Long-lived SSE plus `notify/1` fan-out                               |
+| Extra options    | Spec options (`instructions`, `cache_*`, ...)     | Plus `http_port`, `http_bind`, `http_path`, `http_origin_check`      |
+
+Application objects do **not** change between transports. Only the
+`spec/1` and `transport/1` options selects the path:
+
+    % stdio, 2025
+    ``spec('2025-06-18'), ``transport(stdio)``
+
+    % stdio, 2026
+    ``spec('2026-07-28'), ``transport(stdio)``
+
+    % HTTP, 2026 protocol semantics
+    ``spec('2026-07-28'), ``transport(streamable_http)``
+
+Use **stdio** with desktop MCP clients that launch a command and speak
+MCP on pipes. Use **Streamable HTTP** for remote or multi-client access,
+reverse proxies, or clients that `POST` JSON-RPC (with optional SSE for
+progress and subscriptions).
+
+Mental model:
+
+    Application (mcp_*_protocol)
+            |
+            v
+    mcp_server_application   (shared dispatch, MRTR, schemas, ...)
+            |
+            +--> 2025 stdio spec --------> stdin/stdout
+            +--> 2026 stdio spec --------> stdin/stdout
+            +--> Streamable HTTP adapter ---> http_server + optional SSE
+
+Always start servers through the `mcp_server` facade. For unit tests or
+an external HTTP stack, the Streamable HTTP adapter also exposes
+`prepare/2`, `handle_mcp_request/4`, and `cleanup/0` without opening a
+listener.
+
+
 Starting a MCP server
 ---------------------
 
@@ -106,7 +163,7 @@ Always use the `mcp_server` facade object to start a server (the adapters
 are not meant to be used directly). Some examples, assuming a `my_tools`
 application object:
 
-### 2025-06-18 spec (default)
+### 2025-06-18 spec and stdio transport (default)
 
     | ?- mcp_server::start('my-server', my_tools).
 
@@ -117,10 +174,10 @@ With options:
             server_title('My Server')
         ]).
 
-### 2026-07-28 spec
+### 2026-07-28 spec and stdio transport
 
     | ?- mcp_server::start('my-server', my_tools, [
-            protocol_adapter(mcp_server_2026_07_28_adapter),
+            spec('2026-07-28'),
             server_version('2.0.0'),
             server_title('My Server'),
             instructions('Optional server instructions for clients.'),
@@ -128,19 +185,45 @@ With options:
             cache_scope(private)
         ]).
 
-There should either be no standard output or only a Prolog backend term
-input prompt. Spurious standard output will break the connection between
-an MCP client and the MCP server.
+For stdio transports there should either be no standard output or only a
+Prolog backend term input prompt. Spurious standard output will break the
+connection between an MCP client and the MCP server.
+
+### 2026-07-28 Streamable HTTP
+
+    | ?- mcp_server::start('my-server', my_tools, [
+            spec('2026-07-28'),
+            transport(streamable_http),
+            server_version('2.0.0'),
+            server_title('My Server'),
+            instructions('Optional server instructions for clients.'),
+            http_port(8080),
+            http_bind('127.0.0.1'),
+            http_path('/mcp'),
+            http_origin_check(true)
+        ]).
+
+The server listens for `POST` requests at the configured bind address,
+port, and path (default `http://127.0.0.1:8080/mcp`). Clients must send
+`MCP-Protocol-Version: 2026-07-28` and a JSON-RPC body using the 2026
+`_meta` conventions. When a `progressToken` is present, the response may
+use `text/event-stream` (SSE) for progress events and the final result.
+
+For unit tests and embedded HTTP stacks, call
+`mcp_server_streamable_http_transport::prepare/2` then
+`handle_mcp_request/4` without starting the listener, and finish with
+`cleanup/0`.
 
 
 Common options
 --------------
 
-| Option                      | Default                         | Description                           |
-|-----------------------------|---------------------------------|---------------------------------------|
-| `protocol_adapter(Adapter)` | `mcp_server_2025_06_18_adapter` | Specification adapter                 |
-| `server_version(Version)`   | `'1.0.0'`                       | Server version string                 |
-| `server_title(Title)`       | `'logtalk-mcp-server'`          | Display title                         |
+| Option                    | Default                | Description           |
+|---------------------------|------------------------|-----------------------|
+| `spec(Spec)`              | `'2025-06-18'`         | Spec selection        |
+| `transport(Transport)`    | `stdio`                | Transport selection   |
+| `server_version(Version)` | `'1.0.0'`              | Server version string |
+| `server_title(Title)`     | `'logtalk-mcp-server'` | Display title         |
 
 2026-07-28 spec specific options
 --------------------------------
@@ -150,6 +233,19 @@ Common options
 | `instructions(Text)`        | `''`      | Optional instructions (2026 discover) |
 | `cache_ttl(Milliseconds)`   | `0`       | Default TTL in milliseconds (2026)    |
 | `cache_scope(Scope)`        | `private` | `public` or `private` (2026)          |
+
+Streamable HTTP adapter options
+-------------------------------
+
+| Option                        | Default         | Description                                      |
+|-------------------------------|-----------------|--------------------------------------------------|
+| `http_port(Port)`             | `8080`          | TCP port to listen on                            |
+| `http_bind(Address)`          | `'127.0.0.1'`   | Bind address                                     |
+| `http_path(Path)`             | `'/mcp'`        | HTTP path for MCP POST requests                  |
+| `http_origin_check(Flag)`     | `true`          | Reject disallowed `Origin` headers when `true`   |
+
+These options are validated by the `mcp_server` facade and applied only
+when `protocol_adapter(mcp_server_streamable_http_transport)` is selected.
 
 
 Implementing the tool protocol
@@ -408,8 +504,11 @@ Applications publish events via:
     mcp_server::notify(resource_updated('logtalk://app/data')).
 
 The facade delegates to the active adapter. The 2025-06-18 adapter
-ignores these events. The 2026-07-28 adapter routes them through active
-subscriptions.
+ignores these events. The 2026-07-28 stdio adapter and the Streamable
+HTTP adapter route them through active subscriptions. On HTTP, long-lived
+SSE connections from `subscriptions/listen` receive matching events;
+`notify/1` isolates per-subscriber failures so a dead stream does not
+abort delivery to others.
 
 
 Prompts
@@ -604,8 +703,17 @@ above) depend on the Prolog backend. For example, XVM requires instead:
         }
     }
 
-For a 2026-07-28 server, the application loader or start goal must pass
-`protocol_adapter(mcp_server_2026_07_28_adapter)`.
+For a 2026-07-28 stdio server, the application loader or start goal must
+pass `protocol_adapter(mcp_server_2026_07_28_adapter)`.
+
+For Streamable HTTP, start the server with
+`protocol_adapter(mcp_server_streamable_http_transport)` and point the
+MCP client at the listen URL (for example `http://127.0.0.1:8080/mcp`).
+Each request should include:
+
+- `Content-Type: application/json`
+- `Accept: application/json, text/event-stream`
+- `MCP-Protocol-Version: 2026-07-28`
 
 
 Error handling
@@ -712,12 +820,17 @@ Supported MCP methods per spec
 | `notifications/resources/list_changed`     | Notification (server -> client) | Resources changed               |
 | `notifications/resources/updated`          | Notification (server -> client) | Resource updated                |
 
-The 2026-07-28 adapter never writes JSON-RPC **requests** to stdout
-(only responses and notifications).
+The 2026-07-28 stdio adapter never writes JSON-RPC **requests** to
+stdout (only responses and notifications). The Streamable HTTP adapter
+likewise only returns responses and server-initiated notifications
+(progress and subscription events), never client-bound requests over the
+HTTP response channel.
 
 
 Limitations
 -----------
 
-Resource templates, completion, Streamable HTTP transport, authorization,
-and optional extensions/tasks are not currently implemented.
+Resource templates, completion, authorization, and optional
+extensions/tasks are not currently implemented. Streamable HTTP transport
+is implemented by `mcp_server_streamable_http_transport` (2026-07-28
+protocol semantics over HTTP POST with optional SSE).

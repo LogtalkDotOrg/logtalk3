@@ -41,9 +41,7 @@
 		atomic_concat/3, atomic_list_concat/2
 	]).
 
-	% ---------------------------------------------------------------------
-	% Tool descriptors and schemas
-	% ---------------------------------------------------------------------
+	% tool descriptors and schemas
 
 	:- public(tool_descriptors_to_json/3).
 	:- mode(tool_descriptors_to_json(+list, +object_identifier, -list), one).
@@ -115,11 +113,9 @@
 			InputSchema = {type-object, properties-PropertiesCurly, required-Required}
 		).
 
-	% ---------------------------------------------------------------------
-	% Prompt descriptors
-	% ---------------------------------------------------------------------
+	% prompt descriptors
 
-	:- public(prompt_descriptors_to_json/2).
+	:- protected(prompt_descriptors_to_json/2).
 	:- mode(prompt_descriptors_to_json(+list, -list), one).
 	:- info(prompt_descriptors_to_json/2, [
 		comment is 'Converts prompt descriptors (3-arg or 4-arg) into MCP JSON prompt definitions.',
@@ -146,11 +142,9 @@
 	bool_to_json(true, @true).
 	bool_to_json(false, @false).
 
-	% ---------------------------------------------------------------------
-	% Resource descriptors
-	% ---------------------------------------------------------------------
+	% resource descriptors
 
-	:- public(resource_descriptors_to_json/2).
+	:- protected(resource_descriptors_to_json/2).
 	:- mode(resource_descriptors_to_json(+list, -list), one).
 	:- info(resource_descriptors_to_json/2, [
 		comment is 'Converts resource descriptors (4-arg or 5-arg) into MCP JSON resource definitions.',
@@ -168,11 +162,9 @@
 		Resource = {uri-URI, name-Name, description-Description, mimeType-MimeType},
 		resource_descriptors_to_json(Descriptors, Resources).
 
-	% ---------------------------------------------------------------------
-	% Auto-dispatch and tool execution helpers
-	% ---------------------------------------------------------------------
+	% auto-dispatch and tool execution helpers
 
-	:- public(auto_dispatch_tool/5).
+	:- protected(auto_dispatch_tool/5).
 	:- mode(auto_dispatch_tool(+object_identifier, +atom, +integer, +compound, -compound), one).
 	:- info(auto_dispatch_tool/5, [
 		comment is 'Auto-dispatches a tool call by calling the predicate on the application, collecting output-mode arguments, and returning a text result.',
@@ -203,7 +195,7 @@
 			Result = text(Text)
 		).
 
-	:- public(try_tool_call_3/7).
+	:- protected(try_tool_call_3/7).
 	:- mode(try_tool_call_3(+object_identifier, +atom, +atom, +integer, +list, +compound, -compound), one).
 	:- info(try_tool_call_3/7, [
 		comment is 'Tries tool_call/3; on existence_error falls back to auto-dispatch.',
@@ -220,11 +212,9 @@
 		;	auto_dispatch_tool(Application, Functor, Arity, ToolArguments, Result)
 		).
 
-	% ---------------------------------------------------------------------
-	% Canonical result formatting (content items)
-	% ---------------------------------------------------------------------
+	% canonical result formatting (content items)
 
-	:- public(format_content_items/2).
+	:- protected(format_content_items/2).
 	:- mode(format_content_items(+list, -list), one).
 	:- info(format_content_items/2, [
 		comment is 'Converts canonical content item terms into MCP JSON content array elements.',
@@ -252,7 +242,7 @@
 		Element = {type-resource_link, uri-URI, name-Name, description-Description, mimeType-MimeType},
 		format_content_items(Items, Elements).
 
-	:- public(format_prompt_messages/2).
+	:- protected(format_prompt_messages/2).
 	:- mode(format_prompt_messages(+list, -list), one).
 	:- info(format_prompt_messages/2, [
 		comment is 'Converts message(Role, text(Text)) terms into MCP JSON prompt message objects.',
@@ -264,7 +254,7 @@
 		JsonMsg = {role-Role, content-{type-text, text-Text}},
 		format_prompt_messages(Rest, JsonRest).
 
-	:- public(format_resource_contents/2).
+	:- protected(format_resource_contents/2).
 	:- mode(format_resource_contents(+list, -list), one).
 	:- info(format_resource_contents/2, [
 		comment is 'Converts text_content/3 and blob_content/3 terms into MCP JSON resource content objects.',
@@ -282,9 +272,7 @@
 		JsonContent = {uri-URI, mimeType-MimeType, blob-Base64Data},
 		format_resource_contents(Contents, JsonContents).
 
-	% ---------------------------------------------------------------------
-	% Argument binding / collection / schema helpers
-	% ---------------------------------------------------------------------
+	% argument binding / collection / schema helpers
 
 	bind_input_arguments([], [], _, _, _).
 	bind_input_arguments([ArgName| ArgNames], [Mode| Modes], N, Goal, ToolArguments) :-
@@ -389,11 +377,9 @@
 			atomic_list_concat([Line, '\n', PairsText], Text)
 		).
 
-	% ---------------------------------------------------------------------
-	% Curly-term helpers (shared)
-	% ---------------------------------------------------------------------
+	% curly-term helpers (shared)
 
-	:- public(has_pair/3).
+	:- protected(has_pair/3).
 	:- mode(has_pair(+compound, +atom, ?term), zero_or_one).
 	:- info(has_pair/3, [
 		comment is 'Looks up a Key-Value pair inside a curly-term.',
@@ -410,7 +396,7 @@
 		curly_member(Pair, Pairs).
 	curly_member(Pair, Pair).
 
-	:- public(curly_to_pairs/2).
+	:- protected(curly_to_pairs/2).
 	:- mode(curly_to_pairs(+compound, -list), one).
 	:- info(curly_to_pairs/2, [
 		comment is 'Converts a curly-term to a list of Key-Value pairs.',
@@ -427,7 +413,7 @@
 		curly_pairs_to_list(CurlyPairs, Pairs).
 	curly_pairs_to_list(Key-Value, [Key-Value]).
 
-	:- public(pairs_to_curly/2).
+	:- protected(pairs_to_curly/2).
 	:- mode(pairs_to_curly(+list, -compound), one).
 	:- info(pairs_to_curly/2, [
 		comment is 'Converts a list of Key-Value pairs to a curly-term.',
