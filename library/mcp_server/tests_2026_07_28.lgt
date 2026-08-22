@@ -25,13 +25,13 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-21,
+		date is 2026-08-22,
 		comment is 'Unit tests for the MCP 2026-07-28 adapter.'
 	]).
 
 	:- uses(json_rpc, [
-		request/4, response/3, notification/3, is_request/1, is_response/1, is_error_response/1, method/2,
-		params/2, result/2, id/2, error_code/2, write_message/2, read_message/2
+		request/4, is_response/1, is_error_response/1, result/2, error_code/2, write_message/2,
+		read_message/2
 	]).
 
 	:- uses(lgtunit, [

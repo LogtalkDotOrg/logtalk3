@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-14,
+		date is 2026-08-22,
 		comment is 'Unit tests for the MCP 2025-06-18 adapter.'
 	]).
 
@@ -35,7 +35,7 @@
 	]).
 
 	:- uses(list, [
-		member/2, memberchk/2
+		member/2
 	]).
 
 	cover(mcp_server).

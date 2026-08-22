@@ -25,13 +25,13 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-21,
+		date is 2026-08-22,
 		comment is 'Unit tests for the MCP stdio transport (``mcp_server_stdio_transport``). Spec semantics are covered by ``tests_2025_06_18`` and ``tests_2026_07_28``; this suite focuses on transport selection, framing, and outcome rendering.'
 	]).
 
 	:- uses(json_rpc, [
-		request/4, request/3, response/3, is_response/1, is_error_response/1, method/2, result/2, id/2,
-		error_code/2, write_message/2, read_message/2
+		request/4, request/3, is_response/1, is_error_response/1, result/2, id/2, error_code/2,
+		write_message/2, read_message/2
 	]).
 
 	:- uses(list, [

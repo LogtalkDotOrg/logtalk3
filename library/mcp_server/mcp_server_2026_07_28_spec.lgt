@@ -43,6 +43,10 @@
 		write_to_atom/2
 	]).
 
+	:- uses(user, [
+		atomic_concat/3
+	]).
+
 	% dynamic state
 
 	:- private(output_stream_/1).
@@ -112,10 +116,14 @@
 		).
 
 	collect_outcome(Outcome) :-
-		(	retract(reply_outcome_(Outcome0)) -> true
+		(	retract(reply_outcome_(Outcome0)) ->
+			true
 		;	Outcome0 = no_reply
 		),
-		(	retract(progress_buffer_(Events)) -> true ; Events = [] ),
+		(	retract(progress_buffer_(Events)) ->
+			true
+		;	Events = []
+		),
 		(	Outcome0 = reply(Final), Events = [_| _] ->
 			Outcome = reply_with_progress(Events, Final)
 		;	Outcome0 = subscribe(_, _, _) ->
@@ -188,12 +196,12 @@
 		flush_output(Output).
 	render_stdio_outcome(reply_with_progress(Events, Final), Output) :-
 		!,
-		forall(member(E, Events), (write_message(Output, E), flush_output(Output))),
+		forall(member(Event, Events), (write_message(Output, Event), flush_output(Output))),
 		write_message(Output, Final),
 		flush_output(Output).
 	render_stdio_outcome(subscribe(_Id, _Filters, Messages), Output) :-
 		!,
-		forall(member(M, Messages), (write_message(Output, M), flush_output(Output))).
+		forall(member(Message, Messages), (write_message(Output, Message), flush_output(Output))).
 	render_stdio_outcome(accepted, _) :-
 		!.
 	render_stdio_outcome(no_reply, _) :-
@@ -232,25 +240,29 @@
 		(	^^has_pair(Params, '_meta', Meta) ->
 			true
 		;	send_error(Id, -32602, 'Missing required params._meta', Output),
-			!, fail
+			!,
+			fail
 		),
 		% protocol version
 		(	^^has_pair(Meta, 'io.modelcontextprotocol/protocolVersion', Version) ->
 			true
 		;	send_error(Id, -32602, 'Missing required protocolVersion in _meta', Output),
-			!, fail
+			!,
+			fail
 		),
 		(	Version == '2026-07-28' ->
 			true
 		;	ErrorData = {supported-['2026-07-28'], requested-Version},
 			send_error_data(Id, -32022, 'Unsupported protocol version', ErrorData, Output),
-			!, fail
+			!,
+			fail
 		),
 		% client capabilities
 		(	^^has_pair(Meta, 'io.modelcontextprotocol/clientCapabilities', _) ->
 			true
 		;	send_error(Id, -32602, 'Missing required clientCapabilities in _meta', Output),
-			!, fail
+			!,
+			fail
 		),
 		% method-specific capability checks
 		check_method_capabilities(Method, Meta, Id, Output).
@@ -403,11 +415,8 @@
 	% tools/call (with MRTR)
 
 	handle_tools_call(Params, Id, Output, Options) :-
-		(	^^has_pair(Params, name, ToolName) ->
-			true
-		;	send_error(Id, -32602, 'Missing tool name', Output),
-			!
-		),
+		^^has_pair(Params, name, ToolName),
+		!,
 		(	^^has_pair(Params, arguments, ToolArguments) ->
 			true
 		;	ToolArguments = {}
@@ -426,6 +435,8 @@
 			)
 		;	send_error(Id, -32602, 'Unknown tool', Output)
 		).
+	handle_tools_call(_Params, Id, Output, _Options) :-
+		send_error(Id, -32602, 'Missing tool name', Output).
 
 	execute_tool_round(Application, ToolName, Functor, Arity, ToolArguments,
 			ClientCaps, InputResponses, RequestState, ProgressToken, Id, Output, Options) :-
@@ -469,11 +480,8 @@
 	% prompts/get (with MRTR)
 
 	handle_prompts_get(Params, Id, Output, Options) :-
-		(	^^has_pair(Params, name, PromptName) ->
-			true
-		;	send_error(Id, -32602, 'Missing prompt name', Output),
-			!
-		),
+		^^has_pair(Params, name, PromptName),
+		!,
 		(	^^has_pair(Params, arguments, PromptArguments) ->
 			true
 		;	PromptArguments = {}
@@ -484,8 +492,9 @@
 		extract_client_capabilities(Params, ClientCaps),
 		^^option(application(Application), Options),
 		(	catch(Application::prompts(PromptDescriptors), _, fail),
-			(member(prompt(PromptName, _, _), PromptDescriptors)
-			; member(prompt(PromptName, _, _, _), PromptDescriptors)) ->
+			(	member(prompt(PromptName, _, _), PromptDescriptors)
+			;	member(prompt(PromptName, _, _, _), PromptDescriptors)
+			) ->
 			execute_prompt_round(
 				Application, PromptName, PromptArguments,
 				ClientCaps, InputResponses, RequestState,
@@ -493,9 +502,13 @@
 			)
 		;	send_error(Id, -32602, 'Unknown prompt', Output)
 		).
+	handle_prompts_get(_Params, Id, Output, _Options) :-
+		send_error(Id, -32602, 'Missing prompt name', Output).
 
-	execute_prompt_round(Application, PromptName, PromptArguments,
-			ClientCaps, InputResponses, RequestState, ProgressToken, Id, Output, Options) :-
+	execute_prompt_round(
+		Application, PromptName, PromptArguments,
+		ClientCaps, InputResponses, RequestState, ProgressToken, Id, Output, Options
+	) :-
 		^^curly_to_pairs(PromptArguments, ArgPairs),
 		make_progress_closure(ProgressToken, Id, Output, Progress),
 		Context = request_context(ClientCaps, InputResponses, RequestState, Progress),
@@ -746,10 +759,7 @@
 			Filters = Filters0
 		;	Filters = []
 		),
-		(	atom(Id) -> SubId = Id
-		;	number_codes(Id, Codes), atom_codes(SubId, Codes)
-		),
-		atom_concat('sub_', SubId, SubscriptionId),
+		atomic_concat('sub_', Id, SubscriptionId),
 		AckResult = {resultType-complete, subscriptionId-SubscriptionId},
 		response(AckResult, Id, AckResponse),
 		AckNotification = {

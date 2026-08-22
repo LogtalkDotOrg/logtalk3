@@ -27,7 +27,9 @@
 :- object(test_tools_2026,
 	implements([mcp_tool_protocol, mcp_multiround_protocol, mcp_cache_protocol])).
 
-	:- uses(list, [member/2, memberchk/2]).
+	:- uses(list, [
+		member/2
+	]).
 
 	:- public(echo/2).
 	:- mode(echo(+atom, -atom), one).
@@ -52,6 +54,7 @@
 	]).
 
 	echo(Input, Input).
+
 	add(X, Y, Sum) :-
 		Sum is X + Y.
 
@@ -91,8 +94,10 @@
 		curly_member(name-Name, Pairs).
 	extract_name(_, unknown).
 
-	curly_member(Pair, (Pair, _)) :- !.
-	curly_member(Pair, (_, Rest)) :- !, curly_member(Pair, Rest).
+	curly_member(Pair, (Pair, _)) :-
+		!.
+	curly_member(Pair, (_, Rest)) :-
+		!, curly_member(Pair, Rest).
 	curly_member(Pair, Pair).
 
 	% Cache policy: tools_list cacheable for 1000ms private
@@ -107,7 +112,9 @@
 :- object(test_prompts_2026,
 	implements([mcp_tool_protocol, mcp_prompt_protocol, mcp_multiround_protocol])).
 
-	:- uses(list, [member/2]).
+	:- uses(list, [
+		member/2
+	]).
 
 	capabilities([prompts]).
 
@@ -188,15 +195,7 @@
 % All capabilities for 2026
 
 :- object(test_all_2026,
-	implements([
-		mcp_tool_protocol,
-		mcp_prompt_protocol,
-		mcp_resource_protocol,
-		mcp_multiround_protocol,
-		mcp_cache_protocol
-	])).
-
-	:- uses(list, [member/2]).
+	implements([mcp_tool_protocol,mcp_prompt_protocol,mcp_resource_protocol,mcp_multiround_protocol,mcp_cache_protocol])).
 
 	capabilities([prompts, resources]).
 

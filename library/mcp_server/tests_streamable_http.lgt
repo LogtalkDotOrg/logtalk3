@@ -25,16 +25,16 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-21,
+		date is 2026-08-22,
 		comment is 'Unit tests for the MCP Streamable HTTP transport (2026-07-28 spec over HTTP).'
 	]).
 
 	:- uses(json_rpc, [
-		request/4, response/3, is_response/1, is_error_response/1, result/2, id/2, error_code/2
+		request/4, is_response/1, is_error_response/1, result/2, error_code/2
 	]).
 
 	:- uses(list, [
-		member/2, memberchk/2
+		memberchk/2
 	]).
 
 	:- uses(lgtunit, [

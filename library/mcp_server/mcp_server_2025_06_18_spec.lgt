@@ -26,8 +26,55 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-21,
+		date is 2026-08-22,
 		comment is 'MCP 2025-06-18 protocol handler. Transport-agnostic message handling; returns abstract outcomes for stdio or Streamable HTTP transports to render. Synchronous elicitation requires ``stdio_input/1`` and ``stdio_output/1`` options.'
+	]).
+
+	:- public(current_options/1).
+	:- mode(current_options(-list), zero_or_one).
+	:- info(current_options/1, [
+		comment is 'Merged options established by prepare/2.',
+		argnames is ['Options']
+	]).
+
+	:- public(elicit_request/5).
+	:- mode(elicit_request(+stream, +stream, +atom, +compound, --compound), one).
+	:- info(elicit_request/5, [
+		comment is 'Sends an elicitation/create request to the client and reads the response (2025-06-18 synchronous model).',
+		argnames is ['Input', 'Output', 'Message', 'RequestedSchema', 'Answer']
+	]).
+
+	% dynamic state (spec-owned)
+
+	:- private(initialized_/0).
+	:- dynamic(initialized_/0).
+	:- mode(initialized_, zero_or_one).
+	:- info(initialized_/0, [
+		comment is 'Initialization completed flag.'
+	]).
+
+	:- private(elicit_counter_/1).
+	:- dynamic(elicit_counter_/1).
+	:- mode(elicit_counter_(-non_negative_integer), one).
+	:- info(elicit_counter_/1, [
+		comment is 'Elicitation current counter.',
+		argnames is ['Counter']
+	]).
+
+	:- private(client_capabilities_/1).
+	:- dynamic(client_capabilities_/1).
+	:- mode(client_capabilities_(-nonvar), one).
+	:- info(client_capabilities_/1, [
+		comment is 'Client capabilities.',
+		argnames is ['Capabilities']
+	]).
+
+	:- private(server_options_/1).
+	:- dynamic(server_options_/1).
+	:- mode(server_options_(-list(compound)), one).
+	:- info(server_options_/1, [
+		comment is 'Server options.',
+		argnames is ['Options']
 	]).
 
 	:- uses(json_rpc, [
@@ -43,20 +90,9 @@
 		write_to_atom/2
 	]).
 
-	% dynamic state (spec-owned)
-
-	:- private(initialized_/0).
-	:- dynamic(initialized_/0).
-	:- mode(initialized_, zero_or_one).
-	:- info(initialized_/0, [
-		commnet is 'Initialization completed flag.'
+	:- uses(user, [
+		atomic_concat/3
 	]).
-
-	:- private(elicit_counter_/1).
-	:- dynamic(elicit_counter_/1).
-
-	:- private(client_capabilities_/1).
-	:- dynamic(client_capabilities_/1).
 
 	% implemented spec
 
@@ -72,16 +108,6 @@
 		retractall(server_options_(_)),
 		assertz(server_options_(Options)),
 		setup_state.
-
-	:- private(server_options_/1).
-	:- dynamic(server_options_/1).
-
-	:- public(current_options/1).
-	:- mode(current_options(-list), zero_or_one).
-	:- info(current_options/1, [
-		comment is 'Merged options established by prepare/2.',
-		argnames is ['Options']
-	]).
 
 	current_options(Options) :-
 		server_options_(Options).
@@ -104,7 +130,10 @@
 		assertz(client_capabilities_({})).
 
 	handle_message(Message, TransportOptions, Outcome) :-
-		(	server_options_(Base) -> true ; Base = TransportOptions ),
+		(	server_options_(Base) ->
+			true
+		;	Base = TransportOptions
+		),
 		merge_transport_options(Base, TransportOptions, Options),
 		(	is_request(Message) ->
 			handle_request(Message, Options, Outcome)
@@ -115,8 +144,14 @@
 		).
 
 	merge_transport_options(Base, Transport, Options) :-
-		(	member(stdio_input(In), Transport) -> O1 = [stdio_input(In)| Base] ; O1 = Base ),
-		(	member(stdio_output(Out), Transport) -> Options = [stdio_output(Out)| O1] ; Options = O1 ).
+		(	member(stdio_input(In), Transport) ->
+			Options0 = [stdio_input(In)| Base]
+		;	Options0 = Base
+		),
+		(	member(stdio_output(Out), Transport) ->
+			Options = [stdio_output(Out)| Options0]
+		;	Options = Options0
+		).
 
 	handle_request(Message, Options, Outcome) :-
 		method(Message, Method),
@@ -316,14 +351,21 @@
 
 	handle_prompts_get(Message, Id, Options, Outcome) :-
 		(	params(Message, Params) -> true ; Params = {} ),
-		(	^^has_pair(Params, name, PromptName) -> true
+		(	^^has_pair(Params, name, PromptName) ->
+			true
 		;	invalid_params(Id, ErrorResponse),
-			Outcome = reply(ErrorResponse), !
+			Outcome = reply(ErrorResponse),
+			!
 		),
-		(	^^has_pair(Params, arguments, PromptArguments) -> true ; PromptArguments = {} ),
+		(	^^has_pair(Params, arguments, PromptArguments) ->
+			true
+		;	PromptArguments = {}
+		),
 		^^option(application(Application), Options),
 		(	catch(Application::prompts(PromptDescriptors), _, fail),
-			(member(prompt(PromptName, _, _), PromptDescriptors) ; member(prompt(PromptName, _, _, _), PromptDescriptors)) ->
+			(	member(prompt(PromptName, _, _), PromptDescriptors)
+			;	member(prompt(PromptName, _, _, _), PromptDescriptors)
+			) ->
 			execute_prompt_get(Application, PromptName, PromptArguments, Id, Outcome)
 		;	error_response(-32601, 'Prompt not found', Id, ErrorResponse),
 			Outcome = reply(ErrorResponse)
@@ -405,13 +447,6 @@
 
 	% elicitation (synchronous, 2025 style)
 
-	:- public(elicit_request/5).
-	:- mode(elicit_request(+stream, +stream, +atom, +compound, --compound), one).
-	:- info(elicit_request/5, [
-		comment is 'Sends an elicitation/create request to the client and reads the response (2025-06-18 synchronous model).',
-		argnames is ['Input', 'Output', 'Message', 'RequestedSchema', 'Answer']
-	]).
-
 	elicit_request(Input, Output, Message, RequestedSchema, Answer) :-
 		generate_elicit_id(ElicitId),
 		Params = {message-Message, requestedSchema-RequestedSchema},
@@ -439,9 +474,7 @@
 		retract(elicit_counter_(N)),
 		N1 is N + 1,
 		assertz(elicit_counter_(N1)),
-		number_codes(N1, NCodes),
-		atom_codes(NAtom, NCodes),
-		atom_concat(elicit_, NAtom, Id).
+		atomic_concat(elicit_, N1, Id).
 
 	default_option(server_name('logtalk-mcp-server')).
 	default_option(server_version('1.0.0')).
@@ -469,6 +502,7 @@
 	valid_option(http_bind(_)).
 	valid_option(http_path(_)).
 	valid_option(http_origin_check(_)).
+	valid_option(http_sse_keepalive(_)).
 	valid_option(instructions(_)).
 	valid_option(cache_ttl(_)).
 	valid_option(cache_scope(_)).

@@ -1258,28 +1258,28 @@
 	default_option(http_origin_check(true)).
 	default_option(http_sse_keepalive(15)).
 
-	valid_option(protocol_adapter(A)) :-
-		callable(A), conforms_to_protocol(A, mcp_server_adapter_protocol).
-	valid_option(server_name(N)) :-
-		atom(N).
-	valid_option(server_version(V)) :-
-		atom(V).
-	valid_option(server_title(T)) :-
-		atom(T).
-	valid_option(instructions(I)) :-
-		atom(I).
-	valid_option(cache_ttl(T)) :-
-		number(T), T >= 0.
-	valid_option(cache_scope(S)) :-
-		once((S == (public) ; S == private)).
+	valid_option(protocol_adapter(Adapter)) :-
+		callable(Adapter), conforms_to_protocol(Adapter, mcp_server_adapter_protocol).
+	valid_option(server_name(Name)) :-
+		atom(Name).
+	valid_option(server_version(Version)) :-
+		atom(Version).
+	valid_option(server_title(Title)) :-
+		atom(Title).
+	valid_option(instructions(Instructions)) :-
+		atom(Instructions).
+	valid_option(cache_ttl(TTL)) :-
+		number(TTL), TTL >= 0.
+	valid_option(cache_scope(Scope)) :-
+		once((Scope == (public) ; Scope == private)).
 	valid_option(spec(V)) :-
 		once((V == '2025-06-18'; V == '2026-07-28')).
-	valid_option(http_port(P)) :-
-		integer(P), P > 0, P =< 65535.
-	valid_option(http_bind(B)) :-
-		atom(B).
-	valid_option(http_path(P)) :-
-		atom(P).
+	valid_option(http_port(Port)) :-
+		integer(Port), 0 < Port, Port =< 65535.
+	valid_option(http_bind(Bind)) :-
+		atom(Bind).
+	valid_option(http_path(Path)) :-
+		atom(Path).
 	valid_option(http_origin_check(F)) :-
 		once((F == true ; F == false)).
 	valid_option(http_sse_keepalive(Seconds)) :-
