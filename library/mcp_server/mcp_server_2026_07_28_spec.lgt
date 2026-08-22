@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-21,
+		date is 2026-08-22,
 		comment is 'MCP 2026-07-28 protocol handler. Returns reply/1, reply_with_progress/2, subscribe/3, accepted, or no_reply outcomes. Does not write to streams; transports render outcomes.'
 	]).
 
@@ -958,5 +958,6 @@
 	valid_option(http_bind(_)).
 	valid_option(http_path(_)).
 	valid_option(http_origin_check(_)).
+	valid_option(http_sse_keepalive(_)).
 
 :- end_object.

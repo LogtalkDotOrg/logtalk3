@@ -438,7 +438,7 @@
   <p class="right" id="mcp-server-streamable-http-transport-0"><span id="index-0"></span><strong>object</strong></p>
 <section id="mcp-server-streamable-http-transport">
 <h1><code class="docutils literal notranslate"><span class="pre">mcp_server_streamable_http_transport</span></code><a class="headerlink" href="#mcp-server-streamable-http-transport" title="Link to this heading"></a></h1>
-<p>MCP Streamable HTTP transport (2026-07-28). Uses Logtalk <code class="docutils literal notranslate"><span class="pre">http_server::serve_until_shutdown/5</span></code> and a dedicated <code class="docutils literal notranslate"><span class="pre">http_handler_protocol</span></code> handler object. Supports specs 2025-06-18 and 2026-07-28 selected via the <code class="docutils literal notranslate"><span class="pre">spec/1</span></code> option and delegated to <code class="docutils literal notranslate"><span class="pre">mcp_server_2025_06_18_spec</span></code> or <code class="docutils literal notranslate"><span class="pre">mcp_server_2026_07_28_spec</span></code>. Requires a multi-threaded backend for subscriptions/listen.</p>
+<p>MCP Streamable HTTP transport (2026-07-28). Uses Logtalk <code class="docutils literal notranslate"><span class="pre">http_server::serve_until_shutdown/5</span></code> and a dedicated <code class="docutils literal notranslate"><span class="pre">http_handler_protocol</span></code> handler object. Supports specs 2025-06-18 and 2026-07-28 selected via the <code class="docutils literal notranslate"><span class="pre">spec/1</span></code> option and delegated to <code class="docutils literal notranslate"><span class="pre">mcp_server_2025_06_18_spec</span></code> or <code class="docutils literal notranslate"><span class="pre">mcp_server_2026_07_28_spec</span></code>. Long-lived subscriptions/listen streams emit periodic SSE comment keep-alives (<code class="docutils literal notranslate"><span class="pre">http_sse_keepalive/1</span></code>). Requires a multi-threaded backend for subscriptions/listen.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -448,7 +448,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-08-21</div>
+<div class="line"><strong>Date:</strong> 2026-08-22</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -474,6 +474,7 @@
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
 <div class="line"><a class="reference internal" href="mcp_server_2025_06_18_spec_0.html#mcp-server-2025-06-18-spec-0"><span class="std std-ref">mcp_server_2025_06_18_spec</span></a></div>
 <div class="line"><a class="reference internal" href="mcp_server_2026_07_28_spec_0.html#mcp-server-2026-07-28-spec-0"><span class="std std-ref">mcp_server_2026_07_28_spec</span></a></div>
+<div class="line"><a class="reference internal" href="os_0.html#os-0"><span class="std std-ref">os</span></a></div>
 <div class="line"><a class="reference internal" href="term_io_0.html#term-io-0"><span class="std std-ref">term_io</span></a></div>
 </div>
 </div>

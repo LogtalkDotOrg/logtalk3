@@ -8,7 +8,7 @@
 ``mcp_server_2025_06_18_spec``
 ==============================
 
-MCP 2025-06-18 protocol handler. Transport-agnostic message handling; returns abstract outcomes for stdio or Streamable HTTP transports to render. Synchronous elicitation requires stdio_input/1 and stdio_output/1 in Options.
+MCP 2025-06-18 protocol handler. Transport-agnostic message handling; returns abstract outcomes for stdio or Streamable HTTP transports to render. Synchronous elicitation requires ``stdio_input/1`` and ``stdio_output/1`` options.
 
 | **Availability:** 
 |    ``logtalk_load(mcp_server(loader))``
@@ -98,6 +98,11 @@ Private predicates
 | **Compilation flags:**
 |    ``dynamic``
 
+| **Mode and number of proofs:**
+|    ``initialized_`` - ``zero_or_one``
+
+| **commnet:**
+|    Initialization completed flag.
 
 ------------
 

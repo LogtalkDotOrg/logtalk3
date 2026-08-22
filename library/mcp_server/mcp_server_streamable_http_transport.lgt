@@ -26,8 +26,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-21,
-		comment is 'MCP Streamable HTTP transport (2026-07-28). Uses Logtalk ``http_server::serve_until_shutdown/5`` and a dedicated ``http_handler_protocol`` handler object. Supports specs 2025-06-18 and 2026-07-28 selected via the ``spec/1`` option and delegated to ``mcp_server_2025_06_18_spec`` or ``mcp_server_2026_07_28_spec``. Requires a multi-threaded backend for subscriptions/listen.'
+		date is 2026-08-22,
+		comment is 'MCP Streamable HTTP transport (2026-07-28). Uses Logtalk ``http_server::serve_until_shutdown/5`` and a dedicated ``http_handler_protocol`` handler object. Supports specs 2025-06-18 and 2026-07-28 selected via the ``spec/1`` option and delegated to ``mcp_server_2025_06_18_spec`` or ``mcp_server_2026_07_28_spec``. Long-lived subscriptions/listen streams emit periodic SSE comment keep-alives (``http_sse_keepalive/1``). Requires a multi-threaded backend for subscriptions/listen.'
 	]).
 
 	:- threaded.
@@ -50,6 +50,10 @@
 
 	:- uses(term_io, [
 		write_to_atom/2
+	]).
+
+	:- uses(os, [
+		sleep/1
 	]).
 
 	:- private(running_/0).
@@ -132,8 +136,8 @@
 		catch(http_server_loop(Options), Error, (cleanup, throw(Error))),
 		cleanup.
 
-	% prepare/2 sets up adapter state without starting the HTTP listener.
-	% Used by unit tests and by embeddings that drive handle_mcp_request/4
+	% prepare/2 sets up adapter state without starting the HTTP listener;
+	% used by unit tests and by embeddings that drive handle_mcp_request/4
 	% from an external HTTP stack.
 	:- public(prepare/2).
 	:- mode(prepare(+object_identifier, +list), one_or_error).
@@ -207,7 +211,7 @@
 		stop_all_subscriptions(Rest).
 
 	signal_subscription_stop(SubId) :-
-		catch(threaded_notify(subscription_msg(SubId, stop)), _, true).
+		threaded_notify(subscription_msg(SubId, stop)).
 
 	setup_state(Options) :-
 		cleanup,
@@ -367,7 +371,10 @@
 		(	is_request(Message) ->
 			id(Message, Id),
 			method(Message, Method),
-			(params(Message, Params0) -> Params = Params0 ; Params = {}),
+			(	params(Message, Params0) ->
+				Params = Params0
+			;	Params = {}
+			),
 			(	validate_2026(Method, Headers, Params, Id, ErrorResponse) ->
 				HTTPResponse = ErrorResponse
 			;	server_options_(Options),
@@ -770,6 +777,15 @@
 		put_codes(Codes, Stream),
 		put_codes(Suffix, Stream).
 
+	% SSE comment line (keep-alive). Per the SSE specification, lines that
+	% begin with a colon carry no event data and must be ignored by clients.
+	% MCP 2026-07-28 encourages periodic comments on long-lived streams
+	% (notably subscriptions/listen) so intermediaries do not idle-close them.
+	write_sse_comment(Stream) :-
+		% ":\r\n"
+		put_codes([0':, 13, 10], Stream),
+		flush_output(Stream).
+
 	put_codes([], _Stream).
 	put_codes([Code| Codes], Stream) :-
 		(	catch(put_byte(Stream, Code), _, fail) ->
@@ -1017,6 +1033,7 @@
 			write_sse_data_event(Stream, AckNotification),
 			flush_output(Stream),
 			assertz(subscription_(SubscriptionId, Id, Filters, Stream)),
+			start_subscription_keepalive(SubscriptionId),
 			% block until cancelled / stream dies / cleanup (other threads notify)
 			subscription_wait_loop(SubscriptionId, Stream),
 			retractall(subscription_(SubscriptionId, _, _, _)),
@@ -1028,7 +1045,7 @@
 		).
 
 	% block until stop or stream write failure; requires multi-threading:
-	% notify/1 and cancellation call threaded_notify/1 from other workers
+	% notify/1, cancellation, and the keep-alive worker call threaded_notify/1
 	subscription_wait_loop(SubId, Stream) :-
 		catch(
 			threaded_wait(subscription_msg(SubId, Msg)),
@@ -1037,12 +1054,49 @@
 		),
 		(	Msg == stop ->
 			true
+		;	Msg == keepalive ->
+			(	write_subscription_keepalive(SubId, Stream) ->
+				subscription_wait_loop(SubId, Stream)
+			;	true  % stream dead
+			)
 		;	Msg = event(Event) ->
 			(	push_subscription_event(SubId, Stream, Event) ->
 				subscription_wait_loop(SubId, Stream)
 			;	true  % stream dead
 			)
 		;	subscription_wait_loop(SubId, Stream)
+		).
+
+	% start a detached worker that periodically notifies keepalive for SubId
+	% (interval 0 or negative disables keep-alive)
+	start_subscription_keepalive(SubId) :-
+		(	server_options_(Options),
+			^^option(http_sse_keepalive(Seconds), Options),
+			Seconds > 0 ->
+			catch(
+				threaded_ignore(subscription_keepalive_loop(SubId, Seconds)),
+				Error,
+				log_subscription_error(SubId, keepalive_start, Error)
+			)
+		;	true
+		).
+
+	subscription_keepalive_loop(SubId, Seconds) :-
+		sleep(Seconds),
+		(	subscription_(SubId, _, _, _) ->
+			threaded_notify(subscription_msg(SubId, keepalive)),
+			subscription_keepalive_loop(SubId, Seconds)
+		;	true
+		).
+
+	write_subscription_keepalive(SubId, Stream) :-
+		Stream \== none,
+		catch(
+			write_sse_comment(Stream),
+			Error,
+			(	log_subscription_error(SubId, keepalive, Error),
+				fail
+			)
 		).
 
 	% succeeds if the SSE write+flush completed; fails on stream errors
@@ -1062,46 +1116,30 @@
 	% notify/1 fan-out — never fails; drops dead subscriptions
 	dispatch_event([], _).
 	dispatch_event([Subscription| Subscriptions], Event) :-
-		catch(dispatch_one(Subscription, Event), Error, log_notify_error(Event, Error)),
+		dispatch_one(Subscription, Event),
 		dispatch_event(Subscriptions, Event).
 
 	dispatch_one(subscription_(SubId, ReqId, Filters, Stream), Event) :-
 		(	event_matches(Event, Filters) ->
-			(	deliver_subscription_event(SubId, Stream, Event) ->
-				true
+			(	Stream \== none ->
+				threaded_notify(subscription_msg(SubId, event(Event)))
 			;	drop_subscription(SubId, ReqId),
 				log_subscription_error(SubId, drop, delivery_failed)
 			)
 		;	true
 		).
 
-	% true on successful delivery; false if the subscriber is dead
-	deliver_subscription_event(SubId, Stream, Event) :-
-		(	Stream == none ->
-			fail
-		;	catch(threaded_notify(subscription_msg(SubId, event(Event))), SendError, true) ->
-			(	nonvar(SendError) ->
-				log_subscription_error(SubId, notify, SendError),
-				% Fallback: one direct write attempt
-				push_subscription_event(SubId, Stream, Event)
-			;	true
-			)
-		;	fail
-		).
-
 	% best-effort removal of a dead subscription
 	drop_subscription(SubId, ReqId) :-
-		catch(signal_subscription_stop(SubId), _, true),
+		signal_subscription_stop(SubId),
 		retractall(subscription_(SubId, ReqId, _, _)),
 		retractall(subscription_(SubId, _, _, _)).
 
 	log_subscription_error(SubId, Op, Error) :-
-		catch(
-			format(user_error,
-				'~w: subscription ~w ~w error: ~w~n',
-				[mcp_server_streamable_http_transport, SubId, Op, Error]),
-			_,
-			true
+		format(
+			user_error,
+			'~w: subscription ~w ~w error: ~w~n',
+			[mcp_server_streamable_http_transport, SubId, Op, Error]
 		).
 
 	event_matches(_, []) :-
@@ -1218,6 +1256,7 @@
 	default_option(http_bind('127.0.0.1')).
 	default_option(http_path('/mcp')).
 	default_option(http_origin_check(true)).
+	default_option(http_sse_keepalive(15)).
 
 	valid_option(protocol_adapter(A)) :-
 		callable(A), conforms_to_protocol(A, mcp_server_adapter_protocol).
@@ -1243,6 +1282,8 @@
 		atom(P).
 	valid_option(http_origin_check(F)) :-
 		once((F == true ; F == false)).
+	valid_option(http_sse_keepalive(Seconds)) :-
+		number(Seconds), Seconds >= 0.
 
 :- end_object.
 
@@ -1260,6 +1301,7 @@
 	:- uses(term_io, [
 		write_to_atom/2
 	]).
+
 	:- uses(list, [
 		member/2, valid/1 as is_list/1
 	]).

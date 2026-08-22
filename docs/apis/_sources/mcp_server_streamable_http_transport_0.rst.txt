@@ -8,14 +8,14 @@
 ``mcp_server_streamable_http_transport``
 ========================================
 
-MCP Streamable HTTP transport (2026-07-28). Uses Logtalk ``http_server::serve_until_shutdown/5`` and a dedicated ``http_handler_protocol`` handler object. Supports specs 2025-06-18 and 2026-07-28 selected via the ``spec/1`` option and delegated to ``mcp_server_2025_06_18_spec`` or ``mcp_server_2026_07_28_spec``. Requires a multi-threaded backend for subscriptions/listen.
+MCP Streamable HTTP transport (2026-07-28). Uses Logtalk ``http_server::serve_until_shutdown/5`` and a dedicated ``http_handler_protocol`` handler object. Supports specs 2025-06-18 and 2026-07-28 selected via the ``spec/1`` option and delegated to ``mcp_server_2025_06_18_spec`` or ``mcp_server_2026_07_28_spec``. Long-lived subscriptions/listen streams emit periodic SSE comment keep-alives (``http_sse_keepalive/1``). Requires a multi-threaded backend for subscriptions/listen.
 
 | **Availability:** 
 |    ``logtalk_load(mcp_server(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-21
+| **Date:** 2026-08-22
 
 | **Compilation flags:**
 |    ``static, context_switching_calls, threaded``
@@ -33,6 +33,7 @@ MCP Streamable HTTP transport (2026-07-28). Uses Logtalk ``http_server::serve_un
 |    :ref:`list <list/0>`
 |    :ref:`mcp_server_2025_06_18_spec <mcp_server_2025_06_18_spec/0>`
 |    :ref:`mcp_server_2026_07_28_spec <mcp_server_2026_07_28_spec/0>`
+|    :ref:`os <os/0>`
 |    :ref:`term_io <term_io/0>`
 
 | **Remarks:**

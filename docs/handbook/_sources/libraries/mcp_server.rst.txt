@@ -273,20 +273,24 @@ Common options
 Streamable HTTP adapter options
 -------------------------------
 
-+-----------------------------+-----------------+-------------------------+
-| Option                      | Default         | Description             |
-+=============================+=================+=========================+
-| ``http_port(Port)``         | ``8080``        | TCP port to listen on   |
-+-----------------------------+-----------------+-------------------------+
-| ``http_bind(Address)``      | ``'127.0.0.1'`` | Bind address            |
-+-----------------------------+-----------------+-------------------------+
-| ``http_path(Path)``         | ``'/mcp'``      | HTTP path for MCP POST  |
-|                             |                 | requests                |
-+-----------------------------+-----------------+-------------------------+
-| ``http_origin_check(Flag)`` | ``true``        | Reject disallowed       |
-|                             |                 | ``Origin`` headers when |
-|                             |                 | ``true``                |
-+-----------------------------+-----------------+-------------------------+
++---------------------------------+-----------------+--------------------------+
+| Option                          | Default         | Description              |
++=================================+=================+==========================+
+| ``http_port(Port)``             | ``8080``        | TCP port to listen on    |
++---------------------------------+-----------------+--------------------------+
+| ``http_bind(Address)``          | ``'127.0.0.1'`` | Bind address             |
++---------------------------------+-----------------+--------------------------+
+| ``http_path(Path)``             | ``'/mcp'``      | HTTP path for MCP POST   |
+|                                 |                 | requests                 |
++---------------------------------+-----------------+--------------------------+
+| ``http_origin_check(Flag)``     | ``true``        | Reject disallowed        |
+|                                 |                 | ``Origin`` headers when  |
+|                                 |                 | ``true``                 |
++---------------------------------+-----------------+--------------------------+
+| ``http_sse_keepalive(Seconds)`` | ``15``          | Keep-alive interval for  |
+|                                 |                 | ``subscriptions/listen`` |
+|                                 |                 | response streams         |
++---------------------------------+-----------------+--------------------------+
 
 These options are validated by the ``mcp_server`` facade and applied
 only when ``protocol_adapter(mcp_server_streamable_http_transport)`` is
