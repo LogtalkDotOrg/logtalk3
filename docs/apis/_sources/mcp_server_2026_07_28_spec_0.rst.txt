@@ -15,7 +15,7 @@ MCP 2026-07-28 protocol handler. Returns reply/1, reply_with_progress/2, subscri
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-22
+| **Date:** 2026-08-23
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -29,6 +29,7 @@ MCP 2026-07-28 protocol handler. Returns reply/1, reply_with_progress/2, subscri
 |    :ref:`json_rpc <json_rpc/0>`
 |    :ref:`list <list/0>`
 |    :ref:`term_io <term_io/0>`
+|    :ref:`user <user/0>`
 
 | **Remarks:**
 |    (none)

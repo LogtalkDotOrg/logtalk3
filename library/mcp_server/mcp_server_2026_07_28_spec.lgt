@@ -26,25 +26,22 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-22,
+		date is 2026-08-23,
 		comment is 'MCP 2026-07-28 protocol handler. Returns reply/1, reply_with_progress/2, subscribe/3, accepted, or no_reply outcomes. Does not write to streams; transports render outcomes.'
 	]).
 
-	:- uses(json_rpc, [
-		response/3, error_response/4, method_not_found/2, is_request/1, is_notification/1, id/2, method/2,
-		params/2, write_message/2, read_message/2
+	:- public(run_stdio_loop/3).
+	:- mode(run_stdio_loop(+stream, +stream, +list), one).
+	:- info(run_stdio_loop/3, [
+		comment is 'Stdio read/dispatch loop used by mcp_server_2026_07_28_adapter.',
+		argnames is ['Input', 'Output', 'Options']
 	]).
 
-	:- uses(list, [
-		member/2, memberchk/2, length/2, append/3
-	]).
-
-	:- uses(term_io, [
-		write_to_atom/2
-	]).
-
-	:- uses(user, [
-		atomic_concat/3
+	:- public(emit_progress/6).
+	:- mode(emit_progress(+term, +term, +stream, +number, +number, +atom), one).
+	:- info(emit_progress/6, [
+		comment is 'Buffers a notifications/progress event or invokes progress_hook/1 from current options.',
+		argnames is ['Token', 'RequestId', 'Output', 'ProgressValue', 'Total', 'Message']
 	]).
 
 	% dynamic state
@@ -68,6 +65,23 @@
 	:- private(current_options_/1).
 	:- dynamic(current_options_/1).
 
+	:- uses(json_rpc, [
+		response/3, error_response/4, method_not_found/2, is_request/1, is_notification/1, id/2, method/2,
+		params/2, write_message/2, read_message/2
+	]).
+
+	:- uses(list, [
+		member/2, memberchk/2, length/2, append/3
+	]).
+
+	:- uses(term_io, [
+		write_to_atom/2
+	]).
+
+	:- uses(user, [
+		atomic_concat/3
+	]).
+
 	% implemented spec
 
 	spec('2026-07-28').
@@ -82,13 +96,6 @@
 		retractall(current_options_(_)),
 		assertz(current_options_(Options)),
 		setup_state(user_output).
-
-	:- public(run_stdio_loop/3).
-	:- mode(run_stdio_loop(+stream, +stream, +list), one).
-	:- info(run_stdio_loop/3, [
-		comment is 'Stdio read/dispatch loop used by mcp_server_2026_07_28_adapter.',
-		argnames is ['Input', 'Output', 'Options']
-	]).
 
 	run_stdio_loop(Input, Output, Options) :-
 		retractall(current_options_(_)),
@@ -124,7 +131,8 @@
 			true
 		;	Events = []
 		),
-		(	Outcome0 = reply(Final), Events = [_| _] ->
+		(	Outcome0 = reply(Final),
+			Events = [_| _] ->
 			Outcome = reply_with_progress(Events, Final)
 		;	Outcome0 = subscribe(_, _, _) ->
 			Outcome = Outcome0
@@ -133,8 +141,8 @@
 
 	notify(Event) :-
 		(	output_stream_(Output) ->
-			findall(SubId-Filters, subscription_(SubId, _, Filters), Subs),
-			dispatch_event(Subs, Event, Output)
+			findall(SubscriptionId-Filters, subscription_(SubscriptionId, _, Filters), Subscriptions),
+			dispatch_event(Subscriptions, Event, Output)
 		;	true
 		).
 
@@ -725,13 +733,6 @@
 			mcp_server_2026_07_28_spec::emit_progress(Token, RequestId, Output, ProgressValue, Total, Message)
 		).
 
-	:- public(emit_progress/6).
-	:- mode(emit_progress(+term, +term, +stream, +number, +number, +atom), one).
-	:- info(emit_progress/6, [
-		comment is 'Buffers a notifications/progress event or invokes progress_hook/1 from current options.',
-		argnames is ['Token', 'RequestId', 'Output', 'ProgressValue', 'Total', 'Message']
-	]).
-
 	emit_progress(Token, _RequestId, _Output, ProgressValue, Total, Message) :-
 		Params = {
 			progressToken-Token,
@@ -771,15 +772,15 @@
 		retractall(reply_outcome_(_)),
 		assertz(reply_outcome_(subscribe(SubscriptionId, Filters, [AckResponse, AckNotification]))).
 
-	dispatch_event([], _Event, _).
-	dispatch_event([SubId-Filters| Rest], Event, Output) :-
+	dispatch_event([], _Event, _Output).
+	dispatch_event([SubscriptionId-Filters| Subscriptions], Event, Output) :-
 		(	event_matches(Filters, Event) ->
-			event_to_notification(Event, SubId, Notification),
+			event_to_notification(Event, SubscriptionId, Notification),
 			write_message(Output, Notification),
 			flush_output(Output)
 		;	true
 		),
-		dispatch_event(Rest, Event, Output).
+		dispatch_event(Subscriptions, Event, Output).
 
 	event_matches([], _Event) :-
 		% empty filters match all
@@ -798,29 +799,29 @@
 	event_type(resources_list_changed, resources).
 	event_type(resource_updated(_), resources).
 
-	event_to_notification(tools_list_changed, SubId, Notification) :-
+	event_to_notification(tools_list_changed, SubscriptionId, Notification) :-
 		Notification = {
 			jsonrpc-'2.0',
 			method-'notifications/tools/list_changed',
-			params-{'_meta'-{'io.modelcontextprotocol/subscriptionId'-SubId}}
+			params-{'_meta'-{'io.modelcontextprotocol/subscriptionId'-SubscriptionId}}
 		}.
-	event_to_notification(prompts_list_changed, SubId, Notification) :-
+	event_to_notification(prompts_list_changed, SubscriptionId, Notification) :-
 		Notification = {
 			jsonrpc-'2.0',
 			method-'notifications/prompts/list_changed',
-			params-{'_meta'-{'io.modelcontextprotocol/subscriptionId'-SubId}}
+			params-{'_meta'-{'io.modelcontextprotocol/subscriptionId'-SubscriptionId}}
 		}.
-	event_to_notification(resources_list_changed, SubId, Notification) :-
+	event_to_notification(resources_list_changed, SubscriptionId, Notification) :-
 		Notification = {
 			jsonrpc-'2.0',
 			method-'notifications/resources/list_changed',
-			params-{'_meta'-{'io.modelcontextprotocol/subscriptionId'-SubId}}
+			params-{'_meta'-{'io.modelcontextprotocol/subscriptionId'-SubscriptionId}}
 		}.
-	event_to_notification(resource_updated(URI), SubId, Notification) :-
+	event_to_notification(resource_updated(URI), SubscriptionId, Notification) :-
 		Notification = {
 			jsonrpc-'2.0',
 			method-'notifications/resources/updated',
-			params-{uri-URI, '_meta'-{'io.modelcontextprotocol/subscriptionId'-SubId}}
+			params-{uri-URI, '_meta'-{'io.modelcontextprotocol/subscriptionId'-SubscriptionId}}
 		}.
 
 	% cache resolution
@@ -884,11 +885,11 @@
 		;	Token = none
 		).
 
-	extract_client_capabilities(Params, Caps) :-
+	extract_client_capabilities(Params, Capabilities) :-
 		(	^^has_pair(Params, '_meta', Meta),
-			^^has_pair(Meta, 'io.modelcontextprotocol/clientCapabilities', Caps0) ->
-			Caps = Caps0
-		;	Caps = {}
+			^^has_pair(Meta, 'io.modelcontextprotocol/clientCapabilities', Capabilities0) ->
+			Capabilities = Capabilities0
+		;	Capabilities = {}
 		).
 
 	% output predicates

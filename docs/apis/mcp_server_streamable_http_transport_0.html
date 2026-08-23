@@ -448,7 +448,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-08-22</div>
+<div class="line"><strong>Date:</strong> 2026-08-23</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -523,7 +523,7 @@
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
 <section id="prepare-2">
 <span id="mcp-server-streamable-http-transport-0-prepare-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">prepare/2</span></code></a><a class="headerlink" href="#prepare-2" title="Link to this heading"></a></h3>
-<p>Initializes adapter state for Application with Options without opening a listener. Pair with handle_mcp_request/4 and cleanup/0.</p>
+<p>Initializes adapter state for <code class="docutils literal notranslate"><span class="pre">Application</span></code> with <code class="docutils literal notranslate"><span class="pre">Options</span></code> without opening a listener. Used by unit tests and by embeddings by pairing with <code class="docutils literal notranslate"><span class="pre">handle_mcp_request/4</span></code> and <code class="docutils literal notranslate"><span class="pre">cleanup/0</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -624,7 +624,7 @@
 </section>
 <section id="handle-mcp-request-4">
 <span id="mcp-server-streamable-http-transport-0-handle-mcp-request-4"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">handle_mcp_request/4</span></code></a><a class="headerlink" href="#handle-mcp-request-4" title="Link to this heading"></a></h3>
-<p>Handles one MCP HTTP request. Method is an uppercase HTTP method atom. Headers is a list of Name-Value pairs. Body is the raw request body atom. HTTPResponse is http_response(Status, Headers, BodyAtom) or http_response(already_sent, Headers, BodyAtom).</p>
+<p>Handles one MCP HTTP request. <code class="docutils literal notranslate"><span class="pre">Method</span></code> is an uppercase HTTP method atom. <code class="docutils literal notranslate"><span class="pre">Headers</span></code> is a list of <code class="docutils literal notranslate"><span class="pre">Name-Value</span></code> pairs. <code class="docutils literal notranslate"><span class="pre">Body</span></code> is the raw request body atom. <code class="docutils literal notranslate"><span class="pre">HTTPResponse</span></code> is <code class="docutils literal notranslate"><span class="pre">http_response(Status,</span> <span class="pre">Headers,</span> <span class="pre">BodyAtom)</span></code> or <code class="docutils literal notranslate"><span class="pre">http_response(already_sent,</span> <span class="pre">Headers,</span> <span class="pre">BodyAtom)</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

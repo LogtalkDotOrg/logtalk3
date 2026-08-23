@@ -15,7 +15,7 @@ MCP 2025-06-18 protocol handler. Transport-agnostic message handling; returns ab
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-21
+| **Date:** 2026-08-23
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -29,6 +29,7 @@ MCP 2025-06-18 protocol handler. Transport-agnostic message handling; returns ab
 |    :ref:`json_rpc <json_rpc/0>`
 |    :ref:`list <list/0>`
 |    :ref:`term_io <term_io/0>`
+|    :ref:`user <user/0>`
 
 | **Remarks:**
 |    (none)
@@ -95,14 +96,14 @@ Private predicates
 ``initialized_/0``
 ^^^^^^^^^^^^^^^^^^
 
+Initialization completed flag.
+
 | **Compilation flags:**
 |    ``dynamic``
 
 | **Mode and number of proofs:**
 |    ``initialized_`` - ``zero_or_one``
 
-| **commnet:**
-|    Initialization completed flag.
 
 ------------
 
@@ -112,8 +113,15 @@ Private predicates
 ``elicit_counter_/1``
 ^^^^^^^^^^^^^^^^^^^^^
 
+Elicitation current counter.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``elicit_counter_(Counter)``
+| **Mode and number of proofs:**
+|    ``elicit_counter_(-non_negative_integer)`` - ``one``
 
 
 ------------
@@ -124,8 +132,15 @@ Private predicates
 ``client_capabilities_/1``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Client capabilities.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``client_capabilities_(Capabilities)``
+| **Mode and number of proofs:**
+|    ``client_capabilities_(-nonvar)`` - ``one``
 
 
 ------------
@@ -136,8 +151,15 @@ Private predicates
 ``server_options_/1``
 ^^^^^^^^^^^^^^^^^^^^^
 
+Server options.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``server_options_(Options)``
+| **Mode and number of proofs:**
+|    ``server_options_(-list(compound))`` - ``one``
 
 
 ------------

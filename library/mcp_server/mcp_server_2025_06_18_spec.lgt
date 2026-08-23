@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-22,
+		date is 2026-08-23,
 		comment is 'MCP 2025-06-18 protocol handler. Transport-agnostic message handling; returns abstract outcomes for stdio or Streamable HTTP transports to render. Synchronous elicitation requires ``stdio_input/1`` and ``stdio_output/1`` options.'
 	]).
 
@@ -267,12 +267,19 @@
 	% tools/call
 
 	handle_tools_call(Message, Id, Options, Outcome) :-
-		(	params(Message, Params) -> true ; Params = {} ),
-		(	^^has_pair(Params, name, ToolName) -> true
+		(	params(Message, Params) ->
+			true
+		;	Params = {}
+		),
+		(	^^has_pair(Params, name, ToolName) ->
+			true
 		;	invalid_params(Id, ErrorResponse),
 			Outcome = reply(ErrorResponse), !
 		),
-		(	^^has_pair(Params, arguments, ToolArguments) -> true ; ToolArguments = {} ),
+		(	^^has_pair(Params, arguments, ToolArguments) ->
+			true
+		;	ToolArguments = {}
+		),
 		^^option(application(Application), Options),
 		(	Application::tools(ToolDescriptors),
 			member(tool(ToolName, Functor, Arity), ToolDescriptors) ->
@@ -411,14 +418,20 @@
 	% resources/read
 
 	handle_resources_read(Message, Id, Options, Outcome) :-
-		(	params(Message, Params) -> true ; Params = {} ),
-		(	^^has_pair(Params, uri, URI) -> true
+		(	params(Message, Params) ->
+			true
+		;	Params = {}
+		),
+		(	^^has_pair(Params, uri, URI) ->
+			true
 		;	invalid_params(Id, ErrorResponse),
 			Outcome = reply(ErrorResponse), !
 		),
 		^^option(application(Application), Options),
 		(	catch(Application::resources(ResourceDescriptors), _, fail),
-			(member(resource(URI, _, _, _), ResourceDescriptors) ; member(resource(URI, _, _, _, _), ResourceDescriptors)) ->
+			(	member(resource(URI, _, _, _), ResourceDescriptors)
+			;	member(resource(URI, _, _, _, _), ResourceDescriptors)
+			) ->
 			execute_resource_read(Application, URI, Id, Outcome)
 		;	error_response(-32601, 'Resource not found', Id, ErrorResponse),
 			Outcome = reply(ErrorResponse)
@@ -471,10 +484,10 @@
 		).
 
 	generate_elicit_id(Id) :-
-		retract(elicit_counter_(N)),
-		N1 is N + 1,
-		assertz(elicit_counter_(N1)),
-		atomic_concat(elicit_, N1, Id).
+		retract(elicit_counter_(N0)),
+		N is N0 + 1,
+		assertz(elicit_counter_(N)),
+		atomic_concat(elicit_, N, Id).
 
 	default_option(server_name('logtalk-mcp-server')).
 	default_option(server_version('1.0.0')).

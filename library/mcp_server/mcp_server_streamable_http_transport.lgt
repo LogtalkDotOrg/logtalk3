@@ -26,34 +26,58 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-22,
+		date is 2026-08-23,
 		comment is 'MCP Streamable HTTP transport (2026-07-28). Uses Logtalk ``http_server::serve_until_shutdown/5`` and a dedicated ``http_handler_protocol`` handler object. Supports specs 2025-06-18 and 2026-07-28 selected via the ``spec/1`` option and delegated to ``mcp_server_2025_06_18_spec`` or ``mcp_server_2026_07_28_spec``. Long-lived subscriptions/listen streams emit periodic SSE comment keep-alives (``http_sse_keepalive/1``). Requires a multi-threaded backend for subscriptions/listen.'
 	]).
 
 	:- threaded.
 
-	:- uses(format, [
-		format/3
+	:- public(prepare/2).
+	:- mode(prepare(+object_identifier, +list), one_or_error).
+	:- info(prepare/2, [
+		comment is 'Initializes adapter state for ``Application`` with ``Options`` without opening a listener. Used by unit tests and by embeddings by pairing with ``handle_mcp_request/4`` and ``cleanup/0``.',
+		argnames is ['Application', 'Options']
 	]).
 
-	:- uses(json_rpc, [
-		response/3, error_response/4, is_request/1, is_notification/1, id/2, method/2, params/2
+	:- public(attach_sse_stream/1).
+	:- mode(attach_sse_stream(+stream), one).
+	:- info(attach_sse_stream/1, [
+		comment is 'Registers a live output stream for incremental SSE writes. Headers must already have been written. Each emit_progress/5 call writes and flushes immediately.',
+		argnames is ['Stream']
 	]).
 
-	:- uses(json, [
-		parse/2, generate/2
+	:- public(detach_sse_stream/0).
+	:- mode(detach_sse_stream, one).
+	:- info(detach_sse_stream/0, [
+		comment is 'Clears any live SSE output stream registration.'
 	]).
 
-	:- uses(list, [
-		append/3, member/2, memberchk/2
+	:- public(sse_headers/1).
+	:- mode(sse_headers(-list), one).
+	:- info(sse_headers/1, [
+		comment is 'HTTP headers for an SSE response body.',
+		argnames is ['Headers']
 	]).
 
-	:- uses(term_io, [
-		write_to_atom/2
+	:- public(current_options/1).
+	:- mode(current_options(-list), zero_or_one).
+	:- info(current_options/1, [
+		comment is 'Unified with the options list established by prepare/2 or start/4.',
+		argnames is ['Options']
 	]).
 
-	:- uses(os, [
-		sleep/1
+	:- public(handle_mcp_request/4).
+	:- mode(handle_mcp_request(+atom, +list, +atom, -compound), one).
+	:- info(handle_mcp_request/4, [
+		comment is 'Handles one MCP HTTP request. ``Method`` is an uppercase HTTP method atom. ``Headers`` is a list of ``Name-Value`` pairs. ``Body`` is the raw request body atom. ``HTTPResponse`` is ``http_response(Status, Headers, BodyAtom)`` or ``http_response(already_sent, Headers, BodyAtom)``.',
+		argnames is ['Method', 'Headers', 'Body', 'HTTPResponse']
+	]).
+
+	:- public(emit_progress/5).
+	:- mode(emit_progress(+term, +term, +number, +number, +atom), one).
+	:- info(emit_progress/5, [
+		comment is 'Emits a notifications/progress event. In live mode the SSE record is written and flushed immediately on the attached stream. In buffered mode the event is queued until finalize_response/4.',
+		argnames is ['Token', 'RequestId', 'ProgressValue', 'Total', 'Message']
 	]).
 
 	:- private(running_/0).
@@ -123,6 +147,30 @@
 		argnames is ['Mode']
 	]).
 
+	:- uses(format, [
+		format/3
+	]).
+
+	:- uses(json_rpc, [
+		response/3, error_response/4, is_request/1, is_notification/1, id/2, method/2, params/2
+	]).
+
+	:- uses(json, [
+		parse/2, generate/2
+	]).
+
+	:- uses(list, [
+		append/3, member/2, memberchk/2
+	]).
+
+	:- uses(term_io, [
+		write_to_atom/2
+	]).
+
+	:- uses(os, [
+		sleep/1
+	]).
+
 	spec(Version) :-
 		(	server_options_(Options),
 			member(spec(Version), Options) ->
@@ -135,16 +183,6 @@
 		server_options_(Options),
 		catch(http_server_loop(Options), Error, (cleanup, throw(Error))),
 		cleanup.
-
-	% prepare/2 sets up adapter state without starting the HTTP listener;
-	% used by unit tests and by embeddings that drive handle_mcp_request/4
-	% from an external HTTP stack.
-	:- public(prepare/2).
-	:- mode(prepare(+object_identifier, +list), one_or_error).
-	:- info(prepare/2, [
-		comment is 'Initializes adapter state for Application with Options without opening a listener. Pair with handle_mcp_request/4 and cleanup/0.',
-		argnames is ['Application', 'Options']
-	]).
 
 	prepare(Application, UserOptions) :-
 		^^check_options(UserOptions),
@@ -220,35 +258,15 @@
 
 	% live SSE stream registration (called by the HTTP handler)
 
-	:- public(attach_sse_stream/1).
-	:- mode(attach_sse_stream(+stream), one).
-	:- info(attach_sse_stream/1, [
-		comment is 'Registers a live output stream for incremental SSE writes. Headers must already have been written. Each emit_progress/5 call writes and flushes immediately.',
-		argnames is ['Stream']
-	]).
-
 	attach_sse_stream(Stream) :-
 		retractall(sse_output_(_)),
 		retractall(sse_mode_(_)),
 		assertz(sse_output_(Stream)),
 		assertz(sse_mode_(live)).
 
-	:- public(detach_sse_stream/0).
-	:- mode(detach_sse_stream, one).
-	:- info(detach_sse_stream/0, [
-		comment is 'Clears any live SSE output stream registration.'
-	]).
-
 	detach_sse_stream :-
 		retractall(sse_output_(_)),
 		retractall(sse_mode_(_)).
-
-	:- public(sse_headers/1).
-	:- mode(sse_headers(-list), one).
-	:- info(sse_headers/1, [
-		comment is 'HTTP headers for an SSE response body.',
-		argnames is ['Headers']
-	]).
 
 	sse_headers([
 		'Content-Type'-'text/event-stream; charset=utf-8',
@@ -281,22 +299,8 @@
 			[scheme(http), transport(default), workers(per_connection)]
 		).
 
-	:- public(current_options/1).
-	:- mode(current_options(-list), zero_or_one).
-	:- info(current_options/1, [
-		comment is 'Unified with the options list established by prepare/2 or start/4.',
-		argnames is ['Options']
-	]).
-
 	current_options(Options) :-
 		server_options_(Options).
-
-	:- public(handle_mcp_request/4).
-	:- mode(handle_mcp_request(+atom, +list, +atom, -compound), one).
-	:- info(handle_mcp_request/4, [
-		comment is 'Handles one MCP HTTP request. Method is an uppercase HTTP method atom. Headers is a list of Name-Value pairs. Body is the raw request body atom. HTTPResponse is http_response(Status, Headers, BodyAtom) or http_response(already_sent, Headers, BodyAtom).',
-		argnames is ['Method', 'Headers', 'Body', 'HTTPResponse']
-	]).
 
 	handle_mcp_request(Method, Headers, Body, HTTPResponse) :-
 		(	Method == 'POST' ->
@@ -737,13 +741,6 @@
 			mcp_server_streamable_http_transport::emit_progress(Token, RequestId, ProgressValue, Total, Message)
 		).
 
-	:- public(emit_progress/5).
-	:- mode(emit_progress(+term, +term, +number, +number, +atom), one).
-	:- info(emit_progress/5, [
-		comment is 'Emits a notifications/progress event. In live mode the SSE record is written and flushed immediately on the attached stream. In buffered mode the event is queued until finalize_response/4.',
-		argnames is ['Token', 'RequestId', 'ProgressValue', 'Total', 'Message']
-	]).
-
 	emit_progress(Token, _RequestId, ProgressValue, Total, Message) :-
 		Notification = {
 			jsonrpc-'2.0',
@@ -867,10 +864,12 @@
 		json_result(Id, {prompts-Json, resultType-complete, ttlMs-TTL, cacheScope-Scope}, HTTPResponse).
 
 	handle_prompts_get(Params, Id, HTTPResponse) :-
-		(	^^has_pair(Params, name, Name) -> true
-		;	json_error(Id, -32602, 'Missing prompt name', HTTPResponse), !
+		^^has_pair(Params, name, Name),
+		!,
+		(	^^has_pair(Params, arguments, Args) ->
+			true
+		;	Args = {}
 		),
-		(	^^has_pair(Params, arguments, Args) -> true ; Args = {} ),
 		extract_progress_token(Params, ProgressToken),
 		begin_progress(ProgressToken),
 		server_options_(Options),
@@ -898,6 +897,8 @@
 			)
 		),
 		end_progress.
+	handle_prompts_get(_Params, Id, HTTPResponse) :-
+		json_error(Id, -32602, 'Missing prompt name', HTTPResponse).
 
 	format_prompt_result(Result, Id, ProgressToken, HTTPResponse) :-
 		prompt_result_body(Result, Id, BodyTerm),
@@ -936,10 +937,8 @@
 		json_result(Id, {resources-Json, resultType-complete, ttlMs-TTL, cacheScope-Scope}, HTTPResponse).
 
 	handle_resources_read(Params, Id, HTTPResponse) :-
-		(	^^has_pair(Params, uri, URI) ->
-			true
-		;	json_error(Id, -32602, 'Missing resource uri', HTTPResponse)
-		),
+		^^has_pair(Params, uri, URI),
+		!,
 		extract_progress_token(Params, ProgressToken),
 		begin_progress(ProgressToken),
 		server_options_(Options),
@@ -966,29 +965,31 @@
 			)
 		),
 		end_progress.
+	handle_resources_read(_Params, Id, HTTPResponse) :-
+		json_error(Id, -32602, 'Missing resource uri', HTTPResponse).
 
 	format_resource_result(Result, URI, Id, Options, ProgressToken, HTTPResponse) :-
 		resource_result_body(Result, URI, Id, Options, BodyTerm),
 		finalize_response(Id, BodyTerm, ProgressToken, HTTPResponse).
 
-	resource_result_body(contents(Cs), URI, Id, Options, Msg) :-
+	resource_result_body(contents(Contents), URI, Id, Options, Message) :-
 		!,
-		^^format_resource_contents(Cs, Json),
+		^^format_resource_contents(Contents, Json),
 		resolve_cache(resources_read, URI, TTL, Scope, Options),
-		response({contents-Json, resultType-complete, ttlMs-TTL, cacheScope-Scope}, Id, Msg).
-	resource_result_body(error(E), _, Id, _, Msg) :-
+		response({contents-Json, resultType-complete, ttlMs-TTL, cacheScope-Scope}, Id, Message).
+	resource_result_body(error(Error), _, Id, _, Message) :-
 		!,
-		(	atom(E) ->
-			T = E
-		;	write_to_atom(E, T)
+		(	atom(Error) ->
+			Text = Error
+		;	write_to_atom(Error, Text)
 		),
-		error_response(-32603, T, Id, Msg).
-	resource_result_body(Other, _, Id, _, Msg) :-
+		error_response(-32603, Text, Id, Message).
+	resource_result_body(Other, _, Id, _, Message) :-
 		(	atom(Other) ->
-			T = Other
-		;	write_to_atom(Other, T)
+			Text = Other
+		;	write_to_atom(Other, Text)
 		),
-		error_response(-32603, T, Id, Msg).
+		error_response(-32603, Text, Id, Message).
 
 	% subscriptions/listen — long-lived SSE stream
 	%

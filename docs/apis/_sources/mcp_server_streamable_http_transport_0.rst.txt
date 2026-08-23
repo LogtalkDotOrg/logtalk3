@@ -15,7 +15,7 @@ MCP Streamable HTTP transport (2026-07-28). Uses Logtalk ``http_server::serve_un
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-22
+| **Date:** 2026-08-23
 
 | **Compilation flags:**
 |    ``static, context_switching_calls, threaded``
@@ -55,7 +55,7 @@ Public predicates
 ``prepare/2``
 ^^^^^^^^^^^^^
 
-Initializes adapter state for Application with Options without opening a listener. Pair with handle_mcp_request/4 and cleanup/0.
+Initializes adapter state for ``Application`` with ``Options`` without opening a listener. Used by unit tests and by embeddings by pairing with ``handle_mcp_request/4`` and ``cleanup/0``.
 
 | **Compilation flags:**
 |    ``static``
@@ -148,7 +148,7 @@ Unified with the options list established by prepare/2 or start/4.
 ``handle_mcp_request/4``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Handles one MCP HTTP request. Method is an uppercase HTTP method atom. Headers is a list of Name-Value pairs. Body is the raw request body atom. HTTPResponse is http_response(Status, Headers, BodyAtom) or http_response(already_sent, Headers, BodyAtom).
+Handles one MCP HTTP request. ``Method`` is an uppercase HTTP method atom. ``Headers`` is a list of ``Name-Value`` pairs. ``Body`` is the raw request body atom. ``HTTPResponse`` is ``http_response(Status, Headers, BodyAtom)`` or ``http_response(already_sent, Headers, BodyAtom)``.
 
 | **Compilation flags:**
 |    ``static``
