@@ -252,6 +252,11 @@ SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM.
 
 * IMPROVED: Tests for the `lgtunit` tool to be less verbose.
 
+* UPDATED: The `lgtunit` tool to expand calls to test assertions in test
+outcomes and test bodies to avoid false dead code warnings as the assertion
+meta-calls are only expanded when the tests are compiled in optimal mode,
+which is not common practice.
+
 * UPDATED: The `tutor` tool to explain the new linter warnings on cuts
 followed by goals that throws an error and the use of `once/1` goals
 as if-then-else or soft-cut conditionals.

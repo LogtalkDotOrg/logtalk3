@@ -28,9 +28,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 22:7:1,
+		version is 22:8:0,
 		author is 'Paulo Moura',
-		date is 2026-06-15,
+		date is 2026-08-23,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -1338,7 +1338,7 @@
 			(	run_test_setup(Test, Setup, File, Position, Flaky, Note, Output) ->
 				wall_time(WallStart),
 				cpu_time(CPUStart),
-				(	catch(::test(Test, Variables, deterministic(Deterministic)), Error, failed_test(Test, File, Position, error_instead_of_success(Error), Flaky, Note, CPUStart, WallStart, Output)) ->
+				(	catch(deterministic(::test(Test, Variables, deterministic), Deterministic), Error, failed_test(Test, File, Position, error_instead_of_success(Error), Flaky, Note, CPUStart, WallStart, Output)) ->
 					(	var(Error) ->
 						(	Deterministic == true ->
 							passed_test(Test, File, Position, Flaky, Note, CPUStart, WallStart, Output)
@@ -1432,7 +1432,7 @@
 	run_test(deterministic(Test, Variables, File, Position), _MainFile, Output) :-
 		wall_time(WallStart),
 		cpu_time(CPUStart),
-		(	catch(::test(Test, Variables, deterministic(Deterministic)), Error, failed_test(Test, File, Position, error_instead_of_success(Error), CPUStart, WallStart, Output)) ->
+		(	catch(deterministic(::test(Test, Variables, deterministic), Deterministic), Error, failed_test(Test, File, Position, error_instead_of_success(Error), CPUStart, WallStart, Output)) ->
 			(	var(Error) ->
 				(	Deterministic == true ->
 					passed_test(Test, File, Position, CPUStart, WallStart, Output)
@@ -1670,6 +1670,27 @@
 		New is Old + 1,
 		::asserta(flaky_(New)).
 
+	% expand lgtunit::assertion/1-2 goals in test bodies to avoid false dead code
+	% warnings as the meta-calls are only expanded when the tests are compiled in
+	% optimal mode, which is not common practice
+
+	goal_expansion(Object::Message, Expansion) :-
+		Object == lgtunit,
+		callable(Expansion),
+		(	Message = assertion(Assertion) ->
+			Expansion = (
+				\+ \+ catch(Assertion, Error, throw(assertion_error(Assertion, Error))) ->
+				true
+			;	throw(assertion_failure(Assertion))
+			)
+		;	Message = assertion(Description, Assertion),
+			Expansion = (
+				\+ \+ catch(Assertion, Error, throw(assertion_error(Description, Error))) ->
+				true
+			;	throw(assertion_failure(Description))
+			)
+		).
+
 	% different unit test idioms are supported using the term-expansion mechanism;
 	% the unit test objects must be loaded using this object as an hook object
 
@@ -1730,7 +1751,7 @@
 		parse_test_options(Options, Test, Condition, Setup, Cleanup, Flaky, Note, File, Position, Type, Entity),
 		(	Outcome == true ->
 			assertz(test_(Test, succeeds(Test, Variables, File, Position, Condition, Setup, Cleanup, Flaky, Note)))
-		;	Outcome = deterministic(_) ->
+		;	Outcome == deterministic ->
 			assertz(test_(Test, deterministic(Test, Variables, File, Position, Condition, Setup, Cleanup, Flaky, Note)))
 		;	Outcome == fail ->
 			assertz(test_(Test, fails(Test, Variables, File, Position, Condition, Setup, Cleanup, Flaky, Note)))
@@ -1749,7 +1770,7 @@
 		term_variables(Outcome0, Variables),
 		(	Outcome == true ->
 			assertz(test_(Test, succeeds(Test, Variables, File, Position)))
-		;	Outcome = deterministic(_) ->
+		;	Outcome == deterministic ->
 			assertz(test_(Test, deterministic(Test, Variables, File, Position)))
 		;	Outcome == fail ->
 			assertz(test_(Test, fails(Test, Variables, File, Position)))
@@ -1776,10 +1797,9 @@
 		load_context(File, Position, Type, Entity),
 		check_for_valid_test_identifier(Test, File, Position, Type, Entity),
 		assertz(test_(Test, succeeds(Test, [], File, Position))).
-	term_expansion((deterministic(Test) :- Goal), [(test(Test, [], deterministic(Deterministic)) :- lgtunit::deterministic(Head,Deterministic))], _) :-
+	term_expansion((deterministic(Test) :- Goal), [(test(Test, [], deterministic) :- Goal)], _) :-
 		load_context(File, Position, Type, Entity),
 		check_for_valid_test_identifier(Test, File, Position, Type, Entity),
-		compile_deterministic_test_aux_predicate(Test, Goal, Head),
 		assertz(test_(Test, deterministic(Test, [], File, Position))).
 	term_expansion((fails(Test) :- Goal), [(test(Test, [], fail) :- Goal)], _) :-
 		load_context(File, Position, Type, Entity),
@@ -1940,19 +1960,22 @@
 	valid_test_outcome(ball(_)).
 	valid_test_outcome(balls(_)).
 
+	% for test outcomes that have assertion arguments, use the expansion of the
+	% lgtunit::assertion/1 predicate to avoid false dead code warnings as the
+	% meta-call argument is only expanded when the tests are compiled in optimal
+	% mode, which is not common practice
+
 	convert_test_outcome(true, _, Goal, true, Goal, _, _, _, _, _).
-	convert_test_outcome(true(Assertion), Test, Goal, true, (Goal, lgtunit::assertion(Assertion,Assertion)), File, Position, Type, Entity, VariableNames) :-
+	convert_test_outcome(true(Assertion), Test, Goal, true, (Goal, (\+ \+ catch(Assertion,Error,throw(assertion_error(Assertion, Error))) -> true; throw(assertion_failure(Assertion)))), File, Position, Type, Entity, VariableNames) :-
 		lint_check_assertion(Test, Assertion, File, Position, Type, Entity, VariableNames).
-	convert_test_outcome(deterministic, Test, Goal, deterministic(Deterministic), lgtunit::deterministic(Head,Deterministic), _, _, _, _, _) :-
-		compile_deterministic_test_aux_predicate(Test, Goal, Head).
-	convert_test_outcome(deterministic(Assertion), Test, Goal, deterministic(Deterministic), (lgtunit::deterministic(Head,Deterministic), lgtunit::assertion(Assertion,Assertion)), File, Position, Type, Entity, VariableNames) :-
-		lint_check_assertion(Test, Assertion, File, Position, Type, Entity, VariableNames),
-		compile_deterministic_test_aux_predicate(Test, Goal, Head).
-	convert_test_outcome(subsumes(Expected, Result), _, Goal, true, (Goal, lgtunit::assertion(subsumes_term(Expected,Result),subsumes_term(Expected,Result))), _, _, _, _, _).
-	convert_test_outcome(variant(Term1, Term2), _, Goal, true, (Goal, lgtunit::assertion(variant(Term1,Term2),lgtunit::variant(Term1,Term2))), _, _, _, _, _).
+	convert_test_outcome(deterministic, _, Goal, deterministic, Goal, _, _, _, _, _).
+	convert_test_outcome(deterministic(Assertion), Test, Goal, deterministic, (Goal, (\+ \+ catch(Assertion,Error,throw(assertion_error(Assertion, Error))) -> true; throw(assertion_failure(Assertion)))), File, Position, Type, Entity, VariableNames) :-
+		lint_check_assertion(Test, Assertion, File, Position, Type, Entity, VariableNames).
+	convert_test_outcome(subsumes(Expected, Result), _, Goal, true, (Goal, Assertion = subsumes_term(Expected,Result), (\+ \+ catch(Assertion,Error,throw(assertion_error(Assertion, Error))) -> true; throw(assertion_failure(Assertion)))), _, _, _, _, _).
+	convert_test_outcome(variant(Term1, Term2), _, Goal, true, (Goal, (\+ \+ catch(lgtunit::variant(Term1,Term2),Error,throw(assertion_error(variant(Term1,Term2), Error))) -> true; throw(assertion_failure(variant(Term1,Term2))))), _, _, _, _, _).
 	convert_test_outcome(exists(Assertion), Test, Goal, true, (Goal, Assertion), File, Position, Type, Entity, VariableNames) :-
 		lint_check_assertion(Test, Assertion, File, Position, Type, Entity, VariableNames).
-	convert_test_outcome(all(Assertion), Test, Goal, true, \+ (Goal, \+ lgtunit::assertion(Assertion,Assertion)), File, Position, Type, Entity, VariableNames) :-
+	convert_test_outcome(all(Assertion), Test, Goal, true, \+ (Goal, \+ (catch(Assertion,Error,throw(assertion_error(Assertion, Error))) -> true; throw(assertion_failure(Assertion)))), File, Position, Type, Entity, VariableNames) :-
 		lint_check_assertion(Test, Assertion, File, Position, Type, Entity, VariableNames).
 	convert_test_outcome(fail, _, Goal, fail, Goal, _, _, _, _, _).
 	convert_test_outcome(false, _, Goal, fail, Goal, _, _, _, _, _).
@@ -2139,12 +2162,6 @@
 
 	compile_test_step_aux_predicate(Test, Step, Goal, Head) :-
 		test_name_to_aux_predicate_name(Test, Step, Name),
-		term_variables(Goal, Variables),
-		Head =.. [Name| Variables],
-		logtalk::compile_aux_clauses([(Head :- Goal)]).
-
-	compile_deterministic_test_aux_predicate(Test, Goal, Head) :-
-		test_name_to_aux_predicate_name(Test, '_deterministic', Name),
 		term_variables(Goal, Variables),
 		Head =.. [Name| Variables],
 		logtalk::compile_aux_clauses([(Head :- Goal)]).
