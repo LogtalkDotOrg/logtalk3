@@ -25,15 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-21,
+		date is 2026-08-23,
 		comment is 'Stdio transport adapter for MCP. Reads newline-delimited JSON-RPC from the input stream and writes responses to the output stream. Supports specs 2025-06-18 and 2026-07-28 selected via the ``spec/1`` option and delegated to ``mcp_server_2025_06_18_spec`` or ``mcp_server_2026_07_28_spec``.'
-	]).
-
-	:- uses(json_rpc, [
-		write_message/2, read_message/2
-	]).
-	:- uses(list, [
-		member/2, append/3
 	]).
 
 	:- private(active_protocol_/1).
@@ -44,6 +37,13 @@
 		argnames is ['Protocol']
 	]).
 
+	:- uses(json_rpc, [
+		write_message/2, read_message/2
+	]).
+	:- uses(list, [
+		member/2, append/3
+	]).
+
 	spec(Version) :-
 		(	active_protocol_(Protocol) ->
 			Protocol::spec(Version)
@@ -51,7 +51,8 @@
 		).
 
 	start(Application, Input, Output, UserOptions) :-
-		select_protocol(UserOptions, Protocol),
+		context(Context),
+		select_protocol(UserOptions, Context, Protocol),
 		retractall(active_protocol_(_)),
 		assertz(active_protocol_(Protocol)),
 		Options = [stdio_input(Input), stdio_output(Output)| UserOptions],
@@ -91,7 +92,7 @@
 		;	true
 		).
 
-	select_protocol(Options, Protocol) :-
+	select_protocol(Options, Context, Protocol) :-
 		(	member(spec('2026-07-28'), Options) ->
 			Version = '2026-07-28'
 		;	member(spec('2025-06-18'), Options) ->
@@ -102,7 +103,7 @@
 		),
 		(	protocol_object(Version, Protocol) ->
 			true
-		;	throw(error(domain_error(protocol_version, Version), mcp_server_stdio_transport::start/4))
+		;	throw(error(domain_error(protocol_version, Version), Context))
 		).
 
 	protocol_object('2025-06-18', mcp_server_2025_06_18_spec).

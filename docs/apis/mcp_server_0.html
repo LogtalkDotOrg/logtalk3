@@ -541,7 +541,16 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">start(+atom,+object_identifier,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">start(+atom,+object_identifier,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The <code class="docutils literal notranslate"><span class="pre">Options</span></code> list specifies an invalid MCP server configuration:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mcp_server_configuration,Version-Transport)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />
@@ -583,7 +592,16 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">start(+atom,+object_identifier,+stream,+stream,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">start(+atom,+object_identifier,+stream,+stream,+list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">The <code class="docutils literal notranslate"><span class="pre">Options</span></code> list specifies a unsupported MCP server configuration:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(mcp_server_configuration,Version-Transport)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />

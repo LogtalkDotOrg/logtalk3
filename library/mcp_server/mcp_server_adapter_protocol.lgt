@@ -24,22 +24,25 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-14,
-		comment is 'Protocol for MCP specification adapters. Each adapter implements one MCP protocol version (e.g. 2025-06-18 or 2026-07-28). The ``mcp_server`` facade selects an adapter via the ``protocol_adapter/1`` option and delegates the server lifecycle to it.'
+		date is 2026-08-23,
+		comment is 'Protocol for MCP specification adapters. Each adapter implements one MCP spec version (e.g. 2025-06-18 or 2026-07-28). The ``mcp_server`` facade selects an adapter via the ``protocol_adapter/1`` option and delegates the server lifecycle to it.'
 	]).
 
 	:- public(spec/1).
 	:- mode(spec(-atom), one).
 	:- info(spec/1, [
-		comment is 'Returns the MCP protocol version string implemented by this adapter (e.g. ``''2025-06-18''`` or ``''2026-07-28''``).',
+		comment is 'Returns the MCP spec version string implemented by this adapter (e.g. ``''2025-06-18''`` or ``''2026-07-28''``).',
 		argnames is ['Version']
 	]).
 
 	:- public(start/4).
-	:- mode(start(+object_identifier, +stream, +stream, +list), one).
+	:- mode(start(+object_identifier, +stream, +stream, +list), one_or_error).
 	:- info(start/4, [
 		comment is 'Starts the adapter against the given application object, input/output streams, and normalized server configuration options. Blocks until the client disconnects (EOF) or an exit condition is reached. The adapter is responsible for all request handling, capability negotiation, and cleanup of adapter-owned state.',
-		argnames is ['Application', 'Input', 'Output', 'Options']
+		argnames is ['Application', 'Input', 'Output', 'Options'],
+		exceptions is [
+			'The ``Options`` list specifies a non-supported ``Version`` spec' - domain_error(protocol_version, 'Version')
+		]
 	]).
 
 	:- public(notify/1).

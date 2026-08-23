@@ -42,10 +42,13 @@
 	]).
 
 	:- public(start/3).
-	:- mode(start(+atom, +object_identifier, +list), one).
+	:- mode(start(+atom, +object_identifier, +list), one_or_error).
 	:- info(start/3, [
 		comment is 'Starts the MCP server with options (spec/1, transport/1, protocol_adapter/1, HTTP options, ...).',
-		argnames is ['Name', 'Application', 'Options']
+		argnames is ['Name', 'Application', 'Options'],
+		exceptions is [
+			'The ``Options`` list specifies an invalid MCP server configuration' - domain_error(mcp_server_configuration, 'Version-Transport')
+		]
 	]).
 
 	:- public(start/4).
@@ -56,10 +59,13 @@
 	]).
 
 	:- public(start/5).
-	:- mode(start(+atom, +object_identifier, +stream, +stream, +list), one).
+	:- mode(start(+atom, +object_identifier, +stream, +stream, +list), one_or_error).
 	:- info(start/5, [
 		comment is 'Starts with custom streams and options.',
-		argnames is ['Name', 'Application', 'Input', 'Output', 'Options']
+		argnames is ['Name', 'Application', 'Input', 'Output', 'Options'],
+		exceptions is [
+			'The ``Options`` list specifies a unsupported MCP server configuration' - domain_error(mcp_server_configuration, 'Version-Transport')
+		]
 	]).
 
 	:- public(notify/1).

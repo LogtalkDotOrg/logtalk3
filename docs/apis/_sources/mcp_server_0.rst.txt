@@ -75,7 +75,11 @@ Starts the MCP server with options (spec/1, transport/1, protocol_adapter/1, HTT
 | **Template:**
 |    ``start(Name,Application,Options)``
 | **Mode and number of proofs:**
-|    ``start(+atom,+object_identifier,+list)`` - ``one``
+|    ``start(+atom,+object_identifier,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The ``Options`` list specifies an invalid MCP server configuration:
+|        ``domain_error(mcp_server_configuration,Version-Transport)``
 
 
 ------------
@@ -113,7 +117,11 @@ Starts with custom streams and options.
 | **Template:**
 |    ``start(Name,Application,Input,Output,Options)``
 | **Mode and number of proofs:**
-|    ``start(+atom,+object_identifier,+stream,+stream,+list)`` - ``one``
+|    ``start(+atom,+object_identifier,+stream,+stream,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The ``Options`` list specifies a unsupported MCP server configuration:
+|        ``domain_error(mcp_server_configuration,Version-Transport)``
 
 
 ------------

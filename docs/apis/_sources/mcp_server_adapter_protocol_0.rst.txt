@@ -15,7 +15,7 @@ Protocol for MCP specification adapters. Each adapter implements one MCP protoco
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-14
+| **Date:** 2026-08-23
 
 | **Compilation flags:**
 |    ``static``
@@ -71,7 +71,11 @@ Starts the adapter against the given application object, input/output streams, a
 | **Template:**
 |    ``start(Application,Input,Output,Options)``
 | **Mode and number of proofs:**
-|    ``start(+object_identifier,+stream,+stream,+list)`` - ``one``
+|    ``start(+object_identifier,+stream,+stream,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The ``Options`` list specifies a non-supported ``Version`` spec:
+|        ``domain_error(protocol_version,Version)``
 
 
 ------------
