@@ -113,12 +113,14 @@ is how JSON-RPC is carried and a few transport-only features.
 |------------------|---------------------------------------------------|----------------------------------------------------------------------|
 | Objects          | `mcp_server_stdio_transport`                      | `mcp_server_streamable_http_transport`                               |
 | Transport        | Process stdin/stdout (newline-delimited JSON-RPC) | HTTP `POST` to a path (default `/mcp`)                               |
-| Spec versions    | 2025-06-18 or 2026-07-28                          | 2026-07-28 only                                                      |
+| Spec versions    | 2025-06-18 or 2026-07-28                          | 2025-06-18 (*) or 2026-07-28                                         |
 | Client model     | Client spawns the server as a subprocess          | Client talks to a listening URL                                      |
 | I/O in `start/4` | Reads and writes the given streams                | Opens an `http_server` listener; stream arguments are unused         |
 | Progress         | Stdio notifications when applicable               | Optional SSE (`text/event-stream`) when a `progressToken` is present |
 | Subscriptions    | Stdio listen loop                                 | Long-lived SSE plus `notify/1` fan-out                               |
-| Extra options    | Spec options (`instructions`, `cache_*`, ...)     | Plus `http_port`, `http_bind`, `http_path`, `http_origin_check`      |
+| Extra options    | Spec options (`instructions`, `cache_*`, ...)     | Plus `http_*` options                                                |
+
+(*) But no synchronous elicitation over plain POST.
 
 Application objects do **not** change between transports. Only the
 `spec/1` and `transport/1` options selects the path:
@@ -129,7 +131,10 @@ Application objects do **not** change between transports. Only the
     % stdio, 2026
     ``spec('2026-07-28'), ``transport(stdio)``
 
-    % HTTP, 2026 protocol semantics
+    % Streamable HTTP, 2025
+    ``spec('2025-06-18'), ``transport(streamable_http)``
+
+    % Streamable HTTP, 2026
     ``spec('2026-07-28'), ``transport(streamable_http)``
 
 Use **stdio** with desktop MCP clients that launch a command and speak

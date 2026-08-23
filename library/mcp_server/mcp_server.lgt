@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-21,
+		date is 2026-08-23,
 		comment is 'MCP server facade. Selects spec and transport (stdio or Streamable HTTP). Legacy ``protocol_adapter/1`` remains supported.',
 		remarks is [
 			'Specs' - '``\'2025-06-18``\' (default) and ``\'2026-07-28\'`` via ``spec/1``.',
@@ -85,21 +85,23 @@
 		start(Name, Application, []).
 
 	start(Name, Application, UserOptions) :-
+		context(Context),
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options0),
 		normalize_options(Name, Options0, Options),
 		current_input(Input),
 		current_output(Output),
-		run_adapter(Application, Input, Output, Options).
+		run_adapter(Application, Input, Output, Context, Options).
 
 	start(Name, Application, Input, Output) :-
 		start(Name, Application, Input, Output, []).
 
 	start(Name, Application, Input, Output, UserOptions) :-
+		context(Context),
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options0),
 		normalize_options(Name, Options0, Options),
-		run_adapter(Application, Input, Output, Options).
+		run_adapter(Application, Input, Output, Context, Options).
 
 	notify(Event) :-
 		(	active_adapter_(Adapter) ->
@@ -107,8 +109,8 @@
 		;	true
 		).
 
-	run_adapter(Application, Input, Output, Options) :-
-		select_adapter(Options, Adapter),
+	run_adapter(Application, Input, Output, Context, Options) :-
+		select_adapter(Context, Options, Adapter),
 		retractall(active_adapter_(_)),
 		assertz(active_adapter_(Adapter)),
 		(	catch(
@@ -120,15 +122,12 @@
 		;	cleanup_adapter(Adapter)
 		).
 
-	select_adapter(Options, Adapter) :-
-		(	member(protocol_adapter(Adapter0), Options) ->
-			(	conforms_to_protocol(Adapter0, mcp_server_adapter_protocol) ->
-				Adapter = Adapter0
-			;	throw(error(domain_error(mcp_server_adapter, Adapter0), mcp_server::start/5))
-			)
+	select_adapter(Context, Options, Adapter) :-
+		(	^^option(protocol_adapter(Adapter), Options) ->
+			true
 		;	protocol_version_option(Options, Version),
 			transport_option(Options, Transport),
-			resolve_adapter(Version, Transport, Adapter)
+			resolve_adapter(Version, Transport, Context, Adapter)
 		).
 
 	protocol_version_option(Options, Version) :-
@@ -141,19 +140,16 @@
 		;	Transport = stdio
 		).
 
-	resolve_adapter('2025-06-18', stdio, mcp_server_stdio_transport) :-
+	resolve_adapter('2025-06-18', stdio, _, mcp_server_stdio_transport) :-
 		!.
-	resolve_adapter('2026-07-28', stdio, mcp_server_stdio_transport) :-
+	resolve_adapter('2026-07-28', stdio, _, mcp_server_stdio_transport) :-
 		!.
-	resolve_adapter('2025-06-18', streamable_http, mcp_server_streamable_http_transport) :-
+	resolve_adapter('2025-06-18', streamable_http, _, mcp_server_streamable_http_transport) :-
 		!.
-	resolve_adapter('2026-07-28', streamable_http, mcp_server_streamable_http_transport) :-
+	resolve_adapter('2026-07-28', streamable_http, _, mcp_server_streamable_http_transport) :-
 		!.
-	resolve_adapter(Version, Transport, _) :-
-		throw(error(
-			domain_error(mcp_server_configuration, Version-Transport),
-			mcp_server::start/5
-		)).
+	resolve_adapter(Version, Transport, Context, _) :-
+		throw(error(domain_error(mcp_server_configuration, Version-Transport), Context)).
 
 	cleanup_adapter(Adapter) :-
 		retractall(active_adapter_(_)),
@@ -169,7 +165,7 @@
 	default_option(server_title('logtalk-mcp-server')).
 	default_option(spec('2025-06-18')).
 	default_option(transport(stdio)).
-	% protocol_adapter/1 is optional; when omitted, version × transport selects the adapter.
+	% protocol_adapter/1 is optional; when omitted, version + transport selects the adapter.
 
 	valid_option(server_name(Name)) :-
 		atom(Name).

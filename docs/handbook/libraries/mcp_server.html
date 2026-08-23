@@ -537,7 +537,7 @@ is how JSON-RPC is carried and a few transport-only features.</p>
 </tr>
 <tr class="row-even"><td><p>Spec versions</p></td>
 <td><p>2025-06-18 or 2026-07-28</p></td>
-<td><p>2026-07-28 only</p></td>
+<td><p>2025-06-18 (*) or 2026-07-28</p></td>
 </tr>
 <tr class="row-odd"><td><p>Client model</p></td>
 <td><p>Client spawns the server as a
@@ -564,11 +564,11 @@ when a <code class="docutils literal notranslate"><span class="pre">progressToke
 <td><p>Spec options
 (<code class="docutils literal notranslate"><span class="pre">instructions</span></code>,
 <code class="docutils literal notranslate"><span class="pre">cache_*</span></code>, …)</p></td>
-<td><p>Plus <code class="docutils literal notranslate"><span class="pre">http_port</span></code>, <code class="docutils literal notranslate"><span class="pre">http_bind</span></code>,
-<code class="docutils literal notranslate"><span class="pre">http_path</span></code>, <code class="docutils literal notranslate"><span class="pre">http_origin_check</span></code></p></td>
+<td><p>Plus <code class="docutils literal notranslate"><span class="pre">http_*</span></code> options</p></td>
 </tr>
 </tbody>
 </table>
+<p>(*) But no synchronous elicitation over plain POST.</p>
 <p>Application objects do <strong>not</strong> change between transports. Only the
 <code class="docutils literal notranslate"><span class="pre">spec/1</span></code> and <code class="docutils literal notranslate"><span class="pre">transport/1</span></code> options selects the path:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% stdio, 2025</span>
@@ -577,7 +577,10 @@ when a <code class="docutils literal notranslate"><span class="pre">progressToke
 <span class="c">% stdio, 2026</span>
 <span class="err">``</span>spec(<span class="s">&#39;2026-07-28&#39;</span>), <span class="err">``</span>transport(stdio)<span class="err">``</span>
 
-<span class="c">% HTTP, 2026 protocol semantics</span>
+<span class="c">% Streamable HTTP, 2025</span>
+<span class="err">``</span>spec(<span class="s">&#39;2025-06-18&#39;</span>), <span class="err">``</span>transport(streamable_http)<span class="err">``</span>
+
+<span class="c">% Streamable HTTP, 2026</span>
 <span class="err">``</span>spec(<span class="s">&#39;2026-07-28&#39;</span>), <span class="err">``</span>transport(streamable_http)<span class="err">``</span>
 </pre></div>
 </div>

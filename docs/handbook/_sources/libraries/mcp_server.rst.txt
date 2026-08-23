@@ -103,7 +103,7 @@ is how JSON-RPC is carried and a few transport-only features.
 | Transport          | Process stdin/stdout           | HTTP ``POST`` to a path (default         |
 |                    | (newline-delimited JSON-RPC)   | ``/mcp``)                                |
 +--------------------+--------------------------------+------------------------------------------+
-| Spec versions      | 2025-06-18 or 2026-07-28       | 2026-07-28 only                          |
+| Spec versions      | 2025-06-18 or 2026-07-28       | 2025-06-18 (\*) or 2026-07-28            |
 +--------------------+--------------------------------+------------------------------------------+
 | Client model       | Client spawns the server as a  | Client talks to a listening URL          |
 |                    | subprocess                     |                                          |
@@ -116,10 +116,12 @@ is how JSON-RPC is carried and a few transport-only features.
 +--------------------+--------------------------------+------------------------------------------+
 | Subscriptions      | Stdio listen loop              | Long-lived SSE plus ``notify/1`` fan-out |
 +--------------------+--------------------------------+------------------------------------------+
-| Extra options      | Spec options                   | Plus ``http_port``, ``http_bind``,       |
-|                    | (``instructions``,             | ``http_path``, ``http_origin_check``     |
+| Extra options      | Spec options                   | Plus ``http_*`` options                  |
+|                    | (``instructions``,             |                                          |
 |                    | ``cache_*``, ...)              |                                          |
 +--------------------+--------------------------------+------------------------------------------+
+
+(\*) But no synchronous elicitation over plain POST.
 
 Application objects do **not** change between transports. Only the
 ``spec/1`` and ``transport/1`` options selects the path:
@@ -132,7 +134,10 @@ Application objects do **not** change between transports. Only the
    % stdio, 2026
    ``spec('2026-07-28'), ``transport(stdio)``
 
-   % HTTP, 2026 protocol semantics
+   % Streamable HTTP, 2025
+   ``spec('2025-06-18'), ``transport(streamable_http)``
+
+   % Streamable HTTP, 2026
    ``spec('2026-07-28'), ``transport(streamable_http)``
 
 Use **stdio** with desktop MCP clients that launch a command and speak
