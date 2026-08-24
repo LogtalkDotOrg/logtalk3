@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:9:1,
+		version is 0:9:2,
 		author is 'Paulo Moura',
-		date is 2026-04-01,
+		date is 2026-08-24,
 		comment is 'Unit tests for the "lgtdoc" tool.'
 	]).
 
@@ -55,7 +55,7 @@
 	]).
 
 	:- uses(lgtunit, [
-		deterministic/1
+		assertion/1, deterministic/1
 	]).
 
 	:- uses(os, [
@@ -135,51 +135,51 @@
 		memberchk(version(Major:Minor:Patch), Info),
 		atomic_list_concat([Major, Minor, Patch], '.', Version),
 		diagnostics_tool(lgtdoc, lgtdoc, Version, 'https://logtalk.org/', Properties),
-		^^assertion(member(guid(_), Properties)),
-		^^assertion(member(include_git_metadata(true), Properties)).
+		assertion(member(guid(_), Properties)),
+		assertion(member(include_git_metadata(true), Properties)).
 
 	test(lgtdoc_targets_01, deterministic) :-
-		^^assertion(lgtdoc::diagnostic_target(all)),
-		^^assertion(lgtdoc::diagnostic_target(file(_))),
-		^^assertion(lgtdoc::diagnostic_target(files(_))),
-		^^assertion(lgtdoc::diagnostic_target(directory(_))),
-		^^assertion(lgtdoc::diagnostic_target(directories(_))),
-		^^assertion(lgtdoc::diagnostic_target(rdirectory(_))),
-		^^assertion(lgtdoc::diagnostic_target(rdirectories(_))),
-		^^assertion(lgtdoc::diagnostic_target(library(_))),
-		^^assertion(lgtdoc::diagnostic_target(libraries(_))),
-		^^assertion(lgtdoc::diagnostic_target(rlibrary(_))),
-		^^assertion(lgtdoc::diagnostic_target(rlibraries(_))).
+		assertion(lgtdoc::diagnostic_target(all)),
+		assertion(lgtdoc::diagnostic_target(file(_))),
+		assertion(lgtdoc::diagnostic_target(files(_))),
+		assertion(lgtdoc::diagnostic_target(directory(_))),
+		assertion(lgtdoc::diagnostic_target(directories(_))),
+		assertion(lgtdoc::diagnostic_target(rdirectory(_))),
+		assertion(lgtdoc::diagnostic_target(rdirectories(_))),
+		assertion(lgtdoc::diagnostic_target(library(_))),
+		assertion(lgtdoc::diagnostic_target(libraries(_))),
+		assertion(lgtdoc::diagnostic_target(rlibrary(_))),
+		assertion(lgtdoc::diagnostic_target(rlibraries(_))).
 
 	test(lgtdoc_rules_01, deterministic) :-
 		diagnostic_rules(Rules),
-		^^assertion(length(Rules, 8)).
+		assertion(length(Rules, 8)).
 
 	test(lgtdoc_file_caches_diagnostics_01, deterministic) :-
 		object_property(lgtdoc_diagnostics_fixture(_), file(File)),
 		file(File),
 		xml_docs_directory_(XMLDocsDirectory),
 		directory_files(XMLDocsDirectory, XMLFiles, [paths(absolute), extensions(['.xml'])]),
-		^^assertion(XMLFiles \== []),
+		assertion(XMLFiles \== []),
 		delete_directory_and_contents(XMLDocsDirectory),
 		diagnostics(file(File), Diagnostics),
-		^^assertion(length(Diagnostics, 11)),
-		^^assertion(\+ os::directory_exists(XMLDocsDirectory)).
+		assertion(length(Diagnostics, 11)),
+		assertion(\+ os::directory_exists(XMLDocsDirectory)).
 
 	test(lgtdoc_diagnostics_file_01, deterministic) :-
 		object_property(lgtdoc_diagnostics_fixture(_), file(File)),
 		diagnostics(file(File), Diagnostics),
-		^^assertion(length(Diagnostics, 11)),
+		assertion(length(Diagnostics, 11)),
 		findall(RuleId, member(diagnostic(RuleId, _, _, _, _, _, _, _), Diagnostics), RuleIds0),
 		sort(RuleIds0, RuleIds),
-		^^assertion(RuleIds == [date_in_the_future, missing_entity_info_key, missing_predicate_directive, missing_predicate_info_key, missing_punctuation, non_standard_exception]).
+		assertion(RuleIds == [date_in_the_future, missing_entity_info_key, missing_predicate_directive, missing_predicate_info_key, missing_punctuation, non_standard_exception]).
 
 	test(lgtdoc_diagnostics_summary_file_01, deterministic) :-
 		object_property(lgtdoc_diagnostics_fixture(_), file(File)),
 		diagnostics_summary(file(File), Summary),
 		Summary = diagnostics_summary(file(File), 1, 11, Breakdown, [context_summary(context(object, lgtdoc_diagnostics_fixture(_)), 11, ContextBreakdown)]),
-		^^assertion(Breakdown == diagnostic_breakdown([rule_count(date_in_the_future, 1), rule_count(missing_entity_info_key, 2), rule_count(missing_predicate_directive, 2), rule_count(missing_predicate_info_key, 2), rule_count(missing_punctuation, 3), rule_count(non_standard_exception, 1)], [severity_count(warning, 11)], [confidence_count(not_applicable, 11)])),
-		^^assertion(ContextBreakdown == Breakdown).
+		assertion(Breakdown == diagnostic_breakdown([rule_count(date_in_the_future, 1), rule_count(missing_entity_info_key, 2), rule_count(missing_predicate_directive, 2), rule_count(missing_predicate_info_key, 2), rule_count(missing_punctuation, 3), rule_count(non_standard_exception, 1)], [severity_count(warning, 11)], [confidence_count(not_applicable, 11)])),
+		assertion(ContextBreakdown == Breakdown).
 
 	test(lgtdoc_diagnostics_summary_files_01, deterministic) :-
 		object_property(lgtdoc_diagnostics_fixture(_), file(FixtureFile)),
@@ -188,24 +188,24 @@
 		diagnostics_summary(files([FixtureFile, ToolFile]), diagnostics_summary(files([FixtureFile, ToolFile]), TotalContexts, TotalDiagnostics, _Breakdown, ContextSummaries)),
 		setof(Context, RuleId^Severity^Confidence^Message^File^Lines^Properties^member(diagnostic(RuleId, Severity, Confidence, Message, Context, File, Lines, Properties), Diagnostics), Contexts),
 		findall(Context, member(context_summary(Context, _DiagnosticsCount, _ContextBreakdown), ContextSummaries), SummaryContexts),
-		^^assertion(length(Diagnostics, TotalDiagnostics)),
-		^^assertion(length(Contexts, TotalContexts)),
-		^^assertion(SummaryContexts == Contexts).
+		assertion(length(Diagnostics, TotalDiagnostics)),
+		assertion(length(Contexts, TotalContexts)),
+		assertion(SummaryContexts == Contexts).
 
 	test(lgtdoc_diagnostics_preflight_file_01, deterministic) :-
 		object_property(lgtdoc_diagnostics_fixture(_), file(File)),
 		diagnostics_preflight(file(File), Issues),
-		^^assertion(Issues == []).
+		assertion(Issues == []).
 
 	test(lgtdoc_diagnostics_options_file_01, deterministic) :-
 		^^file_path('diagnostics_fixture.lgt', File),
 		diagnostics(file(File), Diagnostics, [explanations(true)]),
-		^^assertion(length(Diagnostics, 11)).
+		assertion(length(Diagnostics, 11)).
 
 	test(lgtdoc_diagnostics_options_file_02, deterministic) :-
 		^^file_path('diagnostics_fixture.lgt', File),
 		findall(Diagnostic, diagnostic(file(File), Diagnostic, [explanations(false)]), Enumerated),
-		^^assertion(length(Enumerated, 11)).
+		assertion(length(Enumerated, 11)).
 
 	test(lgtdoc_diagnostics_options_file_03, deterministic) :-
 		^^file_path('diagnostics_fixture.lgt', File),
@@ -215,7 +215,7 @@
 	test(lgtdoc_diagnostics_options_file_04, deterministic) :-
 		^^file_path('diagnostics_fixture.lgt', File),
 		diagnostics_preflight(file(File), Issues0, [explanations(false)]),
-		^^assertion(Issues0 == []).
+		assertion(Issues0 == []).
 
 	% suppress all messages from the "lgtdoc" tool
 	% component to not pollute the unit tests output

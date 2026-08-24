@@ -23,10 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:2:1,
 		author is 'Paulo Moura',
-		date is 2026-07-22,
+		date is 2026-08-24,
 		comment is 'Unit tests for the "mutation_testing" tool.'
+	]).
+
+	:- uses(lgtunit, [
+		assertion/1, assertion/2
 	]).
 
 	:- uses(list, [
@@ -63,7 +67,7 @@
 
 	test(mt_predicate_mutants_3_01, deterministic) :-
 		mutation_testing::predicate_mutants(mt_sample, check/1, Mutants),
-		^^assertion(Mutants \== []),
+		assertion(Mutants \== []),
 		forall(member(mutant(mt_sample, check/1, _, _, _), Mutants), true).
 
 	% predicate_mutants/4 tests
@@ -96,7 +100,7 @@
 
 	test(mt_entity_mutants_ordering_01, deterministic) :-
 		mutation_testing::entity_mutants(mt_other_sample, Mutants, [mutators([fail_insertion, body_goal_negation])]),
-		^^assertion(Mutants == [
+		assertion(Mutants == [
 			mutant(mt_other_sample, check/1, clause(1), fail_insertion, 1),
 			mutant(mt_other_sample, check/1, clause(1), fail_insertion, 2),
 			mutant(mt_other_sample, check/1, clause(1), body_goal_negation, 1)
@@ -143,8 +147,8 @@
 			sampling(count(1)),
 			tester_file_name('subprocess_tester.lgt')
 		]),
-		^^assertion(Total == 1),
-		^^assertion(subsumes_term([mutant_result(1, _, _)], Results)).
+		assertion(Total == 1),
+		assertion(subsumes_term([mutant_result(1, _, _)], Results)).
 
 	% report_entity/3 tests
 
@@ -155,13 +159,13 @@
 			threshold(0.0),
 			tester_file_name('subprocess_tester.lgt')
 		]),
-		^^assertion(Total == 2),
-		^^assertion(Killed == 2),
+		assertion(Total == 2),
+		assertion(Killed == 2),
 		Accounted is Killed + Survived + Untested + Timeout + NoCoverage + Errors,
-		^^assertion(Accounted == Total),
-		^^assertion(Threshold == 0.0),
-		^^assertion(Passed == true),
-		^^assertion(Results = [mutant_result(1, _, _)| _]).
+		assertion(Accounted == Total),
+		assertion(Threshold == 0.0),
+		assertion(Passed == true),
+		assertion(Results = [mutant_result(1, _, _)| _]).
 
 	test(mt_report_entity_3_02, deterministic) :-
 		mt_mutation_state::set(original),
@@ -172,13 +176,13 @@
 			threshold(0.0),
 			tester_file_name('subprocess_tester.lgt')
 		]),
-		^^assertion(Total == 2),
-		^^assertion(Killed == 2),
+		assertion(Total == 2),
+		assertion(Killed == 2),
 		Accounted is Killed + Survived + Untested + Timeout + NoCoverage + Errors,
-		^^assertion(Accounted == Total),
+		assertion(Accounted == Total),
 		% verify subprocess execution didn't affect main process state
 		mt_mutation_state::get(State),
-		^^assertion(State == original).
+		assertion(State == original).
 
 	% report_library/3 tests
 
@@ -190,8 +194,8 @@
 			sampling(count(1)),
 			tester_file_name('subprocess_tester.lgt')
 		]),
-		^^assertion(Total == 1),
-		^^assertion(subsumes_term([mutant_result(1, _, _)], Results)).
+		assertion(Total == 1),
+		assertion(subsumes_term([mutant_result(1, _, _)], Results)).
 
 	% report_directory/3 tests
 
@@ -203,8 +207,8 @@
 			sampling(count(1)),
 			tester_file_name('subprocess_tester.lgt')
 		]),
-		^^assertion(Total == 1),
-		^^assertion(subsumes_term([mutant_result(1, _, _)], Results)).
+		assertion(Total == 1),
+		assertion(subsumes_term([mutant_result(1, _, _)], Results)).
 
 	% predicate/2 tests
 
@@ -276,162 +280,162 @@
 
 	test(mt_mutator_fail_insertion_01, deterministic) :-
 		load_with_hook(fail_insertion(mt_sample, check/1, 1, 1, false)),
-		^^assertion(\+ mt_sample::check(1)),
-		^^assertion(mt_other_sample::check(1)),
+		assertion(\+ mt_sample::check(1)),
+		assertion(mt_other_sample::check(1)),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
-		^^assertion(mt_sample::check(1)),
-		^^assertion(mt_other_sample::check(1)).
+		assertion(mt_sample::check(1)),
+		assertion(mt_other_sample::check(1)).
 
 	test(mt_mutator_fail_insertion_02, deterministic) :-
 		load_with_hook(fail_insertion(mt_sample, multi_clause/1, 1, 1, false)),
-		^^assertion(mt_sample::multi_clause_check),
+		assertion(mt_sample::multi_clause_check),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
-		^^assertion(mt_sample::multi_clause_check).
+		assertion(mt_sample::multi_clause_check).
 
 	test(mt_mutator_fail_insertion_03, deterministic) :-
 		load_with_hook(fail_insertion(mt_sample, multi_clause/1, 2, 2, false)),
-		^^assertion(\+ mt_sample::multi_clause_check),
+		assertion(\+ mt_sample::multi_clause_check),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
-		^^assertion(mt_sample::multi_clause_check).
+		assertion(mt_sample::multi_clause_check).
 
 	test(mt_mutator_fail_insertion_dcg_01, true) :-
 		load_with_hook(fail_insertion(mt_dcg_sample, dcg_multi//0, 2, 4, false)),
-		^^assertion(\+ mt_dcg_sample::dcg_multi_check(b)),
-		^^assertion(mt_dcg_sample::dcg_multi_check(a)),
+		assertion(\+ mt_dcg_sample::dcg_multi_check(b)),
+		assertion(mt_dcg_sample::dcg_multi_check(a)),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
-		^^assertion(mt_dcg_sample::dcg_multi_check(b)).
+		assertion(mt_dcg_sample::dcg_multi_check(b)).
 
 	test(mt_mutator_body_goal_negation_01, deterministic) :-
 		load_with_hook(body_goal_negation(mt_sample, check/1, 1, 1, false)),
-		^^assertion(\+ mt_sample::check(1)),
-		^^assertion(mt_other_sample::check(1)),
+		assertion(\+ mt_sample::check(1)),
+		assertion(mt_other_sample::check(1)),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
-		^^assertion(mt_sample::check(1)),
-		^^assertion(mt_other_sample::check(1)).
+		assertion(mt_sample::check(1)),
+		assertion(mt_other_sample::check(1)).
 
 	test(mt_mutator_body_goal_negation_02, deterministic) :-
 		load_with_hook(body_goal_negation(mt_sample, neg_multi/1, 1, 1, false)),
-		^^assertion(mt_sample::neg_multi_check),
+		assertion(mt_sample::neg_multi_check),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
-		^^assertion(mt_sample::neg_multi_check).
+		assertion(mt_sample::neg_multi_check).
 
 	test(mt_mutator_body_goal_negation_03, deterministic) :-
 		load_with_hook(body_goal_negation(mt_sample, check/1, 1, 2, false)),
-		^^assertion(\+ mt_sample::check(1)),
-		^^assertion(mt_other_sample::check(1)),
+		assertion(\+ mt_sample::check(1)),
+		assertion(mt_other_sample::check(1)),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
-		^^assertion(mt_sample::check(1)),
-		^^assertion(mt_other_sample::check(1)).
+		assertion(mt_sample::check(1)),
+		assertion(mt_other_sample::check(1)).
 
 	test(mt_mutator_body_goal_negation_dcg_01, deterministic) :-
 		load_with_hook(body_goal_negation(mt_dcg_sample, dcg_guard//0, 1, 1, false)),
-		^^assertion(\+ mt_dcg_sample::dcg_guard_check),
+		assertion(\+ mt_dcg_sample::dcg_guard_check),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
-		^^assertion(mt_dcg_sample::dcg_guard_check).
+		assertion(mt_dcg_sample::dcg_guard_check).
 
 	test(mt_mutator_relational_operator_replacement_01, true) :-
 		load_with_hook(relational_operator_replacement(mt_sample, target/2, 1, 1, false)),
-		^^assertion(\+ mt_sample::check(1)),
+		assertion(\+ mt_sample::check(1)),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
-		^^assertion(mt_sample::check(1)).
+		assertion(mt_sample::check(1)).
 
 	test(mt_mutator_relational_operator_replacement_02, true) :-
 		load_with_hook(relational_operator_replacement(mt_sample, term_target/2, 1, 1, false)),
-		^^assertion(\+ mt_sample::term_check),
+		assertion(\+ mt_sample::term_check),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
-		^^assertion(mt_sample::term_check).
+		assertion(mt_sample::term_check).
 
 	test(mt_mutator_relational_operator_replacement_03, true) :-
 		load_with_hook(relational_operator_replacement(mt_sample, disj_cmp/1, 1, 1, false)),
-		^^assertion(\+ mt_sample::disj_cmp_check),
+		assertion(\+ mt_sample::disj_cmp_check),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
-		^^assertion(mt_sample::disj_cmp_check).
+		assertion(mt_sample::disj_cmp_check).
 
 	test(mt_mutator_relational_operator_replacement_dcg_01, true) :-
 		load_with_hook(relational_operator_replacement(mt_dcg_sample, dcg_guard//0, 1, 1, false)),
-		^^assertion(\+ mt_dcg_sample::dcg_guard_check),
+		assertion(\+ mt_dcg_sample::dcg_guard_check),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
-		^^assertion(mt_dcg_sample::dcg_guard_check).
+		assertion(mt_dcg_sample::dcg_guard_check).
 
 	test(mt_mutator_arithmetic_operator_replacement_01, deterministic) :-
 		load_with_hook(arithmetic_operator_replacement(mt_sample, target/2, 1, 1, false)),
-		^^assertion(\+ mt_sample::check(1)),
+		assertion(\+ mt_sample::check(1)),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
-		^^assertion(mt_sample::check(1)).
+		assertion(mt_sample::check(1)).
 
 	test(mt_mutator_arithmetic_operator_replacement_02, deterministic) :-
 		load_with_hook(arithmetic_operator_replacement(mt_sample, arithmetic_value/1, 1, 1, false)),
 		mt_sample::arithmetic_value(Value),
-		^^assertion(Value == 7),
+		assertion(Value == 7),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
 		mt_sample::arithmetic_value(OriginalValue),
-		^^assertion(OriginalValue == 5).
+		assertion(OriginalValue == 5).
 
 	test(mt_mutator_arithmetic_operator_replacement_dcg_01, deterministic) :-
 		load_with_hook(arithmetic_operator_replacement(mt_dcg_sample, dcg_arithmetic//1, 1, 1, false)),
 		mt_dcg_sample::dcg_arithmetic_check(Value),
-		^^assertion(Value == 0),
+		assertion(Value == 0),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
 		mt_dcg_sample::dcg_arithmetic_check(OriginalValue),
-		^^assertion(OriginalValue == 2).
+		assertion(OriginalValue == 2).
 
 	test(mt_mutator_truth_literal_flip_01, deterministic) :-
 		load_with_hook(truth_literal_flip(mt_sample, always_true/0, 1, 1, false)),
-		^^assertion(\+ mt_sample::always_true),
+		assertion(\+ mt_sample::always_true),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
-		^^assertion(mt_sample::always_true).
+		assertion(mt_sample::always_true).
 
 	test(mt_mutator_truth_literal_flip_02, deterministic) :-
 		load_with_hook(truth_literal_flip(mt_sample, truth_choice/0, 1, 1, false)),
-		^^assertion(\+ mt_sample::truth_choice),
+		assertion(\+ mt_sample::truth_choice),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
-		^^assertion(mt_sample::truth_choice).
+		assertion(mt_sample::truth_choice).
 
 	test(mt_mutator_truth_literal_flip_dcg_01, deterministic) :-
 		load_with_hook(truth_literal_flip(mt_dcg_sample, dcg_truth//0, 1, 1, false)),
-		^^assertion(\+ mt_dcg_sample::dcg_truth_check),
+		assertion(\+ mt_dcg_sample::dcg_truth_check),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
-		^^assertion(mt_dcg_sample::dcg_truth_check).
+		assertion(mt_dcg_sample::dcg_truth_check).
 
 	test(mt_mutator_head_arguments_mutation_01, deterministic) :-
 		load_with_hook(head_arguments_mutation(mt_sample, head_bound_atom_integer/2, 1, 1, false)),
-		^^assertion(\+ mt_sample::head_bound_atom_integer_check),
+		assertion(\+ mt_sample::head_bound_atom_integer_check),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
-		^^assertion(mt_sample::head_bound_atom_integer_check).
+		assertion(mt_sample::head_bound_atom_integer_check).
 
 	test(mt_mutator_head_arguments_mutation_dcg_01, deterministic) :-
 		load_with_hook(head_arguments_mutation(mt_dcg_sample, dcg_head_bound//1, 1, 1, false)),
-		^^assertion(\+ mt_dcg_sample::dcg_head_bound_check),
+		assertion(\+ mt_dcg_sample::dcg_head_bound_check),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
-		^^assertion(mt_dcg_sample::dcg_head_bound_check).
+		assertion(mt_dcg_sample::dcg_head_bound_check).
 
 	test(mt_mutator_head_arguments_reordering_01, deterministic) :-
 		load_with_hook(head_arguments_reordering(mt_sample, pair_match/2, 1, 1, false)),
-		^^assertion(\+ mt_sample::pair_match_check),
+		assertion(\+ mt_sample::pair_match_check),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
-		^^assertion(mt_sample::pair_match_check).
+		assertion(mt_sample::pair_match_check).
 
 	test(mt_mutator_head_arguments_reordering_dcg_01, deterministic) :-
 		load_with_hook(head_arguments_reordering(mt_dcg_sample, dcg_pair//2, 1, 1, false)),
-		^^assertion(\+ mt_dcg_sample::dcg_pair_check),
+		assertion(\+ mt_dcg_sample::dcg_pair_check),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
-		^^assertion(mt_dcg_sample::dcg_pair_check).
+		assertion(mt_dcg_sample::dcg_pair_check).
 
 	test(mt_mutator_clauses_reordering_01, deterministic) :-
 		load_with_hook(clauses_reordering(mt_sample, ordered_choice/1, 1, 1, false)),
 		mt_sample::ordered_choice_check(Value),
-		^^assertion(Value == second),
+		assertion(Value == second),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
 		mt_sample::ordered_choice_check(OriginalValue),
-		^^assertion(OriginalValue == first).
+		assertion(OriginalValue == first).
 
 	test(mt_mutator_clauses_reordering_dcg_01, deterministic) :-
 		load_with_hook(clauses_reordering(mt_dcg_sample, dcg_ordered_choice//1, 1, 1, false)),
 		mt_dcg_sample::dcg_ordered_choice_check(Value),
-		^^assertion(Value == second),
+		assertion(Value == second),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
 		mt_dcg_sample::dcg_ordered_choice_check(OriginalValue),
-		^^assertion(OriginalValue == first).
+		assertion(OriginalValue == first).
 
 	test(mt_mutator_clauses_reordering_02, deterministic(Length == 5)) :-
 		mutation_testing::predicate_mutants(mt_clauses_reordering, p/1, Mutants, [mutators([clauses_reordering])]),
@@ -444,24 +448,24 @@
 	test(mt_mutator_scope_directive_replacement_01, deterministic) :-
 		load_with_hook(scope_directive_replacement(mt_other_sample, check/1, 1, 1, false)),
 		once(object_property(mt_other_sample, declares(check/1, Properties))),
-		^^assertion(memberchk(scope(protected), Properties)),
+		assertion(memberchk(scope(protected), Properties)),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
-		^^assertion(mt_other_sample::check(1)).
+		assertion(mt_other_sample::check(1)).
 
 	test(mt_mutator_scope_directive_replacement_dcg_01, deterministic) :-
 		load_with_hook(scope_directive_replacement(mt_dcg_sample, dcg_multi//0, 1, 1, false)),
 		once(object_property(mt_dcg_sample, declares(dcg_multi/2, Properties))),
-		^^assertion(memberchk(scope(protected), Properties)),
-		^^assertion(memberchk(non_terminal(dcg_multi//0), Properties)),
+		assertion(memberchk(scope(protected), Properties)),
+		assertion(memberchk(non_terminal(dcg_multi//0), Properties)),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
-		^^assertion(mt_dcg_sample::dcg_multi_check(a)).
+		assertion(mt_dcg_sample::dcg_multi_check(a)).
 
 	test(mt_mutator_predicate_directive_suppression_01, deterministic) :-
 		load_with_hook(predicate_directive_suppression(mt_predicate_directives_sample, local_dynamic/1, 2, 1, false)),
 		once(object_property(mt_predicate_directives_sample, declares(local_dynamic/1, Properties))),
-		^^assertion(\+ member(dynamic, Properties)),
+		assertion(\+ member(dynamic, Properties)),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
-		^^assertion(mt_predicate_directives_sample::local_dynamic_check).
+		assertion(mt_predicate_directives_sample::local_dynamic_check).
 
 	test(mt_mutator_predicate_directive_suppression_02, fail) :-
 		predicate_directive_suppression(mt_predicate_directives_sample, local_dynamic/1, 1, 1, false)::mutation((:- object(foo)), _).
@@ -469,18 +473,18 @@
 	test(mt_mutator_uses_directive_resource_deletion_01, deterministic) :-
 		load_with_hook(uses_directive_resource_deletion(mt_predicate_directives_sample, resource/1, 1, 1, false)),
 		catch(mt_predicate_directives_sample::resource_check, error(existence_error(procedure, _), _), true),
-		^^assertion(mt_predicate_directives_sample::resource_alias_check),
+		assertion(mt_predicate_directives_sample::resource_alias_check),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
-		^^assertion(mt_predicate_directives_sample::resource_check),
-		^^assertion(mt_predicate_directives_sample::resource_alias_check).
+		assertion(mt_predicate_directives_sample::resource_check),
+		assertion(mt_predicate_directives_sample::resource_alias_check).
 
 	test(mt_mutator_uses_directive_resource_deletion_02, deterministic) :-
 		load_with_hook(uses_directive_resource_deletion(mt_predicate_directives_sample, resource_alias/1, 1, 1, false)),
-		^^assertion(mt_predicate_directives_sample::resource_check),
+		assertion(mt_predicate_directives_sample::resource_check),
 		catch(mt_predicate_directives_sample::resource_alias_check, error(existence_error(procedure, _), _), true),
 		logtalk_load(test_entities, [reload(always), source_data(on)]),
-		^^assertion(mt_predicate_directives_sample::resource_check),
-		^^assertion(mt_predicate_directives_sample::resource_alias_check).
+		assertion(mt_predicate_directives_sample::resource_check),
+		assertion(mt_predicate_directives_sample::resource_alias_check).
 
 	test(mt_mutator_uses_directive_resource_deletion_03, fail) :-
 		uses_directive_resource_deletion(mt_predicate_directives_sample, resource/1, 1, 1, false)::mutation((:- uses(mt_uses_provider, [resource/1])), _).
@@ -530,14 +534,14 @@
 			mutators([fail_insertion]),
 			max_mutations_per_mutator(1)
 		]),
-		^^assertion(\+ member(mutant(mt_sample, multi_clause/1, clause(2), fail_insertion, 2), Mutants)).
+		assertion(\+ member(mutant(mt_sample, multi_clause/1, clause(2), fail_insertion, 2), Mutants)).
 
 	test(mt_max_mutations_per_mutator_option_02, deterministic) :-
 		mutation_testing::entity_mutants(mt_sample, Mutants, [
 			mutators([fail_insertion]),
 			max_mutations_per_mutator(all)
 		]),
-		^^assertion(member(mutant(mt_sample, multi_clause/1, clause(2), fail_insertion, 2), Mutants)).
+		assertion(member(mutant(mt_sample, multi_clause/1, clause(2), fail_insertion, 2), Mutants)).
 
 	test(mt_max_mutations_per_mutator_option_03, deterministic) :-
 		mutation_testing::entity_mutants(mt_sample, Mutants, [
@@ -595,31 +599,31 @@
 		]),
 		json(list, dash, atom)::parse(file(Report), JSON),
 		JSON = json(Pairs),
-		^^assertion(memberchk('$schema'-'https://git.io/mutation-testing-schema', Pairs)),
-		^^assertion(memberchk('schemaVersion'-'2', Pairs)),
-		^^assertion(memberchk('thresholds'-json(Thresholds), Pairs)),
-		^^assertion(memberchk('high'-_, Thresholds)),
-		^^assertion(memberchk('low'-_, Thresholds)),
-		^^assertion(memberchk('projectRoot'-ProjectRoot, Pairs)),
-		^^assertion(ProjectRoot \== ''),
-		^^assertion(memberchk('files'-json(FilePairs), Pairs)),
-		^^assertion(memberchk('framework'-json(FrameworkPairs), Pairs)),
-		^^assertion(memberchk('name'-'Logtalk "mutation_testing" tool', FrameworkPairs)),
-		^^assertion(memberchk('version'-_, FrameworkPairs)),
-		^^assertion(memberchk('system'-json(SystemPairs), Pairs)),
-		^^assertion(memberchk('ci'-_, SystemPairs)),
-		^^assertion(memberchk('os'-json(OSPairs), SystemPairs)),
-		^^assertion(memberchk('platform'-_, OSPairs)),
+		assertion(memberchk('$schema'-'https://git.io/mutation-testing-schema', Pairs)),
+		assertion(memberchk('schemaVersion'-'2', Pairs)),
+		assertion(memberchk('thresholds'-json(Thresholds), Pairs)),
+		assertion(memberchk('high'-_, Thresholds)),
+		assertion(memberchk('low'-_, Thresholds)),
+		assertion(memberchk('projectRoot'-ProjectRoot, Pairs)),
+		assertion(ProjectRoot \== ''),
+		assertion(memberchk('files'-json(FilePairs), Pairs)),
+		assertion(memberchk('framework'-json(FrameworkPairs), Pairs)),
+		assertion(memberchk('name'-'Logtalk "mutation_testing" tool', FrameworkPairs)),
+		assertion(memberchk('version'-_, FrameworkPairs)),
+		assertion(memberchk('system'-json(SystemPairs), Pairs)),
+		assertion(memberchk('ci'-_, SystemPairs)),
+		assertion(memberchk('os'-json(OSPairs), SystemPairs)),
+		assertion(memberchk('platform'-_, OSPairs)),
 		FilePairs = [File-FileReport| _],
-		^^assertion(File \== ''),
+		assertion(File \== ''),
 		FileReport = json(FileReportPairs),
-		^^assertion(memberchk('language'-_, FileReportPairs)),
-		^^assertion(memberchk('source'-_, FileReportPairs)),
-		^^assertion(memberchk('mutants'-Mutants, FileReportPairs)),
-		^^assertion(Mutants \== []),
+		assertion(memberchk('language'-_, FileReportPairs)),
+		assertion(memberchk('source'-_, FileReportPairs)),
+		assertion(memberchk('mutants'-Mutants, FileReportPairs)),
+		assertion(Mutants \== []),
 		Mutants = [json(MutantPairs)| _],
-		^^assertion(memberchk('description'-_, MutantPairs)),
-		^^assertion(memberchk('replacement'-_, MutantPairs)).
+		assertion(memberchk('description'-_, MutantPairs)),
+		assertion(memberchk('replacement'-_, MutantPairs)).
 
 	test(mt_format_option_04, deterministic, [condition(report_schema_available(_))]) :-
 		^^suppress_text_output,
@@ -634,8 +638,8 @@
 			tester_file_name('subprocess_tester.lgt')
 		]),
 		json(list, dash, atom)::parse(file(Report), JSON),
-		^^assertion(json_schema::parse(file(SchemaPath), Schema)),
-		^^assertion(json_schema::validate(Schema, JSON)).
+		assertion(json_schema::parse(file(SchemaPath), Schema)),
+		assertion(json_schema::validate(Schema, JSON)).
 
 	test(mt_report_file_name_option_01, deterministic(os::file_exists(Report))) :-
 		^^suppress_text_output,
@@ -670,9 +674,9 @@
 			sampling(all),
 			tester_file_name('subprocess_tester.lgt')
 		]),
-		^^assertion(Total >= 2),
-		^^assertion(NoCoverage >= 1),
-		^^assertion(member(mutant_result(_, mutant(mt_sample, multi_clause/1, clause(1), fail_insertion, 1), no_coverage), Results)).
+		assertion(Total >= 2),
+		assertion(NoCoverage >= 1),
+		assertion(member(mutant_result(_, mutant(mt_sample, multi_clause/1, clause(1), fail_insertion, 1), no_coverage), Results)).
 
 	test(mt_code_coverage_guided_mutants_01, deterministic) :-
 		mutation_testing::report_predicate(mt_code_coverage, p/2, report(mt_code_coverage, summary(Total, Killed, Survived, Untested, Timeout, NoCoverage, Errors, _Score, _Threshold, _Passed), Results), [
@@ -681,14 +685,14 @@
 			max_mutations_per_mutator(5),
 			tester_file_name('subprocess_tester.lgt')
 		]),
-		^^assertion(Total == 5),
-		^^assertion(Killed == 1),
-		^^assertion(Survived == 0),
-		^^assertion(Untested == 0),
-		^^assertion(Timeout == 0),
-		^^assertion(NoCoverage == 4),
-		^^assertion(Errors == 0),
-		^^assertion(Results == [
+		assertion(Total == 5),
+		assertion(Killed == 1),
+		assertion(Survived == 0),
+		assertion(Untested == 0),
+		assertion(Timeout == 0),
+		assertion(NoCoverage == 4),
+		assertion(Errors == 0),
+		assertion(Results == [
 			mutant_result(1, mutant(mt_code_coverage, p/2, clause(1), fail_insertion, 1), no_coverage),
 			mutant_result(2, mutant(mt_code_coverage, p/2, clause(1), fail_insertion, 2), no_coverage),
 			mutant_result(3, mutant(mt_code_coverage, p/2, clause(2), fail_insertion, 3), no_coverage),
@@ -703,10 +707,10 @@
 			seed(1234),
 			tester_file_name('subprocess_tester.lgt')
 		]),
-		^^assertion(total, Total == 3),
+		assertion(total, Total == 3),
 		Accounted is Killed + Survived + Untested + Timeout + NoCoverage + Errors,
-		^^assertion(accounted, Accounted == 3),
-		^^assertion(Results = [mutant_result(1, _, _), mutant_result(2, _, _), mutant_result(3, _, _)]).
+		assertion(accounted, Accounted == 3),
+		assertion(Results = [mutant_result(1, _, _), mutant_result(2, _, _), mutant_result(3, _, _)]).
 
 	test(mt_sampling_seed_reproducibility_01, deterministic) :-
 		mutation_testing::report_predicate(mt_other_sample, check/1, report(mt_other_sample, summary(Total1, _Killed1, _Survived1, _Untested1, _Timeout1, _NoCoverage1, _Errors1, _Score1, _Threshold1, _Passed1), Results1), [
@@ -721,9 +725,9 @@
 			seed(20260303),
 			tester_file_name('subprocess_tester.lgt')
 		]),
-		^^assertion(total1, Total1 == 2),
-		^^assertion(total2, Total2 == 2),
-		^^assertion(results, Results1 == Results2).
+		assertion(total1, Total1 == 2),
+		assertion(total2, Total2 == 2),
+		assertion(results, Results1 == Results2).
 
 	test(mt_sampling_all_seed_invariance_01, deterministic) :-
 		mutation_testing::report_predicate(mt_other_sample, check/1, report(mt_other_sample, summary(Total1, _Killed1, _Survived1, _Untested1, _Timeout1, _NoCoverage1, _Errors1, _Score1, _Threshold1, _Passed1), Results1), [
@@ -738,8 +742,8 @@
 			seed(9999),
 			tester_file_name('subprocess_tester.lgt')
 		]),
-		^^assertion(total, Total1 == Total2),
-		^^assertion(results, Results1 == Results2).
+		assertion(total, Total1 == Total2),
+		assertion(results, Results1 == Results2).
 
 	% auxiliary predicates
 

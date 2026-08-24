@@ -23,14 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:4:1,
 		author is 'Paulo Moura',
-		date is 2023-03-20,
+		date is 2023-08-24,
 		comment is 'Tests for the "clustering" example.'
 	]).
 
 	:- uses(lgtunit, [
-		op(700, xfx, =~=), (=~=)/2
+		op(700, xfx, =~=), (=~=)/2, assertion/1
 	]).
 
 	condition :-
@@ -40,9 +40,9 @@
 	test(clustering_01, true, [condition(\+ current_logtalk_flag(prolog_dialect, xvm))]) :-
 		clustering::clusters([1.0,1.5,1.8,3.5,3.6,4.0,4.2], 4, 10000, Clusters),
 		list::length(Clusters, Length),
-		^^assertion(Length == 4),
+		assertion(Length == 4),
 		sort(Clusters, SortedClusters),
 		list::flatten(SortedClusters, FlattenedSortedClusters),
-		^^assertion(FlattenedSortedClusters =~= [1.0,1.5,1.8,3.5,3.6,4.0,4.2]).
+		assertion(FlattenedSortedClusters =~= [1.0,1.5,1.8,3.5,3.6,4.0,4.2]).
 
 :- end_object.

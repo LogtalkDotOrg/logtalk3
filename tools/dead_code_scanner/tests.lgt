@@ -24,9 +24,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:9:1,
+		version is 0:9:2,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2026-04-01,
+		date is 2026-08-24,
 		comment is 'Unit tests for the "dead_code_scanner" tool.'
 	]).
 
@@ -40,6 +40,10 @@
 		rdirectory/2, rdirectory/1, directory/1,
 		file/1,
 		entity/2, entity/1
+	]).
+
+	:- uses(lgtunit, [
+		assertion/1
 	]).
 
 	:- uses(list, [
@@ -59,16 +63,16 @@
 		memberchk(version(Major:Minor:Patch), Info),
 		atomic_list_concat([Major, Minor, Patch], '.', Version),
 		dead_code_scanner::diagnostics_tool(dead_code_scanner, dead_code_scanner, Version, 'https://logtalk.org/', Properties),
-		^^assertion(member(guid(_), Properties)),
-		^^assertion(member(fingerprint_algorithm(canonical_finding_v1), Properties)),
-		^^assertion(member(automation_id(target), Properties)),
-		^^assertion(member(include_invocations(true), Properties)),
-		^^assertion(member(include_git_metadata(true), Properties)),
-		^^assertion(member(include_version_control_provenance(true), Properties)).
+		assertion(member(guid(_), Properties)),
+		assertion(member(fingerprint_algorithm(canonical_finding_v1), Properties)),
+		assertion(member(automation_id(target), Properties)),
+		assertion(member(include_invocations(true), Properties)),
+		assertion(member(include_git_metadata(true), Properties)),
+		assertion(member(include_version_control_provenance(true), Properties)).
 
 	test(dcs_stand_alone_category_01, deterministic) :-
 		predicates(stand_alone_category, Predicates),
-		^^assertion(Predicates == [
+		assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
@@ -76,7 +80,7 @@
 
 	test(dcs_stand_alone_category_02, deterministic) :-
 		setof(Predicate, predicate(stand_alone_category, Predicate), Predicates),
-		^^assertion(Predicates == [
+		assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
@@ -84,7 +88,7 @@
 
 	test(dcs_category_01, deterministic) :-
 		predicates(category, Predicates),
-		^^assertion(Predicates == [
+		assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
@@ -92,7 +96,7 @@
 
 	test(dcs_category_02, deterministic) :-
 		setof(Predicate, predicate(category, Predicate), Predicates),
-		^^assertion(Predicates == [
+		assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
@@ -102,17 +106,17 @@
 		diagnostics(entity(category), Diagnostics),
 		setof(Predicate, Diagnostic^(member(Diagnostic, Diagnostics), diagnostic_predicate(category, category, Predicate, Diagnostic)), Predicates),
 		setof(RuleId-Confidence, Severity^Message^File^Lines^Properties^member(diagnostic(RuleId, Severity, Confidence, Message, context(category, category), File, Lines, Properties), Diagnostics), Metadata),
-		^^assertion(Predicates == [
+		assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
 		]),
-		^^assertion(Metadata == [local_dead_code-medium]).
+		assertion(Metadata == [local_dead_code-medium]).
 
 	test(dcs_findings_entity_02, deterministic) :-
 		diagnostics(entity(category), Diagnostics, [exclude_predicates([dead_predicate/0, dead_non_terminal//0])]),
 		setof(Predicate, Diagnostic^(member(Diagnostic, Diagnostics), diagnostic_predicate(category, category, Predicate, Diagnostic)), Predicates),
-		^^assertion(Predicates == [
+		assertion(Predicates == [
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0
 		]).
 
@@ -122,23 +126,27 @@
 			dead_predicate(local_dead_code, medium, _, category, category, dead_non_terminal//0, _, _)
 		])]),
 		setof(Predicate, Diagnostic^(member(Diagnostic, Diagnostics), diagnostic_predicate(category, category, Predicate, Diagnostic)), Predicates),
-		^^assertion(Predicates == [
+		assertion(Predicates == [
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0
 		]).
 
 	test(dcs_finding_entity_01, deterministic) :-
 		setof(Diagnostic, diagnostic(entity(category), Diagnostic), Diagnostics),
 		setof(Predicate, Diagnostic^(member(Diagnostic, Diagnostics), diagnostic_predicate(category, category, Predicate, Diagnostic)), Predicates),
-		^^assertion(Predicates == [
+		assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
 		]).
 
 	test(dcs_finding_entity_02, deterministic) :-
-		setof(Diagnostic, diagnostic(entity(category), Diagnostic, [waive_findings([dead_predicate(local_dead_code, medium, _, category, category, dead_predicate_1/0, _, _)])]), Diagnostics),
+		setof(
+			Diagnostic,
+			Properties^File^Lines^diagnostic(entity(category), Diagnostic, [waive_findings([dead_predicate(local_dead_code, medium, Properties, category, category, dead_predicate_1/0, File, Lines)])]),
+			Diagnostics
+		),
 		setof(Predicate, Diagnostic^(member(Diagnostic, Diagnostics), diagnostic_predicate(category, category, Predicate, Diagnostic)), Predicates),
-		^^assertion(Predicates == [
+		assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
@@ -146,11 +154,11 @@
 
 	test(dcs_diagnostics_options_01, deterministic) :-
 		diagnostics(entity(category), Diagnostics, [explanations(true)]),
-		^^assertion(length(Diagnostics, 5)).
+		assertion(length(Diagnostics, 5)).
 
 	test(dcs_diagnostics_options_02, deterministic) :-
 		findall(Diagnostic, diagnostic(entity(category), Diagnostic, [explanations(false)]), Enumerated),
-		^^assertion(length(Enumerated, 5)).
+		assertion(length(Enumerated, 5)).
 
 	test(dcs_diagnostics_options_03, deterministic) :-
 		diagnostics_summary(entity(category), diagnostics_summary(entity(category), 1, 5, _Breakdown, _ContextSummaries), [explanations(true)]),
@@ -159,38 +167,38 @@
 	test(dcs_diagnostics_options_04, deterministic) :-
 		diagnostics_preflight(entity(category), Issues),
 		diagnostics_preflight(entity(category), Issues0, [explanations(false)]),
-		^^assertion(Issues0 == Issues).
+		assertion(Issues0 == Issues).
 
 	test(dcs_summary_entity_01, deterministic) :-
 		diagnostics_summary(entity(category), Summary),
-		^^assertion(Summary == diagnostics_summary(entity(category), 1, 5, diagnostic_breakdown([rule_count(local_dead_code, 5)], [severity_count(note, 5)], [confidence_count(medium, 5)]), [context_summary(context(category, category), 5, diagnostic_breakdown([rule_count(local_dead_code, 5)], [severity_count(note, 5)], [confidence_count(medium, 5)]))])).
+		assertion(Summary == diagnostics_summary(entity(category), 1, 5, diagnostic_breakdown([rule_count(local_dead_code, 5)], [severity_count(note, 5)], [confidence_count(medium, 5)]), [context_summary(context(category, category), 5, diagnostic_breakdown([rule_count(local_dead_code, 5)], [severity_count(note, 5)], [confidence_count(medium, 5)]))])).
 
 	test(dcs_summary_entity_02, deterministic) :-
 		diagnostics_summary(entity(category), Summary, [exclude_predicates([dead_predicate/0, dead_non_terminal//0])]),
-		^^assertion(Summary == diagnostics_summary(entity(category), 1, 3, diagnostic_breakdown([rule_count(local_dead_code, 3)], [severity_count(note, 3)], [confidence_count(medium, 3)]), [context_summary(context(category, category), 3, diagnostic_breakdown([rule_count(local_dead_code, 3)], [severity_count(note, 3)], [confidence_count(medium, 3)]))])).
+		assertion(Summary == diagnostics_summary(entity(category), 1, 3, diagnostic_breakdown([rule_count(local_dead_code, 3)], [severity_count(note, 3)], [confidence_count(medium, 3)]), [context_summary(context(category, category), 3, diagnostic_breakdown([rule_count(local_dead_code, 3)], [severity_count(note, 3)], [confidence_count(medium, 3)]))])).
 
 	test(dcs_summary_entity_03, deterministic) :-
 		diagnostics_summary(entity(category), Summary, [waive_findings([dead_predicate(local_dead_code, medium, _, category, category, dead_predicate_1/0, _, _)])]),
-		^^assertion(Summary == diagnostics_summary(entity(category), 1, 4, diagnostic_breakdown([rule_count(local_dead_code, 4)], [severity_count(note, 4)], [confidence_count(medium, 4)]), [context_summary(context(category, category), 4, diagnostic_breakdown([rule_count(local_dead_code, 4)], [severity_count(note, 4)], [confidence_count(medium, 4)]))])).
+		assertion(Summary == diagnostics_summary(entity(category), 1, 4, diagnostic_breakdown([rule_count(local_dead_code, 4)], [severity_count(note, 4)], [confidence_count(medium, 4)]), [context_summary(context(category, category), 4, diagnostic_breakdown([rule_count(local_dead_code, 4)], [severity_count(note, 4)], [confidence_count(medium, 4)]))])).
 
 	test(dcs_summary_all_01, deterministic) :-
 		diagnostics(all, Diagnostics),
 		diagnostics_summary(all, diagnostics_summary(all, TotalContexts, TotalDiagnostics, _Breakdown, ContextSummaries)),
 		setof(Context, RuleId^Severity^Confidence^Message^File^Lines^Properties^member(diagnostic(RuleId, Severity, Confidence, Message, Context, File, Lines, Properties), Diagnostics), Contexts),
 		findall(Context, member(context_summary(Context, _DiagnosticsCount, _ContextBreakdown), ContextSummaries), SummaryContexts),
-		^^assertion(length(Diagnostics, TotalDiagnostics)),
-		^^assertion(length(Contexts, TotalContexts)),
-		^^assertion(SummaryContexts == Contexts).
+		assertion(length(Diagnostics, TotalDiagnostics)),
+		assertion(length(Contexts, TotalContexts)),
+		assertion(SummaryContexts == Contexts).
 
 	test(dcs_category_03, deterministic) :-
 		predicates(category, Predicates, [exclude_predicates([dead_predicate/0, dead_non_terminal//0])]),
-		^^assertion(Predicates == [
+		assertion(Predicates == [
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0
 		]).
 
 	test(dcs_category_04, deterministic) :-
 		setof(Predicate, predicate(category, Predicate, [exclude_predicates([dead_predicate/0, dead_non_terminal//0])]), Predicates),
-		^^assertion(Predicates == [
+		assertion(Predicates == [
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0
 		]).
 
@@ -198,7 +206,7 @@
 
 	test(dcs_stand_alone_prototype_01, deterministic) :-
 		predicates(stand_alone_prototype, Predicates),
-		^^assertion(Predicates == [
+		assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
@@ -206,7 +214,7 @@
 
 	test(dcs_stand_alone_prototype_02, deterministic) :-
 		setof(Predicate, predicate(stand_alone_prototype, Predicate), Predicates),
-		^^assertion(Predicates == [
+		assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
@@ -214,7 +222,7 @@
 
 	test(dcs_prototype_01, deterministic) :-
 		predicates(prototype, Predicates),
-		^^assertion(Predicates == [
+		assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
@@ -222,7 +230,7 @@
 
 	test(dcs_prototype_02, deterministic) :-
 		setof(Predicate, predicate(prototype, Predicate), Predicates),
-		^^assertion(Predicates == [
+		assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
@@ -232,7 +240,7 @@
 
 	test(dcs_stand_alone_class_01, deterministic) :-
 		predicates(stand_alone_class, Predicates),
-		^^assertion(Predicates == [
+		assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
@@ -240,7 +248,7 @@
 
 	test(dcs_stand_alone_class_02, deterministic) :-
 		setof(Predicate, predicate(stand_alone_class, Predicate), Predicates),
-		^^assertion(Predicates == [
+		assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
@@ -248,7 +256,7 @@
 
 	test(dcs_class_01, deterministic) :-
 		predicates(class, Predicates),
-		^^assertion(Predicates == [
+		assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
@@ -256,7 +264,7 @@
 
 	test(dcs_class_02, deterministic) :-
 		setof(Predicate, predicate(class, Predicate), Predicates),
-		^^assertion(Predicates == [
+		assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
@@ -264,7 +272,7 @@
 
 	test(dcs_subclass_with_metaclass_01, deterministic) :-
 		predicates(subclass_with_metaclass, Predicates),
-		^^assertion(Predicates == [
+		assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
@@ -272,7 +280,7 @@
 
 	test(dcs_subclass_with_metaclass_02, deterministic) :-
 		setof(Predicate, predicate(subclass_with_metaclass, Predicate), Predicates),
-		^^assertion(Predicates == [
+		assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
@@ -280,7 +288,7 @@
 
 	test(dcs_subclass_01, deterministic) :-
 		predicates(subclass, Predicates),
-		^^assertion(Predicates == [
+		assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
@@ -288,7 +296,7 @@
 
 	test(dcs_subclass_02, deterministic) :-
 		setof(Predicate, predicate(subclass, Predicate), Predicates),
-		^^assertion(Predicates == [
+		assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
@@ -296,7 +304,7 @@
 
 	test(dcs_instance_01, deterministic) :-
 		predicates(instance, Predicates),
-		^^assertion(Predicates == [
+		assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
@@ -304,7 +312,7 @@
 
 	test(dcs_instance_02, deterministic) :-
 		setof(Predicate, predicate(instance, Predicate), Predicates),
-		^^assertion(Predicates == [
+		assertion(Predicates == [
 			dead_predicate/0,
 			dead_predicate_1/0, dead_predicate_2/0, dead_predicate_3/0,
 			dead_non_terminal//0
@@ -352,27 +360,27 @@
 
 		test(dcs_uses_directive_01, deterministic) :-
 			setof(Predicate, predicate(predicate_directives, Predicate), Predicates),
-			^^assertion(Predicates == [some_module:bar/2, some_module:baz/2, list::app/3, list::member/2, logtalk::dbg/1]).
+			assertion(Predicates == [some_module:bar/2, some_module:baz/2, list::app/3, list::member/2, logtalk::dbg/1]).
 
 		test(dcs_findings_uses_directive_01, deterministic) :-
 			setof(Diagnostic, diagnostic(entity(predicate_directives), Diagnostic), Diagnostics),
 			setof(Predicate, Diagnostic^(member(Diagnostic, Diagnostics), diagnostic_predicate(object, predicate_directives, Predicate, Diagnostic)), Predicates),
 			setof(Classification, Diagnostic^(member(Diagnostic, Diagnostics), diagnostic_classification(Diagnostic, Classification)), ClassifiedPredicates),
-			^^assertion(Predicates == [some_module:bar/2, some_module:baz/2, list::app/3, list::member/2, logtalk::dbg/1]),
-			^^assertion(ClassifiedPredicates == [classification(unused_use_module_resource, some_module:bar/2), classification(unused_use_module_resource, some_module:baz/2), classification(unused_uses_resource, list::app/3), classification(unused_uses_resource, list::member/2), classification(unused_uses_resource, logtalk::dbg/1)]).
+			assertion(Predicates == [some_module:bar/2, some_module:baz/2, list::app/3, list::member/2, logtalk::dbg/1]),
+			assertion(ClassifiedPredicates == [classification(unused_use_module_resource, some_module:bar/2), classification(unused_use_module_resource, some_module:baz/2), classification(unused_uses_resource, list::app/3), classification(unused_uses_resource, list::member/2), classification(unused_uses_resource, logtalk::dbg/1)]).
 
 	:- else.
 
 		test(dcs_uses_directive_01, deterministic) :-
 			setof(Predicate, predicate(predicate_directives, Predicate), Predicates),
-			^^assertion(Predicates == [list::app/3, list::member/2, logtalk::dbg/1]).
+			assertion(Predicates == [list::app/3, list::member/2, logtalk::dbg/1]).
 
 		test(dcs_findings_uses_directive_01, deterministic) :-
 			setof(Diagnostic, diagnostic(entity(predicate_directives), Diagnostic), Diagnostics),
 			setof(Predicate, Diagnostic^(member(Diagnostic, Diagnostics), diagnostic_predicate(object, predicate_directives, Predicate, Diagnostic)), Predicates),
 			setof(Classification, Diagnostic^(member(Diagnostic, Diagnostics), diagnostic_classification(Diagnostic, Classification)), ClassifiedPredicates),
-			^^assertion(Predicates == [list::app/3, list::member/2, logtalk::dbg/1]),
-			^^assertion(ClassifiedPredicates == [classification(unused_uses_resource, list::app/3), classification(unused_uses_resource, list::member/2), classification(unused_uses_resource, logtalk::dbg/1)]).
+			assertion(Predicates == [list::app/3, list::member/2, logtalk::dbg/1]),
+			assertion(ClassifiedPredicates == [classification(unused_uses_resource, list::app/3), classification(unused_uses_resource, list::member/2), classification(unused_uses_resource, logtalk::dbg/1)]).
 
 	:- endif.
 
@@ -412,7 +420,7 @@
 		set_logtalk_flag(source_data, OldSourceData),
 		set_logtalk_flag(optimize, OldOptimize),
 		logtalk_load(test_entities, [reload(always), source_data(on), unknown_entities(silent)]),
-		^^assertion(Issues == []).
+		assertion(Issues == []).
 
 	test(dcs_preflight_02, deterministic) :-
 		current_logtalk_flag(source_data, OldSourceData),
@@ -424,9 +432,9 @@
 		set_logtalk_flag(source_data, OldSourceData),
 		set_logtalk_flag(optimize, OldOptimize),
 		logtalk_load(test_entities, [reload(always), source_data(on), unknown_entities(silent)]),
-		^^assertion(length(Issues, 2)),
-		^^assertion(member(preflight_issue(missing_analysis_prerequisite, note, _, context(file, _), _, 0-0, [prerequisite(optimize)]), Issues)),
-		^^assertion(member(preflight_issue(missing_analysis_prerequisite, warning, _, context(file, _), _, 0-0, [prerequisite(source_data)]), Issues)).
+		assertion(length(Issues, 2)),
+		assertion(member(preflight_issue(missing_analysis_prerequisite, note, _, context(file, _), _, 0-0, [prerequisite(optimize)]), Issues)),
+		assertion(member(preflight_issue(missing_analysis_prerequisite, warning, _, context(file, _), _, 0-0, [prerequisite(source_data)]), Issues)).
 
 	test(dcs_preflight_warning_01, deterministic) :-
 		retractall(preflight_warning(_)),
@@ -453,7 +461,7 @@
 		set_logtalk_flag(optimize, OldOptimize),
 		logtalk_load(test_entities, [reload(always), source_data(on), unknown_entities(silent)]),
 		setof(Warning, preflight_warning(Warning), Warnings),
-		^^assertion(subsumes_term([
+		assertion(subsumes_term([
 			missing_analysis_prerequisite(_, optimize),
 			missing_analysis_prerequisite(_, source_data)
 		], Warnings)).
@@ -468,9 +476,9 @@
 		set_logtalk_flag(source_data, OldSourceData),
 		set_logtalk_flag(optimize, OldOptimize),
 		logtalk_load(test_entities, [reload(always), source_data(on), unknown_entities(silent)]),
-		^^assertion(member(diagnostic(local_dead_code, warning, high, _, context(category, category), _, _, Properties), Diagnostics)),
-		^^assertion(member(finding_properties(FindingProperties), Properties)),
-		^^assertion(member(optimize(on), FindingProperties)).
+		assertion(member(diagnostic(local_dead_code, warning, high, _, context(category, category), _, _, Properties), Diagnostics)),
+		assertion(member(finding_properties(FindingProperties), Properties)),
+		assertion(member(optimize(on), FindingProperties)).
 
 	% suppress all messages from the "dead_code_scanner"
 	% component to not pollute the unit tests output

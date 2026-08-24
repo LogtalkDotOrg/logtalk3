@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:1,
+		version is 1:1:2,
 		author is 'Paulo Moura',
-		date is 2026-07-21,
+		date is 2026-08-24,
 		comment is 'Unit tests for the sarif tool.'
 	]).
 
@@ -82,7 +82,7 @@
 	test(sarif_dcs_01, deterministic) :-
 		generate(dead_code_scanner, entity(category), atom(Atom), []),
 		json_parse(atom(Atom), SARIF),
-		^^assertion(ground(SARIF)),
+		assertion(ground(SARIF)),
 		SARIF = {
 			'$schema'-'https://json.schemastore.org/sarif-2.1.0.json',
 			version-'2.1.0',
@@ -90,7 +90,7 @@
 		},
 		sarif_dcs_run_ok(Run, Rules, Properties, Notifications, Results),
 		sarif_dcs_rule_ok(Rules, local_dead_code, Rule),
-		^^assertion(subsumes_term({
+		assertion(subsumes_term({
 			id-local_dead_code,
 			name-'local dead code',
 			guid-'f6fd0e53-0c2d-45fd-a6dd-7b2f2af3e2a1',
@@ -100,9 +100,9 @@
 			defaultConfiguration-{level-warning}
 		}, Rule)),
 		sarif_dcs_run_properties_ok(Properties),
-		^^assertion(Notifications = [_]),
+		assertion(Notifications = [_]),
 		Results = [FirstResult| _],
-		^^assertion(subsumes_term({
+		assertion(subsumes_term({
 			ruleId-local_dead_code,
 			ruleIndex-0,
 			level-note,
@@ -116,37 +116,37 @@
 		category_property(category, file(CategoryFile)),
 		os::decompose_file_name(CategoryFile, ApplicationRoot, _),
 		sarif_location_fingerprints_ok(Results, BaseId, ApplicationRoot),
-		^^assertion(subsumes_term([_, _, _, _, _], Results)).
+		assertion(subsumes_term([_, _, _, _, _], Results)).
 
 	test(sarif_dcs_02, deterministic) :-
 		generate(dead_code_scanner, entity(predicate_directives), atom(Atom), []),
 		json_parse(atom(Atom), SARIF),
-		^^assertion(ground(SARIF)),
+		assertion(ground(SARIF)),
 		SARIF = {'$schema'-_, version-'2.1.0', runs-[Run]},
 		sarif_dcs_run_ok(Run, Rules, Properties, Notifications, Results),
 		sarif_dcs_run_properties_ok(Properties),
 		sarif_run_relative_locations_ok(Run, Results, _BaseId),
-		^^assertion(subsumes_term([_], Notifications)),
+		assertion(subsumes_term([_], Notifications)),
 		sarif_dcs_result_ok(Results, unused_uses_resource, 1, error, high, _),
 		(	current_logtalk_flag(modules, supported) ->
 			sarif_dcs_rule_ok(Rules, unused_uses_resource, UsesRule),
 			sarif_dcs_rule_ok(Rules, unused_use_module_resource, UseModuleRule),
 			sarif_dcs_result_ok(Results, unused_use_module_resource, 2, error, high, _),
-			^^assertion(subsumes_term({id-unused_uses_resource, name-_, guid-_, shortDescription-_, fullDescription-_, help-_, defaultConfiguration-{level-error}}, UsesRule)),
-			^^assertion(subsumes_term({id-unused_use_module_resource, name-_, guid-_, shortDescription-_, fullDescription-_, help-_, defaultConfiguration-{level-error}}, UseModuleRule)),
-			^^assertion(length(Results, 5))
+			assertion(subsumes_term({id-unused_uses_resource, name-_, guid-_, shortDescription-_, fullDescription-_, help-_, defaultConfiguration-{level-error}}, UsesRule)),
+			assertion(subsumes_term({id-unused_use_module_resource, name-_, guid-_, shortDescription-_, fullDescription-_, help-_, defaultConfiguration-{level-error}}, UseModuleRule)),
+			assertion(length(Results, 5))
 		;	sarif_dcs_rule_ok(Rules, unused_uses_resource, UsesRule),
-			^^assertion(subsumes_term({id-unused_uses_resource, name-_, guid-_, shortDescription-_, fullDescription-_, help-_, defaultConfiguration-{level-error}}, UsesRule)),
-			^^assertion(length(Results, 3))
+			assertion(subsumes_term({id-unused_uses_resource, name-_, guid-_, shortDescription-_, fullDescription-_, help-_, defaultConfiguration-{level-error}}, UsesRule)),
+			assertion(length(Results, 3))
 		).
 
 	test(sarif_dcs_03, deterministic) :-
 		generate(dead_code_scanner, entity(category), atom(Atom), [exclude_predicates([dead_predicate/0, dead_non_terminal//0])]),
 		json_parse(atom(Atom), SARIF),
-		^^assertion(ground(SARIF)),
+		assertion(ground(SARIF)),
 		SARIF = {'$schema'-_, version-_, runs-[Run]},
 		sarif_dcs_run_results(Run, Results),
-		^^assertion(subsumes_term([_, _, _], Results)),
+		assertion(subsumes_term([_, _, _], Results)),
 		!.
 
 	test(sarif_dcs_file_01, deterministic) :-
@@ -155,12 +155,12 @@
 			dcs_diagnostics(file(File), Diagnostics),
 			generate(dead_code_scanner, file(File), atom(Atom), []),
 			json_parse(atom(Atom), SARIF),
-			^^assertion(ground(SARIF)),
+			assertion(ground(SARIF)),
 			SARIF = {'$schema'-_, version-'2.1.0', runs-[Run]},
 			sarif_dcs_run_ok(Run, _Rules, Properties, _, Results),
 			sarif_dcs_run_properties_ok(Properties),
-			^^assertion(length(Results, Length)),
-			^^assertion(length(Diagnostics, Length))
+			assertion(length(Results, Length)),
+			assertion(length(Diagnostics, Length))
 		)).
 
 	test(sarif_dcs_directory_01, deterministic) :-
@@ -168,12 +168,12 @@
 		dcs_diagnostics(directory(Directory), Diagnostics, [exclude_predicates([logtalk::trace_event/2])]),
 		generate(dead_code_scanner, directory(Directory), atom(Atom), [exclude_predicates([logtalk::trace_event/2])]),
 		json_parse(atom(Atom), SARIF),
-		^^assertion(ground(SARIF)),
+		assertion(ground(SARIF)),
 		SARIF = {'$schema'-_, version-'2.1.0', runs-[Run]},
 		sarif_dcs_run_results(Run, Results),
 		length(Results, ResultsLength),
 		length(Diagnostics, DiagnosticsResults),
-		^^assertion(ResultsLength == DiagnosticsResults).
+		assertion(ResultsLength == DiagnosticsResults).
 
 	test(sarif_lr_01, deterministic) :-
 		prepare_linter_run(false),
@@ -289,7 +289,7 @@
 		json_parse(atom(Atom), JSON),
 		JSON = {'$schema'-_, version-'2.1.0', runs-[EntityRun, FileRun]},
 		sarif_dcs_run_results(EntityRun, EntityResults),
-		^^assertion(subsumes_term([_, _, _], EntityResults)),
+		assertion(subsumes_term([_, _, _], EntityResults)),
 		sarif_dcs_run_ok(FileRun, _Rules, Properties, _Notifications, Results),
 		sarif_dcs_run_properties_ok(Properties),
 		length(Diagnostics, Count),

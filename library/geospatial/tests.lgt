@@ -23,14 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-05-11,
+		date is 2026-08-24,
 		comment is 'Unit tests for the "geospatial" library.'
 	]).
 
 	:- uses(lgtunit, [
-		op(700, xfx, =~=), (=~=)/2
+		op(700, xfx, =~=), (=~=)/2, assertion/1
 	]).
 
 	:- uses(geospatial, [
@@ -362,21 +362,21 @@
 
 	test(geospatial_bbox_union_3_01, deterministic) :-
 		bbox_union(bbox(geographic(0.0, 0.0), geographic(1.0, 1.0)), bbox(geographic(-1.0, 0.5), geographic(0.5, 2.0)), bbox(geographic(MinLatitude, MinLongitude), geographic(MaxLatitude, MaxLongitude))),
-		^^assertion(MinLatitude =~= -1.0),
-		^^assertion(MinLongitude =~= 0.0),
-		^^assertion(MaxLatitude =~= 1.0),
-		^^assertion(MaxLongitude =~= 2.0).
+		assertion(MinLatitude =~= -1.0),
+		assertion(MinLongitude =~= 0.0),
+		assertion(MaxLatitude =~= 1.0),
+		assertion(MaxLongitude =~= 2.0).
 
 	test(geospatial_bbox_expand_3_01, deterministic) :-
 		bbox_expand(bbox(geographic(0.0, 0.0), geographic(0.0, 0.0)), 111.195, bbox(geographic(MinLatitude, MinLongitude), geographic(MaxLatitude, MaxLongitude))),
-		^^assertion(MinLatitude > -1.01),
-		^^assertion(MinLatitude < -0.99),
-		^^assertion(MaxLatitude > 0.99),
-		^^assertion(MaxLatitude < 1.01),
-		^^assertion(MinLongitude > -1.01),
-		^^assertion(MinLongitude < -0.99),
-		^^assertion(MaxLongitude > 0.99),
-		^^assertion(MaxLongitude < 1.01).
+		assertion(MinLatitude > -1.01),
+		assertion(MinLatitude < -0.99),
+		assertion(MaxLatitude > 0.99),
+		assertion(MaxLatitude < 1.01),
+		assertion(MinLongitude > -1.01),
+		assertion(MinLongitude < -0.99),
+		assertion(MaxLongitude > 0.99),
+		assertion(MaxLongitude < 1.01).
 
 	test(geospatial_bbox_intersects_polygon_2_01, deterministic) :-
 		bbox_intersects_polygon(
@@ -419,15 +419,15 @@
 
 	test(geospatial_nearest_point_on_segment_4_01, deterministic) :-
 		nearest_point_on_segment(geographic(1.0, 1.0), geographic(0.0, 0.0), geographic(0.0, 2.0), geographic(Latitude, Longitude)),
-		^^assertion(abs(Latitude) < 0.01),
-		^^assertion(Longitude > 0.99),
-		^^assertion(Longitude < 1.01).
+		assertion(abs(Latitude) < 0.01),
+		assertion(Longitude > 0.99),
+		assertion(Longitude < 1.01).
 
 	test(geospatial_nearest_point_on_polyline_4_01, deterministic) :-
 		nearest_point_on_polyline(geographic(1.0, 1.0), [geographic(0.0, 0.0), geographic(0.0, 2.0), geographic(2.0, 2.0)], Nearest, Distance),
-		^^assertion(geospatial::valid_coordinate(Nearest)),
-		^^assertion(Distance > 111.1),
-		^^assertion(Distance < 111.3).
+		assertion(geospatial::valid_coordinate(Nearest)),
+		assertion(Distance > 111.1),
+		assertion(Distance < 111.3).
 
 	test(geospatial_polyline_length_2_01, deterministic((Length > 222.39, Length < 222.40))) :-
 		polyline_length([geographic(0.0, 0.0), geographic(0.0, 1.0), geographic(0.0, 2.0)], Length).
@@ -495,14 +495,14 @@
 
 	test(geospatial_bounding_box_3_01, deterministic) :-
 		bounding_box(geographic(0.0, 0.0), 111.195, bbox(geographic(MinLatitude, MinLongitude), geographic(MaxLatitude, MaxLongitude))),
-		^^assertion(MinLatitude > -1.01),
-		^^assertion(MinLatitude < -0.99),
-		^^assertion(MaxLatitude > 0.99),
-		^^assertion(MaxLatitude < 1.01),
-		^^assertion(MinLongitude > -1.01),
-		^^assertion(MinLongitude < -0.99),
-		^^assertion(MaxLongitude > 0.99),
-		^^assertion(MaxLongitude < 1.01).
+		assertion(MinLatitude > -1.01),
+		assertion(MinLatitude < -0.99),
+		assertion(MaxLatitude > 0.99),
+		assertion(MaxLatitude < 1.01),
+		assertion(MinLongitude > -1.01),
+		assertion(MinLongitude < -0.99),
+		assertion(MaxLongitude > 0.99),
+		assertion(MaxLongitude < 1.01).
 
 	test(geospatial_route_distance_2_01, deterministic((Distance > 222.39, Distance < 222.40))) :-
 		route_distance([geographic(0.0, 0.0), geographic(0.0, 1.0), geographic(0.0, 2.0)], Distance).

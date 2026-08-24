@@ -23,10 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:13:0,
+		version is 1:13:1,
 		author is 'Paulo Moura',
-		date is 2023-07-18,
+		date is 2026-08-24,
 		comment is 'Unit tests for the ISO Prolog standard read_term/3, read_term/2, read/2, and read/1 built-in predicates.'
+	]).
+
+	:- uses(lgtunit, [
+		assertion/1, variant/2
 	]).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.14.1.4
@@ -46,12 +50,12 @@
 		^^set_text_input(in, ['foo(A+Roger,A+_). ','term2. ...']),
 		{read_term(in, T, [variables(VL),variable_names(VN),singletons(VS)])},
 		^^text_input_assertion(in, ' term2. ...', Assertion),
-		^^assertion(variant(T, foo(X1+X2,X1+X3))),
+		assertion(variant(T, foo(X1+X2,X1+X3))),
 		T = foo(X1+X2,X1+X3),
-		^^assertion(VL == [X1,X2,X3]),
-		^^assertion(VN == ['A'=X1,'Roger'=X2]),
-		^^assertion(VS == ['Roger'=X2]),
-		^^assertion(Assertion).
+		assertion(VL == [X1,X2,X3]),
+		assertion(VN == ['A'=X1,'Roger'=X2]),
+		assertion(VS == ['Roger'=X2]),
+		assertion(Assertion).
 
 	test(iso_read_term_3_04, true(Assertion)) :-
 		^^set_text_input('3.1.  term2. ...'),
@@ -72,8 +76,8 @@
 	test(sics_read_term_3_07, true) :-
 		^^set_text_input('foo( bar). '),
 		{read_term(T, [singletons(S)])},
-		^^assertion(T == foo(bar)),
-		^^assertion(S == []).
+		assertion(T == foo(bar)),
+		assertion(S == []).
 
 	test(sics_read_term_3_08, error(instantiation_error)) :-
 		{read(_, _)}.
@@ -111,7 +115,7 @@
 	test(sics_read_term_3_16, true(Value == past)) :-
 		^^set_text_input(''),
 		{read(T)},
-		^^assertion(T == end_of_file),
+		assertion(T == end_of_file),
 		current_input(Stream),
 		stream_property(Stream, end_of_stream(Value)).
 
@@ -173,34 +177,34 @@
 	test(lgt_read_term_3_28, true) :-
 		^^set_text_input('foo(_X,_Y,_x,_y). '),
 		{read_term(T, [singletons(S)])},
-		^^assertion(variant(T, foo(A,B,C,D))),
+		assertion(variant(T, foo(A,B,C,D))),
 		T = foo(A,B,C,D),
-		^^assertion(S == ['_X'=A,'_Y'=B,'_x'=C,'_y'=D]).
+		assertion(S == ['_X'=A,'_Y'=B,'_x'=C,'_y'=D]).
 
 	test(lgt_read_term_3_29, true) :-
 		^^set_text_input(empty, ''),
 		{read_term(empty, T, [variables(VL),variable_names(VN),singletons(VS)])},
-		^^assertion(T == end_of_file),
-		^^assertion(VL == []),
-		^^assertion(VN == []),
-		^^assertion(VS == []).
+		assertion(T == end_of_file),
+		assertion(VL == []),
+		assertion(VN == []),
+		assertion(VS == []).
 
 	test(lgt_read_term_3_30, true) :-
 		^^set_text_input(in, 'foo(A,B,A). '),
 		{read_term(in, T, [variables(VL),variable_names(VN),singletons(VS)])},
-		^^assertion(variant(T, foo(A,B,A))),
+		assertion(variant(T, foo(A,B,A))),
 		T = foo(A,B,A),
-		^^assertion(VL == [A,B]),
-		^^assertion(VN == ['A'=A,'B'=B]),
-		^^assertion(VS == ['B'=B]).
+		assertion(VL == [A,B]),
+		assertion(VN == ['A'=A,'B'=B]),
+		assertion(VS == ['B'=B]).
 
 	test(lgt_read_term_3_31, true) :-
 		^^set_text_input(in, 'A. '),
 		{read_term(in, T, [variables(VL),variable_names(VN),singletons(VS)])},
-		^^assertion(var(T)),
-		^^assertion(VL == [T]),
-		^^assertion(VN == ['A'=T]),
-		^^assertion(VS == ['A'=T]).
+		assertion(var(T)),
+		assertion(VL == [T]),
+		assertion(VN == ['A'=T]),
+		assertion(VS == ['A'=T]).
 
 	% check detection of invalid options; the ISO Prolog standard only
 	% specifies a domain_error/2 but a uninstantiation_error/1 would be

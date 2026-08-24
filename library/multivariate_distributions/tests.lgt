@@ -23,16 +23,16 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-08-12,
+		date is 2026-08-24,
 		comment is 'Unit tests for the "multivariate_distributions" library.'
 	]).
 
 	cover(multivariate_distributions(_)).
 
 	:- uses(lgtunit, [
-		op(700, xfx, =~=), (=~=)/2
+		op(700, xfx, =~=), (=~=)/2, assertion/1
 	]).
 
 	test(multivariate_normal_3_full_rank, deterministic(Sample =~= [3.0, 3.0])) :-
@@ -80,7 +80,7 @@
 			[1.0, 0.0], [0.0, 0.0], [[1.0, 0.0], [0.0, 0.0]], 1.0e-12, Density
 		).
 
-	test(multivariate_normal_density_5_singular_off_support, deterministic(Density == 0.0)) :-
+	test(multivariate_normal_density_5_singular_off_support, deterministic(Density =~= 0.0)) :-
 		multivariate_distributions(fixed_multivariate_sampler)::multivariate_normal_density(
 			[1.0, 1.0], [0.0, 0.0], [[1.0, 0.0], [0.0, 0.0]], 1.0e-12, Density
 		).
@@ -90,7 +90,7 @@
 			[1.0, 1.0], [0.0, 0.0], [[1.0, 0.0], [0.0, 0.0]], 1.0e-12, LogDensity
 		).
 
-	test(multivariate_normal_density_4_rank_zero, deterministic(Density == 1.0)) :-
+	test(multivariate_normal_density_4_rank_zero, deterministic(Density =~= 1.0)) :-
 		multivariate_distributions(fixed_multivariate_sampler)::multivariate_normal_density(
 			[1.0, 2.0], [1.0, 2.0], [[0.0, 0.0], [0.0, 0.0]], Density
 		).
@@ -145,7 +145,7 @@
 			[0.0], 1.0, [0.0], [[1.0]], LogDensity
 		).
 
-	test(multivariate_t_density_6_off_support, deterministic(Density == 0.0)) :-
+	test(multivariate_t_density_6_off_support, deterministic(Density =~= 0.0)) :-
 		multivariate_distributions(fixed_multivariate_sampler)::multivariate_t_density(
 			[0.0, 1.0], 3.0, [0.0, 0.0], [[1.0, 0.0], [0.0, 0.0]], 1.0e-12, Density
 		).
@@ -196,17 +196,17 @@
 
 	test(dirichlet_2, deterministic) :-
 		multivariate_distributions(fast_random)::dirichlet([1.0, 2.0], [First, Second]),
-		^^assertion(First >= 0.0),
-		^^assertion(Second >= 0.0),
+		assertion(First >= 0.0),
+		assertion(Second >= 0.0),
 		Sum is First + Second,
-		^^assertion(Sum =~= 1.0).
+		assertion(Sum =~= 1.0).
 
 	test(dirichlet_samples_3, deterministic) :-
 		multivariate_distributions(fast_random)::dirichlet_samples(2, [1.0, 2.0], [First, Second]),
 		length(First, FirstLength),
 		length(Second, SecondLength),
-		^^assertion(FirstLength =:= 2),
-		^^assertion(SecondLength =:= 2).
+		assertion(FirstLength =:= 2),
+		assertion(SecondLength =:= 2).
 
 	test(dirichlet_density_3, deterministic(Density =~= 1.0)) :-
 		multivariate_distributions(fast_random)::dirichlet_density([0.25, 0.75], [1.0, 1.0], Density).
@@ -223,7 +223,7 @@
 	test(dirichlet_log_density_uniform_boundary, deterministic(LogDensity =~= 0.0)) :-
 		multivariate_distributions(fast_random)::dirichlet_log_density([0.0, 1.0], [1.0, 1.0], LogDensity).
 
-	test(dirichlet_density_zero_boundary, deterministic(Density == 0.0)) :-
+	test(dirichlet_density_zero_boundary, deterministic(Density =~= 0.0)) :-
 		multivariate_distributions(fast_random)::dirichlet_density([0.0, 1.0], [2.0, 1.0], Density).
 
 	test(dirichlet_log_density_zero_boundary, deterministic(LogDensity == negative_infinity)) :-
@@ -247,17 +247,17 @@
 
 	test(multinomial_3, deterministic) :-
 		multivariate_distributions(fast_random)::multinomial(10, [0.25, 0.75], [First, Second]),
-		^^assertion(First >= 0),
-		^^assertion(Second >= 0),
+		assertion(First >= 0),
+		assertion(Second >= 0),
 		Total is First + Second,
-		^^assertion(Total =:= 10).
+		assertion(Total =:= 10).
 
 	test(multinomial_samples_4, deterministic) :-
 		multivariate_distributions(fast_random)::multinomial_samples(2, 10, [0.25, 0.75], [First, Second]),
 		length(First, FirstLength),
 		length(Second, SecondLength),
-		^^assertion(FirstLength =:= 2),
-		^^assertion(SecondLength =:= 2).
+		assertion(FirstLength =:= 2),
+		assertion(SecondLength =:= 2).
 
 	test(multinomial_density_4, deterministic(Density =~= 0.5)) :-
 		multivariate_distributions(fast_random)::multinomial_density([1, 1], 2, [0.5, 0.5], Density).

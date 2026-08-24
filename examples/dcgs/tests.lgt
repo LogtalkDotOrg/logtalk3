@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:16:0,
+		version is 1:16:1,
 		author is 'Parker Jones and Paulo Moura',
-		date is 2025-10-13,
+		date is 2026-08-24,
 		comment is 'Unit tests for the "dcgs" example.'
 	]).
 
@@ -49,7 +49,9 @@
 	cover(library).
 	cover(client).
 
-	:- uses(lgtunit, [op(700, xfx, =~=), (=~=)/2]).
+	:- uses(lgtunit, [
+		op(700, xfx, =~=), (=~=)/2, assertion/1
+	]).
 
 	test(dcgs_01, true(Solutions == [-9])) :-
 		findall(Result, calculator::parse("1+2-3*4", Result), Solutions).
@@ -88,11 +90,11 @@
 	test(dcgs_11, true) :-
 		tokenizer::tokens(" We owe $1,048,576.24 to Agent 007 for Version 3.14159! ", Tokens),
 		Tokens = [Tok1, Tok2, Tok3, Tok4, Tok5, Tok6, Tok7, Tok8, Tok9, Tok10, Tok11],
-		^^assertion([Tok1, Tok2, Tok3] ==  [we, owe, ('$')]),
-		^^assertion(Tok4 =~= 1048576.24),
-		^^assertion([Tok5, Tok6, Tok7, Tok8, Tok9] == [to, agent, 7, for, version]),
-		^^assertion(Tok10 =~= 3.14159),
-		^^assertion(Tok11 == !).
+		assertion([Tok1, Tok2, Tok3] ==  [we, owe, ('$')]),
+		assertion(Tok4 =~= 1048576.24),
+		assertion([Tok5, Tok6, Tok7, Tok8, Tok9] == [to, agent, 7, for, version]),
+		assertion(Tok10 =~= 3.14159),
+		assertion(Tok11 == !).
 
 	test(dcgs_12, true([A, B] =~= [-0.94974746830583223, 6.9497474683058318])) :-
 		findall(Ending, walker::walk([n(5), e(4), s(2), nw(8), s(5), se(1), n(4)], Ending), Endings),

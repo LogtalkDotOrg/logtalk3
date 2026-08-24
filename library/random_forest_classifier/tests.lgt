@@ -23,10 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:0:1,
 		author is 'Paulo Moura',
-		date is 2026-05-07,
+		date is 2026-08-24,
 		comment is 'Unit tests for the "random_forest_classifier" library.'
+	]).
+
+	:- uses(lgtunit, [
+		assertion/1
 	]).
 
 	:- uses(list, [
@@ -95,10 +99,10 @@
 		random_forest_classifier::learn(iris, Classifier, [number_of_trees(3), maximum_features_per_tree(2)]),
 		Classifier = rf_classifier(Trees, _, _),
 		% Just verify the structure - each tree has associated feature names
-		^^assertion(length(Trees, 3)),
+		assertion(length(Trees, 3)),
 		forall(
 			(member(tree(_Tree, FeatureNames), Trees), length(FeatureNames, Max)),
-			^^assertion(Max =< 2)
+			assertion(Max =< 2)
 		).
 
 	% predict/3 tests - ensemble predictions
