@@ -1686,7 +1686,10 @@
 		Assertion \= (_; _),
 		\+ predicate_property(Assertion, built_in),
 		load_context(File, Position, Type, Entity),
-		print_message(warning, lgtunit, assertion_called_in_the_wrong_context(File, Position, Type, Entity, Assertion)),
+		\+ \+ (
+			numbervars(Assertion, 0, _),
+			print_message(warning, lgtunit, assertion_called_in_the_wrong_context(File, Position, Type, Entity, Assertion))
+		),
 		fail.
 
 	% expand lgtunit::assertion/1-2 goals in test bodies to avoid false dead code
@@ -1725,9 +1728,9 @@
 
 	% ensure the source_data flag is turned on for the test object
 	term_expansion(begin_of_file, [begin_of_file, (:- set_logtalk_flag(source_data,on))], _) :-
-		( logtalk_load_context(file, File) ->
+		(	logtalk_load_context(file, File) ->
 			clear_linter_warnings(File)
-		; true
+		;	true
 		).
 	term_expansion((:- Directive), Terms, _) :-
 		% delegate to another predicate to take advantage of first-argument indexing

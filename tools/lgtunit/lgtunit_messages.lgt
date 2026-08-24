@@ -415,7 +415,7 @@
 		message_context(File, Position, Type, Entity).
 
 	message_tokens(assertion_called_in_the_wrong_context(File, Position, Type, Entity, Assertion)) -->
-		['test ~q assertion called in the wrong context due to (^^)/1 semantics: '-[Test], term(Assertion, [quoted(true), variable_names(VariableNames)]), nl],
+		['test assertion called in the wrong context due to (^^)/1 semantics: '-[], term(Assertion, [quoted(true)]), nl],
 		message_context(File, Position, Type, Entity).
 
 	% auxiliary grammar rules
