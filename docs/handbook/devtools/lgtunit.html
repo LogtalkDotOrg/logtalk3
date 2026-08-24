@@ -1135,7 +1135,9 @@ consistent(<span class="nv">X</span>, <span class="nv">Y</span>) <span class="o"
 </div>
 <p>In this case, the <em>sender</em> is the tests object, and the <code class="docutils literal notranslate"><span class="pre">assertion/1</span></code>
 meta-predicate will call the local <code class="docutils literal notranslate"><span class="pre">consistent/2</span></code> predicate in the
-expected context.</p>
+expected context. A linter warning is printed by default when the
+assertion argument in an <code class="docutils literal notranslate"><span class="pre">^^assertion/1-2</span></code> is not a built-in
+predicate, <code class="docutils literal notranslate"><span class="pre">(::)/2</span></code>, or <code class="docutils literal notranslate"><span class="pre">(:)/2</span></code> goal.</p>
 </section>
 <section id="testing-local-predicates">
 <h2>Testing local predicates<a class="headerlink" href="#testing-local-predicates" title="Link to this heading"></a></h2>

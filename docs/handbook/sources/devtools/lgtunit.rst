@@ -1066,7 +1066,9 @@ calls preserve the *sender*, and the tests are implicitly run by the
 
 In this case, the *sender* is the tests object, and the ``assertion/1``
 meta-predicate will call the local ``consistent/2`` predicate in the
-expected context.
+expected context. A linter warning is printed by default when the
+assertion argument in an ``^^assertion/1-2`` is not a built-in
+predicate, ``(::)/2``, or ``(:)/2`` goal.
 
 Testing local predicates
 ------------------------

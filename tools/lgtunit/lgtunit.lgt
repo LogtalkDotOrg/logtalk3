@@ -28,9 +28,9 @@
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 22:8:0,
+		version is 22:9:0,
 		author is 'Paulo Moura',
-		date is 2026-08-23,
+		date is 2026-08-24,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -1669,6 +1669,25 @@
 		::retract(flaky_(Old)),
 		New is Old + 1,
 		::asserta(flaky_(New)).
+
+	% warn the user about ^^assertion/1-2 goals with arguments that are
+	% not built-in predicate, message-sending, or mudule-qualified goals
+
+	goal_expansion(^^Goal, _) :-
+		callable(Goal),
+		(	Goal = assertion(Assertion) ->
+			true
+		;	Goal = assertion(_, Assertion)
+		),
+		callable(Assertion),
+		Assertion \= _::_,
+		Assertion \= ':'(_, _),
+		Assertion \= (_, _),
+		Assertion \= (_; _),
+		\+ predicate_property(Assertion, built_in),
+		load_context(File, Position, Type, Entity),
+		print_message(warning, lgtunit, assertion_called_in_the_wrong_context(File, Position, Type, Entity, Assertion)),
+		fail.
 
 	% expand lgtunit::assertion/1-2 goals in test bodies to avoid false dead code
 	% warnings as the meta-calls are only expanded when the tests are compiled in

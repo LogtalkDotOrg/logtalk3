@@ -29,9 +29,9 @@
 :- category(lgtunit_messages).
 
 	:- info([
-		version is 12:2:0,
+		version is 12:3:0,
 		author is 'Paulo Moura',
-		date is 2025-10-20,
+		date is 2026-08-24,
 		comment is 'Logtalk unit test framework default message translations.'
 	]).
 
@@ -412,6 +412,10 @@
 
 	message_tokens(assertion_is_always_error(Test, Assertion, File, Position, Type, Entity, VariableNames)) -->
 		['test ~q assertion always throws an error: '-[Test], term(Assertion, [quoted(true), variable_names(VariableNames)]), nl],
+		message_context(File, Position, Type, Entity).
+
+	message_tokens(assertion_called_in_the_wrong_context(File, Position, Type, Entity, Assertion)) -->
+		['test ~q assertion called in the wrong context due to (^^)/1 semantics: '-[Test], term(Assertion, [quoted(true), variable_names(VariableNames)]), nl],
 		message_context(File, Position, Type, Entity).
 
 	% auxiliary grammar rules

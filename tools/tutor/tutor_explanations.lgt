@@ -22,9 +22,9 @@
 :- category(tutor_explanations).
 
 	:- info([
-		version is 0:89:0,
+		version is 0:90:0,
 		author is 'Paulo Moura',
-		date is 2026-08-10,
+		date is 2026-08-24,
 		comment is 'This category provides explanations and suggestions to selected compiler and developer tool warning and error messages.'
 	]).
 
@@ -1270,6 +1270,12 @@
 
 	explain(assertion_is_always_error(_, _, _, _, _, _, _)) -->
 		['As-is, the assertion makes the test always throw an error. Typo in the assertion?'-[], nl, nl].
+
+	explain(assertion_called_in_the_wrong_context(_, _, _, _, _)) -->
+		[	'Super calls preserve the sender and thus the assertion is resolved in the'-[], nl,
+			'context of the object that sent the message to run the tests, not in the'-[], nl,
+			'context of the object defining the tests.'-[], nl, nl
+		].
 
 	explain(non_instantiated_test_option(_, _, _, _, _)) -->
 		[ 	'Test options must be instantited; they cannot be variables.'-[], nl, nl

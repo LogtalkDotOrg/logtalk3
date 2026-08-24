@@ -248,6 +248,10 @@ Tools
 for starting a HTTP server using Logtalk HTTP libraries. Supports ECLiPSe,
 SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM.
 
+* ADDED: New `lgtunit` tool linter warning for `^^assertion/1-2` calls where
+the assertion argument is not a built-in predicate, message-sending, or
+module-qualified goal.
+
 * IMPROVED: Tests for the `linter_reporter` tool to be less verbose.
 
 * IMPROVED: Tests for the `lgtunit` tool to be less verbose.
