@@ -192,10 +192,8 @@ run:
 Usage
 -----
 
-.. _defining-a-problem-1:
-
-Defining a problem
-~~~~~~~~~~~~~~~~~~
+Example of a problem definiton
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Define an object implementing the ``tabu_search_problem_protocol``
 protocol. For example, a simple quadratic minimization problem:

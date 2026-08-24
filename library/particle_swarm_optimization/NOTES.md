@@ -168,7 +168,7 @@ Limitations
 Usage
 -----
 
-### Defining a problem
+### Example of a problem definiton
 
 	:- object(sphere,
 		implements(particle_swarm_optimization_protocol)).

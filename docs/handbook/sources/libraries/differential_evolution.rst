@@ -212,10 +212,8 @@ Limitations
 Usage
 -----
 
-.. _defining-a-problem-1:
-
-Defining a problem
-~~~~~~~~~~~~~~~~~~
+Example of a problem definiton
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ::
 

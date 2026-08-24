@@ -165,10 +165,8 @@ run:
 Usage
 -----
 
-.. _defining-a-problem-1:
-
-Defining a problem
-~~~~~~~~~~~~~~~~~~
+Example of a problem definiton
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Define an object implementing the ``ant_colony_problem_protocol``
 protocol. For example, a small TSP instance:

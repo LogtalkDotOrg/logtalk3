@@ -173,7 +173,7 @@ run:
 Usage
 -----
 
-### Defining a problem
+### Example of a problem definiton
 
 Define an object implementing the `simulated_annealing_protocol` protocol.
 For example, a simple quadratic minimization problem:
