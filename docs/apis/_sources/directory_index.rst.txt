@@ -2116,7 +2116,7 @@ To load an entity, always load the library that includes it using the goal ``log
    lbfgs(Problem) <lbfgs_1>
    lbfgs_b(Problem) <lbfgs_b_1>
    local_optimization_problem_protocol <local_optimization_problem_protocol_0>
-   local_optimization_solver <local_optimization_solver_0>
+   local_optimization_solver(Problem) <local_optimization_solver_1>
    nelder_mead(Problem) <nelder_mead_1>
    trust_region_newton_cg(Problem) <trust_region_newton_cg_1>
 

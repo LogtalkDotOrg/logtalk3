@@ -18,14 +18,14 @@ L-BFGS-B bound-constrained limited-memory quasi-Newton optimizer with a level-B 
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-18
+| **Date:** 2026-08-24
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
 | **Imports:**
-|    ``public`` :ref:`local_optimization_solver <local_optimization_solver/0>`
+|    ``public`` :ref:`local_optimization_solver(Problem) <local_optimization_solver/1>`
 | **Uses:**
 |    :ref:`linear_algebra <linear_algebra/0>`
 |    :ref:`list <list/0>`
@@ -39,7 +39,7 @@ L-BFGS-B bound-constrained limited-memory quasi-Newton optimizer with a level-B 
    - Unbounded problems: When the problem does not define ``position_bounds/1``, the solver behaves like unconstrained ``lbfgs(_)`` (no GCP / free-set masking). Prefer ``lbfgs(_)`` for purely unconstrained work; prefer this solver when box constraints are present.
 
 | **Inherited public predicates:**
-|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`local_optimization_solver/0::run/2`  :ref:`local_optimization_solver/0::run/3`  :ref:`local_optimization_solver/0::run/4`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`local_optimization_solver/1::run/2`  :ref:`local_optimization_solver/1::run/3`  :ref:`local_optimization_solver/1::run/4`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:
@@ -67,5 +67,5 @@ Operators
 
 .. seealso::
 
-   :ref:`local_optimization_problem_protocol <local_optimization_problem_protocol/0>`, :ref:`local_optimization_solver <local_optimization_solver/0>`, :ref:`lbfgs(Problem) <lbfgs/1>`, :ref:`bfgs(Problem) <bfgs/1>`, :ref:`gradient_descent(Problem) <gradient_descent/1>`
+   :ref:`local_optimization_problem_protocol <local_optimization_problem_protocol/0>`, :ref:`local_optimization_solver(Problem) <local_optimization_solver/1>`, :ref:`lbfgs(Problem) <lbfgs/1>`, :ref:`bfgs(Problem) <bfgs/1>`, :ref:`gradient_descent(Problem) <gradient_descent/1>`
 

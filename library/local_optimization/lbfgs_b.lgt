@@ -20,12 +20,12 @@
 
 
 :- object(lbfgs_b(_Problem_),
-	imports(local_optimization_solver)).
+	imports(local_optimization_solver(_Problem_))).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-18,
+		date is 2026-08-24,
 		comment is 'L-BFGS-B bound-constrained limited-memory quasi-Newton optimizer with a level-B approximate generalized Cauchy point (first-segment quadratic min along the projected gradient path), free-set identification at the Cauchy point, feasible-step limiting, and L-BFGS two-loop recursion. Requires ``gradient/2``.',
 		parameters is [
 			'Problem' - 'Problem object implementing ``local_optimization_problem_protocol`` with ``gradient/2`` (and ``position_bounds/1`` when box constraints are present).'
@@ -38,13 +38,13 @@
 			'Unbounded problems' - 'When the problem does not define ``position_bounds/1``, the solver behaves like unconstrained ``lbfgs(_)`` (no GCP / free-set masking). Prefer ``lbfgs(_)`` for purely unconstrained work; prefer this solver when box constraints are present.'
 		],
 		see_also is [
-			local_optimization_problem_protocol, local_optimization_solver, lbfgs(_), bfgs(_), gradient_descent(_)
+			local_optimization_problem_protocol, local_optimization_solver(_), lbfgs(_), bfgs(_),
+			gradient_descent(_)
 		]
 	]).
 
 	:- uses(_Problem_, [
-		initial_point/1, objective/2, gradient/2, position_bounds/1,
-		stop_condition/3, progress/5
+		objective/2, gradient/2, position_bounds/1, stop_condition/3, progress/5
 	]).
 
 	:- uses(linear_algebra, [
@@ -78,11 +78,11 @@
 		;	UpdateInterval = 0
 		),
 		(	position_bounds(Bounds) ->
-			^^validate_bounds(Bounds)
+			^^check_bounds(Bounds)
 		;	Bounds = []
 		),
-		initial_point(PointIn),
-		^^validate_point(PointIn, Bounds),
+		^^initial_point(Options, PointIn),
+		^^check_point(PointIn, Bounds),
 		^^project_to_bounds(PointIn, Bounds, Point0),
 		length(Point0, Dimension),
 		Dimension >= 1,

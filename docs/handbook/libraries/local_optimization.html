@@ -708,6 +708,8 @@ always expressed in minimization form.</p>
 <h2>Common options<a class="headerlink" href="#common-options" title="Link to this heading"></a></h2>
 <p>Inherited from the solver category and available to every solver:</p>
 <ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">initial_point(Point)</span></code>- override problem defined initial point (no
+default).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">objective(minimize|maximize)</span></code> - optimization direction (default:
 <code class="docutils literal notranslate"><span class="pre">minimize</span></code>).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">target_value(Value)</span></code> - stop when the best value reaches or passes
@@ -1068,9 +1070,7 @@ unconstrained problem would.</p></li>
 <section id="using-as-a-local-polisher-after-a-global-search">
 <h3>Using as a local polisher after a global search<a class="headerlink" href="#using-as-a-local-polisher-after-a-global-search" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> differential_evolution(my_problem)<span class="o">::</span>run(<span class="nv">Rough</span>, <span class="nv">_</span>, [max_generations(<span class="m">100</span>)]),
-     <span class="c">% refine with a local solver (problem must expose Rough as</span>
-     <span class="c">% initial_point/1, or use a small adapter object)</span>
-     nelder_mead(my_problem)<span class="o">::</span>run(<span class="nv">Refined</span>, <span class="nv">Value</span>, [max_iterations(<span class="m">200</span>)]).
+     nelder_mead(my_problem)<span class="o">::</span>run(<span class="nv">Refined</span>, <span class="nv">Value</span>, [initial_point(<span class="nv">Rough</span>), max_iterations(<span class="m">200</span>)]).
 
 | <span class="o">?-</span> conjugate_gradient(my_problem)<span class="o">::</span>run(
          <span class="nv">Refined</span>, <span class="nv">Value</span>,

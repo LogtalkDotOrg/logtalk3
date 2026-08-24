@@ -301,6 +301,7 @@ Common options
 
 Inherited from the solver category and available to every solver:
 
+- `initial_point(Point)`- override problem defined initial point (no default).
 - `objective(minimize|maximize)` - optimization direction (default:
   `minimize`).
 - `target_value(Value)` - stop when the best value reaches or passes the
@@ -621,9 +622,7 @@ Usage
 ### Using as a local polisher after a global search
 
 	| ?- differential_evolution(my_problem)::run(Rough, _, [max_generations(100)]),
-	     % refine with a local solver (problem must expose Rough as
-	     % initial_point/1, or use a small adapter object)
-	     nelder_mead(my_problem)::run(Refined, Value, [max_iterations(200)]).
+	     nelder_mead(my_problem)::run(Refined, Value, [initial_point(Rough), max_iterations(200)]).
 
 	| ?- conjugate_gradient(my_problem)::run(
 	         Refined, Value,

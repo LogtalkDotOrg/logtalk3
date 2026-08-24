@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-17,
+		date is 2026-08-24,
 		comment is 'Unit tests for local_optimization solvers. Parameterized by the solver functor (e.g. nelder_mead).',
 		parnames is ['Solver']
 	]).
@@ -34,6 +34,7 @@
 		length/2, memberchk/2
 	]).
 
+	cover(local_optimization_solver(_)).
 	cover(barzilai_borwein(_)).
 	cover(bfgs(_)).
 	cover(conjugate_gradient(_)).
@@ -157,6 +158,43 @@
 		^^assertion(number(Measure)),
 		^^assertion(Evaluations > 0).
 
+	% warm-start (initial_point/1 option)
+
+	test(local_opt_warm_start_uses_point, deterministic) :-
+		% start already at the unconstrained minimum; a short run must remain near it
+		% (Nelder-Mead builds a small simplex around the point, so a tiny residual is expected)
+		Solver =.. [_Solver_, sphere],
+		Solver::run(Point, Value, [
+			initial_point([0.0, 0.0]),
+			max_iterations(5),
+			tol_x(0.0), tol_f(0.0), tol_g(0.0)
+		]),
+		^^assertion(Value < 1.0e-3),
+		Point = [X, Y],
+		^^assertion(abs(X) < 0.1),
+		^^assertion(abs(Y) < 0.1).
+
+	test(local_opt_warm_start_overrides_problem, deterministic(Value < 1.0)) :-
+		% problem default start is (3,4) with f=25; warm-start near the origin
+		Solver =.. [_Solver_, sphere],
+		Solver::run(_Point, Value, [
+			initial_point([0.1, 0.1]),
+			max_iterations(50)
+		]).
+
+	test(local_opt_warm_start_omitted_uses_problem, deterministic(Value < 20.0)) :-
+		% no initial_point option -> same behaviour as the original sphere test
+		Solver =.. [_Solver_, sphere],
+		Solver::run(_Point, Value, [max_iterations(200)]).
+
+	test(local_opt_warm_start_out_of_bounds, error(domain_error(initial_point, [2.0, 2.0]))) :-
+		Solver =.. [_Solver_, bounded_sphere],
+		Solver::run(_Point, _Value, [initial_point([2.0, 2.0])]).
+
+	test(local_opt_warm_start_empty_point, error(domain_error(option, initial_point([])))) :-
+		Solver =.. [_Solver_, sphere],
+		Solver::run(_Point, _Value, [initial_point([])]).
+
 	% option validation
 
 	test(local_opt_invalid_max_iterations, error(domain_error(option, max_iterations(0)))) :-
@@ -174,6 +212,10 @@
 	test(local_opt_invalid_updates, error(domain_error(option, updates(-1)))) :-
 		Solver =.. [_Solver_, sphere],
 		Solver::run(_Point, _Value, [updates(-1)]).
+
+	test(local_opt_invalid_initial_point_option, error(domain_error(option, initial_point(foo)))) :-
+		Solver =.. [_Solver_, sphere_stop],
+		Solver::run(_Point, _Value, [initial_point(foo)]).
 
 	% problem validation
 

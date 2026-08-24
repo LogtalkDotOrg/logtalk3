@@ -20,12 +20,12 @@
 
 
 :- object(trust_region_newton_cg(_Problem_),
-	imports(local_optimization_solver)).
+	imports(local_optimization_solver(_Problem_))).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-19,
+		date is 2026-08-24,
 		comment is 'Trust-region Newton-CG local optimizer (Steihaug-CG for the subproblem). Requires the problem to define ``gradient/2`` and ``hessian/2``. Supports optional box constraints via projection, minimization and maximization.',
 		parameters is [
 			'Problem' - 'Problem object implementing ``local_optimization_problem_protocol`` and defining ``gradient/2`` and ``hessian/2``.'
@@ -38,12 +38,12 @@
 			'Bounds' - 'When the problem defines ``position_bounds/1``, trial points are projected onto the box after each step. Projection can weaken the trust-region model agreement (the accepted step may differ from the one the subproblem solved for), which can trigger more radius shrinkage than an unconstrained problem would; a pure bound-constrained formulation is not implemented.'
 		],
 		see_also is [
-			local_optimization_problem_protocol, local_optimization_solver, gradient_descent(_), conjugate_gradient(_), bfgs(_), lbfgs(_)
+			local_optimization_problem_protocol, local_optimization_solver(_), gradient_descent(_), conjugate_gradient(_), bfgs(_), lbfgs(_)
 		]
 	]).
 
 	:- uses(_Problem_, [
-		initial_point/1, objective/2, gradient/2, hessian/2, position_bounds/1, stop_condition/3, progress/5
+		objective/2, gradient/2, hessian/2, position_bounds/1, stop_condition/3, progress/5
 	]).
 
 	:- uses(linear_algebra, [
@@ -80,12 +80,12 @@
 			UpdateInterval is max(1, (MaxIterations - 1) // Updates)
 		;	UpdateInterval = 0
 		),
-		initial_point(Point0),
+		^^initial_point(Options, Point0),
 		(	position_bounds(Bounds) ->
-			^^validate_bounds(Bounds),
-			^^validate_point(Point0, Bounds)
+			^^check_bounds(Bounds),
+			^^check_point(Point0, Bounds)
 		;	Bounds = [],
-			^^validate_point(Point0, [])
+			^^check_point(Point0, [])
 		),
 		length(Point0, Dimension),
 		Dimension >= 1,

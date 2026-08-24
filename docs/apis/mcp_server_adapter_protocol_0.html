@@ -438,7 +438,7 @@
   <p class="right" id="mcp-server-adapter-protocol-0"><span id="index-0"></span><strong>protocol</strong></p>
 <section id="mcp-server-adapter-protocol">
 <h1><code class="docutils literal notranslate"><span class="pre">mcp_server_adapter_protocol</span></code><a class="headerlink" href="#mcp-server-adapter-protocol" title="Link to this heading"></a></h1>
-<p>Protocol for MCP specification adapters. Each adapter implements one MCP protocol version (e.g. 2025-06-18 or 2026-07-28). The <code class="docutils literal notranslate"><span class="pre">mcp_server</span></code> facade selects an adapter via the <code class="docutils literal notranslate"><span class="pre">protocol_adapter/1</span></code> option and delegates the server lifecycle to it.</p>
+<p>Protocol for MCP specification adapters. Each adapter implements one MCP spec version (e.g. 2025-06-18 or 2026-07-28). The <code class="docutils literal notranslate"><span class="pre">mcp_server</span></code> facade selects an adapter via the <code class="docutils literal notranslate"><span class="pre">protocol_adapter/1</span></code> option and delegates the server lifecycle to it.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -493,7 +493,7 @@
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
 <section id="spec-1">
 <span id="mcp-server-adapter-protocol-0-spec-1"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">spec/1</span></code></a><a class="headerlink" href="#spec-1" title="Link to this heading"></a></h3>
-<p>Returns the MCP protocol version string implemented by this adapter (e.g. <code class="docutils literal notranslate"><span class="pre">'2025-06-18'</span></code> or <code class="docutils literal notranslate"><span class="pre">'2026-07-28'</span></code>).</p>
+<p>Returns the MCP spec version string implemented by this adapter (e.g. <code class="docutils literal notranslate"><span class="pre">'2025-06-18'</span></code> or <code class="docutils literal notranslate"><span class="pre">'2026-07-28'</span></code>).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

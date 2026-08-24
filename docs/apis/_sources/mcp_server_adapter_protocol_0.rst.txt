@@ -8,7 +8,7 @@
 ``mcp_server_adapter_protocol``
 ===============================
 
-Protocol for MCP specification adapters. Each adapter implements one MCP protocol version (e.g. 2025-06-18 or 2026-07-28). The ``mcp_server`` facade selects an adapter via the ``protocol_adapter/1`` option and delegates the server lifecycle to it.
+Protocol for MCP specification adapters. Each adapter implements one MCP spec version (e.g. 2025-06-18 or 2026-07-28). The ``mcp_server`` facade selects an adapter via the ``protocol_adapter/1`` option and delegates the server lifecycle to it.
 
 | **Availability:** 
 |    ``logtalk_load(mcp_server(loader))``
@@ -44,7 +44,7 @@ Public predicates
 ``spec/1``
 ^^^^^^^^^^
 
-Returns the MCP protocol version string implemented by this adapter (e.g. ``'2025-06-18'`` or ``'2026-07-28'``).
+Returns the MCP spec version string implemented by this adapter (e.g. ``'2025-06-18'`` or ``'2026-07-28'``).
 
 | **Compilation flags:**
 |    ``static``
