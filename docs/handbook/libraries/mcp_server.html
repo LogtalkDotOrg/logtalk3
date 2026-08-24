@@ -290,6 +290,13 @@
 <li class="toctree-l4"><a class="reference internal" href="#id9">2026-07-28 spec</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#mcp-apps-interactive-ui">MCP Apps (interactive UI)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#declaring-the-extension">Declaring the extension</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ui-resources">UI resources</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#linking-tools-to-ui">Linking tools to UI</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#out-of-scope">Out of scope</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
 </ul>
 </li>
@@ -1499,6 +1506,55 @@ stdout (only responses and notifications). The Streamable HTTP adapter
 likewise only returns responses and server-initiated notifications
 (progress and subscription events), never client-bound requests over the
 HTTP response channel.</p>
+</section>
+</section>
+<section id="mcp-apps-interactive-ui">
+<h2>MCP Apps (interactive UI)<a class="headerlink" href="#mcp-apps-interactive-ui" title="Link to this heading"></a></h2>
+<p>MCP Apps (<code class="docutils literal notranslate"><span class="pre">io.modelcontextprotocol/ui</span></code>) lets tools declare an
+interactive HTML UI that hosts render in a sandboxed iframe. The
+<strong>server</strong> only serves tools and <code class="docutils literal notranslate"><span class="pre">ui://</span></code> resources; host &lt;-&gt; iframe
+traffic is handled by the host.</p>
+<p>Compatible with <strong>2025-06-18</strong> and <strong>2026-07-28</strong>, and with <strong>stdio</strong>
+and <strong>Streamable HTTP</strong>. Spec:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://modelcontextprotocol.io/extensions/apps/overview">https://modelcontextprotocol.io/extensions/apps/overview</a></p></li>
+</ul>
+<section id="declaring-the-extension">
+<h3>Declaring the extension<a class="headerlink" href="#declaring-the-extension" title="Link to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>capabilities([resources, ui]).
+</pre></div>
+</div>
+<p>Advertises <code class="docutils literal notranslate"><span class="pre">extensions[&quot;io.modelcontextprotocol/ui&quot;]</span></code> in
+<code class="docutils literal notranslate"><span class="pre">initialize</span></code> (2025) or <code class="docutils literal notranslate"><span class="pre">server/discover</span></code> (2026).</p>
+</section>
+<section id="ui-resources">
+<h3>UI resources<a class="headerlink" href="#ui-resources" title="Link to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>resources([
+  resource(
+    <span class="s">&#39;ui://my-app/dashboard&#39;</span>,
+    dashboard,
+    <span class="s">&#39;Interactive dashboard&#39;</span>,
+    <span class="s">&#39;text/html;profile=mcp-app&#39;</span>
+  )
+]).
+</pre></div>
+</div>
+<p>Optional CSP via <code class="docutils literal notranslate"><span class="pre">resource_ui_meta/2</span></code> (<code class="docutils literal notranslate"><span class="pre">mcp_ui_protocol</span></code>).</p>
+</section>
+<section id="linking-tools-to-ui">
+<h3>Linking tools to UI<a class="headerlink" href="#linking-tools-to-ui" title="Link to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>tool_ui(show_dashboard, [
+  resource_uri(<span class="s">&#39;ui://my-app/dashboard&#39;</span>),
+  visibility([model, app])
+]).
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">tools/list</span></code> includes <code class="docutils literal notranslate"><span class="pre">_meta.ui.resourceUri</span></code> /
+<code class="docutils literal notranslate"><span class="pre">_meta.ui.visibility</span></code>.</p>
+</section>
+<section id="out-of-scope">
+<h3>Out of scope<a class="headerlink" href="#out-of-scope" title="Link to this heading"></a></h3>
+<p>Host &lt;-&gt; iframe JSON-RPC (<code class="docutils literal notranslate"><span class="pre">ui/initialize</span></code>, sandbox, <code class="docutils literal notranslate"><span class="pre">postMessage</span></code>).</p>
 </section>
 </section>
 <section id="limitations">

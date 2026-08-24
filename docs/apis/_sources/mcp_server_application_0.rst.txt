@@ -8,14 +8,14 @@
 ``mcp_server_application``
 ==========================
 
-Specification-independent application logic for MCP servers: tool/prompt/resource descriptor conversion, schema derivation from info/2 and mode/2, auto-dispatch, canonical complete-result terms, and curly-term helpers. Imported by both the 2025-06-18 and 2026-07-28 adapters.
+Specification-independent application logic for MCP servers: tool/prompt/resource descriptor conversion, schema derivation from info/2 and mode/2, auto-dispatch, canonical complete-result terms, curly-term predicates, and MCP Apps (``_meta.ui``) metadata. Imported by both the 2025-06-18 and 2026-07-28 adapters.
 
 | **Availability:** 
 |    ``logtalk_load(mcp_server(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-14
+| **Date:** 2026-08-24
 
 | **Compilation flags:**
 |    ``static``
@@ -82,21 +82,21 @@ Converts prompt descriptors (3-arg or 4-arg) into MCP JSON prompt definitions.
 
 ------------
 
-.. index:: resource_descriptors_to_json/2
-.. _mcp_server_application/0::resource_descriptors_to_json/2:
+.. index:: resource_descriptors_to_json/3
+.. _mcp_server_application/0::resource_descriptors_to_json/3:
 
-``resource_descriptors_to_json/2``
+``resource_descriptors_to_json/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Converts resource descriptors (4-arg or 5-arg) into MCP JSON resource definitions.
+Converts resource descriptors (4-arg or 5-arg) into MCP JSON resource definitions. When the application defines ``resource_ui_meta/2``, attaches ``_meta.ui`` (MCP Apps).
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``resource_descriptors_to_json(Descriptors,Resources)``
+|    ``resource_descriptors_to_json(Descriptors,Application,Resources)``
 | **Mode and number of proofs:**
-|    ``resource_descriptors_to_json(+list,-list)`` - ``one``
+|    ``resource_descriptors_to_json(+list,+object_identifier,-list)`` - ``one``
 
 
 ------------

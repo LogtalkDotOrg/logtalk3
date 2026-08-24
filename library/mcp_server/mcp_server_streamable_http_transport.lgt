@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-23,
+		date is 2026-08-24,
 		comment is 'MCP Streamable HTTP transport (2026-07-28). Uses Logtalk ``http_server::serve_until_shutdown/5`` and a dedicated ``http_handler_protocol`` handler object. Supports specs 2025-06-18 and 2026-07-28 selected via the ``spec/1`` option and delegated to ``mcp_server_2025_06_18_spec`` or ``mcp_server_2026_07_28_spec``. Long-lived subscriptions/listen streams emit periodic SSE comment keep-alives (``http_sse_keepalive/1``). Requires a multi-threaded backend for subscriptions/listen.'
 	]).
 
@@ -557,7 +557,13 @@
 		;	Capabilities1 = Capabilities0
 		),
 		Capabilities2 = [subscriptions-{}|Capabilities1],
-		^^pairs_to_curly(Capabilities2, Capabilities).
+		% MCP Apps extension (io.modelcontextprotocol/ui)
+		(	member(ui, AppCaps) ->
+			UIExt = {'io.modelcontextprotocol/ui'-{mimeTypes-['text/html;profile=mcp-app']}},
+			Capabilities3 = [extensions-UIExt| Capabilities2]
+		;	Capabilities3 = Capabilities2
+		),
+		^^pairs_to_curly(Capabilities3, Capabilities).
 
 	handle_tools_list(_, Id, HTTPResponse) :-
 		server_options_(Options),
@@ -928,9 +934,10 @@
 
 	handle_resources_list(_, Id, HTTPResponse) :-
 		server_options_(Options),
-		^^option(application(App), Options),
-		(	catch(App::resources(Descs), _, fail) ->
-			^^resource_descriptors_to_json(Descs, Json)
+		^^option(application(Application), Options),
+		(	conforms_to_protocol(Application, mcp_resource_protocol),
+			Application::resources(Descriptors) ->
+			^^resource_descriptors_to_json(Descriptors, Application, Json)
 		;	Json = []
 		),
 		resolve_cache(resources_list, {}, TTL, Scope, Options),
@@ -1259,6 +1266,8 @@
 	default_option(http_origin_check(true)).
 	default_option(http_sse_keepalive(15)).
 
+	valid_option(transport(Transport)) :-
+		once((Transport == stdio; Transport == streamable_http)).
 	valid_option(protocol_adapter(Adapter)) :-
 		callable(Adapter), conforms_to_protocol(Adapter, mcp_server_adapter_protocol).
 	valid_option(server_name(Name)) :-
@@ -1273,16 +1282,16 @@
 		number(TTL), TTL >= 0.
 	valid_option(cache_scope(Scope)) :-
 		once((Scope == (public) ; Scope == private)).
-	valid_option(spec(V)) :-
-		once((V == '2025-06-18'; V == '2026-07-28')).
+	valid_option(spec(Spec)) :-
+		once((Spec == '2025-06-18'; Spec == '2026-07-28')).
 	valid_option(http_port(Port)) :-
 		integer(Port), 0 < Port, Port =< 65535.
 	valid_option(http_bind(Bind)) :-
 		atom(Bind).
 	valid_option(http_path(Path)) :-
 		atom(Path).
-	valid_option(http_origin_check(F)) :-
-		once((F == true ; F == false)).
+	valid_option(http_origin_check(Flag)) :-
+		once((Flag == true ; Flag == false)).
 	valid_option(http_sse_keepalive(Seconds)) :-
 		number(Seconds), Seconds >= 0.
 

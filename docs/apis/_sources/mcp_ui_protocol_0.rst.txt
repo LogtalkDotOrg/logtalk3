@@ -1,0 +1,97 @@
+.. index:: single: mcp_ui_protocol
+.. _mcp_ui_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``mcp_ui_protocol``
+===================
+
+Optional MCP Apps (``io.modelcontextprotocol/ui``) metadata for tools and resources. Applications that provide interactive UI resources declare ``ui`` in ``capabilities/1`` (and typically ``resources``), implement ``mcp_resource_protocol`` for ``ui://`` HTML resources, and may implement these predicates to attach tool and resource UI metadata. Spec: https://modelcontextprotocol.io/extensions/apps/overview
+
+| **Availability:** 
+|    ``logtalk_load(mcp_server(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-24
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: tool_ui/2
+.. _mcp_ui_protocol/0::tool_ui/2:
+
+``tool_ui/2``
+^^^^^^^^^^^^^
+
+Optional. UI metadata for a tool. ``Options`` is a list of ``resource_uri(URI)`` and/or ``visibility(List)`` terms. ``URI`` must be a ``ui://`` resource served by the application. ``List`` is a list of ``model`` and/or ``app`` (default when omitted on the wire is both). App-only tools use ``visibility([app])`` so hosts hide them from the model while still allowing iframe-proxied ``tools/call``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``tool_ui(ToolName,Options)``
+| **Mode and number of proofs:**
+|    ``tool_ui(?atom,-list)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: resource_ui_meta/2
+.. _mcp_ui_protocol/0::resource_ui_meta/2:
+
+``resource_ui_meta/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Optional. UI metadata for a ``ui://`` resource as a curly-term matching the Apps ``_meta.ui`` object (``csp``, ``permissions``, ``domain``, ``prefersBorder``). Attached when serializing resource descriptors and may be used for ``resources/read`` content.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``resource_ui_meta(URI,Meta)``
+| **Mode and number of proofs:**
+|    ``resource_ui_meta(?atom,-compound)`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`mcp_tool_protocol <mcp_tool_protocol/0>`, :ref:`mcp_resource_protocol <mcp_resource_protocol/0>`, :ref:`mcp_server <mcp_server/0>`
+

@@ -23885,6 +23885,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`mcp_multiround_protocol <mcp_multiround_protocol/0::resource_read_round/4>`
 
+``resource_ui_meta/2``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mcp_ui_protocol <mcp_ui_protocol/0::resource_ui_meta/2>`
+
 ``resources/1``
 ---------------
 
@@ -28137,6 +28147,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`mcp_server_application <mcp_server_application/0::tool_descriptors_to_json/3>`
+
+``tool_ui/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`mcp_ui_protocol <mcp_ui_protocol/0::tool_ui/2>`
 
 ``tools/0``
 -----------

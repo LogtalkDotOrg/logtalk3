@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-23,
+		date is 2026-08-24,
 		comment is 'MCP 2026-07-28 protocol handler. Returns reply/1, reply_with_progress/2, subscribe/3, accepted, or no_reply outcomes. Does not write to streams; transports render outcomes.'
 	]).
 
@@ -403,7 +403,13 @@
 		),
 		% subscriptions are always offered by the 2026 adapter
 		Capabilities2 = [subscriptions-{}| Capabilities1],
-		^^pairs_to_curly(Capabilities2, Capabilities).
+		% MCP Apps extension (io.modelcontextprotocol/ui)
+		(	member(ui, ApplicationCapabilities) ->
+			UIExt = {'io.modelcontextprotocol/ui'-{mimeTypes-['text/html;profile=mcp-app']}},
+			Capabilities3 = [extensions-UIExt| Capabilities2]
+		;	Capabilities3 = Capabilities2
+		),
+		^^pairs_to_curly(Capabilities3, Capabilities).
 
 	% tools/list
 
@@ -541,7 +547,7 @@
 	handle_resources_list(_Params, Id, Output, Options) :-
 		^^option(application(Application), Options),
 		(	catch(Application::resources(ResourceDescriptors), _, fail) ->
-			^^resource_descriptors_to_json(ResourceDescriptors, JsonResources)
+			^^resource_descriptors_to_json(ResourceDescriptors, Application, JsonResources)
 		;	JsonResources = []
 		),
 		resolve_cache(resources_list, {}, TTL, Scope, Options),

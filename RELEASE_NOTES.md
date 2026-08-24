@@ -172,6 +172,8 @@ hash functions that accept both key an digest size parameters (per RFC 7693).
 * ADDED: Support for the MCP 2026-07-28 spec to the `mcp_server` library. Also
 refactored the library for separation of concerns between specs and transports.
 
+* ADDED: Support for MCP Apps to the `mcp_server` library.
+
 * ADDED: Full support for `socat` to the `http_process_transport` library and
 a new `connection_helper_executable/1` option (defaulting to `ncat`).
 

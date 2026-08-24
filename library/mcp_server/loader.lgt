@@ -31,6 +31,7 @@
 		mcp_resource_protocol,
 		mcp_multiround_protocol,
 		mcp_cache_protocol,
+		mcp_ui_protocol,
 		mcp_server_adapter_protocol,
 		mcp_server_spec_protocol,
 		mcp_server_application,

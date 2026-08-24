@@ -833,6 +833,54 @@ likewise only returns responses and server-initiated notifications
 HTTP response channel.
 
 
+
+MCP Apps (interactive UI)
+-------------------------
+
+MCP Apps (`io.modelcontextprotocol/ui`) lets tools declare an interactive
+HTML UI that hosts render in a sandboxed iframe. The **server** only
+serves tools and `ui://` resources; host <-> iframe traffic is handled by
+the host.
+
+Compatible with **2025-06-18** and **2026-07-28**, and with **stdio** and
+**Streamable HTTP**. Spec:
+
+- https://modelcontextprotocol.io/extensions/apps/overview
+
+### Declaring the extension
+
+	capabilities([resources, ui]).
+
+Advertises `extensions["io.modelcontextprotocol/ui"]` in `initialize`
+(2025) or `server/discover` (2026).
+
+### UI resources
+
+	resources([
+	  resource(
+	    'ui://my-app/dashboard',
+	    dashboard,
+	    'Interactive dashboard',
+	    'text/html;profile=mcp-app'
+	  )
+	]).
+
+Optional CSP via `resource_ui_meta/2` (`mcp_ui_protocol`).
+
+### Linking tools to UI
+
+	tool_ui(show_dashboard, [
+	  resource_uri('ui://my-app/dashboard'),
+	  visibility([model, app])
+	]).
+
+`tools/list` includes `_meta.ui.resourceUri` / `_meta.ui.visibility`.
+
+### Out of scope
+
+Host <-> iframe JSON-RPC (`ui/initialize`, sandbox, `postMessage`).
+
+
 Limitations
 -----------
 

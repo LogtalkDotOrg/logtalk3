@@ -25,8 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-14,
-		comment is 'Specification-independent application logic for MCP servers: tool/prompt/resource descriptor conversion, schema derivation from info/2 and mode/2, auto-dispatch, canonical complete-result terms, and curly-term helpers. Imported by both the 2025-06-18 and 2026-07-28 adapters.'
+		date is 2026-08-24,
+		comment is 'Specification-independent application logic for MCP servers: tool/prompt/resource descriptor conversion, schema derivation from info/2 and mode/2, auto-dispatch, canonical complete-result terms, curly-term predicates, and MCP Apps (``_meta.ui``) metadata. Imported by both the 2025-06-18 and 2026-07-28 adapters.'
 	]).
 
 	:- public(tool_descriptors_to_json/3).
@@ -43,11 +43,11 @@
 		argnames is ['PromptDescriptors', 'JsonPrompts']
 	]).
 
-	:- protected(resource_descriptors_to_json/2).
-	:- mode(resource_descriptors_to_json(+list, -list), one).
-	:- info(resource_descriptors_to_json/2, [
-		comment is 'Converts resource descriptors (4-arg or 5-arg) into MCP JSON resource definitions.',
-		argnames is ['Descriptors', 'Resources']
+	:- protected(resource_descriptors_to_json/3).
+	:- mode(resource_descriptors_to_json(+list, +object_identifier, -list), one).
+	:- info(resource_descriptors_to_json/3, [
+		comment is 'Converts resource descriptors (4-arg or 5-arg) into MCP JSON resource definitions. When the application defines ``resource_ui_meta/2``, attaches ``_meta.ui`` (MCP Apps).',
+		argnames is ['Descriptors', 'Application', 'Resources']
 	]).
 
 	:- protected(auto_dispatch_tool/5).
@@ -107,7 +107,7 @@
 	]).
 
 	:- uses(list, [
-		length/2
+		length/2, member/2
 	]).
 
 	:- uses(term_io, [
@@ -136,19 +136,25 @@
 		),
 		tool_input_schema(Application, Functor, Arity, InputSchema),
 		(	catch(Application::output_schema(Name, OutputSchema), _, fail) ->
-			JsonTool = {
+			JsonTool0 = {
 				name-Name,
 				title-Title,
 				description-Description,
 				inputSchema-InputSchema,
 				outputSchema-OutputSchema
 			}
-		;	JsonTool = {
+		;	JsonTool0 = {
 				name-Name,
 				title-Title,
 				description-Description,
 				inputSchema-InputSchema
 			}
+		),
+		% MCP Apps: optional _meta.ui from tool_ui/2
+		(	conforms_to_protocol(Application, mcp_ui_protocol),
+			application_tool_ui_meta(Application, Name, UIMeta) ->
+			add_meta_field(JsonTool0, UIMeta, JsonTool)
+		;	JsonTool = JsonTool0
 		).
 
 	tool_predicate_title(Application, Functor, Arity, Title) :-
@@ -207,18 +213,28 @@
 
 	% resource descriptors
 
-	resource_descriptors_to_json([], []).
-	resource_descriptors_to_json([Descriptor| Descriptors], Resources) :-
-		resource_descriptors_to_json(Descriptor, Descriptors, Resources).
+	resource_descriptors_to_json([], _, []).
+	resource_descriptors_to_json([Descriptor| Descriptors], Application, [Resource| Resources]) :-
+		resource_descriptor_to_json(Application, Descriptor, Resource),
+		resource_descriptors_to_json(Descriptors, Application, Resources).
 
-	resource_descriptors_to_json(resource(URI, Name, Title, Description, MimeType), Descriptors, [Resource| Resources]) :-
-		Resource = {uri-URI, name-Name, title-Title, description-Description, mimeType-MimeType},
-		resource_descriptors_to_json(Descriptors, Resources).
-	resource_descriptors_to_json(resource(URI, Name, Description, MimeType), Descriptors, [Resource| Resources]) :-
-		Resource = {uri-URI, name-Name, description-Description, mimeType-MimeType},
-		resource_descriptors_to_json(Descriptors, Resources).
+	resource_descriptor_to_json(Application, resource(URI, Name, Title, Description, MimeType), Resource) :-
+		!,
+		Resource0 = {uri-URI, name-Name, title-Title, description-Description, mimeType-MimeType},
+		(	conforms_to_protocol(Application, mcp_ui_protocol),
+			application_resource_ui_meta(Application, URI, UIMeta) ->
+			add_meta_field(Resource0, UIMeta, Resource)
+		;	Resource = Resource0
+		).
+	resource_descriptor_to_json(Application, resource(URI, Name, Description, MimeType), Resource) :-
+		Resource0 = {uri-URI, name-Name, description-Description, mimeType-MimeType},
+		(	conforms_to_protocol(Application, mcp_ui_protocol),
+			application_resource_ui_meta(Application, URI, UIMeta) ->
+			add_meta_field(Resource0, UIMeta, Resource)
+		;	Resource = Resource0
+		).
 
-	% auto-dispatch and tool execution helpers
+	% auto-dispatch and tool execution predicates
 
 	auto_dispatch_tool(Application, Functor, Arity, ToolArguments, Result) :-
 		functor(Goal, Functor, Arity),
@@ -289,11 +305,17 @@
 	format_resource_contents(text_content(URI, MimeType, Text), Contents, [JsonContent| JsonContents]) :-
 		JsonContent = {uri-URI, mimeType-MimeType, text-Text},
 		format_resource_contents(Contents, JsonContents).
+	format_resource_contents(text_content(URI, MimeType, Text, Meta), Contents, [JsonContent| JsonContents]) :-
+		JsonContent = {uri-URI, mimeType-MimeType, text-Text, '_meta'-Meta},
+		format_resource_contents(Contents, JsonContents).
 	format_resource_contents(blob_content(URI, MimeType, Base64Data), Contents, [JsonContent| JsonContents]) :-
 		JsonContent = {uri-URI, mimeType-MimeType, blob-Base64Data},
 		format_resource_contents(Contents, JsonContents).
+	format_resource_contents(blob_content(URI, MimeType, Base64Data, Meta), Contents, [JsonContent| JsonContents]) :-
+		JsonContent = {uri-URI, mimeType-MimeType, blob-Base64Data, '_meta'-Meta},
+		format_resource_contents(Contents, JsonContents).
 
-	% argument binding / collection / schema helpers
+	% argument binding / collection / schema predicates
 
 	bind_input_arguments([], [], _, _, _).
 	bind_input_arguments([Name| Names], [Mode| Modes], N, Goal, ToolArguments) :-
@@ -398,7 +420,7 @@
 			atomic_list_concat([Line, '\n', PairsText], Text)
 		).
 
-	% curly-term helpers (shared)
+	% curly-term predicates (shared)
 
 	has_pair({Pairs}, Key, Value) :-
 		curly_member(Key-Value, Pairs).
@@ -433,5 +455,38 @@
 	pairs_keys([], []).
 	pairs_keys([Key-_| Pairs], [Key| Keys]) :-
 		pairs_keys(Pairs, Keys).
+
+	% MCP Apps (io.modelcontextprotocol/ui) predicates
+
+	application_tool_ui_meta(Application, ToolName, {ui-UI}) :-
+		Application::tool_ui(ToolName, Options),
+		Options = [_| _],
+		tool_ui_options_to_ui(Options, UI).
+
+	tool_ui_options_to_ui(Options, UI) :-
+		findall(Pair, tool_ui_option_pair(Options, Pair), Pairs),
+		Pairs = [_| _],
+		pairs_to_curly(Pairs, UI).
+
+	tool_ui_option_pair(Options, resourceUri-URI) :-
+		member(resource_uri(URI), Options),
+		atom(URI).
+	tool_ui_option_pair(Options, visibility-Vis) :-
+		member(visibility(Vis), Options),
+		is_non_empty_list(Vis).
+
+	application_resource_ui_meta(Application, URI, {ui-UI}) :-
+		Application::resource_ui_meta(URI, UI),
+		nonvar(UI).
+
+	add_meta_field({Pairs0}, UIMeta, {('_meta'-UIMeta, Pairs0)}) :-
+		nonvar(Pairs0),
+		Pairs0 \== {},
+		!.
+	add_meta_field({_}, UIMeta, {'_meta'-UIMeta}) :-
+		!.
+	add_meta_field(Other, _, Other).
+
+	is_non_empty_list([_| _]).
 
 :- end_category.

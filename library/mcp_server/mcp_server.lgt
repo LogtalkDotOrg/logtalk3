@@ -179,8 +179,8 @@
 		atom(Version).
 	valid_option(server_title(Title)) :-
 		atom(Title).
-	valid_option(spec(Version)) :-
-		once((Version == '2025-06-18'; Version == '2026-07-28')).
+	valid_option(spec(Spec)) :-
+		once((Spec == '2025-06-18'; Spec == '2026-07-28')).
 	valid_option(transport(Transport)) :-
 		once((Transport == stdio; Transport == streamable_http)).
 	valid_option(protocol_adapter(Adapter)) :-
