@@ -204,11 +204,11 @@
 	notify(Event) :-
 		catch(
 			(	findall(
-					subscription_(SubId, ReqId, Filters, Stream),
-					subscription_(SubId, ReqId, Filters, Stream),
-					Subs
+					subscription_(SubscriptionId, RequestId, Filters, Stream),
+					subscription_(SubscriptionId, RequestId, Filters, Stream),
+					Subscriptions
 				),
-				dispatch_event(Subs, Event)
+				dispatch_event(Subscriptions, Event)
 			),
 			Error,
 			log_notify_error(Event, Error)
@@ -233,8 +233,8 @@
 		;	true
 		),
 		% Stop all live subscriptions
-		findall(SubId, subscription_(SubId, _, _, _), SubIds),
-		stop_all_subscriptions(SubIds),
+		findall(SubscriptionId, subscription_(SubscriptionId, _, _, _), SubscriptionIds),
+		stop_all_subscriptions(SubscriptionIds),
 		retractall(running_),
 		retractall(server_options_(_)),
 		retractall(subscription_(_,_,_,_)),
@@ -244,12 +244,12 @@
 		retractall(sse_mode_(_)).
 
 	stop_all_subscriptions([]).
-	stop_all_subscriptions([SubId| Rest]) :-
-		signal_subscription_stop(SubId),
-		stop_all_subscriptions(Rest).
+	stop_all_subscriptions([SubscriptionId| SubscriptionIds]) :-
+		signal_subscription_stop(SubscriptionId),
+		stop_all_subscriptions(SubscriptionIds).
 
-	signal_subscription_stop(SubId) :-
-		threaded_notify(subscription_msg(SubId, stop)).
+	signal_subscription_stop(SubscriptionId) :-
+		threaded_notify(subscription_msg(SubscriptionId, stop)).
 
 	setup_state(Options) :-
 		cleanup,
@@ -405,7 +405,7 @@
 	render_protocol_outcome_2026(reply_with_progress(_Events, Final), HTTPResponse) :-
 		!,
 		render_protocol_outcome_2026(reply(Final), HTTPResponse).
-	render_protocol_outcome_2026(subscribe(_SubId, _Filters, Messages), HTTPResponse) :-
+	render_protocol_outcome_2026(subscribe(_SubscriptionId, _Filters, Messages), HTTPResponse) :-
 		!,
 		(	Messages = [AckResponse| _] ->
 			render_protocol_outcome_2026(reply(AckResponse), HTTPResponse)
@@ -513,12 +513,12 @@
 
 	handle_cancelled(Message) :-
 		(	params(Message, Params),
-			^^has_pair(Params, requestId, ReqId) ->
+			^^has_pair(Params, requestId, RequestId) ->
 			forall(
-				subscription_(SubId, ReqId, _, _),
-				signal_subscription_stop(SubId)
+				subscription_(SubscriptionId, RequestId, _, _),
+				signal_subscription_stop(SubscriptionId)
 			),
-			retractall(subscription_(_, ReqId, _, _))
+			retractall(subscription_(_, RequestId, _, _))
 		;	true
 		).
 
@@ -567,9 +567,9 @@
 
 	handle_tools_list(_, Id, HTTPResponse) :-
 		server_options_(Options),
-		^^option(application(App), Options),
-		App::tools(Descs),
-		^^tool_descriptors_to_json(Descs, App, JsonTools),
+		^^option(application(Appplication), Options),
+		Appplication::tools(Tools),
+		^^tool_descriptors_to_json(Tools, Appplication, JsonTools),
 		resolve_cache(tools_list, {}, TTL, Scope, Options),
 		json_result(Id, {tools-JsonTools, resultType-complete, ttlMs-TTL, cacheScope-Scope}, HTTPResponse).
 
@@ -600,19 +600,20 @@
 
 	do_tools_call(ToolName, Args, ClientCaps, InputResponses, RequestState, ProgressToken, Id, HTTPResponse) :-
 		server_options_(Options),
-		^^option(application(App), Options),
-		(	App::tools(Descs), member(tool(ToolName, Functor, Arity), Descs) ->
+		^^option(application(Appplication), Options),
+		(	Appplication::tools(Tools),
+			member(tool(ToolName, Functor, Arity), Tools) ->
 			^^curly_to_pairs(Args, ArgPairs),
 			make_progress_closure(ProgressToken, Id, Progress),
 			Context = request_context(ClientCaps, InputResponses, RequestState, Progress),
 			(	catch(
-					App::tool_call_round(ToolName, ArgPairs, Context, RoundResult),
+					Appplication::tool_call_round(ToolName, ArgPairs, Context, RoundResult),
 					error(existence_error(procedure, _), _),
 					fail
 				) ->
 				handle_round_tool_result(RoundResult, Id, ProgressToken, HTTPResponse)
 			;	(	catch(
-						^^try_tool_call_3(App, ToolName, Functor, Arity, ArgPairs, Args, Result),
+						^^try_tool_call_3(Appplication, ToolName, Functor, Arity, ArgPairs, Args, Result),
 						Error,
 						Result = error(Error)
 					) ->
@@ -649,25 +650,25 @@
 	tool_result_body(text(Text), Id, Msg) :-
 		!,
 		response({content-[{type-text, text-Text}], resultType-complete}, Id, Msg).
-	tool_result_body(error(E), Id, Msg) :-
+	tool_result_body(error(Error), Id, Msg) :-
 		!,
-		(atom(E) -> T = E ; write_to_atom(E, T)),
-		response({content-[{type-text, text-T}], isError- @true, resultType-complete}, Id, Msg).
+		(atom(Error) -> Text = Error ; write_to_atom(Error, Text)),
+		response({content-[{type-text, text-Text}], isError- @true, resultType-complete}, Id, Msg).
 	tool_result_body(results(Items), Id, Msg) :-
 		!,
 		^^format_content_items(Items, Content),
 		response({content-Content, resultType-complete}, Id, Msg).
 	tool_result_body(structured(SC), Id, Msg) :-
 		!,
-		write_to_atom(SC, T),
-		response({content-[{type-text, text-T}], structuredContent-SC, resultType-complete}, Id, Msg).
+		write_to_atom(SC, Text),
+		response({content-[{type-text, text-Text}], structuredContent-SC, resultType-complete}, Id, Msg).
 	tool_result_body(structured(Items, SC), Id, Msg) :-
 		!,
 		^^format_content_items(Items, Content),
 		response({content-Content, structuredContent-SC, resultType-complete}, Id, Msg).
 	tool_result_body(Other, Id, Msg) :-
-		(atom(Other) -> T = Other ; write_to_atom(Other, T)),
-		error_response(-32603, T, Id, Msg).
+		(atom(Other) -> Text = Other ; write_to_atom(Other, Text)),
+		error_response(-32603, Text, Id, Msg).
 
 	% progress / SSE
 
@@ -693,7 +694,7 @@
 
 	normalize_input_responses([], []) :-
 		!.
-	normalize_input_responses([Item| Rest], [input_response(Key, Value)| Out]) :-
+	normalize_input_responses([Item| Items], [input_response(Key, Value)| Out]) :-
 		!,
 		(	^^has_pair(Item, key, Key) -> true ; Key = unknown),
 		(	^^has_pair(Item, value, Value) -> true
@@ -705,11 +706,14 @@
 			)
 		;	Value = Item
 		),
-		normalize_input_responses(Rest, Out).
+		normalize_input_responses(Items, Out).
 	normalize_input_responses(_, []).
 
 	extract_request_state(Params, State) :-
-		(	^^has_pair(Params, requestState, State0) -> State = State0 ; State = none ).
+		(	^^has_pair(Params, requestState, State0) ->
+			State = State0
+		;	State = none
+		).
 
 	begin_progress(none) :-
 		!,
@@ -829,9 +833,9 @@
 
 	sse_events_codes([], FinalMsg, Codes) :-
 		sse_data_event_codes(FinalMsg, Codes).
-	sse_events_codes([Ev| Evs], FinalMsg, Codes) :-
-		sse_data_event_codes(Ev, Codes0),
-		sse_events_codes(Evs, FinalMsg, Codes1),
+	sse_events_codes([Event| Events], FinalMsg, Codes) :-
+		sse_data_event_codes(Event, Codes0),
+		sse_events_codes(Events, FinalMsg, Codes1),
 		append(Codes0, Codes1, Codes).
 
 	sse_data_event_codes(Term, Codes) :-
@@ -844,9 +848,9 @@
 		append(Tmp, Suffix, Codes).
 
 	input_requests_to_json([], []).
-	input_requests_to_json([input_request(Key, Request)| Rest], [Json| JsonRest]) :-
+	input_requests_to_json([input_request(Key, Request)| InputRequests], [Json| JsonRest]) :-
 		request_to_json(Request, Key, Json),
-		input_requests_to_json(Rest, JsonRest).
+		input_requests_to_json(InputRequests, JsonRest).
 
 	request_to_json(form_elicitation(Message, Schema), Key, Json) :-
 		Json = {key-Key, method-'elicitation/create', params-{message-Message, requestedSchema-Schema}}.
@@ -1054,69 +1058,69 @@
 
 	% block until stop or stream write failure; requires multi-threading:
 	% notify/1, cancellation, and the keep-alive worker call threaded_notify/1
-	subscription_wait_loop(SubId, Stream) :-
+	subscription_wait_loop(SubscriptionId, Stream) :-
 		catch(
-			threaded_wait(subscription_msg(SubId, Msg)),
+			threaded_wait(subscription_msg(SubscriptionId, Msg)),
 			_,
 			Msg = stop
 		),
 		(	Msg == stop ->
 			true
 		;	Msg == keepalive ->
-			(	write_subscription_keepalive(SubId, Stream) ->
-				subscription_wait_loop(SubId, Stream)
+			(	write_subscription_keepalive(SubscriptionId, Stream) ->
+				subscription_wait_loop(SubscriptionId, Stream)
 			;	true  % stream dead
 			)
 		;	Msg = event(Event) ->
-			(	push_subscription_event(SubId, Stream, Event) ->
-				subscription_wait_loop(SubId, Stream)
+			(	push_subscription_event(SubscriptionId, Stream, Event) ->
+				subscription_wait_loop(SubscriptionId, Stream)
 			;	true  % stream dead
 			)
-		;	subscription_wait_loop(SubId, Stream)
+		;	subscription_wait_loop(SubscriptionId, Stream)
 		).
 
-	% start a detached worker that periodically notifies keepalive for SubId
+	% start a detached worker that periodically notifies keepalive for SubscriptionId
 	% (interval 0 or negative disables keep-alive)
-	start_subscription_keepalive(SubId) :-
+	start_subscription_keepalive(SubscriptionId) :-
 		(	server_options_(Options),
 			^^option(http_sse_keepalive(Seconds), Options),
 			Seconds > 0 ->
 			catch(
-				threaded_ignore(subscription_keepalive_loop(SubId, Seconds)),
+				threaded_ignore(subscription_keepalive_loop(SubscriptionId, Seconds)),
 				Error,
-				log_subscription_error(SubId, keepalive_start, Error)
+				log_subscription_error(SubscriptionId, keepalive_start, Error)
 			)
 		;	true
 		).
 
-	subscription_keepalive_loop(SubId, Seconds) :-
+	subscription_keepalive_loop(SubscriptionId, Seconds) :-
 		sleep(Seconds),
-		(	subscription_(SubId, _, _, _) ->
-			threaded_notify(subscription_msg(SubId, keepalive)),
-			subscription_keepalive_loop(SubId, Seconds)
+		(	subscription_(SubscriptionId, _, _, _) ->
+			threaded_notify(subscription_msg(SubscriptionId, keepalive)),
+			subscription_keepalive_loop(SubscriptionId, Seconds)
 		;	true
 		).
 
-	write_subscription_keepalive(SubId, Stream) :-
+	write_subscription_keepalive(SubscriptionId, Stream) :-
 		Stream \== none,
 		catch(
 			write_sse_comment(Stream),
 			Error,
-			(	log_subscription_error(SubId, keepalive, Error),
+			(	log_subscription_error(SubscriptionId, keepalive, Error),
 				fail
 			)
 		).
 
 	% succeeds if the SSE write+flush completed; fails on stream errors
-	push_subscription_event(SubId, Stream, Event) :-
+	push_subscription_event(SubscriptionId, Stream, Event) :-
 		Stream \== none,
-		event_to_notification(Event, SubId, Notification),
+		event_to_notification(Event, SubscriptionId, Notification),
 		catch(
 			(	write_sse_data_event(Stream, Notification),
 				flush_output(Stream)
 			),
 			Error,
-			(	log_subscription_error(SubId, push, Error),
+			(	log_subscription_error(SubscriptionId, push, Error),
 				fail
 			)
 		).
@@ -1127,27 +1131,27 @@
 		dispatch_one(Subscription, Event),
 		dispatch_event(Subscriptions, Event).
 
-	dispatch_one(subscription_(SubId, ReqId, Filters, Stream), Event) :-
+	dispatch_one(subscription_(SubscriptionId, RequestId, Filters, Stream), Event) :-
 		(	event_matches(Event, Filters) ->
 			(	Stream \== none ->
-				threaded_notify(subscription_msg(SubId, event(Event)))
-			;	drop_subscription(SubId, ReqId),
-				log_subscription_error(SubId, drop, delivery_failed)
+				threaded_notify(subscription_msg(SubscriptionId, event(Event)))
+			;	drop_subscription(SubscriptionId, RequestId),
+				log_subscription_error(SubscriptionId, drop, delivery_failed)
 			)
 		;	true
 		).
 
 	% best-effort removal of a dead subscription
-	drop_subscription(SubId, ReqId) :-
-		signal_subscription_stop(SubId),
-		retractall(subscription_(SubId, ReqId, _, _)),
-		retractall(subscription_(SubId, _, _, _)).
+	drop_subscription(SubscriptionId, RequestId) :-
+		signal_subscription_stop(SubscriptionId),
+		retractall(subscription_(SubscriptionId, RequestId, _, _)),
+		retractall(subscription_(SubscriptionId, _, _, _)).
 
-	log_subscription_error(SubId, Op, Error) :-
+	log_subscription_error(SubscriptionId, Op, Error) :-
 		format(
 			user_error,
 			'~w: subscription ~w ~w error: ~w~n',
-			[mcp_server_streamable_http_transport, SubId, Op, Error]
+			[mcp_server_streamable_http_transport, SubscriptionId, Op, Error]
 		).
 
 	event_matches(_, []) :-
@@ -1168,29 +1172,29 @@
 	event_type(resources_list_changed, resources).
 	event_type(resource_updated(_), resources).
 
-	event_to_notification(tools_list_changed, SubId, Notification) :-
+	event_to_notification(tools_list_changed, SubscriptionId, Notification) :-
 		Notification = {
 			jsonrpc-'2.0',
 			method-'notifications/tools/list_changed',
-			params-{'_meta'-{'io.modelcontextprotocol/subscriptionId'-SubId}}
+			params-{'_meta'-{'io.modelcontextprotocol/subscriptionId'-SubscriptionId}}
 		}.
-	event_to_notification(prompts_list_changed, SubId, Notification) :-
+	event_to_notification(prompts_list_changed, SubscriptionId, Notification) :-
 		Notification = {
 			jsonrpc-'2.0',
 			method-'notifications/prompts/list_changed',
-			params-{'_meta'-{'io.modelcontextprotocol/subscriptionId'-SubId}}
+			params-{'_meta'-{'io.modelcontextprotocol/subscriptionId'-SubscriptionId}}
 		}.
-	event_to_notification(resources_list_changed, SubId, Notification) :-
+	event_to_notification(resources_list_changed, SubscriptionId, Notification) :-
 		Notification = {
 			jsonrpc-'2.0',
 			method-'notifications/resources/list_changed',
-			params-{'_meta'-{'io.modelcontextprotocol/subscriptionId'-SubId}}
+			params-{'_meta'-{'io.modelcontextprotocol/subscriptionId'-SubscriptionId}}
 		}.
-	event_to_notification(resource_updated(URI), SubId, Notification) :-
+	event_to_notification(resource_updated(URI), SubscriptionId, Notification) :-
 		Notification = {
 			jsonrpc-'2.0',
 			method-'notifications/resources/updated',
-			params-{uri-URI, '_meta'-{'io.modelcontextprotocol/subscriptionId'-SubId}}
+			params-{uri-URI, '_meta'-{'io.modelcontextprotocol/subscriptionId'-SubscriptionId}}
 		}.
 
 	resolve_cache(Op, Req, TTL, Scope, Options) :-
@@ -1477,7 +1481,7 @@
 		write_codes(CRLF, Stream).
 
 	write_header_lines([], _Stream).
-	write_header_lines([Name-Value| Rest], Stream) :-
+	write_header_lines([Name-Value| Headers], Stream) :-
 		atom_codes(Name, NC),
 		atom_codes(Value, VC),
 		atom_codes(': ', Colon),
@@ -1486,7 +1490,7 @@
 		write_codes(Colon, Stream),
 		write_codes(VC, Stream),
 		write_codes(CRLF, Stream),
-		write_header_lines(Rest, Stream).
+		write_header_lines(Headers, Stream).
 
 	write_codes([], _Stream) :-
 		!.
