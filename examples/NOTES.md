@@ -303,6 +303,9 @@ Follows a short description of each included example (in alphabetical order):
 	simple example of working with futures, a common concurrent programming
 	idiom, using the high-level multi-threading predicates
 
+- `get_time_mcp_app`  
+    example illustrating the `mcp_server` library support for MCP Apps
+
 - `hailstone`  
 	example of computing Hailstone sequences
 

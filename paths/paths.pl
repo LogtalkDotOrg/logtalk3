@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on August 17, 2026
+%  Last updated on August 25, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -454,6 +454,7 @@ logtalk_library_path(fluents, engines('fluents/')).
 logtalk_library_path(free_nodes, ncl('free_nodes/')).
 logtalk_library_path(functions, threads('functions/')).
 logtalk_library_path(futures, examples('futures/')).
+logtalk_library_path(get_time_mcp_app, examples('get_time_mcp_app/')).
 logtalk_library_path(hailstone, examples('hailstone/')).
 logtalk_library_path(hanoi, threads('hanoi/')).
 logtalk_library_path(haunted_wasteland, examples('haunted_wasteland/')).

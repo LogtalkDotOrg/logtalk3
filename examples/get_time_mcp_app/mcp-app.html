@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>Get Time App</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --fg: light-dark(#1f2937, #f3f4f6);
+      --bg: light-dark(#ffffff, #1a1a1a);
+      --muted: light-dark(#6b7280, #9ca3af);
+      --code-bg: light-dark(#f3f4f6, #2a2a2a);
+      --accent: #2563eb;
+      --on-accent: #fff;
+      --font: ui-sans-serif, system-ui, sans-serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      font-family: var(--font);
+      color: var(--fg);
+      background: var(--bg);
+    }
+    main { max-width: 425px; padding: 1rem; }
+    .row {
+      display: flex;
+      align-items: baseline;
+      gap: 0.35rem;
+      margin: 0 0 0.75rem 0;
+    }
+    #server-time {
+      flex: 1;
+      min-width: 0;
+      font-family: var(--mono);
+      padding: 0.15em 0.4em;
+      border-radius: 4px;
+      background: var(--code-bg);
+    }
+    button {
+      display: block;
+      width: 100%;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 6px;
+      font-weight: 700;
+      color: var(--on-accent);
+      background: var(--accent);
+      cursor: pointer;
+    }
+    button:hover { filter: brightness(0.92); }
+    button:disabled { opacity: 0.55; cursor: not-allowed; }
+    #status {
+      margin-top: 0.75rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <main id="root">
+    <p class="row"><strong>Server Time:</strong> <code id="server-time">Loading…</code></p>
+    <button id="get-time-btn" type="button" disabled>Get Server Time</button>
+    <p id="status">Connecting…</p>
+  </main>
+  <script>
+/**
+ * Minimal MCP Apps View client (JSON-RPC over postMessage).
+ * Implements only: ui/initialize, ui/notifications/initialized,
+ * ui/notifications/tool-result, tools/call, optional ui/message,
+ * optional ui/notifications/size-changed.
+ *
+ * Protocol: https://github.com/modelcontextprotocol/ext-apps
+ * (specification 2026-01-26). No @modelcontextprotocol/ext-apps SDK.
+ *
+ * Tool name must match tools/list: get_time
+ */
+(function () {
+  "use strict";
+
+  var TOOL_NAME = "get_time";
+  var PROTOCOL_VERSION = "2026-01-26";
+  var nextId = 1;
+  var pending = Object.create(null);
+  var ready = false;
+
+  var serverTimeEl = document.getElementById("server-time");
+  var btn = document.getElementById("get-time-btn");
+  var statusEl = document.getElementById("status");
+
+  function post(msg) {
+    window.parent.postMessage(msg, "*");
+  }
+
+  function request(method, params) {
+    var id = nextId++;
+    return new Promise(function (resolve, reject) {
+      pending[id] = { resolve: resolve, reject: reject };
+      post({ jsonrpc: "2.0", id: id, method: method, params: params || {} });
+    });
+  }
+
+  function notify(method, params) {
+    post({ jsonrpc: "2.0", method: method, params: params || {} });
+  }
+
+  function extractTime(result) {
+    if (!result || typeof result !== "object") return null;
+    var sc = result.structuredContent;
+    if (sc && sc.time != null && String(sc.time).length) return String(sc.time);
+    var content = result.content;
+    if (Array.isArray(content)) {
+      for (var i = 0; i < content.length; i++) {
+        var c = content[i];
+        if (c && c.type === "text" && c.text) return String(c.text);
+      }
+    }
+    return null;
+  }
+
+  function showTime(result, source) {
+    var time = extractTime(result);
+    if (time) {
+      serverTimeEl.textContent = time;
+      statusEl.textContent = "Updated (" + source + ")";
+    } else {
+      serverTimeEl.textContent = "[ERROR]";
+      statusEl.textContent = "No time in tool result (see console)";
+      console.warn("Unrecognised tool result:", result);
+    }
+    return time;
+  }
+
+  function applyHostContext(ctx) {
+    if (!ctx) return;
+    if (ctx.theme === "dark" || ctx.theme === "light") {
+      document.documentElement.style.colorScheme = ctx.theme;
+    }
+    var vars = ctx.styles && ctx.styles.variables;
+    if (vars) {
+      Object.keys(vars).forEach(function (key) {
+        if (vars[key]) document.documentElement.style.setProperty(key, vars[key]);
+      });
+    }
+  }
+
+  function reportSize() {
+    var root = document.getElementById("root");
+    if (!root) return;
+    var rect = root.getBoundingClientRect();
+    notify("ui/notifications/size-changed", {
+      width: Math.ceil(rect.width),
+      height: Math.ceil(rect.height)
+    });
+  }
+
+  window.addEventListener("message", function (event) {
+    var data = event.data;
+    if (!data || data.jsonrpc !== "2.0") return;
+
+    // Response to our request
+    if (data.id != null && (data.result !== undefined || data.error !== undefined)) {
+      var p = pending[data.id];
+      if (!p) return;
+      delete pending[data.id];
+      if (data.error) p.reject(data.error);
+      else p.resolve(data.result);
+      return;
+    }
+
+    // Notifications from host
+    if (typeof data.method === "string") {
+      if (data.method === "ui/notifications/tool-result") {
+        console.info("tool-result", data.params);
+        showTime(data.params, "host");
+      } else if (data.method === "ui/notifications/host-context-changed") {
+        applyHostContext(data.params);
+      }
+    }
+  });
+
+  btn.addEventListener("click", function () {
+    if (!ready) {
+      statusEl.textContent = "Not connected yet";
+      return;
+    }
+    statusEl.textContent = "Calling " + TOOL_NAME + "…";
+    btn.disabled = true;
+    request("tools/call", { name: TOOL_NAME, arguments: {} })
+      .then(function (result) {
+        console.info("tools/call result", result);
+        var time = showTime(result, "button");
+        if (!time || time === "[ERROR]") return;
+        // Optional: ask host to surface a chat line (host-dependent).
+        return request("ui/message", {
+          role: "user",
+          content: [{ type: "text", text: "Updated server time: " + time }]
+        }).catch(function (err) {
+          console.info("ui/message not accepted by host:", err);
+        });
+      })
+      .catch(function (err) {
+        console.error(err);
+        serverTimeEl.textContent = "[ERROR]";
+        var msg = (err && err.message) || (typeof err === "string" ? err : JSON.stringify(err));
+        statusEl.textContent = "tools/call failed: " + msg;
+      })
+      .then(function () {
+        btn.disabled = false;
+        reportSize();
+      });
+  });
+
+  // Handshake: View initiates ui/initialize, then notifies initialized.
+  request("ui/initialize", {
+    protocolVersion: PROTOCOL_VERSION,
+    appInfo: { name: "Get Time App", version: "1.0.0" },
+    appCapabilities: {
+      availableDisplayModes: ["inline"]
+    }
+  })
+    .then(function (result) {
+      applyHostContext(result && result.hostContext);
+      notify("ui/notifications/initialized", {});
+      ready = true;
+      btn.disabled = false;
+      statusEl.textContent = "Connected — click to refresh time";
+      reportSize();
+      if (typeof ResizeObserver !== "undefined") {
+        var ro = new ResizeObserver(function () { reportSize(); });
+        ro.observe(document.getElementById("root"));
+      }
+    })
+    .catch(function (err) {
+      console.error("ui/initialize failed", err);
+      var msg = (err && err.message) || (typeof err === "string" ? err : JSON.stringify(err));
+      statusEl.textContent = "connect failed: " + msg;
+    });
+})();
+  </script>
+</body>
+</html>
