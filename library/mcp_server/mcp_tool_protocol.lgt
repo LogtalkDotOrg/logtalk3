@@ -24,12 +24,12 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-14,
-		comment is 'Protocol for Logtalk objects that provide tools to be exposed via an MCP (Model Context Protocol) server. Implementing objects must define the set of tools available and handle tool calls. Tool metadata (names, titles, descriptions, parameter schemas) can be derived automatically from ``info/2`` and ``mode/2`` directives on the tool predicates. Used by both the 2025-06-18 and 2026-07-28 adapters.',
+		date is 2026-08-26,
+		comment is 'Protocol for Logtalk objects that provide tools to be exposed via an MCP (Model Context Protocol) server. Implementing objects must define the set of tools available and handle tool calls. Tool metadata (names, titles, descriptions, input and output schemas) can be derived automatically from ``info/2`` and ``mode/2`` directives on the tool predicates, or overridden using ``input_schema/2`` and ``output_schema/2``. Used by both the 2025-06-18 and 2026-07-28 adapters.',
 		remarks is [
 			'Capabilities' - 'Objects can optionally define ``capabilities/1`` to declare additional application features. Currently supported: ``prompts`` and ``resources`` (server capabilities advertised during initialization) and ``elicitation`` (a required client capability that allows the server to ask the user questions during tool execution under the 2025-06-18 adapter). If ``capabilities/1`` is not defined, only the ``tools`` server capability is advertised.',
 			'Tool title' - 'The tool title (human-friendly display name) is derived from a ``title`` key in the predicate ``info/2`` directive. If not specified, the predicate name (functor) is used as the title.',
-			'Structured output' - 'Tools can declare an output schema via ``output_schema/2`` and return ``structured(StructuredContent)`` or ``structured(ContentItems, StructuredContent)`` results. The structured content is included in the ``structuredContent`` field of the tool call response alongside the ``content`` array.',
+			'Schemas' - 'Input and output schemas are inferred from the tool predicate ``info/2`` and ``mode/2`` directives. Define ``input_schema/2`` or ``output_schema/2`` to override the inferred schema for a tool. Tools can return ``structured(StructuredContent)`` or ``structured(ContentItems, StructuredContent)`` results; the structured content is included in the ``structuredContent`` field of the tool call response alongside the ``content`` array.',
 			'Resource links' - 'Tool results can include ``resource_link(URI, Name)`` or ``resource_link(URI, Name, Description, MimeType)`` content items in ``results/1`` lists.',
 			'Elicitation (2025-06-18 only)' - 'Under the 2025-06-18 adapter, tools that need user interaction during execution should define ``tool_call/4`` instead of ``tool_call/3``. The extra argument is an elicitation closure that can be called as ``call(Elicit, Message, Schema, Answer)`` where ``Message`` is the prompt text (an atom), ``Schema`` is a JSON Schema curly-term for the requested input, and ``Answer`` is unified with ``accept(Content)``, ``decline``, or ``cancel``. The 2026-07-28 adapter never invokes ``tool_call/4``; multi-round interaction is provided by ``mcp_multiround_protocol`` instead.',
 			'Multi-round (2026-07-28)' - 'For the 2026-07-28 adapter, applications that need additional input during a tool call implement ``tool_call_round/4`` from the ``mcp_multiround_protocol``. Existing ``tool_call/3`` and auto-dispatch remain valid and are wrapped as ``complete`` results when the round hook is absent.'
@@ -67,7 +67,14 @@
 	:- public(output_schema/2).
 	:- mode(output_schema(+atom, -compound), zero_or_one).
 	:- info(output_schema/2, [
-		comment is 'Returns the JSON output schema for the given tool name. Optional; when defined, the schema is included in the tool descriptor as ``outputSchema`` and the tool can return ``structured(StructuredContent)`` or ``structured(ContentItems, StructuredContent)`` results. The schema must be a curly-term following JSON Schema format (e.g. ``{type-object, properties-{temperature-{type-number}}, required-[temperature]}``).',
+		comment is 'Returns the JSON output schema for the given tool name. Optional; when defined, the schema overrides the one inferred from the tool predicate ``info/2`` and ``mode/2`` directives. The tool can return ``structured(StructuredContent)`` or ``structured(ContentItems, StructuredContent)`` results. The schema must be a curly-term following JSON Schema format (e.g. ``{type-object, properties-{temperature-{type-number}}, required-[temperature]}``).',
+		argnames is ['Name', 'Schema']
+	]).
+
+	:- public(input_schema/2).
+	:- mode(input_schema(+atom, -compound), zero_or_one).
+	:- info(input_schema/2, [
+		comment is 'Returns the JSON input schema for the given tool name. Optional; when defined, the schema overrides the one inferred from the tool predicate ``info/2`` and ``mode/2`` directives. The schema must be a curly-term following JSON Schema format (e.g. ``{type-object, properties-{temperature-{type-number}}, required-[temperature]}``).',
 		argnames is ['Name', 'Schema']
 	]).
 

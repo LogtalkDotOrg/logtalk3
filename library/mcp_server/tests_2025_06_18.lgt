@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-22,
+		date is 2026-08-26,
 		comment is 'Unit tests for the MCP 2025-06-18 adapter.'
 	]).
 
@@ -788,8 +788,8 @@
 		has_pair(Tool, outputSchema, Schema),
 		has_pair(Schema, type, object).
 
-	% tool without output_schema should not include outputSchema
-	test(mcp_server_tool_no_output_schema_01, true) :-
+	% output schema should be inferred from output-mode arguments
+	test(mcp_server_tool_output_schema_inferred_01, true) :-
 		run_mcp_exchange(
 			[tools_list_request(1)],
 			[Response]
@@ -799,7 +799,42 @@
 		has_pair(Result, tools, Tools),
 		member(Tool, Tools),
 		has_pair(Tool, name, factorial),
-		\+ has_pair(Tool, outputSchema, _).
+		has_pair(Tool, outputSchema, Schema),
+		has_pair(Schema, properties, Properties),
+		has_pair(Properties, 'F', Output),
+		has_pair(Output, type, integer).
+
+	% input_schema/2 should override the schema inferred from documentation
+	test(mcp_server_tool_input_schema_override_01, true) :-
+		run_mcp_exchange_with(
+			test_structured_tools,
+			[tools_list_request(1)],
+			[Response]
+		),
+		is_response(Response),
+		result(Response, Result),
+		has_pair(Result, tools, Tools),
+		member(Tool, Tools),
+		has_pair(Tool, name, divide),
+		has_pair(Tool, inputSchema, Schema),
+		has_pair(Schema, properties, Properties),
+		has_pair(Properties, dividend, _).
+
+	% output_schema/2 should override the schema inferred from documentation
+	test(mcp_server_tool_output_schema_override_01, true) :-
+		run_mcp_exchange_with(
+			test_structured_tools,
+			[tools_list_request(1)],
+			[Response]
+		),
+		is_response(Response),
+		result(Response, Result),
+		has_pair(Result, tools, Tools),
+		member(Tool, Tools),
+		has_pair(Tool, name, divide),
+		has_pair(Tool, outputSchema, Schema),
+		has_pair(Schema, properties, Properties),
+		has_pair(Properties, quotient, _).
 
 	% MCP 2025-06-18: Structured content tests
 

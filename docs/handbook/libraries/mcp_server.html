@@ -261,7 +261,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#streamable-http-adapter-options">Streamable HTTP adapter options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#implementing-the-tool-protocol">Implementing the tool protocol</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#auto-dispatch-vs-custom-tool-call-3">Auto-dispatch vs. custom <code class="docutils literal notranslate"><span class="pre">tool_call/3</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#output-schemas-structured-tool-output">Output schemas (structured tool output)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#input-output-schemas-structured-tool-input-output">Input/Output schemas (structured tool input/output)</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#elicitation-2025-06-18-spec">Elicitation (2025-06-18 spec)</a></li>
@@ -788,11 +788,13 @@ selected.</p>
 </pre></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">tools/1</span></code> predicate returns a list of
-<code class="docutils literal notranslate"><span class="pre">tool(Name,</span> <span class="pre">Functor,</span> <span class="pre">Arity)</span></code> descriptors. Tool descriptions and
-parameter schemas are derived from the <code class="docutils literal notranslate"><span class="pre">info/2</span></code> and <code class="docutils literal notranslate"><span class="pre">mode/2</span></code>
-directives. A <code class="docutils literal notranslate"><span class="pre">title</span></code> key in the predicate’s <code class="docutils literal notranslate"><span class="pre">info/2</span></code> directive
-provides a human-friendly display name. If omitted, the predicate
-functor is used.</p>
+<code class="docutils literal notranslate"><span class="pre">tool(Name,</span> <span class="pre">Functor,</span> <span class="pre">Arity)</span></code> descriptors. Tool descriptions, input
+schemas, and output schemas are derived from the <code class="docutils literal notranslate"><span class="pre">info/2</span></code> and
+<code class="docutils literal notranslate"><span class="pre">mode/2</span></code> directives. Input-mode arguments (<code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">++</span></code>, and <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>)
+define <code class="docutils literal notranslate"><span class="pre">inputSchema</span></code>; output-mode arguments (<code class="docutils literal notranslate"><span class="pre">-</span></code> and <code class="docutils literal notranslate"><span class="pre">--</span></code>) define
+<code class="docutils literal notranslate"><span class="pre">outputSchema</span></code>. A <code class="docutils literal notranslate"><span class="pre">title</span></code> key in the predicate’s <code class="docutils literal notranslate"><span class="pre">info/2</span></code>
+directive provides a human-friendly display name. If omitted, the
+predicate functor is used.</p>
 <p>Supported Logtalk types and their JSON Schema counterparts:</p>
 <table class="docutils align-default">
 <thead>
@@ -869,19 +871,25 @@ explicit content items</p></li>
 </pre></div>
 </div>
 </section>
-<section id="output-schemas-structured-tool-output">
-<h3>Output schemas (structured tool output)<a class="headerlink" href="#output-schemas-structured-tool-output" title="Link to this heading"></a></h3>
-<p>Tools can declare an output schema by defining the <code class="docutils literal notranslate"><span class="pre">output_schema/2</span></code>
-predicate in their application object:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>output_schema(divide, <span class="k">{</span>
+<section id="input-output-schemas-structured-tool-input-output">
+<h3>Input/Output schemas (structured tool input/output)<a class="headerlink" href="#input-output-schemas-structured-tool-input-output" title="Link to this heading"></a></h3>
+<p>Tools can override an inferred input or output schema by defining
+<code class="docutils literal notranslate"><span class="pre">input_schema/2</span></code> or <code class="docutils literal notranslate"><span class="pre">output_schema/2</span></code> in their application object:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>input_schema(factorial, <span class="k">{</span>
     type<span class="o">-</span>object,
-    properties<span class="o">-</span><span class="k">{</span>quotient<span class="o">-</span><span class="k">{</span>type<span class="o">-</span>number<span class="k">}}</span>, required<span class="o">-</span>[quotient]
+    properties<span class="o">-</span><span class="k">{</span><span class="s">&#39;N&#39;</span><span class="o">-</span><span class="k">{</span>type<span class="o">-</span>integer<span class="k">}}</span>, required<span class="o">-</span>[<span class="s">&#39;N&#39;</span>]
+<span class="k">}</span>).
+
+output_schema(factorial, <span class="k">{</span>
+    type<span class="o">-</span>object,
+    properties<span class="o">-</span><span class="k">{</span><span class="s">&#39;F&#39;</span><span class="o">-</span><span class="k">{</span>type<span class="o">-</span>integer<span class="k">}}</span>, required<span class="o">-</span>[<span class="s">&#39;F&#39;</span>]
 <span class="k">}</span>).
 </pre></div>
 </div>
-<p>When an output schema is declared, the tool descriptor includes an
-<code class="docutils literal notranslate"><span class="pre">outputSchema</span></code> field. The tool’s <code class="docutils literal notranslate"><span class="pre">tool_call/3</span></code> predicate can then
-return <code class="docutils literal notranslate"><span class="pre">structured(StructuredContent)</span></code> or
+<p>The tool descriptor always includes inferred <code class="docutils literal notranslate"><span class="pre">inputSchema</span></code> and
+<code class="docutils literal notranslate"><span class="pre">outputSchema</span></code> fields; explicit schemas replace the respective
+inferred field. The tool’s <code class="docutils literal notranslate"><span class="pre">tool_call/3</span></code> predicate can then return
+<code class="docutils literal notranslate"><span class="pre">structured(StructuredContent)</span></code> or
 <code class="docutils literal notranslate"><span class="pre">structured(Items,</span> <span class="pre">StructuredContent)</span></code> results. The
 <code class="docutils literal notranslate"><span class="pre">StructuredContent</span></code> argument must be a curly-term matching the schema.</p>
 </section>
@@ -1306,9 +1314,10 @@ when not defined)</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tool_call/4</span></code> - handles a tool call with an elicitation closure
 (optional; requires <code class="docutils literal notranslate"><span class="pre">capabilities([elicitation])</span></code> or
 <code class="docutils literal notranslate"><span class="pre">capabilities([...,</span> <span class="pre">elicitation])</span></code>; <strong>2025-06-18 only</strong>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">output_schema/2</span></code> - declares a JSON Schema for structured tool
-output (optional; when defined, the tool descriptor includes
-<code class="docutils literal notranslate"><span class="pre">outputSchema</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">input_schema/2</span></code> - overrides the inferred JSON Schema for tool input
+(optional)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">output_schema/2</span></code> - overrides the inferred JSON Schema for
+structured tool output (optional)</p></li>
 </ul>
 </section>
 <section id="mcp-prompt-protocol">

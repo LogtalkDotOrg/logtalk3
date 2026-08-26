@@ -174,6 +174,10 @@ refactored the library for separation of concerns between specs and transports.
 
 * ADDED: Support for MCP Apps to the `mcp_server` library.
 
+* ADDED: Support to the `mcp_server` library for an optional `output_schema/2`
+predicate. Allow the optional `input_schema/2` and `output_schema/2` predicates
+to override schema inference from a tool/predicate documentation.
+
 * ADDED: Full support for `socat` to the `http_process_transport` library and
 a new `connection_helper_executable/1` option (defaulting to `ncat`).
 

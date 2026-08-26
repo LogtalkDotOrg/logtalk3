@@ -134,22 +134,23 @@
 			true
 		;	Description = ''
 		),
-		tool_input_schema(Application, Functor, Arity, InputSchema),
-		(	catch(Application::output_schema(Name, OutputSchema), _, fail) ->
-			JsonTool0 = {
+		(	conforms_to_protocol(Application, mcp_tool_protocol),
+			Application::input_schema(Name, InputSchema) ->
+			true
+		;	tool_input_schema(Application, Functor, Arity, InputSchema)
+		),
+		(	conforms_to_protocol(Application, mcp_tool_protocol),
+			Application::output_schema(Name, OutputSchema) ->
+			true
+		;	tool_output_schema(Application, Functor, Arity, OutputSchema)
+		),
+		JsonTool0 = {
 				name-Name,
 				title-Title,
 				description-Description,
 				inputSchema-InputSchema,
 				outputSchema-OutputSchema
-			}
-		;	JsonTool0 = {
-				name-Name,
-				title-Title,
-				description-Description,
-				inputSchema-InputSchema
-			}
-		),
+			},
 		% MCP Apps: optional _meta.ui from tool_ui/2
 		(	conforms_to_protocol(Application, mcp_ui_protocol),
 			application_tool_ui_meta(Application, Name, UIMeta) ->
@@ -168,6 +169,24 @@
 		info_pair_value(InfoPairs, comment, Comment).
 
 	tool_input_schema(Application, Functor, Arity, InputSchema) :-
+		tool_argument_names_and_modes(Application, Functor, Arity, ArgNames, ModeArgs),
+		build_schema_properties(ArgNames, ModeArgs, 1, Properties, Required),
+		(	Properties == [] ->
+			InputSchema = {type-object, properties-{}}
+		;	pairs_to_curly(Properties, PropertiesCurly),
+			InputSchema = {type-object, properties-PropertiesCurly, required-Required}
+		).
+
+	tool_output_schema(Application, Functor, Arity, OutputSchema) :-
+		tool_argument_names_and_modes(Application, Functor, Arity, ArgNames, ModeArgs),
+		build_output_schema_properties(ArgNames, ModeArgs, 1, Properties, Required),
+		(	Properties == [] ->
+			OutputSchema = {type-object, properties-{}}
+		;	pairs_to_curly(Properties, PropertiesCurly),
+			OutputSchema = {type-object, properties-PropertiesCurly, required-Required}
+		).
+
+	tool_argument_names_and_modes(Application, Functor, Arity, ArgNames, ModeArgs) :-
 		functor(Head, Functor, Arity),
 		(	Application::predicate_property(Head, info(InfoPairs)),
 			(	info_pair_value(InfoPairs, arguments, Arguments) ->
@@ -181,12 +200,6 @@
 			ModeTemplate =.. [_| ModeArgs]
 		;	length(ModeArgs, Arity),
 			fill_default_modes(Arity, ModeArgs)
-		),
-		build_schema_properties(ArgNames, ModeArgs, 1, Properties, Required),
-		(	Properties == [] ->
-			InputSchema = {type-object, properties-{}}
-		;	pairs_to_curly(Properties, PropertiesCurly),
-			InputSchema = {type-object, properties-PropertiesCurly, required-Required}
 		).
 
 	% prompt descriptors
@@ -360,10 +373,24 @@
 		),
 		build_schema_properties(Names, Modes, N1, RestProperties, RestRequired).
 
+	build_output_schema_properties([], [], _, [], []).
+	build_output_schema_properties([Name| Names], [Mode| Modes], N, Properties, Required) :-
+		N1 is N + 1,
+		(	is_output_mode(Mode) ->
+			mode_to_json_type(Mode, JsonType),
+			Properties = [Name-{type-JsonType}| RestProperties],
+			Required = [Name| RestRequired]
+		;	Properties = RestProperties,
+			Required = RestRequired
+		),
+		build_output_schema_properties(Names, Modes, N1, RestProperties, RestRequired).
+
 	mode_to_json_type(Mode, Type) :-
 		(	nonvar(Mode), Mode = (+ModeType) -> true
 		;	nonvar(Mode), Mode = (++ModeType) -> true
 		;	nonvar(Mode), Mode = (@ModeType) -> true
+		;	nonvar(Mode), Mode = (-ModeType) -> true
+		;	nonvar(Mode), Mode = (--ModeType) -> true
 		;	ModeType = any
 		),
 		(	var(ModeType) ->

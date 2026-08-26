@@ -317,11 +317,13 @@ To expose a Logtalk object as an MCP tool provider, implement the
    :- end_object.
 
 The ``tools/1`` predicate returns a list of
-``tool(Name, Functor, Arity)`` descriptors. Tool descriptions and
-parameter schemas are derived from the ``info/2`` and ``mode/2``
-directives. A ``title`` key in the predicate's ``info/2`` directive
-provides a human-friendly display name. If omitted, the predicate
-functor is used.
+``tool(Name, Functor, Arity)`` descriptors. Tool descriptions, input
+schemas, and output schemas are derived from the ``info/2`` and
+``mode/2`` directives. Input-mode arguments (``+``, ``++``, and ``@``)
+define ``inputSchema``; output-mode arguments (``-`` and ``--``) define
+``outputSchema``. A ``title`` key in the predicate's ``info/2``
+directive provides a human-friendly display name. If omitted, the
+predicate functor is used.
 
 Supported Logtalk types and their JSON Schema counterparts:
 
@@ -375,22 +377,28 @@ For example:
        atom_concat('The factorial is: ', FAtom, Text),
        Result = text(Text).
 
-Output schemas (structured tool output)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Input/Output schemas (structured tool input/output)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Tools can declare an output schema by defining the ``output_schema/2``
-predicate in their application object:
+Tools can override an inferred input or output schema by defining
+``input_schema/2`` or ``output_schema/2`` in their application object:
 
 ::
 
-   output_schema(divide, {
+   input_schema(factorial, {
        type-object,
-       properties-{quotient-{type-number}}, required-[quotient]
+       properties-{'N'-{type-integer}}, required-['N']
    }).
 
-When an output schema is declared, the tool descriptor includes an
-``outputSchema`` field. The tool's ``tool_call/3`` predicate can then
-return ``structured(StructuredContent)`` or
+   output_schema(factorial, {
+       type-object,
+       properties-{'F'-{type-integer}}, required-['F']
+   }).
+
+The tool descriptor always includes inferred ``inputSchema`` and
+``outputSchema`` fields; explicit schemas replace the respective
+inferred field. The tool's ``tool_call/3`` predicate can then return
+``structured(StructuredContent)`` or
 ``structured(Items, StructuredContent)`` results. The
 ``StructuredContent`` argument must be a curly-term matching the schema.
 
@@ -843,9 +851,10 @@ details.
 - ``tool_call/4`` - handles a tool call with an elicitation closure
   (optional; requires ``capabilities([elicitation])`` or
   ``capabilities([..., elicitation])``; **2025-06-18 only**)
-- ``output_schema/2`` - declares a JSON Schema for structured tool
-  output (optional; when defined, the tool descriptor includes
-  ``outputSchema``)
+- ``input_schema/2`` - overrides the inferred JSON Schema for tool input
+  (optional)
+- ``output_schema/2`` - overrides the inferred JSON Schema for
+  structured tool output (optional)
 
 ``mcp_prompt_protocol``
 ~~~~~~~~~~~~~~~~~~~~~~~

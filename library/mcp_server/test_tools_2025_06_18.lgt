@@ -367,6 +367,8 @@
 		tool(square, square, 2)
 	]).
 
+	input_schema(divide, {type-object, properties-{dividend-{type-integer}}, required-[dividend]}).
+
 	output_schema(divide, {type-object, properties-{quotient-{type-number}}, required-[quotient]}).
 
 	tool_call(divide, Arguments, Result) :-
