@@ -439,7 +439,7 @@
   <p class="right" id="mcp-streamable-http-handler-0"><span id="index-0"></span><strong>object</strong></p>
 <section id="mcp-streamable-http-handler">
 <h1><code class="docutils literal notranslate"><span class="pre">mcp_streamable_http_handler</span></code><a class="headerlink" href="#mcp-streamable-http-handler" title="Link to this heading"></a></h1>
-<p>HTTP handler bridging http_server to mcp_server_streamable_http_transport. Supports live incremental SSE flushing when a response body stream is available.</p>
+<p>HTTP handler bridging http_server to mcp_server_streamable_http_transport. Uses http_core response/5 with json(Term) bodies for application/json.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -448,8 +448,8 @@
 </div>
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
-<div class="line"><strong>Version:</strong> 0:3:5</div>
-<div class="line"><strong>Date:</strong> 2026-08-20</div>
+<div class="line"><strong>Version:</strong> 0:5:0</div>
+<div class="line"><strong>Date:</strong> 2026-08-26</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -464,11 +464,15 @@
 </div>
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
+<div class="line"><a class="reference internal" href="format_0.html#format-0"><span class="std std-ref">format</span></a></div>
+<div class="line"><a class="reference internal" href="http_core_0.html#http-core-0"><span class="std std-ref">http_core</span></a></div>
 <div class="line"><a class="reference internal" href="http_process_transport_0.html#http-process-transport-0"><span class="std std-ref">http_process_transport</span></a></div>
 <div class="line"><a class="reference internal" href="http_socket_transport_0.html#http-socket-transport-0"><span class="std std-ref">http_socket_transport</span></a></div>
+<div class="line"><a class="reference internal" href="json_0.html#json-0"><span class="std std-ref">json</span></a></div>
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
 <div class="line"><a class="reference internal" href="mcp_server_streamable_http_transport_0.html#mcp-server-streamable-http-transport-0"><span class="std std-ref">mcp_server_streamable_http_transport</span></a></div>
 <div class="line"><a class="reference internal" href="term_io_0.html#term-io-0"><span class="std std-ref">term_io</span></a></div>
+<div class="line"><a class="reference internal" href="user_0.html#user-0"><span class="std std-ref">user</span></a></div>
 </div>
 </div>
 <div class="line-block">

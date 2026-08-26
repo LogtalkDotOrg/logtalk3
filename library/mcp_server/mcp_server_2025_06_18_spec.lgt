@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-24,
+		date is 2026-08-26,
 		comment is 'MCP 2025-06-18 protocol handler. Transport-agnostic message handling; returns abstract outcomes for stdio or Streamable HTTP transports to render. Synchronous elicitation requires ``stdio_input/1`` and ``stdio_output/1`` options.'
 	]).
 
@@ -101,7 +101,9 @@
 	prepare(Application, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options0),
-		(	catch(Application::capabilities(Capabilities), _, fail) -> true
+		(	conforms_to_protocol(Application, mcp_tool_protocol),
+			Application::capabilities(Capabilities) ->
+			true
 		;	Capabilities = []
 		),
 		Options = [application(Application), application_capabilities(Capabilities)| Options0],
@@ -314,11 +316,8 @@
 			^^has_pair(ClientCapabilities, elicitation, _),
 			member(stdio_input(Input), Options),
 			member(stdio_output(Output), Options) ->
-			(	catch(
-					(Application::tool_call(ToolName, ArgPairs, {Input, Output}/[Message, Schema, Answer]>>(mcp_server_2025_06_18_spec::elicit_request(Input, Output, Message, Schema, Answer)), Result)),
-					error(existence_error(procedure, _), _),
-					fail
-				) ->
+			(	conforms_to_protocol(Application, mcp_tool_protocol),
+				Application::tool_call(ToolName, ArgPairs, {Input, Output}/[Message, Schema, Answer]>>(mcp_server_2025_06_18_spec::elicit_request(Input, Output, Message, Schema, Answer)), Result) ->
 				true
 			;	^^try_tool_call_3(Application, ToolName, Functor, Arity, ArgPairs, ToolArguments, Result)
 			)
@@ -352,7 +351,8 @@
 
 	handle_prompts_list(Id, Options, Outcome) :-
 		^^option(application(Application), Options),
-		(	catch(Application::prompts(PromptDescriptors), _, fail) ->
+		(	conforms_to_protocol(Application, mcp_prompt_protocol),
+			Application::prompts(PromptDescriptors) ->
 			^^prompt_descriptors_to_json(PromptDescriptors, JsonPrompts)
 		;	JsonPrompts = []
 		),
@@ -375,7 +375,8 @@
 		;	PromptArguments = {}
 		),
 		^^option(application(Application), Options),
-		(	catch(Application::prompts(PromptDescriptors), _, fail),
+		(	conforms_to_protocol(Application, mcp_prompt_protocol),
+			Application::prompts(PromptDescriptors),
 			(	member(prompt(PromptName, _, _), PromptDescriptors)
 			;	member(prompt(PromptName, _, _, _), PromptDescriptors)
 			) ->
@@ -413,7 +414,8 @@
 
 	handle_resources_list(Id, Options, Outcome) :-
 		^^option(application(Application), Options),
-		(	catch(Application::resources(ResourceDescriptors), _, fail) ->
+		(	conforms_to_protocol(Application, mcp_resource_protocol),
+			Application::resources(ResourceDescriptors) ->
 			^^resource_descriptors_to_json(ResourceDescriptors, Application, JsonResources)
 		;	JsonResources = []
 		),
@@ -434,7 +436,8 @@
 			Outcome = reply(ErrorResponse), !
 		),
 		^^option(application(Application), Options),
-		(	catch(Application::resources(ResourceDescriptors), _, fail),
+		(	conforms_to_protocol(Application, mcp_resource_protocol),
+			Application::resources(ResourceDescriptors),
 			(	member(resource(URI, _, _, _), ResourceDescriptors)
 			;	member(resource(URI, _, _, _, _), ResourceDescriptors)
 			) ->

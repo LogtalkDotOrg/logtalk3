@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-24,
+		date is 2026-08-26,
 		comment is 'Specification-independent application logic for MCP servers: tool/prompt/resource descriptor conversion, schema derivation from info/2 and mode/2, auto-dispatch, canonical complete-result terms, curly-term predicates, and MCP Apps (``_meta.ui``) metadata. Imported by both the 2025-06-18 and 2026-07-28 adapters.'
 	]).
 
@@ -261,11 +261,8 @@
 		).
 
 	try_tool_call_3(Application, ToolName, Functor, Arity, ArgPairs, ToolArguments, Result) :-
-		(	catch(
-				Application::tool_call(ToolName, ArgPairs, Result),
-				error(existence_error(procedure, _), _),
-				fail
-			) ->
+		(	conforms_to_protocol(Application, mcp_tool_protocol),
+			Application::tool_call(ToolName, ArgPairs, Result) ->
 			true
 		;	auto_dispatch_tool(Application, Functor, Arity, ToolArguments, Result)
 		).

@@ -25,8 +25,8 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-22,
-		comment is 'Unit tests for the MCP Streamable HTTP transport (2026-07-28 spec over HTTP).'
+		date is 2026-08-26,
+		comment is 'Unit tests for the MCP Streamable HTTP transport (2026-07-28 spec over HTTP). Updated for json_body/1, text_body/1, and http_core response/5.'
 	]).
 
 	:- uses(json_rpc, [
@@ -232,7 +232,8 @@
 			tools_call_with_progress(echo, {'Input'-hi}, t1, 1),
 			HTTPResponse
 		),
-		HTTPResponse = http_response(200, Headers, Body),
+		HTTPResponse = http_response(200, Headers, Payload),
+		sse_payload_atom(Payload, Body),
 		assertion(atom(Body)),
 		memberchk('Content-Type'-CT, Headers),
 		assertion(sub_atom(CT, _, _, _, 'text/event-stream')).
@@ -243,7 +244,8 @@
 			tools_call_with_progress(echo, {'Input'-hi}, t1, 1),
 			HTTPResponse
 		),
-		HTTPResponse = http_response(200, _, Body),
+		HTTPResponse = http_response(200, _, Payload),
+		sse_payload_atom(Payload, Body),
 		assertion(sub_atom(Body, _, _, _, 'data: ')),
 		assertion(sub_atom(Body, _, _, _, 'resultType')).
 
@@ -302,14 +304,14 @@
 		with_prepared(test_tools_2026, [http_path('/mcp')], (
 			Request = request('POST', '/other', [], '{}'),
 			mcp_streamable_http_handler::handle(Request, Response),
-			Response = response(404, _, _)
+			Response = response(http(1,1), status(404, _), _, _, _)
 		)).
 
 	test(http_handler_method_not_allowed_01, deterministic) :-
 		with_prepared(test_tools_2026, [http_path('/mcp')], (
 			Request = request('GET', '/mcp', [], ''),
 			mcp_streamable_http_handler::handle(Request, Response),
-			Response = response(405, _, _)
+			Response = response(http(1,1), status(405, _), _, _, _)
 		)).
 
 	% ping / unknown method
@@ -367,8 +369,14 @@
 		'Content-Type'-'application/json'
 	]).
 
-	% decode http_response/3 carrying application/json into a JSON-RPC term
+	% decode http_response/3 into a JSON-RPC term (json_body/1 or atom/SSE)
+	http_json_response(http_response(200, _Headers, json_body(Message)), Message) :-
+		!.
+	http_json_response(http_response(200, Headers, text_body(Body)), Message) :-
+		!,
+		http_json_response(http_response(200, Headers, Body), Message).
 	http_json_response(http_response(200, Headers, Body), Message) :-
+		atom(Body),
 		memberchk('Content-Type'-CT, Headers),
 		sub_atom(CT, _, _, _, 'application/json'),
 		!,
@@ -378,6 +386,7 @@
 		fail.
 	http_json_response(http_response(200, Headers, Body), Message) :-
 		% SSE body: take the last data: line as the JSON-RPC message
+		atom(Body),
 		memberchk('Content-Type'-CT, Headers),
 		sub_atom(CT, _, _, _, 'text/event-stream'),
 		!,
@@ -519,6 +528,12 @@
 	spec_to_message(unknown_method_request(Id), Message) :-
 		meta_2026(Meta),
 		request(totally_unknown, {'_meta'-Meta}, Id, Message).
+
+	sse_payload_atom(text_body(Body), Body) :-
+		!,
+		atom(Body).
+	sse_payload_atom(Body, Body) :-
+		atom(Body).
 
 	has_pair({Pairs}, Key, Value) :-
 		curly_member(Key-Value, Pairs).

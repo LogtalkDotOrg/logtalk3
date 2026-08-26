@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-21,
+		date is 2026-08-26,
 		comment is 'Legacy MCP 2026-07-28 stdio transport adapter for backwards compatibility. Delegates protocol handling to ``mcp_server_2026_07_28_spec``.'
 	]).
 
@@ -34,7 +34,8 @@
 	start(Application, Input, Output, UserOptions) :-
 		Options = [stdio_input(Input), stdio_output(Output)| UserOptions],
 		mcp_server_2026_07_28_spec::prepare(Application, Options),
-		(	catch(Application::capabilities(Capabilities), _, fail) ->
+		(	conforms_to_protocol(Application, mcp_tool_protocol),
+			Application::capabilities(Capabilities) ->
 			true
 		;	Capabilities = []
 		),

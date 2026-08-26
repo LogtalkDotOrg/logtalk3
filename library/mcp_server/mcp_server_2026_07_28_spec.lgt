@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-24,
+		date is 2026-08-26,
 		comment is 'MCP 2026-07-28 protocol handler. Returns reply/1, reply_with_progress/2, subscribe/3, accepted, or no_reply outcomes. Does not write to streams; transports render outcomes.'
 	]).
 
@@ -89,7 +89,9 @@
 	prepare(Application, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options0),
-		(	catch(Application::capabilities(Capabilities), _, fail) -> true
+		(	conforms_to_protocol(Application, mcp_tool_protocol),
+			Application::capabilities(Capabilities) ->
+			true
 		;	Capabilities = []
 		),
 		Options = [application(Application), application_capabilities(Capabilities)| Options0],
@@ -361,9 +363,9 @@
 	% server/discover
 
 	handle_discover(_Params, Id, Output, Options) :-
-		^^option(server_name(Name), Options, server_name('logtalk-mcp-server')),
-		^^option(server_version(Version), Options, server_version('1.0.0')),
-		^^option(server_title(Title), Options, server_title('logtalk-mcp-server')),
+		^^option(server_name(Name), Options),
+		^^option(server_version(Version), Options),
+		^^option(server_title(Title), Options),
 		^^option(instructions(Instructions), Options, instructions('')),
 		^^option(application_capabilities(ApplicationCapabilities), Options, application_capabilities([])),
 		build_server_capabilities(ApplicationCapabilities, Capabilities),
@@ -457,11 +459,8 @@
 		^^curly_to_pairs(ToolArguments, ArgPairs),
 		make_progress_closure(ProgressToken, Id, Output, Progress),
 		Context = request_context(ClientCaps, InputResponses, RequestState, Progress),
-		(	catch(
-				Application::tool_call_round(ToolName, ArgPairs, Context, RoundResult),
-				error(existence_error(procedure, _), _),
-				fail
-			) ->
+		(	conforms_to_protocol(Application, mcp_multiround_protocol),
+			Application::tool_call_round(ToolName, ArgPairs, Context, RoundResult) ->
 			handle_round_result(RoundResult, tool, ToolName, Id, Output, Options)
 		;	% Fall back to tool_call/3 or auto-dispatch, wrap as complete
 			(	catch(
@@ -478,7 +477,8 @@
 
 	handle_prompts_list(_Params, Id, Output, Options) :-
 		^^option(application(Application), Options),
-		(	catch(Application::prompts(PromptDescriptors), _, fail) ->
+		(	conforms_to_protocol(Application, mcp_prompt_protocol),
+			Application::prompts(PromptDescriptors) ->
 			^^prompt_descriptors_to_json(PromptDescriptors, JsonPrompts)
 		;	JsonPrompts = []
 		),
@@ -505,7 +505,8 @@
 		extract_progress_token(Params, ProgressToken),
 		extract_client_capabilities(Params, ClientCaps),
 		^^option(application(Application), Options),
-		(	catch(Application::prompts(PromptDescriptors), _, fail),
+		(	conforms_to_protocol(Application, mcp_prompt_protocol),
+			Application::prompts(PromptDescriptors),
 			(	member(prompt(PromptName, _, _), PromptDescriptors)
 			;	member(prompt(PromptName, _, _, _), PromptDescriptors)
 			) ->
@@ -546,7 +547,8 @@
 
 	handle_resources_list(_Params, Id, Output, Options) :-
 		^^option(application(Application), Options),
-		(	catch(Application::resources(ResourceDescriptors), _, fail) ->
+		(	conforms_to_protocol(Application, mcp_resource_protocol),
+			Application::resources(ResourceDescriptors) ->
 			^^resource_descriptors_to_json(ResourceDescriptors, Application, JsonResources)
 		;	JsonResources = []
 		),
@@ -569,7 +571,8 @@
 		extract_progress_token(Params, ProgressToken),
 		extract_client_capabilities(Params, ClientCaps),
 		^^option(application(Application), Options),
-		(	catch(Application::resources(ResourceDescriptors), _, fail),
+		(	conforms_to_protocol(Application, mcp_resource_protocol),
+			Application::resources(ResourceDescriptors),
 			(	member(resource(URI, _, _, _), ResourceDescriptors)
 			;	member(resource(URI, _, _, _, _), ResourceDescriptors)
 			) ->
@@ -586,17 +589,11 @@
 	execute_resource_round(Application, URI, ClientCaps, InputResponses, RequestState, ProgressToken, Id, Output, Options) :-
 		make_progress_closure(ProgressToken, Id, Output, Progress),
 		Context = request_context(ClientCaps, InputResponses, RequestState, Progress),
-		(	catch(
-				Application::resource_read_round(URI, [], Context, RoundResult),
-				error(existence_error(procedure, _), _),
-				fail
-			) ->
+		(	conforms_to_protocol(Application, mcp_multiround_protocol),
+			Application::resource_read_round(URI, [], Context, RoundResult) ->
 			handle_round_result(RoundResult, resource, URI, Id, Output, Options)
-		;	(	catch(
-					Application::resource_read(URI, [], Result),
-					Error,
-					Result = error(Error)
-				) ->
+		;	(	conforms_to_protocol(Application, mcp_resource_protocol),
+				Application::resource_read(URI, [], Result) ->
 				handle_round_result(complete(Result), resource, URI, Id, Output, Options)
 			;	send_error(Id, -32603, 'Resource read failed', Output)
 			)
@@ -754,7 +751,10 @@
 		(	current_options_(Options),
 			member(progress_hook(Hook), Options) ->
 			catch(call(Hook, Notification), _, true)
-		;	(	retract(progress_buffer_(Events0)) -> true ; Events0 = [] ),
+		;	(	retract(progress_buffer_(Events0)) ->
+				true
+			;	Events0 = []
+			),
 			append(Events0, [Notification], Events1),
 			assertz(progress_buffer_(Events1))
 		).
@@ -834,7 +834,8 @@
 
 	resolve_cache(Operation, Request, TTL, Scope, Options) :-
 		(	member(application(Application), Options) ->
-			(	catch(Application::cache_policy(Operation, Request, TTL0, Scope0), _, fail),
+			(	conforms_to_protocol(Application, mcp_cache_protocol),
+				Application::cache_policy(Operation, Request, TTL0, Scope0),
 				integer(TTL0), TTL0 >= 0,
 				memberchk(Scope0, [public, private]) ->
 				TTL = TTL0, Scope = Scope0

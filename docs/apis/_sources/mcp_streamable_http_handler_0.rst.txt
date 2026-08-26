@@ -8,14 +8,14 @@
 ``mcp_streamable_http_handler``
 ===============================
 
-HTTP handler bridging http_server to mcp_server_streamable_http_transport. Supports live incremental SSE flushing when a response body stream is available.
+HTTP handler bridging http_server to mcp_server_streamable_http_transport. Uses http_core response/5 with json(Term) bodies for application/json.
 
 | **Availability:** 
 |    ``logtalk_load(mcp_server(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 0:3:5
-| **Date:** 2026-08-20
+| **Version:** 0:5:0
+| **Date:** 2026-08-26
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -24,11 +24,15 @@ HTTP handler bridging http_server to mcp_server_streamable_http_transport. Suppo
 | **Implements:**
 |    ``public`` :ref:`http_handler_protocol <http_handler_protocol/0>`
 | **Uses:**
+|    :ref:`format <format/0>`
+|    :ref:`http_core <http_core/0>`
 |    :ref:`http_process_transport <http_process_transport/0>`
 |    :ref:`http_socket_transport <http_socket_transport/0>`
+|    :ref:`json <json/0>`
 |    :ref:`list <list/0>`
 |    :ref:`mcp_server_streamable_http_transport <mcp_server_streamable_http_transport/0>`
 |    :ref:`term_io <term_io/0>`
+|    :ref:`user <user/0>`
 
 | **Remarks:**
 |    (none)

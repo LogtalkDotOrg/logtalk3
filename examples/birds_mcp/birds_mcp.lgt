@@ -345,7 +345,8 @@
 	has_pair({Pairs}, Key, Value) :-
 		curly_member(Key-Value, Pairs).
 
-	curly_member(Pair, (Pair, _)) :- !.
+	curly_member(Pair, (Pair, _)) :-
+		!.
 	curly_member(Pair, (_, Rest)) :-
 		!,
 		curly_member(Pair, Rest).

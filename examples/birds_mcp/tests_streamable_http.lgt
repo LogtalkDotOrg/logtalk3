@@ -25,7 +25,7 @@
 	:- info([
 		version is 0:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-20,
+		date is 2026-08-26,
 		comment is 'Unit tests for the birds_mcp example over the Streamable HTTP adapter.'
 	]).
 
@@ -51,9 +51,7 @@
 	cleanup :-
 		mcp_server_streamable_http_transport::cleanup.
 
-	% -----------------------------------------------------------------
-	% Discover / tools list
-	% -----------------------------------------------------------------
+	% discover / tools list
 
 	test(birds_http_discover_01, true) :-
 		call_json_rpc(discover_request(1), HTTPResponse),
@@ -77,9 +75,7 @@
 		member(Tool, Tools),
 		has_pair(Tool, name, identify_bird).
 
-	% -----------------------------------------------------------------
-	% Multi-round identify_bird over HTTP
-	% -----------------------------------------------------------------
+	% multi-round identify_bird over HTTP
 
 	test(birds_http_mrtr_round1_01, true) :-
 		call_json_rpc(tools_call_request(identify_bird, {}, 1), HTTPResponse),
@@ -136,9 +132,7 @@
 		has_pair(Item, text, Text),
 		sub_atom(Text, _, _, _, 'No bird could be identified').
 
-	% -----------------------------------------------------------------
 	% HTTP transport basics
-	% -----------------------------------------------------------------
 
 	test(birds_http_method_not_allowed_01, deterministic(Status == 405)) :-
 		with_prepared(
@@ -153,9 +147,7 @@
 		assertion(is_response(Response)),
 		assertion(\+ is_error_response(Response)).
 
-	% -----------------------------------------------------------------
-	% Helpers
-	% -----------------------------------------------------------------
+	% auxiliary predicates
 
 	with_prepared(Goal) :-
 		catch(
@@ -192,7 +184,7 @@
 		memberchk('Content-Type'-CT, Headers),
 		sub_atom(CT, _, _, _, 'application/json'),
 		!,
-		json_parse_term(Body, Message).
+		Body = json_body(Message).
 	http_json_response(http_response(200, Headers, Body), Message) :-
 		memberchk('Content-Type'-CT, Headers),
 		sub_atom(CT, _, _, _, 'text/event-stream'),
@@ -200,6 +192,9 @@
 		last_sse_data(Body, JSON),
 		json_parse_term(JSON, Message).
 
+	last_sse_data(Body, JSON) :-
+		Body = json_body(JSON),
+		!.
 	last_sse_data(Body, JSON) :-
 		atom_codes(Body, Codes),
 		phrase(sse_data_lines(Lines), Codes),
@@ -281,8 +276,11 @@
 	has_pair({Pairs}, Key, Value) :-
 		curly_member(Key-Value, Pairs).
 
-	curly_member(Pair, (Pair, _)) :- !.
-	curly_member(Pair, (_, Rest)) :- !, curly_member(Pair, Rest).
+	curly_member(Pair, (Pair, _)) :-
+		!.
+	curly_member(Pair, (_, Rest)) :-
+		!,
+		curly_member(Pair, Rest).
 	curly_member(Pair, Pair).
 
 :- end_object.

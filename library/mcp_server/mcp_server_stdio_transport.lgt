@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-23,
+		date is 2026-08-26,
 		comment is 'Stdio transport adapter for MCP. Reads newline-delimited JSON-RPC from the input stream and writes responses to the output stream. Supports specs 2025-06-18 and 2026-07-28 selected via the ``spec/1`` option and delegated to ``mcp_server_2025_06_18_spec`` or ``mcp_server_2026_07_28_spec``.'
 	]).
 
@@ -57,7 +57,8 @@
 		assertz(active_protocol_(Protocol)),
 		Options = [stdio_input(Input), stdio_output(Output)| UserOptions],
 		Protocol::prepare(Application, Options),
-		(	catch(Application::capabilities(Capabilities), _, fail) ->
+		(	conforms_to_protocol(Application, mcp_tool_protocol),
+			Application::capabilities(Capabilities) ->
 			true
 		;	Capabilities = []
 		),

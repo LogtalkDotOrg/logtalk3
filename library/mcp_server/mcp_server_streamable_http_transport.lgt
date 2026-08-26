@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-24,
+		date is 2026-08-26,
 		comment is 'MCP Streamable HTTP transport (2026-07-28). Uses Logtalk ``http_server::serve_until_shutdown/5`` and a dedicated ``http_handler_protocol`` handler object. Supports specs 2025-06-18 and 2026-07-28 selected via the ``spec/1`` option and delegated to ``mcp_server_2025_06_18_spec`` or ``mcp_server_2026_07_28_spec``. Long-lived subscriptions/listen streams emit periodic SSE comment keep-alives (``http_sse_keepalive/1``). Requires a multi-threaded backend for subscriptions/listen.'
 	]).
 
@@ -187,7 +187,8 @@
 	prepare(Application, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options0),
-		(	catch(Application::capabilities(Capabilities), _, fail) ->
+		(	conforms_to_protocol(Application, mcp_tool_protocol),
+			Application::capabilities(Capabilities) ->
 			true
 		;	Capabilities = []
 		),
@@ -292,11 +293,22 @@
 		% per_connection workers so subscriptions/listen can block while
 		% other requests (e.g. notifications/cancelled, notify side-effects)
 		% are still accepted on the same port
-		http_server::serve_until_shutdown(
-			Bind, Port,
-			mcp_streamable_http_handler,
-			Control,
-			[scheme(http), transport(default), workers(per_connection)]
+		(	catch(
+				http_server::serve_until_shutdown(
+					Bind, Port,
+					mcp_streamable_http_handler,
+					Control,
+					[scheme(http), transport(default), workers(per_connection)]
+				),
+				Error,
+				(	format(user_error, 'SERVE EXIT ~q~n', [Error]),
+					flush_output(user_error),
+					throw(Error)
+				)
+			) ->
+			true
+		;	format(user_error, 'UNEXPTECTED FAILURE~n', []),
+			flush_output(user_error)
 		).
 
 	current_options(Options) :-
@@ -312,16 +324,16 @@
 
 	handle_post(Headers, Body, HTTPResponse) :-
 		(	\+ validate_origin(Headers) ->
-			HTTPResponse = http_response(403, ['Content-Type'-'text/plain; charset=utf-8'], 'Forbidden')
+			HTTPResponse = http_response(403, ['Content-Type'-'text/plain; charset=utf-8'], text_body('Forbidden'))
 		;	catch(parse(atom(Body), Message), _, fail) ->
 			handle_http_message(Message, Headers, HTTPResponse)
-		;	HTTPResponse = http_response(400, ['Content-Type'-'text/plain; charset=utf-8'], 'Invalid JSON-RPC body')
+		;	HTTPResponse = http_response(400, ['Content-Type'-'text/plain; charset=utf-8'], text_body('Invalid JSON-RPC body'))
 		).
 
 	handle_http_message(Message, Headers, HTTPResponse) :-
 		(	is_notification(Message) ->
 			handle_notification(Message),
-			HTTPResponse = http_response(202, [], '')
+			HTTPResponse = http_response(202, [], text_body(''))
 		;	is_request(Message) ->
 			id(Message, Id),
 			(	valid_request_id(Id) ->
@@ -340,9 +352,9 @@
 					)
 				;	handle_via_protocol_2026(Message, Headers, HTTPResponse)
 				)
-			;	HTTPResponse = http_response(400, ['Content-Type'-'text/plain; charset=utf-8'], 'Invalid request id')
+			;	HTTPResponse = http_response(400, ['Content-Type'-'text/plain; charset=utf-8'], text_body('Invalid request id'))
 			)
-		;	HTTPResponse = http_response(400, ['Content-Type'-'text/plain; charset=utf-8'], 'Not a JSON-RPC request or notification')
+		;	HTTPResponse = http_response(400, ['Content-Type'-'text/plain; charset=utf-8'], text_body('Not a JSON-RPC request or notification'))
 		).
 
 	valid_request_id(Id) :-
@@ -368,8 +380,15 @@
 
 	handle_via_protocol_2025(Message, HTTPResponse) :-
 		server_options_(Options),
-		mcp_server_2025_06_18_spec::handle_message(Message, Options, Outcome),
-		render_protocol_outcome(Outcome, HTTPResponse).
+		catch(
+			(	mcp_server_2025_06_18_spec::handle_message(Message, Options, Outcome),
+				render_protocol_outcome(Outcome, HTTPResponse)
+			),
+			Error,
+			(	(	is_request(Message) -> id(Message, Id) ; Id = null ),
+				json_error(Id, -32603, Error, HTTPResponse)
+			)
+		).
 
 	handle_via_protocol_2026(Message, Headers, HTTPResponse) :-
 		(	is_request(Message) ->
@@ -390,18 +409,16 @@
 			render_protocol_outcome_2026(Outcome, HTTPResponse)
 		).
 
-	render_protocol_outcome(reply(Response), http_response(200, ['Content-Type'-'application/json; charset=utf-8'], Body)) :-
-		!,
-		json_serialize(Response, Body).
-	render_protocol_outcome(accepted, http_response(202, [], '')) :-
+	render_protocol_outcome(reply(Response), http_response(200, ['Content-Type'-'application/json; charset=utf-8'], json_body(Response))) :-
 		!.
-	render_protocol_outcome(no_reply, http_response(202, [], '')) :-
+	render_protocol_outcome(accepted, http_response(202, [], text_body(''))) :-
 		!.
-	render_protocol_outcome(_, http_response(500, ['Content-Type'-'text/plain; charset=utf-8'], 'Internal protocol outcome error')).
+	render_protocol_outcome(no_reply, http_response(202, [], text_body(''))) :-
+		!.
+	render_protocol_outcome(_, http_response(500, ['Content-Type'-'text/plain; charset=utf-8'], text_body('Internal protocol outcome error'))).
 
-	render_protocol_outcome_2026(reply(Response), http_response(200, ['Content-Type'-'application/json; charset=utf-8'], Body)) :-
-		!,
-		json_serialize(Response, Body).
+	render_protocol_outcome_2026(reply(Response), http_response(200, ['Content-Type'-'application/json; charset=utf-8'], json_body(Response))) :-
+		!.
 	render_protocol_outcome_2026(reply_with_progress(_Events, Final), HTTPResponse) :-
 		!,
 		render_protocol_outcome_2026(reply(Final), HTTPResponse).
@@ -409,13 +426,13 @@
 		!,
 		(	Messages = [AckResponse| _] ->
 			render_protocol_outcome_2026(reply(AckResponse), HTTPResponse)
-		;	HTTPResponse = http_response(202, [], '')
+		;	HTTPResponse = http_response(202, [], text_body(''))
 		).
-	render_protocol_outcome_2026(accepted, http_response(202, [], '')) :-
+	render_protocol_outcome_2026(accepted, http_response(202, [], text_body(''))) :-
 		!.
-	render_protocol_outcome_2026(no_reply, http_response(202, [], '')) :-
+	render_protocol_outcome_2026(no_reply, http_response(202, [], text_body(''))) :-
 		!.
-	render_protocol_outcome_2026(_, http_response(500, ['Content-Type'-'text/plain; charset=utf-8'], 'Internal protocol outcome error')).
+	render_protocol_outcome_2026(_, http_response(500, ['Content-Type'-'text/plain; charset=utf-8'], text_body('Internal protocol outcome error'))).
 
 	% succeeds when the request is invalid, binding ErrorResponse
 	% fails when the request passes 2026 transport/metadata checks
@@ -600,20 +617,17 @@
 
 	do_tools_call(ToolName, Args, ClientCaps, InputResponses, RequestState, ProgressToken, Id, HTTPResponse) :-
 		server_options_(Options),
-		^^option(application(Appplication), Options),
-		(	Appplication::tools(Tools),
+		^^option(application(Application), Options),
+		(	Application::tools(Tools),
 			member(tool(ToolName, Functor, Arity), Tools) ->
 			^^curly_to_pairs(Args, ArgPairs),
 			make_progress_closure(ProgressToken, Id, Progress),
 			Context = request_context(ClientCaps, InputResponses, RequestState, Progress),
-			(	catch(
-					Appplication::tool_call_round(ToolName, ArgPairs, Context, RoundResult),
-					error(existence_error(procedure, _), _),
-					fail
-				) ->
+			(	conforms_to_protocol(Application, mcp_multiround_protocol),
+				Application::tool_call_round(ToolName, ArgPairs, Context, RoundResult) ->
 				handle_round_tool_result(RoundResult, Id, ProgressToken, HTTPResponse)
 			;	(	catch(
-						^^try_tool_call_3(Appplication, ToolName, Functor, Arity, ArgPairs, Args, Result),
+						^^try_tool_call_3(Application, ToolName, Functor, Arity, ArgPairs, Args, Result),
 						Error,
 						Result = error(Error)
 					) ->
@@ -805,8 +819,7 @@
 	% returns a complete SSE body; no-token mode returns application/json
 	finalize_response(_Id, FinalMsg, none, HTTPResponse) :-
 		!,
-		json_serialize(FinalMsg, Body),
-		HTTPResponse = http_response(200, ['Content-Type'-'application/json; charset=utf-8'], Body).
+		HTTPResponse = http_response(200, ['Content-Type'-'application/json; charset=utf-8'], json_body(FinalMsg)).
 	finalize_response(_Id, FinalMsg, _Token, HTTPResponse) :-
 		sse_mode_(live),
 		sse_output_(Stream),
@@ -816,16 +829,16 @@
 		flush_output(Stream),
 		% body already streamed; signal handler that response was sent
 		sse_headers(Headers),
-		HTTPResponse = http_response(already_sent, Headers, '').
+		HTTPResponse = http_response(already_sent, Headers, text_body('')).
 	finalize_response(_Id, FinalMsg, _Token, HTTPResponse) :-
-		% buffered fallback
+		% buffered fallback — SSE text body (not JSON term)
 		(	progress_events_(Events) ->
 			true
 		;	Events = []
 		),
 		sse_body(Events, FinalMsg, Body),
 		sse_headers(Headers),
-		HTTPResponse = http_response(200, Headers, Body).
+		HTTPResponse = http_response(200, Headers, text_body(Body)).
 
 	sse_body(Events, FinalMsg, Body) :-
 		sse_events_codes(Events, FinalMsg, Codes),
@@ -868,8 +881,12 @@
 
 	handle_prompts_list(_, Id, HTTPResponse) :-
 		server_options_(Options),
-		^^option(application(App), Options),
-		(catch(App::prompts(Descs), _, fail) -> ^^prompt_descriptors_to_json(Descs, Json) ; Json = []),
+		^^option(application(Application), Options),
+		(	conforms_to_protocol(Application, mcp_prompt_protocol),
+			Application::prompts(Descriptors) ->
+			^^prompt_descriptors_to_json(Descriptors, Json)
+		;	Json = []
+		),
 		resolve_cache(prompts_list, {}, TTL, Scope, Options),
 		json_result(Id, {prompts-Json, resultType-complete, ttlMs-TTL, cacheScope-Scope}, HTTPResponse).
 
@@ -953,24 +970,21 @@
 		extract_progress_token(Params, ProgressToken),
 		begin_progress(ProgressToken),
 		server_options_(Options),
-		^^option(application(App), Options),
+		^^option(application(Application), Options),
 		make_progress_closure(ProgressToken, Id, Progress),
 		extract_client_capabilities(Params, ClientCaps),
 		extract_input_responses(Params, InputResponses),
 		extract_request_state(Params, RequestState),
 		Context = request_context(ClientCaps, InputResponses, RequestState, Progress),
-		(	catch(
-				App::resource_read_round(URI, [], Context, RoundResult),
-				error(existence_error(procedure, _), _),
-				fail
-			) ->
+		(	conforms_to_protocol(Application, mcp_multiround_protocol),
+			Application::resource_read_round(URI, [], Context, RoundResult) ->
 			(	RoundResult = complete(Result) ->
 				format_resource_result(Result, URI, Id, Options, ProgressToken, HTTPResponse)
 			;	RoundResult = input_required(Reqs, State) ->
 				handle_round_tool_result(input_required(Reqs, State), Id, ProgressToken, HTTPResponse)
 			;	json_error(Id, -32603, RoundResult, HTTPResponse)
 			)
-		;	(	catch(App::resource_read(URI, [], Result), Error, Result = error(Error)) ->
+		;	(	catch(Application::resource_read(URI, [], Result), Error, Result = error(Error)) ->
 				format_resource_result(Result, URI, Id, Options, ProgressToken, HTTPResponse)
 			;	json_error(Id, -32603, 'Resource read failed', HTTPResponse)
 			)
@@ -1050,7 +1064,7 @@
 			subscription_wait_loop(SubscriptionId, Stream),
 			retractall(subscription_(SubscriptionId, _, _, _)),
 			sse_headers(Headers),
-			HTTPResponse = http_response(already_sent, Headers, '')
+			HTTPResponse = http_response(already_sent, Headers, text_body(''))
 		;	% no stream: return JSON ack only (notify/1 cannot push)
 			assertz(subscription_(SubscriptionId, Id, Filters, none)),
 			json_result(Id, AckResult, HTTPResponse)
@@ -1198,33 +1212,31 @@
 		}.
 
 	resolve_cache(Op, Req, TTL, Scope, Options) :-
-		^^option(application(App), Options),
-		(	catch(App::cache_policy(Op, Req, T0, S0), _, fail),
+		^^option(application(Application), Options),
+		(	conforms_to_protocol(Application, mcp_cache_protocol),
+			Application::cache_policy(Op, Req, T0, S0),
 			integer(T0), T0 >= 0, memberchk(S0, [public, private]) ->
 			TTL = T0, Scope = S0
 		;	^^option(cache_ttl(TTL), Options),
 			^^option(cache_scope(Scope), Options)
 		).
 
-	json_result(Id, Result, http_response(200, ['Content-Type'-'application/json; charset=utf-8'], Body)) :-
-		response(Result, Id, Msg),
-		json_serialize(Msg, Body).
+	json_result(Id, Result, http_response(200, ['Content-Type'-'application/json; charset=utf-8'], json_body(Msg))) :-
+		response(Result, Id, Msg).
 
-	json_error(Id, Code, Message, http_response(200, ['Content-Type'-'application/json; charset=utf-8'], Body)) :-
+	json_error(Id, Code, Message, http_response(200, ['Content-Type'-'application/json; charset=utf-8'], json_body(JSON))) :-
 		(	atom(Message) ->
 			Msg = Message
 		;	write_to_atom(Message, Msg)
 		),
-		error_response(Code, Msg, Id, JSON),
-		json_serialize(JSON, Body).
+		error_response(Code, Msg, Id, JSON).
 
-	json_error_data(Id, Code, Message, Data, http_response(200, ['Content-Type'-'application/json; charset=utf-8'], Body)) :-
+	json_error_data(Id, Code, Message, Data, http_response(200, ['Content-Type'-'application/json; charset=utf-8'], json_body(JSON))) :-
 		(	atom(Message) ->
 			Msg = Message
 		;	write_to_atom(Message, Msg)
 		),
-		JSON = {jsonrpc-'2.0', id-Id, error-{code-Code, message-Msg, data-Data}},
-		json_serialize(JSON, Body).
+		JSON = {jsonrpc-'2.0', id-Id, error-{code-Code, message-Msg, data-Data}}.
 
 	header_value(Headers, Name, Value) :-
 		member(Name-Value, Headers),
@@ -1306,10 +1318,10 @@
 	implements(http_handler_protocol)).
 
 	:- info([
-		version is 0:3:5,
+		version is 0:5:0,
 		author is 'Paulo Moura',
-		date is 2026-08-20,
-		comment is 'HTTP handler bridging http_server to mcp_server_streamable_http_transport. Supports live incremental SSE flushing when a response body stream is available.'
+		date is 2026-08-26,
+		comment is 'HTTP handler bridging http_server to mcp_server_streamable_http_transport. Uses http_core response/5 with json(Term) bodies for application/json.'
 	]).
 
 	:- uses(term_io, [
@@ -1317,25 +1329,64 @@
 	]).
 
 	:- uses(list, [
-		member/2, valid/1 as is_list/1
+		append/3, member/2, valid/1 as is_list/1
+	]).
+
+	:- uses(user, [
+		atomic_list_concat/2
+	]).
+
+	:- uses(format, [
+		format/3
+	]).
+
+	:- uses(json, [
+		parse/2
 	]).
 
 	handle(Request, Response) :-
+		catch(
+			handle_checked(Request, Response0),
+			Error,
+			(	format(user_error, 'mcp_streamable_http_handler: ~q~n', [Error]),
+				flush_output(user_error),
+				plain_text_response(500, 'Internal Server Error', Response0)
+			)
+		),
+		(	nonvar(Response0) ->
+			(	http_core::is_response(Response0) ->
+				Response = Response0
+			;	format(user_error, 'INVALID RESP ~q~n', [Response0]),
+				flush_output(user_error),
+				plain_text_response(500, 'Invalid response term', Response)
+			)
+		;	plain_text_response(500, 'Internal Server Error', Response)
+		).
+
+	handle_checked(Request, Response) :-
 		extract(Request, Method, Path, Headers, Body),
 		(	mcp_server_streamable_http_transport::current_options(Opts),
-			member(http_path(Expected), Opts) -> true
+			member(http_path(Expected), Opts) ->
+			true
 		;	Expected = '/mcp'
 		),
-		(	Path == Expected ->
+		(	path_matches(Path, Expected) ->
 			handle_path(Request, Method, Headers, Body, Response)
-		;	Response = response(404, ['Content-Type'-'text/plain; charset=utf-8'], 'Not Found')
+		;	plain_text_response(404, 'Not Found', Response)
 		).
+
+	path_matches(Path, Expected) :-
+		Path == Expected,
+		!.
+	path_matches(Path, Expected) :-
+		atom(Path),
+		atom(Expected),
+		atom_concat(Expected, '/', Path).
 
 	handle_path(Request, Method, Headers, Body, Response) :-
 		(	wants_sse(Headers, Body),
 			open_live_sse_stream(Request, Stream, StreamKind) ->
 			mcp_server_streamable_http_transport::sse_headers(SSEHeaders),
-			% Start the HTTP response with SSE headers; body is written live.
 			start_streaming_response(Stream, StreamKind, SSEHeaders, Response0),
 			mcp_server_streamable_http_transport::attach_sse_stream(Stream),
 			catch(
@@ -1347,16 +1398,134 @@
 			),
 			mcp_server_streamable_http_transport::detach_sse_stream,
 			finish_streaming_response(Stream, StreamKind, HTTPResp, Response0, Response)
-		;	% Non-SSE / no live stream: buffered path
-			mcp_server_streamable_http_transport::handle_mcp_request(Method, Headers, Body, HTTPResp),
-			HTTPResp = http_response(Status, RespHeaders, RespBody),
-			(	Status == already_sent ->
-				Response = response(200, RespHeaders, '')
-			;	Response = response(Status, RespHeaders, RespBody)
-			)
+		;	% Non-SSE buffered path
+			mcp_server_streamable_http_transport::handle_mcp_request(
+				Method, Headers, Body, HTTPResp
+			),
+			http_response_to_core(HTTPResp, Response)
 		).
 
-	% True when the client requested SSE (progress token, subscription listen, or Accept).
+	% Convert internal http_response/3 into validated http_core response/5
+	http_response_to_core(http_response(already_sent, _, _), Response) :-
+		!,
+		http_core::response(
+			http(1,1),
+			status(200, 'OK'),
+			[],
+			empty,
+			[],
+			Response
+		).
+	http_response_to_core(http_response(Code, _Headers, json_body(Term)), Response) :-
+		!,
+		once(status_phrase(Code, Phrase)),
+		http_core::response(
+			http(1,1),
+			status(Code, Phrase),
+			[content_type-media_type('application/json', [])],
+			content('application/json', json(Term)),
+			[],
+			Response
+		).
+	http_response_to_core(http_response(Code, Headers0, text_body(Text0)), Response) :-
+		!,
+		once(status_phrase(Code, Phrase)),
+		(	atom(Text0) -> Text = Text0 ; write_to_atom(Text0, Text) ),
+		media_type_from_headers(Headers0, Media),
+		(	Media == 'application/json' ->
+			% legacy atom JSON payload
+			(	Text == '' ->
+				Body = empty
+			;	parse(atom(Text), Term),
+				Body = content('application/json', json(Term))
+			)
+		;	(	Text == '' ->
+				Body = empty
+			;	Body = content(Media, text(Text))
+			)
+		),
+		http_core::response(
+			http(1,1),
+			status(Code, Phrase),
+			[content_type-media_type(Media, [])],
+			Body,
+			[],
+			Response
+		).
+	http_response_to_core(http_response(Code, Headers0, Body0), Response) :-
+		% Backward compatible: atom / codes body
+		once(status_phrase(Code, Phrase)),
+		media_type_from_headers(Headers0, Media),
+		(	var(Body0) ->
+			Body = empty
+		;	Body0 == '' ->
+			Body = empty
+		;	atom(Body0), Media == 'application/json' ->
+			parse(atom(Body0), Term),
+			Body = content('application/json', json(Term))
+		;	atom(Body0) ->
+			Body = content(Media, text(Body0))
+		;	is_list(Body0) ->
+			atom_codes(Atom, Body0),
+			(	Media == 'application/json' ->
+				parse(atom(Atom), Term),
+				Body = content('application/json', json(Term))
+			;	Body = content(Media, text(Atom))
+			)
+		;	write_to_atom(Body0, Atom),
+			Body = content(Media, text(Atom))
+		),
+		http_core::response(
+			http(1,1),
+			status(Code, Phrase),
+			[content_type-media_type(Media, [])],
+			Body,
+			[],
+			Response
+		).
+
+	plain_text_response(StatusCode, Text, Response) :-
+		once(status_phrase(StatusCode, Phrase)),
+		http_core::response(
+			http(1,1),
+			status(StatusCode, Phrase),
+			[content_type-media_type('text/plain', [])],
+			content('text/plain', text(Text)),
+			[],
+			Response
+		).
+
+	status_phrase(200, 'OK').
+	status_phrase(202, 'Accepted').
+	status_phrase(204, 'No Content').
+	status_phrase(400, 'Bad Request').
+	status_phrase(403, 'Forbidden').
+	status_phrase(404, 'Not Found').
+	status_phrase(405, 'Method Not Allowed').
+	status_phrase(500, 'Internal Server Error').
+	status_phrase(_, 'OK').
+
+	media_type_from_headers(Headers, Media) :-
+		(	member('Content-Type'-Type, Headers),
+			atom(Type) ->
+			(	sub_atom(Type, Before, 1, _, ';') ->
+				sub_atom(Type, 0, Before, _, Media0)
+			;	Media0 = Type
+			),
+			atom_codes(Media0, Codes),
+			trim_spaces(Codes, Trimmed),
+			atom_codes(Media, Trimmed)
+		;	member(content_type-media_type(Media, _), Headers) ->
+			true
+		;	Media = 'application/json'
+		).
+
+	trim_spaces([C|Cs], Out) :-
+		(C =:= 32 ; C =:= 9),
+		!,
+		trim_spaces(Cs, Out).
+	trim_spaces(Codes, Codes).
+
 	wants_sse(Headers, Body) :-
 		(	sub_atom(Body, _, _, _, 'progressToken') -> true
 		;	sub_atom(Body, _, _, _, 'subscriptions/listen') -> true
@@ -1377,9 +1546,6 @@
 		(C >= 65, C =< 90 -> L is C + 32 ; L = C),
 		lower_codes(Cs, Ls).
 
-	% Acquire a writable stream for the response body.
-	% StreamKind = connection — Stream is the socket output (headers must be written here).
-	% StreamKind = pipe(Read) — Stream is the write end; Response body is stream(Read).
 	open_live_sse_stream(Request, Stream, StreamKind) :-
 		(	request_output_stream(Request, Out) ->
 			Stream = Out,
@@ -1390,7 +1556,6 @@
 		;	fail
 		).
 
-	% Try common Request shapes for an already-open connection output stream.
 	request_output_stream(Request, Output) :-
 		(	Request = request(_M, _P, _H, _B, connection(Connection)) ->
 			connection_output(Connection, Output)
@@ -1419,34 +1584,55 @@
 		;	current_object(http_process_transport),
 			catch(http_process_transport::connection_streams(Connection, _In, Output), _, fail) ->
 			true
-		;	% Generic: Connection may itself be a stream pair
-			Connection = connection(_Sock, _In, Output) -> true
+		;	Connection = connection(_Sock, _In, Output) -> true
 		;	fail
 		).
 
-	% Portable pipe for streaming response bodies when the transport supports stream(Read).
 	open_response_pipe(Read, Write) :-
 		(	current_predicate(pipe/2) ->
 			{pipe(Read, Write)}
-		;	% SWI-Prolog style
-			current_predicate(open_pipe_stream/2) ->
+		;	current_predicate(open_pipe_stream/2) ->
 			{open_pipe_stream(Read, Write)}
 		;	fail
 		).
 
-	% Write status + headers on a connection stream, or build a stream-body Response.
-	start_streaming_response(Stream, connection, Headers, response(already_sent, Headers, '')) :-
+	start_streaming_response(Stream, connection, Headers0, Response) :-
 		!,
-		write_status_and_headers(Stream, 200, Headers),
-		flush_output(Stream).
-	start_streaming_response(_Stream, pipe(Read), Headers, response(200, Headers, stream(Read))).
+		write_status_and_headers(Stream, 200, Headers0),
+		flush_output(Stream),
+		http_core::response(
+			http(1,1),
+			status(200, 'OK'),
+			[content_type-media_type('text/event-stream', [])],
+			empty,
+			[],
+			Response
+		).
+	start_streaming_response(_Stream, pipe(_Read), _Headers0, Response) :-
+		http_core::response(
+			http(1,1),
+			status(200, 'OK'),
+			[content_type-media_type('text/event-stream', [])],
+			content('text/event-stream', text('')),
+			[],
+			Response
+		).
 
 	finish_streaming_response(Stream, connection, HTTPResp, Response0, Response) :-
 		!,
 		(	HTTPResp = http_response(already_sent, _, _) ->
 			true
-		;	% Handler returned a full body (e.g. early error before live attach took effect)
-			HTTPResp = http_response(_, _, Body),
+		;	HTTPResp = http_response(_, _, json_body(Term)) ->
+			json::generate(atom(Atom), Term),
+			atom_codes(Atom, Codes),
+			write_codes(Codes, Stream),
+			flush_output(Stream)
+		;	HTTPResp = http_response(_, _, text_body(Body)),
+			atom(Body), Body \== '' ->
+			atom_codes(Body, Codes),
+			write_codes(Codes, Stream),
+			flush_output(Stream)
+		;	HTTPResp = http_response(_, _, Body),
 			atom(Body), Body \== '' ->
 			atom_codes(Body, Codes),
 			write_codes(Codes, Stream),
@@ -1457,6 +1643,10 @@
 	finish_streaming_response(Stream, pipe(_Read), HTTPResp, Response0, Response) :-
 		(	HTTPResp = http_response(already_sent, _, _) ->
 			true
+		;	HTTPResp = http_response(_, _, text_body(Body)),
+			atom(Body), Body \== '' ->
+			atom_codes(Body, Codes),
+			write_codes(Codes, Stream)
 		;	HTTPResp = http_response(_, _, Body),
 			atom(Body), Body \== '' ->
 			atom_codes(Body, Codes),
@@ -1467,12 +1657,9 @@
 		Response = Response0.
 
 	write_status_and_headers(Stream, Status, Headers) :-
-		% HTTP/1.1 status line
 		number_codes(Status, StatusCodes),
 		atom_codes('HTTP/1.1 ', Prefix),
-		% Space + OK + CR LF
 		Ok = [32, 79, 75, 13, 10],
-		% CR LF
 		CRLF = [13, 10],
 		write_codes(Prefix, Stream),
 		write_codes(StatusCodes, Stream),
@@ -1482,8 +1669,9 @@
 
 	write_header_lines([], _Stream).
 	write_header_lines([Name-Value| Headers], Stream) :-
-		atom_codes(Name, NC),
-		atom_codes(Value, VC),
+		header_line_atoms(Name, Value, NameAtom, ValueAtom),
+		atom_codes(NameAtom, NC),
+		atom_codes(ValueAtom, VC),
 		atom_codes(': ', Colon),
 		CRLF = [13, 10],
 		write_codes(NC, Stream),
@@ -1491,6 +1679,20 @@
 		write_codes(VC, Stream),
 		write_codes(CRLF, Stream),
 		write_header_lines(Headers, Stream).
+
+	header_line_atoms(content_type-media_type(Media, _), _, 'Content-Type', Media) :-
+		!.
+	header_line_atoms(Name, Value, Name, ValueAtom) :-
+		atom(Name),
+		!,
+		(	atom(Value) -> ValueAtom = Value
+		;	write_to_atom(Value, ValueAtom)
+		).
+	header_line_atoms(Name, Value, NameAtom, ValueAtom) :-
+		write_to_atom(Name, NameAtom),
+		(	atom(Value) -> ValueAtom = Value
+		;	write_to_atom(Value, ValueAtom)
+		).
 
 	write_codes([], _Stream) :-
 		!.
@@ -1501,15 +1703,116 @@
 		write_codes(Cs, Stream).
 
 	extract(Request, Method, Path, Headers, Body) :-
-		(	Request = request(M0, Path, Headers, Body0) ->
-			upcase(M0, Method), body_atom(Body0, Body)
-		;	Request = request(M0, Path, Headers, Body0, _) ->
-			upcase(M0, Method), body_atom(Body0, Body)
-		;	arg(1, Request, M0), arg(2, Request, Path),
-			(arg(3, Request, Headers) -> true ; Headers = []),
+		(	Request = request(M0, Path0, _HTTPVersion, Headers0, Content, Meta) ->
+			upcase(M0, Method),
+			normalize_path(Path0, Path),
+			normalize_headers(Headers0, Headers1),
+			(	is_list(Meta) ->
+				normalize_meta_headers(Meta, Headers2),
+				append(Headers1, Headers2, Headers)
+			;	Headers = Headers1
+			),
+			normalize_body(Content, Meta, Body)
+		;	Request = request(M0, Path0, Headers0, Body0) ->
+			upcase(M0, Method),
+			normalize_path(Path0, Path),
+			normalize_headers(Headers0, Headers),
+			body_atom(Body0, Body)
+		;	Request = request(M0, Path0, Headers0, Body0, _) ->
+			upcase(M0, Method),
+			normalize_path(Path0, Path),
+			normalize_headers(Headers0, Headers),
+			body_atom(Body0, Body)
+		;	arg(1, Request, M0),
+			arg(2, Request, Path0),
+			(arg(3, Request, Headers0) -> true ; Headers0 = []),
 			(arg(4, Request, Body0) -> true ; Body0 = ''),
-			upcase(M0, Method), body_atom(Body0, Body)
+			upcase(M0, Method),
+			normalize_path(Path0, Path),
+			normalize_headers(Headers0, Headers),
+			body_atom(Body0, Body)
 		).
+
+	normalize_path(origin(Path), Path) :-
+		!,
+		atom(Path).
+	normalize_path(Path, Path) :-
+		atom(Path).
+
+	normalize_body(content(_MediaType, json(Term)), _Meta, Body) :-
+		!,
+		(	current_object(json) ->
+			json::generate(atom(Body), Term)
+		;	write_to_atom(Term, Body)
+		).
+	normalize_body(content(_MediaType, text(Text)), _Meta, Body) :-
+		!,
+		(	atom(Text) -> Body = Text ; write_to_atom(Text, Body) ).
+	normalize_body(content(_MediaType, binary(Codes)), _Meta, Body) :-
+		is_list(Codes),
+		!,
+		atom_codes(Body, Codes).
+	normalize_body(content(_MediaType, Body0), _Meta, Body) :-
+		atom(Body0),
+		!,
+		Body = Body0.
+	normalize_body(content(_MediaType, Codes), _Meta, Body) :-
+		is_list(Codes),
+		!,
+		atom_codes(Body, Codes).
+	normalize_body(_Content, Meta, Body) :-
+		is_list(Meta),
+		member(entity_body_bytes(Codes), Meta),
+		!,
+		atom_codes(Body, Codes).
+	normalize_body(_Content, _Meta, '').
+
+	normalize_headers([], []).
+	normalize_headers([H| Hs], [N| Ns]) :-
+		normalize_header(H, N),
+		normalize_headers(Hs, Ns).
+
+	normalize_header(Name-Value, AtomName-AtomValue) :-
+		!,
+		header_name_atom(Name, AtomName),
+		header_value_atom(Value, AtomValue).
+	normalize_header(Other, Other).
+
+	normalize_meta_headers([], []).
+	normalize_meta_headers([content_type(Type, _Params)| Meta], ['Content-Type'-Type| Headers]) :-
+		!,
+		normalize_meta_headers(Meta, Headers).
+	normalize_meta_headers([content_length(N)| Meta], ['Content-Length'-A| Headers]) :-
+		!,
+		(number(N) -> number_codes(N, C), atom_codes(A, C) ; atom(N) -> A = N ; write_to_atom(N, A)),
+		normalize_meta_headers(Meta, Headers).
+	normalize_meta_headers([_| Meta], Headers) :-
+		normalize_meta_headers(Meta, Headers).
+
+	header_name_atom(Name, Atom) :-
+		(	atom(Name) ->
+			Atom = Name
+		;	write_to_atom(Name, Atom)
+		).
+
+	header_value_atom(media_type(Type, _Params), Type) :-
+		!,
+		atom(Type).
+	header_value_atom(host(Host, Port), Atom) :-
+		!,
+		(	atom(Host) -> H = Host ; write_to_atom(Host, H) ),
+		(	integer(Port) -> number_codes(Port, PC), atom_codes(P, PC) ; write_to_atom(Port, P) ),
+		atomic_list_concat([H, ':', P], Atom).
+	header_value_atom(Value, Value) :-
+		atom(Value),
+		!.
+	header_value_atom(Value, Atom) :-
+		integer(Value),
+		!,
+		number_codes(Value, Codes),
+		atom_codes(Atom, Codes).
+	header_value_atom(Value, Atom) :-
+		write_to_atom(Value, Atom).
 
 	upcase(A0, A) :-
 		(atom(A0) -> atom_codes(A0, C) ; write_to_atom(A0, T), atom_codes(T, C)),
