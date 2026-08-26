@@ -19,9 +19,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%  Entry point for running the birds expert system as an MCP server.
-%  Load the example then start the server, which reads from stdin and
-%  writes newline-delimited JSON-RPC messages to stdout.
+%  entry point for running the factorial MCP server;
+%  load the example then start the server, which reads from stdin and
+%  writes newline-delimited JSON-RPC messages to stdout
 
 :- initialization((
 	logtalk_load(loader),

@@ -19,8 +19,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%  Entry point for running the birds expert system as an MCP 2026-07-28 server.
-%  Requires Logtalk thread support.
+%  entry point for running the factorial MCP 2026-07-28 server
 
 :- initialization((
 	logtalk_load(loader),

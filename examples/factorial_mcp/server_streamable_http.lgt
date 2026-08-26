@@ -19,9 +19,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%  Entry point for running the birds expert system as an MCP server over
-%  Streamable HTTP (MCP 2026-07-28 protocol semantics, HTTP transport).
-%  Listens on http://127.0.0.1:8080/mcp by default.
+% entry point for running the factorial MCP server over Streamable HTTP
+% (MCP 2026-07-28 protocol semantics, HTTP transport);
+% listens on http://127.0.0.1:8080/mcp by default.
 
 :- initialization((
 	logtalk_load(loader),

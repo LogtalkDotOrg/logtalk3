@@ -108,8 +108,10 @@ Example tool call:
 MCP client configuration
 ------------------------
 
-Update the values of the `LOGTALKHOME` and `LOGTALKUSER` environment variables
-with the values on your system (often needed on macOS).
+Configuration illustrated using the SWI-Prolog backend. Updated for your
+preferred backend (se its documentation for similar command-line options). 
+Also update the values of the `LOGTALKHOME` and `LOGTALKUSER` environment
+variables with their values on your system.
 
 ### 2025-06-18 (stdio)
 

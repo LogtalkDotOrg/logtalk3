@@ -1,0 +1,235 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
+%
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
+%
+%      http://www.apache.org/licenses/LICENSE-2.0
+%
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+:- object(tests_streamable_http,
+	extends(lgtunit)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-08-26,
+		comment is 'Unit tests for the "factorial_mcp" example over the Streamable HTTP adapter.'
+	]).
+
+	:- uses(json_rpc, [
+		request/4, is_response/1, is_error_response/1, result/2
+	]).
+
+	:- uses(list, [
+		member/2, memberchk/2
+	]).
+
+	:- uses(lgtunit, [
+		assertion/1
+	]).
+
+	cover(factorial_mcp).
+	cover(mcp_server_streamable_http_transport).
+
+	setup :-
+		mcp_server_streamable_http_transport::cleanup.
+
+	cleanup :-
+		mcp_server_streamable_http_transport::cleanup.
+
+	% discover / tools list
+
+	test(factorial_http_discover_01, true) :-
+		call_json_rpc(discover_request(1), HTTPResponse),
+		http_json_response(HTTPResponse, Response),
+		is_response(Response),
+		\+ is_error_response(Response),
+		result(Response, Result),
+		has_pair(Result, resultType, complete),
+		has_pair(Result, capabilities, Caps),
+		has_pair(Caps, tools, _),
+		has_pair(Result, supportedVersions, Versions),
+		memberchk('2026-07-28', Versions).
+
+	test(factorial_http_tools_list_01, true) :-
+		call_json_rpc(tools_list_request(1), HTTPResponse),
+		http_json_response(HTTPResponse, Response),
+		is_response(Response),
+		result(Response, Result),
+		has_pair(Result, resultType, complete),
+		has_pair(Result, tools, Tools),
+		member(Tool, Tools),
+		has_pair(Tool, name, factorial).
+
+	% HTTP transport basics
+
+	test(factorial_http_method_not_allowed_01, deterministic(Status == 405)) :-
+		with_prepared(
+			mcp_server_streamable_http_transport::handle_mcp_request(
+				'GET', [], '', http_response(Status, _, _)
+			)
+		).
+
+	test(factorial_http_ping_01, true) :-
+		call_json_rpc(ping_request(1), HTTPResponse),
+		http_json_response(HTTPResponse, Response),
+		assertion(is_response(Response)),
+		assertion(\+ is_error_response(Response)).
+
+	% auxiliary predicates
+
+	with_prepared(Goal) :-
+		catch(
+			(	mcp_server_streamable_http_transport::prepare(factorial_mcp, [
+					server_name('Factorial'),
+					server_title('Factorial (Streamable HTTP)')
+				]),
+				call(Goal)
+			),
+			Error,
+			(	mcp_server_streamable_http_transport::cleanup,
+				throw(Error)
+			)
+		),
+		mcp_server_streamable_http_transport::cleanup.
+
+	:- meta_predicate(with_prepared(0)).
+
+	call_json_rpc(Spec, HTTPResponse) :-
+		spec_to_message(Spec, Message),
+		json_serialize_term(Message, Body),
+		Headers = [
+			'MCP-Protocol-Version'-'2026-07-28',
+			'Accept'-'application/json, text/event-stream',
+			'Content-Type'-'application/json'
+		],
+		with_prepared(
+			mcp_server_streamable_http_transport::handle_mcp_request(
+				'POST', Headers, Body, HTTPResponse
+			)
+		).
+
+	http_json_response(http_response(200, Headers, Body), Message) :-
+		memberchk('Content-Type'-CT, Headers),
+		sub_atom(CT, _, _, _, 'application/json'),
+		!,
+		Body = json_body(Message).
+	http_json_response(http_response(200, Headers, Body), Message) :-
+		memberchk('Content-Type'-CT, Headers),
+		sub_atom(CT, _, _, _, 'text/event-stream'),
+		!,
+		last_sse_data(Body, JSON),
+		json_parse_term(JSON, Message).
+
+	last_sse_data(Body, JSON) :-
+		Body = json_body(JSON),
+		!.
+	last_sse_data(Body, JSON) :-
+		atom_codes(Body, Codes),
+		phrase(sse_data_lines(Lines), Codes),
+		Lines = [_| _],
+		last(Lines, JSON).
+
+	sse_data_lines([]) -->
+		[].
+	sse_data_lines(Lines) -->
+		"data: ", sse_line(LineCodes), "\n",
+		{atom_codes(Line, LineCodes)},
+		(	"\n" -> {Lines = [Line| Rest]}, sse_data_lines(Rest)
+		;	sse_data_lines_rest(Line, Lines)
+		).
+	sse_data_lines(Lines) -->
+		sse_skip_line, sse_data_lines(Lines).
+
+	sse_data_lines_rest(Line, [Line| Rest]) -->
+		sse_data_lines(Rest).
+
+	sse_line([]) -->
+		[].
+	sse_line([]) -->
+		"\n", !.
+	sse_line([C|Cs]) -->
+		[C], {C =\= 0'\n}, sse_line(Cs).
+
+	sse_skip_line -->
+		"\n", !.
+	sse_skip_line -->
+		[_], sse_skip_line.
+	sse_skip_line -->
+		[].
+
+	last([X], X) :-
+		!.
+	last([_|Xs], X) :-
+		last(Xs, X).
+
+	json_serialize_term(Term, Atom) :-
+		(	current_object(json) ->
+			json::generate(atom(Atom), Term)
+		;	open(atom(Atom), write, Stream),
+			write_term(Stream, Term, [quoted(true)]),
+			close(Stream)
+		).
+
+	json_parse_term(Atom, Term) :-
+		(	current_object(json) ->
+			json::parse(atom(Atom), Term)
+		;	open(atom(Atom), read, Stream),
+			read_term(Stream, Term, []),
+			close(Stream)
+		).
+
+	meta_2026(Meta) :-
+		Meta = {
+			'io.modelcontextprotocol/protocolVersion'-'2026-07-28',
+			'io.modelcontextprotocol/clientCapabilities'-{
+				tools-{},
+				elicitation-{}
+			}
+		}.
+
+	spec_to_message(discover_request(Id), Message) :-
+		meta_2026(Meta),
+		request('server/discover', {'_meta'-Meta}, Id, Message).
+	spec_to_message(ping_request(Id), Message) :-
+		meta_2026(Meta),
+		request(ping, {'_meta'-Meta}, Id, Message).
+	spec_to_message(tools_list_request(Id), Message) :-
+		meta_2026(Meta),
+		request('tools/list', {'_meta'-Meta}, Id, Message).
+	spec_to_message(tools_call_request(Name, Args, Id), Message) :-
+		meta_2026(Meta),
+		request('tools/call', {name-Name, arguments-Args, '_meta'-Meta}, Id, Message).
+	spec_to_message(tools_call_with_state(Name, Args, Responses, State, Id), Message) :-
+		meta_2026(Meta),
+		request('tools/call', {
+			name-Name,
+			arguments-Args,
+			inputResponses-Responses,
+			requestState-State,
+			'_meta'-Meta
+		}, Id, Message).
+
+	has_pair({Pairs}, Key, Value) :-
+		curly_member(Key-Value, Pairs).
+
+	curly_member(Pair, (Pair, _)) :-
+		!.
+	curly_member(Pair, (_, Rest)) :-
+		!, curly_member(Pair, Rest).
+	curly_member(Pair, Pair).
+
+:- end_object.
