@@ -277,29 +277,13 @@
 		% method-specific capability checks
 		check_method_capabilities(Method, Meta, Id, Output).
 
-	check_method_capabilities(Method, Meta, Id, Output) :-
-		^^has_pair(Meta, 'io.modelcontextprotocol/clientCapabilities', ClientCaps),
-		(	method_requires_capability(Method, Required) ->
-			(	has_capability(ClientCaps, Required) ->
-				true
-			;	ErrorData = {requiredCapabilities-[Required]},
-				send_error_data(Id, -32021, 'Missing required client capability', ErrorData, Output),
-				!,
-				fail
-			)
-		;	true
-		).
-
-	method_requires_capability('tools/call', tools).
-	method_requires_capability('tools/list', tools).
-	method_requires_capability('prompts/get', prompts).
-	method_requires_capability('prompts/list', prompts).
-	method_requires_capability('resources/read', resources).
-	method_requires_capability('resources/list', resources).
-	method_requires_capability('subscriptions/listen', subscriptions).
-
-	has_capability(ClientCaps, Cap) :-
-		^^has_pair(ClientCaps, Cap, _).
+	% client capabilities are declared per-request in ``_meta``; only real
+	% *client* capabilities (e.g., elicitation) may be required by specific flows;
+	% tools / prompts / resources / subscriptions are *server* capabilities;
+	% clients call ``tools/list`` etc. without advertising a matching client
+	% capability (MCP 2026-07-28 ClientCapabilities / -32021);
+	% keeping this hook for future client-capability checks; currently a no-op.
+	check_method_capabilities(_Method, _Meta, _Id, _Output).
 
 	% method dispatch
 

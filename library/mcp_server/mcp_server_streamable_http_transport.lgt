@@ -465,27 +465,15 @@
 
 	validate_2026_caps(Method, Meta, Id, ErrorResponse) :-
 		(	^^has_pair(Meta, 'io.modelcontextprotocol/clientCapabilities', _) ->
-			check_caps(Method, Meta, Id, ErrorResponse)
+			check_capabilities(Method, Meta, Id, ErrorResponse)
 		;	json_error(Id, -32602, 'Missing required clientCapabilities in _meta', ErrorResponse)
 		).
 
-	check_caps(Method, Meta, Id, ErrorResponse) :-
-		^^has_pair(Meta, 'io.modelcontextprotocol/clientCapabilities', ClientCaps),
-		(	method_requires_capability(Method, Required) ->
-			(	^^has_pair(ClientCaps, Required, _) ->
-				fail
-			;	json_error_data(Id, -32021, 'Missing required client capability', {requiredCapabilities-[Required]}, ErrorResponse)
-			)
-		;	fail
-		).
-
-	method_requires_capability('tools/call', tools).
-	method_requires_capability('tools/list', tools).
-	method_requires_capability('prompts/get', prompts).
-	method_requires_capability('prompts/list', prompts).
-	method_requires_capability('resources/read', resources).
-	method_requires_capability('resources/list', resources).
-	method_requires_capability('subscriptions/listen', subscriptions).
+	% check_caps/4 succeeds only when binding ErrorResponse (invalid request);
+	% currently, no method requires a specific capability and thus calling this
+	% predicate fails (i.e., no -32021 error for tools/list, ...)
+	check_capabilities(_Method, _Meta, _Id, _ErrorResponse) :-
+		fail.
 
 	dispatch_method(Method, Params, Id, HTTPResponse) :-
 		catch(
