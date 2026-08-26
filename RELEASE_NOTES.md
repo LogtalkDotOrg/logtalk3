@@ -273,7 +273,9 @@ Examples
 * ADDED: New `http_sse_ticker` example illustrating the use of the new
 `http_sse` library.
 
-* ADDED: New `get_time_mcp_app` illustrating the `mcp_server` library
+* ADDED: New `factorial_mcp` example illustrating the `mcp_server` library.
+
+* ADDED: New `get_time_mcp_app` example illustrating the `mcp_server` library
 support for MCP Apps.
 
 * UPDATED: The `birds_mcp` example to also illustrate the MCP 2026-07-28

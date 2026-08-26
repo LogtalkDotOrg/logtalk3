@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths for the programming examples
-%  Last updated on August 25, 2026
+%  Last updated on August 26, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -91,6 +91,7 @@ logtalk_library_path(encodings, examples('encodings/')).
 logtalk_library_path(engines, examples('engines/')).
 logtalk_library_path(errors, examples('errors/')).
 logtalk_library_path(expansion, examples('expansion/')).
+logtalk_library_path(factorial_mcp, examples('factorial_mcp/')).
 logtalk_library_path(family, examples('family/')).
 logtalk_library_path(family_alt, examples('family_alt/')).
 logtalk_library_path(fft, threads('fft/')).
