@@ -21,5 +21,6 @@
 
 :- initialization((
 	logtalk_load(mcp_server(loader)),
+	logtalk_load(types(loader)),
 	logtalk_load(factorial_mcp, [optimize(on)])
 )).

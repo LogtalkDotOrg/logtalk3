@@ -125,38 +125,27 @@ is how JSON-RPC is carried and a few transport-only features.
 Application objects do **not** change between transports. Only the
 `spec/1` and `transport/1` options selects the path:
 
-    % stdio, 2025
-    ``spec('2025-06-18'), ``transport(stdio)``
+	% stdio, 2025-06-18
+	spec('2025-06-18'), transport(stdio)
 
-    % stdio, 2026
-    ``spec('2026-07-28'), ``transport(stdio)``
+	% stdio, 2026-07-28
+	spec('2026-07-28'), transport(stdio)
 
-    % Streamable HTTP, 2025
-    ``spec('2025-06-18'), ``transport(streamable_http)``
+	% Streamable HTTP, 2025-06-18
+	spec('2025-06-18'), transport(streamable_http)
 
-    % Streamable HTTP, 2026
-    ``spec('2026-07-28'), ``transport(streamable_http)``
+	% Streamable HTTP, 2026-07-28
+	spec('2026-07-28'), transport(streamable_http)
 
 Use **stdio** with desktop MCP clients that launch a command and speak
 MCP on pipes. Use **Streamable HTTP** for remote or multi-client access,
 reverse proxies, or clients that `POST` JSON-RPC (with optional SSE for
 progress and subscriptions).
 
-Mental model:
-
-    Application (mcp_*_protocol)
-            |
-            v
-    mcp_server_application   (shared dispatch, MRTR, schemas, ...)
-            |
-            +--> 2025 stdio spec --------> stdin/stdout
-            +--> 2026 stdio spec --------> stdin/stdout
-            +--> Streamable HTTP adapter ---> http_server + optional SSE
-
 Always start servers through the `mcp_server` facade. For unit tests or
 an external HTTP stack, the Streamable HTTP adapter also exposes
-`prepare/2`, `handle_mcp_request/4`, and `cleanup/0` without opening a
-listener.
+`prepare/2`, `handle_mcp_request/4`, and `cleanup/0` predicates without
+opening a listener.
 
 
 Starting a MCP server
@@ -170,43 +159,43 @@ application object:
 
 ### 2025-06-18 spec and stdio transport (default)
 
-    | ?- mcp_server::start('my-server', my_tools).
+	| ?- mcp_server::start('my-server', my_tools).
 
 With options:
 
-    | ?- mcp_server::start('my-server', my_tools, [
-            server_version('2.0.0'),
-            server_title('My Server')
-        ]).
+	| ?- mcp_server::start('my-server', my_tools, [
+			server_version('2.0.0'),
+			server_title('My Server')
+		]).
 
 ### 2026-07-28 spec and stdio transport
 
-    | ?- mcp_server::start('my-server', my_tools, [
-            spec('2026-07-28'),
-            server_version('2.0.0'),
-            server_title('My Server'),
-            instructions('Optional server instructions for clients.'),
-            cache_ttl(0),
-            cache_scope(private)
-        ]).
+	| ?- mcp_server::start('my-server', my_tools, [
+			spec('2026-07-28'),
+			server_version('2.0.0'),
+			server_title('My Server'),
+			instructions('Optional server instructions for clients.'),
+			cache_ttl(0),
+			cache_scope(private)
+		]).
 
 For stdio transports there should either be no standard output or only a
 Prolog backend term input prompt. Spurious standard output will break the
 connection between an MCP client and the MCP server.
 
-### 2026-07-28 Streamable HTTP
+### 2026-07-28 spec and Streamable HTTP
 
-    | ?- mcp_server::start('my-server', my_tools, [
-            spec('2026-07-28'),
-            transport(streamable_http),
-            server_version('2.0.0'),
-            server_title('My Server'),
-            instructions('Optional server instructions for clients.'),
-            http_port(8080),
-            http_bind('127.0.0.1'),
-            http_path('/mcp'),
-            http_origin_check(true)
-        ]).
+	| ?- mcp_server::start('my-server', my_tools, [
+			spec('2026-07-28'),
+			transport(streamable_http),
+			server_version('2.0.0'),
+			server_title('My Server'),
+			instructions('Optional server instructions for clients.'),
+			http_port(8080),
+			http_bind('127.0.0.1'),
+			http_path('/mcp'),
+			http_origin_check(true)
+		]).
 
 The server listens for `POST` requests at the configured bind address,
 port, and path (default `http://127.0.0.1:8080/mcp`). Clients must send
@@ -260,28 +249,25 @@ Implementing the tool protocol
 To expose a Logtalk object as an MCP tool provider, implement the
 `mcp_tool_protocol` protocol. For example:
 
-    :- object(my_tools,
-        implements(mcp_tool_protocol)).
+	:- object(my_tools,
+		implements(mcp_tool_protocol)).
 
-        :- public(factorial/2).
-        :- mode(factorial(+integer, -integer), one).
-        :- info(factorial/2, [
-            comment is 'Computes the factorial of a non-negative integer.',
-            argnames is ['N', 'F']
-        ]).
+		:- public(factorial/2).
+		:- mode(factorial(+integer, -integer), one).
+		:- info(factorial/2, [
+			comment is 'Computes the factorial of a non-negative integer.',
+			argnames is ['N', 'F']
+		]).
 
-        tools([
-            tool(factorial, factorial, 2)
-        ]).
+		:- uses(natural, [
+			factorial/2
+		]).
 
-        factorial(0, 1) :- !.
-        factorial(N, F) :-
-            N > 0,
-            N1 is N - 1,
-            factorial(N1, F1),
-            F is N * F1.
+		tools([
+			tool(factorial, factorial, 2)
+		]).
 
-    :- end_object.
+	:- end_object.
 
 The `tools/1` predicate returns a list of `tool(Name, Functor, Arity)`
 descriptors. Tool descriptions and parameter schemas are derived from
@@ -325,24 +311,24 @@ can be:
 
 For example:
 
-    tool_call(factorial, Arguments, Result) :-
-        member('N'-N, Arguments),
-        factorial(N, F),
-        number_codes(F, Codes),
-        atom_codes(FAtom, Codes),
-        atom_concat('The factorial is: ', FAtom, Text),
-        Result = text(Text).
+	tool_call(factorial, Arguments, Result) :-
+		member('N'-N, Arguments),
+		factorial(N, F),
+		number_codes(F, Codes),
+		atom_codes(FAtom, Codes),
+		atom_concat('The factorial is: ', FAtom, Text),
+		Result = text(Text).
 
 
 ### Output schemas (structured tool output)
 
-Tools can declare an output schema by defining output_schema/2 in their
-application object:
+Tools can declare an output schema by defining the `output_schema/2` predicate
+in their application object:
 
-    output_schema(divide, {
-        type-object,
-        properties-{quotient-{type-number}}, required-[quotient]
-    }).
+	output_schema(divide, {
+		type-object,
+		properties-{quotient-{type-number}}, required-[quotient]
+	}).
 
 When an output schema is declared, the tool descriptor includes an
 `outputSchema` field. The tool's `tool_call/3` predicate can then
@@ -361,44 +347,44 @@ requires the client `elicitation` capability and implements `tool_call/4`
 instead of `tool_call/3`. The extra argument is an elicitation closure. For
 example:
 
-    :- object(interactive_tools,
-        implements(mcp_tool_protocol)).
+	:- object(interactive_tools,
+		implements(mcp_tool_protocol)).
 
-        capabilities([elicitation]).
+		capabilities([elicitation]).
 
-        tools([
-            tool(ask_name, ask_name, 0)
-        ]).
+		tools([
+			tool(ask_name, ask_name, 0)
+		]).
 
-        :- public(ask_name/0).
-        :- info(ask_name/0, [
-            comment is 'Asks the user for their name and greets them.'
-        ]).
+		:- public(ask_name/0).
+		:- info(ask_name/0, [
+			comment is 'Asks the user for their name and greets them.'
+		]).
 
-        tool_call(ask_name, _Arguments, Elicit, Result) :-
-            Schema = {
-                type-object,
-                properties-{name-{type-string}},
-                required-[name]
-            },
-            call(Elicit, 'What is your name?', Schema, Answer),
-            (	Answer = accept(Content),
-                has_pair(Content, name, Name) ->
-                atom_concat('Hello, ', Name, Greeting),
-                atom_concat(Greeting, '!', Text),
-                Result = text(Text)
-            ;	Result = text('No name provided.')
-            ).
+		tool_call(ask_name, _Arguments, Elicit, Result) :-
+			Schema = {
+				type-object,
+				properties-{name-{type-string}},
+				required-[name]
+			},
+			call(Elicit, 'What is your name?', Schema, Answer),
+			(	Answer = accept(Content),
+				has_pair(Content, name, Name) ->
+				atom_concat('Hello, ', Name, Greeting),
+				atom_concat(Greeting, '!', Text),
+				Result = text(Text)
+			;	Result = text('No name provided.')
+			).
 
-        has_pair({Pairs}, Key, Value) :-
-            curly_member(Key-Value, Pairs).
+		has_pair({Pairs}, Key, Value) :-
+			curly_member(Key-Value, Pairs).
 
-        curly_member(Pair, (Pair, _)) :- !.
-        curly_member(Pair, (_, Rest)) :-
-            !, curly_member(Pair, Rest).
-        curly_member(Pair, Pair).
+		curly_member(Pair, (Pair, _)) :- !.
+		curly_member(Pair, (_, Rest)) :-
+			!, curly_member(Pair, Rest).
+		curly_member(Pair, Pair).
 
-    :- end_object.
+	:- end_object.
 
 The `Elicit` closure is called as `call(Elicit, Message, Schema, Answer)`
 where:
@@ -450,25 +436,25 @@ the 2026 adapter wraps those outcomes as `complete`.
 
 Example:
 
-    :- object(interactive,
-        implements([mcp_tool_protocol, mcp_multiround_protocol])).
+	:- object(interactive,
+		implements([mcp_tool_protocol, mcp_multiround_protocol])).
 
-        tools([tool(ask_name, ask_name, 0)]).
+		tools([tool(ask_name, ask_name, 0)]).
 
-        tool_call_round(ask_name, _Args, Context, RoundResult) :-
-            Context = request_context(_Caps, Responses, State, _Progress),
-            (	State == none ->
-                RoundResult = input_required(
-                    [input_request(name_key, form_elicitation('Your name?', {type-object, properties-{name-{type-string}}, required-[name]}))],
-                    waiting
-                )
-            ;	member(input_response(name_key, accept(Content)), Responses) ->
-                % extract name, return complete(text(...))
-                RoundResult = complete(text('Hello!'))
-            ;	RoundResult = complete(text('Cancelled.'))
-            ).
+		tool_call_round(ask_name, _Args, Context, RoundResult) :-
+			Context = request_context(_Caps, Responses, State, _Progress),
+			(	State == none ->
+				RoundResult = input_required(
+					[input_request(name_key, form_elicitation('Your name?', {type-object, properties-{name-{type-string}}, required-[name]}))],
+					waiting
+				)
+			;	member(input_response(name_key, accept(Content)), Responses) ->
+				% extract name, return complete(text(...))
+				RoundResult = complete(text('Hello!'))
+			;	RoundResult = complete(text('Cancelled.'))
+			).
 
-    :- end_object.
+	:- end_object.
 
 
 Caching (2026-07-28 spec)
@@ -476,8 +462,8 @@ Caching (2026-07-28 spec)
 
 Optional `mcp_cache_protocol` with `cache_policy/4`:
 
-    cache_policy(tools_list, _, 1000, private).
-    cache_policy(resources_read, 'logtalk://app/data', 5000, public).
+	cache_policy(tools_list, _, 1000, private).
+	cache_policy(resources_read, 'logtalk://app/data', 5000, public).
 
 Cache fields (`ttlMs`, `cacheScope`) are attached only to complete results
 of `server/discover`, list operations, and `resources/read`. They are
@@ -504,10 +490,10 @@ events.
 
 Applications publish events via:
 
-    mcp_server::notify(tools_list_changed).
-    mcp_server::notify(prompts_list_changed).
-    mcp_server::notify(resources_list_changed).
-    mcp_server::notify(resource_updated('logtalk://app/data')).
+	mcp_server::notify(tools_list_changed).
+	mcp_server::notify(prompts_list_changed).
+	mcp_server::notify(resources_list_changed).
+	mcp_server::notify(resource_updated('logtalk://app/data')).
 
 The facade delegates to the active adapter. The 2025-06-18 adapter
 ignores these events. The 2026-07-28 stdio adapter and the Streamable
@@ -525,40 +511,40 @@ an application to expose reusable prompt templates that MCP clients can
 discover and use. To add prompts, implement `mcp_prompt_protocol` in
 addition to `mcp_tool_protocol`, and declare `prompts` in capabilities:
 
-    :- object(my_prompts,
-        implements([mcp_tool_protocol, mcp_prompt_protocol])).
+	:- object(my_prompts,
+		implements([mcp_tool_protocol, mcp_prompt_protocol])).
 
-        capabilities([prompts]).
+		capabilities([prompts]).
 
-        tools([]).
+		tools([]).
 
-        prompts([
-            prompt(code_review, 'Reviews code for potential issues', [
-                argument(code, 'The code to review', true),
-                argument(language, 'The programming language', false)
-            ]),
-            prompt(summarize, 'Summarizes a given text', [
-                argument(text, 'The text to summarize', true)
-            ])
-        ]).
+		prompts([
+			prompt(code_review, 'Reviews code for potential issues', [
+				argument(code, 'The code to review', true),
+				argument(language, 'The programming language', false)
+			]),
+			prompt(summarize, 'Summarizes a given text', [
+				argument(text, 'The text to summarize', true)
+			])
+		]).
 
-        prompt_get(code_review, Arguments, Result) :-
-            (	member(code-Code, Arguments) ->
-                atom_concat('Please review the following code for potential issues:\n\n', Code, Text)
-            ;	Text = 'Please provide code to review.'
-            ),
-            Result = messages([message(user, text(Text))]).
+		prompt_get(code_review, Arguments, Result) :-
+			(	member(code-Code, Arguments) ->
+				atom_concat('Please review the following code for potential issues:\n\n', Code, Text)
+			;	Text = 'Please provide code to review.'
+			),
+			Result = messages([message(user, text(Text))]).
 
-        prompt_get(summarize, Arguments, Result) :-
-            (	member(text-Text, Arguments) ->
-                atom_concat('Please summarize the following text:\n\n', Text, PromptText)
-            ;	PromptText = 'Please provide text to summarize.'
-            ),
-            Result = messages([message(user, text(PromptText))]).
+		prompt_get(summarize, Arguments, Result) :-
+			(	member(text-Text, Arguments) ->
+				atom_concat('Please summarize the following text:\n\n', Text, PromptText)
+			;	PromptText = 'Please provide text to summarize.'
+			),
+			Result = messages([message(user, text(PromptText))]).
 
-        :- uses(list, [member/2]).
+		:- uses(list, [member/2]).
 
-    :- end_object.
+	:- end_object.
 
 The `prompts/1` predicate returns a list of prompt descriptors:
 
@@ -587,13 +573,13 @@ Each message in the list is a `message(Role, Content)` term where:
 
 Multi-turn prompts can return multiple messages:
 
-    prompt_get(debate, Arguments, Result) :-
-        member(topic-Topic, Arguments),
-        atom_concat('Let us debate: ', Topic, UserText),
-        Result = messages([
-            message(user, text(UserText)),
-            message(assistant, text('I would be happy to debate that topic. What is your position?'))
-        ]).
+	prompt_get(debate, Arguments, Result) :-
+		member(topic-Topic, Arguments),
+		atom_concat('Let us debate: ', Topic, UserText),
+		Result = messages([
+			message(user, text(UserText)),
+			message(assistant, text('I would be happy to debate that topic. What is your position?'))
+		]).
 
 For 2026 multi-round prompts, implement `prompt_get_round/4`.
 
@@ -606,29 +592,29 @@ clients can access. To add resources, implement `mcp_resource_protocol`
 in addition to `mcp_tool_protocol`, and declare `resources` in
 capabilities:
 
-    :- object(my_resources,
-        implements([mcp_tool_protocol, mcp_resource_protocol])).
+	:- object(my_resources,
+		implements([mcp_tool_protocol, mcp_resource_protocol])).
 
-        capabilities([resources]).
+		capabilities([resources]).
 
-        tools([]).
+		tools([]).
 
-        resources([
-            resource('logtalk://my-app/config', config, 'Application configuration', 'application/json'),
-            resource('logtalk://my-app/readme', readme, 'Application readme', 'text/plain')
-        ]).
+		resources([
+			resource('logtalk://my-app/config', config, 'Application configuration', 'application/json'),
+			resource('logtalk://my-app/readme', readme, 'Application readme', 'text/plain')
+		]).
 
-        resource_read('logtalk://my-app/config', _Arguments, Result) :-
-            Result = contents([
-                text_content('logtalk://my-app/config', 'application/json', '{"name": "my-app", "version": "1.0"}')
-            ]).
+		resource_read('logtalk://my-app/config', _Arguments, Result) :-
+			Result = contents([
+				text_content('logtalk://my-app/config', 'application/json', '{"name": "my-app", "version": "1.0"}')
+			]).
 
-        resource_read('logtalk://my-app/readme', _Arguments, Result) :-
-            Result = contents([
-                text_content('logtalk://my-app/readme', 'text/plain', 'Welcome to my application.')
-            ]).
+		resource_read('logtalk://my-app/readme', _Arguments, Result) :-
+			Result = contents([
+				text_content('logtalk://my-app/readme', 'text/plain', 'Welcome to my application.')
+			]).
 
-    :- end_object.
+	:- end_object.
 
 The `resources/1` predicate returns a list of resource descriptors:
 
@@ -654,11 +640,11 @@ result term must be `contents(ContentList)` where each content item is:
 
 A resource can return multiple content items. For example:
 
-    resource_read('logtalk://my-app/logs', _Arguments, Result) :-
-        Result = contents([
-            text_content('logtalk://my-app/logs', 'text/plain', 'Log entry 1'),
-            text_content('logtalk://my-app/logs', 'text/plain', 'Log entry 2')
-        ]).
+	resource_read('logtalk://my-app/logs', _Arguments, Result) :-
+		Result = contents([
+			text_content('logtalk://my-app/logs', 'text/plain', 'Log entry 1'),
+			text_content('logtalk://my-app/logs', 'text/plain', 'Log entry 2')
+		]).
 
 For 2026 multi-round reads, implement `resource_read_round/4`.
 
@@ -668,22 +654,22 @@ MCP client configuration
 
 Example `claude_desktop_config.json` for the 2025-06-18 path:
 
-    {
-        "mcpServers": {
-            "my-server": {
-                "command": "swilgt",
-                "args": [
-                    "-q",
-                    "-g", "logtalk_load(my_mcp_server(loader))",
-                    "-t", "halt"
-                ],
-                "env": {
-                    "LOGTALKHOME": "/usr/local/share/logtalk",
-                    "LOGTALKUSER": "/Users/jdoe/logtalk"
-                }
-            }
-        }
-    }
+	{
+		"mcpServers": {
+			"my-server": {
+				"command": "swilgt",
+				"args": [
+					"-q",
+					"-g", "logtalk_load(my_mcp_server(loader))",
+					"-t", "halt"
+				],
+				"env": {
+					"LOGTALKHOME": "/usr/local/share/logtalk",
+					"LOGTALKUSER": "/Users/jdoe/logtalk"
+				}
+			}
+		}
+	}
 
 The `env` definition of the `LOGTALKHOME` and `LOGTALKUSER` environment
 variables may or may not be required (it's usually necessary on macOS).
@@ -693,21 +679,21 @@ Logtalk setup.
 The actual arguments to the integration script (`swilgt` in the example
 above) depend on the Prolog backend. For example, XVM requires instead:
 
-    {
-        "mcpServers": {
-            "my-server": {
-                "command": "xvmlgt",
-                "args": [
-                    "-q",
-                    "-g", "logtalk_load(my_mcp_server(loader)), halt.",
-                ],
-                "env": {
-                    "LOGTALKHOME": "/usr/local/share/logtalk",
-                    "LOGTALKUSER": "/Users/jdoe/logtalk"
-                }
-            }
-        }
-    }
+	{
+		"mcpServers": {
+			"my-server": {
+				"command": "xvmlgt",
+				"args": [
+					"-q",
+					"-g", "logtalk_load(my_mcp_server(loader)), halt.",
+				],
+				"env": {
+					"LOGTALKHOME": "/usr/local/share/logtalk",
+					"LOGTALKUSER": "/Users/jdoe/logtalk"
+				}
+			}
+		}
+	}
 
 For a 2026-07-28 stdio server, the application loader or start goal must
 pass `protocol_adapter(mcp_server_2026_07_28_adapter)`.
@@ -858,10 +844,10 @@ Advertises `extensions["io.modelcontextprotocol/ui"]` in `initialize`
 
 	resources([
 	  resource(
-	    'ui://my-app/dashboard',
-	    dashboard,
-	    'Interactive dashboard',
-	    'text/html;profile=mcp-app'
+		'ui://my-app/dashboard',
+		dashboard,
+		'Interactive dashboard',
+		'text/html;profile=mcp-app'
 	  )
 	]).
 

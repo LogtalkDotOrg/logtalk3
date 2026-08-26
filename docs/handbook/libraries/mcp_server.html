@@ -253,7 +253,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#starting-a-mcp-server">Starting a MCP server</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#spec-and-stdio-transport-default">2025-06-18 spec and stdio transport (default)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#spec-and-stdio-transport">2026-07-28 spec and stdio transport</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#streamable-http">2026-07-28 Streamable HTTP</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#spec-and-streamable-http">2026-07-28 spec and Streamable HTTP</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#common-options">Common options</a></li>
@@ -578,38 +578,27 @@ when a <code class="docutils literal notranslate"><span class="pre">progressToke
 <p>(*) But no synchronous elicitation over plain POST.</p>
 <p>Application objects do <strong>not</strong> change between transports. Only the
 <code class="docutils literal notranslate"><span class="pre">spec/1</span></code> and <code class="docutils literal notranslate"><span class="pre">transport/1</span></code> options selects the path:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% stdio, 2025</span>
-<span class="err">``</span>spec(<span class="s">&#39;2025-06-18&#39;</span>), <span class="err">``</span>transport(stdio)<span class="err">``</span>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% stdio, 2025-06-18</span>
+spec(<span class="s">&#39;2025-06-18&#39;</span>), transport(stdio)
 
-<span class="c">% stdio, 2026</span>
-<span class="err">``</span>spec(<span class="s">&#39;2026-07-28&#39;</span>), <span class="err">``</span>transport(stdio)<span class="err">``</span>
+<span class="c">% stdio, 2026-07-28</span>
+spec(<span class="s">&#39;2026-07-28&#39;</span>), transport(stdio)
 
-<span class="c">% Streamable HTTP, 2025</span>
-<span class="err">``</span>spec(<span class="s">&#39;2025-06-18&#39;</span>), <span class="err">``</span>transport(streamable_http)<span class="err">``</span>
+<span class="c">% Streamable HTTP, 2025-06-18</span>
+spec(<span class="s">&#39;2025-06-18&#39;</span>), transport(streamable_http)
 
-<span class="c">% Streamable HTTP, 2026</span>
-<span class="err">``</span>spec(<span class="s">&#39;2026-07-28&#39;</span>), <span class="err">``</span>transport(streamable_http)<span class="err">``</span>
+<span class="c">% Streamable HTTP, 2026-07-28</span>
+spec(<span class="s">&#39;2026-07-28&#39;</span>), transport(streamable_http)
 </pre></div>
 </div>
 <p>Use <strong>stdio</strong> with desktop MCP clients that launch a command and speak
 MCP on pipes. Use <strong>Streamable HTTP</strong> for remote or multi-client access,
 reverse proxies, or clients that <code class="docutils literal notranslate"><span class="pre">POST</span></code> JSON-RPC (with optional SSE
 for progress and subscriptions).</p>
-<p>Mental model:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="nv">Application</span> (mcp_<span class="o">*</span><span class="nv">_protocol</span>)
-        |
-        v
-mcp_server_application   (shared dispatch, <span class="nv">MRTR</span>, schemas, ...)
-        |
-        <span class="o">+--&gt;</span> <span class="m">2025</span> stdio spec <span class="o">--------&gt;</span> stdin<span class="o">/</span>stdout
-        <span class="o">+--&gt;</span> <span class="m">2026</span> stdio spec <span class="o">--------&gt;</span> stdin<span class="o">/</span>stdout
-        <span class="o">+--&gt;</span> <span class="nv">Streamable</span> <span class="nv">HTTP</span> adapter <span class="o">---&gt;</span> http_server <span class="o">+</span> optional <span class="nv">SSE</span>
-</pre></div>
-</div>
 <p>Always start servers through the <code class="docutils literal notranslate"><span class="pre">mcp_server</span></code> facade. For unit tests
 or an external HTTP stack, the Streamable HTTP adapter also exposes
-<code class="docutils literal notranslate"><span class="pre">prepare/2</span></code>, <code class="docutils literal notranslate"><span class="pre">handle_mcp_request/4</span></code>, and <code class="docutils literal notranslate"><span class="pre">cleanup/0</span></code> without
-opening a listener.</p>
+<code class="docutils literal notranslate"><span class="pre">prepare/2</span></code>, <code class="docutils literal notranslate"><span class="pre">handle_mcp_request/4</span></code>, and <code class="docutils literal notranslate"><span class="pre">cleanup/0</span></code> predicates
+without opening a listener.</p>
 </section>
 <section id="starting-a-mcp-server">
 <h2>Starting a MCP server<a class="headerlink" href="#starting-a-mcp-server" title="Link to this heading"></a></h2>
@@ -647,8 +636,8 @@ assuming a <code class="docutils literal notranslate"><span class="pre">my_tools
 Prolog backend term input prompt. Spurious standard output will break
 the connection between an MCP client and the MCP server.</p>
 </section>
-<section id="streamable-http">
-<span id="id3"></span><h3>2026-07-28 Streamable HTTP<a class="headerlink" href="#streamable-http" title="Link to this heading"></a></h3>
+<section id="spec-and-streamable-http">
+<span id="id3"></span><h3>2026-07-28 spec and Streamable HTTP<a class="headerlink" href="#spec-and-streamable-http" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> mcp_server<span class="o">::</span>start(<span class="s">&#39;my-server&#39;</span>, my_tools, [
         spec(<span class="s">&#39;2026-07-28&#39;</span>),
         transport(streamable_http),
@@ -787,16 +776,13 @@ selected.</p>
         argnames <span class="k">is</span> [<span class="s">&#39;N&#39;</span>, <span class="s">&#39;F&#39;</span>]
     ]).
 
+<span class="p">    :- </span><span class="k">uses</span>(natural, [
+        factorial<span class="o">/</span><span class="m">2</span>
+    ]).
+
     tools([
         tool(factorial, factorial, <span class="m">2</span>)
     ]).
-
-    factorial(<span class="m">0</span>, <span class="m">1</span>) <span class="o">:-</span> <span class="o">!</span>.
-    factorial(<span class="nv">N</span>, <span class="nv">F</span>) <span class="o">:-</span>
-        <span class="nv">N</span> <span class="o">&gt;</span> <span class="m">0</span>,
-        <span class="nv">N1</span> <span class="k">is</span> <span class="nv">N</span> <span class="o">-</span> <span class="m">1</span>,
-        factorial(<span class="nv">N1</span>, <span class="nv">F1</span>),
-        <span class="nv">F</span> <span class="k">is</span> <span class="nv">N</span> <span class="o">*</span> <span class="nv">F1</span>.
 
 <span class="p">:- </span><span class="k">end_object</span>.
 </pre></div>
@@ -885,8 +871,8 @@ explicit content items</p></li>
 </section>
 <section id="output-schemas-structured-tool-output">
 <h3>Output schemas (structured tool output)<a class="headerlink" href="#output-schemas-structured-tool-output" title="Link to this heading"></a></h3>
-<p>Tools can declare an output schema by defining output_schema/2 in their
-application object:</p>
+<p>Tools can declare an output schema by defining the <code class="docutils literal notranslate"><span class="pre">output_schema/2</span></code>
+predicate in their application object:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>output_schema(divide, <span class="k">{</span>
     type<span class="o">-</span>object,
     properties<span class="o">-</span><span class="k">{</span>quotient<span class="o">-</span><span class="k">{</span>type<span class="o">-</span>number<span class="k">}}</span>, required<span class="o">-</span>[quotient]

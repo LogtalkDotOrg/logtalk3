@@ -128,40 +128,27 @@ Application objects do **not** change between transports. Only the
 
 ::
 
-   % stdio, 2025
-   ``spec('2025-06-18'), ``transport(stdio)``
+   % stdio, 2025-06-18
+   spec('2025-06-18'), transport(stdio)
 
-   % stdio, 2026
-   ``spec('2026-07-28'), ``transport(stdio)``
+   % stdio, 2026-07-28
+   spec('2026-07-28'), transport(stdio)
 
-   % Streamable HTTP, 2025
-   ``spec('2025-06-18'), ``transport(streamable_http)``
+   % Streamable HTTP, 2025-06-18
+   spec('2025-06-18'), transport(streamable_http)
 
-   % Streamable HTTP, 2026
-   ``spec('2026-07-28'), ``transport(streamable_http)``
+   % Streamable HTTP, 2026-07-28
+   spec('2026-07-28'), transport(streamable_http)
 
 Use **stdio** with desktop MCP clients that launch a command and speak
 MCP on pipes. Use **Streamable HTTP** for remote or multi-client access,
 reverse proxies, or clients that ``POST`` JSON-RPC (with optional SSE
 for progress and subscriptions).
 
-Mental model:
-
-::
-
-   Application (mcp_*_protocol)
-           |
-           v
-   mcp_server_application   (shared dispatch, MRTR, schemas, ...)
-           |
-           +--> 2025 stdio spec --------> stdin/stdout
-           +--> 2026 stdio spec --------> stdin/stdout
-           +--> Streamable HTTP adapter ---> http_server + optional SSE
-
 Always start servers through the ``mcp_server`` facade. For unit tests
 or an external HTTP stack, the Streamable HTTP adapter also exposes
-``prepare/2``, ``handle_mcp_request/4``, and ``cleanup/0`` without
-opening a listener.
+``prepare/2``, ``handle_mcp_request/4``, and ``cleanup/0`` predicates
+without opening a listener.
 
 Starting a MCP server
 ---------------------
@@ -210,10 +197,10 @@ For stdio transports there should either be no standard output or only a
 Prolog backend term input prompt. Spurious standard output will break
 the connection between an MCP client and the MCP server.
 
-.. _2026-07-28-streamable-http:
+.. _2026-07-28-spec-and-streamable-http:
 
-2026-07-28 Streamable HTTP
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+2026-07-28 spec and Streamable HTTP
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ::
 
@@ -319,16 +306,13 @@ To expose a Logtalk object as an MCP tool provider, implement the
            argnames is ['N', 'F']
        ]).
 
+       :- uses(natural, [
+           factorial/2
+       ]).
+
        tools([
            tool(factorial, factorial, 2)
        ]).
-
-       factorial(0, 1) :- !.
-       factorial(N, F) :-
-           N > 0,
-           N1 is N - 1,
-           factorial(N1, F1),
-           F is N * F1.
 
    :- end_object.
 
@@ -394,8 +378,8 @@ For example:
 Output schemas (structured tool output)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Tools can declare an output schema by defining output_schema/2 in their
-application object:
+Tools can declare an output schema by defining the ``output_schema/2``
+predicate in their application object:
 
 ::
 

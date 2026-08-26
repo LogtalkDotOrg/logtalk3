@@ -288,6 +288,9 @@ Follows a short description of each included example (in alphabetical order):
 - `expansion`  
 	example illustrating the term and goal expansion mechanisms
 
+- `factorial_mcp`  
+    example illustrating the `mcp_server` library support for MCP servers
+
 - `family`  
 	classical family relations example
 
