@@ -250,6 +250,13 @@
 	% auto-dispatch and tool execution predicates
 
 	auto_dispatch_tool(Application, Functor, Arity, ToolArguments, Result) :-
+		catch(
+			auto_dispatch_tool_(Application, Functor, Arity, ToolArguments, Result),
+			Error,
+			Result = error(Error)
+		).
+
+	auto_dispatch_tool_(Application, Functor, Arity, ToolArguments, Result) :-
 		functor(Goal, Functor, Arity),
 		(	Application::predicate_property(Goal, mode(ModeTemplate, _)) ->
 			ModeTemplate =.. [_| Modes]
@@ -265,13 +272,15 @@
 		;	generate_argument_names(1, Arity, Names)
 		),
 		bind_input_arguments(Names, Modes, 1, Goal, ToolArguments),
-		Application::Goal,
-		collect_output_arguments(Names, Modes, 1, Goal, OutputPairs),
-		(	OutputPairs == [] ->
-			Result = structured([text('Success')], {})
-		;	format_output_pairs(OutputPairs, Text),
-			pairs_to_curly(OutputPairs, StructuredContent),
-			Result = structured([text(Text)], StructuredContent)
+		( 	Application::Goal ->
+			collect_output_arguments(Names, Modes, 1, Goal, OutputPairs),
+			( 	OutputPairs == [] ->
+				Result = structured([text('Success')], {})
+			;	format_output_pairs(OutputPairs, Text),
+				pairs_to_curly(OutputPairs, StructuredContent),
+				Result = structured([text(Text)], StructuredContent)
+			)
+		;	Result = failure
 		).
 
 	try_tool_call_3(Application, ToolName, Functor, Arity, ArgPairs, ToolArguments, Result) :-

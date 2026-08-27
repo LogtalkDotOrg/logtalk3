@@ -303,6 +303,9 @@ the output-mode arguments (`-` and `--`), and returns them as
 `structuredContent`. For backwards compatibility, it also returns the existing
 human-readable rendering as a `text/1` content item. The tool descriptor's
 `inputSchema` and `outputSchema` are inferred from the predicate documentation.
+If the predicate fails, the server returns an MCP tool error stating `Tool
+predicate failed`; if it throws an exception, the exception is returned as the
+tool error.
 
 For custom result formatting, including a `structuredContent` result matching
 the tool's output schema, implement `tool_call/3`. When an output schema is

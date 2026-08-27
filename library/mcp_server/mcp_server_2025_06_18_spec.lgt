@@ -303,8 +303,7 @@
 				ToolResult0 = error(Error)
 			) ->
 			format_tool_result(ToolResult0, Id, Response)
-		;	FailContent = [{type-text, text-'Tool execution failed'}],
-			response({content-FailContent, isError- @true}, Id, Response)
+		;	format_tool_result(failure, Id, Response)
 		),
 		Outcome = reply(Response).
 
@@ -335,6 +334,9 @@
 		;	write_to_atom(Error, ErrorText)
 		),
 		Content = [{type-text, text-ErrorText}],
+		response({content-Content, isError- @true}, Id, Response).
+	format_tool_result(failure, Id, Response) :-
+		Content = [{type-text, text-'Tool predicate failed'}],
 		response({content-Content, isError- @true}, Id, Response).
 	format_tool_result(results(Items), Id, Response) :-
 		^^format_content_items(Items, Content),

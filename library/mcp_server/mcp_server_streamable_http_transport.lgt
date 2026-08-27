@@ -580,7 +580,10 @@
 
 	handle_tools_call(Params, Id, HTTPResponse) :-
 		(	^^has_pair(Params, name, ToolName) ->
-			(	^^has_pair(Params, arguments, Args) -> true ; Args = {} ),
+			(	^^has_pair(Params, arguments, Args) ->
+				true
+			;	Args = {}
+			),
 			extract_progress_token(Params, ProgressToken),
 			extract_client_capabilities(Params, ClientCaps),
 			extract_input_responses(Params, InputResponses),
@@ -595,7 +598,7 @@
 					true
 				;	nonvar(HTTPResponse) ->
 					true
-				;	json_error(Id, -32603, 'Tool execution failed', HTTPResponse)
+					;	format_tool_result(failure, Id, ProgressToken, HTTPResponse)
 				)
 			;	json_error(Id, -32603, 'Tool execution failed', HTTPResponse)
 			),
@@ -656,6 +659,9 @@
 		!,
 		(atom(Error) -> Text = Error ; write_to_atom(Error, Text)),
 		response({content-[{type-text, text-Text}], isError- @true, resultType-complete}, Id, Msg).
+	tool_result_body(failure, Id, Msg) :-
+		!,
+		response({content-[{type-text, text-'Tool predicate failed'}], isError- @true, resultType-complete}, Id, Msg).
 	tool_result_body(results(Items), Id, Msg) :-
 		!,
 		^^format_content_items(Items, Content),

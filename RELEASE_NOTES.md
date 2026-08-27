@@ -209,6 +209,9 @@ support provided by the `crypto` library.
 * UPDATED: The `http_parameters` and `http_router` libraries to use a standard
 domain error for parameter validation errors.
 
+* UPDATED: The `mcp_server` library to clearly inform clients when tool calls
+fail.
+
 * UPDATED: The `thurstone_mosteller_ranker` library to reuse the new shared
 standard normal quantile implementation.
 

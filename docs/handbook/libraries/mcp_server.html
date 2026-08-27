@@ -846,11 +846,20 @@ predicate functor is used.</p>
 </table>
 <section id="auto-dispatch-vs-custom-tool-call-3">
 <span id="auto-dispatch-vs-custom-tool-call3"></span><h3>Auto-dispatch vs. custom <code class="docutils literal notranslate"><span class="pre">tool_call/3</span></code><a class="headerlink" href="#auto-dispatch-vs-custom-tool-call-3" title="Link to this heading"></a></h3>
-<p>By default the server auto-dispatches: it calls the corresponding
-predicate, collects output-mode arguments (<code class="docutils literal notranslate"><span class="pre">-</span></code> and <code class="docutils literal notranslate"><span class="pre">--</span></code>), and
-returns them as text content.</p>
-<p>For custom result formatting, implement <code class="docutils literal notranslate"><span class="pre">tool_call/3</span></code>. The <code class="docutils literal notranslate"><span class="pre">Result</span></code>
-term can be:</p>
+<p>By default the server auto-dispatches a tool call: it binds the
+input-mode arguments (<code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">++</span></code>, and <code class="docutils literal notranslate"><span class="pre">&#64;</span></code>), calls the corresponding
+predicate, collects the output-mode arguments (<code class="docutils literal notranslate"><span class="pre">-</span></code> and <code class="docutils literal notranslate"><span class="pre">--</span></code>), and
+returns them as <code class="docutils literal notranslate"><span class="pre">structuredContent</span></code>. For backwards compatibility, it
+also returns the existing human-readable rendering as a <code class="docutils literal notranslate"><span class="pre">text/1</span></code>
+content item. The tool descriptor’s <code class="docutils literal notranslate"><span class="pre">inputSchema</span></code> and <code class="docutils literal notranslate"><span class="pre">outputSchema</span></code>
+are inferred from the predicate documentation. If the predicate fails,
+the server returns an MCP tool error stating <code class="docutils literal notranslate"><span class="pre">Tool</span> <span class="pre">predicate</span> <span class="pre">failed</span></code>;
+if it throws an exception, the exception is returned as the tool error.</p>
+<p>For custom result formatting, including a <code class="docutils literal notranslate"><span class="pre">structuredContent</span></code> result
+matching the tool’s output schema, implement <code class="docutils literal notranslate"><span class="pre">tool_call/3</span></code>. When an
+output schema is advertised, a successful custom result must use
+<code class="docutils literal notranslate"><span class="pre">structured/1</span></code> or <code class="docutils literal notranslate"><span class="pre">structured/2</span></code> and conform to that schema. The
+<code class="docutils literal notranslate"><span class="pre">Result</span></code> term can be:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">text(Atom)</span></code> - a text result</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">error(Atom)</span></code> - a tool-level error (<code class="docutils literal notranslate"><span class="pre">isError:</span> <span class="pre">true</span></code>)</p></li>
@@ -867,7 +876,7 @@ explicit content items</p></li>
     <span class="k">number_codes</span>(<span class="nv">F</span>, <span class="nv">Codes</span>),
     <span class="k">atom_codes</span>(<span class="nv">FAtom</span>, <span class="nv">Codes</span>),
     <span class="k">atom_concat</span>(<span class="s">&#39;The factorial is: &#39;</span>, <span class="nv">FAtom</span>, <span class="nv">Text</span>),
-    <span class="nv">Result</span> <span class="o">=</span> text(<span class="nv">Text</span>).
+    <span class="nv">Result</span> <span class="o">=</span> structured([text(<span class="nv">Text</span>)], <span class="k">{</span><span class="s">&#39;F&#39;</span><span class="o">-</span><span class="nv">F</span><span class="k">}</span>).
 </pre></div>
 </div>
 </section>

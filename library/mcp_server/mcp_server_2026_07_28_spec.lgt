@@ -453,7 +453,7 @@
 					Result = error(Error)
 				) ->
 				handle_round_result(complete(Result), tool, ToolName, Id, Output, Options)
-			;	handle_round_result(complete(error('Tool execution failed')), tool, ToolName, Id, Output, Options)
+			;	handle_round_result(complete(failure), tool, ToolName, Id, Output, Options)
 			)
 		).
 
@@ -654,6 +654,11 @@
 		;	write_to_atom(Error, ErrorText)
 		),
 		Content = [{type-text, text-ErrorText}],
+		Result = {content-Content, isError- @true, resultType-complete},
+		send_result(Id, Result, Output).
+	format_complete_result(failure, tool, _, Id, Output, _) :-
+		!,
+		Content = [{type-text, text-'Tool predicate failed'}],
 		Result = {content-Content, isError- @true, resultType-complete},
 		send_result(Id, Result, Output).
 	format_complete_result(results(Items), tool, _, Id, Output, _) :-

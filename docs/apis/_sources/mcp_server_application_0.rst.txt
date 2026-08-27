@@ -107,7 +107,7 @@ Converts resource descriptors (4-arg or 5-arg) into MCP JSON resource definition
 ``auto_dispatch_tool/5``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Auto-dispatches a tool call by calling the predicate on the application, collecting output-mode arguments, and returning a text result.
+Auto-dispatches a tool call by calling the predicate on the application, collecting output-mode arguments, and returning structured output with a backwards-compatible text content item.
 
 | **Compilation flags:**
 |    ``static``

@@ -209,7 +209,9 @@
 		),
 		is_response(Response),
 		result(Response, Result),
-		has_pair(Result, isError, @true).
+		has_pair(Result, isError, @true),
+		has_pair(Result, content, [ContentItem| _]),
+		has_pair(ContentItem, text, 'Tool predicate failed').
 
 	test(mcp_server_unknown_method_01, deterministic) :-
 		run_mcp_exchange(

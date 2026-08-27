@@ -350,12 +350,21 @@ Logtalk type JSON type
 Auto-dispatch vs. custom ``tool_call/3``
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-By default the server auto-dispatches: it calls the corresponding
-predicate, collects output-mode arguments (``-`` and ``--``), and
-returns them as text content.
+By default the server auto-dispatches a tool call: it binds the
+input-mode arguments (``+``, ``++``, and ``@``), calls the corresponding
+predicate, collects the output-mode arguments (``-`` and ``--``), and
+returns them as ``structuredContent``. For backwards compatibility, it
+also returns the existing human-readable rendering as a ``text/1``
+content item. The tool descriptor's ``inputSchema`` and ``outputSchema``
+are inferred from the predicate documentation. If the predicate fails,
+the server returns an MCP tool error stating ``Tool predicate failed``;
+if it throws an exception, the exception is returned as the tool error.
 
-For custom result formatting, implement ``tool_call/3``. The ``Result``
-term can be:
+For custom result formatting, including a ``structuredContent`` result
+matching the tool's output schema, implement ``tool_call/3``. When an
+output schema is advertised, a successful custom result must use
+``structured/1`` or ``structured/2`` and conform to that schema. The
+``Result`` term can be:
 
 - ``text(Atom)`` - a text result
 - ``error(Atom)`` - a tool-level error (``isError: true``)
@@ -375,7 +384,7 @@ For example:
        number_codes(F, Codes),
        atom_codes(FAtom, Codes),
        atom_concat('The factorial is: ', FAtom, Text),
-       Result = text(Text).
+       Result = structured([text(Text)], {'F'-F}).
 
 Input/Output schemas (structured tool input/output)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
