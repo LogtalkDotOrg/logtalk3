@@ -55,6 +55,12 @@
 		tool(identify_bird, identify_bird, 0)
 	]).
 
+	output_schema(identify_bird, {
+		type-object,
+		properties-{message-{type-string}},
+		required-[message]
+	}).
+
 	:- public(identify_bird/0).
 	:- mode(identify_bird, one).
 	:- info(identify_bird/0, [
@@ -189,7 +195,7 @@
 		(	find_next(Known, Outcome) ->
 			(	Outcome = identified(Bird) ->
 				atom_concat('Identified bird: ', Bird, Text),
-				RoundResult = complete(structured([text(Text)], {}))
+				RoundResult = complete(structured([text(Text)], {message-Text}))
 			;	Outcome = need_ask(Attribute, Value) ->
 				atom_concat(Attribute, ': ', T1),
 				atom_concat(T1, Value, T2),
@@ -218,9 +224,11 @@
 					State
 				)
 			;	% Outcome == none,
-				RoundResult = complete(structured([text('No bird could be identified from the given characteristics.')], {}))
+				Text = 'No bird could be identified from the given characteristics.',
+				RoundResult = complete(structured([text(Text)], {message-Text}))
 			)
-		;	RoundResult = complete(structured([text('No bird could be identified from the given characteristics.')], {}))
+		;	Text = 'No bird could be identified from the given characteristics.',
+			RoundResult = complete(structured([text(Text)], {message-Text}))
 		),
 		clear_known.
 
@@ -302,8 +310,9 @@
 		(	order::leaf(Bird),
 			check(Elicit, Bird) ->
 			atom_concat('Identified bird: ', Bird, Text),
-			Result = structured([text(Text)], {})
-		;	Result = structured([text('No bird could be identified from the given characteristics.')], {})
+			Result = structured([text(Text)], {message-Text})
+		;	Text = 'No bird could be identified from the given characteristics.',
+			Result = structured([text(Text)], {message-Text})
 		).
 
 	check(Elicit, Bird) :-
