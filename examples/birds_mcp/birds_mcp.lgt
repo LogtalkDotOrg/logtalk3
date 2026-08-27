@@ -23,9 +23,9 @@
 	implements([mcp_tool_protocol, mcp_multiround_protocol])).
 
 	:- info([
-		version is 1:1:0,
+		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-14,
+		date is 2026-08-27,
 		comment is 'MCP tool provider for the bird identification expert system. Supports both the 2025-06-18 synchronous elicitation API (``tool_call/4``) and the 2026-07-28 multi-round tool results API (``tool_call_round/4``).',
 		remarks is [
 			'2025-06-18 elicitation' - 'Declares the client ``elicitation`` capability. When the client advertises support, the server sends ``elicitation/create`` requests via the ``Elicit`` closure passed to ``tool_call/4``.',
@@ -246,8 +246,8 @@
 			check(Elicit, Bird) ->
 			bird_name(Bird, Name),
 			atom_concat('Identified bird: ', Name, Text),
-			Result = text(Text)
-		;	Result = text('No bird could be identified from the given characteristics.')
+			Result = structured([text(Text)], {})
+		;	Result = structured([text('No bird could be identified from the given characteristics.')], {})
 		).
 
 	check(Elicit, Bird) :-

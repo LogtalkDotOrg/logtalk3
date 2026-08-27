@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Example',
-		date is 2026-08-25,
+		date is 2026-08-27,
 		comment is 'MCP Apps demo: get-time tool linked to a ``ui://`` HTML view. UI inspired by ``modelcontextprotocol/ext-apps``.'
 	]).
 
@@ -54,7 +54,7 @@
 	]).
 
 	% prefer explicit tool_call/3 so the result is a clean text content item
-	tool_call(get_time, _ArgPairs, text(Text)) :-
+	tool_call(get_time, _ArgPairs, structured([text(Text)], {})) :-
 		date_time(Year, Month, Day, Hours, Minutes, Seconds, _),
 		format_date_time(date_time(Year, Month, Day, Hours, Minutes, Seconds), 0, date_time_medium, Text).
 
