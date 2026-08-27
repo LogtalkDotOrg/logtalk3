@@ -202,7 +202,7 @@
 				atom_concat(T2, '?', Message),
 				Schema = {
 					type-object,
-					properties-{answer-{type-string, enum-[yes, no]}},
+					properties-{answer-{type-string, title-Message, enum-[yes, no]}},
 					required-[answer]
 				},
 				encode_state(Known, ask(Attribute, Value), State),
@@ -215,7 +215,7 @@
 				atom_concat(Temp, '?', Message),
 				Schema = {
 					type-object,
-					properties-{answer-{type-string, enum-Menu}},
+					properties-{answer-{type-string, title-Message, enum-Menu}},
 					required-[answer]
 				},
 				encode_state(Known, menu(Attribute, Value, Menu), State),
@@ -363,7 +363,7 @@
 		Schema = {
 			type-object,
 			properties-{
-				answer-{type-string, enum-[yes, no]}
+				answer-{type-string, title-Message, enum-[yes, no]}
 			},
 			required-[answer]
 		},
@@ -383,7 +383,7 @@
 		Schema = {
 			type-object,
 			properties-{
-				answer-{type-string, enum-Menu}
+				answer-{type-string, title-Message, enum-Menu}
 			},
 			required-[answer]
 		},
