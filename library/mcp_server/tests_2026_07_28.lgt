@@ -184,7 +184,7 @@
 		result(Response, Result),
 		has_pair(Result, resultType, input_required),
 		has_pair(Result, inputRequests, Requests),
-		Requests = [_| _],
+		Requests = {_},
 		has_pair(Result, requestState, waiting_for_name),
 		% No cache fields on input_required
 		\+ has_pair(Result, ttlMs, _),
