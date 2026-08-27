@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-26,
+		date is 2026-08-27,
 		comment is 'MCP 2026-07-28 protocol handler. Returns reply/1, reply_with_progress/2, subscribe/3, accepted, or no_reply outcomes. Does not write to streams; transports render outcomes.'
 	]).
 
@@ -594,26 +594,36 @@
 	handle_round_result(Other, _Kind, _Key, Id, Output, _) :-
 		send_error(Id, -32603, Other, Output).
 
+	% InputRequiredResult (MCP 2026-07-28): inputRequests is a *map* keyed by
+	% server-assigned ids (not an array); requestState is an opaque *string*;
+	% at least one of the two fields MUST be present on the wire.
 	validate_input_required(InputRequests, RequestState, Id, Output) :-
 		(	(InputRequests = [_| _] ; RequestState \== none) ->
 			(	unique_keys(InputRequests) ->
-				input_requests_to_json(InputRequests, JsonRequests),
-				(	RequestState == none ->
-					Result = {
-						resultType-input_required,
-						inputRequests-JsonRequests
-					}
-				;	Result = {
-						resultType-input_required,
-						inputRequests-JsonRequests,
-						requestState-RequestState
-					}
-				),
+				build_input_required_result(InputRequests, RequestState, Result),
 				send_result(Id, Result, Output)
 			;	send_error(Id, -32602, 'Duplicate input request keys', Output)
 			)
 		;	send_error(Id, -32602, 'input_required must have nonempty requests or non-none state', Output)
 		).
+
+	build_input_required_result(InputRequests, RequestState, Result) :-
+		Pairs0 = [resultType-input_required],
+		(	InputRequests = [_| _] ->
+			input_requests_to_json(InputRequests, JsonRequests),
+			Pairs1 = [inputRequests-JsonRequests| Pairs0]
+		;	Pairs1 = Pairs0
+		),
+		(	RequestState == none ->
+			Pairs2 = Pairs1
+		;	% requestState must be a string on the wire
+			(	atom(RequestState) ->
+				StateAtom = RequestState
+			;	write_to_atom(RequestState, StateAtom)
+			),
+			Pairs2 = [requestState-StateAtom| Pairs1]
+		),
+		^^pairs_to_curly(Pairs2, Result).
 
 	unique_keys(Requests) :-
 		findall(K, member(input_request(K, _), Requests), Keys),
@@ -621,24 +631,38 @@
 		length(Keys, N),
 		length(Sorted, N).
 
-	input_requests_to_json([], []).
-	input_requests_to_json([input_request(Key, Request)| Rest], [Json| JsonRest]) :-
-		request_to_json(Request, Key, Json),
-		input_requests_to_json(Rest, JsonRest).
+	% Encode as a map: { Key1-RequestJson1, Key2-RequestJson2, ... }
+	input_requests_to_json([], {}) :-
+		!.
+	input_requests_to_json(Requests, Curly) :-
+		findall(Key-Json, (
+			member(input_request(Key, Request), Requests),
+			request_to_json(Request, Json)
+		), Pairs),
+		^^pairs_to_curly(Pairs, Curly).
 
-	request_to_json(form_elicitation(Message, Schema), Key, Json) :-
-		Json = {key-Key, method-'elicitation/create', params-{message-Message, requestedSchema-Schema}}.
-	request_to_json(url_elicitation(Message, URL), Key, Json) :-
-		Json = {key-Key, method-'elicitation/create', params-{message-Message, url-URL}}.
-	request_to_json(sampling(Messages, ModelPreferences, SystemPrompt, IncludeContext), Key, Json) :-
-		Json = {key-Key, method-'sampling/createMessage', params-{
-			messages-Messages,
-			modelPreferences-ModelPreferences,
-			systemPrompt-SystemPrompt,
-			includeContext-IncludeContext
-		}}.
-	request_to_json(roots, Key, Json) :-
-		Json = {key-Key, method-'roots/list', params-{}}.
+	request_to_json(form_elicitation(Message, Schema), Json) :-
+		Json = {
+			method-'elicitation/create',
+			params-{mode-form, message-Message, requestedSchema-Schema}
+		}.
+	request_to_json(url_elicitation(Message, URL), Json) :-
+		Json = {
+			method-'elicitation/create',
+			params-{mode-url, message-Message, url-URL}
+		}.
+	request_to_json(sampling(Messages, ModelPreferences, SystemPrompt, IncludeContext), Json) :-
+		Json = {
+			method-'sampling/createMessage',
+			params-{
+				messages-Messages,
+				modelPreferences-ModelPreferences,
+				systemPrompt-SystemPrompt,
+				includeContext-IncludeContext
+			}
+		}.
+	request_to_json(roots, Json) :-
+		Json = {method-'roots/list', params-{}}.
 
 	% format complete results for 2026 wire shape
 
@@ -837,12 +861,20 @@
 
 	% parameter extraction helpers
 
+	% inputResponses on the wire is a map keyed by the same ids used in
+	% inputRequests (MCP 2026-07-28). Also accept a legacy list of items.
 	extract_input_responses(Params, Responses) :-
 		(	^^has_pair(Params, inputResponses, Raw) ->
 			normalize_input_responses(Raw, Responses)
 		;	Responses = []
 		).
 
+	normalize_input_responses({}, []) :-
+		!.
+	normalize_input_responses({Pairs}, Responses) :-
+		!,
+		^^curly_to_pairs({Pairs}, List),
+		normalize_input_response_pairs(List, Responses).
 	normalize_input_responses([], []) :-
 		!.
 	normalize_input_responses([Item| Items], [input_response(Key, Value)| Responses]) :-
@@ -851,8 +883,18 @@
 			true
 		;	Key = unknown
 		),
-		(	^^has_pair(Item, value, Value) ->
-			true
+		normalize_input_response_value(Item, Value),
+		normalize_input_responses(Items, Responses).
+	normalize_input_responses(_, []).
+
+	normalize_input_response_pairs([], []).
+	normalize_input_response_pairs([Key-Item| Rest], [input_response(Key, Value)| Responses]) :-
+		normalize_input_response_value(Item, Value),
+		normalize_input_response_pairs(Rest, Responses).
+
+	normalize_input_response_value(Item, Value) :-
+		(	^^has_pair(Item, value, Value0) ->
+			Value = Value0
 		;	^^has_pair(Item, action, Action) ->
 			(	Action == accept,
 				^^has_pair(Item, content, Content) ->
@@ -864,9 +906,7 @@
 			;	Value = cancel
 			)
 		;	Value = Item
-		),
-		normalize_input_responses(Items, Responses).
-	normalize_input_responses(_, []).
+		).
 
 	extract_request_state(Params, State) :-
 		(	^^has_pair(Params, requestState, State0) ->

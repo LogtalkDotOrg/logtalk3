@@ -39,6 +39,9 @@ The answers guide the expert system through the bird taxonomy.
 
 ## Key concepts demonstrated
 
+- Implementing `mcp_resource_protocol`, defining two resources for
+listing bird attributes and for listing all known birds.
+
 ### 2025-06-18
 
 - Implementing `mcp_tool_protocol` with a requirement for the client

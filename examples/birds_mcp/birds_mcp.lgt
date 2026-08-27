@@ -42,7 +42,7 @@
 	]).
 
 	:- uses(term_io, [
-		write_to_atom/2
+		write_to_atom/2, read_term_from_atom/3
 	]).
 
 	% ==========================================================================
@@ -92,10 +92,12 @@
 	% 2026-07-28 multi-round path
 	% ==========================================================================
 	%
-	% requestState encoding:
-	%   none                             - first round
-	%   bird_state(Known, Pending)       - Known = [known(Answer,Attr,Val)|...]
-	%                                      Pending = ask(Attr,Val) | menu(Attr,Val,Menu)
+	% requestState encoding (MCP 2026-07-28 requires an opaque *string* on the wire):
+	%   none  - first round
+	%   atom  - Prolog term written with write_to_atom/2 of
+	%           {known-[...], pending-{type-..., ...}}
+	%           Known = [known(Answer,Attr,Val)|...]
+	%           Pending = ask(Attr,Val) | menu(Attr,Val,Menu)
 
 	tool_call_round(identify_bird, _Arguments, Context, RoundResult) :-
 		Context = request_context(_ClientCaps, InputResponses, RequestState, _Progress),
@@ -105,13 +107,22 @@
 			apply_responses(Pending, InputResponses, Known0, Known1, Status),
 			(	Status == continue ->
 				next_round(Known1, RoundResult)
-			;	RoundResult = complete(text('No bird could be identified from the given characteristics.'))
+			;	RoundResult = complete(structured([text('No bird could be identified from the given characteristics.')], {}))
 			)
 		;	next_round([], RoundResult)
 		).
 
-	% State is a curly-term: {known-[...], pending-{type-..., ...}}
+	% Accept either a curly-term (in-process) or an atom string echoed by the client.
+	decode_state(StateAtom, Known, Pending) :-
+		atom(StateAtom),
+		StateAtom \== '',
+		catch(read_term_from_atom(StateAtom, State, []), _, fail),
+		!,
+		decode_state_term(State, Known, Pending).
 	decode_state(State, Known, Pending) :-
+		decode_state_term(State, Known, Pending).
+
+	decode_state_term(State, Known, Pending) :-
 		has_pair(State, known, KnownRaw),
 		has_pair(State, pending, PendingRaw),
 		decode_known(KnownRaw, Known),
@@ -134,10 +145,13 @@
 		has_pair(P, value, Val),
 		has_pair(P, menu, Menu).
 
-	encode_state(Known, Pending, State) :-
+	% Always produce an atom so the adapter can put requestState as a string
+	% on the wire without further transformation surprises.
+	encode_state(Known, Pending, StateAtom) :-
 		encode_known(Known, KnownJson),
 		encode_pending(Pending, PendingJson),
-		State = {known-KnownJson, pending-PendingJson}.
+		Term = {known-KnownJson, pending-PendingJson},
+		write_to_atom(Term, StateAtom).
 
 	encode_known([], []).
 	encode_known([known(A, Attr, V)| Rest], [{answer-A, attribute-Attr, value-V}| Out]) :-
@@ -176,7 +190,7 @@
 			(	Outcome = identified(Bird) ->
 				bird_name(Bird, Name),
 				atom_concat('Identified bird: ', Name, Text),
-				RoundResult = complete(text(Text))
+				RoundResult = complete(structured([text(Text)], {}))
 			;	Outcome = need_ask(Attribute, Value) ->
 				atom_concat(Attribute, ': ', T1),
 				atom_concat(T1, Value, T2),
@@ -206,13 +220,18 @@
 					State
 				)
 			)
-		;	RoundResult = complete(text('No bird could be identified from the given characteristics.'))
+		;	RoundResult = complete(structured([text('No bird could be identified from the given characteristics.')], {}))
 		),
 		clear_known.
 
-	% Find either a fully matching bird or the next unanswered descriptor
+	% Find either a fully matching bird or the next unanswered descriptor.
+	% Only consider birds still possible given answers already known; without
+	% this filter, a menu answer other than the first bird's expected value
+	% leaves that bird "unsatisfied" and the same menu is re-asked forever
+	% (appearing as if only the first option is accepted).
 	find_next(_Known, Outcome) :-
 		order::leaf(Bird),
+		bird_possible(Bird),
 		(	bird_fully_matched(Bird) ->
 			Outcome = identified(Bird)
 		;	next_unanswered(Bird, Question) ->
@@ -224,6 +243,21 @@
 		),
 		!.
 	find_next(_, none).
+
+	% A bird is still possible unless some known answer contradicts one of its
+	% descriptors (different yes-value for the same attribute, or an explicit no).
+	bird_possible(Bird) :-
+		forall(
+			(order::descriptor(Name/Arity), functor(Predicate, Name, Arity), Bird::Predicate),
+			\+ descriptor_contradicted(Predicate)
+		).
+
+	descriptor_contradicted(Predicate) :-
+		Predicate =.. [Attribute, Value],
+		(	known_(yes, Attribute, Other),
+			Other \== Value
+		;	known_(no, Attribute, Value)
+		).
 
 	bird_fully_matched(Bird) :-
 		forall(
