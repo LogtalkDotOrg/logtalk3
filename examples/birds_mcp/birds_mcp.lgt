@@ -188,8 +188,7 @@
 		setup_known(Known),
 		(	find_next(Known, Outcome) ->
 			(	Outcome = identified(Bird) ->
-				bird_name(Bird, Name),
-				atom_concat('Identified bird: ', Name, Text),
+				atom_concat('Identified bird: ', Bird, Text),
 				RoundResult = complete(structured([text(Text)], {}))
 			;	Outcome = need_ask(Attribute, Value) ->
 				atom_concat(Attribute, ': ', T1),
@@ -208,10 +207,9 @@
 			;	Outcome = need_menu(Attribute, Value, Menu) ->
 				atom_concat('What is the value for ', Attribute, Temp),
 				atom_concat(Temp, '?', Message),
-				atoms_to_enum(Menu, EnumList),
 				Schema = {
 					type-object,
-					properties-{answer-{type-string, enum-EnumList}},
+					properties-{answer-{type-string, enum-Menu}},
 					required-[answer]
 				},
 				encode_state(Known, menu(Attribute, Value, Menu), State),
@@ -303,8 +301,7 @@
 		retractall(known_(_, _, _)),
 		(	order::leaf(Bird),
 			check(Elicit, Bird) ->
-			bird_name(Bird, Name),
-			atom_concat('Identified bird: ', Name, Text),
+			atom_concat('Identified bird: ', Bird, Text),
 			Result = structured([text(Text)], {})
 		;	Result = structured([text('No bird could be identified from the given characteristics.')], {})
 		).
@@ -374,11 +371,10 @@
 	menuask(Elicit, Attribute, AskValue, Menu) :-
 		atom_concat('What is the value for ', Attribute, Temp),
 		atom_concat(Temp, '?', Message),
-		atoms_to_enum(Menu, EnumList),
 		Schema = {
 			type-object,
 			properties-{
-				answer-{type-string, enum-EnumList}
+				answer-{type-string, enum-Menu}
 			},
 			required-[answer]
 		},
@@ -393,13 +389,6 @@
 	% ==========================================================================
 	% Auxiliary predicates
 	% ==========================================================================
-
-	bird_name(Bird, Name) :-
-		write_to_atom(Bird, Name).
-
-	atoms_to_enum([], []).
-	atoms_to_enum([Atom| Rest], [Atom| EnumRest]) :-
-		atoms_to_enum(Rest, EnumRest).
 
 	has_pair({Pairs}, Key, Value) :-
 		curly_member(Key-Value, Pairs).
