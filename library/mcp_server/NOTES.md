@@ -295,7 +295,7 @@ Supported Logtalk types and their JSON Schema counterparts:
 | (other)      | `string`  |
 
 
-### Auto-dispatch vs. custom `tool_call/3`
+### Auto-dispatch
 
 By default the server auto-dispatches a tool call: it binds the input-mode
 arguments (`+`, `++`, and `@`), calls the corresponding predicate, collects
@@ -307,29 +307,7 @@ If the predicate fails, the server returns an MCP tool error stating `Tool
 predicate failed`; if it throws an exception, the exception is returned as the
 tool error.
 
-For custom result formatting, including a `structuredContent` result matching
-the tool's output schema, implement `tool_call/3`. When an output schema is
-advertised, a successful custom result must use `structured/1` or `structured/2`
-and conform to that schema. The `Result` term can be:
-
-- `text(Atom)` - a text result
-- `error(Atom)` - a tool-level error (`isError: true`)
-- `results(List)` - content items (`text/1`, `error/1`, `resource_link/2`, `resource_link/4`)
-- `structured(StructuredContent)` - structured output with auto text
-- `structured(Items, StructuredContent)` - structured output with explicit content items
-
-For example:
-
-	tool_call(factorial, Arguments, Result) :-
-		member('N'-N, Arguments),
-		factorial(N, F),
-		number_codes(F, Codes),
-		atom_codes(FAtom, Codes),
-		atom_concat('The factorial is: ', FAtom, Text),
-		Result = structured([text(Text)], {'F'-F}).
-
-
-### Input/Output schemas (structured tool input/output)
+### Overriding input/output schemas
 
 Tools can override an inferred input or output schema by defining
 `input_schema/2` or `output_schema/2` in their application object:
@@ -344,12 +322,42 @@ Tools can override an inferred input or output schema by defining
 		properties-{'F'-{type-integer}}, required-['F']
 	}).
 
-The tool descriptor always includes inferred `inputSchema` and `outputSchema`
-fields; explicit schemas replace the respective inferred field. The tool's
-`tool_call/3` predicate can then
-return `structured(StructuredContent)` or `structured(Items, StructuredContent)`
-results. The `StructuredContent` argument must be a curly-term matching the
-schema.
+The tool descriptor always includes `inputSchema` and `outputSchema` fields.
+
+
+### Custom result formatting
+
+For custom result formatting, including a `structuredContent` result matching
+the tool's output schema, implement `tool_call/3`. As an output schema is
+always advertised, a successful custom result must use `structured/1` or
+`structured/2` and conform to that schema. The `Result` term can be:
+
+- `structured(StructuredContent)` - structured output with auto text
+- `structured(Items, StructuredContent)` - structured output with explicit content items
+
+The content items can be:
+
+- `text(Atom)` - a text result
+- `error(Atom)` - a tool-level error (`isError: true`)
+- `results(List)` - content items (`text/1`, `error/1`, `resource_link/2`, `resource_link/4`)
+
+The `StructuredContent` argument must be a curly-term matching the schema.
+
+For example:
+
+	tool_call(factorial, Arguments, Result) :-
+		member('N'-N, Arguments),
+		factorial(N, F),
+		number_codes(F, Codes),
+		atom_codes(FAtom, Codes),
+		atom_concat('The factorial is: ', FAtom, Text),
+		Result = structured([text(Text)], {'F'-F}).
+
+The `tool_call/3` predicate is specially useful for tool predicates with
+no arguments. In this case, custom text can be used to explain success or
+failure of the tool predicate by returning a `structured([text(Explanation)], {})`
+result. Note that `{}` is the output schema when a predicate have no output
+arguments.
 
 
 Elicitation (2025-06-18 spec)
@@ -529,6 +537,8 @@ addition to `mcp_tool_protocol`, and declare `prompts` in capabilities:
 	:- object(my_prompts,
 		implements([mcp_tool_protocol, mcp_prompt_protocol])).
 
+		:- uses(list, [member/2]).
+
 		capabilities([prompts]).
 
 		tools([]).
@@ -556,8 +566,6 @@ addition to `mcp_tool_protocol`, and declare `prompts` in capabilities:
 			;	PromptText = 'Please provide text to summarize.'
 			),
 			Result = messages([message(user, text(PromptText))]).
-
-		:- uses(list, [member/2]).
 
 	:- end_object.
 
