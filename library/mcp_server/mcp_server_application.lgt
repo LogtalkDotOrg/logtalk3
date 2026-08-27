@@ -53,7 +53,7 @@
 	:- protected(auto_dispatch_tool/5).
 	:- mode(auto_dispatch_tool(+object_identifier, +atom, +integer, +compound, -compound), one).
 	:- info(auto_dispatch_tool/5, [
-		comment is 'Auto-dispatches a tool call by calling the predicate on the application, collecting output-mode arguments, and returning a text result.',
+		comment is 'Auto-dispatches a tool call by calling the predicate on the application, collecting output-mode arguments, and returning structured output with a backwards-compatible text content item.',
 		argnames is ['Application', 'Functor', 'Arity', 'ToolArguments', 'Result']
 	]).
 
@@ -268,9 +268,10 @@
 		Application::Goal,
 		collect_output_arguments(Names, Modes, 1, Goal, OutputPairs),
 		(	OutputPairs == [] ->
-			Result = text('Success')
+			Result = structured([text('Success')], {})
 		;	format_output_pairs(OutputPairs, Text),
-			Result = text(Text)
+			pairs_to_curly(OutputPairs, StructuredContent),
+			Result = structured([text(Text)], StructuredContent)
 		).
 
 	try_tool_call_3(Application, ToolName, Functor, Arity, ArgPairs, ToolArguments, Result) :-

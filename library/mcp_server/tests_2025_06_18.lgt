@@ -177,6 +177,19 @@
 		has_pair(Result, content, [ContentItem| _]),
 		has_pair(ContentItem, text, Text).
 
+	test(mcp_server_tools_call_auto_dispatch_structured_01, true) :-
+		run_mcp_exchange(
+			[tools_call_request(greet, {'Name'-world}, 1)],
+			[Response]
+		),
+		is_response(Response),
+		result(Response, Result),
+		has_pair(Result, content, [ContentItem| _]),
+		has_pair(ContentItem, text, Text),
+		sub_atom(Text, _, _, _, 'Hello, world!'),
+		has_pair(Result, structuredContent, StructuredContent),
+		has_pair(StructuredContent, 'Greeting', 'Hello, world!').
+
 	test(mcp_server_tools_call_add_01, true) :-
 		run_mcp_exchange(
 			[tools_call_request(add, {'X'-3, 'Y'-4}, 1)],

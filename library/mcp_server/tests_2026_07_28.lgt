@@ -159,7 +159,9 @@
 		result(Response, Result),
 		has_pair(Result, resultType, complete),
 		has_pair(Result, content, [Item| _]),
-		has_pair(Item, text, Text).
+		has_pair(Item, text, Text),
+		has_pair(Result, structuredContent, StructuredContent),
+		has_pair(StructuredContent, 'Output', hello).
 
 	test(mcp26_tools_call_unknown_01, deterministic) :-
 		run_2026(
