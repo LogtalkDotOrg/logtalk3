@@ -20,7 +20,7 @@
 
 
 :- object(birds_mcp,
-	implements([mcp_tool_protocol, mcp_multiround_protocol])).
+	implements([mcp_resource_protocol, mcp_tool_protocol, mcp_multiround_protocol])).
 
 	:- info([
 		version is 2:0:0,
@@ -49,7 +49,7 @@
 	% mcp_tool_protocol implementation
 	% ==========================================================================
 
-	capabilities([elicitation]).
+	capabilities([resources, elicitation]).
 
 	tools([
 		tool(identify_bird, identify_bird, 0)
@@ -64,6 +64,29 @@
 	% 2025-06-18 path
 	tool_call(identify_bird, _Arguments, Elicit, Result) :-
 		identify(Elicit, Result).
+
+	% ==========================================================================
+	% mcp_resource_protocol implementation
+	% ==========================================================================
+
+    resources([
+        resource('logtalk://birds/attributes', bird_atributes, 'List of bird attributes', 'application/json'),
+        resource('logtalk://birds/list', list_known_birds, 'List of known birds', 'application/json')
+    ]).
+
+    resource_read('logtalk://birds/attributes', _Arguments, Result) :-
+		findall(Attribute, order::descriptor(Attribute/_), Attributes),
+		write_to_atom(Attributes, Text),
+        Result = contents([
+            text_content('logtalk://birds/attributes', 'application/json', Text)
+        ]).
+
+    resource_read('logtalk://birds/list', _Arguments, Result) :-
+		order::leaves(Birds),
+		write_to_atom(Birds, Text),
+        Result = contents([
+            text_content('logtalk://birds/list', 'application/json', Text)
+        ]).
 
 	% ==========================================================================
 	% 2026-07-28 multi-round path
