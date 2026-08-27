@@ -359,10 +359,12 @@
 % '$lgt_pp_complemented_object_'(Obj, Ctg, Dcl, Def, Rnm)
 :- dynamic('$lgt_pp_complemented_object_'/5).
 
-% '$lgt_pp_file_initialization_'(Goal, Lines)
-:- dynamic('$lgt_pp_file_initialization_'/2).
-% '$lgt_pp_file_entity_initialization_'(Object, Goal, Lines)
-:- dynamic('$lgt_pp_file_entity_initialization_'/3).
+% '$lgt_pp_initialization_order_'(Order)
+:- dynamic('$lgt_pp_initialization_order_'/1).
+% '$lgt_pp_file_initialization_'(Goal, Lines, Order)
+:- dynamic('$lgt_pp_file_initialization_'/3).
+% '$lgt_pp_file_entity_initialization_'(Object, Goal, Lines, Order)
+:- dynamic('$lgt_pp_file_entity_initialization_'/4).
 
 % '$lgt_pp_object_initialization_'(Goal, SourceData, Lines)
 :- dynamic('$lgt_pp_object_initialization_'/3).
@@ -8839,11 +8841,26 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 
 
+% counter to ensure that initialization/1 directive goals are called
+% in the correct order; required to properly handle initialization/1
+% directives found in included files where the saved line positions
+% are for the included file and not for the main file
+
+'$lgt_pp_initialization_order'(Order) :-
+	(	retract('$lgt_pp_initialization_order_'(Order0)) ->
+		Order is Order0 + 1
+	;	Order is 1
+	),
+	assertz('$lgt_pp_initialization_order_'(Order)).
+
+
+
 % cleans up all dynamic predicates used during source file compilation
 
 '$lgt_clean_pp_file_clauses' :-
-	retractall('$lgt_pp_file_initialization_'(_, _)),
-	retractall('$lgt_pp_file_entity_initialization_'(_, _, _)),
+	retractall('$lgt_pp_initialization_order_'(_)),
+	retractall('$lgt_pp_file_initialization_'(_, _, _)),
+	retractall('$lgt_pp_file_entity_initialization_'(_, _, _, _)),
 	retractall('$lgt_pp_file_encoding_'(_, _, _, _)),
 	retractall('$lgt_pp_file_bom_'(_, _)),
 	retractall('$lgt_pp_file_compiler_flag_'(_, _)),
@@ -10161,16 +10178,17 @@ create_logtalk_flag(Flag, Value, Options) :-
 	% initialization directives are collected and moved to the end of file
 	% to minimize compatibility issues with backend Prolog compilers
 	'$lgt_source_file_context'(_File, Lines),
+	'$lgt_pp_initialization_order'(Order),
 	(	Goal = {UserGoal} ->
 		% final goal
 		'$lgt_check'(callable, UserGoal),
-		assertz('$lgt_pp_file_initialization_'(Goal, Lines))
+		assertz('$lgt_pp_file_initialization_'(Goal, Lines, Order))
 	;	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 		% goals are only expanded when compiling a source file
 		'$lgt_expand_file_directive_goal'(Goal, ExpandedGoal),
 		Goal \== ExpandedGoal ->
-		assertz('$lgt_pp_file_initialization_'(ExpandedGoal, Lines))
-	;	assertz('$lgt_pp_file_initialization_'(Goal, Lines))
+		assertz('$lgt_pp_file_initialization_'(ExpandedGoal, Lines, Order))
+	;	assertz('$lgt_pp_file_initialization_'(Goal, Lines, Order))
 	).
 
 '$lgt_compile_file_directive'(op(Priority, Specifier, Operators), Ctx) :-
@@ -24034,19 +24052,19 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_initialization_goal'(InitializationGoal) :-
 	findall(
-		Line-Goal,
-		(	'$lgt_pp_file_entity_initialization_'(_, Goal, Line-_)
-		;	'$lgt_pp_file_initialization_'(Goal, Line-_)
+		Order-Goal,
+		(	'$lgt_pp_file_entity_initialization_'(_, Goal, _, Order)
+		;	'$lgt_pp_file_initialization_'(Goal, _, Order)
 		),
-		LineGoals
+		OrderGoals
 	),
 	% ensure source file textual order for the initialization goals
 	% (this assumes that the backend Prolog system provides access to
 	% read term position...)
-	keysort(LineGoals, SortedLineGoals),
+	keysort(OrderGoals, SortedOrderGoals),
 	findall(
 		Goal,
-		'$lgt_member'(_-Goal, SortedLineGoals),
+		'$lgt_member'(_-Goal, SortedOrderGoals),
 		Goals
 	),
 	'$lgt_list_to_conjunction'(Goals, InitializationGoal).
@@ -24104,7 +24122,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	Goal == true ->
 		true
 	;	'$lgt_pp_referenced_object_'(Object, _File, Lines),
-		assertz('$lgt_pp_file_entity_initialization_'(Object, Goal, Lines))
+		'$lgt_pp_initialization_order'(Order),
+		assertz('$lgt_pp_file_entity_initialization_'(Object, Goal, Lines, Order))
 	).
 
 
@@ -24127,7 +24146,8 @@ create_logtalk_flag(Flag, Value, Options) :-
 	(	Goal == true ->
 		true
 	;	'$lgt_pp_referenced_category_'(Category, _File, Lines),
-		assertz('$lgt_pp_file_entity_initialization_'(Category, Goal, Lines))
+		'$lgt_pp_initialization_order'(Order),
+		assertz('$lgt_pp_file_entity_initialization_'(Category, Goal, Lines, Order))
 	).
 
 

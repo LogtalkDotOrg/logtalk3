@@ -34,6 +34,9 @@ error. Controlled by the `suspicious_calls` flag.
 * ADDED: New linter warning when using a `once/1` goal as an if-then-else or
 soft-cut conditional. Controlled by the `suspicious_calls` flag.
 
+* FIXED: Compiler bug in the handling of `initialization/1` directives found
+in included files where the initialization goals could be called out-of-order.
+
 Prolog adapter and integration files
 ------------------------------------
 
