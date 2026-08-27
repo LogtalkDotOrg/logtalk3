@@ -186,7 +186,7 @@
 
 	next_round(Known, RoundResult) :-
 		setup_known(Known),
-		(	catch(find_next(Known, Outcome), _, fail) ->
+		(	find_next(Known, Outcome) ->
 			(	Outcome = identified(Bird) ->
 				bird_name(Bird, Name),
 				atom_concat('Identified bird: ', Name, Text),
@@ -205,7 +205,7 @@
 					[input_request(q, form_elicitation(Message, Schema))],
 					State
 				)
-			;	Outcome = need_menu(Attribute, Value, Menu),
+			;	Outcome = need_menu(Attribute, Value, Menu) ->
 				atom_concat('What is the value for ', Attribute, Temp),
 				atom_concat(Temp, '?', Message),
 				atoms_to_enum(Menu, EnumList),
@@ -219,6 +219,8 @@
 					[input_request(q, form_elicitation(Message, Schema))],
 					State
 				)
+			;	% Outcome == none,
+				RoundResult = complete(structured([text('No bird could be identified from the given characteristics.')], {}))
 			)
 		;	RoundResult = complete(structured([text('No bird could be identified from the given characteristics.')], {}))
 		),
