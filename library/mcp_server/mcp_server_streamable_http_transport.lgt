@@ -455,8 +455,8 @@
 		).
 
 	validate_2026_header(Method, Headers, Meta, Version, Id, ErrorResponse) :-
-		(	header_value(Headers, 'MCP-Protocol-Version', HV) ->
-			(	HV == Version ->
+		(	header_value(Headers, 'MCP-Protocol-Version', HeaderVersion) ->
+			(	HeaderVersion == Version ->
 				validate_2026_caps(Method, Meta, Id, ErrorResponse)
 			;	json_error(Id, -32602, 'HeaderMismatch: MCP-Protocol-Version', ErrorResponse)
 			)

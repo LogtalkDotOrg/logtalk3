@@ -38,6 +38,7 @@ subscriptions).
 - **2026-07-28** (Streamable HTTP) - same protocol semantics as the 2026
   stdio adapter, over HTTP POST with optional SSE for progress and
   long-lived subscriptions. Transport: `mcp_server_streamable_http_transport`.
+  Requires a multi-threaded backend.
 
 The stdio adapters implement simple synchronous handling of server
 requests. As a consequence, client `notifications/cancelled` can only

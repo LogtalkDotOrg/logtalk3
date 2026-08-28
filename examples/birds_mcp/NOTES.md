@@ -32,6 +32,8 @@ It supports **three** entry points:
 | 2026-07-28 (stdio)           | Multi-round `input_required` / `complete` via `tool_call_round/4` | `server_2026_07_28.lgt`      |
 | 2026-07-28 (Streamable HTTP) | Same 2026 protocol over HTTP POST + optional SSE                  | `server_streamable_http.lgt` |
 
+The Streamable HTTP transport requires a multi-threaded backend.
+
 When an MCP client asks to identify a bird, the server asks the user
 questions about bird characteristics (yes/no and multiple-choice menus).
 The answers guide the expert system through the bird taxonomy.

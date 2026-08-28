@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:1:0,
+		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-14,
+		date is 2026-08-28,
 		comment is 'Unit tests for the "birds_mcp" example under the MCP 2026-07-28 adapter (MRTR).'
 	]).
 
@@ -67,7 +67,7 @@
 		result(Response, Result),
 		has_pair(Result, resultType, input_required),
 		has_pair(Result, inputRequests, Requests),
-		Requests = [_| _],
+		Requests = {_},
 		has_pair(Result, requestState, State),
 		State \== none.
 
