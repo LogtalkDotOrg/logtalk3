@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:5:0,
 		author is 'Paulo Moura',
-		date is 2024-10-03,
+		date is 2026-08-28,
 		comment is 'Unit tests for the ISO Prolog standard copy_term/2 built-in predicate.'
 	]).
 
@@ -135,5 +135,8 @@
 
 	test(wg17_copy_term_2_18, variant(T, _ + _)) :-
 		{copy_term(_ + _, T)}.
+
+	test(wg17_copy_term_2_19, true(var(X))) :-
+		{copy_term(X, 3)}.
 
 :- end_object.

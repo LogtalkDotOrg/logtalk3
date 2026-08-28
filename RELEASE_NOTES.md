@@ -293,6 +293,12 @@ spec and add tests covering both MCP 2025-06-18 and 2026-07-28 specs.
 
 * UPDATED: The `errors` example to illustrate the new linter warnings.
 
+Tests
+-----
+
+* ADDED: Additional test for the ISO Prolog starting `copy_term/2` predicate
+taken from a Ulrich Neumerkel bug report.
+
 Contributions
 -------------
 
