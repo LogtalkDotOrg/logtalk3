@@ -84,7 +84,7 @@
 		result(Response, Result),
 		has_pair(Result, resultType, input_required),
 		has_pair(Result, inputRequests, Requests),
-		Requests = [_| _],
+		Requests = {_},
 		has_pair(Result, requestState, State),
 		State \== none.
 
