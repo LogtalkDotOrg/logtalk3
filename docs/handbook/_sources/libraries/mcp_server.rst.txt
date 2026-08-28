@@ -380,6 +380,30 @@ Tools can override an inferred input or output schema by defining
 The tool descriptor always includes ``inputSchema`` and ``outputSchema``
 fields.
 
+Custom ``input_schema/2`` properties may include the MCP Streamable HTTP
+extension key ``x-mcp-header`` (SEP-2243). When present, conforming
+clients mirror that argument into an HTTP header ``Mcp-Param-{suffix}``
+on ``tools/call``. The value must be a non-empty atom; the property
+should be a top-level string, integer, or boolean. Example:
+
+::
+
+   input_schema(execute_sql, {
+       type-object,
+       properties-{
+           region-{type-string, 'x-mcp-header'-'Region'},
+           query-{type-string}
+       },
+       required-[region, query]
+   }).
+
+On Streamable HTTP under the 2026-07-28 spec, the transport validates
+``Mcp-Param-*`` headers against the tool arguments for annotated
+properties (missing header or mismatched value yields a HeaderMismatch /
+invalid params error). Clients on stdio may ignore ``x-mcp-header``. The
+annotation is optional for servers; including it in ``input_schema/2``
+is enough for listing — no extra protocol is required.
+
 Defining ``output_schema/2`` is usually required when a tool predicate
 has no arguments (which results in an inferred empty output schema) to
 ensure wide compatibility with clients. For example, assuming a text
@@ -823,11 +847,24 @@ pass ``protocol_adapter(mcp_server_2026_07_28_adapter)``.
 For Streamable HTTP, start the server with
 ``protocol_adapter(mcp_server_streamable_http_transport)`` and point the
 MCP client at the listen URL (for example
-``http://127.0.0.1:8080/mcp``). Each request should include:
+``http://127.0.0.1:8080/mcp``). Each **2026-07-28** request should
+include:
 
 - ``Content-Type: application/json``
 - ``Accept: application/json, text/event-stream``
-- ``MCP-Protocol-Version: 2026-07-28``
+- ``MCP-Protocol-Version: 2026-07-28`` (must match ``params._meta``
+  protocol version)
+- ``Mcp-Method: <json-rpc-method>`` (e.g. ``server/discover``,
+  ``tools/call``)
+- ``Mcp-Name: <name-or-uri>`` when the method is ``tools/call``,
+  ``prompts/get``, or ``resources/read`` (must match ``params.name`` or
+  ``params.uri``)
+- ``Mcp-Param-<suffix>: <value>`` when the tool's ``inputSchema``
+  annotates a property with ``x-mcp-header`` and that argument is
+  present in the body
+
+Header mismatches use JSON-RPC error code ``-32020``
+(``HeaderMismatch``). Missing required metadata uses ``-32602``.
 
 Error handling
 --------------
@@ -854,6 +891,9 @@ Error handling
 +============+=========================================================+
 | ``-32602`` | Missing/malformed required metadata or invalid          |
 |            | arguments                                               |
++------------+---------------------------------------------------------+
+| ``-32020`` | Header mismatch (``MCP-Protocol-Version``,              |
+|            | ``Mcp-Method``, ``Mcp-Name``, ``Mcp-Param-*``)          |
 +------------+---------------------------------------------------------+
 | ``-32022`` | Unsupported protocol version (``data.supported``,       |
 |            | ``data.requested``)                                     |
@@ -964,8 +1004,6 @@ Supported MCP methods per spec
 | ``server/discover``                          | Request              | Discovery (replaces  |
 |                                              |                      | initialize)          |
 +----------------------------------------------+----------------------+----------------------+
-| ``ping``                                     | Request              | Liveness check       |
-+----------------------------------------------+----------------------+----------------------+
 | ``tools/list``                               | Request              | List tools           |
 +----------------------------------------------+----------------------+----------------------+
 | ``tools/call``                               | Request              | Call a tool          |
@@ -1004,6 +1042,9 @@ Supported MCP methods per spec
 | ``notifications/resources/updated``          | Notification (server | Resource updated     |
 |                                              | -> client)           |                      |
 +----------------------------------------------+----------------------+----------------------+
+
+The ``ping`` method was removed in the 2026-07-28 specification;
+requests for it return method not found (``-32601``).
 
 The 2026-07-28 stdio adapter never writes JSON-RPC **requests** to
 stdout (only responses and notifications). The Streamable HTTP adapter
@@ -1075,3 +1116,8 @@ Resource templates, completion, authorization, and optional
 extensions/tasks are not currently implemented. Streamable HTTP
 transport is implemented by ``mcp_server_streamable_http_transport``
 (2026-07-28 protocol semantics over HTTP POST with optional SSE).
+
+Streamable HTTP 2026 request headers (``MCP-Protocol-Version``,
+``Mcp-Method``, ``Mcp-Name``, and ``Mcp-Param-*`` for ``x-mcp-header``
+annotations) are validated by the transport. OpenTelemetry ``_meta``
+propagation and OAuth are currently not implemented.

@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-25,
+		date is 2026-08-28,
 		comment is 'Unit tests for the get_time MCP Apps example (server-side Apps contract).'
 	]).
 
@@ -85,15 +85,30 @@
 		assertion(sub_atom(HTML, _, _, _, 'get_time')),
 		assertion(sub_atom(HTML, _, _, _, 'ui/initialize')).
 
-	% tools/call text result
+	% tools/call structured result (matches output_schema message field)
 
-	test(get_time_tool_call_returns_text, deterministic((atom(Text), Text \== ''))) :-
-		get_time::tool_call(get_time, [], text(Text)).
+	test(get_time_tool_call_returns_structured_text, deterministic) :-
+		get_time::tool_call(get_time, [], Result),
+		Result = structured([text(Text)], Structured),
+		assertion(atom(Text)),
+		assertion(Text \== ''),
+		has_pair(Structured, message, Message),
+		assertion(Message == Text).
 
 	test(get_time_tool_call_text_looks_like_date_time, deterministic(Length > 0)) :-
 		get_time::tool_call(get_time, [], Result),
-		Result = text(Text),
+		Result = structured([text(Text)], _),
 		% format_date_time(..., date_time_medium, ...) is time-dependent but non-empty
 		atom_length(Text, Length).
+
+	has_pair({Pairs}, Key, Value) :-
+		curly_member(Key-Value, Pairs).
+
+	curly_member(Pair, (Pair, _)) :-
+		!.
+	curly_member(Pair, (_, Rest)) :-
+		!,
+		curly_member(Pair, Rest).
+	curly_member(Pair, Pair).
 
 :- end_object.

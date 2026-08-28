@@ -15,7 +15,7 @@ Specification-independent application logic for MCP servers: tool/prompt/resourc
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-26
+| **Date:** 2026-08-28
 
 | **Compilation flags:**
 |    ``static``
@@ -135,6 +135,44 @@ Tries tool_call/3; on existence_error falls back to auto-dispatch.
 |    ``try_tool_call_3(Application,ToolName,Functor,Arity,ArgPairs,ToolArguments,Result)``
 | **Mode and number of proofs:**
 |    ``try_tool_call_3(+object_identifier,+atom,+atom,+integer,+list,+compound,-compound)`` - ``one``
+
+
+------------
+
+.. index:: tool_input_schema/4
+.. _mcp_server_application/0::tool_input_schema/4:
+
+``tool_input_schema/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Derives a JSON Schema curly-term for tool input arguments from the application object's ``info/2`` and ``mode/2`` directives. Used by Streamable HTTP ``x-mcp-header`` / ``Mcp-Param-*`` validation when the application does not define ``input_schema/2``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``tool_input_schema(Application,Functor,Arity,InputSchema)``
+| **Mode and number of proofs:**
+|    ``tool_input_schema(+object_identifier,+atom,+integer,-compound)`` - ``one``
+
+
+------------
+
+.. index:: tool_output_schema/4
+.. _mcp_server_application/0::tool_output_schema/4:
+
+``tool_output_schema/4``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Derives a JSON Schema curly-term for tool output arguments from the application object's ``info/2`` and ``mode/2`` directives.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``tool_output_schema(Application,Functor,Arity,OutputSchema)``
+| **Mode and number of proofs:**
+|    ``tool_output_schema(+object_identifier,+atom,+integer,-compound)`` - ``one``
 
 
 ------------

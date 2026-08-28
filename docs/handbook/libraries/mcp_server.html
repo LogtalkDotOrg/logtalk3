@@ -875,6 +875,27 @@ output_schema(factorial, <span class="k">{</span>
 </div>
 <p>The tool descriptor always includes <code class="docutils literal notranslate"><span class="pre">inputSchema</span></code> and <code class="docutils literal notranslate"><span class="pre">outputSchema</span></code>
 fields.</p>
+<p>Custom <code class="docutils literal notranslate"><span class="pre">input_schema/2</span></code> properties may include the MCP Streamable HTTP
+extension key <code class="docutils literal notranslate"><span class="pre">x-mcp-header</span></code> (SEP-2243). When present, conforming
+clients mirror that argument into an HTTP header <code class="docutils literal notranslate"><span class="pre">Mcp-Param-{suffix}</span></code>
+on <code class="docutils literal notranslate"><span class="pre">tools/call</span></code>. The value must be a non-empty atom; the property
+should be a top-level string, integer, or boolean. Example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>input_schema(execute_sql, <span class="k">{</span>
+    type<span class="o">-</span>object,
+    properties<span class="o">-</span><span class="k">{</span>
+        region<span class="o">-</span><span class="k">{</span>type<span class="o">-</span>string, <span class="s">&#39;x-mcp-header&#39;</span><span class="o">-</span><span class="s">&#39;Region&#39;</span><span class="k">}</span>,
+        query<span class="o">-</span><span class="k">{</span>type<span class="o">-</span>string<span class="k">}</span>
+    <span class="k">}</span>,
+    required<span class="o">-</span>[region, query]
+<span class="k">}</span>).
+</pre></div>
+</div>
+<p>On Streamable HTTP under the 2026-07-28 spec, the transport validates
+<code class="docutils literal notranslate"><span class="pre">Mcp-Param-*</span></code> headers against the tool arguments for annotated
+properties (missing header or mismatched value yields a HeaderMismatch /
+invalid params error). Clients on stdio may ignore <code class="docutils literal notranslate"><span class="pre">x-mcp-header</span></code>. The
+annotation is optional for servers; including it in <code class="docutils literal notranslate"><span class="pre">input_schema/2</span></code>
+is enough for listing — no extra protocol is required.</p>
 <p>Defining <code class="docutils literal notranslate"><span class="pre">output_schema/2</span></code> is usually required when a tool predicate
 has no arguments (which results in an inferred empty output schema) to
 ensure wide compatibility with clients. For example, assuming a text
@@ -1278,12 +1299,24 @@ pass <code class="docutils literal notranslate"><span class="pre">protocol_adapt
 <p>For Streamable HTTP, start the server with
 <code class="docutils literal notranslate"><span class="pre">protocol_adapter(mcp_server_streamable_http_transport)</span></code> and point the
 MCP client at the listen URL (for example
-<code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8080/mcp</span></code>). Each request should include:</p>
+<code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8080/mcp</span></code>). Each <strong>2026-07-28</strong> request should
+include:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Content-Type:</span> <span class="pre">application/json</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Accept:</span> <span class="pre">application/json,</span> <span class="pre">text/event-stream</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">MCP-Protocol-Version:</span> <span class="pre">2026-07-28</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MCP-Protocol-Version:</span> <span class="pre">2026-07-28</span></code> (must match <code class="docutils literal notranslate"><span class="pre">params._meta</span></code>
+protocol version)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Mcp-Method:</span> <span class="pre">&lt;json-rpc-method&gt;</span></code> (e.g. <code class="docutils literal notranslate"><span class="pre">server/discover</span></code>,
+<code class="docutils literal notranslate"><span class="pre">tools/call</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Mcp-Name:</span> <span class="pre">&lt;name-or-uri&gt;</span></code> when the method is <code class="docutils literal notranslate"><span class="pre">tools/call</span></code>,
+<code class="docutils literal notranslate"><span class="pre">prompts/get</span></code>, or <code class="docutils literal notranslate"><span class="pre">resources/read</span></code> (must match <code class="docutils literal notranslate"><span class="pre">params.name</span></code> or
+<code class="docutils literal notranslate"><span class="pre">params.uri</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Mcp-Param-&lt;suffix&gt;:</span> <span class="pre">&lt;value&gt;</span></code> when the tool’s <code class="docutils literal notranslate"><span class="pre">inputSchema</span></code>
+annotates a property with <code class="docutils literal notranslate"><span class="pre">x-mcp-header</span></code> and that argument is
+present in the body</p></li>
 </ul>
+<p>Header mismatches use JSON-RPC error code <code class="docutils literal notranslate"><span class="pre">-32020</span></code>
+(<code class="docutils literal notranslate"><span class="pre">HeaderMismatch</span></code>). Missing required metadata uses <code class="docutils literal notranslate"><span class="pre">-32602</span></code>.</p>
 </section>
 <section id="error-handling">
 <h2>Error handling<a class="headerlink" href="#error-handling" title="Link to this heading"></a></h2>
@@ -1311,18 +1344,22 @@ term serialized as the error text.</p></li>
 <td><p>Missing/malformed required metadata or invalid
 arguments</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-32022</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-32020</span></code></p></td>
+<td><p>Header mismatch (<code class="docutils literal notranslate"><span class="pre">MCP-Protocol-Version</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Mcp-Method</span></code>, <code class="docutils literal notranslate"><span class="pre">Mcp-Name</span></code>, <code class="docutils literal notranslate"><span class="pre">Mcp-Param-*</span></code>)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-32022</span></code></p></td>
 <td><p>Unsupported protocol version (<code class="docutils literal notranslate"><span class="pre">data.supported</span></code>,
 <code class="docutils literal notranslate"><span class="pre">data.requested</span></code>)</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-32021</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-32021</span></code></p></td>
 <td><p>Missing required client capability
 (<code class="docutils literal notranslate"><span class="pre">data.requiredCapabilities</span></code>)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-32601</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-32601</span></code></p></td>
 <td><p>Unknown or unadvertised method</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">-32603</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">-32603</span></code></p></td>
 <td><p>Internal / execution failure</p></td>
 </tr>
 </tbody>
@@ -1459,78 +1496,76 @@ input</p></td>
 <td><p>Discovery (replaces
 initialize)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ping</span></code></p></td>
-<td><p>Request</p></td>
-<td><p>Liveness check</p></td>
-</tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">tools/list</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tools/list</span></code></p></td>
 <td><p>Request</p></td>
 <td><p>List tools</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tools/call</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">tools/call</span></code></p></td>
 <td><p>Request</p></td>
 <td><p>Call a tool
 (supports MRTR)</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">prompts/list</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">prompts/list</span></code></p></td>
 <td><p>Request</p></td>
 <td><p>List prompts</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">prompts/get</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">prompts/get</span></code></p></td>
 <td><p>Request</p></td>
 <td><p>Get a prompt
 (supports MRTR)</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">resources/list</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">resources/list</span></code></p></td>
 <td><p>Request</p></td>
 <td><p>List resources</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">resources/read</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">resources/read</span></code></p></td>
 <td><p>Request</p></td>
 <td><p>Read a resource
 (supports MRTR)</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">subscriptions/listen</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">subscriptions/listen</span></code></p></td>
 <td><p>Request</p></td>
 <td><p>Open a subscription</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">notifications/cancelled</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">notifications/cancelled</span></code></p></td>
 <td><p>Notification</p></td>
 <td><p>Cancel in-flight
 request</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">notifications/progress</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">notifications/progress</span></code></p></td>
 <td><p>Notification (server
 -&gt; client)</p></td>
 <td><p>Progress update</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">notifications/subscriptions/acknowledged</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">notifications/subscriptions/acknowledged</span></code></p></td>
 <td><p>Notification (server
 -&gt; client)</p></td>
 <td><p>Subscription ack</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">notifications/tools/list_changed</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">notifications/tools/list_changed</span></code></p></td>
 <td><p>Notification (server
 -&gt; client)</p></td>
 <td><p>Tools changed</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">notifications/prompts/list_changed</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">notifications/prompts/list_changed</span></code></p></td>
 <td><p>Notification (server
 -&gt; client)</p></td>
 <td><p>Prompts changed</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">notifications/resources/list_changed</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">notifications/resources/list_changed</span></code></p></td>
 <td><p>Notification (server
 -&gt; client)</p></td>
 <td><p>Resources changed</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">notifications/resources/updated</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">notifications/resources/updated</span></code></p></td>
 <td><p>Notification (server
 -&gt; client)</p></td>
 <td><p>Resource updated</p></td>
 </tr>
 </tbody>
 </table>
+<p>The <code class="docutils literal notranslate"><span class="pre">ping</span></code> method was removed in the 2026-07-28 specification;
+requests for it return method not found (<code class="docutils literal notranslate"><span class="pre">-32601</span></code>).</p>
 <p>The 2026-07-28 stdio adapter never writes JSON-RPC <strong>requests</strong> to
 stdout (only responses and notifications). The Streamable HTTP adapter
 likewise only returns responses and server-initiated notifications
@@ -1593,6 +1628,10 @@ and <strong>Streamable HTTP</strong>. Spec:</p>
 extensions/tasks are not currently implemented. Streamable HTTP
 transport is implemented by <code class="docutils literal notranslate"><span class="pre">mcp_server_streamable_http_transport</span></code>
 (2026-07-28 protocol semantics over HTTP POST with optional SSE).</p>
+<p>Streamable HTTP 2026 request headers (<code class="docutils literal notranslate"><span class="pre">MCP-Protocol-Version</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Mcp-Method</span></code>, <code class="docutils literal notranslate"><span class="pre">Mcp-Name</span></code>, and <code class="docutils literal notranslate"><span class="pre">Mcp-Param-*</span></code> for <code class="docutils literal notranslate"><span class="pre">x-mcp-header</span></code>
+annotations) are validated by the transport. OpenTelemetry <code class="docutils literal notranslate"><span class="pre">_meta</span></code>
+propagation and OAuth are currently not implemented.</p>
 </section>
 </section>
 

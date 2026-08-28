@@ -449,7 +449,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-08-26</div>
+<div class="line"><strong>Date:</strong> 2026-08-28</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -494,16 +494,18 @@
 <li><p><a class="reference internal" href="#resource-descriptors-to-json-3" id="id5"><code class="docutils literal notranslate"><span class="pre">resource_descriptors_to_json/3</span></code></a></p></li>
 <li><p><a class="reference internal" href="#auto-dispatch-tool-5" id="id6"><code class="docutils literal notranslate"><span class="pre">auto_dispatch_tool/5</span></code></a></p></li>
 <li><p><a class="reference internal" href="#try-tool-call-3-7" id="id7"><code class="docutils literal notranslate"><span class="pre">try_tool_call_3/7</span></code></a></p></li>
-<li><p><a class="reference internal" href="#format-content-items-2" id="id8"><code class="docutils literal notranslate"><span class="pre">format_content_items/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#format-prompt-messages-2" id="id9"><code class="docutils literal notranslate"><span class="pre">format_prompt_messages/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#format-resource-contents-2" id="id10"><code class="docutils literal notranslate"><span class="pre">format_resource_contents/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#has-pair-3" id="id11"><code class="docutils literal notranslate"><span class="pre">has_pair/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#curly-to-pairs-2" id="id12"><code class="docutils literal notranslate"><span class="pre">curly_to_pairs/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#pairs-to-curly-2" id="id13"><code class="docutils literal notranslate"><span class="pre">pairs_to_curly/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#tool-input-schema-4" id="id8"><code class="docutils literal notranslate"><span class="pre">tool_input_schema/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#tool-output-schema-4" id="id9"><code class="docutils literal notranslate"><span class="pre">tool_output_schema/4</span></code></a></p></li>
+<li><p><a class="reference internal" href="#format-content-items-2" id="id10"><code class="docutils literal notranslate"><span class="pre">format_content_items/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#format-prompt-messages-2" id="id11"><code class="docutils literal notranslate"><span class="pre">format_prompt_messages/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#format-resource-contents-2" id="id12"><code class="docutils literal notranslate"><span class="pre">format_resource_contents/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#has-pair-3" id="id13"><code class="docutils literal notranslate"><span class="pre">has_pair/3</span></code></a></p></li>
+<li><p><a class="reference internal" href="#curly-to-pairs-2" id="id14"><code class="docutils literal notranslate"><span class="pre">curly_to_pairs/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#pairs-to-curly-2" id="id15"><code class="docutils literal notranslate"><span class="pre">pairs_to_curly/2</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#private-predicates" id="id14">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id15">Operators</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id16">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id17">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
@@ -616,8 +618,50 @@
 </div>
 <hr class="docutils" />
 </section>
+<section id="tool-input-schema-4">
+<span id="mcp-server-application-0-tool-input-schema-4"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">tool_input_schema/4</span></code></a><a class="headerlink" href="#tool-input-schema-4" title="Link to this heading"></a></h3>
+<p>Derives a JSON Schema curly-term for tool input arguments from the application object’s <code class="docutils literal notranslate"><span class="pre">info/2</span></code> and <code class="docutils literal notranslate"><span class="pre">mode/2</span></code> directives. Used by Streamable HTTP <code class="docutils literal notranslate"><span class="pre">x-mcp-header</span></code> / <code class="docutils literal notranslate"><span class="pre">Mcp-Param-*</span></code> validation when the application does not define <code class="docutils literal notranslate"><span class="pre">input_schema/2</span></code>.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">tool_input_schema(Application,Functor,Arity,InputSchema)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">tool_input_schema(+object_identifier,+atom,+integer,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
+<section id="tool-output-schema-4">
+<span id="mcp-server-application-0-tool-output-schema-4"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">tool_output_schema/4</span></code></a><a class="headerlink" href="#tool-output-schema-4" title="Link to this heading"></a></h3>
+<p>Derives a JSON Schema curly-term for tool output arguments from the application object’s <code class="docutils literal notranslate"><span class="pre">info/2</span></code> and <code class="docutils literal notranslate"><span class="pre">mode/2</span></code> directives.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">tool_output_schema(Application,Functor,Arity,OutputSchema)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">tool_output_schema(+object_identifier,+atom,+integer,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+</div>
+</div>
+<hr class="docutils" />
+</section>
 <section id="format-content-items-2">
-<span id="mcp-server-application-0-format-content-items-2"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">format_content_items/2</span></code></a><a class="headerlink" href="#format-content-items-2" title="Link to this heading"></a></h3>
+<span id="mcp-server-application-0-format-content-items-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">format_content_items/2</span></code></a><a class="headerlink" href="#format-content-items-2" title="Link to this heading"></a></h3>
 <p>Converts canonical content item terms into MCP JSON content array elements.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -638,7 +682,7 @@
 <hr class="docutils" />
 </section>
 <section id="format-prompt-messages-2">
-<span id="mcp-server-application-0-format-prompt-messages-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">format_prompt_messages/2</span></code></a><a class="headerlink" href="#format-prompt-messages-2" title="Link to this heading"></a></h3>
+<span id="mcp-server-application-0-format-prompt-messages-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">format_prompt_messages/2</span></code></a><a class="headerlink" href="#format-prompt-messages-2" title="Link to this heading"></a></h3>
 <p>Converts message(Role, text(Text)) terms into MCP JSON prompt message objects.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -659,7 +703,7 @@
 <hr class="docutils" />
 </section>
 <section id="format-resource-contents-2">
-<span id="mcp-server-application-0-format-resource-contents-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">format_resource_contents/2</span></code></a><a class="headerlink" href="#format-resource-contents-2" title="Link to this heading"></a></h3>
+<span id="mcp-server-application-0-format-resource-contents-2"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">format_resource_contents/2</span></code></a><a class="headerlink" href="#format-resource-contents-2" title="Link to this heading"></a></h3>
 <p>Converts text_content/3 and blob_content/3 terms into MCP JSON resource content objects.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -680,7 +724,7 @@
 <hr class="docutils" />
 </section>
 <section id="has-pair-3">
-<span id="mcp-server-application-0-has-pair-3"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">has_pair/3</span></code></a><a class="headerlink" href="#has-pair-3" title="Link to this heading"></a></h3>
+<span id="mcp-server-application-0-has-pair-3"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">has_pair/3</span></code></a><a class="headerlink" href="#has-pair-3" title="Link to this heading"></a></h3>
 <p>Looks up a Key-Value pair inside a curly-term.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -701,7 +745,7 @@
 <hr class="docutils" />
 </section>
 <section id="curly-to-pairs-2">
-<span id="mcp-server-application-0-curly-to-pairs-2"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">curly_to_pairs/2</span></code></a><a class="headerlink" href="#curly-to-pairs-2" title="Link to this heading"></a></h3>
+<span id="mcp-server-application-0-curly-to-pairs-2"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">curly_to_pairs/2</span></code></a><a class="headerlink" href="#curly-to-pairs-2" title="Link to this heading"></a></h3>
 <p>Converts a curly-term to a list of Key-Value pairs.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -722,7 +766,7 @@
 <hr class="docutils" />
 </section>
 <section id="pairs-to-curly-2">
-<span id="mcp-server-application-0-pairs-to-curly-2"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">pairs_to_curly/2</span></code></a><a class="headerlink" href="#pairs-to-curly-2" title="Link to this heading"></a></h3>
+<span id="mcp-server-application-0-pairs-to-curly-2"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">pairs_to_curly/2</span></code></a><a class="headerlink" href="#pairs-to-curly-2" title="Link to this heading"></a></h3>
 <p>Converts a list of Key-Value pairs to a curly-term.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>

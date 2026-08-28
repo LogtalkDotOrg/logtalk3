@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-22,
+		date is 2026-08-28,
 		comment is 'Unit tests for the MCP 2026-07-28 adapter.'
 	]).
 
@@ -107,23 +107,23 @@
 
 	% required metadata validation
 
-	test(mcp26_missing_meta_01, deterministic) :-
+	test(mcp26_missing_meta_01, deterministic(Code == -32602)) :-
 		run_2026(
 			test_tools_2026,
 			[bare_request('server/discover', 1)],
 			[Response]
 		),
 		is_error_response(Response),
-		error_code(Response, -32602).
+		error_code(Response, Code).
 
-	test(mcp26_unsupported_version_01, deterministic) :-
+	test(mcp26_unsupported_version_01, deterministic(Code == -32022)) :-
 		run_2026(
 			test_tools_2026,
 			[discover_version_request('2025-06-18', 1)],
 			[Response]
 		),
 		is_error_response(Response),
-		error_code(Response, -32022).
+		error_code(Response, Code).
 
 	test(mcp26_initialize_rejected_01, deterministic) :-
 		run_2026(
@@ -163,14 +163,14 @@
 		has_pair(Result, structuredContent, StructuredContent),
 		has_pair(StructuredContent, 'Output', hello).
 
-	test(mcp26_tools_call_unknown_01, deterministic) :-
+	test(mcp26_tools_call_unknown_01, deterministic(Code == -32602)) :-
 		run_2026(
 			test_tools_2026,
 			[tools_call_request(no_such_tool, {}, 1)],
 			[Response]
 		),
 		is_error_response(Response),
-		error_code(Response, -32602).
+		error_code(Response, Code).
 
 	% MRTR: one-round input_required then complete
 
@@ -218,9 +218,9 @@
 			)],
 			[Response]
 		),
-		is_response(Response),
+		assertion(is_response(Response)),
 		result(Response, Result),
-		has_pair(Result, resultType, complete),
+		assertion(has_pair(Result, resultType, complete)),
 		has_pair(Result, content, [Item| _]),
 		has_pair(Item, text, Text).
 
@@ -232,11 +232,11 @@
 			[prompts_list_request(1)],
 			[Response]
 		),
-		is_response(Response),
+		assertion(is_response(Response)),
 		result(Response, Result),
-		has_pair(Result, resultType, complete),
+		assertion(has_pair(Result, resultType, complete)),
 		has_pair(Result, prompts, Prompts),
-		Prompts = [_| _].
+		assertion(subsumes_term([_| _], Prompts)).
 
 	test(mcp26_prompts_get_complete_01, deterministic) :-
 		run_2026(
@@ -244,10 +244,10 @@
 			[prompts_get_request(greet_prompt, {name-'Bob'}, 1)],
 			[Response]
 		),
-		is_response(Response),
+		assertion(is_response(Response)),
 		result(Response, Result),
-		has_pair(Result, resultType, complete),
-		has_pair(Result, messages, [_| _]).
+		assertion(has_pair(Result, resultType, complete)),
+		assertion(has_pair(Result, messages, [_| _])).
 
 	test(mcp26_prompts_get_mrtr_01, deterministic) :-
 		run_2026(
@@ -255,9 +255,9 @@
 			[prompts_get_request(confirm_prompt, {}, 1)],
 			[Response]
 		),
-		is_response(Response),
+		assertion(is_response(Response)),
 		result(Response, Result),
-		has_pair(Result, resultType, input_required).
+		assertion(has_pair(Result, resultType, input_required)).
 
 	% resources
 
@@ -267,13 +267,13 @@
 			[resources_list_request(1)],
 			[Response]
 		),
-		is_response(Response),
+		assertion(is_response(Response)),
 		result(Response, Result),
-		has_pair(Result, resultType, complete),
+		assertion(has_pair(Result, resultType, complete)),
 		has_pair(Result, resources, Resources),
-		Resources = [_| _],
-		has_pair(Result, ttlMs, _),
-		has_pair(Result, cacheScope, _).
+		assertion(subsumes_term([_, _], Resources)),
+		assertion(has_pair(Result, ttlMs, _)),
+		assertion(has_pair(Result, cacheScope, _)).
 
 	test(mcp26_resources_read_01, deterministic(Text == 'Hello 2026')) :-
 		run_2026(
@@ -281,13 +281,13 @@
 			[resources_read_request('logtalk://test/data', 1)],
 			[Response]
 		),
-		is_response(Response),
+		assertion(is_response(Response)),
 		result(Response, Result),
-		has_pair(Result, resultType, complete),
+		assertion(has_pair(Result, resultType, complete)),
 		has_pair(Result, contents, [Item| _]),
 		has_pair(Item, text, Text),
-		has_pair(Result, ttlMs, 2000),
-		has_pair(Result, cacheScope, private).
+		assertion(has_pair(Result, ttlMs, 2000)),
+		assertion(has_pair(Result, cacheScope, private)).
 
 	test(mcp26_resources_read_mrtr_01, deterministic) :-
 		run_2026(
@@ -299,36 +299,36 @@
 		result(Response, Result),
 		has_pair(Result, resultType, input_required).
 
-	test(mcp26_resources_unknown_01, deterministic) :-
+	test(mcp26_resources_unknown_01, deterministic(Code == -32602)) :-
 		run_2026(
 			test_resources_2026,
 			[resources_read_request('logtalk://test/missing', 1)],
 			[Response]
 		),
 		is_error_response(Response),
-		error_code(Response, -32602).
+		error_code(Response, Code).
 
 	% unknown method
 
-	test(mcp26_unknown_method_01, deterministic) :-
+	test(mcp26_unknown_method_01, deterministic(Code == -32601)) :-
 		run_2026(
 			test_tools_2026,
 			[unknown_method_request(1)],
 			[Response]
 		),
 		is_error_response(Response),
-		error_code(Response, -32601).
+		error_code(Response, Code).
 
-	% ping
+	% ping was removed in MCP 2026-07-28; expect method not found
 
-	test(mcp26_ping_01, deterministic) :-
+	test(mcp26_ping_01, deterministic(Code == -32601)) :-
 		run_2026(
 			test_tools_2026,
 			[ping_request(1)],
 			[Response]
 		),
-		assertion(is_response(Response)),
-		assertion(\+ is_error_response(Response)).
+		is_error_response(Response),
+		error_code(Response, Code).
 
 	% combined capabilities
 
@@ -354,8 +354,8 @@
 			Responses
 		),
 		forall(
-			(member(R, Responses), is_response(R), \+ is_error_response(R)),
-			(result(R, Res), has_pair(Res, resultType, _))
+			(member(Response, Responses), is_response(Response), \+ is_error_response(Response)),
+			(result(Response, Result), assertion(has_pair(Result, resultType, _)))
 		).
 
 	% auxiliary predicates

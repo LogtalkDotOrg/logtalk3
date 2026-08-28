@@ -25,12 +25,13 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-26,
+		date is 2026-08-28,
 		comment is 'Unit tests for the MCP Streamable HTTP transport (2026-07-28 spec over HTTP). Updated for json_body/1, text_body/1, and http_core response/5.'
 	]).
 
 	:- uses(json_rpc, [
-		request/4, is_response/1, is_error_response/1, result/2, error_code/2
+		request/4, is_response/1, is_error_response/1, result/2, error_code/2,
+		method/2, params/2
 	]).
 
 	:- uses(list, [
@@ -287,6 +288,7 @@
 		Headers = [
 			'Origin'-'http://localhost:3000',
 			'MCP-Protocol-Version'-'2026-07-28',
+			'Mcp-Method'-'server/discover',
 			'Accept'-'application/json, text/event-stream',
 			'Content-Type'-'application/json'
 		],
@@ -314,19 +316,21 @@
 			Response = response(http(1,1), status(405, _), _, _, _)
 		)).
 
-	% ping / unknown method
+	% ping was removed in MCP 2026-07-28; expect method not found
 
-	test(http_ping_01, deterministic) :-
+	test(http_ping_01, deterministic(Code == -32601)) :-
 		call_json_rpc(test_tools_2026, ping_request(1), HTTPResponse),
 		http_json_response(HTTPResponse, Response),
-		assertion(is_response(Response)),
-		assertion(\+ is_error_response(Response)).
+		is_error_response(Response),
+		error_code(Response, Code).
 
-	test(http_unknown_method_01, deterministic) :-
+	% unknown method
+
+	test(http_unknown_method_01, deterministic(Code == -32601)) :-
 		call_json_rpc(test_tools_2026, unknown_method_request(1), HTTPResponse),
 		http_json_response(HTTPResponse, Response),
 		is_error_response(Response),
-		error_code(Response, -32601).
+		error_code(Response, Code).
 
 	% auxiliary predicates
 
@@ -347,19 +351,39 @@
 	call_json_rpc(Application, Spec, HTTPResponse) :-
 		spec_to_message(Spec, Message),
 		json_serialize_term(Message, Body),
-		Headers = [
-			'MCP-Protocol-Version'-'2026-07-28',
-			'Accept'-'application/json, text/event-stream',
-			'Content-Type'-'application/json'
-		],
+		request_headers(Message, Headers),
 		with_prepared(Application, [],
 			mcp_server_streamable_http_transport::handle_mcp_request(
 				'POST', Headers, Body, HTTPResponse
 			)
 		).
 
+	% 2026 Streamable HTTP requires MCP-Protocol-Version, Mcp-Method, and
+	% Mcp-Name (for tools/call, prompts/get, resources/read).
+	request_headers(Message, Headers) :-
+		method(Message, Method),
+		Base = [
+			'MCP-Protocol-Version'-'2026-07-28',
+			'Mcp-Method'-Method,
+			'Accept'-'application/json, text/event-stream',
+			'Content-Type'-'application/json'
+		],
+		(	params(Message, Params),
+			method_mcp_name(Method, Params, Name) ->
+			Headers = ['Mcp-Name'-Name| Base]
+		;	Headers = Base
+		).
+
+	method_mcp_name('tools/call', Params, Name) :-
+		has_pair(Params, name, Name).
+	method_mcp_name('prompts/get', Params, Name) :-
+		has_pair(Params, name, Name).
+	method_mcp_name('resources/read', Params, Name) :-
+		has_pair(Params, uri, Name).
+
 	default_headers([
 		'MCP-Protocol-Version'-'2026-07-28',
+		'Mcp-Method'-'server/discover',
 		'Accept'-'application/json, text/event-stream',
 		'Content-Type'-'application/json'
 	]).

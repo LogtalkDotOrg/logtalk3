@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-22,
+		date is 2026-08-28,
 		comment is 'Unit tests for the MCP stdio transport (``mcp_server_stdio_transport``). Spec semantics are covered by ``tests_2025_06_18`` and ``tests_2026_07_28``; this suite focuses on transport selection, framing, and outcome rendering.'
 	]).
 
@@ -190,7 +190,7 @@
 		has_pair(Result, resultType, complete),
 		has_pair(Result, content, [Item| _]),
 		has_pair(Item, text, Text),
-		sub_atom(Text, _, _, _, hello).
+		once(sub_atom(Text, _, _, _, hello)).
 
 	test(stdio_render_mrtr_2026_01, deterministic) :-
 		run_stdio(

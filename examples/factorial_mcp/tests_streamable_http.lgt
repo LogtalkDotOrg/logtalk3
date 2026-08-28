@@ -25,12 +25,13 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-26,
+		date is 2026-08-28,
 		comment is 'Unit tests for the "factorial_mcp" example over the Streamable HTTP adapter.'
 	]).
 
 	:- uses(json_rpc, [
-		request/4, is_response/1, is_error_response/1, result/2
+		request/4, is_response/1, is_error_response/1, result/2,
+		error_code/2, method/2, params/2
 	]).
 
 	:- uses(list, [
@@ -83,11 +84,12 @@
 			)
 		).
 
+	% ping was removed in MCP 2026-07-28; expect method not found
 	test(factorial_http_ping_01, true) :-
 		call_json_rpc(ping_request(1), HTTPResponse),
 		http_json_response(HTTPResponse, Response),
-		assertion(is_response(Response)),
-		assertion(\+ is_error_response(Response)).
+		is_error_response(Response),
+		error_code(Response, -32601).
 
 	% auxiliary predicates
 
@@ -111,16 +113,35 @@
 	call_json_rpc(Spec, HTTPResponse) :-
 		spec_to_message(Spec, Message),
 		json_serialize_term(Message, Body),
-		Headers = [
-			'MCP-Protocol-Version'-'2026-07-28',
-			'Accept'-'application/json, text/event-stream',
-			'Content-Type'-'application/json'
-		],
+		request_headers(Message, Headers),
 		with_prepared(
 			mcp_server_streamable_http_transport::handle_mcp_request(
 				'POST', Headers, Body, HTTPResponse
 			)
 		).
+
+	% 2026 Streamable HTTP requires MCP-Protocol-Version, Mcp-Method, and
+	% Mcp-Name for tools/call, prompts/get, and resources/read.
+	request_headers(Message, Headers) :-
+		method(Message, Method),
+		Base = [
+			'MCP-Protocol-Version'-'2026-07-28',
+			'Mcp-Method'-Method,
+			'Accept'-'application/json, text/event-stream',
+			'Content-Type'-'application/json'
+		],
+		(	params(Message, Params),
+			method_mcp_name(Method, Params, Name) ->
+			Headers = ['Mcp-Name'-Name| Base]
+		;	Headers = Base
+		).
+
+	method_mcp_name('tools/call', Params, Name) :-
+		has_pair(Params, name, Name).
+	method_mcp_name('prompts/get', Params, Name) :-
+		has_pair(Params, name, Name).
+	method_mcp_name('resources/read', Params, Name) :-
+		has_pair(Params, uri, Name).
 
 	http_json_response(http_response(200, Headers, Body), Message) :-
 		memberchk('Content-Type'-CT, Headers),
@@ -146,9 +167,9 @@
 	sse_data_lines([]) -->
 		[].
 	sse_data_lines(Lines) -->
-		"data: ", sse_line(LineCodes), "\n",
+		[0'd,0'a,0't,0'a,0':,32], sse_line(LineCodes), [0'\n],
 		{atom_codes(Line, LineCodes)},
-		(	"\n" -> {Lines = [Line| Rest]}, sse_data_lines(Rest)
+		(	[0'\n] -> {Lines = [Line| Rest]}, sse_data_lines(Rest)
 		;	sse_data_lines_rest(Line, Lines)
 		).
 	sse_data_lines(Lines) -->
@@ -160,12 +181,12 @@
 	sse_line([]) -->
 		[].
 	sse_line([]) -->
-		"\n", !.
+		[0'\n], !.
 	sse_line([C|Cs]) -->
 		[C], {C =\= 0'\n}, sse_line(Cs).
 
 	sse_skip_line -->
-		"\n", !.
+		[0'\n], !.
 	sse_skip_line -->
 		[_], sse_skip_line.
 	sse_skip_line -->

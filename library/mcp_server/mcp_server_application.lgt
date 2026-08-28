@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-26,
+		date is 2026-08-28,
 		comment is 'Specification-independent application logic for MCP servers: tool/prompt/resource descriptor conversion, schema derivation from info/2 and mode/2, auto-dispatch, canonical complete-result terms, curly-term predicates, and MCP Apps (``_meta.ui``) metadata. Imported by both the 2025-06-18 and 2026-07-28 adapters.'
 	]).
 
@@ -62,6 +62,20 @@
 	:- info(try_tool_call_3/7, [
 		comment is 'Tries tool_call/3; on existence_error falls back to auto-dispatch.',
 		argnames is ['Application', 'ToolName', 'Functor', 'Arity', 'ArgPairs', 'ToolArguments', 'Result']
+	]).
+
+	:- protected(tool_input_schema/4).
+	:- mode(tool_input_schema(+object_identifier, +atom, +integer, -compound), one).
+	:- info(tool_input_schema/4, [
+		comment is 'Derives a JSON Schema curly-term for tool input arguments from the application object\'s ``info/2`` and ``mode/2`` directives. Used by Streamable HTTP ``x-mcp-header`` / ``Mcp-Param-*`` validation when the application does not define ``input_schema/2``.',
+		argnames is ['Application', 'Functor', 'Arity', 'InputSchema']
+	]).
+
+	:- protected(tool_output_schema/4).
+	:- mode(tool_output_schema(+object_identifier, +atom, +integer, -compound), one).
+	:- info(tool_output_schema/4, [
+		comment is 'Derives a JSON Schema curly-term for tool output arguments from the application object\'s ``info/2`` and ``mode/2`` directives.',
+		argnames is ['Application', 'Functor', 'Arity', 'OutputSchema']
 	]).
 
 	:- protected(format_content_items/2).

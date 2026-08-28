@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-26,
+		date is 2026-08-28,
 		comment is 'MCP Streamable HTTP transport (2026-07-28). Uses Logtalk ``http_server::serve_until_shutdown/5`` and a dedicated ``http_handler_protocol`` handler object. Supports specs 2025-06-18 and 2026-07-28 selected via the ``spec/1`` option and delegated to ``mcp_server_2025_06_18_spec`` or ``mcp_server_2026_07_28_spec``. Long-lived subscriptions/listen streams emit periodic SSE comment keep-alives (``http_sse_keepalive/1``). Requires a multi-threaded backend for subscriptions/listen.'
 	]).
 
@@ -436,31 +436,170 @@
 
 	% succeeds when the request is invalid, binding ErrorResponse
 	% fails when the request passes 2026 transport/metadata checks
+	%
+	% MCP 2026-07-28 Streamable HTTP requires (SEP-2243, SEP-2575):
+	%   - params._meta with protocolVersion + clientCapabilities
+	%   - MCP-Protocol-Version header matching _meta version
+	%   - Mcp-Method header matching the JSON-RPC method
+	%   - Mcp-Name header when the method names a tool/prompt/resource
+	% Header mismatch uses error code -32020 (HeaderMismatch).
 	validate_2026(Method, Headers, Params, Id, ErrorResponse) :-
 		(	^^has_pair(Params, '_meta', Meta) ->
-			validate_2026_meta(Method, Headers, Meta, Id, ErrorResponse)
+			validate_2026_meta(Method, Headers, Params, Meta, Id, ErrorResponse)
 		;	json_error(Id, -32602, 'Missing required params._meta', ErrorResponse)
 		).
 
-	validate_2026_meta(Method, Headers, Meta, Id, ErrorResponse) :-
+	validate_2026_meta(Method, Headers, Params, Meta, Id, ErrorResponse) :-
 		(	^^has_pair(Meta, 'io.modelcontextprotocol/protocolVersion', Version) ->
-			validate_2026_version(Method, Headers, Meta, Version, Id, ErrorResponse)
+			validate_2026_version(Method, Headers, Params, Meta, Version, Id, ErrorResponse)
 		;	json_error(Id, -32602, 'Missing required protocolVersion in _meta', ErrorResponse)
 		).
 
-	validate_2026_version(Method, Headers, Meta, Version, Id, ErrorResponse) :-
+	validate_2026_version(Method, Headers, Params, Meta, Version, Id, ErrorResponse) :-
 		(	Version == '2026-07-28' ->
-			validate_2026_header(Method, Headers, Meta, Version, Id, ErrorResponse)
+			validate_2026_protocol_header(Method, Headers, Params, Meta, Version, Id, ErrorResponse)
 		;	json_error_data(Id, -32022, 'Unsupported protocol version', {supported-['2026-07-28'], requested-Version}, ErrorResponse)
 		).
 
-	validate_2026_header(Method, Headers, Meta, Version, Id, ErrorResponse) :-
-		(	header_value(Headers, 'MCP-Protocol-Version', HeaderVersion) ->
-			(	HeaderVersion == Version ->
-				validate_2026_caps(Method, Meta, Id, ErrorResponse)
-			;	json_error(Id, -32602, 'HeaderMismatch: MCP-Protocol-Version', ErrorResponse)
+	validate_2026_protocol_header(Method, Headers, Params, Meta, Version, Id, ErrorResponse) :-
+		(	header_value(Headers, 'MCP-Protocol-Version', HV) ->
+			(	HV == Version ->
+				validate_2026_method_header(Method, Headers, Params, Meta, Id, ErrorResponse)
+			;	json_error_data(Id, -32020, 'HeaderMismatch: MCP-Protocol-Version',
+					{header-'MCP-Protocol-Version', expected-Version, actual-HV}, ErrorResponse)
 			)
 		;	json_error(Id, -32602, 'Missing required MCP-Protocol-Version header', ErrorResponse)
+		).
+
+	% Mcp-Method must match the JSON-RPC method (case-sensitive atom equality after
+	% normalizing common casing). Missing header is an invalid params error; wrong
+	% value is HeaderMismatch (-32020).
+	validate_2026_method_header(Method, Headers, Params, Meta, Id, ErrorResponse) :-
+		(	header_value(Headers, 'Mcp-Method', HMethod0) ->
+			normalize_mcp_method_header(HMethod0, HMethod),
+			(	HMethod == Method ->
+				validate_2026_name_header(Method, Headers, Params, Meta, Id, ErrorResponse)
+			;	json_error_data(Id, -32020, 'HeaderMismatch: Mcp-Method',
+					{header-'Mcp-Method', expected-Method, actual-HMethod0}, ErrorResponse)
+			)
+		;	json_error(Id, -32602, 'Missing required Mcp-Method header', ErrorResponse)
+		).
+
+	normalize_mcp_method_header(Header, Method) :-
+		atom(Header),
+		!,
+		Method = Header.
+	normalize_mcp_method_header(Header, Method) :-
+		write_to_atom(Header, Method).
+
+	% Mcp-Name is required for methods that name a tool, prompt, or resource
+	% (tools/call, prompts/get, resources/read). Value must match params.name or
+	% params.uri as appropriate.
+	validate_2026_name_header(Method, Headers, Params, Meta, Id, ErrorResponse) :-
+		method_requires_mcp_name(Method, ParamKey),
+		!,
+		(	header_value(Headers, 'Mcp-Name', HName0) ->
+			normalize_mcp_method_header(HName0, HName),
+			(	^^has_pair(Params, ParamKey, Expected),
+				HName == Expected ->
+				validate_2026_param_headers(Method, Headers, Params, Meta, Id, ErrorResponse)
+			;	^^has_pair(Params, ParamKey, Expected) ->
+				json_error_data(Id, -32020, 'HeaderMismatch: Mcp-Name',
+					{header-'Mcp-Name', expected-Expected, actual-HName0}, ErrorResponse)
+			;	% body missing the name/uri field — leave that to the method handler
+				validate_2026_param_headers(Method, Headers, Params, Meta, Id, ErrorResponse)
+			)
+		;	json_error(Id, -32602, 'Missing required Mcp-Name header', ErrorResponse)
+		).
+	validate_2026_name_header(Method, Headers, Params, Meta, Id, ErrorResponse) :-
+		validate_2026_param_headers(Method, Headers, Params, Meta, Id, ErrorResponse).
+
+	method_requires_mcp_name('tools/call', name).
+	method_requires_mcp_name('prompts/get', name).
+	method_requires_mcp_name('resources/read', uri).
+
+	% SEP-2243: when a tool inputSchema property carries ``x-mcp-header``, the
+	% client MUST mirror that argument into an ``Mcp-Param-{suffix}`` header.
+	% Validate present argument values against headers; mismatch -> -32020.
+	validate_2026_param_headers('tools/call', Headers, Params, Meta, Id, ErrorResponse) :-
+		!,
+		(	^^has_pair(Params, name, ToolName),
+			^^has_pair(Params, arguments, Args) ->
+			(	mcp_param_header_mismatch(ToolName, Args, Headers, Mismatch) ->
+				Mismatch = mismatch(HeaderName, Expected, Actual),
+				json_error_data(Id, -32020, 'HeaderMismatch: Mcp-Param',
+					{header-HeaderName, expected-Expected, actual-Actual}, ErrorResponse)
+			;	mcp_param_header_missing(ToolName, Args, Headers, Missing) ->
+				json_error(Id, -32602, Missing, ErrorResponse)
+			;	validate_2026_caps('tools/call', Meta, Id, ErrorResponse)
+			)
+		;	validate_2026_caps('tools/call', Meta, Id, ErrorResponse)
+		).
+	validate_2026_param_headers(Method, _Headers, _Params, Meta, Id, ErrorResponse) :-
+		validate_2026_caps(Method, Meta, Id, ErrorResponse).
+
+	mcp_param_header_mismatch(ToolName, Args, Headers, mismatch(HeaderName, Expected, Actual)) :-
+		resolve_tool_input_schema(ToolName, Schema),
+		header_annotated_params(Schema, Annotated),
+		member(ParamName-Suffix, Annotated),
+		atom_concat('Mcp-Param-', Suffix, HeaderName),
+		^^has_pair(Args, ParamName, Expected0),
+		normalize_mcp_param_value(Expected0, Expected),
+		header_value(Headers, HeaderName, Actual0),
+		normalize_mcp_param_value(Actual0, Actual),
+		Expected \== Actual,
+		!.
+
+	mcp_param_header_missing(ToolName, Args, Headers, Message) :-
+		resolve_tool_input_schema(ToolName, Schema),
+		header_annotated_params(Schema, Annotated),
+		member(ParamName-Suffix, Annotated),
+		^^has_pair(Args, ParamName, _),
+		atom_concat('Mcp-Param-', Suffix, HeaderName),
+		\+ header_value(Headers, HeaderName, _),
+		!,
+		atom_concat('Missing required header ', HeaderName, Message).
+
+	resolve_tool_input_schema(ToolName, Schema) :-
+		server_options_(Options),
+		^^option(application(Application), Options),
+		Application::tools(Tools),
+		member(tool(ToolName, Functor, Arity), Tools),
+		(	conforms_to_protocol(Application, mcp_tool_protocol),
+			Application::input_schema(ToolName, Schema) ->
+			true
+		;	^^tool_input_schema(Application, Functor, Arity, Schema)
+		).
+
+	header_annotated_params(Schema, Annotated) :-
+		(	^^has_pair(Schema, properties, Props) ->
+			^^curly_to_pairs(Props, Pairs),
+			findall(
+				ParamName-Suffix,
+				(	member(ParamName-PropSchema, Pairs),
+					^^has_pair(PropSchema, 'x-mcp-header', Suffix0),
+					atom(Suffix0),
+					Suffix0 \== '',
+					Suffix = Suffix0
+				),
+				Annotated
+			)
+		;	Annotated = []
+		).
+
+	normalize_mcp_param_value(Value, Atom) :-
+		(	atom(Value) ->
+			Atom = Value
+		;	integer(Value) ->
+			number_codes(Value, Codes),
+			atom_codes(Atom, Codes)
+		;	float(Value) ->
+			write_to_atom(Value, Atom)
+		;	Value == @true ->
+			Atom = true
+		;	Value == @false ->
+			Atom = false
+		;	write_to_atom(Value, Atom)
 		).
 
 	validate_2026_caps(Method, Meta, Id, ErrorResponse) :-
@@ -469,9 +608,9 @@
 		;	json_error(Id, -32602, 'Missing required clientCapabilities in _meta', ErrorResponse)
 		).
 
-	% check_caps/4 succeeds only when binding ErrorResponse (invalid request);
-	% currently, no method requires a specific capability and thus calling this
-	% predicate fails (i.e., no -32021 error for tools/list, ...)
+	% check_capabilities/4 succeeds only when binding ErrorResponse (invalid request).
+	% tools/prompts/resources are server capabilities; clients need not advertise them
+	% (-32021 is reserved for genuine missing *client* capabilities). Currently a no-op.
 	check_capabilities(_Method, _Meta, _Id, _ErrorResponse) :-
 		fail.
 
@@ -492,8 +631,7 @@
 		handle_discover(Params, Id, HTTPResponse).
 	do_dispatch_(initialize, _, Id, HTTPResponse) :-
 		json_error(Id, -32600, 'initialize is not used in MCP 2026-07-28; use server/discover', HTTPResponse).
-	do_dispatch_(ping, _, Id, HTTPResponse) :-
-		json_result(Id, {resultType-complete}, HTTPResponse).
+	% ping was removed in MCP 2026-07-28 (SEP-2575); fall through to method not found
 	do_dispatch_('tools/list', Params, Id, HTTPResponse) :-
 		handle_tools_list(Params, Id, HTTPResponse).
 	do_dispatch_('tools/call', Params, Id, HTTPResponse) :-
@@ -1163,17 +1301,31 @@
 		).
 
 	event_matches(_, []) :-
+		% empty filters match all
 		!.
 	event_matches(Event, Filters) :-
 		event_type(Event, Type),
 		member(F, Filters),
-		(	^^has_pair(F, type, Type) ->
-			true
-		;	F == Type ->
-			true
-		;	fail
-		),
+		filter_matches_type(F, Type),
 		!.
+
+	% Accept short names (tools), camelCase opt-in types from SEP-2575
+	% (toolsListChanged, ...), and {type-...} objects.
+	filter_matches_type(Filter, Type) :-
+		^^has_pair(Filter, type, Type0),
+		!,
+		filter_type_atom(Type0, Type).
+	filter_matches_type(Filter, Type) :-
+		atom(Filter),
+		filter_type_atom(Filter, Type).
+
+	filter_type_atom(tools, tools).
+	filter_type_atom(toolsListChanged, tools).
+	filter_type_atom(prompts, prompts).
+	filter_type_atom(promptsListChanged, prompts).
+	filter_type_atom(resources, resources).
+	filter_type_atom(resourcesListChanged, resources).
+	filter_type_atom(resourceSubscriptions, resources).
 
 	event_type(tools_list_changed, tools).
 	event_type(prompts_list_changed, prompts).

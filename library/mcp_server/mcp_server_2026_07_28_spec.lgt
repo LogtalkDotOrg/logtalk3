@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-27,
+		date is 2026-08-28,
 		comment is 'MCP 2026-07-28 protocol handler. Returns reply/1, reply_with_progress/2, subscribe/3, accepted, or no_reply outcomes. Does not write to streams; transports render outcomes.'
 	]).
 
@@ -305,8 +305,7 @@
 		handle_discover(Params, Id, Output, Options).
 	do_dispatch_(initialize, _Params, Id, Output, _) :-
 		send_error(Id, -32600, 'initialize is not used in MCP 2026-07-28; use server/discover', Output).
-	do_dispatch_(ping, _Params, Id, Output, _) :-
-		send_complete(Id, {}, Output).
+	% ping was removed in MCP 2026-07-28 (SEP-2575); fall through to method_not_found
 	do_dispatch_('tools/list', Params, Id, Output, Options) :-
 		handle_tools_list(Params, Id, Output, Options).
 	do_dispatch_('tools/call', Params, Id, Output, Options) :-
@@ -644,12 +643,12 @@
 	request_to_json(form_elicitation(Message, Schema), Json) :-
 		Json = {
 			method-'elicitation/create',
-			params-{mode-form, message-Message, requestedSchema-Schema}
+			params-{(mode)-form, message-Message, requestedSchema-Schema}
 		}.
 	request_to_json(url_elicitation(Message, URL), Json) :-
 		Json = {
 			method-'elicitation/create',
-			params-{mode-url, message-Message, url-URL}
+			params-{(mode)-url, message-Message, url-URL}
 		}.
 	request_to_json(sampling(Messages, ModelPreferences, SystemPrompt, IncludeContext), Json) :-
 		Json = {
@@ -807,11 +806,26 @@
 	event_matches(Filters, Event) :-
 		event_type(Event, Type),
 		member(Filter, Filters),
-		(	^^has_pair(Filter, type, Type) ->
-			true
-		;	Filter == Type
-		),
+		filter_matches_type(Filter, Type),
 		!.
+
+	% Accept short names (tools), camelCase opt-in types from SEP-2575
+	% (toolsListChanged, …), and {type-…} objects.
+	filter_matches_type(Filter, Type) :-
+		^^has_pair(Filter, type, Type0),
+		!,
+		filter_type_atom(Type0, Type).
+	filter_matches_type(Filter, Type) :-
+		atom(Filter),
+		filter_type_atom(Filter, Type).
+
+	filter_type_atom(tools, tools).
+	filter_type_atom(toolsListChanged, tools).
+	filter_type_atom(prompts, prompts).
+	filter_type_atom(promptsListChanged, prompts).
+	filter_type_atom(resources, resources).
+	filter_type_atom(resourcesListChanged, resources).
+	filter_type_atom(resourceSubscriptions, resources).
 
 	event_type(tools_list_changed, tools).
 	event_type(prompts_list_changed, prompts).
