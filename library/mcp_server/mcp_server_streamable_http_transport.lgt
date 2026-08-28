@@ -459,7 +459,7 @@
 		).
 
 	validate_2026_protocol_header(Method, Headers, Params, Meta, Version, Id, ErrorResponse) :-
-		(	header_value(Headers, mcp_protocol_version, HeaderVersion) ->
+		(	header_value(Headers, 'MCP-Protocol-Version', HeaderVersion) ->
 			(	HeaderVersion == Version ->
 				validate_2026_method_header(Method, Headers, Params, Meta, Id, ErrorResponse)
 			;	json_error_data(Id, -32020, 'HeaderMismatch: MCP-Protocol-Version',
@@ -472,7 +472,7 @@
 	% normalizing common casing). Missing header is an invalid params error; wrong
 	% value is HeaderMismatch (-32020).
 	validate_2026_method_header(Method, Headers, Params, Meta, Id, ErrorResponse) :-
-		(	header_value(Headers, mcp_method, HMethod0) ->
+		(	header_value(Headers, 'Mcp-Method', HMethod0) ->
 			normalize_mcp_method_header(HMethod0, HMethod),
 			(	HMethod == Method ->
 				validate_2026_name_header(Method, Headers, Params, Meta, Id, ErrorResponse)
@@ -495,7 +495,7 @@
 	validate_2026_name_header(Method, Headers, Params, Meta, Id, ErrorResponse) :-
 		method_requires_mcp_name(Method, ParamKey),
 		!,
-		(	header_value(Headers, mcp_name, HName0) ->
+		(	header_value(Headers, 'Mcp-Name', HName0) ->
 			normalize_mcp_method_header(HName0, HName),
 			(	^^has_pair(Params, ParamKey, Expected),
 				HName == Expected ->
@@ -528,12 +528,12 @@
 					{header-HeaderName, expected-Expected, actual-Actual}, ErrorResponse)
 			;	mcp_param_header_missing(ToolName, Args, Headers, Missing) ->
 				json_error(Id, -32602, Missing, ErrorResponse)
-			;	validate_2026_caps('tools/call', Meta, Id, ErrorResponse)
+			;	validate_2026_capabilitiess('tools/call', Meta, Id, ErrorResponse)
 			)
-		;	validate_2026_caps('tools/call', Meta, Id, ErrorResponse)
+		;	validate_2026_capabilitiess('tools/call', Meta, Id, ErrorResponse)
 		).
 	validate_2026_param_headers(Method, _Headers, _Params, Meta, Id, ErrorResponse) :-
-		validate_2026_caps(Method, Meta, Id, ErrorResponse).
+		validate_2026_capabilitiess(Method, Meta, Id, ErrorResponse).
 
 	mcp_param_header_mismatch(ToolName, Args, Headers, mismatch(HeaderName, Expected, Actual)) :-
 		resolve_tool_input_schema(ToolName, Schema),
@@ -599,7 +599,7 @@
 		;	write_to_atom(Value, Atom)
 		).
 
-	validate_2026_caps(Method, Meta, Id, ErrorResponse) :-
+	validate_2026_capabilitiess(Method, Meta, Id, ErrorResponse) :-
 		(	^^has_pair(Meta, 'io.modelcontextprotocol/clientCapabilities', _) ->
 			check_capabilities(Method, Meta, Id, ErrorResponse)
 		;	json_error(Id, -32602, 'Missing required clientCapabilities in _meta', ErrorResponse)
@@ -1393,7 +1393,12 @@
 
 	maplist_lower([], []).
 	maplist_lower([C|Cs], [L|Ls]) :-
-		(C >= 65, C =< 90 -> L is C + 32 ; L = C),
+		(	C >= 65, C =< 90 ->
+			L is C + 32
+		;	C =:= 45 ->
+			L = 95
+		;	L = C
+		),
 		maplist_lower(Cs, Ls).
 
 	validate_origin(Headers) :-

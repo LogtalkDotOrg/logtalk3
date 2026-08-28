@@ -97,15 +97,15 @@
 			HTTPResponse
 		),
 		http_json_response(HTTPResponse, Response),
-		is_response(Response),
-		\+ is_error_response(Response),
+		assertion(is_response(Response)),
+		assertion(\+ is_error_response(Response)),
 		result(Response, Result),
-		has_pair(Result, resultType, complete),
+		assertion(has_pair(Result, resultType, complete)),
 		has_pair(Result, supportedVersions, Versions),
-		memberchk('2026-07-28', Versions),
-		has_pair(Result, capabilities, Caps),
-		has_pair(Caps, tools, _),
-		has_pair(Caps, subscriptions, _).
+		assertion(memberchk('2026-07-28', Versions)),
+		assertion(has_pair(Result, capabilities, Caps)),
+		assertion(has_pair(Caps, tools, _)),
+		assertion(has_pair(Caps, subscriptions, _)).
 
 	test(http_discover_missing_meta_01, deterministic) :-
 		call_json_rpc(
@@ -176,11 +176,11 @@
 			HTTPResponse
 		),
 		http_json_response(HTTPResponse, Response),
-		is_response(Response),
+		assertion(is_response(Response)),
 		result(Response, Result),
-		has_pair(Result, resultType, input_required),
-		has_pair(Result, inputRequests, [_| _]),
-		has_pair(Result, requestState, waiting_for_name).
+		assertion(has_pair(Result, resultType, input_required)),
+		has_pair(Result, inputRequests, {_}),
+		assertion(has_pair(Result, requestState, waiting_for_name)).
 
 	test(http_mrtr_complete_01, deterministic(sub_atom(Text, _, _, _, 'Alice'))) :-
 		call_json_rpc(
