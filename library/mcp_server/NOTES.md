@@ -324,6 +324,21 @@ Tools can override an inferred input or output schema by defining
 
 The tool descriptor always includes `inputSchema` and `outputSchema` fields.
 
+Defining `output_schema/2` is usually required when a tool predicate has no
+arguments (which results in an inferred empty output schema) to ensure wide
+compatibility with clients. For example, assuming a text output that we want
+to ensure that is received by all clients:
+
+	output_schema(tool_predicate, {
+		type-object,
+		properties-{message-{type-string}},
+		required-[message]
+	}).
+
+Combine this with a `tool_call/3` predicate definition (see below) that binds
+the result argument to either `structured([text(Text)], {message-Text})` or
+`structured({message-Text})`.
+
 
 ### Custom result formatting
 

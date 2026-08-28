@@ -874,6 +874,21 @@ output_schema(factorial, <span class="k">{</span>
 </div>
 <p>The tool descriptor always includes <code class="docutils literal notranslate"><span class="pre">inputSchema</span></code> and <code class="docutils literal notranslate"><span class="pre">outputSchema</span></code>
 fields.</p>
+<p>Defining <code class="docutils literal notranslate"><span class="pre">output_schema/2</span></code> is usually required when a tool predicate
+has no arguments (which results in an inferred empty output schema) to
+ensure wide compatibility with clients. For example, assuming a text
+output that we want to ensure that is received by all clients:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>output_schema(tool_predicate, <span class="k">{</span>
+    type<span class="o">-</span>object,
+    properties<span class="o">-</span><span class="k">{</span>message<span class="o">-</span><span class="k">{</span>type<span class="o">-</span>string<span class="k">}}</span>,
+    required<span class="o">-</span>[message]
+<span class="k">}</span>).
+</pre></div>
+</div>
+<p>Combine this with a <code class="docutils literal notranslate"><span class="pre">tool_call/3</span></code> predicate definition (see below)
+that binds the result argument to either
+<code class="docutils literal notranslate"><span class="pre">structured([text(Text)],</span> <span class="pre">{message-Text})</span></code> or
+<code class="docutils literal notranslate"><span class="pre">structured({message-Text})</span></code>.</p>
 </section>
 <section id="custom-result-formatting">
 <h3>Custom result formatting<a class="headerlink" href="#custom-result-formatting" title="Link to this heading"></a></h3>
