@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Example',
-		date is 2026-08-27,
+		date is 2026-08-28,
 		comment is 'MCP Apps demo: get-time tool linked to a ``ui://`` HTML view. UI inspired by ``modelcontextprotocol/ext-apps``.'
 	]).
 
@@ -53,8 +53,18 @@
 		tool(get_time, get_time, 0)
 	]).
 
+	% override the inferred empty output schema from the predicate declaration
+	% (as the predicate have no arguments) to ensure a non-empty string result
+	% (as required by e.g. VSCode) represented using the StructuredContent
+	% argument in the structured(Items, StructuredContent) term in tool_call/3
+	output_schema(get_time, {
+		type-object,
+		properties-{message-{type-string}},
+		required-[message]
+	}).
+
 	% prefer explicit tool_call/3 so the result is a clean text content item
-	tool_call(get_time, _ArgPairs, structured([text(Text)], {})) :-
+	tool_call(get_time, _ArgPairs, structured([text(Text)], {message-Text})) :-
 		date_time(Year, Month, Day, Hours, Minutes, Seconds, _),
 		format_date_time(date_time(Year, Month, Day, Hours, Minutes, Seconds), 0, date_time_medium, Text).
 

@@ -25,13 +25,19 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-27,
+		date is 2026-08-28,
 		comment is 'MCP tool provider for the bird identification expert system. Supports both the 2025-06-18 synchronous elicitation API (``tool_call/4``) and the 2026-07-28 multi-round tool results API (``tool_call_round/4``).',
 		remarks is [
 			'2025-06-18 elicitation' - 'Declares the client ``elicitation`` capability. When the client advertises support, the server sends ``elicitation/create`` requests via the ``Elicit`` closure passed to ``tool_call/4``.',
 			'2026-07-28 MRTR' - 'Implements ``tool_call_round/4`` from ``mcp_multiround_protocol``. Each round either returns ``input_required`` with the next yes/no or menu question, or ``complete`` with the identification result. Known answers are carried in opaque ``requestState``.',
 			'Knowledge base' - 'Uses the bird taxonomy from the ``birds`` example (the ``order`` prototype hierarchy).'
 		]
+	]).
+
+	:- public(identify_bird/0).
+	:- mode(identify_bird, one).
+	:- info(identify_bird/0, [
+		comment is 'Identifies a bird by asking the user questions about its characteristics. Under 2025-06-18 uses synchronous MCP elicitation; under 2026-07-28 uses multi-round input_required results.'
 	]).
 
 	:- private(known_/3).
@@ -55,17 +61,16 @@
 		tool(identify_bird, identify_bird, 0)
 	]).
 
+	% override the inferred empty output schema from the predicate declaration
+	% (as the predicate have no arguments) to ensure a non-empty string result
+	% (as required by e.g. VSCode) represented using the StructuredContent
+	% argument in the structured(Items, StructuredContent) terms used to return
+	% the tool results
 	output_schema(identify_bird, {
 		type-object,
 		properties-{message-{type-string}},
 		required-[message]
 	}).
-
-	:- public(identify_bird/0).
-	:- mode(identify_bird, one).
-	:- info(identify_bird/0, [
-		comment is 'Identifies a bird by asking the user questions about its characteristics. Under 2025-06-18 uses synchronous MCP elicitation; under 2026-07-28 uses multi-round input_required results.'
-	]).
 
 	% 2025-06-18 path
 	tool_call(identify_bird, _Arguments, Elicit, Result) :-
@@ -113,7 +118,8 @@
 			apply_responses(Pending, InputResponses, Known0, Known1, Status),
 			(	Status == continue ->
 				next_round(Known1, RoundResult)
-			;	RoundResult = complete(structured([text('No bird could be identified from the given characteristics.')], {}))
+			;	Text = 'No bird could be identified from the given characteristics.',
+				RoundResult = complete(structured([text(Text)], {message-Text}))
 			)
 		;	next_round([], RoundResult)
 		).
