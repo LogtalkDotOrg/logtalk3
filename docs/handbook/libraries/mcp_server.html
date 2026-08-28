@@ -497,8 +497,14 @@ link in a web browser.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(mcp_server(tester)).
 </pre></div>
 </div>
-<p>This runs the 2025-06-18, 2026-07-28 (stdio), and Streamable HTTP test
+<p>This runs the 2025-06-18, 2026-07-28, stdio, and Streamable HTTP test
 sets.</p>
+<p>For live tests, you can use e.g. MCPJam, Postman, or VSCode as clients.
+These and other tools usually provide reliable support for the
+2025-06-18 spec and the stdio transport. For the 2026-07-28 spec and the
+Streamable HTTP transport, support is currently more flaky but expected
+to evolve as implementations mature. Use preferably the latest versions
+of the clients for testing.</p>
 </section>
 <section id="architecture">
 <h2>Architecture<a class="headerlink" href="#architecture" title="Link to this heading"></a></h2>
@@ -846,6 +852,9 @@ predicate functor is used.</p>
 </tr>
 </tbody>
 </table>
+<p>When a tool predicate <code class="docutils literal notranslate"><span class="pre">mode/2</span></code> directive uses types without a JSON
+counterpart, you can override the inferred input and output schemas (see
+below for details) if resorting to JSON strings is not ideal.</p>
 <section id="auto-dispatch">
 <h3>Auto-dispatch<a class="headerlink" href="#auto-dispatch" title="Link to this heading"></a></h3>
 <p>By default the server auto-dispatches a tool call: it binds the

@@ -42,7 +42,7 @@
 	:- public(attach_sse_stream/1).
 	:- mode(attach_sse_stream(+stream), one).
 	:- info(attach_sse_stream/1, [
-		comment is 'Registers a live output stream for incremental SSE writes. Headers must already have been written. Each emit_progress/5 call writes and flushes immediately.',
+		comment is 'Registers a live output stream for incremental SSE writes. Headers must already have been written. Each ``emit_progress/5`` call writes and flushes immediately.',
 		argnames is ['Stream']
 	]).
 
@@ -62,7 +62,7 @@
 	:- public(current_options/1).
 	:- mode(current_options(-list), zero_or_one).
 	:- info(current_options/1, [
-		comment is 'Unified with the options list established by prepare/2 or start/4.',
+		comment is 'Unified with the options list established by ``prepare/2`` or ``start/4``.',
 		argnames is ['Options']
 	]).
 
@@ -76,7 +76,7 @@
 	:- public(emit_progress/5).
 	:- mode(emit_progress(+term, +term, +number, +number, +atom), one).
 	:- info(emit_progress/5, [
-		comment is 'Emits a notifications/progress event. In live mode the SSE record is written and flushed immediately on the attached stream. In buffered mode the event is queued until finalize_response/4.',
+		comment is 'Emits a notifications/progress event. In live mode the SSE record is written and flushed immediately on the attached stream. In buffered mode the event is queued until ``finalize_response/4``.',
 		argnames is ['Token', 'RequestId', 'ProgressValue', 'Total', 'Message']
 	]).
 
@@ -100,7 +100,7 @@
 	:- mode(shutdown_control_(-nonvar), zero_or_one).
 
 	:- info(shutdown_control_/1, [
-		comment is 'Token passed to http_server::request_shutdown/1 when stopping the listener.',
+		comment is 'Token passed to ``http_server::request_shutdown/1`` when stopping the listener.',
 		argnames is ['Control']
 	]).
 
@@ -111,7 +111,7 @@
 	:- dynamic(subscription_/4).
 	:- mode(subscription_(-atom, -nonvar, -list, -nonvar), zero_or_more).
 	:- info(subscription_/4, [
-		comment is 'Active subscriptions/listen registration. Synchronization uses threaded_wait/1 and threaded_notify/1 tagged by SubscriptionId.',
+		comment is 'Active subscriptions/listen registration. Synchronization uses ``threaded_wait/1`` and ``threaded_notify/1`` tagged by ``SubscriptionId``.',
 		argnames is ['SubscriptionId', 'RequestId', 'Filters', 'Stream']
 	]).
 

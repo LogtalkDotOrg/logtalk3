@@ -62,8 +62,15 @@ To test this library predicates, load the ``tester.lgt`` file:
 
    | ?- logtalk_load(mcp_server(tester)).
 
-This runs the 2025-06-18, 2026-07-28 (stdio), and Streamable HTTP test
+This runs the 2025-06-18, 2026-07-28, stdio, and Streamable HTTP test
 sets.
+
+For live tests, you can use e.g. MCPJam, Postman, or VSCode as clients.
+These and other tools usually provide reliable support for the
+2025-06-18 spec and the stdio transport. For the 2026-07-28 spec and the
+Streamable HTTP transport, support is currently more flaky but expected
+to evolve as implementations mature. Use preferably the latest versions
+of the clients for testing.
 
 Architecture
 ------------
@@ -345,6 +352,10 @@ Logtalk type JSON type
 ``codes``    ``string``
 (other)      ``string``
 ============ ===========
+
+When a tool predicate ``mode/2`` directive uses types without a JSON
+counterpart, you can override the inferred input and output schemas (see
+below for details) if resorting to JSON strings is not ideal.
 
 Auto-dispatch
 ~~~~~~~~~~~~~

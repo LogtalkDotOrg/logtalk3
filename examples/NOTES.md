@@ -175,7 +175,8 @@ Follows a short description of each included example (in alphabetical order):
 	(example adapted from the "Adventure in Prolog" Amzi! book)
 
 - `birds_mcp`  
-	bird identification expert system published as a MCP server
+	bird identification expert system published as a MCP server illustrating
+    elicitation and resources features
 
 - `blocks`  
 	simpler version of the `bricks` example; illustrates how to use events
@@ -290,6 +291,7 @@ Follows a short description of each included example (in alphabetical order):
 
 - `factorial_mcp`  
     example illustrating the `mcp_server` library support for MCP servers
+    making predicates available as tools
 
 - `family`  
 	classical family relations example
