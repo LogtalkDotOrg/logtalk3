@@ -33,6 +33,6 @@
 		http_port(8080),
 		http_bind('127.0.0.1'),
 		http_path('/mcp'),
-		http_origin_check(true)
+		http_origin_check(false)
 	])
 )).

@@ -365,18 +365,15 @@
 
 	% protocol-handler bridge (non-SSE path)
 
-	% SSE path: progressToken, subscriptions/listen, or Accept: text/event-stream
+	% SSE path only when the request itself needs a stream: subscriptions/listen
+	% or a progressToken. Compliant clients always send Accept including
+	% text/event-stream; that alone must not force SSE (server/discover and
+	% ordinary tools/call must stay application/json for clients like Postman).
 	http_needs_stream_path('subscriptions/listen', _, _) :-
 		!.
-	http_needs_stream_path(_Method, Params, Headers) :-
-		(	^^has_pair(Params, '_meta', Meta),
-			^^has_pair(Meta, progressToken, _) ->
-			true
-		;	header_value(Headers, 'Accept', Accept),
-			sub_atom(Accept, _, _, _, 'text/event-stream') ->
-			true
-		;	fail
-		).
+	http_needs_stream_path(_Method, Params, _Headers) :-
+		^^has_pair(Params, '_meta', Meta),
+		^^has_pair(Meta, progressToken, _).
 
 	handle_via_protocol_2025(Message, HTTPResponse) :-
 		server_options_(Options),
@@ -462,11 +459,11 @@
 		).
 
 	validate_2026_protocol_header(Method, Headers, Params, Meta, Version, Id, ErrorResponse) :-
-		(	header_value(Headers, 'MCP-Protocol-Version', HV) ->
-			(	HV == Version ->
+		(	header_value(Headers, mcp_protocol_version, HeaderVersion) ->
+			(	HeaderVersion == Version ->
 				validate_2026_method_header(Method, Headers, Params, Meta, Id, ErrorResponse)
 			;	json_error_data(Id, -32020, 'HeaderMismatch: MCP-Protocol-Version',
-					{header-'MCP-Protocol-Version', expected-Version, actual-HV}, ErrorResponse)
+					{header-'MCP-Protocol-Version', expected-Version, actual-HeaderVersion}, ErrorResponse)
 			)
 		;	json_error(Id, -32602, 'Missing required MCP-Protocol-Version header', ErrorResponse)
 		).
@@ -475,7 +472,7 @@
 	% normalizing common casing). Missing header is an invalid params error; wrong
 	% value is HeaderMismatch (-32020).
 	validate_2026_method_header(Method, Headers, Params, Meta, Id, ErrorResponse) :-
-		(	header_value(Headers, 'Mcp-Method', HMethod0) ->
+		(	header_value(Headers, mcp_method, HMethod0) ->
 			normalize_mcp_method_header(HMethod0, HMethod),
 			(	HMethod == Method ->
 				validate_2026_name_header(Method, Headers, Params, Meta, Id, ErrorResponse)
@@ -498,7 +495,7 @@
 	validate_2026_name_header(Method, Headers, Params, Meta, Id, ErrorResponse) :-
 		method_requires_mcp_name(Method, ParamKey),
 		!,
-		(	header_value(Headers, 'Mcp-Name', HName0) ->
+		(	header_value(Headers, mcp_name, HName0) ->
 			normalize_mcp_method_header(HName0, HName),
 			(	^^has_pair(Params, ParamKey, Expected),
 				HName == Expected ->
@@ -1388,10 +1385,11 @@
 		member(Name-Value, Headers),
 		!.
 	header_value(Headers, Name, Value) :-
-		atom_codes(Name, NC), maplist_lower(NC, NL), atom_codes(LN, NL),
-		member(H-Value, Headers),
-		atom_codes(H, HC), maplist_lower(HC, HL), atom_codes(LH, HL),
-		LN == LH, !.
+		atom_codes(Name, NameCodes), maplist_lower(NameCodes, NameLowerCodes), atom_codes(LowerName, NameLowerCodes),
+		member(Header-Value, Headers),
+		atom_codes(Header, HeaderCodes), maplist_lower(HeaderCodes, HeaderLowerCodes), atom_codes(LowerHeader, HeaderLowerCodes),
+		LowerName == LowerHeader,
+		!.
 
 	maplist_lower([], []).
 	maplist_lower([C|Cs], [L|Ls]) :-
@@ -1672,11 +1670,14 @@
 		trim_spaces(Cs, Out).
 	trim_spaces(Codes, Codes).
 
-	wants_sse(Headers, Body) :-
-		(	sub_atom(Body, _, _, _, 'progressToken') -> true
-		;	sub_atom(Body, _, _, _, 'subscriptions/listen') -> true
-		;	header_has(Headers, 'Accept', Accept),
-			sub_atom(Accept, _, _, _, 'text/event-stream')
+	% Open a live SSE response only for progress or subscriptions/listen.
+	% Do not key off Accept: text/event-stream — clients advertise it on every POST.
+	wants_sse(_Headers, Body) :-
+		(	sub_atom(Body, _, _, _, 'progressToken') ->
+			true
+		;	sub_atom(Body, _, _, _, 'subscriptions/listen') ->
+			true
+		;	fail
 		).
 
 	header_has(Headers, Name, Value) :-
