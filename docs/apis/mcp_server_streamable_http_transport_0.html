@@ -449,7 +449,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-08-28</div>
+<div class="line"><strong>Date:</strong> 2026-08-29</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -545,7 +545,7 @@
 </section>
 <section id="attach-sse-stream-1">
 <span id="mcp-server-streamable-http-transport-0-attach-sse-stream-1"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">attach_sse_stream/1</span></code></a><a class="headerlink" href="#attach-sse-stream-1" title="Link to this heading"></a></h3>
-<p>Registers a live output stream for incremental SSE writes. Headers must already have been written. Each emit_progress/5 call writes and flushes immediately.</p>
+<p>Registers a live output stream for incremental SSE writes. Headers must already have been written. Each <code class="docutils literal notranslate"><span class="pre">emit_progress/5</span></code> call writes and flushes immediately.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -604,7 +604,7 @@
 </section>
 <section id="current-options-1">
 <span id="mcp-server-streamable-http-transport-0-current-options-1"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">current_options/1</span></code></a><a class="headerlink" href="#current-options-1" title="Link to this heading"></a></h3>
-<p>Unified with the options list established by prepare/2 or start/4.</p>
+<p>Unified with the options list established by <code class="docutils literal notranslate"><span class="pre">prepare/2</span></code> or <code class="docutils literal notranslate"><span class="pre">start/4</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -646,7 +646,7 @@
 </section>
 <section id="emit-progress-5">
 <span id="mcp-server-streamable-http-transport-0-emit-progress-5"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">emit_progress/5</span></code></a><a class="headerlink" href="#emit-progress-5" title="Link to this heading"></a></h3>
-<p>Emits a notifications/progress event. In live mode the SSE record is written and flushed immediately on the attached stream. In buffered mode the event is queued until finalize_response/4.</p>
+<p>Emits a notifications/progress event. In live mode the SSE record is written and flushed immediately on the attached stream. In buffered mode the event is queued until <code class="docutils literal notranslate"><span class="pre">finalize_response/4</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -712,7 +712,7 @@
 </section>
 <section id="shutdown-control-1">
 <span id="mcp-server-streamable-http-transport-0-shutdown-control-1"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">shutdown_control_/1</span></code></a><a class="headerlink" href="#shutdown-control-1" title="Link to this heading"></a></h3>
-<p>Token passed to http_server::request_shutdown/1 when stopping the listener.</p>
+<p>Token passed to <code class="docutils literal notranslate"><span class="pre">http_server::request_shutdown/1</span></code> when stopping the listener.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -733,7 +733,7 @@
 </section>
 <section id="subscription-4">
 <span id="mcp-server-streamable-http-transport-0-subscription-4"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">subscription_/4</span></code></a><a class="headerlink" href="#subscription-4" title="Link to this heading"></a></h3>
-<p>Active subscriptions/listen registration. Synchronization uses threaded_wait/1 and threaded_notify/1 tagged by SubscriptionId.</p>
+<p>Active subscriptions/listen registration. Synchronization uses <code class="docutils literal notranslate"><span class="pre">threaded_wait/1</span></code> and <code class="docutils literal notranslate"><span class="pre">threaded_notify/1</span></code> tagged by <code class="docutils literal notranslate"><span class="pre">SubscriptionId</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

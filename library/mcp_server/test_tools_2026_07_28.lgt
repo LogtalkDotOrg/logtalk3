@@ -231,3 +231,39 @@
 	cache_policy(discover, _, 0, private).
 
 :- end_object.
+
+
+% tools that return deliberately invalid or valid ``input_required`` multi-round results for adapter validation tests
+
+:- object(test_mrtr_validation_tools,
+	implements((mcp_tool_protocol, mcp_multiround_protocol))).
+
+	capabilities([]).
+
+	tools([
+		tool(bad_empty, bad_empty, 0),
+		tool(bad_duplicate_keys, bad_duplicate_keys, 0),
+		tool(ok_input_required, ok_input_required, 0),
+		tool(ok_state_only, ok_state_only, 0)
+	]).
+
+	% empty requests and none state — must be rejected by the adapter
+	tool_call_round(bad_empty, _Args, _Context, input_required([], none)).
+
+	% duplicate input request keys — must be rejected by the adapter
+	tool_call_round(bad_duplicate_keys, _Args, _Context, input_required([
+		input_request(q, form_elicitation('First?', Schema)),
+		input_request(q, form_elicitation('Second?', Schema))
+	], waiting)) :-
+		Schema = {type-object, properties-{answer-{type-string}}, required-[answer]}.
+
+	% valid: nonempty requests + state
+	tool_call_round(ok_input_required, _Args, _Context, input_required([
+		input_request(name_key, form_elicitation('Your name?', Schema))
+	], waiting_for_name)) :-
+		Schema = {type-object, properties-{name-{type-string}}, required-[name]}.
+
+	% valid: empty requests but non-none state
+	tool_call_round(ok_state_only, _Args, _Context, input_required([], waiting)).
+
+:- end_object.

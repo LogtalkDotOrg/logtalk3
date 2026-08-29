@@ -15,7 +15,7 @@ MCP Streamable HTTP transport (2026-07-28). Uses Logtalk ``http_server::serve_un
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-28
+| **Date:** 2026-08-29
 
 | **Compilation flags:**
 |    ``static, context_switching_calls, threaded``
@@ -74,7 +74,7 @@ Initializes adapter state for ``Application`` with ``Options`` without opening a
 ``attach_sse_stream/1``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Registers a live output stream for incremental SSE writes. Headers must already have been written. Each emit_progress/5 call writes and flushes immediately.
+Registers a live output stream for incremental SSE writes. Headers must already have been written. Each ``emit_progress/5`` call writes and flushes immediately.
 
 | **Compilation flags:**
 |    ``static``
@@ -129,7 +129,7 @@ HTTP headers for an SSE response body.
 ``current_options/1``
 ^^^^^^^^^^^^^^^^^^^^^
 
-Unified with the options list established by prepare/2 or start/4.
+Unified with the options list established by ``prepare/2`` or ``start/4``.
 
 | **Compilation flags:**
 |    ``static``
@@ -167,7 +167,7 @@ Handles one MCP HTTP request. ``Method`` is an uppercase HTTP method atom. ``Hea
 ``emit_progress/5``
 ^^^^^^^^^^^^^^^^^^^
 
-Emits a notifications/progress event. In live mode the SSE record is written and flushed immediately on the attached stream. In buffered mode the event is queued until finalize_response/4.
+Emits a notifications/progress event. In live mode the SSE record is written and flushed immediately on the attached stream. In buffered mode the event is queued until ``finalize_response/4``.
 
 | **Compilation flags:**
 |    ``static``
@@ -230,7 +230,7 @@ Merged server options for the active prepare/start session.
 ``shutdown_control_/1``
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Token passed to http_server::request_shutdown/1 when stopping the listener.
+Token passed to ``http_server::request_shutdown/1`` when stopping the listener.
 
 | **Compilation flags:**
 |    ``dynamic``
@@ -249,7 +249,7 @@ Token passed to http_server::request_shutdown/1 when stopping the listener.
 ``subscription_/4``
 ^^^^^^^^^^^^^^^^^^^
 
-Active subscriptions/listen registration. Synchronization uses threaded_wait/1 and threaded_notify/1 tagged by SubscriptionId.
+Active subscriptions/listen registration. Synchronization uses ``threaded_wait/1`` and ``threaded_notify/1`` tagged by ``SubscriptionId``.
 
 | **Compilation flags:**
 |    ``dynamic``

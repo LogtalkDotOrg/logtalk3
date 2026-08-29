@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-28,
+		date is 2026-08-29,
 		comment is 'MCP Streamable HTTP transport (2026-07-28). Uses Logtalk ``http_server::serve_until_shutdown/5`` and a dedicated ``http_handler_protocol`` handler object. Supports specs 2025-06-18 and 2026-07-28 selected via the ``spec/1`` option and delegated to ``mcp_server_2025_06_18_spec`` or ``mcp_server_2026_07_28_spec``. Long-lived subscriptions/listen streams emit periodic SSE comment keep-alives (``http_sse_keepalive/1``). Requires a multi-threaded backend for subscriptions/listen.'
 	]).
 
@@ -778,7 +778,7 @@
 			;	Result = {resultType-input_required, inputRequests-JsonRequests, requestState-RequestState}
 			),
 			json_result(Id, Result, HTTPResponse)
-		;	json_error(Id, -32602, 'input_required must have nonempty requests or non-none state', HTTPResponse)
+		;	json_error(Id, -32603, 'Invalid multi-round result: must include nonempty inputRequests or a requestState', HTTPResponse)
 		).
 	handle_round_tool_result(Other, Id, _, HTTPResponse) :-
 		json_error(Id, -32603, Other, HTTPResponse).
@@ -1684,19 +1684,6 @@
 			true
 		;	fail
 		).
-
-	header_has(Headers, Name, Value) :-
-		member(Name-Value, Headers), !.
-	header_has(Headers, Name, Value) :-
-		atom_codes(Name, NC), lower_codes(NC, NL), atom_codes(LN, NL),
-		member(H-Value, Headers),
-		atom_codes(H, HC), lower_codes(HC, HL), atom_codes(LH, HL),
-		LN == LH, !.
-
-	lower_codes([], []).
-	lower_codes([C|Cs], [L|Ls]) :-
-		(C >= 65, C =< 90 -> L is C + 32 ; L = C),
-		lower_codes(Cs, Ls).
 
 	open_live_sse_stream(Request, Stream, StreamKind) :-
 		(	request_output_stream(Request, Out) ->

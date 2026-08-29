@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-26,
+		date is 2026-08-29,
 		comment is 'Unit tests for the MCP 2025-06-18 adapter.'
 	]).
 
@@ -39,6 +39,12 @@
 	]).
 
 	cover(mcp_server).
+	cover(mcp_server_2025_06_18_adapter).
+	cover(mcp_server_2025_06_18_spec).
+	cover(mcp_server_stdio_transport).
+
+	setup :-
+		mcp_server_2025_06_18_spec::cleanup.
 
 	cleanup :-
 		^^clean_file('mcp_input_1.tmp'),
@@ -46,7 +52,8 @@
 		^^clean_file('mcp_input_3.tmp'),
 		^^clean_file('mcp_input_4.tmp'),
 		^^clean_file('mcp_input_5.tmp'),
-		^^clean_file('mcp_output.tmp').
+		^^clean_file('mcp_output.tmp'),
+		mcp_server_2025_06_18_spec::cleanup.
 
 	% json_rpc newline-delimited message tests
 

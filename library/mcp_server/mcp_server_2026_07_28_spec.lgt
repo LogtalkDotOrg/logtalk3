@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-28,
+		date is 2026-08-29,
 		comment is 'MCP 2026-07-28 protocol handler. Returns reply/1, reply_with_progress/2, subscribe/3, accepted, or no_reply outcomes. Does not write to streams; transports render outcomes.'
 	]).
 
@@ -601,9 +601,9 @@
 			(	unique_keys(InputRequests) ->
 				build_input_required_result(InputRequests, RequestState, Result),
 				send_result(Id, Result, Output)
-			;	send_error(Id, -32602, 'Duplicate input request keys', Output)
+			;	send_error(Id, -32603, 'Invalid multi-round result: duplicate input request keys', Output)
 			)
-		;	send_error(Id, -32602, 'input_required must have nonempty requests or non-none state', Output)
+		;	send_error(Id, -32603, 'Invalid multi-round result: must include nonempty inputRequests or a requestState', Output)
 		).
 
 	build_input_required_result(InputRequests, RequestState, Result) :-
@@ -952,19 +952,6 @@
 	send_result(Id, Result, Output) :-
 		response(Result, Id, Response),
 		write_locked(Output, Response).
-
-	send_complete(Id, {}, Output) :-
-		!,
-		send_result(Id, {resultType-complete}, Output).
-	send_complete(Id, ResultBody, Output) :-
-		% Ensure resultType is present
-		(	^^has_pair(ResultBody, resultType, _) ->
-			Result = ResultBody
-		;	% Merge resultType-complete
-			ResultBody = {Pairs},
-			Result = {(resultType-complete, Pairs)}
-		),
-		send_result(Id, Result, Output).
 
 	send_error(Id, Code, Message, Output) :-
 		(	atom(Message) ->

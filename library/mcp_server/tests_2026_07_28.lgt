@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-28,
+		date is 2026-08-29,
 		comment is 'Unit tests for the MCP 2026-07-28 adapter.'
 	]).
 
@@ -47,9 +47,13 @@
 	cover(mcp_server_2026_07_28_spec).
 	cover(mcp_server_stdio_transport).
 
+	setup :-
+		mcp_server_2026_07_28_spec::cleanup.
+
 	cleanup :-
 		^^clean_file('mcp26_in.tmp'),
-		^^clean_file('mcp26_out.tmp').
+		^^clean_file('mcp26_out.tmp'),
+		mcp_server_2026_07_28_spec::cleanup.
 
 	% facade adapter selection
 
@@ -358,6 +362,52 @@
 			(result(Response, Result), assertion(has_pair(Result, resultType, _)))
 		).
 
+	% invalid: empty inputRequests and requestState = none → -32603
+
+	test(mrtr_validation_empty_requests_and_none_state_01, true) :-
+		call_tools_call(bad_empty, {}, Outcome),
+		Outcome = reply(Response),
+		is_error_response(Response),
+		error_code(Response, -32603),
+		error_message_atom(Response, Message),
+		assertion(sub_atom(Message, _, _, _, 'inputRequests')).
+
+	% invalid: duplicate keys → -32603
+
+	test(mrtr_validation_duplicate_keys_01, true) :-
+		call_tools_call(bad_duplicate_keys, {}, Outcome),
+		Outcome = reply(Response),
+		is_error_response(Response),
+		error_code(Response, -32603),
+		error_message_atom(Response, Message),
+		assertion(sub_atom(Message, _, _, _, 'duplicate')).
+
+	% valid: nonempty inputRequests + state → resultType input_required
+
+	test(mrtr_validation_ok_input_required_01, true) :-
+		call_tools_call(ok_input_required, {}, Outcome),
+		Outcome = reply(Response),
+		is_response(Response),
+		\+ is_error_response(Response),
+		result(Response, Result),
+		has_pair(Result, resultType, input_required),
+		has_pair(Result, inputRequests, Requests),
+		Requests \== {},
+		has_pair(Result, requestState, waiting_for_name).
+
+	% valid: empty inputRequests but non-none state
+
+	test(mrtr_validation_ok_state_only_01, true) :-
+		call_tools_call(ok_state_only, {}, Outcome),
+		Outcome = reply(Response),
+		is_response(Response),
+		\+ is_error_response(Response),
+		result(Response, Result),
+		has_pair(Result, resultType, input_required),
+		has_pair(Result, requestState, waiting),
+		% inputRequests may be omitted when empty
+		\+ (has_pair(Result, inputRequests, R), R = {_}).
+
 	% auxiliary predicates
 
 	% run exchanges against the 2026 adapter
@@ -395,6 +445,33 @@
 			read_all(Stream, Rest)
 		;	Messages = []
 		).
+
+	call_tools_call(Name, Args, Outcome) :-
+		Options = [
+			application(test_mrtr_validation_tools),
+			server_name('mrtr-validation'),
+			server_version('1.0.0'),
+			server_title('MRTR validation'),
+			cache_ttl(0),
+			cache_scope(private)
+		],
+		mcp_server_2026_07_28_spec::prepare(test_mrtr_validation_tools, Options),
+		mrtr_meta_2026(Meta),
+		request('tools/call', {name-Name, arguments-Args, '_meta'-Meta}, 1, Message),
+		mcp_server_2026_07_28_spec::handle_message(Message, Options, Outcome),
+		mcp_server_2026_07_28_spec::cleanup.
+
+	mrtr_meta_2026(Meta) :-
+		Meta = {
+			'io.modelcontextprotocol/protocolVersion'-'2026-07-28',
+			'io.modelcontextprotocol/clientCapabilities'-{tools-{}, elicitation-{}},
+			'io.modelcontextprotocol/clientInfo'-{name-test, version-'1.0'}
+		}.
+
+	error_message_atom(Response, Message) :-
+		has_pair(Response, error, Error),
+		has_pair(Error, message, Message),
+		atom(Message).
 
 	% meta builder for 2026 requests
 
