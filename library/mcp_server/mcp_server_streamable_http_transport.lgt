@@ -459,7 +459,7 @@
 		).
 
 	validate_2026_protocol_header(Method, Headers, Params, Meta, Version, Id, ErrorResponse) :-
-		(	header_value(Headers, 'MCP-Protocol-Version', HeaderVersion) ->
+		(	header_value(Headers, mcp_protocol_version, HeaderVersion) ->
 			(	HeaderVersion == Version ->
 				validate_2026_method_header(Method, Headers, Params, Meta, Id, ErrorResponse)
 			;	json_error_data(Id, -32020, 'HeaderMismatch: MCP-Protocol-Version',
@@ -472,12 +472,12 @@
 	% normalizing common casing). Missing header is an invalid params error; wrong
 	% value is HeaderMismatch (-32020).
 	validate_2026_method_header(Method, Headers, Params, Meta, Id, ErrorResponse) :-
-		(	header_value(Headers, 'Mcp-Method', HMethod0) ->
-			normalize_mcp_method_header(HMethod0, HMethod),
-			(	HMethod == Method ->
+		(	header_value(Headers, mcp_method, HeaderMethod0) ->
+			normalize_mcp_method_header(HeaderMethod0, HeaderMethod),
+			(	HeaderMethod == Method ->
 				validate_2026_name_header(Method, Headers, Params, Meta, Id, ErrorResponse)
 			;	json_error_data(Id, -32020, 'HeaderMismatch: Mcp-Method',
-					{header-'Mcp-Method', expected-Method, actual-HMethod0}, ErrorResponse)
+					{header-'Mcp-Method', expected-Method, actual-HeaderMethod0}, ErrorResponse)
 			)
 		;	json_error(Id, -32602, 'Missing required Mcp-Method header', ErrorResponse)
 		).
@@ -495,7 +495,7 @@
 	validate_2026_name_header(Method, Headers, Params, Meta, Id, ErrorResponse) :-
 		method_requires_mcp_name(Method, ParamKey),
 		!,
-		(	header_value(Headers, 'Mcp-Name', HName0) ->
+		(	header_value(Headers, mcp_name, HName0) ->
 			normalize_mcp_method_header(HName0, HName),
 			(	^^has_pair(Params, ParamKey, Expected),
 				HName == Expected ->

@@ -35,7 +35,7 @@
 	]).
 
 	:- uses(list, [
-		memberchk/2
+		last/2, memberchk/2
 	]).
 
 	:- uses(lgtunit, [
@@ -82,9 +82,10 @@
 		).
 
 	test(http_invalid_json_01, deterministic(Status == 400)) :-
+		default_headers(Headers),
 		with_prepared(test_tools_2026, [],
 			mcp_server_streamable_http_transport::handle_mcp_request(
-				'POST', default_headers, 'not-json', http_response(Status, _, _)
+				'POST', Headers, 'not-json', http_response(Status, _, _)
 			)
 		).
 
@@ -270,10 +271,10 @@
 
 	test(http_origin_forbidden_01, deterministic(Status == 403)) :-
 		Headers = [
-			'Origin'-'http://evil.example',
-			'MCP-Protocol-Version'-'2026-07-28',
-			'Accept'-'application/json, text/event-stream',
-			'Content-Type'-'application/json'
+			origin-'http://evil.example',
+			mcp_protocol_version-'2026-07-28',
+			accept-'application/json, text/event-stream',
+			content_type-'application/json'
 		],
 		with_prepared(test_tools_2026, [http_origin_check(true)],
 			mcp_server_streamable_http_transport::handle_mcp_request(
@@ -286,11 +287,11 @@
 		request('server/discover', {'_meta'-Meta}, 1, Msg),
 		json_serialize_term(Msg, Body),
 		Headers = [
-			'Origin'-'http://localhost:3000',
-			'MCP-Protocol-Version'-'2026-07-28',
-			'Mcp-Method'-'server/discover',
-			'Accept'-'application/json, text/event-stream',
-			'Content-Type'-'application/json'
+			origin-'http://localhost:3000',
+			mcp_protocol_version-'2026-07-28',
+			mcp_method-'server/discover',
+			accept-'application/json, text/event-stream',
+			content_type-'application/json'
 		],
 		with_prepared(test_tools_2026, [http_origin_check(true)],
 			mcp_server_streamable_http_transport::handle_mcp_request(
@@ -363,14 +364,14 @@
 	request_headers(Message, Headers) :-
 		method(Message, Method),
 		Base = [
-			'MCP-Protocol-Version'-'2026-07-28',
-			'Mcp-Method'-Method,
-			'Accept'-'application/json, text/event-stream',
-			'Content-Type'-'application/json'
+			mcp_protocol_version-'2026-07-28',
+			mcp_method-Method,
+			accept-'application/json, text/event-stream',
+			content_type-'application/json'
 		],
 		(	params(Message, Params),
 			method_mcp_name(Method, Params, Name) ->
-			Headers = ['Mcp-Name'-Name| Base]
+			Headers = [mcp_name-Name| Base]
 		;	Headers = Base
 		).
 
@@ -382,15 +383,10 @@
 		has_pair(Params, uri, Name).
 
 	default_headers([
-		'MCP-Protocol-Version'-'2026-07-28',
-		'Mcp-Method'-'server/discover',
-		'Accept'-'application/json, text/event-stream',
-		'Content-Type'-'application/json'
-	]).
-
-	default_headers_rest([
-		'Accept'-'application/json, text/event-stream',
-		'Content-Type'-'application/json'
+		mcp_protocol_version-'2026-07-28',
+		mcp_method-'server/discover',
+		accept-'application/json, text/event-stream',
+		content_type-'application/json'
 	]).
 
 	% decode http_response/3 into a JSON-RPC term (json_body/1 or atom/SSE)
@@ -450,11 +446,6 @@
 		[_], sse_skip_line.
 	sse_skip_line -->
 		[].
-
-	last([X], X) :-
-		!.
-	last([_|Xs], X) :-
-		last(Xs, X).
 
 	json_serialize_term(Term, Atom) :-
 		(	current_object(json) ->
