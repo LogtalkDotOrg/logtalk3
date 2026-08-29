@@ -36,6 +36,7 @@
 		mcp_server_spec_protocol,
 		mcp_server_application,
 		mcp_server_2025_06_18_spec,
+		mcp_server_2025_11_25_spec,
 		mcp_server_2026_07_28_spec,
 		mcp_server_stdio_transport,
 		mcp_server_2025_06_18_adapter,

@@ -15,7 +15,7 @@ MCP server facade. Selects spec and transport (stdio or Streamable HTTP). Legacy
 
 | **Author:** Paulo Moura
 | **Version:** 2:0:0
-| **Date:** 2026-08-23
+| **Date:** 2026-08-29
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -28,7 +28,7 @@ MCP server facade. Selects spec and transport (stdio or Streamable HTTP). Legacy
 
 | **Remarks:**
 
-   - Specs: ``'2025-06-18``' (default) and ``'2026-07-28'`` via ``spec/1``.
+   - Specs: ``'2025-06-18'`` (default), ``'2025-11-25'``, and ``'2026-07-28'`` via ``spec/1``.
    - Transports: ``stdio`` (default) and ``streamable_http`` via ``transport/1``.
    - Legacy: ``protocol_adapter(Adapter)`` overrides the spec/transport matrix when present.
 

@@ -25,8 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-26,
-		comment is 'Stdio transport adapter for MCP. Reads newline-delimited JSON-RPC from the input stream and writes responses to the output stream. Supports specs 2025-06-18 and 2026-07-28 selected via the ``spec/1`` option and delegated to ``mcp_server_2025_06_18_spec`` or ``mcp_server_2026_07_28_spec``.'
+		date is 2026-08-29,
+		comment is 'Stdio transport adapter for MCP. Reads newline-delimited JSON-RPC from the input stream and writes responses to the output stream. Supports specs 2025-06-18, 2025-11-25, and 2026-07-28 selected via the ``spec/1`` option and delegated to ``mcp_server_2025_06_18_spec`` or ``mcp_server_2026_07_28_spec``.'
 	]).
 
 	:- private(active_protocol_/1).
@@ -96,6 +96,8 @@
 	select_protocol(Options, Context, Protocol) :-
 		(	member(spec('2026-07-28'), Options) ->
 			Version = '2026-07-28'
+		;	member(spec('2025-11-25'), Options) ->
+			Version = '2025-11-25'
 		;	member(spec('2025-06-18'), Options) ->
 			Version = '2025-06-18'
 		;	member(spec(Version), Options) ->
@@ -108,6 +110,7 @@
 		).
 
 	protocol_object('2025-06-18', mcp_server_2025_06_18_spec).
+	protocol_object('2025-11-25', mcp_server_2025_11_25_spec).
 	protocol_object('2026-07-28', mcp_server_2026_07_28_spec).
 
 	run_loop(mcp_server_2026_07_28_spec, Input, Output, Options) :-

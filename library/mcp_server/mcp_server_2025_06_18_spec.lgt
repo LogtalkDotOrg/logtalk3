@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-26,
+		date is 2026-08-29,
 		comment is 'MCP 2025-06-18 protocol handler. Transport-agnostic message handling; returns abstract outcomes for stdio or Streamable HTTP transports to render. Synchronous elicitation requires ``stdio_input/1`` and ``stdio_output/1`` options.'
 	]).
 
@@ -44,16 +44,72 @@
 		argnames is ['Input', 'Output', 'Message', 'RequestedSchema', 'Answer']
 	]).
 
+	:- protected(handle_initialize/4).
+	:- mode(handle_initialize(+nonvar, +nonvar, +list, -nonvar), one).
+	:- info(handle_initialize/4, [
+		comment is 'Handles the ``initialize`` request and returns a ``reply/1`` outcome. Overridable by later 2025 family specs (e.g. 2025-11-25).',
+		argnames is ['Message', 'Id', 'Options', 'Outcome']
+	]).
+
+	:- protected(handle_ping/2).
+	:- mode(handle_ping(+nonvar, -nonvar), one).
+	:- info(handle_ping/2, [
+		comment is 'Handles the ``ping`` request and returns a ``reply/1`` outcome.',
+		argnames is ['Id', 'Outcome']
+	]).
+
+	:- protected(handle_tools_list/3).
+	:- mode(handle_tools_list(+nonvar, +list, -nonvar), one).
+	:- info(handle_tools_list/3, [
+		comment is 'Handles the ``tools/list`` request. Overridable so later specs can enrich tool descriptors (e.g. icons).',
+		argnames is ['Id', 'Options', 'Outcome']
+	]).
+
+	:- protected(handle_tools_call/4).
+	:- mode(handle_tools_call(+nonvar, +nonvar, +list, -nonvar), one).
+	:- info(handle_tools_call/4, [
+		comment is 'Handles the ``tools/call`` request and returns a ``reply/1`` outcome.',
+		argnames is ['Message', 'Id', 'Options', 'Outcome']
+	]).
+
+	:- protected(handle_prompts_list/3).
+	:- mode(handle_prompts_list(+nonvar, +list, -nonvar), one).
+	:- info(handle_prompts_list/3, [
+		comment is 'Handles the ``prompts/list`` request. Overridable so later specs can enrich prompt descriptors (e.g. icons).',
+		argnames is ['Id', 'Options', 'Outcome']
+	]).
+
+	:- protected(handle_prompts_get/4).
+	:- mode(handle_prompts_get(+nonvar, +nonvar, +list, -nonvar), one).
+	:- info(handle_prompts_get/4, [
+		comment is 'Handles the ``prompts/get`` request and returns a ``reply/1`` outcome.',
+		argnames is ['Message', 'Id', 'Options', 'Outcome']
+	]).
+
+	:- protected(handle_resources_list/3).
+	:- mode(handle_resources_list(+nonvar, +list, -nonvar), one).
+	:- info(handle_resources_list/3, [
+		comment is 'Handles the ``resources/list`` request. Overridable so later specs can enrich resource descriptors (e.g. icons).',
+		argnames is ['Id', 'Options', 'Outcome']
+	]).
+
+	:- protected(handle_resources_read/4).
+	:- mode(handle_resources_read(+nonvar, +nonvar, +list, -nonvar), one).
+	:- info(handle_resources_read/4, [
+		comment is 'Handles the ``resources/read`` request and returns a ``reply/1`` outcome.',
+		argnames is ['Message', 'Id', 'Options', 'Outcome']
+	]).
+
 	% dynamic state (spec-owned)
 
-	:- private(initialized_/0).
+	:- protected(initialized_/0).
 	:- dynamic(initialized_/0).
 	:- mode(initialized_, zero_or_one).
 	:- info(initialized_/0, [
 		comment is 'Initialization completed flag.'
 	]).
 
-	:- private(elicit_counter_/1).
+	:- protected(elicit_counter_/1).
 	:- dynamic(elicit_counter_/1).
 	:- mode(elicit_counter_(-non_negative_integer), one).
 	:- info(elicit_counter_/1, [
@@ -61,7 +117,7 @@
 		argnames is ['Counter']
 	]).
 
-	:- private(client_capabilities_/1).
+	:- protected(client_capabilities_/1).
 	:- dynamic(client_capabilities_/1).
 	:- mode(client_capabilities_(-nonvar), one).
 	:- info(client_capabilities_/1, [
@@ -69,7 +125,7 @@
 		argnames is ['Capabilities']
 	]).
 
-	:- private(server_options_/1).
+	:- protected(server_options_/1).
 	:- dynamic(server_options_/1).
 	:- mode(server_options_(-list(compound)), one).
 	:- info(server_options_/1, [
@@ -158,22 +214,23 @@
 	handle_request(Message, Options, Outcome) :-
 		method(Message, Method),
 		id(Message, Id),
+		% Use :: so 2025-11-25 (and other) extensions can override handlers
 		(	Method == initialize ->
-			handle_initialize(Message, Id, Options, Outcome)
+			::handle_initialize(Message, Id, Options, Outcome)
 		;	Method == ping ->
-			handle_ping(Id, Outcome)
+			::handle_ping(Id, Outcome)
 		;	Method == 'tools/list' ->
-			handle_tools_list(Id, Options, Outcome)
+			::handle_tools_list(Id, Options, Outcome)
 		;	Method == 'tools/call' ->
-			handle_tools_call(Message, Id, Options, Outcome)
+			::handle_tools_call(Message, Id, Options, Outcome)
 		;	Method == 'prompts/list' ->
-			handle_prompts_list(Id, Options, Outcome)
+			::handle_prompts_list(Id, Options, Outcome)
 		;	Method == 'prompts/get' ->
-			handle_prompts_get(Message, Id, Options, Outcome)
+			::handle_prompts_get(Message, Id, Options, Outcome)
 		;	Method == 'resources/list' ->
-			handle_resources_list(Id, Options, Outcome)
+			::handle_resources_list(Id, Options, Outcome)
 		;	Method == 'resources/read' ->
-			handle_resources_read(Message, Id, Options, Outcome)
+			::handle_resources_read(Message, Id, Options, Outcome)
 		;	method_not_found(Id, ErrorResponse),
 			Outcome = reply(ErrorResponse)
 		).
@@ -188,7 +245,20 @@
 		;	true
 		).
 
-	% supported protocol versions
+	% supported protocol versions (overridable by 2025-11-25)
+
+	:- protected(supported_protocol_versions/1).
+	:- mode(supported_protocol_versions(-list), one).
+	:- info(supported_protocol_versions/1, [
+		comment is 'Protocol versions this handler can negotiate, preferred first.',
+		argnames is ['Versions']
+	]).
+
+	:- protected(build_capabilities/2).
+	:- mode(build_capabilities(+list, -compound), one).
+
+	:- protected(best_supported_version/3).
+	:- mode(best_supported_version(+list, +atom, -atom), zero_or_one).
 
 	supported_protocol_versions(['2025-06-18']).
 
@@ -205,8 +275,8 @@
 			assertz(client_capabilities_(ClientCapabilities))
 		;	true
 		),
-		supported_protocol_versions(Supported),
-		(	best_supported_version(Supported, ClientVersion, NegotiatedVersion) ->
+		::supported_protocol_versions(Supported),
+		(	::best_supported_version(Supported, ClientVersion, NegotiatedVersion) ->
 			true
 		;	last(Supported, NegotiatedVersion)
 		),
@@ -215,9 +285,20 @@
 		^^option(server_title(Title), Options),
 		^^option(application_capabilities(ApplicationCapabilities), Options),
 		build_capabilities(ApplicationCapabilities, Capabilities),
-		(	Title == '' ->
-			ServerInfo = {name-Name, version-Version}
-		;	ServerInfo = {name-Name, title-Title, version-Version}
+		(	^^option(server_description(Description), Options),
+			atom(Description), Description \== '' ->
+			true
+		;	Description = ''
+		),
+		(	Description == '' ->
+			(	Title == '' ->
+				ServerInfo = {name-Name, version-Version}
+			;	ServerInfo = {name-Name, title-Title, version-Version}
+			)
+		;	(	Title == '' ->
+				ServerInfo = {name-Name, version-Version, description-Description}
+			;	ServerInfo = {name-Name, title-Title, version-Version, description-Description}
+			)
 		),
 		Result = {
 			protocolVersion-NegotiatedVersion,
@@ -503,6 +584,7 @@
 	default_option(server_name('logtalk-mcp-server')).
 	default_option(server_version('1.0.0')).
 	default_option(server_title('logtalk-mcp-server')).
+	default_option(server_description('')).
 
 	valid_option(protocol_adapter(Adapter)) :-
 		callable(Adapter),
@@ -513,6 +595,8 @@
 		atom(Version).
 	valid_option(server_title(Title)) :-
 		atom(Title).
+	valid_option(server_description(Description)) :-
+		atom(Description).
 	% pass-through options
 	valid_option(stdio_input(_)).
 	valid_option(stdio_output(_)).

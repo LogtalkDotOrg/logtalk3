@@ -27,7 +27,7 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-08-29,
-		comment is 'MCP Streamable HTTP transport (2026-07-28). Uses Logtalk ``http_server::serve_until_shutdown/5`` and a dedicated ``http_handler_protocol`` handler object. Supports specs 2025-06-18 and 2026-07-28 selected via the ``spec/1`` option and delegated to ``mcp_server_2025_06_18_spec`` or ``mcp_server_2026_07_28_spec``. Long-lived subscriptions/listen streams emit periodic SSE comment keep-alives (``http_sse_keepalive/1``). Requires a multi-threaded backend for subscriptions/listen.'
+		comment is 'MCP Streamable HTTP transport (2026-07-28). Uses Logtalk ``http_server::serve_until_shutdown/5`` and a dedicated ``http_handler_protocol`` handler object. Supports specs 2025-06-18, 2025-11-25, and 2026-07-28 selected via the ``spec/1`` option and delegated to the matching ``mcp_server_*_spec`` object. Long-lived subscriptions/listen streams emit periodic SSE comment keep-alives (``http_sse_keepalive/1``). Requires a multi-threaded backend for subscriptions/listen.'
 	]).
 
 	:- threaded.
@@ -194,7 +194,9 @@
 		),
 		Options = [application(Application), application_capabilities(Capabilities)| Options0],
 		setup_state(Options),
-		(	member(spec('2025-06-18'), Options) ->
+		(	member(spec('2025-11-25'), Options) ->
+			mcp_server_2025_11_25_spec::prepare(Application, Options)
+		;	member(spec('2025-06-18'), Options) ->
 			mcp_server_2025_06_18_spec::prepare(Application, Options)
 		;	mcp_server_2026_07_28_spec::prepare(Application, Options)
 		).
@@ -228,6 +230,7 @@
 
 	cleanup :-
 		catch(mcp_server_2025_06_18_spec::cleanup, _, true),
+		catch(mcp_server_2025_11_25_spec::cleanup, _, true),
 		catch(mcp_server_2026_07_28_spec::cleanup, _, true),
 		(	retract(shutdown_control_(Control)) ->
 			catch(http_server::request_shutdown(Control), _, true)
@@ -343,7 +346,7 @@
 				;	Params = {}
 				),
 				spec(Version),
-				(	Version == '2025-06-18' ->
+				(	(Version == '2025-06-18' ; Version == '2025-11-25') ->
 					handle_via_protocol_2025(Message, HTTPResponse)
 				;	http_needs_stream_path(Method, Params, Headers) ->
 					(	validate_2026(Method, Headers, Params, Id, Err) ->
@@ -377,8 +380,12 @@
 
 	handle_via_protocol_2025(Message, HTTPResponse) :-
 		server_options_(Options),
+		(	member(spec('2025-11-25'), Options) ->
+			Protocol = mcp_server_2025_11_25_spec
+		;	Protocol = mcp_server_2025_06_18_spec
+		),
 		catch(
-			(	mcp_server_2025_06_18_spec::handle_message(Message, Options, Outcome),
+			(	Protocol::handle_message(Message, Options, Outcome),
 				render_protocol_outcome(Outcome, HTTPResponse)
 			),
 			Error,
@@ -1448,7 +1455,7 @@
 	valid_option(cache_scope(Scope)) :-
 		once((Scope == (public) ; Scope == private)).
 	valid_option(spec(Spec)) :-
-		once((Spec == '2025-06-18'; Spec == '2026-07-28')).
+		once((Spec == '2025-06-18'; Spec == '2025-11-25'; Spec == '2026-07-28')).
 	valid_option(http_port(Port)) :-
 		integer(Port), 0 < Port, Port =< 65535.
 	valid_option(http_bind(Bind)) :-

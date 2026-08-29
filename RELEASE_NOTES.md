@@ -22,8 +22,8 @@ RELEASE NOTES
 =============
 
 
-3.102.0 - August ??, 2026
-=========================
+3.102.0 - September ??, 2026
+============================
 
 Logtalk compiler and runtime
 ----------------------------
@@ -172,8 +172,9 @@ integer arithmetic).
 * ADDED: Support to the `hashes` library for generalized BLAKE2 cryptographic
 hash functions that accept both key an digest size parameters (per RFC 7693).
 
-* ADDED: Support for the MCP 2026-07-28 spec to the `mcp_server` library. Also
-refactored the library for separation of concerns between specs and transports.
+* ADDED: Support for the 2025-11-25 and 2026-07-28 MCP specs to the
+`mcp_server` library. Also refactored the library for separation of
+concerns between specs and transports.
 
 * ADDED: Support for MCP Apps to the `mcp_server` library.
 

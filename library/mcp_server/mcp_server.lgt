@@ -25,10 +25,10 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-23,
+		date is 2026-08-29,
 		comment is 'MCP server facade. Selects spec and transport (stdio or Streamable HTTP). Legacy ``protocol_adapter/1`` remains supported.',
 		remarks is [
-			'Specs' - '``\'2025-06-18``\' (default) and ``\'2026-07-28\'`` via ``spec/1``.',
+			'Specs' - '``\'2025-06-18\'`` (default), ``\'2025-11-25\'``, and ``\'2026-07-28\'`` via ``spec/1``.',
 			'Transports' - '``stdio`` (default) and ``streamable_http`` via ``transport/1``.',
 			'Legacy' - '``protocol_adapter(Adapter)`` overrides the spec/transport matrix when present.'
 		]
@@ -148,9 +148,13 @@
 
 	resolve_adapter('2025-06-18', stdio, _, mcp_server_stdio_transport) :-
 		!.
+	resolve_adapter('2025-11-25', stdio, _, mcp_server_stdio_transport) :-
+		!.
 	resolve_adapter('2026-07-28', stdio, _, mcp_server_stdio_transport) :-
 		!.
 	resolve_adapter('2025-06-18', streamable_http, _, mcp_server_streamable_http_transport) :-
+		!.
+	resolve_adapter('2025-11-25', streamable_http, _, mcp_server_streamable_http_transport) :-
 		!.
 	resolve_adapter('2026-07-28', streamable_http, _, mcp_server_streamable_http_transport) :-
 		!.
@@ -179,8 +183,10 @@
 		atom(Version).
 	valid_option(server_title(Title)) :-
 		atom(Title).
+	valid_option(server_description(Description)) :-
+		atom(Description).
 	valid_option(spec(Spec)) :-
-		once((Spec == '2025-06-18'; Spec == '2026-07-28')).
+		once((Spec == '2025-06-18'; Spec == '2025-11-25'; Spec == '2026-07-28')).
 	valid_option(transport(Transport)) :-
 		once((Transport == stdio; Transport == streamable_http)).
 	valid_option(protocol_adapter(Adapter)) :-

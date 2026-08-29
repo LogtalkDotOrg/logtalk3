@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-28,
+		date is 2026-08-29,
 		comment is 'Unit tests for the MCP stdio transport (``mcp_server_stdio_transport``). Spec semantics are covered by ``tests_2025_06_18`` and ``tests_2026_07_28``; this suite focuses on transport selection, framing, and outcome rendering.'
 	]).
 
@@ -58,6 +58,7 @@
 	test(stdio_facade_transport_option_01, deterministic) :-
 		mcp_server::valid_option(transport(stdio)),
 		mcp_server::valid_option(spec('2025-06-18')),
+		mcp_server::valid_option(spec('2025-11-25')),
 		mcp_server::valid_option(spec('2026-07-28')).
 
 	test(stdio_facade_resolve_2025_01, deterministic) :-

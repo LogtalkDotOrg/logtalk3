@@ -36,6 +36,7 @@
 		mcp_server_spec_protocol,
 		mcp_server_application,
 		mcp_server_2025_06_18_spec,
+		mcp_server_2025_11_25_spec,
 		mcp_server_2026_07_28_spec,
 		mcp_server_stdio_transport,
 		mcp_server_2025_06_18_adapter,
@@ -46,9 +47,11 @@
 		debug(on)
 	]),
 	logtalk_load(test_tools_2025_06_18, [source_data(on), debug(on)]),
+	logtalk_load(test_tools_2025_11_25, [source_data(on), debug(on)]),
 	logtalk_load(test_tools_2026_07_28, [source_data(on), debug(on)]),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(tests_2025_06_18, [hook(lgtunit)]),
+	logtalk_load(tests_2025_11_25, [hook(lgtunit)]),
 	logtalk_load(tests_2026_07_28, [hook(lgtunit)]),
 	logtalk_load(tests_stdio, [hook(lgtunit)])
 )).
@@ -67,6 +70,7 @@
 		logtalk_load(tests_streamable_http, [hook(lgtunit)]),
 		lgtunit::run_test_sets([
 			tests_2025_06_18,
+			tests_2025_11_25,
 			tests_2026_07_28,
 			tests_stdio,
 			tests_streamable_http
@@ -78,6 +82,7 @@
 	:- initialization((
 		lgtunit::run_test_sets([
 			tests_2025_06_18,
+			tests_2025_11_25,
 			tests_2026_07_28,
 			tests_stdio
 		])

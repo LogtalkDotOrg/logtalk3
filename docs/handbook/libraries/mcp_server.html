@@ -252,7 +252,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#stdio-versus-streamable-http-transports">stdio versus Streamable HTTP transports</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#starting-a-mcp-server">Starting a MCP server</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#spec-and-stdio-transport-default">2025-06-18 spec and stdio transport (default)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#spec-and-stdio-transport">2026-07-28 spec and stdio transport</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#spec-and-stdio-transport">2025-11-25 spec and stdio transport</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">2026-07-28 spec and stdio transport</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#spec-and-streamable-http">2026-07-28 spec and Streamable HTTP</a></li>
 </ul>
 </li>
@@ -266,6 +267,14 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#elicitation-2025-06-18-spec">Elicitation (2025-06-18 spec)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#additions">2025-11-25 additions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#server-description">Server description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#icons-sep-973">Icons (SEP-973)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#url-mode-elicitation-sep-1036">URL-mode elicitation (SEP-1036)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#enum-form-schemas-sep-1330">Enum / form schemas (SEP-1330)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#not-implemented-from-2025-11-25">Not implemented from 2025-11-25</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#multi-round-tool-results-mrtr-2026-07-28-spec">Multi-round tool results - MRTR (2026-07-28 spec)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#caching-2026-07-28-spec">Caching (2026-07-28 spec)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#progress-2026-07-28-spec">Progress (2026-07-28 spec)</a></li>
@@ -275,7 +284,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#mcp-client-configuration">MCP client configuration</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#error-handling">Error handling</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#spec">2025-06-18 spec</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id6">2026-07-28 spec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">2026-07-28 spec</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#protocols-overview">Protocols overview</a><ul>
@@ -287,8 +296,8 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#supported-mcp-methods-per-spec">Supported MCP methods per spec</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#spec-1">2025-06-18 spec</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id9">2026-07-28 spec</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#and-2025-11-25-specs">2025-06-18 and 2025-11-25 specs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#spec-1">2026-07-28 spec</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#mcp-apps-interactive-ui">MCP Apps (interactive UI)</a><ul>
@@ -450,21 +459,24 @@
 <p>MCP (Model Context Protocol) server library for Logtalk applications.
 Makes any Logtalk application available as a local MCP server using
 stdio transport or Streamable HTTP transport.</p>
-<p>Supports two specs, 2025-06-18 and 2026-07-28, and two transports, stdio
-and streamable HTTP (with optional SSE for progress and long-lived
-subscriptions).</p>
+<p>Supports three specs and two transports (stdio and Streamable HTTP, with
+optional SSE for progress and long-lived subscriptions):</p>
 <ul class="simple">
-<li><p><strong>2025-06-18</strong> (default, stdio) - tools, prompts, resources,
-synchronous elicitation, structured output, resource links, version
-negotiation. Spec: <code class="docutils literal notranslate"><span class="pre">mcp_server_2025_06_18_spec</span></code>.</p></li>
-<li><p><strong>2026-07-28</strong> (stdio) - discovery, tools/prompts/resources,
-multi-round tool results (MRTR), caching, progress, subscriptions,
-cancellation. Adapter: <code class="docutils literal notranslate"><span class="pre">mcp_server_2026_07_28_spec</span></code>.</p></li>
-<li><p><strong>2026-07-28</strong> (Streamable HTTP) - same protocol semantics as the 2026
-stdio adapter, over HTTP POST with optional SSE for progress and
-long-lived subscriptions. Transport:
-<code class="docutils literal notranslate"><span class="pre">mcp_server_streamable_http_transport</span></code>. Requires a multi-threaded
-backend.</p></li>
+<li><p><strong>2025-06-18</strong> (default) - tools, prompts, resources, synchronous
+elicitation, structured output, resource links, version negotiation.
+Spec object: <code class="docutils literal notranslate"><span class="pre">mcp_server_2025_06_18_spec</span></code>.</p></li>
+<li><p><strong>2025-11-25</strong> - extends the 2025-06-18 handler with optional
+<code class="docutils literal notranslate"><span class="pre">serverInfo.description</span></code>, icons metadata on tools/prompts/resources
+(SEP-973), URL-mode elicitation (SEP-1036), and pass-through of
+enriched enum / form schemas (SEP-1330). Does <strong>not</strong> implement
+sampling tool calling, experimental Tasks, or OAuth/OIDC. Spec object:
+<code class="docutils literal notranslate"><span class="pre">mcp_server_2025_11_25_spec</span></code> (extends
+<code class="docutils literal notranslate"><span class="pre">mcp_server_2025_06_18_spec</span></code>).</p></li>
+<li><p><strong>2026-07-28</strong> - discovery, tools/prompts/resources, multi-round tool
+results (MRTR), caching, progress, subscriptions, cancellation. Spec
+object: <code class="docutils literal notranslate"><span class="pre">mcp_server_2026_07_28_spec</span></code>. Streamable HTTP uses
+<code class="docutils literal notranslate"><span class="pre">mcp_server_streamable_http_transport</span></code> (multi-threaded backend
+required for subscriptions).</p></li>
 </ul>
 <p>The stdio adapters implement simple synchronous handling of server
 requests. As a consequence, client <code class="docutils literal notranslate"><span class="pre">notifications/cancelled</span></code> can only
@@ -474,6 +486,7 @@ request-scoped SSE progress and subscription fan-out via <code class="docutils l
 <p>Specification references:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://modelcontextprotocol.io/specification/2025-06-18">https://modelcontextprotocol.io/specification/2025-06-18</a></p></li>
+<li><p><a class="reference external" href="https://modelcontextprotocol.io/specification/2025-11-25">https://modelcontextprotocol.io/specification/2025-11-25</a></p></li>
 <li><p><a class="reference external" href="https://modelcontextprotocol.io/specification/2026-07-28">https://modelcontextprotocol.io/specification/2026-07-28</a></p></li>
 </ul>
 <p>The library uses the <code class="docutils literal notranslate"><span class="pre">json_rpc</span></code> library for JSON-RPC 2.0 message
@@ -497,11 +510,11 @@ link in a web browser.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(mcp_server(tester)).
 </pre></div>
 </div>
-<p>This runs the 2025-06-18, 2026-07-28, stdio, and Streamable HTTP test
-sets.</p>
+<p>This runs the 2025-06-18, 2025-11-25, 2026-07-28, stdio, and Streamable
+HTTP test sets.</p>
 <p>For live tests, you can use e.g. MCPJam, Postman, or VSCode as clients.
-These and other tools usually provide reliable support for the
-2025-06-18 spec and the stdio transport. For the 2026-07-28 spec and the
+These and other tools usually provide reliable support for the 2025
+family specs and the stdio transport. For the 2026-07-28 spec and the
 Streamable HTTP transport, support is currently more flaky but expected
 to evolve as implementations mature. Use preferably the latest versions
 of the clients for testing.</p>
@@ -551,8 +564,10 @@ is how JSON-RPC is carried and a few transport-only features.</p>
 <code class="docutils literal notranslate"><span class="pre">/mcp</span></code>)</p></td>
 </tr>
 <tr class="row-even"><td><p>Spec versions</p></td>
-<td><p>2025-06-18 or 2026-07-28</p></td>
-<td><p>2025-06-18 (*) or 2026-07-28</p></td>
+<td><p>2025-06-18, 2025-11-25, or
+2026-07-28</p></td>
+<td><p>2025-06-18 (*), 2025-11-25 (*), or
+2026-07-28</p></td>
 </tr>
 <tr class="row-odd"><td><p>Client model</p></td>
 <td><p>Client spawns the server as a
@@ -586,14 +601,20 @@ when a <code class="docutils literal notranslate"><span class="pre">progressToke
 <p>(*) But no synchronous elicitation over plain POST.</p>
 <p>Application objects do <strong>not</strong> change between transports. Only the
 <code class="docutils literal notranslate"><span class="pre">spec/1</span></code> and <code class="docutils literal notranslate"><span class="pre">transport/1</span></code> options selects the path:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% stdio, 2025-06-18</span>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="c">% stdio, 2025-06-18 (default)</span>
 spec(<span class="s">&#39;2025-06-18&#39;</span>), transport(stdio)
+
+<span class="c">% stdio, 2025-11-25</span>
+spec(<span class="s">&#39;2025-11-25&#39;</span>), transport(stdio)
 
 <span class="c">% stdio, 2026-07-28</span>
 spec(<span class="s">&#39;2026-07-28&#39;</span>), transport(stdio)
 
 <span class="c">% Streamable HTTP, 2025-06-18</span>
 spec(<span class="s">&#39;2025-06-18&#39;</span>), transport(streamable_http)
+
+<span class="c">% Streamable HTTP, 2025-11-25</span>
+spec(<span class="s">&#39;2025-11-25&#39;</span>), transport(streamable_http)
 
 <span class="c">% Streamable HTTP, 2026-07-28</span>
 spec(<span class="s">&#39;2026-07-28&#39;</span>), transport(streamable_http)
@@ -629,7 +650,18 @@ assuming a <code class="docutils literal notranslate"><span class="pre">my_tools
 </div>
 </section>
 <section id="spec-and-stdio-transport">
-<span id="id2"></span><h3>2026-07-28 spec and stdio transport<a class="headerlink" href="#spec-and-stdio-transport" title="Link to this heading"></a></h3>
+<span id="id2"></span><h3>2025-11-25 spec and stdio transport<a class="headerlink" href="#spec-and-stdio-transport" title="Link to this heading"></a></h3>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> mcp_server<span class="o">::</span>start(<span class="s">&#39;my-server&#39;</span>, my_tools, [
+        spec(<span class="s">&#39;2025-11-25&#39;</span>),
+        server_version(<span class="s">&#39;2.0.0&#39;</span>),
+        server_title(<span class="s">&#39;My Server&#39;</span>),
+        server_description(<span class="s">&#39;Optional human-readable server description.&#39;</span>)
+    ]).
+</pre></div>
+</div>
+</section>
+<section id="id3">
+<span id="id4"></span><h3>2026-07-28 spec and stdio transport<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> mcp_server<span class="o">::</span>start(<span class="s">&#39;my-server&#39;</span>, my_tools, [
         spec(<span class="s">&#39;2026-07-28&#39;</span>),
         server_version(<span class="s">&#39;2.0.0&#39;</span>),
@@ -645,7 +677,7 @@ Prolog backend term input prompt. Spurious standard output will break
 the connection between an MCP client and the MCP server.</p>
 </section>
 <section id="spec-and-streamable-http">
-<span id="id3"></span><h3>2026-07-28 spec and Streamable HTTP<a class="headerlink" href="#spec-and-streamable-http" title="Link to this heading"></a></h3>
+<span id="id5"></span><h3>2026-07-28 spec and Streamable HTTP<a class="headerlink" href="#spec-and-streamable-http" title="Link to this heading"></a></h3>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> mcp_server<span class="o">::</span>start(<span class="s">&#39;my-server&#39;</span>, my_tools, [
         spec(<span class="s">&#39;2026-07-28&#39;</span>),
         transport(streamable_http),
@@ -691,18 +723,24 @@ final result.</p>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">server_version(Version)</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">'1.0.0'</span></code></p></td>
-<td><p>Server version
-string</p></td>
+<td><p>Server version string</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">server_title(Title)</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">'logtalk-mcp-server'</span></code></p></td>
 <td><p>Display title</p></td>
 </tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">server_description(Text)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">''</span></code></p></td>
+<td><p>Optional
+<code class="docutils literal notranslate"><span class="pre">serverInfo.description</span></code>
+(2025-11-25; also accepted
+by 2025-06-18)</p></td>
+</tr>
 </tbody>
 </table>
 </section>
 <section id="spec-specific-options">
-<span id="id4"></span><h2>2026-07-28 spec specific options<a class="headerlink" href="#spec-specific-options" title="Link to this heading"></a></h2>
+<span id="id6"></span><h2>2026-07-28 spec specific options<a class="headerlink" href="#spec-specific-options" title="Link to this heading"></a></h2>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Option</p></th>
@@ -1023,6 +1061,73 @@ elicitation with a bird identification expert system.</p>
 Multi-round interaction for the 2026-07-28 spec uses
 <code class="docutils literal notranslate"><span class="pre">mcp_multiround_protocol</span></code> instead.</p>
 </section>
+<section id="additions">
+<span id="id7"></span><h2>2025-11-25 additions<a class="headerlink" href="#additions" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">mcp_server_2025_11_25_spec</span></code> object <strong>extends</strong>
+<code class="docutils literal notranslate"><span class="pre">mcp_server_2025_06_18_spec</span></code> and reuses the same lifecycle
+(<code class="docutils literal notranslate"><span class="pre">initialize</span></code> / <code class="docutils literal notranslate"><span class="pre">notifications/initialized</span></code>), stdio elicitation, and
+tool/prompt/resource methods. Select it with <code class="docutils literal notranslate"><span class="pre">spec('2025-11-25')</span></code>.</p>
+<section id="server-description">
+<h3>Server description<a class="headerlink" href="#server-description" title="Link to this heading"></a></h3>
+<p>Pass <code class="docutils literal notranslate"><span class="pre">server_description(Text)</span></code> so <code class="docutils literal notranslate"><span class="pre">initialize</span></code> includes
+<code class="docutils literal notranslate"><span class="pre">serverInfo.description</span></code> (Implementation.description in the spec).
+Empty or omitted description omits the field.</p>
+</section>
+<section id="icons-sep-973">
+<h3>Icons (SEP-973)<a class="headerlink" href="#icons-sep-973" title="Link to this heading"></a></h3>
+<p>Applications may define public predicates that return a list of icon
+objects for listing responses:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">public</span>(tool_icons<span class="o">/</span><span class="m">2</span>).
+tool_icons(factorial, [
+    <span class="k">{</span>src<span class="o">-</span><span class="s">&#39;https://example.com/icons/factorial.png&#39;</span>, mimeType<span class="o">-</span><span class="s">&#39;image/png&#39;</span><span class="k">}</span>
+]).
+
+<span class="p">:- </span><span class="k">public</span>(prompt_icons<span class="o">/</span><span class="m">2</span>).
+prompt_icons(code_review, [<span class="k">{</span>src<span class="o">-</span>..., mimeType<span class="o">-</span>...<span class="k">}</span>]).
+
+<span class="p">:- </span><span class="k">public</span>(resource_icons<span class="o">/</span><span class="m">2</span>).
+resource_icons(<span class="s">&#39;logtalk://app/data&#39;</span>, [<span class="k">{</span>src<span class="o">-</span>..., mimeType<span class="o">-</span>...<span class="k">}</span>]).
+</pre></div>
+</div>
+<p>Each icon is a curly-term. Common fields: <code class="docutils literal notranslate"><span class="pre">src</span></code> (required URL),
+optional <code class="docutils literal notranslate"><span class="pre">mimeType</span></code>, optional <code class="docutils literal notranslate"><span class="pre">sizes</span></code> (list of size atoms such as
+<code class="docutils literal notranslate"><span class="pre">'48x48'</span></code>). Icons are omitted when the predicate is undefined or
+fails.</p>
+</section>
+<section id="url-mode-elicitation-sep-1036">
+<h3>URL-mode elicitation (SEP-1036)<a class="headerlink" href="#url-mode-elicitation-sep-1036" title="Link to this heading"></a></h3>
+<p>In addition to form elicitation via <code class="docutils literal notranslate"><span class="pre">elicit_request/5</span></code> (inherited),
+the 2025-11-25 handler exposes <code class="docutils literal notranslate"><span class="pre">elicit_url_request/5</span></code>:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>mcp_server_2025_11_25_spec<span class="o">::</span>elicit_url_request(
+    <span class="nv">Input</span>, <span class="nv">Output</span>,
+    <span class="s">&#39;Open the documentation to continue&#39;</span>,
+    <span class="s">&#39;https://example.com/docs&#39;</span>,
+    <span class="nv">Answer</span>
+).
+</pre></div>
+</div>
+<p>This sends <code class="docutils literal notranslate"><span class="pre">elicitation/create</span></code> with <code class="docutils literal notranslate"><span class="pre">mode:</span> <span class="pre">url</span></code> and a <code class="docutils literal notranslate"><span class="pre">url</span></code>
+field. <code class="docutils literal notranslate"><span class="pre">Answer</span></code> is <code class="docutils literal notranslate"><span class="pre">accept(Content)</span></code>, <code class="docutils literal notranslate"><span class="pre">decline</span></code>, or <code class="docutils literal notranslate"><span class="pre">cancel</span></code>,
+same as form mode. Tools that need URL elicitation during
+<code class="docutils literal notranslate"><span class="pre">tool_call/4</span></code> can call this predicate from an application helper when
+stdio streams are available.</p>
+</section>
+<section id="enum-form-schemas-sep-1330">
+<span id="id8"></span><h3>Enum / form schemas (SEP-1330)<a class="headerlink" href="#enum-form-schemas-sep-1330" title="Link to this heading"></a></h3>
+<p>Enriched <code class="docutils literal notranslate"><span class="pre">requestedSchema</span></code> / <code class="docutils literal notranslate"><span class="pre">inputSchema</span></code> shapes (for example
+<code class="docutils literal notranslate"><span class="pre">enum</span></code> with <code class="docutils literal notranslate"><span class="pre">enumNames</span></code> for titled choices) are <strong>pass-through</strong>:
+supply them in the schema curly-term you pass to the elicitation closure
+or in <code class="docutils literal notranslate"><span class="pre">input_schema/2</span></code>. The adapter does not rewrite schema dialects.</p>
+</section>
+<section id="not-implemented-from-2025-11-25">
+<h3>Not implemented from 2025-11-25<a class="headerlink" href="#not-implemented-from-2025-11-25" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Sampling with <code class="docutils literal notranslate"><span class="pre">tools</span></code> / <code class="docutils literal notranslate"><span class="pre">toolChoice</span></code></p></li>
+<li><p>Experimental Tasks (SEP-1686; later moved to an extension in 2026)</p></li>
+<li><p>OAuth / OpenID Connect Discovery / Client ID Metadata Documents</p></li>
+</ul>
+</section>
+</section>
 <section id="multi-round-tool-results-mrtr-2026-07-28-spec">
 <h2>Multi-round tool results - MRTR (2026-07-28 spec)<a class="headerlink" href="#multi-round-tool-results-mrtr-2026-07-28-spec" title="Link to this heading"></a></h2>
 <p>Implement <code class="docutils literal notranslate"><span class="pre">mcp_multiround_protocol</span></code> and define round hooks:</p>
@@ -1330,7 +1435,7 @@ present in the body</p></li>
 <section id="error-handling">
 <h2>Error handling<a class="headerlink" href="#error-handling" title="Link to this heading"></a></h2>
 <section id="spec">
-<span id="id5"></span><h3>2025-06-18 spec<a class="headerlink" href="#spec" title="Link to this heading"></a></h3>
+<span id="id9"></span><h3>2025-06-18 spec<a class="headerlink" href="#spec" title="Link to this heading"></a></h3>
 <ul class="simple">
 <li><p>Predicate failures result in a tool-level error with
 <code class="docutils literal notranslate"><span class="pre">isError:</span> <span class="pre">true</span></code>.</p></li>
@@ -1340,8 +1445,8 @@ term serialized as the error text.</p></li>
 <li><p>Resource read failures result in a JSON-RPC error response.</p></li>
 </ul>
 </section>
-<section id="id6">
-<span id="id7"></span><h3>2026-07-28 spec<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<section id="id10">
+<span id="id11"></span><h3>2026-07-28 spec<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Code</p></th>
@@ -1433,8 +1538,11 @@ resource read</p></li>
 </section>
 <section id="supported-mcp-methods-per-spec">
 <h2>Supported MCP methods per spec<a class="headerlink" href="#supported-mcp-methods-per-spec" title="Link to this heading"></a></h2>
-<section id="spec-1">
-<span id="id8"></span><h3>2025-06-18 spec<a class="headerlink" href="#spec-1" title="Link to this heading"></a></h3>
+<section id="and-2025-11-25-specs">
+<span id="id12"></span><h3>2025-06-18 and 2025-11-25 specs<a class="headerlink" href="#and-2025-11-25-specs" title="Link to this heading"></a></h3>
+<p>The 2025-11-25 handler supports the same methods as 2025-06-18. Listing
+responses may include optional <code class="docutils literal notranslate"><span class="pre">icons</span></code>. Form and URL modes of
+<code class="docutils literal notranslate"><span class="pre">elicitation/create</span></code> are both available under 2025-11-25.</p>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Method</p></th>
@@ -1459,7 +1567,8 @@ acknowledgment</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">tools/list</span></code></p></td>
 <td><p>Request</p></td>
-<td><p>List tools</p></td>
+<td><p>List tools (optional
+icons)</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">tools/call</span></code></p></td>
 <td><p>Request</p></td>
@@ -1467,7 +1576,8 @@ acknowledgment</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">prompts/list</span></code></p></td>
 <td><p>Request</p></td>
-<td><p>List prompts</p></td>
+<td><p>List prompts
+(optional icons)</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">prompts/get</span></code></p></td>
 <td><p>Request</p></td>
@@ -1475,7 +1585,8 @@ acknowledgment</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">resources/list</span></code></p></td>
 <td><p>Request</p></td>
-<td><p>List resources</p></td>
+<td><p>List resources
+(optional icons)</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">resources/read</span></code></p></td>
 <td><p>Request</p></td>
@@ -1484,14 +1595,14 @@ acknowledgment</p></td>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">elicitation/create</span></code></p></td>
 <td><p>Request (server -&gt;
 client)</p></td>
-<td><p>Ask the user for
-input</p></td>
+<td><p>Form or URL mode
+user input</p></td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="id9">
-<span id="id10"></span><h3>2026-07-28 spec<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<section id="spec-1">
+<span id="id13"></span><h3>2026-07-28 spec<a class="headerlink" href="#spec-1" title="Link to this heading"></a></h3>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Method</p></th>
@@ -1633,10 +1744,12 @@ and <strong>Streamable HTTP</strong>. Spec:</p>
 </section>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
-<p>Resource templates, completion, authorization, and optional
-extensions/tasks are not currently implemented. Streamable HTTP
+<p>Resource templates, completion, authorization, sampling tool calling,
+and experimental tasks are not currently implemented. Streamable HTTP
 transport is implemented by <code class="docutils literal notranslate"><span class="pre">mcp_server_streamable_http_transport</span></code>
-(2026-07-28 protocol semantics over HTTP POST with optional SSE).</p>
+(2025 specs and 2026-07-28 spec semantics over HTTP POST with optional
+SSE). Synchronous elicitation is restricted to the stdio transport for
+the 2025 specs.</p>
 <p>Streamable HTTP 2026 request headers (<code class="docutils literal notranslate"><span class="pre">MCP-Protocol-Version</span></code>,
 <code class="docutils literal notranslate"><span class="pre">Mcp-Method</span></code>, <code class="docutils literal notranslate"><span class="pre">Mcp-Name</span></code>, and <code class="docutils literal notranslate"><span class="pre">Mcp-Param-*</span></code> for <code class="docutils literal notranslate"><span class="pre">x-mcp-header</span></code>
 annotations) are validated by the transport. OpenTelemetry <code class="docutils literal notranslate"><span class="pre">_meta</span></code>

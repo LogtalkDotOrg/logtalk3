@@ -7,21 +7,24 @@ MCP (Model Context Protocol) server library for Logtalk applications.
 Makes any Logtalk application available as a local MCP server using
 stdio transport or Streamable HTTP transport.
 
-Supports two specs, 2025-06-18 and 2026-07-28, and two transports, stdio
-and streamable HTTP (with optional SSE for progress and long-lived
-subscriptions).
+Supports three specs and two transports (stdio and Streamable HTTP, with
+optional SSE for progress and long-lived subscriptions):
 
-- **2025-06-18** (default, stdio) - tools, prompts, resources,
-  synchronous elicitation, structured output, resource links, version
-  negotiation. Spec: ``mcp_server_2025_06_18_spec``.
-- **2026-07-28** (stdio) - discovery, tools/prompts/resources,
-  multi-round tool results (MRTR), caching, progress, subscriptions,
-  cancellation. Adapter: ``mcp_server_2026_07_28_spec``.
-- **2026-07-28** (Streamable HTTP) - same protocol semantics as the 2026
-  stdio adapter, over HTTP POST with optional SSE for progress and
-  long-lived subscriptions. Transport:
-  ``mcp_server_streamable_http_transport``. Requires a multi-threaded
-  backend.
+- **2025-06-18** (default) - tools, prompts, resources, synchronous
+  elicitation, structured output, resource links, version negotiation.
+  Spec object: ``mcp_server_2025_06_18_spec``.
+- **2025-11-25** - extends the 2025-06-18 handler with optional
+  ``serverInfo.description``, icons metadata on tools/prompts/resources
+  (SEP-973), URL-mode elicitation (SEP-1036), and pass-through of
+  enriched enum / form schemas (SEP-1330). Does **not** implement
+  sampling tool calling, experimental Tasks, or OAuth/OIDC. Spec object:
+  ``mcp_server_2025_11_25_spec`` (extends
+  ``mcp_server_2025_06_18_spec``).
+- **2026-07-28** - discovery, tools/prompts/resources, multi-round tool
+  results (MRTR), caching, progress, subscriptions, cancellation. Spec
+  object: ``mcp_server_2026_07_28_spec``. Streamable HTTP uses
+  ``mcp_server_streamable_http_transport`` (multi-threaded backend
+  required for subscriptions).
 
 The stdio adapters implement simple synchronous handling of server
 requests. As a consequence, client ``notifications/cancelled`` can only
@@ -32,6 +35,7 @@ request-scoped SSE progress and subscription fan-out via ``notify/1``.
 Specification references:
 
 - https://modelcontextprotocol.io/specification/2025-06-18
+- https://modelcontextprotocol.io/specification/2025-11-25
 - https://modelcontextprotocol.io/specification/2026-07-28
 
 The library uses the ``json_rpc`` library for JSON-RPC 2.0 message
@@ -62,12 +66,12 @@ To test this library predicates, load the ``tester.lgt`` file:
 
    | ?- logtalk_load(mcp_server(tester)).
 
-This runs the 2025-06-18, 2026-07-28, stdio, and Streamable HTTP test
-sets.
+This runs the 2025-06-18, 2025-11-25, 2026-07-28, stdio, and Streamable
+HTTP test sets.
 
 For live tests, you can use e.g. MCPJam, Postman, or VSCode as clients.
-These and other tools usually provide reliable support for the
-2025-06-18 spec and the stdio transport. For the 2026-07-28 spec and the
+These and other tools usually provide reliable support for the 2025
+family specs and the stdio transport. For the 2026-07-28 spec and the
 Streamable HTTP transport, support is currently more flaky but expected
 to evolve as implementations mature. Use preferably the latest versions
 of the clients for testing.
@@ -111,7 +115,8 @@ is how JSON-RPC is carried and a few transport-only features.
 | Transport          | Process stdin/stdout           | HTTP ``POST`` to a path (default         |
 |                    | (newline-delimited JSON-RPC)   | ``/mcp``)                                |
 +--------------------+--------------------------------+------------------------------------------+
-| Spec versions      | 2025-06-18 or 2026-07-28       | 2025-06-18 (\*) or 2026-07-28            |
+| Spec versions      | 2025-06-18, 2025-11-25, or     | 2025-06-18 (*), 2025-11-25 (*), or       |
+|                    | 2026-07-28                     | 2026-07-28                               |
 +--------------------+--------------------------------+------------------------------------------+
 | Client model       | Client spawns the server as a  | Client talks to a listening URL          |
 |                    | subprocess                     |                                          |
@@ -136,14 +141,20 @@ Application objects do **not** change between transports. Only the
 
 ::
 
-   % stdio, 2025-06-18
+   % stdio, 2025-06-18 (default)
    spec('2025-06-18'), transport(stdio)
+
+   % stdio, 2025-11-25
+   spec('2025-11-25'), transport(stdio)
 
    % stdio, 2026-07-28
    spec('2026-07-28'), transport(stdio)
 
    % Streamable HTTP, 2025-06-18
    spec('2025-06-18'), transport(streamable_http)
+
+   % Streamable HTTP, 2025-11-25
+   spec('2025-11-25'), transport(streamable_http)
 
    % Streamable HTTP, 2026-07-28
    spec('2026-07-28'), transport(streamable_http)
@@ -183,6 +194,20 @@ With options:
    | ?- mcp_server::start('my-server', my_tools, [
            server_version('2.0.0'),
            server_title('My Server')
+       ]).
+
+.. _2025-11-25-spec-and-stdio-transport:
+
+2025-11-25 spec and stdio transport
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+::
+
+   | ?- mcp_server::start('my-server', my_tools, [
+           spec('2025-11-25'),
+           server_version('2.0.0'),
+           server_title('My Server'),
+           server_description('Optional human-readable server description.')
        ]).
 
 .. _2026-07-28-spec-and-stdio-transport:
@@ -239,18 +264,22 @@ For unit tests and embedded HTTP stacks, call
 Common options
 --------------
 
-+-----------------------------+--------------------------+----------------------+
-| Option                      | Default                  | Description          |
-+=============================+==========================+======================+
-| ``spec(Spec)``              | ``'2025-06-18'``         | Spec selection       |
-+-----------------------------+--------------------------+----------------------+
-| ``transport(Transport)``    | ``stdio``                | Transport selection  |
-+-----------------------------+--------------------------+----------------------+
-| ``server_version(Version)`` | ``'1.0.0'``              | Server version       |
-|                             |                          | string               |
-+-----------------------------+--------------------------+----------------------+
-| ``server_title(Title)``     | ``'logtalk-mcp-server'`` | Display title        |
-+-----------------------------+--------------------------+----------------------+
++------------------------------+--------------------------+----------------------------+
+| Option                       | Default                  | Description                |
++==============================+==========================+============================+
+| ``spec(Spec)``               | ``'2025-06-18'``         | Spec selection             |
++------------------------------+--------------------------+----------------------------+
+| ``transport(Transport)``     | ``stdio``                | Transport selection        |
++------------------------------+--------------------------+----------------------------+
+| ``server_version(Version)``  | ``'1.0.0'``              | Server version string      |
++------------------------------+--------------------------+----------------------------+
+| ``server_title(Title)``      | ``'logtalk-mcp-server'`` | Display title              |
++------------------------------+--------------------------+----------------------------+
+| ``server_description(Text)`` | ``''``                   | Optional                   |
+|                              |                          | ``serverInfo.description`` |
+|                              |                          | (2025-11-25; also accepted |
+|                              |                          | by 2025-06-18)             |
++------------------------------+--------------------------+----------------------------+
 
 .. _2026-07-28-spec-specific-options:
 
@@ -542,6 +571,85 @@ elicitation with a bird identification expert system.
 Note that the 2026-07-28 adapter **never** invokes ``tool_call/4``.
 Multi-round interaction for the 2026-07-28 spec uses
 ``mcp_multiround_protocol`` instead.
+
+.. _2025-11-25-additions:
+
+2025-11-25 additions
+--------------------
+
+The ``mcp_server_2025_11_25_spec`` object **extends**
+``mcp_server_2025_06_18_spec`` and reuses the same lifecycle
+(``initialize`` / ``notifications/initialized``), stdio elicitation, and
+tool/prompt/resource methods. Select it with ``spec('2025-11-25')``.
+
+Server description
+~~~~~~~~~~~~~~~~~~
+
+Pass ``server_description(Text)`` so ``initialize`` includes
+``serverInfo.description`` (Implementation.description in the spec).
+Empty or omitted description omits the field.
+
+Icons (SEP-973)
+~~~~~~~~~~~~~~~
+
+Applications may define public predicates that return a list of icon
+objects for listing responses:
+
+::
+
+   :- public(tool_icons/2).
+   tool_icons(factorial, [
+       {src-'https://example.com/icons/factorial.png', mimeType-'image/png'}
+   ]).
+
+   :- public(prompt_icons/2).
+   prompt_icons(code_review, [{src-..., mimeType-...}]).
+
+   :- public(resource_icons/2).
+   resource_icons('logtalk://app/data', [{src-..., mimeType-...}]).
+
+Each icon is a curly-term. Common fields: ``src`` (required URL),
+optional ``mimeType``, optional ``sizes`` (list of size atoms such as
+``'48x48'``). Icons are omitted when the predicate is undefined or
+fails.
+
+URL-mode elicitation (SEP-1036)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In addition to form elicitation via ``elicit_request/5`` (inherited),
+the 2025-11-25 handler exposes ``elicit_url_request/5``:
+
+::
+
+   mcp_server_2025_11_25_spec::elicit_url_request(
+       Input, Output,
+       'Open the documentation to continue',
+       'https://example.com/docs',
+       Answer
+   ).
+
+This sends ``elicitation/create`` with ``mode: url`` and a ``url``
+field. ``Answer`` is ``accept(Content)``, ``decline``, or ``cancel``,
+same as form mode. Tools that need URL elicitation during
+``tool_call/4`` can call this predicate from an application helper when
+stdio streams are available.
+
+.. _enum--form-schemas-sep-1330:
+
+Enum / form schemas (SEP-1330)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Enriched ``requestedSchema`` / ``inputSchema`` shapes (for example
+``enum`` with ``enumNames`` for titled choices) are **pass-through**:
+supply them in the schema curly-term you pass to the elicitation closure
+or in ``input_schema/2``. The adapter does not rewrite schema dialects.
+
+Not implemented from 2025-11-25
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- Sampling with ``tools`` / ``toolChoice``
+- Experimental Tasks (SEP-1686; later moved to an extension in 2026)
+- OAuth / OpenID Connect Discovery / Client ID Metadata Documents
 
 Multi-round tool results - MRTR (2026-07-28 spec)
 -------------------------------------------------
@@ -972,10 +1080,14 @@ details.
 Supported MCP methods per spec
 ------------------------------
 
-.. _2025-06-18-spec-1:
+.. _2025-06-18-and-2025-11-25-specs:
 
-2025-06-18 spec
-~~~~~~~~~~~~~~~
+2025-06-18 and 2025-11-25 specs
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The 2025-11-25 handler supports the same methods as 2025-06-18. Listing
+responses may include optional ``icons``. Form and URL modes of
+``elicitation/create`` are both available under 2025-11-25.
 
 +-------------------------------+----------------------+----------------------+
 | Method                        | Type                 | Description          |
@@ -988,20 +1100,23 @@ Supported MCP methods per spec
 +-------------------------------+----------------------+----------------------+
 | ``ping``                      | Request              | Liveness check       |
 +-------------------------------+----------------------+----------------------+
-| ``tools/list``                | Request              | List tools           |
+| ``tools/list``                | Request              | List tools (optional |
+|                               |                      | icons)               |
 +-------------------------------+----------------------+----------------------+
 | ``tools/call``                | Request              | Call a tool          |
 +-------------------------------+----------------------+----------------------+
 | ``prompts/list``              | Request              | List prompts         |
+|                               |                      | (optional icons)     |
 +-------------------------------+----------------------+----------------------+
 | ``prompts/get``               | Request              | Get a prompt         |
 +-------------------------------+----------------------+----------------------+
 | ``resources/list``            | Request              | List resources       |
+|                               |                      | (optional icons)     |
 +-------------------------------+----------------------+----------------------+
 | ``resources/read``            | Request              | Read a resource      |
 +-------------------------------+----------------------+----------------------+
-| ``elicitation/create``        | Request (server ->   | Ask the user for     |
-|                               | client)              | input                |
+| ``elicitation/create``        | Request (server ->   | Form or URL mode     |
+|                               | client)              | user input           |
 +-------------------------------+----------------------+----------------------+
 
 .. _2026-07-28-spec-1:
@@ -1123,10 +1238,12 @@ Host <-> iframe JSON-RPC (``ui/initialize``, sandbox, ``postMessage``).
 Limitations
 -----------
 
-Resource templates, completion, authorization, and optional
-extensions/tasks are not currently implemented. Streamable HTTP
+Resource templates, completion, authorization, sampling tool calling,
+and experimental tasks are not currently implemented. Streamable HTTP
 transport is implemented by ``mcp_server_streamable_http_transport``
-(2026-07-28 protocol semantics over HTTP POST with optional SSE).
+(2025 specs and 2026-07-28 spec semantics over HTTP POST with optional
+SSE). Synchronous elicitation is restricted to the stdio transport for
+the 2025 specs.
 
 Streamable HTTP 2026 request headers (``MCP-Protocol-Version``,
 ``Mcp-Method``, ``Mcp-Name``, and ``Mcp-Param-*`` for ``x-mcp-header``
