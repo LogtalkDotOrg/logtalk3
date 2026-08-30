@@ -15,7 +15,7 @@ MCP Streamable HTTP transport (2026-07-28). Uses Logtalk ``http_server::serve_un
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-29
+| **Date:** 2026-08-30
 
 | **Compilation flags:**
 |    ``static, context_switching_calls, threaded``
@@ -65,6 +65,18 @@ Initializes adapter state for ``Application`` with ``Options`` without opening a
 |    ``prepare(Application,Options)``
 | **Mode and number of proofs:**
 |    ``prepare(+object_identifier,+list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
 
 
 ------------

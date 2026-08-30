@@ -8,14 +8,14 @@
 ``mcp_ui_protocol``
 ===================
 
-Optional MCP Apps (``io.modelcontextprotocol/ui``) metadata for tools and resources. Applications that provide interactive UI resources declare ``ui`` in ``capabilities/1`` (and typically ``resources``), implement ``mcp_resource_protocol`` for ``ui://`` HTML resources, and may implement these predicates to attach tool and resource UI metadata. Spec: https://modelcontextprotocol.io/extensions/apps/overview
+Optional MCP Apps (``io.modelcontextprotocol/ui``) metadata for tools and resources. Applications that provide interactive UI resources declare ``ui`` in ``capabilities/1`` (and typically ``resources``), implement ``mcp_resource_protocol`` for ``ui://`` HTML resources, and may implement these predicates to attach tool and resource UI metadata. See the https://modelcontextprotocol.io/extensions/apps/overview spec for details.
 
 | **Availability:** 
 |    ``logtalk_load(mcp_server(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-24
+| **Date:** 2026-08-30
 
 | **Compilation flags:**
 |    ``static``

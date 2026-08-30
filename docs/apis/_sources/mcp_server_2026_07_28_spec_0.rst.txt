@@ -15,7 +15,7 @@ MCP 2026-07-28 protocol handler. Returns reply/1, reply_with_progress/2, subscri
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-29
+| **Date:** 2026-08-30
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -96,8 +96,15 @@ Private predicates
 ``output_stream_/1``
 ^^^^^^^^^^^^^^^^^^^^
 
+Current output stream used for stdio rendering and subscription event fan-out.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``output_stream_(Stream)``
+| **Mode and number of proofs:**
+|    ``output_stream_(-stream)`` - ``zero_or_one``
 
 
 ------------
@@ -108,8 +115,15 @@ Private predicates
 ``subscription_/3``
 ^^^^^^^^^^^^^^^^^^^
 
+Active subscription entry: identifier, opening request id, and filter list.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``subscription_(SubscriptionId,RequestId,Filters)``
+| **Mode and number of proofs:**
+|    ``subscription_(-atom,-nonvar,-list)`` - ``zero_or_more``
 
 
 ------------
@@ -120,8 +134,13 @@ Private predicates
 ``running_/0``
 ^^^^^^^^^^^^^^
 
+Flag set while the stdio server loop is active.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Mode and number of proofs:**
+|    ``running_`` - ``zero_or_one``
 
 
 ------------
@@ -132,8 +151,15 @@ Private predicates
 ``reply_outcome_/1``
 ^^^^^^^^^^^^^^^^^^^^
 
+Buffered abstract outcome (``reply/1``, ``subscribe/3``, etc.) for the current request.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``reply_outcome_(Outcome)``
+| **Mode and number of proofs:**
+|    ``reply_outcome_(-nonvar)`` - ``zero_or_one``
 
 
 ------------
@@ -144,8 +170,15 @@ Private predicates
 ``progress_buffer_/1``
 ^^^^^^^^^^^^^^^^^^^^^^
 
+Buffered ``notifications/progress`` events for the current request (before final reply).
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``progress_buffer_(Events)``
+| **Mode and number of proofs:**
+|    ``progress_buffer_(-list)`` - ``zero_or_one``
 
 
 ------------
@@ -156,8 +189,15 @@ Private predicates
 ``current_options_/1``
 ^^^^^^^^^^^^^^^^^^^^^^
 
+Merged options for the active prepare/handle session.
+
 | **Compilation flags:**
 |    ``dynamic``
+
+| **Template:**
+|    ``current_options_(Options)``
+| **Mode and number of proofs:**
+|    ``current_options_(-list)`` - ``zero_or_one``
 
 
 ------------

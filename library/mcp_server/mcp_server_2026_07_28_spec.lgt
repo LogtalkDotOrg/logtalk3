@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-29,
+		date is 2026-08-30,
 		comment is 'MCP 2026-07-28 protocol handler. Returns reply/1, reply_with_progress/2, subscribe/3, accepted, or no_reply outcomes. Does not write to streams; transports render outcomes.'
 	]).
 
@@ -48,22 +48,50 @@
 
 	:- private(output_stream_/1).
 	:- dynamic(output_stream_/1).
+	:- mode(output_stream_(-stream), zero_or_one).
+	:- info(output_stream_/1, [
+		comment is 'Current output stream used for stdio rendering and subscription event fan-out.',
+		argnames is ['Stream']
+	]).
 
 	:- private(subscription_/3).
 	:- dynamic(subscription_/3).
-	% subscription_(SubId, RequestId, Filters)
+	:- mode(subscription_(-atom, -nonvar, -list), zero_or_more).
+	:- info(subscription_/3, [
+		comment is 'Active subscription entry: identifier, opening request id, and filter list.',
+		argnames is ['SubscriptionId', 'RequestId', 'Filters']
+	]).
 
 	:- private(running_/0).
 	:- dynamic(running_/0).
+	:- mode(running_, zero_or_one).
+	:- info(running_/0, [
+		comment is 'Flag set while the stdio server loop is active.'
+	]).
 
 	:- private(reply_outcome_/1).
 	:- dynamic(reply_outcome_/1).
+	:- mode(reply_outcome_(-nonvar), zero_or_one).
+	:- info(reply_outcome_/1, [
+		comment is 'Buffered abstract outcome (``reply/1``, ``subscribe/3``, etc.) for the current request.',
+		argnames is ['Outcome']
+	]).
 
 	:- private(progress_buffer_/1).
 	:- dynamic(progress_buffer_/1).
+	:- mode(progress_buffer_(-list), zero_or_one).
+	:- info(progress_buffer_/1, [
+		comment is 'Buffered ``notifications/progress`` events for the current request (before final reply).',
+		argnames is ['Events']
+	]).
 
 	:- private(current_options_/1).
 	:- dynamic(current_options_/1).
+	:- mode(current_options_(-list), zero_or_one).
+	:- info(current_options_/1, [
+		comment is 'Merged options for the active prepare/handle session.',
+		argnames is ['Options']
+	]).
 
 	:- uses(json_rpc, [
 		response/3, error_response/4, method_not_found/2, is_request/1, is_notification/1, id/2, method/2,

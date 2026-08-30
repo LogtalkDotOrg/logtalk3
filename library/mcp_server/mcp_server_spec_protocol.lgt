@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-21,
+		date is 2026-08-30,
 		comment is 'Protocol for MCP spec (version) handlers independent of transport. A handler validates and dispatches JSON-RPC messages and returns abstract outcomes that a transport (stdio or Streamable HTTP) renders to the wire.'
 	]).
 
@@ -38,8 +38,15 @@
 	:- public(prepare/2).
 	:- mode(prepare(+object_identifier, +list), one_or_error).
 	:- info(prepare/2, [
-		comment is 'Initializes handler state for Application with merged Options. Does not open any transport.',
-		argnames is ['Application', 'Options']
+		comment is 'Initializes handler state for ``Application`` with merged ``Options``. Does not open any transport.',
+		argnames is ['Application', 'Options'],
+		exceptions is [
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option')
+		]
 	]).
 
 	:- public(handle_message/3).

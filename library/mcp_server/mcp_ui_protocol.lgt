@@ -24,8 +24,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-24,
-		comment is 'Optional MCP Apps (``io.modelcontextprotocol/ui``) metadata for tools and resources. Applications that provide interactive UI resources declare ``ui`` in ``capabilities/1`` (and typically ``resources``), implement ``mcp_resource_protocol`` for ``ui://`` HTML resources, and may implement these predicates to attach tool and resource UI metadata. Spec: https://modelcontextprotocol.io/extensions/apps/overview',
+		date is 2026-08-30,
+		comment is 'Optional MCP Apps (``io.modelcontextprotocol/ui``) metadata for tools and resources. Applications that provide interactive UI resources declare ``ui`` in ``capabilities/1`` (and typically ``resources``), implement ``mcp_resource_protocol`` for ``ui://`` HTML resources, and may implement these predicates to attach tool and resource UI metadata. See the https://modelcontextprotocol.io/extensions/apps/overview spec for details.',
 		see_also is [mcp_tool_protocol, mcp_resource_protocol, mcp_server]
 	]).
 
