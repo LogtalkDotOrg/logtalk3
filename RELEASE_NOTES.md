@@ -37,6 +37,9 @@ soft-cut conditional. Controlled by the `suspicious_calls` flag.
 * FIXED: Compiler bug in the handling of `initialization/1` directives found
 in included files where the initialization goals could be called out-of-order.
 
+* FIXED: The `logtalk_make(check)` goal misreporting missing predicates for
+`(::)/1` and `(^^)/1` calls from complementing categories.
+
 Prolog adapter and integration files
 ------------------------------------
 

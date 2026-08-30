@@ -3264,7 +3264,20 @@ logtalk_make(Target) :-
 			\+ call(IDcl, Template, _, _, _, _, _)
 		)
 	;	'$lgt_current_category_'(Entity, _, Dcl, _, _, _),
-		\+ call(Dcl, Template, _, _, _, _)
+		(	'$lgt_complemented_object_'(Object, Entity, _, _, _),
+			'$lgt_entity_property_'(Object, calls(::Functor/Arity, _, _, _, Location)),
+			'$lgt_current_object_'(Object, _, Dcl, _, _, IDcl, _, _, _, _, _) ->
+			(	\+ '$lgt_instantiates_class_'(Object, _, _),
+				\+ '$lgt_specializes_class_'(Object, _, _) ->
+				% prototype
+				\+ call(Dcl, Template, _, _, _, _, _)
+			;	% instance and/or class
+				\+ call(Dcl, Template, _, _, _, _, _),
+				\+ call(IDcl, Template, _, _, _, _, _)
+			)
+		;	\+ '$lgt_complemented_object_'(_, Entity, _, _, _),
+			\+ call(Dcl, Template, _, _, _, _)
+		)
 	),
 	'$lgt_missing_reference'(Entity, Location, Reference).
 
@@ -3281,7 +3294,20 @@ logtalk_make(Target) :-
 			\+ call(IDcl, Template, _, _, _, _, _)
 		)
 	;	'$lgt_current_category_'(Entity, _, Dcl, _, _, _),
-		\+ call(Dcl, Template, _, _, _, _)
+		(	'$lgt_complemented_object_'(Object, Entity, _, _, _),
+			'$lgt_entity_property_'(Object, calls(::Functor/Arity, _, _, _, Location)),
+			'$lgt_current_object_'(Object, _, Dcl, _, _, IDcl, _, _, _, _, _) ->
+			(	\+ '$lgt_instantiates_class_'(Object, _, _),
+				\+ '$lgt_specializes_class_'(Object, _, _) ->
+				% prototype
+				\+ call(Dcl, Template, _, _, _, _, _)
+			;	% instance and/or class
+				\+ call(Dcl, Template, _, _, _, _, _),
+				\+ call(IDcl, Template, _, _, _, _, _)
+			)
+		;	\+ '$lgt_complemented_object_'(_, Entity, _, _, _),
+			\+ call(Dcl, Template, _, _, _, _)
+		)
 	),
 	'$lgt_missing_reference'(Entity, Location, Reference).
 
