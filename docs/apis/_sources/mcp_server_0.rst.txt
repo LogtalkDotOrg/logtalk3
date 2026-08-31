@@ -8,7 +8,7 @@
 ``mcp_server``
 ==============
 
-MCP server facade. Selects spec and transport (stdio or Streamable HTTP). Legacy ``protocol_adapter/1`` remains supported.
+MCP server facade. Selects spec and transport (stdio or Streamable HTTP).
 
 | **Availability:** 
 |    ``logtalk_load(mcp_server(loader))``
@@ -30,7 +30,6 @@ MCP server facade. Selects spec and transport (stdio or Streamable HTTP). Legacy
 
    - Specs: ``'2025-06-18'`` (default), ``'2025-11-25'``, and ``'2026-07-28'`` via ``spec/1``.
    - Transports: ``stdio`` (default) and ``streamable_http`` via ``transport/1``.
-   - Legacy: ``protocol_adapter(Adapter)`` overrides the spec/transport matrix when present.
 
 | **Inherited public predicates:**
 |     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
@@ -67,7 +66,7 @@ Starts the MCP server with default options.
 ``start/3``
 ^^^^^^^^^^^
 
-Starts the MCP server with options (spec/1, transport/1, protocol_adapter/1, HTTP options, ...).
+Starts the MCP server with options (``spec/1``, ``transport/1``, HTTP options, ...).
 
 | **Compilation flags:**
 |    ``static``
@@ -153,21 +152,21 @@ Protected predicates
 Private predicates
 ------------------
 
-.. index:: active_adapter_/1
-.. _mcp_server/0::active_adapter_/1:
+.. index:: active_transport_object_/1
+.. _mcp_server/0::active_transport_object_/1:
 
-``active_adapter_/1``
-^^^^^^^^^^^^^^^^^^^^^
+``active_transport_object_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Currently active adapter object.
+Currently active transport object.
 
 | **Compilation flags:**
 |    ``dynamic``
 
 | **Template:**
-|    ``active_adapter_(Adapter)``
+|    ``active_transport_object_(TransportObject)``
 | **Mode and number of proofs:**
-|    ``active_adapter_(?object_identifier)`` - ``zero_or_one``
+|    ``active_transport_object_(?object_identifier)`` - ``zero_or_one``
 
 
 ------------

@@ -51,21 +51,21 @@ Protected predicates
 Private predicates
 ------------------
 
-.. index:: active_protocol_/1
-.. _mcp_server_stdio_transport/0::active_protocol_/1:
+.. index:: active_spec_object_/1
+.. _mcp_server_stdio_transport/0::active_spec_object_/1:
 
-``active_protocol_/1``
-^^^^^^^^^^^^^^^^^^^^^^
+``active_spec_object_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Protocol handler object selected for the current session.
+Spec handler object selected for the current session.
 
 | **Compilation flags:**
 |    ``dynamic``
 
 | **Template:**
-|    ``active_protocol_(Protocol)``
+|    ``active_spec_object_(SpecObject)``
 | **Mode and number of proofs:**
-|    ``active_protocol_(-object_identifier)`` - ``zero_or_one``
+|    ``active_spec_object_(-object_identifier)`` - ``zero_or_one``
 
 
 ------------

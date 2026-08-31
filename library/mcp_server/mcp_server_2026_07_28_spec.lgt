@@ -33,7 +33,7 @@
 	:- public(run_stdio_loop/3).
 	:- mode(run_stdio_loop(+stream, +stream, +list), one).
 	:- info(run_stdio_loop/3, [
-		comment is 'Stdio read/dispatch loop used by mcp_server_2026_07_28_adapter.',
+		comment is 'Stdio read/dispatch loop. Called by the stdio transport.',
 		argnames is ['Input', 'Output', 'Options']
 	]).
 
@@ -1005,9 +1005,6 @@
 	default_option(cache_ttl(0)).
 	default_option(cache_scope(private)).
 
-	valid_option(protocol_adapter(Adapter)) :-
-		callable(Adapter),
-		conforms_to_protocol(Adapter, mcp_server_transport_protocol).
 	valid_option(server_name(Name)) :-
 		atom(Name).
 	valid_option(server_version(Version)) :-
@@ -1029,7 +1026,6 @@
 	valid_option(progress_hook(_)).
 	valid_option(spec(_)).
 	valid_option(transport(_)).
-	valid_option(protocol_adapter(_)).
 	valid_option(http_port(_)).
 	valid_option(http_bind(_)).
 	valid_option(http_path(_)).

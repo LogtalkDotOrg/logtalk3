@@ -25,38 +25,6 @@ MCP (Model Context Protocol) server library for Logtalk applications.
 Makes any Logtalk application available as a local MCP server using
 stdio transport or Streamable HTTP transport.
 
-Supports three specs and two transports (stdio and Streamable HTTP, with
-optional SSE for progress and long-lived subscriptions):
-
-- **2025-06-18** (default) - tools, prompts, resources, synchronous
-  elicitation, structured output, resource links, version negotiation.
-  Spec object: `mcp_server_2025_06_18_spec`.
-- **2025-11-25** - extends the 2025-06-18 handler with optional
-  `serverInfo.description`, icons metadata on tools/prompts/resources
-  (SEP-973), URL-mode elicitation (SEP-1036), and pass-through of enriched
-  enum / form schemas (SEP-1330). Does **not** implement sampling tool
-  calling, experimental Tasks, or OAuth/OIDC. Spec object:
-  `mcp_server_2025_11_25_spec` (extends `mcp_server_2025_06_18_spec`).
-- **2026-07-28** - discovery, tools/prompts/resources, multi-round tool
-  results (MRTR), caching, progress, subscriptions, cancellation. Spec
-  object: `mcp_server_2026_07_28_spec`. Streamable HTTP uses
-  `mcp_server_streamable_http_transport` (multi-threaded backend required
-  for subscriptions).
-
-The stdio adapters implement simple synchronous handling of server
-requests. As a consequence, client `notifications/cancelled` can only
-be used to drop matching subscription entries (i.e., listen cancel) and
-cannot cancel in-flight work. The Streamable HTTP adapter supports
-request-scoped SSE progress and subscription fan-out via `notify/1`.
-
-Specification references:
-
-- https://modelcontextprotocol.io/specification/2025-06-18
-- https://modelcontextprotocol.io/specification/2025-11-25
-- https://modelcontextprotocol.io/specification/2026-07-28
-
-The library uses the `json_rpc` library for JSON-RPC 2.0 message handling.
-
 
 API documentation
 -----------------
@@ -93,15 +61,52 @@ mature. Use preferably the latest versions of the clients for testing.
 Architecture
 ------------
 
-This library is designed to support adding new MCP specs and transports
-by implementing `mcp_server_transport_protocol`. Common server code is
-provided using the `mcp_server_application` category. A facade object,
-`mcp_server`, allows selecting specific spec and transport using the
-`spec/1` and `transport/1` options. The legacy `protocol_adapter/1`
-option is still supported for backwards compatibility; it should not
-be used in new code.
+This library currently supports three specs (aka data layers) and two
+transport bindings (stdio and Streamable HTTP, with optional SSE for
+progress and long-lived subscriptions):
 
-The Streamable HTTP adapter additionally depends on the `http_server`
+- **2025-06-18** (default) - tools, prompts, resources, synchronous
+  elicitation, structured output, resource links, version negotiation.
+  Spec object: `mcp_server_2025_06_18_spec`.
+- **2025-11-25** - extends the 2025-06-18 handler with optional
+  `serverInfo.description`, icons metadata on tools/prompts/resources
+  (SEP-973), URL-mode elicitation (SEP-1036), and pass-through of enriched
+  enum / form schemas (SEP-1330). Spec object: `mcp_server_2025_11_25_spec`
+  (extends `mcp_server_2025_06_18_spec`).
+- **2026-07-28** - discovery, tools/prompts/resources, multi-round tool
+  results (MRTR), caching, progress, subscriptions, cancellation. Spec
+  object: `mcp_server_2026_07_28_spec`.
+  
+The stdio transport is implemented by the `mcp_server_stdio_transport`
+object. The Streamable HTTP transport is implemented by the
+`mcp_server_streamable_http_transport` object (assumes a multi-threaded
+backend, which is required for subscriptions).
+
+The stdio transport implement simple synchronous handling of server requests
+(by delegating to the used spec object). As a consequence, client
+`notifications/cancelled` can only be used to drop matching subscription
+entries (i.e., listen cancel) and cannot cancel in-flight work.
+
+The Streamable HTTP transport supports request-scoped SSE progress and
+subscription fan-out via `notify/1`.
+
+Spec references:
+
+- https://modelcontextprotocol.io/specification/2025-06-18
+- https://modelcontextprotocol.io/specification/2025-11-25
+- https://modelcontextprotocol.io/specification/2026-07-28
+
+The library uses the `json_rpc` library for JSON-RPC 2.0 message handling.
+
+This library is designed to support adding new MCP specs (aka data layers)
+and transport bindings by implementing `mcp_server_spec_protocol` and
+`mcp_server_transport_protocol`. Common server code is provided using the
+`mcp_server_application` category.
+
+A facade object, `mcp_server`, allows selecting specific spec and transport
+using the `spec/1` and `transport/1` options.
+
+The Streamable HTTP transport additionally depends on the `http_server`
 library (and optionally `http_sse` helpers) for listening and framing.
 
 There's also a set of protocols for the different MCP facets:
@@ -162,7 +167,7 @@ reverse proxies, or clients that `POST` JSON-RPC (with optional SSE for
 progress and subscriptions).
 
 Always start servers through the `mcp_server` facade. For unit tests or
-an external HTTP stack, the Streamable HTTP adapter also exposes
+an external HTTP stack, the Streamable HTTP transport also exposes
 `prepare/2`, `handle_mcp_request/4`, and `cleanup/0` predicates without
 opening a listener.
 
@@ -172,9 +177,9 @@ Starting a MCP server
 
 Starting a MCP server requires at least a server name and the application
 server object and optionally a list of options to customize the server.
-Always use the `mcp_server` facade object to start a server (the adapters
-are not meant to be used directly). Some examples, assuming a `my_tools`
-application object:
+Always use the `mcp_server` facade object to start a server (the spec and
+transport objects are not meant to be used directly). Some examples,
+assuming a `my_tools` application object:
 
 ### 2025-06-18 spec and stdio transport (default)
 
@@ -257,8 +262,8 @@ Common options
 | `cache_ttl(Milliseconds)`   | `0`       | Default TTL in milliseconds (2026)    |
 | `cache_scope(Scope)`        | `private` | `public` or `private` (2026)          |
 
-Streamable HTTP adapter options
--------------------------------
+Streamable HTTP transport options
+---------------------------------
 
 | Option                        | Default         | Description                                                     |
 |-------------------------------|-----------------|-----------------------------------------------------------------|
@@ -432,7 +437,7 @@ arguments.
 Elicitation (2025-06-18 spec)
 -----------------------------
 
-Under the **2025-06-18** adapter, tools that need to ask the user question
+Under the **2025-06-18** spec, tools that need to ask the user question
 during execution can use MCP elicitation **if** the MCP client supports it
 (tested and working with VSCode Copilot). The application declares that it
 requires the client `elicitation` capability and implements `tool_call/4`
@@ -491,7 +496,7 @@ user's response matching the requested schema.
 See the `examples/birds_mcp/` example for a complete demonstration of
 elicitation with a bird identification expert system.
 
-Note that the 2026-07-28 adapter **never** invokes `tool_call/4`. Multi-round
+Note that the 2026-07-28 spec **never** invokes `tool_call/4`. Multi-round
 interaction for the 2026-07-28 spec uses `mcp_multiround_protocol` instead.
 
 
@@ -551,7 +556,7 @@ application helper when stdio streams are available.
 Enriched `requestedSchema` / `inputSchema` shapes (for example `enum` with
 `enumNames` for titled choices) are **pass-through**: supply them in the
 schema curly-term you pass to the elicitation closure or in `input_schema/2`.
-The adapter does not rewrite schema dialects.
+The spec does not rewrite schema dialects.
 
 ### Not implemented from 2025-11-25
 
@@ -589,7 +594,7 @@ and validate it themselves.
 
 Existing applications that do not implement the round hooks continue
 through `tool_call/3`, `prompt_get/3`, `resource_read/3`, or auto-dispatch;
-the 2026 adapter wraps those outcomes as `complete`.
+the 2026-07-28 spec wraps those outcomes as `complete`.
 
 Example:
 
@@ -652,12 +657,11 @@ Applications publish events via:
 	mcp_server::notify(resources_list_changed).
 	mcp_server::notify(resource_updated('logtalk://app/data')).
 
-The facade delegates to the active adapter. The 2025-06-18 adapter
-ignores these events. The 2026-07-28 stdio adapter and the Streamable
-HTTP adapter route them through active subscriptions. On HTTP, long-lived
-SSE connections from `subscriptions/listen` receive matching events;
-`notify/1` isolates per-subscriber failures so a dead stream does not
-abort delivery to others.
+The facade delegates to the active spec. The 2025-06-18 spec ignores these
+events. The 2026-07-28 spec (with both stdio and Streamable HTTP transports)
+route them through active subscriptions. On HTTP, long-lived SSE connections
+from `subscriptions/listen` receive matching events; `notify/1` isolates
+per-subscriber failures so a dead stream does not abort delivery to others.
 
 
 Prompts
@@ -988,12 +992,11 @@ responses may include optional `icons`. Form and URL modes of
 The `ping` method was removed in the 2026-07-28 specification; requests for
 it return method not found (`-32601`).
 
-The 2026-07-28 stdio adapter never writes JSON-RPC **requests** to
-stdout (only responses and notifications). The Streamable HTTP adapter
-likewise only returns responses and server-initiated notifications
-(progress and subscription events), never client-bound requests over the
-HTTP response channel.
-
+The stdio transport never writes JSON-RPC **requests** to stdout (only
+responses and notifications). The Streamable HTTP transport likewise only
+returns responses and server-initiated notifications (progress and
+subscription events), never client-bound requests over the HTTP response
+channel.
 
 
 MCP Apps (interactive UI)

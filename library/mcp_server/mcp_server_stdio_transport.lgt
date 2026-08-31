@@ -29,12 +29,12 @@
 		comment is 'Implements the stdio transport for MCP servers. Reads newline-delimited JSON-RPC from the input stream and writes responses to the output stream. Supports specs 2025-06-18, 2025-11-25, and 2026-07-28 selected via the ``spec/1`` option and delegated to ``mcp_server_2025_06_18_spec``, ``mcp_server_2025_11_25_spec``, or ``mcp_server_2026_07_28_spec``.'
 	]).
 
-	:- private(active_protocol_/1).
-	:- dynamic(active_protocol_/1).
-	:- mode(active_protocol_(-object_identifier), zero_or_one).
-	:- info(active_protocol_/1, [
-		comment is 'Protocol handler object selected for the current session.',
-		argnames is ['Protocol']
+	:- private(active_spec_object_/1).
+	:- dynamic(active_spec_object_/1).
+	:- mode(active_spec_object_(-object_identifier), zero_or_one).
+	:- info(active_spec_object_/1, [
+		comment is 'Spec handler object selected for the current session.',
+		argnames is ['SpecObject']
 	]).
 
 	:- uses(json_rpc, [
@@ -44,19 +44,19 @@
 		member/2, append/3
 	]).
 
-	spec(Version) :-
-		(	active_protocol_(Protocol) ->
-			Protocol::spec(Version)
-		;	Version = '2025-06-18'
+	spec(Spec) :-
+		(	active_spec_object_(SpecObject) ->
+			SpecObject::spec(Spec)
+		;	Spec = '2025-06-18'
 		).
 
 	start(Application, Input, Output, UserOptions) :-
 		context(Context),
-		select_protocol(UserOptions, Context, Protocol),
-		retractall(active_protocol_(_)),
-		assertz(active_protocol_(Protocol)),
+		select_spec_object(UserOptions, Context, SpecObject),
+		retractall(active_spec_object_(_)),
+		assertz(active_spec_object_(SpecObject)),
 		Options = [stdio_input(Input), stdio_output(Output)| UserOptions],
-		Protocol::prepare(Application, Options),
+		SpecObject::prepare(Application, Options),
 		(	conforms_to_protocol(Application, mcp_tool_protocol),
 			Application::capabilities(Capabilities) ->
 			true
@@ -75,43 +75,43 @@
 			LoopOptions
 		),
 		catch(
-			run_loop(Protocol, Input, Output, LoopOptions),
+			run_loop(SpecObject, Input, Output, LoopOptions),
 			Error,
 			(cleanup, throw(Error))
 		),
 		cleanup.
 
 	notify(Event) :-
-		(	active_protocol_(Protocol) ->
-			Protocol::notify(Event)
+		(	active_spec_object_(SpecObject) ->
+			SpecObject::notify(Event)
 		;	true
 		).
 
 	cleanup :-
-		(	retract(active_protocol_(Protocol)) ->
-			catch(Protocol::cleanup, _, true)
+		(	retract(active_spec_object_(SpecObject)) ->
+			catch(SpecObject::cleanup, _, true)
 		;	true
 		).
 
-	select_protocol(Options, Context, Protocol) :-
+	select_spec_object(Options, Context, SpecObject) :-
 		(	member(spec('2026-07-28'), Options) ->
-			Version = '2026-07-28'
+			Spec = '2026-07-28'
 		;	member(spec('2025-11-25'), Options) ->
-			Version = '2025-11-25'
+			Spec = '2025-11-25'
 		;	member(spec('2025-06-18'), Options) ->
-			Version = '2025-06-18'
-		;	member(spec(Version), Options) ->
+			Spec = '2025-06-18'
+		;	member(spec(Spec), Options) ->
 			true
-		;	Version = '2025-06-18'
+		;	Spec = '2025-06-18'
 		),
-		(	protocol_object(Version, Protocol) ->
+		(	spec_object(Spec, SpecObject) ->
 			true
-		;	throw(error(domain_error(protocol_version, Version), Context))
+		;	throw(error(domain_error(protocol_version, Spec), Context))
 		).
 
-	protocol_object('2025-06-18', mcp_server_2025_06_18_spec).
-	protocol_object('2025-11-25', mcp_server_2025_11_25_spec).
-	protocol_object('2026-07-28', mcp_server_2026_07_28_spec).
+	spec_object('2025-06-18', mcp_server_2025_06_18_spec).
+	spec_object('2025-11-25', mcp_server_2025_11_25_spec).
+	spec_object('2026-07-28', mcp_server_2026_07_28_spec).
 
 	run_loop(mcp_server_2026_07_28_spec, Input, Output, Options) :-
 		!,

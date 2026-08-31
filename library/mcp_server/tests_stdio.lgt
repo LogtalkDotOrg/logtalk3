@@ -86,28 +86,6 @@
 		has_pair(Result, supportedVersions, Versions),
 		memberchk('2026-07-28', Versions).
 
-	% Legacy protocol_adapter aliases still work
-	test(stdio_legacy_adapter_2025_01, deterministic) :-
-		run_stdio(
-			test_tools,
-			[protocol_adapter(mcp_server_2025_06_18_adapter)],
-			[initialize_request(1)],
-			[Response]
-		),
-		is_response(Response),
-		result(Response, Result),
-		has_pair(Result, protocolVersion, '2025-06-18').
-
-	test(stdio_legacy_adapter_2026_01, deterministic) :-
-		run_stdio(
-			test_tools_2026,
-			[protocol_adapter(mcp_server_2026_07_28_adapter)],
-			[discover_request(1)],
-			[Response]
-		),
-		is_response(Response),
-		\+ is_error_response(Response).
-
 	% framing: one JSON-RPC message per line, sequential exchange
 
 	test(stdio_framing_multiple_messages_01, true) :-

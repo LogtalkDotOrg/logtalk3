@@ -25,7 +25,7 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-08-31,
-		comment is 'Protocol for MCP server spec (version) handlers independent of transport. A handler validates and dispatches JSON-RPC messages and returns abstract outcomes that a transport (stdio or Streamable HTTP) renders to the wire.'
+		comment is 'Protocol for MCP server spec (aka data layer) handlers independent of transport. A handler validates and dispatches JSON-RPC messages and returns abstract outcomes that a transport (stdio or Streamable HTTP) renders to the wire.'
 	]).
 
 	:- public(spec/1).

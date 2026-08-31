@@ -130,7 +130,7 @@
 			birds_mcp,
 			In,
 			OutStream,
-			[protocol_adapter(mcp_server_2026_07_28_adapter)]
+			[spec('2026-07-28'), transport(stdio)]
 		),
 		close(In),
 		close(OutStream),

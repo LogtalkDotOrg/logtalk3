@@ -30,6 +30,13 @@
 		comment is 'MCP 2025-06-18 protocol handler. Transport-agnostic message handling; returns abstract outcomes for stdio or Streamable HTTP transports to render. Synchronous elicitation requires ``stdio_input/1`` and ``stdio_output/1`` options.'
 	]).
 
+	:- public(supported_specs/1).
+	:- mode(supported_specs(-list), one).
+	:- info(supported_specs/1, [
+		comment is 'Specs this handler can negotiate, preferred first.',
+		argnames is ['Versions']
+	]).
+
 	:- public(current_options/1).
 	:- mode(current_options(-list), zero_or_one).
 	:- info(current_options/1, [
@@ -141,15 +148,6 @@
 		argnames is ['Options']
 	]).
 
-	% supported protocol versions (overridable by 2025-11-25)
-
-	:- protected(supported_protocol_versions/1).
-	:- mode(supported_protocol_versions(-list), one).
-	:- info(supported_protocol_versions/1, [
-		comment is 'Protocol versions this handler can negotiate, preferred first.',
-		argnames is ['Versions']
-	]).
-
 	:- protected(build_capabilities/2).
 	:- mode(build_capabilities(+list, -compound), one).
 	:- info(build_capabilities/2, [
@@ -157,10 +155,10 @@
 		argnames is ['ApplicationCapabilities', 'Capabilities']
 	]).
 
-	:- protected(best_supported_version/3).
-	:- mode(best_supported_version(+list, +atom, -atom), zero_or_one).
-	:- info(best_supported_version/3, [
-		comment is 'Selects the highest supported protocol version that is less than or equal to the client-requested version. Fails when no such version exists.',
+	:- protected(best_supported_spec/3).
+	:- mode(best_supported_spec(+list, +atom, -atom), zero_or_one).
+	:- info(best_supported_spec/3, [
+		comment is 'Selects the highest supported spec that is less than or equal to the client-requested spec. Fails when no such spec exists.',
 		argnames is ['Supported', 'ClientVersion', 'Best']
 	]).
 
@@ -276,7 +274,7 @@
 		;	true
 		).
 
-	supported_protocol_versions(['2025-06-18']).
+	supported_specs(['2025-06-18']).
 
 	% initialize
 
@@ -291,8 +289,8 @@
 			::assertz(client_capabilities_(ClientCapabilities))
 		;	true
 		),
-		::supported_protocol_versions(Supported),
-		(	::best_supported_version(Supported, ClientVersion, NegotiatedVersion) ->
+		::supported_specs(Supported),
+		(	::best_supported_spec(Supported, ClientVersion, NegotiatedVersion) ->
 			true
 		;	last(Supported, NegotiatedVersion)
 		),
@@ -324,15 +322,15 @@
 		response(Result, Id, Response),
 		Outcome = reply(Response).
 
-	best_supported_version(Supported, ClientVersion, Best) :-
-		best_supported_version(Supported, ClientVersion, '', Best),
+	best_supported_spec(Supported, ClientVersion, Best) :-
+		best_supported_spec(Supported, ClientVersion, '', Best),
 		Best \== ''.
 
-	best_supported_version([], _, Best, Best).
-	best_supported_version([Version| Versions], ClientVersion, Best0, Best) :-
-		(	Version @=< ClientVersion, Version @> Best0 ->
-			best_supported_version(Versions, ClientVersion, Version, Best)
-		;	best_supported_version(Versions, ClientVersion, Best0, Best)
+	best_supported_spec([], _, Best, Best).
+	best_supported_spec([Spec| Specs], ClientSpec, Best0, Best) :-
+		(	Spec @=< ClientSpec, Spec @> Best0 ->
+			best_supported_spec(Specs, ClientSpec, Spec, Best)
+		;	best_supported_spec(Specs, ClientSpec, Best0, Best)
 		).
 
 	build_capabilities(ApplicationCapabilities, Capabilities) :-
@@ -604,9 +602,6 @@
 	default_option(server_title('logtalk-mcp-server')).
 	default_option(server_description('')).
 
-	valid_option(protocol_adapter(Adapter)) :-
-		callable(Adapter),
-		conforms_to_protocol(Adapter, mcp_server_transport_protocol).
 	valid_option(server_name(Name)) :-
 		atom(Name).
 	valid_option(server_version(Version)) :-
@@ -623,7 +618,6 @@
 	valid_option(progress_hook(_)).
 	valid_option(spec(_)).
 	valid_option(transport(_)).
-	valid_option(protocol_adapter(_)).
 	valid_option(http_port(_)).
 	valid_option(http_bind(_)).
 	valid_option(http_path(_)).

@@ -39,8 +39,6 @@
 		mcp_server_2025_11_25_spec,
 		mcp_server_2026_07_28_spec,
 		mcp_server_stdio_transport,
-		mcp_server_2025_06_18_adapter,
-		mcp_server_2026_07_28_adapter,
 		mcp_server
 	], [
 		source_data(on),

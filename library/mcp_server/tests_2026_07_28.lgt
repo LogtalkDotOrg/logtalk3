@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-29,
+		date is 2026-08-31,
 		comment is 'Unit tests for the MCP 2026-07-28 adapter.'
 	]).
 
@@ -43,7 +43,6 @@
 	]).
 
 	cover(mcp_server).
-	cover(mcp_server_2026_07_28_adapter).
 	cover(mcp_server_2026_07_28_spec).
 	cover(mcp_server_stdio_transport).
 
@@ -55,20 +54,11 @@
 		^^clean_file('mcp26_out.tmp'),
 		mcp_server_2026_07_28_spec::cleanup.
 
-	% facade adapter selection
+	% facade default spec and transport
 
-	test(mcp26_facade_default_adapter_01, deterministic) :-
-		% Default is protocol_version + transport matrix (stdio / 2025), not protocol_adapter/1
+	test(mcp26_facade_defaults_01, deterministic) :-
 		mcp_server::default_option(spec('2025-06-18')),
-		mcp_server::default_option(transport(stdio)),
-		\+ mcp_server::default_option(protocol_adapter(_)).
-
-	test(mcp26_facade_select_2026_01, deterministic) :-
-		% Starting with explicit 2026 adapter should not throw domain_error
-		% (we only check selection; a full exchange is tested below)
-		Options = [protocol_adapter(mcp_server_2026_07_28_adapter)],
-		mcp_server::valid_option(protocol_adapter(mcp_server_2026_07_28_adapter)),
-		memberchk(protocol_adapter(mcp_server_2026_07_28_adapter), Options).
+		mcp_server::default_option(transport(stdio)).
 
 	% server/discover
 
@@ -425,7 +415,7 @@
 			Application,
 			In,
 			OutStream,
-			[protocol_adapter(mcp_server_2026_07_28_adapter)]
+			[spec('2026-07-28'), transport(stdio)]
 		),
 		close(In),
 		close(OutStream),

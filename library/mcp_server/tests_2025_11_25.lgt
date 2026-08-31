@@ -59,7 +59,7 @@
 		mcp_server_2025_11_25_spec::spec(Spec).
 
 	test(spec_2025_11_25_supported_versions_01, deterministic) :-
-		mcp_server_2025_11_25_spec<<supported_protocol_versions(Versions),
+		mcp_server_2025_11_25_spec::supported_specs(Versions),
 		assertion(memberchk('2025-11-25', Versions)),
 		assertion(memberchk('2025-06-18', Versions)).
 

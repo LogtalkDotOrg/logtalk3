@@ -44,11 +44,11 @@
 		atomic_concat/3
 	]).
 
-	% version (parent handle_initialize uses ::supported_protocol_versions/1)
+	% version (parent handle_initialize uses ::supported_specs/1)
 
 	spec('2025-11-25').
 
-	supported_protocol_versions(['2025-11-25', '2025-06-18']).
+	supported_specs(['2025-11-25', '2025-06-18']).
 
 	% tools/list — optional icons (SEP-973)
 

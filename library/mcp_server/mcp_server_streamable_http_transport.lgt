@@ -1447,8 +1447,6 @@
 
 	valid_option(transport(Transport)) :-
 		once((Transport == stdio; Transport == streamable_http)).
-	valid_option(protocol_adapter(Adapter)) :-
-		callable(Adapter), conforms_to_protocol(Adapter, mcp_server_transport_protocol).
 	valid_option(server_name(Name)) :-
 		atom(Name).
 	valid_option(server_version(Version)) :-

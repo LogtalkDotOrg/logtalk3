@@ -50,7 +50,7 @@ Public predicates
 ``run_stdio_loop/3``
 ^^^^^^^^^^^^^^^^^^^^
 
-Stdio read/dispatch loop used by mcp_server_2026_07_28_adapter.
+Stdio read/dispatch loop. Called by the stdio transport.
 
 | **Compilation flags:**
 |    ``static``

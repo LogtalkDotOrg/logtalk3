@@ -71,6 +71,10 @@ square zero Gram matrices for zero-width row matrices.
 `http_handler_protocol` (as a marker protocol) to simplify server code that
 defines routes.
 
+* REMOVED: The `mcp_server` library support for the deprecated 2025-03-26 spec.
+Existing code using the previous version of this library must be updated to one
+the more recent specs that are now supported by the library.
+
 * ADDED: New `http_sse` library implementing HTTP Server-Sent Events.
 
 * ADDED: New `paseto` library implementing Platform-Agnostic Security Tokens

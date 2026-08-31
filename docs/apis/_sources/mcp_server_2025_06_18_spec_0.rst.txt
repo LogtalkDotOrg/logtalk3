@@ -44,6 +44,25 @@ MCP 2025-06-18 protocol handler. Transport-agnostic message handling; returns ab
 Public predicates
 -----------------
 
+.. index:: supported_specs/1
+.. _mcp_server_2025_06_18_spec/0::supported_specs/1:
+
+``supported_specs/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Specs this handler can negotiate, preferred first.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``supported_specs(Versions)``
+| **Mode and number of proofs:**
+|    ``supported_specs(-list)`` - ``one``
+
+
+------------
+
 .. index:: current_options/1
 .. _mcp_server_2025_06_18_spec/0::current_options/1:
 
@@ -237,95 +256,21 @@ Handles the ``resources/read`` request and returns a ``reply/1`` outcome.
 
 ------------
 
-.. index:: initialized_/0
-.. _mcp_server_2025_06_18_spec/0::initialized_/0:
+.. index:: generate_elicit_id/1
+.. _mcp_server_2025_06_18_spec/0::generate_elicit_id/1:
 
-``initialized_/0``
-^^^^^^^^^^^^^^^^^^
+``generate_elicit_id/1``
+^^^^^^^^^^^^^^^^^^^^^^^^
 
-Initialization completed flag.
-
-| **Compilation flags:**
-|    ``dynamic``
-
-| **Mode and number of proofs:**
-|    ``initialized_`` - ``zero_or_one``
-
-
-------------
-
-.. index:: elicit_counter_/1
-.. _mcp_server_2025_06_18_spec/0::elicit_counter_/1:
-
-``elicit_counter_/1``
-^^^^^^^^^^^^^^^^^^^^^
-
-Elicitation current counter.
+Generates a new elicitation id.
 
 | **Compilation flags:**
 |    ``dynamic``
 
 | **Template:**
-|    ``elicit_counter_(Counter)``
+|    ``generate_elicit_id(ElicitId)``
 | **Mode and number of proofs:**
-|    ``elicit_counter_(-non_negative_integer)`` - ``one``
-
-
-------------
-
-.. index:: client_capabilities_/1
-.. _mcp_server_2025_06_18_spec/0::client_capabilities_/1:
-
-``client_capabilities_/1``
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Client capabilities.
-
-| **Compilation flags:**
-|    ``dynamic``
-
-| **Template:**
-|    ``client_capabilities_(Capabilities)``
-| **Mode and number of proofs:**
-|    ``client_capabilities_(-nonvar)`` - ``one``
-
-
-------------
-
-.. index:: server_options_/1
-.. _mcp_server_2025_06_18_spec/0::server_options_/1:
-
-``server_options_/1``
-^^^^^^^^^^^^^^^^^^^^^
-
-Server options.
-
-| **Compilation flags:**
-|    ``dynamic``
-
-| **Template:**
-|    ``server_options_(Options)``
-| **Mode and number of proofs:**
-|    ``server_options_(-list(compound))`` - ``one``
-
-
-------------
-
-.. index:: supported_protocol_versions/1
-.. _mcp_server_2025_06_18_spec/0::supported_protocol_versions/1:
-
-``supported_protocol_versions/1``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Protocol versions this handler can negotiate, preferred first.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``supported_protocol_versions(Versions)``
-| **Mode and number of proofs:**
-|    ``supported_protocol_versions(-list)`` - ``one``
+|    ``generate_elicit_id(-non_negative_integer)`` - ``one``
 
 
 ------------
@@ -349,21 +294,21 @@ Builds the server ``capabilities`` object from application capability atoms (too
 
 ------------
 
-.. index:: best_supported_version/3
-.. _mcp_server_2025_06_18_spec/0::best_supported_version/3:
+.. index:: best_supported_spec/3
+.. _mcp_server_2025_06_18_spec/0::best_supported_spec/3:
 
-``best_supported_version/3``
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+``best_supported_spec/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Selects the highest supported protocol version that is less than or equal to the client-requested version. Fails when no such version exists.
+Selects the highest supported spec that is less than or equal to the client-requested spec. Fails when no such spec exists.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``best_supported_version(Supported,ClientVersion,Best)``
+|    ``best_supported_spec(Supported,ClientVersion,Best)``
 | **Mode and number of proofs:**
-|    ``best_supported_version(+list,+atom,-atom)`` - ``zero_or_one``
+|    ``best_supported_spec(+list,+atom,-atom)`` - ``zero_or_one``
 
 
 ------------
@@ -371,7 +316,79 @@ Selects the highest supported protocol version that is less than or equal to the
 Private predicates
 ------------------
 
-(no local declarations; see entity ancestors if any)
+.. index:: client_capabilities_/1
+.. _mcp_server_2025_06_18_spec/0::client_capabilities_/1:
+
+``client_capabilities_/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Client capabilities.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``client_capabilities_(Capabilities)``
+| **Mode and number of proofs:**
+|    ``client_capabilities_(-nonvar)`` - ``one``
+
+
+------------
+
+.. index:: elicit_counter_/1
+.. _mcp_server_2025_06_18_spec/0::elicit_counter_/1:
+
+``elicit_counter_/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Elicitation current counter.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``elicit_counter_(Counter)``
+| **Mode and number of proofs:**
+|    ``elicit_counter_(-non_negative_integer)`` - ``one``
+
+
+------------
+
+.. index:: initialized_/0
+.. _mcp_server_2025_06_18_spec/0::initialized_/0:
+
+``initialized_/0``
+^^^^^^^^^^^^^^^^^^
+
+Initialization completed flag.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Mode and number of proofs:**
+|    ``initialized_`` - ``zero_or_one``
+
+
+------------
+
+.. index:: server_options_/1
+.. _mcp_server_2025_06_18_spec/0::server_options_/1:
+
+``server_options_/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Server options.
+
+| **Compilation flags:**
+|    ``dynamic``
+
+| **Template:**
+|    ``server_options_(Options)``
+| **Mode and number of proofs:**
+|    ``server_options_(-list(compound))`` - ``one``
+
+
+------------
 
 Operators
 ---------

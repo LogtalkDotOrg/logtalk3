@@ -8,7 +8,7 @@
 ``mcp_server_spec_protocol``
 ============================
 
-Protocol for MCP server spec (version) handlers independent of transport. A handler validates and dispatches JSON-RPC messages and returns abstract outcomes that a transport (stdio or Streamable HTTP) renders to the wire.
+Protocol for MCP server spec (aka data layer) handlers independent of transport. A handler validates and dispatches JSON-RPC messages and returns abstract outcomes that a transport (stdio or Streamable HTTP) renders to the wire.
 
 | **Availability:** 
 |    ``logtalk_load(mcp_server(loader))``

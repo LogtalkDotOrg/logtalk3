@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-29,
+		date is 2026-08-31,
 		comment is 'Unit tests for the MCP 2025-06-18 adapter.'
 	]).
 
@@ -39,7 +39,6 @@
 	]).
 
 	cover(mcp_server).
-	cover(mcp_server_2025_06_18_adapter).
 	cover(mcp_server_2025_06_18_spec).
 	cover(mcp_server_stdio_transport).
 
