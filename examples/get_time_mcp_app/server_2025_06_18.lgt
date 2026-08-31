@@ -28,6 +28,6 @@
 	mcp_server::start(get_time, get_time, [
 		spec('2025-06-18'),
 		transport(stdio),
-		server_title('Get time MCP App demo (2025-67-18)')
+		server_title('Get time MCP App demo (2025-06-18)')
 	])
 )).

@@ -1046,13 +1046,10 @@ Host <-> iframe JSON-RPC (`ui/initialize`, sandbox, `postMessage`).
 Limitations
 -----------
 
-Resource templates, completion, authorization, sampling tool calling, and
-experimental tasks are not currently implemented. Streamable HTTP transport
-is implemented by `mcp_server_streamable_http_transport` (2025 specs and
-2026-07-28 spec semantics over HTTP POST with optional SSE). Synchronous
-elicitation is restricted to the stdio transport for the 2025 specs.
+Resource templates, completion, authorization, roots (deprecated), sampling
+(deprecated), and experimental tasks are not currently implemented.
 
-Streamable HTTP 2026 request headers (`MCP-Protocol-Version`, `Mcp-Method`,
-`Mcp-Name`, and `Mcp-Param-*` for `x-mcp-header` annotations) are validated
-by the transport. OpenTelemetry `_meta` propagation and OAuth are currently
-not implemented.
+Synchronous elicitation is restricted to the stdio transport for the 2025
+specs.
+
+OpenTelemetry `_meta` propagation and OAuth are currently not implemented.

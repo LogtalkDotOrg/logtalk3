@@ -28,7 +28,7 @@
 	mcp_server::start('birds-expert', birds_mcp, [
 		spec('2025-06-18'),
 		transport(stdio),
-		server_title('Birds Expert (2025-67-18)'),
+		server_title('Birds Expert (2025-06-18)'),
 		instructions('Identify a bird by answering characteristic questions over multiple rounds.')
 	])
 )).

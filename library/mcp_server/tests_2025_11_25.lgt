@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-29,
+		date is 2026-08-31,
 		comment is 'Unit tests for MCP 2025-11-25: version negotiation, serverInfo.description, icons (SEP-973), URL elicitation (SEP-1036), enum schema pass-through (SEP-1330).'
 	]).
 
@@ -55,8 +55,8 @@
 
 	% version identity
 
-	test(spec_2025_11_25_identity_01, deterministic(V == '2025-11-25')) :-
-		mcp_server_2025_11_25_spec::spec(V).
+	test(spec_2025_11_25_identity_01, deterministic(Spec == '2025-11-25')) :-
+		mcp_server_2025_11_25_spec::spec(Spec).
 
 	test(spec_2025_11_25_supported_versions_01, deterministic) :-
 		mcp_server_2025_11_25_spec<<supported_protocol_versions(Versions),

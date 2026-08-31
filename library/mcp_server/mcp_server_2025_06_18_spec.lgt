@@ -100,24 +100,17 @@
 		argnames is ['Message', 'Id', 'Options', 'Outcome']
 	]).
 
+	:- protected(generate_elicit_id/1).
+	:- dynamic(generate_elicit_id/1).
+	:- mode(generate_elicit_id(-non_negative_integer), one).
+	:- info(generate_elicit_id/1, [
+		comment is 'Generates a new elicitation id.',
+		argnames is ['ElicitId']
+	]).
+
 	% dynamic state (spec-owned)
 
-	:- protected(initialized_/0).
-	:- dynamic(initialized_/0).
-	:- mode(initialized_, zero_or_one).
-	:- info(initialized_/0, [
-		comment is 'Initialization completed flag.'
-	]).
-
-	:- protected(elicit_counter_/1).
-	:- dynamic(elicit_counter_/1).
-	:- mode(elicit_counter_(-non_negative_integer), one).
-	:- info(elicit_counter_/1, [
-		comment is 'Elicitation current counter.',
-		argnames is ['Counter']
-	]).
-
-	:- protected(client_capabilities_/1).
+	:- private(client_capabilities_/1).
 	:- dynamic(client_capabilities_/1).
 	:- mode(client_capabilities_(-nonvar), one).
 	:- info(client_capabilities_/1, [
@@ -125,12 +118,50 @@
 		argnames is ['Capabilities']
 	]).
 
-	:- protected(server_options_/1).
+	:- private(elicit_counter_/1).
+	:- dynamic(elicit_counter_/1).
+	:- mode(elicit_counter_(-non_negative_integer), one).
+	:- info(elicit_counter_/1, [
+		comment is 'Elicitation current counter.',
+		argnames is ['Counter']
+	]).
+
+	:- private(initialized_/0).
+	:- dynamic(initialized_/0).
+	:- mode(initialized_, zero_or_one).
+	:- info(initialized_/0, [
+		comment is 'Initialization completed flag.'
+	]).
+
+	:- private(server_options_/1).
 	:- dynamic(server_options_/1).
 	:- mode(server_options_(-list(compound)), one).
 	:- info(server_options_/1, [
 		comment is 'Server options.',
 		argnames is ['Options']
+	]).
+
+	% supported protocol versions (overridable by 2025-11-25)
+
+	:- protected(supported_protocol_versions/1).
+	:- mode(supported_protocol_versions(-list), one).
+	:- info(supported_protocol_versions/1, [
+		comment is 'Protocol versions this handler can negotiate, preferred first.',
+		argnames is ['Versions']
+	]).
+
+	:- protected(build_capabilities/2).
+	:- mode(build_capabilities(+list, -compound), one).
+	:- info(build_capabilities/2, [
+		comment is 'Builds the server ``capabilities`` object from application capability atoms (tools is always present; prompts, resources, and the MCP Apps UI extension are optional).',
+		argnames is ['ApplicationCapabilities', 'Capabilities']
+	]).
+
+	:- protected(best_supported_version/3).
+	:- mode(best_supported_version(+list, +atom, -atom), zero_or_one).
+	:- info(best_supported_version/3, [
+		comment is 'Selects the highest supported protocol version that is less than or equal to the client-requested version. Fails when no such version exists.',
+		argnames is ['Supported', 'ClientVersion', 'Best']
 	]).
 
 	:- uses(json_rpc, [
@@ -163,32 +194,32 @@
 		;	Capabilities = []
 		),
 		Options = [application(Application), application_capabilities(Capabilities)| Options0],
-		retractall(server_options_(_)),
-		assertz(server_options_(Options)),
+		::retractall(server_options_(_)),
+		::assertz(server_options_(Options)),
 		setup_state.
 
 	current_options(Options) :-
-		server_options_(Options).
+		::server_options_(Options).
 
 	% the 2025-06-18 spec does not support list-changed / resource-updated
 	% notifications in the form used by later specifications; ignore silently
 	notify(_Event).
 
 	cleanup :-
-		retractall(initialized_),
-		retractall(elicit_counter_(_)),
-		retractall(client_capabilities_(_)),
-		retractall(server_options_(_)).
+		::retractall(initialized_),
+		::retractall(elicit_counter_(_)),
+		::retractall(client_capabilities_(_)),
+		::retractall(server_options_(_)).
 
 	setup_state :-
-		retractall(initialized_),
-		retractall(elicit_counter_(_)),
-		retractall(client_capabilities_(_)),
-		assertz(elicit_counter_(0)),
-		assertz(client_capabilities_({})).
+		::retractall(initialized_),
+		::retractall(elicit_counter_(_)),
+		::assertz(elicit_counter_(0)),
+		::retractall(client_capabilities_(_)),
+		::assertz(client_capabilities_({})).
 
 	handle_message(Message, TransportOptions, Outcome) :-
-		(	server_options_(Base) ->
+		(	::server_options_(Base) ->
 			true
 		;	Base = TransportOptions
 		),
@@ -238,35 +269,12 @@
 	handle_notification(Message) :-
 		method(Message, Method),
 		(	Method == 'notifications/initialized' ->
-			retractall(initialized_),
-			assertz(initialized_)
+			::retractall(initialized_),
+			::assertz(initialized_)
 		;	Method == 'notifications/cancelled' ->
 			true
 		;	true
 		).
-
-	% supported protocol versions (overridable by 2025-11-25)
-
-	:- protected(supported_protocol_versions/1).
-	:- mode(supported_protocol_versions(-list), one).
-	:- info(supported_protocol_versions/1, [
-		comment is 'Protocol versions this handler can negotiate, preferred first.',
-		argnames is ['Versions']
-	]).
-
-	:- protected(build_capabilities/2).
-	:- mode(build_capabilities(+list, -compound), one).
-	:- info(build_capabilities/2, [
-		comment is 'Builds the server ``capabilities`` object from application capability atoms (tools is always present; prompts, resources, and the MCP Apps UI extension are optional).',
-		argnames is ['ApplicationCapabilities', 'Capabilities']
-	]).
-
-	:- protected(best_supported_version/3).
-	:- mode(best_supported_version(+list, +atom, -atom), zero_or_one).
-	:- info(best_supported_version/3, [
-		comment is 'Selects the highest supported protocol version that is less than or equal to the client-requested version. Fails when no such version exists.',
-		argnames is ['Supported', 'ClientVersion', 'Best']
-	]).
 
 	supported_protocol_versions(['2025-06-18']).
 
@@ -279,8 +287,8 @@
 		;	ClientVersion = ''
 		),
 		(	^^has_pair(Params, capabilities, ClientCapabilities) ->
-			retractall(client_capabilities_(_)),
-			assertz(client_capabilities_(ClientCapabilities))
+			::retractall(client_capabilities_(_)),
+			::assertz(client_capabilities_(ClientCapabilities))
 		;	true
 		),
 		::supported_protocol_versions(Supported),
@@ -399,7 +407,7 @@
 	execute_tool(Application, ToolName, Functor, Arity, ToolArguments, Options, Result) :-
 		^^curly_to_pairs(ToolArguments, ArgPairs),
 		^^option(application_capabilities(ApplicationCapabilities), Options),
-		client_capabilities_(ClientCapabilities),
+		::client_capabilities_(ClientCapabilities),
 		(	member(elicitation, ApplicationCapabilities),
 			^^has_pair(ClientCapabilities, elicitation, _),
 			member(stdio_input(Input), Options),
@@ -584,9 +592,11 @@
 		).
 
 	generate_elicit_id(Id) :-
-		retract(elicit_counter_(N0)),
-		N is N0 + 1,
-		assertz(elicit_counter_(N)),
+		(	::retract(elicit_counter_(N0)) ->
+			N is N0 + 1
+		;	N is 1
+		),
+		::assertz(elicit_counter_(N)),
 		atomic_concat(elicit_, N, Id).
 
 	default_option(server_name('logtalk-mcp-server')).

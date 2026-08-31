@@ -19,14 +19,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-%  entry point for running the factorial MCP 2026-07-28 server
+%  entry point for running the factorial MCP server;
+%  load the example then start the server, which reads from stdin and
+%  writes newline-delimited JSON-RPC messages to stdout
 
 :- initialization((
 	logtalk_load(loader),
 	mcp_server::start(factorial_mcp, factorial_mcp, [
-		spec('2026-07-28'),
+		spec('2025-11-25'),
 		transport(stdio),
-		server_title('Factorial (2026-07-28)'),
+		server_title('Factorial (2025-11-25)'),
 		instructions('Compute the factorial of a non-negative integer.')
 	])
 )).

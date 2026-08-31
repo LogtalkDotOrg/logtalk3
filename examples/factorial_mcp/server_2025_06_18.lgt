@@ -28,7 +28,7 @@
 	mcp_server::start(factorial_mcp, factorial_mcp, [
 		spec('2025-06-18'),
 		transport(stdio),
-		server_title('Factorial'),
+		server_title('Factorial (2025-06-18)'),
 		instructions('Compute the factorial of a non-negative integer.')
 	])
 )).

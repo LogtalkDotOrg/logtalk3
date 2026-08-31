@@ -1744,16 +1744,13 @@ and <strong>Streamable HTTP</strong>. Spec:</p>
 </section>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
-<p>Resource templates, completion, authorization, sampling tool calling,
-and experimental tasks are not currently implemented. Streamable HTTP
-transport is implemented by <code class="docutils literal notranslate"><span class="pre">mcp_server_streamable_http_transport</span></code>
-(2025 specs and 2026-07-28 spec semantics over HTTP POST with optional
-SSE). Synchronous elicitation is restricted to the stdio transport for
-the 2025 specs.</p>
-<p>Streamable HTTP 2026 request headers (<code class="docutils literal notranslate"><span class="pre">MCP-Protocol-Version</span></code>,
-<code class="docutils literal notranslate"><span class="pre">Mcp-Method</span></code>, <code class="docutils literal notranslate"><span class="pre">Mcp-Name</span></code>, and <code class="docutils literal notranslate"><span class="pre">Mcp-Param-*</span></code> for <code class="docutils literal notranslate"><span class="pre">x-mcp-header</span></code>
-annotations) are validated by the transport. OpenTelemetry <code class="docutils literal notranslate"><span class="pre">_meta</span></code>
-propagation and OAuth are currently not implemented.</p>
+<p>Resource templates, completion, authorization, roots (deprecated),
+sampling (deprecated), and experimental tasks are not currently
+implemented.</p>
+<p>Synchronous elicitation is restricted to the stdio transport for the
+2025 specs.</p>
+<p>OpenTelemetry <code class="docutils literal notranslate"><span class="pre">_meta</span></code> propagation and OAuth are currently not
+implemented.</p>
 </section>
 </section>
 

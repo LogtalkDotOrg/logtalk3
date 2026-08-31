@@ -44,20 +44,6 @@
 		atomic_concat/3
 	]).
 
-
-	:- private(elicit_counter_/1).
-	:- dynamic(elicit_counter_/1).
-	:- mode(elicit_counter_(-non_negative_integer), one).
-	:- info(elicit_counter_/1, [
-		comment is 'Local elicitation id counter used by URL-mode ``elicit_url_request/5`` (separate from the parent form-mode counter).',
-		argnames is ['Counter']
-	]).
-
-	prepare(Application, UserOptions) :-
-		^^prepare(Application, UserOptions),
-		retractall(elicit_counter_(_)),
-		assertz(elicit_counter_(0)).
-
 	% version (parent handle_initialize uses ::supported_protocol_versions/1)
 
 	spec('2025-11-25').
@@ -123,7 +109,7 @@
 	% URL-mode elicitation (SEP-1036)
 
 	elicit_url_request(Input, Output, Message, URL, Answer) :-
-		generate_elicit_id(ElicitId),
+		^^generate_elicit_id(ElicitId),
 		Params = {
 			message-Message,
 			(mode)-url,
@@ -148,15 +134,5 @@
 			)
 		;	Answer = cancel
 		).
-
-	generate_elicit_id(Id) :-
-		(	retract(elicit_counter_(N0)) ->
-			true
-		;	N0 = 0
-		),
-		N is N0 + 1,
-		retractall(elicit_counter_(_)),
-		assertz(elicit_counter_(N)),
-		atomic_concat(elicit_, N, Id).
 
 :- end_object.

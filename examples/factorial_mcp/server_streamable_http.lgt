@@ -28,7 +28,7 @@
 	mcp_server::start(factorial_mcp, factorial_mcp, [
 		spec('2025-06-18'),
 		transport(streamable_http),
-		server_title('Factorial'),
+		server_title('Factorial (2025-06-18)'),
 		instructions('Compute the factorial of a non-negative integer.'),
 		http_port(8080),
 		http_bind('127.0.0.1'),
