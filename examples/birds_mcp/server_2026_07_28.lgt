@@ -25,7 +25,8 @@
 :- initialization((
 	logtalk_load(loader),
 	mcp_server::start('birds-expert', birds_mcp, [
-		protocol_adapter(mcp_server_2026_07_28_adapter),
+		spec('2026-07-28'),
+		transport(stdio),
 		server_title('Birds Expert (2026-07-28)'),
 		instructions('Identify a bird by answering characteristic questions over multiple rounds.')
 	])
