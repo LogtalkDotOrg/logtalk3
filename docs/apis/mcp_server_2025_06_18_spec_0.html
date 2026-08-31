@@ -450,7 +450,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-08-29</div>
+<div class="line"><strong>Date:</strong> 2026-08-31</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -836,6 +836,7 @@
 </section>
 <section id="build-capabilities-2">
 <span id="mcp-server-2025-06-18-spec-0-build-capabilities-2"></span><span id="index-16"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">build_capabilities/2</span></code></a><a class="headerlink" href="#build-capabilities-2" title="Link to this heading"></a></h3>
+<p>Builds the server <code class="docutils literal notranslate"><span class="pre">capabilities</span></code> object from application capability atoms (tools is always present; prompts, resources, and the MCP Apps UI extension are optional).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -843,6 +844,10 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">build_capabilities(ApplicationCapabilities,Capabilities)</span></code></div>
+</div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">build_capabilities(+list,-compound)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
@@ -852,6 +857,7 @@
 </section>
 <section id="best-supported-version-3">
 <span id="mcp-server-2025-06-18-spec-0-best-supported-version-3"></span><span id="index-17"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">best_supported_version/3</span></code></a><a class="headerlink" href="#best-supported-version-3" title="Link to this heading"></a></h3>
+<p>Selects the highest supported protocol version that is less than or equal to the client-requested version. Fails when no such version exists.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -859,6 +865,10 @@
 </div>
 </div>
 <div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">best_supported_version(Supported,ClientVersion,Best)</span></code></div>
+</div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">best_supported_version(+list,+atom,-atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>

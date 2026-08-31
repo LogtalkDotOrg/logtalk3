@@ -15,7 +15,7 @@ MCP 2025-06-18 protocol handler. Transport-agnostic message handling; returns ab
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-29
+| **Date:** 2026-08-31
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -336,9 +336,13 @@ Protocol versions this handler can negotiate, preferred first.
 ``build_capabilities/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
+Builds the server ``capabilities`` object from application capability atoms (tools is always present; prompts, resources, and the MCP Apps UI extension are optional).
+
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``build_capabilities(ApplicationCapabilities,Capabilities)``
 | **Mode and number of proofs:**
 |    ``build_capabilities(+list,-compound)`` - ``one``
 
@@ -351,9 +355,13 @@ Protocol versions this handler can negotiate, preferred first.
 ``best_supported_version/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Selects the highest supported protocol version that is less than or equal to the client-requested version. Fails when no such version exists.
+
 | **Compilation flags:**
 |    ``static``
 
+| **Template:**
+|    ``best_supported_version(Supported,ClientVersion,Best)``
 | **Mode and number of proofs:**
 |    ``best_supported_version(+list,+atom,-atom)`` - ``zero_or_one``
 

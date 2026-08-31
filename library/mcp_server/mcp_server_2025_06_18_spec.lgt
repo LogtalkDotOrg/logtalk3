@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-29,
+		date is 2026-08-31,
 		comment is 'MCP 2025-06-18 protocol handler. Transport-agnostic message handling; returns abstract outcomes for stdio or Streamable HTTP transports to render. Synchronous elicitation requires ``stdio_input/1`` and ``stdio_output/1`` options.'
 	]).
 
@@ -256,9 +256,17 @@
 
 	:- protected(build_capabilities/2).
 	:- mode(build_capabilities(+list, -compound), one).
+	:- info(build_capabilities/2, [
+		comment is 'Builds the server ``capabilities`` object from application capability atoms (tools is always present; prompts, resources, and the MCP Apps UI extension are optional).',
+		argnames is ['ApplicationCapabilities', 'Capabilities']
+	]).
 
 	:- protected(best_supported_version/3).
 	:- mode(best_supported_version(+list, +atom, -atom), zero_or_one).
+	:- info(best_supported_version/3, [
+		comment is 'Selects the highest supported protocol version that is less than or equal to the client-requested version. Fails when no such version exists.',
+		argnames is ['Supported', 'ClientVersion', 'Best']
+	]).
 
 	supported_protocol_versions(['2025-06-18']).
 

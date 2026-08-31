@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-29,
+		date is 2026-08-31,
 		comment is 'MCP 2025-11-25 protocol handler. Extends the 2025-06-18 handler with version ``2025-11-25`` negotiation (still accepting ``2025-06-18``), optional ``serverInfo.description``, icons metadata on tools/prompts/resources (SEP-973), and URL-mode elicitation (SEP-1036). EnumSchema / ElicitResult enrichments (SEP-1330) are pass-through via application-supplied schemas. Does **not** implement sampling tool calling, experimental Tasks, or OAuth/OIDC.'
 	]).
 
@@ -48,19 +48,21 @@
 		atomic_concat/3
 	]).
 
-	% version (parent handle_initialize uses ::supported_protocol_versions/1)
 
 	:- private(elicit_counter_/1).
 	:- dynamic(elicit_counter_/1).
+	:- mode(elicit_counter_(-non_negative_integer), one).
+	:- info(elicit_counter_/1, [
+		comment is 'Local elicitation id counter used by URL-mode ``elicit_url_request/5`` (separate from the parent form-mode counter).',
+		argnames is ['Counter']
+	]).
 
 	prepare(Application, UserOptions) :-
 		^^prepare(Application, UserOptions),
 		retractall(elicit_counter_(_)),
 		assertz(elicit_counter_(0)).
 
-	% ------------------------------------------------------------------
-	% Version (parent handle_initialize uses ::supported_protocol_versions/1)
-	% ------------------------------------------------------------------
+	% version (parent handle_initialize uses ::supported_protocol_versions/1)
 
 	spec('2025-11-25').
 
