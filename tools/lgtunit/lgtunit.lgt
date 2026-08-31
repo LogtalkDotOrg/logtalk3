@@ -30,7 +30,7 @@
 	:- info([
 		version is 22:9:0,
 		author is 'Paulo Moura',
-		date is 2026-08-24,
+		date is 2026-08-31,
 		comment is 'A unit test framework supporting predicate clause coverage, determinism testing, input/output testing, property-based testing, and multiple test dialects.',
 		remarks is [
 			'Usage' - 'Define test objects as extensions of the ``lgtunit`` object and compile their source files using the compiler option ``hook(lgtunit)``.',
@@ -1698,7 +1698,7 @@
 
 	goal_expansion(Object::Message, Expansion) :-
 		Object == lgtunit,
-		callable(Expansion),
+		callable(Message),
 		(	Message = assertion(Assertion) ->
 			Expansion = (
 				\+ \+ catch(Assertion, Error, throw(assertion_error(Assertion, Error))) ->
