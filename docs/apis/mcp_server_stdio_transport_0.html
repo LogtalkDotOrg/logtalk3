@@ -265,11 +265,11 @@
 <li class="toctree-l3"><a class="reference internal" href="mcp_server_2025_11_25_spec_0.html">mcp_server_2025_11_25_spec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_server_2026_07_28_adapter_0.html">mcp_server_2026_07_28_adapter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_server_2026_07_28_spec_0.html">mcp_server_2026_07_28_spec</a></li>
-<li class="toctree-l3"><a class="reference internal" href="mcp_server_adapter_protocol_0.html">mcp_server_adapter_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_server_application_0.html">mcp_server_application</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_server_spec_protocol_0.html">mcp_server_spec_protocol</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">mcp_server_stdio_transport</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_server_streamable_http_transport_0.html">mcp_server_streamable_http_transport</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcp_server_transport_protocol_0.html">mcp_server_transport_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_streamable_http_handler_0.html">mcp_streamable_http_handler</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_tool_protocol_0.html">mcp_tool_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_ui_protocol_0.html">mcp_ui_protocol</a></li>
@@ -440,7 +440,7 @@
   <p class="right" id="mcp-server-stdio-transport-0"><span id="index-0"></span><strong>object</strong></p>
 <section id="mcp-server-stdio-transport">
 <h1><code class="docutils literal notranslate"><span class="pre">mcp_server_stdio_transport</span></code><a class="headerlink" href="#mcp-server-stdio-transport" title="Link to this heading"></a></h1>
-<p>Stdio transport adapter for MCP. Reads newline-delimited JSON-RPC from the input stream and writes responses to the output stream. Supports specs 2025-06-18, 2025-11-25, and 2026-07-28 selected via the <code class="docutils literal notranslate"><span class="pre">spec/1</span></code> option and delegated to <code class="docutils literal notranslate"><span class="pre">mcp_server_2025_06_18_spec</span></code> or <code class="docutils literal notranslate"><span class="pre">mcp_server_2026_07_28_spec</span></code>.</p>
+<p>Implements the stdio transport for MCP servers. Reads newline-delimited JSON-RPC from the input stream and writes responses to the output stream. Supports specs 2025-06-18, 2025-11-25, and 2026-07-28 selected via the <code class="docutils literal notranslate"><span class="pre">spec/1</span></code> option and delegated to <code class="docutils literal notranslate"><span class="pre">mcp_server_2025_06_18_spec</span></code>, <code class="docutils literal notranslate"><span class="pre">mcp_server_2025_11_25_spec</span></code>, or <code class="docutils literal notranslate"><span class="pre">mcp_server_2026_07_28_spec</span></code>.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -450,7 +450,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-08-29</div>
+<div class="line"><strong>Date:</strong> 2026-08-31</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -461,7 +461,7 @@
 <div class="line-block">
 <div class="line"><strong>Implements:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="mcp_server_adapter_protocol_0.html#mcp-server-adapter-protocol-0"><span class="std std-ref">mcp_server_adapter_protocol</span></a></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="mcp_server_transport_protocol_0.html#mcp-server-transport-protocol-0"><span class="std std-ref">mcp_server_transport_protocol</span></a></div>
 </div>
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
@@ -479,7 +479,7 @@
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line"> <a class="reference internal" href="mcp_server_adapter_protocol_0.html#mcp-server-adapter-protocol-0-cleanup-0"><span class="std std-ref">cleanup/0</span></a>  <a class="reference internal" href="mcp_server_adapter_protocol_0.html#mcp-server-adapter-protocol-0-notify-1"><span class="std std-ref">notify/1</span></a>  <a class="reference internal" href="mcp_server_adapter_protocol_0.html#mcp-server-adapter-protocol-0-spec-1"><span class="std std-ref">spec/1</span></a>  <a class="reference internal" href="mcp_server_adapter_protocol_0.html#mcp-server-adapter-protocol-0-start-4"><span class="std std-ref">start/4</span></a></div>
+<div class="line"> <a class="reference internal" href="mcp_server_transport_protocol_0.html#mcp-server-transport-protocol-0-cleanup-0"><span class="std std-ref">cleanup/0</span></a>  <a class="reference internal" href="mcp_server_transport_protocol_0.html#mcp-server-transport-protocol-0-notify-1"><span class="std std-ref">notify/1</span></a>  <a class="reference internal" href="mcp_server_transport_protocol_0.html#mcp-server-transport-protocol-0-spec-1"><span class="std std-ref">spec/1</span></a>  <a class="reference internal" href="mcp_server_transport_protocol_0.html#mcp-server-transport-protocol-0-start-4"><span class="std std-ref">start/4</span></a></div>
 </div>
 </div>
 <nav class="contents local" id="contents">

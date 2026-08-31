@@ -522,12 +522,12 @@ of the clients for testing.</p>
 <section id="architecture">
 <h2>Architecture<a class="headerlink" href="#architecture" title="Link to this heading"></a></h2>
 <p>This library is designed to support adding new MCP specs and transports
-by implementing <code class="docutils literal notranslate"><span class="pre">mcp_server_adapter_protocol</span></code>. Common server code is
+by implementing <code class="docutils literal notranslate"><span class="pre">mcp_server_transport_protocol</span></code>. Common server code is
 provided using the <code class="docutils literal notranslate"><span class="pre">mcp_server_application</span></code> category. A facade object,
 <code class="docutils literal notranslate"><span class="pre">mcp_server</span></code>, allows selecting specific spec and transport using the
 <code class="docutils literal notranslate"><span class="pre">spec/1</span></code> and <code class="docutils literal notranslate"><span class="pre">transport/1</span></code> options. The legacy
 <code class="docutils literal notranslate"><span class="pre">protocol_adapter/1</span></code> option is still supported for backwards
-compatibility.</p>
+compatibility; it should not be used in new code.</p>
 <p>The Streamable HTTP adapter additionally depends on the <code class="docutils literal notranslate"><span class="pre">http_server</span></code>
 library (and optionally <code class="docutils literal notranslate"><span class="pre">http_sse</span></code> helpers) for listening and framing.</p>
 <p>There’s also a set of protocols for the different MCP facets:</p>
@@ -543,8 +543,8 @@ features it provides.</p>
 </section>
 <section id="stdio-versus-streamable-http-transports">
 <h2>stdio versus Streamable HTTP transports<a class="headerlink" href="#stdio-versus-streamable-http-transports" title="Link to this heading"></a></h2>
-<p>Both transports implement <code class="docutils literal notranslate"><span class="pre">mcp_server_adapter_protocol</span></code>. What differs
-is how JSON-RPC is carried and a few transport-only features.</p>
+<p>Both transports implement <code class="docutils literal notranslate"><span class="pre">mcp_server_transport_protocol</span></code>. What
+differs is how JSON-RPC is carried and a few transport-only features.</p>
 <table class="docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"></th>
@@ -805,8 +805,7 @@ response streams</p></td>
 </tbody>
 </table>
 <p>These options are validated by the <code class="docutils literal notranslate"><span class="pre">mcp_server</span></code> facade and applied
-only when <code class="docutils literal notranslate"><span class="pre">protocol_adapter(mcp_server_streamable_http_transport)</span></code> is
-selected.</p>
+only when <code class="docutils literal notranslate"><span class="pre">transport(streamable_http)</span></code> is used.</p>
 </section>
 <section id="implementing-the-tool-protocol">
 <h2>Implementing the tool protocol<a class="headerlink" href="#implementing-the-tool-protocol" title="Link to this heading"></a></h2>
@@ -1408,13 +1407,14 @@ instead:</p>
 <span class="k">}</span>
 </pre></div>
 </div>
-<p>For a 2026-07-28 stdio server, the application loader or start goal must
-pass <code class="docutils literal notranslate"><span class="pre">protocol_adapter(mcp_server_2026_07_28_adapter)</span></code>.</p>
-<p>For Streamable HTTP, start the server with
-<code class="docutils literal notranslate"><span class="pre">protocol_adapter(mcp_server_streamable_http_transport)</span></code> and point the
-MCP client at the listen URL (for example
-<code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8080/mcp</span></code>). Each <strong>2026-07-28</strong> request should
-include:</p>
+<p>For a 2025-11-25 or 2026-07-28 stdio server, the application loader or
+start goal must pass the, respectively, <code class="docutils literal notranslate"><span class="pre">spec('2025-11-25)</span></code> or
+<code class="docutils literal notranslate"><span class="pre">spec('2026-07-28)</span></code> option.</p>
+<p>For Streamable HTTP, start the server with the
+<code class="docutils literal notranslate"><span class="pre">transport(streamable_http)</span></code> and (preferably) <code class="docutils literal notranslate"><span class="pre">spec('2026-07-28)</span></code>
+options. Point the MCP client at the listen URL (for example
+<code class="docutils literal notranslate"><span class="pre">http://127.0.0.1:8080/mcp</span></code>).</p>
+<p>Each <strong>2026-07-28</strong> request should include:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">Content-Type:</span> <span class="pre">application/json</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Accept:</span> <span class="pre">application/json,</span> <span class="pre">text/event-stream</span></code></p></li>

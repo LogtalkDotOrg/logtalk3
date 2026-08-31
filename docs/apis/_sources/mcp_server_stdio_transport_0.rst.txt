@@ -8,21 +8,21 @@
 ``mcp_server_stdio_transport``
 ==============================
 
-Stdio transport adapter for MCP. Reads newline-delimited JSON-RPC from the input stream and writes responses to the output stream. Supports specs 2025-06-18, 2025-11-25, and 2026-07-28 selected via the ``spec/1`` option and delegated to ``mcp_server_2025_06_18_spec`` or ``mcp_server_2026_07_28_spec``.
+Implements the stdio transport for MCP servers. Reads newline-delimited JSON-RPC from the input stream and writes responses to the output stream. Supports specs 2025-06-18, 2025-11-25, and 2026-07-28 selected via the ``spec/1`` option and delegated to ``mcp_server_2025_06_18_spec``, ``mcp_server_2025_11_25_spec``, or ``mcp_server_2026_07_28_spec``.
 
 | **Availability:** 
 |    ``logtalk_load(mcp_server(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-29
+| **Date:** 2026-08-31
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
 | **Implements:**
-|    ``public`` :ref:`mcp_server_adapter_protocol <mcp_server_adapter_protocol/0>`
+|    ``public`` :ref:`mcp_server_transport_protocol <mcp_server_transport_protocol/0>`
 | **Uses:**
 |    :ref:`json_rpc <json_rpc/0>`
 |    :ref:`list <list/0>`
@@ -32,7 +32,7 @@ Stdio transport adapter for MCP. Reads newline-delimited JSON-RPC from the input
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`mcp_server_adapter_protocol/0::cleanup/0`  :ref:`mcp_server_adapter_protocol/0::notify/1`  :ref:`mcp_server_adapter_protocol/0::spec/1`  :ref:`mcp_server_adapter_protocol/0::start/4`  
+|     :ref:`mcp_server_transport_protocol/0::cleanup/0`  :ref:`mcp_server_transport_protocol/0::notify/1`  :ref:`mcp_server_transport_protocol/0::spec/1`  :ref:`mcp_server_transport_protocol/0::start/4`  
 
 .. contents::
    :local:

@@ -8,14 +8,14 @@
 ``mcp_server_application``
 ==========================
 
-Specification-independent application logic for MCP servers: tool/prompt/resource descriptor conversion, schema derivation from info/2 and mode/2, auto-dispatch, canonical complete-result terms, curly-term predicates, and MCP Apps (``_meta.ui``) metadata. Imported by both the 2025-06-18 and 2026-07-28 adapters.
+Common predicates for MCP servers: tool/prompt/resource descriptor conversion, schema derivation from ``info/2`` and ``mode/2`` directives, auto-dispatch, canonical complete-result terms, curly-term predicates, and MCP Apps (``_meta.ui``) metadata.
 
 | **Availability:** 
 |    ``logtalk_load(mcp_server(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-28
+| **Date:** 2026-08-31
 
 | **Compilation flags:**
 |    ``static``
@@ -47,7 +47,7 @@ Public predicates
 ``tool_descriptors_to_json/3``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Converts a list of tool(Name, Functor, Arity) descriptors into MCP JSON tool definitions, deriving titles, descriptions and input schemas from the application object's info/2 and mode/2 directives.
+Converts a list of ``tool(Name, Functor, Arity)`` descriptors into MCP JSON tool definitions, deriving titles, descriptions and input schemas from the application object's ``info/2`` and ``mode/2`` directives.
 
 | **Compilation flags:**
 |    ``static``
@@ -126,7 +126,7 @@ Auto-dispatches a tool call by calling the predicate on the application, collect
 ``try_tool_call_3/7``
 ^^^^^^^^^^^^^^^^^^^^^
 
-Tries tool_call/3; on existence_error falls back to auto-dispatch.
+Tries ``tool_call/3``. Falls back to auto-dispatch on failure.
 
 | **Compilation flags:**
 |    ``static``

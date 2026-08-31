@@ -25,10 +25,10 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-29,
+		date is 2026-08-31,
 		comment is 'MCP server facade. Selects spec and transport (stdio or Streamable HTTP). Legacy ``protocol_adapter/1`` remains supported.',
 		remarks is [
-			'Specs' - '``\'2025-06-18\'`` (default), ``\'2025-11-25\'``, and ``\'2026-07-28\'`` via ``spec/1``.',
+			'Specs' - '``''2025-06-18''`` (default), ``''2025-11-25''``, and ``''2026-07-28''`` via ``spec/1``.',
 			'Transports' - '``stdio`` (default) and ``streamable_http`` via ``transport/1``.',
 			'Legacy' - '``protocol_adapter(Adapter)`` overrides the spec/transport matrix when present.'
 		]
@@ -131,19 +131,9 @@
 	select_adapter(Context, Options, Adapter) :-
 		(	^^option(protocol_adapter(Adapter), Options) ->
 			true
-		;	protocol_version_option(Options, Version),
-			transport_option(Options, Transport),
-			resolve_adapter(Version, Transport, Context, Adapter)
-		).
-
-	protocol_version_option(Options, Version) :-
-		(	member(spec(Version), Options) -> true
-		;	Version = '2025-06-18'
-		).
-
-	transport_option(Options, Transport) :-
-		(	member(transport(Transport), Options) -> true
-		;	Transport = stdio
+		;	^^option(spec(Spec), Options),
+			^^option(transport(Transport), Options),
+			resolve_adapter(Spec, Transport, Context, Adapter)
 		).
 
 	resolve_adapter('2025-06-18', stdio, _, mcp_server_stdio_transport) :-
@@ -158,8 +148,8 @@
 		!.
 	resolve_adapter('2026-07-28', streamable_http, _, mcp_server_streamable_http_transport) :-
 		!.
-	resolve_adapter(Version, Transport, Context, _) :-
-		throw(error(domain_error(mcp_server_configuration, Version-Transport), Context)).
+	resolve_adapter(Spec, Transport, Context, _) :-
+		throw(error(domain_error(mcp_server_configuration, Spec-Transport), Context)).
 
 	cleanup_adapter(Adapter) :-
 		retractall(active_adapter_(_)),
@@ -191,7 +181,7 @@
 		once((Transport == stdio; Transport == streamable_http)).
 	valid_option(protocol_adapter(Adapter)) :-
 		callable(Adapter),
-		conforms_to_protocol(Adapter, mcp_server_adapter_protocol).
+		conforms_to_protocol(Adapter, mcp_server_transport_protocol).
 	valid_option(instructions(Instructions)) :-
 		atom(Instructions).
 	valid_option(cache_ttl(TTL)) :-

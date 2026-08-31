@@ -20,7 +20,7 @@
 
 
 :- object(mcp_server_2026_07_28_adapter,
-	implements(mcp_server_adapter_protocol)).
+	implements(mcp_server_transport_protocol)).
 
 	:- info([
 		version is 2:0:0,

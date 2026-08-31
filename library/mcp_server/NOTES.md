@@ -94,11 +94,12 @@ Architecture
 ------------
 
 This library is designed to support adding new MCP specs and transports
-by implementing `mcp_server_adapter_protocol`. Common server code is
+by implementing `mcp_server_transport_protocol`. Common server code is
 provided using the `mcp_server_application` category. A facade object,
 `mcp_server`, allows selecting specific spec and transport using the
 `spec/1` and `transport/1` options. The legacy `protocol_adapter/1`
-option is still supported for backwards compatibility.
+option is still supported for backwards compatibility; it should not
+be used in new code.
 
 The Streamable HTTP adapter additionally depends on the `http_server`
 library (and optionally `http_sse` helpers) for listening and framing.
@@ -118,7 +119,7 @@ features it provides.
 stdio versus Streamable HTTP transports
 ---------------------------------------
 
-Both transports implement `mcp_server_adapter_protocol`. What differs
+Both transports implement `mcp_server_transport_protocol`. What differs
 is how JSON-RPC is carried and a few transport-only features.
 
 |                  | stdio transport                                   | Streamable HTTP transport                                            |
@@ -268,7 +269,7 @@ Streamable HTTP adapter options
 | `http_sse_keepalive(Seconds)` | `15`            | Keep-alive interval for `subscriptions/listen` response streams |
 
 These options are validated by the `mcp_server` facade and applied only
-when `protocol_adapter(mcp_server_streamable_http_transport)` is selected.
+when `transport(streamable_http)` is used.
 
 
 Implementing the tool protocol
@@ -851,12 +852,14 @@ above) depend on the Prolog backend. For example, XVM requires instead:
 		}
 	}
 
-For a 2026-07-28 stdio server, the application loader or start goal must
-pass `protocol_adapter(mcp_server_2026_07_28_adapter)`.
+For a 2025-11-25 or 2026-07-28 stdio server, the application loader or start
+goal must pass the, respectively, `spec('2025-11-25)` or `spec('2026-07-28)`
+option.
 
-For Streamable HTTP, start the server with
-`protocol_adapter(mcp_server_streamable_http_transport)` and point the
-MCP client at the listen URL (for example `http://127.0.0.1:8080/mcp`).
+For Streamable HTTP, start the server with the `transport(streamable_http)`
+and (preferably) `spec('2026-07-28)` options. Point the MCP client at the
+listen URL (for example `http://127.0.0.1:8080/mcp`).
+
 Each **2026-07-28** request should include:
 
 - `Content-Type: application/json`

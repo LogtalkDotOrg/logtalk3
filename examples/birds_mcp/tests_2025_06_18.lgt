@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-14,
+		date is 2026-08-31,
 		comment is 'Unit tests for the "birds_mcp" example.'
 	]).
 
@@ -100,7 +100,7 @@
 		^^file_path('mcp_input.tmp', InputFile),
 		^^file_path('mcp_output.tmp', OutputFile),
 		open(InputFile, write, InputOutput),
-		write_request_specs(InputOutput, RequestSpecs),
+		write_request_specs(RequestSpecs, InputOutput),
 		close(InputOutput),
 		open(InputFile, read, Input),
 		open(OutputFile, write, Output),
@@ -111,11 +111,11 @@
 		read_all_messages(ResponseInput, Responses),
 		close(ResponseInput).
 
-	write_request_specs(_, []).
-	write_request_specs(Stream, [Spec| Specs]) :-
+	write_request_specs([], _).
+	write_request_specs([Spec| Specs], Stream) :-
 		spec_to_message(Spec, Message),
 		write_message(Stream, Message),
-		write_request_specs(Stream, Specs).
+		write_request_specs(Specs, Stream).
 
 	spec_to_message(initialize_request(Id), Message) :-
 		request(

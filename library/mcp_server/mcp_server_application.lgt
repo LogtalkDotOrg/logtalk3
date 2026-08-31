@@ -25,14 +25,14 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-28,
-		comment is 'Specification-independent application logic for MCP servers: tool/prompt/resource descriptor conversion, schema derivation from info/2 and mode/2, auto-dispatch, canonical complete-result terms, curly-term predicates, and MCP Apps (``_meta.ui``) metadata. Imported by both the 2025-06-18 and 2026-07-28 adapters.'
+		date is 2026-08-31,
+		comment is 'Common predicates for MCP servers: tool/prompt/resource descriptor conversion, schema derivation from ``info/2`` and ``mode/2`` directives, auto-dispatch, canonical complete-result terms, curly-term predicates, and MCP Apps (``_meta.ui``) metadata.'
 	]).
 
 	:- public(tool_descriptors_to_json/3).
 	:- mode(tool_descriptors_to_json(+list, +object_identifier, -list), one).
 	:- info(tool_descriptors_to_json/3, [
-		comment is 'Converts a list of tool(Name, Functor, Arity) descriptors into MCP JSON tool definitions, deriving titles, descriptions and input schemas from the application object''s info/2 and mode/2 directives.',
+		comment is 'Converts a list of ``tool(Name, Functor, Arity)`` descriptors into MCP JSON tool definitions, deriving titles, descriptions and input schemas from the application object''s ``info/2`` and ``mode/2`` directives.',
 		argnames is ['ToolDescriptors', 'Application', 'JsonTools']
 	]).
 
@@ -60,21 +60,21 @@
 	:- protected(try_tool_call_3/7).
 	:- mode(try_tool_call_3(+object_identifier, +atom, +atom, +integer, +list, +compound, -compound), one).
 	:- info(try_tool_call_3/7, [
-		comment is 'Tries tool_call/3; on existence_error falls back to auto-dispatch.',
+		comment is 'Tries ``tool_call/3``. Falls back to auto-dispatch on failure.',
 		argnames is ['Application', 'ToolName', 'Functor', 'Arity', 'ArgPairs', 'ToolArguments', 'Result']
 	]).
 
 	:- protected(tool_input_schema/4).
 	:- mode(tool_input_schema(+object_identifier, +atom, +integer, -compound), one).
 	:- info(tool_input_schema/4, [
-		comment is 'Derives a JSON Schema curly-term for tool input arguments from the application object\'s ``info/2`` and ``mode/2`` directives. Used by Streamable HTTP ``x-mcp-header`` / ``Mcp-Param-*`` validation when the application does not define ``input_schema/2``.',
+		comment is 'Derives a JSON Schema curly-term for tool input arguments from the application object''s ``info/2`` and ``mode/2`` directives. Used by Streamable HTTP ``x-mcp-header`` / ``Mcp-Param-*`` validation when the application does not define ``input_schema/2``.',
 		argnames is ['Application', 'Functor', 'Arity', 'InputSchema']
 	]).
 
 	:- protected(tool_output_schema/4).
 	:- mode(tool_output_schema(+object_identifier, +atom, +integer, -compound), one).
 	:- info(tool_output_schema/4, [
-		comment is 'Derives a JSON Schema curly-term for tool output arguments from the application object\'s ``info/2`` and ``mode/2`` directives.',
+		comment is 'Derives a JSON Schema curly-term for tool output arguments from the application object''s ``info/2`` and ``mode/2`` directives.',
 		argnames is ['Application', 'Functor', 'Arity', 'OutputSchema']
 	]).
 

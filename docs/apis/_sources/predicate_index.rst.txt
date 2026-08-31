@@ -3159,8 +3159,8 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`mcp_server_adapter_protocol <mcp_server_adapter_protocol/0::cleanup/0>`
 * :ref:`mcp_server_spec_protocol <mcp_server_spec_protocol/0::cleanup/0>`
+* :ref:`mcp_server_transport_protocol <mcp_server_transport_protocol/0::cleanup/0>`
 
 ``clear/0``
 -----------
@@ -17696,8 +17696,8 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`mcp_server <mcp_server/0::notify/1>`
-* :ref:`mcp_server_adapter_protocol <mcp_server_adapter_protocol/0::notify/1>`
 * :ref:`mcp_server_spec_protocol <mcp_server_spec_protocol/0::notify/1>`
+* :ref:`mcp_server_transport_protocol <mcp_server_transport_protocol/0::notify/1>`
 
 ``notrace/0``
 -------------
@@ -26213,8 +26213,8 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
-* :ref:`mcp_server_adapter_protocol <mcp_server_adapter_protocol/0::spec/1>`
 * :ref:`mcp_server_spec_protocol <mcp_server_spec_protocol/0::spec/1>`
+* :ref:`mcp_server_transport_protocol <mcp_server_transport_protocol/0::spec/1>`
 
 ``spec_version/1``
 ------------------
@@ -26619,7 +26619,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http_server <http_server/0::start/4>`
 * :ref:`mcp_server <mcp_server/0::start/4>`
-* :ref:`mcp_server_adapter_protocol <mcp_server_adapter_protocol/0::start/4>`
+* :ref:`mcp_server_transport_protocol <mcp_server_transport_protocol/0::start/4>`
 
 ``start/5``
 -----------

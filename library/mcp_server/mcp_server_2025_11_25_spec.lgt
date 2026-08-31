@@ -40,10 +40,6 @@
 		request/4, response/3, is_response/1, result/2, write_message/2, read_message/2
 	]).
 
-	:- uses(list, [
-		member/2
-	]).
-
 	:- uses(user, [
 		atomic_concat/3
 	]).

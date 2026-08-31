@@ -8,14 +8,14 @@
 ``mcp_server_spec_protocol``
 ============================
 
-Protocol for MCP spec (version) handlers independent of transport. A handler validates and dispatches JSON-RPC messages and returns abstract outcomes that a transport (stdio or Streamable HTTP) renders to the wire.
+Protocol for MCP server spec (version) handlers independent of transport. A handler validates and dispatches JSON-RPC messages and returns abstract outcomes that a transport (stdio or Streamable HTTP) renders to the wire.
 
 | **Availability:** 
 |    ``logtalk_load(mcp_server(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-30
+| **Date:** 2026-08-31
 
 | **Compilation flags:**
 |    ``static``
@@ -44,7 +44,7 @@ Public predicates
 ``spec/1``
 ^^^^^^^^^^
 
-MCP protocol version string implemented by this handler (e.g. ``'2025-06-18'`` or ``'2026-07-28'``).
+MCP server spec implemented by this handler (e.g. ``'2025-06-18'`` or ``'2026-07-28'``).
 
 | **Compilation flags:**
 |    ``static``

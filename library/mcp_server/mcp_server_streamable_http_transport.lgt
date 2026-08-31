@@ -20,14 +20,14 @@
 
 
 :- object(mcp_server_streamable_http_transport,
-	implements(mcp_server_adapter_protocol),
+	implements(mcp_server_transport_protocol),
 	imports(mcp_server_application)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-30,
-		comment is 'MCP Streamable HTTP transport (2026-07-28). Uses Logtalk ``http_server::serve_until_shutdown/5`` and a dedicated ``http_handler_protocol`` handler object. Supports specs 2025-06-18, 2025-11-25, and 2026-07-28 selected via the ``spec/1`` option and delegated to the matching ``mcp_server_*_spec`` object. Long-lived subscriptions/listen streams emit periodic SSE comment keep-alives (``http_sse_keepalive/1``). Requires a multi-threaded backend for subscriptions/listen.'
+		date is 2026-08-31,
+		comment is 'Implements the Streamable HTTP transport for MCP servers. Uses Logtalk ``http_server::serve_until_shutdown/5`` and a dedicated ``http_handler_protocol`` handler object. Supports specs 2025-06-18, 2025-11-25, and 2026-07-28 selected via the ``spec/1`` option and delegated to the matching ``mcp_server_*_spec`` object. Long-lived subscriptions/listen streams emit periodic SSE comment keep-alives (``http_sse_keepalive/1``). Requires a multi-threaded backend for subscriptions/listen.'
 	]).
 
 	:- threaded.
@@ -1448,7 +1448,7 @@
 	valid_option(transport(Transport)) :-
 		once((Transport == stdio; Transport == streamable_http)).
 	valid_option(protocol_adapter(Adapter)) :-
-		callable(Adapter), conforms_to_protocol(Adapter, mcp_server_adapter_protocol).
+		callable(Adapter), conforms_to_protocol(Adapter, mcp_server_transport_protocol).
 	valid_option(server_name(Name)) :-
 		atom(Name).
 	valid_option(server_version(Version)) :-

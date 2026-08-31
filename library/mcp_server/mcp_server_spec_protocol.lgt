@@ -24,14 +24,14 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-30,
-		comment is 'Protocol for MCP spec (version) handlers independent of transport. A handler validates and dispatches JSON-RPC messages and returns abstract outcomes that a transport (stdio or Streamable HTTP) renders to the wire.'
+		date is 2026-08-31,
+		comment is 'Protocol for MCP server spec (version) handlers independent of transport. A handler validates and dispatches JSON-RPC messages and returns abstract outcomes that a transport (stdio or Streamable HTTP) renders to the wire.'
 	]).
 
 	:- public(spec/1).
 	:- mode(spec(-atom), one).
 	:- info(spec/1, [
-		comment is 'MCP protocol version string implemented by this handler (e.g. ``''2025-06-18''`` or ``''2026-07-28''``).',
+		comment is 'MCP server spec implemented by this handler (e.g. ``''2025-06-18''`` or ``''2026-07-28''``).',
 		argnames is ['Version']
 	]).
 

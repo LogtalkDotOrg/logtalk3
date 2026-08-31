@@ -8,21 +8,21 @@
 ``mcp_server_streamable_http_transport``
 ========================================
 
-MCP Streamable HTTP transport (2026-07-28). Uses Logtalk ``http_server::serve_until_shutdown/5`` and a dedicated ``http_handler_protocol`` handler object. Supports specs 2025-06-18, 2025-11-25, and 2026-07-28 selected via the ``spec/1`` option and delegated to the matching ``mcp_server_*_spec`` object. Long-lived subscriptions/listen streams emit periodic SSE comment keep-alives (``http_sse_keepalive/1``). Requires a multi-threaded backend for subscriptions/listen.
+Implements the Streamable HTTP transport for MCP servers. Uses Logtalk ``http_server::serve_until_shutdown/5`` and a dedicated ``http_handler_protocol`` handler object. Supports specs 2025-06-18, 2025-11-25, and 2026-07-28 selected via the ``spec/1`` option and delegated to the matching ``mcp_server_*_spec`` object. Long-lived subscriptions/listen streams emit periodic SSE comment keep-alives (``http_sse_keepalive/1``). Requires a multi-threaded backend for subscriptions/listen.
 
 | **Availability:** 
 |    ``logtalk_load(mcp_server(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-30
+| **Date:** 2026-08-31
 
 | **Compilation flags:**
 |    ``static, context_switching_calls, threaded``
 
 
 | **Implements:**
-|    ``public`` :ref:`mcp_server_adapter_protocol <mcp_server_adapter_protocol/0>`
+|    ``public`` :ref:`mcp_server_transport_protocol <mcp_server_transport_protocol/0>`
 | **Imports:**
 |    ``public`` :ref:`mcp_server_application <mcp_server_application/0>`
 | **Uses:**
@@ -41,7 +41,7 @@ MCP Streamable HTTP transport (2026-07-28). Uses Logtalk ``http_server::serve_un
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`mcp_server_adapter_protocol/0::cleanup/0`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`mcp_server_adapter_protocol/0::notify/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`mcp_server_adapter_protocol/0::spec/1`  :ref:`mcp_server_adapter_protocol/0::start/4`  :ref:`mcp_server_application/0::tool_descriptors_to_json/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`mcp_server_transport_protocol/0::cleanup/0`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`mcp_server_transport_protocol/0::notify/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`mcp_server_transport_protocol/0::spec/1`  :ref:`mcp_server_transport_protocol/0::start/4`  :ref:`mcp_server_application/0::tool_descriptors_to_json/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:

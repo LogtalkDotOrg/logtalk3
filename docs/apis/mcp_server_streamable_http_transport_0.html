@@ -32,7 +32,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="mcp_streamable_http_handler" href="mcp_streamable_http_handler_0.html" />
+    <link rel="next" title="mcp_server_transport_protocol" href="mcp_server_transport_protocol_0.html" />
     <link rel="prev" title="mcp_server_stdio_transport" href="mcp_server_stdio_transport_0.html" />
    
 </head>
@@ -265,11 +265,11 @@
 <li class="toctree-l3"><a class="reference internal" href="mcp_server_2025_11_25_spec_0.html">mcp_server_2025_11_25_spec</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_server_2026_07_28_adapter_0.html">mcp_server_2026_07_28_adapter</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_server_2026_07_28_spec_0.html">mcp_server_2026_07_28_spec</a></li>
-<li class="toctree-l3"><a class="reference internal" href="mcp_server_adapter_protocol_0.html">mcp_server_adapter_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_server_application_0.html">mcp_server_application</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_server_spec_protocol_0.html">mcp_server_spec_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_server_stdio_transport_0.html">mcp_server_stdio_transport</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">mcp_server_streamable_http_transport</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcp_server_transport_protocol_0.html">mcp_server_transport_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_streamable_http_handler_0.html">mcp_streamable_http_handler</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_tool_protocol_0.html">mcp_tool_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mcp_ui_protocol_0.html">mcp_ui_protocol</a></li>
@@ -440,7 +440,7 @@
   <p class="right" id="mcp-server-streamable-http-transport-0"><span id="index-0"></span><strong>object</strong></p>
 <section id="mcp-server-streamable-http-transport">
 <h1><code class="docutils literal notranslate"><span class="pre">mcp_server_streamable_http_transport</span></code><a class="headerlink" href="#mcp-server-streamable-http-transport" title="Link to this heading"></a></h1>
-<p>MCP Streamable HTTP transport (2026-07-28). Uses Logtalk <code class="docutils literal notranslate"><span class="pre">http_server::serve_until_shutdown/5</span></code> and a dedicated <code class="docutils literal notranslate"><span class="pre">http_handler_protocol</span></code> handler object. Supports specs 2025-06-18, 2025-11-25, and 2026-07-28 selected via the <code class="docutils literal notranslate"><span class="pre">spec/1</span></code> option and delegated to the matching <code class="docutils literal notranslate"><span class="pre">mcp_server_*_spec</span></code> object. Long-lived subscriptions/listen streams emit periodic SSE comment keep-alives (<code class="docutils literal notranslate"><span class="pre">http_sse_keepalive/1</span></code>). Requires a multi-threaded backend for subscriptions/listen.</p>
+<p>Implements the Streamable HTTP transport for MCP servers. Uses Logtalk <code class="docutils literal notranslate"><span class="pre">http_server::serve_until_shutdown/5</span></code> and a dedicated <code class="docutils literal notranslate"><span class="pre">http_handler_protocol</span></code> handler object. Supports specs 2025-06-18, 2025-11-25, and 2026-07-28 selected via the <code class="docutils literal notranslate"><span class="pre">spec/1</span></code> option and delegated to the matching <code class="docutils literal notranslate"><span class="pre">mcp_server_*_spec</span></code> object. Long-lived subscriptions/listen streams emit periodic SSE comment keep-alives (<code class="docutils literal notranslate"><span class="pre">http_sse_keepalive/1</span></code>). Requires a multi-threaded backend for subscriptions/listen.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -450,7 +450,7 @@
 <div class="line-block">
 <div class="line"><strong>Author:</strong> Paulo Moura</div>
 <div class="line"><strong>Version:</strong> 1:0:0</div>
-<div class="line"><strong>Date:</strong> 2026-08-30</div>
+<div class="line"><strong>Date:</strong> 2026-08-31</div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
@@ -461,7 +461,7 @@
 <div class="line-block">
 <div class="line"><strong>Implements:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="mcp_server_adapter_protocol_0.html#mcp-server-adapter-protocol-0"><span class="std std-ref">mcp_server_adapter_protocol</span></a></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="mcp_server_transport_protocol_0.html#mcp-server-transport-protocol-0"><span class="std std-ref">mcp_server_transport_protocol</span></a></div>
 </div>
 <div class="line"><strong>Imports:</strong></div>
 <div class="line-block">
@@ -490,7 +490,7 @@
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line"> <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-option-1"><span class="std std-ref">check_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-options-1"><span class="std std-ref">check_options/1</span></a>  <a class="reference internal" href="mcp_server_adapter_protocol_0.html#mcp-server-adapter-protocol-0-cleanup-0"><span class="std std-ref">cleanup/0</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-option-1"><span class="std std-ref">default_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-options-1"><span class="std std-ref">default_options/1</span></a>  <a class="reference internal" href="mcp_server_adapter_protocol_0.html#mcp-server-adapter-protocol-0-notify-1"><span class="std std-ref">notify/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-2"><span class="std std-ref">option/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-3"><span class="std std-ref">option/3</span></a>  <a class="reference internal" href="mcp_server_adapter_protocol_0.html#mcp-server-adapter-protocol-0-spec-1"><span class="std std-ref">spec/1</span></a>  <a class="reference internal" href="mcp_server_adapter_protocol_0.html#mcp-server-adapter-protocol-0-start-4"><span class="std std-ref">start/4</span></a>  <a class="reference internal" href="mcp_server_application_0.html#mcp-server-application-0-tool-descriptors-to-json-3"><span class="std std-ref">tool_descriptors_to_json/3</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-option-1"><span class="std std-ref">valid_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-options-1"><span class="std std-ref">valid_options/1</span></a></div>
+<div class="line"> <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-option-1"><span class="std std-ref">check_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-options-1"><span class="std std-ref">check_options/1</span></a>  <a class="reference internal" href="mcp_server_transport_protocol_0.html#mcp-server-transport-protocol-0-cleanup-0"><span class="std std-ref">cleanup/0</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-option-1"><span class="std std-ref">default_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-options-1"><span class="std std-ref">default_options/1</span></a>  <a class="reference internal" href="mcp_server_transport_protocol_0.html#mcp-server-transport-protocol-0-notify-1"><span class="std std-ref">notify/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-2"><span class="std std-ref">option/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-3"><span class="std std-ref">option/3</span></a>  <a class="reference internal" href="mcp_server_transport_protocol_0.html#mcp-server-transport-protocol-0-spec-1"><span class="std std-ref">spec/1</span></a>  <a class="reference internal" href="mcp_server_transport_protocol_0.html#mcp-server-transport-protocol-0-start-4"><span class="std std-ref">start/4</span></a>  <a class="reference internal" href="mcp_server_application_0.html#mcp-server-application-0-tool-descriptors-to-json-3"><span class="std std-ref">tool_descriptors_to_json/3</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-option-1"><span class="std std-ref">valid_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-options-1"><span class="std std-ref">valid_options/1</span></a></div>
 </div>
 </div>
 <nav class="contents local" id="contents">
@@ -875,7 +875,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="mcp_server_stdio_transport_0.html" class="btn btn-neutral float-left" title="mcp_server_stdio_transport" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="mcp_streamable_http_handler_0.html" class="btn btn-neutral float-right" title="mcp_streamable_http_handler" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="mcp_server_transport_protocol_0.html" class="btn btn-neutral float-right" title="mcp_server_transport_protocol" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

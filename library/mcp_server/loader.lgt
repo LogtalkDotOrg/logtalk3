@@ -32,7 +32,7 @@
 		mcp_multiround_protocol,
 		mcp_cache_protocol,
 		mcp_ui_protocol,
-		mcp_server_adapter_protocol,
+		mcp_server_transport_protocol,
 		mcp_server_spec_protocol,
 		mcp_server_application,
 		mcp_server_2025_06_18_spec,

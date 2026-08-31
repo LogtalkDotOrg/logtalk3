@@ -22,7 +22,7 @@ Legacy MCP 2025-06-18 stdio transport adapter for backwards compatibility. Deleg
 
 
 | **Implements:**
-|    ``public`` :ref:`mcp_server_adapter_protocol <mcp_server_adapter_protocol/0>`
+|    ``public`` :ref:`mcp_server_transport_protocol <mcp_server_transport_protocol/0>`
 | **Uses:**
 |    :ref:`json_rpc <json_rpc/0>`
 |    :ref:`mcp_server_2025_06_18_spec <mcp_server_2025_06_18_spec/0>`
@@ -31,7 +31,7 @@ Legacy MCP 2025-06-18 stdio transport adapter for backwards compatibility. Deleg
 |    (none)
 
 | **Inherited public predicates:**
-|     :ref:`mcp_server_adapter_protocol/0::cleanup/0`  :ref:`mcp_server_adapter_protocol/0::notify/1`  :ref:`mcp_server_adapter_protocol/0::spec/1`  :ref:`mcp_server_adapter_protocol/0::start/4`  
+|     :ref:`mcp_server_transport_protocol/0::cleanup/0`  :ref:`mcp_server_transport_protocol/0::notify/1`  :ref:`mcp_server_transport_protocol/0::spec/1`  :ref:`mcp_server_transport_protocol/0::start/4`  
 
 .. contents::
    :local:

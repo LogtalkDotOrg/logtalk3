@@ -30,8 +30,8 @@
 	]).
 
 	:- uses(json_rpc, [
-		request/4, response/3, is_request/1, is_response/1, is_error_response/1, result/2, id/2,
-		method/2, params/2, write_message/2, read_message/2
+		request/4, response/3, is_request/1, is_response/1, result/2, method/2, params/2, write_message/2,
+		read_message/2
 	]).
 
 	:- uses(list, [

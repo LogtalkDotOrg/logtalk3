@@ -19,19 +19,19 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- protocol(mcp_server_adapter_protocol).
+:- protocol(mcp_server_transport_protocol).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-23,
-		comment is 'Protocol for MCP specification adapters. Each adapter implements one MCP spec version (e.g. 2025-06-18 or 2026-07-28). The ``mcp_server`` facade selects an adapter via the ``protocol_adapter/1`` option and delegates the server lifecycle to it.'
+		date is 2026-08-31,
+		comment is 'Protocol for MCP server transports. The ``mcp_server`` facade object selects the transport via the ``transport/1`` option and delegates the server lifecycle to it.'
 	]).
 
 	:- public(spec/1).
 	:- mode(spec(-atom), one).
 	:- info(spec/1, [
-		comment is 'Returns the MCP spec version string implemented by this adapter (e.g. ``''2025-06-18''`` or ``''2026-07-28''``).',
+		comment is 'Returns the MCP server spec version implemented by this adapter (e.g. ``''2025-06-18''`` or ``''2026-07-28''``).',
 		argnames is ['Version']
 	]).
 
