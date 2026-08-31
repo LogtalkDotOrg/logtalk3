@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-151 534,-151 534,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol mcp_multiround_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;08&#45;31, 14:49</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;08&#45;31, 22:07</text>
 <g id="clust1" class="cluster">
 <title>cluster_mcp_multiround_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="mcp_multiround_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 510,-54.25 510,-54.25 516,-54.25 522,-60.25 522,-66.25 522,-66.25 522,-127 522,-127 522,-133 516,-139 510,-139 510,-139 20,-139 20,-139 14,-139 8,-133 8,-127 8,-127 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d905d86db7e8886dc977d00e4c25c75f46870d77/library/mcp_server/mcp_multiround_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d905d86db7e8886dc977d00e4c25c75f46870d77/library/mcp_server/mcp_multiround_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/70b04c052ddaf00d8b73f085d67f6a3713eaa2de/library/mcp_server/mcp_multiround_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/70b04c052ddaf00d8b73f085d67f6a3713eaa2de/library/mcp_server/mcp_multiround_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-121.25" font-family="Monospace" font-size="10.00" fill="dimgray">mcp_multiround_protocol</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>tool_call_round/4</title>
 <polygon fill="springgreen" stroke="black" points="159.62,-100.25 18.38,-100.25 18.38,-64.25 159.62,-64.25 159.62,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="26.38" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d905d86db7e8886dc977d00e4c25c75f46870d77/library/mcp_server/mcp_multiround_protocol.lgt#L41" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d905d86db7e8886dc977d00e4c25c75f46870d77/library/mcp_server/mcp_multiround_protocol.lgt#L41">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/70b04c052ddaf00d8b73f085d67f6a3713eaa2de/library/mcp_server/mcp_multiround_protocol.lgt#L41" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/70b04c052ddaf00d8b73f085d67f6a3713eaa2de/library/mcp_server/mcp_multiround_protocol.lgt#L41">
 <text xml:space="preserve" text-anchor="start" x="31.62" y="-84.12" font-family="Monospace" font-size="11.00">tool_call_round/4</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>prompt_get_round/4</title>
 <polygon fill="springgreen" stroke="black" points="326,-100.25 178,-100.25 178,-64.25 326,-64.25 326,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="186" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d905d86db7e8886dc977d00e4c25c75f46870d77/library/mcp_server/mcp_multiround_protocol.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d905d86db7e8886dc977d00e4c25c75f46870d77/library/mcp_server/mcp_multiround_protocol.lgt#L48">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/70b04c052ddaf00d8b73f085d67f6a3713eaa2de/library/mcp_server/mcp_multiround_protocol.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/70b04c052ddaf00d8b73f085d67f6a3713eaa2de/library/mcp_server/mcp_multiround_protocol.lgt#L48">
 <text xml:space="preserve" text-anchor="start" x="191.25" y="-84.12" font-family="Monospace" font-size="11.00">prompt_get_round/4</text>
 </a>
 </g>
@@ -57,7 +57,7 @@
 <title>resource_read_round/4</title>
 <polygon fill="springgreen" stroke="black" points="512.12,-100.25 343.88,-100.25 343.88,-64.25 512.12,-64.25 512.12,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="351.88" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/d905d86db7e8886dc977d00e4c25c75f46870d77/library/mcp_server/mcp_multiround_protocol.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/d905d86db7e8886dc977d00e4c25c75f46870d77/library/mcp_server/mcp_multiround_protocol.lgt#L55">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/70b04c052ddaf00d8b73f085d67f6a3713eaa2de/library/mcp_server/mcp_multiround_protocol.lgt#L55" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/70b04c052ddaf00d8b73f085d67f6a3713eaa2de/library/mcp_server/mcp_multiround_protocol.lgt#L55">
 <text xml:space="preserve" text-anchor="start" x="357.12" y="-84.12" font-family="Monospace" font-size="11.00">resource_read_round/4</text>
 </a>
 </g>
