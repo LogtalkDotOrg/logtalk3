@@ -24,9 +24,9 @@
 	imports((tool_diagnostics_common, options))).
 
 	:- info([
-		version is 0:18:2,
+		version is 0:18:3,
 		author is 'Barry Evans and Paulo Moura',
-		date is 2026-05-05,
+		date is 2026-09-01,
 		comment is 'A tool for detecting *likely* dead code in compiled Logtalk entities and Prolog modules compiled as objects.',
 		remarks is [
 			'Dead code' - 'A predicate or non-terminal that is not called (directly or indirectly) by any scoped predicate or non-terminal. These predicates and non-terminals are not used, cannot be called without breaking encapsulation, and are thus considered dead code.',
@@ -385,7 +385,10 @@
 		entity_property(Entity, calls(Object::Original, CallsProperties)),
 		(	member(caller(Original), CallsProperties) ->
 			Predicate = Original,
-			entity_property(Entity, defines(Predicate, DefinesProperties))
+			(	Object == user ->
+				true
+			;	entity_property(Entity, defines(Predicate, DefinesProperties))
+			)
 		;	memberchk(alias(Alias), CallsProperties),
 			memberchk(caller(Alias), CallsProperties),
 			Predicate = Alias,
@@ -425,7 +428,10 @@
 		entity_property(Entity, calls(':'(Module,Original), CallsProperties)),
 		(	member(caller(Original), CallsProperties),
 			Predicate = Original,
-			entity_property(Entity, defines(Predicate, DefinesProperties))
+			(	Module == user ->
+				true
+			;	entity_property(Entity, defines(Predicate, DefinesProperties))
+			)
 		;	memberchk(alias(Alias), CallsProperties),
 			memberchk(caller(Alias), CallsProperties),
 			Predicate = Alias,

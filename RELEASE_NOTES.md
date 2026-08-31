@@ -285,6 +285,10 @@ which is not common practice.
 followed by goals that throws an error and the use of `once/1` goals
 as if-then-else or soft-cut conditionals.
 
+* FIXED: The `dead_code_scanner` tool to also report unused built-in Prolog
+predicates referenced in `uses/2` and `use_module/2` directives where the
+referenced object or module is `user`.
+
 Examples
 --------
 
