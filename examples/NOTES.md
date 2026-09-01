@@ -655,6 +655,9 @@ Follows a short description of each included example (in alphabetical order):
 	example of using parametric objects to implement symbolic
 	expression differentiation and simplification
 
+- `symdiff_mcp_app`  
+	example illustrating how to expose symbolic differentiation as an MCP App
+
 - `tabling`  
 	simple example of using tabling directives within objects
 	(requires Logtalk to be run with a backend supporting tabling)

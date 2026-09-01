@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>Symbolic Differentiation App</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --fg: light-dark(#202124, #f1f3f4);
+      --bg: light-dark(#f7f8f5, #181a19);
+      --surface: light-dark(#ffffff, #232624);
+      --muted: light-dark(#66706a, #aab3ae);
+      --border: light-dark(#ccd2ce, #454b47);
+      --accent: light-dark(#176b4d, #52c994);
+      --accent-hover: light-dark(#10583e, #68d6a5);
+      --on-accent: light-dark(#ffffff, #10241b);
+      --error: light-dark(#a62b2b, #ff8f8f);
+      --error-bg: light-dark(#fff4f2, #321d1d);
+      --font: "Avenir Next", "Segoe UI", sans-serif;
+      --mono: "SFMono-Regular", Menlo, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      min-width: 280px;
+      font-family: var(--font);
+      color: var(--fg);
+      background:
+        linear-gradient(135deg, color-mix(in srgb, var(--accent) 8%, transparent), transparent 45%),
+        var(--bg);
+    }
+    main {
+      width: min(100%, 560px);
+      padding: 1.1rem;
+    }
+    h1 {
+      margin: 0 0 1rem;
+      font-size: 1.15rem;
+      font-weight: 650;
+      letter-spacing: 0;
+    }
+    form { margin: 0; }
+    label {
+      display: block;
+      margin-bottom: 0.35rem;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .input-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.55rem;
+    }
+    input, button, output { font: inherit; }
+    input {
+      min-width: 0;
+      height: 2.65rem;
+      padding: 0 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-family: var(--mono);
+      color: var(--fg);
+      background: var(--surface);
+      outline: none;
+    }
+    input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent);
+    }
+    button {
+      min-width: 8.5rem;
+      height: 2.65rem;
+      padding: 0 1rem;
+      border: 0;
+      border-radius: 6px;
+      font-weight: 700;
+      color: var(--on-accent);
+      background: var(--accent);
+      cursor: pointer;
+    }
+    button:hover:not(:disabled) { background: var(--accent-hover); }
+    button:focus-visible {
+      outline: 3px solid color-mix(in srgb, var(--accent) 30%, transparent);
+      outline-offset: 2px;
+    }
+    button:disabled { opacity: 0.58; cursor: wait; }
+    .results {
+      display: grid;
+      gap: 0.7rem;
+      margin-top: 1rem;
+    }
+    .result-label { margin-bottom: 0.3rem; }
+    output {
+      display: block;
+      min-height: 3.25rem;
+      padding: 0.7rem 0.8rem;
+      overflow-wrap: anywhere;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-family: var(--mono);
+      line-height: 1.55;
+      background: var(--surface);
+    }
+    output.error {
+      color: var(--error);
+      border-color: color-mix(in srgb, var(--error) 45%, var(--border));
+      background: var(--error-bg);
+    }
+    #status {
+      min-height: 1.25rem;
+      margin: 0.65rem 0 0;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+    @media (max-width: 430px) {
+      .input-row { grid-template-columns: 1fr; }
+      button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <main id="root">
+    <h1>Symbolic differentiation</h1>
+    <form id="differentiate-form">
+      <label for="expression">Expression</label>
+      <div class="input-row">
+        <input id="expression" name="expression" type="text" value="2*x**3 + x**2 - 4*x" autocomplete="off" spellcheck="false">
+        <button id="differentiate-btn" type="submit" disabled>Differentiate</button>
+      </div>
+    </form>
+    <div class="results" aria-live="polite">
+      <section>
+        <label class="result-label" for="derivative">Derivative</label>
+        <output id="derivative" for="expression">--</output>
+      </section>
+      <section>
+        <label class="result-label" for="simplified">Simplified derivative</label>
+        <output id="simplified" for="expression">--</output>
+      </section>
+    </div>
+    <p id="status" role="status">Connecting...</p>
+  </main>
+  <script>
+(function () {
+  "use strict";
+
+  var TOOL_NAME = "differentiate";
+  var PROTOCOL_VERSION = "2026-01-26";
+  var nextId = 1;
+  var pending = Object.create(null);
+  var ready = false;
+
+  var form = document.getElementById("differentiate-form");
+  var input = document.getElementById("expression");
+  var button = document.getElementById("differentiate-btn");
+  var derivative = document.getElementById("derivative");
+  var simplified = document.getElementById("simplified");
+  var status = document.getElementById("status");
+
+  function post(message) {
+    window.parent.postMessage(message, "*");
+  }
+
+  function request(method, params) {
+    var id = nextId++;
+    return new Promise(function (resolve, reject) {
+      pending[id] = { resolve: resolve, reject: reject };
+      post({ jsonrpc: "2.0", id: id, method: method, params: params || {} });
+    });
+  }
+
+  function notify(method, params) {
+    post({ jsonrpc: "2.0", method: method, params: params || {} });
+  }
+
+  function structuredContent(result) {
+    if (!result || typeof result !== "object") return null;
+    if (result.structuredContent) return result.structuredContent;
+    if (result.result && result.result.structuredContent) return result.result.structuredContent;
+    return null;
+  }
+
+  function errorText(error) {
+    if (error && error.message) return String(error.message);
+    if (typeof error === "string") return error;
+    try { return JSON.stringify(error); } catch (_) { return "Tool call failed."; }
+  }
+
+  function showError(message) {
+    derivative.textContent = message || "Invalid expression.";
+    derivative.classList.add("error");
+    simplified.textContent = "";
+    simplified.classList.remove("error");
+    status.textContent = "Could not differentiate expression";
+  }
+
+  function showIdle() {
+    derivative.textContent = "--";
+    derivative.classList.remove("error");
+    simplified.textContent = "--";
+    simplified.classList.remove("error");
+    status.textContent = "Ready";
+  }
+
+  function showResult(result) {
+    var content = structuredContent(result);
+    if (!content) {
+      showError("No structured result was returned.");
+      return false;
+    }
+    if (content.status === "idle") {
+      showIdle();
+      return true;
+    }
+    if (content.status === "error") {
+      showError(String(content.error || "Invalid expression."));
+      return false;
+    }
+    derivative.textContent = String(content.derivative || "");
+    derivative.classList.remove("error");
+    simplified.textContent = String(content.simplified || "");
+    simplified.classList.remove("error");
+    status.textContent = "Result updated";
+    return true;
+  }
+
+  function applyHostContext(context) {
+    if (!context) return;
+    if (context.theme === "dark" || context.theme === "light") {
+      document.documentElement.style.colorScheme = context.theme;
+    }
+    var variables = context.styles && context.styles.variables;
+    if (variables) {
+      Object.keys(variables).forEach(function (key) {
+        if (variables[key]) document.documentElement.style.setProperty(key, variables[key]);
+      });
+    }
+  }
+
+  function reportSize() {
+    var root = document.getElementById("root");
+    if (!root) return;
+    var rect = root.getBoundingClientRect();
+    notify("ui/notifications/size-changed", {
+      width: Math.ceil(rect.width),
+      height: Math.ceil(rect.height)
+    });
+  }
+
+  function setBusy(busy) {
+    input.disabled = busy;
+    button.disabled = busy || !ready;
+    button.textContent = busy ? "Working..." : "Differentiate";
+  }
+
+  window.addEventListener("message", function (event) {
+    var data = event.data;
+    if (!data || data.jsonrpc !== "2.0") return;
+
+    if (data.id != null && (data.result !== undefined || data.error !== undefined)) {
+      var callback = pending[data.id];
+      if (!callback) return;
+      delete pending[data.id];
+      if (data.error) callback.reject(data.error);
+      else callback.resolve(data.result);
+      return;
+    }
+
+    if (data.method === "ui/notifications/tool-result") {
+      showResult(data.params);
+      reportSize();
+    } else if (data.method === "ui/notifications/host-context-changed") {
+      applyHostContext(data.params);
+    }
+  });
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    if (!ready) return;
+    if (!input.value.trim()) {
+      showError("Enter an expression.");
+      reportSize();
+      return;
+    }
+    status.textContent = "Differentiating...";
+    setBusy(true);
+    request("tools/call", {
+      name: TOOL_NAME,
+      arguments: { expression: input.value }
+    })
+      .then(showResult)
+      .catch(function (error) { showError(errorText(error)); })
+      .then(function () {
+        setBusy(false);
+        input.focus();
+        reportSize();
+      });
+  });
+
+  request("ui/initialize", {
+    protocolVersion: PROTOCOL_VERSION,
+    appInfo: { name: "Symbolic Differentiation App", version: "1.0.0" },
+    appCapabilities: { availableDisplayModes: ["inline"] }
+  })
+    .then(function (result) {
+      applyHostContext(result && result.hostContext);
+      notify("ui/notifications/initialized", {});
+      ready = true;
+      button.disabled = false;
+      status.textContent = "Ready";
+      reportSize();
+      if (typeof ResizeObserver !== "undefined") {
+        new ResizeObserver(reportSize).observe(document.getElementById("root"));
+      }
+    })
+    .catch(function (error) {
+      showError("Connection failed: " + errorText(error));
+      reportSize();
+    });
+})();
+  </script>
+</body>
+</html>

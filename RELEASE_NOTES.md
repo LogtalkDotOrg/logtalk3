@@ -75,6 +75,10 @@ defines routes.
 Existing code using the previous version of this library must be updated to one
 the more recent specs that are now supported by the library.
 
+* ADDED: New `http_oauth` library implementing OAuth 2.0 Bearer request
+protection, protected-resource metadata, token introspection, and JWT
+verification.
+
 * ADDED: New `http_sse` library implementing HTTP Server-Sent Events.
 
 * ADDED: New `paseto` library implementing Platform-Agnostic Security Tokens
@@ -298,6 +302,9 @@ Examples
 * ADDED: New `factorial_mcp` example illustrating the `mcp_server` library.
 
 * ADDED: New `get_time_mcp_app` example illustrating the `mcp_server` library
+support for MCP Apps.
+
+* ADDED: New `symdiff_mcp_app` example illustrating the `mcp_server` library
 support for MCP Apps.
 
 * UPDATED: The `birds_mcp` example to also illustrate the MCP 2026-07-28

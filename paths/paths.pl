@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default library paths
-%  Last updated on August 26, 2026
+%  Last updated on September 1, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -565,6 +565,7 @@ logtalk_library_path(super_calls, examples('super_calls/')).
 logtalk_library_path(symbiosis, examples('symbiosis/')).
 logtalk_library_path(sync, threads('sync/')).
 logtalk_library_path(symdiff, examples('symdiff/')).
+logtalk_library_path(symdiff_mcp_app, examples('symdiff_mcp_app/')).
 logtalk_library_path(tabling, examples('tabling/')).
 logtalk_library_path(tcltk, examples('tcltk/')).
 logtalk_library_path(tak, threads('tak/')).
