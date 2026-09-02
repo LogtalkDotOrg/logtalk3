@@ -81,6 +81,8 @@ verification.
 
 * ADDED: New `http_sse` library implementing HTTP Server-Sent Events.
 
+* ADDED: New `uri_template` library implementing RFC 6570.
+
 * ADDED: New `paseto` library implementing Platform-Agnostic Security Tokens
 (PASETO) version 4.
 

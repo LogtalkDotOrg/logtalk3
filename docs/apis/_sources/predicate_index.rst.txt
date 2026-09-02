@@ -8296,6 +8296,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`geohash_protocol <geohash_protocol/0::expand/2>`
 * :ref:`json_ld_protocol <json_ld_protocol/0::expand/2>`
 
+``expand/3``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`uri_template(Representation) <uri_template/1::expand/3>`
+
+``expand/4``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`uri_template(Representation) <uri_template/1::expand/4>`
+
 ``expand_int/3``
 ----------------
 
@@ -29271,6 +29291,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`statisticsp <statisticsp/0::valid/1>`
 * :ref:`termp <termp/0::valid/1>`
 * :ref:`typeid_protocol <typeid_protocol/0::valid/1>`
+* :ref:`uri_template(Representation) <uri_template/1::valid/1>`
 * :ref:`url(Representation) <url/1::valid/1>`
 * :ref:`validation(Validation) <validation/1::valid/1>`
 * :ref:`varlistp <varlistp/0::valid/1>`
@@ -29985,6 +30006,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`termp <termp/0::variables/2>`
+* :ref:`uri_template(Representation) <uri_template/1::variables/2>`
 
 ``variance/2``
 --------------

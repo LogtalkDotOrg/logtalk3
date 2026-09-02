@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on September 1, 2026
+##   Last updated on September 2, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -352,6 +352,7 @@ cat ../../../library/unicode_data/README.md | pandoc -f gfm -t rst -o libraries/
 sed '1,19d' ../../../library/union_find/NOTES.md | pandoc -f gfm -t rst -o libraries/union_find.rst
 sed '1,19d' ../../../library/univariate_distributions/NOTES.md | pandoc -f gfm -t rst -o libraries/univariate_distributions.rst
 sed '1,19d' ../../../library/url/NOTES.md | pandoc -f gfm -t rst -o libraries/url.rst
+sed '1,19d' ../../../library/uri_template/NOTES.md | pandoc -f gfm -t rst -o libraries/uri_template.rst
 sed '1,19d' ../../../library/uuid/NOTES.md | pandoc -f gfm -t rst -o libraries/uuid.rst
 sed '1,19d' ../../../library/validations/NOTES.md | pandoc -f gfm -t rst -o libraries/validations.rst
 sed '1,19d' ../../../library/wkt_wkb/NOTES.md | pandoc -f gfm -t rst -o libraries/wkt_wkb.rst

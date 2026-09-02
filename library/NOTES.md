@@ -60,7 +60,7 @@ Library groups
 	`character_sets`, `grammars`, `stemming`, `string_distance`, and `strings`.
 - Web and HTTP APIs:
     - High-level libraries:
-	    `html`, `mime_types`, `url`, 
+	    `html`, `mime_types`, `uri_template`, `url`,
         `http_client`, `http_server`, `http_sse`, `http_websocket`,
         `gravatar`, `open_api`, `open_ai`, `open_id`, `rest`, and `s3`.        
     - Supporting libraries:

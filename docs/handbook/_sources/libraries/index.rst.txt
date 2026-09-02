@@ -300,6 +300,7 @@ directory in the ``NOTES.md`` file.
    unicode_data
    union_find
    univariate_distributions
+   uri_template
    url
    uuid
    validations

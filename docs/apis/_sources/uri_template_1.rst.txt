@@ -1,0 +1,134 @@
+.. index:: single: uri_template(Representation)
+.. _uri_template/1:
+
+.. rst-class:: right
+
+**object**
+
+``uri_template(Representation)``
+================================
+
+* ``Representation`` - URI template, variable name, variable value, and expansion representation. Valid values are ``atom``, ``codes``, and ``chars``.
+
+
+URI template validation, variable enumeration, and expansion predicates implementing RFC 6570.
+
+| **Availability:** 
+|    ``logtalk_load(uri_template(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-02
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`utf_8_character_set <utf_8_character_set/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: valid/1
+.. _uri_template/1::valid/1:
+
+``valid/1``
+^^^^^^^^^^^
+
+True iff the argument is a valid RFC 6570 URI template.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid(Template)``
+| **Mode and number of proofs:**
+|    ``valid(++text)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: variables/2
+.. _uri_template/1::variables/2:
+
+``variables/2``
+^^^^^^^^^^^^^^^
+
+Returns the unique template variable names in first-seen order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``variables(Template,Variables)``
+| **Mode and number of proofs:**
+|    ``variables(++text,-list(text))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: expand/3
+.. _uri_template/1::expand/3:
+
+``expand/3``
+^^^^^^^^^^^^
+
+Expands a valid RFC 6570 URI template using a list of ``Name-Value`` bindings. Values are represented by ``undefined``, ``string(Text)``, ``list(Texts)``, ``assoc(Pairs)``, or ``structure(Pairs)`` terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``expand(Template,Bindings,Expansion)``
+| **Mode and number of proofs:**
+|    ``expand(++text,+list(pair),-text)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: expand/4
+.. _uri_template/1::expand/4:
+
+``expand/4``
+^^^^^^^^^^^^
+
+Expands an RFC 6570 URI template while recovering from template syntax errors. Malformed expressions are copied unexpanded and processing continues. For an invalid literal or unterminated expression, the unprocessed remainder is copied and processing stops. Errors are returned as zero-based ``error(Position, Reason)`` terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``expand(Template,Bindings,Expansion,Errors)``
+| **Mode and number of proofs:**
+|    ``expand(++text,+list(pair),-text,-list(compound))`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
