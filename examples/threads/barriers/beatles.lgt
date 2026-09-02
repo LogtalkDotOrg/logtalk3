@@ -22,9 +22,9 @@
 :- object(beatles).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2024-02-06,
+		date is 2026-09-02,
 		comment is 'Simple example of using a barrier to synchronize a set of threads.'
 	]).
 
@@ -40,7 +40,7 @@
 	:- public([hello/1, goodbye/1]).
 	:- dynamic([hello/1, goodbye/1]).
 
-	:- uses(random, [random/3]).
+	:- uses(fast_random, [random/3]).
 
 	sing(Thread) :-
 		% spend some time before saying hello

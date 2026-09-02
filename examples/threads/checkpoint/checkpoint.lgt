@@ -22,9 +22,9 @@
 :- object(checkpoint).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:0:2,
 		author is 'Paulo Moura',
-		date is 2016-05-21,
+		date is 2026-09-02,
 		comment is 'Simple example of using a barrier as a checkpoint to synchronize a set of worker threads assembling a set of items.'
 	]).
 
@@ -45,7 +45,7 @@
 
 	:- uses(format, [format/2]).
 	:- uses(integer, [between/3]).
-	:- uses(random,  [random/3]).
+	:- uses(fast_random,  [random/3]).
 
 	run(Workers, Items, Time) :-
 		% start the workers

@@ -314,9 +314,9 @@ spec and add tests covering both MCP 2025-06-18 and 2026-07-28 specs.
 
 * UPDATED: The `errors` example to illustrate the new linter warnings.
 
-* FIXED: The `philosophers` multi-threading example to use the `fast_random`
-library object to avoid possible race conditions. Thanks to Andrew Davison
-for the analysis.
+* FIXED: The `barriers`, `checkpoint`, and `philosophers` multi-threading
+examples to use the `fast_random` library object to avoid possible race
+conditions. Thanks to Andrew Davison for the analysis.
 
 Tests
 -----
