@@ -136,9 +136,9 @@
 	implements(philosopherp)).
 
 	:- info([
-		version is 2:4:0,
+		version is 2:4:1,
 		author is 'Paulo Moura',
-		date is 2025-04-16,
+		date is 2026-09-02,
 		comment is 'Dining philosophers problem: philosopher representation.'
 	]).
 
@@ -147,7 +147,7 @@
 	:- dynamic(terminated/0).
 
 	:- uses(format, [format/2]).
-	:- uses(random, [random/3]).
+	:- uses(fast_random, [random/3]).
 
 	run(0, _) :-
 		this(Philosopher),
@@ -232,9 +232,9 @@
 	implements(philosopherp)).
 
 	:- info([
-		version is 2:3:0,
+		version is 2:3:1,
 		author is 'Paulo Moura',
-		date is 2024-02-06,
+		date is 2026-09-02,
 		comment is 'Dining philosophers problem: philosopher representation.'
 	]).
 
@@ -243,7 +243,7 @@
 	:- dynamic(terminated/1).
 
 	:- uses(format, [format/2]).
-	:- uses(random, [random/3]).
+	:- uses(fast_random, [random/3]).
 
 	left_chopstick(_LeftChopstick_).
 
