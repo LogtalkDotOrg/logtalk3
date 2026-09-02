@@ -713,6 +713,8 @@
 		handle_prompts_list(Params, Id, HTTPResponse).
 	do_dispatch_('prompts/get', Params, Id, HTTPResponse) :-
 		handle_prompts_get(Params, Id, HTTPResponse).
+	do_dispatch_('completion/complete', Params, Id, HTTPResponse) :-
+		handle_completion_complete(Params, Id, HTTPResponse).
 	do_dispatch_('resources/list', Params, Id, HTTPResponse) :-
 		handle_resources_list(Params, Id, HTTPResponse).
 	do_dispatch_('resources/templates/list', Params, Id, HTTPResponse) :-
@@ -774,14 +776,18 @@
 			Capabilities1 = [resources-{}|Capabilities0]
 		;	Capabilities1 = Capabilities0
 		),
-		Capabilities2 = [subscriptions-{}|Capabilities1],
+		(	member(completions, AppCaps) ->
+			Capabilities2 = [completions-{}| Capabilities1]
+		;	Capabilities2 = Capabilities1
+		),
+		Capabilities3 = [subscriptions-{}| Capabilities2],
 		% MCP Apps extension (io.modelcontextprotocol/ui)
 		(	member(ui, AppCaps) ->
 			UIExt = {'io.modelcontextprotocol/ui'-{mimeTypes-['text/html;profile=mcp-app']}},
-			Capabilities3 = [extensions-UIExt| Capabilities2]
-		;	Capabilities3 = Capabilities2
+			Capabilities4 = [extensions-UIExt| Capabilities3]
+		;	Capabilities4 = Capabilities3
 		),
-		^^pairs_to_curly(Capabilities3, Capabilities).
+		^^pairs_to_curly(Capabilities4, Capabilities).
 
 	handle_tools_list(_, Id, HTTPResponse) :-
 		server_options_(Options),
@@ -1159,6 +1165,22 @@
 		;	write_to_atom(Other, T)
 		),
 		error_response(-32603, T, Id, Msg).
+
+	handle_completion_complete(Params, Id, HTTPResponse) :-
+		server_options_(Options),
+		^^option(application_capabilities(ApplicationCapabilities), Options),
+		(	member(completions, ApplicationCapabilities) ->
+			^^option(application(Application), Options),
+			(	^^completion_request(Application, Params, Reference, Argument, Context) ->
+				(	catch(Application::completion(Reference, Argument, Context, CompletionResult), _, fail),
+					^^completion_result_to_json(CompletionResult, JsonCompletion) ->
+					json_result(Id, {completion-JsonCompletion, resultType-complete}, HTTPResponse)
+				;	json_error(Id, -32603, 'Completion failed', HTTPResponse)
+				)
+			;	json_error(Id, -32602, 'Invalid completion parameters', HTTPResponse)
+			)
+		;	json_error(Id, -32601, 'Method not found', HTTPResponse)
+		).
 
 	handle_resources_list(_, Id, HTTPResponse) :-
 		server_options_(Options),

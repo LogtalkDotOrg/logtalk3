@@ -282,6 +282,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#progress-2026-07-28-spec">Progress (2026-07-28 spec)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#subscriptions-and-notifications-2026-07-28-spec">Subscriptions and notifications (2026-07-28 spec)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#prompts">Prompts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#completions">Completions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#resources">Resources</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#mcp-client-configuration">MCP client configuration</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#error-handling">Error handling</a><ul>
@@ -292,6 +293,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#protocols-overview">Protocols overview</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#mcp-tool-protocol"><code class="docutils literal notranslate"><span class="pre">mcp_tool_protocol</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mcp-prompt-protocol"><code class="docutils literal notranslate"><span class="pre">mcp_prompt_protocol</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mcp-completion-protocol"><code class="docutils literal notranslate"><span class="pre">mcp_completion_protocol</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mcp-resource-protocol"><code class="docutils literal notranslate"><span class="pre">mcp_resource_protocol</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mcp-multiround-protocol-2026-07-28"><code class="docutils literal notranslate"><span class="pre">mcp_multiround_protocol</span></code> (2026-07-28)</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mcp-cache-protocol-2026-07-28"><code class="docutils literal notranslate"><span class="pre">mcp_cache_protocol</span></code> (2026-07-28)</a></li>
@@ -495,18 +497,18 @@ of the clients for testing.</p>
 transport bindings (stdio and Streamable HTTP, with optional SSE for
 progress and long-lived subscriptions):</p>
 <ul class="simple">
-<li><p><strong>2025-06-18</strong> (default) - tools, prompts, resources, synchronous
-elicitation, structured output, resource links, version negotiation.
-Spec object: <code class="docutils literal notranslate"><span class="pre">mcp_server_2025_06_18_spec</span></code>.</p></li>
+<li><p><strong>2025-06-18</strong> (default) - tools, prompts, resources, completions,
+synchronous elicitation, structured output, resource links, version
+negotiation. Spec object: <code class="docutils literal notranslate"><span class="pre">mcp_server_2025_06_18_spec</span></code>.</p></li>
 <li><p><strong>2025-11-25</strong> - extends the 2025-06-18 handler with optional
 <code class="docutils literal notranslate"><span class="pre">serverInfo.description</span></code>, icons metadata on tools/prompts/resources
 (SEP-973), URL-mode elicitation (SEP-1036), and pass-through of
 enriched enum / form schemas (SEP-1330). Spec object:
 <code class="docutils literal notranslate"><span class="pre">mcp_server_2025_11_25_spec</span></code> (extends
 <code class="docutils literal notranslate"><span class="pre">mcp_server_2025_06_18_spec</span></code>).</p></li>
-<li><p><strong>2026-07-28</strong> - discovery, tools/prompts/resources, multi-round tool
-results (MRTR), caching, progress, subscriptions, cancellation. Spec
-object: <code class="docutils literal notranslate"><span class="pre">mcp_server_2026_07_28_spec</span></code>.</p></li>
+<li><p><strong>2026-07-28</strong> - discovery, tools/prompts/resources/completions,
+multi-round tool results (MRTR), caching, progress, subscriptions,
+cancellation. Spec object: <code class="docutils literal notranslate"><span class="pre">mcp_server_2026_07_28_spec</span></code>.</p></li>
 </ul>
 <p>The stdio transport is implemented by the <code class="docutils literal notranslate"><span class="pre">mcp_server_stdio_transport</span></code>
 object. The Streamable HTTP transport is implemented by the
@@ -540,6 +542,7 @@ listening and framing.</p>
 <p>There’s also a set of protocols for the different MCP facets:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">mcp_tool_protocol</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mcp_completion_protocol</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">mcp_prompt_protocol</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">mcp_resource_protocol</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">mcp_multiround_protocol</span></code> (2026 MRTR)</p></li>
@@ -1391,6 +1394,60 @@ description</p></li>
 </div>
 <p>For 2026 multi-round prompts, implement <code class="docutils literal notranslate"><span class="pre">prompt_get_round/4</span></code>.</p>
 </section>
+<section id="completions">
+<h2>Completions<a class="headerlink" href="#completions" title="Link to this heading"></a></h2>
+<p>MCP completions provide application-ranked suggestions for prompt
+arguments and resource URI or URI-template arguments. Implement
+<code class="docutils literal notranslate"><span class="pre">mcp_completion_protocol</span></code> together with the referenced prompt and
+resource protocols, and declare <code class="docutils literal notranslate"><span class="pre">completions</span></code> in <code class="docutils literal notranslate"><span class="pre">capabilities/1</span></code>:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">object</span>(my_completions,
+    <span class="k">implements</span>([
+        mcp_tool_protocol,
+        mcp_completion_protocol,
+        mcp_prompt_protocol,
+        mcp_resource_protocol
+    ])).
+
+    capabilities([completions, prompts, resources]).
+
+    completion(prompt(code_review), language<span class="o">-</span><span class="nv">Partial</span>, <span class="nv">_Context</span>, <span class="nv">Result</span>) <span class="o">:-</span>
+        <span class="c">% Filter and rank using Partial.</span>
+        <span class="nv">Result</span> <span class="o">=</span> completion([logtalk, prolog]).
+
+    completion(resource(<span class="s">&#39;logtalk://my-app/users/{name}&#39;</span>), name<span class="o">-</span><span class="nv">Partial</span>, <span class="nv">Context</span>, <span class="nv">Result</span>) <span class="o">:-</span>
+        <span class="c">% Context contains previously resolved Name-Value pairs.</span>
+        <span class="nv">Result</span> <span class="o">=</span> completion([alice, alicia], <span class="m">5</span>, <span class="k">true</span>).
+
+<span class="p">:- </span><span class="k">end_object</span>.
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">completion/4</span></code> arguments are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Reference</span></code> - <code class="docutils literal notranslate"><span class="pre">prompt(Name)</span></code> or <code class="docutils literal notranslate"><span class="pre">resource(URIOrTemplate)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Argument</span></code> - an <code class="docutils literal notranslate"><span class="pre">ArgumentName-PartialValue</span></code> pair</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Context</span></code> - previously resolved argument <code class="docutils literal notranslate"><span class="pre">Name-Value</span></code> pairs, or
+<code class="docutils literal notranslate"><span class="pre">[]</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Result</span></code> - <code class="docutils literal notranslate"><span class="pre">completion(Values)</span></code> or
+<code class="docutils literal notranslate"><span class="pre">completion(Values,</span> <span class="pre">Total,</span> <span class="pre">HasMore)</span></code></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">Values</span></code> must be an application-ranked list of atoms. <code class="docutils literal notranslate"><span class="pre">Total</span></code> is an
+optional non-negative count of all available matches and <code class="docutils literal notranslate"><span class="pre">HasMore</span></code> is
+<code class="docutils literal notranslate"><span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">false</span></code>. The server preserves order and does not sort or
+deduplicate suggestions. When more than 100 values are returned, the
+server retains the first 100 and sets <code class="docutils literal notranslate"><span class="pre">hasMore</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+<p>Prompt references and argument names must match descriptors returned by
+<code class="docutils literal notranslate"><span class="pre">prompts/1</span></code>. Resource references must exactly match a URI returned by
+<code class="docutils literal notranslate"><span class="pre">resources/1</span></code> or a URI template returned by <code class="docutils literal notranslate"><span class="pre">resource_templates/1</span></code>;
+no RFC 6570 reverse matching is required. Invalid requests return
+<code class="docutils literal notranslate"><span class="pre">-32602</span></code>, while callback failures and invalid result terms return
+<code class="docutils literal notranslate"><span class="pre">-32603</span></code>. Calls made when <code class="docutils literal notranslate"><span class="pre">completions</span></code> is not advertised return
+<code class="docutils literal notranslate"><span class="pre">-32601</span></code>.</p>
+<p>Applications are responsible for filtering suggestions according to
+caller authorization, preventing information disclosure, ranking domain
+results, and applying any domain-specific throttling. Completion is
+synchronous and does not use MRTR, progress notifications, or 2026 cache
+fields.</p>
+</section>
 <section id="resources">
 <h2>Resources<a class="headerlink" href="#resources" title="Link to this heading"></a></h2>
 <p>MCP resources expose data and content from the application that MCP
@@ -1611,10 +1668,10 @@ details.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">capabilities/1</span></code> - returns the list of additional features needed by
 the application (e.g. <code class="docutils literal notranslate"><span class="pre">[elicitation]</span></code>, <code class="docutils literal notranslate"><span class="pre">[prompts]</span></code>,
-<code class="docutils literal notranslate"><span class="pre">[resources]</span></code>, or <code class="docutils literal notranslate"><span class="pre">[prompts,</span> <span class="pre">resources,</span> <span class="pre">elicitation]</span></code>);
-<code class="docutils literal notranslate"><span class="pre">prompts</span></code> and <code class="docutils literal notranslate"><span class="pre">resources</span></code> are server capabilities while
-<code class="docutils literal notranslate"><span class="pre">elicitation</span></code> is a required client capability; optional, defaults to
-<code class="docutils literal notranslate"><span class="pre">[]</span></code></p></li>
+<code class="docutils literal notranslate"><span class="pre">[resources]</span></code>, <code class="docutils literal notranslate"><span class="pre">[completions]</span></code>, or
+<code class="docutils literal notranslate"><span class="pre">[completions,</span> <span class="pre">prompts,</span> <span class="pre">resources]</span></code>); <code class="docutils literal notranslate"><span class="pre">prompts</span></code>, <code class="docutils literal notranslate"><span class="pre">resources</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">completions</span></code> are server capabilities while <code class="docutils literal notranslate"><span class="pre">elicitation</span></code> is a
+required client capability; optional, defaults to <code class="docutils literal notranslate"><span class="pre">[]</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tools/1</span></code> - returns the list of tool descriptors</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">tool_call/3</span></code> - handles a tool call (optional; auto-dispatch is used
 when not defined)</p></li>
@@ -1632,6 +1689,13 @@ structured tool output (optional)</p></li>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">prompts/1</span></code> - returns the list of prompt descriptors</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">prompt_get/3</span></code> - handles a prompt get request</p></li>
+</ul>
+</section>
+<section id="mcp-completion-protocol">
+<h3><code class="docutils literal notranslate"><span class="pre">mcp_completion_protocol</span></code><a class="headerlink" href="#mcp-completion-protocol" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">completion/4</span></code> - completes a prompt argument or resource
+URI/template argument</p></li>
 </ul>
 </section>
 <section id="mcp-resource-protocol">
@@ -1706,21 +1770,27 @@ icons)</p></td>
 <td><p>Request</p></td>
 <td><p>Get a prompt</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">resources/list</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">completion/complete</span></code></p></td>
+<td><p>Request</p></td>
+<td><p>Complete a
+prompt/resource
+value</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">resources/list</span></code></p></td>
 <td><p>Request</p></td>
 <td><p>List resources
 (optional icons)</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">resources/templates/list</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">resources/templates/list</span></code></p></td>
 <td><p>Request</p></td>
 <td><p>List templates
 (optional icons)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">resources/read</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">resources/read</span></code></p></td>
 <td><p>Request</p></td>
 <td><p>Read a resource</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">elicitation/create</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">elicitation/create</span></code></p></td>
 <td><p>Request (server -&gt;
 client)</p></td>
 <td><p>Form or URL mode
@@ -1762,55 +1832,61 @@ initialize)</p></td>
 <td><p>Get a prompt
 (supports MRTR)</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">resources/list</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">completion/complete</span></code></p></td>
+<td><p>Request</p></td>
+<td><p>Complete a
+prompt/resource
+value</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">resources/list</span></code></p></td>
 <td><p>Request</p></td>
 <td><p>List resources</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">resources/templates/list</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">resources/templates/list</span></code></p></td>
 <td><p>Request</p></td>
 <td><p>List resource
 templates</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">resources/read</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">resources/read</span></code></p></td>
 <td><p>Request</p></td>
 <td><p>Read a resource
 (supports MRTR)</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">subscriptions/listen</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">subscriptions/listen</span></code></p></td>
 <td><p>Request</p></td>
 <td><p>Open a subscription</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">notifications/cancelled</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">notifications/cancelled</span></code></p></td>
 <td><p>Notification</p></td>
 <td><p>Cancel in-flight
 request</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">notifications/progress</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">notifications/progress</span></code></p></td>
 <td><p>Notification (server
 -&gt; client)</p></td>
 <td><p>Progress update</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">notifications/subscriptions/acknowledged</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">notifications/subscriptions/acknowledged</span></code></p></td>
 <td><p>Notification (server
 -&gt; client)</p></td>
 <td><p>Subscription ack</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">notifications/tools/list_changed</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">notifications/tools/list_changed</span></code></p></td>
 <td><p>Notification (server
 -&gt; client)</p></td>
 <td><p>Tools changed</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">notifications/prompts/list_changed</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">notifications/prompts/list_changed</span></code></p></td>
 <td><p>Notification (server
 -&gt; client)</p></td>
 <td><p>Prompts changed</p></td>
 </tr>
-<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">notifications/resources/list_changed</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">notifications/resources/list_changed</span></code></p></td>
 <td><p>Notification (server
 -&gt; client)</p></td>
 <td><p>Resources changed</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">notifications/resources/updated</span></code></p></td>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">notifications/resources/updated</span></code></p></td>
 <td><p>Notification (server
 -&gt; client)</p></td>
 <td><p>Resource updated</p></td>
@@ -1877,8 +1953,8 @@ and <strong>Streamable HTTP</strong>. Spec:</p>
 </section>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
-<p>Completion, roots (deprecated), sampling (deprecated), and experimental
-tasks are not currently implemented.</p>
+<p>Roots (deprecated), sampling (deprecated), and experimental tasks are
+not currently implemented.</p>
 <p>Synchronous elicitation is restricted to the stdio transport for the
 2025 specs.</p>
 <p>OpenTelemetry <code class="docutils literal notranslate"><span class="pre">_meta</span></code> propagation is currently not implemented. OAuth

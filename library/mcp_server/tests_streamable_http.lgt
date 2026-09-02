@@ -264,6 +264,34 @@
 
 	% prompts / resources
 
+	test(http_completion_ordinary_01, deterministic(Values == ['Lisbon'])) :-
+		call_json_rpc(
+			test_completion_tools,
+			completion_request(none, 1),
+			HTTPResponse
+		),
+		http_json_response(HTTPResponse, Response),
+		result(Response, Result),
+		has_pair(Result, resultType, complete),
+		has_pair(Result, completion, Completion),
+		has_pair(Completion, values, Values).
+
+	test(http_completion_progress_token_direct_01, deterministic(Values == ['Lisbon'])) :-
+		call_json_rpc(
+			test_completion_tools,
+			completion_request(completion_token, 1),
+			HTTPResponse
+		),
+		HTTPResponse = http_response(200, Headers, _),
+		memberchk('Content-Type'-ContentType, Headers),
+		sub_atom(ContentType, 0, 16, _, 'application/json'),
+		http_json_response(HTTPResponse, Response),
+		result(Response, Result),
+		has_pair(Result, completion, Completion),
+		has_pair(Completion, values, Values),
+		\+ has_pair(Result, ttlMs, _),
+		\+ has_pair(Result, cacheScope, _).
+
 	test(http_prompts_list_01, deterministic) :-
 		call_json_rpc(
 			test_prompts_2026,
@@ -737,6 +765,17 @@
 	spec_to_message(prompts_get_request(Name, Args, Id), Message) :-
 		meta_2026(Meta),
 		request('prompts/get', {name-Name, arguments-Args, '_meta'-Meta}, Id, Message).
+	spec_to_message(completion_request(Token, Id), Message) :-
+		(	Token == none ->
+			meta_2026(Meta)
+		;	meta_2026_progress(Token, Meta)
+		),
+		request('completion/complete', {
+			ref-{type-'ref/prompt', name-city_prompt},
+			argument-{name-city, value-'L'},
+			context-{arguments-{country-'PT'}},
+			'_meta'-Meta
+		}, Id, Message).
 	spec_to_message(resources_list_request(Id), Message) :-
 		meta_2026(Meta),
 		request('resources/list', {'_meta'-Meta}, Id, Message).

@@ -330,6 +330,60 @@
 
 	% unknown method
 
+	% completion
+
+	test(mcp26_completion_capability_01, deterministic) :-
+		run_2026(
+			test_completion_tools,
+			[discover_request(1)],
+			[Response]
+		),
+		result(Response, Result),
+		has_pair(Result, capabilities, Capabilities),
+		has_pair(Capabilities, completions, _).
+
+	test(mcp26_prompt_completion_01, deterministic(Values == ['Lisbon'])) :-
+		run_2026(
+			test_completion_tools,
+			[completion_request(
+				{type-'ref/prompt', name-city_prompt},
+				{name-city, value-'L'},
+				{arguments-{country-'PT'}},
+				1
+			)],
+			[Response]
+		),
+		result(Response, Result),
+		has_pair(Result, resultType, complete),
+		has_pair(Result, completion, Completion),
+		has_pair(Completion, values, Values),
+		\+ has_pair(Result, ttlMs, _),
+		\+ has_pair(Result, cacheScope, _).
+
+	test(mcp26_resource_completion_01, deterministic(Total-HasMore == 2- @true)) :-
+		run_2026(
+			test_completion_tools,
+			[completion_request(
+				{type-'ref/resource', uri-'logtalk://cities/{city}'},
+				{name-city, value-'L'},
+				{},
+				1
+			)],
+			[Response]
+		),
+		result(Response, Result),
+		has_pair(Result, completion, Completion),
+		has_pair(Completion, total, Total),
+		has_pair(Completion, hasMore, HasMore).
+
+	test(mcp26_completion_requires_meta_01, deterministic(Code == -32602)) :-
+		run_2026(
+			test_completion_tools,
+			[bare_request('completion/complete', 1)],
+			[Response]
+		),
+		error_code(Response, Code).
+
 	test(mcp26_unknown_method_01, deterministic(Code == -32601)) :-
 		run_2026(
 			test_tools_2026,
@@ -541,6 +595,14 @@
 	spec_to_message(prompts_get_request(Name, Args, Id), Message) :-
 		meta_2026(Meta),
 		request('prompts/get', {name-Name, arguments-Args, '_meta'-Meta}, Id, Message).
+	spec_to_message(completion_request(Reference, Argument, Context, Id), Message) :-
+		meta_2026(Meta),
+		request('completion/complete', {
+			ref-Reference,
+			argument-Argument,
+			context-Context,
+			'_meta'-Meta
+		}, Id, Message).
 	spec_to_message(resources_list_request(Id), Message) :-
 		meta_2026(Meta),
 		request('resources/list', {'_meta'-Meta}, Id, Message).

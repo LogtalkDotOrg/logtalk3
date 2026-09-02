@@ -1,0 +1,65 @@
+.. index:: single: http_oauth_jwt_verifier(KeyOrJWKSet,Options)
+.. _http_oauth_jwt_verifier/2:
+
+.. rst-class:: right
+
+**object**
+
+``http_oauth_jwt_verifier(KeyOrJWKSet,Options)``
+================================================
+
+* ``KeyOrJWKSet`` - Symmetric key, public JWK, or JWK Set accepted by ``jwt::verify/4``.
+* ``Options`` - Options passed to ``jwt::verify/4``.
+
+
+Resource-aware OAuth verifier for JWT access tokens.
+
+| **Availability:** 
+|    ``logtalk_load(http_oauth(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-01
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`http_oauth_verifier_protocol <http_oauth_verifier_protocol/0>`
+| **Imports:**
+|    ``public`` :ref:`http_oauth_helpers <http_oauth_helpers/0>`
+| **Uses:**
+|    :ref:`jwt <jwt/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`http_oauth_verifier_protocol/0::verify/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

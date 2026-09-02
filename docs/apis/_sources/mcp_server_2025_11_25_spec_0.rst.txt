@@ -1,0 +1,75 @@
+.. index:: single: mcp_server_2025_11_25_spec
+.. _mcp_server_2025_11_25_spec/0:
+
+.. rst-class:: right
+
+**object**
+
+``mcp_server_2025_11_25_spec``
+==============================
+
+MCP 2025-11-25 protocol handler. Extends the 2025-06-18 handler with version ``2025-11-25`` negotiation (still accepting ``2025-06-18``), optional ``serverInfo.description``, icons metadata on tools/prompts/resources (SEP-973), and URL-mode elicitation (SEP-1036). EnumSchema / ElicitResult enrichments (SEP-1330) are pass-through via application-supplied schemas. Does **not** implement sampling tool calling, experimental Tasks, or OAuth/OIDC.
+
+| **Availability:** 
+|    ``logtalk_load(mcp_server(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-08-31
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Extends:**
+|    ``public`` :ref:`mcp_server_2025_06_18_spec <mcp_server_2025_06_18_spec/0>`
+| **Uses:**
+|    :ref:`json_rpc <json_rpc/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`mcp_server_spec_protocol/0::cleanup/0`  :ref:`mcp_server_2025_06_18_spec/0::current_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`mcp_server_2025_06_18_spec/0::elicit_request/5`  :ref:`mcp_server_spec_protocol/0::handle_message/3`  :ref:`mcp_server_spec_protocol/0::notify/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`mcp_server_spec_protocol/0::prepare/2`  :ref:`mcp_server_spec_protocol/0::spec/1`  :ref:`mcp_server_2025_06_18_spec/0::supported_specs/1`  :ref:`mcp_server_application/0::tool_descriptors_to_json/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: elicit_url_request/5
+.. _mcp_server_2025_11_25_spec/0::elicit_url_request/5:
+
+``elicit_url_request/5``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Sends a URL-mode ``elicitation/create`` request (SEP-1036) and reads the client response. ``Answer`` is ``accept(Content)``, ``decline``, or ``cancel``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``elicit_url_request(Input,Output,Message,URL,Answer)``
+| **Mode and number of proofs:**
+|    ``elicit_url_request(+stream,+stream,+atom,+atom,--compound)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

@@ -1,0 +1,113 @@
+.. index:: single: http_authentication_helpers
+.. _http_authentication_helpers/0:
+
+.. rst-class:: right
+
+**category**
+
+``http_authentication_helpers``
+===============================
+
+Internal shared helpers for HTTP authentication scheme and parameter syntax.
+
+| **Availability:** 
+|    ``logtalk_load(http_core(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-01
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Extends:**
+|    ``public`` :ref:`http_text_helpers <http_text_helpers/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: authentication_scheme_codes/3
+.. _http_authentication_helpers/0::authentication_scheme_codes/3:
+
+``authentication_scheme_codes/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Splits authentication value codes into the scheme and remaining payload codes at the first HTTP optional whitespace code.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``authentication_scheme_codes(Codes,SchemeCodes,PayloadCodes)``
+| **Mode and number of proofs:**
+|    ``authentication_scheme_codes(+list(integer),-list(integer),-list(integer))`` - ``one``
+
+
+------------
+
+.. index:: parse_authentication_parameters/3
+.. _http_authentication_helpers/0::parse_authentication_parameters/3:
+
+``parse_authentication_parameters/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Parses comma-separated authentication parameters, using the given domain-error term for invalid syntax and duplicate names.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse_authentication_parameters(ErrorDomain,Codes,Pairs)``
+| **Mode and number of proofs:**
+|    ``parse_authentication_parameters(+nonvar,+list(integer),-list(pair))`` - ``one_or_error``
+
+
+------------
+
+.. index:: authentication_token_codes/1
+.. _http_authentication_helpers/0::authentication_token_codes/1:
+
+``authentication_token_codes/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Succeeds when the nonempty list of codes is an HTTP token.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``authentication_token_codes(Codes)``
+| **Mode and number of proofs:**
+|    ``authentication_token_codes(+list(integer))`` - ``zero_or_one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

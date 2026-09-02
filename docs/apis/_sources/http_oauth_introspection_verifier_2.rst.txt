@@ -1,0 +1,63 @@
+.. index:: single: http_oauth_introspection_verifier(Endpoint,Options)
+.. _http_oauth_introspection_verifier/2:
+
+.. rst-class:: right
+
+**object**
+
+``http_oauth_introspection_verifier(Endpoint,Options)``
+=======================================================
+
+* ``Endpoint`` - Token introspection endpoint URL.
+* ``Options`` - Introspection client options plus optional ``audience_validation(trust_active)``.
+
+
+Resource-aware OAuth verifier using RFC 7662 token introspection.
+
+| **Availability:** 
+|    ``logtalk_load(http_oauth(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-01
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`http_oauth_verifier_protocol <http_oauth_verifier_protocol/0>`
+| **Uses:**
+|    :ref:`http_oauth_introspection_client <http_oauth_introspection_client/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`http_oauth_verifier_protocol/0::verify/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

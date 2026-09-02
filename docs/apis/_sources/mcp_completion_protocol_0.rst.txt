@@ -1,0 +1,77 @@
+.. index:: single: mcp_completion_protocol
+.. _mcp_completion_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``mcp_completion_protocol``
+===========================
+
+Protocol for Logtalk objects that provide MCP prompt argument and resource URI completions. Used by the 2025-06-18, 2025-11-25, and 2026-07-28 adapters.
+
+| **Availability:** 
+|    ``logtalk_load(mcp_server(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-02
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+
+   - Capabilities: Objects providing completions must declare ``completions`` in their ``capabilities/1`` predicate (from the ``mcp_tool_protocol`` protocol).
+   - References: The reference is either ``prompt(Name)`` for a declared prompt or ``resource(URI)`` for a declared resource URI or URI template.
+   - Results: The result is ``completion(Values)`` or ``completion(Values, Total, HasMore)``. ``Values`` is an application-ranked list of atoms. The server preserves the first 100 values and sets ``hasMore`` to true when truncation is required. ``Total`` is a non-negative integer and ``HasMore`` is ``true`` or ``false``.
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: completion/4
+.. _mcp_completion_protocol/0::completion/4:
+
+``completion/4``
+^^^^^^^^^^^^^^^^
+
+Returns completion suggestions for a prompt argument or resource URI. ``Reference`` is ``prompt(Name)`` or ``resource(URI)``, ``Argument`` is an ``ArgumentName-PartialValue`` pair, ``Context`` is a list of previously resolved ``Name-Value`` argument pairs, and ``Result`` is ``completion(Values)`` or ``completion(Values, Total, HasMore)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``completion(Reference,Argument,Context,Result)``
+| **Mode and number of proofs:**
+|    ``completion(+compound,+pair,+list(pair),--compound)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

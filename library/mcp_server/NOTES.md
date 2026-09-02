@@ -65,16 +65,16 @@ This library currently supports three specs (aka data layers) and two
 transport bindings (stdio and Streamable HTTP, with optional SSE for
 progress and long-lived subscriptions):
 
-- **2025-06-18** (default) - tools, prompts, resources, synchronous
-  elicitation, structured output, resource links, version negotiation.
-  Spec object: `mcp_server_2025_06_18_spec`.
+- **2025-06-18** (default) - tools, prompts, resources, completions,
+  synchronous elicitation, structured output, resource links, version
+  negotiation. Spec object: `mcp_server_2025_06_18_spec`.
 - **2025-11-25** - extends the 2025-06-18 handler with optional
   `serverInfo.description`, icons metadata on tools/prompts/resources
   (SEP-973), URL-mode elicitation (SEP-1036), and pass-through of enriched
   enum / form schemas (SEP-1330). Spec object: `mcp_server_2025_11_25_spec`
   (extends `mcp_server_2025_06_18_spec`).
-- **2026-07-28** - discovery, tools/prompts/resources, multi-round tool
-  results (MRTR), caching, progress, subscriptions, cancellation. Spec
+- **2026-07-28** - discovery, tools/prompts/resources/completions, multi-round
+  tool results (MRTR), caching, progress, subscriptions, cancellation. Spec
   object: `mcp_server_2026_07_28_spec`.
   
 The stdio transport is implemented by the `mcp_server_stdio_transport`
@@ -112,6 +112,7 @@ library (and optionally `http_sse` helpers) for listening and framing.
 There's also a set of protocols for the different MCP facets:
 
 - `mcp_tool_protocol`
+- `mcp_completion_protocol`
 - `mcp_prompt_protocol`
 - `mcp_resource_protocol`
 - `mcp_multiround_protocol` (2026 MRTR)
@@ -830,6 +831,60 @@ Multi-turn prompts can return multiple messages:
 For 2026 multi-round prompts, implement `prompt_get_round/4`.
 
 
+Completions
+-----------
+
+MCP completions provide application-ranked suggestions for prompt arguments
+and resource URI or URI-template arguments. Implement
+`mcp_completion_protocol` together with the referenced prompt and resource
+protocols, and declare `completions` in `capabilities/1`:
+
+	:- object(my_completions,
+		implements([
+			mcp_tool_protocol,
+			mcp_completion_protocol,
+			mcp_prompt_protocol,
+			mcp_resource_protocol
+		])).
+
+		capabilities([completions, prompts, resources]).
+
+		completion(prompt(code_review), language-Partial, _Context, Result) :-
+			% Filter and rank using Partial.
+			Result = completion([logtalk, prolog]).
+
+		completion(resource('logtalk://my-app/users/{name}'), name-Partial, Context, Result) :-
+			% Context contains previously resolved Name-Value pairs.
+			Result = completion([alice, alicia], 5, true).
+
+	:- end_object.
+
+The `completion/4` arguments are:
+
+- `Reference` - `prompt(Name)` or `resource(URIOrTemplate)`
+- `Argument` - an `ArgumentName-PartialValue` pair
+- `Context` - previously resolved argument `Name-Value` pairs, or `[]`
+- `Result` - `completion(Values)` or `completion(Values, Total, HasMore)`
+
+`Values` must be an application-ranked list of atoms. `Total` is an optional
+non-negative count of all available matches and `HasMore` is `true` or
+`false`. The server preserves order and does not sort or deduplicate
+suggestions. When more than 100 values are returned, the server retains the
+first 100 and sets `hasMore` to `true`.
+
+Prompt references and argument names must match descriptors returned by
+`prompts/1`. Resource references must exactly match a URI returned by
+`resources/1` or a URI template returned by `resource_templates/1`; no RFC
+6570 reverse matching is required. Invalid requests return `-32602`, while
+callback failures and invalid result terms return `-32603`. Calls made when
+`completions` is not advertised return `-32601`.
+
+Applications are responsible for filtering suggestions according to caller
+authorization, preventing information disclosure, ranking domain results,
+and applying any domain-specific throttling. Completion is synchronous and
+does not use MRTR, progress notifications, or 2026 cache fields.
+
+
 Resources
 ---------
 
@@ -1022,9 +1077,10 @@ implemented by an application. See the API documentation for full details.
 ### `mcp_tool_protocol`
 
 - `capabilities/1` - returns the list of additional features needed by the
-	application (e.g. `[elicitation]`, `[prompts]`, `[resources]`, or
-	`[prompts, resources, elicitation]`); `prompts` and `resources` are server
-	capabilities while `elicitation` is a required client capability; optional,
+	application (e.g. `[elicitation]`, `[prompts]`, `[resources]`,
+	`[completions]`, or `[completions, prompts, resources]`); `prompts`,
+	`resources`, and `completions` are server capabilities while `elicitation`
+	is a required client capability; optional,
 	defaults to `[]`
 - `tools/1` - returns the list of tool descriptors
 - `tool_call/3` - handles a tool call (optional; auto-dispatch is used
@@ -1041,6 +1097,11 @@ implemented by an application. See the API documentation for full details.
 
 - `prompts/1` - returns the list of prompt descriptors
 - `prompt_get/3` - handles a prompt get request
+
+### `mcp_completion_protocol`
+
+- `completion/4` - completes a prompt argument or resource URI/template
+	argument
 
 ### `mcp_resource_protocol`
 
@@ -1077,6 +1138,7 @@ responses may include optional `icons`. Form and URL modes of
 | `tools/call`                | Request                    | Call a tool                       |
 | `prompts/list`              | Request                    | List prompts (optional icons)     |
 | `prompts/get`               | Request                    | Get a prompt                      |
+| `completion/complete`       | Request                    | Complete a prompt/resource value  |
 | `resources/list`            | Request                    | List resources (optional icons)   |
 | `resources/templates/list`  | Request                    | List templates (optional icons)   |
 | `resources/read`            | Request                    | Read a resource                   |
@@ -1085,23 +1147,24 @@ responses may include optional `icons`. Form and URL modes of
 ### 2026-07-28 spec
 
 | Method | Type | Description |
-|--------------------------------------------|---------------------------------|---------------------------------|
-| `server/discover`                          | Request                         | Discovery (replaces initialize) |
-| `tools/list`                               | Request                         | List tools                      |
-| `tools/call`                               | Request                         | Call a tool (supports MRTR)     |
-| `prompts/list`                             | Request                         | List prompts                    |
-| `prompts/get`                              | Request                         | Get a prompt (supports MRTR)    |
-| `resources/list`                           | Request                         | List resources                  |
-| `resources/templates/list`                 | Request                         | List resource templates         |
-| `resources/read`                           | Request                         | Read a resource (supports MRTR) |
-| `subscriptions/listen`                     | Request                         | Open a subscription             |
-| `notifications/cancelled`                  | Notification                    | Cancel in-flight request        |
-| `notifications/progress`                   | Notification (server -> client) | Progress update                 |
-| `notifications/subscriptions/acknowledged` | Notification (server -> client) | Subscription ack                |
-| `notifications/tools/list_changed`         | Notification (server -> client) | Tools changed                   |
-| `notifications/prompts/list_changed`       | Notification (server -> client) | Prompts changed                 |
-| `notifications/resources/list_changed`     | Notification (server -> client) | Resources changed               |
-| `notifications/resources/updated`          | Notification (server -> client) | Resource updated                |
+|--------------------------------------------|---------------------------------|----------------------------------|
+| `server/discover`                          | Request                         | Discovery (replaces initialize)  |
+| `tools/list`                               | Request                         | List tools                       |
+| `tools/call`                               | Request                         | Call a tool (supports MRTR)      |
+| `prompts/list`                             | Request                         | List prompts                     |
+| `prompts/get`                              | Request                         | Get a prompt (supports MRTR)     |
+| `completion/complete`                      | Request                         | Complete a prompt/resource value |
+| `resources/list`                           | Request                         | List resources                   |
+| `resources/templates/list`                 | Request                         | List resource templates          |
+| `resources/read`                           | Request                         | Read a resource (supports MRTR)  |
+| `subscriptions/listen`                     | Request                         | Open a subscription              |
+| `notifications/cancelled`                  | Notification                    | Cancel in-flight request         |
+| `notifications/progress`                   | Notification (server -> client) | Progress update                  |
+| `notifications/subscriptions/acknowledged` | Notification (server -> client) | Subscription ack                 |
+| `notifications/tools/list_changed`         | Notification (server -> client) | Tools changed                    |
+| `notifications/prompts/list_changed`       | Notification (server -> client) | Prompts changed                  |
+| `notifications/resources/list_changed`     | Notification (server -> client) | Resources changed                |
+| `notifications/resources/updated`          | Notification (server -> client) | Resource updated                 |
 
 The `ping` method was removed in the 2026-07-28 specification; requests for
 it return method not found (`-32601`).
@@ -1163,8 +1226,8 @@ Host <-> iframe JSON-RPC (`ui/initialize`, sandbox, `postMessage`).
 Limitations
 -----------
 
-Completion, roots (deprecated), sampling (deprecated), and experimental tasks
-are not currently implemented.
+Roots (deprecated), sampling (deprecated), and experimental tasks are not
+currently implemented.
 
 Synchronous elicitation is restricted to the stdio transport for the 2025
 specs.

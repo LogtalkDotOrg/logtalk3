@@ -1,0 +1,107 @@
+.. index:: single: http_router_oauth(Verifier,BaseOptions)
+.. _http_router_oauth/2:
+
+.. rst-class:: right
+
+**category**
+
+``http_router_oauth(Verifier,BaseOptions)``
+===========================================
+
+* ``Verifier`` - Verifier object passed to ``http_oauth::protect_request/4`` for routes declaring OAuth metadata.
+* ``BaseOptions`` - Base protection options overlaid by route-specific ``oauth/1`` metadata options.
+
+
+Optional OAuth router helpers for objects importing the ``http_router`` category.
+
+| **Availability:** 
+|    ``logtalk_load(http_oauth(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-01
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Uses:**
+|    :ref:`http_core <http_core/0>`
+|    :ref:`http_oauth <http_oauth/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: authorize_oauth_request/2
+.. _http_router_oauth/2::authorize_oauth_request/2:
+
+``authorize_oauth_request/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Applies OAuth route metadata to a routed request and returns ``continue(Request)`` or ``respond(Response)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``authorize_oauth_request(Request,Action)``
+| **Mode and number of proofs:**
+|    ``authorize_oauth_request(+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    An OAuth route metadata or configured base options value ``Options`` is not a proper list:
+|        ``domain_error(http_router_oauth_options,Options)``
+|    ``Request`` is not a valid normalized HTTP request term:
+|        ``domain_error(http_request,Request)``
+|    The configured verifier is a variable:
+|        ``instantiation_error``
+|    The configured verifier ``Verifier`` does not name an existing object:
+|        ``existence_error(http_oauth_verifier,Verifier)``
+|    The configured verifier ``Verifier`` does not implement ``http_oauth_verifier_protocol``:
+|        ``domain_error(http_oauth_verifier,Verifier)``
+|    An element of the effective OAuth protection options list is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the effective OAuth protection options list is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the effective OAuth protection options list is a compound term but not a valid OAuth option:
+|        ``domain_error(option,Option)``
+|    The effective OAuth protection options ``Options`` omit a protected-resource identifier:
+|        ``domain_error(http_oauth_protection_options,Options)``
+|    The effective OAuth scope checker is a variable:
+|        ``instantiation_error``
+|    The effective OAuth scope checker ``ScopeChecker`` does not name an existing object:
+|        ``existence_error(http_oauth_scope_checker,ScopeChecker)``
+|    The effective OAuth scope checker ``ScopeChecker`` does not implement ``http_oauth_scope_checker_protocol``:
+|        ``domain_error(http_oauth_scope_checker,ScopeChecker)``
+|    The OAuth verifier returns malformed normalized token information ``TokenInfo``:
+|        ``domain_error(http_oauth_token_info,TokenInfo)``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

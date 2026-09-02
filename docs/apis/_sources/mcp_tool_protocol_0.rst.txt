@@ -15,7 +15,7 @@ Protocol for Logtalk objects that provide tools to be exposed via an MCP (Model 
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-26
+| **Date:** 2026-09-02
 
 | **Compilation flags:**
 |    ``static``
@@ -27,7 +27,7 @@ Protocol for Logtalk objects that provide tools to be exposed via an MCP (Model 
 
 | **Remarks:**
 
-   - Capabilities: Objects can optionally define ``capabilities/1`` to declare additional application features. Currently supported: ``prompts`` and ``resources`` (server capabilities advertised during initialization) and ``elicitation`` (a required client capability that allows the server to ask the user questions during tool execution under the 2025-06-18 adapter). If ``capabilities/1`` is not defined, only the ``tools`` server capability is advertised.
+   - Capabilities: Objects can optionally define ``capabilities/1`` to declare additional application features. Currently supported: ``prompts``, ``resources``, and ``completions`` (server capabilities advertised during initialization) and ``elicitation`` (a required client capability that allows the server to ask the user questions during tool execution under the 2025-06-18 adapter). If ``capabilities/1`` is not defined, only the ``tools`` server capability is advertised.
    - Tool title: The tool title (human-friendly display name) is derived from a ``title`` key in the predicate ``info/2`` directive. If not specified, the predicate name (functor) is used as the title.
    - Schemas: Input and output schemas are inferred from the tool predicate ``info/2`` and ``mode/2`` directives. Define ``input_schema/2`` or ``output_schema/2`` to override the inferred schema for a tool. Tools can return ``structured(StructuredContent)`` or ``structured(ContentItems, StructuredContent)`` results; the structured content is included in the ``structuredContent`` field of the tool call response alongside the ``content`` array.
    - Resource links: Tool results can include ``resource_link(URI, Name)`` or ``resource_link(URI, Name, Description, MimeType)`` content items in ``results/1`` lists.
@@ -50,7 +50,7 @@ Public predicates
 ``capabilities/1``
 ^^^^^^^^^^^^^^^^^^
 
-Returns a list of additional MCP features used by this provider. ``prompts`` and ``resources`` are advertised as server capabilities. ``elicitation`` declares that the provider may ask the user questions and is enabled only when the client advertises the corresponding client capability. If not defined, only the ``tools`` server capability is advertised.
+Returns a list of additional MCP features used by this provider. ``prompts``, ``resources``, and ``completions`` are advertised as server capabilities. ``elicitation`` declares that the provider may ask the user questions and is enabled only when the client advertises the corresponding client capability. If not defined, only the ``tools`` server capability is advertised.
 
 | **Compilation flags:**
 |    ``static``

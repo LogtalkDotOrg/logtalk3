@@ -25,8 +25,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-31,
-		comment is 'Common predicates for MCP servers: tool/prompt/resource descriptor conversion, schema derivation from ``info/2`` and ``mode/2`` directives, auto-dispatch, canonical complete-result terms, curly-term predicates, and MCP Apps (``_meta.ui``) metadata.'
+		date is 2026-09-02,
+		comment is 'Common predicates for MCP servers: tool/prompt/resource descriptor conversion, completion request handling, schema derivation from ``info/2`` and ``mode/2`` directives, auto-dispatch, canonical complete-result terms, curly-term predicates, and MCP Apps (``_meta.ui``) metadata.'
 	]).
 
 	:- public(tool_descriptors_to_json/3).
@@ -62,6 +62,20 @@
 	:- info(application_resource_template_uri/2, [
 		comment is 'Checks that a concrete resource URI matches the literal segments of one of the application resource templates. Full RFC 6570 expression validation and authorization remain application responsibilities.',
 		argnames is ['Application', 'URI']
+	]).
+
+	:- protected(completion_request/5).
+	:- mode(completion_request(+object_identifier, +compound, -compound, -pair, -list), zero_or_one).
+	:- info(completion_request/5, [
+		comment is 'Validates and normalizes completion request parameters. The normalized reference is ``prompt(Name)`` or ``resource(URI)``, the argument is a ``Name-PartialValue`` pair, and the context is a list of prior argument pairs.',
+		argnames is ['Application', 'Params', 'Reference', 'Argument', 'Context']
+	]).
+
+	:- protected(completion_result_to_json/2).
+	:- mode(completion_result_to_json(+compound, -compound), zero_or_one).
+	:- info(completion_result_to_json/2, [
+		comment is 'Validates and converts a completion result to its MCP JSON curly-term representation.',
+		argnames is ['Result', 'JsonCompletion']
 	]).
 
 	:- protected(auto_dispatch_tool/5).
@@ -245,12 +259,12 @@
 
 	prompt_arguments_to_json([], []).
 	prompt_arguments_to_json([argument(ArgName, ArgDescription, Required)| Rest], [JsonArg| JsonRest]) :-
-		bool_to_json(Required, JsonRequired),
+		boolean_to_json(Required, JsonRequired),
 		JsonArg = {name-ArgName, description-ArgDescription, required-JsonRequired},
 		prompt_arguments_to_json(Rest, JsonRest).
 
-	bool_to_json(true, @true).
-	bool_to_json(false, @false).
+	boolean_to_json(true,  @true).
+	boolean_to_json(false, @false).
 
 	% resource descriptors
 
@@ -323,6 +337,103 @@
 			resource_template_tail_matches(NextTemplate, RestURI)
 		;	atom_concat(_, TailTemplate, URI)
 		).
+
+	% completion requests and results
+
+	completion_request(Application, Params, Reference, ArgumentName-PartialValue, Context) :-
+		conforms_to_protocol(Application, mcp_completion_protocol),
+		has_pair(Params, ref, JsonReference),
+		has_pair(Params, argument, JsonArgument),
+		has_pair(JsonArgument, name, ArgumentName),
+		has_pair(JsonArgument, value, PartialValue),
+		atom(ArgumentName),
+		atom(PartialValue),
+		completion_reference(Application, JsonReference, ArgumentName, Reference),
+		completion_context(Params, Context).
+
+	completion_reference(Application, JsonReference, ArgumentName, prompt(Name)) :-
+		has_pair(JsonReference, type, 'ref/prompt'),
+		has_pair(JsonReference, name, Name),
+		atom(Name),
+		conforms_to_protocol(Application, mcp_prompt_protocol),
+		Application::prompts(PromptDescriptors),
+		member(PromptDescriptor, PromptDescriptors),
+		prompt_descriptor_name_arguments(PromptDescriptor, Name, Arguments),
+		member(argument(ArgumentName, _, _), Arguments),
+		!.
+	completion_reference(Application, JsonReference, _ArgumentName, resource(URI)) :-
+		has_pair(JsonReference, type, 'ref/resource'),
+		has_pair(JsonReference, uri, URI),
+		atom(URI),
+		conforms_to_protocol(Application, mcp_resource_protocol),
+		(	Application::resources(ResourceDescriptors),
+			member(ResourceDescriptor, ResourceDescriptors),
+			resource_descriptor_uri(ResourceDescriptor, URI) ->
+			true
+		;	Application::resource_templates(ResourceTemplateDescriptors),
+			member(ResourceTemplateDescriptor, ResourceTemplateDescriptors),
+			resource_template_uri(ResourceTemplateDescriptor, URI)
+		),
+		!.
+
+	prompt_descriptor_name_arguments(prompt(Name, _, Arguments), Name, Arguments).
+	prompt_descriptor_name_arguments(prompt(Name, _, _, Arguments), Name, Arguments).
+
+	resource_descriptor_uri(resource(URI, _, _, _), URI).
+	resource_descriptor_uri(resource(URI, _, _, _, _), URI).
+
+	completion_context(Params, Context) :-
+		(	has_pair(Params, context, JsonContext) ->
+			(	has_pair(JsonContext, arguments, JsonArguments) ->
+				curly_to_pairs(JsonArguments, Context),
+				completion_context_pairs(Context)
+			;	JsonContext = {},
+				Context = []
+			)
+		;	Context = []
+		).
+
+	completion_context_pairs([]).
+	completion_context_pairs([Name-Value| Pairs]) :-
+		atom(Name),
+		atom(Value),
+		completion_context_pairs(Pairs).
+
+	completion_result_to_json(completion(Values), JsonCompletion) :-
+		completion_values(Values, LimitedValues, Truncated),
+		(	Truncated == true ->
+			JsonCompletion = {values-LimitedValues, hasMore- @true}
+		;	JsonCompletion = {values-LimitedValues}
+		).
+	completion_result_to_json(completion(Values, Total, HasMore), {values-LimitedValues, total-Total, hasMore-JsonHasMore}) :-
+		integer(Total),
+		Total >= 0,
+		boolean_to_json(HasMore, JsonHasMore0),
+		completion_values(Values, LimitedValues, Truncated),
+		(	Truncated == true ->
+			JsonHasMore = @true
+		;	JsonHasMore = JsonHasMore0
+		).
+
+	completion_values(Values, LimitedValues, Truncated) :-
+		completion_values(Values, 0, LimitedValues, Truncated).
+
+	completion_values([], _, [], false).
+	completion_values([Value| Values], Count, LimitedValues, Truncated) :-
+		atom(Value),
+		(	Count < 100 ->
+			LimitedValues = [Value| RestValues],
+			NextCount is Count + 1,
+			completion_values(Values, NextCount, RestValues, Truncated)
+		;	completion_values_atoms(Values),
+			LimitedValues = [],
+			Truncated = true
+		).
+
+	completion_values_atoms([]).
+	completion_values_atoms([Value| Values]) :-
+		atom(Value),
+		completion_values_atoms(Values).
 
 	% auto-dispatch and tool execution predicates
 

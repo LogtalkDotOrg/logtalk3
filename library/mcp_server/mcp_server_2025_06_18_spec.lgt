@@ -93,6 +93,13 @@
 		argnames is ['Message', 'Id', 'Options', 'Outcome']
 	]).
 
+	:- protected(handle_completion_complete/4).
+	:- mode(handle_completion_complete(+nonvar, +nonvar, +list, -nonvar), one).
+	:- info(handle_completion_complete/4, [
+		comment is 'Handles the ``completion/complete`` request and returns a ``reply/1`` outcome.',
+		argnames is ['Message', 'Id', 'Options', 'Outcome']
+	]).
+
 	:- protected(handle_resources_list/3).
 	:- mode(handle_resources_list(+nonvar, +list, -nonvar), one).
 	:- info(handle_resources_list/3, [
@@ -158,7 +165,7 @@
 	:- protected(build_capabilities/2).
 	:- mode(build_capabilities(+list, -compound), one).
 	:- info(build_capabilities/2, [
-		comment is 'Builds the server ``capabilities`` object from application capability atoms (tools is always present; prompts, resources, and the MCP Apps UI extension are optional).',
+		comment is 'Builds the server ``capabilities`` object from application capability atoms (tools is always present; prompts, resources, completions, and the MCP Apps UI extension are optional).',
 		argnames is ['ApplicationCapabilities', 'Capabilities']
 	]).
 
@@ -263,6 +270,8 @@
 			::handle_prompts_list(Id, Options, Outcome)
 		;	Method == 'prompts/get' ->
 			::handle_prompts_get(Message, Id, Options, Outcome)
+		;	Method == 'completion/complete' ->
+			::handle_completion_complete(Message, Id, Options, Outcome)
 		;	Method == 'resources/list' ->
 			::handle_resources_list(Id, Options, Outcome)
 		;	Method == 'resources/templates/list' ->
@@ -352,13 +361,17 @@
 			Capabilities2 = [resources-{}| Capabilities1]
 		;	Capabilities2 = Capabilities1
 		),
+		(	member(completions, ApplicationCapabilities) ->
+			Capabilities3 = [completions-{}| Capabilities2]
+		;	Capabilities3 = Capabilities2
+		),
 		% MCP Apps extension (io.modelcontextprotocol/ui)
 		(	member(ui, ApplicationCapabilities) ->
 			UIExt = {'io.modelcontextprotocol/ui'-{mimeTypes-['text/html;profile=mcp-app']}},
-			Capabilities3 = [extensions-UIExt| Capabilities2]
-		;	Capabilities3 = Capabilities2
+			Capabilities4 = [extensions-UIExt| Capabilities3]
+		;	Capabilities4 = Capabilities3
 		),
-		^^pairs_to_curly(Capabilities3, Capabilities).
+		^^pairs_to_curly(Capabilities4, Capabilities).
 
 	% ping
 
@@ -515,6 +528,30 @@
 		;	write_to_atom(Error, ErrorText)
 		),
 		error_response(-32603, ErrorText, Id, Response).
+
+	% completion/complete
+
+	handle_completion_complete(Message, Id, Options, Outcome) :-
+		^^option(application_capabilities(ApplicationCapabilities), Options),
+		(	member(completions, ApplicationCapabilities) ->
+			( params(Message, Params) -> true; Params = {} ),
+			^^option(application(Application), Options),
+			(	^^completion_request(Application, Params, Reference, Argument, Context) ->
+				execute_completion(Application, Reference, Argument, Context, Id, Outcome)
+			;	invalid_params(Id, ErrorResponse),
+				Outcome = reply(ErrorResponse)
+			)
+		;	method_not_found(Id, ErrorResponse),
+			Outcome = reply(ErrorResponse)
+		).
+
+	execute_completion(Application, Reference, Argument, Context, Id, Outcome) :-
+		(	catch(Application::completion(Reference, Argument, Context, CompletionResult), _, fail),
+			^^completion_result_to_json(CompletionResult, JsonCompletion) ->
+			response({completion-JsonCompletion}, Id, Response)
+		;	error_response(-32603, 'Completion failed', Id, Response)
+		),
+		Outcome = reply(Response).
 
 	% resources/list
 

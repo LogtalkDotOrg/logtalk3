@@ -8,14 +8,14 @@
 ``mcp_server_application``
 ==========================
 
-Common predicates for MCP servers: tool/prompt/resource descriptor conversion, schema derivation from ``info/2`` and ``mode/2`` directives, auto-dispatch, canonical complete-result terms, curly-term predicates, and MCP Apps (``_meta.ui``) metadata.
+Common predicates for MCP servers: tool/prompt/resource descriptor conversion, completion request handling, schema derivation from ``info/2`` and ``mode/2`` directives, auto-dispatch, canonical complete-result terms, curly-term predicates, and MCP Apps (``_meta.ui``) metadata.
 
 | **Availability:** 
 |    ``logtalk_load(mcp_server(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-31
+| **Date:** 2026-09-02
 
 | **Compilation flags:**
 |    ``static``
@@ -135,6 +135,44 @@ Checks that a concrete resource URI matches the literal segments of one of the a
 |    ``application_resource_template_uri(Application,URI)``
 | **Mode and number of proofs:**
 |    ``application_resource_template_uri(+object_identifier,+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: completion_request/5
+.. _mcp_server_application/0::completion_request/5:
+
+``completion_request/5``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Validates and normalizes completion request parameters. The normalized reference is ``prompt(Name)`` or ``resource(URI)``, the argument is a ``Name-PartialValue`` pair, and the context is a list of prior argument pairs.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``completion_request(Application,Params,Reference,Argument,Context)``
+| **Mode and number of proofs:**
+|    ``completion_request(+object_identifier,+compound,-compound,-pair,-list)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: completion_result_to_json/2
+.. _mcp_server_application/0::completion_result_to_json/2:
+
+``completion_result_to_json/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Validates and converts a completion result to its MCP JSON curly-term representation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``completion_result_to_json(Result,JsonCompletion)``
+| **Mode and number of proofs:**
+|    ``completion_result_to_json(+compound,-compound)`` - ``zero_or_one``
 
 
 ------------

@@ -1,0 +1,171 @@
+.. index:: single: http_oauth_helpers
+.. _http_oauth_helpers/0:
+
+.. rst-class:: right
+
+**category**
+
+``http_oauth_helpers``
+======================
+
+Internal shared helpers for OAuth Bearer syntax and normalized HTTP overlays.
+
+| **Availability:** 
+|    ``logtalk_load(http_oauth(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-01
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Extends:**
+|    ``public`` :ref:`http_authentication_helpers <http_authentication_helpers/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`user <user/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: valid_bearer_token/1
+.. _http_oauth_helpers/0::valid_bearer_token/1:
+
+``valid_bearer_token/1``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Succeeds when the atom is a nonempty RFC 6750 b64token value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_bearer_token(Token)``
+| **Mode and number of proofs:**
+|    ``valid_bearer_token(+atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: parse_scope_value/2
+.. _http_oauth_helpers/0::parse_scope_value/2:
+
+``parse_scope_value/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Parses and validates a space-delimited OAuth scope value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``parse_scope_value(Value,Scopes)``
+| **Mode and number of proofs:**
+|    ``parse_scope_value(+atom,-list(atom))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: generate_scope_value/2
+.. _http_oauth_helpers/0::generate_scope_value/2:
+
+``generate_scope_value/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Validates and generates a space-delimited OAuth scope value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``generate_scope_value(Scopes,Value)``
+| **Mode and number of proofs:**
+|    ``generate_scope_value(+list(atom),-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: quoted_authentication_parameter/3
+.. _http_oauth_helpers/0::quoted_authentication_parameter/3:
+
+``quoted_authentication_parameter/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates a quoted HTTP authentication parameter, escaping quotes and backslashes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``quoted_authentication_parameter(Name,Value,Parameter)``
+| **Mode and number of proofs:**
+|    ``quoted_authentication_parameter(+atom,+atom,-atom)`` - ``one``
+
+
+------------
+
+.. index:: overlay_http_headers/3
+.. _http_oauth_helpers/0::overlay_http_headers/3:
+
+``overlay_http_headers/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Overlays normalized HTTP headers by header name.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``overlay_http_headers(Overrides,Headers,OverlayHeaders)``
+| **Mode and number of proofs:**
+|    ``overlay_http_headers(+list(pair),+list(pair),-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: overlay_http_properties/3
+.. _http_oauth_helpers/0::overlay_http_properties/3:
+
+``overlay_http_properties/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Overlays normalized HTTP properties by functor and arity.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``overlay_http_properties(Overrides,Properties,OverlayProperties)``
+| **Mode and number of proofs:**
+|    ``overlay_http_properties(+list(compound),+list(compound),-list(compound))`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

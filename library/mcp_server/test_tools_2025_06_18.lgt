@@ -80,6 +80,55 @@
 :- end_object.
 
 
+% Test application with completion support
+
+:- object(test_completion_tools,
+	implements([mcp_tool_protocol, mcp_completion_protocol, mcp_prompt_protocol, mcp_resource_protocol])).
+
+	capabilities([completions, prompts, resources]).
+
+	tools([]).
+
+	prompts([
+		prompt(city_prompt, 'Suggests a city', [
+			argument(country, 'Country code', false),
+			argument(city, 'City name', true)
+		])
+	]).
+
+	prompt_get(city_prompt, _Arguments, messages([message(user, text('Choose a city.'))])).
+
+	resources([
+		resource('logtalk://cities', cities, 'Known cities', 'application/json')
+	]).
+
+	resource_templates([
+		resource_template('logtalk://cities/{city}', city, 'City details', 'application/json')
+	]).
+
+	resource_read('logtalk://cities', _Arguments, contents([
+		text_content('logtalk://cities', 'application/json', '[]')
+	])).
+
+	completion(prompt(city_prompt), city-'L', [country-'PT'], completion(['Lisbon'])).
+	completion(prompt(city_prompt), city-overflow, _Context, completion(Values)) :-
+		completion_values(101, Values).
+	completion(prompt(city_prompt), city-overflow_metadata, _Context, completion(Values, 101, false)) :-
+		completion_values(101, Values).
+	completion(prompt(city_prompt), city-malformed, _Context, completion([42])).
+	completion(prompt(city_prompt), city-throws, _Context, _Result) :-
+		throw(error(resource_error(memory), test_completion_tools)).
+	completion(resource('logtalk://cities/{city}'), city-'L', [], completion(['Lisbon'], 2, true)).
+
+	completion_values(0, []) :-
+		!.
+	completion_values(Count, [value| Values]) :-
+		NextCount is Count - 1,
+		completion_values(NextCount, Values).
+
+:- end_object.
+
+
 % Test application with custom tool_call/3
 
 :- object(test_custom_tools,

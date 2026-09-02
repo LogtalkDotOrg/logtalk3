@@ -34,6 +34,7 @@
 	logtalk_load(term_io(loader)),
 	logtalk_load([
 		mcp_tool_protocol,
+		mcp_completion_protocol,
 		mcp_prompt_protocol,
 		mcp_resource_protocol,
 		mcp_multiround_protocol,

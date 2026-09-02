@@ -218,6 +218,25 @@ Handles the ``prompts/get`` request and returns a ``reply/1`` outcome.
 
 ------------
 
+.. index:: handle_completion_complete/4
+.. _mcp_server_2025_06_18_spec/0::handle_completion_complete/4:
+
+``handle_completion_complete/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Handles the ``completion/complete`` request and returns a ``reply/1`` outcome.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``handle_completion_complete(Message,Id,Options,Outcome)``
+| **Mode and number of proofs:**
+|    ``handle_completion_complete(+nonvar,+nonvar,+list,-nonvar)`` - ``one``
+
+
+------------
+
 .. index:: handle_resources_list/3
 .. _mcp_server_2025_06_18_spec/0::handle_resources_list/3:
 
@@ -300,7 +319,7 @@ Generates a new elicitation id.
 ``build_capabilities/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Builds the server ``capabilities`` object from application capability atoms (tools is always present; prompts, resources, and the MCP Apps UI extension are optional).
+Builds the server ``capabilities`` object from application capability atoms (tools is always present; prompts, resources, completions, and the MCP Apps UI extension are optional).
 
 | **Compilation flags:**
 |    ``static``

@@ -1,0 +1,70 @@
+.. index:: single: http_server_core_oauth_endpoint_handler(ProtectedResource,MetadataDescriptors,MetadataOptions,Verifier,Handler,ProtectOptions)
+.. _http_server_core_oauth_endpoint_handler/6:
+
+.. rst-class:: right
+
+**object**
+
+``http_server_core_oauth_endpoint_handler(ProtectedResource,MetadataDescriptors,MetadataOptions,Verifier,Handler,ProtectOptions)``
+==================================================================================================================================
+
+* ``ProtectedResource`` - Canonical OAuth protected-resource identifier.
+* ``MetadataDescriptors`` - Protected-resource metadata descriptor list.
+* ``MetadataOptions`` - Options passed to ``http_oauth_metadata::response/4``.
+* ``Verifier`` - Object implementing the ``http_oauth_verifier_protocol`` protocol.
+* ``Handler`` - Wrapped object implementing the ``http_handler_protocol`` protocol.
+* ``ProtectOptions`` - Options passed to ``http_oauth::protect_request/4``.
+
+
+OAuth HTTP handler serving public protected-resource metadata and protecting all other requests.
+
+| **Availability:** 
+|    ``logtalk_load(http_oauth(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-01
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`http_handler_protocol <http_handler_protocol/0>`
+| **Uses:**
+|    :ref:`http_core <http_core/0>`
+|    :ref:`http_oauth_metadata <http_oauth_metadata/0>`
+|    :ref:`http_server_core_oauth_handler(Verifier,Handler,ProtectOptions) <http_server_core_oauth_handler/3>`
+|    :ref:`list <list/0>`
+|    :ref:`url(Representation) <url/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`http_handler_protocol/0::handle/2`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

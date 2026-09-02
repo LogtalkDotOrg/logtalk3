@@ -1,0 +1,74 @@
+.. index:: single: http_oauth_verifier_protocol
+.. _http_oauth_verifier_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``http_oauth_verifier_protocol``
+================================
+
+Protocol for OAuth access-token verifier objects.
+
+| **Availability:** 
+|    ``logtalk_load(http_oauth(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-01
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: verify/3
+.. _http_oauth_verifier_protocol/0::verify/3:
+
+``verify/3``
+^^^^^^^^^^^^
+
+Verifies an access token for the expected protected-resource identifier and returns normalized token information. Fails for invalid, inactive, or wrong-audience tokens.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``verify(Token,ProtectedResource,TokenInfo)``
+| **Mode and number of proofs:**
+|    ``verify(++atom,++atom,-compound)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

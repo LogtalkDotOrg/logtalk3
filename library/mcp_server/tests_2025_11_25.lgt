@@ -188,6 +188,16 @@
 
 	% form elicitation still works; enum schema is passed through (SEP-1330)
 
+	test(spec_2025_11_25_completion_inherited_01, deterministic(Values == ['Lisbon'])) :-
+		run_exchange_with(
+			test_completion_tools,
+			[completion_request(1)],
+			[Response]
+		),
+		result(Response, Result),
+		has_pair(Result, completion, Completion),
+		has_pair(Completion, values, Values).
+
 	test(spec_2025_11_25_enum_schema_01, true) :-
 		run_exchange(
 			[
@@ -259,6 +269,25 @@
 	run_exchange(Specs, Responses) :-
 		run_exchange_options([], Specs, Responses).
 
+	run_exchange_with(Application, Specs, Responses) :-
+		^^file_path('mcp_2025_11_25_in.tmp', InFile),
+		^^file_path('mcp_2025_11_25_out.tmp', OutFile),
+		open(InFile, write, WriteStream),
+		write_specs(Specs, WriteStream),
+		close(WriteStream),
+		open(InFile, read, InputStream),
+		open(OutFile, write, OutputStream),
+		mcp_server::start('test-2025-11-25', Application, InputStream, OutputStream, [
+			spec('2025-11-25'),
+			transport(stdio),
+			server_name('test-2025-11-25')
+		]),
+		close(InputStream),
+		close(OutputStream),
+		open(OutFile, read, ReadStream),
+		read_all(ReadStream, Responses),
+		close(ReadStream).
+
 	run_exchange_options(Extra, Specs, Responses) :-
 		^^file_path('mcp_2025_11_25_in.tmp', InFile),
 		^^file_path('mcp_2025_11_25_out.tmp', OutFile),
@@ -317,6 +346,12 @@
 		request('resources/list', {}, Id, Message).
 	spec_to_message(resource_templates_list_request(Id), Message) :-
 		request('resources/templates/list', {}, Id, Message).
+	spec_to_message(completion_request(Id), Message) :-
+		request('completion/complete', {
+			ref-{type-'ref/prompt', name-city_prompt},
+			argument-{name-city, value-'L'},
+			context-{arguments-{country-'PT'}}
+		}, Id, Message).
 	spec_to_message(elicit_accept_response(Id, Content), Message) :-
 		response({action-accept, content-Content}, Id, Message).
 

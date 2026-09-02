@@ -1,0 +1,74 @@
+.. index:: single: http_oauth_scope_checker_protocol
+.. _http_oauth_scope_checker_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``http_oauth_scope_checker_protocol``
+=====================================
+
+Protocol for OAuth scope-sufficiency checker objects.
+
+| **Availability:** 
+|    ``logtalk_load(http_oauth(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-01
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: sufficient/2
+.. _http_oauth_scope_checker_protocol/0::sufficient/2:
+
+``sufficient/2``
+^^^^^^^^^^^^^^^^
+
+Succeeds when the granted scopes are sufficient for all required scopes.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``sufficient(GrantedScopes,RequiredScopes)``
+| **Mode and number of proofs:**
+|    ``sufficient(++list(atom),++list(atom))`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

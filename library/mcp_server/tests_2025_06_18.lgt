@@ -600,6 +600,149 @@
 
 	% resource capability tests
 
+	% completion tests
+
+	test(mcp_server_completion_capability_01, deterministic) :-
+		run_mcp_exchange_with(
+			test_completion_tools,
+			[initialize_request(1)],
+			[Response]
+		),
+		result(Response, Result),
+		has_pair(Result, capabilities, Capabilities),
+		has_pair(Capabilities, completions, _).
+
+	test(mcp_server_prompt_completion_01, deterministic(Values == ['Lisbon'])) :-
+		run_mcp_exchange_with(
+			test_completion_tools,
+			[completion_request(
+				{type-'ref/prompt', name-city_prompt},
+				{name-city, value-'L'},
+				{arguments-{country-'PT'}},
+				1
+			)],
+			[Response]
+		),
+		result(Response, Result),
+		has_pair(Result, completion, Completion),
+		has_pair(Completion, values, Values).
+
+	test(mcp_server_resource_completion_01, deterministic(Total-HasMore == 2- @true)) :-
+		run_mcp_exchange_with(
+			test_completion_tools,
+			[completion_request(
+				{type-'ref/resource', uri-'logtalk://cities/{city}'},
+				{name-city, value-'L'},
+				{},
+				1
+			)],
+			[Response]
+		),
+		result(Response, Result),
+		has_pair(Result, completion, Completion),
+		has_pair(Completion, total, Total),
+		has_pair(Completion, hasMore, HasMore).
+
+	test(mcp_server_completion_unknown_prompt_argument_01, deterministic(Code == -32602)) :-
+		run_mcp_exchange_with(
+			test_completion_tools,
+			[completion_request(
+				{type-'ref/prompt', name-city_prompt},
+				{name-unknown, value-''},
+				{},
+				1
+			)],
+			[Response]
+		),
+		error_code(Response, Code).
+
+	test(mcp_server_completion_unadvertised_01, deterministic(Code == -32601)) :-
+		run_mcp_exchange_with(
+			test_prompt_tools,
+			[completion_request(
+				{type-'ref/prompt', name-greet_prompt},
+				{name-name, value-''},
+				{},
+				1
+			)],
+			[Response]
+		),
+		error_code(Response, Code).
+
+	test(mcp_server_completion_truncates_values_01, deterministic(Length-HasMore == 100- @true)) :-
+		run_mcp_exchange_with(
+			test_completion_tools,
+			[completion_request(
+				{type-'ref/prompt', name-city_prompt},
+				{name-city, value-overflow},
+				{},
+				1
+			)],
+			[Response]
+		),
+		result(Response, Result),
+		has_pair(Result, completion, Completion),
+		has_pair(Completion, values, Values),
+		length(Values, Length),
+		has_pair(Completion, hasMore, HasMore).
+
+	test(mcp_server_completion_truncates_values_with_metadata_01, deterministic(Length-Total-HasMore == 100-101- @true)) :-
+		run_mcp_exchange_with(
+			test_completion_tools,
+			[completion_request(
+				{type-'ref/prompt', name-city_prompt},
+				{name-city, value-overflow_metadata},
+				{},
+				1
+			)],
+			[Response]
+		),
+		result(Response, Result),
+		has_pair(Result, completion, Completion),
+		has_pair(Completion, values, Values),
+		length(Values, Length),
+		has_pair(Completion, total, Total),
+		has_pair(Completion, hasMore, HasMore).
+
+	test(mcp_server_completion_unknown_reference_01, deterministic(Code == -32602)) :-
+		run_mcp_exchange_with(
+			test_completion_tools,
+			[completion_request(
+				{type-'ref/prompt', name-unknown_prompt},
+				{name-city, value-''},
+				{},
+				1
+			)],
+			[Response]
+		),
+		error_code(Response, Code).
+
+	test(mcp_server_completion_malformed_result_01, deterministic(Code == -32603)) :-
+		run_mcp_exchange_with(
+			test_completion_tools,
+			[completion_request(
+				{type-'ref/prompt', name-city_prompt},
+				{name-city, value-malformed},
+				{},
+				1
+			)],
+			[Response]
+		),
+		error_code(Response, Code).
+
+	test(mcp_server_completion_exception_01, deterministic(Code == -32603)) :-
+		run_mcp_exchange_with(
+			test_completion_tools,
+			[completion_request(
+				{type-'ref/prompt', name-city_prompt},
+				{name-city, value-throws},
+				{},
+				1
+			)],
+			[Response]
+		),
+		error_code(Response, Code).
+
 	% with resources capability, capabilities should include resources
 	test(mcp_server_initialize_resource_capabilities_01, deterministic) :-
 		run_mcp_exchange_with(
@@ -1113,6 +1256,8 @@
 		request('prompts/get', {name-PromptName, arguments-Arguments}, Id, Message).
 	spec_to_message(prompts_get_request(PromptName, Id), Message) :-
 		request('prompts/get', {name-PromptName}, Id, Message).
+	spec_to_message(completion_request(Reference, Argument, Context, Id), Message) :-
+		request('completion/complete', {ref-Reference, argument-Argument, context-Context}, Id, Message).
 	spec_to_message(resources_list_request(Id), Message) :-
 		request('resources/list', {}, Id, Message).
 	spec_to_message(resource_templates_list_request(Id), Message) :-

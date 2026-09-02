@@ -187,7 +187,8 @@ hash functions that accept both key an digest size parameters (per RFC 7693).
 `mcp_server` library. Also refactored the library for separation of
 concerns between data layer specs and transports.
 
-* ADDED: OAuth support to the `mcp_server` library.
+* ADDED: Completions, resource templates, and OAuth support to the `mcp_server`
+library.
 
 * ADDED: Support for MCP Apps to the `mcp_server` library.
 

@@ -24,10 +24,10 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-26,
+		date is 2026-09-02,
 		comment is 'Protocol for Logtalk objects that provide tools to be exposed via an MCP (Model Context Protocol) server. Implementing objects must define the set of tools available and handle tool calls. Tool metadata (names, titles, descriptions, input and output schemas) can be derived automatically from ``info/2`` and ``mode/2`` directives on the tool predicates, or overridden using ``input_schema/2`` and ``output_schema/2``. Used by both the 2025-06-18 and 2026-07-28 adapters.',
 		remarks is [
-			'Capabilities' - 'Objects can optionally define ``capabilities/1`` to declare additional application features. Currently supported: ``prompts`` and ``resources`` (server capabilities advertised during initialization) and ``elicitation`` (a required client capability that allows the server to ask the user questions during tool execution under the 2025-06-18 adapter). If ``capabilities/1`` is not defined, only the ``tools`` server capability is advertised.',
+			'Capabilities' - 'Objects can optionally define ``capabilities/1`` to declare additional application features. Currently supported: ``prompts``, ``resources``, and ``completions`` (server capabilities advertised during initialization) and ``elicitation`` (a required client capability that allows the server to ask the user questions during tool execution under the 2025-06-18 adapter). If ``capabilities/1`` is not defined, only the ``tools`` server capability is advertised.',
 			'Tool title' - 'The tool title (human-friendly display name) is derived from a ``title`` key in the predicate ``info/2`` directive. If not specified, the predicate name (functor) is used as the title.',
 			'Schemas' - 'Input and output schemas are inferred from the tool predicate ``info/2`` and ``mode/2`` directives. Define ``input_schema/2`` or ``output_schema/2`` to override the inferred schema for a tool. Tools can return ``structured(StructuredContent)`` or ``structured(ContentItems, StructuredContent)`` results; the structured content is included in the ``structuredContent`` field of the tool call response alongside the ``content`` array.',
 			'Resource links' - 'Tool results can include ``resource_link(URI, Name)`` or ``resource_link(URI, Name, Description, MimeType)`` content items in ``results/1`` lists.',
@@ -39,7 +39,7 @@
 	:- public(capabilities/1).
 	:- mode(capabilities(-list(atom)), one).
 	:- info(capabilities/1, [
-		comment is 'Returns a list of additional MCP features used by this provider. ``prompts`` and ``resources`` are advertised as server capabilities. ``elicitation`` declares that the provider may ask the user questions and is enabled only when the client advertises the corresponding client capability. If not defined, only the ``tools`` server capability is advertised.',
+		comment is 'Returns a list of additional MCP features used by this provider. ``prompts``, ``resources``, and ``completions`` are advertised as server capabilities. ``elicitation`` declares that the provider may ask the user questions and is enabled only when the client advertises the corresponding client capability. If not defined, only the ``tools`` server capability is advertised.',
 		argnames is ['Capabilities']
 	]).
 

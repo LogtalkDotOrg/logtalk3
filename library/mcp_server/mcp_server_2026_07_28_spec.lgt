@@ -342,6 +342,8 @@
 		handle_prompts_list(Params, Id, Output, Options).
 	do_dispatch_('prompts/get', Params, Id, Output, Options) :-
 		handle_prompts_get(Params, Id, Output, Options).
+	do_dispatch_('completion/complete', Params, Id, Output, Options) :-
+		handle_completion_complete(Params, Id, Output, Options).
 	do_dispatch_('resources/list', Params, Id, Output, Options) :-
 		handle_resources_list(Params, Id, Output, Options).
 	do_dispatch_('resources/templates/list', Params, Id, Output, Options) :-
@@ -416,15 +418,19 @@
 			Capabilities1 = [resources-{}| Capabilities0]
 		;	Capabilities1 = Capabilities0
 		),
+		(	member(completions, ApplicationCapabilities) ->
+			Capabilities2 = [completions-{}| Capabilities1]
+		;	Capabilities2 = Capabilities1
+		),
 		% subscriptions are always offered by the 2026 adapter
-		Capabilities2 = [subscriptions-{}| Capabilities1],
+		Capabilities3 = [subscriptions-{}| Capabilities2],
 		% MCP Apps extension (io.modelcontextprotocol/ui)
 		(	member(ui, ApplicationCapabilities) ->
 			UIExt = {'io.modelcontextprotocol/ui'-{mimeTypes-['text/html;profile=mcp-app']}},
-			Capabilities3 = [extensions-UIExt| Capabilities2]
-		;	Capabilities3 = Capabilities2
+			Capabilities4 = [extensions-UIExt| Capabilities3]
+		;	Capabilities4 = Capabilities3
 		),
-		^^pairs_to_curly(Capabilities3, Capabilities).
+		^^pairs_to_curly(Capabilities4, Capabilities).
 
 	% tools/list
 
@@ -554,6 +560,23 @@
 				handle_round_result(complete(Result), prompt, PromptName, Id, Output, Options)
 			;	send_error(Id, -32603, 'Prompt execution failed', Output)
 			)
+		).
+
+	% completion/complete
+
+	handle_completion_complete(Params, Id, Output, Options) :-
+		^^option(application_capabilities(ApplicationCapabilities), Options, application_capabilities([])),
+		(	member(completions, ApplicationCapabilities) ->
+			^^option(application(Application), Options),
+			(	^^completion_request(Application, Params, Reference, Argument, Context) ->
+				(	catch(Application::completion(Reference, Argument, Context, CompletionResult), _, fail),
+					^^completion_result_to_json(CompletionResult, JsonCompletion) ->
+					send_result(Id, {completion-JsonCompletion, resultType-complete}, Output)
+				;	send_error(Id, -32603, 'Completion failed', Output)
+				)
+			;	send_error(Id, -32602, 'Invalid completion parameters', Output)
+			)
+		;	send_error(Id, -32601, 'Method not found', Output)
 		).
 
 	% resources/list
