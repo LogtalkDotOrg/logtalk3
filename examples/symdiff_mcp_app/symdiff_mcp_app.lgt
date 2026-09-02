@@ -99,7 +99,7 @@
 		{status-idle}
 	)).
 	tool_call(differentiate, Arguments, Result) :-
-		( member(expression-Expression, Arguments) ->
+		(	member(expression-Expression, Arguments) ->
 			tool_result(Expression, Result)
 		;
 			idle_result(Result)

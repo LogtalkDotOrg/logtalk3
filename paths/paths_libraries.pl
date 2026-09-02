@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on August 17, 2026
+%  Last updated on September 1, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -142,6 +142,7 @@ logtalk_library_path(http_digest, library('http_digest/')).
 logtalk_library_path(http_directory_listing, library('http_directory_listing/')).
 logtalk_library_path(http_htmx, library('http_htmx/')).
 logtalk_library_path(http_multipart, library('http_multipart/')).
+logtalk_library_path(http_oauth, library('http_oauth/')).
 logtalk_library_path(http_parameters, library('http_parameters/')).
 logtalk_library_path(http_process_transport, library('http_process_transport/')).
 logtalk_library_path(http_router, library('http_router/')).

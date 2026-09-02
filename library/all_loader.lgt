@@ -249,6 +249,7 @@
 		http_session(loader),
 		http_authenticate(loader),
 		http_digest(loader),
+		http_oauth(loader),
 		http_htmx(loader),
 		http_multipart(loader),
 		http_router(loader),

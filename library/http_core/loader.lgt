@@ -35,6 +35,7 @@
 		http_handler_protocol,
 		http_json_term_helpers,
 		http_text_helpers,
+		http_authentication_helpers,
 		http_octet_stream_body_codec,
 		http_text_body_codec,
 		http_json_body_codec,

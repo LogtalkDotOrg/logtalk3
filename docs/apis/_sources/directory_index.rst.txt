@@ -1355,6 +1355,7 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
 
+   http_authentication_helpers <http_authentication_helpers_0>
    http_body_codec_protocol <http_body_codec_protocol_0>
    http_core <http_core_0>
    http_docroot_paths <http_docroot_paths_0>
@@ -1425,6 +1426,27 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
    http_multipart <http_multipart_0>
+
+``library/http_oauth/``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   http_oauth <http_oauth_0>
+   http_oauth_exact_scope_checker <http_oauth_exact_scope_checker_0>
+   http_oauth_helpers <http_oauth_helpers_0>
+   http_oauth_introspection_client <http_oauth_introspection_client_0>
+   http_oauth_introspection_verifier(Endpoint,Options) <http_oauth_introspection_verifier_2>
+   http_oauth_jwt_verifier(KeyOrJWKSet,Options) <http_oauth_jwt_verifier_2>
+   http_oauth_metadata <http_oauth_metadata_0>
+   http_oauth_scope_checker_protocol <http_oauth_scope_checker_protocol_0>
+   http_oauth_verifier_protocol <http_oauth_verifier_protocol_0>
+   http_router_oauth(Verifier,BaseOptions) <http_router_oauth_2>
+   http_server_core_oauth_endpoint_handler(ProtectedResource,MetadataDescriptors,MetadataOptions,Verifier,Handler,ProtectOptions) <http_server_core_oauth_endpoint_handler_6>
+   http_server_core_oauth_handler(Verifier,Handler,ProtectOptions) <http_server_core_oauth_handler_3>
 
 ``library/http_parameters/``
 ----------------------------

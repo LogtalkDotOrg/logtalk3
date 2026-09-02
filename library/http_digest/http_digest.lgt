@@ -20,12 +20,12 @@
 
 
 :- object(http_digest,
-	imports([options, http_text_helpers])).
+	imports((options, http_authentication_helpers))).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-12,
+		date is 2026-09-01,
 		comment is 'HTTP Digest authentication parsing, generation, request decoration, and verification helpers.'
 	]).
 
@@ -304,7 +304,7 @@
 		text_to_codes(Text, Codes0),
 		trim_ows_codes(Codes0, Codes),
 		parse_digest_scheme(www_authenticate, Codes, DirectiveCodes),
-		parse_directives(www_authenticate, DirectiveCodes, Pairs),
+		^^parse_authentication_parameters(http_digest_header(www_authenticate), DirectiveCodes, Pairs),
 		challenge_term_from_pairs(Pairs, Challenge).
 
 	generate_challenge(Challenge, HeaderValue) :-
@@ -317,7 +317,7 @@
 		text_to_codes(Text, Codes0),
 		trim_ows_codes(Codes0, Codes),
 		parse_digest_scheme(authorization, Codes, DirectiveCodes),
-		parse_directives(authorization, DirectiveCodes, Pairs),
+		^^parse_authentication_parameters(http_digest_header(authorization), DirectiveCodes, Pairs),
 		authorization_term_from_pairs(Pairs, Authorization).
 
 	generate_authorization(Authorization, HeaderValue) :-
@@ -329,7 +329,7 @@
 	parse_authentication_info(Text, AuthenticationInfo) :-
 		text_to_codes(Text, Codes0),
 		trim_ows_codes(Codes0, Codes),
-		parse_directives(authentication_info, Codes, Pairs),
+		^^parse_authentication_parameters(http_digest_header(authentication_info), Codes, Pairs),
 		authentication_info_term_from_pairs(Pairs, AuthenticationInfo).
 
 	generate_authentication_info(AuthenticationInfo, HeaderValue) :-
@@ -1139,7 +1139,7 @@
 	has_digest_scheme(Value) :-
 		text_to_codes(Value, Codes0),
 		trim_ows_codes(Codes0, Codes),
-		scheme_codes(Codes, SchemeCodes, _Rest),
+		^^authentication_scheme_codes(Codes, SchemeCodes, _Rest),
 		lowercase_codes_atom(SchemeCodes, digest).
 
 	single_effective_header_value(_HeaderName, [Value], Value) :-
@@ -1148,7 +1148,7 @@
 		domain_error(http_digest_header(HeaderName), multiple).
 
 	parse_digest_scheme(HeaderName, Codes, DirectiveCodes) :-
-		(	scheme_codes(Codes, SchemeCodes, RestCodes) ->
+		(	^^authentication_scheme_codes(Codes, SchemeCodes, RestCodes) ->
 			(	lowercase_codes_atom(SchemeCodes, digest) ->
 				trim_ows_codes(RestCodes, DirectiveCodes)
 			;	lowercase_codes_atom(SchemeCodes, Scheme),
@@ -1156,110 +1156,6 @@
 			)
 		;	domain_error(http_digest_header(HeaderName), invalid(syntax))
 		).
-
-	scheme_codes([Code| Codes], [Code| SchemeCodes], RestCodes) :-
-		\+ ows_code(Code),
-		!,
-		scheme_codes(Codes, SchemeCodes, RestCodes).
-	scheme_codes(Codes, [], Codes).
-
-	parse_directives(_HeaderName, [], []) :-
-		!.
-	parse_directives(HeaderName, Codes, Pairs) :-
-		split_directive_segments(HeaderName, Codes, Segments),
-		parse_directive_segments(Segments, HeaderName, [], Pairs).
-
-	parse_directive_segments([], _HeaderName, _Seen, []).
-	parse_directive_segments([Segment| Segments], HeaderName, Seen0, Pairs) :-
-		parse_directive_segment(HeaderName, Segment, Name, Value),
-		(	member(Name, Seen0) ->
-			domain_error(http_digest_header(HeaderName), duplicate(Name))
-		;	Pairs = [Name-Value| TailPairs],
-			parse_directive_segments(Segments, HeaderName, [Name| Seen0], TailPairs)
-		).
-
-	parse_directive_segment(HeaderName, Segment0, Name, Value) :-
-		trim_ows_codes(Segment0, Segment),
-		Segment \== [],
-		directive_name_codes(Segment, NameCodes, ValueCodes),
-		trim_ows_codes(NameCodes, TrimmedNameCodes),
-		TrimmedNameCodes \== [],
-		lowercase_codes_atom(TrimmedNameCodes, Name),
-		parse_directive_value(HeaderName, ValueCodes, Value),
-		!.
-	parse_directive_segment(HeaderName, _Segment, _Name, _Value) :-
-		domain_error(http_digest_header(HeaderName), invalid(syntax)).
-
-	directive_name_codes([0'=| ValueCodes], [], ValueCodes) :-
-		!.
-	directive_name_codes([Code| Codes], [Code| NameCodes], ValueCodes) :-
-		directive_name_codes(Codes, NameCodes, ValueCodes).
-
-	parse_directive_value(_HeaderName, ValueCodes0, Value) :-
-		trim_ows_codes(ValueCodes0, ValueCodes),
-		(	ValueCodes = [0'"| _] ->
-			quoted_value_codes(ValueCodes, Codes),
-			atom_codes(Value, Codes)
-		;	ValueCodes \== [],
-			atom_codes(Value, ValueCodes)
-		),
-		!.
-	parse_directive_value(HeaderName, _ValueCodes, _Value) :-
-		domain_error(http_digest_header(HeaderName), invalid(syntax)).
-
-	quoted_value_codes([0'"| Codes], ValueCodes) :-
-		quoted_value_codes(Codes, false, [], ReversedValueCodes, RestCodes),
-		reverse(ReversedValueCodes, ValueCodes),
-		trim_ows_codes(RestCodes, []).
-
-	quoted_value_codes([0'"| RestCodes], false, Acc, Acc, RestCodes) :-
-		!.
-	quoted_value_codes([Code| Codes], true, Acc0, Acc, RestCodes) :-
-		!,
-		quoted_value_codes(Codes, false, [Code| Acc0], Acc, RestCodes).
-	quoted_value_codes([0'\\| Codes], false, Acc0, Acc, RestCodes) :-
-		!,
-		quoted_value_codes(Codes, true, Acc0, Acc, RestCodes).
-	quoted_value_codes([Code| Codes], false, Acc0, Acc, RestCodes) :-
-		quoted_value_codes(Codes, false, [Code| Acc0], Acc, RestCodes).
-
-	split_directive_segments(HeaderName, Codes, Segments) :-
-		split_directive_segments(Codes, HeaderName, false, false, [], Segments).
-
-	split_directive_segments([], _HeaderName, _Quoted, _Escaped, Current0, Segments) :-
-		!,	% ECLiPSe creates a spurious choice-point without this cut!
-		reverse(Current0, Current),
-		trim_ows_codes(Current, TrimmedCurrent),
-		(	TrimmedCurrent == [] ->
-			Segments = []
-		;	Segments = [TrimmedCurrent]
-		).
-	split_directive_segments([Code| Codes], HeaderName, Quoted, true, Current0, Segments) :-
-		!,
-		split_directive_segments(Codes, HeaderName, Quoted, false, [Code| Current0], Segments).
-	split_directive_segments([0'\\| Codes], HeaderName, true, false, Current0, Segments) :-
-		!,
-		split_directive_segments(Codes, HeaderName, true, true, [0'\\| Current0], Segments).
-	split_directive_segments([0'"| Codes], HeaderName, Quoted, false, Current0, Segments) :-
-		(	Quoted == true ->
-			NewQuoted = false
-		;	NewQuoted = true
-		),
-		!,
-		split_directive_segments(Codes, HeaderName, NewQuoted, false, [0'"| Current0], Segments).
-	split_directive_segments([0',| Codes], HeaderName, false, false, Current0, [TrimmedCurrent| Segments]) :-
-		!,
-		reverse(Current0, Current),
-		trim_ows_codes(Current, TrimmedCurrent),
-		trim_ows_codes(Codes, TrimmedCodes),
-		(	TrimmedCurrent == [] ->
-			domain_error(http_digest_header(HeaderName), invalid(syntax))
-		;	TrimmedCodes == [] ->
-			domain_error(http_digest_header(HeaderName), invalid(syntax))
-		;	split_directive_segments(Codes, HeaderName, false, false, [], Segments)
-		).
-	split_directive_segments([Code| Codes], HeaderName, Quoted, false, Current0, Segments) :-
-		split_directive_segments(Codes, HeaderName, Quoted, false, [Code| Current0], Segments).
 
 	challenge_term_from_pairs(Pairs, Challenge) :-
 		ensure_known_directive_names(Pairs, www_authenticate, [realm, domain, nonce, opaque, stale, algorithm, qop, userhash, charset]),

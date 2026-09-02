@@ -46,11 +46,11 @@ Library groups
   - Supporting libraries: ``http_core``, ``http_authenticate``,
     ``http_client_core``, ``http_cookies``, ``http_cors``,
     ``http_digest``, ``http_directory_listing``, ``http_htmx``,
-    ``http_multipart``, ``http_parameters``, ``http_router``,
-    ``http_server_core``, ``http_session``, ``http_socket_transport``,
-    ``http_process_transport``, ``http_static_files``,
-    ``http_websocket_messages``, ``http_websocket_service``,
-    ``http_websocket_session``.
+    ``http_multipart``, ``http_oauth``, ``http_parameters``,
+    ``http_router``, ``http_server_core``, ``http_session``,
+    ``http_socket_transport``, ``http_process_transport``,
+    ``http_static_files``, ``http_websocket_messages``,
+    ``http_websocket_service``, ``http_websocket_session``.
 
 - Identifiers: ``cuid2``, ``genint``, ``gensym``, ``ids``, ``ksuid``,
   ``nanoid``, ``snowflakeid``, ``sqids`` ``typeid``, ``ulid``, and

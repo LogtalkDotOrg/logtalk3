@@ -1274,6 +1274,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`dimension_reduction_dataset_protocol <dimension_reduction_dataset_protocol/0::attribute_values/2>`
 * :ref:`regression_dataset_protocol <regression_dataset_protocol/0::attribute_values/2>`
 
+``authenticate_request/4``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_oauth <http_oauth/0::authenticate_request/4>`
+
 ``authenticated_channel_accept/5``
 ----------------------------------
 
@@ -1344,6 +1354,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http_authenticate <http_authenticate/0::authorization/2>`
 * :ref:`http_digest <http_digest/0::authorization/2>`
+* :ref:`http_oauth <http_oauth/0::authorization/2>`
 
 ``authorization_code/4``
 ------------------------
@@ -1377,6 +1388,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`open_id <open_id/0::authorization_url/5>`
 * :ref:`open_id_pkce <open_id_pkce/0::authorization_url/5>`
+
+``authorize_request/3``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_oauth <http_oauth/0::authorize_request/3>`
 
 ``authorize_request/6``
 -----------------------
@@ -2536,6 +2557,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http_authenticate <http_authenticate/0::challenge/2>`
 * :ref:`http_digest <http_digest/0::challenge/2>`
+* :ref:`http_oauth <http_oauth/0::challenge/2>`
 
 ``change_directory/1``
 ----------------------
@@ -7085,6 +7107,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`open_api <open_api/0::document/2>`
 * :ref:`sbom <sbom/0::document/2>`
 
+``document/3``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_oauth_metadata <http_oauth_metadata/0::document/3>`
+
+``document/4``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_oauth_metadata <http_oauth_metadata/0::document/4>`
+
 ``dot//1``
 ----------
 
@@ -9336,6 +9378,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`paseto_protocol <paseto_protocol/0::footer/2>`
 
+``forbidden_response/3``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_oauth <http_oauth/0::forbidden_response/3>`
+
+``forbidden_response/4``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_oauth <http_oauth/0::forbidden_response/4>`
+
 ``fordownto/3``
 ---------------
 
@@ -10159,6 +10221,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http_authenticate <http_authenticate/0::generate_authorization/2>`
 * :ref:`http_digest <http_digest/0::generate_authorization/2>`
+* :ref:`http_oauth <http_oauth/0::generate_authorization/2>`
 
 ``generate_body/3``
 -------------------
@@ -10180,6 +10243,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http_authenticate <http_authenticate/0::generate_challenge/2>`
 * :ref:`http_digest <http_digest/0::generate_challenge/2>`
+* :ref:`http_oauth <http_oauth/0::generate_challenge/2>`
 
 ``generate_cookie/2``
 ---------------------
@@ -12286,6 +12350,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`iso8601 <iso8601/0::interval_string/2>`
+
+``introspect/4``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_oauth_introspection_client <http_oauth_introspection_client/0::introspect/4>`
 
 ``invalid/1``
 -------------
@@ -19392,6 +19466,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http_authenticate <http_authenticate/0::parse_authorization/2>`
 * :ref:`http_digest <http_digest/0::parse_authorization/2>`
+* :ref:`http_oauth <http_oauth/0::parse_authorization/2>`
 
 ``parse_body/4``
 ----------------
@@ -19413,6 +19488,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http_authenticate <http_authenticate/0::parse_challenge/2>`
 * :ref:`http_digest <http_digest/0::parse_challenge/2>`
+* :ref:`http_oauth <http_oauth/0::parse_challenge/2>`
 
 ``parse_cookie/2``
 ------------------
@@ -21519,6 +21595,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http_authenticate <http_authenticate/0::protect_request/4>`
 * :ref:`http_digest <http_digest/0::protect_request/4>`
+* :ref:`http_oauth <http_oauth/0::protect_request/4>`
 
 ``prove/2``
 -----------
@@ -23933,7 +24010,18 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`http_oauth_metadata <http_oauth_metadata/0::response/3>`
 * :ref:`json_rpc <json_rpc/0::response/3>`
+
+``response/4``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_oauth_metadata <http_oauth_metadata/0::response/4>`
 
 ``response/6``
 --------------
@@ -24774,6 +24862,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http_router <http_router/0::schema/2>`
 * :ref:`open_api_provider_protocol <open_api_provider_protocol/0::schema/2>`
+
+``scopes/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_oauth <http_oauth/0::scopes/2>`
 
 ``score/3``
 -----------
@@ -27289,6 +27387,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`integer <integer/0::succ/2>`
 
+``sufficient/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_oauth_scope_checker_protocol <http_oauth_scope_checker_protocol/0::sufficient/2>`
+
 ``suffix/2``
 ------------
 
@@ -28107,6 +28215,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`crypto <crypto/0::token_hex/2>`
 
+``token_info/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_oauth <http_oauth/0::token_info/2>`
+
 ``token_urlsafe/2``
 -------------------
 
@@ -28593,6 +28711,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http_authenticate <http_authenticate/0::unauthorized_response/3>`
 * :ref:`http_digest <http_digest/0::unauthorized_response/3>`
+* :ref:`http_oauth <http_oauth/0::unauthorized_response/3>`
 
 ``unauthorized_response/4``
 ---------------------------
@@ -28604,6 +28723,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http_authenticate <http_authenticate/0::unauthorized_response/4>`
 * :ref:`http_digest <http_digest/0::unauthorized_response/4>`
+* :ref:`http_oauth <http_oauth/0::unauthorized_response/4>`
 
 ``unexpected/1``
 ----------------
@@ -29926,6 +30046,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_authenticate_verifier_protocol <http_authenticate_verifier_protocol/0::verify/3>`
+* :ref:`http_oauth_verifier_protocol <http_oauth_verifier_protocol/0::verify/3>`
 
 ``verify/4``
 ------------
@@ -30275,6 +30396,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`shell <shell/0::welcome/0>`
+
+``well_known_url/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`http_oauth_metadata <http_oauth_metadata/0::well_known_url/2>`
 
 ``when/2``
 ----------

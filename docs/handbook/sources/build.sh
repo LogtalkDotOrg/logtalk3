@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on August 17, 2026
+##   Last updated on September 1, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -188,6 +188,7 @@ sed '1,19d' ../../../library/http_digest/NOTES.md | pandoc -f gfm -t rst -o libr
 sed '1,19d' ../../../library/http_directory_listing/NOTES.md | pandoc -f gfm -t rst -o libraries/http_directory_listing.rst
 sed '1,19d' ../../../library/http_htmx/NOTES.md | pandoc -f gfm -t rst -o libraries/http_htmx.rst
 sed '1,19d' ../../../library/http_multipart/NOTES.md | pandoc -f gfm -t rst -o libraries/http_multipart.rst
+sed '1,19d' ../../../library/http_oauth/NOTES.md | pandoc -f gfm -t rst -o libraries/http_oauth.rst
 sed '1,19d' ../../../library/http_parameters/NOTES.md | pandoc -f gfm -t rst -o libraries/http_parameters.rst
 sed '1,19d' ../../../library/http_process_transport/NOTES.md | pandoc -f gfm -t rst -o libraries/http_process_transport.rst
 sed '1,19d' ../../../library/http_router/NOTES.md | pandoc -f gfm -t rst -o libraries/http_router.rst

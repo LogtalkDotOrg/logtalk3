@@ -14,8 +14,8 @@ HTTP Digest authentication parsing, generation, request decoration, and verifica
 |    ``logtalk_load(http_digest(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:1
-| **Date:** 2026-08-12
+| **Version:** 1:1:0
+| **Date:** 2026-09-01
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -23,7 +23,7 @@ HTTP Digest authentication parsing, generation, request decoration, and verifica
 
 | **Imports:**
 |    ``public`` :ref:`options <options/0>`
-|    ``public`` :ref:`http_text_helpers <http_text_helpers/0>`
+|    ``public`` :ref:`http_authentication_helpers <http_authentication_helpers/0>`
 | **Uses:**
 |    :ref:`crypto <crypto/0>`
 |    :ref:`date <date/0>`

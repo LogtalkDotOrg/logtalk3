@@ -14,8 +14,8 @@ HTTP Basic authentication parsing, generation, challenge building, and request v
 |    ``logtalk_load(http_authenticate(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:0:1
-| **Date:** 2026-08-02
+| **Version:** 1:1:0
+| **Date:** 2026-09-01
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -23,7 +23,7 @@ HTTP Basic authentication parsing, generation, challenge building, and request v
 
 | **Imports:**
 |    ``public`` :ref:`options <options/0>`
-|    ``public`` :ref:`http_text_helpers <http_text_helpers/0>`
+|    ``public`` :ref:`http_authentication_helpers <http_authentication_helpers/0>`
 | **Uses:**
 |    :ref:`base64 <base64/0>`
 |    :ref:`http_core <http_core/0>`
