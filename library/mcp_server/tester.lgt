@@ -19,6 +19,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+:- if(current_logtalk_flag(threads, supported)).
+
+	:- initialization(
+		logtalk_load(http_server(loader))
+	).
+
+:- endif.
+
 :- initialization((
 	set_logtalk_flag(report, warnings),
 	logtalk_load(basic_types(loader)),
@@ -58,13 +66,14 @@
 
 	:- initialization((
 		logtalk_load(format(loader)),
-		logtalk_load(http_server(loader)),
+		logtalk_load(http_oauth(loader)),
 		logtalk_load([
 			mcp_server_streamable_http_transport
 		], [
 			source_data(on),
 			debug(on)
 		]),
+		logtalk_load(test_oauth_verifier, [source_data(on), debug(on)]),
 		logtalk_load(tests_streamable_http, [hook(lgtunit)]),
 		lgtunit::run_test_sets([
 			tests_2025_06_18,

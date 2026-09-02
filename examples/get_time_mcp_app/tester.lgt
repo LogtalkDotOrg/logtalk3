@@ -26,6 +26,10 @@
 	logtalk_load(os(loader)),
 	logtalk_load(reader(loader)),
 	logtalk_load(get_time, [debug(on), source_data(on)]),
+	(	current_logtalk_flag(threads, supported) ->
+		logtalk_load(oauth_verifier, [debug(on), source_data(on)])
+	;	true
+	),
 	logtalk_load(lgtunit(loader)),
 	logtalk_load(tests, [hook(lgtunit)]),
 	tests::run

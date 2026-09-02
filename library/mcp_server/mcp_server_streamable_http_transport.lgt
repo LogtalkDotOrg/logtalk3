@@ -26,8 +26,8 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-31,
-		comment is 'Implements the Streamable HTTP transport for MCP servers. Uses Logtalk ``http_server::serve_until_shutdown/5`` and a dedicated ``http_handler_protocol`` handler object. Supports specs 2025-06-18, 2025-11-25, and 2026-07-28 selected via the ``spec/1`` option and delegated to the matching ``mcp_server_*_spec`` object. Long-lived subscriptions/listen streams emit periodic SSE comment keep-alives (``http_sse_keepalive/1``). Requires a multi-threaded backend for subscriptions/listen.'
+		date is 2026-09-02,
+		comment is 'Implements the Streamable HTTP transport for MCP servers. Uses Logtalk ``http_server::serve_until_shutdown/5`` and a dedicated ``http_handler_protocol`` handler object. Supports specs 2025-06-18, 2025-11-25, and 2026-07-28 selected via the ``spec/1`` option and delegated to the matching ``mcp_server_*_spec`` object. Supports optional OAuth protection and protected-resource metadata publication using the ``oauth/4`` option. Long-lived subscriptions/listen streams emit periodic SSE comment keep-alives (``http_sse_keepalive/1``). Requires a multi-threaded backend for subscriptions/listen.'
 	]).
 
 	:- threaded.
@@ -194,6 +194,7 @@
 	prepare(Application, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options0),
+		validate_oauth_configuration(Options0),
 		(	conforms_to_protocol(Application, mcp_tool_protocol),
 			Application::capabilities(Capabilities) ->
 			true
@@ -206,6 +207,40 @@
 		;	member(spec('2025-06-18'), Options) ->
 			mcp_server_2025_06_18_spec::prepare(Application, Options)
 		;	mcp_server_2026_07_28_spec::prepare(Application, Options)
+		).
+
+	validate_oauth_configuration(Options) :-
+		(	member(oauth(Verifier, ProtectedResource, MetadataDescriptors, ProtectOptions), Options) ->
+			check_oauth_verifier(Verifier),
+			check_oauth_protect_options(ProtectOptions),
+			http_oauth_metadata::well_known_url(ProtectedResource, ResourceMetadata),
+			http_oauth_metadata::document(
+				ProtectedResource, MetadataDescriptors, _Document,
+				[required_members([authorization_servers])]
+			),
+			http_oauth::unauthorized_response(_Challenge, _Response, [
+				protected_resource(ProtectedResource),
+				resource_metadata(ResourceMetadata)
+			| ProtectOptions
+			])
+		; true
+		).
+
+	check_oauth_verifier(Verifier) :-
+		(	current_object(Verifier) ->
+			(	conforms_to_protocol(Verifier, http_oauth_verifier_protocol) ->
+				true
+			;	domain_error(http_oauth_verifier, Verifier)
+			)
+		;	existence_error(http_oauth_verifier, Verifier)
+		).
+
+	check_oauth_protect_options([]).
+	check_oauth_protect_options([Option| Options]) :-
+		functor(Option, Name, Arity),
+		(	(Name == protected_resource; Name == resource_metadata), Arity =:= 1 ->
+			domain_error(mcp_server_oauth_reserved_option, Option)
+		;	check_oauth_protect_options(Options)
 		).
 
 	% notify/1 never fails the caller. Per-subscriber errors are isolated:
@@ -292,13 +327,16 @@
 		^^option(http_port(Port), Options),
 		^^option(http_bind(Bind), Options),
 		^^option(http_path(Path), Options),
+		^^option(http_server_options(HTTPServerOptions), Options),
+		http_server_scheme(HTTPServerOptions, Scheme),
+		http_handler(Options, Handler),
 		Control = mcp_http_shutdown(Port),
 		retractall(shutdown_control_(_)),
 		assertz(shutdown_control_(Control)),
 		format(
 			user_error,
-			'~w: listening on http://~w:~w~w~n',
-			[mcp_server_streamable_http_transport, Bind, Port, Path]
+			'~w: listening on ~w://~w:~w~w~n',
+			[mcp_server_streamable_http_transport, Scheme, Bind, Port, Path]
 		),
 		% per_connection workers so subscriptions/listen can block while
 		% other requests (e.g. notifications/cancelled, notify side-effects)
@@ -306,9 +344,9 @@
 		(	catch(
 				http_server::serve_until_shutdown(
 					Bind, Port,
-					mcp_streamable_http_handler,
+					Handler,
 					Control,
-					[scheme(http), transport(default), workers(per_connection)]
+					[workers(per_connection)| HTTPServerOptions]
 				),
 				Error,
 				(	format(user_error, 'SERVE EXIT ~q~n', [Error]),
@@ -319,6 +357,30 @@
 			true
 		;	format(user_error, 'UNEXPTECTED FAILURE~n', []),
 			flush_output(user_error)
+		).
+
+	http_server_scheme(Options, Scheme) :-
+		(	member(scheme(Scheme0), Options) ->
+			Scheme = Scheme0
+		;	Scheme = http
+		).
+
+	http_handler(Options, Handler) :-
+		(	member(oauth(Verifier, ProtectedResource, MetadataDescriptors, ProtectOptions), Options) ->
+			http_oauth_metadata::well_known_url(ProtectedResource, ResourceMetadata),
+			Handler = http_server_core_oauth_endpoint_handler(
+				ProtectedResource,
+				MetadataDescriptors,
+				[required_members([authorization_servers])],
+				Verifier,
+				mcp_streamable_http_handler,
+				[
+					protected_resource(ProtectedResource),
+					resource_metadata(ResourceMetadata)
+				| ProtectOptions
+				]
+			)
+		;	Handler = mcp_streamable_http_handler
 		).
 
 	current_options(Options) :-
@@ -1444,6 +1506,7 @@
 	default_option(http_path('/mcp')).
 	default_option(http_origin_check(true)).
 	default_option(http_sse_keepalive(15)).
+	default_option(http_server_options([])).
 
 	valid_option(transport(Transport)) :-
 		once((Transport == stdio; Transport == streamable_http)).
@@ -1471,6 +1534,13 @@
 		once((Flag == true ; Flag == false)).
 	valid_option(http_sse_keepalive(Seconds)) :-
 		number(Seconds), Seconds >= 0.
+	valid_option(http_server_options(Options)) :-
+		http_server::valid_options(Options).
+	valid_option(oauth(Verifier, ProtectedResource, MetadataDescriptors, ProtectOptions)) :-
+		nonvar(Verifier),
+		atom(ProtectedResource),
+		type::valid(list(compound), MetadataDescriptors),
+		type::valid(list(compound), ProtectOptions).
 
 :- end_object.
 

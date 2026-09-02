@@ -25,7 +25,7 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-28,
+		date is 2026-09-02,
 		comment is 'Unit tests for the MCP Streamable HTTP transport (2026-07-28 spec over HTTP). Updated for json_body/1, text_body/1, and http_core response/5.'
 	]).
 
@@ -35,7 +35,7 @@
 	]).
 
 	:- uses(list, [
-		last/2, memberchk/2
+		last/2, member/2, memberchk/2
 	]).
 
 	:- uses(lgtunit, [
@@ -64,13 +64,74 @@
 		mcp_server_streamable_http_transport::current_options(Options),
 		memberchk(application(test_tools_2026), Options),
 		memberchk(server_name('http-test'), Options),
-		memberchk(http_port(18080), Options).
+		memberchk(http_port(18080), Options),
+		memberchk(http_server_options([]), Options).
 
 	test(http_valid_options_01, deterministic) :-
 		mcp_server_streamable_http_transport::valid_option(http_port(8080)),
 		mcp_server_streamable_http_transport::valid_option(http_bind('127.0.0.1')),
 		mcp_server_streamable_http_transport::valid_option(http_path('/mcp')),
-		mcp_server_streamable_http_transport::valid_option(http_origin_check(true)).
+		mcp_server_streamable_http_transport::valid_option(http_origin_check(true)),
+		mcp_server_streamable_http_transport::valid_option(http_server_options([
+			scheme(https),
+			transport(default),
+			tls_certificate_file('/path/to/cert.pem'),
+			tls_key_file('/path/to/key.pem')
+		])).
+
+	test(http_prepare_https_01, deterministic) :-
+		ServerOptions = [
+			scheme(https),
+			transport(default),
+			temporary_tls_credentials('mcp_server_test_')
+		],
+		with_prepared(test_tools_2026, [http_server_options(ServerOptions)], (
+			mcp_server_streamable_http_transport::current_options(Options),
+			memberchk(http_server_options(ServerOptions), Options)
+		)).
+
+	test(http_invalid_http_server_options_01, fail) :-
+		mcp_server_streamable_http_transport::valid_option(
+			http_server_options([scheme(ftp)])
+		).
+
+	test(http_oauth_prepare_01, deterministic) :-
+		with_prepared(test_tools_2026, [
+			oauth(
+				mcp_server_test_oauth_verifier,
+				'https://api.example.com/mcp',
+				[authorization_servers(['https://issuer.example.com'])],
+				[required_scopes([write])]
+			)
+		], true).
+
+	test(http_oauth_prepare_missing_metadata_01, error(domain_error(http_oauth_metadata_descriptors, _))) :-
+		mcp_server_streamable_http_transport::prepare(test_tools_2026, [
+			oauth(mcp_server_test_oauth_verifier, 'https://api.example.com/mcp', [], [])
+		]).
+
+	test(http_oauth_prepare_reserved_option_01, error(domain_error(mcp_server_oauth_reserved_option, _))) :-
+		mcp_server_streamable_http_transport::prepare(test_tools_2026, [
+			oauth(
+				mcp_server_test_oauth_verifier,
+				'https://api.example.com/mcp',
+				[authorization_servers(['https://issuer.example.com'])],
+				[protected_resource('https://other.example.com/mcp')]
+			)
+		]).
+
+	test(http_oauth_all_http_specs_01, deterministic) :-
+		prepare_oauth_specs(['2025-06-18', '2025-11-25', '2026-07-28']).
+
+	test(http_oauth_stdio_rejected_01, error(domain_error(mcp_server_configuration, oauth-stdio))) :-
+		mcp_server::start('oauth-stdio-test', test_tools_2026, [
+			oauth(
+				mcp_server_test_oauth_verifier,
+				'https://api.example.com/mcp',
+				[authorization_servers(['https://issuer.example.com'])],
+				[]
+			)
+		]).
 
 	% HTTP method / path basics
 
@@ -228,25 +289,26 @@
 
 	% progress / SSE body (buffered path — no live stream attached)
 
-	test(http_progress_token_sse_content_type_01, deterministic) :-
+	test(http_progress_token_sse_content_type_01, subsumes(http_response(200, _, _), HTTPResponse)) :-
 		call_json_rpc(
 			test_tools_2026,
 			tools_call_with_progress(echo, {'Input'-hi}, t1, 1),
 			HTTPResponse
 		),
-		HTTPResponse = http_response(200, Headers, Payload),
+		arg(2, HTTPResponse, Headers),
+		arg(3, HTTPResponse, Payload),
 		sse_payload_atom(Payload, Body),
 		assertion(atom(Body)),
 		memberchk('Content-Type'-CT, Headers),
 		assertion(sub_atom(CT, _, _, _, 'text/event-stream')).
 
-	test(http_progress_token_sse_has_final_data_01, deterministic) :-
+	test(http_progress_token_sse_has_final_data_01, subsumes(http_response(200, _, _), HTTPResponse)) :-
 		call_json_rpc(
 			test_tools_2026,
 			tools_call_with_progress(echo, {'Input'-hi}, t1, 1),
 			HTTPResponse
 		),
-		HTTPResponse = http_response(200, _, Payload),
+		arg(3, HTTPResponse, Payload),
 		sse_payload_atom(Payload, Body),
 		assertion(sub_atom(Body, _, _, _, 'data: ')),
 		assertion(sub_atom(Body, _, _, _, 'resultType')).
@@ -303,18 +365,80 @@
 
 	% handler path routing
 
-	test(http_handler_not_found_01, deterministic) :-
+	test(http_handler_not_found_01, subsumes(response(http(1,1), status(404, _), _, _, _), Response)) :-
 		with_prepared(test_tools_2026, [http_path('/mcp')], (
 			Request = request('POST', '/other', [], '{}'),
-			mcp_streamable_http_handler::handle(Request, Response),
-			Response = response(http(1,1), status(404, _), _, _, _)
+			mcp_streamable_http_handler::handle(Request, Response)
 		)).
 
-	test(http_handler_method_not_allowed_01, deterministic) :-
+	test(http_handler_method_not_allowed_01, subsumes(response(http(1,1), status(405, _), _, _, _), Response)) :-
 		with_prepared(test_tools_2026, [http_path('/mcp')], (
 			Request = request('GET', '/mcp', [], ''),
-			mcp_streamable_http_handler::handle(Request, Response),
-			Response = response(http(1,1), status(405, _), _, _, _)
+			mcp_streamable_http_handler::handle(Request, Response)
+		)).
+
+	% OAuth protection and protected-resource metadata
+
+	test(http_oauth_metadata_01, subsumes(response(http(1, 1), status(200, 'OK'), _, _, _), Response)) :-
+		with_oauth_prepared((
+			oauth_handler(Handler),
+			Request = request(get, origin('/.well-known/oauth-protected-resource/mcp'), http(1, 1), [], empty, []),
+			Handler::handle(Request, Response)
+		)).
+
+	test(http_oauth_metadata_method_not_allowed_01, subsumes(response(http(1, 1), status(405, 'Method Not Allowed'), _, _, _), Response)) :-
+		with_oauth_prepared((
+			oauth_handler(Handler),
+			Request = request(post, origin('/.well-known/oauth-protected-resource/mcp'), http(1, 1), [], empty, []),
+			Handler::handle(Request, Response)
+		)).
+
+	test(http_oauth_missing_token_01, subsumes(response(http(1, 1), status(401, 'Unauthorized'), _, _, _), Response)) :-
+		with_oauth_prepared((
+			discover_core_request(none, Request),
+			oauth_handler(Handler),
+			Handler::handle(Request, Response),
+			arg(3, Response, Headers),
+			assertion(memberchk(www_authenticate-_, Headers))
+		)).
+
+	test(http_oauth_malformed_authorization_01, subsumes(response(http(1, 1), status(400, 'Bad Request'), _, _, _), Response)) :-
+		with_oauth_prepared((
+			discover_core_request(none, Request0),
+			Request0 = request(Method, Target, Version, Headers, Body, Properties),
+			Request = request(Method, Target, Version, [authorization-'Basic credentials'| Headers], Body, Properties),
+			oauth_handler(Handler),
+			Handler::handle(Request, Response)
+		)).
+
+	test(http_oauth_invalid_token_01, subsumes(response(http(1, 1), status(401, 'Unauthorized'), _, _, _), Response)) :-
+		with_oauth_prepared((
+			discover_core_request('invalid-token', Request),
+			oauth_handler(Handler),
+			Handler::handle(Request, Response)
+		)).
+
+	test(http_oauth_insufficient_scope_01, subsumes(response(http(1, 1), status(403, 'Forbidden'), _, _, _), Response)) :-
+		with_oauth_prepared((
+			discover_core_request('read-token', Request),
+			oauth_handler(Handler),
+			Handler::handle(Request, Response)
+		)).
+
+	test(http_oauth_dispatch_01, subsumes(response(http(1, 1), status(200, 'OK'), _, _, _), Response)) :-
+		with_oauth_prepared((
+			discover_core_request('write-token', Request),
+			oauth_handler(Handler),
+			Handler::handle(Request, Response)
+		)).
+
+	test(http_oauth_progress_rejected_before_sse_01, subsumes(response(http(1, 1), status(401, 'Unauthorized'), _, _, _), Response)) :-
+		with_oauth_prepared((
+			progress_core_request(Request),
+			oauth_handler(Handler),
+			Handler::handle(Request, Response),
+			arg(3, Response, Headers),
+			assertion(\+ member(content_type-'text/event-stream; charset=utf-8', Headers))
 		)).
 
 	% ping was removed in MCP 2026-07-28; expect method not found
@@ -348,6 +472,60 @@
 		mcp_server_streamable_http_transport::cleanup.
 
 	:- meta_predicate(with_prepared(*, *, 0)).
+
+	with_oauth_prepared(Goal) :-
+		with_prepared(test_tools_2026, [
+			oauth(
+				mcp_server_test_oauth_verifier,
+				'https://api.example.com/mcp',
+				[authorization_servers(['https://issuer.example.com'])],
+				[required_scopes([write])]
+			)
+		], Goal).
+
+	:- meta_predicate(with_oauth_prepared(0)).
+
+	prepare_oauth_specs([]).
+	prepare_oauth_specs([Spec| Specs]) :-
+		with_prepared(test_tools_2026, [
+			spec(Spec),
+			oauth(
+				mcp_server_test_oauth_verifier,
+				'https://api.example.com/mcp',
+				[authorization_servers(['https://issuer.example.com'])],
+				[]
+			)
+		], true),
+		prepare_oauth_specs(Specs).
+
+	oauth_handler(http_server_core_oauth_endpoint_handler(
+		'https://api.example.com/mcp',
+		[authorization_servers(['https://issuer.example.com'])],
+		[required_members([authorization_servers])],
+		mcp_server_test_oauth_verifier,
+		mcp_streamable_http_handler,
+		[
+			protected_resource('https://api.example.com/mcp'),
+			resource_metadata('https://api.example.com/.well-known/oauth-protected-resource/mcp'),
+			required_scopes([write])
+		]
+	)).
+
+	discover_core_request(Token, Request) :-
+		spec_to_message(discover_request(1), Message),
+		request_headers(Message, Headers0),
+		oauth_headers(Token, Headers0, Headers),
+		Request = request(post, origin('/mcp'), http(1, 1), Headers, content('application/json', json(Message)), []).
+
+	progress_core_request(Request) :-
+		spec_to_message(tools_call_with_progress(echo, {'Input'-hi}, t1, 1), Message),
+		request_headers(Message, Headers),
+		Request = request(post, origin('/mcp'), http(1, 1), Headers, content('application/json', json(Message)), []).
+
+	oauth_headers(none, Headers, Headers) :-
+		!.
+	oauth_headers(Token, Headers, [authorization-Authorization| Headers]) :-
+		http_oauth::generate_authorization(bearer_authorization(Token), Authorization).
 
 	call_json_rpc(Application, Spec, HTTPResponse) :-
 		spec_to_message(Spec, Message),

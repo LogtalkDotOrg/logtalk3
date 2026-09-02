@@ -19,18 +19,28 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(dates(loader)),
-	logtalk_load(mcp_server(loader)),
-	logtalk_load(os(loader)),
-	logtalk_load(reader(loader)),
-	logtalk_load(get_time, [optimize(on)])
-)).
+:- object(mcp_server_test_oauth_verifier,
+	implements(http_oauth_verifier_protocol)).
 
-:- if(current_logtalk_flag(threads, supported)).
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-09-02,
+		comment is 'OAuth verifier used by the MCP Streamable HTTP transport tests.'
+	]).
 
-	:- initialization(
-		logtalk_load(oauth_verifier, [optimize(on)])
-	).
+	verify('read-token', 'https://api.example.com/mcp', oauth_token_info([
+		source(test),
+		scopes([read]),
+		audience_validation(exact('https://api.example.com/mcp')),
+		claims([subject(alice)])
+	])).
 
-:- endif.
+	verify('write-token', 'https://api.example.com/mcp', oauth_token_info([
+		source(test),
+		scopes([read, write]),
+		audience_validation(exact('https://api.example.com/mcp')),
+		claims([subject(alice)])
+	])).
+
+:- end_object.

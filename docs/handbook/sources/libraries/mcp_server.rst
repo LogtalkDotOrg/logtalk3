@@ -310,27 +310,117 @@ Common options
 Streamable HTTP transport options
 ---------------------------------
 
-+---------------------------------+-----------------+--------------------------+
-| Option                          | Default         | Description              |
-+=================================+=================+==========================+
-| ``http_port(Port)``             | ``8080``        | TCP port to listen on    |
-+---------------------------------+-----------------+--------------------------+
-| ``http_bind(Address)``          | ``'127.0.0.1'`` | Bind address             |
-+---------------------------------+-----------------+--------------------------+
-| ``http_path(Path)``             | ``'/mcp'``      | HTTP path for MCP POST   |
-|                                 |                 | requests                 |
-+---------------------------------+-----------------+--------------------------+
-| ``http_origin_check(Flag)``     | ``true``        | Reject disallowed        |
-|                                 |                 | ``Origin`` headers when  |
-|                                 |                 | ``true``                 |
-+---------------------------------+-----------------+--------------------------+
-| ``http_sse_keepalive(Seconds)`` | ``15``          | Keep-alive interval for  |
-|                                 |                 | ``subscriptions/listen`` |
-|                                 |                 | response streams         |
-+---------------------------------+-----------------+--------------------------+
++-----------------------------------------------------------------------------+-----------------+-----------------------------------------+
+| Option                                                                      | Default         | Description                             |
++=============================================================================+=================+=========================================+
+| ``http_port(Port)``                                                         | ``8080``        | TCP port to listen on                   |
++-----------------------------------------------------------------------------+-----------------+-----------------------------------------+
+| ``http_bind(Address)``                                                      | ``'127.0.0.1'`` | Bind address                            |
++-----------------------------------------------------------------------------+-----------------+-----------------------------------------+
+| ``http_path(Path)``                                                         | ``'/mcp'``      | HTTP path for MCP POST requests         |
++-----------------------------------------------------------------------------+-----------------+-----------------------------------------+
+| ``http_origin_check(Flag)``                                                 | ``true``        | Reject disallowed ``Origin`` headers    |
+|                                                                             |                 | when ``true``                           |
++-----------------------------------------------------------------------------+-----------------+-----------------------------------------+
+| ``http_sse_keepalive(Seconds)``                                             | ``15``          | Keep-alive interval for                 |
+|                                                                             |                 | ``subscriptions/listen`` response       |
+|                                                                             |                 | streams                                 |
++-----------------------------------------------------------------------------+-----------------+-----------------------------------------+
+| ``http_server_options(Options)``                                            | ``[]``          | Options passed to                       |
+|                                                                             |                 | ``http_server::serve_until_shutdown/5`` |
++-----------------------------------------------------------------------------+-----------------+-----------------------------------------+
+| ``oauth(Verifier, ProtectedResource, MetadataDescriptors, ProtectOptions)`` | none            | Enable OAuth protection and RFC 9728    |
+|                                                                             |                 | metadata publication                    |
++-----------------------------------------------------------------------------+-----------------+-----------------------------------------+
 
 These options are validated by the ``mcp_server`` facade and applied
 only when ``transport(streamable_http)`` is used.
+
+The ``http_server_options/1`` list selects the HTTP scheme, server
+transport, and listener configuration using the ``http_server`` library
+option vocabulary. The default empty list uses that library's defaults:
+plain HTTP and its default HTTP transport. The MCP transport adds
+``workers(per_connection)`` so long-lived subscriptions do not block
+other requests.
+
+For a direct HTTPS listener, provide a certificate and private key:
+
+::
+
+   | ?- mcp_server::start('my-server', my_tools, [
+           transport(streamable_http),
+           http_port(8443),
+           http_server_options([
+               scheme(https),
+               tls_certificate_file('/path/to/cert.pem'),
+               tls_key_file('/path/to/key.pem')
+           ])
+       ]).
+
+For local testing, replace the certificate and key options with
+``temporary_tls_credentials(Prefix)``. The ``http_server`` library
+selects its HTTPS-capable default transport and validates scheme,
+transport, and TLS credential consistency when opening the listener.
+
+OAuth protection
+----------------
+
+Use the ``oauth/4`` option to protect all requests to a Streamable HTTP
+MCP server. OAuth is supported for all three MCP spec versions. It is
+not supported by the stdio transport.
+
+::
+
+   | ?- mcp_server::start('my-server', my_tools, [
+           spec('2026-07-28'),
+           transport(streamable_http),
+           http_port(8443),
+           http_server_options([
+               scheme(https),
+               tls_certificate_file('/path/to/cert.pem'),
+               tls_key_file('/path/to/key.pem')
+           ]),
+           oauth(
+               http_oauth_jwt_verifier(PublicJWKSet, [
+                   allow_algorithms(['RS256']),
+                   claim_policy([
+                       claim(iss, expected('https://identity.example.com'))
+                   ])
+               ]),
+               'https://api.example.com/mcp',
+               [
+                   authorization_servers(['https://identity.example.com']),
+                   scopes_supported([mcp_access]),
+                   resource_name('My MCP Server')
+               ],
+               [required_scopes([mcp_access])]
+           )
+       ]).
+
+The verifier must implement ``http_oauth_verifier_protocol``. JWT and
+token introspection verifiers supplied by the ``http_oauth`` library can
+be used directly. The protected resource must be its canonical
+externally visible HTTPS URL and must match the audience accepted by the
+verifier.
+
+The metadata descriptors are passed to ``http_oauth_metadata`` with
+``required_members([authorization_servers])``. The server automatically
+serves the resulting public RFC 9728 protected-resource metadata
+document at the well-known URL derived from the protected resource. For
+the example above, the URL is
+``https://api.example.com/.well-known/oauth-protected-resource/mcp``.
+
+Protection options use the ``http_oauth`` option vocabulary, including
+``required_scopes/1``, ``scope_checker/1``, ``realm/1``, ``headers/1``,
+``body/1``, and ``properties/1``. The ``protected_resource/1`` and
+``resource_metadata/1`` options are reserved and derived automatically.
+Required scopes are static and apply to every MCP HTTP request.
+
+Every protected HTTP request, including requests associated with an MCP
+session and long-lived SSE requests, must carry a valid Bearer token.
+Missing, malformed, invalid, and insufficient-scope credentials are
+rejected before an SSE response is started. The raw token is not
+retained in the request passed to the MCP handler.
 
 Implementing the tool protocol
 ------------------------------
@@ -1254,5 +1344,6 @@ implemented.
 Synchronous elicitation is restricted to the stdio transport for the
 2025 specs.
 
-OpenTelemetry ``_meta`` propagation and OAuth are currently not
-implemented.
+OpenTelemetry ``_meta`` propagation is currently not implemented. OAuth
+support does not include token acquisition, refresh, revocation,
+method-specific scope policies, or active-subscription revalidation.

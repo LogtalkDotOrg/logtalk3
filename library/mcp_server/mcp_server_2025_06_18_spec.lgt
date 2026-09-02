@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-31,
+		date is 2026-09-02,
 		comment is 'MCP 2025-06-18 protocol handler. Transport-agnostic message handling; returns abstract outcomes for stdio or Streamable HTTP transports to render. Synchronous elicitation requires ``stdio_input/1`` and ``stdio_output/1`` options.'
 	]).
 
@@ -623,6 +623,8 @@
 	valid_option(http_path(_)).
 	valid_option(http_origin_check(_)).
 	valid_option(http_sse_keepalive(_)).
+	valid_option(http_server_options(_)).
+	valid_option(oauth(_, _, _, _)).
 	valid_option(instructions(_)).
 	valid_option(cache_ttl(_)).
 	valid_option(cache_scope(_)).

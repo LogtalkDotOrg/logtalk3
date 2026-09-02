@@ -19,18 +19,21 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- initialization((
-	logtalk_load(dates(loader)),
-	logtalk_load(mcp_server(loader)),
-	logtalk_load(os(loader)),
-	logtalk_load(reader(loader)),
-	logtalk_load(get_time, [optimize(on)])
-)).
+:- object(get_time_oauth_verifier,
+	implements(http_oauth_verifier_protocol)).
 
-:- if(current_logtalk_flag(threads, supported)).
+	:- info([
+		version is 1:0:0,
+		author is 'Example',
+		date is 2026-09-02,
+		comment is 'Fixed-token OAuth verifier for the protected get-time MCP example. For demonstration only.'
+	]).
 
-	:- initialization(
-		logtalk_load(oauth_verifier, [optimize(on)])
-	).
+	verify('get-time-demo-token', 'https://127.0.0.1:8443/mcp', oauth_token_info([
+		source(example),
+		scopes([get_time]),
+		audience_validation(exact('https://127.0.0.1:8443/mcp')),
+		claims([subject(example_client)])
+	])).
 
-:- endif.
+:- end_object.

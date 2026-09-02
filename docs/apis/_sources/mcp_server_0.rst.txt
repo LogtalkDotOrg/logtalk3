@@ -15,7 +15,7 @@ MCP server facade. Selects spec and transport (stdio or Streamable HTTP).
 
 | **Author:** Paulo Moura
 | **Version:** 2:0:0
-| **Date:** 2026-08-31
+| **Date:** 2026-09-02
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -25,11 +25,13 @@ MCP server facade. Selects spec and transport (stdio or Streamable HTTP).
 |    ``public`` :ref:`options <options/0>`
 | **Uses:**
 |    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
 
 | **Remarks:**
 
    - Specs: ``'2025-06-18'`` (default), ``'2025-11-25'``, and ``'2026-07-28'`` via ``spec/1``.
    - Transports: ``stdio`` (default) and ``streamable_http`` via ``transport/1``.
+   - OAuth: Streamable HTTP servers can be protected using the ``oauth/4`` option.
 
 | **Inherited public predicates:**
 |     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  

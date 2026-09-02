@@ -19,49 +19,33 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- if(current_logtalk_flag(threads, supported)).
-
-	:- initialization(
-		logtalk_load(http_server(loader))
-	).
-
-:- endif.
+%  Entry point for running the OAuth-protected get_time MCP App example.
+%  Streamable HTTP (MCP 2026-07-28 protocol semantics, HTTPS transport).
+%  Listens on https://127.0.0.1:8443/mcp by default.
 
 :- initialization((
-	logtalk_load(basic_types(loader)),
-	logtalk_load(json_rpc(loader)),
-	logtalk_load(options(loader)),
-	logtalk_load(term_io(loader)),
-	logtalk_load([
-		mcp_tool_protocol,
-		mcp_prompt_protocol,
-		mcp_resource_protocol,
-		mcp_multiround_protocol,
-		mcp_cache_protocol,
-		mcp_ui_protocol,
-		mcp_server_transport_protocol,
-		mcp_server_spec_protocol,
-		mcp_server_application,
-		mcp_server_2025_06_18_spec,
-		mcp_server_2025_11_25_spec,
-		mcp_server_2026_07_28_spec,
-		mcp_server_stdio_transport,
-		mcp_server
-	], [
-		optimize(on)
+	logtalk_load(loader),
+	mcp_server::start(get_time, get_time, [
+		spec('2026-07-28'),
+		transport(streamable_http),
+		server_title('OAuth-protected get time MCP App demo (2026-07-28)'),
+		http_port(8443),
+		http_bind('127.0.0.1'),
+		http_path('/mcp'),
+		http_origin_check(false),
+		http_server_options([
+			scheme(https),
+			temporary_tls_credentials('get_time_mcp_')
+		]),
+		oauth(
+			get_time_oauth_verifier,
+			'https://127.0.0.1:8443/mcp',
+			[
+				authorization_servers(['https://identity.example.com']),
+				scopes_supported([get_time]),
+				resource_name('Get time MCP App demo')
+			],
+			[required_scopes([get_time])]
+		)
 	])
 )).
-
-:- if(current_logtalk_flag(threads, supported)).
-
-	:- initialization((
-		logtalk_load(format(loader)),
-		logtalk_load(http_oauth(loader)),
-		logtalk_load([
-			mcp_server_streamable_http_transport
-		], [
-			optimize(on)
-		])
-	)).
-
-:- endif.

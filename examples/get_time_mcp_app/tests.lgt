@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-08-28,
+		date is 2026-09-02,
 		comment is 'Unit tests for the get_time MCP Apps example (server-side Apps contract).'
 	]).
 
@@ -100,6 +100,23 @@
 		Result = structured([text(Text)], _),
 		% format_date_time(..., date_time_medium, ...) is time-dependent but non-empty
 		atom_length(Text, Length).
+
+	% OAuth verifier used by the protected Streamable HTTP entry point
+
+	test(get_time_oauth_verifier_valid, subsumes(oauth_token_info([
+		source(example),
+		scopes([get_time]),
+		audience_validation(exact('https://127.0.0.1:8443/mcp')),
+		claims([subject(example_client)])
+	]), TokenInfo), [condition(current_object(get_time_oauth_verifier))]) :-
+		{get_time_oauth_verifier::verify(
+			'get-time-demo-token', 'https://127.0.0.1:8443/mcp', TokenInfo
+		)}.
+
+	test(get_time_oauth_verifier_invalid, fail, [condition(current_object(get_time_oauth_verifier))]) :-
+		{get_time_oauth_verifier::verify(
+			'invalid-token', 'https://127.0.0.1:8443/mcp', _
+		)}.
 
 	has_pair({Pairs}, Key, Value) :-
 		curly_member(Key-Value, Pairs).

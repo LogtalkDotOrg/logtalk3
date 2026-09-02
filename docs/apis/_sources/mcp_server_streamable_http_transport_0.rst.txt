@@ -8,14 +8,14 @@
 ``mcp_server_streamable_http_transport``
 ========================================
 
-Implements the Streamable HTTP transport for MCP servers. Uses Logtalk ``http_server::serve_until_shutdown/5`` and a dedicated ``http_handler_protocol`` handler object. Supports specs 2025-06-18, 2025-11-25, and 2026-07-28 selected via the ``spec/1`` option and delegated to the matching ``mcp_server_*_spec`` object. Long-lived subscriptions/listen streams emit periodic SSE comment keep-alives (``http_sse_keepalive/1``). Requires a multi-threaded backend for subscriptions/listen.
+Implements the Streamable HTTP transport for MCP servers. Uses Logtalk ``http_server::serve_until_shutdown/5`` and a dedicated ``http_handler_protocol`` handler object. Supports specs 2025-06-18, 2025-11-25, and 2026-07-28 selected via the ``spec/1`` option and delegated to the matching ``mcp_server_*_spec`` object. Supports optional OAuth protection and protected-resource metadata publication using the ``oauth/4`` option. Long-lived subscriptions/listen streams emit periodic SSE comment keep-alives (``http_sse_keepalive/1``). Requires a multi-threaded backend for subscriptions/listen.
 
 | **Availability:** 
 |    ``logtalk_load(mcp_server(loader))``
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-08-31
+| **Date:** 2026-09-02
 
 | **Compilation flags:**
 |    ``static, context_switching_calls, threaded``
@@ -27,6 +27,8 @@ Implements the Streamable HTTP transport for MCP servers. Uses Logtalk ``http_se
 |    ``public`` :ref:`mcp_server_application <mcp_server_application/0>`
 | **Uses:**
 |    :ref:`format <format/0>`
+|    :ref:`http_oauth <http_oauth/0>`
+|    :ref:`http_oauth_metadata <http_oauth_metadata/0>`
 |    :ref:`http_server <http_server/0>`
 |    :ref:`json <json/0>`
 |    :ref:`json_rpc <json_rpc/0>`
@@ -36,6 +38,7 @@ Implements the Streamable HTTP transport for MCP servers. Uses Logtalk ``http_se
 |    :ref:`mcp_server_2026_07_28_spec <mcp_server_2026_07_28_spec/0>`
 |    :ref:`os <os/0>`
 |    :ref:`term_io <term_io/0>`
+|    :ref:`type <type/0>`
 
 | **Remarks:**
 |    (none)

@@ -261,6 +261,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#common-options">Common options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#spec-specific-options">2026-07-28 spec specific options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#streamable-http-transport-options">Streamable HTTP transport options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#oauth-protection">OAuth protection</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#implementing-the-tool-protocol">Implementing the tool protocol</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#auto-dispatch">Auto-dispatch</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#overriding-input-output-schemas">Overriding input/output schemas</a></li>
@@ -793,25 +794,109 @@ milliseconds (2026)</p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">http_path(Path)</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">'/mcp'</span></code></p></td>
-<td><p>HTTP path for MCP POST
-requests</p></td>
+<td><p>HTTP path for MCP POST requests</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">http_origin_check(Flag)</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
-<td><p>Reject disallowed
-<code class="docutils literal notranslate"><span class="pre">Origin</span></code> headers when
-<code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
+<td><p>Reject disallowed <code class="docutils literal notranslate"><span class="pre">Origin</span></code> headers
+when <code class="docutils literal notranslate"><span class="pre">true</span></code></p></td>
 </tr>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">http_sse_keepalive(Seconds)</span></code></p></td>
 <td><p><code class="docutils literal notranslate"><span class="pre">15</span></code></p></td>
 <td><p>Keep-alive interval for
-<code class="docutils literal notranslate"><span class="pre">subscriptions/listen</span></code>
-response streams</p></td>
+<code class="docutils literal notranslate"><span class="pre">subscriptions/listen</span></code> response
+streams</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">http_server_options(Options)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">[]</span></code></p></td>
+<td><p>Options passed to
+<code class="docutils literal notranslate"><span class="pre">http_server::serve_until_shutdown/5</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">oauth(Verifier,</span> <span class="pre">ProtectedResource,</span> <span class="pre">MetadataDescriptors,</span> <span class="pre">ProtectOptions)</span></code></p></td>
+<td><p>none</p></td>
+<td><p>Enable OAuth protection and RFC 9728
+metadata publication</p></td>
 </tr>
 </tbody>
 </table>
 <p>These options are validated by the <code class="docutils literal notranslate"><span class="pre">mcp_server</span></code> facade and applied
 only when <code class="docutils literal notranslate"><span class="pre">transport(streamable_http)</span></code> is used.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">http_server_options/1</span></code> list selects the HTTP scheme, server
+transport, and listener configuration using the <code class="docutils literal notranslate"><span class="pre">http_server</span></code> library
+option vocabulary. The default empty list uses that library’s defaults:
+plain HTTP and its default HTTP transport. The MCP transport adds
+<code class="docutils literal notranslate"><span class="pre">workers(per_connection)</span></code> so long-lived subscriptions do not block
+other requests.</p>
+<p>For a direct HTTPS listener, provide a certificate and private key:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> mcp_server<span class="o">::</span>start(<span class="s">&#39;my-server&#39;</span>, my_tools, [
+        transport(streamable_http),
+        http_port(<span class="m">8443</span>),
+        http_server_options([
+            scheme(https),
+            tls_certificate_file(<span class="s">&#39;/path/to/cert.pem&#39;</span>),
+            tls_key_file(<span class="s">&#39;/path/to/key.pem&#39;</span>)
+        ])
+    ]).
+</pre></div>
+</div>
+<p>For local testing, replace the certificate and key options with
+<code class="docutils literal notranslate"><span class="pre">temporary_tls_credentials(Prefix)</span></code>. The <code class="docutils literal notranslate"><span class="pre">http_server</span></code> library
+selects its HTTPS-capable default transport and validates scheme,
+transport, and TLS credential consistency when opening the listener.</p>
+</section>
+<section id="oauth-protection">
+<h2>OAuth protection<a class="headerlink" href="#oauth-protection" title="Link to this heading"></a></h2>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">oauth/4</span></code> option to protect all requests to a Streamable HTTP
+MCP server. OAuth is supported for all three MCP spec versions. It is
+not supported by the stdio transport.</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> mcp_server<span class="o">::</span>start(<span class="s">&#39;my-server&#39;</span>, my_tools, [
+        spec(<span class="s">&#39;2026-07-28&#39;</span>),
+        transport(streamable_http),
+        http_port(<span class="m">8443</span>),
+        http_server_options([
+            scheme(https),
+            tls_certificate_file(<span class="s">&#39;/path/to/cert.pem&#39;</span>),
+            tls_key_file(<span class="s">&#39;/path/to/key.pem&#39;</span>)
+        ]),
+        oauth(
+            http_oauth_jwt_verifier(<span class="nv">PublicJWKSet</span>, [
+                allow_algorithms([<span class="s">&#39;RS256&#39;</span>]),
+                claim_policy([
+                    claim(iss, expected(<span class="s">&#39;https://identity.example.com&#39;</span>))
+                ])
+            ]),
+            <span class="s">&#39;https://api.example.com/mcp&#39;</span>,
+            [
+                authorization_servers([<span class="s">&#39;https://identity.example.com&#39;</span>]),
+                scopes_supported([mcp_access]),
+                resource_name(<span class="s">&#39;My MCP Server&#39;</span>)
+            ],
+            [required_scopes([mcp_access])]
+        )
+    ]).
+</pre></div>
+</div>
+<p>The verifier must implement <code class="docutils literal notranslate"><span class="pre">http_oauth_verifier_protocol</span></code>. JWT and
+token introspection verifiers supplied by the <code class="docutils literal notranslate"><span class="pre">http_oauth</span></code> library can
+be used directly. The protected resource must be its canonical
+externally visible HTTPS URL and must match the audience accepted by the
+verifier.</p>
+<p>The metadata descriptors are passed to <code class="docutils literal notranslate"><span class="pre">http_oauth_metadata</span></code> with
+<code class="docutils literal notranslate"><span class="pre">required_members([authorization_servers])</span></code>. The server automatically
+serves the resulting public RFC 9728 protected-resource metadata
+document at the well-known URL derived from the protected resource. For
+the example above, the URL is
+<code class="docutils literal notranslate"><span class="pre">https://api.example.com/.well-known/oauth-protected-resource/mcp</span></code>.</p>
+<p>Protection options use the <code class="docutils literal notranslate"><span class="pre">http_oauth</span></code> option vocabulary, including
+<code class="docutils literal notranslate"><span class="pre">required_scopes/1</span></code>, <code class="docutils literal notranslate"><span class="pre">scope_checker/1</span></code>, <code class="docutils literal notranslate"><span class="pre">realm/1</span></code>, <code class="docutils literal notranslate"><span class="pre">headers/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">body/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">properties/1</span></code>. The <code class="docutils literal notranslate"><span class="pre">protected_resource/1</span></code> and
+<code class="docutils literal notranslate"><span class="pre">resource_metadata/1</span></code> options are reserved and derived automatically.
+Required scopes are static and apply to every MCP HTTP request.</p>
+<p>Every protected HTTP request, including requests associated with an MCP
+session and long-lived SSE requests, must carry a valid Bearer token.
+Missing, malformed, invalid, and insufficient-scope credentials are
+rejected before an SSE response is started. The raw token is not
+retained in the request passed to the MCP handler.</p>
 </section>
 <section id="implementing-the-tool-protocol">
 <h2>Implementing the tool protocol<a class="headerlink" href="#implementing-the-tool-protocol" title="Link to this heading"></a></h2>
@@ -1755,8 +1840,9 @@ sampling (deprecated), and experimental tasks are not currently
 implemented.</p>
 <p>Synchronous elicitation is restricted to the stdio transport for the
 2025 specs.</p>
-<p>OpenTelemetry <code class="docutils literal notranslate"><span class="pre">_meta</span></code> propagation and OAuth are currently not
-implemented.</p>
+<p>OpenTelemetry <code class="docutils literal notranslate"><span class="pre">_meta</span></code> propagation is currently not implemented. OAuth
+support does not include token acquisition, refresh, revocation,
+method-specific scope policies, or active-subscription revalidation.</p>
 </section>
 </section>
 

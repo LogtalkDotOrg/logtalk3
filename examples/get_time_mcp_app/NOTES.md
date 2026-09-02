@@ -31,13 +31,14 @@ view. Hosts that implement the MCP Apps extension render that view in a
 sandboxed iframe; hosts that do not still receive the normal text tool
 result.
 
-It supports **three** entry points:
+It supports **four** entry points:
 
-| Specification / transport    | Interaction model                          | Entry point                  |
-|------------------------------|--------------------------------------------|------------------------------|
-| 2025-06-18 (stdio)           | Tool call + optional Apps UI               | `server_2025_06_18.lgt`      |
-| 2026-07-28 (stdio)           | Tool call + optional Apps UI               | `server_2026_07_28.lgt`      |
-| 2026-07-28 (Streamable HTTP) | Same protocol over HTTP POST + optional SSE| `server_streamable_http.lgt` |
+| Specification / transport    | Interaction model                          | Entry point                        |
+|------------------------------|--------------------------------------------|------------------------------------|
+| 2025-06-18 (stdio)           | Tool call + optional Apps UI               | `server_2025_06_18.lgt`            |
+| 2026-07-28 (stdio)           | Tool call + optional Apps UI               | `server_2026_07_28.lgt`            |
+| 2026-07-28 (Streamable HTTP) | Same protocol over HTTP POST + optional SSE| `server_streamable_http.lgt`       |
+| 2026-07-28 (OAuth HTTPS)     | Protected HTTPS plus public OAuth metadata | `server_streamable_http_oauth.lgt` |
 
 MCP Apps is transport- and core-revision-agnostic: the same application
 object works on both protocol versions and on both stdio and Streamable
@@ -59,6 +60,8 @@ Key concepts demonstrated
 - Optional resource CSP / border hints via `resource_ui_meta/2`
 - A **minimal custom** Apps View client (JSON-RPC over `postMessage`)
   instead of embedding the full `@modelcontextprotocol/ext-apps` SDK
+- Protecting an MCP Streamable HTTP server using the `mcp_server` `oauth/4`
+  option and a verifier implementing `http_oauth_verifier_protocol`
 
 
 UI: inspiration, minimal client, and license
@@ -205,17 +208,21 @@ behaviour testing requires an Apps-capable host.
 Starting the servers
 --------------------
 
-Only the Streamable HTTP example can (and must) be started from the
+Only the Streamable HTTP examples can (and must) be started from the
 command-line (the stdio examples must be started from the clients).
 For example, using the SWI-Prolog backend:
 
     $ swilgt -q -g "logtalk_load(get_time_mcp_app(server_streamable_http))" -t halt
 
+To run the OAuth-protected variant instead:
+
+    $ swilgt -q -g "logtalk_load(get_time_mcp_app(server_streamable_http_oauth))" -t halt
+
 Other backends provide similar command-line options; see their documentation
 for details.
 
 Default listen address (can be changed by editing the `http_port/1` and
-`http_path/1` options in the `server_streamable_http` file):
+`http_path/1` options in the Streamable HTTP server entry-point files):
 
 http://127.0.0.1:8080/mcp
 
@@ -225,6 +232,7 @@ Example discovery request (2026):
       -H 'Content-Type: application/json' \
       -H 'Accept: application/json, text/event-stream' \
       -H 'MCP-Protocol-Version: 2026-07-28' \
+	  -H 'Mcp-Method: server/discover' \
       -d '{
         "jsonrpc": "2.0",
         "id": 1,
@@ -246,6 +254,8 @@ Example tool call:
       -H 'Content-Type: application/json' \
       -H 'Accept: application/json, text/event-stream' \
       -H 'MCP-Protocol-Version: 2026-07-28' \
+	  -H 'Mcp-Method: tools/call' \
+	  -H 'Mcp-Name: get_time' \
       -d '{
         "jsonrpc": "2.0",
         "id": 2,
@@ -262,6 +272,37 @@ Example tool call:
           }
         }
       }'
+
+
+    OAuth-protected variant
+    -----------------------
+
+    The protected entry point uses `get_time_oauth_verifier`, a deliberately
+    simple verifier that accepts the fixed Bearer token `get-time-demo-token`
+    with the `get_time` scope. This verifier exists only to keep the example
+    self-contained. Production servers should use a JWT or introspection
+    verifier from the `http_oauth` library.
+
+    The configured protected-resource identifier is
+    `https://127.0.0.1:8443/mcp`. The example uses
+    `http_server_options([scheme(https), temporary_tls_credentials(...)])` to
+    create temporary credentials for local testing. This requires the TLS helper
+    programs documented by the `http_server` library. A deployed server should
+    instead use `tls_certificate_file/1` and `tls_key_file/1` with its real
+    certificate and private key.
+
+    The RFC 9728 metadata endpoint remains public:
+
+      $ curl -k -sS \
+        'https://127.0.0.1:8443/.well-known/oauth-protected-resource/mcp'
+
+    Requests to the MCP endpoint require the demo token. Add this header to the
+    discovery and tool-call examples above:
+
+      -H 'Authorization: Bearer get-time-demo-token'
+
+    A request without that header receives `401 Unauthorized`; a valid token
+    without the required `get_time` scope would receive `403 Forbidden`.
 
 
 MCP client configuration
@@ -313,6 +354,15 @@ with the values on your system (often needed on macOS).
 After starting `server_streamable_http.lgt`, point the client at:
 
 http://127.0.0.1:8080/mcp
+
+For `server_streamable_http_oauth.lgt`, configure the client to send
+`Authorization: Bearer get-time-demo-token` and connect to:
+
+https://127.0.0.1:8443/mcp
+
+The temporary certificate is self-signed, so the client must allow it for
+local testing. The exact settings for a fixed Bearer token and self-signed
+certificate are client-specific.
 
 Use a **2026-capable** client for Streamable HTTP (for example MCPJam pinned
 to 2026-07-28). Legacy clients that only speak `initialize` (such as current

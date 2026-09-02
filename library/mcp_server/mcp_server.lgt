@@ -25,11 +25,12 @@
 	:- info([
 		version is 2:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-31,
+		date is 2026-09-02,
 		comment is 'MCP server facade. Selects spec and transport (stdio or Streamable HTTP).',
 		remarks is [
 			'Specs' - '``''2025-06-18''`` (default), ``''2025-11-25''``, and ``''2026-07-28''`` via ``spec/1``.',
-			'Transports' - '``stdio`` (default) and ``streamable_http`` via ``transport/1``.'
+			'Transports' - '``stdio`` (default) and ``streamable_http`` via ``transport/1``.',
+			'OAuth' - 'Streamable HTTP servers can be protected using the ``oauth/4`` option.'
 		]
 	]).
 
@@ -94,6 +95,7 @@
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options0),
 		normalize_options(Name, Options0, Options),
+		validate_transport_options(Options),
 		current_input(Input),
 		current_output(Output),
 		start_transport(Application, Input, Output, Context, Options).
@@ -106,6 +108,7 @@
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options0),
 		normalize_options(Name, Options0, Options),
+		validate_transport_options(Options),
 		start_transport(Application, Input, Output, Context, Options).
 
 	notify(Event) :-
@@ -154,6 +157,15 @@
 		;	Options = [server_name(Name)| Options0]
 		).
 
+	validate_transport_options(Options) :-
+		(	member(oauth(_, _, _, _), Options) ->
+			(	member(transport(streamable_http), Options) ->
+				true
+			;	domain_error(mcp_server_configuration, oauth-stdio)
+			)
+		;	true
+		).
+
 	default_option(server_version('1.0.0')).
 	default_option(server_title('logtalk-mcp-server')).
 	default_option(spec('2025-06-18')).
@@ -186,5 +198,14 @@
 		atom(Path).
 	valid_option(http_origin_check(Flag)) :-
 		once((Flag == true; Flag == false)).
+	:- if(current_logtalk_flag(threads, supported)).
+		valid_option(http_server_options(Options)) :-
+			http_server::valid_options(Options).
+	:- endif.
+	valid_option(oauth(Verifier, ProtectedResource, MetadataDescriptors, ProtectOptions)) :-
+		nonvar(Verifier),
+		atom(ProtectedResource),
+		type::valid(list(compound), MetadataDescriptors),
+		type::valid(list(compound), ProtectOptions).
 
 :- end_object.
