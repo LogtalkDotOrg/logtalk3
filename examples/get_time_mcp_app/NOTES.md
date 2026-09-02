@@ -274,35 +274,35 @@ Example tool call:
       }'
 
 
-    OAuth-protected variant
-    -----------------------
+OAuth-protected variant
+-----------------------
 
-    The protected entry point uses `get_time_oauth_verifier`, a deliberately
-    simple verifier that accepts the fixed Bearer token `get-time-demo-token`
-    with the `get_time` scope. This verifier exists only to keep the example
-    self-contained. Production servers should use a JWT or introspection
-    verifier from the `http_oauth` library.
+The protected entry point uses `get_time_oauth_verifier`, a deliberately
+simple verifier that accepts the fixed Bearer token `get-time-demo-token`
+with the `get_time` scope. This verifier exists only to keep the example
+self-contained. Production servers should use a JWT or introspection
+verifier from the `http_oauth` library.
 
-    The configured protected-resource identifier is
-    `https://127.0.0.1:8443/mcp`. The example uses
-    `http_server_options([scheme(https), temporary_tls_credentials(...)])` to
-    create temporary credentials for local testing. This requires the TLS helper
-    programs documented by the `http_server` library. A deployed server should
-    instead use `tls_certificate_file/1` and `tls_key_file/1` with its real
-    certificate and private key.
+The configured protected-resource identifier is
+`https://127.0.0.1:8443/mcp`. The example uses
+`http_server_options([scheme(https), temporary_tls_credentials(...)])` to
+create temporary credentials for local testing. This requires the TLS helper
+programs documented by the `http_server` library. A deployed server should
+instead use `tls_certificate_file/1` and `tls_key_file/1` with its real
+certificate and private key.
 
-    The RFC 9728 metadata endpoint remains public:
+The RFC 9728 metadata endpoint remains public:
 
-      $ curl -k -sS \
-        'https://127.0.0.1:8443/.well-known/oauth-protected-resource/mcp'
+  $ curl -k -sS \
+    'https://127.0.0.1:8443/.well-known/oauth-protected-resource/mcp'
 
-    Requests to the MCP endpoint require the demo token. Add this header to the
-    discovery and tool-call examples above:
+Requests to the MCP endpoint require the demo token. Add this header to the
+discovery and tool-call examples above:
 
-      -H 'Authorization: Bearer get-time-demo-token'
+  -H 'Authorization: Bearer get-time-demo-token'
 
-    A request without that header receives `401 Unauthorized`; a valid token
-    without the required `get_time` scope would receive `403 Forbidden`.
+A request without that header receives `401 Unauthorized`; a valid token
+without the required `get_time` scope would receive `403 Forbidden`.
 
 
 MCP client configuration
@@ -393,14 +393,15 @@ Protocol interaction examples
 Files
 -----
 
-| File                         | Role                                                |
-|------------------------------|-----------------------------------------------------|
-| `get_time.lgt`               | Application: tool, `ui://` resource, Apps metadata  |
-| `mcp-app.html`               | Minimal Apps View (custom `postMessage` client)     |
-| `server_2025_06_18.lgt`      | 2025-06-18 stdio server entry point                 |
-| `server_2026_07_28.lgt`      | 2026-07-28 stdio server entry point                 |
-| `server_streamable_http.lgt` | 2026-07-28 Streamable HTTP server entry point       |
-| `loader.lgt`                 | Example loader                                      |
-| `tests.lgt`                  | Unit tests (server-side Apps contract)              |
-| `tester.lgt`                 | Runs the test suite                                 |
-| `NOTES.md`                   | This file                                           |
+| File                               | Role                                                  |
+|------------------------------------|-------------------------------------------------------|
+| `get_time.lgt`                     | Application: tool, `ui://` resource, Apps metadata    |
+| `mcp-app.html`                     | Minimal Apps View (custom `postMessage` client)       |
+| `server_2025_06_18.lgt`            | 2025-06-18 stdio server entry point                   |
+| `server_2026_07_28.lgt`            | 2026-07-28 stdio server entry point                   |
+| `server_streamable_http.lgt`       | 2026-07-28 Streamable HTTP server entry point         |
+| `server_streamable_http_oauth.lgt` | 2026-07-28 Streamable HTTP server + OAuth entry point |
+| `loader.lgt`                       | Example loader                                        |
+| `tests.lgt`                        | Unit tests (server-side Apps contract)                |
+| `tester.lgt`                       | Runs the test suite                                   |
+| `NOTES.md`                         | This file                                             |
