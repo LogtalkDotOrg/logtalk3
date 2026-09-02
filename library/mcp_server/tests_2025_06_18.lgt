@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-31,
+		date is 2026-09-02,
 		comment is 'Unit tests for the MCP 2025-06-18 adapter.'
 	]).
 
@@ -643,6 +643,19 @@
 		has_pair(Completion, total, Total),
 		has_pair(Completion, hasMore, HasMore).
 
+	test(mcp_server_resource_completion_unknown_argument_01, deterministic(Code == -32602)) :-
+		run_mcp_exchange_with(
+			test_completion_tools,
+			[completion_request(
+				{type-'ref/resource', uri-'logtalk://cities/{city}'},
+				{name-unknown, value-''},
+				{},
+				1
+			)],
+			[Response]
+		),
+		error_code(Response, Code).
+
 	test(mcp_server_completion_unknown_prompt_argument_01, deterministic(Code == -32602)) :-
 		run_mcp_exchange_with(
 			test_completion_tools,
@@ -851,6 +864,13 @@
 		is_response(Response),
 		result(Response, Result),
 		has_pair(Result, resourceTemplates, ResourceTemplates).
+
+	test(mcp_server_resource_templates_list_invalid_01, error(domain_error(uri_template, 'logtalk://test/broken/{path'))) :-
+		run_mcp_exchange_with(
+			test_invalid_resource_template_tools,
+			[resource_templates_list_request(1)],
+			_
+		).
 
 	test(mcp_server_resource_template_read_01, deterministic(Text == '{"name":"alice"}')) :-
 		run_mcp_exchange_with(

@@ -1071,11 +1071,13 @@ resource descriptors:
   - with title
 
 ``URITemplate`` is an RFC 6570 URI template atom. Templates are listed
-using ``resources/templates/list``. The server checks the literal
-template segments before delegating a concrete URI to
-``resource_read/3``; the application remains responsible for validating
-template expressions, authorizing the concrete URI, and producing its
-contents.
+using ``resources/templates/list``. The server validates the complete
+descriptor list before advertising it. An invalid template raises a
+``domain_error(uri_template, URITemplate)`` error and no partial list is
+returned. For valid templates, the server checks the literal template
+segments before delegating a concrete URI to ``resource_read/3``; the
+application remains responsible for validating template expressions,
+authorizing the concrete URI, and producing its contents.
 
 The ``resource_read/3`` predicate handles resource read requests. Its
 result term must be ``contents(ContentList)`` where each content item

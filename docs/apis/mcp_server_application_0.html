@@ -468,6 +468,7 @@
 <div class="line-block">
 <div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
 <div class="line"><a class="reference internal" href="term_io_0.html#term-io-0"><span class="std std-ref">term_io</span></a></div>
+<div class="line"><a class="reference internal" href="uri_template_1.html#uri-template-1"><span class="std std-ref">uri_template(Representation)</span></a></div>
 <div class="line"><a class="reference internal" href="user_0.html#user-0"><span class="std std-ref">user</span></a></div>
 </div>
 </div>
@@ -584,7 +585,7 @@
 </section>
 <section id="resource-template-descriptors-to-json-2">
 <span id="mcp-server-application-0-resource-template-descriptors-to-json-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">resource_template_descriptors_to_json/2</span></code></a><a class="headerlink" href="#resource-template-descriptors-to-json-2" title="Link to this heading"></a></h3>
-<p>Converts resource template descriptors (4-arg or 5-arg) into MCP JSON resource template definitions.</p>
+<p>Converts resource template descriptors (4-arg or 5-arg) into MCP JSON resource template definitions. No partial list is returned when a descriptor is invalid.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -598,7 +599,16 @@
 </div>
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_template_descriptors_to_json(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">resource_template_descriptors_to_json(+list,-list)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line">A descriptor contains an invalid RFC 6570 URI template <code class="docutils literal notranslate"><span class="pre">URITemplate</span></code>:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(uri_template,URITemplate)</span></code></div>
+</div>
 </div>
 </div>
 <hr class="docutils" />

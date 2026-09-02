@@ -40,6 +40,11 @@ To test this library predicates, load the ``tester.lgt`` file:
 
    | ?- logtalk_load(uri_template(tester)).
 
+The test suite includes the complete RFC 6570 example matrix, ported to
+run with all three supported text representations. ASCII tests are
+shared by all backends. Unicode tests are kept in a separate file and
+are included only when the backend reports Unicode support.
+
 Bindings
 --------
 

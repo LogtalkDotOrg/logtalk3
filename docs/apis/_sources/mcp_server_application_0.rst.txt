@@ -26,6 +26,7 @@ Common predicates for MCP servers: tool/prompt/resource descriptor conversion, c
 | **Uses:**
 |    :ref:`list <list/0>`
 |    :ref:`term_io <term_io/0>`
+|    :ref:`uri_template(Representation) <uri_template/1>`
 |    :ref:`user <user/0>`
 
 | **Remarks:**
@@ -107,7 +108,7 @@ Converts resource descriptors (4-arg or 5-arg) into MCP JSON resource definition
 ``resource_template_descriptors_to_json/2``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Converts resource template descriptors (4-arg or 5-arg) into MCP JSON resource template definitions.
+Converts resource template descriptors (4-arg or 5-arg) into MCP JSON resource template definitions. No partial list is returned when a descriptor is invalid.
 
 | **Compilation flags:**
 |    ``static``
@@ -115,7 +116,11 @@ Converts resource template descriptors (4-arg or 5-arg) into MCP JSON resource t
 | **Template:**
 |    ``resource_template_descriptors_to_json(Descriptors,ResourceTemplates)``
 | **Mode and number of proofs:**
-|    ``resource_template_descriptors_to_json(+list,-list)`` - ``one``
+|    ``resource_template_descriptors_to_json(+list,-list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    A descriptor contains an invalid RFC 6570 URI template ``URITemplate``:
+|        ``domain_error(uri_template,URITemplate)``
 
 
 ------------

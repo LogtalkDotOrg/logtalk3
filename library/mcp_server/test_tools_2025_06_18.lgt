@@ -218,6 +218,27 @@
 :- end_object.
 
 
+% Test application with an invalid resource template
+
+:- object(test_invalid_resource_template_tools,
+	implements([mcp_tool_protocol, mcp_resource_protocol])).
+
+	capabilities([resources]).
+
+	tools([]).
+
+	resources([]).
+
+	resource_templates([
+		resource_template('logtalk://test/broken/{path', broken, 'Malformed URI template', 'text/plain')
+	]).
+
+	resource_read(_, _, _) :-
+		fail.
+
+:- end_object.
+
+
 % Test application with prompts support
 
 :- object(test_prompt_tools,

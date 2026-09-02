@@ -1518,11 +1518,13 @@ without title</p></li>
 - with title</p></li>
 </ul>
 <p><code class="docutils literal notranslate"><span class="pre">URITemplate</span></code> is an RFC 6570 URI template atom. Templates are listed
-using <code class="docutils literal notranslate"><span class="pre">resources/templates/list</span></code>. The server checks the literal
-template segments before delegating a concrete URI to
-<code class="docutils literal notranslate"><span class="pre">resource_read/3</span></code>; the application remains responsible for validating
-template expressions, authorizing the concrete URI, and producing its
-contents.</p>
+using <code class="docutils literal notranslate"><span class="pre">resources/templates/list</span></code>. The server validates the complete
+descriptor list before advertising it. An invalid template raises a
+<code class="docutils literal notranslate"><span class="pre">domain_error(uri_template,</span> <span class="pre">URITemplate)</span></code> error and no partial list is
+returned. For valid templates, the server checks the literal template
+segments before delegating a concrete URI to <code class="docutils literal notranslate"><span class="pre">resource_read/3</span></code>; the
+application remains responsible for validating template expressions,
+authorizing the concrete URI, and producing its contents.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">resource_read/3</span></code> predicate handles resource read requests. Its
 result term must be <code class="docutils literal notranslate"><span class="pre">contents(ContentList)</span></code> where each content item
 is:</p>

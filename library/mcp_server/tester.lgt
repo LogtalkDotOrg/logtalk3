@@ -33,6 +33,7 @@
 	logtalk_load(json_rpc(loader)),
 	logtalk_load(options(loader)),
 	logtalk_load(term_io(loader)),
+	logtalk_load(uri_template(loader)),
 	logtalk_load([
 		mcp_tool_protocol,
 		mcp_completion_protocol,

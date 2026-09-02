@@ -51,10 +51,13 @@
 	]).
 
 	:- protected(resource_template_descriptors_to_json/2).
-	:- mode(resource_template_descriptors_to_json(+list, -list), one).
+	:- mode(resource_template_descriptors_to_json(+list, -list), one_or_error).
 	:- info(resource_template_descriptors_to_json/2, [
-		comment is 'Converts resource template descriptors (4-arg or 5-arg) into MCP JSON resource template definitions.',
-		argnames is ['Descriptors', 'ResourceTemplates']
+		comment is 'Converts resource template descriptors (4-arg or 5-arg) into MCP JSON resource template definitions. No partial list is returned when a descriptor is invalid.',
+		argnames is ['Descriptors', 'ResourceTemplates'],
+		exceptions is [
+			'A descriptor contains an invalid RFC 6570 URI template ``URITemplate``' - domain_error(uri_template, 'URITemplate')
+		]
 	]).
 
 	:- protected(application_resource_template_uri/2).
@@ -291,6 +294,11 @@
 
 	resource_template_descriptors_to_json([], []).
 	resource_template_descriptors_to_json([Descriptor| Descriptors], [ResourceTemplate| ResourceTemplates]) :-
+		resource_template_uri(Descriptor, URITemplate),
+		( 	uri_template(atom)::valid(URITemplate) ->
+			true
+		;	domain_error(uri_template, URITemplate)
+		),
 		resource_template_descriptor_to_json(Descriptor, ResourceTemplate),
 		resource_template_descriptors_to_json(Descriptors, ResourceTemplates).
 
@@ -361,7 +369,7 @@
 		prompt_descriptor_name_arguments(PromptDescriptor, Name, Arguments),
 		member(argument(ArgumentName, _, _), Arguments),
 		!.
-	completion_reference(Application, JsonReference, _ArgumentName, resource(URI)) :-
+	completion_reference(Application, JsonReference, ArgumentName, resource(URI)) :-
 		has_pair(JsonReference, type, 'ref/resource'),
 		has_pair(JsonReference, uri, URI),
 		atom(URI),
@@ -372,7 +380,9 @@
 			true
 		;	Application::resource_templates(ResourceTemplateDescriptors),
 			member(ResourceTemplateDescriptor, ResourceTemplateDescriptors),
-			resource_template_uri(ResourceTemplateDescriptor, URI)
+			resource_template_uri(ResourceTemplateDescriptor, URI),
+			uri_template(atom)::variables(URI, Variables),
+			memberchk(ArgumentName, Variables)
 		),
 		!.
 
