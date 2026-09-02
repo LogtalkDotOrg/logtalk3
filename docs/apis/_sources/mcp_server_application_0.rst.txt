@@ -101,6 +101,44 @@ Converts resource descriptors (4-arg or 5-arg) into MCP JSON resource definition
 
 ------------
 
+.. index:: resource_template_descriptors_to_json/2
+.. _mcp_server_application/0::resource_template_descriptors_to_json/2:
+
+``resource_template_descriptors_to_json/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts resource template descriptors (4-arg or 5-arg) into MCP JSON resource template definitions.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``resource_template_descriptors_to_json(Descriptors,ResourceTemplates)``
+| **Mode and number of proofs:**
+|    ``resource_template_descriptors_to_json(+list,-list)`` - ``one``
+
+
+------------
+
+.. index:: application_resource_template_uri/2
+.. _mcp_server_application/0::application_resource_template_uri/2:
+
+``application_resource_template_uri/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that a concrete resource URI matches the literal segments of one of the application resource templates. Full RFC 6570 expression validation and authorization remain application responsibilities.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``application_resource_template_uri(Application,URI)``
+| **Mode and number of proofs:**
+|    ``application_resource_template_uri(+object_identifier,+atom)`` - ``zero_or_one``
+
+
+------------
+
 .. index:: auto_dispatch_tool/5
 .. _mcp_server_application/0::auto_dispatch_tool/5:
 

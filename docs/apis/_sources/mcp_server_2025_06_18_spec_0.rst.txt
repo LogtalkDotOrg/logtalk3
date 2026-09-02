@@ -237,6 +237,25 @@ Handles the ``resources/list`` request. Overridable so later specs can enrich re
 
 ------------
 
+.. index:: handle_resources_templates_list/3
+.. _mcp_server_2025_06_18_spec/0::handle_resources_templates_list/3:
+
+``handle_resources_templates_list/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Handles the ``resources/templates/list`` request. Overridable so later specs can enrich resource template descriptors (e.g. icons).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``handle_resources_templates_list(Id,Options,Outcome)``
+| **Mode and number of proofs:**
+|    ``handle_resources_templates_list(+nonvar,+list,-nonvar)`` - ``one``
+
+
+------------
+
 .. index:: handle_resources_read/4
 .. _mcp_server_2025_06_18_spec/0::handle_resources_read/4:
 

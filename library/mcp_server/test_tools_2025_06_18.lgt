@@ -277,6 +277,11 @@
 		resource('logtalk://test/multi', multi, 'Multiple content items', 'text/plain')
 	]).
 
+	resource_templates([
+		resource_template('logtalk://test/users/{user}', user, 'A user record', 'application/json'),
+		resource_template('logtalk://test/files/{path}', file, 'Project File', 'A project file', 'text/plain')
+	]).
+
 	resource_read('logtalk://test/greeting', _Arguments, Result) :-
 		Result = contents([
 			text_content('logtalk://test/greeting', 'text/plain', 'Hello from Logtalk!')
@@ -291,6 +296,10 @@
 		Result = contents([
 			text_content('logtalk://test/multi', 'text/plain', 'First part'),
 			text_content('logtalk://test/multi', 'text/plain', 'Second part')
+		]).
+	resource_read('logtalk://test/users/alice', _Arguments, Result) :-
+		Result = contents([
+			text_content('logtalk://test/users/alice', 'application/json', '{"name":"alice"}')
 		]).
 
 :- end_object.

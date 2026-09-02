@@ -287,6 +287,31 @@
 		has_pair(Result, contents, [Item| _]),
 		has_pair(Item, text, Text).
 
+	test(http_resource_templates_list_01, deterministic) :-
+		call_json_rpc(
+			test_resources_2026,
+			resource_templates_list_request(1),
+			HTTPResponse
+		),
+		http_json_response(HTTPResponse, Response),
+		result(Response, Result),
+		has_pair(Result, resultType, complete),
+		has_pair(Result, resourceTemplates, [ResourceTemplate]),
+		has_pair(ResourceTemplate, uriTemplate, 'logtalk://test/data/{name}'),
+		has_pair(Result, ttlMs, 1500),
+		has_pair(Result, cacheScope, public).
+
+	test(http_resource_templates_progress_01, deterministic) :-
+		call_json_rpc(
+			test_resources_2026,
+			resource_templates_list_with_progress(t1, 1),
+			HTTPResponse
+		),
+		http_json_response(HTTPResponse, Response),
+		result(Response, Result),
+		has_pair(Result, resourceTemplates, [_| _]),
+		has_pair(Result, resultType, complete).
+
 	% progress / SSE body (buffered path — no live stream attached)
 
 	test(http_progress_token_sse_content_type_01, subsumes(http_response(200, _, _), HTTPResponse)) :-
@@ -715,6 +740,12 @@
 	spec_to_message(resources_list_request(Id), Message) :-
 		meta_2026(Meta),
 		request('resources/list', {'_meta'-Meta}, Id, Message).
+	spec_to_message(resource_templates_list_request(Id), Message) :-
+		meta_2026(Meta),
+		request('resources/templates/list', {'_meta'-Meta}, Id, Message).
+	spec_to_message(resource_templates_list_with_progress(Token, Id), Message) :-
+		meta_2026_progress(Token, Meta),
+		request('resources/templates/list', {'_meta'-Meta}, Id, Message).
 	spec_to_message(resources_read_request(URI, Id), Message) :-
 		meta_2026(Meta),
 		request('resources/read', {uri-URI, '_meta'-Meta}, Id, Message).

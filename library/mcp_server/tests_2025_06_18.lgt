@@ -35,7 +35,7 @@
 	]).
 
 	:- uses(list, [
-		member/2
+		length/2, member/2
 	]).
 
 	cover(mcp_server).
@@ -356,7 +356,7 @@
 	% result format tests
 
 	% multi-content result from results/1 format
-	test(mcp_server_results_format_01, deterministic(list::length(Content, 2))) :-
+	test(mcp_server_results_format_01, deterministic(length(Content, 2))) :-
 		run_mcp_exchange_with(
 			test_result_tools,
 			[initialize_request(1),
@@ -443,7 +443,7 @@
 		has_pair(Prompt, name, greet_prompt).
 
 	% prompts list includes all declared prompts
-	test(mcp_server_prompts_list_02, deterministic(list::length(Prompts, 3))) :-
+	test(mcp_server_prompts_list_02, deterministic(length(Prompts, 3))) :-
 		run_mcp_exchange_with(
 			test_prompt_tools,
 			[prompts_list_request(1)],
@@ -537,7 +537,7 @@
 		has_pair(Result, messages, [_]).
 
 	% get a multi-turn prompt
-	test(mcp_server_prompts_get_multi_turn_01, deterministic(list::length(Messages, 2))) :-
+	test(mcp_server_prompts_get_multi_turn_01, deterministic(length(Messages, 2))) :-
 		run_mcp_exchange_with(
 			test_prompt_tools,
 			[prompts_get_request(multi_turn_prompt, {topic-'Logtalk'}, 1)],
@@ -639,7 +639,7 @@
 		has_pair(Resource, uri, 'logtalk://test/greeting').
 
 	% resources list includes all declared resources
-	test(mcp_server_resources_list_02, deterministic(list::length(Resources, 3))) :-
+	test(mcp_server_resources_list_02, deterministic(length(Resources, 3))) :-
 		run_mcp_exchange_with(
 			test_resource_tools,
 			[resources_list_request(1)],
@@ -674,6 +674,52 @@
 		has_pair(Resource, description, 'A greeting message'),
 		has_pair(Resource, mimeType, 'text/plain').
 
+	% resources/templates/list tests
+
+	test(mcp_server_resource_templates_list_01, deterministic(length(ResourceTemplates, 2))) :-
+		run_mcp_exchange_with(
+			test_resource_tools,
+			[resource_templates_list_request(1)],
+			[Response]
+		),
+		is_response(Response),
+		result(Response, Result),
+		has_pair(Result, resourceTemplates, ResourceTemplates).
+
+	test(mcp_server_resource_templates_list_fields_01, true) :-
+		run_mcp_exchange_with(
+			test_resource_tools,
+			[resource_templates_list_request(1)],
+			[Response]
+		),
+		result(Response, Result),
+		has_pair(Result, resourceTemplates, [First, Second]),
+		has_pair(First, uriTemplate, 'logtalk://test/users/{user}'),
+		has_pair(First, name, user),
+		has_pair(First, description, 'A user record'),
+		has_pair(First, mimeType, 'application/json'),
+		has_pair(Second, title, 'Project File').
+
+	test(mcp_server_resource_templates_list_empty_01, deterministic(ResourceTemplates == [])) :-
+		run_mcp_exchange(
+			[resource_templates_list_request(1)],
+			[Response]
+		),
+		is_response(Response),
+		result(Response, Result),
+		has_pair(Result, resourceTemplates, ResourceTemplates).
+
+	test(mcp_server_resource_template_read_01, deterministic(Text == '{"name":"alice"}')) :-
+		run_mcp_exchange_with(
+			test_resource_tools,
+			[resources_read_request('logtalk://test/users/alice', 1)],
+			[Response]
+		),
+		is_response(Response),
+		result(Response, Result),
+		has_pair(Result, contents, [ContentItem]),
+		has_pair(ContentItem, text, Text).
+
 	% resources/read tests
 
 	% read a text resource
@@ -704,7 +750,7 @@
 		has_pair(ContentItem, text, _).
 
 	% read a resource with multiple content items
-	test(mcp_server_resources_read_multi_01, deterministic(list::length(Contents, 2))) :-
+	test(mcp_server_resources_read_multi_01, deterministic(length(Contents, 2))) :-
 		run_mcp_exchange_with(
 			test_resource_tools,
 			[resources_read_request('logtalk://test/multi', 1)],
@@ -1069,6 +1115,8 @@
 		request('prompts/get', {name-PromptName}, Id, Message).
 	spec_to_message(resources_list_request(Id), Message) :-
 		request('resources/list', {}, Id, Message).
+	spec_to_message(resource_templates_list_request(Id), Message) :-
+		request('resources/templates/list', {}, Id, Message).
 	spec_to_message(resources_read_request(URI, Id), Message) :-
 		request('resources/read', {uri-URI}, Id, Message).
 

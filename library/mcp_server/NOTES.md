@@ -615,7 +615,8 @@ for listing responses:
 
 Each icon is a curly-term. Common fields: `src` (required URL), optional
 `mimeType`, optional `sizes` (list of size atoms such as `'48x48'`). Icons are
-omitted when the predicate is undefined or fails.
+omitted when the predicate is undefined or fails. The first argument of
+`resource_icons/2` can be a concrete resource URI or a resource URI template.
 
 ### URL-mode elicitation (SEP-1036)
 
@@ -708,6 +709,7 @@ Caching (2026-07-28 spec)
 Optional `mcp_cache_protocol` with `cache_policy/4`:
 
 	cache_policy(tools_list, _, 1000, private).
+	cache_policy(resources_templates_list, _, 1000, public).
 	cache_policy(resources_read, 'logtalk://app/data', 5000, public).
 
 Cache fields (`ttlMs`, `cacheScope`) are attached only to complete results
@@ -848,6 +850,15 @@ capabilities:
 			resource('logtalk://my-app/readme', readme, 'Application readme', 'text/plain')
 		]).
 
+		resource_templates([
+			resource_template(
+				'logtalk://my-app/users/{name}',
+				user,
+				'User record',
+				'application/json'
+			)
+		]).
+
 		resource_read('logtalk://my-app/config', _Arguments, Result) :-
 			Result = contents([
 				text_content('logtalk://my-app/config', 'application/json', '{"name": "my-app", "version": "1.0"}')
@@ -856,6 +867,11 @@ capabilities:
 		resource_read('logtalk://my-app/readme', _Arguments, Result) :-
 			Result = contents([
 				text_content('logtalk://my-app/readme', 'text/plain', 'Welcome to my application.')
+			]).
+
+		resource_read('logtalk://my-app/users/alice', _Arguments, Result) :-
+			Result = contents([
+				text_content('logtalk://my-app/users/alice', 'application/json', '{"name":"alice"}')
 			]).
 
 	:- end_object.
@@ -874,6 +890,18 @@ Where:
 - `Description` - a human-readable description (an atom)
 - `MimeType` - the MIME type of the resource content (an atom, e.g.
   `'text/plain'`, `'application/json'`)
+
+The optional `resource_templates/1` predicate returns parameterized resource
+descriptors:
+
+- `resource_template(URITemplate, Name, Description, MimeType)` - without title
+- `resource_template(URITemplate, Name, Title, Description, MimeType)` - with title
+
+`URITemplate` is an RFC 6570 URI template atom. Templates are listed using
+`resources/templates/list`. The server checks the literal template segments
+before delegating a concrete URI to `resource_read/3`; the application remains
+responsible for validating template expressions, authorizing the concrete URI,
+and producing its contents.
 
 The `resource_read/3` predicate handles resource read requests. Its
 result term must be `contents(ContentList)` where each content item is:
@@ -1017,6 +1045,7 @@ implemented by an application. See the API documentation for full details.
 ### `mcp_resource_protocol`
 
 - `resources/1` - returns the list of resource descriptors
+- `resource_templates/1` - optionally returns resource template descriptors
 - `resource_read/3` - handles a resource read request
 
 ### `mcp_multiround_protocol` (2026-07-28)
@@ -1049,6 +1078,7 @@ responses may include optional `icons`. Form and URL modes of
 | `prompts/list`              | Request                    | List prompts (optional icons)     |
 | `prompts/get`               | Request                    | Get a prompt                      |
 | `resources/list`            | Request                    | List resources (optional icons)   |
+| `resources/templates/list`  | Request                    | List templates (optional icons)   |
 | `resources/read`            | Request                    | Read a resource                   |
 | `elicitation/create`        | Request (server -> client) | Form or URL mode user input       |
 
@@ -1062,6 +1092,7 @@ responses may include optional `icons`. Form and URL modes of
 | `prompts/list`                             | Request                         | List prompts                    |
 | `prompts/get`                              | Request                         | Get a prompt (supports MRTR)    |
 | `resources/list`                           | Request                         | List resources                  |
+| `resources/templates/list`                 | Request                         | List resource templates         |
 | `resources/read`                           | Request                         | Read a resource (supports MRTR) |
 | `subscriptions/listen`                     | Request                         | Open a subscription             |
 | `notifications/cancelled`                  | Notification                    | Cancel in-flight request        |
@@ -1132,8 +1163,8 @@ Host <-> iframe JSON-RPC (`ui/initialize`, sandbox, `postMessage`).
 Limitations
 -----------
 
-Resource templates, completion, authorization, roots (deprecated), sampling
-(deprecated), and experimental tasks are not currently implemented.
+Completion, roots (deprecated), sampling (deprecated), and experimental tasks
+are not currently implemented.
 
 Synchronous elicitation is restricted to the stdio transport for the 2025
 specs.

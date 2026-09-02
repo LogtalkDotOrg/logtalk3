@@ -344,6 +344,8 @@
 		handle_prompts_get(Params, Id, Output, Options).
 	do_dispatch_('resources/list', Params, Id, Output, Options) :-
 		handle_resources_list(Params, Id, Output, Options).
+	do_dispatch_('resources/templates/list', Params, Id, Output, Options) :-
+		handle_resources_templates_list(Params, Id, Output, Options).
 	do_dispatch_('resources/read', Params, Id, Output, Options) :-
 		handle_resources_read(Params, Id, Output, Options).
 	do_dispatch_('subscriptions/listen', Params, Id, Output, _) :-
@@ -572,6 +574,24 @@
 		},
 		send_result(Id, Result, Output).
 
+	% resources/templates/list
+
+	handle_resources_templates_list(_Params, Id, Output, Options) :-
+		^^option(application(Application), Options),
+		(	conforms_to_protocol(Application, mcp_resource_protocol),
+			Application::resource_templates(ResourceTemplateDescriptors) ->
+			^^resource_template_descriptors_to_json(ResourceTemplateDescriptors, JsonResourceTemplates)
+		;	JsonResourceTemplates = []
+		),
+		resolve_cache(resources_templates_list, {}, TTL, Scope, Options),
+		Result = {
+			resourceTemplates-JsonResourceTemplates,
+			resultType-complete,
+			ttlMs-TTL,
+			cacheScope-Scope
+		},
+		send_result(Id, Result, Output).
+
 	% resources/read (with MRTR + cache)
 
 	handle_resources_read(Params, Id, Output, Options) :-
@@ -586,6 +606,7 @@
 			Application::resources(ResourceDescriptors),
 			(	member(resource(URI, _, _, _), ResourceDescriptors)
 			;	member(resource(URI, _, _, _, _), ResourceDescriptors)
+			;	^^application_resource_template_uri(Application, URI)
 			) ->
 			execute_resource_round(
 				Application, URI,

@@ -269,6 +269,32 @@
 		assertion(has_pair(Result, ttlMs, _)),
 		assertion(has_pair(Result, cacheScope, _)).
 
+	test(mcp26_resource_templates_list_01, deterministic) :-
+		run_2026(
+			test_resources_2026,
+			[resource_templates_list_request(1)],
+			[Response]
+		),
+		assertion(is_response(Response)),
+		result(Response, Result),
+		assertion(has_pair(Result, resultType, complete)),
+		has_pair(Result, resourceTemplates, [ResourceTemplate]),
+		assertion(has_pair(ResourceTemplate, uriTemplate, 'logtalk://test/data/{name}')),
+		assertion(has_pair(ResourceTemplate, title, 'Named Test Data')),
+		assertion(has_pair(Result, ttlMs, 1500)),
+		assertion(has_pair(Result, cacheScope, public)).
+
+	test(mcp26_resource_template_read_01, deterministic(Text == 'Hello template')) :-
+		run_2026(
+			test_resources_2026,
+			[resources_read_request('logtalk://test/data/example', 1)],
+			[Response]
+		),
+		assertion(is_response(Response)),
+		result(Response, Result),
+		has_pair(Result, contents, [Item]),
+		has_pair(Item, text, Text).
+
 	test(mcp26_resources_read_01, deterministic(Text == 'Hello 2026')) :-
 		run_2026(
 			test_resources_2026,
@@ -518,6 +544,9 @@
 	spec_to_message(resources_list_request(Id), Message) :-
 		meta_2026(Meta),
 		request('resources/list', {'_meta'-Meta}, Id, Message).
+	spec_to_message(resource_templates_list_request(Id), Message) :-
+		meta_2026(Meta),
+		request('resources/templates/list', {'_meta'-Meta}, Id, Message).
 	spec_to_message(resources_read_request(URI, Id), Message) :-
 		meta_2026(Meta),
 		request('resources/read', {uri-URI, '_meta'-Meta}, Id, Message).

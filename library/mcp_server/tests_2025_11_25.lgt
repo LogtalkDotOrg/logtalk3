@@ -171,6 +171,21 @@
 		has_pair(Resource, icons, Icons),
 		Icons = [_| _].
 
+	% icons on resource templates
+
+	test(spec_2025_11_25_resource_template_icons_01, true) :-
+		run_exchange(
+			[resource_templates_list_request(1)],
+			[Response]
+		),
+		is_response(Response),
+		result(Response, Result),
+		has_pair(Result, resourceTemplates, [ResourceTemplate]),
+		has_pair(ResourceTemplate, uriTemplate, 'logtalk://test/palettes/{name}'),
+		has_pair(ResourceTemplate, title, 'Named Palette'),
+		has_pair(ResourceTemplate, icons, Icons),
+		Icons = [_| _].
+
 	% form elicitation still works; enum schema is passed through (SEP-1330)
 
 	test(spec_2025_11_25_enum_schema_01, true) :-
@@ -300,6 +315,8 @@
 		request('prompts/list', {}, Id, Message).
 	spec_to_message(resources_list_request(Id), Message) :-
 		request('resources/list', {}, Id, Message).
+	spec_to_message(resource_templates_list_request(Id), Message) :-
+		request('resources/templates/list', {}, Id, Message).
 	spec_to_message(elicit_accept_response(Id, Content), Message) :-
 		response({action-accept, content-Content}, Id, Message).
 

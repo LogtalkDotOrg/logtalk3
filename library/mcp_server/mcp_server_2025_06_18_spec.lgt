@@ -100,6 +100,13 @@
 		argnames is ['Id', 'Options', 'Outcome']
 	]).
 
+	:- protected(handle_resources_templates_list/3).
+	:- mode(handle_resources_templates_list(+nonvar, +list, -nonvar), one).
+	:- info(handle_resources_templates_list/3, [
+		comment is 'Handles the ``resources/templates/list`` request. Overridable so later specs can enrich resource template descriptors (e.g. icons).',
+		argnames is ['Id', 'Options', 'Outcome']
+	]).
+
 	:- protected(handle_resources_read/4).
 	:- mode(handle_resources_read(+nonvar, +nonvar, +list, -nonvar), one).
 	:- info(handle_resources_read/4, [
@@ -258,6 +265,8 @@
 			::handle_prompts_get(Message, Id, Options, Outcome)
 		;	Method == 'resources/list' ->
 			::handle_resources_list(Id, Options, Outcome)
+		;	Method == 'resources/templates/list' ->
+			::handle_resources_templates_list(Id, Options, Outcome)
 		;	Method == 'resources/read' ->
 			::handle_resources_read(Message, Id, Options, Outcome)
 		;	method_not_found(Id, ErrorResponse),
@@ -520,6 +529,19 @@
 		response(Result, Id, Response),
 		Outcome = reply(Response).
 
+	% resources/templates/list
+
+	handle_resources_templates_list(Id, Options, Outcome) :-
+		^^option(application(Application), Options),
+		(	conforms_to_protocol(Application, mcp_resource_protocol),
+			Application::resource_templates(ResourceTemplateDescriptors) ->
+			^^resource_template_descriptors_to_json(ResourceTemplateDescriptors, JsonResourceTemplates)
+		;	JsonResourceTemplates = []
+		),
+		Result = {resourceTemplates-JsonResourceTemplates},
+		response(Result, Id, Response),
+		Outcome = reply(Response).
+
 	% resources/read
 
 	handle_resources_read(Message, Id, Options, Outcome) :-
@@ -537,6 +559,7 @@
 			Application::resources(ResourceDescriptors),
 			(	member(resource(URI, _, _, _), ResourceDescriptors)
 			;	member(resource(URI, _, _, _, _), ResourceDescriptors)
+			;	^^application_resource_template_uri(Application, URI)
 			) ->
 			execute_resource_read(Application, URI, Id, Outcome)
 		;	error_response(-32601, 'Resource not found', Id, ErrorResponse),

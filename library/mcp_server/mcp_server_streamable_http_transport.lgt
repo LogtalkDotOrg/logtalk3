@@ -715,6 +715,8 @@
 		handle_prompts_get(Params, Id, HTTPResponse).
 	do_dispatch_('resources/list', Params, Id, HTTPResponse) :-
 		handle_resources_list(Params, Id, HTTPResponse).
+	do_dispatch_('resources/templates/list', Params, Id, HTTPResponse) :-
+		handle_resources_templates_list(Params, Id, HTTPResponse).
 	do_dispatch_('resources/read', Params, Id, HTTPResponse) :-
 		handle_resources_read(Params, Id, HTTPResponse).
 	do_dispatch_('subscriptions/listen', Params, Id, HTTPResponse) :-
@@ -1168,6 +1170,17 @@
 		),
 		resolve_cache(resources_list, {}, TTL, Scope, Options),
 		json_result(Id, {resources-Json, resultType-complete, ttlMs-TTL, cacheScope-Scope}, HTTPResponse).
+
+	handle_resources_templates_list(_, Id, HTTPResponse) :-
+		server_options_(Options),
+		^^option(application(Application), Options),
+		(	conforms_to_protocol(Application, mcp_resource_protocol),
+			Application::resource_templates(Descriptors) ->
+			^^resource_template_descriptors_to_json(Descriptors, Json)
+		;	Json = []
+		),
+		resolve_cache(resources_templates_list, {}, TTL, Scope, Options),
+		json_result(Id, {resourceTemplates-Json, resultType-complete, ttlMs-TTL, cacheScope-Scope}, HTTPResponse).
 
 	handle_resources_read(Params, Id, HTTPResponse) :-
 		^^has_pair(Params, uri, URI),

@@ -79,6 +79,9 @@
 	resource_icons('logtalk://test/palette', [
 		{src-'https://example.com/icons/resource.png', mimeType-'image/png'}
 	]).
+	resource_icons('logtalk://test/palettes/{name}', [
+		{src-'https://example.com/icons/resource-template.png', mimeType-'image/png'}
+	]).
 
 	echo(Input, Input).
 
@@ -134,6 +137,16 @@
 			palette,
 			'Color Palette',
 			'A sample palette resource',
+			'application/json'
+		)
+	]).
+
+	resource_templates([
+		resource_template(
+			'logtalk://test/palettes/{name}',
+			palette,
+			'Named Palette',
+			'A named palette resource',
 			'application/json'
 		)
 	]).

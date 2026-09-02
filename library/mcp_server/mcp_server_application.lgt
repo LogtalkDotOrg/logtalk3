@@ -50,6 +50,20 @@
 		argnames is ['Descriptors', 'Application', 'Resources']
 	]).
 
+	:- protected(resource_template_descriptors_to_json/2).
+	:- mode(resource_template_descriptors_to_json(+list, -list), one).
+	:- info(resource_template_descriptors_to_json/2, [
+		comment is 'Converts resource template descriptors (4-arg or 5-arg) into MCP JSON resource template definitions.',
+		argnames is ['Descriptors', 'ResourceTemplates']
+	]).
+
+	:- protected(application_resource_template_uri/2).
+	:- mode(application_resource_template_uri(+object_identifier, +atom), zero_or_one).
+	:- info(application_resource_template_uri/2, [
+		comment is 'Checks that a concrete resource URI matches the literal segments of one of the application resource templates. Full RFC 6570 expression validation and authorization remain application responsibilities.',
+		argnames is ['Application', 'URI']
+	]).
+
 	:- protected(auto_dispatch_tool/5).
 	:- mode(auto_dispatch_tool(+object_identifier, +atom, +integer, +compound, -compound), one).
 	:- info(auto_dispatch_tool/5, [
@@ -259,6 +273,55 @@
 			application_resource_ui_meta(Application, URI, UIMeta) ->
 			add_meta_field(Resource0, UIMeta, Resource)
 		;	Resource = Resource0
+		).
+
+	resource_template_descriptors_to_json([], []).
+	resource_template_descriptors_to_json([Descriptor| Descriptors], [ResourceTemplate| ResourceTemplates]) :-
+		resource_template_descriptor_to_json(Descriptor, ResourceTemplate),
+		resource_template_descriptors_to_json(Descriptors, ResourceTemplates).
+
+	resource_template_descriptor_to_json(resource_template(URITemplate, Name, Title, Description, MimeType), ResourceTemplate) :-
+		!,
+		ResourceTemplate = {uriTemplate-URITemplate, name-Name, title-Title, description-Description, mimeType-MimeType}.
+	resource_template_descriptor_to_json(resource_template(URITemplate, Name, Description, MimeType), ResourceTemplate) :-
+		ResourceTemplate = {uriTemplate-URITemplate, name-Name, description-Description, mimeType-MimeType}.
+
+	application_resource_template_uri(Application, URI) :-
+		Application::resource_templates(ResourceTemplateDescriptors),
+		member(ResourceTemplateDescriptor, ResourceTemplateDescriptors),
+		resource_template_uri(ResourceTemplateDescriptor, URITemplate),
+		resource_template_matches(URITemplate, URI),
+		!.
+
+	resource_template_uri(resource_template(URITemplate, _, _, _), URITemplate).
+	resource_template_uri(resource_template(URITemplate, _, _, _, _), URITemplate).
+
+	resource_template_matches(URITemplate, URI) :-
+		(	sub_atom(URITemplate, Open, 1, _, '{') ->
+			sub_atom(URITemplate, 0, Open, _, Prefix),
+			atom_concat(Prefix, RestURI, URI),
+			ExpressionStart is Open + 1,
+			sub_atom(URITemplate, Close, 1, _, '}'),
+			Close >= ExpressionStart,
+			TailStart is Close + 1,
+			sub_atom(URITemplate, TailStart, _, 0, TailTemplate),
+			resource_template_tail_matches(TailTemplate, RestURI)
+		;	URITemplate == URI
+		).
+
+	resource_template_tail_matches(TailTemplate, URI) :-
+		(	sub_atom(TailTemplate, Open, 1, _, '{') ->
+			sub_atom(TailTemplate, 0, Open, _, Literal),
+			sub_atom(URI, Before, _, After, Literal),
+			RestStart is Before + Open,
+			sub_atom(URI, RestStart, After, 0, RestURI),
+			ExpressionStart is Open + 1,
+			sub_atom(TailTemplate, Close, 1, _, '}'),
+			Close >= ExpressionStart,
+			NextStart is Close + 1,
+			sub_atom(TailTemplate, NextStart, _, 0, NextTemplate),
+			resource_template_tail_matches(NextTemplate, RestURI)
+		;	atom_concat(_, TailTemplate, URI)
 		).
 
 	% auto-dispatch and tool execution predicates

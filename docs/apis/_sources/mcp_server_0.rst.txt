@@ -24,6 +24,7 @@ MCP server facade. Selects spec and transport (stdio or Streamable HTTP).
 | **Imports:**
 |    ``public`` :ref:`options <options/0>`
 | **Uses:**
+|    :ref:`http_server <http_server/0>`
 |    :ref:`list <list/0>`
 |    :ref:`type <type/0>`
 

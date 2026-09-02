@@ -167,9 +167,17 @@
 		resource('logtalk://test/gated', gated, 'Gated resource', 'text/plain')
 	]).
 
+	resource_templates([
+		resource_template('logtalk://test/data/{name}', data, 'Named Test Data', 'Named test data', 'text/plain')
+	]).
+
 	resource_read('logtalk://test/data', _Arguments, Result) :-
 		Result = contents([
 			text_content('logtalk://test/data', 'text/plain', 'Hello 2026')
+		]).
+	resource_read('logtalk://test/data/example', _Arguments, Result) :-
+		Result = contents([
+			text_content('logtalk://test/data/example', 'text/plain', 'Hello template')
 		]).
 
 	resource_read_round('logtalk://test/gated', _Arguments, Context, RoundResult) :-
@@ -187,7 +195,9 @@
 		).
 
 	cache_policy(resources_read, 'logtalk://test/data', 2000, private).
+	cache_policy(resources_read, 'logtalk://test/data/example', 2000, private).
 	cache_policy(resources_list, _, 1000, private).
+	cache_policy(resources_templates_list, _, 1500, public).
 
 :- end_object.
 

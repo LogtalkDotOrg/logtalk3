@@ -82,8 +82,22 @@
 		Result = {resources-JsonResources},
 		response(Result, Id, Response).
 
+	% resources/templates/list — optional icons
+
+	handle_resources_templates_list(Id, Options, reply(Response)) :-
+		^^option(application(Application), Options),
+		(	conforms_to_protocol(Application, mcp_resource_protocol),
+			Application::resource_templates(ResourceTemplateDescriptors) ->
+			^^resource_template_descriptors_to_json(ResourceTemplateDescriptors, JsonResourceTemplates0),
+			enrich_with_icons(Application, resource_icons, uriTemplate, JsonResourceTemplates0, JsonResourceTemplates)
+		;	JsonResourceTemplates = []
+		),
+		Result = {resourceTemplates-JsonResourceTemplates},
+		response(Result, Id, Response).
+
 	% Icons: application may define tool_icons/2, prompt_icons/2, resource_icons/2
 	% returning a list of icon objects (e.g. {src-'https://.../icon.png', mimeType-'image/png'}).
+	% The resource_icons/2 key may be a concrete resource URI or a URI template.
 
 	enrich_with_icons(_, _, _, [], []).
 	enrich_with_icons(Application, Pred, Key, [Item0| Items0], [Item| Items]) :-
