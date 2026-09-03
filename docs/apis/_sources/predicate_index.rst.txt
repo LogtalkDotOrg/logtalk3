@@ -7902,6 +7902,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`interval_protocol <interval_protocol/0::equal/2>`
 * :ref:`setp <setp/0::equal/2>`
 
+``equality_constraints/2``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`constrained_optimization_problem_protocol <constrained_optimization_problem_protocol/0::equality_constraints/2>`
+
+``equality_jacobian/2``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`constrained_optimization_problem_protocol <constrained_optimization_problem_protocol/0::equality_jacobian/2>`
+
 ``equirectangular_inverse/4``
 -----------------------------
 
@@ -11790,6 +11810,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`counters <counters/0::increment_counter/1>`
 
+``inequality_constraints/2``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`constrained_optimization_problem_protocol <constrained_optimization_problem_protocol/0::inequality_constraints/2>`
+
+``inequality_jacobian/2``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`constrained_optimization_problem_protocol <constrained_optimization_problem_protocol/0::inequality_jacobian/2>`
+
 ``init/0``
 ----------
 
@@ -11975,6 +12015,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`subsequences_protocol <subsequences_protocol/0::inits1/2>`
+
+``inner_progress/6``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`constrained_optimization_problem_protocol <constrained_optimization_problem_protocol/0::inner_progress/6>`
 
 ``inorder/2``
 -------------
@@ -26191,6 +26241,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`ant_colony_problem_protocol <ant_colony_problem_protocol/0::solution_cost/2>`
+
+``solve/8``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`qp_solver_protocol <qp_solver_protocol/0::solve/8>`
 
 ``solve_cholesky/3``
 --------------------

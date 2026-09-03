@@ -121,6 +121,7 @@ Foreach-Object {
 (Get-Content ../../../library/colley_ranker/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/colley_ranker.rst
 (Get-Content ../../../library/combinations/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/combinations.rst
 (Get-Content ../../../library/command_line_options/NOTES.md | Select-Object -Skip 32) | pandoc -f gfm -t rst -o libraries/command_line_options.rst
+(Get-Content ../../../library/constrained_optimization/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/constrained_optimization.rst
 (Get-Content ../../../library/copeland_ranker/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/copeland_ranker.rst
 (Get-Content ../../../library/coroutining/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/coroutining.rst
 (Get-Content ../../../library/crypto/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/crypto.rst

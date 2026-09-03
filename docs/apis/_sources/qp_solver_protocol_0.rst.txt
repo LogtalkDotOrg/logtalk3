@@ -1,0 +1,78 @@
+.. index:: single: qp_solver_protocol
+.. _qp_solver_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``qp_solver_protocol``
+======================
+
+Protocol for solvers of convex quadratic programs in standard form: minimize 0.5*x^T*H*x + c^T*x subject to Aeq*x = beq and Aineq*x =< bineq. This is a numerical subroutine protocol, not a local_optimization_problem_protocol/constrained_optimization_problem_protocol solver: it operates on plain matrices and vectors, not on problem objects, since it is meant to be called once per outer/SQP iteration on a freshly linearized subproblem.
+
+| **Availability:** 
+|    ``logtalk_load(constrained_optimization(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-03
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: solve/8
+.. _qp_solver_protocol/0::solve/8:
+
+``solve/8``
+^^^^^^^^^^^
+
+Solves min 0.5*x^T*H*x + c^T*x s.t. Aeq*x = beq, Aineq*x =< bineq, also returning the Lagrange multipliers Lambda at the solution: the first length(Beq) elements are the equality-constraint multipliers, followed by one element per row of Aineq/Bineq (in that order), each 0.0 if that inequality is inactive at X. H must be symmetric positive semi-definite over the feasible set for X to be a global minimizer. Fails (rather than raising an error) when no feasible point is found or the problem is unbounded below on the feasible set, since this predicate is meant to be used as a subroutine inside a larger iterative solver (such as sqp_active_set(_), which needs the multipliers to update its Hessian-of-the-Lagrangian approximation and merit-function penalty) that must react to that failure, not crash on it.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``solve(H,C,Aeq,Beq,Aineq,Bineq,X,Lambda)``
+| **Mode and number of proofs:**
+|    ``solve(+list(list(number)),+list(number),+list(list(number)),+list(number),+list(list(number)),+list(number),-list(number),-list(number))`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`qp_active_set <qp_active_set/0>`, :ref:`sqp_active_set(Problem) <sqp_active_set/1>`
+

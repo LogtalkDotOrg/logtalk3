@@ -1,0 +1,70 @@
+.. index:: single: sub_problem(Problem,OuterIteration,StartPoint,EqLambda,IneqLambda,Rho,Sign)
+.. _sub_problem/7:
+
+.. rst-class:: right
+
+**object**
+
+``sub_problem(Problem,OuterIteration,StartPoint,EqLambda,IneqLambda,Rho,Sign)``
+===============================================================================
+
+* ``Problem`` - The original constrained problem.
+* ``OuterIteration`` - One-based outer iteration number.
+* ``StartPoint`` - Point the inner solve should start from (the current outer iterate).
+* ``EqLambda`` - Current equality-constraint multiplier estimates (possibly []).
+* ``IneqLambda`` - Current inequality-constraint multiplier estimates (possibly []).
+* ``Rho`` - Current penalty parameter.
+* ``Sign`` - 1.0 to minimize the original objective, -1.0 to maximize it.
+
+
+Internal augmented-Lagrangian penalized subproblem: objective(x) = Sign*f(x) + penalty(x), where penalty adds the Hestenes-Powell term for each equality constraint and the smooth Rockafellar/Bertsekas term for each inequality constraint at the current multiplier estimates EqLambda/IneqLambda and penalty parameter Rho. Instantiated fresh by augmented_lagrangian(_,_) every outer iteration, starting from StartPoint (the previous outer iterate, not Problem's own initial_point/1, so each inner solve warm-starts from where the outer loop left off); not meant to be used directly.
+
+| **Availability:** 
+|    ``logtalk_load(constrained_optimization(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-03
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`local_optimization_problem_protocol <local_optimization_problem_protocol/0>`
+| **Imports:**
+|    ``public`` :ref:`constrained_optimization_solver <constrained_optimization_solver/0>`
+| **Uses:**
+|    :ref:`linear_algebra <linear_algebra/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`local_optimization_problem_protocol/0::gradient/2`  :ref:`local_optimization_problem_protocol/0::hessian/2`  :ref:`local_optimization_problem_protocol/0::initial_point/1`  :ref:`local_optimization_problem_protocol/0::objective/2`  :ref:`local_optimization_problem_protocol/0::position_bounds/1`  :ref:`local_optimization_problem_protocol/0::progress/5`  :ref:`local_optimization_problem_protocol/0::stop_condition/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

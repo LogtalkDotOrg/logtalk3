@@ -1,0 +1,156 @@
+.. index:: single: constrained_optimization_problem_protocol
+.. _constrained_optimization_problem_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``constrained_optimization_problem_protocol``
+=============================================
+
+Extends local_optimization_problem_protocol with general equality and inequality constraints. Box constraints continue to be expressed via the inherited position_bounds/1. A problem that defines neither equality_constraints/2 nor inequality_constraints/2 is a plain local_optimization_problem_protocol problem and can still be solved by any constrained_optimization solver.
+
+| **Availability:** 
+|    ``logtalk_load(constrained_optimization(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-03
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Extends:**
+|    ``public`` :ref:`local_optimization_problem_protocol <local_optimization_problem_protocol/0>`
+
+| **Remarks:**
+
+   - Equality constraints: g(x) = 0, one component per row of equality_constraints/2.
+   - Inequality constraints: h(x) =< 0, one component per row of inequality_constraints/2. Constraints of the form h(x) >= 0 or a =< h(x) =< b must be restated in this form by the problem (e.g. negate, or split into two rows) before being reported here.
+   - Jacobians: equality_jacobian/2 and inequality_jacobian/2 are required by sqp_active_set(_) and primal_dual_interior_point(_), and by augmented_lagrangian(_,_), quadratic_penalty(_,_), and log_barrier(_,_) when their selected inner solver uses gradients. Solvers that need a Jacobian a problem does not define raise an existence error rather than silently falling back to finite differences.
+
+| **Inherited public predicates:**
+|     :ref:`local_optimization_problem_protocol/0::gradient/2`  :ref:`local_optimization_problem_protocol/0::hessian/2`  :ref:`local_optimization_problem_protocol/0::initial_point/1`  :ref:`local_optimization_problem_protocol/0::objective/2`  :ref:`local_optimization_problem_protocol/0::position_bounds/1`  :ref:`local_optimization_problem_protocol/0::progress/5`  :ref:`local_optimization_problem_protocol/0::stop_condition/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: equality_constraints/2
+.. _constrained_optimization_problem_protocol/0::equality_constraints/2:
+
+``equality_constraints/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes g(x), the vector of equality constraint values at a point; feasibility requires every component to equal zero. Optional: when not defined, the problem has no equality constraints.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``equality_constraints(Point,Values)``
+| **Mode and number of proofs:**
+|    ``equality_constraints(+list(number),-list(number))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: equality_jacobian/2
+.. _constrained_optimization_problem_protocol/0::equality_jacobian/2:
+
+``equality_jacobian/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the Jacobian of equality_constraints/2 at a point, one row per constraint, one column per variable. Optional unless required by the solver in use (see the "Jacobians" remark above).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``equality_jacobian(Point,Jacobian)``
+| **Mode and number of proofs:**
+|    ``equality_jacobian(+list(number),-list(list(number)))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: inequality_constraints/2
+.. _constrained_optimization_problem_protocol/0::inequality_constraints/2:
+
+``inequality_constraints/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes h(x), the vector of inequality constraint values at a point; feasibility requires every component to be =< 0. Optional: when not defined, the problem has no general inequality constraints (position_bounds/1 may still apply).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``inequality_constraints(Point,Values)``
+| **Mode and number of proofs:**
+|    ``inequality_constraints(+list(number),-list(number))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: inequality_jacobian/2
+.. _constrained_optimization_problem_protocol/0::inequality_jacobian/2:
+
+``inequality_jacobian/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes the Jacobian of inequality_constraints/2 at a point. Optional unless required by the solver in use (see the "Jacobians" remark above).
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``inequality_jacobian(Point,Jacobian)``
+| **Mode and number of proofs:**
+|    ``inequality_jacobian(+list(number),-list(list(number)))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: inner_progress/6
+.. _constrained_optimization_problem_protocol/0::inner_progress/6:
+
+``inner_progress/6``
+^^^^^^^^^^^^^^^^^^^^
+
+Optional callback reporting progress from an inner solver used by a delegated constrained solver. The stage is ``outer(N)`` for an outer iteration or ``phase1`` for a feasibility search. The value and measure are those of the transformed inner subproblem.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``inner_progress(Stage,Iteration,Point,Value,Measure,Evaluations)``
+| **Mode and number of proofs:**
+|    ``inner_progress(+term,+non_negative_integer,+list(number),+number,+number,+non_negative_integer)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`local_optimization_problem_protocol <local_optimization_problem_protocol/0>`, :ref:`qp_active_set <qp_active_set/0>`, :ref:`sqp_active_set(Problem) <sqp_active_set/1>`, :ref:`augmented_lagrangian(Problem,InnerSolver) <augmented_lagrangian/2>`, :ref:`quadratic_penalty(Problem,InnerSolver) <quadratic_penalty/2>`, :ref:`log_barrier(Problem,InnerSolver) <log_barrier/2>`, :ref:`primal_dual_interior_point(Problem) <primal_dual_interior_point/1>`
+

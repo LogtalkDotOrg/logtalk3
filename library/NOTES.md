@@ -92,7 +92,8 @@ Library groups
 	`byte_order`, `ieee_754`, `linear_algebra`,
     `univariate_distributions`, `multivariate_distributions`, and `statistics`,
 - Local and meta-heuristic optimization:
-    `local_optimization`, `ant_colony`, `differential_evolution`, `genetic_algorithm`,
+    `local_optimization`, `constrained_optimization`,
+    `ant_colony`, `differential_evolution`, `genetic_algorithm`,
     `particle_swarm_optimization`, `simulated_annealing`, and `tabu_search`.
 - Machine learning:
 	- Classification:

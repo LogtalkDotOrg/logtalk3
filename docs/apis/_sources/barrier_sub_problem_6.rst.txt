@@ -1,0 +1,69 @@
+.. index:: single: barrier_sub_problem(Problem,OuterIteration,StartPoint,Mu,Rho,Sign)
+.. _barrier_sub_problem/6:
+
+.. rst-class:: right
+
+**object**
+
+``barrier_sub_problem(Problem,OuterIteration,StartPoint,Mu,Rho,Sign)``
+======================================================================
+
+* ``Problem`` - The original constrained problem.
+* ``OuterIteration`` - One-based outer iteration number.
+* ``StartPoint`` - Point the inner solve should start from (the current outer iterate, always strictly feasible with respect to the inequality constraints).
+* ``Mu`` - Current barrier weight.
+* ``Rho`` - Current equality-penalty weight.
+* ``Sign`` - 1.0 to minimize the original objective, -1.0 to maximize it.
+
+
+Internal log-barrier subproblem: objective(x) = Sign*f(x) - mu*sum_j log(-h_j(x)) + (rho/2)*||g(x)||^2, with the barrier term replaced, per inequality constraint, by a smooth large-coefficient quadratic penalty whenever that constraint is not comfortably strictly satisfied. Instantiated fresh by log_barrier(_,_) every outer iteration, starting from StartPoint (the previous outer iterate); not meant to be used directly.
+
+| **Availability:** 
+|    ``logtalk_load(constrained_optimization(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-03
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`local_optimization_problem_protocol <local_optimization_problem_protocol/0>`
+| **Imports:**
+|    ``public`` :ref:`constrained_optimization_solver <constrained_optimization_solver/0>`
+| **Uses:**
+|    :ref:`linear_algebra <linear_algebra/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`local_optimization_problem_protocol/0::gradient/2`  :ref:`local_optimization_problem_protocol/0::hessian/2`  :ref:`local_optimization_problem_protocol/0::initial_point/1`  :ref:`local_optimization_problem_protocol/0::objective/2`  :ref:`local_optimization_problem_protocol/0::position_bounds/1`  :ref:`local_optimization_problem_protocol/0::progress/5`  :ref:`local_optimization_problem_protocol/0::stop_condition/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

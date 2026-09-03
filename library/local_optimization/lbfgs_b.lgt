@@ -23,9 +23,9 @@
 	imports(local_optimization_solver(_Problem_))).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-08-24,
+		date is 2026-09-03,
 		comment is 'L-BFGS-B bound-constrained limited-memory quasi-Newton optimizer with a level-B approximate generalized Cauchy point (first-segment quadratic min along the projected gradient path), free-set identification at the Cauchy point, feasible-step limiting, and L-BFGS two-loop recursion. Requires ``gradient/2``.',
 		parameters is [
 			'Problem' - 'Problem object implementing ``local_optimization_problem_protocol`` with ``gradient/2`` (and ``position_bounds/1`` when box constraints are present).'
@@ -359,7 +359,6 @@
 
 	breakpoint_times([], [], [], []).
 	breakpoint_times([X| Xs], [D| Ds], [Lower-Upper| Bounds], Ts) :-
-		breakpoint_times(Xs, Ds, Bounds, Rest),
 		(	D > 1.0e-16 ->
 			TU is (Upper - X) / D,
 			Ts = [TU| Rest]
@@ -367,7 +366,8 @@
 			TL is (Lower - X) / D,
 			Ts = [TL| Rest]
 		;	Ts = Rest
-		).
+		),
+		breakpoint_times(Xs, Ds, Bounds, Rest).
 
 	history_gamma([], 1.0).
 	history_gamma([s(S, Y, _)| _], Gamma) :-

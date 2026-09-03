@@ -72,7 +72,8 @@ Library groups
   ``linear_algebra``, ``univariate_distributions``,
   ``multivariate_distributions``, and ``statistics``,
 - Local and meta-heuristic optimization: ``local_optimization``,
-  ``ant_colony``, ``differential_evolution``, ``genetic_algorithm``,
+  ``constrained_optimization``, ``ant_colony``,
+  ``differential_evolution``, ``genetic_algorithm``,
   ``particle_swarm_optimization``, ``simulated_annealing``, and
   ``tabu_search``.
 - Machine learning:

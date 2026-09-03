@@ -38,6 +38,7 @@ Categories
    code_metrics_utilities <code_metrics_utilities_0>
    command_line_option <command_line_option_0>
    condorcet_victory_common <condorcet_victory_common_0>
+   constrained_optimization_solver <constrained_optimization_solver_0>
    core_messages <core_messages_0>
    counters <counters_0>
    csv_guess_questions <csv_guess_questions_0>
@@ -154,11 +155,13 @@ Objects
    association_rule_miner <association_rule_miner_0>
    atom <atom_0>
    atomic <atomic_0>
+   augmented_lagrangian(Problem,InnerSolver) <augmented_lagrangian_2>
    automation_report <automation_report_0>
    avltree <avltree_0>
    avro <avro_0>
    backend_adapter_hook <backend_adapter_hook_0>
    backend_random <backend_random_0>
+   barrier_sub_problem(Problem,OuterIteration,StartPoint,Mu,Rho,Sign) <barrier_sub_problem_6>
    barzilai_borwein(Problem) <barzilai_borwein_1>
    base32 <base32_0>
    base58 <base58_0>
@@ -519,6 +522,7 @@ Objects
    list <list_0>
    list(Type) <list_1>
    lof_anomaly_detector <lof_anomaly_detector_0>
+   log_barrier(Problem,InnerSolver) <log_barrier_2>
    logger <logger_0>
    logistic_regression_classifier <logistic_regression_classifier_0>
    logtalk <logtalk_0>
@@ -618,7 +622,9 @@ Objects
    paseto_v4 <paseto_v4_0>
    pca_projection <pca_projection_0>
    pddl <pddl_0>
+   penalty_sub_problem(Problem,OuterIteration,StartPoint,Rho,Sign) <penalty_sub_problem_5>
    permutations <permutations_0>
+   phase1_sub_problem(Problem,StartPoint) <phase1_sub_problem_2>
    plackett_luce_last_ranker <plackett_luce_last_ranker_0>
    plackett_luce_ranker <plackett_luce_ranker_0>
    plantuml_graph_language <plantuml_graph_language_0>
@@ -628,12 +634,15 @@ Objects
    ports_profiler <ports_profiler_0>
    predicate_directive_suppression(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation) <predicate_directive_suppression_5>
    prefix_span_pattern_miner <prefix_span_pattern_miner_0>
+   primal_dual_interior_point(Problem) <primal_dual_interior_point_1>
    print_goal_hook <print_goal_hook_0>
    probabilistic_pca_projection <probabilistic_pca_projection_0>
    process <process_0>
    prolog_module_hook(Module) <prolog_module_hook_1>
    protobuf <protobuf_0>
    qda_classifier <qda_classifier_0>
+   qp_active_set <qp_active_set_0>
+   quadratic_penalty(Problem,InnerSolver) <quadratic_penalty_2>
    queue <queue_0>
    random <random_0>
    random(Algorithm) <random_1>
@@ -707,10 +716,12 @@ Objects
    splaytree <splaytree_0>
    sqids <sqids_0>
    sqids(Representation) <sqids_1>
+   sqp_active_set(Problem) <sqp_active_set_1>
    stomp <stomp_0>
    streamvars <streamvars_0>
    string(Representation) <string_1>
    string_distance(Representation) <string_distance_1>
+   sub_problem(Problem,OuterIteration,StartPoint,EqLambda,IneqLambda,Rho,Sign) <sub_problem_7>
    subprocess_coverage_hook <subprocess_coverage_hook_0>
    subprocess_mutation_hook <subprocess_mutation_hook_0>
    subsequences <subsequences_0>
@@ -845,6 +856,7 @@ Protocols
    cmac_protocol <cmac_protocol_0>
    combinations_protocol <combinations_protocol_0>
    comparingp <comparingp_0>
+   constrained_optimization_problem_protocol <constrained_optimization_problem_protocol_0>
    crs_projections_protocol <crs_projections_protocol_0>
    csv_protocol <csv_protocol_0>
    cuid2_protocol <cuid2_protocol_0>
@@ -960,6 +972,7 @@ Protocols
    probabilistic_classifier_protocol <probabilistic_classifier_protocol_0>
    proto_hierarchyp <proto_hierarchyp_0>
    pseudo_random_protocol <pseudo_random_protocol_0>
+   qp_solver_protocol <qp_solver_protocol_0>
    queuep <queuep_0>
    random_protocol <random_protocol_0>
    ranker_protocol <ranker_protocol_0>

@@ -24,7 +24,10 @@ Available solvers:
 - **Trust-region Newton-CG** - full Newton with a Steihaug-CG subproblem
 
 All solvers share the same problem protocol and the same ``run/2-4``
-API.
+API. For problems with general equality or inequality constraints, see
+the companion
+```constrained_optimization`` <../constrained_optimization/NOTES.md>`__
+library.
 
 API documentation
 -----------------
@@ -74,6 +77,47 @@ Architecture
   ``gradient/2``; uses ``position_bounds/1`` when defined).
 - ``trust_region_newton_cg(Problem)`` - trust-region Newton-CG (requires
   ``gradient/2`` and ``hessian/2``).
+
+Working with ``constrained_optimization``
+-----------------------------------------
+
+The ``constrained_optimization_problem_protocol`` extends
+``local_optimization_problem_protocol`` with general equality and
+inequality constraints and their Jacobians. Thus, a constrained problem
+uses the same ``initial_point/1``, ``objective/2``, ``gradient/2``,
+``position_bounds/1``, and optional hooks documented here, while adding
+its general constraint data. Load the companion library with:
+
+::
+
+   | ?- logtalk_load(constrained_optimization(loader)).
+
+This also loads ``local_optimization``, as several constrained methods
+use a local solver for their inner subproblems. The local solver is
+selected by name as the second parameter of ``augmented_lagrangian/2``,
+``quadratic_penalty/2``, or ``log_barrier/2``:
+
+::
+
+   | ?- augmented_lagrangian(my_problem, lbfgs)::run(Point, Value).
+
+In this composition, the constrained solver manages feasibility,
+multipliers, penalties, or barriers, and repeatedly delegates
+transformed local subproblems to the selected local solver.
+Gradient-based inner solvers require the constrained problem to provide
+the corresponding constraint Jacobians. Inner-solver options such as
+``max_iterations``, ``tol_x``, ``tol_f``, and ``tol_g`` apply to each
+delegated solve; the constrained library provides separate options for
+its outer iterations and tolerances.
+
+Because the constrained protocol extends the local protocol, its problem
+objects can also be passed directly to a local solver. Doing so ignores
+``equality_constraints/2`` and ``inequality_constraints/2``; only box
+constraints from ``position_bounds/1`` are enforced. Direct local
+polishing is therefore appropriate only when those general constraints
+are absent or when temporary constraint violation is explicitly
+acceptable. Otherwise, use a constrained solver and select the local
+method as its inner solver.
 
 Defining a problem
 ------------------

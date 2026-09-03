@@ -54,15 +54,15 @@ directory in the ``NOTES.md`` file.
    c45_classifier
    cartesian_products
    cbor
-   character_sets
    ccsds_frames
    ccsds_link_profiles
-   ccsds_packet_services
    ccsds_packetization
    ccsds_packets
+   ccsds_packet_services
    ccsds_tc_services
    ccsds_time_codes
    ccsds_time_fields
+   character_sets
    classification_protocols
    clo_span_pattern_miner
    clustering_protocols
@@ -70,11 +70,12 @@ directory in the ``NOTES.md`` file.
    colley_ranker
    combinations
    command_line_options
-   core
+   constrained_optimization
    copeland_ranker
+   core
    coroutining
-   crypto
    crs_projections
+   crypto
    csv
    cuid2
    cusum_anomaly_detector
@@ -108,8 +109,8 @@ directory in the ``NOTES.md`` file.
    geojson
    geospatial
    git
-   glicko2_ranker
    glicko2_periodic_ranker
+   glicko2_ranker
    gpx
    gradient_boosting_classifier
    gradient_boosting_regression
@@ -139,12 +140,12 @@ directory in the ``NOTES.md`` file.
    http_multipart
    http_oauth
    http_parameters
+   http_process_transport
    http_router
    http_server
    http_server_core
    http_session
    http_socket_transport
-   http_process_transport
    http_sse
    http_static_files
    http_websocket
@@ -159,12 +160,12 @@ directory in the ``NOTES.md`` file.
    integer_partitions
    intervals
    iqr_anomaly_detector
-   iso_639
+   isolation_forest_anomaly_detector
+   iso_13616
    iso_3166
    iso_4217
+   iso_639
    iso_9362
-   iso_13616
-   isolation_forest_anomaly_detector
    java
    json
    json_graph
@@ -178,8 +179,8 @@ directory in the ``NOTES.md`` file.
    jwt
    kcenters_clusterer
    kemeny_young_ranker
-   kernel_svm_classifier
    kernel_pca_projection
+   kernel_svm_classifier
    kmeans_clusterer
    kmedians_clusterer
    kmedoids_clusterer
@@ -215,15 +216,15 @@ directory in the ``NOTES.md`` file.
    multisets
    multivariate_distributions
    mutations
-   nanoid
    naive_bayes_classifier
+   nanoid
    nearest_centroid_classifier
    nested_dictionaries
    nmea
    nmf_projection
    one_class_svm_anomaly_detector
-   open_api
    open_ai
+   open_api
    open_id
    optics_clusterer
    optionals
@@ -236,8 +237,8 @@ directory in the ``NOTES.md`` file.
    pattern_mining_protocols
    pca_projection
    permutations
-   plackett_luce_ranker
    plackett_luce_last_ranker
+   plackett_luce_ranker
    pls_projection
    prefix_span_pattern_miner
    probabilistic_pca_projection
@@ -249,9 +250,9 @@ directory in the ``NOTES.md`` file.
    random_forest_classifier
    random_forest_regression
    random_projection
-   rank_centrality
    ranked_pairs
    ranking_protocols
+   rank_centrality
    reader
    recorded_database
    redis
@@ -275,15 +276,15 @@ directory in the ``NOTES.md`` file.
    statistics
    stemming
    stomp
-   string_distance
    strings
+   string_distance
    subsequences
    svr_regression
    tabu_search
    term_io
    thurstone_mosteller_ranker
-   time_scales
    timeout
+   time_scales
    tle_orbits
    toml
    toon
@@ -306,5 +307,5 @@ directory in the ``NOTES.md`` file.
    validations
    wkt_wkb
    yaml
-   z_score_anomaly_detector
    zippers
+   z_score_anomaly_detector

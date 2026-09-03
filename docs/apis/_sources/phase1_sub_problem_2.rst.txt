@@ -1,0 +1,62 @@
+.. index:: single: phase1_sub_problem(Problem,StartPoint)
+.. _phase1_sub_problem/2:
+
+.. rst-class:: right
+
+**object**
+
+``phase1_sub_problem(Problem,StartPoint)``
+==========================================
+
+* ``Problem`` - The original constrained problem.
+* ``StartPoint`` - The point log_barrier(_,_) was actually given (Problem's own initial_point/1); phase 1 starts its search from here.
+
+
+Internal phase-1 feasibility subproblem for log_barrier(_,_): minimizes sum_j max(0, h_j(x) + margin)^2 (margin = 1.0e-6), an ordinary smooth, everywhere-defined unconstrained objective, so a minimizer that reaches (near) zero gives a point with every h_j(x) < -margin, comfortably inside the barrier's domain rather than exactly on its boundary. Instantiated once, when initial_point/1 is not already strictly feasible; not meant to be used directly. See log_barrier(_,_)'s "ensure_strictly_feasible/3" for how the result is validated and how this heuristic falls back to raising domain_error/2 when it does not succeed.
+
+| **Availability:** 
+|    ``logtalk_load(constrained_optimization(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-03
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`local_optimization_problem_protocol <local_optimization_problem_protocol/0>`
+| **Uses:**
+|    :ref:`linear_algebra <linear_algebra/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`local_optimization_problem_protocol/0::gradient/2`  :ref:`local_optimization_problem_protocol/0::hessian/2`  :ref:`local_optimization_problem_protocol/0::initial_point/1`  :ref:`local_optimization_problem_protocol/0::objective/2`  :ref:`local_optimization_problem_protocol/0::position_bounds/1`  :ref:`local_optimization_problem_protocol/0::progress/5`  :ref:`local_optimization_problem_protocol/0::stop_condition/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

@@ -1,0 +1,67 @@
+.. index:: single: qp_active_set
+.. _qp_active_set/0:
+
+.. rst-class:: right
+
+**object**
+
+``qp_active_set``
+=================
+
+
+
+Dense active-set solver for convex quadratic programs. Intended as a subroutine for sqp_active_set(_); also usable standalone for small dense QPs.
+
+| **Availability:** 
+|    ``logtalk_load(constrained_optimization(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-03
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`qp_solver_protocol <qp_solver_protocol/0>`
+| **Imports:**
+|    ``public`` :ref:`constrained_optimization_solver <constrained_optimization_solver/0>`
+| **Uses:**
+|    :ref:`linear_algebra <linear_algebra/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`qp_solver_protocol/0::solve/8`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`qp_solver_protocol <qp_solver_protocol/0>`, :ref:`sqp_active_set(Problem) <sqp_active_set/1>`, :ref:`linear_algebra <linear_algebra/0>`
+

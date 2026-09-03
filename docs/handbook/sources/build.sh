@@ -104,6 +104,7 @@ sed '1,19d' ../../../library/bson/NOTES.md | pandoc -f gfm -t rst -o libraries/b
 sed '1,19d' ../../../library/byte_order/NOTES.md | pandoc -f gfm -t rst -o libraries/byte_order.rst
 sed '1,19d' ../../../library/c45_classifier/NOTES.md | pandoc -f gfm -t rst -o libraries/c45_classifier.rst
 sed '1,19d' ../../../library/cartesian_products/NOTES.md | pandoc -f gfm -t rst -o libraries/cartesian_products.rst
+sed '1,19d' ../../../library/constrained_optimization/NOTES.md | pandoc -f gfm -t rst -o libraries/constrained_optimization.rst
 sed '1,19d' ../../../library/copeland_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/copeland_ranker.rst
 sed '1,19d' ../../../library/coroutining/NOTES.md | pandoc -f gfm -t rst -o libraries/coroutining.rst
 sed '1,19d' ../../../library/crypto/NOTES.md | pandoc -f gfm -t rst -o libraries/crypto.rst

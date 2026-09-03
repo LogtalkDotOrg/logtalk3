@@ -284,6 +284,7 @@
 		linda(loader),
 		command_line_options(loader),
 		local_optimization(loader),
+		constrained_optimization(loader),
 		ant_colony(loader),
 		differential_evolution(loader),
 		genetic_algorithm(loader),

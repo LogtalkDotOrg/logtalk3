@@ -590,6 +590,28 @@ To load an entity, always load the library that includes it using the goal ``log
    command_line_option <command_line_option_0>
    command_line_options <command_line_options_0>
 
+``library/constrained_optimization/``
+-------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   augmented_lagrangian(Problem,InnerSolver) <augmented_lagrangian_2>
+   barrier_sub_problem(Problem,OuterIteration,StartPoint,Mu,Rho,Sign) <barrier_sub_problem_6>
+   constrained_optimization_problem_protocol <constrained_optimization_problem_protocol_0>
+   constrained_optimization_solver <constrained_optimization_solver_0>
+   log_barrier(Problem,InnerSolver) <log_barrier_2>
+   penalty_sub_problem(Problem,OuterIteration,StartPoint,Rho,Sign) <penalty_sub_problem_5>
+   phase1_sub_problem(Problem,StartPoint) <phase1_sub_problem_2>
+   primal_dual_interior_point(Problem) <primal_dual_interior_point_1>
+   qp_active_set <qp_active_set_0>
+   qp_solver_protocol <qp_solver_protocol_0>
+   quadratic_penalty(Problem,InnerSolver) <quadratic_penalty_2>
+   sqp_active_set(Problem) <sqp_active_set_1>
+   sub_problem(Problem,OuterIteration,StartPoint,EqLambda,IneqLambda,Rho,Sign) <sub_problem_7>
+
 ``library/copeland_ranker/``
 ----------------------------
 

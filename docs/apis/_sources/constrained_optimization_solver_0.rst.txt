@@ -1,0 +1,244 @@
+.. index:: single: constrained_optimization_solver
+.. _constrained_optimization_solver/0:
+
+.. rst-class:: right
+
+**category**
+
+``constrained_optimization_solver``
+===================================
+
+Shared numeric, objective-direction, and validation predicates for constrained optimization solvers and their internal problem wrappers.
+
+| **Availability:** 
+|    ``logtalk_load(constrained_optimization(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-03
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: abs_max/2
+.. _constrained_optimization_solver/0::abs_max/2:
+
+``abs_max/2``
+^^^^^^^^^^^^^
+
+Infinity norm: max_i abs(Vec_i), 0.0 for an empty vector.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``abs_max(Vec,Max)``
+| **Mode and number of proofs:**
+|    ``abs_max(+list(number),-number)`` - ``one``
+
+
+------------
+
+.. index:: positive_max/2
+.. _constrained_optimization_solver/0::positive_max/2:
+
+``positive_max/2``
+^^^^^^^^^^^^^^^^^^
+
+Infinity norm of the positive part: max_i max(0, Vec_i), 0.0 for an empty vector.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``positive_max(Vec,Max)``
+| **Mode and number of proofs:**
+|    ``positive_max(+list(number),-number)`` - ``one``
+
+
+------------
+
+.. index:: direction_sign/2
+.. _constrained_optimization_solver/0::direction_sign/2:
+
+``direction_sign/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Converts an objective direction into its numeric sign.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``direction_sign(Direction,Sign)``
+| **Mode and number of proofs:**
+|    ``direction_sign(+atom,-number)`` - ``one``
+
+
+------------
+
+.. index:: objective_direction/2
+.. _constrained_optimization_solver/0::objective_direction/2:
+
+``objective_direction/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Converts an objective numeric sign into its direction.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``objective_direction(Sign,Direction)``
+| **Mode and number of proofs:**
+|    ``objective_direction(+number,-atom)`` - ``one``
+
+
+------------
+
+.. index:: build_inner/3
+.. _constrained_optimization_solver/0::build_inner/3:
+
+``build_inner/3``
+^^^^^^^^^^^^^^^^^
+
+Constructs a parametric inner solver object from its class atom and problem object.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``build_inner(InnerSolver,Problem,Solver)``
+| **Mode and number of proofs:**
+|    ``build_inner(+atom,+nonvar,-nonvar)`` - ``one``
+
+
+------------
+
+.. index:: update_penalty/6
+.. _constrained_optimization_solver/0::update_penalty/6:
+
+``update_penalty/6``
+^^^^^^^^^^^^^^^^^^^^
+
+Scales a penalty when the constraint violation does not decrease by the required factor.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``update_penalty(OldViolation,NewViolation,RequiredDecrease,OldPenalty,Scale,NewPenalty)``
+| **Mode and number of proofs:**
+|    ``update_penalty(+number,+number,+number,+number,+number,-number)`` - ``one``
+
+
+------------
+
+.. index:: split_at/4
+.. _constrained_optimization_solver/0::split_at/4:
+
+``split_at/4``
+^^^^^^^^^^^^^^
+
+Splits a list after its first N elements.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``split_at(N,List,Prefix,Suffix)``
+| **Mode and number of proofs:**
+|    ``split_at(+integer,+list,-list,-list)`` - ``one``
+
+
+------------
+
+.. index:: abs_sum/2
+.. _constrained_optimization_solver/0::abs_sum/2:
+
+``abs_sum/2``
+^^^^^^^^^^^^^
+
+Computes the sum of the absolute values of a numeric list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``abs_sum(Values,Sum)``
+| **Mode and number of proofs:**
+|    ``abs_sum(+list(number),-number)`` - ``one``
+
+
+------------
+
+.. index:: validate_numeric_vector/2
+.. _constrained_optimization_solver/0::validate_numeric_vector/2:
+
+``validate_numeric_vector/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that a vector is a list of numbers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate_numeric_vector(Vector,Domain)``
+| **Mode and number of proofs:**
+|    ``validate_numeric_vector(+list,+atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: validate_constraint_data/4
+.. _constrained_optimization_solver/0::validate_constraint_data/4:
+
+``validate_constraint_data/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that constraint values are numeric and that the Jacobian has one numeric row per constraint and one column per point component.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``validate_constraint_data(Point,Values,Jacobian,Domain)``
+| **Mode and number of proofs:**
+|    ``validate_constraint_data(+list(number),+list,+list,+atom)`` - ``one_or_error``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
