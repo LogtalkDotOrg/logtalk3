@@ -110,7 +110,11 @@ Mahalanobis distance predicates.
 
 * ADDED: New `mqtt` library implementing a MQTT 5.0 client.
 
-* ADDED: New `local_optimization` optimizer library providing common solvers.
+* ADDED: New `local_optimization` library providing common box constraints
+solvers.
+
+* ADDED: New `constrained_optimization` library providing common general
+equality and inequality constraints solvers.
 
 * ADDED: New `ant_colony` meta-heuristic optimizer library.
 

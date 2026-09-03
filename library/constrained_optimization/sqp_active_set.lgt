@@ -56,7 +56,7 @@
 	run(BestPoint, BestValue, Statistics, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		^^option(objective(ObjDir), Options),
+		^^option(objective(Objective), Options),
 		^^option(target_value(Target), Options),
 		^^option(max_iterations(MaxIterations), Options),
 		^^option(tol_x(TolX), Options),
@@ -89,7 +89,7 @@
 		),
 		gradient(Point0, Grad0),
 		validate_gradient(Point0, Grad0),
-		^^direction_sign(ObjDir, Sign),
+		^^direction_sign(Objective, Sign),
 		scale_vector(Grad0, Sign, PhiGrad0),
 		constraint_data(Point0, Constraints0),
 		identity_matrix(Dimension, B0),
@@ -102,7 +102,7 @@
 			BestPoint, BestValue, Iterations, Evaluations, GradEvaluations, QPSolves,
 			FinalStepNorm, FinalViolation
 		),
-		termination_reason(Iterations, MaxIterations, ObjDir, Target, BestPoint, BestValue, FinalViolation, TolConstraint, TerminationReason),
+		termination_reason(Iterations, MaxIterations, Objective, Target, BestPoint, BestValue, FinalViolation, TolConstraint, TerminationReason),
 		Statistics = [
 			iterations(Iterations),
 			evaluations(Evaluations),
@@ -114,10 +114,10 @@
 			final_value(BestValue)
 		].
 
-	termination_reason(Iterations, MaxIterations, ObjDir, Target, Point, Value, Violation, TolConstraint, Reason) :-
+	termination_reason(Iterations, MaxIterations, Objective, Target, Point, Value, Violation, TolConstraint, Reason) :-
 		(	Iterations >= MaxIterations ->
 			Reason = max_iterations
-		;	^^target_reached(ObjDir, Value, Target), Violation =< TolConstraint ->
+		;	^^target_reached(Objective, Value, Target), Violation =< TolConstraint ->
 			Reason = target_reached
 		;	stop_condition(Iterations, Point, Value) ->
 			Reason = stop_condition
@@ -154,8 +154,9 @@
 		Evals, GradEvals, QPSolves,
 		Point, Value, Iter, Evals, GradEvals, QPSolves, 0.0, Violation
 	) :-
-		^^objective_direction(Sign, ObjDir),
-		^^target_reached(ObjDir, Value, Target),
+		% use once/1 to workaround an indexing bug in ECLiPSe and GNU Prolog
+		once(^^objective_direction(Sign, Objective)),
+		^^target_reached(Objective, Value, Target),
 		constraint_violation_inf(Constraints, Violation),
 		Violation =< TolK,
 		!,

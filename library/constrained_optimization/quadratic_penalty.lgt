@@ -50,7 +50,7 @@
 	run(BestPoint, BestValue, Statistics, UserOptions) :-
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
-		^^option(objective(ObjDir), Options),
+		^^option(objective(Objective), Options),
 		^^option(target_value(Target), Options),
 		^^option(max_iterations(InnerMaxIterations), Options),
 		^^option(tol_x(InnerTolX), Options),
@@ -68,7 +68,7 @@
 			tol_x(InnerTolX), tol_f(InnerTolF), tol_g(InnerTolG), updates(InnerUpdates)
 		],
 		^^initial_point(Options, Point0),
-		^^direction_sign(ObjDir, Sign),
+		^^direction_sign(Objective, Sign),
 		constraint_violation(Point0, Violation0),
 		outer_loop(
 			0, MaxOuter, OuterUpdates, OuterTol, RhoScale, ViolDecrease, Sign, Target, InnerOptions,
@@ -76,7 +76,7 @@
 			0, 0, 0,
 			BestPoint, BestValue, OuterIterations, InnerIterations, Evaluations, GradEvaluations, FinalViolation
 		),
-		outer_termination_reason(OuterIterations, MaxOuter, ObjDir, Target, BestValue, FinalViolation, OuterTol, TerminationReason),
+		outer_termination_reason(OuterIterations, MaxOuter, Objective, Target, BestValue, FinalViolation, OuterTol, TerminationReason),
 		Statistics = [
 			outer_iterations(OuterIterations),
 			inner_iterations(InnerIterations),
@@ -87,10 +87,10 @@
 			final_value(BestValue)
 		].
 
-	outer_termination_reason(Iterations, MaxIterations, ObjDir, Target, Value, Violation, Tolerance, Reason) :-
+	outer_termination_reason(Iterations, MaxIterations, Objective, Target, Value, Violation, Tolerance, Reason) :-
 		(	Iterations >= MaxIterations, Violation > Tolerance ->
 			Reason = max_iterations
-		;	^^target_reached(ObjDir, Value, Target), Violation =< Tolerance ->
+		;	^^target_reached(Objective, Value, Target), Violation =< Tolerance ->
 			Reason = target_reached
 		;	Reason = converged
 		).
@@ -137,8 +137,9 @@
 		objective(Point1, Value1),
 		Iter1 is Iter + 1,
 		report_outer(Iter1, OuterUpdates, Point1, Value1, Violation1, Evals1),
-		^^objective_direction(Sign, ObjDir),
-		(	(Violation1 =< OuterTol ; (^^target_reached(ObjDir, Value1, Target), Violation1 =< OuterTol)) ->
+		% use once/1 to workaround an indexing bug in ECLiPSe and GNU Prolog
+		once(^^objective_direction(Sign, Objective)),
+		(	(Violation1 =< OuterTol ; (^^target_reached(Objective, Value1, Target), Violation1 =< OuterTol)) ->
 			BestPoint = Point1,
 			BestValue = Value1,
 			OuterIterations = Iter1,

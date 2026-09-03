@@ -461,7 +461,8 @@ Limitations
 -----------
 
 - Continuous numeric vectors only.
-- Box constraints only; no general equality or inequality constraints.
+- Box constraints only. Use the `constrained_optimization` library for
+  equality and inequality constraints.
 - Single starting point (no multi-start wrapper yet).
 - Nelder-Mead adaptive (Gao-Han) coefficients are stubbed but not active.
 - Projected steps after a conjugate-gradient update can weaken conjugacy;

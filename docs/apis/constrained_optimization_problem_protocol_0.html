@@ -438,7 +438,7 @@
   <p class="right" id="constrained-optimization-problem-protocol-0"><span id="index-0"></span><strong>protocol</strong></p>
 <section id="constrained-optimization-problem-protocol">
 <h1><code class="docutils literal notranslate"><span class="pre">constrained_optimization_problem_protocol</span></code><a class="headerlink" href="#constrained-optimization-problem-protocol" title="Link to this heading"></a></h1>
-<p>Extends local_optimization_problem_protocol with general equality and inequality constraints. Box constraints continue to be expressed via the inherited position_bounds/1. A problem that defines neither equality_constraints/2 nor inequality_constraints/2 is a plain local_optimization_problem_protocol problem and can still be solved by any constrained_optimization solver.</p>
+<p>Extends <code class="docutils literal notranslate"><span class="pre">local_optimization_problem_protocol</span></code> with general equality and inequality constraints. Box constraints continue to be expressed via the inherited <code class="docutils literal notranslate"><span class="pre">position_bounds/1</span></code>. A problem that defines neither <code class="docutils literal notranslate"><span class="pre">equality_constraints/2</span></code> nor <code class="docutils literal notranslate"><span class="pre">inequality_constraints/2</span></code> is a plain <code class="docutils literal notranslate"><span class="pre">local_optimization_problem_protocol</span></code> problem and can still be solved by any <code class="docutils literal notranslate"><span class="pre">constrained_optimization</span></code> solver.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -467,9 +467,9 @@
 </div>
 <blockquote>
 <div><ul class="simple">
-<li><p>Equality constraints: g(x) = 0, one component per row of equality_constraints/2.</p></li>
-<li><p>Inequality constraints: h(x) =&lt; 0, one component per row of inequality_constraints/2. Constraints of the form h(x) &gt;= 0 or a =&lt; h(x) =&lt; b must be restated in this form by the problem (e.g. negate, or split into two rows) before being reported here.</p></li>
-<li><p>Jacobians: equality_jacobian/2 and inequality_jacobian/2 are required by sqp_active_set(_) and primal_dual_interior_point(_), and by augmented_lagrangian(_,_), quadratic_penalty(_,_), and log_barrier(_,_) when their selected inner solver uses gradients. Solvers that need a Jacobian a problem does not define raise an existence error rather than silently falling back to finite differences.</p></li>
+<li><p>Equality constraints: <code class="docutils literal notranslate"><span class="pre">g(x)</span> <span class="pre">=</span> <span class="pre">0</span></code>, one component per row of <code class="docutils literal notranslate"><span class="pre">equality_constraints/2</span></code>.</p></li>
+<li><p>Inequality constraints: <code class="docutils literal notranslate"><span class="pre">h(x)</span> <span class="pre">=&lt;</span> <span class="pre">0</span></code>, one component per row of <code class="docutils literal notranslate"><span class="pre">inequality_constraints/2</span></code>. Constraints of the form <code class="docutils literal notranslate"><span class="pre">h(x)</span> <span class="pre">&gt;=</span> <span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">=&lt;</span> <span class="pre">h(x)</span> <span class="pre">=&lt;</span> <span class="pre">b</span></code> must be restated in this form by the problem (e.g. negate, or split into two rows) before being reported here.</p></li>
+<li><p>Jacobians: <code class="docutils literal notranslate"><span class="pre">equality_jacobian/2</span></code> and <code class="docutils literal notranslate"><span class="pre">inequality_jacobian/2</span></code> are required by <code class="docutils literal notranslate"><span class="pre">sqp_active_set(_)</span></code> and <code class="docutils literal notranslate"><span class="pre">primal_dual_interior_point(_)</span></code>, and by <code class="docutils literal notranslate"><span class="pre">augmented_lagrangian(_,_)</span></code>, <code class="docutils literal notranslate"><span class="pre">quadratic_penalty(_,_)</span></code>, and <code class="docutils literal notranslate"><span class="pre">log_barrier(_,_)</span></code> when their selected inner solver uses gradients. Solvers that need a Jacobian a problem does not define raise an existence error rather than silently falling back to finite differences.</p></li>
 </ul>
 </div></blockquote>
 <div class="line-block">
@@ -498,7 +498,7 @@
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
 <section id="equality-constraints-2">
 <span id="constrained-optimization-problem-protocol-0-equality-constraints-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">equality_constraints/2</span></code></a><a class="headerlink" href="#equality-constraints-2" title="Link to this heading"></a></h3>
-<p>Computes g(x), the vector of equality constraint values at a point; feasibility requires every component to equal zero. Optional: when not defined, the problem has no equality constraints.</p>
+<p>Computes <code class="docutils literal notranslate"><span class="pre">g(x)</span></code>, the vector of equality constraint values at a point; feasibility requires every component to equal zero. Optional: when not defined, the problem has no equality constraints.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -519,7 +519,7 @@
 </section>
 <section id="equality-jacobian-2">
 <span id="constrained-optimization-problem-protocol-0-equality-jacobian-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">equality_jacobian/2</span></code></a><a class="headerlink" href="#equality-jacobian-2" title="Link to this heading"></a></h3>
-<p>Computes the Jacobian of equality_constraints/2 at a point, one row per constraint, one column per variable. Optional unless required by the solver in use (see the “Jacobians” remark above).</p>
+<p>Computes the Jacobian of <code class="docutils literal notranslate"><span class="pre">equality_constraints/2</span></code> at a point, one row per constraint, one column per variable. Optional unless required by the solver in use (see the “Jacobians” remark above).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -540,7 +540,7 @@
 </section>
 <section id="inequality-constraints-2">
 <span id="constrained-optimization-problem-protocol-0-inequality-constraints-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">inequality_constraints/2</span></code></a><a class="headerlink" href="#inequality-constraints-2" title="Link to this heading"></a></h3>
-<p>Computes h(x), the vector of inequality constraint values at a point; feasibility requires every component to be =&lt; 0. Optional: when not defined, the problem has no general inequality constraints (position_bounds/1 may still apply).</p>
+<p>Computes <code class="docutils literal notranslate"><span class="pre">h(x)</span></code>, the vector of inequality constraint values at a point; feasibility requires every component to be <code class="docutils literal notranslate"><span class="pre">=&lt;</span> <span class="pre">0</span></code>. Optional: when not defined, the problem has no general inequality constraints (position_bounds/1 may still apply).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -561,7 +561,7 @@
 </section>
 <section id="inequality-jacobian-2">
 <span id="constrained-optimization-problem-protocol-0-inequality-jacobian-2"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">inequality_jacobian/2</span></code></a><a class="headerlink" href="#inequality-jacobian-2" title="Link to this heading"></a></h3>
-<p>Computes the Jacobian of inequality_constraints/2 at a point. Optional unless required by the solver in use (see the “Jacobians” remark above).</p>
+<p>Computes the Jacobian of <code class="docutils literal notranslate"><span class="pre">inequality_constraints/2</span></code> at a point. Optional unless required by the solver in use (see the “Jacobians” remark above).</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

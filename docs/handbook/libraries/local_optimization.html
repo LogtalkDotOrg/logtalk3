@@ -885,7 +885,8 @@ L-BFGS-B, and trust-region Newton-CG additionally report:</p>
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
 <ul class="simple">
 <li><p>Continuous numeric vectors only.</p></li>
-<li><p>Box constraints only; no general equality or inequality constraints.</p></li>
+<li><p>Box constraints only. Use the <code class="docutils literal notranslate"><span class="pre">constrained_optimization</span></code> library for
+equality and inequality constraints.</p></li>
 <li><p>Single starting point (no multi-start wrapper yet).</p></li>
 <li><p>Nelder-Mead adaptive (Gao-Han) coefficients are stubbed but not
 active.</p></li>

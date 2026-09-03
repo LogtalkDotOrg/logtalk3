@@ -26,11 +26,11 @@
 		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-09-03,
-		comment is 'Extends local_optimization_problem_protocol with general equality and inequality constraints. Box constraints continue to be expressed via the inherited position_bounds/1. A problem that defines neither equality_constraints/2 nor inequality_constraints/2 is a plain local_optimization_problem_protocol problem and can still be solved by any constrained_optimization solver.',
+		comment is 'Extends ``local_optimization_problem_protocol`` with general equality and inequality constraints. Box constraints continue to be expressed via the inherited ``position_bounds/1``. A problem that defines neither ``equality_constraints/2`` nor ``inequality_constraints/2`` is a plain ``local_optimization_problem_protocol`` problem and can still be solved by any ``constrained_optimization`` solver.',
 		remarks is [
-			'Equality constraints' - 'g(x) = 0, one component per row of equality_constraints/2.',
-			'Inequality constraints' - 'h(x) =< 0, one component per row of inequality_constraints/2. Constraints of the form h(x) >= 0 or a =< h(x) =< b must be restated in this form by the problem (e.g. negate, or split into two rows) before being reported here.',
-			'Jacobians' - 'equality_jacobian/2 and inequality_jacobian/2 are required by sqp_active_set(_) and primal_dual_interior_point(_), and by augmented_lagrangian(_,_), quadratic_penalty(_,_), and log_barrier(_,_) when their selected inner solver uses gradients. Solvers that need a Jacobian a problem does not define raise an existence error rather than silently falling back to finite differences.'
+			'Equality constraints' - '``g(x) = 0``, one component per row of ``equality_constraints/2``.',
+			'Inequality constraints' - '``h(x) =< 0``, one component per row of ``inequality_constraints/2``. Constraints of the form ``h(x) >= 0`` or ``a =< h(x) =< b`` must be restated in this form by the problem (e.g. negate, or split into two rows) before being reported here.',
+			'Jacobians' - '``equality_jacobian/2`` and ``inequality_jacobian/2`` are required by ``sqp_active_set(_)`` and ``primal_dual_interior_point(_)``, and by ``augmented_lagrangian(_,_)``, ``quadratic_penalty(_,_)``, and ``log_barrier(_,_)`` when their selected inner solver uses gradients. Solvers that need a Jacobian a problem does not define raise an existence error rather than silently falling back to finite differences.'
 		],
 		see_also is [
 			local_optimization_problem_protocol, qp_active_set, sqp_active_set(_), augmented_lagrangian(_, _),
@@ -41,28 +41,28 @@
 	:- public(equality_constraints/2).
 	:- mode(equality_constraints(+list(number), -list(number)), zero_or_one).
 	:- info(equality_constraints/2, [
-		comment is 'Computes g(x), the vector of equality constraint values at a point; feasibility requires every component to equal zero. Optional: when not defined, the problem has no equality constraints.',
+		comment is 'Computes ``g(x)``, the vector of equality constraint values at a point; feasibility requires every component to equal zero. Optional: when not defined, the problem has no equality constraints.',
 		argnames is ['Point', 'Values']
 	]).
 
 	:- public(equality_jacobian/2).
 	:- mode(equality_jacobian(+list(number), -list(list(number))), zero_or_one).
 	:- info(equality_jacobian/2, [
-		comment is 'Computes the Jacobian of equality_constraints/2 at a point, one row per constraint, one column per variable. Optional unless required by the solver in use (see the "Jacobians" remark above).',
+		comment is 'Computes the Jacobian of ``equality_constraints/2`` at a point, one row per constraint, one column per variable. Optional unless required by the solver in use (see the "Jacobians" remark above).',
 		argnames is ['Point', 'Jacobian']
 	]).
 
 	:- public(inequality_constraints/2).
 	:- mode(inequality_constraints(+list(number), -list(number)), zero_or_one).
 	:- info(inequality_constraints/2, [
-		comment is 'Computes h(x), the vector of inequality constraint values at a point; feasibility requires every component to be =< 0. Optional: when not defined, the problem has no general inequality constraints (position_bounds/1 may still apply).',
+		comment is 'Computes ``h(x)``, the vector of inequality constraint values at a point; feasibility requires every component to be ``=< 0``. Optional: when not defined, the problem has no general inequality constraints (position_bounds/1 may still apply).',
 		argnames is ['Point', 'Values']
 	]).
 
 	:- public(inequality_jacobian/2).
 	:- mode(inequality_jacobian(+list(number), -list(list(number))), zero_or_one).
 	:- info(inequality_jacobian/2, [
-		comment is 'Computes the Jacobian of inequality_constraints/2 at a point. Optional unless required by the solver in use (see the "Jacobians" remark above).',
+		comment is 'Computes the Jacobian of ``inequality_constraints/2`` at a point. Optional unless required by the solver in use (see the "Jacobians" remark above).',
 		argnames is ['Point', 'Jacobian']
 	]).
 
