@@ -238,7 +238,7 @@
 	]).
 
 	:- uses(list, [
-		member/2, memberchk/2
+		member/2, memberchk/2, msort/2
 	]).
 
 	route(Id, Method, Path, dispatch_rest_endpoint) :-
