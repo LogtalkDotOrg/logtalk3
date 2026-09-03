@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-24,
+		date is 2026-09-03,
 		comment is 'Barzilai-Borwein (BB) gradient method with adaptive step sizes. Requires the problem to define ``gradient/2``. Supports box constraints via projection, minimization and maximization, and BB1 / BB2 / alternating formulas.',
 		parameters is [
 			'Problem' - 'Problem object implementing ``local_optimization_problem_protocol`` and defining ``gradient/2``.'
@@ -70,6 +70,9 @@
 		^^option(step_size(Step0), Options),
 		^^option(step_min(StepMin), Options),
 		^^option(step_max(StepMax), Options),
+		( 	StepMin =< StepMax -> true
+		;	domain_error(option, step_min(StepMin))
+		),
 		^^option(line_search(LineSearch), Options),
 		^^option(armijo_c(ArmijoC), Options),
 		^^option(armijo_tau(ArmijoTau), Options),
@@ -335,13 +338,13 @@
 			Value1 = TrialVal,
 			StepUsed = Step,
 			Evals1 = Evals1_try
-		;	BT1 is BT + 1,
-			(	BT1 >= MaxBT ->
+		;	( 	BT >= MaxBT ->
 				Point1 = Trial,
 				Value1 = TrialVal,
 				StepUsed = Step,
 				Evals1 = Evals1_try
-			;	Step1 is Step * Tau,
+			;	BT1 is BT + 1,
+				Step1 is Step * Tau,
 				phi_armijo_backtrack(
 					BT1, MaxBT, Point0, Value0, Sign, Direction, Bounds,
 					Step1, C, Tau, DirDeriv,

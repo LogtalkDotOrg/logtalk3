@@ -23,7 +23,7 @@
 	imports(local_optimization_solver(_Problem_))).
 
 	:- info([
-		version is 1:0:1,
+		version is 1:0:0,
 		author is 'Paulo Moura',
 		date is 2026-09-03,
 		comment is 'L-BFGS-B bound-constrained limited-memory quasi-Newton optimizer with a level-B approximate generalized Cauchy point (first-segment quadratic min along the projected gradient path), free-set identification at the Cauchy point, feasible-step limiting, and L-BFGS two-loop recursion. Requires ``gradient/2``.',
@@ -413,12 +413,12 @@
 			Point1 = Trial,
 			Value1 = TrialVal,
 			Evals1 = Evals1_try
-		;	BT1 is BT + 1,
-			(	BT1 >= MaxBT ->
+		;	( 	BT >= MaxBT ->
 				Point1 = Trial,
 				Value1 = TrialVal,
 				Evals1 = Evals1_try
-			;	Step1 is Step * Tau,
+			;	BT1 is BT + 1,
+				Step1 is Step * Tau,
 				phi_armijo_backtrack(
 					BT1, MaxBT, Point0, Value0, Sign, Direction, Bounds,
 					Step1, C, Tau, DirDeriv,

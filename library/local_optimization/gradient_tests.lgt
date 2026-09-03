@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-19,
+		date is 2026-09-03,
 		comment is 'Unit tests specific to gradient-based local_optimization solvers (gradient descent, conjugate gradient, BFGS, ...). Parameterized by the solver functor.',
 		parnames is ['Solver']
 	]).
@@ -97,6 +97,21 @@
 			max_iterations(500),
 			tol_g(1.0)		% very loose
 		]),
+		memberchk(iterations(Iterations), Statistics).
+
+	test(grad_armijo_backtrack_limit, deterministic((Iterations == 1, Value < 1.0e-10))) :-
+		% the initial unit step reflects [3,4] to [-3,-4] without decreasing
+		% the objective; one backtrack to step 0.5 must reach the minimum
+		Solver =.. [_Solver_, sphere],
+		CommonOptions = [
+			armijo_max_backtracks(1),
+			max_iterations(10)
+		],
+		( 	(_Solver_ == barzilai_borwein; _Solver_ == gradient_descent) ->
+			Options = [line_search(armijo)| CommonOptions]
+		;	Options = CommonOptions
+		),
+		Solver::run(_Point, Value, Statistics, Options),
 		memberchk(iterations(Iterations), Statistics).
 
 	% missing gradient must be reported clearly

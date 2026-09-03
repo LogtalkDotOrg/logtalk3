@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-24,
+		date is 2026-09-03,
 		comment is 'Unit tests for local_optimization solvers. Parameterized by the solver functor (e.g. nelder_mead).',
 		parnames is ['Solver']
 	]).
@@ -124,6 +124,36 @@
 		Point = [X, Y],
 		^^assertion((X >= -1.0, X =< 1.0, Y >= -1.0, Y =< 1.0)),
 		^^assertion(Value >= 0.0).
+
+	test(nelder_mead_upper_bound_start, deterministic(Value < 0.1), [condition(nelder_mead_solver)]) :-
+		Solver =.. [_Solver_, upper_bound_quadratic],
+		Solver::run(_Point, Value, [max_iterations(100)]).
+
+	test(nelder_mead_one_dimensional_outside_contraction, deterministic(SimplexSize < 0.75), [condition(nelder_mead_solver)]) :-
+		Solver =.. [_Solver_, one_dimensional_quadratic],
+		Solver::run(_Point, _Value, Statistics, [
+			initial_step(1.0), max_iterations(1), tol_x(0.0), tol_f(0.0)
+		]),
+		memberchk(final_simplex_size(SimplexSize), Statistics).
+
+	test(nelder_mead_shrink_evaluations, deterministic(Evaluations == 5), [condition(nelder_mead_solver)]) :-
+		Solver =.. [_Solver_, one_dimensional_shrink],
+		Solver::run(_Point, _Value, Statistics, [
+			initial_step(1.0), max_iterations(1), tol_x(0.0), tol_f(0.0)
+		]),
+		memberchk(evaluations(Evaluations), Statistics).
+
+	test(nelder_mead_adaptive_coefficients, deterministic(AdaptiveValue =\= StandardValue), [condition(nelder_mead_solver)]) :-
+		Solver =.. [_Solver_, three_dimensional_sphere],
+		Options = [max_iterations(1), tol_x(0.0), tol_f(0.0)],
+		Solver::run(_StandardPoint, StandardValue, [adaptive(false)| Options]),
+		Solver::run(_AdaptivePoint, AdaptiveValue, [adaptive(true)| Options]).
+
+	test(nelder_mead_orders_by_objective_value, deterministic(Value < 0.1), [condition(nelder_mead_solver)]) :-
+		Solver =.. [_Solver_, shifted_one_dimensional_quadratic],
+		Solver::run(_Point, Value, [
+			initial_step(0.5), max_iterations(1), tol_x(0.0), tol_f(0.0)
+		]).
 
 	% progress reporting
 
@@ -224,6 +254,9 @@
 		Solver::run(_Point, _Value).
 
 	% auxiliary predicates
+
+	nelder_mead_solver :-
+		_Solver_ == nelder_mead.
 
 	no_gradient_solver :-
 		_Solver_ \== barzilai_borwein,

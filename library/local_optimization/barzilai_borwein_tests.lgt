@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-19,
+		date is 2026-09-03,
 		comment is 'Unit tests specific to the barzilai_borwein(_) solver: formula variants, line-search modes, step clamping, and option validation. The shared tests(barzilai_borwein) and gradient_tests(barzilai_borwein) suites cover the common solver API and are not repeated here.'
 	]).
 
@@ -95,6 +95,9 @@
 
 	test(bb_invalid_step_max, error(domain_error(option, step_max(0.0)))) :-
 		barzilai_borwein(sphere)::run(_Point, _Value, [step_max(0.0)]).
+
+	test(bb_invalid_step_range, error(domain_error(option, step_min(2.0)))) :-
+		barzilai_borwein(sphere)::run(_Point, _Value, [step_min(2.0), step_max(1.0)]).
 
 	test(bb_invalid_line_search, error(domain_error(option, line_search(wolfe)))) :-
 		barzilai_borwein(sphere)::run(_Point, _Value, [line_search(wolfe)]).

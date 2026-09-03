@@ -591,6 +591,10 @@ shrink.</p>
 <li><p>contraction <code class="docutils literal notranslate"><span class="pre">Rho</span> <span class="pre">=</span> <span class="pre">0.5</span></code></p></li>
 <li><p>shrink <code class="docutils literal notranslate"><span class="pre">Sigma</span> <span class="pre">=</span> <span class="pre">0.5</span></code></p></li>
 </ul>
+<p>With <code class="docutils literal notranslate"><span class="pre">adaptive(true)</span></code>, the Gao-Han dimension-dependent coefficients
+are used instead: <code class="docutils literal notranslate"><span class="pre">Alpha</span> <span class="pre">=</span> <span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">Gamma</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">+</span> <span class="pre">2/N</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Rho</span> <span class="pre">=</span> <span class="pre">0.75</span> <span class="pre">-</span> <span class="pre">1/(2*N)</span></code>, and <code class="docutils literal notranslate"><span class="pre">Sigma</span> <span class="pre">=</span> <span class="pre">1</span> <span class="pre">-</span> <span class="pre">1/N</span></code>. These coefficients
+override the four corresponding coefficient options.</p>
 <p>The initial simplex is built from <code class="docutils literal notranslate"><span class="pre">initial_point/1</span></code> by perturbing each
 coordinate. The relative step size is controlled by <code class="docutils literal notranslate"><span class="pre">initial_step(S)</span></code>
 (default <code class="docutils literal notranslate"><span class="pre">0.05</span></code>).</p>
@@ -776,8 +780,8 @@ the target; use <code class="docutils literal notranslate"><span class="pre">non
 <li><p><code class="docutils literal notranslate"><span class="pre">contraction(Rho)</span></code> - default <code class="docutils literal notranslate"><span class="pre">0.5</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">shrink(Sigma)</span></code> - default <code class="docutils literal notranslate"><span class="pre">0.5</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">initial_step(S)</span></code> - relative initial simplex step (default <code class="docutils literal notranslate"><span class="pre">0.05</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">adaptive(false|true)</span></code> - reserved for a future Gao-Han variant
-(default <code class="docutils literal notranslate"><span class="pre">false</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">adaptive(false|true)</span></code> - use Gao-Han dimension-dependent
+coefficients (default <code class="docutils literal notranslate"><span class="pre">false</span></code>)</p></li>
 </ul>
 </section>
 <section id="gradient-descent-1">
@@ -888,8 +892,6 @@ L-BFGS-B, and trust-region Newton-CG additionally report:</p>
 <li><p>Box constraints only. Use the <code class="docutils literal notranslate"><span class="pre">constrained_optimization</span></code> library for
 equality and inequality constraints.</p></li>
 <li><p>Single starting point (no multi-start wrapper yet).</p></li>
-<li><p>Nelder-Mead adaptive (Gao-Han) coefficients are stubbed but not
-active.</p></li>
 <li><p>Projected steps after a conjugate-gradient update can weaken
 conjugacy; a pure bound-constrained CG formulation is not yet
 implemented.</p></li>

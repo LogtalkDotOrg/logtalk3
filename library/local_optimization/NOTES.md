@@ -166,6 +166,11 @@ Standard coefficients (overridable):
 - contraction `Rho = 0.5`
 - shrink `Sigma = 0.5`
 
+With `adaptive(true)`, the Gao-Han dimension-dependent coefficients are
+used instead: `Alpha = 1`, `Gamma = 1 + 2/N`, `Rho = 0.75 - 1/(2*N)`,
+and `Sigma = 1 - 1/N`. These coefficients override the four corresponding
+coefficient options.
+
 The initial simplex is built from `initial_point/1` by perturbing each
 coordinate. The relative step size is controlled by `initial_step(S)`
 (default `0.05`).
@@ -364,8 +369,8 @@ Solver-specific options
 - `contraction(Rho)` - default `0.5`
 - `shrink(Sigma)` - default `0.5`
 - `initial_step(S)` - relative initial simplex step (default `0.05`)
-- `adaptive(false|true)` - reserved for a future Gao-Han variant
-  (default `false`)
+- `adaptive(false|true)` - use Gao-Han dimension-dependent coefficients
+	(default `false`)
 
 ### Gradient descent
 
@@ -464,7 +469,6 @@ Limitations
 - Box constraints only. Use the `constrained_optimization` library for
   equality and inequality constraints.
 - Single starting point (no multi-start wrapper yet).
-- Nelder-Mead adaptive (Gao-Han) coefficients are stubbed but not active.
 - Projected steps after a conjugate-gradient update can weaken conjugacy;
   a pure bound-constrained CG formulation is not yet implemented.
 - Projected steps after a BFGS or unconstrained L-BFGS update can weaken

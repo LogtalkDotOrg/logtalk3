@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-24,
+		date is 2026-09-03,
 		comment is 'Gradient descent (steepest descent) local optimizer with optional backtracking Armijo line search. Requires the problem to define ``gradient/2``. Supports box constraints via projection, minimization and maximization.',
 		parameters is [
 			'Problem' - 'Problem object implementing ``local_optimization_problem_protocol`` and defining ``gradient/2``.'
@@ -241,14 +241,13 @@
 			Value1 = TrialVal,
 			StepUsed = Step,
 			Evals1 = Evals1_try
-		;	BT1 is BT + 1,
-			(	BT1 >= MaxBT ->
-				% accept the last trial even if Armijo failed
+		;	( 	BT >= MaxBT ->
 				Point1 = Trial,
 				Value1 = TrialVal,
 				StepUsed = Step,
 				Evals1 = Evals1_try
-			;	Step1 is Step * Tau,
+			;	BT1 is BT + 1,
+				Step1 is Step * Tau,
 				armijo_backtrack(
 					BT1, MaxBT, Point0, Value0, Direction, Bounds, ObjDir,
 					Step1, C, Tau, DirDeriv,

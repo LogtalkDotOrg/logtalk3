@@ -46,6 +46,99 @@
 :- end_object.
 
 
+:- object(one_dimensional_quadratic,
+	implements(local_optimization_problem_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-09-03,
+		comment is 'One-dimensional quadratic with minimum at -0.2, used to test Nelder-Mead simplex operations.'
+	]).
+
+	initial_point([0.0]).
+
+	objective([X], Value) :-
+		Value is (X + 0.2) * (X + 0.2).
+
+:- end_object.
+
+
+:- object(upper_bound_quadratic,
+	implements(local_optimization_problem_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-09-03,
+		comment is 'One-dimensional bounded quadratic starting at its upper bound, used to test bounded simplex construction.'
+	]).
+
+	initial_point([1.0]).
+
+	position_bounds([(-1.0)-1.0]).
+
+	objective([X], Value) :-
+		Value is X * X.
+
+:- end_object.
+
+
+:- object(one_dimensional_shrink,
+	implements(local_optimization_problem_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-09-03,
+		comment is 'One-dimensional polynomial that forces a Nelder-Mead shrink on the first iteration.'
+	]).
+
+	initial_point([0.0]).
+
+	objective([X], Value) :-
+		X2 is X * X,
+		Value is 6.0 * X2 - 5.0 * X2 * X2.
+
+:- end_object.
+
+
+:- object(three_dimensional_sphere,
+	implements(local_optimization_problem_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-09-03,
+		comment is 'Three-dimensional sphere used to test adaptive Nelder-Mead coefficients.'
+	]).
+
+	initial_point([3.0, 4.0, 5.0]).
+
+	objective([X, Y, Z], Value) :-
+		Value is X * X + Y * Y + Z * Z.
+
+:- end_object.
+
+
+:- object(shifted_one_dimensional_quadratic,
+	implements(local_optimization_problem_protocol)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-09-03,
+		comment is 'One-dimensional quadratic whose positive initial perturbation improves the objective, used to test simplex ordering.'
+	]).
+
+	initial_point([0.0]).
+
+	objective([X], Value) :-
+		Value is (X - 1.0) * (X - 1.0).
+
+:- end_object.
+
+
 :- object(rosenbrock_stop,
 	implements(local_optimization_problem_protocol)).
 

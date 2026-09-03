@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-24,
+		date is 2026-09-03,
 		comment is 'Nonlinear conjugate-gradient local optimizer (Fletcher-Reeves and Polak-Ribière). Requires the problem to define ``gradient/2``. Supports optional box constraints via projection, minimization and maximization, and periodic or automatic restarts.',
 		parameters is [
 			'Problem' - 'Problem object implementing ``local_optimization_problem_protocol`` and defining ``gradient/2``.'
@@ -292,12 +292,12 @@
 			Point1 = Trial,
 			Value1 = TrialVal,
 			Evals1 = Evals1_try
-		;	BT1 is BT + 1,
-			(	BT1 >= MaxBT ->
+		;	( 	BT >= MaxBT ->
 				Point1 = Trial,
 				Value1 = TrialVal,
 				Evals1 = Evals1_try
-			;	Step1 is Step * Tau,
+			;	BT1 is BT + 1,
+				Step1 is Step * Tau,
 				armijo_backtrack(
 					BT1, MaxBT, Point0, Value0, Direction, Bounds, ObjDir,
 					Step1, C, Tau, DirDeriv,

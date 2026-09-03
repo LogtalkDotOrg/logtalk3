@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-08-24,
+		date is 2026-09-03,
 		comment is 'Nelder-Mead (downhill simplex) derivative-free local optimizer for continuous problems. Supports optional box constraints via projection, minimization and maximization, and the standard reflection / expansion / contraction / shrink operators.',
 		parameters is [
 			'Problem' - 'Problem object implementing ``local_optimization_problem_protocol``.'
@@ -84,13 +84,17 @@
 		),
 		length(Point0, Dimension),
 		Dimension >= 1,
+		nelder_mead_coefficients(
+			Adaptive, Dimension, Alpha, Gamma, Rho, Sigma,
+			EffectiveAlpha, EffectiveGamma, EffectiveRho, EffectiveSigma
+		),
 		build_simplex(Point0, Dimension, Bounds, InitialStep, Simplex0),
 		evaluate_simplex(Simplex0, Evaluated0, 0, Evals0),
 		order_simplex(ObjDir, Evaluated0, Ordered0),
 		Ordered0 = [Best0-Val0| _],
 		loop(
 			0, MaxIterations, UpdateInterval, Dimension, Bounds, ObjDir, Target,
-			Alpha, Gamma, Rho, Sigma, Adaptive, TolX, TolF,
+			EffectiveAlpha, EffectiveGamma, EffectiveRho, EffectiveSigma, Adaptive, TolX, TolF,
 			Ordered0, Best0, Val0, Evals0,
 			FinalSimplex, BestPoint, BestValue, Iterations, Evaluations
 		),
@@ -177,41 +181,50 @@
 		^^project_to_bounds(Centroid0, Bounds, Centroid),
 		reflect(Worst, Centroid, Alpha, Reflected0),
 		^^project_to_bounds(Reflected0, Bounds, Reflected),
-		objective(Reflected, RefVal),
+		evaluate_objective(Reflected, RefVal),
 		Evals1 is Evals0 + 1,
 		(	^^better_value(ObjDir, RefVal, BestVal) ->
 			expand(Reflected, Centroid, Gamma, Expanded0),
 			^^project_to_bounds(Expanded0, Bounds, Expanded),
-			objective(Expanded, ExpVal),
+			evaluate_objective(Expanded, ExpVal),
 			Evals2 is Evals1 + 1,
 			(	^^better_value(ObjDir, ExpVal, RefVal) ->
 				replace_worst(Simplex, Expanded-ExpVal, NewSimplex)
 			;	replace_worst(Simplex, Reflected-RefVal, NewSimplex)
 			),
 			Evals = Evals2
-		;	(	MiddlePairs == [] ->
-				SecondWorstVal = _WorstVal
+		;	( 	MiddlePairs == [] ->
+				SecondWorstVal = BestVal
 			;	last(MiddlePairs, _-SecondWorstVal)
 			),
 			^^better_value(ObjDir, RefVal, SecondWorstVal) ->
 			replace_worst(Simplex, Reflected-RefVal, NewSimplex),
 			Evals = Evals1
 		;	(	^^better_value(ObjDir, RefVal, _WorstVal) ->
-				contract_outside(Reflected, Centroid, Rho, Contracted0)
-			;	contract_inside(Worst, Centroid, Rho, Contracted0)
+				contract_outside(Reflected, Centroid, Rho, Contracted0),
+				ContractReference = RefVal
+			;	contract_inside(Worst, Centroid, Rho, Contracted0),
+				ContractReference = _WorstVal
 			),
 			^^project_to_bounds(Contracted0, Bounds, Contracted),
-			objective(Contracted, ConVal),
+			evaluate_objective(Contracted, ConVal),
 			Evals2 is Evals1 + 1,
-			(	^^better_value(ObjDir, ConVal, _WorstVal) ->
+			( 	^^better_value(ObjDir, ConVal, ContractReference) ->
 				replace_worst(Simplex, Contracted-ConVal, NewSimplex),
 				Evals = Evals2
-			;	shrink_simplex(Simplex, Best, Sigma, Bounds, Shrunk0, Evals2, Evals),
-				evaluate_pairs(Shrunk0, NewSimplex)
+			;	shrink_simplex(Simplex, Best, Sigma, Bounds, Shrunk0),
+				evaluate_pairs(Shrunk0, Shrunk, Evals2, Evals),
+				NewSimplex = [Best-BestVal| Shrunk]
 			)
 		).
 
 	% simplex operators
+
+	nelder_mead_coefficients(false, _Dimension, Alpha, Gamma, Rho, Sigma, Alpha, Gamma, Rho, Sigma).
+	nelder_mead_coefficients(true, Dimension, _Alpha, _Gamma, _Rho, _Sigma, 1.0, Gamma, Rho, Sigma) :-
+		Gamma is 1.0 + 2.0 / Dimension,
+		Rho is 0.75 - 1.0 / (2.0 * Dimension),
+		Sigma is 1.0 - 1.0 / Dimension.
 
 	reflect(Worst, Centroid, Alpha, Reflected) :-
 		subtract_vectors(Centroid, Worst, Diff),
@@ -233,17 +246,16 @@
 		scale_vector(Diff, Rho, Scaled),
 		add_vectors(Centroid, Scaled, Contracted).
 
-	shrink_simplex([Best-_| Rest], Best, Sigma, Bounds, Shrunk, Evals0, Evals) :-
-		shrink_vertices(Rest, Best, Sigma, Bounds, ShrunkRest, Evals0, Evals),
-		Shrunk = [Best| ShrunkRest].
+	shrink_simplex([Best-_| Rest], Best, Sigma, Bounds, Shrunk) :-
+		shrink_vertices(Rest, Best, Sigma, Bounds, Shrunk).
 
-	shrink_vertices([], _, _, _, [], Evals, Evals).
-	shrink_vertices([V-_| Vs], Best, Sigma, Bounds, [NewV| NewVs], Evals0, Evals) :-
+	shrink_vertices([], _, _, _, []).
+	shrink_vertices([V-_| Vs], Best, Sigma, Bounds, [NewV| NewVs]) :-
 		subtract_vectors(V, Best, Diff),
 		scale_vector(Diff, Sigma, Scaled),
 		add_vectors(Best, Scaled, NewV0),
 		^^project_to_bounds(NewV0, Bounds, NewV),
-		shrink_vertices(Vs, Best, Sigma, Bounds, NewVs, Evals0, Evals).
+		shrink_vertices(Vs, Best, Sigma, Bounds, NewVs).
 
 	% simplex construction & helpers
 
@@ -270,33 +282,53 @@
 			)
 		),
 		nth1(I, Point, Xi),
-		NewXi is Xi + Delta,
+		( 	Bounds == [] ->
+			NewXi is Xi + Delta
+		;	Candidate is Xi + Delta,
+			( 	Candidate =< High ->
+				NewXi = Candidate
+			;	NewXi is Xi - Delta
+			)
+		),
 		replace_nth1(I, Point, NewXi, Perturbed0),
 		^^project_to_bounds(Perturbed0, Bounds, Perturbed).
 
 	evaluate_simplex([], [], Evals, Evals).
 	evaluate_simplex([P| Ps], [P-V| Pairs], Evals0, Evals) :-
-		objective(P, V),
-		(	number(V) -> true ; domain_error(objective, V) ),
+		evaluate_objective(P, V),
 		Evals1 is Evals0 + 1,
 		evaluate_simplex(Ps, Pairs, Evals1, Evals).
 
-	evaluate_pairs([], []).
-	evaluate_pairs([P| Ps], [P-V| Pairs]) :-
-		objective(P, V),
-		evaluate_pairs(Ps, Pairs).
+	evaluate_pairs([], [], Evals, Evals).
+	evaluate_pairs([P| Ps], [P-V| Pairs], Evals0, Evals) :-
+		evaluate_objective(P, V),
+		Evals1 is Evals0 + 1,
+		evaluate_pairs(Ps, Pairs, Evals1, Evals).
 
-	order_simplex(minimize, Pairs, Ordered) :-
-		keysort(Pairs, Ordered).
-	order_simplex(maximize, Pairs, Ordered) :-
-		negate_keys(Pairs, Neg),
-		keysort(Neg, Sorted),
-		negate_keys(Sorted, Ordered).
+	evaluate_objective(Point, Value) :-
+		objective(Point, Value),
+		( 	number(Value) ->
+			true
+		;	domain_error(objective, Value)
+		).
 
-	negate_keys([], []).
-	negate_keys([P-V| Rest], [P-NV| Neg]) :-
-		NV is -V,
-		negate_keys(Rest, Neg).
+	order_simplex(Objective, Pairs, Ordered) :-
+		objective_keys(Objective, Pairs, Keyed),
+		keysort(Keyed, Sorted),
+		strip_objective_keys(Sorted, Ordered).
+
+	objective_keys(_, [], []) :-
+		!.
+	objective_keys(minimize, [Point-Value| Pairs], [Value-(Point-Value)| Keyed]) :-
+		objective_keys(minimize, Pairs, Keyed).
+	objective_keys(maximize, [Point-Value| Pairs], [Key-(Point-Value)| Keyed]) :-
+		Key is -Value,
+		objective_keys(maximize, Pairs, Keyed).
+
+	strip_objective_keys([], []) :-
+		!.
+	strip_objective_keys([_-Pair| Keyed], [Pair| Pairs]) :-
+		strip_objective_keys(Keyed, Pairs).
 
 	replace_worst(Simplex, NewPair, NewSimplex) :-
 		append(Front, [_], Simplex),
