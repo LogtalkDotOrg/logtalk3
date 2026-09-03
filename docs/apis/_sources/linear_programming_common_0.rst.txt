@@ -85,6 +85,63 @@ Checks that the argument is a structurally valid linear-programming result.
 
 ------------
 
+.. index:: relax_problem/2
+.. _linear_programming_common/0::relax_problem/2:
+
+``relax_problem/2``
+^^^^^^^^^^^^^^^^^^^
+
+Returns the continuous relaxation of a validated linear-program problem.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``relax_problem(Problem,Relaxation)``
+| **Mode and number of proofs:**
+|    ``relax_problem(+compound,-compound)`` - ``one``
+
+
+------------
+
+.. index:: discrete_variables/2
+.. _linear_programming_common/0::discrete_variables/2:
+
+``discrete_variables/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the integer and binary variable declarations of a validated linear-program problem in declaration order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``discrete_variables(Problem,Variables)``
+| **Mode and number of proofs:**
+|    ``discrete_variables(+compound,-list(compound))`` - ``one``
+
+
+------------
+
+.. index:: tighten_variable_bounds/5
+.. _linear_programming_common/0::tighten_variable_bounds/5:
+
+``tighten_variable_bounds/5``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns a copy of a validated problem with the named variable bounds tightened to the given finite bounds.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``tighten_variable_bounds(Name,Lower,Upper,Problem0,Problem)``
+| **Mode and number of proofs:**
+|    ``tighten_variable_bounds(+term,+number,+number,+compound,-compound)`` - ``one_or_error``
+
+
+------------
+
 Private predicates
 ------------------
 

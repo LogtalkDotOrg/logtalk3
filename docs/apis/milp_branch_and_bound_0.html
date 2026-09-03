@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>linear_programming_types &mdash; Logtalk 3.102.0</title>
+  <title>milp_branch_and_bound &mdash; Logtalk 3.102.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -32,8 +32,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="milp_branch_and_bound" href="milp_branch_and_bound_0.html" />
-    <link rel="prev" title="linear_programming_protocol" href="linear_programming_protocol_0.html" />
+    <link rel="next" title="simplex" href="simplex_0.html" />
+    <link rel="prev" title="linear_programming_types" href="linear_programming_types_0.html" />
    
 </head>
 
@@ -249,8 +249,8 @@
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#linear-programming"><span class="xref std std-ref">linear_programming</span></a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="linear_programming_common_0.html">linear_programming_common</a></li>
 <li class="toctree-l3"><a class="reference internal" href="linear_programming_protocol_0.html">linear_programming_protocol</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">linear_programming_types</a></li>
-<li class="toctree-l3"><a class="reference internal" href="milp_branch_and_bound_0.html">milp_branch_and_bound</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linear_programming_types_0.html">linear_programming_types</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">milp_branch_and_bound</a></li>
 <li class="toctree-l3"><a class="reference internal" href="simplex_0.html">simplex</a></li>
 </ul>
 </li>
@@ -418,9 +418,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">linear_programming_types</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">milp_branch_and_bound</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/linear_programming_types_0.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/milp_branch_and_bound_0.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -428,10 +428,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="linear-programming-types-0"><span id="index-0"></span><strong>category</strong></p>
-<section id="linear-programming-types">
-<h1><code class="docutils literal notranslate"><span class="pre">linear_programming_types</span></code><a class="headerlink" href="#linear-programming-types" title="Link to this heading"></a></h1>
-<p>Type definitions for linear-programming model inputs.</p>
+  <p class="right" id="milp-branch-and-bound-0"><span id="index-0"></span><strong>object</strong></p>
+<section id="milp-branch-and-bound">
+<h1><code class="docutils literal notranslate"><span class="pre">milp_branch_and_bound</span></code><a class="headerlink" href="#milp-branch-and-bound" title="Link to this heading"></a></h1>
+<p>Portable depth-first branch-and-bound solver for small mixed-integer linear programs.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -446,26 +446,33 @@
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></div>
 </div>
 </div>
 <div class="line-block">
-<div class="line"><strong>Provides:</strong></div>
+<div class="line"><strong>Imports:</strong></div>
 <div class="line-block">
-<div class="line"><a class="reference internal" href="type_0.html#type-0-type-1"><span class="std std-ref">type::type/1</span></a></div>
-<div class="line"><a class="reference internal" href="type_0.html#type-0-check-2"><span class="std std-ref">type::check/2</span></a></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="linear_programming_common_0.html#linear-programming-common-0"><span class="std std-ref">linear_programming_common</span></a></div>
+</div>
+<div class="line"><strong>Uses:</strong></div>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
+<div class="line"><a class="reference internal" href="simplex_0.html#simplex-0"><span class="std std-ref">simplex</span></a></div>
 </div>
 </div>
 <div class="line-block">
 <div class="line"><strong>Remarks:</strong></div>
-<div class="line-block">
-<div class="line">(none)</div>
 </div>
-</div>
+<blockquote>
+<div><ul class="simple">
+<li><p>Discrete domains: Integer and binary variables must have finite bounds. No cutting planes or primal heuristics are used.</p></li>
+<li><p>LP relaxations: Each search node is solved using the simplex object.</p></li>
+</ul>
+</div></blockquote>
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line">(none)</div>
+<div class="line"> <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-option-1"><span class="std std-ref">check_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-check-options-1"><span class="std std-ref">check_options/1</span></a>  <a class="reference internal" href="linear_programming_protocol_0.html#linear-programming-protocol-0-constraint-5"><span class="std std-ref">constraint/5</span></a>  <a class="reference internal" href="linear_programming_protocol_0.html#linear-programming-protocol-0-constraints-3"><span class="std std-ref">constraints/3</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-option-1"><span class="std std-ref">default_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-default-options-1"><span class="std std-ref">default_options/1</span></a>  <a class="reference internal" href="linear_programming_protocol_0.html#linear-programming-protocol-0-new-problem-1"><span class="std std-ref">new_problem/1</span></a>  <a class="reference internal" href="linear_programming_protocol_0.html#linear-programming-protocol-0-objective-4"><span class="std std-ref">objective/4</span></a>  <a class="reference internal" href="linear_programming_protocol_0.html#linear-programming-protocol-0-objective-value-2"><span class="std std-ref">objective_value/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-2"><span class="std std-ref">option/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-option-3"><span class="std std-ref">option/3</span></a>  <a class="reference internal" href="linear_programming_protocol_0.html#linear-programming-protocol-0-print-problem-1"><span class="std std-ref">print_problem/1</span></a>  <a class="reference internal" href="linear_programming_protocol_0.html#linear-programming-protocol-0-print-solution-1"><span class="std std-ref">print_solution/1</span></a>  <a class="reference internal" href="linear_programming_protocol_0.html#linear-programming-protocol-0-problem-from-matrices-8"><span class="std std-ref">problem_from_matrices/8</span></a>  <a class="reference internal" href="linear_programming_protocol_0.html#linear-programming-protocol-0-solve-2"><span class="std std-ref">solve/2</span></a>  <a class="reference internal" href="linear_programming_protocol_0.html#linear-programming-protocol-0-solve-3"><span class="std std-ref">solve/3</span></a>  <a class="reference internal" href="linear_programming_protocol_0.html#linear-programming-protocol-0-statistics-2"><span class="std std-ref">statistics/2</span></a>  <a class="reference internal" href="linear_programming_protocol_0.html#linear-programming-protocol-0-status-2"><span class="std std-ref">status/2</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-option-1"><span class="std std-ref">valid_option/1</span></a>  <a class="reference internal" href="options_protocol_0.html#options-protocol-0-valid-options-1"><span class="std std-ref">valid_options/1</span></a>  <a class="reference internal" href="linear_programming_protocol_0.html#linear-programming-protocol-0-variable-4"><span class="std std-ref">variable/4</span></a>  <a class="reference internal" href="linear_programming_protocol_0.html#linear-programming-protocol-0-variable-6"><span class="std std-ref">variable/6</span></a>  <a class="reference internal" href="linear_programming_protocol_0.html#linear-programming-protocol-0-variable-value-3"><span class="std std-ref">variable_value/3</span></a></div>
 </div>
 </div>
 <nav class="contents local" id="contents">
@@ -491,6 +498,10 @@
 <section id="operators">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
 <p>(none)</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="simplex_0.html#simplex-0"><span class="std std-ref">simplex</span></a>, <a class="reference internal" href="linear_programming_protocol_0.html#linear-programming-protocol-0"><span class="std std-ref">linear_programming_protocol</span></a></p>
+</div>
 </section>
 </section>
 
@@ -498,8 +509,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="linear_programming_protocol_0.html" class="btn btn-neutral float-left" title="linear_programming_protocol" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="milp_branch_and_bound_0.html" class="btn btn-neutral float-right" title="milp_branch_and_bound" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="linear_programming_types_0.html" class="btn btn-neutral float-left" title="linear_programming_types" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="simplex_0.html" class="btn btn-neutral float-right" title="simplex" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

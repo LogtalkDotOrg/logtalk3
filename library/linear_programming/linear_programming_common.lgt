@@ -44,6 +44,27 @@
 		argnames is ['Result']
 	]).
 
+	:- protected(relax_problem/2).
+	:- mode(relax_problem(+compound, -compound), one).
+	:- info(relax_problem/2, [
+		comment is 'Returns the continuous relaxation of a validated linear-program problem.',
+		argnames is ['Problem', 'Relaxation']
+	]).
+
+	:- protected(discrete_variables/2).
+	:- mode(discrete_variables(+compound, -list(compound)), one).
+	:- info(discrete_variables/2, [
+		comment is 'Returns the integer and binary variable declarations of a validated linear-program problem in declaration order.',
+		argnames is ['Problem', 'Variables']
+	]).
+
+	:- protected(tighten_variable_bounds/5).
+	:- mode(tighten_variable_bounds(+term, +number, +number, +compound, -compound), one_or_error).
+	:- info(tighten_variable_bounds/5, [
+		comment is 'Returns a copy of a validated problem with the named variable bounds tightened to the given finite bounds.',
+		argnames is ['Name', 'Lower', 'Upper', 'Problem0', 'Problem']
+	]).
+
 	:- uses(format, [
 		format/2
 	]).
@@ -53,6 +74,17 @@
 	]).
 
 	new_problem(linear_program([], [], none)).
+
+	relax_problem(linear_program(Variables, Constraints, Objective), linear_program(RelaxedVariables, Constraints, Objective)) :-
+		relax_variables(Variables, RelaxedVariables).
+
+	discrete_variables(linear_program(Variables, _Constraints, _Objective), DiscreteVariables) :-
+		collect_discrete_variables(Variables, DiscreteVariables).
+
+	tighten_variable_bounds(Name, Lower, Upper, Problem0, linear_program(Variables, Constraints, Objective)) :-
+		check_problem(Problem0),
+		Problem0 = linear_program(Variables0, Constraints, Objective),
+		tighten_variable(Variables0, Name, Lower, Upper, Variables).
 
 	variable(Name, Type, Problem0, Problem) :-
 		(	Type == binary ->
@@ -210,6 +242,7 @@
 	valid_status(infeasible).
 	valid_status(unbounded).
 	valid_status(iteration_limit).
+	valid_status(node_limit).
 	valid_status(numerical_error).
 
 	valid_result_data(optimal, Objective, Values) :-
@@ -243,6 +276,44 @@
 	valid_variable_type(continuous).
 	valid_variable_type(integer).
 	valid_variable_type(binary).
+
+	relax_variables([], []).
+	relax_variables([variable(Name, _Type, Lower, Upper)| Variables], [variable(Name, continuous, Lower, Upper)| RelaxedVariables]) :-
+		relax_variables(Variables, RelaxedVariables).
+
+	collect_discrete_variables([], []).
+	collect_discrete_variables([variable(_Name, continuous, _Lower, _Upper)| Variables], DiscreteVariables) :-
+		!,
+		collect_discrete_variables(Variables, DiscreteVariables).
+	collect_discrete_variables([Variable| Variables], [Variable| DiscreteVariables]) :-
+		collect_discrete_variables(Variables, DiscreteVariables).
+
+	tighten_variable([], Name, _Lower, _Upper, _Variables) :-
+		domain_error(linear_programming_variable, Name).
+	tighten_variable([variable(Name0, Type, Lower0, Upper0)| Variables], Name, Lower, Upper, [variable(Name0, Type, Lower, Upper)| Variables]) :-
+		Name == Name0,
+		!,
+		check_bounds(Type, Lower, Upper),
+		(	bounds_tightened(Lower0, Upper0, Lower, Upper) ->
+			true
+		;	domain_error(linear_programming_bounds, Lower-Upper)
+		).
+	tighten_variable([Variable| Variables0], Name, Lower, Upper, [Variable| Variables]) :-
+		tighten_variable(Variables0, Name, Lower, Upper, Variables).
+
+	bounds_tightened(Lower0, Upper0, Lower, Upper) :-
+		lower_bound_not_weakened(Lower0, Lower),
+		upper_bound_not_weakened(Upper0, Upper).
+
+	lower_bound_not_weakened(-inf, _Lower).
+	lower_bound_not_weakened(Lower0, Lower) :-
+		number(Lower0),
+		Lower >= Lower0.
+
+	upper_bound_not_weakened(inf, _Upper).
+	upper_bound_not_weakened(Upper0, Upper) :-
+		number(Upper0),
+		Upper =< Upper0.
 
 	check_bounds(Type, Lower, Upper) :-
 		(	var(Lower) ->

@@ -238,14 +238,15 @@
 <li class="toctree-l2"><a class="reference internal" href="linda.html"><code class="docutils literal notranslate"><span class="pre">linda</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="linear_algebra.html"><code class="docutils literal notranslate"><span class="pre">linear_algebra</span></code></a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">linear_programming</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#model-representation">Model representation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#dense-matrix-conversion">Dense matrix conversion</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#results-and-errors">Results and errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mixed-integer-solving">Mixed-integer solving</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#api-documentation">API documentation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="linear_regression.html"><code class="docutils literal notranslate"><span class="pre">linear_regression</span></code></a></li>
@@ -406,14 +407,36 @@
   <section id="linear-programming">
 <span id="library-linear-programming"></span><h1><code class="docutils literal notranslate"><span class="pre">linear_programming</span></code><a class="headerlink" href="#linear-programming" title="Link to this heading"></a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">linear_programming</span></code> library provides immutable construction and
-solving of small linear programs. The initial <code class="docutils literal notranslate"><span class="pre">simplex</span></code> backend is a
-portable dense two-phase tableau implementation using Bland’s pivot
-rule.</p>
+solving of small linear and mixed-integer linear programs. The
+<code class="docutils literal notranslate"><span class="pre">simplex</span></code> backend is a portable dense two-phase tableau implementation
+using Bland’s pivot rule. The <code class="docutils literal notranslate"><span class="pre">milp_branch_and_bound</span></code> backend provides
+deterministic depth-first branch-and-bound over <code class="docutils literal notranslate"><span class="pre">simplex</span></code> LP
+relaxations.</p>
 <p>The model API supports continuous, integer, and binary variable
-declarations so that future MILP backends can consume the same models.
-The <code class="docutils literal notranslate"><span class="pre">simplex</span></code> backend currently solves continuous models only and
+declarations. The <code class="docutils literal notranslate"><span class="pre">simplex</span></code> backend solves continuous models only and
 throws a <code class="docutils literal notranslate"><span class="pre">domain_error(simplex_variable_type,</span> <span class="pre">Variable-Type)</span></code> error
-for other variable types.</p>
+for other variable types. Use <code class="docutils literal notranslate"><span class="pre">milp_branch_and_bound</span></code> to solve models
+containing integer or binary variables.</p>
+<section id="api-documentation">
+<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
+<p>Open the
+<a class="reference external" href="../../apis/library_index.html#linear-programming">../../apis/library_index.html#linear-programming</a>
+link in a web browser.</p>
+</section>
+<section id="loading">
+<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
+<p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(linear_programming(loader)).
+</pre></div>
+</div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
+<p>To test this library, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(linear_programming(tester)).
+</pre></div>
+</div>
+</section>
 <section id="model-representation">
 <h2>Model representation<a class="headerlink" href="#model-representation" title="Link to this heading"></a></h2>
 <p>Variables are identified by unique ground terms. Linear expressions are
@@ -465,42 +488,45 @@ one-based column indices.</p>
 <section id="results-and-errors">
 <h2>Results and errors<a class="headerlink" href="#results-and-errors" title="Link to this heading"></a></h2>
 <p>Solver statuses are <code class="docutils literal notranslate"><span class="pre">optimal</span></code>, <code class="docutils literal notranslate"><span class="pre">infeasible</span></code>, <code class="docutils literal notranslate"><span class="pre">unbounded</span></code>,
-<code class="docutils literal notranslate"><span class="pre">iteration_limit</span></code>, and <code class="docutils literal notranslate"><span class="pre">numerical_error</span></code>. Only an optimal result
-contains variable values and an objective value. The corresponding
-inspector predicates fail for other statuses. Malformed problems and
-unsupported backend capabilities throw errors instead of being reported
-as mathematical solver statuses.</p>
+<code class="docutils literal notranslate"><span class="pre">iteration_limit</span></code>, <code class="docutils literal notranslate"><span class="pre">node_limit</span></code>, and <code class="docutils literal notranslate"><span class="pre">numerical_error</span></code>. Only an
+optimal result contains variable values and an objective value. The
+corresponding inspector predicates fail for other statuses. Malformed
+problems and unsupported backend capabilities throw errors instead of
+being reported as mathematical solver statuses.</p>
 <p>The supported options are <code class="docutils literal notranslate"><span class="pre">max_iterations(PositiveInteger)</span></code>,
 defaulting to 10000, and <code class="docutils literal notranslate"><span class="pre">tolerance(PositiveNumber)</span></code>, defaulting to
 <code class="docutils literal notranslate"><span class="pre">1.0e-9</span></code>. The iteration limit is shared by both simplex phases.</p>
 </section>
+<section id="mixed-integer-solving">
+<h2>Mixed-integer solving<a class="headerlink" href="#mixed-integer-solving" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">milp_branch_and_bound</span></code> backend supports mixed continuous,
+integer, and binary models. Integer and binary variables must have
+finite bounds and each integer domain must contain at least one integer.
+The solver branches on the first fractional discrete variable in
+declaration order and explores the lower branch first. It proves
+optimality by exhausting or bounding the search tree; it does not use
+cutting planes or primal heuristics.</p>
+<p>The supported options are <code class="docutils literal notranslate"><span class="pre">max_nodes(PositiveInteger)</span></code>, defaulting to
+10000, <code class="docutils literal notranslate"><span class="pre">integrality_tolerance(PositiveNumber)</span></code>, defaulting to
+<code class="docutils literal notranslate"><span class="pre">1.0e-9</span></code>, <code class="docutils literal notranslate"><span class="pre">simplex_max_iterations(PositiveInteger)</span></code>, defaulting to
+10000, and <code class="docutils literal notranslate"><span class="pre">simplex_tolerance(PositiveNumber)</span></code>, defaulting to
+<code class="docutils literal notranslate"><span class="pre">1.0e-9</span></code>.</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> milp_branch_and_bound<span class="o">::</span>new_problem(<span class="nv">P0</span>),
+     milp_branch_and_bound<span class="o">::</span>variable(x, binary, <span class="nv">P0</span>, <span class="nv">P1</span>),
+     milp_branch_and_bound<span class="o">::</span>variable(y, binary, <span class="nv">P1</span>, <span class="nv">P2</span>),
+     milp_branch_and_bound<span class="o">::</span>constraint([<span class="m">2</span><span class="o">*</span>x, <span class="m">2</span><span class="o">*</span>y], <span class="o">=&lt;</span>, <span class="m">3</span>, <span class="nv">P2</span>, <span class="nv">P3</span>),
+     milp_branch_and_bound<span class="o">::</span>objective([<span class="m">1</span><span class="o">*</span>x, <span class="m">1</span><span class="o">*</span>y], maximize, <span class="nv">P3</span>, <span class="nv">P</span>),
+     milp_branch_and_bound<span class="o">::</span>solve(<span class="nv">P</span>, <span class="nv">Result</span>).
+</pre></div>
+</div>
+</section>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
-<p>The initial backend uses dense lists and is intended for small problems.
-It does not implement MILP search, presolve beyond bound and
-standard-form normalization, sparse storage, dual values, reduced costs,
-basis export, warm starts, time limits, callbacks, or alternative pivot
-rules.</p>
-</section>
-<section id="api-documentation">
-<h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
-<p>Open the
-<a class="reference external" href="../../apis/library_index.html#linear-programming">../../apis/library_index.html#linear-programming</a>
-link in a web browser.</p>
-</section>
-<section id="loading">
-<h2>Loading<a class="headerlink" href="#loading" title="Link to this heading"></a></h2>
-<p>To load all entities in this library, load the <code class="docutils literal notranslate"><span class="pre">loader.lgt</span></code> file:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(linear_programming(loader)).
-</pre></div>
-</div>
-</section>
-<section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
-<p>To test this library, load the <code class="docutils literal notranslate"><span class="pre">tester.lgt</span></code> file:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(linear_programming(tester)).
-</pre></div>
-</div>
+<p>Both backends use dense lists and are intended for small problems. The
+library does not implement presolve beyond bound and standard-form
+normalization, sparse storage, cutting planes, dual values, reduced
+costs, basis export, warm starts, time limits, callbacks, parallel
+search, or alternative pivot rules.</p>
 </section>
 </section>
 

@@ -4,15 +4,42 @@
 ======================
 
 The ``linear_programming`` library provides immutable construction and
-solving of small linear programs. The initial ``simplex`` backend is a
-portable dense two-phase tableau implementation using Bland's pivot
-rule.
+solving of small linear and mixed-integer linear programs. The
+``simplex`` backend is a portable dense two-phase tableau implementation
+using Bland's pivot rule. The ``milp_branch_and_bound`` backend provides
+deterministic depth-first branch-and-bound over ``simplex`` LP
+relaxations.
 
 The model API supports continuous, integer, and binary variable
-declarations so that future MILP backends can consume the same models.
-The ``simplex`` backend currently solves continuous models only and
+declarations. The ``simplex`` backend solves continuous models only and
 throws a ``domain_error(simplex_variable_type, Variable-Type)`` error
-for other variable types.
+for other variable types. Use ``milp_branch_and_bound`` to solve models
+containing integer or binary variables.
+
+API documentation
+-----------------
+
+Open the
+`../../apis/library_index.html#linear-programming <../../apis/library_index.html#linear-programming>`__
+link in a web browser.
+
+Loading
+-------
+
+To load all entities in this library, load the ``loader.lgt`` file:
+
+::
+
+   | ?- logtalk_load(linear_programming(loader)).
+
+Testing
+-------
+
+To test this library, load the ``tester.lgt`` file:
+
+::
+
+   | ?- logtalk_load(linear_programming(tester)).
 
 Model representation
 --------------------
@@ -71,46 +98,47 @@ Results and errors
 ------------------
 
 Solver statuses are ``optimal``, ``infeasible``, ``unbounded``,
-``iteration_limit``, and ``numerical_error``. Only an optimal result
-contains variable values and an objective value. The corresponding
-inspector predicates fail for other statuses. Malformed problems and
-unsupported backend capabilities throw errors instead of being reported
-as mathematical solver statuses.
+``iteration_limit``, ``node_limit``, and ``numerical_error``. Only an
+optimal result contains variable values and an objective value. The
+corresponding inspector predicates fail for other statuses. Malformed
+problems and unsupported backend capabilities throw errors instead of
+being reported as mathematical solver statuses.
 
 The supported options are ``max_iterations(PositiveInteger)``,
 defaulting to 10000, and ``tolerance(PositiveNumber)``, defaulting to
 ``1.0e-9``. The iteration limit is shared by both simplex phases.
 
+Mixed-integer solving
+---------------------
+
+The ``milp_branch_and_bound`` backend supports mixed continuous,
+integer, and binary models. Integer and binary variables must have
+finite bounds and each integer domain must contain at least one integer.
+The solver branches on the first fractional discrete variable in
+declaration order and explores the lower branch first. It proves
+optimality by exhausting or bounding the search tree; it does not use
+cutting planes or primal heuristics.
+
+The supported options are ``max_nodes(PositiveInteger)``, defaulting to
+10000, ``integrality_tolerance(PositiveNumber)``, defaulting to
+``1.0e-9``, ``simplex_max_iterations(PositiveInteger)``, defaulting to
+10000, and ``simplex_tolerance(PositiveNumber)``, defaulting to
+``1.0e-9``.
+
+::
+
+   | ?- milp_branch_and_bound::new_problem(P0),
+        milp_branch_and_bound::variable(x, binary, P0, P1),
+        milp_branch_and_bound::variable(y, binary, P1, P2),
+        milp_branch_and_bound::constraint([2*x, 2*y], =<, 3, P2, P3),
+        milp_branch_and_bound::objective([1*x, 1*y], maximize, P3, P),
+        milp_branch_and_bound::solve(P, Result).
+
 Limitations
 -----------
 
-The initial backend uses dense lists and is intended for small problems.
-It does not implement MILP search, presolve beyond bound and
-standard-form normalization, sparse storage, dual values, reduced costs,
-basis export, warm starts, time limits, callbacks, or alternative pivot
-rules.
-
-API documentation
------------------
-
-Open the
-`../../apis/library_index.html#linear-programming <../../apis/library_index.html#linear-programming>`__
-link in a web browser.
-
-Loading
--------
-
-To load all entities in this library, load the ``loader.lgt`` file:
-
-::
-
-   | ?- logtalk_load(linear_programming(loader)).
-
-Testing
--------
-
-To test this library, load the ``tester.lgt`` file:
-
-::
-
-   | ?- logtalk_load(linear_programming(tester)).
+Both backends use dense lists and are intended for small problems. The
+library does not implement presolve beyond bound and standard-form
+normalization, sparse storage, cutting planes, dual values, reduced
+costs, basis export, warm starts, time limits, callbacks, parallel
+search, or alternative pivot rules.

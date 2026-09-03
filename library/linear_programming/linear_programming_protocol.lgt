@@ -118,14 +118,14 @@
 	:- public(solve/2).
 	:- mode(solve(+compound, -compound), one_or_error).
 	:- info(solve/2, [
-		comment is 'Solves a linear-program problem using default options and returns a result term.',
+		comment is 'Solves a linear-program problem using default options and returns a result term. Solver statuses include ``optimal``, ``infeasible``, ``unbounded``, ``iteration_limit``, ``node_limit``, and ``numerical_error`` as applicable to the backend.',
 		argnames is ['Problem', 'Result']
 	]).
 
 	:- public(solve/3).
 	:- mode(solve(+compound, -compound, +list(compound)), one_or_error).
 	:- info(solve/3, [
-		comment is 'Solves a linear-program problem using the specified options and returns a result term.',
+		comment is 'Solves a linear-program problem using the specified options and returns a result term. Solver statuses include ``optimal``, ``infeasible``, ``unbounded``, ``iteration_limit``, ``node_limit``, and ``numerical_error`` as applicable to the backend.',
 		argnames is ['Problem', 'Result', 'Options']
 	]).
 

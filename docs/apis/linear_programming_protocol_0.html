@@ -250,6 +250,7 @@
 <li class="toctree-l3"><a class="reference internal" href="linear_programming_common_0.html">linear_programming_common</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">linear_programming_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="linear_programming_types_0.html">linear_programming_types</a></li>
+<li class="toctree-l3"><a class="reference internal" href="milp_branch_and_bound_0.html">milp_branch_and_bound</a></li>
 <li class="toctree-l3"><a class="reference internal" href="simplex_0.html">simplex</a></li>
 </ul>
 </li>
@@ -777,7 +778,7 @@
 </section>
 <section id="solve-2">
 <span id="linear-programming-protocol-0-solve-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">solve/2</span></code></a><a class="headerlink" href="#solve-2" title="Link to this heading"></a></h3>
-<p>Solves a linear-program problem using default options and returns a result term.</p>
+<p>Solves a linear-program problem using default options and returns a result term. Solver statuses include <code class="docutils literal notranslate"><span class="pre">optimal</span></code>, <code class="docutils literal notranslate"><span class="pre">infeasible</span></code>, <code class="docutils literal notranslate"><span class="pre">unbounded</span></code>, <code class="docutils literal notranslate"><span class="pre">iteration_limit</span></code>, <code class="docutils literal notranslate"><span class="pre">node_limit</span></code>, and <code class="docutils literal notranslate"><span class="pre">numerical_error</span></code> as applicable to the backend.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
@@ -798,7 +799,7 @@
 </section>
 <section id="solve-3">
 <span id="linear-programming-protocol-0-solve-3"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">solve/3</span></code></a><a class="headerlink" href="#solve-3" title="Link to this heading"></a></h3>
-<p>Solves a linear-program problem using the specified options and returns a result term.</p>
+<p>Solves a linear-program problem using the specified options and returns a result term. Solver statuses include <code class="docutils literal notranslate"><span class="pre">optimal</span></code>, <code class="docutils literal notranslate"><span class="pre">infeasible</span></code>, <code class="docutils literal notranslate"><span class="pre">unbounded</span></code>, <code class="docutils literal notranslate"><span class="pre">iteration_limit</span></code>, <code class="docutils literal notranslate"><span class="pre">node_limit</span></code>, and <code class="docutils literal notranslate"><span class="pre">numerical_error</span></code> as applicable to the backend.</p>
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">

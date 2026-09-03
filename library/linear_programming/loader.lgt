@@ -28,7 +28,8 @@
 		linear_programming_protocol,
 		linear_programming_types,
 		linear_programming_common,
-		simplex
+		simplex,
+		milp_branch_and_bound
 	], [
 		optimize(on)
 	])
