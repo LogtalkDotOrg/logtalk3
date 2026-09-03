@@ -251,6 +251,22 @@ Solves a linear-program problem using default options and returns a result term.
 | **Mode and number of proofs:**
 |    ``solve(+compound,-compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Problem`` is a variable:
+|        ``instantiation_error``
+|    ``Problem`` is not a linear-program problem:
+|        ``type_error(linear_program,Problem)``
+|    ``Problem`` has no variables:
+|        ``domain_error(linear_programming_problem,empty)``
+|    ``Problem`` has no objective:
+|        ``domain_error(linear_programming_problem,missing_objective)``
+|    ``Problem`` contains a variable type unsupported by the backend:
+|        ``domain_error(simplex_variable_type,Variable-Type)``
+|    A discrete variable does not have finite bounds:
+|        ``domain_error(milp_finite_integer_bounds,Variable-(Lower-Upper))``
+|    A discrete variable domain contains no integer:
+|        ``domain_error(milp_integer_domain,Variable-(Lower-Upper))``
+
 
 ------------
 
@@ -269,6 +285,32 @@ Solves a linear-program problem using the specified options and returns a result
 |    ``solve(Problem,Result,Options)``
 | **Mode and number of proofs:**
 |    ``solve(+compound,-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Problem`` is a variable:
+|        ``instantiation_error``
+|    ``Problem`` is not a linear-program problem:
+|        ``type_error(linear_program,Problem)``
+|    ``Problem`` has no variables:
+|        ``domain_error(linear_programming_problem,empty)``
+|    ``Problem`` has no objective:
+|        ``domain_error(linear_programming_problem,missing_objective)``
+|    ``Problem`` contains a variable type unsupported by the backend:
+|        ``domain_error(simplex_variable_type,Variable-Type)``
+|    A discrete variable does not have finite bounds:
+|        ``domain_error(milp_finite_integer_bounds,Variable-(Lower-Upper))``
+|    A discrete variable domain contains no integer:
+|        ``domain_error(milp_integer_domain,Variable-(Lower-Upper))``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
 
 
 ------------
@@ -289,6 +331,12 @@ Returns the result status.
 | **Mode and number of proofs:**
 |    ``status(+compound,-atom)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Result`` is a variable:
+|        ``instantiation_error``
+|    ``Result`` is not a linear-programming result:
+|        ``type_error(linear_programming_result,Result)``
+
 
 ------------
 
@@ -307,6 +355,12 @@ Returns the optimal objective value. Fails when the result status is not ``optim
 |    ``objective_value(Result,Value)``
 | **Mode and number of proofs:**
 |    ``objective_value(+compound,-number)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``Result`` is a variable:
+|        ``instantiation_error``
+|    ``Result`` is not a linear-programming result:
+|        ``type_error(linear_programming_result,Result)``
 
 
 ------------
@@ -327,6 +381,12 @@ Returns an optimal variable value. Fails when the result status is not ``optimal
 | **Mode and number of proofs:**
 |    ``variable_value(+compound,+term,-number)`` - ``zero_or_one_or_error``
 
+| **Exceptions:**
+|    ``Result`` is a variable:
+|        ``instantiation_error``
+|    ``Result`` is not a linear-programming result:
+|        ``type_error(linear_programming_result,Result)``
+
 
 ------------
 
@@ -345,6 +405,12 @@ Returns solver statistics stored in a result.
 |    ``statistics(Result,Statistics)``
 | **Mode and number of proofs:**
 |    ``statistics(+compound,-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Result`` is a variable:
+|        ``instantiation_error``
+|    ``Result`` is not a linear-programming result:
+|        ``type_error(linear_programming_result,Result)``
 
 
 ------------
@@ -365,6 +431,12 @@ Prints a linear-program problem to the current output stream.
 | **Mode and number of proofs:**
 |    ``print_problem(+compound)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Problem`` is a variable:
+|        ``instantiation_error``
+|    ``Problem`` is not a linear-program problem:
+|        ``type_error(linear_program,Problem)``
+
 
 ------------
 
@@ -383,6 +455,12 @@ Prints a linear-program result to the current output stream.
 |    ``print_solution(Result)``
 | **Mode and number of proofs:**
 |    ``print_solution(+compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Result`` is a variable:
+|        ``instantiation_error``
+|    ``Result`` is not a linear-programming result:
+|        ``type_error(linear_programming_result,Result)``
 
 
 ------------

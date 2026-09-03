@@ -75,13 +75,15 @@ Continuous solving
 ------------------
 
 The `simplex` backend solves continuous linear programs using a portable dense
-two-phase tableau implementation. The supported options are
-`max_iterations(PositiveInteger)`, defaulting to 10000,
-`tolerance(PositiveNumber)`, defaulting to `1.0e-9`, and `pivot_rule(Rule)`,
-where `Rule` is `bland` (the default) or `dantzig`. Bland's rule selects the
-first eligible entering column. Dantzig's rule selects the eligible column
-with the most negative reduced cost, breaking ties by the lowest column index.
-The iteration limit is shared by both simplex phases.
+two-phase tableau implementation. The supported options are:
+
+- `max_iterations(PositiveInteger)` - Maximum number of iterations shared by
+    both simplex phases (default: `10000`).
+- `tolerance(PositiveNumber)` - Numerical tolerance (default: `1.0e-9`).
+- `pivot_rule(Rule)` - Pivot rule, either `bland` (the default), which selects
+    the first eligible entering column, or `dantzig`, which selects the eligible
+    column with the most negative reduced cost, breaking ties by the lowest
+    column index.
 
     | ?- simplex::(
             new_problem(P0),
@@ -134,20 +136,29 @@ Mixed-integer solving
 
 The `milp_branch_and_bound` backend supports mixed continuous, integer, and
 binary models. Integer and binary variables must have finite bounds and each
-integer domain must contain at least one integer. The solver explores the
-lower branch first. It proves optimality by exhausting or bounding the search
-tree; it does not use cutting planes or primal heuristics.
+integer domain must contain at least one integer. The solver proves optimality
+by exhausting or bounding the search tree; it does not use cutting planes or
+primal heuristics.
 
-The supported options are `max_nodes(PositiveInteger)`, defaulting to 10000,
-`integrality_tolerance(PositiveNumber)`, defaulting to `1.0e-9`,
-`simplex_max_iterations(PositiveInteger)`, defaulting to 10000,
-`simplex_tolerance(PositiveNumber)`, defaulting to `1.0e-9`,
-`simplex_pivot_rule(Rule)`, defaulting to `bland`, which selects the pivot rule
-for all LP relaxations, and `branching_rule(Rule)`, where `Rule` is
-`first_fractional` (the default) or `most_fractional`. The first rule selects
-the first fractional discrete variable in declaration order. The second
-selects the variable whose value is farthest from its nearest integer,
-breaking ties by declaration order.
+The supported options are:
+
+- `max_nodes(PositiveInteger)` - Maximum number of search nodes (default:
+    `10000`).
+- `integrality_tolerance(PositiveNumber)` - Integrality tolerance (default:
+    `1.0e-9`).
+- `simplex_max_iterations(PositiveInteger)` - Maximum simplex iterations per
+    LP relaxation (default: `10000`).
+- `simplex_tolerance(PositiveNumber)` - Simplex numerical tolerance (default:
+    `1.0e-9`).
+- `simplex_pivot_rule(Rule)` - Simplex pivot rule for all LP relaxations
+    (default: `bland`).
+- `branching_rule(Rule)` - Branching rule, either `first_fractional` (the
+    default), which selects the first fractional discrete variable in
+    declaration order, or `most_fractional`, which selects the variable whose
+    value is farthest from its nearest integer, breaking ties by declaration
+    order.
+- `branch_order(Order)` - Child traversal order, either `lower_first` (the
+    default) or `upper_first`.
 
     | ?- milp_branch_and_bound::
             new_problem(P0),
@@ -162,7 +173,9 @@ breaking ties by declaration order.
 Limitations
 -----------
 
-Both backends use dense lists and are intended for small problems. The library
-does not implement presolve beyond bound and standard-form normalization,
-sparse storage, cutting planes, dual values, reduced costs, basis export, warm
-starts, time limits, callbacks, or parallel search.
+Both backends use dense lists and are intended for small problems.
+
+The library does not currently implement presolve beyond bound and
+standard-form normalization, sparse storage, cutting planes, dual
+values, reduced costs, basis export, warm starts, time limits,
+callbacks, or parallel search.

@@ -119,56 +119,103 @@
 	:- mode(solve(+compound, -compound), one_or_error).
 	:- info(solve/2, [
 		comment is 'Solves a linear-program problem using default options and returns a result term. Solver statuses include ``optimal``, ``infeasible``, ``unbounded``, ``iteration_limit``, ``node_limit``, and ``numerical_error`` as applicable to the backend.',
-		argnames is ['Problem', 'Result']
+		argnames is ['Problem', 'Result'],
+		exceptions is [
+			'``Problem`` is a variable' - instantiation_error,
+			'``Problem`` is not a linear-program problem' - type_error(linear_program, 'Problem'),
+			'``Problem`` has no variables' - domain_error(linear_programming_problem, empty),
+			'``Problem`` has no objective' - domain_error(linear_programming_problem, missing_objective),
+			'``Problem`` contains a variable type unsupported by the backend' - domain_error(simplex_variable_type, 'Variable'-'Type'),
+			'A discrete variable does not have finite bounds' - domain_error(milp_finite_integer_bounds, 'Variable'-('Lower'-'Upper')),
+			'A discrete variable domain contains no integer' - domain_error(milp_integer_domain, 'Variable'-('Lower'-'Upper'))
+		]
 	]).
 
 	:- public(solve/3).
 	:- mode(solve(+compound, -compound, +list(compound)), one_or_error).
 	:- info(solve/3, [
 		comment is 'Solves a linear-program problem using the specified options and returns a result term. Solver statuses include ``optimal``, ``infeasible``, ``unbounded``, ``iteration_limit``, ``node_limit``, and ``numerical_error`` as applicable to the backend.',
-		argnames is ['Problem', 'Result', 'Options']
+		argnames is ['Problem', 'Result', 'Options'],
+		exceptions is [
+			'``Problem`` is a variable' - instantiation_error,
+			'``Problem`` is not a linear-program problem' - type_error(linear_program, 'Problem'),
+			'``Problem`` has no variables' - domain_error(linear_programming_problem, empty),
+			'``Problem`` has no objective' - domain_error(linear_programming_problem, missing_objective),
+			'``Problem`` contains a variable type unsupported by the backend' - domain_error(simplex_variable_type, 'Variable'-'Type'),
+			'A discrete variable does not have finite bounds' - domain_error(milp_finite_integer_bounds, 'Variable'-('Lower'-'Upper')),
+			'A discrete variable domain contains no integer' - domain_error(milp_integer_domain, 'Variable'-('Lower'-'Upper')),
+			'``Options`` is a variable' - instantiation_error,
+			'``Options`` is neither a variable nor a list' - type_error(list, 'Options'),
+			'An element ``Option`` of the list ``Options`` is a variable' - instantiation_error,
+			'An element ``Option`` of the list ``Options`` is neither a variable nor a compound term' - type_error(compound, 'Option'),
+			'An element ``Option`` of the list ``Options`` is a compound term but not a valid option' - domain_error(option, 'Option')
+		]
 	]).
 
 	:- public(status/2).
 	:- mode(status(+compound, -atom), one_or_error).
 	:- info(status/2, [
 		comment is 'Returns the result status.',
-		argnames is ['Result', 'Status']
+		argnames is ['Result', 'Status'],
+		exceptions is [
+			'``Result`` is a variable' - instantiation_error,
+			'``Result`` is not a linear-programming result' - type_error(linear_programming_result, 'Result')
+		]
 	]).
 
 	:- public(objective_value/2).
 	:- mode(objective_value(+compound, -number), zero_or_one_or_error).
 	:- info(objective_value/2, [
 		comment is 'Returns the optimal objective value. Fails when the result status is not ``optimal``.',
-		argnames is ['Result', 'Value']
+		argnames is ['Result', 'Value'],
+		exceptions is [
+			'``Result`` is a variable' - instantiation_error,
+			'``Result`` is not a linear-programming result' - type_error(linear_programming_result, 'Result')
+		]
 	]).
 
 	:- public(variable_value/3).
 	:- mode(variable_value(+compound, +term, -number), zero_or_one_or_error).
 	:- info(variable_value/3, [
 		comment is 'Returns an optimal variable value. Fails when the result status is not ``optimal`` or the variable is absent.',
-		argnames is ['Result', 'Variable', 'Value']
+		argnames is ['Result', 'Variable', 'Value'],
+		exceptions is [
+			'``Result`` is a variable' - instantiation_error,
+			'``Result`` is not a linear-programming result' - type_error(linear_programming_result, 'Result')
+		]
 	]).
 
 	:- public(statistics/2).
 	:- mode(statistics(+compound, -list(compound)), one_or_error).
 	:- info(statistics/2, [
 		comment is 'Returns solver statistics stored in a result.',
-		argnames is ['Result', 'Statistics']
+		argnames is ['Result', 'Statistics'],
+		exceptions is [
+			'``Result`` is a variable' - instantiation_error,
+			'``Result`` is not a linear-programming result' - type_error(linear_programming_result, 'Result')
+		]
 	]).
 
 	:- public(print_problem/1).
 	:- mode(print_problem(+compound), one_or_error).
 	:- info(print_problem/1, [
 		comment is 'Prints a linear-program problem to the current output stream.',
-		argnames is ['Problem']
+		argnames is ['Problem'],
+		exceptions is [
+			'``Problem`` is a variable' - instantiation_error,
+			'``Problem`` is not a linear-program problem' - type_error(linear_program, 'Problem')
+		]
 	]).
 
 	:- public(print_solution/1).
 	:- mode(print_solution(+compound), one_or_error).
 	:- info(print_solution/1, [
 		comment is 'Prints a linear-program result to the current output stream.',
-		argnames is ['Result']
+		argnames is ['Result'],
+		exceptions is [
+			'``Result`` is a variable' - instantiation_error,
+			'``Result`` is not a linear-programming result' - type_error(linear_programming_result, 'Result')
+		]
 	]).
 
 :- end_protocol.

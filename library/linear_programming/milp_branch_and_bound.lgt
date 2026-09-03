@@ -30,7 +30,7 @@
 		remarks is [
 			'Discrete domains' - 'Integer and binary variables must have finite bounds. No cutting planes or primal heuristics are used.',
 			'LP relaxations' - 'Each search node is solved using the simplex object.',
-			'Branching' - 'The solver can branch on the first fractional variable or the most fractional variable, with declaration order breaking ties.'
+			'Branching' - 'The solver can branch on the first fractional variable or the most fractional variable, with declaration order breaking ties. The lower or upper branch can be explored first.'
 		],
 		see_also is [simplex, linear_programming_protocol]
 	]).
@@ -60,6 +60,7 @@
 	default_option(simplex_tolerance(1.0e-9)).
 	default_option(simplex_pivot_rule(bland)).
 	default_option(branching_rule(first_fractional)).
+	default_option(branch_order(lower_first)).
 
 	valid_option(max_nodes(MaxNodes)) :-
 		integer(MaxNodes),
@@ -77,6 +78,8 @@
 		once((PivotRule == bland; PivotRule == dantzig)).
 	valid_option(branching_rule(BranchingRule)) :-
 		once((BranchingRule == first_fractional; BranchingRule == most_fractional)).
+	valid_option(branch_order(BranchOrder)) :-
+		once((BranchOrder == lower_first; BranchOrder == upper_first)).
 
 	check_solvable_problem([], _Objective) :-
 		domain_error(linear_programming_problem, empty).
@@ -228,10 +231,21 @@
 		branch_on_bounds(Problem, Name, Lower, Split, Next, Upper, Options, State0, State).
 
 	branch_on_bounds(Problem, Name, LeftLower, LeftUpper, RightLower, RightUpper, Options, State0, State) :-
+		^^option(branch_order(BranchOrder), Options),
+		branch_in_order(BranchOrder, Problem, Name, LeftLower, LeftUpper, RightLower, RightUpper, Options, State0, State).
+
+	branch_in_order(lower_first, Problem, Name, LeftLower, LeftUpper, RightLower, RightUpper, Options, State0, State) :-
+		!,
 		search_optional_branch(Problem, Name, LeftLower, LeftUpper, Options, State0, State1),
 		(	stopped(State1) ->
 			State = State1
 		;	search_optional_branch(Problem, Name, RightLower, RightUpper, Options, State1, State)
+		).
+	branch_in_order(upper_first, Problem, Name, LeftLower, LeftUpper, RightLower, RightUpper, Options, State0, State) :-
+		search_optional_branch(Problem, Name, RightLower, RightUpper, Options, State0, State1),
+		(	stopped(State1) ->
+			State = State1
+		;	search_optional_branch(Problem, Name, LeftLower, LeftUpper, Options, State1, State)
 		).
 
 	search_optional_branch(_Problem, _Name, Lower, Upper, _Options, State, State) :-

@@ -340,6 +340,28 @@
 		branching_rule_problem(Problem),
 		milp_branch_and_bound::solve(Problem, _Result, [branching_rule(random)]).
 
+	test(linear_programming_milp_branch_order, deterministic((LowerUpdates == 1, UpperUpdates == 0))) :-
+		branch_order_problem(Problem),
+		milp_branch_and_bound::solve(Problem, LowerResult, [max_nodes(2)]),
+		milp_branch_and_bound::statistics(LowerResult, LowerStatistics),
+		memberchk(incumbent_updates(LowerUpdates), LowerStatistics),
+		milp_branch_and_bound::solve(Problem, UpperResult, [max_nodes(2),branch_order(upper_first)]),
+		milp_branch_and_bound::statistics(UpperResult, UpperStatistics),
+		memberchk(incumbent_updates(UpperUpdates), UpperStatistics).
+
+	test(linear_programming_milp_branch_order_same_optimum, deterministic((LowerX =:= 0, UpperX =:= 0, LowerValue =~= 0.0, UpperValue =~= 0.0))) :-
+		branch_order_problem(Problem),
+		milp_branch_and_bound::solve(Problem, LowerResult),
+		milp_branch_and_bound::variable_value(LowerResult, x, LowerX),
+		milp_branch_and_bound::objective_value(LowerResult, LowerValue),
+		milp_branch_and_bound::solve(Problem, UpperResult, [branch_order(upper_first)]),
+		milp_branch_and_bound::variable_value(UpperResult, x, UpperX),
+		milp_branch_and_bound::objective_value(UpperResult, UpperValue).
+
+	test(linear_programming_milp_invalid_branch_order, error(domain_error(option, branch_order(random)))) :-
+		branch_order_problem(Problem),
+		milp_branch_and_bound::solve(Problem, _Result, [branch_order(random)]).
+
 	test(linear_programming_milp_finite_bounds_required, error(domain_error(milp_finite_integer_bounds, x-(-inf-inf)))) :-
 		milp_branch_and_bound::new_problem(Problem0),
 		milp_branch_and_bound::variable(x, integer, -inf, inf, Problem0, Problem1),
@@ -385,6 +407,12 @@
 		milp_branch_and_bound::constraint([1*y], =<, 0.5, Problem3, Problem4),
 		milp_branch_and_bound::constraint([1*x,-1*y], =<, 0, Problem4, Problem5),
 		milp_branch_and_bound::objective([1*x,1*y], maximize, Problem5, Problem).
+
+	branch_order_problem(Problem) :-
+		milp_branch_and_bound::new_problem(Problem0),
+		milp_branch_and_bound::variable(x, binary, Problem0, Problem1),
+		milp_branch_and_bound::constraint([1*x], =<, 0.5, Problem1, Problem2),
+		milp_branch_and_bound::objective([1*x], maximize, Problem2, Problem).
 
 	one_variable_problem(Lower, Upper, Constraints, Objective, Sense, Problem) :-
 		simplex::new_problem(Problem0),

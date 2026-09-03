@@ -34,14 +34,22 @@
 	:- mode(check_problem(@term), one_or_error).
 	:- info(check_problem/1, [
 		comment is 'Checks that the argument is a structurally valid linear-program problem.',
-		argnames is ['Problem']
+		argnames is ['Problem'],
+		exceptions is [
+			'``Problem`` is a variable' - instantiation_error,
+			'``Problem`` is not a linear-program problem' - type_error(linear_program, 'Problem')
+		]
 	]).
 
 	:- protected(check_result/1).
 	:- mode(check_result(@term), one_or_error).
 	:- info(check_result/1, [
 		comment is 'Checks that the argument is a structurally valid linear-programming result.',
-		argnames is ['Result']
+		argnames is ['Result'],
+		exceptions is [
+			'``Result`` is a variable' - instantiation_error,
+			'``Result`` is not a linear-programming result' - type_error(linear_programming_result, 'Result')
+		]
 	]).
 
 	:- protected(relax_problem/2).
@@ -62,7 +70,13 @@
 	:- mode(tighten_variable_bounds(+term, +number, +number, +compound, -compound), one_or_error).
 	:- info(tighten_variable_bounds/5, [
 		comment is 'Returns a copy of a validated problem with the named variable bounds tightened to the given finite bounds.',
-		argnames is ['Name', 'Lower', 'Upper', 'Problem0', 'Problem']
+		argnames is ['Name', 'Lower', 'Upper', 'Problem0', 'Problem'],
+		exceptions is [
+			'An argument is insufficiently instantiated' - instantiation_error,
+			'``Problem0`` is not a linear-program problem' - type_error(linear_program, 'Problem0'),
+			'``Name`` is not a declared variable' - domain_error(linear_programming_variable, 'Name'),
+			'The bounds are invalid, inconsistent, or weaken the current bounds' - domain_error(linear_programming_bounds, 'Lower'-'Upper')
+		]
 	]).
 
 	:- uses(format, [

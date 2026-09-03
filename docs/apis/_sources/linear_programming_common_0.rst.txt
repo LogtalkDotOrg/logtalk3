@@ -63,6 +63,12 @@ Checks that the argument is a structurally valid linear-program problem.
 | **Mode and number of proofs:**
 |    ``check_problem(@term)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Problem`` is a variable:
+|        ``instantiation_error``
+|    ``Problem`` is not a linear-program problem:
+|        ``type_error(linear_program,Problem)``
+
 
 ------------
 
@@ -81,6 +87,12 @@ Checks that the argument is a structurally valid linear-programming result.
 |    ``check_result(Result)``
 | **Mode and number of proofs:**
 |    ``check_result(@term)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Result`` is a variable:
+|        ``instantiation_error``
+|    ``Result`` is not a linear-programming result:
+|        ``type_error(linear_programming_result,Result)``
 
 
 ------------
@@ -138,6 +150,16 @@ Returns a copy of a validated problem with the named variable bounds tightened t
 |    ``tighten_variable_bounds(Name,Lower,Upper,Problem0,Problem)``
 | **Mode and number of proofs:**
 |    ``tighten_variable_bounds(+term,+number,+number,+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    An argument is insufficiently instantiated:
+|        ``instantiation_error``
+|    ``Problem0`` is not a linear-program problem:
+|        ``type_error(linear_program,Problem0)``
+|    ``Name`` is not a declared variable:
+|        ``domain_error(linear_programming_variable,Name)``
+|    The bounds are invalid, inconsistent, or weaken the current bounds:
+|        ``domain_error(linear_programming_bounds,Lower-Upper)``
 
 
 ------------
