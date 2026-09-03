@@ -174,7 +174,7 @@
 	branchable_domain([variable(Name, _Type, Lower, Upper)| _Variables], Name, Lower, Upper, Split) :-
 		(	integer(Lower) ->
 			IntegerLower is Lower
-		;	IntegerLower is celing(Lower)
+		;	IntegerLower is ceiling(Lower)
 		),
 		(	integer(Upper) ->
 			IntegerUpper is Upper
