@@ -30,7 +30,7 @@ Portable dense two-phase simplex solver for small continuous linear programs.
 | **Remarks:**
 
    - Variable types: This backend supports continuous variables only. Integer and binary variables are accepted by the shared model API for use by future MILP backends but rejected when solving.
-   - Pivoting: Bland's rule is used for entering variables and minimum-ratio ties to prevent cycling.
+   - Pivoting: Bland's rule is used by default. Dantzig's rule is also available, with the lowest column index breaking ties. Minimum-ratio ties use the lowest-indexed basic variable.
 
 | **Inherited public predicates:**
 |     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`linear_programming_protocol/0::constraint/5`  :ref:`linear_programming_protocol/0::constraints/3`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`linear_programming_protocol/0::new_problem/1`  :ref:`linear_programming_protocol/0::objective/4`  :ref:`linear_programming_protocol/0::objective_value/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`linear_programming_protocol/0::print_problem/1`  :ref:`linear_programming_protocol/0::print_solution/1`  :ref:`linear_programming_protocol/0::problem_from_matrices/8`  :ref:`linear_programming_protocol/0::solve/2`  :ref:`linear_programming_protocol/0::solve/3`  :ref:`linear_programming_protocol/0::statistics/2`  :ref:`linear_programming_protocol/0::status/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`linear_programming_protocol/0::variable/4`  :ref:`linear_programming_protocol/0::variable/6`  :ref:`linear_programming_protocol/0::variable_value/3`  

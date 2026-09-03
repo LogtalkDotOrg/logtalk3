@@ -6,9 +6,9 @@
 The ``linear_programming`` library provides immutable construction and
 solving of small linear and mixed-integer linear programs. The
 ``simplex`` backend is a portable dense two-phase tableau implementation
-using Bland's pivot rule. The ``milp_branch_and_bound`` backend provides
-deterministic depth-first branch-and-bound over ``simplex`` LP
-relaxations.
+supporting Bland's and Dantzig's pivot rules. The
+``milp_branch_and_bound`` backend provides deterministic depth-first
+branch-and-bound over ``simplex`` LP relaxations.
 
 The model API supports continuous, integer, and binary variable
 declarations. The ``simplex`` backend solves continuous models only and
@@ -105,8 +105,12 @@ problems and unsupported backend capabilities throw errors instead of
 being reported as mathematical solver statuses.
 
 The supported options are ``max_iterations(PositiveInteger)``,
-defaulting to 10000, and ``tolerance(PositiveNumber)``, defaulting to
-``1.0e-9``. The iteration limit is shared by both simplex phases.
+defaulting to 10000, ``tolerance(PositiveNumber)``, defaulting to
+``1.0e-9``, and ``pivot_rule(Rule)``, where ``Rule`` is ``bland`` (the
+default) or ``dantzig``. Bland's rule selects the first eligible
+entering column. Dantzig's rule selects the eligible column with the
+most negative reduced cost, breaking ties by the lowest column index.
+The iteration limit is shared by both simplex phases.
 
 Mixed-integer solving
 ---------------------
@@ -123,7 +127,8 @@ The supported options are ``max_nodes(PositiveInteger)``, defaulting to
 10000, ``integrality_tolerance(PositiveNumber)``, defaulting to
 ``1.0e-9``, ``simplex_max_iterations(PositiveInteger)``, defaulting to
 10000, and ``simplex_tolerance(PositiveNumber)``, defaulting to
-``1.0e-9``.
+``1.0e-9``, and ``simplex_pivot_rule(Rule)``, defaulting to ``bland``,
+which selects the pivot rule for all LP relaxations.
 
 ::
 
@@ -140,5 +145,5 @@ Limitations
 Both backends use dense lists and are intended for small problems. The
 library does not implement presolve beyond bound and standard-form
 normalization, sparse storage, cutting planes, dual values, reduced
-costs, basis export, warm starts, time limits, callbacks, parallel
-search, or alternative pivot rules.
+costs, basis export, warm starts, time limits, callbacks, or parallel
+search.

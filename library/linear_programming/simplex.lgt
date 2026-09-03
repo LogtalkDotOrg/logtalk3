@@ -29,7 +29,7 @@
 		comment is 'Portable dense two-phase simplex solver for small continuous linear programs.',
 		remarks is [
 			'Variable types' - 'This backend supports continuous variables only. Integer and binary variables are accepted by the shared model API for use by future MILP backends but rejected when solving.',
-			'Pivoting' - 'Bland\'s rule is used for entering variables and minimum-ratio ties to prevent cycling.'
+			'Pivoting' - 'Bland\'s rule is used by default. Dantzig\'s rule is also available, with the lowest column index breaking ties. Minimum-ratio ties use the lowest-indexed basic variable.'
 		],
 		see_also is [linear_programming_protocol]
 	]).
@@ -51,6 +51,7 @@
 		^^merge_options(UserOptions, Options),
 		^^option(max_iterations(MaxIterations), Options),
 		^^option(tolerance(Tolerance), Options),
+		^^option(pivot_rule(PivotRule), Options),
 		Problem = linear_program(Variables, Constraints, Objective),
 		check_solvable_problem(Variables, Objective),
 		prepare_variables(Variables, 1, NextColumn, Recoveries, BoundRows),
@@ -64,12 +65,13 @@
 		build_tableau(Rows, TransformedVariableCount, Tableau0, Basis0, ArtificialColumns, TotalColumns),
 		phase_one_costs(TotalColumns, ArtificialColumns, PhaseOneCosts),
 		build_objective_row(PhaseOneCosts, Tableau0, Basis0, PhaseOneObjective0),
-		simplex_loop(Tableau0, Basis0, PhaseOneObjective0, ArtificialColumns, Tolerance, MaxIterations, 0, PhaseOneStatus, Tableau1, Basis1, PhaseOneObjective, PhaseOneIterations),
+		simplex_loop(Tableau0, Basis0, PhaseOneObjective0, ArtificialColumns, PivotRule, Tolerance, MaxIterations, 0, PhaseOneStatus, Tableau1, Basis1, PhaseOneObjective, PhaseOneIterations),
 		finish_phase_one(PhaseOneStatus, PhaseOneObjective, Tableau1, Basis1, ArtificialColumns, Tolerance, PhaseOneFinish, Tableau2, Basis2),
-		continue_with_phase_two(PhaseOneFinish, Problem, Recoveries, TransformedVariableCount, ObjectiveCoefficients, Tableau2, Basis2, ArtificialColumns, Tolerance, MaxIterations, PhaseOneIterations, Result).
+		continue_with_phase_two(PhaseOneFinish, Problem, Recoveries, TransformedVariableCount, ObjectiveCoefficients, Tableau2, Basis2, ArtificialColumns, PivotRule, Tolerance, MaxIterations, PhaseOneIterations, Result).
 
 	default_option(max_iterations(10000)).
 	default_option(tolerance(1.0e-9)).
+	default_option(pivot_rule(bland)).
 
 	valid_option(max_iterations(MaxIterations)) :-
 		integer(MaxIterations),
@@ -77,6 +79,8 @@
 	valid_option(tolerance(Tolerance)) :-
 		number(Tolerance),
 		Tolerance > 0.
+	valid_option(pivot_rule(PivotRule)) :-
+		once((PivotRule == bland; PivotRule == dantzig)).
 
 	check_solvable_problem([], _Objective) :-
 		domain_error(linear_programming_problem, empty).
@@ -271,9 +275,9 @@
 		Result is Base + Scale * Value,
 		add_scaled_vector(Values, Scale, Bases, Results).
 
-	simplex_loop(Tableau, Basis, Objective, Forbidden, Tolerance, MaxIterations, Iterations0, Status, FinalTableau, FinalBasis, FinalObjective, Iterations) :-
+	simplex_loop(Tableau, Basis, Objective, Forbidden, PivotRule, Tolerance, MaxIterations, Iterations0, Status, FinalTableau, FinalBasis, FinalObjective, Iterations) :-
 		Objective = objective_row(ObjectiveCoefficients, _ObjectiveValue),
-		(	entering_column(ObjectiveCoefficients, Forbidden, Tolerance, 1, Entering) ->
+		(	entering_column(PivotRule, ObjectiveCoefficients, Forbidden, Tolerance, Entering) ->
 			(	Iterations0 >= MaxIterations ->
 				Status = iteration_limit,
 				FinalTableau = Tableau,
@@ -283,7 +287,7 @@
 			;	leaving_row(Tableau, Basis, Entering, Tolerance, Leaving) ->
 				pivot(Tableau, Basis, Objective, Leaving, Entering, PivotedTableau, PivotedBasis, PivotedObjective),
 				Iterations1 is Iterations0 + 1,
-				simplex_loop(PivotedTableau, PivotedBasis, PivotedObjective, Forbidden, Tolerance, MaxIterations, Iterations1, Status, FinalTableau, FinalBasis, FinalObjective, Iterations)
+				simplex_loop(PivotedTableau, PivotedBasis, PivotedObjective, Forbidden, PivotRule, Tolerance, MaxIterations, Iterations1, Status, FinalTableau, FinalBasis, FinalObjective, Iterations)
 			;	Status = unbounded,
 				FinalTableau = Tableau,
 				FinalBasis = Basis,
@@ -297,15 +301,39 @@
 			Iterations = Iterations0
 		).
 
-	entering_column([], _Forbidden, _Tolerance, _Index, _Entering) :-
+	entering_column(bland, Coefficients, Forbidden, Tolerance, Entering) :-
+		bland_entering_column(Coefficients, Forbidden, Tolerance, 1, Entering).
+	entering_column(dantzig, Coefficients, Forbidden, Tolerance, Entering) :-
+		dantzig_entering_column(Coefficients, Forbidden, Tolerance, 1, none, Entering).
+
+	bland_entering_column([], _Forbidden, _Tolerance, _Index, _Entering) :-
 		fail.
-	entering_column([Coefficient| _Coefficients], Forbidden, Tolerance, Index, Index) :-
+	bland_entering_column([Coefficient| _Coefficients], Forbidden, Tolerance, Index, Index) :-
 		Coefficient < -Tolerance,
 		\+ member(Index, Forbidden),
 		!.
-	entering_column([_Coefficient| Coefficients], Forbidden, Tolerance, Index, Entering) :-
+	bland_entering_column([_Coefficient| Coefficients], Forbidden, Tolerance, Index, Entering) :-
 		NextIndex is Index + 1,
-		entering_column(Coefficients, Forbidden, Tolerance, NextIndex, Entering).
+		bland_entering_column(Coefficients, Forbidden, Tolerance, NextIndex, Entering).
+
+	dantzig_entering_column([], _Forbidden, _Tolerance, _Index, none, _Entering) :-
+		fail.
+	dantzig_entering_column([], _Forbidden, _Tolerance, _Index, Entering- _Coefficient, Entering).
+	dantzig_entering_column([Coefficient| Coefficients], Forbidden, Tolerance, Index, Best0, Entering) :-
+		(	Coefficient < -Tolerance,
+			\+ member(Index, Forbidden) ->
+			better_dantzig_candidate(Best0, Index, Coefficient, Best)
+		;	Best = Best0
+		),
+		NextIndex is Index + 1,
+		dantzig_entering_column(Coefficients, Forbidden, Tolerance, NextIndex, Best, Entering).
+
+	better_dantzig_candidate(none, Index, Coefficient, Index-Coefficient) :-
+		!.
+	better_dantzig_candidate(_BestIndex-BestCoefficient, Index, Coefficient, Index-Coefficient) :-
+		Coefficient < BestCoefficient,
+		!.
+	better_dantzig_candidate(Best, _Index, _Coefficient, Best).
 
 	leaving_row(Tableau, Basis, Entering, Tolerance, Leaving) :-
 		leaving_row(Tableau, Basis, Entering, Tolerance, 1, none, Leaving- _Ratio- _Basic).
@@ -430,22 +458,22 @@
 		NextIndex is Index - 1,
 		remove_at(NextIndex, Elements, Remaining).
 
-	continue_with_phase_two(iteration_limit, _Problem, _Recoveries, _VariableCount, _ObjectiveCoefficients, _Tableau, _Basis, _ArtificialColumns, _Tolerance, _MaxIterations, PhaseOneIterations, linear_programming_result(iteration_limit, none, [], [iterations(PhaseOneIterations),phase_one_iterations(PhaseOneIterations),phase_two_iterations(0)])).
-	continue_with_phase_two(infeasible, _Problem, _Recoveries, _VariableCount, _ObjectiveCoefficients, _Tableau, _Basis, _ArtificialColumns, _Tolerance, _MaxIterations, PhaseOneIterations, linear_programming_result(infeasible, none, [], [iterations(PhaseOneIterations),phase_one_iterations(PhaseOneIterations),phase_two_iterations(0)])).
-	continue_with_phase_two(numerical_error, _Problem, _Recoveries, _VariableCount, _ObjectiveCoefficients, _Tableau, _Basis, _ArtificialColumns, _Tolerance, _MaxIterations, PhaseOneIterations, linear_programming_result(numerical_error, none, [], [iterations(PhaseOneIterations),phase_one_iterations(PhaseOneIterations),phase_two_iterations(0)])).
-	continue_with_phase_two(ready, Problem, Recoveries, VariableCount, ObjectiveCoefficients, Tableau0, Basis0, ArtificialColumns, Tolerance, MaxIterations, PhaseOneIterations, Result) :-
+	continue_with_phase_two(iteration_limit, _Problem, _Recoveries, _VariableCount, _ObjectiveCoefficients, _Tableau, _Basis, _ArtificialColumns, _PivotRule, _Tolerance, _MaxIterations, PhaseOneIterations, linear_programming_result(iteration_limit, none, [], [iterations(PhaseOneIterations),phase_one_iterations(PhaseOneIterations),phase_two_iterations(0)])).
+	continue_with_phase_two(infeasible, _Problem, _Recoveries, _VariableCount, _ObjectiveCoefficients, _Tableau, _Basis, _ArtificialColumns, _PivotRule, _Tolerance, _MaxIterations, PhaseOneIterations, linear_programming_result(infeasible, none, [], [iterations(PhaseOneIterations),phase_one_iterations(PhaseOneIterations),phase_two_iterations(0)])).
+	continue_with_phase_two(numerical_error, _Problem, _Recoveries, _VariableCount, _ObjectiveCoefficients, _Tableau, _Basis, _ArtificialColumns, _PivotRule, _Tolerance, _MaxIterations, PhaseOneIterations, linear_programming_result(numerical_error, none, [], [iterations(PhaseOneIterations),phase_one_iterations(PhaseOneIterations),phase_two_iterations(0)])).
+	continue_with_phase_two(ready, Problem, Recoveries, VariableCount, ObjectiveCoefficients, Tableau0, Basis0, ArtificialColumns, PivotRule, Tolerance, MaxIterations, PhaseOneIterations, Result) :-
 		Tableau0 = [tableau_row(AllCoefficients, _)| _],
 		!,
 		length(AllCoefficients, TotalColumns),
 		pad_vector(ObjectiveCoefficients, TotalColumns, PhaseTwoCosts),
 		build_objective_row(PhaseTwoCosts, Tableau0, Basis0, PhaseTwoObjective0),
-		simplex_loop(Tableau0, Basis0, PhaseTwoObjective0, ArtificialColumns, Tolerance, MaxIterations, PhaseOneIterations, PhaseTwoStatus, Tableau, Basis, _PhaseTwoObjective, TotalIterations),
+		simplex_loop(Tableau0, Basis0, PhaseTwoObjective0, ArtificialColumns, PivotRule, Tolerance, MaxIterations, PhaseOneIterations, PhaseTwoStatus, Tableau, Basis, _PhaseTwoObjective, TotalIterations),
 		PhaseTwoIterations is TotalIterations - PhaseOneIterations,
 		finish_result(PhaseTwoStatus, Problem, Recoveries, VariableCount, Tableau, Basis, TotalIterations, PhaseOneIterations, PhaseTwoIterations, Result).
-	continue_with_phase_two(ready, Problem, Recoveries, VariableCount, ObjectiveCoefficients, [], [], ArtificialColumns, Tolerance, MaxIterations, PhaseOneIterations, Result) :-
+	continue_with_phase_two(ready, Problem, Recoveries, VariableCount, ObjectiveCoefficients, [], [], ArtificialColumns, PivotRule, Tolerance, MaxIterations, PhaseOneIterations, Result) :-
 		!,
 		build_objective_row(ObjectiveCoefficients, [], [], PhaseTwoObjective0),
-		simplex_loop([], [], PhaseTwoObjective0, ArtificialColumns, Tolerance, MaxIterations, PhaseOneIterations, PhaseTwoStatus, Tableau, Basis, _PhaseTwoObjective, TotalIterations),
+		simplex_loop([], [], PhaseTwoObjective0, ArtificialColumns, PivotRule, Tolerance, MaxIterations, PhaseOneIterations, PhaseTwoStatus, Tableau, Basis, _PhaseTwoObjective, TotalIterations),
 		PhaseTwoIterations is TotalIterations - PhaseOneIterations,
 		finish_result(PhaseTwoStatus, Problem, Recoveries, VariableCount, Tableau, Basis, TotalIterations, PhaseOneIterations, PhaseTwoIterations, Result).
 

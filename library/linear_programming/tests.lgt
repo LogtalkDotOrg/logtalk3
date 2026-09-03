@@ -144,6 +144,37 @@
 		simplex::solve(Problem, Result, [max_iterations(1)]),
 		simplex::status(Result, Status).
 
+	test(linear_programming_dantzig_pivot_rule, deterministic((BlandStatus == iteration_limit, DantzigStatus == optimal, X =~= 0.0, Y =~= 1.0, Value =~= 2.0))) :-
+		pivot_rule_problem(Problem),
+		simplex::solve(Problem, BlandResult, [max_iterations(1)]),
+		simplex::status(BlandResult, BlandStatus),
+		simplex::solve(Problem, DantzigResult, [max_iterations(1),pivot_rule(dantzig)]),
+		simplex::status(DantzigResult, DantzigStatus),
+		simplex::variable_value(DantzigResult, x, X),
+		simplex::variable_value(DantzigResult, y, Y),
+		simplex::objective_value(DantzigResult, Value).
+
+	test(linear_programming_dantzig_pivot_rule_tie, deterministic((X =~= 1.0, Y =~= 0.0))) :-
+		simplex::new_problem(Problem0),
+		simplex::variable(x, continuous, Problem0, Problem1),
+		simplex::variable(y, continuous, Problem1, Problem2),
+		simplex::constraint([1*x,1*y], =<, 1, Problem2, Problem3),
+		simplex::objective([1*x,1*y], maximize, Problem3, Problem),
+		simplex::solve(Problem, Result, [pivot_rule(dantzig)]),
+		simplex::variable_value(Result, x, X),
+		simplex::variable_value(Result, y, Y).
+
+	test(linear_programming_dantzig_phase_one, deterministic((Status == optimal, X =~= 2.0, Value =~= 2.0))) :-
+		one_variable_problem(0, inf, [constraint([1*x], >=, 2)], [1*x], minimize, Problem),
+		simplex::solve(Problem, Result, [pivot_rule(dantzig)]),
+		simplex::status(Result, Status),
+		simplex::variable_value(Result, x, X),
+		simplex::objective_value(Result, Value).
+
+	test(linear_programming_invalid_pivot_rule, error(domain_error(option, pivot_rule(random)))) :-
+		sample_problem(Problem),
+		simplex::solve(Problem, _Result, [pivot_rule(random)]).
+
 	test(linear_programming_matrix_form, deterministic((X =~= 14.0, Y =~= 0.0, Value =~= 42.0))) :-
 		simplex::problem_from_matrices([3,4], maximize, [], [], [[1,2],[-3,1]], [14,0], [0-inf,0-inf], Problem),
 		simplex::solve(Problem, Result),
@@ -274,6 +305,18 @@
 		milp_branch_and_bound::objective([1*x], maximize, Problem1, Problem),
 		milp_branch_and_bound::solve(Problem, _Result, [max_nodes(0)]).
 
+	test(linear_programming_milp_simplex_pivot_rule, deterministic((Status == optimal, X =~= 0.0, Y =~= 1.0, Value =~= 2.0))) :-
+		pivot_rule_problem(Problem),
+		milp_branch_and_bound::solve(Problem, Result, [simplex_max_iterations(1),simplex_pivot_rule(dantzig)]),
+		milp_branch_and_bound::status(Result, Status),
+		milp_branch_and_bound::variable_value(Result, x, X),
+		milp_branch_and_bound::variable_value(Result, y, Y),
+		milp_branch_and_bound::objective_value(Result, Value).
+
+	test(linear_programming_milp_invalid_simplex_pivot_rule, error(domain_error(option, simplex_pivot_rule(random)))) :-
+		pivot_rule_problem(Problem),
+		milp_branch_and_bound::solve(Problem, _Result, [simplex_pivot_rule(random)]).
+
 	test(linear_programming_milp_finite_bounds_required, error(domain_error(milp_finite_integer_bounds, x-(-inf-inf)))) :-
 		milp_branch_and_bound::new_problem(Problem0),
 		milp_branch_and_bound::variable(x, integer, -inf, inf, Problem0, Problem1),
@@ -293,6 +336,13 @@
 		simplex::constraint([1*x,2*y], =<, 14, Problem2, Problem3),
 		simplex::constraint([3*x,-1*y], >=, 0, Problem3, Problem4),
 		simplex::objective([3*x,4*y], maximize, Problem4, Problem).
+
+	pivot_rule_problem(Problem) :-
+		simplex::new_problem(Problem0),
+		simplex::variable(x, continuous, Problem0, Problem1),
+		simplex::variable(y, continuous, Problem1, Problem2),
+		simplex::constraint([1*x,1*y], =<, 1, Problem2, Problem3),
+		simplex::objective([1*x,2*y], maximize, Problem3, Problem).
 
 	one_variable_problem(Lower, Upper, Constraints, Objective, Sense, Problem) :-
 		simplex::new_problem(Problem0),

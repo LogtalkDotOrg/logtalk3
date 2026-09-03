@@ -409,9 +409,9 @@
 <p>The <code class="docutils literal notranslate"><span class="pre">linear_programming</span></code> library provides immutable construction and
 solving of small linear and mixed-integer linear programs. The
 <code class="docutils literal notranslate"><span class="pre">simplex</span></code> backend is a portable dense two-phase tableau implementation
-using Bland’s pivot rule. The <code class="docutils literal notranslate"><span class="pre">milp_branch_and_bound</span></code> backend provides
-deterministic depth-first branch-and-bound over <code class="docutils literal notranslate"><span class="pre">simplex</span></code> LP
-relaxations.</p>
+supporting Bland’s and Dantzig’s pivot rules. The
+<code class="docutils literal notranslate"><span class="pre">milp_branch_and_bound</span></code> backend provides deterministic depth-first
+branch-and-bound over <code class="docutils literal notranslate"><span class="pre">simplex</span></code> LP relaxations.</p>
 <p>The model API supports continuous, integer, and binary variable
 declarations. The <code class="docutils literal notranslate"><span class="pre">simplex</span></code> backend solves continuous models only and
 throws a <code class="docutils literal notranslate"><span class="pre">domain_error(simplex_variable_type,</span> <span class="pre">Variable-Type)</span></code> error
@@ -494,8 +494,12 @@ corresponding inspector predicates fail for other statuses. Malformed
 problems and unsupported backend capabilities throw errors instead of
 being reported as mathematical solver statuses.</p>
 <p>The supported options are <code class="docutils literal notranslate"><span class="pre">max_iterations(PositiveInteger)</span></code>,
-defaulting to 10000, and <code class="docutils literal notranslate"><span class="pre">tolerance(PositiveNumber)</span></code>, defaulting to
-<code class="docutils literal notranslate"><span class="pre">1.0e-9</span></code>. The iteration limit is shared by both simplex phases.</p>
+defaulting to 10000, <code class="docutils literal notranslate"><span class="pre">tolerance(PositiveNumber)</span></code>, defaulting to
+<code class="docutils literal notranslate"><span class="pre">1.0e-9</span></code>, and <code class="docutils literal notranslate"><span class="pre">pivot_rule(Rule)</span></code>, where <code class="docutils literal notranslate"><span class="pre">Rule</span></code> is <code class="docutils literal notranslate"><span class="pre">bland</span></code> (the
+default) or <code class="docutils literal notranslate"><span class="pre">dantzig</span></code>. Bland’s rule selects the first eligible
+entering column. Dantzig’s rule selects the eligible column with the
+most negative reduced cost, breaking ties by the lowest column index.
+The iteration limit is shared by both simplex phases.</p>
 </section>
 <section id="mixed-integer-solving">
 <h2>Mixed-integer solving<a class="headerlink" href="#mixed-integer-solving" title="Link to this heading"></a></h2>
@@ -510,7 +514,8 @@ cutting planes or primal heuristics.</p>
 10000, <code class="docutils literal notranslate"><span class="pre">integrality_tolerance(PositiveNumber)</span></code>, defaulting to
 <code class="docutils literal notranslate"><span class="pre">1.0e-9</span></code>, <code class="docutils literal notranslate"><span class="pre">simplex_max_iterations(PositiveInteger)</span></code>, defaulting to
 10000, and <code class="docutils literal notranslate"><span class="pre">simplex_tolerance(PositiveNumber)</span></code>, defaulting to
-<code class="docutils literal notranslate"><span class="pre">1.0e-9</span></code>.</p>
+<code class="docutils literal notranslate"><span class="pre">1.0e-9</span></code>, and <code class="docutils literal notranslate"><span class="pre">simplex_pivot_rule(Rule)</span></code>, defaulting to <code class="docutils literal notranslate"><span class="pre">bland</span></code>,
+which selects the pivot rule for all LP relaxations.</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> milp_branch_and_bound<span class="o">::</span>new_problem(<span class="nv">P0</span>),
      milp_branch_and_bound<span class="o">::</span>variable(x, binary, <span class="nv">P0</span>, <span class="nv">P1</span>),
      milp_branch_and_bound<span class="o">::</span>variable(y, binary, <span class="nv">P1</span>, <span class="nv">P2</span>),
@@ -525,8 +530,8 @@ cutting planes or primal heuristics.</p>
 <p>Both backends use dense lists and are intended for small problems. The
 library does not implement presolve beyond bound and standard-form
 normalization, sparse storage, cutting planes, dual values, reduced
-costs, basis export, warm starts, time limits, callbacks, parallel
-search, or alternative pivot rules.</p>
+costs, basis export, warm starts, time limits, callbacks, or parallel
+search.</p>
 </section>
 </section>
 

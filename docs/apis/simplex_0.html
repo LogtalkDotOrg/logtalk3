@@ -466,7 +466,7 @@
 <blockquote>
 <div><ul class="simple">
 <li><p>Variable types: This backend supports continuous variables only. Integer and binary variables are accepted by the shared model API for use by future MILP backends but rejected when solving.</p></li>
-<li><p>Pivoting: Bland’s rule is used for entering variables and minimum-ratio ties to prevent cycling.</p></li>
+<li><p>Pivoting: Bland’s rule is used by default. Dantzig’s rule is also available, with the lowest column index breaking ties. Minimum-ratio ties use the lowest-indexed basic variable.</p></li>
 </ul>
 </div></blockquote>
 <div class="line-block">

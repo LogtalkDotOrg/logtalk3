@@ -57,6 +57,7 @@
 	default_option(integrality_tolerance(1.0e-9)).
 	default_option(simplex_max_iterations(10000)).
 	default_option(simplex_tolerance(1.0e-9)).
+	default_option(simplex_pivot_rule(bland)).
 
 	valid_option(max_nodes(MaxNodes)) :-
 		integer(MaxNodes),
@@ -70,6 +71,8 @@
 	valid_option(simplex_tolerance(Tolerance)) :-
 		number(Tolerance),
 		Tolerance > 0.
+	valid_option(simplex_pivot_rule(PivotRule)) :-
+		once((PivotRule == bland; PivotRule == dantzig)).
 
 	check_solvable_problem([], _Objective) :-
 		domain_error(linear_programming_problem, empty).
@@ -79,14 +82,20 @@
 
 	check_discrete_domains([]).
 	check_discrete_domains([variable(Name, _Type, Lower, Upper)| Variables]) :-
-		( number(Lower), number(Upper) ->
-			IntegerLower is ceiling(Lower),
-			IntegerUpper is floor(Upper),
-			( IntegerLower =< IntegerUpper ->
+		(	number(Lower), number(Upper) ->
+			(	integer(Lower) ->
+				IntegerLower is Lower
+			;	IntegerLower is ceiling(Lower)
+			),
+			(	integer(Upper) ->
+				IntegerUpper is Upper
+			;	IntegerUpper is floor(Upper)
+			),
+			(	IntegerLower =< IntegerUpper ->
 				check_discrete_domains(Variables)
-			; domain_error(milp_integer_domain, Name-(Lower-Upper))
+			;	domain_error(milp_integer_domain, Name-(Lower-Upper))
 			)
-		; domain_error(milp_finite_integer_bounds, Name-(Lower-Upper))
+		;	domain_error(milp_finite_integer_bounds, Name-(Lower-Upper))
 		).
 
 	initial_state(search_state(none, [], 0, 0, 0, 0, 0, none)).
@@ -102,7 +111,8 @@
 		^^relax_problem(Problem, Relaxation),
 		^^option(simplex_max_iterations(MaxIterations), Options),
 		^^option(simplex_tolerance(SimplexTolerance), Options),
-		simplex::solve(Relaxation, RelaxationResult, [max_iterations(MaxIterations), tolerance(SimplexTolerance)]),
+		^^option(simplex_pivot_rule(PivotRule), Options),
+		simplex::solve(Relaxation, RelaxationResult, [max_iterations(MaxIterations), tolerance(SimplexTolerance), pivot_rule(PivotRule)]),
 		add_relaxation_iterations(RelaxationResult, State1, State2),
 		handle_relaxation(RelaxationResult, Problem, Options, State2, State).
 
@@ -125,15 +135,19 @@
 	handle_relaxation(linear_programming_result(optimal, Objective, Values, _Statistics), Problem, Options, State0, State) :-
 		Problem = linear_program(_Variables, _Constraints, objective(_Expression, Sense)),
 		^^option(simplex_tolerance(ObjectiveTolerance), Options),
-		( bound_pruned(Sense, Objective, ObjectiveTolerance, State0) ->
+		(	bound_pruned(Sense, Objective, ObjectiveTolerance, State0) ->
 			increment_pruned(State0, State)
 		; ^^discrete_variables(Problem, DiscreteVariables),
 			^^option(integrality_tolerance(IntegralityTolerance), Options),
-			( fractional_variable(DiscreteVariables, Values, IntegralityTolerance, Name, Lower, Upper, Value) ->
-				Floor is floor(Value),
-				Ceiling is ceiling(Value),
+			(	fractional_variable(DiscreteVariables, Values, IntegralityTolerance, Name, Lower, Upper, Value) ->
+				(	integer(Value) ->
+					Floor is Value,
+					Ceiling is Value
+				;	Floor is floor(Value),
+					Ceiling is ceiling(Value)
+				),
 				branch_on_value(Problem, Name, Lower, Upper, Floor, Ceiling, Options, State0, State)
-			; snap_discrete_values(DiscreteVariables, Values, SnappedValues),
+			;	snap_discrete_values(DiscreteVariables, Values, SnappedValues),
 				evaluate_problem_objective(Problem, SnappedValues, SnappedObjective),
 				update_incumbent(Sense, SnappedObjective, SnappedValues, State0, State)
 			)
@@ -148,15 +162,24 @@
 
 	fractional_variable([variable(Name, _Type, Lower, Upper)| _Variables], Values, Tolerance, Name, Lower, Upper, Value) :-
 		memberchk(Name-Value, Values),
-		Nearest is round(Value),
+		(	integer(Value) ->
+			Nearest is Value
+		;	Nearest is round(Value)
+		),
 		abs(Value - Nearest) > Tolerance,
 		!.
 	fractional_variable([_Variable| Variables], Values, Tolerance, Name, Lower, Upper, Value) :-
 		fractional_variable(Variables, Values, Tolerance, Name, Lower, Upper, Value).
 
 	branchable_domain([variable(Name, _Type, Lower, Upper)| _Variables], Name, Lower, Upper, Split) :-
-		IntegerLower is ceiling(Lower),
-		IntegerUpper is floor(Upper),
+		(	integer(Lower) ->
+			IntegerLower is Lower
+		;	IntegerLower is celing(Lower)
+		),
+		(	integer(Upper) ->
+			IntegerUpper is Upper
+		;	IntegerUpper is floor(Upper)
+		),
 		IntegerLower < IntegerUpper,
 		!,
 		Split is (IntegerLower + IntegerUpper) // 2.
@@ -190,7 +213,10 @@
 	snap_discrete_values([], Values, Values).
 	snap_discrete_values([variable(Name, _Type, _Lower, _Upper)| Variables], Values0, Values) :-
 		memberchk(Name-Value, Values0),
-		Integer is round(Value),
+		(	integer(Value) ->
+			Integer is Value
+		;	Integer is round(Value)
+		),
 		replace_value(Values0, Name, Integer, Values1),
 		snap_discrete_values(Variables, Values1, Values).
 
