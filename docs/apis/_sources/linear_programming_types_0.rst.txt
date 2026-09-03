@@ -1,0 +1,57 @@
+.. index:: single: linear_programming_types
+.. _linear_programming_types/0:
+
+.. rst-class:: right
+
+**category**
+
+``linear_programming_types``
+============================
+
+Type definitions for linear-programming model inputs.
+
+| **Availability:** 
+|    ``logtalk_load(linear_programming(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-03
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Provides:**
+|    :ref:`type::type/1 <type/0::type/1>`
+|    :ref:`type::check/2 <type/0::check/2>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

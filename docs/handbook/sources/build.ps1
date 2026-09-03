@@ -1,7 +1,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on September 2, 2026
+##   Last updated on September 3, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -246,6 +246,7 @@ Foreach-Object {
 (Get-Content ../../../library/lda_projection/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/lda_projection.rst
 (Get-Content ../../../library/linda/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/linda.rst
 (Get-Content ../../../library/linear_algebra/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/linear_algebra.rst
+(Get-Content ../../../library/linear_programming/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/linear_programming.rst
 (Get-Content ../../../library/linear_regression/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/linear_regression.rst
 (Get-Content ../../../library/linear_svm_classifier/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/linear_svm_classifier.rst
 (Get-Content ../../../library/listing/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/listing.rst

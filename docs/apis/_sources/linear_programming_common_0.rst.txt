@@ -1,0 +1,97 @@
+.. index:: single: linear_programming_common
+.. _linear_programming_common/0:
+
+.. rst-class:: right
+
+**category**
+
+``linear_programming_common``
+=============================
+
+Shared immutable model construction, validation, matrix conversion, result inspection, and printing for linear-programming solvers.
+
+| **Availability:** 
+|    ``logtalk_load(linear_programming(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-03
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Implements:**
+|    ``public`` :ref:`linear_programming_protocol <linear_programming_protocol/0>`
+| **Extends:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`format <format/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`linear_programming_protocol/0::constraint/5`  :ref:`linear_programming_protocol/0::constraints/3`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`linear_programming_protocol/0::new_problem/1`  :ref:`linear_programming_protocol/0::objective/4`  :ref:`linear_programming_protocol/0::objective_value/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`linear_programming_protocol/0::print_problem/1`  :ref:`linear_programming_protocol/0::print_solution/1`  :ref:`linear_programming_protocol/0::problem_from_matrices/8`  :ref:`linear_programming_protocol/0::solve/2`  :ref:`linear_programming_protocol/0::solve/3`  :ref:`linear_programming_protocol/0::statistics/2`  :ref:`linear_programming_protocol/0::status/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`linear_programming_protocol/0::variable/4`  :ref:`linear_programming_protocol/0::variable/6`  :ref:`linear_programming_protocol/0::variable_value/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: check_problem/1
+.. _linear_programming_common/0::check_problem/1:
+
+``check_problem/1``
+^^^^^^^^^^^^^^^^^^^
+
+Checks that the argument is a structurally valid linear-program problem.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_problem(Problem)``
+| **Mode and number of proofs:**
+|    ``check_problem(@term)`` - ``one_or_error``
+
+
+------------
+
+.. index:: check_result/1
+.. _linear_programming_common/0::check_result/1:
+
+``check_result/1``
+^^^^^^^^^^^^^^^^^^
+
+Checks that the argument is a structurally valid linear-programming result.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_result(Result)``
+| **Mode and number of proofs:**
+|    ``check_result(@term)`` - ``one_or_error``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

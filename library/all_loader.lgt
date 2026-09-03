@@ -27,6 +27,7 @@
 		strings(loader),
 		string_distance(loader),
 		linear_algebra(loader),
+		linear_programming(loader),
 		stemming(loader),
 		subsequences(loader),
 		combinations(loader),

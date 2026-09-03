@@ -110,6 +110,9 @@ Mahalanobis distance predicates.
 
 * ADDED: New `mqtt` library implementing a MQTT 5.0 client.
 
+* ADDED: New `linear_programming` library providing immutable construction
+and solving of small linear programs.
+
 * ADDED: New `local_optimization` library providing common box constraints
 solvers.
 

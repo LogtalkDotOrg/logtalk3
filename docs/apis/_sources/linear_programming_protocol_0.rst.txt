@@ -1,0 +1,404 @@
+.. index:: single: linear_programming_protocol
+.. _linear_programming_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``linear_programming_protocol``
+===============================
+
+Protocol for immutable linear-program construction, solving, and result inspection.
+
+| **Availability:** 
+|    ``logtalk_load(linear_programming(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-03
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: new_problem/1
+.. _linear_programming_protocol/0::new_problem/1:
+
+``new_problem/1``
+^^^^^^^^^^^^^^^^^
+
+Creates an empty linear-program problem.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``new_problem(Problem)``
+| **Mode and number of proofs:**
+|    ``new_problem(-compound)`` - ``one``
+
+
+------------
+
+.. index:: variable/4
+.. _linear_programming_protocol/0::variable/4:
+
+``variable/4``
+^^^^^^^^^^^^^^
+
+Adds a variable with default bounds. Continuous and integer variables default to zero and positive infinity; binary variables default to zero and one. The variable type is ``continuous``, ``integer``, or ``binary``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``variable(Name,Type,Problem0,Problem)``
+| **Mode and number of proofs:**
+|    ``variable(+term,+atom,+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    An argument is insufficiently instantiated:
+|        ``instantiation_error``
+|    ``Problem0`` is not a linear-program problem:
+|        ``type_error(linear_program,Problem0)``
+|    ``Type`` is not a supported variable type:
+|        ``domain_error(linear_programming_variable_type,Type)``
+|    ``Name`` is already declared:
+|        ``domain_error(linear_programming_variable,Name)``
+
+
+------------
+
+.. index:: variable/6
+.. _linear_programming_protocol/0::variable/6:
+
+``variable/6``
+^^^^^^^^^^^^^^
+
+Adds a variable with explicit lower and upper bounds. A bound is a number, ``inf``, or ``-inf`` as appropriate.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``variable(Name,Type,Lower,Upper,Problem0,Problem)``
+| **Mode and number of proofs:**
+|    ``variable(+term,+atom,+term,+term,+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    An argument is insufficiently instantiated:
+|        ``instantiation_error``
+|    ``Problem0`` is not a linear-program problem:
+|        ``type_error(linear_program,Problem0)``
+|    ``Type`` is not a supported variable type:
+|        ``domain_error(linear_programming_variable_type,Type)``
+|    ``Name`` is already declared:
+|        ``domain_error(linear_programming_variable,Name)``
+|    The bounds are invalid or inconsistent:
+|        ``domain_error(linear_programming_bounds,Lower-Upper)``
+
+
+------------
+
+.. index:: constraint/5
+.. _linear_programming_protocol/0::constraint/5:
+
+``constraint/5``
+^^^^^^^^^^^^^^^^
+
+Adds a linear constraint. ``Coefficients`` is a list of ``Coefficient*Variable`` terms and ``Sense`` is ``=<``, ``>=``, or ``=``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``constraint(Coefficients,Sense,RightHandSide,Problem0,Problem)``
+| **Mode and number of proofs:**
+|    ``constraint(+list(compound),+atom,+number,+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    An argument is insufficiently instantiated:
+|        ``instantiation_error``
+|    ``Problem0`` is not a linear-program problem:
+|        ``type_error(linear_program,Problem0)``
+|    ``Coefficients`` is not a list of coefficient-variable terms:
+|        ``type_error(linear_expression,Coefficients)``
+|    ``Sense`` is not a supported constraint sense:
+|        ``domain_error(linear_programming_constraint_sense,Sense)``
+|    A coefficient references an undeclared variable:
+|        ``domain_error(linear_programming_variable,Variable)``
+
+
+------------
+
+.. index:: constraints/3
+.. _linear_programming_protocol/0::constraints/3:
+
+``constraints/3``
+^^^^^^^^^^^^^^^^^
+
+Adds a list of ``constraint(Coefficients, Sense, RightHandSide)`` terms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``constraints(Constraints,Problem0,Problem)``
+| **Mode and number of proofs:**
+|    ``constraints(+list(compound),+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    An argument is insufficiently instantiated:
+|        ``instantiation_error``
+|    ``Constraints`` is not a list of valid constraint terms:
+|        ``type_error(linear_programming_constraints,Constraints)``
+|    ``Problem0`` is not a linear-program problem:
+|        ``type_error(linear_program,Problem0)``
+
+
+------------
+
+.. index:: objective/4
+.. _linear_programming_protocol/0::objective/4:
+
+``objective/4``
+^^^^^^^^^^^^^^^
+
+Sets the linear objective. ``Coefficients`` is a list of ``Coefficient*Variable`` terms and ``Sense`` is ``minimize`` or ``maximize``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``objective(Coefficients,Sense,Problem0,Problem)``
+| **Mode and number of proofs:**
+|    ``objective(+list(compound),+atom,+compound,-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    An argument is insufficiently instantiated:
+|        ``instantiation_error``
+|    ``Problem0`` is not a linear-program problem:
+|        ``type_error(linear_program,Problem0)``
+|    ``Coefficients`` is not a list of coefficient-variable terms:
+|        ``type_error(linear_expression,Coefficients)``
+|    ``Sense`` is not a supported objective sense:
+|        ``domain_error(linear_programming_objective_sense,Sense)``
+|    The problem already has an objective:
+|        ``domain_error(linear_programming_objective,Problem0)``
+|    A coefficient references an undeclared variable:
+|        ``domain_error(linear_programming_variable,Variable)``
+
+
+------------
+
+.. index:: problem_from_matrices/8
+.. _linear_programming_protocol/0::problem_from_matrices/8:
+
+``problem_from_matrices/8``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Creates a problem from a dense objective vector, objective sense, equality rows and right-hand sides, less-than-or-equal rows and right-hand sides, and variable bounds. Variables are named by their one-based column indices.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``problem_from_matrices(Objective,ObjectiveSense,EqualityMatrix,EqualityRightHandSide,InequalityMatrix,InequalityRightHandSide,Bounds,Problem)``
+| **Mode and number of proofs:**
+|    ``problem_from_matrices(+list(number),+atom,+list(list(number)),+list(number),+list(list(number)),+list(number),+list(pair),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    An argument is insufficiently instantiated:
+|        ``instantiation_error``
+|    The matrix and vector dimensions are inconsistent:
+|        ``domain_error(linear_programming_dimensions,Objective)``
+|    An input is not a numeric vector, numeric matrix, or valid bounds list:
+|        ``type_error(linear_programming_matrix_problem,Objective)``
+
+
+------------
+
+.. index:: solve/2
+.. _linear_programming_protocol/0::solve/2:
+
+``solve/2``
+^^^^^^^^^^^
+
+Solves a linear-program problem using default options and returns a result term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``solve(Problem,Result)``
+| **Mode and number of proofs:**
+|    ``solve(+compound,-compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: solve/3
+.. _linear_programming_protocol/0::solve/3:
+
+``solve/3``
+^^^^^^^^^^^
+
+Solves a linear-program problem using the specified options and returns a result term.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``solve(Problem,Result,Options)``
+| **Mode and number of proofs:**
+|    ``solve(+compound,-compound,+list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: status/2
+.. _linear_programming_protocol/0::status/2:
+
+``status/2``
+^^^^^^^^^^^^
+
+Returns the result status.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``status(Result,Status)``
+| **Mode and number of proofs:**
+|    ``status(+compound,-atom)`` - ``one_or_error``
+
+
+------------
+
+.. index:: objective_value/2
+.. _linear_programming_protocol/0::objective_value/2:
+
+``objective_value/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Returns the optimal objective value. Fails when the result status is not ``optimal``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``objective_value(Result,Value)``
+| **Mode and number of proofs:**
+|    ``objective_value(+compound,-number)`` - ``zero_or_one_or_error``
+
+
+------------
+
+.. index:: variable_value/3
+.. _linear_programming_protocol/0::variable_value/3:
+
+``variable_value/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns an optimal variable value. Fails when the result status is not ``optimal`` or the variable is absent.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``variable_value(Result,Variable,Value)``
+| **Mode and number of proofs:**
+|    ``variable_value(+compound,+term,-number)`` - ``zero_or_one_or_error``
+
+
+------------
+
+.. index:: statistics/2
+.. _linear_programming_protocol/0::statistics/2:
+
+``statistics/2``
+^^^^^^^^^^^^^^^^
+
+Returns solver statistics stored in a result.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``statistics(Result,Statistics)``
+| **Mode and number of proofs:**
+|    ``statistics(+compound,-list(compound))`` - ``one_or_error``
+
+
+------------
+
+.. index:: print_problem/1
+.. _linear_programming_protocol/0::print_problem/1:
+
+``print_problem/1``
+^^^^^^^^^^^^^^^^^^^
+
+Prints a linear-program problem to the current output stream.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_problem(Problem)``
+| **Mode and number of proofs:**
+|    ``print_problem(+compound)`` - ``one_or_error``
+
+
+------------
+
+.. index:: print_solution/1
+.. _linear_programming_protocol/0::print_solution/1:
+
+``print_solution/1``
+^^^^^^^^^^^^^^^^^^^^
+
+Prints a linear-program result to the current output stream.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``print_solution(Result)``
+| **Mode and number of proofs:**
+|    ``print_solution(+compound)`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

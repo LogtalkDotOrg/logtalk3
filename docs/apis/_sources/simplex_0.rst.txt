@@ -1,0 +1,65 @@
+.. index:: single: simplex
+.. _simplex/0:
+
+.. rst-class:: right
+
+**object**
+
+``simplex``
+===========
+
+Portable dense two-phase simplex solver for small continuous linear programs.
+
+| **Availability:** 
+|    ``logtalk_load(linear_programming(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-03
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`linear_programming_common <linear_programming_common/0>`
+| **Uses:**
+|    :ref:`linear_algebra <linear_algebra/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+
+   - Variable types: This backend supports continuous variables only. Integer and binary variables are accepted by the shared model API for use by future MILP backends but rejected when solving.
+   - Pivoting: Bland's rule is used for entering variables and minimum-ratio ties to prevent cycling.
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`linear_programming_protocol/0::constraint/5`  :ref:`linear_programming_protocol/0::constraints/3`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`linear_programming_protocol/0::new_problem/1`  :ref:`linear_programming_protocol/0::objective/4`  :ref:`linear_programming_protocol/0::objective_value/2`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`linear_programming_protocol/0::print_problem/1`  :ref:`linear_programming_protocol/0::print_solution/1`  :ref:`linear_programming_protocol/0::problem_from_matrices/8`  :ref:`linear_programming_protocol/0::solve/2`  :ref:`linear_programming_protocol/0::solve/3`  :ref:`linear_programming_protocol/0::statistics/2`  :ref:`linear_programming_protocol/0::status/2`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  :ref:`linear_programming_protocol/0::variable/4`  :ref:`linear_programming_protocol/0::variable/6`  :ref:`linear_programming_protocol/0::variable_value/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`linear_programming_protocol <linear_programming_protocol/0>`
+

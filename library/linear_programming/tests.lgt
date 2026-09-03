@@ -1,0 +1,165 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
+%
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
+%
+%      http://www.apache.org/licenses/LICENSE-2.0
+%
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+:- object(tests,
+	extends(lgtunit)).
+
+	:- info([
+		version is 1:0:0,
+		author is 'Paulo Moura',
+		date is 2026-09-03,
+		comment is 'Unit tests for the "linear_programming" library.'
+	]).
+
+	:- uses(lgtunit, [
+		op(700, xfx, =~=), (=~=)/2
+	]).
+
+	cover(simplex).
+
+	test(linear_programming_new_problem_1, deterministic(Problem == linear_program([], [], none))) :-
+		simplex::new_problem(Problem).
+
+	test(linear_programming_canonical_expression, deterministic(Problem == linear_program([variable(x,continuous,0,inf)],[],objective([3*x],maximize)))) :-
+		simplex::new_problem(Problem0),
+		simplex::variable(x, continuous, Problem0, Problem1),
+		simplex::objective([1*x, 4*x, -2*x, 0*x], maximize, Problem1, Problem).
+
+	test(linear_programming_bounded_maximum, deterministic((Status == optimal, X =~= 14.0, Y =~= 0.0, Value =~= 42.0))) :-
+		sample_problem(Problem),
+		simplex::solve(Problem, Result),
+		simplex::status(Result, Status),
+		simplex::variable_value(Result, x, X),
+		simplex::variable_value(Result, y, Y),
+		simplex::objective_value(Result, Value).
+
+	test(linear_programming_minimum, deterministic((X =~= 2.0, Value =~= 2.0))) :-
+		one_variable_problem(0, inf, [constraint([1*x], >=, 2)], [1*x], minimize, Problem),
+		simplex::solve(Problem, Result),
+		simplex::variable_value(Result, x, X),
+		simplex::objective_value(Result, Value).
+
+	test(linear_programming_equality, deterministic(X =~= 3.0)) :-
+		one_variable_problem(0, inf, [constraint([1*x], =, 3)], [1*x], minimize, Problem),
+		simplex::solve(Problem, Result),
+		simplex::variable_value(Result, x, X).
+
+	test(linear_programming_negative_rhs, deterministic(X =~= 2.0)) :-
+		one_variable_problem(0, inf, [constraint([-1*x], =<, -2),constraint([1*x], =<, 5)], [1*x], minimize, Problem),
+		simplex::solve(Problem, Result),
+		simplex::variable_value(Result, x, X).
+
+	test(linear_programming_finite_bounds, deterministic(X =~= 5.0)) :-
+		one_variable_problem(2, 5, [], [1*x], maximize, Problem),
+		simplex::solve(Problem, Result),
+		simplex::variable_value(Result, x, X).
+
+	test(linear_programming_upper_bound_only, deterministic(X =~= 3.0)) :-
+		one_variable_problem(-inf, 3, [], [1*x], maximize, Problem),
+		simplex::solve(Problem, Result),
+		simplex::variable_value(Result, x, X).
+
+	test(linear_programming_free_variable, deterministic(X =~= -2.0)) :-
+		one_variable_problem(-inf, inf, [constraint([1*x], =, -2)], [1*x], minimize, Problem),
+		simplex::solve(Problem, Result),
+		simplex::variable_value(Result, x, X).
+
+	test(linear_programming_fixed_variable, deterministic((X =~= 4.0, Value =~= 8.0))) :-
+		one_variable_problem(4, 4, [], [2*x], maximize, Problem),
+		simplex::solve(Problem, Result),
+		simplex::variable_value(Result, x, X),
+		simplex::objective_value(Result, Value).
+
+	test(linear_programming_infeasible, deterministic(Status == infeasible)) :-
+		one_variable_problem(0, inf, [constraint([1*x], =<, 0),constraint([1*x], >=, 1)], [1*x], minimize, Problem),
+		simplex::solve(Problem, Result),
+		simplex::status(Result, Status).
+
+	test(linear_programming_unbounded, deterministic(Status == unbounded)) :-
+		one_variable_problem(0, inf, [], [1*x], maximize, Problem),
+		simplex::solve(Problem, Result),
+		simplex::status(Result, Status).
+
+	test(linear_programming_iteration_limit, deterministic(Status == iteration_limit)) :-
+		sample_problem(Problem),
+		simplex::solve(Problem, Result, [max_iterations(1)]),
+		simplex::status(Result, Status).
+
+	test(linear_programming_matrix_form, deterministic((X =~= 14.0, Y =~= 0.0, Value =~= 42.0))) :-
+		simplex::problem_from_matrices([3,4], maximize, [], [], [[1,2],[-3,1]], [14,0], [0-inf,0-inf], Problem),
+		simplex::solve(Problem, Result),
+		simplex::variable_value(Result, 1, X),
+		simplex::variable_value(Result, 2, Y),
+		simplex::objective_value(Result, Value).
+
+	test(linear_programming_statistics, deterministic) :-
+		sample_problem(Problem),
+		simplex::solve(Problem, Result),
+		simplex::statistics(Result, [iterations(_),phase_one_iterations(_),phase_two_iterations(_)]).
+
+	test(linear_programming_objective_value_non_optimal, fail) :-
+		one_variable_problem(0, inf, [], [1*x], maximize, Problem),
+		simplex::solve(Problem, Result),
+		simplex::objective_value(Result, _Value).
+
+	test(linear_programming_duplicate_variable, error(domain_error(linear_programming_variable, x))) :-
+		simplex::new_problem(Problem0),
+		simplex::variable(x, continuous, Problem0, Problem1),
+		simplex::variable(x, continuous, Problem1, _Problem).
+
+	test(linear_programming_undeclared_variable, error(domain_error(linear_programming_variable, y))) :-
+		simplex::new_problem(Problem0),
+		simplex::variable(x, continuous, Problem0, Problem1),
+		simplex::objective([1*y], maximize, Problem1, _Problem).
+
+	test(linear_programming_invalid_expression, error(type_error(linear_expression, [x+y]))) :-
+		simplex::new_problem(Problem0),
+		simplex::variable(x, continuous, Problem0, Problem1),
+		simplex::objective([x+y], maximize, Problem1, _Problem).
+
+	test(linear_programming_invalid_bounds, error(domain_error(linear_programming_bounds, 2-1))) :-
+		simplex::new_problem(Problem0),
+		simplex::variable(x, continuous, 2, 1, Problem0, _Problem).
+
+	test(linear_programming_matrix_dimensions, error(domain_error(linear_programming_dimensions, [[1,2]]))) :-
+		simplex::problem_from_matrices([1], maximize, [], [], [[1,2]], [1], [0-inf], _Problem).
+
+	test(linear_programming_integer_backend_error, error(domain_error(simplex_variable_type, x-integer))) :-
+		simplex::new_problem(Problem0),
+		simplex::variable(x, integer, Problem0, Problem1),
+		simplex::objective([1*x], maximize, Problem1, Problem),
+		simplex::solve(Problem, _Result).
+
+	sample_problem(Problem) :-
+		simplex::new_problem(Problem0),
+		simplex::variable(x, continuous, Problem0, Problem1),
+		simplex::variable(y, continuous, Problem1, Problem2),
+		simplex::constraint([1*x,2*y], =<, 14, Problem2, Problem3),
+		simplex::constraint([3*x,-1*y], >=, 0, Problem3, Problem4),
+		simplex::objective([3*x,4*y], maximize, Problem4, Problem).
+
+	one_variable_problem(Lower, Upper, Constraints, Objective, Sense, Problem) :-
+		simplex::new_problem(Problem0),
+		simplex::variable(x, continuous, Lower, Upper, Problem0, Problem1),
+		simplex::constraints(Constraints, Problem1, Problem2),
+		simplex::objective(Objective, Sense, Problem2, Problem).
+
+:- end_object.

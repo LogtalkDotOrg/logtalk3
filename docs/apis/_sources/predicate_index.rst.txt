@@ -3930,6 +3930,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`redis <redis/0::console/1>`
 
+``constraint/5``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_programming_protocol <linear_programming_protocol/0::constraint/5>`
+
 ``constraints/2``
 -----------------
 
@@ -3939,6 +3949,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::constraints/2>`
+
+``constraints/3``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_programming_protocol <linear_programming_protocol/0::constraints/3>`
 
 ``contains/2``
 --------------
@@ -17275,6 +17295,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`linear_algebra_protocol <linear_algebra_protocol/0::new_matrix/4>`
 
+``new_problem/1``
+-----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_programming_protocol <linear_programming_protocol/0::new_problem/1>`
+
 ``new_vector/3``
 ----------------
 
@@ -18302,6 +18332,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`local_optimization_problem_protocol <local_optimization_problem_protocol/0::objective/2>`
+
+``objective/4``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_programming_protocol <linear_programming_protocol/0::objective/4>`
+
+``objective_value/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_programming_protocol <linear_programming_protocol/0::objective_value/2>`
 
 ``occurrences/2``
 -----------------
@@ -21292,6 +21342,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`pattern_miner_protocol <pattern_miner_protocol/0::print_pattern_miner/1>`
 
+``print_problem/1``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_programming_protocol <linear_programming_protocol/0::print_problem/1>`
+
 ``print_ranker/1``
 ------------------
 
@@ -21311,6 +21371,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`regressor_protocol <regressor_protocol/0::print_regressor/1>`
+
+``print_solution/1``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_programming_protocol <linear_programming_protocol/0::print_solution/1>`
+
+``problem_from_matrices/8``
+---------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_programming_protocol <linear_programming_protocol/0::problem_from_matrices/8>`
 
 ``problem_json_schema/1``
 -------------------------
@@ -26242,6 +26322,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ant_colony_problem_protocol <ant_colony_problem_protocol/0::solution_cost/2>`
 
+``solve/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_programming_protocol <linear_programming_protocol/0::solve/2>`
+
+``solve/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_programming_protocol <linear_programming_protocol/0::solve/3>`
+
 ``solve/8``
 -----------
 
@@ -26872,6 +26972,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`simulated_annealing_protocol <simulated_annealing_protocol/0::state_energy/2>`
 * :ref:`tabu_search_problem_protocol <tabu_search_problem_protocol/0::state_energy/2>`
 
+``statistics/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_programming_protocol <linear_programming_protocol/0::statistics/2>`
+
 ``stats/1``
 -----------
 
@@ -26921,6 +27031,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_core <http_core/0::status/2>`
+* :ref:`linear_programming_protocol <linear_programming_protocol/0::status/2>`
 
 ``stem/2``
 ----------
@@ -30056,6 +30167,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`trie(Representation) <trie/1::values/3>`
+
+``variable/4``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_programming_protocol <linear_programming_protocol/0::variable/4>`
+
+``variable/6``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_programming_protocol <linear_programming_protocol/0::variable/6>`
+
+``variable_value/3``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`linear_programming_protocol <linear_programming_protocol/0::variable_value/3>`
 
 ``variables/2``
 ---------------

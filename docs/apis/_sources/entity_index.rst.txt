@@ -81,6 +81,8 @@ Categories
    library_diagram(Format) <library_diagram_1>
    linda_client <linda_client_0>
    linda_server <linda_server_0>
+   linear_programming_common <linear_programming_common_0>
+   linear_programming_types <linear_programming_types_0>
    listing <listing_0>
    local_optimization_solver(Problem) <local_optimization_solver_1>
    logging <logging_0>
@@ -696,6 +698,7 @@ Objects
    shell <shell_0>
    shell(Interpreters) <shell_1>
    shell_expansion(Mode) <shell_expansion_1>
+   simplex <simplex_0>
    simulated_annealing(Problem) <simulated_annealing_1>
    simulated_annealing(Problem,RandomAlgorithm) <simulated_annealing_2>
    single_classification_ripple_down_rules <single_classification_ripple_down_rules_0>
@@ -931,6 +934,7 @@ Protocols
    ksuid_protocol <ksuid_protocol_0>
    lgtdocp <lgtdocp_0>
    linear_algebra_protocol <linear_algebra_protocol_0>
+   linear_programming_protocol <linear_programming_protocol_0>
    listp <listp_0>
    local_optimization_problem_protocol <local_optimization_problem_protocol_0>
    loggingp <loggingp_0>

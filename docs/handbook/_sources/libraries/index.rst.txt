@@ -195,6 +195,7 @@ directory in the ``NOTES.md`` file.
    lda_projection
    linda
    linear_algebra
+   linear_programming
    linear_regression
    linear_svm_classifier
    listing

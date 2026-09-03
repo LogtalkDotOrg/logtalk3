@@ -2115,6 +2115,19 @@ To load an entity, always load the library that includes it using the goal ``log
    linear_algebra <linear_algebra_0>
    linear_algebra_protocol <linear_algebra_protocol_0>
 
+``library/linear_programming/``
+-------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   linear_programming_common <linear_programming_common_0>
+   linear_programming_protocol <linear_programming_protocol_0>
+   linear_programming_types <linear_programming_types_0>
+   simplex <simplex_0>
+
 ``library/linear_regression/``
 ------------------------------
 

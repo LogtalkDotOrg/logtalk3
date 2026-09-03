@@ -69,8 +69,9 @@ Library groups
   ``hashes``, ``hmac``, ``jwt``, ``otp``, and ``paseto``.
 - Randomness: ``arbitrary``, ``mutations``, and ``random``.
 - Mathematics and statistics: ``byte_order``, ``ieee_754``,
-  ``linear_algebra``, ``univariate_distributions``,
-  ``multivariate_distributions``, and ``statistics``,
+  ``linear_algebra``, ``linear_programming``,
+  ``univariate_distributions``, ``multivariate_distributions``, and
+  ``statistics``,
 - Local and meta-heuristic optimization: ``local_optimization``,
   ``constrained_optimization``, ``ant_colony``,
   ``differential_evolution``, ``genetic_algorithm``,
