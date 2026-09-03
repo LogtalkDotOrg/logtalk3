@@ -23,9 +23,9 @@
 	extends(http_router)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-06-26,
+		date is 2026-09-03,
 		comment is 'REST authoring layer built on top of the HTTP router category.'
 	]).
 
@@ -408,13 +408,15 @@
 		;	true
 		).
 
-	duplicate_endpoint_id([Id| Ids], DuplicateId) :-
-		(	member(Id, Ids) ->
+	duplicate_endpoint_id(Ids, DuplicateId) :-
+		msort(Ids, [Id| SortedIds]),
+		duplicate_endpoint_id_sorted(SortedIds, Id, DuplicateId).
+
+	duplicate_endpoint_id_sorted([Id| Ids], PreviousId, DuplicateId) :-
+		(	Id == PreviousId ->
 			DuplicateId = Id
-		;	duplicate_endpoint_id(Ids, DuplicateId)
+		;	duplicate_endpoint_id_sorted(Ids, Id, DuplicateId)
 		).
-	duplicate_endpoint_id([], _DuplicateId) :-
-		fail.
 
 	endpoint_descriptor_match(_Id, [Method-Path-Action-Options], Method, Path, Action, Options) :-
 		!.

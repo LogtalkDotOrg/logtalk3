@@ -242,6 +242,9 @@ fail.
 * UPDATED: The `thurstone_mosteller_ranker` library to reuse the new shared
 standard normal quantile implementation.
 
+* UPDATED: The `thurstone_mosteller_ranker` and `trueskill_ranker` libraries
+to use the new `univariate_distributions` library.
+
 * FIXED: The `crypto` library PBKDF2 implementation conformance with RFC 8018.
 
 * FIXED: A race condition in the `http_process_transport` library when closing
@@ -262,8 +265,8 @@ of document roots accessed through symbolic links when using SWI-Prolog.
 handling of per-connection errors to keep listeners serving subsequent
 connections.
 
-* FIXED: Inconsistencies in the `mcp_server` library implementation of the
-MCP 2025-06-18 specification.
+* FIXED: Performance issue in the `rest` library when looking for duplicated
+endpoint identifiers. Thanks to Lindsey Spratt for the patch.
 
 * UPDATED: The `hmac` library documentation to mention the BLAKE2 hash
 functions and added tests for HMAC-BLAKE2b and HMAC-BLAKE2s.
@@ -273,9 +276,6 @@ provide `length/2` as a built-in predicate.
 
 * FIXED: Several `random` library sampling API declaration, formula,
 parameter validation, and edge case handling issues.
-
-* UPDATED: The `thurstone_mosteller_ranker` and `trueskill_ranker` libraries
-to use the new `univariate_distributions` library.
 
 Tools
 -----
