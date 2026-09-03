@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-151 927,-151 927,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for protocol local_optimization_problem_protocol</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;09&#45;03, 12:34</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;09&#45;03, 20:33</text>
 <g id="clust1" class="cluster">
 <title>cluster_local_optimization_problem_protocol_protocol</title>
 <g id="a_clust1"><a xlink:title="local_optimization_problem_protocol">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 903,-54.25 903,-54.25 909,-54.25 915,-60.25 915,-66.25 915,-66.25 915,-127 915,-127 915,-133 909,-139 903,-139 903,-139 20,-139 20,-139 14,-139 8,-133 8,-127 8,-127 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/515e6ccf2992c2c1ee95c242e46ff2c3ce6c3dc8/library/local_optimization/local_optimization_problem_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/515e6ccf2992c2c1ee95c242e46ff2c3ce6c3dc8/library/local_optimization/local_optimization_problem_protocol.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3908175334139f5e59af6aff69c13ae685fe0cbf/library/local_optimization/local_optimization_problem_protocol.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3908175334139f5e59af6aff69c13ae685fe0cbf/library/local_optimization/local_optimization_problem_protocol.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-121.25" font-family="Monospace" font-size="10.00" fill="dimgray">local_optimization_problem_protocol</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>initial_point/1</title>
 <polygon fill="springgreen" stroke="black" points="145.88,-100.25 18.12,-100.25 18.12,-64.25 145.88,-64.25 145.88,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="26.12" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/515e6ccf2992c2c1ee95c242e46ff2c3ce6c3dc8/library/local_optimization/local_optimization_problem_protocol.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/515e6ccf2992c2c1ee95c242e46ff2c3ce6c3dc8/library/local_optimization/local_optimization_problem_protocol.lgt#L37">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3908175334139f5e59af6aff69c13ae685fe0cbf/library/local_optimization/local_optimization_problem_protocol.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3908175334139f5e59af6aff69c13ae685fe0cbf/library/local_optimization/local_optimization_problem_protocol.lgt#L37">
 <text xml:space="preserve" text-anchor="start" x="31.38" y="-84.12" font-family="Monospace" font-size="11.00">initial_point/1</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>objective/2</title>
 <polygon fill="springgreen" stroke="black" points="264.38,-100.25 163.62,-100.25 163.62,-64.25 264.38,-64.25 264.38,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="171.62" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/515e6ccf2992c2c1ee95c242e46ff2c3ce6c3dc8/library/local_optimization/local_optimization_problem_protocol.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/515e6ccf2992c2c1ee95c242e46ff2c3ce6c3dc8/library/local_optimization/local_optimization_problem_protocol.lgt#L44">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3908175334139f5e59af6aff69c13ae685fe0cbf/library/local_optimization/local_optimization_problem_protocol.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3908175334139f5e59af6aff69c13ae685fe0cbf/library/local_optimization/local_optimization_problem_protocol.lgt#L44">
 <text xml:space="preserve" text-anchor="start" x="176.88" y="-84.12" font-family="Monospace" font-size="11.00">objective/2</text>
 </a>
 </g>
@@ -57,7 +57,7 @@
 <title>gradient/2</title>
 <polygon fill="springgreen" stroke="black" points="376,-100.25 282,-100.25 282,-64.25 376,-64.25 376,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="290" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/515e6ccf2992c2c1ee95c242e46ff2c3ce6c3dc8/library/local_optimization/local_optimization_problem_protocol.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/515e6ccf2992c2c1ee95c242e46ff2c3ce6c3dc8/library/local_optimization/local_optimization_problem_protocol.lgt#L53">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3908175334139f5e59af6aff69c13ae685fe0cbf/library/local_optimization/local_optimization_problem_protocol.lgt#L53" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3908175334139f5e59af6aff69c13ae685fe0cbf/library/local_optimization/local_optimization_problem_protocol.lgt#L53">
 <text xml:space="preserve" text-anchor="start" x="295.25" y="-84.12" font-family="Monospace" font-size="11.00">gradient/2</text>
 </a>
 </g>
@@ -71,7 +71,7 @@
 <title>hessian/2</title>
 <polygon fill="springgreen" stroke="black" points="481.62,-100.25 394.38,-100.25 394.38,-64.25 481.62,-64.25 481.62,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="402.38" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/515e6ccf2992c2c1ee95c242e46ff2c3ce6c3dc8/library/local_optimization/local_optimization_problem_protocol.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/515e6ccf2992c2c1ee95c242e46ff2c3ce6c3dc8/library/local_optimization/local_optimization_problem_protocol.lgt#L60">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3908175334139f5e59af6aff69c13ae685fe0cbf/library/local_optimization/local_optimization_problem_protocol.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3908175334139f5e59af6aff69c13ae685fe0cbf/library/local_optimization/local_optimization_problem_protocol.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="407.62" y="-84.12" font-family="Monospace" font-size="11.00">hessian/2</text>
 </a>
 </g>
@@ -85,7 +85,7 @@
 <title>position_bounds/1</title>
 <polygon fill="springgreen" stroke="black" points="640.62,-100.25 499.38,-100.25 499.38,-64.25 640.62,-64.25 640.62,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="507.38" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/515e6ccf2992c2c1ee95c242e46ff2c3ce6c3dc8/library/local_optimization/local_optimization_problem_protocol.lgt#L69" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/515e6ccf2992c2c1ee95c242e46ff2c3ce6c3dc8/library/local_optimization/local_optimization_problem_protocol.lgt#L69">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3908175334139f5e59af6aff69c13ae685fe0cbf/library/local_optimization/local_optimization_problem_protocol.lgt#L69" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3908175334139f5e59af6aff69c13ae685fe0cbf/library/local_optimization/local_optimization_problem_protocol.lgt#L69">
 <text xml:space="preserve" text-anchor="start" x="512.62" y="-84.12" font-family="Monospace" font-size="11.00">position_bounds/1</text>
 </a>
 </g>
@@ -99,7 +99,7 @@
 <title>stop_condition/3</title>
 <polygon fill="springgreen" stroke="black" points="793.25,-100.25 658.75,-100.25 658.75,-64.25 793.25,-64.25 793.25,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="666.75" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/515e6ccf2992c2c1ee95c242e46ff2c3ce6c3dc8/library/local_optimization/local_optimization_problem_protocol.lgt#L78" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/515e6ccf2992c2c1ee95c242e46ff2c3ce6c3dc8/library/local_optimization/local_optimization_problem_protocol.lgt#L78">
+<g id="a_node6_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3908175334139f5e59af6aff69c13ae685fe0cbf/library/local_optimization/local_optimization_problem_protocol.lgt#L78" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3908175334139f5e59af6aff69c13ae685fe0cbf/library/local_optimization/local_optimization_problem_protocol.lgt#L78">
 <text xml:space="preserve" text-anchor="start" x="672" y="-84.12" font-family="Monospace" font-size="11.00">stop_condition/3</text>
 </a>
 </g>
@@ -113,7 +113,7 @@
 <title>progress/5</title>
 <polygon fill="springgreen" stroke="black" points="905,-100.25 811,-100.25 811,-64.25 905,-64.25 905,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="819" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/515e6ccf2992c2c1ee95c242e46ff2c3ce6c3dc8/library/local_optimization/local_optimization_problem_protocol.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/515e6ccf2992c2c1ee95c242e46ff2c3ce6c3dc8/library/local_optimization/local_optimization_problem_protocol.lgt#L85">
+<g id="a_node7_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/3908175334139f5e59af6aff69c13ae685fe0cbf/library/local_optimization/local_optimization_problem_protocol.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/3908175334139f5e59af6aff69c13ae685fe0cbf/library/local_optimization/local_optimization_problem_protocol.lgt#L85">
 <text xml:space="preserve" text-anchor="start" x="824.25" y="-84.12" font-family="Monospace" font-size="11.00">progress/5</text>
 </a>
 </g>
