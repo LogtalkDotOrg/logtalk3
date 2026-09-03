@@ -33,6 +33,10 @@
 		op(700, xfx, =~=), (=~=)/2
 	]).
 
+	:- uses(list, [
+		memberchk/2
+	]).
+
 	cover(simplex).
 	cover(milp_branch_and_bound).
 
@@ -317,6 +321,25 @@
 		pivot_rule_problem(Problem),
 		milp_branch_and_bound::solve(Problem, _Result, [simplex_pivot_rule(random)]).
 
+	test(linear_programming_milp_most_fractional_branching, deterministic((FirstUpdates == 0, MostUpdates == 1))) :-
+		branching_rule_problem(Problem),
+		milp_branch_and_bound::solve(Problem, FirstResult, [max_nodes(2)]),
+		milp_branch_and_bound::statistics(FirstResult, FirstStatistics),
+		memberchk(incumbent_updates(FirstUpdates), FirstStatistics),
+		milp_branch_and_bound::solve(Problem, MostResult, [max_nodes(2),branching_rule(most_fractional)]),
+		milp_branch_and_bound::statistics(MostResult, MostStatistics),
+		memberchk(incumbent_updates(MostUpdates), MostStatistics).
+
+	test(linear_programming_milp_most_fractional_tie, deterministic(Updates == 0)) :-
+		branching_rule_tie_problem(Problem),
+		milp_branch_and_bound::solve(Problem, Result, [max_nodes(2),branching_rule(most_fractional)]),
+		milp_branch_and_bound::statistics(Result, Statistics),
+		memberchk(incumbent_updates(Updates), Statistics).
+
+	test(linear_programming_milp_invalid_branching_rule, error(domain_error(option, branching_rule(random)))) :-
+		branching_rule_problem(Problem),
+		milp_branch_and_bound::solve(Problem, _Result, [branching_rule(random)]).
+
 	test(linear_programming_milp_finite_bounds_required, error(domain_error(milp_finite_integer_bounds, x-(-inf-inf)))) :-
 		milp_branch_and_bound::new_problem(Problem0),
 		milp_branch_and_bound::variable(x, integer, -inf, inf, Problem0, Problem1),
@@ -328,6 +351,8 @@
 		milp_branch_and_bound::variable(x, integer, 0.2, 0.8, Problem0, Problem1),
 		milp_branch_and_bound::objective([1*x], maximize, Problem1, Problem),
 		milp_branch_and_bound::solve(Problem, _Result).
+
+	% auxiliary predicates
 
 	sample_problem(Problem) :-
 		simplex::new_problem(Problem0),
@@ -343,6 +368,23 @@
 		simplex::variable(y, continuous, Problem1, Problem2),
 		simplex::constraint([1*x,1*y], =<, 1, Problem2, Problem3),
 		simplex::objective([1*x,2*y], maximize, Problem3, Problem).
+
+	branching_rule_problem(Problem) :-
+		milp_branch_and_bound::new_problem(Problem0),
+		milp_branch_and_bound::variable(x, binary, Problem0, Problem1),
+		milp_branch_and_bound::variable(y, binary, Problem1, Problem2),
+		milp_branch_and_bound::constraint([1*y], =<, 0.5, Problem2, Problem3),
+		milp_branch_and_bound::constraint([1*x,-0.4*y], =<, 0, Problem3, Problem4),
+		milp_branch_and_bound::objective([1*x,1*y], maximize, Problem4, Problem).
+
+	branching_rule_tie_problem(Problem) :-
+		milp_branch_and_bound::new_problem(Problem0),
+		milp_branch_and_bound::variable(x, binary, Problem0, Problem1),
+		milp_branch_and_bound::variable(y, binary, Problem1, Problem2),
+		milp_branch_and_bound::constraint([1*x], =<, 0.5, Problem2, Problem3),
+		milp_branch_and_bound::constraint([1*y], =<, 0.5, Problem3, Problem4),
+		milp_branch_and_bound::constraint([1*x,-1*y], =<, 0, Problem4, Problem5),
+		milp_branch_and_bound::objective([1*x,1*y], maximize, Problem5, Problem).
 
 	one_variable_problem(Lower, Upper, Constraints, Objective, Sense, Problem) :-
 		simplex::new_problem(Problem0),

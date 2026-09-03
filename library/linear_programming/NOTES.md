@@ -71,20 +71,31 @@ variables default to bounds `0` and `1`. Explicit bounds are numbers, `-inf`
 for an absent lower bound, or `inf` for an absent upper bound.
 
 
-Example
--------
+Continuous solving
+------------------
 
-    | ?- simplex::new_problem(P0),
-         simplex::variable(x, continuous, P0, P1),
-         simplex::variable(y, continuous, P1, P2),
-         simplex::constraint([1*x, 2*y], =<, 14, P2, P3),
-         simplex::constraint([3*x, -1*y], >=, 0, P3, P4),
-         simplex::objective([3*x, 4*y], maximize, P4, P),
-         simplex::solve(P, Result),
-         simplex::status(Result, Status),
-         simplex::variable_value(Result, x, X),
-         simplex::variable_value(Result, y, Y),
-         simplex::objective_value(Result, Value).
+The `simplex` backend solves continuous linear programs using a portable dense
+two-phase tableau implementation. The supported options are
+`max_iterations(PositiveInteger)`, defaulting to 10000,
+`tolerance(PositiveNumber)`, defaulting to `1.0e-9`, and `pivot_rule(Rule)`,
+where `Rule` is `bland` (the default) or `dantzig`. Bland's rule selects the
+first eligible entering column. Dantzig's rule selects the eligible column
+with the most negative reduced cost, breaking ties by the lowest column index.
+The iteration limit is shared by both simplex phases.
+
+    | ?- simplex::(
+            new_problem(P0),
+            variable(x, continuous, P0, P1),
+            variable(y, continuous, P1, P2),
+            constraint([1*x, 2*y], =<, 14, P2, P3),
+            constraint([3*x, -1*y], >=, 0, P3, P4),
+            objective([3*x, 4*y], maximize, P4, P),
+            solve(P, Result),
+            status(Result, Status),
+            variable_value(Result, x, X),
+            variable_value(Result, y, Y),
+            objective_value(Result, Value)
+         ).
     Status = optimal,
     X = 14.0,
     Y = 0,
@@ -117,37 +128,35 @@ values and an objective value. The corresponding inspector predicates fail
 for other statuses. Malformed problems and unsupported backend capabilities
 throw errors instead of being reported as mathematical solver statuses.
 
-The supported options are `max_iterations(PositiveInteger)`, defaulting to
-10000, `tolerance(PositiveNumber)`, defaulting to `1.0e-9`, and
-`pivot_rule(Rule)`, where `Rule` is `bland` (the default) or `dantzig`. Bland's
-rule selects the first eligible entering column. Dantzig's rule selects the
-eligible column with the most negative reduced cost, breaking ties by the
-lowest column index. The iteration limit is shared by both simplex phases.
-
 
 Mixed-integer solving
 ---------------------
 
 The `milp_branch_and_bound` backend supports mixed continuous, integer, and
 binary models. Integer and binary variables must have finite bounds and each
-integer domain must contain at least one integer. The solver branches on the
-first fractional discrete variable in declaration order and explores the
+integer domain must contain at least one integer. The solver explores the
 lower branch first. It proves optimality by exhausting or bounding the search
 tree; it does not use cutting planes or primal heuristics.
 
 The supported options are `max_nodes(PositiveInteger)`, defaulting to 10000,
 `integrality_tolerance(PositiveNumber)`, defaulting to `1.0e-9`,
-`simplex_max_iterations(PositiveInteger)`, defaulting to 10000, and
-`simplex_tolerance(PositiveNumber)`, defaulting to `1.0e-9`, and
+`simplex_max_iterations(PositiveInteger)`, defaulting to 10000,
+`simplex_tolerance(PositiveNumber)`, defaulting to `1.0e-9`,
 `simplex_pivot_rule(Rule)`, defaulting to `bland`, which selects the pivot rule
-for all LP relaxations.
+for all LP relaxations, and `branching_rule(Rule)`, where `Rule` is
+`first_fractional` (the default) or `most_fractional`. The first rule selects
+the first fractional discrete variable in declaration order. The second
+selects the variable whose value is farthest from its nearest integer,
+breaking ties by declaration order.
 
-    | ?- milp_branch_and_bound::new_problem(P0),
-         milp_branch_and_bound::variable(x, binary, P0, P1),
-         milp_branch_and_bound::variable(y, binary, P1, P2),
-         milp_branch_and_bound::constraint([2*x, 2*y], =<, 3, P2, P3),
-         milp_branch_and_bound::objective([1*x, 1*y], maximize, P3, P),
-         milp_branch_and_bound::solve(P, Result).
+    | ?- milp_branch_and_bound::
+            new_problem(P0),
+            variable(x, binary, P0, P1),
+            variable(y, binary, P1, P2),
+            constraint([2*x, 2*y], =<, 3, P2, P3),
+            objective([1*x, 1*y], maximize, P3, P),
+            solve(P, Result
+         ).
 
 
 Limitations

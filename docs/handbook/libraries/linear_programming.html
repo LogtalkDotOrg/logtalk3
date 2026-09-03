@@ -242,7 +242,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#loading">Loading</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#model-representation">Model representation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#continuous-solving">Continuous solving</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#dense-matrix-conversion">Dense matrix conversion</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#results-and-errors">Results and errors</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#mixed-integer-solving">Mixed-integer solving</a></li>
@@ -448,19 +448,30 @@ Binary variables default to bounds <code class="docutils literal notranslate"><s
 numbers, <code class="docutils literal notranslate"><span class="pre">-inf</span></code> for an absent lower bound, or <code class="docutils literal notranslate"><span class="pre">inf</span></code> for an absent
 upper bound.</p>
 </section>
-<section id="example">
-<h2>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h2>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> simplex<span class="o">::</span>new_problem(<span class="nv">P0</span>),
-     simplex<span class="o">::</span>variable(x, continuous, <span class="nv">P0</span>, <span class="nv">P1</span>),
-     simplex<span class="o">::</span>variable(y, continuous, <span class="nv">P1</span>, <span class="nv">P2</span>),
-     simplex<span class="o">::</span>constraint([<span class="m">1</span><span class="o">*</span>x, <span class="m">2</span><span class="o">*</span>y], <span class="o">=&lt;</span>, <span class="m">14</span>, <span class="nv">P2</span>, <span class="nv">P3</span>),
-     simplex<span class="o">::</span>constraint([<span class="m">3</span><span class="o">*</span>x, <span class="o">-</span><span class="m">1</span><span class="o">*</span>y], <span class="o">&gt;=</span>, <span class="m">0</span>, <span class="nv">P3</span>, <span class="nv">P4</span>),
-     simplex<span class="o">::</span>objective([<span class="m">3</span><span class="o">*</span>x, <span class="m">4</span><span class="o">*</span>y], maximize, <span class="nv">P4</span>, <span class="nv">P</span>),
-     simplex<span class="o">::</span>solve(<span class="nv">P</span>, <span class="nv">Result</span>),
-     simplex<span class="o">::</span>status(<span class="nv">Result</span>, <span class="nv">Status</span>),
-     simplex<span class="o">::</span>variable_value(<span class="nv">Result</span>, x, <span class="nv">X</span>),
-     simplex<span class="o">::</span>variable_value(<span class="nv">Result</span>, y, <span class="nv">Y</span>),
-     simplex<span class="o">::</span>objective_value(<span class="nv">Result</span>, <span class="nv">Value</span>).
+<section id="continuous-solving">
+<h2>Continuous solving<a class="headerlink" href="#continuous-solving" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">simplex</span></code> backend solves continuous linear programs using a
+portable dense two-phase tableau implementation. The supported options
+are <code class="docutils literal notranslate"><span class="pre">max_iterations(PositiveInteger)</span></code>, defaulting to 10000,
+<code class="docutils literal notranslate"><span class="pre">tolerance(PositiveNumber)</span></code>, defaulting to <code class="docutils literal notranslate"><span class="pre">1.0e-9</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">pivot_rule(Rule)</span></code>, where <code class="docutils literal notranslate"><span class="pre">Rule</span></code> is <code class="docutils literal notranslate"><span class="pre">bland</span></code> (the default) or
+<code class="docutils literal notranslate"><span class="pre">dantzig</span></code>. Bland’s rule selects the first eligible entering column.
+Dantzig’s rule selects the eligible column with the most negative
+reduced cost, breaking ties by the lowest column index. The iteration
+limit is shared by both simplex phases.</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> simplex<span class="o">::</span>(
+        new_problem(<span class="nv">P0</span>),
+        variable(x, continuous, <span class="nv">P0</span>, <span class="nv">P1</span>),
+        variable(y, continuous, <span class="nv">P1</span>, <span class="nv">P2</span>),
+        constraint([<span class="m">1</span><span class="o">*</span>x, <span class="m">2</span><span class="o">*</span>y], <span class="o">=&lt;</span>, <span class="m">14</span>, <span class="nv">P2</span>, <span class="nv">P3</span>),
+        constraint([<span class="m">3</span><span class="o">*</span>x, <span class="o">-</span><span class="m">1</span><span class="o">*</span>y], <span class="o">&gt;=</span>, <span class="m">0</span>, <span class="nv">P3</span>, <span class="nv">P4</span>),
+        objective([<span class="m">3</span><span class="o">*</span>x, <span class="m">4</span><span class="o">*</span>y], maximize, <span class="nv">P4</span>, <span class="nv">P</span>),
+        solve(<span class="nv">P</span>, <span class="nv">Result</span>),
+        status(<span class="nv">Result</span>, <span class="nv">Status</span>),
+        variable_value(<span class="nv">Result</span>, x, <span class="nv">X</span>),
+        variable_value(<span class="nv">Result</span>, y, <span class="nv">Y</span>),
+        objective_value(<span class="nv">Result</span>, <span class="nv">Value</span>)
+     ).
 <span class="nv">Status</span> <span class="o">=</span> optimal,
 <span class="nv">X</span> <span class="o">=</span> <span class="m">14.0</span>,
 <span class="nv">Y</span> <span class="o">=</span> <span class="m">0</span>,
@@ -493,35 +504,33 @@ optimal result contains variable values and an objective value. The
 corresponding inspector predicates fail for other statuses. Malformed
 problems and unsupported backend capabilities throw errors instead of
 being reported as mathematical solver statuses.</p>
-<p>The supported options are <code class="docutils literal notranslate"><span class="pre">max_iterations(PositiveInteger)</span></code>,
-defaulting to 10000, <code class="docutils literal notranslate"><span class="pre">tolerance(PositiveNumber)</span></code>, defaulting to
-<code class="docutils literal notranslate"><span class="pre">1.0e-9</span></code>, and <code class="docutils literal notranslate"><span class="pre">pivot_rule(Rule)</span></code>, where <code class="docutils literal notranslate"><span class="pre">Rule</span></code> is <code class="docutils literal notranslate"><span class="pre">bland</span></code> (the
-default) or <code class="docutils literal notranslate"><span class="pre">dantzig</span></code>. Bland’s rule selects the first eligible
-entering column. Dantzig’s rule selects the eligible column with the
-most negative reduced cost, breaking ties by the lowest column index.
-The iteration limit is shared by both simplex phases.</p>
 </section>
 <section id="mixed-integer-solving">
 <h2>Mixed-integer solving<a class="headerlink" href="#mixed-integer-solving" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">milp_branch_and_bound</span></code> backend supports mixed continuous,
 integer, and binary models. Integer and binary variables must have
 finite bounds and each integer domain must contain at least one integer.
-The solver branches on the first fractional discrete variable in
-declaration order and explores the lower branch first. It proves
-optimality by exhausting or bounding the search tree; it does not use
-cutting planes or primal heuristics.</p>
+The solver explores the lower branch first. It proves optimality by
+exhausting or bounding the search tree; it does not use cutting planes
+or primal heuristics.</p>
 <p>The supported options are <code class="docutils literal notranslate"><span class="pre">max_nodes(PositiveInteger)</span></code>, defaulting to
 10000, <code class="docutils literal notranslate"><span class="pre">integrality_tolerance(PositiveNumber)</span></code>, defaulting to
 <code class="docutils literal notranslate"><span class="pre">1.0e-9</span></code>, <code class="docutils literal notranslate"><span class="pre">simplex_max_iterations(PositiveInteger)</span></code>, defaulting to
-10000, and <code class="docutils literal notranslate"><span class="pre">simplex_tolerance(PositiveNumber)</span></code>, defaulting to
-<code class="docutils literal notranslate"><span class="pre">1.0e-9</span></code>, and <code class="docutils literal notranslate"><span class="pre">simplex_pivot_rule(Rule)</span></code>, defaulting to <code class="docutils literal notranslate"><span class="pre">bland</span></code>,
-which selects the pivot rule for all LP relaxations.</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> milp_branch_and_bound<span class="o">::</span>new_problem(<span class="nv">P0</span>),
-     milp_branch_and_bound<span class="o">::</span>variable(x, binary, <span class="nv">P0</span>, <span class="nv">P1</span>),
-     milp_branch_and_bound<span class="o">::</span>variable(y, binary, <span class="nv">P1</span>, <span class="nv">P2</span>),
-     milp_branch_and_bound<span class="o">::</span>constraint([<span class="m">2</span><span class="o">*</span>x, <span class="m">2</span><span class="o">*</span>y], <span class="o">=&lt;</span>, <span class="m">3</span>, <span class="nv">P2</span>, <span class="nv">P3</span>),
-     milp_branch_and_bound<span class="o">::</span>objective([<span class="m">1</span><span class="o">*</span>x, <span class="m">1</span><span class="o">*</span>y], maximize, <span class="nv">P3</span>, <span class="nv">P</span>),
-     milp_branch_and_bound<span class="o">::</span>solve(<span class="nv">P</span>, <span class="nv">Result</span>).
+10000, <code class="docutils literal notranslate"><span class="pre">simplex_tolerance(PositiveNumber)</span></code>, defaulting to <code class="docutils literal notranslate"><span class="pre">1.0e-9</span></code>,
+<code class="docutils literal notranslate"><span class="pre">simplex_pivot_rule(Rule)</span></code>, defaulting to <code class="docutils literal notranslate"><span class="pre">bland</span></code>, which selects the
+pivot rule for all LP relaxations, and <code class="docutils literal notranslate"><span class="pre">branching_rule(Rule)</span></code>, where
+<code class="docutils literal notranslate"><span class="pre">Rule</span></code> is <code class="docutils literal notranslate"><span class="pre">first_fractional</span></code> (the default) or <code class="docutils literal notranslate"><span class="pre">most_fractional</span></code>.
+The first rule selects the first fractional discrete variable in
+declaration order. The second selects the variable whose value is
+farthest from its nearest integer, breaking ties by declaration order.</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> milp_branch_and_bound<span class="o">::</span>
+        new_problem(<span class="nv">P0</span>),
+        variable(x, binary, <span class="nv">P0</span>, <span class="nv">P1</span>),
+        variable(y, binary, <span class="nv">P1</span>, <span class="nv">P2</span>),
+        constraint([<span class="m">2</span><span class="o">*</span>x, <span class="m">2</span><span class="o">*</span>y], <span class="o">=&lt;</span>, <span class="m">3</span>, <span class="nv">P2</span>, <span class="nv">P3</span>),
+        objective([<span class="m">1</span><span class="o">*</span>x, <span class="m">1</span><span class="o">*</span>y], maximize, <span class="nv">P3</span>, <span class="nv">P</span>),
+        solve(<span class="nv">P</span>, <span class="nv">Result</span>
+     ).
 </pre></div>
 </div>
 </section>

@@ -29,7 +29,8 @@
 		comment is 'Portable depth-first branch-and-bound solver for small mixed-integer linear programs.',
 		remarks is [
 			'Discrete domains' - 'Integer and binary variables must have finite bounds. No cutting planes or primal heuristics are used.',
-			'LP relaxations' - 'Each search node is solved using the simplex object.'
+			'LP relaxations' - 'Each search node is solved using the simplex object.',
+			'Branching' - 'The solver can branch on the first fractional variable or the most fractional variable, with declaration order breaking ties.'
 		],
 		see_also is [simplex, linear_programming_protocol]
 	]).
@@ -58,6 +59,7 @@
 	default_option(simplex_max_iterations(10000)).
 	default_option(simplex_tolerance(1.0e-9)).
 	default_option(simplex_pivot_rule(bland)).
+	default_option(branching_rule(first_fractional)).
 
 	valid_option(max_nodes(MaxNodes)) :-
 		integer(MaxNodes),
@@ -73,6 +75,8 @@
 		Tolerance > 0.
 	valid_option(simplex_pivot_rule(PivotRule)) :-
 		once((PivotRule == bland; PivotRule == dantzig)).
+	valid_option(branching_rule(BranchingRule)) :-
+		once((BranchingRule == first_fractional; BranchingRule == most_fractional)).
 
 	check_solvable_problem([], _Objective) :-
 		domain_error(linear_programming_problem, empty).
@@ -128,18 +132,19 @@
 	handle_relaxation(linear_programming_result(unbounded, none, [], _Statistics), Problem, Options, State0, State) :-
 		!,
 		^^discrete_variables(Problem, DiscreteVariables),
-		( branchable_domain(DiscreteVariables, Name, Lower, Upper, Split) ->
+		(	branchable_domain(DiscreteVariables, Name, Lower, Upper, Split) ->
 			branch_on_domain(Problem, Name, Lower, Upper, Split, Options, State0, State)
-		; set_stop_status(State0, unbounded, State)
+		;	set_stop_status(State0, unbounded, State)
 		).
 	handle_relaxation(linear_programming_result(optimal, Objective, Values, _Statistics), Problem, Options, State0, State) :-
 		Problem = linear_program(_Variables, _Constraints, objective(_Expression, Sense)),
 		^^option(simplex_tolerance(ObjectiveTolerance), Options),
 		(	bound_pruned(Sense, Objective, ObjectiveTolerance, State0) ->
 			increment_pruned(State0, State)
-		; ^^discrete_variables(Problem, DiscreteVariables),
+		;	^^discrete_variables(Problem, DiscreteVariables),
 			^^option(integrality_tolerance(IntegralityTolerance), Options),
-			(	fractional_variable(DiscreteVariables, Values, IntegralityTolerance, Name, Lower, Upper, Value) ->
+			^^option(branching_rule(BranchingRule), Options),
+			( fractional_variable(BranchingRule, DiscreteVariables, Values, IntegralityTolerance, Name, Lower, Upper, Value) ->
 				(	integer(Value) ->
 					Floor is Value,
 					Ceiling is Value
@@ -160,16 +165,45 @@
 		number(Incumbent),
 		Objective >= Incumbent - Tolerance.
 
-	fractional_variable([variable(Name, _Type, Lower, Upper)| _Variables], Values, Tolerance, Name, Lower, Upper, Value) :-
+	fractional_variable(first_fractional, Variables, Values, Tolerance, Name, Lower, Upper, Value) :-
+		!,
+		first_fractional_variable(Variables, Values, Tolerance, Name, Lower, Upper, Value).
+	fractional_variable(most_fractional, Variables, Values, Tolerance, Name, Lower, Upper, Value) :-
+		most_fractional_variable(Variables, Values, Tolerance, none, variable(Name, _Type, Lower, Upper)-Value- _Fractionality).
+
+	first_fractional_variable([variable(Name, _Type, Lower, Upper)| _Variables], Values, Tolerance, Name, Lower, Upper, Value) :-
 		memberchk(Name-Value, Values),
-		(	integer(Value) ->
-			Nearest is Value
-		;	Nearest is round(Value)
-		),
-		abs(Value - Nearest) > Tolerance,
+		fractionality(Value, Fractionality),
+		Fractionality > Tolerance,
 		!.
-	fractional_variable([_Variable| Variables], Values, Tolerance, Name, Lower, Upper, Value) :-
-		fractional_variable(Variables, Values, Tolerance, Name, Lower, Upper, Value).
+	first_fractional_variable([_Variable| Variables], Values, Tolerance, Name, Lower, Upper, Value) :-
+		first_fractional_variable(Variables, Values, Tolerance, Name, Lower, Upper, Value).
+
+	most_fractional_variable([], _Values, _Tolerance, Best, Best) :-
+		Best \== none.
+	most_fractional_variable([Variable| Variables], Values, Tolerance, Best0, Best) :-
+		Variable = variable(Name, _Type, _Lower, _Upper),
+		memberchk(Name-Value, Values),
+		fractionality(Value, Fractionality),
+		(	Fractionality > Tolerance ->
+			more_fractional_candidate(Best0, Variable, Value, Fractionality, Best1)
+		;	Best1 = Best0
+		),
+		most_fractional_variable(Variables, Values, Tolerance, Best1, Best).
+
+	more_fractional_candidate(none, Variable, Value, Fractionality, Variable-Value-Fractionality) :-
+		!.
+	more_fractional_candidate(_BestVariable-_BestValue-BestFractionality, Variable, Value, Fractionality, Variable-Value-Fractionality) :-
+		Fractionality > BestFractionality,
+		!.
+	more_fractional_candidate(Best, _Variable, _Value, _Fractionality, Best).
+
+	fractionality(Value, 0) :-
+		integer(Value),
+		!.
+	fractionality(Value, Fractionality) :-
+		Nearest is round(Value),
+		Fractionality is abs(Value - Nearest).
 
 	branchable_domain([variable(Name, _Type, Lower, Upper)| _Variables], Name, Lower, Upper, Split) :-
 		(	integer(Lower) ->
@@ -195,9 +229,9 @@
 
 	branch_on_bounds(Problem, Name, LeftLower, LeftUpper, RightLower, RightUpper, Options, State0, State) :-
 		search_optional_branch(Problem, Name, LeftLower, LeftUpper, Options, State0, State1),
-		( stopped(State1) ->
+		(	stopped(State1) ->
 			State = State1
-		; search_optional_branch(Problem, Name, RightLower, RightUpper, Options, State1, State)
+		;	search_optional_branch(Problem, Name, RightLower, RightUpper, Options, State1, State)
 		).
 
 	search_optional_branch(_Problem, _Name, Lower, Upper, _Options, State, State) :-
@@ -240,10 +274,10 @@
 		Updates is Updates0 + 1.
 	update_incumbent(Sense, Objective, Values, State0, State) :-
 		State0 = search_state(Incumbent, _OldValues, Nodes, Iterations, Pruned, Infeasible, Updates0, Stop),
-		( better_objective(Sense, Objective, Incumbent) ->
+		(	better_objective(Sense, Objective, Incumbent) ->
 			Updates is Updates0 + 1,
 			State = search_state(Objective, Values, Nodes, Iterations, Pruned, Infeasible, Updates, Stop)
-		; State = State0
+		;	State = State0
 		).
 
 	better_objective(maximize, Objective, Incumbent) :- Objective > Incumbent.
