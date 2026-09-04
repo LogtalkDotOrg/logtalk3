@@ -22,9 +22,9 @@
 :- protocol(listp).
 
 	:- info([
-		version is 1:19:0,
+		version is 1:20:0,
 		author is 'Paulo Moura',
-		date is 2026-02-03,
+		date is 2026-09-04,
 		comment is 'List protocol.',
 		see_also is [list, list(_), numberlistp, varlistp]
 	]).
@@ -422,8 +422,8 @@
 	:- public(take/4).
 	:- mode(take(+integer, +list, -list, -list), zero_or_one).
 	:- info(take/4, [
-		comment is 'Takes the first ``N`` elements of a list. Fails if the list have fewer than ``N`` elements.',
-		argnames is ['N', 'List', 'Elements', 'Remaining']
+		comment is 'Takes the first ``N`` elements of a list (i.e., splits a list after its first ``N`` elements). Fails if the list have fewer than ``N`` elements.',
+		argnames is ['N', 'List', 'Prefix', 'Suffix']
 	]).
 
 	:- public(drop/3).

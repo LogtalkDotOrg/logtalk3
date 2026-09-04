@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-03,
+		date is 2026-09-04,
 		comment is 'Sequential Quadratic Programming local optimizer for problems with general equality and inequality constraints. Requires the problem to define ``gradient/2``; constraint predicates and their Jacobians are optional.',
 		parameters is [
 			'Problem' - 'Problem object implementing ``constrained_optimization_problem_protocol`` and defining ``gradient/2``.'
@@ -48,7 +48,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2, member/2
+		append/3, length/2, member/2, take/4
 	]).
 
 	% public entry point
@@ -312,8 +312,8 @@
 	split_lambda(constraints(EqualityValues, _EqualityJacobian, InequalityValues, _InequalityJacobian), Lambda, EqLambda, GeneralIneqLambda) :-
 		length(EqualityValues, Meq),
 		length(InequalityValues, Mineq),
-		^^split_at(Meq, Lambda, EqLambda, Rest),
-		^^split_at(Mineq, Rest, GeneralIneqLambda, _BoxLambda).
+		take(Meq, Lambda, EqLambda, Rest),
+		take(Mineq, Rest, GeneralIneqLambda, _BoxLambda).
 
 	% mu := max(mu, safety * ||lambda||_inf), a monotonically
 	% non-decreasing penalty update that is the standard sufficient

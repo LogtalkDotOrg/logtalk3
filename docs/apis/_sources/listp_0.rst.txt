@@ -14,8 +14,8 @@ List protocol.
 |    ``logtalk_load(types(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:19:0
-| **Date:** 2026-02-03
+| **Version:** 1:20:0
+| **Date:** 2026-09-04
 
 | **Compilation flags:**
 |    ``static``
@@ -1074,13 +1074,13 @@ Takes the first ``N`` elements of a list. Fails if the list have fewer than ``N`
 ``take/4``
 ^^^^^^^^^^
 
-Takes the first ``N`` elements of a list. Fails if the list have fewer than ``N`` elements.
+Takes the first ``N`` elements of a list (i.e., splits a list after its first ``N`` elements). Fails if the list have fewer than ``N`` elements.
 
 | **Compilation flags:**
 |    ``static``
 
 | **Template:**
-|    ``take(N,List,Elements,Remaining)``
+|    ``take(N,List,Prefix,Suffix)``
 | **Mode and number of proofs:**
 |    ``take(+integer,+list,-list,-list)`` - ``zero_or_one``
 

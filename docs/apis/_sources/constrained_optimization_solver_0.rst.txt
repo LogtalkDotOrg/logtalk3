@@ -15,7 +15,7 @@ Shared numeric, objective-direction, and validation predicates for constrained o
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-09-03
+| **Date:** 2026-09-04
 
 | **Compilation flags:**
 |    ``static``
@@ -152,25 +152,6 @@ Scales a penalty when the constraint violation does not decrease by the required
 |    ``update_penalty(OldViolation,NewViolation,RequiredDecrease,OldPenalty,Scale,NewPenalty)``
 | **Mode and number of proofs:**
 |    ``update_penalty(+number,+number,+number,+number,+number,-number)`` - ``one``
-
-
-------------
-
-.. index:: split_at/4
-.. _constrained_optimization_solver/0::split_at/4:
-
-``split_at/4``
-^^^^^^^^^^^^^^
-
-Splits a list after its first N elements.
-
-| **Compilation flags:**
-|    ``static``
-
-| **Template:**
-|    ``split_at(N,List,Prefix,Suffix)``
-| **Mode and number of proofs:**
-|    ``split_at(+integer,+list,-list,-list)`` - ``one``
 
 
 ------------

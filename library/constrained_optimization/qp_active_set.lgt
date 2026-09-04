@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-03,
+		date is 2026-09-04,
 		comment is 'Dense active-set solver for convex quadratic programs. Intended as a subroutine for sqp_active_set(_); also usable standalone for small dense QPs.',
 		parameters is [],
 		see_also is [qp_solver_protocol, sqp_active_set(_), linear_algebra]
@@ -38,7 +38,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2, member/2, nth0/3
+		append/3, length/2, member/2, nth0/3, take/4
 	]).
 
 	% public entry point
@@ -62,7 +62,7 @@
 			X0, EqIdx, IneqActive0, X, FinalIneqActive, FinalLambda
 		),
 		feasible_point(Aeq, Beq, Aineq, Bineq, X),
-		^^split_at(Meq, FinalLambda, EqLambda, IneqLambdaActive),
+		take(Meq, FinalLambda, EqLambda, IneqLambdaActive),
 		expand_multipliers(0, Mineq, FinalIneqActive, IneqLambdaActive, IneqLambda),
 		append(EqLambda, IneqLambda, Lambda).
 
@@ -265,7 +265,7 @@
 			new_vector(M, 0.0, ZerosM),
 			append(NegG, ZerosM, RHS),
 			catch(solve_linear_system(KKT, RHS, Sol), error(evaluation_error(zero_divisor), _), fail),
-			^^split_at(N, Sol, P, Lambda)
+			take(N, Sol, P, Lambda)
 		).
 
 	% multiplier of each active inequality: the K-th element of

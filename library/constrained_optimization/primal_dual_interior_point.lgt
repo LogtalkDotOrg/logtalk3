@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-03,
+		date is 2026-09-04,
 		comment is 'Infeasible-start primal-dual interior-point method with Mehrotra predictor-corrector for general equality, inequality, and box constraints.',
 		parameters is [
 			'Problem' - 'Problem object implementing ``constrained_optimization_problem_protocol`` and defining ``gradient/2``.'
@@ -48,7 +48,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2, member/2
+		append/3, length/2, member/2, take/4
 	]).
 
 	% public entry point
@@ -478,7 +478,7 @@
 			scale_vector(EqualityValues, -1.0, NegEqualityValues),
 			append(NegRhsX, NegEqualityValues, RHS),
 			catch(solve_linear_system(KKT, RHS, Sol), error(evaluation_error(zero_divisor), _), fail),
-			^^split_at(N, Sol, PointStep, EqualityMultiplierStep)
+			take(N, Sol, PointStep, EqualityMultiplierStep)
 		),
 		(	InequalityValues == [] ->
 			SlackStep = [],

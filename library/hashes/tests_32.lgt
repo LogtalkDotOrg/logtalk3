@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2026-07-30,
+		date is 2026-09-04,
 		comment is 'Unit tests for the "hashes" library 32-bit algorithms.'
 	]).
 
@@ -34,7 +34,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2
+		append/3, length/2, take/4
 	]).
 
 	:- uses(integer, [
@@ -227,12 +227,12 @@
 
 	test(crc32b_incremental_standard_vector, deterministic(Hash == 'cbf43926')) :-
 		atom_codes('123456789', Bytes),
-		split_at(4, Bytes, Chunk1, Chunk2),
+		take(4, Bytes, Chunk1, Chunk2),
 		run_incremental(crc32b, [Chunk1, Chunk2], Hash).
 
 	test(crc32b_incremental_empty_chunks_are_no_ops, deterministic(Hash == 'cbf43926')) :-
 		atom_codes('123456789', Bytes),
-		split_at(4, Bytes, Chunk1, Chunk2),
+		take(4, Bytes, Chunk1, Chunk2),
 		run_incremental(crc32b, [[], Chunk1, [], Chunk2, []], Hash).
 
 	test(crc32posix_incremental_standard_vector, deterministic(Hash == '377a6011')) :-
@@ -279,19 +279,19 @@
 	test(blake2s_incremental_matches_hash_exact_block_boundary, deterministic(Hash1 == Hash2)) :-
 		sequence(1, 64, Bytes),
 		blake2s::hash(Bytes, Hash1),
-		split_at(30, Bytes, Chunk1, Chunk2),
+		take(30, Bytes, Chunk1, Chunk2),
 		run_incremental(blake2s, [Chunk1, Chunk2], Hash2).
 
 	test(blake2s_incremental_matches_hash_block_boundary_plus_one, deterministic(Hash1 == Hash2)) :-
 		sequence(1, 65, Bytes),
 		blake2s::hash(Bytes, Hash1),
-		split_at(64, Bytes, Chunk1, Chunk2),
+		take(64, Bytes, Chunk1, Chunk2),
 		run_incremental(blake2s, [Chunk1, Chunk2], Hash2).
 
 	test(blake2s_incremental_matches_hash_block_boundary_minus_one, deterministic(Hash1 == Hash2)) :-
 		sequence(1, 63, Bytes),
 		blake2s::hash(Bytes, Hash1),
-		split_at(40, Bytes, Chunk1, Chunk2),
+		take(40, Bytes, Chunk1, Chunk2),
 		run_incremental(blake2s, [Chunk1, Chunk2], Hash2).
 
 	% byte-by-byte chunking across several blocks: at every single-byte step
@@ -337,7 +337,7 @@
 	test(md5_incremental_matches_hash_exact_block_boundary, deterministic(Hash1 == Hash2)) :-
 		sequence(1, 64, Bytes),
 		md5::hash(Bytes, Hash1),
-		split_at(30, Bytes, Chunk1, Chunk2),
+		take(30, Bytes, Chunk1, Chunk2),
 		run_incremental(md5, [Chunk1, Chunk2], Hash2).
 
 	% one byte past an exact block boundary: the leftover buffer after the
@@ -345,14 +345,14 @@
 	test(md5_incremental_matches_hash_block_boundary_plus_one, deterministic(Hash1 == Hash2)) :-
 		sequence(1, 65, Bytes),
 		md5::hash(Bytes, Hash1),
-		split_at(64, Bytes, Chunk1, Chunk2),
+		take(64, Bytes, Chunk1, Chunk2),
 		run_incremental(md5, [Chunk1, Chunk2], Hash2).
 
 	% one byte short of an exact block boundary
 	test(md5_incremental_matches_hash_block_boundary_minus_one, deterministic(Hash1 == Hash2)) :-
 		sequence(1, 63, Bytes),
 		md5::hash(Bytes, Hash1),
-		split_at(40, Bytes, Chunk1, Chunk2),
+		take(40, Bytes, Chunk1, Chunk2),
 		run_incremental(md5, [Chunk1, Chunk2], Hash2).
 
 	% byte-by-byte chunking across several blocks, exercising the buffer
@@ -380,11 +380,6 @@
 
 	% auxiliary predicates
 
-	% splits List into Left (the first N elements) and Right (the remainder)
-	split_at(N, List, Left, Right) :-
-		length(Left, N),
-		append(Left, Right, List).
-
 	% splits List into a list of Chunks of (at most) N elements each,
 	% used to drive update_hash_state/3 one chunk at a time
 	chunks(_, [], []) :-
@@ -394,7 +389,7 @@
 			Length =< N ->
 			Chunk = List,
 			Rest = []
-		;	split_at(N, List, Chunk, Rest)
+		;	take(N, List, Chunk, Rest)
 		),
 		chunks(N, Rest, Chunks).
 

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2026-07-30,
+		date is 2026-09-04,
 		comment is 'Unit tests for the "hashes" library 64-bit algorithms.'
 	]).
 
@@ -34,7 +34,7 @@
 	]).
 
 	:- uses(list, [
-		append/3, length/2
+		append/3, length/2, take/4
 	]).
 
 	:- uses(integer, [
@@ -396,19 +396,19 @@
 	test(blake2b_incremental_matches_hash_exact_block_boundary, deterministic(Hash1 == Hash2)) :-
 		sequence(1, 128, Bytes),
 		blake2b::hash(Bytes, Hash1),
-		split_at(50, Bytes, Chunk1, Chunk2),
+		take(50, Bytes, Chunk1, Chunk2),
 		run_incremental(blake2b, [Chunk1, Chunk2], Hash2).
 
 	test(blake2b_incremental_matches_hash_block_boundary_plus_one, deterministic(Hash1 == Hash2)) :-
 		sequence(1, 129, Bytes),
 		blake2b::hash(Bytes, Hash1),
-		split_at(128, Bytes, Chunk1, Chunk2),
+		take(128, Bytes, Chunk1, Chunk2),
 		run_incremental(blake2b, [Chunk1, Chunk2], Hash2).
 
 	test(blake2b_incremental_matches_hash_block_boundary_minus_one, deterministic(Hash1 == Hash2)) :-
 		sequence(1, 127, Bytes),
 		blake2b::hash(Bytes, Hash1),
-		split_at(90, Bytes, Chunk1, Chunk2),
+		take(90, Bytes, Chunk1, Chunk2),
 		run_incremental(blake2b, [Chunk1, Chunk2], Hash2).
 
 	% unaligned chunking across several blocks, exercising the buffer and
@@ -451,7 +451,7 @@
 	test(sha3_224_incremental_matches_hash_rate_boundary, deterministic(Hash1 == Hash2)) :-
 		sequence(0, 143, Bytes),
 		sha3_224::hash(Bytes, Hash1),
-		split_at(100, Bytes, Chunk1, Chunk2),
+		take(100, Bytes, Chunk1, Chunk2),
 		run_incremental(sha3_224, [Chunk1, Chunk2], Hash2).
 
 	test(sha3_256_incremental_matches_hash_byte_by_byte, deterministic(Hash1 == Hash2)) :-
@@ -463,7 +463,7 @@
 	test(sha3_256_incremental_matches_hash_rate_boundary, deterministic(Hash1 == Hash2)) :-
 		sequence(0, 135, Bytes),
 		sha3_256::hash(Bytes, Hash1),
-		split_at(90, Bytes, Chunk1, Chunk2),
+		take(90, Bytes, Chunk1, Chunk2),
 		run_incremental(sha3_256, [Chunk1, Chunk2], Hash2).
 
 	test(sha3_384_incremental_matches_hash_byte_by_byte, deterministic(Hash1 == Hash2)) :-
@@ -475,7 +475,7 @@
 	test(sha3_384_incremental_matches_hash_rate_boundary, deterministic(Hash1 == Hash2)) :-
 		sequence(0, 103, Bytes),
 		sha3_384::hash(Bytes, Hash1),
-		split_at(70, Bytes, Chunk1, Chunk2),
+		take(70, Bytes, Chunk1, Chunk2),
 		run_incremental(sha3_384, [Chunk1, Chunk2], Hash2).
 
 	test(sha3_512_incremental_matches_hash_byte_by_byte, deterministic(Hash1 == Hash2)) :-
@@ -487,7 +487,7 @@
 	test(sha3_512_incremental_matches_hash_rate_boundary, deterministic(Hash1 == Hash2)) :-
 		sequence(0, 71, Bytes),
 		sha3_512::hash(Bytes, Hash1),
-		split_at(50, Bytes, Chunk1, Chunk2),
+		take(50, Bytes, Chunk1, Chunk2),
 		run_incremental(sha3_512, [Chunk1, Chunk2], Hash2).
 
 	test(shake128_32_incremental_matches_hash_byte_by_byte, deterministic(Hash1 == Hash2)) :-
@@ -499,7 +499,7 @@
 	test(shake128_32_incremental_matches_hash_rate_boundary, deterministic(Hash1 == Hash2)) :-
 		sequence(0, 167, Bytes),
 		shake128(32)::hash(Bytes, Hash1),
-		split_at(120, Bytes, Chunk1, Chunk2),
+		take(120, Bytes, Chunk1, Chunk2),
 		run_incremental(shake128(32), [Chunk1, Chunk2], Hash2).
 
 	test(shake256_64_incremental_matches_hash_byte_by_byte, deterministic(Hash1 == Hash2)) :-
@@ -511,7 +511,7 @@
 	test(shake256_64_incremental_matches_hash_rate_boundary, deterministic(Hash1 == Hash2)) :-
 		sequence(0, 135, Bytes),
 		shake256(64)::hash(Bytes, Hash1),
-		split_at(90, Bytes, Chunk1, Chunk2),
+		take(90, Bytes, Chunk1, Chunk2),
 		run_incremental(shake256(64), [Chunk1, Chunk2], Hash2).
 
 	test(sha1_incremental_empty, deterministic(Hash == 'da39a3ee5e6b4b0d3255bfef95601890afd80709')) :-
@@ -520,13 +520,13 @@
 	test(sha1_incremental_matches_hash_exact_block_boundary, deterministic(Hash1 == Hash2)) :-
 		sequence(1, 64, Bytes),
 		sha1::hash(Bytes, Hash1),
-		split_at(30, Bytes, Chunk1, Chunk2),
+		take(30, Bytes, Chunk1, Chunk2),
 		run_incremental(sha1, [Chunk1, Chunk2], Hash2).
 
 	test(sha1_incremental_matches_hash_block_boundary_plus_one, deterministic(Hash1 == Hash2)) :-
 		sequence(1, 65, Bytes),
 		sha1::hash(Bytes, Hash1),
-		split_at(64, Bytes, Chunk1, Chunk2),
+		take(64, Bytes, Chunk1, Chunk2),
 		run_incremental(sha1, [Chunk1, Chunk2], Hash2).
 
 	test(sha1_incremental_matches_hash_byte_by_byte, deterministic(Hash1 == Hash2)) :-
@@ -541,13 +541,13 @@
 	test(sha256_incremental_matches_hash_exact_block_boundary, deterministic(Hash1 == Hash2)) :-
 		sequence(1, 64, Bytes),
 		sha256::hash(Bytes, Hash1),
-		split_at(30, Bytes, Chunk1, Chunk2),
+		take(30, Bytes, Chunk1, Chunk2),
 		run_incremental(sha256, [Chunk1, Chunk2], Hash2).
 
 	test(sha256_incremental_matches_hash_block_boundary_minus_one, deterministic(Hash1 == Hash2)) :-
 		sequence(1, 63, Bytes),
 		sha256::hash(Bytes, Hash1),
-		split_at(40, Bytes, Chunk1, Chunk2),
+		take(40, Bytes, Chunk1, Chunk2),
 		run_incremental(sha256, [Chunk1, Chunk2], Hash2).
 
 	test(sha256_incremental_matches_hash_byte_by_byte, deterministic(Hash1 == Hash2)) :-
@@ -562,13 +562,13 @@
 	test(sha224_incremental_matches_hash_exact_block_boundary, deterministic(Hash1 == Hash2)) :-
 		sequence(1, 64, Bytes),
 		sha224::hash(Bytes, Hash1),
-		split_at(30, Bytes, Chunk1, Chunk2),
+		take(30, Bytes, Chunk1, Chunk2),
 		run_incremental(sha224, [Chunk1, Chunk2], Hash2).
 
 	test(sha224_incremental_matches_hash_block_boundary_plus_one, deterministic(Hash1 == Hash2)) :-
 		sequence(1, 65, Bytes),
 		sha224::hash(Bytes, Hash1),
-		split_at(64, Bytes, Chunk1, Chunk2),
+		take(64, Bytes, Chunk1, Chunk2),
 		run_incremental(sha224, [Chunk1, Chunk2], Hash2).
 
 	test(sha224_incremental_matches_hash_byte_by_byte, deterministic(Hash1 == Hash2)) :-
@@ -583,13 +583,13 @@
 	test(sha512_incremental_matches_hash_exact_block_boundary, deterministic(Hash1 == Hash2)) :-
 		sequence(1, 128, Bytes),
 		sha512::hash(Bytes, Hash1),
-		split_at(50, Bytes, Chunk1, Chunk2),
+		take(50, Bytes, Chunk1, Chunk2),
 		run_incremental(sha512, [Chunk1, Chunk2], Hash2).
 
 	test(sha512_incremental_matches_hash_block_boundary_plus_one, deterministic(Hash1 == Hash2)) :-
 		sequence(1, 129, Bytes),
 		sha512::hash(Bytes, Hash1),
-		split_at(128, Bytes, Chunk1, Chunk2),
+		take(128, Bytes, Chunk1, Chunk2),
 		run_incremental(sha512, [Chunk1, Chunk2], Hash2).
 
 	test(sha512_incremental_matches_hash_unaligned_chunks, deterministic(Hash1 == Hash2)) :-
@@ -604,13 +604,13 @@
 	test(sha512_256_incremental_matches_hash_exact_block_boundary, deterministic(Hash1 == Hash2)) :-
 		sequence(1, 128, Bytes),
 		sha512_256::hash(Bytes, Hash1),
-		split_at(50, Bytes, Chunk1, Chunk2),
+		take(50, Bytes, Chunk1, Chunk2),
 		run_incremental(sha512_256, [Chunk1, Chunk2], Hash2).
 
 	test(sha512_256_incremental_matches_hash_block_boundary_plus_one, deterministic(Hash1 == Hash2)) :-
 		sequence(1, 129, Bytes),
 		sha512_256::hash(Bytes, Hash1),
-		split_at(128, Bytes, Chunk1, Chunk2),
+		take(128, Bytes, Chunk1, Chunk2),
 		run_incremental(sha512_256, [Chunk1, Chunk2], Hash2).
 
 	test(sha512_256_incremental_matches_hash_unaligned_chunks, deterministic(Hash1 == Hash2)) :-
@@ -625,13 +625,13 @@
 	test(sha384_incremental_matches_hash_exact_block_boundary, deterministic(Hash1 == Hash2)) :-
 		sequence(1, 128, Bytes),
 		sha384::hash(Bytes, Hash1),
-		split_at(50, Bytes, Chunk1, Chunk2),
+		take(50, Bytes, Chunk1, Chunk2),
 		run_incremental(sha384, [Chunk1, Chunk2], Hash2).
 
 	test(sha384_incremental_matches_hash_block_boundary_plus_one, deterministic(Hash1 == Hash2)) :-
 		sequence(1, 129, Bytes),
 		sha384::hash(Bytes, Hash1),
-		split_at(128, Bytes, Chunk1, Chunk2),
+		take(128, Bytes, Chunk1, Chunk2),
 		run_incremental(sha384, [Chunk1, Chunk2], Hash2).
 
 	test(sha384_incremental_matches_hash_unaligned_chunks, deterministic(Hash1 == Hash2)) :-
@@ -657,11 +657,6 @@
 
 	% auxiliary predicates
 
-	% splits List into Left (the first N elements) and Right (the remainder)
-	split_at(N, List, Left, Right) :-
-		length(Left, N),
-		append(Left, Right, List).
-
 	% splits List into a list of Chunks of (at most) N elements each,
 	% used to drive update_hash_state/3 one chunk at a time
 	chunks(_, [], []) :-
@@ -671,7 +666,7 @@
 			Length =< N ->
 			Chunk = List,
 			Rest = []
-		;	split_at(N, List, Chunk, Rest)
+		;	take(N, List, Chunk, Rest)
 		),
 		chunks(N, Rest, Chunks).
 

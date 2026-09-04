@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-03,
+		date is 2026-09-04,
 		comment is 'Shared numeric, objective-direction, and validation predicates for constrained optimization solvers and their internal problem wrappers.'
 	]).
 
@@ -112,23 +112,6 @@
 		;	NewPenalty = OldPenalty
 		).
 
-	:- protected(split_at/4).
-	:- mode(split_at(+integer, +list, -list, -list), one).
-	:- info(split_at/4, [
-		comment is 'Splits a list after its first N elements.',
-		argnames is ['N', 'List', 'Prefix', 'Suffix']
-	]).
-
-	split_at(N, List, Prefix, Suffix) :-
-		(	N =< 0 ->
-			Prefix = [],
-			Suffix = List
-		;	List = [Element| Elements],
-			Prefix = [Element| PrefixElements],
-			N1 is N - 1,
-			split_at(N1, Elements, PrefixElements, Suffix)
-		).
-
 	:- protected(abs_sum/2).
 	:- mode(abs_sum(+list(number), -number), one).
 	:- info(abs_sum/2, [
@@ -137,12 +120,12 @@
 	]).
 
 	abs_sum(Values, Sum) :-
-		abs_sum_acc(Values, 0.0, Sum).
+		abs_sum(Values, 0.0, Sum).
 
-	abs_sum_acc([], Sum, Sum).
-	abs_sum_acc([Value| Values], Sum0, Sum) :-
+	abs_sum([], Sum, Sum).
+	abs_sum([Value| Values], Sum0, Sum) :-
 		Sum1 is Sum0 + abs(Value),
-		abs_sum_acc(Values, Sum1, Sum).
+		abs_sum(Values, Sum1, Sum).
 
 	:- protected(validate_numeric_vector/2).
 	:- mode(validate_numeric_vector(+list, +atom), one_or_error).
