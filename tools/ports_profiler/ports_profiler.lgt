@@ -19,15 +19,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- object(ports_profiler).
+:- object(ports_profiler,
+	imports((tool_diagnostics_common, options))).
 
 	% avoid a catch-22...
 	:- set_logtalk_flag(debug, off).
 
 	:- info([
-		version is 2:0:0,
+		version is 3:0:0,
 		author is 'Paulo Moura',
-		date is 2024-05-18,
+		date is 2026-09-04,
 		comment is 'Predicate execution box model port profiler.'
 	]).
 
@@ -134,6 +135,285 @@
 	:- uses(user, [
 		atomic_list_concat/2
 	]).
+
+	:- uses(list, [
+		length/2, memberchk/2
+	]).
+
+	:- uses(logtalk, [
+		expand_library_path/2, file_type_extension/2
+	]).
+
+	:- uses(os, [
+		absolute_file_name/2, decompose_file_name/3, decompose_file_name/4, internal_os_path/2
+	]).
+	:- uses(type, [
+		valid/2
+	]).
+
+	diagnostics_tool(ports_profiler, ports_profiler, Version, 'https://logtalk.org/', [
+		guid('379ec1a7-f1f4-4bc8-aab8-dfc660d24d12'),
+		fingerprint_algorithm(canonical_finding_v1),
+		automation_id(target),
+		include_invocations(true),
+		include_git_metadata(true),
+		include_version_control_provenance(true)
+	]) :-
+		this(This),
+		object_property(This, info(Info)),
+		memberchk(version(Major:Minor:Patch), Info),
+		atomic_list_concat([Major, '.', Minor, '.', Patch], Version).
+
+	diagnostic_rule(unexpected_non_determinism, 'Unexpected predicate or non-terminal non-determinism.', 'A predicate or non-terminal with only deterministic mode declarations had at least one non-deterministic exit.', warning, [guid('8c2c5fd7-4b8e-4e06-a497-5ac96580c79f')]).
+
+	diagnostics(Target, Diagnostics, UserOptions) :-
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options),
+		(	setof(Diagnostic, target_diagnostic(Target, Diagnostic, Options), Diagnostics) ->
+			true
+		;	Diagnostics = []
+		).
+
+	diagnostics(Target, Diagnostics) :-
+		diagnostics(Target, Diagnostics, []).
+
+	diagnostic(Target, Diagnostic, UserOptions) :-
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options),
+		target_diagnostic(Target, Diagnostic, Options).
+
+	diagnostic(Target, Diagnostic) :-
+		diagnostic(Target, Diagnostic, []).
+
+	diagnostics_summary(Target, diagnostics_summary(Target, TotalContexts, TotalDiagnostics, Breakdown, ContextSummaries), UserOptions) :-
+		diagnostics(Target, Diagnostics, UserOptions),
+		length(Diagnostics, TotalDiagnostics),
+		^^diagnostics_breakdown(Diagnostics, Breakdown),
+		^^context_summaries(Diagnostics, ContextSummaries),
+		length(ContextSummaries, TotalContexts).
+
+	diagnostics_summary(Target, Summary) :-
+		diagnostics_summary(Target, Summary, []).
+
+	diagnostics_preflight(Target, Issues, UserOptions) :-
+		^^check_options(UserOptions),
+		^^merge_options(UserOptions, Options),
+		(	setof(Issue, diagnostic_preflight_issue(Target, Options, Issue), Issues) ->
+			true
+		;	Issues = []
+		).
+
+	diagnostics_preflight(Target, Issues) :-
+		diagnostics_preflight(Target, Issues, []).
+
+	target_diagnostic(Target, Diagnostic, Options) :-
+		profile_diagnostic(Diagnostic, Options),
+		Diagnostic = diagnostic(_, _, _, _, context(_, Entity), File, _, _),
+		target_matches(Target, Entity, File).
+
+	profile_diagnostic(diagnostic(unexpected_non_determinism, warning, high, 'Predicate or non-terminal declared deterministic had a non-deterministic exit.', context(Kind, Entity), File, Lines, [
+		finding_properties([class(unexpected_non_determinism), entity_kind(Kind), entity(Entity), predicate(Predicate)]),
+		entity_kind(Kind), entity(Entity), predicate(Predicate), compiled_predicate(Functor/Arity),
+		port_count(fact, Fact), port_count(rule, Rule), port_count(call, Call), port_count(exit, Exit),
+		port_count(nd_exit, NDExit), port_count(fail, Fail), port_count(redo, Redo), port_count(exception, Exception)
+	]), _Options) :-
+		port_(nd_exit, Entity, Functor, Arity, NDExit),
+		NDExit > 0,
+		entity_kind(Entity, Kind),
+		declared_deterministic_predicate(Entity, Functor, Arity, Predicate),
+		predicate_location(Entity, Functor, Arity, File, Lines),
+		profile_port_count(fact, Entity, Functor, Arity, Fact),
+		profile_port_count(rule, Entity, Functor, Arity, Rule),
+		profile_port_count(call, Entity, Functor, Arity, Call),
+		profile_port_count(exit, Entity, Functor, Arity, Exit),
+		profile_port_count(fail, Entity, Functor, Arity, Fail),
+		profile_port_count(redo, Entity, Functor, Arity, Redo),
+		profile_port_count(exception, Entity, Functor, Arity, Exception).
+
+	declared_deterministic_predicate(Entity, Functor, Arity, Predicate) :-
+		entity_declaration_properties(Entity, Functor/Arity, Properties),
+		memberchk(mode(_, _), Properties),
+		\+ (
+			member(mode(_, Solutions), Properties),
+			\+ deterministic_mode(Solutions)
+		),
+		predicate_indicator(Properties, Functor, Arity, Predicate).
+
+	entity_declaration_properties(Entity, Predicate, Properties) :-
+		(	current_object(Entity) ->
+			object_property(Entity, declares(Predicate, Properties))
+		;	category_property(Entity, declares(Predicate, Properties))
+		).
+
+	deterministic_mode(zero).
+	deterministic_mode(zero_or_one).
+	deterministic_mode(one).
+	deterministic_mode(zero_or_error).
+	deterministic_mode(one_or_error).
+	deterministic_mode(zero_or_one_or_error).
+	deterministic_mode(error).
+
+	profiled_predicate(Kind, Entity, Functor, Arity) :-
+		port_(call, Entity, Functor, Arity, _),
+		entity_kind(Entity, Kind).
+
+	target_matches(all, _Entity, _File).
+	target_matches(entity(Entity), Entity, _File).
+	target_matches(file(TargetFile), _Entity, File) :-
+		locate_target_file(TargetFile, FilePath),
+		diagnostic_file_path(File, FilePath).
+	target_matches(directory(Directory0), _Entity, File) :-
+		normalize_directory_path(Directory0, Directory),
+		diagnostic_file_directory(File, Directory).
+	target_matches(rdirectory(Directory0), _Entity, File) :-
+		normalize_directory_path(Directory0, Directory),
+		diagnostic_file_directory(File, FileDirectory),
+		sub_atom(FileDirectory, 0, _, _, Directory).
+	target_matches(library(Library), _Entity, File) :-
+		expand_library_path(Library, Directory),
+		diagnostic_file_directory(File, Directory).
+	target_matches(rlibrary(Library), _Entity, File) :-
+		expand_library_path(Library, TopPath),
+		diagnostic_file_directory(File, Directory),
+		once((
+			Directory == TopPath
+		; 	sub_library(TopPath, _SubLibrary, Directory)
+		)).
+
+	locate_target_file(LibraryNotation, Path) :-
+		compound(LibraryNotation),
+		!,
+		LibraryNotation =.. [Library, Name],
+		expand_library_path(Library, LibraryPath),
+		atom_concat(LibraryPath, Name, Source),
+		locate_target_file(Source, Path).
+	locate_target_file(Source, Path) :-
+		add_extension(Source, Basename),
+		captured_file(Path, Basename),
+		\+ (
+			captured_file(OtherPath, Basename),
+			Path \== OtherPath
+		),
+		!.
+	locate_target_file(Source, Path) :-
+		add_extension(Source, SourceWithExtension),
+		captured_file(Path, Basename),
+		diagnostic_file_directory(Path, Directory),
+		atom_concat(Directory, Basename, SourceWithExtension),
+		!.
+
+	captured_file(Path, Basename) :-
+		clause_location_(_, _, _, _, File, _),
+		diagnostic_file_path(File, Path),
+		decompose_file_name(Path, _Directory, Basename).
+
+	diagnostic_file_path(File0, File) :-
+		File0 \== '',
+		internal_os_path(File1, File0),
+		absolute_file_name(File1, File).
+
+	diagnostic_file_directory(File0, Directory) :-
+		diagnostic_file_path(File0, File),
+		decompose_file_name(File, Directory, _).
+
+	add_extension(Source, SourceWithExtension) :-
+		atom(Source),
+		decompose_file_name(Source, _, _, SourceExtension),
+		(	file_type_extension(source, SourceExtension) ->
+			SourceWithExtension = Source
+		;	file_type_extension(source, Extension),
+			atom_concat(Source, Extension, SourceWithExtension)
+		).
+
+	sub_library(TopPath, Library, LibraryPath) :-
+		logtalk_library_path(Library, _),
+		expand_library_path(Library, LibraryPath),
+		atom_concat(TopPath, _RelativePath, LibraryPath).
+
+	normalize_directory_path(Directory0, Directory) :-
+		internal_os_path(Directory1, Directory0),
+		absolute_file_name(Directory1, Directory2),
+		(	sub_atom(Directory2, _, _, 0, '/') ->
+			Directory = Directory2
+		;	atom_concat(Directory2, '/', Directory)
+		).
+
+	diagnostic_preflight_issue(Target, _Options, preflight_issue(missing_debug_mode, warning, 'The target entity was not compiled in debug mode and cannot collect port profiling data.', context(Kind, Entity), File, 0-0, [prerequisite(debug)])) :-
+		preflight_entity(Target, Kind, Entity, File),
+		\+ entity_has_property(Entity, debugging).
+	diagnostic_preflight_issue(Target, _Options, preflight_issue(missing_source_data, note, 'The target entity was not compiled with source data and precise diagnostic locations may be unavailable.', context(Kind, Entity), File, 0-0, [prerequisite(source_data)])) :-
+		preflight_entity(Target, Kind, Entity, File),
+		\+ entity_has_property(Entity, source_data).
+	diagnostic_preflight_issue(Target, Options, preflight_issue(no_profiling_data, warning, 'No profiling data is available for the requested target.', context(tool, ports_profiler), '', 0-0, [prerequisite(profiling_data)])) :-
+		\+ target_profile_data(Target, Options).
+
+	target_profile_data(Target, _Options) :-
+		profiled_predicate(_Kind, Entity, Functor, Arity),
+		predicate_location(Entity, Functor, Arity, File, _Lines),
+		target_matches(Target, Entity, File).
+
+	preflight_entity(all, Kind, Entity, File) :-
+		profiled_predicate(Kind, Entity, _Functor, _Arity),
+		entity_file(Entity, File).
+	preflight_entity(entity(Entity), Kind, Entity, File) :-
+		entity_kind(Entity, Kind),
+		entity_file(Entity, File).
+	preflight_entity(Target, Kind, Entity, File) :-
+		Target \= all,
+		Target \= entity(_),
+		current_profile_entity(Kind, Entity),
+		entity_file(Entity, File),
+		target_matches(Target, Entity, File).
+
+	current_profile_entity(object, Entity) :-
+		current_object(Entity).
+	current_profile_entity(category, Entity) :-
+		current_category(Entity).
+
+	entity_file(Entity, File) :-
+		(	current_object(Entity) ->
+			object_property(Entity, file(File))
+		;	category_property(Entity, file(File))
+		).
+
+	entity_has_property(Entity, Property) :-
+		(	current_object(Entity) ->
+			object_property(Entity, Property)
+		;	category_property(Entity, Property)
+		).
+
+	entity_kind(Entity, object) :-
+		current_object(Entity),
+		!.
+	entity_kind(Entity, category) :-
+		current_category(Entity).
+
+	predicate_indicator(Properties, Functor, Arity, Predicate) :-
+		(	member(non_terminal(Predicate), Properties) ->
+			true
+		;	Predicate = Functor/Arity
+		).
+
+	predicate_location(Entity, Functor, Arity, File, BeginLine-EndLine) :-
+		setof(Line, ClauseNumber^clause_location_(Entity, Functor, Arity, ClauseNumber, File, Line), Lines),
+		Lines = [BeginLine| _],
+		last(Lines, EndLine),
+		!.
+	predicate_location(Entity, _Functor, _Arity, File, 0-0) :-
+		entity_file(Entity, File),
+		!.
+	predicate_location(_Entity, _Functor, _Arity, '', 0-0).
+
+	profile_port_count(Port, Entity, Functor, Arity, Count) :-
+		(	port_(Port, Entity, Functor, Arity, Count) ->
+			true
+		;	Count = 0
+		).
+
+	default_option(explanations(false)).
+
+	valid_option(explanations(Boolean)) :-
+		valid(boolean, Boolean).
 
 	start :-
 		logtalk::activate_debug_handler(ports_profiler),

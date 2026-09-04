@@ -20,5 +20,8 @@
 
 
 :- initialization((
+	logtalk_load(options(loader)),
+	logtalk_load(os(loader)),
+	logtalk_load(tool_diagnostics(loader)),
 	logtalk_load(ports_profiler, [optimize(on)])
 )).

@@ -14,25 +14,31 @@ Predicate execution box model port profiler.
 |    ``logtalk_load(ports_profiler(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 2:0:0
-| **Date:** 2024-05-18
+| **Version:** 3:0:0
+| **Date:** 2026-09-04
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
 
 
+| **Imports:**
+|    ``public`` :ref:`tool_diagnostics_common <tool_diagnostics_common/0>`
+|    ``public`` :ref:`options <options/0>`
 | **Provides:**
 |    :ref:`logtalk::debug_handler/1 <logtalk/0::debug_handler/1>`
 |    :ref:`logtalk::debug_handler/3 <logtalk/0::debug_handler/3>`
 | **Uses:**
+|    :ref:`list <list/0>`
 |    :ref:`logtalk <logtalk/0>`
+|    :ref:`os <os/0>`
+|    :ref:`type <type/0>`
 |    :ref:`user <user/0>`
 
 | **Remarks:**
 |    (none)
 
 | **Inherited public predicates:**
-|    (none)
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`tool_diagnostics_protocol/0::diagnostic/2`  :ref:`tool_diagnostics_protocol/0::diagnostic/3`  :ref:`tool_diagnostics_protocol/0::diagnostic_rule/5`  :ref:`tool_diagnostics_protocol/0::diagnostic_rules/1`  :ref:`tool_diagnostics_protocol/0::diagnostic_target/1`  :ref:`tool_diagnostics_protocol/0::diagnostics/2`  :ref:`tool_diagnostics_protocol/0::diagnostics/3`  :ref:`tool_diagnostics_protocol/0::diagnostics_preflight/2`  :ref:`tool_diagnostics_protocol/0::diagnostics_preflight/3`  :ref:`tool_diagnostics_protocol/0::diagnostics_summary/2`  :ref:`tool_diagnostics_protocol/0::diagnostics_summary/3`  :ref:`tool_diagnostics_protocol/0::diagnostics_tool/5`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
 
 .. contents::
    :local:

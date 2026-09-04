@@ -280,6 +280,10 @@ parameter validation, and edge case handling issues.
 Tools
 -----
 
+* ADDED: Support for diagnostics to the `ports_profiler` tool. The diagnostics
+report unexpected non-determinism for declared predicates that specify only
+deterministic modes.
+
 * ADDED: New `logtalk_http_server.sh` and `logtalk_http_server.ps1` scripts
 for starting a HTTP server using Logtalk HTTP libraries. Supports ECLiPSe,
 SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM.

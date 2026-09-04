@@ -196,6 +196,44 @@ The profiling data should be analyzed by taking into account the expected
 behavior for the profiled predicates.
 
 
+Machine-readable profiling diagnostics
+--------------------------------------
+
+The collected profiling data is also available using the common tool
+diagnostics API. For example:
+
+	| ?- ports_profiler::diagnostics(entity(addams), Diagnostics).
+
+The tool publishes an `unexpected_non_determinism` warning for an observed
+predicate or non-terminal when all the following conditions hold:
+
+- the predicate or non-terminal is declared
+- it has at least one mode declaration
+- all its mode declarations use one of the deterministic solution modes
+	`zero`, `zero_or_one`, `one`, `zero_or_error`, `one_or_error`,
+	`zero_or_one_or_error`, or `error`
+- its collected `nd_exit` count is greater than zero
+
+If any mode declaration uses a non-deterministic solution mode, no diagnostic
+is generated. This conservative behavior is required because the profiler
+does not know which declared mode applies to an observed call.
+
+The diagnostic includes `port_count/2` properties for all eight ports: `fact`,
+`rule`, `call`, `exit`, `nd_exit`, `fail`, `redo`, and `exception`. Missing
+port events are represented by a zero count. Predicate and non-terminal
+indicators are reported in their original form; the compiled predicate
+indicator is available in the `compiled_predicate/1` property.
+
+Diagnostics can be requested for the standard targets `all`, `entity/1`,
+`file/1`, `directory/1`, `rdirectory/1`, `library/1`, and `rlibrary/1`.
+Summaries and prerequisite checks are available using, respectively,
+`diagnostics_summary/2-3` and `diagnostics_preflight/2-3`.
+
+The warning reports a mismatch between the declared solution modes and the
+observed execution. The complete port counts are retained as supporting data
+for consumers such as coding tools.
+
+
 Profiling Prolog modules
 ------------------------
 

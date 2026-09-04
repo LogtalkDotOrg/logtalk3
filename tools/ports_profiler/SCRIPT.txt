@@ -72,6 +72,33 @@ hill_climbing/1     search/5              0     1     1     0     1     0     0 
 -------------------------------------------------------------------------------------
 
 
+% enumerate machine-readable unexpected non-determinism diagnostics:
+
+| ?- ports_profiler::diagnostic(entity(miss_cann), Diagnostic).
+...
+
+
+% collect all diagnostics for an entity or source file:
+
+| ?- ports_profiler::diagnostics(entity(miss_cann), Diagnostics).
+...
+
+| ?- ports_profiler::diagnostics(file(miss_cann), Diagnostics).
+...
+
+
+% summarize diagnostics by rule, severity, confidence, and entity context:
+
+| ?- ports_profiler::diagnostics_summary(entity(miss_cann), Summary).
+...
+
+
+% check compilation and collection prerequisites for a target:
+
+| ?- ports_profiler::diagnostics_preflight(entity(miss_cann), Issues).
+Issues = [].
+
+
 % focus on a single entity:
 
 | ?- ports_profiler::data(miss_cann).

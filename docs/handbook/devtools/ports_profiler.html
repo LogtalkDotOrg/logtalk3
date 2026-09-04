@@ -94,6 +94,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#generating-profiling-data">Generating profiling data</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#printing-profiling-data-reports">Printing profiling data reports</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#interpreting-profiling-data">Interpreting profiling data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#machine-readable-profiling-diagnostics">Machine-readable profiling diagnostics</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#profiling-prolog-modules">Profiling Prolog modules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#profiling-plain-prolog-code">Profiling plain Prolog code</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#known-issues">Known issues</a></li>
@@ -314,6 +315,43 @@ include:</p>
 </ul>
 <p>The profiling data should be analyzed by taking into account the
 expected behavior for the profiled predicates.</p>
+</section>
+<section id="machine-readable-profiling-diagnostics">
+<h2>Machine-readable profiling diagnostics<a class="headerlink" href="#machine-readable-profiling-diagnostics" title="Link to this heading"></a></h2>
+<p>The collected profiling data is also available using the common tool
+diagnostics API. For example:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> ports_profiler<span class="o">::</span>diagnostics(entity(addams), <span class="nv">Diagnostics</span>).
+</pre></div>
+</div>
+<p>The tool publishes an <code class="docutils literal notranslate"><span class="pre">unexpected_non_determinism</span></code> warning for an
+observed predicate or non-terminal when all the following conditions
+hold:</p>
+<ul class="simple">
+<li><p>the predicate or non-terminal is declared</p></li>
+<li><p>it has at least one mode declaration</p></li>
+<li><p>all its mode declarations use one of the deterministic solution modes
+<code class="docutils literal notranslate"><span class="pre">zero</span></code>, <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code>, <code class="docutils literal notranslate"><span class="pre">one</span></code>, <code class="docutils literal notranslate"><span class="pre">zero_or_error</span></code>,
+<code class="docutils literal notranslate"><span class="pre">one_or_error</span></code>, <code class="docutils literal notranslate"><span class="pre">zero_or_one_or_error</span></code>, or <code class="docutils literal notranslate"><span class="pre">error</span></code></p></li>
+<li><p>its collected <code class="docutils literal notranslate"><span class="pre">nd_exit</span></code> count is greater than zero</p></li>
+</ul>
+<p>If any mode declaration uses a non-deterministic solution mode, no
+diagnostic is generated. This conservative behavior is required because
+the profiler does not know which declared mode applies to an observed
+call.</p>
+<p>The diagnostic includes <code class="docutils literal notranslate"><span class="pre">port_count/2</span></code> properties for all eight ports:
+<code class="docutils literal notranslate"><span class="pre">fact</span></code>, <code class="docutils literal notranslate"><span class="pre">rule</span></code>, <code class="docutils literal notranslate"><span class="pre">call</span></code>, <code class="docutils literal notranslate"><span class="pre">exit</span></code>, <code class="docutils literal notranslate"><span class="pre">nd_exit</span></code>, <code class="docutils literal notranslate"><span class="pre">fail</span></code>, <code class="docutils literal notranslate"><span class="pre">redo</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">exception</span></code>. Missing port events are represented by a zero count.
+Predicate and non-terminal indicators are reported in their original
+form; the compiled predicate indicator is available in the
+<code class="docutils literal notranslate"><span class="pre">compiled_predicate/1</span></code> property.</p>
+<p>Diagnostics can be requested for the standard targets <code class="docutils literal notranslate"><span class="pre">all</span></code>,
+<code class="docutils literal notranslate"><span class="pre">entity/1</span></code>, <code class="docutils literal notranslate"><span class="pre">file/1</span></code>, <code class="docutils literal notranslate"><span class="pre">directory/1</span></code>, <code class="docutils literal notranslate"><span class="pre">rdirectory/1</span></code>,
+<code class="docutils literal notranslate"><span class="pre">library/1</span></code>, and <code class="docutils literal notranslate"><span class="pre">rlibrary/1</span></code>. Summaries and prerequisite checks are
+available using, respectively, <code class="docutils literal notranslate"><span class="pre">diagnostics_summary/2-3</span></code> and
+<code class="docutils literal notranslate"><span class="pre">diagnostics_preflight/2-3</span></code>.</p>
+<p>The warning reports a mismatch between the declared solution modes and
+the observed execution. The complete port counts are retained as
+supporting data for consumers such as coding tools.</p>
 </section>
 <section id="profiling-prolog-modules">
 <h2>Profiling Prolog modules<a class="headerlink" href="#profiling-prolog-modules" title="Link to this heading"></a></h2>

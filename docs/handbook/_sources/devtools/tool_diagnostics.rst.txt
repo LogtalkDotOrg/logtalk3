@@ -5,8 +5,8 @@
 
 This tool provides the shared ``tool_diagnostics_protocol`` protocol and
 the ``tool_diagnostics_common`` category used by developer tools such as
-``dead_code_scanner``, ``lgtdoc``, ``lgtunit``, and ``linter_reporter``
-to expose machine-readable diagnostics.
+``dead_code_scanner``, ``lgtdoc``, ``lgtunit``, ``linter_reporter``, and
+``ports_profiler`` to expose machine-readable diagnostics.
 
 The protocol is designed so that producer tools can keep their own
 internal semantics while still providing a common interface for querying
