@@ -1,0 +1,107 @@
+.. index:: single: root_finder(Function)
+.. _root_finder/1:
+
+.. rst-class:: right
+
+**category**
+
+``root_finder(Function)``
+=========================
+
+* ``Function`` - Object implementing ``univariate_function_protocol``.
+
+
+Common option handling and validation for scalar root finders.
+
+| **Availability:** 
+|    ``logtalk_load(numerical_analysis(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-04
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Implements:**
+|    ``public`` :ref:`root_finder_protocol <root_finder_protocol/0>`
+| **Extends:**
+|    ``public`` :ref:`options <options/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`root_finder_protocol/0::find_root/2`  :ref:`root_finder_protocol/0::find_root/3`  :ref:`root_finder_protocol/0::find_root/4`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: evaluate_function/2
+.. _root_finder/1::evaluate_function/2:
+
+``evaluate_function/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Evaluates the function and checks that it returns a number.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``evaluate_function(Argument,Value)``
+| **Mode and number of proofs:**
+|    ``evaluate_function(+number,-number)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The function returns a non-numeric value:
+|        ``domain_error(function_value,Value)``
+
+
+------------
+
+.. index:: check_bracket/3
+.. _root_finder/1::check_bracket/3:
+
+``check_bracket/3``
+^^^^^^^^^^^^^^^^^^^
+
+Checks and unpacks a root bracket.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_bracket(Bracket,Lower,Upper)``
+| **Mode and number of proofs:**
+|    ``check_bracket(+compound,-number,-number)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Bracket`` is a variable:
+|        ``instantiation_error``
+|    ``Bracket`` is not a valid increasing numeric bracket:
+|        ``domain_error(root_bracket,Bracket)``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

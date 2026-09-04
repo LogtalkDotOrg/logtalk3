@@ -1,0 +1,109 @@
+.. index:: single: quadrature(Function)
+.. _quadrature/1:
+
+.. rst-class:: right
+
+**category**
+
+``quadrature(Function)``
+========================
+
+* ``Function`` - Object implementing ``univariate_function_protocol``.
+
+
+Common option handling and validation for scalar quadrature algorithms.
+
+| **Availability:** 
+|    ``logtalk_load(numerical_analysis(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-04
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Implements:**
+|    ``public`` :ref:`quadrature_protocol <quadrature_protocol/0>`
+| **Extends:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`quadrature_protocol/0::integrate/3`  :ref:`quadrature_protocol/0::integrate/4`  :ref:`quadrature_protocol/0::integrate/5`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: evaluate_integrand/2
+.. _quadrature/1::evaluate_integrand/2:
+
+``evaluate_integrand/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Evaluates the integrand and checks that it returns a number.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``evaluate_integrand(Argument,Value)``
+| **Mode and number of proofs:**
+|    ``evaluate_integrand(+number,-number)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The integrand returns a non-numeric value:
+|        ``domain_error(function_value,Value)``
+
+
+------------
+
+.. index:: check_bounds/2
+.. _quadrature/1::check_bounds/2:
+
+``check_bounds/2``
+^^^^^^^^^^^^^^^^^^
+
+Checks that both integration bounds are instantiated numbers.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_bounds(Lower,Upper)``
+| **Mode and number of proofs:**
+|    ``check_bounds(+number,+number)`` - ``one_or_error``
+
+| **Exceptions:**
+|    An integration bound is a variable:
+|        ``instantiation_error``
+|    An integration bound is not a number:
+|        ``type_error(number,Bound)``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

@@ -274,6 +274,7 @@ sed '1,19d' ../../../library/nearest_centroid_classifier/NOTES.md | pandoc -f gf
 sed '1,19d' ../../../library/nested_dictionaries/NOTES.md | pandoc -f gfm -t rst -o libraries/nested_dictionaries.rst
 sed '1,19d' ../../../library/nmea/NOTES.md | pandoc -f gfm -t rst -o libraries/nmea.rst
 sed '1,19d' ../../../library/nmf_projection/NOTES.md | pandoc -f gfm -t rst -o libraries/nmf_projection.rst
+sed '1,19d' ../../../library/numerical_analysis/NOTES.md | pandoc -f gfm -t rst -o libraries/numerical_analysis.rst
 sed '1,19d' ../../../library/one_class_svm_anomaly_detector/NOTES.md | pandoc -f gfm -t rst -o libraries/one_class_svm_anomaly_detector.rst
 sed '1,19d' ../../../library/open_api/NOTES.md | pandoc -f gfm -t rst -o libraries/open_api.rst
 sed '1,19d' ../../../library/open_ai/NOTES.md | pandoc -f gfm -t rst -o libraries/open_ai.rst

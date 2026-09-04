@@ -5859,6 +5859,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`derangements_protocol <derangements_protocol/0::derangements/3>`
 
+``derivative/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_function_protocol <univariate_function_protocol/0::derivative/2>`
+
+``derivative/3``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ode_system_protocol <ode_system_protocol/0::derivative/3>`
+
+``derivative/4``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`cubic_spline_interpolator <cubic_spline_interpolator/0::derivative/4>`
+
 ``descendant/1``
 ----------------
 
@@ -8116,6 +8146,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`linear_algebra_protocol <linear_algebra_protocol/0::euclidean_norm/2>`
 * :ref:`numberlistp <numberlistp/0::euclidean_norm/2>`
 
+``evaluate/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`univariate_function_protocol <univariate_function_protocol/0::evaluate/2>`
+
 ``evaluate/3``
 --------------
 
@@ -8124,6 +8164,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`interpolator_protocol <interpolator_protocol/0::evaluate/3>`
 * :ref:`json_path_protocol <json_path_protocol/0::evaluate/3>`
 * :ref:`json_pointer_protocol <json_pointer_protocol/0::evaluate/3>`
 
@@ -9100,6 +9141,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`union_find_protocol <union_find_protocol/0::find/5>`
 
+``find_root/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`root_finder_protocol <root_finder_protocol/0::find_root/2>`
+
+``find_root/3``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`root_finder_protocol <root_finder_protocol/0::find_root/3>`
+
+``find_root/4``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`root_finder_protocol <root_finder_protocol/0::find_root/4>`
+
 ``findall_in_noblock/3``
 ------------------------
 
@@ -9300,6 +9371,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`univariate_distributions_protocol <univariate_distributions_protocol/0::fisher_samples/4>`
+
+``fit/2``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`interpolator_protocol <interpolator_protocol/0::fit/2>`
+
+``fit/3``
+---------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`interpolator_protocol <interpolator_protocol/0::fit/3>`
 
 ``fitness/2``
 -------------
@@ -12348,6 +12439,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`byte_order <byte_order/0::integer_to_bytes/5>`
+
+``integrate/3``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`quadrature_protocol <quadrature_protocol/0::integrate/3>`
+
+``integrate/4``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`quadrature_protocol <quadrature_protocol/0::integrate/4>`
+
+``integrate/5``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`quadrature_protocol <quadrature_protocol/0::integrate/5>`
 
 ``internal_error/2``
 --------------------
@@ -26341,6 +26462,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`linear_programming_protocol <linear_programming_protocol/0::solve/3>`
+
+``solve/4``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ode_solver_protocol <ode_solver_protocol/0::solve/4>`
+
+``solve/5``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ode_solver_protocol <ode_solver_protocol/0::solve/5>`
+
+``solve/6``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`ode_solver_protocol <ode_solver_protocol/0::solve/6>`
 
 ``solve/8``
 -----------

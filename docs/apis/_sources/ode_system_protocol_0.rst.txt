@@ -1,0 +1,74 @@
+.. index:: single: ode_system_protocol
+.. _ode_system_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``ode_system_protocol``
+=======================
+
+Protocol for a non-stiff first-order ordinary differential equation system.
+
+| **Availability:** 
+|    ``logtalk_load(numerical_analysis(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-04
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: derivative/3
+.. _ode_system_protocol/0::derivative/3:
+
+``derivative/3``
+^^^^^^^^^^^^^^^^
+
+Computes the state derivative at a time and state. The derivative must have the same dimension as the state.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``derivative(Time,State,Derivative)``
+| **Mode and number of proofs:**
+|    ``derivative(+number,+list(number),-list(number))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

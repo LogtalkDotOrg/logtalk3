@@ -1,0 +1,140 @@
+.. index:: single: quadrature_protocol
+.. _quadrature_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``quadrature_protocol``
+=======================
+
+Protocol for finite-interval scalar numerical quadrature algorithms.
+
+| **Availability:** 
+|    ``logtalk_load(numerical_analysis(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-04
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: integrate/3
+.. _quadrature_protocol/0::integrate/3:
+
+``integrate/3``
+^^^^^^^^^^^^^^^
+
+Integrates the function over the given finite interval using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``integrate(Lower,Upper,Integral)``
+| **Mode and number of proofs:**
+|    ``integrate(+number,+number,-number)`` - ``one_or_error``
+
+| **Exceptions:**
+|    An integration bound is a variable:
+|        ``instantiation_error``
+|    An integration bound is not a number:
+|        ``type_error(number,Bound)``
+|    The function returns a non-numeric value:
+|        ``domain_error(function_value,Value)``
+
+
+------------
+
+.. index:: integrate/4
+.. _quadrature_protocol/0::integrate/4:
+
+``integrate/4``
+^^^^^^^^^^^^^^^
+
+Integrates the function over the given finite interval using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``integrate(Lower,Upper,Integral,Options)``
+| **Mode and number of proofs:**
+|    ``integrate(+number,+number,-number,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An integration bound or ``Options`` is a variable:
+|        ``instantiation_error``
+|    An integration bound is not a number:
+|        ``type_error(number,Bound)``
+|    ``Options`` is not a list or contains an invalid option:
+|        ``domain_error(options,Options)``
+|    The function returns a non-numeric value:
+|        ``domain_error(function_value,Value)``
+
+
+------------
+
+.. index:: integrate/5
+.. _quadrature_protocol/0::integrate/5:
+
+``integrate/5``
+^^^^^^^^^^^^^^^
+
+Integrates the function and returns run statistics using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``integrate(Lower,Upper,Integral,Statistics,Options)``
+| **Mode and number of proofs:**
+|    ``integrate(+number,+number,-number,-list(compound),+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An integration bound or ``Options`` is a variable:
+|        ``instantiation_error``
+|    An integration bound is not a number:
+|        ``type_error(number,Bound)``
+|    ``Options`` is not a list or contains an invalid option:
+|        ``domain_error(options,Options)``
+|    The function returns a non-numeric value:
+|        ``domain_error(function_value,Value)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

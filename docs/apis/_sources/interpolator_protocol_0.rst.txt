@@ -1,0 +1,146 @@
+.. index:: single: interpolator_protocol
+.. _interpolator_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``interpolator_protocol``
+=========================
+
+Protocol for fitting and evaluating one-dimensional interpolants.
+
+| **Availability:** 
+|    ``logtalk_load(numerical_analysis(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-04
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: fit/2
+.. _interpolator_protocol/0::fit/2:
+
+``fit/2``
+^^^^^^^^^
+
+Fits an interpolant to a list of ``X-Y`` points using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fit(Points,Model)``
+| **Mode and number of proofs:**
+|    ``fit(+list(pair),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Points`` is a variable:
+|        ``instantiation_error``
+|    ``Points`` is not a valid list of at least two numeric points with distinct abscissas:
+|        ``domain_error(interpolation_points,Points)``
+
+
+------------
+
+.. index:: fit/3
+.. _interpolator_protocol/0::fit/3:
+
+``fit/3``
+^^^^^^^^^
+
+Fits an interpolant to a list of ``X-Y`` points using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fit(Points,Model,Options)``
+| **Mode and number of proofs:**
+|    ``fit(+list(pair),-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Points`` or ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Points`` is not a valid list of at least two numeric points with distinct abscissas:
+|        ``domain_error(interpolation_points,Points)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+
+
+------------
+
+.. index:: evaluate/3
+.. _interpolator_protocol/0::evaluate/3:
+
+``evaluate/3``
+^^^^^^^^^^^^^^
+
+Evaluates a fitted interpolant inside its data domain.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``evaluate(Model,Argument,Value)``
+| **Mode and number of proofs:**
+|    ``evaluate(+compound,+number,-number)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Model`` is a variable:
+|        ``instantiation_error``
+|    ``Model`` is not a model for the receiving interpolator:
+|        ``domain_error(interpolation_model,Model)``
+|    ``Argument`` is a variable:
+|        ``instantiation_error``
+|    ``Argument`` is not a number:
+|        ``type_error(number,Argument)``
+|    ``Argument`` lies outside the fitted domain:
+|        ``domain_error(interpolation_domain,Argument)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

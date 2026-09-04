@@ -1,0 +1,66 @@
+.. index:: single: euler_ode_solver(System)
+.. _euler_ode_solver/1:
+
+.. rst-class:: right
+
+**object**
+
+``euler_ode_solver(System)``
+============================
+
+* ``System`` - Object implementing ``ode_system_protocol``.
+
+
+Fixed-step explicit Euler solver for non-stiff initial-value problems.
+
+| **Availability:** 
+|    ``logtalk_load(numerical_analysis(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-04
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`ode_solver(System) <ode_solver/1>`
+| **Uses:**
+|    :ref:`linear_algebra <linear_algebra/0>`
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`ode_solver_protocol/0::solve/4`  :ref:`ode_solver_protocol/0::solve/5`  :ref:`ode_solver_protocol/0::solve/6`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`ode_solver_protocol <ode_solver_protocol/0>`, :ref:`rk4_ode_solver(System) <rk4_ode_solver/1>`, :ref:`rk45_ode_solver(System) <rk45_ode_solver/1>`
+

@@ -26,6 +26,7 @@
 		arbitrary(loader),
 		strings(loader),
 		string_distance(loader),
+		numerical_analysis(loader),
 		linear_algebra(loader),
 		linear_programming(loader),
 		stemming(loader),

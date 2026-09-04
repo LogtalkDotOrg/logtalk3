@@ -75,6 +75,7 @@ Categories
    http_router_server_session(Manager) <http_router_server_session_1>
    http_text_helpers <http_text_helpers_0>
    ieee_754_common(Precision,ByteOrder) <ieee_754_common_2>
+   interpolator <interpolator_0>
    jwt_helpers <jwt_helpers_0>
    lgtdoc_messages <lgtdoc_messages_0>
    lgtunit_messages <lgtunit_messages_0>
@@ -93,6 +94,7 @@ Categories
    mutations <mutations_0>
    mutator_common <mutator_common_0>
    observer <observer_0>
+   ode_solver(System) <ode_solver_1>
    open_id_helpers <open_id_helpers_0>
    options <options_0>
    os_types <os_types_0>
@@ -105,12 +107,14 @@ Categories
    plackett_luce_common <plackett_luce_common_0>
    probabilistic_classifier_common <probabilistic_classifier_common_0>
    proto_hierarchy <proto_hierarchy_0>
+   quadrature(Function) <quadrature_1>
    ranker_common <ranker_common_0>
    ranking_dataset_common <ranking_dataset_common_0>
    read_file <read_file_0>
    recorded_database_core <recorded_database_core_0>
    regressor_common <regressor_common_0>
    rest <rest_0>
+   root_finder(Function) <root_finder_1>
    score_ranker_common <score_ranker_common_0>
    score_ranker_model_common <score_ranker_model_common_0>
    search_indexing <search_indexing_0>
@@ -139,6 +143,7 @@ Objects
 
    a_star_interpreter(W) <a_star_interpreter_1>
    adaptive_boosting_classifier <adaptive_boosting_classifier_0>
+   adaptive_simpson_quadrature(Function) <adaptive_simpson_quadrature_1>
    aes128 <aes128_0>
    aes192 <aes192_0>
    aes256 <aes256_0>
@@ -164,6 +169,7 @@ Objects
    backend_adapter_hook <backend_adapter_hook_0>
    backend_random <backend_random_0>
    barrier_sub_problem(Problem,OuterIteration,StartPoint,Mu,Rho,Sign) <barrier_sub_problem_6>
+   barycentric_interpolator <barycentric_interpolator_0>
    barzilai_borwein(Problem) <barzilai_borwein_1>
    base32 <base32_0>
    base58 <base58_0>
@@ -180,6 +186,7 @@ Objects
    binary_heap_max <binary_heap_max_0>
    binary_heap_min <binary_heap_min_0>
    bintree <bintree_0>
+   bisection_root_finder(Function) <bisection_root_finder_1>
    blake2b <blake2b_0>
    blake2b(Key,DigestSize) <blake2b_2>
    blake2s <blake2s_0>
@@ -188,6 +195,7 @@ Objects
    body_goal_negation(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <body_goal_negation_5>
    borda_ranker <borda_ranker_0>
    bradley_terry_ranker <bradley_terry_ranker_0>
+   brent_root_finder(Function) <brent_root_finder_1>
    bson <bson_0>
    bson(StringRepresentation) <bson_1>
    bup_interpreter <bup_interpreter_0>
@@ -249,6 +257,7 @@ Objects
    ctr <ctr_0>
    ctrf_output <ctrf_output_0>
    ctrf_report <ctrf_report_0>
+   cubic_spline_interpolator <cubic_spline_interpolator_0>
    cuid2 <cuid2_0>
    cuid2(Representation,Size,Alphabet) <cuid2_3>
    cusum_anomaly_detector <cusum_anomaly_detector_0>
@@ -297,6 +306,7 @@ Objects
    elo_ranker <elo_ranker_0>
    entity_diagram <entity_diagram_0>
    entity_diagram(Format) <entity_diagram_1>
+   euler_ode_solver(System) <euler_ode_solver_1>
    event_registry <event_registry_0>
    ewma_anomaly_detector <ewma_anomaly_detector_0>
    expand_library_alias_paths <expand_library_alias_paths_0>
@@ -317,6 +327,7 @@ Objects
    fnv1a_64 <fnv1a_64_0>
    format <format_0>
    fp_growth_pattern_miner <fp_growth_pattern_miner_0>
+   gauss_legendre_quadrature(Function) <gauss_legendre_quadrature_1>
    gaussian_mixture_clusterer <gaussian_mixture_clusterer_0>
    gaussian_process_regression <gaussian_process_regression_0>
    generalized_ripple_down_rules <generalized_ripple_down_rules_0>
@@ -575,6 +586,7 @@ Objects
    nbintree <nbintree_0>
    nearest_centroid_classifier <nearest_centroid_classifier_0>
    nelder_mead(Problem) <nelder_mead_1>
+   newton_root_finder(Function) <newton_root_finder_1>
    nmea <nmea_0>
    nmf_projection <nmf_projection_0>
    noc_metric <noc_metric_0>
@@ -628,6 +640,7 @@ Objects
    penalty_sub_problem(Problem,OuterIteration,StartPoint,Rho,Sign) <penalty_sub_problem_5>
    permutations <permutations_0>
    phase1_sub_problem(Problem,StartPoint) <phase1_sub_problem_2>
+   piecewise_linear_interpolator <piecewise_linear_interpolator_0>
    plackett_luce_last_ranker <plackett_luce_last_ranker_0>
    plackett_luce_ranker <plackett_luce_ranker_0>
    plantuml_graph_language <plantuml_graph_language_0>
@@ -665,6 +678,8 @@ Objects
    relational_operator_replacement(Entity,Predicate,ClauseIndex,Occurrence,PrintMutation) <relational_operator_replacement_5>
    rfc_metric <rfc_metric_0>
    ridge_regression <ridge_regression_0>
+   rk45_ode_solver(System) <rk45_ode_solver_1>
+   rk4_ode_solver(System) <rk4_ode_solver_1>
    rule_expansion(Mode) <rule_expansion_1>
    s3_client <s3_client_0>
    s3_client(HTTPTransport) <s3_client_1>
@@ -680,6 +695,7 @@ Objects
    scope_directive_replacement(Entity,Predicate,DirectiveIndex,Occurrence,PrintMutation) <scope_directive_replacement_5>
    sdbm_32 <sdbm_32_0>
    sdbm_64 <sdbm_64_0>
+   secant_root_finder(Function) <secant_root_finder_1>
    sequence_grammars <sequence_grammars_0>
    set <set_0>
    set(Type) <set_1>
@@ -911,6 +927,7 @@ Protocols
    ieee_754_fields_protocol <ieee_754_fields_protocol_0>
    ieee_754_protocol <ieee_754_protocol_0>
    integer_partitions_protocol <integer_partitions_protocol_0>
+   interpolator_protocol <interpolator_protocol_0>
    interpreterp <interpreterp_0>
    interval_algebra_protocol <interval_algebra_protocol_0>
    interval_constraint_network_protocol <interval_constraint_network_protocol_0>
@@ -961,6 +978,8 @@ Protocols
    nested_dictionary_protocol <nested_dictionary_protocol_0>
    nmea_protocol <nmea_protocol_0>
    numberlistp <numberlistp_0>
+   ode_solver_protocol <ode_solver_protocol_0>
+   ode_system_protocol <ode_system_protocol_0>
    open_ai_backend_protocol <open_ai_backend_protocol_0>
    open_api_provider_protocol <open_api_provider_protocol_0>
    options_protocol <options_protocol_0>
@@ -978,6 +997,7 @@ Protocols
    proto_hierarchyp <proto_hierarchyp_0>
    pseudo_random_protocol <pseudo_random_protocol_0>
    qp_solver_protocol <qp_solver_protocol_0>
+   quadrature_protocol <quadrature_protocol_0>
    queuep <queuep_0>
    random_protocol <random_protocol_0>
    ranker_protocol <ranker_protocol_0>
@@ -987,6 +1007,7 @@ Protocols
    regressor_protocol <regressor_protocol_0>
    ripple_down_rules_common_protocol <ripple_down_rules_common_protocol_0>
    ripple_down_rules_protocol <ripple_down_rules_protocol_0>
+   root_finder_protocol <root_finder_protocol_0>
    s3_protocol <s3_protocol_0>
    sampling_protocol <sampling_protocol_0>
    sequence_dataset_protocol <sequence_dataset_protocol_0>
@@ -1015,6 +1036,7 @@ Protocols
    ulid_protocol <ulid_protocol_0>
    union_find_protocol <union_find_protocol_0>
    univariate_distributions_protocol <univariate_distributions_protocol_0>
+   univariate_function_protocol <univariate_function_protocol_0>
    unweighted_graph_protocol <unweighted_graph_protocol_0>
    uuid_protocol <uuid_protocol_0>
    varlistp <varlistp_0>

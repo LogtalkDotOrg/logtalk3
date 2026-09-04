@@ -1,0 +1,93 @@
+.. index:: single: univariate_function_protocol
+.. _univariate_function_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``univariate_function_protocol``
+================================
+
+Protocol for real-valued functions of one real variable.
+
+| **Availability:** 
+|    ``logtalk_load(numerical_analysis(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-04
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: evaluate/2
+.. _univariate_function_protocol/0::evaluate/2:
+
+``evaluate/2``
+^^^^^^^^^^^^^^
+
+Evaluates the function at the given argument.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``evaluate(Argument,Value)``
+| **Mode and number of proofs:**
+|    ``evaluate(+number,-number)`` - ``one``
+
+
+------------
+
+.. index:: derivative/2
+.. _univariate_function_protocol/0::derivative/2:
+
+``derivative/2``
+^^^^^^^^^^^^^^^^
+
+Optional. Evaluates the first derivative at the given argument.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``derivative(Argument,Derivative)``
+| **Mode and number of proofs:**
+|    ``derivative(+number,-number)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

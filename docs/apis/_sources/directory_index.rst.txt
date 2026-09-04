@@ -2442,6 +2442,37 @@ To load an entity, always load the library that includes it using the goal ``log
 
    nmf_projection <nmf_projection_0>
 
+``library/numerical_analysis/``
+-------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   adaptive_simpson_quadrature(Function) <adaptive_simpson_quadrature_1>
+   barycentric_interpolator <barycentric_interpolator_0>
+   bisection_root_finder(Function) <bisection_root_finder_1>
+   brent_root_finder(Function) <brent_root_finder_1>
+   cubic_spline_interpolator <cubic_spline_interpolator_0>
+   euler_ode_solver(System) <euler_ode_solver_1>
+   gauss_legendre_quadrature(Function) <gauss_legendre_quadrature_1>
+   interpolator <interpolator_0>
+   interpolator_protocol <interpolator_protocol_0>
+   newton_root_finder(Function) <newton_root_finder_1>
+   ode_solver(System) <ode_solver_1>
+   ode_solver_protocol <ode_solver_protocol_0>
+   ode_system_protocol <ode_system_protocol_0>
+   piecewise_linear_interpolator <piecewise_linear_interpolator_0>
+   quadrature(Function) <quadrature_1>
+   quadrature_protocol <quadrature_protocol_0>
+   rk45_ode_solver(System) <rk45_ode_solver_1>
+   rk4_ode_solver(System) <rk4_ode_solver_1>
+   root_finder(Function) <root_finder_1>
+   root_finder_protocol <root_finder_protocol_0>
+   secant_root_finder(Function) <secant_root_finder_1>
+   univariate_function_protocol <univariate_function_protocol_0>
+
 ``library/one_class_svm_anomaly_detector/``
 -------------------------------------------
 

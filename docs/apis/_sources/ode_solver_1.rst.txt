@@ -1,0 +1,111 @@
+.. index:: single: ode_solver(System)
+.. _ode_solver/1:
+
+.. rst-class:: right
+
+**category**
+
+``ode_solver(System)``
+======================
+
+* ``System`` - Object implementing ``ode_system_protocol``.
+
+
+Common validation and option handling for non-stiff initial-value ODE solvers.
+
+| **Availability:** 
+|    ``logtalk_load(numerical_analysis(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-04
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Implements:**
+|    ``public`` :ref:`ode_solver_protocol <ode_solver_protocol/0>`
+| **Extends:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`ode_solver_protocol/0::solve/4`  :ref:`ode_solver_protocol/0::solve/5`  :ref:`ode_solver_protocol/0::solve/6`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: check_initial_value/3
+.. _ode_solver/1::check_initial_value/3:
+
+``check_initial_value/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Checks initial and final times and a non-empty numeric initial state.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_initial_value(InitialTime,InitialState,FinalTime)``
+| **Mode and number of proofs:**
+|    ``check_initial_value(+number,+list(number),+number)`` - ``one_or_error``
+
+| **Exceptions:**
+|    An argument is a variable:
+|        ``instantiation_error``
+|    A time is not a number:
+|        ``type_error(number,Time)``
+|    ``InitialState`` is not a non-empty numeric list:
+|        ``domain_error(ode_state,InitialState)``
+
+
+------------
+
+.. index:: evaluate_derivative/3
+.. _ode_solver/1::evaluate_derivative/3:
+
+``evaluate_derivative/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Evaluates and validates a system derivative.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``evaluate_derivative(Time,State,Derivative)``
+| **Mode and number of proofs:**
+|    ``evaluate_derivative(+number,+list(number),-list(number))`` - ``one_or_error``
+
+| **Exceptions:**
+|    The system returns a non-numeric derivative or one with the wrong dimension:
+|        ``domain_error(ode_derivative,Derivative)``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

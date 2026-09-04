@@ -1,0 +1,63 @@
+.. index:: single: gauss_legendre_quadrature(Function)
+.. _gauss_legendre_quadrature/1:
+
+.. rst-class:: right
+
+**object**
+
+``gauss_legendre_quadrature(Function)``
+=======================================
+
+* ``Function`` - Object implementing ``univariate_function_protocol``.
+
+
+Fixed-order Gauss-Legendre quadrature for orders 2, 4, 8, and 16.
+
+| **Availability:** 
+|    ``logtalk_load(numerical_analysis(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-04
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`quadrature(Function) <quadrature/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`quadrature_protocol/0::integrate/3`  :ref:`quadrature_protocol/0::integrate/4`  :ref:`quadrature_protocol/0::integrate/5`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`quadrature_protocol <quadrature_protocol/0>`, :ref:`adaptive_simpson_quadrature(Function) <adaptive_simpson_quadrature/1>`
+

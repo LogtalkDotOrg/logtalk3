@@ -1,0 +1,129 @@
+.. index:: single: interpolator
+.. _interpolator/0:
+
+.. rst-class:: right
+
+**category**
+
+``interpolator``
+================
+
+Common point validation and domain handling for one-dimensional interpolators.
+
+| **Availability:** 
+|    ``logtalk_load(numerical_analysis(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-04
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Implements:**
+|    ``public`` :ref:`interpolator_protocol <interpolator_protocol/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`interpolator_protocol/0::evaluate/3`  :ref:`interpolator_protocol/0::fit/2`  :ref:`interpolator_protocol/0::fit/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: prepare_points/3
+.. _interpolator/0::prepare_points/3:
+
+``prepare_points/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Validates and sorts interpolation points and returns separate abscissa and ordinate lists.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``prepare_points(Points,Abscissas,Ordinates)``
+| **Mode and number of proofs:**
+|    ``prepare_points(+list(pair),-list(number),-list(number))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Points`` is a variable:
+|        ``instantiation_error``
+|    ``Points`` is not a valid list of at least two numeric points:
+|        ``domain_error(interpolation_points,Points)``
+|    ``Points`` contains a duplicate abscissa:
+|        ``domain_error(duplicate_abscissa,Abscissa)``
+
+
+------------
+
+.. index:: check_argument/3
+.. _interpolator/0::check_argument/3:
+
+``check_argument/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Checks that an interpolation argument lies in the closed fitted domain.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_argument(Argument,Lower,Upper)``
+| **Mode and number of proofs:**
+|    ``check_argument(+number,+number,+number)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Argument`` is a variable:
+|        ``instantiation_error``
+|    ``Argument`` is not a number:
+|        ``type_error(number,Argument)``
+|    ``Argument`` lies outside the fitted domain:
+|        ``domain_error(interpolation_domain,Argument)``
+
+
+------------
+
+.. index:: select_interval/3
+.. _interpolator/0::select_interval/3:
+
+``select_interval/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Selects the fitted interval containing an already validated argument.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``select_interval(Argument,Intervals,Interval)``
+| **Mode and number of proofs:**
+|    ``select_interval(+number,+list(compound),-compound)`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

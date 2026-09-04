@@ -1,0 +1,162 @@
+.. index:: single: ode_solver_protocol
+.. _ode_solver_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``ode_solver_protocol``
+=======================
+
+Protocol for non-stiff initial-value ODE solvers.
+
+| **Availability:** 
+|    ``logtalk_load(numerical_analysis(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-04
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: solve/4
+.. _ode_solver_protocol/0::solve/4:
+
+``solve/4``
+^^^^^^^^^^^
+
+Solves an initial-value problem using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``solve(InitialTime,InitialState,FinalTime,Trajectory)``
+| **Mode and number of proofs:**
+|    ``solve(+number,+list(number),+number,-list(pair))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An input argument is a variable:
+|        ``instantiation_error``
+|    A time is not a number:
+|        ``type_error(number,Time)``
+|    ``InitialState`` is not a non-empty numeric list:
+|        ``domain_error(ode_state,InitialState)``
+|    The system returns an invalid derivative:
+|        ``domain_error(ode_derivative,Derivative)``
+
+
+------------
+
+.. index:: solve/5
+.. _ode_solver_protocol/0::solve/5:
+
+``solve/5``
+^^^^^^^^^^^
+
+Solves an initial-value problem using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``solve(InitialTime,InitialState,FinalTime,Trajectory,Options)``
+| **Mode and number of proofs:**
+|    ``solve(+number,+list(number),+number,-list(pair),+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An input argument or ``Options`` is a variable:
+|        ``instantiation_error``
+|    A time is not a number:
+|        ``type_error(number,Time)``
+|    ``InitialState`` is not a non-empty numeric list:
+|        ``domain_error(ode_state,InitialState)``
+|    The system returns an invalid derivative:
+|        ``domain_error(ode_derivative,Derivative)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+
+
+------------
+
+.. index:: solve/6
+.. _ode_solver_protocol/0::solve/6:
+
+``solve/6``
+^^^^^^^^^^^
+
+Solves an initial-value problem and returns run statistics using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``solve(InitialTime,InitialState,FinalTime,Trajectory,Statistics,Options)``
+| **Mode and number of proofs:**
+|    ``solve(+number,+list(number),+number,-list(pair),-list(compound),+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An input argument or ``Options`` is a variable:
+|        ``instantiation_error``
+|    A time is not a number:
+|        ``type_error(number,Time)``
+|    ``InitialState`` is not a non-empty numeric list:
+|        ``domain_error(ode_state,InitialState)``
+|    The system returns an invalid derivative:
+|        ``domain_error(ode_derivative,Derivative)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

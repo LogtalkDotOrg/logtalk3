@@ -113,6 +113,10 @@ Mahalanobis distance predicates.
 * ADDED: New `linear_programming` library providing immutable construction
 and solving of small linear programs.
 
+* ADDED: New `numerical_analysis` library providing scalar root finding,
+finite-interval quadrature, interpolation and cubic splines, and non-stiff
+initial-value ODE solvers.
+
 * ADDED: New `local_optimization` library providing common box constraints
 solvers.
 

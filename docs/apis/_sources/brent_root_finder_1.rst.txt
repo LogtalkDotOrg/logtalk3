@@ -1,0 +1,63 @@
+.. index:: single: brent_root_finder(Function)
+.. _brent_root_finder/1:
+
+.. rst-class:: right
+
+**object**
+
+``brent_root_finder(Function)``
+===============================
+
+* ``Function`` - Object implementing ``univariate_function_protocol``.
+
+
+Brent-Dekker derivative-free root finder combining interpolation with bisection safeguards.
+
+| **Availability:** 
+|    ``logtalk_load(numerical_analysis(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-04
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Imports:**
+|    ``public`` :ref:`root_finder(Function) <root_finder/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`root_finder_protocol/0::find_root/2`  :ref:`root_finder_protocol/0::find_root/3`  :ref:`root_finder_protocol/0::find_root/4`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`root_finder_protocol <root_finder_protocol/0>`, :ref:`bisection_root_finder(Function) <bisection_root_finder/1>`, :ref:`secant_root_finder(Function) <secant_root_finder/1>`
+
