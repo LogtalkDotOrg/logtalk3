@@ -689,6 +689,15 @@
 <div class="line"><code class="docutils literal notranslate"><span class="pre">validate_numeric_vector(+list,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
 </div>
 </div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Vector</span></code> is not a numeric vector:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(Domain,Vector)</span></code></div>
+</div>
+</div>
+</div>
 <hr class="docutils" />
 </section>
 <section id="validate-constraint-data-4">
@@ -708,6 +717,19 @@
 <div class="line"><strong>Mode and number of proofs:</strong></div>
 <div class="line-block">
 <div class="line"><code class="docutils literal notranslate"><span class="pre">validate_constraint_data(+list(number),+list,+list,+atom)</span></code> - <code class="docutils literal notranslate"><span class="pre">one_or_error</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Exceptions:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Values</span></code> is not a numeric vector:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(Domain,Values)</span></code></div>
+</div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">Jacobian</span></code> does not have one numeric row per constraint and one column per point component:</div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">domain_error(Domain,Jacobian)</span></code></div>
+</div>
 </div>
 </div>
 </section>

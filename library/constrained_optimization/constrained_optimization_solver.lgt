@@ -148,7 +148,10 @@
 	:- mode(validate_numeric_vector(+list, +atom), one_or_error).
 	:- info(validate_numeric_vector/2, [
 		comment is 'Checks that a vector is a list of numbers.',
-		argnames is ['Vector', 'Domain']
+		argnames is ['Vector', 'Domain'],
+		exceptions is [
+			'``Vector`` is not a numeric vector' - domain_error('Domain', 'Vector')
+		]
 	]).
 
 	validate_numeric_vector(Vector, Domain) :-
@@ -166,7 +169,11 @@
 	:- mode(validate_constraint_data(+list(number), +list, +list, +atom), one_or_error).
 	:- info(validate_constraint_data/4, [
 		comment is 'Checks that constraint values are numeric and that the Jacobian has one numeric row per constraint and one column per point component.',
-		argnames is ['Point', 'Values', 'Jacobian', 'Domain']
+		argnames is ['Point', 'Values', 'Jacobian', 'Domain'],
+		exceptions is [
+			'``Values`` is not a numeric vector' - domain_error('Domain', 'Values'),
+			'``Jacobian`` does not have one numeric row per constraint and one column per point component' - domain_error('Domain', 'Jacobian')
+		]
 	]).
 
 	validate_constraint_data(Point, Values, Jacobian, Domain) :-

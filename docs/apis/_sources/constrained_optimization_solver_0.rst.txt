@@ -210,6 +210,10 @@ Checks that a vector is a list of numbers.
 | **Mode and number of proofs:**
 |    ``validate_numeric_vector(+list,+atom)`` - ``one_or_error``
 
+| **Exceptions:**
+|    ``Vector`` is not a numeric vector:
+|        ``domain_error(Domain,Vector)``
+
 
 ------------
 
@@ -228,6 +232,12 @@ Checks that constraint values are numeric and that the Jacobian has one numeric 
 |    ``validate_constraint_data(Point,Values,Jacobian,Domain)``
 | **Mode and number of proofs:**
 |    ``validate_constraint_data(+list(number),+list,+list,+atom)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Values`` is not a numeric vector:
+|        ``domain_error(Domain,Values)``
+|    ``Jacobian`` does not have one numeric row per constraint and one column per point component:
+|        ``domain_error(Domain,Jacobian)``
 
 
 ------------
