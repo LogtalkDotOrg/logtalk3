@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-389.5 1334,-389.5 1334,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object cbc</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;09&#45;05, 22:28</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;09&#45;05, 23:56</text>
 <g id="clust1" class="cluster">
 <title>cluster_cbc_object</title>
 <g id="a_clust1"><a xlink:title="cbc">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 1310,-54.25 1310,-54.25 1316,-54.25 1322,-60.25 1322,-66.25 1322,-66.25 1322,-365.5 1322,-365.5 1322,-371.5 1316,-377.5 1310,-377.5 1310,-377.5 20,-377.5 20,-377.5 14,-377.5 8,-371.5 8,-365.5 8,-365.5 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L21" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L21">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L21" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L21">
 <text xml:space="preserve" text-anchor="start" x="20" y="-359.75" font-family="Monospace" font-size="10.00" fill="dimgray">cbc</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>encrypt/5</title>
 <polygon fill="springgreen" stroke="black" points="412.62,-338.75 325.38,-338.75 325.38,-302.75 412.62,-302.75 412.62,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="333.38" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L31">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L31" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L31">
 <text xml:space="preserve" text-anchor="start" x="338.62" y="-322.62" font-family="Monospace" font-size="11.00">encrypt/5</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>encrypt_blocks/5</title>
 <polygon fill="cornsilk" stroke="black" points="458.25,-219.5 323.75,-219.5 323.75,-183.5 458.25,-183.5 458.25,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="331.75" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L142">
+<g id="a_node5_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L142" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L142">
 <text xml:space="preserve" text-anchor="start" x="337" y="-203.38" font-family="Monospace" font-size="11.00">encrypt_blocks/5</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- encrypt/5&#45;&gt;encrypt_blocks/5 -->
 <g id="edge1" class="edge">
 <title>encrypt/5&#45;&gt;encrypt_blocks/5</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L105" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L105" xlink:title="calls">
 <path fill="none" stroke="black" d="M349.21,-302.5C337.19,-289.83 325.45,-272.02 332.75,-255.5 337.52,-244.71 345.69,-235.18 354.42,-227.28"/>
 <polygon fill="black" stroke="black" points="356.63,-229.99 362.08,-220.9 352.15,-224.61 356.63,-229.99"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L105">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L105">
 <text xml:space="preserve" text-anchor="start" x="332.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -79,12 +79,12 @@
 <!-- encrypt/5&#45;&gt;^^prepare_cipher/4 -->
 <g id="edge5" class="edge">
 <title>encrypt/5&#45;&gt;^^prepare_cipher/4</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L105" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L105" xlink:title="calls">
 <path fill="none" stroke="black" d="M412.8,-310.53C427.43,-307.7 443.87,-304.79 459,-302.75 555.78,-289.67 808.58,-308.23 897,-266.75 914.81,-258.39 930.35,-242.71 941.53,-228.93"/>
 <polygon fill="black" stroke="black" points="944.3,-231.07 947.63,-221.01 938.76,-226.8 944.3,-231.07"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L105">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L105">
 <text xml:space="preserve" text-anchor="start" x="913.59" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -103,12 +103,12 @@
 <!-- encrypt/5&#45;&gt;^^check_block/2 -->
 <g id="edge6" class="edge">
 <title>encrypt/5&#45;&gt;^^check_block/2</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L105" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L105" xlink:title="calls">
 <path fill="none" stroke="black" d="M325.12,-316.13C264.47,-310.11 159.86,-295.73 136.75,-266.75 121.49,-247.62 140.85,-232.76 166.95,-222.17"/>
 <polygon fill="black" stroke="black" points="168.08,-225.49 176.22,-218.71 165.63,-218.93 168.08,-225.49"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L105">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L105">
 <text xml:space="preserve" text-anchor="start" x="136.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -127,12 +127,12 @@
 <!-- encrypt/5&#45;&gt;^^check_bytes/1 -->
 <g id="edge7" class="edge">
 <title>encrypt/5&#45;&gt;^^check_bytes/1</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L105" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L105" xlink:title="calls">
 <path fill="none" stroke="black" d="M412.89,-311.13C427.53,-308.34 443.95,-305.31 459,-302.75 564.03,-284.86 595.69,-302.65 696,-266.75 710.75,-261.47 742.96,-241.89 768.38,-225.71"/>
 <polygon fill="black" stroke="black" points="769.93,-228.87 776.46,-220.53 766.16,-222.98 769.93,-228.87"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L105">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L105">
 <text xml:space="preserve" text-anchor="start" x="717.33" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -151,12 +151,12 @@
 <!-- encrypt/5&#45;&gt;^^check_aligned/2 -->
 <g id="edge8" class="edge">
 <title>encrypt/5&#45;&gt;^^check_aligned/2</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L105" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L105" xlink:title="calls">
 <path fill="none" stroke="black" d="M325.13,-319.44C243.91,-317.84 75.05,-309.34 38.75,-266.75 27.87,-253.99 37.81,-239.28 51.64,-227.17"/>
 <polygon fill="black" stroke="black" points="53.79,-229.92 59.41,-220.94 49.42,-224.46 53.79,-229.92"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L105">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L105">
 <text xml:space="preserve" text-anchor="start" x="38.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -175,12 +175,12 @@
 <!-- encrypt/5&#45;&gt;^^blocks/3 -->
 <g id="edge9" class="edge">
 <title>encrypt/5&#45;&gt;^^blocks/3</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L105" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L105" xlink:title="calls">
 <path fill="none" stroke="black" d="M389.41,-302.43C405.12,-289.27 427.51,-270.86 447.75,-255.5 460.63,-245.73 475.09,-235.4 487.86,-226.48"/>
 <polygon fill="black" stroke="black" points="489.79,-229.41 496.01,-220.83 485.8,-223.66 489.79,-229.41"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L105">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L105">
 <text xml:space="preserve" text-anchor="start" x="447.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -190,7 +190,7 @@
 <title>decrypt/5</title>
 <polygon fill="springgreen" stroke="black" points="555.62,-338.75 468.38,-338.75 468.38,-302.75 555.62,-302.75 555.62,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="476.38" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L48">
+<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L48" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L48">
 <text xml:space="preserve" text-anchor="start" x="481.62" y="-322.62" font-family="Monospace" font-size="11.00">decrypt/5</text>
 </a>
 </g>
@@ -204,7 +204,7 @@
 <title>decrypt_blocks/5</title>
 <polygon fill="cornsilk" stroke="black" points="722.25,-219.5 587.75,-219.5 587.75,-183.5 722.25,-183.5 722.25,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="595.75" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L149" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L149">
+<g id="a_node6_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L149" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L149">
 <text xml:space="preserve" text-anchor="start" x="601" y="-203.38" font-family="Monospace" font-size="11.00">decrypt_blocks/5</text>
 </a>
 </g>
@@ -216,12 +216,12 @@
 <!-- decrypt/5&#45;&gt;decrypt_blocks/5 -->
 <g id="edge2" class="edge">
 <title>decrypt/5&#45;&gt;decrypt_blocks/5</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L113" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L113" xlink:title="calls">
 <path fill="none" stroke="black" d="M549.47,-302.29C567.04,-293.11 587.66,-280.83 604,-266.75 616.6,-255.89 628.32,-241.57 637.33,-229.21"/>
 <polygon fill="black" stroke="black" points="640.18,-231.24 643.08,-221.05 634.46,-227.21 640.18,-231.24"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L113">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L113">
 <text xml:space="preserve" text-anchor="start" x="615.3" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -229,12 +229,12 @@
 <!-- decrypt/5&#45;&gt;^^prepare_cipher/4 -->
 <g id="edge10" class="edge">
 <title>decrypt/5&#45;&gt;^^prepare_cipher/4</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L113" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L113" xlink:title="calls">
 <path fill="none" stroke="black" d="M555.68,-310.42C569.49,-307.68 584.84,-304.86 599,-302.75 675.9,-291.28 889.44,-319.01 947,-266.75 956.71,-257.94 960.31,-244.05 961.34,-231.43"/>
 <polygon fill="black" stroke="black" points="964.84,-231.54 961.61,-221.45 957.84,-231.35 964.84,-231.54"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L113">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L113">
 <text xml:space="preserve" text-anchor="start" x="955.2" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -242,12 +242,12 @@
 <!-- decrypt/5&#45;&gt;^^check_block/2 -->
 <g id="edge11" class="edge">
 <title>decrypt/5&#45;&gt;^^check_block/2</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L113" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L113" xlink:title="calls">
 <path fill="none" stroke="black" d="M468.11,-311.14C453.47,-308.35 437.05,-305.32 422,-302.75 369.65,-293.82 220.36,-307.03 185.75,-266.75 174.17,-253.28 185.76,-238.34 201.35,-226.26"/>
 <polygon fill="black" stroke="black" points="202.97,-229.41 209.08,-220.75 198.9,-223.71 202.97,-229.41"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L113">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L113">
 <text xml:space="preserve" text-anchor="start" x="185.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -255,12 +255,12 @@
 <!-- decrypt/5&#45;&gt;^^check_bytes/1 -->
 <g id="edge12" class="edge">
 <title>decrypt/5&#45;&gt;^^check_bytes/1</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L113" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L113" xlink:title="calls">
 <path fill="none" stroke="black" d="M556.1,-310.74C622.84,-297 742.66,-271.86 751,-266.75 766.18,-257.45 779.02,-242.24 788.25,-228.95"/>
 <polygon fill="black" stroke="black" points="790.92,-231.26 793.49,-220.98 785.07,-227.41 790.92,-231.26"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L113">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L113">
 <text xml:space="preserve" text-anchor="start" x="765.33" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -268,12 +268,12 @@
 <!-- decrypt/5&#45;&gt;^^check_aligned/2 -->
 <g id="edge13" class="edge">
 <title>decrypt/5&#45;&gt;^^check_aligned/2</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L113" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L113" xlink:title="calls">
 <path fill="none" stroke="black" d="M468.17,-310.79C453.53,-307.98 437.1,-305.02 422,-302.75 351.18,-292.1 154.47,-315.22 101.75,-266.75 92.11,-257.88 88.56,-243.99 87.58,-231.39"/>
 <polygon fill="black" stroke="black" points="91.08,-231.33 87.34,-221.42 84.08,-231.5 91.08,-231.33"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L113">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L113">
 <text xml:space="preserve" text-anchor="start" x="101.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -281,12 +281,12 @@
 <!-- decrypt/5&#45;&gt;^^blocks/3 -->
 <g id="edge14" class="edge">
 <title>decrypt/5&#45;&gt;^^blocks/3</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L113" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L113" xlink:title="calls">
 <path fill="none" stroke="black" d="M494.52,-302.27C484.08,-289.63 473.89,-271.96 479.75,-255.5 483.28,-245.58 489.55,-236.18 496.24,-228.12"/>
 <polygon fill="black" stroke="black" points="498.77,-230.55 502.84,-220.77 493.56,-225.88 498.77,-230.55"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L113">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L113" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L113">
 <text xml:space="preserve" text-anchor="start" x="479.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -296,7 +296,7 @@
 <title>encrypt_padded/5</title>
 <polygon fill="springgreen" stroke="black" points="1036.25,-338.75 901.75,-338.75 901.75,-302.75 1036.25,-302.75 1036.25,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="909.75" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L65">
+<g id="a_node3_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L65">
 <text xml:space="preserve" text-anchor="start" x="915" y="-322.62" font-family="Monospace" font-size="11.00">encrypt_padded/5</text>
 </a>
 </g>
@@ -308,12 +308,12 @@
 <!-- encrypt_padded/5&#45;&gt;encrypt_blocks/5 -->
 <g id="edge3" class="edge">
 <title>encrypt_padded/5&#45;&gt;encrypt_blocks/5</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L121" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L121" xlink:title="calls">
 <path fill="none" stroke="black" d="M901.53,-314.03C805.03,-305.28 632.72,-287.4 573.75,-266.75 564.58,-263.54 563.85,-259.52 555,-255.5 527.22,-242.88 495.56,-231.9 467.5,-223.27"/>
 <polygon fill="black" stroke="black" points="468.58,-219.93 457.99,-220.39 466.55,-226.63 468.58,-219.93"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L121">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L121">
 <text xml:space="preserve" text-anchor="start" x="573.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -321,12 +321,12 @@
 <!-- encrypt_padded/5&#45;&gt;^^prepare_cipher/4 -->
 <g id="edge15" class="edge">
 <title>encrypt_padded/5&#45;&gt;^^prepare_cipher/4</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L121" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L121" xlink:title="calls">
 <path fill="none" stroke="black" d="M1036.54,-316.85C1097.77,-311.58 1174.05,-296.82 1143,-255.5 1136.57,-246.95 1089.93,-233.51 1045.35,-222.31"/>
 <polygon fill="black" stroke="black" points="1046.4,-218.96 1035.86,-219.95 1044.72,-225.76 1046.4,-218.96"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L121">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L121">
 <text xml:space="preserve" text-anchor="start" x="1149.07" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -334,12 +334,12 @@
 <!-- encrypt_padded/5&#45;&gt;^^check_block/2 -->
 <g id="edge16" class="edge">
 <title>encrypt_padded/5&#45;&gt;^^check_block/2</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L121" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L121" xlink:title="calls">
 <path fill="none" stroke="black" d="M901.47,-314.48C762.18,-303.46 452,-278.05 404.75,-266.75 364.01,-257 319.93,-239.11 287.93,-224.68"/>
 <polygon fill="black" stroke="black" points="289.49,-221.54 278.95,-220.56 286.58,-227.91 289.49,-221.54"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L121">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L121">
 <text xml:space="preserve" text-anchor="start" x="404.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -347,12 +347,12 @@
 <!-- encrypt_padded/5&#45;&gt;^^check_bytes/1 -->
 <g id="edge17" class="edge">
 <title>encrypt_padded/5&#45;&gt;^^check_bytes/1</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L121" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L121" xlink:title="calls">
 <path fill="none" stroke="black" d="M1013.98,-302.28C1037.89,-290.39 1059.61,-273.57 1045,-255.5 999.15,-198.78 955.61,-232.76 879.1,-219.67"/>
 <polygon fill="black" stroke="black" points="880.05,-216.29 869.56,-217.78 878.7,-223.15 880.05,-216.29"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L121">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L121">
 <text xml:space="preserve" text-anchor="start" x="1049.63" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -360,12 +360,12 @@
 <!-- encrypt_padded/5&#45;&gt;^^blocks/3 -->
 <g id="edge19" class="edge">
 <title>encrypt_padded/5&#45;&gt;^^blocks/3</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L121" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L121" xlink:title="calls">
 <path fill="none" stroke="black" d="M939.71,-302.3C913.46,-287.48 873.42,-266.85 836,-255.5 729.08,-223.06 693.83,-242.99 581.35,-219.78"/>
 <polygon fill="black" stroke="black" points="582.21,-216.39 571.7,-217.72 580.75,-223.23 582.21,-216.39"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L121">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L121">
 <text xml:space="preserve" text-anchor="start" x="866.4" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -384,12 +384,12 @@
 <!-- encrypt_padded/5&#45;&gt;^^pkcs7_pad/3 -->
 <g id="edge18" class="edge">
 <title>encrypt_padded/5&#45;&gt;^^pkcs7_pad/3</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L121" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L121" xlink:title="calls">
 <path fill="none" stroke="black" d="M1036.56,-310.71C1079.16,-303.11 1134.35,-289.69 1179,-266.75 1198.35,-256.81 1217.04,-241.11 1231.05,-227.72"/>
 <polygon fill="black" stroke="black" points="1233.39,-230.33 1238.05,-220.82 1228.47,-225.35 1233.39,-230.33"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L121">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L121" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L121">
 <text xml:space="preserve" text-anchor="start" x="1195.27" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -399,7 +399,7 @@
 <title>decrypt_padded/5</title>
 <polygon fill="springgreen" stroke="black" points="742.25,-338.75 607.75,-338.75 607.75,-302.75 742.25,-302.75 742.25,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="615.75" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L82" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L82">
+<g id="a_node4_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L82" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L82">
 <text xml:space="preserve" text-anchor="start" x="621" y="-322.62" font-family="Monospace" font-size="11.00">decrypt_padded/5</text>
 </a>
 </g>
@@ -411,12 +411,12 @@
 <!-- decrypt_padded/5&#45;&gt;decrypt_blocks/5 -->
 <g id="edge4" class="edge">
 <title>decrypt_padded/5&#45;&gt;decrypt_blocks/5</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L129" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L129" xlink:title="calls">
 <path fill="none" stroke="black" d="M672.05,-302.45C668.84,-283.66 663.67,-253.34 659.86,-231.02"/>
 <polygon fill="black" stroke="black" points="663.35,-230.63 658.22,-221.36 656.45,-231.81 663.35,-230.63"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L129">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L129">
 <text xml:space="preserve" text-anchor="start" x="665.6" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -424,12 +424,12 @@
 <!-- decrypt_padded/5&#45;&gt;^^prepare_cipher/4 -->
 <g id="edge20" class="edge">
 <title>decrypt_padded/5&#45;&gt;^^prepare_cipher/4</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L129" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L129" xlink:title="calls">
 <path fill="none" stroke="black" d="M742.46,-313.25C831.74,-303.95 979.78,-285.86 996,-266.75 1005.88,-255.11 998.7,-240.34 988.24,-227.9"/>
 <polygon fill="black" stroke="black" points="991.04,-225.78 981.67,-220.84 985.91,-230.54 991.04,-225.78"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L129">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L129">
 <text xml:space="preserve" text-anchor="start" x="1000.66" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -437,12 +437,12 @@
 <!-- decrypt_padded/5&#45;&gt;^^check_block/2 -->
 <g id="edge21" class="edge">
 <title>decrypt_padded/5&#45;&gt;^^check_block/2</title>
-<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L129" xlink:title="calls">
+<g id="a_edge21"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L129" xlink:title="calls">
 <path fill="none" stroke="black" d="M607.26,-309.08C593.29,-306.94 578.67,-304.73 565,-302.75 447.26,-285.66 404.9,-322.4 299.75,-266.75 283.32,-258.06 269.27,-242.72 259.14,-229.22"/>
 <polygon fill="black" stroke="black" points="261.99,-227.19 253.35,-221.06 256.28,-231.24 261.99,-227.19"/>
 </a>
 </g>
-<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L129">
+<g id="a_edge21&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L129">
 <text xml:space="preserve" text-anchor="start" x="299.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -450,12 +450,12 @@
 <!-- decrypt_padded/5&#45;&gt;^^check_bytes/1 -->
 <g id="edge22" class="edge">
 <title>decrypt_padded/5&#45;&gt;^^check_bytes/1</title>
-<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L129" xlink:title="calls">
+<g id="a_edge22"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L129" xlink:title="calls">
 <path fill="none" stroke="black" d="M742.51,-306.13C764.33,-298.29 786.38,-285.99 800,-266.75 807.17,-256.62 808.87,-243.2 808.5,-231.24"/>
 <polygon fill="black" stroke="black" points="812.01,-231.13 807.69,-221.46 805.03,-231.71 812.01,-231.13"/>
 </a>
 </g>
-<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L129">
+<g id="a_edge22&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L129">
 <text xml:space="preserve" text-anchor="start" x="805.35" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -463,12 +463,12 @@
 <!-- decrypt_padded/5&#45;&gt;^^check_aligned/2 -->
 <g id="edge23" class="edge">
 <title>decrypt_padded/5&#45;&gt;^^check_aligned/2</title>
-<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L129" xlink:title="calls">
+<g id="a_edge23"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L129" xlink:title="calls">
 <path fill="none" stroke="black" d="M607.28,-308.87C593.32,-306.74 578.69,-304.6 565,-302.75 427,-284.11 388.9,-300.32 253.75,-266.75 212.93,-256.61 168.61,-238.92 136.23,-224.67"/>
 <polygon fill="black" stroke="black" points="137.67,-221.48 127.11,-220.6 134.82,-227.87 137.67,-221.48"/>
 </a>
 </g>
-<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L129">
+<g id="a_edge23&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L129">
 <text xml:space="preserve" text-anchor="start" x="253.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -476,12 +476,12 @@
 <!-- decrypt_padded/5&#45;&gt;^^blocks/3 -->
 <g id="edge24" class="edge">
 <title>decrypt_padded/5&#45;&gt;^^blocks/3</title>
-<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L129" xlink:title="calls">
+<g id="a_edge24"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L129" xlink:title="calls">
 <path fill="none" stroke="black" d="M607.26,-311.44C578.59,-304.32 547.53,-291.14 528.75,-266.75 521.11,-256.83 519.05,-243.33 519.15,-231.26"/>
 <polygon fill="black" stroke="black" points="522.63,-231.57 519.75,-221.37 515.65,-231.14 522.63,-231.57"/>
 </a>
 </g>
-<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L129">
+<g id="a_edge24&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L129">
 <text xml:space="preserve" text-anchor="start" x="528.75" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -500,12 +500,12 @@
 <!-- decrypt_padded/5&#45;&gt;^^pkcs7_unpad/4 -->
 <g id="edge25" class="edge">
 <title>decrypt_padded/5&#45;&gt;^^pkcs7_unpad/4</title>
-<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L129" xlink:title="calls">
+<g id="a_edge25"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L129" xlink:title="calls">
 <path fill="none" stroke="black" d="M742.72,-314.21C850.73,-304.89 1052.66,-285.26 1080,-266.75 1092.74,-258.13 1101.46,-243.42 1107.12,-230.25"/>
 <polygon fill="black" stroke="black" points="1110.3,-231.72 1110.63,-221.13 1103.77,-229.2 1110.3,-231.72"/>
 </a>
 </g>
-<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L129">
+<g id="a_edge25&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L129" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L129">
 <text xml:space="preserve" text-anchor="start" x="1091.65" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -527,12 +527,12 @@
 <!-- encrypt_blocks/5&#45;&gt;list::append/3 -->
 <g id="edge28" class="edge">
 <title>encrypt_blocks/5&#45;&gt;list::append/3</title>
-<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L143" xlink:title="calls">
+<g id="a_edge28"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L143" xlink:title="calls">
 <path fill="none" stroke="black" d="M396.31,-183.2C402.11,-164.32 411.48,-133.81 418.34,-111.46"/>
 <polygon fill="black" stroke="black" points="421.63,-112.66 421.22,-102.07 414.94,-110.6 421.63,-112.66"/>
 </a>
 </g>
-<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L143">
+<g id="a_edge28&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L143">
 <text xml:space="preserve" text-anchor="start" x="410.08" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -551,12 +551,12 @@
 <!-- encrypt_blocks/5&#45;&gt;^^xor_bytes/3 -->
 <g id="edge26" class="edge">
 <title>encrypt_blocks/5&#45;&gt;^^xor_bytes/3</title>
-<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L143" xlink:title="calls">
+<g id="a_edge26"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L143" xlink:title="calls">
 <path fill="none" stroke="black" d="M424.64,-183.2C464.55,-162.68 531.19,-128.41 575.12,-105.82"/>
 <polygon fill="black" stroke="black" points="576.58,-109 583.87,-101.31 573.38,-102.77 576.58,-109"/>
 </a>
 </g>
-<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L143">
+<g id="a_edge26&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L143" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L143">
 <text xml:space="preserve" text-anchor="start" x="511.84" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -564,12 +564,12 @@
 <!-- decrypt_blocks/5&#45;&gt;list::append/3 -->
 <g id="edge29" class="edge">
 <title>decrypt_blocks/5&#45;&gt;list::append/3</title>
-<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L150" xlink:title="calls">
+<g id="a_edge29"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L150" xlink:title="calls">
 <path fill="none" stroke="black" d="M626.11,-183.17C603.49,-169.83 571.11,-151.2 542,-136.25 521.1,-125.52 497.61,-114.51 477.33,-105.33"/>
 <polygon fill="black" stroke="black" points="478.99,-102.23 468.43,-101.32 476.12,-108.62 478.99,-102.23"/>
 </a>
 </g>
-<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L150" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L150">
+<g id="a_edge29&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L150" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L150">
 <text xml:space="preserve" text-anchor="start" x="560.82" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -577,12 +577,12 @@
 <!-- decrypt_blocks/5&#45;&gt;^^xor_bytes/3 -->
 <g id="edge27" class="edge">
 <title>decrypt_blocks/5&#45;&gt;^^xor_bytes/3</title>
-<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L150" xlink:title="calls">
+<g id="a_edge27"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L150" xlink:title="calls">
 <path fill="none" stroke="black" d="M649.69,-183.2C643.89,-164.32 634.52,-133.81 627.66,-111.46"/>
 <polygon fill="black" stroke="black" points="631.06,-110.6 624.78,-102.07 624.37,-112.66 631.06,-110.6"/>
 </a>
 </g>
-<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L150" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/block_ciphers/cbc.lgt#L150">
+<g id="a_edge27&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L150" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5c7ed507250e9e0141af09b69baee02bb1aabf14/library/block_ciphers/cbc.lgt#L150">
 <text xml:space="preserve" text-anchor="start" x="638.08" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
