@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-389.5 1249,-389.5 1249,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object euler_ode_solver/1</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;09&#45;05, 11:02</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;09&#45;05, 18:50</text>
 <g id="clust1" class="cluster">
 <title>cluster_euler_ode_solver_1_object</title>
 <g id="a_clust1"><a xlink:title="euler_ode_solver(System)">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 1225,-54.25 1225,-54.25 1231,-54.25 1237,-60.25 1237,-66.25 1237,-66.25 1237,-365.5 1237,-365.5 1237,-371.5 1231,-377.5 1225,-377.5 1225,-377.5 20,-377.5 20,-377.5 14,-377.5 8,-371.5 8,-365.5 8,-365.5 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-359.75" font-family="Monospace" font-size="10.00" fill="dimgray">euler_ode_solver(System)</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>solve/6</title>
 <polygon fill="cornsilk" stroke="black" points="468.88,-338.75 395.12,-338.75 395.12,-302.75 468.88,-302.75 468.88,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="403.12" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L44">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L44">
 <text xml:space="preserve" text-anchor="start" x="408.38" y="-322.62" font-family="Monospace" font-size="11.00">solve/6</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>fixed_loop/15</title>
 <polygon fill="cornsilk" stroke="black" points="132.12,-219.5 17.87,-219.5 17.87,-183.5 132.12,-183.5 132.12,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="25.88" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L54">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L54" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L54">
 <text xml:space="preserve" text-anchor="start" x="31.12" y="-203.38" font-family="Monospace" font-size="11.00">fixed_loop/15</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- solve/6&#45;&gt;fixed_loop/15 -->
 <g id="edge1" class="edge">
 <title>solve/6&#45;&gt;fixed_loop/15</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L44" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L44" xlink:title="calls">
 <path fill="none" stroke="black" d="M394.81,-307.53C334.21,-287.63 213.47,-247.98 138.92,-223.49"/>
 <polygon fill="black" stroke="black" points="140.3,-220.26 129.71,-220.47 138.12,-226.91 140.3,-220.26"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L44">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L44">
 <text xml:space="preserve" text-anchor="start" x="264.2" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- solve/6&#45;&gt;list::reverse/2 -->
 <g id="edge10" class="edge">
 <title>solve/6&#45;&gt;list::reverse/2</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L44" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L44" xlink:title="calls">
 <path fill="none" stroke="black" d="M399.83,-302.45C361.76,-281.97 298.23,-247.8 256.22,-225.21"/>
 <polygon fill="black" stroke="black" points="258.1,-222.24 247.63,-220.59 254.78,-228.41 258.1,-222.24"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L44">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L44">
 <text xml:space="preserve" text-anchor="start" x="329.54" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -106,12 +106,12 @@
 <!-- solve/6&#45;&gt;^^check_options/1 -->
 <g id="edge3" class="edge">
 <title>solve/6&#45;&gt;^^check_options/1</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L44" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L44" xlink:title="calls">
 <path fill="none" stroke="black" d="M422.41,-302.45C411.8,-283.31 394.56,-252.22 382.13,-229.79"/>
 <polygon fill="black" stroke="black" points="385.27,-228.24 377.36,-221.2 379.15,-231.64 385.27,-228.24"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L44">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L44">
 <text xml:space="preserve" text-anchor="start" x="401.45" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -130,12 +130,12 @@
 <!-- solve/6&#45;&gt;^^merge_options/2 -->
 <g id="edge4" class="edge">
 <title>solve/6&#45;&gt;^^merge_options/2</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L44" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L44" xlink:title="calls">
 <path fill="none" stroke="black" d="M445.87,-302.45C461.49,-282.97 487.04,-251.09 505.09,-228.58"/>
 <polygon fill="black" stroke="black" points="507.6,-231.04 511.13,-221.05 502.14,-226.67 507.6,-231.04"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L44">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L44">
 <text xml:space="preserve" text-anchor="start" x="481.82" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -154,12 +154,12 @@
 <!-- solve/6&#45;&gt;^^option/2 -->
 <g id="edge5" class="edge">
 <title>solve/6&#45;&gt;^^option/2</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L44" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L44" xlink:title="calls">
 <path fill="none" stroke="black" d="M465.94,-302.45C506.2,-281.93 573.42,-247.66 617.73,-225.07"/>
 <polygon fill="black" stroke="black" points="619.26,-228.22 626.58,-220.56 616.08,-221.98 619.26,-228.22"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L44">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L44">
 <text xml:space="preserve" text-anchor="start" x="553.9" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -178,12 +178,12 @@
 <!-- solve/6&#45;&gt;^^check_initial_value/3 -->
 <g id="edge6" class="edge">
 <title>solve/6&#45;&gt;^^check_initial_value/3</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L44" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L44" xlink:title="calls">
 <path fill="none" stroke="black" d="M469.36,-308.4C534.03,-288.76 667.72,-248.15 749.47,-223.32"/>
 <polygon fill="black" stroke="black" points="750.4,-226.69 758.95,-220.44 748.36,-219.99 750.4,-226.69"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L44">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L44" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L44">
 <text xml:space="preserve" text-anchor="start" x="636.57" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -193,7 +193,7 @@
 <title>signed_step/5</title>
 <polygon fill="cornsilk" stroke="black" points="132.12,-100.25 17.87,-100.25 17.87,-64.25 132.12,-64.25 132.12,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="25.88" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L68">
+<g id="a_node3_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L68" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L68">
 <text xml:space="preserve" text-anchor="start" x="31.12" y="-84.12" font-family="Monospace" font-size="11.00">signed_step/5</text>
 </a>
 </g>
@@ -205,12 +205,12 @@
 <!-- fixed_loop/15&#45;&gt;signed_step/5 -->
 <g id="edge2" class="edge">
 <title>fixed_loop/15&#45;&gt;signed_step/5</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L60" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L60" xlink:title="calls">
 <path fill="none" stroke="black" d="M75,-183.2C75,-164.5 75,-134.37 75,-112.08"/>
 <polygon fill="black" stroke="black" points="78.5,-112.14 75,-102.14 71.5,-112.14 78.5,-112.14"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L60">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="75" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -232,12 +232,12 @@
 <!-- fixed_loop/15&#45;&gt;linear_algebra::add_scaled_vector/4 -->
 <g id="edge11" class="edge">
 <title>fixed_loop/15&#45;&gt;linear_algebra::add_scaled_vector/4</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L60" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L60" xlink:title="calls">
 <path fill="none" stroke="black" d="M105.54,-183.2C141.55,-162.81 201.51,-128.84 241.4,-106.25"/>
 <polygon fill="black" stroke="black" points="243.04,-109.34 250.01,-101.37 239.59,-103.25 243.04,-109.34"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L60">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="184.71" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -256,12 +256,12 @@
 <!-- fixed_loop/15&#45;&gt;^^evaluate_derivative/3 -->
 <g id="edge7" class="edge">
 <title>fixed_loop/15&#45;&gt;^^evaluate_derivative/3</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L60" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L60" xlink:title="calls">
 <path fill="none" stroke="black" d="M132.52,-185.41C212.01,-164.56 355.65,-126.88 444.52,-103.57"/>
 <polygon fill="black" stroke="black" points="445.36,-106.97 454.15,-101.05 443.59,-100.2 445.36,-106.97"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L60">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="311.9" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -271,7 +271,7 @@
 <title>default_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="1068.25,-338.75 933.75,-338.75 933.75,-302.75 1068.25,-302.75 1068.25,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="941.75" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L80">
+<g id="a_node4_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L80" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L80">
 <text xml:space="preserve" text-anchor="start" x="947" y="-322.62" font-family="Monospace" font-size="11.00">default_option/1</text>
 </a>
 </g>
@@ -294,12 +294,12 @@
 <!-- default_option/1&#45;&gt;^^default_option/1 -->
 <g id="edge8" class="edge">
 <title>default_option/1&#45;&gt;^^default_option/1</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L82" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L82" xlink:title="calls">
 <path fill="none" stroke="black" d="M1001,-302.45C1001,-283.75 1001,-253.62 1001,-231.33"/>
 <polygon fill="black" stroke="black" points="1004.5,-231.39 1001,-221.39 997.5,-231.39 1004.5,-231.39"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L82" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L82">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L82" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L82">
 <text xml:space="preserve" text-anchor="start" x="1001" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -309,7 +309,7 @@
 <title>valid_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="1220.5,-338.75 1099.5,-338.75 1099.5,-302.75 1220.5,-302.75 1220.5,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="1107.5" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L85">
+<g id="a_node5_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L85" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L85">
 <text xml:space="preserve" text-anchor="start" x="1112.75" y="-322.62" font-family="Monospace" font-size="11.00">valid_option/1</text>
 </a>
 </g>
@@ -332,12 +332,12 @@
 <!-- valid_option/1&#45;&gt;^^valid_option/1 -->
 <g id="edge9" class="edge">
 <title>valid_option/1&#45;&gt;^^valid_option/1</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L89" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L89" xlink:title="calls">
 <path fill="none" stroke="black" d="M1160,-302.45C1160,-283.75 1160,-253.62 1160,-231.33"/>
 <polygon fill="black" stroke="black" points="1163.5,-231.39 1160,-221.39 1156.5,-231.39 1163.5,-231.39"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/numerical_analysis/euler_ode_solver.lgt#L89">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L89" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/euler_ode_solver.lgt#L89">
 <text xml:space="preserve" text-anchor="start" x="1160" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>

@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-389.5 476,-389.5 476,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object stop_words/2</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;09&#45;05, 11:02</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;09&#45;05, 18:50</text>
 <g id="clust1" class="cluster">
 <title>cluster_stop_words_2_object</title>
 <g id="a_clust1"><a xlink:title="stop_words(Representation,Language)">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 452,-54.25 452,-54.25 458,-54.25 464,-60.25 464,-66.25 464,-66.25 464,-365.5 464,-365.5 464,-371.5 458,-377.5 452,-377.5 452,-377.5 20,-377.5 20,-377.5 14,-377.5 8,-371.5 8,-365.5 8,-365.5 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/stop_words/stop_words.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/stop_words/stop_words.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/stop_words/stop_words.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/stop_words/stop_words.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-359.75" font-family="Monospace" font-size="10.00" fill="dimgray">stop_words(Representation,Language)</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>stop_word/1</title>
 <polygon fill="cornsilk" stroke="black" points="173.38,-338.75 72.62,-338.75 72.62,-302.75 173.38,-302.75 173.38,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="80.62" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/stop_words/stop_words.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/stop_words/stop_words.lgt#L37">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/stop_words/stop_words.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/stop_words/stop_words.lgt#L37">
 <text xml:space="preserve" text-anchor="start" x="85.88" y="-322.62" font-family="Monospace" font-size="11.00">stop_word/1</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>atom_to_word/3</title>
 <polygon fill="cornsilk" stroke="black" points="183.5,-219.5 62.5,-219.5 62.5,-183.5 183.5,-183.5 183.5,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="70.5" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/stop_words/stop_words.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/stop_words/stop_words.lgt#L58">
+<g id="a_node4_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/stop_words/stop_words.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/stop_words/stop_words.lgt#L58">
 <text xml:space="preserve" text-anchor="start" x="75.75" y="-203.38" font-family="Monospace" font-size="11.00">atom_to_word/3</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- stop_word/1&#45;&gt;atom_to_word/3 -->
 <g id="edge1" class="edge">
 <title>stop_word/1&#45;&gt;atom_to_word/3</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/stop_words/stop_words.lgt#L37" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/stop_words/stop_words.lgt#L37" xlink:title="calls">
 <path fill="none" stroke="black" d="M123,-302.45C123,-283.75 123,-253.62 123,-231.33"/>
 <polygon fill="black" stroke="black" points="126.5,-231.39 123,-221.39 119.5,-231.39 126.5,-231.39"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/stop_words/stop_words.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/stop_words/stop_words.lgt#L37">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/stop_words/stop_words.lgt#L37" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/stop_words/stop_words.lgt#L37">
 <text xml:space="preserve" text-anchor="start" x="123" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>is_stop_word/1</title>
 <polygon fill="cornsilk" stroke="black" points="344.5,-219.5 223.5,-219.5 223.5,-183.5 344.5,-183.5 344.5,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="231.5" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/stop_words/stop_words.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/stop_words/stop_words.lgt#L45">
+<g id="a_node2_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/stop_words/stop_words.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/stop_words/stop_words.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="236.75" y="-203.38" font-family="Monospace" font-size="11.00">is_stop_word/1</text>
 </a>
 </g>
@@ -84,7 +84,7 @@
 <title>word_to_atom/3</title>
 <polygon fill="cornsilk" stroke="black" points="139.5,-100.25 18.5,-100.25 18.5,-64.25 139.5,-64.25 139.5,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="26.5" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/stop_words/stop_words.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/stop_words/stop_words.lgt#L64">
+<g id="a_node5_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/stop_words/stop_words.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/stop_words/stop_words.lgt#L64">
 <text xml:space="preserve" text-anchor="start" x="31.75" y="-84.12" font-family="Monospace" font-size="11.00">word_to_atom/3</text>
 </a>
 </g>
@@ -96,12 +96,12 @@
 <!-- is_stop_word/1&#45;&gt;word_to_atom/3 -->
 <g id="edge2" class="edge">
 <title>is_stop_word/1&#45;&gt;word_to_atom/3</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/stop_words/stop_words.lgt#L45" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/stop_words/stop_words.lgt#L45" xlink:title="calls">
 <path fill="none" stroke="black" d="M253.75,-183.2C218.1,-162.81 158.71,-128.84 119.21,-106.25"/>
 <polygon fill="black" stroke="black" points="121.1,-103.3 110.69,-101.37 117.63,-109.38 121.1,-103.3"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/stop_words/stop_words.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/stop_words/stop_words.lgt#L45">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/stop_words/stop_words.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/stop_words/stop_words.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="187.65" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -123,12 +123,12 @@
 <!-- is_stop_word/1&#45;&gt;string(Representation)::string_lower/2 -->
 <g id="edge4" class="edge">
 <title>is_stop_word/1&#45;&gt;string(Representation)::string_lower/2</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/stop_words/stop_words.lgt#L45" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/stop_words/stop_words.lgt#L45" xlink:title="calls">
 <path fill="none" stroke="black" d="M287.25,-183.2C290.77,-164.41 296.46,-134.09 300.65,-111.77"/>
 <polygon fill="black" stroke="black" points="304.06,-112.58 302.46,-102.11 297.18,-111.29 304.06,-112.58"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/stop_words/stop_words.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/stop_words/stop_words.lgt#L45">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/stop_words/stop_words.lgt#L45" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/stop_words/stop_words.lgt#L45">
 <text xml:space="preserve" text-anchor="start" x="295.66" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -138,7 +138,7 @@
 <title>exclude/2</title>
 <polygon fill="cornsilk" stroke="black" points="327.62,-338.75 240.38,-338.75 240.38,-302.75 327.62,-302.75 327.62,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="248.38" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/stop_words/stop_words.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/stop_words/stop_words.lgt#L50">
+<g id="a_node3_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/stop_words/stop_words.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/stop_words/stop_words.lgt#L50">
 <text xml:space="preserve" text-anchor="start" x="253.62" y="-322.62" font-family="Monospace" font-size="11.00">exclude/2</text>
 </a>
 </g>
@@ -150,12 +150,12 @@
 <!-- exclude/2&#45;&gt;is_stop_word/1 -->
 <g id="edge3" class="edge">
 <title>exclude/2&#45;&gt;is_stop_word/1</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/stop_words/stop_words.lgt#L51" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/stop_words/stop_words.lgt#L51" xlink:title="calls">
 <path fill="none" stroke="black" d="M284,-302.45C284,-283.75 284,-253.62 284,-231.33"/>
 <polygon fill="black" stroke="black" points="287.5,-231.39 284,-221.39 280.5,-231.39 287.5,-231.39"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/stop_words/stop_words.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/9629aa23c6d3d3bad1620bb2f140b28bade8da4d/library/stop_words/stop_words.lgt#L51">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/stop_words/stop_words.lgt#L51" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/stop_words/stop_words.lgt#L51">
 <text xml:space="preserve" text-anchor="start" x="284" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
