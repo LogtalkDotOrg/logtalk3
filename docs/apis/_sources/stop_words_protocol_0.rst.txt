@@ -1,0 +1,116 @@
+.. index:: single: stop_words_protocol
+.. _stop_words_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``stop_words_protocol``
+=======================
+
+Stop-word enumeration and filtering protocol.
+
+| **Availability:** 
+|    ``logtalk_load(stop_words(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-05
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: stop_word/1
+.. _stop_words_protocol/0::stop_word/1:
+
+``stop_word/1``
+^^^^^^^^^^^^^^^
+
+Enumerates canonical stop words using the configured text representation.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``stop_word(Word)``
+| **Mode and number of proofs:**
+|    ``stop_word(?text)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: is_stop_word/1
+.. _stop_words_protocol/0::is_stop_word/1:
+
+``is_stop_word/1``
+^^^^^^^^^^^^^^^^^^
+
+True if the word, after ASCII lowercasing, is a stop word.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``is_stop_word(Word)``
+| **Mode and number of proofs:**
+|    ``is_stop_word(+text)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: exclude/2
+.. _stop_words_protocol/0::exclude/2:
+
+``exclude/2``
+^^^^^^^^^^^^^
+
+Removes stop words, preserving the representation, value, and order of the remaining words.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``exclude(Words,Filtered)``
+| **Mode and number of proofs:**
+|    ``exclude(+list(text),-list(text))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`stop_words_language_protocol <stop_words_language_protocol/0>`, :ref:`stop_words(Representation,Language) <stop_words/2>`
+

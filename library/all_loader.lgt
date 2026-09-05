@@ -30,6 +30,7 @@
 		linear_algebra(loader),
 		linear_programming(loader),
 		stemming(loader),
+		stop_words(loader),
 		subsequences(loader),
 		combinations(loader),
 		multisets(loader),

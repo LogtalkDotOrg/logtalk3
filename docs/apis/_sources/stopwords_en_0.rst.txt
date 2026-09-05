@@ -1,0 +1,67 @@
+.. index:: single: stopwords_en
+.. _stopwords_en/0:
+
+.. rst-class:: right
+
+**object**
+
+``stopwords_en``
+================
+
+Stop-word facts for the en language code.
+
+| **Availability:** 
+|    ``logtalk_load(stop_words(loader))``
+
+| **Author:** Gene Diaz
+| **Version:** 1:0:0
+| **Date:** 2026-09-05
+
+| **Copyright:** Copyright (c) 2016 Gene Diaz
+| **License:** MIT
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`stop_words_language_protocol <stop_words_language_protocol/0>`
+
+| **Remarks:**
+
+   - Source: https://github.com/stopwords-iso/stopwords-en
+   - Source commit: ccc8898188850d8fb019d5f69c14a6635c3bd115
+   - Source corrections: Removed four malformed non-ASCII reflexive-pronoun entries.
+   - Generated entries: 1294.
+
+| **Inherited public predicates:**
+|     :ref:`stop_words_language_protocol/0::stop_word/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`stop_words(Representation,Language) <stop_words/2>`
+

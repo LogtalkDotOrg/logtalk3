@@ -1,0 +1,78 @@
+.. index:: single: stop_words_language_protocol
+.. _stop_words_language_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``stop_words_language_protocol``
+================================
+
+Stop-word language provider protocol.
+
+| **Availability:** 
+|    ``logtalk_load(stop_words(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-05
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: stop_word/1
+.. _stop_words_language_protocol/0::stop_word/1:
+
+``stop_word/1``
+^^^^^^^^^^^^^^^
+
+Enumerates canonical lowercase stop-word atoms.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``stop_word(Word)``
+| **Mode and number of proofs:**
+|    ``stop_word(-atom)`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`stop_words_protocol <stop_words_protocol/0>`, :ref:`stop_words(Representation,Language) <stop_words/2>`
+

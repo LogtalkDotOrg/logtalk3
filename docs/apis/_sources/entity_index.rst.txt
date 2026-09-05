@@ -738,6 +738,8 @@ Objects
    sqids(Representation) <sqids_1>
    sqp_active_set(Problem) <sqp_active_set_1>
    stomp <stomp_0>
+   stop_words(Representation,Language) <stop_words_2>
+   stopwords_en <stopwords_en_0>
    streamvars <streamvars_0>
    string(Representation) <string_1>
    string_distance(Representation) <string_distance_1>
@@ -1016,6 +1018,8 @@ Protocols
    snowflakeid_protocol <snowflakeid_protocol_0>
    statisticsp <statisticsp_0>
    stemmer_protocol <stemmer_protocol_0>
+   stop_words_language_protocol <stop_words_language_protocol_0>
+   stop_words_protocol <stop_words_protocol_0>
    subsequences_protocol <subsequences_protocol_0>
    supervised_dimension_reduction_dataset_protocol <supervised_dimension_reduction_dataset_protocol_0>
    tabu_search_problem_protocol <tabu_search_problem_protocol_0>

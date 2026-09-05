@@ -8326,6 +8326,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`amqp <amqp/0::exchange_unbind/4>`
 
+``exclude/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`stop_words_protocol <stop_words_protocol/0::exclude/2>`
+
 ``exclude/3``
 -------------
 
@@ -13154,6 +13164,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_websocket_session(Role,TextRepresentation) <http_websocket_session/2::is_state/1>`
+
+``is_stop_word/1``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`stop_words_protocol <stop_words_protocol/0::is_stop_word/1>`
 
 ``is_subsequence_of/2``
 -----------------------
@@ -27269,6 +27289,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`dump_trace <dump_trace/0::stop_redirect_to_file/0>`
+
+``stop_word/1``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`stop_words_language_protocol <stop_words_language_protocol/0::stop_word/1>`
+* :ref:`stop_words_protocol <stop_words_protocol/0::stop_word/1>`
 
 ``store_set_cookies/3``
 -----------------------

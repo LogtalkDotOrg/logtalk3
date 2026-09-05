@@ -278,6 +278,7 @@ directory in the ``NOTES.md`` file.
    statistics
    stemming
    stomp
+   stop_words
    strings
    string_distance
    subsequences

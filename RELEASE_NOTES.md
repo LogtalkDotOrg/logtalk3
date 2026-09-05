@@ -75,6 +75,10 @@ defines routes.
 Existing code using the previous version of this library must be updated to one
 the more recent specs that are now supported by the library.
 
+* ADDED: New `stop_words` library for representation-independent stop-word
+enumeration, membership testing, and filtering. Includes default English,
+Portuguese, Spanish, French, German, and Italian stop-word list objects.
+
 * ADDED: New `http_oauth` library implementing OAuth 2.0 Bearer request
 protection, protected-resource metadata, token introspection, and JWT
 verification.

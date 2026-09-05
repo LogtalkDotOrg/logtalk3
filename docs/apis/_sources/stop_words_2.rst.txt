@@ -1,0 +1,66 @@
+.. index:: single: stop_words(Representation,Language)
+.. _stop_words/2:
+
+.. rst-class:: right
+
+**object**
+
+``stop_words(Representation,Language)``
+=======================================
+
+* ``Representation`` - Word representation. Valid values are ``atom``, ``codes``, and ``chars``.
+* ``Language`` - Object implementing the ``stop_words_language_protocol`` protocol.
+
+
+Stop-word enumeration and filtering for a text representation and language provider.
+
+| **Availability:** 
+|    ``logtalk_load(stop_words(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-05
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`stop_words_protocol <stop_words_protocol/0>`
+| **Uses:**
+|    :ref:`string(Representation) <string/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`stop_words_protocol/0::exclude/2`  :ref:`stop_words_protocol/0::is_stop_word/1`  :ref:`stop_words_protocol/0::stop_word/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`stop_words_protocol <stop_words_protocol/0>`, :ref:`stop_words_language_protocol <stop_words_language_protocol/0>`
+
