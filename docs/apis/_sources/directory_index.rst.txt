@@ -3266,6 +3266,30 @@ To load an entity, always load the library that includes it using the goal ``log
    tle_orbits <tle_orbits_0>
    tle_orbits_protocol <tle_orbits_protocol_0>
 
+``library/tokenization/``
+-------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   sentence_splitter_protocol <sentence_splitter_protocol_0>
+   tokenizer(Representation,Language) <tokenizer_2>
+   tokenizer_language_protocol <tokenizer_language_protocol_0>
+   tokenizer_protocol <tokenizer_protocol_0>
+   tokenizer_rules <tokenizer_rules_0>
+
+``library/tokenization/languages/``
+-----------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   english_tokenizer <english_tokenizer_0>
+
 ``library/toml/``
 -----------------
 

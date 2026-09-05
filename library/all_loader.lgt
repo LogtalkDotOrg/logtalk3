@@ -29,6 +29,7 @@
 		n_grams(loader),
 		lemmatization(loader),
 		stemming(loader),
+		tokenization(loader),
 		stop_words(loader),
 		numerical_analysis(loader),
 		linear_algebra(loader),

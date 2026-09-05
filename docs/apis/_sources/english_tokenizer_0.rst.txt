@@ -1,0 +1,62 @@
+.. index:: single: english_tokenizer
+.. _english_tokenizer/0:
+
+.. rst-class:: right
+
+**object**
+
+``english_tokenizer``
+=====================
+
+English tokenization and sentence splitting provider using portable rule-based heuristics and a curated abbreviation inventory.
+
+| **Availability:** 
+|    ``logtalk_load(tokenization(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-05
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`tokenizer_language_protocol <tokenizer_language_protocol/0>`
+| **Imports:**
+|    ``public`` :ref:`tokenizer_rules <tokenizer_rules/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`tokenizer_language_protocol/0::split_sentence_codes/3`  :ref:`tokenizer_language_protocol/0::tokenize_codes/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`tokenizer(Representation,Language) <tokenizer/2>`, :ref:`tokenizer_rules <tokenizer_rules/0>`
+

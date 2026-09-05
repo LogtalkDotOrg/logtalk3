@@ -1,0 +1,141 @@
+.. index:: single: tokenizer_rules
+.. _tokenizer_rules/0:
+
+.. rst-class:: right
+
+**category**
+
+``tokenizer_rules``
+===================
+
+Reusable portable rules for tokenization and sentence splitting. Importing objects supply language-specific abbreviation and word punctuation hooks. URL and email address recognition delegates to the ``url`` library.
+
+| **Availability:** 
+|    ``logtalk_load(tokenization(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-05
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Implements:**
+|    ``public`` :ref:`tokenizer_language_protocol <tokenizer_language_protocol/0>`
+| **Extends:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`number_grammars(Format) <number_grammars/1>`
+|    :ref:`string(Representation) <string/1>`
+|    :ref:`url(Representation) <url/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`tokenizer_language_protocol/0::split_sentence_codes/3`  :ref:`tokenizer_language_protocol/0::tokenize_codes/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: abbreviation/1
+.. _tokenizer_rules/0::abbreviation/1:
+
+``abbreviation/1``
+^^^^^^^^^^^^^^^^^^
+
+Enumerates canonical lowercase abbreviations, including their periods.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``abbreviation(Abbreviation)``
+| **Mode and number of proofs:**
+|    ``abbreviation(?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: non_terminal_abbreviation/1
+.. _tokenizer_rules/0::non_terminal_abbreviation/1:
+
+``non_terminal_abbreviation/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Enumerates abbreviations that do not terminate a sentence when followed by another token.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``non_terminal_abbreviation(Abbreviation)``
+| **Mode and number of proofs:**
+|    ``non_terminal_abbreviation(?atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: internal_apostrophe/1
+.. _tokenizer_rules/0::internal_apostrophe/1:
+
+``internal_apostrophe/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Enumerates apostrophe character codes accepted inside words.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``internal_apostrophe(Code)``
+| **Mode and number of proofs:**
+|    ``internal_apostrophe(?character_code)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: internal_hyphen/1
+.. _tokenizer_rules/0::internal_hyphen/1:
+
+``internal_hyphen/1``
+^^^^^^^^^^^^^^^^^^^^^
+
+Enumerates hyphen character codes accepted inside words.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``internal_hyphen(Code)``
+| **Mode and number of proofs:**
+|    ``internal_hyphen(?character_code)`` - ``zero_or_more``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`tokenizer_language_protocol <tokenizer_language_protocol/0>`, :ref:`english_tokenizer <english_tokenizer/0>`, :ref:`url(Representation) <url/1>`
+

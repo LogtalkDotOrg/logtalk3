@@ -1,0 +1,211 @@
+.. index:: single: tokenizer_protocol
+.. _tokenizer_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``tokenizer_protocol``
+======================
+
+Tokenization protocol for text represented as atoms, lists of characters, or lists of character codes.
+
+| **Availability:** 
+|    ``logtalk_load(tokenization(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-05
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: tokenize/2
+.. _tokenizer_protocol/0::tokenize/2:
+
+``tokenize/2``
+^^^^^^^^^^^^^^
+
+Tokenizes text using the default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``tokenize(Text,Tokens)``
+| **Mode and number of proofs:**
+|    ``tokenize(+text,-list(text))`` - ``one_or_error``
+
+| **Exceptions:**
+|    The ``Representation`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is neither a variable nor ``atom``, ``chars``, or ``codes``:
+|        ``domain_error(text_representation,Representation)``
+|    ``Text`` is not ground:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
+|        ``type_error(atom,Text)``
+|    The ``Representation`` parameter is ``chars`` but ``Text`` is not a list of characters:
+|        ``type_error(chars,Text)``
+|    The ``Representation`` parameter is ``codes`` but ``Text`` is not a list of character codes:
+|        ``type_error(codes,Text)``
+
+
+------------
+
+.. index:: tokenize/3
+.. _tokenizer_protocol/0::tokenize/3:
+
+``tokenize/3``
+^^^^^^^^^^^^^^
+
+Tokenizes text using the given options. Recognized options are ``keep_punctuation(Boolean)``, ``lowercase(Boolean)``, ``normalize_quotes(Boolean)``, and ``normalize_dashes(Boolean)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``tokenize(Text,Tokens,Options)``
+| **Mode and number of proofs:**
+|    ``tokenize(+text,-list(text),+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    The ``Representation`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is neither a variable nor ``atom``, ``chars``, or ``codes``:
+|        ``domain_error(text_representation,Representation)``
+|    ``Text`` is not ground:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
+|        ``type_error(atom,Text)``
+|    The ``Representation`` parameter is ``chars`` but ``Text`` is not a list of characters:
+|        ``type_error(chars,Text)``
+|    The ``Representation`` parameter is ``codes`` but ``Text`` is not a list of character codes:
+|        ``type_error(codes,Text)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+
+
+------------
+
+.. index:: tokenize_sentences/2
+.. _tokenizer_protocol/0::tokenize_sentences/2:
+
+``tokenize_sentences/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Splits text into sentences and tokenizes each sentence using the default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``tokenize_sentences(Text,TokenizedSentences)``
+| **Mode and number of proofs:**
+|    ``tokenize_sentences(+text,-list(list(text)))`` - ``one_or_error``
+
+| **Exceptions:**
+|    The ``Representation`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is neither a variable nor ``atom``, ``chars``, or ``codes``:
+|        ``domain_error(text_representation,Representation)``
+|    ``Text`` is not ground:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
+|        ``type_error(atom,Text)``
+|    The ``Representation`` parameter is ``chars`` but ``Text`` is not a list of characters:
+|        ``type_error(chars,Text)``
+|    The ``Representation`` parameter is ``codes`` but ``Text`` is not a list of character codes:
+|        ``type_error(codes,Text)``
+
+
+------------
+
+.. index:: tokenize_sentences/3
+.. _tokenizer_protocol/0::tokenize_sentences/3:
+
+``tokenize_sentences/3``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Splits text into sentences and tokenizes each sentence using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``tokenize_sentences(Text,TokenizedSentences,Options)``
+| **Mode and number of proofs:**
+|    ``tokenize_sentences(+text,-list(list(text)),+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    The ``Representation`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is neither a variable nor ``atom``, ``chars``, or ``codes``:
+|        ``domain_error(text_representation,Representation)``
+|    ``Text`` is not ground:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
+|        ``type_error(atom,Text)``
+|    The ``Representation`` parameter is ``chars`` but ``Text`` is not a list of characters:
+|        ``type_error(chars,Text)``
+|    The ``Representation`` parameter is ``codes`` but ``Text`` is not a list of character codes:
+|        ``type_error(codes,Text)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`sentence_splitter_protocol <sentence_splitter_protocol/0>`, :ref:`tokenizer_language_protocol <tokenizer_language_protocol/0>`, :ref:`tokenizer(Representation,Language) <tokenizer/2>`
+

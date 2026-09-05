@@ -296,6 +296,7 @@ logtalk_library_path(thurstone_mosteller_ranker, library('thurstone_mosteller_ra
 logtalk_library_path(time_scales, library('time_scales/')).
 logtalk_library_path(timeout, library('timeout/')).
 logtalk_library_path(tle_orbits, library('tle_orbits/')).
+logtalk_library_path(tokenization, library('tokenization/')).
 logtalk_library_path(toml, library('toml/')).
 logtalk_library_path(toon, library('toon/')).
 logtalk_library_path(tries, library('tries/')).

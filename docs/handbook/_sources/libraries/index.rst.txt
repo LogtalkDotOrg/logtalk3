@@ -291,6 +291,7 @@ directory in the ``NOTES.md`` file.
    timeout
    time_scales
    tle_orbits
+   tokenization
    toml
    toon
    tries

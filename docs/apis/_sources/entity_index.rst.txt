@@ -122,6 +122,7 @@ Categories
    single_byte_character_set(MaxCode) <single_byte_character_set_1>
    statistics <statistics_0>
    subject <subject_0>
+   tokenizer_rules <tokenizer_rules_0>
    tool_diagnostics_common <tool_diagnostics_common_0>
    tutor_explanations <tutor_explanations_0>
    ulid_types <ulid_types_0>
@@ -305,6 +306,7 @@ Objects
    elastic_net_regression <elastic_net_regression_0>
    elo_ranker <elo_ranker_0>
    english_lemmatizer <english_lemmatizer_0>
+   english_tokenizer <english_tokenizer_0>
    entity_diagram <entity_diagram_0>
    entity_diagram(Format) <entity_diagram_1>
    euler_ode_solver(System) <euler_ode_solver_1>
@@ -768,6 +770,7 @@ Objects
    time_scales_data <time_scales_data_0>
    timeout <timeout_0>
    tle_orbits <tle_orbits_0>
+   tokenizer(Representation,Language) <tokenizer_2>
    toml <toml_0>
    toml(StringRepresentation) <toml_1>
    toml(ObjectRepresentation,PairRepresentation,StringRepresentation) <toml_3>
@@ -1018,6 +1021,7 @@ Protocols
    root_finder_protocol <root_finder_protocol_0>
    s3_protocol <s3_protocol_0>
    sampling_protocol <sampling_protocol_0>
+   sentence_splitter_protocol <sentence_splitter_protocol_0>
    sequence_dataset_protocol <sequence_dataset_protocol_0>
    setp <setp_0>
    simulated_annealing_protocol <simulated_annealing_protocol_0>
@@ -1036,6 +1040,8 @@ Protocols
    time_scales_protocol <time_scales_protocol_0>
    timep <timep_0>
    tle_orbits_protocol <tle_orbits_protocol_0>
+   tokenizer_language_protocol <tokenizer_language_protocol_0>
+   tokenizer_protocol <tokenizer_protocol_0>
    toml_protocol <toml_protocol_0>
    tool_diagnostics_protocol <tool_diagnostics_protocol_0>
    toon_protocol <toon_protocol_0>

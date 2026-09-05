@@ -342,6 +342,7 @@ Foreach-Object {
 (Get-Content ../../../library/time_scales/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/time_scales.rst
 (Get-Content ../../../library/timeout/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/timeout.rst
 (Get-Content ../../../library/tle_orbits/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/tle_orbits.rst
+(Get-Content ../../../library/tokenization/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/tokenization.rst
 (Get-Content ../../../library/toml/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/toml.rst
 (Get-Content ../../../library/toon/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/toon.rst
 (Get-Content ../../../library/tries/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/tries.rst

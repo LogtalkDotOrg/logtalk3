@@ -1,0 +1,97 @@
+.. index:: single: tokenizer_language_protocol
+.. _tokenizer_language_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``tokenizer_language_protocol``
+===============================
+
+Language provider protocol for tokenization and sentence splitting using canonical character-code lists.
+
+| **Availability:** 
+|    ``logtalk_load(tokenization(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-05
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: tokenize_codes/3
+.. _tokenizer_language_protocol/0::tokenize_codes/3:
+
+``tokenize_codes/3``
+^^^^^^^^^^^^^^^^^^^^
+
+Tokenizes a character-code list using validated, merged facade options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``tokenize_codes(Codes,Tokens,Options)``
+| **Mode and number of proofs:**
+|    ``tokenize_codes(+list(character_code),-list(list(character_code)),+list(compound))`` - ``one``
+
+
+------------
+
+.. index:: split_sentence_codes/3
+.. _tokenizer_language_protocol/0::split_sentence_codes/3:
+
+``split_sentence_codes/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Splits a character-code list into sentence character-code lists using validated, merged facade options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``split_sentence_codes(Codes,Sentences,Options)``
+| **Mode and number of proofs:**
+|    ``split_sentence_codes(+list(character_code),-list(list(character_code)),+list(compound))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`tokenizer_protocol <tokenizer_protocol/0>`, :ref:`sentence_splitter_protocol <sentence_splitter_protocol/0>`, :ref:`tokenizer(Representation,Language) <tokenizer/2>`
+

@@ -342,6 +342,7 @@ sed '1,19d' ../../../library/thurstone_mosteller_ranker/NOTES.md | pandoc -f gfm
 sed '1,19d' ../../../library/time_scales/NOTES.md | pandoc -f gfm -t rst -o libraries/time_scales.rst
 sed '1,19d' ../../../library/timeout/NOTES.md | pandoc -f gfm -t rst -o libraries/timeout.rst
 sed '1,19d' ../../../library/tle_orbits/NOTES.md | pandoc -f gfm -t rst -o libraries/tle_orbits.rst
+sed '1,19d' ../../../library/tokenization/NOTES.md | pandoc -f gfm -t rst -o libraries/tokenization.rst
 sed '1,19d' ../../../library/toml/NOTES.md | pandoc -f gfm -t rst -o libraries/toml.rst
 sed '1,19d' ../../../library/toon/NOTES.md | pandoc -f gfm -t rst -o libraries/toon.rst
 sed '1,19d' ../../../library/tries/NOTES.md | pandoc -f gfm -t rst -o libraries/tries.rst

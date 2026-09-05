@@ -84,6 +84,9 @@ token and character n-grams.
 enumeration, membership testing, and filtering. Includes default English,
 Portuguese, Spanish, French, German, and Italian stop-word list objects.
 
+* ADDED: New `tokenization` library providing extensible tokenization and
+sentence splitting.
+
 * ADDED: New `http_oauth` library implementing OAuth 2.0 Bearer request
 protection, protected-resource metadata, token introspection, and JWT
 verification.

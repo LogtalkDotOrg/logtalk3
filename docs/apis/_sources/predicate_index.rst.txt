@@ -26838,6 +26838,36 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ccsds_packet_services <ccsds_packet_services/0::split_packet_zone/4>`
 
+``split_sentence_codes/3``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tokenizer_language_protocol <tokenizer_language_protocol/0::split_sentence_codes/3>`
+
+``split_sentences/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`sentence_splitter_protocol <sentence_splitter_protocol/0::split_sentences/2>`
+
+``split_sentences/3``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`sentence_splitter_protocol <sentence_splitter_protocol/0::split_sentences/3>`
+
 ``split_string/4``
 ------------------
 
@@ -28730,6 +28760,56 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`crypto <crypto/0::token_urlsafe/2>`
+
+``tokenize/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tokenizer_protocol <tokenizer_protocol/0::tokenize/2>`
+
+``tokenize/3``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tokenizer_protocol <tokenizer_protocol/0::tokenize/3>`
+
+``tokenize_codes/3``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tokenizer_language_protocol <tokenizer_language_protocol/0::tokenize_codes/3>`
+
+``tokenize_sentences/2``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tokenizer_protocol <tokenizer_protocol/0::tokenize_sentences/2>`
+
+``tokenize_sentences/3``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`tokenizer_protocol <tokenizer_protocol/0::tokenize_sentences/3>`
 
 ``tolerance_equal/4``
 ---------------------

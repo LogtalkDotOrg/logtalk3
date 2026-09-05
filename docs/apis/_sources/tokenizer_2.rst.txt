@@ -1,0 +1,70 @@
+.. index:: single: tokenizer(Representation,Language)
+.. _tokenizer/2:
+
+.. rst-class:: right
+
+**object**
+
+``tokenizer(Representation,Language)``
+======================================
+
+* ``Representation`` - Text representation. Valid values are ``atom``, ``codes``, and ``chars``.
+* ``Language`` - Object implementing the ``tokenizer_language_protocol`` protocol.
+
+
+Tokenizer and sentence splitter parameterized by text representation and language provider.
+
+| **Availability:** 
+|    ``logtalk_load(tokenization(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-05
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`tokenizer_protocol <tokenizer_protocol/0>`
+|    ``public`` :ref:`sentence_splitter_protocol <sentence_splitter_protocol/0>`
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`sentence_splitter_protocol/0::split_sentences/2`  :ref:`sentence_splitter_protocol/0::split_sentences/3`  :ref:`tokenizer_protocol/0::tokenize/2`  :ref:`tokenizer_protocol/0::tokenize/3`  :ref:`tokenizer_protocol/0::tokenize_sentences/2`  :ref:`tokenizer_protocol/0::tokenize_sentences/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`tokenizer_protocol <tokenizer_protocol/0>`, :ref:`sentence_splitter_protocol <sentence_splitter_protocol/0>`, :ref:`tokenizer_language_protocol <tokenizer_language_protocol/0>`
+
