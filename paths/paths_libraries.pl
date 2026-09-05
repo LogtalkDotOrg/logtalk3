@@ -222,6 +222,7 @@ logtalk_library_path(mqtt, library('mqtt/')).
 logtalk_library_path(multisets, library('multisets/')).
 logtalk_library_path(multivariate_distributions, library('multivariate_distributions/')).
 logtalk_library_path(mutations, library('mutations/')).
+logtalk_library_path(n_grams, library('n_grams/')).
 logtalk_library_path(naive_bayes_classifier, library('naive_bayes_classifier/')).
 logtalk_library_path(nanoid, library('nanoid/')).
 logtalk_library_path(nearest_centroid_classifier, library('nearest_centroid_classifier/')).

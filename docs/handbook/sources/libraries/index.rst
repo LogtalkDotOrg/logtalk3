@@ -217,6 +217,7 @@ directory in the ``NOTES.md`` file.
    multisets
    multivariate_distributions
    mutations
+   n_grams
    naive_bayes_classifier
    nanoid
    nearest_centroid_classifier

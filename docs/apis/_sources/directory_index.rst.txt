@@ -2376,6 +2376,17 @@ To load an entity, always load the library that includes it using the goal ``log
    mutations <mutations_0>
    mutations_store <mutations_store_0>
 
+``library/n_grams/``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   n_grams(Representation) <n_grams_1>
+   n_grams_protocol <n_grams_protocol_0>
+
 ``library/naive_bayes_classifier/``
 -----------------------------------
 

@@ -578,6 +578,7 @@ Objects
    murmurhash3_x86_32 <murmurhash3_x86_32_0>
    mutation_testing <mutation_testing_0>
    mutations_store <mutations_store_0>
+   n_grams(Representation) <n_grams_1>
    naive_bayes_classifier <naive_bayes_classifier_0>
    nanoid <nanoid_0>
    nanoid(Representation,Size,Alphabet) <nanoid_3>
@@ -976,6 +977,7 @@ Protocols
    multisets_protocol <multisets_protocol_0>
    multivariate_distributions_protocol <multivariate_distributions_protocol_0>
    mutator_protocol <mutator_protocol_0>
+   n_grams_protocol <n_grams_protocol_0>
    nanoid_protocol <nanoid_protocol_0>
    nested_dictionary_protocol <nested_dictionary_protocol_0>
    nmea_protocol <nmea_protocol_0>

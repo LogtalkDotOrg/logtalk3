@@ -1902,6 +1902,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`iso_9362_protocol <iso_9362_protocol/0::bic/5>`
 
+``bigrams/2``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`n_grams_protocol <n_grams_protocol/0::bigrams/2>`
+
 ``binary_body/2``
 -----------------
 
@@ -2618,6 +2628,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`amqp <amqp/0::channel_open/3>`
+
+``character_n_grams/3``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`n_grams_protocol <n_grams_protocol/0::character_n_grams/3>`
+
+``character_n_grams/4``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`n_grams_protocol <n_grams_protocol/0::character_n_grams/4>`
 
 ``chebyshev_distance/3``
 ------------------------
@@ -4251,6 +4281,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_server_core_session <http_server_core_session/0::count/2>`
+* :ref:`n_grams_protocol <n_grams_protocol/0::count/2>`
+
+``count/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`n_grams_protocol <n_grams_protocol/0::count/3>`
 
 ``count_arrangements/3``
 ------------------------
@@ -17167,6 +17208,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`genetic_algorithm_problem_protocol <genetic_algorithm_problem_protocol/0::mutation_rate/4>`
 
+``n_grams/3``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`n_grams_protocol <n_grams_protocol/0::n_grams/3>`
+
+``n_grams/4``
+-------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`n_grams_protocol <n_grams_protocol/0::n_grams/4>`
+
 ``nack/3``
 ----------
 
@@ -28921,6 +28982,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_htmx <http_htmx/0::trigger_name/2>`
+
+``trigrams/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`n_grams_protocol <n_grams_protocol/0::trigrams/2>`
 
 ``trim/2``
 ----------

@@ -1,0 +1,339 @@
+.. index:: single: n_grams_protocol
+.. _n_grams_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``n_grams_protocol``
+====================
+
+N-gram generation and counting protocol.
+
+| **Availability:** 
+|    ``logtalk_load(n_grams(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-05
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: n_grams/3
+.. _n_grams_protocol/0::n_grams/3:
+
+``n_grams/3``
+^^^^^^^^^^^^^
+
+Generates overlapping n-grams from a list of text tokens.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``n_grams(N,Tokens,NGrams)``
+| **Mode and number of proofs:**
+|    ``n_grams(+positive_integer,+list(text),-list(list(text)))`` - ``one_or_error``
+
+| **Exceptions:**
+|    The ``Representation`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Representation`` parameter neither a variable nor ``atom``, ``chars``, or ``codes``:
+|        ``domain_error(text_representation,Representation)``
+|    ``N`` is a variable:
+|        ``instantiation_error``
+|    ``N`` is neither a variable nor a positive integer:
+|        ``type_error(positive_integer,Options)``
+|    ``Tokens`` is a partial list or a list with an element ``Element`` which is not ground:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is ``atom`` but a ground element ``Element`` of the list ``Tokens`` is not an atom:
+|        ``type_error(atom,Element)``
+|    The ``Representation`` parameter is ``chars`` but an element ``Element`` of the list ``Tokens`` is not a list of characters:
+|        ``type_error(chars,Element)``
+|    The ``Representation`` parameter is ``codes`` but an element ``Element`` of the list ``Tokens`` is not a list of character codes:
+|        ``type_error(codes,Element)``
+
+
+------------
+
+.. index:: n_grams/4
+.. _n_grams_protocol/0::n_grams/4:
+
+``n_grams/4``
+^^^^^^^^^^^^^
+
+Generates n-grams from a list of text tokens using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``n_grams(N,Tokens,NGrams,Options)``
+| **Mode and number of proofs:**
+|    ``n_grams(+positive_integer,+list(text),-list(list(text)),+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    The ``Representation`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Representation`` parameter neither a variable nor ``atom``, ``chars``, or ``codes``:
+|        ``domain_error(text_representation,Representation)``
+|    ``N`` is a variable:
+|        ``instantiation_error``
+|    ``N`` is neither a variable nor a positive integer:
+|        ``type_error(positive_integer,Options)``
+|    ``Tokens`` is a partial list or a list with an element ``Element`` which is not ground:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is ``atom`` but a ground element ``Element`` of the list ``Tokens`` is not an atom:
+|        ``type_error(atom,Element)``
+|    The ``Representation`` parameter is ``chars`` but an element ``Element`` of the list ``Tokens`` is not a list of characters:
+|        ``type_error(chars,Element)``
+|    The ``Representation`` parameter is ``codes`` but an element ``Element`` of the list ``Tokens`` is not a list of character codes:
+|        ``type_error(codes,Element)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+
+
+------------
+
+.. index:: character_n_grams/3
+.. _n_grams_protocol/0::character_n_grams/3:
+
+``character_n_grams/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates overlapping character n-grams from a text value.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``character_n_grams(N,Text,NGrams)``
+| **Mode and number of proofs:**
+|    ``character_n_grams(+positive_integer,+text,-list(text))`` - ``one_or_error``
+
+| **Exceptions:**
+|    The ``Representation`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Representation`` parameter neither a variable nor ``atom``, ``chars``, or ``codes``:
+|        ``domain_error(text_representation,Representation)``
+|    ``N`` is a variable:
+|        ``instantiation_error``
+|    ``N`` is neither a variable nor a positive integer:
+|        ``type_error(positive_integer,Options)``
+|    ``Text`` is not ground:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
+|        ``type_error(atom,Text)``
+|    The ``Representation`` parameter is ``chars`` but ``Text`` is not a list of characters:
+|        ``type_error(chars,Text)``
+|    The ``Representation`` parameter is ``codes`` but ``Text`` is not a list of character codes:
+|        ``type_error(codes,Text)``
+
+
+------------
+
+.. index:: character_n_grams/4
+.. _n_grams_protocol/0::character_n_grams/4:
+
+``character_n_grams/4``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Generates character n-grams from a text value using the given options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``character_n_grams(N,Text,NGrams,Options)``
+| **Mode and number of proofs:**
+|    ``character_n_grams(+positive_integer,+text,-list(text),+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    The ``Representation`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Representation`` parameter neither a variable nor ``atom``, ``chars``, or ``codes``:
+|        ``domain_error(text_representation,Representation)``
+|    ``N`` is a variable:
+|        ``instantiation_error``
+|    ``N`` is neither a variable nor a positive integer:
+|        ``type_error(positive_integer,Options)``
+|    ``Text`` is not ground:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
+|        ``type_error(atom,Text)``
+|    The ``Representation`` parameter is ``chars`` but ``Text`` is not a list of characters:
+|        ``type_error(chars,Text)``
+|    The ``Representation`` parameter is ``codes`` but ``Text`` is not a list of character codes:
+|        ``type_error(codes,Text)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+
+
+------------
+
+.. index:: count/2
+.. _n_grams_protocol/0::count/2:
+
+``count/2``
+^^^^^^^^^^^
+
+Counts n-gram occurrences, preserving the order of first occurrence. Assumes ``NGrams`` is valid.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``count(NGrams,Counts)``
+| **Mode and number of proofs:**
+|    ``count(+list(text),-list(pair(text,positive_integer)))`` - ``one``
+|    ``count(+list(list(text)),-list(pair(list(text),positive_integer)))`` - ``one``
+
+
+------------
+
+.. index:: count/3
+.. _n_grams_protocol/0::count/3:
+
+``count/3``
+^^^^^^^^^^^
+
+Counts n-gram occurrences using the requested ordering. Valid orderings are ``first_occurrence``, ``standard``, and ``frequency_descending``. Assumes ``NGrams`` is valid.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``count(Order,NGrams,Counts)``
+| **Mode and number of proofs:**
+|    ``count(+atom,+list(text),-list(pair(text,positive_integer)))`` - ``one_or_error``
+|    ``count(+atom,+list(list(text)),-list(pair(list(text),positive_integer)))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Order`` is a variable:
+|        ``instantiation_error``
+|    ``Order`` is neither a variable nor a valid ordering:
+|        ``domain_error(count_order,Order)``
+
+
+------------
+
+.. index:: bigrams/2
+.. _n_grams_protocol/0::bigrams/2:
+
+``bigrams/2``
+^^^^^^^^^^^^^
+
+Generates overlapping bigrams from a list of text tokens.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``bigrams(Tokens,Bigrams)``
+| **Mode and number of proofs:**
+|    ``bigrams(+list(text),-list(list(text)))`` - ``one_or_error``
+
+| **Exceptions:**
+|    The ``Representation`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Representation`` parameter neither a variable nor ``atom``, ``chars``, or ``codes``:
+|        ``domain_error(text_representation,Representation)``
+|    ``Tokens`` is a partial list or a list with an element ``Element`` which is not ground:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is ``atom`` but a ground element ``Element`` of the list ``Tokens`` is not an atom:
+|        ``type_error(atom,Element)``
+|    The ``Representation`` parameter is ``chars`` but an element ``Element`` of the list ``Tokens`` is not a list of characters:
+|        ``type_error(chars,Element)``
+|    The ``Representation`` parameter is ``codes`` but an element ``Element`` of the list ``Tokens`` is not a list of character codes:
+|        ``type_error(codes,Element)``
+
+
+------------
+
+.. index:: trigrams/2
+.. _n_grams_protocol/0::trigrams/2:
+
+``trigrams/2``
+^^^^^^^^^^^^^^
+
+Generates overlapping trigrams from a list of text tokens.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``trigrams(Tokens,Trigrams)``
+| **Mode and number of proofs:**
+|    ``trigrams(+list(text),-list(list(text)))`` - ``one_or_error``
+
+| **Exceptions:**
+|    The ``Representation`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Representation`` parameter neither a variable nor ``atom``, ``chars``, or ``codes``:
+|        ``domain_error(text_representation,Representation)``
+|    ``Tokens`` is a partial list or a list with an element ``Element`` which is not ground:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is ``atom`` but a ground element ``Element`` of the list ``Tokens`` is not an atom:
+|        ``type_error(atom,Element)``
+|    The ``Representation`` parameter is ``chars`` but an element ``Element`` of the list ``Tokens`` is not a list of characters:
+|        ``type_error(chars,Element)``
+|    The ``Representation`` parameter is ``codes`` but an element ``Element`` of the list ``Tokens`` is not a list of character codes:
+|        ``type_error(codes,Element)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`n_grams(Representation) <n_grams/1>`
+

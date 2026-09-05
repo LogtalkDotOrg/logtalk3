@@ -268,6 +268,7 @@ sed '1,19d' ../../../library/mqtt/NOTES.md | pandoc -f gfm -t rst -o libraries/m
 sed '1,19d' ../../../library/multisets/NOTES.md | pandoc -f gfm -t rst -o libraries/multisets.rst
 sed '1,19d' ../../../library/multivariate_distributions/NOTES.md | pandoc -f gfm -t rst -o libraries/multivariate_distributions.rst
 sed '1,19d' ../../../library/mutations/NOTES.md | pandoc -f gfm -t rst -o libraries/mutations.rst
+sed '1,19d' ../../../library/n_grams/NOTES.md | pandoc -f gfm -t rst -o libraries/n_grams.rst
 sed '1,19d' ../../../library/nanoid/NOTES.md | pandoc -f gfm -t rst -o libraries/nanoid.rst
 sed '1,19d' ../../../library/naive_bayes_classifier/NOTES.md | pandoc -f gfm -t rst -o libraries/naive_bayes_classifier.rst
 sed '1,19d' ../../../library/nearest_centroid_classifier/NOTES.md | pandoc -f gfm -t rst -o libraries/nearest_centroid_classifier.rst
