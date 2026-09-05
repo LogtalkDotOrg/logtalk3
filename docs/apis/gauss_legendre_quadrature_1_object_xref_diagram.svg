@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-389.5 1228,-389.5 1228,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for object gauss_legendre_quadrature/1</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;09&#45;05, 18:50</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;09&#45;05, 22:29</text>
 <g id="clust1" class="cluster">
 <title>cluster_gauss_legendre_quadrature_1_object</title>
 <g id="a_clust1"><a xlink:title="gauss_legendre_quadrature(Function)">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 1204,-54.25 1204,-54.25 1210,-54.25 1216,-60.25 1216,-66.25 1216,-66.25 1216,-365.5 1216,-365.5 1216,-371.5 1210,-377.5 1204,-377.5 1204,-377.5 20,-377.5 20,-377.5 14,-377.5 8,-371.5 8,-365.5 8,-365.5 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-359.75" font-family="Monospace" font-size="10.00" fill="dimgray">gauss_legendre_quadrature(Function)</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>integrate/5</title>
 <polygon fill="cornsilk" stroke="black" points="509.38,-338.75 408.62,-338.75 408.62,-302.75 509.38,-302.75 509.38,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="416.62" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36">
 <text xml:space="preserve" text-anchor="start" x="421.88" y="-322.62" font-family="Monospace" font-size="11.00">integrate/5</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>quadrature_sum/5</title>
 <polygon fill="cornsilk" stroke="black" points="152.25,-219.5 17.75,-219.5 17.75,-183.5 152.25,-183.5 152.25,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="25.75" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L58">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L58" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L58">
 <text xml:space="preserve" text-anchor="start" x="31" y="-203.38" font-family="Monospace" font-size="11.00">quadrature_sum/5</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- integrate/5&#45;&gt;quadrature_sum/5 -->
 <g id="edge2" class="edge">
 <title>integrate/5&#45;&gt;quadrature_sum/5</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36" xlink:title="calls">
 <path fill="none" stroke="black" d="M408.17,-303.82C341.68,-282.97 225.03,-246.4 151.55,-223.36"/>
 <polygon fill="black" stroke="black" points="152.63,-220.03 142.04,-220.38 150.53,-226.71 152.63,-220.03"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36">
 <text xml:space="preserve" text-anchor="start" x="283.21" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>positive_nodes/2</title>
 <polygon fill="cornsilk" stroke="black" points="305.25,-219.5 170.75,-219.5 170.75,-183.5 305.25,-183.5 305.25,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="178.75" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L67">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L67" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L67">
 <text xml:space="preserve" text-anchor="start" x="184" y="-203.38" font-family="Monospace" font-size="11.00">positive_nodes/2</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- integrate/5&#45;&gt;positive_nodes/2 -->
 <g id="edge1" class="edge">
 <title>integrate/5&#45;&gt;positive_nodes/2</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36" xlink:title="calls">
 <path fill="none" stroke="black" d="M426.39,-302.45C387.79,-281.97 323.39,-247.8 280.8,-225.21"/>
 <polygon fill="black" stroke="black" points="282.55,-222.18 272.08,-220.58 279.27,-228.36 282.55,-222.18"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36">
 <text xml:space="preserve" text-anchor="start" x="355.13" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -106,12 +106,12 @@
 <!-- integrate/5&#45;&gt;^^check_options/1 -->
 <g id="edge3" class="edge">
 <title>integrate/5&#45;&gt;^^check_options/1</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36" xlink:title="calls">
 <path fill="none" stroke="black" d="M449.41,-302.45C438.8,-283.31 421.56,-252.22 409.13,-229.79"/>
 <polygon fill="black" stroke="black" points="412.27,-228.24 404.36,-221.2 406.15,-231.64 412.27,-228.24"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36">
 <text xml:space="preserve" text-anchor="start" x="428.45" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -130,12 +130,12 @@
 <!-- integrate/5&#45;&gt;^^merge_options/2 -->
 <g id="edge4" class="edge">
 <title>integrate/5&#45;&gt;^^merge_options/2</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36" xlink:title="calls">
 <path fill="none" stroke="black" d="M472.87,-302.45C488.49,-282.97 514.04,-251.09 532.09,-228.58"/>
 <polygon fill="black" stroke="black" points="534.6,-231.04 538.13,-221.05 529.14,-226.67 534.6,-231.04"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36">
 <text xml:space="preserve" text-anchor="start" x="508.82" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -154,12 +154,12 @@
 <!-- integrate/5&#45;&gt;^^option/2 -->
 <g id="edge5" class="edge">
 <title>integrate/5&#45;&gt;^^option/2</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36" xlink:title="calls">
 <path fill="none" stroke="black" d="M492.94,-302.45C533.2,-281.93 600.42,-247.66 644.73,-225.07"/>
 <polygon fill="black" stroke="black" points="646.26,-228.22 653.58,-220.56 643.08,-221.98 646.26,-228.22"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36">
 <text xml:space="preserve" text-anchor="start" x="580.9" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -178,12 +178,12 @@
 <!-- integrate/5&#45;&gt;^^check_bounds/2 -->
 <g id="edge6" class="edge">
 <title>integrate/5&#45;&gt;^^check_bounds/2</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36" xlink:title="calls">
 <path fill="none" stroke="black" d="M509.72,-303.32C574.31,-282.4 686,-246.23 756.56,-223.37"/>
 <polygon fill="black" stroke="black" points="757.21,-226.84 765.65,-220.43 755.06,-220.18 757.21,-226.84"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L36">
 <text xml:space="preserve" text-anchor="start" x="650.85" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -202,12 +202,12 @@
 <!-- quadrature_sum/5&#45;&gt;^^evaluate_integrand/2 -->
 <g id="edge7" class="edge">
 <title>quadrature_sum/5&#45;&gt;^^evaluate_integrand/2</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L59" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L59" xlink:title="calls">
 <path fill="none" stroke="black" d="M88.1,-183.2C91.46,-164.41 96.89,-134.09 100.89,-111.77"/>
 <polygon fill="black" stroke="black" points="104.3,-112.57 102.62,-102.11 97.41,-111.34 104.3,-112.57"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L59">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="96.13" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -217,7 +217,7 @@
 <title>default_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="1047.25,-338.75 912.75,-338.75 912.75,-302.75 1047.25,-302.75 1047.25,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="920.75" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L91">
+<g id="a_node4_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L91">
 <text xml:space="preserve" text-anchor="start" x="926" y="-322.62" font-family="Monospace" font-size="11.00">default_option/1</text>
 </a>
 </g>
@@ -240,12 +240,12 @@
 <!-- default_option/1&#45;&gt;^^default_option/1 -->
 <g id="edge8" class="edge">
 <title>default_option/1&#45;&gt;^^default_option/1</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L92" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L92" xlink:title="calls">
 <path fill="none" stroke="black" d="M980,-302.45C980,-283.75 980,-253.62 980,-231.33"/>
 <polygon fill="black" stroke="black" points="983.5,-231.39 980,-221.39 976.5,-231.39 983.5,-231.39"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L92">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L92" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L92">
 <text xml:space="preserve" text-anchor="start" x="980" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -255,7 +255,7 @@
 <title>valid_option/1</title>
 <polygon fill="cornsilk" stroke="black" points="1199.5,-338.75 1078.5,-338.75 1078.5,-302.75 1199.5,-302.75 1199.5,-338.75"/>
 <text xml:space="preserve" text-anchor="start" x="1086.5" y="-323" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L95">
+<g id="a_node5_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L95" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L95">
 <text xml:space="preserve" text-anchor="start" x="1091.75" y="-322.62" font-family="Monospace" font-size="11.00">valid_option/1</text>
 </a>
 </g>
@@ -278,12 +278,12 @@
 <!-- valid_option/1&#45;&gt;^^valid_option/1 -->
 <g id="edge9" class="edge">
 <title>valid_option/1&#45;&gt;^^valid_option/1</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L97" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L97" xlink:title="calls">
 <path fill="none" stroke="black" d="M1139,-302.45C1139,-283.75 1139,-253.62 1139,-231.33"/>
 <polygon fill="black" stroke="black" points="1142.5,-231.39 1139,-221.39 1135.5,-231.39 1142.5,-231.39"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L97" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/5abb4de9d10b896015a25623e9070ccd9749f757/library/numerical_analysis/gauss_legendre_quadrature.lgt#L97">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L97" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/96edec7d57ca3760415f37d0cbc9ba4d68c0ed14/library/numerical_analysis/gauss_legendre_quadrature.lgt#L97">
 <text xml:space="preserve" text-anchor="start" x="1139" y="-257.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
