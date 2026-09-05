@@ -244,6 +244,7 @@ sed '1,19d' ../../../library/ksuid/NOTES.md | pandoc -f gfm -t rst -o libraries/
 sed '1,19d' ../../../library/lasso_regression/NOTES.md | pandoc -f gfm -t rst -o libraries/lasso_regression.rst
 sed '1,19d' ../../../library/lda_classifier/NOTES.md | pandoc -f gfm -t rst -o libraries/lda_classifier.rst
 sed '1,19d' ../../../library/lda_projection/NOTES.md | pandoc -f gfm -t rst -o libraries/lda_projection.rst
+sed '1,19d' ../../../library/lemmatization/NOTES.md | pandoc -f gfm -t rst -o libraries/lemmatization.rst
 sed '1,19d' ../../../library/linda/NOTES.md | pandoc -f gfm -t rst -o libraries/linda.rst
 sed '1,19d' ../../../library/linear_algebra/NOTES.md | pandoc -f gfm -t rst -o libraries/linear_algebra.rst
 sed '1,19d' ../../../library/linear_programming/NOTES.md | pandoc -f gfm -t rst -o libraries/linear_programming.rst

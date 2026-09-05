@@ -1,0 +1,62 @@
+.. index:: single: english_lemmatizer
+.. _english_lemmatizer/0:
+
+.. rst-class:: right
+
+**object**
+
+``english_lemmatizer``
+======================
+
+English lemmatization provider using curated exceptions, base forms, and conservative inflection rules.
+
+| **Availability:** 
+|    ``logtalk_load(lemmatization(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-05
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`lemmatizer_language_protocol <lemmatizer_language_protocol/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`lemmatizer_language_protocol/0::lemma/2`  :ref:`lemmatizer_language_protocol/0::lemma/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`lemmatizer(Representation,Language) <lemmatizer/2>`
+

@@ -75,6 +75,8 @@ defines routes.
 Existing code using the previous version of this library must be updated to one
 the more recent specs that are now supported by the library.
 
+* ADDED: New `lemmatization` library providing extensible word lemmatization.
+
 * ADDED: New `n_grams` library providing predicates for generating and counting
 token and character n-grams.
 

@@ -2191,6 +2191,19 @@ To load any library (including developer tools, ports, and contributions), use t
 
    lda_projection <lda_projection_0>
 
+:ref:`lemmatization <library_lemmatization>`
+--------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   english_lemmatizer <english_lemmatizer_0>
+   lemmatizer(Representation,Language) <lemmatizer_2>
+   lemmatizer_language_protocol <lemmatizer_language_protocol_0>
+   lemmatizer_protocol <lemmatizer_protocol_0>
+
 :ref:`lgtdoc <library_lgtdoc>`
 ------------------------------
 

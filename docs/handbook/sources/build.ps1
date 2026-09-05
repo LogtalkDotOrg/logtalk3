@@ -244,6 +244,7 @@ Foreach-Object {
 (Get-Content ../../../library/lasso_regression/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/lasso_regression.rst
 (Get-Content ../../../library/lda_classifier/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/lda_classifier.rst
 (Get-Content ../../../library/lda_projection/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/lda_projection.rst
+(Get-Content ../../../library/lemmatization/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/lemmatization.rst
 (Get-Content ../../../library/linda/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/linda.rst
 (Get-Content ../../../library/linear_algebra/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/linear_algebra.rst
 (Get-Content ../../../library/linear_programming/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/linear_programming.rst

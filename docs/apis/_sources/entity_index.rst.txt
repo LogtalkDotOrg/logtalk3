@@ -304,6 +304,7 @@ Objects
    either <either_0>
    elastic_net_regression <elastic_net_regression_0>
    elo_ranker <elo_ranker_0>
+   english_lemmatizer <english_lemmatizer_0>
    entity_diagram <entity_diagram_0>
    entity_diagram(Format) <entity_diagram_1>
    euler_ode_solver(System) <euler_ode_solver_1>
@@ -520,6 +521,7 @@ Objects
    lcov_report <lcov_report_0>
    lda_classifier <lda_classifier_0>
    lda_projection <lda_projection_0>
+   lemmatizer(Representation,Language) <lemmatizer_2>
    lgtdoc <lgtdoc_0>
    lgtunit <lgtunit_0>
    library_dependency_diagram <library_dependency_diagram_0>
@@ -953,6 +955,8 @@ Protocols
    json_protocol <json_protocol_0>
    json_schema_protocol <json_schema_protocol_0>
    ksuid_protocol <ksuid_protocol_0>
+   lemmatizer_language_protocol <lemmatizer_language_protocol_0>
+   lemmatizer_protocol <lemmatizer_protocol_0>
    lgtdocp <lgtdocp_0>
    linear_algebra_protocol <linear_algebra_protocol_0>
    linear_programming_protocol <linear_programming_protocol_0>

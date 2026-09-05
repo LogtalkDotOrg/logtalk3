@@ -1,0 +1,97 @@
+.. index:: single: lemmatizer_language_protocol
+.. _lemmatizer_language_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``lemmatizer_language_protocol``
+================================
+
+Language provider protocol for lemmatization using canonical lowercase atoms.
+
+| **Availability:** 
+|    ``logtalk_load(lemmatization(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-05
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: lemma/2
+.. _lemmatizer_language_protocol/0::lemma/2:
+
+``lemma/2``
+^^^^^^^^^^^
+
+Enumerates distinct recognized lemmas in stable preference order. Fails for an unknown word.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``lemma(Word,Lemma)``
+| **Mode and number of proofs:**
+|    ``lemma(+atom,-atom)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: lemma/3
+.. _lemmatizer_language_protocol/0::lemma/3:
+
+``lemma/3``
+^^^^^^^^^^^
+
+Enumerates distinct recognized lemmas for a part-of-speech hint in stable preference order. Fails for an unknown word or unsupported hint.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``lemma(Word,PartOfSpeech,Lemma)``
+| **Mode and number of proofs:**
+|    ``lemma(+atom,+atom,-atom)`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`lemmatizer_protocol <lemmatizer_protocol/0>`, :ref:`lemmatizer(Representation,Language) <lemmatizer/2>`
+

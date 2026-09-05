@@ -193,6 +193,7 @@ directory in the ``NOTES.md`` file.
    lasso_regression
    lda_classifier
    lda_projection
+   lemmatization
    linda
    linear_algebra
    linear_programming

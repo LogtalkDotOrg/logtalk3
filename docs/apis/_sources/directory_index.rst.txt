@@ -2092,6 +2092,28 @@ To load an entity, always load the library that includes it using the goal ``log
 
    lda_projection <lda_projection_0>
 
+``library/lemmatization/``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   lemmatizer(Representation,Language) <lemmatizer_2>
+   lemmatizer_language_protocol <lemmatizer_language_protocol_0>
+   lemmatizer_protocol <lemmatizer_protocol_0>
+
+``library/lemmatization/languages/``
+------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   english_lemmatizer <english_lemmatizer_0>
+
 ``library/linda/``
 ------------------
 
