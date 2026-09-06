@@ -32,6 +32,7 @@
 		text_normalization(loader),
 		tokenization(loader),
 		stop_words(loader),
+	    language_detection(loader),
 		numerical_analysis(loader),
 		linear_algebra(loader),
 		linear_programming(loader),

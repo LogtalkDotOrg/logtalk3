@@ -241,6 +241,7 @@ sed '1,19d' ../../../library/knn_distance_anomaly_detector/NOTES.md | pandoc -f 
 sed '1,19d' ../../../library/knn_regression/NOTES.md | pandoc -f gfm -t rst -o libraries/knn_regression.rst
 sed '1,19d' ../../../library/kprototypes_clusterer/NOTES.md | pandoc -f gfm -t rst -o libraries/kprototypes_clusterer.rst
 sed '1,19d' ../../../library/ksuid/NOTES.md | pandoc -f gfm -t rst -o libraries/ksuid.rst
+sed '1,19d' ../../../library/language_detection/NOTES.md | pandoc -f gfm -t rst -o libraries/language_detection.rst
 sed '1,19d' ../../../library/lasso_regression/NOTES.md | pandoc -f gfm -t rst -o libraries/lasso_regression.rst
 sed '1,19d' ../../../library/lda_classifier/NOTES.md | pandoc -f gfm -t rst -o libraries/lda_classifier.rst
 sed '1,19d' ../../../library/lda_projection/NOTES.md | pandoc -f gfm -t rst -o libraries/lda_projection.rst

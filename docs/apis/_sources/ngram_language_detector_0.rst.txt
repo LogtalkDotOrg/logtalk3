@@ -1,0 +1,65 @@
+.. index:: single: ngram_language_detector
+.. _ngram_language_detector/0:
+
+.. rst-class:: right
+
+**object**
+
+``ngram_language_detector``
+===========================
+
+Language detection strategy using character-trigram cosine similarity.
+
+| **Availability:** 
+|    ``logtalk_load(language_detection(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-06
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`language_detection_strategy_protocol <language_detection_strategy_protocol/0>`
+| **Imports:**
+|    ``public`` :ref:`language_detection_scoring <language_detection_scoring/0>`
+| **Uses:**
+|    :ref:`language_profiles <language_profiles/0>`
+|    :ref:`n_grams(Representation) <n_grams/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`language_detection_strategy_protocol/0::scores/3`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`language_detector(Representation,Strategy) <language_detector/2>`
+

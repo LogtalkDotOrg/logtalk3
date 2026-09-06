@@ -1,0 +1,116 @@
+.. index:: single: language_profiles
+.. _language_profiles/0:
+
+.. rst-class:: right
+
+**object**
+
+``language_profiles``
+=====================
+
+Registry of language detection profiles.
+
+| **Availability:** 
+|    ``logtalk_load(language_detection(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-06
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: profile/2
+.. _language_profiles/0::profile/2:
+
+``profile/2``
+^^^^^^^^^^^^^
+
+Enumerates the effective ISO 639-1 language codes and profile objects. Custom profiles override default profiles for the same language code.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``profile(Language,Profile)``
+| **Mode and number of proofs:**
+|    ``profile(?atom,?object_identifier)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: default_profile/2
+.. _language_profiles/0::default_profile/2:
+
+``default_profile/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Enumerates default built-in ISO 639-1 language codes and profile objects.
+
+| **Compilation flags:**
+|    ``static, multifile``
+
+| **Template:**
+|    ``default_profile(Language,Profile)``
+| **Mode and number of proofs:**
+|    ``default_profile(?atom,?object_identifier)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: custom_profile/2
+.. _language_profiles/0::custom_profile/2:
+
+``custom_profile/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Enumerates custom ISO 639-1 language codes and profile objects.
+
+| **Compilation flags:**
+|    ``static, multifile``
+
+| **Template:**
+|    ``custom_profile(Language,Profile)``
+| **Mode and number of proofs:**
+|    ``custom_profile(?atom,?object_identifier)`` - ``zero_or_more``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`language_profile_protocol <language_profile_protocol/0>`
+

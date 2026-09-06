@@ -1,0 +1,71 @@
+.. index:: single: language_detector(Representation,Strategy)
+.. _language_detector/2:
+
+.. rst-class:: right
+
+**object**
+
+``language_detector(Representation,Strategy)``
+==============================================
+
+* ``Representation`` - Text representation. Valid values are ``atom``, ``chars``, and ``codes``.
+* ``Strategy`` - Object implementing the ``language_detection_strategy_protocol`` protocol.
+
+
+Language detector parameterized by text representation and detection strategy.
+
+| **Availability:** 
+|    ``logtalk_load(language_detection(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-06
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`language_detector_protocol <language_detector_protocol/0>`
+| **Imports:**
+|    ``public`` :ref:`options <options/0>`
+| **Uses:**
+|    :ref:`language_profiles <language_profiles/0>`
+|    :ref:`list <list/0>`
+|    :ref:`text_normalizer(Representation,Profile) <text_normalizer/2>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`options_protocol/0::check_option/1`  :ref:`options_protocol/0::check_options/1`  :ref:`options_protocol/0::default_option/1`  :ref:`options_protocol/0::default_options/1`  :ref:`language_detector_protocol/0::detect/2`  :ref:`language_detector_protocol/0::detect/3`  :ref:`language_detector_protocol/0::detect/4`  :ref:`language_detector_protocol/0::detect_all/2`  :ref:`language_detector_protocol/0::detect_all/3`  :ref:`options_protocol/0::option/2`  :ref:`options_protocol/0::option/3`  :ref:`options_protocol/0::valid_option/1`  :ref:`options_protocol/0::valid_options/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`language_detector_protocol <language_detector_protocol/0>`, :ref:`language_detection_strategy_protocol <language_detection_strategy_protocol/0>`
+

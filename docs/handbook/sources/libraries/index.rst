@@ -190,6 +190,7 @@ directory in the ``NOTES.md`` file.
    knn_regression
    kprototypes_clusterer
    ksuid
+   language_detection
    lasso_regression
    lda_classifier
    lda_projection

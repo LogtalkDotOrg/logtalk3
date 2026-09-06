@@ -2161,6 +2161,32 @@ To load any library (including developer tools, ports, and contributions), use t
    ksuid(Representation,Alphabet) <ksuid_2>
    ksuid_protocol <ksuid_protocol_0>
 
+:ref:`language_detection <library_language_detection>`
+------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   de_language_profile <de_language_profile_0>
+   en_language_profile <en_language_profile_0>
+   es_language_profile <es_language_profile_0>
+   fr_language_profile <fr_language_profile_0>
+   hybrid_language_detector <hybrid_language_detector_0>
+   it_language_profile <it_language_profile_0>
+   language_detection_scoring <language_detection_scoring_0>
+   language_detection_strategy_protocol <language_detection_strategy_protocol_0>
+   language_detection_tokenizer <language_detection_tokenizer_0>
+   language_detector(Representation,Strategy) <language_detector_2>
+   language_detector_protocol <language_detector_protocol_0>
+   language_profile_common <language_profile_common_0>
+   language_profile_protocol <language_profile_protocol_0>
+   language_profiles <language_profiles_0>
+   ngram_language_detector <ngram_language_detector_0>
+   pt_language_profile <pt_language_profile_0>
+   stopword_language_detector <stopword_language_detector_0>
+
 :ref:`lasso_regression <library_lasso_regression>`
 --------------------------------------------------
 
@@ -3397,7 +3423,12 @@ To load any library (including developer tools, ports, and contributions), use t
    stop_words(Representation,Language) <stop_words_2>
    stop_words_language_protocol <stop_words_language_protocol_0>
    stop_words_protocol <stop_words_protocol_0>
+   stopwords_de <stopwords_de_0>
    stopwords_en <stopwords_en_0>
+   stopwords_es <stopwords_es_0>
+   stopwords_fr <stopwords_fr_0>
+   stopwords_it <stopwords_it_0>
+   stopwords_pt <stopwords_pt_0>
 
 :ref:`string_distance <library_string_distance>`
 ------------------------------------------------

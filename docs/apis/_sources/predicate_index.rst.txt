@@ -4864,6 +4864,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http_htmx <http_htmx/0::current_url_abs_path/2>`
 
+``custom_profile/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`language_profiles <language_profiles/0::custom_profile/2>`
+
 ``cut/3``
 ---------
 
@@ -5499,6 +5509,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`options_protocol <options_protocol/0::default_options/1>`
 * :ref:`wrapper <wrapper/0::default_options/1>`
+
+``default_profile/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`language_profiles <language_profiles/0::default_profile/2>`
 
 ``define_log_file/2``
 ---------------------
@@ -6153,6 +6173,56 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`mcp_server_streamable_http_transport <mcp_server_streamable_http_transport/0::detach_sse_stream/0>`
+
+``detect/2``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`language_detector_protocol <language_detector_protocol/0::detect/2>`
+
+``detect/3``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`language_detector_protocol <language_detector_protocol/0::detect/3>`
+
+``detect/4``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`language_detector_protocol <language_detector_protocol/0::detect/4>`
+
+``detect_all/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`language_detector_protocol <language_detector_protocol/0::detect_all/2>`
+
+``detect_all/3``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`language_detector_protocol <language_detector_protocol/0::detect_all/3>`
 
 ``determinant/2``
 -----------------
@@ -13902,6 +13972,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`crs_projections_protocol <crs_projections_protocol/0::lambert_azimuthal_equal_area_inverse/3>`
+
+``language/1``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`language_profile_protocol <language_profile_protocol/0::language/1>`
 
 ``language/3``
 --------------
@@ -21847,6 +21927,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`gravatar <gravatar/0::profile/2>`
+* :ref:`language_profiles <language_profiles/0::profile/2>`
 
 ``profile/3``
 -------------
@@ -25480,6 +25561,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ranker_protocol <ranker_protocol/0::scores/2>`
 
+``scores/3``
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`language_detection_strategy_protocol <language_detection_strategy_protocol/0::scores/3>`
+
 ``search/1``
 ------------
 
@@ -27592,6 +27683,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 
+* :ref:`language_profile_protocol <language_profile_protocol/0::stop_word/1>`
 * :ref:`stop_words_language_protocol <stop_words_language_protocol/0::stop_word/1>`
 * :ref:`stop_words_protocol <stop_words_protocol/0::stop_word/1>`
 
@@ -29275,6 +29367,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`http_htmx <http_htmx/0::trigger_name/2>`
+
+``trigram_counts/1``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`language_profile_common <language_profile_common/0::trigram_counts/1>`
+* :ref:`language_profile_protocol <language_profile_protocol/0::trigram_counts/1>`
 
 ``trigrams/2``
 --------------

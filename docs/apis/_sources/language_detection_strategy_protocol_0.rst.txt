@@ -1,0 +1,78 @@
+.. index:: single: language_detection_strategy_protocol
+.. _language_detection_strategy_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``language_detection_strategy_protocol``
+========================================
+
+Language detection strategy protocol.
+
+| **Availability:** 
+|    ``logtalk_load(language_detection(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-06
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: scores/3
+.. _language_detection_strategy_protocol/0::scores/3:
+
+``scores/3``
+^^^^^^^^^^^^
+
+Returns relative detection scores for the requested ISO 639-1 candidate language codes. Assumes normalized text and validated candidates.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``scores(Codes,Candidates,Scores)``
+| **Mode and number of proofs:**
+|    ``scores(+list(character_code),+list(atom),-list(pair(atom,float)))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`language_detector_protocol <language_detector_protocol/0>`, :ref:`language_detector(Representation,Strategy) <language_detector/2>`
+

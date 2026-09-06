@@ -90,6 +90,9 @@ sentence splitting.
 * ADDED: New `text_normalization` library providing extensible Unicode aware
 text cleaning and normalization.
 
+* ADDED: New `language_detection` library providing extensible language
+detection for text.
+
 * UPDATED: The `unicode_data` library to Unicode 17.0.0, with reproducible
 generation, shared backing ranges, selectively loadable legacy compatibility
 views, and preservation of all Unihan variant solutions.

@@ -241,6 +241,7 @@ Foreach-Object {
 (Get-Content ../../../library/knn_regression/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/knn_regression.rst
 (Get-Content ../../../library/kprototypes_clusterer/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/kprototypes_clusterer.rst
 (Get-Content ../../../library/ksuid/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/ksuid.rst
+(Get-Content ../../../library/language_detection/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/language_detection.rst
 (Get-Content ../../../library/lasso_regression/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/lasso_regression.rst
 (Get-Content ../../../library/lda_classifier/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/lda_classifier.rst
 (Get-Content ../../../library/lda_projection/NOTES.md | Select-Object -Skip 19) | pandoc -f gfm -t rst -o libraries/lda_projection.rst

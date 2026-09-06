@@ -270,6 +270,7 @@ logtalk_library_path(knn_distance_anomaly_detector, library('knn_distance_anomal
 logtalk_library_path(knn_regression, library('knn_regression/')).
 logtalk_library_path(kprototypes_clusterer, library('kprototypes_clusterer/')).
 logtalk_library_path(ksuid, library('ksuid/')).
+logtalk_library_path(language_detection, library('language_detection/')).
 logtalk_library_path(lasso_regression, library('lasso_regression/')).
 logtalk_library_path(lda_classifier, library('lda_classifier/')).
 logtalk_library_path(lda_projection, library('lda_projection/')).

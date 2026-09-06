@@ -1,0 +1,154 @@
+.. index:: single: language_detector_protocol
+.. _language_detector_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``language_detector_protocol``
+==============================
+
+Language detection protocol.
+
+| **Availability:** 
+|    ``logtalk_load(language_detection(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-06
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: detect/2
+.. _language_detector_protocol/0::detect/2:
+
+``detect/2``
+^^^^^^^^^^^^
+
+Detects the most likely language and returns its ISO 639-1 code.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``detect(Text,Language)``
+| **Mode and number of proofs:**
+|    ``detect(+text,-atom)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: detect/3
+.. _language_detector_protocol/0::detect/3:
+
+``detect/3``
+^^^^^^^^^^^^
+
+Detects the most likely language and returns its ISO 639-1 code and relative detection score.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``detect(Text,Language,Score)``
+| **Mode and number of proofs:**
+|    ``detect(+text,-atom,-float)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: detect/4
+.. _language_detector_protocol/0::detect/4:
+
+``detect/4``
+^^^^^^^^^^^^
+
+Detects the most likely language using the given options and returns its ISO 639-1 code and relative detection score.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``detect(Text,Language,Score,Options)``
+| **Mode and number of proofs:**
+|    ``detect(+text,-atom,-float,+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: detect_all/2
+.. _language_detector_protocol/0::detect_all/2:
+
+``detect_all/2``
+^^^^^^^^^^^^^^^^
+
+Returns candidate languages ranked by descending relative detection score or an empty list when there is insufficient evidence.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``detect_all(Text,ScoredLanguages)``
+| **Mode and number of proofs:**
+|    ``detect_all(+text,-list(pair(atom,float)))`` - ``one_or_error``
+
+
+------------
+
+.. index:: detect_all/3
+.. _language_detector_protocol/0::detect_all/3:
+
+``detect_all/3``
+^^^^^^^^^^^^^^^^
+
+Returns candidate languages ranked by descending relative detection score using the given options or an empty list when there is insufficient evidence.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``detect_all(Text,ScoredLanguages,Options)``
+| **Mode and number of proofs:**
+|    ``detect_all(+text,-list(pair(atom,float)),+list(compound))`` - ``one_or_error``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`language_detector(Representation,Strategy) <language_detector/2>`, :ref:`language_detection_strategy_protocol <language_detection_strategy_protocol/0>`
+

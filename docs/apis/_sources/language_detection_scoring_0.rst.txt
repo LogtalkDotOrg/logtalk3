@@ -1,0 +1,93 @@
+.. index:: single: language_detection_scoring
+.. _language_detection_scoring/0:
+
+.. rst-class:: right
+
+**category**
+
+``language_detection_scoring``
+==============================
+
+Shared portable language detection scoring predicates.
+
+| **Availability:** 
+|    ``logtalk_load(language_detection(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-06
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(none)
+
+Protected predicates
+--------------------
+
+.. index:: cosine_similarity/3
+.. _language_detection_scoring/0::cosine_similarity/3:
+
+``cosine_similarity/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Computes cosine similarity between two lexically sorted sparse count vectors.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cosine_similarity(Counts1,Counts2,Similarity)``
+| **Mode and number of proofs:**
+|    ``cosine_similarity(+list(pair(atom,positive_integer)),+list(pair(atom,positive_integer)),-float)`` - ``one``
+
+
+------------
+
+.. index:: normalize_scores/2
+.. _language_detection_scoring/0::normalize_scores/2:
+
+``normalize_scores/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Normalizes non-negative scores to sum to one or returns an empty list when their total is zero.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``normalize_scores(RawScores,Scores)``
+| **Mode and number of proofs:**
+|    ``normalize_scores(+list(pair(atom,number)),-list(pair(atom,float)))`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

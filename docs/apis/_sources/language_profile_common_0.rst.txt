@@ -1,0 +1,75 @@
+.. index:: single: language_profile_common
+.. _language_profile_common/0:
+
+.. rst-class:: right
+
+**category**
+
+``language_profile_common``
+===========================
+
+Shared predicates for language detection profiles.
+
+| **Availability:** 
+|    ``logtalk_load(language_detection(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-06
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`n_grams(Representation) <n_grams/1>`
+|    :ref:`user <user/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: trigram_counts/1
+.. _language_profile_common/0::trigram_counts/1:
+
+``trigram_counts/1``
+^^^^^^^^^^^^^^^^^^^^
+
+Returns trigram counts derived from the profile stop-word inventory.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``trigram_counts(Counts)``
+| **Mode and number of proofs:**
+|    ``trigram_counts(-list(pair(atom,positive_integer)))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

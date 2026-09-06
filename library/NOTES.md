@@ -57,7 +57,7 @@ Library groups
 	`ccsds_frames`, `ccsds_link_profiles`, `ccsds_packet_services`, `ccsds_packetization`,
 	`ccsds_packets`, `ccsds_tc_services`, `ccsds_time_codes`, `ccsds_time_fields`.
 - Text and NLP:
-	`character_sets`, `grammars`, `string_distance`, and `strings`,
+	`character_sets`, `grammars`, `string_distance`, and `strings`, `language_detection`,
 	`lemmatization`, `n_grams`, `stemming`, `stop_words`, `text_normalization`, and `tokenization`.
 - Web and HTTP APIs:
     - High-level libraries:
