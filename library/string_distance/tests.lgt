@@ -283,3 +283,38 @@
 
 	test(double_metaphone_match_2_03, true) :-
 		string_distance::double_metaphone_match("steven", "stephen").
+
+	% caverphone/2 tests
+	%
+	% expected encodings derived from the Caverphone 2.0 specification and
+	% cross-checked against reference implementations (Apache Commons Codec,
+	% Wikipedia examples)
+
+	test(caverphone_2_01, deterministic(Key == "LA11111111")) :-
+		string_distance::caverphone("Lee", Key).
+
+	test(caverphone_2_02, deterministic(Key == "TMPSN11111")) :-
+		string_distance::caverphone("Thompson", Key).
+
+	test(caverphone_2_03, deterministic(Key == "STFNSN1111")) :-
+		string_distance::caverphone("Stevenson", Key).
+
+	test(caverphone_2_04, deterministic(Key == "PTA1111111")) :-
+		string_distance::caverphone("Peter", Key).
+
+	test(caverphone_2_05, deterministic(Key == "1111111111")) :-
+		string_distance::caverphone("", Key).
+
+	test(caverphone_2_06, deterministic(Key == "SMT1111111")) :-
+		string_distance::caverphone("Smith", Key).
+
+	% caverphone_match/2 tests
+
+	test(caverphone_match_2_01, true) :-
+		string_distance::caverphone_match("Lee", "Leigh").
+
+	test(caverphone_match_2_02, true) :-
+		string_distance::caverphone_match("Peter", "Peady").
+
+	test(caverphone_match_2_03, false) :-
+		string_distance::caverphone_match("Thompson", "Thomson").

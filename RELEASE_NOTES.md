@@ -231,7 +231,7 @@ a new `connection_helper_executable/1` option (defaulting to `ncat`).
 ranking datasets with ranked teams and weighted player participation, plus
 shared portable standard normal distribution numeric helpers.
 
-* ADDED: NYSIIS phonetic encoding and matching support to the
+* ADDED: Caverphone and NYSIIS phonetic encodings and matching support to the
 `string_distance` library.
 
 * ADDED: Support for the `open_probability` type to the `types` and `arbitrary`

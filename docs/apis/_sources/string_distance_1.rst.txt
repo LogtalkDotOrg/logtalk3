@@ -17,8 +17,8 @@ String distance predicates.
 |    ``logtalk_load(string_distance(loader))``
 
 | **Author:** Paulo Moura
-| **Version:** 1:3:0
-| **Date:** 2026-08-08
+| **Version:** 1:4:0
+| **Date:** 2026-09-06
 
 | **Compilation flags:**
 |    ``static, context_switching_calls``
@@ -472,6 +472,48 @@ Succeeds if the Double Metaphone encodings of two texts match (either primary or
 |        ``String2`` - Second input string.
 | **Mode and number of proofs:**
 |    ``double_metaphone_match(+text,+text)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: caverphone/2
+.. _string_distance/1::caverphone/2:
+
+``caverphone/2``
+^^^^^^^^^^^^^^^^
+
+Computes the Caverphone 2.0 phonetic encoding of a text.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``caverphone(Text,Encoding)``
+|        ``Text`` - Input string (typically a name).
+|        ``Encoding`` - The Caverphone 2.0 phonetic encoding, limited to ten characters.
+| **Mode and number of proofs:**
+|    ``caverphone(+text,-atom)`` - ``one``
+
+
+------------
+
+.. index:: caverphone_match/2
+.. _string_distance/1::caverphone_match/2:
+
+``caverphone_match/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Succeeds if two strings share the same Caverphone 2.0 key.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``caverphone_match(String1,String2)``
+|        ``String1`` - First input string.
+|        ``String2`` - Second input string.
+| **Mode and number of proofs:**
+|    ``caverphone_match(+text,+text)`` - ``zero_or_one``
 
 
 ------------

@@ -93,11 +93,13 @@ This library implements the following string distance algorithms:
   by dividing the size of their intersection by the size of their union.
   Simple and intuitive, though it ignores term frequency.
 
-- **Soundex/NYSIIS/Metaphone** are phonetic algorithms rather than
-  strict string comparisons. They encode strings based on how they
+- **Soundex/NYSIIS/Metaphone/Caverphone** are phonetic algorithms rather
+  than strict string comparisons. They encode strings based on how they
   sound. Useful for name deduplication where spelling varies but
   pronunciation is similar. The NYSIIS implementation uses the original
-  form with keys limited to six characters.
+  form with keys limited to six characters. The Caverphone
+  implementation follows the revised (2.0) rules and produces
+  ten-character keys.
 
 General advice: use Levenshtein or Damerau-Levenshtein for
 general-purpose edit distance, Jaro-Winkler for short strings like

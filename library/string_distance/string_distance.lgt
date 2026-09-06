@@ -22,9 +22,9 @@
 :- object(string_distance(_Representation_)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:4:0,
 		author is 'Paulo Moura',
-		date is 2026-08-08,
+		date is 2026-09-06,
 		comment is 'String distance predicates.',
 		parameters is [
 			'Representation' - 'String representation. Valid values are ``atom``, ``codes``, and ``chars``.'
@@ -259,6 +259,26 @@
 	:- mode(double_metaphone_match(+text, +text), zero_or_one).
 	:- info(double_metaphone_match/2, [
 		comment is 'Succeeds if the Double Metaphone encodings of two texts match (either primary or alternative encodings).',
+		arguments is [
+			'String1' - 'First input string.',
+			'String2' - 'Second input string.'
+		]
+	]).
+
+	:- public(caverphone/2).
+	:- mode(caverphone(+text, -atom), one).
+	:- info(caverphone/2, [
+		comment is 'Computes the Caverphone 2.0 phonetic encoding of a text.',
+		arguments is [
+			'Text' - 'Input string (typically a name).',
+			'Encoding' - 'The Caverphone 2.0 phonetic encoding, limited to ten characters.'
+		]
+	]).
+
+	:- public(caverphone_match/2).
+	:- mode(caverphone_match(+text, +text), zero_or_one).
+	:- info(caverphone_match/2, [
+		comment is 'Succeeds if two strings share the same Caverphone 2.0 key.',
 		arguments is [
 			'String1' - 'First input string.',
 			'String2' - 'Second input string.'
@@ -1045,8 +1065,11 @@
 		!.
 	nysiis_transcode(_, Char, Chars, Char, Chars).
 
-	nysiis_vowel(Char) :-
-		member(Char, ['A','E','I','O','U']).
+	nysiis_vowel('A').
+	nysiis_vowel('E').
+	nysiis_vowel('I').
+	nysiis_vowel('O').
+	nysiis_vowel('U').
 
 	nysiis_cleanup(Key, Cleaned) :-
 		nysiis_remove_terminal('S', Key, Key1),
@@ -1114,233 +1137,236 @@
 		!.
 	metaphone_transform_initial(Chars, Chars).
 
-		metaphone_encode(_, Index, Length, []) :-
-			Index >= Length,
-			!.
-		metaphone_encode(Word, Index, Length, Encoding) :-
-			nth0(Index, Word, Char),
-			(	metaphone_duplicate(Word, Index, Char) ->
-				Fragment = [],
-				NextIndex is Index + 1
-			; 	metaphone_rule(Char, Word, Index, Length, Fragment, NextIndex)
-			),
-			append(Fragment, Rest, Encoding),
-			metaphone_encode(Word, NextIndex, Length, Rest).
+	metaphone_encode(_, Index, Length, []) :-
+		Index >= Length,
+		!.
+	metaphone_encode(Word, Index, Length, Encoding) :-
+		nth0(Index, Word, Char),
+		(	metaphone_duplicate(Word, Index, Char) ->
+			Fragment = [],
+			NextIndex is Index + 1
+		; 	metaphone_rule(Char, Word, Index, Length, Fragment, NextIndex)
+		),
+		append(Fragment, Rest, Encoding),
+		metaphone_encode(Word, NextIndex, Length, Rest).
 
-		metaphone_duplicate(Word, Index, Char) :-
-			Char \== 'C',
-			Index > 0,
-			PreviousIndex is Index - 1,
-			nth0(PreviousIndex, Word, Char).
+	metaphone_duplicate(Word, Index, Char) :-
+		Char \== 'C',
+		Index > 0,
+		PreviousIndex is Index - 1,
+		nth0(PreviousIndex, Word, Char).
 
-		metaphone_rule(Char, _, 0, _, [Char], 1) :-
-			metaphone_vowel(Char),
-			!.
-		metaphone_rule(Char, _, Index, _, [], NextIndex) :-
-			metaphone_vowel(Char),
-			!,
-			NextIndex is Index + 1.
-		metaphone_rule('B', Word, Index, Length, Fragment, NextIndex) :-
-			!,
-			NextIndex is Index + 1,
-			(	NextIndex =:= Length,
-				metaphone_previous_char(Word, Index, 'M') ->
-				Fragment = []
-			;	Fragment = ['B']
-			).
-		metaphone_rule('C', Word, Index, _, Fragment, NextIndex) :-
-			!,
-			metaphone_c_rule(Word, Index, Fragment, NextIndex).
-		metaphone_rule('D', Word, Index, _, Fragment, NextIndex) :-
-			!,
-			(	(	metaphone_region(Word, Index, ['D','G','E'])
-				;	metaphone_region(Word, Index, ['D','G','I'])
-				;	metaphone_region(Word, Index, ['D','G','Y'])
-				) ->
-				Fragment = ['J'],
-				NextIndex is Index + 3
-			;	Fragment = ['T'],
-				NextIndex is Index + 1
-			).
-		metaphone_rule('G', Word, Index, Length, Fragment, NextIndex) :-
-			!,
-			metaphone_g_rule(Word, Index, Length, Fragment, NextIndex).
-		metaphone_rule('H', Word, Index, Length, Fragment, NextIndex) :-
-			!,
-			NextIndex is Index + 1,
-			(	NextIndex < Length,
-				\+ metaphone_previous_one_of(Word, Index, ['C','S','P','T','G']),
-				metaphone_char_at(Word, NextIndex, Next), metaphone_vowel(Next) ->
-				Fragment = ['H']
-			;	Fragment = []
-			).
-		metaphone_rule('K', Word, Index, _, Fragment, NextIndex) :-
-			!,
-			NextIndex is Index + 1,
-			(	metaphone_previous_char(Word, Index, 'C') ->
-				Fragment = []
-			;	Fragment = ['K']
-			).
-		metaphone_rule('P', Word, Index, _, Fragment, NextIndex) :-
-			!,
-			(	metaphone_next_char(Word, Index, 'H') ->
-				Fragment = ['F'],
-				NextIndex is Index + 2
-			;	Fragment = ['P'],
-				NextIndex is Index + 1
-			).
-		metaphone_rule('Q', _, Index, _, ['K'], NextIndex) :-
-			!,
-			NextIndex is Index + 1.
-		metaphone_rule('S', Word, Index, _, Fragment, NextIndex) :-
-			!,
-			(	metaphone_region(Word, Index, ['S','H']) ->
-				Fragment = ['X'],
-				NextIndex is Index + 2
-			;	metaphone_region(Word, Index, ['S','I','A']) ->
-				Fragment = ['X'],
-				NextIndex is Index + 3
-			;	metaphone_region(Word, Index, ['S','I','O']) ->
-				Fragment = ['X'],
-				NextIndex is Index + 3
-			;	Fragment = ['S'],
-				NextIndex is Index + 1
-			).
-		metaphone_rule('T', Word, Index, _, Fragment, NextIndex) :-
-			!,
-			(	metaphone_region(Word, Index, ['T','I','A']) ->
-				Fragment = ['X'],
-				NextIndex is Index + 3
-			;	metaphone_region(Word, Index, ['T','I','O']) ->
-				Fragment = ['X'],
-				NextIndex is Index + 3
-			;	metaphone_region(Word, Index, ['T','C','H']) ->
-				Fragment = [],
-				NextIndex is Index + 1
-			;	metaphone_region(Word, Index, ['T','H']) ->
-				Fragment = ['0'],
-				NextIndex is Index + 2
-			;	Fragment = ['T'],
-				NextIndex is Index + 1
-			).
-		metaphone_rule('V', _, Index, _, ['F'], NextIndex) :-
-			!,
-			NextIndex is Index + 1.
-		metaphone_rule(Char, Word, Index, Length, Fragment, NextIndex) :-
-			member(Char, ['W','Y']),
-			!,
-			NextIndex is Index + 1,
-			(	NextIndex < Length,
-				metaphone_char_at(Word, NextIndex, Next),
-				metaphone_vowel(Next) ->
-				Fragment = [Char]
-			;	Fragment = []
-			).
-		metaphone_rule('X', _, Index, _, ['K','S'], NextIndex) :-
-			!,
-			NextIndex is Index + 1.
-		metaphone_rule('Z', _, Index, _, ['S'], NextIndex) :-
-			!,
-			NextIndex is Index + 1.
-		metaphone_rule(Char, _, Index, _, Fragment, NextIndex) :-
-			NextIndex is Index + 1,
-			(	member(Char, ['F','J','L','M','N','R']) ->
-				Fragment = [Char]
-			;	Fragment = []
-			).
+	metaphone_rule(Char, _, 0, _, [Char], 1) :-
+		metaphone_vowel(Char),
+		!.
+	metaphone_rule(Char, _, Index, _, [], NextIndex) :-
+		metaphone_vowel(Char),
+		!,
+		NextIndex is Index + 1.
+	metaphone_rule('B', Word, Index, Length, Fragment, NextIndex) :-
+		!,
+		NextIndex is Index + 1,
+		(	NextIndex =:= Length,
+			metaphone_previous_char(Word, Index, 'M') ->
+			Fragment = []
+		;	Fragment = ['B']
+		).
+	metaphone_rule('C', Word, Index, _, Fragment, NextIndex) :-
+		!,
+		metaphone_c_rule(Word, Index, Fragment, NextIndex).
+	metaphone_rule('D', Word, Index, _, Fragment, NextIndex) :-
+		!,
+		(	(	metaphone_region(Word, Index, ['D','G','E'])
+			;	metaphone_region(Word, Index, ['D','G','I'])
+			;	metaphone_region(Word, Index, ['D','G','Y'])
+			) ->
+			Fragment = ['J'],
+			NextIndex is Index + 3
+		;	Fragment = ['T'],
+			NextIndex is Index + 1
+		).
+	metaphone_rule('G', Word, Index, Length, Fragment, NextIndex) :-
+		!,
+		metaphone_g_rule(Word, Index, Length, Fragment, NextIndex).
+	metaphone_rule('H', Word, Index, Length, Fragment, NextIndex) :-
+		!,
+		NextIndex is Index + 1,
+		(	NextIndex < Length,
+			\+ metaphone_previous_one_of(Word, Index, ['C','S','P','T','G']),
+			metaphone_char_at(Word, NextIndex, Next), metaphone_vowel(Next) ->
+			Fragment = ['H']
+		;	Fragment = []
+		).
+	metaphone_rule('K', Word, Index, _, Fragment, NextIndex) :-
+		!,
+		NextIndex is Index + 1,
+		(	metaphone_previous_char(Word, Index, 'C') ->
+			Fragment = []
+		;	Fragment = ['K']
+		).
+	metaphone_rule('P', Word, Index, _, Fragment, NextIndex) :-
+		!,
+		(	metaphone_next_char(Word, Index, 'H') ->
+			Fragment = ['F'],
+			NextIndex is Index + 2
+		;	Fragment = ['P'],
+			NextIndex is Index + 1
+		).
+	metaphone_rule('Q', _, Index, _, ['K'], NextIndex) :-
+		!,
+		NextIndex is Index + 1.
+	metaphone_rule('S', Word, Index, _, Fragment, NextIndex) :-
+		!,
+		(	metaphone_region(Word, Index, ['S','H']) ->
+			Fragment = ['X'],
+			NextIndex is Index + 2
+		;	metaphone_region(Word, Index, ['S','I','A']) ->
+			Fragment = ['X'],
+			NextIndex is Index + 3
+		;	metaphone_region(Word, Index, ['S','I','O']) ->
+			Fragment = ['X'],
+			NextIndex is Index + 3
+		;	Fragment = ['S'],
+			NextIndex is Index + 1
+		).
+	metaphone_rule('T', Word, Index, _, Fragment, NextIndex) :-
+		!,
+		(	metaphone_region(Word, Index, ['T','I','A']) ->
+			Fragment = ['X'],
+			NextIndex is Index + 3
+		;	metaphone_region(Word, Index, ['T','I','O']) ->
+			Fragment = ['X'],
+			NextIndex is Index + 3
+		;	metaphone_region(Word, Index, ['T','C','H']) ->
+			Fragment = [],
+			NextIndex is Index + 1
+		;	metaphone_region(Word, Index, ['T','H']) ->
+			Fragment = ['0'],
+			NextIndex is Index + 2
+		;	Fragment = ['T'],
+			NextIndex is Index + 1
+		).
+	metaphone_rule('V', _, Index, _, ['F'], NextIndex) :-
+		!,
+		NextIndex is Index + 1.
+	metaphone_rule(Char, Word, Index, Length, Fragment, NextIndex) :-
+		member(Char, ['W','Y']),
+		!,
+		NextIndex is Index + 1,
+		(	NextIndex < Length,
+			metaphone_char_at(Word, NextIndex, Next),
+			metaphone_vowel(Next) ->
+			Fragment = [Char]
+		;	Fragment = []
+		).
+	metaphone_rule('X', _, Index, _, ['K','S'], NextIndex) :-
+		!,
+		NextIndex is Index + 1.
+	metaphone_rule('Z', _, Index, _, ['S'], NextIndex) :-
+		!,
+		NextIndex is Index + 1.
+	metaphone_rule(Char, _, Index, _, Fragment, NextIndex) :-
+		NextIndex is Index + 1,
+		(	member(Char, ['F','J','L','M','N','R']) ->
+			Fragment = [Char]
+		;	Fragment = []
+		).
 
-		metaphone_c_rule(Word, Index, [], NextIndex) :-
-			metaphone_previous_char(Word, Index, 'S'),
-			metaphone_next_one_of(Word, Index, ['E','I','Y']),
-			!,
-			NextIndex is Index + 1.
-		metaphone_c_rule(Word, Index, ['K'], NextIndex) :-
-			metaphone_previous_char(Word, Index, 'S'),
-			metaphone_next_char(Word, Index, 'H'),
-			!,
-			NextIndex is Index + 2.
-		metaphone_c_rule(Word, Index, ['X'], NextIndex) :-
-			(	metaphone_region(Word, Index, ['C','I','A']) -> NextIndex is Index + 3
-			;	metaphone_region(Word, Index, ['C','H']), NextIndex is Index + 2
-			),
-			!.
-		metaphone_c_rule(Word, Index, ['S'], NextIndex) :-
-			metaphone_next_one_of(Word, Index, ['E','I','Y']),
-			!,
-			NextIndex is Index + 1.
-		metaphone_c_rule(Word, Index, ['K'], NextIndex) :-
-			(	metaphone_next_char(Word, Index, 'K') ->
-				NextIndex is Index + 2
-			;	NextIndex is Index + 1
-			).
+	metaphone_c_rule(Word, Index, [], NextIndex) :-
+		metaphone_previous_char(Word, Index, 'S'),
+		metaphone_next_one_of(Word, Index, ['E','I','Y']),
+		!,
+		NextIndex is Index + 1.
+	metaphone_c_rule(Word, Index, ['K'], NextIndex) :-
+		metaphone_previous_char(Word, Index, 'S'),
+		metaphone_next_char(Word, Index, 'H'),
+		!,
+		NextIndex is Index + 2.
+	metaphone_c_rule(Word, Index, ['X'], NextIndex) :-
+		(	metaphone_region(Word, Index, ['C','I','A']) -> NextIndex is Index + 3
+		;	metaphone_region(Word, Index, ['C','H']), NextIndex is Index + 2
+		),
+		!.
+	metaphone_c_rule(Word, Index, ['S'], NextIndex) :-
+		metaphone_next_one_of(Word, Index, ['E','I','Y']),
+		!,
+		NextIndex is Index + 1.
+	metaphone_c_rule(Word, Index, ['K'], NextIndex) :-
+		(	metaphone_next_char(Word, Index, 'K') ->
+			NextIndex is Index + 2
+		;	NextIndex is Index + 1
+		).
 
-		metaphone_g_rule(Word, Index, Length, [], NextIndex) :-
-			metaphone_next_char(Word, Index, 'H'),
-			AfterH is Index + 2,
-			(	AfterH >= Length
-			;	metaphone_char_at(Word, AfterH, Char), \+ metaphone_vowel(Char)
-			),
-			!,
-			NextIndex is Index + 2.
-		metaphone_g_rule(Word, Index, Length, [], NextIndex) :-
-			Index > 0,
-			(	metaphone_region_at_end(Word, Index, Length, ['G','N'])
-			;	metaphone_region_at_end(Word, Index, Length, ['G','N','E','D'])
-			),
-			!,
-			NextIndex is Index + 1.
-		metaphone_g_rule(Word, Index, _, ['J'], NextIndex) :-
-			metaphone_next_one_of(Word, Index, ['E','I','Y']),
-			\+ metaphone_previous_char(Word, Index, 'G'),
-			!,
-			NextIndex is Index + 1.
-		metaphone_g_rule(_, Index, _, ['K'], NextIndex) :-
-			NextIndex is Index + 1.
+	metaphone_g_rule(Word, Index, Length, [], NextIndex) :-
+		metaphone_next_char(Word, Index, 'H'),
+		AfterH is Index + 2,
+		(	AfterH >= Length
+		;	metaphone_char_at(Word, AfterH, Char), \+ metaphone_vowel(Char)
+		),
+		!,
+		NextIndex is Index + 2.
+	metaphone_g_rule(Word, Index, Length, [], NextIndex) :-
+		Index > 0,
+		(	metaphone_region_at_end(Word, Index, Length, ['G','N'])
+		;	metaphone_region_at_end(Word, Index, Length, ['G','N','E','D'])
+		),
+		!,
+		NextIndex is Index + 1.
+	metaphone_g_rule(Word, Index, _, ['J'], NextIndex) :-
+		metaphone_next_one_of(Word, Index, ['E','I','Y']),
+		\+ metaphone_previous_char(Word, Index, 'G'),
+		!,
+		NextIndex is Index + 1.
+	metaphone_g_rule(_, Index, _, ['K'], NextIndex) :-
+		NextIndex is Index + 1.
 
-		metaphone_vowel(Char) :-
-			member(Char, ['A','E','I','O','U']).
+	metaphone_vowel('A').
+	metaphone_vowel('E').
+	metaphone_vowel('I').
+	metaphone_vowel('O').
+	metaphone_vowel('U').
 
-		metaphone_char_at(Word, Index, Char) :-
-			Index >= 0,
-			nth0(Index, Word, Char).
+	metaphone_char_at(Word, Index, Char) :-
+		Index >= 0,
+		nth0(Index, Word, Char).
 
-		metaphone_previous_char(Word, Index, Char) :-
-			PreviousIndex is Index - 1,
-			metaphone_char_at(Word, PreviousIndex, Char).
+	metaphone_previous_char(Word, Index, Char) :-
+		PreviousIndex is Index - 1,
+		metaphone_char_at(Word, PreviousIndex, Char).
 
-		metaphone_next_char(Word, Index, Char) :-
-			NextIndex is Index + 1,
-			metaphone_char_at(Word, NextIndex, Char).
+	metaphone_next_char(Word, Index, Char) :-
+		NextIndex is Index + 1,
+		metaphone_char_at(Word, NextIndex, Char).
 
-		metaphone_previous_one_of(Word, Index, Chars) :-
-			metaphone_previous_char(Word, Index, Char),
-			member(Char, Chars).
+	metaphone_previous_one_of(Word, Index, Chars) :-
+		metaphone_previous_char(Word, Index, Char),
+		member(Char, Chars).
 
-		metaphone_next_one_of(Word, Index, Chars) :-
-			metaphone_next_char(Word, Index, Char),
-			member(Char, Chars).
+	metaphone_next_one_of(Word, Index, Chars) :-
+		metaphone_next_char(Word, Index, Char),
+		member(Char, Chars).
 
-		metaphone_region(Word, Index, Pattern) :-
-			drop(Index, Word, Rest),
-			metaphone_prefix(Pattern, Rest).
+	metaphone_region(Word, Index, Pattern) :-
+		drop(Index, Word, Rest),
+		metaphone_prefix(Pattern, Rest).
 
-		metaphone_region_at_end(Word, Index, Length, Pattern) :-
-			length(Pattern, PatternLength),
-			Index + PatternLength =:= Length,
-			metaphone_region(Word, Index, Pattern).
+	metaphone_region_at_end(Word, Index, Length, Pattern) :-
+		length(Pattern, PatternLength),
+		Index + PatternLength =:= Length,
+		metaphone_region(Word, Index, Pattern).
 
-		metaphone_prefix([], _).
-		metaphone_prefix([Head| Pattern], [Head| Word]) :-
-			metaphone_prefix(Pattern, Word).
+	metaphone_prefix([], _).
+	metaphone_prefix([Head| Pattern], [Head| Word]) :-
+		metaphone_prefix(Pattern, Word).
 
-		metaphone_deduplicate([], []).
-		metaphone_deduplicate([X], [X]) :-
-			!.
-		metaphone_deduplicate([X,X| Tail], Result) :-
-			!,
-			metaphone_deduplicate([X| Tail], Result).
-		metaphone_deduplicate([X,Y| Tail], [X| Result]) :-
-			metaphone_deduplicate([Y| Tail], Result).
+	metaphone_deduplicate([], []).
+	metaphone_deduplicate([X], [X]) :-
+		!.
+	metaphone_deduplicate([X,X| Tail], Result) :-
+		!,
+		metaphone_deduplicate([X| Tail], Result).
+	metaphone_deduplicate([X,Y| Tail], [X| Result]) :-
+		metaphone_deduplicate([Y| Tail], Result).
 
 	% -----------------------------------------------------------------
 	% Double Metaphone (simplified variant)
@@ -1501,14 +1527,14 @@
 	double_metaphone_char('V', Chars, _, 'F', [], Chars).
 	% W - kept only before a vowel
 	double_metaphone_char('W', [Char| Chars], _, 'W', 'F', Chars) :-
-		member(Char, ['A','E','I','O','U']),
+		double_metaphone_vowel(Char),
 		!.
 	double_metaphone_char('W', Chars, _, [], [], Chars).
 	% X -> K, push S back onto input
 	double_metaphone_char('X', Chars, _, 'K', [], ['S'| Chars]).
 	% Y - kept only before a vowel
 	double_metaphone_char('Y', [Char| Chars], _, 'Y', [], Chars) :-
-		member(Char, ['A','E','I','O','U']),
+		double_metaphone_vowel(Char),
 		!.
 	double_metaphone_char('Y', Chars, _, [], [], Chars).
 	% Z -> S
@@ -1516,9 +1542,209 @@
 	% Fallback
 	double_metaphone_char(_, Chars, _, [], [], Chars).
 
+	double_metaphone_vowel('A').
+	double_metaphone_vowel('E').
+	double_metaphone_vowel('I').
+	double_metaphone_vowel('O').
+	double_metaphone_vowel('U').
+
+	% -----------------------------------------------------------------
+	% Caverphone 2.0
+	%
+	% Sequential replacement algorithm (David Hood, 2004). Produces a
+	% fixed-length 10-character key. Optimised for general English and
+	% originally for New Zealand name matching.
+	% -----------------------------------------------------------------
+	caverphone(String, Encoding) :-
+		caverphone(_Representation_, String, Encoding).
+
+	caverphone(atom, String, Encoding) :-
+		atom_chars(String, Chars),
+		caverphone(chars, Chars, Encoding0),
+		atom_chars(Encoding, Encoding0).
+	caverphone(codes, String, Encoding) :-
+		codes_to_chars(String, Chars),
+		caverphone(chars, Chars, Encoding0),
+		chars_to_codes(Encoding0, Encoding).
+	caverphone(chars, String, Encoding) :-
+		(	String == [] ->
+			Encoding = ['1','1','1','1','1','1','1','1','1','1']
+		;	% 1-2. Lowercase + keep only a-z
+			downcase_chars(String, Lower),
+			include_alpha(Lower, Clean0),
+			% 3. Remove final e
+			(	append(Prefix, ['e'], Clean0) ->
+				Clean1 = Prefix
+			;	Clean1 = Clean0
+			),
+			% 4. Starting patterns
+			caverphone_start(Clean1, Clean2),
+			% 5. Ending mb
+			(	append(Front, ['m','b'], Clean2) ->
+				append(Front, ['m','2'], Clean3)
+			;	Clean3 = Clean2
+			),
+			% 6. Main replacements (order is significant)
+			caverphone_replace(Clean3, [
+				['c','q']-['2','q'], ['c','i']-['s','i'], ['c','e']-['s','e'], ['c','y']-['s','y'], ['t','c','h']-['2','c','h'],
+				['c']-['k'], ['q']-['k'], ['x']-['k'], ['v']-['f'], ['d','g']-['2','g'],
+				['t','i','o']-['s','i','o'], ['t','i','a']-['s','i','a'], ['d']-['t'], ['p','h']-['f','h'], ['b']-['p'],
+				['s','h']-['s','2'], ['z']-['s']
+			], Step1),
+			% initial vowel -> A ; other vowels -> 3
+			caverphone_vowels(Step1, Step2),
+			% j/y handling (2.0)
+			caverphone_replace(Step2, [['j']-['y']], Step3),
+			(	Step3 = ['y','3'| RestY3] ->
+				Step4 = ['Y','3'| RestY3]
+			;	Step3 = ['y'| RestY] ->
+				Step4 = ['A'| RestY]
+			;	Step4 = Step3
+			),
+			caverphone_replace(Step4, [['y']-['3']], Step5),
+			caverphone_replace(Step5, [['3','g','h','3']-['3','k','h','3'], ['g','h']-['2','2'], ['g']-['k']], Step6),
+			% collapse runs of s/t/p/k/f/m/n
+			caverphone_collapse(Step6, ['s','t','p','k','f','m','n'], Step7),
+			caverphone_replace(Step7, [['w','3']-['W','3'], ['w','h','3']-['W','h','3']], Step8),
+			(	append(FrontW, ['w'], Step8) ->
+				append(FrontW, ['3'], Step9)
+			;	Step9 = Step8
+			),
+			caverphone_replace(Step9, [['w']-['2']], Step10),
+			(	Step10 = ['h'| RestH] ->
+				Step11 = ['A'| RestH]
+			;	Step11 = Step10
+			),
+			caverphone_replace(Step11, [['h']-['2']], Step12),
+			caverphone_replace(Step12, [['r','3']-['R','3']], Step13),
+			(	append(FrontR, ['r'], Step13) ->
+				append(FrontR, ['3'], Step14)
+			;	Step14 = Step13
+			),
+			caverphone_replace(Step14, [['r']-['2']], Step15),
+			caverphone_replace(Step15, [['l','3']-['L','3']], Step16),
+			(	append(FrontL, ['l'], Step16) ->
+				append(FrontL, ['3'], Step17)
+			;	Step17 = Step16
+			),
+			caverphone_replace(Step17, [['l']-['2']], Step18),
+			% remove 2s
+			exclude_char(Step18, '2', Step19),
+			% final 3 -> A
+			(	append(Front3, ['3'], Step19) ->
+				append(Front3, ['A'], Step20)
+			;	Step20 = Step19
+			),
+			% remove remaining 3s
+			exclude_char(Step20, '3', Step21),
+			% pad with ten 1s and take first 10
+			append(Step21, ['1','1','1','1','1','1','1','1','1','1'], Padded),
+			take(10, Padded, Encoding)
+		).
+
+	caverphone_start(Chars, Result) :-
+		(	Chars = ['c','o','u','g','h'| Rest] ->
+			Result = ['c','o','u','2','f'| Rest]
+		;	Chars = ['r','o','u','g','h'| Rest] ->
+			Result = ['r','o','u','2','f'| Rest]
+		;	Chars = ['t','o','u','g','h'| Rest] ->
+			Result = ['t','o','u','2','f'| Rest]
+		;	Chars = ['e','n','o','u','g','h'| Rest] ->
+			Result = ['e','n','o','u','2','f'| Rest]
+		;	Chars = ['t','r','o','u','g','h'| Rest] ->
+			Result = ['t','r','o','u','2','f'| Rest]
+		;	Chars = ['g','n'| Rest] ->
+			Result = ['2','n'| Rest]
+		;	Result = Chars
+		).
+
+	% apply a list of From-To replacements (From/To are character lists)
+	caverphone_replace(Chars, [], Chars) :-
+		!.
+	caverphone_replace(Chars, [From-To| Rules], Result) :-
+		caverphone_replace_all(Chars, From, To, Intermediate),
+		caverphone_replace(Intermediate, Rules, Result).
+
+	caverphone_replace_all([], _, _, []) :-
+		!.
+	caverphone_replace_all(Chars, From, To, Result) :-
+		append(From, Rest, Chars),
+		!,
+		append(To, RestResult, Result),
+		caverphone_replace_all(Rest, From, To, RestResult).
+	caverphone_replace_all([Char| Chars], From, To, [Char| Result]) :-
+		caverphone_replace_all(Chars, From, To, Result).
+
+	caverphone_vowels([], []).
+	caverphone_vowels([Char| Chars], ['A'| Rest]) :-
+		caverphone_is_vowel(Char),
+		!,
+		caverphone_vowels_rest(Chars, Rest).
+	caverphone_vowels([Char| Chars], [Char| Rest]) :-
+		caverphone_vowels_rest(Chars, Rest).
+
+	caverphone_vowels_rest([], []).
+	caverphone_vowels_rest([Char| Chars], ['3'| Rest]) :-
+		caverphone_is_vowel(Char), !,
+		caverphone_vowels_rest(Chars, Rest).
+	caverphone_vowels_rest([Char| Chars], [Char| Rest]) :-
+		caverphone_vowels_rest(Chars, Rest).
+
+	caverphone_is_vowel(a).
+	caverphone_is_vowel(e).
+	caverphone_is_vowel(i).
+	caverphone_is_vowel(o).
+	caverphone_is_vowel(u).
+
+	% collapse consecutive runs of the given letters to a single uppercase letter
+	caverphone_collapse([], _, []).
+	caverphone_collapse([Char| Chars], Letters, [Upper| Rest]) :-
+		member(Char, Letters),
+		!,
+		upcase_char(Char, Upper),
+		caverphone_skip_same(Char, Chars, Remaining),
+		caverphone_collapse(Remaining, Letters, Rest).
+	caverphone_collapse([Char| Chars], Letters, [Char| Rest]) :-
+		caverphone_collapse(Chars, Letters, Rest).
+
+	caverphone_skip_same(Char, [Char| Chars], Rest) :-
+		!,
+		caverphone_skip_same(Char, Chars, Rest).
+	caverphone_skip_same(_, Chars, Chars).
+
+	exclude_char([], _, []).
+	exclude_char([Char| Tail], Char, Result) :-
+		!,
+		exclude_char(Tail, Char, Result).
+	exclude_char([Head| Tail], Char, [Head| Result]) :-
+		exclude_char(Tail, Char, Result).
+
+	include_alpha([], []).
+	include_alpha([Char| Chars], [Char| Rest]) :-
+		char_code(Char, Code),
+		0'a =< Code, Code =< 0'z,
+		!,
+		include_alpha(Chars, Rest).
+	include_alpha([_| Chars], Rest) :-
+		include_alpha(Chars, Rest).
+
+	downcase_chars(Chars, Lower) :-
+		chars_to_codes(Chars, Codes),
+		downcase_codes(Codes, LowerCodes),
+		codes_to_chars(LowerCodes, Lower).
+
+	downcase_codes([], []).
+	downcase_codes([Code| Codes], [LowerCode| LowerCodes]) :-
+		(	0'A =< Code, Code =< 0'Z ->
+			LowerCode is Code + 32
+		;	LowerCode = Code
+		),
+		downcase_codes(Codes, LowerCodes).
+
 	% -----------------------------------------------------------------
 	% Phonetic match convenience predicates
 	% -----------------------------------------------------------------
+
 	soundex_match(String1, String2) :-
 		soundex(String1, Code),
 		soundex(String2, Code).
@@ -1540,6 +1766,10 @@
 		;	A1 == A2
 		),
 		!.
+
+	caverphone_match(String1, String2) :-
+		caverphone(String1, Key),
+		caverphone(String2, Key).
 
 	% =================================================================
 	% Auxiliary predicates

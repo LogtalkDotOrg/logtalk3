@@ -106,11 +106,12 @@ them is computed. It's widely used in NLP and information retrieval.
 by dividing the size of their intersection by the size of their union.
 Simple and intuitive, though it ignores term frequency.
 
-- **Soundex/NYSIIS/Metaphone** are phonetic algorithms rather than strict
-string comparisons. They encode strings based on how they sound. Useful for
-name deduplication where spelling varies but pronunciation is similar. The
+- **Soundex/NYSIIS/Metaphone/Caverphone** are phonetic algorithms rather than
+strict string comparisons. They encode strings based on how they sound. Useful
+for name deduplication where spelling varies but pronunciation is similar. The
 NYSIIS implementation uses the original form with keys limited to six
-characters.
+characters. The Caverphone implementation follows the revised (2.0) rules and
+produces ten-character keys.
 
 General advice: use Levenshtein or Damerau-Levenshtein for general-purpose
 edit distance, Jaro-Winkler for short strings like names, LCS for diff-style

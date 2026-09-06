@@ -481,11 +481,13 @@ information retrieval.</p></li>
 <li><p><strong>Jaccard Index</strong> compares two sets of tokens (often words or n-grams)
 by dividing the size of their intersection by the size of their union.
 Simple and intuitive, though it ignores term frequency.</p></li>
-<li><p><strong>Soundex/NYSIIS/Metaphone</strong> are phonetic algorithms rather than
-strict string comparisons. They encode strings based on how they
+<li><p><strong>Soundex/NYSIIS/Metaphone/Caverphone</strong> are phonetic algorithms rather
+than strict string comparisons. They encode strings based on how they
 sound. Useful for name deduplication where spelling varies but
 pronunciation is similar. The NYSIIS implementation uses the original
-form with keys limited to six characters.</p></li>
+form with keys limited to six characters. The Caverphone
+implementation follows the revised (2.0) rules and produces
+ten-character keys.</p></li>
 </ul>
 <p>General advice: use Levenshtein or Damerau-Levenshtein for
 general-purpose edit distance, Jaro-Winkler for short strings like
