@@ -1,55 +1,33 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  This file is part of VivoMind Prolog Unicode Resources
-%  SPDX-License-Identifier: CC0-1.0
+%  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
 %
-%  VivoMind Prolog Unicode Resources is free software distributed using the
-%  Creative Commons CC0 1.0 Universal (CC0 1.0) - Public Domain Dedication
-%  license
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%  Last modified: March 15, 2012
+%      http://www.apache.org/licenses/LICENSE-2.0
 %
-%  Original Unicode file header comments follow
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-/*
-# DerivedDecompositionType-6.1.0.txt
-# Date: 2011-07-25, 00:54:13 GMT [MD]
-#
-# Unicode Character Database
-# Copyright (c) 1991-2011 Unicode, Inc.
-# For terms of use, see http://www.unicode.org/terms_of_use.html
-# For documentation, see http://www.unicode.org/reports/tr44/
-
-# ================================================
-
-# Decomposition_Type (from UnicodeData.txt, field 5: see UAX #44: http://www.unicode.org/reports/tr44/)
-
-#  All code points not explicitly listed for Decomposition_Type
-#  have the value None.
-
-# @missing: 0000..10FFFF; None
-*/
+% Generated Unicode 17.0.0 compatibility view. Do not edit.
 
 unicode_fraction(CodePoint) :-
 	(	var(CodePoint) ->
-		% generate code point pairs
-		unicode_fraction(CodePointStart, CodePointEnd),
-		between(CodePointStart, CodePointEnd, CodePoint)
-	;	% try first-argument indexing first
-		unicode_fraction(CodePoint, _) ->
-		true
-	;	% look for a code point range that includes the given code point
-		unicode_fraction(CodePointStart, CodePointEnd),
-		between(CodePointStart, CodePointEnd, CodePoint) ->
-		true
+		unicode_fraction(Start, End),
+		between(Start, End, CodePoint)
+	;	unicode_fraction(Start, End),
+		CodePoint >= Start, CodePoint =< End,
+		!
 	).
 
-% ================================================
-
-unicode_fraction(0x00BC, 0x00BE).	% Fraction No   [3] VULGAR FRACTION ONE QUARTER..VULGAR FRACTION THREE QUARTERS
-unicode_fraction(0x2150, 0x215F).	% Fraction No  [16] VULGAR FRACTION ONE SEVENTH..FRACTION NUMERATOR ONE
-unicode_fraction(0x2189, 0x2189).	% Fraction No       VULGAR FRACTION ZERO THIRDS
-
-% Total code points: 20
+unicode_fraction(Start, End) :-
+	unicode_decomposition_type(Start, End, 'Fraction').

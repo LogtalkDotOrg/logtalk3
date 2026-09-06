@@ -19,8 +19,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- category(text_unicode,
-	extends(unicode_character_data)).
+:- category(text_unicode).
 
 	:- info([
 		version is 1:0:0,
@@ -41,6 +40,13 @@
 
 	:- uses(list, [
 		append/3, reverse/2
+	]).
+
+	:- uses(user, [
+		unicode_data_canonical_decomposition/2,
+		unicode_data_compatibility_decomposition/2,
+		unicode_data_canonical_combining_class/2,
+		unicode_data_canonical_composition/3
 	]).
 
 	normalize_unicode_codes(Form, Codes, Normalized) :-
@@ -78,10 +84,10 @@
 	decompose_code(Code, Compatibility, Decomposition) :-
 		(	hangul_decomposition(Code, Hangul) ->
 			decompose_codes(Hangul, Compatibility, Decomposition)
-		;	^^canonical_decomposition(Code, Canonical) ->
+		;	unicode_data_canonical_decomposition(Code, Canonical) ->
 			decompose_codes(Canonical, Compatibility, Decomposition)
 		;	Compatibility == true,
-			^^compatibility_decomposition(Code, Compatible) ->
+			unicode_data_compatibility_decomposition(Code, Compatible) ->
 			decompose_codes(Compatible, Compatibility, Decomposition)
 		;	Decomposition = [Code]
 		).
@@ -120,7 +126,7 @@
 	insert_combining(Code, _, Codes, [Code| Codes]).
 
 	combining_class(Code, Class) :-
-		(	^^canonical_combining_class(Code, Class0) ->
+		(	unicode_data_canonical_combining_class(Code, Class0) ->
 			Class = Class0
 		;	Class = 0
 		).
@@ -164,7 +170,7 @@
 	composition(First, Second, Composite) :-
 		(	hangul_composition(First, Second, Composite) ->
 			true
-		;	^^canonical_composition(First, Second, Composite)
+		;	unicode_data_canonical_composition(First, Second, Composite)
 		).
 
 	hangul_composition(Leading, Vowel, Composite) :-

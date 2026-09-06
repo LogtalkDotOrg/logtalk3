@@ -1,24 +1,28 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  This file is part of VivoMind Prolog Unicode Resources
-%  SPDX-License-Identifier: CC0-1.0
+%  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
 %
-%  VivoMind Prolog Unicode Resources is free software distributed using the
-%  Creative Commons CC0 1.0 Universal (CC0 1.0) - Public Domain Dedication
-%  license
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%      http://www.apache.org/licenses/LICENSE-2.0
+%
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%  Last modified: April 27, 2013
+% Generated Unicode 17.0.0 compatibility view. Do not edit.
 
-% from the Unicode 6.2 "UnicodeData.txt" official file:
+unicode_category_(CodePoint, 'Cs') :-
+	unicode_data_general_category_range(Start, End, 'Cs'),
+	between(Start, End, CodePoint).
 
-% D800;<Non Private Use High Surrogate, First>;Cs;0;L;;;;;N;;;;;
-% DB7F;<Non Private Use High Surrogate, Last>;Cs;0;L;;;;;N;;;;;
-unicode_category_range_(0xD800, 0xDB7F, 'Cs').
-% DB80;<Private Use High Surrogate, First>;Cs;0;L;;;;;N;;;;;
-% DBFF;<Private Use High Surrogate, Last>;Cs;0;L;;;;;N;;;;;
-unicode_category_range_(0xDB80, 0xDBFF, 'Cs').
-% DC00;<Low Surrogate, First>;Cs;0;L;;;;;N;;;;;
-% DFFF;<Low Surrogate, Last>;Cs;0;L;;;;;N;;;;;
-unicode_category_range_(0xDC00, 0xDFFF, 'Cs').
+unicode_category_range_(Start, End, 'Cs') :-
+	unicode_data_general_category_range(Start, End, 'Cs').

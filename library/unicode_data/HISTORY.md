@@ -1,6 +1,17 @@
 VivoMind Prolog Unicode Resources
 =================================
 
+September 6, 2026
+-----------------
+
+Update all data to Unicode 17.0.0. Add generated normalization, default casing,
+and core text classification data used by the `text_normalization` library.
+Generate legacy APIs as compatibility views over shared range stores where
+possible, preserving selective loading while limiting duplicated data. Add a
+selective Logtalk loader, reproducible generation scripts with pinned source
+checksums, Unicode normalization conformance data, and compatibility tests.
+Preserve all Unihan variant solutions instead of returning only the first one.
+
 February 11, 2017
 -----------------
 

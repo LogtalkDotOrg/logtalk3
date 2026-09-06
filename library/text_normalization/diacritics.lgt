@@ -29,14 +29,8 @@
 		comment is 'Unicode diacritic removal and profile-defined transliteration over code lists.'
 	]).
 
-	:- protected([
-		remove_diacritics_codes/2,
-		fold_diacritics_codes/3
-	]).
-
+	:- protected(remove_diacritics_codes/2).
 	:- mode(remove_diacritics_codes(+list(integer), -list(integer)), one_or_error).
-	:- mode(fold_diacritics_codes(+list(integer), +object_identifier, -list(integer)), one_or_error).
-
 	:- info(remove_diacritics_codes/2, [
 		comment is 'Canonically decomposes text, removes all Unicode Mark-category code points, and returns NFC text.',
 		argnames is ['Codes', 'Removed'],
@@ -45,6 +39,8 @@
 		]
 	]).
 
+	:- protected(fold_diacritics_codes/3).
+	:- mode(fold_diacritics_codes(+list(integer), +object_identifier, -list(integer)), one_or_error).
 	:- info(fold_diacritics_codes/3, [
 		comment is 'Removes Unicode marks, applies profile transliterations to remaining code points, and returns NFC text.',
 		argnames is ['Codes', 'Profile', 'Folded'],
@@ -55,6 +51,10 @@
 
 	:- uses(list, [
 		append/3
+	]).
+
+	:- uses(user, [
+		unicode_data_mark_range/2
 	]).
 
 	remove_diacritics_codes(Codes, Removed) :-
@@ -86,7 +86,7 @@
 		fold_codes(Codes, Profile, Rest).
 
 	mark(Code) :-
-		^^mark_code_range(Start, End),
+		unicode_data_mark_range(Start, End),
 		Code >= Start,
 		Code =< End,
 		!.

@@ -1,480 +1,686 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  This file is part of VivoMind Prolog Unicode Resources
-%  SPDX-License-Identifier: CC0-1.0
+%  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
 %
-%  VivoMind Prolog Unicode Resources is free software distributed using the
-%  Creative Commons CC0 1.0 Universal (CC0 1.0) - Public Domain Dedication
-%  license
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%  Last modified: March 28, 2012
+%      http://www.apache.org/licenses/LICENSE-2.0
 %
-%  Original Unicode file header comments follow
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-/*
-# IndicMatraCategory-6.1.0.txt
-# Date: 2011-08-31, 23:50:00 GMT [KW]
-#
-# Unicode Character Database
-# Copyright (c) 1991-2011 Unicode, Inc.
-# For terms of use, see http://www.unicode.org/terms_of_use.html
-# For documentation, see UAX #44.
-#
-# This file defines the following provisional property:
-#
-#    Indic_Matra_Category     enumerated property
-#
-# NB: Provisional properties and data files have no associated stability
-# guarantees. They are provided in part to determine the possible usefulness
-# of a property or other data and to encourage analysis and further investigation
-# which may result in their improvement. Provisional properties and
-# data files may change arbitrarily, or may even be removed in a future version of the
-# Unicode Character Database, if they prove not to be useful.
-#
-# Scope: This provisional property is aimed at the problem of
-# the specification of syllabic structure for Indic scripts.
-# Because dependent vowels (and visible viramas, where they occur)
-# are placed in notional slots around the consonant (or consonant
-# cluster) core of an Indic syllable, there may be cooccurrence
-# constraints or other interactions. Also, it may be desirable,
-# in cases where more than one dependent vowel may occur in
-# sequence, as for example, in a top slot and a bottom slot, to
-# specify preferred orders for spelling. As such, this property
-# is designed primarily to supplement the Indic_Syllabic_Category
-# property.
-#
-# Note that this provisional property is *not* intended as
-# a prescriptive property regarding display or font design,
-# for a number of reasons. Good font design requires information
-# that is outside the context of a character encoding standard,
-# and is best handled in other venues. For Indic dependent
-# vowels, in particular:
-#
-#   1. Matra placement may vary somewhat based on typeface design.
-#   2. Matra placement, even within a single script, may vary
-#      somewhat according to historic period or local conventions.
-#   3. Matra placement may be changed by explicit orthographic reform
-#      decisions.
-#   4. Matras may ligate in various ways with a consonant (or even
-#      other elements of a syllable) instead of occurring in a
-#      discrete location.
-#   4. Matra display may be contextually determined. This is
-#      notable, for example, in the Tamil script, where the shape
-#      and placement of -u and -uu vowels depends strongly on
-#      which consonant they adjoin.
-#
-# Format:
-#    Field 0  Code Point or Code Point Range
-#    Field 1  Indic_Matra_Category
-#
-# A comment field shows General_Category property values and character names.
-#
-# The scripts assessed as containing dependent vowels or viramas in the
-# structural sense used for the Indic_Matra_Category are:
-#
-# Devanagari, Bengali, Gurmukhi, Gujarati, Oriya, Tamil, Telugu,
-# Kannada, Malayalam, Sinhala, Thai, Lao, Tibetan, Myanmar,
-# Tagalog, Hanunoo, Buhid, Tagbanwa, Khmer, Limbu, New Tai Lue,
-# Buginese, Tai Tham, Balinese, Sundanese, Batak, Lepcha,
-# Syloti Nagri, Saurashtra, Rejang, Javanese, Cham, Tai Viet,
-# Meetei Mayek, Kharoshthi, Brahmi, Kaithi, Chakma, Sharada, Takri
-#
-# All characters for all other scripts not in that list
-# take the default value for this property.
-#
-# See IndicSyllabicCategory.txt for a slightly more extended
-# list of Indic scripts, including those which do not have
-# dependent vowel characters. Currently, those additional
-# Indic scripts without dependent vowel characters are
-# Tai Le, Phags-pa, and Kayah Li.
-#
+% Generated from Unicode 17.0.0 UCD data. Do not edit.
 
-# ================================================
-
-# Property: Indic_Matra_Category
-#
-#  All code points not explicitly listed for Indic_Matra_Category
-#  have the value NA (Not_Applicable).
-#
-# @missing: 0000..10FFFF; NA
-
-# Only Indic dependent vowels (Indic_Syllabic_Category=Vowel_Dependent)
-# and viramas (Indic_Syllabic_Category=Virama)
-# have a non-default value for this property.
-
-# ------------------------------------------------
-*/
-
-unicode_indic_matra_category(CodePoint, Category) :-
+unicode_indic_matra_category(CodePoint, Value) :-
 	(	var(CodePoint) ->
-		% generate code point pairs
-		unicode_indic_matra_category(CodePointStart, CodePointEnd, Category),
-		between(CodePointStart, CodePointEnd, CodePoint)
-	;	% try first-argument indexing first
-		unicode_indic_matra_category(CodePoint, _, CodePointCategory) ->
-		Category = CodePointCategory
-	;	% look for a code point range that includes the given code point
-		unicode_indic_matra_category(CodePointStart, CodePointEnd, CodePointCategory),
-		between(CodePointStart, CodePointEnd, CodePoint) ->
-		Category = CodePointCategory
-	;	% missing code point; see original comment above
-		between(0x0000, 0x10FFFF, CodePoint),
-		Category = 'Not_Applicable'
+		unicode_indic_matra_category(Start, End, Value),
+		between(Start, End, CodePoint)
+	;	unicode_indic_matra_category(Start, End, SpecificValue),
+		CodePoint >= Start, CodePoint =< End ->
+		Value = SpecificValue
+	;	between(0, 1114111, CodePoint),
+		Value = 'Not_Applicable'
 	).
 
-% Indic_Matra_Category=Right
-
-unicode_indic_matra_category(0x093B, 0x093B, 'Right'). % Mc       DEVANAGARI VOWEL SIGN OOE
-unicode_indic_matra_category(0x093E, 0x093E, 'Right'). % Mc       DEVANAGARI VOWEL SIGN AA
-unicode_indic_matra_category(0x0940, 0x0940, 'Right'). % Mc       DEVANAGARI VOWEL SIGN II
-unicode_indic_matra_category(0x0949, 0x094C, 'Right'). % Mc   [4] DEVANAGARI VOWEL SIGN CANDRA O..DEVANAGARI VOWEL SIGN AU
-unicode_indic_matra_category(0x094F, 0x094F, 'Right'). % Mc       DEVANAGARI VOWEL SIGN AW
-unicode_indic_matra_category(0x09BE, 0x09BE, 'Right'). % Mc       BENGALI VOWEL SIGN AA
-unicode_indic_matra_category(0x09C0, 0x09C0, 'Right'). % Mc       BENGALI VOWEL SIGN II
-unicode_indic_matra_category(0x09D7, 0x09D7, 'Right'). % Mc       BENGALI AU LENGTH MARK
-unicode_indic_matra_category(0x0A3E, 0x0A3E, 'Right'). % Mc       GURMUKHI VOWEL SIGN AA
-unicode_indic_matra_category(0x0A40, 0x0A40, 'Right'). % Mc       GURMUKHI VOWEL SIGN II
-unicode_indic_matra_category(0x0ABE, 0x0ABE, 'Right'). % Mc       GUJARATI VOWEL SIGN AA
-unicode_indic_matra_category(0x0AC0, 0x0AC0, 'Right'). % Mc       GUJARATI VOWEL SIGN II
-unicode_indic_matra_category(0x0ACB, 0x0ACC, 'Right'). % Mc   [2] GUJARATI VOWEL SIGN O..GUJARATI VOWEL SIGN AU
-unicode_indic_matra_category(0x0B3E, 0x0B3E, 'Right'). % Mc       ORIYA VOWEL SIGN AA
-unicode_indic_matra_category(0x0B40, 0x0B40, 'Right'). % Mc       ORIYA VOWEL SIGN II
-unicode_indic_matra_category(0x0BBE, 0x0BBF, 'Right'). % Mc   [2] TAMIL VOWEL SIGN AA..TAMIL VOWEL SIGN I
-unicode_indic_matra_category(0x0BD7, 0x0BD7, 'Right'). % Mc       TAMIL AU LENGTH MARK
-unicode_indic_matra_category(0x0C41, 0x0C44, 'Right'). % Mc   [4] TELUGU VOWEL SIGN U..TELUGU VOWEL SIGN VOCALIC RR
-unicode_indic_matra_category(0x0CBE, 0x0CBE, 'Right'). % Mc       KANNADA VOWEL SIGN AA
-unicode_indic_matra_category(0x0CC1, 0x0CC4, 'Right'). % Mc   [4] KANNADA VOWEL SIGN U..KANNADA VOWEL SIGN VOCALIC RR
-unicode_indic_matra_category(0x0CD5, 0x0CD6, 'Right'). % Mc   [2] KANNADA LENGTH MARK..KANNADA AI LENGTH MARK
-unicode_indic_matra_category(0x0D3E, 0x0D40, 'Right'). % Mc   [3] MALAYALAM VOWEL SIGN AA..MALAYALAM VOWEL SIGN II
-unicode_indic_matra_category(0x0D41, 0x0D42, 'Right'). % Mn   [2] MALAYALAM VOWEL SIGN U..MALAYALAM VOWEL SIGN UU
-% Note: U and UU form complex ligatures with consonants in older Malayalam orthography
-unicode_indic_matra_category(0x0D57, 0x0D57, 'Right'). % Mc       MALAYALAM AU LENGTH MARK
-unicode_indic_matra_category(0x0DCF, 0x0DD1, 'Right'). % Mc   [3] SINHALA VOWEL SIGN AELA-PILLA..SINHALA VOWEL SIGN DIGA AEDA-PILLA
-unicode_indic_matra_category(0x0DD8, 0x0DD8, 'Right'). % Mc       SINHALA VOWEL SIGN GAETTA-PILLA
-unicode_indic_matra_category(0x0DDF, 0x0DDF, 'Right'). % Mc       SINHALA VOWEL SIGN GAYANUKITTA
-unicode_indic_matra_category(0x0DF2, 0x0DF3, 'Right'). % Mc   [2] SINHALA VOWEL SIGN DIGA GAETTA-PILLA..SINHALA VOWEL SIGN DIGA GAYANUKITTA
-unicode_indic_matra_category(0x0E30, 0x0E30, 'Right'). % Lo       THAI CHARACTER SARA A
-unicode_indic_matra_category(0x0E32, 0x0E33, 'Right'). % Lo   [2] THAI CHARACTER SARA AA..THAI CHARACTER SARA AM
-unicode_indic_matra_category(0x0E45, 0x0E45, 'Right'). % Lo       THAI CHARACTER LAKKHANGYAO
-unicode_indic_matra_category(0x0EB0, 0x0EB0, 'Right'). % Lo       LAO VOWEL SIGN A
-unicode_indic_matra_category(0x0EB2, 0x0EB3, 'Right'). % Lo   [2] LAO VOWEL SIGN AA..LAO VOWEL SIGN AM
-unicode_indic_matra_category(0x102B, 0x102C, 'Right'). % Mc   [2] MYANMAR VOWEL SIGN TALL AA..MYANMAR VOWEL SIGN AA
-unicode_indic_matra_category(0x1056, 0x1057, 'Right'). % Mc   [2] MYANMAR VOWEL SIGN VOCALIC R..MYANMAR VOWEL SIGN VOCALIC RR
-unicode_indic_matra_category(0x1062, 0x1062, 'Right'). % Mc       MYANMAR VOWEL SIGN SGAW KAREN EU
-unicode_indic_matra_category(0x1067, 0x1068, 'Right'). % Mc   [2] MYANMAR VOWEL SIGN WESTERN PWO KAREN EU..MYANMAR VOWEL SIGN WESTERN PWO KAREN UE
-unicode_indic_matra_category(0x1083, 0x1083, 'Right'). % Mc       MYANMAR VOWEL SIGN SHAN AA
-unicode_indic_matra_category(0x109C, 0x109C, 'Right'). % Mc       MYANMAR VOWEL SIGN AITON A
-unicode_indic_matra_category(0x17B6, 0x17B6, 'Right'). % Mc       KHMER VOWEL SIGN AA
-unicode_indic_matra_category(0x17C8, 0x17C8, 'Right'). % Mc       KHMER SIGN YUUKALEAPINTU
-unicode_indic_matra_category(0x1923, 0x1924, 'Right'). % Mc   [2] LIMBU VOWEL SIGN EE..LIMBU VOWEL SIGN AI
-unicode_indic_matra_category(0x19B0, 0x19B4, 'Right'). % Mc   [5] NEW TAI LUE VOWEL SIGN VOWEL SHORTENER..NEW TAI LUE VOWEL SIGN UU
-unicode_indic_matra_category(0x19B8, 0x19B9, 'Right'). % Mc   [2] NEW TAI LUE VOWEL SIGN OA..NEW TAI LUE VOWEL SIGN UE
-unicode_indic_matra_category(0x19BB, 0x19C0, 'Right'). % Mc   [6] NEW TAI LUE VOWEL SIGN AAY..NEW TAI LUE VOWEL SIGN IY
-unicode_indic_matra_category(0x1A1A, 0x1A1A, 'Right'). % Mc       BUGINESE VOWEL SIGN O
-unicode_indic_matra_category(0x1A61, 0x1A61, 'Right'). % Mc       TAI THAM VOWEL SIGN A
-unicode_indic_matra_category(0x1A63, 0x1A64, 'Right'). % Mc   [2] TAI THAM VOWEL SIGN AA..TAI THAM VOWEL SIGN TALL AA
-unicode_indic_matra_category(0x1A6D, 0x1A6D, 'Right'). % Mc       TAI THAM VOWEL SIGN OY
-unicode_indic_matra_category(0x1B35, 0x1B35, 'Right'). % Mc       BALINESE VOWEL SIGN TEDUNG
-unicode_indic_matra_category(0x1B44, 0x1B44, 'Right'). % Mc       BALINESE ADEG ADEG
-unicode_indic_matra_category(0x1BA7, 0x1BA7, 'Right'). % Mc       SUNDANESE VOWEL SIGN PANOLONG
-unicode_indic_matra_category(0x1BAA, 0x1BAA, 'Right'). % Mc       SUNDANESE SIGN PAMAAEH
-unicode_indic_matra_category(0x1BF2, 0x1BF3, 'Right'). % Mc   [2] BATAK PANGOLAT..BATAK PANONGONAN
-unicode_indic_matra_category(0x1C26, 0x1C26, 'Right'). % Mc       LEPCHA VOWEL SIGN AA
-unicode_indic_matra_category(0x1C2A, 0x1C2B, 'Right'). % Mc   [2] LEPCHA VOWEL SIGN U..LEPCHA VOWEL SIGN UU
-unicode_indic_matra_category(0xA823, 0xA824, 'Right'). % Mc   [2] SYLOTI NAGRI VOWEL SIGN A..SYLOTI NAGRI VOWEL SIGN I
-unicode_indic_matra_category(0xA827, 0xA827, 'Right'). % Mc       SYLOTI NAGRI VOWEL SIGN OO
-unicode_indic_matra_category(0xA8B5, 0xA8C3, 'Right'). % Mc  [15] SAURASHTRA VOWEL SIGN AA..SAURASHTRA VOWEL SIGN AU
-unicode_indic_matra_category(0xA953, 0xA953, 'Right'). % Mc       REJANG VIRAMA
-unicode_indic_matra_category(0xA9B4, 0xA9B5, 'Right'). % Mc   [2] JAVANESE VOWEL SIGN TARUNG..JAVANESE VOWEL SIGN TOLONG
-unicode_indic_matra_category(0xAAB1, 0xAAB1, 'Right'). % Lo       TAI VIET VOWEL AA
-unicode_indic_matra_category(0xAABA, 0xAABA, 'Right'). % Lo       TAI VIET VOWEL UA
-unicode_indic_matra_category(0xAABD, 0xAABD, 'Right'). % Lo       TAI VIET VOWEL AN
-unicode_indic_matra_category(0xAAEF, 0xAAEF, 'Right'). % Mc       MEETEI MAYEK VOWEL SIGN AAU
-unicode_indic_matra_category(0xABE3, 0xABE4, 'Right'). % Mc   [2] MEETEI MAYEK VOWEL SIGN ONAP..MEETEI MAYEK VOWEL SIGN INAP
-unicode_indic_matra_category(0xABE6, 0xABE7, 'Right'). % Mc   [2] MEETEI MAYEK VOWEL SIGN YENAP..MEETEI MAYEK VOWEL SIGN SOUNAP
-unicode_indic_matra_category(0xABE9, 0xABEA, 'Right'). % Mc   [2] MEETEI MAYEK VOWEL SIGN CHEINAP..MEETEI MAYEK VOWEL SIGN NUNG
-unicode_indic_matra_category(0x110B0, 0x110B0, 'Right'). % Mc       KAITHI VOWEL SIGN AA
-unicode_indic_matra_category(0x110B2, 0x110B2, 'Right'). % Mc       KAITHI VOWEL SIGN II
-unicode_indic_matra_category(0x110B7, 0x110B8, 'Right'). % Mc   [2] KAITHI VOWEL SIGN O..KAITHI VOWEL SIGN AU
-unicode_indic_matra_category(0x111B3, 0x111B3, 'Right'). % Mc       SHARADA VOWEL SIGN AA
-unicode_indic_matra_category(0x111B5, 0x111B5, 'Right'). % Mc       SHARADA VOWEL SIGN II
-unicode_indic_matra_category(0x111C0, 0x111C0, 'Right'). % Mc       SHARADA SIGN VIRAMA
-unicode_indic_matra_category(0x116AF, 0x116AF, 'Right'). % Mc       TAKRI VOWEL SIGN II
-
-% Indic_Matra_Category=Left
-
-unicode_indic_matra_category(0x093F, 0x093F, 'Left'). % Mc       DEVANAGARI VOWEL SIGN I
-unicode_indic_matra_category(0x094E, 0x094E, 'Left'). % Mc       DEVANAGARI VOWEL SIGN PRISHTHAMATRA E
-unicode_indic_matra_category(0x09BF, 0x09BF, 'Left'). % Mc       BENGALI VOWEL SIGN I
-unicode_indic_matra_category(0x09C7, 0x09C8, 'Left'). % Mc   [2] BENGALI VOWEL SIGN E..BENGALI VOWEL SIGN AI
-unicode_indic_matra_category(0x0A3F, 0x0A3F, 'Left'). % Mc       GURMUKHI VOWEL SIGN I
-unicode_indic_matra_category(0x0ABF, 0x0ABF, 'Left'). % Mc       GUJARATI VOWEL SIGN I
-unicode_indic_matra_category(0x0B47, 0x0B47, 'Left'). % Mc       ORIYA VOWEL SIGN E
-unicode_indic_matra_category(0x0BC6, 0x0BC8, 'Left'). % Mc   [3] TAMIL VOWEL SIGN E..TAMIL VOWEL SIGN AI
-unicode_indic_matra_category(0x0D46, 0x0D48, 'Left'). % Mc   [3] MALAYALAM VOWEL SIGN E..MALAYALAM VOWEL SIGN AI
-unicode_indic_matra_category(0x0DD9, 0x0DD9, 'Left'). % Mc       SINHALA VOWEL SIGN KOMBUVA
-unicode_indic_matra_category(0x0DDB, 0x0DDB, 'Left'). % Mc       SINHALA VOWEL SIGN KOMBU DEKA
-unicode_indic_matra_category(0x1031, 0x1031, 'Left'). % Mc       MYANMAR VOWEL SIGN E
-unicode_indic_matra_category(0x1084, 0x1084, 'Left'). % Mc       MYANMAR VOWEL SIGN SHAN E
-unicode_indic_matra_category(0x17C1, 0x17C3, 'Left'). % Mc   [3] KHMER VOWEL SIGN E..KHMER VOWEL SIGN AI
-unicode_indic_matra_category(0x19B5, 0x19B7, 'Left'). % Mc   [3] NEW TAI LUE VOWEL SIGN E..NEW TAI LUE VOWEL SIGN O
-unicode_indic_matra_category(0x19BA, 0x19BA, 'Left'). % Mc       NEW TAI LUE VOWEL SIGN AY
-unicode_indic_matra_category(0x1A19, 0x1A19, 'Left'). % Mc       BUGINESE VOWEL SIGN E
-unicode_indic_matra_category(0x1A1B, 0x1A1B, 'Left'). % Mc       BUGINESE VOWEL SIGN AE
-unicode_indic_matra_category(0x1A6E, 0x1A72, 'Left'). % Mc   [5] TAI THAM VOWEL SIGN E..TAI THAM VOWEL SIGN THAM AI
-unicode_indic_matra_category(0x1B3E, 0x1B3F, 'Left'). % Mc   [2] BALINESE VOWEL SIGN TALING..BALINESE VOWEL SIGN TALING REPA
-unicode_indic_matra_category(0x1BA6, 0x1BA6, 'Left'). % Mc       SUNDANESE VOWEL SIGN PANAELAENG
-unicode_indic_matra_category(0x1C27, 0x1C28, 'Left'). % Mc   [2] LEPCHA VOWEL SIGN I..LEPCHA VOWEL SIGN O
-unicode_indic_matra_category(0xA9BA, 0xA9BB, 'Left'). % Mc   [2] JAVANESE VOWEL SIGN TALING..JAVANESE VOWEL SIGN DIRGA MURE
-unicode_indic_matra_category(0xAA2F, 0xAA30, 'Left'). % Mc   [2] CHAM VOWEL SIGN O..CHAM VOWEL SIGN AI
-unicode_indic_matra_category(0xAAEB, 0xAAEB, 'Left'). % Mc       MEETEI MAYEK VOWEL SIGN II
-unicode_indic_matra_category(0xAAEE, 0xAAEE, 'Left'). % Mc       MEETEI MAYEK VOWEL SIGN AU
-unicode_indic_matra_category(0x110B1, 0x110B1, 'Left'). % Mc       KAITHI VOWEL SIGN I
-unicode_indic_matra_category(0x1112C, 0x1112C, 'Left'). % Mc       CHAKMA VOWEL SIGN E
-unicode_indic_matra_category(0x111B4, 0x111B4, 'Left'). % Mc       SHARADA VOWEL SIGN I
-unicode_indic_matra_category(0x116AE, 0x116AE, 'Left'). % Mc       TAKRI VOWEL SIGN I
-
-% Indic_Matra_Category=Visual_Order_Left
-
-% These are dependent vowels that occur to the left of the consonant
-% letter in a syllable, but which occur in scripts using the visual order
-% model, instead of the logical order model. Because of the different
-% model, these left-side vowels occur first in the backing store (before
-% the consonant letter) and are not reordered during text rendering.
-%
-% [Derivation: Logical_Order_Exception=True]
-
-unicode_indic_matra_category(0x0E40, 0x0E44, 'Visual_Order_Left'). % Lo   [5] THAI CHARACTER SARA E..THAI CHARACTER SARA AI MAIMALAI
-unicode_indic_matra_category(0x0EC0, 0x0EC4, 'Visual_Order_Left'). % Lo   [5] LAO VOWEL SIGN E..LAO VOWEL SIGN AI
-unicode_indic_matra_category(0xAAB5, 0xAAB6, 'Visual_Order_Left'). % Lo   [2] TAI VIET VOWEL E..TAI VIET VOWEL O
-unicode_indic_matra_category(0xAAB9, 0xAAB9, 'Visual_Order_Left'). % Lo       TAI VIET VOWEL UEA
-unicode_indic_matra_category(0xAABB, 0xAABC, 'Visual_Order_Left'). % Lo   [2] TAI VIET VOWEL AUE..TAI VIET VOWEL AY
-
-% Indic_Matra_Category=Left_And_Right
-
-unicode_indic_matra_category(0x09CB, 0x09CC, 'Left_And_Right'). % Mc   [2] BENGALI VOWEL SIGN O..BENGALI VOWEL SIGN AU
-unicode_indic_matra_category(0x0B4B, 0x0B4B, 'Left_And_Right'). % Mc       ORIYA VOWEL SIGN O
-unicode_indic_matra_category(0x0BCA, 0x0BCC, 'Left_And_Right'). % Mc   [3] TAMIL VOWEL SIGN O..TAMIL VOWEL SIGN AU
-unicode_indic_matra_category(0x0D4A, 0x0D4C, 'Left_And_Right'). % Mc   [3] MALAYALAM VOWEL SIGN O..MALAYALAM VOWEL SIGN AU
-unicode_indic_matra_category(0x0DDC, 0x0DDE, 'Left_And_Right'). % Mc   [3] SINHALA VOWEL SIGN KOMBUVA HAA AELA-PILLA..SINHALA VOWEL SIGN KOMBUVA HAA GAYANUKITTA
-unicode_indic_matra_category(0x17C0, 0x17C0, 'Left_And_Right'). % Mc       KHMER VOWEL SIGN IE
-unicode_indic_matra_category(0x17C4, 0x17C5, 'Left_And_Right'). % Mc   [2] KHMER VOWEL SIGN OO..KHMER VOWEL SIGN AU
-unicode_indic_matra_category(0x1B40, 0x1B41, 'Left_And_Right'). % Mc   [2] BALINESE VOWEL SIGN TALING TEDUNG..BALINESE VOWEL SIGN TALING REPA TEDUNG
-
-% Indic_Matra_Category=Top
-
-unicode_indic_matra_category(0x093A, 0x093A, 'Top'). % Mn       DEVANAGARI VOWEL SIGN OE
-unicode_indic_matra_category(0x0945, 0x0948, 'Top'). % Mn   [4] DEVANAGARI VOWEL SIGN CANDRA E..DEVANAGARI VOWEL SIGN AI
-unicode_indic_matra_category(0x0955, 0x0955, 'Top'). % Mn       DEVANAGARI VOWEL SIGN CANDRA LONG E
-unicode_indic_matra_category(0x0A47, 0x0A48, 'Top'). % Mn   [2] GURMUKHI VOWEL SIGN EE..GURMUKHI VOWEL SIGN AI
-unicode_indic_matra_category(0x0A4B, 0x0A4C, 'Top'). % Mn   [2] GURMUKHI VOWEL SIGN OO..GURMUKHI VOWEL SIGN AU
-unicode_indic_matra_category(0x0AC5, 0x0AC5, 'Top'). % Mn       GUJARATI VOWEL SIGN CANDRA E
-unicode_indic_matra_category(0x0AC7, 0x0AC8, 'Top'). % Mn   [2] GUJARATI VOWEL SIGN E..GUJARATI VOWEL SIGN AI
-unicode_indic_matra_category(0x0B3F, 0x0B3F, 'Top'). % Mn       ORIYA VOWEL SIGN I
-unicode_indic_matra_category(0x0B56, 0x0B56, 'Top'). % Mn       ORIYA AI LENGTH MARK
-unicode_indic_matra_category(0x0BC0, 0x0BC0, 'Top'). % Mn       TAMIL VOWEL SIGN II
-unicode_indic_matra_category(0x0BCD, 0x0BCD, 'Top'). % Mn       TAMIL SIGN VIRAMA
-unicode_indic_matra_category(0x0C3E, 0x0C40, 'Top'). % Mn   [3] TELUGU VOWEL SIGN AA..TELUGU VOWEL SIGN II
-unicode_indic_matra_category(0x0C46, 0x0C47, 'Top'). % Mn   [2] TELUGU VOWEL SIGN E..TELUGU VOWEL SIGN EE
-unicode_indic_matra_category(0x0C4A, 0x0C4C, 'Top'). % Mn   [3] TELUGU VOWEL SIGN O..TELUGU VOWEL SIGN AU
-unicode_indic_matra_category(0x0C4D, 0x0C4D, 'Top'). % Mn       TELUGU SIGN VIRAMA
-unicode_indic_matra_category(0x0C55, 0x0C55, 'Top'). % Mn       TELUGU LENGTH MARK
-unicode_indic_matra_category(0x0CBF, 0x0CBF, 'Top'). % Mn       KANNADA VOWEL SIGN I
-unicode_indic_matra_category(0x0CC6, 0x0CC6, 'Top'). % Mn       KANNADA VOWEL SIGN E
-unicode_indic_matra_category(0x0CCC, 0x0CCC, 'Top'). % Mn       KANNADA VOWEL SIGN AU
-unicode_indic_matra_category(0x0CCD, 0x0CCD, 'Top'). % Mn       KANNADA SIGN VIRAMA
-unicode_indic_matra_category(0x0D4D, 0x0D4D, 'Top'). % Mn       MALAYALAM SIGN VIRAMA
-unicode_indic_matra_category(0x0DCA, 0x0DCA, 'Top'). % Mn       SINHALA SIGN AL-LAKUNA
-unicode_indic_matra_category(0x0DD2, 0x0DD3, 'Top'). % Mn   [2] SINHALA VOWEL SIGN KETTI IS-PILLA..SINHALA VOWEL SIGN DIGA IS-PILLA
-unicode_indic_matra_category(0x0E31, 0x0E31, 'Top'). % Mn       THAI CHARACTER MAI HAN-AKAT
-unicode_indic_matra_category(0x0E34, 0x0E37, 'Top'). % Mn   [4] THAI CHARACTER SARA I..THAI CHARACTER SARA UEE
-unicode_indic_matra_category(0x0E47, 0x0E47, 'Top'). % Mn       THAI CHARACTER MAITAIKHU
-unicode_indic_matra_category(0x0E4E, 0x0E4E, 'Top'). % Mn       THAI CHARACTER YAMAKKAN
-unicode_indic_matra_category(0x0EB1, 0x0EB1, 'Top'). % Mn       LAO VOWEL SIGN MAI KAN
-unicode_indic_matra_category(0x0EB4, 0x0EB7, 'Top'). % Mn   [4] LAO VOWEL SIGN I..LAO VOWEL SIGN YY
-unicode_indic_matra_category(0x0EBB, 0x0EBB, 'Top'). % Mn       LAO VOWEL SIGN MAI KON
-unicode_indic_matra_category(0x0F72, 0x0F72, 'Top'). % Mn       TIBETAN VOWEL SIGN I
-unicode_indic_matra_category(0x0F7A, 0x0F7D, 'Top'). % Mn   [4] TIBETAN VOWEL SIGN E..TIBETAN VOWEL SIGN OO
-unicode_indic_matra_category(0x0F80, 0x0F80, 'Top'). % Mn       TIBETAN VOWEL SIGN REVERSED I
-unicode_indic_matra_category(0x102D, 0x102E, 'Top'). % Mn   [2] MYANMAR VOWEL SIGN I..MYANMAR VOWEL SIGN II
-unicode_indic_matra_category(0x1032, 0x1035, 'Top'). % Mn   [4] MYANMAR VOWEL SIGN AI..MYANMAR VOWEL SIGN E ABOVE
-unicode_indic_matra_category(0x103A, 0x103A, 'Top'). % Mn       MYANMAR SIGN ASAT
-unicode_indic_matra_category(0x1071, 0x1074, 'Top'). % Mn   [4] MYANMAR VOWEL SIGN GEBA KAREN I..MYANMAR VOWEL SIGN KAYAH EE
-unicode_indic_matra_category(0x1085, 0x1086, 'Top'). % Mn   [2] MYANMAR VOWEL SIGN SHAN E ABOVE..MYANMAR VOWEL SIGN SHAN FINAL Y
-unicode_indic_matra_category(0x109D, 0x109D, 'Top'). % Mn       MYANMAR VOWEL SIGN AITON AI
-unicode_indic_matra_category(0x1712, 0x1712, 'Top'). % Mn       TAGALOG VOWEL SIGN I
-unicode_indic_matra_category(0x1732, 0x1732, 'Top'). % Mn       HANUNOO VOWEL SIGN I
-unicode_indic_matra_category(0x1752, 0x1752, 'Top'). % Mn       BUHID VOWEL SIGN I
-unicode_indic_matra_category(0x1772, 0x1772, 'Top'). % Mn       TAGBANWA VOWEL SIGN I
-unicode_indic_matra_category(0x17B7, 0x17BA, 'Top'). % Mn   [4] KHMER VOWEL SIGN I..KHMER VOWEL SIGN YY
-unicode_indic_matra_category(0x17D1, 0x17D1, 'Top'). % Mn       KHMER SIGN VIRIAM
-unicode_indic_matra_category(0x1920, 0x1921, 'Top'). % Mn   [2] LIMBU VOWEL SIGN A..LIMBU VOWEL SIGN I
-unicode_indic_matra_category(0x1927, 0x1928, 'Top'). % Mn   [2] LIMBU VOWEL SIGN E..LIMBU VOWEL SIGN O
-unicode_indic_matra_category(0x1A17, 0x1A17, 'Top'). % Mn       BUGINESE VOWEL SIGN I
-unicode_indic_matra_category(0x1A62, 0x1A62, 'Top'). % Mn       TAI THAM VOWEL SIGN MAI SAT
-unicode_indic_matra_category(0x1A65, 0x1A68, 'Top'). % Mn   [4] TAI THAM VOWEL SIGN I..TAI THAM VOWEL SIGN UUE
-unicode_indic_matra_category(0x1A6B, 0x1A6B, 'Top'). % Mn       TAI THAM VOWEL SIGN O
-unicode_indic_matra_category(0x1A73, 0x1A74, 'Top'). % Mn   [2] TAI THAM VOWEL SIGN OA ABOVE..TAI THAM SIGN MAI KANG
-unicode_indic_matra_category(0x1B36, 0x1B37, 'Top'). % Mn   [2] BALINESE VOWEL SIGN ULU..BALINESE VOWEL SIGN ULU SARI
-unicode_indic_matra_category(0x1B42, 0x1B42, 'Top'). % Mn       BALINESE VOWEL SIGN PEPET
-unicode_indic_matra_category(0x1BA4, 0x1BA4, 'Top'). % Mn       SUNDANESE VOWEL SIGN PANGHULU
-unicode_indic_matra_category(0x1BA8, 0x1BA9, 'Top'). % Mn   [2] SUNDANESE VOWEL SIGN PAMEPET..SUNDANESE VOWEL SIGN PANEULEUNG
-unicode_indic_matra_category(0xA806, 0xA806, 'Top'). % Mn       SYLOTI NAGRI SIGN HASANTA
-unicode_indic_matra_category(0xA826, 0xA826, 'Top'). % Mn       SYLOTI NAGRI VOWEL SIGN E
-unicode_indic_matra_category(0xA94A, 0xA94A, 'Top'). % Mn       REJANG VOWEL SIGN AI
-unicode_indic_matra_category(0xA9B6, 0xA9B7, 'Top'). % Mn   [2] JAVANESE VOWEL SIGN WULU..JAVANESE VOWEL SIGN WULU MELIK
-unicode_indic_matra_category(0xA9BC, 0xA9BC, 'Top'). % Mn       JAVANESE VOWEL SIGN PEPET
-unicode_indic_matra_category(0xAA29, 0xAA2C, 'Top'). % Mn   [4] CHAM VOWEL SIGN AA..CHAM VOWEL SIGN EI
-unicode_indic_matra_category(0xAA2E, 0xAA2E, 'Top'). % Mn       CHAM VOWEL SIGN OE
-unicode_indic_matra_category(0xAA31, 0xAA31, 'Top'). % Mn       CHAM VOWEL SIGN AU
-unicode_indic_matra_category(0xAAB0, 0xAAB0, 'Top'). % Mn       TAI VIET MAI KANG
-unicode_indic_matra_category(0xAAB2, 0xAAB3, 'Top'). % Mn   [2] TAI VIET VOWEL I..TAI VIET VOWEL UE
-unicode_indic_matra_category(0xAAB7, 0xAAB8, 'Top'). % Mn   [2] TAI VIET MAI KHIT..TAI VIET VOWEL IA
-unicode_indic_matra_category(0xAABE, 0xAABE, 'Top'). % Mn       TAI VIET VOWEL AM
-unicode_indic_matra_category(0xAAED, 0xAAED, 'Top'). % Mn       MEETEI MAYEK VOWEL SIGN AAI
-unicode_indic_matra_category(0xABE5, 0xABE5, 'Top'). % Mn       MEETEI MAYEK VOWEL SIGN ANAP
-unicode_indic_matra_category(0x10A05, 0x10A05, 'Top'). % Mn       KHAROSHTHI VOWEL SIGN E
-unicode_indic_matra_category(0x11038, 0x1103B, 'Top'). % Mn   [4] BRAHMI VOWEL SIGN AA..BRAHMI VOWEL SIGN II
-unicode_indic_matra_category(0x11042, 0x11045, 'Top'). % Mn   [4] BRAHMI VOWEL SIGN E..BRAHMI VOWEL SIGN AU
-unicode_indic_matra_category(0x11046, 0x11046, 'Top'). % Mn       BRAHMI VIRAMA
-unicode_indic_matra_category(0x110B5, 0x110B6, 'Top'). % Mn   [2] KAITHI VOWEL SIGN E..KAITHI VOWEL SIGN AI
-unicode_indic_matra_category(0x11127, 0x11129, 'Top'). % Mn   [3] CHAKMA VOWEL SIGN A..CHAKMA VOWEL SIGN II
-unicode_indic_matra_category(0x1112D, 0x1112D, 'Top'). % Mn       CHAKMA VOWEL SIGN AI
-unicode_indic_matra_category(0x11130, 0x11130, 'Top'). % Mn       CHAKMA VOWEL SIGN OI
-unicode_indic_matra_category(0x11134, 0x11134, 'Top'). % Mn       CHAKMA MAAYYAA
-unicode_indic_matra_category(0x111BC, 0x111BE, 'Top'). % Mn   [3] SHARADA VOWEL SIGN E..SHARADA VOWEL SIGN O
-unicode_indic_matra_category(0x116AD, 0x116AD, 'Top'). % Mn       TAKRI VOWEL SIGN AA
-unicode_indic_matra_category(0x116B2, 0x116B5, 'Top'). % Mn   [4] TAKRI VOWEL SIGN E..TAKRI VOWEL SIGN AU
-unicode_indic_matra_category(0x116B6, 0x116B6, 'Top'). % Mn       TAKRI SIGN VIRAMA
-
-% Indic_Matra_Category=Bottom
-
-unicode_indic_matra_category(0x0941, 0x0944, 'Bottom'). % Mn   [4] DEVANAGARI VOWEL SIGN U..DEVANAGARI VOWEL SIGN VOCALIC RR
-unicode_indic_matra_category(0x094D, 0x094D, 'Bottom'). % Mn       DEVANAGARI SIGN VIRAMA
-unicode_indic_matra_category(0x0956, 0x0957, 'Bottom'). % Mn   [2] DEVANAGARI VOWEL SIGN UE..DEVANAGARI VOWEL SIGN UUE
-unicode_indic_matra_category(0x0962, 0x0963, 'Bottom'). % Mn   [2] DEVANAGARI VOWEL SIGN VOCALIC L..DEVANAGARI VOWEL SIGN VOCALIC LL
-unicode_indic_matra_category(0x09C1, 0x09C4, 'Bottom'). % Mn   [4] BENGALI VOWEL SIGN U..BENGALI VOWEL SIGN VOCALIC RR
-unicode_indic_matra_category(0x09CD, 0x09CD, 'Bottom'). % Mn       BENGALI SIGN VIRAMA
-unicode_indic_matra_category(0x09E2, 0x09E3, 'Bottom'). % Mn   [2] BENGALI VOWEL SIGN VOCALIC L..BENGALI VOWEL SIGN VOCALIC LL
-unicode_indic_matra_category(0x0A41, 0x0A42, 'Bottom'). % Mn   [2] GURMUKHI VOWEL SIGN U..GURMUKHI VOWEL SIGN UU
-unicode_indic_matra_category(0x0A4D, 0x0A4D, 'Bottom'). % Mn       GURMUKHI SIGN VIRAMA
-unicode_indic_matra_category(0x0AC1, 0x0AC4, 'Bottom'). % Mn   [4] GUJARATI VOWEL SIGN U..GUJARATI VOWEL SIGN VOCALIC RR
-unicode_indic_matra_category(0x0ACD, 0x0ACD, 'Bottom'). % Mn       GUJARATI SIGN VIRAMA
-unicode_indic_matra_category(0x0AE2, 0x0AE3, 'Bottom'). % Mn   [2] GUJARATI VOWEL SIGN VOCALIC L..GUJARATI VOWEL SIGN VOCALIC LL
-unicode_indic_matra_category(0x0B41, 0x0B44, 'Bottom'). % Mn   [4] ORIYA VOWEL SIGN U..ORIYA VOWEL SIGN VOCALIC RR
-unicode_indic_matra_category(0x0B4D, 0x0B4D, 'Bottom'). % Mn       ORIYA SIGN VIRAMA
-unicode_indic_matra_category(0x0B62, 0x0B63, 'Bottom'). % Mn   [2] ORIYA VOWEL SIGN VOCALIC L..ORIYA VOWEL SIGN VOCALIC LL
-unicode_indic_matra_category(0x0BC1, 0x0BC2, 'Bottom'). % Mc   [2] TAMIL VOWEL SIGN U..TAMIL VOWEL SIGN UU
-% Note: U and UU have contextually variable placement in Tamil.
-unicode_indic_matra_category(0x0C56, 0x0C56, 'Bottom'). % Mn       TELUGU AI LENGTH MARK
-unicode_indic_matra_category(0x0C62, 0x0C63, 'Bottom'). % Mn   [2] TELUGU VOWEL SIGN VOCALIC L..TELUGU VOWEL SIGN VOCALIC LL
-unicode_indic_matra_category(0x0CE2, 0x0CE3, 'Bottom'). % Mn   [2] KANNADA VOWEL SIGN VOCALIC L..KANNADA VOWEL SIGN VOCALIC LL
-unicode_indic_matra_category(0x0D43, 0x0D44, 'Bottom'). % Mn   [2] MALAYALAM VOWEL SIGN VOCALIC R..MALAYALAM VOWEL SIGN VOCALIC RR
-unicode_indic_matra_category(0x0D62, 0x0D63, 'Bottom'). % Mn   [2] MALAYALAM VOWEL SIGN VOCALIC L..MALAYALAM VOWEL SIGN VOCALIC LL
-unicode_indic_matra_category(0x0DD4, 0x0DD4, 'Bottom'). % Mn       SINHALA VOWEL SIGN KETTI PAA-PILLA
-unicode_indic_matra_category(0x0DD6, 0x0DD6, 'Bottom'). % Mn       SINHALA VOWEL SIGN DIGA PAA-PILLA
-unicode_indic_matra_category(0x0E38, 0x0E39, 'Bottom'). % Mn   [2] THAI CHARACTER SARA U..THAI CHARACTER SARA UU
-unicode_indic_matra_category(0x0E3A, 0x0E3A, 'Bottom'). % Mn       THAI CHARACTER PHINTHU
-unicode_indic_matra_category(0x0EB8, 0x0EB9, 'Bottom'). % Mn   [2] LAO VOWEL SIGN U..LAO VOWEL SIGN UU
-unicode_indic_matra_category(0x0F71, 0x0F71, 'Bottom'). % Mn       TIBETAN VOWEL SIGN AA
-unicode_indic_matra_category(0x0F74, 0x0F75, 'Bottom'). % Mn   [2] TIBETAN VOWEL SIGN U..TIBETAN VOWEL SIGN UU
-unicode_indic_matra_category(0x0F84, 0x0F84, 'Bottom'). % Mn       TIBETAN MARK HALANTA
-unicode_indic_matra_category(0x102F, 0x1030, 'Bottom'). % Mn   [2] MYANMAR VOWEL SIGN U..MYANMAR VOWEL SIGN UU
-unicode_indic_matra_category(0x1058, 0x1059, 'Bottom'). % Mn   [2] MYANMAR VOWEL SIGN VOCALIC L..MYANMAR VOWEL SIGN VOCALIC LL
-unicode_indic_matra_category(0x1713, 0x1713, 'Bottom'). % Mn       TAGALOG VOWEL SIGN U
-unicode_indic_matra_category(0x1714, 0x1714, 'Bottom'). % Mn       TAGALOG SIGN VIRAMA
-unicode_indic_matra_category(0x1733, 0x1733, 'Bottom'). % Mn       HANUNOO VOWEL SIGN U
-unicode_indic_matra_category(0x1734, 0x1734, 'Bottom'). % Mn       HANUNOO SIGN PAMUDPOD
-unicode_indic_matra_category(0x1753, 0x1753, 'Bottom'). % Mn       BUHID VOWEL SIGN U
-unicode_indic_matra_category(0x1773, 0x1773, 'Bottom'). % Mn       TAGBANWA VOWEL SIGN U
-unicode_indic_matra_category(0x17BB, 0x17BD, 'Bottom'). % Mn   [3] KHMER VOWEL SIGN U..KHMER VOWEL SIGN UA
-unicode_indic_matra_category(0x1922, 0x1922, 'Bottom'). % Mn       LIMBU VOWEL SIGN U
-unicode_indic_matra_category(0x1A18, 0x1A18, 'Bottom'). % Mn       BUGINESE VOWEL SIGN U
-unicode_indic_matra_category(0x1A69, 0x1A6A, 'Bottom'). % Mn   [2] TAI THAM VOWEL SIGN U..TAI THAM VOWEL SIGN UU
-unicode_indic_matra_category(0x1A6C, 0x1A6C, 'Bottom'). % Mn       TAI THAM VOWEL SIGN OA BELOW
-unicode_indic_matra_category(0x1B38, 0x1B3A, 'Bottom'). % Mn   [3] BALINESE VOWEL SIGN SUKU..BALINESE VOWEL SIGN RA REPA
-unicode_indic_matra_category(0x1BA5, 0x1BA5, 'Bottom'). % Mn       SUNDANESE VOWEL SIGN PANYUKU
-unicode_indic_matra_category(0x1C2C, 0x1C2C, 'Bottom'). % Mn       LEPCHA VOWEL SIGN E
-unicode_indic_matra_category(0xA825, 0xA825, 'Bottom'). % Mn       SYLOTI NAGRI VOWEL SIGN U
-unicode_indic_matra_category(0xA8C4, 0xA8C4, 'Bottom'). % Mn       SAURASHTRA SIGN VIRAMA
-unicode_indic_matra_category(0xA947, 0xA949, 'Bottom'). % Mn   [3] REJANG VOWEL SIGN I..REJANG VOWEL SIGN E
-unicode_indic_matra_category(0xA94B, 0xA94E, 'Bottom'). % Mn   [4] REJANG VOWEL SIGN O..REJANG VOWEL SIGN EA
-unicode_indic_matra_category(0xA9B8, 0xA9B9, 'Bottom'). % Mn   [2] JAVANESE VOWEL SIGN SUKU..JAVANESE VOWEL SIGN SUKU MENDUT
-unicode_indic_matra_category(0xAA2D, 0xAA2D, 'Bottom'). % Mn       CHAM VOWEL SIGN U
-unicode_indic_matra_category(0xAA32, 0xAA32, 'Bottom'). % Mn       CHAM VOWEL SIGN UE
-unicode_indic_matra_category(0xAAB4, 0xAAB4, 'Bottom'). % Mn       TAI VIET VOWEL U
-unicode_indic_matra_category(0xAAEC, 0xAAEC, 'Bottom'). % Mn       MEETEI MAYEK VOWEL SIGN UU
-unicode_indic_matra_category(0xABE8, 0xABE8, 'Bottom'). % Mn       MEETEI MAYEK VOWEL SIGN UNAP
-unicode_indic_matra_category(0xABED, 0xABED, 'Bottom'). % Mn       MEETEI MAYEK APUN IYEK
-unicode_indic_matra_category(0x10A02, 0x10A03, 'Bottom'). % Mn   [2] KHAROSHTHI VOWEL SIGN U..KHAROSHTHI VOWEL SIGN VOCALIC R
-unicode_indic_matra_category(0x10A0C, 0x10A0C, 'Bottom'). % Mn       KHAROSHTHI VOWEL LENGTH MARK
-unicode_indic_matra_category(0x1103C, 0x11041, 'Bottom'). % Mn   [6] BRAHMI VOWEL SIGN U..BRAHMI VOWEL SIGN VOCALIC LL
-unicode_indic_matra_category(0x110B3, 0x110B4, 'Bottom'). % Mn   [2] KAITHI VOWEL SIGN U..KAITHI VOWEL SIGN UU
-unicode_indic_matra_category(0x110B9, 0x110B9, 'Bottom'). % Mn       KAITHI SIGN VIRAMA
-unicode_indic_matra_category(0x1112A, 0x1112B, 'Bottom'). % Mn   [2] CHAKMA VOWEL SIGN U..CHAKMA VOWEL SIGN UU
-unicode_indic_matra_category(0x11131, 0x11132, 'Bottom'). % Mn   [2] CHAKMA O MARK..CHAKMA AU MARK
-unicode_indic_matra_category(0x111B6, 0x111BB, 'Bottom'). % Mn   [6] SHARADA VOWEL SIGN U..SHARADA VOWEL SIGN VOCALIC LL
-unicode_indic_matra_category(0x116B0, 0x116B1, 'Bottom'). % Mn   [2] TAKRI VOWEL SIGN U..TAKRI VOWEL SIGN UU
-
-% Indic_Matra_Category=Top_And_Bottom
-
-unicode_indic_matra_category(0x0C48, 0x0C48, 'Top_And_Bottom'). % Mn       TELUGU VOWEL SIGN AI
-unicode_indic_matra_category(0x0F73, 0x0F73, 'Top_And_Bottom'). % Mn       TIBETAN VOWEL SIGN II
-unicode_indic_matra_category(0x0F76, 0x0F79, 'Top_And_Bottom'). % Mn   [4] TIBETAN VOWEL SIGN VOCALIC R..TIBETAN VOWEL SIGN VOCALIC LL
-unicode_indic_matra_category(0x0F81, 0x0F81, 'Top_And_Bottom'). % Mn       TIBETAN VOWEL SIGN REVERSED II
-unicode_indic_matra_category(0x1B3C, 0x1B3C, 'Top_And_Bottom'). % Mn       BALINESE VOWEL SIGN LA LENGA
-unicode_indic_matra_category(0x1112E, 0x1112F, 'Top_And_Bottom'). % Mn   [2] CHAKMA VOWEL SIGN O..CHAKMA VOWEL SIGN AU
-
-% Indic_Matra_Category=Top_And_Right
-
-unicode_indic_matra_category(0x0AC9, 0x0AC9, 'Top_And_Right'). % Mc       GUJARATI VOWEL SIGN CANDRA O
-unicode_indic_matra_category(0x0B57, 0x0B57, 'Top_And_Right'). % Mc       ORIYA AU LENGTH MARK
-unicode_indic_matra_category(0x0CC0, 0x0CC0, 'Top_And_Right'). % Mc       KANNADA VOWEL SIGN II
-unicode_indic_matra_category(0x0CC7, 0x0CC8, 'Top_And_Right'). % Mc   [2] KANNADA VOWEL SIGN EE..KANNADA VOWEL SIGN AI
-unicode_indic_matra_category(0x0CCA, 0x0CCB, 'Top_And_Right'). % Mc   [2] KANNADA VOWEL SIGN O..KANNADA VOWEL SIGN OO
-unicode_indic_matra_category(0x1925, 0x1926, 'Top_And_Right'). % Mc   [2] LIMBU VOWEL SIGN OO..LIMBU VOWEL SIGN AU
-unicode_indic_matra_category(0x1B43, 0x1B43, 'Top_And_Right'). % Mc       BALINESE VOWEL SIGN PEPET TEDUNG
-unicode_indic_matra_category(0x111BF, 0x111BF, 'Top_And_Right'). % Mc       SHARADA VOWEL SIGN AU
-
-% Indic_Matra_Category=Top_And_Left
-
-unicode_indic_matra_category(0x0B48, 0x0B48 , 'Top_And_Left'). % Mc       ORIYA VOWEL SIGN AI
-unicode_indic_matra_category(0x0DDA, 0x0DDA , 'Top_And_Left'). % Mc       SINHALA VOWEL SIGN DIGA KOMBUVA
-unicode_indic_matra_category(0x17BE, 0x17BE , 'Top_And_Left'). % Mc       KHMER VOWEL SIGN OE
-unicode_indic_matra_category(0x1C29, 0x1C29 , 'Top_And_Left'). % Mc       LEPCHA VOWEL SIGN OO
-
-% Indic_Matra_Category=Top_And_Left_And_Right
-
-unicode_indic_matra_category(0x0B4C, 0x0B4C, 'Top_And_Left_And_Right'). % Mc       ORIYA VOWEL SIGN AU
-unicode_indic_matra_category(0x17BF, 0x17BF, 'Top_And_Left_And_Right'). % Mc       KHMER VOWEL SIGN YA
-
-% Indic_Matra_Category=Bottom_And_Right
-
-unicode_indic_matra_category(0x1B3B, 0x1B3B , 'Bottom_And_Right'). % Mc       BALINESE VOWEL SIGN RA REPA TEDUNG
-unicode_indic_matra_category(0xA9C0, 0xA9C0 , 'Bottom_And_Right'). % Mc       JAVANESE PANGKON
-
-% Indic_Matra_Category=Top_And_Bottom_And_Right
-
-unicode_indic_matra_category(0x1B3D, 0x1B3D, 'Top_And_Bottom_And_Right'). % Mc       BALINESE VOWEL SIGN LA LENGA TEDUNG
-
-% Indic_Matra_Category=Overstruck
-
-unicode_indic_matra_category(0x10A01, 0x10A01, 'Overstruck'). % Mn       KHAROSHTHI VOWEL SIGN I
-unicode_indic_matra_category(0x10A06, 0x10A06, 'Overstruck'). % Mn       KHAROSHTHI VOWEL SIGN O
-
-% Indic_Matra_Category=Invisible
-
-% The Invisible category refers to viramas for certain script
-% which are used only to control consonant stacking or cluster
-% formation, and which have no visible display on their own.
-
-unicode_indic_matra_category(0x1039, 0x1039, 'Invisible'). % Mn       MYANMAR SIGN VIRAMA
-unicode_indic_matra_category(0x17D2, 0x17D2, 'Invisible'). % Mn       KHMER SIGN COENG
-unicode_indic_matra_category(0x1A60, 0x1A60, 'Invisible'). % Mn       TAI THAM SIGN SAKOT
-unicode_indic_matra_category(0xAAF6, 0xAAF6, 'Invisible'). % Mn       MEETEI MAYEK VIRAMA
-unicode_indic_matra_category(0x10A3F, 0x10A3F, 'Invisible'). % Mn       KHAROSHTHI VIRAMA
-unicode_indic_matra_category(0x11133, 0x11133, 'Invisible'). % Mn       CHAKMA VIRAMA
-
-% EOF
+unicode_indic_matra_category(2307, 2307, 'Right').
+unicode_indic_matra_category(2363, 2363, 'Right').
+unicode_indic_matra_category(2366, 2366, 'Right').
+unicode_indic_matra_category(2368, 2368, 'Right').
+unicode_indic_matra_category(2377, 2380, 'Right').
+unicode_indic_matra_category(2383, 2383, 'Right').
+unicode_indic_matra_category(2434, 2435, 'Right').
+unicode_indic_matra_category(2494, 2494, 'Right').
+unicode_indic_matra_category(2496, 2496, 'Right').
+unicode_indic_matra_category(2519, 2519, 'Right').
+unicode_indic_matra_category(2563, 2563, 'Right').
+unicode_indic_matra_category(2622, 2622, 'Right').
+unicode_indic_matra_category(2624, 2624, 'Right').
+unicode_indic_matra_category(2691, 2691, 'Right').
+unicode_indic_matra_category(2750, 2750, 'Right').
+unicode_indic_matra_category(2752, 2752, 'Right').
+unicode_indic_matra_category(2763, 2764, 'Right').
+unicode_indic_matra_category(2818, 2819, 'Right').
+unicode_indic_matra_category(2878, 2878, 'Right').
+unicode_indic_matra_category(2880, 2880, 'Right').
+unicode_indic_matra_category(3006, 3007, 'Right').
+unicode_indic_matra_category(3009, 3010, 'Right').
+unicode_indic_matra_category(3031, 3031, 'Right').
+unicode_indic_matra_category(3073, 3075, 'Right').
+unicode_indic_matra_category(3137, 3140, 'Right').
+unicode_indic_matra_category(3202, 3203, 'Right').
+unicode_indic_matra_category(3262, 3262, 'Right').
+unicode_indic_matra_category(3265, 3268, 'Right').
+unicode_indic_matra_category(3285, 3286, 'Right').
+unicode_indic_matra_category(3315, 3315, 'Right').
+unicode_indic_matra_category(3330, 3331, 'Right').
+unicode_indic_matra_category(3390, 3392, 'Right').
+unicode_indic_matra_category(3415, 3415, 'Right').
+unicode_indic_matra_category(3458, 3459, 'Right').
+unicode_indic_matra_category(3535, 3537, 'Right').
+unicode_indic_matra_category(3544, 3544, 'Right').
+unicode_indic_matra_category(3551, 3551, 'Right').
+unicode_indic_matra_category(3570, 3571, 'Right').
+unicode_indic_matra_category(3632, 3632, 'Right').
+unicode_indic_matra_category(3634, 3635, 'Right').
+unicode_indic_matra_category(3653, 3653, 'Right').
+unicode_indic_matra_category(3760, 3760, 'Right').
+unicode_indic_matra_category(3762, 3763, 'Right').
+unicode_indic_matra_category(3902, 3902, 'Right').
+unicode_indic_matra_category(3967, 3967, 'Right').
+unicode_indic_matra_category(4139, 4140, 'Right').
+unicode_indic_matra_category(4152, 4152, 'Right').
+unicode_indic_matra_category(4155, 4155, 'Right').
+unicode_indic_matra_category(4182, 4183, 'Right').
+unicode_indic_matra_category(4194, 4196, 'Right').
+unicode_indic_matra_category(4199, 4205, 'Right').
+unicode_indic_matra_category(4227, 4227, 'Right').
+unicode_indic_matra_category(4231, 4236, 'Right').
+unicode_indic_matra_category(4239, 4239, 'Right').
+unicode_indic_matra_category(4250, 4252, 'Right').
+unicode_indic_matra_category(5909, 5909, 'Right').
+unicode_indic_matra_category(5940, 5940, 'Right').
+unicode_indic_matra_category(6070, 6070, 'Right').
+unicode_indic_matra_category(6087, 6088, 'Right').
+unicode_indic_matra_category(6435, 6436, 'Right').
+unicode_indic_matra_category(6441, 6443, 'Right').
+unicode_indic_matra_category(6448, 6449, 'Right').
+unicode_indic_matra_category(6451, 6456, 'Right').
+unicode_indic_matra_category(6576, 6580, 'Right').
+unicode_indic_matra_category(6584, 6585, 'Right').
+unicode_indic_matra_category(6587, 6592, 'Right').
+unicode_indic_matra_category(6600, 6601, 'Right').
+unicode_indic_matra_category(6682, 6682, 'Right').
+unicode_indic_matra_category(6743, 6743, 'Right').
+unicode_indic_matra_category(6753, 6753, 'Right').
+unicode_indic_matra_category(6755, 6756, 'Right').
+unicode_indic_matra_category(6765, 6765, 'Right').
+unicode_indic_matra_category(6916, 6916, 'Right').
+unicode_indic_matra_category(6965, 6965, 'Right').
+unicode_indic_matra_category(6980, 6980, 'Right').
+unicode_indic_matra_category(7042, 7042, 'Right').
+unicode_indic_matra_category(7073, 7073, 'Right').
+unicode_indic_matra_category(7079, 7079, 'Right').
+unicode_indic_matra_category(7082, 7082, 'Right').
+unicode_indic_matra_category(7143, 7143, 'Right').
+unicode_indic_matra_category(7146, 7148, 'Right').
+unicode_indic_matra_category(7150, 7150, 'Right').
+unicode_indic_matra_category(7154, 7155, 'Right').
+unicode_indic_matra_category(7204, 7206, 'Right').
+unicode_indic_matra_category(7210, 7211, 'Right').
+unicode_indic_matra_category(7393, 7393, 'Right').
+unicode_indic_matra_category(7415, 7415, 'Right').
+unicode_indic_matra_category(43043, 43044, 'Right').
+unicode_indic_matra_category(43047, 43047, 'Right').
+unicode_indic_matra_category(43136, 43137, 'Right').
+unicode_indic_matra_category(43188, 43203, 'Right').
+unicode_indic_matra_category(43346, 43347, 'Right').
+unicode_indic_matra_category(43395, 43395, 'Right').
+unicode_indic_matra_category(43444, 43445, 'Right').
+unicode_indic_matra_category(43571, 43571, 'Right').
+unicode_indic_matra_category(43597, 43597, 'Right').
+unicode_indic_matra_category(43643, 43643, 'Right').
+unicode_indic_matra_category(43645, 43645, 'Right').
+unicode_indic_matra_category(43697, 43697, 'Right').
+unicode_indic_matra_category(43706, 43706, 'Right').
+unicode_indic_matra_category(43709, 43709, 'Right').
+unicode_indic_matra_category(43759, 43759, 'Right').
+unicode_indic_matra_category(43765, 43765, 'Right').
+unicode_indic_matra_category(44003, 44004, 'Right').
+unicode_indic_matra_category(44006, 44007, 'Right').
+unicode_indic_matra_category(44009, 44010, 'Right').
+unicode_indic_matra_category(44012, 44012, 'Right').
+unicode_indic_matra_category(69632, 69632, 'Right').
+unicode_indic_matra_category(69634, 69634, 'Right').
+unicode_indic_matra_category(69762, 69762, 'Right').
+unicode_indic_matra_category(69808, 69808, 'Right').
+unicode_indic_matra_category(69810, 69810, 'Right').
+unicode_indic_matra_category(69815, 69816, 'Right').
+unicode_indic_matra_category(69957, 69958, 'Right').
+unicode_indic_matra_category(70018, 70018, 'Right').
+unicode_indic_matra_category(70067, 70067, 'Right').
+unicode_indic_matra_category(70069, 70069, 'Right').
+unicode_indic_matra_category(70080, 70080, 'Right').
+unicode_indic_matra_category(70188, 70190, 'Right').
+unicode_indic_matra_category(70197, 70197, 'Right').
+unicode_indic_matra_category(70368, 70368, 'Right').
+unicode_indic_matra_category(70370, 70370, 'Right').
+unicode_indic_matra_category(70402, 70403, 'Right').
+unicode_indic_matra_category(70462, 70463, 'Right').
+unicode_indic_matra_category(70465, 70468, 'Right').
+unicode_indic_matra_category(70477, 70477, 'Right').
+unicode_indic_matra_category(70487, 70487, 'Right').
+unicode_indic_matra_category(70498, 70499, 'Right').
+unicode_indic_matra_category(70584, 70584, 'Right').
+unicode_indic_matra_category(70601, 70602, 'Right').
+unicode_indic_matra_category(70604, 70605, 'Right').
+unicode_indic_matra_category(70607, 70607, 'Right').
+unicode_indic_matra_category(70709, 70709, 'Right').
+unicode_indic_matra_category(70711, 70711, 'Right').
+unicode_indic_matra_category(70720, 70721, 'Right').
+unicode_indic_matra_category(70725, 70725, 'Right').
+unicode_indic_matra_category(70832, 70832, 'Right').
+unicode_indic_matra_category(70834, 70834, 'Right').
+unicode_indic_matra_category(70845, 70845, 'Right').
+unicode_indic_matra_category(70849, 70849, 'Right').
+unicode_indic_matra_category(71087, 71087, 'Right').
+unicode_indic_matra_category(71089, 71089, 'Right').
+unicode_indic_matra_category(71102, 71102, 'Right').
+unicode_indic_matra_category(71216, 71218, 'Right').
+unicode_indic_matra_category(71227, 71228, 'Right').
+unicode_indic_matra_category(71230, 71230, 'Right').
+unicode_indic_matra_category(71340, 71340, 'Right').
+unicode_indic_matra_category(71343, 71343, 'Right').
+unicode_indic_matra_category(71350, 71350, 'Right').
+unicode_indic_matra_category(71456, 71457, 'Right').
+unicode_indic_matra_category(71724, 71724, 'Right').
+unicode_indic_matra_category(71726, 71726, 'Right').
+unicode_indic_matra_category(71736, 71736, 'Right').
+unicode_indic_matra_category(71984, 71988, 'Right').
+unicode_indic_matra_category(71997, 71997, 'Right').
+unicode_indic_matra_category(72000, 72000, 'Right').
+unicode_indic_matra_category(72145, 72145, 'Right').
+unicode_indic_matra_category(72147, 72147, 'Right').
+unicode_indic_matra_category(72156, 72159, 'Right').
+unicode_indic_matra_category(72249, 72249, 'Right').
+unicode_indic_matra_category(72279, 72280, 'Right').
+unicode_indic_matra_category(72343, 72343, 'Right').
+unicode_indic_matra_category(72545, 72545, 'Right').
+unicode_indic_matra_category(72549, 72549, 'Right').
+unicode_indic_matra_category(72551, 72551, 'Right').
+unicode_indic_matra_category(72751, 72751, 'Right').
+unicode_indic_matra_category(72766, 72766, 'Right').
+unicode_indic_matra_category(72873, 72873, 'Right').
+unicode_indic_matra_category(72884, 72884, 'Right').
+unicode_indic_matra_category(73030, 73030, 'Right').
+unicode_indic_matra_category(73098, 73102, 'Right').
+unicode_indic_matra_category(73107, 73108, 'Right').
+unicode_indic_matra_category(73110, 73110, 'Right').
+unicode_indic_matra_category(73462, 73462, 'Right').
+unicode_indic_matra_category(73475, 73475, 'Right').
+unicode_indic_matra_category(73524, 73525, 'Right').
+unicode_indic_matra_category(73537, 73537, 'Right').
+unicode_indic_matra_category(90412, 90412, 'Right').
+unicode_indic_matra_category(93504, 93506, 'Right').
+unicode_indic_matra_category(93539, 93546, 'Right').
+unicode_indic_matra_category(93547, 93548, 'Right').
+unicode_indic_matra_category(2367, 2367, 'Left').
+unicode_indic_matra_category(2382, 2382, 'Left').
+unicode_indic_matra_category(2495, 2495, 'Left').
+unicode_indic_matra_category(2503, 2504, 'Left').
+unicode_indic_matra_category(2623, 2623, 'Left').
+unicode_indic_matra_category(2751, 2751, 'Left').
+unicode_indic_matra_category(2887, 2887, 'Left').
+unicode_indic_matra_category(3014, 3016, 'Left').
+unicode_indic_matra_category(3398, 3400, 'Left').
+unicode_indic_matra_category(3545, 3545, 'Left').
+unicode_indic_matra_category(3547, 3547, 'Left').
+unicode_indic_matra_category(3903, 3903, 'Left').
+unicode_indic_matra_category(4145, 4145, 'Left').
+unicode_indic_matra_category(4228, 4228, 'Left').
+unicode_indic_matra_category(6081, 6083, 'Left').
+unicode_indic_matra_category(6681, 6681, 'Left').
+unicode_indic_matra_category(6741, 6741, 'Left').
+unicode_indic_matra_category(6766, 6770, 'Left').
+unicode_indic_matra_category(6974, 6975, 'Left').
+unicode_indic_matra_category(7078, 7078, 'Left').
+unicode_indic_matra_category(7207, 7208, 'Left').
+unicode_indic_matra_category(7220, 7221, 'Left').
+unicode_indic_matra_category(43450, 43451, 'Left').
+unicode_indic_matra_category(43567, 43568, 'Left').
+unicode_indic_matra_category(43572, 43572, 'Left').
+unicode_indic_matra_category(43755, 43755, 'Left').
+unicode_indic_matra_category(43758, 43758, 'Left').
+unicode_indic_matra_category(69809, 69809, 'Left').
+unicode_indic_matra_category(69932, 69932, 'Left').
+unicode_indic_matra_category(70068, 70068, 'Left').
+unicode_indic_matra_category(70094, 70094, 'Left').
+unicode_indic_matra_category(70369, 70369, 'Left').
+unicode_indic_matra_category(70471, 70472, 'Left').
+unicode_indic_matra_category(70594, 70594, 'Left').
+unicode_indic_matra_category(70597, 70597, 'Left').
+unicode_indic_matra_category(70710, 70710, 'Left').
+unicode_indic_matra_category(70833, 70833, 'Left').
+unicode_indic_matra_category(70841, 70841, 'Left').
+unicode_indic_matra_category(71088, 71088, 'Left').
+unicode_indic_matra_category(71096, 71096, 'Left').
+unicode_indic_matra_category(71342, 71342, 'Left').
+unicode_indic_matra_category(71462, 71462, 'Left').
+unicode_indic_matra_category(71725, 71725, 'Left').
+unicode_indic_matra_category(71989, 71989, 'Left').
+unicode_indic_matra_category(71991, 71991, 'Left').
+unicode_indic_matra_category(72146, 72146, 'Left').
+unicode_indic_matra_category(72164, 72164, 'Left').
+unicode_indic_matra_category(72881, 72881, 'Left').
+unicode_indic_matra_category(73461, 73461, 'Left').
+unicode_indic_matra_category(73534, 73535, 'Left').
+unicode_indic_matra_category(90410, 90411, 'Left').
+unicode_indic_matra_category(3648, 3652, 'Visual_Order_Left').
+unicode_indic_matra_category(3776, 3780, 'Visual_Order_Left').
+unicode_indic_matra_category(6581, 6583, 'Visual_Order_Left').
+unicode_indic_matra_category(6586, 6586, 'Visual_Order_Left').
+unicode_indic_matra_category(43701, 43702, 'Visual_Order_Left').
+unicode_indic_matra_category(43705, 43705, 'Visual_Order_Left').
+unicode_indic_matra_category(43707, 43708, 'Visual_Order_Left').
+unicode_indic_matra_category(2507, 2508, 'Left_And_Right').
+unicode_indic_matra_category(2891, 2891, 'Left_And_Right').
+unicode_indic_matra_category(3018, 3020, 'Left_And_Right').
+unicode_indic_matra_category(3402, 3404, 'Left_And_Right').
+unicode_indic_matra_category(3548, 3548, 'Left_And_Right').
+unicode_indic_matra_category(3550, 3550, 'Left_And_Right').
+unicode_indic_matra_category(6080, 6080, 'Left_And_Right').
+unicode_indic_matra_category(6084, 6085, 'Left_And_Right').
+unicode_indic_matra_category(6976, 6977, 'Left_And_Right').
+unicode_indic_matra_category(70475, 70476, 'Left_And_Right').
+unicode_indic_matra_category(70599, 70600, 'Left_And_Right').
+unicode_indic_matra_category(70844, 70844, 'Left_And_Right').
+unicode_indic_matra_category(70846, 70846, 'Left_And_Right').
+unicode_indic_matra_category(71098, 71098, 'Left_And_Right').
+unicode_indic_matra_category(71992, 71992, 'Left_And_Right').
+unicode_indic_matra_category(2304, 2306, 'Top').
+unicode_indic_matra_category(2362, 2362, 'Top').
+unicode_indic_matra_category(2373, 2376, 'Top').
+unicode_indic_matra_category(2385, 2385, 'Top').
+unicode_indic_matra_category(2389, 2389, 'Top').
+unicode_indic_matra_category(2433, 2433, 'Top').
+unicode_indic_matra_category(2558, 2558, 'Top').
+unicode_indic_matra_category(2561, 2562, 'Top').
+unicode_indic_matra_category(2631, 2632, 'Top').
+unicode_indic_matra_category(2635, 2636, 'Top').
+unicode_indic_matra_category(2672, 2673, 'Top').
+unicode_indic_matra_category(2689, 2690, 'Top').
+unicode_indic_matra_category(2757, 2757, 'Top').
+unicode_indic_matra_category(2759, 2760, 'Top').
+unicode_indic_matra_category(2810, 2815, 'Top').
+unicode_indic_matra_category(2817, 2817, 'Top').
+unicode_indic_matra_category(2879, 2879, 'Top').
+unicode_indic_matra_category(2901, 2902, 'Top').
+unicode_indic_matra_category(2946, 2946, 'Top').
+unicode_indic_matra_category(3008, 3008, 'Top').
+unicode_indic_matra_category(3021, 3021, 'Top').
+unicode_indic_matra_category(3072, 3072, 'Top').
+unicode_indic_matra_category(3076, 3076, 'Top').
+unicode_indic_matra_category(3134, 3136, 'Top').
+unicode_indic_matra_category(3142, 3143, 'Top').
+unicode_indic_matra_category(3146, 3149, 'Top').
+unicode_indic_matra_category(3157, 3157, 'Top').
+unicode_indic_matra_category(3201, 3201, 'Top').
+unicode_indic_matra_category(3263, 3263, 'Top').
+unicode_indic_matra_category(3270, 3270, 'Top').
+unicode_indic_matra_category(3276, 3277, 'Top').
+unicode_indic_matra_category(3328, 3329, 'Top').
+unicode_indic_matra_category(3387, 3388, 'Top').
+unicode_indic_matra_category(3405, 3405, 'Top').
+unicode_indic_matra_category(3406, 3406, 'Top').
+unicode_indic_matra_category(3457, 3457, 'Top').
+unicode_indic_matra_category(3530, 3530, 'Top').
+unicode_indic_matra_category(3538, 3539, 'Top').
+unicode_indic_matra_category(3633, 3633, 'Top').
+unicode_indic_matra_category(3636, 3639, 'Top').
+unicode_indic_matra_category(3655, 3662, 'Top').
+unicode_indic_matra_category(3761, 3761, 'Top').
+unicode_indic_matra_category(3764, 3767, 'Top').
+unicode_indic_matra_category(3771, 3771, 'Top').
+unicode_indic_matra_category(3784, 3790, 'Top').
+unicode_indic_matra_category(3897, 3897, 'Top').
+unicode_indic_matra_category(3954, 3954, 'Top').
+unicode_indic_matra_category(3962, 3966, 'Top').
+unicode_indic_matra_category(3968, 3968, 'Top').
+unicode_indic_matra_category(3970, 3971, 'Top').
+unicode_indic_matra_category(3974, 3975, 'Top').
+unicode_indic_matra_category(4141, 4142, 'Top').
+unicode_indic_matra_category(4146, 4150, 'Top').
+unicode_indic_matra_category(4154, 4154, 'Top').
+unicode_indic_matra_category(4209, 4212, 'Top').
+unicode_indic_matra_category(4229, 4230, 'Top').
+unicode_indic_matra_category(4253, 4253, 'Top').
+unicode_indic_matra_category(5906, 5906, 'Top').
+unicode_indic_matra_category(5938, 5938, 'Top').
+unicode_indic_matra_category(5970, 5970, 'Top').
+unicode_indic_matra_category(6002, 6002, 'Top').
+unicode_indic_matra_category(6071, 6074, 'Top').
+unicode_indic_matra_category(6086, 6086, 'Top').
+unicode_indic_matra_category(6089, 6097, 'Top').
+unicode_indic_matra_category(6099, 6099, 'Top').
+unicode_indic_matra_category(6109, 6109, 'Top').
+unicode_indic_matra_category(6432, 6433, 'Top').
+unicode_indic_matra_category(6439, 6440, 'Top').
+unicode_indic_matra_category(6458, 6458, 'Top').
+unicode_indic_matra_category(6679, 6679, 'Top').
+unicode_indic_matra_category(6683, 6683, 'Top').
+unicode_indic_matra_category(6744, 6746, 'Top').
+unicode_indic_matra_category(6754, 6754, 'Top').
+unicode_indic_matra_category(6757, 6760, 'Top').
+unicode_indic_matra_category(6763, 6763, 'Top').
+unicode_indic_matra_category(6771, 6780, 'Top').
+unicode_indic_matra_category(6912, 6915, 'Top').
+unicode_indic_matra_category(6964, 6964, 'Top').
+unicode_indic_matra_category(6966, 6967, 'Top').
+unicode_indic_matra_category(6978, 6978, 'Top').
+unicode_indic_matra_category(7019, 7019, 'Top').
+unicode_indic_matra_category(7021, 7027, 'Top').
+unicode_indic_matra_category(7040, 7041, 'Top').
+unicode_indic_matra_category(7076, 7076, 'Top').
+unicode_indic_matra_category(7080, 7081, 'Top').
+unicode_indic_matra_category(7142, 7142, 'Top').
+unicode_indic_matra_category(7144, 7145, 'Top').
+unicode_indic_matra_category(7149, 7149, 'Top').
+unicode_indic_matra_category(7151, 7153, 'Top').
+unicode_indic_matra_category(7213, 7219, 'Top').
+unicode_indic_matra_category(7222, 7222, 'Top').
+unicode_indic_matra_category(7376, 7378, 'Top').
+unicode_indic_matra_category(7386, 7387, 'Top').
+unicode_indic_matra_category(7392, 7392, 'Top').
+unicode_indic_matra_category(7412, 7412, 'Top').
+unicode_indic_matra_category(7675, 7675, 'Top').
+unicode_indic_matra_category(8432, 8432, 'Top').
+unicode_indic_matra_category(43010, 43010, 'Top').
+unicode_indic_matra_category(43014, 43014, 'Top').
+unicode_indic_matra_category(43019, 43019, 'Top').
+unicode_indic_matra_category(43046, 43046, 'Top').
+unicode_indic_matra_category(43205, 43205, 'Top').
+unicode_indic_matra_category(43232, 43249, 'Top').
+unicode_indic_matra_category(43263, 43263, 'Top').
+unicode_indic_matra_category(43302, 43306, 'Top').
+unicode_indic_matra_category(43338, 43338, 'Top').
+unicode_indic_matra_category(43343, 43345, 'Top').
+unicode_indic_matra_category(43392, 43394, 'Top').
+unicode_indic_matra_category(43443, 43443, 'Top').
+unicode_indic_matra_category(43446, 43447, 'Top').
+unicode_indic_matra_category(43452, 43452, 'Top').
+unicode_indic_matra_category(43493, 43493, 'Top').
+unicode_indic_matra_category(43561, 43564, 'Top').
+unicode_indic_matra_category(43566, 43566, 'Top').
+unicode_indic_matra_category(43569, 43569, 'Top').
+unicode_indic_matra_category(43587, 43587, 'Top').
+unicode_indic_matra_category(43596, 43596, 'Top').
+unicode_indic_matra_category(43644, 43644, 'Top').
+unicode_indic_matra_category(43696, 43696, 'Top').
+unicode_indic_matra_category(43698, 43699, 'Top').
+unicode_indic_matra_category(43703, 43704, 'Top').
+unicode_indic_matra_category(43710, 43711, 'Top').
+unicode_indic_matra_category(43713, 43713, 'Top').
+unicode_indic_matra_category(43757, 43757, 'Top').
+unicode_indic_matra_category(44005, 44005, 'Top').
+unicode_indic_matra_category(68101, 68101, 'Top').
+unicode_indic_matra_category(68111, 68111, 'Top').
+unicode_indic_matra_category(68152, 68152, 'Top').
+unicode_indic_matra_category(69633, 69633, 'Top').
+unicode_indic_matra_category(69688, 69691, 'Top').
+unicode_indic_matra_category(69698, 69702, 'Top').
+unicode_indic_matra_category(69744, 69744, 'Top').
+unicode_indic_matra_category(69747, 69748, 'Top').
+unicode_indic_matra_category(69760, 69761, 'Top').
+unicode_indic_matra_category(69813, 69814, 'Top').
+unicode_indic_matra_category(69888, 69890, 'Top').
+unicode_indic_matra_category(69927, 69929, 'Top').
+unicode_indic_matra_category(69933, 69933, 'Top').
+unicode_indic_matra_category(69936, 69936, 'Top').
+unicode_indic_matra_category(69940, 69940, 'Top').
+unicode_indic_matra_category(70016, 70017, 'Top').
+unicode_indic_matra_category(70076, 70078, 'Top').
+unicode_indic_matra_category(70082, 70083, 'Top').
+unicode_indic_matra_category(70091, 70091, 'Top').
+unicode_indic_matra_category(70095, 70095, 'Top').
+unicode_indic_matra_category(70192, 70193, 'Top').
+unicode_indic_matra_category(70196, 70196, 'Top').
+unicode_indic_matra_category(70198, 70199, 'Top').
+unicode_indic_matra_category(70206, 70206, 'Top').
+unicode_indic_matra_category(70367, 70367, 'Top').
+unicode_indic_matra_category(70373, 70376, 'Top').
+unicode_indic_matra_category(70400, 70401, 'Top').
+unicode_indic_matra_category(70464, 70464, 'Top').
+unicode_indic_matra_category(70502, 70508, 'Top').
+unicode_indic_matra_category(70512, 70516, 'Top').
+unicode_indic_matra_category(70606, 70606, 'Top').
+unicode_indic_matra_category(70609, 70609, 'Top').
+unicode_indic_matra_category(70625, 70625, 'Top').
+unicode_indic_matra_category(70718, 70719, 'Top').
+unicode_indic_matra_category(70723, 70724, 'Top').
+unicode_indic_matra_category(70750, 70750, 'Top').
+unicode_indic_matra_category(70842, 70842, 'Top').
+unicode_indic_matra_category(70847, 70848, 'Top').
+unicode_indic_matra_category(71100, 71101, 'Top').
+unicode_indic_matra_category(71225, 71226, 'Top').
+unicode_indic_matra_category(71229, 71229, 'Top').
+unicode_indic_matra_category(71232, 71232, 'Top').
+unicode_indic_matra_category(71339, 71339, 'Top').
+unicode_indic_matra_category(71341, 71341, 'Top').
+unicode_indic_matra_category(71346, 71349, 'Top').
+unicode_indic_matra_category(71455, 71455, 'Top').
+unicode_indic_matra_category(71458, 71459, 'Top').
+unicode_indic_matra_category(71463, 71463, 'Top').
+unicode_indic_matra_category(71465, 71467, 'Top').
+unicode_indic_matra_category(71731, 71735, 'Top').
+unicode_indic_matra_category(71995, 71996, 'Top').
+unicode_indic_matra_category(71999, 71999, 'Top').
+unicode_indic_matra_category(72001, 72001, 'Top').
+unicode_indic_matra_category(72154, 72155, 'Top').
+unicode_indic_matra_category(72193, 72193, 'Top').
+unicode_indic_matra_category(72196, 72201, 'Top').
+unicode_indic_matra_category(72245, 72248, 'Top').
+unicode_indic_matra_category(72273, 72273, 'Top').
+unicode_indic_matra_category(72276, 72278, 'Top').
+unicode_indic_matra_category(72324, 72329, 'Top').
+unicode_indic_matra_category(72342, 72342, 'Top').
+unicode_indic_matra_category(72344, 72344, 'Top').
+unicode_indic_matra_category(72544, 72544, 'Top').
+unicode_indic_matra_category(72548, 72548, 'Top').
+unicode_indic_matra_category(72550, 72550, 'Top').
+unicode_indic_matra_category(72752, 72753, 'Top').
+unicode_indic_matra_category(72760, 72765, 'Top').
+unicode_indic_matra_category(72883, 72883, 'Top').
+unicode_indic_matra_category(72885, 72886, 'Top').
+unicode_indic_matra_category(73009, 73013, 'Top').
+unicode_indic_matra_category(73018, 73018, 'Top').
+unicode_indic_matra_category(73020, 73021, 'Top').
+unicode_indic_matra_category(73023, 73025, 'Top').
+unicode_indic_matra_category(73027, 73027, 'Top').
+unicode_indic_matra_category(73104, 73105, 'Top').
+unicode_indic_matra_category(73109, 73109, 'Top').
+unicode_indic_matra_category(73459, 73459, 'Top').
+unicode_indic_matra_category(73472, 73473, 'Top').
+unicode_indic_matra_category(73474, 73474, 'Top').
+unicode_indic_matra_category(73526, 73527, 'Top').
+unicode_indic_matra_category(73536, 73536, 'Top').
+unicode_indic_matra_category(73562, 73562, 'Top').
+unicode_indic_matra_category(90398, 90409, 'Top').
+unicode_indic_matra_category(90413, 90413, 'Top').
+unicode_indic_matra_category(2364, 2364, 'Bottom').
+unicode_indic_matra_category(2369, 2372, 'Bottom').
+unicode_indic_matra_category(2381, 2381, 'Bottom').
+unicode_indic_matra_category(2386, 2386, 'Bottom').
+unicode_indic_matra_category(2390, 2391, 'Bottom').
+unicode_indic_matra_category(2402, 2403, 'Bottom').
+unicode_indic_matra_category(2492, 2492, 'Bottom').
+unicode_indic_matra_category(2497, 2500, 'Bottom').
+unicode_indic_matra_category(2509, 2509, 'Bottom').
+unicode_indic_matra_category(2530, 2531, 'Bottom').
+unicode_indic_matra_category(2620, 2620, 'Bottom').
+unicode_indic_matra_category(2625, 2626, 'Bottom').
+unicode_indic_matra_category(2637, 2637, 'Bottom').
+unicode_indic_matra_category(2641, 2641, 'Bottom').
+unicode_indic_matra_category(2677, 2677, 'Bottom').
+unicode_indic_matra_category(2748, 2748, 'Bottom').
+unicode_indic_matra_category(2753, 2756, 'Bottom').
+unicode_indic_matra_category(2765, 2765, 'Bottom').
+unicode_indic_matra_category(2786, 2787, 'Bottom').
+unicode_indic_matra_category(2876, 2876, 'Bottom').
+unicode_indic_matra_category(2881, 2884, 'Bottom').
+unicode_indic_matra_category(2893, 2893, 'Bottom').
+unicode_indic_matra_category(2914, 2915, 'Bottom').
+unicode_indic_matra_category(3132, 3132, 'Bottom').
+unicode_indic_matra_category(3158, 3158, 'Bottom').
+unicode_indic_matra_category(3170, 3171, 'Bottom').
+unicode_indic_matra_category(3260, 3260, 'Bottom').
+unicode_indic_matra_category(3298, 3299, 'Bottom').
+unicode_indic_matra_category(3393, 3396, 'Bottom').
+unicode_indic_matra_category(3426, 3427, 'Bottom').
+unicode_indic_matra_category(3540, 3540, 'Bottom').
+unicode_indic_matra_category(3542, 3542, 'Bottom').
+unicode_indic_matra_category(3640, 3642, 'Bottom').
+unicode_indic_matra_category(3768, 3770, 'Bottom').
+unicode_indic_matra_category(3772, 3772, 'Bottom').
+unicode_indic_matra_category(3864, 3865, 'Bottom').
+unicode_indic_matra_category(3893, 3893, 'Bottom').
+unicode_indic_matra_category(3895, 3895, 'Bottom').
+unicode_indic_matra_category(3953, 3953, 'Bottom').
+unicode_indic_matra_category(3956, 3957, 'Bottom').
+unicode_indic_matra_category(3972, 3972, 'Bottom').
+unicode_indic_matra_category(3981, 3991, 'Bottom').
+unicode_indic_matra_category(3993, 4028, 'Bottom').
+unicode_indic_matra_category(4038, 4038, 'Bottom').
+unicode_indic_matra_category(4143, 4144, 'Bottom').
+unicode_indic_matra_category(4151, 4151, 'Bottom').
+unicode_indic_matra_category(4157, 4158, 'Bottom').
+unicode_indic_matra_category(4184, 4185, 'Bottom').
+unicode_indic_matra_category(4190, 4192, 'Bottom').
+unicode_indic_matra_category(4226, 4226, 'Bottom').
+unicode_indic_matra_category(4237, 4237, 'Bottom').
+unicode_indic_matra_category(5907, 5908, 'Bottom').
+unicode_indic_matra_category(5939, 5939, 'Bottom').
+unicode_indic_matra_category(5971, 5971, 'Bottom').
+unicode_indic_matra_category(6003, 6003, 'Bottom').
+unicode_indic_matra_category(6075, 6077, 'Bottom').
+unicode_indic_matra_category(6434, 6434, 'Bottom').
+unicode_indic_matra_category(6450, 6450, 'Bottom').
+unicode_indic_matra_category(6457, 6457, 'Bottom').
+unicode_indic_matra_category(6459, 6459, 'Bottom').
+unicode_indic_matra_category(6680, 6680, 'Bottom').
+unicode_indic_matra_category(6742, 6742, 'Bottom').
+unicode_indic_matra_category(6747, 6750, 'Bottom').
+unicode_indic_matra_category(6761, 6762, 'Bottom').
+unicode_indic_matra_category(6764, 6764, 'Bottom').
+unicode_indic_matra_category(6783, 6783, 'Bottom').
+unicode_indic_matra_category(6968, 6970, 'Bottom').
+unicode_indic_matra_category(7020, 7020, 'Bottom').
+unicode_indic_matra_category(7074, 7075, 'Bottom').
+unicode_indic_matra_category(7077, 7077, 'Bottom').
+unicode_indic_matra_category(7084, 7085, 'Bottom').
+unicode_indic_matra_category(7212, 7212, 'Bottom').
+unicode_indic_matra_category(7223, 7223, 'Bottom').
+unicode_indic_matra_category(7381, 7385, 'Bottom').
+unicode_indic_matra_category(7388, 7391, 'Bottom').
+unicode_indic_matra_category(7405, 7405, 'Bottom').
+unicode_indic_matra_category(43045, 43045, 'Bottom').
+unicode_indic_matra_category(43052, 43052, 'Bottom').
+unicode_indic_matra_category(43204, 43204, 'Bottom').
+unicode_indic_matra_category(43307, 43309, 'Bottom').
+unicode_indic_matra_category(43335, 43337, 'Bottom').
+unicode_indic_matra_category(43339, 43342, 'Bottom').
+unicode_indic_matra_category(43448, 43449, 'Bottom').
+unicode_indic_matra_category(43453, 43453, 'Bottom').
+unicode_indic_matra_category(43565, 43565, 'Bottom').
+unicode_indic_matra_category(43570, 43570, 'Bottom').
+unicode_indic_matra_category(43573, 43574, 'Bottom').
+unicode_indic_matra_category(43700, 43700, 'Bottom').
+unicode_indic_matra_category(43756, 43756, 'Bottom').
+unicode_indic_matra_category(44008, 44008, 'Bottom').
+unicode_indic_matra_category(44013, 44013, 'Bottom').
+unicode_indic_matra_category(68098, 68099, 'Bottom').
+unicode_indic_matra_category(68108, 68110, 'Bottom').
+unicode_indic_matra_category(68153, 68154, 'Bottom').
+unicode_indic_matra_category(69692, 69697, 'Bottom').
+unicode_indic_matra_category(69811, 69812, 'Bottom').
+unicode_indic_matra_category(69817, 69818, 'Bottom').
+unicode_indic_matra_category(69826, 69826, 'Bottom').
+unicode_indic_matra_category(69930, 69931, 'Bottom').
+unicode_indic_matra_category(69937, 69938, 'Bottom').
+unicode_indic_matra_category(70003, 70003, 'Bottom').
+unicode_indic_matra_category(70070, 70075, 'Bottom').
+unicode_indic_matra_category(70089, 70090, 'Bottom').
+unicode_indic_matra_category(70092, 70092, 'Bottom').
+unicode_indic_matra_category(70191, 70191, 'Bottom').
+unicode_indic_matra_category(70209, 70209, 'Bottom').
+unicode_indic_matra_category(70371, 70372, 'Bottom').
+unicode_indic_matra_category(70377, 70378, 'Bottom').
+unicode_indic_matra_category(70459, 70460, 'Bottom').
+unicode_indic_matra_category(70587, 70592, 'Bottom').
+unicode_indic_matra_category(70610, 70610, 'Bottom').
+unicode_indic_matra_category(70626, 70626, 'Bottom').
+unicode_indic_matra_category(70712, 70717, 'Bottom').
+unicode_indic_matra_category(70722, 70722, 'Bottom').
+unicode_indic_matra_category(70726, 70726, 'Bottom').
+unicode_indic_matra_category(70835, 70840, 'Bottom').
+unicode_indic_matra_category(70850, 70851, 'Bottom').
+unicode_indic_matra_category(71090, 71093, 'Bottom').
+unicode_indic_matra_category(71103, 71104, 'Bottom').
+unicode_indic_matra_category(71132, 71133, 'Bottom').
+unicode_indic_matra_category(71219, 71224, 'Bottom').
+unicode_indic_matra_category(71231, 71231, 'Bottom').
+unicode_indic_matra_category(71344, 71345, 'Bottom').
+unicode_indic_matra_category(71351, 71351, 'Bottom').
+unicode_indic_matra_category(71453, 71453, 'Bottom').
+unicode_indic_matra_category(71460, 71461, 'Bottom').
+unicode_indic_matra_category(71464, 71464, 'Bottom').
+unicode_indic_matra_category(71727, 71730, 'Bottom').
+unicode_indic_matra_category(71737, 71738, 'Bottom').
+unicode_indic_matra_category(72003, 72003, 'Bottom').
+unicode_indic_matra_category(72148, 72151, 'Bottom').
+unicode_indic_matra_category(72160, 72160, 'Bottom').
+unicode_indic_matra_category(72194, 72195, 'Bottom').
+unicode_indic_matra_category(72202, 72202, 'Bottom').
+unicode_indic_matra_category(72243, 72244, 'Bottom').
+unicode_indic_matra_category(72251, 72254, 'Bottom').
+unicode_indic_matra_category(72274, 72275, 'Bottom').
+unicode_indic_matra_category(72281, 72283, 'Bottom').
+unicode_indic_matra_category(72330, 72341, 'Bottom').
+unicode_indic_matra_category(72546, 72547, 'Bottom').
+unicode_indic_matra_category(72754, 72758, 'Bottom').
+unicode_indic_matra_category(72767, 72767, 'Bottom').
+unicode_indic_matra_category(72850, 72871, 'Bottom').
+unicode_indic_matra_category(72874, 72880, 'Bottom').
+unicode_indic_matra_category(72882, 72882, 'Bottom').
+unicode_indic_matra_category(73014, 73014, 'Bottom').
+unicode_indic_matra_category(73026, 73026, 'Bottom').
+unicode_indic_matra_category(73028, 73028, 'Bottom').
+unicode_indic_matra_category(73031, 73031, 'Bottom').
+unicode_indic_matra_category(73460, 73460, 'Bottom').
+unicode_indic_matra_category(73528, 73530, 'Bottom').
+unicode_indic_matra_category(90414, 90415, 'Bottom').
+unicode_indic_matra_category(3144, 3144, 'Top_And_Bottom').
+unicode_indic_matra_category(3955, 3955, 'Top_And_Bottom').
+unicode_indic_matra_category(3958, 3961, 'Top_And_Bottom').
+unicode_indic_matra_category(3969, 3969, 'Top_And_Bottom').
+unicode_indic_matra_category(6972, 6972, 'Top_And_Bottom').
+unicode_indic_matra_category(69934, 69935, 'Top_And_Bottom').
+unicode_indic_matra_category(2761, 2761, 'Top_And_Right').
+unicode_indic_matra_category(2903, 2903, 'Top_And_Right').
+unicode_indic_matra_category(3264, 3264, 'Top_And_Right').
+unicode_indic_matra_category(3271, 3272, 'Top_And_Right').
+unicode_indic_matra_category(3274, 3275, 'Top_And_Right').
+unicode_indic_matra_category(6437, 6438, 'Top_And_Right').
+unicode_indic_matra_category(6979, 6979, 'Top_And_Right').
+unicode_indic_matra_category(70079, 70079, 'Top_And_Right').
+unicode_indic_matra_category(70194, 70195, 'Top_And_Right').
+unicode_indic_matra_category(70585, 70586, 'Top_And_Right').
+unicode_indic_matra_category(2888, 2888, 'Top_And_Left').
+unicode_indic_matra_category(3546, 3546, 'Top_And_Left').
+unicode_indic_matra_category(6078, 6078, 'Top_And_Left').
+unicode_indic_matra_category(7209, 7209, 'Top_And_Left').
+unicode_indic_matra_category(70843, 70843, 'Top_And_Left').
+unicode_indic_matra_category(71097, 71097, 'Top_And_Left').
+unicode_indic_matra_category(2892, 2892, 'Top_And_Left_And_Right').
+unicode_indic_matra_category(3549, 3549, 'Top_And_Left_And_Right').
+unicode_indic_matra_category(6079, 6079, 'Top_And_Left_And_Right').
+unicode_indic_matra_category(71099, 71099, 'Top_And_Left_And_Right').
+unicode_indic_matra_category(6971, 6971, 'Bottom_And_Right').
+unicode_indic_matra_category(43454, 43454, 'Bottom_And_Right').
+unicode_indic_matra_category(43456, 43456, 'Bottom_And_Right').
+unicode_indic_matra_category(72002, 72002, 'Bottom_And_Right').
+unicode_indic_matra_category(43455, 43455, 'Bottom_And_Left').
+unicode_indic_matra_category(6973, 6973, 'Top_And_Bottom_And_Right').
+unicode_indic_matra_category(4156, 4156, 'Top_And_Bottom_And_Left').
+unicode_indic_matra_category(71454, 71454, 'Top_And_Bottom_And_Left').
+unicode_indic_matra_category(7380, 7380, 'Overstruck').
+unicode_indic_matra_category(7394, 7400, 'Overstruck').
+unicode_indic_matra_category(68097, 68097, 'Overstruck').
+unicode_indic_matra_category(68102, 68102, 'Overstruck').

@@ -478,10 +478,17 @@ contributions.</p>
 </section>
 <section id="description">
 <h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
-<p>The VivoMind Prolog Unicode Resources are a set of files resulting from
-the conversion of most (but not all) official UCD 6.1 files and updated
-for the few changes in the 6.2 standard. The original files can be
-downloaded from:</p>
+<p>This library contains generated Unicode 17.0.0 resources. The
+<code class="docutils literal notranslate"><span class="pre">unicode_character_data.pl</span></code> file provides normalization, default
+casing, and core text-classification predicates in <code class="docutils literal notranslate"><span class="pre">user</span></code> for use by
+the <code class="docutils literal notranslate"><span class="pre">text_normalization</span></code> library. The legacy Prolog APIs are generated
+from the same pinned Unicode release.</p>
+<p>Frequently shared range families use generated backing predicates and
+thin compatibility views. This avoids storing the same Unicode ranges in
+each legacy property file while preserving the existing filenames,
+predicate indicators, enumeration behavior, and default values.
+Independent property families remain selectively loadable. The original
+data can be downloaded from:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>http<span class="o">://</span>www.unicode.org
 </pre></div>
 </div>
@@ -495,13 +502,23 @@ used for properties and other data.</p>
 <h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
 <p>Most of the auxiliary predicates assume that the de facto Prolog
 standard predicate <code class="docutils literal notranslate"><span class="pre">between/3</span></code> is available. Unicode code point values
-are represented using the ISO Prolog standard notation for hexadecimal
-integers. In addition, the ISO Prolog standard directives <code class="docutils literal notranslate"><span class="pre">include/1</span></code>
-and <code class="docutils literal notranslate"><span class="pre">ensure_loaded/1</span></code> are used in some of the files to load auxiliary
-files.</p>
+are represented as integers. In addition, the ISO Prolog standard
+directives <code class="docutils literal notranslate"><span class="pre">include/1</span></code> and <code class="docutils literal notranslate"><span class="pre">ensure_loaded/1</span></code> are used in some files
+to load auxiliary files.</p>
 </section>
 <section id="usage">
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
+<p>To load the optimized Unicode 17.0.0 data used for text normalization
+and default case conversion:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(unicode_data(loader)).
+</pre></div>
+</div>
+<p>Logtalk entities can call these predicates directly using a <code class="docutils literal notranslate"><span class="pre">uses/2</span></code>
+directive for <code class="docutils literal notranslate"><span class="pre">user</span></code>.</p>
+<p>To load all legacy compatibility APIs:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(unicode_data(unicode_data)).
+</pre></div>
+</div>
 <p>Most applications only require some of the tables present in these
 resources. Most of these tables define properties for ranges of code
 points and not for single code points, but the provided auxiliary
@@ -512,9 +529,6 @@ specific application.</p>
 </section>
 <section id="known-issues">
 <h2>Known issues<a class="headerlink" href="#known-issues" title="Link to this heading"></a></h2>
-<p>In the file <code class="docutils literal notranslate"><span class="pre">unicode_unihan_variant.pl</span></code>, when there’s more than one
-variant for a code point, only the first one (as listed in the original
-UCD file) is returned.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">include/1</span></code> and <code class="docutils literal notranslate"><span class="pre">ensure_loaded/1</span></code> directives are specified in
 the ISO Prolog standard published in 1995. But some Prolog compilers
 either don’t implement one or both directives or have flawed
@@ -540,16 +554,13 @@ load all the files in these resources. It is mostly used to test the
 portability of the code across Prolog compilers. Also included is a
 Logtalk version of this file, <code class="docutils literal notranslate"><span class="pre">unicode_data.lgt</span></code>, which uses Logtalk’s
 own implementation of the <code class="docutils literal notranslate"><span class="pre">include/1</span></code> directive and the
-<code class="docutils literal notranslate"><span class="pre">logtak_load/1</span></code> predicate to load all files. This file can be used to
+<code class="docutils literal notranslate"><span class="pre">logtalk_load/1</span></code> predicate to load all files. This file can be used to
 workaround Prolog systems with buggy or missing implementations of the
 <code class="docutils literal notranslate"><span class="pre">ensure_loaded/1</span></code> and <code class="docutils literal notranslate"><span class="pre">include/1</span></code> directives.</p>
 <p>An overview of the original file names and the code point properties can
 be found at:</p>
-<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>http<span class="o">://</span>www.unicode.org<span class="o">/</span>reports<span class="o">/</span>tr44<span class="o">/</span><span class="err">#</span><span class="nv">Directory_Structure</span>
-
-http<span class="o">://</span>www.unicode.org<span class="o">/</span>reports<span class="o">/</span>tr44<span class="o">/</span><span class="err">#</span><span class="nv">Property_Definitions</span>
-</pre></div>
-</div>
+<p><a class="reference external" href="http://www.unicode.org/reports/tr44/#Directory_Structure">http://www.unicode.org/reports/tr44/#Directory_Structure</a>
+<a class="reference external" href="http://www.unicode.org/reports/tr44/#Property_Definitions">http://www.unicode.org/reports/tr44/#Property_Definitions</a></p>
 <section id="unicode-arabic-shaping-pl">
 <span id="unicode-arabic-shapingpl"></span><h3><code class="docutils literal notranslate"><span class="pre">unicode_arabic_shaping.pl</span></code><a class="headerlink" href="#unicode-arabic-shaping-pl" title="Link to this heading"></a></h3>
 <ul class="simple">

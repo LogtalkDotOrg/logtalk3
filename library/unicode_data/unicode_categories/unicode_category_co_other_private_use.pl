@@ -1,24 +1,28 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  This file is part of VivoMind Prolog Unicode Resources
-%  SPDX-License-Identifier: CC0-1.0
+%  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
 %
-%  VivoMind Prolog Unicode Resources is free software distributed using the
-%  Creative Commons CC0 1.0 Universal (CC0 1.0) - Public Domain Dedication
-%  license
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%      http://www.apache.org/licenses/LICENSE-2.0
+%
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%  Last modified: April 27, 2013
+% Generated Unicode 17.0.0 compatibility view. Do not edit.
 
-% from the Unicode 6.2 "UnicodeData.txt" official file:
+unicode_category_(CodePoint, 'Co') :-
+	unicode_data_general_category_range(Start, End, 'Co'),
+	between(Start, End, CodePoint).
 
-% E000;<Private Use, First>;Co;0;L;;;;;N;;;;;
-% F8FF;<Private Use, Last>;Co;0;L;;;;;N;;;;;
-unicode_category_range_(0xE000,   0xF8FF,   'Co').
-% F0000;<Plane 15 Private Use, First>;Co;0;L;;;;;N;;;;;
-% FFFFD;<Plane 15 Private Use, Last>;Co;0;L;;;;;N;;;;;
-unicode_category_range_(0xF0000,  0xFFFFD,  'Co').
-% 100000;<Plane 16 Private Use, First>;Co;0;L;;;;;N;;;;;
-% 10FFFD;<Plane 16 Private Use, Last>;Co;0;L;;;;;N;;;;;
-unicode_category_range_(0x100000, 0x10FFFD, 'Co').
+unicode_category_range_(Start, End, 'Co') :-
+	unicode_data_general_category_range(Start, End, 'Co').

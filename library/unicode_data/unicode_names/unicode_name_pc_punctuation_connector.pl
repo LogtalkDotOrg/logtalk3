@@ -1,23 +1,32 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  This file is part of VivoMind Prolog Unicode Resources
-%  SPDX-License-Identifier: CC0-1.0
+%  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
 %
-%  VivoMind Prolog Unicode Resources is free software distributed using the
-%  Creative Commons CC0 1.0 Universal (CC0 1.0) - Public Domain Dedication
-%  license
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%      http://www.apache.org/licenses/LICENSE-2.0
+%
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%  Last modified: March 13, 2012
+% Generated from Unicode 17.0.0 UnicodeData.txt. Do not edit.
 
-unicode_name(0x005F, 'LOW LINE').
-unicode_name(0x203F, 'UNDERTIE').
-unicode_name(0x2040, 'CHARACTER TIE').
-unicode_name(0x2054, 'INVERTED UNDERTIE').
-unicode_name(0xFE33, 'PRESENTATION FORM FOR VERTICAL LOW LINE').
-unicode_name(0xFE34, 'PRESENTATION FORM FOR VERTICAL WAVY LOW LINE').
-unicode_name(0xFE4D, 'DASHED LOW LINE').
-unicode_name(0xFE4E, 'CENTRELINE LOW LINE').
-unicode_name(0xFE4F, 'WAVY LOW LINE').
-unicode_name(0xFF3F, 'FULLWIDTH LOW LINE').
+unicode_name(95, 'LOW LINE').
+unicode_name(8255, 'UNDERTIE').
+unicode_name(8256, 'CHARACTER TIE').
+unicode_name(8276, 'INVERTED UNDERTIE').
+unicode_name(65075, 'PRESENTATION FORM FOR VERTICAL LOW LINE').
+unicode_name(65076, 'PRESENTATION FORM FOR VERTICAL WAVY LOW LINE').
+unicode_name(65101, 'DASHED LOW LINE').
+unicode_name(65102, 'CENTRELINE LOW LINE').
+unicode_name(65103, 'WAVY LOW LINE').
+unicode_name(65343, 'FULLWIDTH LOW LINE').

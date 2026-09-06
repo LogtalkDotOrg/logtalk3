@@ -19,8 +19,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- category(text_case_folding,
-	extends(unicode_character_data)).
+:- category(text_case_folding).
 
 	:- info([
 		version is 1:0:0,
@@ -38,6 +37,15 @@
 
 	:- uses(list, [
 		append/3
+	]).
+
+	:- uses(user, [
+		unicode_data_case_fold_mapping/2,
+		unicode_data_lower_case_mapping/2,
+		unicode_data_upper_case_mapping/2,
+		unicode_data_title_case_mapping/2,
+		unicode_data_cased_range/2,
+		unicode_data_case_ignorable_range/2
 	]).
 
 	convert_case_codes(Mode, Codes, Profile, Converted) :-
@@ -63,13 +71,25 @@
 		map_codes(Codes, Mapping, Rest).
 
 	code_mapping(case_fold, Code, Mapping) :-
-		( ^^case_fold_mapping(Code, Folded) -> Mapping = Folded; Mapping = [Code] ).
+		(	unicode_data_case_fold_mapping(Code, Folded) ->
+			Mapping = Folded
+		;	Mapping = [Code]
+		).
 	code_mapping(upper, Code, Mapping) :-
-		( ^^upper_case_mapping(Code, Upper) -> Mapping = Upper; Mapping = [Code] ).
+		(	unicode_data_upper_case_mapping(Code, Upper) ->
+			Mapping = Upper
+		;	Mapping = [Code]
+		).
 	code_mapping(title, Code, Mapping) :-
-		( ^^title_case_mapping(Code, Title) -> Mapping = Title; Mapping = [Code] ).
+		(	unicode_data_title_case_mapping(Code, Title) ->
+			Mapping = Title
+		;	Mapping = [Code]
+		).
 	code_mapping(lower, Code, Mapping) :-
-		( ^^lower_case_mapping(Code, Lower) -> Mapping = Lower; Mapping = [Code] ).
+		(	unicode_data_lower_case_mapping(Code, Lower) ->
+			Mapping = Lower
+		;	Mapping = [Code]
+		).
 
 	lower_codes([], _, []).
 	lower_codes([931| Codes], Before, Converted) :-
@@ -118,13 +138,13 @@
 		title_codes(Codes, NextStart, [Code| Before], Rest).
 
 	cased(Code) :-
-		^^cased_code_range(Start, End),
+		unicode_data_cased_range(Start, End),
 		Code >= Start,
 		Code =< End,
 		!.
 
 	case_ignorable(Code) :-
-		^^case_ignorable_range(Start, End),
+		unicode_data_case_ignorable_range(Start, End),
 		Code >= Start,
 		Code =< End,
 		!.

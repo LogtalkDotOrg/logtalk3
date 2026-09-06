@@ -90,6 +90,10 @@ sentence splitting.
 * ADDED: New `text_normalization` library providing extensible Unicode aware
 text cleaning and normalization.
 
+* UPDATED: The `unicode_data` library to Unicode 17.0.0, with reproducible
+generation, shared backing ranges, selectively loadable legacy compatibility
+views, and preservation of all Unihan variant solutions.
+
 * ADDED: New `http_oauth` library implementing OAuth 2.0 Bearer request
 protection, protected-resource metadata, token introspection, and JWT
 verification.

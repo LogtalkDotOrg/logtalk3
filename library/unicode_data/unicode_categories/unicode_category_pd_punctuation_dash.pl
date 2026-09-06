@@ -1,36 +1,28 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  This file is part of VivoMind Prolog Unicode Resources
-%  SPDX-License-Identifier: CC0-1.0
+%  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
 %
-%  VivoMind Prolog Unicode Resources is free software distributed using the
-%  Creative Commons CC0 1.0 Universal (CC0 1.0) - Public Domain Dedication
-%  license
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%      http://www.apache.org/licenses/LICENSE-2.0
+%
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%  Last modified: March 29, 2012
+% Generated Unicode 17.0.0 compatibility view. Do not edit.
 
-unicode_category_(0x002D, 'Pd').
-unicode_category_(0x058A, 'Pd').
-unicode_category_(0x05BE, 'Pd').
-unicode_category_(0x1400, 'Pd').
-unicode_category_(0x1806, 'Pd').
-unicode_category_(0x2010, 'Pd').
-unicode_category_(0x2011, 'Pd').
-unicode_category_(0x2012, 'Pd').
-unicode_category_(0x2013, 'Pd').
-unicode_category_(0x2014, 'Pd').
-unicode_category_(0x2015, 'Pd').
-unicode_category_(0x2E17, 'Pd').
-unicode_category_(0x2E1A, 'Pd').
-unicode_category_(0x2E3A, 'Pd').
-unicode_category_(0x2E3B, 'Pd').
-unicode_category_(0x301C, 'Pd').
-unicode_category_(0x3030, 'Pd').
-unicode_category_(0x30A0, 'Pd').
-unicode_category_(0xFE31, 'Pd').
-unicode_category_(0xFE32, 'Pd').
-unicode_category_(0xFE58, 'Pd').
-unicode_category_(0xFE63, 'Pd').
-unicode_category_(0xFF0D, 'Pd').
+unicode_category_(CodePoint, 'Pd') :-
+	unicode_data_general_category_range(Start, End, 'Pd'),
+	between(Start, End, CodePoint).
+
+unicode_category_range_(Start, End, 'Pd') :-
+	unicode_data_general_category_range(Start, End, 'Pd').

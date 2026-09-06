@@ -1,30 +1,26 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  This file is part of VivoMind Prolog Unicode Resources
-%  SPDX-License-Identifier: CC0-1.0
+%  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
 %
-%  VivoMind Prolog Unicode Resources is free software distributed using the
-%  Creative Commons CC0 1.0 Universal (CC0 1.0) - Public Domain Dedication
-%  license
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%  Last modified: February 11, 2017
+%      http://www.apache.org/licenses/LICENSE-2.0
 %
-%  Original Unicode file header comments follow
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-/*
-# DerivedCoreProperties-6.1.0.txt
-# Date: 2011-12-11, 18:26:55 GMT [MD]
-#
-# Unicode Character Database
-# Copyright (c) 1991-2011 Unicode, Inc.
-# For terms of use, see http://www.unicode.org/terms_of_use.html
-# For documentation, see http://www.unicode.org/reports/tr44/
+% Generated Unicode 17.0.0 compatibility view. Do not edit.
 
-% ================================================
-*/
-
+:- include(unicode_character_data).
 :- include('unicode_core_properties/unicode_math').
 :- include('unicode_core_properties/unicode_alphabetic').
 :- include('unicode_core_properties/unicode_lowercase').
@@ -44,7 +40,4 @@
 :- include('unicode_core_properties/unicode_grapheme_extend').
 :- include('unicode_core_properties/unicode_grapheme_base').
 :- include('unicode_core_properties/unicode_grapheme_link').
-
 :- include('unicode_core_properties/unicode_range_alphabetic').
-
-% EOF

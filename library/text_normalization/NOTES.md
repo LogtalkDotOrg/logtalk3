@@ -110,9 +110,8 @@ lossy operations and are distinct from Unicode normalization.
 
 `decode_entities/2-3` accepts semicolon-terminated decimal and hexadecimal
 numeric references and the case-sensitive names supplied by the profile. The
-default profile includes XML's five names and a documented common HTML subset:
-`nbsp`, `copy`, `reg`, `trade`, `cent`, `pound`, `yen`, `euro`, `sect`, `para`,
-`middot`, `ndash`, `mdash`, `hellip`, `laquo`, and `raquo`.
+default profile includes XML's five predefined entities and all the
+semicolon-terminated named character references defined by WHATWG HTML.
 
 
 Options
@@ -183,10 +182,11 @@ this library.
 Unicode data and portability
 ----------------------------
 
-Generated numeric tables are derived from pinned Unicode 17.0.0 UCD files and
-the WHATWG entity table. The source snapshots, checksums, allowlist, generator,
-and refresh instructions are under `scripts/`. Generated files contain only
-ASCII source text and numeric character values.
+The Unicode 17.0.0 normalization, casing, character-property data, and
+normalization conformance vectors are owned by the `unicode_data` library and
+loaded as a dependency. The static XML and WHATWG HTML entity table remains
+local to this library and contains only ASCII source text and numeric character
+values.
 
 The `codes` representation supports every Unicode scalar value on all
 supported backends. The `atom` and `chars` representations can only round-trip

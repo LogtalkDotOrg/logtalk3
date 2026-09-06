@@ -1,31 +1,28 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  This file is part of VivoMind Prolog Unicode Resources
-%  SPDX-License-Identifier: CC0-1.0
+%  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
 %
-%  VivoMind Prolog Unicode Resources is free software distributed using the
-%  Creative Commons CC0 1.0 Universal (CC0 1.0) - Public Domain Dedication
-%  license
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%      http://www.apache.org/licenses/LICENSE-2.0
+%
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%  Last modified: March 29, 2012
+% Generated Unicode 17.0.0 compatibility view. Do not edit.
 
-unicode_category_(0x0020, 'Zs').
-unicode_category_(0x00A0, 'Zs').
-unicode_category_(0x1680, 'Zs').
-unicode_category_(0x180E, 'Zs').
-unicode_category_(0x2000, 'Zs').
-unicode_category_(0x2001, 'Zs').
-unicode_category_(0x2002, 'Zs').
-unicode_category_(0x2003, 'Zs').
-unicode_category_(0x2004, 'Zs').
-unicode_category_(0x2005, 'Zs').
-unicode_category_(0x2006, 'Zs').
-unicode_category_(0x2007, 'Zs').
-unicode_category_(0x2008, 'Zs').
-unicode_category_(0x2009, 'Zs').
-unicode_category_(0x200A, 'Zs').
-unicode_category_(0x202F, 'Zs').
-unicode_category_(0x205F, 'Zs').
-unicode_category_(0x3000, 'Zs').
+unicode_category_(CodePoint, 'Zs') :-
+	unicode_data_general_category_range(Start, End, 'Zs'),
+	between(Start, End, CodePoint).
+
+unicode_category_range_(Start, End, 'Zs') :-
+	unicode_data_general_category_range(Start, End, 'Zs').

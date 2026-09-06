@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>unicode_character_data &mdash; Logtalk 3.102.0</title>
+  <title>xml_whatwg_entities &mdash; Logtalk 3.102.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -347,7 +347,6 @@
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#tabu-search"><span class="xref std std-ref">tabu_search</span></a></li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#term-io"><span class="xref std std-ref">term_io</span></a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="library_index.html#text-normalization"><span class="xref std std-ref">text_normalization</span></a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="common_text_entities_0.html">common_text_entities</a></li>
 <li class="toctree-l3"><a class="reference internal" href="default_text_normalization_0.html">default_text_normalization</a></li>
 <li class="toctree-l3"><a class="reference internal" href="spelling_normalizer_protocol_0.html">spelling_normalizer_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="text_case_folding_0.html">text_case_folding</a></li>
@@ -358,7 +357,7 @@
 <li class="toctree-l3"><a class="reference internal" href="text_normalizer_protocol_0.html">text_normalizer_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="text_unicode_0.html">text_unicode</a></li>
 <li class="toctree-l3"><a class="reference internal" href="text_whitespace_0.html">text_whitespace</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">unicode_character_data</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">xml_whatwg_entities</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="library_index.html#thurstone-mosteller-ranker"><span class="xref std std-ref">thurstone_mosteller_ranker</span></a></li>
@@ -431,9 +430,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">unicode_character_data</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">xml_whatwg_entities</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/unicode_character_data_0.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/xml_whatwg_entities_0.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -441,10 +440,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="unicode-character-data-0"><span id="index-0"></span><strong>category</strong></p>
-<section id="unicode-character-data">
-<h1><code class="docutils literal notranslate"><span class="pre">unicode_character_data</span></code><a class="headerlink" href="#unicode-character-data" title="Link to this heading"></a></h1>
-<p>Generated numeric Unicode 17.0.0 normalization, casing, and character-property data.</p>
+  <p class="right" id="xml-whatwg-entities-0"><span id="index-0"></span><strong>object</strong></p>
+<section id="xml-whatwg-entities">
+<h1><code class="docutils literal notranslate"><span class="pre">xml_whatwg_entities</span></code><a class="headerlink" href="#xml-whatwg-entities" title="Link to this heading"></a></h1>
+<p>XML and WHATWG HTML semicolon-terminated named character references.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -459,7 +458,7 @@
 <div class="line-block">
 <div class="line"><strong>Compilation flags:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static,</span> <span class="pre">context_switching_calls</span></code></div>
 </div>
 </div>
 <div class="line-block">
@@ -482,330 +481,44 @@
 </div>
 <nav class="contents local" id="contents">
 <ul class="simple">
-<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p></li>
-<li><p><a class="reference internal" href="#protected-predicates" id="id2">Protected predicates</a></p>
+<li><p><a class="reference internal" href="#public-predicates" id="id1">Public predicates</a></p>
 <ul>
-<li><p><a class="reference internal" href="#canonical-decomposition-2" id="id3"><code class="docutils literal notranslate"><span class="pre">canonical_decomposition/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#compatibility-decomposition-2" id="id4"><code class="docutils literal notranslate"><span class="pre">compatibility_decomposition/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#canonical-combining-class-2" id="id5"><code class="docutils literal notranslate"><span class="pre">canonical_combining_class/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#canonical-composition-3" id="id6"><code class="docutils literal notranslate"><span class="pre">canonical_composition/3</span></code></a></p></li>
-<li><p><a class="reference internal" href="#case-fold-mapping-2" id="id7"><code class="docutils literal notranslate"><span class="pre">case_fold_mapping/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#case-fold-mapping-count-1" id="id8"><code class="docutils literal notranslate"><span class="pre">case_fold_mapping_count/1</span></code></a></p></li>
-<li><p><a class="reference internal" href="#lower-case-mapping-2" id="id9"><code class="docutils literal notranslate"><span class="pre">lower_case_mapping/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#upper-case-mapping-2" id="id10"><code class="docutils literal notranslate"><span class="pre">upper_case_mapping/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#title-case-mapping-2" id="id11"><code class="docutils literal notranslate"><span class="pre">title_case_mapping/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#cased-code-range-2" id="id12"><code class="docutils literal notranslate"><span class="pre">cased_code_range/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#case-ignorable-range-2" id="id13"><code class="docutils literal notranslate"><span class="pre">case_ignorable_range/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#mark-code-range-2" id="id14"><code class="docutils literal notranslate"><span class="pre">mark_code_range/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#white-space-range-2" id="id15"><code class="docutils literal notranslate"><span class="pre">white_space_range/2</span></code></a></p></li>
-<li><p><a class="reference internal" href="#control-code-range-2" id="id16"><code class="docutils literal notranslate"><span class="pre">control_code_range/2</span></code></a></p></li>
+<li><p><a class="reference internal" href="#xml-whatwg-named-entity-2" id="id2"><code class="docutils literal notranslate"><span class="pre">xml_whatwg_named_entity/2</span></code></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#private-predicates" id="id17">Private predicates</a></p></li>
-<li><p><a class="reference internal" href="#operators" id="id18">Operators</a></p></li>
+<li><p><a class="reference internal" href="#protected-predicates" id="id3">Protected predicates</a></p></li>
+<li><p><a class="reference internal" href="#private-predicates" id="id4">Private predicates</a></p></li>
+<li><p><a class="reference internal" href="#operators" id="id5">Operators</a></p></li>
 </ul>
 </nav>
 <section id="public-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Public predicates</a><a class="headerlink" href="#public-predicates" title="Link to this heading"></a></h2>
-<p>(none)</p>
+<section id="xml-whatwg-named-entity-2">
+<span id="xml-whatwg-entities-0-xml-whatwg-named-entity-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">xml_whatwg_named_entity/2</span></code></a><a class="headerlink" href="#xml-whatwg-named-entity-2" title="Link to this heading"></a></h3>
+<p>XML or WHATWG HTML named character reference mapping.</p>
+<div class="line-block">
+<div class="line"><strong>Compilation flags:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
+</div>
+</div>
+<div class="line-block">
+<div class="line"><strong>Template:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">xml_whatwg_named_entity(Name,Codes)</span></code></div>
+</div>
+<div class="line"><strong>Mode and number of proofs:</strong></div>
+<div class="line-block">
+<div class="line"><code class="docutils literal notranslate"><span class="pre">xml_whatwg_named_entity(+atom,-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
+</div>
+</div>
 </section>
+</section>
+<hr class="docutils" />
 <section id="protected-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Protected predicates</a><a class="headerlink" href="#protected-predicates" title="Link to this heading"></a></h2>
-<section id="canonical-decomposition-2">
-<span id="unicode-character-data-0-canonical-decomposition-2"></span><span id="index-1"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">canonical_decomposition/2</span></code></a><a class="headerlink" href="#canonical-decomposition-2" title="Link to this heading"></a></h3>
-<p>Canonical decomposition mapping.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">canonical_decomposition(Code,Decomposition)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">canonical_decomposition(+integer,-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
+<p>(none)</p>
 </section>
-<section id="compatibility-decomposition-2">
-<span id="unicode-character-data-0-compatibility-decomposition-2"></span><span id="index-2"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">compatibility_decomposition/2</span></code></a><a class="headerlink" href="#compatibility-decomposition-2" title="Link to this heading"></a></h3>
-<p>Compatibility decomposition mapping.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">compatibility_decomposition(Code,Decomposition)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">compatibility_decomposition(+integer,-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="canonical-combining-class-2">
-<span id="unicode-character-data-0-canonical-combining-class-2"></span><span id="index-3"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">canonical_combining_class/2</span></code></a><a class="headerlink" href="#canonical-combining-class-2" title="Link to this heading"></a></h3>
-<p>Non-zero canonical combining class.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">canonical_combining_class(Code,Class)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">canonical_combining_class(+integer,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="canonical-composition-3">
-<span id="unicode-character-data-0-canonical-composition-3"></span><span id="index-4"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">canonical_composition/3</span></code></a><a class="headerlink" href="#canonical-composition-3" title="Link to this heading"></a></h3>
-<p>Canonical composition mapping.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">canonical_composition(First,Second,Composite)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">canonical_composition(+integer,+integer,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="case-fold-mapping-2">
-<span id="unicode-character-data-0-case-fold-mapping-2"></span><span id="index-5"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">case_fold_mapping/2</span></code></a><a class="headerlink" href="#case-fold-mapping-2" title="Link to this heading"></a></h3>
-<p>Full default case-fold mapping.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">case_fold_mapping(Code,Mapping)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">case_fold_mapping(+integer,-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="case-fold-mapping-count-1">
-<span id="unicode-character-data-0-case-fold-mapping-count-1"></span><span id="index-6"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">case_fold_mapping_count/1</span></code></a><a class="headerlink" href="#case-fold-mapping-count-1" title="Link to this heading"></a></h3>
-<p>Number of full default case-fold mappings.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">case_fold_mapping_count(Count)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">case_fold_mapping_count(-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="lower-case-mapping-2">
-<span id="unicode-character-data-0-lower-case-mapping-2"></span><span id="index-7"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">lower_case_mapping/2</span></code></a><a class="headerlink" href="#lower-case-mapping-2" title="Link to this heading"></a></h3>
-<p>Default lowercase mapping.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">lower_case_mapping(Code,Mapping)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">lower_case_mapping(+integer,-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="upper-case-mapping-2">
-<span id="unicode-character-data-0-upper-case-mapping-2"></span><span id="index-8"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">upper_case_mapping/2</span></code></a><a class="headerlink" href="#upper-case-mapping-2" title="Link to this heading"></a></h3>
-<p>Default uppercase mapping.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">upper_case_mapping(Code,Mapping)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">upper_case_mapping(+integer,-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="title-case-mapping-2">
-<span id="unicode-character-data-0-title-case-mapping-2"></span><span id="index-9"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">title_case_mapping/2</span></code></a><a class="headerlink" href="#title-case-mapping-2" title="Link to this heading"></a></h3>
-<p>Default titlecase mapping.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">title_case_mapping(Code,Mapping)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">title_case_mapping(+integer,-list(integer))</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_one</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="cased-code-range-2">
-<span id="unicode-character-data-0-cased-code-range-2"></span><span id="index-10"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">cased_code_range/2</span></code></a><a class="headerlink" href="#cased-code-range-2" title="Link to this heading"></a></h3>
-<p>Range of code points with the Cased property.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">cased_code_range(Start,End)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">cased_code_range(-integer,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="case-ignorable-range-2">
-<span id="unicode-character-data-0-case-ignorable-range-2"></span><span id="index-11"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">case_ignorable_range/2</span></code></a><a class="headerlink" href="#case-ignorable-range-2" title="Link to this heading"></a></h3>
-<p>Range of code points with the Case_Ignorable property.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">case_ignorable_range(Start,End)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">case_ignorable_range(-integer,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="mark-code-range-2">
-<span id="unicode-character-data-0-mark-code-range-2"></span><span id="index-12"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">mark_code_range/2</span></code></a><a class="headerlink" href="#mark-code-range-2" title="Link to this heading"></a></h3>
-<p>Range of Unicode Mark-category code points.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">mark_code_range(Start,End)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">mark_code_range(-integer,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="white-space-range-2">
-<span id="unicode-character-data-0-white-space-range-2"></span><span id="index-13"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">white_space_range/2</span></code></a><a class="headerlink" href="#white-space-range-2" title="Link to this heading"></a></h3>
-<p>Range of code points with the White_Space property.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">white_space_range(Start,End)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">white_space_range(-integer,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
-</div>
-</div>
-<hr class="docutils" />
-</section>
-<section id="control-code-range-2">
-<span id="unicode-character-data-0-control-code-range-2"></span><span id="index-14"></span><h3><a class="toc-backref" href="#contents" role="doc-backlink"><code class="docutils literal notranslate"><span class="pre">control_code_range/2</span></code></a><a class="headerlink" href="#control-code-range-2" title="Link to this heading"></a></h3>
-<p>Range of Unicode Control-category code points.</p>
-<div class="line-block">
-<div class="line"><strong>Compilation flags:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">static</span></code></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><strong>Template:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">control_code_range(Start,End)</span></code></div>
-</div>
-<div class="line"><strong>Mode and number of proofs:</strong></div>
-<div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">control_code_range(-integer,-integer)</span></code> - <code class="docutils literal notranslate"><span class="pre">zero_or_more</span></code></div>
-</div>
-</div>
-</section>
-</section>
-<hr class="docutils" />
 <section id="private-predicates">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Private predicates</a><a class="headerlink" href="#private-predicates" title="Link to this heading"></a></h2>
 <p>(none)</p>

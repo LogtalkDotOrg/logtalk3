@@ -1,0 +1,74 @@
+.. index:: single: xml_whatwg_entities
+.. _xml_whatwg_entities/0:
+
+.. rst-class:: right
+
+**object**
+
+``xml_whatwg_entities``
+=======================
+
+XML and WHATWG HTML semicolon-terminated named character references.
+
+| **Availability:** 
+|    ``logtalk_load(text_normalization(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-06
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: xml_whatwg_named_entity/2
+.. _xml_whatwg_entities/0::xml_whatwg_named_entity/2:
+
+``xml_whatwg_named_entity/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+XML or WHATWG HTML named character reference mapping.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``xml_whatwg_named_entity(Name,Codes)``
+| **Mode and number of proofs:**
+|    ``xml_whatwg_named_entity(+atom,-list(integer))`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

@@ -491,10 +491,9 @@ transliteration are intentionally lossy operations and are distinct from
 Unicode normalization.</p>
 <p><code class="docutils literal notranslate"><span class="pre">decode_entities/2-3</span></code> accepts semicolon-terminated decimal and
 hexadecimal numeric references and the case-sensitive names supplied by
-the profile. The default profile includes XML’s five names and a
-documented common HTML subset: <code class="docutils literal notranslate"><span class="pre">nbsp</span></code>, <code class="docutils literal notranslate"><span class="pre">copy</span></code>, <code class="docutils literal notranslate"><span class="pre">reg</span></code>, <code class="docutils literal notranslate"><span class="pre">trade</span></code>,
-<code class="docutils literal notranslate"><span class="pre">cent</span></code>, <code class="docutils literal notranslate"><span class="pre">pound</span></code>, <code class="docutils literal notranslate"><span class="pre">yen</span></code>, <code class="docutils literal notranslate"><span class="pre">euro</span></code>, <code class="docutils literal notranslate"><span class="pre">sect</span></code>, <code class="docutils literal notranslate"><span class="pre">para</span></code>, <code class="docutils literal notranslate"><span class="pre">middot</span></code>,
-<code class="docutils literal notranslate"><span class="pre">ndash</span></code>, <code class="docutils literal notranslate"><span class="pre">mdash</span></code>, <code class="docutils literal notranslate"><span class="pre">hellip</span></code>, <code class="docutils literal notranslate"><span class="pre">laquo</span></code>, and <code class="docutils literal notranslate"><span class="pre">raquo</span></code>.</p>
+the profile. The default profile includes XML’s five predefined entities
+and all the semicolon-terminated named character references defined by
+WHATWG HTML.</p>
 </section>
 <section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
@@ -557,11 +556,11 @@ compose correction with this library.</p>
 </section>
 <section id="unicode-data-and-portability">
 <h2>Unicode data and portability<a class="headerlink" href="#unicode-data-and-portability" title="Link to this heading"></a></h2>
-<p>Generated numeric tables are derived from pinned Unicode 17.0.0 UCD
-files and the WHATWG entity table. The source snapshots, checksums,
-allowlist, generator, and refresh instructions are under <code class="docutils literal notranslate"><span class="pre">scripts/</span></code>.
-Generated files contain only ASCII source text and numeric character
-values.</p>
+<p>The Unicode 17.0.0 normalization, casing, character-property data, and
+normalization conformance vectors are owned by the <code class="docutils literal notranslate"><span class="pre">unicode_data</span></code>
+library and loaded as a dependency. The static XML and WHATWG HTML
+entity table remains local to this library and contains only ASCII
+source text and numeric character values.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">codes</span></code> representation supports every Unicode scalar value on all
 supported backends. The <code class="docutils literal notranslate"><span class="pre">atom</span></code> and <code class="docutils literal notranslate"><span class="pre">chars</span></code> representations can only
 round-trip characters supported by the backend’s native character

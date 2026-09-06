@@ -1,1242 +1,1640 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  This file is part of VivoMind Prolog Unicode Resources
-%  SPDX-License-Identifier: CC0-1.0
+%  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
 %
-%  VivoMind Prolog Unicode Resources is free software distributed using the
-%  Creative Commons CC0 1.0 Universal (CC0 1.0) - Public Domain Dedication
-%  license
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%  Last modified: March 19, 2012
+%      http://www.apache.org/licenses/LICENSE-2.0
 %
-%  Original Unicode file header comments follow
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-/*
-# CaseFolding-6.1.0.txt
-# Date: 2011-07-25, 21:21:56 GMT [MD]
-#
-# Unicode Character Database
-# Copyright (c) 1991-2011 Unicode, Inc.
-# For terms of use, see http://www.unicode.org/terms_of_use.html
-# For documentation, see http://www.unicode.org/reports/tr44/
-#
-# Case Folding Properties
-#
-# This file is a supplement to the UnicodeData file.
-# It provides a case folding mapping generated from the Unicode Character Database.
-# If all characters are mapped according to the full mapping below, then
-# case differences (according to UnicodeData.txt and SpecialCasing.txt)
-# are eliminated.
-#
-# The data supports both implementations that require simple case foldings
-# (where string lengths don't change), and implementations that allow full case folding
-# (where string lengths may grow). Note that where they can be supported, the
-# full case foldings are superior: for example, they allow "MASSE" and "Maße" to match.
-#
-# All code points not listed in this file map to themselves.
-#
-# NOTE: case folding does not preserve normalization formats!
-#
-# For information on case folding, including how to have case folding
-# preserve normalization formats, see Section 3.13 Default Case Algorithms in
-# The Unicode Standard, Version 5.0.
-#
-# ================================================================================
-# Format
-# ================================================================================
-# The entries in this file are in the following machine-readable format:
-#
-# <code>; <status>; <mapping>).	% <name>
-#
-# The status field is:
-# C: common case folding, common mappings shared by both simple and full mappings.
-# F: full case folding, mappings that cause strings to grow in length. Multiple characters are separated by spaces.
-# S: simple case folding, mappings to single characters where different from F.
-# T: special case for uppercase I and dotted uppercase I
-#    - For non-Turkic languages, this mapping is normally not used.
-#    - For Turkic languages (tr, az), this mapping can be used instead of the normal mapping for these characters.
-#      Note that the Turkic mappings do not maintain canonical equivalence without additional processing.
-#      See the discussions of case mapping in the Unicode Standard for more information.
-#
-# Usage:
-#  A. To do a simple case folding, use the mappings with status C + S.
-#  B. To do a full case folding, use the mappings with status C + F.
-#
-#    The mappings with status T can be used or omitted depending on the desired case-folding
-#    behavior. (The default option is to exclude them.)
-#
-# =================================================================
+% Generated from Unicode 17.0.0 CaseFolding.txt. Do not edit.
 
-# Property: Case_Folding
-
-#  All code points not explicitly listed for Case_Folding
-#  have the value C for the status field, and the code point itself for the mapping field.
-
-# @missing: 0000..10FFFF, c, 0x<code point>
-
-# =================================================================
-*/
-
-unicode_case_folding(0x0041, 'C', [0x0061]).					% LATIN CAPITAL LETTER A
-unicode_case_folding(0x0042, 'C', [0x0062]).					% LATIN CAPITAL LETTER B
-unicode_case_folding(0x0043, 'C', [0x0063]).					% LATIN CAPITAL LETTER C
-unicode_case_folding(0x0044, 'C', [0x0064]).					% LATIN CAPITAL LETTER D
-unicode_case_folding(0x0045, 'C', [0x0065]).					% LATIN CAPITAL LETTER E
-unicode_case_folding(0x0046, 'C', [0x0066]).					% LATIN CAPITAL LETTER F
-unicode_case_folding(0x0047, 'C', [0x0067]).					% LATIN CAPITAL LETTER G
-unicode_case_folding(0x0048, 'C', [0x0068]).					% LATIN CAPITAL LETTER H
-unicode_case_folding(0x0049, 'C', [0x0069]).					% LATIN CAPITAL LETTER I
-unicode_case_folding(0x0049, 'T', [0x0131]).					% LATIN CAPITAL LETTER I
-unicode_case_folding(0x004A, 'C', [0x006A]).					% LATIN CAPITAL LETTER J
-unicode_case_folding(0x004B, 'C', [0x006B]).					% LATIN CAPITAL LETTER K
-unicode_case_folding(0x004C, 'C', [0x006C]).					% LATIN CAPITAL LETTER L
-unicode_case_folding(0x004D, 'C', [0x006D]).					% LATIN CAPITAL LETTER M
-unicode_case_folding(0x004E, 'C', [0x006E]).					% LATIN CAPITAL LETTER N
-unicode_case_folding(0x004F, 'C', [0x006F]).					% LATIN CAPITAL LETTER O
-unicode_case_folding(0x0050, 'C', [0x0070]).					% LATIN CAPITAL LETTER P
-unicode_case_folding(0x0051, 'C', [0x0071]).					% LATIN CAPITAL LETTER Q
-unicode_case_folding(0x0052, 'C', [0x0072]).					% LATIN CAPITAL LETTER R
-unicode_case_folding(0x0053, 'C', [0x0073]).					% LATIN CAPITAL LETTER S
-unicode_case_folding(0x0054, 'C', [0x0074]).					% LATIN CAPITAL LETTER T
-unicode_case_folding(0x0055, 'C', [0x0075]).					% LATIN CAPITAL LETTER U
-unicode_case_folding(0x0056, 'C', [0x0076]).					% LATIN CAPITAL LETTER V
-unicode_case_folding(0x0057, 'C', [0x0077]).					% LATIN CAPITAL LETTER W
-unicode_case_folding(0x0058, 'C', [0x0078]).					% LATIN CAPITAL LETTER X
-unicode_case_folding(0x0059, 'C', [0x0079]).					% LATIN CAPITAL LETTER Y
-unicode_case_folding(0x005A, 'C', [0x007A]).					% LATIN CAPITAL LETTER Z
-unicode_case_folding(0x00B5, 'C', [0x03BC]).					% MICRO SIGN
-unicode_case_folding(0x00C0, 'C', [0x00E0]).					% LATIN CAPITAL LETTER A WITH GRAVE
-unicode_case_folding(0x00C1, 'C', [0x00E1]).					% LATIN CAPITAL LETTER A WITH ACUTE
-unicode_case_folding(0x00C2, 'C', [0x00E2]).					% LATIN CAPITAL LETTER A WITH CIRCUMFLEX
-unicode_case_folding(0x00C3, 'C', [0x00E3]).					% LATIN CAPITAL LETTER A WITH TILDE
-unicode_case_folding(0x00C4, 'C', [0x00E4]).					% LATIN CAPITAL LETTER A WITH DIAERESIS
-unicode_case_folding(0x00C5, 'C', [0x00E5]).					% LATIN CAPITAL LETTER A WITH RING ABOVE
-unicode_case_folding(0x00C6, 'C', [0x00E6]).					% LATIN CAPITAL LETTER AE
-unicode_case_folding(0x00C7, 'C', [0x00E7]).					% LATIN CAPITAL LETTER C WITH CEDILLA
-unicode_case_folding(0x00C8, 'C', [0x00E8]).					% LATIN CAPITAL LETTER E WITH GRAVE
-unicode_case_folding(0x00C9, 'C', [0x00E9]).					% LATIN CAPITAL LETTER E WITH ACUTE
-unicode_case_folding(0x00CA, 'C', [0x00EA]).					% LATIN CAPITAL LETTER E WITH CIRCUMFLEX
-unicode_case_folding(0x00CB, 'C', [0x00EB]).					% LATIN CAPITAL LETTER E WITH DIAERESIS
-unicode_case_folding(0x00CC, 'C', [0x00EC]).					% LATIN CAPITAL LETTER I WITH GRAVE
-unicode_case_folding(0x00CD, 'C', [0x00ED]).					% LATIN CAPITAL LETTER I WITH ACUTE
-unicode_case_folding(0x00CE, 'C', [0x00EE]).					% LATIN CAPITAL LETTER I WITH CIRCUMFLEX
-unicode_case_folding(0x00CF, 'C', [0x00EF]).					% LATIN CAPITAL LETTER I WITH DIAERESIS
-unicode_case_folding(0x00D0, 'C', [0x00F0]).					% LATIN CAPITAL LETTER ETH
-unicode_case_folding(0x00D1, 'C', [0x00F1]).					% LATIN CAPITAL LETTER N WITH TILDE
-unicode_case_folding(0x00D2, 'C', [0x00F2]).					% LATIN CAPITAL LETTER O WITH GRAVE
-unicode_case_folding(0x00D3, 'C', [0x00F3]).					% LATIN CAPITAL LETTER O WITH ACUTE
-unicode_case_folding(0x00D4, 'C', [0x00F4]).					% LATIN CAPITAL LETTER O WITH CIRCUMFLEX
-unicode_case_folding(0x00D5, 'C', [0x00F5]).					% LATIN CAPITAL LETTER O WITH TILDE
-unicode_case_folding(0x00D6, 'C', [0x00F6]).					% LATIN CAPITAL LETTER O WITH DIAERESIS
-unicode_case_folding(0x00D8, 'C', [0x00F8]).					% LATIN CAPITAL LETTER O WITH STROKE
-unicode_case_folding(0x00D9, 'C', [0x00F9]).					% LATIN CAPITAL LETTER U WITH GRAVE
-unicode_case_folding(0x00DA, 'C', [0x00FA]).					% LATIN CAPITAL LETTER U WITH ACUTE
-unicode_case_folding(0x00DB, 'C', [0x00FB]).					% LATIN CAPITAL LETTER U WITH CIRCUMFLEX
-unicode_case_folding(0x00DC, 'C', [0x00FC]).					% LATIN CAPITAL LETTER U WITH DIAERESIS
-unicode_case_folding(0x00DD, 'C', [0x00FD]).					% LATIN CAPITAL LETTER Y WITH ACUTE
-unicode_case_folding(0x00DE, 'C', [0x00FE]).					% LATIN CAPITAL LETTER THORN
-unicode_case_folding(0x00DF, 'F', [0x0073, 0x0073]).			% LATIN SMALL LETTER SHARP S
-unicode_case_folding(0x0100, 'C', [0x0101]).					% LATIN CAPITAL LETTER A WITH MACRON
-unicode_case_folding(0x0102, 'C', [0x0103]).					% LATIN CAPITAL LETTER A WITH BREVE
-unicode_case_folding(0x0104, 'C', [0x0105]).					% LATIN CAPITAL LETTER A WITH OGONEK
-unicode_case_folding(0x0106, 'C', [0x0107]).					% LATIN CAPITAL LETTER C WITH ACUTE
-unicode_case_folding(0x0108, 'C', [0x0109]).					% LATIN CAPITAL LETTER C WITH CIRCUMFLEX
-unicode_case_folding(0x010A, 'C', [0x010B]).					% LATIN CAPITAL LETTER C WITH DOT ABOVE
-unicode_case_folding(0x010C, 'C', [0x010D]).					% LATIN CAPITAL LETTER C WITH CARON
-unicode_case_folding(0x010E, 'C', [0x010F]).					% LATIN CAPITAL LETTER D WITH CARON
-unicode_case_folding(0x0110, 'C', [0x0111]).					% LATIN CAPITAL LETTER D WITH STROKE
-unicode_case_folding(0x0112, 'C', [0x0113]).					% LATIN CAPITAL LETTER E WITH MACRON
-unicode_case_folding(0x0114, 'C', [0x0115]).					% LATIN CAPITAL LETTER E WITH BREVE
-unicode_case_folding(0x0116, 'C', [0x0117]).					% LATIN CAPITAL LETTER E WITH DOT ABOVE
-unicode_case_folding(0x0118, 'C', [0x0119]).					% LATIN CAPITAL LETTER E WITH OGONEK
-unicode_case_folding(0x011A, 'C', [0x011B]).					% LATIN CAPITAL LETTER E WITH CARON
-unicode_case_folding(0x011C, 'C', [0x011D]).					% LATIN CAPITAL LETTER G WITH CIRCUMFLEX
-unicode_case_folding(0x011E, 'C', [0x011F]).					% LATIN CAPITAL LETTER G WITH BREVE
-unicode_case_folding(0x0120, 'C', [0x0121]).					% LATIN CAPITAL LETTER G WITH DOT ABOVE
-unicode_case_folding(0x0122, 'C', [0x0123]).					% LATIN CAPITAL LETTER G WITH CEDILLA
-unicode_case_folding(0x0124, 'C', [0x0125]).					% LATIN CAPITAL LETTER H WITH CIRCUMFLEX
-unicode_case_folding(0x0126, 'C', [0x0127]).					% LATIN CAPITAL LETTER H WITH STROKE
-unicode_case_folding(0x0128, 'C', [0x0129]).					% LATIN CAPITAL LETTER I WITH TILDE
-unicode_case_folding(0x012A, 'C', [0x012B]).					% LATIN CAPITAL LETTER I WITH MACRON
-unicode_case_folding(0x012C, 'C', [0x012D]).					% LATIN CAPITAL LETTER I WITH BREVE
-unicode_case_folding(0x012E, 'C', [0x012F]).					% LATIN CAPITAL LETTER I WITH OGONEK
-unicode_case_folding(0x0130, 'F', [0x0069, 0x0307]).			% LATIN CAPITAL LETTER I WITH DOT ABOVE
-unicode_case_folding(0x0130, 'T', [0x0069]).					% LATIN CAPITAL LETTER I WITH DOT ABOVE
-unicode_case_folding(0x0132, 'C', [0x0133]).					% LATIN CAPITAL LIGATURE IJ
-unicode_case_folding(0x0134, 'C', [0x0135]).					% LATIN CAPITAL LETTER J WITH CIRCUMFLEX
-unicode_case_folding(0x0136, 'C', [0x0137]).					% LATIN CAPITAL LETTER K WITH CEDILLA
-unicode_case_folding(0x0139, 'C', [0x013A]).					% LATIN CAPITAL LETTER L WITH ACUTE
-unicode_case_folding(0x013B, 'C', [0x013C]).					% LATIN CAPITAL LETTER L WITH CEDILLA
-unicode_case_folding(0x013D, 'C', [0x013E]).					% LATIN CAPITAL LETTER L WITH CARON
-unicode_case_folding(0x013F, 'C', [0x0140]).					% LATIN CAPITAL LETTER L WITH MIDDLE DOT
-unicode_case_folding(0x0141, 'C', [0x0142]).					% LATIN CAPITAL LETTER L WITH STROKE
-unicode_case_folding(0x0143, 'C', [0x0144]).					% LATIN CAPITAL LETTER N WITH ACUTE
-unicode_case_folding(0x0145, 'C', [0x0146]).					% LATIN CAPITAL LETTER N WITH CEDILLA
-unicode_case_folding(0x0147, 'C', [0x0148]).					% LATIN CAPITAL LETTER N WITH CARON
-unicode_case_folding(0x0149, 'F', [0x02BC, 0x006E]).			% LATIN SMALL LETTER N PRECEDED BY APOSTROPHE
-unicode_case_folding(0x014A, 'C', [0x014B]).					% LATIN CAPITAL LETTER ENG
-unicode_case_folding(0x014C, 'C', [0x014D]).					% LATIN CAPITAL LETTER O WITH MACRON
-unicode_case_folding(0x014E, 'C', [0x014F]).					% LATIN CAPITAL LETTER O WITH BREVE
-unicode_case_folding(0x0150, 'C', [0x0151]).					% LATIN CAPITAL LETTER O WITH DOUBLE ACUTE
-unicode_case_folding(0x0152, 'C', [0x0153]).					% LATIN CAPITAL LIGATURE OE
-unicode_case_folding(0x0154, 'C', [0x0155]).					% LATIN CAPITAL LETTER R WITH ACUTE
-unicode_case_folding(0x0156, 'C', [0x0157]).					% LATIN CAPITAL LETTER R WITH CEDILLA
-unicode_case_folding(0x0158, 'C', [0x0159]).					% LATIN CAPITAL LETTER R WITH CARON
-unicode_case_folding(0x015A, 'C', [0x015B]).					% LATIN CAPITAL LETTER S WITH ACUTE
-unicode_case_folding(0x015C, 'C', [0x015D]).					% LATIN CAPITAL LETTER S WITH CIRCUMFLEX
-unicode_case_folding(0x015E, 'C', [0x015F]).					% LATIN CAPITAL LETTER S WITH CEDILLA
-unicode_case_folding(0x0160, 'C', [0x0161]).					% LATIN CAPITAL LETTER S WITH CARON
-unicode_case_folding(0x0162, 'C', [0x0163]).					% LATIN CAPITAL LETTER T WITH CEDILLA
-unicode_case_folding(0x0164, 'C', [0x0165]).					% LATIN CAPITAL LETTER T WITH CARON
-unicode_case_folding(0x0166, 'C', [0x0167]).					% LATIN CAPITAL LETTER T WITH STROKE
-unicode_case_folding(0x0168, 'C', [0x0169]).					% LATIN CAPITAL LETTER U WITH TILDE
-unicode_case_folding(0x016A, 'C', [0x016B]).					% LATIN CAPITAL LETTER U WITH MACRON
-unicode_case_folding(0x016C, 'C', [0x016D]).					% LATIN CAPITAL LETTER U WITH BREVE
-unicode_case_folding(0x016E, 'C', [0x016F]).					% LATIN CAPITAL LETTER U WITH RING ABOVE
-unicode_case_folding(0x0170, 'C', [0x0171]).					% LATIN CAPITAL LETTER U WITH DOUBLE ACUTE
-unicode_case_folding(0x0172, 'C', [0x0173]).					% LATIN CAPITAL LETTER U WITH OGONEK
-unicode_case_folding(0x0174, 'C', [0x0175]).					% LATIN CAPITAL LETTER W WITH CIRCUMFLEX
-unicode_case_folding(0x0176, 'C', [0x0177]).					% LATIN CAPITAL LETTER Y WITH CIRCUMFLEX
-unicode_case_folding(0x0178, 'C', [0x00FF]).					% LATIN CAPITAL LETTER Y WITH DIAERESIS
-unicode_case_folding(0x0179, 'C', [0x017A]).					% LATIN CAPITAL LETTER Z WITH ACUTE
-unicode_case_folding(0x017B, 'C', [0x017C]).					% LATIN CAPITAL LETTER Z WITH DOT ABOVE
-unicode_case_folding(0x017D, 'C', [0x017E]).					% LATIN CAPITAL LETTER Z WITH CARON
-unicode_case_folding(0x017F, 'C', [0x0073]).					% LATIN SMALL LETTER LONG S
-unicode_case_folding(0x0181, 'C', [0x0253]).					% LATIN CAPITAL LETTER B WITH HOOK
-unicode_case_folding(0x0182, 'C', [0x0183]).					% LATIN CAPITAL LETTER B WITH TOPBAR
-unicode_case_folding(0x0184, 'C', [0x0185]).					% LATIN CAPITAL LETTER TONE SIX
-unicode_case_folding(0x0186, 'C', [0x0254]).					% LATIN CAPITAL LETTER OPEN O
-unicode_case_folding(0x0187, 'C', [0x0188]).					% LATIN CAPITAL LETTER C WITH HOOK
-unicode_case_folding(0x0189, 'C', [0x0256]).					% LATIN CAPITAL LETTER AFRICAN D
-unicode_case_folding(0x018A, 'C', [0x0257]).					% LATIN CAPITAL LETTER D WITH HOOK
-unicode_case_folding(0x018B, 'C', [0x018C]).					% LATIN CAPITAL LETTER D WITH TOPBAR
-unicode_case_folding(0x018E, 'C', [0x01DD]).					% LATIN CAPITAL LETTER REVERSED E
-unicode_case_folding(0x018F, 'C', [0x0259]).					% LATIN CAPITAL LETTER SCHWA
-unicode_case_folding(0x0190, 'C', [0x025B]).					% LATIN CAPITAL LETTER OPEN E
-unicode_case_folding(0x0191, 'C', [0x0192]).					% LATIN CAPITAL LETTER F WITH HOOK
-unicode_case_folding(0x0193, 'C', [0x0260]).					% LATIN CAPITAL LETTER G WITH HOOK
-unicode_case_folding(0x0194, 'C', [0x0263]).					% LATIN CAPITAL LETTER GAMMA
-unicode_case_folding(0x0196, 'C', [0x0269]).					% LATIN CAPITAL LETTER IOTA
-unicode_case_folding(0x0197, 'C', [0x0268]).					% LATIN CAPITAL LETTER I WITH STROKE
-unicode_case_folding(0x0198, 'C', [0x0199]).					% LATIN CAPITAL LETTER K WITH HOOK
-unicode_case_folding(0x019C, 'C', [0x026F]).					% LATIN CAPITAL LETTER TURNED M
-unicode_case_folding(0x019D, 'C', [0x0272]).					% LATIN CAPITAL LETTER N WITH LEFT HOOK
-unicode_case_folding(0x019F, 'C', [0x0275]).					% LATIN CAPITAL LETTER O WITH MIDDLE TILDE
-unicode_case_folding(0x01A0, 'C', [0x01A1]).					% LATIN CAPITAL LETTER O WITH HORN
-unicode_case_folding(0x01A2, 'C', [0x01A3]).					% LATIN CAPITAL LETTER OI
-unicode_case_folding(0x01A4, 'C', [0x01A5]).					% LATIN CAPITAL LETTER P WITH HOOK
-unicode_case_folding(0x01A6, 'C', [0x0280]).					% LATIN LETTER YR
-unicode_case_folding(0x01A7, 'C', [0x01A8]).					% LATIN CAPITAL LETTER TONE TWO
-unicode_case_folding(0x01A9, 'C', [0x0283]).					% LATIN CAPITAL LETTER ESH
-unicode_case_folding(0x01AC, 'C', [0x01AD]).					% LATIN CAPITAL LETTER T WITH HOOK
-unicode_case_folding(0x01AE, 'C', [0x0288]).					% LATIN CAPITAL LETTER T WITH RETROFLEX HOOK
-unicode_case_folding(0x01AF, 'C', [0x01B0]).					% LATIN CAPITAL LETTER U WITH HORN
-unicode_case_folding(0x01B1, 'C', [0x028A]).					% LATIN CAPITAL LETTER UPSILON
-unicode_case_folding(0x01B2, 'C', [0x028B]).					% LATIN CAPITAL LETTER V WITH HOOK
-unicode_case_folding(0x01B3, 'C', [0x01B4]).					% LATIN CAPITAL LETTER Y WITH HOOK
-unicode_case_folding(0x01B5, 'C', [0x01B6]).					% LATIN CAPITAL LETTER Z WITH STROKE
-unicode_case_folding(0x01B7, 'C', [0x0292]).					% LATIN CAPITAL LETTER EZH
-unicode_case_folding(0x01B8, 'C', [0x01B9]).					% LATIN CAPITAL LETTER EZH REVERSED
-unicode_case_folding(0x01BC, 'C', [0x01BD]).					% LATIN CAPITAL LETTER TONE FIVE
-unicode_case_folding(0x01C4, 'C', [0x01C6]).					% LATIN CAPITAL LETTER DZ WITH CARON
-unicode_case_folding(0x01C5, 'C', [0x01C6]).					% LATIN CAPITAL LETTER D WITH SMALL LETTER Z WITH CARON
-unicode_case_folding(0x01C7, 'C', [0x01C9]).					% LATIN CAPITAL LETTER LJ
-unicode_case_folding(0x01C8, 'C', [0x01C9]).					% LATIN CAPITAL LETTER L WITH SMALL LETTER J
-unicode_case_folding(0x01CA, 'C', [0x01CC]).					% LATIN CAPITAL LETTER NJ
-unicode_case_folding(0x01CB, 'C', [0x01CC]).					% LATIN CAPITAL LETTER N WITH SMALL LETTER J
-unicode_case_folding(0x01CD, 'C', [0x01CE]).					% LATIN CAPITAL LETTER A WITH CARON
-unicode_case_folding(0x01CF, 'C', [0x01D0]).					% LATIN CAPITAL LETTER I WITH CARON
-unicode_case_folding(0x01D1, 'C', [0x01D2]).					% LATIN CAPITAL LETTER O WITH CARON
-unicode_case_folding(0x01D3, 'C', [0x01D4]).					% LATIN CAPITAL LETTER U WITH CARON
-unicode_case_folding(0x01D5, 'C', [0x01D6]).					% LATIN CAPITAL LETTER U WITH DIAERESIS AND MACRON
-unicode_case_folding(0x01D7, 'C', [0x01D8]).					% LATIN CAPITAL LETTER U WITH DIAERESIS AND ACUTE
-unicode_case_folding(0x01D9, 'C', [0x01DA]).					% LATIN CAPITAL LETTER U WITH DIAERESIS AND CARON
-unicode_case_folding(0x01DB, 'C', [0x01DC]).					% LATIN CAPITAL LETTER U WITH DIAERESIS AND GRAVE
-unicode_case_folding(0x01DE, 'C', [0x01DF]).					% LATIN CAPITAL LETTER A WITH DIAERESIS AND MACRON
-unicode_case_folding(0x01E0, 'C', [0x01E1]).					% LATIN CAPITAL LETTER A WITH DOT ABOVE AND MACRON
-unicode_case_folding(0x01E2, 'C', [0x01E3]).					% LATIN CAPITAL LETTER AE WITH MACRON
-unicode_case_folding(0x01E4, 'C', [0x01E5]).					% LATIN CAPITAL LETTER G WITH STROKE
-unicode_case_folding(0x01E6, 'C', [0x01E7]).					% LATIN CAPITAL LETTER G WITH CARON
-unicode_case_folding(0x01E8, 'C', [0x01E9]).					% LATIN CAPITAL LETTER K WITH CARON
-unicode_case_folding(0x01EA, 'C', [0x01EB]).					% LATIN CAPITAL LETTER O WITH OGONEK
-unicode_case_folding(0x01EC, 'C', [0x01ED]).					% LATIN CAPITAL LETTER O WITH OGONEK AND MACRON
-unicode_case_folding(0x01EE, 'C', [0x01EF]).					% LATIN CAPITAL LETTER EZH WITH CARON
-unicode_case_folding(0x01F0, 'F', [0x006A, 0x030C]).			% LATIN SMALL LETTER J WITH CARON
-unicode_case_folding(0x01F1, 'C', [0x01F3]).					% LATIN CAPITAL LETTER DZ
-unicode_case_folding(0x01F2, 'C', [0x01F3]).					% LATIN CAPITAL LETTER D WITH SMALL LETTER Z
-unicode_case_folding(0x01F4, 'C', [0x01F5]).					% LATIN CAPITAL LETTER G WITH ACUTE
-unicode_case_folding(0x01F6, 'C', [0x0195]).					% LATIN CAPITAL LETTER HWAIR
-unicode_case_folding(0x01F7, 'C', [0x01BF]).					% LATIN CAPITAL LETTER WYNN
-unicode_case_folding(0x01F8, 'C', [0x01F9]).					% LATIN CAPITAL LETTER N WITH GRAVE
-unicode_case_folding(0x01FA, 'C', [0x01FB]).					% LATIN CAPITAL LETTER A WITH RING ABOVE AND ACUTE
-unicode_case_folding(0x01FC, 'C', [0x01FD]).					% LATIN CAPITAL LETTER AE WITH ACUTE
-unicode_case_folding(0x01FE, 'C', [0x01FF]).					% LATIN CAPITAL LETTER O WITH STROKE AND ACUTE
-unicode_case_folding(0x0200, 'C', [0x0201]).					% LATIN CAPITAL LETTER A WITH DOUBLE GRAVE
-unicode_case_folding(0x0202, 'C', [0x0203]).					% LATIN CAPITAL LETTER A WITH INVERTED BREVE
-unicode_case_folding(0x0204, 'C', [0x0205]).					% LATIN CAPITAL LETTER E WITH DOUBLE GRAVE
-unicode_case_folding(0x0206, 'C', [0x0207]).					% LATIN CAPITAL LETTER E WITH INVERTED BREVE
-unicode_case_folding(0x0208, 'C', [0x0209]).					% LATIN CAPITAL LETTER I WITH DOUBLE GRAVE
-unicode_case_folding(0x020A, 'C', [0x020B]).					% LATIN CAPITAL LETTER I WITH INVERTED BREVE
-unicode_case_folding(0x020C, 'C', [0x020D]).					% LATIN CAPITAL LETTER O WITH DOUBLE GRAVE
-unicode_case_folding(0x020E, 'C', [0x020F]).					% LATIN CAPITAL LETTER O WITH INVERTED BREVE
-unicode_case_folding(0x0210, 'C', [0x0211]).					% LATIN CAPITAL LETTER R WITH DOUBLE GRAVE
-unicode_case_folding(0x0212, 'C', [0x0213]).					% LATIN CAPITAL LETTER R WITH INVERTED BREVE
-unicode_case_folding(0x0214, 'C', [0x0215]).					% LATIN CAPITAL LETTER U WITH DOUBLE GRAVE
-unicode_case_folding(0x0216, 'C', [0x0217]).					% LATIN CAPITAL LETTER U WITH INVERTED BREVE
-unicode_case_folding(0x0218, 'C', [0x0219]).					% LATIN CAPITAL LETTER S WITH COMMA BELOW
-unicode_case_folding(0x021A, 'C', [0x021B]).					% LATIN CAPITAL LETTER T WITH COMMA BELOW
-unicode_case_folding(0x021C, 'C', [0x021D]).					% LATIN CAPITAL LETTER YOGH
-unicode_case_folding(0x021E, 'C', [0x021F]).					% LATIN CAPITAL LETTER H WITH CARON
-unicode_case_folding(0x0220, 'C', [0x019E]).					% LATIN CAPITAL LETTER N WITH LONG RIGHT LEG
-unicode_case_folding(0x0222, 'C', [0x0223]).					% LATIN CAPITAL LETTER OU
-unicode_case_folding(0x0224, 'C', [0x0225]).					% LATIN CAPITAL LETTER Z WITH HOOK
-unicode_case_folding(0x0226, 'C', [0x0227]).					% LATIN CAPITAL LETTER A WITH DOT ABOVE
-unicode_case_folding(0x0228, 'C', [0x0229]).					% LATIN CAPITAL LETTER E WITH CEDILLA
-unicode_case_folding(0x022A, 'C', [0x022B]).					% LATIN CAPITAL LETTER O WITH DIAERESIS AND MACRON
-unicode_case_folding(0x022C, 'C', [0x022D]).					% LATIN CAPITAL LETTER O WITH TILDE AND MACRON
-unicode_case_folding(0x022E, 'C', [0x022F]).					% LATIN CAPITAL LETTER O WITH DOT ABOVE
-unicode_case_folding(0x0230, 'C', [0x0231]).					% LATIN CAPITAL LETTER O WITH DOT ABOVE AND MACRON
-unicode_case_folding(0x0232, 'C', [0x0233]).					% LATIN CAPITAL LETTER Y WITH MACRON
-unicode_case_folding(0x023A, 'C', [0x2C65]).					% LATIN CAPITAL LETTER A WITH STROKE
-unicode_case_folding(0x023B, 'C', [0x023C]).					% LATIN CAPITAL LETTER C WITH STROKE
-unicode_case_folding(0x023D, 'C', [0x019A]).					% LATIN CAPITAL LETTER L WITH BAR
-unicode_case_folding(0x023E, 'C', [0x2C66]).					% LATIN CAPITAL LETTER T WITH DIAGONAL STROKE
-unicode_case_folding(0x0241, 'C', [0x0242]).					% LATIN CAPITAL LETTER GLOTTAL STOP
-unicode_case_folding(0x0243, 'C', [0x0180]).					% LATIN CAPITAL LETTER B WITH STROKE
-unicode_case_folding(0x0244, 'C', [0x0289]).					% LATIN CAPITAL LETTER U BAR
-unicode_case_folding(0x0245, 'C', [0x028C]).					% LATIN CAPITAL LETTER TURNED V
-unicode_case_folding(0x0246, 'C', [0x0247]).					% LATIN CAPITAL LETTER E WITH STROKE
-unicode_case_folding(0x0248, 'C', [0x0249]).					% LATIN CAPITAL LETTER J WITH STROKE
-unicode_case_folding(0x024A, 'C', [0x024B]).					% LATIN CAPITAL LETTER SMALL Q WITH HOOK TAIL
-unicode_case_folding(0x024C, 'C', [0x024D]).					% LATIN CAPITAL LETTER R WITH STROKE
-unicode_case_folding(0x024E, 'C', [0x024F]).					% LATIN CAPITAL LETTER Y WITH STROKE
-unicode_case_folding(0x0345, 'C', [0x03B9]).					% COMBINING GREEK YPOGEGRAMMENI
-unicode_case_folding(0x0370, 'C', [0x0371]).					% GREEK CAPITAL LETTER HETA
-unicode_case_folding(0x0372, 'C', [0x0373]).					% GREEK CAPITAL LETTER ARCHAIC SAMPI
-unicode_case_folding(0x0376, 'C', [0x0377]).					% GREEK CAPITAL LETTER PAMPHYLIAN DIGAMMA
-unicode_case_folding(0x0386, 'C', [0x03AC]).					% GREEK CAPITAL LETTER ALPHA WITH TONOS
-unicode_case_folding(0x0388, 'C', [0x03AD]).					% GREEK CAPITAL LETTER EPSILON WITH TONOS
-unicode_case_folding(0x0389, 'C', [0x03AE]).					% GREEK CAPITAL LETTER ETA WITH TONOS
-unicode_case_folding(0x038A, 'C', [0x03AF]).					% GREEK CAPITAL LETTER IOTA WITH TONOS
-unicode_case_folding(0x038C, 'C', [0x03CC]).					% GREEK CAPITAL LETTER OMICRON WITH TONOS
-unicode_case_folding(0x038E, 'C', [0x03CD]).					% GREEK CAPITAL LETTER UPSILON WITH TONOS
-unicode_case_folding(0x038F, 'C', [0x03CE]).					% GREEK CAPITAL LETTER OMEGA WITH TONOS
-unicode_case_folding(0x0390, 'F', [0x03B9, 0x0308, 0x0301]).	% GREEK SMALL LETTER IOTA WITH DIALYTIKA AND TONOS
-unicode_case_folding(0x0391, 'C', [0x03B1]).					% GREEK CAPITAL LETTER ALPHA
-unicode_case_folding(0x0392, 'C', [0x03B2]).					% GREEK CAPITAL LETTER BETA
-unicode_case_folding(0x0393, 'C', [0x03B3]).					% GREEK CAPITAL LETTER GAMMA
-unicode_case_folding(0x0394, 'C', [0x03B4]).					% GREEK CAPITAL LETTER DELTA
-unicode_case_folding(0x0395, 'C', [0x03B5]).					% GREEK CAPITAL LETTER EPSILON
-unicode_case_folding(0x0396, 'C', [0x03B6]).					% GREEK CAPITAL LETTER ZETA
-unicode_case_folding(0x0397, 'C', [0x03B7]).					% GREEK CAPITAL LETTER ETA
-unicode_case_folding(0x0398, 'C', [0x03B8]).					% GREEK CAPITAL LETTER THETA
-unicode_case_folding(0x0399, 'C', [0x03B9]).					% GREEK CAPITAL LETTER IOTA
-unicode_case_folding(0x039A, 'C', [0x03BA]).					% GREEK CAPITAL LETTER KAPPA
-unicode_case_folding(0x039B, 'C', [0x03BB]).					% GREEK CAPITAL LETTER LAMDA
-unicode_case_folding(0x039C, 'C', [0x03BC]).					% GREEK CAPITAL LETTER MU
-unicode_case_folding(0x039D, 'C', [0x03BD]).					% GREEK CAPITAL LETTER NU
-unicode_case_folding(0x039E, 'C', [0x03BE]).					% GREEK CAPITAL LETTER XI
-unicode_case_folding(0x039F, 'C', [0x03BF]).					% GREEK CAPITAL LETTER OMICRON
-unicode_case_folding(0x03A0, 'C', [0x03C0]).					% GREEK CAPITAL LETTER PI
-unicode_case_folding(0x03A1, 'C', [0x03C1]).					% GREEK CAPITAL LETTER RHO
-unicode_case_folding(0x03A3, 'C', [0x03C3]).					% GREEK CAPITAL LETTER SIGMA
-unicode_case_folding(0x03A4, 'C', [0x03C4]).					% GREEK CAPITAL LETTER TAU
-unicode_case_folding(0x03A5, 'C', [0x03C5]).					% GREEK CAPITAL LETTER UPSILON
-unicode_case_folding(0x03A6, 'C', [0x03C6]).					% GREEK CAPITAL LETTER PHI
-unicode_case_folding(0x03A7, 'C', [0x03C7]).					% GREEK CAPITAL LETTER CHI
-unicode_case_folding(0x03A8, 'C', [0x03C8]).					% GREEK CAPITAL LETTER PSI
-unicode_case_folding(0x03A9, 'C', [0x03C9]).					% GREEK CAPITAL LETTER OMEGA
-unicode_case_folding(0x03AA, 'C', [0x03CA]).					% GREEK CAPITAL LETTER IOTA WITH DIALYTIKA
-unicode_case_folding(0x03AB, 'C', [0x03CB]).					% GREEK CAPITAL LETTER UPSILON WITH DIALYTIKA
-unicode_case_folding(0x03B0, 'F', [0x03C5, 0x0308, 0x0301]).	% GREEK SMALL LETTER UPSILON WITH DIALYTIKA AND TONOS
-unicode_case_folding(0x03C2, 'C', [0x03C3]).					% GREEK SMALL LETTER FINAL SIGMA
-unicode_case_folding(0x03CF, 'C', [0x03D7]).					% GREEK CAPITAL KAI SYMBOL
-unicode_case_folding(0x03D0, 'C', [0x03B2]).					% GREEK BETA SYMBOL
-unicode_case_folding(0x03D1, 'C', [0x03B8]).					% GREEK THETA SYMBOL
-unicode_case_folding(0x03D5, 'C', [0x03C6]).					% GREEK PHI SYMBOL
-unicode_case_folding(0x03D6, 'C', [0x03C0]).					% GREEK PI SYMBOL
-unicode_case_folding(0x03D8, 'C', [0x03D9]).					% GREEK LETTER ARCHAIC KOPPA
-unicode_case_folding(0x03DA, 'C', [0x03DB]).					% GREEK LETTER STIGMA
-unicode_case_folding(0x03DC, 'C', [0x03DD]).					% GREEK LETTER DIGAMMA
-unicode_case_folding(0x03DE, 'C', [0x03DF]).					% GREEK LETTER KOPPA
-unicode_case_folding(0x03E0, 'C', [0x03E1]).					% GREEK LETTER SAMPI
-unicode_case_folding(0x03E2, 'C', [0x03E3]).					% COPTIC CAPITAL LETTER SHEI
-unicode_case_folding(0x03E4, 'C', [0x03E5]).					% COPTIC CAPITAL LETTER FEI
-unicode_case_folding(0x03E6, 'C', [0x03E7]).					% COPTIC CAPITAL LETTER KHEI
-unicode_case_folding(0x03E8, 'C', [0x03E9]).					% COPTIC CAPITAL LETTER HORI
-unicode_case_folding(0x03EA, 'C', [0x03EB]).					% COPTIC CAPITAL LETTER GANGIA
-unicode_case_folding(0x03EC, 'C', [0x03ED]).					% COPTIC CAPITAL LETTER SHIMA
-unicode_case_folding(0x03EE, 'C', [0x03EF]).					% COPTIC CAPITAL LETTER DEI
-unicode_case_folding(0x03F0, 'C', [0x03BA]).					% GREEK KAPPA SYMBOL
-unicode_case_folding(0x03F1, 'C', [0x03C1]).					% GREEK RHO SYMBOL
-unicode_case_folding(0x03F4, 'C', [0x03B8]).					% GREEK CAPITAL THETA SYMBOL
-unicode_case_folding(0x03F5, 'C', [0x03B5]).					% GREEK LUNATE EPSILON SYMBOL
-unicode_case_folding(0x03F7, 'C', [0x03F8]).					% GREEK CAPITAL LETTER SHO
-unicode_case_folding(0x03F9, 'C', [0x03F2]).					% GREEK CAPITAL LUNATE SIGMA SYMBOL
-unicode_case_folding(0x03FA, 'C', [0x03FB]).					% GREEK CAPITAL LETTER SAN
-unicode_case_folding(0x03FD, 'C', [0x037B]).					% GREEK CAPITAL REVERSED LUNATE SIGMA SYMBOL
-unicode_case_folding(0x03FE, 'C', [0x037C]).					% GREEK CAPITAL DOTTED LUNATE SIGMA SYMBOL
-unicode_case_folding(0x03FF, 'C', [0x037D]).					% GREEK CAPITAL REVERSED DOTTED LUNATE SIGMA SYMBOL
-unicode_case_folding(0x0400, 'C', [0x0450]).					% CYRILLIC CAPITAL LETTER IE WITH GRAVE
-unicode_case_folding(0x0401, 'C', [0x0451]).					% CYRILLIC CAPITAL LETTER IO
-unicode_case_folding(0x0402, 'C', [0x0452]).					% CYRILLIC CAPITAL LETTER DJE
-unicode_case_folding(0x0403, 'C', [0x0453]).					% CYRILLIC CAPITAL LETTER GJE
-unicode_case_folding(0x0404, 'C', [0x0454]).					% CYRILLIC CAPITAL LETTER UKRAINIAN IE
-unicode_case_folding(0x0405, 'C', [0x0455]).					% CYRILLIC CAPITAL LETTER DZE
-unicode_case_folding(0x0406, 'C', [0x0456]).					% CYRILLIC CAPITAL LETTER BYELORUSSIAN-UKRAINIAN I
-unicode_case_folding(0x0407, 'C', [0x0457]).					% CYRILLIC CAPITAL LETTER YI
-unicode_case_folding(0x0408, 'C', [0x0458]).					% CYRILLIC CAPITAL LETTER JE
-unicode_case_folding(0x0409, 'C', [0x0459]).					% CYRILLIC CAPITAL LETTER LJE
-unicode_case_folding(0x040A, 'C', [0x045A]).					% CYRILLIC CAPITAL LETTER NJE
-unicode_case_folding(0x040B, 'C', [0x045B]).					% CYRILLIC CAPITAL LETTER TSHE
-unicode_case_folding(0x040C, 'C', [0x045C]).					% CYRILLIC CAPITAL LETTER KJE
-unicode_case_folding(0x040D, 'C', [0x045D]).					% CYRILLIC CAPITAL LETTER I WITH GRAVE
-unicode_case_folding(0x040E, 'C', [0x045E]).					% CYRILLIC CAPITAL LETTER SHORT U
-unicode_case_folding(0x040F, 'C', [0x045F]).					% CYRILLIC CAPITAL LETTER DZHE
-unicode_case_folding(0x0410, 'C', [0x0430]).					% CYRILLIC CAPITAL LETTER A
-unicode_case_folding(0x0411, 'C', [0x0431]).					% CYRILLIC CAPITAL LETTER BE
-unicode_case_folding(0x0412, 'C', [0x0432]).					% CYRILLIC CAPITAL LETTER VE
-unicode_case_folding(0x0413, 'C', [0x0433]).					% CYRILLIC CAPITAL LETTER GHE
-unicode_case_folding(0x0414, 'C', [0x0434]).					% CYRILLIC CAPITAL LETTER DE
-unicode_case_folding(0x0415, 'C', [0x0435]).					% CYRILLIC CAPITAL LETTER IE
-unicode_case_folding(0x0416, 'C', [0x0436]).					% CYRILLIC CAPITAL LETTER ZHE
-unicode_case_folding(0x0417, 'C', [0x0437]).					% CYRILLIC CAPITAL LETTER ZE
-unicode_case_folding(0x0418, 'C', [0x0438]).					% CYRILLIC CAPITAL LETTER I
-unicode_case_folding(0x0419, 'C', [0x0439]).					% CYRILLIC CAPITAL LETTER SHORT I
-unicode_case_folding(0x041A, 'C', [0x043A]).					% CYRILLIC CAPITAL LETTER KA
-unicode_case_folding(0x041B, 'C', [0x043B]).					% CYRILLIC CAPITAL LETTER EL
-unicode_case_folding(0x041C, 'C', [0x043C]).					% CYRILLIC CAPITAL LETTER EM
-unicode_case_folding(0x041D, 'C', [0x043D]).					% CYRILLIC CAPITAL LETTER EN
-unicode_case_folding(0x041E, 'C', [0x043E]).					% CYRILLIC CAPITAL LETTER O
-unicode_case_folding(0x041F, 'C', [0x043F]).					% CYRILLIC CAPITAL LETTER PE
-unicode_case_folding(0x0420, 'C', [0x0440]).					% CYRILLIC CAPITAL LETTER ER
-unicode_case_folding(0x0421, 'C', [0x0441]).					% CYRILLIC CAPITAL LETTER ES
-unicode_case_folding(0x0422, 'C', [0x0442]).					% CYRILLIC CAPITAL LETTER TE
-unicode_case_folding(0x0423, 'C', [0x0443]).					% CYRILLIC CAPITAL LETTER U
-unicode_case_folding(0x0424, 'C', [0x0444]).					% CYRILLIC CAPITAL LETTER EF
-unicode_case_folding(0x0425, 'C', [0x0445]).					% CYRILLIC CAPITAL LETTER HA
-unicode_case_folding(0x0426, 'C', [0x0446]).					% CYRILLIC CAPITAL LETTER TSE
-unicode_case_folding(0x0427, 'C', [0x0447]).					% CYRILLIC CAPITAL LETTER CHE
-unicode_case_folding(0x0428, 'C', [0x0448]).					% CYRILLIC CAPITAL LETTER SHA
-unicode_case_folding(0x0429, 'C', [0x0449]).					% CYRILLIC CAPITAL LETTER SHCHA
-unicode_case_folding(0x042A, 'C', [0x044A]).					% CYRILLIC CAPITAL LETTER HARD SIGN
-unicode_case_folding(0x042B, 'C', [0x044B]).					% CYRILLIC CAPITAL LETTER YERU
-unicode_case_folding(0x042C, 'C', [0x044C]).					% CYRILLIC CAPITAL LETTER SOFT SIGN
-unicode_case_folding(0x042D, 'C', [0x044D]).					% CYRILLIC CAPITAL LETTER E
-unicode_case_folding(0x042E, 'C', [0x044E]).					% CYRILLIC CAPITAL LETTER YU
-unicode_case_folding(0x042F, 'C', [0x044F]).					% CYRILLIC CAPITAL LETTER YA
-unicode_case_folding(0x0460, 'C', [0x0461]).					% CYRILLIC CAPITAL LETTER OMEGA
-unicode_case_folding(0x0462, 'C', [0x0463]).					% CYRILLIC CAPITAL LETTER YAT
-unicode_case_folding(0x0464, 'C', [0x0465]).					% CYRILLIC CAPITAL LETTER IOTIFIED E
-unicode_case_folding(0x0466, 'C', [0x0467]).					% CYRILLIC CAPITAL LETTER LITTLE YUS
-unicode_case_folding(0x0468, 'C', [0x0469]).					% CYRILLIC CAPITAL LETTER IOTIFIED LITTLE YUS
-unicode_case_folding(0x046A, 'C', [0x046B]).					% CYRILLIC CAPITAL LETTER BIG YUS
-unicode_case_folding(0x046C, 'C', [0x046D]).					% CYRILLIC CAPITAL LETTER IOTIFIED BIG YUS
-unicode_case_folding(0x046E, 'C', [0x046F]).					% CYRILLIC CAPITAL LETTER KSI
-unicode_case_folding(0x0470, 'C', [0x0471]).					% CYRILLIC CAPITAL LETTER PSI
-unicode_case_folding(0x0472, 'C', [0x0473]).					% CYRILLIC CAPITAL LETTER FITA
-unicode_case_folding(0x0474, 'C', [0x0475]).					% CYRILLIC CAPITAL LETTER IZHITSA
-unicode_case_folding(0x0476, 'C', [0x0477]).					% CYRILLIC CAPITAL LETTER IZHITSA WITH DOUBLE GRAVE ACCENT
-unicode_case_folding(0x0478, 'C', [0x0479]).					% CYRILLIC CAPITAL LETTER UK
-unicode_case_folding(0x047A, 'C', [0x047B]).					% CYRILLIC CAPITAL LETTER ROUND OMEGA
-unicode_case_folding(0x047C, 'C', [0x047D]).					% CYRILLIC CAPITAL LETTER OMEGA WITH TITLO
-unicode_case_folding(0x047E, 'C', [0x047F]).					% CYRILLIC CAPITAL LETTER OT
-unicode_case_folding(0x0480, 'C', [0x0481]).					% CYRILLIC CAPITAL LETTER KOPPA
-unicode_case_folding(0x048A, 'C', [0x048B]).					% CYRILLIC CAPITAL LETTER SHORT I WITH TAIL
-unicode_case_folding(0x048C, 'C', [0x048D]).					% CYRILLIC CAPITAL LETTER SEMISOFT SIGN
-unicode_case_folding(0x048E, 'C', [0x048F]).					% CYRILLIC CAPITAL LETTER ER WITH TICK
-unicode_case_folding(0x0490, 'C', [0x0491]).					% CYRILLIC CAPITAL LETTER GHE WITH UPTURN
-unicode_case_folding(0x0492, 'C', [0x0493]).					% CYRILLIC CAPITAL LETTER GHE WITH STROKE
-unicode_case_folding(0x0494, 'C', [0x0495]).					% CYRILLIC CAPITAL LETTER GHE WITH MIDDLE HOOK
-unicode_case_folding(0x0496, 'C', [0x0497]).					% CYRILLIC CAPITAL LETTER ZHE WITH DESCENDER
-unicode_case_folding(0x0498, 'C', [0x0499]).					% CYRILLIC CAPITAL LETTER ZE WITH DESCENDER
-unicode_case_folding(0x049A, 'C', [0x049B]).					% CYRILLIC CAPITAL LETTER KA WITH DESCENDER
-unicode_case_folding(0x049C, 'C', [0x049D]).					% CYRILLIC CAPITAL LETTER KA WITH VERTICAL STROKE
-unicode_case_folding(0x049E, 'C', [0x049F]).					% CYRILLIC CAPITAL LETTER KA WITH STROKE
-unicode_case_folding(0x04A0, 'C', [0x04A1]).					% CYRILLIC CAPITAL LETTER BASHKIR KA
-unicode_case_folding(0x04A2, 'C', [0x04A3]).					% CYRILLIC CAPITAL LETTER EN WITH DESCENDER
-unicode_case_folding(0x04A4, 'C', [0x04A5]).					% CYRILLIC CAPITAL LIGATURE EN GHE
-unicode_case_folding(0x04A6, 'C', [0x04A7]).					% CYRILLIC CAPITAL LETTER PE WITH MIDDLE HOOK
-unicode_case_folding(0x04A8, 'C', [0x04A9]).					% CYRILLIC CAPITAL LETTER ABKHASIAN HA
-unicode_case_folding(0x04AA, 'C', [0x04AB]).					% CYRILLIC CAPITAL LETTER ES WITH DESCENDER
-unicode_case_folding(0x04AC, 'C', [0x04AD]).					% CYRILLIC CAPITAL LETTER TE WITH DESCENDER
-unicode_case_folding(0x04AE, 'C', [0x04AF]).					% CYRILLIC CAPITAL LETTER STRAIGHT U
-unicode_case_folding(0x04B0, 'C', [0x04B1]).					% CYRILLIC CAPITAL LETTER STRAIGHT U WITH STROKE
-unicode_case_folding(0x04B2, 'C', [0x04B3]).					% CYRILLIC CAPITAL LETTER HA WITH DESCENDER
-unicode_case_folding(0x04B4, 'C', [0x04B5]).					% CYRILLIC CAPITAL LIGATURE TE TSE
-unicode_case_folding(0x04B6, 'C', [0x04B7]).					% CYRILLIC CAPITAL LETTER CHE WITH DESCENDER
-unicode_case_folding(0x04B8, 'C', [0x04B9]).					% CYRILLIC CAPITAL LETTER CHE WITH VERTICAL STROKE
-unicode_case_folding(0x04BA, 'C', [0x04BB]).					% CYRILLIC CAPITAL LETTER SHHA
-unicode_case_folding(0x04BC, 'C', [0x04BD]).					% CYRILLIC CAPITAL LETTER ABKHASIAN CHE
-unicode_case_folding(0x04BE, 'C', [0x04BF]).					% CYRILLIC CAPITAL LETTER ABKHASIAN CHE WITH DESCENDER
-unicode_case_folding(0x04C0, 'C', [0x04CF]).					% CYRILLIC LETTER PALOCHKA
-unicode_case_folding(0x04C1, 'C', [0x04C2]).					% CYRILLIC CAPITAL LETTER ZHE WITH BREVE
-unicode_case_folding(0x04C3, 'C', [0x04C4]).					% CYRILLIC CAPITAL LETTER KA WITH HOOK
-unicode_case_folding(0x04C5, 'C', [0x04C6]).					% CYRILLIC CAPITAL LETTER EL WITH TAIL
-unicode_case_folding(0x04C7, 'C', [0x04C8]).					% CYRILLIC CAPITAL LETTER EN WITH HOOK
-unicode_case_folding(0x04C9, 'C', [0x04CA]).					% CYRILLIC CAPITAL LETTER EN WITH TAIL
-unicode_case_folding(0x04CB, 'C', [0x04CC]).					% CYRILLIC CAPITAL LETTER KHAKASSIAN CHE
-unicode_case_folding(0x04CD, 'C', [0x04CE]).					% CYRILLIC CAPITAL LETTER EM WITH TAIL
-unicode_case_folding(0x04D0, 'C', [0x04D1]).					% CYRILLIC CAPITAL LETTER A WITH BREVE
-unicode_case_folding(0x04D2, 'C', [0x04D3]).					% CYRILLIC CAPITAL LETTER A WITH DIAERESIS
-unicode_case_folding(0x04D4, 'C', [0x04D5]).					% CYRILLIC CAPITAL LIGATURE A IE
-unicode_case_folding(0x04D6, 'C', [0x04D7]).					% CYRILLIC CAPITAL LETTER IE WITH BREVE
-unicode_case_folding(0x04D8, 'C', [0x04D9]).					% CYRILLIC CAPITAL LETTER SCHWA
-unicode_case_folding(0x04DA, 'C', [0x04DB]).					% CYRILLIC CAPITAL LETTER SCHWA WITH DIAERESIS
-unicode_case_folding(0x04DC, 'C', [0x04DD]).					% CYRILLIC CAPITAL LETTER ZHE WITH DIAERESIS
-unicode_case_folding(0x04DE, 'C', [0x04DF]).					% CYRILLIC CAPITAL LETTER ZE WITH DIAERESIS
-unicode_case_folding(0x04E0, 'C', [0x04E1]).					% CYRILLIC CAPITAL LETTER ABKHASIAN DZE
-unicode_case_folding(0x04E2, 'C', [0x04E3]).					% CYRILLIC CAPITAL LETTER I WITH MACRON
-unicode_case_folding(0x04E4, 'C', [0x04E5]).					% CYRILLIC CAPITAL LETTER I WITH DIAERESIS
-unicode_case_folding(0x04E6, 'C', [0x04E7]).					% CYRILLIC CAPITAL LETTER O WITH DIAERESIS
-unicode_case_folding(0x04E8, 'C', [0x04E9]).					% CYRILLIC CAPITAL LETTER BARRED O
-unicode_case_folding(0x04EA, 'C', [0x04EB]).					% CYRILLIC CAPITAL LETTER BARRED O WITH DIAERESIS
-unicode_case_folding(0x04EC, 'C', [0x04ED]).					% CYRILLIC CAPITAL LETTER E WITH DIAERESIS
-unicode_case_folding(0x04EE, 'C', [0x04EF]).					% CYRILLIC CAPITAL LETTER U WITH MACRON
-unicode_case_folding(0x04F0, 'C', [0x04F1]).					% CYRILLIC CAPITAL LETTER U WITH DIAERESIS
-unicode_case_folding(0x04F2, 'C', [0x04F3]).					% CYRILLIC CAPITAL LETTER U WITH DOUBLE ACUTE
-unicode_case_folding(0x04F4, 'C', [0x04F5]).					% CYRILLIC CAPITAL LETTER CHE WITH DIAERESIS
-unicode_case_folding(0x04F6, 'C', [0x04F7]).					% CYRILLIC CAPITAL LETTER GHE WITH DESCENDER
-unicode_case_folding(0x04F8, 'C', [0x04F9]).					% CYRILLIC CAPITAL LETTER YERU WITH DIAERESIS
-unicode_case_folding(0x04FA, 'C', [0x04FB]).					% CYRILLIC CAPITAL LETTER GHE WITH STROKE AND HOOK
-unicode_case_folding(0x04FC, 'C', [0x04FD]).					% CYRILLIC CAPITAL LETTER HA WITH HOOK
-unicode_case_folding(0x04FE, 'C', [0x04FF]).					% CYRILLIC CAPITAL LETTER HA WITH STROKE
-unicode_case_folding(0x0500, 'C', [0x0501]).					% CYRILLIC CAPITAL LETTER KOMI DE
-unicode_case_folding(0x0502, 'C', [0x0503]).					% CYRILLIC CAPITAL LETTER KOMI DJE
-unicode_case_folding(0x0504, 'C', [0x0505]).					% CYRILLIC CAPITAL LETTER KOMI ZJE
-unicode_case_folding(0x0506, 'C', [0x0507]).					% CYRILLIC CAPITAL LETTER KOMI DZJE
-unicode_case_folding(0x0508, 'C', [0x0509]).					% CYRILLIC CAPITAL LETTER KOMI LJE
-unicode_case_folding(0x050A, 'C', [0x050B]).					% CYRILLIC CAPITAL LETTER KOMI NJE
-unicode_case_folding(0x050C, 'C', [0x050D]).					% CYRILLIC CAPITAL LETTER KOMI SJE
-unicode_case_folding(0x050E, 'C', [0x050F]).					% CYRILLIC CAPITAL LETTER KOMI TJE
-unicode_case_folding(0x0510, 'C', [0x0511]).					% CYRILLIC CAPITAL LETTER REVERSED ZE
-unicode_case_folding(0x0512, 'C', [0x0513]).					% CYRILLIC CAPITAL LETTER EL WITH HOOK
-unicode_case_folding(0x0514, 'C', [0x0515]).					% CYRILLIC CAPITAL LETTER LHA
-unicode_case_folding(0x0516, 'C', [0x0517]).					% CYRILLIC CAPITAL LETTER RHA
-unicode_case_folding(0x0518, 'C', [0x0519]).					% CYRILLIC CAPITAL LETTER YAE
-unicode_case_folding(0x051A, 'C', [0x051B]).					% CYRILLIC CAPITAL LETTER QA
-unicode_case_folding(0x051C, 'C', [0x051D]).					% CYRILLIC CAPITAL LETTER WE
-unicode_case_folding(0x051E, 'C', [0x051F]).					% CYRILLIC CAPITAL LETTER ALEUT KA
-unicode_case_folding(0x0520, 'C', [0x0521]).					% CYRILLIC CAPITAL LETTER EL WITH MIDDLE HOOK
-unicode_case_folding(0x0522, 'C', [0x0523]).					% CYRILLIC CAPITAL LETTER EN WITH MIDDLE HOOK
-unicode_case_folding(0x0524, 'C', [0x0525]).					% CYRILLIC CAPITAL LETTER PE WITH DESCENDER
-unicode_case_folding(0x0526, 'C', [0x0527]).					% CYRILLIC CAPITAL LETTER SHHA WITH DESCENDER
-unicode_case_folding(0x0531, 'C', [0x0561]).					% ARMENIAN CAPITAL LETTER AYB
-unicode_case_folding(0x0532, 'C', [0x0562]).					% ARMENIAN CAPITAL LETTER BEN
-unicode_case_folding(0x0533, 'C', [0x0563]).					% ARMENIAN CAPITAL LETTER GIM
-unicode_case_folding(0x0534, 'C', [0x0564]).					% ARMENIAN CAPITAL LETTER DA
-unicode_case_folding(0x0535, 'C', [0x0565]).					% ARMENIAN CAPITAL LETTER ECH
-unicode_case_folding(0x0536, 'C', [0x0566]).					% ARMENIAN CAPITAL LETTER ZA
-unicode_case_folding(0x0537, 'C', [0x0567]).					% ARMENIAN CAPITAL LETTER EH
-unicode_case_folding(0x0538, 'C', [0x0568]).					% ARMENIAN CAPITAL LETTER ET
-unicode_case_folding(0x0539, 'C', [0x0569]).					% ARMENIAN CAPITAL LETTER TO
-unicode_case_folding(0x053A, 'C', [0x056A]).					% ARMENIAN CAPITAL LETTER ZHE
-unicode_case_folding(0x053B, 'C', [0x056B]).					% ARMENIAN CAPITAL LETTER INI
-unicode_case_folding(0x053C, 'C', [0x056C]).					% ARMENIAN CAPITAL LETTER LIWN
-unicode_case_folding(0x053D, 'C', [0x056D]).					% ARMENIAN CAPITAL LETTER XEH
-unicode_case_folding(0x053E, 'C', [0x056E]).					% ARMENIAN CAPITAL LETTER CA
-unicode_case_folding(0x053F, 'C', [0x056F]).					% ARMENIAN CAPITAL LETTER KEN
-unicode_case_folding(0x0540, 'C', [0x0570]).					% ARMENIAN CAPITAL LETTER HO
-unicode_case_folding(0x0541, 'C', [0x0571]).					% ARMENIAN CAPITAL LETTER JA
-unicode_case_folding(0x0542, 'C', [0x0572]).					% ARMENIAN CAPITAL LETTER GHAD
-unicode_case_folding(0x0543, 'C', [0x0573]).					% ARMENIAN CAPITAL LETTER CHEH
-unicode_case_folding(0x0544, 'C', [0x0574]).					% ARMENIAN CAPITAL LETTER MEN
-unicode_case_folding(0x0545, 'C', [0x0575]).					% ARMENIAN CAPITAL LETTER YI
-unicode_case_folding(0x0546, 'C', [0x0576]).					% ARMENIAN CAPITAL LETTER NOW
-unicode_case_folding(0x0547, 'C', [0x0577]).					% ARMENIAN CAPITAL LETTER SHA
-unicode_case_folding(0x0548, 'C', [0x0578]).					% ARMENIAN CAPITAL LETTER VO
-unicode_case_folding(0x0549, 'C', [0x0579]).					% ARMENIAN CAPITAL LETTER CHA
-unicode_case_folding(0x054A, 'C', [0x057A]).					% ARMENIAN CAPITAL LETTER PEH
-unicode_case_folding(0x054B, 'C', [0x057B]).					% ARMENIAN CAPITAL LETTER JHEH
-unicode_case_folding(0x054C, 'C', [0x057C]).					% ARMENIAN CAPITAL LETTER RA
-unicode_case_folding(0x054D, 'C', [0x057D]).					% ARMENIAN CAPITAL LETTER SEH
-unicode_case_folding(0x054E, 'C', [0x057E]).					% ARMENIAN CAPITAL LETTER VEW
-unicode_case_folding(0x054F, 'C', [0x057F]).					% ARMENIAN CAPITAL LETTER TIWN
-unicode_case_folding(0x0550, 'C', [0x0580]).					% ARMENIAN CAPITAL LETTER REH
-unicode_case_folding(0x0551, 'C', [0x0581]).					% ARMENIAN CAPITAL LETTER CO
-unicode_case_folding(0x0552, 'C', [0x0582]).					% ARMENIAN CAPITAL LETTER YIWN
-unicode_case_folding(0x0553, 'C', [0x0583]).					% ARMENIAN CAPITAL LETTER PIWR
-unicode_case_folding(0x0554, 'C', [0x0584]).					% ARMENIAN CAPITAL LETTER KEH
-unicode_case_folding(0x0555, 'C', [0x0585]).					% ARMENIAN CAPITAL LETTER OH
-unicode_case_folding(0x0556, 'C', [0x0586]).					% ARMENIAN CAPITAL LETTER FEH
-unicode_case_folding(0x0587, 'F', [0x0565, 0x0582]).			% ARMENIAN SMALL LIGATURE ECH YIWN
-unicode_case_folding(0x10A0, 'C', [0x2D00]).					% GEORGIAN CAPITAL LETTER AN
-unicode_case_folding(0x10A1, 'C', [0x2D01]).					% GEORGIAN CAPITAL LETTER BAN
-unicode_case_folding(0x10A2, 'C', [0x2D02]).					% GEORGIAN CAPITAL LETTER GAN
-unicode_case_folding(0x10A3, 'C', [0x2D03]).					% GEORGIAN CAPITAL LETTER DON
-unicode_case_folding(0x10A4, 'C', [0x2D04]).					% GEORGIAN CAPITAL LETTER EN
-unicode_case_folding(0x10A5, 'C', [0x2D05]).					% GEORGIAN CAPITAL LETTER VIN
-unicode_case_folding(0x10A6, 'C', [0x2D06]).					% GEORGIAN CAPITAL LETTER ZEN
-unicode_case_folding(0x10A7, 'C', [0x2D07]).					% GEORGIAN CAPITAL LETTER TAN
-unicode_case_folding(0x10A8, 'C', [0x2D08]).					% GEORGIAN CAPITAL LETTER IN
-unicode_case_folding(0x10A9, 'C', [0x2D09]).					% GEORGIAN CAPITAL LETTER KAN
-unicode_case_folding(0x10AA, 'C', [0x2D0A]).					% GEORGIAN CAPITAL LETTER LAS
-unicode_case_folding(0x10AB, 'C', [0x2D0B]).					% GEORGIAN CAPITAL LETTER MAN
-unicode_case_folding(0x10AC, 'C', [0x2D0C]).					% GEORGIAN CAPITAL LETTER NAR
-unicode_case_folding(0x10AD, 'C', [0x2D0D]).					% GEORGIAN CAPITAL LETTER ON
-unicode_case_folding(0x10AE, 'C', [0x2D0E]).					% GEORGIAN CAPITAL LETTER PAR
-unicode_case_folding(0x10AF, 'C', [0x2D0F]).					% GEORGIAN CAPITAL LETTER ZHAR
-unicode_case_folding(0x10B0, 'C', [0x2D10]).					% GEORGIAN CAPITAL LETTER RAE
-unicode_case_folding(0x10B1, 'C', [0x2D11]).					% GEORGIAN CAPITAL LETTER SAN
-unicode_case_folding(0x10B2, 'C', [0x2D12]).					% GEORGIAN CAPITAL LETTER TAR
-unicode_case_folding(0x10B3, 'C', [0x2D13]).					% GEORGIAN CAPITAL LETTER UN
-unicode_case_folding(0x10B4, 'C', [0x2D14]).					% GEORGIAN CAPITAL LETTER PHAR
-unicode_case_folding(0x10B5, 'C', [0x2D15]).					% GEORGIAN CAPITAL LETTER KHAR
-unicode_case_folding(0x10B6, 'C', [0x2D16]).					% GEORGIAN CAPITAL LETTER GHAN
-unicode_case_folding(0x10B7, 'C', [0x2D17]).					% GEORGIAN CAPITAL LETTER QAR
-unicode_case_folding(0x10B8, 'C', [0x2D18]).					% GEORGIAN CAPITAL LETTER SHIN
-unicode_case_folding(0x10B9, 'C', [0x2D19]).					% GEORGIAN CAPITAL LETTER CHIN
-unicode_case_folding(0x10BA, 'C', [0x2D1A]).					% GEORGIAN CAPITAL LETTER CAN
-unicode_case_folding(0x10BB, 'C', [0x2D1B]).					% GEORGIAN CAPITAL LETTER JIL
-unicode_case_folding(0x10BC, 'C', [0x2D1C]).					% GEORGIAN CAPITAL LETTER CIL
-unicode_case_folding(0x10BD, 'C', [0x2D1D]).					% GEORGIAN CAPITAL LETTER CHAR
-unicode_case_folding(0x10BE, 'C', [0x2D1E]).					% GEORGIAN CAPITAL LETTER XAN
-unicode_case_folding(0x10BF, 'C', [0x2D1F]).					% GEORGIAN CAPITAL LETTER JHAN
-unicode_case_folding(0x10C0, 'C', [0x2D20]).					% GEORGIAN CAPITAL LETTER HAE
-unicode_case_folding(0x10C1, 'C', [0x2D21]).					% GEORGIAN CAPITAL LETTER HE
-unicode_case_folding(0x10C2, 'C', [0x2D22]).					% GEORGIAN CAPITAL LETTER HIE
-unicode_case_folding(0x10C3, 'C', [0x2D23]).					% GEORGIAN CAPITAL LETTER WE
-unicode_case_folding(0x10C4, 'C', [0x2D24]).					% GEORGIAN CAPITAL LETTER HAR
-unicode_case_folding(0x10C5, 'C', [0x2D25]).					% GEORGIAN CAPITAL LETTER HOE
-unicode_case_folding(0x10C7, 'C', [0x2D27]).					% GEORGIAN CAPITAL LETTER YN
-unicode_case_folding(0x10CD, 'C', [0x2D2D]).					% GEORGIAN CAPITAL LETTER AEN
-unicode_case_folding(0x1E00, 'C', [0x1E01]).					% LATIN CAPITAL LETTER A WITH RING BELOW
-unicode_case_folding(0x1E02, 'C', [0x1E03]).					% LATIN CAPITAL LETTER B WITH DOT ABOVE
-unicode_case_folding(0x1E04, 'C', [0x1E05]).					% LATIN CAPITAL LETTER B WITH DOT BELOW
-unicode_case_folding(0x1E06, 'C', [0x1E07]).					% LATIN CAPITAL LETTER B WITH LINE BELOW
-unicode_case_folding(0x1E08, 'C', [0x1E09]).					% LATIN CAPITAL LETTER C WITH CEDILLA AND ACUTE
-unicode_case_folding(0x1E0A, 'C', [0x1E0B]).					% LATIN CAPITAL LETTER D WITH DOT ABOVE
-unicode_case_folding(0x1E0C, 'C', [0x1E0D]).					% LATIN CAPITAL LETTER D WITH DOT BELOW
-unicode_case_folding(0x1E0E, 'C', [0x1E0F]).					% LATIN CAPITAL LETTER D WITH LINE BELOW
-unicode_case_folding(0x1E10, 'C', [0x1E11]).					% LATIN CAPITAL LETTER D WITH CEDILLA
-unicode_case_folding(0x1E12, 'C', [0x1E13]).					% LATIN CAPITAL LETTER D WITH CIRCUMFLEX BELOW
-unicode_case_folding(0x1E14, 'C', [0x1E15]).					% LATIN CAPITAL LETTER E WITH MACRON AND GRAVE
-unicode_case_folding(0x1E16, 'C', [0x1E17]).					% LATIN CAPITAL LETTER E WITH MACRON AND ACUTE
-unicode_case_folding(0x1E18, 'C', [0x1E19]).					% LATIN CAPITAL LETTER E WITH CIRCUMFLEX BELOW
-unicode_case_folding(0x1E1A, 'C', [0x1E1B]).					% LATIN CAPITAL LETTER E WITH TILDE BELOW
-unicode_case_folding(0x1E1C, 'C', [0x1E1D]).					% LATIN CAPITAL LETTER E WITH CEDILLA AND BREVE
-unicode_case_folding(0x1E1E, 'C', [0x1E1F]).					% LATIN CAPITAL LETTER F WITH DOT ABOVE
-unicode_case_folding(0x1E20, 'C', [0x1E21]).					% LATIN CAPITAL LETTER G WITH MACRON
-unicode_case_folding(0x1E22, 'C', [0x1E23]).					% LATIN CAPITAL LETTER H WITH DOT ABOVE
-unicode_case_folding(0x1E24, 'C', [0x1E25]).					% LATIN CAPITAL LETTER H WITH DOT BELOW
-unicode_case_folding(0x1E26, 'C', [0x1E27]).					% LATIN CAPITAL LETTER H WITH DIAERESIS
-unicode_case_folding(0x1E28, 'C', [0x1E29]).					% LATIN CAPITAL LETTER H WITH CEDILLA
-unicode_case_folding(0x1E2A, 'C', [0x1E2B]).					% LATIN CAPITAL LETTER H WITH BREVE BELOW
-unicode_case_folding(0x1E2C, 'C', [0x1E2D]).					% LATIN CAPITAL LETTER I WITH TILDE BELOW
-unicode_case_folding(0x1E2E, 'C', [0x1E2F]).					% LATIN CAPITAL LETTER I WITH DIAERESIS AND ACUTE
-unicode_case_folding(0x1E30, 'C', [0x1E31]).					% LATIN CAPITAL LETTER K WITH ACUTE
-unicode_case_folding(0x1E32, 'C', [0x1E33]).					% LATIN CAPITAL LETTER K WITH DOT BELOW
-unicode_case_folding(0x1E34, 'C', [0x1E35]).					% LATIN CAPITAL LETTER K WITH LINE BELOW
-unicode_case_folding(0x1E36, 'C', [0x1E37]).					% LATIN CAPITAL LETTER L WITH DOT BELOW
-unicode_case_folding(0x1E38, 'C', [0x1E39]).					% LATIN CAPITAL LETTER L WITH DOT BELOW AND MACRON
-unicode_case_folding(0x1E3A, 'C', [0x1E3B]).					% LATIN CAPITAL LETTER L WITH LINE BELOW
-unicode_case_folding(0x1E3C, 'C', [0x1E3D]).					% LATIN CAPITAL LETTER L WITH CIRCUMFLEX BELOW
-unicode_case_folding(0x1E3E, 'C', [0x1E3F]).					% LATIN CAPITAL LETTER M WITH ACUTE
-unicode_case_folding(0x1E40, 'C', [0x1E41]).					% LATIN CAPITAL LETTER M WITH DOT ABOVE
-unicode_case_folding(0x1E42, 'C', [0x1E43]).					% LATIN CAPITAL LETTER M WITH DOT BELOW
-unicode_case_folding(0x1E44, 'C', [0x1E45]).					% LATIN CAPITAL LETTER N WITH DOT ABOVE
-unicode_case_folding(0x1E46, 'C', [0x1E47]).					% LATIN CAPITAL LETTER N WITH DOT BELOW
-unicode_case_folding(0x1E48, 'C', [0x1E49]).					% LATIN CAPITAL LETTER N WITH LINE BELOW
-unicode_case_folding(0x1E4A, 'C', [0x1E4B]).					% LATIN CAPITAL LETTER N WITH CIRCUMFLEX BELOW
-unicode_case_folding(0x1E4C, 'C', [0x1E4D]).					% LATIN CAPITAL LETTER O WITH TILDE AND ACUTE
-unicode_case_folding(0x1E4E, 'C', [0x1E4F]).					% LATIN CAPITAL LETTER O WITH TILDE AND DIAERESIS
-unicode_case_folding(0x1E50, 'C', [0x1E51]).					% LATIN CAPITAL LETTER O WITH MACRON AND GRAVE
-unicode_case_folding(0x1E52, 'C', [0x1E53]).					% LATIN CAPITAL LETTER O WITH MACRON AND ACUTE
-unicode_case_folding(0x1E54, 'C', [0x1E55]).					% LATIN CAPITAL LETTER P WITH ACUTE
-unicode_case_folding(0x1E56, 'C', [0x1E57]).					% LATIN CAPITAL LETTER P WITH DOT ABOVE
-unicode_case_folding(0x1E58, 'C', [0x1E59]).					% LATIN CAPITAL LETTER R WITH DOT ABOVE
-unicode_case_folding(0x1E5A, 'C', [0x1E5B]).					% LATIN CAPITAL LETTER R WITH DOT BELOW
-unicode_case_folding(0x1E5C, 'C', [0x1E5D]).					% LATIN CAPITAL LETTER R WITH DOT BELOW AND MACRON
-unicode_case_folding(0x1E5E, 'C', [0x1E5F]).					% LATIN CAPITAL LETTER R WITH LINE BELOW
-unicode_case_folding(0x1E60, 'C', [0x1E61]).					% LATIN CAPITAL LETTER S WITH DOT ABOVE
-unicode_case_folding(0x1E62, 'C', [0x1E63]).					% LATIN CAPITAL LETTER S WITH DOT BELOW
-unicode_case_folding(0x1E64, 'C', [0x1E65]).					% LATIN CAPITAL LETTER S WITH ACUTE AND DOT ABOVE
-unicode_case_folding(0x1E66, 'C', [0x1E67]).					% LATIN CAPITAL LETTER S WITH CARON AND DOT ABOVE
-unicode_case_folding(0x1E68, 'C', [0x1E69]).					% LATIN CAPITAL LETTER S WITH DOT BELOW AND DOT ABOVE
-unicode_case_folding(0x1E6A, 'C', [0x1E6B]).					% LATIN CAPITAL LETTER T WITH DOT ABOVE
-unicode_case_folding(0x1E6C, 'C', [0x1E6D]).					% LATIN CAPITAL LETTER T WITH DOT BELOW
-unicode_case_folding(0x1E6E, 'C', [0x1E6F]).					% LATIN CAPITAL LETTER T WITH LINE BELOW
-unicode_case_folding(0x1E70, 'C', [0x1E71]).					% LATIN CAPITAL LETTER T WITH CIRCUMFLEX BELOW
-unicode_case_folding(0x1E72, 'C', [0x1E73]).					% LATIN CAPITAL LETTER U WITH DIAERESIS BELOW
-unicode_case_folding(0x1E74, 'C', [0x1E75]).					% LATIN CAPITAL LETTER U WITH TILDE BELOW
-unicode_case_folding(0x1E76, 'C', [0x1E77]).					% LATIN CAPITAL LETTER U WITH CIRCUMFLEX BELOW
-unicode_case_folding(0x1E78, 'C', [0x1E79]).					% LATIN CAPITAL LETTER U WITH TILDE AND ACUTE
-unicode_case_folding(0x1E7A, 'C', [0x1E7B]).					% LATIN CAPITAL LETTER U WITH MACRON AND DIAERESIS
-unicode_case_folding(0x1E7C, 'C', [0x1E7D]).					% LATIN CAPITAL LETTER V WITH TILDE
-unicode_case_folding(0x1E7E, 'C', [0x1E7F]).					% LATIN CAPITAL LETTER V WITH DOT BELOW
-unicode_case_folding(0x1E80, 'C', [0x1E81]).					% LATIN CAPITAL LETTER W WITH GRAVE
-unicode_case_folding(0x1E82, 'C', [0x1E83]).					% LATIN CAPITAL LETTER W WITH ACUTE
-unicode_case_folding(0x1E84, 'C', [0x1E85]).					% LATIN CAPITAL LETTER W WITH DIAERESIS
-unicode_case_folding(0x1E86, 'C', [0x1E87]).					% LATIN CAPITAL LETTER W WITH DOT ABOVE
-unicode_case_folding(0x1E88, 'C', [0x1E89]).					% LATIN CAPITAL LETTER W WITH DOT BELOW
-unicode_case_folding(0x1E8A, 'C', [0x1E8B]).					% LATIN CAPITAL LETTER X WITH DOT ABOVE
-unicode_case_folding(0x1E8C, 'C', [0x1E8D]).					% LATIN CAPITAL LETTER X WITH DIAERESIS
-unicode_case_folding(0x1E8E, 'C', [0x1E8F]).					% LATIN CAPITAL LETTER Y WITH DOT ABOVE
-unicode_case_folding(0x1E90, 'C', [0x1E91]).					% LATIN CAPITAL LETTER Z WITH CIRCUMFLEX
-unicode_case_folding(0x1E92, 'C', [0x1E93]).					% LATIN CAPITAL LETTER Z WITH DOT BELOW
-unicode_case_folding(0x1E94, 'C', [0x1E95]).					% LATIN CAPITAL LETTER Z WITH LINE BELOW
-unicode_case_folding(0x1E96, 'F', [0x0068, 0x0331]).			% LATIN SMALL LETTER H WITH LINE BELOW
-unicode_case_folding(0x1E97, 'F', [0x0074, 0x0308]).			% LATIN SMALL LETTER T WITH DIAERESIS
-unicode_case_folding(0x1E98, 'F', [0x0077, 0x030A]).			% LATIN SMALL LETTER W WITH RING ABOVE
-unicode_case_folding(0x1E99, 'F', [0x0079, 0x030A]).			% LATIN SMALL LETTER Y WITH RING ABOVE
-unicode_case_folding(0x1E9A, 'F', [0x0061, 0x02BE]).			% LATIN SMALL LETTER A WITH RIGHT HALF RING
-unicode_case_folding(0x1E9B, 'C', [0x1E61]).					% LATIN SMALL LETTER LONG S WITH DOT ABOVE
-unicode_case_folding(0x1E9E, 'F', [0x0073, 0x0073]).			% LATIN CAPITAL LETTER SHARP S
-unicode_case_folding(0x1E9E, 'S', [0x00DF]).					% LATIN CAPITAL LETTER SHARP S
-unicode_case_folding(0x1EA0, 'C', [0x1EA1]).					% LATIN CAPITAL LETTER A WITH DOT BELOW
-unicode_case_folding(0x1EA2, 'C', [0x1EA3]).					% LATIN CAPITAL LETTER A WITH HOOK ABOVE
-unicode_case_folding(0x1EA4, 'C', [0x1EA5]).					% LATIN CAPITAL LETTER A WITH CIRCUMFLEX AND ACUTE
-unicode_case_folding(0x1EA6, 'C', [0x1EA7]).					% LATIN CAPITAL LETTER A WITH CIRCUMFLEX AND GRAVE
-unicode_case_folding(0x1EA8, 'C', [0x1EA9]).					% LATIN CAPITAL LETTER A WITH CIRCUMFLEX AND HOOK ABOVE
-unicode_case_folding(0x1EAA, 'C', [0x1EAB]).					% LATIN CAPITAL LETTER A WITH CIRCUMFLEX AND TILDE
-unicode_case_folding(0x1EAC, 'C', [0x1EAD]).					% LATIN CAPITAL LETTER A WITH CIRCUMFLEX AND DOT BELOW
-unicode_case_folding(0x1EAE, 'C', [0x1EAF]).					% LATIN CAPITAL LETTER A WITH BREVE AND ACUTE
-unicode_case_folding(0x1EB0, 'C', [0x1EB1]).					% LATIN CAPITAL LETTER A WITH BREVE AND GRAVE
-unicode_case_folding(0x1EB2, 'C', [0x1EB3]).					% LATIN CAPITAL LETTER A WITH BREVE AND HOOK ABOVE
-unicode_case_folding(0x1EB4, 'C', [0x1EB5]).					% LATIN CAPITAL LETTER A WITH BREVE AND TILDE
-unicode_case_folding(0x1EB6, 'C', [0x1EB7]).					% LATIN CAPITAL LETTER A WITH BREVE AND DOT BELOW
-unicode_case_folding(0x1EB8, 'C', [0x1EB9]).					% LATIN CAPITAL LETTER E WITH DOT BELOW
-unicode_case_folding(0x1EBA, 'C', [0x1EBB]).					% LATIN CAPITAL LETTER E WITH HOOK ABOVE
-unicode_case_folding(0x1EBC, 'C', [0x1EBD]).					% LATIN CAPITAL LETTER E WITH TILDE
-unicode_case_folding(0x1EBE, 'C', [0x1EBF]).					% LATIN CAPITAL LETTER E WITH CIRCUMFLEX AND ACUTE
-unicode_case_folding(0x1EC0, 'C', [0x1EC1]).					% LATIN CAPITAL LETTER E WITH CIRCUMFLEX AND GRAVE
-unicode_case_folding(0x1EC2, 'C', [0x1EC3]).					% LATIN CAPITAL LETTER E WITH CIRCUMFLEX AND HOOK ABOVE
-unicode_case_folding(0x1EC4, 'C', [0x1EC5]).					% LATIN CAPITAL LETTER E WITH CIRCUMFLEX AND TILDE
-unicode_case_folding(0x1EC6, 'C', [0x1EC7]).					% LATIN CAPITAL LETTER E WITH CIRCUMFLEX AND DOT BELOW
-unicode_case_folding(0x1EC8, 'C', [0x1EC9]).					% LATIN CAPITAL LETTER I WITH HOOK ABOVE
-unicode_case_folding(0x1ECA, 'C', [0x1ECB]).					% LATIN CAPITAL LETTER I WITH DOT BELOW
-unicode_case_folding(0x1ECC, 'C', [0x1ECD]).					% LATIN CAPITAL LETTER O WITH DOT BELOW
-unicode_case_folding(0x1ECE, 'C', [0x1ECF]).					% LATIN CAPITAL LETTER O WITH HOOK ABOVE
-unicode_case_folding(0x1ED0, 'C', [0x1ED1]).					% LATIN CAPITAL LETTER O WITH CIRCUMFLEX AND ACUTE
-unicode_case_folding(0x1ED2, 'C', [0x1ED3]).					% LATIN CAPITAL LETTER O WITH CIRCUMFLEX AND GRAVE
-unicode_case_folding(0x1ED4, 'C', [0x1ED5]).					% LATIN CAPITAL LETTER O WITH CIRCUMFLEX AND HOOK ABOVE
-unicode_case_folding(0x1ED6, 'C', [0x1ED7]).					% LATIN CAPITAL LETTER O WITH CIRCUMFLEX AND TILDE
-unicode_case_folding(0x1ED8, 'C', [0x1ED9]).					% LATIN CAPITAL LETTER O WITH CIRCUMFLEX AND DOT BELOW
-unicode_case_folding(0x1EDA, 'C', [0x1EDB]).					% LATIN CAPITAL LETTER O WITH HORN AND ACUTE
-unicode_case_folding(0x1EDC, 'C', [0x1EDD]).					% LATIN CAPITAL LETTER O WITH HORN AND GRAVE
-unicode_case_folding(0x1EDE, 'C', [0x1EDF]).					% LATIN CAPITAL LETTER O WITH HORN AND HOOK ABOVE
-unicode_case_folding(0x1EE0, 'C', [0x1EE1]).					% LATIN CAPITAL LETTER O WITH HORN AND TILDE
-unicode_case_folding(0x1EE2, 'C', [0x1EE3]).					% LATIN CAPITAL LETTER O WITH HORN AND DOT BELOW
-unicode_case_folding(0x1EE4, 'C', [0x1EE5]).					% LATIN CAPITAL LETTER U WITH DOT BELOW
-unicode_case_folding(0x1EE6, 'C', [0x1EE7]).					% LATIN CAPITAL LETTER U WITH HOOK ABOVE
-unicode_case_folding(0x1EE8, 'C', [0x1EE9]).					% LATIN CAPITAL LETTER U WITH HORN AND ACUTE
-unicode_case_folding(0x1EEA, 'C', [0x1EEB]).					% LATIN CAPITAL LETTER U WITH HORN AND GRAVE
-unicode_case_folding(0x1EEC, 'C', [0x1EED]).					% LATIN CAPITAL LETTER U WITH HORN AND HOOK ABOVE
-unicode_case_folding(0x1EEE, 'C', [0x1EEF]).					% LATIN CAPITAL LETTER U WITH HORN AND TILDE
-unicode_case_folding(0x1EF0, 'C', [0x1EF1]).					% LATIN CAPITAL LETTER U WITH HORN AND DOT BELOW
-unicode_case_folding(0x1EF2, 'C', [0x1EF3]).					% LATIN CAPITAL LETTER Y WITH GRAVE
-unicode_case_folding(0x1EF4, 'C', [0x1EF5]).					% LATIN CAPITAL LETTER Y WITH DOT BELOW
-unicode_case_folding(0x1EF6, 'C', [0x1EF7]).					% LATIN CAPITAL LETTER Y WITH HOOK ABOVE
-unicode_case_folding(0x1EF8, 'C', [0x1EF9]).					% LATIN CAPITAL LETTER Y WITH TILDE
-unicode_case_folding(0x1EFA, 'C', [0x1EFB]).					% LATIN CAPITAL LETTER MIDDLE-WELSH LL
-unicode_case_folding(0x1EFC, 'C', [0x1EFD]).					% LATIN CAPITAL LETTER MIDDLE-WELSH V
-unicode_case_folding(0x1EFE, 'C', [0x1EFF]).					% LATIN CAPITAL LETTER Y WITH LOOP
-unicode_case_folding(0x1F08, 'C', [0x1F00]).					% GREEK CAPITAL LETTER ALPHA WITH PSILI
-unicode_case_folding(0x1F09, 'C', [0x1F01]).					% GREEK CAPITAL LETTER ALPHA WITH DASIA
-unicode_case_folding(0x1F0A, 'C', [0x1F02]).					% GREEK CAPITAL LETTER ALPHA WITH PSILI AND VARIA
-unicode_case_folding(0x1F0B, 'C', [0x1F03]).					% GREEK CAPITAL LETTER ALPHA WITH DASIA AND VARIA
-unicode_case_folding(0x1F0C, 'C', [0x1F04]).					% GREEK CAPITAL LETTER ALPHA WITH PSILI AND OXIA
-unicode_case_folding(0x1F0D, 'C', [0x1F05]).					% GREEK CAPITAL LETTER ALPHA WITH DASIA AND OXIA
-unicode_case_folding(0x1F0E, 'C', [0x1F06]).					% GREEK CAPITAL LETTER ALPHA WITH PSILI AND PERISPOMENI
-unicode_case_folding(0x1F0F, 'C', [0x1F07]).					% GREEK CAPITAL LETTER ALPHA WITH DASIA AND PERISPOMENI
-unicode_case_folding(0x1F18, 'C', [0x1F10]).					% GREEK CAPITAL LETTER EPSILON WITH PSILI
-unicode_case_folding(0x1F19, 'C', [0x1F11]).					% GREEK CAPITAL LETTER EPSILON WITH DASIA
-unicode_case_folding(0x1F1A, 'C', [0x1F12]).					% GREEK CAPITAL LETTER EPSILON WITH PSILI AND VARIA
-unicode_case_folding(0x1F1B, 'C', [0x1F13]).					% GREEK CAPITAL LETTER EPSILON WITH DASIA AND VARIA
-unicode_case_folding(0x1F1C, 'C', [0x1F14]).					% GREEK CAPITAL LETTER EPSILON WITH PSILI AND OXIA
-unicode_case_folding(0x1F1D, 'C', [0x1F15]).					% GREEK CAPITAL LETTER EPSILON WITH DASIA AND OXIA
-unicode_case_folding(0x1F28, 'C', [0x1F20]).					% GREEK CAPITAL LETTER ETA WITH PSILI
-unicode_case_folding(0x1F29, 'C', [0x1F21]).					% GREEK CAPITAL LETTER ETA WITH DASIA
-unicode_case_folding(0x1F2A, 'C', [0x1F22]).					% GREEK CAPITAL LETTER ETA WITH PSILI AND VARIA
-unicode_case_folding(0x1F2B, 'C', [0x1F23]).					% GREEK CAPITAL LETTER ETA WITH DASIA AND VARIA
-unicode_case_folding(0x1F2C, 'C', [0x1F24]).					% GREEK CAPITAL LETTER ETA WITH PSILI AND OXIA
-unicode_case_folding(0x1F2D, 'C', [0x1F25]).					% GREEK CAPITAL LETTER ETA WITH DASIA AND OXIA
-unicode_case_folding(0x1F2E, 'C', [0x1F26]).					% GREEK CAPITAL LETTER ETA WITH PSILI AND PERISPOMENI
-unicode_case_folding(0x1F2F, 'C', [0x1F27]).					% GREEK CAPITAL LETTER ETA WITH DASIA AND PERISPOMENI
-unicode_case_folding(0x1F38, 'C', [0x1F30]).					% GREEK CAPITAL LETTER IOTA WITH PSILI
-unicode_case_folding(0x1F39, 'C', [0x1F31]).					% GREEK CAPITAL LETTER IOTA WITH DASIA
-unicode_case_folding(0x1F3A, 'C', [0x1F32]).					% GREEK CAPITAL LETTER IOTA WITH PSILI AND VARIA
-unicode_case_folding(0x1F3B, 'C', [0x1F33]).					% GREEK CAPITAL LETTER IOTA WITH DASIA AND VARIA
-unicode_case_folding(0x1F3C, 'C', [0x1F34]).					% GREEK CAPITAL LETTER IOTA WITH PSILI AND OXIA
-unicode_case_folding(0x1F3D, 'C', [0x1F35]).					% GREEK CAPITAL LETTER IOTA WITH DASIA AND OXIA
-unicode_case_folding(0x1F3E, 'C', [0x1F36]).					% GREEK CAPITAL LETTER IOTA WITH PSILI AND PERISPOMENI
-unicode_case_folding(0x1F3F, 'C', [0x1F37]).					% GREEK CAPITAL LETTER IOTA WITH DASIA AND PERISPOMENI
-unicode_case_folding(0x1F48, 'C', [0x1F40]).					% GREEK CAPITAL LETTER OMICRON WITH PSILI
-unicode_case_folding(0x1F49, 'C', [0x1F41]).					% GREEK CAPITAL LETTER OMICRON WITH DASIA
-unicode_case_folding(0x1F4A, 'C', [0x1F42]).					% GREEK CAPITAL LETTER OMICRON WITH PSILI AND VARIA
-unicode_case_folding(0x1F4B, 'C', [0x1F43]).					% GREEK CAPITAL LETTER OMICRON WITH DASIA AND VARIA
-unicode_case_folding(0x1F4C, 'C', [0x1F44]).					% GREEK CAPITAL LETTER OMICRON WITH PSILI AND OXIA
-unicode_case_folding(0x1F4D, 'C', [0x1F45]).					% GREEK CAPITAL LETTER OMICRON WITH DASIA AND OXIA
-unicode_case_folding(0x1F50, 'F', [0x03C5, 0x0313]).			% GREEK SMALL LETTER UPSILON WITH PSILI
-unicode_case_folding(0x1F52, 'F', [0x03C5, 0x0313, 0x0300]).	% GREEK SMALL LETTER UPSILON WITH PSILI AND VARIA
-unicode_case_folding(0x1F54, 'F', [0x03C5, 0x0313, 0x0301]).	% GREEK SMALL LETTER UPSILON WITH PSILI AND OXIA
-unicode_case_folding(0x1F56, 'F', [0x03C5, 0x0313, 0x0342]).	% GREEK SMALL LETTER UPSILON WITH PSILI AND PERISPOMENI
-unicode_case_folding(0x1F59, 'C', [0x1F51]).					% GREEK CAPITAL LETTER UPSILON WITH DASIA
-unicode_case_folding(0x1F5B, 'C', [0x1F53]).					% GREEK CAPITAL LETTER UPSILON WITH DASIA AND VARIA
-unicode_case_folding(0x1F5D, 'C', [0x1F55]).					% GREEK CAPITAL LETTER UPSILON WITH DASIA AND OXIA
-unicode_case_folding(0x1F5F, 'C', [0x1F57]).					% GREEK CAPITAL LETTER UPSILON WITH DASIA AND PERISPOMENI
-unicode_case_folding(0x1F68, 'C', [0x1F60]).					% GREEK CAPITAL LETTER OMEGA WITH PSILI
-unicode_case_folding(0x1F69, 'C', [0x1F61]).					% GREEK CAPITAL LETTER OMEGA WITH DASIA
-unicode_case_folding(0x1F6A, 'C', [0x1F62]).					% GREEK CAPITAL LETTER OMEGA WITH PSILI AND VARIA
-unicode_case_folding(0x1F6B, 'C', [0x1F63]).					% GREEK CAPITAL LETTER OMEGA WITH DASIA AND VARIA
-unicode_case_folding(0x1F6C, 'C', [0x1F64]).					% GREEK CAPITAL LETTER OMEGA WITH PSILI AND OXIA
-unicode_case_folding(0x1F6D, 'C', [0x1F65]).					% GREEK CAPITAL LETTER OMEGA WITH DASIA AND OXIA
-unicode_case_folding(0x1F6E, 'C', [0x1F66]).					% GREEK CAPITAL LETTER OMEGA WITH PSILI AND PERISPOMENI
-unicode_case_folding(0x1F6F, 'C', [0x1F67]).					% GREEK CAPITAL LETTER OMEGA WITH DASIA AND PERISPOMENI
-unicode_case_folding(0x1F80, 'F', [0x1F00, 0x03B9]).			% GREEK SMALL LETTER ALPHA WITH PSILI AND YPOGEGRAMMENI
-unicode_case_folding(0x1F81, 'F', [0x1F01, 0x03B9]).			% GREEK SMALL LETTER ALPHA WITH DASIA AND YPOGEGRAMMENI
-unicode_case_folding(0x1F82, 'F', [0x1F02, 0x03B9]).			% GREEK SMALL LETTER ALPHA WITH PSILI AND VARIA AND YPOGEGRAMMENI
-unicode_case_folding(0x1F83, 'F', [0x1F03, 0x03B9]).			% GREEK SMALL LETTER ALPHA WITH DASIA AND VARIA AND YPOGEGRAMMENI
-unicode_case_folding(0x1F84, 'F', [0x1F04, 0x03B9]).			% GREEK SMALL LETTER ALPHA WITH PSILI AND OXIA AND YPOGEGRAMMENI
-unicode_case_folding(0x1F85, 'F', [0x1F05, 0x03B9]).			% GREEK SMALL LETTER ALPHA WITH DASIA AND OXIA AND YPOGEGRAMMENI
-unicode_case_folding(0x1F86, 'F', [0x1F06, 0x03B9]).			% GREEK SMALL LETTER ALPHA WITH PSILI AND PERISPOMENI AND YPOGEGRAMMENI
-unicode_case_folding(0x1F87, 'F', [0x1F07, 0x03B9]).			% GREEK SMALL LETTER ALPHA WITH DASIA AND PERISPOMENI AND YPOGEGRAMMENI
-unicode_case_folding(0x1F88, 'F', [0x1F00, 0x03B9]).			% GREEK CAPITAL LETTER ALPHA WITH PSILI AND PROSGEGRAMMENI
-unicode_case_folding(0x1F88, 'S', [0x1F80]).					% GREEK CAPITAL LETTER ALPHA WITH PSILI AND PROSGEGRAMMENI
-unicode_case_folding(0x1F89, 'F', [0x1F01, 0x03B9]).			% GREEK CAPITAL LETTER ALPHA WITH DASIA AND PROSGEGRAMMENI
-unicode_case_folding(0x1F89, 'S', [0x1F81]).					% GREEK CAPITAL LETTER ALPHA WITH DASIA AND PROSGEGRAMMENI
-unicode_case_folding(0x1F8A, 'F', [0x1F02, 0x03B9]).			% GREEK CAPITAL LETTER ALPHA WITH PSILI AND VARIA AND PROSGEGRAMMENI
-unicode_case_folding(0x1F8A, 'S', [0x1F82]).					% GREEK CAPITAL LETTER ALPHA WITH PSILI AND VARIA AND PROSGEGRAMMENI
-unicode_case_folding(0x1F8B, 'F', [0x1F03, 0x03B9]).			% GREEK CAPITAL LETTER ALPHA WITH DASIA AND VARIA AND PROSGEGRAMMENI
-unicode_case_folding(0x1F8B, 'S', [0x1F83]).					% GREEK CAPITAL LETTER ALPHA WITH DASIA AND VARIA AND PROSGEGRAMMENI
-unicode_case_folding(0x1F8C, 'F', [0x1F04, 0x03B9]).			% GREEK CAPITAL LETTER ALPHA WITH PSILI AND OXIA AND PROSGEGRAMMENI
-unicode_case_folding(0x1F8C, 'S', [0x1F84]).					% GREEK CAPITAL LETTER ALPHA WITH PSILI AND OXIA AND PROSGEGRAMMENI
-unicode_case_folding(0x1F8D, 'F', [0x1F05, 0x03B9]).			% GREEK CAPITAL LETTER ALPHA WITH DASIA AND OXIA AND PROSGEGRAMMENI
-unicode_case_folding(0x1F8D, 'S', [0x1F85]).					% GREEK CAPITAL LETTER ALPHA WITH DASIA AND OXIA AND PROSGEGRAMMENI
-unicode_case_folding(0x1F8E, 'F', [0x1F06, 0x03B9]).			% GREEK CAPITAL LETTER ALPHA WITH PSILI AND PERISPOMENI AND PROSGEGRAMMENI
-unicode_case_folding(0x1F8E, 'S', [0x1F86]).					% GREEK CAPITAL LETTER ALPHA WITH PSILI AND PERISPOMENI AND PROSGEGRAMMENI
-unicode_case_folding(0x1F8F, 'F', [0x1F07, 0x03B9]).			% GREEK CAPITAL LETTER ALPHA WITH DASIA AND PERISPOMENI AND PROSGEGRAMMENI
-unicode_case_folding(0x1F8F, 'S', [0x1F87]).					% GREEK CAPITAL LETTER ALPHA WITH DASIA AND PERISPOMENI AND PROSGEGRAMMENI
-unicode_case_folding(0x1F90, 'F', [0x1F20, 0x03B9]).			% GREEK SMALL LETTER ETA WITH PSILI AND YPOGEGRAMMENI
-unicode_case_folding(0x1F91, 'F', [0x1F21, 0x03B9]).			% GREEK SMALL LETTER ETA WITH DASIA AND YPOGEGRAMMENI
-unicode_case_folding(0x1F92, 'F', [0x1F22, 0x03B9]).			% GREEK SMALL LETTER ETA WITH PSILI AND VARIA AND YPOGEGRAMMENI
-unicode_case_folding(0x1F93, 'F', [0x1F23, 0x03B9]).			% GREEK SMALL LETTER ETA WITH DASIA AND VARIA AND YPOGEGRAMMENI
-unicode_case_folding(0x1F94, 'F', [0x1F24, 0x03B9]).			% GREEK SMALL LETTER ETA WITH PSILI AND OXIA AND YPOGEGRAMMENI
-unicode_case_folding(0x1F95, 'F', [0x1F25, 0x03B9]).			% GREEK SMALL LETTER ETA WITH DASIA AND OXIA AND YPOGEGRAMMENI
-unicode_case_folding(0x1F96, 'F', [0x1F26, 0x03B9]).			% GREEK SMALL LETTER ETA WITH PSILI AND PERISPOMENI AND YPOGEGRAMMENI
-unicode_case_folding(0x1F97, 'F', [0x1F27, 0x03B9]).			% GREEK SMALL LETTER ETA WITH DASIA AND PERISPOMENI AND YPOGEGRAMMENI
-unicode_case_folding(0x1F98, 'F', [0x1F20, 0x03B9]).			% GREEK CAPITAL LETTER ETA WITH PSILI AND PROSGEGRAMMENI
-unicode_case_folding(0x1F98, 'S', [0x1F90]).					% GREEK CAPITAL LETTER ETA WITH PSILI AND PROSGEGRAMMENI
-unicode_case_folding(0x1F99, 'F', [0x1F21, 0x03B9]).			% GREEK CAPITAL LETTER ETA WITH DASIA AND PROSGEGRAMMENI
-unicode_case_folding(0x1F99, 'S', [0x1F91]).					% GREEK CAPITAL LETTER ETA WITH DASIA AND PROSGEGRAMMENI
-unicode_case_folding(0x1F9A, 'F', [0x1F22, 0x03B9]).			% GREEK CAPITAL LETTER ETA WITH PSILI AND VARIA AND PROSGEGRAMMENI
-unicode_case_folding(0x1F9A, 'S', [0x1F92]).					% GREEK CAPITAL LETTER ETA WITH PSILI AND VARIA AND PROSGEGRAMMENI
-unicode_case_folding(0x1F9B, 'F', [0x1F23, 0x03B9]).			% GREEK CAPITAL LETTER ETA WITH DASIA AND VARIA AND PROSGEGRAMMENI
-unicode_case_folding(0x1F9B, 'S', [0x1F93]).					% GREEK CAPITAL LETTER ETA WITH DASIA AND VARIA AND PROSGEGRAMMENI
-unicode_case_folding(0x1F9C, 'F', [0x1F24, 0x03B9]).			% GREEK CAPITAL LETTER ETA WITH PSILI AND OXIA AND PROSGEGRAMMENI
-unicode_case_folding(0x1F9C, 'S', [0x1F94]).					% GREEK CAPITAL LETTER ETA WITH PSILI AND OXIA AND PROSGEGRAMMENI
-unicode_case_folding(0x1F9D, 'F', [0x1F25, 0x03B9]).			% GREEK CAPITAL LETTER ETA WITH DASIA AND OXIA AND PROSGEGRAMMENI
-unicode_case_folding(0x1F9D, 'S', [0x1F95]).					% GREEK CAPITAL LETTER ETA WITH DASIA AND OXIA AND PROSGEGRAMMENI
-unicode_case_folding(0x1F9E, 'F', [0x1F26, 0x03B9]).			% GREEK CAPITAL LETTER ETA WITH PSILI AND PERISPOMENI AND PROSGEGRAMMENI
-unicode_case_folding(0x1F9E, 'S', [0x1F96]).					% GREEK CAPITAL LETTER ETA WITH PSILI AND PERISPOMENI AND PROSGEGRAMMENI
-unicode_case_folding(0x1F9F, 'F', [0x1F27, 0x03B9]).			% GREEK CAPITAL LETTER ETA WITH DASIA AND PERISPOMENI AND PROSGEGRAMMENI
-unicode_case_folding(0x1F9F, 'S', [0x1F97]).					% GREEK CAPITAL LETTER ETA WITH DASIA AND PERISPOMENI AND PROSGEGRAMMENI
-unicode_case_folding(0x1FA0, 'F', [0x1F60, 0x03B9]).			% GREEK SMALL LETTER OMEGA WITH PSILI AND YPOGEGRAMMENI
-unicode_case_folding(0x1FA1, 'F', [0x1F61, 0x03B9]).			% GREEK SMALL LETTER OMEGA WITH DASIA AND YPOGEGRAMMENI
-unicode_case_folding(0x1FA2, 'F', [0x1F62, 0x03B9]).			% GREEK SMALL LETTER OMEGA WITH PSILI AND VARIA AND YPOGEGRAMMENI
-unicode_case_folding(0x1FA3, 'F', [0x1F63, 0x03B9]).			% GREEK SMALL LETTER OMEGA WITH DASIA AND VARIA AND YPOGEGRAMMENI
-unicode_case_folding(0x1FA4, 'F', [0x1F64, 0x03B9]).			% GREEK SMALL LETTER OMEGA WITH PSILI AND OXIA AND YPOGEGRAMMENI
-unicode_case_folding(0x1FA5, 'F', [0x1F65, 0x03B9]).			% GREEK SMALL LETTER OMEGA WITH DASIA AND OXIA AND YPOGEGRAMMENI
-unicode_case_folding(0x1FA6, 'F', [0x1F66, 0x03B9]).			% GREEK SMALL LETTER OMEGA WITH PSILI AND PERISPOMENI AND YPOGEGRAMMENI
-unicode_case_folding(0x1FA7, 'F', [0x1F67, 0x03B9]).			% GREEK SMALL LETTER OMEGA WITH DASIA AND PERISPOMENI AND YPOGEGRAMMENI
-unicode_case_folding(0x1FA8, 'F', [0x1F60, 0x03B9]).			% GREEK CAPITAL LETTER OMEGA WITH PSILI AND PROSGEGRAMMENI
-unicode_case_folding(0x1FA8, 'S', [0x1FA0]).					% GREEK CAPITAL LETTER OMEGA WITH PSILI AND PROSGEGRAMMENI
-unicode_case_folding(0x1FA9, 'F', [0x1F61, 0x03B9]).			% GREEK CAPITAL LETTER OMEGA WITH DASIA AND PROSGEGRAMMENI
-unicode_case_folding(0x1FA9, 'S', [0x1FA1]).					% GREEK CAPITAL LETTER OMEGA WITH DASIA AND PROSGEGRAMMENI
-unicode_case_folding(0x1FAA, 'F', [0x1F62, 0x03B9]).			% GREEK CAPITAL LETTER OMEGA WITH PSILI AND VARIA AND PROSGEGRAMMENI
-unicode_case_folding(0x1FAA, 'S', [0x1FA2]).					% GREEK CAPITAL LETTER OMEGA WITH PSILI AND VARIA AND PROSGEGRAMMENI
-unicode_case_folding(0x1FAB, 'F', [0x1F63, 0x03B9]).			% GREEK CAPITAL LETTER OMEGA WITH DASIA AND VARIA AND PROSGEGRAMMENI
-unicode_case_folding(0x1FAB, 'S', [0x1FA3]).					% GREEK CAPITAL LETTER OMEGA WITH DASIA AND VARIA AND PROSGEGRAMMENI
-unicode_case_folding(0x1FAC, 'F', [0x1F64, 0x03B9]).			% GREEK CAPITAL LETTER OMEGA WITH PSILI AND OXIA AND PROSGEGRAMMENI
-unicode_case_folding(0x1FAC, 'S', [0x1FA4]).					% GREEK CAPITAL LETTER OMEGA WITH PSILI AND OXIA AND PROSGEGRAMMENI
-unicode_case_folding(0x1FAD, 'F', [0x1F65, 0x03B9]).			% GREEK CAPITAL LETTER OMEGA WITH DASIA AND OXIA AND PROSGEGRAMMENI
-unicode_case_folding(0x1FAD, 'S', [0x1FA5]).					% GREEK CAPITAL LETTER OMEGA WITH DASIA AND OXIA AND PROSGEGRAMMENI
-unicode_case_folding(0x1FAE, 'F', [0x1F66, 0x03B9]).			% GREEK CAPITAL LETTER OMEGA WITH PSILI AND PERISPOMENI AND PROSGEGRAMMENI
-unicode_case_folding(0x1FAE, 'S', [0x1FA6]).					% GREEK CAPITAL LETTER OMEGA WITH PSILI AND PERISPOMENI AND PROSGEGRAMMENI
-unicode_case_folding(0x1FAF, 'F', [0x1F67, 0x03B9]).			% GREEK CAPITAL LETTER OMEGA WITH DASIA AND PERISPOMENI AND PROSGEGRAMMENI
-unicode_case_folding(0x1FAF, 'S', [0x1FA7]).					% GREEK CAPITAL LETTER OMEGA WITH DASIA AND PERISPOMENI AND PROSGEGRAMMENI
-unicode_case_folding(0x1FB2, 'F', [0x1F70, 0x03B9]).			% GREEK SMALL LETTER ALPHA WITH VARIA AND YPOGEGRAMMENI
-unicode_case_folding(0x1FB3, 'F', [0x03B1, 0x03B9]).			% GREEK SMALL LETTER ALPHA WITH YPOGEGRAMMENI
-unicode_case_folding(0x1FB4, 'F', [0x03AC, 0x03B9]).			% GREEK SMALL LETTER ALPHA WITH OXIA AND YPOGEGRAMMENI
-unicode_case_folding(0x1FB6, 'F', [0x03B1, 0x0342]).			% GREEK SMALL LETTER ALPHA WITH PERISPOMENI
-unicode_case_folding(0x1FB7, 'F', [0x03B1, 0x0342, 0x03B9]).	% GREEK SMALL LETTER ALPHA WITH PERISPOMENI AND YPOGEGRAMMENI
-unicode_case_folding(0x1FB8, 'C', [0x1FB0]).					% GREEK CAPITAL LETTER ALPHA WITH VRACHY
-unicode_case_folding(0x1FB9, 'C', [0x1FB1]).					% GREEK CAPITAL LETTER ALPHA WITH MACRON
-unicode_case_folding(0x1FBA, 'C', [0x1F70]).					% GREEK CAPITAL LETTER ALPHA WITH VARIA
-unicode_case_folding(0x1FBB, 'C', [0x1F71]).					% GREEK CAPITAL LETTER ALPHA WITH OXIA
-unicode_case_folding(0x1FBC, 'F', [0x03B1, 0x03B9]).			% GREEK CAPITAL LETTER ALPHA WITH PROSGEGRAMMENI
-unicode_case_folding(0x1FBC, 'S', [0x1FB3]).					% GREEK CAPITAL LETTER ALPHA WITH PROSGEGRAMMENI
-unicode_case_folding(0x1FBE, 'C', [0x03B9]).					% GREEK PROSGEGRAMMENI
-unicode_case_folding(0x1FC2, 'F', [0x1F74, 0x03B9]).			% GREEK SMALL LETTER ETA WITH VARIA AND YPOGEGRAMMENI
-unicode_case_folding(0x1FC3, 'F', [0x03B7, 0x03B9]).			% GREEK SMALL LETTER ETA WITH YPOGEGRAMMENI
-unicode_case_folding(0x1FC4, 'F', [0x03AE, 0x03B9]).			% GREEK SMALL LETTER ETA WITH OXIA AND YPOGEGRAMMENI
-unicode_case_folding(0x1FC6, 'F', [0x03B7, 0x0342]).			% GREEK SMALL LETTER ETA WITH PERISPOMENI
-unicode_case_folding(0x1FC7, 'F', [0x03B7, 0x0342, 0x03B9]).	% GREEK SMALL LETTER ETA WITH PERISPOMENI AND YPOGEGRAMMENI
-unicode_case_folding(0x1FC8, 'C', [0x1F72]).					% GREEK CAPITAL LETTER EPSILON WITH VARIA
-unicode_case_folding(0x1FC9, 'C', [0x1F73]).					% GREEK CAPITAL LETTER EPSILON WITH OXIA
-unicode_case_folding(0x1FCA, 'C', [0x1F74]).					% GREEK CAPITAL LETTER ETA WITH VARIA
-unicode_case_folding(0x1FCB, 'C', [0x1F75]).					% GREEK CAPITAL LETTER ETA WITH OXIA
-unicode_case_folding(0x1FCC, 'F', [0x03B7, 0x03B9]).			% GREEK CAPITAL LETTER ETA WITH PROSGEGRAMMENI
-unicode_case_folding(0x1FCC, 'S', [0x1FC3]).					% GREEK CAPITAL LETTER ETA WITH PROSGEGRAMMENI
-unicode_case_folding(0x1FD2, 'F', [0x03B9, 0x0308, 0x0300]).	% GREEK SMALL LETTER IOTA WITH DIALYTIKA AND VARIA
-unicode_case_folding(0x1FD3, 'F', [0x03B9, 0x0308, 0x0301]).	% GREEK SMALL LETTER IOTA WITH DIALYTIKA AND OXIA
-unicode_case_folding(0x1FD6, 'F', [0x03B9, 0x0342]).			% GREEK SMALL LETTER IOTA WITH PERISPOMENI
-unicode_case_folding(0x1FD7, 'F', [0x03B9, 0x0308, 0x0342]).	% GREEK SMALL LETTER IOTA WITH DIALYTIKA AND PERISPOMENI
-unicode_case_folding(0x1FD8, 'C', [0x1FD0]).					% GREEK CAPITAL LETTER IOTA WITH VRACHY
-unicode_case_folding(0x1FD9, 'C', [0x1FD1]).					% GREEK CAPITAL LETTER IOTA WITH MACRON
-unicode_case_folding(0x1FDA, 'C', [0x1F76]).					% GREEK CAPITAL LETTER IOTA WITH VARIA
-unicode_case_folding(0x1FDB, 'C', [0x1F77]).					% GREEK CAPITAL LETTER IOTA WITH OXIA
-unicode_case_folding(0x1FE2, 'F', [0x03C5, 0x0308, 0x0300]).	% GREEK SMALL LETTER UPSILON WITH DIALYTIKA AND VARIA
-unicode_case_folding(0x1FE3, 'F', [0x03C5, 0x0308, 0x0301]).	% GREEK SMALL LETTER UPSILON WITH DIALYTIKA AND OXIA
-unicode_case_folding(0x1FE4, 'F', [0x03C1, 0x0313]).			% GREEK SMALL LETTER RHO WITH PSILI
-unicode_case_folding(0x1FE6, 'F', [0x03C5, 0x0342]).			% GREEK SMALL LETTER UPSILON WITH PERISPOMENI
-unicode_case_folding(0x1FE7, 'F', [0x03C5, 0x0308, 0x0342]).	% GREEK SMALL LETTER UPSILON WITH DIALYTIKA AND PERISPOMENI
-unicode_case_folding(0x1FE8, 'C', [0x1FE0]).					% GREEK CAPITAL LETTER UPSILON WITH VRACHY
-unicode_case_folding(0x1FE9, 'C', [0x1FE1]).					% GREEK CAPITAL LETTER UPSILON WITH MACRON
-unicode_case_folding(0x1FEA, 'C', [0x1F7A]).					% GREEK CAPITAL LETTER UPSILON WITH VARIA
-unicode_case_folding(0x1FEB, 'C', [0x1F7B]).					% GREEK CAPITAL LETTER UPSILON WITH OXIA
-unicode_case_folding(0x1FEC, 'C', [0x1FE5]).					% GREEK CAPITAL LETTER RHO WITH DASIA
-unicode_case_folding(0x1FF2, 'F', [0x1F7C, 0x03B9]).			% GREEK SMALL LETTER OMEGA WITH VARIA AND YPOGEGRAMMENI
-unicode_case_folding(0x1FF3, 'F', [0x03C9, 0x03B9]).			% GREEK SMALL LETTER OMEGA WITH YPOGEGRAMMENI
-unicode_case_folding(0x1FF4, 'F', [0x03CE, 0x03B9]).			% GREEK SMALL LETTER OMEGA WITH OXIA AND YPOGEGRAMMENI
-unicode_case_folding(0x1FF6, 'F', [0x03C9, 0x0342]).			% GREEK SMALL LETTER OMEGA WITH PERISPOMENI
-unicode_case_folding(0x1FF7, 'F', [0x03C9, 0x0342, 0x03B9]).	% GREEK SMALL LETTER OMEGA WITH PERISPOMENI AND YPOGEGRAMMENI
-unicode_case_folding(0x1FF8, 'C', [0x1F78]).					% GREEK CAPITAL LETTER OMICRON WITH VARIA
-unicode_case_folding(0x1FF9, 'C', [0x1F79]).					% GREEK CAPITAL LETTER OMICRON WITH OXIA
-unicode_case_folding(0x1FFA, 'C', [0x1F7C]).					% GREEK CAPITAL LETTER OMEGA WITH VARIA
-unicode_case_folding(0x1FFB, 'C', [0x1F7D]).					% GREEK CAPITAL LETTER OMEGA WITH OXIA
-unicode_case_folding(0x1FFC, 'F', [0x03C9, 0x03B9]).			% GREEK CAPITAL LETTER OMEGA WITH PROSGEGRAMMENI
-unicode_case_folding(0x1FFC, 'S', [0x1FF3]).					% GREEK CAPITAL LETTER OMEGA WITH PROSGEGRAMMENI
-unicode_case_folding(0x2126, 'C', [0x03C9]).					% OHM SIGN
-unicode_case_folding(0x212A, 'C', [0x006B]).					% KELVIN SIGN
-unicode_case_folding(0x212B, 'C', [0x00E5]).					% ANGSTROM SIGN
-unicode_case_folding(0x2132, 'C', [0x214E]).					% TURNED CAPITAL F
-unicode_case_folding(0x2160, 'C', [0x2170]).					% ROMAN NUMERAL ONE
-unicode_case_folding(0x2161, 'C', [0x2171]).					% ROMAN NUMERAL TWO
-unicode_case_folding(0x2162, 'C', [0x2172]).					% ROMAN NUMERAL THREE
-unicode_case_folding(0x2163, 'C', [0x2173]).					% ROMAN NUMERAL FOUR
-unicode_case_folding(0x2164, 'C', [0x2174]).					% ROMAN NUMERAL FIVE
-unicode_case_folding(0x2165, 'C', [0x2175]).					% ROMAN NUMERAL SIX
-unicode_case_folding(0x2166, 'C', [0x2176]).					% ROMAN NUMERAL SEVEN
-unicode_case_folding(0x2167, 'C', [0x2177]).					% ROMAN NUMERAL EIGHT
-unicode_case_folding(0x2168, 'C', [0x2178]).					% ROMAN NUMERAL NINE
-unicode_case_folding(0x2169, 'C', [0x2179]).					% ROMAN NUMERAL TEN
-unicode_case_folding(0x216A, 'C', [0x217A]).					% ROMAN NUMERAL ELEVEN
-unicode_case_folding(0x216B, 'C', [0x217B]).					% ROMAN NUMERAL TWELVE
-unicode_case_folding(0x216C, 'C', [0x217C]).					% ROMAN NUMERAL FIFTY
-unicode_case_folding(0x216D, 'C', [0x217D]).					% ROMAN NUMERAL ONE HUNDRED
-unicode_case_folding(0x216E, 'C', [0x217E]).					% ROMAN NUMERAL FIVE HUNDRED
-unicode_case_folding(0x216F, 'C', [0x217F]).					% ROMAN NUMERAL ONE THOUSAND
-unicode_case_folding(0x2183, 'C', [0x2184]).					% ROMAN NUMERAL REVERSED ONE HUNDRED
-unicode_case_folding(0x24B6, 'C', [0x24D0]).					% CIRCLED LATIN CAPITAL LETTER A
-unicode_case_folding(0x24B7, 'C', [0x24D1]).					% CIRCLED LATIN CAPITAL LETTER B
-unicode_case_folding(0x24B8, 'C', [0x24D2]).					% CIRCLED LATIN CAPITAL LETTER C
-unicode_case_folding(0x24B9, 'C', [0x24D3]).					% CIRCLED LATIN CAPITAL LETTER D
-unicode_case_folding(0x24BA, 'C', [0x24D4]).					% CIRCLED LATIN CAPITAL LETTER E
-unicode_case_folding(0x24BB, 'C', [0x24D5]).					% CIRCLED LATIN CAPITAL LETTER F
-unicode_case_folding(0x24BC, 'C', [0x24D6]).					% CIRCLED LATIN CAPITAL LETTER G
-unicode_case_folding(0x24BD, 'C', [0x24D7]).					% CIRCLED LATIN CAPITAL LETTER H
-unicode_case_folding(0x24BE, 'C', [0x24D8]).					% CIRCLED LATIN CAPITAL LETTER I
-unicode_case_folding(0x24BF, 'C', [0x24D9]).					% CIRCLED LATIN CAPITAL LETTER J
-unicode_case_folding(0x24C0, 'C', [0x24DA]).					% CIRCLED LATIN CAPITAL LETTER K
-unicode_case_folding(0x24C1, 'C', [0x24DB]).					% CIRCLED LATIN CAPITAL LETTER L
-unicode_case_folding(0x24C2, 'C', [0x24DC]).					% CIRCLED LATIN CAPITAL LETTER M
-unicode_case_folding(0x24C3, 'C', [0x24DD]).					% CIRCLED LATIN CAPITAL LETTER N
-unicode_case_folding(0x24C4, 'C', [0x24DE]).					% CIRCLED LATIN CAPITAL LETTER O
-unicode_case_folding(0x24C5, 'C', [0x24DF]).					% CIRCLED LATIN CAPITAL LETTER P
-unicode_case_folding(0x24C6, 'C', [0x24E0]).					% CIRCLED LATIN CAPITAL LETTER Q
-unicode_case_folding(0x24C7, 'C', [0x24E1]).					% CIRCLED LATIN CAPITAL LETTER R
-unicode_case_folding(0x24C8, 'C', [0x24E2]).					% CIRCLED LATIN CAPITAL LETTER S
-unicode_case_folding(0x24C9, 'C', [0x24E3]).					% CIRCLED LATIN CAPITAL LETTER T
-unicode_case_folding(0x24CA, 'C', [0x24E4]).					% CIRCLED LATIN CAPITAL LETTER U
-unicode_case_folding(0x24CB, 'C', [0x24E5]).					% CIRCLED LATIN CAPITAL LETTER V
-unicode_case_folding(0x24CC, 'C', [0x24E6]).					% CIRCLED LATIN CAPITAL LETTER W
-unicode_case_folding(0x24CD, 'C', [0x24E7]).					% CIRCLED LATIN CAPITAL LETTER X
-unicode_case_folding(0x24CE, 'C', [0x24E8]).					% CIRCLED LATIN CAPITAL LETTER Y
-unicode_case_folding(0x24CF, 'C', [0x24E9]).					% CIRCLED LATIN CAPITAL LETTER Z
-unicode_case_folding(0x2C00, 'C', [0x2C30]).					% GLAGOLITIC CAPITAL LETTER AZU
-unicode_case_folding(0x2C01, 'C', [0x2C31]).					% GLAGOLITIC CAPITAL LETTER BUKY
-unicode_case_folding(0x2C02, 'C', [0x2C32]).					% GLAGOLITIC CAPITAL LETTER VEDE
-unicode_case_folding(0x2C03, 'C', [0x2C33]).					% GLAGOLITIC CAPITAL LETTER GLAGOLI
-unicode_case_folding(0x2C04, 'C', [0x2C34]).					% GLAGOLITIC CAPITAL LETTER DOBRO
-unicode_case_folding(0x2C05, 'C', [0x2C35]).					% GLAGOLITIC CAPITAL LETTER YESTU
-unicode_case_folding(0x2C06, 'C', [0x2C36]).					% GLAGOLITIC CAPITAL LETTER ZHIVETE
-unicode_case_folding(0x2C07, 'C', [0x2C37]).					% GLAGOLITIC CAPITAL LETTER DZELO
-unicode_case_folding(0x2C08, 'C', [0x2C38]).					% GLAGOLITIC CAPITAL LETTER ZEMLJA
-unicode_case_folding(0x2C09, 'C', [0x2C39]).					% GLAGOLITIC CAPITAL LETTER IZHE
-unicode_case_folding(0x2C0A, 'C', [0x2C3A]).					% GLAGOLITIC CAPITAL LETTER INITIAL IZHE
-unicode_case_folding(0x2C0B, 'C', [0x2C3B]).					% GLAGOLITIC CAPITAL LETTER I
-unicode_case_folding(0x2C0C, 'C', [0x2C3C]).					% GLAGOLITIC CAPITAL LETTER DJERVI
-unicode_case_folding(0x2C0D, 'C', [0x2C3D]).					% GLAGOLITIC CAPITAL LETTER KAKO
-unicode_case_folding(0x2C0E, 'C', [0x2C3E]).					% GLAGOLITIC CAPITAL LETTER LJUDIJE
-unicode_case_folding(0x2C0F, 'C', [0x2C3F]).					% GLAGOLITIC CAPITAL LETTER MYSLITE
-unicode_case_folding(0x2C10, 'C', [0x2C40]).					% GLAGOLITIC CAPITAL LETTER NASHI
-unicode_case_folding(0x2C11, 'C', [0x2C41]).					% GLAGOLITIC CAPITAL LETTER ONU
-unicode_case_folding(0x2C12, 'C', [0x2C42]).					% GLAGOLITIC CAPITAL LETTER POKOJI
-unicode_case_folding(0x2C13, 'C', [0x2C43]).					% GLAGOLITIC CAPITAL LETTER RITSI
-unicode_case_folding(0x2C14, 'C', [0x2C44]).					% GLAGOLITIC CAPITAL LETTER SLOVO
-unicode_case_folding(0x2C15, 'C', [0x2C45]).					% GLAGOLITIC CAPITAL LETTER TVRIDO
-unicode_case_folding(0x2C16, 'C', [0x2C46]).					% GLAGOLITIC CAPITAL LETTER UKU
-unicode_case_folding(0x2C17, 'C', [0x2C47]).					% GLAGOLITIC CAPITAL LETTER FRITU
-unicode_case_folding(0x2C18, 'C', [0x2C48]).					% GLAGOLITIC CAPITAL LETTER HERU
-unicode_case_folding(0x2C19, 'C', [0x2C49]).					% GLAGOLITIC CAPITAL LETTER OTU
-unicode_case_folding(0x2C1A, 'C', [0x2C4A]).					% GLAGOLITIC CAPITAL LETTER PE
-unicode_case_folding(0x2C1B, 'C', [0x2C4B]).					% GLAGOLITIC CAPITAL LETTER SHTA
-unicode_case_folding(0x2C1C, 'C', [0x2C4C]).					% GLAGOLITIC CAPITAL LETTER TSI
-unicode_case_folding(0x2C1D, 'C', [0x2C4D]).					% GLAGOLITIC CAPITAL LETTER CHRIVI
-unicode_case_folding(0x2C1E, 'C', [0x2C4E]).					% GLAGOLITIC CAPITAL LETTER SHA
-unicode_case_folding(0x2C1F, 'C', [0x2C4F]).					% GLAGOLITIC CAPITAL LETTER YERU
-unicode_case_folding(0x2C20, 'C', [0x2C50]).					% GLAGOLITIC CAPITAL LETTER YERI
-unicode_case_folding(0x2C21, 'C', [0x2C51]).					% GLAGOLITIC CAPITAL LETTER YATI
-unicode_case_folding(0x2C22, 'C', [0x2C52]).					% GLAGOLITIC CAPITAL LETTER SPIDERY HA
-unicode_case_folding(0x2C23, 'C', [0x2C53]).					% GLAGOLITIC CAPITAL LETTER YU
-unicode_case_folding(0x2C24, 'C', [0x2C54]).					% GLAGOLITIC CAPITAL LETTER SMALL YUS
-unicode_case_folding(0x2C25, 'C', [0x2C55]).					% GLAGOLITIC CAPITAL LETTER SMALL YUS WITH TAIL
-unicode_case_folding(0x2C26, 'C', [0x2C56]).					% GLAGOLITIC CAPITAL LETTER YO
-unicode_case_folding(0x2C27, 'C', [0x2C57]).					% GLAGOLITIC CAPITAL LETTER IOTATED SMALL YUS
-unicode_case_folding(0x2C28, 'C', [0x2C58]).					% GLAGOLITIC CAPITAL LETTER BIG YUS
-unicode_case_folding(0x2C29, 'C', [0x2C59]).					% GLAGOLITIC CAPITAL LETTER IOTATED BIG YUS
-unicode_case_folding(0x2C2A, 'C', [0x2C5A]).					% GLAGOLITIC CAPITAL LETTER FITA
-unicode_case_folding(0x2C2B, 'C', [0x2C5B]).					% GLAGOLITIC CAPITAL LETTER IZHITSA
-unicode_case_folding(0x2C2C, 'C', [0x2C5C]).					% GLAGOLITIC CAPITAL LETTER SHTAPIC
-unicode_case_folding(0x2C2D, 'C', [0x2C5D]).					% GLAGOLITIC CAPITAL LETTER TROKUTASTI A
-unicode_case_folding(0x2C2E, 'C', [0x2C5E]).					% GLAGOLITIC CAPITAL LETTER LATINATE MYSLITE
-unicode_case_folding(0x2C60, 'C', [0x2C61]).					% LATIN CAPITAL LETTER L WITH DOUBLE BAR
-unicode_case_folding(0x2C62, 'C', [0x026B]).					% LATIN CAPITAL LETTER L WITH MIDDLE TILDE
-unicode_case_folding(0x2C63, 'C', [0x1D7D]).					% LATIN CAPITAL LETTER P WITH STROKE
-unicode_case_folding(0x2C64, 'C', [0x027D]).					% LATIN CAPITAL LETTER R WITH TAIL
-unicode_case_folding(0x2C67, 'C', [0x2C68]).					% LATIN CAPITAL LETTER H WITH DESCENDER
-unicode_case_folding(0x2C69, 'C', [0x2C6A]).					% LATIN CAPITAL LETTER K WITH DESCENDER
-unicode_case_folding(0x2C6B, 'C', [0x2C6C]).					% LATIN CAPITAL LETTER Z WITH DESCENDER
-unicode_case_folding(0x2C6D, 'C', [0x0251]).					% LATIN CAPITAL LETTER ALPHA
-unicode_case_folding(0x2C6E, 'C', [0x0271]).					% LATIN CAPITAL LETTER M WITH HOOK
-unicode_case_folding(0x2C6F, 'C', [0x0250]).					% LATIN CAPITAL LETTER TURNED A
-unicode_case_folding(0x2C70, 'C', [0x0252]).					% LATIN CAPITAL LETTER TURNED ALPHA
-unicode_case_folding(0x2C72, 'C', [0x2C73]).					% LATIN CAPITAL LETTER W WITH HOOK
-unicode_case_folding(0x2C75, 'C', [0x2C76]).					% LATIN CAPITAL LETTER HALF H
-unicode_case_folding(0x2C7E, 'C', [0x023F]).					% LATIN CAPITAL LETTER S WITH SWASH TAIL
-unicode_case_folding(0x2C7F, 'C', [0x0240]).					% LATIN CAPITAL LETTER Z WITH SWASH TAIL
-unicode_case_folding(0x2C80, 'C', [0x2C81]).					% COPTIC CAPITAL LETTER ALFA
-unicode_case_folding(0x2C82, 'C', [0x2C83]).					% COPTIC CAPITAL LETTER VIDA
-unicode_case_folding(0x2C84, 'C', [0x2C85]).					% COPTIC CAPITAL LETTER GAMMA
-unicode_case_folding(0x2C86, 'C', [0x2C87]).					% COPTIC CAPITAL LETTER DALDA
-unicode_case_folding(0x2C88, 'C', [0x2C89]).					% COPTIC CAPITAL LETTER EIE
-unicode_case_folding(0x2C8A, 'C', [0x2C8B]).					% COPTIC CAPITAL LETTER SOU
-unicode_case_folding(0x2C8C, 'C', [0x2C8D]).					% COPTIC CAPITAL LETTER ZATA
-unicode_case_folding(0x2C8E, 'C', [0x2C8F]).					% COPTIC CAPITAL LETTER HATE
-unicode_case_folding(0x2C90, 'C', [0x2C91]).					% COPTIC CAPITAL LETTER THETHE
-unicode_case_folding(0x2C92, 'C', [0x2C93]).					% COPTIC CAPITAL LETTER IAUDA
-unicode_case_folding(0x2C94, 'C', [0x2C95]).					% COPTIC CAPITAL LETTER KAPA
-unicode_case_folding(0x2C96, 'C', [0x2C97]).					% COPTIC CAPITAL LETTER LAULA
-unicode_case_folding(0x2C98, 'C', [0x2C99]).					% COPTIC CAPITAL LETTER MI
-unicode_case_folding(0x2C9A, 'C', [0x2C9B]).					% COPTIC CAPITAL LETTER NI
-unicode_case_folding(0x2C9C, 'C', [0x2C9D]).					% COPTIC CAPITAL LETTER KSI
-unicode_case_folding(0x2C9E, 'C', [0x2C9F]).					% COPTIC CAPITAL LETTER O
-unicode_case_folding(0x2CA0, 'C', [0x2CA1]).					% COPTIC CAPITAL LETTER PI
-unicode_case_folding(0x2CA2, 'C', [0x2CA3]).					% COPTIC CAPITAL LETTER RO
-unicode_case_folding(0x2CA4, 'C', [0x2CA5]).					% COPTIC CAPITAL LETTER SIMA
-unicode_case_folding(0x2CA6, 'C', [0x2CA7]).					% COPTIC CAPITAL LETTER TAU
-unicode_case_folding(0x2CA8, 'C', [0x2CA9]).					% COPTIC CAPITAL LETTER UA
-unicode_case_folding(0x2CAA, 'C', [0x2CAB]).					% COPTIC CAPITAL LETTER FI
-unicode_case_folding(0x2CAC, 'C', [0x2CAD]).					% COPTIC CAPITAL LETTER KHI
-unicode_case_folding(0x2CAE, 'C', [0x2CAF]).					% COPTIC CAPITAL LETTER PSI
-unicode_case_folding(0x2CB0, 'C', [0x2CB1]).					% COPTIC CAPITAL LETTER OOU
-unicode_case_folding(0x2CB2, 'C', [0x2CB3]).					% COPTIC CAPITAL LETTER DIALECT-P ALEF
-unicode_case_folding(0x2CB4, 'C', [0x2CB5]).					% COPTIC CAPITAL LETTER OLD COPTIC AIN
-unicode_case_folding(0x2CB6, 'C', [0x2CB7]).					% COPTIC CAPITAL LETTER CRYPTOGRAMMIC EIE
-unicode_case_folding(0x2CB8, 'C', [0x2CB9]).					% COPTIC CAPITAL LETTER DIALECT-P KAPA
-unicode_case_folding(0x2CBA, 'C', [0x2CBB]).					% COPTIC CAPITAL LETTER DIALECT-P NI
-unicode_case_folding(0x2CBC, 'C', [0x2CBD]).					% COPTIC CAPITAL LETTER CRYPTOGRAMMIC NI
-unicode_case_folding(0x2CBE, 'C', [0x2CBF]).					% COPTIC CAPITAL LETTER OLD COPTIC OOU
-unicode_case_folding(0x2CC0, 'C', [0x2CC1]).					% COPTIC CAPITAL LETTER SAMPI
-unicode_case_folding(0x2CC2, 'C', [0x2CC3]).					% COPTIC CAPITAL LETTER CROSSED SHEI
-unicode_case_folding(0x2CC4, 'C', [0x2CC5]).					% COPTIC CAPITAL LETTER OLD COPTIC SHEI
-unicode_case_folding(0x2CC6, 'C', [0x2CC7]).					% COPTIC CAPITAL LETTER OLD COPTIC ESH
-unicode_case_folding(0x2CC8, 'C', [0x2CC9]).					% COPTIC CAPITAL LETTER AKHMIMIC KHEI
-unicode_case_folding(0x2CCA, 'C', [0x2CCB]).					% COPTIC CAPITAL LETTER DIALECT-P HORI
-unicode_case_folding(0x2CCC, 'C', [0x2CCD]).					% COPTIC CAPITAL LETTER OLD COPTIC HORI
-unicode_case_folding(0x2CCE, 'C', [0x2CCF]).					% COPTIC CAPITAL LETTER OLD COPTIC HA
-unicode_case_folding(0x2CD0, 'C', [0x2CD1]).					% COPTIC CAPITAL LETTER L-SHAPED HA
-unicode_case_folding(0x2CD2, 'C', [0x2CD3]).					% COPTIC CAPITAL LETTER OLD COPTIC HEI
-unicode_case_folding(0x2CD4, 'C', [0x2CD5]).					% COPTIC CAPITAL LETTER OLD COPTIC HAT
-unicode_case_folding(0x2CD6, 'C', [0x2CD7]).					% COPTIC CAPITAL LETTER OLD COPTIC GANGIA
-unicode_case_folding(0x2CD8, 'C', [0x2CD9]).					% COPTIC CAPITAL LETTER OLD COPTIC DJA
-unicode_case_folding(0x2CDA, 'C', [0x2CDB]).					% COPTIC CAPITAL LETTER OLD COPTIC SHIMA
-unicode_case_folding(0x2CDC, 'C', [0x2CDD]).					% COPTIC CAPITAL LETTER OLD NUBIAN SHIMA
-unicode_case_folding(0x2CDE, 'C', [0x2CDF]).					% COPTIC CAPITAL LETTER OLD NUBIAN NGI
-unicode_case_folding(0x2CE0, 'C', [0x2CE1]).					% COPTIC CAPITAL LETTER OLD NUBIAN NYI
-unicode_case_folding(0x2CE2, 'C', [0x2CE3]).					% COPTIC CAPITAL LETTER OLD NUBIAN WAU
-unicode_case_folding(0x2CEB, 'C', [0x2CEC]).					% COPTIC CAPITAL LETTER CRYPTOGRAMMIC SHEI
-unicode_case_folding(0x2CED, 'C', [0x2CEE]).					% COPTIC CAPITAL LETTER CRYPTOGRAMMIC GANGIA
-unicode_case_folding(0x2CF2, 'C', [0x2CF3]).					% COPTIC CAPITAL LETTER BOHAIRIC KHEI
-unicode_case_folding(0xA640, 'C', [0xA641]).					% CYRILLIC CAPITAL LETTER ZEMLYA
-unicode_case_folding(0xA642, 'C', [0xA643]).					% CYRILLIC CAPITAL LETTER DZELO
-unicode_case_folding(0xA644, 'C', [0xA645]).					% CYRILLIC CAPITAL LETTER REVERSED DZE
-unicode_case_folding(0xA646, 'C', [0xA647]).					% CYRILLIC CAPITAL LETTER IOTA
-unicode_case_folding(0xA648, 'C', [0xA649]).					% CYRILLIC CAPITAL LETTER DJERV
-unicode_case_folding(0xA64A, 'C', [0xA64B]).					% CYRILLIC CAPITAL LETTER MONOGRAPH UK
-unicode_case_folding(0xA64C, 'C', [0xA64D]).					% CYRILLIC CAPITAL LETTER BROAD OMEGA
-unicode_case_folding(0xA64E, 'C', [0xA64F]).					% CYRILLIC CAPITAL LETTER NEUTRAL YER
-unicode_case_folding(0xA650, 'C', [0xA651]).					% CYRILLIC CAPITAL LETTER YERU WITH BACK YER
-unicode_case_folding(0xA652, 'C', [0xA653]).					% CYRILLIC CAPITAL LETTER IOTIFIED YAT
-unicode_case_folding(0xA654, 'C', [0xA655]).					% CYRILLIC CAPITAL LETTER REVERSED YU
-unicode_case_folding(0xA656, 'C', [0xA657]).					% CYRILLIC CAPITAL LETTER IOTIFIED A
-unicode_case_folding(0xA658, 'C', [0xA659]).					% CYRILLIC CAPITAL LETTER CLOSED LITTLE YUS
-unicode_case_folding(0xA65A, 'C', [0xA65B]).					% CYRILLIC CAPITAL LETTER BLENDED YUS
-unicode_case_folding(0xA65C, 'C', [0xA65D]).					% CYRILLIC CAPITAL LETTER IOTIFIED CLOSED LITTLE YUS
-unicode_case_folding(0xA65E, 'C', [0xA65F]).					% CYRILLIC CAPITAL LETTER YN
-unicode_case_folding(0xA660, 'C', [0xA661]).					% CYRILLIC CAPITAL LETTER REVERSED TSE
-unicode_case_folding(0xA662, 'C', [0xA663]).					% CYRILLIC CAPITAL LETTER SOFT DE
-unicode_case_folding(0xA664, 'C', [0xA665]).					% CYRILLIC CAPITAL LETTER SOFT EL
-unicode_case_folding(0xA666, 'C', [0xA667]).					% CYRILLIC CAPITAL LETTER SOFT EM
-unicode_case_folding(0xA668, 'C', [0xA669]).					% CYRILLIC CAPITAL LETTER MONOCULAR O
-unicode_case_folding(0xA66A, 'C', [0xA66B]).					% CYRILLIC CAPITAL LETTER BINOCULAR O
-unicode_case_folding(0xA66C, 'C', [0xA66D]).					% CYRILLIC CAPITAL LETTER DOUBLE MONOCULAR O
-unicode_case_folding(0xA680, 'C', [0xA681]).					% CYRILLIC CAPITAL LETTER DWE
-unicode_case_folding(0xA682, 'C', [0xA683]).					% CYRILLIC CAPITAL LETTER DZWE
-unicode_case_folding(0xA684, 'C', [0xA685]).					% CYRILLIC CAPITAL LETTER ZHWE
-unicode_case_folding(0xA686, 'C', [0xA687]).					% CYRILLIC CAPITAL LETTER CCHE
-unicode_case_folding(0xA688, 'C', [0xA689]).					% CYRILLIC CAPITAL LETTER DZZE
-unicode_case_folding(0xA68A, 'C', [0xA68B]).					% CYRILLIC CAPITAL LETTER TE WITH MIDDLE HOOK
-unicode_case_folding(0xA68C, 'C', [0xA68D]).					% CYRILLIC CAPITAL LETTER TWE
-unicode_case_folding(0xA68E, 'C', [0xA68F]).					% CYRILLIC CAPITAL LETTER TSWE
-unicode_case_folding(0xA690, 'C', [0xA691]).					% CYRILLIC CAPITAL LETTER TSSE
-unicode_case_folding(0xA692, 'C', [0xA693]).					% CYRILLIC CAPITAL LETTER TCHE
-unicode_case_folding(0xA694, 'C', [0xA695]).					% CYRILLIC CAPITAL LETTER HWE
-unicode_case_folding(0xA696, 'C', [0xA697]).					% CYRILLIC CAPITAL LETTER SHWE
-unicode_case_folding(0xA722, 'C', [0xA723]).					% LATIN CAPITAL LETTER EGYPTOLOGICAL ALEF
-unicode_case_folding(0xA724, 'C', [0xA725]).					% LATIN CAPITAL LETTER EGYPTOLOGICAL AIN
-unicode_case_folding(0xA726, 'C', [0xA727]).					% LATIN CAPITAL LETTER HENG
-unicode_case_folding(0xA728, 'C', [0xA729]).					% LATIN CAPITAL LETTER TZ
-unicode_case_folding(0xA72A, 'C', [0xA72B]).					% LATIN CAPITAL LETTER TRESILLO
-unicode_case_folding(0xA72C, 'C', [0xA72D]).					% LATIN CAPITAL LETTER CUATRILLO
-unicode_case_folding(0xA72E, 'C', [0xA72F]).					% LATIN CAPITAL LETTER CUATRILLO WITH COMMA
-unicode_case_folding(0xA732, 'C', [0xA733]).					% LATIN CAPITAL LETTER AA
-unicode_case_folding(0xA734, 'C', [0xA735]).					% LATIN CAPITAL LETTER AO
-unicode_case_folding(0xA736, 'C', [0xA737]).					% LATIN CAPITAL LETTER AU
-unicode_case_folding(0xA738, 'C', [0xA739]).					% LATIN CAPITAL LETTER AV
-unicode_case_folding(0xA73A, 'C', [0xA73B]).					% LATIN CAPITAL LETTER AV WITH HORIZONTAL BAR
-unicode_case_folding(0xA73C, 'C', [0xA73D]).					% LATIN CAPITAL LETTER AY
-unicode_case_folding(0xA73E, 'C', [0xA73F]).					% LATIN CAPITAL LETTER REVERSED C WITH DOT
-unicode_case_folding(0xA740, 'C', [0xA741]).					% LATIN CAPITAL LETTER K WITH STROKE
-unicode_case_folding(0xA742, 'C', [0xA743]).					% LATIN CAPITAL LETTER K WITH DIAGONAL STROKE
-unicode_case_folding(0xA744, 'C', [0xA745]).					% LATIN CAPITAL LETTER K WITH STROKE AND DIAGONAL STROKE
-unicode_case_folding(0xA746, 'C', [0xA747]).					% LATIN CAPITAL LETTER BROKEN L
-unicode_case_folding(0xA748, 'C', [0xA749]).					% LATIN CAPITAL LETTER L WITH HIGH STROKE
-unicode_case_folding(0xA74A, 'C', [0xA74B]).					% LATIN CAPITAL LETTER O WITH LONG STROKE OVERLAY
-unicode_case_folding(0xA74C, 'C', [0xA74D]).					% LATIN CAPITAL LETTER O WITH LOOP
-unicode_case_folding(0xA74E, 'C', [0xA74F]).					% LATIN CAPITAL LETTER OO
-unicode_case_folding(0xA750, 'C', [0xA751]).					% LATIN CAPITAL LETTER P WITH STROKE THROUGH DESCENDER
-unicode_case_folding(0xA752, 'C', [0xA753]).					% LATIN CAPITAL LETTER P WITH FLOURISH
-unicode_case_folding(0xA754, 'C', [0xA755]).					% LATIN CAPITAL LETTER P WITH SQUIRREL TAIL
-unicode_case_folding(0xA756, 'C', [0xA757]).					% LATIN CAPITAL LETTER Q WITH STROKE THROUGH DESCENDER
-unicode_case_folding(0xA758, 'C', [0xA759]).					% LATIN CAPITAL LETTER Q WITH DIAGONAL STROKE
-unicode_case_folding(0xA75A, 'C', [0xA75B]).					% LATIN CAPITAL LETTER R ROTUNDA
-unicode_case_folding(0xA75C, 'C', [0xA75D]).					% LATIN CAPITAL LETTER RUM ROTUNDA
-unicode_case_folding(0xA75E, 'C', [0xA75F]).					% LATIN CAPITAL LETTER V WITH DIAGONAL STROKE
-unicode_case_folding(0xA760, 'C', [0xA761]).					% LATIN CAPITAL LETTER VY
-unicode_case_folding(0xA762, 'C', [0xA763]).					% LATIN CAPITAL LETTER VISIGOTHIC Z
-unicode_case_folding(0xA764, 'C', [0xA765]).					% LATIN CAPITAL LETTER THORN WITH STROKE
-unicode_case_folding(0xA766, 'C', [0xA767]).					% LATIN CAPITAL LETTER THORN WITH STROKE THROUGH DESCENDER
-unicode_case_folding(0xA768, 'C', [0xA769]).					% LATIN CAPITAL LETTER VEND
-unicode_case_folding(0xA76A, 'C', [0xA76B]).					% LATIN CAPITAL LETTER ET
-unicode_case_folding(0xA76C, 'C', [0xA76D]).					% LATIN CAPITAL LETTER IS
-unicode_case_folding(0xA76E, 'C', [0xA76F]).					% LATIN CAPITAL LETTER CON
-unicode_case_folding(0xA779, 'C', [0xA77A]).					% LATIN CAPITAL LETTER INSULAR D
-unicode_case_folding(0xA77B, 'C', [0xA77C]).					% LATIN CAPITAL LETTER INSULAR F
-unicode_case_folding(0xA77D, 'C', [0x1D79]).					% LATIN CAPITAL LETTER INSULAR G
-unicode_case_folding(0xA77E, 'C', [0xA77F]).					% LATIN CAPITAL LETTER TURNED INSULAR G
-unicode_case_folding(0xA780, 'C', [0xA781]).					% LATIN CAPITAL LETTER TURNED L
-unicode_case_folding(0xA782, 'C', [0xA783]).					% LATIN CAPITAL LETTER INSULAR R
-unicode_case_folding(0xA784, 'C', [0xA785]).					% LATIN CAPITAL LETTER INSULAR S
-unicode_case_folding(0xA786, 'C', [0xA787]).					% LATIN CAPITAL LETTER INSULAR T
-unicode_case_folding(0xA78B, 'C', [0xA78C]).					% LATIN CAPITAL LETTER SALTILLO
-unicode_case_folding(0xA78D, 'C', [0x0265]).					% LATIN CAPITAL LETTER TURNED H
-unicode_case_folding(0xA790, 'C', [0xA791]).					% LATIN CAPITAL LETTER N WITH DESCENDER
-unicode_case_folding(0xA792, 'C', [0xA793]).					% LATIN CAPITAL LETTER C WITH BAR
-unicode_case_folding(0xA7A0, 'C', [0xA7A1]).					% LATIN CAPITAL LETTER G WITH OBLIQUE STROKE
-unicode_case_folding(0xA7A2, 'C', [0xA7A3]).					% LATIN CAPITAL LETTER K WITH OBLIQUE STROKE
-unicode_case_folding(0xA7A4, 'C', [0xA7A5]).					% LATIN CAPITAL LETTER N WITH OBLIQUE STROKE
-unicode_case_folding(0xA7A6, 'C', [0xA7A7]).					% LATIN CAPITAL LETTER R WITH OBLIQUE STROKE
-unicode_case_folding(0xA7A8, 'C', [0xA7A9]).					% LATIN CAPITAL LETTER S WITH OBLIQUE STROKE
-unicode_case_folding(0xA7AA, 'C', [0x0266]).					% LATIN CAPITAL LETTER H WITH HOOK
-unicode_case_folding(0xFB00, 'F', [0x0066, 0x0066]).			% LATIN SMALL LIGATURE FF
-unicode_case_folding(0xFB01, 'F', [0x0066, 0x0069]).			% LATIN SMALL LIGATURE FI
-unicode_case_folding(0xFB02, 'F', [0x0066, 0x006C]).			% LATIN SMALL LIGATURE FL
-unicode_case_folding(0xFB03, 'F', [0x0066, 0x0066, 0x0069]).	% LATIN SMALL LIGATURE FFI
-unicode_case_folding(0xFB04, 'F', [0x0066, 0x0066, 0x006C]).	% LATIN SMALL LIGATURE FFL
-unicode_case_folding(0xFB05, 'F', [0x0073, 0x0074]).			% LATIN SMALL LIGATURE LONG S T
-unicode_case_folding(0xFB06, 'F', [0x0073, 0x0074]).			% LATIN SMALL LIGATURE ST
-unicode_case_folding(0xFB13, 'F', [0x0574, 0x0576]).			% ARMENIAN SMALL LIGATURE MEN NOW
-unicode_case_folding(0xFB14, 'F', [0x0574, 0x0565]).			% ARMENIAN SMALL LIGATURE MEN ECH
-unicode_case_folding(0xFB15, 'F', [0x0574, 0x056B]).			% ARMENIAN SMALL LIGATURE MEN INI
-unicode_case_folding(0xFB16, 'F', [0x057E, 0x0576]).			% ARMENIAN SMALL LIGATURE VEW NOW
-unicode_case_folding(0xFB17, 'F', [0x0574, 0x056D]).			% ARMENIAN SMALL LIGATURE MEN XEH
-unicode_case_folding(0xFF21, 'C', [0xFF41]).					% FULLWIDTH LATIN CAPITAL LETTER A
-unicode_case_folding(0xFF22, 'C', [0xFF42]).					% FULLWIDTH LATIN CAPITAL LETTER B
-unicode_case_folding(0xFF23, 'C', [0xFF43]).					% FULLWIDTH LATIN CAPITAL LETTER C
-unicode_case_folding(0xFF24, 'C', [0xFF44]).					% FULLWIDTH LATIN CAPITAL LETTER D
-unicode_case_folding(0xFF25, 'C', [0xFF45]).					% FULLWIDTH LATIN CAPITAL LETTER E
-unicode_case_folding(0xFF26, 'C', [0xFF46]).					% FULLWIDTH LATIN CAPITAL LETTER F
-unicode_case_folding(0xFF27, 'C', [0xFF47]).					% FULLWIDTH LATIN CAPITAL LETTER G
-unicode_case_folding(0xFF28, 'C', [0xFF48]).					% FULLWIDTH LATIN CAPITAL LETTER H
-unicode_case_folding(0xFF29, 'C', [0xFF49]).					% FULLWIDTH LATIN CAPITAL LETTER I
-unicode_case_folding(0xFF2A, 'C', [0xFF4A]).					% FULLWIDTH LATIN CAPITAL LETTER J
-unicode_case_folding(0xFF2B, 'C', [0xFF4B]).					% FULLWIDTH LATIN CAPITAL LETTER K
-unicode_case_folding(0xFF2C, 'C', [0xFF4C]).					% FULLWIDTH LATIN CAPITAL LETTER L
-unicode_case_folding(0xFF2D, 'C', [0xFF4D]).					% FULLWIDTH LATIN CAPITAL LETTER M
-unicode_case_folding(0xFF2E, 'C', [0xFF4E]).					% FULLWIDTH LATIN CAPITAL LETTER N
-unicode_case_folding(0xFF2F, 'C', [0xFF4F]).					% FULLWIDTH LATIN CAPITAL LETTER O
-unicode_case_folding(0xFF30, 'C', [0xFF50]).					% FULLWIDTH LATIN CAPITAL LETTER P
-unicode_case_folding(0xFF31, 'C', [0xFF51]).					% FULLWIDTH LATIN CAPITAL LETTER Q
-unicode_case_folding(0xFF32, 'C', [0xFF52]).					% FULLWIDTH LATIN CAPITAL LETTER R
-unicode_case_folding(0xFF33, 'C', [0xFF53]).					% FULLWIDTH LATIN CAPITAL LETTER S
-unicode_case_folding(0xFF34, 'C', [0xFF54]).					% FULLWIDTH LATIN CAPITAL LETTER T
-unicode_case_folding(0xFF35, 'C', [0xFF55]).					% FULLWIDTH LATIN CAPITAL LETTER U
-unicode_case_folding(0xFF36, 'C', [0xFF56]).					% FULLWIDTH LATIN CAPITAL LETTER V
-unicode_case_folding(0xFF37, 'C', [0xFF57]).					% FULLWIDTH LATIN CAPITAL LETTER W
-unicode_case_folding(0xFF38, 'C', [0xFF58]).					% FULLWIDTH LATIN CAPITAL LETTER X
-unicode_case_folding(0xFF39, 'C', [0xFF59]).					% FULLWIDTH LATIN CAPITAL LETTER Y
-unicode_case_folding(0xFF3A, 'C', [0xFF5A]).					% FULLWIDTH LATIN CAPITAL LETTER Z
-unicode_case_folding(0x10400, 'C', [0x10428]).				% DESERET CAPITAL LETTER LONG I
-unicode_case_folding(0x10401, 'C', [0x10429]).				% DESERET CAPITAL LETTER LONG E
-unicode_case_folding(0x10402, 'C', [0x1042A]).				% DESERET CAPITAL LETTER LONG A
-unicode_case_folding(0x10403, 'C', [0x1042B]).				% DESERET CAPITAL LETTER LONG AH
-unicode_case_folding(0x10404, 'C', [0x1042C]).				% DESERET CAPITAL LETTER LONG O
-unicode_case_folding(0x10405, 'C', [0x1042D]).				% DESERET CAPITAL LETTER LONG OO
-unicode_case_folding(0x10406, 'C', [0x1042E]).				% DESERET CAPITAL LETTER SHORT I
-unicode_case_folding(0x10407, 'C', [0x1042F]).				% DESERET CAPITAL LETTER SHORT E
-unicode_case_folding(0x10408, 'C', [0x10430]).				% DESERET CAPITAL LETTER SHORT A
-unicode_case_folding(0x10409, 'C', [0x10431]).				% DESERET CAPITAL LETTER SHORT AH
-unicode_case_folding(0x1040A, 'C', [0x10432]).				% DESERET CAPITAL LETTER SHORT O
-unicode_case_folding(0x1040B, 'C', [0x10433]).				% DESERET CAPITAL LETTER SHORT OO
-unicode_case_folding(0x1040C, 'C', [0x10434]).				% DESERET CAPITAL LETTER AY
-unicode_case_folding(0x1040D, 'C', [0x10435]).				% DESERET CAPITAL LETTER OW
-unicode_case_folding(0x1040E, 'C', [0x10436]).				% DESERET CAPITAL LETTER WU
-unicode_case_folding(0x1040F, 'C', [0x10437]).				% DESERET CAPITAL LETTER YEE
-unicode_case_folding(0x10410, 'C', [0x10438]).				% DESERET CAPITAL LETTER H
-unicode_case_folding(0x10411, 'C', [0x10439]).				% DESERET CAPITAL LETTER PEE
-unicode_case_folding(0x10412, 'C', [0x1043A]).				% DESERET CAPITAL LETTER BEE
-unicode_case_folding(0x10413, 'C', [0x1043B]).				% DESERET CAPITAL LETTER TEE
-unicode_case_folding(0x10414, 'C', [0x1043C]).				% DESERET CAPITAL LETTER DEE
-unicode_case_folding(0x10415, 'C', [0x1043D]).				% DESERET CAPITAL LETTER CHEE
-unicode_case_folding(0x10416, 'C', [0x1043E]).				% DESERET CAPITAL LETTER JEE
-unicode_case_folding(0x10417, 'C', [0x1043F]).				% DESERET CAPITAL LETTER KAY
-unicode_case_folding(0x10418, 'C', [0x10440]).				% DESERET CAPITAL LETTER GAY
-unicode_case_folding(0x10419, 'C', [0x10441]).				% DESERET CAPITAL LETTER EF
-unicode_case_folding(0x1041A, 'C', [0x10442]).				% DESERET CAPITAL LETTER VEE
-unicode_case_folding(0x1041B, 'C', [0x10443]).				% DESERET CAPITAL LETTER ETH
-unicode_case_folding(0x1041C, 'C', [0x10444]).				% DESERET CAPITAL LETTER THEE
-unicode_case_folding(0x1041D, 'C', [0x10445]).				% DESERET CAPITAL LETTER ES
-unicode_case_folding(0x1041E, 'C', [0x10446]).				% DESERET CAPITAL LETTER ZEE
-unicode_case_folding(0x1041F, 'C', [0x10447]).				% DESERET CAPITAL LETTER ESH
-unicode_case_folding(0x10420, 'C', [0x10448]).				% DESERET CAPITAL LETTER ZHEE
-unicode_case_folding(0x10421, 'C', [0x10449]).				% DESERET CAPITAL LETTER ER
-unicode_case_folding(0x10422, 'C', [0x1044A]).				% DESERET CAPITAL LETTER EL
-unicode_case_folding(0x10423, 'C', [0x1044B]).				% DESERET CAPITAL LETTER EM
-unicode_case_folding(0x10424, 'C', [0x1044C]).				% DESERET CAPITAL LETTER EN
-unicode_case_folding(0x10425, 'C', [0x1044D]).				% DESERET CAPITAL LETTER ENG
-unicode_case_folding(0x10426, 'C', [0x1044E]).				% DESERET CAPITAL LETTER OI
-unicode_case_folding(0x10427, 'C', [0x1044F]).				% DESERET CAPITAL LETTER EW
+unicode_case_folding(65, 'C', [97]).
+unicode_case_folding(66, 'C', [98]).
+unicode_case_folding(67, 'C', [99]).
+unicode_case_folding(68, 'C', [100]).
+unicode_case_folding(69, 'C', [101]).
+unicode_case_folding(70, 'C', [102]).
+unicode_case_folding(71, 'C', [103]).
+unicode_case_folding(72, 'C', [104]).
+unicode_case_folding(73, 'C', [105]).
+unicode_case_folding(73, 'T', [305]).
+unicode_case_folding(74, 'C', [106]).
+unicode_case_folding(75, 'C', [107]).
+unicode_case_folding(76, 'C', [108]).
+unicode_case_folding(77, 'C', [109]).
+unicode_case_folding(78, 'C', [110]).
+unicode_case_folding(79, 'C', [111]).
+unicode_case_folding(80, 'C', [112]).
+unicode_case_folding(81, 'C', [113]).
+unicode_case_folding(82, 'C', [114]).
+unicode_case_folding(83, 'C', [115]).
+unicode_case_folding(84, 'C', [116]).
+unicode_case_folding(85, 'C', [117]).
+unicode_case_folding(86, 'C', [118]).
+unicode_case_folding(87, 'C', [119]).
+unicode_case_folding(88, 'C', [120]).
+unicode_case_folding(89, 'C', [121]).
+unicode_case_folding(90, 'C', [122]).
+unicode_case_folding(181, 'C', [956]).
+unicode_case_folding(192, 'C', [224]).
+unicode_case_folding(193, 'C', [225]).
+unicode_case_folding(194, 'C', [226]).
+unicode_case_folding(195, 'C', [227]).
+unicode_case_folding(196, 'C', [228]).
+unicode_case_folding(197, 'C', [229]).
+unicode_case_folding(198, 'C', [230]).
+unicode_case_folding(199, 'C', [231]).
+unicode_case_folding(200, 'C', [232]).
+unicode_case_folding(201, 'C', [233]).
+unicode_case_folding(202, 'C', [234]).
+unicode_case_folding(203, 'C', [235]).
+unicode_case_folding(204, 'C', [236]).
+unicode_case_folding(205, 'C', [237]).
+unicode_case_folding(206, 'C', [238]).
+unicode_case_folding(207, 'C', [239]).
+unicode_case_folding(208, 'C', [240]).
+unicode_case_folding(209, 'C', [241]).
+unicode_case_folding(210, 'C', [242]).
+unicode_case_folding(211, 'C', [243]).
+unicode_case_folding(212, 'C', [244]).
+unicode_case_folding(213, 'C', [245]).
+unicode_case_folding(214, 'C', [246]).
+unicode_case_folding(216, 'C', [248]).
+unicode_case_folding(217, 'C', [249]).
+unicode_case_folding(218, 'C', [250]).
+unicode_case_folding(219, 'C', [251]).
+unicode_case_folding(220, 'C', [252]).
+unicode_case_folding(221, 'C', [253]).
+unicode_case_folding(222, 'C', [254]).
+unicode_case_folding(223, 'F', [115,115]).
+unicode_case_folding(256, 'C', [257]).
+unicode_case_folding(258, 'C', [259]).
+unicode_case_folding(260, 'C', [261]).
+unicode_case_folding(262, 'C', [263]).
+unicode_case_folding(264, 'C', [265]).
+unicode_case_folding(266, 'C', [267]).
+unicode_case_folding(268, 'C', [269]).
+unicode_case_folding(270, 'C', [271]).
+unicode_case_folding(272, 'C', [273]).
+unicode_case_folding(274, 'C', [275]).
+unicode_case_folding(276, 'C', [277]).
+unicode_case_folding(278, 'C', [279]).
+unicode_case_folding(280, 'C', [281]).
+unicode_case_folding(282, 'C', [283]).
+unicode_case_folding(284, 'C', [285]).
+unicode_case_folding(286, 'C', [287]).
+unicode_case_folding(288, 'C', [289]).
+unicode_case_folding(290, 'C', [291]).
+unicode_case_folding(292, 'C', [293]).
+unicode_case_folding(294, 'C', [295]).
+unicode_case_folding(296, 'C', [297]).
+unicode_case_folding(298, 'C', [299]).
+unicode_case_folding(300, 'C', [301]).
+unicode_case_folding(302, 'C', [303]).
+unicode_case_folding(304, 'F', [105,775]).
+unicode_case_folding(304, 'T', [105]).
+unicode_case_folding(306, 'C', [307]).
+unicode_case_folding(308, 'C', [309]).
+unicode_case_folding(310, 'C', [311]).
+unicode_case_folding(313, 'C', [314]).
+unicode_case_folding(315, 'C', [316]).
+unicode_case_folding(317, 'C', [318]).
+unicode_case_folding(319, 'C', [320]).
+unicode_case_folding(321, 'C', [322]).
+unicode_case_folding(323, 'C', [324]).
+unicode_case_folding(325, 'C', [326]).
+unicode_case_folding(327, 'C', [328]).
+unicode_case_folding(329, 'F', [700,110]).
+unicode_case_folding(330, 'C', [331]).
+unicode_case_folding(332, 'C', [333]).
+unicode_case_folding(334, 'C', [335]).
+unicode_case_folding(336, 'C', [337]).
+unicode_case_folding(338, 'C', [339]).
+unicode_case_folding(340, 'C', [341]).
+unicode_case_folding(342, 'C', [343]).
+unicode_case_folding(344, 'C', [345]).
+unicode_case_folding(346, 'C', [347]).
+unicode_case_folding(348, 'C', [349]).
+unicode_case_folding(350, 'C', [351]).
+unicode_case_folding(352, 'C', [353]).
+unicode_case_folding(354, 'C', [355]).
+unicode_case_folding(356, 'C', [357]).
+unicode_case_folding(358, 'C', [359]).
+unicode_case_folding(360, 'C', [361]).
+unicode_case_folding(362, 'C', [363]).
+unicode_case_folding(364, 'C', [365]).
+unicode_case_folding(366, 'C', [367]).
+unicode_case_folding(368, 'C', [369]).
+unicode_case_folding(370, 'C', [371]).
+unicode_case_folding(372, 'C', [373]).
+unicode_case_folding(374, 'C', [375]).
+unicode_case_folding(376, 'C', [255]).
+unicode_case_folding(377, 'C', [378]).
+unicode_case_folding(379, 'C', [380]).
+unicode_case_folding(381, 'C', [382]).
+unicode_case_folding(383, 'C', [115]).
+unicode_case_folding(385, 'C', [595]).
+unicode_case_folding(386, 'C', [387]).
+unicode_case_folding(388, 'C', [389]).
+unicode_case_folding(390, 'C', [596]).
+unicode_case_folding(391, 'C', [392]).
+unicode_case_folding(393, 'C', [598]).
+unicode_case_folding(394, 'C', [599]).
+unicode_case_folding(395, 'C', [396]).
+unicode_case_folding(398, 'C', [477]).
+unicode_case_folding(399, 'C', [601]).
+unicode_case_folding(400, 'C', [603]).
+unicode_case_folding(401, 'C', [402]).
+unicode_case_folding(403, 'C', [608]).
+unicode_case_folding(404, 'C', [611]).
+unicode_case_folding(406, 'C', [617]).
+unicode_case_folding(407, 'C', [616]).
+unicode_case_folding(408, 'C', [409]).
+unicode_case_folding(412, 'C', [623]).
+unicode_case_folding(413, 'C', [626]).
+unicode_case_folding(415, 'C', [629]).
+unicode_case_folding(416, 'C', [417]).
+unicode_case_folding(418, 'C', [419]).
+unicode_case_folding(420, 'C', [421]).
+unicode_case_folding(422, 'C', [640]).
+unicode_case_folding(423, 'C', [424]).
+unicode_case_folding(425, 'C', [643]).
+unicode_case_folding(428, 'C', [429]).
+unicode_case_folding(430, 'C', [648]).
+unicode_case_folding(431, 'C', [432]).
+unicode_case_folding(433, 'C', [650]).
+unicode_case_folding(434, 'C', [651]).
+unicode_case_folding(435, 'C', [436]).
+unicode_case_folding(437, 'C', [438]).
+unicode_case_folding(439, 'C', [658]).
+unicode_case_folding(440, 'C', [441]).
+unicode_case_folding(444, 'C', [445]).
+unicode_case_folding(452, 'C', [454]).
+unicode_case_folding(453, 'C', [454]).
+unicode_case_folding(455, 'C', [457]).
+unicode_case_folding(456, 'C', [457]).
+unicode_case_folding(458, 'C', [460]).
+unicode_case_folding(459, 'C', [460]).
+unicode_case_folding(461, 'C', [462]).
+unicode_case_folding(463, 'C', [464]).
+unicode_case_folding(465, 'C', [466]).
+unicode_case_folding(467, 'C', [468]).
+unicode_case_folding(469, 'C', [470]).
+unicode_case_folding(471, 'C', [472]).
+unicode_case_folding(473, 'C', [474]).
+unicode_case_folding(475, 'C', [476]).
+unicode_case_folding(478, 'C', [479]).
+unicode_case_folding(480, 'C', [481]).
+unicode_case_folding(482, 'C', [483]).
+unicode_case_folding(484, 'C', [485]).
+unicode_case_folding(486, 'C', [487]).
+unicode_case_folding(488, 'C', [489]).
+unicode_case_folding(490, 'C', [491]).
+unicode_case_folding(492, 'C', [493]).
+unicode_case_folding(494, 'C', [495]).
+unicode_case_folding(496, 'F', [106,780]).
+unicode_case_folding(497, 'C', [499]).
+unicode_case_folding(498, 'C', [499]).
+unicode_case_folding(500, 'C', [501]).
+unicode_case_folding(502, 'C', [405]).
+unicode_case_folding(503, 'C', [447]).
+unicode_case_folding(504, 'C', [505]).
+unicode_case_folding(506, 'C', [507]).
+unicode_case_folding(508, 'C', [509]).
+unicode_case_folding(510, 'C', [511]).
+unicode_case_folding(512, 'C', [513]).
+unicode_case_folding(514, 'C', [515]).
+unicode_case_folding(516, 'C', [517]).
+unicode_case_folding(518, 'C', [519]).
+unicode_case_folding(520, 'C', [521]).
+unicode_case_folding(522, 'C', [523]).
+unicode_case_folding(524, 'C', [525]).
+unicode_case_folding(526, 'C', [527]).
+unicode_case_folding(528, 'C', [529]).
+unicode_case_folding(530, 'C', [531]).
+unicode_case_folding(532, 'C', [533]).
+unicode_case_folding(534, 'C', [535]).
+unicode_case_folding(536, 'C', [537]).
+unicode_case_folding(538, 'C', [539]).
+unicode_case_folding(540, 'C', [541]).
+unicode_case_folding(542, 'C', [543]).
+unicode_case_folding(544, 'C', [414]).
+unicode_case_folding(546, 'C', [547]).
+unicode_case_folding(548, 'C', [549]).
+unicode_case_folding(550, 'C', [551]).
+unicode_case_folding(552, 'C', [553]).
+unicode_case_folding(554, 'C', [555]).
+unicode_case_folding(556, 'C', [557]).
+unicode_case_folding(558, 'C', [559]).
+unicode_case_folding(560, 'C', [561]).
+unicode_case_folding(562, 'C', [563]).
+unicode_case_folding(570, 'C', [11365]).
+unicode_case_folding(571, 'C', [572]).
+unicode_case_folding(573, 'C', [410]).
+unicode_case_folding(574, 'C', [11366]).
+unicode_case_folding(577, 'C', [578]).
+unicode_case_folding(579, 'C', [384]).
+unicode_case_folding(580, 'C', [649]).
+unicode_case_folding(581, 'C', [652]).
+unicode_case_folding(582, 'C', [583]).
+unicode_case_folding(584, 'C', [585]).
+unicode_case_folding(586, 'C', [587]).
+unicode_case_folding(588, 'C', [589]).
+unicode_case_folding(590, 'C', [591]).
+unicode_case_folding(837, 'C', [953]).
+unicode_case_folding(880, 'C', [881]).
+unicode_case_folding(882, 'C', [883]).
+unicode_case_folding(886, 'C', [887]).
+unicode_case_folding(895, 'C', [1011]).
+unicode_case_folding(902, 'C', [940]).
+unicode_case_folding(904, 'C', [941]).
+unicode_case_folding(905, 'C', [942]).
+unicode_case_folding(906, 'C', [943]).
+unicode_case_folding(908, 'C', [972]).
+unicode_case_folding(910, 'C', [973]).
+unicode_case_folding(911, 'C', [974]).
+unicode_case_folding(912, 'F', [953,776,769]).
+unicode_case_folding(913, 'C', [945]).
+unicode_case_folding(914, 'C', [946]).
+unicode_case_folding(915, 'C', [947]).
+unicode_case_folding(916, 'C', [948]).
+unicode_case_folding(917, 'C', [949]).
+unicode_case_folding(918, 'C', [950]).
+unicode_case_folding(919, 'C', [951]).
+unicode_case_folding(920, 'C', [952]).
+unicode_case_folding(921, 'C', [953]).
+unicode_case_folding(922, 'C', [954]).
+unicode_case_folding(923, 'C', [955]).
+unicode_case_folding(924, 'C', [956]).
+unicode_case_folding(925, 'C', [957]).
+unicode_case_folding(926, 'C', [958]).
+unicode_case_folding(927, 'C', [959]).
+unicode_case_folding(928, 'C', [960]).
+unicode_case_folding(929, 'C', [961]).
+unicode_case_folding(931, 'C', [963]).
+unicode_case_folding(932, 'C', [964]).
+unicode_case_folding(933, 'C', [965]).
+unicode_case_folding(934, 'C', [966]).
+unicode_case_folding(935, 'C', [967]).
+unicode_case_folding(936, 'C', [968]).
+unicode_case_folding(937, 'C', [969]).
+unicode_case_folding(938, 'C', [970]).
+unicode_case_folding(939, 'C', [971]).
+unicode_case_folding(944, 'F', [965,776,769]).
+unicode_case_folding(962, 'C', [963]).
+unicode_case_folding(975, 'C', [983]).
+unicode_case_folding(976, 'C', [946]).
+unicode_case_folding(977, 'C', [952]).
+unicode_case_folding(981, 'C', [966]).
+unicode_case_folding(982, 'C', [960]).
+unicode_case_folding(984, 'C', [985]).
+unicode_case_folding(986, 'C', [987]).
+unicode_case_folding(988, 'C', [989]).
+unicode_case_folding(990, 'C', [991]).
+unicode_case_folding(992, 'C', [993]).
+unicode_case_folding(994, 'C', [995]).
+unicode_case_folding(996, 'C', [997]).
+unicode_case_folding(998, 'C', [999]).
+unicode_case_folding(1000, 'C', [1001]).
+unicode_case_folding(1002, 'C', [1003]).
+unicode_case_folding(1004, 'C', [1005]).
+unicode_case_folding(1006, 'C', [1007]).
+unicode_case_folding(1008, 'C', [954]).
+unicode_case_folding(1009, 'C', [961]).
+unicode_case_folding(1012, 'C', [952]).
+unicode_case_folding(1013, 'C', [949]).
+unicode_case_folding(1015, 'C', [1016]).
+unicode_case_folding(1017, 'C', [1010]).
+unicode_case_folding(1018, 'C', [1019]).
+unicode_case_folding(1021, 'C', [891]).
+unicode_case_folding(1022, 'C', [892]).
+unicode_case_folding(1023, 'C', [893]).
+unicode_case_folding(1024, 'C', [1104]).
+unicode_case_folding(1025, 'C', [1105]).
+unicode_case_folding(1026, 'C', [1106]).
+unicode_case_folding(1027, 'C', [1107]).
+unicode_case_folding(1028, 'C', [1108]).
+unicode_case_folding(1029, 'C', [1109]).
+unicode_case_folding(1030, 'C', [1110]).
+unicode_case_folding(1031, 'C', [1111]).
+unicode_case_folding(1032, 'C', [1112]).
+unicode_case_folding(1033, 'C', [1113]).
+unicode_case_folding(1034, 'C', [1114]).
+unicode_case_folding(1035, 'C', [1115]).
+unicode_case_folding(1036, 'C', [1116]).
+unicode_case_folding(1037, 'C', [1117]).
+unicode_case_folding(1038, 'C', [1118]).
+unicode_case_folding(1039, 'C', [1119]).
+unicode_case_folding(1040, 'C', [1072]).
+unicode_case_folding(1041, 'C', [1073]).
+unicode_case_folding(1042, 'C', [1074]).
+unicode_case_folding(1043, 'C', [1075]).
+unicode_case_folding(1044, 'C', [1076]).
+unicode_case_folding(1045, 'C', [1077]).
+unicode_case_folding(1046, 'C', [1078]).
+unicode_case_folding(1047, 'C', [1079]).
+unicode_case_folding(1048, 'C', [1080]).
+unicode_case_folding(1049, 'C', [1081]).
+unicode_case_folding(1050, 'C', [1082]).
+unicode_case_folding(1051, 'C', [1083]).
+unicode_case_folding(1052, 'C', [1084]).
+unicode_case_folding(1053, 'C', [1085]).
+unicode_case_folding(1054, 'C', [1086]).
+unicode_case_folding(1055, 'C', [1087]).
+unicode_case_folding(1056, 'C', [1088]).
+unicode_case_folding(1057, 'C', [1089]).
+unicode_case_folding(1058, 'C', [1090]).
+unicode_case_folding(1059, 'C', [1091]).
+unicode_case_folding(1060, 'C', [1092]).
+unicode_case_folding(1061, 'C', [1093]).
+unicode_case_folding(1062, 'C', [1094]).
+unicode_case_folding(1063, 'C', [1095]).
+unicode_case_folding(1064, 'C', [1096]).
+unicode_case_folding(1065, 'C', [1097]).
+unicode_case_folding(1066, 'C', [1098]).
+unicode_case_folding(1067, 'C', [1099]).
+unicode_case_folding(1068, 'C', [1100]).
+unicode_case_folding(1069, 'C', [1101]).
+unicode_case_folding(1070, 'C', [1102]).
+unicode_case_folding(1071, 'C', [1103]).
+unicode_case_folding(1120, 'C', [1121]).
+unicode_case_folding(1122, 'C', [1123]).
+unicode_case_folding(1124, 'C', [1125]).
+unicode_case_folding(1126, 'C', [1127]).
+unicode_case_folding(1128, 'C', [1129]).
+unicode_case_folding(1130, 'C', [1131]).
+unicode_case_folding(1132, 'C', [1133]).
+unicode_case_folding(1134, 'C', [1135]).
+unicode_case_folding(1136, 'C', [1137]).
+unicode_case_folding(1138, 'C', [1139]).
+unicode_case_folding(1140, 'C', [1141]).
+unicode_case_folding(1142, 'C', [1143]).
+unicode_case_folding(1144, 'C', [1145]).
+unicode_case_folding(1146, 'C', [1147]).
+unicode_case_folding(1148, 'C', [1149]).
+unicode_case_folding(1150, 'C', [1151]).
+unicode_case_folding(1152, 'C', [1153]).
+unicode_case_folding(1162, 'C', [1163]).
+unicode_case_folding(1164, 'C', [1165]).
+unicode_case_folding(1166, 'C', [1167]).
+unicode_case_folding(1168, 'C', [1169]).
+unicode_case_folding(1170, 'C', [1171]).
+unicode_case_folding(1172, 'C', [1173]).
+unicode_case_folding(1174, 'C', [1175]).
+unicode_case_folding(1176, 'C', [1177]).
+unicode_case_folding(1178, 'C', [1179]).
+unicode_case_folding(1180, 'C', [1181]).
+unicode_case_folding(1182, 'C', [1183]).
+unicode_case_folding(1184, 'C', [1185]).
+unicode_case_folding(1186, 'C', [1187]).
+unicode_case_folding(1188, 'C', [1189]).
+unicode_case_folding(1190, 'C', [1191]).
+unicode_case_folding(1192, 'C', [1193]).
+unicode_case_folding(1194, 'C', [1195]).
+unicode_case_folding(1196, 'C', [1197]).
+unicode_case_folding(1198, 'C', [1199]).
+unicode_case_folding(1200, 'C', [1201]).
+unicode_case_folding(1202, 'C', [1203]).
+unicode_case_folding(1204, 'C', [1205]).
+unicode_case_folding(1206, 'C', [1207]).
+unicode_case_folding(1208, 'C', [1209]).
+unicode_case_folding(1210, 'C', [1211]).
+unicode_case_folding(1212, 'C', [1213]).
+unicode_case_folding(1214, 'C', [1215]).
+unicode_case_folding(1216, 'C', [1231]).
+unicode_case_folding(1217, 'C', [1218]).
+unicode_case_folding(1219, 'C', [1220]).
+unicode_case_folding(1221, 'C', [1222]).
+unicode_case_folding(1223, 'C', [1224]).
+unicode_case_folding(1225, 'C', [1226]).
+unicode_case_folding(1227, 'C', [1228]).
+unicode_case_folding(1229, 'C', [1230]).
+unicode_case_folding(1232, 'C', [1233]).
+unicode_case_folding(1234, 'C', [1235]).
+unicode_case_folding(1236, 'C', [1237]).
+unicode_case_folding(1238, 'C', [1239]).
+unicode_case_folding(1240, 'C', [1241]).
+unicode_case_folding(1242, 'C', [1243]).
+unicode_case_folding(1244, 'C', [1245]).
+unicode_case_folding(1246, 'C', [1247]).
+unicode_case_folding(1248, 'C', [1249]).
+unicode_case_folding(1250, 'C', [1251]).
+unicode_case_folding(1252, 'C', [1253]).
+unicode_case_folding(1254, 'C', [1255]).
+unicode_case_folding(1256, 'C', [1257]).
+unicode_case_folding(1258, 'C', [1259]).
+unicode_case_folding(1260, 'C', [1261]).
+unicode_case_folding(1262, 'C', [1263]).
+unicode_case_folding(1264, 'C', [1265]).
+unicode_case_folding(1266, 'C', [1267]).
+unicode_case_folding(1268, 'C', [1269]).
+unicode_case_folding(1270, 'C', [1271]).
+unicode_case_folding(1272, 'C', [1273]).
+unicode_case_folding(1274, 'C', [1275]).
+unicode_case_folding(1276, 'C', [1277]).
+unicode_case_folding(1278, 'C', [1279]).
+unicode_case_folding(1280, 'C', [1281]).
+unicode_case_folding(1282, 'C', [1283]).
+unicode_case_folding(1284, 'C', [1285]).
+unicode_case_folding(1286, 'C', [1287]).
+unicode_case_folding(1288, 'C', [1289]).
+unicode_case_folding(1290, 'C', [1291]).
+unicode_case_folding(1292, 'C', [1293]).
+unicode_case_folding(1294, 'C', [1295]).
+unicode_case_folding(1296, 'C', [1297]).
+unicode_case_folding(1298, 'C', [1299]).
+unicode_case_folding(1300, 'C', [1301]).
+unicode_case_folding(1302, 'C', [1303]).
+unicode_case_folding(1304, 'C', [1305]).
+unicode_case_folding(1306, 'C', [1307]).
+unicode_case_folding(1308, 'C', [1309]).
+unicode_case_folding(1310, 'C', [1311]).
+unicode_case_folding(1312, 'C', [1313]).
+unicode_case_folding(1314, 'C', [1315]).
+unicode_case_folding(1316, 'C', [1317]).
+unicode_case_folding(1318, 'C', [1319]).
+unicode_case_folding(1320, 'C', [1321]).
+unicode_case_folding(1322, 'C', [1323]).
+unicode_case_folding(1324, 'C', [1325]).
+unicode_case_folding(1326, 'C', [1327]).
+unicode_case_folding(1329, 'C', [1377]).
+unicode_case_folding(1330, 'C', [1378]).
+unicode_case_folding(1331, 'C', [1379]).
+unicode_case_folding(1332, 'C', [1380]).
+unicode_case_folding(1333, 'C', [1381]).
+unicode_case_folding(1334, 'C', [1382]).
+unicode_case_folding(1335, 'C', [1383]).
+unicode_case_folding(1336, 'C', [1384]).
+unicode_case_folding(1337, 'C', [1385]).
+unicode_case_folding(1338, 'C', [1386]).
+unicode_case_folding(1339, 'C', [1387]).
+unicode_case_folding(1340, 'C', [1388]).
+unicode_case_folding(1341, 'C', [1389]).
+unicode_case_folding(1342, 'C', [1390]).
+unicode_case_folding(1343, 'C', [1391]).
+unicode_case_folding(1344, 'C', [1392]).
+unicode_case_folding(1345, 'C', [1393]).
+unicode_case_folding(1346, 'C', [1394]).
+unicode_case_folding(1347, 'C', [1395]).
+unicode_case_folding(1348, 'C', [1396]).
+unicode_case_folding(1349, 'C', [1397]).
+unicode_case_folding(1350, 'C', [1398]).
+unicode_case_folding(1351, 'C', [1399]).
+unicode_case_folding(1352, 'C', [1400]).
+unicode_case_folding(1353, 'C', [1401]).
+unicode_case_folding(1354, 'C', [1402]).
+unicode_case_folding(1355, 'C', [1403]).
+unicode_case_folding(1356, 'C', [1404]).
+unicode_case_folding(1357, 'C', [1405]).
+unicode_case_folding(1358, 'C', [1406]).
+unicode_case_folding(1359, 'C', [1407]).
+unicode_case_folding(1360, 'C', [1408]).
+unicode_case_folding(1361, 'C', [1409]).
+unicode_case_folding(1362, 'C', [1410]).
+unicode_case_folding(1363, 'C', [1411]).
+unicode_case_folding(1364, 'C', [1412]).
+unicode_case_folding(1365, 'C', [1413]).
+unicode_case_folding(1366, 'C', [1414]).
+unicode_case_folding(1415, 'F', [1381,1410]).
+unicode_case_folding(4256, 'C', [11520]).
+unicode_case_folding(4257, 'C', [11521]).
+unicode_case_folding(4258, 'C', [11522]).
+unicode_case_folding(4259, 'C', [11523]).
+unicode_case_folding(4260, 'C', [11524]).
+unicode_case_folding(4261, 'C', [11525]).
+unicode_case_folding(4262, 'C', [11526]).
+unicode_case_folding(4263, 'C', [11527]).
+unicode_case_folding(4264, 'C', [11528]).
+unicode_case_folding(4265, 'C', [11529]).
+unicode_case_folding(4266, 'C', [11530]).
+unicode_case_folding(4267, 'C', [11531]).
+unicode_case_folding(4268, 'C', [11532]).
+unicode_case_folding(4269, 'C', [11533]).
+unicode_case_folding(4270, 'C', [11534]).
+unicode_case_folding(4271, 'C', [11535]).
+unicode_case_folding(4272, 'C', [11536]).
+unicode_case_folding(4273, 'C', [11537]).
+unicode_case_folding(4274, 'C', [11538]).
+unicode_case_folding(4275, 'C', [11539]).
+unicode_case_folding(4276, 'C', [11540]).
+unicode_case_folding(4277, 'C', [11541]).
+unicode_case_folding(4278, 'C', [11542]).
+unicode_case_folding(4279, 'C', [11543]).
+unicode_case_folding(4280, 'C', [11544]).
+unicode_case_folding(4281, 'C', [11545]).
+unicode_case_folding(4282, 'C', [11546]).
+unicode_case_folding(4283, 'C', [11547]).
+unicode_case_folding(4284, 'C', [11548]).
+unicode_case_folding(4285, 'C', [11549]).
+unicode_case_folding(4286, 'C', [11550]).
+unicode_case_folding(4287, 'C', [11551]).
+unicode_case_folding(4288, 'C', [11552]).
+unicode_case_folding(4289, 'C', [11553]).
+unicode_case_folding(4290, 'C', [11554]).
+unicode_case_folding(4291, 'C', [11555]).
+unicode_case_folding(4292, 'C', [11556]).
+unicode_case_folding(4293, 'C', [11557]).
+unicode_case_folding(4295, 'C', [11559]).
+unicode_case_folding(4301, 'C', [11565]).
+unicode_case_folding(5112, 'C', [5104]).
+unicode_case_folding(5113, 'C', [5105]).
+unicode_case_folding(5114, 'C', [5106]).
+unicode_case_folding(5115, 'C', [5107]).
+unicode_case_folding(5116, 'C', [5108]).
+unicode_case_folding(5117, 'C', [5109]).
+unicode_case_folding(7296, 'C', [1074]).
+unicode_case_folding(7297, 'C', [1076]).
+unicode_case_folding(7298, 'C', [1086]).
+unicode_case_folding(7299, 'C', [1089]).
+unicode_case_folding(7300, 'C', [1090]).
+unicode_case_folding(7301, 'C', [1090]).
+unicode_case_folding(7302, 'C', [1098]).
+unicode_case_folding(7303, 'C', [1123]).
+unicode_case_folding(7304, 'C', [42571]).
+unicode_case_folding(7305, 'C', [7306]).
+unicode_case_folding(7312, 'C', [4304]).
+unicode_case_folding(7313, 'C', [4305]).
+unicode_case_folding(7314, 'C', [4306]).
+unicode_case_folding(7315, 'C', [4307]).
+unicode_case_folding(7316, 'C', [4308]).
+unicode_case_folding(7317, 'C', [4309]).
+unicode_case_folding(7318, 'C', [4310]).
+unicode_case_folding(7319, 'C', [4311]).
+unicode_case_folding(7320, 'C', [4312]).
+unicode_case_folding(7321, 'C', [4313]).
+unicode_case_folding(7322, 'C', [4314]).
+unicode_case_folding(7323, 'C', [4315]).
+unicode_case_folding(7324, 'C', [4316]).
+unicode_case_folding(7325, 'C', [4317]).
+unicode_case_folding(7326, 'C', [4318]).
+unicode_case_folding(7327, 'C', [4319]).
+unicode_case_folding(7328, 'C', [4320]).
+unicode_case_folding(7329, 'C', [4321]).
+unicode_case_folding(7330, 'C', [4322]).
+unicode_case_folding(7331, 'C', [4323]).
+unicode_case_folding(7332, 'C', [4324]).
+unicode_case_folding(7333, 'C', [4325]).
+unicode_case_folding(7334, 'C', [4326]).
+unicode_case_folding(7335, 'C', [4327]).
+unicode_case_folding(7336, 'C', [4328]).
+unicode_case_folding(7337, 'C', [4329]).
+unicode_case_folding(7338, 'C', [4330]).
+unicode_case_folding(7339, 'C', [4331]).
+unicode_case_folding(7340, 'C', [4332]).
+unicode_case_folding(7341, 'C', [4333]).
+unicode_case_folding(7342, 'C', [4334]).
+unicode_case_folding(7343, 'C', [4335]).
+unicode_case_folding(7344, 'C', [4336]).
+unicode_case_folding(7345, 'C', [4337]).
+unicode_case_folding(7346, 'C', [4338]).
+unicode_case_folding(7347, 'C', [4339]).
+unicode_case_folding(7348, 'C', [4340]).
+unicode_case_folding(7349, 'C', [4341]).
+unicode_case_folding(7350, 'C', [4342]).
+unicode_case_folding(7351, 'C', [4343]).
+unicode_case_folding(7352, 'C', [4344]).
+unicode_case_folding(7353, 'C', [4345]).
+unicode_case_folding(7354, 'C', [4346]).
+unicode_case_folding(7357, 'C', [4349]).
+unicode_case_folding(7358, 'C', [4350]).
+unicode_case_folding(7359, 'C', [4351]).
+unicode_case_folding(7680, 'C', [7681]).
+unicode_case_folding(7682, 'C', [7683]).
+unicode_case_folding(7684, 'C', [7685]).
+unicode_case_folding(7686, 'C', [7687]).
+unicode_case_folding(7688, 'C', [7689]).
+unicode_case_folding(7690, 'C', [7691]).
+unicode_case_folding(7692, 'C', [7693]).
+unicode_case_folding(7694, 'C', [7695]).
+unicode_case_folding(7696, 'C', [7697]).
+unicode_case_folding(7698, 'C', [7699]).
+unicode_case_folding(7700, 'C', [7701]).
+unicode_case_folding(7702, 'C', [7703]).
+unicode_case_folding(7704, 'C', [7705]).
+unicode_case_folding(7706, 'C', [7707]).
+unicode_case_folding(7708, 'C', [7709]).
+unicode_case_folding(7710, 'C', [7711]).
+unicode_case_folding(7712, 'C', [7713]).
+unicode_case_folding(7714, 'C', [7715]).
+unicode_case_folding(7716, 'C', [7717]).
+unicode_case_folding(7718, 'C', [7719]).
+unicode_case_folding(7720, 'C', [7721]).
+unicode_case_folding(7722, 'C', [7723]).
+unicode_case_folding(7724, 'C', [7725]).
+unicode_case_folding(7726, 'C', [7727]).
+unicode_case_folding(7728, 'C', [7729]).
+unicode_case_folding(7730, 'C', [7731]).
+unicode_case_folding(7732, 'C', [7733]).
+unicode_case_folding(7734, 'C', [7735]).
+unicode_case_folding(7736, 'C', [7737]).
+unicode_case_folding(7738, 'C', [7739]).
+unicode_case_folding(7740, 'C', [7741]).
+unicode_case_folding(7742, 'C', [7743]).
+unicode_case_folding(7744, 'C', [7745]).
+unicode_case_folding(7746, 'C', [7747]).
+unicode_case_folding(7748, 'C', [7749]).
+unicode_case_folding(7750, 'C', [7751]).
+unicode_case_folding(7752, 'C', [7753]).
+unicode_case_folding(7754, 'C', [7755]).
+unicode_case_folding(7756, 'C', [7757]).
+unicode_case_folding(7758, 'C', [7759]).
+unicode_case_folding(7760, 'C', [7761]).
+unicode_case_folding(7762, 'C', [7763]).
+unicode_case_folding(7764, 'C', [7765]).
+unicode_case_folding(7766, 'C', [7767]).
+unicode_case_folding(7768, 'C', [7769]).
+unicode_case_folding(7770, 'C', [7771]).
+unicode_case_folding(7772, 'C', [7773]).
+unicode_case_folding(7774, 'C', [7775]).
+unicode_case_folding(7776, 'C', [7777]).
+unicode_case_folding(7778, 'C', [7779]).
+unicode_case_folding(7780, 'C', [7781]).
+unicode_case_folding(7782, 'C', [7783]).
+unicode_case_folding(7784, 'C', [7785]).
+unicode_case_folding(7786, 'C', [7787]).
+unicode_case_folding(7788, 'C', [7789]).
+unicode_case_folding(7790, 'C', [7791]).
+unicode_case_folding(7792, 'C', [7793]).
+unicode_case_folding(7794, 'C', [7795]).
+unicode_case_folding(7796, 'C', [7797]).
+unicode_case_folding(7798, 'C', [7799]).
+unicode_case_folding(7800, 'C', [7801]).
+unicode_case_folding(7802, 'C', [7803]).
+unicode_case_folding(7804, 'C', [7805]).
+unicode_case_folding(7806, 'C', [7807]).
+unicode_case_folding(7808, 'C', [7809]).
+unicode_case_folding(7810, 'C', [7811]).
+unicode_case_folding(7812, 'C', [7813]).
+unicode_case_folding(7814, 'C', [7815]).
+unicode_case_folding(7816, 'C', [7817]).
+unicode_case_folding(7818, 'C', [7819]).
+unicode_case_folding(7820, 'C', [7821]).
+unicode_case_folding(7822, 'C', [7823]).
+unicode_case_folding(7824, 'C', [7825]).
+unicode_case_folding(7826, 'C', [7827]).
+unicode_case_folding(7828, 'C', [7829]).
+unicode_case_folding(7830, 'F', [104,817]).
+unicode_case_folding(7831, 'F', [116,776]).
+unicode_case_folding(7832, 'F', [119,778]).
+unicode_case_folding(7833, 'F', [121,778]).
+unicode_case_folding(7834, 'F', [97,702]).
+unicode_case_folding(7835, 'C', [7777]).
+unicode_case_folding(7838, 'F', [115,115]).
+unicode_case_folding(7838, 'S', [223]).
+unicode_case_folding(7840, 'C', [7841]).
+unicode_case_folding(7842, 'C', [7843]).
+unicode_case_folding(7844, 'C', [7845]).
+unicode_case_folding(7846, 'C', [7847]).
+unicode_case_folding(7848, 'C', [7849]).
+unicode_case_folding(7850, 'C', [7851]).
+unicode_case_folding(7852, 'C', [7853]).
+unicode_case_folding(7854, 'C', [7855]).
+unicode_case_folding(7856, 'C', [7857]).
+unicode_case_folding(7858, 'C', [7859]).
+unicode_case_folding(7860, 'C', [7861]).
+unicode_case_folding(7862, 'C', [7863]).
+unicode_case_folding(7864, 'C', [7865]).
+unicode_case_folding(7866, 'C', [7867]).
+unicode_case_folding(7868, 'C', [7869]).
+unicode_case_folding(7870, 'C', [7871]).
+unicode_case_folding(7872, 'C', [7873]).
+unicode_case_folding(7874, 'C', [7875]).
+unicode_case_folding(7876, 'C', [7877]).
+unicode_case_folding(7878, 'C', [7879]).
+unicode_case_folding(7880, 'C', [7881]).
+unicode_case_folding(7882, 'C', [7883]).
+unicode_case_folding(7884, 'C', [7885]).
+unicode_case_folding(7886, 'C', [7887]).
+unicode_case_folding(7888, 'C', [7889]).
+unicode_case_folding(7890, 'C', [7891]).
+unicode_case_folding(7892, 'C', [7893]).
+unicode_case_folding(7894, 'C', [7895]).
+unicode_case_folding(7896, 'C', [7897]).
+unicode_case_folding(7898, 'C', [7899]).
+unicode_case_folding(7900, 'C', [7901]).
+unicode_case_folding(7902, 'C', [7903]).
+unicode_case_folding(7904, 'C', [7905]).
+unicode_case_folding(7906, 'C', [7907]).
+unicode_case_folding(7908, 'C', [7909]).
+unicode_case_folding(7910, 'C', [7911]).
+unicode_case_folding(7912, 'C', [7913]).
+unicode_case_folding(7914, 'C', [7915]).
+unicode_case_folding(7916, 'C', [7917]).
+unicode_case_folding(7918, 'C', [7919]).
+unicode_case_folding(7920, 'C', [7921]).
+unicode_case_folding(7922, 'C', [7923]).
+unicode_case_folding(7924, 'C', [7925]).
+unicode_case_folding(7926, 'C', [7927]).
+unicode_case_folding(7928, 'C', [7929]).
+unicode_case_folding(7930, 'C', [7931]).
+unicode_case_folding(7932, 'C', [7933]).
+unicode_case_folding(7934, 'C', [7935]).
+unicode_case_folding(7944, 'C', [7936]).
+unicode_case_folding(7945, 'C', [7937]).
+unicode_case_folding(7946, 'C', [7938]).
+unicode_case_folding(7947, 'C', [7939]).
+unicode_case_folding(7948, 'C', [7940]).
+unicode_case_folding(7949, 'C', [7941]).
+unicode_case_folding(7950, 'C', [7942]).
+unicode_case_folding(7951, 'C', [7943]).
+unicode_case_folding(7960, 'C', [7952]).
+unicode_case_folding(7961, 'C', [7953]).
+unicode_case_folding(7962, 'C', [7954]).
+unicode_case_folding(7963, 'C', [7955]).
+unicode_case_folding(7964, 'C', [7956]).
+unicode_case_folding(7965, 'C', [7957]).
+unicode_case_folding(7976, 'C', [7968]).
+unicode_case_folding(7977, 'C', [7969]).
+unicode_case_folding(7978, 'C', [7970]).
+unicode_case_folding(7979, 'C', [7971]).
+unicode_case_folding(7980, 'C', [7972]).
+unicode_case_folding(7981, 'C', [7973]).
+unicode_case_folding(7982, 'C', [7974]).
+unicode_case_folding(7983, 'C', [7975]).
+unicode_case_folding(7992, 'C', [7984]).
+unicode_case_folding(7993, 'C', [7985]).
+unicode_case_folding(7994, 'C', [7986]).
+unicode_case_folding(7995, 'C', [7987]).
+unicode_case_folding(7996, 'C', [7988]).
+unicode_case_folding(7997, 'C', [7989]).
+unicode_case_folding(7998, 'C', [7990]).
+unicode_case_folding(7999, 'C', [7991]).
+unicode_case_folding(8008, 'C', [8000]).
+unicode_case_folding(8009, 'C', [8001]).
+unicode_case_folding(8010, 'C', [8002]).
+unicode_case_folding(8011, 'C', [8003]).
+unicode_case_folding(8012, 'C', [8004]).
+unicode_case_folding(8013, 'C', [8005]).
+unicode_case_folding(8016, 'F', [965,787]).
+unicode_case_folding(8018, 'F', [965,787,768]).
+unicode_case_folding(8020, 'F', [965,787,769]).
+unicode_case_folding(8022, 'F', [965,787,834]).
+unicode_case_folding(8025, 'C', [8017]).
+unicode_case_folding(8027, 'C', [8019]).
+unicode_case_folding(8029, 'C', [8021]).
+unicode_case_folding(8031, 'C', [8023]).
+unicode_case_folding(8040, 'C', [8032]).
+unicode_case_folding(8041, 'C', [8033]).
+unicode_case_folding(8042, 'C', [8034]).
+unicode_case_folding(8043, 'C', [8035]).
+unicode_case_folding(8044, 'C', [8036]).
+unicode_case_folding(8045, 'C', [8037]).
+unicode_case_folding(8046, 'C', [8038]).
+unicode_case_folding(8047, 'C', [8039]).
+unicode_case_folding(8064, 'F', [7936,953]).
+unicode_case_folding(8065, 'F', [7937,953]).
+unicode_case_folding(8066, 'F', [7938,953]).
+unicode_case_folding(8067, 'F', [7939,953]).
+unicode_case_folding(8068, 'F', [7940,953]).
+unicode_case_folding(8069, 'F', [7941,953]).
+unicode_case_folding(8070, 'F', [7942,953]).
+unicode_case_folding(8071, 'F', [7943,953]).
+unicode_case_folding(8072, 'F', [7936,953]).
+unicode_case_folding(8072, 'S', [8064]).
+unicode_case_folding(8073, 'F', [7937,953]).
+unicode_case_folding(8073, 'S', [8065]).
+unicode_case_folding(8074, 'F', [7938,953]).
+unicode_case_folding(8074, 'S', [8066]).
+unicode_case_folding(8075, 'F', [7939,953]).
+unicode_case_folding(8075, 'S', [8067]).
+unicode_case_folding(8076, 'F', [7940,953]).
+unicode_case_folding(8076, 'S', [8068]).
+unicode_case_folding(8077, 'F', [7941,953]).
+unicode_case_folding(8077, 'S', [8069]).
+unicode_case_folding(8078, 'F', [7942,953]).
+unicode_case_folding(8078, 'S', [8070]).
+unicode_case_folding(8079, 'F', [7943,953]).
+unicode_case_folding(8079, 'S', [8071]).
+unicode_case_folding(8080, 'F', [7968,953]).
+unicode_case_folding(8081, 'F', [7969,953]).
+unicode_case_folding(8082, 'F', [7970,953]).
+unicode_case_folding(8083, 'F', [7971,953]).
+unicode_case_folding(8084, 'F', [7972,953]).
+unicode_case_folding(8085, 'F', [7973,953]).
+unicode_case_folding(8086, 'F', [7974,953]).
+unicode_case_folding(8087, 'F', [7975,953]).
+unicode_case_folding(8088, 'F', [7968,953]).
+unicode_case_folding(8088, 'S', [8080]).
+unicode_case_folding(8089, 'F', [7969,953]).
+unicode_case_folding(8089, 'S', [8081]).
+unicode_case_folding(8090, 'F', [7970,953]).
+unicode_case_folding(8090, 'S', [8082]).
+unicode_case_folding(8091, 'F', [7971,953]).
+unicode_case_folding(8091, 'S', [8083]).
+unicode_case_folding(8092, 'F', [7972,953]).
+unicode_case_folding(8092, 'S', [8084]).
+unicode_case_folding(8093, 'F', [7973,953]).
+unicode_case_folding(8093, 'S', [8085]).
+unicode_case_folding(8094, 'F', [7974,953]).
+unicode_case_folding(8094, 'S', [8086]).
+unicode_case_folding(8095, 'F', [7975,953]).
+unicode_case_folding(8095, 'S', [8087]).
+unicode_case_folding(8096, 'F', [8032,953]).
+unicode_case_folding(8097, 'F', [8033,953]).
+unicode_case_folding(8098, 'F', [8034,953]).
+unicode_case_folding(8099, 'F', [8035,953]).
+unicode_case_folding(8100, 'F', [8036,953]).
+unicode_case_folding(8101, 'F', [8037,953]).
+unicode_case_folding(8102, 'F', [8038,953]).
+unicode_case_folding(8103, 'F', [8039,953]).
+unicode_case_folding(8104, 'F', [8032,953]).
+unicode_case_folding(8104, 'S', [8096]).
+unicode_case_folding(8105, 'F', [8033,953]).
+unicode_case_folding(8105, 'S', [8097]).
+unicode_case_folding(8106, 'F', [8034,953]).
+unicode_case_folding(8106, 'S', [8098]).
+unicode_case_folding(8107, 'F', [8035,953]).
+unicode_case_folding(8107, 'S', [8099]).
+unicode_case_folding(8108, 'F', [8036,953]).
+unicode_case_folding(8108, 'S', [8100]).
+unicode_case_folding(8109, 'F', [8037,953]).
+unicode_case_folding(8109, 'S', [8101]).
+unicode_case_folding(8110, 'F', [8038,953]).
+unicode_case_folding(8110, 'S', [8102]).
+unicode_case_folding(8111, 'F', [8039,953]).
+unicode_case_folding(8111, 'S', [8103]).
+unicode_case_folding(8114, 'F', [8048,953]).
+unicode_case_folding(8115, 'F', [945,953]).
+unicode_case_folding(8116, 'F', [940,953]).
+unicode_case_folding(8118, 'F', [945,834]).
+unicode_case_folding(8119, 'F', [945,834,953]).
+unicode_case_folding(8120, 'C', [8112]).
+unicode_case_folding(8121, 'C', [8113]).
+unicode_case_folding(8122, 'C', [8048]).
+unicode_case_folding(8123, 'C', [8049]).
+unicode_case_folding(8124, 'F', [945,953]).
+unicode_case_folding(8124, 'S', [8115]).
+unicode_case_folding(8126, 'C', [953]).
+unicode_case_folding(8130, 'F', [8052,953]).
+unicode_case_folding(8131, 'F', [951,953]).
+unicode_case_folding(8132, 'F', [942,953]).
+unicode_case_folding(8134, 'F', [951,834]).
+unicode_case_folding(8135, 'F', [951,834,953]).
+unicode_case_folding(8136, 'C', [8050]).
+unicode_case_folding(8137, 'C', [8051]).
+unicode_case_folding(8138, 'C', [8052]).
+unicode_case_folding(8139, 'C', [8053]).
+unicode_case_folding(8140, 'F', [951,953]).
+unicode_case_folding(8140, 'S', [8131]).
+unicode_case_folding(8146, 'F', [953,776,768]).
+unicode_case_folding(8147, 'F', [953,776,769]).
+unicode_case_folding(8147, 'S', [912]).
+unicode_case_folding(8150, 'F', [953,834]).
+unicode_case_folding(8151, 'F', [953,776,834]).
+unicode_case_folding(8152, 'C', [8144]).
+unicode_case_folding(8153, 'C', [8145]).
+unicode_case_folding(8154, 'C', [8054]).
+unicode_case_folding(8155, 'C', [8055]).
+unicode_case_folding(8162, 'F', [965,776,768]).
+unicode_case_folding(8163, 'F', [965,776,769]).
+unicode_case_folding(8163, 'S', [944]).
+unicode_case_folding(8164, 'F', [961,787]).
+unicode_case_folding(8166, 'F', [965,834]).
+unicode_case_folding(8167, 'F', [965,776,834]).
+unicode_case_folding(8168, 'C', [8160]).
+unicode_case_folding(8169, 'C', [8161]).
+unicode_case_folding(8170, 'C', [8058]).
+unicode_case_folding(8171, 'C', [8059]).
+unicode_case_folding(8172, 'C', [8165]).
+unicode_case_folding(8178, 'F', [8060,953]).
+unicode_case_folding(8179, 'F', [969,953]).
+unicode_case_folding(8180, 'F', [974,953]).
+unicode_case_folding(8182, 'F', [969,834]).
+unicode_case_folding(8183, 'F', [969,834,953]).
+unicode_case_folding(8184, 'C', [8056]).
+unicode_case_folding(8185, 'C', [8057]).
+unicode_case_folding(8186, 'C', [8060]).
+unicode_case_folding(8187, 'C', [8061]).
+unicode_case_folding(8188, 'F', [969,953]).
+unicode_case_folding(8188, 'S', [8179]).
+unicode_case_folding(8486, 'C', [969]).
+unicode_case_folding(8490, 'C', [107]).
+unicode_case_folding(8491, 'C', [229]).
+unicode_case_folding(8498, 'C', [8526]).
+unicode_case_folding(8544, 'C', [8560]).
+unicode_case_folding(8545, 'C', [8561]).
+unicode_case_folding(8546, 'C', [8562]).
+unicode_case_folding(8547, 'C', [8563]).
+unicode_case_folding(8548, 'C', [8564]).
+unicode_case_folding(8549, 'C', [8565]).
+unicode_case_folding(8550, 'C', [8566]).
+unicode_case_folding(8551, 'C', [8567]).
+unicode_case_folding(8552, 'C', [8568]).
+unicode_case_folding(8553, 'C', [8569]).
+unicode_case_folding(8554, 'C', [8570]).
+unicode_case_folding(8555, 'C', [8571]).
+unicode_case_folding(8556, 'C', [8572]).
+unicode_case_folding(8557, 'C', [8573]).
+unicode_case_folding(8558, 'C', [8574]).
+unicode_case_folding(8559, 'C', [8575]).
+unicode_case_folding(8579, 'C', [8580]).
+unicode_case_folding(9398, 'C', [9424]).
+unicode_case_folding(9399, 'C', [9425]).
+unicode_case_folding(9400, 'C', [9426]).
+unicode_case_folding(9401, 'C', [9427]).
+unicode_case_folding(9402, 'C', [9428]).
+unicode_case_folding(9403, 'C', [9429]).
+unicode_case_folding(9404, 'C', [9430]).
+unicode_case_folding(9405, 'C', [9431]).
+unicode_case_folding(9406, 'C', [9432]).
+unicode_case_folding(9407, 'C', [9433]).
+unicode_case_folding(9408, 'C', [9434]).
+unicode_case_folding(9409, 'C', [9435]).
+unicode_case_folding(9410, 'C', [9436]).
+unicode_case_folding(9411, 'C', [9437]).
+unicode_case_folding(9412, 'C', [9438]).
+unicode_case_folding(9413, 'C', [9439]).
+unicode_case_folding(9414, 'C', [9440]).
+unicode_case_folding(9415, 'C', [9441]).
+unicode_case_folding(9416, 'C', [9442]).
+unicode_case_folding(9417, 'C', [9443]).
+unicode_case_folding(9418, 'C', [9444]).
+unicode_case_folding(9419, 'C', [9445]).
+unicode_case_folding(9420, 'C', [9446]).
+unicode_case_folding(9421, 'C', [9447]).
+unicode_case_folding(9422, 'C', [9448]).
+unicode_case_folding(9423, 'C', [9449]).
+unicode_case_folding(11264, 'C', [11312]).
+unicode_case_folding(11265, 'C', [11313]).
+unicode_case_folding(11266, 'C', [11314]).
+unicode_case_folding(11267, 'C', [11315]).
+unicode_case_folding(11268, 'C', [11316]).
+unicode_case_folding(11269, 'C', [11317]).
+unicode_case_folding(11270, 'C', [11318]).
+unicode_case_folding(11271, 'C', [11319]).
+unicode_case_folding(11272, 'C', [11320]).
+unicode_case_folding(11273, 'C', [11321]).
+unicode_case_folding(11274, 'C', [11322]).
+unicode_case_folding(11275, 'C', [11323]).
+unicode_case_folding(11276, 'C', [11324]).
+unicode_case_folding(11277, 'C', [11325]).
+unicode_case_folding(11278, 'C', [11326]).
+unicode_case_folding(11279, 'C', [11327]).
+unicode_case_folding(11280, 'C', [11328]).
+unicode_case_folding(11281, 'C', [11329]).
+unicode_case_folding(11282, 'C', [11330]).
+unicode_case_folding(11283, 'C', [11331]).
+unicode_case_folding(11284, 'C', [11332]).
+unicode_case_folding(11285, 'C', [11333]).
+unicode_case_folding(11286, 'C', [11334]).
+unicode_case_folding(11287, 'C', [11335]).
+unicode_case_folding(11288, 'C', [11336]).
+unicode_case_folding(11289, 'C', [11337]).
+unicode_case_folding(11290, 'C', [11338]).
+unicode_case_folding(11291, 'C', [11339]).
+unicode_case_folding(11292, 'C', [11340]).
+unicode_case_folding(11293, 'C', [11341]).
+unicode_case_folding(11294, 'C', [11342]).
+unicode_case_folding(11295, 'C', [11343]).
+unicode_case_folding(11296, 'C', [11344]).
+unicode_case_folding(11297, 'C', [11345]).
+unicode_case_folding(11298, 'C', [11346]).
+unicode_case_folding(11299, 'C', [11347]).
+unicode_case_folding(11300, 'C', [11348]).
+unicode_case_folding(11301, 'C', [11349]).
+unicode_case_folding(11302, 'C', [11350]).
+unicode_case_folding(11303, 'C', [11351]).
+unicode_case_folding(11304, 'C', [11352]).
+unicode_case_folding(11305, 'C', [11353]).
+unicode_case_folding(11306, 'C', [11354]).
+unicode_case_folding(11307, 'C', [11355]).
+unicode_case_folding(11308, 'C', [11356]).
+unicode_case_folding(11309, 'C', [11357]).
+unicode_case_folding(11310, 'C', [11358]).
+unicode_case_folding(11311, 'C', [11359]).
+unicode_case_folding(11360, 'C', [11361]).
+unicode_case_folding(11362, 'C', [619]).
+unicode_case_folding(11363, 'C', [7549]).
+unicode_case_folding(11364, 'C', [637]).
+unicode_case_folding(11367, 'C', [11368]).
+unicode_case_folding(11369, 'C', [11370]).
+unicode_case_folding(11371, 'C', [11372]).
+unicode_case_folding(11373, 'C', [593]).
+unicode_case_folding(11374, 'C', [625]).
+unicode_case_folding(11375, 'C', [592]).
+unicode_case_folding(11376, 'C', [594]).
+unicode_case_folding(11378, 'C', [11379]).
+unicode_case_folding(11381, 'C', [11382]).
+unicode_case_folding(11390, 'C', [575]).
+unicode_case_folding(11391, 'C', [576]).
+unicode_case_folding(11392, 'C', [11393]).
+unicode_case_folding(11394, 'C', [11395]).
+unicode_case_folding(11396, 'C', [11397]).
+unicode_case_folding(11398, 'C', [11399]).
+unicode_case_folding(11400, 'C', [11401]).
+unicode_case_folding(11402, 'C', [11403]).
+unicode_case_folding(11404, 'C', [11405]).
+unicode_case_folding(11406, 'C', [11407]).
+unicode_case_folding(11408, 'C', [11409]).
+unicode_case_folding(11410, 'C', [11411]).
+unicode_case_folding(11412, 'C', [11413]).
+unicode_case_folding(11414, 'C', [11415]).
+unicode_case_folding(11416, 'C', [11417]).
+unicode_case_folding(11418, 'C', [11419]).
+unicode_case_folding(11420, 'C', [11421]).
+unicode_case_folding(11422, 'C', [11423]).
+unicode_case_folding(11424, 'C', [11425]).
+unicode_case_folding(11426, 'C', [11427]).
+unicode_case_folding(11428, 'C', [11429]).
+unicode_case_folding(11430, 'C', [11431]).
+unicode_case_folding(11432, 'C', [11433]).
+unicode_case_folding(11434, 'C', [11435]).
+unicode_case_folding(11436, 'C', [11437]).
+unicode_case_folding(11438, 'C', [11439]).
+unicode_case_folding(11440, 'C', [11441]).
+unicode_case_folding(11442, 'C', [11443]).
+unicode_case_folding(11444, 'C', [11445]).
+unicode_case_folding(11446, 'C', [11447]).
+unicode_case_folding(11448, 'C', [11449]).
+unicode_case_folding(11450, 'C', [11451]).
+unicode_case_folding(11452, 'C', [11453]).
+unicode_case_folding(11454, 'C', [11455]).
+unicode_case_folding(11456, 'C', [11457]).
+unicode_case_folding(11458, 'C', [11459]).
+unicode_case_folding(11460, 'C', [11461]).
+unicode_case_folding(11462, 'C', [11463]).
+unicode_case_folding(11464, 'C', [11465]).
+unicode_case_folding(11466, 'C', [11467]).
+unicode_case_folding(11468, 'C', [11469]).
+unicode_case_folding(11470, 'C', [11471]).
+unicode_case_folding(11472, 'C', [11473]).
+unicode_case_folding(11474, 'C', [11475]).
+unicode_case_folding(11476, 'C', [11477]).
+unicode_case_folding(11478, 'C', [11479]).
+unicode_case_folding(11480, 'C', [11481]).
+unicode_case_folding(11482, 'C', [11483]).
+unicode_case_folding(11484, 'C', [11485]).
+unicode_case_folding(11486, 'C', [11487]).
+unicode_case_folding(11488, 'C', [11489]).
+unicode_case_folding(11490, 'C', [11491]).
+unicode_case_folding(11499, 'C', [11500]).
+unicode_case_folding(11501, 'C', [11502]).
+unicode_case_folding(11506, 'C', [11507]).
+unicode_case_folding(42560, 'C', [42561]).
+unicode_case_folding(42562, 'C', [42563]).
+unicode_case_folding(42564, 'C', [42565]).
+unicode_case_folding(42566, 'C', [42567]).
+unicode_case_folding(42568, 'C', [42569]).
+unicode_case_folding(42570, 'C', [42571]).
+unicode_case_folding(42572, 'C', [42573]).
+unicode_case_folding(42574, 'C', [42575]).
+unicode_case_folding(42576, 'C', [42577]).
+unicode_case_folding(42578, 'C', [42579]).
+unicode_case_folding(42580, 'C', [42581]).
+unicode_case_folding(42582, 'C', [42583]).
+unicode_case_folding(42584, 'C', [42585]).
+unicode_case_folding(42586, 'C', [42587]).
+unicode_case_folding(42588, 'C', [42589]).
+unicode_case_folding(42590, 'C', [42591]).
+unicode_case_folding(42592, 'C', [42593]).
+unicode_case_folding(42594, 'C', [42595]).
+unicode_case_folding(42596, 'C', [42597]).
+unicode_case_folding(42598, 'C', [42599]).
+unicode_case_folding(42600, 'C', [42601]).
+unicode_case_folding(42602, 'C', [42603]).
+unicode_case_folding(42604, 'C', [42605]).
+unicode_case_folding(42624, 'C', [42625]).
+unicode_case_folding(42626, 'C', [42627]).
+unicode_case_folding(42628, 'C', [42629]).
+unicode_case_folding(42630, 'C', [42631]).
+unicode_case_folding(42632, 'C', [42633]).
+unicode_case_folding(42634, 'C', [42635]).
+unicode_case_folding(42636, 'C', [42637]).
+unicode_case_folding(42638, 'C', [42639]).
+unicode_case_folding(42640, 'C', [42641]).
+unicode_case_folding(42642, 'C', [42643]).
+unicode_case_folding(42644, 'C', [42645]).
+unicode_case_folding(42646, 'C', [42647]).
+unicode_case_folding(42648, 'C', [42649]).
+unicode_case_folding(42650, 'C', [42651]).
+unicode_case_folding(42786, 'C', [42787]).
+unicode_case_folding(42788, 'C', [42789]).
+unicode_case_folding(42790, 'C', [42791]).
+unicode_case_folding(42792, 'C', [42793]).
+unicode_case_folding(42794, 'C', [42795]).
+unicode_case_folding(42796, 'C', [42797]).
+unicode_case_folding(42798, 'C', [42799]).
+unicode_case_folding(42802, 'C', [42803]).
+unicode_case_folding(42804, 'C', [42805]).
+unicode_case_folding(42806, 'C', [42807]).
+unicode_case_folding(42808, 'C', [42809]).
+unicode_case_folding(42810, 'C', [42811]).
+unicode_case_folding(42812, 'C', [42813]).
+unicode_case_folding(42814, 'C', [42815]).
+unicode_case_folding(42816, 'C', [42817]).
+unicode_case_folding(42818, 'C', [42819]).
+unicode_case_folding(42820, 'C', [42821]).
+unicode_case_folding(42822, 'C', [42823]).
+unicode_case_folding(42824, 'C', [42825]).
+unicode_case_folding(42826, 'C', [42827]).
+unicode_case_folding(42828, 'C', [42829]).
+unicode_case_folding(42830, 'C', [42831]).
+unicode_case_folding(42832, 'C', [42833]).
+unicode_case_folding(42834, 'C', [42835]).
+unicode_case_folding(42836, 'C', [42837]).
+unicode_case_folding(42838, 'C', [42839]).
+unicode_case_folding(42840, 'C', [42841]).
+unicode_case_folding(42842, 'C', [42843]).
+unicode_case_folding(42844, 'C', [42845]).
+unicode_case_folding(42846, 'C', [42847]).
+unicode_case_folding(42848, 'C', [42849]).
+unicode_case_folding(42850, 'C', [42851]).
+unicode_case_folding(42852, 'C', [42853]).
+unicode_case_folding(42854, 'C', [42855]).
+unicode_case_folding(42856, 'C', [42857]).
+unicode_case_folding(42858, 'C', [42859]).
+unicode_case_folding(42860, 'C', [42861]).
+unicode_case_folding(42862, 'C', [42863]).
+unicode_case_folding(42873, 'C', [42874]).
+unicode_case_folding(42875, 'C', [42876]).
+unicode_case_folding(42877, 'C', [7545]).
+unicode_case_folding(42878, 'C', [42879]).
+unicode_case_folding(42880, 'C', [42881]).
+unicode_case_folding(42882, 'C', [42883]).
+unicode_case_folding(42884, 'C', [42885]).
+unicode_case_folding(42886, 'C', [42887]).
+unicode_case_folding(42891, 'C', [42892]).
+unicode_case_folding(42893, 'C', [613]).
+unicode_case_folding(42896, 'C', [42897]).
+unicode_case_folding(42898, 'C', [42899]).
+unicode_case_folding(42902, 'C', [42903]).
+unicode_case_folding(42904, 'C', [42905]).
+unicode_case_folding(42906, 'C', [42907]).
+unicode_case_folding(42908, 'C', [42909]).
+unicode_case_folding(42910, 'C', [42911]).
+unicode_case_folding(42912, 'C', [42913]).
+unicode_case_folding(42914, 'C', [42915]).
+unicode_case_folding(42916, 'C', [42917]).
+unicode_case_folding(42918, 'C', [42919]).
+unicode_case_folding(42920, 'C', [42921]).
+unicode_case_folding(42922, 'C', [614]).
+unicode_case_folding(42923, 'C', [604]).
+unicode_case_folding(42924, 'C', [609]).
+unicode_case_folding(42925, 'C', [620]).
+unicode_case_folding(42926, 'C', [618]).
+unicode_case_folding(42928, 'C', [670]).
+unicode_case_folding(42929, 'C', [647]).
+unicode_case_folding(42930, 'C', [669]).
+unicode_case_folding(42931, 'C', [43859]).
+unicode_case_folding(42932, 'C', [42933]).
+unicode_case_folding(42934, 'C', [42935]).
+unicode_case_folding(42936, 'C', [42937]).
+unicode_case_folding(42938, 'C', [42939]).
+unicode_case_folding(42940, 'C', [42941]).
+unicode_case_folding(42942, 'C', [42943]).
+unicode_case_folding(42944, 'C', [42945]).
+unicode_case_folding(42946, 'C', [42947]).
+unicode_case_folding(42948, 'C', [42900]).
+unicode_case_folding(42949, 'C', [642]).
+unicode_case_folding(42950, 'C', [7566]).
+unicode_case_folding(42951, 'C', [42952]).
+unicode_case_folding(42953, 'C', [42954]).
+unicode_case_folding(42955, 'C', [612]).
+unicode_case_folding(42956, 'C', [42957]).
+unicode_case_folding(42958, 'C', [42959]).
+unicode_case_folding(42960, 'C', [42961]).
+unicode_case_folding(42962, 'C', [42963]).
+unicode_case_folding(42964, 'C', [42965]).
+unicode_case_folding(42966, 'C', [42967]).
+unicode_case_folding(42968, 'C', [42969]).
+unicode_case_folding(42970, 'C', [42971]).
+unicode_case_folding(42972, 'C', [411]).
+unicode_case_folding(42997, 'C', [42998]).
+unicode_case_folding(43888, 'C', [5024]).
+unicode_case_folding(43889, 'C', [5025]).
+unicode_case_folding(43890, 'C', [5026]).
+unicode_case_folding(43891, 'C', [5027]).
+unicode_case_folding(43892, 'C', [5028]).
+unicode_case_folding(43893, 'C', [5029]).
+unicode_case_folding(43894, 'C', [5030]).
+unicode_case_folding(43895, 'C', [5031]).
+unicode_case_folding(43896, 'C', [5032]).
+unicode_case_folding(43897, 'C', [5033]).
+unicode_case_folding(43898, 'C', [5034]).
+unicode_case_folding(43899, 'C', [5035]).
+unicode_case_folding(43900, 'C', [5036]).
+unicode_case_folding(43901, 'C', [5037]).
+unicode_case_folding(43902, 'C', [5038]).
+unicode_case_folding(43903, 'C', [5039]).
+unicode_case_folding(43904, 'C', [5040]).
+unicode_case_folding(43905, 'C', [5041]).
+unicode_case_folding(43906, 'C', [5042]).
+unicode_case_folding(43907, 'C', [5043]).
+unicode_case_folding(43908, 'C', [5044]).
+unicode_case_folding(43909, 'C', [5045]).
+unicode_case_folding(43910, 'C', [5046]).
+unicode_case_folding(43911, 'C', [5047]).
+unicode_case_folding(43912, 'C', [5048]).
+unicode_case_folding(43913, 'C', [5049]).
+unicode_case_folding(43914, 'C', [5050]).
+unicode_case_folding(43915, 'C', [5051]).
+unicode_case_folding(43916, 'C', [5052]).
+unicode_case_folding(43917, 'C', [5053]).
+unicode_case_folding(43918, 'C', [5054]).
+unicode_case_folding(43919, 'C', [5055]).
+unicode_case_folding(43920, 'C', [5056]).
+unicode_case_folding(43921, 'C', [5057]).
+unicode_case_folding(43922, 'C', [5058]).
+unicode_case_folding(43923, 'C', [5059]).
+unicode_case_folding(43924, 'C', [5060]).
+unicode_case_folding(43925, 'C', [5061]).
+unicode_case_folding(43926, 'C', [5062]).
+unicode_case_folding(43927, 'C', [5063]).
+unicode_case_folding(43928, 'C', [5064]).
+unicode_case_folding(43929, 'C', [5065]).
+unicode_case_folding(43930, 'C', [5066]).
+unicode_case_folding(43931, 'C', [5067]).
+unicode_case_folding(43932, 'C', [5068]).
+unicode_case_folding(43933, 'C', [5069]).
+unicode_case_folding(43934, 'C', [5070]).
+unicode_case_folding(43935, 'C', [5071]).
+unicode_case_folding(43936, 'C', [5072]).
+unicode_case_folding(43937, 'C', [5073]).
+unicode_case_folding(43938, 'C', [5074]).
+unicode_case_folding(43939, 'C', [5075]).
+unicode_case_folding(43940, 'C', [5076]).
+unicode_case_folding(43941, 'C', [5077]).
+unicode_case_folding(43942, 'C', [5078]).
+unicode_case_folding(43943, 'C', [5079]).
+unicode_case_folding(43944, 'C', [5080]).
+unicode_case_folding(43945, 'C', [5081]).
+unicode_case_folding(43946, 'C', [5082]).
+unicode_case_folding(43947, 'C', [5083]).
+unicode_case_folding(43948, 'C', [5084]).
+unicode_case_folding(43949, 'C', [5085]).
+unicode_case_folding(43950, 'C', [5086]).
+unicode_case_folding(43951, 'C', [5087]).
+unicode_case_folding(43952, 'C', [5088]).
+unicode_case_folding(43953, 'C', [5089]).
+unicode_case_folding(43954, 'C', [5090]).
+unicode_case_folding(43955, 'C', [5091]).
+unicode_case_folding(43956, 'C', [5092]).
+unicode_case_folding(43957, 'C', [5093]).
+unicode_case_folding(43958, 'C', [5094]).
+unicode_case_folding(43959, 'C', [5095]).
+unicode_case_folding(43960, 'C', [5096]).
+unicode_case_folding(43961, 'C', [5097]).
+unicode_case_folding(43962, 'C', [5098]).
+unicode_case_folding(43963, 'C', [5099]).
+unicode_case_folding(43964, 'C', [5100]).
+unicode_case_folding(43965, 'C', [5101]).
+unicode_case_folding(43966, 'C', [5102]).
+unicode_case_folding(43967, 'C', [5103]).
+unicode_case_folding(64256, 'F', [102,102]).
+unicode_case_folding(64257, 'F', [102,105]).
+unicode_case_folding(64258, 'F', [102,108]).
+unicode_case_folding(64259, 'F', [102,102,105]).
+unicode_case_folding(64260, 'F', [102,102,108]).
+unicode_case_folding(64261, 'F', [115,116]).
+unicode_case_folding(64261, 'S', [64262]).
+unicode_case_folding(64262, 'F', [115,116]).
+unicode_case_folding(64275, 'F', [1396,1398]).
+unicode_case_folding(64276, 'F', [1396,1381]).
+unicode_case_folding(64277, 'F', [1396,1387]).
+unicode_case_folding(64278, 'F', [1406,1398]).
+unicode_case_folding(64279, 'F', [1396,1389]).
+unicode_case_folding(65313, 'C', [65345]).
+unicode_case_folding(65314, 'C', [65346]).
+unicode_case_folding(65315, 'C', [65347]).
+unicode_case_folding(65316, 'C', [65348]).
+unicode_case_folding(65317, 'C', [65349]).
+unicode_case_folding(65318, 'C', [65350]).
+unicode_case_folding(65319, 'C', [65351]).
+unicode_case_folding(65320, 'C', [65352]).
+unicode_case_folding(65321, 'C', [65353]).
+unicode_case_folding(65322, 'C', [65354]).
+unicode_case_folding(65323, 'C', [65355]).
+unicode_case_folding(65324, 'C', [65356]).
+unicode_case_folding(65325, 'C', [65357]).
+unicode_case_folding(65326, 'C', [65358]).
+unicode_case_folding(65327, 'C', [65359]).
+unicode_case_folding(65328, 'C', [65360]).
+unicode_case_folding(65329, 'C', [65361]).
+unicode_case_folding(65330, 'C', [65362]).
+unicode_case_folding(65331, 'C', [65363]).
+unicode_case_folding(65332, 'C', [65364]).
+unicode_case_folding(65333, 'C', [65365]).
+unicode_case_folding(65334, 'C', [65366]).
+unicode_case_folding(65335, 'C', [65367]).
+unicode_case_folding(65336, 'C', [65368]).
+unicode_case_folding(65337, 'C', [65369]).
+unicode_case_folding(65338, 'C', [65370]).
+unicode_case_folding(66560, 'C', [66600]).
+unicode_case_folding(66561, 'C', [66601]).
+unicode_case_folding(66562, 'C', [66602]).
+unicode_case_folding(66563, 'C', [66603]).
+unicode_case_folding(66564, 'C', [66604]).
+unicode_case_folding(66565, 'C', [66605]).
+unicode_case_folding(66566, 'C', [66606]).
+unicode_case_folding(66567, 'C', [66607]).
+unicode_case_folding(66568, 'C', [66608]).
+unicode_case_folding(66569, 'C', [66609]).
+unicode_case_folding(66570, 'C', [66610]).
+unicode_case_folding(66571, 'C', [66611]).
+unicode_case_folding(66572, 'C', [66612]).
+unicode_case_folding(66573, 'C', [66613]).
+unicode_case_folding(66574, 'C', [66614]).
+unicode_case_folding(66575, 'C', [66615]).
+unicode_case_folding(66576, 'C', [66616]).
+unicode_case_folding(66577, 'C', [66617]).
+unicode_case_folding(66578, 'C', [66618]).
+unicode_case_folding(66579, 'C', [66619]).
+unicode_case_folding(66580, 'C', [66620]).
+unicode_case_folding(66581, 'C', [66621]).
+unicode_case_folding(66582, 'C', [66622]).
+unicode_case_folding(66583, 'C', [66623]).
+unicode_case_folding(66584, 'C', [66624]).
+unicode_case_folding(66585, 'C', [66625]).
+unicode_case_folding(66586, 'C', [66626]).
+unicode_case_folding(66587, 'C', [66627]).
+unicode_case_folding(66588, 'C', [66628]).
+unicode_case_folding(66589, 'C', [66629]).
+unicode_case_folding(66590, 'C', [66630]).
+unicode_case_folding(66591, 'C', [66631]).
+unicode_case_folding(66592, 'C', [66632]).
+unicode_case_folding(66593, 'C', [66633]).
+unicode_case_folding(66594, 'C', [66634]).
+unicode_case_folding(66595, 'C', [66635]).
+unicode_case_folding(66596, 'C', [66636]).
+unicode_case_folding(66597, 'C', [66637]).
+unicode_case_folding(66598, 'C', [66638]).
+unicode_case_folding(66599, 'C', [66639]).
+unicode_case_folding(66736, 'C', [66776]).
+unicode_case_folding(66737, 'C', [66777]).
+unicode_case_folding(66738, 'C', [66778]).
+unicode_case_folding(66739, 'C', [66779]).
+unicode_case_folding(66740, 'C', [66780]).
+unicode_case_folding(66741, 'C', [66781]).
+unicode_case_folding(66742, 'C', [66782]).
+unicode_case_folding(66743, 'C', [66783]).
+unicode_case_folding(66744, 'C', [66784]).
+unicode_case_folding(66745, 'C', [66785]).
+unicode_case_folding(66746, 'C', [66786]).
+unicode_case_folding(66747, 'C', [66787]).
+unicode_case_folding(66748, 'C', [66788]).
+unicode_case_folding(66749, 'C', [66789]).
+unicode_case_folding(66750, 'C', [66790]).
+unicode_case_folding(66751, 'C', [66791]).
+unicode_case_folding(66752, 'C', [66792]).
+unicode_case_folding(66753, 'C', [66793]).
+unicode_case_folding(66754, 'C', [66794]).
+unicode_case_folding(66755, 'C', [66795]).
+unicode_case_folding(66756, 'C', [66796]).
+unicode_case_folding(66757, 'C', [66797]).
+unicode_case_folding(66758, 'C', [66798]).
+unicode_case_folding(66759, 'C', [66799]).
+unicode_case_folding(66760, 'C', [66800]).
+unicode_case_folding(66761, 'C', [66801]).
+unicode_case_folding(66762, 'C', [66802]).
+unicode_case_folding(66763, 'C', [66803]).
+unicode_case_folding(66764, 'C', [66804]).
+unicode_case_folding(66765, 'C', [66805]).
+unicode_case_folding(66766, 'C', [66806]).
+unicode_case_folding(66767, 'C', [66807]).
+unicode_case_folding(66768, 'C', [66808]).
+unicode_case_folding(66769, 'C', [66809]).
+unicode_case_folding(66770, 'C', [66810]).
+unicode_case_folding(66771, 'C', [66811]).
+unicode_case_folding(66928, 'C', [66967]).
+unicode_case_folding(66929, 'C', [66968]).
+unicode_case_folding(66930, 'C', [66969]).
+unicode_case_folding(66931, 'C', [66970]).
+unicode_case_folding(66932, 'C', [66971]).
+unicode_case_folding(66933, 'C', [66972]).
+unicode_case_folding(66934, 'C', [66973]).
+unicode_case_folding(66935, 'C', [66974]).
+unicode_case_folding(66936, 'C', [66975]).
+unicode_case_folding(66937, 'C', [66976]).
+unicode_case_folding(66938, 'C', [66977]).
+unicode_case_folding(66940, 'C', [66979]).
+unicode_case_folding(66941, 'C', [66980]).
+unicode_case_folding(66942, 'C', [66981]).
+unicode_case_folding(66943, 'C', [66982]).
+unicode_case_folding(66944, 'C', [66983]).
+unicode_case_folding(66945, 'C', [66984]).
+unicode_case_folding(66946, 'C', [66985]).
+unicode_case_folding(66947, 'C', [66986]).
+unicode_case_folding(66948, 'C', [66987]).
+unicode_case_folding(66949, 'C', [66988]).
+unicode_case_folding(66950, 'C', [66989]).
+unicode_case_folding(66951, 'C', [66990]).
+unicode_case_folding(66952, 'C', [66991]).
+unicode_case_folding(66953, 'C', [66992]).
+unicode_case_folding(66954, 'C', [66993]).
+unicode_case_folding(66956, 'C', [66995]).
+unicode_case_folding(66957, 'C', [66996]).
+unicode_case_folding(66958, 'C', [66997]).
+unicode_case_folding(66959, 'C', [66998]).
+unicode_case_folding(66960, 'C', [66999]).
+unicode_case_folding(66961, 'C', [67000]).
+unicode_case_folding(66962, 'C', [67001]).
+unicode_case_folding(66964, 'C', [67003]).
+unicode_case_folding(66965, 'C', [67004]).
+unicode_case_folding(68736, 'C', [68800]).
+unicode_case_folding(68737, 'C', [68801]).
+unicode_case_folding(68738, 'C', [68802]).
+unicode_case_folding(68739, 'C', [68803]).
+unicode_case_folding(68740, 'C', [68804]).
+unicode_case_folding(68741, 'C', [68805]).
+unicode_case_folding(68742, 'C', [68806]).
+unicode_case_folding(68743, 'C', [68807]).
+unicode_case_folding(68744, 'C', [68808]).
+unicode_case_folding(68745, 'C', [68809]).
+unicode_case_folding(68746, 'C', [68810]).
+unicode_case_folding(68747, 'C', [68811]).
+unicode_case_folding(68748, 'C', [68812]).
+unicode_case_folding(68749, 'C', [68813]).
+unicode_case_folding(68750, 'C', [68814]).
+unicode_case_folding(68751, 'C', [68815]).
+unicode_case_folding(68752, 'C', [68816]).
+unicode_case_folding(68753, 'C', [68817]).
+unicode_case_folding(68754, 'C', [68818]).
+unicode_case_folding(68755, 'C', [68819]).
+unicode_case_folding(68756, 'C', [68820]).
+unicode_case_folding(68757, 'C', [68821]).
+unicode_case_folding(68758, 'C', [68822]).
+unicode_case_folding(68759, 'C', [68823]).
+unicode_case_folding(68760, 'C', [68824]).
+unicode_case_folding(68761, 'C', [68825]).
+unicode_case_folding(68762, 'C', [68826]).
+unicode_case_folding(68763, 'C', [68827]).
+unicode_case_folding(68764, 'C', [68828]).
+unicode_case_folding(68765, 'C', [68829]).
+unicode_case_folding(68766, 'C', [68830]).
+unicode_case_folding(68767, 'C', [68831]).
+unicode_case_folding(68768, 'C', [68832]).
+unicode_case_folding(68769, 'C', [68833]).
+unicode_case_folding(68770, 'C', [68834]).
+unicode_case_folding(68771, 'C', [68835]).
+unicode_case_folding(68772, 'C', [68836]).
+unicode_case_folding(68773, 'C', [68837]).
+unicode_case_folding(68774, 'C', [68838]).
+unicode_case_folding(68775, 'C', [68839]).
+unicode_case_folding(68776, 'C', [68840]).
+unicode_case_folding(68777, 'C', [68841]).
+unicode_case_folding(68778, 'C', [68842]).
+unicode_case_folding(68779, 'C', [68843]).
+unicode_case_folding(68780, 'C', [68844]).
+unicode_case_folding(68781, 'C', [68845]).
+unicode_case_folding(68782, 'C', [68846]).
+unicode_case_folding(68783, 'C', [68847]).
+unicode_case_folding(68784, 'C', [68848]).
+unicode_case_folding(68785, 'C', [68849]).
+unicode_case_folding(68786, 'C', [68850]).
+unicode_case_folding(68944, 'C', [68976]).
+unicode_case_folding(68945, 'C', [68977]).
+unicode_case_folding(68946, 'C', [68978]).
+unicode_case_folding(68947, 'C', [68979]).
+unicode_case_folding(68948, 'C', [68980]).
+unicode_case_folding(68949, 'C', [68981]).
+unicode_case_folding(68950, 'C', [68982]).
+unicode_case_folding(68951, 'C', [68983]).
+unicode_case_folding(68952, 'C', [68984]).
+unicode_case_folding(68953, 'C', [68985]).
+unicode_case_folding(68954, 'C', [68986]).
+unicode_case_folding(68955, 'C', [68987]).
+unicode_case_folding(68956, 'C', [68988]).
+unicode_case_folding(68957, 'C', [68989]).
+unicode_case_folding(68958, 'C', [68990]).
+unicode_case_folding(68959, 'C', [68991]).
+unicode_case_folding(68960, 'C', [68992]).
+unicode_case_folding(68961, 'C', [68993]).
+unicode_case_folding(68962, 'C', [68994]).
+unicode_case_folding(68963, 'C', [68995]).
+unicode_case_folding(68964, 'C', [68996]).
+unicode_case_folding(68965, 'C', [68997]).
+unicode_case_folding(71840, 'C', [71872]).
+unicode_case_folding(71841, 'C', [71873]).
+unicode_case_folding(71842, 'C', [71874]).
+unicode_case_folding(71843, 'C', [71875]).
+unicode_case_folding(71844, 'C', [71876]).
+unicode_case_folding(71845, 'C', [71877]).
+unicode_case_folding(71846, 'C', [71878]).
+unicode_case_folding(71847, 'C', [71879]).
+unicode_case_folding(71848, 'C', [71880]).
+unicode_case_folding(71849, 'C', [71881]).
+unicode_case_folding(71850, 'C', [71882]).
+unicode_case_folding(71851, 'C', [71883]).
+unicode_case_folding(71852, 'C', [71884]).
+unicode_case_folding(71853, 'C', [71885]).
+unicode_case_folding(71854, 'C', [71886]).
+unicode_case_folding(71855, 'C', [71887]).
+unicode_case_folding(71856, 'C', [71888]).
+unicode_case_folding(71857, 'C', [71889]).
+unicode_case_folding(71858, 'C', [71890]).
+unicode_case_folding(71859, 'C', [71891]).
+unicode_case_folding(71860, 'C', [71892]).
+unicode_case_folding(71861, 'C', [71893]).
+unicode_case_folding(71862, 'C', [71894]).
+unicode_case_folding(71863, 'C', [71895]).
+unicode_case_folding(71864, 'C', [71896]).
+unicode_case_folding(71865, 'C', [71897]).
+unicode_case_folding(71866, 'C', [71898]).
+unicode_case_folding(71867, 'C', [71899]).
+unicode_case_folding(71868, 'C', [71900]).
+unicode_case_folding(71869, 'C', [71901]).
+unicode_case_folding(71870, 'C', [71902]).
+unicode_case_folding(71871, 'C', [71903]).
+unicode_case_folding(93760, 'C', [93792]).
+unicode_case_folding(93761, 'C', [93793]).
+unicode_case_folding(93762, 'C', [93794]).
+unicode_case_folding(93763, 'C', [93795]).
+unicode_case_folding(93764, 'C', [93796]).
+unicode_case_folding(93765, 'C', [93797]).
+unicode_case_folding(93766, 'C', [93798]).
+unicode_case_folding(93767, 'C', [93799]).
+unicode_case_folding(93768, 'C', [93800]).
+unicode_case_folding(93769, 'C', [93801]).
+unicode_case_folding(93770, 'C', [93802]).
+unicode_case_folding(93771, 'C', [93803]).
+unicode_case_folding(93772, 'C', [93804]).
+unicode_case_folding(93773, 'C', [93805]).
+unicode_case_folding(93774, 'C', [93806]).
+unicode_case_folding(93775, 'C', [93807]).
+unicode_case_folding(93776, 'C', [93808]).
+unicode_case_folding(93777, 'C', [93809]).
+unicode_case_folding(93778, 'C', [93810]).
+unicode_case_folding(93779, 'C', [93811]).
+unicode_case_folding(93780, 'C', [93812]).
+unicode_case_folding(93781, 'C', [93813]).
+unicode_case_folding(93782, 'C', [93814]).
+unicode_case_folding(93783, 'C', [93815]).
+unicode_case_folding(93784, 'C', [93816]).
+unicode_case_folding(93785, 'C', [93817]).
+unicode_case_folding(93786, 'C', [93818]).
+unicode_case_folding(93787, 'C', [93819]).
+unicode_case_folding(93788, 'C', [93820]).
+unicode_case_folding(93789, 'C', [93821]).
+unicode_case_folding(93790, 'C', [93822]).
+unicode_case_folding(93791, 'C', [93823]).
+unicode_case_folding(93856, 'C', [93883]).
+unicode_case_folding(93857, 'C', [93884]).
+unicode_case_folding(93858, 'C', [93885]).
+unicode_case_folding(93859, 'C', [93886]).
+unicode_case_folding(93860, 'C', [93887]).
+unicode_case_folding(93861, 'C', [93888]).
+unicode_case_folding(93862, 'C', [93889]).
+unicode_case_folding(93863, 'C', [93890]).
+unicode_case_folding(93864, 'C', [93891]).
+unicode_case_folding(93865, 'C', [93892]).
+unicode_case_folding(93866, 'C', [93893]).
+unicode_case_folding(93867, 'C', [93894]).
+unicode_case_folding(93868, 'C', [93895]).
+unicode_case_folding(93869, 'C', [93896]).
+unicode_case_folding(93870, 'C', [93897]).
+unicode_case_folding(93871, 'C', [93898]).
+unicode_case_folding(93872, 'C', [93899]).
+unicode_case_folding(93873, 'C', [93900]).
+unicode_case_folding(93874, 'C', [93901]).
+unicode_case_folding(93875, 'C', [93902]).
+unicode_case_folding(93876, 'C', [93903]).
+unicode_case_folding(93877, 'C', [93904]).
+unicode_case_folding(93878, 'C', [93905]).
+unicode_case_folding(93879, 'C', [93906]).
+unicode_case_folding(93880, 'C', [93907]).
+unicode_case_folding(125184, 'C', [125218]).
+unicode_case_folding(125185, 'C', [125219]).
+unicode_case_folding(125186, 'C', [125220]).
+unicode_case_folding(125187, 'C', [125221]).
+unicode_case_folding(125188, 'C', [125222]).
+unicode_case_folding(125189, 'C', [125223]).
+unicode_case_folding(125190, 'C', [125224]).
+unicode_case_folding(125191, 'C', [125225]).
+unicode_case_folding(125192, 'C', [125226]).
+unicode_case_folding(125193, 'C', [125227]).
+unicode_case_folding(125194, 'C', [125228]).
+unicode_case_folding(125195, 'C', [125229]).
+unicode_case_folding(125196, 'C', [125230]).
+unicode_case_folding(125197, 'C', [125231]).
+unicode_case_folding(125198, 'C', [125232]).
+unicode_case_folding(125199, 'C', [125233]).
+unicode_case_folding(125200, 'C', [125234]).
+unicode_case_folding(125201, 'C', [125235]).
+unicode_case_folding(125202, 'C', [125236]).
+unicode_case_folding(125203, 'C', [125237]).
+unicode_case_folding(125204, 'C', [125238]).
+unicode_case_folding(125205, 'C', [125239]).
+unicode_case_folding(125206, 'C', [125240]).
+unicode_case_folding(125207, 'C', [125241]).
+unicode_case_folding(125208, 'C', [125242]).
+unicode_case_folding(125209, 'C', [125243]).
+unicode_case_folding(125210, 'C', [125244]).
+unicode_case_folding(125211, 'C', [125245]).
+unicode_case_folding(125212, 'C', [125246]).
+unicode_case_folding(125213, 'C', [125247]).
+unicode_case_folding(125214, 'C', [125248]).
+unicode_case_folding(125215, 'C', [125249]).
+unicode_case_folding(125216, 'C', [125250]).
+unicode_case_folding(125217, 'C', [125251]).

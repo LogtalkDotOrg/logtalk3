@@ -23,8 +23,8 @@ Default language-neutral text normalization profile.
 
 | **Implements:**
 |    ``public`` :ref:`text_normalization_profile_protocol <text_normalization_profile_protocol/0>`
-| **Imports:**
-|    ``public`` :ref:`common_text_entities <common_text_entities/0>`
+| **Uses:**
+|    :ref:`xml_whatwg_entities <xml_whatwg_entities/0>`
 
 | **Remarks:**
 |    (none)

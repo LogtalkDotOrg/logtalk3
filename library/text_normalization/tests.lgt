@@ -33,8 +33,14 @@
 	test(default_profile_xml_entity, deterministic(Codes == [38])) :-
 		default_text_normalization::named_entity(amp, Codes).
 
-	test(default_profile_common_html_entity, deterministic(Codes == [160])) :-
+	test(default_profile_html_entity, deterministic(Codes == [160])) :-
 		default_text_normalization::named_entity(nbsp, Codes).
+
+	test(default_profile_mixed_case_html_entity, deterministic(Codes == [198])) :-
+		default_text_normalization::named_entity('AElig', Codes).
+
+	test(default_profile_multi_code_point_html_entity, deterministic(Codes == [8770, 824])) :-
+		default_text_normalization::named_entity('NotEqualTilde', Codes).
 
 	test(default_profile_unknown_entity, false) :-
 		default_text_normalization::named_entity(unknown, _).

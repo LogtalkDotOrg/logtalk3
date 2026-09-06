@@ -1,447 +1,663 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  This file is part of VivoMind Prolog Unicode Resources
-%  SPDX-License-Identifier: CC0-1.0
+%  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
 %
-%  VivoMind Prolog Unicode Resources is free software distributed using the
-%  Creative Commons CC0 1.0 Universal (CC0 1.0) - Public Domain Dedication
-%  license
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%      http://www.apache.org/licenses/LICENSE-2.0
+%
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%  Last modified: March 13, 2012
+% Generated from Unicode 17.0.0 UnicodeData.txt. Do not edit.
 
-unicode_name(0x0021, 'EXCLAMATION MARK').
-unicode_name(0x0022, 'QUOTATION MARK').
-unicode_name(0x0023, 'NUMBER SIGN').
-unicode_name(0x0025, 'PERCENT SIGN').
-unicode_name(0x0026, 'AMPERSAND').
-unicode_name(0x0027, 'APOSTROPHE').
-unicode_name(0x002A, 'ASTERISK').
-unicode_name(0x002C, 'COMMA').
-unicode_name(0x002E, 'FULL STOP').
-unicode_name(0x002F, 'SOLIDUS').
-unicode_name(0x003A, 'COLON').
-unicode_name(0x003B, 'SEMICOLON').
-unicode_name(0x003F, 'QUESTION MARK').
-unicode_name(0x0040, 'COMMERCIAL AT').
-unicode_name(0x005C, 'REVERSE SOLIDUS').
-unicode_name(0x00A1, 'INVERTED EXCLAMATION MARK').
-unicode_name(0x00A7, 'SECTION SIGN').
-unicode_name(0x00B6, 'PILCROW SIGN').
-unicode_name(0x00B7, 'MIDDLE DOT').
-unicode_name(0x00BF, 'INVERTED QUESTION MARK').
-unicode_name(0x037E, 'GREEK QUESTION MARK').
-unicode_name(0x0387, 'GREEK ANO TELEIA').
-unicode_name(0x055A, 'ARMENIAN APOSTROPHE').
-unicode_name(0x055B, 'ARMENIAN EMPHASIS MARK').
-unicode_name(0x055C, 'ARMENIAN EXCLAMATION MARK').
-unicode_name(0x055D, 'ARMENIAN COMMA').
-unicode_name(0x055E, 'ARMENIAN QUESTION MARK').
-unicode_name(0x055F, 'ARMENIAN ABBREVIATION MARK').
-unicode_name(0x0589, 'ARMENIAN FULL STOP').
-unicode_name(0x05C0, 'HEBREW PUNCTUATION PASEQ').
-unicode_name(0x05C3, 'HEBREW PUNCTUATION SOF PASUQ').
-unicode_name(0x05C6, 'HEBREW PUNCTUATION NUN HAFUKHA').
-unicode_name(0x05F3, 'HEBREW PUNCTUATION GERESH').
-unicode_name(0x05F4, 'HEBREW PUNCTUATION GERSHAYIM').
-unicode_name(0x0609, 'ARABIC-INDIC PER MILLE SIGN').
-unicode_name(0x060A, 'ARABIC-INDIC PER TEN THOUSAND SIGN').
-unicode_name(0x060C, 'ARABIC COMMA').
-unicode_name(0x060D, 'ARABIC DATE SEPARATOR').
-unicode_name(0x061B, 'ARABIC SEMICOLON').
-unicode_name(0x061E, 'ARABIC TRIPLE DOT PUNCTUATION MARK').
-unicode_name(0x061F, 'ARABIC QUESTION MARK').
-unicode_name(0x066A, 'ARABIC PERCENT SIGN').
-unicode_name(0x066B, 'ARABIC DECIMAL SEPARATOR').
-unicode_name(0x066C, 'ARABIC THOUSANDS SEPARATOR').
-unicode_name(0x066D, 'ARABIC FIVE POINTED STAR').
-unicode_name(0x06D4, 'ARABIC FULL STOP').
-unicode_name(0x0700, 'SYRIAC END OF PARAGRAPH').
-unicode_name(0x0701, 'SYRIAC SUPRALINEAR FULL STOP').
-unicode_name(0x0702, 'SYRIAC SUBLINEAR FULL STOP').
-unicode_name(0x0703, 'SYRIAC SUPRALINEAR COLON').
-unicode_name(0x0704, 'SYRIAC SUBLINEAR COLON').
-unicode_name(0x0705, 'SYRIAC HORIZONTAL COLON').
-unicode_name(0x0706, 'SYRIAC COLON SKEWED LEFT').
-unicode_name(0x0707, 'SYRIAC COLON SKEWED RIGHT').
-unicode_name(0x0708, 'SYRIAC SUPRALINEAR COLON SKEWED LEFT').
-unicode_name(0x0709, 'SYRIAC SUBLINEAR COLON SKEWED RIGHT').
-unicode_name(0x070A, 'SYRIAC CONTRACTION').
-unicode_name(0x070B, 'SYRIAC HARKLEAN OBELUS').
-unicode_name(0x070C, 'SYRIAC HARKLEAN METOBELUS').
-unicode_name(0x070D, 'SYRIAC HARKLEAN ASTERISCUS').
-unicode_name(0x07F7, 'NKO SYMBOL GBAKURUNEN').
-unicode_name(0x07F8, 'NKO COMMA').
-unicode_name(0x07F9, 'NKO EXCLAMATION MARK').
-unicode_name(0x0830, 'SAMARITAN PUNCTUATION NEQUDAA').
-unicode_name(0x0831, 'SAMARITAN PUNCTUATION AFSAAQ').
-unicode_name(0x0832, 'SAMARITAN PUNCTUATION ANGED').
-unicode_name(0x0833, 'SAMARITAN PUNCTUATION BAU').
-unicode_name(0x0834, 'SAMARITAN PUNCTUATION ATMAAU').
-unicode_name(0x0835, 'SAMARITAN PUNCTUATION SHIYYAALAA').
-unicode_name(0x0836, 'SAMARITAN ABBREVIATION MARK').
-unicode_name(0x0837, 'SAMARITAN PUNCTUATION MELODIC QITSA').
-unicode_name(0x0838, 'SAMARITAN PUNCTUATION ZIQAA').
-unicode_name(0x0839, 'SAMARITAN PUNCTUATION QITSA').
-unicode_name(0x083A, 'SAMARITAN PUNCTUATION ZAEF').
-unicode_name(0x083B, 'SAMARITAN PUNCTUATION TURU').
-unicode_name(0x083C, 'SAMARITAN PUNCTUATION ARKAANU').
-unicode_name(0x083D, 'SAMARITAN PUNCTUATION SOF MASHFAAT').
-unicode_name(0x083E, 'SAMARITAN PUNCTUATION ANNAAU').
-unicode_name(0x085E, 'MANDAIC PUNCTUATION').
-unicode_name(0x0964, 'DEVANAGARI DANDA').
-unicode_name(0x0965, 'DEVANAGARI DOUBLE DANDA').
-unicode_name(0x0970, 'DEVANAGARI ABBREVIATION SIGN').
-unicode_name(0x0AF0, 'GUJARATI ABBREVIATION SIGN').
-unicode_name(0x0DF4, 'SINHALA PUNCTUATION KUNDDALIYA').
-unicode_name(0x0E4F, 'THAI CHARACTER FONGMAN').
-unicode_name(0x0E5A, 'THAI CHARACTER ANGKHANKHU').
-unicode_name(0x0E5B, 'THAI CHARACTER KHOMUT').
-unicode_name(0x0F04, 'TIBETAN MARK INITIAL YIG MGO MDUN MA').
-unicode_name(0x0F05, 'TIBETAN MARK CLOSING YIG MGO SGAB MA').
-unicode_name(0x0F06, 'TIBETAN MARK CARET YIG MGO PHUR SHAD MA').
-unicode_name(0x0F07, 'TIBETAN MARK YIG MGO TSHEG SHAD MA').
-unicode_name(0x0F08, 'TIBETAN MARK SBRUL SHAD').
-unicode_name(0x0F09, 'TIBETAN MARK BSKUR YIG MGO').
-unicode_name(0x0F0A, 'TIBETAN MARK BKA- SHOG YIG MGO').
-unicode_name(0x0F0B, 'TIBETAN MARK INTERSYLLABIC TSHEG').
-unicode_name(0x0F0C, 'TIBETAN MARK DELIMITER TSHEG BSTAR').
-unicode_name(0x0F0D, 'TIBETAN MARK SHAD').
-unicode_name(0x0F0E, 'TIBETAN MARK NYIS SHAD').
-unicode_name(0x0F0F, 'TIBETAN MARK TSHEG SHAD').
-unicode_name(0x0F10, 'TIBETAN MARK NYIS TSHEG SHAD').
-unicode_name(0x0F11, 'TIBETAN MARK RIN CHEN SPUNGS SHAD').
-unicode_name(0x0F12, 'TIBETAN MARK RGYA GRAM SHAD').
-unicode_name(0x0F14, 'TIBETAN MARK GTER TSHEG').
-unicode_name(0x0F85, 'TIBETAN MARK PALUTA').
-unicode_name(0x0FD0, 'TIBETAN MARK BSKA- SHOG GI MGO RGYAN').
-unicode_name(0x0FD1, 'TIBETAN MARK MNYAM YIG GI MGO RGYAN').
-unicode_name(0x0FD2, 'TIBETAN MARK NYIS TSHEG').
-unicode_name(0x0FD3, 'TIBETAN MARK INITIAL BRDA RNYING YIG MGO MDUN MA').
-unicode_name(0x0FD4, 'TIBETAN MARK CLOSING BRDA RNYING YIG MGO SGAB MA').
-unicode_name(0x0FD9, 'TIBETAN MARK LEADING MCHAN RTAGS').
-unicode_name(0x0FDA, 'TIBETAN MARK TRAILING MCHAN RTAGS').
-unicode_name(0x104A, 'MYANMAR SIGN LITTLE SECTION').
-unicode_name(0x104B, 'MYANMAR SIGN SECTION').
-unicode_name(0x104C, 'MYANMAR SYMBOL LOCATIVE').
-unicode_name(0x104D, 'MYANMAR SYMBOL COMPLETED').
-unicode_name(0x104E, 'MYANMAR SYMBOL AFOREMENTIONED').
-unicode_name(0x104F, 'MYANMAR SYMBOL GENITIVE').
-unicode_name(0x10FB, 'GEORGIAN PARAGRAPH SEPARATOR').
-unicode_name(0x1360, 'ETHIOPIC SECTION MARK').
-unicode_name(0x1361, 'ETHIOPIC WORDSPACE').
-unicode_name(0x1362, 'ETHIOPIC FULL STOP').
-unicode_name(0x1363, 'ETHIOPIC COMMA').
-unicode_name(0x1364, 'ETHIOPIC SEMICOLON').
-unicode_name(0x1365, 'ETHIOPIC COLON').
-unicode_name(0x1366, 'ETHIOPIC PREFACE COLON').
-unicode_name(0x1367, 'ETHIOPIC QUESTION MARK').
-unicode_name(0x1368, 'ETHIOPIC PARAGRAPH SEPARATOR').
-unicode_name(0x166D, 'CANADIAN SYLLABICS CHI SIGN').
-unicode_name(0x166E, 'CANADIAN SYLLABICS FULL STOP').
-unicode_name(0x16EB, 'RUNIC SINGLE PUNCTUATION').
-unicode_name(0x16EC, 'RUNIC MULTIPLE PUNCTUATION').
-unicode_name(0x16ED, 'RUNIC CROSS PUNCTUATION').
-unicode_name(0x1735, 'PHILIPPINE SINGLE PUNCTUATION').
-unicode_name(0x1736, 'PHILIPPINE DOUBLE PUNCTUATION').
-unicode_name(0x17D4, 'KHMER SIGN KHAN').
-unicode_name(0x17D5, 'KHMER SIGN BARIYOOSAN').
-unicode_name(0x17D6, 'KHMER SIGN CAMNUC PII KUUH').
-unicode_name(0x17D8, 'KHMER SIGN BEYYAL').
-unicode_name(0x17D9, 'KHMER SIGN PHNAEK MUAN').
-unicode_name(0x17DA, 'KHMER SIGN KOOMUUT').
-unicode_name(0x1800, 'MONGOLIAN BIRGA').
-unicode_name(0x1801, 'MONGOLIAN ELLIPSIS').
-unicode_name(0x1802, 'MONGOLIAN COMMA').
-unicode_name(0x1803, 'MONGOLIAN FULL STOP').
-unicode_name(0x1804, 'MONGOLIAN COLON').
-unicode_name(0x1805, 'MONGOLIAN FOUR DOTS').
-unicode_name(0x1807, 'MONGOLIAN SIBE SYLLABLE BOUNDARY MARKER').
-unicode_name(0x1808, 'MONGOLIAN MANCHU COMMA').
-unicode_name(0x1809, 'MONGOLIAN MANCHU FULL STOP').
-unicode_name(0x180A, 'MONGOLIAN NIRUGU').
-unicode_name(0x1944, 'LIMBU EXCLAMATION MARK').
-unicode_name(0x1945, 'LIMBU QUESTION MARK').
-unicode_name(0x1A1E, 'BUGINESE PALLAWA').
-unicode_name(0x1A1F, 'BUGINESE END OF SECTION').
-unicode_name(0x1AA0, 'TAI THAM SIGN WIANG').
-unicode_name(0x1AA1, 'TAI THAM SIGN WIANGWAAK').
-unicode_name(0x1AA2, 'TAI THAM SIGN SAWAN').
-unicode_name(0x1AA3, 'TAI THAM SIGN KEOW').
-unicode_name(0x1AA4, 'TAI THAM SIGN HOY').
-unicode_name(0x1AA5, 'TAI THAM SIGN DOKMAI').
-unicode_name(0x1AA6, 'TAI THAM SIGN REVERSED ROTATED RANA').
-unicode_name(0x1AA8, 'TAI THAM SIGN KAAN').
-unicode_name(0x1AA9, 'TAI THAM SIGN KAANKUU').
-unicode_name(0x1AAA, 'TAI THAM SIGN SATKAAN').
-unicode_name(0x1AAB, 'TAI THAM SIGN SATKAANKUU').
-unicode_name(0x1AAC, 'TAI THAM SIGN HANG').
-unicode_name(0x1AAD, 'TAI THAM SIGN CAANG').
-unicode_name(0x1B5A, 'BALINESE PANTI').
-unicode_name(0x1B5B, 'BALINESE PAMADA').
-unicode_name(0x1B5C, 'BALINESE WINDU').
-unicode_name(0x1B5D, 'BALINESE CARIK PAMUNGKAH').
-unicode_name(0x1B5E, 'BALINESE CARIK SIKI').
-unicode_name(0x1B5F, 'BALINESE CARIK PAREREN').
-unicode_name(0x1B60, 'BALINESE PAMENENG').
-unicode_name(0x1BFC, 'BATAK SYMBOL BINDU NA METEK').
-unicode_name(0x1BFD, 'BATAK SYMBOL BINDU PINARBORAS').
-unicode_name(0x1BFE, 'BATAK SYMBOL BINDU JUDUL').
-unicode_name(0x1BFF, 'BATAK SYMBOL BINDU PANGOLAT').
-unicode_name(0x1C3B, 'LEPCHA PUNCTUATION TA-ROL').
-unicode_name(0x1C3C, 'LEPCHA PUNCTUATION NYET THYOOM TA-ROL').
-unicode_name(0x1C3D, 'LEPCHA PUNCTUATION CER-WA').
-unicode_name(0x1C3E, 'LEPCHA PUNCTUATION TSHOOK CER-WA').
-unicode_name(0x1C3F, 'LEPCHA PUNCTUATION TSHOOK').
-unicode_name(0x1C7E, 'OL CHIKI PUNCTUATION MUCAAD').
-unicode_name(0x1C7F, 'OL CHIKI PUNCTUATION DOUBLE MUCAAD').
-unicode_name(0x1CC0, 'SUNDANESE PUNCTUATION BINDU SURYA').
-unicode_name(0x1CC1, 'SUNDANESE PUNCTUATION BINDU PANGLONG').
-unicode_name(0x1CC2, 'SUNDANESE PUNCTUATION BINDU PURNAMA').
-unicode_name(0x1CC3, 'SUNDANESE PUNCTUATION BINDU CAKRA').
-unicode_name(0x1CC4, 'SUNDANESE PUNCTUATION BINDU LEU SATANGA').
-unicode_name(0x1CC5, 'SUNDANESE PUNCTUATION BINDU KA SATANGA').
-unicode_name(0x1CC6, 'SUNDANESE PUNCTUATION BINDU DA SATANGA').
-unicode_name(0x1CC7, 'SUNDANESE PUNCTUATION BINDU BA SATANGA').
-unicode_name(0x1CD3, 'VEDIC SIGN NIHSHVASA').
-unicode_name(0x2016, 'DOUBLE VERTICAL LINE').
-unicode_name(0x2017, 'DOUBLE LOW LINE').
-unicode_name(0x2020, 'DAGGER').
-unicode_name(0x2021, 'DOUBLE DAGGER').
-unicode_name(0x2022, 'BULLET').
-unicode_name(0x2023, 'TRIANGULAR BULLET').
-unicode_name(0x2024, 'ONE DOT LEADER').
-unicode_name(0x2025, 'TWO DOT LEADER').
-unicode_name(0x2026, 'HORIZONTAL ELLIPSIS').
-unicode_name(0x2027, 'HYPHENATION POINT').
-unicode_name(0x2030, 'PER MILLE SIGN').
-unicode_name(0x2031, 'PER TEN THOUSAND SIGN').
-unicode_name(0x2032, 'PRIME').
-unicode_name(0x2033, 'DOUBLE PRIME').
-unicode_name(0x2034, 'TRIPLE PRIME').
-unicode_name(0x2035, 'REVERSED PRIME').
-unicode_name(0x2036, 'REVERSED DOUBLE PRIME').
-unicode_name(0x2037, 'REVERSED TRIPLE PRIME').
-unicode_name(0x2038, 'CARET').
-unicode_name(0x203B, 'REFERENCE MARK').
-unicode_name(0x203C, 'DOUBLE EXCLAMATION MARK').
-unicode_name(0x203D, 'INTERROBANG').
-unicode_name(0x203E, 'OVERLINE').
-unicode_name(0x2041, 'CARET INSERTION POINT').
-unicode_name(0x2042, 'ASTERISM').
-unicode_name(0x2043, 'HYPHEN BULLET').
-unicode_name(0x2047, 'DOUBLE QUESTION MARK').
-unicode_name(0x2048, 'QUESTION EXCLAMATION MARK').
-unicode_name(0x2049, 'EXCLAMATION QUESTION MARK').
-unicode_name(0x204A, 'TIRONIAN SIGN ET').
-unicode_name(0x204B, 'REVERSED PILCROW SIGN').
-unicode_name(0x204C, 'BLACK LEFTWARDS BULLET').
-unicode_name(0x204D, 'BLACK RIGHTWARDS BULLET').
-unicode_name(0x204E, 'LOW ASTERISK').
-unicode_name(0x204F, 'REVERSED SEMICOLON').
-unicode_name(0x2050, 'CLOSE UP').
-unicode_name(0x2051, 'TWO ASTERISKS ALIGNED VERTICALLY').
-unicode_name(0x2053, 'SWUNG DASH').
-unicode_name(0x2055, 'FLOWER PUNCTUATION MARK').
-unicode_name(0x2056, 'THREE DOT PUNCTUATION').
-unicode_name(0x2057, 'QUADRUPLE PRIME').
-unicode_name(0x2058, 'FOUR DOT PUNCTUATION').
-unicode_name(0x2059, 'FIVE DOT PUNCTUATION').
-unicode_name(0x205A, 'TWO DOT PUNCTUATION').
-unicode_name(0x205B, 'FOUR DOT MARK').
-unicode_name(0x205C, 'DOTTED CROSS').
-unicode_name(0x205D, 'TRICOLON').
-unicode_name(0x205E, 'VERTICAL FOUR DOTS').
-unicode_name(0x2CF9, 'COPTIC OLD NUBIAN FULL STOP').
-unicode_name(0x2CFA, 'COPTIC OLD NUBIAN DIRECT QUESTION MARK').
-unicode_name(0x2CFB, 'COPTIC OLD NUBIAN INDIRECT QUESTION MARK').
-unicode_name(0x2CFC, 'COPTIC OLD NUBIAN VERSE DIVIDER').
-unicode_name(0x2CFE, 'COPTIC FULL STOP').
-unicode_name(0x2CFF, 'COPTIC MORPHOLOGICAL DIVIDER').
-unicode_name(0x2D70, 'TIFINAGH SEPARATOR MARK').
-unicode_name(0x2E00, 'RIGHT ANGLE SUBSTITUTION MARKER').
-unicode_name(0x2E01, 'RIGHT ANGLE DOTTED SUBSTITUTION MARKER').
-unicode_name(0x2E06, 'RAISED INTERPOLATION MARKER').
-unicode_name(0x2E07, 'RAISED DOTTED INTERPOLATION MARKER').
-unicode_name(0x2E08, 'DOTTED TRANSPOSITION MARKER').
-unicode_name(0x2E0B, 'RAISED SQUARE').
-unicode_name(0x2E0E, 'EDITORIAL CORONIS').
-unicode_name(0x2E0F, 'PARAGRAPHOS').
-unicode_name(0x2E10, 'FORKED PARAGRAPHOS').
-unicode_name(0x2E11, 'REVERSED FORKED PARAGRAPHOS').
-unicode_name(0x2E12, 'HYPODIASTOLE').
-unicode_name(0x2E13, 'DOTTED OBELOS').
-unicode_name(0x2E14, 'DOWNWARDS ANCORA').
-unicode_name(0x2E15, 'UPWARDS ANCORA').
-unicode_name(0x2E16, 'DOTTED RIGHT-POINTING ANGLE').
-unicode_name(0x2E18, 'INVERTED INTERROBANG').
-unicode_name(0x2E19, 'PALM BRANCH').
-unicode_name(0x2E1B, 'TILDE WITH RING ABOVE').
-unicode_name(0x2E1E, 'TILDE WITH DOT ABOVE').
-unicode_name(0x2E1F, 'TILDE WITH DOT BELOW').
-unicode_name(0x2E2A, 'TWO DOTS OVER ONE DOT PUNCTUATION').
-unicode_name(0x2E2B, 'ONE DOT OVER TWO DOTS PUNCTUATION').
-unicode_name(0x2E2C, 'SQUARED FOUR DOT PUNCTUATION').
-unicode_name(0x2E2D, 'FIVE DOT MARK').
-unicode_name(0x2E2E, 'REVERSED QUESTION MARK').
-unicode_name(0x2E30, 'RING POINT').
-unicode_name(0x2E31, 'WORD SEPARATOR MIDDLE DOT').
-unicode_name(0x2E32, 'TURNED COMMA').
-unicode_name(0x2E33, 'RAISED DOT').
-unicode_name(0x2E34, 'RAISED COMMA').
-unicode_name(0x2E35, 'TURNED SEMICOLON').
-unicode_name(0x2E36, 'DAGGER WITH LEFT GUARD').
-unicode_name(0x2E37, 'DAGGER WITH RIGHT GUARD').
-unicode_name(0x2E38, 'TURNED DAGGER').
-unicode_name(0x2E39, 'TOP HALF SECTION SIGN').
-unicode_name(0x3001, 'IDEOGRAPHIC COMMA').
-unicode_name(0x3002, 'IDEOGRAPHIC FULL STOP').
-unicode_name(0x3003, 'DITTO MARK').
-unicode_name(0x303D, 'PART ALTERNATION MARK').
-unicode_name(0x30FB, 'KATAKANA MIDDLE DOT').
-unicode_name(0xA4FE, 'LISU PUNCTUATION COMMA').
-unicode_name(0xA4FF, 'LISU PUNCTUATION FULL STOP').
-unicode_name(0xA60D, 'VAI COMMA').
-unicode_name(0xA60E, 'VAI FULL STOP').
-unicode_name(0xA60F, 'VAI QUESTION MARK').
-unicode_name(0xA673, 'SLAVONIC ASTERISK').
-unicode_name(0xA67E, 'CYRILLIC KAVYKA').
-unicode_name(0xA6F2, 'BAMUM NJAEMLI').
-unicode_name(0xA6F3, 'BAMUM FULL STOP').
-unicode_name(0xA6F4, 'BAMUM COLON').
-unicode_name(0xA6F5, 'BAMUM COMMA').
-unicode_name(0xA6F6, 'BAMUM SEMICOLON').
-unicode_name(0xA6F7, 'BAMUM QUESTION MARK').
-unicode_name(0xA874, 'PHAGS-PA SINGLE HEAD MARK').
-unicode_name(0xA875, 'PHAGS-PA DOUBLE HEAD MARK').
-unicode_name(0xA876, 'PHAGS-PA MARK SHAD').
-unicode_name(0xA877, 'PHAGS-PA MARK DOUBLE SHAD').
-unicode_name(0xA8CE, 'SAURASHTRA DANDA').
-unicode_name(0xA8CF, 'SAURASHTRA DOUBLE DANDA').
-unicode_name(0xA8F8, 'DEVANAGARI SIGN PUSHPIKA').
-unicode_name(0xA8F9, 'DEVANAGARI GAP FILLER').
-unicode_name(0xA8FA, 'DEVANAGARI CARET').
-unicode_name(0xA92E, 'KAYAH LI SIGN CWI').
-unicode_name(0xA92F, 'KAYAH LI SIGN SHYA').
-unicode_name(0xA95F, 'REJANG SECTION MARK').
-unicode_name(0xA9C1, 'JAVANESE LEFT RERENGGAN').
-unicode_name(0xA9C2, 'JAVANESE RIGHT RERENGGAN').
-unicode_name(0xA9C3, 'JAVANESE PADA ANDAP').
-unicode_name(0xA9C4, 'JAVANESE PADA MADYA').
-unicode_name(0xA9C5, 'JAVANESE PADA LUHUR').
-unicode_name(0xA9C6, 'JAVANESE PADA WINDU').
-unicode_name(0xA9C7, 'JAVANESE PADA PANGKAT').
-unicode_name(0xA9C8, 'JAVANESE PADA LINGSA').
-unicode_name(0xA9C9, 'JAVANESE PADA LUNGSI').
-unicode_name(0xA9CA, 'JAVANESE PADA ADEG').
-unicode_name(0xA9CB, 'JAVANESE PADA ADEG ADEG').
-unicode_name(0xA9CC, 'JAVANESE PADA PISELEH').
-unicode_name(0xA9CD, 'JAVANESE TURNED PADA PISELEH').
-unicode_name(0xA9DE, 'JAVANESE PADA TIRTA TUMETES').
-unicode_name(0xA9DF, 'JAVANESE PADA ISEN-ISEN').
-unicode_name(0xAA5C, 'CHAM PUNCTUATION SPIRAL').
-unicode_name(0xAA5D, 'CHAM PUNCTUATION DANDA').
-unicode_name(0xAA5E, 'CHAM PUNCTUATION DOUBLE DANDA').
-unicode_name(0xAA5F, 'CHAM PUNCTUATION TRIPLE DANDA').
-unicode_name(0xAADE, 'TAI VIET SYMBOL HO HOI').
-unicode_name(0xAADF, 'TAI VIET SYMBOL KOI KOI').
-unicode_name(0xAAF0, 'MEETEI MAYEK CHEIKHAN').
-unicode_name(0xAAF1, 'MEETEI MAYEK AHANG KHUDAM').
-unicode_name(0xABEB, 'MEETEI MAYEK CHEIKHEI').
-unicode_name(0xFE10, 'PRESENTATION FORM FOR VERTICAL COMMA').
-unicode_name(0xFE11, 'PRESENTATION FORM FOR VERTICAL IDEOGRAPHIC COMMA').
-unicode_name(0xFE12, 'PRESENTATION FORM FOR VERTICAL IDEOGRAPHIC FULL STOP').
-unicode_name(0xFE13, 'PRESENTATION FORM FOR VERTICAL COLON').
-unicode_name(0xFE14, 'PRESENTATION FORM FOR VERTICAL SEMICOLON').
-unicode_name(0xFE15, 'PRESENTATION FORM FOR VERTICAL EXCLAMATION MARK').
-unicode_name(0xFE16, 'PRESENTATION FORM FOR VERTICAL QUESTION MARK').
-unicode_name(0xFE19, 'PRESENTATION FORM FOR VERTICAL HORIZONTAL ELLIPSIS').
-unicode_name(0xFE30, 'PRESENTATION FORM FOR VERTICAL TWO DOT LEADER').
-unicode_name(0xFE45, 'SESAME DOT').
-unicode_name(0xFE46, 'WHITE SESAME DOT').
-unicode_name(0xFE49, 'DASHED OVERLINE').
-unicode_name(0xFE4A, 'CENTRELINE OVERLINE').
-unicode_name(0xFE4B, 'WAVY OVERLINE').
-unicode_name(0xFE4C, 'DOUBLE WAVY OVERLINE').
-unicode_name(0xFE50, 'SMALL COMMA').
-unicode_name(0xFE51, 'SMALL IDEOGRAPHIC COMMA').
-unicode_name(0xFE52, 'SMALL FULL STOP').
-unicode_name(0xFE54, 'SMALL SEMICOLON').
-unicode_name(0xFE55, 'SMALL COLON').
-unicode_name(0xFE56, 'SMALL QUESTION MARK').
-unicode_name(0xFE57, 'SMALL EXCLAMATION MARK').
-unicode_name(0xFE5F, 'SMALL NUMBER SIGN').
-unicode_name(0xFE60, 'SMALL AMPERSAND').
-unicode_name(0xFE61, 'SMALL ASTERISK').
-unicode_name(0xFE68, 'SMALL REVERSE SOLIDUS').
-unicode_name(0xFE6A, 'SMALL PERCENT SIGN').
-unicode_name(0xFE6B, 'SMALL COMMERCIAL AT').
-unicode_name(0xFF01, 'FULLWIDTH EXCLAMATION MARK').
-unicode_name(0xFF02, 'FULLWIDTH QUOTATION MARK').
-unicode_name(0xFF03, 'FULLWIDTH NUMBER SIGN').
-unicode_name(0xFF05, 'FULLWIDTH PERCENT SIGN').
-unicode_name(0xFF06, 'FULLWIDTH AMPERSAND').
-unicode_name(0xFF07, 'FULLWIDTH APOSTROPHE').
-unicode_name(0xFF0A, 'FULLWIDTH ASTERISK').
-unicode_name(0xFF0C, 'FULLWIDTH COMMA').
-unicode_name(0xFF0E, 'FULLWIDTH FULL STOP').
-unicode_name(0xFF0F, 'FULLWIDTH SOLIDUS').
-unicode_name(0xFF1A, 'FULLWIDTH COLON').
-unicode_name(0xFF1B, 'FULLWIDTH SEMICOLON').
-unicode_name(0xFF1F, 'FULLWIDTH QUESTION MARK').
-unicode_name(0xFF20, 'FULLWIDTH COMMERCIAL AT').
-unicode_name(0xFF3C, 'FULLWIDTH REVERSE SOLIDUS').
-unicode_name(0xFF61, 'HALFWIDTH IDEOGRAPHIC FULL STOP').
-unicode_name(0xFF64, 'HALFWIDTH IDEOGRAPHIC COMMA').
-unicode_name(0xFF65, 'HALFWIDTH KATAKANA MIDDLE DOT').
-unicode_name(0x10100, 'AEGEAN WORD SEPARATOR LINE').
-unicode_name(0x10101, 'AEGEAN WORD SEPARATOR DOT').
-unicode_name(0x10102, 'AEGEAN CHECK MARK').
-unicode_name(0x1039F, 'UGARITIC WORD DIVIDER').
-unicode_name(0x103D0, 'OLD PERSIAN WORD DIVIDER').
-unicode_name(0x10857, 'IMPERIAL ARAMAIC SECTION SIGN').
-unicode_name(0x1091F, 'PHOENICIAN WORD SEPARATOR').
-unicode_name(0x1093F, 'LYDIAN TRIANGULAR MARK').
-unicode_name(0x10A50, 'KHAROSHTHI PUNCTUATION DOT').
-unicode_name(0x10A51, 'KHAROSHTHI PUNCTUATION SMALL CIRCLE').
-unicode_name(0x10A52, 'KHAROSHTHI PUNCTUATION CIRCLE').
-unicode_name(0x10A53, 'KHAROSHTHI PUNCTUATION CRESCENT BAR').
-unicode_name(0x10A54, 'KHAROSHTHI PUNCTUATION MANGALAM').
-unicode_name(0x10A55, 'KHAROSHTHI PUNCTUATION LOTUS').
-unicode_name(0x10A56, 'KHAROSHTHI PUNCTUATION DANDA').
-unicode_name(0x10A57, 'KHAROSHTHI PUNCTUATION DOUBLE DANDA').
-unicode_name(0x10A58, 'KHAROSHTHI PUNCTUATION LINES').
-unicode_name(0x10A7F, 'OLD SOUTH ARABIAN NUMERIC INDICATOR').
-unicode_name(0x10B39, 'AVESTAN ABBREVIATION MARK').
-unicode_name(0x10B3A, 'TINY TWO DOTS OVER ONE DOT PUNCTUATION').
-unicode_name(0x10B3B, 'SMALL TWO DOTS OVER ONE DOT PUNCTUATION').
-unicode_name(0x10B3C, 'LARGE TWO DOTS OVER ONE DOT PUNCTUATION').
-unicode_name(0x10B3D, 'LARGE ONE DOT OVER TWO DOTS PUNCTUATION').
-unicode_name(0x10B3E, 'LARGE TWO RINGS OVER ONE RING PUNCTUATION').
-unicode_name(0x10B3F, 'LARGE ONE RING OVER TWO RINGS PUNCTUATION').
-unicode_name(0x11047, 'BRAHMI DANDA').
-unicode_name(0x11048, 'BRAHMI DOUBLE DANDA').
-unicode_name(0x11049, 'BRAHMI PUNCTUATION DOT').
-unicode_name(0x1104A, 'BRAHMI PUNCTUATION DOUBLE DOT').
-unicode_name(0x1104B, 'BRAHMI PUNCTUATION LINE').
-unicode_name(0x1104C, 'BRAHMI PUNCTUATION CRESCENT BAR').
-unicode_name(0x1104D, 'BRAHMI PUNCTUATION LOTUS').
-unicode_name(0x110BB, 'KAITHI ABBREVIATION SIGN').
-unicode_name(0x110BC, 'KAITHI ENUMERATION SIGN').
-unicode_name(0x110BE, 'KAITHI SECTION MARK').
-unicode_name(0x110BF, 'KAITHI DOUBLE SECTION MARK').
-unicode_name(0x110C0, 'KAITHI DANDA').
-unicode_name(0x110C1, 'KAITHI DOUBLE DANDA').
-unicode_name(0x11140, 'CHAKMA SECTION MARK').
-unicode_name(0x11141, 'CHAKMA DANDA').
-unicode_name(0x11142, 'CHAKMA DOUBLE DANDA').
-unicode_name(0x11143, 'CHAKMA QUESTION MARK').
-unicode_name(0x111C5, 'SHARADA DANDA').
-unicode_name(0x111C6, 'SHARADA DOUBLE DANDA').
-unicode_name(0x111C7, 'SHARADA ABBREVIATION SIGN').
-unicode_name(0x111C8, 'SHARADA SEPARATOR').
-unicode_name(0x12470, 'CUNEIFORM PUNCTUATION SIGN OLD ASSYRIAN WORD DIVIDER').
-unicode_name(0x12471, 'CUNEIFORM PUNCTUATION SIGN VERTICAL COLON').
-unicode_name(0x12472, 'CUNEIFORM PUNCTUATION SIGN DIAGONAL COLON').
-unicode_name(0x12473, 'CUNEIFORM PUNCTUATION SIGN DIAGONAL TRICOLON').
+unicode_name(33, 'EXCLAMATION MARK').
+unicode_name(34, 'QUOTATION MARK').
+unicode_name(35, 'NUMBER SIGN').
+unicode_name(37, 'PERCENT SIGN').
+unicode_name(38, 'AMPERSAND').
+unicode_name(39, 'APOSTROPHE').
+unicode_name(42, 'ASTERISK').
+unicode_name(44, 'COMMA').
+unicode_name(46, 'FULL STOP').
+unicode_name(47, 'SOLIDUS').
+unicode_name(58, 'COLON').
+unicode_name(59, 'SEMICOLON').
+unicode_name(63, 'QUESTION MARK').
+unicode_name(64, 'COMMERCIAL AT').
+unicode_name(92, 'REVERSE SOLIDUS').
+unicode_name(161, 'INVERTED EXCLAMATION MARK').
+unicode_name(167, 'SECTION SIGN').
+unicode_name(182, 'PILCROW SIGN').
+unicode_name(183, 'MIDDLE DOT').
+unicode_name(191, 'INVERTED QUESTION MARK').
+unicode_name(894, 'GREEK QUESTION MARK').
+unicode_name(903, 'GREEK ANO TELEIA').
+unicode_name(1370, 'ARMENIAN APOSTROPHE').
+unicode_name(1371, 'ARMENIAN EMPHASIS MARK').
+unicode_name(1372, 'ARMENIAN EXCLAMATION MARK').
+unicode_name(1373, 'ARMENIAN COMMA').
+unicode_name(1374, 'ARMENIAN QUESTION MARK').
+unicode_name(1375, 'ARMENIAN ABBREVIATION MARK').
+unicode_name(1417, 'ARMENIAN FULL STOP').
+unicode_name(1472, 'HEBREW PUNCTUATION PASEQ').
+unicode_name(1475, 'HEBREW PUNCTUATION SOF PASUQ').
+unicode_name(1478, 'HEBREW PUNCTUATION NUN HAFUKHA').
+unicode_name(1523, 'HEBREW PUNCTUATION GERESH').
+unicode_name(1524, 'HEBREW PUNCTUATION GERSHAYIM').
+unicode_name(1545, 'ARABIC-INDIC PER MILLE SIGN').
+unicode_name(1546, 'ARABIC-INDIC PER TEN THOUSAND SIGN').
+unicode_name(1548, 'ARABIC COMMA').
+unicode_name(1549, 'ARABIC DATE SEPARATOR').
+unicode_name(1563, 'ARABIC SEMICOLON').
+unicode_name(1565, 'ARABIC END OF TEXT MARK').
+unicode_name(1566, 'ARABIC TRIPLE DOT PUNCTUATION MARK').
+unicode_name(1567, 'ARABIC QUESTION MARK').
+unicode_name(1642, 'ARABIC PERCENT SIGN').
+unicode_name(1643, 'ARABIC DECIMAL SEPARATOR').
+unicode_name(1644, 'ARABIC THOUSANDS SEPARATOR').
+unicode_name(1645, 'ARABIC FIVE POINTED STAR').
+unicode_name(1748, 'ARABIC FULL STOP').
+unicode_name(1792, 'SYRIAC END OF PARAGRAPH').
+unicode_name(1793, 'SYRIAC SUPRALINEAR FULL STOP').
+unicode_name(1794, 'SYRIAC SUBLINEAR FULL STOP').
+unicode_name(1795, 'SYRIAC SUPRALINEAR COLON').
+unicode_name(1796, 'SYRIAC SUBLINEAR COLON').
+unicode_name(1797, 'SYRIAC HORIZONTAL COLON').
+unicode_name(1798, 'SYRIAC COLON SKEWED LEFT').
+unicode_name(1799, 'SYRIAC COLON SKEWED RIGHT').
+unicode_name(1800, 'SYRIAC SUPRALINEAR COLON SKEWED LEFT').
+unicode_name(1801, 'SYRIAC SUBLINEAR COLON SKEWED RIGHT').
+unicode_name(1802, 'SYRIAC CONTRACTION').
+unicode_name(1803, 'SYRIAC HARKLEAN OBELUS').
+unicode_name(1804, 'SYRIAC HARKLEAN METOBELUS').
+unicode_name(1805, 'SYRIAC HARKLEAN ASTERISCUS').
+unicode_name(2039, 'NKO SYMBOL GBAKURUNEN').
+unicode_name(2040, 'NKO COMMA').
+unicode_name(2041, 'NKO EXCLAMATION MARK').
+unicode_name(2096, 'SAMARITAN PUNCTUATION NEQUDAA').
+unicode_name(2097, 'SAMARITAN PUNCTUATION AFSAAQ').
+unicode_name(2098, 'SAMARITAN PUNCTUATION ANGED').
+unicode_name(2099, 'SAMARITAN PUNCTUATION BAU').
+unicode_name(2100, 'SAMARITAN PUNCTUATION ATMAAU').
+unicode_name(2101, 'SAMARITAN PUNCTUATION SHIYYAALAA').
+unicode_name(2102, 'SAMARITAN ABBREVIATION MARK').
+unicode_name(2103, 'SAMARITAN PUNCTUATION MELODIC QITSA').
+unicode_name(2104, 'SAMARITAN PUNCTUATION ZIQAA').
+unicode_name(2105, 'SAMARITAN PUNCTUATION QITSA').
+unicode_name(2106, 'SAMARITAN PUNCTUATION ZAEF').
+unicode_name(2107, 'SAMARITAN PUNCTUATION TURU').
+unicode_name(2108, 'SAMARITAN PUNCTUATION ARKAANU').
+unicode_name(2109, 'SAMARITAN PUNCTUATION SOF MASHFAAT').
+unicode_name(2110, 'SAMARITAN PUNCTUATION ANNAAU').
+unicode_name(2142, 'MANDAIC PUNCTUATION').
+unicode_name(2404, 'DEVANAGARI DANDA').
+unicode_name(2405, 'DEVANAGARI DOUBLE DANDA').
+unicode_name(2416, 'DEVANAGARI ABBREVIATION SIGN').
+unicode_name(2557, 'BENGALI ABBREVIATION SIGN').
+unicode_name(2678, 'GURMUKHI ABBREVIATION SIGN').
+unicode_name(2800, 'GUJARATI ABBREVIATION SIGN').
+unicode_name(3191, 'TELUGU SIGN SIDDHAM').
+unicode_name(3204, 'KANNADA SIGN SIDDHAM').
+unicode_name(3572, 'SINHALA PUNCTUATION KUNDDALIYA').
+unicode_name(3663, 'THAI CHARACTER FONGMAN').
+unicode_name(3674, 'THAI CHARACTER ANGKHANKHU').
+unicode_name(3675, 'THAI CHARACTER KHOMUT').
+unicode_name(3844, 'TIBETAN MARK INITIAL YIG MGO MDUN MA').
+unicode_name(3845, 'TIBETAN MARK CLOSING YIG MGO SGAB MA').
+unicode_name(3846, 'TIBETAN MARK CARET YIG MGO PHUR SHAD MA').
+unicode_name(3847, 'TIBETAN MARK YIG MGO TSHEG SHAD MA').
+unicode_name(3848, 'TIBETAN MARK SBRUL SHAD').
+unicode_name(3849, 'TIBETAN MARK BSKUR YIG MGO').
+unicode_name(3850, 'TIBETAN MARK BKA- SHOG YIG MGO').
+unicode_name(3851, 'TIBETAN MARK INTERSYLLABIC TSHEG').
+unicode_name(3852, 'TIBETAN MARK DELIMITER TSHEG BSTAR').
+unicode_name(3853, 'TIBETAN MARK SHAD').
+unicode_name(3854, 'TIBETAN MARK NYIS SHAD').
+unicode_name(3855, 'TIBETAN MARK TSHEG SHAD').
+unicode_name(3856, 'TIBETAN MARK NYIS TSHEG SHAD').
+unicode_name(3857, 'TIBETAN MARK RIN CHEN SPUNGS SHAD').
+unicode_name(3858, 'TIBETAN MARK RGYA GRAM SHAD').
+unicode_name(3860, 'TIBETAN MARK GTER TSHEG').
+unicode_name(3973, 'TIBETAN MARK PALUTA').
+unicode_name(4048, 'TIBETAN MARK BSKA- SHOG GI MGO RGYAN').
+unicode_name(4049, 'TIBETAN MARK MNYAM YIG GI MGO RGYAN').
+unicode_name(4050, 'TIBETAN MARK NYIS TSHEG').
+unicode_name(4051, 'TIBETAN MARK INITIAL BRDA RNYING YIG MGO MDUN MA').
+unicode_name(4052, 'TIBETAN MARK CLOSING BRDA RNYING YIG MGO SGAB MA').
+unicode_name(4057, 'TIBETAN MARK LEADING MCHAN RTAGS').
+unicode_name(4058, 'TIBETAN MARK TRAILING MCHAN RTAGS').
+unicode_name(4170, 'MYANMAR SIGN LITTLE SECTION').
+unicode_name(4171, 'MYANMAR SIGN SECTION').
+unicode_name(4172, 'MYANMAR SYMBOL LOCATIVE').
+unicode_name(4173, 'MYANMAR SYMBOL COMPLETED').
+unicode_name(4174, 'MYANMAR SYMBOL AFOREMENTIONED').
+unicode_name(4175, 'MYANMAR SYMBOL GENITIVE').
+unicode_name(4347, 'GEORGIAN PARAGRAPH SEPARATOR').
+unicode_name(4960, 'ETHIOPIC SECTION MARK').
+unicode_name(4961, 'ETHIOPIC WORDSPACE').
+unicode_name(4962, 'ETHIOPIC FULL STOP').
+unicode_name(4963, 'ETHIOPIC COMMA').
+unicode_name(4964, 'ETHIOPIC SEMICOLON').
+unicode_name(4965, 'ETHIOPIC COLON').
+unicode_name(4966, 'ETHIOPIC PREFACE COLON').
+unicode_name(4967, 'ETHIOPIC QUESTION MARK').
+unicode_name(4968, 'ETHIOPIC PARAGRAPH SEPARATOR').
+unicode_name(5742, 'CANADIAN SYLLABICS FULL STOP').
+unicode_name(5867, 'RUNIC SINGLE PUNCTUATION').
+unicode_name(5868, 'RUNIC MULTIPLE PUNCTUATION').
+unicode_name(5869, 'RUNIC CROSS PUNCTUATION').
+unicode_name(5941, 'PHILIPPINE SINGLE PUNCTUATION').
+unicode_name(5942, 'PHILIPPINE DOUBLE PUNCTUATION').
+unicode_name(6100, 'KHMER SIGN KHAN').
+unicode_name(6101, 'KHMER SIGN BARIYOOSAN').
+unicode_name(6102, 'KHMER SIGN CAMNUC PII KUUH').
+unicode_name(6104, 'KHMER SIGN BEYYAL').
+unicode_name(6105, 'KHMER SIGN PHNAEK MUAN').
+unicode_name(6106, 'KHMER SIGN KOOMUUT').
+unicode_name(6144, 'MONGOLIAN BIRGA').
+unicode_name(6145, 'MONGOLIAN ELLIPSIS').
+unicode_name(6146, 'MONGOLIAN COMMA').
+unicode_name(6147, 'MONGOLIAN FULL STOP').
+unicode_name(6148, 'MONGOLIAN COLON').
+unicode_name(6149, 'MONGOLIAN FOUR DOTS').
+unicode_name(6151, 'MONGOLIAN SIBE SYLLABLE BOUNDARY MARKER').
+unicode_name(6152, 'MONGOLIAN MANCHU COMMA').
+unicode_name(6153, 'MONGOLIAN MANCHU FULL STOP').
+unicode_name(6154, 'MONGOLIAN NIRUGU').
+unicode_name(6468, 'LIMBU EXCLAMATION MARK').
+unicode_name(6469, 'LIMBU QUESTION MARK').
+unicode_name(6686, 'BUGINESE PALLAWA').
+unicode_name(6687, 'BUGINESE END OF SECTION').
+unicode_name(6816, 'TAI THAM SIGN WIANG').
+unicode_name(6817, 'TAI THAM SIGN WIANGWAAK').
+unicode_name(6818, 'TAI THAM SIGN SAWAN').
+unicode_name(6819, 'TAI THAM SIGN KEOW').
+unicode_name(6820, 'TAI THAM SIGN HOY').
+unicode_name(6821, 'TAI THAM SIGN DOKMAI').
+unicode_name(6822, 'TAI THAM SIGN REVERSED ROTATED RANA').
+unicode_name(6824, 'TAI THAM SIGN KAAN').
+unicode_name(6825, 'TAI THAM SIGN KAANKUU').
+unicode_name(6826, 'TAI THAM SIGN SATKAAN').
+unicode_name(6827, 'TAI THAM SIGN SATKAANKUU').
+unicode_name(6828, 'TAI THAM SIGN HANG').
+unicode_name(6829, 'TAI THAM SIGN CAANG').
+unicode_name(6990, 'BALINESE INVERTED CARIK SIKI').
+unicode_name(6991, 'BALINESE INVERTED CARIK PAREREN').
+unicode_name(7002, 'BALINESE PANTI').
+unicode_name(7003, 'BALINESE PAMADA').
+unicode_name(7004, 'BALINESE WINDU').
+unicode_name(7005, 'BALINESE CARIK PAMUNGKAH').
+unicode_name(7006, 'BALINESE CARIK SIKI').
+unicode_name(7007, 'BALINESE CARIK PAREREN').
+unicode_name(7008, 'BALINESE PAMENENG').
+unicode_name(7037, 'BALINESE PANTI LANTANG').
+unicode_name(7038, 'BALINESE PAMADA LANTANG').
+unicode_name(7039, 'BALINESE PANTI BAWAK').
+unicode_name(7164, 'BATAK SYMBOL BINDU NA METEK').
+unicode_name(7165, 'BATAK SYMBOL BINDU PINARBORAS').
+unicode_name(7166, 'BATAK SYMBOL BINDU JUDUL').
+unicode_name(7167, 'BATAK SYMBOL BINDU PANGOLAT').
+unicode_name(7227, 'LEPCHA PUNCTUATION TA-ROL').
+unicode_name(7228, 'LEPCHA PUNCTUATION NYET THYOOM TA-ROL').
+unicode_name(7229, 'LEPCHA PUNCTUATION CER-WA').
+unicode_name(7230, 'LEPCHA PUNCTUATION TSHOOK CER-WA').
+unicode_name(7231, 'LEPCHA PUNCTUATION TSHOOK').
+unicode_name(7294, 'OL CHIKI PUNCTUATION MUCAAD').
+unicode_name(7295, 'OL CHIKI PUNCTUATION DOUBLE MUCAAD').
+unicode_name(7360, 'SUNDANESE PUNCTUATION BINDU SURYA').
+unicode_name(7361, 'SUNDANESE PUNCTUATION BINDU PANGLONG').
+unicode_name(7362, 'SUNDANESE PUNCTUATION BINDU PURNAMA').
+unicode_name(7363, 'SUNDANESE PUNCTUATION BINDU CAKRA').
+unicode_name(7364, 'SUNDANESE PUNCTUATION BINDU LEU SATANGA').
+unicode_name(7365, 'SUNDANESE PUNCTUATION BINDU KA SATANGA').
+unicode_name(7366, 'SUNDANESE PUNCTUATION BINDU DA SATANGA').
+unicode_name(7367, 'SUNDANESE PUNCTUATION BINDU BA SATANGA').
+unicode_name(7379, 'VEDIC SIGN NIHSHVASA').
+unicode_name(8214, 'DOUBLE VERTICAL LINE').
+unicode_name(8215, 'DOUBLE LOW LINE').
+unicode_name(8224, 'DAGGER').
+unicode_name(8225, 'DOUBLE DAGGER').
+unicode_name(8226, 'BULLET').
+unicode_name(8227, 'TRIANGULAR BULLET').
+unicode_name(8228, 'ONE DOT LEADER').
+unicode_name(8229, 'TWO DOT LEADER').
+unicode_name(8230, 'HORIZONTAL ELLIPSIS').
+unicode_name(8231, 'HYPHENATION POINT').
+unicode_name(8240, 'PER MILLE SIGN').
+unicode_name(8241, 'PER TEN THOUSAND SIGN').
+unicode_name(8242, 'PRIME').
+unicode_name(8243, 'DOUBLE PRIME').
+unicode_name(8244, 'TRIPLE PRIME').
+unicode_name(8245, 'REVERSED PRIME').
+unicode_name(8246, 'REVERSED DOUBLE PRIME').
+unicode_name(8247, 'REVERSED TRIPLE PRIME').
+unicode_name(8248, 'CARET').
+unicode_name(8251, 'REFERENCE MARK').
+unicode_name(8252, 'DOUBLE EXCLAMATION MARK').
+unicode_name(8253, 'INTERROBANG').
+unicode_name(8254, 'OVERLINE').
+unicode_name(8257, 'CARET INSERTION POINT').
+unicode_name(8258, 'ASTERISM').
+unicode_name(8259, 'HYPHEN BULLET').
+unicode_name(8263, 'DOUBLE QUESTION MARK').
+unicode_name(8264, 'QUESTION EXCLAMATION MARK').
+unicode_name(8265, 'EXCLAMATION QUESTION MARK').
+unicode_name(8266, 'TIRONIAN SIGN ET').
+unicode_name(8267, 'REVERSED PILCROW SIGN').
+unicode_name(8268, 'BLACK LEFTWARDS BULLET').
+unicode_name(8269, 'BLACK RIGHTWARDS BULLET').
+unicode_name(8270, 'LOW ASTERISK').
+unicode_name(8271, 'REVERSED SEMICOLON').
+unicode_name(8272, 'CLOSE UP').
+unicode_name(8273, 'TWO ASTERISKS ALIGNED VERTICALLY').
+unicode_name(8275, 'SWUNG DASH').
+unicode_name(8277, 'FLOWER PUNCTUATION MARK').
+unicode_name(8278, 'THREE DOT PUNCTUATION').
+unicode_name(8279, 'QUADRUPLE PRIME').
+unicode_name(8280, 'FOUR DOT PUNCTUATION').
+unicode_name(8281, 'FIVE DOT PUNCTUATION').
+unicode_name(8282, 'TWO DOT PUNCTUATION').
+unicode_name(8283, 'FOUR DOT MARK').
+unicode_name(8284, 'DOTTED CROSS').
+unicode_name(8285, 'TRICOLON').
+unicode_name(8286, 'VERTICAL FOUR DOTS').
+unicode_name(11513, 'COPTIC OLD NUBIAN FULL STOP').
+unicode_name(11514, 'COPTIC OLD NUBIAN DIRECT QUESTION MARK').
+unicode_name(11515, 'COPTIC OLD NUBIAN INDIRECT QUESTION MARK').
+unicode_name(11516, 'COPTIC OLD NUBIAN VERSE DIVIDER').
+unicode_name(11518, 'COPTIC FULL STOP').
+unicode_name(11519, 'COPTIC MORPHOLOGICAL DIVIDER').
+unicode_name(11632, 'TIFINAGH SEPARATOR MARK').
+unicode_name(11776, 'RIGHT ANGLE SUBSTITUTION MARKER').
+unicode_name(11777, 'RIGHT ANGLE DOTTED SUBSTITUTION MARKER').
+unicode_name(11782, 'RAISED INTERPOLATION MARKER').
+unicode_name(11783, 'RAISED DOTTED INTERPOLATION MARKER').
+unicode_name(11784, 'DOTTED TRANSPOSITION MARKER').
+unicode_name(11787, 'RAISED SQUARE').
+unicode_name(11790, 'EDITORIAL CORONIS').
+unicode_name(11791, 'PARAGRAPHOS').
+unicode_name(11792, 'FORKED PARAGRAPHOS').
+unicode_name(11793, 'REVERSED FORKED PARAGRAPHOS').
+unicode_name(11794, 'HYPODIASTOLE').
+unicode_name(11795, 'DOTTED OBELOS').
+unicode_name(11796, 'DOWNWARDS ANCORA').
+unicode_name(11797, 'UPWARDS ANCORA').
+unicode_name(11798, 'DOTTED RIGHT-POINTING ANGLE').
+unicode_name(11800, 'INVERTED INTERROBANG').
+unicode_name(11801, 'PALM BRANCH').
+unicode_name(11803, 'TILDE WITH RING ABOVE').
+unicode_name(11806, 'TILDE WITH DOT ABOVE').
+unicode_name(11807, 'TILDE WITH DOT BELOW').
+unicode_name(11818, 'TWO DOTS OVER ONE DOT PUNCTUATION').
+unicode_name(11819, 'ONE DOT OVER TWO DOTS PUNCTUATION').
+unicode_name(11820, 'SQUARED FOUR DOT PUNCTUATION').
+unicode_name(11821, 'FIVE DOT MARK').
+unicode_name(11822, 'REVERSED QUESTION MARK').
+unicode_name(11824, 'RING POINT').
+unicode_name(11825, 'WORD SEPARATOR MIDDLE DOT').
+unicode_name(11826, 'TURNED COMMA').
+unicode_name(11827, 'RAISED DOT').
+unicode_name(11828, 'RAISED COMMA').
+unicode_name(11829, 'TURNED SEMICOLON').
+unicode_name(11830, 'DAGGER WITH LEFT GUARD').
+unicode_name(11831, 'DAGGER WITH RIGHT GUARD').
+unicode_name(11832, 'TURNED DAGGER').
+unicode_name(11833, 'TOP HALF SECTION SIGN').
+unicode_name(11836, 'STENOGRAPHIC FULL STOP').
+unicode_name(11837, 'VERTICAL SIX DOTS').
+unicode_name(11838, 'WIGGLY VERTICAL LINE').
+unicode_name(11839, 'CAPITULUM').
+unicode_name(11841, 'REVERSED COMMA').
+unicode_name(11843, 'DASH WITH LEFT UPTURN').
+unicode_name(11844, 'DOUBLE SUSPENSION MARK').
+unicode_name(11845, 'INVERTED LOW KAVYKA').
+unicode_name(11846, 'INVERTED LOW KAVYKA WITH KAVYKA ABOVE').
+unicode_name(11847, 'LOW KAVYKA').
+unicode_name(11848, 'LOW KAVYKA WITH DOT').
+unicode_name(11849, 'DOUBLE STACKED COMMA').
+unicode_name(11850, 'DOTTED SOLIDUS').
+unicode_name(11851, 'TRIPLE DAGGER').
+unicode_name(11852, 'MEDIEVAL COMMA').
+unicode_name(11853, 'PARAGRAPHUS MARK').
+unicode_name(11854, 'PUNCTUS ELEVATUS MARK').
+unicode_name(11855, 'CORNISH VERSE DIVIDER').
+unicode_name(11858, 'TIRONIAN SIGN CAPITAL ET').
+unicode_name(11859, 'MEDIEVAL EXCLAMATION MARK').
+unicode_name(11860, 'MEDIEVAL QUESTION MARK').
+unicode_name(12289, 'IDEOGRAPHIC COMMA').
+unicode_name(12290, 'IDEOGRAPHIC FULL STOP').
+unicode_name(12291, 'DITTO MARK').
+unicode_name(12349, 'PART ALTERNATION MARK').
+unicode_name(12539, 'KATAKANA MIDDLE DOT').
+unicode_name(42238, 'LISU PUNCTUATION COMMA').
+unicode_name(42239, 'LISU PUNCTUATION FULL STOP').
+unicode_name(42509, 'VAI COMMA').
+unicode_name(42510, 'VAI FULL STOP').
+unicode_name(42511, 'VAI QUESTION MARK').
+unicode_name(42611, 'SLAVONIC ASTERISK').
+unicode_name(42622, 'CYRILLIC KAVYKA').
+unicode_name(42738, 'BAMUM NJAEMLI').
+unicode_name(42739, 'BAMUM FULL STOP').
+unicode_name(42740, 'BAMUM COLON').
+unicode_name(42741, 'BAMUM COMMA').
+unicode_name(42742, 'BAMUM SEMICOLON').
+unicode_name(42743, 'BAMUM QUESTION MARK').
+unicode_name(43124, 'PHAGS-PA SINGLE HEAD MARK').
+unicode_name(43125, 'PHAGS-PA DOUBLE HEAD MARK').
+unicode_name(43126, 'PHAGS-PA MARK SHAD').
+unicode_name(43127, 'PHAGS-PA MARK DOUBLE SHAD').
+unicode_name(43214, 'SAURASHTRA DANDA').
+unicode_name(43215, 'SAURASHTRA DOUBLE DANDA').
+unicode_name(43256, 'DEVANAGARI SIGN PUSHPIKA').
+unicode_name(43257, 'DEVANAGARI GAP FILLER').
+unicode_name(43258, 'DEVANAGARI CARET').
+unicode_name(43260, 'DEVANAGARI SIGN SIDDHAM').
+unicode_name(43310, 'KAYAH LI SIGN CWI').
+unicode_name(43311, 'KAYAH LI SIGN SHYA').
+unicode_name(43359, 'REJANG SECTION MARK').
+unicode_name(43457, 'JAVANESE LEFT RERENGGAN').
+unicode_name(43458, 'JAVANESE RIGHT RERENGGAN').
+unicode_name(43459, 'JAVANESE PADA ANDAP').
+unicode_name(43460, 'JAVANESE PADA MADYA').
+unicode_name(43461, 'JAVANESE PADA LUHUR').
+unicode_name(43462, 'JAVANESE PADA WINDU').
+unicode_name(43463, 'JAVANESE PADA PANGKAT').
+unicode_name(43464, 'JAVANESE PADA LINGSA').
+unicode_name(43465, 'JAVANESE PADA LUNGSI').
+unicode_name(43466, 'JAVANESE PADA ADEG').
+unicode_name(43467, 'JAVANESE PADA ADEG ADEG').
+unicode_name(43468, 'JAVANESE PADA PISELEH').
+unicode_name(43469, 'JAVANESE TURNED PADA PISELEH').
+unicode_name(43486, 'JAVANESE PADA TIRTA TUMETES').
+unicode_name(43487, 'JAVANESE PADA ISEN-ISEN').
+unicode_name(43612, 'CHAM PUNCTUATION SPIRAL').
+unicode_name(43613, 'CHAM PUNCTUATION DANDA').
+unicode_name(43614, 'CHAM PUNCTUATION DOUBLE DANDA').
+unicode_name(43615, 'CHAM PUNCTUATION TRIPLE DANDA').
+unicode_name(43742, 'TAI VIET SYMBOL HO HOI').
+unicode_name(43743, 'TAI VIET SYMBOL KOI KOI').
+unicode_name(43760, 'MEETEI MAYEK CHEIKHAN').
+unicode_name(43761, 'MEETEI MAYEK AHANG KHUDAM').
+unicode_name(44011, 'MEETEI MAYEK CHEIKHEI').
+unicode_name(65040, 'PRESENTATION FORM FOR VERTICAL COMMA').
+unicode_name(65041, 'PRESENTATION FORM FOR VERTICAL IDEOGRAPHIC COMMA').
+unicode_name(65042, 'PRESENTATION FORM FOR VERTICAL IDEOGRAPHIC FULL STOP').
+unicode_name(65043, 'PRESENTATION FORM FOR VERTICAL COLON').
+unicode_name(65044, 'PRESENTATION FORM FOR VERTICAL SEMICOLON').
+unicode_name(65045, 'PRESENTATION FORM FOR VERTICAL EXCLAMATION MARK').
+unicode_name(65046, 'PRESENTATION FORM FOR VERTICAL QUESTION MARK').
+unicode_name(65049, 'PRESENTATION FORM FOR VERTICAL HORIZONTAL ELLIPSIS').
+unicode_name(65072, 'PRESENTATION FORM FOR VERTICAL TWO DOT LEADER').
+unicode_name(65093, 'SESAME DOT').
+unicode_name(65094, 'WHITE SESAME DOT').
+unicode_name(65097, 'DASHED OVERLINE').
+unicode_name(65098, 'CENTRELINE OVERLINE').
+unicode_name(65099, 'WAVY OVERLINE').
+unicode_name(65100, 'DOUBLE WAVY OVERLINE').
+unicode_name(65104, 'SMALL COMMA').
+unicode_name(65105, 'SMALL IDEOGRAPHIC COMMA').
+unicode_name(65106, 'SMALL FULL STOP').
+unicode_name(65108, 'SMALL SEMICOLON').
+unicode_name(65109, 'SMALL COLON').
+unicode_name(65110, 'SMALL QUESTION MARK').
+unicode_name(65111, 'SMALL EXCLAMATION MARK').
+unicode_name(65119, 'SMALL NUMBER SIGN').
+unicode_name(65120, 'SMALL AMPERSAND').
+unicode_name(65121, 'SMALL ASTERISK').
+unicode_name(65128, 'SMALL REVERSE SOLIDUS').
+unicode_name(65130, 'SMALL PERCENT SIGN').
+unicode_name(65131, 'SMALL COMMERCIAL AT').
+unicode_name(65281, 'FULLWIDTH EXCLAMATION MARK').
+unicode_name(65282, 'FULLWIDTH QUOTATION MARK').
+unicode_name(65283, 'FULLWIDTH NUMBER SIGN').
+unicode_name(65285, 'FULLWIDTH PERCENT SIGN').
+unicode_name(65286, 'FULLWIDTH AMPERSAND').
+unicode_name(65287, 'FULLWIDTH APOSTROPHE').
+unicode_name(65290, 'FULLWIDTH ASTERISK').
+unicode_name(65292, 'FULLWIDTH COMMA').
+unicode_name(65294, 'FULLWIDTH FULL STOP').
+unicode_name(65295, 'FULLWIDTH SOLIDUS').
+unicode_name(65306, 'FULLWIDTH COLON').
+unicode_name(65307, 'FULLWIDTH SEMICOLON').
+unicode_name(65311, 'FULLWIDTH QUESTION MARK').
+unicode_name(65312, 'FULLWIDTH COMMERCIAL AT').
+unicode_name(65340, 'FULLWIDTH REVERSE SOLIDUS').
+unicode_name(65377, 'HALFWIDTH IDEOGRAPHIC FULL STOP').
+unicode_name(65380, 'HALFWIDTH IDEOGRAPHIC COMMA').
+unicode_name(65381, 'HALFWIDTH KATAKANA MIDDLE DOT').
+unicode_name(65792, 'AEGEAN WORD SEPARATOR LINE').
+unicode_name(65793, 'AEGEAN WORD SEPARATOR DOT').
+unicode_name(65794, 'AEGEAN CHECK MARK').
+unicode_name(66463, 'UGARITIC WORD DIVIDER').
+unicode_name(66512, 'OLD PERSIAN WORD DIVIDER').
+unicode_name(66927, 'CAUCASIAN ALBANIAN CITATION MARK').
+unicode_name(67671, 'IMPERIAL ARAMAIC SECTION SIGN').
+unicode_name(67871, 'PHOENICIAN WORD SEPARATOR').
+unicode_name(67903, 'LYDIAN TRIANGULAR MARK').
+unicode_name(68176, 'KHAROSHTHI PUNCTUATION DOT').
+unicode_name(68177, 'KHAROSHTHI PUNCTUATION SMALL CIRCLE').
+unicode_name(68178, 'KHAROSHTHI PUNCTUATION CIRCLE').
+unicode_name(68179, 'KHAROSHTHI PUNCTUATION CRESCENT BAR').
+unicode_name(68180, 'KHAROSHTHI PUNCTUATION MANGALAM').
+unicode_name(68181, 'KHAROSHTHI PUNCTUATION LOTUS').
+unicode_name(68182, 'KHAROSHTHI PUNCTUATION DANDA').
+unicode_name(68183, 'KHAROSHTHI PUNCTUATION DOUBLE DANDA').
+unicode_name(68184, 'KHAROSHTHI PUNCTUATION LINES').
+unicode_name(68223, 'OLD SOUTH ARABIAN NUMERIC INDICATOR').
+unicode_name(68336, 'MANICHAEAN PUNCTUATION STAR').
+unicode_name(68337, 'MANICHAEAN PUNCTUATION FLEURON').
+unicode_name(68338, 'MANICHAEAN PUNCTUATION DOUBLE DOT WITHIN DOT').
+unicode_name(68339, 'MANICHAEAN PUNCTUATION DOT WITHIN DOT').
+unicode_name(68340, 'MANICHAEAN PUNCTUATION DOT').
+unicode_name(68341, 'MANICHAEAN PUNCTUATION TWO DOTS').
+unicode_name(68342, 'MANICHAEAN PUNCTUATION LINE FILLER').
+unicode_name(68409, 'AVESTAN ABBREVIATION MARK').
+unicode_name(68410, 'TINY TWO DOTS OVER ONE DOT PUNCTUATION').
+unicode_name(68411, 'SMALL TWO DOTS OVER ONE DOT PUNCTUATION').
+unicode_name(68412, 'LARGE TWO DOTS OVER ONE DOT PUNCTUATION').
+unicode_name(68413, 'LARGE ONE DOT OVER TWO DOTS PUNCTUATION').
+unicode_name(68414, 'LARGE TWO RINGS OVER ONE RING PUNCTUATION').
+unicode_name(68415, 'LARGE ONE RING OVER TWO RINGS PUNCTUATION').
+unicode_name(68505, 'PSALTER PAHLAVI SECTION MARK').
+unicode_name(68506, 'PSALTER PAHLAVI TURNED SECTION MARK').
+unicode_name(68507, 'PSALTER PAHLAVI FOUR DOTS WITH CROSS').
+unicode_name(68508, 'PSALTER PAHLAVI FOUR DOTS WITH DOT').
+unicode_name(69328, 'ARABIC BIBLICAL END OF VERSE').
+unicode_name(69461, 'SOGDIAN PUNCTUATION TWO VERTICAL BARS').
+unicode_name(69462, 'SOGDIAN PUNCTUATION TWO VERTICAL BARS WITH DOTS').
+unicode_name(69463, 'SOGDIAN PUNCTUATION CIRCLE WITH DOT').
+unicode_name(69464, 'SOGDIAN PUNCTUATION TWO CIRCLES WITH DOTS').
+unicode_name(69465, 'SOGDIAN PUNCTUATION HALF CIRCLE WITH DOT').
+unicode_name(69510, 'OLD UYGHUR PUNCTUATION BAR').
+unicode_name(69511, 'OLD UYGHUR PUNCTUATION TWO BARS').
+unicode_name(69512, 'OLD UYGHUR PUNCTUATION TWO DOTS').
+unicode_name(69513, 'OLD UYGHUR PUNCTUATION FOUR DOTS').
+unicode_name(69703, 'BRAHMI DANDA').
+unicode_name(69704, 'BRAHMI DOUBLE DANDA').
+unicode_name(69705, 'BRAHMI PUNCTUATION DOT').
+unicode_name(69706, 'BRAHMI PUNCTUATION DOUBLE DOT').
+unicode_name(69707, 'BRAHMI PUNCTUATION LINE').
+unicode_name(69708, 'BRAHMI PUNCTUATION CRESCENT BAR').
+unicode_name(69709, 'BRAHMI PUNCTUATION LOTUS').
+unicode_name(69819, 'KAITHI ABBREVIATION SIGN').
+unicode_name(69820, 'KAITHI ENUMERATION SIGN').
+unicode_name(69822, 'KAITHI SECTION MARK').
+unicode_name(69823, 'KAITHI DOUBLE SECTION MARK').
+unicode_name(69824, 'KAITHI DANDA').
+unicode_name(69825, 'KAITHI DOUBLE DANDA').
+unicode_name(69952, 'CHAKMA SECTION MARK').
+unicode_name(69953, 'CHAKMA DANDA').
+unicode_name(69954, 'CHAKMA DOUBLE DANDA').
+unicode_name(69955, 'CHAKMA QUESTION MARK').
+unicode_name(70004, 'MAHAJANI ABBREVIATION SIGN').
+unicode_name(70005, 'MAHAJANI SECTION MARK').
+unicode_name(70085, 'SHARADA DANDA').
+unicode_name(70086, 'SHARADA DOUBLE DANDA').
+unicode_name(70087, 'SHARADA ABBREVIATION SIGN').
+unicode_name(70088, 'SHARADA SEPARATOR').
+unicode_name(70093, 'SHARADA SUTRA MARK').
+unicode_name(70107, 'SHARADA SIGN SIDDHAM').
+unicode_name(70109, 'SHARADA CONTINUATION SIGN').
+unicode_name(70110, 'SHARADA SECTION MARK-1').
+unicode_name(70111, 'SHARADA SECTION MARK-2').
+unicode_name(70200, 'KHOJKI DANDA').
+unicode_name(70201, 'KHOJKI DOUBLE DANDA').
+unicode_name(70202, 'KHOJKI WORD SEPARATOR').
+unicode_name(70203, 'KHOJKI SECTION MARK').
+unicode_name(70204, 'KHOJKI DOUBLE SECTION MARK').
+unicode_name(70205, 'KHOJKI ABBREVIATION SIGN').
+unicode_name(70313, 'MULTANI SECTION MARK').
+unicode_name(70612, 'TULU-TIGALARI DANDA').
+unicode_name(70613, 'TULU-TIGALARI DOUBLE DANDA').
+unicode_name(70615, 'TULU-TIGALARI SIGN OM PUSHPIKA').
+unicode_name(70616, 'TULU-TIGALARI SIGN SHRII PUSHPIKA').
+unicode_name(70731, 'NEWA DANDA').
+unicode_name(70732, 'NEWA DOUBLE DANDA').
+unicode_name(70733, 'NEWA COMMA').
+unicode_name(70734, 'NEWA GAP FILLER').
+unicode_name(70735, 'NEWA ABBREVIATION SIGN').
+unicode_name(70746, 'NEWA DOUBLE COMMA').
+unicode_name(70747, 'NEWA PLACEHOLDER MARK').
+unicode_name(70749, 'NEWA INSERTION SIGN').
+unicode_name(70854, 'TIRHUTA ABBREVIATION SIGN').
+unicode_name(71105, 'SIDDHAM SIGN SIDDHAM').
+unicode_name(71106, 'SIDDHAM DANDA').
+unicode_name(71107, 'SIDDHAM DOUBLE DANDA').
+unicode_name(71108, 'SIDDHAM SEPARATOR DOT').
+unicode_name(71109, 'SIDDHAM SEPARATOR BAR').
+unicode_name(71110, 'SIDDHAM REPETITION MARK-1').
+unicode_name(71111, 'SIDDHAM REPETITION MARK-2').
+unicode_name(71112, 'SIDDHAM REPETITION MARK-3').
+unicode_name(71113, 'SIDDHAM END OF TEXT MARK').
+unicode_name(71114, 'SIDDHAM SECTION MARK WITH TRIDENT AND U-SHAPED ORNAMENTS').
+unicode_name(71115, 'SIDDHAM SECTION MARK WITH TRIDENT AND DOTTED CRESCENTS').
+unicode_name(71116, 'SIDDHAM SECTION MARK WITH RAYS AND DOTTED CRESCENTS').
+unicode_name(71117, 'SIDDHAM SECTION MARK WITH RAYS AND DOTTED DOUBLE CRESCENTS').
+unicode_name(71118, 'SIDDHAM SECTION MARK WITH RAYS AND DOTTED TRIPLE CRESCENTS').
+unicode_name(71119, 'SIDDHAM SECTION MARK DOUBLE RING').
+unicode_name(71120, 'SIDDHAM SECTION MARK DOUBLE RING WITH RAYS').
+unicode_name(71121, 'SIDDHAM SECTION MARK WITH DOUBLE CRESCENTS').
+unicode_name(71122, 'SIDDHAM SECTION MARK WITH TRIPLE CRESCENTS').
+unicode_name(71123, 'SIDDHAM SECTION MARK WITH QUADRUPLE CRESCENTS').
+unicode_name(71124, 'SIDDHAM SECTION MARK WITH SEPTUPLE CRESCENTS').
+unicode_name(71125, 'SIDDHAM SECTION MARK WITH CIRCLES AND RAYS').
+unicode_name(71126, 'SIDDHAM SECTION MARK WITH CIRCLES AND TWO ENCLOSURES').
+unicode_name(71127, 'SIDDHAM SECTION MARK WITH CIRCLES AND FOUR ENCLOSURES').
+unicode_name(71233, 'MODI DANDA').
+unicode_name(71234, 'MODI DOUBLE DANDA').
+unicode_name(71235, 'MODI ABBREVIATION SIGN').
+unicode_name(71264, 'MONGOLIAN BIRGA WITH ORNAMENT').
+unicode_name(71265, 'MONGOLIAN ROTATED BIRGA').
+unicode_name(71266, 'MONGOLIAN DOUBLE BIRGA WITH ORNAMENT').
+unicode_name(71267, 'MONGOLIAN TRIPLE BIRGA WITH ORNAMENT').
+unicode_name(71268, 'MONGOLIAN BIRGA WITH DOUBLE ORNAMENT').
+unicode_name(71269, 'MONGOLIAN ROTATED BIRGA WITH ORNAMENT').
+unicode_name(71270, 'MONGOLIAN ROTATED BIRGA WITH DOUBLE ORNAMENT').
+unicode_name(71271, 'MONGOLIAN INVERTED BIRGA').
+unicode_name(71272, 'MONGOLIAN INVERTED BIRGA WITH DOUBLE ORNAMENT').
+unicode_name(71273, 'MONGOLIAN SWIRL BIRGA').
+unicode_name(71274, 'MONGOLIAN SWIRL BIRGA WITH ORNAMENT').
+unicode_name(71275, 'MONGOLIAN SWIRL BIRGA WITH DOUBLE ORNAMENT').
+unicode_name(71276, 'MONGOLIAN TURNED SWIRL BIRGA WITH DOUBLE ORNAMENT').
+unicode_name(71353, 'TAKRI ABBREVIATION SIGN').
+unicode_name(71484, 'AHOM SIGN SMALL SECTION').
+unicode_name(71485, 'AHOM SIGN SECTION').
+unicode_name(71486, 'AHOM SIGN RULAI').
+unicode_name(71739, 'DOGRA ABBREVIATION SIGN').
+unicode_name(72004, 'DIVES AKURU DOUBLE DANDA').
+unicode_name(72005, 'DIVES AKURU GAP FILLER').
+unicode_name(72006, 'DIVES AKURU END OF TEXT MARK').
+unicode_name(72162, 'NANDINAGARI SIGN SIDDHAM').
+unicode_name(72255, 'ZANABAZAR SQUARE INITIAL HEAD MARK').
+unicode_name(72256, 'ZANABAZAR SQUARE CLOSING HEAD MARK').
+unicode_name(72257, 'ZANABAZAR SQUARE MARK TSHEG').
+unicode_name(72258, 'ZANABAZAR SQUARE MARK SHAD').
+unicode_name(72259, 'ZANABAZAR SQUARE MARK DOUBLE SHAD').
+unicode_name(72260, 'ZANABAZAR SQUARE MARK LONG TSHEG').
+unicode_name(72261, 'ZANABAZAR SQUARE INITIAL DOUBLE-LINED HEAD MARK').
+unicode_name(72262, 'ZANABAZAR SQUARE CLOSING DOUBLE-LINED HEAD MARK').
+unicode_name(72346, 'SOYOMBO MARK TSHEG').
+unicode_name(72347, 'SOYOMBO MARK SHAD').
+unicode_name(72348, 'SOYOMBO MARK DOUBLE SHAD').
+unicode_name(72350, 'SOYOMBO HEAD MARK WITH MOON AND SUN AND TRIPLE FLAME').
+unicode_name(72351, 'SOYOMBO HEAD MARK WITH MOON AND SUN AND FLAME').
+unicode_name(72352, 'SOYOMBO HEAD MARK WITH MOON AND SUN').
+unicode_name(72353, 'SOYOMBO TERMINAL MARK-1').
+unicode_name(72354, 'SOYOMBO TERMINAL MARK-2').
+unicode_name(72448, 'DEVANAGARI HEAD MARK').
+unicode_name(72449, 'DEVANAGARI HEAD MARK WITH HEADSTROKE').
+unicode_name(72450, 'DEVANAGARI SIGN BHALE').
+unicode_name(72451, 'DEVANAGARI SIGN BHALE WITH HOOK').
+unicode_name(72452, 'DEVANAGARI SIGN EXTENDED BHALE').
+unicode_name(72453, 'DEVANAGARI SIGN EXTENDED BHALE WITH HOOK').
+unicode_name(72454, 'DEVANAGARI SIGN WESTERN FIVE-LIKE BHALE').
+unicode_name(72455, 'DEVANAGARI SIGN WESTERN NINE-LIKE BHALE').
+unicode_name(72456, 'DEVANAGARI SIGN REVERSED NINE-LIKE BHALE').
+unicode_name(72457, 'DEVANAGARI SIGN MINDU').
+unicode_name(72673, 'SUNUWAR SIGN PVO').
+unicode_name(72769, 'BHAIKSUKI DANDA').
+unicode_name(72770, 'BHAIKSUKI DOUBLE DANDA').
+unicode_name(72771, 'BHAIKSUKI WORD SEPARATOR').
+unicode_name(72772, 'BHAIKSUKI GAP FILLER-1').
+unicode_name(72773, 'BHAIKSUKI GAP FILLER-2').
+unicode_name(72816, 'MARCHEN HEAD MARK').
+unicode_name(72817, 'MARCHEN MARK SHAD').
+unicode_name(73463, 'MAKASAR PASSIMBANG').
+unicode_name(73464, 'MAKASAR END OF SECTION').
+unicode_name(73539, 'KAWI DANDA').
+unicode_name(73540, 'KAWI DOUBLE DANDA').
+unicode_name(73541, 'KAWI PUNCTUATION SECTION MARKER').
+unicode_name(73542, 'KAWI PUNCTUATION ALTERNATE SECTION MARKER').
+unicode_name(73543, 'KAWI PUNCTUATION FLOWER').
+unicode_name(73544, 'KAWI PUNCTUATION SPACE FILLER').
+unicode_name(73545, 'KAWI PUNCTUATION DOT').
+unicode_name(73546, 'KAWI PUNCTUATION DOUBLE DOT').
+unicode_name(73547, 'KAWI PUNCTUATION TRIPLE DOT').
+unicode_name(73548, 'KAWI PUNCTUATION CIRCLE').
+unicode_name(73549, 'KAWI PUNCTUATION FILLED CIRCLE').
+unicode_name(73550, 'KAWI PUNCTUATION SPIRAL').
+unicode_name(73551, 'KAWI PUNCTUATION CLOSING SPIRAL').
+unicode_name(73727, 'TAMIL PUNCTUATION END OF TEXT').
+unicode_name(74864, 'CUNEIFORM PUNCTUATION SIGN OLD ASSYRIAN WORD DIVIDER').
+unicode_name(74865, 'CUNEIFORM PUNCTUATION SIGN VERTICAL COLON').
+unicode_name(74866, 'CUNEIFORM PUNCTUATION SIGN DIAGONAL COLON').
+unicode_name(74867, 'CUNEIFORM PUNCTUATION SIGN DIAGONAL TRICOLON').
+unicode_name(74868, 'CUNEIFORM PUNCTUATION SIGN DIAGONAL QUADCOLON').
+unicode_name(77809, 'CYPRO-MINOAN SIGN CM301').
+unicode_name(77810, 'CYPRO-MINOAN SIGN CM302').
+unicode_name(92782, 'MRO DANDA').
+unicode_name(92783, 'MRO DOUBLE DANDA').
+unicode_name(92917, 'BASSA VAH FULL STOP').
+unicode_name(92983, 'PAHAWH HMONG SIGN VOS THOM').
+unicode_name(92984, 'PAHAWH HMONG SIGN VOS TSHAB CEEB').
+unicode_name(92985, 'PAHAWH HMONG SIGN CIM CHEEM').
+unicode_name(92986, 'PAHAWH HMONG SIGN VOS THIAB').
+unicode_name(92987, 'PAHAWH HMONG SIGN VOS FEEM').
+unicode_name(92996, 'PAHAWH HMONG SIGN XAUS').
+unicode_name(93549, 'KIRAT RAI SIGN YUPI').
+unicode_name(93550, 'KIRAT RAI DANDA').
+unicode_name(93551, 'KIRAT RAI DOUBLE DANDA').
+unicode_name(93847, 'MEDEFAIDRIN COMMA').
+unicode_name(93848, 'MEDEFAIDRIN FULL STOP').
+unicode_name(93849, 'MEDEFAIDRIN SYMBOL AIVA').
+unicode_name(93850, 'MEDEFAIDRIN EXCLAMATION OH').
+unicode_name(94178, 'OLD CHINESE HOOK MARK').
+unicode_name(113823, 'DUPLOYAN PUNCTUATION CHINOOK FULL STOP').
+unicode_name(121479, 'SIGNWRITING COMMA').
+unicode_name(121480, 'SIGNWRITING FULL STOP').
+unicode_name(121481, 'SIGNWRITING SEMICOLON').
+unicode_name(121482, 'SIGNWRITING COLON').
+unicode_name(121483, 'SIGNWRITING PARENTHESIS').
+unicode_name(124415, 'OL ONAL ABBREVIATION SIGN').
+unicode_name(125278, 'ADLAM INITIAL EXCLAMATION MARK').
+unicode_name(125279, 'ADLAM INITIAL QUESTION MARK').

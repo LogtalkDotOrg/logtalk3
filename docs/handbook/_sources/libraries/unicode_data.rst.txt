@@ -40,10 +40,18 @@ contributions.
 Description
 -----------
 
-The VivoMind Prolog Unicode Resources are a set of files resulting from
-the conversion of most (but not all) official UCD 6.1 files and updated
-for the few changes in the 6.2 standard. The original files can be
-downloaded from:
+This library contains generated Unicode 17.0.0 resources. The
+``unicode_character_data.pl`` file provides normalization, default
+casing, and core text-classification predicates in ``user`` for use by
+the ``text_normalization`` library. The legacy Prolog APIs are generated
+from the same pinned Unicode release.
+
+Frequently shared range families use generated backing predicates and
+thin compatibility views. This avoids storing the same Unicode ranges in
+each legacy property file while preserving the existing filenames,
+predicate indicators, enumeration behavior, and default values.
+Independent property families remain selectively loadable. The original
+data can be downloaded from:
 
 ::
 
@@ -60,13 +68,28 @@ Requirements
 
 Most of the auxiliary predicates assume that the de facto Prolog
 standard predicate ``between/3`` is available. Unicode code point values
-are represented using the ISO Prolog standard notation for hexadecimal
-integers. In addition, the ISO Prolog standard directives ``include/1``
-and ``ensure_loaded/1`` are used in some of the files to load auxiliary
-files.
+are represented as integers. In addition, the ISO Prolog standard
+directives ``include/1`` and ``ensure_loaded/1`` are used in some files
+to load auxiliary files.
 
 Usage
 -----
+
+To load the optimized Unicode 17.0.0 data used for text normalization
+and default case conversion:
+
+::
+
+   | ?- logtalk_load(unicode_data(loader)).
+
+Logtalk entities can call these predicates directly using a ``uses/2``
+directive for ``user``.
+
+To load all legacy compatibility APIs:
+
+::
+
+   | ?- logtalk_load(unicode_data(unicode_data)).
 
 Most applications only require some of the tables present in these
 resources. Most of these tables define properties for ranges of code
@@ -78,10 +101,6 @@ specific application.
 
 Known issues
 ------------
-
-In the file ``unicode_unihan_variant.pl``, when there's more than one
-variant for a code point, only the first one (as listed in the original
-UCD file) is returned.
 
 The ``include/1`` and ``ensure_loaded/1`` directives are specified in
 the ISO Prolog standard published in 1995. But some Prolog compilers
@@ -111,18 +130,15 @@ load all the files in these resources. It is mostly used to test the
 portability of the code across Prolog compilers. Also included is a
 Logtalk version of this file, ``unicode_data.lgt``, which uses Logtalk's
 own implementation of the ``include/1`` directive and the
-``logtak_load/1`` predicate to load all files. This file can be used to
+``logtalk_load/1`` predicate to load all files. This file can be used to
 workaround Prolog systems with buggy or missing implementations of the
 ``ensure_loaded/1`` and ``include/1`` directives.
 
 An overview of the original file names and the code point properties can
 be found at:
 
-::
-
-   http://www.unicode.org/reports/tr44/#Directory_Structure
-
-   http://www.unicode.org/reports/tr44/#Property_Definitions
+http://www.unicode.org/reports/tr44/#Directory_Structure
+http://www.unicode.org/reports/tr44/#Property_Definitions
 
 .. _unicode_arabic_shapingpl:
 

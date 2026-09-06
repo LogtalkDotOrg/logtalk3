@@ -18,23 +18,23 @@ limitations under the License.
 ________________________________________________________________________
 
 
-# Text Normalization Data Refresh
+# Unicode Data Refresh
 
-Run `update_data.sh` to download the pinned Unicode 17.0.0 UCD files and the
-WHATWG entity snapshot, verify their SHA-256 checksums, and regenerate the
-numeric-only Logtalk tables in `../data`.
+Run `update_data.sh` to download the pinned Unicode 17.0.0 UCD files, extracted
+property files, Unihan variants, and normalization conformance data; verify
+their SHA-256 checksums; and regenerate all runtime, compatibility, and
+conformance tables in the parent directory.
 
 The Unicode data files are distributed under the Unicode License V3 at
-<https://www.unicode.org/license.txt>. The entity data is sourced from the
-WHATWG HTML Living Standard at <https://html.spec.whatwg.org/entities.json>.
-Only the semicolon-terminated names listed in `common_entities.txt` are
-included. The source files are retained under `sources` so that conformance
-tests and byte-identical regeneration do not require another download.
+<https://www.unicode.org/license.txt>. The source files are downloaded to a
+temporary directory and removed after generation so that they are not shipped
+with the Logtalk distribution.
 
 Unicode 17.0.0 currently provides 20,034 normalization conformance vectors
 and 1,585 full default case-fold mappings. The generator records these counts
 in its outputs and rejects duplicate keys and invalid Unicode scalar values.
 
-After refreshing, run the text normalization test suite with both SWI-Prolog
-and SICStus Prolog. A Unicode version update requires reviewing expected fact
-counts, conformance vectors, and any changes to generated mappings.
+After refreshing, run both the `unicode_data` and `text_normalization` test
+suites with SWI-Prolog and SICStus Prolog, plus the Unicode conformance suite.
+A Unicode version update requires reviewing expected fact counts, conformance
+vectors, compatibility defaults, and any changes to generated mappings.

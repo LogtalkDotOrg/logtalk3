@@ -1,1995 +1,2356 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  This file is part of VivoMind Prolog Unicode Resources
-%  SPDX-License-Identifier: CC0-1.0
+%  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
 %
-%  VivoMind Prolog Unicode Resources is free software distributed using the
-%  Creative Commons CC0 1.0 Universal (CC0 1.0) - Public Domain Dedication
-%  license
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%  Last modified: September 30, 2012
+%      http://www.apache.org/licenses/LICENSE-2.0
 %
-%  Original Unicode file header comments follow
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-/*
-# DerivedBidiClass-6.2.0.txt
-# Date: 2012-05-20, 00:42:30 GMT [MD]
-#
-# Unicode Character Database
-# Copyright (c) 1991-2012 Unicode, Inc.
-# For terms of use, see http://www.unicode.org/terms_of_use.html
-# For documentation, see http://www.unicode.org/reports/tr44/
+% Generated from Unicode 17.0.0 UCD data. Do not edit.
 
-# ================================================
-
-# Bidi Class (listing UnicodeData.txt, field 4: see UAX #44: http://www.unicode.org/reports/tr44/)
-# Unlike other properties, unassigned code points in blocks
-# reserved for right-to-left scripts are given either types R or AL.
-#
-# The unassigned code points that default to AL are in the ranges:
-#     [\u0600-\u07BF \u08A0-\u08FF \uFB50-\uFDCF \uFDF0-\uFDFF \uFE70-\uFEFF \U0001EE00-\U0001EEFF]
-#
-#     Arabic:            U+0600  -  U+06FF
-#     Syriac:            U+0700  -  U+074F
-#     Arabic_Supplement: U+0750  -  U+077F
-#     Thaana:            U+0780  -  U+07BF
-#     Arabic Extended-A: U+08A0  -  U+08FF
-#     Arabic_Presentation_Forms_A:
-#                        U+FB50  -  U+FDCF
-#                        U+FDF0  -  U+FDFF
-#     Arabic_Presentation_Forms_B:
-#                        U+FE70  -  U+FEFF
-#     Arabic Mathematical Alphabetic Symbols:
-#                       U+1EE00  - U+1EEFF
-#
-# The unassigned code points that default to R are in the ranges:
-#     [\u0590-\u05FF \u07C0-\u089F \uFB1D-\uFB4F \U00010800-\U00010FFF \U0001E800-\U0001EDFF \U0001EF00-\U0001EFFF]
-#
-#     Hebrew:            U+0590  -  U+05FF
-#     NKo:               U+07C0  -  U+07FF
-#     Cypriot_Syllabary: U+10800 - U+1083F
-#     Phoenician:        U+10900 - U+1091F
-#     Lydian:            U+10920 - U+1093F
-#     Meroitic Hieroglyphs:
-#                        U+10980 - U+1099F
-#     Meroitic Cursive:  U+109A0 - U+109FF
-#     Kharoshthi:        U+10A00 - U+10A5F
-#     and any others in the ranges:
-#                        U+0800  -  U+089F,
-#                        U+FB1D  -  U+FB4F,
-#                        U+10840 - U+10FFF,
-#                        U+1E800 - U+1EDFF,
-#                        U+1EF00 - U+1EFFF
-#
-# For all other cases:
-
-#  All code points not explicitly listed for Bidi_Class
-#  have the value Left_To_Right (L).
-
-# @missing: 0000..10FFFF; Left_To_Right
-
-# ================================================
-*/
-
-unicode_bidi_class(CodePoint, Class) :-
+unicode_bidi_class(CodePoint, Value) :-
 	(	var(CodePoint) ->
-		% generate code point pairs
-		unicode_bidi_class(CodePointStart, CodePointEnd, Class),
-		between(CodePointStart, CodePointEnd, CodePoint)
-	;	% try first-argument indexing first
-		unicode_bidi_class(CodePoint, _, CodePointClass) ->
-		Class = CodePointClass
-	;	% look for a code point range that includes the given code point
-		unicode_bidi_class(CodePointStart, CodePointEnd, CodePointClass),
-		between(CodePointStart, CodePointEnd, CodePoint) ->
-		Class = CodePointClass
-	;	% missing code point; see original comment above
-		between(0x0000, 0x10FFFF, CodePoint),
-		Class = 'Left_To_Right'
+		unicode_bidi_class(Start, End, Value),
+		between(Start, End, CodePoint)
+	;	unicode_bidi_class(Start, End, SpecificValue),
+		CodePoint >= Start, CodePoint =< End ->
+		Value = SpecificValue
+	;	between(0, 1114111, CodePoint),
+		Value = 'Left_To_Right'
 	).
 
-% Bidi_Class=Left_To_Right
-
-unicode_bidi_class(0x0041, 0x005A, 'L'). % L&  [26] LATIN CAPITAL LETTER A..LATIN CAPITAL LETTER Z
-unicode_bidi_class(0x0061, 0x007A, 'L'). % L&  [26] LATIN SMALL LETTER A..LATIN SMALL LETTER Z
-unicode_bidi_class(0x00AA, 0x00AA, 'L'). % Lo       FEMININE ORDINAL INDICATOR
-unicode_bidi_class(0x00B5, 0x00B5, 'L'). % L&       MICRO SIGN
-unicode_bidi_class(0x00BA, 0x00BA, 'L'). % Lo       MASCULINE ORDINAL INDICATOR
-unicode_bidi_class(0x00C0, 0x00D6, 'L'). % L&  [23] LATIN CAPITAL LETTER A WITH GRAVE..LATIN CAPITAL LETTER O WITH DIAERESIS
-unicode_bidi_class(0x00D8, 0x00F6, 'L'). % L&  [31] LATIN CAPITAL LETTER O WITH STROKE..LATIN SMALL LETTER O WITH DIAERESIS
-unicode_bidi_class(0x00F8, 0x01BA, 'L'). % L& [195] LATIN SMALL LETTER O WITH STROKE..LATIN SMALL LETTER EZH WITH TAIL
-unicode_bidi_class(0x01BB, 0x01BB, 'L'). % Lo       LATIN LETTER TWO WITH STROKE
-unicode_bidi_class(0x01BC, 0x01BF, 'L'). % L&   [4] LATIN CAPITAL LETTER TONE FIVE..LATIN LETTER WYNN
-unicode_bidi_class(0x01C0, 0x01C3, 'L'). % Lo   [4] LATIN LETTER DENTAL CLICK..LATIN LETTER RETROFLEX CLICK
-unicode_bidi_class(0x01C4, 0x0293, 'L'). % L& [208] LATIN CAPITAL LETTER DZ WITH CARON..LATIN SMALL LETTER EZH WITH CURL
-unicode_bidi_class(0x0294, 0x0294, 'L'). % Lo       LATIN LETTER GLOTTAL STOP
-unicode_bidi_class(0x0295, 0x02AF, 'L'). % L&  [27] LATIN LETTER PHARYNGEAL VOICED FRICATIVE..LATIN SMALL LETTER TURNED H WITH FISHHOOK AND TAIL
-unicode_bidi_class(0x02B0, 0x02B8, 'L'). % Lm   [9] MODIFIER LETTER SMALL H..MODIFIER LETTER SMALL Y
-unicode_bidi_class(0x02BB, 0x02C1, 'L'). % Lm   [7] MODIFIER LETTER TURNED COMMA..MODIFIER LETTER REVERSED GLOTTAL STOP
-unicode_bidi_class(0x02D0, 0x02D1, 'L'). % Lm   [2] MODIFIER LETTER TRIANGULAR COLON..MODIFIER LETTER HALF TRIANGULAR COLON
-unicode_bidi_class(0x02E0, 0x02E4, 'L'). % Lm   [5] MODIFIER LETTER SMALL GAMMA..MODIFIER LETTER SMALL REVERSED GLOTTAL STOP
-unicode_bidi_class(0x02EE, 0x02EE, 'L'). % Lm       MODIFIER LETTER DOUBLE APOSTROPHE
-unicode_bidi_class(0x0370, 0x0373, 'L'). % L&   [4] GREEK CAPITAL LETTER HETA..GREEK SMALL LETTER ARCHAIC SAMPI
-unicode_bidi_class(0x0376, 0x0377, 'L'). % L&   [2] GREEK CAPITAL LETTER PAMPHYLIAN DIGAMMA..GREEK SMALL LETTER PAMPHYLIAN DIGAMMA
-unicode_bidi_class(0x037A, 0x037A, 'L'). % Lm       GREEK YPOGEGRAMMENI
-unicode_bidi_class(0x037B, 0x037D, 'L'). % L&   [3] GREEK SMALL REVERSED LUNATE SIGMA SYMBOL..GREEK SMALL REVERSED DOTTED LUNATE SIGMA SYMBOL
-unicode_bidi_class(0x0386, 0x0386, 'L'). % L&       GREEK CAPITAL LETTER ALPHA WITH TONOS
-unicode_bidi_class(0x0388, 0x038A, 'L'). % L&   [3] GREEK CAPITAL LETTER EPSILON WITH TONOS..GREEK CAPITAL LETTER IOTA WITH TONOS
-unicode_bidi_class(0x038C, 0x038C, 'L'). % L&       GREEK CAPITAL LETTER OMICRON WITH TONOS
-unicode_bidi_class(0x038E, 0x03A1, 'L'). % L&  [20] GREEK CAPITAL LETTER UPSILON WITH TONOS..GREEK CAPITAL LETTER RHO
-unicode_bidi_class(0x03A3, 0x03F5, 'L'). % L&  [83] GREEK CAPITAL LETTER SIGMA..GREEK LUNATE EPSILON SYMBOL
-unicode_bidi_class(0x03F7, 0x0481, 'L'). % L& [139] GREEK CAPITAL LETTER SHO..CYRILLIC SMALL LETTER KOPPA
-unicode_bidi_class(0x0482, 0x0482, 'L'). % So       CYRILLIC THOUSANDS SIGN
-unicode_bidi_class(0x048A, 0x0527, 'L'). % L& [158] CYRILLIC CAPITAL LETTER SHORT I WITH TAIL..CYRILLIC SMALL LETTER SHHA WITH DESCENDER
-unicode_bidi_class(0x0531, 0x0556, 'L'). % L&  [38] ARMENIAN CAPITAL LETTER AYB..ARMENIAN CAPITAL LETTER FEH
-unicode_bidi_class(0x0559, 0x0559, 'L'). % Lm       ARMENIAN MODIFIER LETTER LEFT HALF RING
-unicode_bidi_class(0x055A, 0x055F, 'L'). % Po   [6] ARMENIAN APOSTROPHE..ARMENIAN ABBREVIATION MARK
-unicode_bidi_class(0x0561, 0x0587, 'L'). % L&  [39] ARMENIAN SMALL LETTER AYB..ARMENIAN SMALL LIGATURE ECH YIWN
-unicode_bidi_class(0x0589, 0x0589, 'L'). % Po       ARMENIAN FULL STOP
-unicode_bidi_class(0x0903, 0x0903, 'L'). % Mc       DEVANAGARI SIGN VISARGA
-unicode_bidi_class(0x0904, 0x0939, 'L'). % Lo  [54] DEVANAGARI LETTER SHORT A..DEVANAGARI LETTER HA
-unicode_bidi_class(0x093B, 0x093B, 'L'). % Mc       DEVANAGARI VOWEL SIGN OOE
-unicode_bidi_class(0x093D, 0x093D, 'L'). % Lo       DEVANAGARI SIGN AVAGRAHA
-unicode_bidi_class(0x093E, 0x0940, 'L'). % Mc   [3] DEVANAGARI VOWEL SIGN AA..DEVANAGARI VOWEL SIGN II
-unicode_bidi_class(0x0949, 0x094C, 'L'). % Mc   [4] DEVANAGARI VOWEL SIGN CANDRA O..DEVANAGARI VOWEL SIGN AU
-unicode_bidi_class(0x094E, 0x094F, 'L'). % Mc   [2] DEVANAGARI VOWEL SIGN PRISHTHAMATRA E..DEVANAGARI VOWEL SIGN AW
-unicode_bidi_class(0x0950, 0x0950, 'L'). % Lo       DEVANAGARI OM
-unicode_bidi_class(0x0958, 0x0961, 'L'). % Lo  [10] DEVANAGARI LETTER QA..DEVANAGARI LETTER VOCALIC LL
-unicode_bidi_class(0x0964, 0x0965, 'L'). % Po   [2] DEVANAGARI DANDA..DEVANAGARI DOUBLE DANDA
-unicode_bidi_class(0x0966, 0x096F, 'L'). % Nd  [10] DEVANAGARI DIGIT ZERO..DEVANAGARI DIGIT NINE
-unicode_bidi_class(0x0970, 0x0970, 'L'). % Po       DEVANAGARI ABBREVIATION SIGN
-unicode_bidi_class(0x0971, 0x0971, 'L'). % Lm       DEVANAGARI SIGN HIGH SPACING DOT
-unicode_bidi_class(0x0972, 0x0977, 'L'). % Lo   [6] DEVANAGARI LETTER CANDRA A..DEVANAGARI LETTER UUE
-unicode_bidi_class(0x0979, 0x097F, 'L'). % Lo   [7] DEVANAGARI LETTER ZHA..DEVANAGARI LETTER BBA
-unicode_bidi_class(0x0982, 0x0983, 'L'). % Mc   [2] BENGALI SIGN ANUSVARA..BENGALI SIGN VISARGA
-unicode_bidi_class(0x0985, 0x098C, 'L'). % Lo   [8] BENGALI LETTER A..BENGALI LETTER VOCALIC L
-unicode_bidi_class(0x098F, 0x0990, 'L'). % Lo   [2] BENGALI LETTER E..BENGALI LETTER AI
-unicode_bidi_class(0x0993, 0x09A8, 'L'). % Lo  [22] BENGALI LETTER O..BENGALI LETTER NA
-unicode_bidi_class(0x09AA, 0x09B0, 'L'). % Lo   [7] BENGALI LETTER PA..BENGALI LETTER RA
-unicode_bidi_class(0x09B2, 0x09B2, 'L'). % Lo       BENGALI LETTER LA
-unicode_bidi_class(0x09B6, 0x09B9, 'L'). % Lo   [4] BENGALI LETTER SHA..BENGALI LETTER HA
-unicode_bidi_class(0x09BD, 0x09BD, 'L'). % Lo       BENGALI SIGN AVAGRAHA
-unicode_bidi_class(0x09BE, 0x09C0, 'L'). % Mc   [3] BENGALI VOWEL SIGN AA..BENGALI VOWEL SIGN II
-unicode_bidi_class(0x09C7, 0x09C8, 'L'). % Mc   [2] BENGALI VOWEL SIGN E..BENGALI VOWEL SIGN AI
-unicode_bidi_class(0x09CB, 0x09CC, 'L'). % Mc   [2] BENGALI VOWEL SIGN O..BENGALI VOWEL SIGN AU
-unicode_bidi_class(0x09CE, 0x09CE, 'L'). % Lo       BENGALI LETTER KHANDA TA
-unicode_bidi_class(0x09D7, 0x09D7, 'L'). % Mc       BENGALI AU LENGTH MARK
-unicode_bidi_class(0x09DC, 0x09DD, 'L'). % Lo   [2] BENGALI LETTER RRA..BENGALI LETTER RHA
-unicode_bidi_class(0x09DF, 0x09E1, 'L'). % Lo   [3] BENGALI LETTER YYA..BENGALI LETTER VOCALIC LL
-unicode_bidi_class(0x09E6, 0x09EF, 'L'). % Nd  [10] BENGALI DIGIT ZERO..BENGALI DIGIT NINE
-unicode_bidi_class(0x09F0, 0x09F1, 'L'). % Lo   [2] BENGALI LETTER RA WITH MIDDLE DIAGONAL..BENGALI LETTER RA WITH LOWER DIAGONAL
-unicode_bidi_class(0x09F4, 0x09F9, 'L'). % No   [6] BENGALI CURRENCY NUMERATOR ONE..BENGALI CURRENCY DENOMINATOR SIXTEEN
-unicode_bidi_class(0x09FA, 0x09FA, 'L'). % So       BENGALI ISSHAR
-unicode_bidi_class(0x0A03, 0x0A03, 'L'). % Mc       GURMUKHI SIGN VISARGA
-unicode_bidi_class(0x0A05, 0x0A0A, 'L'). % Lo   [6] GURMUKHI LETTER A..GURMUKHI LETTER UU
-unicode_bidi_class(0x0A0F, 0x0A10, 'L'). % Lo   [2] GURMUKHI LETTER EE..GURMUKHI LETTER AI
-unicode_bidi_class(0x0A13, 0x0A28, 'L'). % Lo  [22] GURMUKHI LETTER OO..GURMUKHI LETTER NA
-unicode_bidi_class(0x0A2A, 0x0A30, 'L'). % Lo   [7] GURMUKHI LETTER PA..GURMUKHI LETTER RA
-unicode_bidi_class(0x0A32, 0x0A33, 'L'). % Lo   [2] GURMUKHI LETTER LA..GURMUKHI LETTER LLA
-unicode_bidi_class(0x0A35, 0x0A36, 'L'). % Lo   [2] GURMUKHI LETTER VA..GURMUKHI LETTER SHA
-unicode_bidi_class(0x0A38, 0x0A39, 'L'). % Lo   [2] GURMUKHI LETTER SA..GURMUKHI LETTER HA
-unicode_bidi_class(0x0A3E, 0x0A40, 'L'). % Mc   [3] GURMUKHI VOWEL SIGN AA..GURMUKHI VOWEL SIGN II
-unicode_bidi_class(0x0A59, 0x0A5C, 'L'). % Lo   [4] GURMUKHI LETTER KHHA..GURMUKHI LETTER RRA
-unicode_bidi_class(0x0A5E, 0x0A5E, 'L'). % Lo       GURMUKHI LETTER FA
-unicode_bidi_class(0x0A66, 0x0A6F, 'L'). % Nd  [10] GURMUKHI DIGIT ZERO..GURMUKHI DIGIT NINE
-unicode_bidi_class(0x0A72, 0x0A74, 'L'). % Lo   [3] GURMUKHI IRI..GURMUKHI EK ONKAR
-unicode_bidi_class(0x0A83, 0x0A83, 'L'). % Mc       GUJARATI SIGN VISARGA
-unicode_bidi_class(0x0A85, 0x0A8D, 'L'). % Lo   [9] GUJARATI LETTER A..GUJARATI VOWEL CANDRA E
-unicode_bidi_class(0x0A8F, 0x0A91, 'L'). % Lo   [3] GUJARATI LETTER E..GUJARATI VOWEL CANDRA O
-unicode_bidi_class(0x0A93, 0x0AA8, 'L'). % Lo  [22] GUJARATI LETTER O..GUJARATI LETTER NA
-unicode_bidi_class(0x0AAA, 0x0AB0, 'L'). % Lo   [7] GUJARATI LETTER PA..GUJARATI LETTER RA
-unicode_bidi_class(0x0AB2, 0x0AB3, 'L'). % Lo   [2] GUJARATI LETTER LA..GUJARATI LETTER LLA
-unicode_bidi_class(0x0AB5, 0x0AB9, 'L'). % Lo   [5] GUJARATI LETTER VA..GUJARATI LETTER HA
-unicode_bidi_class(0x0ABD, 0x0ABD, 'L'). % Lo       GUJARATI SIGN AVAGRAHA
-unicode_bidi_class(0x0ABE, 0x0AC0, 'L'). % Mc   [3] GUJARATI VOWEL SIGN AA..GUJARATI VOWEL SIGN II
-unicode_bidi_class(0x0AC9, 0x0AC9, 'L'). % Mc       GUJARATI VOWEL SIGN CANDRA O
-unicode_bidi_class(0x0ACB, 0x0ACC, 'L'). % Mc   [2] GUJARATI VOWEL SIGN O..GUJARATI VOWEL SIGN AU
-unicode_bidi_class(0x0AD0, 0x0AD0, 'L'). % Lo       GUJARATI OM
-unicode_bidi_class(0x0AE0, 0x0AE1, 'L'). % Lo   [2] GUJARATI LETTER VOCALIC RR..GUJARATI LETTER VOCALIC LL
-unicode_bidi_class(0x0AE6, 0x0AEF, 'L'). % Nd  [10] GUJARATI DIGIT ZERO..GUJARATI DIGIT NINE
-unicode_bidi_class(0x0AF0, 0x0AF0, 'L'). % Po       GUJARATI ABBREVIATION SIGN
-unicode_bidi_class(0x0B02, 0x0B03, 'L'). % Mc   [2] ORIYA SIGN ANUSVARA..ORIYA SIGN VISARGA
-unicode_bidi_class(0x0B05, 0x0B0C, 'L'). % Lo   [8] ORIYA LETTER A..ORIYA LETTER VOCALIC L
-unicode_bidi_class(0x0B0F, 0x0B10, 'L'). % Lo   [2] ORIYA LETTER E..ORIYA LETTER AI
-unicode_bidi_class(0x0B13, 0x0B28, 'L'). % Lo  [22] ORIYA LETTER O..ORIYA LETTER NA
-unicode_bidi_class(0x0B2A, 0x0B30, 'L'). % Lo   [7] ORIYA LETTER PA..ORIYA LETTER RA
-unicode_bidi_class(0x0B32, 0x0B33, 'L'). % Lo   [2] ORIYA LETTER LA..ORIYA LETTER LLA
-unicode_bidi_class(0x0B35, 0x0B39, 'L'). % Lo   [5] ORIYA LETTER VA..ORIYA LETTER HA
-unicode_bidi_class(0x0B3D, 0x0B3D, 'L'). % Lo       ORIYA SIGN AVAGRAHA
-unicode_bidi_class(0x0B3E, 0x0B3E, 'L'). % Mc       ORIYA VOWEL SIGN AA
-unicode_bidi_class(0x0B40, 0x0B40, 'L'). % Mc       ORIYA VOWEL SIGN II
-unicode_bidi_class(0x0B47, 0x0B48, 'L'). % Mc   [2] ORIYA VOWEL SIGN E..ORIYA VOWEL SIGN AI
-unicode_bidi_class(0x0B4B, 0x0B4C, 'L'). % Mc   [2] ORIYA VOWEL SIGN O..ORIYA VOWEL SIGN AU
-unicode_bidi_class(0x0B57, 0x0B57, 'L'). % Mc       ORIYA AU LENGTH MARK
-unicode_bidi_class(0x0B5C, 0x0B5D, 'L'). % Lo   [2] ORIYA LETTER RRA..ORIYA LETTER RHA
-unicode_bidi_class(0x0B5F, 0x0B61, 'L'). % Lo   [3] ORIYA LETTER YYA..ORIYA LETTER VOCALIC LL
-unicode_bidi_class(0x0B66, 0x0B6F, 'L'). % Nd  [10] ORIYA DIGIT ZERO..ORIYA DIGIT NINE
-unicode_bidi_class(0x0B70, 0x0B70, 'L'). % So       ORIYA ISSHAR
-unicode_bidi_class(0x0B71, 0x0B71, 'L'). % Lo       ORIYA LETTER WA
-unicode_bidi_class(0x0B72, 0x0B77, 'L'). % No   [6] ORIYA FRACTION ONE QUARTER..ORIYA FRACTION THREE SIXTEENTHS
-unicode_bidi_class(0x0B83, 0x0B83, 'L'). % Lo       TAMIL SIGN VISARGA
-unicode_bidi_class(0x0B85, 0x0B8A, 'L'). % Lo   [6] TAMIL LETTER A..TAMIL LETTER UU
-unicode_bidi_class(0x0B8E, 0x0B90, 'L'). % Lo   [3] TAMIL LETTER E..TAMIL LETTER AI
-unicode_bidi_class(0x0B92, 0x0B95, 'L'). % Lo   [4] TAMIL LETTER O..TAMIL LETTER KA
-unicode_bidi_class(0x0B99, 0x0B9A, 'L'). % Lo   [2] TAMIL LETTER NGA..TAMIL LETTER CA
-unicode_bidi_class(0x0B9C, 0x0B9C, 'L'). % Lo       TAMIL LETTER JA
-unicode_bidi_class(0x0B9E, 0x0B9F, 'L'). % Lo   [2] TAMIL LETTER NYA..TAMIL LETTER TTA
-unicode_bidi_class(0x0BA3, 0x0BA4, 'L'). % Lo   [2] TAMIL LETTER NNA..TAMIL LETTER TA
-unicode_bidi_class(0x0BA8, 0x0BAA, 'L'). % Lo   [3] TAMIL LETTER NA..TAMIL LETTER PA
-unicode_bidi_class(0x0BAE, 0x0BB9, 'L'). % Lo  [12] TAMIL LETTER MA..TAMIL LETTER HA
-unicode_bidi_class(0x0BBE, 0x0BBF, 'L'). % Mc   [2] TAMIL VOWEL SIGN AA..TAMIL VOWEL SIGN I
-unicode_bidi_class(0x0BC1, 0x0BC2, 'L'). % Mc   [2] TAMIL VOWEL SIGN U..TAMIL VOWEL SIGN UU
-unicode_bidi_class(0x0BC6, 0x0BC8, 'L'). % Mc   [3] TAMIL VOWEL SIGN E..TAMIL VOWEL SIGN AI
-unicode_bidi_class(0x0BCA, 0x0BCC, 'L'). % Mc   [3] TAMIL VOWEL SIGN O..TAMIL VOWEL SIGN AU
-unicode_bidi_class(0x0BD0, 0x0BD0, 'L'). % Lo       TAMIL OM
-unicode_bidi_class(0x0BD7, 0x0BD7, 'L'). % Mc       TAMIL AU LENGTH MARK
-unicode_bidi_class(0x0BE6, 0x0BEF, 'L'). % Nd  [10] TAMIL DIGIT ZERO..TAMIL DIGIT NINE
-unicode_bidi_class(0x0BF0, 0x0BF2, 'L'). % No   [3] TAMIL NUMBER TEN..TAMIL NUMBER ONE THOUSAND
-unicode_bidi_class(0x0C01, 0x0C03, 'L'). % Mc   [3] TELUGU SIGN CANDRABINDU..TELUGU SIGN VISARGA
-unicode_bidi_class(0x0C05, 0x0C0C, 'L'). % Lo   [8] TELUGU LETTER A..TELUGU LETTER VOCALIC L
-unicode_bidi_class(0x0C0E, 0x0C10, 'L'). % Lo   [3] TELUGU LETTER E..TELUGU LETTER AI
-unicode_bidi_class(0x0C12, 0x0C28, 'L'). % Lo  [23] TELUGU LETTER O..TELUGU LETTER NA
-unicode_bidi_class(0x0C2A, 0x0C33, 'L'). % Lo  [10] TELUGU LETTER PA..TELUGU LETTER LLA
-unicode_bidi_class(0x0C35, 0x0C39, 'L'). % Lo   [5] TELUGU LETTER VA..TELUGU LETTER HA
-unicode_bidi_class(0x0C3D, 0x0C3D, 'L'). % Lo       TELUGU SIGN AVAGRAHA
-unicode_bidi_class(0x0C41, 0x0C44, 'L'). % Mc   [4] TELUGU VOWEL SIGN U..TELUGU VOWEL SIGN VOCALIC RR
-unicode_bidi_class(0x0C58, 0x0C59, 'L'). % Lo   [2] TELUGU LETTER TSA..TELUGU LETTER DZA
-unicode_bidi_class(0x0C60, 0x0C61, 'L'). % Lo   [2] TELUGU LETTER VOCALIC RR..TELUGU LETTER VOCALIC LL
-unicode_bidi_class(0x0C66, 0x0C6F, 'L'). % Nd  [10] TELUGU DIGIT ZERO..TELUGU DIGIT NINE
-unicode_bidi_class(0x0C7F, 0x0C7F, 'L'). % So       TELUGU SIGN TUUMU
-unicode_bidi_class(0x0C82, 0x0C83, 'L'). % Mc   [2] KANNADA SIGN ANUSVARA..KANNADA SIGN VISARGA
-unicode_bidi_class(0x0C85, 0x0C8C, 'L'). % Lo   [8] KANNADA LETTER A..KANNADA LETTER VOCALIC L
-unicode_bidi_class(0x0C8E, 0x0C90, 'L'). % Lo   [3] KANNADA LETTER E..KANNADA LETTER AI
-unicode_bidi_class(0x0C92, 0x0CA8, 'L'). % Lo  [23] KANNADA LETTER O..KANNADA LETTER NA
-unicode_bidi_class(0x0CAA, 0x0CB3, 'L'). % Lo  [10] KANNADA LETTER PA..KANNADA LETTER LLA
-unicode_bidi_class(0x0CB5, 0x0CB9, 'L'). % Lo   [5] KANNADA LETTER VA..KANNADA LETTER HA
-unicode_bidi_class(0x0CBD, 0x0CBD, 'L'). % Lo       KANNADA SIGN AVAGRAHA
-unicode_bidi_class(0x0CBE, 0x0CBE, 'L'). % Mc       KANNADA VOWEL SIGN AA
-unicode_bidi_class(0x0CBF, 0x0CBF, 'L'). % Mn       KANNADA VOWEL SIGN I
-unicode_bidi_class(0x0CC0, 0x0CC4, 'L'). % Mc   [5] KANNADA VOWEL SIGN II..KANNADA VOWEL SIGN VOCALIC RR
-unicode_bidi_class(0x0CC6, 0x0CC6, 'L'). % Mn       KANNADA VOWEL SIGN E
-unicode_bidi_class(0x0CC7, 0x0CC8, 'L'). % Mc   [2] KANNADA VOWEL SIGN EE..KANNADA VOWEL SIGN AI
-unicode_bidi_class(0x0CCA, 0x0CCB, 'L'). % Mc   [2] KANNADA VOWEL SIGN O..KANNADA VOWEL SIGN OO
-unicode_bidi_class(0x0CD5, 0x0CD6, 'L'). % Mc   [2] KANNADA LENGTH MARK..KANNADA AI LENGTH MARK
-unicode_bidi_class(0x0CDE, 0x0CDE, 'L'). % Lo       KANNADA LETTER FA
-unicode_bidi_class(0x0CE0, 0x0CE1, 'L'). % Lo   [2] KANNADA LETTER VOCALIC RR..KANNADA LETTER VOCALIC LL
-unicode_bidi_class(0x0CE6, 0x0CEF, 'L'). % Nd  [10] KANNADA DIGIT ZERO..KANNADA DIGIT NINE
-unicode_bidi_class(0x0CF1, 0x0CF2, 'L'). % Lo   [2] KANNADA SIGN JIHVAMULIYA..KANNADA SIGN UPADHMANIYA
-unicode_bidi_class(0x0D02, 0x0D03, 'L'). % Mc   [2] MALAYALAM SIGN ANUSVARA..MALAYALAM SIGN VISARGA
-unicode_bidi_class(0x0D05, 0x0D0C, 'L'). % Lo   [8] MALAYALAM LETTER A..MALAYALAM LETTER VOCALIC L
-unicode_bidi_class(0x0D0E, 0x0D10, 'L'). % Lo   [3] MALAYALAM LETTER E..MALAYALAM LETTER AI
-unicode_bidi_class(0x0D12, 0x0D3A, 'L'). % Lo  [41] MALAYALAM LETTER O..MALAYALAM LETTER TTTA
-unicode_bidi_class(0x0D3D, 0x0D3D, 'L'). % Lo       MALAYALAM SIGN AVAGRAHA
-unicode_bidi_class(0x0D3E, 0x0D40, 'L'). % Mc   [3] MALAYALAM VOWEL SIGN AA..MALAYALAM VOWEL SIGN II
-unicode_bidi_class(0x0D46, 0x0D48, 'L'). % Mc   [3] MALAYALAM VOWEL SIGN E..MALAYALAM VOWEL SIGN AI
-unicode_bidi_class(0x0D4A, 0x0D4C, 'L'). % Mc   [3] MALAYALAM VOWEL SIGN O..MALAYALAM VOWEL SIGN AU
-unicode_bidi_class(0x0D4E, 0x0D4E, 'L'). % Lo       MALAYALAM LETTER DOT REPH
-unicode_bidi_class(0x0D57, 0x0D57, 'L'). % Mc       MALAYALAM AU LENGTH MARK
-unicode_bidi_class(0x0D60, 0x0D61, 'L'). % Lo   [2] MALAYALAM LETTER VOCALIC RR..MALAYALAM LETTER VOCALIC LL
-unicode_bidi_class(0x0D66, 0x0D6F, 'L'). % Nd  [10] MALAYALAM DIGIT ZERO..MALAYALAM DIGIT NINE
-unicode_bidi_class(0x0D70, 0x0D75, 'L'). % No   [6] MALAYALAM NUMBER TEN..MALAYALAM FRACTION THREE QUARTERS
-unicode_bidi_class(0x0D79, 0x0D79, 'L'). % So       MALAYALAM DATE MARK
-unicode_bidi_class(0x0D7A, 0x0D7F, 'L'). % Lo   [6] MALAYALAM LETTER CHILLU NN..MALAYALAM LETTER CHILLU K
-unicode_bidi_class(0x0D82, 0x0D83, 'L'). % Mc   [2] SINHALA SIGN ANUSVARAYA..SINHALA SIGN VISARGAYA
-unicode_bidi_class(0x0D85, 0x0D96, 'L'). % Lo  [18] SINHALA LETTER AYANNA..SINHALA LETTER AUYANNA
-unicode_bidi_class(0x0D9A, 0x0DB1, 'L'). % Lo  [24] SINHALA LETTER ALPAPRAANA KAYANNA..SINHALA LETTER DANTAJA NAYANNA
-unicode_bidi_class(0x0DB3, 0x0DBB, 'L'). % Lo   [9] SINHALA LETTER SANYAKA DAYANNA..SINHALA LETTER RAYANNA
-unicode_bidi_class(0x0DBD, 0x0DBD, 'L'). % Lo       SINHALA LETTER DANTAJA LAYANNA
-unicode_bidi_class(0x0DC0, 0x0DC6, 'L'). % Lo   [7] SINHALA LETTER VAYANNA..SINHALA LETTER FAYANNA
-unicode_bidi_class(0x0DCF, 0x0DD1, 'L'). % Mc   [3] SINHALA VOWEL SIGN AELA-PILLA..SINHALA VOWEL SIGN DIGA AEDA-PILLA
-unicode_bidi_class(0x0DD8, 0x0DDF, 'L'). % Mc   [8] SINHALA VOWEL SIGN GAETTA-PILLA..SINHALA VOWEL SIGN GAYANUKITTA
-unicode_bidi_class(0x0DF2, 0x0DF3, 'L'). % Mc   [2] SINHALA VOWEL SIGN DIGA GAETTA-PILLA..SINHALA VOWEL SIGN DIGA GAYANUKITTA
-unicode_bidi_class(0x0DF4, 0x0DF4, 'L'). % Po       SINHALA PUNCTUATION KUNDDALIYA
-unicode_bidi_class(0x0E01, 0x0E30, 'L'). % Lo  [48] THAI CHARACTER KO KAI..THAI CHARACTER SARA A
-unicode_bidi_class(0x0E32, 0x0E33, 'L'). % Lo   [2] THAI CHARACTER SARA AA..THAI CHARACTER SARA AM
-unicode_bidi_class(0x0E40, 0x0E45, 'L'). % Lo   [6] THAI CHARACTER SARA E..THAI CHARACTER LAKKHANGYAO
-unicode_bidi_class(0x0E46, 0x0E46, 'L'). % Lm       THAI CHARACTER MAIYAMOK
-unicode_bidi_class(0x0E4F, 0x0E4F, 'L'). % Po       THAI CHARACTER FONGMAN
-unicode_bidi_class(0x0E50, 0x0E59, 'L'). % Nd  [10] THAI DIGIT ZERO..THAI DIGIT NINE
-unicode_bidi_class(0x0E5A, 0x0E5B, 'L'). % Po   [2] THAI CHARACTER ANGKHANKHU..THAI CHARACTER KHOMUT
-unicode_bidi_class(0x0E81, 0x0E82, 'L'). % Lo   [2] LAO LETTER KO..LAO LETTER KHO SUNG
-unicode_bidi_class(0x0E84, 0x0E84, 'L'). % Lo       LAO LETTER KHO TAM
-unicode_bidi_class(0x0E87, 0x0E88, 'L'). % Lo   [2] LAO LETTER NGO..LAO LETTER CO
-unicode_bidi_class(0x0E8A, 0x0E8A, 'L'). % Lo       LAO LETTER SO TAM
-unicode_bidi_class(0x0E8D, 0x0E8D, 'L'). % Lo       LAO LETTER NYO
-unicode_bidi_class(0x0E94, 0x0E97, 'L'). % Lo   [4] LAO LETTER DO..LAO LETTER THO TAM
-unicode_bidi_class(0x0E99, 0x0E9F, 'L'). % Lo   [7] LAO LETTER NO..LAO LETTER FO SUNG
-unicode_bidi_class(0x0EA1, 0x0EA3, 'L'). % Lo   [3] LAO LETTER MO..LAO LETTER LO LING
-unicode_bidi_class(0x0EA5, 0x0EA5, 'L'). % Lo       LAO LETTER LO LOOT
-unicode_bidi_class(0x0EA7, 0x0EA7, 'L'). % Lo       LAO LETTER WO
-unicode_bidi_class(0x0EAA, 0x0EAB, 'L'). % Lo   [2] LAO LETTER SO SUNG..LAO LETTER HO SUNG
-unicode_bidi_class(0x0EAD, 0x0EB0, 'L'). % Lo   [4] LAO LETTER O..LAO VOWEL SIGN A
-unicode_bidi_class(0x0EB2, 0x0EB3, 'L'). % Lo   [2] LAO VOWEL SIGN AA..LAO VOWEL SIGN AM
-unicode_bidi_class(0x0EBD, 0x0EBD, 'L'). % Lo       LAO SEMIVOWEL SIGN NYO
-unicode_bidi_class(0x0EC0, 0x0EC4, 'L'). % Lo   [5] LAO VOWEL SIGN E..LAO VOWEL SIGN AI
-unicode_bidi_class(0x0EC6, 0x0EC6, 'L'). % Lm       LAO KO LA
-unicode_bidi_class(0x0ED0, 0x0ED9, 'L'). % Nd  [10] LAO DIGIT ZERO..LAO DIGIT NINE
-unicode_bidi_class(0x0EDC, 0x0EDF, 'L'). % Lo   [4] LAO HO NO..LAO LETTER KHMU NYO
-unicode_bidi_class(0x0F00, 0x0F00, 'L'). % Lo       TIBETAN SYLLABLE OM
-unicode_bidi_class(0x0F01, 0x0F03, 'L'). % So   [3] TIBETAN MARK GTER YIG MGO TRUNCATED A..TIBETAN MARK GTER YIG MGO -UM GTER TSHEG MA
-unicode_bidi_class(0x0F04, 0x0F12, 'L'). % Po  [15] TIBETAN MARK INITIAL YIG MGO MDUN MA..TIBETAN MARK RGYA GRAM SHAD
-unicode_bidi_class(0x0F13, 0x0F13, 'L'). % So       TIBETAN MARK CARET -DZUD RTAGS ME LONG CAN
-unicode_bidi_class(0x0F14, 0x0F14, 'L'). % Po       TIBETAN MARK GTER TSHEG
-unicode_bidi_class(0x0F15, 0x0F17, 'L'). % So   [3] TIBETAN LOGOTYPE SIGN CHAD RTAGS..TIBETAN ASTROLOGICAL SIGN SGRA GCAN -CHAR RTAGS
-unicode_bidi_class(0x0F1A, 0x0F1F, 'L'). % So   [6] TIBETAN SIGN RDEL DKAR GCIG..TIBETAN SIGN RDEL DKAR RDEL NAG
-unicode_bidi_class(0x0F20, 0x0F29, 'L'). % Nd  [10] TIBETAN DIGIT ZERO..TIBETAN DIGIT NINE
-unicode_bidi_class(0x0F2A, 0x0F33, 'L'). % No  [10] TIBETAN DIGIT HALF ONE..TIBETAN DIGIT HALF ZERO
-unicode_bidi_class(0x0F34, 0x0F34, 'L'). % So       TIBETAN MARK BSDUS RTAGS
-unicode_bidi_class(0x0F36, 0x0F36, 'L'). % So       TIBETAN MARK CARET -DZUD RTAGS BZHI MIG CAN
-unicode_bidi_class(0x0F38, 0x0F38, 'L'). % So       TIBETAN MARK CHE MGO
-unicode_bidi_class(0x0F3E, 0x0F3F, 'L'). % Mc   [2] TIBETAN SIGN YAR TSHES..TIBETAN SIGN MAR TSHES
-unicode_bidi_class(0x0F40, 0x0F47, 'L'). % Lo   [8] TIBETAN LETTER KA..TIBETAN LETTER JA
-unicode_bidi_class(0x0F49, 0x0F6C, 'L'). % Lo  [36] TIBETAN LETTER NYA..TIBETAN LETTER RRA
-unicode_bidi_class(0x0F7F, 0x0F7F, 'L'). % Mc       TIBETAN SIGN RNAM BCAD
-unicode_bidi_class(0x0F85, 0x0F85, 'L'). % Po       TIBETAN MARK PALUTA
-unicode_bidi_class(0x0F88, 0x0F8C, 'L'). % Lo   [5] TIBETAN SIGN LCE TSA CAN..TIBETAN SIGN INVERTED MCHU CAN
-unicode_bidi_class(0x0FBE, 0x0FC5, 'L'). % So   [8] TIBETAN KU RU KHA..TIBETAN SYMBOL RDO RJE
-unicode_bidi_class(0x0FC7, 0x0FCC, 'L'). % So   [6] TIBETAN SYMBOL RDO RJE RGYA GRAM..TIBETAN SYMBOL NOR BU BZHI -KHYIL
-unicode_bidi_class(0x0FCE, 0x0FCF, 'L'). % So   [2] TIBETAN SIGN RDEL NAG RDEL DKAR..TIBETAN SIGN RDEL NAG GSUM
-unicode_bidi_class(0x0FD0, 0x0FD4, 'L'). % Po   [5] TIBETAN MARK BSKA- SHOG GI MGO RGYAN..TIBETAN MARK CLOSING BRDA RNYING YIG MGO SGAB MA
-unicode_bidi_class(0x0FD5, 0x0FD8, 'L'). % So   [4] RIGHT-FACING SVASTI SIGN..LEFT-FACING SVASTI SIGN WITH DOTS
-unicode_bidi_class(0x0FD9, 0x0FDA, 'L'). % Po   [2] TIBETAN MARK LEADING MCHAN RTAGS..TIBETAN MARK TRAILING MCHAN RTAGS
-unicode_bidi_class(0x1000, 0x102A, 'L'). % Lo  [43] MYANMAR LETTER KA..MYANMAR LETTER AU
-unicode_bidi_class(0x102B, 0x102C, 'L'). % Mc   [2] MYANMAR VOWEL SIGN TALL AA..MYANMAR VOWEL SIGN AA
-unicode_bidi_class(0x1031, 0x1031, 'L'). % Mc       MYANMAR VOWEL SIGN E
-unicode_bidi_class(0x1038, 0x1038, 'L'). % Mc       MYANMAR SIGN VISARGA
-unicode_bidi_class(0x103B, 0x103C, 'L'). % Mc   [2] MYANMAR CONSONANT SIGN MEDIAL YA..MYANMAR CONSONANT SIGN MEDIAL RA
-unicode_bidi_class(0x103F, 0x103F, 'L'). % Lo       MYANMAR LETTER GREAT SA
-unicode_bidi_class(0x1040, 0x1049, 'L'). % Nd  [10] MYANMAR DIGIT ZERO..MYANMAR DIGIT NINE
-unicode_bidi_class(0x104A, 0x104F, 'L'). % Po   [6] MYANMAR SIGN LITTLE SECTION..MYANMAR SYMBOL GENITIVE
-unicode_bidi_class(0x1050, 0x1055, 'L'). % Lo   [6] MYANMAR LETTER SHA..MYANMAR LETTER VOCALIC LL
-unicode_bidi_class(0x1056, 0x1057, 'L'). % Mc   [2] MYANMAR VOWEL SIGN VOCALIC R..MYANMAR VOWEL SIGN VOCALIC RR
-unicode_bidi_class(0x105A, 0x105D, 'L'). % Lo   [4] MYANMAR LETTER MON NGA..MYANMAR LETTER MON BBE
-unicode_bidi_class(0x1061, 0x1061, 'L'). % Lo       MYANMAR LETTER SGAW KAREN SHA
-unicode_bidi_class(0x1062, 0x1064, 'L'). % Mc   [3] MYANMAR VOWEL SIGN SGAW KAREN EU..MYANMAR TONE MARK SGAW KAREN KE PHO
-unicode_bidi_class(0x1065, 0x1066, 'L'). % Lo   [2] MYANMAR LETTER WESTERN PWO KAREN THA..MYANMAR LETTER WESTERN PWO KAREN PWA
-unicode_bidi_class(0x1067, 0x106D, 'L'). % Mc   [7] MYANMAR VOWEL SIGN WESTERN PWO KAREN EU..MYANMAR SIGN WESTERN PWO KAREN TONE-5
-unicode_bidi_class(0x106E, 0x1070, 'L'). % Lo   [3] MYANMAR LETTER EASTERN PWO KAREN NNA..MYANMAR LETTER EASTERN PWO KAREN GHWA
-unicode_bidi_class(0x1075, 0x1081, 'L'). % Lo  [13] MYANMAR LETTER SHAN KA..MYANMAR LETTER SHAN HA
-unicode_bidi_class(0x1083, 0x1084, 'L'). % Mc   [2] MYANMAR VOWEL SIGN SHAN AA..MYANMAR VOWEL SIGN SHAN E
-unicode_bidi_class(0x1087, 0x108C, 'L'). % Mc   [6] MYANMAR SIGN SHAN TONE-2..MYANMAR SIGN SHAN COUNCIL TONE-3
-unicode_bidi_class(0x108E, 0x108E, 'L'). % Lo       MYANMAR LETTER RUMAI PALAUNG FA
-unicode_bidi_class(0x108F, 0x108F, 'L'). % Mc       MYANMAR SIGN RUMAI PALAUNG TONE-5
-unicode_bidi_class(0x1090, 0x1099, 'L'). % Nd  [10] MYANMAR SHAN DIGIT ZERO..MYANMAR SHAN DIGIT NINE
-unicode_bidi_class(0x109A, 0x109C, 'L'). % Mc   [3] MYANMAR SIGN KHAMTI TONE-1..MYANMAR VOWEL SIGN AITON A
-unicode_bidi_class(0x109E, 0x109F, 'L'). % So   [2] MYANMAR SYMBOL SHAN ONE..MYANMAR SYMBOL SHAN EXCLAMATION
-unicode_bidi_class(0x10A0, 0x10C5, 'L'). % L&  [38] GEORGIAN CAPITAL LETTER AN..GEORGIAN CAPITAL LETTER HOE
-unicode_bidi_class(0x10C7, 0x10C7, 'L'). % L&       GEORGIAN CAPITAL LETTER YN
-unicode_bidi_class(0x10CD, 0x10CD, 'L'). % L&       GEORGIAN CAPITAL LETTER AEN
-unicode_bidi_class(0x10D0, 0x10FA, 'L'). % Lo  [43] GEORGIAN LETTER AN..GEORGIAN LETTER AIN
-unicode_bidi_class(0x10FB, 0x10FB, 'L'). % Po       GEORGIAN PARAGRAPH SEPARATOR
-unicode_bidi_class(0x10FC, 0x10FC, 'L'). % Lm       MODIFIER LETTER GEORGIAN NAR
-unicode_bidi_class(0x10FD, 0x1248, 'L'). % Lo [332] GEORGIAN LETTER AEN..ETHIOPIC SYLLABLE QWA
-unicode_bidi_class(0x124A, 0x124D, 'L'). % Lo   [4] ETHIOPIC SYLLABLE QWI..ETHIOPIC SYLLABLE QWE
-unicode_bidi_class(0x1250, 0x1256, 'L'). % Lo   [7] ETHIOPIC SYLLABLE QHA..ETHIOPIC SYLLABLE QHO
-unicode_bidi_class(0x1258, 0x1258, 'L'). % Lo       ETHIOPIC SYLLABLE QHWA
-unicode_bidi_class(0x125A, 0x125D, 'L'). % Lo   [4] ETHIOPIC SYLLABLE QHWI..ETHIOPIC SYLLABLE QHWE
-unicode_bidi_class(0x1260, 0x1288, 'L'). % Lo  [41] ETHIOPIC SYLLABLE BA..ETHIOPIC SYLLABLE XWA
-unicode_bidi_class(0x128A, 0x128D, 'L'). % Lo   [4] ETHIOPIC SYLLABLE XWI..ETHIOPIC SYLLABLE XWE
-unicode_bidi_class(0x1290, 0x12B0, 'L'). % Lo  [33] ETHIOPIC SYLLABLE NA..ETHIOPIC SYLLABLE KWA
-unicode_bidi_class(0x12B2, 0x12B5, 'L'). % Lo   [4] ETHIOPIC SYLLABLE KWI..ETHIOPIC SYLLABLE KWE
-unicode_bidi_class(0x12B8, 0x12BE, 'L'). % Lo   [7] ETHIOPIC SYLLABLE KXA..ETHIOPIC SYLLABLE KXO
-unicode_bidi_class(0x12C0, 0x12C0, 'L'). % Lo       ETHIOPIC SYLLABLE KXWA
-unicode_bidi_class(0x12C2, 0x12C5, 'L'). % Lo   [4] ETHIOPIC SYLLABLE KXWI..ETHIOPIC SYLLABLE KXWE
-unicode_bidi_class(0x12C8, 0x12D6, 'L'). % Lo  [15] ETHIOPIC SYLLABLE WA..ETHIOPIC SYLLABLE PHARYNGEAL O
-unicode_bidi_class(0x12D8, 0x1310, 'L'). % Lo  [57] ETHIOPIC SYLLABLE ZA..ETHIOPIC SYLLABLE GWA
-unicode_bidi_class(0x1312, 0x1315, 'L'). % Lo   [4] ETHIOPIC SYLLABLE GWI..ETHIOPIC SYLLABLE GWE
-unicode_bidi_class(0x1318, 0x135A, 'L'). % Lo  [67] ETHIOPIC SYLLABLE GGA..ETHIOPIC SYLLABLE FYA
-unicode_bidi_class(0x1360, 0x1368, 'L'). % Po   [9] ETHIOPIC SECTION MARK..ETHIOPIC PARAGRAPH SEPARATOR
-unicode_bidi_class(0x1369, 0x137C, 'L'). % No  [20] ETHIOPIC DIGIT ONE..ETHIOPIC NUMBER TEN THOUSAND
-unicode_bidi_class(0x1380, 0x138F, 'L'). % Lo  [16] ETHIOPIC SYLLABLE SEBATBEIT MWA..ETHIOPIC SYLLABLE PWE
-unicode_bidi_class(0x13A0, 0x13F4, 'L'). % Lo  [85] CHEROKEE LETTER A..CHEROKEE LETTER YV
-unicode_bidi_class(0x1401, 0x166C, 'L'). % Lo [620] CANADIAN SYLLABICS E..CANADIAN SYLLABICS CARRIER TTSA
-unicode_bidi_class(0x166D, 0x166E, 'L'). % Po   [2] CANADIAN SYLLABICS CHI SIGN..CANADIAN SYLLABICS FULL STOP
-unicode_bidi_class(0x166F, 0x167F, 'L'). % Lo  [17] CANADIAN SYLLABICS QAI..CANADIAN SYLLABICS BLACKFOOT W
-unicode_bidi_class(0x1681, 0x169A, 'L'). % Lo  [26] OGHAM LETTER BEITH..OGHAM LETTER PEITH
-unicode_bidi_class(0x16A0, 0x16EA, 'L'). % Lo  [75] RUNIC LETTER FEHU FEOH FE F..RUNIC LETTER X
-unicode_bidi_class(0x16EB, 0x16ED, 'L'). % Po   [3] RUNIC SINGLE PUNCTUATION..RUNIC CROSS PUNCTUATION
-unicode_bidi_class(0x16EE, 0x16F0, 'L'). % Nl   [3] RUNIC ARLAUG SYMBOL..RUNIC BELGTHOR SYMBOL
-unicode_bidi_class(0x1700, 0x170C, 'L'). % Lo  [13] TAGALOG LETTER A..TAGALOG LETTER YA
-unicode_bidi_class(0x170E, 0x1711, 'L'). % Lo   [4] TAGALOG LETTER LA..TAGALOG LETTER HA
-unicode_bidi_class(0x1720, 0x1731, 'L'). % Lo  [18] HANUNOO LETTER A..HANUNOO LETTER HA
-unicode_bidi_class(0x1735, 0x1736, 'L'). % Po   [2] PHILIPPINE SINGLE PUNCTUATION..PHILIPPINE DOUBLE PUNCTUATION
-unicode_bidi_class(0x1740, 0x1751, 'L'). % Lo  [18] BUHID LETTER A..BUHID LETTER HA
-unicode_bidi_class(0x1760, 0x176C, 'L'). % Lo  [13] TAGBANWA LETTER A..TAGBANWA LETTER YA
-unicode_bidi_class(0x176E, 0x1770, 'L'). % Lo   [3] TAGBANWA LETTER LA..TAGBANWA LETTER SA
-unicode_bidi_class(0x1780, 0x17B3, 'L'). % Lo  [52] KHMER LETTER KA..KHMER INDEPENDENT VOWEL QAU
-unicode_bidi_class(0x17B6, 0x17B6, 'L'). % Mc       KHMER VOWEL SIGN AA
-unicode_bidi_class(0x17BE, 0x17C5, 'L'). % Mc   [8] KHMER VOWEL SIGN OE..KHMER VOWEL SIGN AU
-unicode_bidi_class(0x17C7, 0x17C8, 'L'). % Mc   [2] KHMER SIGN REAHMUK..KHMER SIGN YUUKALEAPINTU
-unicode_bidi_class(0x17D4, 0x17D6, 'L'). % Po   [3] KHMER SIGN KHAN..KHMER SIGN CAMNUC PII KUUH
-unicode_bidi_class(0x17D7, 0x17D7, 'L'). % Lm       KHMER SIGN LEK TOO
-unicode_bidi_class(0x17D8, 0x17DA, 'L'). % Po   [3] KHMER SIGN BEYYAL..KHMER SIGN KOOMUUT
-unicode_bidi_class(0x17DC, 0x17DC, 'L'). % Lo       KHMER SIGN AVAKRAHASANYA
-unicode_bidi_class(0x17E0, 0x17E9, 'L'). % Nd  [10] KHMER DIGIT ZERO..KHMER DIGIT NINE
-unicode_bidi_class(0x1810, 0x1819, 'L'). % Nd  [10] MONGOLIAN DIGIT ZERO..MONGOLIAN DIGIT NINE
-unicode_bidi_class(0x1820, 0x1842, 'L'). % Lo  [35] MONGOLIAN LETTER A..MONGOLIAN LETTER CHI
-unicode_bidi_class(0x1843, 0x1843, 'L'). % Lm       MONGOLIAN LETTER TODO LONG VOWEL SIGN
-unicode_bidi_class(0x1844, 0x1877, 'L'). % Lo  [52] MONGOLIAN LETTER TODO E..MONGOLIAN LETTER MANCHU ZHA
-unicode_bidi_class(0x1880, 0x18A8, 'L'). % Lo  [41] MONGOLIAN LETTER ALI GALI ANUSVARA ONE..MONGOLIAN LETTER MANCHU ALI GALI BHA
-unicode_bidi_class(0x18AA, 0x18AA, 'L'). % Lo       MONGOLIAN LETTER MANCHU ALI GALI LHA
-unicode_bidi_class(0x18B0, 0x18F5, 'L'). % Lo  [70] CANADIAN SYLLABICS OY..CANADIAN SYLLABICS CARRIER DENTAL S
-unicode_bidi_class(0x1900, 0x191C, 'L'). % Lo  [29] LIMBU VOWEL-CARRIER LETTER..LIMBU LETTER HA
-unicode_bidi_class(0x1923, 0x1926, 'L'). % Mc   [4] LIMBU VOWEL SIGN EE..LIMBU VOWEL SIGN AU
-unicode_bidi_class(0x1929, 0x192B, 'L'). % Mc   [3] LIMBU SUBJOINED LETTER YA..LIMBU SUBJOINED LETTER WA
-unicode_bidi_class(0x1930, 0x1931, 'L'). % Mc   [2] LIMBU SMALL LETTER KA..LIMBU SMALL LETTER NGA
-unicode_bidi_class(0x1933, 0x1938, 'L'). % Mc   [6] LIMBU SMALL LETTER TA..LIMBU SMALL LETTER LA
-unicode_bidi_class(0x1946, 0x194F, 'L'). % Nd  [10] LIMBU DIGIT ZERO..LIMBU DIGIT NINE
-unicode_bidi_class(0x1950, 0x196D, 'L'). % Lo  [30] TAI LE LETTER KA..TAI LE LETTER AI
-unicode_bidi_class(0x1970, 0x1974, 'L'). % Lo   [5] TAI LE LETTER TONE-2..TAI LE LETTER TONE-6
-unicode_bidi_class(0x1980, 0x19AB, 'L'). % Lo  [44] NEW TAI LUE LETTER HIGH QA..NEW TAI LUE LETTER LOW SUA
-unicode_bidi_class(0x19B0, 0x19C0, 'L'). % Mc  [17] NEW TAI LUE VOWEL SIGN VOWEL SHORTENER..NEW TAI LUE VOWEL SIGN IY
-unicode_bidi_class(0x19C1, 0x19C7, 'L'). % Lo   [7] NEW TAI LUE LETTER FINAL V..NEW TAI LUE LETTER FINAL B
-unicode_bidi_class(0x19C8, 0x19C9, 'L'). % Mc   [2] NEW TAI LUE TONE MARK-1..NEW TAI LUE TONE MARK-2
-unicode_bidi_class(0x19D0, 0x19D9, 'L'). % Nd  [10] NEW TAI LUE DIGIT ZERO..NEW TAI LUE DIGIT NINE
-unicode_bidi_class(0x19DA, 0x19DA, 'L'). % No       NEW TAI LUE THAM DIGIT ONE
-unicode_bidi_class(0x1A00, 0x1A16, 'L'). % Lo  [23] BUGINESE LETTER KA..BUGINESE LETTER HA
-unicode_bidi_class(0x1A19, 0x1A1B, 'L'). % Mc   [3] BUGINESE VOWEL SIGN E..BUGINESE VOWEL SIGN AE
-unicode_bidi_class(0x1A1E, 0x1A1F, 'L'). % Po   [2] BUGINESE PALLAWA..BUGINESE END OF SECTION
-unicode_bidi_class(0x1A20, 0x1A54, 'L'). % Lo  [53] TAI THAM LETTER HIGH KA..TAI THAM LETTER GREAT SA
-unicode_bidi_class(0x1A55, 0x1A55, 'L'). % Mc       TAI THAM CONSONANT SIGN MEDIAL RA
-unicode_bidi_class(0x1A57, 0x1A57, 'L'). % Mc       TAI THAM CONSONANT SIGN LA TANG LAI
-unicode_bidi_class(0x1A61, 0x1A61, 'L'). % Mc       TAI THAM VOWEL SIGN A
-unicode_bidi_class(0x1A63, 0x1A64, 'L'). % Mc   [2] TAI THAM VOWEL SIGN AA..TAI THAM VOWEL SIGN TALL AA
-unicode_bidi_class(0x1A6D, 0x1A72, 'L'). % Mc   [6] TAI THAM VOWEL SIGN OY..TAI THAM VOWEL SIGN THAM AI
-unicode_bidi_class(0x1A80, 0x1A89, 'L'). % Nd  [10] TAI THAM HORA DIGIT ZERO..TAI THAM HORA DIGIT NINE
-unicode_bidi_class(0x1A90, 0x1A99, 'L'). % Nd  [10] TAI THAM THAM DIGIT ZERO..TAI THAM THAM DIGIT NINE
-unicode_bidi_class(0x1AA0, 0x1AA6, 'L'). % Po   [7] TAI THAM SIGN WIANG..TAI THAM SIGN REVERSED ROTATED RANA
-unicode_bidi_class(0x1AA7, 0x1AA7, 'L'). % Lm       TAI THAM SIGN MAI YAMOK
-unicode_bidi_class(0x1AA8, 0x1AAD, 'L'). % Po   [6] TAI THAM SIGN KAAN..TAI THAM SIGN CAANG
-unicode_bidi_class(0x1B04, 0x1B04, 'L'). % Mc       BALINESE SIGN BISAH
-unicode_bidi_class(0x1B05, 0x1B33, 'L'). % Lo  [47] BALINESE LETTER AKARA..BALINESE LETTER HA
-unicode_bidi_class(0x1B35, 0x1B35, 'L'). % Mc       BALINESE VOWEL SIGN TEDUNG
-unicode_bidi_class(0x1B3B, 0x1B3B, 'L'). % Mc       BALINESE VOWEL SIGN RA REPA TEDUNG
-unicode_bidi_class(0x1B3D, 0x1B41, 'L'). % Mc   [5] BALINESE VOWEL SIGN LA LENGA TEDUNG..BALINESE VOWEL SIGN TALING REPA TEDUNG
-unicode_bidi_class(0x1B43, 0x1B44, 'L'). % Mc   [2] BALINESE VOWEL SIGN PEPET TEDUNG..BALINESE ADEG ADEG
-unicode_bidi_class(0x1B45, 0x1B4B, 'L'). % Lo   [7] BALINESE LETTER KAF SASAK..BALINESE LETTER ASYURA SASAK
-unicode_bidi_class(0x1B50, 0x1B59, 'L'). % Nd  [10] BALINESE DIGIT ZERO..BALINESE DIGIT NINE
-unicode_bidi_class(0x1B5A, 0x1B60, 'L'). % Po   [7] BALINESE PANTI..BALINESE PAMENENG
-unicode_bidi_class(0x1B61, 0x1B6A, 'L'). % So  [10] BALINESE MUSICAL SYMBOL DONG..BALINESE MUSICAL SYMBOL DANG GEDE
-unicode_bidi_class(0x1B74, 0x1B7C, 'L'). % So   [9] BALINESE MUSICAL SYMBOL RIGHT-HAND OPEN DUG..BALINESE MUSICAL SYMBOL LEFT-HAND OPEN PING
-unicode_bidi_class(0x1B82, 0x1B82, 'L'). % Mc       SUNDANESE SIGN PANGWISAD
-unicode_bidi_class(0x1B83, 0x1BA0, 'L'). % Lo  [30] SUNDANESE LETTER A..SUNDANESE LETTER HA
-unicode_bidi_class(0x1BA1, 0x1BA1, 'L'). % Mc       SUNDANESE CONSONANT SIGN PAMINGKAL
-unicode_bidi_class(0x1BA6, 0x1BA7, 'L'). % Mc   [2] SUNDANESE VOWEL SIGN PANAELAENG..SUNDANESE VOWEL SIGN PANOLONG
-unicode_bidi_class(0x1BAA, 0x1BAA, 'L'). % Mc       SUNDANESE SIGN PAMAAEH
-unicode_bidi_class(0x1BAC, 0x1BAD, 'L'). % Mc   [2] SUNDANESE CONSONANT SIGN PASANGAN MA..SUNDANESE CONSONANT SIGN PASANGAN WA
-unicode_bidi_class(0x1BAE, 0x1BAF, 'L'). % Lo   [2] SUNDANESE LETTER KHA..SUNDANESE LETTER SYA
-unicode_bidi_class(0x1BB0, 0x1BB9, 'L'). % Nd  [10] SUNDANESE DIGIT ZERO..SUNDANESE DIGIT NINE
-unicode_bidi_class(0x1BBA, 0x1BE5, 'L'). % Lo  [44] SUNDANESE AVAGRAHA..BATAK LETTER U
-unicode_bidi_class(0x1BE7, 0x1BE7, 'L'). % Mc       BATAK VOWEL SIGN E
-unicode_bidi_class(0x1BEA, 0x1BEC, 'L'). % Mc   [3] BATAK VOWEL SIGN I..BATAK VOWEL SIGN O
-unicode_bidi_class(0x1BEE, 0x1BEE, 'L'). % Mc       BATAK VOWEL SIGN U
-unicode_bidi_class(0x1BF2, 0x1BF3, 'L'). % Mc   [2] BATAK PANGOLAT..BATAK PANONGONAN
-unicode_bidi_class(0x1BFC, 0x1BFF, 'L'). % Po   [4] BATAK SYMBOL BINDU NA METEK..BATAK SYMBOL BINDU PANGOLAT
-unicode_bidi_class(0x1C00, 0x1C23, 'L'). % Lo  [36] LEPCHA LETTER KA..LEPCHA LETTER A
-unicode_bidi_class(0x1C24, 0x1C2B, 'L'). % Mc   [8] LEPCHA SUBJOINED LETTER YA..LEPCHA VOWEL SIGN UU
-unicode_bidi_class(0x1C34, 0x1C35, 'L'). % Mc   [2] LEPCHA CONSONANT SIGN NYIN-DO..LEPCHA CONSONANT SIGN KANG
-unicode_bidi_class(0x1C3B, 0x1C3F, 'L'). % Po   [5] LEPCHA PUNCTUATION TA-ROL..LEPCHA PUNCTUATION TSHOOK
-unicode_bidi_class(0x1C40, 0x1C49, 'L'). % Nd  [10] LEPCHA DIGIT ZERO..LEPCHA DIGIT NINE
-unicode_bidi_class(0x1C4D, 0x1C4F, 'L'). % Lo   [3] LEPCHA LETTER TTA..LEPCHA LETTER DDA
-unicode_bidi_class(0x1C50, 0x1C59, 'L'). % Nd  [10] OL CHIKI DIGIT ZERO..OL CHIKI DIGIT NINE
-unicode_bidi_class(0x1C5A, 0x1C77, 'L'). % Lo  [30] OL CHIKI LETTER LA..OL CHIKI LETTER OH
-unicode_bidi_class(0x1C78, 0x1C7D, 'L'). % Lm   [6] OL CHIKI MU TTUDDAG..OL CHIKI AHAD
-unicode_bidi_class(0x1C7E, 0x1C7F, 'L'). % Po   [2] OL CHIKI PUNCTUATION MUCAAD..OL CHIKI PUNCTUATION DOUBLE MUCAAD
-unicode_bidi_class(0x1CC0, 0x1CC7, 'L'). % Po   [8] SUNDANESE PUNCTUATION BINDU SURYA..SUNDANESE PUNCTUATION BINDU BA SATANGA
-unicode_bidi_class(0x1CD3, 0x1CD3, 'L'). % Po       VEDIC SIGN NIHSHVASA
-unicode_bidi_class(0x1CE1, 0x1CE1, 'L'). % Mc       VEDIC TONE ATHARVAVEDIC INDEPENDENT SVARITA
-unicode_bidi_class(0x1CE9, 0x1CEC, 'L'). % Lo   [4] VEDIC SIGN ANUSVARA ANTARGOMUKHA..VEDIC SIGN ANUSVARA VAMAGOMUKHA WITH TAIL
-unicode_bidi_class(0x1CEE, 0x1CF1, 'L'). % Lo   [4] VEDIC SIGN HEXIFORM LONG ANUSVARA..VEDIC SIGN ANUSVARA UBHAYATO MUKHA
-unicode_bidi_class(0x1CF2, 0x1CF3, 'L'). % Mc   [2] VEDIC SIGN ARDHAVISARGA..VEDIC SIGN ROTATED ARDHAVISARGA
-unicode_bidi_class(0x1CF5, 0x1CF6, 'L'). % Lo   [2] VEDIC SIGN JIHVAMULIYA..VEDIC SIGN UPADHMANIYA
-unicode_bidi_class(0x1D00, 0x1D2B, 'L'). % L&  [44] LATIN LETTER SMALL CAPITAL A..CYRILLIC LETTER SMALL CAPITAL EL
-unicode_bidi_class(0x1D2C, 0x1D6A, 'L'). % Lm  [63] MODIFIER LETTER CAPITAL A..GREEK SUBSCRIPT SMALL LETTER CHI
-unicode_bidi_class(0x1D6B, 0x1D77, 'L'). % L&  [13] LATIN SMALL LETTER UE..LATIN SMALL LETTER TURNED G
-unicode_bidi_class(0x1D78, 0x1D78, 'L'). % Lm       MODIFIER LETTER CYRILLIC EN
-unicode_bidi_class(0x1D79, 0x1D9A, 'L'). % L&  [34] LATIN SMALL LETTER INSULAR G..LATIN SMALL LETTER EZH WITH RETROFLEX HOOK
-unicode_bidi_class(0x1D9B, 0x1DBF, 'L'). % Lm  [37] MODIFIER LETTER SMALL TURNED ALPHA..MODIFIER LETTER SMALL THETA
-unicode_bidi_class(0x1E00, 0x1F15, 'L'). % L& [278] LATIN CAPITAL LETTER A WITH RING BELOW..GREEK SMALL LETTER EPSILON WITH DASIA AND OXIA
-unicode_bidi_class(0x1F18, 0x1F1D, 'L'). % L&   [6] GREEK CAPITAL LETTER EPSILON WITH PSILI..GREEK CAPITAL LETTER EPSILON WITH DASIA AND OXIA
-unicode_bidi_class(0x1F20, 0x1F45, 'L'). % L&  [38] GREEK SMALL LETTER ETA WITH PSILI..GREEK SMALL LETTER OMICRON WITH DASIA AND OXIA
-unicode_bidi_class(0x1F48, 0x1F4D, 'L'). % L&   [6] GREEK CAPITAL LETTER OMICRON WITH PSILI..GREEK CAPITAL LETTER OMICRON WITH DASIA AND OXIA
-unicode_bidi_class(0x1F50, 0x1F57, 'L'). % L&   [8] GREEK SMALL LETTER UPSILON WITH PSILI..GREEK SMALL LETTER UPSILON WITH DASIA AND PERISPOMENI
-unicode_bidi_class(0x1F59, 0x1F59, 'L'). % L&       GREEK CAPITAL LETTER UPSILON WITH DASIA
-unicode_bidi_class(0x1F5B, 0x1F5B, 'L'). % L&       GREEK CAPITAL LETTER UPSILON WITH DASIA AND VARIA
-unicode_bidi_class(0x1F5D, 0x1F5D, 'L'). % L&       GREEK CAPITAL LETTER UPSILON WITH DASIA AND OXIA
-unicode_bidi_class(0x1F5F, 0x1F7D, 'L'). % L&  [31] GREEK CAPITAL LETTER UPSILON WITH DASIA AND PERISPOMENI..GREEK SMALL LETTER OMEGA WITH OXIA
-unicode_bidi_class(0x1F80, 0x1FB4, 'L'). % L&  [53] GREEK SMALL LETTER ALPHA WITH PSILI AND YPOGEGRAMMENI..GREEK SMALL LETTER ALPHA WITH OXIA AND YPOGEGRAMMENI
-unicode_bidi_class(0x1FB6, 0x1FBC, 'L'). % L&   [7] GREEK SMALL LETTER ALPHA WITH PERISPOMENI..GREEK CAPITAL LETTER ALPHA WITH PROSGEGRAMMENI
-unicode_bidi_class(0x1FBE, 0x1FBE, 'L'). % L&       GREEK PROSGEGRAMMENI
-unicode_bidi_class(0x1FC2, 0x1FC4, 'L'). % L&   [3] GREEK SMALL LETTER ETA WITH VARIA AND YPOGEGRAMMENI..GREEK SMALL LETTER ETA WITH OXIA AND YPOGEGRAMMENI
-unicode_bidi_class(0x1FC6, 0x1FCC, 'L'). % L&   [7] GREEK SMALL LETTER ETA WITH PERISPOMENI..GREEK CAPITAL LETTER ETA WITH PROSGEGRAMMENI
-unicode_bidi_class(0x1FD0, 0x1FD3, 'L'). % L&   [4] GREEK SMALL LETTER IOTA WITH VRACHY..GREEK SMALL LETTER IOTA WITH DIALYTIKA AND OXIA
-unicode_bidi_class(0x1FD6, 0x1FDB, 'L'). % L&   [6] GREEK SMALL LETTER IOTA WITH PERISPOMENI..GREEK CAPITAL LETTER IOTA WITH OXIA
-unicode_bidi_class(0x1FE0, 0x1FEC, 'L'). % L&  [13] GREEK SMALL LETTER UPSILON WITH VRACHY..GREEK CAPITAL LETTER RHO WITH DASIA
-unicode_bidi_class(0x1FF2, 0x1FF4, 'L'). % L&   [3] GREEK SMALL LETTER OMEGA WITH VARIA AND YPOGEGRAMMENI..GREEK SMALL LETTER OMEGA WITH OXIA AND YPOGEGRAMMENI
-unicode_bidi_class(0x1FF6, 0x1FFC, 'L'). % L&   [7] GREEK SMALL LETTER OMEGA WITH PERISPOMENI..GREEK CAPITAL LETTER OMEGA WITH PROSGEGRAMMENI
-unicode_bidi_class(0x200E, 0x200E, 'L'). % Cf       LEFT-TO-RIGHT MARK
-unicode_bidi_class(0x2071, 0x2071, 'L'). % Lm       SUPERSCRIPT LATIN SMALL LETTER I
-unicode_bidi_class(0x207F, 0x207F, 'L'). % Lm       SUPERSCRIPT LATIN SMALL LETTER N
-unicode_bidi_class(0x2090, 0x209C, 'L'). % Lm  [13] LATIN SUBSCRIPT SMALL LETTER A..LATIN SUBSCRIPT SMALL LETTER T
-unicode_bidi_class(0x2102, 0x2102, 'L'). % L&       DOUBLE-STRUCK CAPITAL C
-unicode_bidi_class(0x2107, 0x2107, 'L'). % L&       EULER CONSTANT
-unicode_bidi_class(0x210A, 0x2113, 'L'). % L&  [10] SCRIPT SMALL G..SCRIPT SMALL L
-unicode_bidi_class(0x2115, 0x2115, 'L'). % L&       DOUBLE-STRUCK CAPITAL N
-unicode_bidi_class(0x2119, 0x211D, 'L'). % L&   [5] DOUBLE-STRUCK CAPITAL P..DOUBLE-STRUCK CAPITAL R
-unicode_bidi_class(0x2124, 0x2124, 'L'). % L&       DOUBLE-STRUCK CAPITAL Z
-unicode_bidi_class(0x2126, 0x2126, 'L'). % L&       OHM SIGN
-unicode_bidi_class(0x2128, 0x2128, 'L'). % L&       BLACK-LETTER CAPITAL Z
-unicode_bidi_class(0x212A, 0x212D, 'L'). % L&   [4] KELVIN SIGN..BLACK-LETTER CAPITAL C
-unicode_bidi_class(0x212F, 0x2134, 'L'). % L&   [6] SCRIPT SMALL E..SCRIPT SMALL O
-unicode_bidi_class(0x2135, 0x2138, 'L'). % Lo   [4] ALEF SYMBOL..DALET SYMBOL
-unicode_bidi_class(0x2139, 0x2139, 'L'). % L&       INFORMATION SOURCE
-unicode_bidi_class(0x213C, 0x213F, 'L'). % L&   [4] DOUBLE-STRUCK SMALL PI..DOUBLE-STRUCK CAPITAL PI
-unicode_bidi_class(0x2145, 0x2149, 'L'). % L&   [5] DOUBLE-STRUCK ITALIC CAPITAL D..DOUBLE-STRUCK ITALIC SMALL J
-unicode_bidi_class(0x214E, 0x214E, 'L'). % L&       TURNED SMALL F
-unicode_bidi_class(0x214F, 0x214F, 'L'). % So       SYMBOL FOR SAMARITAN SOURCE
-unicode_bidi_class(0x2160, 0x2182, 'L'). % Nl  [35] ROMAN NUMERAL ONE..ROMAN NUMERAL TEN THOUSAND
-unicode_bidi_class(0x2183, 0x2184, 'L'). % L&   [2] ROMAN NUMERAL REVERSED ONE HUNDRED..LATIN SMALL LETTER REVERSED C
-unicode_bidi_class(0x2185, 0x2188, 'L'). % Nl   [4] ROMAN NUMERAL SIX LATE FORM..ROMAN NUMERAL ONE HUNDRED THOUSAND
-unicode_bidi_class(0x2336, 0x237A, 'L'). % So  [69] APL FUNCTIONAL SYMBOL I-BEAM..APL FUNCTIONAL SYMBOL ALPHA
-unicode_bidi_class(0x2395, 0x2395, 'L'). % So       APL FUNCTIONAL SYMBOL QUAD
-unicode_bidi_class(0x249C, 0x24E9, 'L'). % So  [78] PARENTHESIZED LATIN SMALL LETTER A..CIRCLED LATIN SMALL LETTER Z
-unicode_bidi_class(0x26AC, 0x26AC, 'L'). % So       MEDIUM SMALL WHITE CIRCLE
-unicode_bidi_class(0x2800, 0x28FF, 'L'). % So [256] BRAILLE PATTERN BLANK..BRAILLE PATTERN DOTS-12345678
-unicode_bidi_class(0x2C00, 0x2C2E, 'L'). % L&  [47] GLAGOLITIC CAPITAL LETTER AZU..GLAGOLITIC CAPITAL LETTER LATINATE MYSLITE
-unicode_bidi_class(0x2C30, 0x2C5E, 'L'). % L&  [47] GLAGOLITIC SMALL LETTER AZU..GLAGOLITIC SMALL LETTER LATINATE MYSLITE
-unicode_bidi_class(0x2C60, 0x2C7B, 'L'). % L&  [28] LATIN CAPITAL LETTER L WITH DOUBLE BAR..LATIN LETTER SMALL CAPITAL TURNED E
-unicode_bidi_class(0x2C7C, 0x2C7D, 'L'). % Lm   [2] LATIN SUBSCRIPT SMALL LETTER J..MODIFIER LETTER CAPITAL V
-unicode_bidi_class(0x2C7E, 0x2CE4, 'L'). % L& [103] LATIN CAPITAL LETTER S WITH SWASH TAIL..COPTIC SYMBOL KAI
-unicode_bidi_class(0x2CEB, 0x2CEE, 'L'). % L&   [4] COPTIC CAPITAL LETTER CRYPTOGRAMMIC SHEI..COPTIC SMALL LETTER CRYPTOGRAMMIC GANGIA
-unicode_bidi_class(0x2CF2, 0x2CF3, 'L'). % L&   [2] COPTIC CAPITAL LETTER BOHAIRIC KHEI..COPTIC SMALL LETTER BOHAIRIC KHEI
-unicode_bidi_class(0x2D00, 0x2D25, 'L'). % L&  [38] GEORGIAN SMALL LETTER AN..GEORGIAN SMALL LETTER HOE
-unicode_bidi_class(0x2D27, 0x2D27, 'L'). % L&       GEORGIAN SMALL LETTER YN
-unicode_bidi_class(0x2D2D, 0x2D2D, 'L'). % L&       GEORGIAN SMALL LETTER AEN
-unicode_bidi_class(0x2D30, 0x2D67, 'L'). % Lo  [56] TIFINAGH LETTER YA..TIFINAGH LETTER YO
-unicode_bidi_class(0x2D6F, 0x2D6F, 'L'). % Lm       TIFINAGH MODIFIER LETTER LABIALIZATION MARK
-unicode_bidi_class(0x2D70, 0x2D70, 'L'). % Po       TIFINAGH SEPARATOR MARK
-unicode_bidi_class(0x2D80, 0x2D96, 'L'). % Lo  [23] ETHIOPIC SYLLABLE LOA..ETHIOPIC SYLLABLE GGWE
-unicode_bidi_class(0x2DA0, 0x2DA6, 'L'). % Lo   [7] ETHIOPIC SYLLABLE SSA..ETHIOPIC SYLLABLE SSO
-unicode_bidi_class(0x2DA8, 0x2DAE, 'L'). % Lo   [7] ETHIOPIC SYLLABLE CCA..ETHIOPIC SYLLABLE CCO
-unicode_bidi_class(0x2DB0, 0x2DB6, 'L'). % Lo   [7] ETHIOPIC SYLLABLE ZZA..ETHIOPIC SYLLABLE ZZO
-unicode_bidi_class(0x2DB8, 0x2DBE, 'L'). % Lo   [7] ETHIOPIC SYLLABLE CCHA..ETHIOPIC SYLLABLE CCHO
-unicode_bidi_class(0x2DC0, 0x2DC6, 'L'). % Lo   [7] ETHIOPIC SYLLABLE QYA..ETHIOPIC SYLLABLE QYO
-unicode_bidi_class(0x2DC8, 0x2DCE, 'L'). % Lo   [7] ETHIOPIC SYLLABLE KYA..ETHIOPIC SYLLABLE KYO
-unicode_bidi_class(0x2DD0, 0x2DD6, 'L'). % Lo   [7] ETHIOPIC SYLLABLE XYA..ETHIOPIC SYLLABLE XYO
-unicode_bidi_class(0x2DD8, 0x2DDE, 'L'). % Lo   [7] ETHIOPIC SYLLABLE GYA..ETHIOPIC SYLLABLE GYO
-unicode_bidi_class(0x3005, 0x3005, 'L'). % Lm       IDEOGRAPHIC ITERATION MARK
-unicode_bidi_class(0x3006, 0x3006, 'L'). % Lo       IDEOGRAPHIC CLOSING MARK
-unicode_bidi_class(0x3007, 0x3007, 'L'). % Nl       IDEOGRAPHIC NUMBER ZERO
-unicode_bidi_class(0x3021, 0x3029, 'L'). % Nl   [9] HANGZHOU NUMERAL ONE..HANGZHOU NUMERAL NINE
-unicode_bidi_class(0x302E, 0x302F, 'L'). % Mc   [2] HANGUL SINGLE DOT TONE MARK..HANGUL DOUBLE DOT TONE MARK
-unicode_bidi_class(0x3031, 0x3035, 'L'). % Lm   [5] VERTICAL KANA REPEAT MARK..VERTICAL KANA REPEAT MARK LOWER HALF
-unicode_bidi_class(0x3038, 0x303A, 'L'). % Nl   [3] HANGZHOU NUMERAL TEN..HANGZHOU NUMERAL THIRTY
-unicode_bidi_class(0x303B, 0x303B, 'L'). % Lm       VERTICAL IDEOGRAPHIC ITERATION MARK
-unicode_bidi_class(0x303C, 0x303C, 'L'). % Lo       MASU MARK
-unicode_bidi_class(0x3041, 0x3096, 'L'). % Lo  [86] HIRAGANA LETTER SMALL A..HIRAGANA LETTER SMALL KE
-unicode_bidi_class(0x309D, 0x309E, 'L'). % Lm   [2] HIRAGANA ITERATION MARK..HIRAGANA VOICED ITERATION MARK
-unicode_bidi_class(0x309F, 0x309F, 'L'). % Lo       HIRAGANA DIGRAPH YORI
-unicode_bidi_class(0x30A1, 0x30FA, 'L'). % Lo  [90] KATAKANA LETTER SMALL A..KATAKANA LETTER VO
-unicode_bidi_class(0x30FC, 0x30FE, 'L'). % Lm   [3] KATAKANA-HIRAGANA PROLONGED SOUND MARK..KATAKANA VOICED ITERATION MARK
-unicode_bidi_class(0x30FF, 0x30FF, 'L'). % Lo       KATAKANA DIGRAPH KOTO
-unicode_bidi_class(0x3105, 0x312D, 'L'). % Lo  [41] BOPOMOFO LETTER B..BOPOMOFO LETTER IH
-unicode_bidi_class(0x3131, 0x318E, 'L'). % Lo  [94] HANGUL LETTER KIYEOK..HANGUL LETTER ARAEAE
-unicode_bidi_class(0x3190, 0x3191, 'L'). % So   [2] IDEOGRAPHIC ANNOTATION LINKING MARK..IDEOGRAPHIC ANNOTATION REVERSE MARK
-unicode_bidi_class(0x3192, 0x3195, 'L'). % No   [4] IDEOGRAPHIC ANNOTATION ONE MARK..IDEOGRAPHIC ANNOTATION FOUR MARK
-unicode_bidi_class(0x3196, 0x319F, 'L'). % So  [10] IDEOGRAPHIC ANNOTATION TOP MARK..IDEOGRAPHIC ANNOTATION MAN MARK
-unicode_bidi_class(0x31A0, 0x31BA, 'L'). % Lo  [27] BOPOMOFO LETTER BU..BOPOMOFO LETTER ZY
-unicode_bidi_class(0x31F0, 0x31FF, 'L'). % Lo  [16] KATAKANA LETTER SMALL KU..KATAKANA LETTER SMALL RO
-unicode_bidi_class(0x3200, 0x321C, 'L'). % So  [29] PARENTHESIZED HANGUL KIYEOK..PARENTHESIZED HANGUL CIEUC U
-unicode_bidi_class(0x3220, 0x3229, 'L'). % No  [10] PARENTHESIZED IDEOGRAPH ONE..PARENTHESIZED IDEOGRAPH TEN
-unicode_bidi_class(0x322A, 0x3247, 'L'). % So  [30] PARENTHESIZED IDEOGRAPH MOON..CIRCLED IDEOGRAPH KOTO
-unicode_bidi_class(0x3248, 0x324F, 'L'). % No   [8] CIRCLED NUMBER TEN ON BLACK SQUARE..CIRCLED NUMBER EIGHTY ON BLACK SQUARE
-unicode_bidi_class(0x3260, 0x327B, 'L'). % So  [28] CIRCLED HANGUL KIYEOK..CIRCLED HANGUL HIEUH A
-unicode_bidi_class(0x327F, 0x327F, 'L'). % So       KOREAN STANDARD SYMBOL
-unicode_bidi_class(0x3280, 0x3289, 'L'). % No  [10] CIRCLED IDEOGRAPH ONE..CIRCLED IDEOGRAPH TEN
-unicode_bidi_class(0x328A, 0x32B0, 'L'). % So  [39] CIRCLED IDEOGRAPH MOON..CIRCLED IDEOGRAPH NIGHT
-unicode_bidi_class(0x32C0, 0x32CB, 'L'). % So  [12] IDEOGRAPHIC TELEGRAPH SYMBOL FOR JANUARY..IDEOGRAPHIC TELEGRAPH SYMBOL FOR DECEMBER
-unicode_bidi_class(0x32D0, 0x32FE, 'L'). % So  [47] CIRCLED KATAKANA A..CIRCLED KATAKANA WO
-unicode_bidi_class(0x3300, 0x3376, 'L'). % So [119] SQUARE APAATO..SQUARE PC
-unicode_bidi_class(0x337B, 0x33DD, 'L'). % So  [99] SQUARE ERA NAME HEISEI..SQUARE WB
-unicode_bidi_class(0x33E0, 0x33FE, 'L'). % So  [31] IDEOGRAPHIC TELEGRAPH SYMBOL FOR DAY ONE..IDEOGRAPHIC TELEGRAPH SYMBOL FOR DAY THIRTY-ONE
-unicode_bidi_class(0x3400, 0x4DB5, 'L'). % Lo [6582] CJK UNIFIED IDEOGRAPH-3400..CJK UNIFIED IDEOGRAPH-4DB5
-unicode_bidi_class(0x4E00, 0x9FCC, 'L'). % Lo [20941] CJK UNIFIED IDEOGRAPH-4E00..CJK UNIFIED IDEOGRAPH-9FCC
-unicode_bidi_class(0xA000, 0xA014, 'L'). % Lo  [21] YI SYLLABLE IT..YI SYLLABLE E
-unicode_bidi_class(0xA015, 0xA015, 'L'). % Lm       YI SYLLABLE WU
-unicode_bidi_class(0xA016, 0xA48C, 'L'). % Lo [1143] YI SYLLABLE BIT..YI SYLLABLE YYR
-unicode_bidi_class(0xA4D0, 0xA4F7, 'L'). % Lo  [40] LISU LETTER BA..LISU LETTER OE
-unicode_bidi_class(0xA4F8, 0xA4FD, 'L'). % Lm   [6] LISU LETTER TONE MYA TI..LISU LETTER TONE MYA JEU
-unicode_bidi_class(0xA4FE, 0xA4FF, 'L'). % Po   [2] LISU PUNCTUATION COMMA..LISU PUNCTUATION FULL STOP
-unicode_bidi_class(0xA500, 0xA60B, 'L'). % Lo [268] VAI SYLLABLE EE..VAI SYLLABLE NG
-unicode_bidi_class(0xA60C, 0xA60C, 'L'). % Lm       VAI SYLLABLE LENGTHENER
-unicode_bidi_class(0xA610, 0xA61F, 'L'). % Lo  [16] VAI SYLLABLE NDOLE FA..VAI SYMBOL JONG
-unicode_bidi_class(0xA620, 0xA629, 'L'). % Nd  [10] VAI DIGIT ZERO..VAI DIGIT NINE
-unicode_bidi_class(0xA62A, 0xA62B, 'L'). % Lo   [2] VAI SYLLABLE NDOLE MA..VAI SYLLABLE NDOLE DO
-unicode_bidi_class(0xA640, 0xA66D, 'L'). % L&  [46] CYRILLIC CAPITAL LETTER ZEMLYA..CYRILLIC SMALL LETTER DOUBLE MONOCULAR O
-unicode_bidi_class(0xA66E, 0xA66E, 'L'). % Lo       CYRILLIC LETTER MULTIOCULAR O
-unicode_bidi_class(0xA680, 0xA697, 'L'). % L&  [24] CYRILLIC CAPITAL LETTER DWE..CYRILLIC SMALL LETTER SHWE
-unicode_bidi_class(0xA6A0, 0xA6E5, 'L'). % Lo  [70] BAMUM LETTER A..BAMUM LETTER KI
-unicode_bidi_class(0xA6E6, 0xA6EF, 'L'). % Nl  [10] BAMUM LETTER MO..BAMUM LETTER KOGHOM
-unicode_bidi_class(0xA6F2, 0xA6F7, 'L'). % Po   [6] BAMUM NJAEMLI..BAMUM QUESTION MARK
-unicode_bidi_class(0xA722, 0xA76F, 'L'). % L&  [78] LATIN CAPITAL LETTER EGYPTOLOGICAL ALEF..LATIN SMALL LETTER CON
-unicode_bidi_class(0xA770, 0xA770, 'L'). % Lm       MODIFIER LETTER US
-unicode_bidi_class(0xA771, 0xA787, 'L'). % L&  [23] LATIN SMALL LETTER DUM..LATIN SMALL LETTER INSULAR T
-unicode_bidi_class(0xA789, 0xA78A, 'L'). % Sk   [2] MODIFIER LETTER COLON..MODIFIER LETTER SHORT EQUALS SIGN
-unicode_bidi_class(0xA78B, 0xA78E, 'L'). % L&   [4] LATIN CAPITAL LETTER SALTILLO..LATIN SMALL LETTER L WITH RETROFLEX HOOK AND BELT
-unicode_bidi_class(0xA790, 0xA793, 'L'). % L&   [4] LATIN CAPITAL LETTER N WITH DESCENDER..LATIN SMALL LETTER C WITH BAR
-unicode_bidi_class(0xA7A0, 0xA7AA, 'L'). % L&  [11] LATIN CAPITAL LETTER G WITH OBLIQUE STROKE..LATIN CAPITAL LETTER H WITH HOOK
-unicode_bidi_class(0xA7F8, 0xA7F9, 'L'). % Lm   [2] MODIFIER LETTER CAPITAL H WITH STROKE..MODIFIER LETTER SMALL LIGATURE OE
-unicode_bidi_class(0xA7FA, 0xA7FA, 'L'). % L&       LATIN LETTER SMALL CAPITAL TURNED M
-unicode_bidi_class(0xA7FB, 0xA801, 'L'). % Lo   [7] LATIN EPIGRAPHIC LETTER REVERSED F..SYLOTI NAGRI LETTER I
-unicode_bidi_class(0xA803, 0xA805, 'L'). % Lo   [3] SYLOTI NAGRI LETTER U..SYLOTI NAGRI LETTER O
-unicode_bidi_class(0xA807, 0xA80A, 'L'). % Lo   [4] SYLOTI NAGRI LETTER KO..SYLOTI NAGRI LETTER GHO
-unicode_bidi_class(0xA80C, 0xA822, 'L'). % Lo  [23] SYLOTI NAGRI LETTER CO..SYLOTI NAGRI LETTER HO
-unicode_bidi_class(0xA823, 0xA824, 'L'). % Mc   [2] SYLOTI NAGRI VOWEL SIGN A..SYLOTI NAGRI VOWEL SIGN I
-unicode_bidi_class(0xA827, 0xA827, 'L'). % Mc       SYLOTI NAGRI VOWEL SIGN OO
-unicode_bidi_class(0xA830, 0xA835, 'L'). % No   [6] NORTH INDIC FRACTION ONE QUARTER..NORTH INDIC FRACTION THREE SIXTEENTHS
-unicode_bidi_class(0xA836, 0xA837, 'L'). % So   [2] NORTH INDIC QUARTER MARK..NORTH INDIC PLACEHOLDER MARK
-unicode_bidi_class(0xA840, 0xA873, 'L'). % Lo  [52] PHAGS-PA LETTER KA..PHAGS-PA LETTER CANDRABINDU
-unicode_bidi_class(0xA880, 0xA881, 'L'). % Mc   [2] SAURASHTRA SIGN ANUSVARA..SAURASHTRA SIGN VISARGA
-unicode_bidi_class(0xA882, 0xA8B3, 'L'). % Lo  [50] SAURASHTRA LETTER A..SAURASHTRA LETTER LLA
-unicode_bidi_class(0xA8B4, 0xA8C3, 'L'). % Mc  [16] SAURASHTRA CONSONANT SIGN HAARU..SAURASHTRA VOWEL SIGN AU
-unicode_bidi_class(0xA8CE, 0xA8CF, 'L'). % Po   [2] SAURASHTRA DANDA..SAURASHTRA DOUBLE DANDA
-unicode_bidi_class(0xA8D0, 0xA8D9, 'L'). % Nd  [10] SAURASHTRA DIGIT ZERO..SAURASHTRA DIGIT NINE
-unicode_bidi_class(0xA8F2, 0xA8F7, 'L'). % Lo   [6] DEVANAGARI SIGN SPACING CANDRABINDU..DEVANAGARI SIGN CANDRABINDU AVAGRAHA
-unicode_bidi_class(0xA8F8, 0xA8FA, 'L'). % Po   [3] DEVANAGARI SIGN PUSHPIKA..DEVANAGARI CARET
-unicode_bidi_class(0xA8FB, 0xA8FB, 'L'). % Lo       DEVANAGARI HEADSTROKE
-unicode_bidi_class(0xA900, 0xA909, 'L'). % Nd  [10] KAYAH LI DIGIT ZERO..KAYAH LI DIGIT NINE
-unicode_bidi_class(0xA90A, 0xA925, 'L'). % Lo  [28] KAYAH LI LETTER KA..KAYAH LI LETTER OO
-unicode_bidi_class(0xA92E, 0xA92F, 'L'). % Po   [2] KAYAH LI SIGN CWI..KAYAH LI SIGN SHYA
-unicode_bidi_class(0xA930, 0xA946, 'L'). % Lo  [23] REJANG LETTER KA..REJANG LETTER A
-unicode_bidi_class(0xA952, 0xA953, 'L'). % Mc   [2] REJANG CONSONANT SIGN H..REJANG VIRAMA
-unicode_bidi_class(0xA95F, 0xA95F, 'L'). % Po       REJANG SECTION MARK
-unicode_bidi_class(0xA960, 0xA97C, 'L'). % Lo  [29] HANGUL CHOSEONG TIKEUT-MIEUM..HANGUL CHOSEONG SSANGYEORINHIEUH
-unicode_bidi_class(0xA983, 0xA983, 'L'). % Mc       JAVANESE SIGN WIGNYAN
-unicode_bidi_class(0xA984, 0xA9B2, 'L'). % Lo  [47] JAVANESE LETTER A..JAVANESE LETTER HA
-unicode_bidi_class(0xA9B4, 0xA9B5, 'L'). % Mc   [2] JAVANESE VOWEL SIGN TARUNG..JAVANESE VOWEL SIGN TOLONG
-unicode_bidi_class(0xA9BA, 0xA9BB, 'L'). % Mc   [2] JAVANESE VOWEL SIGN TALING..JAVANESE VOWEL SIGN DIRGA MURE
-unicode_bidi_class(0xA9BD, 0xA9C0, 'L'). % Mc   [4] JAVANESE CONSONANT SIGN KERET..JAVANESE PANGKON
-unicode_bidi_class(0xA9C1, 0xA9CD, 'L'). % Po  [13] JAVANESE LEFT RERENGGAN..JAVANESE TURNED PADA PISELEH
-unicode_bidi_class(0xA9CF, 0xA9CF, 'L'). % Lm       JAVANESE PANGRANGKEP
-unicode_bidi_class(0xA9D0, 0xA9D9, 'L'). % Nd  [10] JAVANESE DIGIT ZERO..JAVANESE DIGIT NINE
-unicode_bidi_class(0xA9DE, 0xA9DF, 'L'). % Po   [2] JAVANESE PADA TIRTA TUMETES..JAVANESE PADA ISEN-ISEN
-unicode_bidi_class(0xAA00, 0xAA28, 'L'). % Lo  [41] CHAM LETTER A..CHAM LETTER HA
-unicode_bidi_class(0xAA2F, 0xAA30, 'L'). % Mc   [2] CHAM VOWEL SIGN O..CHAM VOWEL SIGN AI
-unicode_bidi_class(0xAA33, 0xAA34, 'L'). % Mc   [2] CHAM CONSONANT SIGN YA..CHAM CONSONANT SIGN RA
-unicode_bidi_class(0xAA40, 0xAA42, 'L'). % Lo   [3] CHAM LETTER FINAL K..CHAM LETTER FINAL NG
-unicode_bidi_class(0xAA44, 0xAA4B, 'L'). % Lo   [8] CHAM LETTER FINAL CH..CHAM LETTER FINAL SS
-unicode_bidi_class(0xAA4D, 0xAA4D, 'L'). % Mc       CHAM CONSONANT SIGN FINAL H
-unicode_bidi_class(0xAA50, 0xAA59, 'L'). % Nd  [10] CHAM DIGIT ZERO..CHAM DIGIT NINE
-unicode_bidi_class(0xAA5C, 0xAA5F, 'L'). % Po   [4] CHAM PUNCTUATION SPIRAL..CHAM PUNCTUATION TRIPLE DANDA
-unicode_bidi_class(0xAA60, 0xAA6F, 'L'). % Lo  [16] MYANMAR LETTER KHAMTI GA..MYANMAR LETTER KHAMTI FA
-unicode_bidi_class(0xAA70, 0xAA70, 'L'). % Lm       MYANMAR MODIFIER LETTER KHAMTI REDUPLICATION
-unicode_bidi_class(0xAA71, 0xAA76, 'L'). % Lo   [6] MYANMAR LETTER KHAMTI XA..MYANMAR LOGOGRAM KHAMTI HM
-unicode_bidi_class(0xAA77, 0xAA79, 'L'). % So   [3] MYANMAR SYMBOL AITON EXCLAMATION..MYANMAR SYMBOL AITON TWO
-unicode_bidi_class(0xAA7A, 0xAA7A, 'L'). % Lo       MYANMAR LETTER AITON RA
-unicode_bidi_class(0xAA7B, 0xAA7B, 'L'). % Mc       MYANMAR SIGN PAO KAREN TONE
-unicode_bidi_class(0xAA80, 0xAAAF, 'L'). % Lo  [48] TAI VIET LETTER LOW KO..TAI VIET LETTER HIGH O
-unicode_bidi_class(0xAAB1, 0xAAB1, 'L'). % Lo       TAI VIET VOWEL AA
-unicode_bidi_class(0xAAB5, 0xAAB6, 'L'). % Lo   [2] TAI VIET VOWEL E..TAI VIET VOWEL O
-unicode_bidi_class(0xAAB9, 0xAABD, 'L'). % Lo   [5] TAI VIET VOWEL UEA..TAI VIET VOWEL AN
-unicode_bidi_class(0xAAC0, 0xAAC0, 'L'). % Lo       TAI VIET TONE MAI NUENG
-unicode_bidi_class(0xAAC2, 0xAAC2, 'L'). % Lo       TAI VIET TONE MAI SONG
-unicode_bidi_class(0xAADB, 0xAADC, 'L'). % Lo   [2] TAI VIET SYMBOL KON..TAI VIET SYMBOL NUENG
-unicode_bidi_class(0xAADD, 0xAADD, 'L'). % Lm       TAI VIET SYMBOL SAM
-unicode_bidi_class(0xAADE, 0xAADF, 'L'). % Po   [2] TAI VIET SYMBOL HO HOI..TAI VIET SYMBOL KOI KOI
-unicode_bidi_class(0xAAE0, 0xAAEA, 'L'). % Lo  [11] MEETEI MAYEK LETTER E..MEETEI MAYEK LETTER SSA
-unicode_bidi_class(0xAAEB, 0xAAEB, 'L'). % Mc       MEETEI MAYEK VOWEL SIGN II
-unicode_bidi_class(0xAAEE, 0xAAEF, 'L'). % Mc   [2] MEETEI MAYEK VOWEL SIGN AU..MEETEI MAYEK VOWEL SIGN AAU
-unicode_bidi_class(0xAAF0, 0xAAF1, 'L'). % Po   [2] MEETEI MAYEK CHEIKHAN..MEETEI MAYEK AHANG KHUDAM
-unicode_bidi_class(0xAAF2, 0xAAF2, 'L'). % Lo       MEETEI MAYEK ANJI
-unicode_bidi_class(0xAAF3, 0xAAF4, 'L'). % Lm   [2] MEETEI MAYEK SYLLABLE REPETITION MARK..MEETEI MAYEK WORD REPETITION MARK
-unicode_bidi_class(0xAAF5, 0xAAF5, 'L'). % Mc       MEETEI MAYEK VOWEL SIGN VISARGA
-unicode_bidi_class(0xAB01, 0xAB06, 'L'). % Lo   [6] ETHIOPIC SYLLABLE TTHU..ETHIOPIC SYLLABLE TTHO
-unicode_bidi_class(0xAB09, 0xAB0E, 'L'). % Lo   [6] ETHIOPIC SYLLABLE DDHU..ETHIOPIC SYLLABLE DDHO
-unicode_bidi_class(0xAB11, 0xAB16, 'L'). % Lo   [6] ETHIOPIC SYLLABLE DZU..ETHIOPIC SYLLABLE DZO
-unicode_bidi_class(0xAB20, 0xAB26, 'L'). % Lo   [7] ETHIOPIC SYLLABLE CCHHA..ETHIOPIC SYLLABLE CCHHO
-unicode_bidi_class(0xAB28, 0xAB2E, 'L'). % Lo   [7] ETHIOPIC SYLLABLE BBA..ETHIOPIC SYLLABLE BBO
-unicode_bidi_class(0xABC0, 0xABE2, 'L'). % Lo  [35] MEETEI MAYEK LETTER KOK..MEETEI MAYEK LETTER I LONSUM
-unicode_bidi_class(0xABE3, 0xABE4, 'L'). % Mc   [2] MEETEI MAYEK VOWEL SIGN ONAP..MEETEI MAYEK VOWEL SIGN INAP
-unicode_bidi_class(0xABE6, 0xABE7, 'L'). % Mc   [2] MEETEI MAYEK VOWEL SIGN YENAP..MEETEI MAYEK VOWEL SIGN SOUNAP
-unicode_bidi_class(0xABE9, 0xABEA, 'L'). % Mc   [2] MEETEI MAYEK VOWEL SIGN CHEINAP..MEETEI MAYEK VOWEL SIGN NUNG
-unicode_bidi_class(0xABEB, 0xABEB, 'L'). % Po       MEETEI MAYEK CHEIKHEI
-unicode_bidi_class(0xABEC, 0xABEC, 'L'). % Mc       MEETEI MAYEK LUM IYEK
-unicode_bidi_class(0xABF0, 0xABF9, 'L'). % Nd  [10] MEETEI MAYEK DIGIT ZERO..MEETEI MAYEK DIGIT NINE
-unicode_bidi_class(0xAC00, 0xD7A3, 'L'). % Lo [11172] HANGUL SYLLABLE GA..HANGUL SYLLABLE HIH
-unicode_bidi_class(0xD7B0, 0xD7C6, 'L'). % Lo  [23] HANGUL JUNGSEONG O-YEO..HANGUL JUNGSEONG ARAEA-E
-unicode_bidi_class(0xD7CB, 0xD7FB, 'L'). % Lo  [49] HANGUL JONGSEONG NIEUN-RIEUL..HANGUL JONGSEONG PHIEUPH-THIEUTH
-unicode_bidi_class(0xE000, 0xF8FF, 'L'). % Co [6400] <private-use-E000>..<private-use-F8FF>
-unicode_bidi_class(0xF900, 0xFA6D, 'L'). % Lo [366] CJK COMPATIBILITY IDEOGRAPH-F900..CJK COMPATIBILITY IDEOGRAPH-FA6D
-unicode_bidi_class(0xFA70, 0xFAD9, 'L'). % Lo [106] CJK COMPATIBILITY IDEOGRAPH-FA70..CJK COMPATIBILITY IDEOGRAPH-FAD9
-unicode_bidi_class(0xFB00, 0xFB06, 'L'). % L&   [7] LATIN SMALL LIGATURE FF..LATIN SMALL LIGATURE ST
-unicode_bidi_class(0xFB13, 0xFB17, 'L'). % L&   [5] ARMENIAN SMALL LIGATURE MEN NOW..ARMENIAN SMALL LIGATURE MEN XEH
-unicode_bidi_class(0xFF21, 0xFF3A, 'L'). % L&  [26] FULLWIDTH LATIN CAPITAL LETTER A..FULLWIDTH LATIN CAPITAL LETTER Z
-unicode_bidi_class(0xFF41, 0xFF5A, 'L'). % L&  [26] FULLWIDTH LATIN SMALL LETTER A..FULLWIDTH LATIN SMALL LETTER Z
-unicode_bidi_class(0xFF66, 0xFF6F, 'L'). % Lo  [10] HALFWIDTH KATAKANA LETTER WO..HALFWIDTH KATAKANA LETTER SMALL TU
-unicode_bidi_class(0xFF70, 0xFF70, 'L'). % Lm       HALFWIDTH KATAKANA-HIRAGANA PROLONGED SOUND MARK
-unicode_bidi_class(0xFF71, 0xFF9D, 'L'). % Lo  [45] HALFWIDTH KATAKANA LETTER A..HALFWIDTH KATAKANA LETTER N
-unicode_bidi_class(0xFF9E, 0xFF9F, 'L'). % Lm   [2] HALFWIDTH KATAKANA VOICED SOUND MARK..HALFWIDTH KATAKANA SEMI-VOICED SOUND MARK
-unicode_bidi_class(0xFFA0, 0xFFBE, 'L'). % Lo  [31] HALFWIDTH HANGUL FILLER..HALFWIDTH HANGUL LETTER HIEUH
-unicode_bidi_class(0xFFC2, 0xFFC7, 'L'). % Lo   [6] HALFWIDTH HANGUL LETTER A..HALFWIDTH HANGUL LETTER E
-unicode_bidi_class(0xFFCA, 0xFFCF, 'L'). % Lo   [6] HALFWIDTH HANGUL LETTER YEO..HALFWIDTH HANGUL LETTER OE
-unicode_bidi_class(0xFFD2, 0xFFD7, 'L'). % Lo   [6] HALFWIDTH HANGUL LETTER YO..HALFWIDTH HANGUL LETTER YU
-unicode_bidi_class(0xFFDA, 0xFFDC, 'L'). % Lo   [3] HALFWIDTH HANGUL LETTER EU..HALFWIDTH HANGUL LETTER I
-unicode_bidi_class(0x10000, 0x1000B, 'L'). % Lo  [12] LINEAR B SYLLABLE B008 A..LINEAR B SYLLABLE B046 JE
-unicode_bidi_class(0x1000D, 0x10026, 'L'). % Lo  [26] LINEAR B SYLLABLE B036 JO..LINEAR B SYLLABLE B032 QO
-unicode_bidi_class(0x10028, 0x1003A, 'L'). % Lo  [19] LINEAR B SYLLABLE B060 RA..LINEAR B SYLLABLE B042 WO
-unicode_bidi_class(0x1003C, 0x1003D, 'L'). % Lo   [2] LINEAR B SYLLABLE B017 ZA..LINEAR B SYLLABLE B074 ZE
-unicode_bidi_class(0x1003F, 0x1004D, 'L'). % Lo  [15] LINEAR B SYLLABLE B020 ZO..LINEAR B SYLLABLE B091 TWO
-unicode_bidi_class(0x10050, 0x1005D, 'L'). % Lo  [14] LINEAR B SYMBOL B018..LINEAR B SYMBOL B089
-unicode_bidi_class(0x10080, 0x100FA, 'L'). % Lo [123] LINEAR B IDEOGRAM B100 MAN..LINEAR B IDEOGRAM VESSEL B305
-unicode_bidi_class(0x10100, 0x10100, 'L'). % Po       AEGEAN WORD SEPARATOR LINE
-unicode_bidi_class(0x10102, 0x10102, 'L'). % Po       AEGEAN CHECK MARK
-unicode_bidi_class(0x10107, 0x10133, 'L'). % No  [45] AEGEAN NUMBER ONE..AEGEAN NUMBER NINETY THOUSAND
-unicode_bidi_class(0x10137, 0x1013F, 'L'). % So   [9] AEGEAN WEIGHT BASE UNIT..AEGEAN MEASURE THIRD SUBUNIT
-unicode_bidi_class(0x101D0, 0x101FC, 'L'). % So  [45] PHAISTOS DISC SIGN PEDESTRIAN..PHAISTOS DISC SIGN WAVY BAND
-unicode_bidi_class(0x10280, 0x1029C, 'L'). % Lo  [29] LYCIAN LETTER A..LYCIAN LETTER X
-unicode_bidi_class(0x102A0, 0x102D0, 'L'). % Lo  [49] CARIAN LETTER A..CARIAN LETTER UUU3
-unicode_bidi_class(0x10300, 0x1031E, 'L'). % Lo  [31] OLD ITALIC LETTER A..OLD ITALIC LETTER UU
-unicode_bidi_class(0x10320, 0x10323, 'L'). % No   [4] OLD ITALIC NUMERAL ONE..OLD ITALIC NUMERAL FIFTY
-unicode_bidi_class(0x10330, 0x10340, 'L'). % Lo  [17] GOTHIC LETTER AHSA..GOTHIC LETTER PAIRTHRA
-unicode_bidi_class(0x10341, 0x10341, 'L'). % Nl       GOTHIC LETTER NINETY
-unicode_bidi_class(0x10342, 0x10349, 'L'). % Lo   [8] GOTHIC LETTER RAIDA..GOTHIC LETTER OTHAL
-unicode_bidi_class(0x1034A, 0x1034A, 'L'). % Nl       GOTHIC LETTER NINE HUNDRED
-unicode_bidi_class(0x10380, 0x1039D, 'L'). % Lo  [30] UGARITIC LETTER ALPA..UGARITIC LETTER SSU
-unicode_bidi_class(0x1039F, 0x1039F, 'L'). % Po       UGARITIC WORD DIVIDER
-unicode_bidi_class(0x103A0, 0x103C3, 'L'). % Lo  [36] OLD PERSIAN SIGN A..OLD PERSIAN SIGN HA
-unicode_bidi_class(0x103C8, 0x103CF, 'L'). % Lo   [8] OLD PERSIAN SIGN AURAMAZDAA..OLD PERSIAN SIGN BUUMISH
-unicode_bidi_class(0x103D0, 0x103D0, 'L'). % Po       OLD PERSIAN WORD DIVIDER
-unicode_bidi_class(0x103D1, 0x103D5, 'L'). % Nl   [5] OLD PERSIAN NUMBER ONE..OLD PERSIAN NUMBER HUNDRED
-unicode_bidi_class(0x10400, 0x1044F, 'L'). % L&  [80] DESERET CAPITAL LETTER LONG I..DESERET SMALL LETTER EW
-unicode_bidi_class(0x10450, 0x1049D, 'L'). % Lo  [78] SHAVIAN LETTER PEEP..OSMANYA LETTER OO
-unicode_bidi_class(0x104A0, 0x104A9, 'L'). % Nd  [10] OSMANYA DIGIT ZERO..OSMANYA DIGIT NINE
-unicode_bidi_class(0x11000, 0x11000, 'L'). % Mc       BRAHMI SIGN CANDRABINDU
-unicode_bidi_class(0x11002, 0x11002, 'L'). % Mc       BRAHMI SIGN VISARGA
-unicode_bidi_class(0x11003, 0x11037, 'L'). % Lo  [53] BRAHMI SIGN JIHVAMULIYA..BRAHMI LETTER OLD TAMIL NNNA
-unicode_bidi_class(0x11047, 0x1104D, 'L'). % Po   [7] BRAHMI DANDA..BRAHMI PUNCTUATION LOTUS
-unicode_bidi_class(0x11066, 0x1106F, 'L'). % Nd  [10] BRAHMI DIGIT ZERO..BRAHMI DIGIT NINE
-unicode_bidi_class(0x11082, 0x11082, 'L'). % Mc       KAITHI SIGN VISARGA
-unicode_bidi_class(0x11083, 0x110AF, 'L'). % Lo  [45] KAITHI LETTER A..KAITHI LETTER HA
-unicode_bidi_class(0x110B0, 0x110B2, 'L'). % Mc   [3] KAITHI VOWEL SIGN AA..KAITHI VOWEL SIGN II
-unicode_bidi_class(0x110B7, 0x110B8, 'L'). % Mc   [2] KAITHI VOWEL SIGN O..KAITHI VOWEL SIGN AU
-unicode_bidi_class(0x110BB, 0x110BC, 'L'). % Po   [2] KAITHI ABBREVIATION SIGN..KAITHI ENUMERATION SIGN
-unicode_bidi_class(0x110BD, 0x110BD, 'L'). % Cf       KAITHI NUMBER SIGN
-unicode_bidi_class(0x110BE, 0x110C1, 'L'). % Po   [4] KAITHI SECTION MARK..KAITHI DOUBLE DANDA
-unicode_bidi_class(0x110D0, 0x110E8, 'L'). % Lo  [25] SORA SOMPENG LETTER SAH..SORA SOMPENG LETTER MAE
-unicode_bidi_class(0x110F0, 0x110F9, 'L'). % Nd  [10] SORA SOMPENG DIGIT ZERO..SORA SOMPENG DIGIT NINE
-unicode_bidi_class(0x11103, 0x11126, 'L'). % Lo  [36] CHAKMA LETTER AA..CHAKMA LETTER HAA
-unicode_bidi_class(0x1112C, 0x1112C, 'L'). % Mc       CHAKMA VOWEL SIGN E
-unicode_bidi_class(0x11136, 0x1113F, 'L'). % Nd  [10] CHAKMA DIGIT ZERO..CHAKMA DIGIT NINE
-unicode_bidi_class(0x11140, 0x11143, 'L'). % Po   [4] CHAKMA SECTION MARK..CHAKMA QUESTION MARK
-unicode_bidi_class(0x11182, 0x11182, 'L'). % Mc       SHARADA SIGN VISARGA
-unicode_bidi_class(0x11183, 0x111B2, 'L'). % Lo  [48] SHARADA LETTER A..SHARADA LETTER HA
-unicode_bidi_class(0x111B3, 0x111B5, 'L'). % Mc   [3] SHARADA VOWEL SIGN AA..SHARADA VOWEL SIGN II
-unicode_bidi_class(0x111BF, 0x111C0, 'L'). % Mc   [2] SHARADA VOWEL SIGN AU..SHARADA SIGN VIRAMA
-unicode_bidi_class(0x111C1, 0x111C4, 'L'). % Lo   [4] SHARADA SIGN AVAGRAHA..SHARADA OM
-unicode_bidi_class(0x111C5, 0x111C8, 'L'). % Po   [4] SHARADA DANDA..SHARADA SEPARATOR
-unicode_bidi_class(0x111D0, 0x111D9, 'L'). % Nd  [10] SHARADA DIGIT ZERO..SHARADA DIGIT NINE
-unicode_bidi_class(0x11680, 0x116AA, 'L'). % Lo  [43] TAKRI LETTER A..TAKRI LETTER RRA
-unicode_bidi_class(0x116AC, 0x116AC, 'L'). % Mc       TAKRI SIGN VISARGA
-unicode_bidi_class(0x116AE, 0x116AF, 'L'). % Mc   [2] TAKRI VOWEL SIGN I..TAKRI VOWEL SIGN II
-unicode_bidi_class(0x116B6, 0x116B6, 'L'). % Mc       TAKRI SIGN VIRAMA
-unicode_bidi_class(0x116C0, 0x116C9, 'L'). % Nd  [10] TAKRI DIGIT ZERO..TAKRI DIGIT NINE
-unicode_bidi_class(0x12000, 0x1236E, 'L'). % Lo [879] CUNEIFORM SIGN A..CUNEIFORM SIGN ZUM
-unicode_bidi_class(0x12400, 0x12462, 'L'). % Nl  [99] CUNEIFORM NUMERIC SIGN TWO ASH..CUNEIFORM NUMERIC SIGN OLD ASSYRIAN ONE QUARTER
-unicode_bidi_class(0x12470, 0x12473, 'L'). % Po   [4] CUNEIFORM PUNCTUATION SIGN OLD ASSYRIAN WORD DIVIDER..CUNEIFORM PUNCTUATION SIGN DIAGONAL TRICOLON
-unicode_bidi_class(0x13000, 0x1342E, 'L'). % Lo [1071] EGYPTIAN HIEROGLYPH A001..EGYPTIAN HIEROGLYPH AA032
-unicode_bidi_class(0x16800, 0x16A38, 'L'). % Lo [569] BAMUM LETTER PHASE-A NGKUE MFON..BAMUM LETTER PHASE-F VUEQ
-unicode_bidi_class(0x16F00, 0x16F44, 'L'). % Lo  [69] MIAO LETTER PA..MIAO LETTER HHA
-unicode_bidi_class(0x16F50, 0x16F50, 'L'). % Lo       MIAO LETTER NASALIZATION
-unicode_bidi_class(0x16F51, 0x16F7E, 'L'). % Mc  [46] MIAO SIGN ASPIRATION..MIAO VOWEL SIGN NG
-unicode_bidi_class(0x16F93, 0x16F9F, 'L'). % Lm  [13] MIAO LETTER TONE-2..MIAO LETTER REFORMED TONE-8
-unicode_bidi_class(0x1B000, 0x1B001, 'L'). % Lo   [2] KATAKANA LETTER ARCHAIC E..HIRAGANA LETTER ARCHAIC YE
-unicode_bidi_class(0x1D000, 0x1D0F5, 'L'). % So [246] BYZANTINE MUSICAL SYMBOL PSILI..BYZANTINE MUSICAL SYMBOL GORGON NEO KATO
-unicode_bidi_class(0x1D100, 0x1D126, 'L'). % So  [39] MUSICAL SYMBOL SINGLE BARLINE..MUSICAL SYMBOL DRUM CLEF-2
-unicode_bidi_class(0x1D129, 0x1D164, 'L'). % So  [60] MUSICAL SYMBOL MULTIPLE MEASURE REST..MUSICAL SYMBOL ONE HUNDRED TWENTY-EIGHTH NOTE
-unicode_bidi_class(0x1D165, 0x1D166, 'L'). % Mc   [2] MUSICAL SYMBOL COMBINING STEM..MUSICAL SYMBOL COMBINING SPRECHGESANG STEM
-unicode_bidi_class(0x1D16A, 0x1D16C, 'L'). % So   [3] MUSICAL SYMBOL FINGERED TREMOLO-1..MUSICAL SYMBOL FINGERED TREMOLO-3
-unicode_bidi_class(0x1D16D, 0x1D172, 'L'). % Mc   [6] MUSICAL SYMBOL COMBINING AUGMENTATION DOT..MUSICAL SYMBOL COMBINING FLAG-5
-unicode_bidi_class(0x1D183, 0x1D184, 'L'). % So   [2] MUSICAL SYMBOL ARPEGGIATO UP..MUSICAL SYMBOL ARPEGGIATO DOWN
-unicode_bidi_class(0x1D18C, 0x1D1A9, 'L'). % So  [30] MUSICAL SYMBOL RINFORZANDO..MUSICAL SYMBOL DEGREE SLASH
-unicode_bidi_class(0x1D1AE, 0x1D1DD, 'L'). % So  [48] MUSICAL SYMBOL PEDAL MARK..MUSICAL SYMBOL PES SUBPUNCTIS
-unicode_bidi_class(0x1D360, 0x1D371, 'L'). % No  [18] COUNTING ROD UNIT DIGIT ONE..COUNTING ROD TENS DIGIT NINE
-unicode_bidi_class(0x1D400, 0x1D454, 'L'). % L&  [85] MATHEMATICAL BOLD CAPITAL A..MATHEMATICAL ITALIC SMALL G
-unicode_bidi_class(0x1D456, 0x1D49C, 'L'). % L&  [71] MATHEMATICAL ITALIC SMALL I..MATHEMATICAL SCRIPT CAPITAL A
-unicode_bidi_class(0x1D49E, 0x1D49F, 'L'). % L&   [2] MATHEMATICAL SCRIPT CAPITAL C..MATHEMATICAL SCRIPT CAPITAL D
-unicode_bidi_class(0x1D4A2, 0x1D4A2, 'L'). % L&       MATHEMATICAL SCRIPT CAPITAL G
-unicode_bidi_class(0x1D4A5, 0x1D4A6, 'L'). % L&   [2] MATHEMATICAL SCRIPT CAPITAL J..MATHEMATICAL SCRIPT CAPITAL K
-unicode_bidi_class(0x1D4A9, 0x1D4AC, 'L'). % L&   [4] MATHEMATICAL SCRIPT CAPITAL N..MATHEMATICAL SCRIPT CAPITAL Q
-unicode_bidi_class(0x1D4AE, 0x1D4B9, 'L'). % L&  [12] MATHEMATICAL SCRIPT CAPITAL S..MATHEMATICAL SCRIPT SMALL D
-unicode_bidi_class(0x1D4BB, 0x1D4BB, 'L'). % L&       MATHEMATICAL SCRIPT SMALL F
-unicode_bidi_class(0x1D4BD, 0x1D4C3, 'L'). % L&   [7] MATHEMATICAL SCRIPT SMALL H..MATHEMATICAL SCRIPT SMALL N
-unicode_bidi_class(0x1D4C5, 0x1D505, 'L'). % L&  [65] MATHEMATICAL SCRIPT SMALL P..MATHEMATICAL FRAKTUR CAPITAL B
-unicode_bidi_class(0x1D507, 0x1D50A, 'L'). % L&   [4] MATHEMATICAL FRAKTUR CAPITAL D..MATHEMATICAL FRAKTUR CAPITAL G
-unicode_bidi_class(0x1D50D, 0x1D514, 'L'). % L&   [8] MATHEMATICAL FRAKTUR CAPITAL J..MATHEMATICAL FRAKTUR CAPITAL Q
-unicode_bidi_class(0x1D516, 0x1D51C, 'L'). % L&   [7] MATHEMATICAL FRAKTUR CAPITAL S..MATHEMATICAL FRAKTUR CAPITAL Y
-unicode_bidi_class(0x1D51E, 0x1D539, 'L'). % L&  [28] MATHEMATICAL FRAKTUR SMALL A..MATHEMATICAL DOUBLE-STRUCK CAPITAL B
-unicode_bidi_class(0x1D53B, 0x1D53E, 'L'). % L&   [4] MATHEMATICAL DOUBLE-STRUCK CAPITAL D..MATHEMATICAL DOUBLE-STRUCK CAPITAL G
-unicode_bidi_class(0x1D540, 0x1D544, 'L'). % L&   [5] MATHEMATICAL DOUBLE-STRUCK CAPITAL I..MATHEMATICAL DOUBLE-STRUCK CAPITAL M
-unicode_bidi_class(0x1D546, 0x1D546, 'L'). % L&       MATHEMATICAL DOUBLE-STRUCK CAPITAL O
-unicode_bidi_class(0x1D54A, 0x1D550, 'L'). % L&   [7] MATHEMATICAL DOUBLE-STRUCK CAPITAL S..MATHEMATICAL DOUBLE-STRUCK CAPITAL Y
-unicode_bidi_class(0x1D552, 0x1D6A5, 'L'). % L& [340] MATHEMATICAL DOUBLE-STRUCK SMALL A..MATHEMATICAL ITALIC SMALL DOTLESS J
-unicode_bidi_class(0x1D6A8, 0x1D6C0, 'L'). % L&  [25] MATHEMATICAL BOLD CAPITAL ALPHA..MATHEMATICAL BOLD CAPITAL OMEGA
-unicode_bidi_class(0x1D6C1, 0x1D6C1, 'L'). % Sm       MATHEMATICAL BOLD NABLA
-unicode_bidi_class(0x1D6C2, 0x1D6DA, 'L'). % L&  [25] MATHEMATICAL BOLD SMALL ALPHA..MATHEMATICAL BOLD SMALL OMEGA
-unicode_bidi_class(0x1D6DC, 0x1D6FA, 'L'). % L&  [31] MATHEMATICAL BOLD EPSILON SYMBOL..MATHEMATICAL ITALIC CAPITAL OMEGA
-unicode_bidi_class(0x1D6FB, 0x1D6FB, 'L'). % Sm       MATHEMATICAL ITALIC NABLA
-unicode_bidi_class(0x1D6FC, 0x1D714, 'L'). % L&  [25] MATHEMATICAL ITALIC SMALL ALPHA..MATHEMATICAL ITALIC SMALL OMEGA
-unicode_bidi_class(0x1D716, 0x1D734, 'L'). % L&  [31] MATHEMATICAL ITALIC EPSILON SYMBOL..MATHEMATICAL BOLD ITALIC CAPITAL OMEGA
-unicode_bidi_class(0x1D735, 0x1D735, 'L'). % Sm       MATHEMATICAL BOLD ITALIC NABLA
-unicode_bidi_class(0x1D736, 0x1D74E, 'L'). % L&  [25] MATHEMATICAL BOLD ITALIC SMALL ALPHA..MATHEMATICAL BOLD ITALIC SMALL OMEGA
-unicode_bidi_class(0x1D750, 0x1D76E, 'L'). % L&  [31] MATHEMATICAL BOLD ITALIC EPSILON SYMBOL..MATHEMATICAL SANS-SERIF BOLD CAPITAL OMEGA
-unicode_bidi_class(0x1D76F, 0x1D76F, 'L'). % Sm       MATHEMATICAL SANS-SERIF BOLD NABLA
-unicode_bidi_class(0x1D770, 0x1D788, 'L'). % L&  [25] MATHEMATICAL SANS-SERIF BOLD SMALL ALPHA..MATHEMATICAL SANS-SERIF BOLD SMALL OMEGA
-unicode_bidi_class(0x1D78A, 0x1D7A8, 'L'). % L&  [31] MATHEMATICAL SANS-SERIF BOLD EPSILON SYMBOL..MATHEMATICAL SANS-SERIF BOLD ITALIC CAPITAL OMEGA
-unicode_bidi_class(0x1D7A9, 0x1D7A9, 'L'). % Sm       MATHEMATICAL SANS-SERIF BOLD ITALIC NABLA
-unicode_bidi_class(0x1D7AA, 0x1D7C2, 'L'). % L&  [25] MATHEMATICAL SANS-SERIF BOLD ITALIC SMALL ALPHA..MATHEMATICAL SANS-SERIF BOLD ITALIC SMALL OMEGA
-unicode_bidi_class(0x1D7C4, 0x1D7CB, 'L'). % L&   [8] MATHEMATICAL SANS-SERIF BOLD ITALIC EPSILON SYMBOL..MATHEMATICAL BOLD SMALL DIGAMMA
-unicode_bidi_class(0x1F110, 0x1F12E, 'L'). % So  [31] PARENTHESIZED LATIN CAPITAL LETTER A..CIRCLED WZ
-unicode_bidi_class(0x1F130, 0x1F169, 'L'). % So  [58] SQUARED LATIN CAPITAL LETTER A..NEGATIVE CIRCLED LATIN CAPITAL LETTER Z
-unicode_bidi_class(0x1F170, 0x1F19A, 'L'). % So  [43] NEGATIVE SQUARED LATIN CAPITAL LETTER A..SQUARED VS
-unicode_bidi_class(0x1F1E6, 0x1F202, 'L'). % So  [29] REGIONAL INDICATOR SYMBOL LETTER A..SQUARED KATAKANA SA
-unicode_bidi_class(0x1F210, 0x1F23A, 'L'). % So  [43] SQUARED CJK UNIFIED IDEOGRAPH-624B..SQUARED CJK UNIFIED IDEOGRAPH-55B6
-unicode_bidi_class(0x1F240, 0x1F248, 'L'). % So   [9] TORTOISE SHELL BRACKETED CJK UNIFIED IDEOGRAPH-672C..TORTOISE SHELL BRACKETED CJK UNIFIED IDEOGRAPH-6557
-unicode_bidi_class(0x1F250, 0x1F251, 'L'). % So   [2] CIRCLED IDEOGRAPH ADVANTAGE..CIRCLED IDEOGRAPH ACCEPT
-unicode_bidi_class(0x20000, 0x2A6D6, 'L'). % Lo [42711] CJK UNIFIED IDEOGRAPH-20000..CJK UNIFIED IDEOGRAPH-2A6D6
-unicode_bidi_class(0x2A700, 0x2B734, 'L'). % Lo [4149] CJK UNIFIED IDEOGRAPH-2A700..CJK UNIFIED IDEOGRAPH-2B734
-unicode_bidi_class(0x2B740, 0x2B81D, 'L'). % Lo [222] CJK UNIFIED IDEOGRAPH-2B740..CJK UNIFIED IDEOGRAPH-2B81D
-unicode_bidi_class(0x2F800, 0x2FA1D, 'L'). % Lo [542] CJK COMPATIBILITY IDEOGRAPH-2F800..CJK COMPATIBILITY IDEOGRAPH-2FA1D
-unicode_bidi_class(0xF0000, 0xFFFFD, 'L'). % Co [65534] <private-use-F0000>..<private-use-FFFFD>
-unicode_bidi_class(0x100000, 0x10FFFD, 'L'). % Co [65534] <private-use-100000>..<private-use-10FFFD>
-
-% The above property value applies to 858960 code points not listed here.
-% Total code points: 1098531
-
-% ================================================
-
-% Bidi_Class=Right_To_Left
-
-unicode_bidi_class(0x0590, 0x0590, 'R'). % Cn       <reserved-0590>
-unicode_bidi_class(0x05BE, 0x05BE, 'R'). % Pd       HEBREW PUNCTUATION MAQAF
-unicode_bidi_class(0x05C0, 0x05C0, 'R'). % Po       HEBREW PUNCTUATION PASEQ
-unicode_bidi_class(0x05C3, 0x05C3, 'R'). % Po       HEBREW PUNCTUATION SOF PASUQ
-unicode_bidi_class(0x05C6, 0x05C6, 'R'). % Po       HEBREW PUNCTUATION NUN HAFUKHA
-unicode_bidi_class(0x05C8, 0x05CF, 'R'). % Cn   [8] <reserved-05C8>..<reserved-05CF>
-unicode_bidi_class(0x05D0, 0x05EA, 'R'). % Lo  [27] HEBREW LETTER ALEF..HEBREW LETTER TAV
-unicode_bidi_class(0x05EB, 0x05EF, 'R'). % Cn   [5] <reserved-05EB>..<reserved-05EF>
-unicode_bidi_class(0x05F0, 0x05F2, 'R'). % Lo   [3] HEBREW LIGATURE YIDDISH DOUBLE VAV..HEBREW LIGATURE YIDDISH DOUBLE YOD
-unicode_bidi_class(0x05F3, 0x05F4, 'R'). % Po   [2] HEBREW PUNCTUATION GERESH..HEBREW PUNCTUATION GERSHAYIM
-unicode_bidi_class(0x05F5, 0x05FF, 'R'). % Cn  [11] <reserved-05F5>..<reserved-05FF>
-unicode_bidi_class(0x07C0, 0x07C9, 'R'). % Nd  [10] NKO DIGIT ZERO..NKO DIGIT NINE
-unicode_bidi_class(0x07CA, 0x07EA, 'R'). % Lo  [33] NKO LETTER A..NKO LETTER JONA RA
-unicode_bidi_class(0x07F4, 0x07F5, 'R'). % Lm   [2] NKO HIGH TONE APOSTROPHE..NKO LOW TONE APOSTROPHE
-unicode_bidi_class(0x07FA, 0x07FA, 'R'). % Lm       NKO LAJANYALAN
-unicode_bidi_class(0x07FB, 0x07FF, 'R'). % Cn   [5] <reserved-07FB>..<reserved-07FF>
-unicode_bidi_class(0x0800, 0x0815, 'R'). % Lo  [22] SAMARITAN LETTER ALAF..SAMARITAN LETTER TAAF
-unicode_bidi_class(0x081A, 0x081A, 'R'). % Lm       SAMARITAN MODIFIER LETTER EPENTHETIC YUT
-unicode_bidi_class(0x0824, 0x0824, 'R'). % Lm       SAMARITAN MODIFIER LETTER SHORT A
-unicode_bidi_class(0x0828, 0x0828, 'R'). % Lm       SAMARITAN MODIFIER LETTER I
-unicode_bidi_class(0x082E, 0x082F, 'R'). % Cn   [2] <reserved-082E>..<reserved-082F>
-unicode_bidi_class(0x0830, 0x083E, 'R'). % Po  [15] SAMARITAN PUNCTUATION NEQUDAA..SAMARITAN PUNCTUATION ANNAAU
-unicode_bidi_class(0x083F, 0x083F, 'R'). % Cn       <reserved-083F>
-unicode_bidi_class(0x0840, 0x0858, 'R'). % Lo  [25] MANDAIC LETTER HALQA..MANDAIC LETTER AIN
-unicode_bidi_class(0x085C, 0x085D, 'R'). % Cn   [2] <reserved-085C>..<reserved-085D>
-unicode_bidi_class(0x085E, 0x085E, 'R'). % Po       MANDAIC PUNCTUATION
-unicode_bidi_class(0x085F, 0x089F, 'R'). % Cn  [65] <reserved-085F>..<reserved-089F>
-unicode_bidi_class(0x200F, 0x200F, 'R'). % Cf       RIGHT-TO-LEFT MARK
-unicode_bidi_class(0xFB1D, 0xFB1D, 'R'). % Lo       HEBREW LETTER YOD WITH HIRIQ
-unicode_bidi_class(0xFB1F, 0xFB28, 'R'). % Lo  [10] HEBREW LIGATURE YIDDISH YOD YOD PATAH..HEBREW LETTER WIDE TAV
-unicode_bidi_class(0xFB2A, 0xFB36, 'R'). % Lo  [13] HEBREW LETTER SHIN WITH SHIN DOT..HEBREW LETTER ZAYIN WITH DAGESH
-unicode_bidi_class(0xFB37, 0xFB37, 'R'). % Cn       <reserved-FB37>
-unicode_bidi_class(0xFB38, 0xFB3C, 'R'). % Lo   [5] HEBREW LETTER TET WITH DAGESH..HEBREW LETTER LAMED WITH DAGESH
-unicode_bidi_class(0xFB3D, 0xFB3D, 'R'). % Cn       <reserved-FB3D>
-unicode_bidi_class(0xFB3E, 0xFB3E, 'R'). % Lo       HEBREW LETTER MEM WITH DAGESH
-unicode_bidi_class(0xFB3F, 0xFB3F, 'R'). % Cn       <reserved-FB3F>
-unicode_bidi_class(0xFB40, 0xFB41, 'R'). % Lo   [2] HEBREW LETTER NUN WITH DAGESH..HEBREW LETTER SAMEKH WITH DAGESH
-unicode_bidi_class(0xFB42, 0xFB42, 'R'). % Cn       <reserved-FB42>
-unicode_bidi_class(0xFB43, 0xFB44, 'R'). % Lo   [2] HEBREW LETTER FINAL PE WITH DAGESH..HEBREW LETTER PE WITH DAGESH
-unicode_bidi_class(0xFB45, 0xFB45, 'R'). % Cn       <reserved-FB45>
-unicode_bidi_class(0xFB46, 0xFB4F, 'R'). % Lo  [10] HEBREW LETTER TSADI WITH DAGESH..HEBREW LIGATURE ALEF LAMED
-unicode_bidi_class(0x10800, 0x10805, 'R'). % Lo   [6] CYPRIOT SYLLABLE A..CYPRIOT SYLLABLE JA
-unicode_bidi_class(0x10806, 0x10807, 'R'). % Cn   [2] <reserved-10806>..<reserved-10807>
-unicode_bidi_class(0x10808, 0x10808, 'R'). % Lo       CYPRIOT SYLLABLE JO
-unicode_bidi_class(0x10809, 0x10809, 'R'). % Cn       <reserved-10809>
-unicode_bidi_class(0x1080A, 0x10835, 'R'). % Lo  [44] CYPRIOT SYLLABLE KA..CYPRIOT SYLLABLE WO
-unicode_bidi_class(0x10836, 0x10836, 'R'). % Cn       <reserved-10836>
-unicode_bidi_class(0x10837, 0x10838, 'R'). % Lo   [2] CYPRIOT SYLLABLE XA..CYPRIOT SYLLABLE XE
-unicode_bidi_class(0x10839, 0x1083B, 'R'). % Cn   [3] <reserved-10839>..<reserved-1083B>
-unicode_bidi_class(0x1083C, 0x1083C, 'R'). % Lo       CYPRIOT SYLLABLE ZA
-unicode_bidi_class(0x1083D, 0x1083E, 'R'). % Cn   [2] <reserved-1083D>..<reserved-1083E>
-unicode_bidi_class(0x1083F, 0x10855, 'R'). % Lo  [23] CYPRIOT SYLLABLE ZO..IMPERIAL ARAMAIC LETTER TAW
-unicode_bidi_class(0x10856, 0x10856, 'R'). % Cn       <reserved-10856>
-unicode_bidi_class(0x10857, 0x10857, 'R'). % Po       IMPERIAL ARAMAIC SECTION SIGN
-unicode_bidi_class(0x10858, 0x1085F, 'R'). % No   [8] IMPERIAL ARAMAIC NUMBER ONE..IMPERIAL ARAMAIC NUMBER TEN THOUSAND
-unicode_bidi_class(0x10860, 0x108FF, 'R'). % Cn [160] <reserved-10860>..<reserved-108FF>
-unicode_bidi_class(0x10900, 0x10915, 'R'). % Lo  [22] PHOENICIAN LETTER ALF..PHOENICIAN LETTER TAU
-unicode_bidi_class(0x10916, 0x1091B, 'R'). % No   [6] PHOENICIAN NUMBER ONE..PHOENICIAN NUMBER THREE
-unicode_bidi_class(0x1091C, 0x1091E, 'R'). % Cn   [3] <reserved-1091C>..<reserved-1091E>
-unicode_bidi_class(0x10920, 0x10939, 'R'). % Lo  [26] LYDIAN LETTER A..LYDIAN LETTER C
-unicode_bidi_class(0x1093A, 0x1093E, 'R'). % Cn   [5] <reserved-1093A>..<reserved-1093E>
-unicode_bidi_class(0x1093F, 0x1093F, 'R'). % Po       LYDIAN TRIANGULAR MARK
-unicode_bidi_class(0x10940, 0x1097F, 'R'). % Cn  [64] <reserved-10940>..<reserved-1097F>
-unicode_bidi_class(0x10980, 0x109B7, 'R'). % Lo  [56] MEROITIC HIEROGLYPHIC LETTER A..MEROITIC CURSIVE LETTER DA
-unicode_bidi_class(0x109B8, 0x109BD, 'R'). % Cn   [6] <reserved-109B8>..<reserved-109BD>
-unicode_bidi_class(0x109BE, 0x109BF, 'R'). % Lo   [2] MEROITIC CURSIVE LOGOGRAM RMT..MEROITIC CURSIVE LOGOGRAM IMN
-unicode_bidi_class(0x109C0, 0x109FF, 'R'). % Cn  [64] <reserved-109C0>..<reserved-109FF>
-unicode_bidi_class(0x10A00, 0x10A00, 'R'). % Lo       KHAROSHTHI LETTER A
-unicode_bidi_class(0x10A04, 0x10A04, 'R'). % Cn       <reserved-10A04>
-unicode_bidi_class(0x10A07, 0x10A0B, 'R'). % Cn   [5] <reserved-10A07>..<reserved-10A0B>
-unicode_bidi_class(0x10A10, 0x10A13, 'R'). % Lo   [4] KHAROSHTHI LETTER KA..KHAROSHTHI LETTER GHA
-unicode_bidi_class(0x10A14, 0x10A14, 'R'). % Cn       <reserved-10A14>
-unicode_bidi_class(0x10A15, 0x10A17, 'R'). % Lo   [3] KHAROSHTHI LETTER CA..KHAROSHTHI LETTER JA
-unicode_bidi_class(0x10A18, 0x10A18, 'R'). % Cn       <reserved-10A18>
-unicode_bidi_class(0x10A19, 0x10A33, 'R'). % Lo  [27] KHAROSHTHI LETTER NYA..KHAROSHTHI LETTER TTTHA
-unicode_bidi_class(0x10A34, 0x10A37, 'R'). % Cn   [4] <reserved-10A34>..<reserved-10A37>
-unicode_bidi_class(0x10A3B, 0x10A3E, 'R'). % Cn   [4] <reserved-10A3B>..<reserved-10A3E>
-unicode_bidi_class(0x10A40, 0x10A47, 'R'). % No   [8] KHAROSHTHI DIGIT ONE..KHAROSHTHI NUMBER ONE THOUSAND
-unicode_bidi_class(0x10A48, 0x10A4F, 'R'). % Cn   [8] <reserved-10A48>..<reserved-10A4F>
-unicode_bidi_class(0x10A50, 0x10A58, 'R'). % Po   [9] KHAROSHTHI PUNCTUATION DOT..KHAROSHTHI PUNCTUATION LINES
-unicode_bidi_class(0x10A59, 0x10A5F, 'R'). % Cn   [7] <reserved-10A59>..<reserved-10A5F>
-unicode_bidi_class(0x10A60, 0x10A7C, 'R'). % Lo  [29] OLD SOUTH ARABIAN LETTER HE..OLD SOUTH ARABIAN LETTER THETH
-unicode_bidi_class(0x10A7D, 0x10A7E, 'R'). % No   [2] OLD SOUTH ARABIAN NUMBER ONE..OLD SOUTH ARABIAN NUMBER FIFTY
-unicode_bidi_class(0x10A7F, 0x10A7F, 'R'). % Po       OLD SOUTH ARABIAN NUMERIC INDICATOR
-unicode_bidi_class(0x10A80, 0x10AFF, 'R'). % Cn [128] <reserved-10A80>..<reserved-10AFF>
-unicode_bidi_class(0x10B00, 0x10B35, 'R'). % Lo  [54] AVESTAN LETTER A..AVESTAN LETTER HE
-unicode_bidi_class(0x10B36, 0x10B38, 'R'). % Cn   [3] <reserved-10B36>..<reserved-10B38>
-unicode_bidi_class(0x10B40, 0x10B55, 'R'). % Lo  [22] INSCRIPTIONAL PARTHIAN LETTER ALEPH..INSCRIPTIONAL PARTHIAN LETTER TAW
-unicode_bidi_class(0x10B56, 0x10B57, 'R'). % Cn   [2] <reserved-10B56>..<reserved-10B57>
-unicode_bidi_class(0x10B58, 0x10B5F, 'R'). % No   [8] INSCRIPTIONAL PARTHIAN NUMBER ONE..INSCRIPTIONAL PARTHIAN NUMBER ONE THOUSAND
-unicode_bidi_class(0x10B60, 0x10B72, 'R'). % Lo  [19] INSCRIPTIONAL PAHLAVI LETTER ALEPH..INSCRIPTIONAL PAHLAVI LETTER TAW
-unicode_bidi_class(0x10B73, 0x10B77, 'R'). % Cn   [5] <reserved-10B73>..<reserved-10B77>
-unicode_bidi_class(0x10B78, 0x10B7F, 'R'). % No   [8] INSCRIPTIONAL PAHLAVI NUMBER ONE..INSCRIPTIONAL PAHLAVI NUMBER ONE THOUSAND
-unicode_bidi_class(0x10B80, 0x10BFF, 'R'). % Cn [128] <reserved-10B80>..<reserved-10BFF>
-unicode_bidi_class(0x10C00, 0x10C48, 'R'). % Lo  [73] OLD TURKIC LETTER ORKHON A..OLD TURKIC LETTER ORKHON BASH
-unicode_bidi_class(0x10C49, 0x10E5F, 'R'). % Cn [535] <reserved-10C49>..<reserved-10E5F>
-unicode_bidi_class(0x10E7F, 0x10FFF, 'R'). % Cn [385] <reserved-10E7F>..<reserved-10FFF>
-unicode_bidi_class(0x1E800, 0x1EDFF, 'R'). % Cn [1536] <reserved-1E800>..<reserved-1EDFF>
-unicode_bidi_class(0x1EF00, 0x1EFFF, 'R'). % Cn [256] <reserved-1EF00>..<reserved-1EFFF>
-
-% Total code points: 4086
-
-% ================================================
-
-% Bidi_Class=European_Number
-
-unicode_bidi_class(0x0030, 0x0039, 'EN'). % Nd  [10] DIGIT ZERO..DIGIT NINE
-unicode_bidi_class(0x00B2, 0x00B3, 'EN'). % No   [2] SUPERSCRIPT TWO..SUPERSCRIPT THREE
-unicode_bidi_class(0x00B9, 0x00B9, 'EN'). % No       SUPERSCRIPT ONE
-unicode_bidi_class(0x06F0, 0x06F9, 'EN'). % Nd  [10] EXTENDED ARABIC-INDIC DIGIT ZERO..EXTENDED ARABIC-INDIC DIGIT NINE
-unicode_bidi_class(0x2070, 0x2070, 'EN'). % No       SUPERSCRIPT ZERO
-unicode_bidi_class(0x2074, 0x2079, 'EN'). % No   [6] SUPERSCRIPT FOUR..SUPERSCRIPT NINE
-unicode_bidi_class(0x2080, 0x2089, 'EN'). % No  [10] SUBSCRIPT ZERO..SUBSCRIPT NINE
-unicode_bidi_class(0x2488, 0x249B, 'EN'). % No  [20] DIGIT ONE FULL STOP..NUMBER TWENTY FULL STOP
-unicode_bidi_class(0xFF10, 0xFF19, 'EN'). % Nd  [10] FULLWIDTH DIGIT ZERO..FULLWIDTH DIGIT NINE
-unicode_bidi_class(0x1D7CE, 0x1D7FF, 'EN'). % Nd  [50] MATHEMATICAL BOLD DIGIT ZERO..MATHEMATICAL MONOSPACE DIGIT NINE
-unicode_bidi_class(0x1F100, 0x1F10A, 'EN'). % No  [11] DIGIT ZERO FULL STOP..DIGIT NINE COMMA
-
-% Total code points: 131
-
-% ================================================
-
-% Bidi_Class=European_Separator
-
-unicode_bidi_class(0x002B, 0x002B, 'ES'). % Sm       PLUS SIGN
-unicode_bidi_class(0x002D, 0x002D, 'ES'). % Pd       HYPHEN-MINUS
-unicode_bidi_class(0x207A, 0x207B, 'ES'). % Sm   [2] SUPERSCRIPT PLUS SIGN..SUPERSCRIPT MINUS
-unicode_bidi_class(0x208A, 0x208B, 'ES'). % Sm   [2] SUBSCRIPT PLUS SIGN..SUBSCRIPT MINUS
-unicode_bidi_class(0x2212, 0x2212, 'ES'). % Sm       MINUS SIGN
-unicode_bidi_class(0xFB29, 0xFB29, 'ES'). % Sm       HEBREW LETTER ALTERNATIVE PLUS SIGN
-unicode_bidi_class(0xFE62, 0xFE62, 'ES'). % Sm       SMALL PLUS SIGN
-unicode_bidi_class(0xFE63, 0xFE63, 'ES'). % Pd       SMALL HYPHEN-MINUS
-unicode_bidi_class(0xFF0B, 0xFF0B, 'ES'). % Sm       FULLWIDTH PLUS SIGN
-unicode_bidi_class(0xFF0D, 0xFF0D, 'ES'). % Pd       FULLWIDTH HYPHEN-MINUS
-
-% Total code points: 12
-
-% ================================================
-
-% Bidi_Class=European_Terminator
-
-unicode_bidi_class(0x0023, 0x0023, 'ET'). % Po       NUMBER SIGN
-unicode_bidi_class(0x0024, 0x0024, 'ET'). % Sc       DOLLAR SIGN
-unicode_bidi_class(0x0025, 0x0025, 'ET'). % Po       PERCENT SIGN
-unicode_bidi_class(0x00A2, 0x00A5, 'ET'). % Sc   [4] CENT SIGN..YEN SIGN
-unicode_bidi_class(0x00B0, 0x00B0, 'ET'). % So       DEGREE SIGN
-unicode_bidi_class(0x00B1, 0x00B1, 'ET'). % Sm       PLUS-MINUS SIGN
-unicode_bidi_class(0x058F, 0x058F, 'ET'). % Sc       ARMENIAN DRAM SIGN
-unicode_bidi_class(0x0609, 0x060A, 'ET'). % Po   [2] ARABIC-INDIC PER MILLE SIGN..ARABIC-INDIC PER TEN THOUSAND SIGN
-unicode_bidi_class(0x066A, 0x066A, 'ET'). % Po       ARABIC PERCENT SIGN
-unicode_bidi_class(0x09F2, 0x09F3, 'ET'). % Sc   [2] BENGALI RUPEE MARK..BENGALI RUPEE SIGN
-unicode_bidi_class(0x09FB, 0x09FB, 'ET'). % Sc       BENGALI GANDA MARK
-unicode_bidi_class(0x0AF1, 0x0AF1, 'ET'). % Sc       GUJARATI RUPEE SIGN
-unicode_bidi_class(0x0BF9, 0x0BF9, 'ET'). % Sc       TAMIL RUPEE SIGN
-unicode_bidi_class(0x0E3F, 0x0E3F, 'ET'). % Sc       THAI CURRENCY SYMBOL BAHT
-unicode_bidi_class(0x17DB, 0x17DB, 'ET'). % Sc       KHMER CURRENCY SYMBOL RIEL
-unicode_bidi_class(0x2030, 0x2034, 'ET'). % Po   [5] PER MILLE SIGN..TRIPLE PRIME
-unicode_bidi_class(0x20A0, 0x20BA, 'ET'). % Sc  [27] EURO-CURRENCY SIGN..TURKISH LIRA SIGN
-unicode_bidi_class(0x212E, 0x212E, 'ET'). % So       ESTIMATED SYMBOL
-unicode_bidi_class(0x2213, 0x2213, 'ET'). % Sm       MINUS-OR-PLUS SIGN
-unicode_bidi_class(0xA838, 0xA838, 'ET'). % Sc       NORTH INDIC RUPEE MARK
-unicode_bidi_class(0xA839, 0xA839, 'ET'). % So       NORTH INDIC QUANTITY MARK
-unicode_bidi_class(0xFE5F, 0xFE5F, 'ET'). % Po       SMALL NUMBER SIGN
-unicode_bidi_class(0xFE69, 0xFE69, 'ET'). % Sc       SMALL DOLLAR SIGN
-unicode_bidi_class(0xFE6A, 0xFE6A, 'ET'). % Po       SMALL PERCENT SIGN
-unicode_bidi_class(0xFF03, 0xFF03, 'ET'). % Po       FULLWIDTH NUMBER SIGN
-unicode_bidi_class(0xFF04, 0xFF04, 'ET'). % Sc       FULLWIDTH DOLLAR SIGN
-unicode_bidi_class(0xFF05, 0xFF05, 'ET'). % Po       FULLWIDTH PERCENT SIGN
-unicode_bidi_class(0xFFE0, 0xFFE1, 'ET'). % Sc   [2] FULLWIDTH CENT SIGN..FULLWIDTH POUND SIGN
-unicode_bidi_class(0xFFE5, 0xFFE6, 'ET'). % Sc   [2] FULLWIDTH YEN SIGN..FULLWIDTH WON SIGN
-
-% Total code points: 66
-
-% ================================================
-
-% Bidi_Class=Arabic_Number
-
-unicode_bidi_class(0x0600, 0x0604, 'AN'). % Cf   [5] ARABIC NUMBER SIGN..ARABIC SIGN SAMVAT
-unicode_bidi_class(0x0660, 0x0669, 'AN'). % Nd  [10] ARABIC-INDIC DIGIT ZERO..ARABIC-INDIC DIGIT NINE
-unicode_bidi_class(0x066B, 0x066C, 'AN'). % Po   [2] ARABIC DECIMAL SEPARATOR..ARABIC THOUSANDS SEPARATOR
-unicode_bidi_class(0x06DD, 0x06DD, 'AN'). % Cf       ARABIC END OF AYAH
-unicode_bidi_class(0x10E60, 0x10E7E, 'AN'). % No  [31] RUMI DIGIT ONE..RUMI FRACTION TWO THIRDS
-
-% Total code points: 49
-
-% ================================================
-
-% Bidi_Class=Common_Separator
-
-unicode_bidi_class(0x002C, 0x002C, 'CS'). % Po       COMMA
-unicode_bidi_class(0x002E, 0x002F, 'CS'). % Po   [2] FULL STOP..SOLIDUS
-unicode_bidi_class(0x003A, 0x003A, 'CS'). % Po       COLON
-unicode_bidi_class(0x00A0, 0x00A0, 'CS'). % Zs       NO-BREAK SPACE
-unicode_bidi_class(0x060C, 0x060C, 'CS'). % Po       ARABIC COMMA
-unicode_bidi_class(0x202F, 0x202F, 'CS'). % Zs       NARROW NO-BREAK SPACE
-unicode_bidi_class(0x2044, 0x2044, 'CS'). % Sm       FRACTION SLASH
-unicode_bidi_class(0xFE50, 0xFE50, 'CS'). % Po       SMALL COMMA
-unicode_bidi_class(0xFE52, 0xFE52, 'CS'). % Po       SMALL FULL STOP
-unicode_bidi_class(0xFE55, 0xFE55, 'CS'). % Po       SMALL COLON
-unicode_bidi_class(0xFF0C, 0xFF0C, 'CS'). % Po       FULLWIDTH COMMA
-unicode_bidi_class(0xFF0E, 0xFF0F, 'CS'). % Po   [2] FULLWIDTH FULL STOP..FULLWIDTH SOLIDUS
-unicode_bidi_class(0xFF1A, 0xFF1A, 'CS'). % Po       FULLWIDTH COLON
-
-% Total code points: 15
-
-% ================================================
-
-% Bidi_Class=Paragraph_Separator
-
-unicode_bidi_class(0x000A, 0x000A, 'B'). % Cc       <control-000A>
-unicode_bidi_class(0x000D, 0x000D, 'B'). % Cc       <control-000D>
-unicode_bidi_class(0x001C, 0x001E, 'B'). % Cc   [3] <control-001C>..<control-001E>
-unicode_bidi_class(0x0085, 0x0085, 'B'). % Cc       <control-0085>
-unicode_bidi_class(0x2029, 0x2029, 'B'). % Zp       PARAGRAPH SEPARATOR
-
-% Total code points: 7
-
-% ================================================
-
-% Bidi_Class=Segment_Separator
-
-unicode_bidi_class(0x0009, 0x0009, 'S'). % Cc       <control-0009>
-unicode_bidi_class(0x000B, 0x000B, 'S'). % Cc       <control-000B>
-unicode_bidi_class(0x001F, 0x001F, 'S'). % Cc       <control-001F>
-
-% Total code points: 3
-
-% ================================================
-
-% Bidi_Class=White_Space
-
-unicode_bidi_class(0x000C, 0x000C, 'WS'). % Cc       <control-000C>
-unicode_bidi_class(0x0020, 0x0020, 'WS'). % Zs       SPACE
-unicode_bidi_class(0x1680, 0x1680, 'WS'). % Zs       OGHAM SPACE MARK
-unicode_bidi_class(0x180E, 0x180E, 'WS'). % Zs       MONGOLIAN VOWEL SEPARATOR
-unicode_bidi_class(0x2000, 0x200A, 'WS'). % Zs  [11] EN QUAD..HAIR SPACE
-unicode_bidi_class(0x2028, 0x2028, 'WS'). % Zl       LINE SEPARATOR
-unicode_bidi_class(0x205F, 0x205F, 'WS'). % Zs       MEDIUM MATHEMATICAL SPACE
-unicode_bidi_class(0x3000, 0x3000, 'WS'). % Zs       IDEOGRAPHIC SPACE
-
-% Total code points: 18
-
-% ================================================
-
-% Bidi_Class=Other_Neutral
-
-unicode_bidi_class(0x0021, 0x0022, 'ON'). % Po   [2] EXCLAMATION MARK..QUOTATION MARK
-unicode_bidi_class(0x0026, 0x0027, 'ON'). % Po   [2] AMPERSAND..APOSTROPHE
-unicode_bidi_class(0x0028, 0x0028, 'ON'). % Ps       LEFT PARENTHESIS
-unicode_bidi_class(0x0029, 0x0029, 'ON'). % Pe       RIGHT PARENTHESIS
-unicode_bidi_class(0x002A, 0x002A, 'ON'). % Po       ASTERISK
-unicode_bidi_class(0x003B, 0x003B, 'ON'). % Po       SEMICOLON
-unicode_bidi_class(0x003C, 0x003E, 'ON'). % Sm   [3] LESS-THAN SIGN..GREATER-THAN SIGN
-unicode_bidi_class(0x003F, 0x0040, 'ON'). % Po   [2] QUESTION MARK..COMMERCIAL AT
-unicode_bidi_class(0x005B, 0x005B, 'ON'). % Ps       LEFT SQUARE BRACKET
-unicode_bidi_class(0x005C, 0x005C, 'ON'). % Po       REVERSE SOLIDUS
-unicode_bidi_class(0x005D, 0x005D, 'ON'). % Pe       RIGHT SQUARE BRACKET
-unicode_bidi_class(0x005E, 0x005E, 'ON'). % Sk       CIRCUMFLEX ACCENT
-unicode_bidi_class(0x005F, 0x005F, 'ON'). % Pc       LOW LINE
-unicode_bidi_class(0x0060, 0x0060, 'ON'). % Sk       GRAVE ACCENT
-unicode_bidi_class(0x007B, 0x007B, 'ON'). % Ps       LEFT CURLY BRACKET
-unicode_bidi_class(0x007C, 0x007C, 'ON'). % Sm       VERTICAL LINE
-unicode_bidi_class(0x007D, 0x007D, 'ON'). % Pe       RIGHT CURLY BRACKET
-unicode_bidi_class(0x007E, 0x007E, 'ON'). % Sm       TILDE
-unicode_bidi_class(0x00A1, 0x00A1, 'ON'). % Po       INVERTED EXCLAMATION MARK
-unicode_bidi_class(0x00A6, 0x00A6, 'ON'). % So       BROKEN BAR
-unicode_bidi_class(0x00A7, 0x00A7, 'ON'). % Po       SECTION SIGN
-unicode_bidi_class(0x00A8, 0x00A8, 'ON'). % Sk       DIAERESIS
-unicode_bidi_class(0x00A9, 0x00A9, 'ON'). % So       COPYRIGHT SIGN
-unicode_bidi_class(0x00AB, 0x00AB, 'ON'). % Pi       LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
-unicode_bidi_class(0x00AC, 0x00AC, 'ON'). % Sm       NOT SIGN
-unicode_bidi_class(0x00AE, 0x00AE, 'ON'). % So       REGISTERED SIGN
-unicode_bidi_class(0x00AF, 0x00AF, 'ON'). % Sk       MACRON
-unicode_bidi_class(0x00B4, 0x00B4, 'ON'). % Sk       ACUTE ACCENT
-unicode_bidi_class(0x00B6, 0x00B7, 'ON'). % Po   [2] PILCROW SIGN..MIDDLE DOT
-unicode_bidi_class(0x00B8, 0x00B8, 'ON'). % Sk       CEDILLA
-unicode_bidi_class(0x00BB, 0x00BB, 'ON'). % Pf       RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
-unicode_bidi_class(0x00BC, 0x00BE, 'ON'). % No   [3] VULGAR FRACTION ONE QUARTER..VULGAR FRACTION THREE QUARTERS
-unicode_bidi_class(0x00BF, 0x00BF, 'ON'). % Po       INVERTED QUESTION MARK
-unicode_bidi_class(0x00D7, 0x00D7, 'ON'). % Sm       MULTIPLICATION SIGN
-unicode_bidi_class(0x00F7, 0x00F7, 'ON'). % Sm       DIVISION SIGN
-unicode_bidi_class(0x02B9, 0x02BA, 'ON'). % Lm   [2] MODIFIER LETTER PRIME..MODIFIER LETTER DOUBLE PRIME
-unicode_bidi_class(0x02C2, 0x02C5, 'ON'). % Sk   [4] MODIFIER LETTER LEFT ARROWHEAD..MODIFIER LETTER DOWN ARROWHEAD
-unicode_bidi_class(0x02C6, 0x02CF, 'ON'). % Lm  [10] MODIFIER LETTER CIRCUMFLEX ACCENT..MODIFIER LETTER LOW ACUTE ACCENT
-unicode_bidi_class(0x02D2, 0x02DF, 'ON'). % Sk  [14] MODIFIER LETTER CENTRED RIGHT HALF RING..MODIFIER LETTER CROSS ACCENT
-unicode_bidi_class(0x02E5, 0x02EB, 'ON'). % Sk   [7] MODIFIER LETTER EXTRA-HIGH TONE BAR..MODIFIER LETTER YANG DEPARTING TONE MARK
-unicode_bidi_class(0x02EC, 0x02EC, 'ON'). % Lm       MODIFIER LETTER VOICING
-unicode_bidi_class(0x02ED, 0x02ED, 'ON'). % Sk       MODIFIER LETTER UNASPIRATED
-unicode_bidi_class(0x02EF, 0x02FF, 'ON'). % Sk  [17] MODIFIER LETTER LOW DOWN ARROWHEAD..MODIFIER LETTER LOW LEFT ARROW
-unicode_bidi_class(0x0374, 0x0374, 'ON'). % Lm       GREEK NUMERAL SIGN
-unicode_bidi_class(0x0375, 0x0375, 'ON'). % Sk       GREEK LOWER NUMERAL SIGN
-unicode_bidi_class(0x037E, 0x037E, 'ON'). % Po       GREEK QUESTION MARK
-unicode_bidi_class(0x0384, 0x0385, 'ON'). % Sk   [2] GREEK TONOS..GREEK DIALYTIKA TONOS
-unicode_bidi_class(0x0387, 0x0387, 'ON'). % Po       GREEK ANO TELEIA
-unicode_bidi_class(0x03F6, 0x03F6, 'ON'). % Sm       GREEK REVERSED LUNATE EPSILON SYMBOL
-unicode_bidi_class(0x058A, 0x058A, 'ON'). % Pd       ARMENIAN HYPHEN
-unicode_bidi_class(0x0606, 0x0607, 'ON'). % Sm   [2] ARABIC-INDIC CUBE ROOT..ARABIC-INDIC FOURTH ROOT
-unicode_bidi_class(0x060E, 0x060F, 'ON'). % So   [2] ARABIC POETIC VERSE SIGN..ARABIC SIGN MISRA
-unicode_bidi_class(0x06DE, 0x06DE, 'ON'). % So       ARABIC START OF RUB EL HIZB
-unicode_bidi_class(0x06E9, 0x06E9, 'ON'). % So       ARABIC PLACE OF SAJDAH
-unicode_bidi_class(0x07F6, 0x07F6, 'ON'). % So       NKO SYMBOL OO DENNEN
-unicode_bidi_class(0x07F7, 0x07F9, 'ON'). % Po   [3] NKO SYMBOL GBAKURUNEN..NKO EXCLAMATION MARK
-unicode_bidi_class(0x0BF3, 0x0BF8, 'ON'). % So   [6] TAMIL DAY SIGN..TAMIL AS ABOVE SIGN
-unicode_bidi_class(0x0BFA, 0x0BFA, 'ON'). % So       TAMIL NUMBER SIGN
-unicode_bidi_class(0x0C78, 0x0C7E, 'ON'). % No   [7] TELUGU FRACTION DIGIT ZERO FOR ODD POWERS OF FOUR..TELUGU FRACTION DIGIT THREE FOR EVEN POWERS OF FOUR
-unicode_bidi_class(0x0F3A, 0x0F3A, 'ON'). % Ps       TIBETAN MARK GUG RTAGS GYON
-unicode_bidi_class(0x0F3B, 0x0F3B, 'ON'). % Pe       TIBETAN MARK GUG RTAGS GYAS
-unicode_bidi_class(0x0F3C, 0x0F3C, 'ON'). % Ps       TIBETAN MARK ANG KHANG GYON
-unicode_bidi_class(0x0F3D, 0x0F3D, 'ON'). % Pe       TIBETAN MARK ANG KHANG GYAS
-unicode_bidi_class(0x1390, 0x1399, 'ON'). % So  [10] ETHIOPIC TONAL MARK YIZET..ETHIOPIC TONAL MARK KURT
-unicode_bidi_class(0x1400, 0x1400, 'ON'). % Pd       CANADIAN SYLLABICS HYPHEN
-unicode_bidi_class(0x169B, 0x169B, 'ON'). % Ps       OGHAM FEATHER MARK
-unicode_bidi_class(0x169C, 0x169C, 'ON'). % Pe       OGHAM REVERSED FEATHER MARK
-unicode_bidi_class(0x17F0, 0x17F9, 'ON'). % No  [10] KHMER SYMBOL LEK ATTAK SON..KHMER SYMBOL LEK ATTAK PRAM-BUON
-unicode_bidi_class(0x1800, 0x1805, 'ON'). % Po   [6] MONGOLIAN BIRGA..MONGOLIAN FOUR DOTS
-unicode_bidi_class(0x1806, 0x1806, 'ON'). % Pd       MONGOLIAN TODO SOFT HYPHEN
-unicode_bidi_class(0x1807, 0x180A, 'ON'). % Po   [4] MONGOLIAN SIBE SYLLABLE BOUNDARY MARKER..MONGOLIAN NIRUGU
-unicode_bidi_class(0x1940, 0x1940, 'ON'). % So       LIMBU SIGN LOO
-unicode_bidi_class(0x1944, 0x1945, 'ON'). % Po   [2] LIMBU EXCLAMATION MARK..LIMBU QUESTION MARK
-unicode_bidi_class(0x19DE, 0x19FF, 'ON'). % So  [34] NEW TAI LUE SIGN LAE..KHMER SYMBOL DAP-PRAM ROC
-unicode_bidi_class(0x1FBD, 0x1FBD, 'ON'). % Sk       GREEK KORONIS
-unicode_bidi_class(0x1FBF, 0x1FC1, 'ON'). % Sk   [3] GREEK PSILI..GREEK DIALYTIKA AND PERISPOMENI
-unicode_bidi_class(0x1FCD, 0x1FCF, 'ON'). % Sk   [3] GREEK PSILI AND VARIA..GREEK PSILI AND PERISPOMENI
-unicode_bidi_class(0x1FDD, 0x1FDF, 'ON'). % Sk   [3] GREEK DASIA AND VARIA..GREEK DASIA AND PERISPOMENI
-unicode_bidi_class(0x1FED, 0x1FEF, 'ON'). % Sk   [3] GREEK DIALYTIKA AND VARIA..GREEK VARIA
-unicode_bidi_class(0x1FFD, 0x1FFE, 'ON'). % Sk   [2] GREEK OXIA..GREEK DASIA
-unicode_bidi_class(0x2010, 0x2015, 'ON'). % Pd   [6] HYPHEN..HORIZONTAL BAR
-unicode_bidi_class(0x2016, 0x2017, 'ON'). % Po   [2] DOUBLE VERTICAL LINE..DOUBLE LOW LINE
-unicode_bidi_class(0x2018, 0x2018, 'ON'). % Pi       LEFT SINGLE QUOTATION MARK
-unicode_bidi_class(0x2019, 0x2019, 'ON'). % Pf       RIGHT SINGLE QUOTATION MARK
-unicode_bidi_class(0x201A, 0x201A, 'ON'). % Ps       SINGLE LOW-9 QUOTATION MARK
-unicode_bidi_class(0x201B, 0x201C, 'ON'). % Pi   [2] SINGLE HIGH-REVERSED-9 QUOTATION MARK..LEFT DOUBLE QUOTATION MARK
-unicode_bidi_class(0x201D, 0x201D, 'ON'). % Pf       RIGHT DOUBLE QUOTATION MARK
-unicode_bidi_class(0x201E, 0x201E, 'ON'). % Ps       DOUBLE LOW-9 QUOTATION MARK
-unicode_bidi_class(0x201F, 0x201F, 'ON'). % Pi       DOUBLE HIGH-REVERSED-9 QUOTATION MARK
-unicode_bidi_class(0x2020, 0x2027, 'ON'). % Po   [8] DAGGER..HYPHENATION POINT
-unicode_bidi_class(0x2035, 0x2038, 'ON'). % Po   [4] REVERSED PRIME..CARET
-unicode_bidi_class(0x2039, 0x2039, 'ON'). % Pi       SINGLE LEFT-POINTING ANGLE QUOTATION MARK
-unicode_bidi_class(0x203A, 0x203A, 'ON'). % Pf       SINGLE RIGHT-POINTING ANGLE QUOTATION MARK
-unicode_bidi_class(0x203B, 0x203E, 'ON'). % Po   [4] REFERENCE MARK..OVERLINE
-unicode_bidi_class(0x203F, 0x2040, 'ON'). % Pc   [2] UNDERTIE..CHARACTER TIE
-unicode_bidi_class(0x2041, 0x2043, 'ON'). % Po   [3] CARET INSERTION POINT..HYPHEN BULLET
-unicode_bidi_class(0x2045, 0x2045, 'ON'). % Ps       LEFT SQUARE BRACKET WITH QUILL
-unicode_bidi_class(0x2046, 0x2046, 'ON'). % Pe       RIGHT SQUARE BRACKET WITH QUILL
-unicode_bidi_class(0x2047, 0x2051, 'ON'). % Po  [11] DOUBLE QUESTION MARK..TWO ASTERISKS ALIGNED VERTICALLY
-unicode_bidi_class(0x2052, 0x2052, 'ON'). % Sm       COMMERCIAL MINUS SIGN
-unicode_bidi_class(0x2053, 0x2053, 'ON'). % Po       SWUNG DASH
-unicode_bidi_class(0x2054, 0x2054, 'ON'). % Pc       INVERTED UNDERTIE
-unicode_bidi_class(0x2055, 0x205E, 'ON'). % Po  [10] FLOWER PUNCTUATION MARK..VERTICAL FOUR DOTS
-unicode_bidi_class(0x207C, 0x207C, 'ON'). % Sm       SUPERSCRIPT EQUALS SIGN
-unicode_bidi_class(0x207D, 0x207D, 'ON'). % Ps       SUPERSCRIPT LEFT PARENTHESIS
-unicode_bidi_class(0x207E, 0x207E, 'ON'). % Pe       SUPERSCRIPT RIGHT PARENTHESIS
-unicode_bidi_class(0x208C, 0x208C, 'ON'). % Sm       SUBSCRIPT EQUALS SIGN
-unicode_bidi_class(0x208D, 0x208D, 'ON'). % Ps       SUBSCRIPT LEFT PARENTHESIS
-unicode_bidi_class(0x208E, 0x208E, 'ON'). % Pe       SUBSCRIPT RIGHT PARENTHESIS
-unicode_bidi_class(0x2100, 0x2101, 'ON'). % So   [2] ACCOUNT OF..ADDRESSED TO THE SUBJECT
-unicode_bidi_class(0x2103, 0x2106, 'ON'). % So   [4] DEGREE CELSIUS..CADA UNA
-unicode_bidi_class(0x2108, 0x2109, 'ON'). % So   [2] SCRUPLE..DEGREE FAHRENHEIT
-unicode_bidi_class(0x2114, 0x2114, 'ON'). % So       L B BAR SYMBOL
-unicode_bidi_class(0x2116, 0x2117, 'ON'). % So   [2] NUMERO SIGN..SOUND RECORDING COPYRIGHT
-unicode_bidi_class(0x2118, 0x2118, 'ON'). % Sm       SCRIPT CAPITAL P
-unicode_bidi_class(0x211E, 0x2123, 'ON'). % So   [6] PRESCRIPTION TAKE..VERSICLE
-unicode_bidi_class(0x2125, 0x2125, 'ON'). % So       OUNCE SIGN
-unicode_bidi_class(0x2127, 0x2127, 'ON'). % So       INVERTED OHM SIGN
-unicode_bidi_class(0x2129, 0x2129, 'ON'). % So       TURNED GREEK SMALL LETTER IOTA
-unicode_bidi_class(0x213A, 0x213B, 'ON'). % So   [2] ROTATED CAPITAL Q..FACSIMILE SIGN
-unicode_bidi_class(0x2140, 0x2144, 'ON'). % Sm   [5] DOUBLE-STRUCK N-ARY SUMMATION..TURNED SANS-SERIF CAPITAL Y
-unicode_bidi_class(0x214A, 0x214A, 'ON'). % So       PROPERTY LINE
-unicode_bidi_class(0x214B, 0x214B, 'ON'). % Sm       TURNED AMPERSAND
-unicode_bidi_class(0x214C, 0x214D, 'ON'). % So   [2] PER SIGN..AKTIESELSKAB
-unicode_bidi_class(0x2150, 0x215F, 'ON'). % No  [16] VULGAR FRACTION ONE SEVENTH..FRACTION NUMERATOR ONE
-unicode_bidi_class(0x2189, 0x2189, 'ON'). % No       VULGAR FRACTION ZERO THIRDS
-unicode_bidi_class(0x2190, 0x2194, 'ON'). % Sm   [5] LEFTWARDS ARROW..LEFT RIGHT ARROW
-unicode_bidi_class(0x2195, 0x2199, 'ON'). % So   [5] UP DOWN ARROW..SOUTH WEST ARROW
-unicode_bidi_class(0x219A, 0x219B, 'ON'). % Sm   [2] LEFTWARDS ARROW WITH STROKE..RIGHTWARDS ARROW WITH STROKE
-unicode_bidi_class(0x219C, 0x219F, 'ON'). % So   [4] LEFTWARDS WAVE ARROW..UPWARDS TWO HEADED ARROW
-unicode_bidi_class(0x21A0, 0x21A0, 'ON'). % Sm       RIGHTWARDS TWO HEADED ARROW
-unicode_bidi_class(0x21A1, 0x21A2, 'ON'). % So   [2] DOWNWARDS TWO HEADED ARROW..LEFTWARDS ARROW WITH TAIL
-unicode_bidi_class(0x21A3, 0x21A3, 'ON'). % Sm       RIGHTWARDS ARROW WITH TAIL
-unicode_bidi_class(0x21A4, 0x21A5, 'ON'). % So   [2] LEFTWARDS ARROW FROM BAR..UPWARDS ARROW FROM BAR
-unicode_bidi_class(0x21A6, 0x21A6, 'ON'). % Sm       RIGHTWARDS ARROW FROM BAR
-unicode_bidi_class(0x21A7, 0x21AD, 'ON'). % So   [7] DOWNWARDS ARROW FROM BAR..LEFT RIGHT WAVE ARROW
-unicode_bidi_class(0x21AE, 0x21AE, 'ON'). % Sm       LEFT RIGHT ARROW WITH STROKE
-unicode_bidi_class(0x21AF, 0x21CD, 'ON'). % So  [31] DOWNWARDS ZIGZAG ARROW..LEFTWARDS DOUBLE ARROW WITH STROKE
-unicode_bidi_class(0x21CE, 0x21CF, 'ON'). % Sm   [2] LEFT RIGHT DOUBLE ARROW WITH STROKE..RIGHTWARDS DOUBLE ARROW WITH STROKE
-unicode_bidi_class(0x21D0, 0x21D1, 'ON'). % So   [2] LEFTWARDS DOUBLE ARROW..UPWARDS DOUBLE ARROW
-unicode_bidi_class(0x21D2, 0x21D2, 'ON'). % Sm       RIGHTWARDS DOUBLE ARROW
-unicode_bidi_class(0x21D3, 0x21D3, 'ON'). % So       DOWNWARDS DOUBLE ARROW
-unicode_bidi_class(0x21D4, 0x21D4, 'ON'). % Sm       LEFT RIGHT DOUBLE ARROW
-unicode_bidi_class(0x21D5, 0x21F3, 'ON'). % So  [31] UP DOWN DOUBLE ARROW..UP DOWN WHITE ARROW
-unicode_bidi_class(0x21F4, 0x2211, 'ON'). % Sm  [30] RIGHT ARROW WITH SMALL CIRCLE..N-ARY SUMMATION
-unicode_bidi_class(0x2214, 0x22FF, 'ON'). % Sm [236] DOT PLUS..Z NOTATION BAG MEMBERSHIP
-unicode_bidi_class(0x2300, 0x2307, 'ON'). % So   [8] DIAMETER SIGN..WAVY LINE
-unicode_bidi_class(0x2308, 0x230B, 'ON'). % Sm   [4] LEFT CEILING..RIGHT FLOOR
-unicode_bidi_class(0x230C, 0x231F, 'ON'). % So  [20] BOTTOM RIGHT CROP..BOTTOM RIGHT CORNER
-unicode_bidi_class(0x2320, 0x2321, 'ON'). % Sm   [2] TOP HALF INTEGRAL..BOTTOM HALF INTEGRAL
-unicode_bidi_class(0x2322, 0x2328, 'ON'). % So   [7] FROWN..KEYBOARD
-unicode_bidi_class(0x2329, 0x2329, 'ON'). % Ps       LEFT-POINTING ANGLE BRACKET
-unicode_bidi_class(0x232A, 0x232A, 'ON'). % Pe       RIGHT-POINTING ANGLE BRACKET
-unicode_bidi_class(0x232B, 0x2335, 'ON'). % So  [11] ERASE TO THE LEFT..COUNTERSINK
-unicode_bidi_class(0x237B, 0x237B, 'ON'). % So       NOT CHECK MARK
-unicode_bidi_class(0x237C, 0x237C, 'ON'). % Sm       RIGHT ANGLE WITH DOWNWARDS ZIGZAG ARROW
-unicode_bidi_class(0x237D, 0x2394, 'ON'). % So  [24] SHOULDERED OPEN BOX..SOFTWARE-FUNCTION SYMBOL
-unicode_bidi_class(0x2396, 0x239A, 'ON'). % So   [5] DECIMAL SEPARATOR KEY SYMBOL..CLEAR SCREEN SYMBOL
-unicode_bidi_class(0x239B, 0x23B3, 'ON'). % Sm  [25] LEFT PARENTHESIS UPPER HOOK..SUMMATION BOTTOM
-unicode_bidi_class(0x23B4, 0x23DB, 'ON'). % So  [40] TOP SQUARE BRACKET..FUSE
-unicode_bidi_class(0x23DC, 0x23E1, 'ON'). % Sm   [6] TOP PARENTHESIS..BOTTOM TORTOISE SHELL BRACKET
-unicode_bidi_class(0x23E2, 0x23F3, 'ON'). % So  [18] WHITE TRAPEZIUM..HOURGLASS WITH FLOWING SAND
-unicode_bidi_class(0x2400, 0x2426, 'ON'). % So  [39] SYMBOL FOR NULL..SYMBOL FOR SUBSTITUTE FORM TWO
-unicode_bidi_class(0x2440, 0x244A, 'ON'). % So  [11] OCR HOOK..OCR DOUBLE BACKSLASH
-unicode_bidi_class(0x2460, 0x2487, 'ON'). % No  [40] CIRCLED DIGIT ONE..PARENTHESIZED NUMBER TWENTY
-unicode_bidi_class(0x24EA, 0x24FF, 'ON'). % No  [22] CIRCLED DIGIT ZERO..NEGATIVE CIRCLED DIGIT ZERO
-unicode_bidi_class(0x2500, 0x25B6, 'ON'). % So [183] BOX DRAWINGS LIGHT HORIZONTAL..BLACK RIGHT-POINTING TRIANGLE
-unicode_bidi_class(0x25B7, 0x25B7, 'ON'). % Sm       WHITE RIGHT-POINTING TRIANGLE
-unicode_bidi_class(0x25B8, 0x25C0, 'ON'). % So   [9] BLACK RIGHT-POINTING SMALL TRIANGLE..BLACK LEFT-POINTING TRIANGLE
-unicode_bidi_class(0x25C1, 0x25C1, 'ON'). % Sm       WHITE LEFT-POINTING TRIANGLE
-unicode_bidi_class(0x25C2, 0x25F7, 'ON'). % So  [54] BLACK LEFT-POINTING SMALL TRIANGLE..WHITE CIRCLE WITH UPPER RIGHT QUADRANT
-unicode_bidi_class(0x25F8, 0x25FF, 'ON'). % Sm   [8] UPPER LEFT TRIANGLE..LOWER RIGHT TRIANGLE
-unicode_bidi_class(0x2600, 0x266E, 'ON'). % So [111] BLACK SUN WITH RAYS..MUSIC NATURAL SIGN
-unicode_bidi_class(0x266F, 0x266F, 'ON'). % Sm       MUSIC SHARP SIGN
-unicode_bidi_class(0x2670, 0x26AB, 'ON'). % So  [60] WEST SYRIAC CROSS..MEDIUM BLACK CIRCLE
-unicode_bidi_class(0x26AD, 0x26FF, 'ON'). % So  [83] MARRIAGE SYMBOL..WHITE FLAG WITH HORIZONTAL MIDDLE BLACK STRIPE
-unicode_bidi_class(0x2701, 0x2767, 'ON'). % So [103] UPPER BLADE SCISSORS..ROTATED FLORAL HEART BULLET
-unicode_bidi_class(0x2768, 0x2768, 'ON'). % Ps       MEDIUM LEFT PARENTHESIS ORNAMENT
-unicode_bidi_class(0x2769, 0x2769, 'ON'). % Pe       MEDIUM RIGHT PARENTHESIS ORNAMENT
-unicode_bidi_class(0x276A, 0x276A, 'ON'). % Ps       MEDIUM FLATTENED LEFT PARENTHESIS ORNAMENT
-unicode_bidi_class(0x276B, 0x276B, 'ON'). % Pe       MEDIUM FLATTENED RIGHT PARENTHESIS ORNAMENT
-unicode_bidi_class(0x276C, 0x276C, 'ON'). % Ps       MEDIUM LEFT-POINTING ANGLE BRACKET ORNAMENT
-unicode_bidi_class(0x276D, 0x276D, 'ON'). % Pe       MEDIUM RIGHT-POINTING ANGLE BRACKET ORNAMENT
-unicode_bidi_class(0x276E, 0x276E, 'ON'). % Ps       HEAVY LEFT-POINTING ANGLE QUOTATION MARK ORNAMENT
-unicode_bidi_class(0x276F, 0x276F, 'ON'). % Pe       HEAVY RIGHT-POINTING ANGLE QUOTATION MARK ORNAMENT
-unicode_bidi_class(0x2770, 0x2770, 'ON'). % Ps       HEAVY LEFT-POINTING ANGLE BRACKET ORNAMENT
-unicode_bidi_class(0x2771, 0x2771, 'ON'). % Pe       HEAVY RIGHT-POINTING ANGLE BRACKET ORNAMENT
-unicode_bidi_class(0x2772, 0x2772, 'ON'). % Ps       LIGHT LEFT TORTOISE SHELL BRACKET ORNAMENT
-unicode_bidi_class(0x2773, 0x2773, 'ON'). % Pe       LIGHT RIGHT TORTOISE SHELL BRACKET ORNAMENT
-unicode_bidi_class(0x2774, 0x2774, 'ON'). % Ps       MEDIUM LEFT CURLY BRACKET ORNAMENT
-unicode_bidi_class(0x2775, 0x2775, 'ON'). % Pe       MEDIUM RIGHT CURLY BRACKET ORNAMENT
-unicode_bidi_class(0x2776, 0x2793, 'ON'). % No  [30] DINGBAT NEGATIVE CIRCLED DIGIT ONE..DINGBAT NEGATIVE CIRCLED SANS-SERIF NUMBER TEN
-unicode_bidi_class(0x2794, 0x27BF, 'ON'). % So  [44] HEAVY WIDE-HEADED RIGHTWARDS ARROW..DOUBLE CURLY LOOP
-unicode_bidi_class(0x27C0, 0x27C4, 'ON'). % Sm   [5] THREE DIMENSIONAL ANGLE..OPEN SUPERSET
-unicode_bidi_class(0x27C5, 0x27C5, 'ON'). % Ps       LEFT S-SHAPED BAG DELIMITER
-unicode_bidi_class(0x27C6, 0x27C6, 'ON'). % Pe       RIGHT S-SHAPED BAG DELIMITER
-unicode_bidi_class(0x27C7, 0x27E5, 'ON'). % Sm  [31] OR WITH DOT INSIDE..WHITE SQUARE WITH RIGHTWARDS TICK
-unicode_bidi_class(0x27E6, 0x27E6, 'ON'). % Ps       MATHEMATICAL LEFT WHITE SQUARE BRACKET
-unicode_bidi_class(0x27E7, 0x27E7, 'ON'). % Pe       MATHEMATICAL RIGHT WHITE SQUARE BRACKET
-unicode_bidi_class(0x27E8, 0x27E8, 'ON'). % Ps       MATHEMATICAL LEFT ANGLE BRACKET
-unicode_bidi_class(0x27E9, 0x27E9, 'ON'). % Pe       MATHEMATICAL RIGHT ANGLE BRACKET
-unicode_bidi_class(0x27EA, 0x27EA, 'ON'). % Ps       MATHEMATICAL LEFT DOUBLE ANGLE BRACKET
-unicode_bidi_class(0x27EB, 0x27EB, 'ON'). % Pe       MATHEMATICAL RIGHT DOUBLE ANGLE BRACKET
-unicode_bidi_class(0x27EC, 0x27EC, 'ON'). % Ps       MATHEMATICAL LEFT WHITE TORTOISE SHELL BRACKET
-unicode_bidi_class(0x27ED, 0x27ED, 'ON'). % Pe       MATHEMATICAL RIGHT WHITE TORTOISE SHELL BRACKET
-unicode_bidi_class(0x27EE, 0x27EE, 'ON'). % Ps       MATHEMATICAL LEFT FLATTENED PARENTHESIS
-unicode_bidi_class(0x27EF, 0x27EF, 'ON'). % Pe       MATHEMATICAL RIGHT FLATTENED PARENTHESIS
-unicode_bidi_class(0x27F0, 0x27FF, 'ON'). % Sm  [16] UPWARDS QUADRUPLE ARROW..LONG RIGHTWARDS SQUIGGLE ARROW
-unicode_bidi_class(0x2900, 0x2982, 'ON'). % Sm [131] RIGHTWARDS TWO-HEADED ARROW WITH VERTICAL STROKE..Z NOTATION TYPE COLON
-unicode_bidi_class(0x2983, 0x2983, 'ON'). % Ps       LEFT WHITE CURLY BRACKET
-unicode_bidi_class(0x2984, 0x2984, 'ON'). % Pe       RIGHT WHITE CURLY BRACKET
-unicode_bidi_class(0x2985, 0x2985, 'ON'). % Ps       LEFT WHITE PARENTHESIS
-unicode_bidi_class(0x2986, 0x2986, 'ON'). % Pe       RIGHT WHITE PARENTHESIS
-unicode_bidi_class(0x2987, 0x2987, 'ON'). % Ps       Z NOTATION LEFT IMAGE BRACKET
-unicode_bidi_class(0x2988, 0x2988, 'ON'). % Pe       Z NOTATION RIGHT IMAGE BRACKET
-unicode_bidi_class(0x2989, 0x2989, 'ON'). % Ps       Z NOTATION LEFT BINDING BRACKET
-unicode_bidi_class(0x298A, 0x298A, 'ON'). % Pe       Z NOTATION RIGHT BINDING BRACKET
-unicode_bidi_class(0x298B, 0x298B, 'ON'). % Ps       LEFT SQUARE BRACKET WITH UNDERBAR
-unicode_bidi_class(0x298C, 0x298C, 'ON'). % Pe       RIGHT SQUARE BRACKET WITH UNDERBAR
-unicode_bidi_class(0x298D, 0x298D, 'ON'). % Ps       LEFT SQUARE BRACKET WITH TICK IN TOP CORNER
-unicode_bidi_class(0x298E, 0x298E, 'ON'). % Pe       RIGHT SQUARE BRACKET WITH TICK IN BOTTOM CORNER
-unicode_bidi_class(0x298F, 0x298F, 'ON'). % Ps       LEFT SQUARE BRACKET WITH TICK IN BOTTOM CORNER
-unicode_bidi_class(0x2990, 0x2990, 'ON'). % Pe       RIGHT SQUARE BRACKET WITH TICK IN TOP CORNER
-unicode_bidi_class(0x2991, 0x2991, 'ON'). % Ps       LEFT ANGLE BRACKET WITH DOT
-unicode_bidi_class(0x2992, 0x2992, 'ON'). % Pe       RIGHT ANGLE BRACKET WITH DOT
-unicode_bidi_class(0x2993, 0x2993, 'ON'). % Ps       LEFT ARC LESS-THAN BRACKET
-unicode_bidi_class(0x2994, 0x2994, 'ON'). % Pe       RIGHT ARC GREATER-THAN BRACKET
-unicode_bidi_class(0x2995, 0x2995, 'ON'). % Ps       DOUBLE LEFT ARC GREATER-THAN BRACKET
-unicode_bidi_class(0x2996, 0x2996, 'ON'). % Pe       DOUBLE RIGHT ARC LESS-THAN BRACKET
-unicode_bidi_class(0x2997, 0x2997, 'ON'). % Ps       LEFT BLACK TORTOISE SHELL BRACKET
-unicode_bidi_class(0x2998, 0x2998, 'ON'). % Pe       RIGHT BLACK TORTOISE SHELL BRACKET
-unicode_bidi_class(0x2999, 0x29D7, 'ON'). % Sm  [63] DOTTED FENCE..BLACK HOURGLASS
-unicode_bidi_class(0x29D8, 0x29D8, 'ON'). % Ps       LEFT WIGGLY FENCE
-unicode_bidi_class(0x29D9, 0x29D9, 'ON'). % Pe       RIGHT WIGGLY FENCE
-unicode_bidi_class(0x29DA, 0x29DA, 'ON'). % Ps       LEFT DOUBLE WIGGLY FENCE
-unicode_bidi_class(0x29DB, 0x29DB, 'ON'). % Pe       RIGHT DOUBLE WIGGLY FENCE
-unicode_bidi_class(0x29DC, 0x29FB, 'ON'). % Sm  [32] INCOMPLETE INFINITY..TRIPLE PLUS
-unicode_bidi_class(0x29FC, 0x29FC, 'ON'). % Ps       LEFT-POINTING CURVED ANGLE BRACKET
-unicode_bidi_class(0x29FD, 0x29FD, 'ON'). % Pe       RIGHT-POINTING CURVED ANGLE BRACKET
-unicode_bidi_class(0x29FE, 0x2AFF, 'ON'). % Sm [258] TINY..N-ARY WHITE VERTICAL BAR
-unicode_bidi_class(0x2B00, 0x2B2F, 'ON'). % So  [48] NORTH EAST WHITE ARROW..WHITE VERTICAL ELLIPSE
-unicode_bidi_class(0x2B30, 0x2B44, 'ON'). % Sm  [21] LEFT ARROW WITH SMALL CIRCLE..RIGHTWARDS ARROW THROUGH SUPERSET
-unicode_bidi_class(0x2B45, 0x2B46, 'ON'). % So   [2] LEFTWARDS QUADRUPLE ARROW..RIGHTWARDS QUADRUPLE ARROW
-unicode_bidi_class(0x2B47, 0x2B4C, 'ON'). % Sm   [6] REVERSE TILDE OPERATOR ABOVE RIGHTWARDS ARROW..RIGHTWARDS ARROW ABOVE REVERSE TILDE OPERATOR
-unicode_bidi_class(0x2B50, 0x2B59, 'ON'). % So  [10] WHITE MEDIUM STAR..HEAVY CIRCLED SALTIRE
-unicode_bidi_class(0x2CE5, 0x2CEA, 'ON'). % So   [6] COPTIC SYMBOL MI RO..COPTIC SYMBOL SHIMA SIMA
-unicode_bidi_class(0x2CF9, 0x2CFC, 'ON'). % Po   [4] COPTIC OLD NUBIAN FULL STOP..COPTIC OLD NUBIAN VERSE DIVIDER
-unicode_bidi_class(0x2CFD, 0x2CFD, 'ON'). % No       COPTIC FRACTION ONE HALF
-unicode_bidi_class(0x2CFE, 0x2CFF, 'ON'). % Po   [2] COPTIC FULL STOP..COPTIC MORPHOLOGICAL DIVIDER
-unicode_bidi_class(0x2E00, 0x2E01, 'ON'). % Po   [2] RIGHT ANGLE SUBSTITUTION MARKER..RIGHT ANGLE DOTTED SUBSTITUTION MARKER
-unicode_bidi_class(0x2E02, 0x2E02, 'ON'). % Pi       LEFT SUBSTITUTION BRACKET
-unicode_bidi_class(0x2E03, 0x2E03, 'ON'). % Pf       RIGHT SUBSTITUTION BRACKET
-unicode_bidi_class(0x2E04, 0x2E04, 'ON'). % Pi       LEFT DOTTED SUBSTITUTION BRACKET
-unicode_bidi_class(0x2E05, 0x2E05, 'ON'). % Pf       RIGHT DOTTED SUBSTITUTION BRACKET
-unicode_bidi_class(0x2E06, 0x2E08, 'ON'). % Po   [3] RAISED INTERPOLATION MARKER..DOTTED TRANSPOSITION MARKER
-unicode_bidi_class(0x2E09, 0x2E09, 'ON'). % Pi       LEFT TRANSPOSITION BRACKET
-unicode_bidi_class(0x2E0A, 0x2E0A, 'ON'). % Pf       RIGHT TRANSPOSITION BRACKET
-unicode_bidi_class(0x2E0B, 0x2E0B, 'ON'). % Po       RAISED SQUARE
-unicode_bidi_class(0x2E0C, 0x2E0C, 'ON'). % Pi       LEFT RAISED OMISSION BRACKET
-unicode_bidi_class(0x2E0D, 0x2E0D, 'ON'). % Pf       RIGHT RAISED OMISSION BRACKET
-unicode_bidi_class(0x2E0E, 0x2E16, 'ON'). % Po   [9] EDITORIAL CORONIS..DOTTED RIGHT-POINTING ANGLE
-unicode_bidi_class(0x2E17, 0x2E17, 'ON'). % Pd       DOUBLE OBLIQUE HYPHEN
-unicode_bidi_class(0x2E18, 0x2E19, 'ON'). % Po   [2] INVERTED INTERROBANG..PALM BRANCH
-unicode_bidi_class(0x2E1A, 0x2E1A, 'ON'). % Pd       HYPHEN WITH DIAERESIS
-unicode_bidi_class(0x2E1B, 0x2E1B, 'ON'). % Po       TILDE WITH RING ABOVE
-unicode_bidi_class(0x2E1C, 0x2E1C, 'ON'). % Pi       LEFT LOW PARAPHRASE BRACKET
-unicode_bidi_class(0x2E1D, 0x2E1D, 'ON'). % Pf       RIGHT LOW PARAPHRASE BRACKET
-unicode_bidi_class(0x2E1E, 0x2E1F, 'ON'). % Po   [2] TILDE WITH DOT ABOVE..TILDE WITH DOT BELOW
-unicode_bidi_class(0x2E20, 0x2E20, 'ON'). % Pi       LEFT VERTICAL BAR WITH QUILL
-unicode_bidi_class(0x2E21, 0x2E21, 'ON'). % Pf       RIGHT VERTICAL BAR WITH QUILL
-unicode_bidi_class(0x2E22, 0x2E22, 'ON'). % Ps       TOP LEFT HALF BRACKET
-unicode_bidi_class(0x2E23, 0x2E23, 'ON'). % Pe       TOP RIGHT HALF BRACKET
-unicode_bidi_class(0x2E24, 0x2E24, 'ON'). % Ps       BOTTOM LEFT HALF BRACKET
-unicode_bidi_class(0x2E25, 0x2E25, 'ON'). % Pe       BOTTOM RIGHT HALF BRACKET
-unicode_bidi_class(0x2E26, 0x2E26, 'ON'). % Ps       LEFT SIDEWAYS U BRACKET
-unicode_bidi_class(0x2E27, 0x2E27, 'ON'). % Pe       RIGHT SIDEWAYS U BRACKET
-unicode_bidi_class(0x2E28, 0x2E28, 'ON'). % Ps       LEFT DOUBLE PARENTHESIS
-unicode_bidi_class(0x2E29, 0x2E29, 'ON'). % Pe       RIGHT DOUBLE PARENTHESIS
-unicode_bidi_class(0x2E2A, 0x2E2E, 'ON'). % Po   [5] TWO DOTS OVER ONE DOT PUNCTUATION..REVERSED QUESTION MARK
-unicode_bidi_class(0x2E2F, 0x2E2F, 'ON'). % Lm       VERTICAL TILDE
-unicode_bidi_class(0x2E30, 0x2E39, 'ON'). % Po  [10] RING POINT..TOP HALF SECTION SIGN
-unicode_bidi_class(0x2E3A, 0x2E3B, 'ON'). % Pd   [2] TWO-EM DASH..THREE-EM DASH
-unicode_bidi_class(0x2E80, 0x2E99, 'ON'). % So  [26] CJK RADICAL REPEAT..CJK RADICAL RAP
-unicode_bidi_class(0x2E9B, 0x2EF3, 'ON'). % So  [89] CJK RADICAL CHOKE..CJK RADICAL C-SIMPLIFIED TURTLE
-unicode_bidi_class(0x2F00, 0x2FD5, 'ON'). % So [214] KANGXI RADICAL ONE..KANGXI RADICAL FLUTE
-unicode_bidi_class(0x2FF0, 0x2FFB, 'ON'). % So  [12] IDEOGRAPHIC DESCRIPTION CHARACTER LEFT TO RIGHT..IDEOGRAPHIC DESCRIPTION CHARACTER OVERLAID
-unicode_bidi_class(0x3001, 0x3003, 'ON'). % Po   [3] IDEOGRAPHIC COMMA..DITTO MARK
-unicode_bidi_class(0x3004, 0x3004, 'ON'). % So       JAPANESE INDUSTRIAL STANDARD SYMBOL
-unicode_bidi_class(0x3008, 0x3008, 'ON'). % Ps       LEFT ANGLE BRACKET
-unicode_bidi_class(0x3009, 0x3009, 'ON'). % Pe       RIGHT ANGLE BRACKET
-unicode_bidi_class(0x300A, 0x300A, 'ON'). % Ps       LEFT DOUBLE ANGLE BRACKET
-unicode_bidi_class(0x300B, 0x300B, 'ON'). % Pe       RIGHT DOUBLE ANGLE BRACKET
-unicode_bidi_class(0x300C, 0x300C, 'ON'). % Ps       LEFT CORNER BRACKET
-unicode_bidi_class(0x300D, 0x300D, 'ON'). % Pe       RIGHT CORNER BRACKET
-unicode_bidi_class(0x300E, 0x300E, 'ON'). % Ps       LEFT WHITE CORNER BRACKET
-unicode_bidi_class(0x300F, 0x300F, 'ON'). % Pe       RIGHT WHITE CORNER BRACKET
-unicode_bidi_class(0x3010, 0x3010, 'ON'). % Ps       LEFT BLACK LENTICULAR BRACKET
-unicode_bidi_class(0x3011, 0x3011, 'ON'). % Pe       RIGHT BLACK LENTICULAR BRACKET
-unicode_bidi_class(0x3012, 0x3013, 'ON'). % So   [2] POSTAL MARK..GETA MARK
-unicode_bidi_class(0x3014, 0x3014, 'ON'). % Ps       LEFT TORTOISE SHELL BRACKET
-unicode_bidi_class(0x3015, 0x3015, 'ON'). % Pe       RIGHT TORTOISE SHELL BRACKET
-unicode_bidi_class(0x3016, 0x3016, 'ON'). % Ps       LEFT WHITE LENTICULAR BRACKET
-unicode_bidi_class(0x3017, 0x3017, 'ON'). % Pe       RIGHT WHITE LENTICULAR BRACKET
-unicode_bidi_class(0x3018, 0x3018, 'ON'). % Ps       LEFT WHITE TORTOISE SHELL BRACKET
-unicode_bidi_class(0x3019, 0x3019, 'ON'). % Pe       RIGHT WHITE TORTOISE SHELL BRACKET
-unicode_bidi_class(0x301A, 0x301A, 'ON'). % Ps       LEFT WHITE SQUARE BRACKET
-unicode_bidi_class(0x301B, 0x301B, 'ON'). % Pe       RIGHT WHITE SQUARE BRACKET
-unicode_bidi_class(0x301C, 0x301C, 'ON'). % Pd       WAVE DASH
-unicode_bidi_class(0x301D, 0x301D, 'ON'). % Ps       REVERSED DOUBLE PRIME QUOTATION MARK
-unicode_bidi_class(0x301E, 0x301F, 'ON'). % Pe   [2] DOUBLE PRIME QUOTATION MARK..LOW DOUBLE PRIME QUOTATION MARK
-unicode_bidi_class(0x3020, 0x3020, 'ON'). % So       POSTAL MARK FACE
-unicode_bidi_class(0x3030, 0x3030, 'ON'). % Pd       WAVY DASH
-unicode_bidi_class(0x3036, 0x3037, 'ON'). % So   [2] CIRCLED POSTAL MARK..IDEOGRAPHIC TELEGRAPH LINE FEED SEPARATOR SYMBOL
-unicode_bidi_class(0x303D, 0x303D, 'ON'). % Po       PART ALTERNATION MARK
-unicode_bidi_class(0x303E, 0x303F, 'ON'). % So   [2] IDEOGRAPHIC VARIATION INDICATOR..IDEOGRAPHIC HALF FILL SPACE
-unicode_bidi_class(0x309B, 0x309C, 'ON'). % Sk   [2] KATAKANA-HIRAGANA VOICED SOUND MARK..KATAKANA-HIRAGANA SEMI-VOICED SOUND MARK
-unicode_bidi_class(0x30A0, 0x30A0, 'ON'). % Pd       KATAKANA-HIRAGANA DOUBLE HYPHEN
-unicode_bidi_class(0x30FB, 0x30FB, 'ON'). % Po       KATAKANA MIDDLE DOT
-unicode_bidi_class(0x31C0, 0x31E3, 'ON'). % So  [36] CJK STROKE T..CJK STROKE Q
-unicode_bidi_class(0x321D, 0x321E, 'ON'). % So   [2] PARENTHESIZED KOREAN CHARACTER OJEON..PARENTHESIZED KOREAN CHARACTER O HU
-unicode_bidi_class(0x3250, 0x3250, 'ON'). % So       PARTNERSHIP SIGN
-unicode_bidi_class(0x3251, 0x325F, 'ON'). % No  [15] CIRCLED NUMBER TWENTY ONE..CIRCLED NUMBER THIRTY FIVE
-unicode_bidi_class(0x327C, 0x327E, 'ON'). % So   [3] CIRCLED KOREAN CHARACTER CHAMKO..CIRCLED HANGUL IEUNG U
-unicode_bidi_class(0x32B1, 0x32BF, 'ON'). % No  [15] CIRCLED NUMBER THIRTY SIX..CIRCLED NUMBER FIFTY
-unicode_bidi_class(0x32CC, 0x32CF, 'ON'). % So   [4] SQUARE HG..LIMITED LIABILITY SIGN
-unicode_bidi_class(0x3377, 0x337A, 'ON'). % So   [4] SQUARE DM..SQUARE IU
-unicode_bidi_class(0x33DE, 0x33DF, 'ON'). % So   [2] SQUARE V OVER M..SQUARE A OVER M
-unicode_bidi_class(0x33FF, 0x33FF, 'ON'). % So       SQUARE GAL
-unicode_bidi_class(0x4DC0, 0x4DFF, 'ON'). % So  [64] HEXAGRAM FOR THE CREATIVE HEAVEN..HEXAGRAM FOR BEFORE COMPLETION
-unicode_bidi_class(0xA490, 0xA4C6, 'ON'). % So  [55] YI RADICAL QOT..YI RADICAL KE
-unicode_bidi_class(0xA60D, 0xA60F, 'ON'). % Po   [3] VAI COMMA..VAI QUESTION MARK
-unicode_bidi_class(0xA673, 0xA673, 'ON'). % Po       SLAVONIC ASTERISK
-unicode_bidi_class(0xA67E, 0xA67E, 'ON'). % Po       CYRILLIC KAVYKA
-unicode_bidi_class(0xA67F, 0xA67F, 'ON'). % Lm       CYRILLIC PAYEROK
-unicode_bidi_class(0xA700, 0xA716, 'ON'). % Sk  [23] MODIFIER LETTER CHINESE TONE YIN PING..MODIFIER LETTER EXTRA-LOW LEFT-STEM TONE BAR
-unicode_bidi_class(0xA717, 0xA71F, 'ON'). % Lm   [9] MODIFIER LETTER DOT VERTICAL BAR..MODIFIER LETTER LOW INVERTED EXCLAMATION MARK
-unicode_bidi_class(0xA720, 0xA721, 'ON'). % Sk   [2] MODIFIER LETTER STRESS AND HIGH TONE..MODIFIER LETTER STRESS AND LOW TONE
-unicode_bidi_class(0xA788, 0xA788, 'ON'). % Lm       MODIFIER LETTER LOW CIRCUMFLEX ACCENT
-unicode_bidi_class(0xA828, 0xA82B, 'ON'). % So   [4] SYLOTI NAGRI POETRY MARK-1..SYLOTI NAGRI POETRY MARK-4
-unicode_bidi_class(0xA874, 0xA877, 'ON'). % Po   [4] PHAGS-PA SINGLE HEAD MARK..PHAGS-PA MARK DOUBLE SHAD
-unicode_bidi_class(0xFD3E, 0xFD3E, 'ON'). % Ps       ORNATE LEFT PARENTHESIS
-unicode_bidi_class(0xFD3F, 0xFD3F, 'ON'). % Pe       ORNATE RIGHT PARENTHESIS
-unicode_bidi_class(0xFDFD, 0xFDFD, 'ON'). % So       ARABIC LIGATURE BISMILLAH AR-RAHMAN AR-RAHEEM
-unicode_bidi_class(0xFE10, 0xFE16, 'ON'). % Po   [7] PRESENTATION FORM FOR VERTICAL COMMA..PRESENTATION FORM FOR VERTICAL QUESTION MARK
-unicode_bidi_class(0xFE17, 0xFE17, 'ON'). % Ps       PRESENTATION FORM FOR VERTICAL LEFT WHITE LENTICULAR BRACKET
-unicode_bidi_class(0xFE18, 0xFE18, 'ON'). % Pe       PRESENTATION FORM FOR VERTICAL RIGHT WHITE LENTICULAR BRAKCET
-unicode_bidi_class(0xFE19, 0xFE19, 'ON'). % Po       PRESENTATION FORM FOR VERTICAL HORIZONTAL ELLIPSIS
-unicode_bidi_class(0xFE30, 0xFE30, 'ON'). % Po       PRESENTATION FORM FOR VERTICAL TWO DOT LEADER
-unicode_bidi_class(0xFE31, 0xFE32, 'ON'). % Pd   [2] PRESENTATION FORM FOR VERTICAL EM DASH..PRESENTATION FORM FOR VERTICAL EN DASH
-unicode_bidi_class(0xFE33, 0xFE34, 'ON'). % Pc   [2] PRESENTATION FORM FOR VERTICAL LOW LINE..PRESENTATION FORM FOR VERTICAL WAVY LOW LINE
-unicode_bidi_class(0xFE35, 0xFE35, 'ON'). % Ps       PRESENTATION FORM FOR VERTICAL LEFT PARENTHESIS
-unicode_bidi_class(0xFE36, 0xFE36, 'ON'). % Pe       PRESENTATION FORM FOR VERTICAL RIGHT PARENTHESIS
-unicode_bidi_class(0xFE37, 0xFE37, 'ON'). % Ps       PRESENTATION FORM FOR VERTICAL LEFT CURLY BRACKET
-unicode_bidi_class(0xFE38, 0xFE38, 'ON'). % Pe       PRESENTATION FORM FOR VERTICAL RIGHT CURLY BRACKET
-unicode_bidi_class(0xFE39, 0xFE39, 'ON'). % Ps       PRESENTATION FORM FOR VERTICAL LEFT TORTOISE SHELL BRACKET
-unicode_bidi_class(0xFE3A, 0xFE3A, 'ON'). % Pe       PRESENTATION FORM FOR VERTICAL RIGHT TORTOISE SHELL BRACKET
-unicode_bidi_class(0xFE3B, 0xFE3B, 'ON'). % Ps       PRESENTATION FORM FOR VERTICAL LEFT BLACK LENTICULAR BRACKET
-unicode_bidi_class(0xFE3C, 0xFE3C, 'ON'). % Pe       PRESENTATION FORM FOR VERTICAL RIGHT BLACK LENTICULAR BRACKET
-unicode_bidi_class(0xFE3D, 0xFE3D, 'ON'). % Ps       PRESENTATION FORM FOR VERTICAL LEFT DOUBLE ANGLE BRACKET
-unicode_bidi_class(0xFE3E, 0xFE3E, 'ON'). % Pe       PRESENTATION FORM FOR VERTICAL RIGHT DOUBLE ANGLE BRACKET
-unicode_bidi_class(0xFE3F, 0xFE3F, 'ON'). % Ps       PRESENTATION FORM FOR VERTICAL LEFT ANGLE BRACKET
-unicode_bidi_class(0xFE40, 0xFE40, 'ON'). % Pe       PRESENTATION FORM FOR VERTICAL RIGHT ANGLE BRACKET
-unicode_bidi_class(0xFE41, 0xFE41, 'ON'). % Ps       PRESENTATION FORM FOR VERTICAL LEFT CORNER BRACKET
-unicode_bidi_class(0xFE42, 0xFE42, 'ON'). % Pe       PRESENTATION FORM FOR VERTICAL RIGHT CORNER BRACKET
-unicode_bidi_class(0xFE43, 0xFE43, 'ON'). % Ps       PRESENTATION FORM FOR VERTICAL LEFT WHITE CORNER BRACKET
-unicode_bidi_class(0xFE44, 0xFE44, 'ON'). % Pe       PRESENTATION FORM FOR VERTICAL RIGHT WHITE CORNER BRACKET
-unicode_bidi_class(0xFE45, 0xFE46, 'ON'). % Po   [2] SESAME DOT..WHITE SESAME DOT
-unicode_bidi_class(0xFE47, 0xFE47, 'ON'). % Ps       PRESENTATION FORM FOR VERTICAL LEFT SQUARE BRACKET
-unicode_bidi_class(0xFE48, 0xFE48, 'ON'). % Pe       PRESENTATION FORM FOR VERTICAL RIGHT SQUARE BRACKET
-unicode_bidi_class(0xFE49, 0xFE4C, 'ON'). % Po   [4] DASHED OVERLINE..DOUBLE WAVY OVERLINE
-unicode_bidi_class(0xFE4D, 0xFE4F, 'ON'). % Pc   [3] DASHED LOW LINE..WAVY LOW LINE
-unicode_bidi_class(0xFE51, 0xFE51, 'ON'). % Po       SMALL IDEOGRAPHIC COMMA
-unicode_bidi_class(0xFE54, 0xFE54, 'ON'). % Po       SMALL SEMICOLON
-unicode_bidi_class(0xFE56, 0xFE57, 'ON'). % Po   [2] SMALL QUESTION MARK..SMALL EXCLAMATION MARK
-unicode_bidi_class(0xFE58, 0xFE58, 'ON'). % Pd       SMALL EM DASH
-unicode_bidi_class(0xFE59, 0xFE59, 'ON'). % Ps       SMALL LEFT PARENTHESIS
-unicode_bidi_class(0xFE5A, 0xFE5A, 'ON'). % Pe       SMALL RIGHT PARENTHESIS
-unicode_bidi_class(0xFE5B, 0xFE5B, 'ON'). % Ps       SMALL LEFT CURLY BRACKET
-unicode_bidi_class(0xFE5C, 0xFE5C, 'ON'). % Pe       SMALL RIGHT CURLY BRACKET
-unicode_bidi_class(0xFE5D, 0xFE5D, 'ON'). % Ps       SMALL LEFT TORTOISE SHELL BRACKET
-unicode_bidi_class(0xFE5E, 0xFE5E, 'ON'). % Pe       SMALL RIGHT TORTOISE SHELL BRACKET
-unicode_bidi_class(0xFE60, 0xFE61, 'ON'). % Po   [2] SMALL AMPERSAND..SMALL ASTERISK
-unicode_bidi_class(0xFE64, 0xFE66, 'ON'). % Sm   [3] SMALL LESS-THAN SIGN..SMALL EQUALS SIGN
-unicode_bidi_class(0xFE68, 0xFE68, 'ON'). % Po       SMALL REVERSE SOLIDUS
-unicode_bidi_class(0xFE6B, 0xFE6B, 'ON'). % Po       SMALL COMMERCIAL AT
-unicode_bidi_class(0xFF01, 0xFF02, 'ON'). % Po   [2] FULLWIDTH EXCLAMATION MARK..FULLWIDTH QUOTATION MARK
-unicode_bidi_class(0xFF06, 0xFF07, 'ON'). % Po   [2] FULLWIDTH AMPERSAND..FULLWIDTH APOSTROPHE
-unicode_bidi_class(0xFF08, 0xFF08, 'ON'). % Ps       FULLWIDTH LEFT PARENTHESIS
-unicode_bidi_class(0xFF09, 0xFF09, 'ON'). % Pe       FULLWIDTH RIGHT PARENTHESIS
-unicode_bidi_class(0xFF0A, 0xFF0A, 'ON'). % Po       FULLWIDTH ASTERISK
-unicode_bidi_class(0xFF1B, 0xFF1B, 'ON'). % Po       FULLWIDTH SEMICOLON
-unicode_bidi_class(0xFF1C, 0xFF1E, 'ON'). % Sm   [3] FULLWIDTH LESS-THAN SIGN..FULLWIDTH GREATER-THAN SIGN
-unicode_bidi_class(0xFF1F, 0xFF20, 'ON'). % Po   [2] FULLWIDTH QUESTION MARK..FULLWIDTH COMMERCIAL AT
-unicode_bidi_class(0xFF3B, 0xFF3B, 'ON'). % Ps       FULLWIDTH LEFT SQUARE BRACKET
-unicode_bidi_class(0xFF3C, 0xFF3C, 'ON'). % Po       FULLWIDTH REVERSE SOLIDUS
-unicode_bidi_class(0xFF3D, 0xFF3D, 'ON'). % Pe       FULLWIDTH RIGHT SQUARE BRACKET
-unicode_bidi_class(0xFF3E, 0xFF3E, 'ON'). % Sk       FULLWIDTH CIRCUMFLEX ACCENT
-unicode_bidi_class(0xFF3F, 0xFF3F, 'ON'). % Pc       FULLWIDTH LOW LINE
-unicode_bidi_class(0xFF40, 0xFF40, 'ON'). % Sk       FULLWIDTH GRAVE ACCENT
-unicode_bidi_class(0xFF5B, 0xFF5B, 'ON'). % Ps       FULLWIDTH LEFT CURLY BRACKET
-unicode_bidi_class(0xFF5C, 0xFF5C, 'ON'). % Sm       FULLWIDTH VERTICAL LINE
-unicode_bidi_class(0xFF5D, 0xFF5D, 'ON'). % Pe       FULLWIDTH RIGHT CURLY BRACKET
-unicode_bidi_class(0xFF5E, 0xFF5E, 'ON'). % Sm       FULLWIDTH TILDE
-unicode_bidi_class(0xFF5F, 0xFF5F, 'ON'). % Ps       FULLWIDTH LEFT WHITE PARENTHESIS
-unicode_bidi_class(0xFF60, 0xFF60, 'ON'). % Pe       FULLWIDTH RIGHT WHITE PARENTHESIS
-unicode_bidi_class(0xFF61, 0xFF61, 'ON'). % Po       HALFWIDTH IDEOGRAPHIC FULL STOP
-unicode_bidi_class(0xFF62, 0xFF62, 'ON'). % Ps       HALFWIDTH LEFT CORNER BRACKET
-unicode_bidi_class(0xFF63, 0xFF63, 'ON'). % Pe       HALFWIDTH RIGHT CORNER BRACKET
-unicode_bidi_class(0xFF64, 0xFF65, 'ON'). % Po   [2] HALFWIDTH IDEOGRAPHIC COMMA..HALFWIDTH KATAKANA MIDDLE DOT
-unicode_bidi_class(0xFFE2, 0xFFE2, 'ON'). % Sm       FULLWIDTH NOT SIGN
-unicode_bidi_class(0xFFE3, 0xFFE3, 'ON'). % Sk       FULLWIDTH MACRON
-unicode_bidi_class(0xFFE4, 0xFFE4, 'ON'). % So       FULLWIDTH BROKEN BAR
-unicode_bidi_class(0xFFE8, 0xFFE8, 'ON'). % So       HALFWIDTH FORMS LIGHT VERTICAL
-unicode_bidi_class(0xFFE9, 0xFFEC, 'ON'). % Sm   [4] HALFWIDTH LEFTWARDS ARROW..HALFWIDTH DOWNWARDS ARROW
-unicode_bidi_class(0xFFED, 0xFFEE, 'ON'). % So   [2] HALFWIDTH BLACK SQUARE..HALFWIDTH WHITE CIRCLE
-unicode_bidi_class(0xFFF9, 0xFFFB, 'ON'). % Cf   [3] INTERLINEAR ANNOTATION ANCHOR..INTERLINEAR ANNOTATION TERMINATOR
-unicode_bidi_class(0xFFFC, 0xFFFD, 'ON'). % So   [2] OBJECT REPLACEMENT CHARACTER..REPLACEMENT CHARACTER
-unicode_bidi_class(0x10101, 0x10101, 'ON'). % Po       AEGEAN WORD SEPARATOR DOT
-unicode_bidi_class(0x10140, 0x10174, 'ON'). % Nl  [53] GREEK ACROPHONIC ATTIC ONE QUARTER..GREEK ACROPHONIC STRATIAN FIFTY MNAS
-unicode_bidi_class(0x10175, 0x10178, 'ON'). % No   [4] GREEK ONE HALF SIGN..GREEK THREE QUARTERS SIGN
-unicode_bidi_class(0x10179, 0x10189, 'ON'). % So  [17] GREEK YEAR SIGN..GREEK TRYBLION BASE SIGN
-unicode_bidi_class(0x1018A, 0x1018A, 'ON'). % No       GREEK ZERO SIGN
-unicode_bidi_class(0x10190, 0x1019B, 'ON'). % So  [12] ROMAN SEXTANS SIGN..ROMAN CENTURIAL SIGN
-unicode_bidi_class(0x1091F, 0x1091F, 'ON'). % Po       PHOENICIAN WORD SEPARATOR
-unicode_bidi_class(0x10B39, 0x10B3F, 'ON'). % Po   [7] AVESTAN ABBREVIATION MARK..LARGE ONE RING OVER TWO RINGS PUNCTUATION
-unicode_bidi_class(0x11052, 0x11065, 'ON'). % No  [20] BRAHMI NUMBER ONE..BRAHMI NUMBER ONE THOUSAND
-unicode_bidi_class(0x1D200, 0x1D241, 'ON'). % So  [66] GREEK VOCAL NOTATION SYMBOL-1..GREEK INSTRUMENTAL NOTATION SYMBOL-54
-unicode_bidi_class(0x1D245, 0x1D245, 'ON'). % So       GREEK MUSICAL LEIMMA
-unicode_bidi_class(0x1D300, 0x1D356, 'ON'). % So  [87] MONOGRAM FOR EARTH..TETRAGRAM FOR FOSTERING
-unicode_bidi_class(0x1D6DB, 0x1D6DB, 'ON'). % Sm       MATHEMATICAL BOLD PARTIAL DIFFERENTIAL
-unicode_bidi_class(0x1D715, 0x1D715, 'ON'). % Sm       MATHEMATICAL ITALIC PARTIAL DIFFERENTIAL
-unicode_bidi_class(0x1D74F, 0x1D74F, 'ON'). % Sm       MATHEMATICAL BOLD ITALIC PARTIAL DIFFERENTIAL
-unicode_bidi_class(0x1D789, 0x1D789, 'ON'). % Sm       MATHEMATICAL SANS-SERIF BOLD PARTIAL DIFFERENTIAL
-unicode_bidi_class(0x1D7C3, 0x1D7C3, 'ON'). % Sm       MATHEMATICAL SANS-SERIF BOLD ITALIC PARTIAL DIFFERENTIAL
-unicode_bidi_class(0x1EEF0, 0x1EEF1, 'ON'). % Sm   [2] ARABIC MATHEMATICAL OPERATOR MEEM WITH HAH WITH TATWEEL..ARABIC MATHEMATICAL OPERATOR HAH WITH DAL
-unicode_bidi_class(0x1F000, 0x1F02B, 'ON'). % So  [44] MAHJONG TILE EAST WIND..MAHJONG TILE BACK
-unicode_bidi_class(0x1F030, 0x1F093, 'ON'). % So [100] DOMINO TILE HORIZONTAL BACK..DOMINO TILE VERTICAL-06-06
-unicode_bidi_class(0x1F0A0, 0x1F0AE, 'ON'). % So  [15] PLAYING CARD BACK..PLAYING CARD KING OF SPADES
-unicode_bidi_class(0x1F0B1, 0x1F0BE, 'ON'). % So  [14] PLAYING CARD ACE OF HEARTS..PLAYING CARD KING OF HEARTS
-unicode_bidi_class(0x1F0C1, 0x1F0CF, 'ON'). % So  [15] PLAYING CARD ACE OF DIAMONDS..PLAYING CARD BLACK JOKER
-unicode_bidi_class(0x1F0D1, 0x1F0DF, 'ON'). % So  [15] PLAYING CARD ACE OF CLUBS..PLAYING CARD WHITE JOKER
-unicode_bidi_class(0x1F16A, 0x1F16B, 'ON'). % So   [2] RAISED MC SIGN..RAISED MD SIGN
-unicode_bidi_class(0x1F300, 0x1F320, 'ON'). % So  [33] CYCLONE..SHOOTING STAR
-unicode_bidi_class(0x1F330, 0x1F335, 'ON'). % So   [6] CHESTNUT..CACTUS
-unicode_bidi_class(0x1F337, 0x1F37C, 'ON'). % So  [70] TULIP..BABY BOTTLE
-unicode_bidi_class(0x1F380, 0x1F393, 'ON'). % So  [20] RIBBON..GRADUATION CAP
-unicode_bidi_class(0x1F3A0, 0x1F3C4, 'ON'). % So  [37] CAROUSEL HORSE..SURFER
-unicode_bidi_class(0x1F3C6, 0x1F3CA, 'ON'). % So   [5] TROPHY..SWIMMER
-unicode_bidi_class(0x1F3E0, 0x1F3F0, 'ON'). % So  [17] HOUSE BUILDING..EUROPEAN CASTLE
-unicode_bidi_class(0x1F400, 0x1F43E, 'ON'). % So  [63] RAT..PAW PRINTS
-unicode_bidi_class(0x1F440, 0x1F440, 'ON'). % So       EYES
-unicode_bidi_class(0x1F442, 0x1F4F7, 'ON'). % So [182] EAR..CAMERA
-unicode_bidi_class(0x1F4F9, 0x1F4FC, 'ON'). % So   [4] VIDEO CAMERA..VIDEOCASSETTE
-unicode_bidi_class(0x1F500, 0x1F53D, 'ON'). % So  [62] TWISTED RIGHTWARDS ARROWS..DOWN-POINTING SMALL RED TRIANGLE
-unicode_bidi_class(0x1F540, 0x1F543, 'ON'). % So   [4] CIRCLED CROSS POMMEE..NOTCHED LEFT SEMICIRCLE WITH THREE DOTS
-unicode_bidi_class(0x1F550, 0x1F567, 'ON'). % So  [24] CLOCK FACE ONE OCLOCK..CLOCK FACE TWELVE-THIRTY
-unicode_bidi_class(0x1F5FB, 0x1F640, 'ON'). % So  [70] MOUNT FUJI..WEARY CAT FACE
-unicode_bidi_class(0x1F645, 0x1F64F, 'ON'). % So  [11] FACE WITH NO GOOD GESTURE..PERSON WITH FOLDED HANDS
-unicode_bidi_class(0x1F680, 0x1F6C5, 'ON'). % So  [70] ROCKET..LEFT LUGGAGE
-unicode_bidi_class(0x1F700, 0x1F773, 'ON'). % So [116] ALCHEMICAL SYMBOL FOR QUINTESSENCE..ALCHEMICAL SYMBOL FOR HALF OUNCE
-
-% Total code points: 4447
-
-% ================================================
-
-% Bidi_Class=Boundary_Neutral
-
-unicode_bidi_class(0x0000, 0x0008, 'BN'). % Cc   [9] <control-0000>..<control-0008>
-unicode_bidi_class(0x000E, 0x001B, 'BN'). % Cc  [14] <control-000E>..<control-001B>
-unicode_bidi_class(0x007F, 0x0084, 'BN'). % Cc   [6] <control-007F>..<control-0084>
-unicode_bidi_class(0x0086, 0x009F, 'BN'). % Cc  [26] <control-0086>..<control-009F>
-unicode_bidi_class(0x00AD, 0x00AD, 'BN'). % Cf       SOFT HYPHEN
-unicode_bidi_class(0x200B, 0x200D, 'BN'). % Cf   [3] ZERO WIDTH SPACE..ZERO WIDTH JOINER
-unicode_bidi_class(0x2060, 0x2064, 'BN'). % Cf   [5] WORD JOINER..INVISIBLE PLUS
-unicode_bidi_class(0x2065, 0x2069, 'BN'). % Cn   [5] <reserved-2065>..<reserved-2069>
-unicode_bidi_class(0x206A, 0x206F, 'BN'). % Cf   [6] INHIBIT SYMMETRIC SWAPPING..NOMINAL DIGIT SHAPES
-unicode_bidi_class(0xFDD0, 0xFDEF, 'BN'). % Cn  [32] <noncharacter-FDD0>..<noncharacter-FDEF>
-unicode_bidi_class(0xFEFF, 0xFEFF, 'BN'). % Cf       ZERO WIDTH NO-BREAK SPACE
-unicode_bidi_class(0xFFF0, 0xFFF8, 'BN'). % Cn   [9] <reserved-FFF0>..<reserved-FFF8>
-unicode_bidi_class(0xFFFE, 0xFFFF, 'BN'). % Cn   [2] <noncharacter-FFFE>..<noncharacter-FFFF>
-unicode_bidi_class(0x1D173, 0x1D17A, 'BN'). % Cf   [8] MUSICAL SYMBOL BEGIN BEAM..MUSICAL SYMBOL END PHRASE
-unicode_bidi_class(0x1FFFE, 0x1FFFF, 'BN'). % Cn   [2] <noncharacter-1FFFE>..<noncharacter-1FFFF>
-unicode_bidi_class(0x2FFFE, 0x2FFFF, 'BN'). % Cn   [2] <noncharacter-2FFFE>..<noncharacter-2FFFF>
-unicode_bidi_class(0x3FFFE, 0x3FFFF, 'BN'). % Cn   [2] <noncharacter-3FFFE>..<noncharacter-3FFFF>
-unicode_bidi_class(0x4FFFE, 0x4FFFF, 'BN'). % Cn   [2] <noncharacter-4FFFE>..<noncharacter-4FFFF>
-unicode_bidi_class(0x5FFFE, 0x5FFFF, 'BN'). % Cn   [2] <noncharacter-5FFFE>..<noncharacter-5FFFF>
-unicode_bidi_class(0x6FFFE, 0x6FFFF, 'BN'). % Cn   [2] <noncharacter-6FFFE>..<noncharacter-6FFFF>
-unicode_bidi_class(0x7FFFE, 0x7FFFF, 'BN'). % Cn   [2] <noncharacter-7FFFE>..<noncharacter-7FFFF>
-unicode_bidi_class(0x8FFFE, 0x8FFFF, 'BN'). % Cn   [2] <noncharacter-8FFFE>..<noncharacter-8FFFF>
-unicode_bidi_class(0x9FFFE, 0x9FFFF, 'BN'). % Cn   [2] <noncharacter-9FFFE>..<noncharacter-9FFFF>
-unicode_bidi_class(0xAFFFE, 0xAFFFF, 'BN'). % Cn   [2] <noncharacter-AFFFE>..<noncharacter-AFFFF>
-unicode_bidi_class(0xBFFFE, 0xBFFFF, 'BN'). % Cn   [2] <noncharacter-BFFFE>..<noncharacter-BFFFF>
-unicode_bidi_class(0xCFFFE, 0xCFFFF, 'BN'). % Cn   [2] <noncharacter-CFFFE>..<noncharacter-CFFFF>
-unicode_bidi_class(0xDFFFE, 0xE0000, 'BN'). % Cn   [3] <noncharacter-DFFFE>..<reserved-E0000>
-unicode_bidi_class(0xE0001, 0xE0001, 'BN'). % Cf       LANGUAGE TAG
-unicode_bidi_class(0xE0002, 0xE001F, 'BN'). % Cn  [30] <reserved-E0002>..<reserved-E001F>
-unicode_bidi_class(0xE0020, 0xE007F, 'BN'). % Cf  [96] TAG SPACE..CANCEL TAG
-unicode_bidi_class(0xE0080, 0xE00FF, 'BN'). % Cn [128] <reserved-E0080>..<reserved-E00FF>
-unicode_bidi_class(0xE01F0, 0xE0FFF, 'BN'). % Cn [3600] <reserved-E01F0>..<reserved-E0FFF>
-unicode_bidi_class(0xEFFFE, 0xEFFFF, 'BN'). % Cn   [2] <noncharacter-EFFFE>..<noncharacter-EFFFF>
-unicode_bidi_class(0xFFFFE, 0xFFFFF, 'BN'). % Cn   [2] <noncharacter-FFFFE>..<noncharacter-FFFFF>
-unicode_bidi_class(0x10FFFE, 0x10FFFF, 'BN'). % Cn   [2] <noncharacter-10FFFE>..<noncharacter-10FFFF>
-
-% Total code points: 4015
-
-% ================================================
-
-% Bidi_Class=Nonspacing_Mark
-
-unicode_bidi_class(0x0300, 0x036F, 'NSM'). % Mn [112] COMBINING GRAVE ACCENT..COMBINING LATIN SMALL LETTER X
-unicode_bidi_class(0x0483, 0x0487, 'NSM'). % Mn   [5] COMBINING CYRILLIC TITLO..COMBINING CYRILLIC POKRYTIE
-unicode_bidi_class(0x0488, 0x0489, 'NSM'). % Me   [2] COMBINING CYRILLIC HUNDRED THOUSANDS SIGN..COMBINING CYRILLIC MILLIONS SIGN
-unicode_bidi_class(0x0591, 0x05BD, 'NSM'). % Mn  [45] HEBREW ACCENT ETNAHTA..HEBREW POINT METEG
-unicode_bidi_class(0x05BF, 0x05BF, 'NSM'). % Mn       HEBREW POINT RAFE
-unicode_bidi_class(0x05C1, 0x05C2, 'NSM'). % Mn   [2] HEBREW POINT SHIN DOT..HEBREW POINT SIN DOT
-unicode_bidi_class(0x05C4, 0x05C5, 'NSM'). % Mn   [2] HEBREW MARK UPPER DOT..HEBREW MARK LOWER DOT
-unicode_bidi_class(0x05C7, 0x05C7, 'NSM'). % Mn       HEBREW POINT QAMATS QATAN
-unicode_bidi_class(0x0610, 0x061A, 'NSM'). % Mn  [11] ARABIC SIGN SALLALLAHOU ALAYHE WASSALLAM..ARABIC SMALL KASRA
-unicode_bidi_class(0x064B, 0x065F, 'NSM'). % Mn  [21] ARABIC FATHATAN..ARABIC WAVY HAMZA BELOW
-unicode_bidi_class(0x0670, 0x0670, 'NSM'). % Mn       ARABIC LETTER SUPERSCRIPT ALEF
-unicode_bidi_class(0x06D6, 0x06DC, 'NSM'). % Mn   [7] ARABIC SMALL HIGH LIGATURE SAD WITH LAM WITH ALEF MAKSURA..ARABIC SMALL HIGH SEEN
-unicode_bidi_class(0x06DF, 0x06E4, 'NSM'). % Mn   [6] ARABIC SMALL HIGH ROUNDED ZERO..ARABIC SMALL HIGH MADDA
-unicode_bidi_class(0x06E7, 0x06E8, 'NSM'). % Mn   [2] ARABIC SMALL HIGH YEH..ARABIC SMALL HIGH NOON
-unicode_bidi_class(0x06EA, 0x06ED, 'NSM'). % Mn   [4] ARABIC EMPTY CENTRE LOW STOP..ARABIC SMALL LOW MEEM
-unicode_bidi_class(0x0711, 0x0711, 'NSM'). % Mn       SYRIAC LETTER SUPERSCRIPT ALAPH
-unicode_bidi_class(0x0730, 0x074A, 'NSM'). % Mn  [27] SYRIAC PTHAHA ABOVE..SYRIAC BARREKH
-unicode_bidi_class(0x07A6, 0x07B0, 'NSM'). % Mn  [11] THAANA ABAFILI..THAANA SUKUN
-unicode_bidi_class(0x07EB, 0x07F3, 'NSM'). % Mn   [9] NKO COMBINING SHORT HIGH TONE..NKO COMBINING DOUBLE DOT ABOVE
-unicode_bidi_class(0x0816, 0x0819, 'NSM'). % Mn   [4] SAMARITAN MARK IN..SAMARITAN MARK DAGESH
-unicode_bidi_class(0x081B, 0x0823, 'NSM'). % Mn   [9] SAMARITAN MARK EPENTHETIC YUT..SAMARITAN VOWEL SIGN A
-unicode_bidi_class(0x0825, 0x0827, 'NSM'). % Mn   [3] SAMARITAN VOWEL SIGN SHORT A..SAMARITAN VOWEL SIGN U
-unicode_bidi_class(0x0829, 0x082D, 'NSM'). % Mn   [5] SAMARITAN VOWEL SIGN LONG I..SAMARITAN MARK NEQUDAA
-unicode_bidi_class(0x0859, 0x085B, 'NSM'). % Mn   [3] MANDAIC AFFRICATION MARK..MANDAIC GEMINATION MARK
-unicode_bidi_class(0x08E4, 0x08FE, 'NSM'). % Mn  [27] ARABIC CURLY FATHA..ARABIC DAMMA WITH DOT
-unicode_bidi_class(0x0900, 0x0902, 'NSM'). % Mn   [3] DEVANAGARI SIGN INVERTED CANDRABINDU..DEVANAGARI SIGN ANUSVARA
-unicode_bidi_class(0x093A, 0x093A, 'NSM'). % Mn       DEVANAGARI VOWEL SIGN OE
-unicode_bidi_class(0x093C, 0x093C, 'NSM'). % Mn       DEVANAGARI SIGN NUKTA
-unicode_bidi_class(0x0941, 0x0948, 'NSM'). % Mn   [8] DEVANAGARI VOWEL SIGN U..DEVANAGARI VOWEL SIGN AI
-unicode_bidi_class(0x094D, 0x094D, 'NSM'). % Mn       DEVANAGARI SIGN VIRAMA
-unicode_bidi_class(0x0951, 0x0957, 'NSM'). % Mn   [7] DEVANAGARI STRESS SIGN UDATTA..DEVANAGARI VOWEL SIGN UUE
-unicode_bidi_class(0x0962, 0x0963, 'NSM'). % Mn   [2] DEVANAGARI VOWEL SIGN VOCALIC L..DEVANAGARI VOWEL SIGN VOCALIC LL
-unicode_bidi_class(0x0981, 0x0981, 'NSM'). % Mn       BENGALI SIGN CANDRABINDU
-unicode_bidi_class(0x09BC, 0x09BC, 'NSM'). % Mn       BENGALI SIGN NUKTA
-unicode_bidi_class(0x09C1, 0x09C4, 'NSM'). % Mn   [4] BENGALI VOWEL SIGN U..BENGALI VOWEL SIGN VOCALIC RR
-unicode_bidi_class(0x09CD, 0x09CD, 'NSM'). % Mn       BENGALI SIGN VIRAMA
-unicode_bidi_class(0x09E2, 0x09E3, 'NSM'). % Mn   [2] BENGALI VOWEL SIGN VOCALIC L..BENGALI VOWEL SIGN VOCALIC LL
-unicode_bidi_class(0x0A01, 0x0A02, 'NSM'). % Mn   [2] GURMUKHI SIGN ADAK BINDI..GURMUKHI SIGN BINDI
-unicode_bidi_class(0x0A3C, 0x0A3C, 'NSM'). % Mn       GURMUKHI SIGN NUKTA
-unicode_bidi_class(0x0A41, 0x0A42, 'NSM'). % Mn   [2] GURMUKHI VOWEL SIGN U..GURMUKHI VOWEL SIGN UU
-unicode_bidi_class(0x0A47, 0x0A48, 'NSM'). % Mn   [2] GURMUKHI VOWEL SIGN EE..GURMUKHI VOWEL SIGN AI
-unicode_bidi_class(0x0A4B, 0x0A4D, 'NSM'). % Mn   [3] GURMUKHI VOWEL SIGN OO..GURMUKHI SIGN VIRAMA
-unicode_bidi_class(0x0A51, 0x0A51, 'NSM'). % Mn       GURMUKHI SIGN UDAAT
-unicode_bidi_class(0x0A70, 0x0A71, 'NSM'). % Mn   [2] GURMUKHI TIPPI..GURMUKHI ADDAK
-unicode_bidi_class(0x0A75, 0x0A75, 'NSM'). % Mn       GURMUKHI SIGN YAKASH
-unicode_bidi_class(0x0A81, 0x0A82, 'NSM'). % Mn   [2] GUJARATI SIGN CANDRABINDU..GUJARATI SIGN ANUSVARA
-unicode_bidi_class(0x0ABC, 0x0ABC, 'NSM'). % Mn       GUJARATI SIGN NUKTA
-unicode_bidi_class(0x0AC1, 0x0AC5, 'NSM'). % Mn   [5] GUJARATI VOWEL SIGN U..GUJARATI VOWEL SIGN CANDRA E
-unicode_bidi_class(0x0AC7, 0x0AC8, 'NSM'). % Mn   [2] GUJARATI VOWEL SIGN E..GUJARATI VOWEL SIGN AI
-unicode_bidi_class(0x0ACD, 0x0ACD, 'NSM'). % Mn       GUJARATI SIGN VIRAMA
-unicode_bidi_class(0x0AE2, 0x0AE3, 'NSM'). % Mn   [2] GUJARATI VOWEL SIGN VOCALIC L..GUJARATI VOWEL SIGN VOCALIC LL
-unicode_bidi_class(0x0B01, 0x0B01, 'NSM'). % Mn       ORIYA SIGN CANDRABINDU
-unicode_bidi_class(0x0B3C, 0x0B3C, 'NSM'). % Mn       ORIYA SIGN NUKTA
-unicode_bidi_class(0x0B3F, 0x0B3F, 'NSM'). % Mn       ORIYA VOWEL SIGN I
-unicode_bidi_class(0x0B41, 0x0B44, 'NSM'). % Mn   [4] ORIYA VOWEL SIGN U..ORIYA VOWEL SIGN VOCALIC RR
-unicode_bidi_class(0x0B4D, 0x0B4D, 'NSM'). % Mn       ORIYA SIGN VIRAMA
-unicode_bidi_class(0x0B56, 0x0B56, 'NSM'). % Mn       ORIYA AI LENGTH MARK
-unicode_bidi_class(0x0B62, 0x0B63, 'NSM'). % Mn   [2] ORIYA VOWEL SIGN VOCALIC L..ORIYA VOWEL SIGN VOCALIC LL
-unicode_bidi_class(0x0B82, 0x0B82, 'NSM'). % Mn       TAMIL SIGN ANUSVARA
-unicode_bidi_class(0x0BC0, 0x0BC0, 'NSM'). % Mn       TAMIL VOWEL SIGN II
-unicode_bidi_class(0x0BCD, 0x0BCD, 'NSM'). % Mn       TAMIL SIGN VIRAMA
-unicode_bidi_class(0x0C3E, 0x0C40, 'NSM'). % Mn   [3] TELUGU VOWEL SIGN AA..TELUGU VOWEL SIGN II
-unicode_bidi_class(0x0C46, 0x0C48, 'NSM'). % Mn   [3] TELUGU VOWEL SIGN E..TELUGU VOWEL SIGN AI
-unicode_bidi_class(0x0C4A, 0x0C4D, 'NSM'). % Mn   [4] TELUGU VOWEL SIGN O..TELUGU SIGN VIRAMA
-unicode_bidi_class(0x0C55, 0x0C56, 'NSM'). % Mn   [2] TELUGU LENGTH MARK..TELUGU AI LENGTH MARK
-unicode_bidi_class(0x0C62, 0x0C63, 'NSM'). % Mn   [2] TELUGU VOWEL SIGN VOCALIC L..TELUGU VOWEL SIGN VOCALIC LL
-unicode_bidi_class(0x0CBC, 0x0CBC, 'NSM'). % Mn       KANNADA SIGN NUKTA
-unicode_bidi_class(0x0CCC, 0x0CCD, 'NSM'). % Mn   [2] KANNADA VOWEL SIGN AU..KANNADA SIGN VIRAMA
-unicode_bidi_class(0x0CE2, 0x0CE3, 'NSM'). % Mn   [2] KANNADA VOWEL SIGN VOCALIC L..KANNADA VOWEL SIGN VOCALIC LL
-unicode_bidi_class(0x0D41, 0x0D44, 'NSM'). % Mn   [4] MALAYALAM VOWEL SIGN U..MALAYALAM VOWEL SIGN VOCALIC RR
-unicode_bidi_class(0x0D4D, 0x0D4D, 'NSM'). % Mn       MALAYALAM SIGN VIRAMA
-unicode_bidi_class(0x0D62, 0x0D63, 'NSM'). % Mn   [2] MALAYALAM VOWEL SIGN VOCALIC L..MALAYALAM VOWEL SIGN VOCALIC LL
-unicode_bidi_class(0x0DCA, 0x0DCA, 'NSM'). % Mn       SINHALA SIGN AL-LAKUNA
-unicode_bidi_class(0x0DD2, 0x0DD4, 'NSM'). % Mn   [3] SINHALA VOWEL SIGN KETTI IS-PILLA..SINHALA VOWEL SIGN KETTI PAA-PILLA
-unicode_bidi_class(0x0DD6, 0x0DD6, 'NSM'). % Mn       SINHALA VOWEL SIGN DIGA PAA-PILLA
-unicode_bidi_class(0x0E31, 0x0E31, 'NSM'). % Mn       THAI CHARACTER MAI HAN-AKAT
-unicode_bidi_class(0x0E34, 0x0E3A, 'NSM'). % Mn   [7] THAI CHARACTER SARA I..THAI CHARACTER PHINTHU
-unicode_bidi_class(0x0E47, 0x0E4E, 'NSM'). % Mn   [8] THAI CHARACTER MAITAIKHU..THAI CHARACTER YAMAKKAN
-unicode_bidi_class(0x0EB1, 0x0EB1, 'NSM'). % Mn       LAO VOWEL SIGN MAI KAN
-unicode_bidi_class(0x0EB4, 0x0EB9, 'NSM'). % Mn   [6] LAO VOWEL SIGN I..LAO VOWEL SIGN UU
-unicode_bidi_class(0x0EBB, 0x0EBC, 'NSM'). % Mn   [2] LAO VOWEL SIGN MAI KON..LAO SEMIVOWEL SIGN LO
-unicode_bidi_class(0x0EC8, 0x0ECD, 'NSM'). % Mn   [6] LAO TONE MAI EK..LAO NIGGAHITA
-unicode_bidi_class(0x0F18, 0x0F19, 'NSM'). % Mn   [2] TIBETAN ASTROLOGICAL SIGN -KHYUD PA..TIBETAN ASTROLOGICAL SIGN SDONG TSHUGS
-unicode_bidi_class(0x0F35, 0x0F35, 'NSM'). % Mn       TIBETAN MARK NGAS BZUNG NYI ZLA
-unicode_bidi_class(0x0F37, 0x0F37, 'NSM'). % Mn       TIBETAN MARK NGAS BZUNG SGOR RTAGS
-unicode_bidi_class(0x0F39, 0x0F39, 'NSM'). % Mn       TIBETAN MARK TSA -PHRU
-unicode_bidi_class(0x0F71, 0x0F7E, 'NSM'). % Mn  [14] TIBETAN VOWEL SIGN AA..TIBETAN SIGN RJES SU NGA RO
-unicode_bidi_class(0x0F80, 0x0F84, 'NSM'). % Mn   [5] TIBETAN VOWEL SIGN REVERSED I..TIBETAN MARK HALANTA
-unicode_bidi_class(0x0F86, 0x0F87, 'NSM'). % Mn   [2] TIBETAN SIGN LCI RTAGS..TIBETAN SIGN YANG RTAGS
-unicode_bidi_class(0x0F8D, 0x0F97, 'NSM'). % Mn  [11] TIBETAN SUBJOINED SIGN LCE TSA CAN..TIBETAN SUBJOINED LETTER JA
-unicode_bidi_class(0x0F99, 0x0FBC, 'NSM'). % Mn  [36] TIBETAN SUBJOINED LETTER NYA..TIBETAN SUBJOINED LETTER FIXED-FORM RA
-unicode_bidi_class(0x0FC6, 0x0FC6, 'NSM'). % Mn       TIBETAN SYMBOL PADMA GDAN
-unicode_bidi_class(0x102D, 0x1030, 'NSM'). % Mn   [4] MYANMAR VOWEL SIGN I..MYANMAR VOWEL SIGN UU
-unicode_bidi_class(0x1032, 0x1037, 'NSM'). % Mn   [6] MYANMAR VOWEL SIGN AI..MYANMAR SIGN DOT BELOW
-unicode_bidi_class(0x1039, 0x103A, 'NSM'). % Mn   [2] MYANMAR SIGN VIRAMA..MYANMAR SIGN ASAT
-unicode_bidi_class(0x103D, 0x103E, 'NSM'). % Mn   [2] MYANMAR CONSONANT SIGN MEDIAL WA..MYANMAR CONSONANT SIGN MEDIAL HA
-unicode_bidi_class(0x1058, 0x1059, 'NSM'). % Mn   [2] MYANMAR VOWEL SIGN VOCALIC L..MYANMAR VOWEL SIGN VOCALIC LL
-unicode_bidi_class(0x105E, 0x1060, 'NSM'). % Mn   [3] MYANMAR CONSONANT SIGN MON MEDIAL NA..MYANMAR CONSONANT SIGN MON MEDIAL LA
-unicode_bidi_class(0x1071, 0x1074, 'NSM'). % Mn   [4] MYANMAR VOWEL SIGN GEBA KAREN I..MYANMAR VOWEL SIGN KAYAH EE
-unicode_bidi_class(0x1082, 0x1082, 'NSM'). % Mn       MYANMAR CONSONANT SIGN SHAN MEDIAL WA
-unicode_bidi_class(0x1085, 0x1086, 'NSM'). % Mn   [2] MYANMAR VOWEL SIGN SHAN E ABOVE..MYANMAR VOWEL SIGN SHAN FINAL Y
-unicode_bidi_class(0x108D, 0x108D, 'NSM'). % Mn       MYANMAR SIGN SHAN COUNCIL EMPHATIC TONE
-unicode_bidi_class(0x109D, 0x109D, 'NSM'). % Mn       MYANMAR VOWEL SIGN AITON AI
-unicode_bidi_class(0x135D, 0x135F, 'NSM'). % Mn   [3] ETHIOPIC COMBINING GEMINATION AND VOWEL LENGTH MARK..ETHIOPIC COMBINING GEMINATION MARK
-unicode_bidi_class(0x1712, 0x1714, 'NSM'). % Mn   [3] TAGALOG VOWEL SIGN I..TAGALOG SIGN VIRAMA
-unicode_bidi_class(0x1732, 0x1734, 'NSM'). % Mn   [3] HANUNOO VOWEL SIGN I..HANUNOO SIGN PAMUDPOD
-unicode_bidi_class(0x1752, 0x1753, 'NSM'). % Mn   [2] BUHID VOWEL SIGN I..BUHID VOWEL SIGN U
-unicode_bidi_class(0x1772, 0x1773, 'NSM'). % Mn   [2] TAGBANWA VOWEL SIGN I..TAGBANWA VOWEL SIGN U
-unicode_bidi_class(0x17B4, 0x17B5, 'NSM'). % Mn   [2] KHMER VOWEL INHERENT AQ..KHMER VOWEL INHERENT AA
-unicode_bidi_class(0x17B7, 0x17BD, 'NSM'). % Mn   [7] KHMER VOWEL SIGN I..KHMER VOWEL SIGN UA
-unicode_bidi_class(0x17C6, 0x17C6, 'NSM'). % Mn       KHMER SIGN NIKAHIT
-unicode_bidi_class(0x17C9, 0x17D3, 'NSM'). % Mn  [11] KHMER SIGN MUUSIKATOAN..KHMER SIGN BATHAMASAT
-unicode_bidi_class(0x17DD, 0x17DD, 'NSM'). % Mn       KHMER SIGN ATTHACAN
-unicode_bidi_class(0x180B, 0x180D, 'NSM'). % Mn   [3] MONGOLIAN FREE VARIATION SELECTOR ONE..MONGOLIAN FREE VARIATION SELECTOR THREE
-unicode_bidi_class(0x18A9, 0x18A9, 'NSM'). % Mn       MONGOLIAN LETTER ALI GALI DAGALGA
-unicode_bidi_class(0x1920, 0x1922, 'NSM'). % Mn   [3] LIMBU VOWEL SIGN A..LIMBU VOWEL SIGN U
-unicode_bidi_class(0x1927, 0x1928, 'NSM'). % Mn   [2] LIMBU VOWEL SIGN E..LIMBU VOWEL SIGN O
-unicode_bidi_class(0x1932, 0x1932, 'NSM'). % Mn       LIMBU SMALL LETTER ANUSVARA
-unicode_bidi_class(0x1939, 0x193B, 'NSM'). % Mn   [3] LIMBU SIGN MUKPHRENG..LIMBU SIGN SA-I
-unicode_bidi_class(0x1A17, 0x1A18, 'NSM'). % Mn   [2] BUGINESE VOWEL SIGN I..BUGINESE VOWEL SIGN U
-unicode_bidi_class(0x1A56, 0x1A56, 'NSM'). % Mn       TAI THAM CONSONANT SIGN MEDIAL LA
-unicode_bidi_class(0x1A58, 0x1A5E, 'NSM'). % Mn   [7] TAI THAM SIGN MAI KANG LAI..TAI THAM CONSONANT SIGN SA
-unicode_bidi_class(0x1A60, 0x1A60, 'NSM'). % Mn       TAI THAM SIGN SAKOT
-unicode_bidi_class(0x1A62, 0x1A62, 'NSM'). % Mn       TAI THAM VOWEL SIGN MAI SAT
-unicode_bidi_class(0x1A65, 0x1A6C, 'NSM'). % Mn   [8] TAI THAM VOWEL SIGN I..TAI THAM VOWEL SIGN OA BELOW
-unicode_bidi_class(0x1A73, 0x1A7C, 'NSM'). % Mn  [10] TAI THAM VOWEL SIGN OA ABOVE..TAI THAM SIGN KHUEN-LUE KARAN
-unicode_bidi_class(0x1A7F, 0x1A7F, 'NSM'). % Mn       TAI THAM COMBINING CRYPTOGRAMMIC DOT
-unicode_bidi_class(0x1B00, 0x1B03, 'NSM'). % Mn   [4] BALINESE SIGN ULU RICEM..BALINESE SIGN SURANG
-unicode_bidi_class(0x1B34, 0x1B34, 'NSM'). % Mn       BALINESE SIGN REREKAN
-unicode_bidi_class(0x1B36, 0x1B3A, 'NSM'). % Mn   [5] BALINESE VOWEL SIGN ULU..BALINESE VOWEL SIGN RA REPA
-unicode_bidi_class(0x1B3C, 0x1B3C, 'NSM'). % Mn       BALINESE VOWEL SIGN LA LENGA
-unicode_bidi_class(0x1B42, 0x1B42, 'NSM'). % Mn       BALINESE VOWEL SIGN PEPET
-unicode_bidi_class(0x1B6B, 0x1B73, 'NSM'). % Mn   [9] BALINESE MUSICAL SYMBOL COMBINING TEGEH..BALINESE MUSICAL SYMBOL COMBINING GONG
-unicode_bidi_class(0x1B80, 0x1B81, 'NSM'). % Mn   [2] SUNDANESE SIGN PANYECEK..SUNDANESE SIGN PANGLAYAR
-unicode_bidi_class(0x1BA2, 0x1BA5, 'NSM'). % Mn   [4] SUNDANESE CONSONANT SIGN PANYAKRA..SUNDANESE VOWEL SIGN PANYUKU
-unicode_bidi_class(0x1BA8, 0x1BA9, 'NSM'). % Mn   [2] SUNDANESE VOWEL SIGN PAMEPET..SUNDANESE VOWEL SIGN PANEULEUNG
-unicode_bidi_class(0x1BAB, 0x1BAB, 'NSM'). % Mn       SUNDANESE SIGN VIRAMA
-unicode_bidi_class(0x1BE6, 0x1BE6, 'NSM'). % Mn       BATAK SIGN TOMPI
-unicode_bidi_class(0x1BE8, 0x1BE9, 'NSM'). % Mn   [2] BATAK VOWEL SIGN PAKPAK E..BATAK VOWEL SIGN EE
-unicode_bidi_class(0x1BED, 0x1BED, 'NSM'). % Mn       BATAK VOWEL SIGN KARO O
-unicode_bidi_class(0x1BEF, 0x1BF1, 'NSM'). % Mn   [3] BATAK VOWEL SIGN U FOR SIMALUNGUN SA..BATAK CONSONANT SIGN H
-unicode_bidi_class(0x1C2C, 0x1C33, 'NSM'). % Mn   [8] LEPCHA VOWEL SIGN E..LEPCHA CONSONANT SIGN T
-unicode_bidi_class(0x1C36, 0x1C37, 'NSM'). % Mn   [2] LEPCHA SIGN RAN..LEPCHA SIGN NUKTA
-unicode_bidi_class(0x1CD0, 0x1CD2, 'NSM'). % Mn   [3] VEDIC TONE KARSHANA..VEDIC TONE PRENKHA
-unicode_bidi_class(0x1CD4, 0x1CE0, 'NSM'). % Mn  [13] VEDIC SIGN YAJURVEDIC MIDLINE SVARITA..VEDIC TONE RIGVEDIC KASHMIRI INDEPENDENT SVARITA
-unicode_bidi_class(0x1CE2, 0x1CE8, 'NSM'). % Mn   [7] VEDIC SIGN VISARGA SVARITA..VEDIC SIGN VISARGA ANUDATTA WITH TAIL
-unicode_bidi_class(0x1CED, 0x1CED, 'NSM'). % Mn       VEDIC SIGN TIRYAK
-unicode_bidi_class(0x1CF4, 0x1CF4, 'NSM'). % Mn       VEDIC TONE CANDRA ABOVE
-unicode_bidi_class(0x1DC0, 0x1DE6, 'NSM'). % Mn  [39] COMBINING DOTTED GRAVE ACCENT..COMBINING LATIN SMALL LETTER Z
-unicode_bidi_class(0x1DFC, 0x1DFF, 'NSM'). % Mn   [4] COMBINING DOUBLE INVERTED BREVE BELOW..COMBINING RIGHT ARROWHEAD AND DOWN ARROWHEAD BELOW
-unicode_bidi_class(0x20D0, 0x20DC, 'NSM'). % Mn  [13] COMBINING LEFT HARPOON ABOVE..COMBINING FOUR DOTS ABOVE
-unicode_bidi_class(0x20DD, 0x20E0, 'NSM'). % Me   [4] COMBINING ENCLOSING CIRCLE..COMBINING ENCLOSING CIRCLE BACKSLASH
-unicode_bidi_class(0x20E1, 0x20E1, 'NSM'). % Mn       COMBINING LEFT RIGHT ARROW ABOVE
-unicode_bidi_class(0x20E2, 0x20E4, 'NSM'). % Me   [3] COMBINING ENCLOSING SCREEN..COMBINING ENCLOSING UPWARD POINTING TRIANGLE
-unicode_bidi_class(0x20E5, 0x20F0, 'NSM'). % Mn  [12] COMBINING REVERSE SOLIDUS OVERLAY..COMBINING ASTERISK ABOVE
-unicode_bidi_class(0x2CEF, 0x2CF1, 'NSM'). % Mn   [3] COPTIC COMBINING NI ABOVE..COPTIC COMBINING SPIRITUS LENIS
-unicode_bidi_class(0x2D7F, 0x2D7F, 'NSM'). % Mn       TIFINAGH CONSONANT JOINER
-unicode_bidi_class(0x2DE0, 0x2DFF, 'NSM'). % Mn  [32] COMBINING CYRILLIC LETTER BE..COMBINING CYRILLIC LETTER IOTIFIED BIG YUS
-unicode_bidi_class(0x302A, 0x302D, 'NSM'). % Mn   [4] IDEOGRAPHIC LEVEL TONE MARK..IDEOGRAPHIC ENTERING TONE MARK
-unicode_bidi_class(0x3099, 0x309A, 'NSM'). % Mn   [2] COMBINING KATAKANA-HIRAGANA VOICED SOUND MARK..COMBINING KATAKANA-HIRAGANA SEMI-VOICED SOUND MARK
-unicode_bidi_class(0xA66F, 0xA66F, 'NSM'). % Mn       COMBINING CYRILLIC VZMET
-unicode_bidi_class(0xA670, 0xA672, 'NSM'). % Me   [3] COMBINING CYRILLIC TEN MILLIONS SIGN..COMBINING CYRILLIC THOUSAND MILLIONS SIGN
-unicode_bidi_class(0xA674, 0xA67D, 'NSM'). % Mn  [10] COMBINING CYRILLIC LETTER UKRAINIAN IE..COMBINING CYRILLIC PAYEROK
-unicode_bidi_class(0xA69F, 0xA69F, 'NSM'). % Mn       COMBINING CYRILLIC LETTER IOTIFIED E
-unicode_bidi_class(0xA6F0, 0xA6F1, 'NSM'). % Mn   [2] BAMUM COMBINING MARK KOQNDON..BAMUM COMBINING MARK TUKWENTIS
-unicode_bidi_class(0xA802, 0xA802, 'NSM'). % Mn       SYLOTI NAGRI SIGN DVISVARA
-unicode_bidi_class(0xA806, 0xA806, 'NSM'). % Mn       SYLOTI NAGRI SIGN HASANTA
-unicode_bidi_class(0xA80B, 0xA80B, 'NSM'). % Mn       SYLOTI NAGRI SIGN ANUSVARA
-unicode_bidi_class(0xA825, 0xA826, 'NSM'). % Mn   [2] SYLOTI NAGRI VOWEL SIGN U..SYLOTI NAGRI VOWEL SIGN E
-unicode_bidi_class(0xA8C4, 0xA8C4, 'NSM'). % Mn       SAURASHTRA SIGN VIRAMA
-unicode_bidi_class(0xA8E0, 0xA8F1, 'NSM'). % Mn  [18] COMBINING DEVANAGARI DIGIT ZERO..COMBINING DEVANAGARI SIGN AVAGRAHA
-unicode_bidi_class(0xA926, 0xA92D, 'NSM'). % Mn   [8] KAYAH LI VOWEL UE..KAYAH LI TONE CALYA PLOPHU
-unicode_bidi_class(0xA947, 0xA951, 'NSM'). % Mn  [11] REJANG VOWEL SIGN I..REJANG CONSONANT SIGN R
-unicode_bidi_class(0xA980, 0xA982, 'NSM'). % Mn   [3] JAVANESE SIGN PANYANGGA..JAVANESE SIGN LAYAR
-unicode_bidi_class(0xA9B3, 0xA9B3, 'NSM'). % Mn       JAVANESE SIGN CECAK TELU
-unicode_bidi_class(0xA9B6, 0xA9B9, 'NSM'). % Mn   [4] JAVANESE VOWEL SIGN WULU..JAVANESE VOWEL SIGN SUKU MENDUT
-unicode_bidi_class(0xA9BC, 0xA9BC, 'NSM'). % Mn       JAVANESE VOWEL SIGN PEPET
-unicode_bidi_class(0xAA29, 0xAA2E, 'NSM'). % Mn   [6] CHAM VOWEL SIGN AA..CHAM VOWEL SIGN OE
-unicode_bidi_class(0xAA31, 0xAA32, 'NSM'). % Mn   [2] CHAM VOWEL SIGN AU..CHAM VOWEL SIGN UE
-unicode_bidi_class(0xAA35, 0xAA36, 'NSM'). % Mn   [2] CHAM CONSONANT SIGN LA..CHAM CONSONANT SIGN WA
-unicode_bidi_class(0xAA43, 0xAA43, 'NSM'). % Mn       CHAM CONSONANT SIGN FINAL NG
-unicode_bidi_class(0xAA4C, 0xAA4C, 'NSM'). % Mn       CHAM CONSONANT SIGN FINAL M
-unicode_bidi_class(0xAAB0, 0xAAB0, 'NSM'). % Mn       TAI VIET MAI KANG
-unicode_bidi_class(0xAAB2, 0xAAB4, 'NSM'). % Mn   [3] TAI VIET VOWEL I..TAI VIET VOWEL U
-unicode_bidi_class(0xAAB7, 0xAAB8, 'NSM'). % Mn   [2] TAI VIET MAI KHIT..TAI VIET VOWEL IA
-unicode_bidi_class(0xAABE, 0xAABF, 'NSM'). % Mn   [2] TAI VIET VOWEL AM..TAI VIET TONE MAI EK
-unicode_bidi_class(0xAAC1, 0xAAC1, 'NSM'). % Mn       TAI VIET TONE MAI THO
-unicode_bidi_class(0xAAEC, 0xAAED, 'NSM'). % Mn   [2] MEETEI MAYEK VOWEL SIGN UU..MEETEI MAYEK VOWEL SIGN AAI
-unicode_bidi_class(0xAAF6, 0xAAF6, 'NSM'). % Mn       MEETEI MAYEK VIRAMA
-unicode_bidi_class(0xABE5, 0xABE5, 'NSM'). % Mn       MEETEI MAYEK VOWEL SIGN ANAP
-unicode_bidi_class(0xABE8, 0xABE8, 'NSM'). % Mn       MEETEI MAYEK VOWEL SIGN UNAP
-unicode_bidi_class(0xABED, 0xABED, 'NSM'). % Mn       MEETEI MAYEK APUN IYEK
-unicode_bidi_class(0xFB1E, 0xFB1E, 'NSM'). % Mn       HEBREW POINT JUDEO-SPANISH VARIKA
-unicode_bidi_class(0xFE00, 0xFE0F, 'NSM'). % Mn  [16] VARIATION SELECTOR-1..VARIATION SELECTOR-16
-unicode_bidi_class(0xFE20, 0xFE26, 'NSM'). % Mn   [7] COMBINING LIGATURE LEFT HALF..COMBINING CONJOINING MACRON
-unicode_bidi_class(0x101FD, 0x101FD, 'NSM'). % Mn       PHAISTOS DISC SIGN COMBINING OBLIQUE STROKE
-unicode_bidi_class(0x10A01, 0x10A03, 'NSM'). % Mn   [3] KHAROSHTHI VOWEL SIGN I..KHAROSHTHI VOWEL SIGN VOCALIC R
-unicode_bidi_class(0x10A05, 0x10A06, 'NSM'). % Mn   [2] KHAROSHTHI VOWEL SIGN E..KHAROSHTHI VOWEL SIGN O
-unicode_bidi_class(0x10A0C, 0x10A0F, 'NSM'). % Mn   [4] KHAROSHTHI VOWEL LENGTH MARK..KHAROSHTHI SIGN VISARGA
-unicode_bidi_class(0x10A38, 0x10A3A, 'NSM'). % Mn   [3] KHAROSHTHI SIGN BAR ABOVE..KHAROSHTHI SIGN DOT BELOW
-unicode_bidi_class(0x10A3F, 0x10A3F, 'NSM'). % Mn       KHAROSHTHI VIRAMA
-unicode_bidi_class(0x11001, 0x11001, 'NSM'). % Mn       BRAHMI SIGN ANUSVARA
-unicode_bidi_class(0x11038, 0x11046, 'NSM'). % Mn  [15] BRAHMI VOWEL SIGN AA..BRAHMI VIRAMA
-unicode_bidi_class(0x11080, 0x11081, 'NSM'). % Mn   [2] KAITHI SIGN CANDRABINDU..KAITHI SIGN ANUSVARA
-unicode_bidi_class(0x110B3, 0x110B6, 'NSM'). % Mn   [4] KAITHI VOWEL SIGN U..KAITHI VOWEL SIGN AI
-unicode_bidi_class(0x110B9, 0x110BA, 'NSM'). % Mn   [2] KAITHI SIGN VIRAMA..KAITHI SIGN NUKTA
-unicode_bidi_class(0x11100, 0x11102, 'NSM'). % Mn   [3] CHAKMA SIGN CANDRABINDU..CHAKMA SIGN VISARGA
-unicode_bidi_class(0x11127, 0x1112B, 'NSM'). % Mn   [5] CHAKMA VOWEL SIGN A..CHAKMA VOWEL SIGN UU
-unicode_bidi_class(0x1112D, 0x11134, 'NSM'). % Mn   [8] CHAKMA VOWEL SIGN AI..CHAKMA MAAYYAA
-unicode_bidi_class(0x11180, 0x11181, 'NSM'). % Mn   [2] SHARADA SIGN CANDRABINDU..SHARADA SIGN ANUSVARA
-unicode_bidi_class(0x111B6, 0x111BE, 'NSM'). % Mn   [9] SHARADA VOWEL SIGN U..SHARADA VOWEL SIGN O
-unicode_bidi_class(0x116AB, 0x116AB, 'NSM'). % Mn       TAKRI SIGN ANUSVARA
-unicode_bidi_class(0x116AD, 0x116AD, 'NSM'). % Mn       TAKRI VOWEL SIGN AA
-unicode_bidi_class(0x116B0, 0x116B5, 'NSM'). % Mn   [6] TAKRI VOWEL SIGN U..TAKRI VOWEL SIGN AU
-unicode_bidi_class(0x116B7, 0x116B7, 'NSM'). % Mn       TAKRI SIGN NUKTA
-unicode_bidi_class(0x16F8F, 0x16F92, 'NSM'). % Mn   [4] MIAO TONE RIGHT..MIAO TONE BELOW
-unicode_bidi_class(0x1D167, 0x1D169, 'NSM'). % Mn   [3] MUSICAL SYMBOL COMBINING TREMOLO-1..MUSICAL SYMBOL COMBINING TREMOLO-3
-unicode_bidi_class(0x1D17B, 0x1D182, 'NSM'). % Mn   [8] MUSICAL SYMBOL COMBINING ACCENT..MUSICAL SYMBOL COMBINING LOURE
-unicode_bidi_class(0x1D185, 0x1D18B, 'NSM'). % Mn   [7] MUSICAL SYMBOL COMBINING DOIT..MUSICAL SYMBOL COMBINING TRIPLE TONGUE
-unicode_bidi_class(0x1D1AA, 0x1D1AD, 'NSM'). % Mn   [4] MUSICAL SYMBOL COMBINING DOWN BOW..MUSICAL SYMBOL COMBINING SNAP PIZZICATO
-unicode_bidi_class(0x1D242, 0x1D244, 'NSM'). % Mn   [3] COMBINING GREEK MUSICAL TRISEME..COMBINING GREEK MUSICAL PENTASEME
-unicode_bidi_class(0xE0100, 0xE01EF, 'NSM'). % Mn [240] VARIATION SELECTOR-17..VARIATION SELECTOR-256
-
-% Total code points: 1290
-
-% ================================================
-
-% Bidi_Class=Arabic_Letter
-
-unicode_bidi_class(0x0605, 0x0605, 'AL'). % Cn       <reserved-0605>
-unicode_bidi_class(0x0608, 0x0608, 'AL'). % Sm       ARABIC RAY
-unicode_bidi_class(0x060B, 0x060B, 'AL'). % Sc       AFGHANI SIGN
-unicode_bidi_class(0x060D, 0x060D, 'AL'). % Po       ARABIC DATE SEPARATOR
-unicode_bidi_class(0x061B, 0x061B, 'AL'). % Po       ARABIC SEMICOLON
-unicode_bidi_class(0x061C, 0x061D, 'AL'). % Cn   [2] <reserved-061C>..<reserved-061D>
-unicode_bidi_class(0x061E, 0x061F, 'AL'). % Po   [2] ARABIC TRIPLE DOT PUNCTUATION MARK..ARABIC QUESTION MARK
-unicode_bidi_class(0x0620, 0x063F, 'AL'). % Lo  [32] ARABIC LETTER KASHMIRI YEH..ARABIC LETTER FARSI YEH WITH THREE DOTS ABOVE
-unicode_bidi_class(0x0640, 0x0640, 'AL'). % Lm       ARABIC TATWEEL
-unicode_bidi_class(0x0641, 0x064A, 'AL'). % Lo  [10] ARABIC LETTER FEH..ARABIC LETTER YEH
-unicode_bidi_class(0x066D, 0x066D, 'AL'). % Po       ARABIC FIVE POINTED STAR
-unicode_bidi_class(0x066E, 0x066F, 'AL'). % Lo   [2] ARABIC LETTER DOTLESS BEH..ARABIC LETTER DOTLESS QAF
-unicode_bidi_class(0x0671, 0x06D3, 'AL'). % Lo  [99] ARABIC LETTER ALEF WASLA..ARABIC LETTER YEH BARREE WITH HAMZA ABOVE
-unicode_bidi_class(0x06D4, 0x06D4, 'AL'). % Po       ARABIC FULL STOP
-unicode_bidi_class(0x06D5, 0x06D5, 'AL'). % Lo       ARABIC LETTER AE
-unicode_bidi_class(0x06E5, 0x06E6, 'AL'). % Lm   [2] ARABIC SMALL WAW..ARABIC SMALL YEH
-unicode_bidi_class(0x06EE, 0x06EF, 'AL'). % Lo   [2] ARABIC LETTER DAL WITH INVERTED V..ARABIC LETTER REH WITH INVERTED V
-unicode_bidi_class(0x06FA, 0x06FC, 'AL'). % Lo   [3] ARABIC LETTER SHEEN WITH DOT BELOW..ARABIC LETTER GHAIN WITH DOT BELOW
-unicode_bidi_class(0x06FD, 0x06FE, 'AL'). % So   [2] ARABIC SIGN SINDHI AMPERSAND..ARABIC SIGN SINDHI POSTPOSITION MEN
-unicode_bidi_class(0x06FF, 0x06FF, 'AL'). % Lo       ARABIC LETTER HEH WITH INVERTED V
-unicode_bidi_class(0x0700, 0x070D, 'AL'). % Po  [14] SYRIAC END OF PARAGRAPH..SYRIAC HARKLEAN ASTERISCUS
-unicode_bidi_class(0x070E, 0x070E, 'AL'). % Cn       <reserved-070E>
-unicode_bidi_class(0x070F, 0x070F, 'AL'). % Cf       SYRIAC ABBREVIATION MARK
-unicode_bidi_class(0x0710, 0x0710, 'AL'). % Lo       SYRIAC LETTER ALAPH
-unicode_bidi_class(0x0712, 0x072F, 'AL'). % Lo  [30] SYRIAC LETTER BETH..SYRIAC LETTER PERSIAN DHALATH
-unicode_bidi_class(0x074B, 0x074C, 'AL'). % Cn   [2] <reserved-074B>..<reserved-074C>
-unicode_bidi_class(0x074D, 0x07A5, 'AL'). % Lo  [89] SYRIAC LETTER SOGDIAN ZHAIN..THAANA LETTER WAAVU
-unicode_bidi_class(0x07B1, 0x07B1, 'AL'). % Lo       THAANA LETTER NAA
-unicode_bidi_class(0x07B2, 0x07BF, 'AL'). % Cn  [14] <reserved-07B2>..<reserved-07BF>
-unicode_bidi_class(0x08A0, 0x08A0, 'AL'). % Lo       ARABIC LETTER BEH WITH SMALL V BELOW
-unicode_bidi_class(0x08A1, 0x08A1, 'AL'). % Cn       <reserved-08A1>
-unicode_bidi_class(0x08A2, 0x08AC, 'AL'). % Lo  [11] ARABIC LETTER JEEM WITH TWO DOTS ABOVE..ARABIC LETTER ROHINGYA YEH
-unicode_bidi_class(0x08AD, 0x08E3, 'AL'). % Cn  [55] <reserved-08AD>..<reserved-08E3>
-unicode_bidi_class(0x08FF, 0x08FF, 'AL'). % Cn       <reserved-08FF>
-unicode_bidi_class(0xFB50, 0xFBB1, 'AL'). % Lo  [98] ARABIC LETTER ALEF WASLA ISOLATED FORM..ARABIC LETTER YEH BARREE WITH HAMZA ABOVE FINAL FORM
-unicode_bidi_class(0xFBB2, 0xFBC1, 'AL'). % Sk  [16] ARABIC SYMBOL DOT ABOVE..ARABIC SYMBOL SMALL TAH BELOW
-unicode_bidi_class(0xFBC2, 0xFBD2, 'AL'). % Cn  [17] <reserved-FBC2>..<reserved-FBD2>
-unicode_bidi_class(0xFBD3, 0xFD3D, 'AL'). % Lo [363] ARABIC LETTER NG ISOLATED FORM..ARABIC LIGATURE ALEF WITH FATHATAN ISOLATED FORM
-unicode_bidi_class(0xFD40, 0xFD4F, 'AL'). % Cn  [16] <reserved-FD40>..<reserved-FD4F>
-unicode_bidi_class(0xFD50, 0xFD8F, 'AL'). % Lo  [64] ARABIC LIGATURE TEH WITH JEEM WITH MEEM INITIAL FORM..ARABIC LIGATURE MEEM WITH KHAH WITH MEEM INITIAL FORM
-unicode_bidi_class(0xFD90, 0xFD91, 'AL'). % Cn   [2] <reserved-FD90>..<reserved-FD91>
-unicode_bidi_class(0xFD92, 0xFDC7, 'AL'). % Lo  [54] ARABIC LIGATURE MEEM WITH JEEM WITH KHAH INITIAL FORM..ARABIC LIGATURE NOON WITH JEEM WITH YEH FINAL FORM
-unicode_bidi_class(0xFDC8, 0xFDCF, 'AL'). % Cn   [8] <reserved-FDC8>..<reserved-FDCF>
-unicode_bidi_class(0xFDF0, 0xFDFB, 'AL'). % Lo  [12] ARABIC LIGATURE SALLA USED AS KORANIC STOP SIGN ISOLATED FORM..ARABIC LIGATURE JALLAJALALOUHOU
-unicode_bidi_class(0xFDFC, 0xFDFC, 'AL'). % Sc       RIAL SIGN
-unicode_bidi_class(0xFDFE, 0xFDFF, 'AL'). % Cn   [2] <reserved-FDFE>..<reserved-FDFF>
-unicode_bidi_class(0xFE70, 0xFE74, 'AL'). % Lo   [5] ARABIC FATHATAN ISOLATED FORM..ARABIC KASRATAN ISOLATED FORM
-unicode_bidi_class(0xFE75, 0xFE75, 'AL'). % Cn       <reserved-FE75>
-unicode_bidi_class(0xFE76, 0xFEFC, 'AL'). % Lo [135] ARABIC FATHA ISOLATED FORM..ARABIC LIGATURE LAM WITH ALEF FINAL FORM
-unicode_bidi_class(0xFEFD, 0xFEFE, 'AL'). % Cn   [2] <reserved-FEFD>..<reserved-FEFE>
-unicode_bidi_class(0x1EE00, 0x1EE03, 'AL'). % Lo   [4] ARABIC MATHEMATICAL ALEF..ARABIC MATHEMATICAL DAL
-unicode_bidi_class(0x1EE04, 0x1EE04, 'AL'). % Cn       <reserved-1EE04>
-unicode_bidi_class(0x1EE05, 0x1EE1F, 'AL'). % Lo  [27] ARABIC MATHEMATICAL WAW..ARABIC MATHEMATICAL DOTLESS QAF
-unicode_bidi_class(0x1EE20, 0x1EE20, 'AL'). % Cn       <reserved-1EE20>
-unicode_bidi_class(0x1EE21, 0x1EE22, 'AL'). % Lo   [2] ARABIC MATHEMATICAL INITIAL BEH..ARABIC MATHEMATICAL INITIAL JEEM
-unicode_bidi_class(0x1EE23, 0x1EE23, 'AL'). % Cn       <reserved-1EE23>
-unicode_bidi_class(0x1EE24, 0x1EE24, 'AL'). % Lo       ARABIC MATHEMATICAL INITIAL HEH
-unicode_bidi_class(0x1EE25, 0x1EE26, 'AL'). % Cn   [2] <reserved-1EE25>..<reserved-1EE26>
-unicode_bidi_class(0x1EE27, 0x1EE27, 'AL'). % Lo       ARABIC MATHEMATICAL INITIAL HAH
-unicode_bidi_class(0x1EE28, 0x1EE28, 'AL'). % Cn       <reserved-1EE28>
-unicode_bidi_class(0x1EE29, 0x1EE32, 'AL'). % Lo  [10] ARABIC MATHEMATICAL INITIAL YEH..ARABIC MATHEMATICAL INITIAL QAF
-unicode_bidi_class(0x1EE33, 0x1EE33, 'AL'). % Cn       <reserved-1EE33>
-unicode_bidi_class(0x1EE34, 0x1EE37, 'AL'). % Lo   [4] ARABIC MATHEMATICAL INITIAL SHEEN..ARABIC MATHEMATICAL INITIAL KHAH
-unicode_bidi_class(0x1EE38, 0x1EE38, 'AL'). % Cn       <reserved-1EE38>
-unicode_bidi_class(0x1EE39, 0x1EE39, 'AL'). % Lo       ARABIC MATHEMATICAL INITIAL DAD
-unicode_bidi_class(0x1EE3A, 0x1EE3A, 'AL'). % Cn       <reserved-1EE3A>
-unicode_bidi_class(0x1EE3B, 0x1EE3B, 'AL'). % Lo       ARABIC MATHEMATICAL INITIAL GHAIN
-unicode_bidi_class(0x1EE3C, 0x1EE41, 'AL'). % Cn   [6] <reserved-1EE3C>..<reserved-1EE41>
-unicode_bidi_class(0x1EE42, 0x1EE42, 'AL'). % Lo       ARABIC MATHEMATICAL TAILED JEEM
-unicode_bidi_class(0x1EE43, 0x1EE46, 'AL'). % Cn   [4] <reserved-1EE43>..<reserved-1EE46>
-unicode_bidi_class(0x1EE47, 0x1EE47, 'AL'). % Lo       ARABIC MATHEMATICAL TAILED HAH
-unicode_bidi_class(0x1EE48, 0x1EE48, 'AL'). % Cn       <reserved-1EE48>
-unicode_bidi_class(0x1EE49, 0x1EE49, 'AL'). % Lo       ARABIC MATHEMATICAL TAILED YEH
-unicode_bidi_class(0x1EE4A, 0x1EE4A, 'AL'). % Cn       <reserved-1EE4A>
-unicode_bidi_class(0x1EE4B, 0x1EE4B, 'AL'). % Lo       ARABIC MATHEMATICAL TAILED LAM
-unicode_bidi_class(0x1EE4C, 0x1EE4C, 'AL'). % Cn       <reserved-1EE4C>
-unicode_bidi_class(0x1EE4D, 0x1EE4F, 'AL'). % Lo   [3] ARABIC MATHEMATICAL TAILED NOON..ARABIC MATHEMATICAL TAILED AIN
-unicode_bidi_class(0x1EE50, 0x1EE50, 'AL'). % Cn       <reserved-1EE50>
-unicode_bidi_class(0x1EE51, 0x1EE52, 'AL'). % Lo   [2] ARABIC MATHEMATICAL TAILED SAD..ARABIC MATHEMATICAL TAILED QAF
-unicode_bidi_class(0x1EE53, 0x1EE53, 'AL'). % Cn       <reserved-1EE53>
-unicode_bidi_class(0x1EE54, 0x1EE54, 'AL'). % Lo       ARABIC MATHEMATICAL TAILED SHEEN
-unicode_bidi_class(0x1EE55, 0x1EE56, 'AL'). % Cn   [2] <reserved-1EE55>..<reserved-1EE56>
-unicode_bidi_class(0x1EE57, 0x1EE57, 'AL'). % Lo       ARABIC MATHEMATICAL TAILED KHAH
-unicode_bidi_class(0x1EE58, 0x1EE58, 'AL'). % Cn       <reserved-1EE58>
-unicode_bidi_class(0x1EE59, 0x1EE59, 'AL'). % Lo       ARABIC MATHEMATICAL TAILED DAD
-unicode_bidi_class(0x1EE5A, 0x1EE5A, 'AL'). % Cn       <reserved-1EE5A>
-unicode_bidi_class(0x1EE5B, 0x1EE5B, 'AL'). % Lo       ARABIC MATHEMATICAL TAILED GHAIN
-unicode_bidi_class(0x1EE5C, 0x1EE5C, 'AL'). % Cn       <reserved-1EE5C>
-unicode_bidi_class(0x1EE5D, 0x1EE5D, 'AL'). % Lo       ARABIC MATHEMATICAL TAILED DOTLESS NOON
-unicode_bidi_class(0x1EE5E, 0x1EE5E, 'AL'). % Cn       <reserved-1EE5E>
-unicode_bidi_class(0x1EE5F, 0x1EE5F, 'AL'). % Lo       ARABIC MATHEMATICAL TAILED DOTLESS QAF
-unicode_bidi_class(0x1EE60, 0x1EE60, 'AL'). % Cn       <reserved-1EE60>
-unicode_bidi_class(0x1EE61, 0x1EE62, 'AL'). % Lo   [2] ARABIC MATHEMATICAL STRETCHED BEH..ARABIC MATHEMATICAL STRETCHED JEEM
-unicode_bidi_class(0x1EE63, 0x1EE63, 'AL'). % Cn       <reserved-1EE63>
-unicode_bidi_class(0x1EE64, 0x1EE64, 'AL'). % Lo       ARABIC MATHEMATICAL STRETCHED HEH
-unicode_bidi_class(0x1EE65, 0x1EE66, 'AL'). % Cn   [2] <reserved-1EE65>..<reserved-1EE66>
-unicode_bidi_class(0x1EE67, 0x1EE6A, 'AL'). % Lo   [4] ARABIC MATHEMATICAL STRETCHED HAH..ARABIC MATHEMATICAL STRETCHED KAF
-unicode_bidi_class(0x1EE6B, 0x1EE6B, 'AL'). % Cn       <reserved-1EE6B>
-unicode_bidi_class(0x1EE6C, 0x1EE72, 'AL'). % Lo   [7] ARABIC MATHEMATICAL STRETCHED MEEM..ARABIC MATHEMATICAL STRETCHED QAF
-unicode_bidi_class(0x1EE73, 0x1EE73, 'AL'). % Cn       <reserved-1EE73>
-unicode_bidi_class(0x1EE74, 0x1EE77, 'AL'). % Lo   [4] ARABIC MATHEMATICAL STRETCHED SHEEN..ARABIC MATHEMATICAL STRETCHED KHAH
-unicode_bidi_class(0x1EE78, 0x1EE78, 'AL'). % Cn       <reserved-1EE78>
-unicode_bidi_class(0x1EE79, 0x1EE7C, 'AL'). % Lo   [4] ARABIC MATHEMATICAL STRETCHED DAD..ARABIC MATHEMATICAL STRETCHED DOTLESS BEH
-unicode_bidi_class(0x1EE7D, 0x1EE7D, 'AL'). % Cn       <reserved-1EE7D>
-unicode_bidi_class(0x1EE7E, 0x1EE7E, 'AL'). % Lo       ARABIC MATHEMATICAL STRETCHED DOTLESS FEH
-unicode_bidi_class(0x1EE7F, 0x1EE7F, 'AL'). % Cn       <reserved-1EE7F>
-unicode_bidi_class(0x1EE80, 0x1EE89, 'AL'). % Lo  [10] ARABIC MATHEMATICAL LOOPED ALEF..ARABIC MATHEMATICAL LOOPED YEH
-unicode_bidi_class(0x1EE8A, 0x1EE8A, 'AL'). % Cn       <reserved-1EE8A>
-unicode_bidi_class(0x1EE8B, 0x1EE9B, 'AL'). % Lo  [17] ARABIC MATHEMATICAL LOOPED LAM..ARABIC MATHEMATICAL LOOPED GHAIN
-unicode_bidi_class(0x1EE9C, 0x1EEA0, 'AL'). % Cn   [5] <reserved-1EE9C>..<reserved-1EEA0>
-unicode_bidi_class(0x1EEA1, 0x1EEA3, 'AL'). % Lo   [3] ARABIC MATHEMATICAL DOUBLE-STRUCK BEH..ARABIC MATHEMATICAL DOUBLE-STRUCK DAL
-unicode_bidi_class(0x1EEA4, 0x1EEA4, 'AL'). % Cn       <reserved-1EEA4>
-unicode_bidi_class(0x1EEA5, 0x1EEA9, 'AL'). % Lo   [5] ARABIC MATHEMATICAL DOUBLE-STRUCK WAW..ARABIC MATHEMATICAL DOUBLE-STRUCK YEH
-unicode_bidi_class(0x1EEAA, 0x1EEAA, 'AL'). % Cn       <reserved-1EEAA>
-unicode_bidi_class(0x1EEAB, 0x1EEBB, 'AL'). % Lo  [17] ARABIC MATHEMATICAL DOUBLE-STRUCK LAM..ARABIC MATHEMATICAL DOUBLE-STRUCK GHAIN
-unicode_bidi_class(0x1EEBC, 0x1EEEF, 'AL'). % Cn  [52] <reserved-1EEBC>..<reserved-1EEEF>
-unicode_bidi_class(0x1EEF2, 0x1EEFF, 'AL'). % Cn  [14] <reserved-1EEF2>..<reserved-1EEFF>
-
-% Total code points: 1438
-
-% ================================================
-
-% Bidi_Class=Left_To_Right_Override
-
-unicode_bidi_class(0x202D, 0x202D, 'LRO'). % Cf       LEFT-TO-RIGHT OVERRIDE
-
-% Total code points: 1
-
-% ================================================
-
-% Bidi_Class=Right_To_Left_Override
-
-unicode_bidi_class(0x202E, 0x202E, 'RLO'). % Cf       RIGHT-TO-LEFT OVERRIDE
-
-% Total code points: 1
-
-% ================================================
-
-% Bidi_Class=Left_To_Right_Embedding
-
-unicode_bidi_class(0x202A, 0x202A, 'LRE'). % Cf       LEFT-TO-RIGHT EMBEDDING
-
-% Total code points: 1
-
-% ================================================
-
-% Bidi_Class=Right_To_Left_Embedding
-
-unicode_bidi_class(0x202B, 0x202B, 'RLE'). % Cf       RIGHT-TO-LEFT EMBEDDING
-
-% Total code points: 1
-
-% ================================================
-
-% Bidi_Class=Pop_Directional_Format
-
-unicode_bidi_class(0x202C, 0x202C, 'PDF'). % Cf       POP DIRECTIONAL FORMATTING
-
-% Total code points: 1
-
-% EOF
+unicode_bidi_class(65, 90, 'L').
+unicode_bidi_class(97, 122, 'L').
+unicode_bidi_class(170, 170, 'L').
+unicode_bidi_class(181, 181, 'L').
+unicode_bidi_class(186, 186, 'L').
+unicode_bidi_class(192, 214, 'L').
+unicode_bidi_class(216, 246, 'L').
+unicode_bidi_class(248, 442, 'L').
+unicode_bidi_class(443, 443, 'L').
+unicode_bidi_class(444, 447, 'L').
+unicode_bidi_class(448, 451, 'L').
+unicode_bidi_class(452, 659, 'L').
+unicode_bidi_class(660, 661, 'L').
+unicode_bidi_class(662, 687, 'L').
+unicode_bidi_class(688, 696, 'L').
+unicode_bidi_class(699, 705, 'L').
+unicode_bidi_class(720, 721, 'L').
+unicode_bidi_class(736, 740, 'L').
+unicode_bidi_class(750, 750, 'L').
+unicode_bidi_class(880, 883, 'L').
+unicode_bidi_class(886, 887, 'L').
+unicode_bidi_class(890, 890, 'L').
+unicode_bidi_class(891, 893, 'L').
+unicode_bidi_class(895, 895, 'L').
+unicode_bidi_class(902, 902, 'L').
+unicode_bidi_class(904, 906, 'L').
+unicode_bidi_class(908, 908, 'L').
+unicode_bidi_class(910, 929, 'L').
+unicode_bidi_class(931, 1013, 'L').
+unicode_bidi_class(1015, 1153, 'L').
+unicode_bidi_class(1154, 1154, 'L').
+unicode_bidi_class(1162, 1327, 'L').
+unicode_bidi_class(1329, 1366, 'L').
+unicode_bidi_class(1369, 1369, 'L').
+unicode_bidi_class(1370, 1375, 'L').
+unicode_bidi_class(1376, 1416, 'L').
+unicode_bidi_class(1417, 1417, 'L').
+unicode_bidi_class(2307, 2307, 'L').
+unicode_bidi_class(2308, 2361, 'L').
+unicode_bidi_class(2363, 2363, 'L').
+unicode_bidi_class(2365, 2365, 'L').
+unicode_bidi_class(2366, 2368, 'L').
+unicode_bidi_class(2377, 2380, 'L').
+unicode_bidi_class(2382, 2383, 'L').
+unicode_bidi_class(2384, 2384, 'L').
+unicode_bidi_class(2392, 2401, 'L').
+unicode_bidi_class(2404, 2405, 'L').
+unicode_bidi_class(2406, 2415, 'L').
+unicode_bidi_class(2416, 2416, 'L').
+unicode_bidi_class(2417, 2417, 'L').
+unicode_bidi_class(2418, 2432, 'L').
+unicode_bidi_class(2434, 2435, 'L').
+unicode_bidi_class(2437, 2444, 'L').
+unicode_bidi_class(2447, 2448, 'L').
+unicode_bidi_class(2451, 2472, 'L').
+unicode_bidi_class(2474, 2480, 'L').
+unicode_bidi_class(2482, 2482, 'L').
+unicode_bidi_class(2486, 2489, 'L').
+unicode_bidi_class(2493, 2493, 'L').
+unicode_bidi_class(2494, 2496, 'L').
+unicode_bidi_class(2503, 2504, 'L').
+unicode_bidi_class(2507, 2508, 'L').
+unicode_bidi_class(2510, 2510, 'L').
+unicode_bidi_class(2519, 2519, 'L').
+unicode_bidi_class(2524, 2525, 'L').
+unicode_bidi_class(2527, 2529, 'L').
+unicode_bidi_class(2534, 2543, 'L').
+unicode_bidi_class(2544, 2545, 'L').
+unicode_bidi_class(2548, 2553, 'L').
+unicode_bidi_class(2554, 2554, 'L').
+unicode_bidi_class(2556, 2556, 'L').
+unicode_bidi_class(2557, 2557, 'L').
+unicode_bidi_class(2563, 2563, 'L').
+unicode_bidi_class(2565, 2570, 'L').
+unicode_bidi_class(2575, 2576, 'L').
+unicode_bidi_class(2579, 2600, 'L').
+unicode_bidi_class(2602, 2608, 'L').
+unicode_bidi_class(2610, 2611, 'L').
+unicode_bidi_class(2613, 2614, 'L').
+unicode_bidi_class(2616, 2617, 'L').
+unicode_bidi_class(2622, 2624, 'L').
+unicode_bidi_class(2649, 2652, 'L').
+unicode_bidi_class(2654, 2654, 'L').
+unicode_bidi_class(2662, 2671, 'L').
+unicode_bidi_class(2674, 2676, 'L').
+unicode_bidi_class(2678, 2678, 'L').
+unicode_bidi_class(2691, 2691, 'L').
+unicode_bidi_class(2693, 2701, 'L').
+unicode_bidi_class(2703, 2705, 'L').
+unicode_bidi_class(2707, 2728, 'L').
+unicode_bidi_class(2730, 2736, 'L').
+unicode_bidi_class(2738, 2739, 'L').
+unicode_bidi_class(2741, 2745, 'L').
+unicode_bidi_class(2749, 2749, 'L').
+unicode_bidi_class(2750, 2752, 'L').
+unicode_bidi_class(2761, 2761, 'L').
+unicode_bidi_class(2763, 2764, 'L').
+unicode_bidi_class(2768, 2768, 'L').
+unicode_bidi_class(2784, 2785, 'L').
+unicode_bidi_class(2790, 2799, 'L').
+unicode_bidi_class(2800, 2800, 'L').
+unicode_bidi_class(2809, 2809, 'L').
+unicode_bidi_class(2818, 2819, 'L').
+unicode_bidi_class(2821, 2828, 'L').
+unicode_bidi_class(2831, 2832, 'L').
+unicode_bidi_class(2835, 2856, 'L').
+unicode_bidi_class(2858, 2864, 'L').
+unicode_bidi_class(2866, 2867, 'L').
+unicode_bidi_class(2869, 2873, 'L').
+unicode_bidi_class(2877, 2877, 'L').
+unicode_bidi_class(2878, 2878, 'L').
+unicode_bidi_class(2880, 2880, 'L').
+unicode_bidi_class(2887, 2888, 'L').
+unicode_bidi_class(2891, 2892, 'L').
+unicode_bidi_class(2903, 2903, 'L').
+unicode_bidi_class(2908, 2909, 'L').
+unicode_bidi_class(2911, 2913, 'L').
+unicode_bidi_class(2918, 2927, 'L').
+unicode_bidi_class(2928, 2928, 'L').
+unicode_bidi_class(2929, 2929, 'L').
+unicode_bidi_class(2930, 2935, 'L').
+unicode_bidi_class(2947, 2947, 'L').
+unicode_bidi_class(2949, 2954, 'L').
+unicode_bidi_class(2958, 2960, 'L').
+unicode_bidi_class(2962, 2965, 'L').
+unicode_bidi_class(2969, 2970, 'L').
+unicode_bidi_class(2972, 2972, 'L').
+unicode_bidi_class(2974, 2975, 'L').
+unicode_bidi_class(2979, 2980, 'L').
+unicode_bidi_class(2984, 2986, 'L').
+unicode_bidi_class(2990, 3001, 'L').
+unicode_bidi_class(3006, 3007, 'L').
+unicode_bidi_class(3009, 3010, 'L').
+unicode_bidi_class(3014, 3016, 'L').
+unicode_bidi_class(3018, 3020, 'L').
+unicode_bidi_class(3024, 3024, 'L').
+unicode_bidi_class(3031, 3031, 'L').
+unicode_bidi_class(3046, 3055, 'L').
+unicode_bidi_class(3056, 3058, 'L').
+unicode_bidi_class(3073, 3075, 'L').
+unicode_bidi_class(3077, 3084, 'L').
+unicode_bidi_class(3086, 3088, 'L').
+unicode_bidi_class(3090, 3112, 'L').
+unicode_bidi_class(3114, 3129, 'L').
+unicode_bidi_class(3133, 3133, 'L').
+unicode_bidi_class(3137, 3140, 'L').
+unicode_bidi_class(3160, 3162, 'L').
+unicode_bidi_class(3164, 3165, 'L').
+unicode_bidi_class(3168, 3169, 'L').
+unicode_bidi_class(3174, 3183, 'L').
+unicode_bidi_class(3191, 3191, 'L').
+unicode_bidi_class(3199, 3199, 'L').
+unicode_bidi_class(3200, 3200, 'L').
+unicode_bidi_class(3202, 3203, 'L').
+unicode_bidi_class(3204, 3204, 'L').
+unicode_bidi_class(3205, 3212, 'L').
+unicode_bidi_class(3214, 3216, 'L').
+unicode_bidi_class(3218, 3240, 'L').
+unicode_bidi_class(3242, 3251, 'L').
+unicode_bidi_class(3253, 3257, 'L').
+unicode_bidi_class(3261, 3261, 'L').
+unicode_bidi_class(3262, 3262, 'L').
+unicode_bidi_class(3263, 3263, 'L').
+unicode_bidi_class(3264, 3268, 'L').
+unicode_bidi_class(3270, 3270, 'L').
+unicode_bidi_class(3271, 3272, 'L').
+unicode_bidi_class(3274, 3275, 'L').
+unicode_bidi_class(3285, 3286, 'L').
+unicode_bidi_class(3292, 3294, 'L').
+unicode_bidi_class(3296, 3297, 'L').
+unicode_bidi_class(3302, 3311, 'L').
+unicode_bidi_class(3313, 3314, 'L').
+unicode_bidi_class(3315, 3315, 'L').
+unicode_bidi_class(3330, 3331, 'L').
+unicode_bidi_class(3332, 3340, 'L').
+unicode_bidi_class(3342, 3344, 'L').
+unicode_bidi_class(3346, 3386, 'L').
+unicode_bidi_class(3389, 3389, 'L').
+unicode_bidi_class(3390, 3392, 'L').
+unicode_bidi_class(3398, 3400, 'L').
+unicode_bidi_class(3402, 3404, 'L').
+unicode_bidi_class(3406, 3406, 'L').
+unicode_bidi_class(3407, 3407, 'L').
+unicode_bidi_class(3412, 3414, 'L').
+unicode_bidi_class(3415, 3415, 'L').
+unicode_bidi_class(3416, 3422, 'L').
+unicode_bidi_class(3423, 3425, 'L').
+unicode_bidi_class(3430, 3439, 'L').
+unicode_bidi_class(3440, 3448, 'L').
+unicode_bidi_class(3449, 3449, 'L').
+unicode_bidi_class(3450, 3455, 'L').
+unicode_bidi_class(3458, 3459, 'L').
+unicode_bidi_class(3461, 3478, 'L').
+unicode_bidi_class(3482, 3505, 'L').
+unicode_bidi_class(3507, 3515, 'L').
+unicode_bidi_class(3517, 3517, 'L').
+unicode_bidi_class(3520, 3526, 'L').
+unicode_bidi_class(3535, 3537, 'L').
+unicode_bidi_class(3544, 3551, 'L').
+unicode_bidi_class(3558, 3567, 'L').
+unicode_bidi_class(3570, 3571, 'L').
+unicode_bidi_class(3572, 3572, 'L').
+unicode_bidi_class(3585, 3632, 'L').
+unicode_bidi_class(3634, 3635, 'L').
+unicode_bidi_class(3648, 3653, 'L').
+unicode_bidi_class(3654, 3654, 'L').
+unicode_bidi_class(3663, 3663, 'L').
+unicode_bidi_class(3664, 3673, 'L').
+unicode_bidi_class(3674, 3675, 'L').
+unicode_bidi_class(3713, 3714, 'L').
+unicode_bidi_class(3716, 3716, 'L').
+unicode_bidi_class(3718, 3722, 'L').
+unicode_bidi_class(3724, 3747, 'L').
+unicode_bidi_class(3749, 3749, 'L').
+unicode_bidi_class(3751, 3760, 'L').
+unicode_bidi_class(3762, 3763, 'L').
+unicode_bidi_class(3773, 3773, 'L').
+unicode_bidi_class(3776, 3780, 'L').
+unicode_bidi_class(3782, 3782, 'L').
+unicode_bidi_class(3792, 3801, 'L').
+unicode_bidi_class(3804, 3807, 'L').
+unicode_bidi_class(3840, 3840, 'L').
+unicode_bidi_class(3841, 3843, 'L').
+unicode_bidi_class(3844, 3858, 'L').
+unicode_bidi_class(3859, 3859, 'L').
+unicode_bidi_class(3860, 3860, 'L').
+unicode_bidi_class(3861, 3863, 'L').
+unicode_bidi_class(3866, 3871, 'L').
+unicode_bidi_class(3872, 3881, 'L').
+unicode_bidi_class(3882, 3891, 'L').
+unicode_bidi_class(3892, 3892, 'L').
+unicode_bidi_class(3894, 3894, 'L').
+unicode_bidi_class(3896, 3896, 'L').
+unicode_bidi_class(3902, 3903, 'L').
+unicode_bidi_class(3904, 3911, 'L').
+unicode_bidi_class(3913, 3948, 'L').
+unicode_bidi_class(3967, 3967, 'L').
+unicode_bidi_class(3973, 3973, 'L').
+unicode_bidi_class(3976, 3980, 'L').
+unicode_bidi_class(4030, 4037, 'L').
+unicode_bidi_class(4039, 4044, 'L').
+unicode_bidi_class(4046, 4047, 'L').
+unicode_bidi_class(4048, 4052, 'L').
+unicode_bidi_class(4053, 4056, 'L').
+unicode_bidi_class(4057, 4058, 'L').
+unicode_bidi_class(4096, 4138, 'L').
+unicode_bidi_class(4139, 4140, 'L').
+unicode_bidi_class(4145, 4145, 'L').
+unicode_bidi_class(4152, 4152, 'L').
+unicode_bidi_class(4155, 4156, 'L').
+unicode_bidi_class(4159, 4159, 'L').
+unicode_bidi_class(4160, 4169, 'L').
+unicode_bidi_class(4170, 4175, 'L').
+unicode_bidi_class(4176, 4181, 'L').
+unicode_bidi_class(4182, 4183, 'L').
+unicode_bidi_class(4186, 4189, 'L').
+unicode_bidi_class(4193, 4193, 'L').
+unicode_bidi_class(4194, 4196, 'L').
+unicode_bidi_class(4197, 4198, 'L').
+unicode_bidi_class(4199, 4205, 'L').
+unicode_bidi_class(4206, 4208, 'L').
+unicode_bidi_class(4213, 4225, 'L').
+unicode_bidi_class(4227, 4228, 'L').
+unicode_bidi_class(4231, 4236, 'L').
+unicode_bidi_class(4238, 4238, 'L').
+unicode_bidi_class(4239, 4239, 'L').
+unicode_bidi_class(4240, 4249, 'L').
+unicode_bidi_class(4250, 4252, 'L').
+unicode_bidi_class(4254, 4255, 'L').
+unicode_bidi_class(4256, 4293, 'L').
+unicode_bidi_class(4295, 4295, 'L').
+unicode_bidi_class(4301, 4301, 'L').
+unicode_bidi_class(4304, 4346, 'L').
+unicode_bidi_class(4347, 4347, 'L').
+unicode_bidi_class(4348, 4348, 'L').
+unicode_bidi_class(4349, 4351, 'L').
+unicode_bidi_class(4352, 4680, 'L').
+unicode_bidi_class(4682, 4685, 'L').
+unicode_bidi_class(4688, 4694, 'L').
+unicode_bidi_class(4696, 4696, 'L').
+unicode_bidi_class(4698, 4701, 'L').
+unicode_bidi_class(4704, 4744, 'L').
+unicode_bidi_class(4746, 4749, 'L').
+unicode_bidi_class(4752, 4784, 'L').
+unicode_bidi_class(4786, 4789, 'L').
+unicode_bidi_class(4792, 4798, 'L').
+unicode_bidi_class(4800, 4800, 'L').
+unicode_bidi_class(4802, 4805, 'L').
+unicode_bidi_class(4808, 4822, 'L').
+unicode_bidi_class(4824, 4880, 'L').
+unicode_bidi_class(4882, 4885, 'L').
+unicode_bidi_class(4888, 4954, 'L').
+unicode_bidi_class(4960, 4968, 'L').
+unicode_bidi_class(4969, 4988, 'L').
+unicode_bidi_class(4992, 5007, 'L').
+unicode_bidi_class(5024, 5109, 'L').
+unicode_bidi_class(5112, 5117, 'L').
+unicode_bidi_class(5121, 5740, 'L').
+unicode_bidi_class(5741, 5741, 'L').
+unicode_bidi_class(5742, 5742, 'L').
+unicode_bidi_class(5743, 5759, 'L').
+unicode_bidi_class(5761, 5786, 'L').
+unicode_bidi_class(5792, 5866, 'L').
+unicode_bidi_class(5867, 5869, 'L').
+unicode_bidi_class(5870, 5872, 'L').
+unicode_bidi_class(5873, 5880, 'L').
+unicode_bidi_class(5888, 5905, 'L').
+unicode_bidi_class(5909, 5909, 'L').
+unicode_bidi_class(5919, 5937, 'L').
+unicode_bidi_class(5940, 5940, 'L').
+unicode_bidi_class(5941, 5942, 'L').
+unicode_bidi_class(5952, 5969, 'L').
+unicode_bidi_class(5984, 5996, 'L').
+unicode_bidi_class(5998, 6000, 'L').
+unicode_bidi_class(6016, 6067, 'L').
+unicode_bidi_class(6070, 6070, 'L').
+unicode_bidi_class(6078, 6085, 'L').
+unicode_bidi_class(6087, 6088, 'L').
+unicode_bidi_class(6100, 6102, 'L').
+unicode_bidi_class(6103, 6103, 'L').
+unicode_bidi_class(6104, 6106, 'L').
+unicode_bidi_class(6108, 6108, 'L').
+unicode_bidi_class(6112, 6121, 'L').
+unicode_bidi_class(6160, 6169, 'L').
+unicode_bidi_class(6176, 6210, 'L').
+unicode_bidi_class(6211, 6211, 'L').
+unicode_bidi_class(6212, 6264, 'L').
+unicode_bidi_class(6272, 6276, 'L').
+unicode_bidi_class(6279, 6312, 'L').
+unicode_bidi_class(6314, 6314, 'L').
+unicode_bidi_class(6320, 6389, 'L').
+unicode_bidi_class(6400, 6430, 'L').
+unicode_bidi_class(6435, 6438, 'L').
+unicode_bidi_class(6441, 6443, 'L').
+unicode_bidi_class(6448, 6449, 'L').
+unicode_bidi_class(6451, 6456, 'L').
+unicode_bidi_class(6470, 6479, 'L').
+unicode_bidi_class(6480, 6509, 'L').
+unicode_bidi_class(6512, 6516, 'L').
+unicode_bidi_class(6528, 6571, 'L').
+unicode_bidi_class(6576, 6601, 'L').
+unicode_bidi_class(6608, 6617, 'L').
+unicode_bidi_class(6618, 6618, 'L').
+unicode_bidi_class(6656, 6678, 'L').
+unicode_bidi_class(6681, 6682, 'L').
+unicode_bidi_class(6686, 6687, 'L').
+unicode_bidi_class(6688, 6740, 'L').
+unicode_bidi_class(6741, 6741, 'L').
+unicode_bidi_class(6743, 6743, 'L').
+unicode_bidi_class(6753, 6753, 'L').
+unicode_bidi_class(6755, 6756, 'L').
+unicode_bidi_class(6765, 6770, 'L').
+unicode_bidi_class(6784, 6793, 'L').
+unicode_bidi_class(6800, 6809, 'L').
+unicode_bidi_class(6816, 6822, 'L').
+unicode_bidi_class(6823, 6823, 'L').
+unicode_bidi_class(6824, 6829, 'L').
+unicode_bidi_class(6916, 6916, 'L').
+unicode_bidi_class(6917, 6963, 'L').
+unicode_bidi_class(6965, 6965, 'L').
+unicode_bidi_class(6971, 6971, 'L').
+unicode_bidi_class(6973, 6977, 'L').
+unicode_bidi_class(6979, 6980, 'L').
+unicode_bidi_class(6981, 6988, 'L').
+unicode_bidi_class(6990, 6991, 'L').
+unicode_bidi_class(6992, 7001, 'L').
+unicode_bidi_class(7002, 7008, 'L').
+unicode_bidi_class(7009, 7018, 'L').
+unicode_bidi_class(7028, 7036, 'L').
+unicode_bidi_class(7037, 7039, 'L').
+unicode_bidi_class(7042, 7042, 'L').
+unicode_bidi_class(7043, 7072, 'L').
+unicode_bidi_class(7073, 7073, 'L').
+unicode_bidi_class(7078, 7079, 'L').
+unicode_bidi_class(7082, 7082, 'L').
+unicode_bidi_class(7086, 7087, 'L').
+unicode_bidi_class(7088, 7097, 'L').
+unicode_bidi_class(7098, 7141, 'L').
+unicode_bidi_class(7143, 7143, 'L').
+unicode_bidi_class(7146, 7148, 'L').
+unicode_bidi_class(7150, 7150, 'L').
+unicode_bidi_class(7154, 7155, 'L').
+unicode_bidi_class(7164, 7167, 'L').
+unicode_bidi_class(7168, 7203, 'L').
+unicode_bidi_class(7204, 7211, 'L').
+unicode_bidi_class(7220, 7221, 'L').
+unicode_bidi_class(7227, 7231, 'L').
+unicode_bidi_class(7232, 7241, 'L').
+unicode_bidi_class(7245, 7247, 'L').
+unicode_bidi_class(7248, 7257, 'L').
+unicode_bidi_class(7258, 7287, 'L').
+unicode_bidi_class(7288, 7293, 'L').
+unicode_bidi_class(7294, 7295, 'L').
+unicode_bidi_class(7296, 7306, 'L').
+unicode_bidi_class(7312, 7354, 'L').
+unicode_bidi_class(7357, 7359, 'L').
+unicode_bidi_class(7360, 7367, 'L').
+unicode_bidi_class(7379, 7379, 'L').
+unicode_bidi_class(7393, 7393, 'L').
+unicode_bidi_class(7401, 7404, 'L').
+unicode_bidi_class(7406, 7411, 'L').
+unicode_bidi_class(7413, 7414, 'L').
+unicode_bidi_class(7415, 7415, 'L').
+unicode_bidi_class(7418, 7418, 'L').
+unicode_bidi_class(7424, 7467, 'L').
+unicode_bidi_class(7468, 7530, 'L').
+unicode_bidi_class(7531, 7543, 'L').
+unicode_bidi_class(7544, 7544, 'L').
+unicode_bidi_class(7545, 7578, 'L').
+unicode_bidi_class(7579, 7615, 'L').
+unicode_bidi_class(7680, 7957, 'L').
+unicode_bidi_class(7960, 7965, 'L').
+unicode_bidi_class(7968, 8005, 'L').
+unicode_bidi_class(8008, 8013, 'L').
+unicode_bidi_class(8016, 8023, 'L').
+unicode_bidi_class(8025, 8025, 'L').
+unicode_bidi_class(8027, 8027, 'L').
+unicode_bidi_class(8029, 8029, 'L').
+unicode_bidi_class(8031, 8061, 'L').
+unicode_bidi_class(8064, 8116, 'L').
+unicode_bidi_class(8118, 8124, 'L').
+unicode_bidi_class(8126, 8126, 'L').
+unicode_bidi_class(8130, 8132, 'L').
+unicode_bidi_class(8134, 8140, 'L').
+unicode_bidi_class(8144, 8147, 'L').
+unicode_bidi_class(8150, 8155, 'L').
+unicode_bidi_class(8160, 8172, 'L').
+unicode_bidi_class(8178, 8180, 'L').
+unicode_bidi_class(8182, 8188, 'L').
+unicode_bidi_class(8206, 8206, 'L').
+unicode_bidi_class(8305, 8305, 'L').
+unicode_bidi_class(8319, 8319, 'L').
+unicode_bidi_class(8336, 8348, 'L').
+unicode_bidi_class(8450, 8450, 'L').
+unicode_bidi_class(8455, 8455, 'L').
+unicode_bidi_class(8458, 8467, 'L').
+unicode_bidi_class(8469, 8469, 'L').
+unicode_bidi_class(8473, 8477, 'L').
+unicode_bidi_class(8484, 8484, 'L').
+unicode_bidi_class(8486, 8486, 'L').
+unicode_bidi_class(8488, 8488, 'L').
+unicode_bidi_class(8490, 8493, 'L').
+unicode_bidi_class(8495, 8500, 'L').
+unicode_bidi_class(8501, 8504, 'L').
+unicode_bidi_class(8505, 8505, 'L').
+unicode_bidi_class(8508, 8511, 'L').
+unicode_bidi_class(8517, 8521, 'L').
+unicode_bidi_class(8526, 8526, 'L').
+unicode_bidi_class(8527, 8527, 'L').
+unicode_bidi_class(8544, 8578, 'L').
+unicode_bidi_class(8579, 8580, 'L').
+unicode_bidi_class(8581, 8584, 'L').
+unicode_bidi_class(9014, 9082, 'L').
+unicode_bidi_class(9109, 9109, 'L').
+unicode_bidi_class(9372, 9449, 'L').
+unicode_bidi_class(9900, 9900, 'L').
+unicode_bidi_class(10240, 10495, 'L').
+unicode_bidi_class(11264, 11387, 'L').
+unicode_bidi_class(11388, 11389, 'L').
+unicode_bidi_class(11390, 11492, 'L').
+unicode_bidi_class(11499, 11502, 'L').
+unicode_bidi_class(11506, 11507, 'L').
+unicode_bidi_class(11520, 11557, 'L').
+unicode_bidi_class(11559, 11559, 'L').
+unicode_bidi_class(11565, 11565, 'L').
+unicode_bidi_class(11568, 11623, 'L').
+unicode_bidi_class(11631, 11631, 'L').
+unicode_bidi_class(11632, 11632, 'L').
+unicode_bidi_class(11648, 11670, 'L').
+unicode_bidi_class(11680, 11686, 'L').
+unicode_bidi_class(11688, 11694, 'L').
+unicode_bidi_class(11696, 11702, 'L').
+unicode_bidi_class(11704, 11710, 'L').
+unicode_bidi_class(11712, 11718, 'L').
+unicode_bidi_class(11720, 11726, 'L').
+unicode_bidi_class(11728, 11734, 'L').
+unicode_bidi_class(11736, 11742, 'L').
+unicode_bidi_class(12293, 12293, 'L').
+unicode_bidi_class(12294, 12294, 'L').
+unicode_bidi_class(12295, 12295, 'L').
+unicode_bidi_class(12321, 12329, 'L').
+unicode_bidi_class(12334, 12335, 'L').
+unicode_bidi_class(12337, 12341, 'L').
+unicode_bidi_class(12344, 12346, 'L').
+unicode_bidi_class(12347, 12347, 'L').
+unicode_bidi_class(12348, 12348, 'L').
+unicode_bidi_class(12353, 12438, 'L').
+unicode_bidi_class(12445, 12446, 'L').
+unicode_bidi_class(12447, 12447, 'L').
+unicode_bidi_class(12449, 12538, 'L').
+unicode_bidi_class(12540, 12542, 'L').
+unicode_bidi_class(12543, 12543, 'L').
+unicode_bidi_class(12549, 12591, 'L').
+unicode_bidi_class(12593, 12686, 'L').
+unicode_bidi_class(12688, 12689, 'L').
+unicode_bidi_class(12690, 12693, 'L').
+unicode_bidi_class(12694, 12703, 'L').
+unicode_bidi_class(12704, 12735, 'L').
+unicode_bidi_class(12784, 12799, 'L').
+unicode_bidi_class(12800, 12828, 'L').
+unicode_bidi_class(12832, 12841, 'L').
+unicode_bidi_class(12842, 12871, 'L').
+unicode_bidi_class(12872, 12879, 'L').
+unicode_bidi_class(12896, 12923, 'L').
+unicode_bidi_class(12927, 12927, 'L').
+unicode_bidi_class(12928, 12937, 'L').
+unicode_bidi_class(12938, 12976, 'L').
+unicode_bidi_class(12992, 13003, 'L').
+unicode_bidi_class(13008, 13174, 'L').
+unicode_bidi_class(13179, 13277, 'L').
+unicode_bidi_class(13280, 13310, 'L').
+unicode_bidi_class(13312, 19903, 'L').
+unicode_bidi_class(19968, 40980, 'L').
+unicode_bidi_class(40981, 40981, 'L').
+unicode_bidi_class(40982, 42124, 'L').
+unicode_bidi_class(42192, 42231, 'L').
+unicode_bidi_class(42232, 42237, 'L').
+unicode_bidi_class(42238, 42239, 'L').
+unicode_bidi_class(42240, 42507, 'L').
+unicode_bidi_class(42508, 42508, 'L').
+unicode_bidi_class(42512, 42527, 'L').
+unicode_bidi_class(42528, 42537, 'L').
+unicode_bidi_class(42538, 42539, 'L').
+unicode_bidi_class(42560, 42605, 'L').
+unicode_bidi_class(42606, 42606, 'L').
+unicode_bidi_class(42624, 42651, 'L').
+unicode_bidi_class(42652, 42653, 'L').
+unicode_bidi_class(42656, 42725, 'L').
+unicode_bidi_class(42726, 42735, 'L').
+unicode_bidi_class(42738, 42743, 'L').
+unicode_bidi_class(42786, 42863, 'L').
+unicode_bidi_class(42864, 42864, 'L').
+unicode_bidi_class(42865, 42887, 'L').
+unicode_bidi_class(42889, 42890, 'L').
+unicode_bidi_class(42891, 42894, 'L').
+unicode_bidi_class(42895, 42895, 'L').
+unicode_bidi_class(42896, 42972, 'L').
+unicode_bidi_class(42993, 42996, 'L').
+unicode_bidi_class(42997, 42998, 'L').
+unicode_bidi_class(42999, 42999, 'L').
+unicode_bidi_class(43000, 43001, 'L').
+unicode_bidi_class(43002, 43002, 'L').
+unicode_bidi_class(43003, 43009, 'L').
+unicode_bidi_class(43011, 43013, 'L').
+unicode_bidi_class(43015, 43018, 'L').
+unicode_bidi_class(43020, 43042, 'L').
+unicode_bidi_class(43043, 43044, 'L').
+unicode_bidi_class(43047, 43047, 'L').
+unicode_bidi_class(43056, 43061, 'L').
+unicode_bidi_class(43062, 43063, 'L').
+unicode_bidi_class(43072, 43123, 'L').
+unicode_bidi_class(43136, 43137, 'L').
+unicode_bidi_class(43138, 43187, 'L').
+unicode_bidi_class(43188, 43203, 'L').
+unicode_bidi_class(43214, 43215, 'L').
+unicode_bidi_class(43216, 43225, 'L').
+unicode_bidi_class(43250, 43255, 'L').
+unicode_bidi_class(43256, 43258, 'L').
+unicode_bidi_class(43259, 43259, 'L').
+unicode_bidi_class(43260, 43260, 'L').
+unicode_bidi_class(43261, 43262, 'L').
+unicode_bidi_class(43264, 43273, 'L').
+unicode_bidi_class(43274, 43301, 'L').
+unicode_bidi_class(43310, 43311, 'L').
+unicode_bidi_class(43312, 43334, 'L').
+unicode_bidi_class(43346, 43347, 'L').
+unicode_bidi_class(43359, 43359, 'L').
+unicode_bidi_class(43360, 43388, 'L').
+unicode_bidi_class(43395, 43395, 'L').
+unicode_bidi_class(43396, 43442, 'L').
+unicode_bidi_class(43444, 43445, 'L').
+unicode_bidi_class(43450, 43451, 'L').
+unicode_bidi_class(43454, 43456, 'L').
+unicode_bidi_class(43457, 43469, 'L').
+unicode_bidi_class(43471, 43471, 'L').
+unicode_bidi_class(43472, 43481, 'L').
+unicode_bidi_class(43486, 43487, 'L').
+unicode_bidi_class(43488, 43492, 'L').
+unicode_bidi_class(43494, 43494, 'L').
+unicode_bidi_class(43495, 43503, 'L').
+unicode_bidi_class(43504, 43513, 'L').
+unicode_bidi_class(43514, 43518, 'L').
+unicode_bidi_class(43520, 43560, 'L').
+unicode_bidi_class(43567, 43568, 'L').
+unicode_bidi_class(43571, 43572, 'L').
+unicode_bidi_class(43584, 43586, 'L').
+unicode_bidi_class(43588, 43595, 'L').
+unicode_bidi_class(43597, 43597, 'L').
+unicode_bidi_class(43600, 43609, 'L').
+unicode_bidi_class(43612, 43615, 'L').
+unicode_bidi_class(43616, 43631, 'L').
+unicode_bidi_class(43632, 43632, 'L').
+unicode_bidi_class(43633, 43638, 'L').
+unicode_bidi_class(43639, 43641, 'L').
+unicode_bidi_class(43642, 43642, 'L').
+unicode_bidi_class(43643, 43643, 'L').
+unicode_bidi_class(43645, 43645, 'L').
+unicode_bidi_class(43646, 43695, 'L').
+unicode_bidi_class(43697, 43697, 'L').
+unicode_bidi_class(43701, 43702, 'L').
+unicode_bidi_class(43705, 43709, 'L').
+unicode_bidi_class(43712, 43712, 'L').
+unicode_bidi_class(43714, 43714, 'L').
+unicode_bidi_class(43739, 43740, 'L').
+unicode_bidi_class(43741, 43741, 'L').
+unicode_bidi_class(43742, 43743, 'L').
+unicode_bidi_class(43744, 43754, 'L').
+unicode_bidi_class(43755, 43755, 'L').
+unicode_bidi_class(43758, 43759, 'L').
+unicode_bidi_class(43760, 43761, 'L').
+unicode_bidi_class(43762, 43762, 'L').
+unicode_bidi_class(43763, 43764, 'L').
+unicode_bidi_class(43765, 43765, 'L').
+unicode_bidi_class(43777, 43782, 'L').
+unicode_bidi_class(43785, 43790, 'L').
+unicode_bidi_class(43793, 43798, 'L').
+unicode_bidi_class(43808, 43814, 'L').
+unicode_bidi_class(43816, 43822, 'L').
+unicode_bidi_class(43824, 43866, 'L').
+unicode_bidi_class(43867, 43867, 'L').
+unicode_bidi_class(43868, 43871, 'L').
+unicode_bidi_class(43872, 43880, 'L').
+unicode_bidi_class(43881, 43881, 'L').
+unicode_bidi_class(43888, 43967, 'L').
+unicode_bidi_class(43968, 44002, 'L').
+unicode_bidi_class(44003, 44004, 'L').
+unicode_bidi_class(44006, 44007, 'L').
+unicode_bidi_class(44009, 44010, 'L').
+unicode_bidi_class(44011, 44011, 'L').
+unicode_bidi_class(44012, 44012, 'L').
+unicode_bidi_class(44016, 44025, 'L').
+unicode_bidi_class(44032, 55203, 'L').
+unicode_bidi_class(55216, 55238, 'L').
+unicode_bidi_class(55243, 55291, 'L').
+unicode_bidi_class(57344, 63743, 'L').
+unicode_bidi_class(63744, 64109, 'L').
+unicode_bidi_class(64112, 64217, 'L').
+unicode_bidi_class(64256, 64262, 'L').
+unicode_bidi_class(64275, 64279, 'L').
+unicode_bidi_class(65313, 65338, 'L').
+unicode_bidi_class(65345, 65370, 'L').
+unicode_bidi_class(65382, 65391, 'L').
+unicode_bidi_class(65392, 65392, 'L').
+unicode_bidi_class(65393, 65437, 'L').
+unicode_bidi_class(65438, 65439, 'L').
+unicode_bidi_class(65440, 65470, 'L').
+unicode_bidi_class(65474, 65479, 'L').
+unicode_bidi_class(65482, 65487, 'L').
+unicode_bidi_class(65490, 65495, 'L').
+unicode_bidi_class(65498, 65500, 'L').
+unicode_bidi_class(65536, 65547, 'L').
+unicode_bidi_class(65549, 65574, 'L').
+unicode_bidi_class(65576, 65594, 'L').
+unicode_bidi_class(65596, 65597, 'L').
+unicode_bidi_class(65599, 65613, 'L').
+unicode_bidi_class(65616, 65629, 'L').
+unicode_bidi_class(65664, 65786, 'L').
+unicode_bidi_class(65792, 65792, 'L').
+unicode_bidi_class(65794, 65794, 'L').
+unicode_bidi_class(65799, 65843, 'L').
+unicode_bidi_class(65847, 65855, 'L').
+unicode_bidi_class(65933, 65934, 'L').
+unicode_bidi_class(66000, 66044, 'L').
+unicode_bidi_class(66176, 66204, 'L').
+unicode_bidi_class(66208, 66256, 'L').
+unicode_bidi_class(66304, 66335, 'L').
+unicode_bidi_class(66336, 66339, 'L').
+unicode_bidi_class(66349, 66368, 'L').
+unicode_bidi_class(66369, 66369, 'L').
+unicode_bidi_class(66370, 66377, 'L').
+unicode_bidi_class(66378, 66378, 'L').
+unicode_bidi_class(66384, 66421, 'L').
+unicode_bidi_class(66432, 66461, 'L').
+unicode_bidi_class(66463, 66463, 'L').
+unicode_bidi_class(66464, 66499, 'L').
+unicode_bidi_class(66504, 66511, 'L').
+unicode_bidi_class(66512, 66512, 'L').
+unicode_bidi_class(66513, 66517, 'L').
+unicode_bidi_class(66560, 66639, 'L').
+unicode_bidi_class(66640, 66717, 'L').
+unicode_bidi_class(66720, 66729, 'L').
+unicode_bidi_class(66736, 66771, 'L').
+unicode_bidi_class(66776, 66811, 'L').
+unicode_bidi_class(66816, 66855, 'L').
+unicode_bidi_class(66864, 66915, 'L').
+unicode_bidi_class(66927, 66927, 'L').
+unicode_bidi_class(66928, 66938, 'L').
+unicode_bidi_class(66940, 66954, 'L').
+unicode_bidi_class(66956, 66962, 'L').
+unicode_bidi_class(66964, 66965, 'L').
+unicode_bidi_class(66967, 66977, 'L').
+unicode_bidi_class(66979, 66993, 'L').
+unicode_bidi_class(66995, 67001, 'L').
+unicode_bidi_class(67003, 67004, 'L').
+unicode_bidi_class(67008, 67059, 'L').
+unicode_bidi_class(67072, 67382, 'L').
+unicode_bidi_class(67392, 67413, 'L').
+unicode_bidi_class(67424, 67431, 'L').
+unicode_bidi_class(67456, 67461, 'L').
+unicode_bidi_class(67463, 67504, 'L').
+unicode_bidi_class(67506, 67514, 'L').
+unicode_bidi_class(69632, 69632, 'L').
+unicode_bidi_class(69634, 69634, 'L').
+unicode_bidi_class(69635, 69687, 'L').
+unicode_bidi_class(69703, 69709, 'L').
+unicode_bidi_class(69734, 69743, 'L').
+unicode_bidi_class(69745, 69746, 'L').
+unicode_bidi_class(69749, 69749, 'L').
+unicode_bidi_class(69762, 69762, 'L').
+unicode_bidi_class(69763, 69807, 'L').
+unicode_bidi_class(69808, 69810, 'L').
+unicode_bidi_class(69815, 69816, 'L').
+unicode_bidi_class(69819, 69820, 'L').
+unicode_bidi_class(69821, 69821, 'L').
+unicode_bidi_class(69822, 69825, 'L').
+unicode_bidi_class(69837, 69837, 'L').
+unicode_bidi_class(69840, 69864, 'L').
+unicode_bidi_class(69872, 69881, 'L').
+unicode_bidi_class(69891, 69926, 'L').
+unicode_bidi_class(69932, 69932, 'L').
+unicode_bidi_class(69942, 69951, 'L').
+unicode_bidi_class(69952, 69955, 'L').
+unicode_bidi_class(69956, 69956, 'L').
+unicode_bidi_class(69957, 69958, 'L').
+unicode_bidi_class(69959, 69959, 'L').
+unicode_bidi_class(69968, 70002, 'L').
+unicode_bidi_class(70004, 70005, 'L').
+unicode_bidi_class(70006, 70006, 'L').
+unicode_bidi_class(70018, 70018, 'L').
+unicode_bidi_class(70019, 70066, 'L').
+unicode_bidi_class(70067, 70069, 'L').
+unicode_bidi_class(70079, 70080, 'L').
+unicode_bidi_class(70081, 70084, 'L').
+unicode_bidi_class(70085, 70088, 'L').
+unicode_bidi_class(70093, 70093, 'L').
+unicode_bidi_class(70094, 70094, 'L').
+unicode_bidi_class(70096, 70105, 'L').
+unicode_bidi_class(70106, 70106, 'L').
+unicode_bidi_class(70107, 70107, 'L').
+unicode_bidi_class(70108, 70108, 'L').
+unicode_bidi_class(70109, 70111, 'L').
+unicode_bidi_class(70113, 70132, 'L').
+unicode_bidi_class(70144, 70161, 'L').
+unicode_bidi_class(70163, 70187, 'L').
+unicode_bidi_class(70188, 70190, 'L').
+unicode_bidi_class(70194, 70195, 'L').
+unicode_bidi_class(70197, 70197, 'L').
+unicode_bidi_class(70200, 70205, 'L').
+unicode_bidi_class(70207, 70208, 'L').
+unicode_bidi_class(70272, 70278, 'L').
+unicode_bidi_class(70280, 70280, 'L').
+unicode_bidi_class(70282, 70285, 'L').
+unicode_bidi_class(70287, 70301, 'L').
+unicode_bidi_class(70303, 70312, 'L').
+unicode_bidi_class(70313, 70313, 'L').
+unicode_bidi_class(70320, 70366, 'L').
+unicode_bidi_class(70368, 70370, 'L').
+unicode_bidi_class(70384, 70393, 'L').
+unicode_bidi_class(70402, 70403, 'L').
+unicode_bidi_class(70405, 70412, 'L').
+unicode_bidi_class(70415, 70416, 'L').
+unicode_bidi_class(70419, 70440, 'L').
+unicode_bidi_class(70442, 70448, 'L').
+unicode_bidi_class(70450, 70451, 'L').
+unicode_bidi_class(70453, 70457, 'L').
+unicode_bidi_class(70461, 70461, 'L').
+unicode_bidi_class(70462, 70463, 'L').
+unicode_bidi_class(70465, 70468, 'L').
+unicode_bidi_class(70471, 70472, 'L').
+unicode_bidi_class(70475, 70477, 'L').
+unicode_bidi_class(70480, 70480, 'L').
+unicode_bidi_class(70487, 70487, 'L').
+unicode_bidi_class(70493, 70497, 'L').
+unicode_bidi_class(70498, 70499, 'L').
+unicode_bidi_class(70528, 70537, 'L').
+unicode_bidi_class(70539, 70539, 'L').
+unicode_bidi_class(70542, 70542, 'L').
+unicode_bidi_class(70544, 70581, 'L').
+unicode_bidi_class(70583, 70583, 'L').
+unicode_bidi_class(70584, 70586, 'L').
+unicode_bidi_class(70594, 70594, 'L').
+unicode_bidi_class(70597, 70597, 'L').
+unicode_bidi_class(70599, 70602, 'L').
+unicode_bidi_class(70604, 70605, 'L').
+unicode_bidi_class(70607, 70607, 'L').
+unicode_bidi_class(70609, 70609, 'L').
+unicode_bidi_class(70611, 70611, 'L').
+unicode_bidi_class(70612, 70613, 'L').
+unicode_bidi_class(70615, 70616, 'L').
+unicode_bidi_class(70656, 70708, 'L').
+unicode_bidi_class(70709, 70711, 'L').
+unicode_bidi_class(70720, 70721, 'L').
+unicode_bidi_class(70725, 70725, 'L').
+unicode_bidi_class(70727, 70730, 'L').
+unicode_bidi_class(70731, 70735, 'L').
+unicode_bidi_class(70736, 70745, 'L').
+unicode_bidi_class(70746, 70747, 'L').
+unicode_bidi_class(70749, 70749, 'L').
+unicode_bidi_class(70751, 70753, 'L').
+unicode_bidi_class(70784, 70831, 'L').
+unicode_bidi_class(70832, 70834, 'L').
+unicode_bidi_class(70841, 70841, 'L').
+unicode_bidi_class(70843, 70846, 'L').
+unicode_bidi_class(70849, 70849, 'L').
+unicode_bidi_class(70852, 70853, 'L').
+unicode_bidi_class(70854, 70854, 'L').
+unicode_bidi_class(70855, 70855, 'L').
+unicode_bidi_class(70864, 70873, 'L').
+unicode_bidi_class(71040, 71086, 'L').
+unicode_bidi_class(71087, 71089, 'L').
+unicode_bidi_class(71096, 71099, 'L').
+unicode_bidi_class(71102, 71102, 'L').
+unicode_bidi_class(71105, 71127, 'L').
+unicode_bidi_class(71128, 71131, 'L').
+unicode_bidi_class(71168, 71215, 'L').
+unicode_bidi_class(71216, 71218, 'L').
+unicode_bidi_class(71227, 71228, 'L').
+unicode_bidi_class(71230, 71230, 'L').
+unicode_bidi_class(71233, 71235, 'L').
+unicode_bidi_class(71236, 71236, 'L').
+unicode_bidi_class(71248, 71257, 'L').
+unicode_bidi_class(71296, 71338, 'L').
+unicode_bidi_class(71340, 71340, 'L').
+unicode_bidi_class(71342, 71343, 'L').
+unicode_bidi_class(71350, 71350, 'L').
+unicode_bidi_class(71352, 71352, 'L').
+unicode_bidi_class(71353, 71353, 'L').
+unicode_bidi_class(71360, 71369, 'L').
+unicode_bidi_class(71376, 71395, 'L').
+unicode_bidi_class(71424, 71450, 'L').
+unicode_bidi_class(71454, 71454, 'L').
+unicode_bidi_class(71456, 71457, 'L').
+unicode_bidi_class(71462, 71462, 'L').
+unicode_bidi_class(71472, 71481, 'L').
+unicode_bidi_class(71482, 71483, 'L').
+unicode_bidi_class(71484, 71486, 'L').
+unicode_bidi_class(71487, 71487, 'L').
+unicode_bidi_class(71488, 71494, 'L').
+unicode_bidi_class(71680, 71723, 'L').
+unicode_bidi_class(71724, 71726, 'L').
+unicode_bidi_class(71736, 71736, 'L').
+unicode_bidi_class(71739, 71739, 'L').
+unicode_bidi_class(71840, 71903, 'L').
+unicode_bidi_class(71904, 71913, 'L').
+unicode_bidi_class(71914, 71922, 'L').
+unicode_bidi_class(71935, 71942, 'L').
+unicode_bidi_class(71945, 71945, 'L').
+unicode_bidi_class(71948, 71955, 'L').
+unicode_bidi_class(71957, 71958, 'L').
+unicode_bidi_class(71960, 71983, 'L').
+unicode_bidi_class(71984, 71989, 'L').
+unicode_bidi_class(71991, 71992, 'L').
+unicode_bidi_class(71997, 71997, 'L').
+unicode_bidi_class(71999, 71999, 'L').
+unicode_bidi_class(72000, 72000, 'L').
+unicode_bidi_class(72001, 72001, 'L').
+unicode_bidi_class(72002, 72002, 'L').
+unicode_bidi_class(72004, 72006, 'L').
+unicode_bidi_class(72016, 72025, 'L').
+unicode_bidi_class(72096, 72103, 'L').
+unicode_bidi_class(72106, 72144, 'L').
+unicode_bidi_class(72145, 72147, 'L').
+unicode_bidi_class(72156, 72159, 'L').
+unicode_bidi_class(72161, 72161, 'L').
+unicode_bidi_class(72162, 72162, 'L').
+unicode_bidi_class(72163, 72163, 'L').
+unicode_bidi_class(72164, 72164, 'L').
+unicode_bidi_class(72192, 72192, 'L').
+unicode_bidi_class(72199, 72200, 'L').
+unicode_bidi_class(72203, 72242, 'L').
+unicode_bidi_class(72249, 72249, 'L').
+unicode_bidi_class(72250, 72250, 'L').
+unicode_bidi_class(72255, 72262, 'L').
+unicode_bidi_class(72272, 72272, 'L').
+unicode_bidi_class(72279, 72280, 'L').
+unicode_bidi_class(72284, 72329, 'L').
+unicode_bidi_class(72343, 72343, 'L').
+unicode_bidi_class(72346, 72348, 'L').
+unicode_bidi_class(72349, 72349, 'L').
+unicode_bidi_class(72350, 72354, 'L').
+unicode_bidi_class(72368, 72440, 'L').
+unicode_bidi_class(72448, 72457, 'L').
+unicode_bidi_class(72545, 72545, 'L').
+unicode_bidi_class(72549, 72549, 'L').
+unicode_bidi_class(72551, 72551, 'L').
+unicode_bidi_class(72640, 72672, 'L').
+unicode_bidi_class(72673, 72673, 'L').
+unicode_bidi_class(72688, 72697, 'L').
+unicode_bidi_class(72704, 72712, 'L').
+unicode_bidi_class(72714, 72750, 'L').
+unicode_bidi_class(72751, 72751, 'L').
+unicode_bidi_class(72766, 72766, 'L').
+unicode_bidi_class(72767, 72767, 'L').
+unicode_bidi_class(72768, 72768, 'L').
+unicode_bidi_class(72769, 72773, 'L').
+unicode_bidi_class(72784, 72793, 'L').
+unicode_bidi_class(72794, 72812, 'L').
+unicode_bidi_class(72816, 72817, 'L').
+unicode_bidi_class(72818, 72847, 'L').
+unicode_bidi_class(72873, 72873, 'L').
+unicode_bidi_class(72881, 72881, 'L').
+unicode_bidi_class(72884, 72884, 'L').
+unicode_bidi_class(72960, 72966, 'L').
+unicode_bidi_class(72968, 72969, 'L').
+unicode_bidi_class(72971, 73008, 'L').
+unicode_bidi_class(73030, 73030, 'L').
+unicode_bidi_class(73040, 73049, 'L').
+unicode_bidi_class(73056, 73061, 'L').
+unicode_bidi_class(73063, 73064, 'L').
+unicode_bidi_class(73066, 73097, 'L').
+unicode_bidi_class(73098, 73102, 'L').
+unicode_bidi_class(73107, 73108, 'L').
+unicode_bidi_class(73110, 73110, 'L').
+unicode_bidi_class(73112, 73112, 'L').
+unicode_bidi_class(73120, 73129, 'L').
+unicode_bidi_class(73136, 73176, 'L').
+unicode_bidi_class(73177, 73177, 'L').
+unicode_bidi_class(73178, 73179, 'L').
+unicode_bidi_class(73184, 73193, 'L').
+unicode_bidi_class(73440, 73458, 'L').
+unicode_bidi_class(73461, 73462, 'L').
+unicode_bidi_class(73463, 73464, 'L').
+unicode_bidi_class(73474, 73474, 'L').
+unicode_bidi_class(73475, 73475, 'L').
+unicode_bidi_class(73476, 73488, 'L').
+unicode_bidi_class(73490, 73523, 'L').
+unicode_bidi_class(73524, 73525, 'L').
+unicode_bidi_class(73534, 73535, 'L').
+unicode_bidi_class(73537, 73537, 'L').
+unicode_bidi_class(73539, 73551, 'L').
+unicode_bidi_class(73552, 73561, 'L').
+unicode_bidi_class(73648, 73648, 'L').
+unicode_bidi_class(73664, 73684, 'L').
+unicode_bidi_class(73727, 73727, 'L').
+unicode_bidi_class(73728, 74649, 'L').
+unicode_bidi_class(74752, 74862, 'L').
+unicode_bidi_class(74864, 74868, 'L').
+unicode_bidi_class(74880, 75075, 'L').
+unicode_bidi_class(77712, 77808, 'L').
+unicode_bidi_class(77809, 77810, 'L').
+unicode_bidi_class(77824, 78895, 'L').
+unicode_bidi_class(78896, 78911, 'L').
+unicode_bidi_class(78913, 78918, 'L').
+unicode_bidi_class(78944, 82938, 'L').
+unicode_bidi_class(82944, 83526, 'L').
+unicode_bidi_class(90368, 90397, 'L').
+unicode_bidi_class(90410, 90412, 'L').
+unicode_bidi_class(90416, 90425, 'L').
+unicode_bidi_class(92160, 92728, 'L').
+unicode_bidi_class(92736, 92766, 'L').
+unicode_bidi_class(92768, 92777, 'L').
+unicode_bidi_class(92782, 92783, 'L').
+unicode_bidi_class(92784, 92862, 'L').
+unicode_bidi_class(92864, 92873, 'L').
+unicode_bidi_class(92880, 92909, 'L').
+unicode_bidi_class(92917, 92917, 'L').
+unicode_bidi_class(92928, 92975, 'L').
+unicode_bidi_class(92983, 92987, 'L').
+unicode_bidi_class(92988, 92991, 'L').
+unicode_bidi_class(92992, 92995, 'L').
+unicode_bidi_class(92996, 92996, 'L').
+unicode_bidi_class(92997, 92997, 'L').
+unicode_bidi_class(93008, 93017, 'L').
+unicode_bidi_class(93019, 93025, 'L').
+unicode_bidi_class(93027, 93047, 'L').
+unicode_bidi_class(93053, 93071, 'L').
+unicode_bidi_class(93504, 93506, 'L').
+unicode_bidi_class(93507, 93546, 'L').
+unicode_bidi_class(93547, 93548, 'L').
+unicode_bidi_class(93549, 93551, 'L').
+unicode_bidi_class(93552, 93561, 'L').
+unicode_bidi_class(93760, 93823, 'L').
+unicode_bidi_class(93824, 93846, 'L').
+unicode_bidi_class(93847, 93850, 'L').
+unicode_bidi_class(93856, 93880, 'L').
+unicode_bidi_class(93883, 93907, 'L').
+unicode_bidi_class(93952, 94026, 'L').
+unicode_bidi_class(94032, 94032, 'L').
+unicode_bidi_class(94033, 94087, 'L').
+unicode_bidi_class(94099, 94111, 'L').
+unicode_bidi_class(94176, 94177, 'L').
+unicode_bidi_class(94179, 94179, 'L').
+unicode_bidi_class(94192, 94193, 'L').
+unicode_bidi_class(94194, 94195, 'L').
+unicode_bidi_class(94196, 94198, 'L').
+unicode_bidi_class(94208, 101589, 'L').
+unicode_bidi_class(101631, 101662, 'L').
+unicode_bidi_class(101760, 101874, 'L').
+unicode_bidi_class(110576, 110579, 'L').
+unicode_bidi_class(110581, 110587, 'L').
+unicode_bidi_class(110589, 110590, 'L').
+unicode_bidi_class(110592, 110882, 'L').
+unicode_bidi_class(110898, 110898, 'L').
+unicode_bidi_class(110928, 110930, 'L').
+unicode_bidi_class(110933, 110933, 'L').
+unicode_bidi_class(110948, 110951, 'L').
+unicode_bidi_class(110960, 111355, 'L').
+unicode_bidi_class(113664, 113770, 'L').
+unicode_bidi_class(113776, 113788, 'L').
+unicode_bidi_class(113792, 113800, 'L').
+unicode_bidi_class(113808, 113817, 'L').
+unicode_bidi_class(113820, 113820, 'L').
+unicode_bidi_class(113823, 113823, 'L').
+unicode_bidi_class(117974, 117999, 'L').
+unicode_bidi_class(118608, 118723, 'L').
+unicode_bidi_class(118784, 119029, 'L').
+unicode_bidi_class(119040, 119078, 'L').
+unicode_bidi_class(119081, 119140, 'L').
+unicode_bidi_class(119141, 119142, 'L').
+unicode_bidi_class(119146, 119148, 'L').
+unicode_bidi_class(119149, 119154, 'L').
+unicode_bidi_class(119171, 119172, 'L').
+unicode_bidi_class(119180, 119209, 'L').
+unicode_bidi_class(119214, 119272, 'L').
+unicode_bidi_class(119488, 119507, 'L').
+unicode_bidi_class(119520, 119539, 'L').
+unicode_bidi_class(119648, 119672, 'L').
+unicode_bidi_class(119808, 119892, 'L').
+unicode_bidi_class(119894, 119964, 'L').
+unicode_bidi_class(119966, 119967, 'L').
+unicode_bidi_class(119970, 119970, 'L').
+unicode_bidi_class(119973, 119974, 'L').
+unicode_bidi_class(119977, 119980, 'L').
+unicode_bidi_class(119982, 119993, 'L').
+unicode_bidi_class(119995, 119995, 'L').
+unicode_bidi_class(119997, 120003, 'L').
+unicode_bidi_class(120005, 120069, 'L').
+unicode_bidi_class(120071, 120074, 'L').
+unicode_bidi_class(120077, 120084, 'L').
+unicode_bidi_class(120086, 120092, 'L').
+unicode_bidi_class(120094, 120121, 'L').
+unicode_bidi_class(120123, 120126, 'L').
+unicode_bidi_class(120128, 120132, 'L').
+unicode_bidi_class(120134, 120134, 'L').
+unicode_bidi_class(120138, 120144, 'L').
+unicode_bidi_class(120146, 120485, 'L').
+unicode_bidi_class(120488, 120512, 'L').
+unicode_bidi_class(120514, 120538, 'L').
+unicode_bidi_class(120540, 120570, 'L').
+unicode_bidi_class(120572, 120596, 'L').
+unicode_bidi_class(120598, 120628, 'L').
+unicode_bidi_class(120630, 120654, 'L').
+unicode_bidi_class(120656, 120686, 'L').
+unicode_bidi_class(120688, 120712, 'L').
+unicode_bidi_class(120714, 120744, 'L').
+unicode_bidi_class(120746, 120770, 'L').
+unicode_bidi_class(120772, 120779, 'L').
+unicode_bidi_class(120832, 121343, 'L').
+unicode_bidi_class(121399, 121402, 'L').
+unicode_bidi_class(121453, 121460, 'L').
+unicode_bidi_class(121462, 121475, 'L').
+unicode_bidi_class(121477, 121478, 'L').
+unicode_bidi_class(121479, 121483, 'L').
+unicode_bidi_class(122624, 122633, 'L').
+unicode_bidi_class(122634, 122634, 'L').
+unicode_bidi_class(122635, 122654, 'L').
+unicode_bidi_class(122661, 122666, 'L').
+unicode_bidi_class(122928, 122989, 'L').
+unicode_bidi_class(123136, 123180, 'L').
+unicode_bidi_class(123191, 123197, 'L').
+unicode_bidi_class(123200, 123209, 'L').
+unicode_bidi_class(123214, 123214, 'L').
+unicode_bidi_class(123215, 123215, 'L').
+unicode_bidi_class(123536, 123565, 'L').
+unicode_bidi_class(123584, 123627, 'L').
+unicode_bidi_class(123632, 123641, 'L').
+unicode_bidi_class(124112, 124138, 'L').
+unicode_bidi_class(124139, 124139, 'L').
+unicode_bidi_class(124144, 124153, 'L').
+unicode_bidi_class(124368, 124397, 'L').
+unicode_bidi_class(124400, 124400, 'L').
+unicode_bidi_class(124401, 124410, 'L').
+unicode_bidi_class(124415, 124415, 'L').
+unicode_bidi_class(124608, 124638, 'L').
+unicode_bidi_class(124640, 124642, 'L').
+unicode_bidi_class(124644, 124645, 'L').
+unicode_bidi_class(124647, 124653, 'L').
+unicode_bidi_class(124656, 124660, 'L').
+unicode_bidi_class(124670, 124670, 'L').
+unicode_bidi_class(124671, 124671, 'L').
+unicode_bidi_class(124896, 124902, 'L').
+unicode_bidi_class(124904, 124907, 'L').
+unicode_bidi_class(124909, 124910, 'L').
+unicode_bidi_class(124912, 124926, 'L').
+unicode_bidi_class(127248, 127278, 'L').
+unicode_bidi_class(127280, 127337, 'L').
+unicode_bidi_class(127344, 127404, 'L').
+unicode_bidi_class(127462, 127490, 'L').
+unicode_bidi_class(127504, 127547, 'L').
+unicode_bidi_class(127552, 127560, 'L').
+unicode_bidi_class(127568, 127569, 'L').
+unicode_bidi_class(131072, 173791, 'L').
+unicode_bidi_class(173824, 178205, 'L').
+unicode_bidi_class(178208, 183981, 'L').
+unicode_bidi_class(183984, 191456, 'L').
+unicode_bidi_class(191472, 192093, 'L').
+unicode_bidi_class(194560, 195101, 'L').
+unicode_bidi_class(196608, 201546, 'L').
+unicode_bidi_class(201552, 210041, 'L').
+unicode_bidi_class(983040, 1048573, 'L').
+unicode_bidi_class(1048576, 1114109, 'L').
+unicode_bidi_class(1470, 1470, 'R').
+unicode_bidi_class(1472, 1472, 'R').
+unicode_bidi_class(1475, 1475, 'R').
+unicode_bidi_class(1478, 1478, 'R').
+unicode_bidi_class(1488, 1514, 'R').
+unicode_bidi_class(1519, 1522, 'R').
+unicode_bidi_class(1523, 1524, 'R').
+unicode_bidi_class(1984, 1993, 'R').
+unicode_bidi_class(1994, 2026, 'R').
+unicode_bidi_class(2036, 2037, 'R').
+unicode_bidi_class(2042, 2042, 'R').
+unicode_bidi_class(2046, 2047, 'R').
+unicode_bidi_class(2048, 2069, 'R').
+unicode_bidi_class(2074, 2074, 'R').
+unicode_bidi_class(2084, 2084, 'R').
+unicode_bidi_class(2088, 2088, 'R').
+unicode_bidi_class(2096, 2110, 'R').
+unicode_bidi_class(2112, 2136, 'R').
+unicode_bidi_class(2142, 2142, 'R').
+unicode_bidi_class(8207, 8207, 'R').
+unicode_bidi_class(64285, 64285, 'R').
+unicode_bidi_class(64287, 64296, 'R').
+unicode_bidi_class(64298, 64310, 'R').
+unicode_bidi_class(64312, 64316, 'R').
+unicode_bidi_class(64318, 64318, 'R').
+unicode_bidi_class(64320, 64321, 'R').
+unicode_bidi_class(64323, 64324, 'R').
+unicode_bidi_class(64326, 64335, 'R').
+unicode_bidi_class(67584, 67589, 'R').
+unicode_bidi_class(67592, 67592, 'R').
+unicode_bidi_class(67594, 67637, 'R').
+unicode_bidi_class(67639, 67640, 'R').
+unicode_bidi_class(67644, 67644, 'R').
+unicode_bidi_class(67647, 67669, 'R').
+unicode_bidi_class(67671, 67671, 'R').
+unicode_bidi_class(67672, 67679, 'R').
+unicode_bidi_class(67680, 67702, 'R').
+unicode_bidi_class(67703, 67704, 'R').
+unicode_bidi_class(67705, 67711, 'R').
+unicode_bidi_class(67712, 67742, 'R').
+unicode_bidi_class(67751, 67759, 'R').
+unicode_bidi_class(67808, 67826, 'R').
+unicode_bidi_class(67828, 67829, 'R').
+unicode_bidi_class(67835, 67839, 'R').
+unicode_bidi_class(67840, 67861, 'R').
+unicode_bidi_class(67862, 67867, 'R').
+unicode_bidi_class(67872, 67897, 'R').
+unicode_bidi_class(67903, 67903, 'R').
+unicode_bidi_class(67904, 67929, 'R').
+unicode_bidi_class(67968, 68023, 'R').
+unicode_bidi_class(68028, 68029, 'R').
+unicode_bidi_class(68030, 68031, 'R').
+unicode_bidi_class(68032, 68047, 'R').
+unicode_bidi_class(68050, 68095, 'R').
+unicode_bidi_class(68096, 68096, 'R').
+unicode_bidi_class(68112, 68115, 'R').
+unicode_bidi_class(68117, 68119, 'R').
+unicode_bidi_class(68121, 68149, 'R').
+unicode_bidi_class(68160, 68168, 'R').
+unicode_bidi_class(68176, 68184, 'R').
+unicode_bidi_class(68192, 68220, 'R').
+unicode_bidi_class(68221, 68222, 'R').
+unicode_bidi_class(68223, 68223, 'R').
+unicode_bidi_class(68224, 68252, 'R').
+unicode_bidi_class(68253, 68255, 'R').
+unicode_bidi_class(68288, 68295, 'R').
+unicode_bidi_class(68296, 68296, 'R').
+unicode_bidi_class(68297, 68324, 'R').
+unicode_bidi_class(68331, 68335, 'R').
+unicode_bidi_class(68336, 68342, 'R').
+unicode_bidi_class(68352, 68405, 'R').
+unicode_bidi_class(68416, 68437, 'R').
+unicode_bidi_class(68440, 68447, 'R').
+unicode_bidi_class(68448, 68466, 'R').
+unicode_bidi_class(68472, 68479, 'R').
+unicode_bidi_class(68480, 68497, 'R').
+unicode_bidi_class(68505, 68508, 'R').
+unicode_bidi_class(68521, 68527, 'R').
+unicode_bidi_class(68608, 68680, 'R').
+unicode_bidi_class(68736, 68786, 'R').
+unicode_bidi_class(68800, 68850, 'R').
+unicode_bidi_class(68858, 68863, 'R').
+unicode_bidi_class(68938, 68941, 'R').
+unicode_bidi_class(68942, 68942, 'R').
+unicode_bidi_class(68943, 68943, 'R').
+unicode_bidi_class(68944, 68965, 'R').
+unicode_bidi_class(68975, 68975, 'R').
+unicode_bidi_class(68976, 68997, 'R').
+unicode_bidi_class(69006, 69007, 'R').
+unicode_bidi_class(69248, 69289, 'R').
+unicode_bidi_class(69293, 69293, 'R').
+unicode_bidi_class(69296, 69297, 'R').
+unicode_bidi_class(69376, 69404, 'R').
+unicode_bidi_class(69405, 69414, 'R').
+unicode_bidi_class(69415, 69415, 'R').
+unicode_bidi_class(69488, 69505, 'R').
+unicode_bidi_class(69510, 69513, 'R').
+unicode_bidi_class(69552, 69572, 'R').
+unicode_bidi_class(69573, 69579, 'R').
+unicode_bidi_class(69600, 69622, 'R').
+unicode_bidi_class(124928, 125124, 'R').
+unicode_bidi_class(125127, 125135, 'R').
+unicode_bidi_class(125184, 125251, 'R').
+unicode_bidi_class(125259, 125259, 'R').
+unicode_bidi_class(125264, 125273, 'R').
+unicode_bidi_class(125278, 125279, 'R').
+unicode_bidi_class(48, 57, 'EN').
+unicode_bidi_class(178, 179, 'EN').
+unicode_bidi_class(185, 185, 'EN').
+unicode_bidi_class(1776, 1785, 'EN').
+unicode_bidi_class(8304, 8304, 'EN').
+unicode_bidi_class(8308, 8313, 'EN').
+unicode_bidi_class(8320, 8329, 'EN').
+unicode_bidi_class(9352, 9371, 'EN').
+unicode_bidi_class(65296, 65305, 'EN').
+unicode_bidi_class(66273, 66299, 'EN').
+unicode_bidi_class(118000, 118009, 'EN').
+unicode_bidi_class(120782, 120831, 'EN').
+unicode_bidi_class(127232, 127242, 'EN').
+unicode_bidi_class(130032, 130041, 'EN').
+unicode_bidi_class(43, 43, 'ES').
+unicode_bidi_class(45, 45, 'ES').
+unicode_bidi_class(8314, 8315, 'ES').
+unicode_bidi_class(8330, 8331, 'ES').
+unicode_bidi_class(8722, 8722, 'ES').
+unicode_bidi_class(64297, 64297, 'ES').
+unicode_bidi_class(65122, 65122, 'ES').
+unicode_bidi_class(65123, 65123, 'ES').
+unicode_bidi_class(65291, 65291, 'ES').
+unicode_bidi_class(65293, 65293, 'ES').
+unicode_bidi_class(35, 35, 'ET').
+unicode_bidi_class(36, 36, 'ET').
+unicode_bidi_class(37, 37, 'ET').
+unicode_bidi_class(162, 165, 'ET').
+unicode_bidi_class(176, 176, 'ET').
+unicode_bidi_class(177, 177, 'ET').
+unicode_bidi_class(1423, 1423, 'ET').
+unicode_bidi_class(1545, 1546, 'ET').
+unicode_bidi_class(1642, 1642, 'ET').
+unicode_bidi_class(2546, 2547, 'ET').
+unicode_bidi_class(2555, 2555, 'ET').
+unicode_bidi_class(2801, 2801, 'ET').
+unicode_bidi_class(3065, 3065, 'ET').
+unicode_bidi_class(3647, 3647, 'ET').
+unicode_bidi_class(6107, 6107, 'ET').
+unicode_bidi_class(8240, 8244, 'ET').
+unicode_bidi_class(8352, 8385, 'ET').
+unicode_bidi_class(8494, 8494, 'ET').
+unicode_bidi_class(8723, 8723, 'ET').
+unicode_bidi_class(43064, 43064, 'ET').
+unicode_bidi_class(43065, 43065, 'ET').
+unicode_bidi_class(65119, 65119, 'ET').
+unicode_bidi_class(65129, 65129, 'ET').
+unicode_bidi_class(65130, 65130, 'ET').
+unicode_bidi_class(65283, 65283, 'ET').
+unicode_bidi_class(65284, 65284, 'ET').
+unicode_bidi_class(65285, 65285, 'ET').
+unicode_bidi_class(65504, 65505, 'ET').
+unicode_bidi_class(65509, 65510, 'ET').
+unicode_bidi_class(73693, 73696, 'ET').
+unicode_bidi_class(123647, 123647, 'ET').
+unicode_bidi_class(1536, 1541, 'AN').
+unicode_bidi_class(1632, 1641, 'AN').
+unicode_bidi_class(1643, 1644, 'AN').
+unicode_bidi_class(1757, 1757, 'AN').
+unicode_bidi_class(2192, 2193, 'AN').
+unicode_bidi_class(2274, 2274, 'AN').
+unicode_bidi_class(68912, 68921, 'AN').
+unicode_bidi_class(68928, 68937, 'AN').
+unicode_bidi_class(69216, 69246, 'AN').
+unicode_bidi_class(44, 44, 'CS').
+unicode_bidi_class(46, 47, 'CS').
+unicode_bidi_class(58, 58, 'CS').
+unicode_bidi_class(160, 160, 'CS').
+unicode_bidi_class(1548, 1548, 'CS').
+unicode_bidi_class(8239, 8239, 'CS').
+unicode_bidi_class(8260, 8260, 'CS').
+unicode_bidi_class(65104, 65104, 'CS').
+unicode_bidi_class(65106, 65106, 'CS').
+unicode_bidi_class(65109, 65109, 'CS').
+unicode_bidi_class(65292, 65292, 'CS').
+unicode_bidi_class(65294, 65295, 'CS').
+unicode_bidi_class(65306, 65306, 'CS').
+unicode_bidi_class(10, 10, 'B').
+unicode_bidi_class(13, 13, 'B').
+unicode_bidi_class(28, 30, 'B').
+unicode_bidi_class(133, 133, 'B').
+unicode_bidi_class(8233, 8233, 'B').
+unicode_bidi_class(9, 9, 'S').
+unicode_bidi_class(11, 11, 'S').
+unicode_bidi_class(31, 31, 'S').
+unicode_bidi_class(12, 12, 'WS').
+unicode_bidi_class(32, 32, 'WS').
+unicode_bidi_class(5760, 5760, 'WS').
+unicode_bidi_class(8192, 8202, 'WS').
+unicode_bidi_class(8232, 8232, 'WS').
+unicode_bidi_class(8287, 8287, 'WS').
+unicode_bidi_class(12288, 12288, 'WS').
+unicode_bidi_class(33, 34, 'ON').
+unicode_bidi_class(38, 39, 'ON').
+unicode_bidi_class(40, 40, 'ON').
+unicode_bidi_class(41, 41, 'ON').
+unicode_bidi_class(42, 42, 'ON').
+unicode_bidi_class(59, 59, 'ON').
+unicode_bidi_class(60, 62, 'ON').
+unicode_bidi_class(63, 64, 'ON').
+unicode_bidi_class(91, 91, 'ON').
+unicode_bidi_class(92, 92, 'ON').
+unicode_bidi_class(93, 93, 'ON').
+unicode_bidi_class(94, 94, 'ON').
+unicode_bidi_class(95, 95, 'ON').
+unicode_bidi_class(96, 96, 'ON').
+unicode_bidi_class(123, 123, 'ON').
+unicode_bidi_class(124, 124, 'ON').
+unicode_bidi_class(125, 125, 'ON').
+unicode_bidi_class(126, 126, 'ON').
+unicode_bidi_class(161, 161, 'ON').
+unicode_bidi_class(166, 166, 'ON').
+unicode_bidi_class(167, 167, 'ON').
+unicode_bidi_class(168, 168, 'ON').
+unicode_bidi_class(169, 169, 'ON').
+unicode_bidi_class(171, 171, 'ON').
+unicode_bidi_class(172, 172, 'ON').
+unicode_bidi_class(174, 174, 'ON').
+unicode_bidi_class(175, 175, 'ON').
+unicode_bidi_class(180, 180, 'ON').
+unicode_bidi_class(182, 183, 'ON').
+unicode_bidi_class(184, 184, 'ON').
+unicode_bidi_class(187, 187, 'ON').
+unicode_bidi_class(188, 190, 'ON').
+unicode_bidi_class(191, 191, 'ON').
+unicode_bidi_class(215, 215, 'ON').
+unicode_bidi_class(247, 247, 'ON').
+unicode_bidi_class(697, 698, 'ON').
+unicode_bidi_class(706, 709, 'ON').
+unicode_bidi_class(710, 719, 'ON').
+unicode_bidi_class(722, 735, 'ON').
+unicode_bidi_class(741, 747, 'ON').
+unicode_bidi_class(748, 748, 'ON').
+unicode_bidi_class(749, 749, 'ON').
+unicode_bidi_class(751, 767, 'ON').
+unicode_bidi_class(884, 884, 'ON').
+unicode_bidi_class(885, 885, 'ON').
+unicode_bidi_class(894, 894, 'ON').
+unicode_bidi_class(900, 901, 'ON').
+unicode_bidi_class(903, 903, 'ON').
+unicode_bidi_class(1014, 1014, 'ON').
+unicode_bidi_class(1418, 1418, 'ON').
+unicode_bidi_class(1421, 1422, 'ON').
+unicode_bidi_class(1542, 1543, 'ON').
+unicode_bidi_class(1550, 1551, 'ON').
+unicode_bidi_class(1758, 1758, 'ON').
+unicode_bidi_class(1769, 1769, 'ON').
+unicode_bidi_class(2038, 2038, 'ON').
+unicode_bidi_class(2039, 2041, 'ON').
+unicode_bidi_class(3059, 3064, 'ON').
+unicode_bidi_class(3066, 3066, 'ON').
+unicode_bidi_class(3192, 3198, 'ON').
+unicode_bidi_class(3898, 3898, 'ON').
+unicode_bidi_class(3899, 3899, 'ON').
+unicode_bidi_class(3900, 3900, 'ON').
+unicode_bidi_class(3901, 3901, 'ON').
+unicode_bidi_class(5008, 5017, 'ON').
+unicode_bidi_class(5120, 5120, 'ON').
+unicode_bidi_class(5787, 5787, 'ON').
+unicode_bidi_class(5788, 5788, 'ON').
+unicode_bidi_class(6128, 6137, 'ON').
+unicode_bidi_class(6144, 6149, 'ON').
+unicode_bidi_class(6150, 6150, 'ON').
+unicode_bidi_class(6151, 6154, 'ON').
+unicode_bidi_class(6464, 6464, 'ON').
+unicode_bidi_class(6468, 6469, 'ON').
+unicode_bidi_class(6622, 6655, 'ON').
+unicode_bidi_class(8125, 8125, 'ON').
+unicode_bidi_class(8127, 8129, 'ON').
+unicode_bidi_class(8141, 8143, 'ON').
+unicode_bidi_class(8157, 8159, 'ON').
+unicode_bidi_class(8173, 8175, 'ON').
+unicode_bidi_class(8189, 8190, 'ON').
+unicode_bidi_class(8208, 8213, 'ON').
+unicode_bidi_class(8214, 8215, 'ON').
+unicode_bidi_class(8216, 8216, 'ON').
+unicode_bidi_class(8217, 8217, 'ON').
+unicode_bidi_class(8218, 8218, 'ON').
+unicode_bidi_class(8219, 8220, 'ON').
+unicode_bidi_class(8221, 8221, 'ON').
+unicode_bidi_class(8222, 8222, 'ON').
+unicode_bidi_class(8223, 8223, 'ON').
+unicode_bidi_class(8224, 8231, 'ON').
+unicode_bidi_class(8245, 8248, 'ON').
+unicode_bidi_class(8249, 8249, 'ON').
+unicode_bidi_class(8250, 8250, 'ON').
+unicode_bidi_class(8251, 8254, 'ON').
+unicode_bidi_class(8255, 8256, 'ON').
+unicode_bidi_class(8257, 8259, 'ON').
+unicode_bidi_class(8261, 8261, 'ON').
+unicode_bidi_class(8262, 8262, 'ON').
+unicode_bidi_class(8263, 8273, 'ON').
+unicode_bidi_class(8274, 8274, 'ON').
+unicode_bidi_class(8275, 8275, 'ON').
+unicode_bidi_class(8276, 8276, 'ON').
+unicode_bidi_class(8277, 8286, 'ON').
+unicode_bidi_class(8316, 8316, 'ON').
+unicode_bidi_class(8317, 8317, 'ON').
+unicode_bidi_class(8318, 8318, 'ON').
+unicode_bidi_class(8332, 8332, 'ON').
+unicode_bidi_class(8333, 8333, 'ON').
+unicode_bidi_class(8334, 8334, 'ON').
+unicode_bidi_class(8448, 8449, 'ON').
+unicode_bidi_class(8451, 8454, 'ON').
+unicode_bidi_class(8456, 8457, 'ON').
+unicode_bidi_class(8468, 8468, 'ON').
+unicode_bidi_class(8470, 8471, 'ON').
+unicode_bidi_class(8472, 8472, 'ON').
+unicode_bidi_class(8478, 8483, 'ON').
+unicode_bidi_class(8485, 8485, 'ON').
+unicode_bidi_class(8487, 8487, 'ON').
+unicode_bidi_class(8489, 8489, 'ON').
+unicode_bidi_class(8506, 8507, 'ON').
+unicode_bidi_class(8512, 8516, 'ON').
+unicode_bidi_class(8522, 8522, 'ON').
+unicode_bidi_class(8523, 8523, 'ON').
+unicode_bidi_class(8524, 8525, 'ON').
+unicode_bidi_class(8528, 8543, 'ON').
+unicode_bidi_class(8585, 8585, 'ON').
+unicode_bidi_class(8586, 8587, 'ON').
+unicode_bidi_class(8592, 8596, 'ON').
+unicode_bidi_class(8597, 8601, 'ON').
+unicode_bidi_class(8602, 8603, 'ON').
+unicode_bidi_class(8604, 8607, 'ON').
+unicode_bidi_class(8608, 8608, 'ON').
+unicode_bidi_class(8609, 8610, 'ON').
+unicode_bidi_class(8611, 8611, 'ON').
+unicode_bidi_class(8612, 8613, 'ON').
+unicode_bidi_class(8614, 8614, 'ON').
+unicode_bidi_class(8615, 8621, 'ON').
+unicode_bidi_class(8622, 8622, 'ON').
+unicode_bidi_class(8623, 8653, 'ON').
+unicode_bidi_class(8654, 8655, 'ON').
+unicode_bidi_class(8656, 8657, 'ON').
+unicode_bidi_class(8658, 8658, 'ON').
+unicode_bidi_class(8659, 8659, 'ON').
+unicode_bidi_class(8660, 8660, 'ON').
+unicode_bidi_class(8661, 8691, 'ON').
+unicode_bidi_class(8692, 8721, 'ON').
+unicode_bidi_class(8724, 8959, 'ON').
+unicode_bidi_class(8960, 8967, 'ON').
+unicode_bidi_class(8968, 8968, 'ON').
+unicode_bidi_class(8969, 8969, 'ON').
+unicode_bidi_class(8970, 8970, 'ON').
+unicode_bidi_class(8971, 8971, 'ON').
+unicode_bidi_class(8972, 8991, 'ON').
+unicode_bidi_class(8992, 8993, 'ON').
+unicode_bidi_class(8994, 9000, 'ON').
+unicode_bidi_class(9001, 9001, 'ON').
+unicode_bidi_class(9002, 9002, 'ON').
+unicode_bidi_class(9003, 9013, 'ON').
+unicode_bidi_class(9083, 9083, 'ON').
+unicode_bidi_class(9084, 9084, 'ON').
+unicode_bidi_class(9085, 9108, 'ON').
+unicode_bidi_class(9110, 9114, 'ON').
+unicode_bidi_class(9115, 9139, 'ON').
+unicode_bidi_class(9140, 9179, 'ON').
+unicode_bidi_class(9180, 9185, 'ON').
+unicode_bidi_class(9186, 9257, 'ON').
+unicode_bidi_class(9280, 9290, 'ON').
+unicode_bidi_class(9312, 9351, 'ON').
+unicode_bidi_class(9450, 9471, 'ON').
+unicode_bidi_class(9472, 9654, 'ON').
+unicode_bidi_class(9655, 9655, 'ON').
+unicode_bidi_class(9656, 9664, 'ON').
+unicode_bidi_class(9665, 9665, 'ON').
+unicode_bidi_class(9666, 9719, 'ON').
+unicode_bidi_class(9720, 9727, 'ON').
+unicode_bidi_class(9728, 9838, 'ON').
+unicode_bidi_class(9839, 9839, 'ON').
+unicode_bidi_class(9840, 9899, 'ON').
+unicode_bidi_class(9901, 10087, 'ON').
+unicode_bidi_class(10088, 10088, 'ON').
+unicode_bidi_class(10089, 10089, 'ON').
+unicode_bidi_class(10090, 10090, 'ON').
+unicode_bidi_class(10091, 10091, 'ON').
+unicode_bidi_class(10092, 10092, 'ON').
+unicode_bidi_class(10093, 10093, 'ON').
+unicode_bidi_class(10094, 10094, 'ON').
+unicode_bidi_class(10095, 10095, 'ON').
+unicode_bidi_class(10096, 10096, 'ON').
+unicode_bidi_class(10097, 10097, 'ON').
+unicode_bidi_class(10098, 10098, 'ON').
+unicode_bidi_class(10099, 10099, 'ON').
+unicode_bidi_class(10100, 10100, 'ON').
+unicode_bidi_class(10101, 10101, 'ON').
+unicode_bidi_class(10102, 10131, 'ON').
+unicode_bidi_class(10132, 10175, 'ON').
+unicode_bidi_class(10176, 10180, 'ON').
+unicode_bidi_class(10181, 10181, 'ON').
+unicode_bidi_class(10182, 10182, 'ON').
+unicode_bidi_class(10183, 10213, 'ON').
+unicode_bidi_class(10214, 10214, 'ON').
+unicode_bidi_class(10215, 10215, 'ON').
+unicode_bidi_class(10216, 10216, 'ON').
+unicode_bidi_class(10217, 10217, 'ON').
+unicode_bidi_class(10218, 10218, 'ON').
+unicode_bidi_class(10219, 10219, 'ON').
+unicode_bidi_class(10220, 10220, 'ON').
+unicode_bidi_class(10221, 10221, 'ON').
+unicode_bidi_class(10222, 10222, 'ON').
+unicode_bidi_class(10223, 10223, 'ON').
+unicode_bidi_class(10224, 10239, 'ON').
+unicode_bidi_class(10496, 10626, 'ON').
+unicode_bidi_class(10627, 10627, 'ON').
+unicode_bidi_class(10628, 10628, 'ON').
+unicode_bidi_class(10629, 10629, 'ON').
+unicode_bidi_class(10630, 10630, 'ON').
+unicode_bidi_class(10631, 10631, 'ON').
+unicode_bidi_class(10632, 10632, 'ON').
+unicode_bidi_class(10633, 10633, 'ON').
+unicode_bidi_class(10634, 10634, 'ON').
+unicode_bidi_class(10635, 10635, 'ON').
+unicode_bidi_class(10636, 10636, 'ON').
+unicode_bidi_class(10637, 10637, 'ON').
+unicode_bidi_class(10638, 10638, 'ON').
+unicode_bidi_class(10639, 10639, 'ON').
+unicode_bidi_class(10640, 10640, 'ON').
+unicode_bidi_class(10641, 10641, 'ON').
+unicode_bidi_class(10642, 10642, 'ON').
+unicode_bidi_class(10643, 10643, 'ON').
+unicode_bidi_class(10644, 10644, 'ON').
+unicode_bidi_class(10645, 10645, 'ON').
+unicode_bidi_class(10646, 10646, 'ON').
+unicode_bidi_class(10647, 10647, 'ON').
+unicode_bidi_class(10648, 10648, 'ON').
+unicode_bidi_class(10649, 10711, 'ON').
+unicode_bidi_class(10712, 10712, 'ON').
+unicode_bidi_class(10713, 10713, 'ON').
+unicode_bidi_class(10714, 10714, 'ON').
+unicode_bidi_class(10715, 10715, 'ON').
+unicode_bidi_class(10716, 10747, 'ON').
+unicode_bidi_class(10748, 10748, 'ON').
+unicode_bidi_class(10749, 10749, 'ON').
+unicode_bidi_class(10750, 11007, 'ON').
+unicode_bidi_class(11008, 11055, 'ON').
+unicode_bidi_class(11056, 11076, 'ON').
+unicode_bidi_class(11077, 11078, 'ON').
+unicode_bidi_class(11079, 11084, 'ON').
+unicode_bidi_class(11085, 11123, 'ON').
+unicode_bidi_class(11126, 11263, 'ON').
+unicode_bidi_class(11493, 11498, 'ON').
+unicode_bidi_class(11513, 11516, 'ON').
+unicode_bidi_class(11517, 11517, 'ON').
+unicode_bidi_class(11518, 11519, 'ON').
+unicode_bidi_class(11776, 11777, 'ON').
+unicode_bidi_class(11778, 11778, 'ON').
+unicode_bidi_class(11779, 11779, 'ON').
+unicode_bidi_class(11780, 11780, 'ON').
+unicode_bidi_class(11781, 11781, 'ON').
+unicode_bidi_class(11782, 11784, 'ON').
+unicode_bidi_class(11785, 11785, 'ON').
+unicode_bidi_class(11786, 11786, 'ON').
+unicode_bidi_class(11787, 11787, 'ON').
+unicode_bidi_class(11788, 11788, 'ON').
+unicode_bidi_class(11789, 11789, 'ON').
+unicode_bidi_class(11790, 11798, 'ON').
+unicode_bidi_class(11799, 11799, 'ON').
+unicode_bidi_class(11800, 11801, 'ON').
+unicode_bidi_class(11802, 11802, 'ON').
+unicode_bidi_class(11803, 11803, 'ON').
+unicode_bidi_class(11804, 11804, 'ON').
+unicode_bidi_class(11805, 11805, 'ON').
+unicode_bidi_class(11806, 11807, 'ON').
+unicode_bidi_class(11808, 11808, 'ON').
+unicode_bidi_class(11809, 11809, 'ON').
+unicode_bidi_class(11810, 11810, 'ON').
+unicode_bidi_class(11811, 11811, 'ON').
+unicode_bidi_class(11812, 11812, 'ON').
+unicode_bidi_class(11813, 11813, 'ON').
+unicode_bidi_class(11814, 11814, 'ON').
+unicode_bidi_class(11815, 11815, 'ON').
+unicode_bidi_class(11816, 11816, 'ON').
+unicode_bidi_class(11817, 11817, 'ON').
+unicode_bidi_class(11818, 11822, 'ON').
+unicode_bidi_class(11823, 11823, 'ON').
+unicode_bidi_class(11824, 11833, 'ON').
+unicode_bidi_class(11834, 11835, 'ON').
+unicode_bidi_class(11836, 11839, 'ON').
+unicode_bidi_class(11840, 11840, 'ON').
+unicode_bidi_class(11841, 11841, 'ON').
+unicode_bidi_class(11842, 11842, 'ON').
+unicode_bidi_class(11843, 11855, 'ON').
+unicode_bidi_class(11856, 11857, 'ON').
+unicode_bidi_class(11858, 11860, 'ON').
+unicode_bidi_class(11861, 11861, 'ON').
+unicode_bidi_class(11862, 11862, 'ON').
+unicode_bidi_class(11863, 11863, 'ON').
+unicode_bidi_class(11864, 11864, 'ON').
+unicode_bidi_class(11865, 11865, 'ON').
+unicode_bidi_class(11866, 11866, 'ON').
+unicode_bidi_class(11867, 11867, 'ON').
+unicode_bidi_class(11868, 11868, 'ON').
+unicode_bidi_class(11869, 11869, 'ON').
+unicode_bidi_class(11904, 11929, 'ON').
+unicode_bidi_class(11931, 12019, 'ON').
+unicode_bidi_class(12032, 12245, 'ON').
+unicode_bidi_class(12272, 12287, 'ON').
+unicode_bidi_class(12289, 12291, 'ON').
+unicode_bidi_class(12292, 12292, 'ON').
+unicode_bidi_class(12296, 12296, 'ON').
+unicode_bidi_class(12297, 12297, 'ON').
+unicode_bidi_class(12298, 12298, 'ON').
+unicode_bidi_class(12299, 12299, 'ON').
+unicode_bidi_class(12300, 12300, 'ON').
+unicode_bidi_class(12301, 12301, 'ON').
+unicode_bidi_class(12302, 12302, 'ON').
+unicode_bidi_class(12303, 12303, 'ON').
+unicode_bidi_class(12304, 12304, 'ON').
+unicode_bidi_class(12305, 12305, 'ON').
+unicode_bidi_class(12306, 12307, 'ON').
+unicode_bidi_class(12308, 12308, 'ON').
+unicode_bidi_class(12309, 12309, 'ON').
+unicode_bidi_class(12310, 12310, 'ON').
+unicode_bidi_class(12311, 12311, 'ON').
+unicode_bidi_class(12312, 12312, 'ON').
+unicode_bidi_class(12313, 12313, 'ON').
+unicode_bidi_class(12314, 12314, 'ON').
+unicode_bidi_class(12315, 12315, 'ON').
+unicode_bidi_class(12316, 12316, 'ON').
+unicode_bidi_class(12317, 12317, 'ON').
+unicode_bidi_class(12318, 12319, 'ON').
+unicode_bidi_class(12320, 12320, 'ON').
+unicode_bidi_class(12336, 12336, 'ON').
+unicode_bidi_class(12342, 12343, 'ON').
+unicode_bidi_class(12349, 12349, 'ON').
+unicode_bidi_class(12350, 12351, 'ON').
+unicode_bidi_class(12443, 12444, 'ON').
+unicode_bidi_class(12448, 12448, 'ON').
+unicode_bidi_class(12539, 12539, 'ON').
+unicode_bidi_class(12736, 12773, 'ON').
+unicode_bidi_class(12783, 12783, 'ON').
+unicode_bidi_class(12829, 12830, 'ON').
+unicode_bidi_class(12880, 12880, 'ON').
+unicode_bidi_class(12881, 12895, 'ON').
+unicode_bidi_class(12924, 12926, 'ON').
+unicode_bidi_class(12977, 12991, 'ON').
+unicode_bidi_class(13004, 13007, 'ON').
+unicode_bidi_class(13175, 13178, 'ON').
+unicode_bidi_class(13278, 13279, 'ON').
+unicode_bidi_class(13311, 13311, 'ON').
+unicode_bidi_class(19904, 19967, 'ON').
+unicode_bidi_class(42128, 42182, 'ON').
+unicode_bidi_class(42509, 42511, 'ON').
+unicode_bidi_class(42611, 42611, 'ON').
+unicode_bidi_class(42622, 42622, 'ON').
+unicode_bidi_class(42623, 42623, 'ON').
+unicode_bidi_class(42752, 42774, 'ON').
+unicode_bidi_class(42775, 42783, 'ON').
+unicode_bidi_class(42784, 42785, 'ON').
+unicode_bidi_class(42888, 42888, 'ON').
+unicode_bidi_class(43048, 43051, 'ON').
+unicode_bidi_class(43124, 43127, 'ON').
+unicode_bidi_class(43882, 43883, 'ON').
+unicode_bidi_class(64451, 64466, 'ON').
+unicode_bidi_class(64830, 64830, 'ON').
+unicode_bidi_class(64831, 64831, 'ON').
+unicode_bidi_class(64832, 64847, 'ON').
+unicode_bidi_class(64912, 64913, 'ON').
+unicode_bidi_class(64968, 64975, 'ON').
+unicode_bidi_class(65021, 65023, 'ON').
+unicode_bidi_class(65040, 65046, 'ON').
+unicode_bidi_class(65047, 65047, 'ON').
+unicode_bidi_class(65048, 65048, 'ON').
+unicode_bidi_class(65049, 65049, 'ON').
+unicode_bidi_class(65072, 65072, 'ON').
+unicode_bidi_class(65073, 65074, 'ON').
+unicode_bidi_class(65075, 65076, 'ON').
+unicode_bidi_class(65077, 65077, 'ON').
+unicode_bidi_class(65078, 65078, 'ON').
+unicode_bidi_class(65079, 65079, 'ON').
+unicode_bidi_class(65080, 65080, 'ON').
+unicode_bidi_class(65081, 65081, 'ON').
+unicode_bidi_class(65082, 65082, 'ON').
+unicode_bidi_class(65083, 65083, 'ON').
+unicode_bidi_class(65084, 65084, 'ON').
+unicode_bidi_class(65085, 65085, 'ON').
+unicode_bidi_class(65086, 65086, 'ON').
+unicode_bidi_class(65087, 65087, 'ON').
+unicode_bidi_class(65088, 65088, 'ON').
+unicode_bidi_class(65089, 65089, 'ON').
+unicode_bidi_class(65090, 65090, 'ON').
+unicode_bidi_class(65091, 65091, 'ON').
+unicode_bidi_class(65092, 65092, 'ON').
+unicode_bidi_class(65093, 65094, 'ON').
+unicode_bidi_class(65095, 65095, 'ON').
+unicode_bidi_class(65096, 65096, 'ON').
+unicode_bidi_class(65097, 65100, 'ON').
+unicode_bidi_class(65101, 65103, 'ON').
+unicode_bidi_class(65105, 65105, 'ON').
+unicode_bidi_class(65108, 65108, 'ON').
+unicode_bidi_class(65110, 65111, 'ON').
+unicode_bidi_class(65112, 65112, 'ON').
+unicode_bidi_class(65113, 65113, 'ON').
+unicode_bidi_class(65114, 65114, 'ON').
+unicode_bidi_class(65115, 65115, 'ON').
+unicode_bidi_class(65116, 65116, 'ON').
+unicode_bidi_class(65117, 65117, 'ON').
+unicode_bidi_class(65118, 65118, 'ON').
+unicode_bidi_class(65120, 65121, 'ON').
+unicode_bidi_class(65124, 65126, 'ON').
+unicode_bidi_class(65128, 65128, 'ON').
+unicode_bidi_class(65131, 65131, 'ON').
+unicode_bidi_class(65281, 65282, 'ON').
+unicode_bidi_class(65286, 65287, 'ON').
+unicode_bidi_class(65288, 65288, 'ON').
+unicode_bidi_class(65289, 65289, 'ON').
+unicode_bidi_class(65290, 65290, 'ON').
+unicode_bidi_class(65307, 65307, 'ON').
+unicode_bidi_class(65308, 65310, 'ON').
+unicode_bidi_class(65311, 65312, 'ON').
+unicode_bidi_class(65339, 65339, 'ON').
+unicode_bidi_class(65340, 65340, 'ON').
+unicode_bidi_class(65341, 65341, 'ON').
+unicode_bidi_class(65342, 65342, 'ON').
+unicode_bidi_class(65343, 65343, 'ON').
+unicode_bidi_class(65344, 65344, 'ON').
+unicode_bidi_class(65371, 65371, 'ON').
+unicode_bidi_class(65372, 65372, 'ON').
+unicode_bidi_class(65373, 65373, 'ON').
+unicode_bidi_class(65374, 65374, 'ON').
+unicode_bidi_class(65375, 65375, 'ON').
+unicode_bidi_class(65376, 65376, 'ON').
+unicode_bidi_class(65377, 65377, 'ON').
+unicode_bidi_class(65378, 65378, 'ON').
+unicode_bidi_class(65379, 65379, 'ON').
+unicode_bidi_class(65380, 65381, 'ON').
+unicode_bidi_class(65506, 65506, 'ON').
+unicode_bidi_class(65507, 65507, 'ON').
+unicode_bidi_class(65508, 65508, 'ON').
+unicode_bidi_class(65512, 65512, 'ON').
+unicode_bidi_class(65513, 65516, 'ON').
+unicode_bidi_class(65517, 65518, 'ON').
+unicode_bidi_class(65529, 65531, 'ON').
+unicode_bidi_class(65532, 65533, 'ON').
+unicode_bidi_class(65793, 65793, 'ON').
+unicode_bidi_class(65856, 65908, 'ON').
+unicode_bidi_class(65909, 65912, 'ON').
+unicode_bidi_class(65913, 65929, 'ON').
+unicode_bidi_class(65930, 65931, 'ON').
+unicode_bidi_class(65932, 65932, 'ON').
+unicode_bidi_class(65936, 65948, 'ON').
+unicode_bidi_class(65952, 65952, 'ON').
+unicode_bidi_class(67871, 67871, 'ON').
+unicode_bidi_class(68409, 68415, 'ON').
+unicode_bidi_class(68974, 68974, 'ON').
+unicode_bidi_class(69328, 69328, 'ON').
+unicode_bidi_class(69329, 69336, 'ON').
+unicode_bidi_class(69714, 69733, 'ON').
+unicode_bidi_class(71264, 71276, 'ON').
+unicode_bidi_class(73685, 73692, 'ON').
+unicode_bidi_class(73697, 73713, 'ON').
+unicode_bidi_class(94178, 94178, 'ON').
+unicode_bidi_class(117760, 117973, 'ON').
+unicode_bidi_class(118010, 118012, 'ON').
+unicode_bidi_class(118016, 118451, 'ON').
+unicode_bidi_class(118458, 118480, 'ON').
+unicode_bidi_class(118496, 118511, 'ON').
+unicode_bidi_class(118512, 118512, 'ON').
+unicode_bidi_class(119273, 119274, 'ON').
+unicode_bidi_class(119296, 119361, 'ON').
+unicode_bidi_class(119365, 119365, 'ON').
+unicode_bidi_class(119552, 119638, 'ON').
+unicode_bidi_class(120513, 120513, 'ON').
+unicode_bidi_class(120539, 120539, 'ON').
+unicode_bidi_class(120571, 120571, 'ON').
+unicode_bidi_class(120597, 120597, 'ON').
+unicode_bidi_class(120629, 120629, 'ON').
+unicode_bidi_class(120655, 120655, 'ON').
+unicode_bidi_class(120687, 120687, 'ON').
+unicode_bidi_class(120713, 120713, 'ON').
+unicode_bidi_class(120745, 120745, 'ON').
+unicode_bidi_class(120771, 120771, 'ON').
+unicode_bidi_class(126704, 126705, 'ON').
+unicode_bidi_class(126976, 127019, 'ON').
+unicode_bidi_class(127024, 127123, 'ON').
+unicode_bidi_class(127136, 127150, 'ON').
+unicode_bidi_class(127153, 127167, 'ON').
+unicode_bidi_class(127169, 127183, 'ON').
+unicode_bidi_class(127185, 127221, 'ON').
+unicode_bidi_class(127243, 127244, 'ON').
+unicode_bidi_class(127245, 127247, 'ON').
+unicode_bidi_class(127279, 127279, 'ON').
+unicode_bidi_class(127338, 127343, 'ON').
+unicode_bidi_class(127405, 127405, 'ON').
+unicode_bidi_class(127584, 127589, 'ON').
+unicode_bidi_class(127744, 127994, 'ON').
+unicode_bidi_class(127995, 127999, 'ON').
+unicode_bidi_class(128000, 128728, 'ON').
+unicode_bidi_class(128732, 128748, 'ON').
+unicode_bidi_class(128752, 128764, 'ON').
+unicode_bidi_class(128768, 128985, 'ON').
+unicode_bidi_class(128992, 129003, 'ON').
+unicode_bidi_class(129008, 129008, 'ON').
+unicode_bidi_class(129024, 129035, 'ON').
+unicode_bidi_class(129040, 129095, 'ON').
+unicode_bidi_class(129104, 129113, 'ON').
+unicode_bidi_class(129120, 129159, 'ON').
+unicode_bidi_class(129168, 129197, 'ON').
+unicode_bidi_class(129200, 129211, 'ON').
+unicode_bidi_class(129216, 129217, 'ON').
+unicode_bidi_class(129232, 129240, 'ON').
+unicode_bidi_class(129280, 129623, 'ON').
+unicode_bidi_class(129632, 129645, 'ON').
+unicode_bidi_class(129648, 129660, 'ON').
+unicode_bidi_class(129664, 129674, 'ON').
+unicode_bidi_class(129678, 129734, 'ON').
+unicode_bidi_class(129736, 129736, 'ON').
+unicode_bidi_class(129741, 129756, 'ON').
+unicode_bidi_class(129759, 129770, 'ON').
+unicode_bidi_class(129775, 129784, 'ON').
+unicode_bidi_class(129792, 129938, 'ON').
+unicode_bidi_class(129940, 130031, 'ON').
+unicode_bidi_class(130042, 130042, 'ON').
+unicode_bidi_class(0, 8, 'BN').
+unicode_bidi_class(14, 27, 'BN').
+unicode_bidi_class(127, 132, 'BN').
+unicode_bidi_class(134, 159, 'BN').
+unicode_bidi_class(173, 173, 'BN').
+unicode_bidi_class(6158, 6158, 'BN').
+unicode_bidi_class(8203, 8205, 'BN').
+unicode_bidi_class(8288, 8292, 'BN').
+unicode_bidi_class(8293, 8293, 'BN').
+unicode_bidi_class(8298, 8303, 'BN').
+unicode_bidi_class(64976, 65007, 'BN').
+unicode_bidi_class(65279, 65279, 'BN').
+unicode_bidi_class(65520, 65528, 'BN').
+unicode_bidi_class(65534, 65535, 'BN').
+unicode_bidi_class(113824, 113827, 'BN').
+unicode_bidi_class(119155, 119162, 'BN').
+unicode_bidi_class(131070, 131071, 'BN').
+unicode_bidi_class(196606, 196607, 'BN').
+unicode_bidi_class(262142, 262143, 'BN').
+unicode_bidi_class(327678, 327679, 'BN').
+unicode_bidi_class(393214, 393215, 'BN').
+unicode_bidi_class(458750, 458751, 'BN').
+unicode_bidi_class(524286, 524287, 'BN').
+unicode_bidi_class(589822, 589823, 'BN').
+unicode_bidi_class(655358, 655359, 'BN').
+unicode_bidi_class(720894, 720895, 'BN').
+unicode_bidi_class(786430, 786431, 'BN').
+unicode_bidi_class(851966, 851967, 'BN').
+unicode_bidi_class(917502, 917504, 'BN').
+unicode_bidi_class(917505, 917505, 'BN').
+unicode_bidi_class(917506, 917535, 'BN').
+unicode_bidi_class(917536, 917631, 'BN').
+unicode_bidi_class(917632, 917759, 'BN').
+unicode_bidi_class(918000, 921599, 'BN').
+unicode_bidi_class(983038, 983039, 'BN').
+unicode_bidi_class(1048574, 1048575, 'BN').
+unicode_bidi_class(1114110, 1114111, 'BN').
+unicode_bidi_class(768, 879, 'NSM').
+unicode_bidi_class(1155, 1159, 'NSM').
+unicode_bidi_class(1160, 1161, 'NSM').
+unicode_bidi_class(1425, 1469, 'NSM').
+unicode_bidi_class(1471, 1471, 'NSM').
+unicode_bidi_class(1473, 1474, 'NSM').
+unicode_bidi_class(1476, 1477, 'NSM').
+unicode_bidi_class(1479, 1479, 'NSM').
+unicode_bidi_class(1552, 1562, 'NSM').
+unicode_bidi_class(1611, 1631, 'NSM').
+unicode_bidi_class(1648, 1648, 'NSM').
+unicode_bidi_class(1750, 1756, 'NSM').
+unicode_bidi_class(1759, 1764, 'NSM').
+unicode_bidi_class(1767, 1768, 'NSM').
+unicode_bidi_class(1770, 1773, 'NSM').
+unicode_bidi_class(1809, 1809, 'NSM').
+unicode_bidi_class(1840, 1866, 'NSM').
+unicode_bidi_class(1958, 1968, 'NSM').
+unicode_bidi_class(2027, 2035, 'NSM').
+unicode_bidi_class(2045, 2045, 'NSM').
+unicode_bidi_class(2070, 2073, 'NSM').
+unicode_bidi_class(2075, 2083, 'NSM').
+unicode_bidi_class(2085, 2087, 'NSM').
+unicode_bidi_class(2089, 2093, 'NSM').
+unicode_bidi_class(2137, 2139, 'NSM').
+unicode_bidi_class(2199, 2207, 'NSM').
+unicode_bidi_class(2250, 2273, 'NSM').
+unicode_bidi_class(2275, 2306, 'NSM').
+unicode_bidi_class(2362, 2362, 'NSM').
+unicode_bidi_class(2364, 2364, 'NSM').
+unicode_bidi_class(2369, 2376, 'NSM').
+unicode_bidi_class(2381, 2381, 'NSM').
+unicode_bidi_class(2385, 2391, 'NSM').
+unicode_bidi_class(2402, 2403, 'NSM').
+unicode_bidi_class(2433, 2433, 'NSM').
+unicode_bidi_class(2492, 2492, 'NSM').
+unicode_bidi_class(2497, 2500, 'NSM').
+unicode_bidi_class(2509, 2509, 'NSM').
+unicode_bidi_class(2530, 2531, 'NSM').
+unicode_bidi_class(2558, 2558, 'NSM').
+unicode_bidi_class(2561, 2562, 'NSM').
+unicode_bidi_class(2620, 2620, 'NSM').
+unicode_bidi_class(2625, 2626, 'NSM').
+unicode_bidi_class(2631, 2632, 'NSM').
+unicode_bidi_class(2635, 2637, 'NSM').
+unicode_bidi_class(2641, 2641, 'NSM').
+unicode_bidi_class(2672, 2673, 'NSM').
+unicode_bidi_class(2677, 2677, 'NSM').
+unicode_bidi_class(2689, 2690, 'NSM').
+unicode_bidi_class(2748, 2748, 'NSM').
+unicode_bidi_class(2753, 2757, 'NSM').
+unicode_bidi_class(2759, 2760, 'NSM').
+unicode_bidi_class(2765, 2765, 'NSM').
+unicode_bidi_class(2786, 2787, 'NSM').
+unicode_bidi_class(2810, 2815, 'NSM').
+unicode_bidi_class(2817, 2817, 'NSM').
+unicode_bidi_class(2876, 2876, 'NSM').
+unicode_bidi_class(2879, 2879, 'NSM').
+unicode_bidi_class(2881, 2884, 'NSM').
+unicode_bidi_class(2893, 2893, 'NSM').
+unicode_bidi_class(2901, 2902, 'NSM').
+unicode_bidi_class(2914, 2915, 'NSM').
+unicode_bidi_class(2946, 2946, 'NSM').
+unicode_bidi_class(3008, 3008, 'NSM').
+unicode_bidi_class(3021, 3021, 'NSM').
+unicode_bidi_class(3072, 3072, 'NSM').
+unicode_bidi_class(3076, 3076, 'NSM').
+unicode_bidi_class(3132, 3132, 'NSM').
+unicode_bidi_class(3134, 3136, 'NSM').
+unicode_bidi_class(3142, 3144, 'NSM').
+unicode_bidi_class(3146, 3149, 'NSM').
+unicode_bidi_class(3157, 3158, 'NSM').
+unicode_bidi_class(3170, 3171, 'NSM').
+unicode_bidi_class(3201, 3201, 'NSM').
+unicode_bidi_class(3260, 3260, 'NSM').
+unicode_bidi_class(3276, 3277, 'NSM').
+unicode_bidi_class(3298, 3299, 'NSM').
+unicode_bidi_class(3328, 3329, 'NSM').
+unicode_bidi_class(3387, 3388, 'NSM').
+unicode_bidi_class(3393, 3396, 'NSM').
+unicode_bidi_class(3405, 3405, 'NSM').
+unicode_bidi_class(3426, 3427, 'NSM').
+unicode_bidi_class(3457, 3457, 'NSM').
+unicode_bidi_class(3530, 3530, 'NSM').
+unicode_bidi_class(3538, 3540, 'NSM').
+unicode_bidi_class(3542, 3542, 'NSM').
+unicode_bidi_class(3633, 3633, 'NSM').
+unicode_bidi_class(3636, 3642, 'NSM').
+unicode_bidi_class(3655, 3662, 'NSM').
+unicode_bidi_class(3761, 3761, 'NSM').
+unicode_bidi_class(3764, 3772, 'NSM').
+unicode_bidi_class(3784, 3790, 'NSM').
+unicode_bidi_class(3864, 3865, 'NSM').
+unicode_bidi_class(3893, 3893, 'NSM').
+unicode_bidi_class(3895, 3895, 'NSM').
+unicode_bidi_class(3897, 3897, 'NSM').
+unicode_bidi_class(3953, 3966, 'NSM').
+unicode_bidi_class(3968, 3972, 'NSM').
+unicode_bidi_class(3974, 3975, 'NSM').
+unicode_bidi_class(3981, 3991, 'NSM').
+unicode_bidi_class(3993, 4028, 'NSM').
+unicode_bidi_class(4038, 4038, 'NSM').
+unicode_bidi_class(4141, 4144, 'NSM').
+unicode_bidi_class(4146, 4151, 'NSM').
+unicode_bidi_class(4153, 4154, 'NSM').
+unicode_bidi_class(4157, 4158, 'NSM').
+unicode_bidi_class(4184, 4185, 'NSM').
+unicode_bidi_class(4190, 4192, 'NSM').
+unicode_bidi_class(4209, 4212, 'NSM').
+unicode_bidi_class(4226, 4226, 'NSM').
+unicode_bidi_class(4229, 4230, 'NSM').
+unicode_bidi_class(4237, 4237, 'NSM').
+unicode_bidi_class(4253, 4253, 'NSM').
+unicode_bidi_class(4957, 4959, 'NSM').
+unicode_bidi_class(5906, 5908, 'NSM').
+unicode_bidi_class(5938, 5939, 'NSM').
+unicode_bidi_class(5970, 5971, 'NSM').
+unicode_bidi_class(6002, 6003, 'NSM').
+unicode_bidi_class(6068, 6069, 'NSM').
+unicode_bidi_class(6071, 6077, 'NSM').
+unicode_bidi_class(6086, 6086, 'NSM').
+unicode_bidi_class(6089, 6099, 'NSM').
+unicode_bidi_class(6109, 6109, 'NSM').
+unicode_bidi_class(6155, 6157, 'NSM').
+unicode_bidi_class(6159, 6159, 'NSM').
+unicode_bidi_class(6277, 6278, 'NSM').
+unicode_bidi_class(6313, 6313, 'NSM').
+unicode_bidi_class(6432, 6434, 'NSM').
+unicode_bidi_class(6439, 6440, 'NSM').
+unicode_bidi_class(6450, 6450, 'NSM').
+unicode_bidi_class(6457, 6459, 'NSM').
+unicode_bidi_class(6679, 6680, 'NSM').
+unicode_bidi_class(6683, 6683, 'NSM').
+unicode_bidi_class(6742, 6742, 'NSM').
+unicode_bidi_class(6744, 6750, 'NSM').
+unicode_bidi_class(6752, 6752, 'NSM').
+unicode_bidi_class(6754, 6754, 'NSM').
+unicode_bidi_class(6757, 6764, 'NSM').
+unicode_bidi_class(6771, 6780, 'NSM').
+unicode_bidi_class(6783, 6783, 'NSM').
+unicode_bidi_class(6832, 6845, 'NSM').
+unicode_bidi_class(6846, 6846, 'NSM').
+unicode_bidi_class(6847, 6877, 'NSM').
+unicode_bidi_class(6880, 6891, 'NSM').
+unicode_bidi_class(6912, 6915, 'NSM').
+unicode_bidi_class(6964, 6964, 'NSM').
+unicode_bidi_class(6966, 6970, 'NSM').
+unicode_bidi_class(6972, 6972, 'NSM').
+unicode_bidi_class(6978, 6978, 'NSM').
+unicode_bidi_class(7019, 7027, 'NSM').
+unicode_bidi_class(7040, 7041, 'NSM').
+unicode_bidi_class(7074, 7077, 'NSM').
+unicode_bidi_class(7080, 7081, 'NSM').
+unicode_bidi_class(7083, 7085, 'NSM').
+unicode_bidi_class(7142, 7142, 'NSM').
+unicode_bidi_class(7144, 7145, 'NSM').
+unicode_bidi_class(7149, 7149, 'NSM').
+unicode_bidi_class(7151, 7153, 'NSM').
+unicode_bidi_class(7212, 7219, 'NSM').
+unicode_bidi_class(7222, 7223, 'NSM').
+unicode_bidi_class(7376, 7378, 'NSM').
+unicode_bidi_class(7380, 7392, 'NSM').
+unicode_bidi_class(7394, 7400, 'NSM').
+unicode_bidi_class(7405, 7405, 'NSM').
+unicode_bidi_class(7412, 7412, 'NSM').
+unicode_bidi_class(7416, 7417, 'NSM').
+unicode_bidi_class(7616, 7679, 'NSM').
+unicode_bidi_class(8400, 8412, 'NSM').
+unicode_bidi_class(8413, 8416, 'NSM').
+unicode_bidi_class(8417, 8417, 'NSM').
+unicode_bidi_class(8418, 8420, 'NSM').
+unicode_bidi_class(8421, 8432, 'NSM').
+unicode_bidi_class(11503, 11505, 'NSM').
+unicode_bidi_class(11647, 11647, 'NSM').
+unicode_bidi_class(11744, 11775, 'NSM').
+unicode_bidi_class(12330, 12333, 'NSM').
+unicode_bidi_class(12441, 12442, 'NSM').
+unicode_bidi_class(42607, 42607, 'NSM').
+unicode_bidi_class(42608, 42610, 'NSM').
+unicode_bidi_class(42612, 42621, 'NSM').
+unicode_bidi_class(42654, 42655, 'NSM').
+unicode_bidi_class(42736, 42737, 'NSM').
+unicode_bidi_class(43010, 43010, 'NSM').
+unicode_bidi_class(43014, 43014, 'NSM').
+unicode_bidi_class(43019, 43019, 'NSM').
+unicode_bidi_class(43045, 43046, 'NSM').
+unicode_bidi_class(43052, 43052, 'NSM').
+unicode_bidi_class(43204, 43205, 'NSM').
+unicode_bidi_class(43232, 43249, 'NSM').
+unicode_bidi_class(43263, 43263, 'NSM').
+unicode_bidi_class(43302, 43309, 'NSM').
+unicode_bidi_class(43335, 43345, 'NSM').
+unicode_bidi_class(43392, 43394, 'NSM').
+unicode_bidi_class(43443, 43443, 'NSM').
+unicode_bidi_class(43446, 43449, 'NSM').
+unicode_bidi_class(43452, 43453, 'NSM').
+unicode_bidi_class(43493, 43493, 'NSM').
+unicode_bidi_class(43561, 43566, 'NSM').
+unicode_bidi_class(43569, 43570, 'NSM').
+unicode_bidi_class(43573, 43574, 'NSM').
+unicode_bidi_class(43587, 43587, 'NSM').
+unicode_bidi_class(43596, 43596, 'NSM').
+unicode_bidi_class(43644, 43644, 'NSM').
+unicode_bidi_class(43696, 43696, 'NSM').
+unicode_bidi_class(43698, 43700, 'NSM').
+unicode_bidi_class(43703, 43704, 'NSM').
+unicode_bidi_class(43710, 43711, 'NSM').
+unicode_bidi_class(43713, 43713, 'NSM').
+unicode_bidi_class(43756, 43757, 'NSM').
+unicode_bidi_class(43766, 43766, 'NSM').
+unicode_bidi_class(44005, 44005, 'NSM').
+unicode_bidi_class(44008, 44008, 'NSM').
+unicode_bidi_class(44013, 44013, 'NSM').
+unicode_bidi_class(64286, 64286, 'NSM').
+unicode_bidi_class(65024, 65039, 'NSM').
+unicode_bidi_class(65056, 65071, 'NSM').
+unicode_bidi_class(66045, 66045, 'NSM').
+unicode_bidi_class(66272, 66272, 'NSM').
+unicode_bidi_class(66422, 66426, 'NSM').
+unicode_bidi_class(68097, 68099, 'NSM').
+unicode_bidi_class(68101, 68102, 'NSM').
+unicode_bidi_class(68108, 68111, 'NSM').
+unicode_bidi_class(68152, 68154, 'NSM').
+unicode_bidi_class(68159, 68159, 'NSM').
+unicode_bidi_class(68325, 68326, 'NSM').
+unicode_bidi_class(68900, 68903, 'NSM').
+unicode_bidi_class(68969, 68973, 'NSM').
+unicode_bidi_class(69291, 69292, 'NSM').
+unicode_bidi_class(69370, 69375, 'NSM').
+unicode_bidi_class(69446, 69456, 'NSM').
+unicode_bidi_class(69506, 69509, 'NSM').
+unicode_bidi_class(69633, 69633, 'NSM').
+unicode_bidi_class(69688, 69702, 'NSM').
+unicode_bidi_class(69744, 69744, 'NSM').
+unicode_bidi_class(69747, 69748, 'NSM').
+unicode_bidi_class(69759, 69761, 'NSM').
+unicode_bidi_class(69811, 69814, 'NSM').
+unicode_bidi_class(69817, 69818, 'NSM').
+unicode_bidi_class(69826, 69826, 'NSM').
+unicode_bidi_class(69888, 69890, 'NSM').
+unicode_bidi_class(69927, 69931, 'NSM').
+unicode_bidi_class(69933, 69940, 'NSM').
+unicode_bidi_class(70003, 70003, 'NSM').
+unicode_bidi_class(70016, 70017, 'NSM').
+unicode_bidi_class(70070, 70078, 'NSM').
+unicode_bidi_class(70089, 70092, 'NSM').
+unicode_bidi_class(70095, 70095, 'NSM').
+unicode_bidi_class(70191, 70193, 'NSM').
+unicode_bidi_class(70196, 70196, 'NSM').
+unicode_bidi_class(70198, 70199, 'NSM').
+unicode_bidi_class(70206, 70206, 'NSM').
+unicode_bidi_class(70209, 70209, 'NSM').
+unicode_bidi_class(70367, 70367, 'NSM').
+unicode_bidi_class(70371, 70378, 'NSM').
+unicode_bidi_class(70400, 70401, 'NSM').
+unicode_bidi_class(70459, 70460, 'NSM').
+unicode_bidi_class(70464, 70464, 'NSM').
+unicode_bidi_class(70502, 70508, 'NSM').
+unicode_bidi_class(70512, 70516, 'NSM').
+unicode_bidi_class(70587, 70592, 'NSM').
+unicode_bidi_class(70606, 70606, 'NSM').
+unicode_bidi_class(70608, 70608, 'NSM').
+unicode_bidi_class(70610, 70610, 'NSM').
+unicode_bidi_class(70625, 70626, 'NSM').
+unicode_bidi_class(70712, 70719, 'NSM').
+unicode_bidi_class(70722, 70724, 'NSM').
+unicode_bidi_class(70726, 70726, 'NSM').
+unicode_bidi_class(70750, 70750, 'NSM').
+unicode_bidi_class(70835, 70840, 'NSM').
+unicode_bidi_class(70842, 70842, 'NSM').
+unicode_bidi_class(70847, 70848, 'NSM').
+unicode_bidi_class(70850, 70851, 'NSM').
+unicode_bidi_class(71090, 71093, 'NSM').
+unicode_bidi_class(71100, 71101, 'NSM').
+unicode_bidi_class(71103, 71104, 'NSM').
+unicode_bidi_class(71132, 71133, 'NSM').
+unicode_bidi_class(71219, 71226, 'NSM').
+unicode_bidi_class(71229, 71229, 'NSM').
+unicode_bidi_class(71231, 71232, 'NSM').
+unicode_bidi_class(71339, 71339, 'NSM').
+unicode_bidi_class(71341, 71341, 'NSM').
+unicode_bidi_class(71344, 71349, 'NSM').
+unicode_bidi_class(71351, 71351, 'NSM').
+unicode_bidi_class(71453, 71453, 'NSM').
+unicode_bidi_class(71455, 71455, 'NSM').
+unicode_bidi_class(71458, 71461, 'NSM').
+unicode_bidi_class(71463, 71467, 'NSM').
+unicode_bidi_class(71727, 71735, 'NSM').
+unicode_bidi_class(71737, 71738, 'NSM').
+unicode_bidi_class(71995, 71996, 'NSM').
+unicode_bidi_class(71998, 71998, 'NSM').
+unicode_bidi_class(72003, 72003, 'NSM').
+unicode_bidi_class(72148, 72151, 'NSM').
+unicode_bidi_class(72154, 72155, 'NSM').
+unicode_bidi_class(72160, 72160, 'NSM').
+unicode_bidi_class(72193, 72198, 'NSM').
+unicode_bidi_class(72201, 72202, 'NSM').
+unicode_bidi_class(72243, 72248, 'NSM').
+unicode_bidi_class(72251, 72254, 'NSM').
+unicode_bidi_class(72263, 72263, 'NSM').
+unicode_bidi_class(72273, 72278, 'NSM').
+unicode_bidi_class(72281, 72283, 'NSM').
+unicode_bidi_class(72330, 72342, 'NSM').
+unicode_bidi_class(72344, 72345, 'NSM').
+unicode_bidi_class(72544, 72544, 'NSM').
+unicode_bidi_class(72546, 72548, 'NSM').
+unicode_bidi_class(72550, 72550, 'NSM').
+unicode_bidi_class(72752, 72758, 'NSM').
+unicode_bidi_class(72760, 72765, 'NSM').
+unicode_bidi_class(72850, 72871, 'NSM').
+unicode_bidi_class(72874, 72880, 'NSM').
+unicode_bidi_class(72882, 72883, 'NSM').
+unicode_bidi_class(72885, 72886, 'NSM').
+unicode_bidi_class(73009, 73014, 'NSM').
+unicode_bidi_class(73018, 73018, 'NSM').
+unicode_bidi_class(73020, 73021, 'NSM').
+unicode_bidi_class(73023, 73029, 'NSM').
+unicode_bidi_class(73031, 73031, 'NSM').
+unicode_bidi_class(73104, 73105, 'NSM').
+unicode_bidi_class(73109, 73109, 'NSM').
+unicode_bidi_class(73111, 73111, 'NSM').
+unicode_bidi_class(73459, 73460, 'NSM').
+unicode_bidi_class(73472, 73473, 'NSM').
+unicode_bidi_class(73526, 73530, 'NSM').
+unicode_bidi_class(73536, 73536, 'NSM').
+unicode_bidi_class(73538, 73538, 'NSM').
+unicode_bidi_class(73562, 73562, 'NSM').
+unicode_bidi_class(78912, 78912, 'NSM').
+unicode_bidi_class(78919, 78933, 'NSM').
+unicode_bidi_class(90398, 90409, 'NSM').
+unicode_bidi_class(90413, 90415, 'NSM').
+unicode_bidi_class(92912, 92916, 'NSM').
+unicode_bidi_class(92976, 92982, 'NSM').
+unicode_bidi_class(94031, 94031, 'NSM').
+unicode_bidi_class(94095, 94098, 'NSM').
+unicode_bidi_class(94180, 94180, 'NSM').
+unicode_bidi_class(113821, 113822, 'NSM').
+unicode_bidi_class(118528, 118573, 'NSM').
+unicode_bidi_class(118576, 118598, 'NSM').
+unicode_bidi_class(119143, 119145, 'NSM').
+unicode_bidi_class(119163, 119170, 'NSM').
+unicode_bidi_class(119173, 119179, 'NSM').
+unicode_bidi_class(119210, 119213, 'NSM').
+unicode_bidi_class(119362, 119364, 'NSM').
+unicode_bidi_class(121344, 121398, 'NSM').
+unicode_bidi_class(121403, 121452, 'NSM').
+unicode_bidi_class(121461, 121461, 'NSM').
+unicode_bidi_class(121476, 121476, 'NSM').
+unicode_bidi_class(121499, 121503, 'NSM').
+unicode_bidi_class(121505, 121519, 'NSM').
+unicode_bidi_class(122880, 122886, 'NSM').
+unicode_bidi_class(122888, 122904, 'NSM').
+unicode_bidi_class(122907, 122913, 'NSM').
+unicode_bidi_class(122915, 122916, 'NSM').
+unicode_bidi_class(122918, 122922, 'NSM').
+unicode_bidi_class(123023, 123023, 'NSM').
+unicode_bidi_class(123184, 123190, 'NSM').
+unicode_bidi_class(123566, 123566, 'NSM').
+unicode_bidi_class(123628, 123631, 'NSM').
+unicode_bidi_class(124140, 124143, 'NSM').
+unicode_bidi_class(124398, 124399, 'NSM').
+unicode_bidi_class(124643, 124643, 'NSM').
+unicode_bidi_class(124646, 124646, 'NSM').
+unicode_bidi_class(124654, 124655, 'NSM').
+unicode_bidi_class(124661, 124661, 'NSM').
+unicode_bidi_class(125136, 125142, 'NSM').
+unicode_bidi_class(125252, 125258, 'NSM').
+unicode_bidi_class(917760, 917999, 'NSM').
+unicode_bidi_class(1544, 1544, 'AL').
+unicode_bidi_class(1547, 1547, 'AL').
+unicode_bidi_class(1549, 1549, 'AL').
+unicode_bidi_class(1563, 1563, 'AL').
+unicode_bidi_class(1564, 1564, 'AL').
+unicode_bidi_class(1565, 1567, 'AL').
+unicode_bidi_class(1568, 1599, 'AL').
+unicode_bidi_class(1600, 1600, 'AL').
+unicode_bidi_class(1601, 1610, 'AL').
+unicode_bidi_class(1645, 1645, 'AL').
+unicode_bidi_class(1646, 1647, 'AL').
+unicode_bidi_class(1649, 1747, 'AL').
+unicode_bidi_class(1748, 1748, 'AL').
+unicode_bidi_class(1749, 1749, 'AL').
+unicode_bidi_class(1765, 1766, 'AL').
+unicode_bidi_class(1774, 1775, 'AL').
+unicode_bidi_class(1786, 1788, 'AL').
+unicode_bidi_class(1789, 1790, 'AL').
+unicode_bidi_class(1791, 1791, 'AL').
+unicode_bidi_class(1792, 1805, 'AL').
+unicode_bidi_class(1807, 1807, 'AL').
+unicode_bidi_class(1808, 1808, 'AL').
+unicode_bidi_class(1810, 1839, 'AL').
+unicode_bidi_class(1869, 1957, 'AL').
+unicode_bidi_class(1969, 1969, 'AL').
+unicode_bidi_class(2144, 2154, 'AL').
+unicode_bidi_class(2160, 2183, 'AL').
+unicode_bidi_class(2184, 2184, 'AL').
+unicode_bidi_class(2185, 2191, 'AL').
+unicode_bidi_class(2208, 2248, 'AL').
+unicode_bidi_class(2249, 2249, 'AL').
+unicode_bidi_class(64336, 64433, 'AL').
+unicode_bidi_class(64434, 64450, 'AL').
+unicode_bidi_class(64467, 64829, 'AL').
+unicode_bidi_class(64848, 64911, 'AL').
+unicode_bidi_class(64914, 64967, 'AL').
+unicode_bidi_class(65008, 65019, 'AL').
+unicode_bidi_class(65020, 65020, 'AL').
+unicode_bidi_class(65136, 65140, 'AL').
+unicode_bidi_class(65142, 65276, 'AL').
+unicode_bidi_class(68864, 68899, 'AL').
+unicode_bidi_class(69314, 69316, 'AL').
+unicode_bidi_class(69317, 69317, 'AL').
+unicode_bidi_class(69318, 69319, 'AL').
+unicode_bidi_class(69424, 69445, 'AL').
+unicode_bidi_class(69457, 69460, 'AL').
+unicode_bidi_class(69461, 69465, 'AL').
+unicode_bidi_class(126065, 126123, 'AL').
+unicode_bidi_class(126124, 126124, 'AL').
+unicode_bidi_class(126125, 126127, 'AL').
+unicode_bidi_class(126128, 126128, 'AL').
+unicode_bidi_class(126129, 126132, 'AL').
+unicode_bidi_class(126209, 126253, 'AL').
+unicode_bidi_class(126254, 126254, 'AL').
+unicode_bidi_class(126255, 126269, 'AL').
+unicode_bidi_class(126464, 126467, 'AL').
+unicode_bidi_class(126469, 126495, 'AL').
+unicode_bidi_class(126497, 126498, 'AL').
+unicode_bidi_class(126500, 126500, 'AL').
+unicode_bidi_class(126503, 126503, 'AL').
+unicode_bidi_class(126505, 126514, 'AL').
+unicode_bidi_class(126516, 126519, 'AL').
+unicode_bidi_class(126521, 126521, 'AL').
+unicode_bidi_class(126523, 126523, 'AL').
+unicode_bidi_class(126530, 126530, 'AL').
+unicode_bidi_class(126535, 126535, 'AL').
+unicode_bidi_class(126537, 126537, 'AL').
+unicode_bidi_class(126539, 126539, 'AL').
+unicode_bidi_class(126541, 126543, 'AL').
+unicode_bidi_class(126545, 126546, 'AL').
+unicode_bidi_class(126548, 126548, 'AL').
+unicode_bidi_class(126551, 126551, 'AL').
+unicode_bidi_class(126553, 126553, 'AL').
+unicode_bidi_class(126555, 126555, 'AL').
+unicode_bidi_class(126557, 126557, 'AL').
+unicode_bidi_class(126559, 126559, 'AL').
+unicode_bidi_class(126561, 126562, 'AL').
+unicode_bidi_class(126564, 126564, 'AL').
+unicode_bidi_class(126567, 126570, 'AL').
+unicode_bidi_class(126572, 126578, 'AL').
+unicode_bidi_class(126580, 126583, 'AL').
+unicode_bidi_class(126585, 126588, 'AL').
+unicode_bidi_class(126590, 126590, 'AL').
+unicode_bidi_class(126592, 126601, 'AL').
+unicode_bidi_class(126603, 126619, 'AL').
+unicode_bidi_class(126625, 126627, 'AL').
+unicode_bidi_class(126629, 126633, 'AL').
+unicode_bidi_class(126635, 126651, 'AL').
+unicode_bidi_class(8237, 8237, 'LRO').
+unicode_bidi_class(8238, 8238, 'RLO').
+unicode_bidi_class(8234, 8234, 'LRE').
+unicode_bidi_class(8235, 8235, 'RLE').
+unicode_bidi_class(8236, 8236, 'PDF').
+unicode_bidi_class(8294, 8294, 'LRI').
+unicode_bidi_class(8295, 8295, 'RLI').
+unicode_bidi_class(8296, 8296, 'FSI').
+unicode_bidi_class(8297, 8297, 'PDI').

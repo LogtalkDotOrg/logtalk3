@@ -20,8 +20,7 @@
 
 
 :- object(default_text_normalization,
-	implements(text_normalization_profile_protocol),
-	imports(common_text_entities)).
+	implements(text_normalization_profile_protocol)).
 
 	:- info([
 		version is 1:0:0,
@@ -40,6 +39,6 @@
 	diacritic_fold(0x0142, [0x006C]).
 
 	named_entity(Name, Codes) :-
-		^^common_named_entity(Name, Codes).
+		xml_whatwg_entities::xml_whatwg_named_entity(Name, Codes).
 
 :- end_object.

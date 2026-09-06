@@ -310,6 +310,7 @@ logtalk_library_path(types, library('types/')).
 logtalk_library_path(tzif, library('tzif/')).
 logtalk_library_path(ulid, library('ulid/')).
 logtalk_library_path(umap_projection, library('umap_projection/')).
+logtalk_library_path(unicode_data, library('unicode_data/')).
 logtalk_library_path(union_find, library('union_find/')).
 logtalk_library_path(univariate_distributions, library('univariate_distributions/')).
 logtalk_library_path(uri_template, library('uri_template/')).

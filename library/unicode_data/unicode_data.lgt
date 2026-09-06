@@ -31,7 +31,6 @@
 		unicode_derived_bidi_class,
 		unicode_derived_combining_class,
 		unicode_derived_core_properties,
-		unicode_derived_decomposition_type,
 		unicode_derived_east_asian_width,
 		unicode_derived_joining_group,
 		unicode_derived_joining_type,

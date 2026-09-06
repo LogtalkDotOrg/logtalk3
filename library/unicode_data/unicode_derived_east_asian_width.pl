@@ -1,1977 +1,2711 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  This file is part of VivoMind Prolog Unicode Resources
-%  SPDX-License-Identifier: CC0-1.0
+%  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
 %
-%  VivoMind Prolog Unicode Resources is free software distributed using the
-%  Creative Commons CC0 1.0 Universal (CC0 1.0) - Public Domain Dedication
-%  license
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%  Last modified: September 30, 2012
+%      http://www.apache.org/licenses/LICENSE-2.0
 %
-%  Original Unicode file header comments follow
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-/*
-# DerivedEastAsianWidth-6.2.0.txt
-# Date: 2012-05-20, 00:42:33 GMT [MD]
-#
-# Unicode Character Database
-# Copyright (c) 1991-2012 Unicode, Inc.
-# For terms of use, see http://www.unicode.org/terms_of_use.html
-# For documentation, see http://www.unicode.org/reports/tr44/
+% Generated from Unicode 17.0.0 UCD data. Do not edit.
 
-# ================================================
-
-# East_Asian_Width (listing EastAsianWidth.txt, field 1)
-
-#  All code points not explicitly listed for East_Asian_Width
-#  have the value Neutral (N).
-
-# @missing: 0000..10FFFF; Neutral
-
-# ================================================
-*/
-
-unicode_east_asian_width(CodePoint, Width) :-
+unicode_east_asian_width(CodePoint, Value) :-
 	(	var(CodePoint) ->
-		% generate code point pairs
-		unicode_east_asian_width(CodePointStart, CodePointEnd, Width),
-		between(CodePointStart, CodePointEnd, CodePoint)
-	;	% try first-argument indexing first
-		unicode_east_asian_width(CodePoint, _, CodePointWidth) ->
-		Width = CodePointWidth
-	;	% look for a code point range that includes the given code point
-		unicode_east_asian_width(CodePointStart, CodePointEnd, CodePointWidth),
-		between(CodePointStart, CodePointEnd, CodePoint) ->
-		Width = CodePointWidth
-	;	% missing code point; see original comment above
-		between(0x0000, 0x10FFFF, CodePoint),
-		Width = 'N'
+		unicode_east_asian_width(Start, End, Value),
+		between(Start, End, CodePoint)
+	;	unicode_east_asian_width(Start, End, SpecificValue),
+		CodePoint >= Start, CodePoint =< End ->
+		Value = SpecificValue
+	;	between(0, 1114111, CodePoint),
+		Value = 'N'
 	).
 
-% East_Asian_Width=Neutral
-
-unicode_east_asian_width(0x0000, 0x001F, 'N').	% Cc  [32] <control-0000>..<control-001F>
-unicode_east_asian_width(0x007F, 0x009F, 'N').	% Cc  [33] <control-007F>..<control-009F>
-unicode_east_asian_width(0x00A0, 0x00A0, 'N').	% Zs       NO-BREAK SPACE
-unicode_east_asian_width(0x00A9, 0x00A9, 'N').	% So       COPYRIGHT SIGN
-unicode_east_asian_width(0x00AB, 0x00AB, 'N').	% Pi       LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
-unicode_east_asian_width(0x00B5, 0x00B5, 'N').	% L&       MICRO SIGN
-unicode_east_asian_width(0x00BB, 0x00BB, 'N').	% Pf       RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
-unicode_east_asian_width(0x00C0, 0x00C5, 'N').	% L&   [6] LATIN CAPITAL LETTER A WITH GRAVE..LATIN CAPITAL LETTER A WITH RING ABOVE
-unicode_east_asian_width(0x00C7, 0x00CF, 'N').	% L&   [9] LATIN CAPITAL LETTER C WITH CEDILLA..LATIN CAPITAL LETTER I WITH DIAERESIS
-unicode_east_asian_width(0x00D1, 0x00D6, 'N').	% L&   [6] LATIN CAPITAL LETTER N WITH TILDE..LATIN CAPITAL LETTER O WITH DIAERESIS
-unicode_east_asian_width(0x00D9, 0x00DD, 'N').	% L&   [5] LATIN CAPITAL LETTER U WITH GRAVE..LATIN CAPITAL LETTER Y WITH ACUTE
-unicode_east_asian_width(0x00E2, 0x00E5, 'N').	% L&   [4] LATIN SMALL LETTER A WITH CIRCUMFLEX..LATIN SMALL LETTER A WITH RING ABOVE
-unicode_east_asian_width(0x00E7, 0x00E7, 'N').	% L&       LATIN SMALL LETTER C WITH CEDILLA
-unicode_east_asian_width(0x00EB, 0x00EB, 'N').	% L&       LATIN SMALL LETTER E WITH DIAERESIS
-unicode_east_asian_width(0x00EE, 0x00EF, 'N').	% L&   [2] LATIN SMALL LETTER I WITH CIRCUMFLEX..LATIN SMALL LETTER I WITH DIAERESIS
-unicode_east_asian_width(0x00F1, 0x00F1, 'N').	% L&       LATIN SMALL LETTER N WITH TILDE
-unicode_east_asian_width(0x00F4, 0x00F6, 'N').	% L&   [3] LATIN SMALL LETTER O WITH CIRCUMFLEX..LATIN SMALL LETTER O WITH DIAERESIS
-unicode_east_asian_width(0x00FB, 0x00FB, 'N').	% L&       LATIN SMALL LETTER U WITH CIRCUMFLEX
-unicode_east_asian_width(0x00FD, 0x00FD, 'N').	% L&       LATIN SMALL LETTER Y WITH ACUTE
-unicode_east_asian_width(0x00FF, 0x0100, 'N').	% L&   [2] LATIN SMALL LETTER Y WITH DIAERESIS..LATIN CAPITAL LETTER A WITH MACRON
-unicode_east_asian_width(0x0102, 0x0110, 'N').	% L&  [15] LATIN CAPITAL LETTER A WITH BREVE..LATIN CAPITAL LETTER D WITH STROKE
-unicode_east_asian_width(0x0112, 0x0112, 'N').	% L&       LATIN CAPITAL LETTER E WITH MACRON
-unicode_east_asian_width(0x0114, 0x011A, 'N').	% L&   [7] LATIN CAPITAL LETTER E WITH BREVE..LATIN CAPITAL LETTER E WITH CARON
-unicode_east_asian_width(0x011C, 0x0125, 'N').	% L&  [10] LATIN CAPITAL LETTER G WITH CIRCUMFLEX..LATIN SMALL LETTER H WITH CIRCUMFLEX
-unicode_east_asian_width(0x0128, 0x012A, 'N').	% L&   [3] LATIN CAPITAL LETTER I WITH TILDE..LATIN CAPITAL LETTER I WITH MACRON
-unicode_east_asian_width(0x012C, 0x0130, 'N').	% L&   [5] LATIN CAPITAL LETTER I WITH BREVE..LATIN CAPITAL LETTER I WITH DOT ABOVE
-unicode_east_asian_width(0x0134, 0x0137, 'N').	% L&   [4] LATIN CAPITAL LETTER J WITH CIRCUMFLEX..LATIN SMALL LETTER K WITH CEDILLA
-unicode_east_asian_width(0x0139, 0x013E, 'N').	% L&   [6] LATIN CAPITAL LETTER L WITH ACUTE..LATIN SMALL LETTER L WITH CARON
-unicode_east_asian_width(0x0143, 0x0143, 'N').	% L&       LATIN CAPITAL LETTER N WITH ACUTE
-unicode_east_asian_width(0x0145, 0x0147, 'N').	% L&   [3] LATIN CAPITAL LETTER N WITH CEDILLA..LATIN CAPITAL LETTER N WITH CARON
-unicode_east_asian_width(0x014C, 0x014C, 'N').	% L&       LATIN CAPITAL LETTER O WITH MACRON
-unicode_east_asian_width(0x014E, 0x0151, 'N').	% L&   [4] LATIN CAPITAL LETTER O WITH BREVE..LATIN SMALL LETTER O WITH DOUBLE ACUTE
-unicode_east_asian_width(0x0154, 0x0165, 'N').	% L&  [18] LATIN CAPITAL LETTER R WITH ACUTE..LATIN SMALL LETTER T WITH CARON
-unicode_east_asian_width(0x0168, 0x016A, 'N').	% L&   [3] LATIN CAPITAL LETTER U WITH TILDE..LATIN CAPITAL LETTER U WITH MACRON
-unicode_east_asian_width(0x016C, 0x01BA, 'N').	% L&  [79] LATIN CAPITAL LETTER U WITH BREVE..LATIN SMALL LETTER EZH WITH TAIL
-unicode_east_asian_width(0x01BB, 0x01BB, 'N').	% Lo       LATIN LETTER TWO WITH STROKE
-unicode_east_asian_width(0x01BC, 0x01BF, 'N').	% L&   [4] LATIN CAPITAL LETTER TONE FIVE..LATIN LETTER WYNN
-unicode_east_asian_width(0x01C0, 0x01C3, 'N').	% Lo   [4] LATIN LETTER DENTAL CLICK..LATIN LETTER RETROFLEX CLICK
-unicode_east_asian_width(0x01C4, 0x01CD, 'N').	% L&  [10] LATIN CAPITAL LETTER DZ WITH CARON..LATIN CAPITAL LETTER A WITH CARON
-unicode_east_asian_width(0x01CF, 0x01CF, 'N').	% L&       LATIN CAPITAL LETTER I WITH CARON
-unicode_east_asian_width(0x01D1, 0x01D1, 'N').	% L&       LATIN CAPITAL LETTER O WITH CARON
-unicode_east_asian_width(0x01D3, 0x01D3, 'N').	% L&       LATIN CAPITAL LETTER U WITH CARON
-unicode_east_asian_width(0x01D5, 0x01D5, 'N').	% L&       LATIN CAPITAL LETTER U WITH DIAERESIS AND MACRON
-unicode_east_asian_width(0x01D7, 0x01D7, 'N').	% L&       LATIN CAPITAL LETTER U WITH DIAERESIS AND ACUTE
-unicode_east_asian_width(0x01D9, 0x01D9, 'N').	% L&       LATIN CAPITAL LETTER U WITH DIAERESIS AND CARON
-unicode_east_asian_width(0x01DB, 0x01DB, 'N').	% L&       LATIN CAPITAL LETTER U WITH DIAERESIS AND GRAVE
-unicode_east_asian_width(0x01DD, 0x0250, 'N').	% L& [116] LATIN SMALL LETTER TURNED E..LATIN SMALL LETTER TURNED A
-unicode_east_asian_width(0x0252, 0x0260, 'N').	% L&  [15] LATIN SMALL LETTER TURNED ALPHA..LATIN SMALL LETTER G WITH HOOK
-unicode_east_asian_width(0x0262, 0x0293, 'N').	% L&  [50] LATIN LETTER SMALL CAPITAL G..LATIN SMALL LETTER EZH WITH CURL
-unicode_east_asian_width(0x0294, 0x0294, 'N').	% Lo       LATIN LETTER GLOTTAL STOP
-unicode_east_asian_width(0x0295, 0x02AF, 'N').	% L&  [27] LATIN LETTER PHARYNGEAL VOICED FRICATIVE..LATIN SMALL LETTER TURNED H WITH FISHHOOK AND TAIL
-unicode_east_asian_width(0x02B0, 0x02C1, 'N').	% Lm  [18] MODIFIER LETTER SMALL H..MODIFIER LETTER REVERSED GLOTTAL STOP
-unicode_east_asian_width(0x02C2, 0x02C3, 'N').	% Sk   [2] MODIFIER LETTER LEFT ARROWHEAD..MODIFIER LETTER RIGHT ARROWHEAD
-unicode_east_asian_width(0x02C5, 0x02C5, 'N').	% Sk       MODIFIER LETTER DOWN ARROWHEAD
-unicode_east_asian_width(0x02C6, 0x02C6, 'N').	% Lm       MODIFIER LETTER CIRCUMFLEX ACCENT
-unicode_east_asian_width(0x02C8, 0x02C8, 'N').	% Lm       MODIFIER LETTER VERTICAL LINE
-unicode_east_asian_width(0x02CC, 0x02CC, 'N').	% Lm       MODIFIER LETTER LOW VERTICAL LINE
-unicode_east_asian_width(0x02CE, 0x02CF, 'N').	% Lm   [2] MODIFIER LETTER LOW GRAVE ACCENT..MODIFIER LETTER LOW ACUTE ACCENT
-unicode_east_asian_width(0x02D1, 0x02D1, 'N').	% Lm       MODIFIER LETTER HALF TRIANGULAR COLON
-unicode_east_asian_width(0x02D2, 0x02D7, 'N').	% Sk   [6] MODIFIER LETTER CENTRED RIGHT HALF RING..MODIFIER LETTER MINUS SIGN
-unicode_east_asian_width(0x02DC, 0x02DC, 'N').	% Sk       SMALL TILDE
-unicode_east_asian_width(0x02DE, 0x02DE, 'N').	% Sk       MODIFIER LETTER RHOTIC HOOK
-unicode_east_asian_width(0x02E0, 0x02E4, 'N').	% Lm   [5] MODIFIER LETTER SMALL GAMMA..MODIFIER LETTER SMALL REVERSED GLOTTAL STOP
-unicode_east_asian_width(0x02E5, 0x02EB, 'N').	% Sk   [7] MODIFIER LETTER EXTRA-HIGH TONE BAR..MODIFIER LETTER YANG DEPARTING TONE MARK
-unicode_east_asian_width(0x02EC, 0x02EC, 'N').	% Lm       MODIFIER LETTER VOICING
-unicode_east_asian_width(0x02ED, 0x02ED, 'N').	% Sk       MODIFIER LETTER UNASPIRATED
-unicode_east_asian_width(0x02EE, 0x02EE, 'N').	% Lm       MODIFIER LETTER DOUBLE APOSTROPHE
-unicode_east_asian_width(0x02EF, 0x02FF, 'N').	% Sk  [17] MODIFIER LETTER LOW DOWN ARROWHEAD..MODIFIER LETTER LOW LEFT ARROW
-unicode_east_asian_width(0x0370, 0x0373, 'N').	% L&   [4] GREEK CAPITAL LETTER HETA..GREEK SMALL LETTER ARCHAIC SAMPI
-unicode_east_asian_width(0x0374, 0x0374, 'N').	% Lm       GREEK NUMERAL SIGN
-unicode_east_asian_width(0x0375, 0x0375, 'N').	% Sk       GREEK LOWER NUMERAL SIGN
-unicode_east_asian_width(0x0376, 0x0377, 'N').	% L&   [2] GREEK CAPITAL LETTER PAMPHYLIAN DIGAMMA..GREEK SMALL LETTER PAMPHYLIAN DIGAMMA
-unicode_east_asian_width(0x037A, 0x037A, 'N').	% Lm       GREEK YPOGEGRAMMENI
-unicode_east_asian_width(0x037B, 0x037D, 'N').	% L&   [3] GREEK SMALL REVERSED LUNATE SIGMA SYMBOL..GREEK SMALL REVERSED DOTTED LUNATE SIGMA SYMBOL
-unicode_east_asian_width(0x037E, 0x037E, 'N').	% Po       GREEK QUESTION MARK
-unicode_east_asian_width(0x0384, 0x0385, 'N').	% Sk   [2] GREEK TONOS..GREEK DIALYTIKA TONOS
-unicode_east_asian_width(0x0386, 0x0386, 'N').	% L&       GREEK CAPITAL LETTER ALPHA WITH TONOS
-unicode_east_asian_width(0x0387, 0x0387, 'N').	% Po       GREEK ANO TELEIA
-unicode_east_asian_width(0x0388, 0x038A, 'N').	% L&   [3] GREEK CAPITAL LETTER EPSILON WITH TONOS..GREEK CAPITAL LETTER IOTA WITH TONOS
-unicode_east_asian_width(0x038C, 0x038C, 'N').	% L&       GREEK CAPITAL LETTER OMICRON WITH TONOS
-unicode_east_asian_width(0x038E, 0x0390, 'N').	% L&   [3] GREEK CAPITAL LETTER UPSILON WITH TONOS..GREEK SMALL LETTER IOTA WITH DIALYTIKA AND TONOS
-unicode_east_asian_width(0x03AA, 0x03B0, 'N').	% L&   [7] GREEK CAPITAL LETTER IOTA WITH DIALYTIKA..GREEK SMALL LETTER UPSILON WITH DIALYTIKA AND TONOS
-unicode_east_asian_width(0x03C2, 0x03C2, 'N').	% L&       GREEK SMALL LETTER FINAL SIGMA
-unicode_east_asian_width(0x03CA, 0x03F5, 'N').	% L&  [44] GREEK SMALL LETTER IOTA WITH DIALYTIKA..GREEK LUNATE EPSILON SYMBOL
-unicode_east_asian_width(0x03F6, 0x03F6, 'N').	% Sm       GREEK REVERSED LUNATE EPSILON SYMBOL
-unicode_east_asian_width(0x03F7, 0x0400, 'N').	% L&  [10] GREEK CAPITAL LETTER SHO..CYRILLIC CAPITAL LETTER IE WITH GRAVE
-unicode_east_asian_width(0x0402, 0x040F, 'N').	% L&  [14] CYRILLIC CAPITAL LETTER DJE..CYRILLIC CAPITAL LETTER DZHE
-unicode_east_asian_width(0x0450, 0x0450, 'N').	% L&       CYRILLIC SMALL LETTER IE WITH GRAVE
-unicode_east_asian_width(0x0452, 0x0481, 'N').	% L&  [48] CYRILLIC SMALL LETTER DJE..CYRILLIC SMALL LETTER KOPPA
-unicode_east_asian_width(0x0482, 0x0482, 'N').	% So       CYRILLIC THOUSANDS SIGN
-unicode_east_asian_width(0x0483, 0x0487, 'N').	% Mn   [5] COMBINING CYRILLIC TITLO..COMBINING CYRILLIC POKRYTIE
-unicode_east_asian_width(0x0488, 0x0489, 'N').	% Me   [2] COMBINING CYRILLIC HUNDRED THOUSANDS SIGN..COMBINING CYRILLIC MILLIONS SIGN
-unicode_east_asian_width(0x048A, 0x0527, 'N').	% L& [158] CYRILLIC CAPITAL LETTER SHORT I WITH TAIL..CYRILLIC SMALL LETTER SHHA WITH DESCENDER
-unicode_east_asian_width(0x0531, 0x0556, 'N').	% L&  [38] ARMENIAN CAPITAL LETTER AYB..ARMENIAN CAPITAL LETTER FEH
-unicode_east_asian_width(0x0559, 0x0559, 'N').	% Lm       ARMENIAN MODIFIER LETTER LEFT HALF RING
-unicode_east_asian_width(0x055A, 0x055F, 'N').	% Po   [6] ARMENIAN APOSTROPHE..ARMENIAN ABBREVIATION MARK
-unicode_east_asian_width(0x0561, 0x0587, 'N').	% L&  [39] ARMENIAN SMALL LETTER AYB..ARMENIAN SMALL LIGATURE ECH YIWN
-unicode_east_asian_width(0x0589, 0x0589, 'N').	% Po       ARMENIAN FULL STOP
-unicode_east_asian_width(0x058A, 0x058A, 'N').	% Pd       ARMENIAN HYPHEN
-unicode_east_asian_width(0x058F, 0x058F, 'N').	% Sc       ARMENIAN DRAM SIGN
-unicode_east_asian_width(0x0591, 0x05BD, 'N').	% Mn  [45] HEBREW ACCENT ETNAHTA..HEBREW POINT METEG
-unicode_east_asian_width(0x05BE, 0x05BE, 'N').	% Pd       HEBREW PUNCTUATION MAQAF
-unicode_east_asian_width(0x05BF, 0x05BF, 'N').	% Mn       HEBREW POINT RAFE
-unicode_east_asian_width(0x05C0, 0x05C0, 'N').	% Po       HEBREW PUNCTUATION PASEQ
-unicode_east_asian_width(0x05C1, 0x05C2, 'N').	% Mn   [2] HEBREW POINT SHIN DOT..HEBREW POINT SIN DOT
-unicode_east_asian_width(0x05C3, 0x05C3, 'N').	% Po       HEBREW PUNCTUATION SOF PASUQ
-unicode_east_asian_width(0x05C4, 0x05C5, 'N').	% Mn   [2] HEBREW MARK UPPER DOT..HEBREW MARK LOWER DOT
-unicode_east_asian_width(0x05C6, 0x05C6, 'N').	% Po       HEBREW PUNCTUATION NUN HAFUKHA
-unicode_east_asian_width(0x05C7, 0x05C7, 'N').	% Mn       HEBREW POINT QAMATS QATAN
-unicode_east_asian_width(0x05D0, 0x05EA, 'N').	% Lo  [27] HEBREW LETTER ALEF..HEBREW LETTER TAV
-unicode_east_asian_width(0x05F0, 0x05F2, 'N').	% Lo   [3] HEBREW LIGATURE YIDDISH DOUBLE VAV..HEBREW LIGATURE YIDDISH DOUBLE YOD
-unicode_east_asian_width(0x05F3, 0x05F4, 'N').	% Po   [2] HEBREW PUNCTUATION GERESH..HEBREW PUNCTUATION GERSHAYIM
-unicode_east_asian_width(0x0600, 0x0604, 'N').	% Cf   [5] ARABIC NUMBER SIGN..ARABIC SIGN SAMVAT
-unicode_east_asian_width(0x0606, 0x0608, 'N').	% Sm   [3] ARABIC-INDIC CUBE ROOT..ARABIC RAY
-unicode_east_asian_width(0x0609, 0x060A, 'N').	% Po   [2] ARABIC-INDIC PER MILLE SIGN..ARABIC-INDIC PER TEN THOUSAND SIGN
-unicode_east_asian_width(0x060B, 0x060B, 'N').	% Sc       AFGHANI SIGN
-unicode_east_asian_width(0x060C, 0x060D, 'N').	% Po   [2] ARABIC COMMA..ARABIC DATE SEPARATOR
-unicode_east_asian_width(0x060E, 0x060F, 'N').	% So   [2] ARABIC POETIC VERSE SIGN..ARABIC SIGN MISRA
-unicode_east_asian_width(0x0610, 0x061A, 'N').	% Mn  [11] ARABIC SIGN SALLALLAHOU ALAYHE WASSALLAM..ARABIC SMALL KASRA
-unicode_east_asian_width(0x061B, 0x061B, 'N').	% Po       ARABIC SEMICOLON
-unicode_east_asian_width(0x061E, 0x061F, 'N').	% Po   [2] ARABIC TRIPLE DOT PUNCTUATION MARK..ARABIC QUESTION MARK
-unicode_east_asian_width(0x0620, 0x063F, 'N').	% Lo  [32] ARABIC LETTER KASHMIRI YEH..ARABIC LETTER FARSI YEH WITH THREE DOTS ABOVE
-unicode_east_asian_width(0x0640, 0x0640, 'N').	% Lm       ARABIC TATWEEL
-unicode_east_asian_width(0x0641, 0x064A, 'N').	% Lo  [10] ARABIC LETTER FEH..ARABIC LETTER YEH
-unicode_east_asian_width(0x064B, 0x065F, 'N').	% Mn  [21] ARABIC FATHATAN..ARABIC WAVY HAMZA BELOW
-unicode_east_asian_width(0x0660, 0x0669, 'N').	% Nd  [10] ARABIC-INDIC DIGIT ZERO..ARABIC-INDIC DIGIT NINE
-unicode_east_asian_width(0x066A, 0x066D, 'N').	% Po   [4] ARABIC PERCENT SIGN..ARABIC FIVE POINTED STAR
-unicode_east_asian_width(0x066E, 0x066F, 'N').	% Lo   [2] ARABIC LETTER DOTLESS BEH..ARABIC LETTER DOTLESS QAF
-unicode_east_asian_width(0x0670, 0x0670, 'N').	% Mn       ARABIC LETTER SUPERSCRIPT ALEF
-unicode_east_asian_width(0x0671, 0x06D3, 'N').	% Lo  [99] ARABIC LETTER ALEF WASLA..ARABIC LETTER YEH BARREE WITH HAMZA ABOVE
-unicode_east_asian_width(0x06D4, 0x06D4, 'N').	% Po       ARABIC FULL STOP
-unicode_east_asian_width(0x06D5, 0x06D5, 'N').	% Lo       ARABIC LETTER AE
-unicode_east_asian_width(0x06D6, 0x06DC, 'N').	% Mn   [7] ARABIC SMALL HIGH LIGATURE SAD WITH LAM WITH ALEF MAKSURA..ARABIC SMALL HIGH SEEN
-unicode_east_asian_width(0x06DD, 0x06DD, 'N').	% Cf       ARABIC END OF AYAH
-unicode_east_asian_width(0x06DE, 0x06DE, 'N').	% So       ARABIC START OF RUB EL HIZB
-unicode_east_asian_width(0x06DF, 0x06E4, 'N').	% Mn   [6] ARABIC SMALL HIGH ROUNDED ZERO..ARABIC SMALL HIGH MADDA
-unicode_east_asian_width(0x06E5, 0x06E6, 'N').	% Lm   [2] ARABIC SMALL WAW..ARABIC SMALL YEH
-unicode_east_asian_width(0x06E7, 0x06E8, 'N').	% Mn   [2] ARABIC SMALL HIGH YEH..ARABIC SMALL HIGH NOON
-unicode_east_asian_width(0x06E9, 0x06E9, 'N').	% So       ARABIC PLACE OF SAJDAH
-unicode_east_asian_width(0x06EA, 0x06ED, 'N').	% Mn   [4] ARABIC EMPTY CENTRE LOW STOP..ARABIC SMALL LOW MEEM
-unicode_east_asian_width(0x06EE, 0x06EF, 'N').	% Lo   [2] ARABIC LETTER DAL WITH INVERTED V..ARABIC LETTER REH WITH INVERTED V
-unicode_east_asian_width(0x06F0, 0x06F9, 'N').	% Nd  [10] EXTENDED ARABIC-INDIC DIGIT ZERO..EXTENDED ARABIC-INDIC DIGIT NINE
-unicode_east_asian_width(0x06FA, 0x06FC, 'N').	% Lo   [3] ARABIC LETTER SHEEN WITH DOT BELOW..ARABIC LETTER GHAIN WITH DOT BELOW
-unicode_east_asian_width(0x06FD, 0x06FE, 'N').	% So   [2] ARABIC SIGN SINDHI AMPERSAND..ARABIC SIGN SINDHI POSTPOSITION MEN
-unicode_east_asian_width(0x06FF, 0x06FF, 'N').	% Lo       ARABIC LETTER HEH WITH INVERTED V
-unicode_east_asian_width(0x0700, 0x070D, 'N').	% Po  [14] SYRIAC END OF PARAGRAPH..SYRIAC HARKLEAN ASTERISCUS
-unicode_east_asian_width(0x070F, 0x070F, 'N').	% Cf       SYRIAC ABBREVIATION MARK
-unicode_east_asian_width(0x0710, 0x0710, 'N').	% Lo       SYRIAC LETTER ALAPH
-unicode_east_asian_width(0x0711, 0x0711, 'N').	% Mn       SYRIAC LETTER SUPERSCRIPT ALAPH
-unicode_east_asian_width(0x0712, 0x072F, 'N').	% Lo  [30] SYRIAC LETTER BETH..SYRIAC LETTER PERSIAN DHALATH
-unicode_east_asian_width(0x0730, 0x074A, 'N').	% Mn  [27] SYRIAC PTHAHA ABOVE..SYRIAC BARREKH
-unicode_east_asian_width(0x074D, 0x07A5, 'N').	% Lo  [89] SYRIAC LETTER SOGDIAN ZHAIN..THAANA LETTER WAAVU
-unicode_east_asian_width(0x07A6, 0x07B0, 'N').	% Mn  [11] THAANA ABAFILI..THAANA SUKUN
-unicode_east_asian_width(0x07B1, 0x07B1, 'N').	% Lo       THAANA LETTER NAA
-unicode_east_asian_width(0x07C0, 0x07C9, 'N').	% Nd  [10] NKO DIGIT ZERO..NKO DIGIT NINE
-unicode_east_asian_width(0x07CA, 0x07EA, 'N').	% Lo  [33] NKO LETTER A..NKO LETTER JONA RA
-unicode_east_asian_width(0x07EB, 0x07F3, 'N').	% Mn   [9] NKO COMBINING SHORT HIGH TONE..NKO COMBINING DOUBLE DOT ABOVE
-unicode_east_asian_width(0x07F4, 0x07F5, 'N').	% Lm   [2] NKO HIGH TONE APOSTROPHE..NKO LOW TONE APOSTROPHE
-unicode_east_asian_width(0x07F6, 0x07F6, 'N').	% So       NKO SYMBOL OO DENNEN
-unicode_east_asian_width(0x07F7, 0x07F9, 'N').	% Po   [3] NKO SYMBOL GBAKURUNEN..NKO EXCLAMATION MARK
-unicode_east_asian_width(0x07FA, 0x07FA, 'N').	% Lm       NKO LAJANYALAN
-unicode_east_asian_width(0x0800, 0x0815, 'N').	% Lo  [22] SAMARITAN LETTER ALAF..SAMARITAN LETTER TAAF
-unicode_east_asian_width(0x0816, 0x0819, 'N').	% Mn   [4] SAMARITAN MARK IN..SAMARITAN MARK DAGESH
-unicode_east_asian_width(0x081A, 0x081A, 'N').	% Lm       SAMARITAN MODIFIER LETTER EPENTHETIC YUT
-unicode_east_asian_width(0x081B, 0x0823, 'N').	% Mn   [9] SAMARITAN MARK EPENTHETIC YUT..SAMARITAN VOWEL SIGN A
-unicode_east_asian_width(0x0824, 0x0824, 'N').	% Lm       SAMARITAN MODIFIER LETTER SHORT A
-unicode_east_asian_width(0x0825, 0x0827, 'N').	% Mn   [3] SAMARITAN VOWEL SIGN SHORT A..SAMARITAN VOWEL SIGN U
-unicode_east_asian_width(0x0828, 0x0828, 'N').	% Lm       SAMARITAN MODIFIER LETTER I
-unicode_east_asian_width(0x0829, 0x082D, 'N').	% Mn   [5] SAMARITAN VOWEL SIGN LONG I..SAMARITAN MARK NEQUDAA
-unicode_east_asian_width(0x0830, 0x083E, 'N').	% Po  [15] SAMARITAN PUNCTUATION NEQUDAA..SAMARITAN PUNCTUATION ANNAAU
-unicode_east_asian_width(0x0840, 0x0858, 'N').	% Lo  [25] MANDAIC LETTER HALQA..MANDAIC LETTER AIN
-unicode_east_asian_width(0x0859, 0x085B, 'N').	% Mn   [3] MANDAIC AFFRICATION MARK..MANDAIC GEMINATION MARK
-unicode_east_asian_width(0x085E, 0x085E, 'N').	% Po       MANDAIC PUNCTUATION
-unicode_east_asian_width(0x08A0, 0x08A0, 'N').	% Lo       ARABIC LETTER BEH WITH SMALL V BELOW
-unicode_east_asian_width(0x08A2, 0x08AC, 'N').	% Lo  [11] ARABIC LETTER JEEM WITH TWO DOTS ABOVE..ARABIC LETTER ROHINGYA YEH
-unicode_east_asian_width(0x08E4, 0x08FE, 'N').	% Mn  [27] ARABIC CURLY FATHA..ARABIC DAMMA WITH DOT
-unicode_east_asian_width(0x0900, 0x0902, 'N').	% Mn   [3] DEVANAGARI SIGN INVERTED CANDRABINDU..DEVANAGARI SIGN ANUSVARA
-unicode_east_asian_width(0x0903, 0x0903, 'N').	% Mc       DEVANAGARI SIGN VISARGA
-unicode_east_asian_width(0x0904, 0x0939, 'N').	% Lo  [54] DEVANAGARI LETTER SHORT A..DEVANAGARI LETTER HA
-unicode_east_asian_width(0x093A, 0x093A, 'N').	% Mn       DEVANAGARI VOWEL SIGN OE
-unicode_east_asian_width(0x093B, 0x093B, 'N').	% Mc       DEVANAGARI VOWEL SIGN OOE
-unicode_east_asian_width(0x093C, 0x093C, 'N').	% Mn       DEVANAGARI SIGN NUKTA
-unicode_east_asian_width(0x093D, 0x093D, 'N').	% Lo       DEVANAGARI SIGN AVAGRAHA
-unicode_east_asian_width(0x093E, 0x0940, 'N').	% Mc   [3] DEVANAGARI VOWEL SIGN AA..DEVANAGARI VOWEL SIGN II
-unicode_east_asian_width(0x0941, 0x0948, 'N').	% Mn   [8] DEVANAGARI VOWEL SIGN U..DEVANAGARI VOWEL SIGN AI
-unicode_east_asian_width(0x0949, 0x094C, 'N').	% Mc   [4] DEVANAGARI VOWEL SIGN CANDRA O..DEVANAGARI VOWEL SIGN AU
-unicode_east_asian_width(0x094D, 0x094D, 'N').	% Mn       DEVANAGARI SIGN VIRAMA
-unicode_east_asian_width(0x094E, 0x094F, 'N').	% Mc   [2] DEVANAGARI VOWEL SIGN PRISHTHAMATRA E..DEVANAGARI VOWEL SIGN AW
-unicode_east_asian_width(0x0950, 0x0950, 'N').	% Lo       DEVANAGARI OM
-unicode_east_asian_width(0x0951, 0x0957, 'N').	% Mn   [7] DEVANAGARI STRESS SIGN UDATTA..DEVANAGARI VOWEL SIGN UUE
-unicode_east_asian_width(0x0958, 0x0961, 'N').	% Lo  [10] DEVANAGARI LETTER QA..DEVANAGARI LETTER VOCALIC LL
-unicode_east_asian_width(0x0962, 0x0963, 'N').	% Mn   [2] DEVANAGARI VOWEL SIGN VOCALIC L..DEVANAGARI VOWEL SIGN VOCALIC LL
-unicode_east_asian_width(0x0964, 0x0965, 'N').	% Po   [2] DEVANAGARI DANDA..DEVANAGARI DOUBLE DANDA
-unicode_east_asian_width(0x0966, 0x096F, 'N').	% Nd  [10] DEVANAGARI DIGIT ZERO..DEVANAGARI DIGIT NINE
-unicode_east_asian_width(0x0970, 0x0970, 'N').	% Po       DEVANAGARI ABBREVIATION SIGN
-unicode_east_asian_width(0x0971, 0x0971, 'N').	% Lm       DEVANAGARI SIGN HIGH SPACING DOT
-unicode_east_asian_width(0x0972, 0x0977, 'N').	% Lo   [6] DEVANAGARI LETTER CANDRA A..DEVANAGARI LETTER UUE
-unicode_east_asian_width(0x0979, 0x097F, 'N').	% Lo   [7] DEVANAGARI LETTER ZHA..DEVANAGARI LETTER BBA
-unicode_east_asian_width(0x0981, 0x0981, 'N').	% Mn       BENGALI SIGN CANDRABINDU
-unicode_east_asian_width(0x0982, 0x0983, 'N').	% Mc   [2] BENGALI SIGN ANUSVARA..BENGALI SIGN VISARGA
-unicode_east_asian_width(0x0985, 0x098C, 'N').	% Lo   [8] BENGALI LETTER A..BENGALI LETTER VOCALIC L
-unicode_east_asian_width(0x098F, 0x0990, 'N').	% Lo   [2] BENGALI LETTER E..BENGALI LETTER AI
-unicode_east_asian_width(0x0993, 0x09A8, 'N').	% Lo  [22] BENGALI LETTER O..BENGALI LETTER NA
-unicode_east_asian_width(0x09AA, 0x09B0, 'N').	% Lo   [7] BENGALI LETTER PA..BENGALI LETTER RA
-unicode_east_asian_width(0x09B2, 0x09B2, 'N').	% Lo       BENGALI LETTER LA
-unicode_east_asian_width(0x09B6, 0x09B9, 'N').	% Lo   [4] BENGALI LETTER SHA..BENGALI LETTER HA
-unicode_east_asian_width(0x09BC, 0x09BC, 'N').	% Mn       BENGALI SIGN NUKTA
-unicode_east_asian_width(0x09BD, 0x09BD, 'N').	% Lo       BENGALI SIGN AVAGRAHA
-unicode_east_asian_width(0x09BE, 0x09C0, 'N').	% Mc   [3] BENGALI VOWEL SIGN AA..BENGALI VOWEL SIGN II
-unicode_east_asian_width(0x09C1, 0x09C4, 'N').	% Mn   [4] BENGALI VOWEL SIGN U..BENGALI VOWEL SIGN VOCALIC RR
-unicode_east_asian_width(0x09C7, 0x09C8, 'N').	% Mc   [2] BENGALI VOWEL SIGN E..BENGALI VOWEL SIGN AI
-unicode_east_asian_width(0x09CB, 0x09CC, 'N').	% Mc   [2] BENGALI VOWEL SIGN O..BENGALI VOWEL SIGN AU
-unicode_east_asian_width(0x09CD, 0x09CD, 'N').	% Mn       BENGALI SIGN VIRAMA
-unicode_east_asian_width(0x09CE, 0x09CE, 'N').	% Lo       BENGALI LETTER KHANDA TA
-unicode_east_asian_width(0x09D7, 0x09D7, 'N').	% Mc       BENGALI AU LENGTH MARK
-unicode_east_asian_width(0x09DC, 0x09DD, 'N').	% Lo   [2] BENGALI LETTER RRA..BENGALI LETTER RHA
-unicode_east_asian_width(0x09DF, 0x09E1, 'N').	% Lo   [3] BENGALI LETTER YYA..BENGALI LETTER VOCALIC LL
-unicode_east_asian_width(0x09E2, 0x09E3, 'N').	% Mn   [2] BENGALI VOWEL SIGN VOCALIC L..BENGALI VOWEL SIGN VOCALIC LL
-unicode_east_asian_width(0x09E6, 0x09EF, 'N').	% Nd  [10] BENGALI DIGIT ZERO..BENGALI DIGIT NINE
-unicode_east_asian_width(0x09F0, 0x09F1, 'N').	% Lo   [2] BENGALI LETTER RA WITH MIDDLE DIAGONAL..BENGALI LETTER RA WITH LOWER DIAGONAL
-unicode_east_asian_width(0x09F2, 0x09F3, 'N').	% Sc   [2] BENGALI RUPEE MARK..BENGALI RUPEE SIGN
-unicode_east_asian_width(0x09F4, 0x09F9, 'N').	% No   [6] BENGALI CURRENCY NUMERATOR ONE..BENGALI CURRENCY DENOMINATOR SIXTEEN
-unicode_east_asian_width(0x09FA, 0x09FA, 'N').	% So       BENGALI ISSHAR
-unicode_east_asian_width(0x09FB, 0x09FB, 'N').	% Sc       BENGALI GANDA MARK
-unicode_east_asian_width(0x0A01, 0x0A02, 'N').	% Mn   [2] GURMUKHI SIGN ADAK BINDI..GURMUKHI SIGN BINDI
-unicode_east_asian_width(0x0A03, 0x0A03, 'N').	% Mc       GURMUKHI SIGN VISARGA
-unicode_east_asian_width(0x0A05, 0x0A0A, 'N').	% Lo   [6] GURMUKHI LETTER A..GURMUKHI LETTER UU
-unicode_east_asian_width(0x0A0F, 0x0A10, 'N').	% Lo   [2] GURMUKHI LETTER EE..GURMUKHI LETTER AI
-unicode_east_asian_width(0x0A13, 0x0A28, 'N').	% Lo  [22] GURMUKHI LETTER OO..GURMUKHI LETTER NA
-unicode_east_asian_width(0x0A2A, 0x0A30, 'N').	% Lo   [7] GURMUKHI LETTER PA..GURMUKHI LETTER RA
-unicode_east_asian_width(0x0A32, 0x0A33, 'N').	% Lo   [2] GURMUKHI LETTER LA..GURMUKHI LETTER LLA
-unicode_east_asian_width(0x0A35, 0x0A36, 'N').	% Lo   [2] GURMUKHI LETTER VA..GURMUKHI LETTER SHA
-unicode_east_asian_width(0x0A38, 0x0A39, 'N').	% Lo   [2] GURMUKHI LETTER SA..GURMUKHI LETTER HA
-unicode_east_asian_width(0x0A3C, 0x0A3C, 'N').	% Mn       GURMUKHI SIGN NUKTA
-unicode_east_asian_width(0x0A3E, 0x0A40, 'N').	% Mc   [3] GURMUKHI VOWEL SIGN AA..GURMUKHI VOWEL SIGN II
-unicode_east_asian_width(0x0A41, 0x0A42, 'N').	% Mn   [2] GURMUKHI VOWEL SIGN U..GURMUKHI VOWEL SIGN UU
-unicode_east_asian_width(0x0A47, 0x0A48, 'N').	% Mn   [2] GURMUKHI VOWEL SIGN EE..GURMUKHI VOWEL SIGN AI
-unicode_east_asian_width(0x0A4B, 0x0A4D, 'N').	% Mn   [3] GURMUKHI VOWEL SIGN OO..GURMUKHI SIGN VIRAMA
-unicode_east_asian_width(0x0A51, 0x0A51, 'N').	% Mn       GURMUKHI SIGN UDAAT
-unicode_east_asian_width(0x0A59, 0x0A5C, 'N').	% Lo   [4] GURMUKHI LETTER KHHA..GURMUKHI LETTER RRA
-unicode_east_asian_width(0x0A5E, 0x0A5E, 'N').	% Lo       GURMUKHI LETTER FA
-unicode_east_asian_width(0x0A66, 0x0A6F, 'N').	% Nd  [10] GURMUKHI DIGIT ZERO..GURMUKHI DIGIT NINE
-unicode_east_asian_width(0x0A70, 0x0A71, 'N').	% Mn   [2] GURMUKHI TIPPI..GURMUKHI ADDAK
-unicode_east_asian_width(0x0A72, 0x0A74, 'N').	% Lo   [3] GURMUKHI IRI..GURMUKHI EK ONKAR
-unicode_east_asian_width(0x0A75, 0x0A75, 'N').	% Mn       GURMUKHI SIGN YAKASH
-unicode_east_asian_width(0x0A81, 0x0A82, 'N').	% Mn   [2] GUJARATI SIGN CANDRABINDU..GUJARATI SIGN ANUSVARA
-unicode_east_asian_width(0x0A83, 0x0A83, 'N').	% Mc       GUJARATI SIGN VISARGA
-unicode_east_asian_width(0x0A85, 0x0A8D, 'N').	% Lo   [9] GUJARATI LETTER A..GUJARATI VOWEL CANDRA E
-unicode_east_asian_width(0x0A8F, 0x0A91, 'N').	% Lo   [3] GUJARATI LETTER E..GUJARATI VOWEL CANDRA O
-unicode_east_asian_width(0x0A93, 0x0AA8, 'N').	% Lo  [22] GUJARATI LETTER O..GUJARATI LETTER NA
-unicode_east_asian_width(0x0AAA, 0x0AB0, 'N').	% Lo   [7] GUJARATI LETTER PA..GUJARATI LETTER RA
-unicode_east_asian_width(0x0AB2, 0x0AB3, 'N').	% Lo   [2] GUJARATI LETTER LA..GUJARATI LETTER LLA
-unicode_east_asian_width(0x0AB5, 0x0AB9, 'N').	% Lo   [5] GUJARATI LETTER VA..GUJARATI LETTER HA
-unicode_east_asian_width(0x0ABC, 0x0ABC, 'N').	% Mn       GUJARATI SIGN NUKTA
-unicode_east_asian_width(0x0ABD, 0x0ABD, 'N').	% Lo       GUJARATI SIGN AVAGRAHA
-unicode_east_asian_width(0x0ABE, 0x0AC0, 'N').	% Mc   [3] GUJARATI VOWEL SIGN AA..GUJARATI VOWEL SIGN II
-unicode_east_asian_width(0x0AC1, 0x0AC5, 'N').	% Mn   [5] GUJARATI VOWEL SIGN U..GUJARATI VOWEL SIGN CANDRA E
-unicode_east_asian_width(0x0AC7, 0x0AC8, 'N').	% Mn   [2] GUJARATI VOWEL SIGN E..GUJARATI VOWEL SIGN AI
-unicode_east_asian_width(0x0AC9, 0x0AC9, 'N').	% Mc       GUJARATI VOWEL SIGN CANDRA O
-unicode_east_asian_width(0x0ACB, 0x0ACC, 'N').	% Mc   [2] GUJARATI VOWEL SIGN O..GUJARATI VOWEL SIGN AU
-unicode_east_asian_width(0x0ACD, 0x0ACD, 'N').	% Mn       GUJARATI SIGN VIRAMA
-unicode_east_asian_width(0x0AD0, 0x0AD0, 'N').	% Lo       GUJARATI OM
-unicode_east_asian_width(0x0AE0, 0x0AE1, 'N').	% Lo   [2] GUJARATI LETTER VOCALIC RR..GUJARATI LETTER VOCALIC LL
-unicode_east_asian_width(0x0AE2, 0x0AE3, 'N').	% Mn   [2] GUJARATI VOWEL SIGN VOCALIC L..GUJARATI VOWEL SIGN VOCALIC LL
-unicode_east_asian_width(0x0AE6, 0x0AEF, 'N').	% Nd  [10] GUJARATI DIGIT ZERO..GUJARATI DIGIT NINE
-unicode_east_asian_width(0x0AF0, 0x0AF0, 'N').	% Po       GUJARATI ABBREVIATION SIGN
-unicode_east_asian_width(0x0AF1, 0x0AF1, 'N').	% Sc       GUJARATI RUPEE SIGN
-unicode_east_asian_width(0x0B01, 0x0B01, 'N').	% Mn       ORIYA SIGN CANDRABINDU
-unicode_east_asian_width(0x0B02, 0x0B03, 'N').	% Mc   [2] ORIYA SIGN ANUSVARA..ORIYA SIGN VISARGA
-unicode_east_asian_width(0x0B05, 0x0B0C, 'N').	% Lo   [8] ORIYA LETTER A..ORIYA LETTER VOCALIC L
-unicode_east_asian_width(0x0B0F, 0x0B10, 'N').	% Lo   [2] ORIYA LETTER E..ORIYA LETTER AI
-unicode_east_asian_width(0x0B13, 0x0B28, 'N').	% Lo  [22] ORIYA LETTER O..ORIYA LETTER NA
-unicode_east_asian_width(0x0B2A, 0x0B30, 'N').	% Lo   [7] ORIYA LETTER PA..ORIYA LETTER RA
-unicode_east_asian_width(0x0B32, 0x0B33, 'N').	% Lo   [2] ORIYA LETTER LA..ORIYA LETTER LLA
-unicode_east_asian_width(0x0B35, 0x0B39, 'N').	% Lo   [5] ORIYA LETTER VA..ORIYA LETTER HA
-unicode_east_asian_width(0x0B3C, 0x0B3C, 'N').	% Mn       ORIYA SIGN NUKTA
-unicode_east_asian_width(0x0B3D, 0x0B3D, 'N').	% Lo       ORIYA SIGN AVAGRAHA
-unicode_east_asian_width(0x0B3E, 0x0B3E, 'N').	% Mc       ORIYA VOWEL SIGN AA
-unicode_east_asian_width(0x0B3F, 0x0B3F, 'N').	% Mn       ORIYA VOWEL SIGN I
-unicode_east_asian_width(0x0B40, 0x0B40, 'N').	% Mc       ORIYA VOWEL SIGN II
-unicode_east_asian_width(0x0B41, 0x0B44, 'N').	% Mn   [4] ORIYA VOWEL SIGN U..ORIYA VOWEL SIGN VOCALIC RR
-unicode_east_asian_width(0x0B47, 0x0B48, 'N').	% Mc   [2] ORIYA VOWEL SIGN E..ORIYA VOWEL SIGN AI
-unicode_east_asian_width(0x0B4B, 0x0B4C, 'N').	% Mc   [2] ORIYA VOWEL SIGN O..ORIYA VOWEL SIGN AU
-unicode_east_asian_width(0x0B4D, 0x0B4D, 'N').	% Mn       ORIYA SIGN VIRAMA
-unicode_east_asian_width(0x0B56, 0x0B56, 'N').	% Mn       ORIYA AI LENGTH MARK
-unicode_east_asian_width(0x0B57, 0x0B57, 'N').	% Mc       ORIYA AU LENGTH MARK
-unicode_east_asian_width(0x0B5C, 0x0B5D, 'N').	% Lo   [2] ORIYA LETTER RRA..ORIYA LETTER RHA
-unicode_east_asian_width(0x0B5F, 0x0B61, 'N').	% Lo   [3] ORIYA LETTER YYA..ORIYA LETTER VOCALIC LL
-unicode_east_asian_width(0x0B62, 0x0B63, 'N').	% Mn   [2] ORIYA VOWEL SIGN VOCALIC L..ORIYA VOWEL SIGN VOCALIC LL
-unicode_east_asian_width(0x0B66, 0x0B6F, 'N').	% Nd  [10] ORIYA DIGIT ZERO..ORIYA DIGIT NINE
-unicode_east_asian_width(0x0B70, 0x0B70, 'N').	% So       ORIYA ISSHAR
-unicode_east_asian_width(0x0B71, 0x0B71, 'N').	% Lo       ORIYA LETTER WA
-unicode_east_asian_width(0x0B72, 0x0B77, 'N').	% No   [6] ORIYA FRACTION ONE QUARTER..ORIYA FRACTION THREE SIXTEENTHS
-unicode_east_asian_width(0x0B82, 0x0B82, 'N').	% Mn       TAMIL SIGN ANUSVARA
-unicode_east_asian_width(0x0B83, 0x0B83, 'N').	% Lo       TAMIL SIGN VISARGA
-unicode_east_asian_width(0x0B85, 0x0B8A, 'N').	% Lo   [6] TAMIL LETTER A..TAMIL LETTER UU
-unicode_east_asian_width(0x0B8E, 0x0B90, 'N').	% Lo   [3] TAMIL LETTER E..TAMIL LETTER AI
-unicode_east_asian_width(0x0B92, 0x0B95, 'N').	% Lo   [4] TAMIL LETTER O..TAMIL LETTER KA
-unicode_east_asian_width(0x0B99, 0x0B9A, 'N').	% Lo   [2] TAMIL LETTER NGA..TAMIL LETTER CA
-unicode_east_asian_width(0x0B9C, 0x0B9C, 'N').	% Lo       TAMIL LETTER JA
-unicode_east_asian_width(0x0B9E, 0x0B9F, 'N').	% Lo   [2] TAMIL LETTER NYA..TAMIL LETTER TTA
-unicode_east_asian_width(0x0BA3, 0x0BA4, 'N').	% Lo   [2] TAMIL LETTER NNA..TAMIL LETTER TA
-unicode_east_asian_width(0x0BA8, 0x0BAA, 'N').	% Lo   [3] TAMIL LETTER NA..TAMIL LETTER PA
-unicode_east_asian_width(0x0BAE, 0x0BB9, 'N').	% Lo  [12] TAMIL LETTER MA..TAMIL LETTER HA
-unicode_east_asian_width(0x0BBE, 0x0BBF, 'N').	% Mc   [2] TAMIL VOWEL SIGN AA..TAMIL VOWEL SIGN I
-unicode_east_asian_width(0x0BC0, 0x0BC0, 'N').	% Mn       TAMIL VOWEL SIGN II
-unicode_east_asian_width(0x0BC1, 0x0BC2, 'N').	% Mc   [2] TAMIL VOWEL SIGN U..TAMIL VOWEL SIGN UU
-unicode_east_asian_width(0x0BC6, 0x0BC8, 'N').	% Mc   [3] TAMIL VOWEL SIGN E..TAMIL VOWEL SIGN AI
-unicode_east_asian_width(0x0BCA, 0x0BCC, 'N').	% Mc   [3] TAMIL VOWEL SIGN O..TAMIL VOWEL SIGN AU
-unicode_east_asian_width(0x0BCD, 0x0BCD, 'N').	% Mn       TAMIL SIGN VIRAMA
-unicode_east_asian_width(0x0BD0, 0x0BD0, 'N').	% Lo       TAMIL OM
-unicode_east_asian_width(0x0BD7, 0x0BD7, 'N').	% Mc       TAMIL AU LENGTH MARK
-unicode_east_asian_width(0x0BE6, 0x0BEF, 'N').	% Nd  [10] TAMIL DIGIT ZERO..TAMIL DIGIT NINE
-unicode_east_asian_width(0x0BF0, 0x0BF2, 'N').	% No   [3] TAMIL NUMBER TEN..TAMIL NUMBER ONE THOUSAND
-unicode_east_asian_width(0x0BF3, 0x0BF8, 'N').	% So   [6] TAMIL DAY SIGN..TAMIL AS ABOVE SIGN
-unicode_east_asian_width(0x0BF9, 0x0BF9, 'N').	% Sc       TAMIL RUPEE SIGN
-unicode_east_asian_width(0x0BFA, 0x0BFA, 'N').	% So       TAMIL NUMBER SIGN
-unicode_east_asian_width(0x0C01, 0x0C03, 'N').	% Mc   [3] TELUGU SIGN CANDRABINDU..TELUGU SIGN VISARGA
-unicode_east_asian_width(0x0C05, 0x0C0C, 'N').	% Lo   [8] TELUGU LETTER A..TELUGU LETTER VOCALIC L
-unicode_east_asian_width(0x0C0E, 0x0C10, 'N').	% Lo   [3] TELUGU LETTER E..TELUGU LETTER AI
-unicode_east_asian_width(0x0C12, 0x0C28, 'N').	% Lo  [23] TELUGU LETTER O..TELUGU LETTER NA
-unicode_east_asian_width(0x0C2A, 0x0C33, 'N').	% Lo  [10] TELUGU LETTER PA..TELUGU LETTER LLA
-unicode_east_asian_width(0x0C35, 0x0C39, 'N').	% Lo   [5] TELUGU LETTER VA..TELUGU LETTER HA
-unicode_east_asian_width(0x0C3D, 0x0C3D, 'N').	% Lo       TELUGU SIGN AVAGRAHA
-unicode_east_asian_width(0x0C3E, 0x0C40, 'N').	% Mn   [3] TELUGU VOWEL SIGN AA..TELUGU VOWEL SIGN II
-unicode_east_asian_width(0x0C41, 0x0C44, 'N').	% Mc   [4] TELUGU VOWEL SIGN U..TELUGU VOWEL SIGN VOCALIC RR
-unicode_east_asian_width(0x0C46, 0x0C48, 'N').	% Mn   [3] TELUGU VOWEL SIGN E..TELUGU VOWEL SIGN AI
-unicode_east_asian_width(0x0C4A, 0x0C4D, 'N').	% Mn   [4] TELUGU VOWEL SIGN O..TELUGU SIGN VIRAMA
-unicode_east_asian_width(0x0C55, 0x0C56, 'N').	% Mn   [2] TELUGU LENGTH MARK..TELUGU AI LENGTH MARK
-unicode_east_asian_width(0x0C58, 0x0C59, 'N').	% Lo   [2] TELUGU LETTER TSA..TELUGU LETTER DZA
-unicode_east_asian_width(0x0C60, 0x0C61, 'N').	% Lo   [2] TELUGU LETTER VOCALIC RR..TELUGU LETTER VOCALIC LL
-unicode_east_asian_width(0x0C62, 0x0C63, 'N').	% Mn   [2] TELUGU VOWEL SIGN VOCALIC L..TELUGU VOWEL SIGN VOCALIC LL
-unicode_east_asian_width(0x0C66, 0x0C6F, 'N').	% Nd  [10] TELUGU DIGIT ZERO..TELUGU DIGIT NINE
-unicode_east_asian_width(0x0C78, 0x0C7E, 'N').	% No   [7] TELUGU FRACTION DIGIT ZERO FOR ODD POWERS OF FOUR..TELUGU FRACTION DIGIT THREE FOR EVEN POWERS OF FOUR
-unicode_east_asian_width(0x0C7F, 0x0C7F, 'N').	% So       TELUGU SIGN TUUMU
-unicode_east_asian_width(0x0C82, 0x0C83, 'N').	% Mc   [2] KANNADA SIGN ANUSVARA..KANNADA SIGN VISARGA
-unicode_east_asian_width(0x0C85, 0x0C8C, 'N').	% Lo   [8] KANNADA LETTER A..KANNADA LETTER VOCALIC L
-unicode_east_asian_width(0x0C8E, 0x0C90, 'N').	% Lo   [3] KANNADA LETTER E..KANNADA LETTER AI
-unicode_east_asian_width(0x0C92, 0x0CA8, 'N').	% Lo  [23] KANNADA LETTER O..KANNADA LETTER NA
-unicode_east_asian_width(0x0CAA, 0x0CB3, 'N').	% Lo  [10] KANNADA LETTER PA..KANNADA LETTER LLA
-unicode_east_asian_width(0x0CB5, 0x0CB9, 'N').	% Lo   [5] KANNADA LETTER VA..KANNADA LETTER HA
-unicode_east_asian_width(0x0CBC, 0x0CBC, 'N').	% Mn       KANNADA SIGN NUKTA
-unicode_east_asian_width(0x0CBD, 0x0CBD, 'N').	% Lo       KANNADA SIGN AVAGRAHA
-unicode_east_asian_width(0x0CBE, 0x0CBE, 'N').	% Mc       KANNADA VOWEL SIGN AA
-unicode_east_asian_width(0x0CBF, 0x0CBF, 'N').	% Mn       KANNADA VOWEL SIGN I
-unicode_east_asian_width(0x0CC0, 0x0CC4, 'N').	% Mc   [5] KANNADA VOWEL SIGN II..KANNADA VOWEL SIGN VOCALIC RR
-unicode_east_asian_width(0x0CC6, 0x0CC6, 'N').	% Mn       KANNADA VOWEL SIGN E
-unicode_east_asian_width(0x0CC7, 0x0CC8, 'N').	% Mc   [2] KANNADA VOWEL SIGN EE..KANNADA VOWEL SIGN AI
-unicode_east_asian_width(0x0CCA, 0x0CCB, 'N').	% Mc   [2] KANNADA VOWEL SIGN O..KANNADA VOWEL SIGN OO
-unicode_east_asian_width(0x0CCC, 0x0CCD, 'N').	% Mn   [2] KANNADA VOWEL SIGN AU..KANNADA SIGN VIRAMA
-unicode_east_asian_width(0x0CD5, 0x0CD6, 'N').	% Mc   [2] KANNADA LENGTH MARK..KANNADA AI LENGTH MARK
-unicode_east_asian_width(0x0CDE, 0x0CDE, 'N').	% Lo       KANNADA LETTER FA
-unicode_east_asian_width(0x0CE0, 0x0CE1, 'N').	% Lo   [2] KANNADA LETTER VOCALIC RR..KANNADA LETTER VOCALIC LL
-unicode_east_asian_width(0x0CE2, 0x0CE3, 'N').	% Mn   [2] KANNADA VOWEL SIGN VOCALIC L..KANNADA VOWEL SIGN VOCALIC LL
-unicode_east_asian_width(0x0CE6, 0x0CEF, 'N').	% Nd  [10] KANNADA DIGIT ZERO..KANNADA DIGIT NINE
-unicode_east_asian_width(0x0CF1, 0x0CF2, 'N').	% Lo   [2] KANNADA SIGN JIHVAMULIYA..KANNADA SIGN UPADHMANIYA
-unicode_east_asian_width(0x0D02, 0x0D03, 'N').	% Mc   [2] MALAYALAM SIGN ANUSVARA..MALAYALAM SIGN VISARGA
-unicode_east_asian_width(0x0D05, 0x0D0C, 'N').	% Lo   [8] MALAYALAM LETTER A..MALAYALAM LETTER VOCALIC L
-unicode_east_asian_width(0x0D0E, 0x0D10, 'N').	% Lo   [3] MALAYALAM LETTER E..MALAYALAM LETTER AI
-unicode_east_asian_width(0x0D12, 0x0D3A, 'N').	% Lo  [41] MALAYALAM LETTER O..MALAYALAM LETTER TTTA
-unicode_east_asian_width(0x0D3D, 0x0D3D, 'N').	% Lo       MALAYALAM SIGN AVAGRAHA
-unicode_east_asian_width(0x0D3E, 0x0D40, 'N').	% Mc   [3] MALAYALAM VOWEL SIGN AA..MALAYALAM VOWEL SIGN II
-unicode_east_asian_width(0x0D41, 0x0D44, 'N').	% Mn   [4] MALAYALAM VOWEL SIGN U..MALAYALAM VOWEL SIGN VOCALIC RR
-unicode_east_asian_width(0x0D46, 0x0D48, 'N').	% Mc   [3] MALAYALAM VOWEL SIGN E..MALAYALAM VOWEL SIGN AI
-unicode_east_asian_width(0x0D4A, 0x0D4C, 'N').	% Mc   [3] MALAYALAM VOWEL SIGN O..MALAYALAM VOWEL SIGN AU
-unicode_east_asian_width(0x0D4D, 0x0D4D, 'N').	% Mn       MALAYALAM SIGN VIRAMA
-unicode_east_asian_width(0x0D4E, 0x0D4E, 'N').	% Lo       MALAYALAM LETTER DOT REPH
-unicode_east_asian_width(0x0D57, 0x0D57, 'N').	% Mc       MALAYALAM AU LENGTH MARK
-unicode_east_asian_width(0x0D60, 0x0D61, 'N').	% Lo   [2] MALAYALAM LETTER VOCALIC RR..MALAYALAM LETTER VOCALIC LL
-unicode_east_asian_width(0x0D62, 0x0D63, 'N').	% Mn   [2] MALAYALAM VOWEL SIGN VOCALIC L..MALAYALAM VOWEL SIGN VOCALIC LL
-unicode_east_asian_width(0x0D66, 0x0D6F, 'N').	% Nd  [10] MALAYALAM DIGIT ZERO..MALAYALAM DIGIT NINE
-unicode_east_asian_width(0x0D70, 0x0D75, 'N').	% No   [6] MALAYALAM NUMBER TEN..MALAYALAM FRACTION THREE QUARTERS
-unicode_east_asian_width(0x0D79, 0x0D79, 'N').	% So       MALAYALAM DATE MARK
-unicode_east_asian_width(0x0D7A, 0x0D7F, 'N').	% Lo   [6] MALAYALAM LETTER CHILLU NN..MALAYALAM LETTER CHILLU K
-unicode_east_asian_width(0x0D82, 0x0D83, 'N').	% Mc   [2] SINHALA SIGN ANUSVARAYA..SINHALA SIGN VISARGAYA
-unicode_east_asian_width(0x0D85, 0x0D96, 'N').	% Lo  [18] SINHALA LETTER AYANNA..SINHALA LETTER AUYANNA
-unicode_east_asian_width(0x0D9A, 0x0DB1, 'N').	% Lo  [24] SINHALA LETTER ALPAPRAANA KAYANNA..SINHALA LETTER DANTAJA NAYANNA
-unicode_east_asian_width(0x0DB3, 0x0DBB, 'N').	% Lo   [9] SINHALA LETTER SANYAKA DAYANNA..SINHALA LETTER RAYANNA
-unicode_east_asian_width(0x0DBD, 0x0DBD, 'N').	% Lo       SINHALA LETTER DANTAJA LAYANNA
-unicode_east_asian_width(0x0DC0, 0x0DC6, 'N').	% Lo   [7] SINHALA LETTER VAYANNA..SINHALA LETTER FAYANNA
-unicode_east_asian_width(0x0DCA, 0x0DCA, 'N').	% Mn       SINHALA SIGN AL-LAKUNA
-unicode_east_asian_width(0x0DCF, 0x0DD1, 'N').	% Mc   [3] SINHALA VOWEL SIGN AELA-PILLA..SINHALA VOWEL SIGN DIGA AEDA-PILLA
-unicode_east_asian_width(0x0DD2, 0x0DD4, 'N').	% Mn   [3] SINHALA VOWEL SIGN KETTI IS-PILLA..SINHALA VOWEL SIGN KETTI PAA-PILLA
-unicode_east_asian_width(0x0DD6, 0x0DD6, 'N').	% Mn       SINHALA VOWEL SIGN DIGA PAA-PILLA
-unicode_east_asian_width(0x0DD8, 0x0DDF, 'N').	% Mc   [8] SINHALA VOWEL SIGN GAETTA-PILLA..SINHALA VOWEL SIGN GAYANUKITTA
-unicode_east_asian_width(0x0DF2, 0x0DF3, 'N').	% Mc   [2] SINHALA VOWEL SIGN DIGA GAETTA-PILLA..SINHALA VOWEL SIGN DIGA GAYANUKITTA
-unicode_east_asian_width(0x0DF4, 0x0DF4, 'N').	% Po       SINHALA PUNCTUATION KUNDDALIYA
-unicode_east_asian_width(0x0E01, 0x0E30, 'N').	% Lo  [48] THAI CHARACTER KO KAI..THAI CHARACTER SARA A
-unicode_east_asian_width(0x0E31, 0x0E31, 'N').	% Mn       THAI CHARACTER MAI HAN-AKAT
-unicode_east_asian_width(0x0E32, 0x0E33, 'N').	% Lo   [2] THAI CHARACTER SARA AA..THAI CHARACTER SARA AM
-unicode_east_asian_width(0x0E34, 0x0E3A, 'N').	% Mn   [7] THAI CHARACTER SARA I..THAI CHARACTER PHINTHU
-unicode_east_asian_width(0x0E3F, 0x0E3F, 'N').	% Sc       THAI CURRENCY SYMBOL BAHT
-unicode_east_asian_width(0x0E40, 0x0E45, 'N').	% Lo   [6] THAI CHARACTER SARA E..THAI CHARACTER LAKKHANGYAO
-unicode_east_asian_width(0x0E46, 0x0E46, 'N').	% Lm       THAI CHARACTER MAIYAMOK
-unicode_east_asian_width(0x0E47, 0x0E4E, 'N').	% Mn   [8] THAI CHARACTER MAITAIKHU..THAI CHARACTER YAMAKKAN
-unicode_east_asian_width(0x0E4F, 0x0E4F, 'N').	% Po       THAI CHARACTER FONGMAN
-unicode_east_asian_width(0x0E50, 0x0E59, 'N').	% Nd  [10] THAI DIGIT ZERO..THAI DIGIT NINE
-unicode_east_asian_width(0x0E5A, 0x0E5B, 'N').	% Po   [2] THAI CHARACTER ANGKHANKHU..THAI CHARACTER KHOMUT
-unicode_east_asian_width(0x0E81, 0x0E82, 'N').	% Lo   [2] LAO LETTER KO..LAO LETTER KHO SUNG
-unicode_east_asian_width(0x0E84, 0x0E84, 'N').	% Lo       LAO LETTER KHO TAM
-unicode_east_asian_width(0x0E87, 0x0E88, 'N').	% Lo   [2] LAO LETTER NGO..LAO LETTER CO
-unicode_east_asian_width(0x0E8A, 0x0E8A, 'N').	% Lo       LAO LETTER SO TAM
-unicode_east_asian_width(0x0E8D, 0x0E8D, 'N').	% Lo       LAO LETTER NYO
-unicode_east_asian_width(0x0E94, 0x0E97, 'N').	% Lo   [4] LAO LETTER DO..LAO LETTER THO TAM
-unicode_east_asian_width(0x0E99, 0x0E9F, 'N').	% Lo   [7] LAO LETTER NO..LAO LETTER FO SUNG
-unicode_east_asian_width(0x0EA1, 0x0EA3, 'N').	% Lo   [3] LAO LETTER MO..LAO LETTER LO LING
-unicode_east_asian_width(0x0EA5, 0x0EA5, 'N').	% Lo       LAO LETTER LO LOOT
-unicode_east_asian_width(0x0EA7, 0x0EA7, 'N').	% Lo       LAO LETTER WO
-unicode_east_asian_width(0x0EAA, 0x0EAB, 'N').	% Lo   [2] LAO LETTER SO SUNG..LAO LETTER HO SUNG
-unicode_east_asian_width(0x0EAD, 0x0EB0, 'N').	% Lo   [4] LAO LETTER O..LAO VOWEL SIGN A
-unicode_east_asian_width(0x0EB1, 0x0EB1, 'N').	% Mn       LAO VOWEL SIGN MAI KAN
-unicode_east_asian_width(0x0EB2, 0x0EB3, 'N').	% Lo   [2] LAO VOWEL SIGN AA..LAO VOWEL SIGN AM
-unicode_east_asian_width(0x0EB4, 0x0EB9, 'N').	% Mn   [6] LAO VOWEL SIGN I..LAO VOWEL SIGN UU
-unicode_east_asian_width(0x0EBB, 0x0EBC, 'N').	% Mn   [2] LAO VOWEL SIGN MAI KON..LAO SEMIVOWEL SIGN LO
-unicode_east_asian_width(0x0EBD, 0x0EBD, 'N').	% Lo       LAO SEMIVOWEL SIGN NYO
-unicode_east_asian_width(0x0EC0, 0x0EC4, 'N').	% Lo   [5] LAO VOWEL SIGN E..LAO VOWEL SIGN AI
-unicode_east_asian_width(0x0EC6, 0x0EC6, 'N').	% Lm       LAO KO LA
-unicode_east_asian_width(0x0EC8, 0x0ECD, 'N').	% Mn   [6] LAO TONE MAI EK..LAO NIGGAHITA
-unicode_east_asian_width(0x0ED0, 0x0ED9, 'N').	% Nd  [10] LAO DIGIT ZERO..LAO DIGIT NINE
-unicode_east_asian_width(0x0EDC, 0x0EDF, 'N').	% Lo   [4] LAO HO NO..LAO LETTER KHMU NYO
-unicode_east_asian_width(0x0F00, 0x0F00, 'N').	% Lo       TIBETAN SYLLABLE OM
-unicode_east_asian_width(0x0F01, 0x0F03, 'N').	% So   [3] TIBETAN MARK GTER YIG MGO TRUNCATED A..TIBETAN MARK GTER YIG MGO -UM GTER TSHEG MA
-unicode_east_asian_width(0x0F04, 0x0F12, 'N').	% Po  [15] TIBETAN MARK INITIAL YIG MGO MDUN MA..TIBETAN MARK RGYA GRAM SHAD
-unicode_east_asian_width(0x0F13, 0x0F13, 'N').	% So       TIBETAN MARK CARET -DZUD RTAGS ME LONG CAN
-unicode_east_asian_width(0x0F14, 0x0F14, 'N').	% Po       TIBETAN MARK GTER TSHEG
-unicode_east_asian_width(0x0F15, 0x0F17, 'N').	% So   [3] TIBETAN LOGOTYPE SIGN CHAD RTAGS..TIBETAN ASTROLOGICAL SIGN SGRA GCAN -CHAR RTAGS
-unicode_east_asian_width(0x0F18, 0x0F19, 'N').	% Mn   [2] TIBETAN ASTROLOGICAL SIGN -KHYUD PA..TIBETAN ASTROLOGICAL SIGN SDONG TSHUGS
-unicode_east_asian_width(0x0F1A, 0x0F1F, 'N').	% So   [6] TIBETAN SIGN RDEL DKAR GCIG..TIBETAN SIGN RDEL DKAR RDEL NAG
-unicode_east_asian_width(0x0F20, 0x0F29, 'N').	% Nd  [10] TIBETAN DIGIT ZERO..TIBETAN DIGIT NINE
-unicode_east_asian_width(0x0F2A, 0x0F33, 'N').	% No  [10] TIBETAN DIGIT HALF ONE..TIBETAN DIGIT HALF ZERO
-unicode_east_asian_width(0x0F34, 0x0F34, 'N').	% So       TIBETAN MARK BSDUS RTAGS
-unicode_east_asian_width(0x0F35, 0x0F35, 'N').	% Mn       TIBETAN MARK NGAS BZUNG NYI ZLA
-unicode_east_asian_width(0x0F36, 0x0F36, 'N').	% So       TIBETAN MARK CARET -DZUD RTAGS BZHI MIG CAN
-unicode_east_asian_width(0x0F37, 0x0F37, 'N').	% Mn       TIBETAN MARK NGAS BZUNG SGOR RTAGS
-unicode_east_asian_width(0x0F38, 0x0F38, 'N').	% So       TIBETAN MARK CHE MGO
-unicode_east_asian_width(0x0F39, 0x0F39, 'N').	% Mn       TIBETAN MARK TSA -PHRU
-unicode_east_asian_width(0x0F3A, 0x0F3A, 'N').	% Ps       TIBETAN MARK GUG RTAGS GYON
-unicode_east_asian_width(0x0F3B, 0x0F3B, 'N').	% Pe       TIBETAN MARK GUG RTAGS GYAS
-unicode_east_asian_width(0x0F3C, 0x0F3C, 'N').	% Ps       TIBETAN MARK ANG KHANG GYON
-unicode_east_asian_width(0x0F3D, 0x0F3D, 'N').	% Pe       TIBETAN MARK ANG KHANG GYAS
-unicode_east_asian_width(0x0F3E, 0x0F3F, 'N').	% Mc   [2] TIBETAN SIGN YAR TSHES..TIBETAN SIGN MAR TSHES
-unicode_east_asian_width(0x0F40, 0x0F47, 'N').	% Lo   [8] TIBETAN LETTER KA..TIBETAN LETTER JA
-unicode_east_asian_width(0x0F49, 0x0F6C, 'N').	% Lo  [36] TIBETAN LETTER NYA..TIBETAN LETTER RRA
-unicode_east_asian_width(0x0F71, 0x0F7E, 'N').	% Mn  [14] TIBETAN VOWEL SIGN AA..TIBETAN SIGN RJES SU NGA RO
-unicode_east_asian_width(0x0F7F, 0x0F7F, 'N').	% Mc       TIBETAN SIGN RNAM BCAD
-unicode_east_asian_width(0x0F80, 0x0F84, 'N').	% Mn   [5] TIBETAN VOWEL SIGN REVERSED I..TIBETAN MARK HALANTA
-unicode_east_asian_width(0x0F85, 0x0F85, 'N').	% Po       TIBETAN MARK PALUTA
-unicode_east_asian_width(0x0F86, 0x0F87, 'N').	% Mn   [2] TIBETAN SIGN LCI RTAGS..TIBETAN SIGN YANG RTAGS
-unicode_east_asian_width(0x0F88, 0x0F8C, 'N').	% Lo   [5] TIBETAN SIGN LCE TSA CAN..TIBETAN SIGN INVERTED MCHU CAN
-unicode_east_asian_width(0x0F8D, 0x0F97, 'N').	% Mn  [11] TIBETAN SUBJOINED SIGN LCE TSA CAN..TIBETAN SUBJOINED LETTER JA
-unicode_east_asian_width(0x0F99, 0x0FBC, 'N').	% Mn  [36] TIBETAN SUBJOINED LETTER NYA..TIBETAN SUBJOINED LETTER FIXED-FORM RA
-unicode_east_asian_width(0x0FBE, 0x0FC5, 'N').	% So   [8] TIBETAN KU RU KHA..TIBETAN SYMBOL RDO RJE
-unicode_east_asian_width(0x0FC6, 0x0FC6, 'N').	% Mn       TIBETAN SYMBOL PADMA GDAN
-unicode_east_asian_width(0x0FC7, 0x0FCC, 'N').	% So   [6] TIBETAN SYMBOL RDO RJE RGYA GRAM..TIBETAN SYMBOL NOR BU BZHI -KHYIL
-unicode_east_asian_width(0x0FCE, 0x0FCF, 'N').	% So   [2] TIBETAN SIGN RDEL NAG RDEL DKAR..TIBETAN SIGN RDEL NAG GSUM
-unicode_east_asian_width(0x0FD0, 0x0FD4, 'N').	% Po   [5] TIBETAN MARK BSKA- SHOG GI MGO RGYAN..TIBETAN MARK CLOSING BRDA RNYING YIG MGO SGAB MA
-unicode_east_asian_width(0x0FD5, 0x0FD8, 'N').	% So   [4] RIGHT-FACING SVASTI SIGN..LEFT-FACING SVASTI SIGN WITH DOTS
-unicode_east_asian_width(0x0FD9, 0x0FDA, 'N').	% Po   [2] TIBETAN MARK LEADING MCHAN RTAGS..TIBETAN MARK TRAILING MCHAN RTAGS
-unicode_east_asian_width(0x1000, 0x102A, 'N').	% Lo  [43] MYANMAR LETTER KA..MYANMAR LETTER AU
-unicode_east_asian_width(0x102B, 0x102C, 'N').	% Mc   [2] MYANMAR VOWEL SIGN TALL AA..MYANMAR VOWEL SIGN AA
-unicode_east_asian_width(0x102D, 0x1030, 'N').	% Mn   [4] MYANMAR VOWEL SIGN I..MYANMAR VOWEL SIGN UU
-unicode_east_asian_width(0x1031, 0x1031, 'N').	% Mc       MYANMAR VOWEL SIGN E
-unicode_east_asian_width(0x1032, 0x1037, 'N').	% Mn   [6] MYANMAR VOWEL SIGN AI..MYANMAR SIGN DOT BELOW
-unicode_east_asian_width(0x1038, 0x1038, 'N').	% Mc       MYANMAR SIGN VISARGA
-unicode_east_asian_width(0x1039, 0x103A, 'N').	% Mn   [2] MYANMAR SIGN VIRAMA..MYANMAR SIGN ASAT
-unicode_east_asian_width(0x103B, 0x103C, 'N').	% Mc   [2] MYANMAR CONSONANT SIGN MEDIAL YA..MYANMAR CONSONANT SIGN MEDIAL RA
-unicode_east_asian_width(0x103D, 0x103E, 'N').	% Mn   [2] MYANMAR CONSONANT SIGN MEDIAL WA..MYANMAR CONSONANT SIGN MEDIAL HA
-unicode_east_asian_width(0x103F, 0x103F, 'N').	% Lo       MYANMAR LETTER GREAT SA
-unicode_east_asian_width(0x1040, 0x1049, 'N').	% Nd  [10] MYANMAR DIGIT ZERO..MYANMAR DIGIT NINE
-unicode_east_asian_width(0x104A, 0x104F, 'N').	% Po   [6] MYANMAR SIGN LITTLE SECTION..MYANMAR SYMBOL GENITIVE
-unicode_east_asian_width(0x1050, 0x1055, 'N').	% Lo   [6] MYANMAR LETTER SHA..MYANMAR LETTER VOCALIC LL
-unicode_east_asian_width(0x1056, 0x1057, 'N').	% Mc   [2] MYANMAR VOWEL SIGN VOCALIC R..MYANMAR VOWEL SIGN VOCALIC RR
-unicode_east_asian_width(0x1058, 0x1059, 'N').	% Mn   [2] MYANMAR VOWEL SIGN VOCALIC L..MYANMAR VOWEL SIGN VOCALIC LL
-unicode_east_asian_width(0x105A, 0x105D, 'N').	% Lo   [4] MYANMAR LETTER MON NGA..MYANMAR LETTER MON BBE
-unicode_east_asian_width(0x105E, 0x1060, 'N').	% Mn   [3] MYANMAR CONSONANT SIGN MON MEDIAL NA..MYANMAR CONSONANT SIGN MON MEDIAL LA
-unicode_east_asian_width(0x1061, 0x1061, 'N').	% Lo       MYANMAR LETTER SGAW KAREN SHA
-unicode_east_asian_width(0x1062, 0x1064, 'N').	% Mc   [3] MYANMAR VOWEL SIGN SGAW KAREN EU..MYANMAR TONE MARK SGAW KAREN KE PHO
-unicode_east_asian_width(0x1065, 0x1066, 'N').	% Lo   [2] MYANMAR LETTER WESTERN PWO KAREN THA..MYANMAR LETTER WESTERN PWO KAREN PWA
-unicode_east_asian_width(0x1067, 0x106D, 'N').	% Mc   [7] MYANMAR VOWEL SIGN WESTERN PWO KAREN EU..MYANMAR SIGN WESTERN PWO KAREN TONE-5
-unicode_east_asian_width(0x106E, 0x1070, 'N').	% Lo   [3] MYANMAR LETTER EASTERN PWO KAREN NNA..MYANMAR LETTER EASTERN PWO KAREN GHWA
-unicode_east_asian_width(0x1071, 0x1074, 'N').	% Mn   [4] MYANMAR VOWEL SIGN GEBA KAREN I..MYANMAR VOWEL SIGN KAYAH EE
-unicode_east_asian_width(0x1075, 0x1081, 'N').	% Lo  [13] MYANMAR LETTER SHAN KA..MYANMAR LETTER SHAN HA
-unicode_east_asian_width(0x1082, 0x1082, 'N').	% Mn       MYANMAR CONSONANT SIGN SHAN MEDIAL WA
-unicode_east_asian_width(0x1083, 0x1084, 'N').	% Mc   [2] MYANMAR VOWEL SIGN SHAN AA..MYANMAR VOWEL SIGN SHAN E
-unicode_east_asian_width(0x1085, 0x1086, 'N').	% Mn   [2] MYANMAR VOWEL SIGN SHAN E ABOVE..MYANMAR VOWEL SIGN SHAN FINAL Y
-unicode_east_asian_width(0x1087, 0x108C, 'N').	% Mc   [6] MYANMAR SIGN SHAN TONE-2..MYANMAR SIGN SHAN COUNCIL TONE-3
-unicode_east_asian_width(0x108D, 0x108D, 'N').	% Mn       MYANMAR SIGN SHAN COUNCIL EMPHATIC TONE
-unicode_east_asian_width(0x108E, 0x108E, 'N').	% Lo       MYANMAR LETTER RUMAI PALAUNG FA
-unicode_east_asian_width(0x108F, 0x108F, 'N').	% Mc       MYANMAR SIGN RUMAI PALAUNG TONE-5
-unicode_east_asian_width(0x1090, 0x1099, 'N').	% Nd  [10] MYANMAR SHAN DIGIT ZERO..MYANMAR SHAN DIGIT NINE
-unicode_east_asian_width(0x109A, 0x109C, 'N').	% Mc   [3] MYANMAR SIGN KHAMTI TONE-1..MYANMAR VOWEL SIGN AITON A
-unicode_east_asian_width(0x109D, 0x109D, 'N').	% Mn       MYANMAR VOWEL SIGN AITON AI
-unicode_east_asian_width(0x109E, 0x109F, 'N').	% So   [2] MYANMAR SYMBOL SHAN ONE..MYANMAR SYMBOL SHAN EXCLAMATION
-unicode_east_asian_width(0x10A0, 0x10C5, 'N').	% L&  [38] GEORGIAN CAPITAL LETTER AN..GEORGIAN CAPITAL LETTER HOE
-unicode_east_asian_width(0x10C7, 0x10C7, 'N').	% L&       GEORGIAN CAPITAL LETTER YN
-unicode_east_asian_width(0x10CD, 0x10CD, 'N').	% L&       GEORGIAN CAPITAL LETTER AEN
-unicode_east_asian_width(0x10D0, 0x10FA, 'N').	% Lo  [43] GEORGIAN LETTER AN..GEORGIAN LETTER AIN
-unicode_east_asian_width(0x10FB, 0x10FB, 'N').	% Po       GEORGIAN PARAGRAPH SEPARATOR
-unicode_east_asian_width(0x10FC, 0x10FC, 'N').	% Lm       MODIFIER LETTER GEORGIAN NAR
-unicode_east_asian_width(0x10FD, 0x10FF, 'N').	% Lo   [3] GEORGIAN LETTER AEN..GEORGIAN LETTER LABIAL SIGN
-unicode_east_asian_width(0x1160, 0x11A2, 'N').	% Lo  [67] HANGUL JUNGSEONG FILLER..HANGUL JUNGSEONG SSANGARAEA
-unicode_east_asian_width(0x11A8, 0x11F9, 'N').	% Lo  [82] HANGUL JONGSEONG KIYEOK..HANGUL JONGSEONG YEORINHIEUH
-unicode_east_asian_width(0x1200, 0x1248, 'N').	% Lo  [73] ETHIOPIC SYLLABLE HA..ETHIOPIC SYLLABLE QWA
-unicode_east_asian_width(0x124A, 0x124D, 'N').	% Lo   [4] ETHIOPIC SYLLABLE QWI..ETHIOPIC SYLLABLE QWE
-unicode_east_asian_width(0x1250, 0x1256, 'N').	% Lo   [7] ETHIOPIC SYLLABLE QHA..ETHIOPIC SYLLABLE QHO
-unicode_east_asian_width(0x1258, 0x1258, 'N').	% Lo       ETHIOPIC SYLLABLE QHWA
-unicode_east_asian_width(0x125A, 0x125D, 'N').	% Lo   [4] ETHIOPIC SYLLABLE QHWI..ETHIOPIC SYLLABLE QHWE
-unicode_east_asian_width(0x1260, 0x1288, 'N').	% Lo  [41] ETHIOPIC SYLLABLE BA..ETHIOPIC SYLLABLE XWA
-unicode_east_asian_width(0x128A, 0x128D, 'N').	% Lo   [4] ETHIOPIC SYLLABLE XWI..ETHIOPIC SYLLABLE XWE
-unicode_east_asian_width(0x1290, 0x12B0, 'N').	% Lo  [33] ETHIOPIC SYLLABLE NA..ETHIOPIC SYLLABLE KWA
-unicode_east_asian_width(0x12B2, 0x12B5, 'N').	% Lo   [4] ETHIOPIC SYLLABLE KWI..ETHIOPIC SYLLABLE KWE
-unicode_east_asian_width(0x12B8, 0x12BE, 'N').	% Lo   [7] ETHIOPIC SYLLABLE KXA..ETHIOPIC SYLLABLE KXO
-unicode_east_asian_width(0x12C0, 0x12C0, 'N').	% Lo       ETHIOPIC SYLLABLE KXWA
-unicode_east_asian_width(0x12C2, 0x12C5, 'N').	% Lo   [4] ETHIOPIC SYLLABLE KXWI..ETHIOPIC SYLLABLE KXWE
-unicode_east_asian_width(0x12C8, 0x12D6, 'N').	% Lo  [15] ETHIOPIC SYLLABLE WA..ETHIOPIC SYLLABLE PHARYNGEAL O
-unicode_east_asian_width(0x12D8, 0x1310, 'N').	% Lo  [57] ETHIOPIC SYLLABLE ZA..ETHIOPIC SYLLABLE GWA
-unicode_east_asian_width(0x1312, 0x1315, 'N').	% Lo   [4] ETHIOPIC SYLLABLE GWI..ETHIOPIC SYLLABLE GWE
-unicode_east_asian_width(0x1318, 0x135A, 'N').	% Lo  [67] ETHIOPIC SYLLABLE GGA..ETHIOPIC SYLLABLE FYA
-unicode_east_asian_width(0x135D, 0x135F, 'N').	% Mn   [3] ETHIOPIC COMBINING GEMINATION AND VOWEL LENGTH MARK..ETHIOPIC COMBINING GEMINATION MARK
-unicode_east_asian_width(0x1360, 0x1368, 'N').	% Po   [9] ETHIOPIC SECTION MARK..ETHIOPIC PARAGRAPH SEPARATOR
-unicode_east_asian_width(0x1369, 0x137C, 'N').	% No  [20] ETHIOPIC DIGIT ONE..ETHIOPIC NUMBER TEN THOUSAND
-unicode_east_asian_width(0x1380, 0x138F, 'N').	% Lo  [16] ETHIOPIC SYLLABLE SEBATBEIT MWA..ETHIOPIC SYLLABLE PWE
-unicode_east_asian_width(0x1390, 0x1399, 'N').	% So  [10] ETHIOPIC TONAL MARK YIZET..ETHIOPIC TONAL MARK KURT
-unicode_east_asian_width(0x13A0, 0x13F4, 'N').	% Lo  [85] CHEROKEE LETTER A..CHEROKEE LETTER YV
-unicode_east_asian_width(0x1400, 0x1400, 'N').	% Pd       CANADIAN SYLLABICS HYPHEN
-unicode_east_asian_width(0x1401, 0x166C, 'N').	% Lo [620] CANADIAN SYLLABICS E..CANADIAN SYLLABICS CARRIER TTSA
-unicode_east_asian_width(0x166D, 0x166E, 'N').	% Po   [2] CANADIAN SYLLABICS CHI SIGN..CANADIAN SYLLABICS FULL STOP
-unicode_east_asian_width(0x166F, 0x167F, 'N').	% Lo  [17] CANADIAN SYLLABICS QAI..CANADIAN SYLLABICS BLACKFOOT W
-unicode_east_asian_width(0x1680, 0x1680, 'N').	% Zs       OGHAM SPACE MARK
-unicode_east_asian_width(0x1681, 0x169A, 'N').	% Lo  [26] OGHAM LETTER BEITH..OGHAM LETTER PEITH
-unicode_east_asian_width(0x169B, 0x169B, 'N').	% Ps       OGHAM FEATHER MARK
-unicode_east_asian_width(0x169C, 0x169C, 'N').	% Pe       OGHAM REVERSED FEATHER MARK
-unicode_east_asian_width(0x16A0, 0x16EA, 'N').	% Lo  [75] RUNIC LETTER FEHU FEOH FE F..RUNIC LETTER X
-unicode_east_asian_width(0x16EB, 0x16ED, 'N').	% Po   [3] RUNIC SINGLE PUNCTUATION..RUNIC CROSS PUNCTUATION
-unicode_east_asian_width(0x16EE, 0x16F0, 'N').	% Nl   [3] RUNIC ARLAUG SYMBOL..RUNIC BELGTHOR SYMBOL
-unicode_east_asian_width(0x1700, 0x170C, 'N').	% Lo  [13] TAGALOG LETTER A..TAGALOG LETTER YA
-unicode_east_asian_width(0x170E, 0x1711, 'N').	% Lo   [4] TAGALOG LETTER LA..TAGALOG LETTER HA
-unicode_east_asian_width(0x1712, 0x1714, 'N').	% Mn   [3] TAGALOG VOWEL SIGN I..TAGALOG SIGN VIRAMA
-unicode_east_asian_width(0x1720, 0x1731, 'N').	% Lo  [18] HANUNOO LETTER A..HANUNOO LETTER HA
-unicode_east_asian_width(0x1732, 0x1734, 'N').	% Mn   [3] HANUNOO VOWEL SIGN I..HANUNOO SIGN PAMUDPOD
-unicode_east_asian_width(0x1735, 0x1736, 'N').	% Po   [2] PHILIPPINE SINGLE PUNCTUATION..PHILIPPINE DOUBLE PUNCTUATION
-unicode_east_asian_width(0x1740, 0x1751, 'N').	% Lo  [18] BUHID LETTER A..BUHID LETTER HA
-unicode_east_asian_width(0x1752, 0x1753, 'N').	% Mn   [2] BUHID VOWEL SIGN I..BUHID VOWEL SIGN U
-unicode_east_asian_width(0x1760, 0x176C, 'N').	% Lo  [13] TAGBANWA LETTER A..TAGBANWA LETTER YA
-unicode_east_asian_width(0x176E, 0x1770, 'N').	% Lo   [3] TAGBANWA LETTER LA..TAGBANWA LETTER SA
-unicode_east_asian_width(0x1772, 0x1773, 'N').	% Mn   [2] TAGBANWA VOWEL SIGN I..TAGBANWA VOWEL SIGN U
-unicode_east_asian_width(0x1780, 0x17B3, 'N').	% Lo  [52] KHMER LETTER KA..KHMER INDEPENDENT VOWEL QAU
-unicode_east_asian_width(0x17B4, 0x17B5, 'N').	% Mn   [2] KHMER VOWEL INHERENT AQ..KHMER VOWEL INHERENT AA
-unicode_east_asian_width(0x17B6, 0x17B6, 'N').	% Mc       KHMER VOWEL SIGN AA
-unicode_east_asian_width(0x17B7, 0x17BD, 'N').	% Mn   [7] KHMER VOWEL SIGN I..KHMER VOWEL SIGN UA
-unicode_east_asian_width(0x17BE, 0x17C5, 'N').	% Mc   [8] KHMER VOWEL SIGN OE..KHMER VOWEL SIGN AU
-unicode_east_asian_width(0x17C6, 0x17C6, 'N').	% Mn       KHMER SIGN NIKAHIT
-unicode_east_asian_width(0x17C7, 0x17C8, 'N').	% Mc   [2] KHMER SIGN REAHMUK..KHMER SIGN YUUKALEAPINTU
-unicode_east_asian_width(0x17C9, 0x17D3, 'N').	% Mn  [11] KHMER SIGN MUUSIKATOAN..KHMER SIGN BATHAMASAT
-unicode_east_asian_width(0x17D4, 0x17D6, 'N').	% Po   [3] KHMER SIGN KHAN..KHMER SIGN CAMNUC PII KUUH
-unicode_east_asian_width(0x17D7, 0x17D7, 'N').	% Lm       KHMER SIGN LEK TOO
-unicode_east_asian_width(0x17D8, 0x17DA, 'N').	% Po   [3] KHMER SIGN BEYYAL..KHMER SIGN KOOMUUT
-unicode_east_asian_width(0x17DB, 0x17DB, 'N').	% Sc       KHMER CURRENCY SYMBOL RIEL
-unicode_east_asian_width(0x17DC, 0x17DC, 'N').	% Lo       KHMER SIGN AVAKRAHASANYA
-unicode_east_asian_width(0x17DD, 0x17DD, 'N').	% Mn       KHMER SIGN ATTHACAN
-unicode_east_asian_width(0x17E0, 0x17E9, 'N').	% Nd  [10] KHMER DIGIT ZERO..KHMER DIGIT NINE
-unicode_east_asian_width(0x17F0, 0x17F9, 'N').	% No  [10] KHMER SYMBOL LEK ATTAK SON..KHMER SYMBOL LEK ATTAK PRAM-BUON
-unicode_east_asian_width(0x1800, 0x1805, 'N').	% Po   [6] MONGOLIAN BIRGA..MONGOLIAN FOUR DOTS
-unicode_east_asian_width(0x1806, 0x1806, 'N').	% Pd       MONGOLIAN TODO SOFT HYPHEN
-unicode_east_asian_width(0x1807, 0x180A, 'N').	% Po   [4] MONGOLIAN SIBE SYLLABLE BOUNDARY MARKER..MONGOLIAN NIRUGU
-unicode_east_asian_width(0x180B, 0x180D, 'N').	% Mn   [3] MONGOLIAN FREE VARIATION SELECTOR ONE..MONGOLIAN FREE VARIATION SELECTOR THREE
-unicode_east_asian_width(0x180E, 0x180E, 'N').	% Zs       MONGOLIAN VOWEL SEPARATOR
-unicode_east_asian_width(0x1810, 0x1819, 'N').	% Nd  [10] MONGOLIAN DIGIT ZERO..MONGOLIAN DIGIT NINE
-unicode_east_asian_width(0x1820, 0x1842, 'N').	% Lo  [35] MONGOLIAN LETTER A..MONGOLIAN LETTER CHI
-unicode_east_asian_width(0x1843, 0x1843, 'N').	% Lm       MONGOLIAN LETTER TODO LONG VOWEL SIGN
-unicode_east_asian_width(0x1844, 0x1877, 'N').	% Lo  [52] MONGOLIAN LETTER TODO E..MONGOLIAN LETTER MANCHU ZHA
-unicode_east_asian_width(0x1880, 0x18A8, 'N').	% Lo  [41] MONGOLIAN LETTER ALI GALI ANUSVARA ONE..MONGOLIAN LETTER MANCHU ALI GALI BHA
-unicode_east_asian_width(0x18A9, 0x18A9, 'N').	% Mn       MONGOLIAN LETTER ALI GALI DAGALGA
-unicode_east_asian_width(0x18AA, 0x18AA, 'N').	% Lo       MONGOLIAN LETTER MANCHU ALI GALI LHA
-unicode_east_asian_width(0x18B0, 0x18F5, 'N').	% Lo  [70] CANADIAN SYLLABICS OY..CANADIAN SYLLABICS CARRIER DENTAL S
-unicode_east_asian_width(0x1900, 0x191C, 'N').	% Lo  [29] LIMBU VOWEL-CARRIER LETTER..LIMBU LETTER HA
-unicode_east_asian_width(0x1920, 0x1922, 'N').	% Mn   [3] LIMBU VOWEL SIGN A..LIMBU VOWEL SIGN U
-unicode_east_asian_width(0x1923, 0x1926, 'N').	% Mc   [4] LIMBU VOWEL SIGN EE..LIMBU VOWEL SIGN AU
-unicode_east_asian_width(0x1927, 0x1928, 'N').	% Mn   [2] LIMBU VOWEL SIGN E..LIMBU VOWEL SIGN O
-unicode_east_asian_width(0x1929, 0x192B, 'N').	% Mc   [3] LIMBU SUBJOINED LETTER YA..LIMBU SUBJOINED LETTER WA
-unicode_east_asian_width(0x1930, 0x1931, 'N').	% Mc   [2] LIMBU SMALL LETTER KA..LIMBU SMALL LETTER NGA
-unicode_east_asian_width(0x1932, 0x1932, 'N').	% Mn       LIMBU SMALL LETTER ANUSVARA
-unicode_east_asian_width(0x1933, 0x1938, 'N').	% Mc   [6] LIMBU SMALL LETTER TA..LIMBU SMALL LETTER LA
-unicode_east_asian_width(0x1939, 0x193B, 'N').	% Mn   [3] LIMBU SIGN MUKPHRENG..LIMBU SIGN SA-I
-unicode_east_asian_width(0x1940, 0x1940, 'N').	% So       LIMBU SIGN LOO
-unicode_east_asian_width(0x1944, 0x1945, 'N').	% Po   [2] LIMBU EXCLAMATION MARK..LIMBU QUESTION MARK
-unicode_east_asian_width(0x1946, 0x194F, 'N').	% Nd  [10] LIMBU DIGIT ZERO..LIMBU DIGIT NINE
-unicode_east_asian_width(0x1950, 0x196D, 'N').	% Lo  [30] TAI LE LETTER KA..TAI LE LETTER AI
-unicode_east_asian_width(0x1970, 0x1974, 'N').	% Lo   [5] TAI LE LETTER TONE-2..TAI LE LETTER TONE-6
-unicode_east_asian_width(0x1980, 0x19AB, 'N').	% Lo  [44] NEW TAI LUE LETTER HIGH QA..NEW TAI LUE LETTER LOW SUA
-unicode_east_asian_width(0x19B0, 0x19C0, 'N').	% Mc  [17] NEW TAI LUE VOWEL SIGN VOWEL SHORTENER..NEW TAI LUE VOWEL SIGN IY
-unicode_east_asian_width(0x19C1, 0x19C7, 'N').	% Lo   [7] NEW TAI LUE LETTER FINAL V..NEW TAI LUE LETTER FINAL B
-unicode_east_asian_width(0x19C8, 0x19C9, 'N').	% Mc   [2] NEW TAI LUE TONE MARK-1..NEW TAI LUE TONE MARK-2
-unicode_east_asian_width(0x19D0, 0x19D9, 'N').	% Nd  [10] NEW TAI LUE DIGIT ZERO..NEW TAI LUE DIGIT NINE
-unicode_east_asian_width(0x19DA, 0x19DA, 'N').	% No       NEW TAI LUE THAM DIGIT ONE
-unicode_east_asian_width(0x19DE, 0x19FF, 'N').	% So  [34] NEW TAI LUE SIGN LAE..KHMER SYMBOL DAP-PRAM ROC
-unicode_east_asian_width(0x1A00, 0x1A16, 'N').	% Lo  [23] BUGINESE LETTER KA..BUGINESE LETTER HA
-unicode_east_asian_width(0x1A17, 0x1A18, 'N').	% Mn   [2] BUGINESE VOWEL SIGN I..BUGINESE VOWEL SIGN U
-unicode_east_asian_width(0x1A19, 0x1A1B, 'N').	% Mc   [3] BUGINESE VOWEL SIGN E..BUGINESE VOWEL SIGN AE
-unicode_east_asian_width(0x1A1E, 0x1A1F, 'N').	% Po   [2] BUGINESE PALLAWA..BUGINESE END OF SECTION
-unicode_east_asian_width(0x1A20, 0x1A54, 'N').	% Lo  [53] TAI THAM LETTER HIGH KA..TAI THAM LETTER GREAT SA
-unicode_east_asian_width(0x1A55, 0x1A55, 'N').	% Mc       TAI THAM CONSONANT SIGN MEDIAL RA
-unicode_east_asian_width(0x1A56, 0x1A56, 'N').	% Mn       TAI THAM CONSONANT SIGN MEDIAL LA
-unicode_east_asian_width(0x1A57, 0x1A57, 'N').	% Mc       TAI THAM CONSONANT SIGN LA TANG LAI
-unicode_east_asian_width(0x1A58, 0x1A5E, 'N').	% Mn   [7] TAI THAM SIGN MAI KANG LAI..TAI THAM CONSONANT SIGN SA
-unicode_east_asian_width(0x1A60, 0x1A60, 'N').	% Mn       TAI THAM SIGN SAKOT
-unicode_east_asian_width(0x1A61, 0x1A61, 'N').	% Mc       TAI THAM VOWEL SIGN A
-unicode_east_asian_width(0x1A62, 0x1A62, 'N').	% Mn       TAI THAM VOWEL SIGN MAI SAT
-unicode_east_asian_width(0x1A63, 0x1A64, 'N').	% Mc   [2] TAI THAM VOWEL SIGN AA..TAI THAM VOWEL SIGN TALL AA
-unicode_east_asian_width(0x1A65, 0x1A6C, 'N').	% Mn   [8] TAI THAM VOWEL SIGN I..TAI THAM VOWEL SIGN OA BELOW
-unicode_east_asian_width(0x1A6D, 0x1A72, 'N').	% Mc   [6] TAI THAM VOWEL SIGN OY..TAI THAM VOWEL SIGN THAM AI
-unicode_east_asian_width(0x1A73, 0x1A7C, 'N').	% Mn  [10] TAI THAM VOWEL SIGN OA ABOVE..TAI THAM SIGN KHUEN-LUE KARAN
-unicode_east_asian_width(0x1A7F, 0x1A7F, 'N').	% Mn       TAI THAM COMBINING CRYPTOGRAMMIC DOT
-unicode_east_asian_width(0x1A80, 0x1A89, 'N').	% Nd  [10] TAI THAM HORA DIGIT ZERO..TAI THAM HORA DIGIT NINE
-unicode_east_asian_width(0x1A90, 0x1A99, 'N').	% Nd  [10] TAI THAM THAM DIGIT ZERO..TAI THAM THAM DIGIT NINE
-unicode_east_asian_width(0x1AA0, 0x1AA6, 'N').	% Po   [7] TAI THAM SIGN WIANG..TAI THAM SIGN REVERSED ROTATED RANA
-unicode_east_asian_width(0x1AA7, 0x1AA7, 'N').	% Lm       TAI THAM SIGN MAI YAMOK
-unicode_east_asian_width(0x1AA8, 0x1AAD, 'N').	% Po   [6] TAI THAM SIGN KAAN..TAI THAM SIGN CAANG
-unicode_east_asian_width(0x1B00, 0x1B03, 'N').	% Mn   [4] BALINESE SIGN ULU RICEM..BALINESE SIGN SURANG
-unicode_east_asian_width(0x1B04, 0x1B04, 'N').	% Mc       BALINESE SIGN BISAH
-unicode_east_asian_width(0x1B05, 0x1B33, 'N').	% Lo  [47] BALINESE LETTER AKARA..BALINESE LETTER HA
-unicode_east_asian_width(0x1B34, 0x1B34, 'N').	% Mn       BALINESE SIGN REREKAN
-unicode_east_asian_width(0x1B35, 0x1B35, 'N').	% Mc       BALINESE VOWEL SIGN TEDUNG
-unicode_east_asian_width(0x1B36, 0x1B3A, 'N').	% Mn   [5] BALINESE VOWEL SIGN ULU..BALINESE VOWEL SIGN RA REPA
-unicode_east_asian_width(0x1B3B, 0x1B3B, 'N').	% Mc       BALINESE VOWEL SIGN RA REPA TEDUNG
-unicode_east_asian_width(0x1B3C, 0x1B3C, 'N').	% Mn       BALINESE VOWEL SIGN LA LENGA
-unicode_east_asian_width(0x1B3D, 0x1B41, 'N').	% Mc   [5] BALINESE VOWEL SIGN LA LENGA TEDUNG..BALINESE VOWEL SIGN TALING REPA TEDUNG
-unicode_east_asian_width(0x1B42, 0x1B42, 'N').	% Mn       BALINESE VOWEL SIGN PEPET
-unicode_east_asian_width(0x1B43, 0x1B44, 'N').	% Mc   [2] BALINESE VOWEL SIGN PEPET TEDUNG..BALINESE ADEG ADEG
-unicode_east_asian_width(0x1B45, 0x1B4B, 'N').	% Lo   [7] BALINESE LETTER KAF SASAK..BALINESE LETTER ASYURA SASAK
-unicode_east_asian_width(0x1B50, 0x1B59, 'N').	% Nd  [10] BALINESE DIGIT ZERO..BALINESE DIGIT NINE
-unicode_east_asian_width(0x1B5A, 0x1B60, 'N').	% Po   [7] BALINESE PANTI..BALINESE PAMENENG
-unicode_east_asian_width(0x1B61, 0x1B6A, 'N').	% So  [10] BALINESE MUSICAL SYMBOL DONG..BALINESE MUSICAL SYMBOL DANG GEDE
-unicode_east_asian_width(0x1B6B, 0x1B73, 'N').	% Mn   [9] BALINESE MUSICAL SYMBOL COMBINING TEGEH..BALINESE MUSICAL SYMBOL COMBINING GONG
-unicode_east_asian_width(0x1B74, 0x1B7C, 'N').	% So   [9] BALINESE MUSICAL SYMBOL RIGHT-HAND OPEN DUG..BALINESE MUSICAL SYMBOL LEFT-HAND OPEN PING
-unicode_east_asian_width(0x1B80, 0x1B81, 'N').	% Mn   [2] SUNDANESE SIGN PANYECEK..SUNDANESE SIGN PANGLAYAR
-unicode_east_asian_width(0x1B82, 0x1B82, 'N').	% Mc       SUNDANESE SIGN PANGWISAD
-unicode_east_asian_width(0x1B83, 0x1BA0, 'N').	% Lo  [30] SUNDANESE LETTER A..SUNDANESE LETTER HA
-unicode_east_asian_width(0x1BA1, 0x1BA1, 'N').	% Mc       SUNDANESE CONSONANT SIGN PAMINGKAL
-unicode_east_asian_width(0x1BA2, 0x1BA5, 'N').	% Mn   [4] SUNDANESE CONSONANT SIGN PANYAKRA..SUNDANESE VOWEL SIGN PANYUKU
-unicode_east_asian_width(0x1BA6, 0x1BA7, 'N').	% Mc   [2] SUNDANESE VOWEL SIGN PANAELAENG..SUNDANESE VOWEL SIGN PANOLONG
-unicode_east_asian_width(0x1BA8, 0x1BA9, 'N').	% Mn   [2] SUNDANESE VOWEL SIGN PAMEPET..SUNDANESE VOWEL SIGN PANEULEUNG
-unicode_east_asian_width(0x1BAA, 0x1BAA, 'N').	% Mc       SUNDANESE SIGN PAMAAEH
-unicode_east_asian_width(0x1BAB, 0x1BAB, 'N').	% Mn       SUNDANESE SIGN VIRAMA
-unicode_east_asian_width(0x1BAC, 0x1BAD, 'N').	% Mc   [2] SUNDANESE CONSONANT SIGN PASANGAN MA..SUNDANESE CONSONANT SIGN PASANGAN WA
-unicode_east_asian_width(0x1BAE, 0x1BAF, 'N').	% Lo   [2] SUNDANESE LETTER KHA..SUNDANESE LETTER SYA
-unicode_east_asian_width(0x1BB0, 0x1BB9, 'N').	% Nd  [10] SUNDANESE DIGIT ZERO..SUNDANESE DIGIT NINE
-unicode_east_asian_width(0x1BBA, 0x1BE5, 'N').	% Lo  [44] SUNDANESE AVAGRAHA..BATAK LETTER U
-unicode_east_asian_width(0x1BE6, 0x1BE6, 'N').	% Mn       BATAK SIGN TOMPI
-unicode_east_asian_width(0x1BE7, 0x1BE7, 'N').	% Mc       BATAK VOWEL SIGN E
-unicode_east_asian_width(0x1BE8, 0x1BE9, 'N').	% Mn   [2] BATAK VOWEL SIGN PAKPAK E..BATAK VOWEL SIGN EE
-unicode_east_asian_width(0x1BEA, 0x1BEC, 'N').	% Mc   [3] BATAK VOWEL SIGN I..BATAK VOWEL SIGN O
-unicode_east_asian_width(0x1BED, 0x1BED, 'N').	% Mn       BATAK VOWEL SIGN KARO O
-unicode_east_asian_width(0x1BEE, 0x1BEE, 'N').	% Mc       BATAK VOWEL SIGN U
-unicode_east_asian_width(0x1BEF, 0x1BF1, 'N').	% Mn   [3] BATAK VOWEL SIGN U FOR SIMALUNGUN SA..BATAK CONSONANT SIGN H
-unicode_east_asian_width(0x1BF2, 0x1BF3, 'N').	% Mc   [2] BATAK PANGOLAT..BATAK PANONGONAN
-unicode_east_asian_width(0x1BFC, 0x1BFF, 'N').	% Po   [4] BATAK SYMBOL BINDU NA METEK..BATAK SYMBOL BINDU PANGOLAT
-unicode_east_asian_width(0x1C00, 0x1C23, 'N').	% Lo  [36] LEPCHA LETTER KA..LEPCHA LETTER A
-unicode_east_asian_width(0x1C24, 0x1C2B, 'N').	% Mc   [8] LEPCHA SUBJOINED LETTER YA..LEPCHA VOWEL SIGN UU
-unicode_east_asian_width(0x1C2C, 0x1C33, 'N').	% Mn   [8] LEPCHA VOWEL SIGN E..LEPCHA CONSONANT SIGN T
-unicode_east_asian_width(0x1C34, 0x1C35, 'N').	% Mc   [2] LEPCHA CONSONANT SIGN NYIN-DO..LEPCHA CONSONANT SIGN KANG
-unicode_east_asian_width(0x1C36, 0x1C37, 'N').	% Mn   [2] LEPCHA SIGN RAN..LEPCHA SIGN NUKTA
-unicode_east_asian_width(0x1C3B, 0x1C3F, 'N').	% Po   [5] LEPCHA PUNCTUATION TA-ROL..LEPCHA PUNCTUATION TSHOOK
-unicode_east_asian_width(0x1C40, 0x1C49, 'N').	% Nd  [10] LEPCHA DIGIT ZERO..LEPCHA DIGIT NINE
-unicode_east_asian_width(0x1C4D, 0x1C4F, 'N').	% Lo   [3] LEPCHA LETTER TTA..LEPCHA LETTER DDA
-unicode_east_asian_width(0x1C50, 0x1C59, 'N').	% Nd  [10] OL CHIKI DIGIT ZERO..OL CHIKI DIGIT NINE
-unicode_east_asian_width(0x1C5A, 0x1C77, 'N').	% Lo  [30] OL CHIKI LETTER LA..OL CHIKI LETTER OH
-unicode_east_asian_width(0x1C78, 0x1C7D, 'N').	% Lm   [6] OL CHIKI MU TTUDDAG..OL CHIKI AHAD
-unicode_east_asian_width(0x1C7E, 0x1C7F, 'N').	% Po   [2] OL CHIKI PUNCTUATION MUCAAD..OL CHIKI PUNCTUATION DOUBLE MUCAAD
-unicode_east_asian_width(0x1CC0, 0x1CC7, 'N').	% Po   [8] SUNDANESE PUNCTUATION BINDU SURYA..SUNDANESE PUNCTUATION BINDU BA SATANGA
-unicode_east_asian_width(0x1CD0, 0x1CD2, 'N').	% Mn   [3] VEDIC TONE KARSHANA..VEDIC TONE PRENKHA
-unicode_east_asian_width(0x1CD3, 0x1CD3, 'N').	% Po       VEDIC SIGN NIHSHVASA
-unicode_east_asian_width(0x1CD4, 0x1CE0, 'N').	% Mn  [13] VEDIC SIGN YAJURVEDIC MIDLINE SVARITA..VEDIC TONE RIGVEDIC KASHMIRI INDEPENDENT SVARITA
-unicode_east_asian_width(0x1CE1, 0x1CE1, 'N').	% Mc       VEDIC TONE ATHARVAVEDIC INDEPENDENT SVARITA
-unicode_east_asian_width(0x1CE2, 0x1CE8, 'N').	% Mn   [7] VEDIC SIGN VISARGA SVARITA..VEDIC SIGN VISARGA ANUDATTA WITH TAIL
-unicode_east_asian_width(0x1CE9, 0x1CEC, 'N').	% Lo   [4] VEDIC SIGN ANUSVARA ANTARGOMUKHA..VEDIC SIGN ANUSVARA VAMAGOMUKHA WITH TAIL
-unicode_east_asian_width(0x1CED, 0x1CED, 'N').	% Mn       VEDIC SIGN TIRYAK
-unicode_east_asian_width(0x1CEE, 0x1CF1, 'N').	% Lo   [4] VEDIC SIGN HEXIFORM LONG ANUSVARA..VEDIC SIGN ANUSVARA UBHAYATO MUKHA
-unicode_east_asian_width(0x1CF2, 0x1CF3, 'N').	% Mc   [2] VEDIC SIGN ARDHAVISARGA..VEDIC SIGN ROTATED ARDHAVISARGA
-unicode_east_asian_width(0x1CF4, 0x1CF4, 'N').	% Mn       VEDIC TONE CANDRA ABOVE
-unicode_east_asian_width(0x1CF5, 0x1CF6, 'N').	% Lo   [2] VEDIC SIGN JIHVAMULIYA..VEDIC SIGN UPADHMANIYA
-unicode_east_asian_width(0x1D00, 0x1D2B, 'N').	% L&  [44] LATIN LETTER SMALL CAPITAL A..CYRILLIC LETTER SMALL CAPITAL EL
-unicode_east_asian_width(0x1D2C, 0x1D6A, 'N').	% Lm  [63] MODIFIER LETTER CAPITAL A..GREEK SUBSCRIPT SMALL LETTER CHI
-unicode_east_asian_width(0x1D6B, 0x1D77, 'N').	% L&  [13] LATIN SMALL LETTER UE..LATIN SMALL LETTER TURNED G
-unicode_east_asian_width(0x1D78, 0x1D78, 'N').	% Lm       MODIFIER LETTER CYRILLIC EN
-unicode_east_asian_width(0x1D79, 0x1D9A, 'N').	% L&  [34] LATIN SMALL LETTER INSULAR G..LATIN SMALL LETTER EZH WITH RETROFLEX HOOK
-unicode_east_asian_width(0x1D9B, 0x1DBF, 'N').	% Lm  [37] MODIFIER LETTER SMALL TURNED ALPHA..MODIFIER LETTER SMALL THETA
-unicode_east_asian_width(0x1DC0, 0x1DE6, 'N').	% Mn  [39] COMBINING DOTTED GRAVE ACCENT..COMBINING LATIN SMALL LETTER Z
-unicode_east_asian_width(0x1DFC, 0x1DFF, 'N').	% Mn   [4] COMBINING DOUBLE INVERTED BREVE BELOW..COMBINING RIGHT ARROWHEAD AND DOWN ARROWHEAD BELOW
-unicode_east_asian_width(0x1E00, 0x1F15, 'N').	% L& [278] LATIN CAPITAL LETTER A WITH RING BELOW..GREEK SMALL LETTER EPSILON WITH DASIA AND OXIA
-unicode_east_asian_width(0x1F18, 0x1F1D, 'N').	% L&   [6] GREEK CAPITAL LETTER EPSILON WITH PSILI..GREEK CAPITAL LETTER EPSILON WITH DASIA AND OXIA
-unicode_east_asian_width(0x1F20, 0x1F45, 'N').	% L&  [38] GREEK SMALL LETTER ETA WITH PSILI..GREEK SMALL LETTER OMICRON WITH DASIA AND OXIA
-unicode_east_asian_width(0x1F48, 0x1F4D, 'N').	% L&   [6] GREEK CAPITAL LETTER OMICRON WITH PSILI..GREEK CAPITAL LETTER OMICRON WITH DASIA AND OXIA
-unicode_east_asian_width(0x1F50, 0x1F57, 'N').	% L&   [8] GREEK SMALL LETTER UPSILON WITH PSILI..GREEK SMALL LETTER UPSILON WITH DASIA AND PERISPOMENI
-unicode_east_asian_width(0x1F59, 0x1F59, 'N').	% L&       GREEK CAPITAL LETTER UPSILON WITH DASIA
-unicode_east_asian_width(0x1F5B, 0x1F5B, 'N').	% L&       GREEK CAPITAL LETTER UPSILON WITH DASIA AND VARIA
-unicode_east_asian_width(0x1F5D, 0x1F5D, 'N').	% L&       GREEK CAPITAL LETTER UPSILON WITH DASIA AND OXIA
-unicode_east_asian_width(0x1F5F, 0x1F7D, 'N').	% L&  [31] GREEK CAPITAL LETTER UPSILON WITH DASIA AND PERISPOMENI..GREEK SMALL LETTER OMEGA WITH OXIA
-unicode_east_asian_width(0x1F80, 0x1FB4, 'N').	% L&  [53] GREEK SMALL LETTER ALPHA WITH PSILI AND YPOGEGRAMMENI..GREEK SMALL LETTER ALPHA WITH OXIA AND YPOGEGRAMMENI
-unicode_east_asian_width(0x1FB6, 0x1FBC, 'N').	% L&   [7] GREEK SMALL LETTER ALPHA WITH PERISPOMENI..GREEK CAPITAL LETTER ALPHA WITH PROSGEGRAMMENI
-unicode_east_asian_width(0x1FBD, 0x1FBD, 'N').	% Sk       GREEK KORONIS
-unicode_east_asian_width(0x1FBE, 0x1FBE, 'N').	% L&       GREEK PROSGEGRAMMENI
-unicode_east_asian_width(0x1FBF, 0x1FC1, 'N').	% Sk   [3] GREEK PSILI..GREEK DIALYTIKA AND PERISPOMENI
-unicode_east_asian_width(0x1FC2, 0x1FC4, 'N').	% L&   [3] GREEK SMALL LETTER ETA WITH VARIA AND YPOGEGRAMMENI..GREEK SMALL LETTER ETA WITH OXIA AND YPOGEGRAMMENI
-unicode_east_asian_width(0x1FC6, 0x1FCC, 'N').	% L&   [7] GREEK SMALL LETTER ETA WITH PERISPOMENI..GREEK CAPITAL LETTER ETA WITH PROSGEGRAMMENI
-unicode_east_asian_width(0x1FCD, 0x1FCF, 'N').	% Sk   [3] GREEK PSILI AND VARIA..GREEK PSILI AND PERISPOMENI
-unicode_east_asian_width(0x1FD0, 0x1FD3, 'N').	% L&   [4] GREEK SMALL LETTER IOTA WITH VRACHY..GREEK SMALL LETTER IOTA WITH DIALYTIKA AND OXIA
-unicode_east_asian_width(0x1FD6, 0x1FDB, 'N').	% L&   [6] GREEK SMALL LETTER IOTA WITH PERISPOMENI..GREEK CAPITAL LETTER IOTA WITH OXIA
-unicode_east_asian_width(0x1FDD, 0x1FDF, 'N').	% Sk   [3] GREEK DASIA AND VARIA..GREEK DASIA AND PERISPOMENI
-unicode_east_asian_width(0x1FE0, 0x1FEC, 'N').	% L&  [13] GREEK SMALL LETTER UPSILON WITH VRACHY..GREEK CAPITAL LETTER RHO WITH DASIA
-unicode_east_asian_width(0x1FED, 0x1FEF, 'N').	% Sk   [3] GREEK DIALYTIKA AND VARIA..GREEK VARIA
-unicode_east_asian_width(0x1FF2, 0x1FF4, 'N').	% L&   [3] GREEK SMALL LETTER OMEGA WITH VARIA AND YPOGEGRAMMENI..GREEK SMALL LETTER OMEGA WITH OXIA AND YPOGEGRAMMENI
-unicode_east_asian_width(0x1FF6, 0x1FFC, 'N').	% L&   [7] GREEK SMALL LETTER OMEGA WITH PERISPOMENI..GREEK CAPITAL LETTER OMEGA WITH PROSGEGRAMMENI
-unicode_east_asian_width(0x1FFD, 0x1FFE, 'N').	% Sk   [2] GREEK OXIA..GREEK DASIA
-unicode_east_asian_width(0x2000, 0x200A, 'N').	% Zs  [11] EN QUAD..HAIR SPACE
-unicode_east_asian_width(0x200B, 0x200F, 'N').	% Cf   [5] ZERO WIDTH SPACE..RIGHT-TO-LEFT MARK
-unicode_east_asian_width(0x2011, 0x2012, 'N').	% Pd   [2] NON-BREAKING HYPHEN..FIGURE DASH
-unicode_east_asian_width(0x2017, 0x2017, 'N').	% Po       DOUBLE LOW LINE
-unicode_east_asian_width(0x201A, 0x201A, 'N').	% Ps       SINGLE LOW-9 QUOTATION MARK
-unicode_east_asian_width(0x201B, 0x201B, 'N').	% Pi       SINGLE HIGH-REVERSED-9 QUOTATION MARK
-unicode_east_asian_width(0x201E, 0x201E, 'N').	% Ps       DOUBLE LOW-9 QUOTATION MARK
-unicode_east_asian_width(0x201F, 0x201F, 'N').	% Pi       DOUBLE HIGH-REVERSED-9 QUOTATION MARK
-unicode_east_asian_width(0x2023, 0x2023, 'N').	% Po       TRIANGULAR BULLET
-unicode_east_asian_width(0x2028, 0x2028, 'N').	% Zl       LINE SEPARATOR
-unicode_east_asian_width(0x2029, 0x2029, 'N').	% Zp       PARAGRAPH SEPARATOR
-unicode_east_asian_width(0x202A, 0x202E, 'N').	% Cf   [5] LEFT-TO-RIGHT EMBEDDING..RIGHT-TO-LEFT OVERRIDE
-unicode_east_asian_width(0x202F, 0x202F, 'N').	% Zs       NARROW NO-BREAK SPACE
-unicode_east_asian_width(0x2031, 0x2031, 'N').	% Po       PER TEN THOUSAND SIGN
-unicode_east_asian_width(0x2034, 0x2034, 'N').	% Po       TRIPLE PRIME
-unicode_east_asian_width(0x2036, 0x2038, 'N').	% Po   [3] REVERSED DOUBLE PRIME..CARET
-unicode_east_asian_width(0x2039, 0x2039, 'N').	% Pi       SINGLE LEFT-POINTING ANGLE QUOTATION MARK
-unicode_east_asian_width(0x203A, 0x203A, 'N').	% Pf       SINGLE RIGHT-POINTING ANGLE QUOTATION MARK
-unicode_east_asian_width(0x203C, 0x203D, 'N').	% Po   [2] DOUBLE EXCLAMATION MARK..INTERROBANG
-unicode_east_asian_width(0x203F, 0x2040, 'N').	% Pc   [2] UNDERTIE..CHARACTER TIE
-unicode_east_asian_width(0x2041, 0x2043, 'N').	% Po   [3] CARET INSERTION POINT..HYPHEN BULLET
-unicode_east_asian_width(0x2044, 0x2044, 'N').	% Sm       FRACTION SLASH
-unicode_east_asian_width(0x2045, 0x2045, 'N').	% Ps       LEFT SQUARE BRACKET WITH QUILL
-unicode_east_asian_width(0x2046, 0x2046, 'N').	% Pe       RIGHT SQUARE BRACKET WITH QUILL
-unicode_east_asian_width(0x2047, 0x2051, 'N').	% Po  [11] DOUBLE QUESTION MARK..TWO ASTERISKS ALIGNED VERTICALLY
-unicode_east_asian_width(0x2052, 0x2052, 'N').	% Sm       COMMERCIAL MINUS SIGN
-unicode_east_asian_width(0x2053, 0x2053, 'N').	% Po       SWUNG DASH
-unicode_east_asian_width(0x2054, 0x2054, 'N').	% Pc       INVERTED UNDERTIE
-unicode_east_asian_width(0x2055, 0x205E, 'N').	% Po  [10] FLOWER PUNCTUATION MARK..VERTICAL FOUR DOTS
-unicode_east_asian_width(0x205F, 0x205F, 'N').	% Zs       MEDIUM MATHEMATICAL SPACE
-unicode_east_asian_width(0x2060, 0x2064, 'N').	% Cf   [5] WORD JOINER..INVISIBLE PLUS
-unicode_east_asian_width(0x206A, 0x206F, 'N').	% Cf   [6] INHIBIT SYMMETRIC SWAPPING..NOMINAL DIGIT SHAPES
-unicode_east_asian_width(0x2070, 0x2070, 'N').	% No       SUPERSCRIPT ZERO
-unicode_east_asian_width(0x2071, 0x2071, 'N').	% Lm       SUPERSCRIPT LATIN SMALL LETTER I
-unicode_east_asian_width(0x2075, 0x2079, 'N').	% No   [5] SUPERSCRIPT FIVE..SUPERSCRIPT NINE
-unicode_east_asian_width(0x207A, 0x207C, 'N').	% Sm   [3] SUPERSCRIPT PLUS SIGN..SUPERSCRIPT EQUALS SIGN
-unicode_east_asian_width(0x207D, 0x207D, 'N').	% Ps       SUPERSCRIPT LEFT PARENTHESIS
-unicode_east_asian_width(0x207E, 0x207E, 'N').	% Pe       SUPERSCRIPT RIGHT PARENTHESIS
-unicode_east_asian_width(0x2080, 0x2080, 'N').	% No       SUBSCRIPT ZERO
-unicode_east_asian_width(0x2085, 0x2089, 'N').	% No   [5] SUBSCRIPT FIVE..SUBSCRIPT NINE
-unicode_east_asian_width(0x208A, 0x208C, 'N').	% Sm   [3] SUBSCRIPT PLUS SIGN..SUBSCRIPT EQUALS SIGN
-unicode_east_asian_width(0x208D, 0x208D, 'N').	% Ps       SUBSCRIPT LEFT PARENTHESIS
-unicode_east_asian_width(0x208E, 0x208E, 'N').	% Pe       SUBSCRIPT RIGHT PARENTHESIS
-unicode_east_asian_width(0x2090, 0x209C, 'N').	% Lm  [13] LATIN SUBSCRIPT SMALL LETTER A..LATIN SUBSCRIPT SMALL LETTER T
-unicode_east_asian_width(0x20A0, 0x20A8, 'N').	% Sc   [9] EURO-CURRENCY SIGN..RUPEE SIGN
-unicode_east_asian_width(0x20AA, 0x20AB, 'N').	% Sc   [2] NEW SHEQEL SIGN..DONG SIGN
-unicode_east_asian_width(0x20AD, 0x20BA, 'N').	% Sc  [14] KIP SIGN..TURKISH LIRA SIGN
-unicode_east_asian_width(0x20D0, 0x20DC, 'N').	% Mn  [13] COMBINING LEFT HARPOON ABOVE..COMBINING FOUR DOTS ABOVE
-unicode_east_asian_width(0x20DD, 0x20E0, 'N').	% Me   [4] COMBINING ENCLOSING CIRCLE..COMBINING ENCLOSING CIRCLE BACKSLASH
-unicode_east_asian_width(0x20E1, 0x20E1, 'N').	% Mn       COMBINING LEFT RIGHT ARROW ABOVE
-unicode_east_asian_width(0x20E2, 0x20E4, 'N').	% Me   [3] COMBINING ENCLOSING SCREEN..COMBINING ENCLOSING UPWARD POINTING TRIANGLE
-unicode_east_asian_width(0x20E5, 0x20F0, 'N').	% Mn  [12] COMBINING REVERSE SOLIDUS OVERLAY..COMBINING ASTERISK ABOVE
-unicode_east_asian_width(0x2100, 0x2101, 'N').	% So   [2] ACCOUNT OF..ADDRESSED TO THE SUBJECT
-unicode_east_asian_width(0x2102, 0x2102, 'N').	% L&       DOUBLE-STRUCK CAPITAL C
-unicode_east_asian_width(0x2104, 0x2104, 'N').	% So       CENTRE LINE SYMBOL
-unicode_east_asian_width(0x2106, 0x2106, 'N').	% So       CADA UNA
-unicode_east_asian_width(0x2107, 0x2107, 'N').	% L&       EULER CONSTANT
-unicode_east_asian_width(0x2108, 0x2108, 'N').	% So       SCRUPLE
-unicode_east_asian_width(0x210A, 0x2112, 'N').	% L&   [9] SCRIPT SMALL G..SCRIPT CAPITAL L
-unicode_east_asian_width(0x2114, 0x2114, 'N').	% So       L B BAR SYMBOL
-unicode_east_asian_width(0x2115, 0x2115, 'N').	% L&       DOUBLE-STRUCK CAPITAL N
-unicode_east_asian_width(0x2117, 0x2117, 'N').	% So       SOUND RECORDING COPYRIGHT
-unicode_east_asian_width(0x2118, 0x2118, 'N').	% Sm       SCRIPT CAPITAL P
-unicode_east_asian_width(0x2119, 0x211D, 'N').	% L&   [5] DOUBLE-STRUCK CAPITAL P..DOUBLE-STRUCK CAPITAL R
-unicode_east_asian_width(0x211E, 0x2120, 'N').	% So   [3] PRESCRIPTION TAKE..SERVICE MARK
-unicode_east_asian_width(0x2123, 0x2123, 'N').	% So       VERSICLE
-unicode_east_asian_width(0x2124, 0x2124, 'N').	% L&       DOUBLE-STRUCK CAPITAL Z
-unicode_east_asian_width(0x2125, 0x2125, 'N').	% So       OUNCE SIGN
-unicode_east_asian_width(0x2127, 0x2127, 'N').	% So       INVERTED OHM SIGN
-unicode_east_asian_width(0x2128, 0x2128, 'N').	% L&       BLACK-LETTER CAPITAL Z
-unicode_east_asian_width(0x2129, 0x2129, 'N').	% So       TURNED GREEK SMALL LETTER IOTA
-unicode_east_asian_width(0x212A, 0x212A, 'N').	% L&       KELVIN SIGN
-unicode_east_asian_width(0x212C, 0x212D, 'N').	% L&   [2] SCRIPT CAPITAL B..BLACK-LETTER CAPITAL C
-unicode_east_asian_width(0x212E, 0x212E, 'N').	% So       ESTIMATED SYMBOL
-unicode_east_asian_width(0x212F, 0x2134, 'N').	% L&   [6] SCRIPT SMALL E..SCRIPT SMALL O
-unicode_east_asian_width(0x2135, 0x2138, 'N').	% Lo   [4] ALEF SYMBOL..DALET SYMBOL
-unicode_east_asian_width(0x2139, 0x2139, 'N').	% L&       INFORMATION SOURCE
-unicode_east_asian_width(0x213A, 0x213B, 'N').	% So   [2] ROTATED CAPITAL Q..FACSIMILE SIGN
-unicode_east_asian_width(0x213C, 0x213F, 'N').	% L&   [4] DOUBLE-STRUCK SMALL PI..DOUBLE-STRUCK CAPITAL PI
-unicode_east_asian_width(0x2140, 0x2144, 'N').	% Sm   [5] DOUBLE-STRUCK N-ARY SUMMATION..TURNED SANS-SERIF CAPITAL Y
-unicode_east_asian_width(0x2145, 0x2149, 'N').	% L&   [5] DOUBLE-STRUCK ITALIC CAPITAL D..DOUBLE-STRUCK ITALIC SMALL J
-unicode_east_asian_width(0x214A, 0x214A, 'N').	% So       PROPERTY LINE
-unicode_east_asian_width(0x214B, 0x214B, 'N').	% Sm       TURNED AMPERSAND
-unicode_east_asian_width(0x214C, 0x214D, 'N').	% So   [2] PER SIGN..AKTIESELSKAB
-unicode_east_asian_width(0x214E, 0x214E, 'N').	% L&       TURNED SMALL F
-unicode_east_asian_width(0x214F, 0x214F, 'N').	% So       SYMBOL FOR SAMARITAN SOURCE
-unicode_east_asian_width(0x2150, 0x2152, 'N').	% No   [3] VULGAR FRACTION ONE SEVENTH..VULGAR FRACTION ONE TENTH
-unicode_east_asian_width(0x2155, 0x215A, 'N').	% No   [6] VULGAR FRACTION ONE FIFTH..VULGAR FRACTION FIVE SIXTHS
-unicode_east_asian_width(0x215F, 0x215F, 'N').	% No       FRACTION NUMERATOR ONE
-unicode_east_asian_width(0x216C, 0x216F, 'N').	% Nl   [4] ROMAN NUMERAL FIFTY..ROMAN NUMERAL ONE THOUSAND
-unicode_east_asian_width(0x217A, 0x2182, 'N').	% Nl   [9] SMALL ROMAN NUMERAL ELEVEN..ROMAN NUMERAL TEN THOUSAND
-unicode_east_asian_width(0x2183, 0x2184, 'N').	% L&   [2] ROMAN NUMERAL REVERSED ONE HUNDRED..LATIN SMALL LETTER REVERSED C
-unicode_east_asian_width(0x2185, 0x2188, 'N').	% Nl   [4] ROMAN NUMERAL SIX LATE FORM..ROMAN NUMERAL ONE HUNDRED THOUSAND
-unicode_east_asian_width(0x219A, 0x219B, 'N').	% Sm   [2] LEFTWARDS ARROW WITH STROKE..RIGHTWARDS ARROW WITH STROKE
-unicode_east_asian_width(0x219C, 0x219F, 'N').	% So   [4] LEFTWARDS WAVE ARROW..UPWARDS TWO HEADED ARROW
-unicode_east_asian_width(0x21A0, 0x21A0, 'N').	% Sm       RIGHTWARDS TWO HEADED ARROW
-unicode_east_asian_width(0x21A1, 0x21A2, 'N').	% So   [2] DOWNWARDS TWO HEADED ARROW..LEFTWARDS ARROW WITH TAIL
-unicode_east_asian_width(0x21A3, 0x21A3, 'N').	% Sm       RIGHTWARDS ARROW WITH TAIL
-unicode_east_asian_width(0x21A4, 0x21A5, 'N').	% So   [2] LEFTWARDS ARROW FROM BAR..UPWARDS ARROW FROM BAR
-unicode_east_asian_width(0x21A6, 0x21A6, 'N').	% Sm       RIGHTWARDS ARROW FROM BAR
-unicode_east_asian_width(0x21A7, 0x21AD, 'N').	% So   [7] DOWNWARDS ARROW FROM BAR..LEFT RIGHT WAVE ARROW
-unicode_east_asian_width(0x21AE, 0x21AE, 'N').	% Sm       LEFT RIGHT ARROW WITH STROKE
-unicode_east_asian_width(0x21AF, 0x21B7, 'N').	% So   [9] DOWNWARDS ZIGZAG ARROW..CLOCKWISE TOP SEMICIRCLE ARROW
-unicode_east_asian_width(0x21BA, 0x21CD, 'N').	% So  [20] ANTICLOCKWISE OPEN CIRCLE ARROW..LEFTWARDS DOUBLE ARROW WITH STROKE
-unicode_east_asian_width(0x21CE, 0x21CF, 'N').	% Sm   [2] LEFT RIGHT DOUBLE ARROW WITH STROKE..RIGHTWARDS DOUBLE ARROW WITH STROKE
-unicode_east_asian_width(0x21D0, 0x21D1, 'N').	% So   [2] LEFTWARDS DOUBLE ARROW..UPWARDS DOUBLE ARROW
-unicode_east_asian_width(0x21D3, 0x21D3, 'N').	% So       DOWNWARDS DOUBLE ARROW
-unicode_east_asian_width(0x21D5, 0x21E6, 'N').	% So  [18] UP DOWN DOUBLE ARROW..LEFTWARDS WHITE ARROW
-unicode_east_asian_width(0x21E8, 0x21F3, 'N').	% So  [12] RIGHTWARDS WHITE ARROW..UP DOWN WHITE ARROW
-unicode_east_asian_width(0x21F4, 0x21FF, 'N').	% Sm  [12] RIGHT ARROW WITH SMALL CIRCLE..LEFT RIGHT OPEN-HEADED ARROW
-unicode_east_asian_width(0x2201, 0x2201, 'N').	% Sm       COMPLEMENT
-unicode_east_asian_width(0x2204, 0x2206, 'N').	% Sm   [3] THERE DOES NOT EXIST..INCREMENT
-unicode_east_asian_width(0x2209, 0x220A, 'N').	% Sm   [2] NOT AN ELEMENT OF..SMALL ELEMENT OF
-unicode_east_asian_width(0x220C, 0x220E, 'N').	% Sm   [3] DOES NOT CONTAIN AS MEMBER..END OF PROOF
-unicode_east_asian_width(0x2210, 0x2210, 'N').	% Sm       N-ARY COPRODUCT
-unicode_east_asian_width(0x2212, 0x2214, 'N').	% Sm   [3] MINUS SIGN..DOT PLUS
-unicode_east_asian_width(0x2216, 0x2219, 'N').	% Sm   [4] SET MINUS..BULLET OPERATOR
-unicode_east_asian_width(0x221B, 0x221C, 'N').	% Sm   [2] CUBE ROOT..FOURTH ROOT
-unicode_east_asian_width(0x2221, 0x2222, 'N').	% Sm   [2] MEASURED ANGLE..SPHERICAL ANGLE
-unicode_east_asian_width(0x2224, 0x2224, 'N').	% Sm       DOES NOT DIVIDE
-unicode_east_asian_width(0x2226, 0x2226, 'N').	% Sm       NOT PARALLEL TO
-unicode_east_asian_width(0x222D, 0x222D, 'N').	% Sm       TRIPLE INTEGRAL
-unicode_east_asian_width(0x222F, 0x2233, 'N').	% Sm   [5] SURFACE INTEGRAL..ANTICLOCKWISE CONTOUR INTEGRAL
-unicode_east_asian_width(0x2238, 0x223B, 'N').	% Sm   [4] DOT MINUS..HOMOTHETIC
-unicode_east_asian_width(0x223E, 0x2247, 'N').	% Sm  [10] INVERTED LAZY S..NEITHER APPROXIMATELY NOR ACTUALLY EQUAL TO
-unicode_east_asian_width(0x2249, 0x224B, 'N').	% Sm   [3] NOT ALMOST EQUAL TO..TRIPLE TILDE
-unicode_east_asian_width(0x224D, 0x2251, 'N').	% Sm   [5] EQUIVALENT TO..GEOMETRICALLY EQUAL TO
-unicode_east_asian_width(0x2253, 0x225F, 'N').	% Sm  [13] IMAGE OF OR APPROXIMATELY EQUAL TO..QUESTIONED EQUAL TO
-unicode_east_asian_width(0x2262, 0x2263, 'N').	% Sm   [2] NOT IDENTICAL TO..STRICTLY EQUIVALENT TO
-unicode_east_asian_width(0x2268, 0x2269, 'N').	% Sm   [2] LESS-THAN BUT NOT EQUAL TO..GREATER-THAN BUT NOT EQUAL TO
-unicode_east_asian_width(0x226C, 0x226D, 'N').	% Sm   [2] BETWEEN..NOT EQUIVALENT TO
-unicode_east_asian_width(0x2270, 0x2281, 'N').	% Sm  [18] NEITHER LESS-THAN NOR EQUAL TO..DOES NOT SUCCEED
-unicode_east_asian_width(0x2284, 0x2285, 'N').	% Sm   [2] NOT A SUBSET OF..NOT A SUPERSET OF
-unicode_east_asian_width(0x2288, 0x2294, 'N').	% Sm  [13] NEITHER A SUBSET OF NOR EQUAL TO..SQUARE CUP
-unicode_east_asian_width(0x2296, 0x2298, 'N').	% Sm   [3] CIRCLED MINUS..CIRCLED DIVISION SLASH
-unicode_east_asian_width(0x229A, 0x22A4, 'N').	% Sm  [11] CIRCLED RING OPERATOR..DOWN TACK
-unicode_east_asian_width(0x22A6, 0x22BE, 'N').	% Sm  [25] ASSERTION..RIGHT ANGLE WITH ARC
-unicode_east_asian_width(0x22C0, 0x22FF, 'N').	% Sm  [64] N-ARY LOGICAL AND..Z NOTATION BAG MEMBERSHIP
-unicode_east_asian_width(0x2300, 0x2307, 'N').	% So   [8] DIAMETER SIGN..WAVY LINE
-unicode_east_asian_width(0x2308, 0x230B, 'N').	% Sm   [4] LEFT CEILING..RIGHT FLOOR
-unicode_east_asian_width(0x230C, 0x2311, 'N').	% So   [6] BOTTOM RIGHT CROP..SQUARE LOZENGE
-unicode_east_asian_width(0x2313, 0x231F, 'N').	% So  [13] SEGMENT..BOTTOM RIGHT CORNER
-unicode_east_asian_width(0x2320, 0x2321, 'N').	% Sm   [2] TOP HALF INTEGRAL..BOTTOM HALF INTEGRAL
-unicode_east_asian_width(0x2322, 0x2328, 'N').	% So   [7] FROWN..KEYBOARD
-unicode_east_asian_width(0x232B, 0x237B, 'N').	% So  [81] ERASE TO THE LEFT..NOT CHECK MARK
-unicode_east_asian_width(0x237C, 0x237C, 'N').	% Sm       RIGHT ANGLE WITH DOWNWARDS ZIGZAG ARROW
-unicode_east_asian_width(0x237D, 0x239A, 'N').	% So  [30] SHOULDERED OPEN BOX..CLEAR SCREEN SYMBOL
-unicode_east_asian_width(0x239B, 0x23B3, 'N').	% Sm  [25] LEFT PARENTHESIS UPPER HOOK..SUMMATION BOTTOM
-unicode_east_asian_width(0x23B4, 0x23DB, 'N').	% So  [40] TOP SQUARE BRACKET..FUSE
-unicode_east_asian_width(0x23DC, 0x23E1, 'N').	% Sm   [6] TOP PARENTHESIS..BOTTOM TORTOISE SHELL BRACKET
-unicode_east_asian_width(0x23E2, 0x23F3, 'N').	% So  [18] WHITE TRAPEZIUM..HOURGLASS WITH FLOWING SAND
-unicode_east_asian_width(0x2400, 0x2426, 'N').	% So  [39] SYMBOL FOR NULL..SYMBOL FOR SUBSTITUTE FORM TWO
-unicode_east_asian_width(0x2440, 0x244A, 'N').	% So  [11] OCR HOOK..OCR DOUBLE BACKSLASH
-unicode_east_asian_width(0x24EA, 0x24EA, 'N').	% No       CIRCLED DIGIT ZERO
-unicode_east_asian_width(0x254C, 0x254F, 'N').	% So   [4] BOX DRAWINGS LIGHT DOUBLE DASH HORIZONTAL..BOX DRAWINGS HEAVY DOUBLE DASH VERTICAL
-unicode_east_asian_width(0x2574, 0x257F, 'N').	% So  [12] BOX DRAWINGS LIGHT LEFT..BOX DRAWINGS HEAVY UP AND LIGHT DOWN
-unicode_east_asian_width(0x2590, 0x2591, 'N').	% So   [2] RIGHT HALF BLOCK..LIGHT SHADE
-unicode_east_asian_width(0x2596, 0x259F, 'N').	% So  [10] QUADRANT LOWER LEFT..QUADRANT UPPER RIGHT AND LOWER LEFT AND LOWER RIGHT
-unicode_east_asian_width(0x25A2, 0x25A2, 'N').	% So       WHITE SQUARE WITH ROUNDED CORNERS
-unicode_east_asian_width(0x25AA, 0x25B1, 'N').	% So   [8] BLACK SMALL SQUARE..WHITE PARALLELOGRAM
-unicode_east_asian_width(0x25B4, 0x25B5, 'N').	% So   [2] BLACK UP-POINTING SMALL TRIANGLE..WHITE UP-POINTING SMALL TRIANGLE
-unicode_east_asian_width(0x25B8, 0x25BB, 'N').	% So   [4] BLACK RIGHT-POINTING SMALL TRIANGLE..WHITE RIGHT-POINTING POINTER
-unicode_east_asian_width(0x25BE, 0x25BF, 'N').	% So   [2] BLACK DOWN-POINTING SMALL TRIANGLE..WHITE DOWN-POINTING SMALL TRIANGLE
-unicode_east_asian_width(0x25C2, 0x25C5, 'N').	% So   [4] BLACK LEFT-POINTING SMALL TRIANGLE..WHITE LEFT-POINTING POINTER
-unicode_east_asian_width(0x25C9, 0x25CA, 'N').	% So   [2] FISHEYE..LOZENGE
-unicode_east_asian_width(0x25CC, 0x25CD, 'N').	% So   [2] DOTTED CIRCLE..CIRCLE WITH VERTICAL FILL
-unicode_east_asian_width(0x25D2, 0x25E1, 'N').	% So  [16] CIRCLE WITH LOWER HALF BLACK..LOWER HALF CIRCLE
-unicode_east_asian_width(0x25E6, 0x25EE, 'N').	% So   [9] WHITE BULLET..UP-POINTING TRIANGLE WITH RIGHT HALF BLACK
-unicode_east_asian_width(0x25F0, 0x25F7, 'N').	% So   [8] WHITE SQUARE WITH UPPER LEFT QUADRANT..WHITE CIRCLE WITH UPPER RIGHT QUADRANT
-unicode_east_asian_width(0x25F8, 0x25FF, 'N').	% Sm   [8] UPPER LEFT TRIANGLE..LOWER RIGHT TRIANGLE
-unicode_east_asian_width(0x2600, 0x2604, 'N').	% So   [5] BLACK SUN WITH RAYS..COMET
-unicode_east_asian_width(0x2607, 0x2608, 'N').	% So   [2] LIGHTNING..THUNDERSTORM
-unicode_east_asian_width(0x260A, 0x260D, 'N').	% So   [4] ASCENDING NODE..OPPOSITION
-unicode_east_asian_width(0x2610, 0x2613, 'N').	% So   [4] BALLOT BOX..SALTIRE
-unicode_east_asian_width(0x2616, 0x261B, 'N').	% So   [6] WHITE SHOGI PIECE..BLACK RIGHT POINTING INDEX
-unicode_east_asian_width(0x261D, 0x261D, 'N').	% So       WHITE UP POINTING INDEX
-unicode_east_asian_width(0x261F, 0x263F, 'N').	% So  [33] WHITE DOWN POINTING INDEX..MERCURY
-unicode_east_asian_width(0x2641, 0x2641, 'N').	% So       EARTH
-unicode_east_asian_width(0x2643, 0x265F, 'N').	% So  [29] JUPITER..BLACK CHESS PAWN
-unicode_east_asian_width(0x2662, 0x2662, 'N').	% So       WHITE DIAMOND SUIT
-unicode_east_asian_width(0x2666, 0x2666, 'N').	% So       BLACK DIAMOND SUIT
-unicode_east_asian_width(0x266B, 0x266B, 'N').	% So       BEAMED EIGHTH NOTES
-unicode_east_asian_width(0x266E, 0x266E, 'N').	% So       MUSIC NATURAL SIGN
-unicode_east_asian_width(0x2670, 0x269D, 'N').	% So  [46] WEST SYRIAC CROSS..OUTLINED WHITE STAR
-unicode_east_asian_width(0x26A0, 0x26BD, 'N').	% So  [30] WARNING SIGN..SOCCER BALL
-unicode_east_asian_width(0x26C0, 0x26C3, 'N').	% So   [4] WHITE DRAUGHTS MAN..BLACK DRAUGHTS KING
-unicode_east_asian_width(0x26CE, 0x26CE, 'N').	% So       OPHIUCHUS
-unicode_east_asian_width(0x26E2, 0x26E2, 'N').	% So       ASTRONOMICAL SYMBOL FOR URANUS
-unicode_east_asian_width(0x26E4, 0x26E7, 'N').	% So   [4] PENTAGRAM..INVERTED PENTAGRAM
-unicode_east_asian_width(0x2701, 0x273C, 'N').	% So  [60] UPPER BLADE SCISSORS..OPEN CENTRE TEARDROP-SPOKED ASTERISK
-unicode_east_asian_width(0x273E, 0x2756, 'N').	% So  [25] SIX PETALLED BLACK AND WHITE FLORETTE..BLACK DIAMOND MINUS WHITE X
-unicode_east_asian_width(0x2758, 0x2767, 'N').	% So  [16] LIGHT VERTICAL BAR..ROTATED FLORAL HEART BULLET
-unicode_east_asian_width(0x2768, 0x2768, 'N').	% Ps       MEDIUM LEFT PARENTHESIS ORNAMENT
-unicode_east_asian_width(0x2769, 0x2769, 'N').	% Pe       MEDIUM RIGHT PARENTHESIS ORNAMENT
-unicode_east_asian_width(0x276A, 0x276A, 'N').	% Ps       MEDIUM FLATTENED LEFT PARENTHESIS ORNAMENT
-unicode_east_asian_width(0x276B, 0x276B, 'N').	% Pe       MEDIUM FLATTENED RIGHT PARENTHESIS ORNAMENT
-unicode_east_asian_width(0x276C, 0x276C, 'N').	% Ps       MEDIUM LEFT-POINTING ANGLE BRACKET ORNAMENT
-unicode_east_asian_width(0x276D, 0x276D, 'N').	% Pe       MEDIUM RIGHT-POINTING ANGLE BRACKET ORNAMENT
-unicode_east_asian_width(0x276E, 0x276E, 'N').	% Ps       HEAVY LEFT-POINTING ANGLE QUOTATION MARK ORNAMENT
-unicode_east_asian_width(0x276F, 0x276F, 'N').	% Pe       HEAVY RIGHT-POINTING ANGLE QUOTATION MARK ORNAMENT
-unicode_east_asian_width(0x2770, 0x2770, 'N').	% Ps       HEAVY LEFT-POINTING ANGLE BRACKET ORNAMENT
-unicode_east_asian_width(0x2771, 0x2771, 'N').	% Pe       HEAVY RIGHT-POINTING ANGLE BRACKET ORNAMENT
-unicode_east_asian_width(0x2772, 0x2772, 'N').	% Ps       LIGHT LEFT TORTOISE SHELL BRACKET ORNAMENT
-unicode_east_asian_width(0x2773, 0x2773, 'N').	% Pe       LIGHT RIGHT TORTOISE SHELL BRACKET ORNAMENT
-unicode_east_asian_width(0x2774, 0x2774, 'N').	% Ps       MEDIUM LEFT CURLY BRACKET ORNAMENT
-unicode_east_asian_width(0x2775, 0x2775, 'N').	% Pe       MEDIUM RIGHT CURLY BRACKET ORNAMENT
-unicode_east_asian_width(0x2780, 0x2793, 'N').	% No  [20] DINGBAT CIRCLED SANS-SERIF DIGIT ONE..DINGBAT NEGATIVE CIRCLED SANS-SERIF NUMBER TEN
-unicode_east_asian_width(0x2794, 0x27BF, 'N').	% So  [44] HEAVY WIDE-HEADED RIGHTWARDS ARROW..DOUBLE CURLY LOOP
-unicode_east_asian_width(0x27C0, 0x27C4, 'N').	% Sm   [5] THREE DIMENSIONAL ANGLE..OPEN SUPERSET
-unicode_east_asian_width(0x27C5, 0x27C5, 'N').	% Ps       LEFT S-SHAPED BAG DELIMITER
-unicode_east_asian_width(0x27C6, 0x27C6, 'N').	% Pe       RIGHT S-SHAPED BAG DELIMITER
-unicode_east_asian_width(0x27C7, 0x27E5, 'N').	% Sm  [31] OR WITH DOT INSIDE..WHITE SQUARE WITH RIGHTWARDS TICK
-unicode_east_asian_width(0x27EE, 0x27EE, 'N').	% Ps       MATHEMATICAL LEFT FLATTENED PARENTHESIS
-unicode_east_asian_width(0x27EF, 0x27EF, 'N').	% Pe       MATHEMATICAL RIGHT FLATTENED PARENTHESIS
-unicode_east_asian_width(0x27F0, 0x27FF, 'N').	% Sm  [16] UPWARDS QUADRUPLE ARROW..LONG RIGHTWARDS SQUIGGLE ARROW
-unicode_east_asian_width(0x2800, 0x28FF, 'N').	% So [256] BRAILLE PATTERN BLANK..BRAILLE PATTERN DOTS-12345678
-unicode_east_asian_width(0x2900, 0x2982, 'N').	% Sm [131] RIGHTWARDS TWO-HEADED ARROW WITH VERTICAL STROKE..Z NOTATION TYPE COLON
-unicode_east_asian_width(0x2983, 0x2983, 'N').	% Ps       LEFT WHITE CURLY BRACKET
-unicode_east_asian_width(0x2984, 0x2984, 'N').	% Pe       RIGHT WHITE CURLY BRACKET
-unicode_east_asian_width(0x2987, 0x2987, 'N').	% Ps       Z NOTATION LEFT IMAGE BRACKET
-unicode_east_asian_width(0x2988, 0x2988, 'N').	% Pe       Z NOTATION RIGHT IMAGE BRACKET
-unicode_east_asian_width(0x2989, 0x2989, 'N').	% Ps       Z NOTATION LEFT BINDING BRACKET
-unicode_east_asian_width(0x298A, 0x298A, 'N').	% Pe       Z NOTATION RIGHT BINDING BRACKET
-unicode_east_asian_width(0x298B, 0x298B, 'N').	% Ps       LEFT SQUARE BRACKET WITH UNDERBAR
-unicode_east_asian_width(0x298C, 0x298C, 'N').	% Pe       RIGHT SQUARE BRACKET WITH UNDERBAR
-unicode_east_asian_width(0x298D, 0x298D, 'N').	% Ps       LEFT SQUARE BRACKET WITH TICK IN TOP CORNER
-unicode_east_asian_width(0x298E, 0x298E, 'N').	% Pe       RIGHT SQUARE BRACKET WITH TICK IN BOTTOM CORNER
-unicode_east_asian_width(0x298F, 0x298F, 'N').	% Ps       LEFT SQUARE BRACKET WITH TICK IN BOTTOM CORNER
-unicode_east_asian_width(0x2990, 0x2990, 'N').	% Pe       RIGHT SQUARE BRACKET WITH TICK IN TOP CORNER
-unicode_east_asian_width(0x2991, 0x2991, 'N').	% Ps       LEFT ANGLE BRACKET WITH DOT
-unicode_east_asian_width(0x2992, 0x2992, 'N').	% Pe       RIGHT ANGLE BRACKET WITH DOT
-unicode_east_asian_width(0x2993, 0x2993, 'N').	% Ps       LEFT ARC LESS-THAN BRACKET
-unicode_east_asian_width(0x2994, 0x2994, 'N').	% Pe       RIGHT ARC GREATER-THAN BRACKET
-unicode_east_asian_width(0x2995, 0x2995, 'N').	% Ps       DOUBLE LEFT ARC GREATER-THAN BRACKET
-unicode_east_asian_width(0x2996, 0x2996, 'N').	% Pe       DOUBLE RIGHT ARC LESS-THAN BRACKET
-unicode_east_asian_width(0x2997, 0x2997, 'N').	% Ps       LEFT BLACK TORTOISE SHELL BRACKET
-unicode_east_asian_width(0x2998, 0x2998, 'N').	% Pe       RIGHT BLACK TORTOISE SHELL BRACKET
-unicode_east_asian_width(0x2999, 0x29D7, 'N').	% Sm  [63] DOTTED FENCE..BLACK HOURGLASS
-unicode_east_asian_width(0x29D8, 0x29D8, 'N').	% Ps       LEFT WIGGLY FENCE
-unicode_east_asian_width(0x29D9, 0x29D9, 'N').	% Pe       RIGHT WIGGLY FENCE
-unicode_east_asian_width(0x29DA, 0x29DA, 'N').	% Ps       LEFT DOUBLE WIGGLY FENCE
-unicode_east_asian_width(0x29DB, 0x29DB, 'N').	% Pe       RIGHT DOUBLE WIGGLY FENCE
-unicode_east_asian_width(0x29DC, 0x29FB, 'N').	% Sm  [32] INCOMPLETE INFINITY..TRIPLE PLUS
-unicode_east_asian_width(0x29FC, 0x29FC, 'N').	% Ps       LEFT-POINTING CURVED ANGLE BRACKET
-unicode_east_asian_width(0x29FD, 0x29FD, 'N').	% Pe       RIGHT-POINTING CURVED ANGLE BRACKET
-unicode_east_asian_width(0x29FE, 0x2AFF, 'N').	% Sm [258] TINY..N-ARY WHITE VERTICAL BAR
-unicode_east_asian_width(0x2B00, 0x2B2F, 'N').	% So  [48] NORTH EAST WHITE ARROW..WHITE VERTICAL ELLIPSE
-unicode_east_asian_width(0x2B30, 0x2B44, 'N').	% Sm  [21] LEFT ARROW WITH SMALL CIRCLE..RIGHTWARDS ARROW THROUGH SUPERSET
-unicode_east_asian_width(0x2B45, 0x2B46, 'N').	% So   [2] LEFTWARDS QUADRUPLE ARROW..RIGHTWARDS QUADRUPLE ARROW
-unicode_east_asian_width(0x2B47, 0x2B4C, 'N').	% Sm   [6] REVERSE TILDE OPERATOR ABOVE RIGHTWARDS ARROW..RIGHTWARDS ARROW ABOVE REVERSE TILDE OPERATOR
-unicode_east_asian_width(0x2B50, 0x2B54, 'N').	% So   [5] WHITE MEDIUM STAR..WHITE RIGHT-POINTING PENTAGON
-unicode_east_asian_width(0x2C00, 0x2C2E, 'N').	% L&  [47] GLAGOLITIC CAPITAL LETTER AZU..GLAGOLITIC CAPITAL LETTER LATINATE MYSLITE
-unicode_east_asian_width(0x2C30, 0x2C5E, 'N').	% L&  [47] GLAGOLITIC SMALL LETTER AZU..GLAGOLITIC SMALL LETTER LATINATE MYSLITE
-unicode_east_asian_width(0x2C60, 0x2C7B, 'N').	% L&  [28] LATIN CAPITAL LETTER L WITH DOUBLE BAR..LATIN LETTER SMALL CAPITAL TURNED E
-unicode_east_asian_width(0x2C7C, 0x2C7D, 'N').	% Lm   [2] LATIN SUBSCRIPT SMALL LETTER J..MODIFIER LETTER CAPITAL V
-unicode_east_asian_width(0x2C7E, 0x2CE4, 'N').	% L& [103] LATIN CAPITAL LETTER S WITH SWASH TAIL..COPTIC SYMBOL KAI
-unicode_east_asian_width(0x2CE5, 0x2CEA, 'N').	% So   [6] COPTIC SYMBOL MI RO..COPTIC SYMBOL SHIMA SIMA
-unicode_east_asian_width(0x2CEB, 0x2CEE, 'N').	% L&   [4] COPTIC CAPITAL LETTER CRYPTOGRAMMIC SHEI..COPTIC SMALL LETTER CRYPTOGRAMMIC GANGIA
-unicode_east_asian_width(0x2CEF, 0x2CF1, 'N').	% Mn   [3] COPTIC COMBINING NI ABOVE..COPTIC COMBINING SPIRITUS LENIS
-unicode_east_asian_width(0x2CF2, 0x2CF3, 'N').	% L&   [2] COPTIC CAPITAL LETTER BOHAIRIC KHEI..COPTIC SMALL LETTER BOHAIRIC KHEI
-unicode_east_asian_width(0x2CF9, 0x2CFC, 'N').	% Po   [4] COPTIC OLD NUBIAN FULL STOP..COPTIC OLD NUBIAN VERSE DIVIDER
-unicode_east_asian_width(0x2CFD, 0x2CFD, 'N').	% No       COPTIC FRACTION ONE HALF
-unicode_east_asian_width(0x2CFE, 0x2CFF, 'N').	% Po   [2] COPTIC FULL STOP..COPTIC MORPHOLOGICAL DIVIDER
-unicode_east_asian_width(0x2D00, 0x2D25, 'N').	% L&  [38] GEORGIAN SMALL LETTER AN..GEORGIAN SMALL LETTER HOE
-unicode_east_asian_width(0x2D27, 0x2D27, 'N').	% L&       GEORGIAN SMALL LETTER YN
-unicode_east_asian_width(0x2D2D, 0x2D2D, 'N').	% L&       GEORGIAN SMALL LETTER AEN
-unicode_east_asian_width(0x2D30, 0x2D67, 'N').	% Lo  [56] TIFINAGH LETTER YA..TIFINAGH LETTER YO
-unicode_east_asian_width(0x2D6F, 0x2D6F, 'N').	% Lm       TIFINAGH MODIFIER LETTER LABIALIZATION MARK
-unicode_east_asian_width(0x2D70, 0x2D70, 'N').	% Po       TIFINAGH SEPARATOR MARK
-unicode_east_asian_width(0x2D7F, 0x2D7F, 'N').	% Mn       TIFINAGH CONSONANT JOINER
-unicode_east_asian_width(0x2D80, 0x2D96, 'N').	% Lo  [23] ETHIOPIC SYLLABLE LOA..ETHIOPIC SYLLABLE GGWE
-unicode_east_asian_width(0x2DA0, 0x2DA6, 'N').	% Lo   [7] ETHIOPIC SYLLABLE SSA..ETHIOPIC SYLLABLE SSO
-unicode_east_asian_width(0x2DA8, 0x2DAE, 'N').	% Lo   [7] ETHIOPIC SYLLABLE CCA..ETHIOPIC SYLLABLE CCO
-unicode_east_asian_width(0x2DB0, 0x2DB6, 'N').	% Lo   [7] ETHIOPIC SYLLABLE ZZA..ETHIOPIC SYLLABLE ZZO
-unicode_east_asian_width(0x2DB8, 0x2DBE, 'N').	% Lo   [7] ETHIOPIC SYLLABLE CCHA..ETHIOPIC SYLLABLE CCHO
-unicode_east_asian_width(0x2DC0, 0x2DC6, 'N').	% Lo   [7] ETHIOPIC SYLLABLE QYA..ETHIOPIC SYLLABLE QYO
-unicode_east_asian_width(0x2DC8, 0x2DCE, 'N').	% Lo   [7] ETHIOPIC SYLLABLE KYA..ETHIOPIC SYLLABLE KYO
-unicode_east_asian_width(0x2DD0, 0x2DD6, 'N').	% Lo   [7] ETHIOPIC SYLLABLE XYA..ETHIOPIC SYLLABLE XYO
-unicode_east_asian_width(0x2DD8, 0x2DDE, 'N').	% Lo   [7] ETHIOPIC SYLLABLE GYA..ETHIOPIC SYLLABLE GYO
-unicode_east_asian_width(0x2DE0, 0x2DFF, 'N').	% Mn  [32] COMBINING CYRILLIC LETTER BE..COMBINING CYRILLIC LETTER IOTIFIED BIG YUS
-unicode_east_asian_width(0x2E00, 0x2E01, 'N').	% Po   [2] RIGHT ANGLE SUBSTITUTION MARKER..RIGHT ANGLE DOTTED SUBSTITUTION MARKER
-unicode_east_asian_width(0x2E02, 0x2E02, 'N').	% Pi       LEFT SUBSTITUTION BRACKET
-unicode_east_asian_width(0x2E03, 0x2E03, 'N').	% Pf       RIGHT SUBSTITUTION BRACKET
-unicode_east_asian_width(0x2E04, 0x2E04, 'N').	% Pi       LEFT DOTTED SUBSTITUTION BRACKET
-unicode_east_asian_width(0x2E05, 0x2E05, 'N').	% Pf       RIGHT DOTTED SUBSTITUTION BRACKET
-unicode_east_asian_width(0x2E06, 0x2E08, 'N').	% Po   [3] RAISED INTERPOLATION MARKER..DOTTED TRANSPOSITION MARKER
-unicode_east_asian_width(0x2E09, 0x2E09, 'N').	% Pi       LEFT TRANSPOSITION BRACKET
-unicode_east_asian_width(0x2E0A, 0x2E0A, 'N').	% Pf       RIGHT TRANSPOSITION BRACKET
-unicode_east_asian_width(0x2E0B, 0x2E0B, 'N').	% Po       RAISED SQUARE
-unicode_east_asian_width(0x2E0C, 0x2E0C, 'N').	% Pi       LEFT RAISED OMISSION BRACKET
-unicode_east_asian_width(0x2E0D, 0x2E0D, 'N').	% Pf       RIGHT RAISED OMISSION BRACKET
-unicode_east_asian_width(0x2E0E, 0x2E16, 'N').	% Po   [9] EDITORIAL CORONIS..DOTTED RIGHT-POINTING ANGLE
-unicode_east_asian_width(0x2E17, 0x2E17, 'N').	% Pd       DOUBLE OBLIQUE HYPHEN
-unicode_east_asian_width(0x2E18, 0x2E19, 'N').	% Po   [2] INVERTED INTERROBANG..PALM BRANCH
-unicode_east_asian_width(0x2E1A, 0x2E1A, 'N').	% Pd       HYPHEN WITH DIAERESIS
-unicode_east_asian_width(0x2E1B, 0x2E1B, 'N').	% Po       TILDE WITH RING ABOVE
-unicode_east_asian_width(0x2E1C, 0x2E1C, 'N').	% Pi       LEFT LOW PARAPHRASE BRACKET
-unicode_east_asian_width(0x2E1D, 0x2E1D, 'N').	% Pf       RIGHT LOW PARAPHRASE BRACKET
-unicode_east_asian_width(0x2E1E, 0x2E1F, 'N').	% Po   [2] TILDE WITH DOT ABOVE..TILDE WITH DOT BELOW
-unicode_east_asian_width(0x2E20, 0x2E20, 'N').	% Pi       LEFT VERTICAL BAR WITH QUILL
-unicode_east_asian_width(0x2E21, 0x2E21, 'N').	% Pf       RIGHT VERTICAL BAR WITH QUILL
-unicode_east_asian_width(0x2E22, 0x2E22, 'N').	% Ps       TOP LEFT HALF BRACKET
-unicode_east_asian_width(0x2E23, 0x2E23, 'N').	% Pe       TOP RIGHT HALF BRACKET
-unicode_east_asian_width(0x2E24, 0x2E24, 'N').	% Ps       BOTTOM LEFT HALF BRACKET
-unicode_east_asian_width(0x2E25, 0x2E25, 'N').	% Pe       BOTTOM RIGHT HALF BRACKET
-unicode_east_asian_width(0x2E26, 0x2E26, 'N').	% Ps       LEFT SIDEWAYS U BRACKET
-unicode_east_asian_width(0x2E27, 0x2E27, 'N').	% Pe       RIGHT SIDEWAYS U BRACKET
-unicode_east_asian_width(0x2E28, 0x2E28, 'N').	% Ps       LEFT DOUBLE PARENTHESIS
-unicode_east_asian_width(0x2E29, 0x2E29, 'N').	% Pe       RIGHT DOUBLE PARENTHESIS
-unicode_east_asian_width(0x2E2A, 0x2E2E, 'N').	% Po   [5] TWO DOTS OVER ONE DOT PUNCTUATION..REVERSED QUESTION MARK
-unicode_east_asian_width(0x2E2F, 0x2E2F, 'N').	% Lm       VERTICAL TILDE
-unicode_east_asian_width(0x2E30, 0x2E39, 'N').	% Po  [10] RING POINT..TOP HALF SECTION SIGN
-unicode_east_asian_width(0x2E3A, 0x2E3B, 'N').	% Pd   [2] TWO-EM DASH..THREE-EM DASH
-unicode_east_asian_width(0x303F, 0x303F, 'N').	% So       IDEOGRAPHIC HALF FILL SPACE
-unicode_east_asian_width(0x4DC0, 0x4DFF, 'N').	% So  [64] HEXAGRAM FOR THE CREATIVE HEAVEN..HEXAGRAM FOR BEFORE COMPLETION
-unicode_east_asian_width(0xA4D0, 0xA4F7, 'N').	% Lo  [40] LISU LETTER BA..LISU LETTER OE
-unicode_east_asian_width(0xA4F8, 0xA4FD, 'N').	% Lm   [6] LISU LETTER TONE MYA TI..LISU LETTER TONE MYA JEU
-unicode_east_asian_width(0xA4FE, 0xA4FF, 'N').	% Po   [2] LISU PUNCTUATION COMMA..LISU PUNCTUATION FULL STOP
-unicode_east_asian_width(0xA500, 0xA60B, 'N').	% Lo [268] VAI SYLLABLE EE..VAI SYLLABLE NG
-unicode_east_asian_width(0xA60C, 0xA60C, 'N').	% Lm       VAI SYLLABLE LENGTHENER
-unicode_east_asian_width(0xA60D, 0xA60F, 'N').	% Po   [3] VAI COMMA..VAI QUESTION MARK
-unicode_east_asian_width(0xA610, 0xA61F, 'N').	% Lo  [16] VAI SYLLABLE NDOLE FA..VAI SYMBOL JONG
-unicode_east_asian_width(0xA620, 0xA629, 'N').	% Nd  [10] VAI DIGIT ZERO..VAI DIGIT NINE
-unicode_east_asian_width(0xA62A, 0xA62B, 'N').	% Lo   [2] VAI SYLLABLE NDOLE MA..VAI SYLLABLE NDOLE DO
-unicode_east_asian_width(0xA640, 0xA66D, 'N').	% L&  [46] CYRILLIC CAPITAL LETTER ZEMLYA..CYRILLIC SMALL LETTER DOUBLE MONOCULAR O
-unicode_east_asian_width(0xA66E, 0xA66E, 'N').	% Lo       CYRILLIC LETTER MULTIOCULAR O
-unicode_east_asian_width(0xA66F, 0xA66F, 'N').	% Mn       COMBINING CYRILLIC VZMET
-unicode_east_asian_width(0xA670, 0xA672, 'N').	% Me   [3] COMBINING CYRILLIC TEN MILLIONS SIGN..COMBINING CYRILLIC THOUSAND MILLIONS SIGN
-unicode_east_asian_width(0xA673, 0xA673, 'N').	% Po       SLAVONIC ASTERISK
-unicode_east_asian_width(0xA674, 0xA67D, 'N').	% Mn  [10] COMBINING CYRILLIC LETTER UKRAINIAN IE..COMBINING CYRILLIC PAYEROK
-unicode_east_asian_width(0xA67E, 0xA67E, 'N').	% Po       CYRILLIC KAVYKA
-unicode_east_asian_width(0xA67F, 0xA67F, 'N').	% Lm       CYRILLIC PAYEROK
-unicode_east_asian_width(0xA680, 0xA697, 'N').	% L&  [24] CYRILLIC CAPITAL LETTER DWE..CYRILLIC SMALL LETTER SHWE
-unicode_east_asian_width(0xA69F, 0xA69F, 'N').	% Mn       COMBINING CYRILLIC LETTER IOTIFIED E
-unicode_east_asian_width(0xA6A0, 0xA6E5, 'N').	% Lo  [70] BAMUM LETTER A..BAMUM LETTER KI
-unicode_east_asian_width(0xA6E6, 0xA6EF, 'N').	% Nl  [10] BAMUM LETTER MO..BAMUM LETTER KOGHOM
-unicode_east_asian_width(0xA6F0, 0xA6F1, 'N').	% Mn   [2] BAMUM COMBINING MARK KOQNDON..BAMUM COMBINING MARK TUKWENTIS
-unicode_east_asian_width(0xA6F2, 0xA6F7, 'N').	% Po   [6] BAMUM NJAEMLI..BAMUM QUESTION MARK
-unicode_east_asian_width(0xA700, 0xA716, 'N').	% Sk  [23] MODIFIER LETTER CHINESE TONE YIN PING..MODIFIER LETTER EXTRA-LOW LEFT-STEM TONE BAR
-unicode_east_asian_width(0xA717, 0xA71F, 'N').	% Lm   [9] MODIFIER LETTER DOT VERTICAL BAR..MODIFIER LETTER LOW INVERTED EXCLAMATION MARK
-unicode_east_asian_width(0xA720, 0xA721, 'N').	% Sk   [2] MODIFIER LETTER STRESS AND HIGH TONE..MODIFIER LETTER STRESS AND LOW TONE
-unicode_east_asian_width(0xA722, 0xA76F, 'N').	% L&  [78] LATIN CAPITAL LETTER EGYPTOLOGICAL ALEF..LATIN SMALL LETTER CON
-unicode_east_asian_width(0xA770, 0xA770, 'N').	% Lm       MODIFIER LETTER US
-unicode_east_asian_width(0xA771, 0xA787, 'N').	% L&  [23] LATIN SMALL LETTER DUM..LATIN SMALL LETTER INSULAR T
-unicode_east_asian_width(0xA788, 0xA788, 'N').	% Lm       MODIFIER LETTER LOW CIRCUMFLEX ACCENT
-unicode_east_asian_width(0xA789, 0xA78A, 'N').	% Sk   [2] MODIFIER LETTER COLON..MODIFIER LETTER SHORT EQUALS SIGN
-unicode_east_asian_width(0xA78B, 0xA78E, 'N').	% L&   [4] LATIN CAPITAL LETTER SALTILLO..LATIN SMALL LETTER L WITH RETROFLEX HOOK AND BELT
-unicode_east_asian_width(0xA790, 0xA793, 'N').	% L&   [4] LATIN CAPITAL LETTER N WITH DESCENDER..LATIN SMALL LETTER C WITH BAR
-unicode_east_asian_width(0xA7A0, 0xA7AA, 'N').	% L&  [11] LATIN CAPITAL LETTER G WITH OBLIQUE STROKE..LATIN CAPITAL LETTER H WITH HOOK
-unicode_east_asian_width(0xA7F8, 0xA7F9, 'N').	% Lm   [2] MODIFIER LETTER CAPITAL H WITH STROKE..MODIFIER LETTER SMALL LIGATURE OE
-unicode_east_asian_width(0xA7FA, 0xA7FA, 'N').	% L&       LATIN LETTER SMALL CAPITAL TURNED M
-unicode_east_asian_width(0xA7FB, 0xA801, 'N').	% Lo   [7] LATIN EPIGRAPHIC LETTER REVERSED F..SYLOTI NAGRI LETTER I
-unicode_east_asian_width(0xA802, 0xA802, 'N').	% Mn       SYLOTI NAGRI SIGN DVISVARA
-unicode_east_asian_width(0xA803, 0xA805, 'N').	% Lo   [3] SYLOTI NAGRI LETTER U..SYLOTI NAGRI LETTER O
-unicode_east_asian_width(0xA806, 0xA806, 'N').	% Mn       SYLOTI NAGRI SIGN HASANTA
-unicode_east_asian_width(0xA807, 0xA80A, 'N').	% Lo   [4] SYLOTI NAGRI LETTER KO..SYLOTI NAGRI LETTER GHO
-unicode_east_asian_width(0xA80B, 0xA80B, 'N').	% Mn       SYLOTI NAGRI SIGN ANUSVARA
-unicode_east_asian_width(0xA80C, 0xA822, 'N').	% Lo  [23] SYLOTI NAGRI LETTER CO..SYLOTI NAGRI LETTER HO
-unicode_east_asian_width(0xA823, 0xA824, 'N').	% Mc   [2] SYLOTI NAGRI VOWEL SIGN A..SYLOTI NAGRI VOWEL SIGN I
-unicode_east_asian_width(0xA825, 0xA826, 'N').	% Mn   [2] SYLOTI NAGRI VOWEL SIGN U..SYLOTI NAGRI VOWEL SIGN E
-unicode_east_asian_width(0xA827, 0xA827, 'N').	% Mc       SYLOTI NAGRI VOWEL SIGN OO
-unicode_east_asian_width(0xA828, 0xA82B, 'N').	% So   [4] SYLOTI NAGRI POETRY MARK-1..SYLOTI NAGRI POETRY MARK-4
-unicode_east_asian_width(0xA830, 0xA835, 'N').	% No   [6] NORTH INDIC FRACTION ONE QUARTER..NORTH INDIC FRACTION THREE SIXTEENTHS
-unicode_east_asian_width(0xA836, 0xA837, 'N').	% So   [2] NORTH INDIC QUARTER MARK..NORTH INDIC PLACEHOLDER MARK
-unicode_east_asian_width(0xA838, 0xA838, 'N').	% Sc       NORTH INDIC RUPEE MARK
-unicode_east_asian_width(0xA839, 0xA839, 'N').	% So       NORTH INDIC QUANTITY MARK
-unicode_east_asian_width(0xA840, 0xA873, 'N').	% Lo  [52] PHAGS-PA LETTER KA..PHAGS-PA LETTER CANDRABINDU
-unicode_east_asian_width(0xA874, 0xA877, 'N').	% Po   [4] PHAGS-PA SINGLE HEAD MARK..PHAGS-PA MARK DOUBLE SHAD
-unicode_east_asian_width(0xA880, 0xA881, 'N').	% Mc   [2] SAURASHTRA SIGN ANUSVARA..SAURASHTRA SIGN VISARGA
-unicode_east_asian_width(0xA882, 0xA8B3, 'N').	% Lo  [50] SAURASHTRA LETTER A..SAURASHTRA LETTER LLA
-unicode_east_asian_width(0xA8B4, 0xA8C3, 'N').	% Mc  [16] SAURASHTRA CONSONANT SIGN HAARU..SAURASHTRA VOWEL SIGN AU
-unicode_east_asian_width(0xA8C4, 0xA8C4, 'N').	% Mn       SAURASHTRA SIGN VIRAMA
-unicode_east_asian_width(0xA8CE, 0xA8CF, 'N').	% Po   [2] SAURASHTRA DANDA..SAURASHTRA DOUBLE DANDA
-unicode_east_asian_width(0xA8D0, 0xA8D9, 'N').	% Nd  [10] SAURASHTRA DIGIT ZERO..SAURASHTRA DIGIT NINE
-unicode_east_asian_width(0xA8E0, 0xA8F1, 'N').	% Mn  [18] COMBINING DEVANAGARI DIGIT ZERO..COMBINING DEVANAGARI SIGN AVAGRAHA
-unicode_east_asian_width(0xA8F2, 0xA8F7, 'N').	% Lo   [6] DEVANAGARI SIGN SPACING CANDRABINDU..DEVANAGARI SIGN CANDRABINDU AVAGRAHA
-unicode_east_asian_width(0xA8F8, 0xA8FA, 'N').	% Po   [3] DEVANAGARI SIGN PUSHPIKA..DEVANAGARI CARET
-unicode_east_asian_width(0xA8FB, 0xA8FB, 'N').	% Lo       DEVANAGARI HEADSTROKE
-unicode_east_asian_width(0xA900, 0xA909, 'N').	% Nd  [10] KAYAH LI DIGIT ZERO..KAYAH LI DIGIT NINE
-unicode_east_asian_width(0xA90A, 0xA925, 'N').	% Lo  [28] KAYAH LI LETTER KA..KAYAH LI LETTER OO
-unicode_east_asian_width(0xA926, 0xA92D, 'N').	% Mn   [8] KAYAH LI VOWEL UE..KAYAH LI TONE CALYA PLOPHU
-unicode_east_asian_width(0xA92E, 0xA92F, 'N').	% Po   [2] KAYAH LI SIGN CWI..KAYAH LI SIGN SHYA
-unicode_east_asian_width(0xA930, 0xA946, 'N').	% Lo  [23] REJANG LETTER KA..REJANG LETTER A
-unicode_east_asian_width(0xA947, 0xA951, 'N').	% Mn  [11] REJANG VOWEL SIGN I..REJANG CONSONANT SIGN R
-unicode_east_asian_width(0xA952, 0xA953, 'N').	% Mc   [2] REJANG CONSONANT SIGN H..REJANG VIRAMA
-unicode_east_asian_width(0xA95F, 0xA95F, 'N').	% Po       REJANG SECTION MARK
-unicode_east_asian_width(0xA980, 0xA982, 'N').	% Mn   [3] JAVANESE SIGN PANYANGGA..JAVANESE SIGN LAYAR
-unicode_east_asian_width(0xA983, 0xA983, 'N').	% Mc       JAVANESE SIGN WIGNYAN
-unicode_east_asian_width(0xA984, 0xA9B2, 'N').	% Lo  [47] JAVANESE LETTER A..JAVANESE LETTER HA
-unicode_east_asian_width(0xA9B3, 0xA9B3, 'N').	% Mn       JAVANESE SIGN CECAK TELU
-unicode_east_asian_width(0xA9B4, 0xA9B5, 'N').	% Mc   [2] JAVANESE VOWEL SIGN TARUNG..JAVANESE VOWEL SIGN TOLONG
-unicode_east_asian_width(0xA9B6, 0xA9B9, 'N').	% Mn   [4] JAVANESE VOWEL SIGN WULU..JAVANESE VOWEL SIGN SUKU MENDUT
-unicode_east_asian_width(0xA9BA, 0xA9BB, 'N').	% Mc   [2] JAVANESE VOWEL SIGN TALING..JAVANESE VOWEL SIGN DIRGA MURE
-unicode_east_asian_width(0xA9BC, 0xA9BC, 'N').	% Mn       JAVANESE VOWEL SIGN PEPET
-unicode_east_asian_width(0xA9BD, 0xA9C0, 'N').	% Mc   [4] JAVANESE CONSONANT SIGN KERET..JAVANESE PANGKON
-unicode_east_asian_width(0xA9C1, 0xA9CD, 'N').	% Po  [13] JAVANESE LEFT RERENGGAN..JAVANESE TURNED PADA PISELEH
-unicode_east_asian_width(0xA9CF, 0xA9CF, 'N').	% Lm       JAVANESE PANGRANGKEP
-unicode_east_asian_width(0xA9D0, 0xA9D9, 'N').	% Nd  [10] JAVANESE DIGIT ZERO..JAVANESE DIGIT NINE
-unicode_east_asian_width(0xA9DE, 0xA9DF, 'N').	% Po   [2] JAVANESE PADA TIRTA TUMETES..JAVANESE PADA ISEN-ISEN
-unicode_east_asian_width(0xAA00, 0xAA28, 'N').	% Lo  [41] CHAM LETTER A..CHAM LETTER HA
-unicode_east_asian_width(0xAA29, 0xAA2E, 'N').	% Mn   [6] CHAM VOWEL SIGN AA..CHAM VOWEL SIGN OE
-unicode_east_asian_width(0xAA2F, 0xAA30, 'N').	% Mc   [2] CHAM VOWEL SIGN O..CHAM VOWEL SIGN AI
-unicode_east_asian_width(0xAA31, 0xAA32, 'N').	% Mn   [2] CHAM VOWEL SIGN AU..CHAM VOWEL SIGN UE
-unicode_east_asian_width(0xAA33, 0xAA34, 'N').	% Mc   [2] CHAM CONSONANT SIGN YA..CHAM CONSONANT SIGN RA
-unicode_east_asian_width(0xAA35, 0xAA36, 'N').	% Mn   [2] CHAM CONSONANT SIGN LA..CHAM CONSONANT SIGN WA
-unicode_east_asian_width(0xAA40, 0xAA42, 'N').	% Lo   [3] CHAM LETTER FINAL K..CHAM LETTER FINAL NG
-unicode_east_asian_width(0xAA43, 0xAA43, 'N').	% Mn       CHAM CONSONANT SIGN FINAL NG
-unicode_east_asian_width(0xAA44, 0xAA4B, 'N').	% Lo   [8] CHAM LETTER FINAL CH..CHAM LETTER FINAL SS
-unicode_east_asian_width(0xAA4C, 0xAA4C, 'N').	% Mn       CHAM CONSONANT SIGN FINAL M
-unicode_east_asian_width(0xAA4D, 0xAA4D, 'N').	% Mc       CHAM CONSONANT SIGN FINAL H
-unicode_east_asian_width(0xAA50, 0xAA59, 'N').	% Nd  [10] CHAM DIGIT ZERO..CHAM DIGIT NINE
-unicode_east_asian_width(0xAA5C, 0xAA5F, 'N').	% Po   [4] CHAM PUNCTUATION SPIRAL..CHAM PUNCTUATION TRIPLE DANDA
-unicode_east_asian_width(0xAA60, 0xAA6F, 'N').	% Lo  [16] MYANMAR LETTER KHAMTI GA..MYANMAR LETTER KHAMTI FA
-unicode_east_asian_width(0xAA70, 0xAA70, 'N').	% Lm       MYANMAR MODIFIER LETTER KHAMTI REDUPLICATION
-unicode_east_asian_width(0xAA71, 0xAA76, 'N').	% Lo   [6] MYANMAR LETTER KHAMTI XA..MYANMAR LOGOGRAM KHAMTI HM
-unicode_east_asian_width(0xAA77, 0xAA79, 'N').	% So   [3] MYANMAR SYMBOL AITON EXCLAMATION..MYANMAR SYMBOL AITON TWO
-unicode_east_asian_width(0xAA7A, 0xAA7A, 'N').	% Lo       MYANMAR LETTER AITON RA
-unicode_east_asian_width(0xAA7B, 0xAA7B, 'N').	% Mc       MYANMAR SIGN PAO KAREN TONE
-unicode_east_asian_width(0xAA80, 0xAAAF, 'N').	% Lo  [48] TAI VIET LETTER LOW KO..TAI VIET LETTER HIGH O
-unicode_east_asian_width(0xAAB0, 0xAAB0, 'N').	% Mn       TAI VIET MAI KANG
-unicode_east_asian_width(0xAAB1, 0xAAB1, 'N').	% Lo       TAI VIET VOWEL AA
-unicode_east_asian_width(0xAAB2, 0xAAB4, 'N').	% Mn   [3] TAI VIET VOWEL I..TAI VIET VOWEL U
-unicode_east_asian_width(0xAAB5, 0xAAB6, 'N').	% Lo   [2] TAI VIET VOWEL E..TAI VIET VOWEL O
-unicode_east_asian_width(0xAAB7, 0xAAB8, 'N').	% Mn   [2] TAI VIET MAI KHIT..TAI VIET VOWEL IA
-unicode_east_asian_width(0xAAB9, 0xAABD, 'N').	% Lo   [5] TAI VIET VOWEL UEA..TAI VIET VOWEL AN
-unicode_east_asian_width(0xAABE, 0xAABF, 'N').	% Mn   [2] TAI VIET VOWEL AM..TAI VIET TONE MAI EK
-unicode_east_asian_width(0xAAC0, 0xAAC0, 'N').	% Lo       TAI VIET TONE MAI NUENG
-unicode_east_asian_width(0xAAC1, 0xAAC1, 'N').	% Mn       TAI VIET TONE MAI THO
-unicode_east_asian_width(0xAAC2, 0xAAC2, 'N').	% Lo       TAI VIET TONE MAI SONG
-unicode_east_asian_width(0xAADB, 0xAADC, 'N').	% Lo   [2] TAI VIET SYMBOL KON..TAI VIET SYMBOL NUENG
-unicode_east_asian_width(0xAADD, 0xAADD, 'N').	% Lm       TAI VIET SYMBOL SAM
-unicode_east_asian_width(0xAADE, 0xAADF, 'N').	% Po   [2] TAI VIET SYMBOL HO HOI..TAI VIET SYMBOL KOI KOI
-unicode_east_asian_width(0xAAE0, 0xAAEA, 'N').	% Lo  [11] MEETEI MAYEK LETTER E..MEETEI MAYEK LETTER SSA
-unicode_east_asian_width(0xAAEB, 0xAAEB, 'N').	% Mc       MEETEI MAYEK VOWEL SIGN II
-unicode_east_asian_width(0xAAEC, 0xAAED, 'N').	% Mn   [2] MEETEI MAYEK VOWEL SIGN UU..MEETEI MAYEK VOWEL SIGN AAI
-unicode_east_asian_width(0xAAEE, 0xAAEF, 'N').	% Mc   [2] MEETEI MAYEK VOWEL SIGN AU..MEETEI MAYEK VOWEL SIGN AAU
-unicode_east_asian_width(0xAAF0, 0xAAF1, 'N').	% Po   [2] MEETEI MAYEK CHEIKHAN..MEETEI MAYEK AHANG KHUDAM
-unicode_east_asian_width(0xAAF2, 0xAAF2, 'N').	% Lo       MEETEI MAYEK ANJI
-unicode_east_asian_width(0xAAF3, 0xAAF4, 'N').	% Lm   [2] MEETEI MAYEK SYLLABLE REPETITION MARK..MEETEI MAYEK WORD REPETITION MARK
-unicode_east_asian_width(0xAAF5, 0xAAF5, 'N').	% Mc       MEETEI MAYEK VOWEL SIGN VISARGA
-unicode_east_asian_width(0xAAF6, 0xAAF6, 'N').	% Mn       MEETEI MAYEK VIRAMA
-unicode_east_asian_width(0xAB01, 0xAB06, 'N').	% Lo   [6] ETHIOPIC SYLLABLE TTHU..ETHIOPIC SYLLABLE TTHO
-unicode_east_asian_width(0xAB09, 0xAB0E, 'N').	% Lo   [6] ETHIOPIC SYLLABLE DDHU..ETHIOPIC SYLLABLE DDHO
-unicode_east_asian_width(0xAB11, 0xAB16, 'N').	% Lo   [6] ETHIOPIC SYLLABLE DZU..ETHIOPIC SYLLABLE DZO
-unicode_east_asian_width(0xAB20, 0xAB26, 'N').	% Lo   [7] ETHIOPIC SYLLABLE CCHHA..ETHIOPIC SYLLABLE CCHHO
-unicode_east_asian_width(0xAB28, 0xAB2E, 'N').	% Lo   [7] ETHIOPIC SYLLABLE BBA..ETHIOPIC SYLLABLE BBO
-unicode_east_asian_width(0xABC0, 0xABE2, 'N').	% Lo  [35] MEETEI MAYEK LETTER KOK..MEETEI MAYEK LETTER I LONSUM
-unicode_east_asian_width(0xABE3, 0xABE4, 'N').	% Mc   [2] MEETEI MAYEK VOWEL SIGN ONAP..MEETEI MAYEK VOWEL SIGN INAP
-unicode_east_asian_width(0xABE5, 0xABE5, 'N').	% Mn       MEETEI MAYEK VOWEL SIGN ANAP
-unicode_east_asian_width(0xABE6, 0xABE7, 'N').	% Mc   [2] MEETEI MAYEK VOWEL SIGN YENAP..MEETEI MAYEK VOWEL SIGN SOUNAP
-unicode_east_asian_width(0xABE8, 0xABE8, 'N').	% Mn       MEETEI MAYEK VOWEL SIGN UNAP
-unicode_east_asian_width(0xABE9, 0xABEA, 'N').	% Mc   [2] MEETEI MAYEK VOWEL SIGN CHEINAP..MEETEI MAYEK VOWEL SIGN NUNG
-unicode_east_asian_width(0xABEB, 0xABEB, 'N').	% Po       MEETEI MAYEK CHEIKHEI
-unicode_east_asian_width(0xABEC, 0xABEC, 'N').	% Mc       MEETEI MAYEK LUM IYEK
-unicode_east_asian_width(0xABED, 0xABED, 'N').	% Mn       MEETEI MAYEK APUN IYEK
-unicode_east_asian_width(0xABF0, 0xABF9, 'N').	% Nd  [10] MEETEI MAYEK DIGIT ZERO..MEETEI MAYEK DIGIT NINE
-unicode_east_asian_width(0xFB00, 0xFB06, 'N').	% L&   [7] LATIN SMALL LIGATURE FF..LATIN SMALL LIGATURE ST
-unicode_east_asian_width(0xFB13, 0xFB17, 'N').	% L&   [5] ARMENIAN SMALL LIGATURE MEN NOW..ARMENIAN SMALL LIGATURE MEN XEH
-unicode_east_asian_width(0xFB1D, 0xFB1D, 'N').	% Lo       HEBREW LETTER YOD WITH HIRIQ
-unicode_east_asian_width(0xFB1E, 0xFB1E, 'N').	% Mn       HEBREW POINT JUDEO-SPANISH VARIKA
-unicode_east_asian_width(0xFB1F, 0xFB28, 'N').	% Lo  [10] HEBREW LIGATURE YIDDISH YOD YOD PATAH..HEBREW LETTER WIDE TAV
-unicode_east_asian_width(0xFB29, 0xFB29, 'N').	% Sm       HEBREW LETTER ALTERNATIVE PLUS SIGN
-unicode_east_asian_width(0xFB2A, 0xFB36, 'N').	% Lo  [13] HEBREW LETTER SHIN WITH SHIN DOT..HEBREW LETTER ZAYIN WITH DAGESH
-unicode_east_asian_width(0xFB38, 0xFB3C, 'N').	% Lo   [5] HEBREW LETTER TET WITH DAGESH..HEBREW LETTER LAMED WITH DAGESH
-unicode_east_asian_width(0xFB3E, 0xFB3E, 'N').	% Lo       HEBREW LETTER MEM WITH DAGESH
-unicode_east_asian_width(0xFB40, 0xFB41, 'N').	% Lo   [2] HEBREW LETTER NUN WITH DAGESH..HEBREW LETTER SAMEKH WITH DAGESH
-unicode_east_asian_width(0xFB43, 0xFB44, 'N').	% Lo   [2] HEBREW LETTER FINAL PE WITH DAGESH..HEBREW LETTER PE WITH DAGESH
-unicode_east_asian_width(0xFB46, 0xFBB1, 'N').	% Lo [108] HEBREW LETTER TSADI WITH DAGESH..ARABIC LETTER YEH BARREE WITH HAMZA ABOVE FINAL FORM
-unicode_east_asian_width(0xFBB2, 0xFBC1, 'N').	% Sk  [16] ARABIC SYMBOL DOT ABOVE..ARABIC SYMBOL SMALL TAH BELOW
-unicode_east_asian_width(0xFBD3, 0xFD3D, 'N').	% Lo [363] ARABIC LETTER NG ISOLATED FORM..ARABIC LIGATURE ALEF WITH FATHATAN ISOLATED FORM
-unicode_east_asian_width(0xFD3E, 0xFD3E, 'N').	% Ps       ORNATE LEFT PARENTHESIS
-unicode_east_asian_width(0xFD3F, 0xFD3F, 'N').	% Pe       ORNATE RIGHT PARENTHESIS
-unicode_east_asian_width(0xFD50, 0xFD8F, 'N').	% Lo  [64] ARABIC LIGATURE TEH WITH JEEM WITH MEEM INITIAL FORM..ARABIC LIGATURE MEEM WITH KHAH WITH MEEM INITIAL FORM
-unicode_east_asian_width(0xFD92, 0xFDC7, 'N').	% Lo  [54] ARABIC LIGATURE MEEM WITH JEEM WITH KHAH INITIAL FORM..ARABIC LIGATURE NOON WITH JEEM WITH YEH FINAL FORM
-unicode_east_asian_width(0xFDF0, 0xFDFB, 'N').	% Lo  [12] ARABIC LIGATURE SALLA USED AS KORANIC STOP SIGN ISOLATED FORM..ARABIC LIGATURE JALLAJALALOUHOU
-unicode_east_asian_width(0xFDFC, 0xFDFC, 'N').	% Sc       RIAL SIGN
-unicode_east_asian_width(0xFDFD, 0xFDFD, 'N').	% So       ARABIC LIGATURE BISMILLAH AR-RAHMAN AR-RAHEEM
-unicode_east_asian_width(0xFE20, 0xFE26, 'N').	% Mn   [7] COMBINING LIGATURE LEFT HALF..COMBINING CONJOINING MACRON
-unicode_east_asian_width(0xFE70, 0xFE74, 'N').	% Lo   [5] ARABIC FATHATAN ISOLATED FORM..ARABIC KASRATAN ISOLATED FORM
-unicode_east_asian_width(0xFE76, 0xFEFC, 'N').	% Lo [135] ARABIC FATHA ISOLATED FORM..ARABIC LIGATURE LAM WITH ALEF FINAL FORM
-unicode_east_asian_width(0xFEFF, 0xFEFF, 'N').	% Cf       ZERO WIDTH NO-BREAK SPACE
-unicode_east_asian_width(0xFFF9, 0xFFFB, 'N').	% Cf   [3] INTERLINEAR ANNOTATION ANCHOR..INTERLINEAR ANNOTATION TERMINATOR
-unicode_east_asian_width(0xFFFC, 0xFFFC, 'N').	% So       OBJECT REPLACEMENT CHARACTER
-unicode_east_asian_width(0x10000, 0x1000B, 'N').	% Lo  [12] LINEAR B SYLLABLE B008 A..LINEAR B SYLLABLE B046 JE
-unicode_east_asian_width(0x1000D, 0x10026, 'N').	% Lo  [26] LINEAR B SYLLABLE B036 JO..LINEAR B SYLLABLE B032 QO
-unicode_east_asian_width(0x10028, 0x1003A, 'N').	% Lo  [19] LINEAR B SYLLABLE B060 RA..LINEAR B SYLLABLE B042 WO
-unicode_east_asian_width(0x1003C, 0x1003D, 'N').	% Lo   [2] LINEAR B SYLLABLE B017 ZA..LINEAR B SYLLABLE B074 ZE
-unicode_east_asian_width(0x1003F, 0x1004D, 'N').	% Lo  [15] LINEAR B SYLLABLE B020 ZO..LINEAR B SYLLABLE B091 TWO
-unicode_east_asian_width(0x10050, 0x1005D, 'N').	% Lo  [14] LINEAR B SYMBOL B018..LINEAR B SYMBOL B089
-unicode_east_asian_width(0x10080, 0x100FA, 'N').	% Lo [123] LINEAR B IDEOGRAM B100 MAN..LINEAR B IDEOGRAM VESSEL B305
-unicode_east_asian_width(0x10100, 0x10102, 'N').	% Po   [3] AEGEAN WORD SEPARATOR LINE..AEGEAN CHECK MARK
-unicode_east_asian_width(0x10107, 0x10133, 'N').	% No  [45] AEGEAN NUMBER ONE..AEGEAN NUMBER NINETY THOUSAND
-unicode_east_asian_width(0x10137, 0x1013F, 'N').	% So   [9] AEGEAN WEIGHT BASE UNIT..AEGEAN MEASURE THIRD SUBUNIT
-unicode_east_asian_width(0x10140, 0x10174, 'N').	% Nl  [53] GREEK ACROPHONIC ATTIC ONE QUARTER..GREEK ACROPHONIC STRATIAN FIFTY MNAS
-unicode_east_asian_width(0x10175, 0x10178, 'N').	% No   [4] GREEK ONE HALF SIGN..GREEK THREE QUARTERS SIGN
-unicode_east_asian_width(0x10179, 0x10189, 'N').	% So  [17] GREEK YEAR SIGN..GREEK TRYBLION BASE SIGN
-unicode_east_asian_width(0x1018A, 0x1018A, 'N').	% No       GREEK ZERO SIGN
-unicode_east_asian_width(0x10190, 0x1019B, 'N').	% So  [12] ROMAN SEXTANS SIGN..ROMAN CENTURIAL SIGN
-unicode_east_asian_width(0x101D0, 0x101FC, 'N').	% So  [45] PHAISTOS DISC SIGN PEDESTRIAN..PHAISTOS DISC SIGN WAVY BAND
-unicode_east_asian_width(0x101FD, 0x101FD, 'N').	% Mn       PHAISTOS DISC SIGN COMBINING OBLIQUE STROKE
-unicode_east_asian_width(0x10280, 0x1029C, 'N').	% Lo  [29] LYCIAN LETTER A..LYCIAN LETTER X
-unicode_east_asian_width(0x102A0, 0x102D0, 'N').	% Lo  [49] CARIAN LETTER A..CARIAN LETTER UUU3
-unicode_east_asian_width(0x10300, 0x1031E, 'N').	% Lo  [31] OLD ITALIC LETTER A..OLD ITALIC LETTER UU
-unicode_east_asian_width(0x10320, 0x10323, 'N').	% No   [4] OLD ITALIC NUMERAL ONE..OLD ITALIC NUMERAL FIFTY
-unicode_east_asian_width(0x10330, 0x10340, 'N').	% Lo  [17] GOTHIC LETTER AHSA..GOTHIC LETTER PAIRTHRA
-unicode_east_asian_width(0x10341, 0x10341, 'N').	% Nl       GOTHIC LETTER NINETY
-unicode_east_asian_width(0x10342, 0x10349, 'N').	% Lo   [8] GOTHIC LETTER RAIDA..GOTHIC LETTER OTHAL
-unicode_east_asian_width(0x1034A, 0x1034A, 'N').	% Nl       GOTHIC LETTER NINE HUNDRED
-unicode_east_asian_width(0x10380, 0x1039D, 'N').	% Lo  [30] UGARITIC LETTER ALPA..UGARITIC LETTER SSU
-unicode_east_asian_width(0x1039F, 0x1039F, 'N').	% Po       UGARITIC WORD DIVIDER
-unicode_east_asian_width(0x103A0, 0x103C3, 'N').	% Lo  [36] OLD PERSIAN SIGN A..OLD PERSIAN SIGN HA
-unicode_east_asian_width(0x103C8, 0x103CF, 'N').	% Lo   [8] OLD PERSIAN SIGN AURAMAZDAA..OLD PERSIAN SIGN BUUMISH
-unicode_east_asian_width(0x103D0, 0x103D0, 'N').	% Po       OLD PERSIAN WORD DIVIDER
-unicode_east_asian_width(0x103D1, 0x103D5, 'N').	% Nl   [5] OLD PERSIAN NUMBER ONE..OLD PERSIAN NUMBER HUNDRED
-unicode_east_asian_width(0x10400, 0x1044F, 'N').	% L&  [80] DESERET CAPITAL LETTER LONG I..DESERET SMALL LETTER EW
-unicode_east_asian_width(0x10450, 0x1049D, 'N').	% Lo  [78] SHAVIAN LETTER PEEP..OSMANYA LETTER OO
-unicode_east_asian_width(0x104A0, 0x104A9, 'N').	% Nd  [10] OSMANYA DIGIT ZERO..OSMANYA DIGIT NINE
-unicode_east_asian_width(0x10800, 0x10805, 'N').	% Lo   [6] CYPRIOT SYLLABLE A..CYPRIOT SYLLABLE JA
-unicode_east_asian_width(0x10808, 0x10808, 'N').	% Lo       CYPRIOT SYLLABLE JO
-unicode_east_asian_width(0x1080A, 0x10835, 'N').	% Lo  [44] CYPRIOT SYLLABLE KA..CYPRIOT SYLLABLE WO
-unicode_east_asian_width(0x10837, 0x10838, 'N').	% Lo   [2] CYPRIOT SYLLABLE XA..CYPRIOT SYLLABLE XE
-unicode_east_asian_width(0x1083C, 0x1083C, 'N').	% Lo       CYPRIOT SYLLABLE ZA
-unicode_east_asian_width(0x1083F, 0x10855, 'N').	% Lo  [23] CYPRIOT SYLLABLE ZO..IMPERIAL ARAMAIC LETTER TAW
-unicode_east_asian_width(0x10857, 0x10857, 'N').	% Po       IMPERIAL ARAMAIC SECTION SIGN
-unicode_east_asian_width(0x10858, 0x1085F, 'N').	% No   [8] IMPERIAL ARAMAIC NUMBER ONE..IMPERIAL ARAMAIC NUMBER TEN THOUSAND
-unicode_east_asian_width(0x10900, 0x10915, 'N').	% Lo  [22] PHOENICIAN LETTER ALF..PHOENICIAN LETTER TAU
-unicode_east_asian_width(0x10916, 0x1091B, 'N').	% No   [6] PHOENICIAN NUMBER ONE..PHOENICIAN NUMBER THREE
-unicode_east_asian_width(0x1091F, 0x1091F, 'N').	% Po       PHOENICIAN WORD SEPARATOR
-unicode_east_asian_width(0x10920, 0x10939, 'N').	% Lo  [26] LYDIAN LETTER A..LYDIAN LETTER C
-unicode_east_asian_width(0x1093F, 0x1093F, 'N').	% Po       LYDIAN TRIANGULAR MARK
-unicode_east_asian_width(0x10980, 0x109B7, 'N').	% Lo  [56] MEROITIC HIEROGLYPHIC LETTER A..MEROITIC CURSIVE LETTER DA
-unicode_east_asian_width(0x109BE, 0x109BF, 'N').	% Lo   [2] MEROITIC CURSIVE LOGOGRAM RMT..MEROITIC CURSIVE LOGOGRAM IMN
-unicode_east_asian_width(0x10A00, 0x10A00, 'N').	% Lo       KHAROSHTHI LETTER A
-unicode_east_asian_width(0x10A01, 0x10A03, 'N').	% Mn   [3] KHAROSHTHI VOWEL SIGN I..KHAROSHTHI VOWEL SIGN VOCALIC R
-unicode_east_asian_width(0x10A05, 0x10A06, 'N').	% Mn   [2] KHAROSHTHI VOWEL SIGN E..KHAROSHTHI VOWEL SIGN O
-unicode_east_asian_width(0x10A0C, 0x10A0F, 'N').	% Mn   [4] KHAROSHTHI VOWEL LENGTH MARK..KHAROSHTHI SIGN VISARGA
-unicode_east_asian_width(0x10A10, 0x10A13, 'N').	% Lo   [4] KHAROSHTHI LETTER KA..KHAROSHTHI LETTER GHA
-unicode_east_asian_width(0x10A15, 0x10A17, 'N').	% Lo   [3] KHAROSHTHI LETTER CA..KHAROSHTHI LETTER JA
-unicode_east_asian_width(0x10A19, 0x10A33, 'N').	% Lo  [27] KHAROSHTHI LETTER NYA..KHAROSHTHI LETTER TTTHA
-unicode_east_asian_width(0x10A38, 0x10A3A, 'N').	% Mn   [3] KHAROSHTHI SIGN BAR ABOVE..KHAROSHTHI SIGN DOT BELOW
-unicode_east_asian_width(0x10A3F, 0x10A3F, 'N').	% Mn       KHAROSHTHI VIRAMA
-unicode_east_asian_width(0x10A40, 0x10A47, 'N').	% No   [8] KHAROSHTHI DIGIT ONE..KHAROSHTHI NUMBER ONE THOUSAND
-unicode_east_asian_width(0x10A50, 0x10A58, 'N').	% Po   [9] KHAROSHTHI PUNCTUATION DOT..KHAROSHTHI PUNCTUATION LINES
-unicode_east_asian_width(0x10A60, 0x10A7C, 'N').	% Lo  [29] OLD SOUTH ARABIAN LETTER HE..OLD SOUTH ARABIAN LETTER THETH
-unicode_east_asian_width(0x10A7D, 0x10A7E, 'N').	% No   [2] OLD SOUTH ARABIAN NUMBER ONE..OLD SOUTH ARABIAN NUMBER FIFTY
-unicode_east_asian_width(0x10A7F, 0x10A7F, 'N').	% Po       OLD SOUTH ARABIAN NUMERIC INDICATOR
-unicode_east_asian_width(0x10B00, 0x10B35, 'N').	% Lo  [54] AVESTAN LETTER A..AVESTAN LETTER HE
-unicode_east_asian_width(0x10B39, 0x10B3F, 'N').	% Po   [7] AVESTAN ABBREVIATION MARK..LARGE ONE RING OVER TWO RINGS PUNCTUATION
-unicode_east_asian_width(0x10B40, 0x10B55, 'N').	% Lo  [22] INSCRIPTIONAL PARTHIAN LETTER ALEPH..INSCRIPTIONAL PARTHIAN LETTER TAW
-unicode_east_asian_width(0x10B58, 0x10B5F, 'N').	% No   [8] INSCRIPTIONAL PARTHIAN NUMBER ONE..INSCRIPTIONAL PARTHIAN NUMBER ONE THOUSAND
-unicode_east_asian_width(0x10B60, 0x10B72, 'N').	% Lo  [19] INSCRIPTIONAL PAHLAVI LETTER ALEPH..INSCRIPTIONAL PAHLAVI LETTER TAW
-unicode_east_asian_width(0x10B78, 0x10B7F, 'N').	% No   [8] INSCRIPTIONAL PAHLAVI NUMBER ONE..INSCRIPTIONAL PAHLAVI NUMBER ONE THOUSAND
-unicode_east_asian_width(0x10C00, 0x10C48, 'N').	% Lo  [73] OLD TURKIC LETTER ORKHON A..OLD TURKIC LETTER ORKHON BASH
-unicode_east_asian_width(0x10E60, 0x10E7E, 'N').	% No  [31] RUMI DIGIT ONE..RUMI FRACTION TWO THIRDS
-unicode_east_asian_width(0x11000, 0x11000, 'N').	% Mc       BRAHMI SIGN CANDRABINDU
-unicode_east_asian_width(0x11001, 0x11001, 'N').	% Mn       BRAHMI SIGN ANUSVARA
-unicode_east_asian_width(0x11002, 0x11002, 'N').	% Mc       BRAHMI SIGN VISARGA
-unicode_east_asian_width(0x11003, 0x11037, 'N').	% Lo  [53] BRAHMI SIGN JIHVAMULIYA..BRAHMI LETTER OLD TAMIL NNNA
-unicode_east_asian_width(0x11038, 0x11046, 'N').	% Mn  [15] BRAHMI VOWEL SIGN AA..BRAHMI VIRAMA
-unicode_east_asian_width(0x11047, 0x1104D, 'N').	% Po   [7] BRAHMI DANDA..BRAHMI PUNCTUATION LOTUS
-unicode_east_asian_width(0x11052, 0x11065, 'N').	% No  [20] BRAHMI NUMBER ONE..BRAHMI NUMBER ONE THOUSAND
-unicode_east_asian_width(0x11066, 0x1106F, 'N').	% Nd  [10] BRAHMI DIGIT ZERO..BRAHMI DIGIT NINE
-unicode_east_asian_width(0x11080, 0x11081, 'N').	% Mn   [2] KAITHI SIGN CANDRABINDU..KAITHI SIGN ANUSVARA
-unicode_east_asian_width(0x11082, 0x11082, 'N').	% Mc       KAITHI SIGN VISARGA
-unicode_east_asian_width(0x11083, 0x110AF, 'N').	% Lo  [45] KAITHI LETTER A..KAITHI LETTER HA
-unicode_east_asian_width(0x110B0, 0x110B2, 'N').	% Mc   [3] KAITHI VOWEL SIGN AA..KAITHI VOWEL SIGN II
-unicode_east_asian_width(0x110B3, 0x110B6, 'N').	% Mn   [4] KAITHI VOWEL SIGN U..KAITHI VOWEL SIGN AI
-unicode_east_asian_width(0x110B7, 0x110B8, 'N').	% Mc   [2] KAITHI VOWEL SIGN O..KAITHI VOWEL SIGN AU
-unicode_east_asian_width(0x110B9, 0x110BA, 'N').	% Mn   [2] KAITHI SIGN VIRAMA..KAITHI SIGN NUKTA
-unicode_east_asian_width(0x110BB, 0x110BC, 'N').	% Po   [2] KAITHI ABBREVIATION SIGN..KAITHI ENUMERATION SIGN
-unicode_east_asian_width(0x110BD, 0x110BD, 'N').	% Cf       KAITHI NUMBER SIGN
-unicode_east_asian_width(0x110BE, 0x110C1, 'N').	% Po   [4] KAITHI SECTION MARK..KAITHI DOUBLE DANDA
-unicode_east_asian_width(0x110D0, 0x110E8, 'N').	% Lo  [25] SORA SOMPENG LETTER SAH..SORA SOMPENG LETTER MAE
-unicode_east_asian_width(0x110F0, 0x110F9, 'N').	% Nd  [10] SORA SOMPENG DIGIT ZERO..SORA SOMPENG DIGIT NINE
-unicode_east_asian_width(0x11100, 0x11102, 'N').	% Mn   [3] CHAKMA SIGN CANDRABINDU..CHAKMA SIGN VISARGA
-unicode_east_asian_width(0x11103, 0x11126, 'N').	% Lo  [36] CHAKMA LETTER AA..CHAKMA LETTER HAA
-unicode_east_asian_width(0x11127, 0x1112B, 'N').	% Mn   [5] CHAKMA VOWEL SIGN A..CHAKMA VOWEL SIGN UU
-unicode_east_asian_width(0x1112C, 0x1112C, 'N').	% Mc       CHAKMA VOWEL SIGN E
-unicode_east_asian_width(0x1112D, 0x11134, 'N').	% Mn   [8] CHAKMA VOWEL SIGN AI..CHAKMA MAAYYAA
-unicode_east_asian_width(0x11136, 0x1113F, 'N').	% Nd  [10] CHAKMA DIGIT ZERO..CHAKMA DIGIT NINE
-unicode_east_asian_width(0x11140, 0x11143, 'N').	% Po   [4] CHAKMA SECTION MARK..CHAKMA QUESTION MARK
-unicode_east_asian_width(0x11180, 0x11181, 'N').	% Mn   [2] SHARADA SIGN CANDRABINDU..SHARADA SIGN ANUSVARA
-unicode_east_asian_width(0x11182, 0x11182, 'N').	% Mc       SHARADA SIGN VISARGA
-unicode_east_asian_width(0x11183, 0x111B2, 'N').	% Lo  [48] SHARADA LETTER A..SHARADA LETTER HA
-unicode_east_asian_width(0x111B3, 0x111B5, 'N').	% Mc   [3] SHARADA VOWEL SIGN AA..SHARADA VOWEL SIGN II
-unicode_east_asian_width(0x111B6, 0x111BE, 'N').	% Mn   [9] SHARADA VOWEL SIGN U..SHARADA VOWEL SIGN O
-unicode_east_asian_width(0x111BF, 0x111C0, 'N').	% Mc   [2] SHARADA VOWEL SIGN AU..SHARADA SIGN VIRAMA
-unicode_east_asian_width(0x111C1, 0x111C4, 'N').	% Lo   [4] SHARADA SIGN AVAGRAHA..SHARADA OM
-unicode_east_asian_width(0x111C5, 0x111C8, 'N').	% Po   [4] SHARADA DANDA..SHARADA SEPARATOR
-unicode_east_asian_width(0x111D0, 0x111D9, 'N').	% Nd  [10] SHARADA DIGIT ZERO..SHARADA DIGIT NINE
-unicode_east_asian_width(0x11680, 0x116AA, 'N').	% Lo  [43] TAKRI LETTER A..TAKRI LETTER RRA
-unicode_east_asian_width(0x116AB, 0x116AB, 'N').	% Mn       TAKRI SIGN ANUSVARA
-unicode_east_asian_width(0x116AC, 0x116AC, 'N').	% Mc       TAKRI SIGN VISARGA
-unicode_east_asian_width(0x116AD, 0x116AD, 'N').	% Mn       TAKRI VOWEL SIGN AA
-unicode_east_asian_width(0x116AE, 0x116AF, 'N').	% Mc   [2] TAKRI VOWEL SIGN I..TAKRI VOWEL SIGN II
-unicode_east_asian_width(0x116B0, 0x116B5, 'N').	% Mn   [6] TAKRI VOWEL SIGN U..TAKRI VOWEL SIGN AU
-unicode_east_asian_width(0x116B6, 0x116B6, 'N').	% Mc       TAKRI SIGN VIRAMA
-unicode_east_asian_width(0x116B7, 0x116B7, 'N').	% Mn       TAKRI SIGN NUKTA
-unicode_east_asian_width(0x116C0, 0x116C9, 'N').	% Nd  [10] TAKRI DIGIT ZERO..TAKRI DIGIT NINE
-unicode_east_asian_width(0x12000, 0x1236E, 'N').	% Lo [879] CUNEIFORM SIGN A..CUNEIFORM SIGN ZUM
-unicode_east_asian_width(0x12400, 0x12462, 'N').	% Nl  [99] CUNEIFORM NUMERIC SIGN TWO ASH..CUNEIFORM NUMERIC SIGN OLD ASSYRIAN ONE QUARTER
-unicode_east_asian_width(0x12470, 0x12473, 'N').	% Po   [4] CUNEIFORM PUNCTUATION SIGN OLD ASSYRIAN WORD DIVIDER..CUNEIFORM PUNCTUATION SIGN DIAGONAL TRICOLON
-unicode_east_asian_width(0x13000, 0x1342E, 'N').	% Lo [1071] EGYPTIAN HIEROGLYPH A001..EGYPTIAN HIEROGLYPH AA032
-unicode_east_asian_width(0x16800, 0x16A38, 'N').	% Lo [569] BAMUM LETTER PHASE-A NGKUE MFON..BAMUM LETTER PHASE-F VUEQ
-unicode_east_asian_width(0x16F00, 0x16F44, 'N').	% Lo  [69] MIAO LETTER PA..MIAO LETTER HHA
-unicode_east_asian_width(0x16F50, 0x16F50, 'N').	% Lo       MIAO LETTER NASALIZATION
-unicode_east_asian_width(0x16F51, 0x16F7E, 'N').	% Mc  [46] MIAO SIGN ASPIRATION..MIAO VOWEL SIGN NG
-unicode_east_asian_width(0x16F8F, 0x16F92, 'N').	% Mn   [4] MIAO TONE RIGHT..MIAO TONE BELOW
-unicode_east_asian_width(0x16F93, 0x16F9F, 'N').	% Lm  [13] MIAO LETTER TONE-2..MIAO LETTER REFORMED TONE-8
-unicode_east_asian_width(0x1D000, 0x1D0F5, 'N').	% So [246] BYZANTINE MUSICAL SYMBOL PSILI..BYZANTINE MUSICAL SYMBOL GORGON NEO KATO
-unicode_east_asian_width(0x1D100, 0x1D126, 'N').	% So  [39] MUSICAL SYMBOL SINGLE BARLINE..MUSICAL SYMBOL DRUM CLEF-2
-unicode_east_asian_width(0x1D129, 0x1D164, 'N').	% So  [60] MUSICAL SYMBOL MULTIPLE MEASURE REST..MUSICAL SYMBOL ONE HUNDRED TWENTY-EIGHTH NOTE
-unicode_east_asian_width(0x1D165, 0x1D166, 'N').	% Mc   [2] MUSICAL SYMBOL COMBINING STEM..MUSICAL SYMBOL COMBINING SPRECHGESANG STEM
-unicode_east_asian_width(0x1D167, 0x1D169, 'N').	% Mn   [3] MUSICAL SYMBOL COMBINING TREMOLO-1..MUSICAL SYMBOL COMBINING TREMOLO-3
-unicode_east_asian_width(0x1D16A, 0x1D16C, 'N').	% So   [3] MUSICAL SYMBOL FINGERED TREMOLO-1..MUSICAL SYMBOL FINGERED TREMOLO-3
-unicode_east_asian_width(0x1D16D, 0x1D172, 'N').	% Mc   [6] MUSICAL SYMBOL COMBINING AUGMENTATION DOT..MUSICAL SYMBOL COMBINING FLAG-5
-unicode_east_asian_width(0x1D173, 0x1D17A, 'N').	% Cf   [8] MUSICAL SYMBOL BEGIN BEAM..MUSICAL SYMBOL END PHRASE
-unicode_east_asian_width(0x1D17B, 0x1D182, 'N').	% Mn   [8] MUSICAL SYMBOL COMBINING ACCENT..MUSICAL SYMBOL COMBINING LOURE
-unicode_east_asian_width(0x1D183, 0x1D184, 'N').	% So   [2] MUSICAL SYMBOL ARPEGGIATO UP..MUSICAL SYMBOL ARPEGGIATO DOWN
-unicode_east_asian_width(0x1D185, 0x1D18B, 'N').	% Mn   [7] MUSICAL SYMBOL COMBINING DOIT..MUSICAL SYMBOL COMBINING TRIPLE TONGUE
-unicode_east_asian_width(0x1D18C, 0x1D1A9, 'N').	% So  [30] MUSICAL SYMBOL RINFORZANDO..MUSICAL SYMBOL DEGREE SLASH
-unicode_east_asian_width(0x1D1AA, 0x1D1AD, 'N').	% Mn   [4] MUSICAL SYMBOL COMBINING DOWN BOW..MUSICAL SYMBOL COMBINING SNAP PIZZICATO
-unicode_east_asian_width(0x1D1AE, 0x1D1DD, 'N').	% So  [48] MUSICAL SYMBOL PEDAL MARK..MUSICAL SYMBOL PES SUBPUNCTIS
-unicode_east_asian_width(0x1D200, 0x1D241, 'N').	% So  [66] GREEK VOCAL NOTATION SYMBOL-1..GREEK INSTRUMENTAL NOTATION SYMBOL-54
-unicode_east_asian_width(0x1D242, 0x1D244, 'N').	% Mn   [3] COMBINING GREEK MUSICAL TRISEME..COMBINING GREEK MUSICAL PENTASEME
-unicode_east_asian_width(0x1D245, 0x1D245, 'N').	% So       GREEK MUSICAL LEIMMA
-unicode_east_asian_width(0x1D300, 0x1D356, 'N').	% So  [87] MONOGRAM FOR EARTH..TETRAGRAM FOR FOSTERING
-unicode_east_asian_width(0x1D360, 0x1D371, 'N').	% No  [18] COUNTING ROD UNIT DIGIT ONE..COUNTING ROD TENS DIGIT NINE
-unicode_east_asian_width(0x1D400, 0x1D454, 'N').	% L&  [85] MATHEMATICAL BOLD CAPITAL A..MATHEMATICAL ITALIC SMALL G
-unicode_east_asian_width(0x1D456, 0x1D49C, 'N').	% L&  [71] MATHEMATICAL ITALIC SMALL I..MATHEMATICAL SCRIPT CAPITAL A
-unicode_east_asian_width(0x1D49E, 0x1D49F, 'N').	% L&   [2] MATHEMATICAL SCRIPT CAPITAL C..MATHEMATICAL SCRIPT CAPITAL D
-unicode_east_asian_width(0x1D4A2, 0x1D4A2, 'N').	% L&       MATHEMATICAL SCRIPT CAPITAL G
-unicode_east_asian_width(0x1D4A5, 0x1D4A6, 'N').	% L&   [2] MATHEMATICAL SCRIPT CAPITAL J..MATHEMATICAL SCRIPT CAPITAL K
-unicode_east_asian_width(0x1D4A9, 0x1D4AC, 'N').	% L&   [4] MATHEMATICAL SCRIPT CAPITAL N..MATHEMATICAL SCRIPT CAPITAL Q
-unicode_east_asian_width(0x1D4AE, 0x1D4B9, 'N').	% L&  [12] MATHEMATICAL SCRIPT CAPITAL S..MATHEMATICAL SCRIPT SMALL D
-unicode_east_asian_width(0x1D4BB, 0x1D4BB, 'N').	% L&       MATHEMATICAL SCRIPT SMALL F
-unicode_east_asian_width(0x1D4BD, 0x1D4C3, 'N').	% L&   [7] MATHEMATICAL SCRIPT SMALL H..MATHEMATICAL SCRIPT SMALL N
-unicode_east_asian_width(0x1D4C5, 0x1D505, 'N').	% L&  [65] MATHEMATICAL SCRIPT SMALL P..MATHEMATICAL FRAKTUR CAPITAL B
-unicode_east_asian_width(0x1D507, 0x1D50A, 'N').	% L&   [4] MATHEMATICAL FRAKTUR CAPITAL D..MATHEMATICAL FRAKTUR CAPITAL G
-unicode_east_asian_width(0x1D50D, 0x1D514, 'N').	% L&   [8] MATHEMATICAL FRAKTUR CAPITAL J..MATHEMATICAL FRAKTUR CAPITAL Q
-unicode_east_asian_width(0x1D516, 0x1D51C, 'N').	% L&   [7] MATHEMATICAL FRAKTUR CAPITAL S..MATHEMATICAL FRAKTUR CAPITAL Y
-unicode_east_asian_width(0x1D51E, 0x1D539, 'N').	% L&  [28] MATHEMATICAL FRAKTUR SMALL A..MATHEMATICAL DOUBLE-STRUCK CAPITAL B
-unicode_east_asian_width(0x1D53B, 0x1D53E, 'N').	% L&   [4] MATHEMATICAL DOUBLE-STRUCK CAPITAL D..MATHEMATICAL DOUBLE-STRUCK CAPITAL G
-unicode_east_asian_width(0x1D540, 0x1D544, 'N').	% L&   [5] MATHEMATICAL DOUBLE-STRUCK CAPITAL I..MATHEMATICAL DOUBLE-STRUCK CAPITAL M
-unicode_east_asian_width(0x1D546, 0x1D546, 'N').	% L&       MATHEMATICAL DOUBLE-STRUCK CAPITAL O
-unicode_east_asian_width(0x1D54A, 0x1D550, 'N').	% L&   [7] MATHEMATICAL DOUBLE-STRUCK CAPITAL S..MATHEMATICAL DOUBLE-STRUCK CAPITAL Y
-unicode_east_asian_width(0x1D552, 0x1D6A5, 'N').	% L& [340] MATHEMATICAL DOUBLE-STRUCK SMALL A..MATHEMATICAL ITALIC SMALL DOTLESS J
-unicode_east_asian_width(0x1D6A8, 0x1D6C0, 'N').	% L&  [25] MATHEMATICAL BOLD CAPITAL ALPHA..MATHEMATICAL BOLD CAPITAL OMEGA
-unicode_east_asian_width(0x1D6C1, 0x1D6C1, 'N').	% Sm       MATHEMATICAL BOLD NABLA
-unicode_east_asian_width(0x1D6C2, 0x1D6DA, 'N').	% L&  [25] MATHEMATICAL BOLD SMALL ALPHA..MATHEMATICAL BOLD SMALL OMEGA
-unicode_east_asian_width(0x1D6DB, 0x1D6DB, 'N').	% Sm       MATHEMATICAL BOLD PARTIAL DIFFERENTIAL
-unicode_east_asian_width(0x1D6DC, 0x1D6FA, 'N').	% L&  [31] MATHEMATICAL BOLD EPSILON SYMBOL..MATHEMATICAL ITALIC CAPITAL OMEGA
-unicode_east_asian_width(0x1D6FB, 0x1D6FB, 'N').	% Sm       MATHEMATICAL ITALIC NABLA
-unicode_east_asian_width(0x1D6FC, 0x1D714, 'N').	% L&  [25] MATHEMATICAL ITALIC SMALL ALPHA..MATHEMATICAL ITALIC SMALL OMEGA
-unicode_east_asian_width(0x1D715, 0x1D715, 'N').	% Sm       MATHEMATICAL ITALIC PARTIAL DIFFERENTIAL
-unicode_east_asian_width(0x1D716, 0x1D734, 'N').	% L&  [31] MATHEMATICAL ITALIC EPSILON SYMBOL..MATHEMATICAL BOLD ITALIC CAPITAL OMEGA
-unicode_east_asian_width(0x1D735, 0x1D735, 'N').	% Sm       MATHEMATICAL BOLD ITALIC NABLA
-unicode_east_asian_width(0x1D736, 0x1D74E, 'N').	% L&  [25] MATHEMATICAL BOLD ITALIC SMALL ALPHA..MATHEMATICAL BOLD ITALIC SMALL OMEGA
-unicode_east_asian_width(0x1D74F, 0x1D74F, 'N').	% Sm       MATHEMATICAL BOLD ITALIC PARTIAL DIFFERENTIAL
-unicode_east_asian_width(0x1D750, 0x1D76E, 'N').	% L&  [31] MATHEMATICAL BOLD ITALIC EPSILON SYMBOL..MATHEMATICAL SANS-SERIF BOLD CAPITAL OMEGA
-unicode_east_asian_width(0x1D76F, 0x1D76F, 'N').	% Sm       MATHEMATICAL SANS-SERIF BOLD NABLA
-unicode_east_asian_width(0x1D770, 0x1D788, 'N').	% L&  [25] MATHEMATICAL SANS-SERIF BOLD SMALL ALPHA..MATHEMATICAL SANS-SERIF BOLD SMALL OMEGA
-unicode_east_asian_width(0x1D789, 0x1D789, 'N').	% Sm       MATHEMATICAL SANS-SERIF BOLD PARTIAL DIFFERENTIAL
-unicode_east_asian_width(0x1D78A, 0x1D7A8, 'N').	% L&  [31] MATHEMATICAL SANS-SERIF BOLD EPSILON SYMBOL..MATHEMATICAL SANS-SERIF BOLD ITALIC CAPITAL OMEGA
-unicode_east_asian_width(0x1D7A9, 0x1D7A9, 'N').	% Sm       MATHEMATICAL SANS-SERIF BOLD ITALIC NABLA
-unicode_east_asian_width(0x1D7AA, 0x1D7C2, 'N').	% L&  [25] MATHEMATICAL SANS-SERIF BOLD ITALIC SMALL ALPHA..MATHEMATICAL SANS-SERIF BOLD ITALIC SMALL OMEGA
-unicode_east_asian_width(0x1D7C3, 0x1D7C3, 'N').	% Sm       MATHEMATICAL SANS-SERIF BOLD ITALIC PARTIAL DIFFERENTIAL
-unicode_east_asian_width(0x1D7C4, 0x1D7CB, 'N').	% L&   [8] MATHEMATICAL SANS-SERIF BOLD ITALIC EPSILON SYMBOL..MATHEMATICAL BOLD SMALL DIGAMMA
-unicode_east_asian_width(0x1D7CE, 0x1D7FF, 'N').	% Nd  [50] MATHEMATICAL BOLD DIGIT ZERO..MATHEMATICAL MONOSPACE DIGIT NINE
-unicode_east_asian_width(0x1EE00, 0x1EE03, 'N').	% Lo   [4] ARABIC MATHEMATICAL ALEF..ARABIC MATHEMATICAL DAL
-unicode_east_asian_width(0x1EE05, 0x1EE1F, 'N').	% Lo  [27] ARABIC MATHEMATICAL WAW..ARABIC MATHEMATICAL DOTLESS QAF
-unicode_east_asian_width(0x1EE21, 0x1EE22, 'N').	% Lo   [2] ARABIC MATHEMATICAL INITIAL BEH..ARABIC MATHEMATICAL INITIAL JEEM
-unicode_east_asian_width(0x1EE24, 0x1EE24, 'N').	% Lo       ARABIC MATHEMATICAL INITIAL HEH
-unicode_east_asian_width(0x1EE27, 0x1EE27, 'N').	% Lo       ARABIC MATHEMATICAL INITIAL HAH
-unicode_east_asian_width(0x1EE29, 0x1EE32, 'N').	% Lo  [10] ARABIC MATHEMATICAL INITIAL YEH..ARABIC MATHEMATICAL INITIAL QAF
-unicode_east_asian_width(0x1EE34, 0x1EE37, 'N').	% Lo   [4] ARABIC MATHEMATICAL INITIAL SHEEN..ARABIC MATHEMATICAL INITIAL KHAH
-unicode_east_asian_width(0x1EE39, 0x1EE39, 'N').	% Lo       ARABIC MATHEMATICAL INITIAL DAD
-unicode_east_asian_width(0x1EE3B, 0x1EE3B, 'N').	% Lo       ARABIC MATHEMATICAL INITIAL GHAIN
-unicode_east_asian_width(0x1EE42, 0x1EE42, 'N').	% Lo       ARABIC MATHEMATICAL TAILED JEEM
-unicode_east_asian_width(0x1EE47, 0x1EE47, 'N').	% Lo       ARABIC MATHEMATICAL TAILED HAH
-unicode_east_asian_width(0x1EE49, 0x1EE49, 'N').	% Lo       ARABIC MATHEMATICAL TAILED YEH
-unicode_east_asian_width(0x1EE4B, 0x1EE4B, 'N').	% Lo       ARABIC MATHEMATICAL TAILED LAM
-unicode_east_asian_width(0x1EE4D, 0x1EE4F, 'N').	% Lo   [3] ARABIC MATHEMATICAL TAILED NOON..ARABIC MATHEMATICAL TAILED AIN
-unicode_east_asian_width(0x1EE51, 0x1EE52, 'N').	% Lo   [2] ARABIC MATHEMATICAL TAILED SAD..ARABIC MATHEMATICAL TAILED QAF
-unicode_east_asian_width(0x1EE54, 0x1EE54, 'N').	% Lo       ARABIC MATHEMATICAL TAILED SHEEN
-unicode_east_asian_width(0x1EE57, 0x1EE57, 'N').	% Lo       ARABIC MATHEMATICAL TAILED KHAH
-unicode_east_asian_width(0x1EE59, 0x1EE59, 'N').	% Lo       ARABIC MATHEMATICAL TAILED DAD
-unicode_east_asian_width(0x1EE5B, 0x1EE5B, 'N').	% Lo       ARABIC MATHEMATICAL TAILED GHAIN
-unicode_east_asian_width(0x1EE5D, 0x1EE5D, 'N').	% Lo       ARABIC MATHEMATICAL TAILED DOTLESS NOON
-unicode_east_asian_width(0x1EE5F, 0x1EE5F, 'N').	% Lo       ARABIC MATHEMATICAL TAILED DOTLESS QAF
-unicode_east_asian_width(0x1EE61, 0x1EE62, 'N').	% Lo   [2] ARABIC MATHEMATICAL STRETCHED BEH..ARABIC MATHEMATICAL STRETCHED JEEM
-unicode_east_asian_width(0x1EE64, 0x1EE64, 'N').	% Lo       ARABIC MATHEMATICAL STRETCHED HEH
-unicode_east_asian_width(0x1EE67, 0x1EE6A, 'N').	% Lo   [4] ARABIC MATHEMATICAL STRETCHED HAH..ARABIC MATHEMATICAL STRETCHED KAF
-unicode_east_asian_width(0x1EE6C, 0x1EE72, 'N').	% Lo   [7] ARABIC MATHEMATICAL STRETCHED MEEM..ARABIC MATHEMATICAL STRETCHED QAF
-unicode_east_asian_width(0x1EE74, 0x1EE77, 'N').	% Lo   [4] ARABIC MATHEMATICAL STRETCHED SHEEN..ARABIC MATHEMATICAL STRETCHED KHAH
-unicode_east_asian_width(0x1EE79, 0x1EE7C, 'N').	% Lo   [4] ARABIC MATHEMATICAL STRETCHED DAD..ARABIC MATHEMATICAL STRETCHED DOTLESS BEH
-unicode_east_asian_width(0x1EE7E, 0x1EE7E, 'N').	% Lo       ARABIC MATHEMATICAL STRETCHED DOTLESS FEH
-unicode_east_asian_width(0x1EE80, 0x1EE89, 'N').	% Lo  [10] ARABIC MATHEMATICAL LOOPED ALEF..ARABIC MATHEMATICAL LOOPED YEH
-unicode_east_asian_width(0x1EE8B, 0x1EE9B, 'N').	% Lo  [17] ARABIC MATHEMATICAL LOOPED LAM..ARABIC MATHEMATICAL LOOPED GHAIN
-unicode_east_asian_width(0x1EEA1, 0x1EEA3, 'N').	% Lo   [3] ARABIC MATHEMATICAL DOUBLE-STRUCK BEH..ARABIC MATHEMATICAL DOUBLE-STRUCK DAL
-unicode_east_asian_width(0x1EEA5, 0x1EEA9, 'N').	% Lo   [5] ARABIC MATHEMATICAL DOUBLE-STRUCK WAW..ARABIC MATHEMATICAL DOUBLE-STRUCK YEH
-unicode_east_asian_width(0x1EEAB, 0x1EEBB, 'N').	% Lo  [17] ARABIC MATHEMATICAL DOUBLE-STRUCK LAM..ARABIC MATHEMATICAL DOUBLE-STRUCK GHAIN
-unicode_east_asian_width(0x1EEF0, 0x1EEF1, 'N').	% Sm   [2] ARABIC MATHEMATICAL OPERATOR MEEM WITH HAH WITH TATWEEL..ARABIC MATHEMATICAL OPERATOR HAH WITH DAL
-unicode_east_asian_width(0x1F000, 0x1F02B, 'N').	% So  [44] MAHJONG TILE EAST WIND..MAHJONG TILE BACK
-unicode_east_asian_width(0x1F030, 0x1F093, 'N').	% So [100] DOMINO TILE HORIZONTAL BACK..DOMINO TILE VERTICAL-06-06
-unicode_east_asian_width(0x1F0A0, 0x1F0AE, 'N').	% So  [15] PLAYING CARD BACK..PLAYING CARD KING OF SPADES
-unicode_east_asian_width(0x1F0B1, 0x1F0BE, 'N').	% So  [14] PLAYING CARD ACE OF HEARTS..PLAYING CARD KING OF HEARTS
-unicode_east_asian_width(0x1F0C1, 0x1F0CF, 'N').	% So  [15] PLAYING CARD ACE OF DIAMONDS..PLAYING CARD BLACK JOKER
-unicode_east_asian_width(0x1F0D1, 0x1F0DF, 'N').	% So  [15] PLAYING CARD ACE OF CLUBS..PLAYING CARD WHITE JOKER
-unicode_east_asian_width(0x1F12E, 0x1F12E, 'N').	% So       CIRCLED WZ
-unicode_east_asian_width(0x1F16A, 0x1F16B, 'N').	% So   [2] RAISED MC SIGN..RAISED MD SIGN
-unicode_east_asian_width(0x1F1E6, 0x1F1FF, 'N').	% So  [26] REGIONAL INDICATOR SYMBOL LETTER A..REGIONAL INDICATOR SYMBOL LETTER Z
-unicode_east_asian_width(0x1F300, 0x1F320, 'N').	% So  [33] CYCLONE..SHOOTING STAR
-unicode_east_asian_width(0x1F330, 0x1F335, 'N').	% So   [6] CHESTNUT..CACTUS
-unicode_east_asian_width(0x1F337, 0x1F37C, 'N').	% So  [70] TULIP..BABY BOTTLE
-unicode_east_asian_width(0x1F380, 0x1F393, 'N').	% So  [20] RIBBON..GRADUATION CAP
-unicode_east_asian_width(0x1F3A0, 0x1F3C4, 'N').	% So  [37] CAROUSEL HORSE..SURFER
-unicode_east_asian_width(0x1F3C6, 0x1F3CA, 'N').	% So   [5] TROPHY..SWIMMER
-unicode_east_asian_width(0x1F3E0, 0x1F3F0, 'N').	% So  [17] HOUSE BUILDING..EUROPEAN CASTLE
-unicode_east_asian_width(0x1F400, 0x1F43E, 'N').	% So  [63] RAT..PAW PRINTS
-unicode_east_asian_width(0x1F440, 0x1F440, 'N').	% So       EYES
-unicode_east_asian_width(0x1F442, 0x1F4F7, 'N').	% So [182] EAR..CAMERA
-unicode_east_asian_width(0x1F4F9, 0x1F4FC, 'N').	% So   [4] VIDEO CAMERA..VIDEOCASSETTE
-unicode_east_asian_width(0x1F500, 0x1F53D, 'N').	% So  [62] TWISTED RIGHTWARDS ARROWS..DOWN-POINTING SMALL RED TRIANGLE
-unicode_east_asian_width(0x1F540, 0x1F543, 'N').	% So   [4] CIRCLED CROSS POMMEE..NOTCHED LEFT SEMICIRCLE WITH THREE DOTS
-unicode_east_asian_width(0x1F550, 0x1F567, 'N').	% So  [24] CLOCK FACE ONE OCLOCK..CLOCK FACE TWELVE-THIRTY
-unicode_east_asian_width(0x1F5FB, 0x1F640, 'N').	% So  [70] MOUNT FUJI..WEARY CAT FACE
-unicode_east_asian_width(0x1F645, 0x1F64F, 'N').	% So  [11] FACE WITH NO GOOD GESTURE..PERSON WITH FOLDED HANDS
-unicode_east_asian_width(0x1F680, 0x1F6C5, 'N').	% So  [70] ROCKET..LEFT LUGGAGE
-unicode_east_asian_width(0x1F700, 0x1F773, 'N').	% So [116] ALCHEMICAL SYMBOL FOR QUINTESSENCE..ALCHEMICAL SYMBOL FOR HALF OUNCE
-unicode_east_asian_width(0xE0001, 0xE0001, 'N').	% Cf       LANGUAGE TAG
-unicode_east_asian_width(0xE0020, 0xE007F, 'N').	% Cf  [96] TAG SPACE..CANCEL TAG
-
-% The above property value applies to 782918 code points not listed here.
-% Total code points: 801811
-
-% ================================================
-
-% East_Asian_Width=Ambiguous
-
-unicode_east_asian_width(0x00A1, 0x00A1, 'A').	% Po       INVERTED EXCLAMATION MARK
-unicode_east_asian_width(0x00A4, 0x00A4, 'A').	% Sc       CURRENCY SIGN
-unicode_east_asian_width(0x00A7, 0x00A7, 'A').	% Po       SECTION SIGN
-unicode_east_asian_width(0x00A8, 0x00A8, 'A').	% Sk       DIAERESIS
-unicode_east_asian_width(0x00AA, 0x00AA, 'A').	% Lo       FEMININE ORDINAL INDICATOR
-unicode_east_asian_width(0x00AD, 0x00AD, 'A').	% Cf       SOFT HYPHEN
-unicode_east_asian_width(0x00AE, 0x00AE, 'A').	% So       REGISTERED SIGN
-unicode_east_asian_width(0x00B0, 0x00B0, 'A').	% So       DEGREE SIGN
-unicode_east_asian_width(0x00B1, 0x00B1, 'A').	% Sm       PLUS-MINUS SIGN
-unicode_east_asian_width(0x00B2, 0x00B3, 'A').	% No   [2] SUPERSCRIPT TWO..SUPERSCRIPT THREE
-unicode_east_asian_width(0x00B4, 0x00B4, 'A').	% Sk       ACUTE ACCENT
-unicode_east_asian_width(0x00B6, 0x00B7, 'A').	% Po   [2] PILCROW SIGN..MIDDLE DOT
-unicode_east_asian_width(0x00B8, 0x00B8, 'A').	% Sk       CEDILLA
-unicode_east_asian_width(0x00B9, 0x00B9, 'A').	% No       SUPERSCRIPT ONE
-unicode_east_asian_width(0x00BA, 0x00BA, 'A').	% Lo       MASCULINE ORDINAL INDICATOR
-unicode_east_asian_width(0x00BC, 0x00BE, 'A').	% No   [3] VULGAR FRACTION ONE QUARTER..VULGAR FRACTION THREE QUARTERS
-unicode_east_asian_width(0x00BF, 0x00BF, 'A').	% Po       INVERTED QUESTION MARK
-unicode_east_asian_width(0x00C6, 0x00C6, 'A').	% L&       LATIN CAPITAL LETTER AE
-unicode_east_asian_width(0x00D0, 0x00D0, 'A').	% L&       LATIN CAPITAL LETTER ETH
-unicode_east_asian_width(0x00D7, 0x00D7, 'A').	% Sm       MULTIPLICATION SIGN
-unicode_east_asian_width(0x00D8, 0x00D8, 'A').	% L&       LATIN CAPITAL LETTER O WITH STROKE
-unicode_east_asian_width(0x00DE, 0x00E1, 'A').	% L&   [4] LATIN CAPITAL LETTER THORN..LATIN SMALL LETTER A WITH ACUTE
-unicode_east_asian_width(0x00E6, 0x00E6, 'A').	% L&       LATIN SMALL LETTER AE
-unicode_east_asian_width(0x00E8, 0x00EA, 'A').	% L&   [3] LATIN SMALL LETTER E WITH GRAVE..LATIN SMALL LETTER E WITH CIRCUMFLEX
-unicode_east_asian_width(0x00EC, 0x00ED, 'A').	% L&   [2] LATIN SMALL LETTER I WITH GRAVE..LATIN SMALL LETTER I WITH ACUTE
-unicode_east_asian_width(0x00F0, 0x00F0, 'A').	% L&       LATIN SMALL LETTER ETH
-unicode_east_asian_width(0x00F2, 0x00F3, 'A').	% L&   [2] LATIN SMALL LETTER O WITH GRAVE..LATIN SMALL LETTER O WITH ACUTE
-unicode_east_asian_width(0x00F7, 0x00F7, 'A').	% Sm       DIVISION SIGN
-unicode_east_asian_width(0x00F8, 0x00FA, 'A').	% L&   [3] LATIN SMALL LETTER O WITH STROKE..LATIN SMALL LETTER U WITH ACUTE
-unicode_east_asian_width(0x00FC, 0x00FC, 'A').	% L&       LATIN SMALL LETTER U WITH DIAERESIS
-unicode_east_asian_width(0x00FE, 0x00FE, 'A').	% L&       LATIN SMALL LETTER THORN
-unicode_east_asian_width(0x0101, 0x0101, 'A').	% L&       LATIN SMALL LETTER A WITH MACRON
-unicode_east_asian_width(0x0111, 0x0111, 'A').	% L&       LATIN SMALL LETTER D WITH STROKE
-unicode_east_asian_width(0x0113, 0x0113, 'A').	% L&       LATIN SMALL LETTER E WITH MACRON
-unicode_east_asian_width(0x011B, 0x011B, 'A').	% L&       LATIN SMALL LETTER E WITH CARON
-unicode_east_asian_width(0x0126, 0x0127, 'A').	% L&   [2] LATIN CAPITAL LETTER H WITH STROKE..LATIN SMALL LETTER H WITH STROKE
-unicode_east_asian_width(0x012B, 0x012B, 'A').	% L&       LATIN SMALL LETTER I WITH MACRON
-unicode_east_asian_width(0x0131, 0x0133, 'A').	% L&   [3] LATIN SMALL LETTER DOTLESS I..LATIN SMALL LIGATURE IJ
-unicode_east_asian_width(0x0138, 0x0138, 'A').	% L&       LATIN SMALL LETTER KRA
-unicode_east_asian_width(0x013F, 0x0142, 'A').	% L&   [4] LATIN CAPITAL LETTER L WITH MIDDLE DOT..LATIN SMALL LETTER L WITH STROKE
-unicode_east_asian_width(0x0144, 0x0144, 'A').	% L&       LATIN SMALL LETTER N WITH ACUTE
-unicode_east_asian_width(0x0148, 0x014B, 'A').	% L&   [4] LATIN SMALL LETTER N WITH CARON..LATIN SMALL LETTER ENG
-unicode_east_asian_width(0x014D, 0x014D, 'A').	% L&       LATIN SMALL LETTER O WITH MACRON
-unicode_east_asian_width(0x0152, 0x0153, 'A').	% L&   [2] LATIN CAPITAL LIGATURE OE..LATIN SMALL LIGATURE OE
-unicode_east_asian_width(0x0166, 0x0167, 'A').	% L&   [2] LATIN CAPITAL LETTER T WITH STROKE..LATIN SMALL LETTER T WITH STROKE
-unicode_east_asian_width(0x016B, 0x016B, 'A').	% L&       LATIN SMALL LETTER U WITH MACRON
-unicode_east_asian_width(0x01CE, 0x01CE, 'A').	% L&       LATIN SMALL LETTER A WITH CARON
-unicode_east_asian_width(0x01D0, 0x01D0, 'A').	% L&       LATIN SMALL LETTER I WITH CARON
-unicode_east_asian_width(0x01D2, 0x01D2, 'A').	% L&       LATIN SMALL LETTER O WITH CARON
-unicode_east_asian_width(0x01D4, 0x01D4, 'A').	% L&       LATIN SMALL LETTER U WITH CARON
-unicode_east_asian_width(0x01D6, 0x01D6, 'A').	% L&       LATIN SMALL LETTER U WITH DIAERESIS AND MACRON
-unicode_east_asian_width(0x01D8, 0x01D8, 'A').	% L&       LATIN SMALL LETTER U WITH DIAERESIS AND ACUTE
-unicode_east_asian_width(0x01DA, 0x01DA, 'A').	% L&       LATIN SMALL LETTER U WITH DIAERESIS AND CARON
-unicode_east_asian_width(0x01DC, 0x01DC, 'A').	% L&       LATIN SMALL LETTER U WITH DIAERESIS AND GRAVE
-unicode_east_asian_width(0x0251, 0x0251, 'A').	% L&       LATIN SMALL LETTER ALPHA
-unicode_east_asian_width(0x0261, 0x0261, 'A').	% L&       LATIN SMALL LETTER SCRIPT G
-unicode_east_asian_width(0x02C4, 0x02C4, 'A').	% Sk       MODIFIER LETTER UP ARROWHEAD
-unicode_east_asian_width(0x02C7, 0x02C7, 'A').	% Lm       CARON
-unicode_east_asian_width(0x02C9, 0x02CB, 'A').	% Lm   [3] MODIFIER LETTER MACRON..MODIFIER LETTER GRAVE ACCENT
-unicode_east_asian_width(0x02CD, 0x02CD, 'A').	% Lm       MODIFIER LETTER LOW MACRON
-unicode_east_asian_width(0x02D0, 0x02D0, 'A').	% Lm       MODIFIER LETTER TRIANGULAR COLON
-unicode_east_asian_width(0x02D8, 0x02DB, 'A').	% Sk   [4] BREVE..OGONEK
-unicode_east_asian_width(0x02DD, 0x02DD, 'A').	% Sk       DOUBLE ACUTE ACCENT
-unicode_east_asian_width(0x02DF, 0x02DF, 'A').	% Sk       MODIFIER LETTER CROSS ACCENT
-unicode_east_asian_width(0x0300, 0x036F, 'A').	% Mn [112] COMBINING GRAVE ACCENT..COMBINING LATIN SMALL LETTER X
-unicode_east_asian_width(0x0391, 0x03A1, 'A').	% L&  [17] GREEK CAPITAL LETTER ALPHA..GREEK CAPITAL LETTER RHO
-unicode_east_asian_width(0x03A3, 0x03A9, 'A').	% L&   [7] GREEK CAPITAL LETTER SIGMA..GREEK CAPITAL LETTER OMEGA
-unicode_east_asian_width(0x03B1, 0x03C1, 'A').	% L&  [17] GREEK SMALL LETTER ALPHA..GREEK SMALL LETTER RHO
-unicode_east_asian_width(0x03C3, 0x03C9, 'A').	% L&   [7] GREEK SMALL LETTER SIGMA..GREEK SMALL LETTER OMEGA
-unicode_east_asian_width(0x0401, 0x0401, 'A').	% L&       CYRILLIC CAPITAL LETTER IO
-unicode_east_asian_width(0x0410, 0x044F, 'A').	% L&  [64] CYRILLIC CAPITAL LETTER A..CYRILLIC SMALL LETTER YA
-unicode_east_asian_width(0x0451, 0x0451, 'A').	% L&       CYRILLIC SMALL LETTER IO
-unicode_east_asian_width(0x2010, 0x2010, 'A').	% Pd       HYPHEN
-unicode_east_asian_width(0x2013, 0x2015, 'A').	% Pd   [3] EN DASH..HORIZONTAL BAR
-unicode_east_asian_width(0x2016, 0x2016, 'A').	% Po       DOUBLE VERTICAL LINE
-unicode_east_asian_width(0x2018, 0x2018, 'A').	% Pi       LEFT SINGLE QUOTATION MARK
-unicode_east_asian_width(0x2019, 0x2019, 'A').	% Pf       RIGHT SINGLE QUOTATION MARK
-unicode_east_asian_width(0x201C, 0x201C, 'A').	% Pi       LEFT DOUBLE QUOTATION MARK
-unicode_east_asian_width(0x201D, 0x201D, 'A').	% Pf       RIGHT DOUBLE QUOTATION MARK
-unicode_east_asian_width(0x2020, 0x2022, 'A').	% Po   [3] DAGGER..BULLET
-unicode_east_asian_width(0x2024, 0x2027, 'A').	% Po   [4] ONE DOT LEADER..HYPHENATION POINT
-unicode_east_asian_width(0x2030, 0x2030, 'A').	% Po       PER MILLE SIGN
-unicode_east_asian_width(0x2032, 0x2033, 'A').	% Po   [2] PRIME..DOUBLE PRIME
-unicode_east_asian_width(0x2035, 0x2035, 'A').	% Po       REVERSED PRIME
-unicode_east_asian_width(0x203B, 0x203B, 'A').	% Po       REFERENCE MARK
-unicode_east_asian_width(0x203E, 0x203E, 'A').	% Po       OVERLINE
-unicode_east_asian_width(0x2074, 0x2074, 'A').	% No       SUPERSCRIPT FOUR
-unicode_east_asian_width(0x207F, 0x207F, 'A').	% Lm       SUPERSCRIPT LATIN SMALL LETTER N
-unicode_east_asian_width(0x2081, 0x2084, 'A').	% No   [4] SUBSCRIPT ONE..SUBSCRIPT FOUR
-unicode_east_asian_width(0x20AC, 0x20AC, 'A').	% Sc       EURO SIGN
-unicode_east_asian_width(0x2103, 0x2103, 'A').	% So       DEGREE CELSIUS
-unicode_east_asian_width(0x2105, 0x2105, 'A').	% So       CARE OF
-unicode_east_asian_width(0x2109, 0x2109, 'A').	% So       DEGREE FAHRENHEIT
-unicode_east_asian_width(0x2113, 0x2113, 'A').	% L&       SCRIPT SMALL L
-unicode_east_asian_width(0x2116, 0x2116, 'A').	% So       NUMERO SIGN
-unicode_east_asian_width(0x2121, 0x2122, 'A').	% So   [2] TELEPHONE SIGN..TRADE MARK SIGN
-unicode_east_asian_width(0x2126, 0x2126, 'A').	% L&       OHM SIGN
-unicode_east_asian_width(0x212B, 0x212B, 'A').	% L&       ANGSTROM SIGN
-unicode_east_asian_width(0x2153, 0x2154, 'A').	% No   [2] VULGAR FRACTION ONE THIRD..VULGAR FRACTION TWO THIRDS
-unicode_east_asian_width(0x215B, 0x215E, 'A').	% No   [4] VULGAR FRACTION ONE EIGHTH..VULGAR FRACTION SEVEN EIGHTHS
-unicode_east_asian_width(0x2160, 0x216B, 'A').	% Nl  [12] ROMAN NUMERAL ONE..ROMAN NUMERAL TWELVE
-unicode_east_asian_width(0x2170, 0x2179, 'A').	% Nl  [10] SMALL ROMAN NUMERAL ONE..SMALL ROMAN NUMERAL TEN
-unicode_east_asian_width(0x2189, 0x2189, 'A').	% No       VULGAR FRACTION ZERO THIRDS
-unicode_east_asian_width(0x2190, 0x2194, 'A').	% Sm   [5] LEFTWARDS ARROW..LEFT RIGHT ARROW
-unicode_east_asian_width(0x2195, 0x2199, 'A').	% So   [5] UP DOWN ARROW..SOUTH WEST ARROW
-unicode_east_asian_width(0x21B8, 0x21B9, 'A').	% So   [2] NORTH WEST ARROW TO LONG BAR..LEFTWARDS ARROW TO BAR OVER RIGHTWARDS ARROW TO BAR
-unicode_east_asian_width(0x21D2, 0x21D2, 'A').	% Sm       RIGHTWARDS DOUBLE ARROW
-unicode_east_asian_width(0x21D4, 0x21D4, 'A').	% Sm       LEFT RIGHT DOUBLE ARROW
-unicode_east_asian_width(0x21E7, 0x21E7, 'A').	% So       UPWARDS WHITE ARROW
-unicode_east_asian_width(0x2200, 0x2200, 'A').	% Sm       FOR ALL
-unicode_east_asian_width(0x2202, 0x2203, 'A').	% Sm   [2] PARTIAL DIFFERENTIAL..THERE EXISTS
-unicode_east_asian_width(0x2207, 0x2208, 'A').	% Sm   [2] NABLA..ELEMENT OF
-unicode_east_asian_width(0x220B, 0x220B, 'A').	% Sm       CONTAINS AS MEMBER
-unicode_east_asian_width(0x220F, 0x220F, 'A').	% Sm       N-ARY PRODUCT
-unicode_east_asian_width(0x2211, 0x2211, 'A').	% Sm       N-ARY SUMMATION
-unicode_east_asian_width(0x2215, 0x2215, 'A').	% Sm       DIVISION SLASH
-unicode_east_asian_width(0x221A, 0x221A, 'A').	% Sm       SQUARE ROOT
-unicode_east_asian_width(0x221D, 0x2220, 'A').	% Sm   [4] PROPORTIONAL TO..ANGLE
-unicode_east_asian_width(0x2223, 0x2223, 'A').	% Sm       DIVIDES
-unicode_east_asian_width(0x2225, 0x2225, 'A').	% Sm       PARALLEL TO
-unicode_east_asian_width(0x2227, 0x222C, 'A').	% Sm   [6] LOGICAL AND..DOUBLE INTEGRAL
-unicode_east_asian_width(0x222E, 0x222E, 'A').	% Sm       CONTOUR INTEGRAL
-unicode_east_asian_width(0x2234, 0x2237, 'A').	% Sm   [4] THEREFORE..PROPORTION
-unicode_east_asian_width(0x223C, 0x223D, 'A').	% Sm   [2] TILDE OPERATOR..REVERSED TILDE
-unicode_east_asian_width(0x2248, 0x2248, 'A').	% Sm       ALMOST EQUAL TO
-unicode_east_asian_width(0x224C, 0x224C, 'A').	% Sm       ALL EQUAL TO
-unicode_east_asian_width(0x2252, 0x2252, 'A').	% Sm       APPROXIMATELY EQUAL TO OR THE IMAGE OF
-unicode_east_asian_width(0x2260, 0x2261, 'A').	% Sm   [2] NOT EQUAL TO..IDENTICAL TO
-unicode_east_asian_width(0x2264, 0x2267, 'A').	% Sm   [4] LESS-THAN OR EQUAL TO..GREATER-THAN OVER EQUAL TO
-unicode_east_asian_width(0x226A, 0x226B, 'A').	% Sm   [2] MUCH LESS-THAN..MUCH GREATER-THAN
-unicode_east_asian_width(0x226E, 0x226F, 'A').	% Sm   [2] NOT LESS-THAN..NOT GREATER-THAN
-unicode_east_asian_width(0x2282, 0x2283, 'A').	% Sm   [2] SUBSET OF..SUPERSET OF
-unicode_east_asian_width(0x2286, 0x2287, 'A').	% Sm   [2] SUBSET OF OR EQUAL TO..SUPERSET OF OR EQUAL TO
-unicode_east_asian_width(0x2295, 0x2295, 'A').	% Sm       CIRCLED PLUS
-unicode_east_asian_width(0x2299, 0x2299, 'A').	% Sm       CIRCLED DOT OPERATOR
-unicode_east_asian_width(0x22A5, 0x22A5, 'A').	% Sm       UP TACK
-unicode_east_asian_width(0x22BF, 0x22BF, 'A').	% Sm       RIGHT TRIANGLE
-unicode_east_asian_width(0x2312, 0x2312, 'A').	% So       ARC
-unicode_east_asian_width(0x2460, 0x249B, 'A').	% No  [60] CIRCLED DIGIT ONE..NUMBER TWENTY FULL STOP
-unicode_east_asian_width(0x249C, 0x24E9, 'A').	% So  [78] PARENTHESIZED LATIN SMALL LETTER A..CIRCLED LATIN SMALL LETTER Z
-unicode_east_asian_width(0x24EB, 0x24FF, 'A').	% No  [21] NEGATIVE CIRCLED NUMBER ELEVEN..NEGATIVE CIRCLED DIGIT ZERO
-unicode_east_asian_width(0x2500, 0x254B, 'A').	% So  [76] BOX DRAWINGS LIGHT HORIZONTAL..BOX DRAWINGS HEAVY VERTICAL AND HORIZONTAL
-unicode_east_asian_width(0x2550, 0x2573, 'A').	% So  [36] BOX DRAWINGS DOUBLE HORIZONTAL..BOX DRAWINGS LIGHT DIAGONAL CROSS
-unicode_east_asian_width(0x2580, 0x258F, 'A').	% So  [16] UPPER HALF BLOCK..LEFT ONE EIGHTH BLOCK
-unicode_east_asian_width(0x2592, 0x2595, 'A').	% So   [4] MEDIUM SHADE..RIGHT ONE EIGHTH BLOCK
-unicode_east_asian_width(0x25A0, 0x25A1, 'A').	% So   [2] BLACK SQUARE..WHITE SQUARE
-unicode_east_asian_width(0x25A3, 0x25A9, 'A').	% So   [7] WHITE SQUARE CONTAINING BLACK SMALL SQUARE..SQUARE WITH DIAGONAL CROSSHATCH FILL
-unicode_east_asian_width(0x25B2, 0x25B3, 'A').	% So   [2] BLACK UP-POINTING TRIANGLE..WHITE UP-POINTING TRIANGLE
-unicode_east_asian_width(0x25B6, 0x25B6, 'A').	% So       BLACK RIGHT-POINTING TRIANGLE
-unicode_east_asian_width(0x25B7, 0x25B7, 'A').	% Sm       WHITE RIGHT-POINTING TRIANGLE
-unicode_east_asian_width(0x25BC, 0x25BD, 'A').	% So   [2] BLACK DOWN-POINTING TRIANGLE..WHITE DOWN-POINTING TRIANGLE
-unicode_east_asian_width(0x25C0, 0x25C0, 'A').	% So       BLACK LEFT-POINTING TRIANGLE
-unicode_east_asian_width(0x25C1, 0x25C1, 'A').	% Sm       WHITE LEFT-POINTING TRIANGLE
-unicode_east_asian_width(0x25C6, 0x25C8, 'A').	% So   [3] BLACK DIAMOND..WHITE DIAMOND CONTAINING BLACK SMALL DIAMOND
-unicode_east_asian_width(0x25CB, 0x25CB, 'A').	% So       WHITE CIRCLE
-unicode_east_asian_width(0x25CE, 0x25D1, 'A').	% So   [4] BULLSEYE..CIRCLE WITH RIGHT HALF BLACK
-unicode_east_asian_width(0x25E2, 0x25E5, 'A').	% So   [4] BLACK LOWER RIGHT TRIANGLE..BLACK UPPER RIGHT TRIANGLE
-unicode_east_asian_width(0x25EF, 0x25EF, 'A').	% So       LARGE CIRCLE
-unicode_east_asian_width(0x2605, 0x2606, 'A').	% So   [2] BLACK STAR..WHITE STAR
-unicode_east_asian_width(0x2609, 0x2609, 'A').	% So       SUN
-unicode_east_asian_width(0x260E, 0x260F, 'A').	% So   [2] BLACK TELEPHONE..WHITE TELEPHONE
-unicode_east_asian_width(0x2614, 0x2615, 'A').	% So   [2] UMBRELLA WITH RAIN DROPS..HOT BEVERAGE
-unicode_east_asian_width(0x261C, 0x261C, 'A').	% So       WHITE LEFT POINTING INDEX
-unicode_east_asian_width(0x261E, 0x261E, 'A').	% So       WHITE RIGHT POINTING INDEX
-unicode_east_asian_width(0x2640, 0x2640, 'A').	% So       FEMALE SIGN
-unicode_east_asian_width(0x2642, 0x2642, 'A').	% So       MALE SIGN
-unicode_east_asian_width(0x2660, 0x2661, 'A').	% So   [2] BLACK SPADE SUIT..WHITE HEART SUIT
-unicode_east_asian_width(0x2663, 0x2665, 'A').	% So   [3] BLACK CLUB SUIT..BLACK HEART SUIT
-unicode_east_asian_width(0x2667, 0x266A, 'A').	% So   [4] WHITE CLUB SUIT..EIGHTH NOTE
-unicode_east_asian_width(0x266C, 0x266D, 'A').	% So   [2] BEAMED SIXTEENTH NOTES..MUSIC FLAT SIGN
-unicode_east_asian_width(0x266F, 0x266F, 'A').	% Sm       MUSIC SHARP SIGN
-unicode_east_asian_width(0x269E, 0x269F, 'A').	% So   [2] THREE LINES CONVERGING RIGHT..THREE LINES CONVERGING LEFT
-unicode_east_asian_width(0x26BE, 0x26BF, 'A').	% So   [2] BASEBALL..SQUARED KEY
-unicode_east_asian_width(0x26C4, 0x26CD, 'A').	% So  [10] SNOWMAN WITHOUT SNOW..DISABLED CAR
-unicode_east_asian_width(0x26CF, 0x26E1, 'A').	% So  [19] PICK..RESTRICTED LEFT ENTRY-2
-unicode_east_asian_width(0x26E3, 0x26E3, 'A').	% So       HEAVY CIRCLE WITH STROKE AND TWO DOTS ABOVE
-unicode_east_asian_width(0x26E8, 0x26FF, 'A').	% So  [24] BLACK CROSS ON SHIELD..WHITE FLAG WITH HORIZONTAL MIDDLE BLACK STRIPE
-unicode_east_asian_width(0x273D, 0x273D, 'A').	% So       HEAVY TEARDROP-SPOKED ASTERISK
-unicode_east_asian_width(0x2757, 0x2757, 'A').	% So       HEAVY EXCLAMATION MARK SYMBOL
-unicode_east_asian_width(0x2776, 0x277F, 'A').	% No  [10] DINGBAT NEGATIVE CIRCLED DIGIT ONE..DINGBAT NEGATIVE CIRCLED NUMBER TEN
-unicode_east_asian_width(0x2B55, 0x2B59, 'A').	% So   [5] HEAVY LARGE CIRCLE..HEAVY CIRCLED SALTIRE
-unicode_east_asian_width(0x3248, 0x324F, 'A').	% No   [8] CIRCLED NUMBER TEN ON BLACK SQUARE..CIRCLED NUMBER EIGHTY ON BLACK SQUARE
-unicode_east_asian_width(0xE000, 0xF8FF, 'A').	% Co [6400] <private-use-E000>..<private-use-F8FF>
-unicode_east_asian_width(0xFE00, 0xFE0F, 'A').	% Mn  [16] VARIATION SELECTOR-1..VARIATION SELECTOR-16
-unicode_east_asian_width(0xFFFD, 0xFFFD, 'A').	% So       REPLACEMENT CHARACTER
-unicode_east_asian_width(0x1F100, 0x1F10A, 'A').	% No  [11] DIGIT ZERO FULL STOP..DIGIT NINE COMMA
-unicode_east_asian_width(0x1F110, 0x1F12D, 'A').	% So  [30] PARENTHESIZED LATIN CAPITAL LETTER A..CIRCLED CD
-unicode_east_asian_width(0x1F130, 0x1F169, 'A').	% So  [58] SQUARED LATIN CAPITAL LETTER A..NEGATIVE CIRCLED LATIN CAPITAL LETTER Z
-unicode_east_asian_width(0x1F170, 0x1F19A, 'A').	% So  [43] NEGATIVE SQUARED LATIN CAPITAL LETTER A..SQUARED VS
-unicode_east_asian_width(0xE0100, 0xE01EF, 'A').	% Mn [240] VARIATION SELECTOR-17..VARIATION SELECTOR-256
-unicode_east_asian_width(0xF0000, 0xFFFFD, 'A').	% Co [65534] <private-use-F0000>..<private-use-FFFFD>
-unicode_east_asian_width(0x100000, 0x10FFFD, 'A').	% Co [65534] <private-use-100000>..<private-use-10FFFD>
-
-% Total code points: 138746
-
-% ================================================
-
-% East_Asian_Width=Halfwidth
-
-unicode_east_asian_width(0x20A9, 0x20A9, 'H').	% Sc       WON SIGN
-unicode_east_asian_width(0xFF61, 0xFF61, 'H').	% Po       HALFWIDTH IDEOGRAPHIC FULL STOP
-unicode_east_asian_width(0xFF62, 0xFF62, 'H').	% Ps       HALFWIDTH LEFT CORNER BRACKET
-unicode_east_asian_width(0xFF63, 0xFF63, 'H').	% Pe       HALFWIDTH RIGHT CORNER BRACKET
-unicode_east_asian_width(0xFF64, 0xFF65, 'H').	% Po   [2] HALFWIDTH IDEOGRAPHIC COMMA..HALFWIDTH KATAKANA MIDDLE DOT
-unicode_east_asian_width(0xFF66, 0xFF6F, 'H').	% Lo  [10] HALFWIDTH KATAKANA LETTER WO..HALFWIDTH KATAKANA LETTER SMALL TU
-unicode_east_asian_width(0xFF70, 0xFF70, 'H').	% Lm       HALFWIDTH KATAKANA-HIRAGANA PROLONGED SOUND MARK
-unicode_east_asian_width(0xFF71, 0xFF9D, 'H').	% Lo  [45] HALFWIDTH KATAKANA LETTER A..HALFWIDTH KATAKANA LETTER N
-unicode_east_asian_width(0xFF9E, 0xFF9F, 'H').	% Lm   [2] HALFWIDTH KATAKANA VOICED SOUND MARK..HALFWIDTH KATAKANA SEMI-VOICED SOUND MARK
-unicode_east_asian_width(0xFFA0, 0xFFBE, 'H').	% Lo  [31] HALFWIDTH HANGUL FILLER..HALFWIDTH HANGUL LETTER HIEUH
-unicode_east_asian_width(0xFFC2, 0xFFC7, 'H').	% Lo   [6] HALFWIDTH HANGUL LETTER A..HALFWIDTH HANGUL LETTER E
-unicode_east_asian_width(0xFFCA, 0xFFCF, 'H').	% Lo   [6] HALFWIDTH HANGUL LETTER YEO..HALFWIDTH HANGUL LETTER OE
-unicode_east_asian_width(0xFFD2, 0xFFD7, 'H').	% Lo   [6] HALFWIDTH HANGUL LETTER YO..HALFWIDTH HANGUL LETTER YU
-unicode_east_asian_width(0xFFDA, 0xFFDC, 'H').	% Lo   [3] HALFWIDTH HANGUL LETTER EU..HALFWIDTH HANGUL LETTER I
-unicode_east_asian_width(0xFFE8, 0xFFE8, 'H').	% So       HALFWIDTH FORMS LIGHT VERTICAL
-unicode_east_asian_width(0xFFE9, 0xFFEC, 'H').	% Sm   [4] HALFWIDTH LEFTWARDS ARROW..HALFWIDTH DOWNWARDS ARROW
-unicode_east_asian_width(0xFFED, 0xFFEE, 'H').	% So   [2] HALFWIDTH BLACK SQUARE..HALFWIDTH WHITE CIRCLE
-
-% Total code points: 123
-
-% ================================================
-
-% East_Asian_Width=Wide
-
-unicode_east_asian_width(0x1100, 0x115F, 'W').	% Lo  [96] HANGUL CHOSEONG KIYEOK..HANGUL CHOSEONG FILLER
-unicode_east_asian_width(0x11A3, 0x11A7, 'W').	% Lo   [5] HANGUL JUNGSEONG A-EU..HANGUL JUNGSEONG O-YAE
-unicode_east_asian_width(0x11FA, 0x11FF, 'W').	% Lo   [6] HANGUL JONGSEONG KIYEOK-NIEUN..HANGUL JONGSEONG SSANGNIEUN
-unicode_east_asian_width(0x2329, 0x2329, 'W').	% Ps       LEFT-POINTING ANGLE BRACKET
-unicode_east_asian_width(0x232A, 0x232A, 'W').	% Pe       RIGHT-POINTING ANGLE BRACKET
-unicode_east_asian_width(0x2E80, 0x2E99, 'W').	% So  [26] CJK RADICAL REPEAT..CJK RADICAL RAP
-unicode_east_asian_width(0x2E9B, 0x2EF3, 'W').	% So  [89] CJK RADICAL CHOKE..CJK RADICAL C-SIMPLIFIED TURTLE
-unicode_east_asian_width(0x2F00, 0x2FD5, 'W').	% So [214] KANGXI RADICAL ONE..KANGXI RADICAL FLUTE
-unicode_east_asian_width(0x2FF0, 0x2FFB, 'W').	% So  [12] IDEOGRAPHIC DESCRIPTION CHARACTER LEFT TO RIGHT..IDEOGRAPHIC DESCRIPTION CHARACTER OVERLAID
-unicode_east_asian_width(0x3001, 0x3003, 'W').	% Po   [3] IDEOGRAPHIC COMMA..DITTO MARK
-unicode_east_asian_width(0x3004, 0x3004, 'W').	% So       JAPANESE INDUSTRIAL STANDARD SYMBOL
-unicode_east_asian_width(0x3005, 0x3005, 'W').	% Lm       IDEOGRAPHIC ITERATION MARK
-unicode_east_asian_width(0x3006, 0x3006, 'W').	% Lo       IDEOGRAPHIC CLOSING MARK
-unicode_east_asian_width(0x3007, 0x3007, 'W').	% Nl       IDEOGRAPHIC NUMBER ZERO
-unicode_east_asian_width(0x3008, 0x3008, 'W').	% Ps       LEFT ANGLE BRACKET
-unicode_east_asian_width(0x3009, 0x3009, 'W').	% Pe       RIGHT ANGLE BRACKET
-unicode_east_asian_width(0x300A, 0x300A, 'W').	% Ps       LEFT DOUBLE ANGLE BRACKET
-unicode_east_asian_width(0x300B, 0x300B, 'W').	% Pe       RIGHT DOUBLE ANGLE BRACKET
-unicode_east_asian_width(0x300C, 0x300C, 'W').	% Ps       LEFT CORNER BRACKET
-unicode_east_asian_width(0x300D, 0x300D, 'W').	% Pe       RIGHT CORNER BRACKET
-unicode_east_asian_width(0x300E, 0x300E, 'W').	% Ps       LEFT WHITE CORNER BRACKET
-unicode_east_asian_width(0x300F, 0x300F, 'W').	% Pe       RIGHT WHITE CORNER BRACKET
-unicode_east_asian_width(0x3010, 0x3010, 'W').	% Ps       LEFT BLACK LENTICULAR BRACKET
-unicode_east_asian_width(0x3011, 0x3011, 'W').	% Pe       RIGHT BLACK LENTICULAR BRACKET
-unicode_east_asian_width(0x3012, 0x3013, 'W').	% So   [2] POSTAL MARK..GETA MARK
-unicode_east_asian_width(0x3014, 0x3014, 'W').	% Ps       LEFT TORTOISE SHELL BRACKET
-unicode_east_asian_width(0x3015, 0x3015, 'W').	% Pe       RIGHT TORTOISE SHELL BRACKET
-unicode_east_asian_width(0x3016, 0x3016, 'W').	% Ps       LEFT WHITE LENTICULAR BRACKET
-unicode_east_asian_width(0x3017, 0x3017, 'W').	% Pe       RIGHT WHITE LENTICULAR BRACKET
-unicode_east_asian_width(0x3018, 0x3018, 'W').	% Ps       LEFT WHITE TORTOISE SHELL BRACKET
-unicode_east_asian_width(0x3019, 0x3019, 'W').	% Pe       RIGHT WHITE TORTOISE SHELL BRACKET
-unicode_east_asian_width(0x301A, 0x301A, 'W').	% Ps       LEFT WHITE SQUARE BRACKET
-unicode_east_asian_width(0x301B, 0x301B, 'W').	% Pe       RIGHT WHITE SQUARE BRACKET
-unicode_east_asian_width(0x301C, 0x301C, 'W').	% Pd       WAVE DASH
-unicode_east_asian_width(0x301D, 0x301D, 'W').	% Ps       REVERSED DOUBLE PRIME QUOTATION MARK
-unicode_east_asian_width(0x301E, 0x301F, 'W').	% Pe   [2] DOUBLE PRIME QUOTATION MARK..LOW DOUBLE PRIME QUOTATION MARK
-unicode_east_asian_width(0x3020, 0x3020, 'W').	% So       POSTAL MARK FACE
-unicode_east_asian_width(0x3021, 0x3029, 'W').	% Nl   [9] HANGZHOU NUMERAL ONE..HANGZHOU NUMERAL NINE
-unicode_east_asian_width(0x302A, 0x302D, 'W').	% Mn   [4] IDEOGRAPHIC LEVEL TONE MARK..IDEOGRAPHIC ENTERING TONE MARK
-unicode_east_asian_width(0x302E, 0x302F, 'W').	% Mc   [2] HANGUL SINGLE DOT TONE MARK..HANGUL DOUBLE DOT TONE MARK
-unicode_east_asian_width(0x3030, 0x3030, 'W').	% Pd       WAVY DASH
-unicode_east_asian_width(0x3031, 0x3035, 'W').	% Lm   [5] VERTICAL KANA REPEAT MARK..VERTICAL KANA REPEAT MARK LOWER HALF
-unicode_east_asian_width(0x3036, 0x3037, 'W').	% So   [2] CIRCLED POSTAL MARK..IDEOGRAPHIC TELEGRAPH LINE FEED SEPARATOR SYMBOL
-unicode_east_asian_width(0x3038, 0x303A, 'W').	% Nl   [3] HANGZHOU NUMERAL TEN..HANGZHOU NUMERAL THIRTY
-unicode_east_asian_width(0x303B, 0x303B, 'W').	% Lm       VERTICAL IDEOGRAPHIC ITERATION MARK
-unicode_east_asian_width(0x303C, 0x303C, 'W').	% Lo       MASU MARK
-unicode_east_asian_width(0x303D, 0x303D, 'W').	% Po       PART ALTERNATION MARK
-unicode_east_asian_width(0x303E, 0x303E, 'W').	% So       IDEOGRAPHIC VARIATION INDICATOR
-unicode_east_asian_width(0x3041, 0x3096, 'W').	% Lo  [86] HIRAGANA LETTER SMALL A..HIRAGANA LETTER SMALL KE
-unicode_east_asian_width(0x3099, 0x309A, 'W').	% Mn   [2] COMBINING KATAKANA-HIRAGANA VOICED SOUND MARK..COMBINING KATAKANA-HIRAGANA SEMI-VOICED SOUND MARK
-unicode_east_asian_width(0x309B, 0x309C, 'W').	% Sk   [2] KATAKANA-HIRAGANA VOICED SOUND MARK..KATAKANA-HIRAGANA SEMI-VOICED SOUND MARK
-unicode_east_asian_width(0x309D, 0x309E, 'W').	% Lm   [2] HIRAGANA ITERATION MARK..HIRAGANA VOICED ITERATION MARK
-unicode_east_asian_width(0x309F, 0x309F, 'W').	% Lo       HIRAGANA DIGRAPH YORI
-unicode_east_asian_width(0x30A0, 0x30A0, 'W').	% Pd       KATAKANA-HIRAGANA DOUBLE HYPHEN
-unicode_east_asian_width(0x30A1, 0x30FA, 'W').	% Lo  [90] KATAKANA LETTER SMALL A..KATAKANA LETTER VO
-unicode_east_asian_width(0x30FB, 0x30FB, 'W').	% Po       KATAKANA MIDDLE DOT
-unicode_east_asian_width(0x30FC, 0x30FE, 'W').	% Lm   [3] KATAKANA-HIRAGANA PROLONGED SOUND MARK..KATAKANA VOICED ITERATION MARK
-unicode_east_asian_width(0x30FF, 0x30FF, 'W').	% Lo       KATAKANA DIGRAPH KOTO
-unicode_east_asian_width(0x3105, 0x312D, 'W').	% Lo  [41] BOPOMOFO LETTER B..BOPOMOFO LETTER IH
-unicode_east_asian_width(0x3131, 0x318E, 'W').	% Lo  [94] HANGUL LETTER KIYEOK..HANGUL LETTER ARAEAE
-unicode_east_asian_width(0x3190, 0x3191, 'W').	% So   [2] IDEOGRAPHIC ANNOTATION LINKING MARK..IDEOGRAPHIC ANNOTATION REVERSE MARK
-unicode_east_asian_width(0x3192, 0x3195, 'W').	% No   [4] IDEOGRAPHIC ANNOTATION ONE MARK..IDEOGRAPHIC ANNOTATION FOUR MARK
-unicode_east_asian_width(0x3196, 0x319F, 'W').	% So  [10] IDEOGRAPHIC ANNOTATION TOP MARK..IDEOGRAPHIC ANNOTATION MAN MARK
-unicode_east_asian_width(0x31A0, 0x31BA, 'W').	% Lo  [27] BOPOMOFO LETTER BU..BOPOMOFO LETTER ZY
-unicode_east_asian_width(0x31C0, 0x31E3, 'W').	% So  [36] CJK STROKE T..CJK STROKE Q
-unicode_east_asian_width(0x31F0, 0x31FF, 'W').	% Lo  [16] KATAKANA LETTER SMALL KU..KATAKANA LETTER SMALL RO
-unicode_east_asian_width(0x3200, 0x321E, 'W').	% So  [31] PARENTHESIZED HANGUL KIYEOK..PARENTHESIZED KOREAN CHARACTER O HU
-unicode_east_asian_width(0x3220, 0x3229, 'W').	% No  [10] PARENTHESIZED IDEOGRAPH ONE..PARENTHESIZED IDEOGRAPH TEN
-unicode_east_asian_width(0x322A, 0x3247, 'W').	% So  [30] PARENTHESIZED IDEOGRAPH MOON..CIRCLED IDEOGRAPH KOTO
-unicode_east_asian_width(0x3250, 0x3250, 'W').	% So       PARTNERSHIP SIGN
-unicode_east_asian_width(0x3251, 0x325F, 'W').	% No  [15] CIRCLED NUMBER TWENTY ONE..CIRCLED NUMBER THIRTY FIVE
-unicode_east_asian_width(0x3260, 0x327F, 'W').	% So  [32] CIRCLED HANGUL KIYEOK..KOREAN STANDARD SYMBOL
-unicode_east_asian_width(0x3280, 0x3289, 'W').	% No  [10] CIRCLED IDEOGRAPH ONE..CIRCLED IDEOGRAPH TEN
-unicode_east_asian_width(0x328A, 0x32B0, 'W').	% So  [39] CIRCLED IDEOGRAPH MOON..CIRCLED IDEOGRAPH NIGHT
-unicode_east_asian_width(0x32B1, 0x32BF, 'W').	% No  [15] CIRCLED NUMBER THIRTY SIX..CIRCLED NUMBER FIFTY
-unicode_east_asian_width(0x32C0, 0x32FE, 'W').	% So  [63] IDEOGRAPHIC TELEGRAPH SYMBOL FOR JANUARY..CIRCLED KATAKANA WO
-unicode_east_asian_width(0x3300, 0x33FF, 'W').	% So [256] SQUARE APAATO..SQUARE GAL
-unicode_east_asian_width(0x3400, 0x4DB5, 'W').	% Lo [6582] CJK UNIFIED IDEOGRAPH-3400..CJK UNIFIED IDEOGRAPH-4DB5
-unicode_east_asian_width(0x4DB6, 0x4DBF, 'W').	% Cn  [10] <reserved-4DB6>..<reserved-4DBF>
-unicode_east_asian_width(0x4E00, 0x9FCC, 'W').	% Lo [20941] CJK UNIFIED IDEOGRAPH-4E00..CJK UNIFIED IDEOGRAPH-9FCC
-unicode_east_asian_width(0x9FCD, 0x9FFF, 'W').	% Cn  [51] <reserved-9FCD>..<reserved-9FFF>
-unicode_east_asian_width(0xA000, 0xA014, 'W').	% Lo  [21] YI SYLLABLE IT..YI SYLLABLE E
-unicode_east_asian_width(0xA015, 0xA015, 'W').	% Lm       YI SYLLABLE WU
-unicode_east_asian_width(0xA016, 0xA48C, 'W').	% Lo [1143] YI SYLLABLE BIT..YI SYLLABLE YYR
-unicode_east_asian_width(0xA490, 0xA4C6, 'W').	% So  [55] YI RADICAL QOT..YI RADICAL KE
-unicode_east_asian_width(0xA960, 0xA97C, 'W').	% Lo  [29] HANGUL CHOSEONG TIKEUT-MIEUM..HANGUL CHOSEONG SSANGYEORINHIEUH
-unicode_east_asian_width(0xAC00, 0xD7A3, 'W').	% Lo [11172] HANGUL SYLLABLE GA..HANGUL SYLLABLE HIH
-unicode_east_asian_width(0xD7B0, 0xD7C6, 'W').	% Lo  [23] HANGUL JUNGSEONG O-YEO..HANGUL JUNGSEONG ARAEA-E
-unicode_east_asian_width(0xD7CB, 0xD7FB, 'W').	% Lo  [49] HANGUL JONGSEONG NIEUN-RIEUL..HANGUL JONGSEONG PHIEUPH-THIEUTH
-unicode_east_asian_width(0xF900, 0xFA6D, 'W').	% Lo [366] CJK COMPATIBILITY IDEOGRAPH-F900..CJK COMPATIBILITY IDEOGRAPH-FA6D
-unicode_east_asian_width(0xFA6E, 0xFA6F, 'W').	% Cn   [2] <reserved-FA6E>..<reserved-FA6F>
-unicode_east_asian_width(0xFA70, 0xFAD9, 'W').	% Lo [106] CJK COMPATIBILITY IDEOGRAPH-FA70..CJK COMPATIBILITY IDEOGRAPH-FAD9
-unicode_east_asian_width(0xFADA, 0xFAFF, 'W').	% Cn  [38] <reserved-FADA>..<reserved-FAFF>
-unicode_east_asian_width(0xFE10, 0xFE16, 'W').	% Po   [7] PRESENTATION FORM FOR VERTICAL COMMA..PRESENTATION FORM FOR VERTICAL QUESTION MARK
-unicode_east_asian_width(0xFE17, 0xFE17, 'W').	% Ps       PRESENTATION FORM FOR VERTICAL LEFT WHITE LENTICULAR BRACKET
-unicode_east_asian_width(0xFE18, 0xFE18, 'W').	% Pe       PRESENTATION FORM FOR VERTICAL RIGHT WHITE LENTICULAR BRAKCET
-unicode_east_asian_width(0xFE19, 0xFE19, 'W').	% Po       PRESENTATION FORM FOR VERTICAL HORIZONTAL ELLIPSIS
-unicode_east_asian_width(0xFE30, 0xFE30, 'W').	% Po       PRESENTATION FORM FOR VERTICAL TWO DOT LEADER
-unicode_east_asian_width(0xFE31, 0xFE32, 'W').	% Pd   [2] PRESENTATION FORM FOR VERTICAL EM DASH..PRESENTATION FORM FOR VERTICAL EN DASH
-unicode_east_asian_width(0xFE33, 0xFE34, 'W').	% Pc   [2] PRESENTATION FORM FOR VERTICAL LOW LINE..PRESENTATION FORM FOR VERTICAL WAVY LOW LINE
-unicode_east_asian_width(0xFE35, 0xFE35, 'W').	% Ps       PRESENTATION FORM FOR VERTICAL LEFT PARENTHESIS
-unicode_east_asian_width(0xFE36, 0xFE36, 'W').	% Pe       PRESENTATION FORM FOR VERTICAL RIGHT PARENTHESIS
-unicode_east_asian_width(0xFE37, 0xFE37, 'W').	% Ps       PRESENTATION FORM FOR VERTICAL LEFT CURLY BRACKET
-unicode_east_asian_width(0xFE38, 0xFE38, 'W').	% Pe       PRESENTATION FORM FOR VERTICAL RIGHT CURLY BRACKET
-unicode_east_asian_width(0xFE39, 0xFE39, 'W').	% Ps       PRESENTATION FORM FOR VERTICAL LEFT TORTOISE SHELL BRACKET
-unicode_east_asian_width(0xFE3A, 0xFE3A, 'W').	% Pe       PRESENTATION FORM FOR VERTICAL RIGHT TORTOISE SHELL BRACKET
-unicode_east_asian_width(0xFE3B, 0xFE3B, 'W').	% Ps       PRESENTATION FORM FOR VERTICAL LEFT BLACK LENTICULAR BRACKET
-unicode_east_asian_width(0xFE3C, 0xFE3C, 'W').	% Pe       PRESENTATION FORM FOR VERTICAL RIGHT BLACK LENTICULAR BRACKET
-unicode_east_asian_width(0xFE3D, 0xFE3D, 'W').	% Ps       PRESENTATION FORM FOR VERTICAL LEFT DOUBLE ANGLE BRACKET
-unicode_east_asian_width(0xFE3E, 0xFE3E, 'W').	% Pe       PRESENTATION FORM FOR VERTICAL RIGHT DOUBLE ANGLE BRACKET
-unicode_east_asian_width(0xFE3F, 0xFE3F, 'W').	% Ps       PRESENTATION FORM FOR VERTICAL LEFT ANGLE BRACKET
-unicode_east_asian_width(0xFE40, 0xFE40, 'W').	% Pe       PRESENTATION FORM FOR VERTICAL RIGHT ANGLE BRACKET
-unicode_east_asian_width(0xFE41, 0xFE41, 'W').	% Ps       PRESENTATION FORM FOR VERTICAL LEFT CORNER BRACKET
-unicode_east_asian_width(0xFE42, 0xFE42, 'W').	% Pe       PRESENTATION FORM FOR VERTICAL RIGHT CORNER BRACKET
-unicode_east_asian_width(0xFE43, 0xFE43, 'W').	% Ps       PRESENTATION FORM FOR VERTICAL LEFT WHITE CORNER BRACKET
-unicode_east_asian_width(0xFE44, 0xFE44, 'W').	% Pe       PRESENTATION FORM FOR VERTICAL RIGHT WHITE CORNER BRACKET
-unicode_east_asian_width(0xFE45, 0xFE46, 'W').	% Po   [2] SESAME DOT..WHITE SESAME DOT
-unicode_east_asian_width(0xFE47, 0xFE47, 'W').	% Ps       PRESENTATION FORM FOR VERTICAL LEFT SQUARE BRACKET
-unicode_east_asian_width(0xFE48, 0xFE48, 'W').	% Pe       PRESENTATION FORM FOR VERTICAL RIGHT SQUARE BRACKET
-unicode_east_asian_width(0xFE49, 0xFE4C, 'W').	% Po   [4] DASHED OVERLINE..DOUBLE WAVY OVERLINE
-unicode_east_asian_width(0xFE4D, 0xFE4F, 'W').	% Pc   [3] DASHED LOW LINE..WAVY LOW LINE
-unicode_east_asian_width(0xFE50, 0xFE52, 'W').	% Po   [3] SMALL COMMA..SMALL FULL STOP
-unicode_east_asian_width(0xFE54, 0xFE57, 'W').	% Po   [4] SMALL SEMICOLON..SMALL EXCLAMATION MARK
-unicode_east_asian_width(0xFE58, 0xFE58, 'W').	% Pd       SMALL EM DASH
-unicode_east_asian_width(0xFE59, 0xFE59, 'W').	% Ps       SMALL LEFT PARENTHESIS
-unicode_east_asian_width(0xFE5A, 0xFE5A, 'W').	% Pe       SMALL RIGHT PARENTHESIS
-unicode_east_asian_width(0xFE5B, 0xFE5B, 'W').	% Ps       SMALL LEFT CURLY BRACKET
-unicode_east_asian_width(0xFE5C, 0xFE5C, 'W').	% Pe       SMALL RIGHT CURLY BRACKET
-unicode_east_asian_width(0xFE5D, 0xFE5D, 'W').	% Ps       SMALL LEFT TORTOISE SHELL BRACKET
-unicode_east_asian_width(0xFE5E, 0xFE5E, 'W').	% Pe       SMALL RIGHT TORTOISE SHELL BRACKET
-unicode_east_asian_width(0xFE5F, 0xFE61, 'W').	% Po   [3] SMALL NUMBER SIGN..SMALL ASTERISK
-unicode_east_asian_width(0xFE62, 0xFE62, 'W').	% Sm       SMALL PLUS SIGN
-unicode_east_asian_width(0xFE63, 0xFE63, 'W').	% Pd       SMALL HYPHEN-MINUS
-unicode_east_asian_width(0xFE64, 0xFE66, 'W').	% Sm   [3] SMALL LESS-THAN SIGN..SMALL EQUALS SIGN
-unicode_east_asian_width(0xFE68, 0xFE68, 'W').	% Po       SMALL REVERSE SOLIDUS
-unicode_east_asian_width(0xFE69, 0xFE69, 'W').	% Sc       SMALL DOLLAR SIGN
-unicode_east_asian_width(0xFE6A, 0xFE6B, 'W').	% Po   [2] SMALL PERCENT SIGN..SMALL COMMERCIAL AT
-unicode_east_asian_width(0x1B000, 0x1B001, 'W').	% Lo   [2] KATAKANA LETTER ARCHAIC E..HIRAGANA LETTER ARCHAIC YE
-unicode_east_asian_width(0x1F200, 0x1F202, 'W').	% So   [3] SQUARE HIRAGANA HOKA..SQUARED KATAKANA SA
-unicode_east_asian_width(0x1F210, 0x1F23A, 'W').	% So  [43] SQUARED CJK UNIFIED IDEOGRAPH-624B..SQUARED CJK UNIFIED IDEOGRAPH-55B6
-unicode_east_asian_width(0x1F240, 0x1F248, 'W').	% So   [9] TORTOISE SHELL BRACKETED CJK UNIFIED IDEOGRAPH-672C..TORTOISE SHELL BRACKETED CJK UNIFIED IDEOGRAPH-6557
-unicode_east_asian_width(0x1F250, 0x1F251, 'W').	% So   [2] CIRCLED IDEOGRAPH ADVANTAGE..CIRCLED IDEOGRAPH ACCEPT
-unicode_east_asian_width(0x20000, 0x2A6D6, 'W').	% Lo [42711] CJK UNIFIED IDEOGRAPH-20000..CJK UNIFIED IDEOGRAPH-2A6D6
-unicode_east_asian_width(0x2A6D7, 0x2A6FF, 'W').	% Cn  [41] <reserved-2A6D7>..<reserved-2A6FF>
-unicode_east_asian_width(0x2A700, 0x2B734, 'W').	% Lo [4149] CJK UNIFIED IDEOGRAPH-2A700..CJK UNIFIED IDEOGRAPH-2B734
-unicode_east_asian_width(0x2B735, 0x2B73F, 'W').	% Cn  [11] <reserved-2B735>..<reserved-2B73F>
-unicode_east_asian_width(0x2B740, 0x2B81D, 'W').	% Lo [222] CJK UNIFIED IDEOGRAPH-2B740..CJK UNIFIED IDEOGRAPH-2B81D
-unicode_east_asian_width(0x2B81E, 0x2F7FF, 'W').	% Cn [16354] <reserved-2B81E>..<reserved-2F7FF>
-unicode_east_asian_width(0x2F800, 0x2FA1D, 'W').	% Lo [542] CJK COMPATIBILITY IDEOGRAPH-2F800..CJK COMPATIBILITY IDEOGRAPH-2FA1D
-unicode_east_asian_width(0x2FA1E, 0x2FFFD, 'W').	% Cn [1504] <reserved-2FA1E>..<reserved-2FFFD>
-unicode_east_asian_width(0x30000, 0x3FFFD, 'W').	% Cn [65534] <reserved-30000>..<reserved-3FFFD>
-
-% Total code points: 173217
-
-% ================================================
-
-% East_Asian_Width=Fullwidth
-
-unicode_east_asian_width(0x3000, 0x3000, 'F').	% Zs       IDEOGRAPHIC SPACE
-unicode_east_asian_width(0xFF01, 0xFF03, 'F').	% Po   [3] FULLWIDTH EXCLAMATION MARK..FULLWIDTH NUMBER SIGN
-unicode_east_asian_width(0xFF04, 0xFF04, 'F').	% Sc       FULLWIDTH DOLLAR SIGN
-unicode_east_asian_width(0xFF05, 0xFF07, 'F').	% Po   [3] FULLWIDTH PERCENT SIGN..FULLWIDTH APOSTROPHE
-unicode_east_asian_width(0xFF08, 0xFF08, 'F').	% Ps       FULLWIDTH LEFT PARENTHESIS
-unicode_east_asian_width(0xFF09, 0xFF09, 'F').	% Pe       FULLWIDTH RIGHT PARENTHESIS
-unicode_east_asian_width(0xFF0A, 0xFF0A, 'F').	% Po       FULLWIDTH ASTERISK
-unicode_east_asian_width(0xFF0B, 0xFF0B, 'F').	% Sm       FULLWIDTH PLUS SIGN
-unicode_east_asian_width(0xFF0C, 0xFF0C, 'F').	% Po       FULLWIDTH COMMA
-unicode_east_asian_width(0xFF0D, 0xFF0D, 'F').	% Pd       FULLWIDTH HYPHEN-MINUS
-unicode_east_asian_width(0xFF0E, 0xFF0F, 'F').	% Po   [2] FULLWIDTH FULL STOP..FULLWIDTH SOLIDUS
-unicode_east_asian_width(0xFF10, 0xFF19, 'F').	% Nd  [10] FULLWIDTH DIGIT ZERO..FULLWIDTH DIGIT NINE
-unicode_east_asian_width(0xFF1A, 0xFF1B, 'F').	% Po   [2] FULLWIDTH COLON..FULLWIDTH SEMICOLON
-unicode_east_asian_width(0xFF1C, 0xFF1E, 'F').	% Sm   [3] FULLWIDTH LESS-THAN SIGN..FULLWIDTH GREATER-THAN SIGN
-unicode_east_asian_width(0xFF1F, 0xFF20, 'F').	% Po   [2] FULLWIDTH QUESTION MARK..FULLWIDTH COMMERCIAL AT
-unicode_east_asian_width(0xFF21, 0xFF3A, 'F').	% L&  [26] FULLWIDTH LATIN CAPITAL LETTER A..FULLWIDTH LATIN CAPITAL LETTER Z
-unicode_east_asian_width(0xFF3B, 0xFF3B, 'F').	% Ps       FULLWIDTH LEFT SQUARE BRACKET
-unicode_east_asian_width(0xFF3C, 0xFF3C, 'F').	% Po       FULLWIDTH REVERSE SOLIDUS
-unicode_east_asian_width(0xFF3D, 0xFF3D, 'F').	% Pe       FULLWIDTH RIGHT SQUARE BRACKET
-unicode_east_asian_width(0xFF3E, 0xFF3E, 'F').	% Sk       FULLWIDTH CIRCUMFLEX ACCENT
-unicode_east_asian_width(0xFF3F, 0xFF3F, 'F').	% Pc       FULLWIDTH LOW LINE
-unicode_east_asian_width(0xFF40, 0xFF40, 'F').	% Sk       FULLWIDTH GRAVE ACCENT
-unicode_east_asian_width(0xFF41, 0xFF5A, 'F').	% L&  [26] FULLWIDTH LATIN SMALL LETTER A..FULLWIDTH LATIN SMALL LETTER Z
-unicode_east_asian_width(0xFF5B, 0xFF5B, 'F').	% Ps       FULLWIDTH LEFT CURLY BRACKET
-unicode_east_asian_width(0xFF5C, 0xFF5C, 'F').	% Sm       FULLWIDTH VERTICAL LINE
-unicode_east_asian_width(0xFF5D, 0xFF5D, 'F').	% Pe       FULLWIDTH RIGHT CURLY BRACKET
-unicode_east_asian_width(0xFF5E, 0xFF5E, 'F').	% Sm       FULLWIDTH TILDE
-unicode_east_asian_width(0xFF5F, 0xFF5F, 'F').	% Ps       FULLWIDTH LEFT WHITE PARENTHESIS
-unicode_east_asian_width(0xFF60, 0xFF60, 'F').	% Pe       FULLWIDTH RIGHT WHITE PARENTHESIS
-unicode_east_asian_width(0xFFE0, 0xFFE1, 'F').	% Sc   [2] FULLWIDTH CENT SIGN..FULLWIDTH POUND SIGN
-unicode_east_asian_width(0xFFE2, 0xFFE2, 'F').	% Sm       FULLWIDTH NOT SIGN
-unicode_east_asian_width(0xFFE3, 0xFFE3, 'F').	% Sk       FULLWIDTH MACRON
-unicode_east_asian_width(0xFFE4, 0xFFE4, 'F').	% So       FULLWIDTH BROKEN BAR
-unicode_east_asian_width(0xFFE5, 0xFFE6, 'F').	% Sc   [2] FULLWIDTH YEN SIGN..FULLWIDTH WON SIGN
-
-% Total code points: 104
-
-% ================================================
-
-% East_Asian_Width=Narrow
-
-unicode_east_asian_width(0x0020, 0x0020, 'Na').	% Zs       SPACE
-unicode_east_asian_width(0x0021, 0x0023, 'Na').	% Po   [3] EXCLAMATION MARK..NUMBER SIGN
-unicode_east_asian_width(0x0024, 0x0024, 'Na').	% Sc       DOLLAR SIGN
-unicode_east_asian_width(0x0025, 0x0027, 'Na').	% Po   [3] PERCENT SIGN..APOSTROPHE
-unicode_east_asian_width(0x0028, 0x0028, 'Na').	% Ps       LEFT PARENTHESIS
-unicode_east_asian_width(0x0029, 0x0029, 'Na').	% Pe       RIGHT PARENTHESIS
-unicode_east_asian_width(0x002A, 0x002A, 'Na').	% Po       ASTERISK
-unicode_east_asian_width(0x002B, 0x002B, 'Na').	% Sm       PLUS SIGN
-unicode_east_asian_width(0x002C, 0x002C, 'Na').	% Po       COMMA
-unicode_east_asian_width(0x002D, 0x002D, 'Na').	% Pd       HYPHEN-MINUS
-unicode_east_asian_width(0x002E, 0x002F, 'Na').	% Po   [2] FULL STOP..SOLIDUS
-unicode_east_asian_width(0x0030, 0x0039, 'Na').	% Nd  [10] DIGIT ZERO..DIGIT NINE
-unicode_east_asian_width(0x003A, 0x003B, 'Na').	% Po   [2] COLON..SEMICOLON
-unicode_east_asian_width(0x003C, 0x003E, 'Na').	% Sm   [3] LESS-THAN SIGN..GREATER-THAN SIGN
-unicode_east_asian_width(0x003F, 0x0040, 'Na').	% Po   [2] QUESTION MARK..COMMERCIAL AT
-unicode_east_asian_width(0x0041, 0x005A, 'Na').	% L&  [26] LATIN CAPITAL LETTER A..LATIN CAPITAL LETTER Z
-unicode_east_asian_width(0x005B, 0x005B, 'Na').	% Ps       LEFT SQUARE BRACKET
-unicode_east_asian_width(0x005C, 0x005C, 'Na').	% Po       REVERSE SOLIDUS
-unicode_east_asian_width(0x005D, 0x005D, 'Na').	% Pe       RIGHT SQUARE BRACKET
-unicode_east_asian_width(0x005E, 0x005E, 'Na').	% Sk       CIRCUMFLEX ACCENT
-unicode_east_asian_width(0x005F, 0x005F, 'Na').	% Pc       LOW LINE
-unicode_east_asian_width(0x0060, 0x0060, 'Na').	% Sk       GRAVE ACCENT
-unicode_east_asian_width(0x0061, 0x007A, 'Na').	% L&  [26] LATIN SMALL LETTER A..LATIN SMALL LETTER Z
-unicode_east_asian_width(0x007B, 0x007B, 'Na').	% Ps       LEFT CURLY BRACKET
-unicode_east_asian_width(0x007C, 0x007C, 'Na').	% Sm       VERTICAL LINE
-unicode_east_asian_width(0x007D, 0x007D, 'Na').	% Pe       RIGHT CURLY BRACKET
-unicode_east_asian_width(0x007E, 0x007E, 'Na').	% Sm       TILDE
-unicode_east_asian_width(0x00A2, 0x00A3, 'Na').	% Sc   [2] CENT SIGN..POUND SIGN
-unicode_east_asian_width(0x00A5, 0x00A5, 'Na').	% Sc       YEN SIGN
-unicode_east_asian_width(0x00A6, 0x00A6, 'Na').	% So       BROKEN BAR
-unicode_east_asian_width(0x00AC, 0x00AC, 'Na').	% Sm       NOT SIGN
-unicode_east_asian_width(0x00AF, 0x00AF, 'Na').	% Sk       MACRON
-unicode_east_asian_width(0x27E6, 0x27E6, 'Na').	% Ps       MATHEMATICAL LEFT WHITE SQUARE BRACKET
-unicode_east_asian_width(0x27E7, 0x27E7, 'Na').	% Pe       MATHEMATICAL RIGHT WHITE SQUARE BRACKET
-unicode_east_asian_width(0x27E8, 0x27E8, 'Na').	% Ps       MATHEMATICAL LEFT ANGLE BRACKET
-unicode_east_asian_width(0x27E9, 0x27E9, 'Na').	% Pe       MATHEMATICAL RIGHT ANGLE BRACKET
-unicode_east_asian_width(0x27EA, 0x27EA, 'Na').	% Ps       MATHEMATICAL LEFT DOUBLE ANGLE BRACKET
-unicode_east_asian_width(0x27EB, 0x27EB, 'Na').	% Pe       MATHEMATICAL RIGHT DOUBLE ANGLE BRACKET
-unicode_east_asian_width(0x27EC, 0x27EC, 'Na').	% Ps       MATHEMATICAL LEFT WHITE TORTOISE SHELL BRACKET
-unicode_east_asian_width(0x27ED, 0x27ED, 'Na').	% Pe       MATHEMATICAL RIGHT WHITE TORTOISE SHELL BRACKET
-unicode_east_asian_width(0x2985, 0x2985, 'Na').	% Ps       LEFT WHITE PARENTHESIS
-unicode_east_asian_width(0x2986, 0x2986, 'Na').	% Pe       RIGHT WHITE PARENTHESIS
-
-% Total code points: 111
-
-% EOF
+unicode_east_asian_width(0, 31, 'N').
+unicode_east_asian_width(32, 32, 'Na').
+unicode_east_asian_width(33, 35, 'Na').
+unicode_east_asian_width(36, 36, 'Na').
+unicode_east_asian_width(37, 39, 'Na').
+unicode_east_asian_width(40, 40, 'Na').
+unicode_east_asian_width(41, 41, 'Na').
+unicode_east_asian_width(42, 42, 'Na').
+unicode_east_asian_width(43, 43, 'Na').
+unicode_east_asian_width(44, 44, 'Na').
+unicode_east_asian_width(45, 45, 'Na').
+unicode_east_asian_width(46, 47, 'Na').
+unicode_east_asian_width(48, 57, 'Na').
+unicode_east_asian_width(58, 59, 'Na').
+unicode_east_asian_width(60, 62, 'Na').
+unicode_east_asian_width(63, 64, 'Na').
+unicode_east_asian_width(65, 90, 'Na').
+unicode_east_asian_width(91, 91, 'Na').
+unicode_east_asian_width(92, 92, 'Na').
+unicode_east_asian_width(93, 93, 'Na').
+unicode_east_asian_width(94, 94, 'Na').
+unicode_east_asian_width(95, 95, 'Na').
+unicode_east_asian_width(96, 96, 'Na').
+unicode_east_asian_width(97, 122, 'Na').
+unicode_east_asian_width(123, 123, 'Na').
+unicode_east_asian_width(124, 124, 'Na').
+unicode_east_asian_width(125, 125, 'Na').
+unicode_east_asian_width(126, 126, 'Na').
+unicode_east_asian_width(127, 127, 'N').
+unicode_east_asian_width(128, 159, 'N').
+unicode_east_asian_width(160, 160, 'N').
+unicode_east_asian_width(161, 161, 'A').
+unicode_east_asian_width(162, 163, 'Na').
+unicode_east_asian_width(164, 164, 'A').
+unicode_east_asian_width(165, 165, 'Na').
+unicode_east_asian_width(166, 166, 'Na').
+unicode_east_asian_width(167, 167, 'A').
+unicode_east_asian_width(168, 168, 'A').
+unicode_east_asian_width(169, 169, 'N').
+unicode_east_asian_width(170, 170, 'A').
+unicode_east_asian_width(171, 171, 'N').
+unicode_east_asian_width(172, 172, 'Na').
+unicode_east_asian_width(173, 173, 'A').
+unicode_east_asian_width(174, 174, 'A').
+unicode_east_asian_width(175, 175, 'Na').
+unicode_east_asian_width(176, 176, 'A').
+unicode_east_asian_width(177, 177, 'A').
+unicode_east_asian_width(178, 179, 'A').
+unicode_east_asian_width(180, 180, 'A').
+unicode_east_asian_width(181, 181, 'N').
+unicode_east_asian_width(182, 183, 'A').
+unicode_east_asian_width(184, 184, 'A').
+unicode_east_asian_width(185, 185, 'A').
+unicode_east_asian_width(186, 186, 'A').
+unicode_east_asian_width(187, 187, 'N').
+unicode_east_asian_width(188, 190, 'A').
+unicode_east_asian_width(191, 191, 'A').
+unicode_east_asian_width(192, 197, 'N').
+unicode_east_asian_width(198, 198, 'A').
+unicode_east_asian_width(199, 207, 'N').
+unicode_east_asian_width(208, 208, 'A').
+unicode_east_asian_width(209, 214, 'N').
+unicode_east_asian_width(215, 215, 'A').
+unicode_east_asian_width(216, 216, 'A').
+unicode_east_asian_width(217, 221, 'N').
+unicode_east_asian_width(222, 225, 'A').
+unicode_east_asian_width(226, 229, 'N').
+unicode_east_asian_width(230, 230, 'A').
+unicode_east_asian_width(231, 231, 'N').
+unicode_east_asian_width(232, 234, 'A').
+unicode_east_asian_width(235, 235, 'N').
+unicode_east_asian_width(236, 237, 'A').
+unicode_east_asian_width(238, 239, 'N').
+unicode_east_asian_width(240, 240, 'A').
+unicode_east_asian_width(241, 241, 'N').
+unicode_east_asian_width(242, 243, 'A').
+unicode_east_asian_width(244, 246, 'N').
+unicode_east_asian_width(247, 247, 'A').
+unicode_east_asian_width(248, 250, 'A').
+unicode_east_asian_width(251, 251, 'N').
+unicode_east_asian_width(252, 252, 'A').
+unicode_east_asian_width(253, 253, 'N').
+unicode_east_asian_width(254, 254, 'A').
+unicode_east_asian_width(255, 255, 'N').
+unicode_east_asian_width(256, 256, 'N').
+unicode_east_asian_width(257, 257, 'A').
+unicode_east_asian_width(258, 272, 'N').
+unicode_east_asian_width(273, 273, 'A').
+unicode_east_asian_width(274, 274, 'N').
+unicode_east_asian_width(275, 275, 'A').
+unicode_east_asian_width(276, 282, 'N').
+unicode_east_asian_width(283, 283, 'A').
+unicode_east_asian_width(284, 293, 'N').
+unicode_east_asian_width(294, 295, 'A').
+unicode_east_asian_width(296, 298, 'N').
+unicode_east_asian_width(299, 299, 'A').
+unicode_east_asian_width(300, 304, 'N').
+unicode_east_asian_width(305, 307, 'A').
+unicode_east_asian_width(308, 311, 'N').
+unicode_east_asian_width(312, 312, 'A').
+unicode_east_asian_width(313, 318, 'N').
+unicode_east_asian_width(319, 322, 'A').
+unicode_east_asian_width(323, 323, 'N').
+unicode_east_asian_width(324, 324, 'A').
+unicode_east_asian_width(325, 327, 'N').
+unicode_east_asian_width(328, 331, 'A').
+unicode_east_asian_width(332, 332, 'N').
+unicode_east_asian_width(333, 333, 'A').
+unicode_east_asian_width(334, 337, 'N').
+unicode_east_asian_width(338, 339, 'A').
+unicode_east_asian_width(340, 357, 'N').
+unicode_east_asian_width(358, 359, 'A').
+unicode_east_asian_width(360, 362, 'N').
+unicode_east_asian_width(363, 363, 'A').
+unicode_east_asian_width(364, 383, 'N').
+unicode_east_asian_width(384, 442, 'N').
+unicode_east_asian_width(443, 443, 'N').
+unicode_east_asian_width(444, 447, 'N').
+unicode_east_asian_width(448, 451, 'N').
+unicode_east_asian_width(452, 461, 'N').
+unicode_east_asian_width(462, 462, 'A').
+unicode_east_asian_width(463, 463, 'N').
+unicode_east_asian_width(464, 464, 'A').
+unicode_east_asian_width(465, 465, 'N').
+unicode_east_asian_width(466, 466, 'A').
+unicode_east_asian_width(467, 467, 'N').
+unicode_east_asian_width(468, 468, 'A').
+unicode_east_asian_width(469, 469, 'N').
+unicode_east_asian_width(470, 470, 'A').
+unicode_east_asian_width(471, 471, 'N').
+unicode_east_asian_width(472, 472, 'A').
+unicode_east_asian_width(473, 473, 'N').
+unicode_east_asian_width(474, 474, 'A').
+unicode_east_asian_width(475, 475, 'N').
+unicode_east_asian_width(476, 476, 'A').
+unicode_east_asian_width(477, 591, 'N').
+unicode_east_asian_width(592, 592, 'N').
+unicode_east_asian_width(593, 593, 'A').
+unicode_east_asian_width(594, 608, 'N').
+unicode_east_asian_width(609, 609, 'A').
+unicode_east_asian_width(610, 659, 'N').
+unicode_east_asian_width(660, 661, 'N').
+unicode_east_asian_width(662, 687, 'N').
+unicode_east_asian_width(688, 705, 'N').
+unicode_east_asian_width(706, 707, 'N').
+unicode_east_asian_width(708, 708, 'A').
+unicode_east_asian_width(709, 709, 'N').
+unicode_east_asian_width(710, 710, 'N').
+unicode_east_asian_width(711, 711, 'A').
+unicode_east_asian_width(712, 712, 'N').
+unicode_east_asian_width(713, 715, 'A').
+unicode_east_asian_width(716, 716, 'N').
+unicode_east_asian_width(717, 717, 'A').
+unicode_east_asian_width(718, 719, 'N').
+unicode_east_asian_width(720, 720, 'A').
+unicode_east_asian_width(721, 721, 'N').
+unicode_east_asian_width(722, 727, 'N').
+unicode_east_asian_width(728, 731, 'A').
+unicode_east_asian_width(732, 732, 'N').
+unicode_east_asian_width(733, 733, 'A').
+unicode_east_asian_width(734, 734, 'N').
+unicode_east_asian_width(735, 735, 'A').
+unicode_east_asian_width(736, 740, 'N').
+unicode_east_asian_width(741, 747, 'N').
+unicode_east_asian_width(748, 748, 'N').
+unicode_east_asian_width(749, 749, 'N').
+unicode_east_asian_width(750, 750, 'N').
+unicode_east_asian_width(751, 767, 'N').
+unicode_east_asian_width(768, 879, 'A').
+unicode_east_asian_width(880, 883, 'N').
+unicode_east_asian_width(884, 884, 'N').
+unicode_east_asian_width(885, 885, 'N').
+unicode_east_asian_width(886, 887, 'N').
+unicode_east_asian_width(890, 890, 'N').
+unicode_east_asian_width(891, 893, 'N').
+unicode_east_asian_width(894, 894, 'N').
+unicode_east_asian_width(895, 895, 'N').
+unicode_east_asian_width(900, 901, 'N').
+unicode_east_asian_width(902, 902, 'N').
+unicode_east_asian_width(903, 903, 'N').
+unicode_east_asian_width(904, 906, 'N').
+unicode_east_asian_width(908, 908, 'N').
+unicode_east_asian_width(910, 912, 'N').
+unicode_east_asian_width(913, 929, 'A').
+unicode_east_asian_width(931, 937, 'A').
+unicode_east_asian_width(938, 944, 'N').
+unicode_east_asian_width(945, 961, 'A').
+unicode_east_asian_width(962, 962, 'N').
+unicode_east_asian_width(963, 969, 'A').
+unicode_east_asian_width(970, 1013, 'N').
+unicode_east_asian_width(1014, 1014, 'N').
+unicode_east_asian_width(1015, 1023, 'N').
+unicode_east_asian_width(1024, 1024, 'N').
+unicode_east_asian_width(1025, 1025, 'A').
+unicode_east_asian_width(1026, 1039, 'N').
+unicode_east_asian_width(1040, 1103, 'A').
+unicode_east_asian_width(1104, 1104, 'N').
+unicode_east_asian_width(1105, 1105, 'A').
+unicode_east_asian_width(1106, 1153, 'N').
+unicode_east_asian_width(1154, 1154, 'N').
+unicode_east_asian_width(1155, 1159, 'N').
+unicode_east_asian_width(1160, 1161, 'N').
+unicode_east_asian_width(1162, 1279, 'N').
+unicode_east_asian_width(1280, 1327, 'N').
+unicode_east_asian_width(1329, 1366, 'N').
+unicode_east_asian_width(1369, 1369, 'N').
+unicode_east_asian_width(1370, 1375, 'N').
+unicode_east_asian_width(1376, 1416, 'N').
+unicode_east_asian_width(1417, 1417, 'N').
+unicode_east_asian_width(1418, 1418, 'N').
+unicode_east_asian_width(1421, 1422, 'N').
+unicode_east_asian_width(1423, 1423, 'N').
+unicode_east_asian_width(1425, 1469, 'N').
+unicode_east_asian_width(1470, 1470, 'N').
+unicode_east_asian_width(1471, 1471, 'N').
+unicode_east_asian_width(1472, 1472, 'N').
+unicode_east_asian_width(1473, 1474, 'N').
+unicode_east_asian_width(1475, 1475, 'N').
+unicode_east_asian_width(1476, 1477, 'N').
+unicode_east_asian_width(1478, 1478, 'N').
+unicode_east_asian_width(1479, 1479, 'N').
+unicode_east_asian_width(1488, 1514, 'N').
+unicode_east_asian_width(1519, 1522, 'N').
+unicode_east_asian_width(1523, 1524, 'N').
+unicode_east_asian_width(1536, 1541, 'N').
+unicode_east_asian_width(1542, 1544, 'N').
+unicode_east_asian_width(1545, 1546, 'N').
+unicode_east_asian_width(1547, 1547, 'N').
+unicode_east_asian_width(1548, 1549, 'N').
+unicode_east_asian_width(1550, 1551, 'N').
+unicode_east_asian_width(1552, 1562, 'N').
+unicode_east_asian_width(1563, 1563, 'N').
+unicode_east_asian_width(1564, 1564, 'N').
+unicode_east_asian_width(1565, 1567, 'N').
+unicode_east_asian_width(1568, 1599, 'N').
+unicode_east_asian_width(1600, 1600, 'N').
+unicode_east_asian_width(1601, 1610, 'N').
+unicode_east_asian_width(1611, 1631, 'N').
+unicode_east_asian_width(1632, 1641, 'N').
+unicode_east_asian_width(1642, 1645, 'N').
+unicode_east_asian_width(1646, 1647, 'N').
+unicode_east_asian_width(1648, 1648, 'N').
+unicode_east_asian_width(1649, 1747, 'N').
+unicode_east_asian_width(1748, 1748, 'N').
+unicode_east_asian_width(1749, 1749, 'N').
+unicode_east_asian_width(1750, 1756, 'N').
+unicode_east_asian_width(1757, 1757, 'N').
+unicode_east_asian_width(1758, 1758, 'N').
+unicode_east_asian_width(1759, 1764, 'N').
+unicode_east_asian_width(1765, 1766, 'N').
+unicode_east_asian_width(1767, 1768, 'N').
+unicode_east_asian_width(1769, 1769, 'N').
+unicode_east_asian_width(1770, 1773, 'N').
+unicode_east_asian_width(1774, 1775, 'N').
+unicode_east_asian_width(1776, 1785, 'N').
+unicode_east_asian_width(1786, 1788, 'N').
+unicode_east_asian_width(1789, 1790, 'N').
+unicode_east_asian_width(1791, 1791, 'N').
+unicode_east_asian_width(1792, 1805, 'N').
+unicode_east_asian_width(1807, 1807, 'N').
+unicode_east_asian_width(1808, 1808, 'N').
+unicode_east_asian_width(1809, 1809, 'N').
+unicode_east_asian_width(1810, 1839, 'N').
+unicode_east_asian_width(1840, 1866, 'N').
+unicode_east_asian_width(1869, 1871, 'N').
+unicode_east_asian_width(1872, 1919, 'N').
+unicode_east_asian_width(1920, 1957, 'N').
+unicode_east_asian_width(1958, 1968, 'N').
+unicode_east_asian_width(1969, 1969, 'N').
+unicode_east_asian_width(1984, 1993, 'N').
+unicode_east_asian_width(1994, 2026, 'N').
+unicode_east_asian_width(2027, 2035, 'N').
+unicode_east_asian_width(2036, 2037, 'N').
+unicode_east_asian_width(2038, 2038, 'N').
+unicode_east_asian_width(2039, 2041, 'N').
+unicode_east_asian_width(2042, 2042, 'N').
+unicode_east_asian_width(2045, 2045, 'N').
+unicode_east_asian_width(2046, 2047, 'N').
+unicode_east_asian_width(2048, 2069, 'N').
+unicode_east_asian_width(2070, 2073, 'N').
+unicode_east_asian_width(2074, 2074, 'N').
+unicode_east_asian_width(2075, 2083, 'N').
+unicode_east_asian_width(2084, 2084, 'N').
+unicode_east_asian_width(2085, 2087, 'N').
+unicode_east_asian_width(2088, 2088, 'N').
+unicode_east_asian_width(2089, 2093, 'N').
+unicode_east_asian_width(2096, 2110, 'N').
+unicode_east_asian_width(2112, 2136, 'N').
+unicode_east_asian_width(2137, 2139, 'N').
+unicode_east_asian_width(2142, 2142, 'N').
+unicode_east_asian_width(2144, 2154, 'N').
+unicode_east_asian_width(2160, 2183, 'N').
+unicode_east_asian_width(2184, 2184, 'N').
+unicode_east_asian_width(2185, 2191, 'N').
+unicode_east_asian_width(2192, 2193, 'N').
+unicode_east_asian_width(2199, 2207, 'N').
+unicode_east_asian_width(2208, 2248, 'N').
+unicode_east_asian_width(2249, 2249, 'N').
+unicode_east_asian_width(2250, 2273, 'N').
+unicode_east_asian_width(2274, 2274, 'N').
+unicode_east_asian_width(2275, 2303, 'N').
+unicode_east_asian_width(2304, 2306, 'N').
+unicode_east_asian_width(2307, 2307, 'N').
+unicode_east_asian_width(2308, 2361, 'N').
+unicode_east_asian_width(2362, 2362, 'N').
+unicode_east_asian_width(2363, 2363, 'N').
+unicode_east_asian_width(2364, 2364, 'N').
+unicode_east_asian_width(2365, 2365, 'N').
+unicode_east_asian_width(2366, 2368, 'N').
+unicode_east_asian_width(2369, 2376, 'N').
+unicode_east_asian_width(2377, 2380, 'N').
+unicode_east_asian_width(2381, 2381, 'N').
+unicode_east_asian_width(2382, 2383, 'N').
+unicode_east_asian_width(2384, 2384, 'N').
+unicode_east_asian_width(2385, 2391, 'N').
+unicode_east_asian_width(2392, 2401, 'N').
+unicode_east_asian_width(2402, 2403, 'N').
+unicode_east_asian_width(2404, 2405, 'N').
+unicode_east_asian_width(2406, 2415, 'N').
+unicode_east_asian_width(2416, 2416, 'N').
+unicode_east_asian_width(2417, 2417, 'N').
+unicode_east_asian_width(2418, 2431, 'N').
+unicode_east_asian_width(2432, 2432, 'N').
+unicode_east_asian_width(2433, 2433, 'N').
+unicode_east_asian_width(2434, 2435, 'N').
+unicode_east_asian_width(2437, 2444, 'N').
+unicode_east_asian_width(2447, 2448, 'N').
+unicode_east_asian_width(2451, 2472, 'N').
+unicode_east_asian_width(2474, 2480, 'N').
+unicode_east_asian_width(2482, 2482, 'N').
+unicode_east_asian_width(2486, 2489, 'N').
+unicode_east_asian_width(2492, 2492, 'N').
+unicode_east_asian_width(2493, 2493, 'N').
+unicode_east_asian_width(2494, 2496, 'N').
+unicode_east_asian_width(2497, 2500, 'N').
+unicode_east_asian_width(2503, 2504, 'N').
+unicode_east_asian_width(2507, 2508, 'N').
+unicode_east_asian_width(2509, 2509, 'N').
+unicode_east_asian_width(2510, 2510, 'N').
+unicode_east_asian_width(2519, 2519, 'N').
+unicode_east_asian_width(2524, 2525, 'N').
+unicode_east_asian_width(2527, 2529, 'N').
+unicode_east_asian_width(2530, 2531, 'N').
+unicode_east_asian_width(2534, 2543, 'N').
+unicode_east_asian_width(2544, 2545, 'N').
+unicode_east_asian_width(2546, 2547, 'N').
+unicode_east_asian_width(2548, 2553, 'N').
+unicode_east_asian_width(2554, 2554, 'N').
+unicode_east_asian_width(2555, 2555, 'N').
+unicode_east_asian_width(2556, 2556, 'N').
+unicode_east_asian_width(2557, 2557, 'N').
+unicode_east_asian_width(2558, 2558, 'N').
+unicode_east_asian_width(2561, 2562, 'N').
+unicode_east_asian_width(2563, 2563, 'N').
+unicode_east_asian_width(2565, 2570, 'N').
+unicode_east_asian_width(2575, 2576, 'N').
+unicode_east_asian_width(2579, 2600, 'N').
+unicode_east_asian_width(2602, 2608, 'N').
+unicode_east_asian_width(2610, 2611, 'N').
+unicode_east_asian_width(2613, 2614, 'N').
+unicode_east_asian_width(2616, 2617, 'N').
+unicode_east_asian_width(2620, 2620, 'N').
+unicode_east_asian_width(2622, 2624, 'N').
+unicode_east_asian_width(2625, 2626, 'N').
+unicode_east_asian_width(2631, 2632, 'N').
+unicode_east_asian_width(2635, 2637, 'N').
+unicode_east_asian_width(2641, 2641, 'N').
+unicode_east_asian_width(2649, 2652, 'N').
+unicode_east_asian_width(2654, 2654, 'N').
+unicode_east_asian_width(2662, 2671, 'N').
+unicode_east_asian_width(2672, 2673, 'N').
+unicode_east_asian_width(2674, 2676, 'N').
+unicode_east_asian_width(2677, 2677, 'N').
+unicode_east_asian_width(2678, 2678, 'N').
+unicode_east_asian_width(2689, 2690, 'N').
+unicode_east_asian_width(2691, 2691, 'N').
+unicode_east_asian_width(2693, 2701, 'N').
+unicode_east_asian_width(2703, 2705, 'N').
+unicode_east_asian_width(2707, 2728, 'N').
+unicode_east_asian_width(2730, 2736, 'N').
+unicode_east_asian_width(2738, 2739, 'N').
+unicode_east_asian_width(2741, 2745, 'N').
+unicode_east_asian_width(2748, 2748, 'N').
+unicode_east_asian_width(2749, 2749, 'N').
+unicode_east_asian_width(2750, 2752, 'N').
+unicode_east_asian_width(2753, 2757, 'N').
+unicode_east_asian_width(2759, 2760, 'N').
+unicode_east_asian_width(2761, 2761, 'N').
+unicode_east_asian_width(2763, 2764, 'N').
+unicode_east_asian_width(2765, 2765, 'N').
+unicode_east_asian_width(2768, 2768, 'N').
+unicode_east_asian_width(2784, 2785, 'N').
+unicode_east_asian_width(2786, 2787, 'N').
+unicode_east_asian_width(2790, 2799, 'N').
+unicode_east_asian_width(2800, 2800, 'N').
+unicode_east_asian_width(2801, 2801, 'N').
+unicode_east_asian_width(2809, 2809, 'N').
+unicode_east_asian_width(2810, 2815, 'N').
+unicode_east_asian_width(2817, 2817, 'N').
+unicode_east_asian_width(2818, 2819, 'N').
+unicode_east_asian_width(2821, 2828, 'N').
+unicode_east_asian_width(2831, 2832, 'N').
+unicode_east_asian_width(2835, 2856, 'N').
+unicode_east_asian_width(2858, 2864, 'N').
+unicode_east_asian_width(2866, 2867, 'N').
+unicode_east_asian_width(2869, 2873, 'N').
+unicode_east_asian_width(2876, 2876, 'N').
+unicode_east_asian_width(2877, 2877, 'N').
+unicode_east_asian_width(2878, 2878, 'N').
+unicode_east_asian_width(2879, 2879, 'N').
+unicode_east_asian_width(2880, 2880, 'N').
+unicode_east_asian_width(2881, 2884, 'N').
+unicode_east_asian_width(2887, 2888, 'N').
+unicode_east_asian_width(2891, 2892, 'N').
+unicode_east_asian_width(2893, 2893, 'N').
+unicode_east_asian_width(2901, 2902, 'N').
+unicode_east_asian_width(2903, 2903, 'N').
+unicode_east_asian_width(2908, 2909, 'N').
+unicode_east_asian_width(2911, 2913, 'N').
+unicode_east_asian_width(2914, 2915, 'N').
+unicode_east_asian_width(2918, 2927, 'N').
+unicode_east_asian_width(2928, 2928, 'N').
+unicode_east_asian_width(2929, 2929, 'N').
+unicode_east_asian_width(2930, 2935, 'N').
+unicode_east_asian_width(2946, 2946, 'N').
+unicode_east_asian_width(2947, 2947, 'N').
+unicode_east_asian_width(2949, 2954, 'N').
+unicode_east_asian_width(2958, 2960, 'N').
+unicode_east_asian_width(2962, 2965, 'N').
+unicode_east_asian_width(2969, 2970, 'N').
+unicode_east_asian_width(2972, 2972, 'N').
+unicode_east_asian_width(2974, 2975, 'N').
+unicode_east_asian_width(2979, 2980, 'N').
+unicode_east_asian_width(2984, 2986, 'N').
+unicode_east_asian_width(2990, 3001, 'N').
+unicode_east_asian_width(3006, 3007, 'N').
+unicode_east_asian_width(3008, 3008, 'N').
+unicode_east_asian_width(3009, 3010, 'N').
+unicode_east_asian_width(3014, 3016, 'N').
+unicode_east_asian_width(3018, 3020, 'N').
+unicode_east_asian_width(3021, 3021, 'N').
+unicode_east_asian_width(3024, 3024, 'N').
+unicode_east_asian_width(3031, 3031, 'N').
+unicode_east_asian_width(3046, 3055, 'N').
+unicode_east_asian_width(3056, 3058, 'N').
+unicode_east_asian_width(3059, 3064, 'N').
+unicode_east_asian_width(3065, 3065, 'N').
+unicode_east_asian_width(3066, 3066, 'N').
+unicode_east_asian_width(3072, 3072, 'N').
+unicode_east_asian_width(3073, 3075, 'N').
+unicode_east_asian_width(3076, 3076, 'N').
+unicode_east_asian_width(3077, 3084, 'N').
+unicode_east_asian_width(3086, 3088, 'N').
+unicode_east_asian_width(3090, 3112, 'N').
+unicode_east_asian_width(3114, 3129, 'N').
+unicode_east_asian_width(3132, 3132, 'N').
+unicode_east_asian_width(3133, 3133, 'N').
+unicode_east_asian_width(3134, 3136, 'N').
+unicode_east_asian_width(3137, 3140, 'N').
+unicode_east_asian_width(3142, 3144, 'N').
+unicode_east_asian_width(3146, 3149, 'N').
+unicode_east_asian_width(3157, 3158, 'N').
+unicode_east_asian_width(3160, 3162, 'N').
+unicode_east_asian_width(3164, 3165, 'N').
+unicode_east_asian_width(3168, 3169, 'N').
+unicode_east_asian_width(3170, 3171, 'N').
+unicode_east_asian_width(3174, 3183, 'N').
+unicode_east_asian_width(3191, 3191, 'N').
+unicode_east_asian_width(3192, 3198, 'N').
+unicode_east_asian_width(3199, 3199, 'N').
+unicode_east_asian_width(3200, 3200, 'N').
+unicode_east_asian_width(3201, 3201, 'N').
+unicode_east_asian_width(3202, 3203, 'N').
+unicode_east_asian_width(3204, 3204, 'N').
+unicode_east_asian_width(3205, 3212, 'N').
+unicode_east_asian_width(3214, 3216, 'N').
+unicode_east_asian_width(3218, 3240, 'N').
+unicode_east_asian_width(3242, 3251, 'N').
+unicode_east_asian_width(3253, 3257, 'N').
+unicode_east_asian_width(3260, 3260, 'N').
+unicode_east_asian_width(3261, 3261, 'N').
+unicode_east_asian_width(3262, 3262, 'N').
+unicode_east_asian_width(3263, 3263, 'N').
+unicode_east_asian_width(3264, 3268, 'N').
+unicode_east_asian_width(3270, 3270, 'N').
+unicode_east_asian_width(3271, 3272, 'N').
+unicode_east_asian_width(3274, 3275, 'N').
+unicode_east_asian_width(3276, 3277, 'N').
+unicode_east_asian_width(3285, 3286, 'N').
+unicode_east_asian_width(3292, 3294, 'N').
+unicode_east_asian_width(3296, 3297, 'N').
+unicode_east_asian_width(3298, 3299, 'N').
+unicode_east_asian_width(3302, 3311, 'N').
+unicode_east_asian_width(3313, 3314, 'N').
+unicode_east_asian_width(3315, 3315, 'N').
+unicode_east_asian_width(3328, 3329, 'N').
+unicode_east_asian_width(3330, 3331, 'N').
+unicode_east_asian_width(3332, 3340, 'N').
+unicode_east_asian_width(3342, 3344, 'N').
+unicode_east_asian_width(3346, 3386, 'N').
+unicode_east_asian_width(3387, 3388, 'N').
+unicode_east_asian_width(3389, 3389, 'N').
+unicode_east_asian_width(3390, 3392, 'N').
+unicode_east_asian_width(3393, 3396, 'N').
+unicode_east_asian_width(3398, 3400, 'N').
+unicode_east_asian_width(3402, 3404, 'N').
+unicode_east_asian_width(3405, 3405, 'N').
+unicode_east_asian_width(3406, 3406, 'N').
+unicode_east_asian_width(3407, 3407, 'N').
+unicode_east_asian_width(3412, 3414, 'N').
+unicode_east_asian_width(3415, 3415, 'N').
+unicode_east_asian_width(3416, 3422, 'N').
+unicode_east_asian_width(3423, 3425, 'N').
+unicode_east_asian_width(3426, 3427, 'N').
+unicode_east_asian_width(3430, 3439, 'N').
+unicode_east_asian_width(3440, 3448, 'N').
+unicode_east_asian_width(3449, 3449, 'N').
+unicode_east_asian_width(3450, 3455, 'N').
+unicode_east_asian_width(3457, 3457, 'N').
+unicode_east_asian_width(3458, 3459, 'N').
+unicode_east_asian_width(3461, 3478, 'N').
+unicode_east_asian_width(3482, 3505, 'N').
+unicode_east_asian_width(3507, 3515, 'N').
+unicode_east_asian_width(3517, 3517, 'N').
+unicode_east_asian_width(3520, 3526, 'N').
+unicode_east_asian_width(3530, 3530, 'N').
+unicode_east_asian_width(3535, 3537, 'N').
+unicode_east_asian_width(3538, 3540, 'N').
+unicode_east_asian_width(3542, 3542, 'N').
+unicode_east_asian_width(3544, 3551, 'N').
+unicode_east_asian_width(3558, 3567, 'N').
+unicode_east_asian_width(3570, 3571, 'N').
+unicode_east_asian_width(3572, 3572, 'N').
+unicode_east_asian_width(3585, 3632, 'N').
+unicode_east_asian_width(3633, 3633, 'N').
+unicode_east_asian_width(3634, 3635, 'N').
+unicode_east_asian_width(3636, 3642, 'N').
+unicode_east_asian_width(3647, 3647, 'N').
+unicode_east_asian_width(3648, 3653, 'N').
+unicode_east_asian_width(3654, 3654, 'N').
+unicode_east_asian_width(3655, 3662, 'N').
+unicode_east_asian_width(3663, 3663, 'N').
+unicode_east_asian_width(3664, 3673, 'N').
+unicode_east_asian_width(3674, 3675, 'N').
+unicode_east_asian_width(3713, 3714, 'N').
+unicode_east_asian_width(3716, 3716, 'N').
+unicode_east_asian_width(3718, 3722, 'N').
+unicode_east_asian_width(3724, 3747, 'N').
+unicode_east_asian_width(3749, 3749, 'N').
+unicode_east_asian_width(3751, 3760, 'N').
+unicode_east_asian_width(3761, 3761, 'N').
+unicode_east_asian_width(3762, 3763, 'N').
+unicode_east_asian_width(3764, 3772, 'N').
+unicode_east_asian_width(3773, 3773, 'N').
+unicode_east_asian_width(3776, 3780, 'N').
+unicode_east_asian_width(3782, 3782, 'N').
+unicode_east_asian_width(3784, 3790, 'N').
+unicode_east_asian_width(3792, 3801, 'N').
+unicode_east_asian_width(3804, 3807, 'N').
+unicode_east_asian_width(3840, 3840, 'N').
+unicode_east_asian_width(3841, 3843, 'N').
+unicode_east_asian_width(3844, 3858, 'N').
+unicode_east_asian_width(3859, 3859, 'N').
+unicode_east_asian_width(3860, 3860, 'N').
+unicode_east_asian_width(3861, 3863, 'N').
+unicode_east_asian_width(3864, 3865, 'N').
+unicode_east_asian_width(3866, 3871, 'N').
+unicode_east_asian_width(3872, 3881, 'N').
+unicode_east_asian_width(3882, 3891, 'N').
+unicode_east_asian_width(3892, 3892, 'N').
+unicode_east_asian_width(3893, 3893, 'N').
+unicode_east_asian_width(3894, 3894, 'N').
+unicode_east_asian_width(3895, 3895, 'N').
+unicode_east_asian_width(3896, 3896, 'N').
+unicode_east_asian_width(3897, 3897, 'N').
+unicode_east_asian_width(3898, 3898, 'N').
+unicode_east_asian_width(3899, 3899, 'N').
+unicode_east_asian_width(3900, 3900, 'N').
+unicode_east_asian_width(3901, 3901, 'N').
+unicode_east_asian_width(3902, 3903, 'N').
+unicode_east_asian_width(3904, 3911, 'N').
+unicode_east_asian_width(3913, 3948, 'N').
+unicode_east_asian_width(3953, 3966, 'N').
+unicode_east_asian_width(3967, 3967, 'N').
+unicode_east_asian_width(3968, 3972, 'N').
+unicode_east_asian_width(3973, 3973, 'N').
+unicode_east_asian_width(3974, 3975, 'N').
+unicode_east_asian_width(3976, 3980, 'N').
+unicode_east_asian_width(3981, 3991, 'N').
+unicode_east_asian_width(3993, 4028, 'N').
+unicode_east_asian_width(4030, 4037, 'N').
+unicode_east_asian_width(4038, 4038, 'N').
+unicode_east_asian_width(4039, 4044, 'N').
+unicode_east_asian_width(4046, 4047, 'N').
+unicode_east_asian_width(4048, 4052, 'N').
+unicode_east_asian_width(4053, 4056, 'N').
+unicode_east_asian_width(4057, 4058, 'N').
+unicode_east_asian_width(4096, 4138, 'N').
+unicode_east_asian_width(4139, 4140, 'N').
+unicode_east_asian_width(4141, 4144, 'N').
+unicode_east_asian_width(4145, 4145, 'N').
+unicode_east_asian_width(4146, 4151, 'N').
+unicode_east_asian_width(4152, 4152, 'N').
+unicode_east_asian_width(4153, 4154, 'N').
+unicode_east_asian_width(4155, 4156, 'N').
+unicode_east_asian_width(4157, 4158, 'N').
+unicode_east_asian_width(4159, 4159, 'N').
+unicode_east_asian_width(4160, 4169, 'N').
+unicode_east_asian_width(4170, 4175, 'N').
+unicode_east_asian_width(4176, 4181, 'N').
+unicode_east_asian_width(4182, 4183, 'N').
+unicode_east_asian_width(4184, 4185, 'N').
+unicode_east_asian_width(4186, 4189, 'N').
+unicode_east_asian_width(4190, 4192, 'N').
+unicode_east_asian_width(4193, 4193, 'N').
+unicode_east_asian_width(4194, 4196, 'N').
+unicode_east_asian_width(4197, 4198, 'N').
+unicode_east_asian_width(4199, 4205, 'N').
+unicode_east_asian_width(4206, 4208, 'N').
+unicode_east_asian_width(4209, 4212, 'N').
+unicode_east_asian_width(4213, 4225, 'N').
+unicode_east_asian_width(4226, 4226, 'N').
+unicode_east_asian_width(4227, 4228, 'N').
+unicode_east_asian_width(4229, 4230, 'N').
+unicode_east_asian_width(4231, 4236, 'N').
+unicode_east_asian_width(4237, 4237, 'N').
+unicode_east_asian_width(4238, 4238, 'N').
+unicode_east_asian_width(4239, 4239, 'N').
+unicode_east_asian_width(4240, 4249, 'N').
+unicode_east_asian_width(4250, 4252, 'N').
+unicode_east_asian_width(4253, 4253, 'N').
+unicode_east_asian_width(4254, 4255, 'N').
+unicode_east_asian_width(4256, 4293, 'N').
+unicode_east_asian_width(4295, 4295, 'N').
+unicode_east_asian_width(4301, 4301, 'N').
+unicode_east_asian_width(4304, 4346, 'N').
+unicode_east_asian_width(4347, 4347, 'N').
+unicode_east_asian_width(4348, 4348, 'N').
+unicode_east_asian_width(4349, 4351, 'N').
+unicode_east_asian_width(4352, 4447, 'W').
+unicode_east_asian_width(4448, 4607, 'N').
+unicode_east_asian_width(4608, 4680, 'N').
+unicode_east_asian_width(4682, 4685, 'N').
+unicode_east_asian_width(4688, 4694, 'N').
+unicode_east_asian_width(4696, 4696, 'N').
+unicode_east_asian_width(4698, 4701, 'N').
+unicode_east_asian_width(4704, 4744, 'N').
+unicode_east_asian_width(4746, 4749, 'N').
+unicode_east_asian_width(4752, 4784, 'N').
+unicode_east_asian_width(4786, 4789, 'N').
+unicode_east_asian_width(4792, 4798, 'N').
+unicode_east_asian_width(4800, 4800, 'N').
+unicode_east_asian_width(4802, 4805, 'N').
+unicode_east_asian_width(4808, 4822, 'N').
+unicode_east_asian_width(4824, 4880, 'N').
+unicode_east_asian_width(4882, 4885, 'N').
+unicode_east_asian_width(4888, 4954, 'N').
+unicode_east_asian_width(4957, 4959, 'N').
+unicode_east_asian_width(4960, 4968, 'N').
+unicode_east_asian_width(4969, 4988, 'N').
+unicode_east_asian_width(4992, 5007, 'N').
+unicode_east_asian_width(5008, 5017, 'N').
+unicode_east_asian_width(5024, 5109, 'N').
+unicode_east_asian_width(5112, 5117, 'N').
+unicode_east_asian_width(5120, 5120, 'N').
+unicode_east_asian_width(5121, 5740, 'N').
+unicode_east_asian_width(5741, 5741, 'N').
+unicode_east_asian_width(5742, 5742, 'N').
+unicode_east_asian_width(5743, 5759, 'N').
+unicode_east_asian_width(5760, 5760, 'N').
+unicode_east_asian_width(5761, 5786, 'N').
+unicode_east_asian_width(5787, 5787, 'N').
+unicode_east_asian_width(5788, 5788, 'N').
+unicode_east_asian_width(5792, 5866, 'N').
+unicode_east_asian_width(5867, 5869, 'N').
+unicode_east_asian_width(5870, 5872, 'N').
+unicode_east_asian_width(5873, 5880, 'N').
+unicode_east_asian_width(5888, 5905, 'N').
+unicode_east_asian_width(5906, 5908, 'N').
+unicode_east_asian_width(5909, 5909, 'N').
+unicode_east_asian_width(5919, 5919, 'N').
+unicode_east_asian_width(5920, 5937, 'N').
+unicode_east_asian_width(5938, 5939, 'N').
+unicode_east_asian_width(5940, 5940, 'N').
+unicode_east_asian_width(5941, 5942, 'N').
+unicode_east_asian_width(5952, 5969, 'N').
+unicode_east_asian_width(5970, 5971, 'N').
+unicode_east_asian_width(5984, 5996, 'N').
+unicode_east_asian_width(5998, 6000, 'N').
+unicode_east_asian_width(6002, 6003, 'N').
+unicode_east_asian_width(6016, 6067, 'N').
+unicode_east_asian_width(6068, 6069, 'N').
+unicode_east_asian_width(6070, 6070, 'N').
+unicode_east_asian_width(6071, 6077, 'N').
+unicode_east_asian_width(6078, 6085, 'N').
+unicode_east_asian_width(6086, 6086, 'N').
+unicode_east_asian_width(6087, 6088, 'N').
+unicode_east_asian_width(6089, 6099, 'N').
+unicode_east_asian_width(6100, 6102, 'N').
+unicode_east_asian_width(6103, 6103, 'N').
+unicode_east_asian_width(6104, 6106, 'N').
+unicode_east_asian_width(6107, 6107, 'N').
+unicode_east_asian_width(6108, 6108, 'N').
+unicode_east_asian_width(6109, 6109, 'N').
+unicode_east_asian_width(6112, 6121, 'N').
+unicode_east_asian_width(6128, 6137, 'N').
+unicode_east_asian_width(6144, 6149, 'N').
+unicode_east_asian_width(6150, 6150, 'N').
+unicode_east_asian_width(6151, 6154, 'N').
+unicode_east_asian_width(6155, 6157, 'N').
+unicode_east_asian_width(6158, 6158, 'N').
+unicode_east_asian_width(6159, 6159, 'N').
+unicode_east_asian_width(6160, 6169, 'N').
+unicode_east_asian_width(6176, 6210, 'N').
+unicode_east_asian_width(6211, 6211, 'N').
+unicode_east_asian_width(6212, 6264, 'N').
+unicode_east_asian_width(6272, 6276, 'N').
+unicode_east_asian_width(6277, 6278, 'N').
+unicode_east_asian_width(6279, 6312, 'N').
+unicode_east_asian_width(6313, 6313, 'N').
+unicode_east_asian_width(6314, 6314, 'N').
+unicode_east_asian_width(6320, 6389, 'N').
+unicode_east_asian_width(6400, 6430, 'N').
+unicode_east_asian_width(6432, 6434, 'N').
+unicode_east_asian_width(6435, 6438, 'N').
+unicode_east_asian_width(6439, 6440, 'N').
+unicode_east_asian_width(6441, 6443, 'N').
+unicode_east_asian_width(6448, 6449, 'N').
+unicode_east_asian_width(6450, 6450, 'N').
+unicode_east_asian_width(6451, 6456, 'N').
+unicode_east_asian_width(6457, 6459, 'N').
+unicode_east_asian_width(6464, 6464, 'N').
+unicode_east_asian_width(6468, 6469, 'N').
+unicode_east_asian_width(6470, 6479, 'N').
+unicode_east_asian_width(6480, 6509, 'N').
+unicode_east_asian_width(6512, 6516, 'N').
+unicode_east_asian_width(6528, 6571, 'N').
+unicode_east_asian_width(6576, 6601, 'N').
+unicode_east_asian_width(6608, 6617, 'N').
+unicode_east_asian_width(6618, 6618, 'N').
+unicode_east_asian_width(6622, 6623, 'N').
+unicode_east_asian_width(6624, 6655, 'N').
+unicode_east_asian_width(6656, 6678, 'N').
+unicode_east_asian_width(6679, 6680, 'N').
+unicode_east_asian_width(6681, 6682, 'N').
+unicode_east_asian_width(6683, 6683, 'N').
+unicode_east_asian_width(6686, 6687, 'N').
+unicode_east_asian_width(6688, 6740, 'N').
+unicode_east_asian_width(6741, 6741, 'N').
+unicode_east_asian_width(6742, 6742, 'N').
+unicode_east_asian_width(6743, 6743, 'N').
+unicode_east_asian_width(6744, 6750, 'N').
+unicode_east_asian_width(6752, 6752, 'N').
+unicode_east_asian_width(6753, 6753, 'N').
+unicode_east_asian_width(6754, 6754, 'N').
+unicode_east_asian_width(6755, 6756, 'N').
+unicode_east_asian_width(6757, 6764, 'N').
+unicode_east_asian_width(6765, 6770, 'N').
+unicode_east_asian_width(6771, 6780, 'N').
+unicode_east_asian_width(6783, 6783, 'N').
+unicode_east_asian_width(6784, 6793, 'N').
+unicode_east_asian_width(6800, 6809, 'N').
+unicode_east_asian_width(6816, 6822, 'N').
+unicode_east_asian_width(6823, 6823, 'N').
+unicode_east_asian_width(6824, 6829, 'N').
+unicode_east_asian_width(6832, 6845, 'N').
+unicode_east_asian_width(6846, 6846, 'N').
+unicode_east_asian_width(6847, 6877, 'N').
+unicode_east_asian_width(6880, 6891, 'N').
+unicode_east_asian_width(6912, 6915, 'N').
+unicode_east_asian_width(6916, 6916, 'N').
+unicode_east_asian_width(6917, 6963, 'N').
+unicode_east_asian_width(6964, 6964, 'N').
+unicode_east_asian_width(6965, 6965, 'N').
+unicode_east_asian_width(6966, 6970, 'N').
+unicode_east_asian_width(6971, 6971, 'N').
+unicode_east_asian_width(6972, 6972, 'N').
+unicode_east_asian_width(6973, 6977, 'N').
+unicode_east_asian_width(6978, 6978, 'N').
+unicode_east_asian_width(6979, 6980, 'N').
+unicode_east_asian_width(6981, 6988, 'N').
+unicode_east_asian_width(6990, 6991, 'N').
+unicode_east_asian_width(6992, 7001, 'N').
+unicode_east_asian_width(7002, 7008, 'N').
+unicode_east_asian_width(7009, 7018, 'N').
+unicode_east_asian_width(7019, 7027, 'N').
+unicode_east_asian_width(7028, 7036, 'N').
+unicode_east_asian_width(7037, 7039, 'N').
+unicode_east_asian_width(7040, 7041, 'N').
+unicode_east_asian_width(7042, 7042, 'N').
+unicode_east_asian_width(7043, 7072, 'N').
+unicode_east_asian_width(7073, 7073, 'N').
+unicode_east_asian_width(7074, 7077, 'N').
+unicode_east_asian_width(7078, 7079, 'N').
+unicode_east_asian_width(7080, 7081, 'N').
+unicode_east_asian_width(7082, 7082, 'N').
+unicode_east_asian_width(7083, 7085, 'N').
+unicode_east_asian_width(7086, 7087, 'N').
+unicode_east_asian_width(7088, 7097, 'N').
+unicode_east_asian_width(7098, 7103, 'N').
+unicode_east_asian_width(7104, 7141, 'N').
+unicode_east_asian_width(7142, 7142, 'N').
+unicode_east_asian_width(7143, 7143, 'N').
+unicode_east_asian_width(7144, 7145, 'N').
+unicode_east_asian_width(7146, 7148, 'N').
+unicode_east_asian_width(7149, 7149, 'N').
+unicode_east_asian_width(7150, 7150, 'N').
+unicode_east_asian_width(7151, 7153, 'N').
+unicode_east_asian_width(7154, 7155, 'N').
+unicode_east_asian_width(7164, 7167, 'N').
+unicode_east_asian_width(7168, 7203, 'N').
+unicode_east_asian_width(7204, 7211, 'N').
+unicode_east_asian_width(7212, 7219, 'N').
+unicode_east_asian_width(7220, 7221, 'N').
+unicode_east_asian_width(7222, 7223, 'N').
+unicode_east_asian_width(7227, 7231, 'N').
+unicode_east_asian_width(7232, 7241, 'N').
+unicode_east_asian_width(7245, 7247, 'N').
+unicode_east_asian_width(7248, 7257, 'N').
+unicode_east_asian_width(7258, 7287, 'N').
+unicode_east_asian_width(7288, 7293, 'N').
+unicode_east_asian_width(7294, 7295, 'N').
+unicode_east_asian_width(7296, 7306, 'N').
+unicode_east_asian_width(7312, 7354, 'N').
+unicode_east_asian_width(7357, 7359, 'N').
+unicode_east_asian_width(7360, 7367, 'N').
+unicode_east_asian_width(7376, 7378, 'N').
+unicode_east_asian_width(7379, 7379, 'N').
+unicode_east_asian_width(7380, 7392, 'N').
+unicode_east_asian_width(7393, 7393, 'N').
+unicode_east_asian_width(7394, 7400, 'N').
+unicode_east_asian_width(7401, 7404, 'N').
+unicode_east_asian_width(7405, 7405, 'N').
+unicode_east_asian_width(7406, 7411, 'N').
+unicode_east_asian_width(7412, 7412, 'N').
+unicode_east_asian_width(7413, 7414, 'N').
+unicode_east_asian_width(7415, 7415, 'N').
+unicode_east_asian_width(7416, 7417, 'N').
+unicode_east_asian_width(7418, 7418, 'N').
+unicode_east_asian_width(7424, 7467, 'N').
+unicode_east_asian_width(7468, 7530, 'N').
+unicode_east_asian_width(7531, 7543, 'N').
+unicode_east_asian_width(7544, 7544, 'N').
+unicode_east_asian_width(7545, 7551, 'N').
+unicode_east_asian_width(7552, 7578, 'N').
+unicode_east_asian_width(7579, 7615, 'N').
+unicode_east_asian_width(7616, 7679, 'N').
+unicode_east_asian_width(7680, 7935, 'N').
+unicode_east_asian_width(7936, 7957, 'N').
+unicode_east_asian_width(7960, 7965, 'N').
+unicode_east_asian_width(7968, 8005, 'N').
+unicode_east_asian_width(8008, 8013, 'N').
+unicode_east_asian_width(8016, 8023, 'N').
+unicode_east_asian_width(8025, 8025, 'N').
+unicode_east_asian_width(8027, 8027, 'N').
+unicode_east_asian_width(8029, 8029, 'N').
+unicode_east_asian_width(8031, 8061, 'N').
+unicode_east_asian_width(8064, 8116, 'N').
+unicode_east_asian_width(8118, 8124, 'N').
+unicode_east_asian_width(8125, 8125, 'N').
+unicode_east_asian_width(8126, 8126, 'N').
+unicode_east_asian_width(8127, 8129, 'N').
+unicode_east_asian_width(8130, 8132, 'N').
+unicode_east_asian_width(8134, 8140, 'N').
+unicode_east_asian_width(8141, 8143, 'N').
+unicode_east_asian_width(8144, 8147, 'N').
+unicode_east_asian_width(8150, 8155, 'N').
+unicode_east_asian_width(8157, 8159, 'N').
+unicode_east_asian_width(8160, 8172, 'N').
+unicode_east_asian_width(8173, 8175, 'N').
+unicode_east_asian_width(8178, 8180, 'N').
+unicode_east_asian_width(8182, 8188, 'N').
+unicode_east_asian_width(8189, 8190, 'N').
+unicode_east_asian_width(8192, 8202, 'N').
+unicode_east_asian_width(8203, 8207, 'N').
+unicode_east_asian_width(8208, 8208, 'A').
+unicode_east_asian_width(8209, 8210, 'N').
+unicode_east_asian_width(8211, 8213, 'A').
+unicode_east_asian_width(8214, 8214, 'A').
+unicode_east_asian_width(8215, 8215, 'N').
+unicode_east_asian_width(8216, 8216, 'A').
+unicode_east_asian_width(8217, 8217, 'A').
+unicode_east_asian_width(8218, 8218, 'N').
+unicode_east_asian_width(8219, 8219, 'N').
+unicode_east_asian_width(8220, 8220, 'A').
+unicode_east_asian_width(8221, 8221, 'A').
+unicode_east_asian_width(8222, 8222, 'N').
+unicode_east_asian_width(8223, 8223, 'N').
+unicode_east_asian_width(8224, 8226, 'A').
+unicode_east_asian_width(8227, 8227, 'N').
+unicode_east_asian_width(8228, 8231, 'A').
+unicode_east_asian_width(8232, 8232, 'N').
+unicode_east_asian_width(8233, 8233, 'N').
+unicode_east_asian_width(8234, 8238, 'N').
+unicode_east_asian_width(8239, 8239, 'N').
+unicode_east_asian_width(8240, 8240, 'A').
+unicode_east_asian_width(8241, 8241, 'N').
+unicode_east_asian_width(8242, 8243, 'A').
+unicode_east_asian_width(8244, 8244, 'N').
+unicode_east_asian_width(8245, 8245, 'A').
+unicode_east_asian_width(8246, 8248, 'N').
+unicode_east_asian_width(8249, 8249, 'N').
+unicode_east_asian_width(8250, 8250, 'N').
+unicode_east_asian_width(8251, 8251, 'A').
+unicode_east_asian_width(8252, 8253, 'N').
+unicode_east_asian_width(8254, 8254, 'A').
+unicode_east_asian_width(8255, 8256, 'N').
+unicode_east_asian_width(8257, 8259, 'N').
+unicode_east_asian_width(8260, 8260, 'N').
+unicode_east_asian_width(8261, 8261, 'N').
+unicode_east_asian_width(8262, 8262, 'N').
+unicode_east_asian_width(8263, 8273, 'N').
+unicode_east_asian_width(8274, 8274, 'N').
+unicode_east_asian_width(8275, 8275, 'N').
+unicode_east_asian_width(8276, 8276, 'N').
+unicode_east_asian_width(8277, 8286, 'N').
+unicode_east_asian_width(8287, 8287, 'N').
+unicode_east_asian_width(8288, 8292, 'N').
+unicode_east_asian_width(8294, 8303, 'N').
+unicode_east_asian_width(8304, 8304, 'N').
+unicode_east_asian_width(8305, 8305, 'N').
+unicode_east_asian_width(8308, 8308, 'A').
+unicode_east_asian_width(8309, 8313, 'N').
+unicode_east_asian_width(8314, 8316, 'N').
+unicode_east_asian_width(8317, 8317, 'N').
+unicode_east_asian_width(8318, 8318, 'N').
+unicode_east_asian_width(8319, 8319, 'A').
+unicode_east_asian_width(8320, 8320, 'N').
+unicode_east_asian_width(8321, 8324, 'A').
+unicode_east_asian_width(8325, 8329, 'N').
+unicode_east_asian_width(8330, 8332, 'N').
+unicode_east_asian_width(8333, 8333, 'N').
+unicode_east_asian_width(8334, 8334, 'N').
+unicode_east_asian_width(8336, 8348, 'N').
+unicode_east_asian_width(8352, 8360, 'N').
+unicode_east_asian_width(8361, 8361, 'H').
+unicode_east_asian_width(8362, 8363, 'N').
+unicode_east_asian_width(8364, 8364, 'A').
+unicode_east_asian_width(8365, 8385, 'N').
+unicode_east_asian_width(8400, 8412, 'N').
+unicode_east_asian_width(8413, 8416, 'N').
+unicode_east_asian_width(8417, 8417, 'N').
+unicode_east_asian_width(8418, 8420, 'N').
+unicode_east_asian_width(8421, 8432, 'N').
+unicode_east_asian_width(8448, 8449, 'N').
+unicode_east_asian_width(8450, 8450, 'N').
+unicode_east_asian_width(8451, 8451, 'A').
+unicode_east_asian_width(8452, 8452, 'N').
+unicode_east_asian_width(8453, 8453, 'A').
+unicode_east_asian_width(8454, 8454, 'N').
+unicode_east_asian_width(8455, 8455, 'N').
+unicode_east_asian_width(8456, 8456, 'N').
+unicode_east_asian_width(8457, 8457, 'A').
+unicode_east_asian_width(8458, 8466, 'N').
+unicode_east_asian_width(8467, 8467, 'A').
+unicode_east_asian_width(8468, 8468, 'N').
+unicode_east_asian_width(8469, 8469, 'N').
+unicode_east_asian_width(8470, 8470, 'A').
+unicode_east_asian_width(8471, 8471, 'N').
+unicode_east_asian_width(8472, 8472, 'N').
+unicode_east_asian_width(8473, 8477, 'N').
+unicode_east_asian_width(8478, 8480, 'N').
+unicode_east_asian_width(8481, 8482, 'A').
+unicode_east_asian_width(8483, 8483, 'N').
+unicode_east_asian_width(8484, 8484, 'N').
+unicode_east_asian_width(8485, 8485, 'N').
+unicode_east_asian_width(8486, 8486, 'A').
+unicode_east_asian_width(8487, 8487, 'N').
+unicode_east_asian_width(8488, 8488, 'N').
+unicode_east_asian_width(8489, 8489, 'N').
+unicode_east_asian_width(8490, 8490, 'N').
+unicode_east_asian_width(8491, 8491, 'A').
+unicode_east_asian_width(8492, 8493, 'N').
+unicode_east_asian_width(8494, 8494, 'N').
+unicode_east_asian_width(8495, 8500, 'N').
+unicode_east_asian_width(8501, 8504, 'N').
+unicode_east_asian_width(8505, 8505, 'N').
+unicode_east_asian_width(8506, 8507, 'N').
+unicode_east_asian_width(8508, 8511, 'N').
+unicode_east_asian_width(8512, 8516, 'N').
+unicode_east_asian_width(8517, 8521, 'N').
+unicode_east_asian_width(8522, 8522, 'N').
+unicode_east_asian_width(8523, 8523, 'N').
+unicode_east_asian_width(8524, 8525, 'N').
+unicode_east_asian_width(8526, 8526, 'N').
+unicode_east_asian_width(8527, 8527, 'N').
+unicode_east_asian_width(8528, 8530, 'N').
+unicode_east_asian_width(8531, 8532, 'A').
+unicode_east_asian_width(8533, 8538, 'N').
+unicode_east_asian_width(8539, 8542, 'A').
+unicode_east_asian_width(8543, 8543, 'N').
+unicode_east_asian_width(8544, 8555, 'A').
+unicode_east_asian_width(8556, 8559, 'N').
+unicode_east_asian_width(8560, 8569, 'A').
+unicode_east_asian_width(8570, 8578, 'N').
+unicode_east_asian_width(8579, 8580, 'N').
+unicode_east_asian_width(8581, 8584, 'N').
+unicode_east_asian_width(8585, 8585, 'A').
+unicode_east_asian_width(8586, 8587, 'N').
+unicode_east_asian_width(8592, 8596, 'A').
+unicode_east_asian_width(8597, 8601, 'A').
+unicode_east_asian_width(8602, 8603, 'N').
+unicode_east_asian_width(8604, 8607, 'N').
+unicode_east_asian_width(8608, 8608, 'N').
+unicode_east_asian_width(8609, 8610, 'N').
+unicode_east_asian_width(8611, 8611, 'N').
+unicode_east_asian_width(8612, 8613, 'N').
+unicode_east_asian_width(8614, 8614, 'N').
+unicode_east_asian_width(8615, 8621, 'N').
+unicode_east_asian_width(8622, 8622, 'N').
+unicode_east_asian_width(8623, 8631, 'N').
+unicode_east_asian_width(8632, 8633, 'A').
+unicode_east_asian_width(8634, 8653, 'N').
+unicode_east_asian_width(8654, 8655, 'N').
+unicode_east_asian_width(8656, 8657, 'N').
+unicode_east_asian_width(8658, 8658, 'A').
+unicode_east_asian_width(8659, 8659, 'N').
+unicode_east_asian_width(8660, 8660, 'A').
+unicode_east_asian_width(8661, 8678, 'N').
+unicode_east_asian_width(8679, 8679, 'A').
+unicode_east_asian_width(8680, 8691, 'N').
+unicode_east_asian_width(8692, 8703, 'N').
+unicode_east_asian_width(8704, 8704, 'A').
+unicode_east_asian_width(8705, 8705, 'N').
+unicode_east_asian_width(8706, 8707, 'A').
+unicode_east_asian_width(8708, 8710, 'N').
+unicode_east_asian_width(8711, 8712, 'A').
+unicode_east_asian_width(8713, 8714, 'N').
+unicode_east_asian_width(8715, 8715, 'A').
+unicode_east_asian_width(8716, 8718, 'N').
+unicode_east_asian_width(8719, 8719, 'A').
+unicode_east_asian_width(8720, 8720, 'N').
+unicode_east_asian_width(8721, 8721, 'A').
+unicode_east_asian_width(8722, 8724, 'N').
+unicode_east_asian_width(8725, 8725, 'A').
+unicode_east_asian_width(8726, 8729, 'N').
+unicode_east_asian_width(8730, 8730, 'A').
+unicode_east_asian_width(8731, 8732, 'N').
+unicode_east_asian_width(8733, 8736, 'A').
+unicode_east_asian_width(8737, 8738, 'N').
+unicode_east_asian_width(8739, 8739, 'A').
+unicode_east_asian_width(8740, 8740, 'N').
+unicode_east_asian_width(8741, 8741, 'A').
+unicode_east_asian_width(8742, 8742, 'N').
+unicode_east_asian_width(8743, 8748, 'A').
+unicode_east_asian_width(8749, 8749, 'N').
+unicode_east_asian_width(8750, 8750, 'A').
+unicode_east_asian_width(8751, 8755, 'N').
+unicode_east_asian_width(8756, 8759, 'A').
+unicode_east_asian_width(8760, 8763, 'N').
+unicode_east_asian_width(8764, 8765, 'A').
+unicode_east_asian_width(8766, 8775, 'N').
+unicode_east_asian_width(8776, 8776, 'A').
+unicode_east_asian_width(8777, 8779, 'N').
+unicode_east_asian_width(8780, 8780, 'A').
+unicode_east_asian_width(8781, 8785, 'N').
+unicode_east_asian_width(8786, 8786, 'A').
+unicode_east_asian_width(8787, 8799, 'N').
+unicode_east_asian_width(8800, 8801, 'A').
+unicode_east_asian_width(8802, 8803, 'N').
+unicode_east_asian_width(8804, 8807, 'A').
+unicode_east_asian_width(8808, 8809, 'N').
+unicode_east_asian_width(8810, 8811, 'A').
+unicode_east_asian_width(8812, 8813, 'N').
+unicode_east_asian_width(8814, 8815, 'A').
+unicode_east_asian_width(8816, 8833, 'N').
+unicode_east_asian_width(8834, 8835, 'A').
+unicode_east_asian_width(8836, 8837, 'N').
+unicode_east_asian_width(8838, 8839, 'A').
+unicode_east_asian_width(8840, 8852, 'N').
+unicode_east_asian_width(8853, 8853, 'A').
+unicode_east_asian_width(8854, 8856, 'N').
+unicode_east_asian_width(8857, 8857, 'A').
+unicode_east_asian_width(8858, 8868, 'N').
+unicode_east_asian_width(8869, 8869, 'A').
+unicode_east_asian_width(8870, 8894, 'N').
+unicode_east_asian_width(8895, 8895, 'A').
+unicode_east_asian_width(8896, 8959, 'N').
+unicode_east_asian_width(8960, 8967, 'N').
+unicode_east_asian_width(8968, 8968, 'N').
+unicode_east_asian_width(8969, 8969, 'N').
+unicode_east_asian_width(8970, 8970, 'N').
+unicode_east_asian_width(8971, 8971, 'N').
+unicode_east_asian_width(8972, 8977, 'N').
+unicode_east_asian_width(8978, 8978, 'A').
+unicode_east_asian_width(8979, 8985, 'N').
+unicode_east_asian_width(8986, 8987, 'W').
+unicode_east_asian_width(8988, 8991, 'N').
+unicode_east_asian_width(8992, 8993, 'N').
+unicode_east_asian_width(8994, 9000, 'N').
+unicode_east_asian_width(9001, 9001, 'W').
+unicode_east_asian_width(9002, 9002, 'W').
+unicode_east_asian_width(9003, 9083, 'N').
+unicode_east_asian_width(9084, 9084, 'N').
+unicode_east_asian_width(9085, 9114, 'N').
+unicode_east_asian_width(9115, 9139, 'N').
+unicode_east_asian_width(9140, 9179, 'N').
+unicode_east_asian_width(9180, 9185, 'N').
+unicode_east_asian_width(9186, 9192, 'N').
+unicode_east_asian_width(9193, 9196, 'W').
+unicode_east_asian_width(9197, 9199, 'N').
+unicode_east_asian_width(9200, 9200, 'W').
+unicode_east_asian_width(9201, 9202, 'N').
+unicode_east_asian_width(9203, 9203, 'W').
+unicode_east_asian_width(9204, 9215, 'N').
+unicode_east_asian_width(9216, 9257, 'N').
+unicode_east_asian_width(9280, 9290, 'N').
+unicode_east_asian_width(9312, 9371, 'A').
+unicode_east_asian_width(9372, 9449, 'A').
+unicode_east_asian_width(9450, 9450, 'N').
+unicode_east_asian_width(9451, 9471, 'A').
+unicode_east_asian_width(9472, 9547, 'A').
+unicode_east_asian_width(9548, 9551, 'N').
+unicode_east_asian_width(9552, 9587, 'A').
+unicode_east_asian_width(9588, 9599, 'N').
+unicode_east_asian_width(9600, 9615, 'A').
+unicode_east_asian_width(9616, 9617, 'N').
+unicode_east_asian_width(9618, 9621, 'A').
+unicode_east_asian_width(9622, 9631, 'N').
+unicode_east_asian_width(9632, 9633, 'A').
+unicode_east_asian_width(9634, 9634, 'N').
+unicode_east_asian_width(9635, 9641, 'A').
+unicode_east_asian_width(9642, 9649, 'N').
+unicode_east_asian_width(9650, 9651, 'A').
+unicode_east_asian_width(9652, 9653, 'N').
+unicode_east_asian_width(9654, 9654, 'A').
+unicode_east_asian_width(9655, 9655, 'A').
+unicode_east_asian_width(9656, 9659, 'N').
+unicode_east_asian_width(9660, 9661, 'A').
+unicode_east_asian_width(9662, 9663, 'N').
+unicode_east_asian_width(9664, 9664, 'A').
+unicode_east_asian_width(9665, 9665, 'A').
+unicode_east_asian_width(9666, 9669, 'N').
+unicode_east_asian_width(9670, 9672, 'A').
+unicode_east_asian_width(9673, 9674, 'N').
+unicode_east_asian_width(9675, 9675, 'A').
+unicode_east_asian_width(9676, 9677, 'N').
+unicode_east_asian_width(9678, 9681, 'A').
+unicode_east_asian_width(9682, 9697, 'N').
+unicode_east_asian_width(9698, 9701, 'A').
+unicode_east_asian_width(9702, 9710, 'N').
+unicode_east_asian_width(9711, 9711, 'A').
+unicode_east_asian_width(9712, 9719, 'N').
+unicode_east_asian_width(9720, 9724, 'N').
+unicode_east_asian_width(9725, 9726, 'W').
+unicode_east_asian_width(9727, 9727, 'N').
+unicode_east_asian_width(9728, 9732, 'N').
+unicode_east_asian_width(9733, 9734, 'A').
+unicode_east_asian_width(9735, 9736, 'N').
+unicode_east_asian_width(9737, 9737, 'A').
+unicode_east_asian_width(9738, 9741, 'N').
+unicode_east_asian_width(9742, 9743, 'A').
+unicode_east_asian_width(9744, 9747, 'N').
+unicode_east_asian_width(9748, 9749, 'W').
+unicode_east_asian_width(9750, 9755, 'N').
+unicode_east_asian_width(9756, 9756, 'A').
+unicode_east_asian_width(9757, 9757, 'N').
+unicode_east_asian_width(9758, 9758, 'A').
+unicode_east_asian_width(9759, 9775, 'N').
+unicode_east_asian_width(9776, 9783, 'W').
+unicode_east_asian_width(9784, 9791, 'N').
+unicode_east_asian_width(9792, 9792, 'A').
+unicode_east_asian_width(9793, 9793, 'N').
+unicode_east_asian_width(9794, 9794, 'A').
+unicode_east_asian_width(9795, 9799, 'N').
+unicode_east_asian_width(9800, 9811, 'W').
+unicode_east_asian_width(9812, 9823, 'N').
+unicode_east_asian_width(9824, 9825, 'A').
+unicode_east_asian_width(9826, 9826, 'N').
+unicode_east_asian_width(9827, 9829, 'A').
+unicode_east_asian_width(9830, 9830, 'N').
+unicode_east_asian_width(9831, 9834, 'A').
+unicode_east_asian_width(9835, 9835, 'N').
+unicode_east_asian_width(9836, 9837, 'A').
+unicode_east_asian_width(9838, 9838, 'N').
+unicode_east_asian_width(9839, 9839, 'A').
+unicode_east_asian_width(9840, 9854, 'N').
+unicode_east_asian_width(9855, 9855, 'W').
+unicode_east_asian_width(9856, 9865, 'N').
+unicode_east_asian_width(9866, 9871, 'W').
+unicode_east_asian_width(9872, 9874, 'N').
+unicode_east_asian_width(9875, 9875, 'W').
+unicode_east_asian_width(9876, 9885, 'N').
+unicode_east_asian_width(9886, 9887, 'A').
+unicode_east_asian_width(9888, 9888, 'N').
+unicode_east_asian_width(9889, 9889, 'W').
+unicode_east_asian_width(9890, 9897, 'N').
+unicode_east_asian_width(9898, 9899, 'W').
+unicode_east_asian_width(9900, 9916, 'N').
+unicode_east_asian_width(9917, 9918, 'W').
+unicode_east_asian_width(9919, 9919, 'A').
+unicode_east_asian_width(9920, 9923, 'N').
+unicode_east_asian_width(9924, 9925, 'W').
+unicode_east_asian_width(9926, 9933, 'A').
+unicode_east_asian_width(9934, 9934, 'W').
+unicode_east_asian_width(9935, 9939, 'A').
+unicode_east_asian_width(9940, 9940, 'W').
+unicode_east_asian_width(9941, 9953, 'A').
+unicode_east_asian_width(9954, 9954, 'N').
+unicode_east_asian_width(9955, 9955, 'A').
+unicode_east_asian_width(9956, 9959, 'N').
+unicode_east_asian_width(9960, 9961, 'A').
+unicode_east_asian_width(9962, 9962, 'W').
+unicode_east_asian_width(9963, 9969, 'A').
+unicode_east_asian_width(9970, 9971, 'W').
+unicode_east_asian_width(9972, 9972, 'A').
+unicode_east_asian_width(9973, 9973, 'W').
+unicode_east_asian_width(9974, 9977, 'A').
+unicode_east_asian_width(9978, 9978, 'W').
+unicode_east_asian_width(9979, 9980, 'A').
+unicode_east_asian_width(9981, 9981, 'W').
+unicode_east_asian_width(9982, 9983, 'A').
+unicode_east_asian_width(9984, 9988, 'N').
+unicode_east_asian_width(9989, 9989, 'W').
+unicode_east_asian_width(9990, 9993, 'N').
+unicode_east_asian_width(9994, 9995, 'W').
+unicode_east_asian_width(9996, 10023, 'N').
+unicode_east_asian_width(10024, 10024, 'W').
+unicode_east_asian_width(10025, 10044, 'N').
+unicode_east_asian_width(10045, 10045, 'A').
+unicode_east_asian_width(10046, 10059, 'N').
+unicode_east_asian_width(10060, 10060, 'W').
+unicode_east_asian_width(10061, 10061, 'N').
+unicode_east_asian_width(10062, 10062, 'W').
+unicode_east_asian_width(10063, 10066, 'N').
+unicode_east_asian_width(10067, 10069, 'W').
+unicode_east_asian_width(10070, 10070, 'N').
+unicode_east_asian_width(10071, 10071, 'W').
+unicode_east_asian_width(10072, 10087, 'N').
+unicode_east_asian_width(10088, 10088, 'N').
+unicode_east_asian_width(10089, 10089, 'N').
+unicode_east_asian_width(10090, 10090, 'N').
+unicode_east_asian_width(10091, 10091, 'N').
+unicode_east_asian_width(10092, 10092, 'N').
+unicode_east_asian_width(10093, 10093, 'N').
+unicode_east_asian_width(10094, 10094, 'N').
+unicode_east_asian_width(10095, 10095, 'N').
+unicode_east_asian_width(10096, 10096, 'N').
+unicode_east_asian_width(10097, 10097, 'N').
+unicode_east_asian_width(10098, 10098, 'N').
+unicode_east_asian_width(10099, 10099, 'N').
+unicode_east_asian_width(10100, 10100, 'N').
+unicode_east_asian_width(10101, 10101, 'N').
+unicode_east_asian_width(10102, 10111, 'A').
+unicode_east_asian_width(10112, 10131, 'N').
+unicode_east_asian_width(10132, 10132, 'N').
+unicode_east_asian_width(10133, 10135, 'W').
+unicode_east_asian_width(10136, 10159, 'N').
+unicode_east_asian_width(10160, 10160, 'W').
+unicode_east_asian_width(10161, 10174, 'N').
+unicode_east_asian_width(10175, 10175, 'W').
+unicode_east_asian_width(10176, 10180, 'N').
+unicode_east_asian_width(10181, 10181, 'N').
+unicode_east_asian_width(10182, 10182, 'N').
+unicode_east_asian_width(10183, 10213, 'N').
+unicode_east_asian_width(10214, 10214, 'Na').
+unicode_east_asian_width(10215, 10215, 'Na').
+unicode_east_asian_width(10216, 10216, 'Na').
+unicode_east_asian_width(10217, 10217, 'Na').
+unicode_east_asian_width(10218, 10218, 'Na').
+unicode_east_asian_width(10219, 10219, 'Na').
+unicode_east_asian_width(10220, 10220, 'Na').
+unicode_east_asian_width(10221, 10221, 'Na').
+unicode_east_asian_width(10222, 10222, 'N').
+unicode_east_asian_width(10223, 10223, 'N').
+unicode_east_asian_width(10224, 10239, 'N').
+unicode_east_asian_width(10240, 10495, 'N').
+unicode_east_asian_width(10496, 10623, 'N').
+unicode_east_asian_width(10624, 10626, 'N').
+unicode_east_asian_width(10627, 10627, 'N').
+unicode_east_asian_width(10628, 10628, 'N').
+unicode_east_asian_width(10629, 10629, 'Na').
+unicode_east_asian_width(10630, 10630, 'Na').
+unicode_east_asian_width(10631, 10631, 'N').
+unicode_east_asian_width(10632, 10632, 'N').
+unicode_east_asian_width(10633, 10633, 'N').
+unicode_east_asian_width(10634, 10634, 'N').
+unicode_east_asian_width(10635, 10635, 'N').
+unicode_east_asian_width(10636, 10636, 'N').
+unicode_east_asian_width(10637, 10637, 'N').
+unicode_east_asian_width(10638, 10638, 'N').
+unicode_east_asian_width(10639, 10639, 'N').
+unicode_east_asian_width(10640, 10640, 'N').
+unicode_east_asian_width(10641, 10641, 'N').
+unicode_east_asian_width(10642, 10642, 'N').
+unicode_east_asian_width(10643, 10643, 'N').
+unicode_east_asian_width(10644, 10644, 'N').
+unicode_east_asian_width(10645, 10645, 'N').
+unicode_east_asian_width(10646, 10646, 'N').
+unicode_east_asian_width(10647, 10647, 'N').
+unicode_east_asian_width(10648, 10648, 'N').
+unicode_east_asian_width(10649, 10711, 'N').
+unicode_east_asian_width(10712, 10712, 'N').
+unicode_east_asian_width(10713, 10713, 'N').
+unicode_east_asian_width(10714, 10714, 'N').
+unicode_east_asian_width(10715, 10715, 'N').
+unicode_east_asian_width(10716, 10747, 'N').
+unicode_east_asian_width(10748, 10748, 'N').
+unicode_east_asian_width(10749, 10749, 'N').
+unicode_east_asian_width(10750, 10751, 'N').
+unicode_east_asian_width(10752, 11007, 'N').
+unicode_east_asian_width(11008, 11034, 'N').
+unicode_east_asian_width(11035, 11036, 'W').
+unicode_east_asian_width(11037, 11055, 'N').
+unicode_east_asian_width(11056, 11076, 'N').
+unicode_east_asian_width(11077, 11078, 'N').
+unicode_east_asian_width(11079, 11084, 'N').
+unicode_east_asian_width(11085, 11087, 'N').
+unicode_east_asian_width(11088, 11088, 'W').
+unicode_east_asian_width(11089, 11092, 'N').
+unicode_east_asian_width(11093, 11093, 'W').
+unicode_east_asian_width(11094, 11097, 'A').
+unicode_east_asian_width(11098, 11123, 'N').
+unicode_east_asian_width(11126, 11263, 'N').
+unicode_east_asian_width(11264, 11359, 'N').
+unicode_east_asian_width(11360, 11387, 'N').
+unicode_east_asian_width(11388, 11389, 'N').
+unicode_east_asian_width(11390, 11391, 'N').
+unicode_east_asian_width(11392, 11492, 'N').
+unicode_east_asian_width(11493, 11498, 'N').
+unicode_east_asian_width(11499, 11502, 'N').
+unicode_east_asian_width(11503, 11505, 'N').
+unicode_east_asian_width(11506, 11507, 'N').
+unicode_east_asian_width(11513, 11516, 'N').
+unicode_east_asian_width(11517, 11517, 'N').
+unicode_east_asian_width(11518, 11519, 'N').
+unicode_east_asian_width(11520, 11557, 'N').
+unicode_east_asian_width(11559, 11559, 'N').
+unicode_east_asian_width(11565, 11565, 'N').
+unicode_east_asian_width(11568, 11623, 'N').
+unicode_east_asian_width(11631, 11631, 'N').
+unicode_east_asian_width(11632, 11632, 'N').
+unicode_east_asian_width(11647, 11647, 'N').
+unicode_east_asian_width(11648, 11670, 'N').
+unicode_east_asian_width(11680, 11686, 'N').
+unicode_east_asian_width(11688, 11694, 'N').
+unicode_east_asian_width(11696, 11702, 'N').
+unicode_east_asian_width(11704, 11710, 'N').
+unicode_east_asian_width(11712, 11718, 'N').
+unicode_east_asian_width(11720, 11726, 'N').
+unicode_east_asian_width(11728, 11734, 'N').
+unicode_east_asian_width(11736, 11742, 'N').
+unicode_east_asian_width(11744, 11775, 'N').
+unicode_east_asian_width(11776, 11777, 'N').
+unicode_east_asian_width(11778, 11778, 'N').
+unicode_east_asian_width(11779, 11779, 'N').
+unicode_east_asian_width(11780, 11780, 'N').
+unicode_east_asian_width(11781, 11781, 'N').
+unicode_east_asian_width(11782, 11784, 'N').
+unicode_east_asian_width(11785, 11785, 'N').
+unicode_east_asian_width(11786, 11786, 'N').
+unicode_east_asian_width(11787, 11787, 'N').
+unicode_east_asian_width(11788, 11788, 'N').
+unicode_east_asian_width(11789, 11789, 'N').
+unicode_east_asian_width(11790, 11798, 'N').
+unicode_east_asian_width(11799, 11799, 'N').
+unicode_east_asian_width(11800, 11801, 'N').
+unicode_east_asian_width(11802, 11802, 'N').
+unicode_east_asian_width(11803, 11803, 'N').
+unicode_east_asian_width(11804, 11804, 'N').
+unicode_east_asian_width(11805, 11805, 'N').
+unicode_east_asian_width(11806, 11807, 'N').
+unicode_east_asian_width(11808, 11808, 'N').
+unicode_east_asian_width(11809, 11809, 'N').
+unicode_east_asian_width(11810, 11810, 'N').
+unicode_east_asian_width(11811, 11811, 'N').
+unicode_east_asian_width(11812, 11812, 'N').
+unicode_east_asian_width(11813, 11813, 'N').
+unicode_east_asian_width(11814, 11814, 'N').
+unicode_east_asian_width(11815, 11815, 'N').
+unicode_east_asian_width(11816, 11816, 'N').
+unicode_east_asian_width(11817, 11817, 'N').
+unicode_east_asian_width(11818, 11822, 'N').
+unicode_east_asian_width(11823, 11823, 'N').
+unicode_east_asian_width(11824, 11833, 'N').
+unicode_east_asian_width(11834, 11835, 'N').
+unicode_east_asian_width(11836, 11839, 'N').
+unicode_east_asian_width(11840, 11840, 'N').
+unicode_east_asian_width(11841, 11841, 'N').
+unicode_east_asian_width(11842, 11842, 'N').
+unicode_east_asian_width(11843, 11855, 'N').
+unicode_east_asian_width(11856, 11857, 'N').
+unicode_east_asian_width(11858, 11860, 'N').
+unicode_east_asian_width(11861, 11861, 'N').
+unicode_east_asian_width(11862, 11862, 'N').
+unicode_east_asian_width(11863, 11863, 'N').
+unicode_east_asian_width(11864, 11864, 'N').
+unicode_east_asian_width(11865, 11865, 'N').
+unicode_east_asian_width(11866, 11866, 'N').
+unicode_east_asian_width(11867, 11867, 'N').
+unicode_east_asian_width(11868, 11868, 'N').
+unicode_east_asian_width(11869, 11869, 'N').
+unicode_east_asian_width(11904, 11929, 'W').
+unicode_east_asian_width(11931, 12019, 'W').
+unicode_east_asian_width(12032, 12245, 'W').
+unicode_east_asian_width(12272, 12287, 'W').
+unicode_east_asian_width(12288, 12288, 'F').
+unicode_east_asian_width(12289, 12291, 'W').
+unicode_east_asian_width(12292, 12292, 'W').
+unicode_east_asian_width(12293, 12293, 'W').
+unicode_east_asian_width(12294, 12294, 'W').
+unicode_east_asian_width(12295, 12295, 'W').
+unicode_east_asian_width(12296, 12296, 'W').
+unicode_east_asian_width(12297, 12297, 'W').
+unicode_east_asian_width(12298, 12298, 'W').
+unicode_east_asian_width(12299, 12299, 'W').
+unicode_east_asian_width(12300, 12300, 'W').
+unicode_east_asian_width(12301, 12301, 'W').
+unicode_east_asian_width(12302, 12302, 'W').
+unicode_east_asian_width(12303, 12303, 'W').
+unicode_east_asian_width(12304, 12304, 'W').
+unicode_east_asian_width(12305, 12305, 'W').
+unicode_east_asian_width(12306, 12307, 'W').
+unicode_east_asian_width(12308, 12308, 'W').
+unicode_east_asian_width(12309, 12309, 'W').
+unicode_east_asian_width(12310, 12310, 'W').
+unicode_east_asian_width(12311, 12311, 'W').
+unicode_east_asian_width(12312, 12312, 'W').
+unicode_east_asian_width(12313, 12313, 'W').
+unicode_east_asian_width(12314, 12314, 'W').
+unicode_east_asian_width(12315, 12315, 'W').
+unicode_east_asian_width(12316, 12316, 'W').
+unicode_east_asian_width(12317, 12317, 'W').
+unicode_east_asian_width(12318, 12319, 'W').
+unicode_east_asian_width(12320, 12320, 'W').
+unicode_east_asian_width(12321, 12329, 'W').
+unicode_east_asian_width(12330, 12333, 'W').
+unicode_east_asian_width(12334, 12335, 'W').
+unicode_east_asian_width(12336, 12336, 'W').
+unicode_east_asian_width(12337, 12341, 'W').
+unicode_east_asian_width(12342, 12343, 'W').
+unicode_east_asian_width(12344, 12346, 'W').
+unicode_east_asian_width(12347, 12347, 'W').
+unicode_east_asian_width(12348, 12348, 'W').
+unicode_east_asian_width(12349, 12349, 'W').
+unicode_east_asian_width(12350, 12350, 'W').
+unicode_east_asian_width(12351, 12351, 'N').
+unicode_east_asian_width(12353, 12438, 'W').
+unicode_east_asian_width(12441, 12442, 'W').
+unicode_east_asian_width(12443, 12444, 'W').
+unicode_east_asian_width(12445, 12446, 'W').
+unicode_east_asian_width(12447, 12447, 'W').
+unicode_east_asian_width(12448, 12448, 'W').
+unicode_east_asian_width(12449, 12538, 'W').
+unicode_east_asian_width(12539, 12539, 'W').
+unicode_east_asian_width(12540, 12542, 'W').
+unicode_east_asian_width(12543, 12543, 'W').
+unicode_east_asian_width(12549, 12591, 'W').
+unicode_east_asian_width(12593, 12686, 'W').
+unicode_east_asian_width(12688, 12689, 'W').
+unicode_east_asian_width(12690, 12693, 'W').
+unicode_east_asian_width(12694, 12703, 'W').
+unicode_east_asian_width(12704, 12735, 'W').
+unicode_east_asian_width(12736, 12773, 'W').
+unicode_east_asian_width(12783, 12783, 'W').
+unicode_east_asian_width(12784, 12799, 'W').
+unicode_east_asian_width(12800, 12830, 'W').
+unicode_east_asian_width(12832, 12841, 'W').
+unicode_east_asian_width(12842, 12871, 'W').
+unicode_east_asian_width(12872, 12879, 'A').
+unicode_east_asian_width(12880, 12880, 'W').
+unicode_east_asian_width(12881, 12895, 'W').
+unicode_east_asian_width(12896, 12927, 'W').
+unicode_east_asian_width(12928, 12937, 'W').
+unicode_east_asian_width(12938, 12976, 'W').
+unicode_east_asian_width(12977, 12991, 'W').
+unicode_east_asian_width(12992, 13055, 'W').
+unicode_east_asian_width(13056, 13311, 'W').
+unicode_east_asian_width(13312, 19903, 'W').
+unicode_east_asian_width(19904, 19967, 'W').
+unicode_east_asian_width(19968, 40959, 'W').
+unicode_east_asian_width(40960, 40980, 'W').
+unicode_east_asian_width(40981, 40981, 'W').
+unicode_east_asian_width(40982, 42124, 'W').
+unicode_east_asian_width(42128, 42182, 'W').
+unicode_east_asian_width(42192, 42231, 'N').
+unicode_east_asian_width(42232, 42237, 'N').
+unicode_east_asian_width(42238, 42239, 'N').
+unicode_east_asian_width(42240, 42507, 'N').
+unicode_east_asian_width(42508, 42508, 'N').
+unicode_east_asian_width(42509, 42511, 'N').
+unicode_east_asian_width(42512, 42527, 'N').
+unicode_east_asian_width(42528, 42537, 'N').
+unicode_east_asian_width(42538, 42539, 'N').
+unicode_east_asian_width(42560, 42605, 'N').
+unicode_east_asian_width(42606, 42606, 'N').
+unicode_east_asian_width(42607, 42607, 'N').
+unicode_east_asian_width(42608, 42610, 'N').
+unicode_east_asian_width(42611, 42611, 'N').
+unicode_east_asian_width(42612, 42621, 'N').
+unicode_east_asian_width(42622, 42622, 'N').
+unicode_east_asian_width(42623, 42623, 'N').
+unicode_east_asian_width(42624, 42651, 'N').
+unicode_east_asian_width(42652, 42653, 'N').
+unicode_east_asian_width(42654, 42655, 'N').
+unicode_east_asian_width(42656, 42725, 'N').
+unicode_east_asian_width(42726, 42735, 'N').
+unicode_east_asian_width(42736, 42737, 'N').
+unicode_east_asian_width(42738, 42743, 'N').
+unicode_east_asian_width(42752, 42774, 'N').
+unicode_east_asian_width(42775, 42783, 'N').
+unicode_east_asian_width(42784, 42785, 'N').
+unicode_east_asian_width(42786, 42863, 'N').
+unicode_east_asian_width(42864, 42864, 'N').
+unicode_east_asian_width(42865, 42887, 'N').
+unicode_east_asian_width(42888, 42888, 'N').
+unicode_east_asian_width(42889, 42890, 'N').
+unicode_east_asian_width(42891, 42894, 'N').
+unicode_east_asian_width(42895, 42895, 'N').
+unicode_east_asian_width(42896, 42972, 'N').
+unicode_east_asian_width(42993, 42996, 'N').
+unicode_east_asian_width(42997, 42998, 'N').
+unicode_east_asian_width(42999, 42999, 'N').
+unicode_east_asian_width(43000, 43001, 'N').
+unicode_east_asian_width(43002, 43002, 'N').
+unicode_east_asian_width(43003, 43007, 'N').
+unicode_east_asian_width(43008, 43009, 'N').
+unicode_east_asian_width(43010, 43010, 'N').
+unicode_east_asian_width(43011, 43013, 'N').
+unicode_east_asian_width(43014, 43014, 'N').
+unicode_east_asian_width(43015, 43018, 'N').
+unicode_east_asian_width(43019, 43019, 'N').
+unicode_east_asian_width(43020, 43042, 'N').
+unicode_east_asian_width(43043, 43044, 'N').
+unicode_east_asian_width(43045, 43046, 'N').
+unicode_east_asian_width(43047, 43047, 'N').
+unicode_east_asian_width(43048, 43051, 'N').
+unicode_east_asian_width(43052, 43052, 'N').
+unicode_east_asian_width(43056, 43061, 'N').
+unicode_east_asian_width(43062, 43063, 'N').
+unicode_east_asian_width(43064, 43064, 'N').
+unicode_east_asian_width(43065, 43065, 'N').
+unicode_east_asian_width(43072, 43123, 'N').
+unicode_east_asian_width(43124, 43127, 'N').
+unicode_east_asian_width(43136, 43137, 'N').
+unicode_east_asian_width(43138, 43187, 'N').
+unicode_east_asian_width(43188, 43203, 'N').
+unicode_east_asian_width(43204, 43205, 'N').
+unicode_east_asian_width(43214, 43215, 'N').
+unicode_east_asian_width(43216, 43225, 'N').
+unicode_east_asian_width(43232, 43249, 'N').
+unicode_east_asian_width(43250, 43255, 'N').
+unicode_east_asian_width(43256, 43258, 'N').
+unicode_east_asian_width(43259, 43259, 'N').
+unicode_east_asian_width(43260, 43260, 'N').
+unicode_east_asian_width(43261, 43262, 'N').
+unicode_east_asian_width(43263, 43263, 'N').
+unicode_east_asian_width(43264, 43273, 'N').
+unicode_east_asian_width(43274, 43301, 'N').
+unicode_east_asian_width(43302, 43309, 'N').
+unicode_east_asian_width(43310, 43311, 'N').
+unicode_east_asian_width(43312, 43334, 'N').
+unicode_east_asian_width(43335, 43345, 'N').
+unicode_east_asian_width(43346, 43347, 'N').
+unicode_east_asian_width(43359, 43359, 'N').
+unicode_east_asian_width(43360, 43388, 'W').
+unicode_east_asian_width(43392, 43394, 'N').
+unicode_east_asian_width(43395, 43395, 'N').
+unicode_east_asian_width(43396, 43442, 'N').
+unicode_east_asian_width(43443, 43443, 'N').
+unicode_east_asian_width(43444, 43445, 'N').
+unicode_east_asian_width(43446, 43449, 'N').
+unicode_east_asian_width(43450, 43451, 'N').
+unicode_east_asian_width(43452, 43453, 'N').
+unicode_east_asian_width(43454, 43456, 'N').
+unicode_east_asian_width(43457, 43469, 'N').
+unicode_east_asian_width(43471, 43471, 'N').
+unicode_east_asian_width(43472, 43481, 'N').
+unicode_east_asian_width(43486, 43487, 'N').
+unicode_east_asian_width(43488, 43492, 'N').
+unicode_east_asian_width(43493, 43493, 'N').
+unicode_east_asian_width(43494, 43494, 'N').
+unicode_east_asian_width(43495, 43503, 'N').
+unicode_east_asian_width(43504, 43513, 'N').
+unicode_east_asian_width(43514, 43518, 'N').
+unicode_east_asian_width(43520, 43560, 'N').
+unicode_east_asian_width(43561, 43566, 'N').
+unicode_east_asian_width(43567, 43568, 'N').
+unicode_east_asian_width(43569, 43570, 'N').
+unicode_east_asian_width(43571, 43572, 'N').
+unicode_east_asian_width(43573, 43574, 'N').
+unicode_east_asian_width(43584, 43586, 'N').
+unicode_east_asian_width(43587, 43587, 'N').
+unicode_east_asian_width(43588, 43595, 'N').
+unicode_east_asian_width(43596, 43596, 'N').
+unicode_east_asian_width(43597, 43597, 'N').
+unicode_east_asian_width(43600, 43609, 'N').
+unicode_east_asian_width(43612, 43615, 'N').
+unicode_east_asian_width(43616, 43631, 'N').
+unicode_east_asian_width(43632, 43632, 'N').
+unicode_east_asian_width(43633, 43638, 'N').
+unicode_east_asian_width(43639, 43641, 'N').
+unicode_east_asian_width(43642, 43642, 'N').
+unicode_east_asian_width(43643, 43643, 'N').
+unicode_east_asian_width(43644, 43644, 'N').
+unicode_east_asian_width(43645, 43645, 'N').
+unicode_east_asian_width(43646, 43647, 'N').
+unicode_east_asian_width(43648, 43695, 'N').
+unicode_east_asian_width(43696, 43696, 'N').
+unicode_east_asian_width(43697, 43697, 'N').
+unicode_east_asian_width(43698, 43700, 'N').
+unicode_east_asian_width(43701, 43702, 'N').
+unicode_east_asian_width(43703, 43704, 'N').
+unicode_east_asian_width(43705, 43709, 'N').
+unicode_east_asian_width(43710, 43711, 'N').
+unicode_east_asian_width(43712, 43712, 'N').
+unicode_east_asian_width(43713, 43713, 'N').
+unicode_east_asian_width(43714, 43714, 'N').
+unicode_east_asian_width(43739, 43740, 'N').
+unicode_east_asian_width(43741, 43741, 'N').
+unicode_east_asian_width(43742, 43743, 'N').
+unicode_east_asian_width(43744, 43754, 'N').
+unicode_east_asian_width(43755, 43755, 'N').
+unicode_east_asian_width(43756, 43757, 'N').
+unicode_east_asian_width(43758, 43759, 'N').
+unicode_east_asian_width(43760, 43761, 'N').
+unicode_east_asian_width(43762, 43762, 'N').
+unicode_east_asian_width(43763, 43764, 'N').
+unicode_east_asian_width(43765, 43765, 'N').
+unicode_east_asian_width(43766, 43766, 'N').
+unicode_east_asian_width(43777, 43782, 'N').
+unicode_east_asian_width(43785, 43790, 'N').
+unicode_east_asian_width(43793, 43798, 'N').
+unicode_east_asian_width(43808, 43814, 'N').
+unicode_east_asian_width(43816, 43822, 'N').
+unicode_east_asian_width(43824, 43866, 'N').
+unicode_east_asian_width(43867, 43867, 'N').
+unicode_east_asian_width(43868, 43871, 'N').
+unicode_east_asian_width(43872, 43880, 'N').
+unicode_east_asian_width(43881, 43881, 'N').
+unicode_east_asian_width(43882, 43883, 'N').
+unicode_east_asian_width(43888, 43967, 'N').
+unicode_east_asian_width(43968, 44002, 'N').
+unicode_east_asian_width(44003, 44004, 'N').
+unicode_east_asian_width(44005, 44005, 'N').
+unicode_east_asian_width(44006, 44007, 'N').
+unicode_east_asian_width(44008, 44008, 'N').
+unicode_east_asian_width(44009, 44010, 'N').
+unicode_east_asian_width(44011, 44011, 'N').
+unicode_east_asian_width(44012, 44012, 'N').
+unicode_east_asian_width(44013, 44013, 'N').
+unicode_east_asian_width(44016, 44025, 'N').
+unicode_east_asian_width(44032, 55203, 'W').
+unicode_east_asian_width(55216, 55238, 'N').
+unicode_east_asian_width(55243, 55291, 'N').
+unicode_east_asian_width(55296, 56191, 'N').
+unicode_east_asian_width(56192, 56319, 'N').
+unicode_east_asian_width(56320, 57343, 'N').
+unicode_east_asian_width(57344, 63743, 'A').
+unicode_east_asian_width(63744, 64109, 'W').
+unicode_east_asian_width(64110, 64111, 'W').
+unicode_east_asian_width(64112, 64217, 'W').
+unicode_east_asian_width(64218, 64255, 'W').
+unicode_east_asian_width(64256, 64262, 'N').
+unicode_east_asian_width(64275, 64279, 'N').
+unicode_east_asian_width(64285, 64285, 'N').
+unicode_east_asian_width(64286, 64286, 'N').
+unicode_east_asian_width(64287, 64296, 'N').
+unicode_east_asian_width(64297, 64297, 'N').
+unicode_east_asian_width(64298, 64310, 'N').
+unicode_east_asian_width(64312, 64316, 'N').
+unicode_east_asian_width(64318, 64318, 'N').
+unicode_east_asian_width(64320, 64321, 'N').
+unicode_east_asian_width(64323, 64324, 'N').
+unicode_east_asian_width(64326, 64335, 'N').
+unicode_east_asian_width(64336, 64433, 'N').
+unicode_east_asian_width(64434, 64450, 'N').
+unicode_east_asian_width(64451, 64466, 'N').
+unicode_east_asian_width(64467, 64829, 'N').
+unicode_east_asian_width(64830, 64830, 'N').
+unicode_east_asian_width(64831, 64831, 'N').
+unicode_east_asian_width(64832, 64847, 'N').
+unicode_east_asian_width(64848, 64911, 'N').
+unicode_east_asian_width(64912, 64913, 'N').
+unicode_east_asian_width(64914, 64967, 'N').
+unicode_east_asian_width(64968, 64975, 'N').
+unicode_east_asian_width(65008, 65019, 'N').
+unicode_east_asian_width(65020, 65020, 'N').
+unicode_east_asian_width(65021, 65023, 'N').
+unicode_east_asian_width(65024, 65039, 'A').
+unicode_east_asian_width(65040, 65046, 'W').
+unicode_east_asian_width(65047, 65047, 'W').
+unicode_east_asian_width(65048, 65048, 'W').
+unicode_east_asian_width(65049, 65049, 'W').
+unicode_east_asian_width(65056, 65071, 'N').
+unicode_east_asian_width(65072, 65072, 'W').
+unicode_east_asian_width(65073, 65074, 'W').
+unicode_east_asian_width(65075, 65076, 'W').
+unicode_east_asian_width(65077, 65077, 'W').
+unicode_east_asian_width(65078, 65078, 'W').
+unicode_east_asian_width(65079, 65079, 'W').
+unicode_east_asian_width(65080, 65080, 'W').
+unicode_east_asian_width(65081, 65081, 'W').
+unicode_east_asian_width(65082, 65082, 'W').
+unicode_east_asian_width(65083, 65083, 'W').
+unicode_east_asian_width(65084, 65084, 'W').
+unicode_east_asian_width(65085, 65085, 'W').
+unicode_east_asian_width(65086, 65086, 'W').
+unicode_east_asian_width(65087, 65087, 'W').
+unicode_east_asian_width(65088, 65088, 'W').
+unicode_east_asian_width(65089, 65089, 'W').
+unicode_east_asian_width(65090, 65090, 'W').
+unicode_east_asian_width(65091, 65091, 'W').
+unicode_east_asian_width(65092, 65092, 'W').
+unicode_east_asian_width(65093, 65094, 'W').
+unicode_east_asian_width(65095, 65095, 'W').
+unicode_east_asian_width(65096, 65096, 'W').
+unicode_east_asian_width(65097, 65100, 'W').
+unicode_east_asian_width(65101, 65103, 'W').
+unicode_east_asian_width(65104, 65106, 'W').
+unicode_east_asian_width(65108, 65111, 'W').
+unicode_east_asian_width(65112, 65112, 'W').
+unicode_east_asian_width(65113, 65113, 'W').
+unicode_east_asian_width(65114, 65114, 'W').
+unicode_east_asian_width(65115, 65115, 'W').
+unicode_east_asian_width(65116, 65116, 'W').
+unicode_east_asian_width(65117, 65117, 'W').
+unicode_east_asian_width(65118, 65118, 'W').
+unicode_east_asian_width(65119, 65121, 'W').
+unicode_east_asian_width(65122, 65122, 'W').
+unicode_east_asian_width(65123, 65123, 'W').
+unicode_east_asian_width(65124, 65126, 'W').
+unicode_east_asian_width(65128, 65128, 'W').
+unicode_east_asian_width(65129, 65129, 'W').
+unicode_east_asian_width(65130, 65131, 'W').
+unicode_east_asian_width(65136, 65140, 'N').
+unicode_east_asian_width(65142, 65276, 'N').
+unicode_east_asian_width(65279, 65279, 'N').
+unicode_east_asian_width(65281, 65283, 'F').
+unicode_east_asian_width(65284, 65284, 'F').
+unicode_east_asian_width(65285, 65287, 'F').
+unicode_east_asian_width(65288, 65288, 'F').
+unicode_east_asian_width(65289, 65289, 'F').
+unicode_east_asian_width(65290, 65290, 'F').
+unicode_east_asian_width(65291, 65291, 'F').
+unicode_east_asian_width(65292, 65292, 'F').
+unicode_east_asian_width(65293, 65293, 'F').
+unicode_east_asian_width(65294, 65295, 'F').
+unicode_east_asian_width(65296, 65305, 'F').
+unicode_east_asian_width(65306, 65307, 'F').
+unicode_east_asian_width(65308, 65310, 'F').
+unicode_east_asian_width(65311, 65312, 'F').
+unicode_east_asian_width(65313, 65338, 'F').
+unicode_east_asian_width(65339, 65339, 'F').
+unicode_east_asian_width(65340, 65340, 'F').
+unicode_east_asian_width(65341, 65341, 'F').
+unicode_east_asian_width(65342, 65342, 'F').
+unicode_east_asian_width(65343, 65343, 'F').
+unicode_east_asian_width(65344, 65344, 'F').
+unicode_east_asian_width(65345, 65370, 'F').
+unicode_east_asian_width(65371, 65371, 'F').
+unicode_east_asian_width(65372, 65372, 'F').
+unicode_east_asian_width(65373, 65373, 'F').
+unicode_east_asian_width(65374, 65374, 'F').
+unicode_east_asian_width(65375, 65375, 'F').
+unicode_east_asian_width(65376, 65376, 'F').
+unicode_east_asian_width(65377, 65377, 'H').
+unicode_east_asian_width(65378, 65378, 'H').
+unicode_east_asian_width(65379, 65379, 'H').
+unicode_east_asian_width(65380, 65381, 'H').
+unicode_east_asian_width(65382, 65391, 'H').
+unicode_east_asian_width(65392, 65392, 'H').
+unicode_east_asian_width(65393, 65437, 'H').
+unicode_east_asian_width(65438, 65439, 'H').
+unicode_east_asian_width(65440, 65470, 'H').
+unicode_east_asian_width(65474, 65479, 'H').
+unicode_east_asian_width(65482, 65487, 'H').
+unicode_east_asian_width(65490, 65495, 'H').
+unicode_east_asian_width(65498, 65500, 'H').
+unicode_east_asian_width(65504, 65505, 'F').
+unicode_east_asian_width(65506, 65506, 'F').
+unicode_east_asian_width(65507, 65507, 'F').
+unicode_east_asian_width(65508, 65508, 'F').
+unicode_east_asian_width(65509, 65510, 'F').
+unicode_east_asian_width(65512, 65512, 'H').
+unicode_east_asian_width(65513, 65516, 'H').
+unicode_east_asian_width(65517, 65518, 'H').
+unicode_east_asian_width(65529, 65531, 'N').
+unicode_east_asian_width(65532, 65532, 'N').
+unicode_east_asian_width(65533, 65533, 'A').
+unicode_east_asian_width(65536, 65547, 'N').
+unicode_east_asian_width(65549, 65574, 'N').
+unicode_east_asian_width(65576, 65594, 'N').
+unicode_east_asian_width(65596, 65597, 'N').
+unicode_east_asian_width(65599, 65613, 'N').
+unicode_east_asian_width(65616, 65629, 'N').
+unicode_east_asian_width(65664, 65786, 'N').
+unicode_east_asian_width(65792, 65794, 'N').
+unicode_east_asian_width(65799, 65843, 'N').
+unicode_east_asian_width(65847, 65855, 'N').
+unicode_east_asian_width(65856, 65908, 'N').
+unicode_east_asian_width(65909, 65912, 'N').
+unicode_east_asian_width(65913, 65929, 'N').
+unicode_east_asian_width(65930, 65931, 'N').
+unicode_east_asian_width(65932, 65934, 'N').
+unicode_east_asian_width(65936, 65948, 'N').
+unicode_east_asian_width(65952, 65952, 'N').
+unicode_east_asian_width(66000, 66044, 'N').
+unicode_east_asian_width(66045, 66045, 'N').
+unicode_east_asian_width(66176, 66204, 'N').
+unicode_east_asian_width(66208, 66256, 'N').
+unicode_east_asian_width(66272, 66272, 'N').
+unicode_east_asian_width(66273, 66299, 'N').
+unicode_east_asian_width(66304, 66335, 'N').
+unicode_east_asian_width(66336, 66339, 'N').
+unicode_east_asian_width(66349, 66351, 'N').
+unicode_east_asian_width(66352, 66368, 'N').
+unicode_east_asian_width(66369, 66369, 'N').
+unicode_east_asian_width(66370, 66377, 'N').
+unicode_east_asian_width(66378, 66378, 'N').
+unicode_east_asian_width(66384, 66421, 'N').
+unicode_east_asian_width(66422, 66426, 'N').
+unicode_east_asian_width(66432, 66461, 'N').
+unicode_east_asian_width(66463, 66463, 'N').
+unicode_east_asian_width(66464, 66499, 'N').
+unicode_east_asian_width(66504, 66511, 'N').
+unicode_east_asian_width(66512, 66512, 'N').
+unicode_east_asian_width(66513, 66517, 'N').
+unicode_east_asian_width(66560, 66639, 'N').
+unicode_east_asian_width(66640, 66687, 'N').
+unicode_east_asian_width(66688, 66717, 'N').
+unicode_east_asian_width(66720, 66729, 'N').
+unicode_east_asian_width(66736, 66771, 'N').
+unicode_east_asian_width(66776, 66811, 'N').
+unicode_east_asian_width(66816, 66855, 'N').
+unicode_east_asian_width(66864, 66915, 'N').
+unicode_east_asian_width(66927, 66927, 'N').
+unicode_east_asian_width(66928, 66938, 'N').
+unicode_east_asian_width(66940, 66954, 'N').
+unicode_east_asian_width(66956, 66962, 'N').
+unicode_east_asian_width(66964, 66965, 'N').
+unicode_east_asian_width(66967, 66977, 'N').
+unicode_east_asian_width(66979, 66993, 'N').
+unicode_east_asian_width(66995, 67001, 'N').
+unicode_east_asian_width(67003, 67004, 'N').
+unicode_east_asian_width(67008, 67059, 'N').
+unicode_east_asian_width(67072, 67382, 'N').
+unicode_east_asian_width(67392, 67413, 'N').
+unicode_east_asian_width(67424, 67431, 'N').
+unicode_east_asian_width(67456, 67461, 'N').
+unicode_east_asian_width(67463, 67504, 'N').
+unicode_east_asian_width(67506, 67514, 'N').
+unicode_east_asian_width(67584, 67589, 'N').
+unicode_east_asian_width(67592, 67592, 'N').
+unicode_east_asian_width(67594, 67637, 'N').
+unicode_east_asian_width(67639, 67640, 'N').
+unicode_east_asian_width(67644, 67644, 'N').
+unicode_east_asian_width(67647, 67647, 'N').
+unicode_east_asian_width(67648, 67669, 'N').
+unicode_east_asian_width(67671, 67671, 'N').
+unicode_east_asian_width(67672, 67679, 'N').
+unicode_east_asian_width(67680, 67702, 'N').
+unicode_east_asian_width(67703, 67704, 'N').
+unicode_east_asian_width(67705, 67711, 'N').
+unicode_east_asian_width(67712, 67742, 'N').
+unicode_east_asian_width(67751, 67759, 'N').
+unicode_east_asian_width(67808, 67826, 'N').
+unicode_east_asian_width(67828, 67829, 'N').
+unicode_east_asian_width(67835, 67839, 'N').
+unicode_east_asian_width(67840, 67861, 'N').
+unicode_east_asian_width(67862, 67867, 'N').
+unicode_east_asian_width(67871, 67871, 'N').
+unicode_east_asian_width(67872, 67897, 'N').
+unicode_east_asian_width(67903, 67903, 'N').
+unicode_east_asian_width(67904, 67929, 'N').
+unicode_east_asian_width(67968, 67999, 'N').
+unicode_east_asian_width(68000, 68023, 'N').
+unicode_east_asian_width(68028, 68029, 'N').
+unicode_east_asian_width(68030, 68031, 'N').
+unicode_east_asian_width(68032, 68047, 'N').
+unicode_east_asian_width(68050, 68095, 'N').
+unicode_east_asian_width(68096, 68096, 'N').
+unicode_east_asian_width(68097, 68099, 'N').
+unicode_east_asian_width(68101, 68102, 'N').
+unicode_east_asian_width(68108, 68111, 'N').
+unicode_east_asian_width(68112, 68115, 'N').
+unicode_east_asian_width(68117, 68119, 'N').
+unicode_east_asian_width(68121, 68149, 'N').
+unicode_east_asian_width(68152, 68154, 'N').
+unicode_east_asian_width(68159, 68159, 'N').
+unicode_east_asian_width(68160, 68168, 'N').
+unicode_east_asian_width(68176, 68184, 'N').
+unicode_east_asian_width(68192, 68220, 'N').
+unicode_east_asian_width(68221, 68222, 'N').
+unicode_east_asian_width(68223, 68223, 'N').
+unicode_east_asian_width(68224, 68252, 'N').
+unicode_east_asian_width(68253, 68255, 'N').
+unicode_east_asian_width(68288, 68295, 'N').
+unicode_east_asian_width(68296, 68296, 'N').
+unicode_east_asian_width(68297, 68324, 'N').
+unicode_east_asian_width(68325, 68326, 'N').
+unicode_east_asian_width(68331, 68335, 'N').
+unicode_east_asian_width(68336, 68342, 'N').
+unicode_east_asian_width(68352, 68405, 'N').
+unicode_east_asian_width(68409, 68415, 'N').
+unicode_east_asian_width(68416, 68437, 'N').
+unicode_east_asian_width(68440, 68447, 'N').
+unicode_east_asian_width(68448, 68466, 'N').
+unicode_east_asian_width(68472, 68479, 'N').
+unicode_east_asian_width(68480, 68497, 'N').
+unicode_east_asian_width(68505, 68508, 'N').
+unicode_east_asian_width(68521, 68527, 'N').
+unicode_east_asian_width(68608, 68680, 'N').
+unicode_east_asian_width(68736, 68786, 'N').
+unicode_east_asian_width(68800, 68850, 'N').
+unicode_east_asian_width(68858, 68863, 'N').
+unicode_east_asian_width(68864, 68899, 'N').
+unicode_east_asian_width(68900, 68903, 'N').
+unicode_east_asian_width(68912, 68921, 'N').
+unicode_east_asian_width(68928, 68937, 'N').
+unicode_east_asian_width(68938, 68941, 'N').
+unicode_east_asian_width(68942, 68942, 'N').
+unicode_east_asian_width(68943, 68943, 'N').
+unicode_east_asian_width(68944, 68965, 'N').
+unicode_east_asian_width(68969, 68973, 'N').
+unicode_east_asian_width(68974, 68974, 'N').
+unicode_east_asian_width(68975, 68975, 'N').
+unicode_east_asian_width(68976, 68997, 'N').
+unicode_east_asian_width(69006, 69007, 'N').
+unicode_east_asian_width(69216, 69246, 'N').
+unicode_east_asian_width(69248, 69289, 'N').
+unicode_east_asian_width(69291, 69292, 'N').
+unicode_east_asian_width(69293, 69293, 'N').
+unicode_east_asian_width(69296, 69297, 'N').
+unicode_east_asian_width(69314, 69316, 'N').
+unicode_east_asian_width(69317, 69317, 'N').
+unicode_east_asian_width(69318, 69319, 'N').
+unicode_east_asian_width(69328, 69328, 'N').
+unicode_east_asian_width(69329, 69336, 'N').
+unicode_east_asian_width(69370, 69375, 'N').
+unicode_east_asian_width(69376, 69404, 'N').
+unicode_east_asian_width(69405, 69414, 'N').
+unicode_east_asian_width(69415, 69415, 'N').
+unicode_east_asian_width(69424, 69445, 'N').
+unicode_east_asian_width(69446, 69456, 'N').
+unicode_east_asian_width(69457, 69460, 'N').
+unicode_east_asian_width(69461, 69465, 'N').
+unicode_east_asian_width(69488, 69505, 'N').
+unicode_east_asian_width(69506, 69509, 'N').
+unicode_east_asian_width(69510, 69513, 'N').
+unicode_east_asian_width(69552, 69572, 'N').
+unicode_east_asian_width(69573, 69579, 'N').
+unicode_east_asian_width(69600, 69622, 'N').
+unicode_east_asian_width(69632, 69632, 'N').
+unicode_east_asian_width(69633, 69633, 'N').
+unicode_east_asian_width(69634, 69634, 'N').
+unicode_east_asian_width(69635, 69687, 'N').
+unicode_east_asian_width(69688, 69702, 'N').
+unicode_east_asian_width(69703, 69709, 'N').
+unicode_east_asian_width(69714, 69733, 'N').
+unicode_east_asian_width(69734, 69743, 'N').
+unicode_east_asian_width(69744, 69744, 'N').
+unicode_east_asian_width(69745, 69746, 'N').
+unicode_east_asian_width(69747, 69748, 'N').
+unicode_east_asian_width(69749, 69749, 'N').
+unicode_east_asian_width(69759, 69759, 'N').
+unicode_east_asian_width(69760, 69761, 'N').
+unicode_east_asian_width(69762, 69762, 'N').
+unicode_east_asian_width(69763, 69807, 'N').
+unicode_east_asian_width(69808, 69810, 'N').
+unicode_east_asian_width(69811, 69814, 'N').
+unicode_east_asian_width(69815, 69816, 'N').
+unicode_east_asian_width(69817, 69818, 'N').
+unicode_east_asian_width(69819, 69820, 'N').
+unicode_east_asian_width(69821, 69821, 'N').
+unicode_east_asian_width(69822, 69825, 'N').
+unicode_east_asian_width(69826, 69826, 'N').
+unicode_east_asian_width(69837, 69837, 'N').
+unicode_east_asian_width(69840, 69864, 'N').
+unicode_east_asian_width(69872, 69881, 'N').
+unicode_east_asian_width(69888, 69890, 'N').
+unicode_east_asian_width(69891, 69926, 'N').
+unicode_east_asian_width(69927, 69931, 'N').
+unicode_east_asian_width(69932, 69932, 'N').
+unicode_east_asian_width(69933, 69940, 'N').
+unicode_east_asian_width(69942, 69951, 'N').
+unicode_east_asian_width(69952, 69955, 'N').
+unicode_east_asian_width(69956, 69956, 'N').
+unicode_east_asian_width(69957, 69958, 'N').
+unicode_east_asian_width(69959, 69959, 'N').
+unicode_east_asian_width(69968, 70002, 'N').
+unicode_east_asian_width(70003, 70003, 'N').
+unicode_east_asian_width(70004, 70005, 'N').
+unicode_east_asian_width(70006, 70006, 'N').
+unicode_east_asian_width(70016, 70017, 'N').
+unicode_east_asian_width(70018, 70018, 'N').
+unicode_east_asian_width(70019, 70066, 'N').
+unicode_east_asian_width(70067, 70069, 'N').
+unicode_east_asian_width(70070, 70078, 'N').
+unicode_east_asian_width(70079, 70080, 'N').
+unicode_east_asian_width(70081, 70084, 'N').
+unicode_east_asian_width(70085, 70088, 'N').
+unicode_east_asian_width(70089, 70092, 'N').
+unicode_east_asian_width(70093, 70093, 'N').
+unicode_east_asian_width(70094, 70094, 'N').
+unicode_east_asian_width(70095, 70095, 'N').
+unicode_east_asian_width(70096, 70105, 'N').
+unicode_east_asian_width(70106, 70106, 'N').
+unicode_east_asian_width(70107, 70107, 'N').
+unicode_east_asian_width(70108, 70108, 'N').
+unicode_east_asian_width(70109, 70111, 'N').
+unicode_east_asian_width(70113, 70132, 'N').
+unicode_east_asian_width(70144, 70161, 'N').
+unicode_east_asian_width(70163, 70187, 'N').
+unicode_east_asian_width(70188, 70190, 'N').
+unicode_east_asian_width(70191, 70193, 'N').
+unicode_east_asian_width(70194, 70195, 'N').
+unicode_east_asian_width(70196, 70196, 'N').
+unicode_east_asian_width(70197, 70197, 'N').
+unicode_east_asian_width(70198, 70199, 'N').
+unicode_east_asian_width(70200, 70205, 'N').
+unicode_east_asian_width(70206, 70206, 'N').
+unicode_east_asian_width(70207, 70208, 'N').
+unicode_east_asian_width(70209, 70209, 'N').
+unicode_east_asian_width(70272, 70278, 'N').
+unicode_east_asian_width(70280, 70280, 'N').
+unicode_east_asian_width(70282, 70285, 'N').
+unicode_east_asian_width(70287, 70301, 'N').
+unicode_east_asian_width(70303, 70312, 'N').
+unicode_east_asian_width(70313, 70313, 'N').
+unicode_east_asian_width(70320, 70366, 'N').
+unicode_east_asian_width(70367, 70367, 'N').
+unicode_east_asian_width(70368, 70370, 'N').
+unicode_east_asian_width(70371, 70378, 'N').
+unicode_east_asian_width(70384, 70393, 'N').
+unicode_east_asian_width(70400, 70401, 'N').
+unicode_east_asian_width(70402, 70403, 'N').
+unicode_east_asian_width(70405, 70412, 'N').
+unicode_east_asian_width(70415, 70416, 'N').
+unicode_east_asian_width(70419, 70440, 'N').
+unicode_east_asian_width(70442, 70448, 'N').
+unicode_east_asian_width(70450, 70451, 'N').
+unicode_east_asian_width(70453, 70457, 'N').
+unicode_east_asian_width(70459, 70460, 'N').
+unicode_east_asian_width(70461, 70461, 'N').
+unicode_east_asian_width(70462, 70463, 'N').
+unicode_east_asian_width(70464, 70464, 'N').
+unicode_east_asian_width(70465, 70468, 'N').
+unicode_east_asian_width(70471, 70472, 'N').
+unicode_east_asian_width(70475, 70477, 'N').
+unicode_east_asian_width(70480, 70480, 'N').
+unicode_east_asian_width(70487, 70487, 'N').
+unicode_east_asian_width(70493, 70497, 'N').
+unicode_east_asian_width(70498, 70499, 'N').
+unicode_east_asian_width(70502, 70508, 'N').
+unicode_east_asian_width(70512, 70516, 'N').
+unicode_east_asian_width(70528, 70537, 'N').
+unicode_east_asian_width(70539, 70539, 'N').
+unicode_east_asian_width(70542, 70542, 'N').
+unicode_east_asian_width(70544, 70581, 'N').
+unicode_east_asian_width(70583, 70583, 'N').
+unicode_east_asian_width(70584, 70586, 'N').
+unicode_east_asian_width(70587, 70592, 'N').
+unicode_east_asian_width(70594, 70594, 'N').
+unicode_east_asian_width(70597, 70597, 'N').
+unicode_east_asian_width(70599, 70602, 'N').
+unicode_east_asian_width(70604, 70605, 'N').
+unicode_east_asian_width(70606, 70606, 'N').
+unicode_east_asian_width(70607, 70607, 'N').
+unicode_east_asian_width(70608, 70608, 'N').
+unicode_east_asian_width(70609, 70609, 'N').
+unicode_east_asian_width(70610, 70610, 'N').
+unicode_east_asian_width(70611, 70611, 'N').
+unicode_east_asian_width(70612, 70613, 'N').
+unicode_east_asian_width(70615, 70616, 'N').
+unicode_east_asian_width(70625, 70626, 'N').
+unicode_east_asian_width(70656, 70708, 'N').
+unicode_east_asian_width(70709, 70711, 'N').
+unicode_east_asian_width(70712, 70719, 'N').
+unicode_east_asian_width(70720, 70721, 'N').
+unicode_east_asian_width(70722, 70724, 'N').
+unicode_east_asian_width(70725, 70725, 'N').
+unicode_east_asian_width(70726, 70726, 'N').
+unicode_east_asian_width(70727, 70730, 'N').
+unicode_east_asian_width(70731, 70735, 'N').
+unicode_east_asian_width(70736, 70745, 'N').
+unicode_east_asian_width(70746, 70747, 'N').
+unicode_east_asian_width(70749, 70749, 'N').
+unicode_east_asian_width(70750, 70750, 'N').
+unicode_east_asian_width(70751, 70753, 'N').
+unicode_east_asian_width(70784, 70831, 'N').
+unicode_east_asian_width(70832, 70834, 'N').
+unicode_east_asian_width(70835, 70840, 'N').
+unicode_east_asian_width(70841, 70841, 'N').
+unicode_east_asian_width(70842, 70842, 'N').
+unicode_east_asian_width(70843, 70846, 'N').
+unicode_east_asian_width(70847, 70848, 'N').
+unicode_east_asian_width(70849, 70849, 'N').
+unicode_east_asian_width(70850, 70851, 'N').
+unicode_east_asian_width(70852, 70853, 'N').
+unicode_east_asian_width(70854, 70854, 'N').
+unicode_east_asian_width(70855, 70855, 'N').
+unicode_east_asian_width(70864, 70873, 'N').
+unicode_east_asian_width(71040, 71086, 'N').
+unicode_east_asian_width(71087, 71089, 'N').
+unicode_east_asian_width(71090, 71093, 'N').
+unicode_east_asian_width(71096, 71099, 'N').
+unicode_east_asian_width(71100, 71101, 'N').
+unicode_east_asian_width(71102, 71102, 'N').
+unicode_east_asian_width(71103, 71104, 'N').
+unicode_east_asian_width(71105, 71127, 'N').
+unicode_east_asian_width(71128, 71131, 'N').
+unicode_east_asian_width(71132, 71133, 'N').
+unicode_east_asian_width(71168, 71215, 'N').
+unicode_east_asian_width(71216, 71218, 'N').
+unicode_east_asian_width(71219, 71226, 'N').
+unicode_east_asian_width(71227, 71228, 'N').
+unicode_east_asian_width(71229, 71229, 'N').
+unicode_east_asian_width(71230, 71230, 'N').
+unicode_east_asian_width(71231, 71232, 'N').
+unicode_east_asian_width(71233, 71235, 'N').
+unicode_east_asian_width(71236, 71236, 'N').
+unicode_east_asian_width(71248, 71257, 'N').
+unicode_east_asian_width(71264, 71276, 'N').
+unicode_east_asian_width(71296, 71338, 'N').
+unicode_east_asian_width(71339, 71339, 'N').
+unicode_east_asian_width(71340, 71340, 'N').
+unicode_east_asian_width(71341, 71341, 'N').
+unicode_east_asian_width(71342, 71343, 'N').
+unicode_east_asian_width(71344, 71349, 'N').
+unicode_east_asian_width(71350, 71350, 'N').
+unicode_east_asian_width(71351, 71351, 'N').
+unicode_east_asian_width(71352, 71352, 'N').
+unicode_east_asian_width(71353, 71353, 'N').
+unicode_east_asian_width(71360, 71369, 'N').
+unicode_east_asian_width(71376, 71395, 'N').
+unicode_east_asian_width(71424, 71450, 'N').
+unicode_east_asian_width(71453, 71453, 'N').
+unicode_east_asian_width(71454, 71454, 'N').
+unicode_east_asian_width(71455, 71455, 'N').
+unicode_east_asian_width(71456, 71457, 'N').
+unicode_east_asian_width(71458, 71461, 'N').
+unicode_east_asian_width(71462, 71462, 'N').
+unicode_east_asian_width(71463, 71467, 'N').
+unicode_east_asian_width(71472, 71481, 'N').
+unicode_east_asian_width(71482, 71483, 'N').
+unicode_east_asian_width(71484, 71486, 'N').
+unicode_east_asian_width(71487, 71487, 'N').
+unicode_east_asian_width(71488, 71494, 'N').
+unicode_east_asian_width(71680, 71723, 'N').
+unicode_east_asian_width(71724, 71726, 'N').
+unicode_east_asian_width(71727, 71735, 'N').
+unicode_east_asian_width(71736, 71736, 'N').
+unicode_east_asian_width(71737, 71738, 'N').
+unicode_east_asian_width(71739, 71739, 'N').
+unicode_east_asian_width(71840, 71903, 'N').
+unicode_east_asian_width(71904, 71913, 'N').
+unicode_east_asian_width(71914, 71922, 'N').
+unicode_east_asian_width(71935, 71935, 'N').
+unicode_east_asian_width(71936, 71942, 'N').
+unicode_east_asian_width(71945, 71945, 'N').
+unicode_east_asian_width(71948, 71955, 'N').
+unicode_east_asian_width(71957, 71958, 'N').
+unicode_east_asian_width(71960, 71983, 'N').
+unicode_east_asian_width(71984, 71989, 'N').
+unicode_east_asian_width(71991, 71992, 'N').
+unicode_east_asian_width(71995, 71996, 'N').
+unicode_east_asian_width(71997, 71997, 'N').
+unicode_east_asian_width(71998, 71998, 'N').
+unicode_east_asian_width(71999, 71999, 'N').
+unicode_east_asian_width(72000, 72000, 'N').
+unicode_east_asian_width(72001, 72001, 'N').
+unicode_east_asian_width(72002, 72002, 'N').
+unicode_east_asian_width(72003, 72003, 'N').
+unicode_east_asian_width(72004, 72006, 'N').
+unicode_east_asian_width(72016, 72025, 'N').
+unicode_east_asian_width(72096, 72103, 'N').
+unicode_east_asian_width(72106, 72144, 'N').
+unicode_east_asian_width(72145, 72147, 'N').
+unicode_east_asian_width(72148, 72151, 'N').
+unicode_east_asian_width(72154, 72155, 'N').
+unicode_east_asian_width(72156, 72159, 'N').
+unicode_east_asian_width(72160, 72160, 'N').
+unicode_east_asian_width(72161, 72161, 'N').
+unicode_east_asian_width(72162, 72162, 'N').
+unicode_east_asian_width(72163, 72163, 'N').
+unicode_east_asian_width(72164, 72164, 'N').
+unicode_east_asian_width(72192, 72192, 'N').
+unicode_east_asian_width(72193, 72202, 'N').
+unicode_east_asian_width(72203, 72242, 'N').
+unicode_east_asian_width(72243, 72248, 'N').
+unicode_east_asian_width(72249, 72249, 'N').
+unicode_east_asian_width(72250, 72250, 'N').
+unicode_east_asian_width(72251, 72254, 'N').
+unicode_east_asian_width(72255, 72262, 'N').
+unicode_east_asian_width(72263, 72263, 'N').
+unicode_east_asian_width(72272, 72272, 'N').
+unicode_east_asian_width(72273, 72278, 'N').
+unicode_east_asian_width(72279, 72280, 'N').
+unicode_east_asian_width(72281, 72283, 'N').
+unicode_east_asian_width(72284, 72329, 'N').
+unicode_east_asian_width(72330, 72342, 'N').
+unicode_east_asian_width(72343, 72343, 'N').
+unicode_east_asian_width(72344, 72345, 'N').
+unicode_east_asian_width(72346, 72348, 'N').
+unicode_east_asian_width(72349, 72349, 'N').
+unicode_east_asian_width(72350, 72354, 'N').
+unicode_east_asian_width(72368, 72383, 'N').
+unicode_east_asian_width(72384, 72440, 'N').
+unicode_east_asian_width(72448, 72457, 'N').
+unicode_east_asian_width(72544, 72544, 'N').
+unicode_east_asian_width(72545, 72545, 'N').
+unicode_east_asian_width(72546, 72548, 'N').
+unicode_east_asian_width(72549, 72549, 'N').
+unicode_east_asian_width(72550, 72550, 'N').
+unicode_east_asian_width(72551, 72551, 'N').
+unicode_east_asian_width(72640, 72672, 'N').
+unicode_east_asian_width(72673, 72673, 'N').
+unicode_east_asian_width(72688, 72697, 'N').
+unicode_east_asian_width(72704, 72712, 'N').
+unicode_east_asian_width(72714, 72750, 'N').
+unicode_east_asian_width(72751, 72751, 'N').
+unicode_east_asian_width(72752, 72758, 'N').
+unicode_east_asian_width(72760, 72765, 'N').
+unicode_east_asian_width(72766, 72766, 'N').
+unicode_east_asian_width(72767, 72767, 'N').
+unicode_east_asian_width(72768, 72768, 'N').
+unicode_east_asian_width(72769, 72773, 'N').
+unicode_east_asian_width(72784, 72793, 'N').
+unicode_east_asian_width(72794, 72812, 'N').
+unicode_east_asian_width(72816, 72817, 'N').
+unicode_east_asian_width(72818, 72847, 'N').
+unicode_east_asian_width(72850, 72871, 'N').
+unicode_east_asian_width(72873, 72873, 'N').
+unicode_east_asian_width(72874, 72880, 'N').
+unicode_east_asian_width(72881, 72881, 'N').
+unicode_east_asian_width(72882, 72883, 'N').
+unicode_east_asian_width(72884, 72884, 'N').
+unicode_east_asian_width(72885, 72886, 'N').
+unicode_east_asian_width(72960, 72966, 'N').
+unicode_east_asian_width(72968, 72969, 'N').
+unicode_east_asian_width(72971, 73008, 'N').
+unicode_east_asian_width(73009, 73014, 'N').
+unicode_east_asian_width(73018, 73018, 'N').
+unicode_east_asian_width(73020, 73021, 'N').
+unicode_east_asian_width(73023, 73029, 'N').
+unicode_east_asian_width(73030, 73030, 'N').
+unicode_east_asian_width(73031, 73031, 'N').
+unicode_east_asian_width(73040, 73049, 'N').
+unicode_east_asian_width(73056, 73061, 'N').
+unicode_east_asian_width(73063, 73064, 'N').
+unicode_east_asian_width(73066, 73097, 'N').
+unicode_east_asian_width(73098, 73102, 'N').
+unicode_east_asian_width(73104, 73105, 'N').
+unicode_east_asian_width(73107, 73108, 'N').
+unicode_east_asian_width(73109, 73109, 'N').
+unicode_east_asian_width(73110, 73110, 'N').
+unicode_east_asian_width(73111, 73111, 'N').
+unicode_east_asian_width(73112, 73112, 'N').
+unicode_east_asian_width(73120, 73129, 'N').
+unicode_east_asian_width(73136, 73176, 'N').
+unicode_east_asian_width(73177, 73177, 'N').
+unicode_east_asian_width(73178, 73179, 'N').
+unicode_east_asian_width(73184, 73193, 'N').
+unicode_east_asian_width(73440, 73458, 'N').
+unicode_east_asian_width(73459, 73460, 'N').
+unicode_east_asian_width(73461, 73462, 'N').
+unicode_east_asian_width(73463, 73464, 'N').
+unicode_east_asian_width(73472, 73473, 'N').
+unicode_east_asian_width(73474, 73474, 'N').
+unicode_east_asian_width(73475, 73475, 'N').
+unicode_east_asian_width(73476, 73488, 'N').
+unicode_east_asian_width(73490, 73523, 'N').
+unicode_east_asian_width(73524, 73525, 'N').
+unicode_east_asian_width(73526, 73530, 'N').
+unicode_east_asian_width(73534, 73535, 'N').
+unicode_east_asian_width(73536, 73536, 'N').
+unicode_east_asian_width(73537, 73537, 'N').
+unicode_east_asian_width(73538, 73538, 'N').
+unicode_east_asian_width(73539, 73551, 'N').
+unicode_east_asian_width(73552, 73561, 'N').
+unicode_east_asian_width(73562, 73562, 'N').
+unicode_east_asian_width(73648, 73648, 'N').
+unicode_east_asian_width(73664, 73684, 'N').
+unicode_east_asian_width(73685, 73692, 'N').
+unicode_east_asian_width(73693, 73696, 'N').
+unicode_east_asian_width(73697, 73713, 'N').
+unicode_east_asian_width(73727, 73727, 'N').
+unicode_east_asian_width(73728, 74649, 'N').
+unicode_east_asian_width(74752, 74862, 'N').
+unicode_east_asian_width(74864, 74868, 'N').
+unicode_east_asian_width(74880, 75075, 'N').
+unicode_east_asian_width(77712, 77808, 'N').
+unicode_east_asian_width(77809, 77810, 'N').
+unicode_east_asian_width(77824, 78895, 'N').
+unicode_east_asian_width(78896, 78911, 'N').
+unicode_east_asian_width(78912, 78912, 'N').
+unicode_east_asian_width(78913, 78918, 'N').
+unicode_east_asian_width(78919, 78933, 'N').
+unicode_east_asian_width(78944, 82938, 'N').
+unicode_east_asian_width(82944, 83526, 'N').
+unicode_east_asian_width(90368, 90397, 'N').
+unicode_east_asian_width(90398, 90409, 'N').
+unicode_east_asian_width(90410, 90412, 'N').
+unicode_east_asian_width(90413, 90415, 'N').
+unicode_east_asian_width(90416, 90425, 'N').
+unicode_east_asian_width(92160, 92728, 'N').
+unicode_east_asian_width(92736, 92766, 'N').
+unicode_east_asian_width(92768, 92777, 'N').
+unicode_east_asian_width(92782, 92783, 'N').
+unicode_east_asian_width(92784, 92862, 'N').
+unicode_east_asian_width(92864, 92873, 'N').
+unicode_east_asian_width(92880, 92909, 'N').
+unicode_east_asian_width(92912, 92916, 'N').
+unicode_east_asian_width(92917, 92917, 'N').
+unicode_east_asian_width(92928, 92975, 'N').
+unicode_east_asian_width(92976, 92982, 'N').
+unicode_east_asian_width(92983, 92987, 'N').
+unicode_east_asian_width(92988, 92991, 'N').
+unicode_east_asian_width(92992, 92995, 'N').
+unicode_east_asian_width(92996, 92996, 'N').
+unicode_east_asian_width(92997, 92997, 'N').
+unicode_east_asian_width(93008, 93017, 'N').
+unicode_east_asian_width(93019, 93025, 'N').
+unicode_east_asian_width(93027, 93047, 'N').
+unicode_east_asian_width(93053, 93071, 'N').
+unicode_east_asian_width(93504, 93506, 'N').
+unicode_east_asian_width(93507, 93546, 'N').
+unicode_east_asian_width(93547, 93548, 'N').
+unicode_east_asian_width(93549, 93551, 'N').
+unicode_east_asian_width(93552, 93561, 'N').
+unicode_east_asian_width(93760, 93823, 'N').
+unicode_east_asian_width(93824, 93846, 'N').
+unicode_east_asian_width(93847, 93850, 'N').
+unicode_east_asian_width(93856, 93880, 'N').
+unicode_east_asian_width(93883, 93907, 'N').
+unicode_east_asian_width(93952, 94026, 'N').
+unicode_east_asian_width(94031, 94031, 'N').
+unicode_east_asian_width(94032, 94032, 'N').
+unicode_east_asian_width(94033, 94087, 'N').
+unicode_east_asian_width(94095, 94098, 'N').
+unicode_east_asian_width(94099, 94111, 'N').
+unicode_east_asian_width(94176, 94177, 'W').
+unicode_east_asian_width(94178, 94178, 'W').
+unicode_east_asian_width(94179, 94179, 'W').
+unicode_east_asian_width(94180, 94180, 'W').
+unicode_east_asian_width(94192, 94193, 'W').
+unicode_east_asian_width(94194, 94195, 'W').
+unicode_east_asian_width(94196, 94198, 'W').
+unicode_east_asian_width(94208, 100351, 'W').
+unicode_east_asian_width(100352, 101119, 'W').
+unicode_east_asian_width(101120, 101589, 'W').
+unicode_east_asian_width(101631, 101631, 'W').
+unicode_east_asian_width(101632, 101662, 'W').
+unicode_east_asian_width(101760, 101874, 'W').
+unicode_east_asian_width(110576, 110579, 'W').
+unicode_east_asian_width(110581, 110587, 'W').
+unicode_east_asian_width(110589, 110590, 'W').
+unicode_east_asian_width(110592, 110847, 'W').
+unicode_east_asian_width(110848, 110882, 'W').
+unicode_east_asian_width(110898, 110898, 'W').
+unicode_east_asian_width(110928, 110930, 'W').
+unicode_east_asian_width(110933, 110933, 'W').
+unicode_east_asian_width(110948, 110951, 'W').
+unicode_east_asian_width(110960, 111355, 'W').
+unicode_east_asian_width(113664, 113770, 'N').
+unicode_east_asian_width(113776, 113788, 'N').
+unicode_east_asian_width(113792, 113800, 'N').
+unicode_east_asian_width(113808, 113817, 'N').
+unicode_east_asian_width(113820, 113820, 'N').
+unicode_east_asian_width(113821, 113822, 'N').
+unicode_east_asian_width(113823, 113823, 'N').
+unicode_east_asian_width(113824, 113827, 'N').
+unicode_east_asian_width(117760, 117999, 'N').
+unicode_east_asian_width(118000, 118009, 'N').
+unicode_east_asian_width(118010, 118012, 'N').
+unicode_east_asian_width(118016, 118451, 'N').
+unicode_east_asian_width(118458, 118463, 'N').
+unicode_east_asian_width(118464, 118480, 'N').
+unicode_east_asian_width(118496, 118511, 'N').
+unicode_east_asian_width(118512, 118512, 'N').
+unicode_east_asian_width(118528, 118573, 'N').
+unicode_east_asian_width(118576, 118598, 'N').
+unicode_east_asian_width(118608, 118723, 'N').
+unicode_east_asian_width(118784, 119029, 'N').
+unicode_east_asian_width(119040, 119078, 'N').
+unicode_east_asian_width(119081, 119140, 'N').
+unicode_east_asian_width(119141, 119142, 'N').
+unicode_east_asian_width(119143, 119145, 'N').
+unicode_east_asian_width(119146, 119148, 'N').
+unicode_east_asian_width(119149, 119154, 'N').
+unicode_east_asian_width(119155, 119162, 'N').
+unicode_east_asian_width(119163, 119170, 'N').
+unicode_east_asian_width(119171, 119172, 'N').
+unicode_east_asian_width(119173, 119179, 'N').
+unicode_east_asian_width(119180, 119209, 'N').
+unicode_east_asian_width(119210, 119213, 'N').
+unicode_east_asian_width(119214, 119274, 'N').
+unicode_east_asian_width(119296, 119361, 'N').
+unicode_east_asian_width(119362, 119364, 'N').
+unicode_east_asian_width(119365, 119365, 'N').
+unicode_east_asian_width(119488, 119507, 'N').
+unicode_east_asian_width(119520, 119539, 'N').
+unicode_east_asian_width(119552, 119638, 'W').
+unicode_east_asian_width(119648, 119670, 'W').
+unicode_east_asian_width(119671, 119672, 'N').
+unicode_east_asian_width(119808, 119892, 'N').
+unicode_east_asian_width(119894, 119964, 'N').
+unicode_east_asian_width(119966, 119967, 'N').
+unicode_east_asian_width(119970, 119970, 'N').
+unicode_east_asian_width(119973, 119974, 'N').
+unicode_east_asian_width(119977, 119980, 'N').
+unicode_east_asian_width(119982, 119993, 'N').
+unicode_east_asian_width(119995, 119995, 'N').
+unicode_east_asian_width(119997, 120003, 'N').
+unicode_east_asian_width(120005, 120069, 'N').
+unicode_east_asian_width(120071, 120074, 'N').
+unicode_east_asian_width(120077, 120084, 'N').
+unicode_east_asian_width(120086, 120092, 'N').
+unicode_east_asian_width(120094, 120121, 'N').
+unicode_east_asian_width(120123, 120126, 'N').
+unicode_east_asian_width(120128, 120132, 'N').
+unicode_east_asian_width(120134, 120134, 'N').
+unicode_east_asian_width(120138, 120144, 'N').
+unicode_east_asian_width(120146, 120485, 'N').
+unicode_east_asian_width(120488, 120512, 'N').
+unicode_east_asian_width(120513, 120513, 'N').
+unicode_east_asian_width(120514, 120538, 'N').
+unicode_east_asian_width(120539, 120539, 'N').
+unicode_east_asian_width(120540, 120570, 'N').
+unicode_east_asian_width(120571, 120571, 'N').
+unicode_east_asian_width(120572, 120596, 'N').
+unicode_east_asian_width(120597, 120597, 'N').
+unicode_east_asian_width(120598, 120628, 'N').
+unicode_east_asian_width(120629, 120629, 'N').
+unicode_east_asian_width(120630, 120654, 'N').
+unicode_east_asian_width(120655, 120655, 'N').
+unicode_east_asian_width(120656, 120686, 'N').
+unicode_east_asian_width(120687, 120687, 'N').
+unicode_east_asian_width(120688, 120712, 'N').
+unicode_east_asian_width(120713, 120713, 'N').
+unicode_east_asian_width(120714, 120744, 'N').
+unicode_east_asian_width(120745, 120745, 'N').
+unicode_east_asian_width(120746, 120770, 'N').
+unicode_east_asian_width(120771, 120771, 'N').
+unicode_east_asian_width(120772, 120779, 'N').
+unicode_east_asian_width(120782, 120831, 'N').
+unicode_east_asian_width(120832, 121343, 'N').
+unicode_east_asian_width(121344, 121398, 'N').
+unicode_east_asian_width(121399, 121402, 'N').
+unicode_east_asian_width(121403, 121452, 'N').
+unicode_east_asian_width(121453, 121460, 'N').
+unicode_east_asian_width(121461, 121461, 'N').
+unicode_east_asian_width(121462, 121475, 'N').
+unicode_east_asian_width(121476, 121476, 'N').
+unicode_east_asian_width(121477, 121478, 'N').
+unicode_east_asian_width(121479, 121483, 'N').
+unicode_east_asian_width(121499, 121503, 'N').
+unicode_east_asian_width(121505, 121519, 'N').
+unicode_east_asian_width(122624, 122633, 'N').
+unicode_east_asian_width(122634, 122634, 'N').
+unicode_east_asian_width(122635, 122654, 'N').
+unicode_east_asian_width(122661, 122666, 'N').
+unicode_east_asian_width(122880, 122886, 'N').
+unicode_east_asian_width(122888, 122904, 'N').
+unicode_east_asian_width(122907, 122913, 'N').
+unicode_east_asian_width(122915, 122916, 'N').
+unicode_east_asian_width(122918, 122922, 'N').
+unicode_east_asian_width(122928, 122989, 'N').
+unicode_east_asian_width(123023, 123023, 'N').
+unicode_east_asian_width(123136, 123180, 'N').
+unicode_east_asian_width(123184, 123190, 'N').
+unicode_east_asian_width(123191, 123197, 'N').
+unicode_east_asian_width(123200, 123209, 'N').
+unicode_east_asian_width(123214, 123214, 'N').
+unicode_east_asian_width(123215, 123215, 'N').
+unicode_east_asian_width(123536, 123565, 'N').
+unicode_east_asian_width(123566, 123566, 'N').
+unicode_east_asian_width(123584, 123627, 'N').
+unicode_east_asian_width(123628, 123631, 'N').
+unicode_east_asian_width(123632, 123641, 'N').
+unicode_east_asian_width(123647, 123647, 'N').
+unicode_east_asian_width(124112, 124138, 'N').
+unicode_east_asian_width(124139, 124139, 'N').
+unicode_east_asian_width(124140, 124143, 'N').
+unicode_east_asian_width(124144, 124153, 'N').
+unicode_east_asian_width(124368, 124397, 'N').
+unicode_east_asian_width(124398, 124399, 'N').
+unicode_east_asian_width(124400, 124400, 'N').
+unicode_east_asian_width(124401, 124410, 'N').
+unicode_east_asian_width(124415, 124415, 'N').
+unicode_east_asian_width(124608, 124638, 'N').
+unicode_east_asian_width(124640, 124642, 'N').
+unicode_east_asian_width(124643, 124643, 'N').
+unicode_east_asian_width(124644, 124645, 'N').
+unicode_east_asian_width(124646, 124646, 'N').
+unicode_east_asian_width(124647, 124653, 'N').
+unicode_east_asian_width(124654, 124655, 'N').
+unicode_east_asian_width(124656, 124660, 'N').
+unicode_east_asian_width(124661, 124661, 'N').
+unicode_east_asian_width(124670, 124670, 'N').
+unicode_east_asian_width(124671, 124671, 'N').
+unicode_east_asian_width(124896, 124902, 'N').
+unicode_east_asian_width(124904, 124907, 'N').
+unicode_east_asian_width(124909, 124910, 'N').
+unicode_east_asian_width(124912, 124926, 'N').
+unicode_east_asian_width(124928, 125124, 'N').
+unicode_east_asian_width(125127, 125135, 'N').
+unicode_east_asian_width(125136, 125142, 'N').
+unicode_east_asian_width(125184, 125251, 'N').
+unicode_east_asian_width(125252, 125258, 'N').
+unicode_east_asian_width(125259, 125259, 'N').
+unicode_east_asian_width(125264, 125273, 'N').
+unicode_east_asian_width(125278, 125279, 'N').
+unicode_east_asian_width(126065, 126123, 'N').
+unicode_east_asian_width(126124, 126124, 'N').
+unicode_east_asian_width(126125, 126127, 'N').
+unicode_east_asian_width(126128, 126128, 'N').
+unicode_east_asian_width(126129, 126132, 'N').
+unicode_east_asian_width(126209, 126253, 'N').
+unicode_east_asian_width(126254, 126254, 'N').
+unicode_east_asian_width(126255, 126269, 'N').
+unicode_east_asian_width(126464, 126467, 'N').
+unicode_east_asian_width(126469, 126495, 'N').
+unicode_east_asian_width(126497, 126498, 'N').
+unicode_east_asian_width(126500, 126500, 'N').
+unicode_east_asian_width(126503, 126503, 'N').
+unicode_east_asian_width(126505, 126514, 'N').
+unicode_east_asian_width(126516, 126519, 'N').
+unicode_east_asian_width(126521, 126521, 'N').
+unicode_east_asian_width(126523, 126523, 'N').
+unicode_east_asian_width(126530, 126530, 'N').
+unicode_east_asian_width(126535, 126535, 'N').
+unicode_east_asian_width(126537, 126537, 'N').
+unicode_east_asian_width(126539, 126539, 'N').
+unicode_east_asian_width(126541, 126543, 'N').
+unicode_east_asian_width(126545, 126546, 'N').
+unicode_east_asian_width(126548, 126548, 'N').
+unicode_east_asian_width(126551, 126551, 'N').
+unicode_east_asian_width(126553, 126553, 'N').
+unicode_east_asian_width(126555, 126555, 'N').
+unicode_east_asian_width(126557, 126557, 'N').
+unicode_east_asian_width(126559, 126559, 'N').
+unicode_east_asian_width(126561, 126562, 'N').
+unicode_east_asian_width(126564, 126564, 'N').
+unicode_east_asian_width(126567, 126570, 'N').
+unicode_east_asian_width(126572, 126578, 'N').
+unicode_east_asian_width(126580, 126583, 'N').
+unicode_east_asian_width(126585, 126588, 'N').
+unicode_east_asian_width(126590, 126590, 'N').
+unicode_east_asian_width(126592, 126601, 'N').
+unicode_east_asian_width(126603, 126619, 'N').
+unicode_east_asian_width(126625, 126627, 'N').
+unicode_east_asian_width(126629, 126633, 'N').
+unicode_east_asian_width(126635, 126651, 'N').
+unicode_east_asian_width(126704, 126705, 'N').
+unicode_east_asian_width(126976, 126979, 'N').
+unicode_east_asian_width(126980, 126980, 'W').
+unicode_east_asian_width(126981, 127019, 'N').
+unicode_east_asian_width(127024, 127123, 'N').
+unicode_east_asian_width(127136, 127150, 'N').
+unicode_east_asian_width(127153, 127167, 'N').
+unicode_east_asian_width(127169, 127182, 'N').
+unicode_east_asian_width(127183, 127183, 'W').
+unicode_east_asian_width(127185, 127221, 'N').
+unicode_east_asian_width(127232, 127242, 'A').
+unicode_east_asian_width(127243, 127244, 'N').
+unicode_east_asian_width(127245, 127247, 'N').
+unicode_east_asian_width(127248, 127277, 'A').
+unicode_east_asian_width(127278, 127279, 'N').
+unicode_east_asian_width(127280, 127337, 'A').
+unicode_east_asian_width(127338, 127343, 'N').
+unicode_east_asian_width(127344, 127373, 'A').
+unicode_east_asian_width(127374, 127374, 'W').
+unicode_east_asian_width(127375, 127376, 'A').
+unicode_east_asian_width(127377, 127386, 'W').
+unicode_east_asian_width(127387, 127404, 'A').
+unicode_east_asian_width(127405, 127405, 'N').
+unicode_east_asian_width(127462, 127487, 'N').
+unicode_east_asian_width(127488, 127490, 'W').
+unicode_east_asian_width(127504, 127547, 'W').
+unicode_east_asian_width(127552, 127560, 'W').
+unicode_east_asian_width(127568, 127569, 'W').
+unicode_east_asian_width(127584, 127589, 'W').
+unicode_east_asian_width(127744, 127776, 'W').
+unicode_east_asian_width(127777, 127788, 'N').
+unicode_east_asian_width(127789, 127797, 'W').
+unicode_east_asian_width(127798, 127798, 'N').
+unicode_east_asian_width(127799, 127868, 'W').
+unicode_east_asian_width(127869, 127869, 'N').
+unicode_east_asian_width(127870, 127891, 'W').
+unicode_east_asian_width(127892, 127903, 'N').
+unicode_east_asian_width(127904, 127946, 'W').
+unicode_east_asian_width(127947, 127950, 'N').
+unicode_east_asian_width(127951, 127955, 'W').
+unicode_east_asian_width(127956, 127967, 'N').
+unicode_east_asian_width(127968, 127984, 'W').
+unicode_east_asian_width(127985, 127987, 'N').
+unicode_east_asian_width(127988, 127988, 'W').
+unicode_east_asian_width(127989, 127991, 'N').
+unicode_east_asian_width(127992, 127994, 'W').
+unicode_east_asian_width(127995, 127999, 'W').
+unicode_east_asian_width(128000, 128062, 'W').
+unicode_east_asian_width(128063, 128063, 'N').
+unicode_east_asian_width(128064, 128064, 'W').
+unicode_east_asian_width(128065, 128065, 'N').
+unicode_east_asian_width(128066, 128252, 'W').
+unicode_east_asian_width(128253, 128254, 'N').
+unicode_east_asian_width(128255, 128317, 'W').
+unicode_east_asian_width(128318, 128330, 'N').
+unicode_east_asian_width(128331, 128334, 'W').
+unicode_east_asian_width(128335, 128335, 'N').
+unicode_east_asian_width(128336, 128359, 'W').
+unicode_east_asian_width(128360, 128377, 'N').
+unicode_east_asian_width(128378, 128378, 'W').
+unicode_east_asian_width(128379, 128404, 'N').
+unicode_east_asian_width(128405, 128406, 'W').
+unicode_east_asian_width(128407, 128419, 'N').
+unicode_east_asian_width(128420, 128420, 'W').
+unicode_east_asian_width(128421, 128506, 'N').
+unicode_east_asian_width(128507, 128511, 'W').
+unicode_east_asian_width(128512, 128591, 'W').
+unicode_east_asian_width(128592, 128639, 'N').
+unicode_east_asian_width(128640, 128709, 'W').
+unicode_east_asian_width(128710, 128715, 'N').
+unicode_east_asian_width(128716, 128716, 'W').
+unicode_east_asian_width(128717, 128719, 'N').
+unicode_east_asian_width(128720, 128722, 'W').
+unicode_east_asian_width(128723, 128724, 'N').
+unicode_east_asian_width(128725, 128728, 'W').
+unicode_east_asian_width(128732, 128735, 'W').
+unicode_east_asian_width(128736, 128746, 'N').
+unicode_east_asian_width(128747, 128748, 'W').
+unicode_east_asian_width(128752, 128755, 'N').
+unicode_east_asian_width(128756, 128764, 'W').
+unicode_east_asian_width(128768, 128895, 'N').
+unicode_east_asian_width(128896, 128985, 'N').
+unicode_east_asian_width(128992, 129003, 'W').
+unicode_east_asian_width(129008, 129008, 'W').
+unicode_east_asian_width(129024, 129035, 'N').
+unicode_east_asian_width(129040, 129095, 'N').
+unicode_east_asian_width(129104, 129113, 'N').
+unicode_east_asian_width(129120, 129159, 'N').
+unicode_east_asian_width(129168, 129197, 'N').
+unicode_east_asian_width(129200, 129211, 'N').
+unicode_east_asian_width(129216, 129217, 'N').
+unicode_east_asian_width(129232, 129240, 'N').
+unicode_east_asian_width(129280, 129291, 'N').
+unicode_east_asian_width(129292, 129338, 'W').
+unicode_east_asian_width(129339, 129339, 'N').
+unicode_east_asian_width(129340, 129349, 'W').
+unicode_east_asian_width(129350, 129350, 'N').
+unicode_east_asian_width(129351, 129535, 'W').
+unicode_east_asian_width(129536, 129623, 'N').
+unicode_east_asian_width(129632, 129645, 'N').
+unicode_east_asian_width(129648, 129660, 'W').
+unicode_east_asian_width(129664, 129674, 'W').
+unicode_east_asian_width(129678, 129734, 'W').
+unicode_east_asian_width(129736, 129736, 'W').
+unicode_east_asian_width(129741, 129756, 'W').
+unicode_east_asian_width(129759, 129770, 'W').
+unicode_east_asian_width(129775, 129784, 'W').
+unicode_east_asian_width(129792, 129938, 'N').
+unicode_east_asian_width(129940, 130031, 'N').
+unicode_east_asian_width(130032, 130041, 'N').
+unicode_east_asian_width(130042, 130042, 'N').
+unicode_east_asian_width(131072, 173791, 'W').
+unicode_east_asian_width(173792, 173823, 'W').
+unicode_east_asian_width(173824, 178205, 'W').
+unicode_east_asian_width(178206, 178207, 'W').
+unicode_east_asian_width(178208, 183981, 'W').
+unicode_east_asian_width(183982, 183983, 'W').
+unicode_east_asian_width(183984, 191456, 'W').
+unicode_east_asian_width(191457, 191471, 'W').
+unicode_east_asian_width(191472, 192093, 'W').
+unicode_east_asian_width(192094, 194559, 'W').
+unicode_east_asian_width(194560, 195101, 'W').
+unicode_east_asian_width(195102, 195103, 'W').
+unicode_east_asian_width(195104, 196605, 'W').
+unicode_east_asian_width(196608, 201546, 'W').
+unicode_east_asian_width(201547, 201551, 'W').
+unicode_east_asian_width(201552, 210041, 'W').
+unicode_east_asian_width(210042, 262141, 'W').
+unicode_east_asian_width(917505, 917505, 'N').
+unicode_east_asian_width(917536, 917631, 'N').
+unicode_east_asian_width(917760, 917999, 'A').
+unicode_east_asian_width(983040, 1048573, 'A').
+unicode_east_asian_width(1048576, 1114109, 'A').

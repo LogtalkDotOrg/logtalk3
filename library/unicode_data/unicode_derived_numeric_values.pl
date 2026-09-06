@@ -1,1863 +1,2045 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  This file is part of VivoMind Prolog Unicode Resources
-%  SPDX-License-Identifier: CC0-1.0
+%  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
 %
-%  VivoMind Prolog Unicode Resources is free software distributed using the
-%  Creative Commons CC0 1.0 Universal (CC0 1.0) - Public Domain Dedication
-%  license
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%  Last modified: September 30, 2012
+%      http://www.apache.org/licenses/LICENSE-2.0
 %
-%  Original Unicode file header comments follow
-
-/*
-# DerivedNumericValues-6.2.0.txt
-# Date: 2012-08-13, 19:20:22 GMT [MD]
-#
-# Unicode Character Database
-# Copyright (c) 1991-2012 Unicode, Inc.
-# For terms of use, see http://www.unicode.org/terms_of_use.html
-# For documentation, see http://www.unicode.org/reports/tr44/
-
-# ================================================
-
-# Derived Property:   Numeric_Value
-#  The values are based on field 8 of UnicodeData.txt, plus the fields
-#  kAccountingNumeric, kOtherNumeric, kPrimaryNumeric in the Unicode Han Database (Unihan).
-#  The derivations for these values are as follows.
-#     Numeric_Value = the value of kAccountingNumeric, kOtherNumeric, or kPrimaryNumeric, if they exist; otherwise
-#     Numeric_Value = the value of field 8, if it exists; otherwise
-#     Numeric_Value = NaN
-#
-# WARNING: Certain values, such as 0.16666667, are repeating fractions
-# Although they are only printed with a limited number of decimal places
-# in this file, they should be expressed to the limits of the precision
-# available when used.
-#
-# The third field is empty; it used to be a copy of the numeric type.
-#
-# A fourth field was added to this extracted data as of
-# Unicode 5.1.0, expressing the same numeric value either as
-# a whole integer where possible or as a rational fraction, e.g. "1/6".
-#
-# @missing: 0000..10FFFF; NaN; ; NaN
-*/
-
-% ================================================
-
-unicode_numerical_value(0x0F33, -0.5, -1/2).	% No       TIBETAN DIGIT HALF ZERO
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x0030, 0.0, 0).	% Nd       DIGIT ZERO
-unicode_numerical_value(0x0660, 0.0, 0).	% Nd       ARABIC-INDIC DIGIT ZERO
-unicode_numerical_value(0x06F0, 0.0, 0).	% Nd       EXTENDED ARABIC-INDIC DIGIT ZERO
-unicode_numerical_value(0x07C0, 0.0, 0).	% Nd       NKO DIGIT ZERO
-unicode_numerical_value(0x0966, 0.0, 0).	% Nd       DEVANAGARI DIGIT ZERO
-unicode_numerical_value(0x09E6, 0.0, 0).	% Nd       BENGALI DIGIT ZERO
-unicode_numerical_value(0x0A66, 0.0, 0).	% Nd       GURMUKHI DIGIT ZERO
-unicode_numerical_value(0x0AE6, 0.0, 0).	% Nd       GUJARATI DIGIT ZERO
-unicode_numerical_value(0x0B66, 0.0, 0).	% Nd       ORIYA DIGIT ZERO
-unicode_numerical_value(0x0BE6, 0.0, 0).	% Nd       TAMIL DIGIT ZERO
-unicode_numerical_value(0x0C66, 0.0, 0).	% Nd       TELUGU DIGIT ZERO
-unicode_numerical_value(0x0C78, 0.0, 0).	% No       TELUGU FRACTION DIGIT ZERO FOR ODD POWERS OF FOUR
-unicode_numerical_value(0x0CE6, 0.0, 0).	% Nd       KANNADA DIGIT ZERO
-unicode_numerical_value(0x0D66, 0.0, 0).	% Nd       MALAYALAM DIGIT ZERO
-unicode_numerical_value(0x0E50, 0.0, 0).	% Nd       THAI DIGIT ZERO
-unicode_numerical_value(0x0ED0, 0.0, 0).	% Nd       LAO DIGIT ZERO
-unicode_numerical_value(0x0F20, 0.0, 0).	% Nd       TIBETAN DIGIT ZERO
-unicode_numerical_value(0x1040, 0.0, 0).	% Nd       MYANMAR DIGIT ZERO
-unicode_numerical_value(0x1090, 0.0, 0).	% Nd       MYANMAR SHAN DIGIT ZERO
-unicode_numerical_value(0x17E0, 0.0, 0).	% Nd       KHMER DIGIT ZERO
-unicode_numerical_value(0x17F0, 0.0, 0).	% No       KHMER SYMBOL LEK ATTAK SON
-unicode_numerical_value(0x1810, 0.0, 0).	% Nd       MONGOLIAN DIGIT ZERO
-unicode_numerical_value(0x1946, 0.0, 0).	% Nd       LIMBU DIGIT ZERO
-unicode_numerical_value(0x19D0, 0.0, 0).	% Nd       NEW TAI LUE DIGIT ZERO
-unicode_numerical_value(0x1A80, 0.0, 0).	% Nd       TAI THAM HORA DIGIT ZERO
-unicode_numerical_value(0x1A90, 0.0, 0).	% Nd       TAI THAM THAM DIGIT ZERO
-unicode_numerical_value(0x1B50, 0.0, 0).	% Nd       BALINESE DIGIT ZERO
-unicode_numerical_value(0x1BB0, 0.0, 0).	% Nd       SUNDANESE DIGIT ZERO
-unicode_numerical_value(0x1C40, 0.0, 0).	% Nd       LEPCHA DIGIT ZERO
-unicode_numerical_value(0x1C50, 0.0, 0).	% Nd       OL CHIKI DIGIT ZERO
-unicode_numerical_value(0x2070, 0.0, 0).	% No       SUPERSCRIPT ZERO
-unicode_numerical_value(0x2080, 0.0, 0).	% No       SUBSCRIPT ZERO
-unicode_numerical_value(0x2189, 0.0, 0).	% No       VULGAR FRACTION ZERO THIRDS
-unicode_numerical_value(0x24EA, 0.0, 0).	% No       CIRCLED DIGIT ZERO
-unicode_numerical_value(0x24FF, 0.0, 0).	% No       NEGATIVE CIRCLED DIGIT ZERO
-unicode_numerical_value(0x3007, 0.0, 0).	% Nl       IDEOGRAPHIC NUMBER ZERO
-unicode_numerical_value(0x96F6, 0.0, 0).	% Lo       CJK UNIFIED IDEOGRAPH-96F6
-unicode_numerical_value(0xA620, 0.0, 0).	% Nd       VAI DIGIT ZERO
-unicode_numerical_value(0xA6EF, 0.0, 0).	% Nl       BAMUM LETTER KOGHOM
-unicode_numerical_value(0xA8D0, 0.0, 0).	% Nd       SAURASHTRA DIGIT ZERO
-unicode_numerical_value(0xA900, 0.0, 0).	% Nd       KAYAH LI DIGIT ZERO
-unicode_numerical_value(0xA9D0, 0.0, 0).	% Nd       JAVANESE DIGIT ZERO
-unicode_numerical_value(0xAA50, 0.0, 0).	% Nd       CHAM DIGIT ZERO
-unicode_numerical_value(0xABF0, 0.0, 0).	% Nd       MEETEI MAYEK DIGIT ZERO
-unicode_numerical_value(0xF9B2, 0.0, 0).	% Lo       CJK COMPATIBILITY IDEOGRAPH-F9B2
-unicode_numerical_value(0xFF10, 0.0, 0).	% Nd       FULLWIDTH DIGIT ZERO
-unicode_numerical_value(0x1018A, 0.0, 0).	% No       GREEK ZERO SIGN
-unicode_numerical_value(0x104A0, 0.0, 0).	% Nd       OSMANYA DIGIT ZERO
-unicode_numerical_value(0x11066, 0.0, 0).	% Nd       BRAHMI DIGIT ZERO
-unicode_numerical_value(0x110F0, 0.0, 0).	% Nd       SORA SOMPENG DIGIT ZERO
-unicode_numerical_value(0x11136, 0.0, 0).	% Nd       CHAKMA DIGIT ZERO
-unicode_numerical_value(0x111D0, 0.0, 0).	% Nd       SHARADA DIGIT ZERO
-unicode_numerical_value(0x116C0, 0.0, 0).	% Nd       TAKRI DIGIT ZERO
-unicode_numerical_value(0x1D7CE, 0.0, 0).	% Nd       MATHEMATICAL BOLD DIGIT ZERO
-unicode_numerical_value(0x1D7D8, 0.0, 0).	% Nd       MATHEMATICAL DOUBLE-STRUCK DIGIT ZERO
-unicode_numerical_value(0x1D7E2, 0.0, 0).	% Nd       MATHEMATICAL SANS-SERIF DIGIT ZERO
-unicode_numerical_value(0x1D7EC, 0.0, 0).	% Nd       MATHEMATICAL SANS-SERIF BOLD DIGIT ZERO
-unicode_numerical_value(0x1D7F6, 0.0, 0).	% Nd       MATHEMATICAL MONOSPACE DIGIT ZERO
-%0x1F100..1F101  ; 0.0, 0).	% No   [2] DIGIT ZERO FULL STOP..DIGIT ZERO COMMA
-unicode_numerical_value(0x1F100, 0.0, 0).	% No   DIGIT ZERO FULL STOP
-unicode_numerical_value(0x1F101, 0.0, 0).	% No   DIGIT ZERO COMMA
-
-% Total code points: 60
-
-% ================================================
-
-unicode_numerical_value(0x09F4, 0.0625, 1/16).	% No       BENGALI CURRENCY NUMERATOR ONE
-unicode_numerical_value(0x0B75, 0.0625, 1/16).	% No       ORIYA FRACTION ONE SIXTEENTH
-unicode_numerical_value(0xA833, 0.0625, 1/16).	% No       NORTH INDIC FRACTION ONE SIXTEENTH
-
-% Total code points: 3
-
-% ================================================
-
-unicode_numerical_value(0x2152, 0.1, 1/10).	% No       VULGAR FRACTION ONE TENTH
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x2151, 0.11111111, 1/9).	% No       VULGAR FRACTION ONE NINTH
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x09F5, 0.125, 1/8).	% No       BENGALI CURRENCY NUMERATOR TWO
-unicode_numerical_value(0x0B76, 0.125, 1/8).	% No       ORIYA FRACTION ONE EIGHTH
-unicode_numerical_value(0x215B, 0.125, 1/8).	% No       VULGAR FRACTION ONE EIGHTH
-unicode_numerical_value(0xA834, 0.125, 1/8).	% No       NORTH INDIC FRACTION ONE EIGHTH
-unicode_numerical_value(0x1245F, 0.125, 1/8).	% Nl       CUNEIFORM NUMERIC SIGN ONE EIGHTH ASH
-
-% Total code points: 5
-
-% ================================================
-
-unicode_numerical_value(0x2150, 0.14285714, 1/7).	% No       VULGAR FRACTION ONE SEVENTH
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x2159, 0.16666667, 1/6).	% No       VULGAR FRACTION ONE SIXTH
-unicode_numerical_value(0x12461, 0.16666667, 1/6).	% Nl       CUNEIFORM NUMERIC SIGN OLD ASSYRIAN ONE SIXTH
-
-% Total code points: 2
-
-% ================================================
-
-unicode_numerical_value(0x09F6, 0.1875, 3/16).	% No       BENGALI CURRENCY NUMERATOR THREE
-unicode_numerical_value(0x0B77, 0.1875, 3/16).	% No       ORIYA FRACTION THREE SIXTEENTHS
-unicode_numerical_value(0xA835, 0.1875, 3/16).	% No       NORTH INDIC FRACTION THREE SIXTEENTHS
-
-% Total code points: 3
-
-% ================================================
-
-unicode_numerical_value(0x2155, 0.2, 1/5).	% No       VULGAR FRACTION ONE FIFTH
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x00BC, 0.25, 1/4).	% No       VULGAR FRACTION ONE QUARTER
-unicode_numerical_value(0x09F7, 0.25, 1/4).	% No       BENGALI CURRENCY NUMERATOR FOUR
-unicode_numerical_value(0x0B72, 0.25, 1/4).	% No       ORIYA FRACTION ONE QUARTER
-unicode_numerical_value(0x0D73, 0.25, 1/4).	% No       MALAYALAM FRACTION ONE QUARTER
-unicode_numerical_value(0xA830, 0.25, 1/4).	% No       NORTH INDIC FRACTION ONE QUARTER
-unicode_numerical_value(0x10140, 0.25, 1/4).	% Nl       GREEK ACROPHONIC ATTIC ONE QUARTER
-unicode_numerical_value(0x10E7C, 0.25, 1/4).	% No       RUMI FRACTION ONE QUARTER
-unicode_numerical_value(0x12460, 0.25, 1/4).	% Nl       CUNEIFORM NUMERIC SIGN ONE QUARTER ASH
-unicode_numerical_value(0x12462, 0.25, 1/4).	% Nl       CUNEIFORM NUMERIC SIGN OLD ASSYRIAN ONE QUARTER
-
-% Total code points: 9
-
-% ================================================
-
-unicode_numerical_value(0x2153, 0.33333333, 1/3).	% No       VULGAR FRACTION ONE THIRD
-unicode_numerical_value(0x10E7D, 0.33333333, 1/3).	% No       RUMI FRACTION ONE THIRD
-unicode_numerical_value(0x1245A, 0.33333333, 1/3).	% Nl       CUNEIFORM NUMERIC SIGN ONE THIRD DISH
-unicode_numerical_value(0x1245D, 0.33333333, 1/3).	% Nl       CUNEIFORM NUMERIC SIGN ONE THIRD VARIANT FORM A
-
-% Total code points: 4
-
-% ================================================
-
-unicode_numerical_value(0x215C, 0.375, 3/8).	% No       VULGAR FRACTION THREE EIGHTHS
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x2156, 0.4, 2/5).	% No       VULGAR FRACTION TWO FIFTHS
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x00BD, 0.5, 1/2).	% No       VULGAR FRACTION ONE HALF
-unicode_numerical_value(0x0B73, 0.5, 1/2).	% No       ORIYA FRACTION ONE HALF
-unicode_numerical_value(0x0D74, 0.5, 1/2).	% No       MALAYALAM FRACTION ONE HALF
-unicode_numerical_value(0x0F2A, 0.5, 1/2).	% No       TIBETAN DIGIT HALF ONE
-unicode_numerical_value(0x2CFD, 0.5, 1/2).	% No       COPTIC FRACTION ONE HALF
-unicode_numerical_value(0xA831, 0.5, 1/2).	% No       NORTH INDIC FRACTION ONE HALF
-unicode_numerical_value(0x10141, 0.5, 1/2).	% Nl       GREEK ACROPHONIC ATTIC ONE HALF
-%10175..10176  ; 0.5, 1/2).	% No   [2] GREEK ONE HALF SIGN..GREEK ONE HALF SIGN ALTERNATE FORM
-unicode_numerical_value(0x10175, 0.5, 1/2).	% No       GREEK ONE HALF SIGN
-unicode_numerical_value(0x10176, 0.5, 1/2).	% No       GREEK ONE HALF SIGN ALTERNATE FORM
-unicode_numerical_value(0x10E7B, 0.5, 1/2).	% No       RUMI FRACTION ONE HALF
-
-% Total code points: 10
-
-% ================================================
-
-unicode_numerical_value(0x2157, 0.6, 3/5).	% No       VULGAR FRACTION THREE FIFTHS
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x215D, 0.625, 5/8).	% No       VULGAR FRACTION FIVE EIGHTHS
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x2154, 0.66666667, 2/3).	% No       VULGAR FRACTION TWO THIRDS
-unicode_numerical_value(0x10177, 0.66666667, 2/3).	% No       GREEK TWO THIRDS SIGN
-unicode_numerical_value(0x10E7E, 0.66666667, 2/3).	% No       RUMI FRACTION TWO THIRDS
-unicode_numerical_value(0x1245B, 0.66666667, 2/3).	% Nl       CUNEIFORM NUMERIC SIGN TWO THIRDS DISH
-unicode_numerical_value(0x1245E, 0.66666667, 2/3).	% Nl       CUNEIFORM NUMERIC SIGN TWO THIRDS VARIANT FORM A
-
-% Total code points: 5
-
-% ================================================
-
-unicode_numerical_value(0x00BE, 0.75, 3/4).	% No       VULGAR FRACTION THREE QUARTERS
-unicode_numerical_value(0x09F8, 0.75, 3/4).	% No       BENGALI CURRENCY NUMERATOR ONE LESS THAN THE DENOMINATOR
-unicode_numerical_value(0x0B74, 0.75, 3/4).	% No       ORIYA FRACTION THREE QUARTERS
-unicode_numerical_value(0x0D75, 0.75, 3/4).	% No       MALAYALAM FRACTION THREE QUARTERS
-unicode_numerical_value(0xA832, 0.75, 3/4).	% No       NORTH INDIC FRACTION THREE QUARTERS
-unicode_numerical_value(0x10178, 0.75, 3/4).	% No       GREEK THREE QUARTERS SIGN
-
-% Total code points: 6
-
-% ================================================
-
-unicode_numerical_value(0x2158, 0.8, 4/5).	% No       VULGAR FRACTION FOUR FIFTHS
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x215A, 0.83333333, 5/6).	% No       VULGAR FRACTION FIVE SIXTHS
-unicode_numerical_value(0x1245C, 0.83333333, 5/6).	% Nl       CUNEIFORM NUMERIC SIGN FIVE SIXTHS DISH
-
-% Total code points: 2
-
-% ================================================
-
-unicode_numerical_value(0x215E, 0.875, 7/8).	% No       VULGAR FRACTION SEVEN EIGHTHS
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x0031, 1.0, 1).	% Nd       DIGIT ONE
-unicode_numerical_value(0x00B9, 1.0, 1).	% No       SUPERSCRIPT ONE
-unicode_numerical_value(0x0661, 1.0, 1).	% Nd       ARABIC-INDIC DIGIT ONE
-unicode_numerical_value(0x06F1, 1.0, 1).	% Nd       EXTENDED ARABIC-INDIC DIGIT ONE
-unicode_numerical_value(0x07C1, 1.0, 1).	% Nd       NKO DIGIT ONE
-unicode_numerical_value(0x0967, 1.0, 1).	% Nd       DEVANAGARI DIGIT ONE
-unicode_numerical_value(0x09E7, 1.0, 1).	% Nd       BENGALI DIGIT ONE
-unicode_numerical_value(0x0A67, 1.0, 1).	% Nd       GURMUKHI DIGIT ONE
-unicode_numerical_value(0x0AE7, 1.0, 1).	% Nd       GUJARATI DIGIT ONE
-unicode_numerical_value(0x0B67, 1.0, 1).	% Nd       ORIYA DIGIT ONE
-unicode_numerical_value(0x0BE7, 1.0, 1).	% Nd       TAMIL DIGIT ONE
-unicode_numerical_value(0x0C67, 1.0, 1).	% Nd       TELUGU DIGIT ONE
-unicode_numerical_value(0x0C79, 1.0, 1).	% No       TELUGU FRACTION DIGIT ONE FOR ODD POWERS OF FOUR
-unicode_numerical_value(0x0C7C, 1.0, 1).	% No       TELUGU FRACTION DIGIT ONE FOR EVEN POWERS OF FOUR
-unicode_numerical_value(0x0CE7, 1.0, 1).	% Nd       KANNADA DIGIT ONE
-unicode_numerical_value(0x0D67, 1.0, 1).	% Nd       MALAYALAM DIGIT ONE
-unicode_numerical_value(0x0E51, 1.0, 1).	% Nd       THAI DIGIT ONE
-unicode_numerical_value(0x0ED1, 1.0, 1).	% Nd       LAO DIGIT ONE
-unicode_numerical_value(0x0F21, 1.0, 1).	% Nd       TIBETAN DIGIT ONE
-unicode_numerical_value(0x1041, 1.0, 1).	% Nd       MYANMAR DIGIT ONE
-unicode_numerical_value(0x1091, 1.0, 1).	% Nd       MYANMAR SHAN DIGIT ONE
-unicode_numerical_value(0x1369, 1.0, 1).	% No       ETHIOPIC DIGIT ONE
-unicode_numerical_value(0x17E1, 1.0, 1).	% Nd       KHMER DIGIT ONE
-unicode_numerical_value(0x17F1, 1.0, 1).	% No       KHMER SYMBOL LEK ATTAK MUOY
-unicode_numerical_value(0x1811, 1.0, 1).	% Nd       MONGOLIAN DIGIT ONE
-unicode_numerical_value(0x1947, 1.0, 1).	% Nd       LIMBU DIGIT ONE
-unicode_numerical_value(0x19D1, 1.0, 1).	% Nd       NEW TAI LUE DIGIT ONE
-unicode_numerical_value(0x19DA, 1.0, 1).	% No       NEW TAI LUE THAM DIGIT ONE
-unicode_numerical_value(0x1A81, 1.0, 1).	% Nd       TAI THAM HORA DIGIT ONE
-unicode_numerical_value(0x1A91, 1.0, 1).	% Nd       TAI THAM THAM DIGIT ONE
-unicode_numerical_value(0x1B51, 1.0, 1).	% Nd       BALINESE DIGIT ONE
-unicode_numerical_value(0x1BB1, 1.0, 1).	% Nd       SUNDANESE DIGIT ONE
-unicode_numerical_value(0x1C41, 1.0, 1).	% Nd       LEPCHA DIGIT ONE
-unicode_numerical_value(0x1C51, 1.0, 1).	% Nd       OL CHIKI DIGIT ONE
-unicode_numerical_value(0x2081, 1.0, 1).	% No       SUBSCRIPT ONE
-unicode_numerical_value(0x215F, 1.0, 1).	% No       FRACTION NUMERATOR ONE
-unicode_numerical_value(0x2160, 1.0, 1).	% Nl       ROMAN NUMERAL ONE
-unicode_numerical_value(0x2170, 1.0, 1).	% Nl       SMALL ROMAN NUMERAL ONE
-unicode_numerical_value(0x2460, 1.0, 1).	% No       CIRCLED DIGIT ONE
-unicode_numerical_value(0x2474, 1.0, 1).	% No       PARENTHESIZED DIGIT ONE
-unicode_numerical_value(0x2488, 1.0, 1).	% No       DIGIT ONE FULL STOP
-unicode_numerical_value(0x24F5, 1.0, 1).	% No       DOUBLE CIRCLED DIGIT ONE
-unicode_numerical_value(0x2776, 1.0, 1).	% No       DINGBAT NEGATIVE CIRCLED DIGIT ONE
-unicode_numerical_value(0x2780, 1.0, 1).	% No       DINGBAT CIRCLED SANS-SERIF DIGIT ONE
-unicode_numerical_value(0x278A, 1.0, 1).	% No       DINGBAT NEGATIVE CIRCLED SANS-SERIF DIGIT ONE
-unicode_numerical_value(0x3021, 1.0, 1).	% Nl       HANGZHOU NUMERAL ONE
-unicode_numerical_value(0x3192, 1.0, 1).	% No       IDEOGRAPHIC ANNOTATION ONE MARK
-unicode_numerical_value(0x3220, 1.0, 1).	% No       PARENTHESIZED IDEOGRAPH ONE
-unicode_numerical_value(0x3280, 1.0, 1).	% No       CIRCLED IDEOGRAPH ONE
-unicode_numerical_value(0x4E00, 1.0, 1).	% Lo       CJK UNIFIED IDEOGRAPH-4E00
-unicode_numerical_value(0x58F1, 1.0, 1).	% Lo       CJK UNIFIED IDEOGRAPH-58F1
-unicode_numerical_value(0x58F9, 1.0, 1).	% Lo       CJK UNIFIED IDEOGRAPH-58F9
-unicode_numerical_value(0x5E7A, 1.0, 1).	% Lo       CJK UNIFIED IDEOGRAPH-5E7A
-unicode_numerical_value(0x5F0C, 1.0, 1).	% Lo       CJK UNIFIED IDEOGRAPH-5F0C
-unicode_numerical_value(0xA621, 1.0, 1).	% Nd       VAI DIGIT ONE
-unicode_numerical_value(0xA6E6, 1.0, 1).	% Nl       BAMUM LETTER MO
-unicode_numerical_value(0xA8D1, 1.0, 1).	% Nd       SAURASHTRA DIGIT ONE
-unicode_numerical_value(0xA901, 1.0, 1).	% Nd       KAYAH LI DIGIT ONE
-unicode_numerical_value(0xA9D1, 1.0, 1).	% Nd       JAVANESE DIGIT ONE
-unicode_numerical_value(0xAA51, 1.0, 1).	% Nd       CHAM DIGIT ONE
-unicode_numerical_value(0xABF1, 1.0, 1).	% Nd       MEETEI MAYEK DIGIT ONE
-unicode_numerical_value(0xFF11, 1.0, 1).	% Nd       FULLWIDTH DIGIT ONE
-unicode_numerical_value(0x10107, 1.0, 1).	% No       AEGEAN NUMBER ONE
-unicode_numerical_value(0x10142, 1.0, 1).	% Nl       GREEK ACROPHONIC ATTIC ONE DRACHMA
-%10158..1015A  ; 1.0, 1).	% Nl   [3] GREEK ACROPHONIC HERAEUM ONE PLETHRON..GREEK ACROPHONIC HERMIONIAN ONE
-unicode_numerical_value(0x10158, 1.0, 1).	% Nl       GREEK ACROPHONIC HERAEUM ONE PLETHRON
-unicode_numerical_value(0x10159, 1.0, 1).	% Nl       GREEK ACROPHONIC THESPIAN ONE
-unicode_numerical_value(0x1015A, 1.0, 1).	% Nl       GREEK ACROPHONIC HERMIONIAN ONE
-unicode_numerical_value(0x10320, 1.0, 1).	% No       OLD ITALIC NUMERAL ONE
-unicode_numerical_value(0x103D1, 1.0, 1).	% Nl       OLD PERSIAN NUMBER ONE
-unicode_numerical_value(0x104A1, 1.0, 1).	% Nd       OSMANYA DIGIT ONE
-unicode_numerical_value(0x10858, 1.0, 1).	% No       IMPERIAL ARAMAIC NUMBER ONE
-unicode_numerical_value(0x10916, 1.0, 1).	% No       PHOENICIAN NUMBER ONE
-unicode_numerical_value(0x10A40, 1.0, 1).	% No       KHAROSHTHI DIGIT ONE
-unicode_numerical_value(0x10A7D, 1.0, 1).	% No       OLD SOUTH ARABIAN NUMBER ONE
-unicode_numerical_value(0x10B58, 1.0, 1).	% No       INSCRIPTIONAL PARTHIAN NUMBER ONE
-unicode_numerical_value(0x10B78, 1.0, 1).	% No       INSCRIPTIONAL PAHLAVI NUMBER ONE
-unicode_numerical_value(0x10E60, 1.0, 1).	% No       RUMI DIGIT ONE
-unicode_numerical_value(0x11052, 1.0, 1).	% No       BRAHMI NUMBER ONE
-unicode_numerical_value(0x11067, 1.0, 1).	% Nd       BRAHMI DIGIT ONE
-unicode_numerical_value(0x110F1, 1.0, 1).	% Nd       SORA SOMPENG DIGIT ONE
-unicode_numerical_value(0x11137, 1.0, 1).	% Nd       CHAKMA DIGIT ONE
-unicode_numerical_value(0x111D1, 1.0, 1).	% Nd       SHARADA DIGIT ONE
-unicode_numerical_value(0x116C1, 1.0, 1).	% Nd       TAKRI DIGIT ONE
-unicode_numerical_value(0x12415, 1.0, 1).	% Nl       CUNEIFORM NUMERIC SIGN ONE GESH2
-unicode_numerical_value(0x1241E, 1.0, 1).	% Nl       CUNEIFORM NUMERIC SIGN ONE GESHU
-unicode_numerical_value(0x1242C, 1.0, 1).	% Nl       CUNEIFORM NUMERIC SIGN ONE SHARU
-unicode_numerical_value(0x12434, 1.0, 1).	% Nl       CUNEIFORM NUMERIC SIGN ONE BURU
-unicode_numerical_value(0x1244F, 1.0, 1).	% Nl       CUNEIFORM NUMERIC SIGN ONE BAN2
-unicode_numerical_value(0x12458, 1.0, 1).	% Nl       CUNEIFORM NUMERIC SIGN ONE ESHE3
-unicode_numerical_value(0x1D360, 1.0, 1).	% No       COUNTING ROD UNIT DIGIT ONE
-unicode_numerical_value(0x1D7CF, 1.0, 1).	% Nd       MATHEMATICAL BOLD DIGIT ONE
-unicode_numerical_value(0x1D7D9, 1.0, 1).	% Nd       MATHEMATICAL DOUBLE-STRUCK DIGIT ONE
-unicode_numerical_value(0x1D7E3, 1.0, 1).	% Nd       MATHEMATICAL SANS-SERIF DIGIT ONE
-unicode_numerical_value(0x1D7ED, 1.0, 1).	% Nd       MATHEMATICAL SANS-SERIF BOLD DIGIT ONE
-unicode_numerical_value(0x1D7F7, 1.0, 1).	% Nd       MATHEMATICAL MONOSPACE DIGIT ONE
-unicode_numerical_value(0x1F102, 1.0, 1).	% No       DIGIT ONE COMMA
-unicode_numerical_value(0x2092A, 1.0, 1).	% Lo       CJK UNIFIED IDEOGRAPH-2092A
-
-% Total code points: 97
-
-% ================================================
-
-unicode_numerical_value(0x0F2B, 1.5, 3/2).	% No       TIBETAN DIGIT HALF TWO
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x0032, 2.0, 2).	% Nd       DIGIT TWO
-unicode_numerical_value(0x00B2, 2.0, 2).	% No       SUPERSCRIPT TWO
-unicode_numerical_value(0x0662, 2.0, 2).	% Nd       ARABIC-INDIC DIGIT TWO
-unicode_numerical_value(0x06F2, 2.0, 2).	% Nd       EXTENDED ARABIC-INDIC DIGIT TWO
-unicode_numerical_value(0x07C2, 2.0, 2).	% Nd       NKO DIGIT TWO
-unicode_numerical_value(0x0968, 2.0, 2).	% Nd       DEVANAGARI DIGIT TWO
-unicode_numerical_value(0x09E8, 2.0, 2).	% Nd       BENGALI DIGIT TWO
-unicode_numerical_value(0x0A68, 2.0, 2).	% Nd       GURMUKHI DIGIT TWO
-unicode_numerical_value(0x0AE8, 2.0, 2).	% Nd       GUJARATI DIGIT TWO
-unicode_numerical_value(0x0B68, 2.0, 2).	% Nd       ORIYA DIGIT TWO
-unicode_numerical_value(0x0BE8, 2.0, 2).	% Nd       TAMIL DIGIT TWO
-unicode_numerical_value(0x0C68, 2.0, 2).	% Nd       TELUGU DIGIT TWO
-unicode_numerical_value(0x0C7A, 2.0, 2).	% No       TELUGU FRACTION DIGIT TWO FOR ODD POWERS OF FOUR
-unicode_numerical_value(0x0C7D, 2.0, 2).	% No       TELUGU FRACTION DIGIT TWO FOR EVEN POWERS OF FOUR
-unicode_numerical_value(0x0CE8, 2.0, 2).	% Nd       KANNADA DIGIT TWO
-unicode_numerical_value(0x0D68, 2.0, 2).	% Nd       MALAYALAM DIGIT TWO
-unicode_numerical_value(0x0E52, 2.0, 2).	% Nd       THAI DIGIT TWO
-unicode_numerical_value(0x0ED2, 2.0, 2).	% Nd       LAO DIGIT TWO
-unicode_numerical_value(0x0F22, 2.0, 2).	% Nd       TIBETAN DIGIT TWO
-unicode_numerical_value(0x1042, 2.0, 2).	% Nd       MYANMAR DIGIT TWO
-unicode_numerical_value(0x1092, 2.0, 2).	% Nd       MYANMAR SHAN DIGIT TWO
-unicode_numerical_value(0x136A, 2.0, 2).	% No       ETHIOPIC DIGIT TWO
-unicode_numerical_value(0x17E2, 2.0, 2).	% Nd       KHMER DIGIT TWO
-unicode_numerical_value(0x17F2, 2.0, 2).	% No       KHMER SYMBOL LEK ATTAK PII
-unicode_numerical_value(0x1812, 2.0, 2).	% Nd       MONGOLIAN DIGIT TWO
-unicode_numerical_value(0x1948, 2.0, 2).	% Nd       LIMBU DIGIT TWO
-unicode_numerical_value(0x19D2, 2.0, 2).	% Nd       NEW TAI LUE DIGIT TWO
-unicode_numerical_value(0x1A82, 2.0, 2).	% Nd       TAI THAM HORA DIGIT TWO
-unicode_numerical_value(0x1A92, 2.0, 2).	% Nd       TAI THAM THAM DIGIT TWO
-unicode_numerical_value(0x1B52, 2.0, 2).	% Nd       BALINESE DIGIT TWO
-unicode_numerical_value(0x1BB2, 2.0, 2).	% Nd       SUNDANESE DIGIT TWO
-unicode_numerical_value(0x1C42, 2.0, 2).	% Nd       LEPCHA DIGIT TWO
-unicode_numerical_value(0x1C52, 2.0, 2).	% Nd       OL CHIKI DIGIT TWO
-unicode_numerical_value(0x2082, 2.0, 2).	% No       SUBSCRIPT TWO
-unicode_numerical_value(0x2161, 2.0, 2).	% Nl       ROMAN NUMERAL TWO
-unicode_numerical_value(0x2171, 2.0, 2).	% Nl       SMALL ROMAN NUMERAL TWO
-unicode_numerical_value(0x2461, 2.0, 2).	% No       CIRCLED DIGIT TWO
-unicode_numerical_value(0x2475, 2.0, 2).	% No       PARENTHESIZED DIGIT TWO
-unicode_numerical_value(0x2489, 2.0, 2).	% No       DIGIT TWO FULL STOP
-unicode_numerical_value(0x24F6, 2.0, 2).	% No       DOUBLE CIRCLED DIGIT TWO
-unicode_numerical_value(0x2777, 2.0, 2).	% No       DINGBAT NEGATIVE CIRCLED DIGIT TWO
-unicode_numerical_value(0x2781, 2.0, 2).	% No       DINGBAT CIRCLED SANS-SERIF DIGIT TWO
-unicode_numerical_value(0x278B, 2.0, 2).	% No       DINGBAT NEGATIVE CIRCLED SANS-SERIF DIGIT TWO
-unicode_numerical_value(0x3022, 2.0, 2).	% Nl       HANGZHOU NUMERAL TWO
-unicode_numerical_value(0x3193, 2.0, 2).	% No       IDEOGRAPHIC ANNOTATION TWO MARK
-unicode_numerical_value(0x3221, 2.0, 2).	% No       PARENTHESIZED IDEOGRAPH TWO
-unicode_numerical_value(0x3281, 2.0, 2).	% No       CIRCLED IDEOGRAPH TWO
-unicode_numerical_value(0x3483, 2.0, 2).	% Lo       CJK UNIFIED IDEOGRAPH-3483
-unicode_numerical_value(0x4E8C, 2.0, 2).	% Lo       CJK UNIFIED IDEOGRAPH-4E8C
-unicode_numerical_value(0x5169, 2.0, 2).	% Lo       CJK UNIFIED IDEOGRAPH-5169
-unicode_numerical_value(0x5F0D, 2.0, 2).	% Lo       CJK UNIFIED IDEOGRAPH-5F0D
-unicode_numerical_value(0x5F10, 2.0, 2).	% Lo       CJK UNIFIED IDEOGRAPH-5F10
-unicode_numerical_value(0x8CAE, 2.0, 2).	% Lo       CJK UNIFIED IDEOGRAPH-8CAE
-unicode_numerical_value(0x8CB3, 2.0, 2).	% Lo       CJK UNIFIED IDEOGRAPH-8CB3
-unicode_numerical_value(0x8D30, 2.0, 2).	% Lo       CJK UNIFIED IDEOGRAPH-8D30
-unicode_numerical_value(0xA622, 2.0, 2).	% Nd       VAI DIGIT TWO
-unicode_numerical_value(0xA6E7, 2.0, 2).	% Nl       BAMUM LETTER MBAA
-unicode_numerical_value(0xA8D2, 2.0, 2).	% Nd       SAURASHTRA DIGIT TWO
-unicode_numerical_value(0xA902, 2.0, 2).	% Nd       KAYAH LI DIGIT TWO
-unicode_numerical_value(0xA9D2, 2.0, 2).	% Nd       JAVANESE DIGIT TWO
-unicode_numerical_value(0xAA52, 2.0, 2).	% Nd       CHAM DIGIT TWO
-unicode_numerical_value(0xABF2, 2.0, 2).	% Nd       MEETEI MAYEK DIGIT TWO
-unicode_numerical_value(0xF978, 2.0, 2).	% Lo       CJK COMPATIBILITY IDEOGRAPH-F978
-unicode_numerical_value(0xFF12, 2.0, 2).	% Nd       FULLWIDTH DIGIT TWO
-unicode_numerical_value(0x10108, 2.0, 2).	% No       AEGEAN NUMBER TWO
-%1015B..1015E  ; 2.0, 2).	% Nl   [4] GREEK ACROPHONIC EPIDAUREAN TWO..GREEK ACROPHONIC EPIDAUREAN TWO DRACHMAS
-unicode_numerical_value(0x1015B, 2.0, 2).	% Nl       GREEK ACROPHONIC EPIDAUREAN TWO
-unicode_numerical_value(0x1015C, 2.0, 2).	% Nl       GREEK ACROPHONIC THESPIAN TWO
-unicode_numerical_value(0x1015D, 2.0, 2).	% Nl       GREEK ACROPHONIC CYRENAIC TWO DRACHMAS
-unicode_numerical_value(0x1015E, 2.0, 2).	% Nl       GREEK ACROPHONIC EPIDAUREAN TWO DRACHMAS
-unicode_numerical_value(0x103D2, 2.0, 2).	% Nl       OLD PERSIAN NUMBER TWO
-unicode_numerical_value(0x104A2, 2.0, 2).	% Nd       OSMANYA DIGIT TWO
-unicode_numerical_value(0x10859, 2.0, 2).	% No       IMPERIAL ARAMAIC NUMBER TWO
-unicode_numerical_value(0x1091A, 2.0, 2).	% No       PHOENICIAN NUMBER TWO
-unicode_numerical_value(0x10A41, 2.0, 2).	% No       KHAROSHTHI DIGIT TWO
-unicode_numerical_value(0x10B59, 2.0, 2).	% No       INSCRIPTIONAL PARTHIAN NUMBER TWO
-unicode_numerical_value(0x10B79, 2.0, 2).	% No       INSCRIPTIONAL PAHLAVI NUMBER TWO
-unicode_numerical_value(0x10E61, 2.0, 2).	% No       RUMI DIGIT TWO
-unicode_numerical_value(0x11053, 2.0, 2).	% No       BRAHMI NUMBER TWO
-unicode_numerical_value(0x11068, 2.0, 2).	% Nd       BRAHMI DIGIT TWO
-unicode_numerical_value(0x110F2, 2.0, 2).	% Nd       SORA SOMPENG DIGIT TWO
-unicode_numerical_value(0x11138, 2.0, 2).	% Nd       CHAKMA DIGIT TWO
-unicode_numerical_value(0x111D2, 2.0, 2).	% Nd       SHARADA DIGIT TWO
-unicode_numerical_value(0x116C2, 2.0, 2).	% Nd       TAKRI DIGIT TWO
-unicode_numerical_value(0x12400, 2.0, 2).	% Nl       CUNEIFORM NUMERIC SIGN TWO ASH
-unicode_numerical_value(0x12416, 2.0, 2).	% Nl       CUNEIFORM NUMERIC SIGN TWO GESH2
-unicode_numerical_value(0x1241F, 2.0, 2).	% Nl       CUNEIFORM NUMERIC SIGN TWO GESHU
-unicode_numerical_value(0x12423, 2.0, 2).	% Nl       CUNEIFORM NUMERIC SIGN TWO SHAR2
-unicode_numerical_value(0x1242D, 2.0, 2).	% Nl       CUNEIFORM NUMERIC SIGN TWO SHARU
-unicode_numerical_value(0x12435, 2.0, 2).	% Nl       CUNEIFORM NUMERIC SIGN TWO BURU
-unicode_numerical_value(0x1244A, 2.0, 2).	% Nl       CUNEIFORM NUMERIC SIGN TWO ASH TENU
-unicode_numerical_value(0x12450, 2.0, 2).	% Nl       CUNEIFORM NUMERIC SIGN TWO BAN2
-unicode_numerical_value(0x12459, 2.0, 2).	% Nl       CUNEIFORM NUMERIC SIGN TWO ESHE3
-unicode_numerical_value(0x1D361, 2.0, 2).	% No       COUNTING ROD UNIT DIGIT TWO
-unicode_numerical_value(0x1D7D0, 2.0, 2).	% Nd       MATHEMATICAL BOLD DIGIT TWO
-unicode_numerical_value(0x1D7DA, 2.0, 2).	% Nd       MATHEMATICAL DOUBLE-STRUCK DIGIT TWO
-unicode_numerical_value(0x1D7E4, 2.0, 2).	% Nd       MATHEMATICAL SANS-SERIF DIGIT TWO
-unicode_numerical_value(0x1D7EE, 2.0, 2).	% Nd       MATHEMATICAL SANS-SERIF BOLD DIGIT TWO
-unicode_numerical_value(0x1D7F8, 2.0, 2).	% Nd       MATHEMATICAL MONOSPACE DIGIT TWO
-unicode_numerical_value(0x1F103, 2.0, 2).	% No       DIGIT TWO COMMA
-unicode_numerical_value(0x22390, 2.0, 2).	% Lo       CJK UNIFIED IDEOGRAPH-22390
-
-% Total code points: 100
-
-% ================================================
-
-unicode_numerical_value(0x0F2C, 2.5, 5/2).	% No       TIBETAN DIGIT HALF THREE
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x0033, 3.0, 3).	% Nd       DIGIT THREE
-unicode_numerical_value(0x00B3, 3.0, 3).	% No       SUPERSCRIPT THREE
-unicode_numerical_value(0x0663, 3.0, 3).	% Nd       ARABIC-INDIC DIGIT THREE
-unicode_numerical_value(0x06F3, 3.0, 3).	% Nd       EXTENDED ARABIC-INDIC DIGIT THREE
-unicode_numerical_value(0x07C3, 3.0, 3).	% Nd       NKO DIGIT THREE
-unicode_numerical_value(0x0969, 3.0, 3).	% Nd       DEVANAGARI DIGIT THREE
-unicode_numerical_value(0x09E9, 3.0, 3).	% Nd       BENGALI DIGIT THREE
-unicode_numerical_value(0x0A69, 3.0, 3).	% Nd       GURMUKHI DIGIT THREE
-unicode_numerical_value(0x0AE9, 3.0, 3).	% Nd       GUJARATI DIGIT THREE
-unicode_numerical_value(0x0B69, 3.0, 3).	% Nd       ORIYA DIGIT THREE
-unicode_numerical_value(0x0BE9, 3.0, 3).	% Nd       TAMIL DIGIT THREE
-unicode_numerical_value(0x0C69, 3.0, 3).	% Nd       TELUGU DIGIT THREE
-unicode_numerical_value(0x0C7B, 3.0, 3).	% No       TELUGU FRACTION DIGIT THREE FOR ODD POWERS OF FOUR
-unicode_numerical_value(0x0C7E, 3.0, 3).	% No       TELUGU FRACTION DIGIT THREE FOR EVEN POWERS OF FOUR
-unicode_numerical_value(0x0CE9, 3.0, 3).	% Nd       KANNADA DIGIT THREE
-unicode_numerical_value(0x0D69, 3.0, 3).	% Nd       MALAYALAM DIGIT THREE
-unicode_numerical_value(0x0E53, 3.0, 3).	% Nd       THAI DIGIT THREE
-unicode_numerical_value(0x0ED3, 3.0, 3).	% Nd       LAO DIGIT THREE
-unicode_numerical_value(0x0F23, 3.0, 3).	% Nd       TIBETAN DIGIT THREE
-unicode_numerical_value(0x1043, 3.0, 3).	% Nd       MYANMAR DIGIT THREE
-unicode_numerical_value(0x1093, 3.0, 3).	% Nd       MYANMAR SHAN DIGIT THREE
-unicode_numerical_value(0x136B, 3.0, 3).	% No       ETHIOPIC DIGIT THREE
-unicode_numerical_value(0x17E3, 3.0, 3).	% Nd       KHMER DIGIT THREE
-unicode_numerical_value(0x17F3, 3.0, 3).	% No       KHMER SYMBOL LEK ATTAK BEI
-unicode_numerical_value(0x1813, 3.0, 3).	% Nd       MONGOLIAN DIGIT THREE
-unicode_numerical_value(0x1949, 3.0, 3).	% Nd       LIMBU DIGIT THREE
-unicode_numerical_value(0x19D3, 3.0, 3).	% Nd       NEW TAI LUE DIGIT THREE
-unicode_numerical_value(0x1A83, 3.0, 3).	% Nd       TAI THAM HORA DIGIT THREE
-unicode_numerical_value(0x1A93, 3.0, 3).	% Nd       TAI THAM THAM DIGIT THREE
-unicode_numerical_value(0x1B53, 3.0, 3).	% Nd       BALINESE DIGIT THREE
-unicode_numerical_value(0x1BB3, 3.0, 3).	% Nd       SUNDANESE DIGIT THREE
-unicode_numerical_value(0x1C43, 3.0, 3).	% Nd       LEPCHA DIGIT THREE
-unicode_numerical_value(0x1C53, 3.0, 3).	% Nd       OL CHIKI DIGIT THREE
-unicode_numerical_value(0x2083, 3.0, 3).	% No       SUBSCRIPT THREE
-unicode_numerical_value(0x2162, 3.0, 3).	% Nl       ROMAN NUMERAL THREE
-unicode_numerical_value(0x2172, 3.0, 3).	% Nl       SMALL ROMAN NUMERAL THREE
-unicode_numerical_value(0x2462, 3.0, 3).	% No       CIRCLED DIGIT THREE
-unicode_numerical_value(0x2476, 3.0, 3).	% No       PARENTHESIZED DIGIT THREE
-unicode_numerical_value(0x248A, 3.0, 3).	% No       DIGIT THREE FULL STOP
-unicode_numerical_value(0x24F7, 3.0, 3).	% No       DOUBLE CIRCLED DIGIT THREE
-unicode_numerical_value(0x2778, 3.0, 3).	% No       DINGBAT NEGATIVE CIRCLED DIGIT THREE
-unicode_numerical_value(0x2782, 3.0, 3).	% No       DINGBAT CIRCLED SANS-SERIF DIGIT THREE
-unicode_numerical_value(0x278C, 3.0, 3).	% No       DINGBAT NEGATIVE CIRCLED SANS-SERIF DIGIT THREE
-unicode_numerical_value(0x3023, 3.0, 3).	% Nl       HANGZHOU NUMERAL THREE
-unicode_numerical_value(0x3194, 3.0, 3).	% No       IDEOGRAPHIC ANNOTATION THREE MARK
-unicode_numerical_value(0x3222, 3.0, 3).	% No       PARENTHESIZED IDEOGRAPH THREE
-unicode_numerical_value(0x3282, 3.0, 3).	% No       CIRCLED IDEOGRAPH THREE
-unicode_numerical_value(0x4E09, 3.0, 3).	% Lo       CJK UNIFIED IDEOGRAPH-4E09
-unicode_numerical_value(0x4EE8, 3.0, 3).	% Lo       CJK UNIFIED IDEOGRAPH-4EE8
-%53C1..53C4    ; 3.0, 3).	% Lo   [4] CJK UNIFIED IDEOGRAPH-53C1..CJK UNIFIED IDEOGRAPH-53C4
-unicode_numerical_value(0x53C1, 3.0, 3).	% Lo       CJK UNIFIED IDEOGRAPH-53C1
-unicode_numerical_value(0x53C2, 3.0, 3).	% Lo       CJK UNIFIED IDEOGRAPH-53C2
-unicode_numerical_value(0x53C3, 3.0, 3).	% Lo       CJK UNIFIED IDEOGRAPH-53C3
-unicode_numerical_value(0x53C4, 3.0, 3).	% Lo       CJK UNIFIED IDEOGRAPH-53C4
-unicode_numerical_value(0x5F0E, 3.0, 3).	% Lo       CJK UNIFIED IDEOGRAPH-5F0E
-unicode_numerical_value(0xA623, 3.0, 3).	% Nd       VAI DIGIT THREE
-unicode_numerical_value(0xA6E8, 3.0, 3).	% Nl       BAMUM LETTER TET
-unicode_numerical_value(0xA8D3, 3.0, 3).	% Nd       SAURASHTRA DIGIT THREE
-unicode_numerical_value(0xA903, 3.0, 3).	% Nd       KAYAH LI DIGIT THREE
-unicode_numerical_value(0xA9D3, 3.0, 3).	% Nd       JAVANESE DIGIT THREE
-unicode_numerical_value(0xAA53, 3.0, 3).	% Nd       CHAM DIGIT THREE
-unicode_numerical_value(0xABF3, 3.0, 3).	% Nd       MEETEI MAYEK DIGIT THREE
-unicode_numerical_value(0xF96B, 3.0, 3).	% Lo       CJK COMPATIBILITY IDEOGRAPH-F96B
-unicode_numerical_value(0xFF13, 3.0, 3).	% Nd       FULLWIDTH DIGIT THREE
-unicode_numerical_value(0x10109, 3.0, 3).	% No       AEGEAN NUMBER THREE
-unicode_numerical_value(0x104A3, 3.0, 3).	% Nd       OSMANYA DIGIT THREE
-unicode_numerical_value(0x1085A, 3.0, 3).	% No       IMPERIAL ARAMAIC NUMBER THREE
-unicode_numerical_value(0x1091B, 3.0, 3).	% No       PHOENICIAN NUMBER THREE
-unicode_numerical_value(0x10A42, 3.0, 3).	% No       KHAROSHTHI DIGIT THREE
-unicode_numerical_value(0x10B5A, 3.0, 3).	% No       INSCRIPTIONAL PARTHIAN NUMBER THREE
-unicode_numerical_value(0x10B7A, 3.0, 3).	% No       INSCRIPTIONAL PAHLAVI NUMBER THREE
-unicode_numerical_value(0x10E62, 3.0, 3).	% No       RUMI DIGIT THREE
-unicode_numerical_value(0x11054, 3.0, 3).	% No       BRAHMI NUMBER THREE
-unicode_numerical_value(0x11069, 3.0, 3).	% Nd       BRAHMI DIGIT THREE
-unicode_numerical_value(0x110F3, 3.0, 3).	% Nd       SORA SOMPENG DIGIT THREE
-unicode_numerical_value(0x11139, 3.0, 3).	% Nd       CHAKMA DIGIT THREE
-unicode_numerical_value(0x111D3, 3.0, 3).	% Nd       SHARADA DIGIT THREE
-unicode_numerical_value(0x116C3, 3.0, 3).	% Nd       TAKRI DIGIT THREE
-unicode_numerical_value(0x12401, 3.0, 3).	% Nl       CUNEIFORM NUMERIC SIGN THREE ASH
-unicode_numerical_value(0x12408, 3.0, 3).	% Nl       CUNEIFORM NUMERIC SIGN THREE DISH
-unicode_numerical_value(0x12417, 3.0, 3).	% Nl       CUNEIFORM NUMERIC SIGN THREE GESH2
-unicode_numerical_value(0x12420, 3.0, 3).	% Nl       CUNEIFORM NUMERIC SIGN THREE GESHU
-%12424..12425  ; 3.0, 3).	% Nl   [2] CUNEIFORM NUMERIC SIGN THREE SHAR2..CUNEIFORM NUMERIC SIGN THREE SHAR2 VARIANT FORM
-unicode_numerical_value(0x12424, 3.0, 3).	% Nl       CUNEIFORM NUMERIC SIGN THREE SHAR2
-unicode_numerical_value(0x12425, 3.0, 3).	% Nl       CUNEIFORM NUMERIC SIGN THREE SHAR2 VARIANT FORM
-%1242E..1242F  ; 3.0, 3).	% Nl   [2] CUNEIFORM NUMERIC SIGN THREE SHARU..CUNEIFORM NUMERIC SIGN THREE SHARU VARIANT FORM
-unicode_numerical_value(0x1242E, 3.0, 3).	% Nl       CUNEIFORM NUMERIC SIGN THREE SHARU
-unicode_numerical_value(0x1242F, 3.0, 3).	% Nl       CUNEIFORM NUMERIC SIGN THREE SHARU VARIANT FORM
-%12436..12437  ; 3.0, 3).	% Nl   [2] CUNEIFORM NUMERIC SIGN THREE BURU..CUNEIFORM NUMERIC SIGN THREE BURU VARIANT FORM
-unicode_numerical_value(0x12436, 3.0, 3).	% Nl       CUNEIFORM NUMERIC SIGN THREE BURU
-unicode_numerical_value(0x12437, 3.0, 3).	% Nl       CUNEIFORM NUMERIC SIGN THREE BURU VARIANT FORM
-%1243A..1243B  ; 3.0, 3).	% Nl   [2] CUNEIFORM NUMERIC SIGN THREE VARIANT FORM ESH16..CUNEIFORM NUMERIC SIGN THREE VARIANT FORM ESH21
-unicode_numerical_value(0x1243A, 3.0, 3).	% Nl       CUNEIFORM NUMERIC SIGN THREE VARIANT FORM ESH16
-unicode_numerical_value(0x1243B, 3.0, 3).	% Nl       CUNEIFORM NUMERIC SIGN THREE VARIANT FORM ESH21
-unicode_numerical_value(0x1244B, 3.0, 3).	% Nl       CUNEIFORM NUMERIC SIGN THREE ASH TENU
-unicode_numerical_value(0x12451, 3.0, 3).	% Nl       CUNEIFORM NUMERIC SIGN THREE BAN2
-unicode_numerical_value(0x1D362, 3.0, 3).	% No       COUNTING ROD UNIT DIGIT THREE
-unicode_numerical_value(0x1D7D1, 3.0, 3).	% Nd       MATHEMATICAL BOLD DIGIT THREE
-unicode_numerical_value(0x1D7DB, 3.0, 3).	% Nd       MATHEMATICAL DOUBLE-STRUCK DIGIT THREE
-unicode_numerical_value(0x1D7E5, 3.0, 3).	% Nd       MATHEMATICAL SANS-SERIF DIGIT THREE
-unicode_numerical_value(0x1D7EF, 3.0, 3).	% Nd       MATHEMATICAL SANS-SERIF BOLD DIGIT THREE
-unicode_numerical_value(0x1D7F9, 3.0, 3).	% Nd       MATHEMATICAL MONOSPACE DIGIT THREE
-unicode_numerical_value(0x1F104, 3.0, 3).	% No       DIGIT THREE COMMA
-unicode_numerical_value(0x20AFD, 3.0, 3).	% Lo       CJK UNIFIED IDEOGRAPH-20AFD
-unicode_numerical_value(0x20B19, 3.0, 3).	% Lo       CJK UNIFIED IDEOGRAPH-20B19
-unicode_numerical_value(0x22998, 3.0, 3).	% Lo       CJK UNIFIED IDEOGRAPH-22998
-unicode_numerical_value(0x23B1B, 3.0, 3).	% Lo       CJK UNIFIED IDEOGRAPH-23B1B
-
-% Total code points: 102
-
-% ================================================
-
-unicode_numerical_value(0x0F2D, 3.5, 7/2).	% No       TIBETAN DIGIT HALF FOUR
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x0034, 4.0, 4).	% Nd       DIGIT FOUR
-unicode_numerical_value(0x0664, 4.0, 4).	% Nd       ARABIC-INDIC DIGIT FOUR
-unicode_numerical_value(0x06F4, 4.0, 4).	% Nd       EXTENDED ARABIC-INDIC DIGIT FOUR
-unicode_numerical_value(0x07C4, 4.0, 4).	% Nd       NKO DIGIT FOUR
-unicode_numerical_value(0x096A, 4.0, 4).	% Nd       DEVANAGARI DIGIT FOUR
-unicode_numerical_value(0x09EA, 4.0, 4).	% Nd       BENGALI DIGIT FOUR
-unicode_numerical_value(0x0A6A, 4.0, 4).	% Nd       GURMUKHI DIGIT FOUR
-unicode_numerical_value(0x0AEA, 4.0, 4).	% Nd       GUJARATI DIGIT FOUR
-unicode_numerical_value(0x0B6A, 4.0, 4).	% Nd       ORIYA DIGIT FOUR
-unicode_numerical_value(0x0BEA, 4.0, 4).	% Nd       TAMIL DIGIT FOUR
-unicode_numerical_value(0x0C6A, 4.0, 4).	% Nd       TELUGU DIGIT FOUR
-unicode_numerical_value(0x0CEA, 4.0, 4).	% Nd       KANNADA DIGIT FOUR
-unicode_numerical_value(0x0D6A, 4.0, 4).	% Nd       MALAYALAM DIGIT FOUR
-unicode_numerical_value(0x0E54, 4.0, 4).	% Nd       THAI DIGIT FOUR
-unicode_numerical_value(0x0ED4, 4.0, 4).	% Nd       LAO DIGIT FOUR
-unicode_numerical_value(0x0F24, 4.0, 4).	% Nd       TIBETAN DIGIT FOUR
-unicode_numerical_value(0x1044, 4.0, 4).	% Nd       MYANMAR DIGIT FOUR
-unicode_numerical_value(0x1094, 4.0, 4).	% Nd       MYANMAR SHAN DIGIT FOUR
-unicode_numerical_value(0x136C, 4.0, 4).	% No       ETHIOPIC DIGIT FOUR
-unicode_numerical_value(0x17E4, 4.0, 4).	% Nd       KHMER DIGIT FOUR
-unicode_numerical_value(0x17F4, 4.0, 4).	% No       KHMER SYMBOL LEK ATTAK BUON
-unicode_numerical_value(0x1814, 4.0, 4).	% Nd       MONGOLIAN DIGIT FOUR
-unicode_numerical_value(0x194A, 4.0, 4).	% Nd       LIMBU DIGIT FOUR
-unicode_numerical_value(0x19D4, 4.0, 4).	% Nd       NEW TAI LUE DIGIT FOUR
-unicode_numerical_value(0x1A84, 4.0, 4).	% Nd       TAI THAM HORA DIGIT FOUR
-unicode_numerical_value(0x1A94, 4.0, 4).	% Nd       TAI THAM THAM DIGIT FOUR
-unicode_numerical_value(0x1B54, 4.0, 4).	% Nd       BALINESE DIGIT FOUR
-unicode_numerical_value(0x1BB4, 4.0, 4).	% Nd       SUNDANESE DIGIT FOUR
-unicode_numerical_value(0x1C44, 4.0, 4).	% Nd       LEPCHA DIGIT FOUR
-unicode_numerical_value(0x1C54, 4.0, 4).	% Nd       OL CHIKI DIGIT FOUR
-unicode_numerical_value(0x2074, 4.0, 4).	% No       SUPERSCRIPT FOUR
-unicode_numerical_value(0x2084, 4.0, 4).	% No       SUBSCRIPT FOUR
-unicode_numerical_value(0x2163, 4.0, 4).	% Nl       ROMAN NUMERAL FOUR
-unicode_numerical_value(0x2173, 4.0, 4).	% Nl       SMALL ROMAN NUMERAL FOUR
-unicode_numerical_value(0x2463, 4.0, 4).	% No       CIRCLED DIGIT FOUR
-unicode_numerical_value(0x2477, 4.0, 4).	% No       PARENTHESIZED DIGIT FOUR
-unicode_numerical_value(0x248B, 4.0, 4).	% No       DIGIT FOUR FULL STOP
-unicode_numerical_value(0x24F8, 4.0, 4).	% No       DOUBLE CIRCLED DIGIT FOUR
-unicode_numerical_value(0x2779, 4.0, 4).	% No       DINGBAT NEGATIVE CIRCLED DIGIT FOUR
-unicode_numerical_value(0x2783, 4.0, 4).	% No       DINGBAT CIRCLED SANS-SERIF DIGIT FOUR
-unicode_numerical_value(0x278D, 4.0, 4).	% No       DINGBAT NEGATIVE CIRCLED SANS-SERIF DIGIT FOUR
-unicode_numerical_value(0x3024, 4.0, 4).	% Nl       HANGZHOU NUMERAL FOUR
-unicode_numerical_value(0x3195, 4.0, 4).	% No       IDEOGRAPHIC ANNOTATION FOUR MARK
-unicode_numerical_value(0x3223, 4.0, 4).	% No       PARENTHESIZED IDEOGRAPH FOUR
-unicode_numerical_value(0x3283, 4.0, 4).	% No       CIRCLED IDEOGRAPH FOUR
-unicode_numerical_value(0x4E96, 4.0, 4).	% Lo       CJK UNIFIED IDEOGRAPH-4E96
-unicode_numerical_value(0x56DB, 4.0, 4).	% Lo       CJK UNIFIED IDEOGRAPH-56DB
-unicode_numerical_value(0x8086, 4.0, 4).	% Lo       CJK UNIFIED IDEOGRAPH-8086
-unicode_numerical_value(0xA624, 4.0, 4).	% Nd       VAI DIGIT FOUR
-unicode_numerical_value(0xA6E9, 4.0, 4).	% Nl       BAMUM LETTER KPA
-unicode_numerical_value(0xA8D4, 4.0, 4).	% Nd       SAURASHTRA DIGIT FOUR
-unicode_numerical_value(0xA904, 4.0, 4).	% Nd       KAYAH LI DIGIT FOUR
-unicode_numerical_value(0xA9D4, 4.0, 4).	% Nd       JAVANESE DIGIT FOUR
-unicode_numerical_value(0xAA54, 4.0, 4).	% Nd       CHAM DIGIT FOUR
-unicode_numerical_value(0xABF4, 4.0, 4).	% Nd       MEETEI MAYEK DIGIT FOUR
-unicode_numerical_value(0xFF14, 4.0, 4).	% Nd       FULLWIDTH DIGIT FOUR
-unicode_numerical_value(0x1010A, 4.0, 4).	% No       AEGEAN NUMBER FOUR
-unicode_numerical_value(0x104A4, 4.0, 4).	% Nd       OSMANYA DIGIT FOUR
-unicode_numerical_value(0x10A43, 4.0, 4).	% No       KHAROSHTHI DIGIT FOUR
-unicode_numerical_value(0x10B5B, 4.0, 4).	% No       INSCRIPTIONAL PARTHIAN NUMBER FOUR
-unicode_numerical_value(0x10B7B, 4.0, 4).	% No       INSCRIPTIONAL PAHLAVI NUMBER FOUR
-unicode_numerical_value(0x10E63, 4.0, 4).	% No       RUMI DIGIT FOUR
-unicode_numerical_value(0x11055, 4.0, 4).	% No       BRAHMI NUMBER FOUR
-unicode_numerical_value(0x1106A, 4.0, 4).	% Nd       BRAHMI DIGIT FOUR
-unicode_numerical_value(0x110F4, 4.0, 4).	% Nd       SORA SOMPENG DIGIT FOUR
-unicode_numerical_value(0x1113A, 4.0, 4).	% Nd       CHAKMA DIGIT FOUR
-unicode_numerical_value(0x111D4, 4.0, 4).	% Nd       SHARADA DIGIT FOUR
-unicode_numerical_value(0x116C4, 4.0, 4).	% Nd       TAKRI DIGIT FOUR
-unicode_numerical_value(0x12402, 4.0, 4).	% Nl       CUNEIFORM NUMERIC SIGN FOUR ASH
-unicode_numerical_value(0x12409, 4.0, 4).	% Nl       CUNEIFORM NUMERIC SIGN FOUR DISH
-unicode_numerical_value(0x1240F, 4.0, 4).	% Nl       CUNEIFORM NUMERIC SIGN FOUR U
-unicode_numerical_value(0x12418, 4.0, 4).	% Nl       CUNEIFORM NUMERIC SIGN FOUR GESH2
-unicode_numerical_value(0x12421, 4.0, 4).	% Nl       CUNEIFORM NUMERIC SIGN FOUR GESHU
-unicode_numerical_value(0x12426, 4.0, 4).	% Nl       CUNEIFORM NUMERIC SIGN FOUR SHAR2
-unicode_numerical_value(0x12430, 4.0, 4).	% Nl       CUNEIFORM NUMERIC SIGN FOUR SHARU
-unicode_numerical_value(0x12438, 4.0, 4).	% Nl       CUNEIFORM NUMERIC SIGN FOUR BURU
-%1243C..1243F  ; 4.0, 4).	% Nl   [4] CUNEIFORM NUMERIC SIGN FOUR VARIANT FORM LIMMU..CUNEIFORM NUMERIC SIGN FOUR VARIANT FORM LIMMU B
-unicode_numerical_value(0x1243C, 4.0, 4).	% Nl       CUNEIFORM NUMERIC SIGN FOUR VARIANT FORM LIMMU
-unicode_numerical_value(0x1243D, 4.0, 4).	% Nl       CUNEIFORM NUMERIC SIGN FOUR VARIANT FORM LIMMU4
-unicode_numerical_value(0x1243E, 4.0, 4).	% Nl       CUNEIFORM NUMERIC SIGN FOUR VARIANT FORM LIMMU A
-unicode_numerical_value(0x1243F, 4.0, 4).	% Nl       CUNEIFORM NUMERIC SIGN FOUR VARIANT FORM LIMMU B
-unicode_numerical_value(0x1244C, 4.0, 4).	% Nl       CUNEIFORM NUMERIC SIGN FOUR ASH TENU
-%12452..12453  ; 4.0, 4).	% Nl   [2] CUNEIFORM NUMERIC SIGN FOUR BAN2..CUNEIFORM NUMERIC SIGN FOUR BAN2 VARIANT FORM
-unicode_numerical_value(0x12452, 4.0, 4).	% Nl       CUNEIFORM NUMERIC SIGN FOUR BAN2
-unicode_numerical_value(0x12453, 4.0, 4).	% Nl       CUNEIFORM NUMERIC SIGN FOUR BAN2 VARIANT FORM
-unicode_numerical_value(0x1D363, 4.0, 4).	% No       COUNTING ROD UNIT DIGIT FOUR
-unicode_numerical_value(0x1D7D2, 4.0, 4).	% Nd       MATHEMATICAL BOLD DIGIT FOUR
-unicode_numerical_value(0x1D7DC, 4.0, 4).	% Nd       MATHEMATICAL DOUBLE-STRUCK DIGIT FOUR
-unicode_numerical_value(0x1D7E6, 4.0, 4).	% Nd       MATHEMATICAL SANS-SERIF DIGIT FOUR
-unicode_numerical_value(0x1D7F0, 4.0, 4).	% Nd       MATHEMATICAL SANS-SERIF BOLD DIGIT FOUR
-unicode_numerical_value(0x1D7FA, 4.0, 4).	% Nd       MATHEMATICAL MONOSPACE DIGIT FOUR
-unicode_numerical_value(0x1F105, 4.0, 4).	% No       DIGIT FOUR COMMA
-unicode_numerical_value(0x20064, 4.0, 4).	% Lo       CJK UNIFIED IDEOGRAPH-20064
-unicode_numerical_value(0x200E2, 4.0, 4).	% Lo       CJK UNIFIED IDEOGRAPH-200E2
-unicode_numerical_value(0x2626D, 4.0, 4).	% Lo       CJK UNIFIED IDEOGRAPH-2626D
-
-% Total code points: 93
-
-% ================================================
-
-unicode_numerical_value(0x0F2E, 4.5, 9/2).	% No       TIBETAN DIGIT HALF FIVE
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x0035, 5.0, 5).	% Nd       DIGIT FIVE
-unicode_numerical_value(0x0665, 5.0, 5).	% Nd       ARABIC-INDIC DIGIT FIVE
-unicode_numerical_value(0x06F5, 5.0, 5).	% Nd       EXTENDED ARABIC-INDIC DIGIT FIVE
-unicode_numerical_value(0x07C5, 5.0, 5).	% Nd       NKO DIGIT FIVE
-unicode_numerical_value(0x096B, 5.0, 5).	% Nd       DEVANAGARI DIGIT FIVE
-unicode_numerical_value(0x09EB, 5.0, 5).	% Nd       BENGALI DIGIT FIVE
-unicode_numerical_value(0x0A6B, 5.0, 5).	% Nd       GURMUKHI DIGIT FIVE
-unicode_numerical_value(0x0AEB, 5.0, 5).	% Nd       GUJARATI DIGIT FIVE
-unicode_numerical_value(0x0B6B, 5.0, 5).	% Nd       ORIYA DIGIT FIVE
-unicode_numerical_value(0x0BEB, 5.0, 5).	% Nd       TAMIL DIGIT FIVE
-unicode_numerical_value(0x0C6B, 5.0, 5).	% Nd       TELUGU DIGIT FIVE
-unicode_numerical_value(0x0CEB, 5.0, 5).	% Nd       KANNADA DIGIT FIVE
-unicode_numerical_value(0x0D6B, 5.0, 5).	% Nd       MALAYALAM DIGIT FIVE
-unicode_numerical_value(0x0E55, 5.0, 5).	% Nd       THAI DIGIT FIVE
-unicode_numerical_value(0x0ED5, 5.0, 5).	% Nd       LAO DIGIT FIVE
-unicode_numerical_value(0x0F25, 5.0, 5).	% Nd       TIBETAN DIGIT FIVE
-unicode_numerical_value(0x1045, 5.0, 5).	% Nd       MYANMAR DIGIT FIVE
-unicode_numerical_value(0x1095, 5.0, 5).	% Nd       MYANMAR SHAN DIGIT FIVE
-unicode_numerical_value(0x136D, 5.0, 5).	% No       ETHIOPIC DIGIT FIVE
-unicode_numerical_value(0x17E5, 5.0, 5).	% Nd       KHMER DIGIT FIVE
-unicode_numerical_value(0x17F5, 5.0, 5).	% No       KHMER SYMBOL LEK ATTAK PRAM
-unicode_numerical_value(0x1815, 5.0, 5).	% Nd       MONGOLIAN DIGIT FIVE
-unicode_numerical_value(0x194B, 5.0, 5).	% Nd       LIMBU DIGIT FIVE
-unicode_numerical_value(0x19D5, 5.0, 5).	% Nd       NEW TAI LUE DIGIT FIVE
-unicode_numerical_value(0x1A85, 5.0, 5).	% Nd       TAI THAM HORA DIGIT FIVE
-unicode_numerical_value(0x1A95, 5.0, 5).	% Nd       TAI THAM THAM DIGIT FIVE
-unicode_numerical_value(0x1B55, 5.0, 5).	% Nd       BALINESE DIGIT FIVE
-unicode_numerical_value(0x1BB5, 5.0, 5).	% Nd       SUNDANESE DIGIT FIVE
-unicode_numerical_value(0x1C45, 5.0, 5).	% Nd       LEPCHA DIGIT FIVE
-unicode_numerical_value(0x1C55, 5.0, 5).	% Nd       OL CHIKI DIGIT FIVE
-unicode_numerical_value(0x2075, 5.0, 5).	% No       SUPERSCRIPT FIVE
-unicode_numerical_value(0x2085, 5.0, 5).	% No       SUBSCRIPT FIVE
-unicode_numerical_value(0x2164, 5.0, 5).	% Nl       ROMAN NUMERAL FIVE
-unicode_numerical_value(0x2174, 5.0, 5).	% Nl       SMALL ROMAN NUMERAL FIVE
-unicode_numerical_value(0x2464, 5.0, 5).	% No       CIRCLED DIGIT FIVE
-unicode_numerical_value(0x2478, 5.0, 5).	% No       PARENTHESIZED DIGIT FIVE
-unicode_numerical_value(0x248C, 5.0, 5).	% No       DIGIT FIVE FULL STOP
-unicode_numerical_value(0x24F9, 5.0, 5).	% No       DOUBLE CIRCLED DIGIT FIVE
-unicode_numerical_value(0x277A, 5.0, 5).	% No       DINGBAT NEGATIVE CIRCLED DIGIT FIVE
-unicode_numerical_value(0x2784, 5.0, 5).	% No       DINGBAT CIRCLED SANS-SERIF DIGIT FIVE
-unicode_numerical_value(0x278E, 5.0, 5).	% No       DINGBAT NEGATIVE CIRCLED SANS-SERIF DIGIT FIVE
-unicode_numerical_value(0x3025, 5.0, 5).	% Nl       HANGZHOU NUMERAL FIVE
-unicode_numerical_value(0x3224, 5.0, 5).	% No       PARENTHESIZED IDEOGRAPH FIVE
-unicode_numerical_value(0x3284, 5.0, 5).	% No       CIRCLED IDEOGRAPH FIVE
-unicode_numerical_value(0x3405, 5.0, 5).	% Lo       CJK UNIFIED IDEOGRAPH-3405
-unicode_numerical_value(0x382A, 5.0, 5).	% Lo       CJK UNIFIED IDEOGRAPH-382A
-unicode_numerical_value(0x4E94, 5.0, 5).	% Lo       CJK UNIFIED IDEOGRAPH-4E94
-unicode_numerical_value(0x4F0D, 5.0, 5).	% Lo       CJK UNIFIED IDEOGRAPH-4F0D
-unicode_numerical_value(0xA625, 5.0, 5).	% Nd       VAI DIGIT FIVE
-unicode_numerical_value(0xA6EA, 5.0, 5).	% Nl       BAMUM LETTER TEN
-unicode_numerical_value(0xA8D5, 5.0, 5).	% Nd       SAURASHTRA DIGIT FIVE
-unicode_numerical_value(0xA905, 5.0, 5).	% Nd       KAYAH LI DIGIT FIVE
-unicode_numerical_value(0xA9D5, 5.0, 5).	% Nd       JAVANESE DIGIT FIVE
-unicode_numerical_value(0xAA55, 5.0, 5).	% Nd       CHAM DIGIT FIVE
-unicode_numerical_value(0xABF5, 5.0, 5).	% Nd       MEETEI MAYEK DIGIT FIVE
-unicode_numerical_value(0xFF15, 5.0, 5).	% Nd       FULLWIDTH DIGIT FIVE
-unicode_numerical_value(0x1010B, 5.0, 5).	% No       AEGEAN NUMBER FIVE
-unicode_numerical_value(0x10143, 5.0, 5).	% Nl       GREEK ACROPHONIC ATTIC FIVE
-unicode_numerical_value(0x10148, 5.0, 5).	% Nl       GREEK ACROPHONIC ATTIC FIVE TALENTS
-unicode_numerical_value(0x1014F, 5.0, 5).	% Nl       GREEK ACROPHONIC ATTIC FIVE STATERS
-unicode_numerical_value(0x1015F, 5.0, 5).	% Nl       GREEK ACROPHONIC TROEZENIAN FIVE
-unicode_numerical_value(0x10173, 5.0, 5).	% Nl       GREEK ACROPHONIC DELPHIC FIVE MNAS
-unicode_numerical_value(0x10321, 5.0, 5).	% No       OLD ITALIC NUMERAL FIVE
-unicode_numerical_value(0x104A5, 5.0, 5).	% Nd       OSMANYA DIGIT FIVE
-unicode_numerical_value(0x10E64, 5.0, 5).	% No       RUMI DIGIT FIVE
-unicode_numerical_value(0x11056, 5.0, 5).	% No       BRAHMI NUMBER FIVE
-unicode_numerical_value(0x1106B, 5.0, 5).	% Nd       BRAHMI DIGIT FIVE
-unicode_numerical_value(0x110F5, 5.0, 5).	% Nd       SORA SOMPENG DIGIT FIVE
-unicode_numerical_value(0x1113B, 5.0, 5).	% Nd       CHAKMA DIGIT FIVE
-unicode_numerical_value(0x111D5, 5.0, 5).	% Nd       SHARADA DIGIT FIVE
-unicode_numerical_value(0x116C5, 5.0, 5).	% Nd       TAKRI DIGIT FIVE
-unicode_numerical_value(0x12403, 5.0, 5).	% Nl       CUNEIFORM NUMERIC SIGN FIVE ASH
-unicode_numerical_value(0x1240A, 5.0, 5).	% Nl       CUNEIFORM NUMERIC SIGN FIVE DISH
-unicode_numerical_value(0x12410, 5.0, 5).	% Nl       CUNEIFORM NUMERIC SIGN FIVE U
-unicode_numerical_value(0x12419, 5.0, 5).	% Nl       CUNEIFORM NUMERIC SIGN FIVE GESH2
-unicode_numerical_value(0x12422, 5.0, 5).	% Nl       CUNEIFORM NUMERIC SIGN FIVE GESHU
-unicode_numerical_value(0x12427, 5.0, 5).	% Nl       CUNEIFORM NUMERIC SIGN FIVE SHAR2
-unicode_numerical_value(0x12431, 5.0, 5).	% Nl       CUNEIFORM NUMERIC SIGN FIVE SHARU
-unicode_numerical_value(0x12439, 5.0, 5).	% Nl       CUNEIFORM NUMERIC SIGN FIVE BURU
-unicode_numerical_value(0x1244D, 5.0, 5).	% Nl       CUNEIFORM NUMERIC SIGN FIVE ASH TENU
-%12454..12455  ; 5.0, 5).	% Nl   [2] CUNEIFORM NUMERIC SIGN FIVE BAN2..CUNEIFORM NUMERIC SIGN FIVE BAN2 VARIANT FORM
-unicode_numerical_value(0x12454, 5.0, 5).	% Nl       CUNEIFORM NUMERIC SIGN FIVE BAN2
-unicode_numerical_value(0x12455, 5.0, 5).	% Nl       CUNEIFORM NUMERIC SIGN FIVE BAN2 VARIANT FORM
-unicode_numerical_value(0x1D364, 5.0, 5).	% No       COUNTING ROD UNIT DIGIT FIVE
-unicode_numerical_value(0x1D7D3, 5.0, 5).	% Nd       MATHEMATICAL BOLD DIGIT FIVE
-unicode_numerical_value(0x1D7DD, 5.0, 5).	% Nd       MATHEMATICAL DOUBLE-STRUCK DIGIT FIVE
-unicode_numerical_value(0x1D7E7, 5.0, 5).	% Nd       MATHEMATICAL SANS-SERIF DIGIT FIVE
-unicode_numerical_value(0x1D7F1, 5.0, 5).	% Nd       MATHEMATICAL SANS-SERIF BOLD DIGIT FIVE
-unicode_numerical_value(0x1D7FB, 5.0, 5).	% Nd       MATHEMATICAL MONOSPACE DIGIT FIVE
-unicode_numerical_value(0x1F106, 5.0, 5).	% No       DIGIT FIVE COMMA
-unicode_numerical_value(0x20121, 5.0, 5).	% Lo       CJK UNIFIED IDEOGRAPH-20121
-
-% Total code points: 90
-
-% ================================================
-
-unicode_numerical_value(0x0F2F, 5.5, 11/2).	% No       TIBETAN DIGIT HALF SIX
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x0036, 6.0, 6).	% Nd       DIGIT SIX
-unicode_numerical_value(0x0666, 6.0, 6).	% Nd       ARABIC-INDIC DIGIT SIX
-unicode_numerical_value(0x06F6, 6.0, 6).	% Nd       EXTENDED ARABIC-INDIC DIGIT SIX
-unicode_numerical_value(0x07C6, 6.0, 6).	% Nd       NKO DIGIT SIX
-unicode_numerical_value(0x096C, 6.0, 6).	% Nd       DEVANAGARI DIGIT SIX
-unicode_numerical_value(0x09EC, 6.0, 6).	% Nd       BENGALI DIGIT SIX
-unicode_numerical_value(0x0A6C, 6.0, 6).	% Nd       GURMUKHI DIGIT SIX
-unicode_numerical_value(0x0AEC, 6.0, 6).	% Nd       GUJARATI DIGIT SIX
-unicode_numerical_value(0x0B6C, 6.0, 6).	% Nd       ORIYA DIGIT SIX
-unicode_numerical_value(0x0BEC, 6.0, 6).	% Nd       TAMIL DIGIT SIX
-unicode_numerical_value(0x0C6C, 6.0, 6).	% Nd       TELUGU DIGIT SIX
-unicode_numerical_value(0x0CEC, 6.0, 6).	% Nd       KANNADA DIGIT SIX
-unicode_numerical_value(0x0D6C, 6.0, 6).	% Nd       MALAYALAM DIGIT SIX
-unicode_numerical_value(0x0E56, 6.0, 6).	% Nd       THAI DIGIT SIX
-unicode_numerical_value(0x0ED6, 6.0, 6).	% Nd       LAO DIGIT SIX
-unicode_numerical_value(0x0F26, 6.0, 6).	% Nd       TIBETAN DIGIT SIX
-unicode_numerical_value(0x1046, 6.0, 6).	% Nd       MYANMAR DIGIT SIX
-unicode_numerical_value(0x1096, 6.0, 6).	% Nd       MYANMAR SHAN DIGIT SIX
-unicode_numerical_value(0x136E, 6.0, 6).	% No       ETHIOPIC DIGIT SIX
-unicode_numerical_value(0x17E6, 6.0, 6).	% Nd       KHMER DIGIT SIX
-unicode_numerical_value(0x17F6, 6.0, 6).	% No       KHMER SYMBOL LEK ATTAK PRAM-MUOY
-unicode_numerical_value(0x1816, 6.0, 6).	% Nd       MONGOLIAN DIGIT SIX
-unicode_numerical_value(0x194C, 6.0, 6).	% Nd       LIMBU DIGIT SIX
-unicode_numerical_value(0x19D6, 6.0, 6).	% Nd       NEW TAI LUE DIGIT SIX
-unicode_numerical_value(0x1A86, 6.0, 6).	% Nd       TAI THAM HORA DIGIT SIX
-unicode_numerical_value(0x1A96, 6.0, 6).	% Nd       TAI THAM THAM DIGIT SIX
-unicode_numerical_value(0x1B56, 6.0, 6).	% Nd       BALINESE DIGIT SIX
-unicode_numerical_value(0x1BB6, 6.0, 6).	% Nd       SUNDANESE DIGIT SIX
-unicode_numerical_value(0x1C46, 6.0, 6).	% Nd       LEPCHA DIGIT SIX
-unicode_numerical_value(0x1C56, 6.0, 6).	% Nd       OL CHIKI DIGIT SIX
-unicode_numerical_value(0x2076, 6.0, 6).	% No       SUPERSCRIPT SIX
-unicode_numerical_value(0x2086, 6.0, 6).	% No       SUBSCRIPT SIX
-unicode_numerical_value(0x2165, 6.0, 6).	% Nl       ROMAN NUMERAL SIX
-unicode_numerical_value(0x2175, 6.0, 6).	% Nl       SMALL ROMAN NUMERAL SIX
-unicode_numerical_value(0x2185, 6.0, 6).	% Nl       ROMAN NUMERAL SIX LATE FORM
-unicode_numerical_value(0x2465, 6.0, 6).	% No       CIRCLED DIGIT SIX
-unicode_numerical_value(0x2479, 6.0, 6).	% No       PARENTHESIZED DIGIT SIX
-unicode_numerical_value(0x248D, 6.0, 6).	% No       DIGIT SIX FULL STOP
-unicode_numerical_value(0x24FA, 6.0, 6).	% No       DOUBLE CIRCLED DIGIT SIX
-unicode_numerical_value(0x277B, 6.0, 6).	% No       DINGBAT NEGATIVE CIRCLED DIGIT SIX
-unicode_numerical_value(0x2785, 6.0, 6).	% No       DINGBAT CIRCLED SANS-SERIF DIGIT SIX
-unicode_numerical_value(0x278F, 6.0, 6).	% No       DINGBAT NEGATIVE CIRCLED SANS-SERIF DIGIT SIX
-unicode_numerical_value(0x3026, 6.0, 6).	% Nl       HANGZHOU NUMERAL SIX
-unicode_numerical_value(0x3225, 6.0, 6).	% No       PARENTHESIZED IDEOGRAPH SIX
-unicode_numerical_value(0x3285, 6.0, 6).	% No       CIRCLED IDEOGRAPH SIX
-unicode_numerical_value(0x516D, 6.0, 6).	% Lo       CJK UNIFIED IDEOGRAPH-516D
-unicode_numerical_value(0x9646, 6.0, 6).	% Lo       CJK UNIFIED IDEOGRAPH-9646
-unicode_numerical_value(0x9678, 6.0, 6).	% Lo       CJK UNIFIED IDEOGRAPH-9678
-unicode_numerical_value(0xA626, 6.0, 6).	% Nd       VAI DIGIT SIX
-unicode_numerical_value(0xA6EB, 6.0, 6).	% Nl       BAMUM LETTER NTUU
-unicode_numerical_value(0xA8D6, 6.0, 6).	% Nd       SAURASHTRA DIGIT SIX
-unicode_numerical_value(0xA906, 6.0, 6).	% Nd       KAYAH LI DIGIT SIX
-unicode_numerical_value(0xA9D6, 6.0, 6).	% Nd       JAVANESE DIGIT SIX
-unicode_numerical_value(0xAA56, 6.0, 6).	% Nd       CHAM DIGIT SIX
-unicode_numerical_value(0xABF6, 6.0, 6).	% Nd       MEETEI MAYEK DIGIT SIX
-unicode_numerical_value(0xF9D1, 6.0, 6).	% Lo       CJK COMPATIBILITY IDEOGRAPH-F9D1
-unicode_numerical_value(0xF9D3, 6.0, 6).	% Lo       CJK COMPATIBILITY IDEOGRAPH-F9D3
-unicode_numerical_value(0xFF16, 6.0, 6).	% Nd       FULLWIDTH DIGIT SIX
-unicode_numerical_value(0x1010C, 6.0, 6).	% No       AEGEAN NUMBER SIX
-unicode_numerical_value(0x104A6, 6.0, 6).	% Nd       OSMANYA DIGIT SIX
-unicode_numerical_value(0x10E65, 6.0, 6).	% No       RUMI DIGIT SIX
-unicode_numerical_value(0x11057, 6.0, 6).	% No       BRAHMI NUMBER SIX
-unicode_numerical_value(0x1106C, 6.0, 6).	% Nd       BRAHMI DIGIT SIX
-unicode_numerical_value(0x110F6, 6.0, 6).	% Nd       SORA SOMPENG DIGIT SIX
-unicode_numerical_value(0x1113C, 6.0, 6).	% Nd       CHAKMA DIGIT SIX
-unicode_numerical_value(0x111D6, 6.0, 6).	% Nd       SHARADA DIGIT SIX
-unicode_numerical_value(0x116C6, 6.0, 6).	% Nd       TAKRI DIGIT SIX
-unicode_numerical_value(0x12404, 6.0, 6).	% Nl       CUNEIFORM NUMERIC SIGN SIX ASH
-unicode_numerical_value(0x1240B, 6.0, 6).	% Nl       CUNEIFORM NUMERIC SIGN SIX DISH
-unicode_numerical_value(0x12411, 6.0, 6).	% Nl       CUNEIFORM NUMERIC SIGN SIX U
-unicode_numerical_value(0x1241A, 6.0, 6).	% Nl       CUNEIFORM NUMERIC SIGN SIX GESH2
-unicode_numerical_value(0x12428, 6.0, 6).	% Nl       CUNEIFORM NUMERIC SIGN SIX SHAR2
-unicode_numerical_value(0x12440, 6.0, 6).	% Nl       CUNEIFORM NUMERIC SIGN SIX VARIANT FORM ASH9
-unicode_numerical_value(0x1244E, 6.0, 6).	% Nl       CUNEIFORM NUMERIC SIGN SIX ASH TENU
-unicode_numerical_value(0x1D365, 6.0, 6).	% No       COUNTING ROD UNIT DIGIT SIX
-unicode_numerical_value(0x1D7D4, 6.0, 6).	% Nd       MATHEMATICAL BOLD DIGIT SIX
-unicode_numerical_value(0x1D7DE, 6.0, 6).	% Nd       MATHEMATICAL DOUBLE-STRUCK DIGIT SIX
-unicode_numerical_value(0x1D7E8, 6.0, 6).	% Nd       MATHEMATICAL SANS-SERIF DIGIT SIX
-unicode_numerical_value(0x1D7F2, 6.0, 6).	% Nd       MATHEMATICAL SANS-SERIF BOLD DIGIT SIX
-unicode_numerical_value(0x1D7FC, 6.0, 6).	% Nd       MATHEMATICAL MONOSPACE DIGIT SIX
-unicode_numerical_value(0x1F107, 6.0, 6).	% No       DIGIT SIX COMMA
-unicode_numerical_value(0x20AEA, 6.0, 6).	% Lo       CJK UNIFIED IDEOGRAPH-20AEA
-
-% Total code points: 82
-
-% ================================================
-
-unicode_numerical_value(0x0F30, 6.5, 13/2).	% No       TIBETAN DIGIT HALF SEVEN
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x0037, 7.0, 7).	% Nd       DIGIT SEVEN
-unicode_numerical_value(0x0667, 7.0, 7).	% Nd       ARABIC-INDIC DIGIT SEVEN
-unicode_numerical_value(0x06F7, 7.0, 7).	% Nd       EXTENDED ARABIC-INDIC DIGIT SEVEN
-unicode_numerical_value(0x07C7, 7.0, 7).	% Nd       NKO DIGIT SEVEN
-unicode_numerical_value(0x096D, 7.0, 7).	% Nd       DEVANAGARI DIGIT SEVEN
-unicode_numerical_value(0x09ED, 7.0, 7).	% Nd       BENGALI DIGIT SEVEN
-unicode_numerical_value(0x0A6D, 7.0, 7).	% Nd       GURMUKHI DIGIT SEVEN
-unicode_numerical_value(0x0AED, 7.0, 7).	% Nd       GUJARATI DIGIT SEVEN
-unicode_numerical_value(0x0B6D, 7.0, 7).	% Nd       ORIYA DIGIT SEVEN
-unicode_numerical_value(0x0BED, 7.0, 7).	% Nd       TAMIL DIGIT SEVEN
-unicode_numerical_value(0x0C6D, 7.0, 7).	% Nd       TELUGU DIGIT SEVEN
-unicode_numerical_value(0x0CED, 7.0, 7).	% Nd       KANNADA DIGIT SEVEN
-unicode_numerical_value(0x0D6D, 7.0, 7).	% Nd       MALAYALAM DIGIT SEVEN
-unicode_numerical_value(0x0E57, 7.0, 7).	% Nd       THAI DIGIT SEVEN
-unicode_numerical_value(0x0ED7, 7.0, 7).	% Nd       LAO DIGIT SEVEN
-unicode_numerical_value(0x0F27, 7.0, 7).	% Nd       TIBETAN DIGIT SEVEN
-unicode_numerical_value(0x1047, 7.0, 7).	% Nd       MYANMAR DIGIT SEVEN
-unicode_numerical_value(0x1097, 7.0, 7).	% Nd       MYANMAR SHAN DIGIT SEVEN
-unicode_numerical_value(0x136F, 7.0, 7).	% No       ETHIOPIC DIGIT SEVEN
-unicode_numerical_value(0x17E7, 7.0, 7).	% Nd       KHMER DIGIT SEVEN
-unicode_numerical_value(0x17F7, 7.0, 7).	% No       KHMER SYMBOL LEK ATTAK PRAM-PII
-unicode_numerical_value(0x1817, 7.0, 7).	% Nd       MONGOLIAN DIGIT SEVEN
-unicode_numerical_value(0x194D, 7.0, 7).	% Nd       LIMBU DIGIT SEVEN
-unicode_numerical_value(0x19D7, 7.0, 7).	% Nd       NEW TAI LUE DIGIT SEVEN
-unicode_numerical_value(0x1A87, 7.0, 7).	% Nd       TAI THAM HORA DIGIT SEVEN
-unicode_numerical_value(0x1A97, 7.0, 7).	% Nd       TAI THAM THAM DIGIT SEVEN
-unicode_numerical_value(0x1B57, 7.0, 7).	% Nd       BALINESE DIGIT SEVEN
-unicode_numerical_value(0x1BB7, 7.0, 7).	% Nd       SUNDANESE DIGIT SEVEN
-unicode_numerical_value(0x1C47, 7.0, 7).	% Nd       LEPCHA DIGIT SEVEN
-unicode_numerical_value(0x1C57, 7.0, 7).	% Nd       OL CHIKI DIGIT SEVEN
-unicode_numerical_value(0x2077, 7.0, 7).	% No       SUPERSCRIPT SEVEN
-unicode_numerical_value(0x2087, 7.0, 7).	% No       SUBSCRIPT SEVEN
-unicode_numerical_value(0x2166, 7.0, 7).	% Nl       ROMAN NUMERAL SEVEN
-unicode_numerical_value(0x2176, 7.0, 7).	% Nl       SMALL ROMAN NUMERAL SEVEN
-unicode_numerical_value(0x2466, 7.0, 7).	% No       CIRCLED DIGIT SEVEN
-unicode_numerical_value(0x247A, 7.0, 7).	% No       PARENTHESIZED DIGIT SEVEN
-unicode_numerical_value(0x248E, 7.0, 7).	% No       DIGIT SEVEN FULL STOP
-unicode_numerical_value(0x24FB, 7.0, 7).	% No       DOUBLE CIRCLED DIGIT SEVEN
-unicode_numerical_value(0x277C, 7.0, 7).	% No       DINGBAT NEGATIVE CIRCLED DIGIT SEVEN
-unicode_numerical_value(0x2786, 7.0, 7).	% No       DINGBAT CIRCLED SANS-SERIF DIGIT SEVEN
-unicode_numerical_value(0x2790, 7.0, 7).	% No       DINGBAT NEGATIVE CIRCLED SANS-SERIF DIGIT SEVEN
-unicode_numerical_value(0x3027, 7.0, 7).	% Nl       HANGZHOU NUMERAL SEVEN
-unicode_numerical_value(0x3226, 7.0, 7).	% No       PARENTHESIZED IDEOGRAPH SEVEN
-unicode_numerical_value(0x3286, 7.0, 7).	% No       CIRCLED IDEOGRAPH SEVEN
-unicode_numerical_value(0x3B4D, 7.0, 7).	% Lo       CJK UNIFIED IDEOGRAPH-3B4D
-unicode_numerical_value(0x4E03, 7.0, 7).	% Lo       CJK UNIFIED IDEOGRAPH-4E03
-unicode_numerical_value(0x67D2, 7.0, 7).	% Lo       CJK UNIFIED IDEOGRAPH-67D2
-unicode_numerical_value(0x6F06, 7.0, 7).	% Lo       CJK UNIFIED IDEOGRAPH-6F06
-unicode_numerical_value(0xA627, 7.0, 7).	% Nd       VAI DIGIT SEVEN
-unicode_numerical_value(0xA6EC, 7.0, 7).	% Nl       BAMUM LETTER SAMBA
-unicode_numerical_value(0xA8D7, 7.0, 7).	% Nd       SAURASHTRA DIGIT SEVEN
-unicode_numerical_value(0xA907, 7.0, 7).	% Nd       KAYAH LI DIGIT SEVEN
-unicode_numerical_value(0xA9D7, 7.0, 7).	% Nd       JAVANESE DIGIT SEVEN
-unicode_numerical_value(0xAA57, 7.0, 7).	% Nd       CHAM DIGIT SEVEN
-unicode_numerical_value(0xABF7, 7.0, 7).	% Nd       MEETEI MAYEK DIGIT SEVEN
-unicode_numerical_value(0xFF17, 7.0, 7).	% Nd       FULLWIDTH DIGIT SEVEN
-unicode_numerical_value(0x1010D, 7.0, 7).	% No       AEGEAN NUMBER SEVEN
-unicode_numerical_value(0x104A7, 7.0, 7).	% Nd       OSMANYA DIGIT SEVEN
-unicode_numerical_value(0x10E66, 7.0, 7).	% No       RUMI DIGIT SEVEN
-unicode_numerical_value(0x11058, 7.0, 7).	% No       BRAHMI NUMBER SEVEN
-unicode_numerical_value(0x1106D, 7.0, 7).	% Nd       BRAHMI DIGIT SEVEN
-unicode_numerical_value(0x110F7, 7.0, 7).	% Nd       SORA SOMPENG DIGIT SEVEN
-unicode_numerical_value(0x1113D, 7.0, 7).	% Nd       CHAKMA DIGIT SEVEN
-unicode_numerical_value(0x111D7, 7.0, 7).	% Nd       SHARADA DIGIT SEVEN
-unicode_numerical_value(0x116C7, 7.0, 7).	% Nd       TAKRI DIGIT SEVEN
-unicode_numerical_value(0x12405, 7.0, 7).	% Nl       CUNEIFORM NUMERIC SIGN SEVEN ASH
-unicode_numerical_value(0x1240C, 7.0, 7).	% Nl       CUNEIFORM NUMERIC SIGN SEVEN DISH
-unicode_numerical_value(0x12412, 7.0, 7).	% Nl       CUNEIFORM NUMERIC SIGN SEVEN U
-unicode_numerical_value(0x1241B, 7.0, 7).	% Nl       CUNEIFORM NUMERIC SIGN SEVEN GESH2
-unicode_numerical_value(0x12429, 7.0, 7).	% Nl       CUNEIFORM NUMERIC SIGN SEVEN SHAR2
-%12441..12443  ; 7.0, 7).	% Nl   [3] CUNEIFORM NUMERIC SIGN SEVEN VARIANT FORM IMIN3..CUNEIFORM NUMERIC SIGN SEVEN VARIANT FORM IMIN B
-unicode_numerical_value(0x12441, 7.0, 7).	% Nl       CUNEIFORM NUMERIC SIGN SEVEN VARIANT FORM IMIN3
-unicode_numerical_value(0x12442, 7.0, 7).	% Nl       CUNEIFORM NUMERIC SIGN SEVEN VARIANT FORM IMIN A
-unicode_numerical_value(0x12443, 7.0, 7).	% Nl       CUNEIFORM NUMERIC SIGN SEVEN VARIANT FORM IMIN B
-unicode_numerical_value(0x1D366, 7.0, 7).	% No       COUNTING ROD UNIT DIGIT SEVEN
-unicode_numerical_value(0x1D7D5, 7.0, 7).	% Nd       MATHEMATICAL BOLD DIGIT SEVEN
-unicode_numerical_value(0x1D7DF, 7.0, 7).	% Nd       MATHEMATICAL DOUBLE-STRUCK DIGIT SEVEN
-unicode_numerical_value(0x1D7E9, 7.0, 7).	% Nd       MATHEMATICAL SANS-SERIF DIGIT SEVEN
-unicode_numerical_value(0x1D7F3, 7.0, 7).	% Nd       MATHEMATICAL SANS-SERIF BOLD DIGIT SEVEN
-unicode_numerical_value(0x1D7FD, 7.0, 7).	% Nd       MATHEMATICAL MONOSPACE DIGIT SEVEN
-unicode_numerical_value(0x1F108, 7.0, 7).	% No       DIGIT SEVEN COMMA
-unicode_numerical_value(0x20001, 7.0, 7).	% Lo       CJK UNIFIED IDEOGRAPH-20001
-
-% Total code points: 81
-
-% ================================================
-
-unicode_numerical_value(0x0F31, 7.5, 15/2).	% No       TIBETAN DIGIT HALF EIGHT
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x0038, 8.0, 8).	% Nd       DIGIT EIGHT
-unicode_numerical_value(0x0668, 8.0, 8).	% Nd       ARABIC-INDIC DIGIT EIGHT
-unicode_numerical_value(0x06F8, 8.0, 8).	% Nd       EXTENDED ARABIC-INDIC DIGIT EIGHT
-unicode_numerical_value(0x07C8, 8.0, 8).	% Nd       NKO DIGIT EIGHT
-unicode_numerical_value(0x096E, 8.0, 8).	% Nd       DEVANAGARI DIGIT EIGHT
-unicode_numerical_value(0x09EE, 8.0, 8).	% Nd       BENGALI DIGIT EIGHT
-unicode_numerical_value(0x0A6E, 8.0, 8).	% Nd       GURMUKHI DIGIT EIGHT
-unicode_numerical_value(0x0AEE, 8.0, 8).	% Nd       GUJARATI DIGIT EIGHT
-unicode_numerical_value(0x0B6E, 8.0, 8).	% Nd       ORIYA DIGIT EIGHT
-unicode_numerical_value(0x0BEE, 8.0, 8).	% Nd       TAMIL DIGIT EIGHT
-unicode_numerical_value(0x0C6E, 8.0, 8).	% Nd       TELUGU DIGIT EIGHT
-unicode_numerical_value(0x0CEE, 8.0, 8).	% Nd       KANNADA DIGIT EIGHT
-unicode_numerical_value(0x0D6E, 8.0, 8).	% Nd       MALAYALAM DIGIT EIGHT
-unicode_numerical_value(0x0E58, 8.0, 8).	% Nd       THAI DIGIT EIGHT
-unicode_numerical_value(0x0ED8, 8.0, 8).	% Nd       LAO DIGIT EIGHT
-unicode_numerical_value(0x0F28, 8.0, 8).	% Nd       TIBETAN DIGIT EIGHT
-unicode_numerical_value(0x1048, 8.0, 8).	% Nd       MYANMAR DIGIT EIGHT
-unicode_numerical_value(0x1098, 8.0, 8).	% Nd       MYANMAR SHAN DIGIT EIGHT
-unicode_numerical_value(0x1370, 8.0, 8).	% No       ETHIOPIC DIGIT EIGHT
-unicode_numerical_value(0x17E8, 8.0, 8).	% Nd       KHMER DIGIT EIGHT
-unicode_numerical_value(0x17F8, 8.0, 8).	% No       KHMER SYMBOL LEK ATTAK PRAM-BEI
-unicode_numerical_value(0x1818, 8.0, 8).	% Nd       MONGOLIAN DIGIT EIGHT
-unicode_numerical_value(0x194E, 8.0, 8).	% Nd       LIMBU DIGIT EIGHT
-unicode_numerical_value(0x19D8, 8.0, 8).	% Nd       NEW TAI LUE DIGIT EIGHT
-unicode_numerical_value(0x1A88, 8.0, 8).	% Nd       TAI THAM HORA DIGIT EIGHT
-unicode_numerical_value(0x1A98, 8.0, 8).	% Nd       TAI THAM THAM DIGIT EIGHT
-unicode_numerical_value(0x1B58, 8.0, 8).	% Nd       BALINESE DIGIT EIGHT
-unicode_numerical_value(0x1BB8, 8.0, 8).	% Nd       SUNDANESE DIGIT EIGHT
-unicode_numerical_value(0x1C48, 8.0, 8).	% Nd       LEPCHA DIGIT EIGHT
-unicode_numerical_value(0x1C58, 8.0, 8).	% Nd       OL CHIKI DIGIT EIGHT
-unicode_numerical_value(0x2078, 8.0, 8).	% No       SUPERSCRIPT EIGHT
-unicode_numerical_value(0x2088, 8.0, 8).	% No       SUBSCRIPT EIGHT
-unicode_numerical_value(0x2167, 8.0, 8).	% Nl       ROMAN NUMERAL EIGHT
-unicode_numerical_value(0x2177, 8.0, 8).	% Nl       SMALL ROMAN NUMERAL EIGHT
-unicode_numerical_value(0x2467, 8.0, 8).	% No       CIRCLED DIGIT EIGHT
-unicode_numerical_value(0x247B, 8.0, 8).	% No       PARENTHESIZED DIGIT EIGHT
-unicode_numerical_value(0x248F, 8.0, 8).	% No       DIGIT EIGHT FULL STOP
-unicode_numerical_value(0x24FC, 8.0, 8).	% No       DOUBLE CIRCLED DIGIT EIGHT
-unicode_numerical_value(0x277D, 8.0, 8).	% No       DINGBAT NEGATIVE CIRCLED DIGIT EIGHT
-unicode_numerical_value(0x2787, 8.0, 8).	% No       DINGBAT CIRCLED SANS-SERIF DIGIT EIGHT
-unicode_numerical_value(0x2791, 8.0, 8).	% No       DINGBAT NEGATIVE CIRCLED SANS-SERIF DIGIT EIGHT
-unicode_numerical_value(0x3028, 8.0, 8).	% Nl       HANGZHOU NUMERAL EIGHT
-unicode_numerical_value(0x3227, 8.0, 8).	% No       PARENTHESIZED IDEOGRAPH EIGHT
-unicode_numerical_value(0x3287, 8.0, 8).	% No       CIRCLED IDEOGRAPH EIGHT
-unicode_numerical_value(0x516B, 8.0, 8).	% Lo       CJK UNIFIED IDEOGRAPH-516B
-unicode_numerical_value(0x634C, 8.0, 8).	% Lo       CJK UNIFIED IDEOGRAPH-634C
-unicode_numerical_value(0xA628, 8.0, 8).	% Nd       VAI DIGIT EIGHT
-unicode_numerical_value(0xA6ED, 8.0, 8).	% Nl       BAMUM LETTER FAAMAE
-unicode_numerical_value(0xA8D8, 8.0, 8).	% Nd       SAURASHTRA DIGIT EIGHT
-unicode_numerical_value(0xA908, 8.0, 8).	% Nd       KAYAH LI DIGIT EIGHT
-unicode_numerical_value(0xA9D8, 8.0, 8).	% Nd       JAVANESE DIGIT EIGHT
-unicode_numerical_value(0xAA58, 8.0, 8).	% Nd       CHAM DIGIT EIGHT
-unicode_numerical_value(0xABF8, 8.0, 8).	% Nd       MEETEI MAYEK DIGIT EIGHT
-unicode_numerical_value(0xFF18, 8.0, 8).	% Nd       FULLWIDTH DIGIT EIGHT
-unicode_numerical_value(0x1010E, 8.0, 8).	% No       AEGEAN NUMBER EIGHT
-unicode_numerical_value(0x104A8, 8.0, 8).	% Nd       OSMANYA DIGIT EIGHT
-unicode_numerical_value(0x10E67, 8.0, 8).	% No       RUMI DIGIT EIGHT
-unicode_numerical_value(0x11059, 8.0, 8).	% No       BRAHMI NUMBER EIGHT
-unicode_numerical_value(0x1106E, 8.0, 8).	% Nd       BRAHMI DIGIT EIGHT
-unicode_numerical_value(0x110F8, 8.0, 8).	% Nd       SORA SOMPENG DIGIT EIGHT
-unicode_numerical_value(0x1113E, 8.0, 8).	% Nd       CHAKMA DIGIT EIGHT
-unicode_numerical_value(0x111D8, 8.0, 8).	% Nd       SHARADA DIGIT EIGHT
-unicode_numerical_value(0x116C8, 8.0, 8).	% Nd       TAKRI DIGIT EIGHT
-unicode_numerical_value(0x12406, 8.0, 8).	% Nl       CUNEIFORM NUMERIC SIGN EIGHT ASH
-unicode_numerical_value(0x1240D, 8.0, 8).	% Nl       CUNEIFORM NUMERIC SIGN EIGHT DISH
-unicode_numerical_value(0x12413, 8.0, 8).	% Nl       CUNEIFORM NUMERIC SIGN EIGHT U
-unicode_numerical_value(0x1241C, 8.0, 8).	% Nl       CUNEIFORM NUMERIC SIGN EIGHT GESH2
-unicode_numerical_value(0x1242A, 8.0, 8).	% Nl       CUNEIFORM NUMERIC SIGN EIGHT SHAR2
-%12444..12445  ; 8.0, 8).	% Nl   [2] CUNEIFORM NUMERIC SIGN EIGHT VARIANT FORM USSU..CUNEIFORM NUMERIC SIGN EIGHT VARIANT FORM USSU3
-unicode_numerical_value(0x12444, 8.0, 8).	% Nl       CUNEIFORM NUMERIC SIGN EIGHT VARIANT FORM USSU
-unicode_numerical_value(0x12445, 8.0, 8).	% Nl       CUNEIFORM NUMERIC SIGN EIGHT VARIANT FORM USSU3
-unicode_numerical_value(0x1D367, 8.0, 8).	% No       COUNTING ROD UNIT DIGIT EIGHT
-unicode_numerical_value(0x1D7D6, 8.0, 8).	% Nd       MATHEMATICAL BOLD DIGIT EIGHT
-unicode_numerical_value(0x1D7E0, 8.0, 8).	% Nd       MATHEMATICAL DOUBLE-STRUCK DIGIT EIGHT
-unicode_numerical_value(0x1D7EA, 8.0, 8).	% Nd       MATHEMATICAL SANS-SERIF DIGIT EIGHT
-unicode_numerical_value(0x1D7F4, 8.0, 8).	% Nd       MATHEMATICAL SANS-SERIF BOLD DIGIT EIGHT
-unicode_numerical_value(0x1D7FE, 8.0, 8).	% Nd       MATHEMATICAL MONOSPACE DIGIT EIGHT
-unicode_numerical_value(0x1F109, 8.0, 8).	% No       DIGIT EIGHT COMMA
-
-% Total code points: 77
-
-% ================================================
-
-unicode_numerical_value(0x0F32, 8.5, 17/2).	% No       TIBETAN DIGIT HALF NINE
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x0039, 9.0, 9).	% Nd       DIGIT NINE
-unicode_numerical_value(0x0669, 9.0, 9).	% Nd       ARABIC-INDIC DIGIT NINE
-unicode_numerical_value(0x06F9, 9.0, 9).	% Nd       EXTENDED ARABIC-INDIC DIGIT NINE
-unicode_numerical_value(0x07C9, 9.0, 9).	% Nd       NKO DIGIT NINE
-unicode_numerical_value(0x096F, 9.0, 9).	% Nd       DEVANAGARI DIGIT NINE
-unicode_numerical_value(0x09EF, 9.0, 9).	% Nd       BENGALI DIGIT NINE
-unicode_numerical_value(0x0A6F, 9.0, 9).	% Nd       GURMUKHI DIGIT NINE
-unicode_numerical_value(0x0AEF, 9.0, 9).	% Nd       GUJARATI DIGIT NINE
-unicode_numerical_value(0x0B6F, 9.0, 9).	% Nd       ORIYA DIGIT NINE
-unicode_numerical_value(0x0BEF, 9.0, 9).	% Nd       TAMIL DIGIT NINE
-unicode_numerical_value(0x0C6F, 9.0, 9).	% Nd       TELUGU DIGIT NINE
-unicode_numerical_value(0x0CEF, 9.0, 9).	% Nd       KANNADA DIGIT NINE
-unicode_numerical_value(0x0D6F, 9.0, 9).	% Nd       MALAYALAM DIGIT NINE
-unicode_numerical_value(0x0E59, 9.0, 9).	% Nd       THAI DIGIT NINE
-unicode_numerical_value(0x0ED9, 9.0, 9).	% Nd       LAO DIGIT NINE
-unicode_numerical_value(0x0F29, 9.0, 9).	% Nd       TIBETAN DIGIT NINE
-unicode_numerical_value(0x1049, 9.0, 9).	% Nd       MYANMAR DIGIT NINE
-unicode_numerical_value(0x1099, 9.0, 9).	% Nd       MYANMAR SHAN DIGIT NINE
-unicode_numerical_value(0x1371, 9.0, 9).	% No       ETHIOPIC DIGIT NINE
-unicode_numerical_value(0x17E9, 9.0, 9).	% Nd       KHMER DIGIT NINE
-unicode_numerical_value(0x17F9, 9.0, 9).	% No       KHMER SYMBOL LEK ATTAK PRAM-BUON
-unicode_numerical_value(0x1819, 9.0, 9).	% Nd       MONGOLIAN DIGIT NINE
-unicode_numerical_value(0x194F, 9.0, 9).	% Nd       LIMBU DIGIT NINE
-unicode_numerical_value(0x19D9, 9.0, 9).	% Nd       NEW TAI LUE DIGIT NINE
-unicode_numerical_value(0x1A89, 9.0, 9).	% Nd       TAI THAM HORA DIGIT NINE
-unicode_numerical_value(0x1A99, 9.0, 9).	% Nd       TAI THAM THAM DIGIT NINE
-unicode_numerical_value(0x1B59, 9.0, 9).	% Nd       BALINESE DIGIT NINE
-unicode_numerical_value(0x1BB9, 9.0, 9).	% Nd       SUNDANESE DIGIT NINE
-unicode_numerical_value(0x1C49, 9.0, 9).	% Nd       LEPCHA DIGIT NINE
-unicode_numerical_value(0x1C59, 9.0, 9).	% Nd       OL CHIKI DIGIT NINE
-unicode_numerical_value(0x2079, 9.0, 9).	% No       SUPERSCRIPT NINE
-unicode_numerical_value(0x2089, 9.0, 9).	% No       SUBSCRIPT NINE
-unicode_numerical_value(0x2168, 9.0, 9).	% Nl       ROMAN NUMERAL NINE
-unicode_numerical_value(0x2178, 9.0, 9).	% Nl       SMALL ROMAN NUMERAL NINE
-unicode_numerical_value(0x2468, 9.0, 9).	% No       CIRCLED DIGIT NINE
-unicode_numerical_value(0x247C, 9.0, 9).	% No       PARENTHESIZED DIGIT NINE
-unicode_numerical_value(0x2490, 9.0, 9).	% No       DIGIT NINE FULL STOP
-unicode_numerical_value(0x24FD, 9.0, 9).	% No       DOUBLE CIRCLED DIGIT NINE
-unicode_numerical_value(0x277E, 9.0, 9).	% No       DINGBAT NEGATIVE CIRCLED DIGIT NINE
-unicode_numerical_value(0x2788, 9.0, 9).	% No       DINGBAT CIRCLED SANS-SERIF DIGIT NINE
-unicode_numerical_value(0x2792, 9.0, 9).	% No       DINGBAT NEGATIVE CIRCLED SANS-SERIF DIGIT NINE
-unicode_numerical_value(0x3029, 9.0, 9).	% Nl       HANGZHOU NUMERAL NINE
-unicode_numerical_value(0x3228, 9.0, 9).	% No       PARENTHESIZED IDEOGRAPH NINE
-unicode_numerical_value(0x3288, 9.0, 9).	% No       CIRCLED IDEOGRAPH NINE
-unicode_numerical_value(0x4E5D, 9.0, 9).	% Lo       CJK UNIFIED IDEOGRAPH-4E5D
-unicode_numerical_value(0x5EFE, 9.0, 9).	% Lo       CJK UNIFIED IDEOGRAPH-5EFE
-unicode_numerical_value(0x7396, 9.0, 9).	% Lo       CJK UNIFIED IDEOGRAPH-7396
-unicode_numerical_value(0xA629, 9.0, 9).	% Nd       VAI DIGIT NINE
-unicode_numerical_value(0xA6EE, 9.0, 9).	% Nl       BAMUM LETTER KOVUU
-unicode_numerical_value(0xA8D9, 9.0, 9).	% Nd       SAURASHTRA DIGIT NINE
-unicode_numerical_value(0xA909, 9.0, 9).	% Nd       KAYAH LI DIGIT NINE
-unicode_numerical_value(0xA9D9, 9.0, 9).	% Nd       JAVANESE DIGIT NINE
-unicode_numerical_value(0xAA59, 9.0, 9).	% Nd       CHAM DIGIT NINE
-unicode_numerical_value(0xABF9, 9.0, 9).	% Nd       MEETEI MAYEK DIGIT NINE
-unicode_numerical_value(0xFF19, 9.0, 9).	% Nd       FULLWIDTH DIGIT NINE
-unicode_numerical_value(0x1010F, 9.0, 9).	% No       AEGEAN NUMBER NINE
-unicode_numerical_value(0x104A9, 9.0, 9).	% Nd       OSMANYA DIGIT NINE
-unicode_numerical_value(0x10E68, 9.0, 9).	% No       RUMI DIGIT NINE
-unicode_numerical_value(0x1105A, 9.0, 9).	% No       BRAHMI NUMBER NINE
-unicode_numerical_value(0x1106F, 9.0, 9).	% Nd       BRAHMI DIGIT NINE
-unicode_numerical_value(0x110F9, 9.0, 9).	% Nd       SORA SOMPENG DIGIT NINE
-unicode_numerical_value(0x1113F, 9.0, 9).	% Nd       CHAKMA DIGIT NINE
-unicode_numerical_value(0x111D9, 9.0, 9).	% Nd       SHARADA DIGIT NINE
-unicode_numerical_value(0x116C9, 9.0, 9).	% Nd       TAKRI DIGIT NINE
-unicode_numerical_value(0x12407, 9.0, 9).	% Nl       CUNEIFORM NUMERIC SIGN NINE ASH
-unicode_numerical_value(0x1240E, 9.0, 9).	% Nl       CUNEIFORM NUMERIC SIGN NINE DISH
-unicode_numerical_value(0x12414, 9.0, 9).	% Nl       CUNEIFORM NUMERIC SIGN NINE U
-unicode_numerical_value(0x1241D, 9.0, 9).	% Nl       CUNEIFORM NUMERIC SIGN NINE GESH2
-unicode_numerical_value(0x1242B, 9.0, 9).	% Nl       CUNEIFORM NUMERIC SIGN NINE SHAR2
-%12446..12449  ; 9.0, 9).	% Nl   [4] CUNEIFORM NUMERIC SIGN NINE VARIANT FORM ILIMMU..CUNEIFORM NUMERIC SIGN NINE VARIANT FORM ILIMMU A
-unicode_numerical_value(0x12446, 9.0, 9).	% Nl       CUNEIFORM NUMERIC SIGN NINE VARIANT FORM ILIMMU
-unicode_numerical_value(0x12447, 9.0, 9).	% Nl       CUNEIFORM NUMERIC SIGN NINE VARIANT FORM ILIMMU3
-unicode_numerical_value(0x12448, 9.0, 9).	% Nl       CUNEIFORM NUMERIC SIGN NINE VARIANT FORM ILIMMU4
-unicode_numerical_value(0x12449, 9.0, 9).	% Nl       CUNEIFORM NUMERIC SIGN NINE VARIANT FORM ILIMMU A
-unicode_numerical_value(0x1D368, 9.0, 9).	% No       COUNTING ROD UNIT DIGIT NINE
-unicode_numerical_value(0x1D7D7, 9.0, 9).	% Nd       MATHEMATICAL BOLD DIGIT NINE
-unicode_numerical_value(0x1D7E1, 9.0, 9).	% Nd       MATHEMATICAL DOUBLE-STRUCK DIGIT NINE
-unicode_numerical_value(0x1D7EB, 9.0, 9).	% Nd       MATHEMATICAL SANS-SERIF DIGIT NINE
-unicode_numerical_value(0x1D7F5, 9.0, 9).	% Nd       MATHEMATICAL SANS-SERIF BOLD DIGIT NINE
-unicode_numerical_value(0x1D7FF, 9.0, 9).	% Nd       MATHEMATICAL MONOSPACE DIGIT NINE
-unicode_numerical_value(0x1F10A, 9.0, 9).	% No       DIGIT NINE COMMA
-unicode_numerical_value(0x2F890, 9.0, 9).	% Lo       CJK COMPATIBILITY IDEOGRAPH-2F890
-
-% Total code points: 81
-
-% ================================================
-
-unicode_numerical_value(0x0BF0, 10.0, 10).	% No       TAMIL NUMBER TEN
-unicode_numerical_value(0x0D70, 10.0, 10).	% No       MALAYALAM NUMBER TEN
-unicode_numerical_value(0x1372, 10.0, 10).	% No       ETHIOPIC NUMBER TEN
-unicode_numerical_value(0x2169, 10.0, 10).	% Nl       ROMAN NUMERAL TEN
-unicode_numerical_value(0x2179, 10.0, 10).	% Nl       SMALL ROMAN NUMERAL TEN
-unicode_numerical_value(0x2469, 10.0, 10).	% No       CIRCLED NUMBER TEN
-unicode_numerical_value(0x247D, 10.0, 10).	% No       PARENTHESIZED NUMBER TEN
-unicode_numerical_value(0x2491, 10.0, 10).	% No       NUMBER TEN FULL STOP
-unicode_numerical_value(0x24FE, 10.0, 10).	% No       DOUBLE CIRCLED NUMBER TEN
-unicode_numerical_value(0x277F, 10.0, 10).	% No       DINGBAT NEGATIVE CIRCLED NUMBER TEN
-unicode_numerical_value(0x2789, 10.0, 10).	% No       DINGBAT CIRCLED SANS-SERIF NUMBER TEN
-unicode_numerical_value(0x2793, 10.0, 10).	% No       DINGBAT NEGATIVE CIRCLED SANS-SERIF NUMBER TEN
-unicode_numerical_value(0x3038, 10.0, 10).	% Nl       HANGZHOU NUMERAL TEN
-unicode_numerical_value(0x3229, 10.0, 10).	% No       PARENTHESIZED IDEOGRAPH TEN
-unicode_numerical_value(0x3248, 10.0, 10).	% No       CIRCLED NUMBER TEN ON BLACK SQUARE
-unicode_numerical_value(0x3289, 10.0, 10).	% No       CIRCLED IDEOGRAPH TEN
-unicode_numerical_value(0x4EC0, 10.0, 10).	% Lo       CJK UNIFIED IDEOGRAPH-4EC0
-unicode_numerical_value(0x5341, 10.0, 10).	% Lo       CJK UNIFIED IDEOGRAPH-5341
-unicode_numerical_value(0x62FE, 10.0, 10).	% Lo       CJK UNIFIED IDEOGRAPH-62FE
-unicode_numerical_value(0xF973, 10.0, 10).	% Lo       CJK COMPATIBILITY IDEOGRAPH-F973
-unicode_numerical_value(0xF9FD, 10.0, 10).	% Lo       CJK COMPATIBILITY IDEOGRAPH-F9FD
-unicode_numerical_value(0x10110, 10.0, 10).	% No       AEGEAN NUMBER TEN
-unicode_numerical_value(0x10149, 10.0, 10).	% Nl       GREEK ACROPHONIC ATTIC TEN TALENTS
-unicode_numerical_value(0x10150, 10.0, 10).	% Nl       GREEK ACROPHONIC ATTIC TEN STATERS
-unicode_numerical_value(0x10157, 10.0, 10).	% Nl       GREEK ACROPHONIC ATTIC TEN MNAS
-%10160..10164  ; 10.0, 10).	% Nl   [5] GREEK ACROPHONIC TROEZENIAN TEN..GREEK ACROPHONIC THESPIAN TEN
-unicode_numerical_value(0x10160, 10.0, 10).	% Nl       GREEK ACROPHONIC TROEZENIAN TEN
-unicode_numerical_value(0x10161, 10.0, 10).	% Nl       GREEK ACROPHONIC TROEZENIAN TEN ALTERNATE FORM
-unicode_numerical_value(0x10162, 10.0, 10).	% Nl       GREEK ACROPHONIC HERMIONIAN TEN
-unicode_numerical_value(0x10163, 10.0, 10).	% Nl       GREEK ACROPHONIC MESSENIAN TEN
-unicode_numerical_value(0x10164, 10.0, 10).	% Nl       GREEK ACROPHONIC THESPIAN TEN
-unicode_numerical_value(0x10322, 10.0, 10).	% No       OLD ITALIC NUMERAL TEN
-unicode_numerical_value(0x103D3, 10.0, 10).	% Nl       OLD PERSIAN NUMBER TEN
-unicode_numerical_value(0x1085B, 10.0, 10).	% No       IMPERIAL ARAMAIC NUMBER TEN
-unicode_numerical_value(0x10917, 10.0, 10).	% No       PHOENICIAN NUMBER TEN
-unicode_numerical_value(0x10A44, 10.0, 10).	% No       KHAROSHTHI NUMBER TEN
-unicode_numerical_value(0x10B5C, 10.0, 10).	% No       INSCRIPTIONAL PARTHIAN NUMBER TEN
-unicode_numerical_value(0x10B7C, 10.0, 10).	% No       INSCRIPTIONAL PAHLAVI NUMBER TEN
-unicode_numerical_value(0x10E69, 10.0, 10).	% No       RUMI NUMBER TEN
-unicode_numerical_value(0x1105B, 10.0, 10).	% No       BRAHMI NUMBER TEN
-unicode_numerical_value(0x1D369, 10.0, 10).	% No       COUNTING ROD TENS DIGIT ONE
-
-% Total code points: 40
-
-% ================================================
-
-unicode_numerical_value(0x216A, 11.0, 11).	% Nl       ROMAN NUMERAL ELEVEN
-unicode_numerical_value(0x217A, 11.0, 11).	% Nl       SMALL ROMAN NUMERAL ELEVEN
-unicode_numerical_value(0x246A, 11.0, 11).	% No       CIRCLED NUMBER ELEVEN
-unicode_numerical_value(0x247E, 11.0, 11).	% No       PARENTHESIZED NUMBER ELEVEN
-unicode_numerical_value(0x2492, 11.0, 11).	% No       NUMBER ELEVEN FULL STOP
-unicode_numerical_value(0x24EB, 11.0, 11).	% No       NEGATIVE CIRCLED NUMBER ELEVEN
-
-% Total code points: 6
-
-% ================================================
-
-unicode_numerical_value(0x216B, 12.0, 12).	% Nl       ROMAN NUMERAL TWELVE
-unicode_numerical_value(0x217B, 12.0, 12).	% Nl       SMALL ROMAN NUMERAL TWELVE
-unicode_numerical_value(0x246B, 12.0, 12).	% No       CIRCLED NUMBER TWELVE
-unicode_numerical_value(0x247F, 12.0, 12).	% No       PARENTHESIZED NUMBER TWELVE
-unicode_numerical_value(0x2493, 12.0, 12).	% No       NUMBER TWELVE FULL STOP
-unicode_numerical_value(0x24EC, 12.0, 12).	% No       NEGATIVE CIRCLED NUMBER TWELVE
-
-% Total code points: 6
-
-% ================================================
-
-unicode_numerical_value(0x246C, 13.0, 13).	% No       CIRCLED NUMBER THIRTEEN
-unicode_numerical_value(0x2480, 13.0, 13).	% No       PARENTHESIZED NUMBER THIRTEEN
-unicode_numerical_value(0x2494, 13.0, 13).	% No       NUMBER THIRTEEN FULL STOP
-unicode_numerical_value(0x24ED, 13.0, 13).	% No       NEGATIVE CIRCLED NUMBER THIRTEEN
-
-% Total code points: 4
-
-% ================================================
-
-unicode_numerical_value(0x246D, 14.0, 14).	% No       CIRCLED NUMBER FOURTEEN
-unicode_numerical_value(0x2481, 14.0, 14).	% No       PARENTHESIZED NUMBER FOURTEEN
-unicode_numerical_value(0x2495, 14.0, 14).	% No       NUMBER FOURTEEN FULL STOP
-unicode_numerical_value(0x24EE, 14.0, 14).	% No       NEGATIVE CIRCLED NUMBER FOURTEEN
-
-% Total code points: 4
-
-% ================================================
-
-unicode_numerical_value(0x246E, 15.0, 15).	% No       CIRCLED NUMBER FIFTEEN
-unicode_numerical_value(0x2482, 15.0, 15).	% No       PARENTHESIZED NUMBER FIFTEEN
-unicode_numerical_value(0x2496, 15.0, 15).	% No       NUMBER FIFTEEN FULL STOP
-unicode_numerical_value(0x24EF, 15.0, 15).	% No       NEGATIVE CIRCLED NUMBER FIFTEEN
-
-% Total code points: 4
-
-% ================================================
-
-unicode_numerical_value(0x09F9, 16.0, 16).	% No       BENGALI CURRENCY DENOMINATOR SIXTEEN
-unicode_numerical_value(0x246F, 16.0, 16).	% No       CIRCLED NUMBER SIXTEEN
-unicode_numerical_value(0x2483, 16.0, 16).	% No       PARENTHESIZED NUMBER SIXTEEN
-unicode_numerical_value(0x2497, 16.0, 16).	% No       NUMBER SIXTEEN FULL STOP
-unicode_numerical_value(0x24F0, 16.0, 16).	% No       NEGATIVE CIRCLED NUMBER SIXTEEN
-
-% Total code points: 5
-
-% ================================================
-
-unicode_numerical_value(0x16EE, 17.0, 17).	% Nl       RUNIC ARLAUG SYMBOL
-unicode_numerical_value(0x2470, 17.0, 17).	% No       CIRCLED NUMBER SEVENTEEN
-unicode_numerical_value(0x2484, 17.0, 17).	% No       PARENTHESIZED NUMBER SEVENTEEN
-unicode_numerical_value(0x2498, 17.0, 17).	% No       NUMBER SEVENTEEN FULL STOP
-unicode_numerical_value(0x24F1, 17.0, 17).	% No       NEGATIVE CIRCLED NUMBER SEVENTEEN
-
-% Total code points: 5
-
-% ================================================
-
-unicode_numerical_value(0x16EF, 18.0, 18).	% Nl       RUNIC TVIMADUR SYMBOL
-unicode_numerical_value(0x2471, 18.0, 18).	% No       CIRCLED NUMBER EIGHTEEN
-unicode_numerical_value(0x2485, 18.0, 18).	% No       PARENTHESIZED NUMBER EIGHTEEN
-unicode_numerical_value(0x2499, 18.0, 18).	% No       NUMBER EIGHTEEN FULL STOP
-unicode_numerical_value(0x24F2, 18.0, 18).	% No       NEGATIVE CIRCLED NUMBER EIGHTEEN
-
-% Total code points: 5
-
-% ================================================
-
-unicode_numerical_value(0x16F0, 19.0, 19).	% Nl       RUNIC BELGTHOR SYMBOL
-unicode_numerical_value(0x2472, 19.0, 19).	% No       CIRCLED NUMBER NINETEEN
-unicode_numerical_value(0x2486, 19.0, 19).	% No       PARENTHESIZED NUMBER NINETEEN
-unicode_numerical_value(0x249A, 19.0, 19).	% No       NUMBER NINETEEN FULL STOP
-unicode_numerical_value(0x24F3, 19.0, 19).	% No       NEGATIVE CIRCLED NUMBER NINETEEN
-
-% Total code points: 5
-
-% ================================================
-
-unicode_numerical_value(0x1373, 20.0, 20).	% No       ETHIOPIC NUMBER TWENTY
-unicode_numerical_value(0x2473, 20.0, 20).	% No       CIRCLED NUMBER TWENTY
-unicode_numerical_value(0x2487, 20.0, 20).	% No       PARENTHESIZED NUMBER TWENTY
-unicode_numerical_value(0x249B, 20.0, 20).	% No       NUMBER TWENTY FULL STOP
-unicode_numerical_value(0x24F4, 20.0, 20).	% No       NEGATIVE CIRCLED NUMBER TWENTY
-unicode_numerical_value(0x3039, 20.0, 20).	% Nl       HANGZHOU NUMERAL TWENTY
-unicode_numerical_value(0x3249, 20.0, 20).	% No       CIRCLED NUMBER TWENTY ON BLACK SQUARE
-unicode_numerical_value(0x5344, 20.0, 20).	% Lo       CJK UNIFIED IDEOGRAPH-5344
-unicode_numerical_value(0x5EFF, 20.0, 20).	% Lo       CJK UNIFIED IDEOGRAPH-5EFF
-unicode_numerical_value(0x10111, 20.0, 20).	% No       AEGEAN NUMBER TWENTY
-unicode_numerical_value(0x103D4, 20.0, 20).	% Nl       OLD PERSIAN NUMBER TWENTY
-unicode_numerical_value(0x1085C, 20.0, 20).	% No       IMPERIAL ARAMAIC NUMBER TWENTY
-unicode_numerical_value(0x10918, 20.0, 20).	% No       PHOENICIAN NUMBER TWENTY
-unicode_numerical_value(0x10A45, 20.0, 20).	% No       KHAROSHTHI NUMBER TWENTY
-unicode_numerical_value(0x10B5D, 20.0, 20).	% No       INSCRIPTIONAL PARTHIAN NUMBER TWENTY
-unicode_numerical_value(0x10B7D, 20.0, 20).	% No       INSCRIPTIONAL PAHLAVI NUMBER TWENTY
-unicode_numerical_value(0x10E6A, 20.0, 20).	% No       RUMI NUMBER TWENTY
-unicode_numerical_value(0x1105C, 20.0, 20).	% No       BRAHMI NUMBER TWENTY
-unicode_numerical_value(0x1D36A, 20.0, 20).	% No       COUNTING ROD TENS DIGIT TWO
-
-% Total code points: 19
-
-% ================================================
-
-unicode_numerical_value(0x3251, 21.0, 21).	% No       CIRCLED NUMBER TWENTY ONE
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x3252, 22.0, 22).	% No       CIRCLED NUMBER TWENTY TWO
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x3253, 23.0, 23).	% No       CIRCLED NUMBER TWENTY THREE
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x3254, 24.0, 24).	% No       CIRCLED NUMBER TWENTY FOUR
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x3255, 25.0, 25).	% No       CIRCLED NUMBER TWENTY FIVE
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x3256, 26.0, 26).	% No       CIRCLED NUMBER TWENTY SIX
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x3257, 27.0, 27).	% No       CIRCLED NUMBER TWENTY SEVEN
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x3258, 28.0, 28).	% No       CIRCLED NUMBER TWENTY EIGHT
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x3259, 29.0, 29).	% No       CIRCLED NUMBER TWENTY NINE
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x1374, 30.0, 30).	% No       ETHIOPIC NUMBER THIRTY
-unicode_numerical_value(0x303A, 30.0, 30).	% Nl       HANGZHOU NUMERAL THIRTY
-unicode_numerical_value(0x324A, 30.0, 30).	% No       CIRCLED NUMBER THIRTY ON BLACK SQUARE
-unicode_numerical_value(0x325A, 30.0, 30).	% No       CIRCLED NUMBER THIRTY
-unicode_numerical_value(0x5345, 30.0, 30).	% Lo       CJK UNIFIED IDEOGRAPH-5345
-unicode_numerical_value(0x10112, 30.0, 30).	% No       AEGEAN NUMBER THIRTY
-unicode_numerical_value(0x10165, 30.0, 30).	% Nl       GREEK ACROPHONIC THESPIAN THIRTY
-unicode_numerical_value(0x10E6B, 30.0, 30).	% No       RUMI NUMBER THIRTY
-unicode_numerical_value(0x1105D, 30.0, 30).	% No       BRAHMI NUMBER THIRTY
-unicode_numerical_value(0x1D36B, 30.0, 30).	% No       COUNTING ROD TENS DIGIT THREE
-unicode_numerical_value(0x20983, 30.0, 30).	% Lo       CJK UNIFIED IDEOGRAPH-20983
-
-% Total code points: 11
-
-% ================================================
-
-unicode_numerical_value(0x325B, 31.0, 31).	% No       CIRCLED NUMBER THIRTY ONE
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x325C, 32.0, 32).	% No       CIRCLED NUMBER THIRTY TWO
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x325D, 33.0, 33).	% No       CIRCLED NUMBER THIRTY THREE
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x325E, 34.0, 34).	% No       CIRCLED NUMBER THIRTY FOUR
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x325F, 35.0, 35).	% No       CIRCLED NUMBER THIRTY FIVE
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x32B1, 36.0, 36).	% No       CIRCLED NUMBER THIRTY SIX
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x32B2, 37.0, 37).	% No       CIRCLED NUMBER THIRTY SEVEN
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x32B3, 38.0, 38).	% No       CIRCLED NUMBER THIRTY EIGHT
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x32B4, 39.0, 39).	% No       CIRCLED NUMBER THIRTY NINE
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x1375, 40.0, 40).	% No       ETHIOPIC NUMBER FORTY
-unicode_numerical_value(0x324B, 40.0, 40).	% No       CIRCLED NUMBER FORTY ON BLACK SQUARE
-unicode_numerical_value(0x32B5, 40.0, 40).	% No       CIRCLED NUMBER FORTY
-unicode_numerical_value(0x534C, 40.0, 40).	% Lo       CJK UNIFIED IDEOGRAPH-534C
-unicode_numerical_value(0x10113, 40.0, 40).	% No       AEGEAN NUMBER FORTY
-unicode_numerical_value(0x10E6C, 40.0, 40).	% No       RUMI NUMBER FORTY
-unicode_numerical_value(0x1105E, 40.0, 40).	% No       BRAHMI NUMBER FORTY
-unicode_numerical_value(0x1D36C, 40.0, 40).	% No       COUNTING ROD TENS DIGIT FOUR
-unicode_numerical_value(0x2098C, 40.0, 40).	% Lo       CJK UNIFIED IDEOGRAPH-2098C
-unicode_numerical_value(0x2099C, 40.0, 40).	% Lo       CJK UNIFIED IDEOGRAPH-2099C
-
-% Total code points: 10
-
-% ================================================
-
-unicode_numerical_value(0x32B6, 41.0, 41).	% No       CIRCLED NUMBER FORTY ONE
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x32B7, 42.0, 42).	% No       CIRCLED NUMBER FORTY TWO
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x32B8, 43.0, 43).	% No       CIRCLED NUMBER FORTY THREE
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x32B9, 44.0, 44).	% No       CIRCLED NUMBER FORTY FOUR
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x32BA, 45.0, 45).	% No       CIRCLED NUMBER FORTY FIVE
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x32BB, 46.0, 46).	% No       CIRCLED NUMBER FORTY SIX
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x32BC, 47.0, 47).	% No       CIRCLED NUMBER FORTY SEVEN
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x32BD, 48.0, 48).	% No       CIRCLED NUMBER FORTY EIGHT
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x32BE, 49.0, 49).	% No       CIRCLED NUMBER FORTY NINE
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x1376, 50.0, 50).	% No       ETHIOPIC NUMBER FIFTY
-unicode_numerical_value(0x216C, 50.0, 50).	% Nl       ROMAN NUMERAL FIFTY
-unicode_numerical_value(0x217C, 50.0, 50).	% Nl       SMALL ROMAN NUMERAL FIFTY
-unicode_numerical_value(0x2186, 50.0, 50).	% Nl       ROMAN NUMERAL FIFTY EARLY FORM
-unicode_numerical_value(0x324C, 50.0, 50).	% No       CIRCLED NUMBER FIFTY ON BLACK SQUARE
-unicode_numerical_value(0x32BF, 50.0, 50).	% No       CIRCLED NUMBER FIFTY
-unicode_numerical_value(0x10114, 50.0, 50).	% No       AEGEAN NUMBER FIFTY
-unicode_numerical_value(0x10144, 50.0, 50).	% Nl       GREEK ACROPHONIC ATTIC FIFTY
-unicode_numerical_value(0x1014A, 50.0, 50).	% Nl       GREEK ACROPHONIC ATTIC FIFTY TALENTS
-unicode_numerical_value(0x10151, 50.0, 50).	% Nl       GREEK ACROPHONIC ATTIC FIFTY STATERS
-%10166..10169  ; 50.0, 50).	% Nl   [4] GREEK ACROPHONIC TROEZENIAN FIFTY..GREEK ACROPHONIC THESPIAN FIFTY
-unicode_numerical_value(0x10166, 50.0, 50).	% Nl       GREEK ACROPHONIC TROEZENIAN FIFTY
-unicode_numerical_value(0x10167, 50.0, 50).	% Nl       GREEK ACROPHONIC TROEZENIAN FIFTY ALTERNATE FORM
-unicode_numerical_value(0x10168, 50.0, 50).	% Nl       GREEK ACROPHONIC HERMIONIAN FIFTY
-unicode_numerical_value(0x10169, 50.0, 50).	% Nl       GREEK ACROPHONIC THESPIAN FIFTY
-unicode_numerical_value(0x10174, 50.0, 50).	% Nl       GREEK ACROPHONIC STRATIAN FIFTY MNAS
-unicode_numerical_value(0x10323, 50.0, 50).	% No       OLD ITALIC NUMERAL FIFTY
-unicode_numerical_value(0x10A7E, 50.0, 50).	% No       OLD SOUTH ARABIAN NUMBER FIFTY
-unicode_numerical_value(0x10E6D, 50.0, 50).	% No       RUMI NUMBER FIFTY
-unicode_numerical_value(0x1105F, 50.0, 50).	% No       BRAHMI NUMBER FIFTY
-unicode_numerical_value(0x1D36D, 50.0, 50).	% No       COUNTING ROD TENS DIGIT FIVE
-
-% Total code points: 20
-
-% ================================================
-
-unicode_numerical_value(0x1377, 60.0, 60).	% No       ETHIOPIC NUMBER SIXTY
-unicode_numerical_value(0x324D, 60.0, 60).	% No       CIRCLED NUMBER SIXTY ON BLACK SQUARE
-unicode_numerical_value(0x10115, 60.0, 60).	% No       AEGEAN NUMBER SIXTY
-unicode_numerical_value(0x10E6E, 60.0, 60).	% No       RUMI NUMBER SIXTY
-unicode_numerical_value(0x11060, 60.0, 60).	% No       BRAHMI NUMBER SIXTY
-unicode_numerical_value(0x1D36E, 60.0, 60).	% No       COUNTING ROD TENS DIGIT SIX
-
-% Total code points: 6
-
-% ================================================
-
-unicode_numerical_value(0x1378, 70.0, 70).	% No       ETHIOPIC NUMBER SEVENTY
-unicode_numerical_value(0x324E, 70.0, 70).	% No       CIRCLED NUMBER SEVENTY ON BLACK SQUARE
-unicode_numerical_value(0x10116, 70.0, 70).	% No       AEGEAN NUMBER SEVENTY
-unicode_numerical_value(0x10E6F, 70.0, 70).	% No       RUMI NUMBER SEVENTY
-unicode_numerical_value(0x11061, 70.0, 70).	% No       BRAHMI NUMBER SEVENTY
-unicode_numerical_value(0x1D36F, 70.0, 70).	% No       COUNTING ROD TENS DIGIT SEVEN
-
-% Total code points: 6
-
-% ================================================
-
-unicode_numerical_value(0x1379, 80.0, 80).	% No       ETHIOPIC NUMBER EIGHTY
-unicode_numerical_value(0x324F, 80.0, 80).	% No       CIRCLED NUMBER EIGHTY ON BLACK SQUARE
-unicode_numerical_value(0x10117, 80.0, 80).	% No       AEGEAN NUMBER EIGHTY
-unicode_numerical_value(0x10E70, 80.0, 80).	% No       RUMI NUMBER EIGHTY
-unicode_numerical_value(0x11062, 80.0, 80).	% No       BRAHMI NUMBER EIGHTY
-unicode_numerical_value(0x1D370, 80.0, 80).	% No       COUNTING ROD TENS DIGIT EIGHT
-
-% Total code points: 6
-
-% ================================================
-
-unicode_numerical_value(0x137A, 90.0, 90).	% No       ETHIOPIC NUMBER NINETY
-unicode_numerical_value(0x10118, 90.0, 90).	% No       AEGEAN NUMBER NINETY
-unicode_numerical_value(0x10341, 90.0, 90).	% Nl       GOTHIC LETTER NINETY
-unicode_numerical_value(0x10E71, 90.0, 90).	% No       RUMI NUMBER NINETY
-unicode_numerical_value(0x11063, 90.0, 90).	% No       BRAHMI NUMBER NINETY
-unicode_numerical_value(0x1D371, 90.0, 90).	% No       COUNTING ROD TENS DIGIT NINE
-
-% Total code points: 6
-
-% ================================================
-
-unicode_numerical_value(0x0BF1, 100.0, 100).	% No       TAMIL NUMBER ONE HUNDRED
-unicode_numerical_value(0x0D71, 100.0, 100).	% No       MALAYALAM NUMBER ONE HUNDRED
-unicode_numerical_value(0x137B, 100.0, 100).	% No       ETHIOPIC NUMBER HUNDRED
-unicode_numerical_value(0x216D, 100.0, 100).	% Nl       ROMAN NUMERAL ONE HUNDRED
-unicode_numerical_value(0x217D, 100.0, 100).	% Nl       SMALL ROMAN NUMERAL ONE HUNDRED
-unicode_numerical_value(0x4F70, 100.0, 100).	% Lo       CJK UNIFIED IDEOGRAPH-4F70
-unicode_numerical_value(0x767E, 100.0, 100).	% Lo       CJK UNIFIED IDEOGRAPH-767E
-unicode_numerical_value(0x964C, 100.0, 100).	% Lo       CJK UNIFIED IDEOGRAPH-964C
-unicode_numerical_value(0x10119, 100.0, 100).	% No       AEGEAN NUMBER ONE HUNDRED
-unicode_numerical_value(0x1014B, 100.0, 100).	% Nl       GREEK ACROPHONIC ATTIC ONE HUNDRED TALENTS
-unicode_numerical_value(0x10152, 100.0, 100).	% Nl       GREEK ACROPHONIC ATTIC ONE HUNDRED STATERS
-unicode_numerical_value(0x1016A, 100.0, 100).	% Nl       GREEK ACROPHONIC THESPIAN ONE HUNDRED
-unicode_numerical_value(0x103D5, 100.0, 100).	% Nl       OLD PERSIAN NUMBER HUNDRED
-unicode_numerical_value(0x1085D, 100.0, 100).	% No       IMPERIAL ARAMAIC NUMBER ONE HUNDRED
-unicode_numerical_value(0x10919, 100.0, 100).	% No       PHOENICIAN NUMBER ONE HUNDRED
-unicode_numerical_value(0x10A46, 100.0, 100).	% No       KHAROSHTHI NUMBER ONE HUNDRED
-unicode_numerical_value(0x10B5E, 100.0, 100).	% No       INSCRIPTIONAL PARTHIAN NUMBER ONE HUNDRED
-unicode_numerical_value(0x10B7E, 100.0, 100).	% No       INSCRIPTIONAL PAHLAVI NUMBER ONE HUNDRED
-unicode_numerical_value(0x10E72, 100.0, 100).	% No       RUMI NUMBER ONE HUNDRED
-unicode_numerical_value(0x11064, 100.0, 100).	% No       BRAHMI NUMBER ONE HUNDRED
-
-% Total code points: 20
-
-% ================================================
-
-unicode_numerical_value(0x1011A, 200.0, 200).	% No       AEGEAN NUMBER TWO HUNDRED
-unicode_numerical_value(0x10E73, 200.0, 200).	% No       RUMI NUMBER TWO HUNDRED
-
-% Total code points: 2
-
-% ================================================
-
-unicode_numerical_value(0x1011B, 300.0, 300).	% No       AEGEAN NUMBER THREE HUNDRED
-unicode_numerical_value(0x1016B, 300.0, 300).	% Nl       GREEK ACROPHONIC THESPIAN THREE HUNDRED
-unicode_numerical_value(0x10E74, 300.0, 300).	% No       RUMI NUMBER THREE HUNDRED
-
-% Total code points: 3
-
-% ================================================
-
-unicode_numerical_value(0x1011C, 400.0, 400).	% No       AEGEAN NUMBER FOUR HUNDRED
-unicode_numerical_value(0x10E75, 400.0, 400).	% No       RUMI NUMBER FOUR HUNDRED
-
-% Total code points: 2
-
-% ================================================
-
-unicode_numerical_value(0x216E, 500.0, 500).	% Nl       ROMAN NUMERAL FIVE HUNDRED
-unicode_numerical_value(0x217E, 500.0, 500).	% Nl       SMALL ROMAN NUMERAL FIVE HUNDRED
-unicode_numerical_value(0x1011D, 500.0, 500).	% No       AEGEAN NUMBER FIVE HUNDRED
-unicode_numerical_value(0x10145, 500.0, 500).	% Nl       GREEK ACROPHONIC ATTIC FIVE HUNDRED
-unicode_numerical_value(0x1014C, 500.0, 500).	% Nl       GREEK ACROPHONIC ATTIC FIVE HUNDRED TALENTS
-unicode_numerical_value(0x10153, 500.0, 500).	% Nl       GREEK ACROPHONIC ATTIC FIVE HUNDRED STATERS
-%1016C..10170  ; 500.0, 500).	% Nl   [5] GREEK ACROPHONIC EPIDAUREAN FIVE HUNDRED..GREEK ACROPHONIC NAXIAN FIVE HUNDRED
-unicode_numerical_value(0x1016C, 500.0, 500).	% Nl       GREEK ACROPHONIC EPIDAUREAN FIVE HUNDRED
-unicode_numerical_value(0x1016D, 500.0, 500).	% Nl       GREEK ACROPHONIC TROEZENIAN FIVE HUNDRED
-unicode_numerical_value(0x1016E, 500.0, 500).	% Nl       GREEK ACROPHONIC THESPIAN FIVE HUNDRED
-unicode_numerical_value(0x1016F, 500.0, 500).	% Nl       GREEK ACROPHONIC CARYSTIAN FIVE HUNDRED
-unicode_numerical_value(0x10170, 500.0, 500).	% Nl       GREEK ACROPHONIC NAXIAN FIVE HUNDRED
-unicode_numerical_value(0x10E76, 500.0, 500).	% No       RUMI NUMBER FIVE HUNDRED
-
-% Total code points: 12
-
-% ================================================
-
-unicode_numerical_value(0x1011E, 600.0, 600).	% No       AEGEAN NUMBER SIX HUNDRED
-unicode_numerical_value(0x10E77, 600.0, 600).	% No       RUMI NUMBER SIX HUNDRED
-
-% Total code points: 2
-
-% ================================================
-
-unicode_numerical_value(0x1011F, 700.0, 700).	% No       AEGEAN NUMBER SEVEN HUNDRED
-unicode_numerical_value(0x10E78, 700.0, 700).	% No       RUMI NUMBER SEVEN HUNDRED
-
-% Total code points: 2
-
-% ================================================
-
-unicode_numerical_value(0x10120, 800.0, 800).	% No       AEGEAN NUMBER EIGHT HUNDRED
-unicode_numerical_value(0x10E79, 800.0, 800).	% No       RUMI NUMBER EIGHT HUNDRED
-
-% Total code points: 2
-
-% ================================================
-
-unicode_numerical_value(0x10121, 900.0, 900).	% No       AEGEAN NUMBER NINE HUNDRED
-unicode_numerical_value(0x1034A, 900.0, 900).	% Nl       GOTHIC LETTER NINE HUNDRED
-unicode_numerical_value(0x10E7A, 900.0, 900).	% No       RUMI NUMBER NINE HUNDRED
-
-% Total code points: 3
-
-% ================================================
-
-unicode_numerical_value(0x0BF2, 1000.0, 1000).	% No       TAMIL NUMBER ONE THOUSAND
-unicode_numerical_value(0x0D72, 1000.0, 1000).	% No       MALAYALAM NUMBER ONE THOUSAND
-unicode_numerical_value(0x216F, 1000.0, 1000).	% Nl       ROMAN NUMERAL ONE THOUSAND
-%217F..2180    ; 1000.0, 1000).	% Nl   [2] SMALL ROMAN NUMERAL ONE THOUSAND..ROMAN NUMERAL ONE THOUSAND C D
-unicode_numerical_value(0x217F, 1000.0, 1000).	% Nl       SMALL ROMAN NUMERAL ONE THOUSAND
-unicode_numerical_value(0x2180, 1000.0, 1000).	% Nl       ROMAN NUMERAL ONE THOUSAND C D
-unicode_numerical_value(0x4EDF, 1000.0, 1000).	% Lo       CJK UNIFIED IDEOGRAPH-4EDF
-unicode_numerical_value(0x5343, 1000.0, 1000).	% Lo       CJK UNIFIED IDEOGRAPH-5343
-unicode_numerical_value(0x9621, 1000.0, 1000).	% Lo       CJK UNIFIED IDEOGRAPH-9621
-unicode_numerical_value(0x10122, 1000.0, 1000).	% No       AEGEAN NUMBER ONE THOUSAND
-unicode_numerical_value(0x1014D, 1000.0, 1000).	% Nl       GREEK ACROPHONIC ATTIC ONE THOUSAND TALENTS
-unicode_numerical_value(0x10154, 1000.0, 1000).	% Nl       GREEK ACROPHONIC ATTIC ONE THOUSAND STATERS
-unicode_numerical_value(0x10171, 1000.0, 1000).	% Nl       GREEK ACROPHONIC THESPIAN ONE THOUSAND
-unicode_numerical_value(0x1085E, 1000.0, 1000).	% No       IMPERIAL ARAMAIC NUMBER ONE THOUSAND
-unicode_numerical_value(0x10A47, 1000.0, 1000).	% No       KHAROSHTHI NUMBER ONE THOUSAND
-unicode_numerical_value(0x10B5F, 1000.0, 1000).	% No       INSCRIPTIONAL PARTHIAN NUMBER ONE THOUSAND
-unicode_numerical_value(0x10B7F, 1000.0, 1000).	% No       INSCRIPTIONAL PAHLAVI NUMBER ONE THOUSAND
-unicode_numerical_value(0x11065, 1000.0, 1000).	% No       BRAHMI NUMBER ONE THOUSAND
-
-% Total code points: 17
-
-% ================================================
-
-unicode_numerical_value(0x10123, 2000.0, 2000).	% No       AEGEAN NUMBER TWO THOUSAND
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x10124, 3000.0, 3000).	% No       AEGEAN NUMBER THREE THOUSAND
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x10125, 4000.0, 4000).	% No       AEGEAN NUMBER FOUR THOUSAND
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x2181, 5000.0, 5000).	% Nl       ROMAN NUMERAL FIVE THOUSAND
-unicode_numerical_value(0x10126, 5000.0, 5000).	% No       AEGEAN NUMBER FIVE THOUSAND
-unicode_numerical_value(0x10146, 5000.0, 5000).	% Nl       GREEK ACROPHONIC ATTIC FIVE THOUSAND
-unicode_numerical_value(0x1014E, 5000.0, 5000).	% Nl       GREEK ACROPHONIC ATTIC FIVE THOUSAND TALENTS
-unicode_numerical_value(0x10172, 5000.0, 5000).	% Nl       GREEK ACROPHONIC THESPIAN FIVE THOUSAND
-
-% Total code points: 5
-
-% ================================================
-
-unicode_numerical_value(0x10127, 6000.0, 6000).	% No       AEGEAN NUMBER SIX THOUSAND
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x10128, 7000.0, 7000).	% No       AEGEAN NUMBER SEVEN THOUSAND
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x10129, 8000.0, 8000).	% No       AEGEAN NUMBER EIGHT THOUSAND
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x1012A, 9000.0, 9000).	% No       AEGEAN NUMBER NINE THOUSAND
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x137C, 10000.0, 10000).	% No       ETHIOPIC NUMBER TEN THOUSAND
-unicode_numerical_value(0x2182, 10000.0, 10000).	% Nl       ROMAN NUMERAL TEN THOUSAND
-unicode_numerical_value(0x4E07, 10000.0, 10000).	% Lo       CJK UNIFIED IDEOGRAPH-4E07
-unicode_numerical_value(0x842C, 10000.0, 10000).	% Lo       CJK UNIFIED IDEOGRAPH-842C
-unicode_numerical_value(0x1012B, 10000.0, 10000).	% No       AEGEAN NUMBER TEN THOUSAND
-unicode_numerical_value(0x10155, 10000.0, 10000).	% Nl       GREEK ACROPHONIC ATTIC TEN THOUSAND STATERS
-unicode_numerical_value(0x1085F, 10000.0, 10000).	% No       IMPERIAL ARAMAIC NUMBER TEN THOUSAND
-
-% Total code points: 7
-
-% ================================================
-
-unicode_numerical_value(0x1012C, 20000.0, 20000).	% No       AEGEAN NUMBER TWENTY THOUSAND
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x1012D, 30000.0, 30000).	% No       AEGEAN NUMBER THIRTY THOUSAND
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x1012E, 40000.0, 40000).	% No       AEGEAN NUMBER FORTY THOUSAND
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x2187, 50000.0, 50000).	% Nl       ROMAN NUMERAL FIFTY THOUSAND
-unicode_numerical_value(0x1012F, 50000.0, 50000).	% No       AEGEAN NUMBER FIFTY THOUSAND
-unicode_numerical_value(0x10147, 50000.0, 50000).	% Nl       GREEK ACROPHONIC ATTIC FIFTY THOUSAND
-unicode_numerical_value(0x10156, 50000.0, 50000).	% Nl       GREEK ACROPHONIC ATTIC FIFTY THOUSAND STATERS
-
-% Total code points: 4
-
-% ================================================
-
-unicode_numerical_value(0x10130, 60000.0, 60000).	% No       AEGEAN NUMBER SIXTY THOUSAND
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x10131, 70000.0, 70000).	% No       AEGEAN NUMBER SEVENTY THOUSAND
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x10132, 80000.0, 80000).	% No       AEGEAN NUMBER EIGHTY THOUSAND
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x10133, 90000.0, 90000).	% No       AEGEAN NUMBER NINETY THOUSAND
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x2188, 100000.0, 100000).	% Nl       ROMAN NUMERAL ONE HUNDRED THOUSAND
-
-% Total code points: 1
-
-% ================================================
-
-unicode_numerical_value(0x4EBF, 100000000.0, 100000000).	% Lo       CJK UNIFIED IDEOGRAPH-4EBF
-unicode_numerical_value(0x5104, 100000000.0, 100000000).	% Lo       CJK UNIFIED IDEOGRAPH-5104
-
-% Total code points: 2
-
-% ================================================
-
-unicode_numerical_value(0x5146, 1000000000000.0, 1000000000000).	% Lo       CJK UNIFIED IDEOGRAPH-5146
-
-% Total code points: 1
-
-% EOF
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Generated from Unicode 17.0.0 DerivedNumericValues.txt. Do not edit.
+
+unicode_numerical_value(3891, -0.5, -1/2).
+unicode_numerical_value(48, 0.0, 0).
+unicode_numerical_value(1632, 0.0, 0).
+unicode_numerical_value(1776, 0.0, 0).
+unicode_numerical_value(1984, 0.0, 0).
+unicode_numerical_value(2406, 0.0, 0).
+unicode_numerical_value(2534, 0.0, 0).
+unicode_numerical_value(2662, 0.0, 0).
+unicode_numerical_value(2790, 0.0, 0).
+unicode_numerical_value(2918, 0.0, 0).
+unicode_numerical_value(3046, 0.0, 0).
+unicode_numerical_value(3174, 0.0, 0).
+unicode_numerical_value(3192, 0.0, 0).
+unicode_numerical_value(3302, 0.0, 0).
+unicode_numerical_value(3430, 0.0, 0).
+unicode_numerical_value(3558, 0.0, 0).
+unicode_numerical_value(3664, 0.0, 0).
+unicode_numerical_value(3792, 0.0, 0).
+unicode_numerical_value(3872, 0.0, 0).
+unicode_numerical_value(4160, 0.0, 0).
+unicode_numerical_value(4240, 0.0, 0).
+unicode_numerical_value(6112, 0.0, 0).
+unicode_numerical_value(6128, 0.0, 0).
+unicode_numerical_value(6160, 0.0, 0).
+unicode_numerical_value(6470, 0.0, 0).
+unicode_numerical_value(6608, 0.0, 0).
+unicode_numerical_value(6784, 0.0, 0).
+unicode_numerical_value(6800, 0.0, 0).
+unicode_numerical_value(6992, 0.0, 0).
+unicode_numerical_value(7088, 0.0, 0).
+unicode_numerical_value(7232, 0.0, 0).
+unicode_numerical_value(7248, 0.0, 0).
+unicode_numerical_value(8304, 0.0, 0).
+unicode_numerical_value(8320, 0.0, 0).
+unicode_numerical_value(8585, 0.0, 0).
+unicode_numerical_value(9450, 0.0, 0).
+unicode_numerical_value(9471, 0.0, 0).
+unicode_numerical_value(12295, 0.0, 0).
+unicode_numerical_value(27934, 0.0, 0).
+unicode_numerical_value(38646, 0.0, 0).
+unicode_numerical_value(42528, 0.0, 0).
+unicode_numerical_value(42735, 0.0, 0).
+unicode_numerical_value(43216, 0.0, 0).
+unicode_numerical_value(43264, 0.0, 0).
+unicode_numerical_value(43472, 0.0, 0).
+unicode_numerical_value(43504, 0.0, 0).
+unicode_numerical_value(43600, 0.0, 0).
+unicode_numerical_value(44016, 0.0, 0).
+unicode_numerical_value(63922, 0.0, 0).
+unicode_numerical_value(65296, 0.0, 0).
+unicode_numerical_value(65930, 0.0, 0).
+unicode_numerical_value(66720, 0.0, 0).
+unicode_numerical_value(68912, 0.0, 0).
+unicode_numerical_value(68928, 0.0, 0).
+unicode_numerical_value(69734, 0.0, 0).
+unicode_numerical_value(69872, 0.0, 0).
+unicode_numerical_value(69942, 0.0, 0).
+unicode_numerical_value(70096, 0.0, 0).
+unicode_numerical_value(70384, 0.0, 0).
+unicode_numerical_value(70736, 0.0, 0).
+unicode_numerical_value(70864, 0.0, 0).
+unicode_numerical_value(71248, 0.0, 0).
+unicode_numerical_value(71360, 0.0, 0).
+unicode_numerical_value(71376, 0.0, 0).
+unicode_numerical_value(71386, 0.0, 0).
+unicode_numerical_value(71472, 0.0, 0).
+unicode_numerical_value(71904, 0.0, 0).
+unicode_numerical_value(72016, 0.0, 0).
+unicode_numerical_value(72688, 0.0, 0).
+unicode_numerical_value(72784, 0.0, 0).
+unicode_numerical_value(73040, 0.0, 0).
+unicode_numerical_value(73120, 0.0, 0).
+unicode_numerical_value(73184, 0.0, 0).
+unicode_numerical_value(73552, 0.0, 0).
+unicode_numerical_value(90416, 0.0, 0).
+unicode_numerical_value(92768, 0.0, 0).
+unicode_numerical_value(92864, 0.0, 0).
+unicode_numerical_value(93008, 0.0, 0).
+unicode_numerical_value(93552, 0.0, 0).
+unicode_numerical_value(93824, 0.0, 0).
+unicode_numerical_value(118000, 0.0, 0).
+unicode_numerical_value(119488, 0.0, 0).
+unicode_numerical_value(119520, 0.0, 0).
+unicode_numerical_value(120782, 0.0, 0).
+unicode_numerical_value(120792, 0.0, 0).
+unicode_numerical_value(120802, 0.0, 0).
+unicode_numerical_value(120812, 0.0, 0).
+unicode_numerical_value(120822, 0.0, 0).
+unicode_numerical_value(123200, 0.0, 0).
+unicode_numerical_value(123632, 0.0, 0).
+unicode_numerical_value(124144, 0.0, 0).
+unicode_numerical_value(124401, 0.0, 0).
+unicode_numerical_value(125264, 0.0, 0).
+unicode_numerical_value(127232, 0.0, 0).
+unicode_numerical_value(127233, 0.0, 0).
+unicode_numerical_value(127243, 0.0, 0).
+unicode_numerical_value(127244, 0.0, 0).
+unicode_numerical_value(130032, 0.0, 0).
+unicode_numerical_value(73664, 0.003125, 1/320).
+unicode_numerical_value(73684, 0.003125, 1/320).
+unicode_numerical_value(3416, 0.00625, 1/160).
+unicode_numerical_value(73665, 0.00625, 1/160).
+unicode_numerical_value(73666, 0.0125, 1/80).
+unicode_numerical_value(73667, 0.015625, 1/64).
+unicode_numerical_value(3417, 0.025, 1/40).
+unicode_numerical_value(73668, 0.025, 1/40).
+unicode_numerical_value(73669, 0.03125, 1/32).
+unicode_numerical_value(3418, 0.0375, 3/80).
+unicode_numerical_value(73670, 0.0375, 3/80).
+unicode_numerical_value(73671, 0.046875, 3/64).
+unicode_numerical_value(3419, 0.05, 1/20).
+unicode_numerical_value(73672, 0.05, 1/20).
+unicode_numerical_value(2548, 0.0625, 1/16).
+unicode_numerical_value(2933, 0.0625, 1/16).
+unicode_numerical_value(3446, 0.0625, 1/16).
+unicode_numerical_value(43059, 0.0625, 1/16).
+unicode_numerical_value(73673, 0.0625, 1/16).
+unicode_numerical_value(73674, 0.0625, 1/16).
+unicode_numerical_value(68086, 0.08333333, 1/12).
+unicode_numerical_value(3420, 0.1, 1/10).
+unicode_numerical_value(8530, 0.1, 1/10).
+unicode_numerical_value(73675, 0.1, 1/10).
+unicode_numerical_value(8529, 0.11111111, 1/9).
+unicode_numerical_value(2549, 0.125, 1/8).
+unicode_numerical_value(2934, 0.125, 1/8).
+unicode_numerical_value(3447, 0.125, 1/8).
+unicode_numerical_value(8539, 0.125, 1/8).
+unicode_numerical_value(43060, 0.125, 1/8).
+unicode_numerical_value(73676, 0.125, 1/8).
+unicode_numerical_value(74847, 0.125, 1/8).
+unicode_numerical_value(8528, 0.14285714, 1/7).
+unicode_numerical_value(3421, 0.15, 3/20).
+unicode_numerical_value(73677, 0.15, 3/20).
+unicode_numerical_value(8537, 0.16666667, 1/6).
+unicode_numerical_value(68087, 0.16666667, 1/6).
+unicode_numerical_value(74849, 0.16666667, 1/6).
+unicode_numerical_value(126269, 0.16666667, 1/6).
+unicode_numerical_value(2550, 0.1875, 3/16).
+unicode_numerical_value(2935, 0.1875, 3/16).
+unicode_numerical_value(3448, 0.1875, 3/16).
+unicode_numerical_value(43061, 0.1875, 3/16).
+unicode_numerical_value(73678, 0.1875, 3/16).
+unicode_numerical_value(3422, 0.2, 1/5).
+unicode_numerical_value(8533, 0.2, 1/5).
+unicode_numerical_value(73679, 0.2, 1/5).
+unicode_numerical_value(188, 0.25, 1/4).
+unicode_numerical_value(2551, 0.25, 1/4).
+unicode_numerical_value(2930, 0.25, 1/4).
+unicode_numerical_value(3443, 0.25, 1/4).
+unicode_numerical_value(43056, 0.25, 1/4).
+unicode_numerical_value(65856, 0.25, 1/4).
+unicode_numerical_value(65931, 0.25, 1/4).
+unicode_numerical_value(68088, 0.25, 1/4).
+unicode_numerical_value(69244, 0.25, 1/4).
+unicode_numerical_value(73680, 0.25, 1/4).
+unicode_numerical_value(74848, 0.25, 1/4).
+unicode_numerical_value(74850, 0.25, 1/4).
+unicode_numerical_value(74851, 0.25, 1/4).
+unicode_numerical_value(126125, 0.25, 1/4).
+unicode_numerical_value(8531, 0.33333333, 1/3).
+unicode_numerical_value(68089, 0.33333333, 1/3).
+unicode_numerical_value(69245, 0.33333333, 1/3).
+unicode_numerical_value(74842, 0.33333333, 1/3).
+unicode_numerical_value(74845, 0.33333333, 1/3).
+unicode_numerical_value(74853, 0.33333333, 1/3).
+unicode_numerical_value(8540, 0.375, 3/8).
+unicode_numerical_value(8534, 0.4, 2/5).
+unicode_numerical_value(68090, 0.41666667, 5/12).
+unicode_numerical_value(189, 0.5, 1/2).
+unicode_numerical_value(2931, 0.5, 1/2).
+unicode_numerical_value(3444, 0.5, 1/2).
+unicode_numerical_value(3882, 0.5, 1/2).
+unicode_numerical_value(11517, 0.5, 1/2).
+unicode_numerical_value(43057, 0.5, 1/2).
+unicode_numerical_value(65857, 0.5, 1/2).
+unicode_numerical_value(65909, 0.5, 1/2).
+unicode_numerical_value(65910, 0.5, 1/2).
+unicode_numerical_value(68029, 0.5, 1/2).
+unicode_numerical_value(68091, 0.5, 1/2).
+unicode_numerical_value(68168, 0.5, 1/2).
+unicode_numerical_value(69243, 0.5, 1/2).
+unicode_numerical_value(69414, 0.5, 1/2).
+unicode_numerical_value(73681, 0.5, 1/2).
+unicode_numerical_value(73682, 0.5, 1/2).
+unicode_numerical_value(74278, 0.5, 1/2).
+unicode_numerical_value(74852, 0.5, 1/2).
+unicode_numerical_value(126126, 0.5, 1/2).
+unicode_numerical_value(126268, 0.5, 1/2).
+unicode_numerical_value(68092, 0.58333333, 7/12).
+unicode_numerical_value(8535, 0.6, 3/5).
+unicode_numerical_value(8541, 0.625, 5/8).
+unicode_numerical_value(8532, 0.66666667, 2/3).
+unicode_numerical_value(65911, 0.66666667, 2/3).
+unicode_numerical_value(68093, 0.66666667, 2/3).
+unicode_numerical_value(69246, 0.66666667, 2/3).
+unicode_numerical_value(74843, 0.66666667, 2/3).
+unicode_numerical_value(74846, 0.66666667, 2/3).
+unicode_numerical_value(74854, 0.66666667, 2/3).
+unicode_numerical_value(190, 0.75, 3/4).
+unicode_numerical_value(2552, 0.75, 3/4).
+unicode_numerical_value(2932, 0.75, 3/4).
+unicode_numerical_value(3445, 0.75, 3/4).
+unicode_numerical_value(43058, 0.75, 3/4).
+unicode_numerical_value(65912, 0.75, 3/4).
+unicode_numerical_value(68094, 0.75, 3/4).
+unicode_numerical_value(73683, 0.75, 3/4).
+unicode_numerical_value(126127, 0.75, 3/4).
+unicode_numerical_value(8536, 0.8, 4/5).
+unicode_numerical_value(8538, 0.83333333, 5/6).
+unicode_numerical_value(68095, 0.83333333, 5/6).
+unicode_numerical_value(74844, 0.83333333, 5/6).
+unicode_numerical_value(8542, 0.875, 7/8).
+unicode_numerical_value(68028, 0.91666667, 11/12).
+unicode_numerical_value(49, 1.0, 1).
+unicode_numerical_value(185, 1.0, 1).
+unicode_numerical_value(1633, 1.0, 1).
+unicode_numerical_value(1777, 1.0, 1).
+unicode_numerical_value(1985, 1.0, 1).
+unicode_numerical_value(2407, 1.0, 1).
+unicode_numerical_value(2535, 1.0, 1).
+unicode_numerical_value(2663, 1.0, 1).
+unicode_numerical_value(2791, 1.0, 1).
+unicode_numerical_value(2919, 1.0, 1).
+unicode_numerical_value(3047, 1.0, 1).
+unicode_numerical_value(3175, 1.0, 1).
+unicode_numerical_value(3193, 1.0, 1).
+unicode_numerical_value(3196, 1.0, 1).
+unicode_numerical_value(3303, 1.0, 1).
+unicode_numerical_value(3431, 1.0, 1).
+unicode_numerical_value(3559, 1.0, 1).
+unicode_numerical_value(3665, 1.0, 1).
+unicode_numerical_value(3793, 1.0, 1).
+unicode_numerical_value(3873, 1.0, 1).
+unicode_numerical_value(4161, 1.0, 1).
+unicode_numerical_value(4241, 1.0, 1).
+unicode_numerical_value(4969, 1.0, 1).
+unicode_numerical_value(6113, 1.0, 1).
+unicode_numerical_value(6129, 1.0, 1).
+unicode_numerical_value(6161, 1.0, 1).
+unicode_numerical_value(6471, 1.0, 1).
+unicode_numerical_value(6609, 1.0, 1).
+unicode_numerical_value(6618, 1.0, 1).
+unicode_numerical_value(6785, 1.0, 1).
+unicode_numerical_value(6801, 1.0, 1).
+unicode_numerical_value(6993, 1.0, 1).
+unicode_numerical_value(7089, 1.0, 1).
+unicode_numerical_value(7233, 1.0, 1).
+unicode_numerical_value(7249, 1.0, 1).
+unicode_numerical_value(8321, 1.0, 1).
+unicode_numerical_value(8543, 1.0, 1).
+unicode_numerical_value(8544, 1.0, 1).
+unicode_numerical_value(8560, 1.0, 1).
+unicode_numerical_value(9312, 1.0, 1).
+unicode_numerical_value(9332, 1.0, 1).
+unicode_numerical_value(9352, 1.0, 1).
+unicode_numerical_value(9461, 1.0, 1).
+unicode_numerical_value(10102, 1.0, 1).
+unicode_numerical_value(10112, 1.0, 1).
+unicode_numerical_value(10122, 1.0, 1).
+unicode_numerical_value(12321, 1.0, 1).
+unicode_numerical_value(12690, 1.0, 1).
+unicode_numerical_value(12832, 1.0, 1).
+unicode_numerical_value(12928, 1.0, 1).
+unicode_numerical_value(19968, 1.0, 1).
+unicode_numerical_value(22769, 1.0, 1).
+unicode_numerical_value(22777, 1.0, 1).
+unicode_numerical_value(24186, 1.0, 1).
+unicode_numerical_value(24332, 1.0, 1).
+unicode_numerical_value(42529, 1.0, 1).
+unicode_numerical_value(42726, 1.0, 1).
+unicode_numerical_value(43217, 1.0, 1).
+unicode_numerical_value(43265, 1.0, 1).
+unicode_numerical_value(43473, 1.0, 1).
+unicode_numerical_value(43505, 1.0, 1).
+unicode_numerical_value(43601, 1.0, 1).
+unicode_numerical_value(44017, 1.0, 1).
+unicode_numerical_value(65297, 1.0, 1).
+unicode_numerical_value(65799, 1.0, 1).
+unicode_numerical_value(65858, 1.0, 1).
+unicode_numerical_value(65880, 1.0, 1).
+unicode_numerical_value(65881, 1.0, 1).
+unicode_numerical_value(65882, 1.0, 1).
+unicode_numerical_value(66273, 1.0, 1).
+unicode_numerical_value(66336, 1.0, 1).
+unicode_numerical_value(66513, 1.0, 1).
+unicode_numerical_value(66721, 1.0, 1).
+unicode_numerical_value(67672, 1.0, 1).
+unicode_numerical_value(67705, 1.0, 1).
+unicode_numerical_value(67751, 1.0, 1).
+unicode_numerical_value(67835, 1.0, 1).
+unicode_numerical_value(67862, 1.0, 1).
+unicode_numerical_value(68032, 1.0, 1).
+unicode_numerical_value(68160, 1.0, 1).
+unicode_numerical_value(68221, 1.0, 1).
+unicode_numerical_value(68253, 1.0, 1).
+unicode_numerical_value(68331, 1.0, 1).
+unicode_numerical_value(68440, 1.0, 1).
+unicode_numerical_value(68472, 1.0, 1).
+unicode_numerical_value(68521, 1.0, 1).
+unicode_numerical_value(68858, 1.0, 1).
+unicode_numerical_value(68913, 1.0, 1).
+unicode_numerical_value(68929, 1.0, 1).
+unicode_numerical_value(69216, 1.0, 1).
+unicode_numerical_value(69405, 1.0, 1).
+unicode_numerical_value(69457, 1.0, 1).
+unicode_numerical_value(69573, 1.0, 1).
+unicode_numerical_value(69714, 1.0, 1).
+unicode_numerical_value(69735, 1.0, 1).
+unicode_numerical_value(69873, 1.0, 1).
+unicode_numerical_value(69943, 1.0, 1).
+unicode_numerical_value(70097, 1.0, 1).
+unicode_numerical_value(70113, 1.0, 1).
+unicode_numerical_value(70385, 1.0, 1).
+unicode_numerical_value(70737, 1.0, 1).
+unicode_numerical_value(70865, 1.0, 1).
+unicode_numerical_value(71249, 1.0, 1).
+unicode_numerical_value(71361, 1.0, 1).
+unicode_numerical_value(71377, 1.0, 1).
+unicode_numerical_value(71387, 1.0, 1).
+unicode_numerical_value(71473, 1.0, 1).
+unicode_numerical_value(71905, 1.0, 1).
+unicode_numerical_value(72017, 1.0, 1).
+unicode_numerical_value(72689, 1.0, 1).
+unicode_numerical_value(72785, 1.0, 1).
+unicode_numerical_value(72794, 1.0, 1).
+unicode_numerical_value(73041, 1.0, 1).
+unicode_numerical_value(73121, 1.0, 1).
+unicode_numerical_value(73185, 1.0, 1).
+unicode_numerical_value(73553, 1.0, 1).
+unicode_numerical_value(73784, 1.0, 1).
+unicode_numerical_value(73785, 1.0, 1).
+unicode_numerical_value(73849, 1.0, 1).
+unicode_numerical_value(74507, 1.0, 1).
+unicode_numerical_value(74773, 1.0, 1).
+unicode_numerical_value(74782, 1.0, 1).
+unicode_numerical_value(74796, 1.0, 1).
+unicode_numerical_value(74804, 1.0, 1).
+unicode_numerical_value(74831, 1.0, 1).
+unicode_numerical_value(74840, 1.0, 1).
+unicode_numerical_value(90417, 1.0, 1).
+unicode_numerical_value(92769, 1.0, 1).
+unicode_numerical_value(92865, 1.0, 1).
+unicode_numerical_value(93009, 1.0, 1).
+unicode_numerical_value(93553, 1.0, 1).
+unicode_numerical_value(93825, 1.0, 1).
+unicode_numerical_value(93844, 1.0, 1).
+unicode_numerical_value(94196, 1.0, 1).
+unicode_numerical_value(118001, 1.0, 1).
+unicode_numerical_value(119489, 1.0, 1).
+unicode_numerical_value(119521, 1.0, 1).
+unicode_numerical_value(119648, 1.0, 1).
+unicode_numerical_value(119666, 1.0, 1).
+unicode_numerical_value(119671, 1.0, 1).
+unicode_numerical_value(120783, 1.0, 1).
+unicode_numerical_value(120793, 1.0, 1).
+unicode_numerical_value(120803, 1.0, 1).
+unicode_numerical_value(120813, 1.0, 1).
+unicode_numerical_value(120823, 1.0, 1).
+unicode_numerical_value(123201, 1.0, 1).
+unicode_numerical_value(123633, 1.0, 1).
+unicode_numerical_value(124145, 1.0, 1).
+unicode_numerical_value(124402, 1.0, 1).
+unicode_numerical_value(125127, 1.0, 1).
+unicode_numerical_value(125265, 1.0, 1).
+unicode_numerical_value(126065, 1.0, 1).
+unicode_numerical_value(126115, 1.0, 1).
+unicode_numerical_value(126129, 1.0, 1).
+unicode_numerical_value(126209, 1.0, 1).
+unicode_numerical_value(127234, 1.0, 1).
+unicode_numerical_value(130033, 1.0, 1).
+unicode_numerical_value(133418, 1.0, 1).
+unicode_numerical_value(3883, 1.5, 3/2).
+unicode_numerical_value(94197, 1.5, 3/2).
+unicode_numerical_value(50, 2.0, 2).
+unicode_numerical_value(178, 2.0, 2).
+unicode_numerical_value(1634, 2.0, 2).
+unicode_numerical_value(1778, 2.0, 2).
+unicode_numerical_value(1986, 2.0, 2).
+unicode_numerical_value(2408, 2.0, 2).
+unicode_numerical_value(2536, 2.0, 2).
+unicode_numerical_value(2664, 2.0, 2).
+unicode_numerical_value(2792, 2.0, 2).
+unicode_numerical_value(2920, 2.0, 2).
+unicode_numerical_value(3048, 2.0, 2).
+unicode_numerical_value(3176, 2.0, 2).
+unicode_numerical_value(3194, 2.0, 2).
+unicode_numerical_value(3197, 2.0, 2).
+unicode_numerical_value(3304, 2.0, 2).
+unicode_numerical_value(3432, 2.0, 2).
+unicode_numerical_value(3560, 2.0, 2).
+unicode_numerical_value(3666, 2.0, 2).
+unicode_numerical_value(3794, 2.0, 2).
+unicode_numerical_value(3874, 2.0, 2).
+unicode_numerical_value(4162, 2.0, 2).
+unicode_numerical_value(4242, 2.0, 2).
+unicode_numerical_value(4970, 2.0, 2).
+unicode_numerical_value(6114, 2.0, 2).
+unicode_numerical_value(6130, 2.0, 2).
+unicode_numerical_value(6162, 2.0, 2).
+unicode_numerical_value(6472, 2.0, 2).
+unicode_numerical_value(6610, 2.0, 2).
+unicode_numerical_value(6786, 2.0, 2).
+unicode_numerical_value(6802, 2.0, 2).
+unicode_numerical_value(6994, 2.0, 2).
+unicode_numerical_value(7090, 2.0, 2).
+unicode_numerical_value(7234, 2.0, 2).
+unicode_numerical_value(7250, 2.0, 2).
+unicode_numerical_value(8322, 2.0, 2).
+unicode_numerical_value(8545, 2.0, 2).
+unicode_numerical_value(8561, 2.0, 2).
+unicode_numerical_value(9313, 2.0, 2).
+unicode_numerical_value(9333, 2.0, 2).
+unicode_numerical_value(9353, 2.0, 2).
+unicode_numerical_value(9462, 2.0, 2).
+unicode_numerical_value(10103, 2.0, 2).
+unicode_numerical_value(10113, 2.0, 2).
+unicode_numerical_value(10123, 2.0, 2).
+unicode_numerical_value(12322, 2.0, 2).
+unicode_numerical_value(12691, 2.0, 2).
+unicode_numerical_value(12833, 2.0, 2).
+unicode_numerical_value(12929, 2.0, 2).
+unicode_numerical_value(13443, 2.0, 2).
+unicode_numerical_value(20004, 2.0, 2).
+unicode_numerical_value(20108, 2.0, 2).
+unicode_numerical_value(20457, 2.0, 2).
+unicode_numerical_value(20486, 2.0, 2).
+unicode_numerical_value(20841, 2.0, 2).
+unicode_numerical_value(24333, 2.0, 2).
+unicode_numerical_value(24336, 2.0, 2).
+unicode_numerical_value(36014, 2.0, 2).
+unicode_numerical_value(36019, 2.0, 2).
+unicode_numerical_value(36144, 2.0, 2).
+unicode_numerical_value(42530, 2.0, 2).
+unicode_numerical_value(42727, 2.0, 2).
+unicode_numerical_value(43218, 2.0, 2).
+unicode_numerical_value(43266, 2.0, 2).
+unicode_numerical_value(43474, 2.0, 2).
+unicode_numerical_value(43506, 2.0, 2).
+unicode_numerical_value(43602, 2.0, 2).
+unicode_numerical_value(44018, 2.0, 2).
+unicode_numerical_value(63864, 2.0, 2).
+unicode_numerical_value(65298, 2.0, 2).
+unicode_numerical_value(65800, 2.0, 2).
+unicode_numerical_value(65883, 2.0, 2).
+unicode_numerical_value(65884, 2.0, 2).
+unicode_numerical_value(65885, 2.0, 2).
+unicode_numerical_value(65886, 2.0, 2).
+unicode_numerical_value(66274, 2.0, 2).
+unicode_numerical_value(66514, 2.0, 2).
+unicode_numerical_value(66722, 2.0, 2).
+unicode_numerical_value(67673, 2.0, 2).
+unicode_numerical_value(67706, 2.0, 2).
+unicode_numerical_value(67752, 2.0, 2).
+unicode_numerical_value(67866, 2.0, 2).
+unicode_numerical_value(68033, 2.0, 2).
+unicode_numerical_value(68161, 2.0, 2).
+unicode_numerical_value(68441, 2.0, 2).
+unicode_numerical_value(68473, 2.0, 2).
+unicode_numerical_value(68522, 2.0, 2).
+unicode_numerical_value(68914, 2.0, 2).
+unicode_numerical_value(68930, 2.0, 2).
+unicode_numerical_value(69217, 2.0, 2).
+unicode_numerical_value(69406, 2.0, 2).
+unicode_numerical_value(69574, 2.0, 2).
+unicode_numerical_value(69715, 2.0, 2).
+unicode_numerical_value(69736, 2.0, 2).
+unicode_numerical_value(69874, 2.0, 2).
+unicode_numerical_value(69944, 2.0, 2).
+unicode_numerical_value(70098, 2.0, 2).
+unicode_numerical_value(70114, 2.0, 2).
+unicode_numerical_value(70386, 2.0, 2).
+unicode_numerical_value(70738, 2.0, 2).
+unicode_numerical_value(70866, 2.0, 2).
+unicode_numerical_value(71250, 2.0, 2).
+unicode_numerical_value(71362, 2.0, 2).
+unicode_numerical_value(71378, 2.0, 2).
+unicode_numerical_value(71388, 2.0, 2).
+unicode_numerical_value(71474, 2.0, 2).
+unicode_numerical_value(71906, 2.0, 2).
+unicode_numerical_value(72018, 2.0, 2).
+unicode_numerical_value(72690, 2.0, 2).
+unicode_numerical_value(72786, 2.0, 2).
+unicode_numerical_value(72795, 2.0, 2).
+unicode_numerical_value(73042, 2.0, 2).
+unicode_numerical_value(73122, 2.0, 2).
+unicode_numerical_value(73186, 2.0, 2).
+unicode_numerical_value(73554, 2.0, 2).
+unicode_numerical_value(74283, 2.0, 2).
+unicode_numerical_value(74649, 2.0, 2).
+unicode_numerical_value(74752, 2.0, 2).
+unicode_numerical_value(74774, 2.0, 2).
+unicode_numerical_value(74783, 2.0, 2).
+unicode_numerical_value(74787, 2.0, 2).
+unicode_numerical_value(74797, 2.0, 2).
+unicode_numerical_value(74805, 2.0, 2).
+unicode_numerical_value(74826, 2.0, 2).
+unicode_numerical_value(74832, 2.0, 2).
+unicode_numerical_value(74838, 2.0, 2).
+unicode_numerical_value(74841, 2.0, 2).
+unicode_numerical_value(90418, 2.0, 2).
+unicode_numerical_value(92770, 2.0, 2).
+unicode_numerical_value(92866, 2.0, 2).
+unicode_numerical_value(93010, 2.0, 2).
+unicode_numerical_value(93554, 2.0, 2).
+unicode_numerical_value(93826, 2.0, 2).
+unicode_numerical_value(93845, 2.0, 2).
+unicode_numerical_value(94198, 2.0, 2).
+unicode_numerical_value(118002, 2.0, 2).
+unicode_numerical_value(119490, 2.0, 2).
+unicode_numerical_value(119522, 2.0, 2).
+unicode_numerical_value(119649, 2.0, 2).
+unicode_numerical_value(119667, 2.0, 2).
+unicode_numerical_value(120784, 2.0, 2).
+unicode_numerical_value(120794, 2.0, 2).
+unicode_numerical_value(120804, 2.0, 2).
+unicode_numerical_value(120814, 2.0, 2).
+unicode_numerical_value(120824, 2.0, 2).
+unicode_numerical_value(123202, 2.0, 2).
+unicode_numerical_value(123634, 2.0, 2).
+unicode_numerical_value(124146, 2.0, 2).
+unicode_numerical_value(124403, 2.0, 2).
+unicode_numerical_value(125128, 2.0, 2).
+unicode_numerical_value(125266, 2.0, 2).
+unicode_numerical_value(126066, 2.0, 2).
+unicode_numerical_value(126116, 2.0, 2).
+unicode_numerical_value(126130, 2.0, 2).
+unicode_numerical_value(126210, 2.0, 2).
+unicode_numerical_value(126255, 2.0, 2).
+unicode_numerical_value(127235, 2.0, 2).
+unicode_numerical_value(130034, 2.0, 2).
+unicode_numerical_value(140176, 2.0, 2).
+unicode_numerical_value(3884, 2.5, 5/2).
+unicode_numerical_value(51, 3.0, 3).
+unicode_numerical_value(179, 3.0, 3).
+unicode_numerical_value(1635, 3.0, 3).
+unicode_numerical_value(1779, 3.0, 3).
+unicode_numerical_value(1987, 3.0, 3).
+unicode_numerical_value(2409, 3.0, 3).
+unicode_numerical_value(2537, 3.0, 3).
+unicode_numerical_value(2665, 3.0, 3).
+unicode_numerical_value(2793, 3.0, 3).
+unicode_numerical_value(2921, 3.0, 3).
+unicode_numerical_value(3049, 3.0, 3).
+unicode_numerical_value(3177, 3.0, 3).
+unicode_numerical_value(3195, 3.0, 3).
+unicode_numerical_value(3198, 3.0, 3).
+unicode_numerical_value(3305, 3.0, 3).
+unicode_numerical_value(3433, 3.0, 3).
+unicode_numerical_value(3561, 3.0, 3).
+unicode_numerical_value(3667, 3.0, 3).
+unicode_numerical_value(3795, 3.0, 3).
+unicode_numerical_value(3875, 3.0, 3).
+unicode_numerical_value(4163, 3.0, 3).
+unicode_numerical_value(4243, 3.0, 3).
+unicode_numerical_value(4971, 3.0, 3).
+unicode_numerical_value(6115, 3.0, 3).
+unicode_numerical_value(6131, 3.0, 3).
+unicode_numerical_value(6163, 3.0, 3).
+unicode_numerical_value(6473, 3.0, 3).
+unicode_numerical_value(6611, 3.0, 3).
+unicode_numerical_value(6787, 3.0, 3).
+unicode_numerical_value(6803, 3.0, 3).
+unicode_numerical_value(6995, 3.0, 3).
+unicode_numerical_value(7091, 3.0, 3).
+unicode_numerical_value(7235, 3.0, 3).
+unicode_numerical_value(7251, 3.0, 3).
+unicode_numerical_value(8323, 3.0, 3).
+unicode_numerical_value(8546, 3.0, 3).
+unicode_numerical_value(8562, 3.0, 3).
+unicode_numerical_value(9314, 3.0, 3).
+unicode_numerical_value(9334, 3.0, 3).
+unicode_numerical_value(9354, 3.0, 3).
+unicode_numerical_value(9463, 3.0, 3).
+unicode_numerical_value(10104, 3.0, 3).
+unicode_numerical_value(10114, 3.0, 3).
+unicode_numerical_value(10124, 3.0, 3).
+unicode_numerical_value(12323, 3.0, 3).
+unicode_numerical_value(12692, 3.0, 3).
+unicode_numerical_value(12834, 3.0, 3).
+unicode_numerical_value(12930, 3.0, 3).
+unicode_numerical_value(19977, 3.0, 3).
+unicode_numerical_value(20200, 3.0, 3).
+unicode_numerical_value(21441, 3.0, 3).
+unicode_numerical_value(21442, 3.0, 3).
+unicode_numerical_value(21443, 3.0, 3).
+unicode_numerical_value(21444, 3.0, 3).
+unicode_numerical_value(24334, 3.0, 3).
+unicode_numerical_value(42531, 3.0, 3).
+unicode_numerical_value(42728, 3.0, 3).
+unicode_numerical_value(43219, 3.0, 3).
+unicode_numerical_value(43267, 3.0, 3).
+unicode_numerical_value(43475, 3.0, 3).
+unicode_numerical_value(43507, 3.0, 3).
+unicode_numerical_value(43603, 3.0, 3).
+unicode_numerical_value(44019, 3.0, 3).
+unicode_numerical_value(63851, 3.0, 3).
+unicode_numerical_value(65299, 3.0, 3).
+unicode_numerical_value(65801, 3.0, 3).
+unicode_numerical_value(66275, 3.0, 3).
+unicode_numerical_value(66723, 3.0, 3).
+unicode_numerical_value(67674, 3.0, 3).
+unicode_numerical_value(67707, 3.0, 3).
+unicode_numerical_value(67753, 3.0, 3).
+unicode_numerical_value(67867, 3.0, 3).
+unicode_numerical_value(68034, 3.0, 3).
+unicode_numerical_value(68162, 3.0, 3).
+unicode_numerical_value(68442, 3.0, 3).
+unicode_numerical_value(68474, 3.0, 3).
+unicode_numerical_value(68523, 3.0, 3).
+unicode_numerical_value(68915, 3.0, 3).
+unicode_numerical_value(68931, 3.0, 3).
+unicode_numerical_value(69218, 3.0, 3).
+unicode_numerical_value(69407, 3.0, 3).
+unicode_numerical_value(69575, 3.0, 3).
+unicode_numerical_value(69716, 3.0, 3).
+unicode_numerical_value(69737, 3.0, 3).
+unicode_numerical_value(69875, 3.0, 3).
+unicode_numerical_value(69945, 3.0, 3).
+unicode_numerical_value(70099, 3.0, 3).
+unicode_numerical_value(70115, 3.0, 3).
+unicode_numerical_value(70387, 3.0, 3).
+unicode_numerical_value(70739, 3.0, 3).
+unicode_numerical_value(70867, 3.0, 3).
+unicode_numerical_value(71251, 3.0, 3).
+unicode_numerical_value(71363, 3.0, 3).
+unicode_numerical_value(71379, 3.0, 3).
+unicode_numerical_value(71389, 3.0, 3).
+unicode_numerical_value(71475, 3.0, 3).
+unicode_numerical_value(71907, 3.0, 3).
+unicode_numerical_value(72019, 3.0, 3).
+unicode_numerical_value(72691, 3.0, 3).
+unicode_numerical_value(72787, 3.0, 3).
+unicode_numerical_value(72796, 3.0, 3).
+unicode_numerical_value(73043, 3.0, 3).
+unicode_numerical_value(73123, 3.0, 3).
+unicode_numerical_value(73187, 3.0, 3).
+unicode_numerical_value(73555, 3.0, 3).
+unicode_numerical_value(74509, 3.0, 3).
+unicode_numerical_value(74753, 3.0, 3).
+unicode_numerical_value(74760, 3.0, 3).
+unicode_numerical_value(74775, 3.0, 3).
+unicode_numerical_value(74784, 3.0, 3).
+unicode_numerical_value(74788, 3.0, 3).
+unicode_numerical_value(74789, 3.0, 3).
+unicode_numerical_value(74798, 3.0, 3).
+unicode_numerical_value(74799, 3.0, 3).
+unicode_numerical_value(74806, 3.0, 3).
+unicode_numerical_value(74807, 3.0, 3).
+unicode_numerical_value(74810, 3.0, 3).
+unicode_numerical_value(74811, 3.0, 3).
+unicode_numerical_value(74827, 3.0, 3).
+unicode_numerical_value(74833, 3.0, 3).
+unicode_numerical_value(74839, 3.0, 3).
+unicode_numerical_value(90419, 3.0, 3).
+unicode_numerical_value(92771, 3.0, 3).
+unicode_numerical_value(92867, 3.0, 3).
+unicode_numerical_value(93011, 3.0, 3).
+unicode_numerical_value(93555, 3.0, 3).
+unicode_numerical_value(93827, 3.0, 3).
+unicode_numerical_value(93846, 3.0, 3).
+unicode_numerical_value(118003, 3.0, 3).
+unicode_numerical_value(119491, 3.0, 3).
+unicode_numerical_value(119523, 3.0, 3).
+unicode_numerical_value(119650, 3.0, 3).
+unicode_numerical_value(119668, 3.0, 3).
+unicode_numerical_value(120785, 3.0, 3).
+unicode_numerical_value(120795, 3.0, 3).
+unicode_numerical_value(120805, 3.0, 3).
+unicode_numerical_value(120815, 3.0, 3).
+unicode_numerical_value(120825, 3.0, 3).
+unicode_numerical_value(123203, 3.0, 3).
+unicode_numerical_value(123635, 3.0, 3).
+unicode_numerical_value(124147, 3.0, 3).
+unicode_numerical_value(124404, 3.0, 3).
+unicode_numerical_value(125129, 3.0, 3).
+unicode_numerical_value(125267, 3.0, 3).
+unicode_numerical_value(126067, 3.0, 3).
+unicode_numerical_value(126117, 3.0, 3).
+unicode_numerical_value(126211, 3.0, 3).
+unicode_numerical_value(126256, 3.0, 3).
+unicode_numerical_value(127236, 3.0, 3).
+unicode_numerical_value(130035, 3.0, 3).
+unicode_numerical_value(133885, 3.0, 3).
+unicode_numerical_value(133913, 3.0, 3).
+unicode_numerical_value(141720, 3.0, 3).
+unicode_numerical_value(146203, 3.0, 3).
+unicode_numerical_value(3885, 3.5, 7/2).
+unicode_numerical_value(52, 4.0, 4).
+unicode_numerical_value(1636, 4.0, 4).
+unicode_numerical_value(1780, 4.0, 4).
+unicode_numerical_value(1988, 4.0, 4).
+unicode_numerical_value(2410, 4.0, 4).
+unicode_numerical_value(2538, 4.0, 4).
+unicode_numerical_value(2666, 4.0, 4).
+unicode_numerical_value(2794, 4.0, 4).
+unicode_numerical_value(2922, 4.0, 4).
+unicode_numerical_value(3050, 4.0, 4).
+unicode_numerical_value(3178, 4.0, 4).
+unicode_numerical_value(3306, 4.0, 4).
+unicode_numerical_value(3434, 4.0, 4).
+unicode_numerical_value(3562, 4.0, 4).
+unicode_numerical_value(3668, 4.0, 4).
+unicode_numerical_value(3796, 4.0, 4).
+unicode_numerical_value(3876, 4.0, 4).
+unicode_numerical_value(4164, 4.0, 4).
+unicode_numerical_value(4244, 4.0, 4).
+unicode_numerical_value(4972, 4.0, 4).
+unicode_numerical_value(6116, 4.0, 4).
+unicode_numerical_value(6132, 4.0, 4).
+unicode_numerical_value(6164, 4.0, 4).
+unicode_numerical_value(6474, 4.0, 4).
+unicode_numerical_value(6612, 4.0, 4).
+unicode_numerical_value(6788, 4.0, 4).
+unicode_numerical_value(6804, 4.0, 4).
+unicode_numerical_value(6996, 4.0, 4).
+unicode_numerical_value(7092, 4.0, 4).
+unicode_numerical_value(7236, 4.0, 4).
+unicode_numerical_value(7252, 4.0, 4).
+unicode_numerical_value(8308, 4.0, 4).
+unicode_numerical_value(8324, 4.0, 4).
+unicode_numerical_value(8547, 4.0, 4).
+unicode_numerical_value(8563, 4.0, 4).
+unicode_numerical_value(9315, 4.0, 4).
+unicode_numerical_value(9335, 4.0, 4).
+unicode_numerical_value(9355, 4.0, 4).
+unicode_numerical_value(9464, 4.0, 4).
+unicode_numerical_value(10105, 4.0, 4).
+unicode_numerical_value(10115, 4.0, 4).
+unicode_numerical_value(10125, 4.0, 4).
+unicode_numerical_value(12324, 4.0, 4).
+unicode_numerical_value(12693, 4.0, 4).
+unicode_numerical_value(12835, 4.0, 4).
+unicode_numerical_value(12931, 4.0, 4).
+unicode_numerical_value(20118, 4.0, 4).
+unicode_numerical_value(22235, 4.0, 4).
+unicode_numerical_value(32902, 4.0, 4).
+unicode_numerical_value(42532, 4.0, 4).
+unicode_numerical_value(42729, 4.0, 4).
+unicode_numerical_value(43220, 4.0, 4).
+unicode_numerical_value(43268, 4.0, 4).
+unicode_numerical_value(43476, 4.0, 4).
+unicode_numerical_value(43508, 4.0, 4).
+unicode_numerical_value(43604, 4.0, 4).
+unicode_numerical_value(44020, 4.0, 4).
+unicode_numerical_value(65300, 4.0, 4).
+unicode_numerical_value(65802, 4.0, 4).
+unicode_numerical_value(66276, 4.0, 4).
+unicode_numerical_value(66724, 4.0, 4).
+unicode_numerical_value(67708, 4.0, 4).
+unicode_numerical_value(67754, 4.0, 4).
+unicode_numerical_value(67755, 4.0, 4).
+unicode_numerical_value(68035, 4.0, 4).
+unicode_numerical_value(68163, 4.0, 4).
+unicode_numerical_value(68443, 4.0, 4).
+unicode_numerical_value(68475, 4.0, 4).
+unicode_numerical_value(68524, 4.0, 4).
+unicode_numerical_value(68916, 4.0, 4).
+unicode_numerical_value(68932, 4.0, 4).
+unicode_numerical_value(69219, 4.0, 4).
+unicode_numerical_value(69408, 4.0, 4).
+unicode_numerical_value(69576, 4.0, 4).
+unicode_numerical_value(69717, 4.0, 4).
+unicode_numerical_value(69738, 4.0, 4).
+unicode_numerical_value(69876, 4.0, 4).
+unicode_numerical_value(69946, 4.0, 4).
+unicode_numerical_value(70100, 4.0, 4).
+unicode_numerical_value(70116, 4.0, 4).
+unicode_numerical_value(70388, 4.0, 4).
+unicode_numerical_value(70740, 4.0, 4).
+unicode_numerical_value(70868, 4.0, 4).
+unicode_numerical_value(71252, 4.0, 4).
+unicode_numerical_value(71364, 4.0, 4).
+unicode_numerical_value(71380, 4.0, 4).
+unicode_numerical_value(71390, 4.0, 4).
+unicode_numerical_value(71476, 4.0, 4).
+unicode_numerical_value(71908, 4.0, 4).
+unicode_numerical_value(72020, 4.0, 4).
+unicode_numerical_value(72692, 4.0, 4).
+unicode_numerical_value(72788, 4.0, 4).
+unicode_numerical_value(72797, 4.0, 4).
+unicode_numerical_value(73044, 4.0, 4).
+unicode_numerical_value(73124, 4.0, 4).
+unicode_numerical_value(73188, 4.0, 4).
+unicode_numerical_value(73556, 4.0, 4).
+unicode_numerical_value(74754, 4.0, 4).
+unicode_numerical_value(74761, 4.0, 4).
+unicode_numerical_value(74767, 4.0, 4).
+unicode_numerical_value(74776, 4.0, 4).
+unicode_numerical_value(74785, 4.0, 4).
+unicode_numerical_value(74790, 4.0, 4).
+unicode_numerical_value(74800, 4.0, 4).
+unicode_numerical_value(74808, 4.0, 4).
+unicode_numerical_value(74812, 4.0, 4).
+unicode_numerical_value(74813, 4.0, 4).
+unicode_numerical_value(74814, 4.0, 4).
+unicode_numerical_value(74815, 4.0, 4).
+unicode_numerical_value(74828, 4.0, 4).
+unicode_numerical_value(74834, 4.0, 4).
+unicode_numerical_value(74835, 4.0, 4).
+unicode_numerical_value(74857, 4.0, 4).
+unicode_numerical_value(90420, 4.0, 4).
+unicode_numerical_value(92772, 4.0, 4).
+unicode_numerical_value(92868, 4.0, 4).
+unicode_numerical_value(93012, 4.0, 4).
+unicode_numerical_value(93556, 4.0, 4).
+unicode_numerical_value(93828, 4.0, 4).
+unicode_numerical_value(118004, 4.0, 4).
+unicode_numerical_value(119492, 4.0, 4).
+unicode_numerical_value(119524, 4.0, 4).
+unicode_numerical_value(119651, 4.0, 4).
+unicode_numerical_value(119669, 4.0, 4).
+unicode_numerical_value(120786, 4.0, 4).
+unicode_numerical_value(120796, 4.0, 4).
+unicode_numerical_value(120806, 4.0, 4).
+unicode_numerical_value(120816, 4.0, 4).
+unicode_numerical_value(120826, 4.0, 4).
+unicode_numerical_value(123204, 4.0, 4).
+unicode_numerical_value(123636, 4.0, 4).
+unicode_numerical_value(124148, 4.0, 4).
+unicode_numerical_value(124405, 4.0, 4).
+unicode_numerical_value(125130, 4.0, 4).
+unicode_numerical_value(125268, 4.0, 4).
+unicode_numerical_value(126068, 4.0, 4).
+unicode_numerical_value(126118, 4.0, 4).
+unicode_numerical_value(126212, 4.0, 4).
+unicode_numerical_value(126257, 4.0, 4).
+unicode_numerical_value(127237, 4.0, 4).
+unicode_numerical_value(130036, 4.0, 4).
+unicode_numerical_value(131172, 4.0, 4).
+unicode_numerical_value(131298, 4.0, 4).
+unicode_numerical_value(156269, 4.0, 4).
+unicode_numerical_value(3886, 4.5, 9/2).
+unicode_numerical_value(53, 5.0, 5).
+unicode_numerical_value(1637, 5.0, 5).
+unicode_numerical_value(1781, 5.0, 5).
+unicode_numerical_value(1989, 5.0, 5).
+unicode_numerical_value(2411, 5.0, 5).
+unicode_numerical_value(2539, 5.0, 5).
+unicode_numerical_value(2667, 5.0, 5).
+unicode_numerical_value(2795, 5.0, 5).
+unicode_numerical_value(2923, 5.0, 5).
+unicode_numerical_value(3051, 5.0, 5).
+unicode_numerical_value(3179, 5.0, 5).
+unicode_numerical_value(3307, 5.0, 5).
+unicode_numerical_value(3435, 5.0, 5).
+unicode_numerical_value(3563, 5.0, 5).
+unicode_numerical_value(3669, 5.0, 5).
+unicode_numerical_value(3797, 5.0, 5).
+unicode_numerical_value(3877, 5.0, 5).
+unicode_numerical_value(4165, 5.0, 5).
+unicode_numerical_value(4245, 5.0, 5).
+unicode_numerical_value(4973, 5.0, 5).
+unicode_numerical_value(6117, 5.0, 5).
+unicode_numerical_value(6133, 5.0, 5).
+unicode_numerical_value(6165, 5.0, 5).
+unicode_numerical_value(6475, 5.0, 5).
+unicode_numerical_value(6613, 5.0, 5).
+unicode_numerical_value(6789, 5.0, 5).
+unicode_numerical_value(6805, 5.0, 5).
+unicode_numerical_value(6997, 5.0, 5).
+unicode_numerical_value(7093, 5.0, 5).
+unicode_numerical_value(7237, 5.0, 5).
+unicode_numerical_value(7253, 5.0, 5).
+unicode_numerical_value(8309, 5.0, 5).
+unicode_numerical_value(8325, 5.0, 5).
+unicode_numerical_value(8548, 5.0, 5).
+unicode_numerical_value(8564, 5.0, 5).
+unicode_numerical_value(9316, 5.0, 5).
+unicode_numerical_value(9336, 5.0, 5).
+unicode_numerical_value(9356, 5.0, 5).
+unicode_numerical_value(9465, 5.0, 5).
+unicode_numerical_value(10106, 5.0, 5).
+unicode_numerical_value(10116, 5.0, 5).
+unicode_numerical_value(10126, 5.0, 5).
+unicode_numerical_value(12325, 5.0, 5).
+unicode_numerical_value(12836, 5.0, 5).
+unicode_numerical_value(12932, 5.0, 5).
+unicode_numerical_value(13317, 5.0, 5).
+unicode_numerical_value(14378, 5.0, 5).
+unicode_numerical_value(20116, 5.0, 5).
+unicode_numerical_value(20237, 5.0, 5).
+unicode_numerical_value(42533, 5.0, 5).
+unicode_numerical_value(42730, 5.0, 5).
+unicode_numerical_value(43221, 5.0, 5).
+unicode_numerical_value(43269, 5.0, 5).
+unicode_numerical_value(43477, 5.0, 5).
+unicode_numerical_value(43509, 5.0, 5).
+unicode_numerical_value(43605, 5.0, 5).
+unicode_numerical_value(44021, 5.0, 5).
+unicode_numerical_value(65301, 5.0, 5).
+unicode_numerical_value(65803, 5.0, 5).
+unicode_numerical_value(65859, 5.0, 5).
+unicode_numerical_value(65864, 5.0, 5).
+unicode_numerical_value(65871, 5.0, 5).
+unicode_numerical_value(65887, 5.0, 5).
+unicode_numerical_value(65907, 5.0, 5).
+unicode_numerical_value(66277, 5.0, 5).
+unicode_numerical_value(66337, 5.0, 5).
+unicode_numerical_value(66725, 5.0, 5).
+unicode_numerical_value(67709, 5.0, 5).
+unicode_numerical_value(67756, 5.0, 5).
+unicode_numerical_value(67836, 5.0, 5).
+unicode_numerical_value(68036, 5.0, 5).
+unicode_numerical_value(68332, 5.0, 5).
+unicode_numerical_value(68859, 5.0, 5).
+unicode_numerical_value(68917, 5.0, 5).
+unicode_numerical_value(68933, 5.0, 5).
+unicode_numerical_value(69220, 5.0, 5).
+unicode_numerical_value(69409, 5.0, 5).
+unicode_numerical_value(69718, 5.0, 5).
+unicode_numerical_value(69739, 5.0, 5).
+unicode_numerical_value(69877, 5.0, 5).
+unicode_numerical_value(69947, 5.0, 5).
+unicode_numerical_value(70101, 5.0, 5).
+unicode_numerical_value(70117, 5.0, 5).
+unicode_numerical_value(70389, 5.0, 5).
+unicode_numerical_value(70741, 5.0, 5).
+unicode_numerical_value(70869, 5.0, 5).
+unicode_numerical_value(71253, 5.0, 5).
+unicode_numerical_value(71365, 5.0, 5).
+unicode_numerical_value(71381, 5.0, 5).
+unicode_numerical_value(71391, 5.0, 5).
+unicode_numerical_value(71477, 5.0, 5).
+unicode_numerical_value(71909, 5.0, 5).
+unicode_numerical_value(72021, 5.0, 5).
+unicode_numerical_value(72693, 5.0, 5).
+unicode_numerical_value(72789, 5.0, 5).
+unicode_numerical_value(72798, 5.0, 5).
+unicode_numerical_value(73045, 5.0, 5).
+unicode_numerical_value(73125, 5.0, 5).
+unicode_numerical_value(73189, 5.0, 5).
+unicode_numerical_value(73557, 5.0, 5).
+unicode_numerical_value(74755, 5.0, 5).
+unicode_numerical_value(74762, 5.0, 5).
+unicode_numerical_value(74768, 5.0, 5).
+unicode_numerical_value(74777, 5.0, 5).
+unicode_numerical_value(74786, 5.0, 5).
+unicode_numerical_value(74791, 5.0, 5).
+unicode_numerical_value(74801, 5.0, 5).
+unicode_numerical_value(74809, 5.0, 5).
+unicode_numerical_value(74829, 5.0, 5).
+unicode_numerical_value(74836, 5.0, 5).
+unicode_numerical_value(74837, 5.0, 5).
+unicode_numerical_value(74858, 5.0, 5).
+unicode_numerical_value(90421, 5.0, 5).
+unicode_numerical_value(92773, 5.0, 5).
+unicode_numerical_value(92869, 5.0, 5).
+unicode_numerical_value(93013, 5.0, 5).
+unicode_numerical_value(93557, 5.0, 5).
+unicode_numerical_value(93829, 5.0, 5).
+unicode_numerical_value(118005, 5.0, 5).
+unicode_numerical_value(119493, 5.0, 5).
+unicode_numerical_value(119525, 5.0, 5).
+unicode_numerical_value(119652, 5.0, 5).
+unicode_numerical_value(119670, 5.0, 5).
+unicode_numerical_value(119672, 5.0, 5).
+unicode_numerical_value(120787, 5.0, 5).
+unicode_numerical_value(120797, 5.0, 5).
+unicode_numerical_value(120807, 5.0, 5).
+unicode_numerical_value(120817, 5.0, 5).
+unicode_numerical_value(120827, 5.0, 5).
+unicode_numerical_value(123205, 5.0, 5).
+unicode_numerical_value(123637, 5.0, 5).
+unicode_numerical_value(124149, 5.0, 5).
+unicode_numerical_value(124406, 5.0, 5).
+unicode_numerical_value(125131, 5.0, 5).
+unicode_numerical_value(125269, 5.0, 5).
+unicode_numerical_value(126069, 5.0, 5).
+unicode_numerical_value(126119, 5.0, 5).
+unicode_numerical_value(126213, 5.0, 5).
+unicode_numerical_value(126258, 5.0, 5).
+unicode_numerical_value(127238, 5.0, 5).
+unicode_numerical_value(130037, 5.0, 5).
+unicode_numerical_value(131361, 5.0, 5).
+unicode_numerical_value(3887, 5.5, 11/2).
+unicode_numerical_value(54, 6.0, 6).
+unicode_numerical_value(1638, 6.0, 6).
+unicode_numerical_value(1782, 6.0, 6).
+unicode_numerical_value(1990, 6.0, 6).
+unicode_numerical_value(2412, 6.0, 6).
+unicode_numerical_value(2540, 6.0, 6).
+unicode_numerical_value(2668, 6.0, 6).
+unicode_numerical_value(2796, 6.0, 6).
+unicode_numerical_value(2924, 6.0, 6).
+unicode_numerical_value(3052, 6.0, 6).
+unicode_numerical_value(3180, 6.0, 6).
+unicode_numerical_value(3308, 6.0, 6).
+unicode_numerical_value(3436, 6.0, 6).
+unicode_numerical_value(3564, 6.0, 6).
+unicode_numerical_value(3670, 6.0, 6).
+unicode_numerical_value(3798, 6.0, 6).
+unicode_numerical_value(3878, 6.0, 6).
+unicode_numerical_value(4166, 6.0, 6).
+unicode_numerical_value(4246, 6.0, 6).
+unicode_numerical_value(4974, 6.0, 6).
+unicode_numerical_value(6118, 6.0, 6).
+unicode_numerical_value(6134, 6.0, 6).
+unicode_numerical_value(6166, 6.0, 6).
+unicode_numerical_value(6476, 6.0, 6).
+unicode_numerical_value(6614, 6.0, 6).
+unicode_numerical_value(6790, 6.0, 6).
+unicode_numerical_value(6806, 6.0, 6).
+unicode_numerical_value(6998, 6.0, 6).
+unicode_numerical_value(7094, 6.0, 6).
+unicode_numerical_value(7238, 6.0, 6).
+unicode_numerical_value(7254, 6.0, 6).
+unicode_numerical_value(8310, 6.0, 6).
+unicode_numerical_value(8326, 6.0, 6).
+unicode_numerical_value(8549, 6.0, 6).
+unicode_numerical_value(8565, 6.0, 6).
+unicode_numerical_value(8581, 6.0, 6).
+unicode_numerical_value(9317, 6.0, 6).
+unicode_numerical_value(9337, 6.0, 6).
+unicode_numerical_value(9357, 6.0, 6).
+unicode_numerical_value(9466, 6.0, 6).
+unicode_numerical_value(10107, 6.0, 6).
+unicode_numerical_value(10117, 6.0, 6).
+unicode_numerical_value(10127, 6.0, 6).
+unicode_numerical_value(12326, 6.0, 6).
+unicode_numerical_value(12837, 6.0, 6).
+unicode_numerical_value(12933, 6.0, 6).
+unicode_numerical_value(20845, 6.0, 6).
+unicode_numerical_value(38470, 6.0, 6).
+unicode_numerical_value(38520, 6.0, 6).
+unicode_numerical_value(42534, 6.0, 6).
+unicode_numerical_value(42731, 6.0, 6).
+unicode_numerical_value(43222, 6.0, 6).
+unicode_numerical_value(43270, 6.0, 6).
+unicode_numerical_value(43478, 6.0, 6).
+unicode_numerical_value(43510, 6.0, 6).
+unicode_numerical_value(43606, 6.0, 6).
+unicode_numerical_value(44022, 6.0, 6).
+unicode_numerical_value(63953, 6.0, 6).
+unicode_numerical_value(63955, 6.0, 6).
+unicode_numerical_value(65302, 6.0, 6).
+unicode_numerical_value(65804, 6.0, 6).
+unicode_numerical_value(66278, 6.0, 6).
+unicode_numerical_value(66726, 6.0, 6).
+unicode_numerical_value(68037, 6.0, 6).
+unicode_numerical_value(68918, 6.0, 6).
+unicode_numerical_value(68934, 6.0, 6).
+unicode_numerical_value(69221, 6.0, 6).
+unicode_numerical_value(69719, 6.0, 6).
+unicode_numerical_value(69740, 6.0, 6).
+unicode_numerical_value(69878, 6.0, 6).
+unicode_numerical_value(69948, 6.0, 6).
+unicode_numerical_value(70102, 6.0, 6).
+unicode_numerical_value(70118, 6.0, 6).
+unicode_numerical_value(70390, 6.0, 6).
+unicode_numerical_value(70742, 6.0, 6).
+unicode_numerical_value(70870, 6.0, 6).
+unicode_numerical_value(71254, 6.0, 6).
+unicode_numerical_value(71366, 6.0, 6).
+unicode_numerical_value(71382, 6.0, 6).
+unicode_numerical_value(71392, 6.0, 6).
+unicode_numerical_value(71478, 6.0, 6).
+unicode_numerical_value(71910, 6.0, 6).
+unicode_numerical_value(72022, 6.0, 6).
+unicode_numerical_value(72694, 6.0, 6).
+unicode_numerical_value(72790, 6.0, 6).
+unicode_numerical_value(72799, 6.0, 6).
+unicode_numerical_value(73046, 6.0, 6).
+unicode_numerical_value(73126, 6.0, 6).
+unicode_numerical_value(73190, 6.0, 6).
+unicode_numerical_value(73558, 6.0, 6).
+unicode_numerical_value(74756, 6.0, 6).
+unicode_numerical_value(74763, 6.0, 6).
+unicode_numerical_value(74769, 6.0, 6).
+unicode_numerical_value(74778, 6.0, 6).
+unicode_numerical_value(74792, 6.0, 6).
+unicode_numerical_value(74816, 6.0, 6).
+unicode_numerical_value(74830, 6.0, 6).
+unicode_numerical_value(74859, 6.0, 6).
+unicode_numerical_value(90422, 6.0, 6).
+unicode_numerical_value(92774, 6.0, 6).
+unicode_numerical_value(92870, 6.0, 6).
+unicode_numerical_value(93014, 6.0, 6).
+unicode_numerical_value(93558, 6.0, 6).
+unicode_numerical_value(93830, 6.0, 6).
+unicode_numerical_value(118006, 6.0, 6).
+unicode_numerical_value(119494, 6.0, 6).
+unicode_numerical_value(119526, 6.0, 6).
+unicode_numerical_value(119653, 6.0, 6).
+unicode_numerical_value(120788, 6.0, 6).
+unicode_numerical_value(120798, 6.0, 6).
+unicode_numerical_value(120808, 6.0, 6).
+unicode_numerical_value(120818, 6.0, 6).
+unicode_numerical_value(120828, 6.0, 6).
+unicode_numerical_value(123206, 6.0, 6).
+unicode_numerical_value(123638, 6.0, 6).
+unicode_numerical_value(124150, 6.0, 6).
+unicode_numerical_value(124407, 6.0, 6).
+unicode_numerical_value(125132, 6.0, 6).
+unicode_numerical_value(125270, 6.0, 6).
+unicode_numerical_value(126070, 6.0, 6).
+unicode_numerical_value(126120, 6.0, 6).
+unicode_numerical_value(126214, 6.0, 6).
+unicode_numerical_value(126259, 6.0, 6).
+unicode_numerical_value(127239, 6.0, 6).
+unicode_numerical_value(130038, 6.0, 6).
+unicode_numerical_value(133866, 6.0, 6).
+unicode_numerical_value(3888, 6.5, 13/2).
+unicode_numerical_value(55, 7.0, 7).
+unicode_numerical_value(1639, 7.0, 7).
+unicode_numerical_value(1783, 7.0, 7).
+unicode_numerical_value(1991, 7.0, 7).
+unicode_numerical_value(2413, 7.0, 7).
+unicode_numerical_value(2541, 7.0, 7).
+unicode_numerical_value(2669, 7.0, 7).
+unicode_numerical_value(2797, 7.0, 7).
+unicode_numerical_value(2925, 7.0, 7).
+unicode_numerical_value(3053, 7.0, 7).
+unicode_numerical_value(3181, 7.0, 7).
+unicode_numerical_value(3309, 7.0, 7).
+unicode_numerical_value(3437, 7.0, 7).
+unicode_numerical_value(3565, 7.0, 7).
+unicode_numerical_value(3671, 7.0, 7).
+unicode_numerical_value(3799, 7.0, 7).
+unicode_numerical_value(3879, 7.0, 7).
+unicode_numerical_value(4167, 7.0, 7).
+unicode_numerical_value(4247, 7.0, 7).
+unicode_numerical_value(4975, 7.0, 7).
+unicode_numerical_value(6119, 7.0, 7).
+unicode_numerical_value(6135, 7.0, 7).
+unicode_numerical_value(6167, 7.0, 7).
+unicode_numerical_value(6477, 7.0, 7).
+unicode_numerical_value(6615, 7.0, 7).
+unicode_numerical_value(6791, 7.0, 7).
+unicode_numerical_value(6807, 7.0, 7).
+unicode_numerical_value(6999, 7.0, 7).
+unicode_numerical_value(7095, 7.0, 7).
+unicode_numerical_value(7239, 7.0, 7).
+unicode_numerical_value(7255, 7.0, 7).
+unicode_numerical_value(8311, 7.0, 7).
+unicode_numerical_value(8327, 7.0, 7).
+unicode_numerical_value(8550, 7.0, 7).
+unicode_numerical_value(8566, 7.0, 7).
+unicode_numerical_value(9318, 7.0, 7).
+unicode_numerical_value(9338, 7.0, 7).
+unicode_numerical_value(9358, 7.0, 7).
+unicode_numerical_value(9467, 7.0, 7).
+unicode_numerical_value(10108, 7.0, 7).
+unicode_numerical_value(10118, 7.0, 7).
+unicode_numerical_value(10128, 7.0, 7).
+unicode_numerical_value(12327, 7.0, 7).
+unicode_numerical_value(12838, 7.0, 7).
+unicode_numerical_value(12934, 7.0, 7).
+unicode_numerical_value(15181, 7.0, 7).
+unicode_numerical_value(19971, 7.0, 7).
+unicode_numerical_value(25296, 7.0, 7).
+unicode_numerical_value(26578, 7.0, 7).
+unicode_numerical_value(28422, 7.0, 7).
+unicode_numerical_value(42535, 7.0, 7).
+unicode_numerical_value(42732, 7.0, 7).
+unicode_numerical_value(43223, 7.0, 7).
+unicode_numerical_value(43271, 7.0, 7).
+unicode_numerical_value(43479, 7.0, 7).
+unicode_numerical_value(43511, 7.0, 7).
+unicode_numerical_value(43607, 7.0, 7).
+unicode_numerical_value(44023, 7.0, 7).
+unicode_numerical_value(65303, 7.0, 7).
+unicode_numerical_value(65805, 7.0, 7).
+unicode_numerical_value(66279, 7.0, 7).
+unicode_numerical_value(66727, 7.0, 7).
+unicode_numerical_value(68038, 7.0, 7).
+unicode_numerical_value(68919, 7.0, 7).
+unicode_numerical_value(68935, 7.0, 7).
+unicode_numerical_value(69222, 7.0, 7).
+unicode_numerical_value(69720, 7.0, 7).
+unicode_numerical_value(69741, 7.0, 7).
+unicode_numerical_value(69879, 7.0, 7).
+unicode_numerical_value(69949, 7.0, 7).
+unicode_numerical_value(70103, 7.0, 7).
+unicode_numerical_value(70119, 7.0, 7).
+unicode_numerical_value(70391, 7.0, 7).
+unicode_numerical_value(70743, 7.0, 7).
+unicode_numerical_value(70871, 7.0, 7).
+unicode_numerical_value(71255, 7.0, 7).
+unicode_numerical_value(71367, 7.0, 7).
+unicode_numerical_value(71383, 7.0, 7).
+unicode_numerical_value(71393, 7.0, 7).
+unicode_numerical_value(71479, 7.0, 7).
+unicode_numerical_value(71911, 7.0, 7).
+unicode_numerical_value(72023, 7.0, 7).
+unicode_numerical_value(72695, 7.0, 7).
+unicode_numerical_value(72791, 7.0, 7).
+unicode_numerical_value(72800, 7.0, 7).
+unicode_numerical_value(73047, 7.0, 7).
+unicode_numerical_value(73127, 7.0, 7).
+unicode_numerical_value(73191, 7.0, 7).
+unicode_numerical_value(73559, 7.0, 7).
+unicode_numerical_value(74757, 7.0, 7).
+unicode_numerical_value(74764, 7.0, 7).
+unicode_numerical_value(74770, 7.0, 7).
+unicode_numerical_value(74779, 7.0, 7).
+unicode_numerical_value(74793, 7.0, 7).
+unicode_numerical_value(74817, 7.0, 7).
+unicode_numerical_value(74818, 7.0, 7).
+unicode_numerical_value(74819, 7.0, 7).
+unicode_numerical_value(74860, 7.0, 7).
+unicode_numerical_value(90423, 7.0, 7).
+unicode_numerical_value(92775, 7.0, 7).
+unicode_numerical_value(92871, 7.0, 7).
+unicode_numerical_value(93015, 7.0, 7).
+unicode_numerical_value(93559, 7.0, 7).
+unicode_numerical_value(93831, 7.0, 7).
+unicode_numerical_value(118007, 7.0, 7).
+unicode_numerical_value(119495, 7.0, 7).
+unicode_numerical_value(119527, 7.0, 7).
+unicode_numerical_value(119654, 7.0, 7).
+unicode_numerical_value(120789, 7.0, 7).
+unicode_numerical_value(120799, 7.0, 7).
+unicode_numerical_value(120809, 7.0, 7).
+unicode_numerical_value(120819, 7.0, 7).
+unicode_numerical_value(120829, 7.0, 7).
+unicode_numerical_value(123207, 7.0, 7).
+unicode_numerical_value(123639, 7.0, 7).
+unicode_numerical_value(124151, 7.0, 7).
+unicode_numerical_value(124408, 7.0, 7).
+unicode_numerical_value(125133, 7.0, 7).
+unicode_numerical_value(125271, 7.0, 7).
+unicode_numerical_value(126071, 7.0, 7).
+unicode_numerical_value(126121, 7.0, 7).
+unicode_numerical_value(126215, 7.0, 7).
+unicode_numerical_value(126260, 7.0, 7).
+unicode_numerical_value(127240, 7.0, 7).
+unicode_numerical_value(130039, 7.0, 7).
+unicode_numerical_value(131073, 7.0, 7).
+unicode_numerical_value(3889, 7.5, 15/2).
+unicode_numerical_value(56, 8.0, 8).
+unicode_numerical_value(1640, 8.0, 8).
+unicode_numerical_value(1784, 8.0, 8).
+unicode_numerical_value(1992, 8.0, 8).
+unicode_numerical_value(2414, 8.0, 8).
+unicode_numerical_value(2542, 8.0, 8).
+unicode_numerical_value(2670, 8.0, 8).
+unicode_numerical_value(2798, 8.0, 8).
+unicode_numerical_value(2926, 8.0, 8).
+unicode_numerical_value(3054, 8.0, 8).
+unicode_numerical_value(3182, 8.0, 8).
+unicode_numerical_value(3310, 8.0, 8).
+unicode_numerical_value(3438, 8.0, 8).
+unicode_numerical_value(3566, 8.0, 8).
+unicode_numerical_value(3672, 8.0, 8).
+unicode_numerical_value(3800, 8.0, 8).
+unicode_numerical_value(3880, 8.0, 8).
+unicode_numerical_value(4168, 8.0, 8).
+unicode_numerical_value(4248, 8.0, 8).
+unicode_numerical_value(4976, 8.0, 8).
+unicode_numerical_value(6120, 8.0, 8).
+unicode_numerical_value(6136, 8.0, 8).
+unicode_numerical_value(6168, 8.0, 8).
+unicode_numerical_value(6478, 8.0, 8).
+unicode_numerical_value(6616, 8.0, 8).
+unicode_numerical_value(6792, 8.0, 8).
+unicode_numerical_value(6808, 8.0, 8).
+unicode_numerical_value(7000, 8.0, 8).
+unicode_numerical_value(7096, 8.0, 8).
+unicode_numerical_value(7240, 8.0, 8).
+unicode_numerical_value(7256, 8.0, 8).
+unicode_numerical_value(8312, 8.0, 8).
+unicode_numerical_value(8328, 8.0, 8).
+unicode_numerical_value(8551, 8.0, 8).
+unicode_numerical_value(8567, 8.0, 8).
+unicode_numerical_value(9319, 8.0, 8).
+unicode_numerical_value(9339, 8.0, 8).
+unicode_numerical_value(9359, 8.0, 8).
+unicode_numerical_value(9468, 8.0, 8).
+unicode_numerical_value(10109, 8.0, 8).
+unicode_numerical_value(10119, 8.0, 8).
+unicode_numerical_value(10129, 8.0, 8).
+unicode_numerical_value(12328, 8.0, 8).
+unicode_numerical_value(12839, 8.0, 8).
+unicode_numerical_value(12935, 8.0, 8).
+unicode_numerical_value(20843, 8.0, 8).
+unicode_numerical_value(25420, 8.0, 8).
+unicode_numerical_value(42536, 8.0, 8).
+unicode_numerical_value(42733, 8.0, 8).
+unicode_numerical_value(43224, 8.0, 8).
+unicode_numerical_value(43272, 8.0, 8).
+unicode_numerical_value(43480, 8.0, 8).
+unicode_numerical_value(43512, 8.0, 8).
+unicode_numerical_value(43608, 8.0, 8).
+unicode_numerical_value(44024, 8.0, 8).
+unicode_numerical_value(65304, 8.0, 8).
+unicode_numerical_value(65806, 8.0, 8).
+unicode_numerical_value(66280, 8.0, 8).
+unicode_numerical_value(66728, 8.0, 8).
+unicode_numerical_value(68039, 8.0, 8).
+unicode_numerical_value(68920, 8.0, 8).
+unicode_numerical_value(68936, 8.0, 8).
+unicode_numerical_value(69223, 8.0, 8).
+unicode_numerical_value(69721, 8.0, 8).
+unicode_numerical_value(69742, 8.0, 8).
+unicode_numerical_value(69880, 8.0, 8).
+unicode_numerical_value(69950, 8.0, 8).
+unicode_numerical_value(70104, 8.0, 8).
+unicode_numerical_value(70120, 8.0, 8).
+unicode_numerical_value(70392, 8.0, 8).
+unicode_numerical_value(70744, 8.0, 8).
+unicode_numerical_value(70872, 8.0, 8).
+unicode_numerical_value(71256, 8.0, 8).
+unicode_numerical_value(71368, 8.0, 8).
+unicode_numerical_value(71384, 8.0, 8).
+unicode_numerical_value(71394, 8.0, 8).
+unicode_numerical_value(71480, 8.0, 8).
+unicode_numerical_value(71912, 8.0, 8).
+unicode_numerical_value(72024, 8.0, 8).
+unicode_numerical_value(72696, 8.0, 8).
+unicode_numerical_value(72792, 8.0, 8).
+unicode_numerical_value(72801, 8.0, 8).
+unicode_numerical_value(73048, 8.0, 8).
+unicode_numerical_value(73128, 8.0, 8).
+unicode_numerical_value(73192, 8.0, 8).
+unicode_numerical_value(73560, 8.0, 8).
+unicode_numerical_value(74758, 8.0, 8).
+unicode_numerical_value(74765, 8.0, 8).
+unicode_numerical_value(74771, 8.0, 8).
+unicode_numerical_value(74780, 8.0, 8).
+unicode_numerical_value(74794, 8.0, 8).
+unicode_numerical_value(74820, 8.0, 8).
+unicode_numerical_value(74821, 8.0, 8).
+unicode_numerical_value(74861, 8.0, 8).
+unicode_numerical_value(90424, 8.0, 8).
+unicode_numerical_value(92776, 8.0, 8).
+unicode_numerical_value(92872, 8.0, 8).
+unicode_numerical_value(93016, 8.0, 8).
+unicode_numerical_value(93560, 8.0, 8).
+unicode_numerical_value(93832, 8.0, 8).
+unicode_numerical_value(118008, 8.0, 8).
+unicode_numerical_value(119496, 8.0, 8).
+unicode_numerical_value(119528, 8.0, 8).
+unicode_numerical_value(119655, 8.0, 8).
+unicode_numerical_value(120790, 8.0, 8).
+unicode_numerical_value(120800, 8.0, 8).
+unicode_numerical_value(120810, 8.0, 8).
+unicode_numerical_value(120820, 8.0, 8).
+unicode_numerical_value(120830, 8.0, 8).
+unicode_numerical_value(123208, 8.0, 8).
+unicode_numerical_value(123640, 8.0, 8).
+unicode_numerical_value(124152, 8.0, 8).
+unicode_numerical_value(124409, 8.0, 8).
+unicode_numerical_value(125134, 8.0, 8).
+unicode_numerical_value(125272, 8.0, 8).
+unicode_numerical_value(126072, 8.0, 8).
+unicode_numerical_value(126122, 8.0, 8).
+unicode_numerical_value(126216, 8.0, 8).
+unicode_numerical_value(126261, 8.0, 8).
+unicode_numerical_value(127241, 8.0, 8).
+unicode_numerical_value(130040, 8.0, 8).
+unicode_numerical_value(3890, 8.5, 17/2).
+unicode_numerical_value(57, 9.0, 9).
+unicode_numerical_value(1641, 9.0, 9).
+unicode_numerical_value(1785, 9.0, 9).
+unicode_numerical_value(1993, 9.0, 9).
+unicode_numerical_value(2415, 9.0, 9).
+unicode_numerical_value(2543, 9.0, 9).
+unicode_numerical_value(2671, 9.0, 9).
+unicode_numerical_value(2799, 9.0, 9).
+unicode_numerical_value(2927, 9.0, 9).
+unicode_numerical_value(3055, 9.0, 9).
+unicode_numerical_value(3183, 9.0, 9).
+unicode_numerical_value(3311, 9.0, 9).
+unicode_numerical_value(3439, 9.0, 9).
+unicode_numerical_value(3567, 9.0, 9).
+unicode_numerical_value(3673, 9.0, 9).
+unicode_numerical_value(3801, 9.0, 9).
+unicode_numerical_value(3881, 9.0, 9).
+unicode_numerical_value(4169, 9.0, 9).
+unicode_numerical_value(4249, 9.0, 9).
+unicode_numerical_value(4977, 9.0, 9).
+unicode_numerical_value(6121, 9.0, 9).
+unicode_numerical_value(6137, 9.0, 9).
+unicode_numerical_value(6169, 9.0, 9).
+unicode_numerical_value(6479, 9.0, 9).
+unicode_numerical_value(6617, 9.0, 9).
+unicode_numerical_value(6793, 9.0, 9).
+unicode_numerical_value(6809, 9.0, 9).
+unicode_numerical_value(7001, 9.0, 9).
+unicode_numerical_value(7097, 9.0, 9).
+unicode_numerical_value(7241, 9.0, 9).
+unicode_numerical_value(7257, 9.0, 9).
+unicode_numerical_value(8313, 9.0, 9).
+unicode_numerical_value(8329, 9.0, 9).
+unicode_numerical_value(8552, 9.0, 9).
+unicode_numerical_value(8568, 9.0, 9).
+unicode_numerical_value(9320, 9.0, 9).
+unicode_numerical_value(9340, 9.0, 9).
+unicode_numerical_value(9360, 9.0, 9).
+unicode_numerical_value(9469, 9.0, 9).
+unicode_numerical_value(10110, 9.0, 9).
+unicode_numerical_value(10120, 9.0, 9).
+unicode_numerical_value(10130, 9.0, 9).
+unicode_numerical_value(12329, 9.0, 9).
+unicode_numerical_value(12840, 9.0, 9).
+unicode_numerical_value(12936, 9.0, 9).
+unicode_numerical_value(20061, 9.0, 9).
+unicode_numerical_value(24318, 9.0, 9).
+unicode_numerical_value(29590, 9.0, 9).
+unicode_numerical_value(37390, 9.0, 9).
+unicode_numerical_value(38057, 9.0, 9).
+unicode_numerical_value(42537, 9.0, 9).
+unicode_numerical_value(42734, 9.0, 9).
+unicode_numerical_value(43225, 9.0, 9).
+unicode_numerical_value(43273, 9.0, 9).
+unicode_numerical_value(43481, 9.0, 9).
+unicode_numerical_value(43513, 9.0, 9).
+unicode_numerical_value(43609, 9.0, 9).
+unicode_numerical_value(44025, 9.0, 9).
+unicode_numerical_value(65305, 9.0, 9).
+unicode_numerical_value(65807, 9.0, 9).
+unicode_numerical_value(66281, 9.0, 9).
+unicode_numerical_value(66729, 9.0, 9).
+unicode_numerical_value(68040, 9.0, 9).
+unicode_numerical_value(68921, 9.0, 9).
+unicode_numerical_value(68937, 9.0, 9).
+unicode_numerical_value(69224, 9.0, 9).
+unicode_numerical_value(69722, 9.0, 9).
+unicode_numerical_value(69743, 9.0, 9).
+unicode_numerical_value(69881, 9.0, 9).
+unicode_numerical_value(69951, 9.0, 9).
+unicode_numerical_value(70105, 9.0, 9).
+unicode_numerical_value(70121, 9.0, 9).
+unicode_numerical_value(70393, 9.0, 9).
+unicode_numerical_value(70745, 9.0, 9).
+unicode_numerical_value(70873, 9.0, 9).
+unicode_numerical_value(71257, 9.0, 9).
+unicode_numerical_value(71369, 9.0, 9).
+unicode_numerical_value(71385, 9.0, 9).
+unicode_numerical_value(71395, 9.0, 9).
+unicode_numerical_value(71481, 9.0, 9).
+unicode_numerical_value(71913, 9.0, 9).
+unicode_numerical_value(72025, 9.0, 9).
+unicode_numerical_value(72697, 9.0, 9).
+unicode_numerical_value(72793, 9.0, 9).
+unicode_numerical_value(72802, 9.0, 9).
+unicode_numerical_value(73049, 9.0, 9).
+unicode_numerical_value(73129, 9.0, 9).
+unicode_numerical_value(73193, 9.0, 9).
+unicode_numerical_value(73561, 9.0, 9).
+unicode_numerical_value(74759, 9.0, 9).
+unicode_numerical_value(74766, 9.0, 9).
+unicode_numerical_value(74772, 9.0, 9).
+unicode_numerical_value(74781, 9.0, 9).
+unicode_numerical_value(74795, 9.0, 9).
+unicode_numerical_value(74822, 9.0, 9).
+unicode_numerical_value(74823, 9.0, 9).
+unicode_numerical_value(74824, 9.0, 9).
+unicode_numerical_value(74825, 9.0, 9).
+unicode_numerical_value(74862, 9.0, 9).
+unicode_numerical_value(90425, 9.0, 9).
+unicode_numerical_value(92777, 9.0, 9).
+unicode_numerical_value(92873, 9.0, 9).
+unicode_numerical_value(93017, 9.0, 9).
+unicode_numerical_value(93561, 9.0, 9).
+unicode_numerical_value(93833, 9.0, 9).
+unicode_numerical_value(118009, 9.0, 9).
+unicode_numerical_value(119497, 9.0, 9).
+unicode_numerical_value(119529, 9.0, 9).
+unicode_numerical_value(119656, 9.0, 9).
+unicode_numerical_value(120791, 9.0, 9).
+unicode_numerical_value(120801, 9.0, 9).
+unicode_numerical_value(120811, 9.0, 9).
+unicode_numerical_value(120821, 9.0, 9).
+unicode_numerical_value(120831, 9.0, 9).
+unicode_numerical_value(123209, 9.0, 9).
+unicode_numerical_value(123641, 9.0, 9).
+unicode_numerical_value(124153, 9.0, 9).
+unicode_numerical_value(124410, 9.0, 9).
+unicode_numerical_value(125135, 9.0, 9).
+unicode_numerical_value(125273, 9.0, 9).
+unicode_numerical_value(126073, 9.0, 9).
+unicode_numerical_value(126123, 9.0, 9).
+unicode_numerical_value(126217, 9.0, 9).
+unicode_numerical_value(126262, 9.0, 9).
+unicode_numerical_value(127242, 9.0, 9).
+unicode_numerical_value(130041, 9.0, 9).
+unicode_numerical_value(194704, 9.0, 9).
+unicode_numerical_value(3056, 10.0, 10).
+unicode_numerical_value(3440, 10.0, 10).
+unicode_numerical_value(4978, 10.0, 10).
+unicode_numerical_value(8553, 10.0, 10).
+unicode_numerical_value(8569, 10.0, 10).
+unicode_numerical_value(9321, 10.0, 10).
+unicode_numerical_value(9341, 10.0, 10).
+unicode_numerical_value(9361, 10.0, 10).
+unicode_numerical_value(9470, 10.0, 10).
+unicode_numerical_value(10111, 10.0, 10).
+unicode_numerical_value(10121, 10.0, 10).
+unicode_numerical_value(10131, 10.0, 10).
+unicode_numerical_value(12344, 10.0, 10).
+unicode_numerical_value(12841, 10.0, 10).
+unicode_numerical_value(12872, 10.0, 10).
+unicode_numerical_value(12937, 10.0, 10).
+unicode_numerical_value(20160, 10.0, 10).
+unicode_numerical_value(21313, 10.0, 10).
+unicode_numerical_value(25342, 10.0, 10).
+unicode_numerical_value(63859, 10.0, 10).
+unicode_numerical_value(63997, 10.0, 10).
+unicode_numerical_value(65808, 10.0, 10).
+unicode_numerical_value(65865, 10.0, 10).
+unicode_numerical_value(65872, 10.0, 10).
+unicode_numerical_value(65879, 10.0, 10).
+unicode_numerical_value(65888, 10.0, 10).
+unicode_numerical_value(65889, 10.0, 10).
+unicode_numerical_value(65890, 10.0, 10).
+unicode_numerical_value(65891, 10.0, 10).
+unicode_numerical_value(65892, 10.0, 10).
+unicode_numerical_value(66282, 10.0, 10).
+unicode_numerical_value(66338, 10.0, 10).
+unicode_numerical_value(66515, 10.0, 10).
+unicode_numerical_value(67675, 10.0, 10).
+unicode_numerical_value(67710, 10.0, 10).
+unicode_numerical_value(67757, 10.0, 10).
+unicode_numerical_value(67837, 10.0, 10).
+unicode_numerical_value(67863, 10.0, 10).
+unicode_numerical_value(68041, 10.0, 10).
+unicode_numerical_value(68164, 10.0, 10).
+unicode_numerical_value(68254, 10.0, 10).
+unicode_numerical_value(68333, 10.0, 10).
+unicode_numerical_value(68444, 10.0, 10).
+unicode_numerical_value(68476, 10.0, 10).
+unicode_numerical_value(68525, 10.0, 10).
+unicode_numerical_value(68860, 10.0, 10).
+unicode_numerical_value(69225, 10.0, 10).
+unicode_numerical_value(69410, 10.0, 10).
+unicode_numerical_value(69458, 10.0, 10).
+unicode_numerical_value(69577, 10.0, 10).
+unicode_numerical_value(69723, 10.0, 10).
+unicode_numerical_value(70122, 10.0, 10).
+unicode_numerical_value(71482, 10.0, 10).
+unicode_numerical_value(71914, 10.0, 10).
+unicode_numerical_value(72803, 10.0, 10).
+unicode_numerical_value(93019, 10.0, 10).
+unicode_numerical_value(93834, 10.0, 10).
+unicode_numerical_value(119498, 10.0, 10).
+unicode_numerical_value(119530, 10.0, 10).
+unicode_numerical_value(119657, 10.0, 10).
+unicode_numerical_value(126074, 10.0, 10).
+unicode_numerical_value(126218, 10.0, 10).
+unicode_numerical_value(126263, 10.0, 10).
+unicode_numerical_value(8554, 11.0, 11).
+unicode_numerical_value(8570, 11.0, 11).
+unicode_numerical_value(9322, 11.0, 11).
+unicode_numerical_value(9342, 11.0, 11).
+unicode_numerical_value(9362, 11.0, 11).
+unicode_numerical_value(9451, 11.0, 11).
+unicode_numerical_value(93835, 11.0, 11).
+unicode_numerical_value(119499, 11.0, 11).
+unicode_numerical_value(119531, 11.0, 11).
+unicode_numerical_value(8555, 12.0, 12).
+unicode_numerical_value(8571, 12.0, 12).
+unicode_numerical_value(9323, 12.0, 12).
+unicode_numerical_value(9343, 12.0, 12).
+unicode_numerical_value(9363, 12.0, 12).
+unicode_numerical_value(9452, 12.0, 12).
+unicode_numerical_value(93836, 12.0, 12).
+unicode_numerical_value(119500, 12.0, 12).
+unicode_numerical_value(119532, 12.0, 12).
+unicode_numerical_value(9324, 13.0, 13).
+unicode_numerical_value(9344, 13.0, 13).
+unicode_numerical_value(9364, 13.0, 13).
+unicode_numerical_value(9453, 13.0, 13).
+unicode_numerical_value(93837, 13.0, 13).
+unicode_numerical_value(119501, 13.0, 13).
+unicode_numerical_value(119533, 13.0, 13).
+unicode_numerical_value(9325, 14.0, 14).
+unicode_numerical_value(9345, 14.0, 14).
+unicode_numerical_value(9365, 14.0, 14).
+unicode_numerical_value(9454, 14.0, 14).
+unicode_numerical_value(93838, 14.0, 14).
+unicode_numerical_value(119502, 14.0, 14).
+unicode_numerical_value(119534, 14.0, 14).
+unicode_numerical_value(9326, 15.0, 15).
+unicode_numerical_value(9346, 15.0, 15).
+unicode_numerical_value(9366, 15.0, 15).
+unicode_numerical_value(9455, 15.0, 15).
+unicode_numerical_value(93839, 15.0, 15).
+unicode_numerical_value(119503, 15.0, 15).
+unicode_numerical_value(119535, 15.0, 15).
+unicode_numerical_value(2553, 16.0, 16).
+unicode_numerical_value(9327, 16.0, 16).
+unicode_numerical_value(9347, 16.0, 16).
+unicode_numerical_value(9367, 16.0, 16).
+unicode_numerical_value(9456, 16.0, 16).
+unicode_numerical_value(93840, 16.0, 16).
+unicode_numerical_value(119504, 16.0, 16).
+unicode_numerical_value(119536, 16.0, 16).
+unicode_numerical_value(5870, 17.0, 17).
+unicode_numerical_value(9328, 17.0, 17).
+unicode_numerical_value(9348, 17.0, 17).
+unicode_numerical_value(9368, 17.0, 17).
+unicode_numerical_value(9457, 17.0, 17).
+unicode_numerical_value(93841, 17.0, 17).
+unicode_numerical_value(119505, 17.0, 17).
+unicode_numerical_value(119537, 17.0, 17).
+unicode_numerical_value(5871, 18.0, 18).
+unicode_numerical_value(9329, 18.0, 18).
+unicode_numerical_value(9349, 18.0, 18).
+unicode_numerical_value(9369, 18.0, 18).
+unicode_numerical_value(9458, 18.0, 18).
+unicode_numerical_value(93842, 18.0, 18).
+unicode_numerical_value(119506, 18.0, 18).
+unicode_numerical_value(119538, 18.0, 18).
+unicode_numerical_value(5872, 19.0, 19).
+unicode_numerical_value(9330, 19.0, 19).
+unicode_numerical_value(9350, 19.0, 19).
+unicode_numerical_value(9370, 19.0, 19).
+unicode_numerical_value(9459, 19.0, 19).
+unicode_numerical_value(93843, 19.0, 19).
+unicode_numerical_value(119507, 19.0, 19).
+unicode_numerical_value(119539, 19.0, 19).
+unicode_numerical_value(4979, 20.0, 20).
+unicode_numerical_value(9331, 20.0, 20).
+unicode_numerical_value(9351, 20.0, 20).
+unicode_numerical_value(9371, 20.0, 20).
+unicode_numerical_value(9460, 20.0, 20).
+unicode_numerical_value(12345, 20.0, 20).
+unicode_numerical_value(12873, 20.0, 20).
+unicode_numerical_value(21316, 20.0, 20).
+unicode_numerical_value(24319, 20.0, 20).
+unicode_numerical_value(65809, 20.0, 20).
+unicode_numerical_value(66283, 20.0, 20).
+unicode_numerical_value(66516, 20.0, 20).
+unicode_numerical_value(67676, 20.0, 20).
+unicode_numerical_value(67711, 20.0, 20).
+unicode_numerical_value(67758, 20.0, 20).
+unicode_numerical_value(67838, 20.0, 20).
+unicode_numerical_value(67864, 20.0, 20).
+unicode_numerical_value(68042, 20.0, 20).
+unicode_numerical_value(68165, 20.0, 20).
+unicode_numerical_value(68255, 20.0, 20).
+unicode_numerical_value(68334, 20.0, 20).
+unicode_numerical_value(68445, 20.0, 20).
+unicode_numerical_value(68477, 20.0, 20).
+unicode_numerical_value(68526, 20.0, 20).
+unicode_numerical_value(69226, 20.0, 20).
+unicode_numerical_value(69411, 20.0, 20).
+unicode_numerical_value(69459, 20.0, 20).
+unicode_numerical_value(69578, 20.0, 20).
+unicode_numerical_value(69724, 20.0, 20).
+unicode_numerical_value(70123, 20.0, 20).
+unicode_numerical_value(71483, 20.0, 20).
+unicode_numerical_value(71915, 20.0, 20).
+unicode_numerical_value(72804, 20.0, 20).
+unicode_numerical_value(119658, 20.0, 20).
+unicode_numerical_value(126075, 20.0, 20).
+unicode_numerical_value(126219, 20.0, 20).
+unicode_numerical_value(12881, 21.0, 21).
+unicode_numerical_value(12882, 22.0, 22).
+unicode_numerical_value(12883, 23.0, 23).
+unicode_numerical_value(12884, 24.0, 24).
+unicode_numerical_value(12885, 25.0, 25).
+unicode_numerical_value(12886, 26.0, 26).
+unicode_numerical_value(12887, 27.0, 27).
+unicode_numerical_value(12888, 28.0, 28).
+unicode_numerical_value(12889, 29.0, 29).
+unicode_numerical_value(4980, 30.0, 30).
+unicode_numerical_value(12346, 30.0, 30).
+unicode_numerical_value(12874, 30.0, 30).
+unicode_numerical_value(12890, 30.0, 30).
+unicode_numerical_value(21317, 30.0, 30).
+unicode_numerical_value(65810, 30.0, 30).
+unicode_numerical_value(65893, 30.0, 30).
+unicode_numerical_value(66284, 30.0, 30).
+unicode_numerical_value(68043, 30.0, 30).
+unicode_numerical_value(69227, 30.0, 30).
+unicode_numerical_value(69412, 30.0, 30).
+unicode_numerical_value(69725, 30.0, 30).
+unicode_numerical_value(70124, 30.0, 30).
+unicode_numerical_value(71916, 30.0, 30).
+unicode_numerical_value(72805, 30.0, 30).
+unicode_numerical_value(119659, 30.0, 30).
+unicode_numerical_value(126076, 30.0, 30).
+unicode_numerical_value(126220, 30.0, 30).
+unicode_numerical_value(133507, 30.0, 30).
+unicode_numerical_value(12891, 31.0, 31).
+unicode_numerical_value(12892, 32.0, 32).
+unicode_numerical_value(12893, 33.0, 33).
+unicode_numerical_value(12894, 34.0, 34).
+unicode_numerical_value(12895, 35.0, 35).
+unicode_numerical_value(12977, 36.0, 36).
+unicode_numerical_value(12978, 37.0, 37).
+unicode_numerical_value(12979, 38.0, 38).
+unicode_numerical_value(12980, 39.0, 39).
+unicode_numerical_value(4981, 40.0, 40).
+unicode_numerical_value(12875, 40.0, 40).
+unicode_numerical_value(12981, 40.0, 40).
+unicode_numerical_value(21324, 40.0, 40).
+unicode_numerical_value(65811, 40.0, 40).
+unicode_numerical_value(66285, 40.0, 40).
+unicode_numerical_value(68044, 40.0, 40).
+unicode_numerical_value(69228, 40.0, 40).
+unicode_numerical_value(69726, 40.0, 40).
+unicode_numerical_value(70125, 40.0, 40).
+unicode_numerical_value(71917, 40.0, 40).
+unicode_numerical_value(72806, 40.0, 40).
+unicode_numerical_value(74855, 40.0, 40).
+unicode_numerical_value(119660, 40.0, 40).
+unicode_numerical_value(126077, 40.0, 40).
+unicode_numerical_value(126221, 40.0, 40).
+unicode_numerical_value(133516, 40.0, 40).
+unicode_numerical_value(133532, 40.0, 40).
+unicode_numerical_value(12982, 41.0, 41).
+unicode_numerical_value(12983, 42.0, 42).
+unicode_numerical_value(12984, 43.0, 43).
+unicode_numerical_value(12985, 44.0, 44).
+unicode_numerical_value(12986, 45.0, 45).
+unicode_numerical_value(12987, 46.0, 46).
+unicode_numerical_value(12988, 47.0, 47).
+unicode_numerical_value(12989, 48.0, 48).
+unicode_numerical_value(12990, 49.0, 49).
+unicode_numerical_value(4982, 50.0, 50).
+unicode_numerical_value(8556, 50.0, 50).
+unicode_numerical_value(8572, 50.0, 50).
+unicode_numerical_value(8582, 50.0, 50).
+unicode_numerical_value(12876, 50.0, 50).
+unicode_numerical_value(12991, 50.0, 50).
+unicode_numerical_value(65812, 50.0, 50).
+unicode_numerical_value(65860, 50.0, 50).
+unicode_numerical_value(65866, 50.0, 50).
+unicode_numerical_value(65873, 50.0, 50).
+unicode_numerical_value(65894, 50.0, 50).
+unicode_numerical_value(65895, 50.0, 50).
+unicode_numerical_value(65896, 50.0, 50).
+unicode_numerical_value(65897, 50.0, 50).
+unicode_numerical_value(65908, 50.0, 50).
+unicode_numerical_value(66286, 50.0, 50).
+unicode_numerical_value(66339, 50.0, 50).
+unicode_numerical_value(68045, 50.0, 50).
+unicode_numerical_value(68222, 50.0, 50).
+unicode_numerical_value(68861, 50.0, 50).
+unicode_numerical_value(69229, 50.0, 50).
+unicode_numerical_value(69727, 50.0, 50).
+unicode_numerical_value(70126, 50.0, 50).
+unicode_numerical_value(71918, 50.0, 50).
+unicode_numerical_value(72807, 50.0, 50).
+unicode_numerical_value(74856, 50.0, 50).
+unicode_numerical_value(119661, 50.0, 50).
+unicode_numerical_value(126078, 50.0, 50).
+unicode_numerical_value(126222, 50.0, 50).
+unicode_numerical_value(4983, 60.0, 60).
+unicode_numerical_value(12877, 60.0, 60).
+unicode_numerical_value(65813, 60.0, 60).
+unicode_numerical_value(66287, 60.0, 60).
+unicode_numerical_value(68046, 60.0, 60).
+unicode_numerical_value(69230, 60.0, 60).
+unicode_numerical_value(69728, 60.0, 60).
+unicode_numerical_value(70127, 60.0, 60).
+unicode_numerical_value(71919, 60.0, 60).
+unicode_numerical_value(72808, 60.0, 60).
+unicode_numerical_value(119662, 60.0, 60).
+unicode_numerical_value(126079, 60.0, 60).
+unicode_numerical_value(126223, 60.0, 60).
+unicode_numerical_value(4984, 70.0, 70).
+unicode_numerical_value(12878, 70.0, 70).
+unicode_numerical_value(65814, 70.0, 70).
+unicode_numerical_value(66288, 70.0, 70).
+unicode_numerical_value(68047, 70.0, 70).
+unicode_numerical_value(69231, 70.0, 70).
+unicode_numerical_value(69729, 70.0, 70).
+unicode_numerical_value(70128, 70.0, 70).
+unicode_numerical_value(71920, 70.0, 70).
+unicode_numerical_value(72809, 70.0, 70).
+unicode_numerical_value(119663, 70.0, 70).
+unicode_numerical_value(126080, 70.0, 70).
+unicode_numerical_value(126224, 70.0, 70).
+unicode_numerical_value(4985, 80.0, 80).
+unicode_numerical_value(12879, 80.0, 80).
+unicode_numerical_value(65815, 80.0, 80).
+unicode_numerical_value(66289, 80.0, 80).
+unicode_numerical_value(69232, 80.0, 80).
+unicode_numerical_value(69730, 80.0, 80).
+unicode_numerical_value(70129, 80.0, 80).
+unicode_numerical_value(71921, 80.0, 80).
+unicode_numerical_value(72810, 80.0, 80).
+unicode_numerical_value(119664, 80.0, 80).
+unicode_numerical_value(126081, 80.0, 80).
+unicode_numerical_value(126225, 80.0, 80).
+unicode_numerical_value(4986, 90.0, 90).
+unicode_numerical_value(65816, 90.0, 90).
+unicode_numerical_value(66290, 90.0, 90).
+unicode_numerical_value(66369, 90.0, 90).
+unicode_numerical_value(69233, 90.0, 90).
+unicode_numerical_value(69731, 90.0, 90).
+unicode_numerical_value(70130, 90.0, 90).
+unicode_numerical_value(71922, 90.0, 90).
+unicode_numerical_value(72811, 90.0, 90).
+unicode_numerical_value(119665, 90.0, 90).
+unicode_numerical_value(126082, 90.0, 90).
+unicode_numerical_value(126226, 90.0, 90).
+unicode_numerical_value(3057, 100.0, 100).
+unicode_numerical_value(3441, 100.0, 100).
+unicode_numerical_value(4987, 100.0, 100).
+unicode_numerical_value(8557, 100.0, 100).
+unicode_numerical_value(8573, 100.0, 100).
+unicode_numerical_value(20336, 100.0, 100).
+unicode_numerical_value(30334, 100.0, 100).
+unicode_numerical_value(38476, 100.0, 100).
+unicode_numerical_value(65817, 100.0, 100).
+unicode_numerical_value(65867, 100.0, 100).
+unicode_numerical_value(65874, 100.0, 100).
+unicode_numerical_value(65898, 100.0, 100).
+unicode_numerical_value(66291, 100.0, 100).
+unicode_numerical_value(66517, 100.0, 100).
+unicode_numerical_value(67677, 100.0, 100).
+unicode_numerical_value(67759, 100.0, 100).
+unicode_numerical_value(67839, 100.0, 100).
+unicode_numerical_value(67865, 100.0, 100).
+unicode_numerical_value(68050, 100.0, 100).
+unicode_numerical_value(68166, 100.0, 100).
+unicode_numerical_value(68335, 100.0, 100).
+unicode_numerical_value(68446, 100.0, 100).
+unicode_numerical_value(68478, 100.0, 100).
+unicode_numerical_value(68527, 100.0, 100).
+unicode_numerical_value(68862, 100.0, 100).
+unicode_numerical_value(69234, 100.0, 100).
+unicode_numerical_value(69413, 100.0, 100).
+unicode_numerical_value(69460, 100.0, 100).
+unicode_numerical_value(69579, 100.0, 100).
+unicode_numerical_value(69732, 100.0, 100).
+unicode_numerical_value(70131, 100.0, 100).
+unicode_numerical_value(72812, 100.0, 100).
+unicode_numerical_value(93020, 100.0, 100).
+unicode_numerical_value(126083, 100.0, 100).
+unicode_numerical_value(126227, 100.0, 100).
+unicode_numerical_value(30357, 200.0, 200).
+unicode_numerical_value(65818, 200.0, 200).
+unicode_numerical_value(66292, 200.0, 200).
+unicode_numerical_value(68051, 200.0, 200).
+unicode_numerical_value(69235, 200.0, 200).
+unicode_numerical_value(126084, 200.0, 200).
+unicode_numerical_value(126228, 200.0, 200).
+unicode_numerical_value(65819, 300.0, 300).
+unicode_numerical_value(65899, 300.0, 300).
+unicode_numerical_value(66293, 300.0, 300).
+unicode_numerical_value(68052, 300.0, 300).
+unicode_numerical_value(69236, 300.0, 300).
+unicode_numerical_value(126085, 300.0, 300).
+unicode_numerical_value(126229, 300.0, 300).
+unicode_numerical_value(65820, 400.0, 400).
+unicode_numerical_value(66294, 400.0, 400).
+unicode_numerical_value(68053, 400.0, 400).
+unicode_numerical_value(69237, 400.0, 400).
+unicode_numerical_value(126086, 400.0, 400).
+unicode_numerical_value(126230, 400.0, 400).
+unicode_numerical_value(126264, 400.0, 400).
+unicode_numerical_value(8558, 500.0, 500).
+unicode_numerical_value(8574, 500.0, 500).
+unicode_numerical_value(65821, 500.0, 500).
+unicode_numerical_value(65861, 500.0, 500).
+unicode_numerical_value(65868, 500.0, 500).
+unicode_numerical_value(65875, 500.0, 500).
+unicode_numerical_value(65900, 500.0, 500).
+unicode_numerical_value(65901, 500.0, 500).
+unicode_numerical_value(65902, 500.0, 500).
+unicode_numerical_value(65903, 500.0, 500).
+unicode_numerical_value(65904, 500.0, 500).
+unicode_numerical_value(66295, 500.0, 500).
+unicode_numerical_value(68054, 500.0, 500).
+unicode_numerical_value(69238, 500.0, 500).
+unicode_numerical_value(126087, 500.0, 500).
+unicode_numerical_value(126231, 500.0, 500).
+unicode_numerical_value(65822, 600.0, 600).
+unicode_numerical_value(66296, 600.0, 600).
+unicode_numerical_value(68055, 600.0, 600).
+unicode_numerical_value(69239, 600.0, 600).
+unicode_numerical_value(126088, 600.0, 600).
+unicode_numerical_value(126232, 600.0, 600).
+unicode_numerical_value(126265, 600.0, 600).
+unicode_numerical_value(65823, 700.0, 700).
+unicode_numerical_value(66297, 700.0, 700).
+unicode_numerical_value(68056, 700.0, 700).
+unicode_numerical_value(69240, 700.0, 700).
+unicode_numerical_value(126089, 700.0, 700).
+unicode_numerical_value(126233, 700.0, 700).
+unicode_numerical_value(65824, 800.0, 800).
+unicode_numerical_value(66298, 800.0, 800).
+unicode_numerical_value(68057, 800.0, 800).
+unicode_numerical_value(69241, 800.0, 800).
+unicode_numerical_value(126090, 800.0, 800).
+unicode_numerical_value(126234, 800.0, 800).
+unicode_numerical_value(65825, 900.0, 900).
+unicode_numerical_value(66299, 900.0, 900).
+unicode_numerical_value(66378, 900.0, 900).
+unicode_numerical_value(68058, 900.0, 900).
+unicode_numerical_value(69242, 900.0, 900).
+unicode_numerical_value(126091, 900.0, 900).
+unicode_numerical_value(126235, 900.0, 900).
+unicode_numerical_value(3058, 1000.0, 1000).
+unicode_numerical_value(3442, 1000.0, 1000).
+unicode_numerical_value(8559, 1000.0, 1000).
+unicode_numerical_value(8575, 1000.0, 1000).
+unicode_numerical_value(8576, 1000.0, 1000).
+unicode_numerical_value(20191, 1000.0, 1000).
+unicode_numerical_value(21315, 1000.0, 1000).
+unicode_numerical_value(38433, 1000.0, 1000).
+unicode_numerical_value(65826, 1000.0, 1000).
+unicode_numerical_value(65869, 1000.0, 1000).
+unicode_numerical_value(65876, 1000.0, 1000).
+unicode_numerical_value(65905, 1000.0, 1000).
+unicode_numerical_value(67678, 1000.0, 1000).
+unicode_numerical_value(68059, 1000.0, 1000).
+unicode_numerical_value(68167, 1000.0, 1000).
+unicode_numerical_value(68447, 1000.0, 1000).
+unicode_numerical_value(68479, 1000.0, 1000).
+unicode_numerical_value(68863, 1000.0, 1000).
+unicode_numerical_value(69733, 1000.0, 1000).
+unicode_numerical_value(70132, 1000.0, 1000).
+unicode_numerical_value(126092, 1000.0, 1000).
+unicode_numerical_value(126236, 1000.0, 1000).
+unicode_numerical_value(65827, 2000.0, 2000).
+unicode_numerical_value(68060, 2000.0, 2000).
+unicode_numerical_value(126093, 2000.0, 2000).
+unicode_numerical_value(126237, 2000.0, 2000).
+unicode_numerical_value(126266, 2000.0, 2000).
+unicode_numerical_value(65828, 3000.0, 3000).
+unicode_numerical_value(68061, 3000.0, 3000).
+unicode_numerical_value(126094, 3000.0, 3000).
+unicode_numerical_value(126238, 3000.0, 3000).
+unicode_numerical_value(65829, 4000.0, 4000).
+unicode_numerical_value(68062, 4000.0, 4000).
+unicode_numerical_value(126095, 4000.0, 4000).
+unicode_numerical_value(126239, 4000.0, 4000).
+unicode_numerical_value(8577, 5000.0, 5000).
+unicode_numerical_value(65830, 5000.0, 5000).
+unicode_numerical_value(65862, 5000.0, 5000).
+unicode_numerical_value(65870, 5000.0, 5000).
+unicode_numerical_value(65906, 5000.0, 5000).
+unicode_numerical_value(68063, 5000.0, 5000).
+unicode_numerical_value(126096, 5000.0, 5000).
+unicode_numerical_value(126240, 5000.0, 5000).
+unicode_numerical_value(65831, 6000.0, 6000).
+unicode_numerical_value(68064, 6000.0, 6000).
+unicode_numerical_value(126097, 6000.0, 6000).
+unicode_numerical_value(126241, 6000.0, 6000).
+unicode_numerical_value(65832, 7000.0, 7000).
+unicode_numerical_value(68065, 7000.0, 7000).
+unicode_numerical_value(126098, 7000.0, 7000).
+unicode_numerical_value(126242, 7000.0, 7000).
+unicode_numerical_value(65833, 8000.0, 8000).
+unicode_numerical_value(68066, 8000.0, 8000).
+unicode_numerical_value(126099, 8000.0, 8000).
+unicode_numerical_value(126243, 8000.0, 8000).
+unicode_numerical_value(65834, 9000.0, 9000).
+unicode_numerical_value(68067, 9000.0, 9000).
+unicode_numerical_value(126100, 9000.0, 9000).
+unicode_numerical_value(126244, 9000.0, 9000).
+unicode_numerical_value(4988, 10000.0, 10000).
+unicode_numerical_value(8578, 10000.0, 10000).
+unicode_numerical_value(19975, 10000.0, 10000).
+unicode_numerical_value(33836, 10000.0, 10000).
+unicode_numerical_value(65835, 10000.0, 10000).
+unicode_numerical_value(65877, 10000.0, 10000).
+unicode_numerical_value(67679, 10000.0, 10000).
+unicode_numerical_value(68068, 10000.0, 10000).
+unicode_numerical_value(93021, 10000.0, 10000).
+unicode_numerical_value(126101, 10000.0, 10000).
+unicode_numerical_value(126131, 10000.0, 10000).
+unicode_numerical_value(126245, 10000.0, 10000).
+unicode_numerical_value(126267, 10000.0, 10000).
+unicode_numerical_value(65836, 20000.0, 20000).
+unicode_numerical_value(68069, 20000.0, 20000).
+unicode_numerical_value(126102, 20000.0, 20000).
+unicode_numerical_value(126246, 20000.0, 20000).
+unicode_numerical_value(65837, 30000.0, 30000).
+unicode_numerical_value(68070, 30000.0, 30000).
+unicode_numerical_value(126103, 30000.0, 30000).
+unicode_numerical_value(126247, 30000.0, 30000).
+unicode_numerical_value(65838, 40000.0, 40000).
+unicode_numerical_value(68071, 40000.0, 40000).
+unicode_numerical_value(126104, 40000.0, 40000).
+unicode_numerical_value(126248, 40000.0, 40000).
+unicode_numerical_value(8583, 50000.0, 50000).
+unicode_numerical_value(65839, 50000.0, 50000).
+unicode_numerical_value(65863, 50000.0, 50000).
+unicode_numerical_value(65878, 50000.0, 50000).
+unicode_numerical_value(68072, 50000.0, 50000).
+unicode_numerical_value(126105, 50000.0, 50000).
+unicode_numerical_value(126249, 50000.0, 50000).
+unicode_numerical_value(65840, 60000.0, 60000).
+unicode_numerical_value(68073, 60000.0, 60000).
+unicode_numerical_value(126106, 60000.0, 60000).
+unicode_numerical_value(126250, 60000.0, 60000).
+unicode_numerical_value(65841, 70000.0, 70000).
+unicode_numerical_value(68074, 70000.0, 70000).
+unicode_numerical_value(126107, 70000.0, 70000).
+unicode_numerical_value(126251, 70000.0, 70000).
+unicode_numerical_value(65842, 80000.0, 80000).
+unicode_numerical_value(68075, 80000.0, 80000).
+unicode_numerical_value(126108, 80000.0, 80000).
+unicode_numerical_value(126252, 80000.0, 80000).
+unicode_numerical_value(65843, 90000.0, 90000).
+unicode_numerical_value(68076, 90000.0, 90000).
+unicode_numerical_value(126109, 90000.0, 90000).
+unicode_numerical_value(126253, 90000.0, 90000).
+unicode_numerical_value(8584, 100000.0, 100000).
+unicode_numerical_value(68077, 100000.0, 100000).
+unicode_numerical_value(126110, 100000.0, 100000).
+unicode_numerical_value(126112, 100000.0, 100000).
+unicode_numerical_value(126132, 100000.0, 100000).
+unicode_numerical_value(68078, 200000.0, 200000).
+unicode_numerical_value(126111, 200000.0, 200000).
+unicode_numerical_value(74802, 216000.0, 216000).
+unicode_numerical_value(68079, 300000.0, 300000).
+unicode_numerical_value(68080, 400000.0, 400000).
+unicode_numerical_value(74803, 432000.0, 432000).
+unicode_numerical_value(68081, 500000.0, 500000).
+unicode_numerical_value(68082, 600000.0, 600000).
+unicode_numerical_value(68083, 700000.0, 700000).
+unicode_numerical_value(68084, 800000.0, 800000).
+unicode_numerical_value(68085, 900000.0, 900000).
+unicode_numerical_value(93022, 1000000.0, 1000000).
+unicode_numerical_value(126113, 10000000.0, 10000000).
+unicode_numerical_value(126114, 20000000.0, 20000000).
+unicode_numerical_value(20159, 100000000.0, 100000000).
+unicode_numerical_value(20740, 100000000.0, 100000000).
+unicode_numerical_value(93023, 100000000.0, 100000000).
+unicode_numerical_value(31213, 1000000000.0, 1000000000).
+unicode_numerical_value(93024, 10000000000.0, 10000000000).
+unicode_numerical_value(20806, 1000000000000.0, 1000000000000).
+unicode_numerical_value(93025, 1000000000000.0, 1000000000000).
+unicode_numerical_value(20140, 10000000000000000.0, 10000000000000000).

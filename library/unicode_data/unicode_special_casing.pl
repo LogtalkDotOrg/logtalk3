@@ -1,292 +1,141 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  This file is part of VivoMind Prolog Unicode Resources
-%  SPDX-License-Identifier: CC0-1.0
+%  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
 %
-%  VivoMind Prolog Unicode Resources is free software distributed using the
-%  Creative Commons CC0 1.0 Universal (CC0 1.0) - Public Domain Dedication
-%  license
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%  Last modified: September 30, 2012
+%      http://www.apache.org/licenses/LICENSE-2.0
 %
-%  Original Unicode file header comments follow
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-/*
-# SpecialCasing-6.1.0.txt
-# Date: 2011-11-27, 05:10:51 GMT [MD]
-#
-# Unicode Character Database
-# Copyright (c) 1991-2011 Unicode, Inc.
-# For terms of use, see http://www.unicode.org/terms_of_use.html
-# For documentation, see http://www.unicode.org/reports/tr44/
-#
-# Special Casing Properties
-#
-# This file is a supplement to the UnicodeData file.
-# It contains additional information about the casing of Unicode characters.
-# (For compatibility, the UnicodeData.txt file only contains case mappings for
-# characters where they are 1-1, and independent of context and language.
-# For more information, see the discussion of Case Mappings in the Unicode Standard.
-#
-# All code points not listed in this file that do not have a simple case mappings
-# in UnicodeData.txt map to themselves.
-# ================================================================================
-# Format
-# ================================================================================
-# The entries in this file are in the following machine-readable format:
-#
-# <code>; <lower> ; <title> ; <upper> ; (<condition_list> ;)? # <comment>
-#
-# <code>, <lower>, <title>, and <upper> provide character values in hex. If there is more
-# than one character, they are separated by spaces. Other than as used to separate
-# elements, spaces are to be ignored.
-#
-# The <condition_list> is optional. Where present, it consists of one or more language IDs
-# or contexts, separated by spaces. In these conditions:
-# - A condition list overrides the normal behavior if all of the listed conditions are true.
-# - The context is always the context of the characters in the original string,
-#   NOT in the resulting string.
-# - Case distinctions in the condition list are not significant.
-# - Conditions preceded by "Not_" represent the negation of the condition.
-# The condition list is not represented in the UCD as a formal property.
-#
-# A language ID is defined by BCP 47, with '-' and '_' treated equivalently.
-#
-# A context for a character C is defined by Section 3.13 Default Case
-# Operations, of The Unicode Standard, Version 5.0.
-# (This is identical to the context defined by Unicode 4.1.0,
-#  as specified in http://www.unicode.org/versions/Unicode4.1.0/)
-#
-# Parsers of this file must be prepared to deal with future additions to this format:
-#  * Additional contexts
-#  * Additional fields
-# ================================================================================
+% Generated from Unicode 17.0.0 SpecialCasing.txt. Do not edit.
 
-# @missing: 0000..10FFFF; <slc>; <stc>; <suc>;
-*/
-
-% ================================================================================
-% Unconditional mappings
-% ================================================================================
-
-% The German es-zed is special--the normal mapping is to SS.
-% Note: the titlecase should never occur in practice. It is equal to titlecase(uppercase(<es-zed>))
-
-unicode_special_casing(0x00DF, [0x00DF], [0x0053, 0x0073], [0x0053, 0x0053], []). % LATIN SMALL LETTER SHARP S
-
-% Preserve canonical equivalence for I with dot. Turkic is handled below.
-
-unicode_special_casing(0x0130, [0x0069, 0x0307], [0x0130], [0x0130], []). % LATIN CAPITAL LETTER I WITH DOT ABOVE
-
-% Ligatures
-
-unicode_special_casing(0xFB00, [0xFB00], [0x0046, 0x0066], [0x0046, 0x0046], []). % LATIN SMALL LIGATURE FF
-unicode_special_casing(0xFB01, [0xFB01], [0x0046, 0x0069], [0x0046, 0x0049], []). % LATIN SMALL LIGATURE FI
-unicode_special_casing(0xFB02, [0xFB02], [0x0046, 0x006C], [0x0046, 0x004C], []). % LATIN SMALL LIGATURE FL
-unicode_special_casing(0xFB03, [0xFB03], [0x0046, 0x0066, 0x0069], [0x0046, 0x0046, 0x0049], []). % LATIN SMALL LIGATURE FFI
-unicode_special_casing(0xFB04, [0xFB04], [0x0046, 0x0066, 0x006C], [0x0046, 0x0046, 0x004C], []). % LATIN SMALL LIGATURE FFL
-unicode_special_casing(0xFB05, [0xFB05], [0x0053, 0x0074], [0x0053, 0x0054], []). % LATIN SMALL LIGATURE LONG S T
-unicode_special_casing(0xFB06, [0xFB06], [0x0053, 0x0074], [0x0053, 0x0054], []). % LATIN SMALL LIGATURE ST
-
-unicode_special_casing(0x0587, [0x0587], [0x0535, 0x0582], [0x0535, 0x0552], []). % ARMENIAN SMALL LIGATURE ECH YIWN
-unicode_special_casing(0xFB13, [0xFB13], [0x0544, 0x0576], [0x0544, 0x0546], []). % ARMENIAN SMALL LIGATURE MEN NOW
-unicode_special_casing(0xFB14, [0xFB14], [0x0544, 0x0565], [0x0544, 0x0535], []). % ARMENIAN SMALL LIGATURE MEN ECH
-unicode_special_casing(0xFB15, [0xFB15], [0x0544, 0x056B], [0x0544, 0x053B], []). % ARMENIAN SMALL LIGATURE MEN INI
-unicode_special_casing(0xFB16, [0xFB16], [0x054E, 0x0576], [0x054E, 0x0546], []). % ARMENIAN SMALL LIGATURE VEW NOW
-unicode_special_casing(0xFB17, [0xFB17], [0x0544, 0x056D], [0x0544, 0x053D], []). % ARMENIAN SMALL LIGATURE MEN XEH
-
-% No corresponding uppercase precomposed character
-
-unicode_special_casing(0x0149, [0x0149], [0x02BC, 0x004E], [0x02BC, 0x004E], []). % LATIN SMALL LETTER N PRECEDED BY APOSTROPHE
-unicode_special_casing(0x0390, [0x0390], [0x0399, 0x0308, 0x0301], [0x0399, 0x0308, 0x0301], []). % GREEK SMALL LETTER IOTA WITH DIALYTIKA AND TONOS
-unicode_special_casing(0x03B0, [0x03B0], [0x03A5, 0x0308, 0x0301], [0x03A5, 0x0308, 0x0301], []). % GREEK SMALL LETTER UPSILON WITH DIALYTIKA AND TONOS
-unicode_special_casing(0x01F0, [0x01F0], [0x004A, 0x030C], [0x004A, 0x030C], []). % LATIN SMALL LETTER J WITH CARON
-unicode_special_casing(0x1E96, [0x1E96], [0x0048, 0x0331], [0x0048, 0x0331], []). % LATIN SMALL LETTER H WITH LINE BELOW
-unicode_special_casing(0x1E97, [0x1E97], [0x0054, 0x0308], [0x0054, 0x0308], []). % LATIN SMALL LETTER T WITH DIAERESIS
-unicode_special_casing(0x1E98, [0x1E98], [0x0057, 0x030A], [0x0057, 0x030A], []). % LATIN SMALL LETTER W WITH RING ABOVE
-unicode_special_casing(0x1E99, [0x1E99], [0x0059, 0x030A], [0x0059, 0x030A], []). % LATIN SMALL LETTER Y WITH RING ABOVE
-unicode_special_casing(0x1E9A, [0x1E9A], [0x0041, 0x02BE], [0x0041, 0x02BE], []). % LATIN SMALL LETTER A WITH RIGHT HALF RING
-unicode_special_casing(0x1F50, [0x1F50], [0x03A5, 0x0313], [0x03A5, 0x0313], []). % GREEK SMALL LETTER UPSILON WITH PSILI
-unicode_special_casing(0x1F52, [0x1F52], [0x03A5, 0x0313, 0x0300], [0x03A5, 0x0313, 0x0300], []). % GREEK SMALL LETTER UPSILON WITH PSILI AND VARIA
-unicode_special_casing(0x1F54, [0x1F54], [0x03A5, 0x0313, 0x0301], [0x03A5, 0x0313, 0x0301], []). % GREEK SMALL LETTER UPSILON WITH PSILI AND OXIA
-unicode_special_casing(0x1F56, [0x1F56], [0x03A5, 0x0313, 0x0342], [0x03A5, 0x0313, 0x0342], []). % GREEK SMALL LETTER UPSILON WITH PSILI AND PERISPOMENI
-unicode_special_casing(0x1FB6, [0x1FB6], [0x0391, 0x0342], [0x0391, 0x0342], []). % GREEK SMALL LETTER ALPHA WITH PERISPOMENI
-unicode_special_casing(0x1FC6, [0x1FC6], [0x0397, 0x0342], [0x0397, 0x0342], []). % GREEK SMALL LETTER ETA WITH PERISPOMENI
-unicode_special_casing(0x1FD2, [0x1FD2], [0x0399, 0x0308, 0x0300], [0x0399, 0x0308, 0x0300], []). % GREEK SMALL LETTER IOTA WITH DIALYTIKA AND VARIA
-unicode_special_casing(0x1FD3, [0x1FD3], [0x0399, 0x0308, 0x0301], [0x0399, 0x0308, 0x0301], []). % GREEK SMALL LETTER IOTA WITH DIALYTIKA AND OXIA
-unicode_special_casing(0x1FD6, [0x1FD6], [0x0399, 0x0342], [0399, 0x0342], []). % GREEK SMALL LETTER IOTA WITH PERISPOMENI
-unicode_special_casing(0x1FD7, [0x1FD7], [0x0399, 0x0308, 0x0342], [0x0399, 0x0308, 0x0342], []). % GREEK SMALL LETTER IOTA WITH DIALYTIKA AND PERISPOMENI
-unicode_special_casing(0x1FE2, [0x1FE2], [0x03A5, 0x0308, 0x0300], [0x03A5, 0x0308, 0x0300], []). % GREEK SMALL LETTER UPSILON WITH DIALYTIKA AND VARIA
-unicode_special_casing(0x1FE3, [0x1FE3], [0x03A5, 0x0308, 0x0301], [0x03A5, 0x0308, 0x0301], []). % GREEK SMALL LETTER UPSILON WITH DIALYTIKA AND OXIA
-unicode_special_casing(0x1FE4, [0x1FE4], [0x03A1, 0x0313], [0x03A1, 0x0313], []). % GREEK SMALL LETTER RHO WITH PSILI
-unicode_special_casing(0x1FE6, [0x1FE6], [0x03A5, 0x0342], [0x03A5, 0x0342], []). % GREEK SMALL LETTER UPSILON WITH PERISPOMENI
-unicode_special_casing(0x1FE7, [0x1FE7], [0x03A5, 0x0308, 0x0342], [0x03A5, 0x0308, 0x0342], []). % GREEK SMALL LETTER UPSILON WITH DIALYTIKA AND PERISPOMENI
-unicode_special_casing(0x1FF6, [0x1FF6], [0x03A9, 0x0342], [0x03A9, 0x0342], []). % GREEK SMALL LETTER OMEGA WITH PERISPOMENI
-
-% IMPORTANT-when iota-subscript (0345) is uppercased or titlecased,
-%  the result will be incorrect unless the iota-subscript is moved to the end
-%  of any sequence of combining marks. Otherwise, the accents will go on the capital iota.
-%  This process can be achieved by first transforming the text to NFC before casing.
-%  E.g. <alpha><iota_subscript><acute> is uppercased to <ALPHA><acute><IOTA>
-
-% The following cases are already in the UnicodeData file, so are only commented here.
-
-% 0345; 0345; 0345; 0399; # COMBINING GREEK YPOGEGRAMMENI
-
-% All letters with YPOGEGRAMMENI (iota-subscript) or PROSGEGRAMMENI (iota adscript)
-% have special uppercases.
-% Note: characters with PROSGEGRAMMENI are actually titlecase, not uppercase!
-
-unicode_special_casing(0x1F80, [0x1F80], [0x1F88], [0x1F08, 0x0399], []). % GREEK SMALL LETTER ALPHA WITH PSILI AND YPOGEGRAMMENI
-unicode_special_casing(0x1F81, [0x1F81], [0x1F89], [0x1F09, 0x0399], []). % GREEK SMALL LETTER ALPHA WITH DASIA AND YPOGEGRAMMENI
-unicode_special_casing(0x1F82, [0x1F82], [0x1F8A], [0x1F0A, 0x0399], []). % GREEK SMALL LETTER ALPHA WITH PSILI AND VARIA AND YPOGEGRAMMENI
-unicode_special_casing(0x1F83, [0x1F83], [0x1F8B], [0x1F0B, 0x0399], []). % GREEK SMALL LETTER ALPHA WITH DASIA AND VARIA AND YPOGEGRAMMENI
-unicode_special_casing(0x1F84, [0x1F84], [0x1F8C], [0x1F0C, 0x0399], []). % GREEK SMALL LETTER ALPHA WITH PSILI AND OXIA AND YPOGEGRAMMENI
-unicode_special_casing(0x1F85, [0x1F85], [0x1F8D], [0x1F0D, 0x0399], []). % GREEK SMALL LETTER ALPHA WITH DASIA AND OXIA AND YPOGEGRAMMENI
-unicode_special_casing(0x1F86, [0x1F86], [0x1F8E], [0x1F0E, 0x0399], []). % GREEK SMALL LETTER ALPHA WITH PSILI AND PERISPOMENI AND YPOGEGRAMMENI
-unicode_special_casing(0x1F87, [0x1F87], [0x1F8F], [0x1F0F, 0x0399], []). % GREEK SMALL LETTER ALPHA WITH DASIA AND PERISPOMENI AND YPOGEGRAMMENI
-unicode_special_casing(0x1F88, [0x1F80], [0x1F88], [0x1F08, 0x0399], []). % GREEK CAPITAL LETTER ALPHA WITH PSILI AND PROSGEGRAMMENI
-unicode_special_casing(0x1F89, [0x1F81], [0x1F89], [0x1F09, 0x0399], []). % GREEK CAPITAL LETTER ALPHA WITH DASIA AND PROSGEGRAMMENI
-unicode_special_casing(0x1F8A, [0x1F82], [0x1F8A], [0x1F0A, 0x0399], []). % GREEK CAPITAL LETTER ALPHA WITH PSILI AND VARIA AND PROSGEGRAMMENI
-unicode_special_casing(0x1F8B, [0x1F83], [0x1F8B], [0x1F0B, 0x0399], []). % GREEK CAPITAL LETTER ALPHA WITH DASIA AND VARIA AND PROSGEGRAMMENI
-unicode_special_casing(0x1F8C, [0x1F84], [0x1F8C], [0x1F0C, 0x0399], []). % GREEK CAPITAL LETTER ALPHA WITH PSILI AND OXIA AND PROSGEGRAMMENI
-unicode_special_casing(0x1F8D, [0x1F85], [0x1F8D], [0x1F0D, 0x0399], []). % GREEK CAPITAL LETTER ALPHA WITH DASIA AND OXIA AND PROSGEGRAMMENI
-unicode_special_casing(0x1F8E, [0x1F86], [0x1F8E], [0x1F0E, 0x0399], []). % GREEK CAPITAL LETTER ALPHA WITH PSILI AND PERISPOMENI AND PROSGEGRAMMENI
-unicode_special_casing(0x1F8F, [0x1F87], [0x1F8F], [0x1F0F, 0x0399], []). % GREEK CAPITAL LETTER ALPHA WITH DASIA AND PERISPOMENI AND PROSGEGRAMMENI
-unicode_special_casing(0x1F90, [0x1F90], [0x1F98], [0x1F28, 0x0399], []). % GREEK SMALL LETTER ETA WITH PSILI AND YPOGEGRAMMENI
-unicode_special_casing(0x1F91, [0x1F91], [0x1F99], [0x1F29, 0x0399], []). % GREEK SMALL LETTER ETA WITH DASIA AND YPOGEGRAMMENI
-unicode_special_casing(0x1F92, [0x1F92], [0x1F9A], [0x1F2A, 0x0399], []). % GREEK SMALL LETTER ETA WITH PSILI AND VARIA AND YPOGEGRAMMENI
-unicode_special_casing(0x1F93, [0x1F93], [0x1F9B], [0x1F2B, 0x0399], []). % GREEK SMALL LETTER ETA WITH DASIA AND VARIA AND YPOGEGRAMMENI
-unicode_special_casing(0x1F94, [0x1F94], [0x1F9C], [0x1F2C, 0x0399], []). % GREEK SMALL LETTER ETA WITH PSILI AND OXIA AND YPOGEGRAMMENI
-unicode_special_casing(0x1F95, [0x1F95], [0x1F9D], [0x1F2D, 0x0399], []). % GREEK SMALL LETTER ETA WITH DASIA AND OXIA AND YPOGEGRAMMENI
-unicode_special_casing(0x1F96, [0x1F96], [0x1F9E], [0x1F2E, 0x0399], []). % GREEK SMALL LETTER ETA WITH PSILI AND PERISPOMENI AND YPOGEGRAMMENI
-unicode_special_casing(0x1F97, [0x1F97], [0x1F9F], [0x1F2F, 0x0399], []). % GREEK SMALL LETTER ETA WITH DASIA AND PERISPOMENI AND YPOGEGRAMMENI
-unicode_special_casing(0x1F98, [0x1F90], [0x1F98], [0x1F28, 0x0399], []). % GREEK CAPITAL LETTER ETA WITH PSILI AND PROSGEGRAMMENI
-unicode_special_casing(0x1F99, [0x1F91], [0x1F99], [0x1F29, 0x0399], []). % GREEK CAPITAL LETTER ETA WITH DASIA AND PROSGEGRAMMENI
-unicode_special_casing(0x1F9A, [0x1F92], [0x1F9A], [0x1F2A, 0x0399], []). % GREEK CAPITAL LETTER ETA WITH PSILI AND VARIA AND PROSGEGRAMMENI
-unicode_special_casing(0x1F9B, [0x1F93], [0x1F9B], [0x1F2B, 0x0399], []). % GREEK CAPITAL LETTER ETA WITH DASIA AND VARIA AND PROSGEGRAMMENI
-unicode_special_casing(0x1F9C, [0x1F94], [0x1F9C], [0x1F2C, 0x0399], []). % GREEK CAPITAL LETTER ETA WITH PSILI AND OXIA AND PROSGEGRAMMENI
-unicode_special_casing(0x1F9D, [0x1F95], [0x1F9D], [0x1F2D, 0x0399], []). % GREEK CAPITAL LETTER ETA WITH DASIA AND OXIA AND PROSGEGRAMMENI
-unicode_special_casing(0x1F9E, [0x1F96], [0x1F9E], [0x1F2E, 0x0399], []). % GREEK CAPITAL LETTER ETA WITH PSILI AND PERISPOMENI AND PROSGEGRAMMENI
-unicode_special_casing(0x1F9F, [0x1F97], [0x1F9F], [0x1F2F, 0x0399], []). % GREEK CAPITAL LETTER ETA WITH DASIA AND PERISPOMENI AND PROSGEGRAMMENI
-unicode_special_casing(0x1FA0, [0x1FA0], [0x1FA8], [0x1F68, 0x0399], []). % GREEK SMALL LETTER OMEGA WITH PSILI AND YPOGEGRAMMENI
-unicode_special_casing(0x1FA1, [0x1FA1], [0x1FA9], [0x1F69, 0x0399], []). % GREEK SMALL LETTER OMEGA WITH DASIA AND YPOGEGRAMMENI
-unicode_special_casing(0x1FA2, [0x1FA2], [0x1FAA], [0x1F6A, 0x0399], []). % GREEK SMALL LETTER OMEGA WITH PSILI AND VARIA AND YPOGEGRAMMENI
-unicode_special_casing(0x1FA3, [0x1FA3], [0x1FAB], [0x1F6B, 0x0399], []). % GREEK SMALL LETTER OMEGA WITH DASIA AND VARIA AND YPOGEGRAMMENI
-unicode_special_casing(0x1FA4, [0x1FA4], [0x1FAC], [0x1F6C, 0x0399], []). % GREEK SMALL LETTER OMEGA WITH PSILI AND OXIA AND YPOGEGRAMMENI
-unicode_special_casing(0x1FA5, [0x1FA5], [0x1FAD], [0x1F6D, 0x0399], []). % GREEK SMALL LETTER OMEGA WITH DASIA AND OXIA AND YPOGEGRAMMENI
-unicode_special_casing(0x1FA6, [0x1FA6], [0x1FAE], [0x1F6E, 0x0399], []). % GREEK SMALL LETTER OMEGA WITH PSILI AND PERISPOMENI AND YPOGEGRAMMENI
-unicode_special_casing(0x1FA7, [0x1FA7], [0x1FAF], [0x1F6F, 0x0399], []). % GREEK SMALL LETTER OMEGA WITH DASIA AND PERISPOMENI AND YPOGEGRAMMENI
-unicode_special_casing(0x1FA8, [0x1FA0], [0x1FA8], [0x1F68, 0x0399], []). % GREEK CAPITAL LETTER OMEGA WITH PSILI AND PROSGEGRAMMENI
-unicode_special_casing(0x1FA9, [0x1FA1], [0x1FA9], [0x1F69, 0x0399], []). % GREEK CAPITAL LETTER OMEGA WITH DASIA AND PROSGEGRAMMENI
-unicode_special_casing(0x1FAA, [0x1FA2], [0x1FAA], [0x1F6A, 0x0399], []). % GREEK CAPITAL LETTER OMEGA WITH PSILI AND VARIA AND PROSGEGRAMMENI
-unicode_special_casing(0x1FAB, [0x1FA3], [0x1FAB], [0x1F6B, 0x0399], []). % GREEK CAPITAL LETTER OMEGA WITH DASIA AND VARIA AND PROSGEGRAMMENI
-unicode_special_casing(0x1FAC, [0x1FA4], [0x1FAC], [0x1F6C, 0x0399], []). % GREEK CAPITAL LETTER OMEGA WITH PSILI AND OXIA AND PROSGEGRAMMENI
-unicode_special_casing(0x1FAD, [0x1FA5], [0x1FAD], [0x1F6D, 0x0399], []). % GREEK CAPITAL LETTER OMEGA WITH DASIA AND OXIA AND PROSGEGRAMMENI
-unicode_special_casing(0x1FAE, [0x1FA6], [0x1FAE], [0x1F6E, 0x0399], []). % GREEK CAPITAL LETTER OMEGA WITH PSILI AND PERISPOMENI AND PROSGEGRAMMENI
-unicode_special_casing(0x1FAF, [0x1FA7], [0x1FAF], [0x1F6F, 0x0399], []). % GREEK CAPITAL LETTER OMEGA WITH DASIA AND PERISPOMENI AND PROSGEGRAMMENI
-unicode_special_casing(0x1FB3, [0x1FB3], [0x1FBC], [0x0391, 0x0399], []). % GREEK SMALL LETTER ALPHA WITH YPOGEGRAMMENI
-unicode_special_casing(0x1FBC, [0x1FB3], [0x1FBC], [0x0391, 0x0399], []). % GREEK CAPITAL LETTER ALPHA WITH PROSGEGRAMMENI
-unicode_special_casing(0x1FC3, [0x1FC3], [0x1FCC], [0x0397, 0x0399], []). % GREEK SMALL LETTER ETA WITH YPOGEGRAMMENI
-unicode_special_casing(0x1FCC, [0x1FC3], [0x1FCC], [0x0397, 0x0399], []). % GREEK CAPITAL LETTER ETA WITH PROSGEGRAMMENI
-unicode_special_casing(0x1FF3, [0x1FF3], [0x1FFC], [0x03A9, 0x0399], []). % GREEK SMALL LETTER OMEGA WITH YPOGEGRAMMENI
-unicode_special_casing(0x1FFC, [0x1FF3], [0x1FFC], [0x03A9, 0x0399], []). % GREEK CAPITAL LETTER OMEGA WITH PROSGEGRAMMENI
-
-% Some characters with YPOGEGRAMMENI also have no corresponding titlecases
-
-unicode_special_casing(0x1FB2, [0x1FB2], [0x1FBA, 0x0345], [0x1FBA, 0x0399], []). % GREEK SMALL LETTER ALPHA WITH VARIA AND YPOGEGRAMMENI
-unicode_special_casing(0x1FB4, [0x1FB4], [0x0386, 0x0345], [0x0386, 0x0399], []). % GREEK SMALL LETTER ALPHA WITH OXIA AND YPOGEGRAMMENI
-unicode_special_casing(0x1FC2, [0x1FC2], [0x1FCA, 0x0345], [0x1FCA, 0x0399], []). % GREEK SMALL LETTER ETA WITH VARIA AND YPOGEGRAMMENI
-unicode_special_casing(0x1FC4, [0x1FC4], [0x0389, 0x0345], [0x0389, 0x0399], []). % GREEK SMALL LETTER ETA WITH OXIA AND YPOGEGRAMMENI
-unicode_special_casing(0x1FF2, [0x1FF2], [0x1FFA, 0x0345], [0x1FFA, 0x0399], []). % GREEK SMALL LETTER OMEGA WITH VARIA AND YPOGEGRAMMENI
-unicode_special_casing(0x1FF4, [0x1FF4], [0x038F, 0x0345], [0x038F, 0x0399], []). % GREEK SMALL LETTER OMEGA WITH OXIA AND YPOGEGRAMMENI
-
-unicode_special_casing(0x1FB7, [0x1FB7], [0x0391, 0x0342, 0x0345], [0x0391, 0x0342, 0x0399], []). % GREEK SMALL LETTER ALPHA WITH PERISPOMENI AND YPOGEGRAMMENI
-unicode_special_casing(0x1FC7, [0x1FC7], [0x0397, 0x0342, 0x0345], [0x0397, 0x0342, 0x0399], []). % GREEK SMALL LETTER ETA WITH PERISPOMENI AND YPOGEGRAMMENI
-unicode_special_casing(0x1FF7, [0x1FF7], [0x03A9, 0x0342, 0x0345], [0x03A9, 0x0342, 0x0399], []). % GREEK SMALL LETTER OMEGA WITH PERISPOMENI AND YPOGEGRAMMENI
-
-% ================================================================================
-% Conditional Mappings
-% The remainder of this file provides conditional casing data used to produce
-% full case mappings.
-% ================================================================================
-% Language-Insensitive Mappings
-% These are characters whose full case mappings do not depend on language, but do
-% depend on context (which characters come before or after). For more information
-% see the header of this file and the Unicode Standard.
-% ================================================================================
-
-% Special case for final form of sigma
-
-unicode_special_casing(0x03A3, [0x03C2], [0x03A3], [0x03A3], ['Final_Sigma']). % GREEK CAPITAL LETTER SIGMA
-
-% Note: the following cases for non-final are already in the UnicodeData file.
-
-% 03A3; 03C3; 03A3; 03A3; # GREEK CAPITAL LETTER SIGMA
-% 03C3; 03C3; 03A3; 03A3; # GREEK SMALL LETTER SIGMA
-% 03C2; 03C2; 03A3; 03A3; # GREEK SMALL LETTER FINAL SIGMA
-
-% Note: the following cases are not included, since they would case-fold in lowercasing
-
-% 03C3; 03C2; 03A3; 03A3; Final_Sigma; # GREEK SMALL LETTER SIGMA
-% 03C2; 03C3; 03A3; 03A3; Not_Final_Sigma; # GREEK SMALL LETTER FINAL SIGMA
-
-% ================================================================================
-% Language-Sensitive Mappings
-% These are characters whose full case mappings depend on language and perhaps also
-% context (which characters come before or after). For more information
-% see the header of this file and the Unicode Standard.
-% ================================================================================
-
-% Lithuanian
-
-% Lithuanian retains the dot in a lowercase i when followed by accents.
-
-% Remove DOT ABOVE after "i" with upper or titlecase
-
-unicode_special_casing(0x0307, [0x0307], [], [], [lt, 'After_Soft_Dotted']). % COMBINING DOT ABOVE
-
-% Introduce an explicit dot above when lowercasing capital I's and J's
-% whenever there are more accents above.
-% (of the accents used in Lithuanian: grave, acute, tilde above, and ogonek)
-
-unicode_special_casing(0x0049, [0x0069, 0x0307], [0x0049], [0x0049], [lt, 'More_Above']). % LATIN CAPITAL LETTER I
-unicode_special_casing(0x004A, [0x006A, 0x0307], [0x004A], [0x004A], [lt, 'More_Above']). % LATIN CAPITAL LETTER J
-unicode_special_casing(0x012E, [0x012F, 0x0307], [0x012E], [0x012E], [lt, 'More_Above']). % LATIN CAPITAL LETTER I WITH OGONEK
-unicode_special_casing(0x00CC, [0x0069, 0x0307, 0x0300], [0x00CC], [0x00CC], [lt]). % LATIN CAPITAL LETTER I WITH GRAVE
-unicode_special_casing(0x00CD, [0x0069, 0x0307, 0x0301], [0x00CD], [0x00CD], [lt]). % LATIN CAPITAL LETTER I WITH ACUTE
-unicode_special_casing(0x0128, [0x0069, 0x0307, 0x0303], [0x0128], [0x0128], [lt]). % LATIN CAPITAL LETTER I WITH TILDE
-
-% ================================================================================
-
-% Turkish and Azeri
-
-% I and i-dotless; I-dot and i are case pairs in Turkish and Azeri
-% The following rules handle those cases.
-
-unicode_special_casing(0x0130, [0x0069], [0x0130], [0x0130], [tr]). % LATIN CAPITAL LETTER I WITH DOT ABOVE
-unicode_special_casing(0x0130, [0x0069], [0x0130], [0x0130], [az]). % LATIN CAPITAL LETTER I WITH DOT ABOVE
-
-% When lowercasing, remove dot_above in the sequence I + dot_above, which will turn into i.
-% This matches the behavior of the canonically equivalent I-dot_above
-
-unicode_special_casing(0x0307, [], [0x0307], [0x0307], [tr, 'After_I']). % COMBINING DOT ABOVE
-unicode_special_casing(0x0307, [], [0x0307], [0x0307], [az, 'After_I']). % COMBINING DOT ABOVE
-
-% When lowercasing, unless an I is before a dot_above, it turns into a dotless i.
-
-unicode_special_casing(0x0049, [0x0131], [0x0049], [0x0049], [tr, 'Not_Before_Dot']). % LATIN CAPITAL LETTER I
-unicode_special_casing(0x0049, [0x0131], [0x0049], [0x0049], [az, 'Not_Before_Dot']). % LATIN CAPITAL LETTER I
-
-% When uppercasing, i turns into a dotted capital I
-
-unicode_special_casing(0x0069, [0x0069], [0x0130], [0x0130], [tr]). % LATIN SMALL LETTER I
-unicode_special_casing(0x0069, [0x0069], [0x0130], [0x0130], [az]). % LATIN SMALL LETTER I
-
-% Note: the following case is already in the UnicodeData file.
-
-% 0131; 0131; 0049; 0049; tr; # LATIN SMALL LETTER DOTLESS I
-
-% EOF
+unicode_special_casing(223, [223], [83,115], [83,83], []).
+unicode_special_casing(304, [105,775], [304], [304], []).
+unicode_special_casing(64256, [64256], [70,102], [70,70], []).
+unicode_special_casing(64257, [64257], [70,105], [70,73], []).
+unicode_special_casing(64258, [64258], [70,108], [70,76], []).
+unicode_special_casing(64259, [64259], [70,102,105], [70,70,73], []).
+unicode_special_casing(64260, [64260], [70,102,108], [70,70,76], []).
+unicode_special_casing(64261, [64261], [83,116], [83,84], []).
+unicode_special_casing(64262, [64262], [83,116], [83,84], []).
+unicode_special_casing(1415, [1415], [1333,1410], [1333,1362], []).
+unicode_special_casing(64275, [64275], [1348,1398], [1348,1350], []).
+unicode_special_casing(64276, [64276], [1348,1381], [1348,1333], []).
+unicode_special_casing(64277, [64277], [1348,1387], [1348,1339], []).
+unicode_special_casing(64278, [64278], [1358,1398], [1358,1350], []).
+unicode_special_casing(64279, [64279], [1348,1389], [1348,1341], []).
+unicode_special_casing(329, [329], [700,78], [700,78], []).
+unicode_special_casing(912, [912], [921,776,769], [921,776,769], []).
+unicode_special_casing(944, [944], [933,776,769], [933,776,769], []).
+unicode_special_casing(496, [496], [74,780], [74,780], []).
+unicode_special_casing(7830, [7830], [72,817], [72,817], []).
+unicode_special_casing(7831, [7831], [84,776], [84,776], []).
+unicode_special_casing(7832, [7832], [87,778], [87,778], []).
+unicode_special_casing(7833, [7833], [89,778], [89,778], []).
+unicode_special_casing(7834, [7834], [65,702], [65,702], []).
+unicode_special_casing(8016, [8016], [933,787], [933,787], []).
+unicode_special_casing(8018, [8018], [933,787,768], [933,787,768], []).
+unicode_special_casing(8020, [8020], [933,787,769], [933,787,769], []).
+unicode_special_casing(8022, [8022], [933,787,834], [933,787,834], []).
+unicode_special_casing(8118, [8118], [913,834], [913,834], []).
+unicode_special_casing(8134, [8134], [919,834], [919,834], []).
+unicode_special_casing(8146, [8146], [921,776,768], [921,776,768], []).
+unicode_special_casing(8147, [8147], [921,776,769], [921,776,769], []).
+unicode_special_casing(8150, [8150], [921,834], [921,834], []).
+unicode_special_casing(8151, [8151], [921,776,834], [921,776,834], []).
+unicode_special_casing(8162, [8162], [933,776,768], [933,776,768], []).
+unicode_special_casing(8163, [8163], [933,776,769], [933,776,769], []).
+unicode_special_casing(8164, [8164], [929,787], [929,787], []).
+unicode_special_casing(8166, [8166], [933,834], [933,834], []).
+unicode_special_casing(8167, [8167], [933,776,834], [933,776,834], []).
+unicode_special_casing(8182, [8182], [937,834], [937,834], []).
+unicode_special_casing(8064, [8064], [8072], [7944,921], []).
+unicode_special_casing(8065, [8065], [8073], [7945,921], []).
+unicode_special_casing(8066, [8066], [8074], [7946,921], []).
+unicode_special_casing(8067, [8067], [8075], [7947,921], []).
+unicode_special_casing(8068, [8068], [8076], [7948,921], []).
+unicode_special_casing(8069, [8069], [8077], [7949,921], []).
+unicode_special_casing(8070, [8070], [8078], [7950,921], []).
+unicode_special_casing(8071, [8071], [8079], [7951,921], []).
+unicode_special_casing(8072, [8064], [8072], [7944,921], []).
+unicode_special_casing(8073, [8065], [8073], [7945,921], []).
+unicode_special_casing(8074, [8066], [8074], [7946,921], []).
+unicode_special_casing(8075, [8067], [8075], [7947,921], []).
+unicode_special_casing(8076, [8068], [8076], [7948,921], []).
+unicode_special_casing(8077, [8069], [8077], [7949,921], []).
+unicode_special_casing(8078, [8070], [8078], [7950,921], []).
+unicode_special_casing(8079, [8071], [8079], [7951,921], []).
+unicode_special_casing(8080, [8080], [8088], [7976,921], []).
+unicode_special_casing(8081, [8081], [8089], [7977,921], []).
+unicode_special_casing(8082, [8082], [8090], [7978,921], []).
+unicode_special_casing(8083, [8083], [8091], [7979,921], []).
+unicode_special_casing(8084, [8084], [8092], [7980,921], []).
+unicode_special_casing(8085, [8085], [8093], [7981,921], []).
+unicode_special_casing(8086, [8086], [8094], [7982,921], []).
+unicode_special_casing(8087, [8087], [8095], [7983,921], []).
+unicode_special_casing(8088, [8080], [8088], [7976,921], []).
+unicode_special_casing(8089, [8081], [8089], [7977,921], []).
+unicode_special_casing(8090, [8082], [8090], [7978,921], []).
+unicode_special_casing(8091, [8083], [8091], [7979,921], []).
+unicode_special_casing(8092, [8084], [8092], [7980,921], []).
+unicode_special_casing(8093, [8085], [8093], [7981,921], []).
+unicode_special_casing(8094, [8086], [8094], [7982,921], []).
+unicode_special_casing(8095, [8087], [8095], [7983,921], []).
+unicode_special_casing(8096, [8096], [8104], [8040,921], []).
+unicode_special_casing(8097, [8097], [8105], [8041,921], []).
+unicode_special_casing(8098, [8098], [8106], [8042,921], []).
+unicode_special_casing(8099, [8099], [8107], [8043,921], []).
+unicode_special_casing(8100, [8100], [8108], [8044,921], []).
+unicode_special_casing(8101, [8101], [8109], [8045,921], []).
+unicode_special_casing(8102, [8102], [8110], [8046,921], []).
+unicode_special_casing(8103, [8103], [8111], [8047,921], []).
+unicode_special_casing(8104, [8096], [8104], [8040,921], []).
+unicode_special_casing(8105, [8097], [8105], [8041,921], []).
+unicode_special_casing(8106, [8098], [8106], [8042,921], []).
+unicode_special_casing(8107, [8099], [8107], [8043,921], []).
+unicode_special_casing(8108, [8100], [8108], [8044,921], []).
+unicode_special_casing(8109, [8101], [8109], [8045,921], []).
+unicode_special_casing(8110, [8102], [8110], [8046,921], []).
+unicode_special_casing(8111, [8103], [8111], [8047,921], []).
+unicode_special_casing(8115, [8115], [8124], [913,921], []).
+unicode_special_casing(8124, [8115], [8124], [913,921], []).
+unicode_special_casing(8131, [8131], [8140], [919,921], []).
+unicode_special_casing(8140, [8131], [8140], [919,921], []).
+unicode_special_casing(8179, [8179], [8188], [937,921], []).
+unicode_special_casing(8188, [8179], [8188], [937,921], []).
+unicode_special_casing(8114, [8114], [8122,837], [8122,921], []).
+unicode_special_casing(8116, [8116], [902,837], [902,921], []).
+unicode_special_casing(8130, [8130], [8138,837], [8138,921], []).
+unicode_special_casing(8132, [8132], [905,837], [905,921], []).
+unicode_special_casing(8178, [8178], [8186,837], [8186,921], []).
+unicode_special_casing(8180, [8180], [911,837], [911,921], []).
+unicode_special_casing(8119, [8119], [913,834,837], [913,834,921], []).
+unicode_special_casing(8135, [8135], [919,834,837], [919,834,921], []).
+unicode_special_casing(8183, [8183], [937,834,837], [937,834,921], []).
+unicode_special_casing(931, [962], [931], [931], ['Final_Sigma']).
+unicode_special_casing(775, [775], [], [], [lt,'After_Soft_Dotted']).
+unicode_special_casing(73, [105,775], [73], [73], [lt,'More_Above']).
+unicode_special_casing(74, [106,775], [74], [74], [lt,'More_Above']).
+unicode_special_casing(302, [303,775], [302], [302], [lt,'More_Above']).
+unicode_special_casing(204, [105,775,768], [204], [204], [lt]).
+unicode_special_casing(205, [105,775,769], [205], [205], [lt]).
+unicode_special_casing(296, [105,775,771], [296], [296], [lt]).
+unicode_special_casing(304, [105], [304], [304], [tr]).
+unicode_special_casing(304, [105], [304], [304], [az]).
+unicode_special_casing(775, [], [775], [775], [tr,'After_I']).
+unicode_special_casing(775, [], [775], [775], [az,'After_I']).
+unicode_special_casing(73, [305], [73], [73], [tr,'Not_Before_Dot']).
+unicode_special_casing(73, [305], [73], [73], [az,'Not_Before_Dot']).
+unicode_special_casing(105, [105], [304], [304], [tr]).
+unicode_special_casing(105, [105], [304], [304], [az]).

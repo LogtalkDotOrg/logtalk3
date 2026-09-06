@@ -1,1341 +1,1848 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  This file is part of VivoMind Prolog Unicode Resources
-%  SPDX-License-Identifier: CC0-1.0
+%  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
 %
-%  VivoMind Prolog Unicode Resources is free software distributed using the
-%  Creative Commons CC0 1.0 Universal (CC0 1.0) - Public Domain Dedication
-%  license
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%  Last modified: September 30, 2012
+%      http://www.apache.org/licenses/LICENSE-2.0
 %
-%  Original Unicode file header comments follow
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-/*
-# DerivedAge-6.2.0.txt
-# Date: 2012-09-20, 21:30:39 GMT [MD]
-#
-# Unicode Character Database
-# Copyright (c) 1991-2012 Unicode, Inc.
-# For terms of use, see http://www.unicode.org/terms_of_use.html
-# For documentation, see http://www.unicode.org/reports/tr44/
-#
-# Unicode Character Database: Derived Property Data
-# This file shows when various code points were first assigned in Unicode.
-#
-# Notes:
-#
-# - The term 'assigned' means that a previously reserved code point was assigned
-#   to be a character (graphic, format, control, or private-use);
-#   a noncharacter code point; or a surrogate code point.
-#   For more information, see The Unicode Standard Section 2.4
-#
-# - Versions are only tracked from 1.1 onwards, since version 1.0
-#   predated changes required by the ISO 10646 merger.
-#
-# - The Hangul Syllables that were removed from 2.0 are not included in the 1.1 listing.
-#
-# - The supplementary private use code points and the non-character code points
-#   were assigned in version 2.0, but not specifically listed in the UCD
-#   until versions 3.0 and 3.1 respectively.
-#
-# - Contiguous ranges are broken into separate lines where they would cross code point
-#   types: graphic, format, control, private-use, surrogate, noncharacter
-#
-# For details on the contents of each version, see
-#   http://www.unicode.org/versions/enumeratedversions.html.
+% Generated from Unicode 17.0.0 UCD data. Do not edit.
 
-# ================================================
-
-# Property: Age
-#
-# Note: When using the Age property in regular expressions,
-# an expression such as "\p{age=3.0}" matches all of the code points
-# assigned in Version 3.0--that is, all the code points with a value
-# less than or equal to 3.0 for the Age property.
-# For more information, see [http://www.unicode.org/reports/tr18/].
-
-#  All code points not explicitly listed for Age
-#  have the value Unassigned (NA).
-
-# @missing: 0000..10FFFF; Unassigned
-
-# ================================================
-*/
-
-unicode_age(CodePoint, Age) :-
+unicode_age(CodePoint, Value) :-
 	(	var(CodePoint) ->
-		% generate code point pairs
-		unicode_age(CodePointStart, CodePointEnd, Age),
-		between(CodePointStart, CodePointEnd, CodePoint)
-	;	% try first-argument indexing first
-		unicode_age(CodePoint, _, CodePointAge) ->
-		Age = CodePointAge
-	;	% look for a code point range that includes the given code point
-		unicode_age(CodePointStart, CodePointEnd, CodePointAge),
-		between(CodePointStart, CodePointEnd, CodePoint) ->
-		Age = CodePointAge
-	;	% missing code point; see original comment above
-		between(0x0000, 0x10FFFF, CodePoint),
-		Age = 'Unassigned'
+		unicode_age(Start, End, Value),
+		between(Start, End, CodePoint)
+	;	unicode_age(Start, End, SpecificValue),
+		CodePoint >= Start, CodePoint =< End ->
+		Value = SpecificValue
+	;	between(0, 1114111, CodePoint),
+		Value = 'Unassigned'
 	).
 
-% Age=V1_1
-
-% Assigned as of Unicode 1.1.0 (June, 1993)
-% [excluding removed Hangul Syllables]
-
-unicode_age(0x0000, 0x001F, '1.1').		% [32] <control-0000>..<control-001F>
-unicode_age(0x0020, 0x007E, '1.1').		% [95] SPACE..TILDE
-unicode_age(0x007F, 0x009F, '1.1').		% [33] <control-007F>..<control-009F>
-unicode_age(0x00A0, 0x00AC, '1.1').		% [13] NO-BREAK SPACE..NOT SIGN
-unicode_age(0x00AD, 0x00AD, '1.1').		%      SOFT HYPHEN
-unicode_age(0x00AE, 0x01F5, '1.1').		% [328] REGISTERED SIGN..LATIN SMALL LETTER G WITH ACUTE
-unicode_age(0x01FA, 0x0217, '1.1').		% [30] LATIN CAPITAL LETTER A WITH RING ABOVE AND ACUTE..LATIN SMALL LETTER U WITH INVERTED BREVE
-unicode_age(0x0250, 0x02A8, '1.1').		% [89] LATIN SMALL LETTER TURNED A..LATIN SMALL LETTER TC DIGRAPH WITH CURL
-unicode_age(0x02B0, 0x02DE, '1.1').		% [47] MODIFIER LETTER SMALL H..MODIFIER LETTER RHOTIC HOOK
-unicode_age(0x02E0, 0x02E9, '1.1').		% [10] MODIFIER LETTER SMALL GAMMA..MODIFIER LETTER EXTRA-LOW TONE BAR
-unicode_age(0x0300, 0x0345, '1.1').		% [70] COMBINING GRAVE ACCENT..COMBINING GREEK YPOGEGRAMMENI
-unicode_age(0x0360, 0x0361, '1.1').		%  [2] COMBINING DOUBLE TILDE..COMBINING DOUBLE INVERTED BREVE
-unicode_age(0x0374, 0x0375, '1.1').		%  [2] GREEK NUMERAL SIGN..GREEK LOWER NUMERAL SIGN
-unicode_age(0x037A, 0x037A, '1.1').		%      GREEK YPOGEGRAMMENI
-unicode_age(0x037E, 0x037E, '1.1').		%      GREEK QUESTION MARK
-unicode_age(0x0384, 0x038A, '1.1').		%  [7] GREEK TONOS..GREEK CAPITAL LETTER IOTA WITH TONOS
-unicode_age(0x038C, 0x038C, '1.1').		%      GREEK CAPITAL LETTER OMICRON WITH TONOS
-unicode_age(0x038E, 0x03A1, '1.1').		% [20] GREEK CAPITAL LETTER UPSILON WITH TONOS..GREEK CAPITAL LETTER RHO
-unicode_age(0x03A3, 0x03CE, '1.1').		% [44] GREEK CAPITAL LETTER SIGMA..GREEK SMALL LETTER OMEGA WITH TONOS
-unicode_age(0x03D0, 0x03D6, '1.1').		%  [7] GREEK BETA SYMBOL..GREEK PI SYMBOL
-unicode_age(0x03DA, 0x03DA, '1.1').		%      GREEK LETTER STIGMA
-unicode_age(0x03DC, 0x03DC, '1.1').		%      GREEK LETTER DIGAMMA
-unicode_age(0x03DE, 0x03DE, '1.1').		%      GREEK LETTER KOPPA
-unicode_age(0x03E0, 0x03E0, '1.1').		%      GREEK LETTER SAMPI
-unicode_age(0x03E2, 0x03F3, '1.1').		% [18] COPTIC CAPITAL LETTER SHEI..GREEK LETTER YOT
-unicode_age(0x0401, 0x040C, '1.1').		% [12] CYRILLIC CAPITAL LETTER IO..CYRILLIC CAPITAL LETTER KJE
-unicode_age(0x040E, 0x044F, '1.1').		% [66] CYRILLIC CAPITAL LETTER SHORT U..CYRILLIC SMALL LETTER YA
-unicode_age(0x0451, 0x045C, '1.1').		% [12] CYRILLIC SMALL LETTER IO..CYRILLIC SMALL LETTER KJE
-unicode_age(0x045E, 0x0486, '1.1').		% [41] CYRILLIC SMALL LETTER SHORT U..COMBINING CYRILLIC PSILI PNEUMATA
-unicode_age(0x0490, 0x04C4, '1.1').		% [53] CYRILLIC CAPITAL LETTER GHE WITH UPTURN..CYRILLIC SMALL LETTER KA WITH HOOK
-unicode_age(0x04C7, 0x04C8, '1.1').		%  [2] CYRILLIC CAPITAL LETTER EN WITH HOOK..CYRILLIC SMALL LETTER EN WITH HOOK
-unicode_age(0x04CB, 0x04CC, '1.1').		%  [2] CYRILLIC CAPITAL LETTER KHAKASSIAN CHE..CYRILLIC SMALL LETTER KHAKASSIAN CHE
-unicode_age(0x04D0, 0x04EB, '1.1').		% [28] CYRILLIC CAPITAL LETTER A WITH BREVE..CYRILLIC SMALL LETTER BARRED O WITH DIAERESIS
-unicode_age(0x04EE, 0x04F5, '1.1').		%  [8] CYRILLIC CAPITAL LETTER U WITH MACRON..CYRILLIC SMALL LETTER CHE WITH DIAERESIS
-unicode_age(0x04F8, 0x04F9, '1.1').		%  [2] CYRILLIC CAPITAL LETTER YERU WITH DIAERESIS..CYRILLIC SMALL LETTER YERU WITH DIAERESIS
-unicode_age(0x0531, 0x0556, '1.1').		% [38] ARMENIAN CAPITAL LETTER AYB..ARMENIAN CAPITAL LETTER FEH
-unicode_age(0x0559, 0x055F, '1.1').		%  [7] ARMENIAN MODIFIER LETTER LEFT HALF RING..ARMENIAN ABBREVIATION MARK
-unicode_age(0x0561, 0x0587, '1.1').		% [39] ARMENIAN SMALL LETTER AYB..ARMENIAN SMALL LIGATURE ECH YIWN
-unicode_age(0x0589, 0x0589, '1.1').		%      ARMENIAN FULL STOP
-unicode_age(0x05B0, 0x05B9, '1.1').		% [10] HEBREW POINT SHEVA..HEBREW POINT HOLAM
-unicode_age(0x05BB, 0x05C3, '1.1').		%  [9] HEBREW POINT QUBUTS..HEBREW PUNCTUATION SOF PASUQ
-unicode_age(0x05D0, 0x05EA, '1.1').		% [27] HEBREW LETTER ALEF..HEBREW LETTER TAV
-unicode_age(0x05F0, 0x05F4, '1.1').		%  [5] HEBREW LIGATURE YIDDISH DOUBLE VAV..HEBREW PUNCTUATION GERSHAYIM
-unicode_age(0x060C, 0x060C, '1.1').		%      ARABIC COMMA
-unicode_age(0x061B, 0x061B, '1.1').		%      ARABIC SEMICOLON
-unicode_age(0x061F, 0x061F, '1.1').		%      ARABIC QUESTION MARK
-unicode_age(0x0621, 0x063A, '1.1').		% [26] ARABIC LETTER HAMZA..ARABIC LETTER GHAIN
-unicode_age(0x0640, 0x0652, '1.1').		% [19] ARABIC TATWEEL..ARABIC SUKUN
-unicode_age(0x0660, 0x066D, '1.1').		% [14] ARABIC-INDIC DIGIT ZERO..ARABIC FIVE POINTED STAR
-unicode_age(0x0670, 0x06B7, '1.1').		% [72] ARABIC LETTER SUPERSCRIPT ALEF..ARABIC LETTER LAM WITH THREE DOTS ABOVE
-unicode_age(0x06BA, 0x06BE, '1.1').		%  [5] ARABIC LETTER NOON GHUNNA..ARABIC LETTER HEH DOACHASHMEE
-unicode_age(0x06C0, 0x06CE, '1.1').		% [15] ARABIC LETTER HEH WITH YEH ABOVE..ARABIC LETTER YEH WITH SMALL V
-unicode_age(0x06D0, 0x06DC, '1.1').		% [13] ARABIC LETTER E..ARABIC SMALL HIGH SEEN
-unicode_age(0x06DD, 0x06DD, '1.1').		%      ARABIC END OF AYAH
-unicode_age(0x06DE, 0x06ED, '1.1').		% [16] ARABIC START OF RUB EL HIZB..ARABIC SMALL LOW MEEM
-unicode_age(0x06F0, 0x06F9, '1.1').		% [10] EXTENDED ARABIC-INDIC DIGIT ZERO..EXTENDED ARABIC-INDIC DIGIT NINE
-unicode_age(0x0901, 0x0903, '1.1').		%  [3] DEVANAGARI SIGN CANDRABINDU..DEVANAGARI SIGN VISARGA
-unicode_age(0x0905, 0x0939, '1.1').		% [53] DEVANAGARI LETTER A..DEVANAGARI LETTER HA
-unicode_age(0x093C, 0x094D, '1.1').		% [18] DEVANAGARI SIGN NUKTA..DEVANAGARI SIGN VIRAMA
-unicode_age(0x0950, 0x0954, '1.1').		%  [5] DEVANAGARI OM..DEVANAGARI ACUTE ACCENT
-unicode_age(0x0958, 0x0970, '1.1').		% [25] DEVANAGARI LETTER QA..DEVANAGARI ABBREVIATION SIGN
-unicode_age(0x0981, 0x0983, '1.1').		%  [3] BENGALI SIGN CANDRABINDU..BENGALI SIGN VISARGA
-unicode_age(0x0985, 0x098C, '1.1').		%  [8] BENGALI LETTER A..BENGALI LETTER VOCALIC L
-unicode_age(0x098F, 0x0990, '1.1').		%  [2] BENGALI LETTER E..BENGALI LETTER AI
-unicode_age(0x0993, 0x09A8, '1.1').		% [22] BENGALI LETTER O..BENGALI LETTER NA
-unicode_age(0x09AA, 0x09B0, '1.1').		%  [7] BENGALI LETTER PA..BENGALI LETTER RA
-unicode_age(0x09B2, 0x09B2, '1.1').		%      BENGALI LETTER LA
-unicode_age(0x09B6, 0x09B9, '1.1').		%  [4] BENGALI LETTER SHA..BENGALI LETTER HA
-unicode_age(0x09BC, 0x09BC, '1.1').		%      BENGALI SIGN NUKTA
-unicode_age(0x09BE, 0x09C4, '1.1').		%  [7] BENGALI VOWEL SIGN AA..BENGALI VOWEL SIGN VOCALIC RR
-unicode_age(0x09C7, 0x09C8, '1.1').		%  [2] BENGALI VOWEL SIGN E..BENGALI VOWEL SIGN AI
-unicode_age(0x09CB, 0x09CD, '1.1').		%  [3] BENGALI VOWEL SIGN O..BENGALI SIGN VIRAMA
-unicode_age(0x09D7, 0x09D7, '1.1').		%      BENGALI AU LENGTH MARK
-unicode_age(0x09DC, 0x09DD, '1.1').		%  [2] BENGALI LETTER RRA..BENGALI LETTER RHA
-unicode_age(0x09DF, 0x09E3, '1.1').		%  [5] BENGALI LETTER YYA..BENGALI VOWEL SIGN VOCALIC LL
-unicode_age(0x09E6, 0x09FA, '1.1').		% [21] BENGALI DIGIT ZERO..BENGALI ISSHAR
-unicode_age(0x0A02, 0x0A02, '1.1').		%      GURMUKHI SIGN BINDI
-unicode_age(0x0A05, 0x0A0A, '1.1').		%  [6] GURMUKHI LETTER A..GURMUKHI LETTER UU
-unicode_age(0x0A0F, 0x0A10, '1.1').		%  [2] GURMUKHI LETTER EE..GURMUKHI LETTER AI
-unicode_age(0x0A13, 0x0A28, '1.1').		% [22] GURMUKHI LETTER OO..GURMUKHI LETTER NA
-unicode_age(0x0A2A, 0x0A30, '1.1').		%  [7] GURMUKHI LETTER PA..GURMUKHI LETTER RA
-unicode_age(0x0A32, 0x0A33, '1.1').		%  [2] GURMUKHI LETTER LA..GURMUKHI LETTER LLA
-unicode_age(0x0A35, 0x0A36, '1.1').		%  [2] GURMUKHI LETTER VA..GURMUKHI LETTER SHA
-unicode_age(0x0A38, 0x0A39, '1.1').		%  [2] GURMUKHI LETTER SA..GURMUKHI LETTER HA
-unicode_age(0x0A3C, 0x0A3C, '1.1').		%      GURMUKHI SIGN NUKTA
-unicode_age(0x0A3E, 0x0A42, '1.1').		%  [5] GURMUKHI VOWEL SIGN AA..GURMUKHI VOWEL SIGN UU
-unicode_age(0x0A47, 0x0A48, '1.1').		%  [2] GURMUKHI VOWEL SIGN EE..GURMUKHI VOWEL SIGN AI
-unicode_age(0x0A4B, 0x0A4D, '1.1').		%  [3] GURMUKHI VOWEL SIGN OO..GURMUKHI SIGN VIRAMA
-unicode_age(0x0A59, 0x0A5C, '1.1').		%  [4] GURMUKHI LETTER KHHA..GURMUKHI LETTER RRA
-unicode_age(0x0A5E, 0x0A5E, '1.1').		%      GURMUKHI LETTER FA
-unicode_age(0x0A66, 0x0A74, '1.1').		% [15] GURMUKHI DIGIT ZERO..GURMUKHI EK ONKAR
-unicode_age(0x0A81, 0x0A83, '1.1').		%  [3] GUJARATI SIGN CANDRABINDU..GUJARATI SIGN VISARGA
-unicode_age(0x0A85, 0x0A8B, '1.1').		%  [7] GUJARATI LETTER A..GUJARATI LETTER VOCALIC R
-unicode_age(0x0A8D, 0x0A8D, '1.1').		%      GUJARATI VOWEL CANDRA E
-unicode_age(0x0A8F, 0x0A91, '1.1').		%  [3] GUJARATI LETTER E..GUJARATI VOWEL CANDRA O
-unicode_age(0x0A93, 0x0AA8, '1.1').		% [22] GUJARATI LETTER O..GUJARATI LETTER NA
-unicode_age(0x0AAA, 0x0AB0, '1.1').		%  [7] GUJARATI LETTER PA..GUJARATI LETTER RA
-unicode_age(0x0AB2, 0x0AB3, '1.1').		%  [2] GUJARATI LETTER LA..GUJARATI LETTER LLA
-unicode_age(0x0AB5, 0x0AB9, '1.1').		%  [5] GUJARATI LETTER VA..GUJARATI LETTER HA
-unicode_age(0x0ABC, 0x0AC5, '1.1').		% [10] GUJARATI SIGN NUKTA..GUJARATI VOWEL SIGN CANDRA E
-unicode_age(0x0AC7, 0x0AC9, '1.1').		%  [3] GUJARATI VOWEL SIGN E..GUJARATI VOWEL SIGN CANDRA O
-unicode_age(0x0ACB, 0x0ACD, '1.1').		%  [3] GUJARATI VOWEL SIGN O..GUJARATI SIGN VIRAMA
-unicode_age(0x0AD0, 0x0AD0, '1.1').		%      GUJARATI OM
-unicode_age(0x0AE0, 0x0AE0, '1.1').		%      GUJARATI LETTER VOCALIC RR
-unicode_age(0x0AE6, 0x0AEF, '1.1').		% [10] GUJARATI DIGIT ZERO..GUJARATI DIGIT NINE
-unicode_age(0x0B01, 0x0B03, '1.1').		%  [3] ORIYA SIGN CANDRABINDU..ORIYA SIGN VISARGA
-unicode_age(0x0B05, 0x0B0C, '1.1').		%  [8] ORIYA LETTER A..ORIYA LETTER VOCALIC L
-unicode_age(0x0B0F, 0x0B10, '1.1').		%  [2] ORIYA LETTER E..ORIYA LETTER AI
-unicode_age(0x0B13, 0x0B28, '1.1').		% [22] ORIYA LETTER O..ORIYA LETTER NA
-unicode_age(0x0B2A, 0x0B30, '1.1').		%  [7] ORIYA LETTER PA..ORIYA LETTER RA
-unicode_age(0x0B32, 0x0B33, '1.1').		%  [2] ORIYA LETTER LA..ORIYA LETTER LLA
-unicode_age(0x0B36, 0x0B39, '1.1').		%  [4] ORIYA LETTER SHA..ORIYA LETTER HA
-unicode_age(0x0B3C, 0x0B43, '1.1').		%  [8] ORIYA SIGN NUKTA..ORIYA VOWEL SIGN VOCALIC R
-unicode_age(0x0B47, 0x0B48, '1.1').		%  [2] ORIYA VOWEL SIGN E..ORIYA VOWEL SIGN AI
-unicode_age(0x0B4B, 0x0B4D, '1.1').		%  [3] ORIYA VOWEL SIGN O..ORIYA SIGN VIRAMA
-unicode_age(0x0B56, 0x0B57, '1.1').		%  [2] ORIYA AI LENGTH MARK..ORIYA AU LENGTH MARK
-unicode_age(0x0B5C, 0x0B5D, '1.1').		%  [2] ORIYA LETTER RRA..ORIYA LETTER RHA
-unicode_age(0x0B5F, 0x0B61, '1.1').		%  [3] ORIYA LETTER YYA..ORIYA LETTER VOCALIC LL
-unicode_age(0x0B66, 0x0B70, '1.1').		% [11] ORIYA DIGIT ZERO..ORIYA ISSHAR
-unicode_age(0x0B82, 0x0B83, '1.1').		%  [2] TAMIL SIGN ANUSVARA..TAMIL SIGN VISARGA
-unicode_age(0x0B85, 0x0B8A, '1.1').		%  [6] TAMIL LETTER A..TAMIL LETTER UU
-unicode_age(0x0B8E, 0x0B90, '1.1').		%  [3] TAMIL LETTER E..TAMIL LETTER AI
-unicode_age(0x0B92, 0x0B95, '1.1').		%  [4] TAMIL LETTER O..TAMIL LETTER KA
-unicode_age(0x0B99, 0x0B9A, '1.1').		%  [2] TAMIL LETTER NGA..TAMIL LETTER CA
-unicode_age(0x0B9C, 0x0B9C, '1.1').		%      TAMIL LETTER JA
-unicode_age(0x0B9E, 0x0B9F, '1.1').		%  [2] TAMIL LETTER NYA..TAMIL LETTER TTA
-unicode_age(0x0BA3, 0x0BA4, '1.1').		%  [2] TAMIL LETTER NNA..TAMIL LETTER TA
-unicode_age(0x0BA8, 0x0BAA, '1.1').		%  [3] TAMIL LETTER NA..TAMIL LETTER PA
-unicode_age(0x0BAE, 0x0BB5, '1.1').		%  [8] TAMIL LETTER MA..TAMIL LETTER VA
-unicode_age(0x0BB7, 0x0BB9, '1.1').		%  [3] TAMIL LETTER SSA..TAMIL LETTER HA
-unicode_age(0x0BBE, 0x0BC2, '1.1').		%  [5] TAMIL VOWEL SIGN AA..TAMIL VOWEL SIGN UU
-unicode_age(0x0BC6, 0x0BC8, '1.1').		%  [3] TAMIL VOWEL SIGN E..TAMIL VOWEL SIGN AI
-unicode_age(0x0BCA, 0x0BCD, '1.1').		%  [4] TAMIL VOWEL SIGN O..TAMIL SIGN VIRAMA
-unicode_age(0x0BD7, 0x0BD7, '1.1').		%      TAMIL AU LENGTH MARK
-unicode_age(0x0BE7, 0x0BF2, '1.1').		% [12] TAMIL DIGIT ONE..TAMIL NUMBER ONE THOUSAND
-unicode_age(0x0C01, 0x0C03, '1.1').		%  [3] TELUGU SIGN CANDRABINDU..TELUGU SIGN VISARGA
-unicode_age(0x0C05, 0x0C0C, '1.1').		%  [8] TELUGU LETTER A..TELUGU LETTER VOCALIC L
-unicode_age(0x0C0E, 0x0C10, '1.1').		%  [3] TELUGU LETTER E..TELUGU LETTER AI
-unicode_age(0x0C12, 0x0C28, '1.1').		% [23] TELUGU LETTER O..TELUGU LETTER NA
-unicode_age(0x0C2A, 0x0C33, '1.1').		% [10] TELUGU LETTER PA..TELUGU LETTER LLA
-unicode_age(0x0C35, 0x0C39, '1.1').		%  [5] TELUGU LETTER VA..TELUGU LETTER HA
-unicode_age(0x0C3E, 0x0C44, '1.1').		%  [7] TELUGU VOWEL SIGN AA..TELUGU VOWEL SIGN VOCALIC RR
-unicode_age(0x0C46, 0x0C48, '1.1').		%  [3] TELUGU VOWEL SIGN E..TELUGU VOWEL SIGN AI
-unicode_age(0x0C4A, 0x0C4D, '1.1').		%  [4] TELUGU VOWEL SIGN O..TELUGU SIGN VIRAMA
-unicode_age(0x0C55, 0x0C56, '1.1').		%  [2] TELUGU LENGTH MARK..TELUGU AI LENGTH MARK
-unicode_age(0x0C60, 0x0C61, '1.1').		%  [2] TELUGU LETTER VOCALIC RR..TELUGU LETTER VOCALIC LL
-unicode_age(0x0C66, 0x0C6F, '1.1').		% [10] TELUGU DIGIT ZERO..TELUGU DIGIT NINE
-unicode_age(0x0C82, 0x0C83, '1.1').		%  [2] KANNADA SIGN ANUSVARA..KANNADA SIGN VISARGA
-unicode_age(0x0C85, 0x0C8C, '1.1').		%  [8] KANNADA LETTER A..KANNADA LETTER VOCALIC L
-unicode_age(0x0C8E, 0x0C90, '1.1').		%  [3] KANNADA LETTER E..KANNADA LETTER AI
-unicode_age(0x0C92, 0x0CA8, '1.1').		% [23] KANNADA LETTER O..KANNADA LETTER NA
-unicode_age(0x0CAA, 0x0CB3, '1.1').		% [10] KANNADA LETTER PA..KANNADA LETTER LLA
-unicode_age(0x0CB5, 0x0CB9, '1.1').		%  [5] KANNADA LETTER VA..KANNADA LETTER HA
-unicode_age(0x0CBE, 0x0CC4, '1.1').		%  [7] KANNADA VOWEL SIGN AA..KANNADA VOWEL SIGN VOCALIC RR
-unicode_age(0x0CC6, 0x0CC8, '1.1').		%  [3] KANNADA VOWEL SIGN E..KANNADA VOWEL SIGN AI
-unicode_age(0x0CCA, 0x0CCD, '1.1').		%  [4] KANNADA VOWEL SIGN O..KANNADA SIGN VIRAMA
-unicode_age(0x0CD5, 0x0CD6, '1.1').		%  [2] KANNADA LENGTH MARK..KANNADA AI LENGTH MARK
-unicode_age(0x0CDE, 0x0CDE, '1.1').		%      KANNADA LETTER FA
-unicode_age(0x0CE0, 0x0CE1, '1.1').		%  [2] KANNADA LETTER VOCALIC RR..KANNADA LETTER VOCALIC LL
-unicode_age(0x0CE6, 0x0CEF, '1.1').		% [10] KANNADA DIGIT ZERO..KANNADA DIGIT NINE
-unicode_age(0x0D02, 0x0D03, '1.1').		%  [2] MALAYALAM SIGN ANUSVARA..MALAYALAM SIGN VISARGA
-unicode_age(0x0D05, 0x0D0C, '1.1').		%  [8] MALAYALAM LETTER A..MALAYALAM LETTER VOCALIC L
-unicode_age(0x0D0E, 0x0D10, '1.1').		%  [3] MALAYALAM LETTER E..MALAYALAM LETTER AI
-unicode_age(0x0D12, 0x0D28, '1.1').		% [23] MALAYALAM LETTER O..MALAYALAM LETTER NA
-unicode_age(0x0D2A, 0x0D39, '1.1').		% [16] MALAYALAM LETTER PA..MALAYALAM LETTER HA
-unicode_age(0x0D3E, 0x0D43, '1.1').		%  [6] MALAYALAM VOWEL SIGN AA..MALAYALAM VOWEL SIGN VOCALIC R
-unicode_age(0x0D46, 0x0D48, '1.1').		%  [3] MALAYALAM VOWEL SIGN E..MALAYALAM VOWEL SIGN AI
-unicode_age(0x0D4A, 0x0D4D, '1.1').		%  [4] MALAYALAM VOWEL SIGN O..MALAYALAM SIGN VIRAMA
-unicode_age(0x0D57, 0x0D57, '1.1').		%      MALAYALAM AU LENGTH MARK
-unicode_age(0x0D60, 0x0D61, '1.1').		%  [2] MALAYALAM LETTER VOCALIC RR..MALAYALAM LETTER VOCALIC LL
-unicode_age(0x0D66, 0x0D6F, '1.1').		% [10] MALAYALAM DIGIT ZERO..MALAYALAM DIGIT NINE
-unicode_age(0x0E01, 0x0E3A, '1.1').		% [58] THAI CHARACTER KO KAI..THAI CHARACTER PHINTHU
-unicode_age(0x0E3F, 0x0E5B, '1.1').		% [29] THAI CURRENCY SYMBOL BAHT..THAI CHARACTER KHOMUT
-unicode_age(0x0E81, 0x0E82, '1.1').		%  [2] LAO LETTER KO..LAO LETTER KHO SUNG
-unicode_age(0x0E84, 0x0E84, '1.1').		%      LAO LETTER KHO TAM
-unicode_age(0x0E87, 0x0E88, '1.1').		%  [2] LAO LETTER NGO..LAO LETTER CO
-unicode_age(0x0E8A, 0x0E8A, '1.1').		%      LAO LETTER SO TAM
-unicode_age(0x0E8D, 0x0E8D, '1.1').		%      LAO LETTER NYO
-unicode_age(0x0E94, 0x0E97, '1.1').		%  [4] LAO LETTER DO..LAO LETTER THO TAM
-unicode_age(0x0E99, 0x0E9F, '1.1').		%  [7] LAO LETTER NO..LAO LETTER FO SUNG
-unicode_age(0x0EA1, 0x0EA3, '1.1').		%  [3] LAO LETTER MO..LAO LETTER LO LING
-unicode_age(0x0EA5, 0x0EA5, '1.1').		%      LAO LETTER LO LOOT
-unicode_age(0x0EA7, 0x0EA7, '1.1').		%      LAO LETTER WO
-unicode_age(0x0EAA, 0x0EAB, '1.1').		%  [2] LAO LETTER SO SUNG..LAO LETTER HO SUNG
-unicode_age(0x0EAD, 0x0EB9, '1.1').		% [13] LAO LETTER O..LAO VOWEL SIGN UU
-unicode_age(0x0EBB, 0x0EBD, '1.1').		%  [3] LAO VOWEL SIGN MAI KON..LAO SEMIVOWEL SIGN NYO
-unicode_age(0x0EC0, 0x0EC4, '1.1').		%  [5] LAO VOWEL SIGN E..LAO VOWEL SIGN AI
-unicode_age(0x0EC6, 0x0EC6, '1.1').		%      LAO KO LA
-unicode_age(0x0EC8, 0x0ECD, '1.1').		%  [6] LAO TONE MAI EK..LAO NIGGAHITA
-unicode_age(0x0ED0, 0x0ED9, '1.1').		% [10] LAO DIGIT ZERO..LAO DIGIT NINE
-unicode_age(0x0EDC, 0x0EDD, '1.1').		%  [2] LAO HO NO..LAO HO MO
-unicode_age(0x10A0, 0x10C5, '1.1').		% [38] GEORGIAN CAPITAL LETTER AN..GEORGIAN CAPITAL LETTER HOE
-unicode_age(0x10D0, 0x10F6, '1.1').		% [39] GEORGIAN LETTER AN..GEORGIAN LETTER FI
-unicode_age(0x10FB, 0x10FB, '1.1').		%      GEORGIAN PARAGRAPH SEPARATOR
-unicode_age(0x1100, 0x1159, '1.1').		% [90] HANGUL CHOSEONG KIYEOK..HANGUL CHOSEONG YEORINHIEUH
-unicode_age(0x115F, 0x11A2, '1.1').		% [68] HANGUL CHOSEONG FILLER..HANGUL JUNGSEONG SSANGARAEA
-unicode_age(0x11A8, 0x11F9, '1.1').		% [82] HANGUL JONGSEONG KIYEOK..HANGUL JONGSEONG YEORINHIEUH
-unicode_age(0x1E00, 0x1E9A, '1.1').		% [155] LATIN CAPITAL LETTER A WITH RING BELOW..LATIN SMALL LETTER A WITH RIGHT HALF RING
-unicode_age(0x1EA0, 0x1EF9, '1.1').		% [90] LATIN CAPITAL LETTER A WITH DOT BELOW..LATIN SMALL LETTER Y WITH TILDE
-unicode_age(0x1F00, 0x1F15, '1.1').		% [22] GREEK SMALL LETTER ALPHA WITH PSILI..GREEK SMALL LETTER EPSILON WITH DASIA AND OXIA
-unicode_age(0x1F18, 0x1F1D, '1.1').		%  [6] GREEK CAPITAL LETTER EPSILON WITH PSILI..GREEK CAPITAL LETTER EPSILON WITH DASIA AND OXIA
-unicode_age(0x1F20, 0x1F45, '1.1').		% [38] GREEK SMALL LETTER ETA WITH PSILI..GREEK SMALL LETTER OMICRON WITH DASIA AND OXIA
-unicode_age(0x1F48, 0x1F4D, '1.1').		%  [6] GREEK CAPITAL LETTER OMICRON WITH PSILI..GREEK CAPITAL LETTER OMICRON WITH DASIA AND OXIA
-unicode_age(0x1F50, 0x1F57, '1.1').		%  [8] GREEK SMALL LETTER UPSILON WITH PSILI..GREEK SMALL LETTER UPSILON WITH DASIA AND PERISPOMENI
-unicode_age(0x1F59, 0x1F59, '1.1').		%      GREEK CAPITAL LETTER UPSILON WITH DASIA
-unicode_age(0x1F5B, 0x1F5B, '1.1').		%      GREEK CAPITAL LETTER UPSILON WITH DASIA AND VARIA
-unicode_age(0x1F5D, 0x1F5D, '1.1').		%      GREEK CAPITAL LETTER UPSILON WITH DASIA AND OXIA
-unicode_age(0x1F5F, 0x1F7D, '1.1').		% [31] GREEK CAPITAL LETTER UPSILON WITH DASIA AND PERISPOMENI..GREEK SMALL LETTER OMEGA WITH OXIA
-unicode_age(0x1F80, 0x1FB4, '1.1').		% [53] GREEK SMALL LETTER ALPHA WITH PSILI AND YPOGEGRAMMENI..GREEK SMALL LETTER ALPHA WITH OXIA AND YPOGEGRAMMENI
-unicode_age(0x1FB6, 0x1FC4, '1.1').		% [15] GREEK SMALL LETTER ALPHA WITH PERISPOMENI..GREEK SMALL LETTER ETA WITH OXIA AND YPOGEGRAMMENI
-unicode_age(0x1FC6, 0x1FD3, '1.1').		% [14] GREEK SMALL LETTER ETA WITH PERISPOMENI..GREEK SMALL LETTER IOTA WITH DIALYTIKA AND OXIA
-unicode_age(0x1FD6, 0x1FDB, '1.1').		%  [6] GREEK SMALL LETTER IOTA WITH PERISPOMENI..GREEK CAPITAL LETTER IOTA WITH OXIA
-unicode_age(0x1FDD, 0x1FEF, '1.1').		% [19] GREEK DASIA AND VARIA..GREEK VARIA
-unicode_age(0x1FF2, 0x1FF4, '1.1').		%  [3] GREEK SMALL LETTER OMEGA WITH VARIA AND YPOGEGRAMMENI..GREEK SMALL LETTER OMEGA WITH OXIA AND YPOGEGRAMMENI
-unicode_age(0x1FF6, 0x1FFE, '1.1').		%  [9] GREEK SMALL LETTER OMEGA WITH PERISPOMENI..GREEK DASIA
-unicode_age(0x2000, 0x200A, '1.1').		% [11] EN QUAD..HAIR SPACE
-unicode_age(0x200B, 0x200F, '1.1').		%  [5] ZERO WIDTH SPACE..RIGHT-TO-LEFT MARK
-unicode_age(0x2010, 0x2027, '1.1').		% [24] HYPHEN..HYPHENATION POINT
-unicode_age(0x2028, 0x202E, '1.1').		%  [7] LINE SEPARATOR..RIGHT-TO-LEFT OVERRIDE
-unicode_age(0x2030, 0x2046, '1.1').		% [23] PER MILLE SIGN..RIGHT SQUARE BRACKET WITH QUILL
-unicode_age(0x206A, 0x206F, '1.1').		%  [6] INHIBIT SYMMETRIC SWAPPING..NOMINAL DIGIT SHAPES
-unicode_age(0x2070, 0x2070, '1.1').		%      SUPERSCRIPT ZERO
-unicode_age(0x2074, 0x208E, '1.1').		% [27] SUPERSCRIPT FOUR..SUBSCRIPT RIGHT PARENTHESIS
-unicode_age(0x20A0, 0x20AA, '1.1').		% [11] EURO-CURRENCY SIGN..NEW SHEQEL SIGN
-unicode_age(0x20D0, 0x20E1, '1.1').		% [18] COMBINING LEFT HARPOON ABOVE..COMBINING LEFT RIGHT ARROW ABOVE
-unicode_age(0x2100, 0x2138, '1.1').		% [57] ACCOUNT OF..DALET SYMBOL
-unicode_age(0x2153, 0x2182, '1.1').		% [48] VULGAR FRACTION ONE THIRD..ROMAN NUMERAL TEN THOUSAND
-unicode_age(0x2190, 0x21EA, '1.1').		% [91] LEFTWARDS ARROW..UPWARDS WHITE ARROW FROM BAR
-unicode_age(0x2200, 0x22F1, '1.1'). 		% [242] FOR ALL..DOWN RIGHT DIAGONAL ELLIPSIS
-unicode_age(0x2300, 0x2300, '1.1').		%      DIAMETER SIGN
-unicode_age(0x2302, 0x237A, '1.1').		% [121] HOUSE..APL FUNCTIONAL SYMBOL ALPHA
-unicode_age(0x2400, 0x2424, '1.1').		% [37] SYMBOL FOR NULL..SYMBOL FOR NEWLINE
-unicode_age(0x2440, 0x244A, '1.1').		% [11] OCR HOOK..OCR DOUBLE BACKSLASH
-unicode_age(0x2460, 0x24EA, '1.1').		% [139] CIRCLED DIGIT ONE..CIRCLED DIGIT ZERO
-unicode_age(0x2500, 0x2595, '1.1').		% [150] BOX DRAWINGS LIGHT HORIZONTAL..RIGHT ONE EIGHTH BLOCK
-unicode_age(0x25A0, 0x25EF, '1.1').		% [80] BLACK SQUARE..LARGE CIRCLE
-unicode_age(0x2600, 0x2613, '1.1').		% [20] BLACK SUN WITH RAYS..SALTIRE
-unicode_age(0x261A, 0x266F, '1.1').		% [86] BLACK LEFT POINTING INDEX..MUSIC SHARP SIGN
-unicode_age(0x2701, 0x2704, '1.1').		%  [4] UPPER BLADE SCISSORS..WHITE SCISSORS
-unicode_age(0x2706, 0x2709, '1.1').		%  [4] TELEPHONE LOCATION SIGN..ENVELOPE
-unicode_age(0x270C, 0x2727, '1.1').		% [28] VICTORY HAND..WHITE FOUR POINTED STAR
-unicode_age(0x2729, 0x274B, '1.1').		% [35] STRESS OUTLINED WHITE STAR..HEAVY EIGHT TEARDROP-SPOKED PROPELLER ASTERISK
-unicode_age(0x274D, 0x274D, '1.1').		%      SHADOWED WHITE CIRCLE
-unicode_age(0x274F, 0x2752, '1.1').		%  [4] LOWER RIGHT DROP-SHADOWED WHITE SQUARE..UPPER RIGHT SHADOWED WHITE SQUARE
-unicode_age(0x2756, 0x2756, '1.1').		%      BLACK DIAMOND MINUS WHITE X
-unicode_age(0x2758, 0x275E, '1.1').		%  [7] LIGHT VERTICAL BAR..HEAVY DOUBLE COMMA QUOTATION MARK ORNAMENT
-unicode_age(0x2761, 0x2767, '1.1').		%  [7] CURVED STEM PARAGRAPH SIGN ORNAMENT..ROTATED FLORAL HEART BULLET
-unicode_age(0x2776, 0x2794, '1.1').		% [31] DINGBAT NEGATIVE CIRCLED DIGIT ONE..HEAVY WIDE-HEADED RIGHTWARDS ARROW
-unicode_age(0x2798, 0x27AF, '1.1').		% [24] HEAVY SOUTH EAST ARROW..NOTCHED LOWER RIGHT-SHADOWED WHITE RIGHTWARDS ARROW
-unicode_age(0x27B1, 0x27BE, '1.1').		% [14] NOTCHED UPPER RIGHT-SHADOWED WHITE RIGHTWARDS ARROW..OPEN-OUTLINED RIGHTWARDS ARROW
-unicode_age(0x3000, 0x3037, '1.1').		% [56] IDEOGRAPHIC SPACE..IDEOGRAPHIC TELEGRAPH LINE FEED SEPARATOR SYMBOL
-unicode_age(0x303F, 0x303F, '1.1').		%      IDEOGRAPHIC HALF FILL SPACE
-unicode_age(0x3041, 0x3094, '1.1').		% [84] HIRAGANA LETTER SMALL A..HIRAGANA LETTER VU
-unicode_age(0x3099, 0x309E, '1.1').		%  [6] COMBINING KATAKANA-HIRAGANA VOICED SOUND MARK..HIRAGANA VOICED ITERATION MARK
-unicode_age(0x30A1, 0x30FE, '1.1').		% [94] KATAKANA LETTER SMALL A..KATAKANA VOICED ITERATION MARK
-unicode_age(0x3105, 0x312C, '1.1').		% [40] BOPOMOFO LETTER B..BOPOMOFO LETTER GN
-unicode_age(0x3131, 0x318E, '1.1').		% [94] HANGUL LETTER KIYEOK..HANGUL LETTER ARAEAE
-unicode_age(0x3190, 0x319F, '1.1').		% [16] IDEOGRAPHIC ANNOTATION LINKING MARK..IDEOGRAPHIC ANNOTATION MAN MARK
-unicode_age(0x3200, 0x321C, '1.1').		% [29] PARENTHESIZED HANGUL KIYEOK..PARENTHESIZED HANGUL CIEUC U
-unicode_age(0x3220, 0x3243, '1.1').		% [36] PARENTHESIZED IDEOGRAPH ONE..PARENTHESIZED IDEOGRAPH REACH
-unicode_age(0x3260, 0x327B, '1.1').		% [28] CIRCLED HANGUL KIYEOK..CIRCLED HANGUL HIEUH A
-unicode_age(0x327F, 0x32B0, '1.1').		% [50] KOREAN STANDARD SYMBOL..CIRCLED IDEOGRAPH NIGHT
-unicode_age(0x32C0, 0x32CB, '1.1').		% [12] IDEOGRAPHIC TELEGRAPH SYMBOL FOR JANUARY..IDEOGRAPHIC TELEGRAPH SYMBOL FOR DECEMBER
-unicode_age(0x32D0, 0x32FE, '1.1').		% [47] CIRCLED KATAKANA A..CIRCLED KATAKANA WO
-unicode_age(0x3300, 0x3376, '1.1').		% [119] SQUARE APAATO..SQUARE PC
-unicode_age(0x337B, 0x33DD, '1.1').		% [99] SQUARE ERA NAME HEISEI..SQUARE WB
-unicode_age(0x33E0, 0x33FE, '1.1').		% [31] IDEOGRAPHIC TELEGRAPH SYMBOL FOR DAY ONE..IDEOGRAPHIC TELEGRAPH SYMBOL FOR DAY THIRTY-ONE
-unicode_age(0x4E00, 0x9FA5, '1.1').		% [20902] CJK UNIFIED IDEOGRAPH-4E00..CJK UNIFIED IDEOGRAPH-9FA5
-unicode_age(0xE000, 0xF8FF, '1.1').		% [6400] <private-use-E000>..<private-use-F8FF>
-unicode_age(0xF900, 0xFA2D, '1.1').		% [302] CJK COMPATIBILITY IDEOGRAPH-F900..CJK COMPATIBILITY IDEOGRAPH-FA2D
-unicode_age(0xFB00, 0xFB06, '1.1').		%  [7] LATIN SMALL LIGATURE FF..LATIN SMALL LIGATURE ST
-unicode_age(0xFB13, 0xFB17, '1.1').		%  [5] ARMENIAN SMALL LIGATURE MEN NOW..ARMENIAN SMALL LIGATURE MEN XEH
-unicode_age(0xFB1E, 0xFB36, '1.1').		% [25] HEBREW POINT JUDEO-SPANISH VARIKA..HEBREW LETTER ZAYIN WITH DAGESH
-unicode_age(0xFB38, 0xFB3C, '1.1').		%  [5] HEBREW LETTER TET WITH DAGESH..HEBREW LETTER LAMED WITH DAGESH
-unicode_age(0xFB3E, 0xFB3E, '1.1').		%      HEBREW LETTER MEM WITH DAGESH
-unicode_age(0xFB40, 0xFB41, '1.1').		%  [2] HEBREW LETTER NUN WITH DAGESH..HEBREW LETTER SAMEKH WITH DAGESH
-unicode_age(0xFB43, 0xFB44, '1.1').		%  [2] HEBREW LETTER FINAL PE WITH DAGESH..HEBREW LETTER PE WITH DAGESH
-unicode_age(0xFB46, 0xFBB1, '1.1').		% [108] HEBREW LETTER TSADI WITH DAGESH..ARABIC LETTER YEH BARREE WITH HAMZA ABOVE FINAL FORM
-unicode_age(0xFBD3, 0xFD3F, '1.1').		% [365] ARABIC LETTER NG ISOLATED FORM..ORNATE RIGHT PARENTHESIS
-unicode_age(0xFD50, 0xFD8F, '1.1').		% [64] ARABIC LIGATURE TEH WITH JEEM WITH MEEM INITIAL FORM..ARABIC LIGATURE MEEM WITH KHAH WITH MEEM INITIAL FORM
-unicode_age(0xFD92, 0xFDC7, '1.1').		% [54] ARABIC LIGATURE MEEM WITH JEEM WITH KHAH INITIAL FORM..ARABIC LIGATURE NOON WITH JEEM WITH YEH FINAL FORM
-unicode_age(0xFDF0, 0xFDFB, '1.1').		% [12] ARABIC LIGATURE SALLA USED AS KORANIC STOP SIGN ISOLATED FORM..ARABIC LIGATURE JALLAJALALOUHOU
-unicode_age(0xFE20, 0xFE23, '1.1').		%  [4] COMBINING LIGATURE LEFT HALF..COMBINING DOUBLE TILDE RIGHT HALF
-unicode_age(0xFE30, 0xFE44, '1.1').		% [21] PRESENTATION FORM FOR VERTICAL TWO DOT LEADER..PRESENTATION FORM FOR VERTICAL RIGHT WHITE CORNER BRACKET
-unicode_age(0xFE49, 0xFE52, '1.1').		% [10] DASHED OVERLINE..SMALL FULL STOP
-unicode_age(0xFE54, 0xFE66, '1.1').		% [19] SMALL SEMICOLON..SMALL EQUALS SIGN
-unicode_age(0xFE68, 0xFE6B, '1.1').		%  [4] SMALL REVERSE SOLIDUS..SMALL COMMERCIAL AT
-unicode_age(0xFE70, 0xFE72, '1.1').		%  [3] ARABIC FATHATAN ISOLATED FORM..ARABIC DAMMATAN ISOLATED FORM
-unicode_age(0xFE74, 0xFE74, '1.1').		%      ARABIC KASRATAN ISOLATED FORM
-unicode_age(0xFE76, 0xFEFC, '1.1').		% [135] ARABIC FATHA ISOLATED FORM..ARABIC LIGATURE LAM WITH ALEF FINAL FORM
-unicode_age(0xFEFF, 0xFEFF, '1.1').		%      ZERO WIDTH NO-BREAK SPACE
-unicode_age(0xFF01, 0xFF5E, '1.1').		% [94] FULLWIDTH EXCLAMATION MARK..FULLWIDTH TILDE
-unicode_age(0xFF61, 0xFFBE, '1.1').		% [94] HALFWIDTH IDEOGRAPHIC FULL STOP..HALFWIDTH HANGUL LETTER HIEUH
-unicode_age(0xFFC2, 0xFFC7, '1.1').		%  [6] HALFWIDTH HANGUL LETTER A..HALFWIDTH HANGUL LETTER E
-unicode_age(0xFFCA, 0xFFCF, '1.1').		%  [6] HALFWIDTH HANGUL LETTER YEO..HALFWIDTH HANGUL LETTER OE
-unicode_age(0xFFD2, 0xFFD7, '1.1').		%  [6] HALFWIDTH HANGUL LETTER YO..HALFWIDTH HANGUL LETTER YU
-unicode_age(0xFFDA, 0xFFDC, '1.1').		%  [3] HALFWIDTH HANGUL LETTER EU..HALFWIDTH HANGUL LETTER I
-unicode_age(0xFFE0, 0xFFE6, '1.1').		%  [7] FULLWIDTH CENT SIGN..FULLWIDTH WON SIGN
-unicode_age(0xFFE8, 0xFFEE, '1.1').		%  [7] HALFWIDTH FORMS LIGHT VERTICAL..HALFWIDTH WHITE CIRCLE
-unicode_age(0xFFFD, 0xFFFD, '1.1').		%      REPLACEMENT CHARACTER
-unicode_age(0xFFFE, 0xFFFF, '1.1').		%  [2] <noncharacter-FFFE>..<noncharacter-FFFF>
-
-% Total code points: 33979
-
-% ================================================
-
-% Age=V2_0
-
-% Newly assigned in Unicode 2.0.0 (July, 1996)
-
-unicode_age(0x0591, 0x05A1, '2.0').		% [17] HEBREW ACCENT ETNAHTA..HEBREW ACCENT PAZER
-unicode_age(0x05A3, 0x05AF, '2.0').		% [13] HEBREW ACCENT MUNAH..HEBREW MARK MASORA CIRCLE
-unicode_age(0x05C4, 0x05C4, '2.0').		%      HEBREW MARK UPPER DOT
-unicode_age(0x0F00, 0x0F47, '2.0').		% [72] TIBETAN SYLLABLE OM..TIBETAN LETTER JA
-unicode_age(0x0F49, 0x0F69, '2.0').		% [33] TIBETAN LETTER NYA..TIBETAN LETTER KSSA
-unicode_age(0x0F71, 0x0F8B, '2.0').		% [27] TIBETAN VOWEL SIGN AA..TIBETAN SIGN GRU MED RGYINGS
-unicode_age(0x0F90, 0x0F95, '2.0').		%  [6] TIBETAN SUBJOINED LETTER KA..TIBETAN SUBJOINED LETTER CA
-unicode_age(0x0F97, 0x0F97, '2.0').		%      TIBETAN SUBJOINED LETTER JA
-unicode_age(0x0F99, 0x0FAD, '2.0').		% [21] TIBETAN SUBJOINED LETTER NYA..TIBETAN SUBJOINED LETTER WA
-unicode_age(0x0FB1, 0x0FB7, '2.0').		%  [7] TIBETAN SUBJOINED LETTER YA..TIBETAN SUBJOINED LETTER HA
-unicode_age(0x0FB9, 0x0FB9, '2.0').		%      TIBETAN SUBJOINED LETTER KSSA
-unicode_age(0x1E9B, 0x1E9B, '2.0').		%      LATIN SMALL LETTER LONG S WITH DOT ABOVE
-unicode_age(0x20AB, 0x20AB, '2.0').		%      DONG SIGN
-unicode_age(0xAC00, 0xD7A3, '2.0').		% [11172] HANGUL SYLLABLE GA..HANGUL SYLLABLE HIH
-unicode_age(0xD800, 0xDFFF, '2.0').		% [2048] <surrogate-D800>..<surrogate-DFFF>
-unicode_age(0x1FFFE, 0x1FFFF, '2.0').	%  [2] <noncharacter-1FFFE>..<noncharacter-1FFFF>
-unicode_age(0x2FFFE, 0x2FFFF, '2.0').	%  [2] <noncharacter-2FFFE>..<noncharacter-2FFFF>
-unicode_age(0x3FFFE, 0x3FFFF, '2.0').	%  [2] <noncharacter-3FFFE>..<noncharacter-3FFFF>
-unicode_age(0x4FFFE, 0x4FFFF, '2.0').	%  [2] <noncharacter-4FFFE>..<noncharacter-4FFFF>
-unicode_age(0x5FFFE, 0x5FFFF, '2.0').	%  [2] <noncharacter-5FFFE>..<noncharacter-5FFFF>
-unicode_age(0x6FFFE, 0x6FFFF, '2.0').	%  [2] <noncharacter-6FFFE>..<noncharacter-6FFFF>
-unicode_age(0x7FFFE, 0x7FFFF, '2.0').	%  [2] <noncharacter-7FFFE>..<noncharacter-7FFFF>
-unicode_age(0x8FFFE, 0x8FFFF, '2.0').	%  [2] <noncharacter-8FFFE>..<noncharacter-8FFFF>
-unicode_age(0x9FFFE, 0x9FFFF, '2.0').	%  [2] <noncharacter-9FFFE>..<noncharacter-9FFFF>
-unicode_age(0xAFFFE, 0xAFFFF, '2.0').	%  [2] <noncharacter-AFFFE>..<noncharacter-AFFFF>
-unicode_age(0xBFFFE, 0xBFFFF, '2.0').	%  [2] <noncharacter-BFFFE>..<noncharacter-BFFFF>
-unicode_age(0xCFFFE, 0xCFFFF, '2.0').	%  [2] <noncharacter-CFFFE>..<noncharacter-CFFFF>
-unicode_age(0xDFFFE, 0xDFFFF, '2.0').	%  [2] <noncharacter-DFFFE>..<noncharacter-DFFFF>
-unicode_age(0xEFFFE, 0xEFFFF, '2.0').	%  [2] <noncharacter-EFFFE>..<noncharacter-EFFFF>
-unicode_age(0xF0000, 0xFFFFD, '2.0').	% [65534] <private-use-F0000>..<private-use-FFFFD>
-unicode_age(0xFFFFE, 0xFFFFF, '2.0').	%  [2] <noncharacter-FFFFE>..<noncharacter-FFFFF>
-unicode_age(0x100000, 0x10FFFD, '2.0').	% [65534] <private-use-100000>..<private-use-10FFFD>
-unicode_age(0x10FFFE, 0x10FFFF, '2.0').	%  [2] <noncharacter-10FFFE>..<noncharacter-10FFFF>
-
-% Total code points: 144521
-
-% ================================================
-
-% Age=V2_1
-
-% Newly assigned in Unicode 2.1.2 (May, 1998)
-
-unicode_age(0x20AC, 0x20AC, '2.1').		%      EURO SIGN
-unicode_age(0xFFFC, 0xFFFC, '2.1').		%      OBJECT REPLACEMENT CHARACTER
-
-% Total code points: 2
-
-% ================================================
-
-% Age=V3_0
-
-% Newly assigned in Unicode 3.0.0 (September, 1999)
-
-unicode_age(0x01F6, 0x01F9, '3.0').		%  [4] LATIN CAPITAL LETTER HWAIR..LATIN SMALL LETTER N WITH GRAVE
-unicode_age(0x0218, 0x021F, '3.0').		%  [8] LATIN CAPITAL LETTER S WITH COMMA BELOW..LATIN SMALL LETTER H WITH CARON
-unicode_age(0x0222, 0x0233, '3.0').		% [18] LATIN CAPITAL LETTER OU..LATIN SMALL LETTER Y WITH MACRON
-unicode_age(0x02A9, 0x02AD, '3.0').		%  [5] LATIN SMALL LETTER FENG DIGRAPH..LATIN LETTER BIDENTAL PERCUSSIVE
-unicode_age(0x02DF, 0x02DF, '3.0').		%      MODIFIER LETTER CROSS ACCENT
-unicode_age(0x02EA, 0x02EE, '3.0').		%  [5] MODIFIER LETTER YIN DEPARTING TONE MARK..MODIFIER LETTER DOUBLE APOSTROPHE
-unicode_age(0x0346, 0x034E, '3.0').		%  [9] COMBINING BRIDGE ABOVE..COMBINING UPWARDS ARROW BELOW
-unicode_age(0x0362, 0x0362, '3.0').		%      COMBINING DOUBLE RIGHTWARDS ARROW BELOW
-unicode_age(0x03D7, 0x03D7, '3.0').		%      GREEK KAI SYMBOL
-unicode_age(0x03DB, 0x03DB, '3.0').		%      GREEK SMALL LETTER STIGMA
-unicode_age(0x03DD, 0x03DD, '3.0').		%      GREEK SMALL LETTER DIGAMMA
-unicode_age(0x03DF, 0x03DF, '3.0').		%      GREEK SMALL LETTER KOPPA
-unicode_age(0x03E1, 0x03E1, '3.0').		%      GREEK SMALL LETTER SAMPI
-unicode_age(0x0400, 0x0400, '3.0').		%      CYRILLIC CAPITAL LETTER IE WITH GRAVE
-unicode_age(0x040D, 0x040D, '3.0').		%      CYRILLIC CAPITAL LETTER I WITH GRAVE
-unicode_age(0x0450, 0x0450, '3.0').		%      CYRILLIC SMALL LETTER IE WITH GRAVE
-unicode_age(0x045D, 0x045D, '3.0').		%      CYRILLIC SMALL LETTER I WITH GRAVE
-unicode_age(0x0488, 0x0489, '3.0').		%  [2] COMBINING CYRILLIC HUNDRED THOUSANDS SIGN..COMBINING CYRILLIC MILLIONS SIGN
-unicode_age(0x048C, 0x048F, '3.0').		%  [4] CYRILLIC CAPITAL LETTER SEMISOFT SIGN..CYRILLIC SMALL LETTER ER WITH TICK
-unicode_age(0x04EC, 0x04ED, '3.0').		%  [2] CYRILLIC CAPITAL LETTER E WITH DIAERESIS..CYRILLIC SMALL LETTER E WITH DIAERESIS
-unicode_age(0x058A, 0x058A, '3.0').		%      ARMENIAN HYPHEN
-unicode_age(0x0653, 0x0655, '3.0').		%  [3] ARABIC MADDAH ABOVE..ARABIC HAMZA BELOW
-unicode_age(0x06B8, 0x06B9, '3.0').		%  [2] ARABIC LETTER LAM WITH THREE DOTS BELOW..ARABIC LETTER NOON WITH DOT BELOW
-unicode_age(0x06BF, 0x06BF, '3.0').		%      ARABIC LETTER TCHEH WITH DOT ABOVE
-unicode_age(0x06CF, 0x06CF, '3.0').		%      ARABIC LETTER WAW WITH DOT ABOVE
-unicode_age(0x06FA, 0x06FE, '3.0').		%  [5] ARABIC LETTER SHEEN WITH DOT BELOW..ARABIC SIGN SINDHI POSTPOSITION MEN
-unicode_age(0x0700, 0x070D, '3.0').		% [14] SYRIAC END OF PARAGRAPH..SYRIAC HARKLEAN ASTERISCUS
-unicode_age(0x070F, 0x070F, '3.0').		%      SYRIAC ABBREVIATION MARK
-unicode_age(0x0710, 0x072C, '3.0').		% [29] SYRIAC LETTER ALAPH..SYRIAC LETTER TAW
-unicode_age(0x0730, 0x074A, '3.0').		% [27] SYRIAC PTHAHA ABOVE..SYRIAC BARREKH
-unicode_age(0x0780, 0x07B0, '3.0').		% [49] THAANA LETTER HAA..THAANA SUKUN
-unicode_age(0x0D82, 0x0D83, '3.0').		%  [2] SINHALA SIGN ANUSVARAYA..SINHALA SIGN VISARGAYA
-unicode_age(0x0D85, 0x0D96, '3.0').		% [18] SINHALA LETTER AYANNA..SINHALA LETTER AUYANNA
-unicode_age(0x0D9A, 0x0DB1, '3.0').		% [24] SINHALA LETTER ALPAPRAANA KAYANNA..SINHALA LETTER DANTAJA NAYANNA
-unicode_age(0x0DB3, 0x0DBB, '3.0').		%  [9] SINHALA LETTER SANYAKA DAYANNA..SINHALA LETTER RAYANNA
-unicode_age(0x0DBD, 0x0DBD, '3.0').		%      SINHALA LETTER DANTAJA LAYANNA
-unicode_age(0x0DC0, 0x0DC6, '3.0').		%  [7] SINHALA LETTER VAYANNA..SINHALA LETTER FAYANNA
-unicode_age(0x0DCA, 0x0DCA, '3.0').		%      SINHALA SIGN AL-LAKUNA
-unicode_age(0x0DCF, 0x0DD4, '3.0').		%  [6] SINHALA VOWEL SIGN AELA-PILLA..SINHALA VOWEL SIGN KETTI PAA-PILLA
-unicode_age(0x0DD6, 0x0DD6, '3.0').		%      SINHALA VOWEL SIGN DIGA PAA-PILLA
-unicode_age(0x0DD8, 0x0DDF, '3.0').		%  [8] SINHALA VOWEL SIGN GAETTA-PILLA..SINHALA VOWEL SIGN GAYANUKITTA
-unicode_age(0x0DF2, 0x0DF4, '3.0').		%  [3] SINHALA VOWEL SIGN DIGA GAETTA-PILLA..SINHALA PUNCTUATION KUNDDALIYA
-unicode_age(0x0F6A, 0x0F6A, '3.0').		%      TIBETAN LETTER FIXED-FORM RA
-unicode_age(0x0F96, 0x0F96, '3.0').		%      TIBETAN SUBJOINED LETTER CHA
-unicode_age(0x0FAE, 0x0FB0, '3.0').		%  [3] TIBETAN SUBJOINED LETTER ZHA..TIBETAN SUBJOINED LETTER -A
-unicode_age(0x0FB8, 0x0FB8, '3.0').		%      TIBETAN SUBJOINED LETTER A
-unicode_age(0x0FBA, 0x0FBC, '3.0').		%  [3] TIBETAN SUBJOINED LETTER FIXED-FORM WA..TIBETAN SUBJOINED LETTER FIXED-FORM RA
-unicode_age(0x0FBE, 0x0FCC, '3.0').		% [15] TIBETAN KU RU KHA..TIBETAN SYMBOL NOR BU BZHI -KHYIL
-unicode_age(0x0FCF, 0x0FCF, '3.0').		%      TIBETAN SIGN RDEL NAG GSUM
-unicode_age(0x1000, 0x1021, '3.0').		% [34] MYANMAR LETTER KA..MYANMAR LETTER A
-unicode_age(0x1023, 0x1027, '3.0').		%  [5] MYANMAR LETTER I..MYANMAR LETTER E
-unicode_age(0x1029, 0x102A, '3.0').		%  [2] MYANMAR LETTER O..MYANMAR LETTER AU
-unicode_age(0x102C, 0x1032, '3.0').		%  [7] MYANMAR VOWEL SIGN AA..MYANMAR VOWEL SIGN AI
-unicode_age(0x1036, 0x1039, '3.0').		%  [4] MYANMAR SIGN ANUSVARA..MYANMAR SIGN VIRAMA
-unicode_age(0x1040, 0x1059, '3.0').		% [26] MYANMAR DIGIT ZERO..MYANMAR VOWEL SIGN VOCALIC LL
-unicode_age(0x1200, 0x1206, '3.0').		%  [7] ETHIOPIC SYLLABLE HA..ETHIOPIC SYLLABLE HO
-unicode_age(0x1208, 0x1246, '3.0').		% [63] ETHIOPIC SYLLABLE LA..ETHIOPIC SYLLABLE QO
-unicode_age(0x1248, 0x1248, '3.0').		%      ETHIOPIC SYLLABLE QWA
-unicode_age(0x124A, 0x124D, '3.0').		%  [4] ETHIOPIC SYLLABLE QWI..ETHIOPIC SYLLABLE QWE
-unicode_age(0x1250, 0x1256, '3.0').		%  [7] ETHIOPIC SYLLABLE QHA..ETHIOPIC SYLLABLE QHO
-unicode_age(0x1258, 0x1258, '3.0').		%      ETHIOPIC SYLLABLE QHWA
-unicode_age(0x125A, 0x125D, '3.0').		%  [4] ETHIOPIC SYLLABLE QHWI..ETHIOPIC SYLLABLE QHWE
-unicode_age(0x1260, 0x1286, '3.0').		% [39] ETHIOPIC SYLLABLE BA..ETHIOPIC SYLLABLE XO
-unicode_age(0x1288, 0x1288, '3.0').		%      ETHIOPIC SYLLABLE XWA
-unicode_age(0x128A, 0x128D, '3.0').		%  [4] ETHIOPIC SYLLABLE XWI..ETHIOPIC SYLLABLE XWE
-unicode_age(0x1290, 0x12AE, '3.0').		% [31] ETHIOPIC SYLLABLE NA..ETHIOPIC SYLLABLE KO
-unicode_age(0x12B0, 0x12B0, '3.0').		%      ETHIOPIC SYLLABLE KWA
-unicode_age(0x12B2, 0x12B5, '3.0').		%  [4] ETHIOPIC SYLLABLE KWI..ETHIOPIC SYLLABLE KWE
-unicode_age(0x12B8, 0x12BE, '3.0').		%  [7] ETHIOPIC SYLLABLE KXA..ETHIOPIC SYLLABLE KXO
-unicode_age(0x12C0, 0x12C0, '3.0').		%      ETHIOPIC SYLLABLE KXWA
-unicode_age(0x12C2, 0x12C5, '3.0').		%  [4] ETHIOPIC SYLLABLE KXWI..ETHIOPIC SYLLABLE KXWE
-unicode_age(0x12C8, 0x12CE, '3.0').		%  [7] ETHIOPIC SYLLABLE WA..ETHIOPIC SYLLABLE WO
-unicode_age(0x12D0, 0x12D6, '3.0').		%  [7] ETHIOPIC SYLLABLE PHARYNGEAL A..ETHIOPIC SYLLABLE PHARYNGEAL O
-unicode_age(0x12D8, 0x12EE, '3.0').		% [23] ETHIOPIC SYLLABLE ZA..ETHIOPIC SYLLABLE YO
-unicode_age(0x12F0, 0x130E, '3.0').		% [31] ETHIOPIC SYLLABLE DA..ETHIOPIC SYLLABLE GO
-unicode_age(0x1310, 0x1310, '3.0').		%      ETHIOPIC SYLLABLE GWA
-unicode_age(0x1312, 0x1315, '3.0').		%  [4] ETHIOPIC SYLLABLE GWI..ETHIOPIC SYLLABLE GWE
-unicode_age(0x1318, 0x131E, '3.0').		%  [7] ETHIOPIC SYLLABLE GGA..ETHIOPIC SYLLABLE GGO
-unicode_age(0x1320, 0x1346, '3.0').		% [39] ETHIOPIC SYLLABLE THA..ETHIOPIC SYLLABLE TZO
-unicode_age(0x1348, 0x135A, '3.0').		% [19] ETHIOPIC SYLLABLE FA..ETHIOPIC SYLLABLE FYA
-unicode_age(0x1361, 0x137C, '3.0').		% [28] ETHIOPIC WORDSPACE..ETHIOPIC NUMBER TEN THOUSAND
-unicode_age(0x13A0, 0x13F4, '3.0').		% [85] CHEROKEE LETTER A..CHEROKEE LETTER YV
-unicode_age(0x1401, 0x1676, '3.0').		% [630] CANADIAN SYLLABICS E..CANADIAN SYLLABICS NNGAA
-unicode_age(0x1680, 0x169C, '3.0').		% [29] OGHAM SPACE MARK..OGHAM REVERSED FEATHER MARK
-unicode_age(0x16A0, 0x16F0, '3.0').		% [81] RUNIC LETTER FEHU FEOH FE F..RUNIC BELGTHOR SYMBOL
-unicode_age(0x1780, 0x17DC, '3.0').		% [93] KHMER LETTER KA..KHMER SIGN AVAKRAHASANYA
-unicode_age(0x17E0, 0x17E9, '3.0').		% [10] KHMER DIGIT ZERO..KHMER DIGIT NINE
-unicode_age(0x1800, 0x180E, '3.0').		% [15] MONGOLIAN BIRGA..MONGOLIAN VOWEL SEPARATOR
-unicode_age(0x1810, 0x1819, '3.0').		% [10] MONGOLIAN DIGIT ZERO..MONGOLIAN DIGIT NINE
-unicode_age(0x1820, 0x1877, '3.0').		% [88] MONGOLIAN LETTER A..MONGOLIAN LETTER MANCHU ZHA
-unicode_age(0x1880, 0x18A9, '3.0').		% [42] MONGOLIAN LETTER ALI GALI ANUSVARA ONE..MONGOLIAN LETTER ALI GALI DAGALGA
-unicode_age(0x202F, 0x202F, '3.0').		%      NARROW NO-BREAK SPACE
-unicode_age(0x2048, 0x204D, '3.0').		%  [6] QUESTION EXCLAMATION MARK..BLACK RIGHTWARDS BULLET
-unicode_age(0x20AD, 0x20AF, '3.0').		%  [3] KIP SIGN..DRACHMA SIGN
-unicode_age(0x20E2, 0x20E3, '3.0').		%  [2] COMBINING ENCLOSING SCREEN..COMBINING ENCLOSING KEYCAP
-unicode_age(0x2139, 0x213A, '3.0').		%  [2] INFORMATION SOURCE..ROTATED CAPITAL Q
-unicode_age(0x2183, 0x2183, '3.0').		%      ROMAN NUMERAL REVERSED ONE HUNDRED
-unicode_age(0x21EB, 0x21F3, '3.0').		%  [9] UPWARDS WHITE ARROW ON PEDESTAL..UP DOWN WHITE ARROW
-unicode_age(0x2301, 0x2301, '3.0').		%      ELECTRIC ARROW
-unicode_age(0x237B, 0x237B, '3.0').		%      NOT CHECK MARK
-unicode_age(0x237D, 0x239A, '3.0').		% [30] SHOULDERED OPEN BOX..CLEAR SCREEN SYMBOL
-unicode_age(0x2425, 0x2426, '3.0').		%  [2] SYMBOL FOR DELETE FORM TWO..SYMBOL FOR SUBSTITUTE FORM TWO
-unicode_age(0x25F0, 0x25F7, '3.0').		%  [8] WHITE SQUARE WITH UPPER LEFT QUADRANT..WHITE CIRCLE WITH UPPER RIGHT QUADRANT
-unicode_age(0x2619, 0x2619, '3.0').		%      REVERSED ROTATED FLORAL HEART BULLET
-unicode_age(0x2670, 0x2671, '3.0').		%  [2] WEST SYRIAC CROSS..EAST SYRIAC CROSS
-unicode_age(0x2800, 0x28FF, '3.0').		% [256] BRAILLE PATTERN BLANK..BRAILLE PATTERN DOTS-12345678
-unicode_age(0x2E80, 0x2E99, '3.0').		% [26] CJK RADICAL REPEAT..CJK RADICAL RAP
-unicode_age(0x2E9B, 0x2EF3, '3.0').		% [89] CJK RADICAL CHOKE..CJK RADICAL C-SIMPLIFIED TURTLE
-unicode_age(0x2F00, 0x2FD5, '3.0').		% [214] KANGXI RADICAL ONE..KANGXI RADICAL FLUTE
-unicode_age(0x2FF0, 0x2FFB, '3.0').		% [12] IDEOGRAPHIC DESCRIPTION CHARACTER LEFT TO RIGHT..IDEOGRAPHIC DESCRIPTION CHARACTER OVERLAID
-unicode_age(0x3038, 0x303A, '3.0').		%  [3] HANGZHOU NUMERAL TEN..HANGZHOU NUMERAL THIRTY
-unicode_age(0x303E, 0x303E, '3.0').		%      IDEOGRAPHIC VARIATION INDICATOR
-unicode_age(0x31A0, 0x31B7, '3.0').		% [24] BOPOMOFO LETTER BU..BOPOMOFO FINAL LETTER H
-unicode_age(0x3400, 0x4DB5, '3.0').		% [6582] CJK UNIFIED IDEOGRAPH-3400..CJK UNIFIED IDEOGRAPH-4DB5
-unicode_age(0xA000, 0xA48C, '3.0').		% [1165] YI SYLLABLE IT..YI SYLLABLE YYR
-unicode_age(0xA490, 0xA4A1, '3.0').		% [18] YI RADICAL QOT..YI RADICAL GA
-unicode_age(0xA4A4, 0xA4B3, '3.0').		% [16] YI RADICAL DDUR..YI RADICAL JO
-unicode_age(0xA4B5, 0xA4C0, '3.0').		% [12] YI RADICAL JJY..YI RADICAL SHAT
-unicode_age(0xA4C2, 0xA4C4, '3.0').		%  [3] YI RADICAL SHOP..YI RADICAL ZZIET
-unicode_age(0xA4C6, 0xA4C6, '3.0').		%      YI RADICAL KE
-unicode_age(0xFB1D, 0xFB1D, '3.0').		%      HEBREW LETTER YOD WITH HIRIQ
-unicode_age(0xFFF9, 0xFFFB, '3.0').		%  [3] INTERLINEAR ANNOTATION ANCHOR..INTERLINEAR ANNOTATION TERMINATOR
-
-% Total code points: 10307
-
-% ================================================
-
-% Age=V3_1
-
-% Newly assigned in Unicode 3.1.0 (March, 2001)
-
-unicode_age(0x03F4, 0x03F5, '3.1').	%  [2] GREEK CAPITAL THETA SYMBOL..GREEK LUNATE EPSILON SYMBOL
-unicode_age(0xFDD0, 0xFDEF, '3.1').	% [32] <noncharacter-FDD0>..<noncharacter-FDEF>
-unicode_age(0x10300, 0x1031E, '3.1').	% [31] OLD ITALIC LETTER A..OLD ITALIC LETTER UU
-unicode_age(0x10320, 0x10323, '3.1').	%  [4] OLD ITALIC NUMERAL ONE..OLD ITALIC NUMERAL FIFTY
-unicode_age(0x10330, 0x1034A, '3.1').	% [27] GOTHIC LETTER AHSA..GOTHIC LETTER NINE HUNDRED
-unicode_age(0x10400, 0x10425, '3.1').	% [38] DESERET CAPITAL LETTER LONG I..DESERET CAPITAL LETTER ENG
-unicode_age(0x10428, 0x1044D, '3.1').	% [38] DESERET SMALL LETTER LONG I..DESERET SMALL LETTER ENG
-unicode_age(0x1D000, 0x1D0F5, '3.1').	% [246] BYZANTINE MUSICAL SYMBOL PSILI..BYZANTINE MUSICAL SYMBOL GORGON NEO KATO
-unicode_age(0x1D100, 0x1D126, '3.1').	% [39] MUSICAL SYMBOL SINGLE BARLINE..MUSICAL SYMBOL DRUM CLEF-2
-unicode_age(0x1D12A, 0x1D172, '3.1').	% [73] MUSICAL SYMBOL DOUBLE SHARP..MUSICAL SYMBOL COMBINING FLAG-5
-unicode_age(0x1D173, 0x1D17A, '3.1').	%  [8] MUSICAL SYMBOL BEGIN BEAM..MUSICAL SYMBOL END PHRASE
-unicode_age(0x1D17B, 0x1D1DD, '3.1').	% [99] MUSICAL SYMBOL COMBINING ACCENT..MUSICAL SYMBOL PES SUBPUNCTIS
-unicode_age(0x1D400, 0x1D454, '3.1').	% [85] MATHEMATICAL BOLD CAPITAL A..MATHEMATICAL ITALIC SMALL G
-unicode_age(0x1D456, 0x1D49C, '3.1').	% [71] MATHEMATICAL ITALIC SMALL I..MATHEMATICAL SCRIPT CAPITAL A
-unicode_age(0x1D49E, 0x1D49F, '3.1').	%  [2] MATHEMATICAL SCRIPT CAPITAL C..MATHEMATICAL SCRIPT CAPITAL D
-unicode_age(0x1D4A2, 0x1D4A2, '3.1').	%      MATHEMATICAL SCRIPT CAPITAL G
-unicode_age(0x1D4A5, 0x1D4A6, '3.1').	%  [2] MATHEMATICAL SCRIPT CAPITAL J..MATHEMATICAL SCRIPT CAPITAL K
-unicode_age(0x1D4A9, 0x1D4AC, '3.1').	%  [4] MATHEMATICAL SCRIPT CAPITAL N..MATHEMATICAL SCRIPT CAPITAL Q
-unicode_age(0x1D4AE, 0x1D4B9, '3.1').	% [12] MATHEMATICAL SCRIPT CAPITAL S..MATHEMATICAL SCRIPT SMALL D
-unicode_age(0x1D4BB, 0x1D4BB, '3.1').	%      MATHEMATICAL SCRIPT SMALL F
-unicode_age(0x1D4BD, 0x1D4C0, '3.1').	%  [4] MATHEMATICAL SCRIPT SMALL H..MATHEMATICAL SCRIPT SMALL K
-unicode_age(0x1D4C2, 0x1D4C3, '3.1').	%  [2] MATHEMATICAL SCRIPT SMALL M..MATHEMATICAL SCRIPT SMALL N
-unicode_age(0x1D4C5, 0x1D505, '3.1').	% [65] MATHEMATICAL SCRIPT SMALL P..MATHEMATICAL FRAKTUR CAPITAL B
-unicode_age(0x1D507, 0x1D50A, '3.1').	%  [4] MATHEMATICAL FRAKTUR CAPITAL D..MATHEMATICAL FRAKTUR CAPITAL G
-unicode_age(0x1D50D, 0x1D514, '3.1').	%  [8] MATHEMATICAL FRAKTUR CAPITAL J..MATHEMATICAL FRAKTUR CAPITAL Q
-unicode_age(0x1D516, 0x1D51C, '3.1').	%  [7] MATHEMATICAL FRAKTUR CAPITAL S..MATHEMATICAL FRAKTUR CAPITAL Y
-unicode_age(0x1D51E, 0x1D539, '3.1').	% [28] MATHEMATICAL FRAKTUR SMALL A..MATHEMATICAL DOUBLE-STRUCK CAPITAL B
-unicode_age(0x1D53B, 0x1D53E, '3.1').	%  [4] MATHEMATICAL DOUBLE-STRUCK CAPITAL D..MATHEMATICAL DOUBLE-STRUCK CAPITAL G
-unicode_age(0x1D540, 0x1D544, '3.1').	%  [5] MATHEMATICAL DOUBLE-STRUCK CAPITAL I..MATHEMATICAL DOUBLE-STRUCK CAPITAL M
-unicode_age(0x1D546, 0x1D546, '3.1').	%      MATHEMATICAL DOUBLE-STRUCK CAPITAL O
-unicode_age(0x1D54A, 0x1D550, '3.1').	%  [7] MATHEMATICAL DOUBLE-STRUCK CAPITAL S..MATHEMATICAL DOUBLE-STRUCK CAPITAL Y
-unicode_age(0x1D552, 0x1D6A3, '3.1').	% [338] MATHEMATICAL DOUBLE-STRUCK SMALL A..MATHEMATICAL MONOSPACE SMALL Z
-unicode_age(0x1D6A8, 0x1D7C9, '3.1').	% [290] MATHEMATICAL BOLD CAPITAL ALPHA..MATHEMATICAL SANS-SERIF BOLD ITALIC PI SYMBOL
-unicode_age(0x1D7CE, 0x1D7FF, '3.1').	% [50] MATHEMATICAL BOLD DIGIT ZERO..MATHEMATICAL MONOSPACE DIGIT NINE
-unicode_age(0x20000, 0x2A6D6, '3.1').	% [42711] CJK UNIFIED IDEOGRAPH-20000..CJK UNIFIED IDEOGRAPH-2A6D6
-unicode_age(0x2F800, 0x2FA1D, '3.1').	% [542] CJK COMPATIBILITY IDEOGRAPH-2F800..CJK COMPATIBILITY IDEOGRAPH-2FA1D
-unicode_age(0xE0001, 0xE0001, '3.1').	%      LANGUAGE TAG
-unicode_age(0xE0020, 0xE007F, '3.1').	% [96] TAG SPACE..CANCEL TAG
-
-% Total code points: 44978
-
-% ================================================
-
-% Age=V3_2
-
-% Newly assigned in Unicode 3.2.0 (March, 2002)
-
-unicode_age(0x0220, 0x0220, '3.2').		%      LATIN CAPITAL LETTER N WITH LONG RIGHT LEG
-unicode_age(0x034F, 0x034F, '3.2').		%      COMBINING GRAPHEME JOINER
-unicode_age(0x0363, 0x036F, '3.2').		% [13] COMBINING LATIN SMALL LETTER A..COMBINING LATIN SMALL LETTER X
-unicode_age(0x03D8, 0x03D9, '3.2').		%  [2] GREEK LETTER ARCHAIC KOPPA..GREEK SMALL LETTER ARCHAIC KOPPA
-unicode_age(0x03F6, 0x03F6, '3.2').		%      GREEK REVERSED LUNATE EPSILON SYMBOL
-unicode_age(0x048A, 0x048B, '3.2').		%  [2] CYRILLIC CAPITAL LETTER SHORT I WITH TAIL..CYRILLIC SMALL LETTER SHORT I WITH TAIL
-unicode_age(0x04C5, 0x04C6, '3.2').		%  [2] CYRILLIC CAPITAL LETTER EL WITH TAIL..CYRILLIC SMALL LETTER EL WITH TAIL
-unicode_age(0x04C9, 0x04CA, '3.2').		%  [2] CYRILLIC CAPITAL LETTER EN WITH TAIL..CYRILLIC SMALL LETTER EN WITH TAIL
-unicode_age(0x04CD, 0x04CE, '3.2').		%  [2] CYRILLIC CAPITAL LETTER EM WITH TAIL..CYRILLIC SMALL LETTER EM WITH TAIL
-unicode_age(0x0500, 0x050F, '3.2').		% [16] CYRILLIC CAPITAL LETTER KOMI DE..CYRILLIC SMALL LETTER KOMI TJE
-unicode_age(0x066E, 0x066F, '3.2').		%  [2] ARABIC LETTER DOTLESS BEH..ARABIC LETTER DOTLESS QAF
-unicode_age(0x07B1, 0x07B1, '3.2').		%      THAANA LETTER NAA
-unicode_age(0x10F7, 0x10F8, '3.2').		%  [2] GEORGIAN LETTER YN..GEORGIAN LETTER ELIFI
-unicode_age(0x1700, 0x170C, '3.2').		% [13] TAGALOG LETTER A..TAGALOG LETTER YA
-unicode_age(0x170E, 0x1714, '3.2').		%  [7] TAGALOG LETTER LA..TAGALOG SIGN VIRAMA
-unicode_age(0x1720, 0x1736, '3.2').		% [23] HANUNOO LETTER A..PHILIPPINE DOUBLE PUNCTUATION
-unicode_age(0x1740, 0x1753, '3.2').		% [20] BUHID LETTER A..BUHID VOWEL SIGN U
-unicode_age(0x1760, 0x176C, '3.2').		% [13] TAGBANWA LETTER A..TAGBANWA LETTER YA
-unicode_age(0x176E, 0x1770, '3.2').		%  [3] TAGBANWA LETTER LA..TAGBANWA LETTER SA
-unicode_age(0x1772, 0x1773, '3.2').		%  [2] TAGBANWA VOWEL SIGN I..TAGBANWA VOWEL SIGN U
-unicode_age(0x2047, 0x2047, '3.2').		%      DOUBLE QUESTION MARK
-unicode_age(0x204E, 0x2052, '3.2').		%  [5] LOW ASTERISK..COMMERCIAL MINUS SIGN
-unicode_age(0x2057, 0x2057, '3.2').		%      QUADRUPLE PRIME
-unicode_age(0x205F, 0x205F, '3.2').		%      MEDIUM MATHEMATICAL SPACE
-unicode_age(0x2060, 0x2063, '3.2').		%  [4] WORD JOINER..INVISIBLE SEPARATOR
-unicode_age(0x2071, 0x2071, '3.2').		%      SUPERSCRIPT LATIN SMALL LETTER I
-unicode_age(0x20B0, 0x20B1, '3.2').		%  [2] GERMAN PENNY SIGN..PESO SIGN
-unicode_age(0x20E4, 0x20EA, '3.2').		%  [7] COMBINING ENCLOSING UPWARD POINTING TRIANGLE..COMBINING LEFTWARDS ARROW OVERLAY
-unicode_age(0x213D, 0x214B, '3.2').		% [15] DOUBLE-STRUCK SMALL GAMMA..TURNED AMPERSAND
-unicode_age(0x21F4, 0x21FF, '3.2').		% [12] RIGHT ARROW WITH SMALL CIRCLE..LEFT RIGHT OPEN-HEADED ARROW
-unicode_age(0x22F2, 0x22FF, '3.2').		% [14] ELEMENT OF WITH LONG HORIZONTAL STROKE..Z NOTATION BAG MEMBERSHIP
-unicode_age(0x237C, 0x237C, '3.2').		%      RIGHT ANGLE WITH DOWNWARDS ZIGZAG ARROW
-unicode_age(0x239B, 0x23CE, '3.2').		% [52] LEFT PARENTHESIS UPPER HOOK..RETURN SYMBOL
-unicode_age(0x24EB, 0x24FE, '3.2').		% [20] NEGATIVE CIRCLED NUMBER ELEVEN..DOUBLE CIRCLED NUMBER TEN
-unicode_age(0x2596, 0x259F, '3.2').		% [10] QUADRANT LOWER LEFT..QUADRANT UPPER RIGHT AND LOWER LEFT AND LOWER RIGHT
-unicode_age(0x25F8, 0x25FF, '3.2').		%  [8] UPPER LEFT TRIANGLE..LOWER RIGHT TRIANGLE
-unicode_age(0x2616, 0x2617, '3.2').		%  [2] WHITE SHOGI PIECE..BLACK SHOGI PIECE
-unicode_age(0x2672, 0x267D, '3.2').		% [12] UNIVERSAL RECYCLING SYMBOL..PARTIALLY-RECYCLED PAPER SYMBOL
-unicode_age(0x2680, 0x2689, '3.2').		% [10] DIE FACE-1..BLACK CIRCLE WITH TWO WHITE DOTS
-unicode_age(0x2768, 0x2775, '3.2').		% [14] MEDIUM LEFT PARENTHESIS ORNAMENT..MEDIUM RIGHT CURLY BRACKET ORNAMENT
-unicode_age(0x27D0, 0x27EB, '3.2').		% [28] WHITE DIAMOND WITH CENTRED DOT..MATHEMATICAL RIGHT DOUBLE ANGLE BRACKET
-unicode_age(0x27F0, 0x27FF, '3.2').		% [16] UPWARDS QUADRUPLE ARROW..LONG RIGHTWARDS SQUIGGLE ARROW
-unicode_age(0x2900, 0x2AFF, '3.2').		% [512] RIGHTWARDS TWO-HEADED ARROW WITH VERTICAL STROKE..N-ARY WHITE VERTICAL BAR
-unicode_age(0x303B, 0x303D, '3.2').		%  [3] VERTICAL IDEOGRAPHIC ITERATION MARK..PART ALTERNATION MARK
-unicode_age(0x3095, 0x3096, '3.2').		%  [2] HIRAGANA LETTER SMALL KA..HIRAGANA LETTER SMALL KE
-unicode_age(0x309F, 0x30A0, '3.2').		%  [2] HIRAGANA DIGRAPH YORI..KATAKANA-HIRAGANA DOUBLE HYPHEN
-unicode_age(0x30FF, 0x30FF, '3.2').		%      KATAKANA DIGRAPH KOTO
-unicode_age(0x31F0, 0x31FF, '3.2').		% [16] KATAKANA LETTER SMALL KU..KATAKANA LETTER SMALL RO
-unicode_age(0x3251, 0x325F, '3.2').		% [15] CIRCLED NUMBER TWENTY ONE..CIRCLED NUMBER THIRTY FIVE
-unicode_age(0x32B1, 0x32BF, '3.2').		% [15] CIRCLED NUMBER THIRTY SIX..CIRCLED NUMBER FIFTY
-unicode_age(0xA4A2, 0xA4A3, '3.2').		%  [2] YI RADICAL ZUP..YI RADICAL CYT
-unicode_age(0xA4B4, 0xA4B4, '3.2').		%      YI RADICAL NZUP
-unicode_age(0xA4C1, 0xA4C1, '3.2').		%      YI RADICAL ZUR
-unicode_age(0xA4C5, 0xA4C5, '3.2').		%      YI RADICAL NBIE
-unicode_age(0xFA30, 0xFA6A, '3.2').		% [59] CJK COMPATIBILITY IDEOGRAPH-FA30..CJK COMPATIBILITY IDEOGRAPH-FA6A
-unicode_age(0xFDFC, 0xFDFC, '3.2').		%      RIAL SIGN
-unicode_age(0xFE00, 0xFE0F, '3.2').		% [16] VARIATION SELECTOR-1..VARIATION SELECTOR-16
-unicode_age(0xFE45, 0xFE46, '3.2').		%  [2] SESAME DOT..WHITE SESAME DOT
-unicode_age(0xFE73, 0xFE73, '3.2').		%      ARABIC TAIL FRAGMENT
-unicode_age(0xFF5F, 0xFF60, '3.2').		%  [2] FULLWIDTH LEFT WHITE PARENTHESIS..FULLWIDTH RIGHT WHITE PARENTHESIS
-
-% Total code points: 1016
-
-% ================================================
-
-% Age=V4_0
-
-% Newly assigned in Unicode 4.0.0 (April, 2003)
-
-unicode_age(0x0221, 0x0221, '4.0').		%      LATIN SMALL LETTER D WITH CURL
-unicode_age(0x0234, 0x0236, '4.0').		%  [3] LATIN SMALL LETTER L WITH CURL..LATIN SMALL LETTER T WITH CURL
-unicode_age(0x02AE, 0x02AF, '4.0').		%  [2] LATIN SMALL LETTER TURNED H WITH FISHHOOK..LATIN SMALL LETTER TURNED H WITH FISHHOOK AND TAIL
-unicode_age(0x02EF, 0x02FF, '4.0').		% [17] MODIFIER LETTER LOW DOWN ARROWHEAD..MODIFIER LETTER LOW LEFT ARROW
-unicode_age(0x0350, 0x0357, '4.0').		%  [8] COMBINING RIGHT ARROWHEAD ABOVE..COMBINING RIGHT HALF RING ABOVE
-unicode_age(0x035D, 0x035F, '4.0').		%  [3] COMBINING DOUBLE BREVE..COMBINING DOUBLE MACRON BELOW
-unicode_age(0x03F7, 0x03FB, '4.0').		%  [5] GREEK CAPITAL LETTER SHO..GREEK SMALL LETTER SAN
-unicode_age(0x0600, 0x0603, '4.0').		%  [4] ARABIC NUMBER SIGN..ARABIC SIGN SAFHA
-unicode_age(0x060D, 0x0615, '4.0').		%  [9] ARABIC DATE SEPARATOR..ARABIC SMALL HIGH TAH
-unicode_age(0x0656, 0x0658, '4.0').		%  [3] ARABIC SUBSCRIPT ALEF..ARABIC MARK NOON GHUNNA
-unicode_age(0x06EE, 0x06EF, '4.0').		%  [2] ARABIC LETTER DAL WITH INVERTED V..ARABIC LETTER REH WITH INVERTED V
-unicode_age(0x06FF, 0x06FF, '4.0').		%      ARABIC LETTER HEH WITH INVERTED V
-unicode_age(0x072D, 0x072F, '4.0').		%  [3] SYRIAC LETTER PERSIAN BHETH..SYRIAC LETTER PERSIAN DHALATH
-unicode_age(0x074D, 0x074F, '4.0').		%  [3] SYRIAC LETTER SOGDIAN ZHAIN..SYRIAC LETTER SOGDIAN FE
-unicode_age(0x0904, 0x0904, '4.0').		%      DEVANAGARI LETTER SHORT A
-unicode_age(0x09BD, 0x09BD, '4.0').		%      BENGALI SIGN AVAGRAHA
-unicode_age(0x0A01, 0x0A01, '4.0').		%      GURMUKHI SIGN ADAK BINDI
-unicode_age(0x0A03, 0x0A03, '4.0').		%      GURMUKHI SIGN VISARGA
-unicode_age(0x0A8C, 0x0A8C, '4.0').		%      GUJARATI LETTER VOCALIC L
-unicode_age(0x0AE1, 0x0AE3, '4.0').		%  [3] GUJARATI LETTER VOCALIC LL..GUJARATI VOWEL SIGN VOCALIC LL
-unicode_age(0x0AF1, 0x0AF1, '4.0').		%      GUJARATI RUPEE SIGN
-unicode_age(0x0B35, 0x0B35, '4.0').		%      ORIYA LETTER VA
-unicode_age(0x0B71, 0x0B71, '4.0').		%      ORIYA LETTER WA
-unicode_age(0x0BF3, 0x0BFA, '4.0').		%  [8] TAMIL DAY SIGN..TAMIL NUMBER SIGN
-unicode_age(0x0CBC, 0x0CBD, '4.0').		%  [2] KANNADA SIGN NUKTA..KANNADA SIGN AVAGRAHA
-unicode_age(0x17DD, 0x17DD, '4.0').		%      KHMER SIGN ATTHACAN
-unicode_age(0x17F0, 0x17F9, '4.0').		% [10] KHMER SYMBOL LEK ATTAK SON..KHMER SYMBOL LEK ATTAK PRAM-BUON
-unicode_age(0x1900, 0x191C, '4.0').		% [29] LIMBU VOWEL-CARRIER LETTER..LIMBU LETTER HA
-unicode_age(0x1920, 0x192B, '4.0').		% [12] LIMBU VOWEL SIGN A..LIMBU SUBJOINED LETTER WA
-unicode_age(0x1930, 0x193B, '4.0').		% [12] LIMBU SMALL LETTER KA..LIMBU SIGN SA-I
-unicode_age(0x1940, 0x1940, '4.0').		%      LIMBU SIGN LOO
-unicode_age(0x1944, 0x196D, '4.0').		% [42] LIMBU EXCLAMATION MARK..TAI LE LETTER AI
-unicode_age(0x1970, 0x1974, '4.0').		%  [5] TAI LE LETTER TONE-2..TAI LE LETTER TONE-6
-unicode_age(0x19E0, 0x19FF, '4.0').		% [32] KHMER SYMBOL PATHAMASAT..KHMER SYMBOL DAP-PRAM ROC
-unicode_age(0x1D00, 0x1D6B, '4.0').		% [108] LATIN LETTER SMALL CAPITAL A..LATIN SMALL LETTER UE
-unicode_age(0x2053, 0x2054, '4.0').		%  [2] SWUNG DASH..INVERTED UNDERTIE
-unicode_age(0x213B, 0x213B, '4.0').		%      FACSIMILE SIGN
-unicode_age(0x23CF, 0x23D0, '4.0').		%  [2] EJECT SYMBOL..VERTICAL LINE EXTENSION
-unicode_age(0x24FF, 0x24FF, '4.0').		%      NEGATIVE CIRCLED DIGIT ZERO
-unicode_age(0x2614, 0x2615, '4.0').		%  [2] UMBRELLA WITH RAIN DROPS..HOT BEVERAGE
-unicode_age(0x268A, 0x2691, '4.0').		%  [8] MONOGRAM FOR YANG..BLACK FLAG
-unicode_age(0x26A0, 0x26A1, '4.0').		%  [2] WARNING SIGN..HIGH VOLTAGE SIGN
-unicode_age(0x2B00, 0x2B0D, '4.0').		% [14] NORTH EAST WHITE ARROW..UP DOWN BLACK ARROW
-unicode_age(0x321D, 0x321E, '4.0').		%  [2] PARENTHESIZED KOREAN CHARACTER OJEON..PARENTHESIZED KOREAN CHARACTER O HU
-unicode_age(0x3250, 0x3250, '4.0').		%      PARTNERSHIP SIGN
-unicode_age(0x327C, 0x327D, '4.0').		%  [2] CIRCLED KOREAN CHARACTER CHAMKO..CIRCLED KOREAN CHARACTER JUEUI
-unicode_age(0x32CC, 0x32CF, '4.0').		%  [4] SQUARE HG..LIMITED LIABILITY SIGN
-unicode_age(0x3377, 0x337A, '4.0').		%  [4] SQUARE DM..SQUARE IU
-unicode_age(0x33DE, 0x33DF, '4.0').		%  [2] SQUARE V OVER M..SQUARE A OVER M
-unicode_age(0x33FF, 0x33FF, '4.0').		%      SQUARE GAL
-unicode_age(0x4DC0, 0x4DFF, '4.0').		% [64] HEXAGRAM FOR THE CREATIVE HEAVEN..HEXAGRAM FOR BEFORE COMPLETION
-unicode_age(0xFDFD, 0xFDFD, '4.0').		%      ARABIC LIGATURE BISMILLAH AR-RAHMAN AR-RAHEEM
-unicode_age(0xFE47, 0xFE48, '4.0').		%  [2] PRESENTATION FORM FOR VERTICAL LEFT SQUARE BRACKET..PRESENTATION FORM FOR VERTICAL RIGHT SQUARE BRACKET
-unicode_age(0x10000, 0x1000B, '4.0').	% [12] LINEAR B SYLLABLE B008 A..LINEAR B SYLLABLE B046 JE
-unicode_age(0x1000D, 0x10026, '4.0').	% [26] LINEAR B SYLLABLE B036 JO..LINEAR B SYLLABLE B032 QO
-unicode_age(0x10028, 0x1003A, '4.0').	% [19] LINEAR B SYLLABLE B060 RA..LINEAR B SYLLABLE B042 WO
-unicode_age(0x1003C, 0x1003D, '4.0').	%  [2] LINEAR B SYLLABLE B017 ZA..LINEAR B SYLLABLE B074 ZE
-unicode_age(0x1003F, 0x1004D, '4.0').	% [15] LINEAR B SYLLABLE B020 ZO..LINEAR B SYLLABLE B091 TWO
-unicode_age(0x10050, 0x1005D, '4.0').	% [14] LINEAR B SYMBOL B018..LINEAR B SYMBOL B089
-unicode_age(0x10080, 0x100FA, '4.0').	% [123] LINEAR B IDEOGRAM B100 MAN..LINEAR B IDEOGRAM VESSEL B305
-unicode_age(0x10100, 0x10102, '4.0').	%  [3] AEGEAN WORD SEPARATOR LINE..AEGEAN CHECK MARK
-unicode_age(0x10107, 0x10133, '4.0').	% [45] AEGEAN NUMBER ONE..AEGEAN NUMBER NINETY THOUSAND
-unicode_age(0x10137, 0x1013F, '4.0').	%  [9] AEGEAN WEIGHT BASE UNIT..AEGEAN MEASURE THIRD SUBUNIT
-unicode_age(0x10380, 0x1039D, '4.0').	% [30] UGARITIC LETTER ALPA..UGARITIC LETTER SSU
-unicode_age(0x1039F, 0x1039F, '4.0').	%      UGARITIC WORD DIVIDER
-unicode_age(0x10426, 0x10427, '4.0').	%  [2] DESERET CAPITAL LETTER OI..DESERET CAPITAL LETTER EW
-unicode_age(0x1044E, 0x1049D, '4.0').	% [80] DESERET SMALL LETTER OI..OSMANYA LETTER OO
-unicode_age(0x104A0, 0x104A9, '4.0').	% [10] OSMANYA DIGIT ZERO..OSMANYA DIGIT NINE
-unicode_age(0x10800, 0x10805, '4.0').	%  [6] CYPRIOT SYLLABLE A..CYPRIOT SYLLABLE JA
-unicode_age(0x10808, 0x10808, '4.0').	%      CYPRIOT SYLLABLE JO
-unicode_age(0x1080A, 0x10835, '4.0').	% [44] CYPRIOT SYLLABLE KA..CYPRIOT SYLLABLE WO
-unicode_age(0x10837, 0x10838, '4.0').	%  [2] CYPRIOT SYLLABLE XA..CYPRIOT SYLLABLE XE
-unicode_age(0x1083C, 0x1083C, '4.0').	%      CYPRIOT SYLLABLE ZA
-unicode_age(0x1083F, 0x1083F, '4.0').	%      CYPRIOT SYLLABLE ZO
-unicode_age(0x1D300, 0x1D356, '4.0').	% [87] MONOGRAM FOR EARTH..TETRAGRAM FOR FOSTERING
-unicode_age(0x1D4C1, 0x1D4C1, '4.0').	%      MATHEMATICAL SCRIPT SMALL L
-unicode_age(0xE0100, 0xE01EF, '4.0').	% [240] VARIATION SELECTOR-17..VARIATION SELECTOR-256
-
-% Total code points: 1226
-
-% ================================================
-
-% Age=V4_1
-
-% Newly assigned in Unicode 4.1.0 (March, 2005)
-
-unicode_age(0x0237, 0x0241, '4.1').		% [11] LATIN SMALL LETTER DOTLESS J..LATIN CAPITAL LETTER GLOTTAL STOP
-unicode_age(0x0358, 0x035C, '4.1').		%  [5] COMBINING DOT ABOVE RIGHT..COMBINING DOUBLE BREVE BELOW
-unicode_age(0x03FC, 0x03FF, '4.1').		%  [4] GREEK RHO WITH STROKE SYMBOL..GREEK CAPITAL REVERSED DOTTED LUNATE SIGMA SYMBOL
-unicode_age(0x04F6, 0x04F7, '4.1').		%  [2] CYRILLIC CAPITAL LETTER GHE WITH DESCENDER..CYRILLIC SMALL LETTER GHE WITH DESCENDER
-unicode_age(0x05A2, 0x05A2, '4.1').		%      HEBREW ACCENT ATNAH HAFUKH
-unicode_age(0x05C5, 0x05C7, '4.1').		%  [3] HEBREW MARK LOWER DOT..HEBREW POINT QAMATS QATAN
-unicode_age(0x060B, 0x060B, '4.1').		%      AFGHANI SIGN
-unicode_age(0x061E, 0x061E, '4.1').		%      ARABIC TRIPLE DOT PUNCTUATION MARK
-unicode_age(0x0659, 0x065E, '4.1').		%  [6] ARABIC ZWARAKAY..ARABIC FATHA WITH TWO DOTS
-unicode_age(0x0750, 0x076D, '4.1').		% [30] ARABIC LETTER BEH WITH THREE DOTS HORIZONTALLY BELOW..ARABIC LETTER SEEN WITH TWO DOTS VERTICALLY ABOVE
-unicode_age(0x097D, 0x097D, '4.1').		%      DEVANAGARI LETTER GLOTTAL STOP
-unicode_age(0x09CE, 0x09CE, '4.1').		%      BENGALI LETTER KHANDA TA
-unicode_age(0x0BB6, 0x0BB6, '4.1').		%      TAMIL LETTER SHA
-unicode_age(0x0BE6, 0x0BE6, '4.1').		%      TAMIL DIGIT ZERO
-unicode_age(0x0FD0, 0x0FD1, '4.1').		%  [2] TIBETAN MARK BSKA- SHOG GI MGO RGYAN..TIBETAN MARK MNYAM YIG GI MGO RGYAN
-unicode_age(0x10F9, 0x10FA, '4.1').		%  [2] GEORGIAN LETTER TURNED GAN..GEORGIAN LETTER AIN
-unicode_age(0x10FC, 0x10FC, '4.1').		%      MODIFIER LETTER GEORGIAN NAR
-unicode_age(0x1207, 0x1207, '4.1').		%      ETHIOPIC SYLLABLE HOA
-unicode_age(0x1247, 0x1247, '4.1').		%      ETHIOPIC SYLLABLE QOA
-unicode_age(0x1287, 0x1287, '4.1').		%      ETHIOPIC SYLLABLE XOA
-unicode_age(0x12AF, 0x12AF, '4.1').		%      ETHIOPIC SYLLABLE KOA
-unicode_age(0x12CF, 0x12CF, '4.1').		%      ETHIOPIC SYLLABLE WOA
-unicode_age(0x12EF, 0x12EF, '4.1').		%      ETHIOPIC SYLLABLE YOA
-unicode_age(0x130F, 0x130F, '4.1').		%      ETHIOPIC SYLLABLE GOA
-unicode_age(0x131F, 0x131F, '4.1').		%      ETHIOPIC SYLLABLE GGWAA
-unicode_age(0x1347, 0x1347, '4.1').		%      ETHIOPIC SYLLABLE TZOA
-unicode_age(0x135F, 0x1360, '4.1').		%  [2] ETHIOPIC COMBINING GEMINATION MARK..ETHIOPIC SECTION MARK
-unicode_age(0x1380, 0x1399, '4.1').		% [26] ETHIOPIC SYLLABLE SEBATBEIT MWA..ETHIOPIC TONAL MARK KURT
-unicode_age(0x1980, 0x19A9, '4.1').		% [42] NEW TAI LUE LETTER HIGH QA..NEW TAI LUE LETTER LOW XVA
-unicode_age(0x19B0, 0x19C9, '4.1').		% [26] NEW TAI LUE VOWEL SIGN VOWEL SHORTENER..NEW TAI LUE TONE MARK-2
-unicode_age(0x19D0, 0x19D9, '4.1').		% [10] NEW TAI LUE DIGIT ZERO..NEW TAI LUE DIGIT NINE
-unicode_age(0x19DE, 0x19DF, '4.1').		%  [2] NEW TAI LUE SIGN LAE..NEW TAI LUE SIGN LAEV
-unicode_age(0x1A00, 0x1A1B, '4.1').		% [28] BUGINESE LETTER KA..BUGINESE VOWEL SIGN AE
-unicode_age(0x1A1E, 0x1A1F, '4.1').		%  [2] BUGINESE PALLAWA..BUGINESE END OF SECTION
-unicode_age(0x1D6C, 0x1DC3, '4.1').		% [88] LATIN SMALL LETTER B WITH MIDDLE TILDE..COMBINING SUSPENSION MARK
-unicode_age(0x2055, 0x2056, '4.1').		%  [2] FLOWER PUNCTUATION MARK..THREE DOT PUNCTUATION
-unicode_age(0x2058, 0x205E, '4.1').		%  [7] FOUR DOT PUNCTUATION..VERTICAL FOUR DOTS
-unicode_age(0x2090, 0x2094, '4.1').		%  [5] LATIN SUBSCRIPT SMALL LETTER A..LATIN SUBSCRIPT SMALL LETTER SCHWA
-unicode_age(0x20B2, 0x20B5, '4.1').		%  [4] GUARANI SIGN..CEDI SIGN
-unicode_age(0x20EB, 0x20EB, '4.1').		%      COMBINING LONG DOUBLE SOLIDUS OVERLAY
-unicode_age(0x213C, 0x213C, '4.1').		%      DOUBLE-STRUCK SMALL PI
-unicode_age(0x214C, 0x214C, '4.1').		%      PER SIGN
-unicode_age(0x23D1, 0x23DB, '4.1').		% [11] METRICAL BREVE..FUSE
-unicode_age(0x2618, 0x2618, '4.1').		%      SHAMROCK
-unicode_age(0x267E, 0x267F, '4.1').		%  [2] PERMANENT PAPER SIGN..WHEELCHAIR SYMBOL
-unicode_age(0x2692, 0x269C, '4.1').		% [11] HAMMER AND PICK..FLEUR-DE-LIS
-unicode_age(0x26A2, 0x26B1, '4.1').		% [16] DOUBLED FEMALE SIGN..FUNERAL URN
-unicode_age(0x27C0, 0x27C6, '4.1').		%  [7] THREE DIMENSIONAL ANGLE..RIGHT S-SHAPED BAG DELIMITER
-unicode_age(0x2B0E, 0x2B13, '4.1').		%  [6] RIGHTWARDS ARROW WITH TIP DOWNWARDS..SQUARE WITH BOTTOM HALF BLACK
-unicode_age(0x2C00, 0x2C2E, '4.1').		% [47] GLAGOLITIC CAPITAL LETTER AZU..GLAGOLITIC CAPITAL LETTER LATINATE MYSLITE
-unicode_age(0x2C30, 0x2C5E, '4.1').		% [47] GLAGOLITIC SMALL LETTER AZU..GLAGOLITIC SMALL LETTER LATINATE MYSLITE
-unicode_age(0x2C80, 0x2CEA, '4.1').		% [107] COPTIC CAPITAL LETTER ALFA..COPTIC SYMBOL SHIMA SIMA
-unicode_age(0x2CF9, 0x2D25, '4.1').		% [45] COPTIC OLD NUBIAN FULL STOP..GEORGIAN SMALL LETTER HOE
-unicode_age(0x2D30, 0x2D65, '4.1').		% [54] TIFINAGH LETTER YA..TIFINAGH LETTER YAZZ
-unicode_age(0x2D6F, 0x2D6F, '4.1').		%      TIFINAGH MODIFIER LETTER LABIALIZATION MARK
-unicode_age(0x2D80, 0x2D96, '4.1').		% [23] ETHIOPIC SYLLABLE LOA..ETHIOPIC SYLLABLE GGWE
-unicode_age(0x2DA0, 0x2DA6, '4.1').		%  [7] ETHIOPIC SYLLABLE SSA..ETHIOPIC SYLLABLE SSO
-unicode_age(0x2DA8, 0x2DAE, '4.1').		%  [7] ETHIOPIC SYLLABLE CCA..ETHIOPIC SYLLABLE CCO
-unicode_age(0x2DB0, 0x2DB6, '4.1').		%  [7] ETHIOPIC SYLLABLE ZZA..ETHIOPIC SYLLABLE ZZO
-unicode_age(0x2DB8, 0x2DBE, '4.1').		%  [7] ETHIOPIC SYLLABLE CCHA..ETHIOPIC SYLLABLE CCHO
-unicode_age(0x2DC0, 0x2DC6, '4.1').		%  [7] ETHIOPIC SYLLABLE QYA..ETHIOPIC SYLLABLE QYO
-unicode_age(0x2DC8, 0x2DCE, '4.1').		%  [7] ETHIOPIC SYLLABLE KYA..ETHIOPIC SYLLABLE KYO
-unicode_age(0x2DD0, 0x2DD6, '4.1').		%  [7] ETHIOPIC SYLLABLE XYA..ETHIOPIC SYLLABLE XYO
-unicode_age(0x2DD8, 0x2DDE, '4.1').		%  [7] ETHIOPIC SYLLABLE GYA..ETHIOPIC SYLLABLE GYO
-unicode_age(0x2E00, 0x2E17, '4.1').		% [24] RIGHT ANGLE SUBSTITUTION MARKER..DOUBLE OBLIQUE HYPHEN
-unicode_age(0x2E1C, 0x2E1D, '4.1').		%  [2] LEFT LOW PARAPHRASE BRACKET..RIGHT LOW PARAPHRASE BRACKET
-unicode_age(0x31C0, 0x31CF, '4.1').		% [16] CJK STROKE T..CJK STROKE N
-unicode_age(0x327E, 0x327E, '4.1').		%      CIRCLED HANGUL IEUNG U
-unicode_age(0x9FA6, 0x9FBB, '4.1').		% [22] CJK UNIFIED IDEOGRAPH-9FA6..CJK UNIFIED IDEOGRAPH-9FBB
-unicode_age(0xA700, 0xA716, '4.1').		% [23] MODIFIER LETTER CHINESE TONE YIN PING..MODIFIER LETTER EXTRA-LOW LEFT-STEM TONE BAR
-unicode_age(0xA800, 0xA82B, '4.1').		% [44] SYLOTI NAGRI LETTER A..SYLOTI NAGRI POETRY MARK-4
-unicode_age(0xFA70, 0xFAD9, '4.1').		% [106] CJK COMPATIBILITY IDEOGRAPH-FA70..CJK COMPATIBILITY IDEOGRAPH-FAD9
-unicode_age(0xFE10, 0xFE19, '4.1').		% [10] PRESENTATION FORM FOR VERTICAL COMMA..PRESENTATION FORM FOR VERTICAL HORIZONTAL ELLIPSIS
-unicode_age(0x10140, 0x1018A, '4.1').	% [75] GREEK ACROPHONIC ATTIC ONE QUARTER..GREEK ZERO SIGN
-unicode_age(0x103A0, 0x103C3, '4.1').	% [36] OLD PERSIAN SIGN A..OLD PERSIAN SIGN HA
-unicode_age(0x103C8, 0x103D5, '4.1').	% [14] OLD PERSIAN SIGN AURAMAZDAA..OLD PERSIAN NUMBER HUNDRED
-unicode_age(0x10A00, 0x10A03, '4.1').	%  [4] KHAROSHTHI LETTER A..KHAROSHTHI VOWEL SIGN VOCALIC R
-unicode_age(0x10A05, 0x10A06, '4.1').	%  [2] KHAROSHTHI VOWEL SIGN E..KHAROSHTHI VOWEL SIGN O
-unicode_age(0x10A0C, 0x10A13, '4.1').	%  [8] KHAROSHTHI VOWEL LENGTH MARK..KHAROSHTHI LETTER GHA
-unicode_age(0x10A15, 0x10A17, '4.1').	%  [3] KHAROSHTHI LETTER CA..KHAROSHTHI LETTER JA
-unicode_age(0x10A19, 0x10A33, '4.1').	% [27] KHAROSHTHI LETTER NYA..KHAROSHTHI LETTER TTTHA
-unicode_age(0x10A38, 0x10A3A, '4.1').	%  [3] KHAROSHTHI SIGN BAR ABOVE..KHAROSHTHI SIGN DOT BELOW
-unicode_age(0x10A3F, 0x10A47, '4.1').	%  [9] KHAROSHTHI VIRAMA..KHAROSHTHI NUMBER ONE THOUSAND
-unicode_age(0x10A50, 0x10A58, '4.1').	%  [9] KHAROSHTHI PUNCTUATION DOT..KHAROSHTHI PUNCTUATION LINES
-unicode_age(0x1D200, 0x1D245, '4.1').	% [70] GREEK VOCAL NOTATION SYMBOL-1..GREEK MUSICAL LEIMMA
-unicode_age(0x1D6A4, 0x1D6A5, '4.1').	%  [2] MATHEMATICAL ITALIC SMALL DOTLESS I..MATHEMATICAL ITALIC SMALL DOTLESS J
-
-% Total code points: 1273
-
-% ================================================
-
-% Age=V5_0
-
-% Newly assigned in Unicode 5.0.0 (July, 2006)
-
-unicode_age(0x0242, 0x024F, '5.0').		% [14] LATIN SMALL LETTER GLOTTAL STOP..LATIN SMALL LETTER Y WITH STROKE
-unicode_age(0x037B, 0x037D, '5.0').		%  [3] GREEK SMALL REVERSED LUNATE SIGMA SYMBOL..GREEK SMALL REVERSED DOTTED LUNATE SIGMA SYMBOL
-unicode_age(0x04CF, 0x04CF, '5.0').		%      CYRILLIC SMALL LETTER PALOCHKA
-unicode_age(0x04FA, 0x04FF, '5.0').		%  [6] CYRILLIC CAPITAL LETTER GHE WITH STROKE AND HOOK..CYRILLIC SMALL LETTER HA WITH STROKE
-unicode_age(0x0510, 0x0513, '5.0').		%  [4] CYRILLIC CAPITAL LETTER REVERSED ZE..CYRILLIC SMALL LETTER EL WITH HOOK
-unicode_age(0x05BA, 0x05BA, '5.0').		%      HEBREW POINT HOLAM HASER FOR VAV
-unicode_age(0x07C0, 0x07FA, '5.0').		% [59] NKO DIGIT ZERO..NKO LAJANYALAN
-unicode_age(0x097B, 0x097C, '5.0').		%  [2] DEVANAGARI LETTER GGA..DEVANAGARI LETTER JJA
-unicode_age(0x097E, 0x097F, '5.0').		%  [2] DEVANAGARI LETTER DDDA..DEVANAGARI LETTER BBA
-unicode_age(0x0CE2, 0x0CE3, '5.0').		%  [2] KANNADA VOWEL SIGN VOCALIC L..KANNADA VOWEL SIGN VOCALIC LL
-unicode_age(0x0CF1, 0x0CF2, '5.0').		%  [2] KANNADA SIGN JIHVAMULIYA..KANNADA SIGN UPADHMANIYA
-unicode_age(0x1B00, 0x1B4B, '5.0').		% [76] BALINESE SIGN ULU RICEM..BALINESE LETTER ASYURA SASAK
-unicode_age(0x1B50, 0x1B7C, '5.0').		% [45] BALINESE DIGIT ZERO..BALINESE MUSICAL SYMBOL LEFT-HAND OPEN PING
-unicode_age(0x1DC4, 0x1DCA, '5.0').		%  [7] COMBINING MACRON-ACUTE..COMBINING LATIN SMALL LETTER R BELOW
-unicode_age(0x1DFE, 0x1DFF, '5.0').		%  [2] COMBINING LEFT ARROWHEAD ABOVE..COMBINING RIGHT ARROWHEAD AND DOWN ARROWHEAD BELOW
-unicode_age(0x20EC, 0x20EF, '5.0').		%  [4] COMBINING RIGHTWARDS HARPOON WITH BARB DOWNWARDS..COMBINING RIGHT ARROW BELOW
-unicode_age(0x214D, 0x214E, '5.0').		%  [2] AKTIESELSKAB..TURNED SMALL F
-unicode_age(0x2184, 0x2184, '5.0').		%      LATIN SMALL LETTER REVERSED C
-unicode_age(0x23DC, 0x23E7, '5.0').		% [12] TOP PARENTHESIS..ELECTRICAL INTERSECTION
-unicode_age(0x26B2, 0x26B2, '5.0').		%      NEUTER
-unicode_age(0x27C7, 0x27CA, '5.0').		%  [4] OR WITH DOT INSIDE..VERTICAL BAR WITH HORIZONTAL STROKE
-unicode_age(0x2B14, 0x2B1A, '5.0').		%  [7] SQUARE WITH UPPER RIGHT DIAGONAL HALF BLACK..DOTTED SQUARE
-unicode_age(0x2B20, 0x2B23, '5.0').		%  [4] WHITE PENTAGON..HORIZONTAL BLACK HEXAGON
-unicode_age(0x2C60, 0x2C6C, '5.0').		% [13] LATIN CAPITAL LETTER L WITH DOUBLE BAR..LATIN SMALL LETTER Z WITH DESCENDER
-unicode_age(0x2C74, 0x2C77, '5.0').		%  [4] LATIN SMALL LETTER V WITH CURL..LATIN SMALL LETTER TAILLESS PHI
-unicode_age(0xA717, 0xA71A, '5.0').		%  [4] MODIFIER LETTER DOT VERTICAL BAR..MODIFIER LETTER LOWER RIGHT CORNER ANGLE
-unicode_age(0xA720, 0xA721, '5.0').		%  [2] MODIFIER LETTER STRESS AND HIGH TONE..MODIFIER LETTER STRESS AND LOW TONE
-unicode_age(0xA840, 0xA877, '5.0').		% [56] PHAGS-PA LETTER KA..PHAGS-PA MARK DOUBLE SHAD
-unicode_age(0x10900, 0x10919, '5.0').	% [26] PHOENICIAN LETTER ALF..PHOENICIAN NUMBER ONE HUNDRED
-unicode_age(0x1091F, 0x1091F, '5.0').	%      PHOENICIAN WORD SEPARATOR
-unicode_age(0x12000, 0x1236E, '5.0').	% [879] CUNEIFORM SIGN A..CUNEIFORM SIGN ZUM
-unicode_age(0x12400, 0x12462, '5.0').	% [99] CUNEIFORM NUMERIC SIGN TWO ASH..CUNEIFORM NUMERIC SIGN OLD ASSYRIAN ONE QUARTER
-unicode_age(0x12470, 0x12473, '5.0').	%  [4] CUNEIFORM PUNCTUATION SIGN OLD ASSYRIAN WORD DIVIDER..CUNEIFORM PUNCTUATION SIGN DIAGONAL TRICOLON
-unicode_age(0x1D360, 0x1D371, '5.0').	% [18] COUNTING ROD UNIT DIGIT ONE..COUNTING ROD TENS DIGIT NINE
-unicode_age(0x1D7CA, 0x1D7CB, '5.0').	%  [2] MATHEMATICAL BOLD CAPITAL DIGAMMA..MATHEMATICAL BOLD SMALL DIGAMMA
-
-% Total code points: 1369
-
-% ================================================
-
-% Age=V5_1
-
-% Newly assigned in Unicode 5.1.0 (March, 2008)
-
-unicode_age(0x0370, 0x0373, '5.1').		%  [4] GREEK CAPITAL LETTER HETA..GREEK SMALL LETTER ARCHAIC SAMPI
-unicode_age(0x0376, 0x0377, '5.1').		%  [2] GREEK CAPITAL LETTER PAMPHYLIAN DIGAMMA..GREEK SMALL LETTER PAMPHYLIAN DIGAMMA
-unicode_age(0x03CF, 0x03CF, '5.1').		%      GREEK CAPITAL KAI SYMBOL
-unicode_age(0x0487, 0x0487, '5.1').		%      COMBINING CYRILLIC POKRYTIE
-unicode_age(0x0514, 0x0523, '5.1').		% [16] CYRILLIC CAPITAL LETTER LHA..CYRILLIC SMALL LETTER EN WITH MIDDLE HOOK
-unicode_age(0x0606, 0x060A, '5.1').		%  [5] ARABIC-INDIC CUBE ROOT..ARABIC-INDIC PER TEN THOUSAND SIGN
-unicode_age(0x0616, 0x061A, '5.1').		%  [5] ARABIC SMALL HIGH LIGATURE ALEF WITH LAM WITH YEH..ARABIC SMALL KASRA
-unicode_age(0x063B, 0x063F, '5.1').		%  [5] ARABIC LETTER KEHEH WITH TWO DOTS ABOVE..ARABIC LETTER FARSI YEH WITH THREE DOTS ABOVE
-unicode_age(0x076E, 0x077F, '5.1').		% [18] ARABIC LETTER HAH WITH SMALL ARABIC LETTER TAH BELOW..ARABIC LETTER KAF WITH TWO DOTS ABOVE
-unicode_age(0x0971, 0x0972, '5.1').		%  [2] DEVANAGARI SIGN HIGH SPACING DOT..DEVANAGARI LETTER CANDRA A
-unicode_age(0x0A51, 0x0A51, '5.1').		%      GURMUKHI SIGN UDAAT
-unicode_age(0x0A75, 0x0A75, '5.1').		%      GURMUKHI SIGN YAKASH
-unicode_age(0x0B44, 0x0B44, '5.1').		%      ORIYA VOWEL SIGN VOCALIC RR
-unicode_age(0x0B62, 0x0B63, '5.1').		%  [2] ORIYA VOWEL SIGN VOCALIC L..ORIYA VOWEL SIGN VOCALIC LL
-unicode_age(0x0BD0, 0x0BD0, '5.1').		%      TAMIL OM
-unicode_age(0x0C3D, 0x0C3D, '5.1').		%      TELUGU SIGN AVAGRAHA
-unicode_age(0x0C58, 0x0C59, '5.1').		%  [2] TELUGU LETTER TSA..TELUGU LETTER DZA
-unicode_age(0x0C62, 0x0C63, '5.1').		%  [2] TELUGU VOWEL SIGN VOCALIC L..TELUGU VOWEL SIGN VOCALIC LL
-unicode_age(0x0C78, 0x0C7F, '5.1').		%  [8] TELUGU FRACTION DIGIT ZERO FOR ODD POWERS OF FOUR..TELUGU SIGN TUUMU
-unicode_age(0x0D3D, 0x0D3D, '5.1').		%      MALAYALAM SIGN AVAGRAHA
-unicode_age(0x0D44, 0x0D44, '5.1').		%      MALAYALAM VOWEL SIGN VOCALIC RR
-unicode_age(0x0D62, 0x0D63, '5.1').		%  [2] MALAYALAM VOWEL SIGN VOCALIC L..MALAYALAM VOWEL SIGN VOCALIC LL
-unicode_age(0x0D70, 0x0D75, '5.1').		%  [6] MALAYALAM NUMBER TEN..MALAYALAM FRACTION THREE QUARTERS
-unicode_age(0x0D79, 0x0D7F, '5.1').		%  [7] MALAYALAM DATE MARK..MALAYALAM LETTER CHILLU K
-unicode_age(0x0F6B, 0x0F6C, '5.1').		%  [2] TIBETAN LETTER KKA..TIBETAN LETTER RRA
-unicode_age(0x0FCE, 0x0FCE, '5.1').		%      TIBETAN SIGN RDEL NAG RDEL DKAR
-unicode_age(0x0FD2, 0x0FD4, '5.1').		%  [3] TIBETAN MARK NYIS TSHEG..TIBETAN MARK CLOSING BRDA RNYING YIG MGO SGAB MA
-unicode_age(0x1022, 0x1022, '5.1').		%      MYANMAR LETTER SHAN A
-unicode_age(0x1028, 0x1028, '5.1').		%      MYANMAR LETTER MON E
-unicode_age(0x102B, 0x102B, '5.1').		%      MYANMAR VOWEL SIGN TALL AA
-unicode_age(0x1033, 0x1035, '5.1').		%  [3] MYANMAR VOWEL SIGN MON II..MYANMAR VOWEL SIGN E ABOVE
-unicode_age(0x103A, 0x103F, '5.1').		%  [6] MYANMAR SIGN ASAT..MYANMAR LETTER GREAT SA
-unicode_age(0x105A, 0x1099, '5.1').		% [64] MYANMAR LETTER MON NGA..MYANMAR SHAN DIGIT NINE
-unicode_age(0x109E, 0x109F, '5.1').		%  [2] MYANMAR SYMBOL SHAN ONE..MYANMAR SYMBOL SHAN EXCLAMATION
-unicode_age(0x18AA, 0x18AA, '5.1').		%      MONGOLIAN LETTER MANCHU ALI GALI LHA
-unicode_age(0x1B80, 0x1BAA, '5.1').		% [43] SUNDANESE SIGN PANYECEK..SUNDANESE SIGN PAMAAEH
-unicode_age(0x1BAE, 0x1BB9, '5.1').		% [12] SUNDANESE LETTER KHA..SUNDANESE DIGIT NINE
-unicode_age(0x1C00, 0x1C37, '5.1').		% [56] LEPCHA LETTER KA..LEPCHA SIGN NUKTA
-unicode_age(0x1C3B, 0x1C49, '5.1').		% [15] LEPCHA PUNCTUATION TA-ROL..LEPCHA DIGIT NINE
-unicode_age(0x1C4D, 0x1C7F, '5.1').		% [51] LEPCHA LETTER TTA..OL CHIKI PUNCTUATION DOUBLE MUCAAD
-unicode_age(0x1DCB, 0x1DE6, '5.1').		% [28] COMBINING BREVE-MACRON..COMBINING LATIN SMALL LETTER Z
-unicode_age(0x1E9C, 0x1E9F, '5.1').		%  [4] LATIN SMALL LETTER LONG S WITH DIAGONAL STROKE..LATIN SMALL LETTER DELTA
-unicode_age(0x1EFA, 0x1EFF, '5.1').		%  [6] LATIN CAPITAL LETTER MIDDLE-WELSH LL..LATIN SMALL LETTER Y WITH LOOP
-unicode_age(0x2064, 0x2064, '5.1').		%      INVISIBLE PLUS
-unicode_age(0x20F0, 0x20F0, '5.1').		%      COMBINING ASTERISK ABOVE
-unicode_age(0x214F, 0x214F, '5.1').		%      SYMBOL FOR SAMARITAN SOURCE
-unicode_age(0x2185, 0x2188, '5.1').		%  [4] ROMAN NUMERAL SIX LATE FORM..ROMAN NUMERAL ONE HUNDRED THOUSAND
-unicode_age(0x269D, 0x269D, '5.1').		%      OUTLINED WHITE STAR
-unicode_age(0x26B3, 0x26BC, '5.1').		% [10] CERES..SESQUIQUADRATE
-unicode_age(0x26C0, 0x26C3, '5.1').		%  [4] WHITE DRAUGHTS MAN..BLACK DRAUGHTS KING
-unicode_age(0x27CC, 0x27CC, '5.1').		%      LONG DIVISION
-unicode_age(0x27EC, 0x27EF, '5.1').		%  [4] MATHEMATICAL LEFT WHITE TORTOISE SHELL BRACKET..MATHEMATICAL RIGHT FLATTENED PARENTHESIS
-unicode_age(0x2B1B, 0x2B1F, '5.1').		%  [5] BLACK LARGE SQUARE..BLACK PENTAGON
-unicode_age(0x2B24, 0x2B4C, '5.1').		% [41] BLACK LARGE CIRCLE..RIGHTWARDS ARROW ABOVE REVERSE TILDE OPERATOR
-unicode_age(0x2B50, 0x2B54, '5.1').		%  [5] WHITE MEDIUM STAR..WHITE RIGHT-POINTING PENTAGON
-unicode_age(0x2C6D, 0x2C6F, '5.1').		%  [3] LATIN CAPITAL LETTER ALPHA..LATIN CAPITAL LETTER TURNED A
-unicode_age(0x2C71, 0x2C73, '5.1').		%  [3] LATIN SMALL LETTER V WITH RIGHT HOOK..LATIN SMALL LETTER W WITH HOOK
-unicode_age(0x2C78, 0x2C7D, '5.1').		%  [6] LATIN SMALL LETTER E WITH NOTCH..MODIFIER LETTER CAPITAL V
-unicode_age(0x2DE0, 0x2DFF, '5.1').		% [32] COMBINING CYRILLIC LETTER BE..COMBINING CYRILLIC LETTER IOTIFIED BIG YUS
-unicode_age(0x2E18, 0x2E1B, '5.1').		%  [4] INVERTED INTERROBANG..TILDE WITH RING ABOVE
-unicode_age(0x2E1E, 0x2E30, '5.1').		% [19] TILDE WITH DOT ABOVE..RING POINT
-unicode_age(0x312D, 0x312D, '5.1').		%      BOPOMOFO LETTER IH
-unicode_age(0x31D0, 0x31E3, '5.1').		% [20] CJK STROKE H..CJK STROKE Q
-unicode_age(0x9FBC, 0x9FC3, '5.1').		%  [8] CJK UNIFIED IDEOGRAPH-9FBC..CJK UNIFIED IDEOGRAPH-9FC3
-unicode_age(0xA500, 0xA62B, '5.1').		% [300] VAI SYLLABLE EE..VAI SYLLABLE NDOLE DO
-unicode_age(0xA640, 0xA65F, '5.1').		% [32] CYRILLIC CAPITAL LETTER ZEMLYA..CYRILLIC SMALL LETTER YN
-unicode_age(0xA662, 0xA673, '5.1').		% [18] CYRILLIC CAPITAL LETTER SOFT DE..SLAVONIC ASTERISK
-unicode_age(0xA67C, 0xA697, '5.1').		% [28] COMBINING CYRILLIC KAVYKA..CYRILLIC SMALL LETTER SHWE
-unicode_age(0xA71B, 0xA71F, '5.1').		%  [5] MODIFIER LETTER RAISED UP ARROW..MODIFIER LETTER LOW INVERTED EXCLAMATION MARK
-unicode_age(0xA722, 0xA78C, '5.1').		% [107] LATIN CAPITAL LETTER EGYPTOLOGICAL ALEF..LATIN SMALL LETTER SALTILLO
-unicode_age(0xA7FB, 0xA7FF, '5.1').		%  [5] LATIN EPIGRAPHIC LETTER REVERSED F..LATIN EPIGRAPHIC LETTER ARCHAIC M
-unicode_age(0xA880, 0xA8C4, '5.1').		% [69] SAURASHTRA SIGN ANUSVARA..SAURASHTRA SIGN VIRAMA
-unicode_age(0xA8CE, 0xA8D9, '5.1').		% [12] SAURASHTRA DANDA..SAURASHTRA DIGIT NINE
-unicode_age(0xA900, 0xA953, '5.1').		% [84] KAYAH LI DIGIT ZERO..REJANG VIRAMA
-unicode_age(0xA95F, 0xA95F, '5.1').		%      REJANG SECTION MARK
-unicode_age(0xAA00, 0xAA36, '5.1').		% [55] CHAM LETTER A..CHAM CONSONANT SIGN WA
-unicode_age(0xAA40, 0xAA4D, '5.1').		% [14] CHAM LETTER FINAL K..CHAM CONSONANT SIGN FINAL H
-unicode_age(0xAA50, 0xAA59, '5.1').		% [10] CHAM DIGIT ZERO..CHAM DIGIT NINE
-unicode_age(0xAA5C, 0xAA5F, '5.1').		%  [4] CHAM PUNCTUATION SPIRAL..CHAM PUNCTUATION TRIPLE DANDA
-unicode_age(0xFE24, 0xFE26, '5.1').		%  [3] COMBINING MACRON LEFT HALF..COMBINING CONJOINING MACRON
-unicode_age(0x10190, 0x1019B, '5.1').	% [12] ROMAN SEXTANS SIGN..ROMAN CENTURIAL SIGN
-unicode_age(0x101D0, 0x101FD, '5.1').	% [46] PHAISTOS DISC SIGN PEDESTRIAN..PHAISTOS DISC SIGN COMBINING OBLIQUE STROKE
-unicode_age(0x10280, 0x1029C, '5.1').	% [29] LYCIAN LETTER A..LYCIAN LETTER X
-unicode_age(0x102A0, 0x102D0, '5.1').	% [49] CARIAN LETTER A..CARIAN LETTER UUU3
-unicode_age(0x10920, 0x10939, '5.1').	% [26] LYDIAN LETTER A..LYDIAN LETTER C
-unicode_age(0x1093F, 0x1093F, '5.1').	%      LYDIAN TRIANGULAR MARK
-unicode_age(0x1D129, 0x1D129, '5.1').	%      MUSICAL SYMBOL MULTIPLE MEASURE REST
-unicode_age(0x1F000, 0x1F02B, '5.1').	% [44] MAHJONG TILE EAST WIND..MAHJONG TILE BACK
-unicode_age(0x1F030, 0x1F093, '5.1').	% [100] DOMINO TILE HORIZONTAL BACK..DOMINO TILE VERTICAL-06-06
-
-% Total code points: 1624
-
-% ================================================
-
-% Age=V5_2
-
-% Newly assigned in Unicode 5.2.0 (October, 2009)
-
-unicode_age(0x0524, 0x0525, '5.2').		%  [2] CYRILLIC CAPITAL LETTER PE WITH DESCENDER..CYRILLIC SMALL LETTER PE WITH DESCENDER
-unicode_age(0x0800, 0x082D, '5.2').		% [46] SAMARITAN LETTER ALAF..SAMARITAN MARK NEQUDAA
-unicode_age(0x0830, 0x083E, '5.2').		% [15] SAMARITAN PUNCTUATION NEQUDAA..SAMARITAN PUNCTUATION ANNAAU
-unicode_age(0x0900, 0x0900, '5.2').		%      DEVANAGARI SIGN INVERTED CANDRABINDU
-unicode_age(0x094E, 0x094E, '5.2').		%      DEVANAGARI VOWEL SIGN PRISHTHAMATRA E
-unicode_age(0x0955, 0x0955, '5.2').		%      DEVANAGARI VOWEL SIGN CANDRA LONG E
-unicode_age(0x0979, 0x097A, '5.2').		%  [2] DEVANAGARI LETTER ZHA..DEVANAGARI LETTER HEAVY YA
-unicode_age(0x09FB, 0x09FB, '5.2').		%      BENGALI GANDA MARK
-unicode_age(0x0FD5, 0x0FD8, '5.2').		%  [4] RIGHT-FACING SVASTI SIGN..LEFT-FACING SVASTI SIGN WITH DOTS
-unicode_age(0x109A, 0x109D, '5.2').		%  [4] MYANMAR SIGN KHAMTI TONE-1..MYANMAR VOWEL SIGN AITON AI
-unicode_age(0x115A, 0x115E, '5.2').		%  [5] HANGUL CHOSEONG KIYEOK-TIKEUT..HANGUL CHOSEONG TIKEUT-RIEUL
-unicode_age(0x11A3, 0x11A7, '5.2').		%  [5] HANGUL JUNGSEONG A-EU..HANGUL JUNGSEONG O-YAE
-unicode_age(0x11FA, 0x11FF, '5.2').		%  [6] HANGUL JONGSEONG KIYEOK-NIEUN..HANGUL JONGSEONG SSANGNIEUN
-unicode_age(0x1400, 0x1400, '5.2').		%      CANADIAN SYLLABICS HYPHEN
-unicode_age(0x1677, 0x167F, '5.2').		%  [9] CANADIAN SYLLABICS WOODS-CREE THWEE..CANADIAN SYLLABICS BLACKFOOT W
-unicode_age(0x18B0, 0x18F5, '5.2').		% [70] CANADIAN SYLLABICS OY..CANADIAN SYLLABICS CARRIER DENTAL S
-unicode_age(0x19AA, 0x19AB, '5.2').		%  [2] NEW TAI LUE LETTER HIGH SUA..NEW TAI LUE LETTER LOW SUA
-unicode_age(0x19DA, 0x19DA, '5.2').		%      NEW TAI LUE THAM DIGIT ONE
-unicode_age(0x1A20, 0x1A5E, '5.2').		% [63] TAI THAM LETTER HIGH KA..TAI THAM CONSONANT SIGN SA
-unicode_age(0x1A60, 0x1A7C, '5.2').		% [29] TAI THAM SIGN SAKOT..TAI THAM SIGN KHUEN-LUE KARAN
-unicode_age(0x1A7F, 0x1A89, '5.2').		% [11] TAI THAM COMBINING CRYPTOGRAMMIC DOT..TAI THAM HORA DIGIT NINE
-unicode_age(0x1A90, 0x1A99, '5.2').		% [10] TAI THAM THAM DIGIT ZERO..TAI THAM THAM DIGIT NINE
-unicode_age(0x1AA0, 0x1AAD, '5.2').		% [14] TAI THAM SIGN WIANG..TAI THAM SIGN CAANG
-unicode_age(0x1CD0, 0x1CF2, '5.2').		% [35] VEDIC TONE KARSHANA..VEDIC SIGN ARDHAVISARGA
-unicode_age(0x1DFD, 0x1DFD, '5.2').		%      COMBINING ALMOST EQUAL TO BELOW
-unicode_age(0x20B6, 0x20B8, '5.2').		%  [3] LIVRE TOURNOIS SIGN..TENGE SIGN
-unicode_age(0x2150, 0x2152, '5.2').		%  [3] VULGAR FRACTION ONE SEVENTH..VULGAR FRACTION ONE TENTH
-unicode_age(0x2189, 0x2189, '5.2').		%      VULGAR FRACTION ZERO THIRDS
-unicode_age(0x23E8, 0x23E8, '5.2').		%      DECIMAL EXPONENT SYMBOL
-unicode_age(0x269E, 0x269F, '5.2').		%  [2] THREE LINES CONVERGING RIGHT..THREE LINES CONVERGING LEFT
-unicode_age(0x26BD, 0x26BF, '5.2').		%  [3] SOCCER BALL..SQUARED KEY
-unicode_age(0x26C4, 0x26CD, '5.2').		% [10] SNOWMAN WITHOUT SNOW..DISABLED CAR
-unicode_age(0x26CF, 0x26E1, '5.2').		% [19] PICK..RESTRICTED LEFT ENTRY-2
-unicode_age(0x26E3, 0x26E3, '5.2').		%      HEAVY CIRCLE WITH STROKE AND TWO DOTS ABOVE
-unicode_age(0x26E8, 0x26FF, '5.2').		% [24] BLACK CROSS ON SHIELD..WHITE FLAG WITH HORIZONTAL MIDDLE BLACK STRIPE
-unicode_age(0x2757, 0x2757, '5.2').		%      HEAVY EXCLAMATION MARK SYMBOL
-unicode_age(0x2B55, 0x2B59, '5.2').		%  [5] HEAVY LARGE CIRCLE..HEAVY CIRCLED SALTIRE
-unicode_age(0x2C70, 0x2C70, '5.2').		%      LATIN CAPITAL LETTER TURNED ALPHA
-unicode_age(0x2C7E, 0x2C7F, '5.2').		%  [2] LATIN CAPITAL LETTER S WITH SWASH TAIL..LATIN CAPITAL LETTER Z WITH SWASH TAIL
-unicode_age(0x2CEB, 0x2CF1, '5.2').		%  [7] COPTIC CAPITAL LETTER CRYPTOGRAMMIC SHEI..COPTIC COMBINING SPIRITUS LENIS
-unicode_age(0x2E31, 0x2E31, '5.2').		%      WORD SEPARATOR MIDDLE DOT
-unicode_age(0x3244, 0x324F, '5.2').		% [12] CIRCLED IDEOGRAPH QUESTION..CIRCLED NUMBER EIGHTY ON BLACK SQUARE
-unicode_age(0x9FC4, 0x9FCB, '5.2').		%  [8] CJK UNIFIED IDEOGRAPH-9FC4..CJK UNIFIED IDEOGRAPH-9FCB
-unicode_age(0xA4D0, 0xA4FF, '5.2').		% [48] LISU LETTER BA..LISU PUNCTUATION FULL STOP
-unicode_age(0xA6A0, 0xA6F7, '5.2').		% [88] BAMUM LETTER A..BAMUM QUESTION MARK
-unicode_age(0xA830, 0xA839, '5.2').		% [10] NORTH INDIC FRACTION ONE QUARTER..NORTH INDIC QUANTITY MARK
-unicode_age(0xA8E0, 0xA8FB, '5.2').		% [28] COMBINING DEVANAGARI DIGIT ZERO..DEVANAGARI HEADSTROKE
-unicode_age(0xA960, 0xA97C, '5.2').		% [29] HANGUL CHOSEONG TIKEUT-MIEUM..HANGUL CHOSEONG SSANGYEORINHIEUH
-unicode_age(0xA980, 0xA9CD, '5.2').		% [78] JAVANESE SIGN PANYANGGA..JAVANESE TURNED PADA PISELEH
-unicode_age(0xA9CF, 0xA9D9, '5.2').		% [11] JAVANESE PANGRANGKEP..JAVANESE DIGIT NINE
-unicode_age(0xA9DE, 0xA9DF, '5.2').		%  [2] JAVANESE PADA TIRTA TUMETES..JAVANESE PADA ISEN-ISEN
-unicode_age(0xAA60, 0xAA7B, '5.2').		% [28] MYANMAR LETTER KHAMTI GA..MYANMAR SIGN PAO KAREN TONE
-unicode_age(0xAA80, 0xAAC2, '5.2').		% [67] TAI VIET LETTER LOW KO..TAI VIET TONE MAI SONG
-unicode_age(0xAADB, 0xAADF, '5.2').		%  [5] TAI VIET SYMBOL KON..TAI VIET SYMBOL KOI KOI
-unicode_age(0xABC0, 0xABED, '5.2').		% [46] MEETEI MAYEK LETTER KOK..MEETEI MAYEK APUN IYEK
-unicode_age(0xABF0, 0xABF9, '5.2').		% [10] MEETEI MAYEK DIGIT ZERO..MEETEI MAYEK DIGIT NINE
-unicode_age(0xD7B0, 0xD7C6, '5.2').		% [23] HANGUL JUNGSEONG O-YEO..HANGUL JUNGSEONG ARAEA-E
-unicode_age(0xD7CB, 0xD7FB, '5.2').		% [49] HANGUL JONGSEONG NIEUN-RIEUL..HANGUL JONGSEONG PHIEUPH-THIEUTH
-unicode_age(0xFA6B, 0xFA6D, '5.2').		%  [3] CJK COMPATIBILITY IDEOGRAPH-FA6B..CJK COMPATIBILITY IDEOGRAPH-FA6D
-unicode_age(0x10840, 0x10855, '5.2').	% [22] IMPERIAL ARAMAIC LETTER ALEPH..IMPERIAL ARAMAIC LETTER TAW
-unicode_age(0x10857, 0x1085F, '5.2').	%  [9] IMPERIAL ARAMAIC SECTION SIGN..IMPERIAL ARAMAIC NUMBER TEN THOUSAND
-unicode_age(0x1091A, 0x1091B, '5.2').	%  [2] PHOENICIAN NUMBER TWO..PHOENICIAN NUMBER THREE
-unicode_age(0x10A60, 0x10A7F, '5.2').	% [32] OLD SOUTH ARABIAN LETTER HE..OLD SOUTH ARABIAN NUMERIC INDICATOR
-unicode_age(0x10B00, 0x10B35, '5.2').	% [54] AVESTAN LETTER A..AVESTAN LETTER HE
-unicode_age(0x10B39, 0x10B55, '5.2').	% [29] AVESTAN ABBREVIATION MARK..INSCRIPTIONAL PARTHIAN LETTER TAW
-unicode_age(0x10B58, 0x10B72, '5.2').	% [27] INSCRIPTIONAL PARTHIAN NUMBER ONE..INSCRIPTIONAL PAHLAVI LETTER TAW
-unicode_age(0x10B78, 0x10B7F, '5.2').	%  [8] INSCRIPTIONAL PAHLAVI NUMBER ONE..INSCRIPTIONAL PAHLAVI NUMBER ONE THOUSAND
-unicode_age(0x10C00, 0x10C48, '5.2').	% [73] OLD TURKIC LETTER ORKHON A..OLD TURKIC LETTER ORKHON BASH
-unicode_age(0x10E60, 0x10E7E, '5.2').	% [31] RUMI DIGIT ONE..RUMI FRACTION TWO THIRDS
-unicode_age(0x11080, 0x110BC, '5.2').	% [61] KAITHI SIGN CANDRABINDU..KAITHI ENUMERATION SIGN
-unicode_age(0x110BD, 0x110BD, '5.2').	%      KAITHI NUMBER SIGN
-unicode_age(0x110BE, 0x110C1, '5.2').	%  [4] KAITHI SECTION MARK..KAITHI DOUBLE DANDA
-unicode_age(0x13000, 0x1342E, '5.2').	% [1071] EGYPTIAN HIEROGLYPH A001..EGYPTIAN HIEROGLYPH AA032
-unicode_age(0x1F100, 0x1F10A, '5.2').	% [11] DIGIT ZERO FULL STOP..DIGIT NINE COMMA
-unicode_age(0x1F110, 0x1F12E, '5.2').	% [31] PARENTHESIZED LATIN CAPITAL LETTER A..CIRCLED WZ
-unicode_age(0x1F131, 0x1F131, '5.2').	%      SQUARED LATIN CAPITAL LETTER B
-unicode_age(0x1F13D, 0x1F13D, '5.2').	%      SQUARED LATIN CAPITAL LETTER N
-unicode_age(0x1F13F, 0x1F13F, '5.2').	%      SQUARED LATIN CAPITAL LETTER P
-unicode_age(0x1F142, 0x1F142, '5.2').	%      SQUARED LATIN CAPITAL LETTER S
-unicode_age(0x1F146, 0x1F146, '5.2').	%      SQUARED LATIN CAPITAL LETTER W
-unicode_age(0x1F14A, 0x1F14E, '5.2').	%  [5] SQUARED HV..SQUARED PPV
-unicode_age(0x1F157, 0x1F157, '5.2').	%      NEGATIVE CIRCLED LATIN CAPITAL LETTER H
-unicode_age(0x1F15F, 0x1F15F, '5.2').	%      NEGATIVE CIRCLED LATIN CAPITAL LETTER P
-unicode_age(0x1F179, 0x1F179, '5.2').	%      NEGATIVE SQUARED LATIN CAPITAL LETTER J
-unicode_age(0x1F17B, 0x1F17C, '5.2').	%  [2] NEGATIVE SQUARED LATIN CAPITAL LETTER L..NEGATIVE SQUARED LATIN CAPITAL LETTER M
-unicode_age(0x1F17F, 0x1F17F, '5.2').	%      NEGATIVE SQUARED LATIN CAPITAL LETTER P
-unicode_age(0x1F18A, 0x1F18D, '5.2').	%  [4] CROSSED NEGATIVE SQUARED LATIN CAPITAL LETTER P..NEGATIVE SQUARED SA
-unicode_age(0x1F190, 0x1F190, '5.2').	%      SQUARE DJ
-unicode_age(0x1F200, 0x1F200, '5.2').	%      SQUARE HIRAGANA HOKA
-unicode_age(0x1F210, 0x1F231, '5.2').	% [34] SQUARED CJK UNIFIED IDEOGRAPH-624B..SQUARED CJK UNIFIED IDEOGRAPH-6253
-unicode_age(0x1F240, 0x1F248, '5.2').	%  [9] TORTOISE SHELL BRACKETED CJK UNIFIED IDEOGRAPH-672C..TORTOISE SHELL BRACKETED CJK UNIFIED IDEOGRAPH-6557
-unicode_age(0x2A700, 0x2B734, '5.2').	% [4149] CJK UNIFIED IDEOGRAPH-2A700..CJK UNIFIED IDEOGRAPH-2B734
-
-% Total code points: 6648
-
-% ================================================
-
-% Age=V6_0
-
-% Newly assigned in Unicode 6.0.0 (October, 2010)
-
-unicode_age(0x0526, 0x0527, '6.0').		%  [2] CYRILLIC CAPITAL LETTER SHHA WITH DESCENDER..CYRILLIC SMALL LETTER SHHA WITH DESCENDER
-unicode_age(0x0620, 0x0620, '6.0').		%      ARABIC LETTER KASHMIRI YEH
-unicode_age(0x065F, 0x065F, '6.0').		%      ARABIC WAVY HAMZA BELOW
-unicode_age(0x0840, 0x085B, '6.0').		% [28] MANDAIC LETTER HALQA..MANDAIC GEMINATION MARK
-unicode_age(0x085E, 0x085E, '6.0').		%      MANDAIC PUNCTUATION
-unicode_age(0x093A, 0x093B, '6.0').		%  [2] DEVANAGARI VOWEL SIGN OE..DEVANAGARI VOWEL SIGN OOE
-unicode_age(0x094F, 0x094F, '6.0').		%      DEVANAGARI VOWEL SIGN AW
-unicode_age(0x0956, 0x0957, '6.0').		%  [2] DEVANAGARI VOWEL SIGN UE..DEVANAGARI VOWEL SIGN UUE
-unicode_age(0x0973, 0x0977, '6.0').		%  [5] DEVANAGARI LETTER OE..DEVANAGARI LETTER UUE
-unicode_age(0x0B72, 0x0B77, '6.0').		%  [6] ORIYA FRACTION ONE QUARTER..ORIYA FRACTION THREE SIXTEENTHS
-unicode_age(0x0D29, 0x0D29, '6.0').		%      MALAYALAM LETTER NNNA
-unicode_age(0x0D3A, 0x0D3A, '6.0').		%      MALAYALAM LETTER TTTA
-unicode_age(0x0D4E, 0x0D4E, '6.0').		%      MALAYALAM LETTER DOT REPH
-unicode_age(0x0F8C, 0x0F8F, '6.0').		%  [4] TIBETAN SIGN INVERTED MCHU CAN..TIBETAN SUBJOINED SIGN INVERTED MCHU CAN
-unicode_age(0x0FD9, 0x0FDA, '6.0').		%  [2] TIBETAN MARK LEADING MCHAN RTAGS..TIBETAN MARK TRAILING MCHAN RTAGS
-unicode_age(0x135D, 0x135E, '6.0').		%  [2] ETHIOPIC COMBINING GEMINATION AND VOWEL LENGTH MARK..ETHIOPIC COMBINING VOWEL LENGTH MARK
-unicode_age(0x1BC0, 0x1BF3, '6.0').		% [52] BATAK LETTER A..BATAK PANONGONAN
-unicode_age(0x1BFC, 0x1BFF, '6.0').		%  [4] BATAK SYMBOL BINDU NA METEK..BATAK SYMBOL BINDU PANGOLAT
-unicode_age(0x1DFC, 0x1DFC, '6.0').		%      COMBINING DOUBLE INVERTED BREVE BELOW
-unicode_age(0x2095, 0x209C, '6.0').		%  [8] LATIN SUBSCRIPT SMALL LETTER H..LATIN SUBSCRIPT SMALL LETTER T
-unicode_age(0x20B9, 0x20B9, '6.0').		%      INDIAN RUPEE SIGN
-unicode_age(0x23E9, 0x23F3, '6.0').		% [11] BLACK RIGHT-POINTING DOUBLE TRIANGLE..HOURGLASS WITH FLOWING SAND
-unicode_age(0x26CE, 0x26CE, '6.0').		%      OPHIUCHUS
-unicode_age(0x26E2, 0x26E2, '6.0').		%      ASTRONOMICAL SYMBOL FOR URANUS
-unicode_age(0x26E4, 0x26E7, '6.0').		%  [4] PENTAGRAM..INVERTED PENTAGRAM
-unicode_age(0x2705, 0x2705, '6.0').		%      WHITE HEAVY CHECK MARK
-unicode_age(0x270A, 0x270B, '6.0').		%  [2] RAISED FIST..RAISED HAND
-unicode_age(0x2728, 0x2728, '6.0').		%      SPARKLES
-unicode_age(0x274C, 0x274C, '6.0').		%      CROSS MARK
-unicode_age(0x274E, 0x274E, '6.0').		%      NEGATIVE SQUARED CROSS MARK
-unicode_age(0x2753, 0x2755, '6.0').		%  [3] BLACK QUESTION MARK ORNAMENT..WHITE EXCLAMATION MARK ORNAMENT
-unicode_age(0x275F, 0x2760, '6.0').		%  [2] HEAVY LOW SINGLE COMMA QUOTATION MARK ORNAMENT..HEAVY LOW DOUBLE COMMA QUOTATION MARK ORNAMENT
-unicode_age(0x2795, 0x2797, '6.0').		%  [3] HEAVY PLUS SIGN..HEAVY DIVISION SIGN
-unicode_age(0x27B0, 0x27B0, '6.0').		%      CURLY LOOP
-unicode_age(0x27BF, 0x27BF, '6.0').		%      DOUBLE CURLY LOOP
-unicode_age(0x27CE, 0x27CF, '6.0').		%  [2] SQUARED LOGICAL AND..SQUARED LOGICAL OR
-unicode_age(0x2D70, 0x2D70, '6.0').		%      TIFINAGH SEPARATOR MARK
-unicode_age(0x2D7F, 0x2D7F, '6.0').		%      TIFINAGH CONSONANT JOINER
-unicode_age(0x31B8, 0x31BA, '6.0').		%  [3] BOPOMOFO LETTER GH..BOPOMOFO LETTER ZY
-unicode_age(0xA660, 0xA661, '6.0').		%  [2] CYRILLIC CAPITAL LETTER REVERSED TSE..CYRILLIC SMALL LETTER REVERSED TSE
-unicode_age(0xA78D, 0xA78E, '6.0').		%  [2] LATIN CAPITAL LETTER TURNED H..LATIN SMALL LETTER L WITH RETROFLEX HOOK AND BELT
-unicode_age(0xA790, 0xA791, '6.0').		%  [2] LATIN CAPITAL LETTER N WITH DESCENDER..LATIN SMALL LETTER N WITH DESCENDER
-unicode_age(0xA7A0, 0xA7A9, '6.0').		% [10] LATIN CAPITAL LETTER G WITH OBLIQUE STROKE..LATIN SMALL LETTER S WITH OBLIQUE STROKE
-unicode_age(0xA7FA, 0xA7FA, '6.0').		%      LATIN LETTER SMALL CAPITAL TURNED M
-unicode_age(0xAB01, 0xAB06, '6.0').		%  [6] ETHIOPIC SYLLABLE TTHU..ETHIOPIC SYLLABLE TTHO
-unicode_age(0xAB09, 0xAB0E, '6.0').		%  [6] ETHIOPIC SYLLABLE DDHU..ETHIOPIC SYLLABLE DDHO
-unicode_age(0xAB11, 0xAB16, '6.0').		%  [6] ETHIOPIC SYLLABLE DZU..ETHIOPIC SYLLABLE DZO
-unicode_age(0xAB20, 0xAB26, '6.0').		%  [7] ETHIOPIC SYLLABLE CCHHA..ETHIOPIC SYLLABLE CCHHO
-unicode_age(0xAB28, 0xAB2E, '6.0').		%  [7] ETHIOPIC SYLLABLE BBA..ETHIOPIC SYLLABLE BBO
-unicode_age(0xFBB2, 0xFBC1, '6.0').		% [16] ARABIC SYMBOL DOT ABOVE..ARABIC SYMBOL SMALL TAH BELOW
-unicode_age(0x11000, 0x1104D, '6.0').	% [78] BRAHMI SIGN CANDRABINDU..BRAHMI PUNCTUATION LOTUS
-unicode_age(0x11052, 0x1106F, '6.0').	% [30] BRAHMI NUMBER ONE..BRAHMI DIGIT NINE
-unicode_age(0x16800, 0x16A38, '6.0').	% [569] BAMUM LETTER PHASE-A NGKUE MFON..BAMUM LETTER PHASE-F VUEQ
-unicode_age(0x1B000, 0x1B001, '6.0').	%  [2] KATAKANA LETTER ARCHAIC E..HIRAGANA LETTER ARCHAIC YE
-unicode_age(0x1F0A0, 0x1F0AE, '6.0').	% [15] PLAYING CARD BACK..PLAYING CARD KING OF SPADES
-unicode_age(0x1F0B1, 0x1F0BE, '6.0').	% [14] PLAYING CARD ACE OF HEARTS..PLAYING CARD KING OF HEARTS
-unicode_age(0x1F0C1, 0x1F0CF, '6.0').	% [15] PLAYING CARD ACE OF DIAMONDS..PLAYING CARD BLACK JOKER
-unicode_age(0x1F0D1, 0x1F0DF, '6.0').	% [15] PLAYING CARD ACE OF CLUBS..PLAYING CARD WHITE JOKER
-unicode_age(0x1F130, 0x1F130, '6.0').	%      SQUARED LATIN CAPITAL LETTER A
-unicode_age(0x1F132, 0x1F13C, '6.0').	% [11] SQUARED LATIN CAPITAL LETTER C..SQUARED LATIN CAPITAL LETTER M
-unicode_age(0x1F13E, 0x1F13E, '6.0').	%      SQUARED LATIN CAPITAL LETTER O
-unicode_age(0x1F140, 0x1F141, '6.0').	%  [2] SQUARED LATIN CAPITAL LETTER Q..SQUARED LATIN CAPITAL LETTER R
-unicode_age(0x1F143, 0x1F145, '6.0').	%  [3] SQUARED LATIN CAPITAL LETTER T..SQUARED LATIN CAPITAL LETTER V
-unicode_age(0x1F147, 0x1F149, '6.0').	%  [3] SQUARED LATIN CAPITAL LETTER X..SQUARED LATIN CAPITAL LETTER Z
-unicode_age(0x1F14F, 0x1F156, '6.0').	%  [8] SQUARED WC..NEGATIVE CIRCLED LATIN CAPITAL LETTER G
-unicode_age(0x1F158, 0x1F15E, '6.0').	%  [7] NEGATIVE CIRCLED LATIN CAPITAL LETTER I..NEGATIVE CIRCLED LATIN CAPITAL LETTER O
-unicode_age(0x1F160, 0x1F169, '6.0').	% [10] NEGATIVE CIRCLED LATIN CAPITAL LETTER Q..NEGATIVE CIRCLED LATIN CAPITAL LETTER Z
-unicode_age(0x1F170, 0x1F178, '6.0').	%  [9] NEGATIVE SQUARED LATIN CAPITAL LETTER A..NEGATIVE SQUARED LATIN CAPITAL LETTER I
-unicode_age(0x1F17A, 0x1F17A, '6.0').	%      NEGATIVE SQUARED LATIN CAPITAL LETTER K
-unicode_age(0x1F17D, 0x1F17E, '6.0').	%  [2] NEGATIVE SQUARED LATIN CAPITAL LETTER N..NEGATIVE SQUARED LATIN CAPITAL LETTER O
-unicode_age(0x1F180, 0x1F189, '6.0').	% [10] NEGATIVE SQUARED LATIN CAPITAL LETTER Q..NEGATIVE SQUARED LATIN CAPITAL LETTER Z
-unicode_age(0x1F18E, 0x1F18F, '6.0').	%  [2] NEGATIVE SQUARED AB..NEGATIVE SQUARED WC
-unicode_age(0x1F191, 0x1F19A, '6.0').	% [10] SQUARED CL..SQUARED VS
-unicode_age(0x1F1E6, 0x1F1FF, '6.0').	% [26] REGIONAL INDICATOR SYMBOL LETTER A..REGIONAL INDICATOR SYMBOL LETTER Z
-unicode_age(0x1F201, 0x1F202, '6.0').	%  [2] SQUARED KATAKANA KOKO..SQUARED KATAKANA SA
-unicode_age(0x1F232, 0x1F23A, '6.0').	%  [9] SQUARED CJK UNIFIED IDEOGRAPH-7981..SQUARED CJK UNIFIED IDEOGRAPH-55B6
-unicode_age(0x1F250, 0x1F251, '6.0').	%  [2] CIRCLED IDEOGRAPH ADVANTAGE..CIRCLED IDEOGRAPH ACCEPT
-unicode_age(0x1F300, 0x1F320, '6.0').	% [33] CYCLONE..SHOOTING STAR
-unicode_age(0x1F330, 0x1F335, '6.0').	%  [6] CHESTNUT..CACTUS
-unicode_age(0x1F337, 0x1F37C, '6.0').	% [70] TULIP..BABY BOTTLE
-unicode_age(0x1F380, 0x1F393, '6.0').	% [20] RIBBON..GRADUATION CAP
-unicode_age(0x1F3A0, 0x1F3C4, '6.0').	% [37] CAROUSEL HORSE..SURFER
-unicode_age(0x1F3C6, 0x1F3CA, '6.0').	%  [5] TROPHY..SWIMMER
-unicode_age(0x1F3E0, 0x1F3F0, '6.0').	% [17] HOUSE BUILDING..EUROPEAN CASTLE
-unicode_age(0x1F400, 0x1F43E, '6.0').	% [63] RAT..PAW PRINTS
-unicode_age(0x1F440, 0x1F440, '6.0').	%      EYES
-unicode_age(0x1F442, 0x1F4F7, '6.0').	% [182] EAR..CAMERA
-unicode_age(0x1F4F9, 0x1F4FC, '6.0').	%  [4] VIDEO CAMERA..VIDEOCASSETTE
-unicode_age(0x1F500, 0x1F53D, '6.0').	% [62] TWISTED RIGHTWARDS ARROWS..DOWN-POINTING SMALL RED TRIANGLE
-unicode_age(0x1F550, 0x1F567, '6.0').	% [24] CLOCK FACE ONE OCLOCK..CLOCK FACE TWELVE-THIRTY
-unicode_age(0x1F5FB, 0x1F5FF, '6.0').	%  [5] MOUNT FUJI..MOYAI
-unicode_age(0x1F601, 0x1F610, '6.0').	% [16] GRINNING FACE WITH SMILING EYES..NEUTRAL FACE
-unicode_age(0x1F612, 0x1F614, '6.0').	%  [3] UNAMUSED FACE..PENSIVE FACE
-unicode_age(0x1F616, 0x1F616, '6.0').	%      CONFOUNDED FACE
-unicode_age(0x1F618, 0x1F618, '6.0').	%      FACE THROWING A KISS
-unicode_age(0x1F61A, 0x1F61A, '6.0').	%      KISSING FACE WITH CLOSED EYES
-unicode_age(0x1F61C, 0x1F61E, '6.0').	%  [3] FACE WITH STUCK-OUT TONGUE AND WINKING EYE..DISAPPOINTED FACE
-unicode_age(0x1F620, 0x1F625, '6.0').	%  [6] ANGRY FACE..DISAPPOINTED BUT RELIEVED FACE
-unicode_age(0x1F628, 0x1F62B, '6.0').	%  [4] FEARFUL FACE..TIRED FACE
-unicode_age(0x1F62D, 0x1F62D, '6.0').	%      LOUDLY CRYING FACE
-unicode_age(0x1F630, 0x1F633, '6.0').	%  [4] FACE WITH OPEN MOUTH AND COLD SWEAT..FLUSHED FACE
-unicode_age(0x1F635, 0x1F640, '6.0').	% [12] DIZZY FACE..WEARY CAT FACE
-unicode_age(0x1F645, 0x1F64F, '6.0').	% [11] FACE WITH NO GOOD GESTURE..PERSON WITH FOLDED HANDS
-unicode_age(0x1F680, 0x1F6C5, '6.0').	% [70] ROCKET..LEFT LUGGAGE
-unicode_age(0x1F700, 0x1F773, '6.0').	% [116] ALCHEMICAL SYMBOL FOR QUINTESSENCE..ALCHEMICAL SYMBOL FOR HALF OUNCE
-unicode_age(0x2B740, 0x2B81D, '6.0').	% [222] CJK UNIFIED IDEOGRAPH-2B740..CJK UNIFIED IDEOGRAPH-2B81D
-
-% Total code points: 2088
-
-% ================================================
-
-% Age=V6_1
-
-% Newly assigned in Unicode 6.1.0 (January, 2012)
-
-unicode_age(0x058F, 0x058F, '6.1').		%      ARMENIAN DRAM SIGN
-unicode_age(0x0604, 0x0604, '6.1').		%      ARABIC SIGN SAMVAT
-unicode_age(0x08A0, 0x08A0, '6.1').		%      ARABIC LETTER BEH WITH SMALL V BELOW
-unicode_age(0x08A2, 0x08AC, '6.1').		% [11] ARABIC LETTER JEEM WITH TWO DOTS ABOVE..ARABIC LETTER ROHINGYA YEH
-unicode_age(0x08E4, 0x08FE, '6.1').		% [27] ARABIC CURLY FATHA..ARABIC DAMMA WITH DOT
-unicode_age(0x0AF0, 0x0AF0, '6.1').		%      GUJARATI ABBREVIATION SIGN
-unicode_age(0x0EDE, 0x0EDF, '6.1').		%  [2] LAO LETTER KHMU GO..LAO LETTER KHMU NYO
-unicode_age(0x10C7, 0x10C7, '6.1').		%      GEORGIAN CAPITAL LETTER YN
-unicode_age(0x10CD, 0x10CD, '6.1').		%      GEORGIAN CAPITAL LETTER AEN
-unicode_age(0x10FD, 0x10FF, '6.1').		%  [3] GEORGIAN LETTER AEN..GEORGIAN LETTER LABIAL SIGN
-unicode_age(0x1BAB, 0x1BAD, '6.1').		%  [3] SUNDANESE SIGN VIRAMA..SUNDANESE CONSONANT SIGN PASANGAN WA
-unicode_age(0x1BBA, 0x1BBF, '6.1').		%  [6] SUNDANESE AVAGRAHA..SUNDANESE LETTER FINAL M
-unicode_age(0x1CC0, 0x1CC7, '6.1').		%  [8] SUNDANESE PUNCTUATION BINDU SURYA..SUNDANESE PUNCTUATION BINDU BA SATANGA
-unicode_age(0x1CF3, 0x1CF6, '6.1').		%  [4] VEDIC SIGN ROTATED ARDHAVISARGA..VEDIC SIGN UPADHMANIYA
-unicode_age(0x27CB, 0x27CB, '6.1').		%      MATHEMATICAL RISING DIAGONAL
-unicode_age(0x27CD, 0x27CD, '6.1').		%      MATHEMATICAL FALLING DIAGONAL
-unicode_age(0x2CF2, 0x2CF3, '6.1').		%  [2] COPTIC CAPITAL LETTER BOHAIRIC KHEI..COPTIC SMALL LETTER BOHAIRIC KHEI
-unicode_age(0x2D27, 0x2D27, '6.1').		%      GEORGIAN SMALL LETTER YN
-unicode_age(0x2D2D, 0x2D2D, '6.1').		%      GEORGIAN SMALL LETTER AEN
-unicode_age(0x2D66, 0x2D67, '6.1').		%  [2] TIFINAGH LETTER YE..TIFINAGH LETTER YO
-unicode_age(0x2E32, 0x2E3B, '6.1').		% [10] TURNED COMMA..THREE-EM DASH
-unicode_age(0x9FCC, 0x9FCC, '6.1').		%      CJK UNIFIED IDEOGRAPH-9FCC
-unicode_age(0xA674, 0xA67B, '6.1').		%  [8] COMBINING CYRILLIC LETTER UKRAINIAN IE..COMBINING CYRILLIC LETTER OMEGA
-unicode_age(0xA69F, 0xA69F, '6.1').		%      COMBINING CYRILLIC LETTER IOTIFIED E
-unicode_age(0xA792, 0xA793, '6.1').		%  [2] LATIN CAPITAL LETTER C WITH BAR..LATIN SMALL LETTER C WITH BAR
-unicode_age(0xA7AA, 0xA7AA, '6.1').		%      LATIN CAPITAL LETTER H WITH HOOK
-unicode_age(0xA7F8, 0xA7F9, '6.1').		%  [2] MODIFIER LETTER CAPITAL H WITH STROKE..MODIFIER LETTER SMALL LIGATURE OE
-unicode_age(0xAAE0, 0xAAF6, '6.1').		% [23] MEETEI MAYEK LETTER E..MEETEI MAYEK VIRAMA
-unicode_age(0xFA2E, 0xFA2F, '6.1').		%  [2] CJK COMPATIBILITY IDEOGRAPH-FA2E..CJK COMPATIBILITY IDEOGRAPH-FA2F
-unicode_age(0x10980, 0x109B7, '6.1').	% [56] MEROITIC HIEROGLYPHIC LETTER A..MEROITIC CURSIVE LETTER DA
-unicode_age(0x109BE, 0x109BF, '6.1').	%  [2] MEROITIC CURSIVE LOGOGRAM RMT..MEROITIC CURSIVE LOGOGRAM IMN
-unicode_age(0x110D0, 0x110E8, '6.1').	% [25] SORA SOMPENG LETTER SAH..SORA SOMPENG LETTER MAE
-unicode_age(0x110F0, 0x110F9, '6.1').	% [10] SORA SOMPENG DIGIT ZERO..SORA SOMPENG DIGIT NINE
-unicode_age(0x11100, 0x11134, '6.1').	% [53] CHAKMA SIGN CANDRABINDU..CHAKMA MAAYYAA
-unicode_age(0x11136, 0x11143, '6.1').	% [14] CHAKMA DIGIT ZERO..CHAKMA QUESTION MARK
-unicode_age(0x11180, 0x111C8, '6.1').	% [73] SHARADA SIGN CANDRABINDU..SHARADA SEPARATOR
-unicode_age(0x111D0, 0x111D9, '6.1').	% [10] SHARADA DIGIT ZERO..SHARADA DIGIT NINE
-unicode_age(0x11680, 0x116B7, '6.1').	% [56] TAKRI LETTER A..TAKRI SIGN NUKTA
-unicode_age(0x116C0, 0x116C9, '6.1').	% [10] TAKRI DIGIT ZERO..TAKRI DIGIT NINE
-unicode_age(0x16F00, 0x16F44, '6.1').	% [69] MIAO LETTER PA..MIAO LETTER HHA
-unicode_age(0x16F50, 0x16F7E, '6.1').	% [47] MIAO LETTER NASALIZATION..MIAO VOWEL SIGN NG
-unicode_age(0x16F8F, 0x16F9F, '6.1').	% [17] MIAO TONE RIGHT..MIAO LETTER REFORMED TONE-8
-unicode_age(0x1EE00, 0x1EE03, '6.1').	%  [4] ARABIC MATHEMATICAL ALEF..ARABIC MATHEMATICAL DAL
-unicode_age(0x1EE05, 0x1EE1F, '6.1').	% [27] ARABIC MATHEMATICAL WAW..ARABIC MATHEMATICAL DOTLESS QAF
-unicode_age(0x1EE21, 0x1EE22, '6.1').	%  [2] ARABIC MATHEMATICAL INITIAL BEH..ARABIC MATHEMATICAL INITIAL JEEM
-unicode_age(0x1EE24, 0x1EE24, '6.1').	%      ARABIC MATHEMATICAL INITIAL HEH
-unicode_age(0x1EE27, 0x1EE27, '6.1').	%      ARABIC MATHEMATICAL INITIAL HAH
-unicode_age(0x1EE29, 0x1EE32, '6.1').	% [10] ARABIC MATHEMATICAL INITIAL YEH..ARABIC MATHEMATICAL INITIAL QAF
-unicode_age(0x1EE34, 0x1EE37, '6.1').	%  [4] ARABIC MATHEMATICAL INITIAL SHEEN..ARABIC MATHEMATICAL INITIAL KHAH
-unicode_age(0x1EE39, 0x1EE39, '6.1').	%      ARABIC MATHEMATICAL INITIAL DAD
-unicode_age(0x1EE3B, 0x1EE3B, '6.1').	%      ARABIC MATHEMATICAL INITIAL GHAIN
-unicode_age(0x1EE42, 0x1EE42, '6.1').	%      ARABIC MATHEMATICAL TAILED JEEM
-unicode_age(0x1EE47, 0x1EE47, '6.1').	%      ARABIC MATHEMATICAL TAILED HAH
-unicode_age(0x1EE49, 0x1EE49, '6.1').	%      ARABIC MATHEMATICAL TAILED YEH
-unicode_age(0x1EE4B, 0x1EE4B, '6.1').	%      ARABIC MATHEMATICAL TAILED LAM
-unicode_age(0x1EE4D, 0x1EE4F, '6.1').	%  [3] ARABIC MATHEMATICAL TAILED NOON..ARABIC MATHEMATICAL TAILED AIN
-unicode_age(0x1EE51, 0x1EE52, '6.1').	%  [2] ARABIC MATHEMATICAL TAILED SAD..ARABIC MATHEMATICAL TAILED QAF
-unicode_age(0x1EE54, 0x1EE54, '6.1').	%      ARABIC MATHEMATICAL TAILED SHEEN
-unicode_age(0x1EE57, 0x1EE57, '6.1').	%      ARABIC MATHEMATICAL TAILED KHAH
-unicode_age(0x1EE59, 0x1EE59, '6.1').	%      ARABIC MATHEMATICAL TAILED DAD
-unicode_age(0x1EE5B, 0x1EE5B, '6.1').	%      ARABIC MATHEMATICAL TAILED GHAIN
-unicode_age(0x1EE5D, 0x1EE5D, '6.1').	%      ARABIC MATHEMATICAL TAILED DOTLESS NOON
-unicode_age(0x1EE5F, 0x1EE5F, '6.1').	%      ARABIC MATHEMATICAL TAILED DOTLESS QAF
-unicode_age(0x1EE61, 0x1EE62, '6.1').	%  [2] ARABIC MATHEMATICAL STRETCHED BEH..ARABIC MATHEMATICAL STRETCHED JEEM
-unicode_age(0x1EE64, 0x1EE64, '6.1').	%      ARABIC MATHEMATICAL STRETCHED HEH
-unicode_age(0x1EE67, 0x1EE6A, '6.1').	%  [4] ARABIC MATHEMATICAL STRETCHED HAH..ARABIC MATHEMATICAL STRETCHED KAF
-unicode_age(0x1EE6C, 0x1EE72, '6.1').	%  [7] ARABIC MATHEMATICAL STRETCHED MEEM..ARABIC MATHEMATICAL STRETCHED QAF
-unicode_age(0x1EE74, 0x1EE77, '6.1').	%  [4] ARABIC MATHEMATICAL STRETCHED SHEEN..ARABIC MATHEMATICAL STRETCHED KHAH
-unicode_age(0x1EE79, 0x1EE7C, '6.1').	%  [4] ARABIC MATHEMATICAL STRETCHED DAD..ARABIC MATHEMATICAL STRETCHED DOTLESS BEH
-unicode_age(0x1EE7E, 0x1EE7E, '6.1').	%      ARABIC MATHEMATICAL STRETCHED DOTLESS FEH
-unicode_age(0x1EE80, 0x1EE89, '6.1').	% [10] ARABIC MATHEMATICAL LOOPED ALEF..ARABIC MATHEMATICAL LOOPED YEH
-unicode_age(0x1EE8B, 0x1EE9B, '6.1').	% [17] ARABIC MATHEMATICAL LOOPED LAM..ARABIC MATHEMATICAL LOOPED GHAIN
-unicode_age(0x1EEA1, 0x1EEA3, '6.1').	%  [3] ARABIC MATHEMATICAL DOUBLE-STRUCK BEH..ARABIC MATHEMATICAL DOUBLE-STRUCK DAL
-unicode_age(0x1EEA5, 0x1EEA9, '6.1').	%  [5] ARABIC MATHEMATICAL DOUBLE-STRUCK WAW..ARABIC MATHEMATICAL DOUBLE-STRUCK YEH
-unicode_age(0x1EEAB, 0x1EEBB, '6.1').	% [17] ARABIC MATHEMATICAL DOUBLE-STRUCK LAM..ARABIC MATHEMATICAL DOUBLE-STRUCK GHAIN
-unicode_age(0x1EEF0, 0x1EEF1, '6.1').	%  [2] ARABIC MATHEMATICAL OPERATOR MEEM WITH HAH WITH TATWEEL..ARABIC MATHEMATICAL OPERATOR HAH WITH DAL
-unicode_age(0x1F16A, 0x1F16B, '6.1').	%  [2] RAISED MC SIGN..RAISED MD SIGN
-unicode_age(0x1F540, 0x1F543, '6.1').	%  [4] CIRCLED CROSS POMMEE..NOTCHED LEFT SEMICIRCLE WITH THREE DOTS
-unicode_age(0x1F600, 0x1F600, '6.1').	%      GRINNING FACE
-unicode_age(0x1F611, 0x1F611, '6.1').	%      EXPRESSIONLESS FACE
-unicode_age(0x1F615, 0x1F615, '6.1').	%      CONFUSED FACE
-unicode_age(0x1F617, 0x1F617, '6.1').	%      KISSING FACE
-unicode_age(0x1F619, 0x1F619, '6.1').	%      KISSING FACE WITH SMILING EYES
-unicode_age(0x1F61B, 0x1F61B, '6.1').	%      FACE WITH STUCK-OUT TONGUE
-unicode_age(0x1F61F, 0x1F61F, '6.1').	%      WORRIED FACE
-unicode_age(0x1F626, 0x1F627, '6.1').	%  [2] FROWNING FACE WITH OPEN MOUTH..ANGUISHED FACE
-unicode_age(0x1F62C, 0x1F62C, '6.1').	%      GRIMACING FACE
-unicode_age(0x1F62E, 0x1F62F, '6.1').	%  [2] FACE WITH OPEN MOUTH..HUSHED FACE
-unicode_age(0x1F634, 0x1F634, '6.1').	%      SLEEPING FACE
-
-% Total code points: 732
-
-% ================================================
-
-% Age=V6_2
-
-% Newly assigned in Unicode 6.2.0 (September, 2012)
-
-unicode_age(0x20BA, 0x20BA, '6.2').		%      TURKISH LIRA SIGN
-
-% Total code points: 1
-
-% EOF
+unicode_age(0, 31, '1.1').
+unicode_age(32, 126, '1.1').
+unicode_age(127, 159, '1.1').
+unicode_age(160, 172, '1.1').
+unicode_age(173, 173, '1.1').
+unicode_age(174, 501, '1.1').
+unicode_age(506, 535, '1.1').
+unicode_age(592, 680, '1.1').
+unicode_age(688, 734, '1.1').
+unicode_age(736, 745, '1.1').
+unicode_age(768, 837, '1.1').
+unicode_age(864, 865, '1.1').
+unicode_age(884, 885, '1.1').
+unicode_age(890, 890, '1.1').
+unicode_age(894, 894, '1.1').
+unicode_age(900, 906, '1.1').
+unicode_age(908, 908, '1.1').
+unicode_age(910, 929, '1.1').
+unicode_age(931, 974, '1.1').
+unicode_age(976, 982, '1.1').
+unicode_age(986, 986, '1.1').
+unicode_age(988, 988, '1.1').
+unicode_age(990, 990, '1.1').
+unicode_age(992, 992, '1.1').
+unicode_age(994, 1011, '1.1').
+unicode_age(1025, 1036, '1.1').
+unicode_age(1038, 1103, '1.1').
+unicode_age(1105, 1116, '1.1').
+unicode_age(1118, 1158, '1.1').
+unicode_age(1168, 1220, '1.1').
+unicode_age(1223, 1224, '1.1').
+unicode_age(1227, 1228, '1.1').
+unicode_age(1232, 1259, '1.1').
+unicode_age(1262, 1269, '1.1').
+unicode_age(1272, 1273, '1.1').
+unicode_age(1329, 1366, '1.1').
+unicode_age(1369, 1375, '1.1').
+unicode_age(1377, 1415, '1.1').
+unicode_age(1417, 1417, '1.1').
+unicode_age(1456, 1465, '1.1').
+unicode_age(1467, 1475, '1.1').
+unicode_age(1488, 1514, '1.1').
+unicode_age(1520, 1524, '1.1').
+unicode_age(1548, 1548, '1.1').
+unicode_age(1563, 1563, '1.1').
+unicode_age(1567, 1567, '1.1').
+unicode_age(1569, 1594, '1.1').
+unicode_age(1600, 1618, '1.1').
+unicode_age(1632, 1645, '1.1').
+unicode_age(1648, 1719, '1.1').
+unicode_age(1722, 1726, '1.1').
+unicode_age(1728, 1742, '1.1').
+unicode_age(1744, 1756, '1.1').
+unicode_age(1757, 1757, '1.1').
+unicode_age(1758, 1773, '1.1').
+unicode_age(1776, 1785, '1.1').
+unicode_age(2305, 2307, '1.1').
+unicode_age(2309, 2361, '1.1').
+unicode_age(2364, 2381, '1.1').
+unicode_age(2384, 2388, '1.1').
+unicode_age(2392, 2416, '1.1').
+unicode_age(2433, 2435, '1.1').
+unicode_age(2437, 2444, '1.1').
+unicode_age(2447, 2448, '1.1').
+unicode_age(2451, 2472, '1.1').
+unicode_age(2474, 2480, '1.1').
+unicode_age(2482, 2482, '1.1').
+unicode_age(2486, 2489, '1.1').
+unicode_age(2492, 2492, '1.1').
+unicode_age(2494, 2500, '1.1').
+unicode_age(2503, 2504, '1.1').
+unicode_age(2507, 2509, '1.1').
+unicode_age(2519, 2519, '1.1').
+unicode_age(2524, 2525, '1.1').
+unicode_age(2527, 2531, '1.1').
+unicode_age(2534, 2554, '1.1').
+unicode_age(2562, 2562, '1.1').
+unicode_age(2565, 2570, '1.1').
+unicode_age(2575, 2576, '1.1').
+unicode_age(2579, 2600, '1.1').
+unicode_age(2602, 2608, '1.1').
+unicode_age(2610, 2611, '1.1').
+unicode_age(2613, 2614, '1.1').
+unicode_age(2616, 2617, '1.1').
+unicode_age(2620, 2620, '1.1').
+unicode_age(2622, 2626, '1.1').
+unicode_age(2631, 2632, '1.1').
+unicode_age(2635, 2637, '1.1').
+unicode_age(2649, 2652, '1.1').
+unicode_age(2654, 2654, '1.1').
+unicode_age(2662, 2676, '1.1').
+unicode_age(2689, 2691, '1.1').
+unicode_age(2693, 2699, '1.1').
+unicode_age(2701, 2701, '1.1').
+unicode_age(2703, 2705, '1.1').
+unicode_age(2707, 2728, '1.1').
+unicode_age(2730, 2736, '1.1').
+unicode_age(2738, 2739, '1.1').
+unicode_age(2741, 2745, '1.1').
+unicode_age(2748, 2757, '1.1').
+unicode_age(2759, 2761, '1.1').
+unicode_age(2763, 2765, '1.1').
+unicode_age(2768, 2768, '1.1').
+unicode_age(2784, 2784, '1.1').
+unicode_age(2790, 2799, '1.1').
+unicode_age(2817, 2819, '1.1').
+unicode_age(2821, 2828, '1.1').
+unicode_age(2831, 2832, '1.1').
+unicode_age(2835, 2856, '1.1').
+unicode_age(2858, 2864, '1.1').
+unicode_age(2866, 2867, '1.1').
+unicode_age(2870, 2873, '1.1').
+unicode_age(2876, 2883, '1.1').
+unicode_age(2887, 2888, '1.1').
+unicode_age(2891, 2893, '1.1').
+unicode_age(2902, 2903, '1.1').
+unicode_age(2908, 2909, '1.1').
+unicode_age(2911, 2913, '1.1').
+unicode_age(2918, 2928, '1.1').
+unicode_age(2946, 2947, '1.1').
+unicode_age(2949, 2954, '1.1').
+unicode_age(2958, 2960, '1.1').
+unicode_age(2962, 2965, '1.1').
+unicode_age(2969, 2970, '1.1').
+unicode_age(2972, 2972, '1.1').
+unicode_age(2974, 2975, '1.1').
+unicode_age(2979, 2980, '1.1').
+unicode_age(2984, 2986, '1.1').
+unicode_age(2990, 2997, '1.1').
+unicode_age(2999, 3001, '1.1').
+unicode_age(3006, 3010, '1.1').
+unicode_age(3014, 3016, '1.1').
+unicode_age(3018, 3021, '1.1').
+unicode_age(3031, 3031, '1.1').
+unicode_age(3047, 3058, '1.1').
+unicode_age(3073, 3075, '1.1').
+unicode_age(3077, 3084, '1.1').
+unicode_age(3086, 3088, '1.1').
+unicode_age(3090, 3112, '1.1').
+unicode_age(3114, 3123, '1.1').
+unicode_age(3125, 3129, '1.1').
+unicode_age(3134, 3140, '1.1').
+unicode_age(3142, 3144, '1.1').
+unicode_age(3146, 3149, '1.1').
+unicode_age(3157, 3158, '1.1').
+unicode_age(3168, 3169, '1.1').
+unicode_age(3174, 3183, '1.1').
+unicode_age(3202, 3203, '1.1').
+unicode_age(3205, 3212, '1.1').
+unicode_age(3214, 3216, '1.1').
+unicode_age(3218, 3240, '1.1').
+unicode_age(3242, 3251, '1.1').
+unicode_age(3253, 3257, '1.1').
+unicode_age(3262, 3268, '1.1').
+unicode_age(3270, 3272, '1.1').
+unicode_age(3274, 3277, '1.1').
+unicode_age(3285, 3286, '1.1').
+unicode_age(3294, 3294, '1.1').
+unicode_age(3296, 3297, '1.1').
+unicode_age(3302, 3311, '1.1').
+unicode_age(3330, 3331, '1.1').
+unicode_age(3333, 3340, '1.1').
+unicode_age(3342, 3344, '1.1').
+unicode_age(3346, 3368, '1.1').
+unicode_age(3370, 3385, '1.1').
+unicode_age(3390, 3395, '1.1').
+unicode_age(3398, 3400, '1.1').
+unicode_age(3402, 3405, '1.1').
+unicode_age(3415, 3415, '1.1').
+unicode_age(3424, 3425, '1.1').
+unicode_age(3430, 3439, '1.1').
+unicode_age(3585, 3642, '1.1').
+unicode_age(3647, 3675, '1.1').
+unicode_age(3713, 3714, '1.1').
+unicode_age(3716, 3716, '1.1').
+unicode_age(3719, 3720, '1.1').
+unicode_age(3722, 3722, '1.1').
+unicode_age(3725, 3725, '1.1').
+unicode_age(3732, 3735, '1.1').
+unicode_age(3737, 3743, '1.1').
+unicode_age(3745, 3747, '1.1').
+unicode_age(3749, 3749, '1.1').
+unicode_age(3751, 3751, '1.1').
+unicode_age(3754, 3755, '1.1').
+unicode_age(3757, 3769, '1.1').
+unicode_age(3771, 3773, '1.1').
+unicode_age(3776, 3780, '1.1').
+unicode_age(3782, 3782, '1.1').
+unicode_age(3784, 3789, '1.1').
+unicode_age(3792, 3801, '1.1').
+unicode_age(3804, 3805, '1.1').
+unicode_age(4256, 4293, '1.1').
+unicode_age(4304, 4342, '1.1').
+unicode_age(4347, 4347, '1.1').
+unicode_age(4352, 4441, '1.1').
+unicode_age(4447, 4514, '1.1').
+unicode_age(4520, 4601, '1.1').
+unicode_age(7680, 7834, '1.1').
+unicode_age(7840, 7929, '1.1').
+unicode_age(7936, 7957, '1.1').
+unicode_age(7960, 7965, '1.1').
+unicode_age(7968, 8005, '1.1').
+unicode_age(8008, 8013, '1.1').
+unicode_age(8016, 8023, '1.1').
+unicode_age(8025, 8025, '1.1').
+unicode_age(8027, 8027, '1.1').
+unicode_age(8029, 8029, '1.1').
+unicode_age(8031, 8061, '1.1').
+unicode_age(8064, 8116, '1.1').
+unicode_age(8118, 8132, '1.1').
+unicode_age(8134, 8147, '1.1').
+unicode_age(8150, 8155, '1.1').
+unicode_age(8157, 8175, '1.1').
+unicode_age(8178, 8180, '1.1').
+unicode_age(8182, 8190, '1.1').
+unicode_age(8192, 8202, '1.1').
+unicode_age(8203, 8207, '1.1').
+unicode_age(8208, 8231, '1.1').
+unicode_age(8232, 8238, '1.1').
+unicode_age(8240, 8262, '1.1').
+unicode_age(8298, 8303, '1.1').
+unicode_age(8304, 8304, '1.1').
+unicode_age(8308, 8334, '1.1').
+unicode_age(8352, 8362, '1.1').
+unicode_age(8400, 8417, '1.1').
+unicode_age(8448, 8504, '1.1').
+unicode_age(8531, 8578, '1.1').
+unicode_age(8592, 8682, '1.1').
+unicode_age(8704, 8945, '1.1').
+unicode_age(8960, 8960, '1.1').
+unicode_age(8962, 9082, '1.1').
+unicode_age(9216, 9252, '1.1').
+unicode_age(9280, 9290, '1.1').
+unicode_age(9312, 9450, '1.1').
+unicode_age(9472, 9621, '1.1').
+unicode_age(9632, 9711, '1.1').
+unicode_age(9728, 9747, '1.1').
+unicode_age(9754, 9839, '1.1').
+unicode_age(9985, 9988, '1.1').
+unicode_age(9990, 9993, '1.1').
+unicode_age(9996, 10023, '1.1').
+unicode_age(10025, 10059, '1.1').
+unicode_age(10061, 10061, '1.1').
+unicode_age(10063, 10066, '1.1').
+unicode_age(10070, 10070, '1.1').
+unicode_age(10072, 10078, '1.1').
+unicode_age(10081, 10087, '1.1').
+unicode_age(10102, 10132, '1.1').
+unicode_age(10136, 10159, '1.1').
+unicode_age(10161, 10174, '1.1').
+unicode_age(12288, 12343, '1.1').
+unicode_age(12351, 12351, '1.1').
+unicode_age(12353, 12436, '1.1').
+unicode_age(12441, 12446, '1.1').
+unicode_age(12449, 12542, '1.1').
+unicode_age(12549, 12588, '1.1').
+unicode_age(12593, 12686, '1.1').
+unicode_age(12688, 12703, '1.1').
+unicode_age(12800, 12828, '1.1').
+unicode_age(12832, 12867, '1.1').
+unicode_age(12896, 12923, '1.1').
+unicode_age(12927, 12976, '1.1').
+unicode_age(12992, 13003, '1.1').
+unicode_age(13008, 13054, '1.1').
+unicode_age(13056, 13174, '1.1').
+unicode_age(13179, 13277, '1.1').
+unicode_age(13280, 13310, '1.1').
+unicode_age(19968, 40869, '1.1').
+unicode_age(57344, 63743, '1.1').
+unicode_age(63744, 64045, '1.1').
+unicode_age(64256, 64262, '1.1').
+unicode_age(64275, 64279, '1.1').
+unicode_age(64286, 64310, '1.1').
+unicode_age(64312, 64316, '1.1').
+unicode_age(64318, 64318, '1.1').
+unicode_age(64320, 64321, '1.1').
+unicode_age(64323, 64324, '1.1').
+unicode_age(64326, 64433, '1.1').
+unicode_age(64467, 64831, '1.1').
+unicode_age(64848, 64911, '1.1').
+unicode_age(64914, 64967, '1.1').
+unicode_age(65008, 65019, '1.1').
+unicode_age(65056, 65059, '1.1').
+unicode_age(65072, 65092, '1.1').
+unicode_age(65097, 65106, '1.1').
+unicode_age(65108, 65126, '1.1').
+unicode_age(65128, 65131, '1.1').
+unicode_age(65136, 65138, '1.1').
+unicode_age(65140, 65140, '1.1').
+unicode_age(65142, 65276, '1.1').
+unicode_age(65279, 65279, '1.1').
+unicode_age(65281, 65374, '1.1').
+unicode_age(65377, 65470, '1.1').
+unicode_age(65474, 65479, '1.1').
+unicode_age(65482, 65487, '1.1').
+unicode_age(65490, 65495, '1.1').
+unicode_age(65498, 65500, '1.1').
+unicode_age(65504, 65510, '1.1').
+unicode_age(65512, 65518, '1.1').
+unicode_age(65533, 65533, '1.1').
+unicode_age(65534, 65535, '1.1').
+unicode_age(1425, 1441, '2.0').
+unicode_age(1443, 1455, '2.0').
+unicode_age(1476, 1476, '2.0').
+unicode_age(3840, 3911, '2.0').
+unicode_age(3913, 3945, '2.0').
+unicode_age(3953, 3979, '2.0').
+unicode_age(3984, 3989, '2.0').
+unicode_age(3991, 3991, '2.0').
+unicode_age(3993, 4013, '2.0').
+unicode_age(4017, 4023, '2.0').
+unicode_age(4025, 4025, '2.0').
+unicode_age(7835, 7835, '2.0').
+unicode_age(8363, 8363, '2.0').
+unicode_age(44032, 55203, '2.0').
+unicode_age(55296, 57343, '2.0').
+unicode_age(131070, 131071, '2.0').
+unicode_age(196606, 196607, '2.0').
+unicode_age(262142, 262143, '2.0').
+unicode_age(327678, 327679, '2.0').
+unicode_age(393214, 393215, '2.0').
+unicode_age(458750, 458751, '2.0').
+unicode_age(524286, 524287, '2.0').
+unicode_age(589822, 589823, '2.0').
+unicode_age(655358, 655359, '2.0').
+unicode_age(720894, 720895, '2.0').
+unicode_age(786430, 786431, '2.0').
+unicode_age(851966, 851967, '2.0').
+unicode_age(917502, 917503, '2.0').
+unicode_age(983038, 983039, '2.0').
+unicode_age(983040, 1048573, '2.0').
+unicode_age(1048574, 1048575, '2.0').
+unicode_age(1048576, 1114109, '2.0').
+unicode_age(1114110, 1114111, '2.0').
+unicode_age(8364, 8364, '2.1').
+unicode_age(65532, 65532, '2.1').
+unicode_age(502, 505, '3.0').
+unicode_age(536, 543, '3.0').
+unicode_age(546, 563, '3.0').
+unicode_age(681, 685, '3.0').
+unicode_age(735, 735, '3.0').
+unicode_age(746, 750, '3.0').
+unicode_age(838, 846, '3.0').
+unicode_age(866, 866, '3.0').
+unicode_age(983, 983, '3.0').
+unicode_age(987, 987, '3.0').
+unicode_age(989, 989, '3.0').
+unicode_age(991, 991, '3.0').
+unicode_age(993, 993, '3.0').
+unicode_age(1024, 1024, '3.0').
+unicode_age(1037, 1037, '3.0').
+unicode_age(1104, 1104, '3.0').
+unicode_age(1117, 1117, '3.0').
+unicode_age(1160, 1161, '3.0').
+unicode_age(1164, 1167, '3.0').
+unicode_age(1260, 1261, '3.0').
+unicode_age(1418, 1418, '3.0').
+unicode_age(1619, 1621, '3.0').
+unicode_age(1720, 1721, '3.0').
+unicode_age(1727, 1727, '3.0').
+unicode_age(1743, 1743, '3.0').
+unicode_age(1786, 1790, '3.0').
+unicode_age(1792, 1805, '3.0').
+unicode_age(1807, 1807, '3.0').
+unicode_age(1808, 1836, '3.0').
+unicode_age(1840, 1866, '3.0').
+unicode_age(1920, 1968, '3.0').
+unicode_age(3458, 3459, '3.0').
+unicode_age(3461, 3478, '3.0').
+unicode_age(3482, 3505, '3.0').
+unicode_age(3507, 3515, '3.0').
+unicode_age(3517, 3517, '3.0').
+unicode_age(3520, 3526, '3.0').
+unicode_age(3530, 3530, '3.0').
+unicode_age(3535, 3540, '3.0').
+unicode_age(3542, 3542, '3.0').
+unicode_age(3544, 3551, '3.0').
+unicode_age(3570, 3572, '3.0').
+unicode_age(3946, 3946, '3.0').
+unicode_age(3990, 3990, '3.0').
+unicode_age(4014, 4016, '3.0').
+unicode_age(4024, 4024, '3.0').
+unicode_age(4026, 4028, '3.0').
+unicode_age(4030, 4044, '3.0').
+unicode_age(4047, 4047, '3.0').
+unicode_age(4096, 4129, '3.0').
+unicode_age(4131, 4135, '3.0').
+unicode_age(4137, 4138, '3.0').
+unicode_age(4140, 4146, '3.0').
+unicode_age(4150, 4153, '3.0').
+unicode_age(4160, 4185, '3.0').
+unicode_age(4608, 4614, '3.0').
+unicode_age(4616, 4678, '3.0').
+unicode_age(4680, 4680, '3.0').
+unicode_age(4682, 4685, '3.0').
+unicode_age(4688, 4694, '3.0').
+unicode_age(4696, 4696, '3.0').
+unicode_age(4698, 4701, '3.0').
+unicode_age(4704, 4742, '3.0').
+unicode_age(4744, 4744, '3.0').
+unicode_age(4746, 4749, '3.0').
+unicode_age(4752, 4782, '3.0').
+unicode_age(4784, 4784, '3.0').
+unicode_age(4786, 4789, '3.0').
+unicode_age(4792, 4798, '3.0').
+unicode_age(4800, 4800, '3.0').
+unicode_age(4802, 4805, '3.0').
+unicode_age(4808, 4814, '3.0').
+unicode_age(4816, 4822, '3.0').
+unicode_age(4824, 4846, '3.0').
+unicode_age(4848, 4878, '3.0').
+unicode_age(4880, 4880, '3.0').
+unicode_age(4882, 4885, '3.0').
+unicode_age(4888, 4894, '3.0').
+unicode_age(4896, 4934, '3.0').
+unicode_age(4936, 4954, '3.0').
+unicode_age(4961, 4988, '3.0').
+unicode_age(5024, 5108, '3.0').
+unicode_age(5121, 5750, '3.0').
+unicode_age(5760, 5788, '3.0').
+unicode_age(5792, 5872, '3.0').
+unicode_age(6016, 6108, '3.0').
+unicode_age(6112, 6121, '3.0').
+unicode_age(6144, 6157, '3.0').
+unicode_age(6158, 6158, '3.0').
+unicode_age(6160, 6169, '3.0').
+unicode_age(6176, 6263, '3.0').
+unicode_age(6272, 6313, '3.0').
+unicode_age(8239, 8239, '3.0').
+unicode_age(8264, 8269, '3.0').
+unicode_age(8365, 8367, '3.0').
+unicode_age(8418, 8419, '3.0').
+unicode_age(8505, 8506, '3.0').
+unicode_age(8579, 8579, '3.0').
+unicode_age(8683, 8691, '3.0').
+unicode_age(8961, 8961, '3.0').
+unicode_age(9083, 9083, '3.0').
+unicode_age(9085, 9114, '3.0').
+unicode_age(9253, 9254, '3.0').
+unicode_age(9712, 9719, '3.0').
+unicode_age(9753, 9753, '3.0').
+unicode_age(9840, 9841, '3.0').
+unicode_age(10240, 10495, '3.0').
+unicode_age(11904, 11929, '3.0').
+unicode_age(11931, 12019, '3.0').
+unicode_age(12032, 12245, '3.0').
+unicode_age(12272, 12283, '3.0').
+unicode_age(12344, 12346, '3.0').
+unicode_age(12350, 12350, '3.0').
+unicode_age(12704, 12727, '3.0').
+unicode_age(13312, 19893, '3.0').
+unicode_age(40960, 42124, '3.0').
+unicode_age(42128, 42145, '3.0').
+unicode_age(42148, 42163, '3.0').
+unicode_age(42165, 42176, '3.0').
+unicode_age(42178, 42180, '3.0').
+unicode_age(42182, 42182, '3.0').
+unicode_age(64285, 64285, '3.0').
+unicode_age(65529, 65531, '3.0').
+unicode_age(1012, 1013, '3.1').
+unicode_age(64976, 65007, '3.1').
+unicode_age(66304, 66334, '3.1').
+unicode_age(66336, 66339, '3.1').
+unicode_age(66352, 66378, '3.1').
+unicode_age(66560, 66597, '3.1').
+unicode_age(66600, 66637, '3.1').
+unicode_age(118784, 119029, '3.1').
+unicode_age(119040, 119078, '3.1').
+unicode_age(119082, 119154, '3.1').
+unicode_age(119155, 119162, '3.1').
+unicode_age(119163, 119261, '3.1').
+unicode_age(119808, 119892, '3.1').
+unicode_age(119894, 119964, '3.1').
+unicode_age(119966, 119967, '3.1').
+unicode_age(119970, 119970, '3.1').
+unicode_age(119973, 119974, '3.1').
+unicode_age(119977, 119980, '3.1').
+unicode_age(119982, 119993, '3.1').
+unicode_age(119995, 119995, '3.1').
+unicode_age(119997, 120000, '3.1').
+unicode_age(120002, 120003, '3.1').
+unicode_age(120005, 120069, '3.1').
+unicode_age(120071, 120074, '3.1').
+unicode_age(120077, 120084, '3.1').
+unicode_age(120086, 120092, '3.1').
+unicode_age(120094, 120121, '3.1').
+unicode_age(120123, 120126, '3.1').
+unicode_age(120128, 120132, '3.1').
+unicode_age(120134, 120134, '3.1').
+unicode_age(120138, 120144, '3.1').
+unicode_age(120146, 120483, '3.1').
+unicode_age(120488, 120777, '3.1').
+unicode_age(120782, 120831, '3.1').
+unicode_age(131072, 173782, '3.1').
+unicode_age(194560, 195101, '3.1').
+unicode_age(917505, 917505, '3.1').
+unicode_age(917536, 917631, '3.1').
+unicode_age(544, 544, '3.2').
+unicode_age(847, 847, '3.2').
+unicode_age(867, 879, '3.2').
+unicode_age(984, 985, '3.2').
+unicode_age(1014, 1014, '3.2').
+unicode_age(1162, 1163, '3.2').
+unicode_age(1221, 1222, '3.2').
+unicode_age(1225, 1226, '3.2').
+unicode_age(1229, 1230, '3.2').
+unicode_age(1280, 1295, '3.2').
+unicode_age(1646, 1647, '3.2').
+unicode_age(1969, 1969, '3.2').
+unicode_age(4343, 4344, '3.2').
+unicode_age(5888, 5900, '3.2').
+unicode_age(5902, 5908, '3.2').
+unicode_age(5920, 5942, '3.2').
+unicode_age(5952, 5971, '3.2').
+unicode_age(5984, 5996, '3.2').
+unicode_age(5998, 6000, '3.2').
+unicode_age(6002, 6003, '3.2').
+unicode_age(8263, 8263, '3.2').
+unicode_age(8270, 8274, '3.2').
+unicode_age(8279, 8279, '3.2').
+unicode_age(8287, 8287, '3.2').
+unicode_age(8288, 8291, '3.2').
+unicode_age(8305, 8305, '3.2').
+unicode_age(8368, 8369, '3.2').
+unicode_age(8420, 8426, '3.2').
+unicode_age(8509, 8523, '3.2').
+unicode_age(8692, 8703, '3.2').
+unicode_age(8946, 8959, '3.2').
+unicode_age(9084, 9084, '3.2').
+unicode_age(9115, 9166, '3.2').
+unicode_age(9451, 9470, '3.2').
+unicode_age(9622, 9631, '3.2').
+unicode_age(9720, 9727, '3.2').
+unicode_age(9750, 9751, '3.2').
+unicode_age(9842, 9853, '3.2').
+unicode_age(9856, 9865, '3.2').
+unicode_age(10088, 10101, '3.2').
+unicode_age(10192, 10219, '3.2').
+unicode_age(10224, 10239, '3.2').
+unicode_age(10496, 11007, '3.2').
+unicode_age(12347, 12349, '3.2').
+unicode_age(12437, 12438, '3.2').
+unicode_age(12447, 12448, '3.2').
+unicode_age(12543, 12543, '3.2').
+unicode_age(12784, 12799, '3.2').
+unicode_age(12881, 12895, '3.2').
+unicode_age(12977, 12991, '3.2').
+unicode_age(42146, 42147, '3.2').
+unicode_age(42164, 42164, '3.2').
+unicode_age(42177, 42177, '3.2').
+unicode_age(42181, 42181, '3.2').
+unicode_age(64048, 64106, '3.2').
+unicode_age(65020, 65020, '3.2').
+unicode_age(65024, 65039, '3.2').
+unicode_age(65093, 65094, '3.2').
+unicode_age(65139, 65139, '3.2').
+unicode_age(65375, 65376, '3.2').
+unicode_age(545, 545, '4.0').
+unicode_age(564, 566, '4.0').
+unicode_age(686, 687, '4.0').
+unicode_age(751, 767, '4.0').
+unicode_age(848, 855, '4.0').
+unicode_age(861, 863, '4.0').
+unicode_age(1015, 1019, '4.0').
+unicode_age(1536, 1539, '4.0').
+unicode_age(1549, 1557, '4.0').
+unicode_age(1622, 1624, '4.0').
+unicode_age(1774, 1775, '4.0').
+unicode_age(1791, 1791, '4.0').
+unicode_age(1837, 1839, '4.0').
+unicode_age(1869, 1871, '4.0').
+unicode_age(2308, 2308, '4.0').
+unicode_age(2493, 2493, '4.0').
+unicode_age(2561, 2561, '4.0').
+unicode_age(2563, 2563, '4.0').
+unicode_age(2700, 2700, '4.0').
+unicode_age(2785, 2787, '4.0').
+unicode_age(2801, 2801, '4.0').
+unicode_age(2869, 2869, '4.0').
+unicode_age(2929, 2929, '4.0').
+unicode_age(3059, 3066, '4.0').
+unicode_age(3260, 3261, '4.0').
+unicode_age(6109, 6109, '4.0').
+unicode_age(6128, 6137, '4.0').
+unicode_age(6400, 6428, '4.0').
+unicode_age(6432, 6443, '4.0').
+unicode_age(6448, 6459, '4.0').
+unicode_age(6464, 6464, '4.0').
+unicode_age(6468, 6509, '4.0').
+unicode_age(6512, 6516, '4.0').
+unicode_age(6624, 6655, '4.0').
+unicode_age(7424, 7531, '4.0').
+unicode_age(8275, 8276, '4.0').
+unicode_age(8507, 8507, '4.0').
+unicode_age(9167, 9168, '4.0').
+unicode_age(9471, 9471, '4.0').
+unicode_age(9748, 9749, '4.0').
+unicode_age(9866, 9873, '4.0').
+unicode_age(9888, 9889, '4.0').
+unicode_age(11008, 11021, '4.0').
+unicode_age(12829, 12830, '4.0').
+unicode_age(12880, 12880, '4.0').
+unicode_age(12924, 12925, '4.0').
+unicode_age(13004, 13007, '4.0').
+unicode_age(13175, 13178, '4.0').
+unicode_age(13278, 13279, '4.0').
+unicode_age(13311, 13311, '4.0').
+unicode_age(19904, 19967, '4.0').
+unicode_age(65021, 65021, '4.0').
+unicode_age(65095, 65096, '4.0').
+unicode_age(65536, 65547, '4.0').
+unicode_age(65549, 65574, '4.0').
+unicode_age(65576, 65594, '4.0').
+unicode_age(65596, 65597, '4.0').
+unicode_age(65599, 65613, '4.0').
+unicode_age(65616, 65629, '4.0').
+unicode_age(65664, 65786, '4.0').
+unicode_age(65792, 65794, '4.0').
+unicode_age(65799, 65843, '4.0').
+unicode_age(65847, 65855, '4.0').
+unicode_age(66432, 66461, '4.0').
+unicode_age(66463, 66463, '4.0').
+unicode_age(66598, 66599, '4.0').
+unicode_age(66638, 66717, '4.0').
+unicode_age(66720, 66729, '4.0').
+unicode_age(67584, 67589, '4.0').
+unicode_age(67592, 67592, '4.0').
+unicode_age(67594, 67637, '4.0').
+unicode_age(67639, 67640, '4.0').
+unicode_age(67644, 67644, '4.0').
+unicode_age(67647, 67647, '4.0').
+unicode_age(119552, 119638, '4.0').
+unicode_age(120001, 120001, '4.0').
+unicode_age(917760, 917999, '4.0').
+unicode_age(567, 577, '4.1').
+unicode_age(856, 860, '4.1').
+unicode_age(1020, 1023, '4.1').
+unicode_age(1270, 1271, '4.1').
+unicode_age(1442, 1442, '4.1').
+unicode_age(1477, 1479, '4.1').
+unicode_age(1547, 1547, '4.1').
+unicode_age(1566, 1566, '4.1').
+unicode_age(1625, 1630, '4.1').
+unicode_age(1872, 1901, '4.1').
+unicode_age(2429, 2429, '4.1').
+unicode_age(2510, 2510, '4.1').
+unicode_age(2998, 2998, '4.1').
+unicode_age(3046, 3046, '4.1').
+unicode_age(4048, 4049, '4.1').
+unicode_age(4345, 4346, '4.1').
+unicode_age(4348, 4348, '4.1').
+unicode_age(4615, 4615, '4.1').
+unicode_age(4679, 4679, '4.1').
+unicode_age(4743, 4743, '4.1').
+unicode_age(4783, 4783, '4.1').
+unicode_age(4815, 4815, '4.1').
+unicode_age(4847, 4847, '4.1').
+unicode_age(4879, 4879, '4.1').
+unicode_age(4895, 4895, '4.1').
+unicode_age(4935, 4935, '4.1').
+unicode_age(4959, 4960, '4.1').
+unicode_age(4992, 5017, '4.1').
+unicode_age(6528, 6569, '4.1').
+unicode_age(6576, 6601, '4.1').
+unicode_age(6608, 6617, '4.1').
+unicode_age(6622, 6623, '4.1').
+unicode_age(6656, 6683, '4.1').
+unicode_age(6686, 6687, '4.1').
+unicode_age(7532, 7619, '4.1').
+unicode_age(8277, 8278, '4.1').
+unicode_age(8280, 8286, '4.1').
+unicode_age(8336, 8340, '4.1').
+unicode_age(8370, 8373, '4.1').
+unicode_age(8427, 8427, '4.1').
+unicode_age(8508, 8508, '4.1').
+unicode_age(8524, 8524, '4.1').
+unicode_age(9169, 9179, '4.1').
+unicode_age(9752, 9752, '4.1').
+unicode_age(9854, 9855, '4.1').
+unicode_age(9874, 9884, '4.1').
+unicode_age(9890, 9905, '4.1').
+unicode_age(10176, 10182, '4.1').
+unicode_age(11022, 11027, '4.1').
+unicode_age(11264, 11310, '4.1').
+unicode_age(11312, 11358, '4.1').
+unicode_age(11392, 11498, '4.1').
+unicode_age(11513, 11557, '4.1').
+unicode_age(11568, 11621, '4.1').
+unicode_age(11631, 11631, '4.1').
+unicode_age(11648, 11670, '4.1').
+unicode_age(11680, 11686, '4.1').
+unicode_age(11688, 11694, '4.1').
+unicode_age(11696, 11702, '4.1').
+unicode_age(11704, 11710, '4.1').
+unicode_age(11712, 11718, '4.1').
+unicode_age(11720, 11726, '4.1').
+unicode_age(11728, 11734, '4.1').
+unicode_age(11736, 11742, '4.1').
+unicode_age(11776, 11799, '4.1').
+unicode_age(11804, 11805, '4.1').
+unicode_age(12736, 12751, '4.1').
+unicode_age(12926, 12926, '4.1').
+unicode_age(40870, 40891, '4.1').
+unicode_age(42752, 42774, '4.1').
+unicode_age(43008, 43051, '4.1').
+unicode_age(64112, 64217, '4.1').
+unicode_age(65040, 65049, '4.1').
+unicode_age(65856, 65930, '4.1').
+unicode_age(66464, 66499, '4.1').
+unicode_age(66504, 66517, '4.1').
+unicode_age(68096, 68099, '4.1').
+unicode_age(68101, 68102, '4.1').
+unicode_age(68108, 68115, '4.1').
+unicode_age(68117, 68119, '4.1').
+unicode_age(68121, 68147, '4.1').
+unicode_age(68152, 68154, '4.1').
+unicode_age(68159, 68167, '4.1').
+unicode_age(68176, 68184, '4.1').
+unicode_age(119296, 119365, '4.1').
+unicode_age(120484, 120485, '4.1').
+unicode_age(578, 591, '5.0').
+unicode_age(891, 893, '5.0').
+unicode_age(1231, 1231, '5.0').
+unicode_age(1274, 1279, '5.0').
+unicode_age(1296, 1299, '5.0').
+unicode_age(1466, 1466, '5.0').
+unicode_age(1984, 2042, '5.0').
+unicode_age(2427, 2428, '5.0').
+unicode_age(2430, 2431, '5.0').
+unicode_age(3298, 3299, '5.0').
+unicode_age(3313, 3314, '5.0').
+unicode_age(6912, 6987, '5.0').
+unicode_age(6992, 7036, '5.0').
+unicode_age(7620, 7626, '5.0').
+unicode_age(7678, 7679, '5.0').
+unicode_age(8428, 8431, '5.0').
+unicode_age(8525, 8526, '5.0').
+unicode_age(8580, 8580, '5.0').
+unicode_age(9180, 9191, '5.0').
+unicode_age(9906, 9906, '5.0').
+unicode_age(10183, 10186, '5.0').
+unicode_age(11028, 11034, '5.0').
+unicode_age(11040, 11043, '5.0').
+unicode_age(11360, 11372, '5.0').
+unicode_age(11380, 11383, '5.0').
+unicode_age(42775, 42778, '5.0').
+unicode_age(42784, 42785, '5.0').
+unicode_age(43072, 43127, '5.0').
+unicode_age(67840, 67865, '5.0').
+unicode_age(67871, 67871, '5.0').
+unicode_age(73728, 74606, '5.0').
+unicode_age(74752, 74850, '5.0').
+unicode_age(74864, 74867, '5.0').
+unicode_age(119648, 119665, '5.0').
+unicode_age(120778, 120779, '5.0').
+unicode_age(880, 883, '5.1').
+unicode_age(886, 887, '5.1').
+unicode_age(975, 975, '5.1').
+unicode_age(1159, 1159, '5.1').
+unicode_age(1300, 1315, '5.1').
+unicode_age(1542, 1546, '5.1').
+unicode_age(1558, 1562, '5.1').
+unicode_age(1595, 1599, '5.1').
+unicode_age(1902, 1919, '5.1').
+unicode_age(2417, 2418, '5.1').
+unicode_age(2641, 2641, '5.1').
+unicode_age(2677, 2677, '5.1').
+unicode_age(2884, 2884, '5.1').
+unicode_age(2914, 2915, '5.1').
+unicode_age(3024, 3024, '5.1').
+unicode_age(3133, 3133, '5.1').
+unicode_age(3160, 3161, '5.1').
+unicode_age(3170, 3171, '5.1').
+unicode_age(3192, 3199, '5.1').
+unicode_age(3389, 3389, '5.1').
+unicode_age(3396, 3396, '5.1').
+unicode_age(3426, 3427, '5.1').
+unicode_age(3440, 3445, '5.1').
+unicode_age(3449, 3455, '5.1').
+unicode_age(3947, 3948, '5.1').
+unicode_age(4046, 4046, '5.1').
+unicode_age(4050, 4052, '5.1').
+unicode_age(4130, 4130, '5.1').
+unicode_age(4136, 4136, '5.1').
+unicode_age(4139, 4139, '5.1').
+unicode_age(4147, 4149, '5.1').
+unicode_age(4154, 4159, '5.1').
+unicode_age(4186, 4249, '5.1').
+unicode_age(4254, 4255, '5.1').
+unicode_age(6314, 6314, '5.1').
+unicode_age(7040, 7082, '5.1').
+unicode_age(7086, 7097, '5.1').
+unicode_age(7168, 7223, '5.1').
+unicode_age(7227, 7241, '5.1').
+unicode_age(7245, 7295, '5.1').
+unicode_age(7627, 7654, '5.1').
+unicode_age(7836, 7839, '5.1').
+unicode_age(7930, 7935, '5.1').
+unicode_age(8292, 8292, '5.1').
+unicode_age(8432, 8432, '5.1').
+unicode_age(8527, 8527, '5.1').
+unicode_age(8581, 8584, '5.1').
+unicode_age(9885, 9885, '5.1').
+unicode_age(9907, 9916, '5.1').
+unicode_age(9920, 9923, '5.1').
+unicode_age(10188, 10188, '5.1').
+unicode_age(10220, 10223, '5.1').
+unicode_age(11035, 11039, '5.1').
+unicode_age(11044, 11084, '5.1').
+unicode_age(11088, 11092, '5.1').
+unicode_age(11373, 11375, '5.1').
+unicode_age(11377, 11379, '5.1').
+unicode_age(11384, 11389, '5.1').
+unicode_age(11744, 11775, '5.1').
+unicode_age(11800, 11803, '5.1').
+unicode_age(11806, 11824, '5.1').
+unicode_age(12589, 12589, '5.1').
+unicode_age(12752, 12771, '5.1').
+unicode_age(40892, 40899, '5.1').
+unicode_age(42240, 42539, '5.1').
+unicode_age(42560, 42591, '5.1').
+unicode_age(42594, 42611, '5.1').
+unicode_age(42620, 42647, '5.1').
+unicode_age(42779, 42783, '5.1').
+unicode_age(42786, 42892, '5.1').
+unicode_age(43003, 43007, '5.1').
+unicode_age(43136, 43204, '5.1').
+unicode_age(43214, 43225, '5.1').
+unicode_age(43264, 43347, '5.1').
+unicode_age(43359, 43359, '5.1').
+unicode_age(43520, 43574, '5.1').
+unicode_age(43584, 43597, '5.1').
+unicode_age(43600, 43609, '5.1').
+unicode_age(43612, 43615, '5.1').
+unicode_age(65060, 65062, '5.1').
+unicode_age(65936, 65947, '5.1').
+unicode_age(66000, 66045, '5.1').
+unicode_age(66176, 66204, '5.1').
+unicode_age(66208, 66256, '5.1').
+unicode_age(67872, 67897, '5.1').
+unicode_age(67903, 67903, '5.1').
+unicode_age(119081, 119081, '5.1').
+unicode_age(126976, 127019, '5.1').
+unicode_age(127024, 127123, '5.1').
+unicode_age(1316, 1317, '5.2').
+unicode_age(2048, 2093, '5.2').
+unicode_age(2096, 2110, '5.2').
+unicode_age(2304, 2304, '5.2').
+unicode_age(2382, 2382, '5.2').
+unicode_age(2389, 2389, '5.2').
+unicode_age(2425, 2426, '5.2').
+unicode_age(2555, 2555, '5.2').
+unicode_age(4053, 4056, '5.2').
+unicode_age(4250, 4253, '5.2').
+unicode_age(4442, 4446, '5.2').
+unicode_age(4515, 4519, '5.2').
+unicode_age(4602, 4607, '5.2').
+unicode_age(5120, 5120, '5.2').
+unicode_age(5751, 5759, '5.2').
+unicode_age(6320, 6389, '5.2').
+unicode_age(6570, 6571, '5.2').
+unicode_age(6618, 6618, '5.2').
+unicode_age(6688, 6750, '5.2').
+unicode_age(6752, 6780, '5.2').
+unicode_age(6783, 6793, '5.2').
+unicode_age(6800, 6809, '5.2').
+unicode_age(6816, 6829, '5.2').
+unicode_age(7376, 7410, '5.2').
+unicode_age(7677, 7677, '5.2').
+unicode_age(8374, 8376, '5.2').
+unicode_age(8528, 8530, '5.2').
+unicode_age(8585, 8585, '5.2').
+unicode_age(9192, 9192, '5.2').
+unicode_age(9886, 9887, '5.2').
+unicode_age(9917, 9919, '5.2').
+unicode_age(9924, 9933, '5.2').
+unicode_age(9935, 9953, '5.2').
+unicode_age(9955, 9955, '5.2').
+unicode_age(9960, 9983, '5.2').
+unicode_age(10071, 10071, '5.2').
+unicode_age(11093, 11097, '5.2').
+unicode_age(11376, 11376, '5.2').
+unicode_age(11390, 11391, '5.2').
+unicode_age(11499, 11505, '5.2').
+unicode_age(11825, 11825, '5.2').
+unicode_age(12868, 12879, '5.2').
+unicode_age(40900, 40907, '5.2').
+unicode_age(42192, 42239, '5.2').
+unicode_age(42656, 42743, '5.2').
+unicode_age(43056, 43065, '5.2').
+unicode_age(43232, 43259, '5.2').
+unicode_age(43360, 43388, '5.2').
+unicode_age(43392, 43469, '5.2').
+unicode_age(43471, 43481, '5.2').
+unicode_age(43486, 43487, '5.2').
+unicode_age(43616, 43643, '5.2').
+unicode_age(43648, 43714, '5.2').
+unicode_age(43739, 43743, '5.2').
+unicode_age(43968, 44013, '5.2').
+unicode_age(44016, 44025, '5.2').
+unicode_age(55216, 55238, '5.2').
+unicode_age(55243, 55291, '5.2').
+unicode_age(64107, 64109, '5.2').
+unicode_age(67648, 67669, '5.2').
+unicode_age(67671, 67679, '5.2').
+unicode_age(67866, 67867, '5.2').
+unicode_age(68192, 68223, '5.2').
+unicode_age(68352, 68405, '5.2').
+unicode_age(68409, 68437, '5.2').
+unicode_age(68440, 68466, '5.2').
+unicode_age(68472, 68479, '5.2').
+unicode_age(68608, 68680, '5.2').
+unicode_age(69216, 69246, '5.2').
+unicode_age(69760, 69820, '5.2').
+unicode_age(69821, 69821, '5.2').
+unicode_age(69822, 69825, '5.2').
+unicode_age(77824, 78894, '5.2').
+unicode_age(127232, 127242, '5.2').
+unicode_age(127248, 127278, '5.2').
+unicode_age(127281, 127281, '5.2').
+unicode_age(127293, 127293, '5.2').
+unicode_age(127295, 127295, '5.2').
+unicode_age(127298, 127298, '5.2').
+unicode_age(127302, 127302, '5.2').
+unicode_age(127306, 127310, '5.2').
+unicode_age(127319, 127319, '5.2').
+unicode_age(127327, 127327, '5.2').
+unicode_age(127353, 127353, '5.2').
+unicode_age(127355, 127356, '5.2').
+unicode_age(127359, 127359, '5.2').
+unicode_age(127370, 127373, '5.2').
+unicode_age(127376, 127376, '5.2').
+unicode_age(127488, 127488, '5.2').
+unicode_age(127504, 127537, '5.2').
+unicode_age(127552, 127560, '5.2').
+unicode_age(173824, 177972, '5.2').
+unicode_age(1318, 1319, '6.0').
+unicode_age(1568, 1568, '6.0').
+unicode_age(1631, 1631, '6.0').
+unicode_age(2112, 2139, '6.0').
+unicode_age(2142, 2142, '6.0').
+unicode_age(2362, 2363, '6.0').
+unicode_age(2383, 2383, '6.0').
+unicode_age(2390, 2391, '6.0').
+unicode_age(2419, 2423, '6.0').
+unicode_age(2930, 2935, '6.0').
+unicode_age(3369, 3369, '6.0').
+unicode_age(3386, 3386, '6.0').
+unicode_age(3406, 3406, '6.0').
+unicode_age(3980, 3983, '6.0').
+unicode_age(4057, 4058, '6.0').
+unicode_age(4957, 4958, '6.0').
+unicode_age(7104, 7155, '6.0').
+unicode_age(7164, 7167, '6.0').
+unicode_age(7676, 7676, '6.0').
+unicode_age(8341, 8348, '6.0').
+unicode_age(8377, 8377, '6.0').
+unicode_age(9193, 9203, '6.0').
+unicode_age(9934, 9934, '6.0').
+unicode_age(9954, 9954, '6.0').
+unicode_age(9956, 9959, '6.0').
+unicode_age(9989, 9989, '6.0').
+unicode_age(9994, 9995, '6.0').
+unicode_age(10024, 10024, '6.0').
+unicode_age(10060, 10060, '6.0').
+unicode_age(10062, 10062, '6.0').
+unicode_age(10067, 10069, '6.0').
+unicode_age(10079, 10080, '6.0').
+unicode_age(10133, 10135, '6.0').
+unicode_age(10160, 10160, '6.0').
+unicode_age(10175, 10175, '6.0').
+unicode_age(10190, 10191, '6.0').
+unicode_age(11632, 11632, '6.0').
+unicode_age(11647, 11647, '6.0').
+unicode_age(12728, 12730, '6.0').
+unicode_age(42592, 42593, '6.0').
+unicode_age(42893, 42894, '6.0').
+unicode_age(42896, 42897, '6.0').
+unicode_age(42912, 42921, '6.0').
+unicode_age(43002, 43002, '6.0').
+unicode_age(43777, 43782, '6.0').
+unicode_age(43785, 43790, '6.0').
+unicode_age(43793, 43798, '6.0').
+unicode_age(43808, 43814, '6.0').
+unicode_age(43816, 43822, '6.0').
+unicode_age(64434, 64449, '6.0').
+unicode_age(69632, 69709, '6.0').
+unicode_age(69714, 69743, '6.0').
+unicode_age(92160, 92728, '6.0').
+unicode_age(110592, 110593, '6.0').
+unicode_age(127136, 127150, '6.0').
+unicode_age(127153, 127166, '6.0').
+unicode_age(127169, 127183, '6.0').
+unicode_age(127185, 127199, '6.0').
+unicode_age(127280, 127280, '6.0').
+unicode_age(127282, 127292, '6.0').
+unicode_age(127294, 127294, '6.0').
+unicode_age(127296, 127297, '6.0').
+unicode_age(127299, 127301, '6.0').
+unicode_age(127303, 127305, '6.0').
+unicode_age(127311, 127318, '6.0').
+unicode_age(127320, 127326, '6.0').
+unicode_age(127328, 127337, '6.0').
+unicode_age(127344, 127352, '6.0').
+unicode_age(127354, 127354, '6.0').
+unicode_age(127357, 127358, '6.0').
+unicode_age(127360, 127369, '6.0').
+unicode_age(127374, 127375, '6.0').
+unicode_age(127377, 127386, '6.0').
+unicode_age(127462, 127487, '6.0').
+unicode_age(127489, 127490, '6.0').
+unicode_age(127538, 127546, '6.0').
+unicode_age(127568, 127569, '6.0').
+unicode_age(127744, 127776, '6.0').
+unicode_age(127792, 127797, '6.0').
+unicode_age(127799, 127868, '6.0').
+unicode_age(127872, 127891, '6.0').
+unicode_age(127904, 127940, '6.0').
+unicode_age(127942, 127946, '6.0').
+unicode_age(127968, 127984, '6.0').
+unicode_age(128000, 128062, '6.0').
+unicode_age(128064, 128064, '6.0').
+unicode_age(128066, 128247, '6.0').
+unicode_age(128249, 128252, '6.0').
+unicode_age(128256, 128317, '6.0').
+unicode_age(128336, 128359, '6.0').
+unicode_age(128507, 128511, '6.0').
+unicode_age(128513, 128528, '6.0').
+unicode_age(128530, 128532, '6.0').
+unicode_age(128534, 128534, '6.0').
+unicode_age(128536, 128536, '6.0').
+unicode_age(128538, 128538, '6.0').
+unicode_age(128540, 128542, '6.0').
+unicode_age(128544, 128549, '6.0').
+unicode_age(128552, 128555, '6.0').
+unicode_age(128557, 128557, '6.0').
+unicode_age(128560, 128563, '6.0').
+unicode_age(128565, 128576, '6.0').
+unicode_age(128581, 128591, '6.0').
+unicode_age(128640, 128709, '6.0').
+unicode_age(128768, 128883, '6.0').
+unicode_age(177984, 178205, '6.0').
+unicode_age(1423, 1423, '6.1').
+unicode_age(1540, 1540, '6.1').
+unicode_age(2208, 2208, '6.1').
+unicode_age(2210, 2220, '6.1').
+unicode_age(2276, 2302, '6.1').
+unicode_age(2800, 2800, '6.1').
+unicode_age(3806, 3807, '6.1').
+unicode_age(4295, 4295, '6.1').
+unicode_age(4301, 4301, '6.1').
+unicode_age(4349, 4351, '6.1').
+unicode_age(7083, 7085, '6.1').
+unicode_age(7098, 7103, '6.1').
+unicode_age(7360, 7367, '6.1').
+unicode_age(7411, 7414, '6.1').
+unicode_age(10187, 10187, '6.1').
+unicode_age(10189, 10189, '6.1').
+unicode_age(11506, 11507, '6.1').
+unicode_age(11559, 11559, '6.1').
+unicode_age(11565, 11565, '6.1').
+unicode_age(11622, 11623, '6.1').
+unicode_age(11826, 11835, '6.1').
+unicode_age(40908, 40908, '6.1').
+unicode_age(42612, 42619, '6.1').
+unicode_age(42655, 42655, '6.1').
+unicode_age(42898, 42899, '6.1').
+unicode_age(42922, 42922, '6.1').
+unicode_age(43000, 43001, '6.1').
+unicode_age(43744, 43766, '6.1').
+unicode_age(64046, 64047, '6.1').
+unicode_age(67968, 68023, '6.1').
+unicode_age(68030, 68031, '6.1').
+unicode_age(69840, 69864, '6.1').
+unicode_age(69872, 69881, '6.1').
+unicode_age(69888, 69940, '6.1').
+unicode_age(69942, 69955, '6.1').
+unicode_age(70016, 70088, '6.1').
+unicode_age(70096, 70105, '6.1').
+unicode_age(71296, 71351, '6.1').
+unicode_age(71360, 71369, '6.1').
+unicode_age(93952, 94020, '6.1').
+unicode_age(94032, 94078, '6.1').
+unicode_age(94095, 94111, '6.1').
+unicode_age(126464, 126467, '6.1').
+unicode_age(126469, 126495, '6.1').
+unicode_age(126497, 126498, '6.1').
+unicode_age(126500, 126500, '6.1').
+unicode_age(126503, 126503, '6.1').
+unicode_age(126505, 126514, '6.1').
+unicode_age(126516, 126519, '6.1').
+unicode_age(126521, 126521, '6.1').
+unicode_age(126523, 126523, '6.1').
+unicode_age(126530, 126530, '6.1').
+unicode_age(126535, 126535, '6.1').
+unicode_age(126537, 126537, '6.1').
+unicode_age(126539, 126539, '6.1').
+unicode_age(126541, 126543, '6.1').
+unicode_age(126545, 126546, '6.1').
+unicode_age(126548, 126548, '6.1').
+unicode_age(126551, 126551, '6.1').
+unicode_age(126553, 126553, '6.1').
+unicode_age(126555, 126555, '6.1').
+unicode_age(126557, 126557, '6.1').
+unicode_age(126559, 126559, '6.1').
+unicode_age(126561, 126562, '6.1').
+unicode_age(126564, 126564, '6.1').
+unicode_age(126567, 126570, '6.1').
+unicode_age(126572, 126578, '6.1').
+unicode_age(126580, 126583, '6.1').
+unicode_age(126585, 126588, '6.1').
+unicode_age(126590, 126590, '6.1').
+unicode_age(126592, 126601, '6.1').
+unicode_age(126603, 126619, '6.1').
+unicode_age(126625, 126627, '6.1').
+unicode_age(126629, 126633, '6.1').
+unicode_age(126635, 126651, '6.1').
+unicode_age(126704, 126705, '6.1').
+unicode_age(127338, 127339, '6.1').
+unicode_age(128320, 128323, '6.1').
+unicode_age(128512, 128512, '6.1').
+unicode_age(128529, 128529, '6.1').
+unicode_age(128533, 128533, '6.1').
+unicode_age(128535, 128535, '6.1').
+unicode_age(128537, 128537, '6.1').
+unicode_age(128539, 128539, '6.1').
+unicode_age(128543, 128543, '6.1').
+unicode_age(128550, 128551, '6.1').
+unicode_age(128556, 128556, '6.1').
+unicode_age(128558, 128559, '6.1').
+unicode_age(128564, 128564, '6.1').
+unicode_age(8378, 8378, '6.2').
+unicode_age(1564, 1564, '6.3').
+unicode_age(8294, 8297, '6.3').
+unicode_age(895, 895, '7.0').
+unicode_age(1320, 1327, '7.0').
+unicode_age(1421, 1422, '7.0').
+unicode_age(1541, 1541, '7.0').
+unicode_age(2209, 2209, '7.0').
+unicode_age(2221, 2226, '7.0').
+unicode_age(2303, 2303, '7.0').
+unicode_age(2424, 2424, '7.0').
+unicode_age(2432, 2432, '7.0').
+unicode_age(3072, 3072, '7.0').
+unicode_age(3124, 3124, '7.0').
+unicode_age(3201, 3201, '7.0').
+unicode_age(3329, 3329, '7.0').
+unicode_age(3558, 3567, '7.0').
+unicode_age(5873, 5880, '7.0').
+unicode_age(6429, 6430, '7.0').
+unicode_age(6832, 6846, '7.0').
+unicode_age(7416, 7417, '7.0').
+unicode_age(7655, 7669, '7.0').
+unicode_age(8379, 8381, '7.0').
+unicode_age(9204, 9210, '7.0').
+unicode_age(9984, 9984, '7.0').
+unicode_age(11085, 11087, '7.0').
+unicode_age(11098, 11123, '7.0').
+unicode_age(11126, 11157, '7.0').
+unicode_age(11160, 11193, '7.0').
+unicode_age(11197, 11208, '7.0').
+unicode_age(11210, 11217, '7.0').
+unicode_age(11836, 11842, '7.0').
+unicode_age(42648, 42653, '7.0').
+unicode_age(42900, 42911, '7.0').
+unicode_age(42923, 42925, '7.0').
+unicode_age(42928, 42929, '7.0').
+unicode_age(42999, 42999, '7.0').
+unicode_age(43488, 43518, '7.0').
+unicode_age(43644, 43647, '7.0').
+unicode_age(43824, 43871, '7.0').
+unicode_age(43876, 43877, '7.0').
+unicode_age(65063, 65069, '7.0').
+unicode_age(65931, 65932, '7.0').
+unicode_age(65952, 65952, '7.0').
+unicode_age(66272, 66299, '7.0').
+unicode_age(66335, 66335, '7.0').
+unicode_age(66384, 66426, '7.0').
+unicode_age(66816, 66855, '7.0').
+unicode_age(66864, 66915, '7.0').
+unicode_age(66927, 66927, '7.0').
+unicode_age(67072, 67382, '7.0').
+unicode_age(67392, 67413, '7.0').
+unicode_age(67424, 67431, '7.0').
+unicode_age(67680, 67742, '7.0').
+unicode_age(67751, 67759, '7.0').
+unicode_age(68224, 68255, '7.0').
+unicode_age(68288, 68326, '7.0').
+unicode_age(68331, 68342, '7.0').
+unicode_age(68480, 68497, '7.0').
+unicode_age(68505, 68508, '7.0').
+unicode_age(68521, 68527, '7.0').
+unicode_age(69759, 69759, '7.0').
+unicode_age(69968, 70006, '7.0').
+unicode_age(70093, 70093, '7.0').
+unicode_age(70106, 70106, '7.0').
+unicode_age(70113, 70132, '7.0').
+unicode_age(70144, 70161, '7.0').
+unicode_age(70163, 70205, '7.0').
+unicode_age(70320, 70378, '7.0').
+unicode_age(70384, 70393, '7.0').
+unicode_age(70401, 70403, '7.0').
+unicode_age(70405, 70412, '7.0').
+unicode_age(70415, 70416, '7.0').
+unicode_age(70419, 70440, '7.0').
+unicode_age(70442, 70448, '7.0').
+unicode_age(70450, 70451, '7.0').
+unicode_age(70453, 70457, '7.0').
+unicode_age(70460, 70468, '7.0').
+unicode_age(70471, 70472, '7.0').
+unicode_age(70475, 70477, '7.0').
+unicode_age(70487, 70487, '7.0').
+unicode_age(70493, 70499, '7.0').
+unicode_age(70502, 70508, '7.0').
+unicode_age(70512, 70516, '7.0').
+unicode_age(70784, 70855, '7.0').
+unicode_age(70864, 70873, '7.0').
+unicode_age(71040, 71093, '7.0').
+unicode_age(71096, 71113, '7.0').
+unicode_age(71168, 71236, '7.0').
+unicode_age(71248, 71257, '7.0').
+unicode_age(71840, 71922, '7.0').
+unicode_age(71935, 71935, '7.0').
+unicode_age(72384, 72440, '7.0').
+unicode_age(74607, 74648, '7.0').
+unicode_age(74851, 74862, '7.0').
+unicode_age(74868, 74868, '7.0').
+unicode_age(92736, 92766, '7.0').
+unicode_age(92768, 92777, '7.0').
+unicode_age(92782, 92783, '7.0').
+unicode_age(92880, 92909, '7.0').
+unicode_age(92912, 92917, '7.0').
+unicode_age(92928, 92997, '7.0').
+unicode_age(93008, 93017, '7.0').
+unicode_age(93019, 93025, '7.0').
+unicode_age(93027, 93047, '7.0').
+unicode_age(93053, 93071, '7.0').
+unicode_age(113664, 113770, '7.0').
+unicode_age(113776, 113788, '7.0').
+unicode_age(113792, 113800, '7.0').
+unicode_age(113808, 113817, '7.0').
+unicode_age(113820, 113823, '7.0').
+unicode_age(113824, 113827, '7.0').
+unicode_age(124928, 125124, '7.0').
+unicode_age(125127, 125142, '7.0').
+unicode_age(127167, 127167, '7.0').
+unicode_age(127200, 127221, '7.0').
+unicode_age(127243, 127244, '7.0').
+unicode_age(127777, 127788, '7.0').
+unicode_age(127798, 127798, '7.0').
+unicode_age(127869, 127869, '7.0').
+unicode_age(127892, 127903, '7.0').
+unicode_age(127941, 127941, '7.0').
+unicode_age(127947, 127950, '7.0').
+unicode_age(127956, 127967, '7.0').
+unicode_age(127985, 127991, '7.0').
+unicode_age(128063, 128063, '7.0').
+unicode_age(128065, 128065, '7.0').
+unicode_age(128248, 128248, '7.0').
+unicode_age(128253, 128254, '7.0').
+unicode_age(128318, 128319, '7.0').
+unicode_age(128324, 128330, '7.0').
+unicode_age(128360, 128377, '7.0').
+unicode_age(128379, 128419, '7.0').
+unicode_age(128421, 128506, '7.0').
+unicode_age(128577, 128578, '7.0').
+unicode_age(128592, 128639, '7.0').
+unicode_age(128710, 128719, '7.0').
+unicode_age(128736, 128748, '7.0').
+unicode_age(128752, 128755, '7.0').
+unicode_age(128896, 128980, '7.0').
+unicode_age(129024, 129035, '7.0').
+unicode_age(129040, 129095, '7.0').
+unicode_age(129104, 129113, '7.0').
+unicode_age(129120, 129159, '7.0').
+unicode_age(129168, 129197, '7.0').
+unicode_age(2227, 2228, '8.0').
+unicode_age(2275, 2275, '8.0').
+unicode_age(2809, 2809, '8.0').
+unicode_age(3162, 3162, '8.0').
+unicode_age(3423, 3423, '8.0').
+unicode_age(5109, 5109, '8.0').
+unicode_age(5112, 5117, '8.0').
+unicode_age(8382, 8382, '8.0').
+unicode_age(8586, 8587, '8.0').
+unicode_age(11244, 11247, '8.0').
+unicode_age(40909, 40917, '8.0').
+unicode_age(42654, 42654, '8.0').
+unicode_age(42895, 42895, '8.0').
+unicode_age(42930, 42935, '8.0').
+unicode_age(43260, 43261, '8.0').
+unicode_age(43872, 43875, '8.0').
+unicode_age(43888, 43967, '8.0').
+unicode_age(65070, 65071, '8.0').
+unicode_age(67808, 67826, '8.0').
+unicode_age(67828, 67829, '8.0').
+unicode_age(67835, 67839, '8.0').
+unicode_age(68028, 68029, '8.0').
+unicode_age(68032, 68047, '8.0').
+unicode_age(68050, 68095, '8.0').
+unicode_age(68736, 68786, '8.0').
+unicode_age(68800, 68850, '8.0').
+unicode_age(68858, 68863, '8.0').
+unicode_age(70089, 70092, '8.0').
+unicode_age(70107, 70111, '8.0').
+unicode_age(70272, 70278, '8.0').
+unicode_age(70280, 70280, '8.0').
+unicode_age(70282, 70285, '8.0').
+unicode_age(70287, 70301, '8.0').
+unicode_age(70303, 70313, '8.0').
+unicode_age(70400, 70400, '8.0').
+unicode_age(70480, 70480, '8.0').
+unicode_age(71114, 71133, '8.0').
+unicode_age(71424, 71449, '8.0').
+unicode_age(71453, 71467, '8.0').
+unicode_age(71472, 71487, '8.0').
+unicode_age(74649, 74649, '8.0').
+unicode_age(74880, 75075, '8.0').
+unicode_age(82944, 83526, '8.0').
+unicode_age(119262, 119272, '8.0').
+unicode_age(120832, 121483, '8.0').
+unicode_age(121499, 121503, '8.0').
+unicode_age(121505, 121519, '8.0').
+unicode_age(127789, 127791, '8.0').
+unicode_age(127870, 127871, '8.0').
+unicode_age(127951, 127955, '8.0').
+unicode_age(127992, 127999, '8.0').
+unicode_age(128255, 128255, '8.0').
+unicode_age(128331, 128335, '8.0').
+unicode_age(128579, 128580, '8.0').
+unicode_age(128720, 128720, '8.0').
+unicode_age(129296, 129304, '8.0').
+unicode_age(129408, 129412, '8.0').
+unicode_age(129472, 129472, '8.0').
+unicode_age(178208, 183969, '8.0').
+unicode_age(2230, 2237, '9.0').
+unicode_age(2260, 2273, '9.0').
+unicode_age(2274, 2274, '9.0').
+unicode_age(3200, 3200, '9.0').
+unicode_age(3407, 3407, '9.0').
+unicode_age(3412, 3414, '9.0').
+unicode_age(3416, 3422, '9.0').
+unicode_age(3446, 3448, '9.0').
+unicode_age(7296, 7304, '9.0').
+unicode_age(7675, 7675, '9.0').
+unicode_age(9211, 9214, '9.0').
+unicode_age(11843, 11844, '9.0').
+unicode_age(42926, 42926, '9.0').
+unicode_age(43205, 43205, '9.0').
+unicode_age(65933, 65934, '9.0').
+unicode_age(66736, 66771, '9.0').
+unicode_age(66776, 66811, '9.0').
+unicode_age(70206, 70206, '9.0').
+unicode_age(70656, 70745, '9.0').
+unicode_age(70747, 70747, '9.0').
+unicode_age(70749, 70749, '9.0').
+unicode_age(71264, 71276, '9.0').
+unicode_age(72704, 72712, '9.0').
+unicode_age(72714, 72758, '9.0').
+unicode_age(72760, 72773, '9.0').
+unicode_age(72784, 72812, '9.0').
+unicode_age(72816, 72847, '9.0').
+unicode_age(72850, 72871, '9.0').
+unicode_age(72873, 72886, '9.0').
+unicode_age(94176, 94176, '9.0').
+unicode_age(94208, 100332, '9.0').
+unicode_age(100352, 101106, '9.0').
+unicode_age(122880, 122886, '9.0').
+unicode_age(122888, 122904, '9.0').
+unicode_age(122907, 122913, '9.0').
+unicode_age(122915, 122916, '9.0').
+unicode_age(122918, 122922, '9.0').
+unicode_age(125184, 125258, '9.0').
+unicode_age(125264, 125273, '9.0').
+unicode_age(125278, 125279, '9.0').
+unicode_age(127387, 127404, '9.0').
+unicode_age(127547, 127547, '9.0').
+unicode_age(128378, 128378, '9.0').
+unicode_age(128420, 128420, '9.0').
+unicode_age(128721, 128722, '9.0').
+unicode_age(128756, 128758, '9.0').
+unicode_age(129305, 129310, '9.0').
+unicode_age(129312, 129319, '9.0').
+unicode_age(129328, 129328, '9.0').
+unicode_age(129331, 129342, '9.0').
+unicode_age(129344, 129355, '9.0').
+unicode_age(129360, 129374, '9.0').
+unicode_age(129413, 129425, '9.0').
+unicode_age(2144, 2154, '10.0').
+unicode_age(2556, 2557, '10.0').
+unicode_age(2810, 2815, '10.0').
+unicode_age(3328, 3328, '10.0').
+unicode_age(3387, 3388, '10.0').
+unicode_age(7415, 7415, '10.0').
+unicode_age(7670, 7673, '10.0').
+unicode_age(8383, 8383, '10.0').
+unicode_age(9215, 9215, '10.0').
+unicode_age(11218, 11218, '10.0').
+unicode_age(11845, 11849, '10.0').
+unicode_age(12590, 12590, '10.0').
+unicode_age(40918, 40938, '10.0').
+unicode_age(66349, 66351, '10.0').
+unicode_age(72192, 72263, '10.0').
+unicode_age(72272, 72323, '10.0').
+unicode_age(72326, 72348, '10.0').
+unicode_age(72350, 72354, '10.0').
+unicode_age(72960, 72966, '10.0').
+unicode_age(72968, 72969, '10.0').
+unicode_age(72971, 73014, '10.0').
+unicode_age(73018, 73018, '10.0').
+unicode_age(73020, 73021, '10.0').
+unicode_age(73023, 73031, '10.0').
+unicode_age(73040, 73049, '10.0').
+unicode_age(94177, 94177, '10.0').
+unicode_age(110594, 110878, '10.0').
+unicode_age(110960, 111355, '10.0').
+unicode_age(127584, 127589, '10.0').
+unicode_age(128723, 128724, '10.0').
+unicode_age(128759, 128760, '10.0').
+unicode_age(129280, 129291, '10.0').
+unicode_age(129311, 129311, '10.0').
+unicode_age(129320, 129327, '10.0').
+unicode_age(129329, 129330, '10.0').
+unicode_age(129356, 129356, '10.0').
+unicode_age(129375, 129387, '10.0').
+unicode_age(129426, 129431, '10.0').
+unicode_age(129488, 129510, '10.0').
+unicode_age(183984, 191456, '10.0').
+unicode_age(1376, 1376, '11.0').
+unicode_age(1416, 1416, '11.0').
+unicode_age(1519, 1519, '11.0').
+unicode_age(2045, 2047, '11.0').
+unicode_age(2259, 2259, '11.0').
+unicode_age(2558, 2558, '11.0').
+unicode_age(2678, 2678, '11.0').
+unicode_age(3076, 3076, '11.0').
+unicode_age(3204, 3204, '11.0').
+unicode_age(6264, 6264, '11.0').
+unicode_age(7312, 7354, '11.0').
+unicode_age(7357, 7359, '11.0').
+unicode_age(11194, 11196, '11.0').
+unicode_age(11219, 11243, '11.0').
+unicode_age(11248, 11262, '11.0').
+unicode_age(11850, 11854, '11.0').
+unicode_age(12591, 12591, '11.0').
+unicode_age(40939, 40943, '11.0').
+unicode_age(42927, 42927, '11.0').
+unicode_age(42936, 42937, '11.0').
+unicode_age(43262, 43263, '11.0').
+unicode_age(68148, 68149, '11.0').
+unicode_age(68168, 68168, '11.0').
+unicode_age(68864, 68903, '11.0').
+unicode_age(68912, 68921, '11.0').
+unicode_age(69376, 69415, '11.0').
+unicode_age(69424, 69465, '11.0').
+unicode_age(69837, 69837, '11.0').
+unicode_age(69956, 69958, '11.0').
+unicode_age(70459, 70459, '11.0').
+unicode_age(70750, 70750, '11.0').
+unicode_age(71450, 71450, '11.0').
+unicode_age(71680, 71739, '11.0').
+unicode_age(72349, 72349, '11.0').
+unicode_age(73056, 73061, '11.0').
+unicode_age(73063, 73064, '11.0').
+unicode_age(73066, 73102, '11.0').
+unicode_age(73104, 73105, '11.0').
+unicode_age(73107, 73112, '11.0').
+unicode_age(73120, 73129, '11.0').
+unicode_age(73440, 73464, '11.0').
+unicode_age(93760, 93850, '11.0').
+unicode_age(100333, 100337, '11.0').
+unicode_age(119520, 119539, '11.0').
+unicode_age(119666, 119672, '11.0').
+unicode_age(126065, 126132, '11.0').
+unicode_age(127279, 127279, '11.0').
+unicode_age(128761, 128761, '11.0').
+unicode_age(128981, 128984, '11.0').
+unicode_age(129357, 129359, '11.0').
+unicode_age(129388, 129392, '11.0').
+unicode_age(129395, 129398, '11.0').
+unicode_age(129402, 129402, '11.0').
+unicode_age(129404, 129407, '11.0').
+unicode_age(129432, 129442, '11.0').
+unicode_age(129456, 129465, '11.0').
+unicode_age(129473, 129474, '11.0').
+unicode_age(129511, 129535, '11.0').
+unicode_age(129632, 129645, '11.0').
+unicode_age(3191, 3191, '12.0').
+unicode_age(3718, 3718, '12.0').
+unicode_age(3721, 3721, '12.0').
+unicode_age(3724, 3724, '12.0').
+unicode_age(3726, 3731, '12.0').
+unicode_age(3736, 3736, '12.0').
+unicode_age(3744, 3744, '12.0').
+unicode_age(3752, 3753, '12.0').
+unicode_age(3756, 3756, '12.0').
+unicode_age(3770, 3770, '12.0').
+unicode_age(7418, 7418, '12.0').
+unicode_age(11209, 11209, '12.0').
+unicode_age(11263, 11263, '12.0').
+unicode_age(11855, 11855, '12.0').
+unicode_age(42938, 42943, '12.0').
+unicode_age(42946, 42950, '12.0').
+unicode_age(43878, 43879, '12.0').
+unicode_age(69600, 69622, '12.0').
+unicode_age(70751, 70751, '12.0').
+unicode_age(71352, 71352, '12.0').
+unicode_age(72096, 72103, '12.0').
+unicode_age(72106, 72151, '12.0').
+unicode_age(72154, 72164, '12.0').
+unicode_age(72324, 72325, '12.0').
+unicode_age(73664, 73713, '12.0').
+unicode_age(73727, 73727, '12.0').
+unicode_age(78896, 78904, '12.0').
+unicode_age(94021, 94026, '12.0').
+unicode_age(94031, 94031, '12.0').
+unicode_age(94079, 94087, '12.0').
+unicode_age(94178, 94179, '12.0').
+unicode_age(100338, 100343, '12.0').
+unicode_age(110928, 110930, '12.0').
+unicode_age(110948, 110951, '12.0').
+unicode_age(123136, 123180, '12.0').
+unicode_age(123184, 123197, '12.0').
+unicode_age(123200, 123209, '12.0').
+unicode_age(123214, 123215, '12.0').
+unicode_age(123584, 123641, '12.0').
+unicode_age(123647, 123647, '12.0').
+unicode_age(125259, 125259, '12.0').
+unicode_age(126209, 126269, '12.0').
+unicode_age(127340, 127340, '12.0').
+unicode_age(128725, 128725, '12.0').
+unicode_age(128762, 128762, '12.0').
+unicode_age(128992, 129003, '12.0').
+unicode_age(129293, 129295, '12.0').
+unicode_age(129343, 129343, '12.0').
+unicode_age(129393, 129393, '12.0').
+unicode_age(129403, 129403, '12.0').
+unicode_age(129445, 129450, '12.0').
+unicode_age(129454, 129455, '12.0').
+unicode_age(129466, 129471, '12.0').
+unicode_age(129475, 129482, '12.0').
+unicode_age(129485, 129487, '12.0').
+unicode_age(129536, 129619, '12.0').
+unicode_age(129648, 129651, '12.0').
+unicode_age(129656, 129658, '12.0').
+unicode_age(129664, 129666, '12.0').
+unicode_age(129680, 129685, '12.0').
+unicode_age(13055, 13055, '12.1').
+unicode_age(2238, 2247, '13.0').
+unicode_age(2901, 2901, '13.0').
+unicode_age(3332, 3332, '13.0').
+unicode_age(3457, 3457, '13.0').
+unicode_age(6847, 6848, '13.0').
+unicode_age(11159, 11159, '13.0').
+unicode_age(11856, 11858, '13.0').
+unicode_age(12731, 12735, '13.0').
+unicode_age(19894, 19903, '13.0').
+unicode_age(40944, 40956, '13.0').
+unicode_age(42951, 42954, '13.0').
+unicode_age(42997, 42998, '13.0').
+unicode_age(43052, 43052, '13.0').
+unicode_age(43880, 43883, '13.0').
+unicode_age(65948, 65948, '13.0').
+unicode_age(69248, 69289, '13.0').
+unicode_age(69291, 69293, '13.0').
+unicode_age(69296, 69297, '13.0').
+unicode_age(69552, 69579, '13.0').
+unicode_age(69959, 69959, '13.0').
+unicode_age(70094, 70095, '13.0').
+unicode_age(70746, 70746, '13.0').
+unicode_age(70752, 70753, '13.0').
+unicode_age(71936, 71942, '13.0').
+unicode_age(71945, 71945, '13.0').
+unicode_age(71948, 71955, '13.0').
+unicode_age(71957, 71958, '13.0').
+unicode_age(71960, 71989, '13.0').
+unicode_age(71991, 71992, '13.0').
+unicode_age(71995, 72006, '13.0').
+unicode_age(72016, 72025, '13.0').
+unicode_age(73648, 73648, '13.0').
+unicode_age(94180, 94180, '13.0').
+unicode_age(94192, 94193, '13.0').
+unicode_age(101107, 101589, '13.0').
+unicode_age(101632, 101640, '13.0').
+unicode_age(127245, 127247, '13.0').
+unicode_age(127341, 127343, '13.0').
+unicode_age(127405, 127405, '13.0').
+unicode_age(128726, 128727, '13.0').
+unicode_age(128763, 128764, '13.0').
+unicode_age(129200, 129201, '13.0').
+unicode_age(129292, 129292, '13.0').
+unicode_age(129394, 129394, '13.0').
+unicode_age(129399, 129400, '13.0').
+unicode_age(129443, 129444, '13.0').
+unicode_age(129451, 129453, '13.0').
+unicode_age(129483, 129483, '13.0').
+unicode_age(129652, 129652, '13.0').
+unicode_age(129667, 129670, '13.0').
+unicode_age(129686, 129704, '13.0').
+unicode_age(129712, 129718, '13.0').
+unicode_age(129728, 129730, '13.0').
+unicode_age(129744, 129750, '13.0').
+unicode_age(129792, 129938, '13.0').
+unicode_age(129940, 129994, '13.0').
+unicode_age(130032, 130041, '13.0').
+unicode_age(173783, 173789, '13.0').
+unicode_age(196608, 201546, '13.0').
+unicode_age(1565, 1565, '14.0').
+unicode_age(2160, 2190, '14.0').
+unicode_age(2192, 2193, '14.0').
+unicode_age(2200, 2207, '14.0').
+unicode_age(2229, 2229, '14.0').
+unicode_age(2248, 2258, '14.0').
+unicode_age(3132, 3132, '14.0').
+unicode_age(3165, 3165, '14.0').
+unicode_age(3293, 3293, '14.0').
+unicode_age(5901, 5901, '14.0').
+unicode_age(5909, 5909, '14.0').
+unicode_age(5919, 5919, '14.0').
+unicode_age(6159, 6159, '14.0').
+unicode_age(6849, 6862, '14.0').
+unicode_age(6988, 6988, '14.0').
+unicode_age(7037, 7038, '14.0').
+unicode_age(7674, 7674, '14.0').
+unicode_age(8384, 8384, '14.0').
+unicode_age(11311, 11311, '14.0').
+unicode_age(11359, 11359, '14.0').
+unicode_age(11859, 11869, '14.0').
+unicode_age(40957, 40959, '14.0').
+unicode_age(42944, 42945, '14.0').
+unicode_age(42960, 42961, '14.0').
+unicode_age(42963, 42963, '14.0').
+unicode_age(42965, 42969, '14.0').
+unicode_age(42994, 42996, '14.0').
+unicode_age(64450, 64450, '14.0').
+unicode_age(64832, 64847, '14.0').
+unicode_age(64975, 64975, '14.0').
+unicode_age(65022, 65023, '14.0').
+unicode_age(66928, 66938, '14.0').
+unicode_age(66940, 66954, '14.0').
+unicode_age(66956, 66962, '14.0').
+unicode_age(66964, 66965, '14.0').
+unicode_age(66967, 66977, '14.0').
+unicode_age(66979, 66993, '14.0').
+unicode_age(66995, 67001, '14.0').
+unicode_age(67003, 67004, '14.0').
+unicode_age(67456, 67461, '14.0').
+unicode_age(67463, 67504, '14.0').
+unicode_age(67506, 67514, '14.0').
+unicode_age(69488, 69513, '14.0').
+unicode_age(69744, 69749, '14.0').
+unicode_age(69826, 69826, '14.0').
+unicode_age(71353, 71353, '14.0').
+unicode_age(71488, 71494, '14.0').
+unicode_age(72368, 72383, '14.0').
+unicode_age(77712, 77810, '14.0').
+unicode_age(92784, 92862, '14.0').
+unicode_age(92864, 92873, '14.0').
+unicode_age(110576, 110579, '14.0').
+unicode_age(110581, 110587, '14.0').
+unicode_age(110589, 110590, '14.0').
+unicode_age(110879, 110882, '14.0').
+unicode_age(118528, 118573, '14.0').
+unicode_age(118576, 118598, '14.0').
+unicode_age(118608, 118723, '14.0').
+unicode_age(119273, 119274, '14.0').
+unicode_age(122624, 122654, '14.0').
+unicode_age(123536, 123566, '14.0').
+unicode_age(124896, 124902, '14.0').
+unicode_age(124904, 124907, '14.0').
+unicode_age(124909, 124910, '14.0').
+unicode_age(124912, 124926, '14.0').
+unicode_age(128733, 128735, '14.0').
+unicode_age(129008, 129008, '14.0').
+unicode_age(129401, 129401, '14.0').
+unicode_age(129484, 129484, '14.0').
+unicode_age(129659, 129660, '14.0').
+unicode_age(129705, 129708, '14.0').
+unicode_age(129719, 129722, '14.0').
+unicode_age(129731, 129733, '14.0').
+unicode_age(129751, 129753, '14.0').
+unicode_age(129760, 129767, '14.0').
+unicode_age(129776, 129782, '14.0').
+unicode_age(173790, 173791, '14.0').
+unicode_age(177973, 177976, '14.0').
+unicode_age(3315, 3315, '15.0').
+unicode_age(3790, 3790, '15.0').
+unicode_age(69373, 69375, '15.0').
+unicode_age(70207, 70209, '15.0').
+unicode_age(72448, 72457, '15.0').
+unicode_age(73472, 73488, '15.0').
+unicode_age(73490, 73530, '15.0').
+unicode_age(73534, 73561, '15.0').
+unicode_age(78895, 78895, '15.0').
+unicode_age(78905, 78911, '15.0').
+unicode_age(78912, 78933, '15.0').
+unicode_age(110898, 110898, '15.0').
+unicode_age(110933, 110933, '15.0').
+unicode_age(119488, 119507, '15.0').
+unicode_age(122661, 122666, '15.0').
+unicode_age(122928, 122989, '15.0').
+unicode_age(123023, 123023, '15.0').
+unicode_age(124112, 124153, '15.0').
+unicode_age(128732, 128732, '15.0').
+unicode_age(128884, 128886, '15.0').
+unicode_age(128891, 128895, '15.0').
+unicode_age(128985, 128985, '15.0').
+unicode_age(129653, 129655, '15.0').
+unicode_age(129671, 129672, '15.0').
+unicode_age(129709, 129711, '15.0').
+unicode_age(129723, 129725, '15.0').
+unicode_age(129727, 129727, '15.0').
+unicode_age(129742, 129743, '15.0').
+unicode_age(129754, 129755, '15.0').
+unicode_age(129768, 129768, '15.0').
+unicode_age(129783, 129784, '15.0').
+unicode_age(177977, 177977, '15.0').
+unicode_age(201552, 205743, '15.0').
+unicode_age(12284, 12287, '15.1').
+unicode_age(12783, 12783, '15.1').
+unicode_age(191472, 192093, '15.1').
+unicode_age(2199, 2199, '16.0').
+unicode_age(6990, 6991, '16.0').
+unicode_age(7039, 7039, '16.0').
+unicode_age(7305, 7306, '16.0').
+unicode_age(9255, 9257, '16.0').
+unicode_age(12772, 12773, '16.0').
+unicode_age(42955, 42957, '16.0').
+unicode_age(42970, 42972, '16.0').
+unicode_age(67008, 67059, '16.0').
+unicode_age(68928, 68965, '16.0').
+unicode_age(68969, 68997, '16.0').
+unicode_age(69006, 69007, '16.0').
+unicode_age(69314, 69316, '16.0').
+unicode_age(69372, 69372, '16.0').
+unicode_age(70528, 70537, '16.0').
+unicode_age(70539, 70539, '16.0').
+unicode_age(70542, 70542, '16.0').
+unicode_age(70544, 70581, '16.0').
+unicode_age(70583, 70592, '16.0').
+unicode_age(70594, 70594, '16.0').
+unicode_age(70597, 70597, '16.0').
+unicode_age(70599, 70602, '16.0').
+unicode_age(70604, 70613, '16.0').
+unicode_age(70615, 70616, '16.0').
+unicode_age(70625, 70626, '16.0').
+unicode_age(71376, 71395, '16.0').
+unicode_age(72640, 72673, '16.0').
+unicode_age(72688, 72697, '16.0').
+unicode_age(73562, 73562, '16.0').
+unicode_age(78944, 82938, '16.0').
+unicode_age(90368, 90425, '16.0').
+unicode_age(93504, 93561, '16.0').
+unicode_age(101631, 101631, '16.0').
+unicode_age(117760, 118009, '16.0').
+unicode_age(118016, 118451, '16.0').
+unicode_age(124368, 124410, '16.0').
+unicode_age(124415, 124415, '16.0').
+unicode_age(129202, 129211, '16.0').
+unicode_age(129216, 129217, '16.0').
+unicode_age(129673, 129673, '16.0').
+unicode_age(129679, 129679, '16.0').
+unicode_age(129726, 129726, '16.0').
+unicode_age(129734, 129734, '16.0').
+unicode_age(129756, 129756, '16.0').
+unicode_age(129759, 129759, '16.0').
+unicode_age(129769, 129769, '16.0').
+unicode_age(129995, 130031, '16.0').
+unicode_age(2191, 2191, '17.0').
+unicode_age(3164, 3164, '17.0').
+unicode_age(3292, 3292, '17.0').
+unicode_age(6863, 6877, '17.0').
+unicode_age(6880, 6891, '17.0').
+unicode_age(8385, 8385, '17.0').
+unicode_age(11158, 11158, '17.0').
+unicode_age(42958, 42959, '17.0').
+unicode_age(42962, 42962, '17.0').
+unicode_age(42964, 42964, '17.0').
+unicode_age(42993, 42993, '17.0').
+unicode_age(64451, 64466, '17.0').
+unicode_age(64912, 64913, '17.0').
+unicode_age(64968, 64974, '17.0').
+unicode_age(67904, 67929, '17.0').
+unicode_age(69317, 69319, '17.0').
+unicode_age(69328, 69336, '17.0').
+unicode_age(69370, 69371, '17.0').
+unicode_age(72544, 72551, '17.0').
+unicode_age(73136, 73179, '17.0').
+unicode_age(73184, 73193, '17.0').
+unicode_age(93856, 93880, '17.0').
+unicode_age(93883, 93907, '17.0').
+unicode_age(94194, 94198, '17.0').
+unicode_age(100344, 100351, '17.0').
+unicode_age(101641, 101662, '17.0').
+unicode_age(101760, 101874, '17.0').
+unicode_age(118010, 118012, '17.0').
+unicode_age(118458, 118480, '17.0').
+unicode_age(118496, 118512, '17.0').
+unicode_age(124608, 124638, '17.0').
+unicode_age(124640, 124661, '17.0').
+unicode_age(124670, 124671, '17.0').
+unicode_age(128728, 128728, '17.0').
+unicode_age(128887, 128890, '17.0').
+unicode_age(129232, 129240, '17.0').
+unicode_age(129620, 129623, '17.0').
+unicode_age(129674, 129674, '17.0').
+unicode_age(129678, 129678, '17.0').
+unicode_age(129736, 129736, '17.0').
+unicode_age(129741, 129741, '17.0').
+unicode_age(129770, 129770, '17.0').
+unicode_age(129775, 129775, '17.0').
+unicode_age(130042, 130042, '17.0').
+unicode_age(177978, 177983, '17.0').
+unicode_age(183970, 183981, '17.0').
+unicode_age(205744, 210041, '17.0').

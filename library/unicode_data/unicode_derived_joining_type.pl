@@ -1,390 +1,575 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  This file is part of VivoMind Prolog Unicode Resources
-%  SPDX-License-Identifier: CC0-1.0
+%  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
 %
-%  VivoMind Prolog Unicode Resources is free software distributed using the
-%  Creative Commons CC0 1.0 Universal (CC0 1.0) - Public Domain Dedication
-%  license
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%  Last modified: March 28, 2012
+%      http://www.apache.org/licenses/LICENSE-2.0
 %
-%  Original Unicode file header comments follow
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-/*
-# DerivedJoiningType-6.1.0.txt
-# Date: 2011-11-27, 05:10:23 GMT [MD]
-#
-# Unicode Character Database
-# Copyright (c) 1991-2011 Unicode, Inc.
-# For terms of use, see http://www.unicode.org/terms_of_use.html
-# For documentation, see http://www.unicode.org/reports/tr44/
+% Generated from Unicode 17.0.0 UCD data. Do not edit.
 
-# ================================================
-
-#	Type T is derived, as described in ArabicShaping.txt
-
-#  All code points not explicitly listed for Joining_Type
-#  have the value Non_Joining (U).
-
-# @missing: 0000..10FFFF; Non_Joining
-*/
-
-% ================================================
-
-unicode_joining_type(CodePoint, Type) :-
+unicode_joining_type(CodePoint, Value) :-
 	(	var(CodePoint) ->
-		% generate code point pairs
-		unicode_joining_type(CodePointStart, CodePointEnd, Type),
-		between(CodePointStart, CodePointEnd, CodePoint)
-	;	% try first-argument indexing first
-		unicode_joining_type(CodePoint, _, CodePointType) ->
-		Type = CodePointType
-	;	% look for a code point range that includes the given code point
-		unicode_joining_type(CodePointStart, CodePointEnd, CodePointType),
-		between(CodePointStart, CodePointEnd, CodePoint) ->
-		Type = CodePointType
-	;	% missing code point; see original comment above
-		between(0x0000, 0x10FFFF, CodePoint),
-		Type = 'U'
+		unicode_joining_type(Start, End, Value),
+		between(Start, End, CodePoint)
+	;	unicode_joining_type(Start, End, SpecificValue),
+		CodePoint >= Start, CodePoint =< End ->
+		Value = SpecificValue
+	;	between(0, 1114111, CodePoint),
+		Value = 'U'
 	).
 
-% Joining_Type=Join_Causing
-
-unicode_joining_type(0x0640, 0x0640, 'C'). % Lm       ARABIC TATWEEL
-unicode_joining_type(0x07FA, 0x07FA, 'C'). % Lm       NKO LAJANYALAN
-unicode_joining_type(0x200D, 0x200D, 'C'). % Cf       ZERO WIDTH JOINER
-
-% Total code points: 3
-
-% ================================================
-
-% Joining_Type=Dual_Joining
-
-unicode_joining_type(0x0620, 0x0620, 'D'). % Lo       ARABIC LETTER KASHMIRI YEH
-unicode_joining_type(0x0626, 0x0626, 'D'). % Lo       ARABIC LETTER YEH WITH HAMZA ABOVE
-unicode_joining_type(0x0628, 0x0628, 'D'). % Lo       ARABIC LETTER BEH
-unicode_joining_type(0x062A, 0x062E, 'D'). % Lo   [5] ARABIC LETTER TEH..ARABIC LETTER KHAH
-unicode_joining_type(0x0633, 0x063F, 'D'). % Lo  [13] ARABIC LETTER SEEN..ARABIC LETTER FARSI YEH WITH THREE DOTS ABOVE
-unicode_joining_type(0x0641, 0x0647, 'D'). % Lo   [7] ARABIC LETTER FEH..ARABIC LETTER HEH
-unicode_joining_type(0x0649, 0x064A, 'D'). % Lo   [2] ARABIC LETTER ALEF MAKSURA..ARABIC LETTER YEH
-unicode_joining_type(0x066E, 0x066F, 'D'). % Lo   [2] ARABIC LETTER DOTLESS BEH..ARABIC LETTER DOTLESS QAF
-unicode_joining_type(0x0678, 0x0687, 'D'). % Lo  [16] ARABIC LETTER HIGH HAMZA YEH..ARABIC LETTER TCHEHEH
-unicode_joining_type(0x069A, 0x06BF, 'D'). % Lo  [38] ARABIC LETTER SEEN WITH DOT BELOW AND DOT ABOVE..ARABIC LETTER TCHEH WITH DOT ABOVE
-unicode_joining_type(0x06C1, 0x06C2, 'D'). % Lo   [2] ARABIC LETTER HEH GOAL..ARABIC LETTER HEH GOAL WITH HAMZA ABOVE
-unicode_joining_type(0x06CC, 0x06CC, 'D'). % Lo       ARABIC LETTER FARSI YEH
-unicode_joining_type(0x06CE, 0x06CE, 'D'). % Lo       ARABIC LETTER YEH WITH SMALL V
-unicode_joining_type(0x06D0, 0x06D1, 'D'). % Lo   [2] ARABIC LETTER E..ARABIC LETTER YEH WITH THREE DOTS BELOW
-unicode_joining_type(0x06FA, 0x06FC, 'D'). % Lo   [3] ARABIC LETTER SHEEN WITH DOT BELOW..ARABIC LETTER GHAIN WITH DOT BELOW
-unicode_joining_type(0x06FF, 0x06FF, 'D'). % Lo       ARABIC LETTER HEH WITH INVERTED V
-unicode_joining_type(0x0712, 0x0714, 'D'). % Lo   [3] SYRIAC LETTER BETH..SYRIAC LETTER GAMAL GARSHUNI
-unicode_joining_type(0x071A, 0x071D, 'D'). % Lo   [4] SYRIAC LETTER HETH..SYRIAC LETTER YUDH
-unicode_joining_type(0x071F, 0x0727, 'D'). % Lo   [9] SYRIAC LETTER KAPH..SYRIAC LETTER REVERSED PE
-unicode_joining_type(0x0729, 0x0729, 'D'). % Lo       SYRIAC LETTER QAPH
-unicode_joining_type(0x072B, 0x072B, 'D'). % Lo       SYRIAC LETTER SHIN
-unicode_joining_type(0x072D, 0x072E, 'D'). % Lo   [2] SYRIAC LETTER PERSIAN BHETH..SYRIAC LETTER PERSIAN GHAMAL
-unicode_joining_type(0x074E, 0x0758, 'D'). % Lo  [11] SYRIAC LETTER SOGDIAN KHAPH..ARABIC LETTER HAH WITH THREE DOTS POINTING UPWARDS BELOW
-unicode_joining_type(0x075C, 0x076A, 'D'). % Lo  [15] ARABIC LETTER SEEN WITH FOUR DOTS ABOVE..ARABIC LETTER LAM WITH BAR
-unicode_joining_type(0x076D, 0x0770, 'D'). % Lo   [4] ARABIC LETTER SEEN WITH TWO DOTS VERTICALLY ABOVE..ARABIC LETTER SEEN WITH SMALL ARABIC LETTER TAH AND TWO DOTS
-unicode_joining_type(0x0772, 0x0772, 'D'). % Lo       ARABIC LETTER HAH WITH SMALL ARABIC LETTER TAH ABOVE
-unicode_joining_type(0x0775, 0x0777, 'D'). % Lo   [3] ARABIC LETTER FARSI YEH WITH EXTENDED ARABIC-INDIC DIGIT TWO ABOVE..ARABIC LETTER FARSI YEH WITH EXTENDED ARABIC-INDIC DIGIT FOUR BELOW
-unicode_joining_type(0x077A, 0x077F, 'D'). % Lo   [6] ARABIC LETTER YEH BARREE WITH EXTENDED ARABIC-INDIC DIGIT TWO ABOVE..ARABIC LETTER KAF WITH TWO DOTS ABOVE
-unicode_joining_type(0x07CA, 0x07EA, 'D'). % Lo  [33] NKO LETTER A..NKO LETTER JONA RA
-unicode_joining_type(0x0841, 0x0845, 'D'). % Lo   [5] MANDAIC LETTER AB..MANDAIC LETTER USHENNA
-unicode_joining_type(0x0847, 0x0848, 'D'). % Lo   [2] MANDAIC LETTER IT..MANDAIC LETTER ATT
-unicode_joining_type(0x084A, 0x084E, 'D'). % Lo   [5] MANDAIC LETTER AK..MANDAIC LETTER AS
-unicode_joining_type(0x0850, 0x0853, 'D'). % Lo   [4] MANDAIC LETTER AP..MANDAIC LETTER AR
-unicode_joining_type(0x0855, 0x0855, 'D'). % Lo       MANDAIC LETTER AT
-unicode_joining_type(0x08A0, 0x08A0, 'D'). % Lo       ARABIC LETTER BEH WITH SMALL V BELOW
-unicode_joining_type(0x08A2, 0x08A9, 'D'). % Lo   [8] ARABIC LETTER JEEM WITH TWO DOTS ABOVE..ARABIC LETTER YEH WITH TWO DOTS BELOW AND DOT ABOVE
-
-% Total code points: 215
-
-% ================================================
-
-% Joining_Type=Right_Joining
-
-unicode_joining_type(0x0622, 0x0625, 'R'). % Lo   [4] ARABIC LETTER ALEF WITH MADDA ABOVE..ARABIC LETTER ALEF WITH HAMZA BELOW
-unicode_joining_type(0x0627, 0x0627, 'R'). % Lo       ARABIC LETTER ALEF
-unicode_joining_type(0x0629, 0x0629, 'R'). % Lo       ARABIC LETTER TEH MARBUTA
-unicode_joining_type(0x062F, 0x0632, 'R'). % Lo   [4] ARABIC LETTER DAL..ARABIC LETTER ZAIN
-unicode_joining_type(0x0648, 0x0648, 'R'). % Lo       ARABIC LETTER WAW
-unicode_joining_type(0x0671, 0x0673, 'R'). % Lo   [3] ARABIC LETTER ALEF WASLA..ARABIC LETTER ALEF WITH WAVY HAMZA BELOW
-unicode_joining_type(0x0675, 0x0677, 'R'). % Lo   [3] ARABIC LETTER HIGH HAMZA ALEF..ARABIC LETTER U WITH HAMZA ABOVE
-unicode_joining_type(0x0688, 0x0699, 'R'). % Lo  [18] ARABIC LETTER DDAL..ARABIC LETTER REH WITH FOUR DOTS ABOVE
-unicode_joining_type(0x06C0, 0x06C0, 'R'). % Lo       ARABIC LETTER HEH WITH YEH ABOVE
-unicode_joining_type(0x06C3, 0x06CB, 'R'). % Lo   [9] ARABIC LETTER TEH MARBUTA GOAL..ARABIC LETTER VE
-unicode_joining_type(0x06CD, 0x06CD, 'R'). % Lo       ARABIC LETTER YEH WITH TAIL
-unicode_joining_type(0x06CF, 0x06CF, 'R'). % Lo       ARABIC LETTER WAW WITH DOT ABOVE
-unicode_joining_type(0x06D2, 0x06D3, 'R'). % Lo   [2] ARABIC LETTER YEH BARREE..ARABIC LETTER YEH BARREE WITH HAMZA ABOVE
-unicode_joining_type(0x06D5, 0x06D5, 'R'). % Lo       ARABIC LETTER AE
-unicode_joining_type(0x06EE, 0x06EF, 'R'). % Lo   [2] ARABIC LETTER DAL WITH INVERTED V..ARABIC LETTER REH WITH INVERTED V
-unicode_joining_type(0x0710, 0x0710, 'R'). % Lo       SYRIAC LETTER ALAPH
-unicode_joining_type(0x0715, 0x0719, 'R'). % Lo   [5] SYRIAC LETTER DALATH..SYRIAC LETTER ZAIN
-unicode_joining_type(0x071E, 0x071E, 'R'). % Lo       SYRIAC LETTER YUDH HE
-unicode_joining_type(0x0728, 0x0728, 'R'). % Lo       SYRIAC LETTER SADHE
-unicode_joining_type(0x072A, 0x072A, 'R'). % Lo       SYRIAC LETTER RISH
-unicode_joining_type(0x072C, 0x072C, 'R'). % Lo       SYRIAC LETTER TAW
-unicode_joining_type(0x072F, 0x072F, 'R'). % Lo       SYRIAC LETTER PERSIAN DHALATH
-unicode_joining_type(0x074D, 0x074D, 'R'). % Lo       SYRIAC LETTER SOGDIAN ZHAIN
-unicode_joining_type(0x0759, 0x075B, 'R'). % Lo   [3] ARABIC LETTER DAL WITH TWO DOTS VERTICALLY BELOW AND SMALL TAH..ARABIC LETTER REH WITH STROKE
-unicode_joining_type(0x076B, 0x076C, 'R'). % Lo   [2] ARABIC LETTER REH WITH TWO DOTS VERTICALLY ABOVE..ARABIC LETTER REH WITH HAMZA ABOVE
-unicode_joining_type(0x0771, 0x0771, 'R'). % Lo       ARABIC LETTER REH WITH SMALL ARABIC LETTER TAH AND TWO DOTS
-unicode_joining_type(0x0773, 0x0774, 'R'). % Lo   [2] ARABIC LETTER ALEF WITH EXTENDED ARABIC-INDIC DIGIT TWO ABOVE..ARABIC LETTER ALEF WITH EXTENDED ARABIC-INDIC DIGIT THREE ABOVE
-unicode_joining_type(0x0778, 0x0779, 'R'). % Lo   [2] ARABIC LETTER WAW WITH EXTENDED ARABIC-INDIC DIGIT TWO ABOVE..ARABIC LETTER WAW WITH EXTENDED ARABIC-INDIC DIGIT THREE ABOVE
-unicode_joining_type(0x0840, 0x0840, 'R'). % Lo       MANDAIC LETTER HALQA
-unicode_joining_type(0x0846, 0x0846, 'R'). % Lo       MANDAIC LETTER AZ
-unicode_joining_type(0x0849, 0x0849, 'R'). % Lo       MANDAIC LETTER AKSA
-unicode_joining_type(0x084F, 0x084F, 'R'). % Lo       MANDAIC LETTER IN
-unicode_joining_type(0x0854, 0x0854, 'R'). % Lo       MANDAIC LETTER ASH
-unicode_joining_type(0x08AA, 0x08AC, 'R'). % Lo   [3] ARABIC LETTER REH WITH LOOP..ARABIC LETTER ROHINGYA YEH
-
-% Total code points: 82
-
-% ================================================
-
-% Joining_Type=Transparent
-
-unicode_joining_type(0x00AD, 0x00AD, 'T'). % Cf       SOFT HYPHEN
-unicode_joining_type(0x0300, 0x036F, 'T'). % Mn [112] COMBINING GRAVE ACCENT..COMBINING LATIN SMALL LETTER X
-unicode_joining_type(0x0483, 0x0487, 'T'). % Mn   [5] COMBINING CYRILLIC TITLO..COMBINING CYRILLIC POKRYTIE
-unicode_joining_type(0x0488, 0x0489, 'T'). % Me   [2] COMBINING CYRILLIC HUNDRED THOUSANDS SIGN..COMBINING CYRILLIC MILLIONS SIGN
-unicode_joining_type(0x0591, 0x05BD, 'T'). % Mn  [45] HEBREW ACCENT ETNAHTA..HEBREW POINT METEG
-unicode_joining_type(0x05BF, 0x05BF, 'T'). % Mn       HEBREW POINT RAFE
-unicode_joining_type(0x05C1, 0x05C2, 'T'). % Mn   [2] HEBREW POINT SHIN DOT..HEBREW POINT SIN DOT
-unicode_joining_type(0x05C4, 0x05C5, 'T'). % Mn   [2] HEBREW MARK UPPER DOT..HEBREW MARK LOWER DOT
-unicode_joining_type(0x05C7, 0x05C7, 'T'). % Mn       HEBREW POINT QAMATS QATAN
-unicode_joining_type(0x0610, 0x061A, 'T'). % Mn  [11] ARABIC SIGN SALLALLAHOU ALAYHE WASSALLAM..ARABIC SMALL KASRA
-unicode_joining_type(0x064B, 0x065F, 'T'). % Mn  [21] ARABIC FATHATAN..ARABIC WAVY HAMZA BELOW
-unicode_joining_type(0x0670, 0x0670, 'T'). % Mn       ARABIC LETTER SUPERSCRIPT ALEF
-unicode_joining_type(0x06D6, 0x06DC, 'T'). % Mn   [7] ARABIC SMALL HIGH LIGATURE SAD WITH LAM WITH ALEF MAKSURA..ARABIC SMALL HIGH SEEN
-unicode_joining_type(0x06DF, 0x06E4, 'T'). % Mn   [6] ARABIC SMALL HIGH ROUNDED ZERO..ARABIC SMALL HIGH MADDA
-unicode_joining_type(0x06E7, 0x06E8, 'T'). % Mn   [2] ARABIC SMALL HIGH YEH..ARABIC SMALL HIGH NOON
-unicode_joining_type(0x06EA, 0x06ED, 'T'). % Mn   [4] ARABIC EMPTY CENTRE LOW STOP..ARABIC SMALL LOW MEEM
-unicode_joining_type(0x070F, 0x070F, 'T'). % Cf       SYRIAC ABBREVIATION MARK
-unicode_joining_type(0x0711, 0x0711, 'T'). % Mn       SYRIAC LETTER SUPERSCRIPT ALAPH
-unicode_joining_type(0x0730, 0x074A, 'T'). % Mn  [27] SYRIAC PTHAHA ABOVE..SYRIAC BARREKH
-unicode_joining_type(0x07A6, 0x07B0, 'T'). % Mn  [11] THAANA ABAFILI..THAANA SUKUN
-unicode_joining_type(0x07EB, 0x07F3, 'T'). % Mn   [9] NKO COMBINING SHORT HIGH TONE..NKO COMBINING DOUBLE DOT ABOVE
-unicode_joining_type(0x0816, 0x0819, 'T'). % Mn   [4] SAMARITAN MARK IN..SAMARITAN MARK DAGESH
-unicode_joining_type(0x081B, 0x0823, 'T'). % Mn   [9] SAMARITAN MARK EPENTHETIC YUT..SAMARITAN VOWEL SIGN A
-unicode_joining_type(0x0825, 0x0827, 'T'). % Mn   [3] SAMARITAN VOWEL SIGN SHORT A..SAMARITAN VOWEL SIGN U
-unicode_joining_type(0x0829, 0x082D, 'T'). % Mn   [5] SAMARITAN VOWEL SIGN LONG I..SAMARITAN MARK NEQUDAA
-unicode_joining_type(0x0859, 0x085B, 'T'). % Mn   [3] MANDAIC AFFRICATION MARK..MANDAIC GEMINATION MARK
-unicode_joining_type(0x08E4, 0x08FE, 'T'). % Mn  [27] ARABIC CURLY FATHA..ARABIC DAMMA WITH DOT
-unicode_joining_type(0x0900, 0x0902, 'T'). % Mn   [3] DEVANAGARI SIGN INVERTED CANDRABINDU..DEVANAGARI SIGN ANUSVARA
-unicode_joining_type(0x093A, 0x093A, 'T'). % Mn       DEVANAGARI VOWEL SIGN OE
-unicode_joining_type(0x093C, 0x093C, 'T'). % Mn       DEVANAGARI SIGN NUKTA
-unicode_joining_type(0x0941, 0x0948, 'T'). % Mn   [8] DEVANAGARI VOWEL SIGN U..DEVANAGARI VOWEL SIGN AI
-unicode_joining_type(0x094D, 0x094D, 'T'). % Mn       DEVANAGARI SIGN VIRAMA
-unicode_joining_type(0x0951, 0x0957, 'T'). % Mn   [7] DEVANAGARI STRESS SIGN UDATTA..DEVANAGARI VOWEL SIGN UUE
-unicode_joining_type(0x0962, 0x0963, 'T'). % Mn   [2] DEVANAGARI VOWEL SIGN VOCALIC L..DEVANAGARI VOWEL SIGN VOCALIC LL
-unicode_joining_type(0x0981, 0x0981, 'T'). % Mn       BENGALI SIGN CANDRABINDU
-unicode_joining_type(0x09BC, 0x09BC, 'T'). % Mn       BENGALI SIGN NUKTA
-unicode_joining_type(0x09C1, 0x09C4, 'T'). % Mn   [4] BENGALI VOWEL SIGN U..BENGALI VOWEL SIGN VOCALIC RR
-unicode_joining_type(0x09CD, 0x09CD, 'T'). % Mn       BENGALI SIGN VIRAMA
-unicode_joining_type(0x09E2, 0x09E3, 'T'). % Mn   [2] BENGALI VOWEL SIGN VOCALIC L..BENGALI VOWEL SIGN VOCALIC LL
-unicode_joining_type(0x0A01, 0x0A02, 'T'). % Mn   [2] GURMUKHI SIGN ADAK BINDI..GURMUKHI SIGN BINDI
-unicode_joining_type(0x0A3C, 0x0A3C, 'T'). % Mn       GURMUKHI SIGN NUKTA
-unicode_joining_type(0x0A41, 0x0A42, 'T'). % Mn   [2] GURMUKHI VOWEL SIGN U..GURMUKHI VOWEL SIGN UU
-unicode_joining_type(0x0A47, 0x0A48, 'T'). % Mn   [2] GURMUKHI VOWEL SIGN EE..GURMUKHI VOWEL SIGN AI
-unicode_joining_type(0x0A4B, 0x0A4D, 'T'). % Mn   [3] GURMUKHI VOWEL SIGN OO..GURMUKHI SIGN VIRAMA
-unicode_joining_type(0x0A51, 0x0A51, 'T'). % Mn       GURMUKHI SIGN UDAAT
-unicode_joining_type(0x0A70, 0x0A71, 'T'). % Mn   [2] GURMUKHI TIPPI..GURMUKHI ADDAK
-unicode_joining_type(0x0A75, 0x0A75, 'T'). % Mn       GURMUKHI SIGN YAKASH
-unicode_joining_type(0x0A81, 0x0A82, 'T'). % Mn   [2] GUJARATI SIGN CANDRABINDU..GUJARATI SIGN ANUSVARA
-unicode_joining_type(0x0ABC, 0x0ABC, 'T'). % Mn       GUJARATI SIGN NUKTA
-unicode_joining_type(0x0AC1, 0x0AC5, 'T'). % Mn   [5] GUJARATI VOWEL SIGN U..GUJARATI VOWEL SIGN CANDRA E
-unicode_joining_type(0x0AC7, 0x0AC8, 'T'). % Mn   [2] GUJARATI VOWEL SIGN E..GUJARATI VOWEL SIGN AI
-unicode_joining_type(0x0ACD, 0x0ACD, 'T'). % Mn       GUJARATI SIGN VIRAMA
-unicode_joining_type(0x0AE2, 0x0AE3, 'T'). % Mn   [2] GUJARATI VOWEL SIGN VOCALIC L..GUJARATI VOWEL SIGN VOCALIC LL
-unicode_joining_type(0x0B01, 0x0B01, 'T'). % Mn       ORIYA SIGN CANDRABINDU
-unicode_joining_type(0x0B3C, 0x0B3C, 'T'). % Mn       ORIYA SIGN NUKTA
-unicode_joining_type(0x0B3F, 0x0B3F, 'T'). % Mn       ORIYA VOWEL SIGN I
-unicode_joining_type(0x0B41, 0x0B44, 'T'). % Mn   [4] ORIYA VOWEL SIGN U..ORIYA VOWEL SIGN VOCALIC RR
-unicode_joining_type(0x0B4D, 0x0B4D, 'T'). % Mn       ORIYA SIGN VIRAMA
-unicode_joining_type(0x0B56, 0x0B56, 'T'). % Mn       ORIYA AI LENGTH MARK
-unicode_joining_type(0x0B62, 0x0B63, 'T'). % Mn   [2] ORIYA VOWEL SIGN VOCALIC L..ORIYA VOWEL SIGN VOCALIC LL
-unicode_joining_type(0x0B82, 0x0B82, 'T'). % Mn       TAMIL SIGN ANUSVARA
-unicode_joining_type(0x0BC0, 0x0BC0, 'T'). % Mn       TAMIL VOWEL SIGN II
-unicode_joining_type(0x0BCD, 0x0BCD, 'T'). % Mn       TAMIL SIGN VIRAMA
-unicode_joining_type(0x0C3E, 0x0C40, 'T'). % Mn   [3] TELUGU VOWEL SIGN AA..TELUGU VOWEL SIGN II
-unicode_joining_type(0x0C46, 0x0C48, 'T'). % Mn   [3] TELUGU VOWEL SIGN E..TELUGU VOWEL SIGN AI
-unicode_joining_type(0x0C4A, 0x0C4D, 'T'). % Mn   [4] TELUGU VOWEL SIGN O..TELUGU SIGN VIRAMA
-unicode_joining_type(0x0C55, 0x0C56, 'T'). % Mn   [2] TELUGU LENGTH MARK..TELUGU AI LENGTH MARK
-unicode_joining_type(0x0C62, 0x0C63, 'T'). % Mn   [2] TELUGU VOWEL SIGN VOCALIC L..TELUGU VOWEL SIGN VOCALIC LL
-unicode_joining_type(0x0CBC, 0x0CBC, 'T'). % Mn       KANNADA SIGN NUKTA
-unicode_joining_type(0x0CBF, 0x0CBF, 'T'). % Mn       KANNADA VOWEL SIGN I
-unicode_joining_type(0x0CC6, 0x0CC6, 'T'). % Mn       KANNADA VOWEL SIGN E
-unicode_joining_type(0x0CCC, 0x0CCD, 'T'). % Mn   [2] KANNADA VOWEL SIGN AU..KANNADA SIGN VIRAMA
-unicode_joining_type(0x0CE2, 0x0CE3, 'T'). % Mn   [2] KANNADA VOWEL SIGN VOCALIC L..KANNADA VOWEL SIGN VOCALIC LL
-unicode_joining_type(0x0D41, 0x0D44, 'T'). % Mn   [4] MALAYALAM VOWEL SIGN U..MALAYALAM VOWEL SIGN VOCALIC RR
-unicode_joining_type(0x0D4D, 0x0D4D, 'T'). % Mn       MALAYALAM SIGN VIRAMA
-unicode_joining_type(0x0D62, 0x0D63, 'T'). % Mn   [2] MALAYALAM VOWEL SIGN VOCALIC L..MALAYALAM VOWEL SIGN VOCALIC LL
-unicode_joining_type(0x0DCA, 0x0DCA, 'T'). % Mn       SINHALA SIGN AL-LAKUNA
-unicode_joining_type(0x0DD2, 0x0DD4, 'T'). % Mn   [3] SINHALA VOWEL SIGN KETTI IS-PILLA..SINHALA VOWEL SIGN KETTI PAA-PILLA
-unicode_joining_type(0x0DD6, 0x0DD6, 'T'). % Mn       SINHALA VOWEL SIGN DIGA PAA-PILLA
-unicode_joining_type(0x0E31, 0x0E31, 'T'). % Mn       THAI CHARACTER MAI HAN-AKAT
-unicode_joining_type(0x0E34, 0x0E3A, 'T'). % Mn   [7] THAI CHARACTER SARA I..THAI CHARACTER PHINTHU
-unicode_joining_type(0x0E47, 0x0E4E, 'T'). % Mn   [8] THAI CHARACTER MAITAIKHU..THAI CHARACTER YAMAKKAN
-unicode_joining_type(0x0EB1, 0x0EB1, 'T'). % Mn       LAO VOWEL SIGN MAI KAN
-unicode_joining_type(0x0EB4, 0x0EB9, 'T'). % Mn   [6] LAO VOWEL SIGN I..LAO VOWEL SIGN UU
-unicode_joining_type(0x0EBB, 0x0EBC, 'T'). % Mn   [2] LAO VOWEL SIGN MAI KON..LAO SEMIVOWEL SIGN LO
-unicode_joining_type(0x0EC8, 0x0ECD, 'T'). % Mn   [6] LAO TONE MAI EK..LAO NIGGAHITA
-unicode_joining_type(0x0F18, 0x0F19, 'T'). % Mn   [2] TIBETAN ASTROLOGICAL SIGN -KHYUD PA..TIBETAN ASTROLOGICAL SIGN SDONG TSHUGS
-unicode_joining_type(0x0F35, 0x0F35, 'T'). % Mn       TIBETAN MARK NGAS BZUNG NYI ZLA
-unicode_joining_type(0x0F37, 0x0F37, 'T'). % Mn       TIBETAN MARK NGAS BZUNG SGOR RTAGS
-unicode_joining_type(0x0F39, 0x0F39, 'T'). % Mn       TIBETAN MARK TSA -PHRU
-unicode_joining_type(0x0F71, 0x0F7E, 'T'). % Mn  [14] TIBETAN VOWEL SIGN AA..TIBETAN SIGN RJES SU NGA RO
-unicode_joining_type(0x0F80, 0x0F84, 'T'). % Mn   [5] TIBETAN VOWEL SIGN REVERSED I..TIBETAN MARK HALANTA
-unicode_joining_type(0x0F86, 0x0F87, 'T'). % Mn   [2] TIBETAN SIGN LCI RTAGS..TIBETAN SIGN YANG RTAGS
-unicode_joining_type(0x0F8D, 0x0F97, 'T'). % Mn  [11] TIBETAN SUBJOINED SIGN LCE TSA CAN..TIBETAN SUBJOINED LETTER JA
-unicode_joining_type(0x0F99, 0x0FBC, 'T'). % Mn  [36] TIBETAN SUBJOINED LETTER NYA..TIBETAN SUBJOINED LETTER FIXED-FORM RA
-unicode_joining_type(0x0FC6, 0x0FC6, 'T'). % Mn       TIBETAN SYMBOL PADMA GDAN
-unicode_joining_type(0x102D, 0x1030, 'T'). % Mn   [4] MYANMAR VOWEL SIGN I..MYANMAR VOWEL SIGN UU
-unicode_joining_type(0x1032, 0x1037, 'T'). % Mn   [6] MYANMAR VOWEL SIGN AI..MYANMAR SIGN DOT BELOW
-unicode_joining_type(0x1039, 0x103A, 'T'). % Mn   [2] MYANMAR SIGN VIRAMA..MYANMAR SIGN ASAT
-unicode_joining_type(0x103D, 0x103E, 'T'). % Mn   [2] MYANMAR CONSONANT SIGN MEDIAL WA..MYANMAR CONSONANT SIGN MEDIAL HA
-unicode_joining_type(0x1058, 0x1059, 'T'). % Mn   [2] MYANMAR VOWEL SIGN VOCALIC L..MYANMAR VOWEL SIGN VOCALIC LL
-unicode_joining_type(0x105E, 0x1060, 'T'). % Mn   [3] MYANMAR CONSONANT SIGN MON MEDIAL NA..MYANMAR CONSONANT SIGN MON MEDIAL LA
-unicode_joining_type(0x1071, 0x1074, 'T'). % Mn   [4] MYANMAR VOWEL SIGN GEBA KAREN I..MYANMAR VOWEL SIGN KAYAH EE
-unicode_joining_type(0x1082, 0x1082, 'T'). % Mn       MYANMAR CONSONANT SIGN SHAN MEDIAL WA
-unicode_joining_type(0x1085, 0x1086, 'T'). % Mn   [2] MYANMAR VOWEL SIGN SHAN E ABOVE..MYANMAR VOWEL SIGN SHAN FINAL Y
-unicode_joining_type(0x108D, 0x108D, 'T'). % Mn       MYANMAR SIGN SHAN COUNCIL EMPHATIC TONE
-unicode_joining_type(0x109D, 0x109D, 'T'). % Mn       MYANMAR VOWEL SIGN AITON AI
-unicode_joining_type(0x135D, 0x135F, 'T'). % Mn   [3] ETHIOPIC COMBINING GEMINATION AND VOWEL LENGTH MARK..ETHIOPIC COMBINING GEMINATION MARK
-unicode_joining_type(0x1712, 0x1714, 'T'). % Mn   [3] TAGALOG VOWEL SIGN I..TAGALOG SIGN VIRAMA
-unicode_joining_type(0x1732, 0x1734, 'T'). % Mn   [3] HANUNOO VOWEL SIGN I..HANUNOO SIGN PAMUDPOD
-unicode_joining_type(0x1752, 0x1753, 'T'). % Mn   [2] BUHID VOWEL SIGN I..BUHID VOWEL SIGN U
-unicode_joining_type(0x1772, 0x1773, 'T'). % Mn   [2] TAGBANWA VOWEL SIGN I..TAGBANWA VOWEL SIGN U
-unicode_joining_type(0x17B4, 0x17B5, 'T'). % Mn   [2] KHMER VOWEL INHERENT AQ..KHMER VOWEL INHERENT AA
-unicode_joining_type(0x17B7, 0x17BD, 'T'). % Mn   [7] KHMER VOWEL SIGN I..KHMER VOWEL SIGN UA
-unicode_joining_type(0x17C6, 0x17C6, 'T'). % Mn       KHMER SIGN NIKAHIT
-unicode_joining_type(0x17C9, 0x17D3, 'T'). % Mn  [11] KHMER SIGN MUUSIKATOAN..KHMER SIGN BATHAMASAT
-unicode_joining_type(0x17DD, 0x17DD, 'T'). % Mn       KHMER SIGN ATTHACAN
-unicode_joining_type(0x180B, 0x180D, 'T'). % Mn   [3] MONGOLIAN FREE VARIATION SELECTOR ONE..MONGOLIAN FREE VARIATION SELECTOR THREE
-unicode_joining_type(0x18A9, 0x18A9, 'T'). % Mn       MONGOLIAN LETTER ALI GALI DAGALGA
-unicode_joining_type(0x1920, 0x1922, 'T'). % Mn   [3] LIMBU VOWEL SIGN A..LIMBU VOWEL SIGN U
-unicode_joining_type(0x1927, 0x1928, 'T'). % Mn   [2] LIMBU VOWEL SIGN E..LIMBU VOWEL SIGN O
-unicode_joining_type(0x1932, 0x1932, 'T'). % Mn       LIMBU SMALL LETTER ANUSVARA
-unicode_joining_type(0x1939, 0x193B, 'T'). % Mn   [3] LIMBU SIGN MUKPHRENG..LIMBU SIGN SA-I
-unicode_joining_type(0x1A17, 0x1A18, 'T'). % Mn   [2] BUGINESE VOWEL SIGN I..BUGINESE VOWEL SIGN U
-unicode_joining_type(0x1A56, 0x1A56, 'T'). % Mn       TAI THAM CONSONANT SIGN MEDIAL LA
-unicode_joining_type(0x1A58, 0x1A5E, 'T'). % Mn   [7] TAI THAM SIGN MAI KANG LAI..TAI THAM CONSONANT SIGN SA
-unicode_joining_type(0x1A60, 0x1A60, 'T'). % Mn       TAI THAM SIGN SAKOT
-unicode_joining_type(0x1A62, 0x1A62, 'T'). % Mn       TAI THAM VOWEL SIGN MAI SAT
-unicode_joining_type(0x1A65, 0x1A6C, 'T'). % Mn   [8] TAI THAM VOWEL SIGN I..TAI THAM VOWEL SIGN OA BELOW
-unicode_joining_type(0x1A73, 0x1A7C, 'T'). % Mn  [10] TAI THAM VOWEL SIGN OA ABOVE..TAI THAM SIGN KHUEN-LUE KARAN
-unicode_joining_type(0x1A7F, 0x1A7F, 'T'). % Mn       TAI THAM COMBINING CRYPTOGRAMMIC DOT
-unicode_joining_type(0x1B00, 0x1B03, 'T'). % Mn   [4] BALINESE SIGN ULU RICEM..BALINESE SIGN SURANG
-unicode_joining_type(0x1B34, 0x1B34, 'T'). % Mn       BALINESE SIGN REREKAN
-unicode_joining_type(0x1B36, 0x1B3A, 'T'). % Mn   [5] BALINESE VOWEL SIGN ULU..BALINESE VOWEL SIGN RA REPA
-unicode_joining_type(0x1B3C, 0x1B3C, 'T'). % Mn       BALINESE VOWEL SIGN LA LENGA
-unicode_joining_type(0x1B42, 0x1B42, 'T'). % Mn       BALINESE VOWEL SIGN PEPET
-unicode_joining_type(0x1B6B, 0x1B73, 'T'). % Mn   [9] BALINESE MUSICAL SYMBOL COMBINING TEGEH..BALINESE MUSICAL SYMBOL COMBINING GONG
-unicode_joining_type(0x1B80, 0x1B81, 'T'). % Mn   [2] SUNDANESE SIGN PANYECEK..SUNDANESE SIGN PANGLAYAR
-unicode_joining_type(0x1BA2, 0x1BA5, 'T'). % Mn   [4] SUNDANESE CONSONANT SIGN PANYAKRA..SUNDANESE VOWEL SIGN PANYUKU
-unicode_joining_type(0x1BA8, 0x1BA9, 'T'). % Mn   [2] SUNDANESE VOWEL SIGN PAMEPET..SUNDANESE VOWEL SIGN PANEULEUNG
-unicode_joining_type(0x1BAB, 0x1BAB, 'T'). % Mn       SUNDANESE SIGN VIRAMA
-unicode_joining_type(0x1BE6, 0x1BE6, 'T'). % Mn       BATAK SIGN TOMPI
-unicode_joining_type(0x1BE8, 0x1BE9, 'T'). % Mn   [2] BATAK VOWEL SIGN PAKPAK E..BATAK VOWEL SIGN EE
-unicode_joining_type(0x1BED, 0x1BED, 'T'). % Mn       BATAK VOWEL SIGN KARO O
-unicode_joining_type(0x1BEF, 0x1BF1, 'T'). % Mn   [3] BATAK VOWEL SIGN U FOR SIMALUNGUN SA..BATAK CONSONANT SIGN H
-unicode_joining_type(0x1C2C, 0x1C33, 'T'). % Mn   [8] LEPCHA VOWEL SIGN E..LEPCHA CONSONANT SIGN T
-unicode_joining_type(0x1C36, 0x1C37, 'T'). % Mn   [2] LEPCHA SIGN RAN..LEPCHA SIGN NUKTA
-unicode_joining_type(0x1CD0, 0x1CD2, 'T'). % Mn   [3] VEDIC TONE KARSHANA..VEDIC TONE PRENKHA
-unicode_joining_type(0x1CD4, 0x1CE0, 'T'). % Mn  [13] VEDIC SIGN YAJURVEDIC MIDLINE SVARITA..VEDIC TONE RIGVEDIC KASHMIRI INDEPENDENT SVARITA
-unicode_joining_type(0x1CE2, 0x1CE8, 'T'). % Mn   [7] VEDIC SIGN VISARGA SVARITA..VEDIC SIGN VISARGA ANUDATTA WITH TAIL
-unicode_joining_type(0x1CED, 0x1CED, 'T'). % Mn       VEDIC SIGN TIRYAK
-unicode_joining_type(0x1CF4, 0x1CF4, 'T'). % Mn       VEDIC TONE CANDRA ABOVE
-unicode_joining_type(0x1DC0, 0x1DE6, 'T'). % Mn  [39] COMBINING DOTTED GRAVE ACCENT..COMBINING LATIN SMALL LETTER Z
-unicode_joining_type(0x1DFC, 0x1DFF, 'T'). % Mn   [4] COMBINING DOUBLE INVERTED BREVE BELOW..COMBINING RIGHT ARROWHEAD AND DOWN ARROWHEAD BELOW
-unicode_joining_type(0x200B, 0x200B, 'T'). % Cf       ZERO WIDTH SPACE
-unicode_joining_type(0x200E, 0x200F, 'T'). % Cf   [2] LEFT-TO-RIGHT MARK..RIGHT-TO-LEFT MARK
-unicode_joining_type(0x202A, 0x202E, 'T'). % Cf   [5] LEFT-TO-RIGHT EMBEDDING..RIGHT-TO-LEFT OVERRIDE
-unicode_joining_type(0x2060, 0x2064, 'T'). % Cf   [5] WORD JOINER..INVISIBLE PLUS
-unicode_joining_type(0x206A, 0x206F, 'T'). % Cf   [6] INHIBIT SYMMETRIC SWAPPING..NOMINAL DIGIT SHAPES
-unicode_joining_type(0x20D0, 0x20DC, 'T'). % Mn  [13] COMBINING LEFT HARPOON ABOVE..COMBINING FOUR DOTS ABOVE
-unicode_joining_type(0x20DD, 0x20E0, 'T'). % Me   [4] COMBINING ENCLOSING CIRCLE..COMBINING ENCLOSING CIRCLE BACKSLASH
-unicode_joining_type(0x20E1, 0x20E1, 'T'). % Mn       COMBINING LEFT RIGHT ARROW ABOVE
-unicode_joining_type(0x20E2, 0x20E4, 'T'). % Me   [3] COMBINING ENCLOSING SCREEN..COMBINING ENCLOSING UPWARD POINTING TRIANGLE
-unicode_joining_type(0x20E5, 0x20F0, 'T'). % Mn  [12] COMBINING REVERSE SOLIDUS OVERLAY..COMBINING ASTERISK ABOVE
-unicode_joining_type(0x2CEF, 0x2CF1, 'T'). % Mn   [3] COPTIC COMBINING NI ABOVE..COPTIC COMBINING SPIRITUS LENIS
-unicode_joining_type(0x2D7F, 0x2D7F, 'T'). % Mn       TIFINAGH CONSONANT JOINER
-unicode_joining_type(0x2DE0, 0x2DFF, 'T'). % Mn  [32] COMBINING CYRILLIC LETTER BE..COMBINING CYRILLIC LETTER IOTIFIED BIG YUS
-unicode_joining_type(0x302A, 0x302D, 'T'). % Mn   [4] IDEOGRAPHIC LEVEL TONE MARK..IDEOGRAPHIC ENTERING TONE MARK
-unicode_joining_type(0x3099, 0x309A, 'T'). % Mn   [2] COMBINING KATAKANA-HIRAGANA VOICED SOUND MARK..COMBINING KATAKANA-HIRAGANA SEMI-VOICED SOUND MARK
-unicode_joining_type(0xA66F, 0xA66F, 'T'). % Mn       COMBINING CYRILLIC VZMET
-unicode_joining_type(0xA670, 0xA672, 'T'). % Me   [3] COMBINING CYRILLIC TEN MILLIONS SIGN..COMBINING CYRILLIC THOUSAND MILLIONS SIGN
-unicode_joining_type(0xA674, 0xA67D, 'T'). % Mn  [10] COMBINING CYRILLIC LETTER UKRAINIAN IE..COMBINING CYRILLIC PAYEROK
-unicode_joining_type(0xA69F, 0xA69F, 'T'). % Mn       COMBINING CYRILLIC LETTER IOTIFIED E
-unicode_joining_type(0xA6F0, 0xA6F1, 'T'). % Mn   [2] BAMUM COMBINING MARK KOQNDON..BAMUM COMBINING MARK TUKWENTIS
-unicode_joining_type(0xA802, 0xA802, 'T'). % Mn       SYLOTI NAGRI SIGN DVISVARA
-unicode_joining_type(0xA806, 0xA806, 'T'). % Mn       SYLOTI NAGRI SIGN HASANTA
-unicode_joining_type(0xA80B, 0xA80B, 'T'). % Mn       SYLOTI NAGRI SIGN ANUSVARA
-unicode_joining_type(0xA825, 0xA826, 'T'). % Mn   [2] SYLOTI NAGRI VOWEL SIGN U..SYLOTI NAGRI VOWEL SIGN E
-unicode_joining_type(0xA8C4, 0xA8C4, 'T'). % Mn       SAURASHTRA SIGN VIRAMA
-unicode_joining_type(0xA8E0, 0xA8F1, 'T'). % Mn  [18] COMBINING DEVANAGARI DIGIT ZERO..COMBINING DEVANAGARI SIGN AVAGRAHA
-unicode_joining_type(0xA926, 0xA92D, 'T'). % Mn   [8] KAYAH LI VOWEL UE..KAYAH LI TONE CALYA PLOPHU
-unicode_joining_type(0xA947, 0xA951, 'T'). % Mn  [11] REJANG VOWEL SIGN I..REJANG CONSONANT SIGN R
-unicode_joining_type(0xA980, 0xA982, 'T'). % Mn   [3] JAVANESE SIGN PANYANGGA..JAVANESE SIGN LAYAR
-unicode_joining_type(0xA9B3, 0xA9B3, 'T'). % Mn       JAVANESE SIGN CECAK TELU
-unicode_joining_type(0xA9B6, 0xA9B9, 'T'). % Mn   [4] JAVANESE VOWEL SIGN WULU..JAVANESE VOWEL SIGN SUKU MENDUT
-unicode_joining_type(0xA9BC, 0xA9BC, 'T'). % Mn       JAVANESE VOWEL SIGN PEPET
-unicode_joining_type(0xAA29, 0xAA2E, 'T'). % Mn   [6] CHAM VOWEL SIGN AA..CHAM VOWEL SIGN OE
-unicode_joining_type(0xAA31, 0xAA32, 'T'). % Mn   [2] CHAM VOWEL SIGN AU..CHAM VOWEL SIGN UE
-unicode_joining_type(0xAA35, 0xAA36, 'T'). % Mn   [2] CHAM CONSONANT SIGN LA..CHAM CONSONANT SIGN WA
-unicode_joining_type(0xAA43, 0xAA43, 'T'). % Mn       CHAM CONSONANT SIGN FINAL NG
-unicode_joining_type(0xAA4C, 0xAA4C, 'T'). % Mn       CHAM CONSONANT SIGN FINAL M
-unicode_joining_type(0xAAB0, 0xAAB0, 'T'). % Mn       TAI VIET MAI KANG
-unicode_joining_type(0xAAB2, 0xAAB4, 'T'). % Mn   [3] TAI VIET VOWEL I..TAI VIET VOWEL U
-unicode_joining_type(0xAAB7, 0xAAB8, 'T'). % Mn   [2] TAI VIET MAI KHIT..TAI VIET VOWEL IA
-unicode_joining_type(0xAABE, 0xAABF, 'T'). % Mn   [2] TAI VIET VOWEL AM..TAI VIET TONE MAI EK
-unicode_joining_type(0xAAC1, 0xAAC1, 'T'). % Mn       TAI VIET TONE MAI THO
-unicode_joining_type(0xAAEC, 0xAAED, 'T'). % Mn   [2] MEETEI MAYEK VOWEL SIGN UU..MEETEI MAYEK VOWEL SIGN AAI
-unicode_joining_type(0xAAF6, 0xAAF6, 'T'). % Mn       MEETEI MAYEK VIRAMA
-unicode_joining_type(0xABE5, 0xABE5, 'T'). % Mn       MEETEI MAYEK VOWEL SIGN ANAP
-unicode_joining_type(0xABE8, 0xABE8, 'T'). % Mn       MEETEI MAYEK VOWEL SIGN UNAP
-unicode_joining_type(0xABED, 0xABED, 'T'). % Mn       MEETEI MAYEK APUN IYEK
-unicode_joining_type(0xFB1E, 0xFB1E, 'T'). % Mn       HEBREW POINT JUDEO-SPANISH VARIKA
-unicode_joining_type(0xFE00, 0xFE0F, 'T'). % Mn  [16] VARIATION SELECTOR-1..VARIATION SELECTOR-16
-unicode_joining_type(0xFE20, 0xFE26, 'T'). % Mn   [7] COMBINING LIGATURE LEFT HALF..COMBINING CONJOINING MACRON
-unicode_joining_type(0xFEFF, 0xFEFF, 'T'). % Cf       ZERO WIDTH NO-BREAK SPACE
-unicode_joining_type(0xFFF9, 0xFFFB, 'T'). % Cf   [3] INTERLINEAR ANNOTATION ANCHOR..INTERLINEAR ANNOTATION TERMINATOR
-unicode_joining_type(0x101FD, 0x101FD, 'T'). % Mn       PHAISTOS DISC SIGN COMBINING OBLIQUE STROKE
-unicode_joining_type(0x10A01, 0x10A03, 'T'). % Mn   [3] KHAROSHTHI VOWEL SIGN I..KHAROSHTHI VOWEL SIGN VOCALIC R
-unicode_joining_type(0x10A05, 0x10A06, 'T'). % Mn   [2] KHAROSHTHI VOWEL SIGN E..KHAROSHTHI VOWEL SIGN O
-unicode_joining_type(0x10A0C, 0x10A0F, 'T'). % Mn   [4] KHAROSHTHI VOWEL LENGTH MARK..KHAROSHTHI SIGN VISARGA
-unicode_joining_type(0x10A38, 0x10A3A, 'T'). % Mn   [3] KHAROSHTHI SIGN BAR ABOVE..KHAROSHTHI SIGN DOT BELOW
-unicode_joining_type(0x10A3F, 0x10A3F, 'T'). % Mn       KHAROSHTHI VIRAMA
-unicode_joining_type(0x11001, 0x11001, 'T'). % Mn       BRAHMI SIGN ANUSVARA
-unicode_joining_type(0x11038, 0x11046, 'T'). % Mn  [15] BRAHMI VOWEL SIGN AA..BRAHMI VIRAMA
-unicode_joining_type(0x11080, 0x11081, 'T'). % Mn   [2] KAITHI SIGN CANDRABINDU..KAITHI SIGN ANUSVARA
-unicode_joining_type(0x110B3, 0x110B6, 'T'). % Mn   [4] KAITHI VOWEL SIGN U..KAITHI VOWEL SIGN AI
-unicode_joining_type(0x110B9, 0x110BA, 'T'). % Mn   [2] KAITHI SIGN VIRAMA..KAITHI SIGN NUKTA
-unicode_joining_type(0x110BD, 0x110BD, 'T'). % Cf       KAITHI NUMBER SIGN
-unicode_joining_type(0x11100, 0x11102, 'T'). % Mn   [3] CHAKMA SIGN CANDRABINDU..CHAKMA SIGN VISARGA
-unicode_joining_type(0x11127, 0x1112B, 'T'). % Mn   [5] CHAKMA VOWEL SIGN A..CHAKMA VOWEL SIGN UU
-unicode_joining_type(0x1112D, 0x11134, 'T'). % Mn   [8] CHAKMA VOWEL SIGN AI..CHAKMA MAAYYAA
-unicode_joining_type(0x11180, 0x11181, 'T'). % Mn   [2] SHARADA SIGN CANDRABINDU..SHARADA SIGN ANUSVARA
-unicode_joining_type(0x111B6, 0x111BE, 'T'). % Mn   [9] SHARADA VOWEL SIGN U..SHARADA VOWEL SIGN O
-unicode_joining_type(0x116AB, 0x116AB, 'T'). % Mn       TAKRI SIGN ANUSVARA
-unicode_joining_type(0x116AD, 0x116AD, 'T'). % Mn       TAKRI VOWEL SIGN AA
-unicode_joining_type(0x116B0, 0x116B5, 'T'). % Mn   [6] TAKRI VOWEL SIGN U..TAKRI VOWEL SIGN AU
-unicode_joining_type(0x116B7, 0x116B7, 'T'). % Mn       TAKRI SIGN NUKTA
-unicode_joining_type(0x16F8F, 0x16F92, 'T'). % Mn   [4] MIAO TONE RIGHT..MIAO TONE BELOW
-unicode_joining_type(0x1D167, 0x1D169, 'T'). % Mn   [3] MUSICAL SYMBOL COMBINING TREMOLO-1..MUSICAL SYMBOL COMBINING TREMOLO-3
-unicode_joining_type(0x1D173, 0x1D17A, 'T'). % Cf   [8] MUSICAL SYMBOL BEGIN BEAM..MUSICAL SYMBOL END PHRASE
-unicode_joining_type(0x1D17B, 0x1D182, 'T'). % Mn   [8] MUSICAL SYMBOL COMBINING ACCENT..MUSICAL SYMBOL COMBINING LOURE
-unicode_joining_type(0x1D185, 0x1D18B, 'T'). % Mn   [7] MUSICAL SYMBOL COMBINING DOIT..MUSICAL SYMBOL COMBINING TRIPLE TONGUE
-unicode_joining_type(0x1D1AA, 0x1D1AD, 'T'). % Mn   [4] MUSICAL SYMBOL COMBINING DOWN BOW..MUSICAL SYMBOL COMBINING SNAP PIZZICATO
-unicode_joining_type(0x1D242, 0x1D244, 'T'). % Mn   [3] COMBINING GREEK MUSICAL TRISEME..COMBINING GREEK MUSICAL PENTASEME
-unicode_joining_type(0xE0001, 0xE0001, 'T'). % Cf       LANGUAGE TAG
-unicode_joining_type(0xE0020, 0xE007F, 'T'). % Cf  [96] TAG SPACE..CANCEL TAG
-unicode_joining_type(0xE0100, 0xE01EF, 'T'). % Mn [240] VARIATION SELECTOR-17..VARIATION SELECTOR-256
-
-% Total code points: 1423
-
-% EOF
+unicode_joining_type(1600, 1600, 'C').
+unicode_joining_type(2042, 2042, 'C').
+unicode_joining_type(2179, 2181, 'C').
+unicode_joining_type(6154, 6154, 'C').
+unicode_joining_type(8205, 8205, 'C').
+unicode_joining_type(1568, 1568, 'D').
+unicode_joining_type(1574, 1574, 'D').
+unicode_joining_type(1576, 1576, 'D').
+unicode_joining_type(1578, 1582, 'D').
+unicode_joining_type(1587, 1599, 'D').
+unicode_joining_type(1601, 1607, 'D').
+unicode_joining_type(1609, 1610, 'D').
+unicode_joining_type(1646, 1647, 'D').
+unicode_joining_type(1656, 1671, 'D').
+unicode_joining_type(1690, 1727, 'D').
+unicode_joining_type(1729, 1730, 'D').
+unicode_joining_type(1740, 1740, 'D').
+unicode_joining_type(1742, 1742, 'D').
+unicode_joining_type(1744, 1745, 'D').
+unicode_joining_type(1786, 1788, 'D').
+unicode_joining_type(1791, 1791, 'D').
+unicode_joining_type(1810, 1812, 'D').
+unicode_joining_type(1818, 1821, 'D').
+unicode_joining_type(1823, 1831, 'D').
+unicode_joining_type(1833, 1833, 'D').
+unicode_joining_type(1835, 1835, 'D').
+unicode_joining_type(1837, 1838, 'D').
+unicode_joining_type(1870, 1880, 'D').
+unicode_joining_type(1884, 1898, 'D').
+unicode_joining_type(1901, 1904, 'D').
+unicode_joining_type(1906, 1906, 'D').
+unicode_joining_type(1909, 1911, 'D').
+unicode_joining_type(1914, 1919, 'D').
+unicode_joining_type(1994, 2026, 'D').
+unicode_joining_type(2113, 2117, 'D').
+unicode_joining_type(2120, 2120, 'D').
+unicode_joining_type(2122, 2131, 'D').
+unicode_joining_type(2133, 2133, 'D').
+unicode_joining_type(2144, 2144, 'D').
+unicode_joining_type(2146, 2149, 'D').
+unicode_joining_type(2152, 2152, 'D').
+unicode_joining_type(2182, 2182, 'D').
+unicode_joining_type(2185, 2189, 'D').
+unicode_joining_type(2191, 2191, 'D').
+unicode_joining_type(2208, 2217, 'D').
+unicode_joining_type(2223, 2224, 'D').
+unicode_joining_type(2227, 2232, 'D').
+unicode_joining_type(2234, 2248, 'D').
+unicode_joining_type(6151, 6151, 'D').
+unicode_joining_type(6176, 6210, 'D').
+unicode_joining_type(6211, 6211, 'D').
+unicode_joining_type(6212, 6264, 'D').
+unicode_joining_type(6279, 6312, 'D').
+unicode_joining_type(6314, 6314, 'D').
+unicode_joining_type(43072, 43121, 'D').
+unicode_joining_type(68288, 68292, 'D').
+unicode_joining_type(68307, 68310, 'D').
+unicode_joining_type(68312, 68316, 'D').
+unicode_joining_type(68318, 68320, 'D').
+unicode_joining_type(68331, 68334, 'D').
+unicode_joining_type(68480, 68480, 'D').
+unicode_joining_type(68482, 68482, 'D').
+unicode_joining_type(68486, 68488, 'D').
+unicode_joining_type(68490, 68491, 'D').
+unicode_joining_type(68493, 68493, 'D').
+unicode_joining_type(68496, 68496, 'D').
+unicode_joining_type(68525, 68526, 'D').
+unicode_joining_type(68865, 68897, 'D').
+unicode_joining_type(68899, 68899, 'D').
+unicode_joining_type(69315, 69316, 'D').
+unicode_joining_type(69318, 69319, 'D').
+unicode_joining_type(69424, 69426, 'D').
+unicode_joining_type(69428, 69444, 'D').
+unicode_joining_type(69457, 69459, 'D').
+unicode_joining_type(69488, 69491, 'D').
+unicode_joining_type(69494, 69505, 'D').
+unicode_joining_type(69552, 69552, 'D').
+unicode_joining_type(69554, 69555, 'D').
+unicode_joining_type(69560, 69560, 'D').
+unicode_joining_type(69563, 69564, 'D').
+unicode_joining_type(69566, 69567, 'D').
+unicode_joining_type(69569, 69569, 'D').
+unicode_joining_type(69572, 69572, 'D').
+unicode_joining_type(69578, 69578, 'D').
+unicode_joining_type(125184, 125251, 'D').
+unicode_joining_type(1570, 1573, 'R').
+unicode_joining_type(1575, 1575, 'R').
+unicode_joining_type(1577, 1577, 'R').
+unicode_joining_type(1583, 1586, 'R').
+unicode_joining_type(1608, 1608, 'R').
+unicode_joining_type(1649, 1651, 'R').
+unicode_joining_type(1653, 1655, 'R').
+unicode_joining_type(1672, 1689, 'R').
+unicode_joining_type(1728, 1728, 'R').
+unicode_joining_type(1731, 1739, 'R').
+unicode_joining_type(1741, 1741, 'R').
+unicode_joining_type(1743, 1743, 'R').
+unicode_joining_type(1746, 1747, 'R').
+unicode_joining_type(1749, 1749, 'R').
+unicode_joining_type(1774, 1775, 'R').
+unicode_joining_type(1808, 1808, 'R').
+unicode_joining_type(1813, 1817, 'R').
+unicode_joining_type(1822, 1822, 'R').
+unicode_joining_type(1832, 1832, 'R').
+unicode_joining_type(1834, 1834, 'R').
+unicode_joining_type(1836, 1836, 'R').
+unicode_joining_type(1839, 1839, 'R').
+unicode_joining_type(1869, 1869, 'R').
+unicode_joining_type(1881, 1883, 'R').
+unicode_joining_type(1899, 1900, 'R').
+unicode_joining_type(1905, 1905, 'R').
+unicode_joining_type(1907, 1908, 'R').
+unicode_joining_type(1912, 1913, 'R').
+unicode_joining_type(2112, 2112, 'R').
+unicode_joining_type(2118, 2119, 'R').
+unicode_joining_type(2121, 2121, 'R').
+unicode_joining_type(2132, 2132, 'R').
+unicode_joining_type(2134, 2136, 'R').
+unicode_joining_type(2151, 2151, 'R').
+unicode_joining_type(2153, 2154, 'R').
+unicode_joining_type(2160, 2178, 'R').
+unicode_joining_type(2190, 2190, 'R').
+unicode_joining_type(2218, 2220, 'R').
+unicode_joining_type(2222, 2222, 'R').
+unicode_joining_type(2225, 2226, 'R').
+unicode_joining_type(2233, 2233, 'R').
+unicode_joining_type(68293, 68293, 'R').
+unicode_joining_type(68295, 68295, 'R').
+unicode_joining_type(68297, 68298, 'R').
+unicode_joining_type(68302, 68306, 'R').
+unicode_joining_type(68317, 68317, 'R').
+unicode_joining_type(68321, 68321, 'R').
+unicode_joining_type(68324, 68324, 'R').
+unicode_joining_type(68335, 68335, 'R').
+unicode_joining_type(68481, 68481, 'R').
+unicode_joining_type(68483, 68485, 'R').
+unicode_joining_type(68489, 68489, 'R').
+unicode_joining_type(68492, 68492, 'R').
+unicode_joining_type(68494, 68495, 'R').
+unicode_joining_type(68497, 68497, 'R').
+unicode_joining_type(68521, 68524, 'R').
+unicode_joining_type(68898, 68898, 'R').
+unicode_joining_type(69314, 69314, 'R').
+unicode_joining_type(69427, 69427, 'R').
+unicode_joining_type(69460, 69460, 'R').
+unicode_joining_type(69492, 69493, 'R').
+unicode_joining_type(69556, 69558, 'R').
+unicode_joining_type(69561, 69562, 'R').
+unicode_joining_type(69565, 69565, 'R').
+unicode_joining_type(69570, 69571, 'R').
+unicode_joining_type(69577, 69577, 'R').
+unicode_joining_type(43122, 43122, 'L').
+unicode_joining_type(68301, 68301, 'L').
+unicode_joining_type(68311, 68311, 'L').
+unicode_joining_type(68864, 68864, 'L').
+unicode_joining_type(69579, 69579, 'L').
+unicode_joining_type(173, 173, 'T').
+unicode_joining_type(768, 879, 'T').
+unicode_joining_type(1155, 1159, 'T').
+unicode_joining_type(1160, 1161, 'T').
+unicode_joining_type(1425, 1469, 'T').
+unicode_joining_type(1471, 1471, 'T').
+unicode_joining_type(1473, 1474, 'T').
+unicode_joining_type(1476, 1477, 'T').
+unicode_joining_type(1479, 1479, 'T').
+unicode_joining_type(1552, 1562, 'T').
+unicode_joining_type(1564, 1564, 'T').
+unicode_joining_type(1611, 1631, 'T').
+unicode_joining_type(1648, 1648, 'T').
+unicode_joining_type(1750, 1756, 'T').
+unicode_joining_type(1759, 1764, 'T').
+unicode_joining_type(1767, 1768, 'T').
+unicode_joining_type(1770, 1773, 'T').
+unicode_joining_type(1807, 1807, 'T').
+unicode_joining_type(1809, 1809, 'T').
+unicode_joining_type(1840, 1866, 'T').
+unicode_joining_type(1958, 1968, 'T').
+unicode_joining_type(2027, 2035, 'T').
+unicode_joining_type(2045, 2045, 'T').
+unicode_joining_type(2070, 2073, 'T').
+unicode_joining_type(2075, 2083, 'T').
+unicode_joining_type(2085, 2087, 'T').
+unicode_joining_type(2089, 2093, 'T').
+unicode_joining_type(2137, 2139, 'T').
+unicode_joining_type(2199, 2207, 'T').
+unicode_joining_type(2250, 2273, 'T').
+unicode_joining_type(2275, 2306, 'T').
+unicode_joining_type(2362, 2362, 'T').
+unicode_joining_type(2364, 2364, 'T').
+unicode_joining_type(2369, 2376, 'T').
+unicode_joining_type(2381, 2381, 'T').
+unicode_joining_type(2385, 2391, 'T').
+unicode_joining_type(2402, 2403, 'T').
+unicode_joining_type(2433, 2433, 'T').
+unicode_joining_type(2492, 2492, 'T').
+unicode_joining_type(2497, 2500, 'T').
+unicode_joining_type(2509, 2509, 'T').
+unicode_joining_type(2530, 2531, 'T').
+unicode_joining_type(2558, 2558, 'T').
+unicode_joining_type(2561, 2562, 'T').
+unicode_joining_type(2620, 2620, 'T').
+unicode_joining_type(2625, 2626, 'T').
+unicode_joining_type(2631, 2632, 'T').
+unicode_joining_type(2635, 2637, 'T').
+unicode_joining_type(2641, 2641, 'T').
+unicode_joining_type(2672, 2673, 'T').
+unicode_joining_type(2677, 2677, 'T').
+unicode_joining_type(2689, 2690, 'T').
+unicode_joining_type(2748, 2748, 'T').
+unicode_joining_type(2753, 2757, 'T').
+unicode_joining_type(2759, 2760, 'T').
+unicode_joining_type(2765, 2765, 'T').
+unicode_joining_type(2786, 2787, 'T').
+unicode_joining_type(2810, 2815, 'T').
+unicode_joining_type(2817, 2817, 'T').
+unicode_joining_type(2876, 2876, 'T').
+unicode_joining_type(2879, 2879, 'T').
+unicode_joining_type(2881, 2884, 'T').
+unicode_joining_type(2893, 2893, 'T').
+unicode_joining_type(2901, 2902, 'T').
+unicode_joining_type(2914, 2915, 'T').
+unicode_joining_type(2946, 2946, 'T').
+unicode_joining_type(3008, 3008, 'T').
+unicode_joining_type(3021, 3021, 'T').
+unicode_joining_type(3072, 3072, 'T').
+unicode_joining_type(3076, 3076, 'T').
+unicode_joining_type(3132, 3132, 'T').
+unicode_joining_type(3134, 3136, 'T').
+unicode_joining_type(3142, 3144, 'T').
+unicode_joining_type(3146, 3149, 'T').
+unicode_joining_type(3157, 3158, 'T').
+unicode_joining_type(3170, 3171, 'T').
+unicode_joining_type(3201, 3201, 'T').
+unicode_joining_type(3260, 3260, 'T').
+unicode_joining_type(3263, 3263, 'T').
+unicode_joining_type(3270, 3270, 'T').
+unicode_joining_type(3276, 3277, 'T').
+unicode_joining_type(3298, 3299, 'T').
+unicode_joining_type(3328, 3329, 'T').
+unicode_joining_type(3387, 3388, 'T').
+unicode_joining_type(3393, 3396, 'T').
+unicode_joining_type(3405, 3405, 'T').
+unicode_joining_type(3426, 3427, 'T').
+unicode_joining_type(3457, 3457, 'T').
+unicode_joining_type(3530, 3530, 'T').
+unicode_joining_type(3538, 3540, 'T').
+unicode_joining_type(3542, 3542, 'T').
+unicode_joining_type(3633, 3633, 'T').
+unicode_joining_type(3636, 3642, 'T').
+unicode_joining_type(3655, 3662, 'T').
+unicode_joining_type(3761, 3761, 'T').
+unicode_joining_type(3764, 3772, 'T').
+unicode_joining_type(3784, 3790, 'T').
+unicode_joining_type(3864, 3865, 'T').
+unicode_joining_type(3893, 3893, 'T').
+unicode_joining_type(3895, 3895, 'T').
+unicode_joining_type(3897, 3897, 'T').
+unicode_joining_type(3953, 3966, 'T').
+unicode_joining_type(3968, 3972, 'T').
+unicode_joining_type(3974, 3975, 'T').
+unicode_joining_type(3981, 3991, 'T').
+unicode_joining_type(3993, 4028, 'T').
+unicode_joining_type(4038, 4038, 'T').
+unicode_joining_type(4141, 4144, 'T').
+unicode_joining_type(4146, 4151, 'T').
+unicode_joining_type(4153, 4154, 'T').
+unicode_joining_type(4157, 4158, 'T').
+unicode_joining_type(4184, 4185, 'T').
+unicode_joining_type(4190, 4192, 'T').
+unicode_joining_type(4209, 4212, 'T').
+unicode_joining_type(4226, 4226, 'T').
+unicode_joining_type(4229, 4230, 'T').
+unicode_joining_type(4237, 4237, 'T').
+unicode_joining_type(4253, 4253, 'T').
+unicode_joining_type(4957, 4959, 'T').
+unicode_joining_type(5906, 5908, 'T').
+unicode_joining_type(5938, 5939, 'T').
+unicode_joining_type(5970, 5971, 'T').
+unicode_joining_type(6002, 6003, 'T').
+unicode_joining_type(6068, 6069, 'T').
+unicode_joining_type(6071, 6077, 'T').
+unicode_joining_type(6086, 6086, 'T').
+unicode_joining_type(6089, 6099, 'T').
+unicode_joining_type(6109, 6109, 'T').
+unicode_joining_type(6155, 6157, 'T').
+unicode_joining_type(6159, 6159, 'T').
+unicode_joining_type(6277, 6278, 'T').
+unicode_joining_type(6313, 6313, 'T').
+unicode_joining_type(6432, 6434, 'T').
+unicode_joining_type(6439, 6440, 'T').
+unicode_joining_type(6450, 6450, 'T').
+unicode_joining_type(6457, 6459, 'T').
+unicode_joining_type(6679, 6680, 'T').
+unicode_joining_type(6683, 6683, 'T').
+unicode_joining_type(6742, 6742, 'T').
+unicode_joining_type(6744, 6750, 'T').
+unicode_joining_type(6752, 6752, 'T').
+unicode_joining_type(6754, 6754, 'T').
+unicode_joining_type(6757, 6764, 'T').
+unicode_joining_type(6771, 6780, 'T').
+unicode_joining_type(6783, 6783, 'T').
+unicode_joining_type(6832, 6845, 'T').
+unicode_joining_type(6846, 6846, 'T').
+unicode_joining_type(6847, 6877, 'T').
+unicode_joining_type(6880, 6891, 'T').
+unicode_joining_type(6912, 6915, 'T').
+unicode_joining_type(6964, 6964, 'T').
+unicode_joining_type(6966, 6970, 'T').
+unicode_joining_type(6972, 6972, 'T').
+unicode_joining_type(6978, 6978, 'T').
+unicode_joining_type(7019, 7027, 'T').
+unicode_joining_type(7040, 7041, 'T').
+unicode_joining_type(7074, 7077, 'T').
+unicode_joining_type(7080, 7081, 'T').
+unicode_joining_type(7083, 7085, 'T').
+unicode_joining_type(7142, 7142, 'T').
+unicode_joining_type(7144, 7145, 'T').
+unicode_joining_type(7149, 7149, 'T').
+unicode_joining_type(7151, 7153, 'T').
+unicode_joining_type(7212, 7219, 'T').
+unicode_joining_type(7222, 7223, 'T').
+unicode_joining_type(7376, 7378, 'T').
+unicode_joining_type(7380, 7392, 'T').
+unicode_joining_type(7394, 7400, 'T').
+unicode_joining_type(7405, 7405, 'T').
+unicode_joining_type(7412, 7412, 'T').
+unicode_joining_type(7416, 7417, 'T').
+unicode_joining_type(7616, 7679, 'T').
+unicode_joining_type(8203, 8203, 'T').
+unicode_joining_type(8206, 8207, 'T').
+unicode_joining_type(8234, 8238, 'T').
+unicode_joining_type(8288, 8292, 'T').
+unicode_joining_type(8298, 8303, 'T').
+unicode_joining_type(8400, 8412, 'T').
+unicode_joining_type(8413, 8416, 'T').
+unicode_joining_type(8417, 8417, 'T').
+unicode_joining_type(8418, 8420, 'T').
+unicode_joining_type(8421, 8432, 'T').
+unicode_joining_type(11503, 11505, 'T').
+unicode_joining_type(11647, 11647, 'T').
+unicode_joining_type(11744, 11775, 'T').
+unicode_joining_type(12330, 12333, 'T').
+unicode_joining_type(12441, 12442, 'T').
+unicode_joining_type(42607, 42607, 'T').
+unicode_joining_type(42608, 42610, 'T').
+unicode_joining_type(42612, 42621, 'T').
+unicode_joining_type(42654, 42655, 'T').
+unicode_joining_type(42736, 42737, 'T').
+unicode_joining_type(43010, 43010, 'T').
+unicode_joining_type(43014, 43014, 'T').
+unicode_joining_type(43019, 43019, 'T').
+unicode_joining_type(43045, 43046, 'T').
+unicode_joining_type(43052, 43052, 'T').
+unicode_joining_type(43204, 43205, 'T').
+unicode_joining_type(43232, 43249, 'T').
+unicode_joining_type(43263, 43263, 'T').
+unicode_joining_type(43302, 43309, 'T').
+unicode_joining_type(43335, 43345, 'T').
+unicode_joining_type(43392, 43394, 'T').
+unicode_joining_type(43443, 43443, 'T').
+unicode_joining_type(43446, 43449, 'T').
+unicode_joining_type(43452, 43453, 'T').
+unicode_joining_type(43493, 43493, 'T').
+unicode_joining_type(43561, 43566, 'T').
+unicode_joining_type(43569, 43570, 'T').
+unicode_joining_type(43573, 43574, 'T').
+unicode_joining_type(43587, 43587, 'T').
+unicode_joining_type(43596, 43596, 'T').
+unicode_joining_type(43644, 43644, 'T').
+unicode_joining_type(43696, 43696, 'T').
+unicode_joining_type(43698, 43700, 'T').
+unicode_joining_type(43703, 43704, 'T').
+unicode_joining_type(43710, 43711, 'T').
+unicode_joining_type(43713, 43713, 'T').
+unicode_joining_type(43756, 43757, 'T').
+unicode_joining_type(43766, 43766, 'T').
+unicode_joining_type(44005, 44005, 'T').
+unicode_joining_type(44008, 44008, 'T').
+unicode_joining_type(44013, 44013, 'T').
+unicode_joining_type(64286, 64286, 'T').
+unicode_joining_type(65024, 65039, 'T').
+unicode_joining_type(65056, 65071, 'T').
+unicode_joining_type(65279, 65279, 'T').
+unicode_joining_type(65529, 65531, 'T').
+unicode_joining_type(66045, 66045, 'T').
+unicode_joining_type(66272, 66272, 'T').
+unicode_joining_type(66422, 66426, 'T').
+unicode_joining_type(68097, 68099, 'T').
+unicode_joining_type(68101, 68102, 'T').
+unicode_joining_type(68108, 68111, 'T').
+unicode_joining_type(68152, 68154, 'T').
+unicode_joining_type(68159, 68159, 'T').
+unicode_joining_type(68325, 68326, 'T').
+unicode_joining_type(68900, 68903, 'T').
+unicode_joining_type(68969, 68973, 'T').
+unicode_joining_type(69291, 69292, 'T').
+unicode_joining_type(69370, 69375, 'T').
+unicode_joining_type(69446, 69456, 'T').
+unicode_joining_type(69506, 69509, 'T').
+unicode_joining_type(69633, 69633, 'T').
+unicode_joining_type(69688, 69702, 'T').
+unicode_joining_type(69744, 69744, 'T').
+unicode_joining_type(69747, 69748, 'T').
+unicode_joining_type(69759, 69761, 'T').
+unicode_joining_type(69811, 69814, 'T').
+unicode_joining_type(69817, 69818, 'T').
+unicode_joining_type(69826, 69826, 'T').
+unicode_joining_type(69888, 69890, 'T').
+unicode_joining_type(69927, 69931, 'T').
+unicode_joining_type(69933, 69940, 'T').
+unicode_joining_type(70003, 70003, 'T').
+unicode_joining_type(70016, 70017, 'T').
+unicode_joining_type(70070, 70078, 'T').
+unicode_joining_type(70089, 70092, 'T').
+unicode_joining_type(70095, 70095, 'T').
+unicode_joining_type(70191, 70193, 'T').
+unicode_joining_type(70196, 70196, 'T').
+unicode_joining_type(70198, 70199, 'T').
+unicode_joining_type(70206, 70206, 'T').
+unicode_joining_type(70209, 70209, 'T').
+unicode_joining_type(70367, 70367, 'T').
+unicode_joining_type(70371, 70378, 'T').
+unicode_joining_type(70400, 70401, 'T').
+unicode_joining_type(70459, 70460, 'T').
+unicode_joining_type(70464, 70464, 'T').
+unicode_joining_type(70502, 70508, 'T').
+unicode_joining_type(70512, 70516, 'T').
+unicode_joining_type(70587, 70592, 'T').
+unicode_joining_type(70606, 70606, 'T').
+unicode_joining_type(70608, 70608, 'T').
+unicode_joining_type(70610, 70610, 'T').
+unicode_joining_type(70625, 70626, 'T').
+unicode_joining_type(70712, 70719, 'T').
+unicode_joining_type(70722, 70724, 'T').
+unicode_joining_type(70726, 70726, 'T').
+unicode_joining_type(70750, 70750, 'T').
+unicode_joining_type(70835, 70840, 'T').
+unicode_joining_type(70842, 70842, 'T').
+unicode_joining_type(70847, 70848, 'T').
+unicode_joining_type(70850, 70851, 'T').
+unicode_joining_type(71090, 71093, 'T').
+unicode_joining_type(71100, 71101, 'T').
+unicode_joining_type(71103, 71104, 'T').
+unicode_joining_type(71132, 71133, 'T').
+unicode_joining_type(71219, 71226, 'T').
+unicode_joining_type(71229, 71229, 'T').
+unicode_joining_type(71231, 71232, 'T').
+unicode_joining_type(71339, 71339, 'T').
+unicode_joining_type(71341, 71341, 'T').
+unicode_joining_type(71344, 71349, 'T').
+unicode_joining_type(71351, 71351, 'T').
+unicode_joining_type(71453, 71453, 'T').
+unicode_joining_type(71455, 71455, 'T').
+unicode_joining_type(71458, 71461, 'T').
+unicode_joining_type(71463, 71467, 'T').
+unicode_joining_type(71727, 71735, 'T').
+unicode_joining_type(71737, 71738, 'T').
+unicode_joining_type(71995, 71996, 'T').
+unicode_joining_type(71998, 71998, 'T').
+unicode_joining_type(72003, 72003, 'T').
+unicode_joining_type(72148, 72151, 'T').
+unicode_joining_type(72154, 72155, 'T').
+unicode_joining_type(72160, 72160, 'T').
+unicode_joining_type(72193, 72202, 'T').
+unicode_joining_type(72243, 72248, 'T').
+unicode_joining_type(72251, 72254, 'T').
+unicode_joining_type(72263, 72263, 'T').
+unicode_joining_type(72273, 72278, 'T').
+unicode_joining_type(72281, 72283, 'T').
+unicode_joining_type(72330, 72342, 'T').
+unicode_joining_type(72344, 72345, 'T').
+unicode_joining_type(72544, 72544, 'T').
+unicode_joining_type(72546, 72548, 'T').
+unicode_joining_type(72550, 72550, 'T').
+unicode_joining_type(72752, 72758, 'T').
+unicode_joining_type(72760, 72765, 'T').
+unicode_joining_type(72767, 72767, 'T').
+unicode_joining_type(72850, 72871, 'T').
+unicode_joining_type(72874, 72880, 'T').
+unicode_joining_type(72882, 72883, 'T').
+unicode_joining_type(72885, 72886, 'T').
+unicode_joining_type(73009, 73014, 'T').
+unicode_joining_type(73018, 73018, 'T').
+unicode_joining_type(73020, 73021, 'T').
+unicode_joining_type(73023, 73029, 'T').
+unicode_joining_type(73031, 73031, 'T').
+unicode_joining_type(73104, 73105, 'T').
+unicode_joining_type(73109, 73109, 'T').
+unicode_joining_type(73111, 73111, 'T').
+unicode_joining_type(73459, 73460, 'T').
+unicode_joining_type(73472, 73473, 'T').
+unicode_joining_type(73526, 73530, 'T').
+unicode_joining_type(73536, 73536, 'T').
+unicode_joining_type(73538, 73538, 'T').
+unicode_joining_type(73562, 73562, 'T').
+unicode_joining_type(78896, 78911, 'T').
+unicode_joining_type(78912, 78912, 'T').
+unicode_joining_type(78919, 78933, 'T').
+unicode_joining_type(90398, 90409, 'T').
+unicode_joining_type(90413, 90415, 'T').
+unicode_joining_type(92912, 92916, 'T').
+unicode_joining_type(92976, 92982, 'T').
+unicode_joining_type(94031, 94031, 'T').
+unicode_joining_type(94095, 94098, 'T').
+unicode_joining_type(94180, 94180, 'T').
+unicode_joining_type(113821, 113822, 'T').
+unicode_joining_type(113824, 113827, 'T').
+unicode_joining_type(118528, 118573, 'T').
+unicode_joining_type(118576, 118598, 'T').
+unicode_joining_type(119143, 119145, 'T').
+unicode_joining_type(119155, 119162, 'T').
+unicode_joining_type(119163, 119170, 'T').
+unicode_joining_type(119173, 119179, 'T').
+unicode_joining_type(119210, 119213, 'T').
+unicode_joining_type(119362, 119364, 'T').
+unicode_joining_type(121344, 121398, 'T').
+unicode_joining_type(121403, 121452, 'T').
+unicode_joining_type(121461, 121461, 'T').
+unicode_joining_type(121476, 121476, 'T').
+unicode_joining_type(121499, 121503, 'T').
+unicode_joining_type(121505, 121519, 'T').
+unicode_joining_type(122880, 122886, 'T').
+unicode_joining_type(122888, 122904, 'T').
+unicode_joining_type(122907, 122913, 'T').
+unicode_joining_type(122915, 122916, 'T').
+unicode_joining_type(122918, 122922, 'T').
+unicode_joining_type(123023, 123023, 'T').
+unicode_joining_type(123184, 123190, 'T').
+unicode_joining_type(123566, 123566, 'T').
+unicode_joining_type(123628, 123631, 'T').
+unicode_joining_type(124140, 124143, 'T').
+unicode_joining_type(124398, 124399, 'T').
+unicode_joining_type(124643, 124643, 'T').
+unicode_joining_type(124646, 124646, 'T').
+unicode_joining_type(124654, 124655, 'T').
+unicode_joining_type(124661, 124661, 'T').
+unicode_joining_type(125136, 125142, 'T').
+unicode_joining_type(125252, 125258, 'T').
+unicode_joining_type(125259, 125259, 'T').
+unicode_joining_type(917505, 917505, 'T').
+unicode_joining_type(917536, 917631, 'T').
+unicode_joining_type(917760, 917999, 'T').

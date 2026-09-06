@@ -26,7 +26,6 @@
 :- include('unicode_derived_bidi_class').
 :- include('unicode_derived_combining_class').
 :- include('unicode_derived_core_properties').
-:- include('unicode_derived_decomposition_type').
 :- include('unicode_derived_east_asian_width').
 :- include('unicode_derived_joining_group').
 :- include('unicode_derived_joining_type').

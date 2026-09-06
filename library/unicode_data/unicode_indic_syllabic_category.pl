@@ -1,830 +1,1000 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  This file is part of VivoMind Prolog Unicode Resources
-%  SPDX-License-Identifier: CC0-1.0
+%  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
 %
-%  VivoMind Prolog Unicode Resources is free software distributed using the
-%  Creative Commons CC0 1.0 Universal (CC0 1.0) - Public Domain Dedication
-%  license
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%  Last modified: March 28, 2012
+%      http://www.apache.org/licenses/LICENSE-2.0
 %
-%  Original Unicode file header comments follow
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-/*
-# IndicSyllabicCategory-6.1.0.txt
-# Date: 2011-08-31, 23:54:00 GMT [KW]
-#
-# Unicode Character Database
-# Copyright (c) 1991-2011 Unicode, Inc.
-# For terms of use, see http://www.unicode.org/terms_of_use.html
-# For documentation, see UAX #44.
-#
-# This file defines the following provisional property:
-#
-#    Indic_Syllabic_Category     enumerated property
-#
-# NB: Provisional properties and data files have no associated stability
-# guarantees. They are provided in part to determine the possible usefulness
-# of a property or other data and to encourage analysis and further investigation
-# which may result in their improvement. Provisional properties and
-# data files may change arbitrarily, or may even be removed in a future version of the
-# Unicode Character Database, if they prove not to be useful.
-#
-# Scope: This provisional property is aimed at two general problem
-# areas involving the analysis and processing of Indic scripts:
-#
-#   1. Specification of syllabic structure.
-#   2. Specification of segmentation rules.
-#
-# Both of these problem areas may benefit from having defined subtypes
-# of Indic script characters which are relevant to how Indic
-# syllables (or aksaras) are constructed. Note that rules for
-# syllabic structure in Indic scripts may differ significantly
-# from how phonological syllables are defined.
-#
-# Format:
-#    Field 0  Code Point or Code Point Range
-#    Field 1  Indic_Syllabic_Category
-#
-# A comment field shows General_Category property values and character names.
-#
-# The scripts assessed as Indic in the
-# structural sense used for the Indic_Syllabic_Category are:
-#
-# Devanagari, Bengali, Gurmukhi, Gujarati, Oriya, Tamil, Telugu,
-# Kannada, Malayalam, Sinhala, Thai, Lao, Tibetan, Myanmar,
-# Tagalog, Hanunoo, Buhid, Tagbanwa, Khmer, Limbu, Tai Le, New Tai Lue,
-# Buginese, Tai Tham, Balinese, Sundanese, Batak, Lepcha,
-# Syloti Nagri, Phags-Pa, Saurashtra, Kayah Li, Rejang, Javanese, Cham, Tai Viet,
-# Meetei Mayek, Kharoshthi, Brahmi, Kaithi, Chakma, Sharada, Takri
-#
-# All characters for all other scripts not in that list
-# take the default value for this property, unless they
-# are individually listed in this data file.
-#
+% Generated from Unicode 17.0.0 UCD data. Do not edit.
 
-# ================================================
-
-# Property: Indic_Syllabic_Category
-#
-#  All code points not explicitly listed for Indic_Syllabic_Category
-#  have the value Other.
-#
-# @missing: 0000..10FFFF; Other
-*/
-
-unicode_indic_syllabic_category(CodePoint, Category) :-
+unicode_indic_syllabic_category(CodePoint, Value) :-
 	(	var(CodePoint) ->
-		% generate code point pairs
-		unicode_indic_syllabic_category(CodePointStart, CodePointEnd, Category),
-		between(CodePointStart, CodePointEnd, CodePoint)
-	;	% try first-argument indexing first
-		unicode_indic_syllabic_category(CodePoint, _, CodePointCategory) ->
-		Category = CodePointCategory
-	;	% look for a code point range that includes the given code point
-		unicode_indic_syllabic_category(CodePointStart, CodePointEnd, CodePointCategory),
-		between(CodePointStart, CodePointEnd, CodePoint) ->
-		Category = CodePointCategory
-	;	% missing code point; see original comment above
-		between(0x0000, 0x10FFFF, CodePoint),
-		Category = 'Other'
+		unicode_indic_syllabic_category(Start, End, Value),
+		between(Start, End, CodePoint)
+	;	unicode_indic_syllabic_category(Start, End, SpecificValue),
+		CodePoint >= Start, CodePoint =< End ->
+		Value = SpecificValue
+	;	between(0, 1114111, CodePoint),
+		Value = 'Other'
 	).
 
-% ================================================
-
-% Indic_Syllabic_Category=Bindu
-
-% Bindu/Anusvara (nasalization or -n)
-% Excludes various Vedic nasalization signs.
-
-% [Not derivable]
-
-unicode_indic_syllabic_category(0x0900, 0x0902, 'Bindu'). % Mn   [3] DEVANAGARI SIGN INVERTED CANDRABINDU..DEVANAGARI SIGN ANUSVARA
-unicode_indic_syllabic_category(0x0981, 0x0981, 'Bindu'). % Mn       BENGALI SIGN CANDRABINDU
-unicode_indic_syllabic_category(0x0982, 0x0982, 'Bindu'). % Mc       BENGALI SIGN ANUSVARA
-unicode_indic_syllabic_category(0x0A01, 0x0A02, 'Bindu'). % Mn   [2] GURMUKHI SIGN ADAK BINDI..GURMUKHI SIGN BINDI
-unicode_indic_syllabic_category(0x0A70, 0x0A70, 'Bindu'). % Mn       GURMUKHI TIPPI
-unicode_indic_syllabic_category(0x0A81, 0x0A82, 'Bindu'). % Mn   [2] GUJARATI SIGN CANDRABINDU..GUJARATI SIGN ANUSVARA
-unicode_indic_syllabic_category(0x0B01, 0x0B01, 'Bindu'). % Mn       ORIYA SIGN CANDRABINDU
-unicode_indic_syllabic_category(0x0B02, 0x0B02, 'Bindu'). % Mc       ORIYA SIGN ANUSVARA
-unicode_indic_syllabic_category(0x0B82, 0x0B82, 'Bindu'). % Mn       TAMIL SIGN ANUSVARA
-unicode_indic_syllabic_category(0x0C01, 0x0C02, 'Bindu'). % Mc   [2] TELUGU SIGN CANDRABINDU..TELUGU SIGN ANUSVARA
-unicode_indic_syllabic_category(0x0C82, 0x0C82, 'Bindu'). % Mc       KANNADA SIGN ANUSVARA
-unicode_indic_syllabic_category(0x0D02, 0x0D02, 'Bindu'). % Mc       MALAYALAM SIGN ANUSVARA
-unicode_indic_syllabic_category(0x0D82, 0x0D82, 'Bindu'). % Mc       SINHALA SIGN ANUSVARAYA
-unicode_indic_syllabic_category(0x0E4D, 0x0E4D, 'Bindu'). % Mn       THAI CHARACTER NIKHAHIT
-unicode_indic_syllabic_category(0x0ECD, 0x0ECD, 'Bindu'). % Mn       LAO NIGGAHITA
-unicode_indic_syllabic_category(0x0F7E, 0x0F7E, 'Bindu'). % Mn       TIBETAN SIGN RJES SU NGA RO
-unicode_indic_syllabic_category(0x0F82, 0x0F83, 'Bindu'). % Mn   [2] TIBETAN SIGN NYI ZLA NAA DA..TIBETAN SIGN SNA LDAN
-unicode_indic_syllabic_category(0x1036, 0x1036, 'Bindu'). % Mn       MYANMAR SIGN ANUSVARA
-unicode_indic_syllabic_category(0x17C6, 0x17C6, 'Bindu'). % Mn       KHMER SIGN NIKAHIT
-unicode_indic_syllabic_category(0x1932, 0x1932, 'Bindu'). % Mn       LIMBU SMALL LETTER ANUSVARA
-unicode_indic_syllabic_category(0x1B00, 0x1B02, 'Bindu'). % Mn   [3] BALINESE SIGN ULU RICEM..BALINESE SIGN CECEK
-unicode_indic_syllabic_category(0xA80B, 0xA80B, 'Bindu'). % Mn       SYLOTI NAGRI SIGN ANUSVARA
-unicode_indic_syllabic_category(0xA873, 0xA873, 'Bindu'). % Lo       PHAGS-PA LETTER CANDRABINDU
-unicode_indic_syllabic_category(0xA980, 0xA981, 'Bindu'). % Mn   [2] JAVANESE SIGN PANYANGGA..JAVANESE SIGN CECAK
-unicode_indic_syllabic_category(0x1B80, 0x1B80, 'Bindu'). % Mn       SUNDANESE SIGN PANYECEK
-unicode_indic_syllabic_category(0x1C34, 0x1C35, 'Bindu'). % Mc   [2] LEPCHA CONSONANT SIGN NYIN-DO..LEPCHA CONSONANT SIGN KANG
-unicode_indic_syllabic_category(0xA880, 0xA880, 'Bindu'). % Mc       SAURASHTRA SIGN ANUSVARA
-unicode_indic_syllabic_category(0x10A0E, 0x10A0E, 'Bindu'). % Mn       KHAROSHTHI SIGN ANUSVARA
-unicode_indic_syllabic_category(0x11000, 0x11000, 'Bindu'). % Mc       BRAHMI SIGN CANDRABINDU
-unicode_indic_syllabic_category(0x11001, 0x11001, 'Bindu'). % Mn       BRAHMI SIGN ANUSVARA
-unicode_indic_syllabic_category(0x11080, 0x11081, 'Bindu'). % Mn   [2] KAITHI SIGN CANDRABINDU..KAITHI SIGN ANUSVARA
-unicode_indic_syllabic_category(0x11100, 0x11101, 'Bindu'). % Mn       CHAKMA SIGN CANDRABINDU..CHAKMA SIGN ANUSVARA
-unicode_indic_syllabic_category(0x11180, 0x11181, 'Bindu'). % Mn       SHARADA SIGN CANDRABINDU..SHARADA SIGN ANUSVARA
-unicode_indic_syllabic_category(0x116AB, 0x116AB, 'Bindu'). % Mn       TAKRI SIGN ANUSVARA
-
-% ================================================
-
-% Indic_Syllabic_Category=Visarga
-
-% Visarga (-h)
-% Includes specialized case for Sanskrit: ardhavisarga
-% Excludes letters for jihvamuliya and upadhmaniya, which are
-%   related, but structured somewhat differently.
-
-% [Not derivable]
-
-unicode_indic_syllabic_category(0x0903, 0x0903 , 'Visarga'). % Mc       DEVANAGARI SIGN VISARGA
-unicode_indic_syllabic_category(0x0983, 0x0983 , 'Visarga'). % Mc       BENGALI SIGN VISARGA
-unicode_indic_syllabic_category(0x0A03, 0x0A03 , 'Visarga'). % Mc       GURMUKHI SIGN VISARGA
-unicode_indic_syllabic_category(0x0A83, 0x0A83 , 'Visarga'). % Mc       GUJARATI SIGN VISARGA
-unicode_indic_syllabic_category(0x0B03, 0x0B03 , 'Visarga'). % Mc       ORIYA SIGN VISARGA
-unicode_indic_syllabic_category(0x0C03, 0x0C03 , 'Visarga'). % Mc       TELUGU SIGN VISARGA
-unicode_indic_syllabic_category(0x0C83, 0x0C83 , 'Visarga'). % Mc       KANNADA SIGN VISARGA
-unicode_indic_syllabic_category(0x0D03, 0x0D03 , 'Visarga'). % Mc       MALAYALAM SIGN VISARGA
-unicode_indic_syllabic_category(0x0D83, 0x0D83 , 'Visarga'). % Mc       SINHALA SIGN VISARGAYA
-unicode_indic_syllabic_category(0x0F7F, 0x0F7F , 'Visarga'). % Mc       TIBETAN SIGN RNAM BCAD
-unicode_indic_syllabic_category(0x1038, 0x1038 , 'Visarga'). % Mc       MYANMAR SIGN VISARGA
-unicode_indic_syllabic_category(0x17C7, 0x17C7 , 'Visarga'). % Mc       KHMER SIGN REAHMUK
-unicode_indic_syllabic_category(0x1B04, 0x1B04 , 'Visarga'). % Mc       BALINESE SIGN BISAH
-unicode_indic_syllabic_category(0x1B82, 0x1B82 , 'Visarga'). % Mc       SUNDANESE SIGN PANGWISAD
-unicode_indic_syllabic_category(0x1CF2, 0x1CF2 , 'Visarga'). % Mc       VEDIC SIGN ARDHAVISARGA
-unicode_indic_syllabic_category(0x1CF3, 0x1CF3 , 'Visarga'). % Mc       VEDIC SIGN ROTATED ARDHAVISARGA
-unicode_indic_syllabic_category(0xA881, 0xA881 , 'Visarga'). % Mc       SAURASHTRA SIGN VISARGA
-unicode_indic_syllabic_category(0xA983, 0xA983 , 'Visarga'). % Mc       JAVANESE SIGN WIGNYAN
-unicode_indic_syllabic_category(0xAAF5, 0xAAF5 , 'Visarga'). % Mc       MEETEI MAYEK VOWEL SIGN VISARGA
-unicode_indic_syllabic_category(0x10A0F, 0x10A0F, 'Visarga'). % Mn       KHAROSHTHI SIGN VISARGA
-unicode_indic_syllabic_category(0x11002, 0x11002, 'Visarga'). % Mc       BRAHMI SIGN VISARGA
-unicode_indic_syllabic_category(0x11082, 0x11082, 'Visarga'). % Mc       KAITHI SIGN VISARGA
-unicode_indic_syllabic_category(0x11102, 0x11102, 'Visarga'). % Mn       CHAKMA SIGN VISARGA
-unicode_indic_syllabic_category(0x11182, 0x11182, 'Visarga'). % Mn       SHARADA SIGN VISARGA
-unicode_indic_syllabic_category(0x116AC, 0x116AC, 'Visarga'). % Mc       TAKRI SIGN VISARGA
-
-% ================================================
-
-% Indic_Syllabic_Category=Avagraha
-
-% Avagraha (elision of initial a- in sandhi)
-
-% [Not derivable]
-
-unicode_indic_syllabic_category(0x093D, 0x093D  , 'Avagraha'). % Lo       DEVANAGARI SIGN AVAGRAHA
-unicode_indic_syllabic_category(0x09BD, 0x09BD  , 'Avagraha'). % Lo       BENGALI SIGN AVAGRAHA
-unicode_indic_syllabic_category(0x0ABD, 0x0ABD  , 'Avagraha'). % Lo       GUJARATI SIGN AVAGRAHA
-unicode_indic_syllabic_category(0x0B3D, 0x0B3D  , 'Avagraha'). % Lo       ORIYA SIGN AVAGRAHA
-unicode_indic_syllabic_category(0x0C3D, 0x0C3D  , 'Avagraha'). % Lo       TELUGU SIGN AVAGRAHA
-unicode_indic_syllabic_category(0x0CBD, 0x0CBD  , 'Avagraha'). % Lo       KANNADA SIGN AVAGRAHA
-unicode_indic_syllabic_category(0x0D3D, 0x0D3D  , 'Avagraha'). % Lo       MALAYALAM SIGN AVAGRAHA
-unicode_indic_syllabic_category(0x0F85, 0x0F85  , 'Avagraha'). % Po       TIBETAN MARK PALUTA
-unicode_indic_syllabic_category(0x17DC, 0x17DC  , 'Avagraha'). % Lo       KHMER SIGN AVAKRAHASANYA
-unicode_indic_syllabic_category(0x1BBA, 0x1BBA  , 'Avagraha'). % Lo       SUNDANESE AVAGRAHA
-unicode_indic_syllabic_category(0x111C1, 0x111C1, 'Avagraha'). % Lo       SHARADA SIGN AVAGRAHA
-
-% ================================================
-
-% Indic_Syllabic_Category=Nukta
-
-% Nukta (diacritic for borrowed consonants)
-
-% [Derivation: (ccc=7) - 1037]
-
-unicode_indic_syllabic_category(0x093C, 0x093C  , 'Nukta'). % Mn       DEVANAGARI SIGN NUKTA
-unicode_indic_syllabic_category(0x09BC, 0x09BC  , 'Nukta'). % Mn       BENGALI SIGN NUKTA
-unicode_indic_syllabic_category(0x0A3C, 0x0A3C  , 'Nukta'). % Mn       GURMUKHI SIGN NUKTA
-unicode_indic_syllabic_category(0x0ABC, 0x0ABC  , 'Nukta'). % Mn       GUJARATI SIGN NUKTA
-unicode_indic_syllabic_category(0x0B3C, 0x0B3C  , 'Nukta'). % Mn       ORIYA SIGN NUKTA
-unicode_indic_syllabic_category(0x0CBC, 0x0CBC  , 'Nukta'). % Mn       KANNADA SIGN NUKTA
-unicode_indic_syllabic_category(0x1B34, 0x1B34  , 'Nukta'). % Mn       BALINESE SIGN REREKAN
-unicode_indic_syllabic_category(0x1BE6, 0x1BE6  , 'Nukta'). % Mn       BATAK SIGN TOMPI
-unicode_indic_syllabic_category(0x1C37, 0x1C37  , 'Nukta'). % Mn       LEPCHA SIGN NUKTA
-unicode_indic_syllabic_category(0xA9B3, 0xA9B3  , 'Nukta'). % Mn       JAVANESE SIGN CECAK TELU
-unicode_indic_syllabic_category(0x110BA, 0x110BA, 'Nukta'). % Mn       KAITHI SIGN NUKTA
-unicode_indic_syllabic_category(0x116B7, 0x116B7, 'Nukta'). % Mn       TAKRI SIGN NUKTA
-
-% ================================================
-
-% Indic_Syllabic_Category=Virama
-
-% Virama (killing of inherent vowel in consonant sequence,
-%         or consonant stacker, depending on model)
-% Also includes pure killers.
-
-% [Derivation: (ccc=9) + 0E4E + 17D1]
-
-unicode_indic_syllabic_category(0x094D, 0x094D, 'Virama'). % Mn       DEVANAGARI SIGN VIRAMA
-unicode_indic_syllabic_category(0x09CD, 0x09CD, 'Virama'). % Mn       BENGALI SIGN VIRAMA
-unicode_indic_syllabic_category(0x0A4D, 0x0A4D, 'Virama'). % Mn       GURMUKHI SIGN VIRAMA
-unicode_indic_syllabic_category(0x0ACD, 0x0ACD, 'Virama'). % Mn       GUJARATI SIGN VIRAMA
-unicode_indic_syllabic_category(0x0B4D, 0x0B4D, 'Virama'). % Mn       ORIYA SIGN VIRAMA
-unicode_indic_syllabic_category(0x0BCD, 0x0BCD, 'Virama'). % Mn       TAMIL SIGN VIRAMA
-unicode_indic_syllabic_category(0x0C4D, 0x0C4D, 'Virama'). % Mn       TELUGU SIGN VIRAMA
-unicode_indic_syllabic_category(0x0CCD, 0x0CCD, 'Virama'). % Mn       KANNADA SIGN VIRAMA
-unicode_indic_syllabic_category(0x0D4D, 0x0D4D, 'Virama'). % Mn       MALAYALAM SIGN VIRAMA
-unicode_indic_syllabic_category(0x0DCA, 0x0DCA, 'Virama'). % Mn       SINHALA SIGN AL-LAKUNA
-unicode_indic_syllabic_category(0x0E3A, 0x0E3A, 'Virama'). % Mn       THAI CHARACTER PHINTHU
-unicode_indic_syllabic_category(0x0E4E, 0x0E4E, 'Virama'). % Mn       THAI CHARACTER YAMAKKAN
-unicode_indic_syllabic_category(0x0F84, 0x0F84, 'Virama'). % Mn       TIBETAN MARK HALANTA
-unicode_indic_syllabic_category(0x1039, 0x103A, 'Virama'). % Mn   [2] MYANMAR SIGN VIRAMA..MYANMAR SIGN ASAT
-unicode_indic_syllabic_category(0x1714, 0x1714, 'Virama'). % Mn       TAGALOG SIGN VIRAMA
-unicode_indic_syllabic_category(0x1734, 0x1734, 'Virama'). % Mn       HANUNOO SIGN PAMUDPOD
-unicode_indic_syllabic_category(0x17D1, 0x17D2, 'Virama'). % Mn   [2] KHMER SIGN VIRIAM..KHMER SIGN COENG
-unicode_indic_syllabic_category(0x1A60, 0x1A60, 'Virama'). % Mn       TAI THAM SIGN SAKOT
-unicode_indic_syllabic_category(0x1B44, 0x1B44, 'Virama'). % Mc       BALINESE ADEG ADEG
-unicode_indic_syllabic_category(0x1BAA, 0x1BAA, 'Virama'). % Mc       SUNDANESE SIGN PAMAAEH
-unicode_indic_syllabic_category(0x1BAB, 0x1BAB, 'Virama'). % Mc       SUNDANESE SIGN VIRAMA
-unicode_indic_syllabic_category(0x1BF2, 0x1BF3, 'Virama'). % Mc   [2] BATAK PANGOLAT..BATAK PANONGONAN
-unicode_indic_syllabic_category(0xA806, 0xA806, 'Virama'). % Mn       SYLOTI NAGRI SIGN HASANTA
-unicode_indic_syllabic_category(0xA8C4, 0xA8C4, 'Virama'). % Mn       SAURASHTRA SIGN VIRAMA
-unicode_indic_syllabic_category(0xA953, 0xA953, 'Virama'). % Mc       REJANG VIRAMA
-unicode_indic_syllabic_category(0xA9C0, 0xA9C0, 'Virama'). % Mc       JAVANESE PANGKON
-unicode_indic_syllabic_category(0xAAF6, 0xAAF6, 'Virama'). % Mn       MEETEI MAYEK VIRAMA
-unicode_indic_syllabic_category(0xABED, 0xABED, 'Virama'). % Mn       MEETEI MAYEK APUN IYEK
-unicode_indic_syllabic_category(0x10A3F, 0x10A3F, 'Virama'). % Mn       KHAROSHTHI VIRAMA
-unicode_indic_syllabic_category(0x11046, 0x11046, 'Virama'). % Mn       BRAHMI VIRAMA
-unicode_indic_syllabic_category(0x110B9, 0x110B9, 'Virama'). % Mn       KAITHI SIGN VIRAMA
-unicode_indic_syllabic_category(0x11133, 0x11134, 'Virama'). % Mn       CHAKMA VIRAMA..CHAKMA MAAYYAA
-unicode_indic_syllabic_category(0x111C0, 0x111C0, 'Virama'). % Mc       SHARADA SIGN VIRAMA
-unicode_indic_syllabic_category(0x116B6, 0x116B6, 'Virama'). % Mn       TAKRI SIGN VIRAMA
-
-% ================================================
-
-% Indic_Syllabic_Category=Vowel_Independent
-
-% Independent Vowels (contrasted with matras)
-
-% [Not derivable]
-
-unicode_indic_syllabic_category(0x0904, 0x0914, 'Vowel_Independent'). % Lo  [17] DEVANAGARI LETTER SHORT A..DEVANAGARI LETTER AU
-unicode_indic_syllabic_category(0x0960, 0x0961, 'Vowel_Independent'). % Lo   [2] DEVANAGARI LETTER VOCALIC RR..DEVANAGARI LETTER VOCALIC LL
-unicode_indic_syllabic_category(0x0972, 0x0977, 'Vowel_Independent'). % Lo   [6] DEVANAGARI LETTER CANDRA A..DEVANAGARI LETTER UUE
-unicode_indic_syllabic_category(0x0985, 0x098C, 'Vowel_Independent'). % Lo   [8] BENGALI LETTER A..BENGALI LETTER VOCALIC L
-unicode_indic_syllabic_category(0x098F, 0x0990, 'Vowel_Independent'). % Lo   [2] BENGALI LETTER E..BENGALI LETTER AI
-unicode_indic_syllabic_category(0x0993, 0x0994, 'Vowel_Independent'). % Lo   [2] BENGALI LETTER O..BENGALI LETTER AU
-unicode_indic_syllabic_category(0x09E0, 0x09E1, 'Vowel_Independent'). % Lo   [2] BENGALI LETTER VOCALIC RR..BENGALI LETTER VOCALIC LL
-unicode_indic_syllabic_category(0x0A05, 0x0A0A, 'Vowel_Independent'). % Lo   [6] GURMUKHI LETTER A..GURMUKHI LETTER UU
-unicode_indic_syllabic_category(0x0A0F, 0x0A10, 'Vowel_Independent'). % Lo   [2] GURMUKHI LETTER EE..GURMUKHI LETTER AI
-unicode_indic_syllabic_category(0x0A13, 0x0A14, 'Vowel_Independent'). % Lo   [2] GURMUKHI LETTER OO..GURMUKHI LETTER AU
-unicode_indic_syllabic_category(0x0A85, 0x0A8D, 'Vowel_Independent'). % Lo   [9] GUJARATI LETTER A..GUJARATI VOWEL CANDRA E
-unicode_indic_syllabic_category(0x0A8F, 0x0A91, 'Vowel_Independent'). % Lo   [3] GUJARATI LETTER E..GUJARATI VOWEL CANDRA O
-unicode_indic_syllabic_category(0x0A93, 0x0A94, 'Vowel_Independent'). % Lo   [2] GUJARATI LETTER O..GUJARATI LETTER AU
-unicode_indic_syllabic_category(0x0AE0, 0x0AE1, 'Vowel_Independent'). % Lo   [2] GUJARATI LETTER VOCALIC RR..GUJARATI LETTER VOCALIC LL
-unicode_indic_syllabic_category(0x0B05, 0x0B0C, 'Vowel_Independent'). % Lo   [8] ORIYA LETTER A..ORIYA LETTER VOCALIC L
-unicode_indic_syllabic_category(0x0B0F, 0x0B10, 'Vowel_Independent'). % Lo   [2] ORIYA LETTER E..ORIYA LETTER AI
-unicode_indic_syllabic_category(0x0B13, 0x0B14, 'Vowel_Independent'). % Lo   [2] ORIYA LETTER O..ORIYA LETTER AU
-unicode_indic_syllabic_category(0x0B60, 0x0B61, 'Vowel_Independent'). % Lo   [2] ORIYA LETTER VOCALIC RR..ORIYA LETTER VOCALIC LL
-unicode_indic_syllabic_category(0x0B85, 0x0B8A, 'Vowel_Independent'). % Lo   [6] TAMIL LETTER A..TAMIL LETTER UU
-unicode_indic_syllabic_category(0x0B8E, 0x0B90, 'Vowel_Independent'). % Lo   [3] TAMIL LETTER E..TAMIL LETTER AI
-unicode_indic_syllabic_category(0x0B92, 0x0B94, 'Vowel_Independent'). % Lo   [3] TAMIL LETTER O..TAMIL LETTER AU
-unicode_indic_syllabic_category(0x0C05, 0x0C0C, 'Vowel_Independent'). % Lo   [8] TELUGU LETTER A..TELUGU LETTER VOCALIC L
-unicode_indic_syllabic_category(0x0C0E, 0x0C10, 'Vowel_Independent'). % Lo   [3] TELUGU LETTER E..TELUGU LETTER AI
-unicode_indic_syllabic_category(0x0C12, 0x0C14, 'Vowel_Independent'). % Lo   [3] TELUGU LETTER O..TELUGU LETTER AU
-unicode_indic_syllabic_category(0x0C60, 0x0C61, 'Vowel_Independent'). % Lo   [2] TELUGU LETTER VOCALIC RR..TELUGU LETTER VOCALIC LL
-unicode_indic_syllabic_category(0x0C85, 0x0C8C, 'Vowel_Independent'). % Lo   [8] KANNADA LETTER A..KANNADA LETTER VOCALIC L
-unicode_indic_syllabic_category(0x0C8E, 0x0C90, 'Vowel_Independent'). % Lo   [3] KANNADA LETTER E..KANNADA LETTER AI
-unicode_indic_syllabic_category(0x0C92, 0x0C94, 'Vowel_Independent'). % Lo   [3] KANNADA LETTER O..KANNADA LETTER AU
-unicode_indic_syllabic_category(0x0CE0, 0x0CE1, 'Vowel_Independent'). % Lo   [2] KANNADA LETTER VOCALIC RR..KANNADA LETTER VOCALIC LL
-unicode_indic_syllabic_category(0x0D05, 0x0D0C, 'Vowel_Independent'). % Lo   [8] MALAYALAM LETTER A..MALAYALAM LETTER VOCALIC L
-unicode_indic_syllabic_category(0x0D0E, 0x0D10, 'Vowel_Independent'). % Lo   [3] MALAYALAM LETTER E..MALAYALAM LETTER AI
-unicode_indic_syllabic_category(0x0D12, 0x0D14, 'Vowel_Independent'). % Lo   [3] MALAYALAM LETTER O..MALAYALAM LETTER AU
-unicode_indic_syllabic_category(0x0D60, 0x0D61, 'Vowel_Independent'). % Lo   [2] MALAYALAM LETTER VOCALIC RR..MALAYALAM LETTER VOCALIC LL
-unicode_indic_syllabic_category(0x0D85, 0x0D96, 'Vowel_Independent'). % Lo  [18] SINHALA LETTER AYANNA..SINHALA LETTER AUYANNA
-unicode_indic_syllabic_category(0x1021, 0x102A, 'Vowel_Independent'). % Lo  [10] MYANMAR LETTER A..MYANMAR LETTER AU
-unicode_indic_syllabic_category(0x1052, 0x1055, 'Vowel_Independent'). % Lo   [4] MYANMAR LETTER VOCALIC R..MYANMAR LETTER VOCALIC LL
-unicode_indic_syllabic_category(0x1700, 0x1702, 'Vowel_Independent'). % Lo   [3] TAGALOG LETTER A..TAGALOG LETTER U
-unicode_indic_syllabic_category(0x1720, 0x1722, 'Vowel_Independent'). % Lo   [3] HANUNOO LETTER A..HANUNOO LETTER U
-unicode_indic_syllabic_category(0x1740, 0x1742, 'Vowel_Independent'). % Lo   [3] BUHID LETTER A..BUHID LETTER U
-unicode_indic_syllabic_category(0x1760, 0x1762, 'Vowel_Independent'). % Lo   [3] TAGBANWA LETTER A..TAGBANWA LETTER U
-unicode_indic_syllabic_category(0x17A3, 0x17B3, 'Vowel_Independent'). % Lo  [17] KHMER INDEPENDENT VOWEL QAQ..KHMER INDEPENDENT VOWEL QAU
-unicode_indic_syllabic_category(0x1A4D, 0x1A52, 'Vowel_Independent'). % Lo   [6] TAI THAM LETTER I..TAI THAM LETTER OO
-unicode_indic_syllabic_category(0x1B05, 0x1B12, 'Vowel_Independent'). % Lo  [14] BALINESE LETTER AKARA..BALINESE LETTER OKARA TEDUNG
-unicode_indic_syllabic_category(0x1B83, 0x1B89, 'Vowel_Independent'). % Lo   [7] SUNDANESE LETTER A..SUNDANESE LETTER EU
-unicode_indic_syllabic_category(0x1BE4, 0x1BE5, 'Vowel_Independent'). % Lo   [2] BATAK LETTER I..BATAK LETTER U
-unicode_indic_syllabic_category(0xA800, 0xA801, 'Vowel_Independent'). % Lo   [2] SYLOTI NAGRI LETTER A..SYLOTI NAGRI LETTER I
-unicode_indic_syllabic_category(0xA803, 0xA805, 'Vowel_Independent'). % Lo   [3] SYLOTI NAGRI LETTER U..SYLOTI NAGRI LETTER O
-unicode_indic_syllabic_category(0xA882, 0xA891, 'Vowel_Independent'). % Lo  [16] SAURASHTRA LETTER A..SAURASHTRA LETTER AU
-unicode_indic_syllabic_category(0xA984, 0xA988, 'Vowel_Independent'). % Lo   [5] JAVANESE LETTER A..JAVANESE LETTER U
-unicode_indic_syllabic_category(0xA98C, 0xA98E, 'Vowel_Independent'). % Lo   [3] JAVANESE LETTER E..JAVANESE LETTER O
-unicode_indic_syllabic_category(0xAA00, 0xAA05, 'Vowel_Independent'). % Lo   [6] CHAM LETTER A..CHAM LETTER O
-unicode_indic_syllabic_category(0xAAE0, 0xAAE1, 'Vowel_Independent'). % Lo   [2] MEETEI MAYEK LETTER E..MEETEI MAYEK LETTER O
-unicode_indic_syllabic_category(0xABCE, 0xABCF, 'Vowel_Independent'). % Lo   [2] MEETEI MAYEK LETTER UN..MEETEI MAYEK LETTER I
-unicode_indic_syllabic_category(0xABD1, 0xABD1, 'Vowel_Independent'). % Lo       MEETEI MAYEK LETTER ATIYA
-unicode_indic_syllabic_category(0x11005, 0x11012, 'Vowel_Independent'). % Lo  [14] BRAHMI LETTER A..BRAHMI LETTER AU
-unicode_indic_syllabic_category(0x11083, 0x1108C, 'Vowel_Independent'). % Lo  [10] KAITHI LETTER A..KAITHI LETTER AU
-unicode_indic_syllabic_category(0x11103, 0x11106, 'Vowel_Independent'). % Lo   [4] CHAKMA LETTER AA..CHAKMA LETTER E
-unicode_indic_syllabic_category(0x11183, 0x11190, 'Vowel_Independent'). % Lo  [14] SHARADA LETTER A..SHARADA LETTER AU
-unicode_indic_syllabic_category(0x11680, 0x11689, 'Vowel_Independent'). % Lo  [10] TAKRI LETTER A..TAKRI LETTER AU
-
-% ================================================
-
-% Indic_Syllabic_Category=Vowel_Dependent
-
-% Dependent Vowels (contrasted with independent vowels and/or with complex placement)
-% Matras (in Indic scripts)
-
-% [Not derivable]
-
-unicode_indic_syllabic_category(0x093A, 0x093A, 'Vowel_Dependent'). % Mn       DEVANAGARI VOWEL SIGN OE
-unicode_indic_syllabic_category(0x093B, 0x093B, 'Vowel_Dependent'). % Mc       DEVANAGARI VOWEL SIGN OOE
-unicode_indic_syllabic_category(0x093E, 0x0940, 'Vowel_Dependent'). % Mc   [3] DEVANAGARI VOWEL SIGN AA..DEVANAGARI VOWEL SIGN II
-unicode_indic_syllabic_category(0x0941, 0x0948, 'Vowel_Dependent'). % Mn   [8] DEVANAGARI VOWEL SIGN U..DEVANAGARI VOWEL SIGN AI
-unicode_indic_syllabic_category(0x0949, 0x094C, 'Vowel_Dependent'). % Mc   [4] DEVANAGARI VOWEL SIGN CANDRA O..DEVANAGARI VOWEL SIGN AU
-unicode_indic_syllabic_category(0x094E, 0x094F, 'Vowel_Dependent'). % Mc   [2] DEVANAGARI VOWEL SIGN PRISHTHAMATRA E..DEVANAGARI VOWEL SIGN AW
-unicode_indic_syllabic_category(0x0955, 0x0957, 'Vowel_Dependent'). % Mn       DEVANAGARI VOWEL SIGN CANDRA LONG E..DEVANAGARI VOWEL SIGN UUE
-unicode_indic_syllabic_category(0x0962, 0x0963, 'Vowel_Dependent'). % Mn   [2] DEVANAGARI VOWEL SIGN VOCALIC L..DEVANAGARI VOWEL SIGN VOCALIC LL
-unicode_indic_syllabic_category(0x09BE, 0x09C0, 'Vowel_Dependent'). % Mc   [3] BENGALI VOWEL SIGN AA..BENGALI VOWEL SIGN II
-unicode_indic_syllabic_category(0x09C1, 0x09C4, 'Vowel_Dependent'). % Mn   [4] BENGALI VOWEL SIGN U..BENGALI VOWEL SIGN VOCALIC RR
-unicode_indic_syllabic_category(0x09C7, 0x09C8, 'Vowel_Dependent'). % Mc   [2] BENGALI VOWEL SIGN E..BENGALI VOWEL SIGN AI
-unicode_indic_syllabic_category(0x09CB, 0x09CC, 'Vowel_Dependent'). % Mc   [2] BENGALI VOWEL SIGN O..BENGALI VOWEL SIGN AU
-unicode_indic_syllabic_category(0x09D7, 0x09D7, 'Vowel_Dependent'). % Mc       BENGALI AU LENGTH MARK
-unicode_indic_syllabic_category(0x09E2, 0x09E3, 'Vowel_Dependent'). % Mn   [2] BENGALI VOWEL SIGN VOCALIC L..BENGALI VOWEL SIGN VOCALIC LL
-unicode_indic_syllabic_category(0x0A3E, 0x0A40, 'Vowel_Dependent'). % Mc   [3] GURMUKHI VOWEL SIGN AA..GURMUKHI VOWEL SIGN II
-unicode_indic_syllabic_category(0x0A41, 0x0A42, 'Vowel_Dependent'). % Mn   [2] GURMUKHI VOWEL SIGN U..GURMUKHI VOWEL SIGN UU
-unicode_indic_syllabic_category(0x0A47, 0x0A48, 'Vowel_Dependent'). % Mn   [2] GURMUKHI VOWEL SIGN EE..GURMUKHI VOWEL SIGN AI
-unicode_indic_syllabic_category(0x0A4B, 0x0A4C, 'Vowel_Dependent'). % Mn   [2] GURMUKHI VOWEL SIGN OO..GURMUKHI VOWEL SIGN AU
-unicode_indic_syllabic_category(0x0ABE, 0x0AC0, 'Vowel_Dependent'). % Mc   [3] GUJARATI VOWEL SIGN AA..GUJARATI VOWEL SIGN II
-unicode_indic_syllabic_category(0x0AC1, 0x0AC5, 'Vowel_Dependent'). % Mn   [5] GUJARATI VOWEL SIGN U..GUJARATI VOWEL SIGN CANDRA E
-unicode_indic_syllabic_category(0x0AC7, 0x0AC8, 'Vowel_Dependent'). % Mn   [2] GUJARATI VOWEL SIGN E..GUJARATI VOWEL SIGN AI
-unicode_indic_syllabic_category(0x0AC9, 0x0AC9, 'Vowel_Dependent'). % Mc       GUJARATI VOWEL SIGN CANDRA O
-unicode_indic_syllabic_category(0x0ACB, 0x0ACC, 'Vowel_Dependent'). % Mc   [2] GUJARATI VOWEL SIGN O..GUJARATI VOWEL SIGN AU
-unicode_indic_syllabic_category(0x0AE2, 0x0AE3, 'Vowel_Dependent'). % Mn   [2] GUJARATI VOWEL SIGN VOCALIC L..GUJARATI VOWEL SIGN VOCALIC LL
-unicode_indic_syllabic_category(0x0B3E, 0x0B3E, 'Vowel_Dependent'). % Mc       ORIYA VOWEL SIGN AA
-unicode_indic_syllabic_category(0x0B3F, 0x0B3F, 'Vowel_Dependent'). % Mn       ORIYA VOWEL SIGN I
-unicode_indic_syllabic_category(0x0B40, 0x0B40, 'Vowel_Dependent'). % Mc       ORIYA VOWEL SIGN II
-unicode_indic_syllabic_category(0x0B41, 0x0B44, 'Vowel_Dependent'). % Mn   [4] ORIYA VOWEL SIGN U..ORIYA VOWEL SIGN VOCALIC RR
-unicode_indic_syllabic_category(0x0B47, 0x0B48, 'Vowel_Dependent'). % Mc   [2] ORIYA VOWEL SIGN E..ORIYA VOWEL SIGN AI
-unicode_indic_syllabic_category(0x0B4B, 0x0B4C, 'Vowel_Dependent'). % Mc   [2] ORIYA VOWEL SIGN O..ORIYA VOWEL SIGN AU
-unicode_indic_syllabic_category(0x0B56, 0x0B56, 'Vowel_Dependent'). % Mn       ORIYA AI LENGTH MARK
-unicode_indic_syllabic_category(0x0B57, 0x0B57, 'Vowel_Dependent'). % Mc       ORIYA AU LENGTH MARK
-unicode_indic_syllabic_category(0x0B62, 0x0B63, 'Vowel_Dependent'). % Mn   [2] ORIYA VOWEL SIGN VOCALIC L..ORIYA VOWEL SIGN VOCALIC LL
-unicode_indic_syllabic_category(0x0BBE, 0x0BBF, 'Vowel_Dependent'). % Mc   [2] TAMIL VOWEL SIGN AA..TAMIL VOWEL SIGN I
-unicode_indic_syllabic_category(0x0BC0, 0x0BC0, 'Vowel_Dependent'). % Mn       TAMIL VOWEL SIGN II
-unicode_indic_syllabic_category(0x0BC1, 0x0BC2, 'Vowel_Dependent'). % Mc   [2] TAMIL VOWEL SIGN U..TAMIL VOWEL SIGN UU
-unicode_indic_syllabic_category(0x0BC6, 0x0BC8, 'Vowel_Dependent'). % Mc   [3] TAMIL VOWEL SIGN E..TAMIL VOWEL SIGN AI
-unicode_indic_syllabic_category(0x0BCA, 0x0BCC, 'Vowel_Dependent'). % Mc   [3] TAMIL VOWEL SIGN O..TAMIL VOWEL SIGN AU
-unicode_indic_syllabic_category(0x0BD7, 0x0BD7, 'Vowel_Dependent'). % Mc       TAMIL AU LENGTH MARK
-unicode_indic_syllabic_category(0x0C3E, 0x0C40, 'Vowel_Dependent'). % Mn   [3] TELUGU VOWEL SIGN AA..TELUGU VOWEL SIGN II
-unicode_indic_syllabic_category(0x0C41, 0x0C44, 'Vowel_Dependent'). % Mc   [4] TELUGU VOWEL SIGN U..TELUGU VOWEL SIGN VOCALIC RR
-unicode_indic_syllabic_category(0x0C46, 0x0C48, 'Vowel_Dependent'). % Mn   [3] TELUGU VOWEL SIGN E..TELUGU VOWEL SIGN AI
-unicode_indic_syllabic_category(0x0C4A, 0x0C4C, 'Vowel_Dependent'). % Mn   [3] TELUGU VOWEL SIGN O..TELUGU VOWEL SIGN AU
-unicode_indic_syllabic_category(0x0C55, 0x0C56, 'Vowel_Dependent'). % Mn   [2] TELUGU LENGTH MARK..TELUGU AI LENGTH MARK
-unicode_indic_syllabic_category(0x0C62, 0x0C63, 'Vowel_Dependent'). % Mn   [2] TELUGU VOWEL SIGN VOCALIC L..TELUGU VOWEL SIGN VOCALIC LL
-unicode_indic_syllabic_category(0x0CBE, 0x0CBE, 'Vowel_Dependent'). % Mc       KANNADA VOWEL SIGN AA
-unicode_indic_syllabic_category(0x0CBF, 0x0CBF, 'Vowel_Dependent'). % Mn       KANNADA VOWEL SIGN I
-unicode_indic_syllabic_category(0x0CC0, 0x0CC4, 'Vowel_Dependent'). % Mc   [5] KANNADA VOWEL SIGN II..KANNADA VOWEL SIGN VOCALIC RR
-unicode_indic_syllabic_category(0x0CC6, 0x0CC6, 'Vowel_Dependent'). % Mn       KANNADA VOWEL SIGN E
-unicode_indic_syllabic_category(0x0CC7, 0x0CC8, 'Vowel_Dependent'). % Mc   [2] KANNADA VOWEL SIGN EE..KANNADA VOWEL SIGN AI
-unicode_indic_syllabic_category(0x0CCA, 0x0CCB, 'Vowel_Dependent'). % Mc   [2] KANNADA VOWEL SIGN O..KANNADA VOWEL SIGN OO
-unicode_indic_syllabic_category(0x0CCC, 0x0CCC, 'Vowel_Dependent'). % Mn       KANNADA VOWEL SIGN AU
-unicode_indic_syllabic_category(0x0CD5, 0x0CD6, 'Vowel_Dependent'). % Mc   [2] KANNADA LENGTH MARK..KANNADA AI LENGTH MARK
-unicode_indic_syllabic_category(0x0CE2, 0x0CE3, 'Vowel_Dependent'). % Mn   [2] KANNADA VOWEL SIGN VOCALIC L..KANNADA VOWEL SIGN VOCALIC LL
-unicode_indic_syllabic_category(0x0D3E, 0x0D40, 'Vowel_Dependent'). % Mc   [3] MALAYALAM VOWEL SIGN AA..MALAYALAM VOWEL SIGN II
-unicode_indic_syllabic_category(0x0D41, 0x0D44, 'Vowel_Dependent'). % Mn   [4] MALAYALAM VOWEL SIGN U..MALAYALAM VOWEL SIGN VOCALIC RR
-unicode_indic_syllabic_category(0x0D46, 0x0D48, 'Vowel_Dependent'). % Mc   [3] MALAYALAM VOWEL SIGN E..MALAYALAM VOWEL SIGN AI
-unicode_indic_syllabic_category(0x0D4A, 0x0D4C, 'Vowel_Dependent'). % Mc   [3] MALAYALAM VOWEL SIGN O..MALAYALAM VOWEL SIGN AU
-unicode_indic_syllabic_category(0x0D57, 0x0D57, 'Vowel_Dependent'). % Mc       MALAYALAM AU LENGTH MARK
-unicode_indic_syllabic_category(0x0D62, 0x0D63, 'Vowel_Dependent'). % Mn   [2] MALAYALAM VOWEL SIGN VOCALIC L..MALAYALAM VOWEL SIGN VOCALIC LL
-unicode_indic_syllabic_category(0x0DCF, 0x0DD1, 'Vowel_Dependent'). % Mc   [3] SINHALA VOWEL SIGN AELA-PILLA..SINHALA VOWEL SIGN DIGA AEDA-PILLA
-unicode_indic_syllabic_category(0x0DD2, 0x0DD4, 'Vowel_Dependent'). % Mn   [3] SINHALA VOWEL SIGN KETTI IS-PILLA..SINHALA VOWEL SIGN KETTI PAA-PILLA
-unicode_indic_syllabic_category(0x0DD6, 0x0DD6, 'Vowel_Dependent'). % Mn       SINHALA VOWEL SIGN DIGA PAA-PILLA
-unicode_indic_syllabic_category(0x0DD8, 0x0DDF, 'Vowel_Dependent'). % Mc   [8] SINHALA VOWEL SIGN GAETTA-PILLA..SINHALA VOWEL SIGN GAYANUKITTA
-unicode_indic_syllabic_category(0x0DF2, 0x0DF3, 'Vowel_Dependent'). % Mc   [2] SINHALA VOWEL SIGN DIGA GAETTA-PILLA..SINHALA VOWEL SIGN DIGA GAYANUKITTA
-unicode_indic_syllabic_category(0x0E30, 0x0E30, 'Vowel_Dependent'). % Lo       THAI CHARACTER SARA A
-unicode_indic_syllabic_category(0x0E31, 0x0E31, 'Vowel_Dependent'). % Mn       THAI CHARACTER MAI HAN-AKAT
-unicode_indic_syllabic_category(0x0E32, 0x0E33, 'Vowel_Dependent'). % Lo   [2] THAI CHARACTER SARA AA..THAI CHARACTER SARA AM
-unicode_indic_syllabic_category(0x0E34, 0x0E39, 'Vowel_Dependent'). % Mn   [6] THAI CHARACTER SARA I..THAI CHARACTER SARA UU
-unicode_indic_syllabic_category(0x0E40, 0x0E45, 'Vowel_Dependent'). % Lo   [6] THAI CHARACTER SARA E..THAI CHARACTER LAKKHANGYAO
-unicode_indic_syllabic_category(0x0E47, 0x0E47, 'Vowel_Dependent'). % Mn       THAI CHARACTER MAITAIKHU
-unicode_indic_syllabic_category(0x0EB0, 0x0EB0, 'Vowel_Dependent'). % Lo       LAO VOWEL SIGN A
-unicode_indic_syllabic_category(0x0EB1, 0x0EB1, 'Vowel_Dependent'). % Mn       LAO VOWEL SIGN MAI KAN
-unicode_indic_syllabic_category(0x0EB2, 0x0EB3, 'Vowel_Dependent'). % Lo   [2] LAO VOWEL SIGN AA..LAO VOWEL SIGN AM
-unicode_indic_syllabic_category(0x0EB4, 0x0EB9, 'Vowel_Dependent'). % Mn   [6] LAO VOWEL SIGN I..LAO VOWEL SIGN UU
-unicode_indic_syllabic_category(0x0EBB, 0x0EBB, 'Vowel_Dependent'). % Mn       LAO VOWEL SIGN MAI KON
-unicode_indic_syllabic_category(0x0EC0, 0x0EC4, 'Vowel_Dependent'). % Lo   [5] LAO VOWEL SIGN E..LAO VOWEL SIGN AI
-unicode_indic_syllabic_category(0x0F71, 0x0F7D, 'Vowel_Dependent'). % Mn  [13] TIBETAN VOWEL SIGN AA..TIBETAN VOWEL SIGN OO
-unicode_indic_syllabic_category(0x0F80, 0x0F81, 'Vowel_Dependent'). % Mn   [2] TIBETAN VOWEL SIGN REVERSED I..TIBETAN VOWEL SIGN REVERSED II
-unicode_indic_syllabic_category(0x102B, 0x102C, 'Vowel_Dependent'). % Mc   [2] MYANMAR VOWEL SIGN TALL AA..MYANMAR VOWEL SIGN AA
-unicode_indic_syllabic_category(0x102D, 0x1030, 'Vowel_Dependent'). % Mn   [4] MYANMAR VOWEL SIGN I..MYANMAR VOWEL SIGN UU
-unicode_indic_syllabic_category(0x1031, 0x1031, 'Vowel_Dependent'). % Mc       MYANMAR VOWEL SIGN E
-unicode_indic_syllabic_category(0x1032, 0x1035, 'Vowel_Dependent'). % Mn   [4] MYANMAR VOWEL SIGN AI..MYANMAR VOWEL SIGN E ABOVE
-unicode_indic_syllabic_category(0x1056, 0x1057, 'Vowel_Dependent'). % Mc   [2] MYANMAR VOWEL SIGN VOCALIC R..MYANMAR VOWEL SIGN VOCALIC RR
-unicode_indic_syllabic_category(0x1058, 0x1059, 'Vowel_Dependent'). % Mn   [2] MYANMAR VOWEL SIGN VOCALIC L..MYANMAR VOWEL SIGN VOCALIC LL
-unicode_indic_syllabic_category(0x1062, 0x1062, 'Vowel_Dependent'). % Mc       MYANMAR VOWEL SIGN SGAW KAREN EU
-unicode_indic_syllabic_category(0x1067, 0x1068, 'Vowel_Dependent'). % Mc   [2] MYANMAR VOWEL SIGN WESTERN PWO KAREN EU..MYANMAR VOWEL SIGN WESTERN PWO KAREN UE
-unicode_indic_syllabic_category(0x1071, 0x1074, 'Vowel_Dependent'). % Mn   [4] MYANMAR VOWEL SIGN GEBA KAREN I..MYANMAR VOWEL SIGN KAYAH EE
-unicode_indic_syllabic_category(0x1083, 0x1084, 'Vowel_Dependent'). % Mc   [2] MYANMAR VOWEL SIGN SHAN AA..MYANMAR VOWEL SIGN SHAN E
-unicode_indic_syllabic_category(0x1085, 0x1086, 'Vowel_Dependent'). % Mn   [2] MYANMAR VOWEL SIGN SHAN E ABOVE..MYANMAR VOWEL SIGN SHAN FINAL Y
-unicode_indic_syllabic_category(0x109C, 0x109C, 'Vowel_Dependent'). % Mc       MYANMAR VOWEL SIGN AITON A
-unicode_indic_syllabic_category(0x109D, 0x109D, 'Vowel_Dependent'). % Mn       MYANMAR VOWEL SIGN AITON AI
-unicode_indic_syllabic_category(0x1712, 0x1713, 'Vowel_Dependent'). % Mn   [2] TAGALOG VOWEL SIGN I..TAGALOG VOWEL SIGN U
-unicode_indic_syllabic_category(0x1732, 0x1733, 'Vowel_Dependent'). % Mn   [2] HANUNOO VOWEL SIGN I..HANUNOO VOWEL SIGN U
-unicode_indic_syllabic_category(0x1752, 0x1753, 'Vowel_Dependent'). % Mn   [2] BUHID VOWEL SIGN I..BUHID VOWEL SIGN U
-unicode_indic_syllabic_category(0x1772, 0x1773, 'Vowel_Dependent'). % Mn   [2] TAGBANWA VOWEL SIGN I..TAGBANWA VOWEL SIGN U
-unicode_indic_syllabic_category(0x17B6, 0x17B6, 'Vowel_Dependent'). % Mc       KHMER VOWEL SIGN AA
-unicode_indic_syllabic_category(0x17B7, 0x17BD, 'Vowel_Dependent'). % Mn   [7] KHMER VOWEL SIGN I..KHMER VOWEL SIGN UA
-unicode_indic_syllabic_category(0x17BE, 0x17C5, 'Vowel_Dependent'). % Mc   [8] KHMER VOWEL SIGN OE..KHMER VOWEL SIGN AU
-unicode_indic_syllabic_category(0x17C8, 0x17C8, 'Vowel_Dependent'). % Mc       KHMER SIGN YUUKALEAPINTU
-unicode_indic_syllabic_category(0x1920, 0x1922, 'Vowel_Dependent'). % Mn   [3] LIMBU VOWEL SIGN A..LIMBU VOWEL SIGN U
-unicode_indic_syllabic_category(0x1923, 0x1926, 'Vowel_Dependent'). % Mc   [4] LIMBU VOWEL SIGN EE..LIMBU VOWEL SIGN AU
-unicode_indic_syllabic_category(0x1927, 0x1928, 'Vowel_Dependent'). % Mn   [2] LIMBU VOWEL SIGN E..LIMBU VOWEL SIGN O
-unicode_indic_syllabic_category(0x19B0, 0x19C0, 'Vowel_Dependent'). % Mc  [17] NEW TAI LUE VOWEL SIGN VOWEL SHORTENER..NEW TAI LUE VOWEL SIGN IY
-unicode_indic_syllabic_category(0x1A17, 0x1A18, 'Vowel_Dependent'). % Mn   [2] BUGINESE VOWEL SIGN I..BUGINESE VOWEL SIGN U
-unicode_indic_syllabic_category(0x1A19, 0x1A1B, 'Vowel_Dependent'). % Mc   [3] BUGINESE VOWEL SIGN E..BUGINESE VOWEL SIGN AE
-unicode_indic_syllabic_category(0x1A61, 0x1A61, 'Vowel_Dependent'). % Mc       TAI THAM VOWEL SIGN A
-unicode_indic_syllabic_category(0x1A62, 0x1A62, 'Vowel_Dependent'). % Mn       TAI THAM VOWEL SIGN MAI SAT
-unicode_indic_syllabic_category(0x1A63, 0x1A64, 'Vowel_Dependent'). % Mc   [2] TAI THAM VOWEL SIGN AA..TAI THAM VOWEL SIGN TALL AA
-unicode_indic_syllabic_category(0x1A65, 0x1A6C, 'Vowel_Dependent'). % Mn   [8] TAI THAM VOWEL SIGN I..TAI THAM VOWEL SIGN OA BELOW
-unicode_indic_syllabic_category(0x1A6D, 0x1A72, 'Vowel_Dependent'). % Mc   [6] TAI THAM VOWEL SIGN OY..TAI THAM VOWEL SIGN THAM AI
-unicode_indic_syllabic_category(0x1A73, 0x1A74, 'Vowel_Dependent'). % Mn   [2] TAI THAM VOWEL SIGN OA ABOVE..TAI THAM SIGN MAI KANG
-unicode_indic_syllabic_category(0x1B35, 0x1B35, 'Vowel_Dependent'). % Mc       BALINESE VOWEL SIGN TEDUNG
-unicode_indic_syllabic_category(0x1B36, 0x1B3A, 'Vowel_Dependent'). % Mn   [5] BALINESE VOWEL SIGN ULU..BALINESE VOWEL SIGN RA REPA
-unicode_indic_syllabic_category(0x1B3B, 0x1B3B, 'Vowel_Dependent'). % Mc       BALINESE VOWEL SIGN RA REPA TEDUNG
-unicode_indic_syllabic_category(0x1B3C, 0x1B3C, 'Vowel_Dependent'). % Mn       BALINESE VOWEL SIGN LA LENGA
-unicode_indic_syllabic_category(0x1B3D, 0x1B41, 'Vowel_Dependent'). % Mc   [5] BALINESE VOWEL SIGN LA LENGA TEDUNG..BALINESE VOWEL SIGN TALING REPA TEDUNG
-unicode_indic_syllabic_category(0x1B42, 0x1B42, 'Vowel_Dependent'). % Mn       BALINESE VOWEL SIGN PEPET
-unicode_indic_syllabic_category(0x1B43, 0x1B43, 'Vowel_Dependent'). % Mc       BALINESE VOWEL SIGN PEPET TEDUNG
-unicode_indic_syllabic_category(0x1BA4, 0x1BA5, 'Vowel_Dependent'). % Mn   [2] SUNDANESE VOWEL SIGN PANGHULU..SUNDANESE VOWEL SIGN PANYUKU
-unicode_indic_syllabic_category(0x1BA6, 0x1BA7, 'Vowel_Dependent'). % Mc   [2] SUNDANESE VOWEL SIGN PANAELAENG..SUNDANESE VOWEL SIGN PANOLONG
-unicode_indic_syllabic_category(0x1BA8, 0x1BA9, 'Vowel_Dependent'). % Mn   [2] SUNDANESE VOWEL SIGN PAMEPET..SUNDANESE VOWEL SIGN PANEULEUNG
-unicode_indic_syllabic_category(0x1BE7, 0x1BE7, 'Vowel_Dependent'). % Mc       BATAK VOWEL SIGN E
-unicode_indic_syllabic_category(0x1BE8, 0x1BE9, 'Vowel_Dependent'). % Mn   [2] BATAK VOWEL SIGN PAKPAK E..BATAK VOWEL SIGN EE
-unicode_indic_syllabic_category(0x1BEA, 0x1BEC, 'Vowel_Dependent'). % Mc   [3] BATAK VOWEL SIGN I..BATAK VOWEL SIGN O
-unicode_indic_syllabic_category(0x1BED, 0x1BED, 'Vowel_Dependent'). % Mn       BATAK VOWEL SIGN KARO O
-unicode_indic_syllabic_category(0x1BEE, 0x1BEE, 'Vowel_Dependent'). % Mc       BATAK VOWEL SIGN U
-unicode_indic_syllabic_category(0x1BEF, 0x1BEF, 'Vowel_Dependent'). % Mn       BATAK VOWEL SIGN U FOR SIMALUNGUN SA
-unicode_indic_syllabic_category(0x1C26, 0x1C2B, 'Vowel_Dependent'). % Mc   [6] LEPCHA VOWEL SIGN AA..LEPCHA VOWEL SIGN UU
-unicode_indic_syllabic_category(0x1C2C, 0x1C2C, 'Vowel_Dependent'). % Mn       LEPCHA VOWEL SIGN E
-unicode_indic_syllabic_category(0xA823, 0xA824, 'Vowel_Dependent'). % Mc   [2] SYLOTI NAGRI VOWEL SIGN A..SYLOTI NAGRI VOWEL SIGN I
-unicode_indic_syllabic_category(0xA825, 0xA826, 'Vowel_Dependent'). % Mn   [2] SYLOTI NAGRI VOWEL SIGN U..SYLOTI NAGRI VOWEL SIGN E
-unicode_indic_syllabic_category(0xA827, 0xA827, 'Vowel_Dependent'). % Mc       SYLOTI NAGRI VOWEL SIGN OO
-unicode_indic_syllabic_category(0xA8B5, 0xA8C3, 'Vowel_Dependent'). % Mc  [15] SAURASHTRA VOWEL SIGN AA..SAURASHTRA VOWEL SIGN AU
-unicode_indic_syllabic_category(0xA947, 0xA94E, 'Vowel_Dependent'). % Mn   [8] REJANG VOWEL SIGN I..REJANG VOWEL SIGN EA
-unicode_indic_syllabic_category(0xA9B4, 0xA9B5, 'Vowel_Dependent'). % Mc   [2] JAVANESE VOWEL SIGN TARUNG..JAVANESE VOWEL SIGN TOLONG
-unicode_indic_syllabic_category(0xA9B6, 0xA9B9, 'Vowel_Dependent'). % Mn   [4] JAVANESE VOWEL SIGN WULU..JAVANESE VOWEL SIGN SUKU MENDUT
-unicode_indic_syllabic_category(0xA9BA, 0xA9BB, 'Vowel_Dependent'). % Mc   [2] JAVANESE VOWEL SIGN TALING..JAVANESE VOWEL SIGN DIRGA MURE
-unicode_indic_syllabic_category(0xA9BC, 0xA9BC, 'Vowel_Dependent'). % Mn       JAVANESE VOWEL SIGN PEPET
-unicode_indic_syllabic_category(0xAA29, 0xAA2E, 'Vowel_Dependent'). % Mn   [6] CHAM VOWEL SIGN AA..CHAM VOWEL SIGN OE
-unicode_indic_syllabic_category(0xAA2F, 0xAA30, 'Vowel_Dependent'). % Mc   [2] CHAM VOWEL SIGN O..CHAM VOWEL SIGN AI
-unicode_indic_syllabic_category(0xAA31, 0xAA32, 'Vowel_Dependent'). % Mn   [2] CHAM VOWEL SIGN AU..CHAM VOWEL SIGN UE
-unicode_indic_syllabic_category(0xAAB0, 0xAAB0, 'Vowel_Dependent'). % Mn       TAI VIET MAI KANG
-unicode_indic_syllabic_category(0xAAB1, 0xAAB1, 'Vowel_Dependent'). % Lo       TAI VIET VOWEL AA
-unicode_indic_syllabic_category(0xAAB2, 0xAAB4, 'Vowel_Dependent'). % Mn   [3] TAI VIET VOWEL I..TAI VIET VOWEL U
-unicode_indic_syllabic_category(0xAAB5, 0xAAB6, 'Vowel_Dependent'). % Lo   [2] TAI VIET VOWEL E..TAI VIET VOWEL O
-unicode_indic_syllabic_category(0xAAB7, 0xAAB8, 'Vowel_Dependent'). % Mn   [2] TAI VIET MAI KHIT..TAI VIET VOWEL IA
-unicode_indic_syllabic_category(0xAAB9, 0xAABD, 'Vowel_Dependent'). % Lo   [5] TAI VIET VOWEL UEA..TAI VIET VOWEL AN
-unicode_indic_syllabic_category(0xAABE, 0xAABE, 'Vowel_Dependent'). % Mn       TAI VIET VOWEL AM
-unicode_indic_syllabic_category(0xAAEB, 0xAAEF, 'Vowel_Dependent'). % Mc   [5] MEETEI MAYEK VOWEL SIGN II..MEETEI MAYEK VOWEL SIGN AAU
-unicode_indic_syllabic_category(0xABE3, 0xABE4, 'Vowel_Dependent'). % Mc   [2] MEETEI MAYEK VOWEL SIGN ONAP..MEETEI MAYEK VOWEL SIGN INAP
-unicode_indic_syllabic_category(0xABE5, 0xABE5, 'Vowel_Dependent'). % Mn       MEETEI MAYEK VOWEL SIGN ANAP
-unicode_indic_syllabic_category(0xABE6, 0xABE7, 'Vowel_Dependent'). % Mc   [2] MEETEI MAYEK VOWEL SIGN YENAP..MEETEI MAYEK VOWEL SIGN SOUNAP
-unicode_indic_syllabic_category(0xABE8, 0xABE8, 'Vowel_Dependent'). % Mn       MEETEI MAYEK VOWEL SIGN UNAP
-unicode_indic_syllabic_category(0xABE9, 0xABEA, 'Vowel_Dependent'). % Mc   [2] MEETEI MAYEK VOWEL SIGN CHEINAP..MEETEI MAYEK VOWEL SIGN NUNG
-unicode_indic_syllabic_category(0x10A01, 0x10A03, 'Vowel_Dependent'). % Mn   [3] KHAROSHTHI VOWEL SIGN I..KHAROSHTHI VOWEL SIGN VOCALIC R
-unicode_indic_syllabic_category(0x10A05, 0x10A06, 'Vowel_Dependent'). % Mn   [2] KHAROSHTHI VOWEL SIGN E..KHAROSHTHI VOWEL SIGN O
-unicode_indic_syllabic_category(0x10A0C, 0x10A0C, 'Vowel_Dependent'). % Mn       KHAROSHTHI VOWEL LENGTH MARK
-unicode_indic_syllabic_category(0x11038, 0x11045, 'Vowel_Dependent'). % Mn  [14] BRAHMI VOWEL SIGN AA..BRAHMI VOWEL SIGN AU
-unicode_indic_syllabic_category(0x110B0, 0x110B2, 'Vowel_Dependent'). % Mc   [3] KAITHI VOWEL SIGN AA..KAITHI VOWEL SIGN II
-unicode_indic_syllabic_category(0x110B3, 0x110B6, 'Vowel_Dependent'). % Mn   [4] KAITHI VOWEL SIGN U..KAITHI VOWEL SIGN AI
-unicode_indic_syllabic_category(0x110B7, 0x110B8, 'Vowel_Dependent'). % Mc   [2] KAITHI VOWEL SIGN O..KAITHI VOWEL SIGN AU
-unicode_indic_syllabic_category(0x11127, 0x11132, 'Vowel_Dependent'). % Mn  [12] CHAKMA VOWEL SIGN A..CHAKMA AU MARK
-unicode_indic_syllabic_category(0x111B3, 0x111BF, 'Vowel_Dependent'). % Mn  [13] SHARADA VOWEL SIGN AA..SHARADA VOWEL SIGN AU
-unicode_indic_syllabic_category(0x116AD, 0x116B5, 'Vowel_Dependent'). % Mn   [9] TAKRI VOWEL SIGN AA..TAKRI VOWEL SIGN AU
-
-% ================================================
-
-% Indic_Syllabic_Category=Vowel
-
-% (Other) Vowels (reanalyzed as ordinary alphabetic letters or marks)
-
-% [Not derivable]
-
-unicode_indic_syllabic_category(0x1963, 0x196D, 'Vowel'). % Lo  [11] TAI LE LETTER A..TAI LE LETTER AI
-unicode_indic_syllabic_category(0xA85E, 0xA861, 'Vowel'). % Lo   [4] PHAGS-PA LETTER I..PHAGS-PA LETTER O
-unicode_indic_syllabic_category(0xA866, 0xA866, 'Vowel'). % Lo   [1] PHAGS-PA LETTER EE
-unicode_indic_syllabic_category(0xA922, 0xA925, 'Vowel'). % Lo   [4] KAYAH LI LETTER A..KAYAH LI LETTER OO
-unicode_indic_syllabic_category(0xA926, 0xA92A, 'Vowel'). % Mn   [5] KAYAH LI VOWEL UE..KAYAH LI VOWEL O
-
-% ================================================
-
-% Indic_Syllabic_Category=Consonant_Placeholder
-
-% Consonant Placeholder
-% This includes generic placeholders used for
-% Indic script layout (NBSP and dotted circle), as well as a few script-
-% specific vowel-holder characters which are not technically
-% consonants, but serve instead as bases for placement of vowel marks.
-
-% [Not derivable]
-
-unicode_indic_syllabic_category(0x00A0, 0x00A0, 'Consonant_Placeholder'). % Zs       NO-BREAK SPACE
-unicode_indic_syllabic_category(0x0A72, 0x0A73, 'Consonant_Placeholder'). % Lo   [2] GURMUKHI IRI..GURMUKHI URA
-unicode_indic_syllabic_category(0x1900, 0x1900, 'Consonant_Placeholder'). % Lo       LIMBU VOWEL-CARRIER LETTER
-unicode_indic_syllabic_category(0x25CC, 0x25CC, 'Consonant_Placeholder'). % So       DOTTED CIRCLE
-
-% ================================================
-
-% Indic_Syllabic_Category=Consonant
-
-% Consonant (ordinary abugida consonants, with inherent vowels)
-
-% [Not derivable]
-
-unicode_indic_syllabic_category(0x0915, 0x0939, 'Consonant'). % Lo  [35] DEVANAGARI LETTER KA..DEVANAGARI LETTER HA
-unicode_indic_syllabic_category(0x0958, 0x095F, 'Consonant'). % Lo   [8] DEVANAGARI LETTER QA..DEVANAGARI LETTER YYA
-unicode_indic_syllabic_category(0x0979, 0x097F, 'Consonant'). % Lo   [7] DEVANAGARI LETTER ZHA..DEVANAGARI LETTER BBA
-unicode_indic_syllabic_category(0x0995, 0x09A8, 'Consonant'). % Lo  [20] BENGALI LETTER KA..BENGALI LETTER NA
-unicode_indic_syllabic_category(0x09AA, 0x09B0, 'Consonant'). % Lo   [7] BENGALI LETTER PA..BENGALI LETTER RA
-unicode_indic_syllabic_category(0x09B2, 0x09B2, 'Consonant'). % Lo       BENGALI LETTER LA
-unicode_indic_syllabic_category(0x09B6, 0x09B9, 'Consonant'). % Lo   [4] BENGALI LETTER SHA..BENGALI LETTER HA
-unicode_indic_syllabic_category(0x09DC, 0x09DD, 'Consonant'). % Lo   [2] BENGALI LETTER RRA..BENGALI LETTER RHA
-unicode_indic_syllabic_category(0x09DF, 0x09DF, 'Consonant'). % Lo       BENGALI LETTER YYA
-unicode_indic_syllabic_category(0x09F0, 0x09F1, 'Consonant'). % Lo   [2] BENGALI LETTER RA WITH MIDDLE DIAGONAL..BENGALI LETTER RA WITH LOWER DIAGONAL
-unicode_indic_syllabic_category(0x0A15, 0x0A28, 'Consonant'). % Lo  [20] GURMUKHI LETTER KA..GURMUKHI LETTER NA
-unicode_indic_syllabic_category(0x0A2A, 0x0A30, 'Consonant'). % Lo   [7] GURMUKHI LETTER PA..GURMUKHI LETTER RA
-unicode_indic_syllabic_category(0x0A32, 0x0A33, 'Consonant'). % Lo   [2] GURMUKHI LETTER LA..GURMUKHI LETTER LLA
-unicode_indic_syllabic_category(0x0A35, 0x0A36, 'Consonant'). % Lo   [2] GURMUKHI LETTER VA..GURMUKHI LETTER SHA
-unicode_indic_syllabic_category(0x0A38, 0x0A39, 'Consonant'). % Lo   [2] GURMUKHI LETTER SA..GURMUKHI LETTER HA
-unicode_indic_syllabic_category(0x0A59, 0x0A5C, 'Consonant'). % Lo   [4] GURMUKHI LETTER KHHA..GURMUKHI LETTER RRA
-unicode_indic_syllabic_category(0x0A5E, 0x0A5E, 'Consonant'). % Lo       GURMUKHI LETTER FA
-unicode_indic_syllabic_category(0x0A95, 0x0AA8, 'Consonant'). % Lo  [20] GUJARATI LETTER KA..GUJARATI LETTER NA
-unicode_indic_syllabic_category(0x0AAA, 0x0AB0, 'Consonant'). % Lo   [7] GUJARATI LETTER PA..GUJARATI LETTER RA
-unicode_indic_syllabic_category(0x0AB2, 0x0AB3, 'Consonant'). % Lo   [2] GUJARATI LETTER LA..GUJARATI LETTER LLA
-unicode_indic_syllabic_category(0x0AB5, 0x0AB9, 'Consonant'). % Lo   [5] GUJARATI LETTER VA..GUJARATI LETTER HA
-unicode_indic_syllabic_category(0x0B15, 0x0B28, 'Consonant'). % Lo  [20] ORIYA LETTER KA..ORIYA LETTER NA
-unicode_indic_syllabic_category(0x0B2A, 0x0B30, 'Consonant'). % Lo   [7] ORIYA LETTER PA..ORIYA LETTER RA
-unicode_indic_syllabic_category(0x0B32, 0x0B33, 'Consonant'). % Lo   [2] ORIYA LETTER LA..ORIYA LETTER LLA
-unicode_indic_syllabic_category(0x0B35, 0x0B39, 'Consonant'). % Lo   [5] ORIYA LETTER VA..ORIYA LETTER HA
-unicode_indic_syllabic_category(0x0B5C, 0x0B5D, 'Consonant'). % Lo   [2] ORIYA LETTER RRA..ORIYA LETTER RHA
-unicode_indic_syllabic_category(0x0B5F, 0x0B5F, 'Consonant'). % Lo       ORIYA LETTER YYA
-unicode_indic_syllabic_category(0x0B71, 0x0B71, 'Consonant'). % Lo       ORIYA LETTER WA
-unicode_indic_syllabic_category(0x0B95, 0x0B95, 'Consonant'). % Lo       TAMIL LETTER KA
-unicode_indic_syllabic_category(0x0B99, 0x0B9A, 'Consonant'). % Lo   [2] TAMIL LETTER NGA..TAMIL LETTER CA
-unicode_indic_syllabic_category(0x0B9C, 0x0B9C, 'Consonant'). % Lo       TAMIL LETTER JA
-unicode_indic_syllabic_category(0x0B9E, 0x0B9F, 'Consonant'). % Lo   [2] TAMIL LETTER NYA..TAMIL LETTER TTA
-unicode_indic_syllabic_category(0x0BA3, 0x0BA4, 'Consonant'). % Lo   [2] TAMIL LETTER NNA..TAMIL LETTER TA
-unicode_indic_syllabic_category(0x0BA8, 0x0BAA, 'Consonant'). % Lo   [3] TAMIL LETTER NA..TAMIL LETTER PA
-unicode_indic_syllabic_category(0x0BAE, 0x0BB9, 'Consonant'). % Lo  [12] TAMIL LETTER MA..TAMIL LETTER HA
-unicode_indic_syllabic_category(0x0C15, 0x0C28, 'Consonant'). % Lo  [20] TELUGU LETTER KA..TELUGU LETTER NA
-unicode_indic_syllabic_category(0x0C2A, 0x0C33, 'Consonant'). % Lo  [10] TELUGU LETTER PA..TELUGU LETTER LLA
-unicode_indic_syllabic_category(0x0C35, 0x0C39, 'Consonant'). % Lo   [5] TELUGU LETTER VA..TELUGU LETTER HA
-unicode_indic_syllabic_category(0x0C58, 0x0C59, 'Consonant'). % Lo   [2] TELUGU LETTER TSA..TELUGU LETTER DZA
-unicode_indic_syllabic_category(0x0C95, 0x0CA8, 'Consonant'). % Lo  [20] KANNADA LETTER KA..KANNADA LETTER NA
-unicode_indic_syllabic_category(0x0CAA, 0x0CB3, 'Consonant'). % Lo  [10] KANNADA LETTER PA..KANNADA LETTER LLA
-unicode_indic_syllabic_category(0x0CB5, 0x0CB9, 'Consonant'). % Lo   [5] KANNADA LETTER VA..KANNADA LETTER HA
-unicode_indic_syllabic_category(0x0CDE, 0x0CDE, 'Consonant'). % Lo       KANNADA LETTER FA
-unicode_indic_syllabic_category(0x0D15, 0x0D3A, 'Consonant'). % Lo  [38] MALAYALAM LETTER KA..MALAYALAM LETTER TTTA
-unicode_indic_syllabic_category(0x0D9A, 0x0DB1, 'Consonant'). % Lo  [24] SINHALA LETTER ALPAPRAANA KAYANNA..SINHALA LETTER DANTAJA NAYANNA
-unicode_indic_syllabic_category(0x0DB3, 0x0DBB, 'Consonant'). % Lo   [9] SINHALA LETTER SANYAKA DAYANNA..SINHALA LETTER RAYANNA
-unicode_indic_syllabic_category(0x0DBD, 0x0DBD, 'Consonant'). % Lo       SINHALA LETTER DANTAJA LAYANNA
-unicode_indic_syllabic_category(0x0DC0, 0x0DC6, 'Consonant'). % Lo   [7] SINHALA LETTER VAYANNA..SINHALA LETTER FAYANNA
-unicode_indic_syllabic_category(0x0E01, 0x0E2E, 'Consonant'). % Lo  [46] THAI CHARACTER KO KAI..THAI CHARACTER NOKHUK
-unicode_indic_syllabic_category(0x0E81, 0x0E82, 'Consonant'). % Lo   [2] LAO LETTER KO..LAO LETTER KHO SUNG
-unicode_indic_syllabic_category(0x0E84, 0x0E84, 'Consonant'). % Lo       LAO LETTER KHO TAM
-unicode_indic_syllabic_category(0x0E87, 0x0E88, 'Consonant'). % Lo   [2] LAO LETTER NGO..LAO LETTER CO
-unicode_indic_syllabic_category(0x0E8A, 0x0E8A, 'Consonant'). % Lo       LAO LETTER SO TAM
-unicode_indic_syllabic_category(0x0E8D, 0x0E8D, 'Consonant'). % Lo       LAO LETTER NYO
-unicode_indic_syllabic_category(0x0E94, 0x0E97, 'Consonant'). % Lo   [4] LAO LETTER DO..LAO LETTER THO TAM
-unicode_indic_syllabic_category(0x0E99, 0x0E9F, 'Consonant'). % Lo   [7] LAO LETTER NO..LAO LETTER FO SUNG
-unicode_indic_syllabic_category(0x0EA1, 0x0EA3, 'Consonant'). % Lo   [3] LAO LETTER MO..LAO LETTER LO LING
-unicode_indic_syllabic_category(0x0EA5, 0x0EA5, 'Consonant'). % Lo       LAO LETTER LO LOOT
-unicode_indic_syllabic_category(0x0EA7, 0x0EA7, 'Consonant'). % Lo       LAO LETTER WO
-unicode_indic_syllabic_category(0x0EAA, 0x0EAB, 'Consonant'). % Lo   [2] LAO LETTER SO SUNG..LAO LETTER HO SUNG
-unicode_indic_syllabic_category(0x0EAD, 0x0EAE, 'Consonant'). % Lo   [2] LAO LETTER O..LAO LETTER HO TAM
-unicode_indic_syllabic_category(0x0EDC, 0x0EDD, 'Consonant'). % Lo   [2] LAO HO NO..LAO HO MO
-unicode_indic_syllabic_category(0x0F40, 0x0F47, 'Consonant'). % Lo   [8] TIBETAN LETTER KA..TIBETAN LETTER JA
-unicode_indic_syllabic_category(0x0F49, 0x0F6C, 'Consonant'). % Lo  [36] TIBETAN LETTER NYA..TIBETAN LETTER RRA
-unicode_indic_syllabic_category(0x1000, 0x1020, 'Consonant'). % Lo  [33] MYANMAR LETTER KA..MYANMAR LETTER LLA
-unicode_indic_syllabic_category(0x103F, 0x103F, 'Consonant'). % Lo       MYANMAR LETTER GREAT SA
-unicode_indic_syllabic_category(0x1050, 0x1051, 'Consonant'). % Lo   [2] MYANMAR LETTER SHA..MYANMAR LETTER SSA
-unicode_indic_syllabic_category(0x105A, 0x105D, 'Consonant'). % Lo   [4] MYANMAR LETTER MON NGA..MYANMAR LETTER MON BBE
-unicode_indic_syllabic_category(0x1061, 0x1061, 'Consonant'). % Lo       MYANMAR LETTER SGAW KAREN SHA
-unicode_indic_syllabic_category(0x1065, 0x1066, 'Consonant'). % Lo   [2] MYANMAR LETTER WESTERN PWO KAREN THA..MYANMAR LETTER WESTERN PWO KAREN PWA
-unicode_indic_syllabic_category(0x106E, 0x1070, 'Consonant'). % Lo   [3] MYANMAR LETTER EASTERN PWO KAREN NNA..MYANMAR LETTER EASTERN PWO KAREN GHWA
-unicode_indic_syllabic_category(0x1075, 0x1081, 'Consonant'). % Lo  [13] MYANMAR LETTER SHAN KA..MYANMAR LETTER SHAN HA
-unicode_indic_syllabic_category(0x108E, 0x108E, 'Consonant'). % Lo       MYANMAR LETTER RUMAI PALAUNG FA
-unicode_indic_syllabic_category(0x1703, 0x170C, 'Consonant'). % Lo  [10] TAGALOG LETTER KA..TAGALOG LETTER YA
-unicode_indic_syllabic_category(0x170E, 0x1711, 'Consonant'). % Lo   [4] TAGALOG LETTER LA..TAGALOG LETTER HA
-unicode_indic_syllabic_category(0x1723, 0x1731, 'Consonant'). % Lo  [15] HANUNOO LETTER KA..HANUNOO LETTER HA
-unicode_indic_syllabic_category(0x1743, 0x1751, 'Consonant'). % Lo  [15] BUHID LETTER KA..BUHID LETTER HA
-unicode_indic_syllabic_category(0x1763, 0x176C, 'Consonant'). % Lo  [10] TAGBANWA LETTER KA..TAGBANWA LETTER YA
-unicode_indic_syllabic_category(0x176E, 0x1770, 'Consonant'). % Lo   [3] TAGBANWA LETTER LA..TAGBANWA LETTER SA
-unicode_indic_syllabic_category(0x1780, 0x17A2, 'Consonant'). % Lo  [35] KHMER LETTER KA..KHMER LETTER QA
-unicode_indic_syllabic_category(0x1901, 0x191C, 'Consonant'). % Lo  [28] LIMBU LETTER KA..LIMBU LETTER HA
-unicode_indic_syllabic_category(0x1950, 0x1962, 'Consonant'). % Lo  [19] TAI LE LETTER KA..TAI LE LETTER NA
-unicode_indic_syllabic_category(0x1980, 0x19AB, 'Consonant'). % Lo  [44] NEW TAI LUE LETTER HIGH QA..NEW TAI LUE LETTER LOW SUA
-unicode_indic_syllabic_category(0x1A00, 0x1A16, 'Consonant'). % Lo  [23] BUGINESE LETTER KA..BUGINESE LETTER HA
-unicode_indic_syllabic_category(0x1A20, 0x1A4C, 'Consonant'). % Lo  [45] TAI THAM LETTER HIGH KA..TAI THAM LETTER LOW HA
-unicode_indic_syllabic_category(0x1A53, 0x1A54, 'Consonant'). % Lo   [2] TAI THAM LETTER LAE..TAI THAM LETTER GREAT SA
-unicode_indic_syllabic_category(0x1B13, 0x1B33, 'Consonant'). % Lo  [33] BALINESE LETTER KA..BALINESE LETTER HA
-unicode_indic_syllabic_category(0x1B45, 0x1B4B, 'Consonant'). % Lo   [7] BALINESE LETTER KAF SASAK..BALINESE LETTER ASYURA SASAK
-unicode_indic_syllabic_category(0x1B8A, 0x1BA0, 'Consonant'). % Lo  [23] SUNDANESE LETTER KA..SUNDANESE LETTER HA
-unicode_indic_syllabic_category(0x1BAE, 0x1BAF, 'Consonant'). % Lo   [2] SUNDANESE LETTER KHA..SUNDANESE LETTER SYA
-unicode_indic_syllabic_category(0x1BBB, 0x1BBD, 'Consonant'). % Lo   [3] SUNDANESE LETTER REU..SUNDANESE LETTER BHA
-unicode_indic_syllabic_category(0x1BC0, 0x1BE3, 'Consonant'). % Lo  [36] BATAK LETTER A..BATAK LETTER MBA
-unicode_indic_syllabic_category(0x1C00, 0x1C23, 'Consonant'). % Lo  [36] LEPCHA LETTER KA..LEPCHA LETTER A
-unicode_indic_syllabic_category(0x1C4D, 0x1C4F, 'Consonant'). % Lo   [3] LEPCHA LETTER TTA..LEPCHA LETTER DDA
-unicode_indic_syllabic_category(0xA807, 0xA80A, 'Consonant'). % Lo   [4] SYLOTI NAGRI LETTER KO..SYLOTI NAGRI LETTER GHO
-unicode_indic_syllabic_category(0xA80C, 0xA822, 'Consonant'). % Lo  [23] SYLOTI NAGRI LETTER CO..SYLOTI NAGRI LETTER HO
-unicode_indic_syllabic_category(0xA840, 0xA85D, 'Consonant'). % Lo  [30] PHAGS-PA LETTER KA..PHAGS-PA LETTER A
-unicode_indic_syllabic_category(0xA862, 0xA865, 'Consonant'). % Lo   [4] PHAGS-PA LETTER QA..PHAGS-PA LETTER GGA
-unicode_indic_syllabic_category(0xA869, 0xA870, 'Consonant'). % Lo   [8] PHAGS-PA LETTER TTA..PHAGS-PA LETTER ASPIRATED FA
-unicode_indic_syllabic_category(0xA872, 0xA872, 'Consonant'). % Lo       PHAGS-PA SUPERFIXED LETTER RA
-unicode_indic_syllabic_category(0xA892, 0xA8B3, 'Consonant'). % Lo  [34] SAURASHTRA LETTER KA..SAURASHTRA LETTER LLA
-unicode_indic_syllabic_category(0xA90A, 0xA921, 'Consonant'). % Lo  [24] KAYAH LI LETTER KA..KAYAH LI LETTER CA
-unicode_indic_syllabic_category(0xA930, 0xA946, 'Consonant'). % Lo  [23] REJANG LETTER KA..REJANG LETTER A
-unicode_indic_syllabic_category(0xA989, 0xA98B, 'Consonant'). % Lo   [3] JAVANESE LETTER PA CEREK..JAVANESE LETTER NGA LELET RASWADI
-unicode_indic_syllabic_category(0xA98F, 0xA9B2, 'Consonant'). % Lo  [34] JAVANESE LETTER KA..JAVANESE LETTER HA
-unicode_indic_syllabic_category(0xAA06, 0xAA28, 'Consonant'). % Lo  [35] CHAM LETTER KA..CHAM LETTER HA
-unicode_indic_syllabic_category(0xAA60, 0xAA6F, 'Consonant'). % Lo  [16] MYANMAR LETTER KHAMTI GA..MYANMAR LETTER KHAMTI FA
-unicode_indic_syllabic_category(0xAA71, 0xAA73, 'Consonant'). % Lo   [3] MYANMAR LETTER KHAMTI XA..MYAMNAR LETTER KHAMTI RA
-unicode_indic_syllabic_category(0xAA7A, 0xAA7A, 'Consonant'). % Lo       MYANMAR LETTER AITON RA
-unicode_indic_syllabic_category(0xAA80, 0xAAAF, 'Consonant'). % Lo  [48] TAI VIET LETTER LOW KO..TAI VIET LETTER HIGH O
-unicode_indic_syllabic_category(0xAAE2, 0xAAEA, 'Consonant'). % Lo   [9] MEETEI MAYEK LETTER CHA..MEETEI MAYEK LETTER SSA
-unicode_indic_syllabic_category(0xABC0, 0xABCD, 'Consonant'). % Lo  [14] MEETEI MAYEK LETTER KOK..MEETEI MAYEK LETTER HUK
-unicode_indic_syllabic_category(0xABD0, 0xABD0, 'Consonant'). % Lo       MEETEI MAYEK LETTER PHAM
-unicode_indic_syllabic_category(0xABD2, 0xABDA, 'Consonant'). % Lo   [9] MEETEI MAYEK LETTER GOK..MEETEI MAYEK LETTER BHAM
-unicode_indic_syllabic_category(0x10A00, 0x10A00, 'Consonant'). % Lo       KHAROSHTHI LETTER A
-unicode_indic_syllabic_category(0x10A10, 0x10A13, 'Consonant'). % Lo   [4] KHAROSHTHI LETTER KA..KHAROSHTHI LETTER GHA
-unicode_indic_syllabic_category(0x10A15, 0x10A17, 'Consonant'). % Lo   [3] KHAROSHTHI LETTER CA..KHAROSHTHI LETTER JA
-unicode_indic_syllabic_category(0x10A19, 0x10A33, 'Consonant'). % Lo  [27] KHAROSHTHI LETTER NYA..KHAROSHTHI LETTER TTTHA
-unicode_indic_syllabic_category(0x11013, 0x11037, 'Consonant'). % Lo  [37] BRAHMI LETTER KA..BRAHMI LETTER OLD TAMIL NNNA
-unicode_indic_syllabic_category(0x1108D, 0x110AF, 'Consonant'). % Lo  [35] KAITHI LETTER KA..KAITHI LETTER HA
-unicode_indic_syllabic_category(0x11107, 0x11126, 'Consonant'). % Lo  [32] CHAKMA LETTER KAA..CHAKMA LETTER HAA
-unicode_indic_syllabic_category(0x11191, 0x111B2, 'Consonant'). % Lo  [34] SHARADA LETTER KA..SHARADA LETTER HA
-unicode_indic_syllabic_category(0x1168A, 0x116AA, 'Consonant'). % Lo  [34] TAKRI LETTER KA..TAKRI LETTER RRA
-
-% ================================================
-
-% Indic_Syllabic_Category=Consonant_Dead
-
-% Dead Consonant (special consonant with killed vowel)
-
-% [Not derivable]
-
-unicode_indic_syllabic_category(0x09CE, 0x09CE, 'Consonant_Dead'). % Lo       BENGALI LETTER KHANDA TA
-unicode_indic_syllabic_category(0x0D7A, 0x0D7F, 'Consonant_Dead'). % Lo   [6] MALAYALAM LETTER CHILLU NN..MALAYALAM LETTER CHILLU K
-
-% ================================================
-
-% Indic_Syllabic_Category=Consonant_Repha
-
-% Repha Form of RA (reanalyzed in some scripts)
-
-% [Not derivable]
-
-unicode_indic_syllabic_category(0x0D4E, 0x0D4E, 'Consonant_Repha'). % Lo       MALAYALAM LETTER DOT REPH
-unicode_indic_syllabic_category(0x17CC, 0x17CC, 'Consonant_Repha'). % Mn       KHMER SIGN ROBAT
-unicode_indic_syllabic_category(0x1B03, 0x1B03, 'Consonant_Repha'). % Mn       BALINESE SIGN SURANG
-unicode_indic_syllabic_category(0x1B81, 0x1B81, 'Consonant_Repha'). % Mn       SUNDANESE SIGN PANGLAYAR
-unicode_indic_syllabic_category(0xA982, 0xA982, 'Consonant_Repha'). % Mn       JAVANESE SIGN LAYAR
-
-% ================================================
-
-% Indic_Syllabic_Category=Consonant_Subjoined
-
-% Subjoined Consonant (C2 form subtending a base consonant in Tibetan, etc.)
-
-% [Not derivable]
-
-unicode_indic_syllabic_category(0x0F8D, 0x0F97, 'Consonant_Subjoined'). % Mn  [11] TIBETAN SUBJOINED SIGN LCE TSA CAN..TIBETAN SUBJOINED LETTER JA
-unicode_indic_syllabic_category(0x0F99, 0x0FBC, 'Consonant_Subjoined'). % Mn  [36] TIBETAN SUBJOINED LETTER NYA..TIBETAN SUBJOINED LETTER FIXED-FORM RA
-unicode_indic_syllabic_category(0x1929, 0x192B, 'Consonant_Subjoined'). % Mc   [3] LIMBU SUBJOINED LETTER YA..LIMBU SUBJOINED LETTER WA
-unicode_indic_syllabic_category(0x1BA1, 0x1BA1, 'Consonant_Subjoined'). % Mc       SUNDANESE CONSONANT SIGN PAMINGKAL
-unicode_indic_syllabic_category(0x1BA2, 0x1BA3, 'Consonant_Subjoined'). % Mn   [2] SUNDANESE CONSONANT SIGN PANYAKRA..SUNDANESE CONSONANT SIGN PANYIKU
-unicode_indic_syllabic_category(0x1BAC, 0x1BAD, 'Consonant_Subjoined'). % Mc   [2] SUNDANESE CONSONANT SIGN PASANGAN MA..SUNDANESE CONSONANT SIGN PASANGAN WA
-unicode_indic_syllabic_category(0x1C24, 0x1C25, 'Consonant_Subjoined'). % Mc   [2] LEPCHA SUBJOINED LETTER YA..LEPCHA SUBJOINED LETTER RA
-unicode_indic_syllabic_category(0xA867, 0xA868, 'Consonant_Subjoined'). % Lo   [2] PHAGS-PA SUBJOINED LETTER WA..PHAGS-PA SUBJOINED LETTER YA
-unicode_indic_syllabic_category(0xA871, 0xA871, 'Consonant_Subjoined'). % Lo       PHAGS-PA SUBJOINED LETTER RA
-unicode_indic_syllabic_category(0xA9BD, 0xA9BD, 'Consonant_Subjoined'). % Mc       JAVANESE CONSONANT SIGN KERET
-
-% ================================================
-
-% Indic_Syllabic_Category=Consonant_Medial
-
-% Medial Consonant (medial liquid, occurring in clusters)
-
-% [Not derivable]
-
-unicode_indic_syllabic_category(0x0A75, 0x0A75, 'Consonant_Medial'). % Mn       GURMUKHI SIGN YAKASH
-unicode_indic_syllabic_category(0x0EBC, 0x0EBC, 'Consonant_Medial'). % Mn       LAO SEMIVOWEL SIGN LO
-unicode_indic_syllabic_category(0x0EBD, 0x0EBD, 'Consonant_Medial'). % Lo       LAO SEMIVOWEL SIGN NYO
-unicode_indic_syllabic_category(0x103B, 0x103C, 'Consonant_Medial'). % Mc   [2] MYANMAR CONSONANT SIGN MEDIAL YA..MYANMAR CONSONANT SIGN MEDIAL RA
-unicode_indic_syllabic_category(0x103D, 0x103E, 'Consonant_Medial'). % Mn   [2] MYANMAR CONSONANT SIGN MEDIAL WA..MYANMAR CONSONANT SIGN MEDIAL HA
-unicode_indic_syllabic_category(0x105E, 0x1060, 'Consonant_Medial'). % Mn   [3] MYANMAR CONSONANT SIGN MON MEDIAL NA..MYANMAR CONSONANT SIGN MON MEDIAL LA
-unicode_indic_syllabic_category(0x1082, 0x1082, 'Consonant_Medial'). % Mn       MYANMAR CONSONANT SIGN SHAN MEDIAL WA
-unicode_indic_syllabic_category(0x1A55, 0x1A55, 'Consonant_Medial'). % Mc       TAI THAM CONSONANT SIGN MEDIAL RA
-unicode_indic_syllabic_category(0x1A56, 0x1A56, 'Consonant_Medial'). % Mn       TAI THAM CONSONANT SIGN MEDIAL LA
-unicode_indic_syllabic_category(0xA9BE, 0xA9BF, 'Consonant_Medial'). % Mc       JAVANESE CONSONANT SIGN PENGKAL..JAVANESE CONSONANT SIGN CAKRA
-unicode_indic_syllabic_category(0xAA33, 0xAA34, 'Consonant_Medial'). % Mc   [2] CHAM CONSONANT SIGN YA..CHAM CONSONANT SIGN RA
-unicode_indic_syllabic_category(0xAA35, 0xAA36, 'Consonant_Medial'). % Mn   [2] CHAM CONSONANT SIGN LA..CHAM CONSONANT SIGN WA
-
-% ================================================
-
-% Indic_Syllabic_Category=Consonant_Final
-
-% Final Consonant (special final forms which do not take vowels)
-
-% [Not derivable]
-
-unicode_indic_syllabic_category(0x1930, 0x1931, 'Consonant_Final'). % Mc   [2] LIMBU SMALL LETTER KA..LIMBU SMALL LETTER NGA
-unicode_indic_syllabic_category(0x1933, 0x1938, 'Consonant_Final'). % Mc   [6] LIMBU SMALL LETTER TA..LIMBU SMALL LETTER LA
-unicode_indic_syllabic_category(0x19C1, 0x19C7, 'Consonant_Final'). % Lo   [7] NEW TAI LUE LETTER FINAL V..NEW TAI LUE LETTER FINAL B
-unicode_indic_syllabic_category(0x1A57, 0x1A57, 'Consonant_Final'). % Mc       TAI THAM CONSONANT SIGN LA TANG LAI
-unicode_indic_syllabic_category(0x1A58, 0x1A5E, 'Consonant_Final'). % Mn   [7] TAI THAM SIGN MAI KANG LAI..TAI THAM CONSONANT SIGN SA
-unicode_indic_syllabic_category(0x1BBE, 0x1BBF, 'Consonant_Final'). % Lo   [2] SUNDANESE LETTER FINAL K..SUNDANESE LETTER FINAL M
-unicode_indic_syllabic_category(0x1BF0, 0x1BF1, 'Consonant_Final'). % Mn   [2] BATAK CONSONANT SIGN NG..BATAK CONSONANT SIGN H
-unicode_indic_syllabic_category(0x1C2D, 0x1C33, 'Consonant_Final'). % Mn   [7] LEPCHA CONSONANT SIGN K..LEPCHA CONSONANT SIGN T
-unicode_indic_syllabic_category(0xA8B4, 0xA8B4, 'Consonant_Final'). % Mc       SAURASHTRA CONSONANT SIGN HAARU
-unicode_indic_syllabic_category(0xA94F, 0xA951, 'Consonant_Final'). % Mn   [3] REJANG CONSONANT SIGN NG..REJANG CONSONANT SIGN R
-unicode_indic_syllabic_category(0xA952, 0xA952, 'Consonant_Final'). % Mc       REJANG CONSONANT SIGN H
-unicode_indic_syllabic_category(0xAA40, 0xAA42, 'Consonant_Final'). % Lo   [3] CHAM LETTER FINAL K..CHAM LETTER FINAL NG
-unicode_indic_syllabic_category(0xAA43, 0xAA43, 'Consonant_Final'). % Mn       CHAM CONSONANT SIGN FINAL NG
-unicode_indic_syllabic_category(0xAA44, 0xAA4B, 'Consonant_Final'). % Lo   [8] CHAM LETTER FINAL CH..CHAM LETTER FINAL SS
-unicode_indic_syllabic_category(0xAA4C, 0xAA4C, 'Consonant_Final'). % Mn       CHAM CONSONANT SIGN FINAL M
-unicode_indic_syllabic_category(0xAA4D, 0xAA4D, 'Consonant_Final'). % Mc       CHAM CONSONANT SIGN FINAL H
-unicode_indic_syllabic_category(0xABDB, 0xABE2, 'Consonant_Final'). % Lo   [8] MEETEI MAYEK LETTER KOK LONSUM..MEETEI MAYEK LETTER I LONSUM
-
-% ================================================
-
-% Indic_Syllabic_Category=Consonant_Head_Letter
-
-% Head Letter (Tibetan)
-
-% [Not derivable]
-
-unicode_indic_syllabic_category(0x0F88, 0x0F8C, 'Consonant_Head_Letter'). % Lo   [5] TIBETAN SIGN LCE TSA CAN..TIBETAN SIGN INVERTED MCHU CAN
-
-% ================================================
-
-% Indic_Syllabic_Category=Modifying_Letter
-
-% Reanalyzed letters not participating in the abugida structure, but
-% serving to modify the sound of an adjacent vowel or consonant.
-% Note that this is not the same as General_Category=Modifier_Letter.
-
-% [Not derivable]
-
-unicode_indic_syllabic_category(0x0B83, 0x0B83, 'Modifying_Letter'). % Lo       TAMIL SIGN VISARGA (aytham)
-
-% ================================================
-
-% Indic_Syllabic_Category=Tone_Letter
-
-% Tone Letter (spacing lexical tone mark with status as a letter)
-
-% [Not derivable]
-
-unicode_indic_syllabic_category(0x1970, 0x1974, 'Tone_Letter'). % Lo   [5] TAI LE LETTER TONE-2..TAI LE LETTER TONE-6
-unicode_indic_syllabic_category(0xAAC0, 0xAAC0, 'Tone_Letter'). % Lo       TAI VIET TONE MAI NUENG
-unicode_indic_syllabic_category(0xAAC2, 0xAAC2, 'Tone_Letter'). % Lo       TAI VIET TONE MAI SONG
-
-% ================================================
-
-% Indic_Syllabic_Category=Tone_Mark
-
-% Tone Mark (nonspacing or spacing lexical tone mark)
-% Excludes Vedic tone marks, which are more akin to cantillation marks.
-
-% [Not derivable]
-
-unicode_indic_syllabic_category(0x0E48, 0x0E4B, 'Tone_Mark'). % Mn   [4] THAI CHARACTER MAI EK..THAI CHARACTER MAI CHATTAWA
-unicode_indic_syllabic_category(0x0EC8, 0x0ECB, 'Tone_Mark'). % Mn   [4] LAO TONE MAI EK..LAO TONE MAI CATAWA
-unicode_indic_syllabic_category(0x1037, 0x1037, 'Tone_Mark'). % Mn       MYANMAR SIGN DOT BELOW
-unicode_indic_syllabic_category(0x1063, 0x1064, 'Tone_Mark'). % Mc   [2] MYANMAR TONE MARK SGAW KAREN HATHI..MYANMAR TONE MARK SGAW KAREN KE PHO
-unicode_indic_syllabic_category(0x1069, 0x106D, 'Tone_Mark'). % Mc   [5] MYANMAR SIGN WESTERN PWO KAREN TONE-1..MYANMAR SIGN WESTERN PWO KAREN TONE-5
-unicode_indic_syllabic_category(0x1087, 0x108C, 'Tone_Mark'). % Mc   [6] MYANMAR SIGN SHAN TONE-2..MYANMAR SIGN SHAN COUNCIL TONE-3
-unicode_indic_syllabic_category(0x108D, 0x108D, 'Tone_Mark'). % Mn       MYANMAR SIGN SHAN COUNCIL EMPHATIC TONE
-unicode_indic_syllabic_category(0x108F, 0x108F, 'Tone_Mark'). % Mc       MYANMAR SIGN RUMAI PALAUNG TONE-5
-unicode_indic_syllabic_category(0x109A, 0x109B, 'Tone_Mark'). % Mc   [2] MYANMAR SIGN KHAMTI TONE-1..MYANMAR SIGN KHAMTI TONE-3
-unicode_indic_syllabic_category(0x19C8, 0x19C9, 'Tone_Mark'). % Mc   [2] NEW TAI LUE TONE MARK-1..NEW TAI LUE TONE MARK-2
-unicode_indic_syllabic_category(0x1A75, 0x1A79, 'Tone_Mark'). % Mn   [5] TAI THAM SIGN TONE-1..TAI THAM SIGN KHUEN TONE-5
-unicode_indic_syllabic_category(0xA92B, 0xA92D, 'Tone_Mark'). % Mn   [3] KAYAH LI TONE PLOPHU..KAYAH LI TONE CALYA PLOPHU
-unicode_indic_syllabic_category(0xAA7B, 0xAA7B, 'Tone_Mark'). % Mc       MYANMAR SIGN PAO KAREN TONE
-unicode_indic_syllabic_category(0xAABF, 0xAABF, 'Tone_Mark'). % Mn       TAI VIET TONE MAI EK
-unicode_indic_syllabic_category(0xAAC1, 0xAAC1, 'Tone_Mark'). % Mn       TAI VIET TONE MAI THO
-unicode_indic_syllabic_category(0xABEC, 0xABEC, 'Tone_Mark'). % Mc       MEETEI MAYEK LUM IYEK
-
-% ================================================
-
-% Indic_Syllabic_Category=Register_Shifter
-
-% Register Shifter (shifts register for consonants, akin to a tone mark)
-
-% [Not derivable]
-
-unicode_indic_syllabic_category(0x17C9, 0x17CA, 'Register_Shifter'). % Mn   [2] KHMER SIGN MUUSIKATOAN..KHMER SIGN TRIISAP
-
-% EOF
+unicode_indic_syllabic_category(2304, 2306, 'Bindu').
+unicode_indic_syllabic_category(2433, 2433, 'Bindu').
+unicode_indic_syllabic_category(2434, 2434, 'Bindu').
+unicode_indic_syllabic_category(2556, 2556, 'Bindu').
+unicode_indic_syllabic_category(2561, 2562, 'Bindu').
+unicode_indic_syllabic_category(2672, 2672, 'Bindu').
+unicode_indic_syllabic_category(2689, 2690, 'Bindu').
+unicode_indic_syllabic_category(2817, 2817, 'Bindu').
+unicode_indic_syllabic_category(2818, 2818, 'Bindu').
+unicode_indic_syllabic_category(2946, 2946, 'Bindu').
+unicode_indic_syllabic_category(3072, 3072, 'Bindu').
+unicode_indic_syllabic_category(3073, 3074, 'Bindu').
+unicode_indic_syllabic_category(3076, 3076, 'Bindu').
+unicode_indic_syllabic_category(3200, 3200, 'Bindu').
+unicode_indic_syllabic_category(3201, 3201, 'Bindu').
+unicode_indic_syllabic_category(3202, 3202, 'Bindu').
+unicode_indic_syllabic_category(3315, 3315, 'Bindu').
+unicode_indic_syllabic_category(3328, 3329, 'Bindu').
+unicode_indic_syllabic_category(3330, 3330, 'Bindu').
+unicode_indic_syllabic_category(3332, 3332, 'Bindu').
+unicode_indic_syllabic_category(3457, 3457, 'Bindu').
+unicode_indic_syllabic_category(3458, 3458, 'Bindu').
+unicode_indic_syllabic_category(3661, 3661, 'Bindu').
+unicode_indic_syllabic_category(3789, 3789, 'Bindu').
+unicode_indic_syllabic_category(3966, 3966, 'Bindu').
+unicode_indic_syllabic_category(3970, 3971, 'Bindu').
+unicode_indic_syllabic_category(4150, 4150, 'Bindu').
+unicode_indic_syllabic_category(6086, 6086, 'Bindu').
+unicode_indic_syllabic_category(6450, 6450, 'Bindu').
+unicode_indic_syllabic_category(6772, 6772, 'Bindu').
+unicode_indic_syllabic_category(6912, 6914, 'Bindu').
+unicode_indic_syllabic_category(7040, 7040, 'Bindu').
+unicode_indic_syllabic_category(7220, 7221, 'Bindu').
+unicode_indic_syllabic_category(43019, 43019, 'Bindu').
+unicode_indic_syllabic_category(43123, 43123, 'Bindu').
+unicode_indic_syllabic_category(43136, 43136, 'Bindu').
+unicode_indic_syllabic_category(43205, 43205, 'Bindu').
+unicode_indic_syllabic_category(43250, 43251, 'Bindu').
+unicode_indic_syllabic_category(43392, 43393, 'Bindu').
+unicode_indic_syllabic_category(68110, 68110, 'Bindu').
+unicode_indic_syllabic_category(69632, 69632, 'Bindu').
+unicode_indic_syllabic_category(69633, 69633, 'Bindu').
+unicode_indic_syllabic_category(69760, 69761, 'Bindu').
+unicode_indic_syllabic_category(69888, 69889, 'Bindu').
+unicode_indic_syllabic_category(70016, 70017, 'Bindu').
+unicode_indic_syllabic_category(70095, 70095, 'Bindu').
+unicode_indic_syllabic_category(70196, 70196, 'Bindu').
+unicode_indic_syllabic_category(70367, 70367, 'Bindu').
+unicode_indic_syllabic_category(70400, 70401, 'Bindu').
+unicode_indic_syllabic_category(70402, 70402, 'Bindu').
+unicode_indic_syllabic_category(70494, 70495, 'Bindu').
+unicode_indic_syllabic_category(70602, 70602, 'Bindu').
+unicode_indic_syllabic_category(70604, 70604, 'Bindu').
+unicode_indic_syllabic_category(70723, 70724, 'Bindu').
+unicode_indic_syllabic_category(70751, 70751, 'Bindu').
+unicode_indic_syllabic_category(70847, 70848, 'Bindu').
+unicode_indic_syllabic_category(71100, 71101, 'Bindu').
+unicode_indic_syllabic_category(71229, 71229, 'Bindu').
+unicode_indic_syllabic_category(71339, 71339, 'Bindu').
+unicode_indic_syllabic_category(71735, 71735, 'Bindu').
+unicode_indic_syllabic_category(71995, 71996, 'Bindu').
+unicode_indic_syllabic_category(72158, 72158, 'Bindu').
+unicode_indic_syllabic_category(72245, 72248, 'Bindu').
+unicode_indic_syllabic_category(72342, 72342, 'Bindu').
+unicode_indic_syllabic_category(72764, 72765, 'Bindu').
+unicode_indic_syllabic_category(72885, 72886, 'Bindu').
+unicode_indic_syllabic_category(73024, 73024, 'Bindu').
+unicode_indic_syllabic_category(73109, 73109, 'Bindu').
+unicode_indic_syllabic_category(73472, 73473, 'Bindu').
+unicode_indic_syllabic_category(90413, 90413, 'Bindu').
+unicode_indic_syllabic_category(93504, 93505, 'Bindu').
+unicode_indic_syllabic_category(2307, 2307, 'Visarga').
+unicode_indic_syllabic_category(2435, 2435, 'Visarga').
+unicode_indic_syllabic_category(2563, 2563, 'Visarga').
+unicode_indic_syllabic_category(2691, 2691, 'Visarga').
+unicode_indic_syllabic_category(2819, 2819, 'Visarga').
+unicode_indic_syllabic_category(3075, 3075, 'Visarga').
+unicode_indic_syllabic_category(3203, 3203, 'Visarga').
+unicode_indic_syllabic_category(3331, 3331, 'Visarga').
+unicode_indic_syllabic_category(3459, 3459, 'Visarga').
+unicode_indic_syllabic_category(3967, 3967, 'Visarga').
+unicode_indic_syllabic_category(4152, 4152, 'Visarga').
+unicode_indic_syllabic_category(6087, 6087, 'Visarga').
+unicode_indic_syllabic_category(6916, 6916, 'Visarga').
+unicode_indic_syllabic_category(7042, 7042, 'Visarga').
+unicode_indic_syllabic_category(43137, 43137, 'Visarga').
+unicode_indic_syllabic_category(43395, 43395, 'Visarga').
+unicode_indic_syllabic_category(43765, 43765, 'Visarga').
+unicode_indic_syllabic_category(68111, 68111, 'Visarga').
+unicode_indic_syllabic_category(69634, 69634, 'Visarga').
+unicode_indic_syllabic_category(69762, 69762, 'Visarga').
+unicode_indic_syllabic_category(69890, 69890, 'Visarga').
+unicode_indic_syllabic_category(70018, 70018, 'Visarga').
+unicode_indic_syllabic_category(70403, 70403, 'Visarga').
+unicode_indic_syllabic_category(70605, 70605, 'Visarga').
+unicode_indic_syllabic_category(70725, 70725, 'Visarga').
+unicode_indic_syllabic_category(70849, 70849, 'Visarga').
+unicode_indic_syllabic_category(71102, 71102, 'Visarga').
+unicode_indic_syllabic_category(71230, 71230, 'Visarga').
+unicode_indic_syllabic_category(71340, 71340, 'Visarga').
+unicode_indic_syllabic_category(71736, 71736, 'Visarga').
+unicode_indic_syllabic_category(72159, 72159, 'Visarga').
+unicode_indic_syllabic_category(72249, 72249, 'Visarga').
+unicode_indic_syllabic_category(72343, 72343, 'Visarga').
+unicode_indic_syllabic_category(72766, 72766, 'Visarga').
+unicode_indic_syllabic_category(73025, 73025, 'Visarga').
+unicode_indic_syllabic_category(73110, 73110, 'Visarga').
+unicode_indic_syllabic_category(73475, 73475, 'Visarga').
+unicode_indic_syllabic_category(93506, 93506, 'Visarga').
+unicode_indic_syllabic_category(2365, 2365, 'Avagraha').
+unicode_indic_syllabic_category(2493, 2493, 'Avagraha').
+unicode_indic_syllabic_category(2749, 2749, 'Avagraha').
+unicode_indic_syllabic_category(2877, 2877, 'Avagraha').
+unicode_indic_syllabic_category(3133, 3133, 'Avagraha').
+unicode_indic_syllabic_category(3261, 3261, 'Avagraha').
+unicode_indic_syllabic_category(3389, 3389, 'Avagraha').
+unicode_indic_syllabic_category(3973, 3973, 'Avagraha').
+unicode_indic_syllabic_category(6108, 6108, 'Avagraha').
+unicode_indic_syllabic_category(7098, 7098, 'Avagraha').
+unicode_indic_syllabic_category(70081, 70081, 'Avagraha').
+unicode_indic_syllabic_category(70461, 70461, 'Avagraha').
+unicode_indic_syllabic_category(70583, 70583, 'Avagraha').
+unicode_indic_syllabic_category(70727, 70727, 'Avagraha').
+unicode_indic_syllabic_category(70852, 70852, 'Avagraha').
+unicode_indic_syllabic_category(72161, 72161, 'Avagraha').
+unicode_indic_syllabic_category(72349, 72349, 'Avagraha').
+unicode_indic_syllabic_category(72768, 72768, 'Avagraha').
+unicode_indic_syllabic_category(2364, 2364, 'Nukta').
+unicode_indic_syllabic_category(2492, 2492, 'Nukta').
+unicode_indic_syllabic_category(2620, 2620, 'Nukta').
+unicode_indic_syllabic_category(2748, 2748, 'Nukta').
+unicode_indic_syllabic_category(2813, 2815, 'Nukta').
+unicode_indic_syllabic_category(2876, 2876, 'Nukta').
+unicode_indic_syllabic_category(3132, 3132, 'Nukta').
+unicode_indic_syllabic_category(3260, 3260, 'Nukta').
+unicode_indic_syllabic_category(3897, 3897, 'Nukta').
+unicode_indic_syllabic_category(6964, 6964, 'Nukta').
+unicode_indic_syllabic_category(7142, 7142, 'Nukta').
+unicode_indic_syllabic_category(7223, 7223, 'Nukta').
+unicode_indic_syllabic_category(43443, 43443, 'Nukta').
+unicode_indic_syllabic_category(68152, 68154, 'Nukta').
+unicode_indic_syllabic_category(69818, 69818, 'Nukta').
+unicode_indic_syllabic_category(70003, 70003, 'Nukta').
+unicode_indic_syllabic_category(70090, 70090, 'Nukta').
+unicode_indic_syllabic_category(70198, 70198, 'Nukta').
+unicode_indic_syllabic_category(70377, 70377, 'Nukta').
+unicode_indic_syllabic_category(70459, 70460, 'Nukta').
+unicode_indic_syllabic_category(70726, 70726, 'Nukta').
+unicode_indic_syllabic_category(70851, 70851, 'Nukta').
+unicode_indic_syllabic_category(71104, 71104, 'Nukta').
+unicode_indic_syllabic_category(71351, 71351, 'Nukta').
+unicode_indic_syllabic_category(71738, 71738, 'Nukta').
+unicode_indic_syllabic_category(72003, 72003, 'Nukta').
+unicode_indic_syllabic_category(73026, 73026, 'Nukta').
+unicode_indic_syllabic_category(73562, 73562, 'Nukta').
+unicode_indic_syllabic_category(2381, 2381, 'Virama').
+unicode_indic_syllabic_category(2509, 2509, 'Virama').
+unicode_indic_syllabic_category(2637, 2637, 'Virama').
+unicode_indic_syllabic_category(2765, 2765, 'Virama').
+unicode_indic_syllabic_category(2893, 2893, 'Virama').
+unicode_indic_syllabic_category(3021, 3021, 'Virama').
+unicode_indic_syllabic_category(3149, 3149, 'Virama').
+unicode_indic_syllabic_category(3277, 3277, 'Virama').
+unicode_indic_syllabic_category(3405, 3405, 'Virama').
+unicode_indic_syllabic_category(3530, 3530, 'Virama').
+unicode_indic_syllabic_category(6980, 6980, 'Virama').
+unicode_indic_syllabic_category(43014, 43014, 'Virama').
+unicode_indic_syllabic_category(43204, 43204, 'Virama').
+unicode_indic_syllabic_category(43456, 43456, 'Virama').
+unicode_indic_syllabic_category(69702, 69702, 'Virama').
+unicode_indic_syllabic_category(69817, 69817, 'Virama').
+unicode_indic_syllabic_category(70080, 70080, 'Virama').
+unicode_indic_syllabic_category(70197, 70197, 'Virama').
+unicode_indic_syllabic_category(70477, 70477, 'Virama').
+unicode_indic_syllabic_category(70722, 70722, 'Virama').
+unicode_indic_syllabic_category(70850, 70850, 'Virama').
+unicode_indic_syllabic_category(71103, 71103, 'Virama').
+unicode_indic_syllabic_category(71231, 71231, 'Virama').
+unicode_indic_syllabic_category(71350, 71350, 'Virama').
+unicode_indic_syllabic_category(71737, 71737, 'Virama').
+unicode_indic_syllabic_category(72160, 72160, 'Virama').
+unicode_indic_syllabic_category(72767, 72767, 'Virama').
+unicode_indic_syllabic_category(3387, 3388, 'Pure_Killer').
+unicode_indic_syllabic_category(3642, 3642, 'Pure_Killer').
+unicode_indic_syllabic_category(3662, 3662, 'Pure_Killer').
+unicode_indic_syllabic_category(3770, 3770, 'Pure_Killer').
+unicode_indic_syllabic_category(3972, 3972, 'Pure_Killer').
+unicode_indic_syllabic_category(4154, 4154, 'Pure_Killer').
+unicode_indic_syllabic_category(5908, 5908, 'Pure_Killer').
+unicode_indic_syllabic_category(5909, 5909, 'Pure_Killer').
+unicode_indic_syllabic_category(5940, 5940, 'Pure_Killer').
+unicode_indic_syllabic_category(6097, 6097, 'Pure_Killer').
+unicode_indic_syllabic_category(6778, 6778, 'Pure_Killer').
+unicode_indic_syllabic_category(7082, 7082, 'Pure_Killer').
+unicode_indic_syllabic_category(43052, 43052, 'Pure_Killer').
+unicode_indic_syllabic_category(43347, 43347, 'Pure_Killer').
+unicode_indic_syllabic_category(44013, 44013, 'Pure_Killer').
+unicode_indic_syllabic_category(69744, 69744, 'Pure_Killer').
+unicode_indic_syllabic_category(69940, 69940, 'Pure_Killer').
+unicode_indic_syllabic_category(70378, 70378, 'Pure_Killer').
+unicode_indic_syllabic_category(70606, 70606, 'Pure_Killer').
+unicode_indic_syllabic_category(70607, 70607, 'Pure_Killer').
+unicode_indic_syllabic_category(71467, 71467, 'Pure_Killer').
+unicode_indic_syllabic_category(71997, 71997, 'Pure_Killer').
+unicode_indic_syllabic_category(72244, 72244, 'Pure_Killer').
+unicode_indic_syllabic_category(73028, 73028, 'Pure_Killer').
+unicode_indic_syllabic_category(73537, 73537, 'Pure_Killer').
+unicode_indic_syllabic_category(90415, 90415, 'Pure_Killer').
+unicode_indic_syllabic_category(93547, 93548, 'Pure_Killer').
+unicode_indic_syllabic_category(7154, 7155, 'Reordering_Killer').
+unicode_indic_syllabic_category(4153, 4153, 'Invisible_Stacker').
+unicode_indic_syllabic_category(6098, 6098, 'Invisible_Stacker').
+unicode_indic_syllabic_category(6752, 6752, 'Invisible_Stacker').
+unicode_indic_syllabic_category(7083, 7083, 'Invisible_Stacker').
+unicode_indic_syllabic_category(43766, 43766, 'Invisible_Stacker').
+unicode_indic_syllabic_category(68159, 68159, 'Invisible_Stacker').
+unicode_indic_syllabic_category(69939, 69939, 'Invisible_Stacker').
+unicode_indic_syllabic_category(70608, 70608, 'Invisible_Stacker').
+unicode_indic_syllabic_category(71998, 71998, 'Invisible_Stacker').
+unicode_indic_syllabic_category(72263, 72263, 'Invisible_Stacker').
+unicode_indic_syllabic_category(72345, 72345, 'Invisible_Stacker').
+unicode_indic_syllabic_category(73029, 73029, 'Invisible_Stacker').
+unicode_indic_syllabic_category(73111, 73111, 'Invisible_Stacker').
+unicode_indic_syllabic_category(73538, 73538, 'Invisible_Stacker').
+unicode_indic_syllabic_category(2308, 2324, 'Vowel_Independent').
+unicode_indic_syllabic_category(2400, 2401, 'Vowel_Independent').
+unicode_indic_syllabic_category(2418, 2423, 'Vowel_Independent').
+unicode_indic_syllabic_category(2437, 2444, 'Vowel_Independent').
+unicode_indic_syllabic_category(2447, 2448, 'Vowel_Independent').
+unicode_indic_syllabic_category(2451, 2452, 'Vowel_Independent').
+unicode_indic_syllabic_category(2528, 2529, 'Vowel_Independent').
+unicode_indic_syllabic_category(2565, 2570, 'Vowel_Independent').
+unicode_indic_syllabic_category(2575, 2576, 'Vowel_Independent').
+unicode_indic_syllabic_category(2579, 2580, 'Vowel_Independent').
+unicode_indic_syllabic_category(2693, 2701, 'Vowel_Independent').
+unicode_indic_syllabic_category(2703, 2705, 'Vowel_Independent').
+unicode_indic_syllabic_category(2707, 2708, 'Vowel_Independent').
+unicode_indic_syllabic_category(2784, 2785, 'Vowel_Independent').
+unicode_indic_syllabic_category(2821, 2828, 'Vowel_Independent').
+unicode_indic_syllabic_category(2831, 2832, 'Vowel_Independent').
+unicode_indic_syllabic_category(2835, 2836, 'Vowel_Independent').
+unicode_indic_syllabic_category(2912, 2913, 'Vowel_Independent').
+unicode_indic_syllabic_category(2949, 2954, 'Vowel_Independent').
+unicode_indic_syllabic_category(2958, 2960, 'Vowel_Independent').
+unicode_indic_syllabic_category(2962, 2964, 'Vowel_Independent').
+unicode_indic_syllabic_category(3077, 3084, 'Vowel_Independent').
+unicode_indic_syllabic_category(3086, 3088, 'Vowel_Independent').
+unicode_indic_syllabic_category(3090, 3092, 'Vowel_Independent').
+unicode_indic_syllabic_category(3168, 3169, 'Vowel_Independent').
+unicode_indic_syllabic_category(3205, 3212, 'Vowel_Independent').
+unicode_indic_syllabic_category(3214, 3216, 'Vowel_Independent').
+unicode_indic_syllabic_category(3218, 3220, 'Vowel_Independent').
+unicode_indic_syllabic_category(3296, 3297, 'Vowel_Independent').
+unicode_indic_syllabic_category(3333, 3340, 'Vowel_Independent').
+unicode_indic_syllabic_category(3342, 3344, 'Vowel_Independent').
+unicode_indic_syllabic_category(3346, 3348, 'Vowel_Independent').
+unicode_indic_syllabic_category(3423, 3425, 'Vowel_Independent').
+unicode_indic_syllabic_category(3461, 3478, 'Vowel_Independent').
+unicode_indic_syllabic_category(4129, 4138, 'Vowel_Independent').
+unicode_indic_syllabic_category(4178, 4181, 'Vowel_Independent').
+unicode_indic_syllabic_category(5888, 5890, 'Vowel_Independent').
+unicode_indic_syllabic_category(5920, 5922, 'Vowel_Independent').
+unicode_indic_syllabic_category(5952, 5954, 'Vowel_Independent').
+unicode_indic_syllabic_category(5984, 5986, 'Vowel_Independent').
+unicode_indic_syllabic_category(6051, 6067, 'Vowel_Independent').
+unicode_indic_syllabic_category(6733, 6738, 'Vowel_Independent').
+unicode_indic_syllabic_category(6917, 6930, 'Vowel_Independent').
+unicode_indic_syllabic_category(7043, 7049, 'Vowel_Independent').
+unicode_indic_syllabic_category(7140, 7141, 'Vowel_Independent').
+unicode_indic_syllabic_category(43008, 43009, 'Vowel_Independent').
+unicode_indic_syllabic_category(43011, 43013, 'Vowel_Independent').
+unicode_indic_syllabic_category(43138, 43153, 'Vowel_Independent').
+unicode_indic_syllabic_category(43262, 43262, 'Vowel_Independent').
+unicode_indic_syllabic_category(43396, 43400, 'Vowel_Independent').
+unicode_indic_syllabic_category(43404, 43406, 'Vowel_Independent').
+unicode_indic_syllabic_category(43520, 43525, 'Vowel_Independent').
+unicode_indic_syllabic_category(43744, 43745, 'Vowel_Independent').
+unicode_indic_syllabic_category(43982, 43983, 'Vowel_Independent').
+unicode_indic_syllabic_category(43985, 43985, 'Vowel_Independent').
+unicode_indic_syllabic_category(69637, 69650, 'Vowel_Independent').
+unicode_indic_syllabic_category(69745, 69746, 'Vowel_Independent').
+unicode_indic_syllabic_category(69763, 69772, 'Vowel_Independent').
+unicode_indic_syllabic_category(69891, 69894, 'Vowel_Independent').
+unicode_indic_syllabic_category(70019, 70032, 'Vowel_Independent').
+unicode_indic_syllabic_category(70144, 70151, 'Vowel_Independent').
+unicode_indic_syllabic_category(70208, 70208, 'Vowel_Independent').
+unicode_indic_syllabic_category(70272, 70275, 'Vowel_Independent').
+unicode_indic_syllabic_category(70320, 70329, 'Vowel_Independent').
+unicode_indic_syllabic_category(70405, 70412, 'Vowel_Independent').
+unicode_indic_syllabic_category(70415, 70416, 'Vowel_Independent').
+unicode_indic_syllabic_category(70419, 70420, 'Vowel_Independent').
+unicode_indic_syllabic_category(70496, 70497, 'Vowel_Independent').
+unicode_indic_syllabic_category(70528, 70537, 'Vowel_Independent').
+unicode_indic_syllabic_category(70539, 70539, 'Vowel_Independent').
+unicode_indic_syllabic_category(70542, 70542, 'Vowel_Independent').
+unicode_indic_syllabic_category(70544, 70545, 'Vowel_Independent').
+unicode_indic_syllabic_category(70656, 70669, 'Vowel_Independent').
+unicode_indic_syllabic_category(70785, 70798, 'Vowel_Independent').
+unicode_indic_syllabic_category(71040, 71053, 'Vowel_Independent').
+unicode_indic_syllabic_category(71128, 71131, 'Vowel_Independent').
+unicode_indic_syllabic_category(71168, 71181, 'Vowel_Independent').
+unicode_indic_syllabic_category(71296, 71305, 'Vowel_Independent').
+unicode_indic_syllabic_category(71680, 71689, 'Vowel_Independent').
+unicode_indic_syllabic_category(71936, 71942, 'Vowel_Independent').
+unicode_indic_syllabic_category(71945, 71945, 'Vowel_Independent').
+unicode_indic_syllabic_category(72096, 72103, 'Vowel_Independent').
+unicode_indic_syllabic_category(72106, 72109, 'Vowel_Independent').
+unicode_indic_syllabic_category(72704, 72712, 'Vowel_Independent').
+unicode_indic_syllabic_category(72714, 72717, 'Vowel_Independent').
+unicode_indic_syllabic_category(72960, 72966, 'Vowel_Independent').
+unicode_indic_syllabic_category(72968, 72969, 'Vowel_Independent').
+unicode_indic_syllabic_category(72971, 72971, 'Vowel_Independent').
+unicode_indic_syllabic_category(73056, 73061, 'Vowel_Independent').
+unicode_indic_syllabic_category(73063, 73064, 'Vowel_Independent').
+unicode_indic_syllabic_category(73066, 73067, 'Vowel_Independent').
+unicode_indic_syllabic_category(73476, 73488, 'Vowel_Independent').
+unicode_indic_syllabic_category(90368, 90368, 'Vowel_Independent').
+unicode_indic_syllabic_category(2362, 2362, 'Vowel_Dependent').
+unicode_indic_syllabic_category(2363, 2363, 'Vowel_Dependent').
+unicode_indic_syllabic_category(2366, 2368, 'Vowel_Dependent').
+unicode_indic_syllabic_category(2369, 2376, 'Vowel_Dependent').
+unicode_indic_syllabic_category(2377, 2380, 'Vowel_Dependent').
+unicode_indic_syllabic_category(2382, 2383, 'Vowel_Dependent').
+unicode_indic_syllabic_category(2389, 2391, 'Vowel_Dependent').
+unicode_indic_syllabic_category(2402, 2403, 'Vowel_Dependent').
+unicode_indic_syllabic_category(2494, 2496, 'Vowel_Dependent').
+unicode_indic_syllabic_category(2497, 2500, 'Vowel_Dependent').
+unicode_indic_syllabic_category(2503, 2504, 'Vowel_Dependent').
+unicode_indic_syllabic_category(2507, 2508, 'Vowel_Dependent').
+unicode_indic_syllabic_category(2519, 2519, 'Vowel_Dependent').
+unicode_indic_syllabic_category(2530, 2531, 'Vowel_Dependent').
+unicode_indic_syllabic_category(2622, 2624, 'Vowel_Dependent').
+unicode_indic_syllabic_category(2625, 2626, 'Vowel_Dependent').
+unicode_indic_syllabic_category(2631, 2632, 'Vowel_Dependent').
+unicode_indic_syllabic_category(2635, 2636, 'Vowel_Dependent').
+unicode_indic_syllabic_category(2750, 2752, 'Vowel_Dependent').
+unicode_indic_syllabic_category(2753, 2757, 'Vowel_Dependent').
+unicode_indic_syllabic_category(2759, 2760, 'Vowel_Dependent').
+unicode_indic_syllabic_category(2761, 2761, 'Vowel_Dependent').
+unicode_indic_syllabic_category(2763, 2764, 'Vowel_Dependent').
+unicode_indic_syllabic_category(2786, 2787, 'Vowel_Dependent').
+unicode_indic_syllabic_category(2878, 2878, 'Vowel_Dependent').
+unicode_indic_syllabic_category(2879, 2879, 'Vowel_Dependent').
+unicode_indic_syllabic_category(2880, 2880, 'Vowel_Dependent').
+unicode_indic_syllabic_category(2881, 2884, 'Vowel_Dependent').
+unicode_indic_syllabic_category(2887, 2888, 'Vowel_Dependent').
+unicode_indic_syllabic_category(2891, 2892, 'Vowel_Dependent').
+unicode_indic_syllabic_category(2901, 2902, 'Vowel_Dependent').
+unicode_indic_syllabic_category(2903, 2903, 'Vowel_Dependent').
+unicode_indic_syllabic_category(2914, 2915, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3006, 3007, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3008, 3008, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3009, 3010, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3014, 3016, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3018, 3020, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3031, 3031, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3134, 3136, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3137, 3140, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3142, 3144, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3146, 3148, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3157, 3158, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3170, 3171, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3262, 3262, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3263, 3263, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3264, 3268, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3270, 3270, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3271, 3272, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3274, 3275, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3276, 3276, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3285, 3286, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3298, 3299, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3390, 3392, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3393, 3396, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3398, 3400, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3402, 3404, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3415, 3415, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3426, 3427, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3535, 3537, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3538, 3540, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3542, 3542, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3544, 3551, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3570, 3571, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3632, 3632, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3633, 3633, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3634, 3635, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3636, 3641, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3648, 3653, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3655, 3655, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3760, 3760, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3761, 3761, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3762, 3763, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3764, 3769, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3771, 3771, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3776, 3780, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3953, 3965, 'Vowel_Dependent').
+unicode_indic_syllabic_category(3968, 3969, 'Vowel_Dependent').
+unicode_indic_syllabic_category(4139, 4140, 'Vowel_Dependent').
+unicode_indic_syllabic_category(4141, 4144, 'Vowel_Dependent').
+unicode_indic_syllabic_category(4145, 4145, 'Vowel_Dependent').
+unicode_indic_syllabic_category(4146, 4149, 'Vowel_Dependent').
+unicode_indic_syllabic_category(4182, 4183, 'Vowel_Dependent').
+unicode_indic_syllabic_category(4184, 4185, 'Vowel_Dependent').
+unicode_indic_syllabic_category(4194, 4194, 'Vowel_Dependent').
+unicode_indic_syllabic_category(4199, 4200, 'Vowel_Dependent').
+unicode_indic_syllabic_category(4209, 4212, 'Vowel_Dependent').
+unicode_indic_syllabic_category(4227, 4228, 'Vowel_Dependent').
+unicode_indic_syllabic_category(4229, 4230, 'Vowel_Dependent').
+unicode_indic_syllabic_category(4252, 4252, 'Vowel_Dependent').
+unicode_indic_syllabic_category(4253, 4253, 'Vowel_Dependent').
+unicode_indic_syllabic_category(5906, 5907, 'Vowel_Dependent').
+unicode_indic_syllabic_category(5938, 5939, 'Vowel_Dependent').
+unicode_indic_syllabic_category(5970, 5971, 'Vowel_Dependent').
+unicode_indic_syllabic_category(6002, 6003, 'Vowel_Dependent').
+unicode_indic_syllabic_category(6070, 6070, 'Vowel_Dependent').
+unicode_indic_syllabic_category(6071, 6077, 'Vowel_Dependent').
+unicode_indic_syllabic_category(6078, 6085, 'Vowel_Dependent').
+unicode_indic_syllabic_category(6088, 6088, 'Vowel_Dependent').
+unicode_indic_syllabic_category(6432, 6434, 'Vowel_Dependent').
+unicode_indic_syllabic_category(6435, 6438, 'Vowel_Dependent').
+unicode_indic_syllabic_category(6439, 6440, 'Vowel_Dependent').
+unicode_indic_syllabic_category(6458, 6458, 'Vowel_Dependent').
+unicode_indic_syllabic_category(6576, 6592, 'Vowel_Dependent').
+unicode_indic_syllabic_category(6679, 6680, 'Vowel_Dependent').
+unicode_indic_syllabic_category(6681, 6682, 'Vowel_Dependent').
+unicode_indic_syllabic_category(6683, 6683, 'Vowel_Dependent').
+unicode_indic_syllabic_category(6753, 6753, 'Vowel_Dependent').
+unicode_indic_syllabic_category(6754, 6754, 'Vowel_Dependent').
+unicode_indic_syllabic_category(6755, 6756, 'Vowel_Dependent').
+unicode_indic_syllabic_category(6757, 6764, 'Vowel_Dependent').
+unicode_indic_syllabic_category(6765, 6770, 'Vowel_Dependent').
+unicode_indic_syllabic_category(6771, 6771, 'Vowel_Dependent').
+unicode_indic_syllabic_category(6965, 6965, 'Vowel_Dependent').
+unicode_indic_syllabic_category(6966, 6970, 'Vowel_Dependent').
+unicode_indic_syllabic_category(6971, 6971, 'Vowel_Dependent').
+unicode_indic_syllabic_category(6972, 6972, 'Vowel_Dependent').
+unicode_indic_syllabic_category(6973, 6977, 'Vowel_Dependent').
+unicode_indic_syllabic_category(6978, 6978, 'Vowel_Dependent').
+unicode_indic_syllabic_category(6979, 6979, 'Vowel_Dependent').
+unicode_indic_syllabic_category(7076, 7077, 'Vowel_Dependent').
+unicode_indic_syllabic_category(7078, 7079, 'Vowel_Dependent').
+unicode_indic_syllabic_category(7080, 7081, 'Vowel_Dependent').
+unicode_indic_syllabic_category(7143, 7143, 'Vowel_Dependent').
+unicode_indic_syllabic_category(7144, 7145, 'Vowel_Dependent').
+unicode_indic_syllabic_category(7146, 7148, 'Vowel_Dependent').
+unicode_indic_syllabic_category(7149, 7149, 'Vowel_Dependent').
+unicode_indic_syllabic_category(7150, 7150, 'Vowel_Dependent').
+unicode_indic_syllabic_category(7151, 7151, 'Vowel_Dependent').
+unicode_indic_syllabic_category(7206, 7211, 'Vowel_Dependent').
+unicode_indic_syllabic_category(7212, 7212, 'Vowel_Dependent').
+unicode_indic_syllabic_category(43010, 43010, 'Vowel_Dependent').
+unicode_indic_syllabic_category(43043, 43044, 'Vowel_Dependent').
+unicode_indic_syllabic_category(43045, 43046, 'Vowel_Dependent').
+unicode_indic_syllabic_category(43047, 43047, 'Vowel_Dependent').
+unicode_indic_syllabic_category(43189, 43203, 'Vowel_Dependent').
+unicode_indic_syllabic_category(43263, 43263, 'Vowel_Dependent').
+unicode_indic_syllabic_category(43335, 43342, 'Vowel_Dependent').
+unicode_indic_syllabic_category(43444, 43445, 'Vowel_Dependent').
+unicode_indic_syllabic_category(43446, 43449, 'Vowel_Dependent').
+unicode_indic_syllabic_category(43450, 43451, 'Vowel_Dependent').
+unicode_indic_syllabic_category(43452, 43452, 'Vowel_Dependent').
+unicode_indic_syllabic_category(43493, 43493, 'Vowel_Dependent').
+unicode_indic_syllabic_category(43561, 43566, 'Vowel_Dependent').
+unicode_indic_syllabic_category(43567, 43568, 'Vowel_Dependent').
+unicode_indic_syllabic_category(43569, 43570, 'Vowel_Dependent').
+unicode_indic_syllabic_category(43696, 43696, 'Vowel_Dependent').
+unicode_indic_syllabic_category(43697, 43697, 'Vowel_Dependent').
+unicode_indic_syllabic_category(43698, 43700, 'Vowel_Dependent').
+unicode_indic_syllabic_category(43701, 43702, 'Vowel_Dependent').
+unicode_indic_syllabic_category(43703, 43704, 'Vowel_Dependent').
+unicode_indic_syllabic_category(43705, 43709, 'Vowel_Dependent').
+unicode_indic_syllabic_category(43710, 43710, 'Vowel_Dependent').
+unicode_indic_syllabic_category(43755, 43755, 'Vowel_Dependent').
+unicode_indic_syllabic_category(43756, 43757, 'Vowel_Dependent').
+unicode_indic_syllabic_category(43758, 43759, 'Vowel_Dependent').
+unicode_indic_syllabic_category(44003, 44004, 'Vowel_Dependent').
+unicode_indic_syllabic_category(44005, 44005, 'Vowel_Dependent').
+unicode_indic_syllabic_category(44006, 44007, 'Vowel_Dependent').
+unicode_indic_syllabic_category(44008, 44008, 'Vowel_Dependent').
+unicode_indic_syllabic_category(44009, 44010, 'Vowel_Dependent').
+unicode_indic_syllabic_category(68097, 68099, 'Vowel_Dependent').
+unicode_indic_syllabic_category(68101, 68102, 'Vowel_Dependent').
+unicode_indic_syllabic_category(68108, 68109, 'Vowel_Dependent').
+unicode_indic_syllabic_category(69688, 69701, 'Vowel_Dependent').
+unicode_indic_syllabic_category(69747, 69748, 'Vowel_Dependent').
+unicode_indic_syllabic_category(69808, 69810, 'Vowel_Dependent').
+unicode_indic_syllabic_category(69811, 69814, 'Vowel_Dependent').
+unicode_indic_syllabic_category(69815, 69816, 'Vowel_Dependent').
+unicode_indic_syllabic_category(69826, 69826, 'Vowel_Dependent').
+unicode_indic_syllabic_category(69927, 69931, 'Vowel_Dependent').
+unicode_indic_syllabic_category(69932, 69932, 'Vowel_Dependent').
+unicode_indic_syllabic_category(69933, 69938, 'Vowel_Dependent').
+unicode_indic_syllabic_category(69957, 69958, 'Vowel_Dependent').
+unicode_indic_syllabic_category(70067, 70069, 'Vowel_Dependent').
+unicode_indic_syllabic_category(70070, 70078, 'Vowel_Dependent').
+unicode_indic_syllabic_category(70079, 70079, 'Vowel_Dependent').
+unicode_indic_syllabic_category(70091, 70092, 'Vowel_Dependent').
+unicode_indic_syllabic_category(70094, 70094, 'Vowel_Dependent').
+unicode_indic_syllabic_category(70188, 70190, 'Vowel_Dependent').
+unicode_indic_syllabic_category(70191, 70193, 'Vowel_Dependent').
+unicode_indic_syllabic_category(70194, 70195, 'Vowel_Dependent').
+unicode_indic_syllabic_category(70209, 70209, 'Vowel_Dependent').
+unicode_indic_syllabic_category(70368, 70370, 'Vowel_Dependent').
+unicode_indic_syllabic_category(70371, 70376, 'Vowel_Dependent').
+unicode_indic_syllabic_category(70462, 70463, 'Vowel_Dependent').
+unicode_indic_syllabic_category(70464, 70464, 'Vowel_Dependent').
+unicode_indic_syllabic_category(70465, 70468, 'Vowel_Dependent').
+unicode_indic_syllabic_category(70471, 70472, 'Vowel_Dependent').
+unicode_indic_syllabic_category(70475, 70476, 'Vowel_Dependent').
+unicode_indic_syllabic_category(70487, 70487, 'Vowel_Dependent').
+unicode_indic_syllabic_category(70498, 70499, 'Vowel_Dependent').
+unicode_indic_syllabic_category(70584, 70586, 'Vowel_Dependent').
+unicode_indic_syllabic_category(70587, 70592, 'Vowel_Dependent').
+unicode_indic_syllabic_category(70594, 70594, 'Vowel_Dependent').
+unicode_indic_syllabic_category(70597, 70597, 'Vowel_Dependent').
+unicode_indic_syllabic_category(70599, 70601, 'Vowel_Dependent').
+unicode_indic_syllabic_category(70709, 70711, 'Vowel_Dependent').
+unicode_indic_syllabic_category(70712, 70719, 'Vowel_Dependent').
+unicode_indic_syllabic_category(70720, 70721, 'Vowel_Dependent').
+unicode_indic_syllabic_category(70832, 70834, 'Vowel_Dependent').
+unicode_indic_syllabic_category(70835, 70840, 'Vowel_Dependent').
+unicode_indic_syllabic_category(70841, 70841, 'Vowel_Dependent').
+unicode_indic_syllabic_category(70842, 70842, 'Vowel_Dependent').
+unicode_indic_syllabic_category(70843, 70846, 'Vowel_Dependent').
+unicode_indic_syllabic_category(71087, 71089, 'Vowel_Dependent').
+unicode_indic_syllabic_category(71090, 71093, 'Vowel_Dependent').
+unicode_indic_syllabic_category(71096, 71099, 'Vowel_Dependent').
+unicode_indic_syllabic_category(71132, 71133, 'Vowel_Dependent').
+unicode_indic_syllabic_category(71216, 71218, 'Vowel_Dependent').
+unicode_indic_syllabic_category(71219, 71226, 'Vowel_Dependent').
+unicode_indic_syllabic_category(71227, 71228, 'Vowel_Dependent').
+unicode_indic_syllabic_category(71232, 71232, 'Vowel_Dependent').
+unicode_indic_syllabic_category(71341, 71341, 'Vowel_Dependent').
+unicode_indic_syllabic_category(71342, 71343, 'Vowel_Dependent').
+unicode_indic_syllabic_category(71344, 71349, 'Vowel_Dependent').
+unicode_indic_syllabic_category(71456, 71457, 'Vowel_Dependent').
+unicode_indic_syllabic_category(71458, 71461, 'Vowel_Dependent').
+unicode_indic_syllabic_category(71462, 71462, 'Vowel_Dependent').
+unicode_indic_syllabic_category(71463, 71466, 'Vowel_Dependent').
+unicode_indic_syllabic_category(71724, 71726, 'Vowel_Dependent').
+unicode_indic_syllabic_category(71727, 71734, 'Vowel_Dependent').
+unicode_indic_syllabic_category(71984, 71989, 'Vowel_Dependent').
+unicode_indic_syllabic_category(71991, 71992, 'Vowel_Dependent').
+unicode_indic_syllabic_category(72145, 72147, 'Vowel_Dependent').
+unicode_indic_syllabic_category(72148, 72151, 'Vowel_Dependent').
+unicode_indic_syllabic_category(72154, 72155, 'Vowel_Dependent').
+unicode_indic_syllabic_category(72156, 72157, 'Vowel_Dependent').
+unicode_indic_syllabic_category(72164, 72164, 'Vowel_Dependent').
+unicode_indic_syllabic_category(72193, 72202, 'Vowel_Dependent').
+unicode_indic_syllabic_category(72273, 72278, 'Vowel_Dependent').
+unicode_indic_syllabic_category(72279, 72280, 'Vowel_Dependent').
+unicode_indic_syllabic_category(72281, 72283, 'Vowel_Dependent').
+unicode_indic_syllabic_category(72544, 72544, 'Vowel_Dependent').
+unicode_indic_syllabic_category(72545, 72545, 'Vowel_Dependent').
+unicode_indic_syllabic_category(72546, 72548, 'Vowel_Dependent').
+unicode_indic_syllabic_category(72549, 72549, 'Vowel_Dependent').
+unicode_indic_syllabic_category(72550, 72550, 'Vowel_Dependent').
+unicode_indic_syllabic_category(72551, 72551, 'Vowel_Dependent').
+unicode_indic_syllabic_category(72751, 72751, 'Vowel_Dependent').
+unicode_indic_syllabic_category(72752, 72758, 'Vowel_Dependent').
+unicode_indic_syllabic_category(72760, 72763, 'Vowel_Dependent').
+unicode_indic_syllabic_category(72880, 72880, 'Vowel_Dependent').
+unicode_indic_syllabic_category(72881, 72881, 'Vowel_Dependent').
+unicode_indic_syllabic_category(72882, 72883, 'Vowel_Dependent').
+unicode_indic_syllabic_category(72884, 72884, 'Vowel_Dependent').
+unicode_indic_syllabic_category(73009, 73014, 'Vowel_Dependent').
+unicode_indic_syllabic_category(73018, 73018, 'Vowel_Dependent').
+unicode_indic_syllabic_category(73020, 73021, 'Vowel_Dependent').
+unicode_indic_syllabic_category(73023, 73023, 'Vowel_Dependent').
+unicode_indic_syllabic_category(73027, 73027, 'Vowel_Dependent').
+unicode_indic_syllabic_category(73098, 73102, 'Vowel_Dependent').
+unicode_indic_syllabic_category(73104, 73105, 'Vowel_Dependent').
+unicode_indic_syllabic_category(73107, 73108, 'Vowel_Dependent').
+unicode_indic_syllabic_category(73459, 73460, 'Vowel_Dependent').
+unicode_indic_syllabic_category(73461, 73462, 'Vowel_Dependent').
+unicode_indic_syllabic_category(73524, 73525, 'Vowel_Dependent').
+unicode_indic_syllabic_category(73526, 73530, 'Vowel_Dependent').
+unicode_indic_syllabic_category(73534, 73535, 'Vowel_Dependent').
+unicode_indic_syllabic_category(73536, 73536, 'Vowel_Dependent').
+unicode_indic_syllabic_category(90398, 90409, 'Vowel_Dependent').
+unicode_indic_syllabic_category(93539, 93546, 'Vowel_Dependent').
+unicode_indic_syllabic_category(6499, 6509, 'Vowel').
+unicode_indic_syllabic_category(43102, 43105, 'Vowel').
+unicode_indic_syllabic_category(43110, 43110, 'Vowel').
+unicode_indic_syllabic_category(43298, 43301, 'Vowel').
+unicode_indic_syllabic_category(43302, 43306, 'Vowel').
+unicode_indic_syllabic_category(69968, 69972, 'Vowel').
+unicode_indic_syllabic_category(45, 45, 'Consonant_Placeholder').
+unicode_indic_syllabic_category(160, 160, 'Consonant_Placeholder').
+unicode_indic_syllabic_category(215, 215, 'Consonant_Placeholder').
+unicode_indic_syllabic_category(2432, 2432, 'Consonant_Placeholder').
+unicode_indic_syllabic_category(2674, 2675, 'Consonant_Placeholder').
+unicode_indic_syllabic_category(4171, 4171, 'Consonant_Placeholder').
+unicode_indic_syllabic_category(4174, 4174, 'Consonant_Placeholder').
+unicode_indic_syllabic_category(7418, 7418, 'Consonant_Placeholder').
+unicode_indic_syllabic_category(8208, 8212, 'Consonant_Placeholder').
+unicode_indic_syllabic_category(9676, 9676, 'Consonant_Placeholder').
+unicode_indic_syllabic_category(43636, 43638, 'Consonant_Placeholder').
+unicode_indic_syllabic_category(72255, 72255, 'Consonant_Placeholder').
+unicode_indic_syllabic_category(72261, 72261, 'Consonant_Placeholder').
+unicode_indic_syllabic_category(73458, 73458, 'Consonant_Placeholder').
+unicode_indic_syllabic_category(2325, 2361, 'Consonant').
+unicode_indic_syllabic_category(2392, 2399, 'Consonant').
+unicode_indic_syllabic_category(2424, 2431, 'Consonant').
+unicode_indic_syllabic_category(2453, 2472, 'Consonant').
+unicode_indic_syllabic_category(2474, 2480, 'Consonant').
+unicode_indic_syllabic_category(2482, 2482, 'Consonant').
+unicode_indic_syllabic_category(2486, 2489, 'Consonant').
+unicode_indic_syllabic_category(2524, 2525, 'Consonant').
+unicode_indic_syllabic_category(2527, 2527, 'Consonant').
+unicode_indic_syllabic_category(2544, 2545, 'Consonant').
+unicode_indic_syllabic_category(2581, 2600, 'Consonant').
+unicode_indic_syllabic_category(2602, 2608, 'Consonant').
+unicode_indic_syllabic_category(2610, 2611, 'Consonant').
+unicode_indic_syllabic_category(2613, 2614, 'Consonant').
+unicode_indic_syllabic_category(2616, 2617, 'Consonant').
+unicode_indic_syllabic_category(2649, 2652, 'Consonant').
+unicode_indic_syllabic_category(2654, 2654, 'Consonant').
+unicode_indic_syllabic_category(2709, 2728, 'Consonant').
+unicode_indic_syllabic_category(2730, 2736, 'Consonant').
+unicode_indic_syllabic_category(2738, 2739, 'Consonant').
+unicode_indic_syllabic_category(2741, 2745, 'Consonant').
+unicode_indic_syllabic_category(2809, 2809, 'Consonant').
+unicode_indic_syllabic_category(2837, 2856, 'Consonant').
+unicode_indic_syllabic_category(2858, 2864, 'Consonant').
+unicode_indic_syllabic_category(2866, 2867, 'Consonant').
+unicode_indic_syllabic_category(2869, 2873, 'Consonant').
+unicode_indic_syllabic_category(2908, 2909, 'Consonant').
+unicode_indic_syllabic_category(2911, 2911, 'Consonant').
+unicode_indic_syllabic_category(2929, 2929, 'Consonant').
+unicode_indic_syllabic_category(2965, 2965, 'Consonant').
+unicode_indic_syllabic_category(2969, 2970, 'Consonant').
+unicode_indic_syllabic_category(2972, 2972, 'Consonant').
+unicode_indic_syllabic_category(2974, 2975, 'Consonant').
+unicode_indic_syllabic_category(2979, 2980, 'Consonant').
+unicode_indic_syllabic_category(2984, 2986, 'Consonant').
+unicode_indic_syllabic_category(2990, 3001, 'Consonant').
+unicode_indic_syllabic_category(3093, 3112, 'Consonant').
+unicode_indic_syllabic_category(3114, 3129, 'Consonant').
+unicode_indic_syllabic_category(3160, 3162, 'Consonant').
+unicode_indic_syllabic_category(3221, 3240, 'Consonant').
+unicode_indic_syllabic_category(3242, 3251, 'Consonant').
+unicode_indic_syllabic_category(3253, 3257, 'Consonant').
+unicode_indic_syllabic_category(3294, 3294, 'Consonant').
+unicode_indic_syllabic_category(3349, 3386, 'Consonant').
+unicode_indic_syllabic_category(3482, 3505, 'Consonant').
+unicode_indic_syllabic_category(3507, 3515, 'Consonant').
+unicode_indic_syllabic_category(3517, 3517, 'Consonant').
+unicode_indic_syllabic_category(3520, 3526, 'Consonant').
+unicode_indic_syllabic_category(3585, 3630, 'Consonant').
+unicode_indic_syllabic_category(3713, 3714, 'Consonant').
+unicode_indic_syllabic_category(3716, 3716, 'Consonant').
+unicode_indic_syllabic_category(3718, 3722, 'Consonant').
+unicode_indic_syllabic_category(3724, 3747, 'Consonant').
+unicode_indic_syllabic_category(3749, 3749, 'Consonant').
+unicode_indic_syllabic_category(3751, 3758, 'Consonant').
+unicode_indic_syllabic_category(3804, 3807, 'Consonant').
+unicode_indic_syllabic_category(3904, 3911, 'Consonant').
+unicode_indic_syllabic_category(3913, 3948, 'Consonant').
+unicode_indic_syllabic_category(4096, 4128, 'Consonant').
+unicode_indic_syllabic_category(4159, 4159, 'Consonant').
+unicode_indic_syllabic_category(4176, 4177, 'Consonant').
+unicode_indic_syllabic_category(4186, 4189, 'Consonant').
+unicode_indic_syllabic_category(4193, 4193, 'Consonant').
+unicode_indic_syllabic_category(4197, 4198, 'Consonant').
+unicode_indic_syllabic_category(4206, 4208, 'Consonant').
+unicode_indic_syllabic_category(4213, 4225, 'Consonant').
+unicode_indic_syllabic_category(4238, 4238, 'Consonant').
+unicode_indic_syllabic_category(5891, 5905, 'Consonant').
+unicode_indic_syllabic_category(5919, 5919, 'Consonant').
+unicode_indic_syllabic_category(5923, 5937, 'Consonant').
+unicode_indic_syllabic_category(5955, 5969, 'Consonant').
+unicode_indic_syllabic_category(5987, 5996, 'Consonant').
+unicode_indic_syllabic_category(5998, 6000, 'Consonant').
+unicode_indic_syllabic_category(6016, 6050, 'Consonant').
+unicode_indic_syllabic_category(6400, 6430, 'Consonant').
+unicode_indic_syllabic_category(6480, 6498, 'Consonant').
+unicode_indic_syllabic_category(6528, 6571, 'Consonant').
+unicode_indic_syllabic_category(6656, 6678, 'Consonant').
+unicode_indic_syllabic_category(6688, 6732, 'Consonant').
+unicode_indic_syllabic_category(6739, 6740, 'Consonant').
+unicode_indic_syllabic_category(6931, 6963, 'Consonant').
+unicode_indic_syllabic_category(6981, 6988, 'Consonant').
+unicode_indic_syllabic_category(7050, 7072, 'Consonant').
+unicode_indic_syllabic_category(7086, 7087, 'Consonant').
+unicode_indic_syllabic_category(7099, 7101, 'Consonant').
+unicode_indic_syllabic_category(7104, 7139, 'Consonant').
+unicode_indic_syllabic_category(7168, 7203, 'Consonant').
+unicode_indic_syllabic_category(7245, 7247, 'Consonant').
+unicode_indic_syllabic_category(43015, 43018, 'Consonant').
+unicode_indic_syllabic_category(43020, 43042, 'Consonant').
+unicode_indic_syllabic_category(43072, 43101, 'Consonant').
+unicode_indic_syllabic_category(43106, 43109, 'Consonant').
+unicode_indic_syllabic_category(43113, 43120, 'Consonant').
+unicode_indic_syllabic_category(43122, 43122, 'Consonant').
+unicode_indic_syllabic_category(43154, 43187, 'Consonant').
+unicode_indic_syllabic_category(43274, 43297, 'Consonant').
+unicode_indic_syllabic_category(43312, 43334, 'Consonant').
+unicode_indic_syllabic_category(43401, 43403, 'Consonant').
+unicode_indic_syllabic_category(43407, 43442, 'Consonant').
+unicode_indic_syllabic_category(43488, 43492, 'Consonant').
+unicode_indic_syllabic_category(43495, 43503, 'Consonant').
+unicode_indic_syllabic_category(43514, 43518, 'Consonant').
+unicode_indic_syllabic_category(43526, 43560, 'Consonant').
+unicode_indic_syllabic_category(43616, 43631, 'Consonant').
+unicode_indic_syllabic_category(43633, 43635, 'Consonant').
+unicode_indic_syllabic_category(43642, 43642, 'Consonant').
+unicode_indic_syllabic_category(43646, 43647, 'Consonant').
+unicode_indic_syllabic_category(43648, 43695, 'Consonant').
+unicode_indic_syllabic_category(43746, 43754, 'Consonant').
+unicode_indic_syllabic_category(43968, 43981, 'Consonant').
+unicode_indic_syllabic_category(43984, 43984, 'Consonant').
+unicode_indic_syllabic_category(43986, 43994, 'Consonant').
+unicode_indic_syllabic_category(68096, 68096, 'Consonant').
+unicode_indic_syllabic_category(68112, 68115, 'Consonant').
+unicode_indic_syllabic_category(68117, 68119, 'Consonant').
+unicode_indic_syllabic_category(68121, 68149, 'Consonant').
+unicode_indic_syllabic_category(69651, 69687, 'Consonant').
+unicode_indic_syllabic_category(69749, 69749, 'Consonant').
+unicode_indic_syllabic_category(69773, 69807, 'Consonant').
+unicode_indic_syllabic_category(69895, 69926, 'Consonant').
+unicode_indic_syllabic_category(69956, 69956, 'Consonant').
+unicode_indic_syllabic_category(69959, 69959, 'Consonant').
+unicode_indic_syllabic_category(69973, 70002, 'Consonant').
+unicode_indic_syllabic_category(70033, 70066, 'Consonant').
+unicode_indic_syllabic_category(70152, 70161, 'Consonant').
+unicode_indic_syllabic_category(70163, 70187, 'Consonant').
+unicode_indic_syllabic_category(70207, 70207, 'Consonant').
+unicode_indic_syllabic_category(70276, 70278, 'Consonant').
+unicode_indic_syllabic_category(70280, 70280, 'Consonant').
+unicode_indic_syllabic_category(70282, 70285, 'Consonant').
+unicode_indic_syllabic_category(70287, 70301, 'Consonant').
+unicode_indic_syllabic_category(70303, 70312, 'Consonant').
+unicode_indic_syllabic_category(70330, 70366, 'Consonant').
+unicode_indic_syllabic_category(70421, 70440, 'Consonant').
+unicode_indic_syllabic_category(70442, 70448, 'Consonant').
+unicode_indic_syllabic_category(70450, 70451, 'Consonant').
+unicode_indic_syllabic_category(70453, 70457, 'Consonant').
+unicode_indic_syllabic_category(70546, 70581, 'Consonant').
+unicode_indic_syllabic_category(70670, 70708, 'Consonant').
+unicode_indic_syllabic_category(70799, 70831, 'Consonant').
+unicode_indic_syllabic_category(71054, 71086, 'Consonant').
+unicode_indic_syllabic_category(71182, 71215, 'Consonant').
+unicode_indic_syllabic_category(71306, 71338, 'Consonant').
+unicode_indic_syllabic_category(71352, 71352, 'Consonant').
+unicode_indic_syllabic_category(71424, 71450, 'Consonant').
+unicode_indic_syllabic_category(71488, 71494, 'Consonant').
+unicode_indic_syllabic_category(71690, 71723, 'Consonant').
+unicode_indic_syllabic_category(71948, 71955, 'Consonant').
+unicode_indic_syllabic_category(71957, 71958, 'Consonant').
+unicode_indic_syllabic_category(71960, 71983, 'Consonant').
+unicode_indic_syllabic_category(72110, 72144, 'Consonant').
+unicode_indic_syllabic_category(72192, 72192, 'Consonant').
+unicode_indic_syllabic_category(72203, 72242, 'Consonant').
+unicode_indic_syllabic_category(72272, 72272, 'Consonant').
+unicode_indic_syllabic_category(72284, 72323, 'Consonant').
+unicode_indic_syllabic_category(72718, 72750, 'Consonant').
+unicode_indic_syllabic_category(72818, 72847, 'Consonant').
+unicode_indic_syllabic_category(72972, 73008, 'Consonant').
+unicode_indic_syllabic_category(73068, 73097, 'Consonant').
+unicode_indic_syllabic_category(73440, 73457, 'Consonant').
+unicode_indic_syllabic_category(73490, 73523, 'Consonant').
+unicode_indic_syllabic_category(90369, 90397, 'Consonant').
+unicode_indic_syllabic_category(93507, 93538, 'Consonant').
+unicode_indic_syllabic_category(2510, 2510, 'Consonant_Dead').
+unicode_indic_syllabic_category(3165, 3165, 'Consonant_Dead').
+unicode_indic_syllabic_category(3293, 3293, 'Consonant_Dead').
+unicode_indic_syllabic_category(3412, 3414, 'Consonant_Dead').
+unicode_indic_syllabic_category(3450, 3455, 'Consonant_Dead').
+unicode_indic_syllabic_category(7410, 7411, 'Consonant_Dead').
+unicode_indic_syllabic_category(3313, 3314, 'Consonant_With_Stacker').
+unicode_indic_syllabic_category(7413, 7414, 'Consonant_With_Stacker').
+unicode_indic_syllabic_category(69635, 69636, 'Consonant_With_Stacker').
+unicode_indic_syllabic_category(70752, 70753, 'Consonant_With_Stacker').
+unicode_indic_syllabic_category(72250, 72250, 'Consonant_With_Stacker').
+unicode_indic_syllabic_category(70082, 70083, 'Consonant_Prefixed').
+unicode_indic_syllabic_category(71999, 71999, 'Consonant_Prefixed').
+unicode_indic_syllabic_category(72324, 72325, 'Consonant_Prefixed').
+unicode_indic_syllabic_category(72327, 72329, 'Consonant_Prefixed').
+unicode_indic_syllabic_category(3406, 3406, 'Consonant_Preceding_Repha').
+unicode_indic_syllabic_category(70609, 70609, 'Consonant_Preceding_Repha').
+unicode_indic_syllabic_category(72001, 72001, 'Consonant_Preceding_Repha').
+unicode_indic_syllabic_category(72326, 72326, 'Consonant_Preceding_Repha').
+unicode_indic_syllabic_category(73030, 73030, 'Consonant_Preceding_Repha').
+unicode_indic_syllabic_category(73474, 73474, 'Consonant_Preceding_Repha').
+unicode_indic_syllabic_category(6746, 6746, 'Consonant_Initial_Postfixed').
+unicode_indic_syllabic_category(6092, 6092, 'Consonant_Succeeding_Repha').
+unicode_indic_syllabic_category(3981, 3991, 'Consonant_Subjoined').
+unicode_indic_syllabic_category(3993, 4028, 'Consonant_Subjoined').
+unicode_indic_syllabic_category(6441, 6443, 'Consonant_Subjoined').
+unicode_indic_syllabic_category(6743, 6743, 'Consonant_Subjoined').
+unicode_indic_syllabic_category(6747, 6750, 'Consonant_Subjoined').
+unicode_indic_syllabic_category(7073, 7073, 'Consonant_Subjoined').
+unicode_indic_syllabic_category(7074, 7075, 'Consonant_Subjoined').
+unicode_indic_syllabic_category(7084, 7085, 'Consonant_Subjoined').
+unicode_indic_syllabic_category(7204, 7205, 'Consonant_Subjoined').
+unicode_indic_syllabic_category(43111, 43112, 'Consonant_Subjoined').
+unicode_indic_syllabic_category(43121, 43121, 'Consonant_Subjoined').
+unicode_indic_syllabic_category(72850, 72871, 'Consonant_Subjoined').
+unicode_indic_syllabic_category(72873, 72873, 'Consonant_Subjoined').
+unicode_indic_syllabic_category(72874, 72879, 'Consonant_Subjoined').
+unicode_indic_syllabic_category(2677, 2677, 'Consonant_Medial').
+unicode_indic_syllabic_category(3772, 3772, 'Consonant_Medial').
+unicode_indic_syllabic_category(3773, 3773, 'Consonant_Medial').
+unicode_indic_syllabic_category(4155, 4156, 'Consonant_Medial').
+unicode_indic_syllabic_category(4157, 4158, 'Consonant_Medial').
+unicode_indic_syllabic_category(4190, 4192, 'Consonant_Medial').
+unicode_indic_syllabic_category(4226, 4226, 'Consonant_Medial').
+unicode_indic_syllabic_category(6741, 6741, 'Consonant_Medial').
+unicode_indic_syllabic_category(6742, 6742, 'Consonant_Medial').
+unicode_indic_syllabic_category(43188, 43188, 'Consonant_Medial').
+unicode_indic_syllabic_category(43453, 43453, 'Consonant_Medial').
+unicode_indic_syllabic_category(43454, 43455, 'Consonant_Medial').
+unicode_indic_syllabic_category(43571, 43572, 'Consonant_Medial').
+unicode_indic_syllabic_category(43573, 43574, 'Consonant_Medial').
+unicode_indic_syllabic_category(71453, 71453, 'Consonant_Medial').
+unicode_indic_syllabic_category(71454, 71454, 'Consonant_Medial').
+unicode_indic_syllabic_category(71455, 71455, 'Consonant_Medial').
+unicode_indic_syllabic_category(72000, 72000, 'Consonant_Medial').
+unicode_indic_syllabic_category(72002, 72002, 'Consonant_Medial').
+unicode_indic_syllabic_category(72251, 72254, 'Consonant_Medial').
+unicode_indic_syllabic_category(73031, 73031, 'Consonant_Medial').
+unicode_indic_syllabic_category(90410, 90412, 'Consonant_Medial').
+unicode_indic_syllabic_category(90414, 90414, 'Consonant_Medial').
+unicode_indic_syllabic_category(6448, 6449, 'Consonant_Final').
+unicode_indic_syllabic_category(6451, 6456, 'Consonant_Final').
+unicode_indic_syllabic_category(6457, 6457, 'Consonant_Final').
+unicode_indic_syllabic_category(6593, 6599, 'Consonant_Final').
+unicode_indic_syllabic_category(6744, 6745, 'Consonant_Final').
+unicode_indic_syllabic_category(6915, 6915, 'Consonant_Final').
+unicode_indic_syllabic_category(7041, 7041, 'Consonant_Final').
+unicode_indic_syllabic_category(7102, 7103, 'Consonant_Final').
+unicode_indic_syllabic_category(7152, 7153, 'Consonant_Final').
+unicode_indic_syllabic_category(7213, 7219, 'Consonant_Final').
+unicode_indic_syllabic_category(43343, 43345, 'Consonant_Final').
+unicode_indic_syllabic_category(43346, 43346, 'Consonant_Final').
+unicode_indic_syllabic_category(43394, 43394, 'Consonant_Final').
+unicode_indic_syllabic_category(43584, 43586, 'Consonant_Final').
+unicode_indic_syllabic_category(43587, 43587, 'Consonant_Final').
+unicode_indic_syllabic_category(43588, 43595, 'Consonant_Final').
+unicode_indic_syllabic_category(43596, 43596, 'Consonant_Final').
+unicode_indic_syllabic_category(43597, 43597, 'Consonant_Final').
+unicode_indic_syllabic_category(43995, 44002, 'Consonant_Final').
+unicode_indic_syllabic_category(72330, 72341, 'Consonant_Final').
+unicode_indic_syllabic_category(3976, 3980, 'Consonant_Head_Letter').
+unicode_indic_syllabic_category(2947, 2947, 'Modifying_Letter').
+unicode_indic_syllabic_category(6512, 6516, 'Tone_Letter').
+unicode_indic_syllabic_category(43712, 43712, 'Tone_Letter').
+unicode_indic_syllabic_category(43714, 43714, 'Tone_Letter').
+unicode_indic_syllabic_category(3656, 3659, 'Tone_Mark').
+unicode_indic_syllabic_category(3784, 3787, 'Tone_Mark').
+unicode_indic_syllabic_category(4151, 4151, 'Tone_Mark').
+unicode_indic_syllabic_category(4195, 4196, 'Tone_Mark').
+unicode_indic_syllabic_category(4201, 4205, 'Tone_Mark').
+unicode_indic_syllabic_category(4231, 4236, 'Tone_Mark').
+unicode_indic_syllabic_category(4237, 4237, 'Tone_Mark').
+unicode_indic_syllabic_category(4239, 4239, 'Tone_Mark').
+unicode_indic_syllabic_category(4250, 4251, 'Tone_Mark').
+unicode_indic_syllabic_category(6600, 6601, 'Tone_Mark').
+unicode_indic_syllabic_category(6773, 6777, 'Tone_Mark').
+unicode_indic_syllabic_category(43307, 43309, 'Tone_Mark').
+unicode_indic_syllabic_category(43643, 43643, 'Tone_Mark').
+unicode_indic_syllabic_category(43644, 43644, 'Tone_Mark').
+unicode_indic_syllabic_category(43645, 43645, 'Tone_Mark').
+unicode_indic_syllabic_category(43711, 43711, 'Tone_Mark').
+unicode_indic_syllabic_category(43713, 43713, 'Tone_Mark').
+unicode_indic_syllabic_category(44012, 44012, 'Tone_Mark').
+unicode_indic_syllabic_category(2673, 2673, 'Gemination_Mark').
+unicode_indic_syllabic_category(2811, 2811, 'Gemination_Mark').
+unicode_indic_syllabic_category(70199, 70199, 'Gemination_Mark').
+unicode_indic_syllabic_category(70610, 70610, 'Gemination_Mark').
+unicode_indic_syllabic_category(72344, 72344, 'Gemination_Mark').
+unicode_indic_syllabic_category(2385, 2386, 'Cantillation_Mark').
+unicode_indic_syllabic_category(2641, 2641, 'Cantillation_Mark').
+unicode_indic_syllabic_category(2810, 2810, 'Cantillation_Mark').
+unicode_indic_syllabic_category(2812, 2812, 'Cantillation_Mark').
+unicode_indic_syllabic_category(7376, 7378, 'Cantillation_Mark').
+unicode_indic_syllabic_category(7380, 7392, 'Cantillation_Mark').
+unicode_indic_syllabic_category(7393, 7393, 'Cantillation_Mark').
+unicode_indic_syllabic_category(7412, 7412, 'Cantillation_Mark').
+unicode_indic_syllabic_category(7415, 7415, 'Cantillation_Mark').
+unicode_indic_syllabic_category(7416, 7417, 'Cantillation_Mark').
+unicode_indic_syllabic_category(8432, 8432, 'Cantillation_Mark').
+unicode_indic_syllabic_category(43232, 43249, 'Cantillation_Mark').
+unicode_indic_syllabic_category(70206, 70206, 'Cantillation_Mark').
+unicode_indic_syllabic_category(70502, 70508, 'Cantillation_Mark').
+unicode_indic_syllabic_category(70512, 70516, 'Cantillation_Mark').
+unicode_indic_syllabic_category(70625, 70626, 'Cantillation_Mark').
+unicode_indic_syllabic_category(6089, 6090, 'Register_Shifter').
+unicode_indic_syllabic_category(178, 179, 'Syllable_Modifier').
+unicode_indic_syllabic_category(2558, 2558, 'Syllable_Modifier').
+unicode_indic_syllabic_category(3790, 3790, 'Syllable_Modifier').
+unicode_indic_syllabic_category(3893, 3893, 'Syllable_Modifier').
+unicode_indic_syllabic_category(3895, 3895, 'Syllable_Modifier').
+unicode_indic_syllabic_category(4038, 4038, 'Syllable_Modifier').
+unicode_indic_syllabic_category(6091, 6091, 'Syllable_Modifier').
+unicode_indic_syllabic_category(6094, 6096, 'Syllable_Modifier').
+unicode_indic_syllabic_category(6099, 6099, 'Syllable_Modifier').
+unicode_indic_syllabic_category(6109, 6109, 'Syllable_Modifier').
+unicode_indic_syllabic_category(6459, 6459, 'Syllable_Modifier').
+unicode_indic_syllabic_category(6779, 6780, 'Syllable_Modifier').
+unicode_indic_syllabic_category(6783, 6783, 'Syllable_Modifier').
+unicode_indic_syllabic_category(7222, 7222, 'Syllable_Modifier').
+unicode_indic_syllabic_category(7675, 7675, 'Syllable_Modifier').
+unicode_indic_syllabic_category(8308, 8308, 'Syllable_Modifier').
+unicode_indic_syllabic_category(8322, 8324, 'Syllable_Modifier').
+unicode_indic_syllabic_category(70089, 70089, 'Syllable_Modifier').
+unicode_indic_syllabic_category(70750, 70750, 'Syllable_Modifier').
+unicode_indic_syllabic_category(72243, 72243, 'Syllable_Modifier').
+unicode_indic_syllabic_category(3660, 3660, 'Consonant_Killer').
+unicode_indic_syllabic_category(6093, 6093, 'Consonant_Killer').
+unicode_indic_syllabic_category(8204, 8204, 'Non_Joiner').
+unicode_indic_syllabic_category(8205, 8205, 'Joiner').
+unicode_indic_syllabic_category(69759, 69759, 'Number_Joiner').
+unicode_indic_syllabic_category(48, 57, 'Number').
+unicode_indic_syllabic_category(2406, 2415, 'Number').
+unicode_indic_syllabic_category(2534, 2543, 'Number').
+unicode_indic_syllabic_category(2662, 2671, 'Number').
+unicode_indic_syllabic_category(2790, 2799, 'Number').
+unicode_indic_syllabic_category(2918, 2927, 'Number').
+unicode_indic_syllabic_category(3046, 3055, 'Number').
+unicode_indic_syllabic_category(3174, 3183, 'Number').
+unicode_indic_syllabic_category(3302, 3311, 'Number').
+unicode_indic_syllabic_category(3430, 3439, 'Number').
+unicode_indic_syllabic_category(3558, 3567, 'Number').
+unicode_indic_syllabic_category(3664, 3673, 'Number').
+unicode_indic_syllabic_category(3792, 3801, 'Number').
+unicode_indic_syllabic_category(3872, 3881, 'Number').
+unicode_indic_syllabic_category(3882, 3891, 'Number').
+unicode_indic_syllabic_category(4160, 4169, 'Number').
+unicode_indic_syllabic_category(4240, 4249, 'Number').
+unicode_indic_syllabic_category(6112, 6121, 'Number').
+unicode_indic_syllabic_category(6470, 6479, 'Number').
+unicode_indic_syllabic_category(6608, 6617, 'Number').
+unicode_indic_syllabic_category(6618, 6618, 'Number').
+unicode_indic_syllabic_category(6784, 6793, 'Number').
+unicode_indic_syllabic_category(6800, 6809, 'Number').
+unicode_indic_syllabic_category(6992, 7001, 'Number').
+unicode_indic_syllabic_category(7088, 7097, 'Number').
+unicode_indic_syllabic_category(7232, 7241, 'Number').
+unicode_indic_syllabic_category(43216, 43225, 'Number').
+unicode_indic_syllabic_category(43264, 43273, 'Number').
+unicode_indic_syllabic_category(43472, 43481, 'Number').
+unicode_indic_syllabic_category(43504, 43513, 'Number').
+unicode_indic_syllabic_category(43600, 43609, 'Number').
+unicode_indic_syllabic_category(44016, 44025, 'Number').
+unicode_indic_syllabic_category(68160, 68168, 'Number').
+unicode_indic_syllabic_category(69734, 69743, 'Number').
+unicode_indic_syllabic_category(69942, 69951, 'Number').
+unicode_indic_syllabic_category(70096, 70105, 'Number').
+unicode_indic_syllabic_category(70113, 70132, 'Number').
+unicode_indic_syllabic_category(70384, 70393, 'Number').
+unicode_indic_syllabic_category(70736, 70745, 'Number').
+unicode_indic_syllabic_category(70864, 70873, 'Number').
+unicode_indic_syllabic_category(71248, 71257, 'Number').
+unicode_indic_syllabic_category(71360, 71369, 'Number').
+unicode_indic_syllabic_category(71376, 71395, 'Number').
+unicode_indic_syllabic_category(71472, 71481, 'Number').
+unicode_indic_syllabic_category(71482, 71483, 'Number').
+unicode_indic_syllabic_category(72016, 72025, 'Number').
+unicode_indic_syllabic_category(72784, 72793, 'Number').
+unicode_indic_syllabic_category(72794, 72812, 'Number').
+unicode_indic_syllabic_category(73040, 73049, 'Number').
+unicode_indic_syllabic_category(73120, 73129, 'Number').
+unicode_indic_syllabic_category(73552, 73561, 'Number').
+unicode_indic_syllabic_category(90416, 90425, 'Number').
+unicode_indic_syllabic_category(93552, 93561, 'Number').
+unicode_indic_syllabic_category(69714, 69733, 'Brahmi_Joining_Number').

@@ -1,1282 +1,2320 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  This file is part of VivoMind Prolog Unicode Resources
-%  SPDX-License-Identifier: CC0-1.0
+%  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
 %
-%  VivoMind Prolog Unicode Resources is free software distributed using the
-%  Creative Commons CC0 1.0 Universal (CC0 1.0) - Public Domain Dedication
-%  license
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%      http://www.apache.org/licenses/LICENSE-2.0
+%
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%  Last modified: August 23, 2013
-%
-%  File derived from the "unicode_scripts.pl" file by merging the consecutive
-%  intervals for better performance of the unicode_script/2 predicate
+% Generated from Unicode 17.0.0 UCD data. Do not edit.
 
-unicode_script(CodePoint, Script) :-
+unicode_script(CodePoint, Value) :-
 	(	var(CodePoint) ->
-		% generate CodePoint-script pairs
-		unicode_range_script(CodePointStart, CodePointEnd, Script),
-		between(CodePointStart, CodePointEnd, CodePoint)
-	;	% try first-argument indexing first
-		unicode_range_script(CodePoint, _, CodePointScript) ->
-		Script = CodePointScript
-	;	% if the script name is known, go straight to it
-		nonvar(Script) ->
-		(	unicode_range_script(CodePointStart, CodePointEnd, Script),
-			between(CodePointStart, CodePointEnd, CodePoint) ->
-			true
-		;	fail
-		)
-	;	% look for a code point range that includes the given code point
-		unicode_range_script(CodePointStart, CodePointEnd, Script),
-		between(CodePointStart, CodePointEnd, CodePoint) ->
-		true
-	;	% missing code point; see original comment above
-		between(0x0000, 0x10FFFF, CodePoint),
-		Script = 'Zzzz'
+		unicode_script(Start, End, Value),
+		between(Start, End, CodePoint)
+	;	unicode_script(Start, End, SpecificValue),
+		CodePoint >= Start, CodePoint =< End ->
+		Value = SpecificValue
+	;	between(0, 1114111, CodePoint),
+		Value = 'Zzzz'
 	).
 
-unicode_range_script(0x0000, 0x0040, 'Common').
-unicode_range_script(0x005B, 0x0060, 'Common').
-unicode_range_script(0x007B, 0x00A9, 'Common').
-unicode_range_script(0x00AB, 0x00B9, 'Common').
-unicode_range_script(0x00BB, 0x00BF, 'Common').
-unicode_range_script(0x00D7, 0x00D7, 'Common').
-unicode_range_script(0x00F7, 0x00F7, 'Common').
-unicode_range_script(0x02B9, 0x02DF, 'Common').
-unicode_range_script(0x02E5, 0x02E9, 'Common').
-unicode_range_script(0x02EC, 0x02FF, 'Common').
-unicode_range_script(0x0374, 0x0374, 'Common').
-unicode_range_script(0x037E, 0x037E, 'Common').
-unicode_range_script(0x0385, 0x0385, 'Common').
-unicode_range_script(0x0387, 0x0387, 'Common').
-unicode_range_script(0x0589, 0x0589, 'Common').
-unicode_range_script(0x060C, 0x060C, 'Common').
-unicode_range_script(0x061B, 0x061B, 'Common').
-unicode_range_script(0x061F, 0x061F, 'Common').
-unicode_range_script(0x0640, 0x0640, 'Common').
-unicode_range_script(0x0660, 0x0669, 'Common').
-unicode_range_script(0x06DD, 0x06DD, 'Common').
-unicode_range_script(0x0964, 0x0965, 'Common').
-unicode_range_script(0x0E3F, 0x0E3F, 'Common').
-unicode_range_script(0x0FD5, 0x0FD8, 'Common').
-unicode_range_script(0x10FB, 0x10FB, 'Common').
-unicode_range_script(0x16EB, 0x16ED, 'Common').
-unicode_range_script(0x1735, 0x1736, 'Common').
-unicode_range_script(0x1802, 0x1803, 'Common').
-unicode_range_script(0x1805, 0x1805, 'Common').
-unicode_range_script(0x1CD3, 0x1CD3, 'Common').
-unicode_range_script(0x1CE1, 0x1CE1, 'Common').
-unicode_range_script(0x1CE9, 0x1CEC, 'Common').
-unicode_range_script(0x1CEE, 0x1CF3, 'Common').
-unicode_range_script(0x1CF5, 0x1CF6, 'Common').
-unicode_range_script(0x2000, 0x200B, 'Common').
-unicode_range_script(0x200E, 0x2064, 'Common').
-unicode_range_script(0x206A, 0x2070, 'Common').
-unicode_range_script(0x2074, 0x207E, 'Common').
-unicode_range_script(0x2080, 0x208E, 'Common').
-unicode_range_script(0x20A0, 0x20BA, 'Common').
-unicode_range_script(0x2100, 0x2125, 'Common').
-unicode_range_script(0x2127, 0x2129, 'Common').
-unicode_range_script(0x212C, 0x2131, 'Common').
-unicode_range_script(0x2133, 0x214D, 'Common').
-unicode_range_script(0x214F, 0x215F, 'Common').
-unicode_range_script(0x2189, 0x2189, 'Common').
-unicode_range_script(0x2190, 0x23F3, 'Common').
-unicode_range_script(0x2400, 0x2426, 'Common').
-unicode_range_script(0x2440, 0x244A, 'Common').
-unicode_range_script(0x2460, 0x26FF, 'Common').
-unicode_range_script(0x2701, 0x2769, 'Common').
-unicode_range_script(0x276A, 0x27FF, 'Common').
-unicode_range_script(0x2900, 0x2B4C, 'Common').
-unicode_range_script(0x2B50, 0x2B59, 'Common').
-unicode_range_script(0x2E00, 0x2E3B, 'Common').
-unicode_range_script(0x2FF0, 0x2FFB, 'Common').
-unicode_range_script(0x3000, 0x3004, 'Common').
-unicode_range_script(0x3006, 0x3006, 'Common').
-unicode_range_script(0x3008, 0x3020, 'Common').
-unicode_range_script(0x3030, 0x3037, 'Common').
-unicode_range_script(0x303C, 0x303F, 'Common').
-unicode_range_script(0x309B, 0x309C, 'Common').
-unicode_range_script(0x30A0, 0x30A0, 'Common').
-unicode_range_script(0x30FB, 0x30FC, 'Common').
-unicode_range_script(0x3190, 0x319F, 'Common').
-unicode_range_script(0x31C0, 0x31E3, 'Common').
-unicode_range_script(0x3220, 0x325F, 'Common').
-unicode_range_script(0x327F, 0x32CF, 'Common').
-unicode_range_script(0x3358, 0x33FF, 'Common').
-unicode_range_script(0x4DC0, 0x4DFF, 'Common').
-unicode_range_script(0xA700, 0xA721, 'Common').
-unicode_range_script(0xA788, 0xA78A, 'Common').
-unicode_range_script(0xA830, 0xA839, 'Common').
-unicode_range_script(0xFD3E, 0xFD3F, 'Common').
-unicode_range_script(0xFDFD, 0xFDFD, 'Common').
-unicode_range_script(0xFE10, 0xFE19, 'Common').
-unicode_range_script(0xFE30, 0xFE52, 'Common').
-unicode_range_script(0xFE54, 0xFE66, 'Common').
-unicode_range_script(0xFE68, 0xFE6B, 'Common').
-unicode_range_script(0xFEFF, 0xFEFF, 'Common').
-unicode_range_script(0xFF01, 0xFF20, 'Common').
-unicode_range_script(0xFF3B, 0xFF40, 'Common').
-unicode_range_script(0xFF5B, 0xFF65, 'Common').
-unicode_range_script(0xFF70, 0xFF70, 'Common').
-unicode_range_script(0xFF9E, 0xFF9F, 'Common').
-unicode_range_script(0xFFE0, 0xFFE6, 'Common').
-unicode_range_script(0xFFE8, 0xFFEE, 'Common').
-unicode_range_script(0xFFF9, 0xFFFD, 'Common').
-unicode_range_script(0x10100, 0x10102, 'Common').
-unicode_range_script(0x10107, 0x10133, 'Common').
-unicode_range_script(0x10137, 0x1013F, 'Common').
-unicode_range_script(0x10190, 0x1019B, 'Common').
-unicode_range_script(0x101D0, 0x101FC, 'Common').
-unicode_range_script(0x1D000, 0x1D0F5, 'Common').
-unicode_range_script(0x1D100, 0x1D126, 'Common').
-unicode_range_script(0x1D129, 0x1D166, 'Common').
-unicode_range_script(0x1D16A, 0x1D17A, 'Common').
-unicode_range_script(0x1D183, 0x1D184, 'Common').
-unicode_range_script(0x1D18C, 0x1D1A9, 'Common').
-unicode_range_script(0x1D1AE, 0x1D1DD, 'Common').
-unicode_range_script(0x1D300, 0x1D356, 'Common').
-unicode_range_script(0x1D360, 0x1D371, 'Common').
-unicode_range_script(0x1D400, 0x1D454, 'Common').
-unicode_range_script(0x1D456, 0x1D49C, 'Common').
-unicode_range_script(0x1D49E, 0x1D49F, 'Common').
-unicode_range_script(0x1D4A2, 0x1D4A2, 'Common').
-unicode_range_script(0x1D4A5, 0x1D4A6, 'Common').
-unicode_range_script(0x1D4A9, 0x1D4AC, 'Common').
-unicode_range_script(0x1D4AE, 0x1D4B9, 'Common').
-unicode_range_script(0x1D4BB, 0x1D4BB, 'Common').
-unicode_range_script(0x1D4BD, 0x1D4C3, 'Common').
-unicode_range_script(0x1D4C5, 0x1D505, 'Common').
-unicode_range_script(0x1D507, 0x1D50A, 'Common').
-unicode_range_script(0x1D50D, 0x1D514, 'Common').
-unicode_range_script(0x1D516, 0x1D51C, 'Common').
-unicode_range_script(0x1D51E, 0x1D539, 'Common').
-unicode_range_script(0x1D53B, 0x1D53E, 'Common').
-unicode_range_script(0x1D540, 0x1D544, 'Common').
-unicode_range_script(0x1D546, 0x1D546, 'Common').
-unicode_range_script(0x1D54A, 0x1D550, 'Common').
-unicode_range_script(0x1D552, 0x1D6A5, 'Common').
-unicode_range_script(0x1D6A8, 0x1D7CB, 'Common').
-unicode_range_script(0x1D7CE, 0x1D7FF, 'Common').
-unicode_range_script(0x1F000, 0x1F02B, 'Common').
-unicode_range_script(0x1F030, 0x1F093, 'Common').
-unicode_range_script(0x1F0A0, 0x1F0AE, 'Common').
-unicode_range_script(0x1F0B1, 0x1F0BE, 'Common').
-unicode_range_script(0x1F0C1, 0x1F0CF, 'Common').
-unicode_range_script(0x1F0D1, 0x1F0DF, 'Common').
-unicode_range_script(0x1F100, 0x1F10A, 'Common').
-unicode_range_script(0x1F110, 0x1F12E, 'Common').
-unicode_range_script(0x1F130, 0x1F16B, 'Common').
-unicode_range_script(0x1F170, 0x1F19A, 'Common').
-unicode_range_script(0x1F1E6, 0x1F1FF, 'Common').
-unicode_range_script(0x1F201, 0x1F202, 'Common').
-unicode_range_script(0x1F210, 0x1F23A, 'Common').
-unicode_range_script(0x1F240, 0x1F248, 'Common').
-unicode_range_script(0x1F250, 0x1F251, 'Common').
-unicode_range_script(0x1F300, 0x1F320, 'Common').
-unicode_range_script(0x1F330, 0x1F335, 'Common').
-unicode_range_script(0x1F337, 0x1F37C, 'Common').
-unicode_range_script(0x1F380, 0x1F393, 'Common').
-unicode_range_script(0x1F3A0, 0x1F3C4, 'Common').
-unicode_range_script(0x1F3C6, 0x1F3CA, 'Common').
-unicode_range_script(0x1F3E0, 0x1F3F0, 'Common').
-unicode_range_script(0x1F400, 0x1F43E, 'Common').
-unicode_range_script(0x1F440, 0x1F440, 'Common').
-unicode_range_script(0x1F442, 0x1F4F7, 'Common').
-unicode_range_script(0x1F4F9, 0x1F4FC, 'Common').
-unicode_range_script(0x1F500, 0x1F53D, 'Common').
-unicode_range_script(0x1F540, 0x1F543, 'Common').
-unicode_range_script(0x1F550, 0x1F567, 'Common').
-unicode_range_script(0x1F5FB, 0x1F640, 'Common').
-unicode_range_script(0x1F645, 0x1F64F, 'Common').
-unicode_range_script(0x1F680, 0x1F6C5, 'Common').
-unicode_range_script(0x1F700, 0x1F773, 'Common').
-unicode_range_script(0xE0001, 0xE0001, 'Common').
-unicode_range_script(0xE0020, 0xE007F, 'Common').
-
-% Total code points: 6412
-
-% ================================================
-
-unicode_range_script(0x0041, 0x005A, 'Latin').
-unicode_range_script(0x0061, 0x007A, 'Latin').
-unicode_range_script(0x00AA, 0x00AA, 'Latin').
-unicode_range_script(0x00BA, 0x00BA, 'Latin').
-unicode_range_script(0x00C0, 0x00D6, 'Latin').
-unicode_range_script(0x00D8, 0x00F6, 'Latin').
-unicode_range_script(0x00F8, 0x02B8, 'Latin').
-unicode_range_script(0x02E0, 0x02E4, 'Latin').
-unicode_range_script(0x1D00, 0x1D25, 'Latin').
-unicode_range_script(0x1D2C, 0x1D5C, 'Latin').
-unicode_range_script(0x1D62, 0x1D65, 'Latin').
-unicode_range_script(0x1D6B, 0x1D77, 'Latin').
-unicode_range_script(0x1D79, 0x1DBE, 'Latin').
-unicode_range_script(0x1E00, 0x1EFF, 'Latin').
-unicode_range_script(0x2071, 0x2071, 'Latin').
-unicode_range_script(0x207F, 0x207F, 'Latin').
-unicode_range_script(0x2090, 0x209C, 'Latin').
-unicode_range_script(0x212A, 0x212B, 'Latin').
-unicode_range_script(0x2132, 0x2132, 'Latin').
-
-unicode_range_script(0x214E, 0x214E, 'Latin').
-unicode_range_script(0x2160, 0x2188, 'Latin').
-unicode_range_script(0x2C60, 0x2C7F, 'Latin').
-unicode_range_script(0xA722, 0xA787, 'Latin').
-unicode_range_script(0xA78B, 0xA78E, 'Latin').
-unicode_range_script(0xA790, 0xA793, 'Latin').
-unicode_range_script(0xA7A0, 0xA7AA, 'Latin').
-unicode_range_script(0xA7F8, 0xA7FF, 'Latin').
-unicode_range_script(0xFB00, 0xFB06, 'Latin').
-unicode_range_script(0xFF21, 0xFF3A, 'Latin').
-unicode_range_script(0xFF41, 0xFF5A, 'Latin').
-
-% Total code points: 1272
-
-% ================================================
-
-unicode_range_script(0x0370, 0x0373, 'Greek').
-unicode_range_script(0x0375, 0x0377, 'Greek').
-unicode_range_script(0x037A, 0x037D, 'Greek').
-unicode_range_script(0x0384, 0x0384, 'Greek').
-unicode_range_script(0x0386, 0x0386, 'Greek').
-unicode_range_script(0x0388, 0x038A, 'Greek').
-unicode_range_script(0x038C, 0x038C, 'Greek').
-unicode_range_script(0x038E, 0x03A1, 'Greek').
-unicode_range_script(0x03A3, 0x03E1, 'Greek').
-unicode_range_script(0x03F0, 0x03FF, 'Greek').
-unicode_range_script(0x1D26, 0x1D2A, 'Greek').
-unicode_range_script(0x1D5D, 0x1D61, 'Greek').
-unicode_range_script(0x1D66, 0x1D6A, 'Greek').
-unicode_range_script(0x1DBF, 0x1DBF, 'Greek').
-unicode_range_script(0x1F00, 0x1F15, 'Greek').
-unicode_range_script(0x1F18, 0x1F1D, 'Greek').
-unicode_range_script(0x1F20, 0x1F45, 'Greek').
-unicode_range_script(0x1F48, 0x1F4D, 'Greek').
-unicode_range_script(0x1F50, 0x1F57, 'Greek').
-unicode_range_script(0x1F59, 0x1F59, 'Greek').
-unicode_range_script(0x1F5B, 0x1F5B, 'Greek').
-unicode_range_script(0x1F5D, 0x1F5D, 'Greek').
-unicode_range_script(0x1F5F, 0x1F7D, 'Greek').
-unicode_range_script(0x1F80, 0x1FB4, 'Greek').
-unicode_range_script(0x1FB6, 0x1FC4, 'Greek').
-unicode_range_script(0x1FC6, 0x1FD3, 'Greek').
-unicode_range_script(0x1FD6, 0x1FDB, 'Greek').
-unicode_range_script(0x1FDD, 0x1FEF, 'Greek').
-unicode_range_script(0x1FF2, 0x1FF4, 'Greek').
-unicode_range_script(0x1FF6, 0x1FFE, 'Greek').
-unicode_range_script(0x2126, 0x2126, 'Greek').
-unicode_range_script(0x10140, 0x1018A, 'Greek').
-unicode_range_script(0x1D200, 0x1D245, 'Greek').
-
-% Total code points: 511
-
-% ================================================
-
-unicode_range_script(0x0400, 0x0484, 'Cyrillic').
-unicode_range_script(0x0487, 0x0527, 'Cyrillic').
-unicode_range_script(0x1D2B, 0x1D2B, 'Cyrillic').
-unicode_range_script(0x1D78, 0x1D78, 'Cyrillic').
-unicode_range_script(0x2DE0, 0x2DFF, 'Cyrillic').
-unicode_range_script(0xA640, 0xA697, 'Cyrillic').
-unicode_range_script(0xA69F, 0xA69F, 'Cyrillic').
-
-% Total code points: 417
-
-% ================================================
-
-unicode_range_script(0x0531, 0x0556, 'Armenian').
-unicode_range_script(0x0559, 0x055F, 'Armenian').
-unicode_range_script(0x0561, 0x0587, 'Armenian').
-unicode_range_script(0x058A, 0x058A, 'Armenian').
-unicode_range_script(0x058F, 0x058F, 'Armenian').
-unicode_range_script(0xFB13, 0xFB17, 'Armenian').
-
-% Total code points: 91
-
-% ================================================
-
-unicode_range_script(0x0591, 0x05C7, 'Hebrew').
-unicode_range_script(0x05D0, 0x05EA, 'Hebrew').
-unicode_range_script(0x05F0, 0x05F4, 'Hebrew').
-unicode_range_script(0xFB1D, 0xFB36, 'Hebrew').
-unicode_range_script(0xFB38, 0xFB3C, 'Hebrew').
-unicode_range_script(0xFB3E, 0xFB3E, 'Hebrew').
-unicode_range_script(0xFB40, 0xFB41, 'Hebrew').
-unicode_range_script(0xFB43, 0xFB44, 'Hebrew').
-unicode_range_script(0xFB46, 0xFB4F, 'Hebrew').
-
-% Total code points: 133
-
-% ================================================
-
-unicode_range_script(0x0600, 0x0604, 'Arabic').
-unicode_range_script(0x0606, 0x060B, 'Arabic').
-unicode_range_script(0x060D, 0x061A, 'Arabic').
-unicode_range_script(0x061E, 0x061E, 'Arabic').
-unicode_range_script(0x0620, 0x063F, 'Arabic').
-unicode_range_script(0x0641, 0x064A, 'Arabic').
-unicode_range_script(0x0656, 0x065E, 'Arabic').
-unicode_range_script(0x066A, 0x066F, 'Arabic').
-unicode_range_script(0x0671, 0x06DC, 'Arabic').
-unicode_range_script(0x06DE, 0x06FF, 'Arabic').
-unicode_range_script(0x0750, 0x077F, 'Arabic').
-unicode_range_script(0x08A0, 0x08A0, 'Arabic').
-unicode_range_script(0x08A2, 0x08AC, 'Arabic').
-unicode_range_script(0x08E4, 0x08FE, 'Arabic').
-unicode_range_script(0xFB50, 0xFBC1, 'Arabic').
-unicode_range_script(0xFBD3, 0xFD3D, 'Arabic').
-unicode_range_script(0xFD50, 0xFD8F, 'Arabic').
-unicode_range_script(0xFD92, 0xFDC7, 'Arabic').
-unicode_range_script(0xFDF0, 0xFDFC, 'Arabic').
-unicode_range_script(0xFE70, 0xFE74, 'Arabic').
-unicode_range_script(0xFE76, 0xFEFC, 'Arabic').
-unicode_range_script(0x10E60, 0x10E7E, 'Arabic').
-unicode_range_script(0x1EE00, 0x1EE03, 'Arabic').
-unicode_range_script(0x1EE05, 0x1EE1F, 'Arabic').
-unicode_range_script(0x1EE21, 0x1EE22, 'Arabic').
-unicode_range_script(0x1EE24, 0x1EE24, 'Arabic').
-unicode_range_script(0x1EE27, 0x1EE27, 'Arabic').
-unicode_range_script(0x1EE29, 0x1EE32, 'Arabic').
-unicode_range_script(0x1EE34, 0x1EE37, 'Arabic').
-unicode_range_script(0x1EE39, 0x1EE39, 'Arabic').
-unicode_range_script(0x1EE3B, 0x1EE3B, 'Arabic').
-unicode_range_script(0x1EE42, 0x1EE42, 'Arabic').
-unicode_range_script(0x1EE47, 0x1EE47, 'Arabic').
-unicode_range_script(0x1EE49, 0x1EE49, 'Arabic').
-unicode_range_script(0x1EE4B, 0x1EE4B, 'Arabic').
-unicode_range_script(0x1EE4D, 0x1EE4F, 'Arabic').
-unicode_range_script(0x1EE51, 0x1EE52, 'Arabic').
-unicode_range_script(0x1EE54, 0x1EE54, 'Arabic').
-unicode_range_script(0x1EE57, 0x1EE57, 'Arabic').
-unicode_range_script(0x1EE59, 0x1EE59, 'Arabic').
-unicode_range_script(0x1EE5B, 0x1EE5B, 'Arabic').
-unicode_range_script(0x1EE5D, 0x1EE5D, 'Arabic').
-unicode_range_script(0x1EE5F, 0x1EE5F, 'Arabic').
-unicode_range_script(0x1EE61, 0x1EE62, 'Arabic').
-unicode_range_script(0x1EE64, 0x1EE64, 'Arabic').
-unicode_range_script(0x1EE67, 0x1EE6A, 'Arabic').
-unicode_range_script(0x1EE6C, 0x1EE72, 'Arabic').
-unicode_range_script(0x1EE74, 0x1EE77, 'Arabic').
-unicode_range_script(0x1EE79, 0x1EE7C, 'Arabic').
-unicode_range_script(0x1EE7E, 0x1EE7E, 'Arabic').
-unicode_range_script(0x1EE80, 0x1EE89, 'Arabic').
-unicode_range_script(0x1EE8B, 0x1EE9B, 'Arabic').
-unicode_range_script(0x1EEA1, 0x1EEA3, 'Arabic').
-unicode_range_script(0x1EEA5, 0x1EEA9, 'Arabic').
-unicode_range_script(0x1EEAB, 0x1EEBB, 'Arabic').
-unicode_range_script(0x1EEF0, 0x1EEF1, 'Arabic').
-
-% Total code points: 1234
-
-% ================================================
-
-unicode_range_script(0x0700, 0x070D, 'Syriac').
-unicode_range_script(0x070F, 0x074A, 'Syriac').
-unicode_range_script(0x074D, 0x074F, 'Syriac').
-
-% Total code points: 77
-
-% ================================================
-
-unicode_range_script(0x0780, 0x07B1, 'Thaana').
-
-% Total code points: 50
-
-% ================================================
-
-unicode_range_script(0x0900, 0x0950, 'Devanagari').
-unicode_range_script(0x0953, 0x0963, 'Devanagari').
-unicode_range_script(0x0966, 0x0977, 'Devanagari').
-unicode_range_script(0x0979, 0x097F, 'Devanagari').
-unicode_range_script(0xA8E0, 0xA8FB, 'Devanagari').
-
-% Total code points: 151
-
-% ================================================
-
-unicode_range_script(0x0981, 0x0983, 'Bengali').
-unicode_range_script(0x0985, 0x098C, 'Bengali').
-unicode_range_script(0x098F, 0x0990, 'Bengali').
-unicode_range_script(0x0993, 0x09A8, 'Bengali').
-unicode_range_script(0x09AA, 0x09B0, 'Bengali').
-unicode_range_script(0x09B2, 0x09B2, 'Bengali').
-unicode_range_script(0x09B6, 0x09B9, 'Bengali').
-unicode_range_script(0x09BC, 0x09C4, 'Bengali').
-unicode_range_script(0x09C7, 0x09C8, 'Bengali').
-unicode_range_script(0x09CB, 0x09CE, 'Bengali').
-unicode_range_script(0x09D7, 0x09D7, 'Bengali').
-unicode_range_script(0x09DC, 0x09DD, 'Bengali').
-unicode_range_script(0x09DF, 0x09E3, 'Bengali').
-unicode_range_script(0x09E6, 0x09FB, 'Bengali').
-
-% Total code points: 92
-
-% ================================================
-
-unicode_range_script(0x0A01, 0x0A03, 'Gurmukhi').
-unicode_range_script(0x0A05, 0x0A0A, 'Gurmukhi').
-unicode_range_script(0x0A0F, 0x0A10, 'Gurmukhi').
-unicode_range_script(0x0A13, 0x0A28, 'Gurmukhi').
-unicode_range_script(0x0A2A, 0x0A30, 'Gurmukhi').
-unicode_range_script(0x0A32, 0x0A33, 'Gurmukhi').
-unicode_range_script(0x0A35, 0x0A36, 'Gurmukhi').
-unicode_range_script(0x0A38, 0x0A39, 'Gurmukhi').
-unicode_range_script(0x0A3C, 0x0A3C, 'Gurmukhi').
-unicode_range_script(0x0A3E, 0x0A42, 'Gurmukhi').
-unicode_range_script(0x0A47, 0x0A48, 'Gurmukhi').
-unicode_range_script(0x0A4B, 0x0A4D, 'Gurmukhi').
-unicode_range_script(0x0A51, 0x0A51, 'Gurmukhi').
-unicode_range_script(0x0A59, 0x0A5C, 'Gurmukhi').
-unicode_range_script(0x0A5E, 0x0A5E, 'Gurmukhi').
-unicode_range_script(0x0A66, 0x0A75, 'Gurmukhi').
-
-% Total code points: 79
-
-% ================================================
-
-unicode_range_script(0x0A81, 0x0A83, 'Gujarati').
-unicode_range_script(0x0A85, 0x0A8D, 'Gujarati').
-unicode_range_script(0x0A8F, 0x0A91, 'Gujarati').
-unicode_range_script(0x0A93, 0x0AA8, 'Gujarati').
-unicode_range_script(0x0AAA, 0x0AB0, 'Gujarati').
-unicode_range_script(0x0AB2, 0x0AB3, 'Gujarati').
-unicode_range_script(0x0AB5, 0x0AB9, 'Gujarati').
-unicode_range_script(0x0ABC, 0x0AC5, 'Gujarati').
-unicode_range_script(0x0AC7, 0x0AC9, 'Gujarati').
-unicode_range_script(0x0ACB, 0x0ACD, 'Gujarati').
-unicode_range_script(0x0AD0, 0x0AD0, 'Gujarati').
-unicode_range_script(0x0AE0, 0x0AE3, 'Gujarati').
-unicode_range_script(0x0AE6, 0x0AF1, 'Gujarati').
-
-% Total code points: 84
-
-% ================================================
-
-unicode_range_script(0x0B01, 0x0B03, 'Oriya').
-unicode_range_script(0x0B05, 0x0B0C, 'Oriya').
-unicode_range_script(0x0B0F, 0x0B10, 'Oriya').
-unicode_range_script(0x0B13, 0x0B28, 'Oriya').
-unicode_range_script(0x0B2A, 0x0B30, 'Oriya').
-unicode_range_script(0x0B32, 0x0B33, 'Oriya').
-unicode_range_script(0x0B35, 0x0B39, 'Oriya').
-unicode_range_script(0x0B3C, 0x0B44, 'Oriya').
-unicode_range_script(0x0B47, 0x0B48, 'Oriya').
-unicode_range_script(0x0B4B, 0x0B4D, 'Oriya').
-unicode_range_script(0x0B56, 0x0B57, 'Oriya').
-unicode_range_script(0x0B5C, 0x0B5D, 'Oriya').
-unicode_range_script(0x0B5F, 0x0B63, 'Oriya').
-unicode_range_script(0x0B66, 0x0B77, 'Oriya').
-
-% Total code points: 90
-
-% ================================================
-
-unicode_range_script(0x0B82, 0x0B83, 'Tamil').
-unicode_range_script(0x0B85, 0x0B8A, 'Tamil').
-unicode_range_script(0x0B8E, 0x0B90, 'Tamil').
-unicode_range_script(0x0B92, 0x0B95, 'Tamil').
-unicode_range_script(0x0B99, 0x0B9A, 'Tamil').
-unicode_range_script(0x0B9C, 0x0B9C, 'Tamil').
-unicode_range_script(0x0B9E, 0x0B9F, 'Tamil').
-unicode_range_script(0x0BA3, 0x0BA4, 'Tamil').
-unicode_range_script(0x0BA8, 0x0BAA, 'Tamil').
-unicode_range_script(0x0BAE, 0x0BB9, 'Tamil').
-unicode_range_script(0x0BBE, 0x0BC2, 'Tamil').
-unicode_range_script(0x0BC6, 0x0BC8, 'Tamil').
-unicode_range_script(0x0BCA, 0x0BCD, 'Tamil').
-unicode_range_script(0x0BD0, 0x0BD0, 'Tamil').
-unicode_range_script(0x0BD7, 0x0BD7, 'Tamil').
-unicode_range_script(0x0BE6, 0x0BFA, 'Tamil').
-
-% Total code points: 72
-
-% ================================================
-
-unicode_range_script(0x0C01, 0x0C03, 'Telugu').
-unicode_range_script(0x0C05, 0x0C0C, 'Telugu').
-unicode_range_script(0x0C0E, 0x0C10, 'Telugu').
-unicode_range_script(0x0C12, 0x0C28, 'Telugu').
-unicode_range_script(0x0C2A, 0x0C33, 'Telugu').
-unicode_range_script(0x0C35, 0x0C39, 'Telugu').
-unicode_range_script(0x0C3D, 0x0C44, 'Telugu').
-unicode_range_script(0x0C46, 0x0C48, 'Telugu').
-unicode_range_script(0x0C4A, 0x0C4D, 'Telugu').
-unicode_range_script(0x0C55, 0x0C56, 'Telugu').
-unicode_range_script(0x0C58, 0x0C59, 'Telugu').
-unicode_range_script(0x0C60, 0x0C63, 'Telugu').
-unicode_range_script(0x0C66, 0x0C6F, 'Telugu').
-unicode_range_script(0x0C78, 0x0C7F, 'Telugu').
-
-% Total code points: 93
-
-% ================================================
-
-unicode_range_script(0x0C82, 0x0C83, 'Kannada').
-unicode_range_script(0x0C85, 0x0C8C, 'Kannada').
-unicode_range_script(0x0C8E, 0x0C90, 'Kannada').
-unicode_range_script(0x0C92, 0x0CA8, 'Kannada').
-unicode_range_script(0x0CAA, 0x0CB3, 'Kannada').
-unicode_range_script(0x0CB5, 0x0CB9, 'Kannada').
-unicode_range_script(0x0CBC, 0x0CC4, 'Kannada').
-unicode_range_script(0x0CC6, 0x0CC8, 'Kannada').
-unicode_range_script(0x0CCA, 0x0CCD, 'Kannada').
-unicode_range_script(0x0CD5, 0x0CD6, 'Kannada').
-unicode_range_script(0x0CDE, 0x0CDE, 'Kannada').
-unicode_range_script(0x0CE0, 0x0CE3, 'Kannada').
-unicode_range_script(0x0CE6, 0x0CEF, 'Kannada').
-unicode_range_script(0x0CF1, 0x0CF2, 'Kannada').
-
-% Total code points: 86
-
-% ================================================
-
-unicode_range_script(0x0D02, 0x0D03, 'Malayalam').
-unicode_range_script(0x0D05, 0x0D0C, 'Malayalam').
-unicode_range_script(0x0D0E, 0x0D10, 'Malayalam').
-unicode_range_script(0x0D12, 0x0D3A, 'Malayalam').
-unicode_range_script(0x0D3D, 0x0D44, 'Malayalam').
-unicode_range_script(0x0D46, 0x0D48, 'Malayalam').
-unicode_range_script(0x0D4A, 0x0D4E, 'Malayalam').
-unicode_range_script(0x0D57, 0x0D57, 'Malayalam').
-unicode_range_script(0x0D60, 0x0D63, 'Malayalam').
-unicode_range_script(0x0D66, 0x0D75, 'Malayalam').
-unicode_range_script(0x0D79, 0x0D7F, 'Malayalam').
-
-% Total code points: 98
-
-% ================================================
-
-unicode_range_script(0x0D82, 0x0D83, 'Sinhala').
-unicode_range_script(0x0D85, 0x0D96, 'Sinhala').
-unicode_range_script(0x0D9A, 0x0DB1, 'Sinhala').
-unicode_range_script(0x0DB3, 0x0DBB, 'Sinhala').
-unicode_range_script(0x0DBD, 0x0DBD, 'Sinhala').
-unicode_range_script(0x0DC0, 0x0DC6, 'Sinhala').
-unicode_range_script(0x0DCA, 0x0DCA, 'Sinhala').
-unicode_range_script(0x0DCF, 0x0DD4, 'Sinhala').
-unicode_range_script(0x0DD6, 0x0DD6, 'Sinhala').
-unicode_range_script(0x0DD8, 0x0DDF, 'Sinhala').
-unicode_range_script(0x0DF2, 0x0DF4, 'Sinhala').
-
-% Total code points: 80
-
-% ================================================
-
-unicode_range_script(0x0E01, 0x0E3A, 'Thai').
-unicode_range_script(0x0E40, 0x0E5B, 'Thai').
-
-% Total code points: 86
-
-% ================================================
-
-unicode_range_script(0x0E81, 0x0E82, 'Lao').
-unicode_range_script(0x0E84, 0x0E84, 'Lao').
-unicode_range_script(0x0E87, 0x0E88, 'Lao').
-unicode_range_script(0x0E8A, 0x0E8A, 'Lao').
-unicode_range_script(0x0E8D, 0x0E8D, 'Lao').
-unicode_range_script(0x0E94, 0x0E97, 'Lao').
-unicode_range_script(0x0E99, 0x0E9F, 'Lao').
-unicode_range_script(0x0EA1, 0x0EA3, 'Lao').
-unicode_range_script(0x0EA5, 0x0EA5, 'Lao').
-unicode_range_script(0x0EA7, 0x0EA7, 'Lao').
-unicode_range_script(0x0EAA, 0x0EAB, 'Lao').
-unicode_range_script(0x0EAD, 0x0EB9, 'Lao').
-unicode_range_script(0x0EBB, 0x0EBD, 'Lao').
-unicode_range_script(0x0EC0, 0x0EC4, 'Lao').
-unicode_range_script(0x0EC6, 0x0EC6, 'Lao').
-unicode_range_script(0x0EC8, 0x0ECD, 'Lao').
-unicode_range_script(0x0ED0, 0x0ED9, 'Lao').
-unicode_range_script(0x0EDC, 0x0EDF, 'Lao').
-
-% Total code points: 67
-
-% ================================================
-
-unicode_range_script(0x0F00, 0x0F47, 'Tibetan').
-unicode_range_script(0x0F49, 0x0F6C, 'Tibetan').
-unicode_range_script(0x0F71, 0x0F97, 'Tibetan').
-unicode_range_script(0x0F99, 0x0FBC, 'Tibetan').
-unicode_range_script(0x0FBE, 0x0FCC, 'Tibetan').
-unicode_range_script(0x0FCE, 0x0FD4, 'Tibetan').
-unicode_range_script(0x0FD9, 0x0FDA, 'Tibetan').
-
-% Total code points: 207
-
-% ================================================
-
-unicode_range_script(0x1000, 0x109F, 'Myanmar').
-unicode_range_script(0xAA60, 0xAA7B, 'Myanmar').
-
-% Total code points: 188
-
-% ================================================
-
-unicode_range_script(0x10A0, 0x10C5, 'Georgian').
-unicode_range_script(0x10C7, 0x10C7, 'Georgian').
-unicode_range_script(0x10CD, 0x10CD, 'Georgian').
-unicode_range_script(0x10D0, 0x10FA, 'Georgian').
-unicode_range_script(0x10FC, 0x10FF, 'Georgian').
-unicode_range_script(0x2D00, 0x2D25, 'Georgian').
-unicode_range_script(0x2D27, 0x2D27, 'Georgian').
-unicode_range_script(0x2D2D, 0x2D2D, 'Georgian').
-
-% Total code points: 127
-
-% ================================================
-
-unicode_range_script(0x1100, 0x11FF, 'Hangul').
-unicode_range_script(0x302E, 0x302F, 'Hangul').
-unicode_range_script(0x3131, 0x318E, 'Hangul').
-unicode_range_script(0x3200, 0x321E, 'Hangul').
-unicode_range_script(0x3260, 0x327E, 'Hangul').
-unicode_range_script(0xA960, 0xA97C, 'Hangul').
-unicode_range_script(0xAC00, 0xD7A3, 'Hangul').
-unicode_range_script(0xD7B0, 0xD7C6, 'Hangul').
-unicode_range_script(0xD7CB, 0xD7FB, 'Hangul').
-unicode_range_script(0xFFA0, 0xFFBE, 'Hangul').
-unicode_range_script(0xFFC2, 0xFFC7, 'Hangul').
-unicode_range_script(0xFFCA, 0xFFCF, 'Hangul').
-unicode_range_script(0xFFD2, 0xFFD7, 'Hangul').
-unicode_range_script(0xFFDA, 0xFFDC, 'Hangul').
-
-% Total code points: 11739
-
-% ================================================
-
-unicode_range_script(0x1200, 0x1248, 'Ethiopic').
-unicode_range_script(0x124A, 0x124D, 'Ethiopic').
-unicode_range_script(0x1250, 0x1256, 'Ethiopic').
-unicode_range_script(0x1258, 0x1258, 'Ethiopic').
-unicode_range_script(0x125A, 0x125D, 'Ethiopic').
-unicode_range_script(0x1260, 0x1288, 'Ethiopic').
-unicode_range_script(0x128A, 0x128D, 'Ethiopic').
-unicode_range_script(0x1290, 0x12B0, 'Ethiopic').
-unicode_range_script(0x12B2, 0x12B5, 'Ethiopic').
-unicode_range_script(0x12B8, 0x12BE, 'Ethiopic').
-unicode_range_script(0x12C0, 0x12C0, 'Ethiopic').
-unicode_range_script(0x12C2, 0x12C5, 'Ethiopic').
-unicode_range_script(0x12C8, 0x12D6, 'Ethiopic').
-unicode_range_script(0x12D8, 0x1310, 'Ethiopic').
-unicode_range_script(0x1312, 0x1315, 'Ethiopic').
-unicode_range_script(0x1318, 0x135A, 'Ethiopic').
-unicode_range_script(0x135D, 0x137C, 'Ethiopic').
-unicode_range_script(0x1380, 0x1399, 'Ethiopic').
-unicode_range_script(0x2D80, 0x2D96, 'Ethiopic').
-unicode_range_script(0x2DA0, 0x2DA6, 'Ethiopic').
-unicode_range_script(0x2DA8, 0x2DAE, 'Ethiopic').
-unicode_range_script(0x2DB0, 0x2DB6, 'Ethiopic').
-unicode_range_script(0x2DB8, 0x2DBE, 'Ethiopic').
-unicode_range_script(0x2DC0, 0x2DC6, 'Ethiopic').
-unicode_range_script(0x2DC8, 0x2DCE, 'Ethiopic').
-unicode_range_script(0x2DD0, 0x2DD6, 'Ethiopic').
-unicode_range_script(0x2DD8, 0x2DDE, 'Ethiopic').
-unicode_range_script(0xAB01, 0xAB06, 'Ethiopic').
-unicode_range_script(0xAB09, 0xAB0E, 'Ethiopic').
-unicode_range_script(0xAB11, 0xAB16, 'Ethiopic').
-unicode_range_script(0xAB20, 0xAB26, 'Ethiopic').
-unicode_range_script(0xAB28, 0xAB2E, 'Ethiopic').
-
-% Total code points: 495
-
-% ================================================
-
-unicode_range_script(0x13A0, 0x13F4, 'Cherokee').
-
-% Total code points: 85
-
-% ================================================
-
-unicode_range_script(0x1400, 0x167F, 'Canadian_Aboriginal').
-unicode_range_script(0x18B0, 0x18F5, 'Canadian_Aboriginal').
-
-% Total code points: 710
-
-% ================================================
-
-unicode_range_script(0x1680, 0x169C, 'Ogham').
-
-% Total code points: 29
-
-% ================================================
-
-unicode_range_script(0x16A0, 0x16EA, 'Runic').
-unicode_range_script(0x16EE, 0x16F0, 'Runic').
-
-% Total code points: 78
-
-% ================================================
-
-unicode_range_script(0x1780, 0x17DD, 'Khmer').
-unicode_range_script(0x17E0, 0x17E9, 'Khmer').
-unicode_range_script(0x17F0, 0x17F9, 'Khmer').
-unicode_range_script(0x19E0, 0x19FF, 'Khmer').
-
-% Total code points: 146
-
-% ================================================
-
-unicode_range_script(0x1800, 0x1801, 'Mongolian').
-unicode_range_script(0x1804, 0x1804, 'Mongolian').
-unicode_range_script(0x1806, 0x180E, 'Mongolian').
-unicode_range_script(0x1810, 0x1819, 'Mongolian').
-unicode_range_script(0x1820, 0x1877, 'Mongolian').
-unicode_range_script(0x1880, 0x18AA, 'Mongolian').
-
-% Total code points: 153
-
-% ================================================
-
-unicode_range_script(0x3041, 0x3096, 'Hiragana').
-unicode_range_script(0x309D, 0x309F, 'Hiragana').
-unicode_range_script(0x1B001, 0x1B001, 'Hiragana').
-unicode_range_script(0x1F200, 0x1F200, 'Hiragana').
-
-% Total code points: 91
-
-% ================================================
-
-unicode_range_script(0x30A1, 0x30FA, 'Katakana').
-unicode_range_script(0x30FD, 0x30FF, 'Katakana').
-unicode_range_script(0x31F0, 0x31FF, 'Katakana').
-unicode_range_script(0x32D0, 0x32FE, 'Katakana').
-unicode_range_script(0x3300, 0x3357, 'Katakana').
-unicode_range_script(0xFF66, 0xFF6F, 'Katakana').
-unicode_range_script(0xFF71, 0xFF9D, 'Katakana').
-unicode_range_script(0x1B000, 0x1B000, 'Katakana').
-
-% Total code points: 300
-
-% ================================================
-
-unicode_range_script(0x02EA, 0x02EB, 'Bopomofo').
-unicode_range_script(0x3105, 0x312D, 'Bopomofo').
-unicode_range_script(0x31A0, 0x31BA, 'Bopomofo').
-
-% Total code points: 70
-
-% ================================================
-
-unicode_range_script(0x2E80, 0x2E99, 'Han').
-unicode_range_script(0x2E9B, 0x2EF3, 'Han').
-unicode_range_script(0x2F00, 0x2FD5, 'Han').
-unicode_range_script(0x3005, 0x3005, 'Han').
-unicode_range_script(0x3007, 0x3007, 'Han').
-unicode_range_script(0x3021, 0x3029, 'Han').
-unicode_range_script(0x3038, 0x303B, 'Han').
-unicode_range_script(0x3400, 0x4DB5, 'Han').
-unicode_range_script(0x4E00, 0x9FCC, 'Han').
-unicode_range_script(0xF900, 0xFA6D, 'Han').
-unicode_range_script(0xFA70, 0xFAD9, 'Han').
-unicode_range_script(0x20000, 0x2A6D6, 'Han').
-unicode_range_script(0x2A700, 0x2B734, 'Han').
-unicode_range_script(0x2B740, 0x2B81D, 'Han').
-unicode_range_script(0x2F800, 0x2FA1D, 'Han').
-
-% Total code points: 75963
-
-% ================================================
-
-unicode_range_script(0xA000, 0xA48C, 'Yi').
-unicode_range_script(0xA490, 0xA4C6, 'Yi').
-
-% Total code points: 1220
-
-% ================================================
-
-unicode_range_script(0x10300, 0x1031E, 'Old_Italic').
-unicode_range_script(0x10320, 0x10323, 'Old_Italic').
-
-% Total code points: 35
-
-% ================================================
-
-unicode_range_script(0x10330, 0x1034A, 'Gothic').
-
-% Total code points: 27
-
-% ================================================
-
-unicode_range_script(0x10400, 0x1044F, 'Deseret').
-
-% Total code points: 80
-
-% ================================================
-
-unicode_range_script(0x0300, 0x036F, 'Inherited').
-unicode_range_script(0x0485, 0x0486, 'Inherited').
-unicode_range_script(0x064B, 0x0655, 'Inherited').
-unicode_range_script(0x065F, 0x065F, 'Inherited').
-unicode_range_script(0x0670, 0x0670, 'Inherited').
-unicode_range_script(0x0951, 0x0952, 'Inherited').
-unicode_range_script(0x1CD0, 0x1CD2, 'Inherited').
-unicode_range_script(0x1CD4, 0x1CE0, 'Inherited').
-unicode_range_script(0x1CE2, 0x1CE8, 'Inherited').
-unicode_range_script(0x1CED, 0x1CED, 'Inherited').
-unicode_range_script(0x1CF4, 0x1CF4, 'Inherited').
-unicode_range_script(0x1DC0, 0x1DE6, 'Inherited').
-unicode_range_script(0x1DFC, 0x1DFF, 'Inherited').
-unicode_range_script(0x200C, 0x200D, 'Inherited').
-unicode_range_script(0x20D0, 0x20F0, 'Inherited').
-unicode_range_script(0x302A, 0x302D, 'Inherited').
-unicode_range_script(0x3099, 0x309A, 'Inherited').
-unicode_range_script(0xFE00, 0xFE0F, 'Inherited').
-unicode_range_script(0xFE20, 0xFE26, 'Inherited').
-unicode_range_script(0x101FD, 0x101FD, 'Inherited').
-unicode_range_script(0x1D167, 0x1D169, 'Inherited').
-unicode_range_script(0x1D17B, 0x1D182, 'Inherited').
-unicode_range_script(0x1D185, 0x1D18B, 'Inherited').
-unicode_range_script(0x1D1AA, 0x1D1AD, 'Inherited').
-unicode_range_script(0xE0100, 0xE01EF, 'Inherited').
-
-% Total code points: 524
-
-% ================================================
-
-unicode_range_script(0x1700, 0x170C, 'Tagalog').
-unicode_range_script(0x170E, 0x1714, 'Tagalog').
-
-% Total code points: 20
-
-% ================================================
-
-unicode_range_script(0x1720, 0x1734, 'Hanunoo').
-
-% Total code points: 21
-
-% ================================================
-
-unicode_range_script(0x1740, 0x1753, 'Buhid').
-
-% Total code points: 20
-
-% ================================================
-
-unicode_range_script(0x1760, 0x176C, 'Tagbanwa').
-unicode_range_script(0x176E, 0x1770, 'Tagbanwa').
-unicode_range_script(0x1772, 0x1773, 'Tagbanwa').
-
-% Total code points: 18
-
-% ================================================
-
-unicode_range_script(0x1900, 0x191C, 'Limbu').
-unicode_range_script(0x1930, 0x193B, 'Limbu').
-unicode_range_script(0x1940, 0x1940, 'Limbu').
-unicode_range_script(0x1944, 0x194F, 'Limbu').
-unicode_range_script(0x1920, 0x192B, 'Limbu').
-unicode_range_script(0x1930, 0x193B, 'Limbu').
-unicode_range_script(0x1940, 0x1940, 'Limbu').
-unicode_range_script(0x1944, 0x194F, 'Limbu').
-
-% Total code points: 66
-
-% ================================================
-
-unicode_range_script(0x1950, 0x196D, 'Tai_Le').
-unicode_range_script(0x1970, 0x1974, 'Tai_Le').
-
-% Total code points: 35
-
-% ================================================
-
-unicode_range_script(0x10000, 0x1000B, 'Linear_B').
-unicode_range_script(0x1000D, 0x10026, 'Linear_B').
-unicode_range_script(0x10028, 0x1003A, 'Linear_B').
-unicode_range_script(0x1003C, 0x1003D, 'Linear_B').
-unicode_range_script(0x1003F, 0x1004D, 'Linear_B').
-unicode_range_script(0x10050, 0x1005D, 'Linear_B').
-unicode_range_script(0x10080, 0x100FA, 'Linear_B').
-
-% Total code points: 211
-
-% ================================================
-
-unicode_range_script(0x10380, 0x1039D, 'Ugaritic').
-unicode_range_script(0x1039F, 0x1039F, 'Ugaritic').
-
-% Total code points: 31
-
-% ================================================
-
-unicode_range_script(0x10450, 0x1047F, 'Shavian').
-
-% Total code points: 48
-
-% ================================================
-
-unicode_range_script(0x10480, 0x1049D, 'Osmanya').
-unicode_range_script(0x104A0, 0x104A9, 'Osmanya').
-
-% Total code points: 40
-
-% ================================================
-
-unicode_range_script(0x10800, 0x10805, 'Cypriot').
-unicode_range_script(0x10808, 0x10808, 'Cypriot').
-unicode_range_script(0x1080A, 0x10835, 'Cypriot').
-unicode_range_script(0x10837, 0x10838, 'Cypriot').
-unicode_range_script(0x1083C, 0x1083C, 'Cypriot').
-unicode_range_script(0x1083F, 0x1083F, 'Cypriot').
-
-% Total code points: 55
-
-% ================================================
-
-unicode_range_script(0x2800, 0x28FF, 'Braille').
-
-% Total code points: 256
-
-% ================================================
-
-unicode_range_script(0x1A00, 0x1A1B, 'Buginese').
-unicode_range_script(0x1A1E, 0x1A1F, 'Buginese').
-
-% Total code points: 30
-
-% ================================================
-
-unicode_range_script(0x03E2, 0x03EF, 'Coptic').
-unicode_range_script(0x2C80, 0x2CF3, 'Coptic').
-unicode_range_script(0x2CF9, 0x2CFF, 'Coptic').
-
-% Total code points: 137
-
-% ================================================
-
-unicode_range_script(0x1980, 0x19AB, 'New_Tai_Lue').
-unicode_range_script(0x19B0, 0x19C9, 'New_Tai_Lue').
-unicode_range_script(0x19D0, 0x19DA, 'New_Tai_Lue').
-unicode_range_script(0x19DE, 0x19DF, 'New_Tai_Lue').
-
-
-% Total code points: 83
-
-% ================================================
-
-unicode_range_script(0x2C00, 0x2C2E, 'Glagolitic').
-unicode_range_script(0x2C30, 0x2C5E, 'Glagolitic').
-
-% Total code points: 94
-
-% ================================================
-
-unicode_range_script(0x2D30, 0x2D67, 'Tifinagh').
-unicode_range_script(0x2D6F, 0x2D70, 'Tifinagh').
-unicode_range_script(0x2D7F, 0x2D7F, 'Tifinagh').
-
-% Total code points: 59
-
-% ================================================
-
-unicode_range_script(0xA800, 0xA82B, 'Syloti_Nagri').
-
-% Total code points: 44
-
-% ================================================
-
-unicode_range_script(0x103A0, 0x103C3, 'Old_Persian').
-unicode_range_script(0x103C8, 0x103D5, 'Old_Persian').
-
-% Total code points: 50
-
-% ================================================
-
-unicode_range_script(0x10A00, 0x10A03, 'Kharoshthi').
-unicode_range_script(0x10A05, 0x10A06, 'Kharoshthi').
-unicode_range_script(0x10A0C, 0x10A13, 'Kharoshthi').
-unicode_range_script(0x10A15, 0x10A17, 'Kharoshthi').
-unicode_range_script(0x10A19, 0x10A33, 'Kharoshthi').
-unicode_range_script(0x10A38, 0x10A3A, 'Kharoshthi').
-unicode_range_script(0x10A3F, 0x10A47, 'Kharoshthi').
-unicode_range_script(0x10A50, 0x10A58, 'Kharoshthi').
-
-% Total code points: 65
-
-% ================================================
-
-unicode_range_script(0x1B00, 0x1B4B, 'Balinese').
-unicode_range_script(0x1B50, 0x1B7C, 'Balinese').
-
-% Total code points: 121
-
-% ================================================
-
-unicode_range_script(0x12000, 0x1236E, 'Cuneiform').
-unicode_range_script(0x12400, 0x12462, 'Cuneiform').
-unicode_range_script(0x12470, 0x12473, 'Cuneiform').
-
-% Total code points: 982
-
-% ================================================
-
-unicode_range_script(0x10900, 0x1091B, 'Phoenician').
-unicode_range_script(0x1091F, 0x1091F, 'Phoenician').
-
-% Total code points: 29
-
-% ================================================
-
-unicode_range_script(0xA840, 0xA877, 'Phags_Pa').
-
-% Total code points: 56
-
-% ================================================
-
-unicode_range_script(0x07C0, 0x07FA, 'Nko').
-
-% Total code points: 59
-
-% ================================================
-
-unicode_range_script(0x1B80, 0x1BBF, 'Sundanese').
-unicode_range_script(0x1CC0, 0x1CC7, 'Sundanese').
-
-% Total code points: 72
-
-% ================================================
-
-unicode_range_script(0x1C00, 0x1C37, 'Lepcha').
-unicode_range_script(0x1C3B, 0x1C49, 'Lepcha').
-unicode_range_script(0x1C4D, 0x1C4F, 'Lepcha').
-
-% Total code points: 74
-
-% ================================================
-
-unicode_range_script(0x1C50, 0x1C7F, 'Ol_Chiki').
-
-% Total code points: 48
-
-% ================================================
-
-unicode_range_script(0xA500, 0xA62B, 'Vai').
-
-% Total code points: 300
-
-% ================================================
-
-unicode_range_script(0xA880, 0xA8C4, 'Saurashtra').
-unicode_range_script(0xA8CE, 0xA8D9, 'Saurashtra').
-
-% Total code points: 81
-
-% ================================================
-
-unicode_range_script(0xA900, 0xA92F, 'Kayah_Li').
-
-% Total code points: 48
-
-% ================================================
-
-unicode_range_script(0xA930, 0xA953, 'Rejang').
-unicode_range_script(0xA95F, 0xA95F, 'Rejang').
-
-% Total code points: 37
-
-% ================================================
-
-unicode_range_script(0x10280, 0x1029C, 'Lycian').
-
-% Total code points: 29
-
-% ================================================
-
-unicode_range_script(0x102A0, 0x102D0, 'Carian').
-
-% Total code points: 49
-
-% ================================================
-
-unicode_range_script(0x10920, 0x10939, 'Lydian').
-unicode_range_script(0x1093F, 0x1093F, 'Lydian').
-
-% Total code points: 27
-
-% ================================================
-
-unicode_range_script(0xAA00, 0xAA36, 'Cham').
-unicode_range_script(0xAA40, 0xAA4D, 'Cham').
-unicode_range_script(0xAA50, 0xAA59, 'Cham').
-unicode_range_script(0xAA5C, 0xAA5F, 'Cham').
-
-% Total code points: 83
-
-% ================================================
-
-unicode_range_script(0x1A20, 0x1A5E, 'Tai_Tham').
-unicode_range_script(0x1A60, 0x1A7C, 'Tai_Tham').
-unicode_range_script(0x1A7F, 0x1A89, 'Tai_Tham').
-unicode_range_script(0x1A90, 0x1A99, 'Tai_Tham').
-unicode_range_script(0x1AA0, 0x1AAD, 'Tai_Tham').
-
-% Total code points: 127
-
-% ================================================
-
-unicode_range_script(0xAA80, 0xAAC2, 'Tai_Viet').
-unicode_range_script(0xAADB, 0xAADF, 'Tai_Viet').
-
-% Total code points: 72
-
-% ================================================
-
-unicode_range_script(0x10B00, 0x10B35, 'Avestan').
-unicode_range_script(0x10B39, 0x10B3F, 'Avestan').
-
-% Total code points: 61
-
-% ================================================
-
-unicode_range_script(0x13000, 0x1342E, 'Egyptian_Hieroglyphs').
-
-% Total code points: 1071
-
-% ================================================
-
-unicode_range_script(0x0800, 0x082D, 'Samaritan').
-unicode_range_script(0x0830, 0x083E, 'Samaritan').
-
-% Total code points: 61
-
-% ================================================
-
-unicode_range_script(0xA4D0, 0xA4FF, 'Lisu').
-
-% Total code points: 48
-
-% ================================================
-
-unicode_range_script(0xA6A0, 0xA6F7, 'Bamum').
-unicode_range_script(0x16800, 0x16A38, 'Bamum').
-
-% Total code points: 657
-
-% ================================================
-
-unicode_range_script(0xA980, 0xA9CD, 'Javanese').
-unicode_range_script(0xA9CF, 0xA9D9, 'Javanese').
-unicode_range_script(0xA9DE, 0xA9DF, 'Javanese').
-
-% Total code points: 91
-
-% ================================================
-
-unicode_range_script(0xAAE0, 0xAAF6, 'Meetei_Mayek').
-unicode_range_script(0xABC0, 0xABED, 'Meetei_Mayek').
-unicode_range_script(0xABF0, 0xABF9, 'Meetei_Mayek').
-
-% Total code points: 79
-
-% ================================================
-
-unicode_range_script(0x10840, 0x10855, 'Imperial_Aramaic').
-unicode_range_script(0x10857, 0x1085F, 'Imperial_Aramaic').
-
-% Total code points: 31
-
-% ================================================
-
-unicode_range_script(0x10A60, 0x10A7F, 'Old_South_Arabian').
-
-% Total code points: 32
-
-% ================================================
-
-unicode_range_script(0x10B40, 0x10B55, 'Inscriptional_Parthian').
-unicode_range_script(0x10B58, 0x10B5F, 'Inscriptional_Parthian').
-
-% Total code points: 30
-
-% ================================================
-
-unicode_range_script(0x10B60, 0x10B72, 'Inscriptional_Pahlavi').
-unicode_range_script(0x10B78, 0x10B7F, 'Inscriptional_Pahlavi').
-
-% Total code points: 27
-
-% ================================================
-
-unicode_range_script(0x10C00, 0x10C48, 'Old_Turkic').
-
-% Total code points: 73
-
-% ================================================
-
-unicode_range_script(0x11080, 0x110C1, 'Kaithi').
-
-% Total code points: 66
-
-% ================================================
-
-unicode_range_script(0x1BC0, 0x1BF3, 'Batak').
-unicode_range_script(0x1BFC, 0x1BFF, 'Batak').
-
-% Total code points: 56
-
-% ================================================
-
-unicode_range_script(0x11000, 0x1104D, 'Brahmi').
-unicode_range_script(0x11052, 0x1106F, 'Brahmi').
-
-% Total code points: 108
-
-% ================================================
-
-unicode_range_script(0x0840, 0x085B, 'Mandaic').
-unicode_range_script(0x085E, 0x085E, 'Mandaic').
-
-% Total code points: 29
-
-% ================================================
-
-unicode_range_script(0x11100, 0x11134, 'Chakma').
-unicode_range_script(0x11136, 0x11143, 'Chakma').
-
-% Total code points: 67
-
-% ================================================
-
-unicode_range_script(0x109A0, 0x109B7, 'Meroitic_Cursive').
-unicode_range_script(0x109BE, 0x109BF, 'Meroitic_Cursive').
-
-% Total code points: 26
-
-% ================================================
-
-unicode_range_script(0x10980, 0x1099F, 'Meroitic_Hieroglyphs').
-
-% Total code points: 32
-
-% ================================================
-
-unicode_range_script(0x16F00, 0x16F44, 'Miao').
-unicode_range_script(0x16F50, 0x16F7E, 'Miao').
-unicode_range_script(0x16F8F, 0x16F9F, 'Miao').
-
-% Total code points: 133
-
-% ================================================
-
-unicode_range_script(0x11180, 0x111C8, 'Sharada').
-unicode_range_script(0x111D0, 0x111D9, 'Sharada').
-
-% Total code points: 83
-
-% ================================================
-
-unicode_range_script(0x110D0, 0x110E8, 'Sora_Sompeng').
-unicode_range_script(0x110F0, 0x110F9, 'Sora_Sompeng').
-
-% Total code points: 35
-
-% ================================================
-
-unicode_range_script(0x11680, 0x116B7, 'Takri').
-unicode_range_script(0x116C0, 0x116C9, 'Takri').
-
-% Total code points: 66
-
-% EOF
+unicode_script(0, 31, 'Common').
+unicode_script(32, 32, 'Common').
+unicode_script(33, 35, 'Common').
+unicode_script(36, 36, 'Common').
+unicode_script(37, 39, 'Common').
+unicode_script(40, 40, 'Common').
+unicode_script(41, 41, 'Common').
+unicode_script(42, 42, 'Common').
+unicode_script(43, 43, 'Common').
+unicode_script(44, 44, 'Common').
+unicode_script(45, 45, 'Common').
+unicode_script(46, 47, 'Common').
+unicode_script(48, 57, 'Common').
+unicode_script(58, 59, 'Common').
+unicode_script(60, 62, 'Common').
+unicode_script(63, 64, 'Common').
+unicode_script(91, 91, 'Common').
+unicode_script(92, 92, 'Common').
+unicode_script(93, 93, 'Common').
+unicode_script(94, 94, 'Common').
+unicode_script(95, 95, 'Common').
+unicode_script(96, 96, 'Common').
+unicode_script(123, 123, 'Common').
+unicode_script(124, 124, 'Common').
+unicode_script(125, 125, 'Common').
+unicode_script(126, 126, 'Common').
+unicode_script(127, 159, 'Common').
+unicode_script(160, 160, 'Common').
+unicode_script(161, 161, 'Common').
+unicode_script(162, 165, 'Common').
+unicode_script(166, 166, 'Common').
+unicode_script(167, 167, 'Common').
+unicode_script(168, 168, 'Common').
+unicode_script(169, 169, 'Common').
+unicode_script(171, 171, 'Common').
+unicode_script(172, 172, 'Common').
+unicode_script(173, 173, 'Common').
+unicode_script(174, 174, 'Common').
+unicode_script(175, 175, 'Common').
+unicode_script(176, 176, 'Common').
+unicode_script(177, 177, 'Common').
+unicode_script(178, 179, 'Common').
+unicode_script(180, 180, 'Common').
+unicode_script(181, 181, 'Common').
+unicode_script(182, 183, 'Common').
+unicode_script(184, 184, 'Common').
+unicode_script(185, 185, 'Common').
+unicode_script(187, 187, 'Common').
+unicode_script(188, 190, 'Common').
+unicode_script(191, 191, 'Common').
+unicode_script(215, 215, 'Common').
+unicode_script(247, 247, 'Common').
+unicode_script(697, 705, 'Common').
+unicode_script(706, 709, 'Common').
+unicode_script(710, 721, 'Common').
+unicode_script(722, 735, 'Common').
+unicode_script(741, 745, 'Common').
+unicode_script(748, 748, 'Common').
+unicode_script(749, 749, 'Common').
+unicode_script(750, 750, 'Common').
+unicode_script(751, 767, 'Common').
+unicode_script(884, 884, 'Common').
+unicode_script(894, 894, 'Common').
+unicode_script(901, 901, 'Common').
+unicode_script(903, 903, 'Common').
+unicode_script(1541, 1541, 'Common').
+unicode_script(1548, 1548, 'Common').
+unicode_script(1563, 1563, 'Common').
+unicode_script(1567, 1567, 'Common').
+unicode_script(1600, 1600, 'Common').
+unicode_script(1757, 1757, 'Common').
+unicode_script(2274, 2274, 'Common').
+unicode_script(2404, 2405, 'Common').
+unicode_script(3647, 3647, 'Common').
+unicode_script(4053, 4056, 'Common').
+unicode_script(4347, 4347, 'Common').
+unicode_script(5867, 5869, 'Common').
+unicode_script(5941, 5942, 'Common').
+unicode_script(6146, 6147, 'Common').
+unicode_script(6149, 6149, 'Common').
+unicode_script(7379, 7379, 'Common').
+unicode_script(7393, 7393, 'Common').
+unicode_script(7401, 7404, 'Common').
+unicode_script(7406, 7411, 'Common').
+unicode_script(7413, 7414, 'Common').
+unicode_script(7415, 7415, 'Common').
+unicode_script(7418, 7418, 'Common').
+unicode_script(8192, 8202, 'Common').
+unicode_script(8203, 8203, 'Common').
+unicode_script(8206, 8207, 'Common').
+unicode_script(8208, 8213, 'Common').
+unicode_script(8214, 8215, 'Common').
+unicode_script(8216, 8216, 'Common').
+unicode_script(8217, 8217, 'Common').
+unicode_script(8218, 8218, 'Common').
+unicode_script(8219, 8220, 'Common').
+unicode_script(8221, 8221, 'Common').
+unicode_script(8222, 8222, 'Common').
+unicode_script(8223, 8223, 'Common').
+unicode_script(8224, 8231, 'Common').
+unicode_script(8232, 8232, 'Common').
+unicode_script(8233, 8233, 'Common').
+unicode_script(8234, 8238, 'Common').
+unicode_script(8239, 8239, 'Common').
+unicode_script(8240, 8248, 'Common').
+unicode_script(8249, 8249, 'Common').
+unicode_script(8250, 8250, 'Common').
+unicode_script(8251, 8254, 'Common').
+unicode_script(8255, 8256, 'Common').
+unicode_script(8257, 8259, 'Common').
+unicode_script(8260, 8260, 'Common').
+unicode_script(8261, 8261, 'Common').
+unicode_script(8262, 8262, 'Common').
+unicode_script(8263, 8273, 'Common').
+unicode_script(8274, 8274, 'Common').
+unicode_script(8275, 8275, 'Common').
+unicode_script(8276, 8276, 'Common').
+unicode_script(8277, 8286, 'Common').
+unicode_script(8287, 8287, 'Common').
+unicode_script(8288, 8292, 'Common').
+unicode_script(8294, 8303, 'Common').
+unicode_script(8304, 8304, 'Common').
+unicode_script(8308, 8313, 'Common').
+unicode_script(8314, 8316, 'Common').
+unicode_script(8317, 8317, 'Common').
+unicode_script(8318, 8318, 'Common').
+unicode_script(8320, 8329, 'Common').
+unicode_script(8330, 8332, 'Common').
+unicode_script(8333, 8333, 'Common').
+unicode_script(8334, 8334, 'Common').
+unicode_script(8352, 8385, 'Common').
+unicode_script(8448, 8449, 'Common').
+unicode_script(8450, 8450, 'Common').
+unicode_script(8451, 8454, 'Common').
+unicode_script(8455, 8455, 'Common').
+unicode_script(8456, 8457, 'Common').
+unicode_script(8458, 8467, 'Common').
+unicode_script(8468, 8468, 'Common').
+unicode_script(8469, 8469, 'Common').
+unicode_script(8470, 8471, 'Common').
+unicode_script(8472, 8472, 'Common').
+unicode_script(8473, 8477, 'Common').
+unicode_script(8478, 8483, 'Common').
+unicode_script(8484, 8484, 'Common').
+unicode_script(8485, 8485, 'Common').
+unicode_script(8487, 8487, 'Common').
+unicode_script(8488, 8488, 'Common').
+unicode_script(8489, 8489, 'Common').
+unicode_script(8492, 8493, 'Common').
+unicode_script(8494, 8494, 'Common').
+unicode_script(8495, 8497, 'Common').
+unicode_script(8499, 8500, 'Common').
+unicode_script(8501, 8504, 'Common').
+unicode_script(8505, 8505, 'Common').
+unicode_script(8506, 8507, 'Common').
+unicode_script(8508, 8511, 'Common').
+unicode_script(8512, 8516, 'Common').
+unicode_script(8517, 8521, 'Common').
+unicode_script(8522, 8522, 'Common').
+unicode_script(8523, 8523, 'Common').
+unicode_script(8524, 8525, 'Common').
+unicode_script(8527, 8527, 'Common').
+unicode_script(8528, 8543, 'Common').
+unicode_script(8585, 8585, 'Common').
+unicode_script(8586, 8587, 'Common').
+unicode_script(8592, 8596, 'Common').
+unicode_script(8597, 8601, 'Common').
+unicode_script(8602, 8603, 'Common').
+unicode_script(8604, 8607, 'Common').
+unicode_script(8608, 8608, 'Common').
+unicode_script(8609, 8610, 'Common').
+unicode_script(8611, 8611, 'Common').
+unicode_script(8612, 8613, 'Common').
+unicode_script(8614, 8614, 'Common').
+unicode_script(8615, 8621, 'Common').
+unicode_script(8622, 8622, 'Common').
+unicode_script(8623, 8653, 'Common').
+unicode_script(8654, 8655, 'Common').
+unicode_script(8656, 8657, 'Common').
+unicode_script(8658, 8658, 'Common').
+unicode_script(8659, 8659, 'Common').
+unicode_script(8660, 8660, 'Common').
+unicode_script(8661, 8691, 'Common').
+unicode_script(8692, 8959, 'Common').
+unicode_script(8960, 8967, 'Common').
+unicode_script(8968, 8968, 'Common').
+unicode_script(8969, 8969, 'Common').
+unicode_script(8970, 8970, 'Common').
+unicode_script(8971, 8971, 'Common').
+unicode_script(8972, 8991, 'Common').
+unicode_script(8992, 8993, 'Common').
+unicode_script(8994, 9000, 'Common').
+unicode_script(9001, 9001, 'Common').
+unicode_script(9002, 9002, 'Common').
+unicode_script(9003, 9083, 'Common').
+unicode_script(9084, 9084, 'Common').
+unicode_script(9085, 9114, 'Common').
+unicode_script(9115, 9139, 'Common').
+unicode_script(9140, 9179, 'Common').
+unicode_script(9180, 9185, 'Common').
+unicode_script(9186, 9257, 'Common').
+unicode_script(9280, 9290, 'Common').
+unicode_script(9312, 9371, 'Common').
+unicode_script(9372, 9449, 'Common').
+unicode_script(9450, 9471, 'Common').
+unicode_script(9472, 9654, 'Common').
+unicode_script(9655, 9655, 'Common').
+unicode_script(9656, 9664, 'Common').
+unicode_script(9665, 9665, 'Common').
+unicode_script(9666, 9719, 'Common').
+unicode_script(9720, 9727, 'Common').
+unicode_script(9728, 9838, 'Common').
+unicode_script(9839, 9839, 'Common').
+unicode_script(9840, 10087, 'Common').
+unicode_script(10088, 10088, 'Common').
+unicode_script(10089, 10089, 'Common').
+unicode_script(10090, 10090, 'Common').
+unicode_script(10091, 10091, 'Common').
+unicode_script(10092, 10092, 'Common').
+unicode_script(10093, 10093, 'Common').
+unicode_script(10094, 10094, 'Common').
+unicode_script(10095, 10095, 'Common').
+unicode_script(10096, 10096, 'Common').
+unicode_script(10097, 10097, 'Common').
+unicode_script(10098, 10098, 'Common').
+unicode_script(10099, 10099, 'Common').
+unicode_script(10100, 10100, 'Common').
+unicode_script(10101, 10101, 'Common').
+unicode_script(10102, 10131, 'Common').
+unicode_script(10132, 10175, 'Common').
+unicode_script(10176, 10180, 'Common').
+unicode_script(10181, 10181, 'Common').
+unicode_script(10182, 10182, 'Common').
+unicode_script(10183, 10213, 'Common').
+unicode_script(10214, 10214, 'Common').
+unicode_script(10215, 10215, 'Common').
+unicode_script(10216, 10216, 'Common').
+unicode_script(10217, 10217, 'Common').
+unicode_script(10218, 10218, 'Common').
+unicode_script(10219, 10219, 'Common').
+unicode_script(10220, 10220, 'Common').
+unicode_script(10221, 10221, 'Common').
+unicode_script(10222, 10222, 'Common').
+unicode_script(10223, 10223, 'Common').
+unicode_script(10224, 10239, 'Common').
+unicode_script(10496, 10626, 'Common').
+unicode_script(10627, 10627, 'Common').
+unicode_script(10628, 10628, 'Common').
+unicode_script(10629, 10629, 'Common').
+unicode_script(10630, 10630, 'Common').
+unicode_script(10631, 10631, 'Common').
+unicode_script(10632, 10632, 'Common').
+unicode_script(10633, 10633, 'Common').
+unicode_script(10634, 10634, 'Common').
+unicode_script(10635, 10635, 'Common').
+unicode_script(10636, 10636, 'Common').
+unicode_script(10637, 10637, 'Common').
+unicode_script(10638, 10638, 'Common').
+unicode_script(10639, 10639, 'Common').
+unicode_script(10640, 10640, 'Common').
+unicode_script(10641, 10641, 'Common').
+unicode_script(10642, 10642, 'Common').
+unicode_script(10643, 10643, 'Common').
+unicode_script(10644, 10644, 'Common').
+unicode_script(10645, 10645, 'Common').
+unicode_script(10646, 10646, 'Common').
+unicode_script(10647, 10647, 'Common').
+unicode_script(10648, 10648, 'Common').
+unicode_script(10649, 10711, 'Common').
+unicode_script(10712, 10712, 'Common').
+unicode_script(10713, 10713, 'Common').
+unicode_script(10714, 10714, 'Common').
+unicode_script(10715, 10715, 'Common').
+unicode_script(10716, 10747, 'Common').
+unicode_script(10748, 10748, 'Common').
+unicode_script(10749, 10749, 'Common').
+unicode_script(10750, 11007, 'Common').
+unicode_script(11008, 11055, 'Common').
+unicode_script(11056, 11076, 'Common').
+unicode_script(11077, 11078, 'Common').
+unicode_script(11079, 11084, 'Common').
+unicode_script(11085, 11123, 'Common').
+unicode_script(11126, 11263, 'Common').
+unicode_script(11776, 11777, 'Common').
+unicode_script(11778, 11778, 'Common').
+unicode_script(11779, 11779, 'Common').
+unicode_script(11780, 11780, 'Common').
+unicode_script(11781, 11781, 'Common').
+unicode_script(11782, 11784, 'Common').
+unicode_script(11785, 11785, 'Common').
+unicode_script(11786, 11786, 'Common').
+unicode_script(11787, 11787, 'Common').
+unicode_script(11788, 11788, 'Common').
+unicode_script(11789, 11789, 'Common').
+unicode_script(11790, 11798, 'Common').
+unicode_script(11799, 11799, 'Common').
+unicode_script(11800, 11801, 'Common').
+unicode_script(11802, 11802, 'Common').
+unicode_script(11803, 11803, 'Common').
+unicode_script(11804, 11804, 'Common').
+unicode_script(11805, 11805, 'Common').
+unicode_script(11806, 11807, 'Common').
+unicode_script(11808, 11808, 'Common').
+unicode_script(11809, 11809, 'Common').
+unicode_script(11810, 11810, 'Common').
+unicode_script(11811, 11811, 'Common').
+unicode_script(11812, 11812, 'Common').
+unicode_script(11813, 11813, 'Common').
+unicode_script(11814, 11814, 'Common').
+unicode_script(11815, 11815, 'Common').
+unicode_script(11816, 11816, 'Common').
+unicode_script(11817, 11817, 'Common').
+unicode_script(11818, 11822, 'Common').
+unicode_script(11823, 11823, 'Common').
+unicode_script(11824, 11833, 'Common').
+unicode_script(11834, 11835, 'Common').
+unicode_script(11836, 11839, 'Common').
+unicode_script(11840, 11840, 'Common').
+unicode_script(11841, 11841, 'Common').
+unicode_script(11842, 11842, 'Common').
+unicode_script(11843, 11855, 'Common').
+unicode_script(11856, 11857, 'Common').
+unicode_script(11858, 11860, 'Common').
+unicode_script(11861, 11861, 'Common').
+unicode_script(11862, 11862, 'Common').
+unicode_script(11863, 11863, 'Common').
+unicode_script(11864, 11864, 'Common').
+unicode_script(11865, 11865, 'Common').
+unicode_script(11866, 11866, 'Common').
+unicode_script(11867, 11867, 'Common').
+unicode_script(11868, 11868, 'Common').
+unicode_script(11869, 11869, 'Common').
+unicode_script(12272, 12287, 'Common').
+unicode_script(12288, 12288, 'Common').
+unicode_script(12289, 12291, 'Common').
+unicode_script(12292, 12292, 'Common').
+unicode_script(12294, 12294, 'Common').
+unicode_script(12296, 12296, 'Common').
+unicode_script(12297, 12297, 'Common').
+unicode_script(12298, 12298, 'Common').
+unicode_script(12299, 12299, 'Common').
+unicode_script(12300, 12300, 'Common').
+unicode_script(12301, 12301, 'Common').
+unicode_script(12302, 12302, 'Common').
+unicode_script(12303, 12303, 'Common').
+unicode_script(12304, 12304, 'Common').
+unicode_script(12305, 12305, 'Common').
+unicode_script(12306, 12307, 'Common').
+unicode_script(12308, 12308, 'Common').
+unicode_script(12309, 12309, 'Common').
+unicode_script(12310, 12310, 'Common').
+unicode_script(12311, 12311, 'Common').
+unicode_script(12312, 12312, 'Common').
+unicode_script(12313, 12313, 'Common').
+unicode_script(12314, 12314, 'Common').
+unicode_script(12315, 12315, 'Common').
+unicode_script(12316, 12316, 'Common').
+unicode_script(12317, 12317, 'Common').
+unicode_script(12318, 12319, 'Common').
+unicode_script(12320, 12320, 'Common').
+unicode_script(12336, 12336, 'Common').
+unicode_script(12337, 12341, 'Common').
+unicode_script(12342, 12343, 'Common').
+unicode_script(12348, 12348, 'Common').
+unicode_script(12349, 12349, 'Common').
+unicode_script(12350, 12351, 'Common').
+unicode_script(12443, 12444, 'Common').
+unicode_script(12448, 12448, 'Common').
+unicode_script(12539, 12539, 'Common').
+unicode_script(12540, 12540, 'Common').
+unicode_script(12688, 12689, 'Common').
+unicode_script(12690, 12693, 'Common').
+unicode_script(12694, 12703, 'Common').
+unicode_script(12736, 12773, 'Common').
+unicode_script(12783, 12783, 'Common').
+unicode_script(12832, 12841, 'Common').
+unicode_script(12842, 12871, 'Common').
+unicode_script(12872, 12879, 'Common').
+unicode_script(12880, 12880, 'Common').
+unicode_script(12881, 12895, 'Common').
+unicode_script(12927, 12927, 'Common').
+unicode_script(12928, 12937, 'Common').
+unicode_script(12938, 12976, 'Common').
+unicode_script(12977, 12991, 'Common').
+unicode_script(12992, 13007, 'Common').
+unicode_script(13055, 13055, 'Common').
+unicode_script(13144, 13311, 'Common').
+unicode_script(19904, 19967, 'Common').
+unicode_script(42752, 42774, 'Common').
+unicode_script(42775, 42783, 'Common').
+unicode_script(42784, 42785, 'Common').
+unicode_script(42888, 42888, 'Common').
+unicode_script(42889, 42890, 'Common').
+unicode_script(43056, 43061, 'Common').
+unicode_script(43062, 43063, 'Common').
+unicode_script(43064, 43064, 'Common').
+unicode_script(43065, 43065, 'Common').
+unicode_script(43310, 43310, 'Common').
+unicode_script(43471, 43471, 'Common').
+unicode_script(43867, 43867, 'Common').
+unicode_script(43882, 43883, 'Common').
+unicode_script(64830, 64830, 'Common').
+unicode_script(64831, 64831, 'Common').
+unicode_script(65040, 65046, 'Common').
+unicode_script(65047, 65047, 'Common').
+unicode_script(65048, 65048, 'Common').
+unicode_script(65049, 65049, 'Common').
+unicode_script(65072, 65072, 'Common').
+unicode_script(65073, 65074, 'Common').
+unicode_script(65075, 65076, 'Common').
+unicode_script(65077, 65077, 'Common').
+unicode_script(65078, 65078, 'Common').
+unicode_script(65079, 65079, 'Common').
+unicode_script(65080, 65080, 'Common').
+unicode_script(65081, 65081, 'Common').
+unicode_script(65082, 65082, 'Common').
+unicode_script(65083, 65083, 'Common').
+unicode_script(65084, 65084, 'Common').
+unicode_script(65085, 65085, 'Common').
+unicode_script(65086, 65086, 'Common').
+unicode_script(65087, 65087, 'Common').
+unicode_script(65088, 65088, 'Common').
+unicode_script(65089, 65089, 'Common').
+unicode_script(65090, 65090, 'Common').
+unicode_script(65091, 65091, 'Common').
+unicode_script(65092, 65092, 'Common').
+unicode_script(65093, 65094, 'Common').
+unicode_script(65095, 65095, 'Common').
+unicode_script(65096, 65096, 'Common').
+unicode_script(65097, 65100, 'Common').
+unicode_script(65101, 65103, 'Common').
+unicode_script(65104, 65106, 'Common').
+unicode_script(65108, 65111, 'Common').
+unicode_script(65112, 65112, 'Common').
+unicode_script(65113, 65113, 'Common').
+unicode_script(65114, 65114, 'Common').
+unicode_script(65115, 65115, 'Common').
+unicode_script(65116, 65116, 'Common').
+unicode_script(65117, 65117, 'Common').
+unicode_script(65118, 65118, 'Common').
+unicode_script(65119, 65121, 'Common').
+unicode_script(65122, 65122, 'Common').
+unicode_script(65123, 65123, 'Common').
+unicode_script(65124, 65126, 'Common').
+unicode_script(65128, 65128, 'Common').
+unicode_script(65129, 65129, 'Common').
+unicode_script(65130, 65131, 'Common').
+unicode_script(65279, 65279, 'Common').
+unicode_script(65281, 65283, 'Common').
+unicode_script(65284, 65284, 'Common').
+unicode_script(65285, 65287, 'Common').
+unicode_script(65288, 65288, 'Common').
+unicode_script(65289, 65289, 'Common').
+unicode_script(65290, 65290, 'Common').
+unicode_script(65291, 65291, 'Common').
+unicode_script(65292, 65292, 'Common').
+unicode_script(65293, 65293, 'Common').
+unicode_script(65294, 65295, 'Common').
+unicode_script(65296, 65305, 'Common').
+unicode_script(65306, 65307, 'Common').
+unicode_script(65308, 65310, 'Common').
+unicode_script(65311, 65312, 'Common').
+unicode_script(65339, 65339, 'Common').
+unicode_script(65340, 65340, 'Common').
+unicode_script(65341, 65341, 'Common').
+unicode_script(65342, 65342, 'Common').
+unicode_script(65343, 65343, 'Common').
+unicode_script(65344, 65344, 'Common').
+unicode_script(65371, 65371, 'Common').
+unicode_script(65372, 65372, 'Common').
+unicode_script(65373, 65373, 'Common').
+unicode_script(65374, 65374, 'Common').
+unicode_script(65375, 65375, 'Common').
+unicode_script(65376, 65376, 'Common').
+unicode_script(65377, 65377, 'Common').
+unicode_script(65378, 65378, 'Common').
+unicode_script(65379, 65379, 'Common').
+unicode_script(65380, 65381, 'Common').
+unicode_script(65392, 65392, 'Common').
+unicode_script(65438, 65439, 'Common').
+unicode_script(65504, 65505, 'Common').
+unicode_script(65506, 65506, 'Common').
+unicode_script(65507, 65507, 'Common').
+unicode_script(65508, 65508, 'Common').
+unicode_script(65509, 65510, 'Common').
+unicode_script(65512, 65512, 'Common').
+unicode_script(65513, 65516, 'Common').
+unicode_script(65517, 65518, 'Common').
+unicode_script(65529, 65531, 'Common').
+unicode_script(65532, 65533, 'Common').
+unicode_script(65792, 65794, 'Common').
+unicode_script(65799, 65843, 'Common').
+unicode_script(65847, 65855, 'Common').
+unicode_script(65936, 65948, 'Common').
+unicode_script(66000, 66044, 'Common').
+unicode_script(66273, 66299, 'Common').
+unicode_script(113824, 113827, 'Common').
+unicode_script(117760, 117999, 'Common').
+unicode_script(118000, 118009, 'Common').
+unicode_script(118010, 118012, 'Common').
+unicode_script(118016, 118451, 'Common').
+unicode_script(118458, 118480, 'Common').
+unicode_script(118496, 118511, 'Common').
+unicode_script(118512, 118512, 'Common').
+unicode_script(118608, 118723, 'Common').
+unicode_script(118784, 119029, 'Common').
+unicode_script(119040, 119078, 'Common').
+unicode_script(119081, 119140, 'Common').
+unicode_script(119141, 119142, 'Common').
+unicode_script(119146, 119148, 'Common').
+unicode_script(119149, 119154, 'Common').
+unicode_script(119155, 119162, 'Common').
+unicode_script(119171, 119172, 'Common').
+unicode_script(119180, 119209, 'Common').
+unicode_script(119214, 119274, 'Common').
+unicode_script(119488, 119507, 'Common').
+unicode_script(119520, 119539, 'Common').
+unicode_script(119552, 119638, 'Common').
+unicode_script(119648, 119672, 'Common').
+unicode_script(119808, 119892, 'Common').
+unicode_script(119894, 119964, 'Common').
+unicode_script(119966, 119967, 'Common').
+unicode_script(119970, 119970, 'Common').
+unicode_script(119973, 119974, 'Common').
+unicode_script(119977, 119980, 'Common').
+unicode_script(119982, 119993, 'Common').
+unicode_script(119995, 119995, 'Common').
+unicode_script(119997, 120003, 'Common').
+unicode_script(120005, 120069, 'Common').
+unicode_script(120071, 120074, 'Common').
+unicode_script(120077, 120084, 'Common').
+unicode_script(120086, 120092, 'Common').
+unicode_script(120094, 120121, 'Common').
+unicode_script(120123, 120126, 'Common').
+unicode_script(120128, 120132, 'Common').
+unicode_script(120134, 120134, 'Common').
+unicode_script(120138, 120144, 'Common').
+unicode_script(120146, 120485, 'Common').
+unicode_script(120488, 120512, 'Common').
+unicode_script(120513, 120513, 'Common').
+unicode_script(120514, 120538, 'Common').
+unicode_script(120539, 120539, 'Common').
+unicode_script(120540, 120570, 'Common').
+unicode_script(120571, 120571, 'Common').
+unicode_script(120572, 120596, 'Common').
+unicode_script(120597, 120597, 'Common').
+unicode_script(120598, 120628, 'Common').
+unicode_script(120629, 120629, 'Common').
+unicode_script(120630, 120654, 'Common').
+unicode_script(120655, 120655, 'Common').
+unicode_script(120656, 120686, 'Common').
+unicode_script(120687, 120687, 'Common').
+unicode_script(120688, 120712, 'Common').
+unicode_script(120713, 120713, 'Common').
+unicode_script(120714, 120744, 'Common').
+unicode_script(120745, 120745, 'Common').
+unicode_script(120746, 120770, 'Common').
+unicode_script(120771, 120771, 'Common').
+unicode_script(120772, 120779, 'Common').
+unicode_script(120782, 120831, 'Common').
+unicode_script(126065, 126123, 'Common').
+unicode_script(126124, 126124, 'Common').
+unicode_script(126125, 126127, 'Common').
+unicode_script(126128, 126128, 'Common').
+unicode_script(126129, 126132, 'Common').
+unicode_script(126209, 126253, 'Common').
+unicode_script(126254, 126254, 'Common').
+unicode_script(126255, 126269, 'Common').
+unicode_script(126976, 127019, 'Common').
+unicode_script(127024, 127123, 'Common').
+unicode_script(127136, 127150, 'Common').
+unicode_script(127153, 127167, 'Common').
+unicode_script(127169, 127183, 'Common').
+unicode_script(127185, 127221, 'Common').
+unicode_script(127232, 127244, 'Common').
+unicode_script(127245, 127405, 'Common').
+unicode_script(127462, 127487, 'Common').
+unicode_script(127489, 127490, 'Common').
+unicode_script(127504, 127547, 'Common').
+unicode_script(127552, 127560, 'Common').
+unicode_script(127568, 127569, 'Common').
+unicode_script(127584, 127589, 'Common').
+unicode_script(127744, 127994, 'Common').
+unicode_script(127995, 127999, 'Common').
+unicode_script(128000, 128728, 'Common').
+unicode_script(128732, 128748, 'Common').
+unicode_script(128752, 128764, 'Common').
+unicode_script(128768, 128985, 'Common').
+unicode_script(128992, 129003, 'Common').
+unicode_script(129008, 129008, 'Common').
+unicode_script(129024, 129035, 'Common').
+unicode_script(129040, 129095, 'Common').
+unicode_script(129104, 129113, 'Common').
+unicode_script(129120, 129159, 'Common').
+unicode_script(129168, 129197, 'Common').
+unicode_script(129200, 129211, 'Common').
+unicode_script(129216, 129217, 'Common').
+unicode_script(129232, 129240, 'Common').
+unicode_script(129280, 129623, 'Common').
+unicode_script(129632, 129645, 'Common').
+unicode_script(129648, 129660, 'Common').
+unicode_script(129664, 129674, 'Common').
+unicode_script(129678, 129734, 'Common').
+unicode_script(129736, 129736, 'Common').
+unicode_script(129741, 129756, 'Common').
+unicode_script(129759, 129770, 'Common').
+unicode_script(129775, 129784, 'Common').
+unicode_script(129792, 129938, 'Common').
+unicode_script(129940, 130031, 'Common').
+unicode_script(130032, 130041, 'Common').
+unicode_script(130042, 130042, 'Common').
+unicode_script(917505, 917505, 'Common').
+unicode_script(917536, 917631, 'Common').
+unicode_script(65, 90, 'Latin').
+unicode_script(97, 122, 'Latin').
+unicode_script(170, 170, 'Latin').
+unicode_script(186, 186, 'Latin').
+unicode_script(192, 214, 'Latin').
+unicode_script(216, 246, 'Latin').
+unicode_script(248, 442, 'Latin').
+unicode_script(443, 443, 'Latin').
+unicode_script(444, 447, 'Latin').
+unicode_script(448, 451, 'Latin').
+unicode_script(452, 659, 'Latin').
+unicode_script(660, 661, 'Latin').
+unicode_script(662, 687, 'Latin').
+unicode_script(688, 696, 'Latin').
+unicode_script(736, 740, 'Latin').
+unicode_script(7424, 7461, 'Latin').
+unicode_script(7468, 7516, 'Latin').
+unicode_script(7522, 7525, 'Latin').
+unicode_script(7531, 7543, 'Latin').
+unicode_script(7545, 7578, 'Latin').
+unicode_script(7579, 7614, 'Latin').
+unicode_script(7680, 7935, 'Latin').
+unicode_script(8305, 8305, 'Latin').
+unicode_script(8319, 8319, 'Latin').
+unicode_script(8336, 8348, 'Latin').
+unicode_script(8490, 8491, 'Latin').
+unicode_script(8498, 8498, 'Latin').
+unicode_script(8526, 8526, 'Latin').
+unicode_script(8544, 8578, 'Latin').
+unicode_script(8579, 8580, 'Latin').
+unicode_script(8581, 8584, 'Latin').
+unicode_script(11360, 11387, 'Latin').
+unicode_script(11388, 11389, 'Latin').
+unicode_script(11390, 11391, 'Latin').
+unicode_script(42786, 42863, 'Latin').
+unicode_script(42864, 42864, 'Latin').
+unicode_script(42865, 42887, 'Latin').
+unicode_script(42891, 42894, 'Latin').
+unicode_script(42895, 42895, 'Latin').
+unicode_script(42896, 42972, 'Latin').
+unicode_script(42993, 42996, 'Latin').
+unicode_script(42997, 42998, 'Latin').
+unicode_script(42999, 42999, 'Latin').
+unicode_script(43000, 43001, 'Latin').
+unicode_script(43002, 43002, 'Latin').
+unicode_script(43003, 43007, 'Latin').
+unicode_script(43824, 43866, 'Latin').
+unicode_script(43868, 43871, 'Latin').
+unicode_script(43872, 43876, 'Latin').
+unicode_script(43878, 43880, 'Latin').
+unicode_script(43881, 43881, 'Latin').
+unicode_script(64256, 64262, 'Latin').
+unicode_script(65313, 65338, 'Latin').
+unicode_script(65345, 65370, 'Latin').
+unicode_script(67456, 67461, 'Latin').
+unicode_script(67463, 67504, 'Latin').
+unicode_script(67506, 67514, 'Latin').
+unicode_script(122624, 122633, 'Latin').
+unicode_script(122634, 122634, 'Latin').
+unicode_script(122635, 122654, 'Latin').
+unicode_script(122661, 122666, 'Latin').
+unicode_script(880, 883, 'Greek').
+unicode_script(885, 885, 'Greek').
+unicode_script(886, 887, 'Greek').
+unicode_script(890, 890, 'Greek').
+unicode_script(891, 893, 'Greek').
+unicode_script(895, 895, 'Greek').
+unicode_script(900, 900, 'Greek').
+unicode_script(902, 902, 'Greek').
+unicode_script(904, 906, 'Greek').
+unicode_script(908, 908, 'Greek').
+unicode_script(910, 929, 'Greek').
+unicode_script(931, 993, 'Greek').
+unicode_script(1008, 1013, 'Greek').
+unicode_script(1014, 1014, 'Greek').
+unicode_script(1015, 1023, 'Greek').
+unicode_script(7462, 7466, 'Greek').
+unicode_script(7517, 7521, 'Greek').
+unicode_script(7526, 7530, 'Greek').
+unicode_script(7615, 7615, 'Greek').
+unicode_script(7936, 7957, 'Greek').
+unicode_script(7960, 7965, 'Greek').
+unicode_script(7968, 8005, 'Greek').
+unicode_script(8008, 8013, 'Greek').
+unicode_script(8016, 8023, 'Greek').
+unicode_script(8025, 8025, 'Greek').
+unicode_script(8027, 8027, 'Greek').
+unicode_script(8029, 8029, 'Greek').
+unicode_script(8031, 8061, 'Greek').
+unicode_script(8064, 8116, 'Greek').
+unicode_script(8118, 8124, 'Greek').
+unicode_script(8125, 8125, 'Greek').
+unicode_script(8126, 8126, 'Greek').
+unicode_script(8127, 8129, 'Greek').
+unicode_script(8130, 8132, 'Greek').
+unicode_script(8134, 8140, 'Greek').
+unicode_script(8141, 8143, 'Greek').
+unicode_script(8144, 8147, 'Greek').
+unicode_script(8150, 8155, 'Greek').
+unicode_script(8157, 8159, 'Greek').
+unicode_script(8160, 8172, 'Greek').
+unicode_script(8173, 8175, 'Greek').
+unicode_script(8178, 8180, 'Greek').
+unicode_script(8182, 8188, 'Greek').
+unicode_script(8189, 8190, 'Greek').
+unicode_script(8486, 8486, 'Greek').
+unicode_script(43877, 43877, 'Greek').
+unicode_script(65856, 65908, 'Greek').
+unicode_script(65909, 65912, 'Greek').
+unicode_script(65913, 65929, 'Greek').
+unicode_script(65930, 65931, 'Greek').
+unicode_script(65932, 65934, 'Greek').
+unicode_script(65952, 65952, 'Greek').
+unicode_script(119296, 119361, 'Greek').
+unicode_script(119362, 119364, 'Greek').
+unicode_script(119365, 119365, 'Greek').
+unicode_script(1024, 1153, 'Cyrillic').
+unicode_script(1154, 1154, 'Cyrillic').
+unicode_script(1155, 1156, 'Cyrillic').
+unicode_script(1159, 1159, 'Cyrillic').
+unicode_script(1160, 1161, 'Cyrillic').
+unicode_script(1162, 1327, 'Cyrillic').
+unicode_script(7296, 7306, 'Cyrillic').
+unicode_script(7467, 7467, 'Cyrillic').
+unicode_script(7544, 7544, 'Cyrillic').
+unicode_script(11744, 11775, 'Cyrillic').
+unicode_script(42560, 42605, 'Cyrillic').
+unicode_script(42606, 42606, 'Cyrillic').
+unicode_script(42607, 42607, 'Cyrillic').
+unicode_script(42608, 42610, 'Cyrillic').
+unicode_script(42611, 42611, 'Cyrillic').
+unicode_script(42612, 42621, 'Cyrillic').
+unicode_script(42622, 42622, 'Cyrillic').
+unicode_script(42623, 42623, 'Cyrillic').
+unicode_script(42624, 42651, 'Cyrillic').
+unicode_script(42652, 42653, 'Cyrillic').
+unicode_script(42654, 42655, 'Cyrillic').
+unicode_script(65070, 65071, 'Cyrillic').
+unicode_script(122928, 122989, 'Cyrillic').
+unicode_script(123023, 123023, 'Cyrillic').
+unicode_script(1329, 1366, 'Armenian').
+unicode_script(1369, 1369, 'Armenian').
+unicode_script(1370, 1375, 'Armenian').
+unicode_script(1376, 1416, 'Armenian').
+unicode_script(1417, 1417, 'Armenian').
+unicode_script(1418, 1418, 'Armenian').
+unicode_script(1421, 1422, 'Armenian').
+unicode_script(1423, 1423, 'Armenian').
+unicode_script(64275, 64279, 'Armenian').
+unicode_script(1425, 1469, 'Hebrew').
+unicode_script(1470, 1470, 'Hebrew').
+unicode_script(1471, 1471, 'Hebrew').
+unicode_script(1472, 1472, 'Hebrew').
+unicode_script(1473, 1474, 'Hebrew').
+unicode_script(1475, 1475, 'Hebrew').
+unicode_script(1476, 1477, 'Hebrew').
+unicode_script(1478, 1478, 'Hebrew').
+unicode_script(1479, 1479, 'Hebrew').
+unicode_script(1488, 1514, 'Hebrew').
+unicode_script(1519, 1522, 'Hebrew').
+unicode_script(1523, 1524, 'Hebrew').
+unicode_script(64285, 64285, 'Hebrew').
+unicode_script(64286, 64286, 'Hebrew').
+unicode_script(64287, 64296, 'Hebrew').
+unicode_script(64297, 64297, 'Hebrew').
+unicode_script(64298, 64310, 'Hebrew').
+unicode_script(64312, 64316, 'Hebrew').
+unicode_script(64318, 64318, 'Hebrew').
+unicode_script(64320, 64321, 'Hebrew').
+unicode_script(64323, 64324, 'Hebrew').
+unicode_script(64326, 64335, 'Hebrew').
+unicode_script(1536, 1540, 'Arabic').
+unicode_script(1542, 1544, 'Arabic').
+unicode_script(1545, 1546, 'Arabic').
+unicode_script(1547, 1547, 'Arabic').
+unicode_script(1549, 1549, 'Arabic').
+unicode_script(1550, 1551, 'Arabic').
+unicode_script(1552, 1562, 'Arabic').
+unicode_script(1564, 1564, 'Arabic').
+unicode_script(1565, 1566, 'Arabic').
+unicode_script(1568, 1599, 'Arabic').
+unicode_script(1601, 1610, 'Arabic').
+unicode_script(1622, 1631, 'Arabic').
+unicode_script(1632, 1641, 'Arabic').
+unicode_script(1642, 1645, 'Arabic').
+unicode_script(1646, 1647, 'Arabic').
+unicode_script(1649, 1747, 'Arabic').
+unicode_script(1748, 1748, 'Arabic').
+unicode_script(1749, 1749, 'Arabic').
+unicode_script(1750, 1756, 'Arabic').
+unicode_script(1758, 1758, 'Arabic').
+unicode_script(1759, 1764, 'Arabic').
+unicode_script(1765, 1766, 'Arabic').
+unicode_script(1767, 1768, 'Arabic').
+unicode_script(1769, 1769, 'Arabic').
+unicode_script(1770, 1773, 'Arabic').
+unicode_script(1774, 1775, 'Arabic').
+unicode_script(1776, 1785, 'Arabic').
+unicode_script(1786, 1788, 'Arabic').
+unicode_script(1789, 1790, 'Arabic').
+unicode_script(1791, 1791, 'Arabic').
+unicode_script(1872, 1919, 'Arabic').
+unicode_script(2160, 2183, 'Arabic').
+unicode_script(2184, 2184, 'Arabic').
+unicode_script(2185, 2191, 'Arabic').
+unicode_script(2192, 2193, 'Arabic').
+unicode_script(2199, 2207, 'Arabic').
+unicode_script(2208, 2248, 'Arabic').
+unicode_script(2249, 2249, 'Arabic').
+unicode_script(2250, 2273, 'Arabic').
+unicode_script(2275, 2303, 'Arabic').
+unicode_script(64336, 64433, 'Arabic').
+unicode_script(64434, 64450, 'Arabic').
+unicode_script(64451, 64466, 'Arabic').
+unicode_script(64467, 64829, 'Arabic').
+unicode_script(64832, 64847, 'Arabic').
+unicode_script(64848, 64911, 'Arabic').
+unicode_script(64912, 64913, 'Arabic').
+unicode_script(64914, 64967, 'Arabic').
+unicode_script(64968, 64975, 'Arabic').
+unicode_script(65008, 65019, 'Arabic').
+unicode_script(65020, 65020, 'Arabic').
+unicode_script(65021, 65023, 'Arabic').
+unicode_script(65136, 65140, 'Arabic').
+unicode_script(65142, 65276, 'Arabic').
+unicode_script(69216, 69246, 'Arabic').
+unicode_script(69314, 69316, 'Arabic').
+unicode_script(69317, 69317, 'Arabic').
+unicode_script(69318, 69319, 'Arabic').
+unicode_script(69328, 69328, 'Arabic').
+unicode_script(69329, 69336, 'Arabic').
+unicode_script(69370, 69375, 'Arabic').
+unicode_script(126464, 126467, 'Arabic').
+unicode_script(126469, 126495, 'Arabic').
+unicode_script(126497, 126498, 'Arabic').
+unicode_script(126500, 126500, 'Arabic').
+unicode_script(126503, 126503, 'Arabic').
+unicode_script(126505, 126514, 'Arabic').
+unicode_script(126516, 126519, 'Arabic').
+unicode_script(126521, 126521, 'Arabic').
+unicode_script(126523, 126523, 'Arabic').
+unicode_script(126530, 126530, 'Arabic').
+unicode_script(126535, 126535, 'Arabic').
+unicode_script(126537, 126537, 'Arabic').
+unicode_script(126539, 126539, 'Arabic').
+unicode_script(126541, 126543, 'Arabic').
+unicode_script(126545, 126546, 'Arabic').
+unicode_script(126548, 126548, 'Arabic').
+unicode_script(126551, 126551, 'Arabic').
+unicode_script(126553, 126553, 'Arabic').
+unicode_script(126555, 126555, 'Arabic').
+unicode_script(126557, 126557, 'Arabic').
+unicode_script(126559, 126559, 'Arabic').
+unicode_script(126561, 126562, 'Arabic').
+unicode_script(126564, 126564, 'Arabic').
+unicode_script(126567, 126570, 'Arabic').
+unicode_script(126572, 126578, 'Arabic').
+unicode_script(126580, 126583, 'Arabic').
+unicode_script(126585, 126588, 'Arabic').
+unicode_script(126590, 126590, 'Arabic').
+unicode_script(126592, 126601, 'Arabic').
+unicode_script(126603, 126619, 'Arabic').
+unicode_script(126625, 126627, 'Arabic').
+unicode_script(126629, 126633, 'Arabic').
+unicode_script(126635, 126651, 'Arabic').
+unicode_script(126704, 126705, 'Arabic').
+unicode_script(1792, 1805, 'Syriac').
+unicode_script(1807, 1807, 'Syriac').
+unicode_script(1808, 1808, 'Syriac').
+unicode_script(1809, 1809, 'Syriac').
+unicode_script(1810, 1839, 'Syriac').
+unicode_script(1840, 1866, 'Syriac').
+unicode_script(1869, 1871, 'Syriac').
+unicode_script(2144, 2154, 'Syriac').
+unicode_script(1920, 1957, 'Thaana').
+unicode_script(1958, 1968, 'Thaana').
+unicode_script(1969, 1969, 'Thaana').
+unicode_script(2304, 2306, 'Devanagari').
+unicode_script(2307, 2307, 'Devanagari').
+unicode_script(2308, 2361, 'Devanagari').
+unicode_script(2362, 2362, 'Devanagari').
+unicode_script(2363, 2363, 'Devanagari').
+unicode_script(2364, 2364, 'Devanagari').
+unicode_script(2365, 2365, 'Devanagari').
+unicode_script(2366, 2368, 'Devanagari').
+unicode_script(2369, 2376, 'Devanagari').
+unicode_script(2377, 2380, 'Devanagari').
+unicode_script(2381, 2381, 'Devanagari').
+unicode_script(2382, 2383, 'Devanagari').
+unicode_script(2384, 2384, 'Devanagari').
+unicode_script(2389, 2391, 'Devanagari').
+unicode_script(2392, 2401, 'Devanagari').
+unicode_script(2402, 2403, 'Devanagari').
+unicode_script(2406, 2415, 'Devanagari').
+unicode_script(2416, 2416, 'Devanagari').
+unicode_script(2417, 2417, 'Devanagari').
+unicode_script(2418, 2431, 'Devanagari').
+unicode_script(43232, 43249, 'Devanagari').
+unicode_script(43250, 43255, 'Devanagari').
+unicode_script(43256, 43258, 'Devanagari').
+unicode_script(43259, 43259, 'Devanagari').
+unicode_script(43260, 43260, 'Devanagari').
+unicode_script(43261, 43262, 'Devanagari').
+unicode_script(43263, 43263, 'Devanagari').
+unicode_script(72448, 72457, 'Devanagari').
+unicode_script(2432, 2432, 'Bengali').
+unicode_script(2433, 2433, 'Bengali').
+unicode_script(2434, 2435, 'Bengali').
+unicode_script(2437, 2444, 'Bengali').
+unicode_script(2447, 2448, 'Bengali').
+unicode_script(2451, 2472, 'Bengali').
+unicode_script(2474, 2480, 'Bengali').
+unicode_script(2482, 2482, 'Bengali').
+unicode_script(2486, 2489, 'Bengali').
+unicode_script(2492, 2492, 'Bengali').
+unicode_script(2493, 2493, 'Bengali').
+unicode_script(2494, 2496, 'Bengali').
+unicode_script(2497, 2500, 'Bengali').
+unicode_script(2503, 2504, 'Bengali').
+unicode_script(2507, 2508, 'Bengali').
+unicode_script(2509, 2509, 'Bengali').
+unicode_script(2510, 2510, 'Bengali').
+unicode_script(2519, 2519, 'Bengali').
+unicode_script(2524, 2525, 'Bengali').
+unicode_script(2527, 2529, 'Bengali').
+unicode_script(2530, 2531, 'Bengali').
+unicode_script(2534, 2543, 'Bengali').
+unicode_script(2544, 2545, 'Bengali').
+unicode_script(2546, 2547, 'Bengali').
+unicode_script(2548, 2553, 'Bengali').
+unicode_script(2554, 2554, 'Bengali').
+unicode_script(2555, 2555, 'Bengali').
+unicode_script(2556, 2556, 'Bengali').
+unicode_script(2557, 2557, 'Bengali').
+unicode_script(2558, 2558, 'Bengali').
+unicode_script(2561, 2562, 'Gurmukhi').
+unicode_script(2563, 2563, 'Gurmukhi').
+unicode_script(2565, 2570, 'Gurmukhi').
+unicode_script(2575, 2576, 'Gurmukhi').
+unicode_script(2579, 2600, 'Gurmukhi').
+unicode_script(2602, 2608, 'Gurmukhi').
+unicode_script(2610, 2611, 'Gurmukhi').
+unicode_script(2613, 2614, 'Gurmukhi').
+unicode_script(2616, 2617, 'Gurmukhi').
+unicode_script(2620, 2620, 'Gurmukhi').
+unicode_script(2622, 2624, 'Gurmukhi').
+unicode_script(2625, 2626, 'Gurmukhi').
+unicode_script(2631, 2632, 'Gurmukhi').
+unicode_script(2635, 2637, 'Gurmukhi').
+unicode_script(2641, 2641, 'Gurmukhi').
+unicode_script(2649, 2652, 'Gurmukhi').
+unicode_script(2654, 2654, 'Gurmukhi').
+unicode_script(2662, 2671, 'Gurmukhi').
+unicode_script(2672, 2673, 'Gurmukhi').
+unicode_script(2674, 2676, 'Gurmukhi').
+unicode_script(2677, 2677, 'Gurmukhi').
+unicode_script(2678, 2678, 'Gurmukhi').
+unicode_script(2689, 2690, 'Gujarati').
+unicode_script(2691, 2691, 'Gujarati').
+unicode_script(2693, 2701, 'Gujarati').
+unicode_script(2703, 2705, 'Gujarati').
+unicode_script(2707, 2728, 'Gujarati').
+unicode_script(2730, 2736, 'Gujarati').
+unicode_script(2738, 2739, 'Gujarati').
+unicode_script(2741, 2745, 'Gujarati').
+unicode_script(2748, 2748, 'Gujarati').
+unicode_script(2749, 2749, 'Gujarati').
+unicode_script(2750, 2752, 'Gujarati').
+unicode_script(2753, 2757, 'Gujarati').
+unicode_script(2759, 2760, 'Gujarati').
+unicode_script(2761, 2761, 'Gujarati').
+unicode_script(2763, 2764, 'Gujarati').
+unicode_script(2765, 2765, 'Gujarati').
+unicode_script(2768, 2768, 'Gujarati').
+unicode_script(2784, 2785, 'Gujarati').
+unicode_script(2786, 2787, 'Gujarati').
+unicode_script(2790, 2799, 'Gujarati').
+unicode_script(2800, 2800, 'Gujarati').
+unicode_script(2801, 2801, 'Gujarati').
+unicode_script(2809, 2809, 'Gujarati').
+unicode_script(2810, 2815, 'Gujarati').
+unicode_script(2817, 2817, 'Oriya').
+unicode_script(2818, 2819, 'Oriya').
+unicode_script(2821, 2828, 'Oriya').
+unicode_script(2831, 2832, 'Oriya').
+unicode_script(2835, 2856, 'Oriya').
+unicode_script(2858, 2864, 'Oriya').
+unicode_script(2866, 2867, 'Oriya').
+unicode_script(2869, 2873, 'Oriya').
+unicode_script(2876, 2876, 'Oriya').
+unicode_script(2877, 2877, 'Oriya').
+unicode_script(2878, 2878, 'Oriya').
+unicode_script(2879, 2879, 'Oriya').
+unicode_script(2880, 2880, 'Oriya').
+unicode_script(2881, 2884, 'Oriya').
+unicode_script(2887, 2888, 'Oriya').
+unicode_script(2891, 2892, 'Oriya').
+unicode_script(2893, 2893, 'Oriya').
+unicode_script(2901, 2902, 'Oriya').
+unicode_script(2903, 2903, 'Oriya').
+unicode_script(2908, 2909, 'Oriya').
+unicode_script(2911, 2913, 'Oriya').
+unicode_script(2914, 2915, 'Oriya').
+unicode_script(2918, 2927, 'Oriya').
+unicode_script(2928, 2928, 'Oriya').
+unicode_script(2929, 2929, 'Oriya').
+unicode_script(2930, 2935, 'Oriya').
+unicode_script(2946, 2946, 'Tamil').
+unicode_script(2947, 2947, 'Tamil').
+unicode_script(2949, 2954, 'Tamil').
+unicode_script(2958, 2960, 'Tamil').
+unicode_script(2962, 2965, 'Tamil').
+unicode_script(2969, 2970, 'Tamil').
+unicode_script(2972, 2972, 'Tamil').
+unicode_script(2974, 2975, 'Tamil').
+unicode_script(2979, 2980, 'Tamil').
+unicode_script(2984, 2986, 'Tamil').
+unicode_script(2990, 3001, 'Tamil').
+unicode_script(3006, 3007, 'Tamil').
+unicode_script(3008, 3008, 'Tamil').
+unicode_script(3009, 3010, 'Tamil').
+unicode_script(3014, 3016, 'Tamil').
+unicode_script(3018, 3020, 'Tamil').
+unicode_script(3021, 3021, 'Tamil').
+unicode_script(3024, 3024, 'Tamil').
+unicode_script(3031, 3031, 'Tamil').
+unicode_script(3046, 3055, 'Tamil').
+unicode_script(3056, 3058, 'Tamil').
+unicode_script(3059, 3064, 'Tamil').
+unicode_script(3065, 3065, 'Tamil').
+unicode_script(3066, 3066, 'Tamil').
+unicode_script(73664, 73684, 'Tamil').
+unicode_script(73685, 73692, 'Tamil').
+unicode_script(73693, 73696, 'Tamil').
+unicode_script(73697, 73713, 'Tamil').
+unicode_script(73727, 73727, 'Tamil').
+unicode_script(3072, 3072, 'Telugu').
+unicode_script(3073, 3075, 'Telugu').
+unicode_script(3076, 3076, 'Telugu').
+unicode_script(3077, 3084, 'Telugu').
+unicode_script(3086, 3088, 'Telugu').
+unicode_script(3090, 3112, 'Telugu').
+unicode_script(3114, 3129, 'Telugu').
+unicode_script(3132, 3132, 'Telugu').
+unicode_script(3133, 3133, 'Telugu').
+unicode_script(3134, 3136, 'Telugu').
+unicode_script(3137, 3140, 'Telugu').
+unicode_script(3142, 3144, 'Telugu').
+unicode_script(3146, 3149, 'Telugu').
+unicode_script(3157, 3158, 'Telugu').
+unicode_script(3160, 3162, 'Telugu').
+unicode_script(3164, 3165, 'Telugu').
+unicode_script(3168, 3169, 'Telugu').
+unicode_script(3170, 3171, 'Telugu').
+unicode_script(3174, 3183, 'Telugu').
+unicode_script(3191, 3191, 'Telugu').
+unicode_script(3192, 3198, 'Telugu').
+unicode_script(3199, 3199, 'Telugu').
+unicode_script(3200, 3200, 'Kannada').
+unicode_script(3201, 3201, 'Kannada').
+unicode_script(3202, 3203, 'Kannada').
+unicode_script(3204, 3204, 'Kannada').
+unicode_script(3205, 3212, 'Kannada').
+unicode_script(3214, 3216, 'Kannada').
+unicode_script(3218, 3240, 'Kannada').
+unicode_script(3242, 3251, 'Kannada').
+unicode_script(3253, 3257, 'Kannada').
+unicode_script(3260, 3260, 'Kannada').
+unicode_script(3261, 3261, 'Kannada').
+unicode_script(3262, 3262, 'Kannada').
+unicode_script(3263, 3263, 'Kannada').
+unicode_script(3264, 3268, 'Kannada').
+unicode_script(3270, 3270, 'Kannada').
+unicode_script(3271, 3272, 'Kannada').
+unicode_script(3274, 3275, 'Kannada').
+unicode_script(3276, 3277, 'Kannada').
+unicode_script(3285, 3286, 'Kannada').
+unicode_script(3292, 3294, 'Kannada').
+unicode_script(3296, 3297, 'Kannada').
+unicode_script(3298, 3299, 'Kannada').
+unicode_script(3302, 3311, 'Kannada').
+unicode_script(3313, 3314, 'Kannada').
+unicode_script(3315, 3315, 'Kannada').
+unicode_script(3328, 3329, 'Malayalam').
+unicode_script(3330, 3331, 'Malayalam').
+unicode_script(3332, 3340, 'Malayalam').
+unicode_script(3342, 3344, 'Malayalam').
+unicode_script(3346, 3386, 'Malayalam').
+unicode_script(3387, 3388, 'Malayalam').
+unicode_script(3389, 3389, 'Malayalam').
+unicode_script(3390, 3392, 'Malayalam').
+unicode_script(3393, 3396, 'Malayalam').
+unicode_script(3398, 3400, 'Malayalam').
+unicode_script(3402, 3404, 'Malayalam').
+unicode_script(3405, 3405, 'Malayalam').
+unicode_script(3406, 3406, 'Malayalam').
+unicode_script(3407, 3407, 'Malayalam').
+unicode_script(3412, 3414, 'Malayalam').
+unicode_script(3415, 3415, 'Malayalam').
+unicode_script(3416, 3422, 'Malayalam').
+unicode_script(3423, 3425, 'Malayalam').
+unicode_script(3426, 3427, 'Malayalam').
+unicode_script(3430, 3439, 'Malayalam').
+unicode_script(3440, 3448, 'Malayalam').
+unicode_script(3449, 3449, 'Malayalam').
+unicode_script(3450, 3455, 'Malayalam').
+unicode_script(3457, 3457, 'Sinhala').
+unicode_script(3458, 3459, 'Sinhala').
+unicode_script(3461, 3478, 'Sinhala').
+unicode_script(3482, 3505, 'Sinhala').
+unicode_script(3507, 3515, 'Sinhala').
+unicode_script(3517, 3517, 'Sinhala').
+unicode_script(3520, 3526, 'Sinhala').
+unicode_script(3530, 3530, 'Sinhala').
+unicode_script(3535, 3537, 'Sinhala').
+unicode_script(3538, 3540, 'Sinhala').
+unicode_script(3542, 3542, 'Sinhala').
+unicode_script(3544, 3551, 'Sinhala').
+unicode_script(3558, 3567, 'Sinhala').
+unicode_script(3570, 3571, 'Sinhala').
+unicode_script(3572, 3572, 'Sinhala').
+unicode_script(70113, 70132, 'Sinhala').
+unicode_script(3585, 3632, 'Thai').
+unicode_script(3633, 3633, 'Thai').
+unicode_script(3634, 3635, 'Thai').
+unicode_script(3636, 3642, 'Thai').
+unicode_script(3648, 3653, 'Thai').
+unicode_script(3654, 3654, 'Thai').
+unicode_script(3655, 3662, 'Thai').
+unicode_script(3663, 3663, 'Thai').
+unicode_script(3664, 3673, 'Thai').
+unicode_script(3674, 3675, 'Thai').
+unicode_script(3713, 3714, 'Lao').
+unicode_script(3716, 3716, 'Lao').
+unicode_script(3718, 3722, 'Lao').
+unicode_script(3724, 3747, 'Lao').
+unicode_script(3749, 3749, 'Lao').
+unicode_script(3751, 3760, 'Lao').
+unicode_script(3761, 3761, 'Lao').
+unicode_script(3762, 3763, 'Lao').
+unicode_script(3764, 3772, 'Lao').
+unicode_script(3773, 3773, 'Lao').
+unicode_script(3776, 3780, 'Lao').
+unicode_script(3782, 3782, 'Lao').
+unicode_script(3784, 3790, 'Lao').
+unicode_script(3792, 3801, 'Lao').
+unicode_script(3804, 3807, 'Lao').
+unicode_script(3840, 3840, 'Tibetan').
+unicode_script(3841, 3843, 'Tibetan').
+unicode_script(3844, 3858, 'Tibetan').
+unicode_script(3859, 3859, 'Tibetan').
+unicode_script(3860, 3860, 'Tibetan').
+unicode_script(3861, 3863, 'Tibetan').
+unicode_script(3864, 3865, 'Tibetan').
+unicode_script(3866, 3871, 'Tibetan').
+unicode_script(3872, 3881, 'Tibetan').
+unicode_script(3882, 3891, 'Tibetan').
+unicode_script(3892, 3892, 'Tibetan').
+unicode_script(3893, 3893, 'Tibetan').
+unicode_script(3894, 3894, 'Tibetan').
+unicode_script(3895, 3895, 'Tibetan').
+unicode_script(3896, 3896, 'Tibetan').
+unicode_script(3897, 3897, 'Tibetan').
+unicode_script(3898, 3898, 'Tibetan').
+unicode_script(3899, 3899, 'Tibetan').
+unicode_script(3900, 3900, 'Tibetan').
+unicode_script(3901, 3901, 'Tibetan').
+unicode_script(3902, 3903, 'Tibetan').
+unicode_script(3904, 3911, 'Tibetan').
+unicode_script(3913, 3948, 'Tibetan').
+unicode_script(3953, 3966, 'Tibetan').
+unicode_script(3967, 3967, 'Tibetan').
+unicode_script(3968, 3972, 'Tibetan').
+unicode_script(3973, 3973, 'Tibetan').
+unicode_script(3974, 3975, 'Tibetan').
+unicode_script(3976, 3980, 'Tibetan').
+unicode_script(3981, 3991, 'Tibetan').
+unicode_script(3993, 4028, 'Tibetan').
+unicode_script(4030, 4037, 'Tibetan').
+unicode_script(4038, 4038, 'Tibetan').
+unicode_script(4039, 4044, 'Tibetan').
+unicode_script(4046, 4047, 'Tibetan').
+unicode_script(4048, 4052, 'Tibetan').
+unicode_script(4057, 4058, 'Tibetan').
+unicode_script(4096, 4138, 'Myanmar').
+unicode_script(4139, 4140, 'Myanmar').
+unicode_script(4141, 4144, 'Myanmar').
+unicode_script(4145, 4145, 'Myanmar').
+unicode_script(4146, 4151, 'Myanmar').
+unicode_script(4152, 4152, 'Myanmar').
+unicode_script(4153, 4154, 'Myanmar').
+unicode_script(4155, 4156, 'Myanmar').
+unicode_script(4157, 4158, 'Myanmar').
+unicode_script(4159, 4159, 'Myanmar').
+unicode_script(4160, 4169, 'Myanmar').
+unicode_script(4170, 4175, 'Myanmar').
+unicode_script(4176, 4181, 'Myanmar').
+unicode_script(4182, 4183, 'Myanmar').
+unicode_script(4184, 4185, 'Myanmar').
+unicode_script(4186, 4189, 'Myanmar').
+unicode_script(4190, 4192, 'Myanmar').
+unicode_script(4193, 4193, 'Myanmar').
+unicode_script(4194, 4196, 'Myanmar').
+unicode_script(4197, 4198, 'Myanmar').
+unicode_script(4199, 4205, 'Myanmar').
+unicode_script(4206, 4208, 'Myanmar').
+unicode_script(4209, 4212, 'Myanmar').
+unicode_script(4213, 4225, 'Myanmar').
+unicode_script(4226, 4226, 'Myanmar').
+unicode_script(4227, 4228, 'Myanmar').
+unicode_script(4229, 4230, 'Myanmar').
+unicode_script(4231, 4236, 'Myanmar').
+unicode_script(4237, 4237, 'Myanmar').
+unicode_script(4238, 4238, 'Myanmar').
+unicode_script(4239, 4239, 'Myanmar').
+unicode_script(4240, 4249, 'Myanmar').
+unicode_script(4250, 4252, 'Myanmar').
+unicode_script(4253, 4253, 'Myanmar').
+unicode_script(4254, 4255, 'Myanmar').
+unicode_script(43488, 43492, 'Myanmar').
+unicode_script(43493, 43493, 'Myanmar').
+unicode_script(43494, 43494, 'Myanmar').
+unicode_script(43495, 43503, 'Myanmar').
+unicode_script(43504, 43513, 'Myanmar').
+unicode_script(43514, 43518, 'Myanmar').
+unicode_script(43616, 43631, 'Myanmar').
+unicode_script(43632, 43632, 'Myanmar').
+unicode_script(43633, 43638, 'Myanmar').
+unicode_script(43639, 43641, 'Myanmar').
+unicode_script(43642, 43642, 'Myanmar').
+unicode_script(43643, 43643, 'Myanmar').
+unicode_script(43644, 43644, 'Myanmar').
+unicode_script(43645, 43645, 'Myanmar').
+unicode_script(43646, 43647, 'Myanmar').
+unicode_script(71376, 71395, 'Myanmar').
+unicode_script(4256, 4293, 'Georgian').
+unicode_script(4295, 4295, 'Georgian').
+unicode_script(4301, 4301, 'Georgian').
+unicode_script(4304, 4346, 'Georgian').
+unicode_script(4348, 4348, 'Georgian').
+unicode_script(4349, 4351, 'Georgian').
+unicode_script(7312, 7354, 'Georgian').
+unicode_script(7357, 7359, 'Georgian').
+unicode_script(11520, 11557, 'Georgian').
+unicode_script(11559, 11559, 'Georgian').
+unicode_script(11565, 11565, 'Georgian').
+unicode_script(4352, 4607, 'Hangul').
+unicode_script(12334, 12335, 'Hangul').
+unicode_script(12593, 12686, 'Hangul').
+unicode_script(12800, 12830, 'Hangul').
+unicode_script(12896, 12926, 'Hangul').
+unicode_script(43360, 43388, 'Hangul').
+unicode_script(44032, 55203, 'Hangul').
+unicode_script(55216, 55238, 'Hangul').
+unicode_script(55243, 55291, 'Hangul').
+unicode_script(65440, 65470, 'Hangul').
+unicode_script(65474, 65479, 'Hangul').
+unicode_script(65482, 65487, 'Hangul').
+unicode_script(65490, 65495, 'Hangul').
+unicode_script(65498, 65500, 'Hangul').
+unicode_script(4608, 4680, 'Ethiopic').
+unicode_script(4682, 4685, 'Ethiopic').
+unicode_script(4688, 4694, 'Ethiopic').
+unicode_script(4696, 4696, 'Ethiopic').
+unicode_script(4698, 4701, 'Ethiopic').
+unicode_script(4704, 4744, 'Ethiopic').
+unicode_script(4746, 4749, 'Ethiopic').
+unicode_script(4752, 4784, 'Ethiopic').
+unicode_script(4786, 4789, 'Ethiopic').
+unicode_script(4792, 4798, 'Ethiopic').
+unicode_script(4800, 4800, 'Ethiopic').
+unicode_script(4802, 4805, 'Ethiopic').
+unicode_script(4808, 4822, 'Ethiopic').
+unicode_script(4824, 4880, 'Ethiopic').
+unicode_script(4882, 4885, 'Ethiopic').
+unicode_script(4888, 4954, 'Ethiopic').
+unicode_script(4957, 4959, 'Ethiopic').
+unicode_script(4960, 4968, 'Ethiopic').
+unicode_script(4969, 4988, 'Ethiopic').
+unicode_script(4992, 5007, 'Ethiopic').
+unicode_script(5008, 5017, 'Ethiopic').
+unicode_script(11648, 11670, 'Ethiopic').
+unicode_script(11680, 11686, 'Ethiopic').
+unicode_script(11688, 11694, 'Ethiopic').
+unicode_script(11696, 11702, 'Ethiopic').
+unicode_script(11704, 11710, 'Ethiopic').
+unicode_script(11712, 11718, 'Ethiopic').
+unicode_script(11720, 11726, 'Ethiopic').
+unicode_script(11728, 11734, 'Ethiopic').
+unicode_script(11736, 11742, 'Ethiopic').
+unicode_script(43777, 43782, 'Ethiopic').
+unicode_script(43785, 43790, 'Ethiopic').
+unicode_script(43793, 43798, 'Ethiopic').
+unicode_script(43808, 43814, 'Ethiopic').
+unicode_script(43816, 43822, 'Ethiopic').
+unicode_script(124896, 124902, 'Ethiopic').
+unicode_script(124904, 124907, 'Ethiopic').
+unicode_script(124909, 124910, 'Ethiopic').
+unicode_script(124912, 124926, 'Ethiopic').
+unicode_script(5024, 5109, 'Cherokee').
+unicode_script(5112, 5117, 'Cherokee').
+unicode_script(43888, 43967, 'Cherokee').
+unicode_script(5120, 5120, 'Canadian_Aboriginal').
+unicode_script(5121, 5740, 'Canadian_Aboriginal').
+unicode_script(5741, 5741, 'Canadian_Aboriginal').
+unicode_script(5742, 5742, 'Canadian_Aboriginal').
+unicode_script(5743, 5759, 'Canadian_Aboriginal').
+unicode_script(6320, 6389, 'Canadian_Aboriginal').
+unicode_script(72368, 72383, 'Canadian_Aboriginal').
+unicode_script(5760, 5760, 'Ogham').
+unicode_script(5761, 5786, 'Ogham').
+unicode_script(5787, 5787, 'Ogham').
+unicode_script(5788, 5788, 'Ogham').
+unicode_script(5792, 5866, 'Runic').
+unicode_script(5870, 5872, 'Runic').
+unicode_script(5873, 5880, 'Runic').
+unicode_script(6016, 6067, 'Khmer').
+unicode_script(6068, 6069, 'Khmer').
+unicode_script(6070, 6070, 'Khmer').
+unicode_script(6071, 6077, 'Khmer').
+unicode_script(6078, 6085, 'Khmer').
+unicode_script(6086, 6086, 'Khmer').
+unicode_script(6087, 6088, 'Khmer').
+unicode_script(6089, 6099, 'Khmer').
+unicode_script(6100, 6102, 'Khmer').
+unicode_script(6103, 6103, 'Khmer').
+unicode_script(6104, 6106, 'Khmer').
+unicode_script(6107, 6107, 'Khmer').
+unicode_script(6108, 6108, 'Khmer').
+unicode_script(6109, 6109, 'Khmer').
+unicode_script(6112, 6121, 'Khmer').
+unicode_script(6128, 6137, 'Khmer').
+unicode_script(6624, 6655, 'Khmer').
+unicode_script(6144, 6145, 'Mongolian').
+unicode_script(6148, 6148, 'Mongolian').
+unicode_script(6150, 6150, 'Mongolian').
+unicode_script(6151, 6154, 'Mongolian').
+unicode_script(6155, 6157, 'Mongolian').
+unicode_script(6158, 6158, 'Mongolian').
+unicode_script(6159, 6159, 'Mongolian').
+unicode_script(6160, 6169, 'Mongolian').
+unicode_script(6176, 6210, 'Mongolian').
+unicode_script(6211, 6211, 'Mongolian').
+unicode_script(6212, 6264, 'Mongolian').
+unicode_script(6272, 6276, 'Mongolian').
+unicode_script(6277, 6278, 'Mongolian').
+unicode_script(6279, 6312, 'Mongolian').
+unicode_script(6313, 6313, 'Mongolian').
+unicode_script(6314, 6314, 'Mongolian').
+unicode_script(71264, 71276, 'Mongolian').
+unicode_script(12353, 12438, 'Hiragana').
+unicode_script(12445, 12446, 'Hiragana').
+unicode_script(12447, 12447, 'Hiragana').
+unicode_script(110593, 110879, 'Hiragana').
+unicode_script(110898, 110898, 'Hiragana').
+unicode_script(110928, 110930, 'Hiragana').
+unicode_script(127488, 127488, 'Hiragana').
+unicode_script(12449, 12538, 'Katakana').
+unicode_script(12541, 12542, 'Katakana').
+unicode_script(12543, 12543, 'Katakana').
+unicode_script(12784, 12799, 'Katakana').
+unicode_script(13008, 13054, 'Katakana').
+unicode_script(13056, 13143, 'Katakana').
+unicode_script(65382, 65391, 'Katakana').
+unicode_script(65393, 65437, 'Katakana').
+unicode_script(110576, 110579, 'Katakana').
+unicode_script(110581, 110587, 'Katakana').
+unicode_script(110589, 110590, 'Katakana').
+unicode_script(110592, 110592, 'Katakana').
+unicode_script(110880, 110882, 'Katakana').
+unicode_script(110933, 110933, 'Katakana').
+unicode_script(110948, 110951, 'Katakana').
+unicode_script(746, 747, 'Bopomofo').
+unicode_script(12549, 12591, 'Bopomofo').
+unicode_script(12704, 12735, 'Bopomofo').
+unicode_script(11904, 11929, 'Han').
+unicode_script(11931, 12019, 'Han').
+unicode_script(12032, 12245, 'Han').
+unicode_script(12293, 12293, 'Han').
+unicode_script(12295, 12295, 'Han').
+unicode_script(12321, 12329, 'Han').
+unicode_script(12344, 12346, 'Han').
+unicode_script(12347, 12347, 'Han').
+unicode_script(13312, 19903, 'Han').
+unicode_script(19968, 40959, 'Han').
+unicode_script(63744, 64109, 'Han').
+unicode_script(64112, 64217, 'Han').
+unicode_script(94178, 94178, 'Han').
+unicode_script(94179, 94179, 'Han').
+unicode_script(94192, 94193, 'Han').
+unicode_script(94194, 94195, 'Han').
+unicode_script(94196, 94198, 'Han').
+unicode_script(131072, 173791, 'Han').
+unicode_script(173824, 178205, 'Han').
+unicode_script(178208, 183981, 'Han').
+unicode_script(183984, 191456, 'Han').
+unicode_script(191472, 192093, 'Han').
+unicode_script(194560, 195101, 'Han').
+unicode_script(196608, 201546, 'Han').
+unicode_script(201552, 210041, 'Han').
+unicode_script(40960, 40980, 'Yi').
+unicode_script(40981, 40981, 'Yi').
+unicode_script(40982, 42124, 'Yi').
+unicode_script(42128, 42182, 'Yi').
+unicode_script(66304, 66335, 'Old_Italic').
+unicode_script(66336, 66339, 'Old_Italic').
+unicode_script(66349, 66351, 'Old_Italic').
+unicode_script(66352, 66368, 'Gothic').
+unicode_script(66369, 66369, 'Gothic').
+unicode_script(66370, 66377, 'Gothic').
+unicode_script(66378, 66378, 'Gothic').
+unicode_script(66560, 66639, 'Deseret').
+unicode_script(768, 879, 'Inherited').
+unicode_script(1157, 1158, 'Inherited').
+unicode_script(1611, 1621, 'Inherited').
+unicode_script(1648, 1648, 'Inherited').
+unicode_script(2385, 2388, 'Inherited').
+unicode_script(6832, 6845, 'Inherited').
+unicode_script(6846, 6846, 'Inherited').
+unicode_script(6847, 6877, 'Inherited').
+unicode_script(6880, 6891, 'Inherited').
+unicode_script(7376, 7378, 'Inherited').
+unicode_script(7380, 7392, 'Inherited').
+unicode_script(7394, 7400, 'Inherited').
+unicode_script(7405, 7405, 'Inherited').
+unicode_script(7412, 7412, 'Inherited').
+unicode_script(7416, 7417, 'Inherited').
+unicode_script(7616, 7679, 'Inherited').
+unicode_script(8204, 8205, 'Inherited').
+unicode_script(8400, 8412, 'Inherited').
+unicode_script(8413, 8416, 'Inherited').
+unicode_script(8417, 8417, 'Inherited').
+unicode_script(8418, 8420, 'Inherited').
+unicode_script(8421, 8432, 'Inherited').
+unicode_script(12330, 12333, 'Inherited').
+unicode_script(12441, 12442, 'Inherited').
+unicode_script(65024, 65039, 'Inherited').
+unicode_script(65056, 65069, 'Inherited').
+unicode_script(66045, 66045, 'Inherited').
+unicode_script(66272, 66272, 'Inherited').
+unicode_script(70459, 70459, 'Inherited').
+unicode_script(118528, 118573, 'Inherited').
+unicode_script(118576, 118598, 'Inherited').
+unicode_script(119143, 119145, 'Inherited').
+unicode_script(119163, 119170, 'Inherited').
+unicode_script(119173, 119179, 'Inherited').
+unicode_script(119210, 119213, 'Inherited').
+unicode_script(917760, 917999, 'Inherited').
+unicode_script(5888, 5905, 'Tagalog').
+unicode_script(5906, 5908, 'Tagalog').
+unicode_script(5909, 5909, 'Tagalog').
+unicode_script(5919, 5919, 'Tagalog').
+unicode_script(5920, 5937, 'Hanunoo').
+unicode_script(5938, 5939, 'Hanunoo').
+unicode_script(5940, 5940, 'Hanunoo').
+unicode_script(5952, 5969, 'Buhid').
+unicode_script(5970, 5971, 'Buhid').
+unicode_script(5984, 5996, 'Tagbanwa').
+unicode_script(5998, 6000, 'Tagbanwa').
+unicode_script(6002, 6003, 'Tagbanwa').
+unicode_script(6400, 6430, 'Limbu').
+unicode_script(6432, 6434, 'Limbu').
+unicode_script(6435, 6438, 'Limbu').
+unicode_script(6439, 6440, 'Limbu').
+unicode_script(6441, 6443, 'Limbu').
+unicode_script(6448, 6449, 'Limbu').
+unicode_script(6450, 6450, 'Limbu').
+unicode_script(6451, 6456, 'Limbu').
+unicode_script(6457, 6459, 'Limbu').
+unicode_script(6464, 6464, 'Limbu').
+unicode_script(6468, 6469, 'Limbu').
+unicode_script(6470, 6479, 'Limbu').
+unicode_script(6480, 6509, 'Tai_Le').
+unicode_script(6512, 6516, 'Tai_Le').
+unicode_script(65536, 65547, 'Linear_B').
+unicode_script(65549, 65574, 'Linear_B').
+unicode_script(65576, 65594, 'Linear_B').
+unicode_script(65596, 65597, 'Linear_B').
+unicode_script(65599, 65613, 'Linear_B').
+unicode_script(65616, 65629, 'Linear_B').
+unicode_script(65664, 65786, 'Linear_B').
+unicode_script(66432, 66461, 'Ugaritic').
+unicode_script(66463, 66463, 'Ugaritic').
+unicode_script(66640, 66687, 'Shavian').
+unicode_script(66688, 66717, 'Osmanya').
+unicode_script(66720, 66729, 'Osmanya').
+unicode_script(67584, 67589, 'Cypriot').
+unicode_script(67592, 67592, 'Cypriot').
+unicode_script(67594, 67637, 'Cypriot').
+unicode_script(67639, 67640, 'Cypriot').
+unicode_script(67644, 67644, 'Cypriot').
+unicode_script(67647, 67647, 'Cypriot').
+unicode_script(10240, 10495, 'Braille').
+unicode_script(6656, 6678, 'Buginese').
+unicode_script(6679, 6680, 'Buginese').
+unicode_script(6681, 6682, 'Buginese').
+unicode_script(6683, 6683, 'Buginese').
+unicode_script(6686, 6687, 'Buginese').
+unicode_script(994, 1007, 'Coptic').
+unicode_script(11392, 11492, 'Coptic').
+unicode_script(11493, 11498, 'Coptic').
+unicode_script(11499, 11502, 'Coptic').
+unicode_script(11503, 11505, 'Coptic').
+unicode_script(11506, 11507, 'Coptic').
+unicode_script(11513, 11516, 'Coptic').
+unicode_script(11517, 11517, 'Coptic').
+unicode_script(11518, 11519, 'Coptic').
+unicode_script(6528, 6571, 'New_Tai_Lue').
+unicode_script(6576, 6601, 'New_Tai_Lue').
+unicode_script(6608, 6617, 'New_Tai_Lue').
+unicode_script(6618, 6618, 'New_Tai_Lue').
+unicode_script(6622, 6623, 'New_Tai_Lue').
+unicode_script(11264, 11359, 'Glagolitic').
+unicode_script(122880, 122886, 'Glagolitic').
+unicode_script(122888, 122904, 'Glagolitic').
+unicode_script(122907, 122913, 'Glagolitic').
+unicode_script(122915, 122916, 'Glagolitic').
+unicode_script(122918, 122922, 'Glagolitic').
+unicode_script(11568, 11623, 'Tifinagh').
+unicode_script(11631, 11631, 'Tifinagh').
+unicode_script(11632, 11632, 'Tifinagh').
+unicode_script(11647, 11647, 'Tifinagh').
+unicode_script(43008, 43009, 'Syloti_Nagri').
+unicode_script(43010, 43010, 'Syloti_Nagri').
+unicode_script(43011, 43013, 'Syloti_Nagri').
+unicode_script(43014, 43014, 'Syloti_Nagri').
+unicode_script(43015, 43018, 'Syloti_Nagri').
+unicode_script(43019, 43019, 'Syloti_Nagri').
+unicode_script(43020, 43042, 'Syloti_Nagri').
+unicode_script(43043, 43044, 'Syloti_Nagri').
+unicode_script(43045, 43046, 'Syloti_Nagri').
+unicode_script(43047, 43047, 'Syloti_Nagri').
+unicode_script(43048, 43051, 'Syloti_Nagri').
+unicode_script(43052, 43052, 'Syloti_Nagri').
+unicode_script(66464, 66499, 'Old_Persian').
+unicode_script(66504, 66511, 'Old_Persian').
+unicode_script(66512, 66512, 'Old_Persian').
+unicode_script(66513, 66517, 'Old_Persian').
+unicode_script(68096, 68096, 'Kharoshthi').
+unicode_script(68097, 68099, 'Kharoshthi').
+unicode_script(68101, 68102, 'Kharoshthi').
+unicode_script(68108, 68111, 'Kharoshthi').
+unicode_script(68112, 68115, 'Kharoshthi').
+unicode_script(68117, 68119, 'Kharoshthi').
+unicode_script(68121, 68149, 'Kharoshthi').
+unicode_script(68152, 68154, 'Kharoshthi').
+unicode_script(68159, 68159, 'Kharoshthi').
+unicode_script(68160, 68168, 'Kharoshthi').
+unicode_script(68176, 68184, 'Kharoshthi').
+unicode_script(6912, 6915, 'Balinese').
+unicode_script(6916, 6916, 'Balinese').
+unicode_script(6917, 6963, 'Balinese').
+unicode_script(6964, 6964, 'Balinese').
+unicode_script(6965, 6965, 'Balinese').
+unicode_script(6966, 6970, 'Balinese').
+unicode_script(6971, 6971, 'Balinese').
+unicode_script(6972, 6972, 'Balinese').
+unicode_script(6973, 6977, 'Balinese').
+unicode_script(6978, 6978, 'Balinese').
+unicode_script(6979, 6980, 'Balinese').
+unicode_script(6981, 6988, 'Balinese').
+unicode_script(6990, 6991, 'Balinese').
+unicode_script(6992, 7001, 'Balinese').
+unicode_script(7002, 7008, 'Balinese').
+unicode_script(7009, 7018, 'Balinese').
+unicode_script(7019, 7027, 'Balinese').
+unicode_script(7028, 7036, 'Balinese').
+unicode_script(7037, 7039, 'Balinese').
+unicode_script(73728, 74649, 'Cuneiform').
+unicode_script(74752, 74862, 'Cuneiform').
+unicode_script(74864, 74868, 'Cuneiform').
+unicode_script(74880, 75075, 'Cuneiform').
+unicode_script(67840, 67861, 'Phoenician').
+unicode_script(67862, 67867, 'Phoenician').
+unicode_script(67871, 67871, 'Phoenician').
+unicode_script(43072, 43123, 'Phags_Pa').
+unicode_script(43124, 43127, 'Phags_Pa').
+unicode_script(1984, 1993, 'Nko').
+unicode_script(1994, 2026, 'Nko').
+unicode_script(2027, 2035, 'Nko').
+unicode_script(2036, 2037, 'Nko').
+unicode_script(2038, 2038, 'Nko').
+unicode_script(2039, 2041, 'Nko').
+unicode_script(2042, 2042, 'Nko').
+unicode_script(2045, 2045, 'Nko').
+unicode_script(2046, 2047, 'Nko').
+unicode_script(7040, 7041, 'Sundanese').
+unicode_script(7042, 7042, 'Sundanese').
+unicode_script(7043, 7072, 'Sundanese').
+unicode_script(7073, 7073, 'Sundanese').
+unicode_script(7074, 7077, 'Sundanese').
+unicode_script(7078, 7079, 'Sundanese').
+unicode_script(7080, 7081, 'Sundanese').
+unicode_script(7082, 7082, 'Sundanese').
+unicode_script(7083, 7085, 'Sundanese').
+unicode_script(7086, 7087, 'Sundanese').
+unicode_script(7088, 7097, 'Sundanese').
+unicode_script(7098, 7103, 'Sundanese').
+unicode_script(7360, 7367, 'Sundanese').
+unicode_script(7168, 7203, 'Lepcha').
+unicode_script(7204, 7211, 'Lepcha').
+unicode_script(7212, 7219, 'Lepcha').
+unicode_script(7220, 7221, 'Lepcha').
+unicode_script(7222, 7223, 'Lepcha').
+unicode_script(7227, 7231, 'Lepcha').
+unicode_script(7232, 7241, 'Lepcha').
+unicode_script(7245, 7247, 'Lepcha').
+unicode_script(7248, 7257, 'Ol_Chiki').
+unicode_script(7258, 7287, 'Ol_Chiki').
+unicode_script(7288, 7293, 'Ol_Chiki').
+unicode_script(7294, 7295, 'Ol_Chiki').
+unicode_script(42240, 42507, 'Vai').
+unicode_script(42508, 42508, 'Vai').
+unicode_script(42509, 42511, 'Vai').
+unicode_script(42512, 42527, 'Vai').
+unicode_script(42528, 42537, 'Vai').
+unicode_script(42538, 42539, 'Vai').
+unicode_script(43136, 43137, 'Saurashtra').
+unicode_script(43138, 43187, 'Saurashtra').
+unicode_script(43188, 43203, 'Saurashtra').
+unicode_script(43204, 43205, 'Saurashtra').
+unicode_script(43214, 43215, 'Saurashtra').
+unicode_script(43216, 43225, 'Saurashtra').
+unicode_script(43264, 43273, 'Kayah_Li').
+unicode_script(43274, 43301, 'Kayah_Li').
+unicode_script(43302, 43309, 'Kayah_Li').
+unicode_script(43311, 43311, 'Kayah_Li').
+unicode_script(43312, 43334, 'Rejang').
+unicode_script(43335, 43345, 'Rejang').
+unicode_script(43346, 43347, 'Rejang').
+unicode_script(43359, 43359, 'Rejang').
+unicode_script(66176, 66204, 'Lycian').
+unicode_script(66208, 66256, 'Carian').
+unicode_script(67872, 67897, 'Lydian').
+unicode_script(67903, 67903, 'Lydian').
+unicode_script(43520, 43560, 'Cham').
+unicode_script(43561, 43566, 'Cham').
+unicode_script(43567, 43568, 'Cham').
+unicode_script(43569, 43570, 'Cham').
+unicode_script(43571, 43572, 'Cham').
+unicode_script(43573, 43574, 'Cham').
+unicode_script(43584, 43586, 'Cham').
+unicode_script(43587, 43587, 'Cham').
+unicode_script(43588, 43595, 'Cham').
+unicode_script(43596, 43596, 'Cham').
+unicode_script(43597, 43597, 'Cham').
+unicode_script(43600, 43609, 'Cham').
+unicode_script(43612, 43615, 'Cham').
+unicode_script(6688, 6740, 'Tai_Tham').
+unicode_script(6741, 6741, 'Tai_Tham').
+unicode_script(6742, 6742, 'Tai_Tham').
+unicode_script(6743, 6743, 'Tai_Tham').
+unicode_script(6744, 6750, 'Tai_Tham').
+unicode_script(6752, 6752, 'Tai_Tham').
+unicode_script(6753, 6753, 'Tai_Tham').
+unicode_script(6754, 6754, 'Tai_Tham').
+unicode_script(6755, 6756, 'Tai_Tham').
+unicode_script(6757, 6764, 'Tai_Tham').
+unicode_script(6765, 6770, 'Tai_Tham').
+unicode_script(6771, 6780, 'Tai_Tham').
+unicode_script(6783, 6783, 'Tai_Tham').
+unicode_script(6784, 6793, 'Tai_Tham').
+unicode_script(6800, 6809, 'Tai_Tham').
+unicode_script(6816, 6822, 'Tai_Tham').
+unicode_script(6823, 6823, 'Tai_Tham').
+unicode_script(6824, 6829, 'Tai_Tham').
+unicode_script(43648, 43695, 'Tai_Viet').
+unicode_script(43696, 43696, 'Tai_Viet').
+unicode_script(43697, 43697, 'Tai_Viet').
+unicode_script(43698, 43700, 'Tai_Viet').
+unicode_script(43701, 43702, 'Tai_Viet').
+unicode_script(43703, 43704, 'Tai_Viet').
+unicode_script(43705, 43709, 'Tai_Viet').
+unicode_script(43710, 43711, 'Tai_Viet').
+unicode_script(43712, 43712, 'Tai_Viet').
+unicode_script(43713, 43713, 'Tai_Viet').
+unicode_script(43714, 43714, 'Tai_Viet').
+unicode_script(43739, 43740, 'Tai_Viet').
+unicode_script(43741, 43741, 'Tai_Viet').
+unicode_script(43742, 43743, 'Tai_Viet').
+unicode_script(68352, 68405, 'Avestan').
+unicode_script(68409, 68415, 'Avestan').
+unicode_script(77824, 78895, 'Egyptian_Hieroglyphs').
+unicode_script(78896, 78911, 'Egyptian_Hieroglyphs').
+unicode_script(78912, 78912, 'Egyptian_Hieroglyphs').
+unicode_script(78913, 78918, 'Egyptian_Hieroglyphs').
+unicode_script(78919, 78933, 'Egyptian_Hieroglyphs').
+unicode_script(78944, 82938, 'Egyptian_Hieroglyphs').
+unicode_script(2048, 2069, 'Samaritan').
+unicode_script(2070, 2073, 'Samaritan').
+unicode_script(2074, 2074, 'Samaritan').
+unicode_script(2075, 2083, 'Samaritan').
+unicode_script(2084, 2084, 'Samaritan').
+unicode_script(2085, 2087, 'Samaritan').
+unicode_script(2088, 2088, 'Samaritan').
+unicode_script(2089, 2093, 'Samaritan').
+unicode_script(2096, 2110, 'Samaritan').
+unicode_script(42192, 42231, 'Lisu').
+unicode_script(42232, 42237, 'Lisu').
+unicode_script(42238, 42239, 'Lisu').
+unicode_script(73648, 73648, 'Lisu').
+unicode_script(42656, 42725, 'Bamum').
+unicode_script(42726, 42735, 'Bamum').
+unicode_script(42736, 42737, 'Bamum').
+unicode_script(42738, 42743, 'Bamum').
+unicode_script(92160, 92728, 'Bamum').
+unicode_script(43392, 43394, 'Javanese').
+unicode_script(43395, 43395, 'Javanese').
+unicode_script(43396, 43442, 'Javanese').
+unicode_script(43443, 43443, 'Javanese').
+unicode_script(43444, 43445, 'Javanese').
+unicode_script(43446, 43449, 'Javanese').
+unicode_script(43450, 43451, 'Javanese').
+unicode_script(43452, 43453, 'Javanese').
+unicode_script(43454, 43456, 'Javanese').
+unicode_script(43457, 43469, 'Javanese').
+unicode_script(43472, 43481, 'Javanese').
+unicode_script(43486, 43487, 'Javanese').
+unicode_script(43744, 43754, 'Meetei_Mayek').
+unicode_script(43755, 43755, 'Meetei_Mayek').
+unicode_script(43756, 43757, 'Meetei_Mayek').
+unicode_script(43758, 43759, 'Meetei_Mayek').
+unicode_script(43760, 43761, 'Meetei_Mayek').
+unicode_script(43762, 43762, 'Meetei_Mayek').
+unicode_script(43763, 43764, 'Meetei_Mayek').
+unicode_script(43765, 43765, 'Meetei_Mayek').
+unicode_script(43766, 43766, 'Meetei_Mayek').
+unicode_script(43968, 44002, 'Meetei_Mayek').
+unicode_script(44003, 44004, 'Meetei_Mayek').
+unicode_script(44005, 44005, 'Meetei_Mayek').
+unicode_script(44006, 44007, 'Meetei_Mayek').
+unicode_script(44008, 44008, 'Meetei_Mayek').
+unicode_script(44009, 44010, 'Meetei_Mayek').
+unicode_script(44011, 44011, 'Meetei_Mayek').
+unicode_script(44012, 44012, 'Meetei_Mayek').
+unicode_script(44013, 44013, 'Meetei_Mayek').
+unicode_script(44016, 44025, 'Meetei_Mayek').
+unicode_script(67648, 67669, 'Imperial_Aramaic').
+unicode_script(67671, 67671, 'Imperial_Aramaic').
+unicode_script(67672, 67679, 'Imperial_Aramaic').
+unicode_script(68192, 68220, 'Old_South_Arabian').
+unicode_script(68221, 68222, 'Old_South_Arabian').
+unicode_script(68223, 68223, 'Old_South_Arabian').
+unicode_script(68416, 68437, 'Inscriptional_Parthian').
+unicode_script(68440, 68447, 'Inscriptional_Parthian').
+unicode_script(68448, 68466, 'Inscriptional_Pahlavi').
+unicode_script(68472, 68479, 'Inscriptional_Pahlavi').
+unicode_script(68608, 68680, 'Old_Turkic').
+unicode_script(69760, 69761, 'Kaithi').
+unicode_script(69762, 69762, 'Kaithi').
+unicode_script(69763, 69807, 'Kaithi').
+unicode_script(69808, 69810, 'Kaithi').
+unicode_script(69811, 69814, 'Kaithi').
+unicode_script(69815, 69816, 'Kaithi').
+unicode_script(69817, 69818, 'Kaithi').
+unicode_script(69819, 69820, 'Kaithi').
+unicode_script(69821, 69821, 'Kaithi').
+unicode_script(69822, 69825, 'Kaithi').
+unicode_script(69826, 69826, 'Kaithi').
+unicode_script(69837, 69837, 'Kaithi').
+unicode_script(7104, 7141, 'Batak').
+unicode_script(7142, 7142, 'Batak').
+unicode_script(7143, 7143, 'Batak').
+unicode_script(7144, 7145, 'Batak').
+unicode_script(7146, 7148, 'Batak').
+unicode_script(7149, 7149, 'Batak').
+unicode_script(7150, 7150, 'Batak').
+unicode_script(7151, 7153, 'Batak').
+unicode_script(7154, 7155, 'Batak').
+unicode_script(7164, 7167, 'Batak').
+unicode_script(69632, 69632, 'Brahmi').
+unicode_script(69633, 69633, 'Brahmi').
+unicode_script(69634, 69634, 'Brahmi').
+unicode_script(69635, 69687, 'Brahmi').
+unicode_script(69688, 69702, 'Brahmi').
+unicode_script(69703, 69709, 'Brahmi').
+unicode_script(69714, 69733, 'Brahmi').
+unicode_script(69734, 69743, 'Brahmi').
+unicode_script(69744, 69744, 'Brahmi').
+unicode_script(69745, 69746, 'Brahmi').
+unicode_script(69747, 69748, 'Brahmi').
+unicode_script(69749, 69749, 'Brahmi').
+unicode_script(69759, 69759, 'Brahmi').
+unicode_script(2112, 2136, 'Mandaic').
+unicode_script(2137, 2139, 'Mandaic').
+unicode_script(2142, 2142, 'Mandaic').
+unicode_script(69888, 69890, 'Chakma').
+unicode_script(69891, 69926, 'Chakma').
+unicode_script(69927, 69931, 'Chakma').
+unicode_script(69932, 69932, 'Chakma').
+unicode_script(69933, 69940, 'Chakma').
+unicode_script(69942, 69951, 'Chakma').
+unicode_script(69952, 69955, 'Chakma').
+unicode_script(69956, 69956, 'Chakma').
+unicode_script(69957, 69958, 'Chakma').
+unicode_script(69959, 69959, 'Chakma').
+unicode_script(68000, 68023, 'Meroitic_Cursive').
+unicode_script(68028, 68029, 'Meroitic_Cursive').
+unicode_script(68030, 68031, 'Meroitic_Cursive').
+unicode_script(68032, 68047, 'Meroitic_Cursive').
+unicode_script(68050, 68095, 'Meroitic_Cursive').
+unicode_script(67968, 67999, 'Meroitic_Hieroglyphs').
+unicode_script(93952, 94026, 'Miao').
+unicode_script(94031, 94031, 'Miao').
+unicode_script(94032, 94032, 'Miao').
+unicode_script(94033, 94087, 'Miao').
+unicode_script(94095, 94098, 'Miao').
+unicode_script(94099, 94111, 'Miao').
+unicode_script(70016, 70017, 'Sharada').
+unicode_script(70018, 70018, 'Sharada').
+unicode_script(70019, 70066, 'Sharada').
+unicode_script(70067, 70069, 'Sharada').
+unicode_script(70070, 70078, 'Sharada').
+unicode_script(70079, 70080, 'Sharada').
+unicode_script(70081, 70084, 'Sharada').
+unicode_script(70085, 70088, 'Sharada').
+unicode_script(70089, 70092, 'Sharada').
+unicode_script(70093, 70093, 'Sharada').
+unicode_script(70094, 70094, 'Sharada').
+unicode_script(70095, 70095, 'Sharada').
+unicode_script(70096, 70105, 'Sharada').
+unicode_script(70106, 70106, 'Sharada').
+unicode_script(70107, 70107, 'Sharada').
+unicode_script(70108, 70108, 'Sharada').
+unicode_script(70109, 70111, 'Sharada').
+unicode_script(72544, 72544, 'Sharada').
+unicode_script(72545, 72545, 'Sharada').
+unicode_script(72546, 72548, 'Sharada').
+unicode_script(72549, 72549, 'Sharada').
+unicode_script(72550, 72550, 'Sharada').
+unicode_script(72551, 72551, 'Sharada').
+unicode_script(69840, 69864, 'Sora_Sompeng').
+unicode_script(69872, 69881, 'Sora_Sompeng').
+unicode_script(71296, 71338, 'Takri').
+unicode_script(71339, 71339, 'Takri').
+unicode_script(71340, 71340, 'Takri').
+unicode_script(71341, 71341, 'Takri').
+unicode_script(71342, 71343, 'Takri').
+unicode_script(71344, 71349, 'Takri').
+unicode_script(71350, 71350, 'Takri').
+unicode_script(71351, 71351, 'Takri').
+unicode_script(71352, 71352, 'Takri').
+unicode_script(71353, 71353, 'Takri').
+unicode_script(71360, 71369, 'Takri').
+unicode_script(66864, 66915, 'Caucasian_Albanian').
+unicode_script(66927, 66927, 'Caucasian_Albanian').
+unicode_script(92880, 92909, 'Bassa_Vah').
+unicode_script(92912, 92916, 'Bassa_Vah').
+unicode_script(92917, 92917, 'Bassa_Vah').
+unicode_script(113664, 113770, 'Duployan').
+unicode_script(113776, 113788, 'Duployan').
+unicode_script(113792, 113800, 'Duployan').
+unicode_script(113808, 113817, 'Duployan').
+unicode_script(113820, 113820, 'Duployan').
+unicode_script(113821, 113822, 'Duployan').
+unicode_script(113823, 113823, 'Duployan').
+unicode_script(66816, 66855, 'Elbasan').
+unicode_script(70400, 70401, 'Grantha').
+unicode_script(70402, 70403, 'Grantha').
+unicode_script(70405, 70412, 'Grantha').
+unicode_script(70415, 70416, 'Grantha').
+unicode_script(70419, 70440, 'Grantha').
+unicode_script(70442, 70448, 'Grantha').
+unicode_script(70450, 70451, 'Grantha').
+unicode_script(70453, 70457, 'Grantha').
+unicode_script(70460, 70460, 'Grantha').
+unicode_script(70461, 70461, 'Grantha').
+unicode_script(70462, 70463, 'Grantha').
+unicode_script(70464, 70464, 'Grantha').
+unicode_script(70465, 70468, 'Grantha').
+unicode_script(70471, 70472, 'Grantha').
+unicode_script(70475, 70477, 'Grantha').
+unicode_script(70480, 70480, 'Grantha').
+unicode_script(70487, 70487, 'Grantha').
+unicode_script(70493, 70497, 'Grantha').
+unicode_script(70498, 70499, 'Grantha').
+unicode_script(70502, 70508, 'Grantha').
+unicode_script(70512, 70516, 'Grantha').
+unicode_script(92928, 92975, 'Pahawh_Hmong').
+unicode_script(92976, 92982, 'Pahawh_Hmong').
+unicode_script(92983, 92987, 'Pahawh_Hmong').
+unicode_script(92988, 92991, 'Pahawh_Hmong').
+unicode_script(92992, 92995, 'Pahawh_Hmong').
+unicode_script(92996, 92996, 'Pahawh_Hmong').
+unicode_script(92997, 92997, 'Pahawh_Hmong').
+unicode_script(93008, 93017, 'Pahawh_Hmong').
+unicode_script(93019, 93025, 'Pahawh_Hmong').
+unicode_script(93027, 93047, 'Pahawh_Hmong').
+unicode_script(93053, 93071, 'Pahawh_Hmong').
+unicode_script(70144, 70161, 'Khojki').
+unicode_script(70163, 70187, 'Khojki').
+unicode_script(70188, 70190, 'Khojki').
+unicode_script(70191, 70193, 'Khojki').
+unicode_script(70194, 70195, 'Khojki').
+unicode_script(70196, 70196, 'Khojki').
+unicode_script(70197, 70197, 'Khojki').
+unicode_script(70198, 70199, 'Khojki').
+unicode_script(70200, 70205, 'Khojki').
+unicode_script(70206, 70206, 'Khojki').
+unicode_script(70207, 70208, 'Khojki').
+unicode_script(70209, 70209, 'Khojki').
+unicode_script(67072, 67382, 'Linear_A').
+unicode_script(67392, 67413, 'Linear_A').
+unicode_script(67424, 67431, 'Linear_A').
+unicode_script(69968, 70002, 'Mahajani').
+unicode_script(70003, 70003, 'Mahajani').
+unicode_script(70004, 70005, 'Mahajani').
+unicode_script(70006, 70006, 'Mahajani').
+unicode_script(68288, 68295, 'Manichaean').
+unicode_script(68296, 68296, 'Manichaean').
+unicode_script(68297, 68324, 'Manichaean').
+unicode_script(68325, 68326, 'Manichaean').
+unicode_script(68331, 68335, 'Manichaean').
+unicode_script(68336, 68342, 'Manichaean').
+unicode_script(124928, 125124, 'Mende_Kikakui').
+unicode_script(125127, 125135, 'Mende_Kikakui').
+unicode_script(125136, 125142, 'Mende_Kikakui').
+unicode_script(71168, 71215, 'Modi').
+unicode_script(71216, 71218, 'Modi').
+unicode_script(71219, 71226, 'Modi').
+unicode_script(71227, 71228, 'Modi').
+unicode_script(71229, 71229, 'Modi').
+unicode_script(71230, 71230, 'Modi').
+unicode_script(71231, 71232, 'Modi').
+unicode_script(71233, 71235, 'Modi').
+unicode_script(71236, 71236, 'Modi').
+unicode_script(71248, 71257, 'Modi').
+unicode_script(92736, 92766, 'Mro').
+unicode_script(92768, 92777, 'Mro').
+unicode_script(92782, 92783, 'Mro').
+unicode_script(68224, 68252, 'Old_North_Arabian').
+unicode_script(68253, 68255, 'Old_North_Arabian').
+unicode_script(67712, 67742, 'Nabataean').
+unicode_script(67751, 67759, 'Nabataean').
+unicode_script(67680, 67702, 'Palmyrene').
+unicode_script(67703, 67704, 'Palmyrene').
+unicode_script(67705, 67711, 'Palmyrene').
+unicode_script(72384, 72440, 'Pau_Cin_Hau').
+unicode_script(66384, 66421, 'Old_Permic').
+unicode_script(66422, 66426, 'Old_Permic').
+unicode_script(68480, 68497, 'Psalter_Pahlavi').
+unicode_script(68505, 68508, 'Psalter_Pahlavi').
+unicode_script(68521, 68527, 'Psalter_Pahlavi').
+unicode_script(71040, 71086, 'Siddham').
+unicode_script(71087, 71089, 'Siddham').
+unicode_script(71090, 71093, 'Siddham').
+unicode_script(71096, 71099, 'Siddham').
+unicode_script(71100, 71101, 'Siddham').
+unicode_script(71102, 71102, 'Siddham').
+unicode_script(71103, 71104, 'Siddham').
+unicode_script(71105, 71127, 'Siddham').
+unicode_script(71128, 71131, 'Siddham').
+unicode_script(71132, 71133, 'Siddham').
+unicode_script(70320, 70366, 'Khudawadi').
+unicode_script(70367, 70367, 'Khudawadi').
+unicode_script(70368, 70370, 'Khudawadi').
+unicode_script(70371, 70378, 'Khudawadi').
+unicode_script(70384, 70393, 'Khudawadi').
+unicode_script(70784, 70831, 'Tirhuta').
+unicode_script(70832, 70834, 'Tirhuta').
+unicode_script(70835, 70840, 'Tirhuta').
+unicode_script(70841, 70841, 'Tirhuta').
+unicode_script(70842, 70842, 'Tirhuta').
+unicode_script(70843, 70846, 'Tirhuta').
+unicode_script(70847, 70848, 'Tirhuta').
+unicode_script(70849, 70849, 'Tirhuta').
+unicode_script(70850, 70851, 'Tirhuta').
+unicode_script(70852, 70853, 'Tirhuta').
+unicode_script(70854, 70854, 'Tirhuta').
+unicode_script(70855, 70855, 'Tirhuta').
+unicode_script(70864, 70873, 'Tirhuta').
+unicode_script(71840, 71903, 'Warang_Citi').
+unicode_script(71904, 71913, 'Warang_Citi').
+unicode_script(71914, 71922, 'Warang_Citi').
+unicode_script(71935, 71935, 'Warang_Citi').
+unicode_script(71424, 71450, 'Ahom').
+unicode_script(71453, 71453, 'Ahom').
+unicode_script(71454, 71454, 'Ahom').
+unicode_script(71455, 71455, 'Ahom').
+unicode_script(71456, 71457, 'Ahom').
+unicode_script(71458, 71461, 'Ahom').
+unicode_script(71462, 71462, 'Ahom').
+unicode_script(71463, 71467, 'Ahom').
+unicode_script(71472, 71481, 'Ahom').
+unicode_script(71482, 71483, 'Ahom').
+unicode_script(71484, 71486, 'Ahom').
+unicode_script(71487, 71487, 'Ahom').
+unicode_script(71488, 71494, 'Ahom').
+unicode_script(82944, 83526, 'Anatolian_Hieroglyphs').
+unicode_script(67808, 67826, 'Hatran').
+unicode_script(67828, 67829, 'Hatran').
+unicode_script(67835, 67839, 'Hatran').
+unicode_script(70272, 70278, 'Multani').
+unicode_script(70280, 70280, 'Multani').
+unicode_script(70282, 70285, 'Multani').
+unicode_script(70287, 70301, 'Multani').
+unicode_script(70303, 70312, 'Multani').
+unicode_script(70313, 70313, 'Multani').
+unicode_script(68736, 68786, 'Old_Hungarian').
+unicode_script(68800, 68850, 'Old_Hungarian').
+unicode_script(68858, 68863, 'Old_Hungarian').
+unicode_script(120832, 121343, 'SignWriting').
+unicode_script(121344, 121398, 'SignWriting').
+unicode_script(121399, 121402, 'SignWriting').
+unicode_script(121403, 121452, 'SignWriting').
+unicode_script(121453, 121460, 'SignWriting').
+unicode_script(121461, 121461, 'SignWriting').
+unicode_script(121462, 121475, 'SignWriting').
+unicode_script(121476, 121476, 'SignWriting').
+unicode_script(121477, 121478, 'SignWriting').
+unicode_script(121479, 121483, 'SignWriting').
+unicode_script(121499, 121503, 'SignWriting').
+unicode_script(121505, 121519, 'SignWriting').
+unicode_script(125184, 125251, 'Adlam').
+unicode_script(125252, 125258, 'Adlam').
+unicode_script(125259, 125259, 'Adlam').
+unicode_script(125264, 125273, 'Adlam').
+unicode_script(125278, 125279, 'Adlam').
+unicode_script(72704, 72712, 'Bhaiksuki').
+unicode_script(72714, 72750, 'Bhaiksuki').
+unicode_script(72751, 72751, 'Bhaiksuki').
+unicode_script(72752, 72758, 'Bhaiksuki').
+unicode_script(72760, 72765, 'Bhaiksuki').
+unicode_script(72766, 72766, 'Bhaiksuki').
+unicode_script(72767, 72767, 'Bhaiksuki').
+unicode_script(72768, 72768, 'Bhaiksuki').
+unicode_script(72769, 72773, 'Bhaiksuki').
+unicode_script(72784, 72793, 'Bhaiksuki').
+unicode_script(72794, 72812, 'Bhaiksuki').
+unicode_script(72816, 72817, 'Marchen').
+unicode_script(72818, 72847, 'Marchen').
+unicode_script(72850, 72871, 'Marchen').
+unicode_script(72873, 72873, 'Marchen').
+unicode_script(72874, 72880, 'Marchen').
+unicode_script(72881, 72881, 'Marchen').
+unicode_script(72882, 72883, 'Marchen').
+unicode_script(72884, 72884, 'Marchen').
+unicode_script(72885, 72886, 'Marchen').
+unicode_script(70656, 70708, 'Newa').
+unicode_script(70709, 70711, 'Newa').
+unicode_script(70712, 70719, 'Newa').
+unicode_script(70720, 70721, 'Newa').
+unicode_script(70722, 70724, 'Newa').
+unicode_script(70725, 70725, 'Newa').
+unicode_script(70726, 70726, 'Newa').
+unicode_script(70727, 70730, 'Newa').
+unicode_script(70731, 70735, 'Newa').
+unicode_script(70736, 70745, 'Newa').
+unicode_script(70746, 70747, 'Newa').
+unicode_script(70749, 70749, 'Newa').
+unicode_script(70750, 70750, 'Newa').
+unicode_script(70751, 70753, 'Newa').
+unicode_script(66736, 66771, 'Osage').
+unicode_script(66776, 66811, 'Osage').
+unicode_script(94176, 94176, 'Tangut').
+unicode_script(94208, 101119, 'Tangut').
+unicode_script(101632, 101662, 'Tangut').
+unicode_script(101760, 101874, 'Tangut').
+unicode_script(72960, 72966, 'Masaram_Gondi').
+unicode_script(72968, 72969, 'Masaram_Gondi').
+unicode_script(72971, 73008, 'Masaram_Gondi').
+unicode_script(73009, 73014, 'Masaram_Gondi').
+unicode_script(73018, 73018, 'Masaram_Gondi').
+unicode_script(73020, 73021, 'Masaram_Gondi').
+unicode_script(73023, 73029, 'Masaram_Gondi').
+unicode_script(73030, 73030, 'Masaram_Gondi').
+unicode_script(73031, 73031, 'Masaram_Gondi').
+unicode_script(73040, 73049, 'Masaram_Gondi').
+unicode_script(94177, 94177, 'Nushu').
+unicode_script(110960, 111355, 'Nushu').
+unicode_script(72272, 72272, 'Soyombo').
+unicode_script(72273, 72278, 'Soyombo').
+unicode_script(72279, 72280, 'Soyombo').
+unicode_script(72281, 72283, 'Soyombo').
+unicode_script(72284, 72329, 'Soyombo').
+unicode_script(72330, 72342, 'Soyombo').
+unicode_script(72343, 72343, 'Soyombo').
+unicode_script(72344, 72345, 'Soyombo').
+unicode_script(72346, 72348, 'Soyombo').
+unicode_script(72349, 72349, 'Soyombo').
+unicode_script(72350, 72354, 'Soyombo').
+unicode_script(72192, 72192, 'Zanabazar_Square').
+unicode_script(72193, 72202, 'Zanabazar_Square').
+unicode_script(72203, 72242, 'Zanabazar_Square').
+unicode_script(72243, 72248, 'Zanabazar_Square').
+unicode_script(72249, 72249, 'Zanabazar_Square').
+unicode_script(72250, 72250, 'Zanabazar_Square').
+unicode_script(72251, 72254, 'Zanabazar_Square').
+unicode_script(72255, 72262, 'Zanabazar_Square').
+unicode_script(72263, 72263, 'Zanabazar_Square').
+unicode_script(71680, 71723, 'Dogra').
+unicode_script(71724, 71726, 'Dogra').
+unicode_script(71727, 71735, 'Dogra').
+unicode_script(71736, 71736, 'Dogra').
+unicode_script(71737, 71738, 'Dogra').
+unicode_script(71739, 71739, 'Dogra').
+unicode_script(73056, 73061, 'Gunjala_Gondi').
+unicode_script(73063, 73064, 'Gunjala_Gondi').
+unicode_script(73066, 73097, 'Gunjala_Gondi').
+unicode_script(73098, 73102, 'Gunjala_Gondi').
+unicode_script(73104, 73105, 'Gunjala_Gondi').
+unicode_script(73107, 73108, 'Gunjala_Gondi').
+unicode_script(73109, 73109, 'Gunjala_Gondi').
+unicode_script(73110, 73110, 'Gunjala_Gondi').
+unicode_script(73111, 73111, 'Gunjala_Gondi').
+unicode_script(73112, 73112, 'Gunjala_Gondi').
+unicode_script(73120, 73129, 'Gunjala_Gondi').
+unicode_script(73440, 73458, 'Makasar').
+unicode_script(73459, 73460, 'Makasar').
+unicode_script(73461, 73462, 'Makasar').
+unicode_script(73463, 73464, 'Makasar').
+unicode_script(93760, 93823, 'Medefaidrin').
+unicode_script(93824, 93846, 'Medefaidrin').
+unicode_script(93847, 93850, 'Medefaidrin').
+unicode_script(68864, 68899, 'Hanifi_Rohingya').
+unicode_script(68900, 68903, 'Hanifi_Rohingya').
+unicode_script(68912, 68921, 'Hanifi_Rohingya').
+unicode_script(69424, 69445, 'Sogdian').
+unicode_script(69446, 69456, 'Sogdian').
+unicode_script(69457, 69460, 'Sogdian').
+unicode_script(69461, 69465, 'Sogdian').
+unicode_script(69376, 69404, 'Old_Sogdian').
+unicode_script(69405, 69414, 'Old_Sogdian').
+unicode_script(69415, 69415, 'Old_Sogdian').
+unicode_script(69600, 69622, 'Elymaic').
+unicode_script(72096, 72103, 'Nandinagari').
+unicode_script(72106, 72144, 'Nandinagari').
+unicode_script(72145, 72147, 'Nandinagari').
+unicode_script(72148, 72151, 'Nandinagari').
+unicode_script(72154, 72155, 'Nandinagari').
+unicode_script(72156, 72159, 'Nandinagari').
+unicode_script(72160, 72160, 'Nandinagari').
+unicode_script(72161, 72161, 'Nandinagari').
+unicode_script(72162, 72162, 'Nandinagari').
+unicode_script(72163, 72163, 'Nandinagari').
+unicode_script(72164, 72164, 'Nandinagari').
+unicode_script(123136, 123180, 'Nyiakeng_Puachue_Hmong').
+unicode_script(123184, 123190, 'Nyiakeng_Puachue_Hmong').
+unicode_script(123191, 123197, 'Nyiakeng_Puachue_Hmong').
+unicode_script(123200, 123209, 'Nyiakeng_Puachue_Hmong').
+unicode_script(123214, 123214, 'Nyiakeng_Puachue_Hmong').
+unicode_script(123215, 123215, 'Nyiakeng_Puachue_Hmong').
+unicode_script(123584, 123627, 'Wancho').
+unicode_script(123628, 123631, 'Wancho').
+unicode_script(123632, 123641, 'Wancho').
+unicode_script(123647, 123647, 'Wancho').
+unicode_script(69552, 69572, 'Chorasmian').
+unicode_script(69573, 69579, 'Chorasmian').
+unicode_script(71936, 71942, 'Dives_Akuru').
+unicode_script(71945, 71945, 'Dives_Akuru').
+unicode_script(71948, 71955, 'Dives_Akuru').
+unicode_script(71957, 71958, 'Dives_Akuru').
+unicode_script(71960, 71983, 'Dives_Akuru').
+unicode_script(71984, 71989, 'Dives_Akuru').
+unicode_script(71991, 71992, 'Dives_Akuru').
+unicode_script(71995, 71996, 'Dives_Akuru').
+unicode_script(71997, 71997, 'Dives_Akuru').
+unicode_script(71998, 71998, 'Dives_Akuru').
+unicode_script(71999, 71999, 'Dives_Akuru').
+unicode_script(72000, 72000, 'Dives_Akuru').
+unicode_script(72001, 72001, 'Dives_Akuru').
+unicode_script(72002, 72002, 'Dives_Akuru').
+unicode_script(72003, 72003, 'Dives_Akuru').
+unicode_script(72004, 72006, 'Dives_Akuru').
+unicode_script(72016, 72025, 'Dives_Akuru').
+unicode_script(94180, 94180, 'Khitan_Small_Script').
+unicode_script(101120, 101589, 'Khitan_Small_Script').
+unicode_script(101631, 101631, 'Khitan_Small_Script').
+unicode_script(69248, 69289, 'Yezidi').
+unicode_script(69291, 69292, 'Yezidi').
+unicode_script(69293, 69293, 'Yezidi').
+unicode_script(69296, 69297, 'Yezidi').
+unicode_script(77712, 77808, 'Cypro_Minoan').
+unicode_script(77809, 77810, 'Cypro_Minoan').
+unicode_script(69488, 69505, 'Old_Uyghur').
+unicode_script(69506, 69509, 'Old_Uyghur').
+unicode_script(69510, 69513, 'Old_Uyghur').
+unicode_script(92784, 92862, 'Tangsa').
+unicode_script(92864, 92873, 'Tangsa').
+unicode_script(123536, 123565, 'Toto').
+unicode_script(123566, 123566, 'Toto').
+unicode_script(66928, 66938, 'Vithkuqi').
+unicode_script(66940, 66954, 'Vithkuqi').
+unicode_script(66956, 66962, 'Vithkuqi').
+unicode_script(66964, 66965, 'Vithkuqi').
+unicode_script(66967, 66977, 'Vithkuqi').
+unicode_script(66979, 66993, 'Vithkuqi').
+unicode_script(66995, 67001, 'Vithkuqi').
+unicode_script(67003, 67004, 'Vithkuqi').
+unicode_script(73472, 73473, 'Kawi').
+unicode_script(73474, 73474, 'Kawi').
+unicode_script(73475, 73475, 'Kawi').
+unicode_script(73476, 73488, 'Kawi').
+unicode_script(73490, 73523, 'Kawi').
+unicode_script(73524, 73525, 'Kawi').
+unicode_script(73526, 73530, 'Kawi').
+unicode_script(73534, 73535, 'Kawi').
+unicode_script(73536, 73536, 'Kawi').
+unicode_script(73537, 73537, 'Kawi').
+unicode_script(73538, 73538, 'Kawi').
+unicode_script(73539, 73551, 'Kawi').
+unicode_script(73552, 73561, 'Kawi').
+unicode_script(73562, 73562, 'Kawi').
+unicode_script(124112, 124138, 'Nag_Mundari').
+unicode_script(124139, 124139, 'Nag_Mundari').
+unicode_script(124140, 124143, 'Nag_Mundari').
+unicode_script(124144, 124153, 'Nag_Mundari').
+unicode_script(68928, 68937, 'Garay').
+unicode_script(68938, 68941, 'Garay').
+unicode_script(68942, 68942, 'Garay').
+unicode_script(68943, 68943, 'Garay').
+unicode_script(68944, 68965, 'Garay').
+unicode_script(68969, 68973, 'Garay').
+unicode_script(68974, 68974, 'Garay').
+unicode_script(68975, 68975, 'Garay').
+unicode_script(68976, 68997, 'Garay').
+unicode_script(69006, 69007, 'Garay').
+unicode_script(90368, 90397, 'Gurung_Khema').
+unicode_script(90398, 90409, 'Gurung_Khema').
+unicode_script(90410, 90412, 'Gurung_Khema').
+unicode_script(90413, 90415, 'Gurung_Khema').
+unicode_script(90416, 90425, 'Gurung_Khema').
+unicode_script(93504, 93506, 'Kirat_Rai').
+unicode_script(93507, 93546, 'Kirat_Rai').
+unicode_script(93547, 93548, 'Kirat_Rai').
+unicode_script(93549, 93551, 'Kirat_Rai').
+unicode_script(93552, 93561, 'Kirat_Rai').
+unicode_script(124368, 124397, 'Ol_Onal').
+unicode_script(124398, 124399, 'Ol_Onal').
+unicode_script(124400, 124400, 'Ol_Onal').
+unicode_script(124401, 124410, 'Ol_Onal').
+unicode_script(124415, 124415, 'Ol_Onal').
+unicode_script(72640, 72672, 'Sunuwar').
+unicode_script(72673, 72673, 'Sunuwar').
+unicode_script(72688, 72697, 'Sunuwar').
+unicode_script(67008, 67059, 'Todhri').
+unicode_script(70528, 70537, 'Tulu_Tigalari').
+unicode_script(70539, 70539, 'Tulu_Tigalari').
+unicode_script(70542, 70542, 'Tulu_Tigalari').
+unicode_script(70544, 70581, 'Tulu_Tigalari').
+unicode_script(70583, 70583, 'Tulu_Tigalari').
+unicode_script(70584, 70586, 'Tulu_Tigalari').
+unicode_script(70587, 70592, 'Tulu_Tigalari').
+unicode_script(70594, 70594, 'Tulu_Tigalari').
+unicode_script(70597, 70597, 'Tulu_Tigalari').
+unicode_script(70599, 70602, 'Tulu_Tigalari').
+unicode_script(70604, 70605, 'Tulu_Tigalari').
+unicode_script(70606, 70606, 'Tulu_Tigalari').
+unicode_script(70607, 70607, 'Tulu_Tigalari').
+unicode_script(70608, 70608, 'Tulu_Tigalari').
+unicode_script(70609, 70609, 'Tulu_Tigalari').
+unicode_script(70610, 70610, 'Tulu_Tigalari').
+unicode_script(70611, 70611, 'Tulu_Tigalari').
+unicode_script(70612, 70613, 'Tulu_Tigalari').
+unicode_script(70615, 70616, 'Tulu_Tigalari').
+unicode_script(70625, 70626, 'Tulu_Tigalari').
+unicode_script(67904, 67929, 'Sidetic').
+unicode_script(124608, 124638, 'Tai_Yo').
+unicode_script(124640, 124642, 'Tai_Yo').
+unicode_script(124643, 124643, 'Tai_Yo').
+unicode_script(124644, 124645, 'Tai_Yo').
+unicode_script(124646, 124646, 'Tai_Yo').
+unicode_script(124647, 124653, 'Tai_Yo').
+unicode_script(124654, 124655, 'Tai_Yo').
+unicode_script(124656, 124660, 'Tai_Yo').
+unicode_script(124661, 124661, 'Tai_Yo').
+unicode_script(124670, 124670, 'Tai_Yo').
+unicode_script(124671, 124671, 'Tai_Yo').
+unicode_script(73136, 73176, 'Tolong_Siki').
+unicode_script(73177, 73177, 'Tolong_Siki').
+unicode_script(73178, 73179, 'Tolong_Siki').
+unicode_script(73184, 73193, 'Tolong_Siki').
+unicode_script(93856, 93880, 'Beria_Erfe').
+unicode_script(93883, 93907, 'Beria_Erfe').

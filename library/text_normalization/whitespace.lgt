@@ -19,8 +19,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-:- category(text_whitespace,
-	extends(unicode_character_data)).
+:- category(text_whitespace).
 
 	:- info([
 		version is 1:0:0,
@@ -35,6 +34,10 @@
 	:- info(normalize_whitespace_codes/6, [
 		comment is 'Normalizes code-list whitespace using trim, collapse, line-ending, and control-character policies.',
 		argnames is ['Codes', 'Trim', 'Collapse', 'LineEndings', 'Controls', 'Normalized']
+	]).
+
+	:- uses(user, [
+		unicode_data_control_range/2
 	]).
 
 	normalize_whitespace_codes(Codes, Trim, Collapse, LineEndings, Controls, Normalized) :-
@@ -141,7 +144,7 @@
 	line_break_code(8233).
 
 	control_code(Code) :-
-		^^control_code_range(Start, End),
+		unicode_data_control_range(Start, End),
 		Code >= Start,
 		Code =< End,
 		!.

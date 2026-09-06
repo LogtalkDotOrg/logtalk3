@@ -1,474 +1,250 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  This file is part of VivoMind Prolog Unicode Resources
-%  SPDX-License-Identifier: CC0-1.0
+%  This file is part of Logtalk <https://logtalk.org/>
+%  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
+%  SPDX-License-Identifier: Apache-2.0
 %
-%  VivoMind Prolog Unicode Resources is free software distributed using the
-%  Creative Commons CC0 1.0 Universal (CC0 1.0) - Public Domain Dedication
-%  license
+%  Licensed under the Apache License, Version 2.0 (the "License");
+%  you may not use this file except in compliance with the License.
+%  You may obtain a copy of the License at
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%  Last modified: March 28, 2012
+%      http://www.apache.org/licenses/LICENSE-2.0
 %
-%  Original Unicode file header comments follow
+%  Unless required by applicable law or agreed to in writing, software
+%  distributed under the License is distributed on an "AS IS" BASIS,
+%  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+%  See the License for the specific language governing permissions and
+%  limitations under the License.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-/*
-# DerivedJoiningGroup-6.1.0.txt
-# Date: 2011-07-25, 00:54:14 GMT [MD]
-#
-# Unicode Character Database
-# Copyright (c) 1991-2011 Unicode, Inc.
-# For terms of use, see http://www.unicode.org/terms_of_use.html
-# For documentation, see http://www.unicode.org/reports/tr44/
+% Generated from Unicode 17.0.0 UCD data. Do not edit.
 
-# ================================================
-
-# Joining Group (listing ArabicShaping.txt, field 3)
-
-#  All code points not explicitly listed for Joining_Group
-#  have the value No_Joining_Group.
-
-# @missing: 0000..10FFFF; No_Joining_Group
-*/
-
-unicode_joining_group(CodePoint, Group) :-
+unicode_joining_group(CodePoint, Value) :-
 	(	var(CodePoint) ->
-		% generate code point pairs
-		unicode_joining_group(CodePointStart, CodePointEnd, Group),
-		between(CodePointStart, CodePointEnd, CodePoint)
-	;	% try first-argument indexing first
-		unicode_joining_group(CodePoint, _, CodePointGroup) ->
-		Group = CodePointGroup
-	;	% look for a code point range that includes the given code point
-		unicode_joining_group(CodePointStart, CodePointEnd, CodePointGroup),
-		between(CodePointStart, CodePointEnd, CodePoint) ->
-		Group = CodePointGroup
-	;	% missing code point; see original comment above
-		between(0x0000, 0x10FFFF, CodePoint),
-		Group = 'No_Joining_Group'
+		unicode_joining_group(Start, End, Value),
+		between(Start, End, CodePoint)
+	;	unicode_joining_group(Start, End, SpecificValue),
+		CodePoint >= Start, CodePoint =< End ->
+		Value = SpecificValue
+	;	between(0, 1114111, CodePoint),
+		Value = 'No_Joining_Group'
 	).
 
-% ================================================
-
-unicode_joining_group(0x0639, 0x063A, 'Ain'). % Lo   [2] ARABIC LETTER AIN..ARABIC LETTER GHAIN
-unicode_joining_group(0x06A0, 0x06A0, 'Ain'). % Lo       ARABIC LETTER AIN WITH THREE DOTS ABOVE
-unicode_joining_group(0x06FC, 0x06FC, 'Ain'). % Lo       ARABIC LETTER GHAIN WITH DOT BELOW
-unicode_joining_group(0x075D, 0x075F, 'Ain'). % Lo   [3] ARABIC LETTER AIN WITH TWO DOTS ABOVE..ARABIC LETTER AIN WITH TWO DOTS VERTICALLY ABOVE
-
-% Total code points: 7
-
-% ================================================
-
-unicode_joining_group(0x0710, 0x0710, 'Alaph'). % Lo       SYRIAC LETTER ALAPH
-
-% Total code points: 1
-
-% ================================================
-
-unicode_joining_group(0x0622, 0x0623, 'Alef'). % Lo   [2] ARABIC LETTER ALEF WITH MADDA ABOVE..ARABIC LETTER ALEF WITH HAMZA ABOVE
-unicode_joining_group(0x0625, 0x0625, 'Alef'). % Lo       ARABIC LETTER ALEF WITH HAMZA BELOW
-unicode_joining_group(0x0627, 0x0627, 'Alef'). % Lo       ARABIC LETTER ALEF
-unicode_joining_group(0x0671, 0x0673, 'Alef'). % Lo   [3] ARABIC LETTER ALEF WASLA..ARABIC LETTER ALEF WITH WAVY HAMZA BELOW
-unicode_joining_group(0x0675, 0x0675, 'Alef'). % Lo       ARABIC LETTER HIGH HAMZA ALEF
-unicode_joining_group(0x0773, 0x0774, 'Alef'). % Lo   [2] ARABIC LETTER ALEF WITH EXTENDED ARABIC-INDIC DIGIT TWO ABOVE..ARABIC LETTER ALEF WITH EXTENDED ARABIC-INDIC DIGIT THREE ABOVE
-
-% Total code points: 10
-
-% ================================================
-
-unicode_joining_group(0x0628, 0x0628, 'Beh'). % Lo       ARABIC LETTER BEH
-unicode_joining_group(0x062A, 0x062B, 'Beh'). % Lo   [2] ARABIC LETTER TEH..ARABIC LETTER THEH
-unicode_joining_group(0x066E, 0x066E, 'Beh'). % Lo       ARABIC LETTER DOTLESS BEH
-unicode_joining_group(0x0679, 0x0680, 'Beh'). % Lo   [8] ARABIC LETTER TTEH..ARABIC LETTER BEHEH
-unicode_joining_group(0x0750, 0x0756, 'Beh'). % Lo   [7] ARABIC LETTER BEH WITH THREE DOTS HORIZONTALLY BELOW..ARABIC LETTER BEH WITH SMALL V
-unicode_joining_group(0x08A0, 0x08A0, 'Beh'). % Lo       ARABIC LETTER BEH WITH SMALL V BELOW
-
-% Total code points: 20
-
-% ================================================
-
-unicode_joining_group(0x0712, 0x0712, 'Beth'). % Lo       SYRIAC LETTER BETH
-unicode_joining_group(0x072D, 0x072D, 'Beth'). % Lo       SYRIAC LETTER PERSIAN BHETH
-
-% Total code points: 2
-
-% ================================================
-
-unicode_joining_group(0x062F, 0x0630, 'Dal'). % Lo   [2] ARABIC LETTER DAL..ARABIC LETTER THAL
-unicode_joining_group(0x0688, 0x0690, 'Dal'). % Lo   [9] ARABIC LETTER DDAL..ARABIC LETTER DAL WITH FOUR DOTS ABOVE
-unicode_joining_group(0x06EE, 0x06EE, 'Dal'). % Lo       ARABIC LETTER DAL WITH INVERTED V
-unicode_joining_group(0x0759, 0x075A, 'Dal'). % Lo   [2] ARABIC LETTER DAL WITH TWO DOTS VERTICALLY BELOW AND SMALL TAH..ARABIC LETTER DAL WITH INVERTED SMALL V BELOW
-
-% Total code points: 14
-
-% ================================================
-
-unicode_joining_group(0x0715, 0x0716, 'Dalath_Rish'). % Lo   [2] SYRIAC LETTER DALATH..SYRIAC LETTER DOTLESS DALATH RISH
-unicode_joining_group(0x072A, 0x072A, 'Dalath_Rish'). % Lo       SYRIAC LETTER RISH
-unicode_joining_group(0x072F, 0x072F, 'Dalath_Rish'). % Lo       SYRIAC LETTER PERSIAN DHALATH
-
-% Total code points: 4
-
-% ================================================
-
-unicode_joining_group(0x0725, 0x0725, 'E'). % Lo       SYRIAC LETTER E
-
-% Total code points: 1
-
-% ================================================
-
-unicode_joining_group(0x0641, 0x0641, 'Feh'). % Lo       ARABIC LETTER FEH
-unicode_joining_group(0x06A1, 0x06A6, 'Feh'). % Lo   [6] ARABIC LETTER DOTLESS FEH..ARABIC LETTER PEHEH
-unicode_joining_group(0x0760, 0x0761, 'Feh'). % Lo   [2] ARABIC LETTER FEH WITH TWO DOTS BELOW..ARABIC LETTER FEH WITH THREE DOTS POINTING UPWARDS BELOW
-unicode_joining_group(0x08A4, 0x08A4, 'Feh'). % Lo       ARABIC LETTER FEH WITH DOT BELOW AND THREE DOTS ABOVE
-
-% Total code points: 10
-
-% ================================================
-
-unicode_joining_group(0x0724, 0x0724, 'Final_Semkath'). % Lo       SYRIAC LETTER FINAL SEMKATH
-
-% Total code points: 1
-
-% ================================================
-
-unicode_joining_group(0x063B, 0x063C, 'Gaf'). % Lo   [2] ARABIC LETTER KEHEH WITH TWO DOTS ABOVE..ARABIC LETTER KEHEH WITH THREE DOTS BELOW
-unicode_joining_group(0x06A9, 0x06A9, 'Gaf'). % Lo       ARABIC LETTER KEHEH
-unicode_joining_group(0x06AB, 0x06AB, 'Gaf'). % Lo       ARABIC LETTER KAF WITH RING
-unicode_joining_group(0x06AF, 0x06B4, 'Gaf'). % Lo   [6] ARABIC LETTER GAF..ARABIC LETTER GAF WITH THREE DOTS ABOVE
-unicode_joining_group(0x0762, 0x0764, 'Gaf'). % Lo   [3] ARABIC LETTER KEHEH WITH DOT ABOVE..ARABIC LETTER KEHEH WITH THREE DOTS POINTING UPWARDS BELOW
-
-% Total code points: 13
-
-% ================================================
-
-unicode_joining_group(0x0713, 0x0714, 'Gamal'). % Lo   [2] SYRIAC LETTER GAMAL..SYRIAC LETTER GAMAL GARSHUNI
-unicode_joining_group(0x072E, 0x072E, 'Gamal'). % Lo       SYRIAC LETTER PERSIAN GHAMAL
-
-% Total code points: 3
-
-% ================================================
-
-unicode_joining_group(0x062C, 0x062E, 'Hah'). % Lo   [3] ARABIC LETTER JEEM..ARABIC LETTER KHAH
-unicode_joining_group(0x0681, 0x0687, 'Hah'). % Lo   [7] ARABIC LETTER HAH WITH HAMZA ABOVE..ARABIC LETTER TCHEHEH
-unicode_joining_group(0x06BF, 0x06BF, 'Hah'). % Lo       ARABIC LETTER TCHEH WITH DOT ABOVE
-unicode_joining_group(0x0757, 0x0758, 'Hah'). % Lo   [2] ARABIC LETTER HAH WITH TWO DOTS ABOVE..ARABIC LETTER HAH WITH THREE DOTS POINTING UPWARDS BELOW
-unicode_joining_group(0x076E, 0x076F, 'Hah'). % Lo   [2] ARABIC LETTER HAH WITH SMALL ARABIC LETTER TAH BELOW..ARABIC LETTER HAH WITH SMALL ARABIC LETTER TAH AND TWO DOTS
-unicode_joining_group(0x0772, 0x0772, 'Hah'). % Lo       ARABIC LETTER HAH WITH SMALL ARABIC LETTER TAH ABOVE
-unicode_joining_group(0x077C, 0x077C, 'Hah'). % Lo       ARABIC LETTER HAH WITH EXTENDED ARABIC-INDIC DIGIT FOUR BELOW
-unicode_joining_group(0x08A2, 0x08A2, 'Hah'). % Lo       ARABIC LETTER JEEM WITH TWO DOTS ABOVE
-
-% Total code points: 18
-
-% ================================================
-
-unicode_joining_group(0x06C3, 0x06C3, 'Teh_Marbuta_Goal'). % Lo       ARABIC LETTER TEH MARBUTA GOAL
-
-% Total code points: 1
-
-% ================================================
-
-unicode_joining_group(0x0717, 0x0717, 'He'). % Lo       SYRIAC LETTER HE
-
-% Total code points: 1
-
-% ================================================
-
-unicode_joining_group(0x0647, 0x0647, 'Heh'). % Lo       ARABIC LETTER HEH
-
-% Total code points: 1
-
-% ================================================
-
-unicode_joining_group(0x06C1, 0x06C2, 'Heh_Goal'). % Lo   [2] ARABIC LETTER HEH GOAL..ARABIC LETTER HEH GOAL WITH HAMZA ABOVE
-
-% Total code points: 2
-
-% ================================================
-
-unicode_joining_group(0x071A, 0x071A, 'Heth'). % Lo       SYRIAC LETTER HETH
-
-% Total code points: 1
-
-% ================================================
-
-unicode_joining_group(0x0643, 0x0643, 'Kaf'). % Lo       ARABIC LETTER KAF
-unicode_joining_group(0x06AC, 0x06AE, 'Kaf'). % Lo   [3] ARABIC LETTER KAF WITH DOT ABOVE..ARABIC LETTER KAF WITH THREE DOTS BELOW
-unicode_joining_group(0x077F, 0x077F, 'Kaf'). % Lo       ARABIC LETTER KAF WITH TWO DOTS ABOVE
-
-% Total code points: 5
-
-% ================================================
-
-unicode_joining_group(0x071F, 0x071F, 'Kaph'). % Lo       SYRIAC LETTER KAPH
-
-% Total code points: 1
-
-% ================================================
-
-unicode_joining_group(0x06BE, 0x06BE, 'Knotted_Heh'). % Lo       ARABIC LETTER HEH DOACHASHMEE
-unicode_joining_group(0x06FF, 0x06FF, 'Knotted_Heh'). % Lo       ARABIC LETTER HEH WITH INVERTED V
-
-% Total code points: 2
-
-% ================================================
-
-unicode_joining_group(0x0644, 0x0644, 'Lam'). % Lo       ARABIC LETTER LAM
-unicode_joining_group(0x06B5, 0x06B8, 'Lam'). % Lo   [4] ARABIC LETTER LAM WITH SMALL V..ARABIC LETTER LAM WITH THREE DOTS BELOW
-unicode_joining_group(0x076A, 0x076A, 'Lam'). % Lo       ARABIC LETTER LAM WITH BAR
-unicode_joining_group(0x08A6, 0x08A6, 'Lam'). % Lo       ARABIC LETTER LAM WITH DOUBLE BAR
-
-% Total code points: 7
-
-% ================================================
-
-unicode_joining_group(0x0720, 0x0720, 'Lamadh'). % Lo       SYRIAC LETTER LAMADH
-
-% Total code points: 1
-
-% ================================================
-
-unicode_joining_group(0x0645, 0x0645, 'Meem'). % Lo       ARABIC LETTER MEEM
-unicode_joining_group(0x0765, 0x0766, 'Meem'). % Lo   [2] ARABIC LETTER MEEM WITH DOT ABOVE..ARABIC LETTER MEEM WITH DOT BELOW
-unicode_joining_group(0x08A7, 0x08A7, 'Meem'). % Lo       ARABIC LETTER MEEM WITH THREE DOTS ABOVE
-
-% Total code points: 4
-
-% ================================================
-
-unicode_joining_group(0x0721, 0x0721, 'Mim'). % Lo       SYRIAC LETTER MIM
-
-% Total code points: 1
-
-% ================================================
-
-unicode_joining_group(0x0646, 0x0646, 'Noon'). % Lo       ARABIC LETTER NOON
-unicode_joining_group(0x06B9, 0x06BC, 'Noon'). % Lo   [4] ARABIC LETTER NOON WITH DOT BELOW..ARABIC LETTER NOON WITH RING
-unicode_joining_group(0x0767, 0x0769, 'Noon'). % Lo   [3] ARABIC LETTER NOON WITH TWO DOTS BELOW..ARABIC LETTER NOON WITH SMALL V
-
-% Total code points: 8
-
-% ================================================
-
-unicode_joining_group(0x0722, 0x0722, 'Nun'). % Lo       SYRIAC LETTER NUN
-
-% Total code points: 1
-
-% ================================================
-
-unicode_joining_group(0x0726, 0x0726, 'Pe'). % Lo       SYRIAC LETTER PE
-
-% Total code points: 1
-
-% ================================================
-
-unicode_joining_group(0x0642, 0x0642, 'Qaf'). % Lo       ARABIC LETTER QAF
-unicode_joining_group(0x066F, 0x066F, 'Qaf'). % Lo       ARABIC LETTER DOTLESS QAF
-unicode_joining_group(0x06A7, 0x06A8, 'Qaf'). % Lo   [2] ARABIC LETTER QAF WITH DOT ABOVE..ARABIC LETTER QAF WITH THREE DOTS ABOVE
-unicode_joining_group(0x08A5, 0x08A5, 'Qaf'). % Lo       ARABIC LETTER QAF WITH DOT BELOW
-
-% Total code points: 5
-
-% ================================================
-
-unicode_joining_group(0x0729, 0x0729, 'Qaph'). % Lo       SYRIAC LETTER QAPH
-
-% Total code points: 1
-
-% ================================================
-
-unicode_joining_group(0x0631, 0x0632, 'Reh'). % Lo   [2] ARABIC LETTER REH..ARABIC LETTER ZAIN
-unicode_joining_group(0x0691, 0x0699, 'Reh'). % Lo   [9] ARABIC LETTER RREH..ARABIC LETTER REH WITH FOUR DOTS ABOVE
-unicode_joining_group(0x06EF, 0x06EF, 'Reh'). % Lo       ARABIC LETTER REH WITH INVERTED V
-unicode_joining_group(0x075B, 0x075B, 'Reh'). % Lo       ARABIC LETTER REH WITH STROKE
-unicode_joining_group(0x076B, 0x076C, 'Reh'). % Lo   [2] ARABIC LETTER REH WITH TWO DOTS VERTICALLY ABOVE..ARABIC LETTER REH WITH HAMZA ABOVE
-unicode_joining_group(0x0771, 0x0771, 'Reh'). % Lo       ARABIC LETTER REH WITH SMALL ARABIC LETTER TAH AND TWO DOTS
-unicode_joining_group(0x08AA, 0x08AA, 'Reh'). % Lo       ARABIC LETTER REH WITH LOOP
-
-% Total code points: 17
-
-% ================================================
-
-unicode_joining_group(0x0727, 0x0727, 'Reversed_Pe'). % Lo       SYRIAC LETTER REVERSED PE
-
-% Total code points: 1
-
-% ================================================
-
-unicode_joining_group(0x0635, 0x0636, 'Sad'). % Lo   [2] ARABIC LETTER SAD..ARABIC LETTER DAD
-unicode_joining_group(0x069D, 0x069E, 'Sad'). % Lo   [2] ARABIC LETTER SAD WITH TWO DOTS BELOW..ARABIC LETTER SAD WITH THREE DOTS ABOVE
-unicode_joining_group(0x06FB, 0x06FB, 'Sad'). % Lo       ARABIC LETTER DAD WITH DOT BELOW
-
-% Total code points: 5
-
-% ================================================
-
-unicode_joining_group(0x0728, 0x0728, 'Sadhe'). % Lo       SYRIAC LETTER SADHE
-
-% Total code points: 1
-
-% ================================================
-
-unicode_joining_group(0x0633, 0x0634, 'Seen'). % Lo   [2] ARABIC LETTER SEEN..ARABIC LETTER SHEEN
-unicode_joining_group(0x069A, 0x069C, 'Seen'). % Lo   [3] ARABIC LETTER SEEN WITH DOT BELOW AND DOT ABOVE..ARABIC LETTER SEEN WITH THREE DOTS BELOW AND THREE DOTS ABOVE
-unicode_joining_group(0x06FA, 0x06FA, 'Seen'). % Lo       ARABIC LETTER SHEEN WITH DOT BELOW
-unicode_joining_group(0x075C, 0x075C, 'Seen'). % Lo       ARABIC LETTER SEEN WITH FOUR DOTS ABOVE
-unicode_joining_group(0x076D, 0x076D, 'Seen'). % Lo       ARABIC LETTER SEEN WITH TWO DOTS VERTICALLY ABOVE
-unicode_joining_group(0x0770, 0x0770, 'Seen'). % Lo       ARABIC LETTER SEEN WITH SMALL ARABIC LETTER TAH AND TWO DOTS
-unicode_joining_group(0x077D, 0x077E, 'Seen'). % Lo   [2] ARABIC LETTER SEEN WITH EXTENDED ARABIC-INDIC DIGIT FOUR ABOVE..ARABIC LETTER SEEN WITH INVERTED V
-
-% Total code points: 11
-
-% ================================================
-
-unicode_joining_group(0x0723, 0x0723, 'Semkath'). % Lo       SYRIAC LETTER SEMKATH
-
-% Total code points: 1
-
-% ================================================
-
-unicode_joining_group(0x072B, 0x072B, 'Shin'). % Lo       SYRIAC LETTER SHIN
-
-% Total code points: 1
-
-% ================================================
-
-unicode_joining_group(0x06AA, 0x06AA, 'Swash_Kaf'). % Lo       ARABIC LETTER SWASH KAF
-
-% Total code points: 1
-
-% ================================================
-
-unicode_joining_group(0x0637, 0x0638, 'Tah'). % Lo   [2] ARABIC LETTER TAH..ARABIC LETTER ZAH
-unicode_joining_group(0x069F, 0x069F, 'Tah'). % Lo       ARABIC LETTER TAH WITH THREE DOTS ABOVE
-unicode_joining_group(0x08A3, 0x08A3, 'Tah'). % Lo       ARABIC LETTER TAH WITH TWO DOTS ABOVE
-
-% Total code points: 4
-
-% ================================================
-
-unicode_joining_group(0x072C, 0x072C, 'Taw'). % Lo       SYRIAC LETTER TAW
-
-% Total code points: 1
-
-% ================================================
-
-unicode_joining_group(0x0629, 0x0629, 'Teh_Marbuta'). % Lo       ARABIC LETTER TEH MARBUTA
-unicode_joining_group(0x06C0, 0x06C0, 'Teh_Marbuta'). % Lo       ARABIC LETTER HEH WITH YEH ABOVE
-unicode_joining_group(0x06D5, 0x06D5, 'Teh_Marbuta'). % Lo       ARABIC LETTER AE
-
-% Total code points: 3
-
-% ================================================
-
-unicode_joining_group(0x071B, 0x071C, 'Teth'). % Lo   [2] SYRIAC LETTER TETH..SYRIAC LETTER TETH GARSHUNI
-
-% Total code points: 2
-
-% ================================================
-
-unicode_joining_group(0x0624, 0x0624, 'Waw'). % Lo       ARABIC LETTER WAW WITH HAMZA ABOVE
-unicode_joining_group(0x0648, 0x0648, 'Waw'). % Lo       ARABIC LETTER WAW
-unicode_joining_group(0x0676, 0x0677, 'Waw'). % Lo   [2] ARABIC LETTER HIGH HAMZA WAW..ARABIC LETTER U WITH HAMZA ABOVE
-unicode_joining_group(0x06C4, 0x06CB, 'Waw'). % Lo   [8] ARABIC LETTER WAW WITH RING..ARABIC LETTER VE
-unicode_joining_group(0x06CF, 0x06CF, 'Waw'). % Lo       ARABIC LETTER WAW WITH DOT ABOVE
-unicode_joining_group(0x0778, 0x0779, 'Waw'). % Lo   [2] ARABIC LETTER WAW WITH EXTENDED ARABIC-INDIC DIGIT TWO ABOVE..ARABIC LETTER WAW WITH EXTENDED ARABIC-INDIC DIGIT THREE ABOVE
-unicode_joining_group(0x08AB, 0x08AB, 'Waw'). % Lo       ARABIC LETTER WAW WITH DOT WITHIN
-
-% Total code points: 16
-
-% ================================================
-
-unicode_joining_group(0x0718, 0x0718, 'Syriac_Waw'). % Lo       SYRIAC LETTER WAW
-
-% Total code points: 1
-
-% ================================================
-
-unicode_joining_group(0x0620, 0x0620, 'Yeh'). % Lo       ARABIC LETTER KASHMIRI YEH
-unicode_joining_group(0x0626, 0x0626, 'Yeh'). % Lo       ARABIC LETTER YEH WITH HAMZA ABOVE
-unicode_joining_group(0x0649, 0x064A, 'Yeh'). % Lo   [2] ARABIC LETTER ALEF MAKSURA..ARABIC LETTER YEH
-unicode_joining_group(0x0678, 0x0678, 'Yeh'). % Lo       ARABIC LETTER HIGH HAMZA YEH
-unicode_joining_group(0x06D0, 0x06D1, 'Yeh'). % Lo   [2] ARABIC LETTER E..ARABIC LETTER YEH WITH THREE DOTS BELOW
-unicode_joining_group(0x0777, 0x0777, 'Yeh'). % Lo       ARABIC LETTER FARSI YEH WITH EXTENDED ARABIC-INDIC DIGIT FOUR BELOW
-unicode_joining_group(0x08A8, 0x08A9, 'Yeh'). % Lo   [2] ARABIC LETTER YEH WITH TWO DOTS BELOW AND HAMZA ABOVE..ARABIC LETTER YEH WITH TWO DOTS BELOW AND DOT ABOVE
-
-% Total code points: 10
-
-% ================================================
-
-unicode_joining_group(0x06D2, 0x06D3, 'Yeh_Barree'). % Lo   [2] ARABIC LETTER YEH BARREE..ARABIC LETTER YEH BARREE WITH HAMZA ABOVE
-
-% Total code points: 2
-
-% ================================================
-
-unicode_joining_group(0x06CD, 0x06CD, 'Yeh_With_Tail'). % Lo       ARABIC LETTER YEH WITH TAIL
-
-% Total code points: 1
-
-% ================================================
-
-unicode_joining_group(0x071D, 0x071D, 'Yudh'). % Lo       SYRIAC LETTER YUDH
-
-% Total code points: 1
-
-% ================================================
-
-unicode_joining_group(0x071E, 0x071E, 'Yudh_He'). % Lo       SYRIAC LETTER YUDH HE
-
-% Total code points: 1
-
-% ================================================
-
-unicode_joining_group(0x0719, 0x0719, 'Zain'). % Lo       SYRIAC LETTER ZAIN
-
-% Total code points: 1
-
-% ================================================
-
-unicode_joining_group(0x074D, 0x074D, 'Zhain'). % Lo       SYRIAC LETTER SOGDIAN ZHAIN
-
-% Total code points: 1
-
-% ================================================
-
-unicode_joining_group(0x074E, 0x074E, 'Khaph'). % Lo       SYRIAC LETTER SOGDIAN KHAPH
-
-% Total code points: 1
-
-% ================================================
-
-unicode_joining_group(0x074F, 0x074F, 'Fe'). % Lo       SYRIAC LETTER SOGDIAN FE
-
-% Total code points: 1
-
-% ================================================
-
-unicode_joining_group(0x077A, 0x077B, 'Burushaski_Yeh_Barree'). % Lo   [2] ARABIC LETTER YEH BARREE WITH EXTENDED ARABIC-INDIC DIGIT TWO ABOVE..ARABIC LETTER YEH BARREE WITH EXTENDED ARABIC-INDIC DIGIT THREE ABOVE
-
-% Total code points: 2
-
-% ================================================
-
-unicode_joining_group(0x063D, 0x063F, 'Farsi_Yeh'). % Lo   [3] ARABIC LETTER FARSI YEH WITH INVERTED V..ARABIC LETTER FARSI YEH WITH THREE DOTS ABOVE
-unicode_joining_group(0x06CC, 0x06CC, 'Farsi_Yeh'). % Lo       ARABIC LETTER FARSI YEH
-unicode_joining_group(0x06CE, 0x06CE, 'Farsi_Yeh'). % Lo       ARABIC LETTER YEH WITH SMALL V
-unicode_joining_group(0x0775, 0x0776, 'Farsi_Yeh'). % Lo   [2] ARABIC LETTER FARSI YEH WITH EXTENDED ARABIC-INDIC DIGIT TWO ABOVE..ARABIC LETTER FARSI YEH WITH EXTENDED ARABIC-INDIC DIGIT THREE ABOVE
-
-% Total code points: 7
-
-% ================================================
-
-unicode_joining_group(0x06BD, 0x06BD, 'Nya'). % Lo       ARABIC LETTER NOON WITH THREE DOTS ABOVE
-
-% Total code points: 1
-
-% ================================================
-
-unicode_joining_group(0x08AC, 0x08AC, 'Rohingya_Yeh'). % Lo       ARABIC LETTER ROHINGYA YEH
-
-% Total code points: 1
-
-% EOF
+unicode_joining_group(1593, 1594, 'Ain').
+unicode_joining_group(1696, 1696, 'Ain').
+unicode_joining_group(1788, 1788, 'Ain').
+unicode_joining_group(1885, 1887, 'Ain').
+unicode_joining_group(2227, 2227, 'Ain').
+unicode_joining_group(2243, 2243, 'Ain').
+unicode_joining_group(1808, 1808, 'Alaph').
+unicode_joining_group(1570, 1571, 'Alef').
+unicode_joining_group(1573, 1573, 'Alef').
+unicode_joining_group(1575, 1575, 'Alef').
+unicode_joining_group(1649, 1651, 'Alef').
+unicode_joining_group(1653, 1653, 'Alef').
+unicode_joining_group(1907, 1908, 'Alef').
+unicode_joining_group(2160, 2178, 'Alef').
+unicode_joining_group(1576, 1576, 'Beh').
+unicode_joining_group(1578, 1579, 'Beh').
+unicode_joining_group(1646, 1646, 'Beh').
+unicode_joining_group(1657, 1664, 'Beh').
+unicode_joining_group(1872, 1878, 'Beh').
+unicode_joining_group(2208, 2209, 'Beh').
+unicode_joining_group(2230, 2232, 'Beh').
+unicode_joining_group(2238, 2240, 'Beh').
+unicode_joining_group(1810, 1810, 'Beth').
+unicode_joining_group(1837, 1837, 'Beth').
+unicode_joining_group(1583, 1584, 'Dal').
+unicode_joining_group(1672, 1680, 'Dal').
+unicode_joining_group(1774, 1774, 'Dal').
+unicode_joining_group(1881, 1882, 'Dal').
+unicode_joining_group(2222, 2222, 'Dal').
+unicode_joining_group(69314, 69314, 'Dal').
+unicode_joining_group(1813, 1814, 'Dalath_Rish').
+unicode_joining_group(1834, 1834, 'Dalath_Rish').
+unicode_joining_group(1839, 1839, 'Dalath_Rish').
+unicode_joining_group(1829, 1829, 'E').
+unicode_joining_group(1601, 1601, 'Feh').
+unicode_joining_group(1697, 1702, 'Feh').
+unicode_joining_group(1888, 1889, 'Feh').
+unicode_joining_group(2212, 2212, 'Feh').
+unicode_joining_group(1828, 1828, 'Final_Semkath').
+unicode_joining_group(1595, 1596, 'Gaf').
+unicode_joining_group(1705, 1705, 'Gaf').
+unicode_joining_group(1707, 1707, 'Gaf').
+unicode_joining_group(1711, 1716, 'Gaf').
+unicode_joining_group(1890, 1892, 'Gaf').
+unicode_joining_group(2189, 2189, 'Gaf').
+unicode_joining_group(2224, 2224, 'Gaf').
+unicode_joining_group(2242, 2242, 'Gaf').
+unicode_joining_group(2248, 2248, 'Gaf').
+unicode_joining_group(1811, 1812, 'Gamal').
+unicode_joining_group(1838, 1838, 'Gamal').
+unicode_joining_group(1580, 1582, 'Hah').
+unicode_joining_group(1665, 1671, 'Hah').
+unicode_joining_group(1727, 1727, 'Hah').
+unicode_joining_group(1879, 1880, 'Hah').
+unicode_joining_group(1902, 1903, 'Hah').
+unicode_joining_group(1906, 1906, 'Hah').
+unicode_joining_group(1916, 1916, 'Hah').
+unicode_joining_group(2186, 2186, 'Hah').
+unicode_joining_group(2210, 2210, 'Hah').
+unicode_joining_group(2241, 2241, 'Hah').
+unicode_joining_group(2245, 2246, 'Hah').
+unicode_joining_group(1731, 1731, 'Teh_Marbuta_Goal').
+unicode_joining_group(1815, 1815, 'He').
+unicode_joining_group(1607, 1607, 'Heh').
+unicode_joining_group(1729, 1730, 'Heh_Goal').
+unicode_joining_group(1818, 1818, 'Heth').
+unicode_joining_group(1603, 1603, 'Kaf').
+unicode_joining_group(1708, 1710, 'Kaf').
+unicode_joining_group(1919, 1919, 'Kaf').
+unicode_joining_group(2228, 2228, 'Kaf').
+unicode_joining_group(69316, 69316, 'Kaf').
+unicode_joining_group(1823, 1823, 'Kaph').
+unicode_joining_group(1726, 1726, 'Knotted_Heh').
+unicode_joining_group(1791, 1791, 'Knotted_Heh').
+unicode_joining_group(1604, 1604, 'Lam').
+unicode_joining_group(1717, 1720, 'Lam').
+unicode_joining_group(1898, 1898, 'Lam').
+unicode_joining_group(2214, 2214, 'Lam').
+unicode_joining_group(2247, 2247, 'Lam').
+unicode_joining_group(1824, 1824, 'Lamadh').
+unicode_joining_group(1605, 1605, 'Meem').
+unicode_joining_group(1893, 1894, 'Meem').
+unicode_joining_group(2215, 2215, 'Meem').
+unicode_joining_group(1825, 1825, 'Mim').
+unicode_joining_group(1606, 1606, 'Noon').
+unicode_joining_group(1721, 1724, 'Noon').
+unicode_joining_group(1895, 1897, 'Noon').
+unicode_joining_group(2185, 2185, 'Noon').
+unicode_joining_group(2191, 2191, 'Noon').
+unicode_joining_group(1826, 1826, 'Nun').
+unicode_joining_group(1830, 1830, 'Pe').
+unicode_joining_group(1602, 1602, 'Qaf').
+unicode_joining_group(1647, 1647, 'Qaf').
+unicode_joining_group(1703, 1704, 'Qaf').
+unicode_joining_group(2213, 2213, 'Qaf').
+unicode_joining_group(2229, 2229, 'Qaf').
+unicode_joining_group(1833, 1833, 'Qaph').
+unicode_joining_group(1585, 1586, 'Reh').
+unicode_joining_group(1681, 1689, 'Reh').
+unicode_joining_group(1775, 1775, 'Reh').
+unicode_joining_group(1883, 1883, 'Reh').
+unicode_joining_group(1899, 1900, 'Reh').
+unicode_joining_group(1905, 1905, 'Reh').
+unicode_joining_group(2218, 2218, 'Reh').
+unicode_joining_group(2226, 2226, 'Reh').
+unicode_joining_group(2233, 2233, 'Reh').
+unicode_joining_group(1831, 1831, 'Reversed_Pe').
+unicode_joining_group(1589, 1590, 'Sad').
+unicode_joining_group(1693, 1694, 'Sad').
+unicode_joining_group(1787, 1787, 'Sad').
+unicode_joining_group(2223, 2223, 'Sad').
+unicode_joining_group(1832, 1832, 'Sadhe').
+unicode_joining_group(1587, 1588, 'Seen').
+unicode_joining_group(1690, 1692, 'Seen').
+unicode_joining_group(1786, 1786, 'Seen').
+unicode_joining_group(1884, 1884, 'Seen').
+unicode_joining_group(1901, 1901, 'Seen').
+unicode_joining_group(1904, 1904, 'Seen').
+unicode_joining_group(1917, 1918, 'Seen').
+unicode_joining_group(1827, 1827, 'Semkath').
+unicode_joining_group(1835, 1835, 'Shin').
+unicode_joining_group(1706, 1706, 'Swash_Kaf').
+unicode_joining_group(1591, 1592, 'Tah').
+unicode_joining_group(1695, 1695, 'Tah').
+unicode_joining_group(2187, 2188, 'Tah').
+unicode_joining_group(2211, 2211, 'Tah').
+unicode_joining_group(69315, 69315, 'Tah').
+unicode_joining_group(1836, 1836, 'Taw').
+unicode_joining_group(1577, 1577, 'Teh_Marbuta').
+unicode_joining_group(1728, 1728, 'Teh_Marbuta').
+unicode_joining_group(1749, 1749, 'Teh_Marbuta').
+unicode_joining_group(1819, 1820, 'Teth').
+unicode_joining_group(1572, 1572, 'Waw').
+unicode_joining_group(1608, 1608, 'Waw').
+unicode_joining_group(1654, 1655, 'Waw').
+unicode_joining_group(1732, 1739, 'Waw').
+unicode_joining_group(1743, 1743, 'Waw').
+unicode_joining_group(1912, 1913, 'Waw').
+unicode_joining_group(2219, 2219, 'Waw').
+unicode_joining_group(1816, 1816, 'Syriac_Waw').
+unicode_joining_group(1574, 1574, 'Yeh').
+unicode_joining_group(1609, 1610, 'Yeh').
+unicode_joining_group(1656, 1656, 'Yeh').
+unicode_joining_group(1744, 1745, 'Yeh').
+unicode_joining_group(1911, 1911, 'Yeh').
+unicode_joining_group(2216, 2217, 'Yeh').
+unicode_joining_group(2234, 2234, 'Yeh').
+unicode_joining_group(69319, 69319, 'Yeh').
+unicode_joining_group(1746, 1747, 'Yeh_Barree').
+unicode_joining_group(1741, 1741, 'Yeh_With_Tail').
+unicode_joining_group(1821, 1821, 'Yudh').
+unicode_joining_group(1822, 1822, 'Yudh_He').
+unicode_joining_group(1817, 1817, 'Zain').
+unicode_joining_group(1869, 1869, 'Zhain').
+unicode_joining_group(1870, 1870, 'Khaph').
+unicode_joining_group(1871, 1871, 'Fe').
+unicode_joining_group(1914, 1915, 'Burushaski_Yeh_Barree').
+unicode_joining_group(1597, 1599, 'Farsi_Yeh').
+unicode_joining_group(1740, 1740, 'Farsi_Yeh').
+unicode_joining_group(1742, 1742, 'Farsi_Yeh').
+unicode_joining_group(1909, 1910, 'Farsi_Yeh').
+unicode_joining_group(1725, 1725, 'Nya').
+unicode_joining_group(2220, 2220, 'Rohingya_Yeh').
+unicode_joining_group(2225, 2225, 'Straight_Waw').
+unicode_joining_group(68288, 68288, 'Manichaean_Aleph').
+unicode_joining_group(68313, 68314, 'Manichaean_Ayin').
+unicode_joining_group(68289, 68290, 'Manichaean_Beth').
+unicode_joining_group(68293, 68293, 'Manichaean_Daleth').
+unicode_joining_group(68308, 68308, 'Manichaean_Dhamedh').
+unicode_joining_group(68332, 68332, 'Manichaean_Five').
+unicode_joining_group(68291, 68292, 'Manichaean_Gimel').
+unicode_joining_group(68301, 68301, 'Manichaean_Heth').
+unicode_joining_group(68335, 68335, 'Manichaean_Hundred').
+unicode_joining_group(68304, 68306, 'Manichaean_Kaph').
+unicode_joining_group(68307, 68307, 'Manichaean_Lamedh').
+unicode_joining_group(68310, 68310, 'Manichaean_Mem').
+unicode_joining_group(68311, 68311, 'Manichaean_Nun').
+unicode_joining_group(68331, 68331, 'Manichaean_One').
+unicode_joining_group(68315, 68316, 'Manichaean_Pe').
+unicode_joining_group(68318, 68320, 'Manichaean_Qoph').
+unicode_joining_group(68321, 68321, 'Manichaean_Resh').
+unicode_joining_group(68317, 68317, 'Manichaean_Sadhe').
+unicode_joining_group(68312, 68312, 'Manichaean_Samekh').
+unicode_joining_group(68324, 68324, 'Manichaean_Taw').
+unicode_joining_group(68333, 68333, 'Manichaean_Ten').
+unicode_joining_group(68302, 68302, 'Manichaean_Teth').
+unicode_joining_group(68309, 68309, 'Manichaean_Thamedh').
+unicode_joining_group(68334, 68334, 'Manichaean_Twenty').
+unicode_joining_group(68295, 68295, 'Manichaean_Waw').
+unicode_joining_group(68303, 68303, 'Manichaean_Yodh').
+unicode_joining_group(68297, 68298, 'Manichaean_Zayin').
+unicode_joining_group(2235, 2235, 'African_Feh').
+unicode_joining_group(2236, 2236, 'African_Qaf').
+unicode_joining_group(2244, 2244, 'African_Qaf').
+unicode_joining_group(2237, 2237, 'African_Noon').
+unicode_joining_group(2144, 2144, 'Malayalam_Nga').
+unicode_joining_group(2145, 2145, 'Malayalam_Ja').
+unicode_joining_group(2146, 2146, 'Malayalam_Nya').
+unicode_joining_group(2147, 2147, 'Malayalam_Tta').
+unicode_joining_group(2148, 2148, 'Malayalam_Nna').
+unicode_joining_group(2149, 2149, 'Malayalam_Nnna').
+unicode_joining_group(2150, 2150, 'Malayalam_Bha').
+unicode_joining_group(2151, 2151, 'Malayalam_Ra').
+unicode_joining_group(2152, 2152, 'Malayalam_Lla').
+unicode_joining_group(2153, 2153, 'Malayalam_Llla').
+unicode_joining_group(2154, 2154, 'Malayalam_Ssa').
+unicode_joining_group(68866, 68866, 'Hanifi_Rohingya_Pa').
+unicode_joining_group(68873, 68873, 'Hanifi_Rohingya_Pa').
+unicode_joining_group(68892, 68892, 'Hanifi_Rohingya_Pa').
+unicode_joining_group(68889, 68889, 'Hanifi_Rohingya_Kinna_Ya').
+unicode_joining_group(68894, 68894, 'Hanifi_Rohingya_Kinna_Ya').
+unicode_joining_group(68896, 68896, 'Hanifi_Rohingya_Kinna_Ya').
+unicode_joining_group(68899, 68899, 'Hanifi_Rohingya_Kinna_Ya').
+unicode_joining_group(2182, 2182, 'Thin_Yeh').
+unicode_joining_group(2190, 2190, 'Vertical_Tail').
+unicode_joining_group(1568, 1568, 'Kashmiri_Yeh').
+unicode_joining_group(69318, 69318, 'Thin_Noon').
