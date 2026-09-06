@@ -1,0 +1,116 @@
+.. index:: single: text_normalization_profile_protocol
+.. _text_normalization_profile_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``text_normalization_profile_protocol``
+=======================================
+
+Profile provider protocol for extending text normalization policy without replacing Unicode normalization algorithms.
+
+| **Availability:** 
+|    ``logtalk_load(text_normalization(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-06
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: case_conversion/3
+.. _text_normalization_profile_protocol/0::case_conversion/3:
+
+``case_conversion/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Converts a list of Unicode code points for a profile-specific case operation. Valid operations are ``fold``, ``lower``, ``upper``, and ``title``. Fails to select the library default Unicode behavior.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``case_conversion(Operation,Codes,Converted)``
+| **Mode and number of proofs:**
+|    ``case_conversion(+atom,+codes,-codes)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: diacritic_fold/2
+.. _text_normalization_profile_protocol/0::diacritic_fold/2:
+
+``diacritic_fold/2``
+^^^^^^^^^^^^^^^^^^^^
+
+Maps a Unicode code point without a canonical base decomposition to a profile-specific replacement. Fails when no mapping is defined.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diacritic_fold(Code,Replacement)``
+| **Mode and number of proofs:**
+|    ``diacritic_fold(+code,-codes)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: named_entity/2
+.. _text_normalization_profile_protocol/0::named_entity/2:
+
+``named_entity/2``
+^^^^^^^^^^^^^^^^^^
+
+Maps a case-sensitive named character reference, without the leading ampersand or trailing semicolon, to Unicode code points. Fails for an unknown name.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``named_entity(Name,Codes)``
+| **Mode and number of proofs:**
+|    ``named_entity(+atom,-codes)`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`text_normalizer_protocol <text_normalizer_protocol/0>`, :ref:`text_normalizer(Representation,Profile) <text_normalizer/2>`
+

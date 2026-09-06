@@ -87,6 +87,9 @@ Portuguese, Spanish, French, German, and Italian stop-word list objects.
 * ADDED: New `tokenization` library providing extensible tokenization and
 sentence splitting.
 
+* ADDED: New `text_normalization` library providing extensible Unicode aware
+text cleaning and normalization.
+
 * ADDED: New `http_oauth` library implementing OAuth 2.0 Bearer request
 protection, protected-resource metadata, token introspection, and JWT
 verification.

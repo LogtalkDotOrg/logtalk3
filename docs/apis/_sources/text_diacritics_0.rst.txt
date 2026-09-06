@@ -1,0 +1,102 @@
+.. index:: single: text_diacritics
+.. _text_diacritics/0:
+
+.. rst-class:: right
+
+**category**
+
+``text_diacritics``
+===================
+
+Unicode diacritic removal and profile-defined transliteration over code lists.
+
+| **Availability:** 
+|    ``logtalk_load(text_normalization(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-06
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Extends:**
+|    ``public`` :ref:`text_unicode <text_unicode/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: remove_diacritics_codes/2
+.. _text_diacritics/0::remove_diacritics_codes/2:
+
+``remove_diacritics_codes/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Canonically decomposes text, removes all Unicode Mark-category code points, and returns NFC text.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``remove_diacritics_codes(Codes,Removed)``
+| **Mode and number of proofs:**
+|    ``remove_diacritics_codes(+list(integer),-list(integer))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An input element is not a Unicode scalar value:
+|        ``domain_error(unicode_scalar_value,Code)``
+
+
+------------
+
+.. index:: fold_diacritics_codes/3
+.. _text_diacritics/0::fold_diacritics_codes/3:
+
+``fold_diacritics_codes/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Removes Unicode marks, applies profile transliterations to remaining code points, and returns NFC text.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fold_diacritics_codes(Codes,Profile,Folded)``
+| **Mode and number of proofs:**
+|    ``fold_diacritics_codes(+list(integer),+object_identifier,-list(integer))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An input element is not a Unicode scalar value:
+|        ``domain_error(unicode_scalar_value,Code)``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

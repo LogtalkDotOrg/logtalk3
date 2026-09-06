@@ -1,0 +1,78 @@
+.. index:: single: spelling_normalizer_protocol
+.. _spelling_normalizer_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``spelling_normalizer_protocol``
+================================
+
+Optional provider protocol for spelling correction composed after text normalization.
+
+| **Availability:** 
+|    ``logtalk_load(text_normalization(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-06
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: correct_spelling_codes/3
+.. _spelling_normalizer_protocol/0::correct_spelling_codes/3:
+
+``correct_spelling_codes/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Corrects a normalized word represented as Unicode code points using provider-defined options. Fails when no correction is available.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``correct_spelling_codes(Word,Corrected,Options)``
+| **Mode and number of proofs:**
+|    ``correct_spelling_codes(+codes,-codes,+list(compound))`` - ``zero_or_one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`text_normalizer_protocol <text_normalizer_protocol/0>`
+

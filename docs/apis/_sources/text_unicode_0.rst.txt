@@ -1,0 +1,79 @@
+.. index:: single: text_unicode
+.. _text_unicode/0:
+
+.. rst-class:: right
+
+**category**
+
+``text_unicode``
+================
+
+Portable Unicode 17.0 normalization over lists of Unicode scalar values.
+
+| **Availability:** 
+|    ``logtalk_load(text_normalization(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-06
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Extends:**
+|    ``public`` :ref:`unicode_character_data <unicode_character_data/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: normalize_unicode_codes/3
+.. _text_unicode/0::normalize_unicode_codes/3:
+
+``normalize_unicode_codes/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Normalizes code points using the NFC, NFD, NFKC, or NFKD normalization form.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``normalize_unicode_codes(Form,Codes,Normalized)``
+| **Mode and number of proofs:**
+|    ``normalize_unicode_codes(+atom,+list(integer),-list(integer))`` - ``one_or_error``
+
+| **Exceptions:**
+|    An input element is not a Unicode scalar value:
+|        ``domain_error(unicode_scalar_value,Code)``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

@@ -37,6 +37,7 @@ Categories
    code_metrics_messages <code_metrics_messages_0>
    code_metrics_utilities <code_metrics_utilities_0>
    command_line_option <command_line_option_0>
+   common_text_entities <common_text_entities_0>
    condorcet_victory_common <condorcet_victory_common_0>
    constrained_optimization_solver <constrained_optimization_solver_0>
    core_messages <core_messages_0>
@@ -122,11 +123,17 @@ Categories
    single_byte_character_set(MaxCode) <single_byte_character_set_1>
    statistics <statistics_0>
    subject <subject_0>
+   text_case_folding <text_case_folding_0>
+   text_diacritics <text_diacritics_0>
+   text_entities <text_entities_0>
+   text_unicode <text_unicode_0>
+   text_whitespace <text_whitespace_0>
    tokenizer_rules <tokenizer_rules_0>
    tool_diagnostics_common <tool_diagnostics_common_0>
    tutor_explanations <tutor_explanations_0>
    ulid_types <ulid_types_0>
    undirected_graph_common <undirected_graph_common_0>
+   unicode_character_data <unicode_character_data_0>
    unweighted_graph_common(Dictionary) <unweighted_graph_common_1>
    utf_16_character_set(Endian) <utf_16_character_set_1>
    utf_32_character_set(Endian) <utf_32_character_set_1>
@@ -277,6 +284,7 @@ Objects
    default_float_mutations <default_float_mutations_0>
    default_integer_mutations <default_integer_mutations_0>
    default_list_mutations <default_list_mutations_0>
+   default_text_normalization <default_text_normalization_0>
    default_workflow_hook <default_workflow_hook_0>
    demodb <demodb_0>
    deque <deque_0>
@@ -764,6 +772,7 @@ Objects
    tap_report <tap_report_0>
    term <term_0>
    term_io <term_io_0>
+   text_normalizer(Representation,Profile) <text_normalizer_2>
    thurstone_mosteller_ranker <thurstone_mosteller_ranker_0>
    time <time_0>
    time_scales <time_scales_0>
@@ -1026,6 +1035,7 @@ Protocols
    setp <setp_0>
    simulated_annealing_protocol <simulated_annealing_protocol_0>
    snowflakeid_protocol <snowflakeid_protocol_0>
+   spelling_normalizer_protocol <spelling_normalizer_protocol_0>
    statisticsp <statisticsp_0>
    stemmer_protocol <stemmer_protocol_0>
    stop_words_language_protocol <stop_words_language_protocol_0>
@@ -1037,6 +1047,8 @@ Protocols
    temporal_pairwise_ranking_dataset_protocol <temporal_pairwise_ranking_dataset_protocol_0>
    term_io_protocol <term_io_protocol_0>
    termp <termp_0>
+   text_normalization_profile_protocol <text_normalization_profile_protocol_0>
+   text_normalizer_protocol <text_normalizer_protocol_0>
    time_scales_protocol <time_scales_protocol_0>
    timep <timep_0>
    tle_orbits_protocol <tle_orbits_protocol_0>

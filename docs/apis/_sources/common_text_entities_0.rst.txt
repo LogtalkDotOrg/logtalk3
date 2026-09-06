@@ -1,0 +1,74 @@
+.. index:: single: common_text_entities
+.. _common_text_entities/0:
+
+.. rst-class:: right
+
+**category**
+
+``common_text_entities``
+========================
+
+Generated common semicolon-terminated HTML named character references.
+
+| **Availability:** 
+|    ``logtalk_load(text_normalization(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-06
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(none)
+
+Protected predicates
+--------------------
+
+.. index:: common_named_entity/2
+.. _common_text_entities/0::common_named_entity/2:
+
+``common_named_entity/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Common named character reference mapping.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``common_named_entity(Name,Codes)``
+| **Mode and number of proofs:**
+|    ``common_named_entity(+atom,-list(integer))`` - ``zero_or_one``
+
+
+------------
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

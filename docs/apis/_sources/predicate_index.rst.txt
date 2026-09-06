@@ -2477,6 +2477,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`memcached <memcached/0::cas/6>`
 
+``case_conversion/3``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`text_normalization_profile_protocol <text_normalization_profile_protocol/0::case_conversion/3>`
+
+``case_fold/2``
+---------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`text_normalizer_protocol <text_normalizer_protocol/0::case_fold/2>`
+
 ``cat/2``
 ---------
 
@@ -3202,6 +3222,17 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`packs <packs/0::clean/2>`
+* :ref:`text_normalizer_protocol <text_normalizer_protocol/0::clean/2>`
+
+``clean/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`text_normalizer_protocol <text_normalizer_protocol/0::clean/3>`
 
 ``cleanup/0``
 -------------
@@ -4252,6 +4283,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`s3_xml <s3_xml/0::copy_object_response/2>`
 
+``correct_spelling_codes/3``
+----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`spelling_normalizer_protocol <spelling_normalizer_protocol/0::correct_spelling_codes/3>`
+
 ``correlation/3``
 -----------------
 
@@ -5185,6 +5226,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`http_body_codec_protocol <http_body_codec_protocol/0::decode_body/4>`
 * :ref:`http_core <http_core/0::decode_body/4>`
 
+``decode_entities/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`text_normalizer_protocol <text_normalizer_protocol/0::decode_entities/2>`
+
+``decode_entities/3``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`text_normalizer_protocol <text_normalizer_protocol/0::decode_entities/3>`
+
 ``decode_exception/2``
 ----------------------
 
@@ -6102,6 +6163,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`lgtunit <lgtunit/0::deterministic/2>`
+
+``diacritic_fold/2``
+--------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`text_normalization_profile_protocol <text_normalization_profile_protocol/0::diacritic_fold/2>`
 
 ``diagnostic/2``
 ----------------
@@ -9539,6 +9610,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`memcached <memcached/0::flush_all/2>`
+
+``fold_diacritics/2``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`text_normalizer_protocol <text_normalizer_protocol/0::fold_diacritics/2>`
 
 ``fold_left/4``
 ---------------
@@ -15486,6 +15567,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`trie(Representation) <trie/1::lookup_prefix/4>`
 
+``lower_case/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`text_normalizer_protocol <text_normalizer_protocol/0::lower_case/2>`
+
 ``lower_triangular_part/2``
 ---------------------------
 
@@ -17314,6 +17405,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`datep <datep/0::name_of_month/3>`
 
+``named_entity/2``
+------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`text_normalization_profile_protocol <text_normalization_profile_protocol/0::named_entity/2>`
+
 ``nan_kind/2``
 --------------
 
@@ -17995,6 +18096,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`numberlistp <numberlistp/0::normalize_scalar/2>`
 
+``normalize_unicode/3``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`text_normalizer_protocol <text_normalizer_protocol/0::normalize_unicode/3>`
+
 ``normalize_unit/2``
 --------------------
 
@@ -18024,6 +18135,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`linear_algebra_protocol <linear_algebra_protocol/0::normalize_vector/3>`
+
+``normalize_whitespace/2``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`text_normalizer_protocol <text_normalizer_protocol/0::normalize_whitespace/2>`
+
+``normalize_whitespace/3``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`text_normalizer_protocol <text_normalizer_protocol/0::normalize_whitespace/3>`
 
 ``nospy/1``
 -----------
@@ -23811,6 +23942,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`subject <subject/0::removeDependent/1>`
 
+``remove_diacritics/2``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`text_normalizer_protocol <text_normalizer_protocol/0::remove_diacritics/2>`
+
 ``remove_duplicates/2``
 -----------------------
 
@@ -28680,6 +28821,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ulid_protocol <ulid_protocol/0::timestamp/8>`
 
+``title_case/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`text_normalizer_protocol <text_normalizer_protocol/0::title_case/2>`
+
 ``to_expected/1``
 -----------------
 
@@ -29617,6 +29768,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`nested_dictionary_protocol <nested_dictionary_protocol/0::update_in/5>`
+
+``upper_case/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`text_normalizer_protocol <text_normalizer_protocol/0::upper_case/2>`
 
 ``upper_triangular_part/2``
 ---------------------------

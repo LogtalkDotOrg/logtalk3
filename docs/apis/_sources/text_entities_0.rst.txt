@@ -1,0 +1,83 @@
+.. index:: single: text_entities
+.. _text_entities/0:
+
+.. rst-class:: right
+
+**category**
+
+``text_entities``
+=================
+
+Portable character reference decoding rules over lists of Unicode code points.
+
+| **Availability:** 
+|    ``logtalk_load(text_normalization(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-06
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: decode_entities_codes/4
+.. _text_entities/0::decode_entities_codes/4:
+
+``decode_entities_codes/4``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Decodes semicolon-terminated numeric and profile-defined named character references. The unknown-name policy is ``preserve`` or ``error``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode_entities_codes(Codes,Profile,Unknown,Decoded)``
+| **Mode and number of proofs:**
+|    ``decode_entities_codes(+list(integer),+object_identifier,+atom,-list(integer))`` - ``one_or_error``
+
+| **Exceptions:**
+|    A numeric reference denotes a value that is not a Unicode scalar value:
+|        ``domain_error(unicode_scalar_value,Value)``
+|    A named reference is unknown and the policy is ``error``:
+|        ``domain_error(character_reference,Reference)``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`text_normalization_profile_protocol <text_normalization_profile_protocol/0>`, :ref:`text_normalizer(Representation,Profile) <text_normalizer/2>`
+

@@ -3463,6 +3463,27 @@ To load any library (including developer tools, ports, and contributions), use t
    term_io <term_io_0>
    term_io_protocol <term_io_protocol_0>
 
+:ref:`text_normalization <library_text_normalization>`
+------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   common_text_entities <common_text_entities_0>
+   default_text_normalization <default_text_normalization_0>
+   spelling_normalizer_protocol <spelling_normalizer_protocol_0>
+   text_case_folding <text_case_folding_0>
+   text_diacritics <text_diacritics_0>
+   text_entities <text_entities_0>
+   text_normalization_profile_protocol <text_normalization_profile_protocol_0>
+   text_normalizer(Representation,Profile) <text_normalizer_2>
+   text_normalizer_protocol <text_normalizer_protocol_0>
+   text_unicode <text_unicode_0>
+   text_whitespace <text_whitespace_0>
+   unicode_character_data <unicode_character_data_0>
+
 :ref:`thurstone_mosteller_ranker <library_thurstone_mosteller_ranker>`
 ----------------------------------------------------------------------
 

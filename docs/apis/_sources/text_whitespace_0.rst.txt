@@ -1,0 +1,79 @@
+.. index:: single: text_whitespace
+.. _text_whitespace/0:
+
+.. rst-class:: right
+
+**category**
+
+``text_whitespace``
+===================
+
+Portable Unicode whitespace, line-ending, and control-character normalization rules over code lists.
+
+| **Availability:** 
+|    ``logtalk_load(text_normalization(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-06
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Extends:**
+|    ``public`` :ref:`unicode_character_data <unicode_character_data/0>`
+| **Uses:**
+|    :ref:`string(Representation) <string/1>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: normalize_whitespace_codes/6
+.. _text_whitespace/0::normalize_whitespace_codes/6:
+
+``normalize_whitespace_codes/6``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Normalizes code-list whitespace using trim, collapse, line-ending, and control-character policies.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``normalize_whitespace_codes(Codes,Trim,Collapse,LineEndings,Controls,Normalized)``
+| **Mode and number of proofs:**
+|    ``normalize_whitespace_codes(+list(integer),+boolean,+atom,+atom,+atom,-list(integer))`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`text_normalizer(Representation,Profile) <text_normalizer/2>`, :ref:`string(Representation) <string/1>`
+

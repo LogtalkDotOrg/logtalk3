@@ -7,8 +7,9 @@ This library provides extensible tokenization and sentence splitting for
 atoms, character lists, and character code lists. A representation-aware
 facade delegates canonical character-code lists to a language provider.
 The included English provider uses portable deterministic rules for
-words, contractions, hyphenated words, abbreviations, numbers, URLs,
-email addresses, punctuation, and sentence boundaries.
+words, contractions, hyphenated words, abbreviations, numbers, email
+addresses, punctuation, and sentence boundaries. URL and email address
+recognition delegates to the ``url`` library for parsing and validation.
 
 API documentation
 -----------------
@@ -130,6 +131,16 @@ hooks, as illustrated by the ``english_tokenizer`` object. The provider
 protocol does not otherwise constrain the implementation; finite-state,
 statistical, cached, dynamically loaded, and external tokenizers can use
 the same facade.
+
+English coverage
+----------------
+
+The English provider includes common honorifics and ranks, month names,
+academic and professional credentials, organization and editorial forms,
+geographic initialisms, time abbreviations, and common Latin
+abbreviations. Titles and ranks are treated as non-terminal when
+followed by more text; other abbreviations use the following token and
+surrounding context to decide whether a period ends a sentence.
 
 Limitations
 -----------

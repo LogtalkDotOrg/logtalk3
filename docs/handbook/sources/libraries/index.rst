@@ -287,6 +287,7 @@ directory in the ``NOTES.md`` file.
    svr_regression
    tabu_search
    term_io
+   text_normalization
    thurstone_mosteller_ranker
    timeout
    time_scales

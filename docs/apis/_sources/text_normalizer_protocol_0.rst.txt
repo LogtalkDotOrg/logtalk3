@@ -1,0 +1,614 @@
+.. index:: single: text_normalizer_protocol
+.. _text_normalizer_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``text_normalizer_protocol``
+============================
+
+Text normalization protocol for text represented as atoms, lists of characters, or lists of character codes.
+
+| **Availability:** 
+|    ``logtalk_load(text_normalization(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-06
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: normalize_unicode/3
+.. _text_normalizer_protocol/0::normalize_unicode/3:
+
+``normalize_unicode/3``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Normalizes text to the specified Unicode normalization form. Valid forms are ``nfc``, ``nfd``, ``nfkc``, and ``nfkd``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``normalize_unicode(Form,Text,Normalized)``
+| **Mode and number of proofs:**
+|    ``normalize_unicode(+atom,+text,-text)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The ``Representation`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is neither a variable nor ``atom``, ``chars``, or ``codes``:
+|        ``domain_error(text_representation,Representation)``
+|    The ``Profile`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Profile`` parameter is not an object implementing the ``text_normalization_profile_protocol`` protocol:
+|        ``domain_error(text_normalization_profile,Profile)``
+|    ``Form`` is a variable:
+|        ``instantiation_error``
+|    ``Form`` is not an atom:
+|        ``type_error(atom,Form)``
+|    ``Form`` is not a supported Unicode normalization form:
+|        ``domain_error(unicode_normalization_form,Form)``
+|    ``Text`` is not ground:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
+|        ``type_error(atom,Text)``
+|    The ``Representation`` parameter is ``chars`` but ``Text`` is not a list of characters:
+|        ``type_error(chars,Text)``
+|    The ``Representation`` parameter is ``codes`` but ``Text`` is not a list of character codes:
+|        ``type_error(codes,Text)``
+|    An input character code is not a Unicode scalar value:
+|        ``domain_error(unicode_scalar_value,Code)``
+
+
+------------
+
+.. index:: remove_diacritics/2
+.. _text_normalizer_protocol/0::remove_diacritics/2:
+
+``remove_diacritics/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Canonically decomposes text, removes Unicode mark characters, and returns NFC text.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``remove_diacritics(Text,Normalized)``
+| **Mode and number of proofs:**
+|    ``remove_diacritics(+text,-text)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The ``Representation`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is neither a variable nor ``atom``, ``chars``, or ``codes``:
+|        ``domain_error(text_representation,Representation)``
+|    The ``Profile`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Profile`` parameter is not an object implementing the ``text_normalization_profile_protocol`` protocol:
+|        ``domain_error(text_normalization_profile,Profile)``
+|    ``Text`` is not ground:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
+|        ``type_error(atom,Text)``
+|    The ``Representation`` parameter is ``chars`` but ``Text`` is not a list of characters:
+|        ``type_error(chars,Text)``
+|    The ``Representation`` parameter is ``codes`` but ``Text`` is not a list of character codes:
+|        ``type_error(codes,Text)``
+|    An input character code is not a Unicode scalar value:
+|        ``domain_error(unicode_scalar_value,Code)``
+
+
+------------
+
+.. index:: fold_diacritics/2
+.. _text_normalizer_protocol/0::fold_diacritics/2:
+
+``fold_diacritics/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Removes diacritics and applies profile-defined transliterations for characters without canonical decompositions.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``fold_diacritics(Text,Normalized)``
+| **Mode and number of proofs:**
+|    ``fold_diacritics(+text,-text)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The ``Representation`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is neither a variable nor ``atom``, ``chars``, or ``codes``:
+|        ``domain_error(text_representation,Representation)``
+|    The ``Profile`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Profile`` parameter is not an object implementing the ``text_normalization_profile_protocol`` protocol:
+|        ``domain_error(text_normalization_profile,Profile)``
+|    ``Text`` is not ground:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
+|        ``type_error(atom,Text)``
+|    The ``Representation`` parameter is ``chars`` but ``Text`` is not a list of characters:
+|        ``type_error(chars,Text)``
+|    The ``Representation`` parameter is ``codes`` but ``Text`` is not a list of character codes:
+|        ``type_error(codes,Text)``
+|    An input character code is not a Unicode scalar value:
+|        ``domain_error(unicode_scalar_value,Code)``
+
+
+------------
+
+.. index:: case_fold/2
+.. _text_normalizer_protocol/0::case_fold/2:
+
+``case_fold/2``
+^^^^^^^^^^^^^^^
+
+Applies full default Unicode case folding, unless overridden by the selected profile.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``case_fold(Text,Folded)``
+| **Mode and number of proofs:**
+|    ``case_fold(+text,-text)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The ``Representation`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is neither a variable nor ``atom``, ``chars``, or ``codes``:
+|        ``domain_error(text_representation,Representation)``
+|    The ``Profile`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Profile`` parameter is not an object implementing the ``text_normalization_profile_protocol`` protocol:
+|        ``domain_error(text_normalization_profile,Profile)``
+|    ``Text`` is not ground:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
+|        ``type_error(atom,Text)``
+|    The ``Representation`` parameter is ``chars`` but ``Text`` is not a list of characters:
+|        ``type_error(chars,Text)``
+|    The ``Representation`` parameter is ``codes`` but ``Text`` is not a list of character codes:
+|        ``type_error(codes,Text)``
+|    An input character code is not a Unicode scalar value:
+|        ``domain_error(unicode_scalar_value,Code)``
+
+
+------------
+
+.. index:: lower_case/2
+.. _text_normalizer_protocol/0::lower_case/2:
+
+``lower_case/2``
+^^^^^^^^^^^^^^^^
+
+Converts text to lowercase using the selected profile and Unicode default casing.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``lower_case(Text,Lowercase)``
+| **Mode and number of proofs:**
+|    ``lower_case(+text,-text)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The ``Representation`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is neither a variable nor ``atom``, ``chars``, or ``codes``:
+|        ``domain_error(text_representation,Representation)``
+|    The ``Profile`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Profile`` parameter is not an object implementing the ``text_normalization_profile_protocol`` protocol:
+|        ``domain_error(text_normalization_profile,Profile)``
+|    ``Text`` is not ground:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
+|        ``type_error(atom,Text)``
+|    The ``Representation`` parameter is ``chars`` but ``Text`` is not a list of characters:
+|        ``type_error(chars,Text)``
+|    The ``Representation`` parameter is ``codes`` but ``Text`` is not a list of character codes:
+|        ``type_error(codes,Text)``
+|    An input character code is not a Unicode scalar value:
+|        ``domain_error(unicode_scalar_value,Code)``
+
+
+------------
+
+.. index:: upper_case/2
+.. _text_normalizer_protocol/0::upper_case/2:
+
+``upper_case/2``
+^^^^^^^^^^^^^^^^
+
+Converts text to uppercase using the selected profile and Unicode default casing.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``upper_case(Text,Uppercase)``
+| **Mode and number of proofs:**
+|    ``upper_case(+text,-text)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The ``Representation`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is neither a variable nor ``atom``, ``chars``, or ``codes``:
+|        ``domain_error(text_representation,Representation)``
+|    The ``Profile`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Profile`` parameter is not an object implementing the ``text_normalization_profile_protocol`` protocol:
+|        ``domain_error(text_normalization_profile,Profile)``
+|    ``Text`` is not ground:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
+|        ``type_error(atom,Text)``
+|    The ``Representation`` parameter is ``chars`` but ``Text`` is not a list of characters:
+|        ``type_error(chars,Text)``
+|    The ``Representation`` parameter is ``codes`` but ``Text`` is not a list of character codes:
+|        ``type_error(codes,Text)``
+|    An input character code is not a Unicode scalar value:
+|        ``domain_error(unicode_scalar_value,Code)``
+
+
+------------
+
+.. index:: title_case/2
+.. _text_normalizer_protocol/0::title_case/2:
+
+``title_case/2``
+^^^^^^^^^^^^^^^^
+
+Converts text to title case using the library simple word-boundary definition.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``title_case(Text,Titlecase)``
+| **Mode and number of proofs:**
+|    ``title_case(+text,-text)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The ``Representation`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is neither a variable nor ``atom``, ``chars``, or ``codes``:
+|        ``domain_error(text_representation,Representation)``
+|    The ``Profile`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Profile`` parameter is not an object implementing the ``text_normalization_profile_protocol`` protocol:
+|        ``domain_error(text_normalization_profile,Profile)``
+|    ``Text`` is not ground:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
+|        ``type_error(atom,Text)``
+|    The ``Representation`` parameter is ``chars`` but ``Text`` is not a list of characters:
+|        ``type_error(chars,Text)``
+|    The ``Representation`` parameter is ``codes`` but ``Text`` is not a list of character codes:
+|        ``type_error(codes,Text)``
+|    An input character code is not a Unicode scalar value:
+|        ``domain_error(unicode_scalar_value,Code)``
+
+
+------------
+
+.. index:: decode_entities/2
+.. _text_normalizer_protocol/0::decode_entities/2:
+
+``decode_entities/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Decodes semicolon-terminated XML, numeric, and profile-defined named character references using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode_entities(Text,Decoded)``
+| **Mode and number of proofs:**
+|    ``decode_entities(+text,-text)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The ``Representation`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is neither a variable nor ``atom``, ``chars``, or ``codes``:
+|        ``domain_error(text_representation,Representation)``
+|    The ``Profile`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Profile`` parameter is not an object implementing the ``text_normalization_profile_protocol`` protocol:
+|        ``domain_error(text_normalization_profile,Profile)``
+|    ``Text`` is not ground:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
+|        ``type_error(atom,Text)``
+|    The ``Representation`` parameter is ``chars`` but ``Text`` is not a list of characters:
+|        ``type_error(chars,Text)``
+|    The ``Representation`` parameter is ``codes`` but ``Text`` is not a list of character codes:
+|        ``type_error(codes,Text)``
+|    An input character code is not a Unicode scalar value:
+|        ``domain_error(unicode_scalar_value,Code)``
+|    A numeric character reference denotes a value that is not a Unicode scalar value:
+|        ``domain_error(unicode_scalar_value,Value)``
+
+
+------------
+
+.. index:: decode_entities/3
+.. _text_normalizer_protocol/0::decode_entities/3:
+
+``decode_entities/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Decodes semicolon-terminated character references. The recognized option is ``unknown(preserve|error)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``decode_entities(Text,Decoded,Options)``
+| **Mode and number of proofs:**
+|    ``decode_entities(+text,-text,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    The ``Representation`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is neither a variable nor ``atom``, ``chars``, or ``codes``:
+|        ``domain_error(text_representation,Representation)``
+|    The ``Profile`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Profile`` parameter is not an object implementing the ``text_normalization_profile_protocol`` protocol:
+|        ``domain_error(text_normalization_profile,Profile)``
+|    ``Text`` is not ground:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
+|        ``type_error(atom,Text)``
+|    The ``Representation`` parameter is ``chars`` but ``Text`` is not a list of characters:
+|        ``type_error(chars,Text)``
+|    The ``Representation`` parameter is ``codes`` but ``Text`` is not a list of character codes:
+|        ``type_error(codes,Text)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    An input character code is not a Unicode scalar value:
+|        ``domain_error(unicode_scalar_value,Code)``
+|    A numeric character reference denotes a value that is not a Unicode scalar value:
+|        ``domain_error(unicode_scalar_value,Value)``
+|    A named character reference is unknown and the ``unknown(error)`` option is used:
+|        ``domain_error(character_reference,Reference)``
+
+
+------------
+
+.. index:: normalize_whitespace/2
+.. _text_normalizer_protocol/0::normalize_whitespace/2:
+
+``normalize_whitespace/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Normalizes whitespace using default options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``normalize_whitespace(Text,Normalized)``
+| **Mode and number of proofs:**
+|    ``normalize_whitespace(+text,-text)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The ``Representation`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is neither a variable nor ``atom``, ``chars``, or ``codes``:
+|        ``domain_error(text_representation,Representation)``
+|    The ``Profile`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Profile`` parameter is not an object implementing the ``text_normalization_profile_protocol`` protocol:
+|        ``domain_error(text_normalization_profile,Profile)``
+|    ``Text`` is not ground:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
+|        ``type_error(atom,Text)``
+|    The ``Representation`` parameter is ``chars`` but ``Text`` is not a list of characters:
+|        ``type_error(chars,Text)``
+|    The ``Representation`` parameter is ``codes`` but ``Text`` is not a list of character codes:
+|        ``type_error(codes,Text)``
+|    An input character code is not a Unicode scalar value:
+|        ``domain_error(unicode_scalar_value,Code)``
+
+
+------------
+
+.. index:: normalize_whitespace/3
+.. _text_normalizer_protocol/0::normalize_whitespace/3:
+
+``normalize_whitespace/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Normalizes whitespace. Recognized options are ``trim(Boolean)``, ``collapse(none|horizontal|all)``, ``line_endings(lf|crlf|cr|preserve)``, and ``controls(preserve|remove)``.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``normalize_whitespace(Text,Normalized,Options)``
+| **Mode and number of proofs:**
+|    ``normalize_whitespace(+text,-text,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    The ``Representation`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is neither a variable nor ``atom``, ``chars``, or ``codes``:
+|        ``domain_error(text_representation,Representation)``
+|    The ``Profile`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Profile`` parameter is not an object implementing the ``text_normalization_profile_protocol`` protocol:
+|        ``domain_error(text_normalization_profile,Profile)``
+|    ``Text`` is not ground:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
+|        ``type_error(atom,Text)``
+|    The ``Representation`` parameter is ``chars`` but ``Text`` is not a list of characters:
+|        ``type_error(chars,Text)``
+|    The ``Representation`` parameter is ``codes`` but ``Text`` is not a list of character codes:
+|        ``type_error(codes,Text)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    An input character code is not a Unicode scalar value:
+|        ``domain_error(unicode_scalar_value,Code)``
+
+
+------------
+
+.. index:: clean/2
+.. _text_normalizer_protocol/0::clean/2:
+
+``clean/2``
+^^^^^^^^^^^
+
+Cleans text using the default normalization pipeline options.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``clean(Text,Cleaned)``
+| **Mode and number of proofs:**
+|    ``clean(+text,-text)`` - ``one_or_error``
+
+| **Exceptions:**
+|    The ``Representation`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is neither a variable nor ``atom``, ``chars``, or ``codes``:
+|        ``domain_error(text_representation,Representation)``
+|    The ``Profile`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Profile`` parameter is not an object implementing the ``text_normalization_profile_protocol`` protocol:
+|        ``domain_error(text_normalization_profile,Profile)``
+|    ``Text`` is not ground:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
+|        ``type_error(atom,Text)``
+|    The ``Representation`` parameter is ``chars`` but ``Text`` is not a list of characters:
+|        ``type_error(chars,Text)``
+|    The ``Representation`` parameter is ``codes`` but ``Text`` is not a list of character codes:
+|        ``type_error(codes,Text)``
+|    An input character code is not a Unicode scalar value:
+|        ``domain_error(unicode_scalar_value,Code)``
+|    A numeric character reference denotes a value that is not a Unicode scalar value:
+|        ``domain_error(unicode_scalar_value,Value)``
+
+
+------------
+
+.. index:: clean/3
+.. _text_normalizer_protocol/0::clean/3:
+
+``clean/3``
+^^^^^^^^^^^
+
+Cleans text by applying entity decoding, case conversion, diacritic handling, Unicode normalization, and whitespace normalization in that order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``clean(Text,Cleaned,Options)``
+| **Mode and number of proofs:**
+|    ``clean(+text,-text,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    The ``Representation`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is neither a variable nor ``atom``, ``chars``, or ``codes``:
+|        ``domain_error(text_representation,Representation)``
+|    The ``Profile`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Profile`` parameter is not an object implementing the ``text_normalization_profile_protocol`` protocol:
+|        ``domain_error(text_normalization_profile,Profile)``
+|    ``Text`` is not ground:
+|        ``instantiation_error``
+|    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
+|        ``type_error(atom,Text)``
+|    The ``Representation`` parameter is ``chars`` but ``Text`` is not a list of characters:
+|        ``type_error(chars,Text)``
+|    The ``Representation`` parameter is ``codes`` but ``Text`` is not a list of character codes:
+|        ``type_error(codes,Text)``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    An input character code is not a Unicode scalar value:
+|        ``domain_error(unicode_scalar_value,Code)``
+|    A numeric character reference denotes a value that is not a Unicode scalar value:
+|        ``domain_error(unicode_scalar_value,Value)``
+|    A named character reference is unknown and the ``unknown_entities(error)`` option is used:
+|        ``domain_error(character_reference,Reference)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`text_normalization_profile_protocol <text_normalization_profile_protocol/0>`, :ref:`spelling_normalizer_protocol <spelling_normalizer_protocol/0>`, :ref:`text_normalizer(Representation,Profile) <text_normalizer/2>`
+

@@ -329,6 +329,7 @@
 <li class="toctree-l2"><a class="reference internal" href="svr_regression.html"><code class="docutils literal notranslate"><span class="pre">svr_regression</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="tabu_search.html"><code class="docutils literal notranslate"><span class="pre">tabu_search</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="term_io.html"><code class="docutils literal notranslate"><span class="pre">term_io</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="text_normalization.html"><code class="docutils literal notranslate"><span class="pre">text_normalization</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="thurstone_mosteller_ranker.html"><code class="docutils literal notranslate"><span class="pre">thurstone_mosteller_ranker</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="timeout.html"><code class="docutils literal notranslate"><span class="pre">timeout</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="time_scales.html"><code class="docutils literal notranslate"><span class="pre">time_scales</span></code></a></li>
@@ -341,6 +342,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#pipeline-integration">Pipeline integration</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#adding-providers">Adding providers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#english-coverage">English coverage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#limitations">Limitations</a></li>
 </ul>
 </li>
@@ -414,8 +416,9 @@
 atoms, character lists, and character code lists. A representation-aware
 facade delegates canonical character-code lists to a language provider.
 The included English provider uses portable deterministic rules for
-words, contractions, hyphenated words, abbreviations, numbers, URLs,
-email addresses, punctuation, and sentence boundaries.</p>
+words, contractions, hyphenated words, abbreviations, numbers, email
+addresses, punctuation, and sentence boundaries. URL and email address
+recognition delegates to the <code class="docutils literal notranslate"><span class="pre">url</span></code> library for parsing and validation.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -522,6 +525,15 @@ hooks, as illustrated by the <code class="docutils literal notranslate"><span cl
 protocol does not otherwise constrain the implementation; finite-state,
 statistical, cached, dynamically loaded, and external tokenizers can use
 the same facade.</p>
+</section>
+<section id="english-coverage">
+<h2>English coverage<a class="headerlink" href="#english-coverage" title="Link to this heading"></a></h2>
+<p>The English provider includes common honorifics and ranks, month names,
+academic and professional credentials, organization and editorial forms,
+geographic initialisms, time abbreviations, and common Latin
+abbreviations. Titles and ranks are treated as non-terminal when
+followed by more text; other abbreviations use the following token and
+surrounding context to decide whether a period ends a sentence.</p>
 </section>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>

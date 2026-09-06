@@ -1,0 +1,321 @@
+.. index:: single: unicode_character_data
+.. _unicode_character_data/0:
+
+.. rst-class:: right
+
+**category**
+
+``unicode_character_data``
+==========================
+
+Generated numeric Unicode 17.0.0 normalization, casing, and character-property data.
+
+| **Availability:** 
+|    ``logtalk_load(text_normalization(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-06
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(none)
+
+Protected predicates
+--------------------
+
+.. index:: canonical_decomposition/2
+.. _unicode_character_data/0::canonical_decomposition/2:
+
+``canonical_decomposition/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Canonical decomposition mapping.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``canonical_decomposition(Code,Decomposition)``
+| **Mode and number of proofs:**
+|    ``canonical_decomposition(+integer,-list(integer))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: compatibility_decomposition/2
+.. _unicode_character_data/0::compatibility_decomposition/2:
+
+``compatibility_decomposition/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Compatibility decomposition mapping.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``compatibility_decomposition(Code,Decomposition)``
+| **Mode and number of proofs:**
+|    ``compatibility_decomposition(+integer,-list(integer))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: canonical_combining_class/2
+.. _unicode_character_data/0::canonical_combining_class/2:
+
+``canonical_combining_class/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Non-zero canonical combining class.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``canonical_combining_class(Code,Class)``
+| **Mode and number of proofs:**
+|    ``canonical_combining_class(+integer,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: canonical_composition/3
+.. _unicode_character_data/0::canonical_composition/3:
+
+``canonical_composition/3``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Canonical composition mapping.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``canonical_composition(First,Second,Composite)``
+| **Mode and number of proofs:**
+|    ``canonical_composition(+integer,+integer,-integer)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: case_fold_mapping/2
+.. _unicode_character_data/0::case_fold_mapping/2:
+
+``case_fold_mapping/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Full default case-fold mapping.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``case_fold_mapping(Code,Mapping)``
+| **Mode and number of proofs:**
+|    ``case_fold_mapping(+integer,-list(integer))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: case_fold_mapping_count/1
+.. _unicode_character_data/0::case_fold_mapping_count/1:
+
+``case_fold_mapping_count/1``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Number of full default case-fold mappings.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``case_fold_mapping_count(Count)``
+| **Mode and number of proofs:**
+|    ``case_fold_mapping_count(-integer)`` - ``one``
+
+
+------------
+
+.. index:: lower_case_mapping/2
+.. _unicode_character_data/0::lower_case_mapping/2:
+
+``lower_case_mapping/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Default lowercase mapping.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``lower_case_mapping(Code,Mapping)``
+| **Mode and number of proofs:**
+|    ``lower_case_mapping(+integer,-list(integer))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: upper_case_mapping/2
+.. _unicode_character_data/0::upper_case_mapping/2:
+
+``upper_case_mapping/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Default uppercase mapping.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``upper_case_mapping(Code,Mapping)``
+| **Mode and number of proofs:**
+|    ``upper_case_mapping(+integer,-list(integer))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: title_case_mapping/2
+.. _unicode_character_data/0::title_case_mapping/2:
+
+``title_case_mapping/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Default titlecase mapping.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``title_case_mapping(Code,Mapping)``
+| **Mode and number of proofs:**
+|    ``title_case_mapping(+integer,-list(integer))`` - ``zero_or_one``
+
+
+------------
+
+.. index:: cased_code_range/2
+.. _unicode_character_data/0::cased_code_range/2:
+
+``cased_code_range/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Range of code points with the Cased property.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``cased_code_range(Start,End)``
+| **Mode and number of proofs:**
+|    ``cased_code_range(-integer,-integer)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: case_ignorable_range/2
+.. _unicode_character_data/0::case_ignorable_range/2:
+
+``case_ignorable_range/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Range of code points with the Case_Ignorable property.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``case_ignorable_range(Start,End)``
+| **Mode and number of proofs:**
+|    ``case_ignorable_range(-integer,-integer)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: mark_code_range/2
+.. _unicode_character_data/0::mark_code_range/2:
+
+``mark_code_range/2``
+^^^^^^^^^^^^^^^^^^^^^
+
+Range of Unicode Mark-category code points.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``mark_code_range(Start,End)``
+| **Mode and number of proofs:**
+|    ``mark_code_range(-integer,-integer)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: white_space_range/2
+.. _unicode_character_data/0::white_space_range/2:
+
+``white_space_range/2``
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Range of code points with the White_Space property.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``white_space_range(Start,End)``
+| **Mode and number of proofs:**
+|    ``white_space_range(-integer,-integer)`` - ``zero_or_more``
+
+
+------------
+
+.. index:: control_code_range/2
+.. _unicode_character_data/0::control_code_range/2:
+
+``control_code_range/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Range of Unicode Control-category code points.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``control_code_range(Start,End)``
+| **Mode and number of proofs:**
+|    ``control_code_range(-integer,-integer)`` - ``zero_or_more``
+
+
+------------
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+

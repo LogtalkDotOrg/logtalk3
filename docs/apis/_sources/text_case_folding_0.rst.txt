@@ -1,0 +1,75 @@
+.. index:: single: text_case_folding
+.. _text_case_folding/0:
+
+.. rst-class:: right
+
+**category**
+
+``text_case_folding``
+=====================
+
+Portable Unicode 17.0 default case conversion over lists of Unicode scalar values.
+
+| **Availability:** 
+|    ``logtalk_load(text_normalization(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-06
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Extends:**
+|    ``public`` :ref:`unicode_character_data <unicode_character_data/0>`
+| **Uses:**
+|    :ref:`list <list/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+.. index:: convert_case_codes/4
+.. _text_case_folding/0::convert_case_codes/4:
+
+``convert_case_codes/4``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Applies a profile override or the default ``fold``, ``lower``, ``upper``, or ``title`` case conversion.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``convert_case_codes(Mode,Codes,Profile,Converted)``
+| **Mode and number of proofs:**
+|    ``convert_case_codes(+atom,+list(integer),+object_identifier,-list(integer))`` - ``one``
+
+
+------------
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
