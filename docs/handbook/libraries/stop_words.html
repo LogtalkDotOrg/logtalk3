@@ -427,6 +427,11 @@ load the <code class="docutils literal notranslate"><span class="pre">loader.lgt
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(stop_words(loader)).
 </pre></div>
 </div>
+<p>To load also all the language provider objects, load the
+<code class="docutils literal notranslate"><span class="pre">loader_all.lgt</span></code> file:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">logtalk_load</span>(stop_words(loader_all)).
+</pre></div>
+</div>
 </section>
 <section id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Link to this heading"></a></h2>
@@ -440,16 +445,11 @@ load the <code class="docutils literal notranslate"><span class="pre">loader.lgt
 <h2>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">stop_words(Representation,</span> <span class="pre">Language)</span></code> object accepts <code class="docutils literal notranslate"><span class="pre">atom</span></code>,
 <code class="docutils literal notranslate"><span class="pre">chars</span></code>, and <code class="docutils literal notranslate"><span class="pre">codes</span></code> representations. The language parameter is an
-object implementing the <code class="docutils literal notranslate"><span class="pre">stop_words_language_protocol</span></code> protocol.</p>
-<p>The library includes the following language provider objects:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">stopwords_en</span></code> - English</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">stopwords_pt</span></code> - Portuguese</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">stopwords_es</span></code> - Spanish</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">stopwords_fr</span></code> - French</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">stopwords_de</span></code> - German</p></li>
-</ul>
-<p>To enumerate canonical English stop words as atoms:</p>
+object implementing the <code class="docutils literal notranslate"><span class="pre">stop_words_language_protocol</span></code> protocol. The
+library includes a large number of language provider objects in the
+<code class="docutils literal notranslate"><span class="pre">languages</span></code> sub-directory named <code class="docutils literal notranslate"><span class="pre">stopwords_XX</span></code> where <code class="docutils literal notranslate"><span class="pre">XX</span></code> is the
+two letters ISO language code.</p>
+<p>For example, to enumerate canonical English stop words as atoms:</p>
 <div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> stop_words(atom, stopwords_en)<span class="o">::</span>stop_word(<span class="nv">Word</span>).
 <span class="nv">Word</span> <span class="o">=</span> <span class="s">&#39;ll&#39;</span>
 ...

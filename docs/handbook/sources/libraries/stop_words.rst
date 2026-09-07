@@ -25,6 +25,13 @@ load the ``loader.lgt`` file:
 
    | ?- logtalk_load(stop_words(loader)).
 
+To load also all the language provider objects, load the
+``loader_all.lgt`` file:
+
+::
+
+   | ?- logtalk_load(stop_words(loader_all)).
+
 Testing
 -------
 
@@ -41,17 +48,12 @@ Usage
 
 The ``stop_words(Representation, Language)`` object accepts ``atom``,
 ``chars``, and ``codes`` representations. The language parameter is an
-object implementing the ``stop_words_language_protocol`` protocol.
+object implementing the ``stop_words_language_protocol`` protocol. The
+library includes a large number of language provider objects in the
+``languages`` sub-directory named ``stopwords_XX`` where ``XX`` is the
+two letters ISO language code.
 
-The library includes the following language provider objects:
-
-- ``stopwords_en`` - English
-- ``stopwords_pt`` - Portuguese
-- ``stopwords_es`` - Spanish
-- ``stopwords_fr`` - French
-- ``stopwords_de`` - German
-
-To enumerate canonical English stop words as atoms:
+For example, to enumerate canonical English stop words as atoms:
 
 ::
 
