@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-02,
+		date is 2026-09-07,
 		comment is 'Common predicates for MCP servers: tool/prompt/resource descriptor conversion, completion request handling, schema derivation from ``info/2`` and ``mode/2`` directives, auto-dispatch, canonical complete-result terms, curly-term predicates, and MCP Apps (``_meta.ui``) metadata.'
 	]).
 
@@ -152,7 +152,7 @@
 	]).
 
 	:- uses(list, [
-		length/2, member/2
+		length/2, member/2, memberchk/2
 	]).
 
 	:- uses(term_io, [
