@@ -379,6 +379,12 @@ Installers and installation scripts
 * UPDATED: The portable Docker image to compile SWI-Prolog without its
 documentation (to avoid recurrent failures) and in optimized mode.
 
+IDEs, text editors, and syntax highlighters support
+---------------------------------------------------
+
+* FIXED: VSCode support for finding predicate references to a declared
+predicate when the reference is a call to a local definition.
+
 
 3.101.0 - July 23, 2026
 =======================

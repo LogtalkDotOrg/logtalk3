@@ -23,9 +23,9 @@
 :- object(vscode).
 
 	:- info([
-		version is 0:89:0,
+		version is 0:89:1,
 		author is 'Paulo Moura and Jacob Friedman',
-		date is 2026-04-09,
+		date is 2026-09-07,
 		comment is 'Support for Visual Studio Code programatic features.'
 	]).
 
@@ -1144,11 +1144,12 @@
 		),
 		findall(
 			CallerFile-CallerLine,
-			(	entity_property(Entity, _, calls(Name/Arity, CallsProperties)),
+			(	entity_property(Caller, _, calls(Name/Arity, CallsProperties)),
 				memberchk(line_count(CallerLine), CallsProperties),
+				find_declaration_(Name/Arity, Caller, CallerLine, File, Line),
 				(	member(include(CallerFile), CallsProperties) ->
 					true
-				;	CallerFile = File
+				;	entity_property(Caller, _, file(CallerFile))
 				)
 			),
 			References3,
