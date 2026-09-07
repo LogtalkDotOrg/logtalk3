@@ -12,12 +12,12 @@
 <polygon fill="white" stroke="none" points="-4,4 -4,-652.75 1205,-652.75 1205,4 -4,4"/>
 <text xml:space="preserve" text-anchor="start" x="8" y="-32.75" font-family="Monospace" font-size="10.00" fill="dimgray">Logtalk library</text>
 <text xml:space="preserve" text-anchor="start" x="8" y="-20" font-family="Monospace" font-size="10.00" fill="dimgray">Cross&#45;referencing diagram for category text_whitespace</text>
-<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;09&#45;07, 12:10</text>
+<text xml:space="preserve" text-anchor="start" x="8" y="-7.25" font-family="Monospace" font-size="10.00" fill="dimgray">Generated on 2026&#45;09&#45;07, 15:12</text>
 <g id="clust1" class="cluster">
 <title>cluster_text_whitespace_category</title>
 <g id="a_clust1"><a xlink:title="text_whitespace">
 <path fill="snow" stroke="dimgray" d="M20,-54.25C20,-54.25 1181,-54.25 1181,-54.25 1187,-54.25 1193,-60.25 1193,-66.25 1193,-66.25 1193,-628.75 1193,-628.75 1193,-634.75 1187,-640.75 1181,-640.75 1181,-640.75 20,-640.75 20,-640.75 14,-640.75 8,-634.75 8,-628.75 8,-628.75 8,-66.25 8,-66.25 8,-60.25 14,-54.25 20,-54.25"/>
-<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L22">
+<g id="a_clust1_0"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L22" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L22">
 <text xml:space="preserve" text-anchor="start" x="20" y="-623" font-family="Monospace" font-size="10.00" fill="dimgray">text_whitespace</text>
 </a>
 </g>
@@ -29,7 +29,7 @@
 <title>normalize_whitespace_codes/6</title>
 <polygon fill="yellow" stroke="black" points="686.75,-602 471.25,-602 471.25,-566 686.75,-566 686.75,-602"/>
 <text xml:space="preserve" text-anchor="start" x="479.25" y="-586.25" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L32">
+<g id="a_node1_1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L32" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L32">
 <text xml:space="preserve" text-anchor="start" x="484.5" y="-585.88" font-family="Monospace" font-size="11.00">normalize_whitespace_codes/6</text>
 </a>
 </g>
@@ -43,7 +43,7 @@
 <title>remove_controls/3</title>
 <polygon fill="cornsilk" stroke="black" points="767.62,-482.75 626.38,-482.75 626.38,-446.75 767.62,-446.75 767.62,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="634.38" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L50">
+<g id="a_node2_2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L50" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L50">
 <text xml:space="preserve" text-anchor="start" x="639.62" y="-466.62" font-family="Monospace" font-size="11.00">remove_controls/3</text>
 </a>
 </g>
@@ -55,12 +55,12 @@
 <!-- normalize_whitespace_codes/6&#45;&gt;remove_controls/3 -->
 <g id="edge1" class="edge">
 <title>normalize_whitespace_codes/6&#45;&gt;remove_controls/3</title>
-<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L43" xlink:title="calls">
+<g id="a_edge1"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L43" xlink:title="calls">
 <path fill="none" stroke="black" d="M596.41,-565.7C616.19,-546.04 648.67,-513.77 671.35,-491.24"/>
 <polygon fill="black" stroke="black" points="673.82,-493.72 678.44,-484.19 668.88,-488.75 673.82,-493.72"/>
 </a>
 </g>
-<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L43" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L43">
+<g id="a_edge1&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L43" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L43">
 <text xml:space="preserve" text-anchor="start" x="641.54" y="-521" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -70,7 +70,7 @@
 <title>normalize_line_endings/3</title>
 <polygon fill="cornsilk" stroke="black" points="373.25,-482.75 184.75,-482.75 184.75,-446.75 373.25,-446.75 373.25,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="192.75" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L59">
+<g id="a_node3_3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L59" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L59">
 <text xml:space="preserve" text-anchor="start" x="198" y="-466.62" font-family="Monospace" font-size="11.00">normalize_line_endings/3</text>
 </a>
 </g>
@@ -82,12 +82,12 @@
 <!-- normalize_whitespace_codes/6&#45;&gt;normalize_line_endings/3 -->
 <g id="edge2" class="edge">
 <title>normalize_whitespace_codes/6&#45;&gt;normalize_line_endings/3</title>
-<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L43" xlink:title="calls">
+<g id="a_edge2"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L43" xlink:title="calls">
 <path fill="none" stroke="black" d="M534.41,-565.57C480.94,-544.67 391.32,-509.65 333.71,-487.13"/>
 <polygon fill="black" stroke="black" points="335.34,-484.01 324.75,-483.63 332.79,-490.53 335.34,-484.01"/>
 </a>
 </g>
-<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L43" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L43">
+<g id="a_edge2&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L43" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L43">
 <text xml:space="preserve" text-anchor="start" x="438" y="-521" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -97,7 +97,7 @@
 <title>collapse_whitespace/3</title>
 <polygon fill="cornsilk" stroke="black" points="608.12,-482.75 439.88,-482.75 439.88,-446.75 608.12,-446.75 608.12,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="447.88" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node6_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L81">
+<g id="a_node6_4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L81" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L81">
 <text xml:space="preserve" text-anchor="start" x="453.12" y="-466.62" font-family="Monospace" font-size="11.00">collapse_whitespace/3</text>
 </a>
 </g>
@@ -109,12 +109,12 @@
 <!-- normalize_whitespace_codes/6&#45;&gt;collapse_whitespace/3 -->
 <g id="edge3" class="edge">
 <title>normalize_whitespace_codes/6&#45;&gt;collapse_whitespace/3</title>
-<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L43" xlink:title="calls">
+<g id="a_edge3"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L43" xlink:title="calls">
 <path fill="none" stroke="black" d="M570.88,-565.7C561.95,-546.65 547.46,-515.75 536.95,-493.35"/>
 <polygon fill="black" stroke="black" points="540.21,-492.06 532.79,-484.49 533.87,-495.03 540.21,-492.06"/>
 </a>
 </g>
-<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L43" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L43">
+<g id="a_edge3&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L43" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L43">
 <text xml:space="preserve" text-anchor="start" x="553.15" y="-521" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -124,7 +124,7 @@
 <title>trim_whitespace/3</title>
 <polygon fill="cornsilk" stroke="black" points="926.62,-482.75 785.38,-482.75 785.38,-446.75 926.62,-446.75 926.62,-482.75"/>
 <text xml:space="preserve" text-anchor="start" x="793.38" y="-467" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node9_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L111">
+<g id="a_node9_5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L111" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L111">
 <text xml:space="preserve" text-anchor="start" x="798.62" y="-466.62" font-family="Monospace" font-size="11.00">trim_whitespace/3</text>
 </a>
 </g>
@@ -136,12 +136,12 @@
 <!-- normalize_whitespace_codes/6&#45;&gt;trim_whitespace/3 -->
 <g id="edge4" class="edge">
 <title>normalize_whitespace_codes/6&#45;&gt;trim_whitespace/3</title>
-<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L43" xlink:title="calls">
+<g id="a_edge4"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L43" xlink:title="calls">
 <path fill="none" stroke="black" d="M620.17,-565.57C669.24,-544.8 751.26,-510.09 804.48,-487.56"/>
 <polygon fill="black" stroke="black" points="805.82,-490.79 813.66,-483.67 803.09,-484.35 805.82,-490.79"/>
 </a>
 </g>
-<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L43" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L43">
+<g id="a_edge4&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L43" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L43">
 <text xml:space="preserve" text-anchor="start" x="725.81" y="-521" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -151,7 +151,7 @@
 <title>white_space_code/1</title>
 <polygon fill="cornsilk" stroke="black" points="612,-100.25 464,-100.25 464,-64.25 612,-64.25 612,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="472" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node12_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L122">
+<g id="a_node12_6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L122" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L122">
 <text xml:space="preserve" text-anchor="start" x="477.25" y="-84.12" font-family="Monospace" font-size="11.00">white_space_code/1</text>
 </a>
 </g>
@@ -163,12 +163,12 @@
 <!-- remove_controls/3&#45;&gt;white_space_code/1 -->
 <g id="edge6" class="edge">
 <title>remove_controls/3&#45;&gt;white_space_code/1</title>
-<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L52" xlink:title="calls">
+<g id="a_edge6"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L52" xlink:title="calls">
 <path fill="none" stroke="black" d="M703.38,-446.3C713.44,-419.72 734.4,-367.9 759,-327.5 797.65,-264.02 887.61,-243.68 844,-183.5 794.1,-114.64 695.46,-92.22 623.63,-85.36"/>
 <polygon fill="black" stroke="black" points="624.11,-81.89 613.85,-84.52 623.51,-88.86 624.11,-81.89"/>
 </a>
 </g>
-<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L52">
+<g id="a_edge6&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L52">
 <text xml:space="preserve" text-anchor="start" x="830.3" y="-270.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -178,7 +178,7 @@
 <title>control_code/1</title>
 <polygon fill="cornsilk" stroke="black" points="729.5,-363.5 608.5,-363.5 608.5,-327.5 729.5,-327.5 729.5,-363.5"/>
 <text xml:space="preserve" text-anchor="start" x="616.5" y="-347.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node14_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L146" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L146">
+<g id="a_node14_7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L146" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L146">
 <text xml:space="preserve" text-anchor="start" x="621.75" y="-347.38" font-family="Monospace" font-size="11.00">control_code/1</text>
 </a>
 </g>
@@ -190,12 +190,12 @@
 <!-- remove_controls/3&#45;&gt;control_code/1 -->
 <g id="edge5" class="edge">
 <title>remove_controls/3&#45;&gt;control_code/1</title>
-<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L52" xlink:title="calls">
+<g id="a_edge5"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L52" xlink:title="calls">
 <path fill="none" stroke="black" d="M692.87,-446.45C688.38,-427.66 681.14,-397.34 675.81,-375.02"/>
 <polygon fill="black" stroke="black" points="679.23,-374.26 673.5,-365.34 672.42,-375.88 679.23,-374.26"/>
 </a>
 </g>
-<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L52">
+<g id="a_edge5&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L52" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L52">
 <text xml:space="preserve" text-anchor="start" x="683.84" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -205,7 +205,7 @@
 <title>normalize_line_endings_codes/3</title>
 <polygon fill="cornsilk" stroke="black" points="247.5,-363.5 18.5,-363.5 18.5,-327.5 247.5,-327.5 247.5,-363.5"/>
 <text xml:space="preserve" text-anchor="start" x="26.5" y="-347.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node4_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L64">
+<g id="a_node4_8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L64" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L64">
 <text xml:space="preserve" text-anchor="start" x="31.75" y="-347.38" font-family="Monospace" font-size="11.00">normalize_line_endings_codes/3</text>
 </a>
 </g>
@@ -217,12 +217,12 @@
 <!-- normalize_line_endings/3&#45;&gt;normalize_line_endings_codes/3 -->
 <g id="edge7" class="edge">
 <title>normalize_line_endings/3&#45;&gt;normalize_line_endings_codes/3</title>
-<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L60" xlink:title="calls">
+<g id="a_edge7"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L60" xlink:title="calls">
 <path fill="none" stroke="black" d="M257.46,-446.45C232.55,-426.45 191.38,-393.38 163.26,-370.8"/>
 <polygon fill="black" stroke="black" points="165.8,-368.35 155.81,-364.82 161.42,-373.81 165.8,-368.35"/>
 </a>
 </g>
-<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L60">
+<g id="a_edge7&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L60" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L60">
 <text xml:space="preserve" text-anchor="start" x="210.38" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -232,7 +232,7 @@
 <title>line_ending_codes/3</title>
 <polygon fill="cornsilk" stroke="black" points="238.38,-219.5 83.62,-219.5 83.62,-183.5 238.38,-183.5 238.38,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="91.62" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node5_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L77" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L77">
+<g id="a_node5_9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L77" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L77">
 <text xml:space="preserve" text-anchor="start" x="96.88" y="-203.38" font-family="Monospace" font-size="11.00">line_ending_codes/3</text>
 </a>
 </g>
@@ -244,12 +244,12 @@
 <!-- normalize_line_endings_codes/3&#45;&gt;line_ending_codes/3 -->
 <g id="edge8" class="edge">
 <title>normalize_line_endings_codes/3&#45;&gt;line_ending_codes/3</title>
-<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L65" xlink:title="calls">
+<g id="a_edge8"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L65" xlink:title="calls">
 <path fill="none" stroke="black" d="M136.43,-327.09C141.18,-303 149.81,-259.25 155.47,-230.53"/>
 <polygon fill="black" stroke="black" points="158.83,-231.58 157.33,-221.1 151.96,-230.23 158.83,-231.58"/>
 </a>
 </g>
-<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L65">
+<g id="a_edge8&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L65" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L65">
 <text xml:space="preserve" text-anchor="start" x="150.33" y="-270.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -259,7 +259,7 @@
 <title>line_break_code/1</title>
 <polygon fill="cornsilk" stroke="black" points="267.62,-100.25 126.38,-100.25 126.38,-64.25 267.62,-64.25 267.62,-100.25"/>
 <text xml:space="preserve" text-anchor="start" x="134.38" y="-84.5" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node13_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L140">
+<g id="a_node13_10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L140" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L140">
 <text xml:space="preserve" text-anchor="start" x="139.62" y="-84.12" font-family="Monospace" font-size="11.00">line_break_code/1</text>
 </a>
 </g>
@@ -271,12 +271,12 @@
 <!-- normalize_line_endings_codes/3&#45;&gt;line_break_code/1 -->
 <g id="edge9" class="edge">
 <title>normalize_line_endings_codes/3&#45;&gt;line_break_code/1</title>
-<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L69" xlink:title="calls">
+<g id="a_edge9"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L69" xlink:title="calls">
 <path fill="none" stroke="black" d="M111.91,-327.07C78.79,-297.49 21.09,-235.6 48.75,-183.5 68.03,-147.19 106.98,-121.63 140.12,-105.42"/>
 <polygon fill="black" stroke="black" points="141.26,-108.75 148.82,-101.32 138.28,-102.41 141.26,-108.75"/>
 </a>
 </g>
-<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L69" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L69">
+<g id="a_edge9&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L69" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L69">
 <text xml:space="preserve" text-anchor="start" x="48.75" y="-198.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -286,7 +286,7 @@
 <title>drop_white_space/2</title>
 <polygon fill="cornsilk" stroke="black" points="566,-291.5 418,-291.5 418,-255.5 566,-255.5 566,-291.5"/>
 <text xml:space="preserve" text-anchor="start" x="426" y="-275.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node7_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L99" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L99">
+<g id="a_node7_11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L99" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L99">
 <text xml:space="preserve" text-anchor="start" x="431.25" y="-275.38" font-family="Monospace" font-size="11.00">drop_white_space/2</text>
 </a>
 </g>
@@ -298,12 +298,12 @@
 <!-- collapse_whitespace/3&#45;&gt;drop_white_space/2 -->
 <g id="edge11" class="edge">
 <title>collapse_whitespace/3&#45;&gt;drop_white_space/2</title>
-<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L83" xlink:title="calls">
+<g id="a_edge11"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L83" xlink:title="calls">
 <path fill="none" stroke="black" d="M534.45,-446.65C549.25,-420.08 572.55,-367.76 554,-327.5 548.88,-316.39 540.16,-306.74 530.84,-298.83"/>
 <polygon fill="black" stroke="black" points="533.06,-296.13 523.02,-292.73 528.75,-301.64 533.06,-296.13"/>
 </a>
 </g>
-<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L83">
+<g id="a_edge11&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L83">
 <text xml:space="preserve" text-anchor="start" x="554.65" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -313,7 +313,7 @@
 <title>drop_horizontal_white_space/2</title>
 <polygon fill="cornsilk" stroke="black" points="488.12,-363.5 265.88,-363.5 265.88,-327.5 488.12,-327.5 488.12,-363.5"/>
 <text xml:space="preserve" text-anchor="start" x="273.88" y="-347.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node8_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L105">
+<g id="a_node8_12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L105">
 <text xml:space="preserve" text-anchor="start" x="279.12" y="-347.38" font-family="Monospace" font-size="11.00">drop_horizontal_white_space/2</text>
 </a>
 </g>
@@ -325,12 +325,12 @@
 <!-- collapse_whitespace/3&#45;&gt;drop_horizontal_white_space/2 -->
 <g id="edge13" class="edge">
 <title>collapse_whitespace/3&#45;&gt;drop_horizontal_white_space/2</title>
-<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L91" xlink:title="calls">
+<g id="a_edge13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L91" xlink:title="calls">
 <path fill="none" stroke="black" d="M502.31,-446.45C477.23,-426.45 435.78,-393.38 407.47,-370.8"/>
 <polygon fill="black" stroke="black" points="409.96,-368.31 399.96,-364.82 405.6,-373.79 409.96,-368.31"/>
 </a>
 </g>
-<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L91">
+<g id="a_edge13&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L91">
 <text xml:space="preserve" text-anchor="start" x="454.91" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -340,7 +340,7 @@
 <title>horizontal_white_space_code/1</title>
 <polygon fill="cornsilk" stroke="black" points="479.12,-219.5 256.88,-219.5 256.88,-183.5 479.12,-183.5 479.12,-219.5"/>
 <text xml:space="preserve" text-anchor="start" x="264.88" y="-203.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node11_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L118" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L118">
+<g id="a_node11_13"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L118" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L118">
 <text xml:space="preserve" text-anchor="start" x="270.12" y="-203.38" font-family="Monospace" font-size="11.00">horizontal_white_space_code/1</text>
 </a>
 </g>
@@ -352,12 +352,12 @@
 <!-- collapse_whitespace/3&#45;&gt;horizontal_white_space_code/1 -->
 <g id="edge12" class="edge">
 <title>collapse_whitespace/3&#45;&gt;horizontal_white_space_code/1</title>
-<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L91" xlink:title="calls">
+<g id="a_edge12"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L91" xlink:title="calls">
 <path fill="none" stroke="black" d="M525.31,-446.63C526.52,-418.62 524.92,-362.61 497,-327.5 472.73,-296.98 443.5,-320.1 417,-291.5 405.44,-279.02 411.73,-270.65 404,-255.5 399.47,-246.62 393.71,-237.47 388.12,-229.32"/>
 <polygon fill="black" stroke="black" points="391.01,-227.34 382.37,-221.2 385.29,-231.38 391.01,-227.34"/>
 </a>
 </g>
-<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L91">
+<g id="a_edge12&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L91" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L91">
 <text xml:space="preserve" text-anchor="start" x="515.25" y="-342.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -365,12 +365,12 @@
 <!-- collapse_whitespace/3&#45;&gt;white_space_code/1 -->
 <g id="edge10" class="edge">
 <title>collapse_whitespace/3&#45;&gt;white_space_code/1</title>
-<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L83" xlink:title="calls">
+<g id="a_edge10"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L83" xlink:title="calls">
 <path fill="none" stroke="black" d="M552.89,-446.25C564.88,-437.28 577.49,-425.19 584,-410.75 596.21,-383.67 558.61,-186.3 543.76,-111.7"/>
 <polygon fill="black" stroke="black" points="547.19,-111.04 541.8,-101.92 540.33,-112.41 547.19,-111.04"/>
 </a>
 </g>
-<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L83">
+<g id="a_edge10&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L83" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L83">
 <text xml:space="preserve" text-anchor="start" x="575.42" y="-270.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -378,12 +378,12 @@
 <!-- drop_white_space/2&#45;&gt;white_space_code/1 -->
 <g id="edge14" class="edge">
 <title>drop_white_space/2&#45;&gt;white_space_code/1</title>
-<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L99" xlink:title="calls">
+<g id="a_edge14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L99" xlink:title="calls">
 <path fill="none" stroke="black" d="M496.25,-255.04C504.2,-222.29 521.43,-151.41 531.09,-111.69"/>
 <polygon fill="black" stroke="black" points="534.45,-112.69 533.41,-102.14 527.64,-111.03 534.45,-112.69"/>
 </a>
 </g>
-<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L99" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L99">
+<g id="a_edge14&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L99" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L99">
 <text xml:space="preserve" text-anchor="start" x="513.03" y="-198.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -391,12 +391,12 @@
 <!-- drop_horizontal_white_space/2&#45;&gt;horizontal_white_space_code/1 -->
 <g id="edge15" class="edge">
 <title>drop_horizontal_white_space/2&#45;&gt;horizontal_white_space_code/1</title>
-<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L105" xlink:title="calls">
+<g id="a_edge15"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L105" xlink:title="calls">
 <path fill="none" stroke="black" d="M375.9,-327.09C374.38,-303.11 371.62,-259.64 369.8,-230.92"/>
 <polygon fill="black" stroke="black" points="373.31,-230.88 369.18,-221.12 366.32,-231.32 373.31,-230.88"/>
 </a>
 </g>
-<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L105">
+<g id="a_edge15&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L105" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L105">
 <text xml:space="preserve" text-anchor="start" x="373.57" y="-270.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -406,7 +406,7 @@
 <title>white_space_codes/1</title>
 <polygon fill="cornsilk" stroke="black" points="922.38,-363.5 767.62,-363.5 767.62,-327.5 922.38,-327.5 922.38,-363.5"/>
 <text xml:space="preserve" text-anchor="start" x="775.62" y="-347.75" font-family="Monospace" font-size="9.00"> </text>
-<g id="a_node10_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L116">
+<g id="a_node10_14"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L116" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L116">
 <text xml:space="preserve" text-anchor="start" x="780.88" y="-347.38" font-family="Monospace" font-size="11.00">white_space_codes/1</text>
 </a>
 </g>
@@ -418,12 +418,12 @@
 <!-- trim_whitespace/3&#45;&gt;white_space_codes/1 -->
 <g id="edge16" class="edge">
 <title>trim_whitespace/3&#45;&gt;white_space_codes/1</title>
-<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L112" xlink:title="calls">
+<g id="a_edge16"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L112" xlink:title="calls">
 <path fill="none" stroke="black" d="M854.38,-446.45C852.62,-427.75 849.8,-397.62 847.7,-375.33"/>
 <polygon fill="black" stroke="black" points="851.19,-375.01 846.77,-365.38 844.22,-375.66 851.19,-375.01"/>
 </a>
 </g>
-<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L112">
+<g id="a_edge16&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L112">
 <text xml:space="preserve" text-anchor="start" x="850.83" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -445,12 +445,12 @@
 <!-- trim_whitespace/3&#45;&gt;string(Representation)::trim/3 -->
 <g id="edge19" class="edge">
 <title>trim_whitespace/3&#45;&gt;string(Representation)::trim/3</title>
-<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L112" xlink:title="calls">
+<g id="a_edge19"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L112" xlink:title="calls">
 <path fill="none" stroke="black" d="M886.4,-446.45C922.22,-426.06 981.9,-392.09 1021.6,-369.5"/>
 <polygon fill="black" stroke="black" points="1023.2,-372.61 1030.16,-364.62 1019.74,-366.53 1023.2,-372.61"/>
 </a>
 </g>
-<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L112">
+<g id="a_edge19&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L112" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L112">
 <text xml:space="preserve" text-anchor="start" x="965.18" y="-401.75" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -458,12 +458,12 @@
 <!-- horizontal_white_space_code/1&#45;&gt;white_space_code/1 -->
 <g id="edge17" class="edge">
 <title>horizontal_white_space_code/1&#45;&gt;white_space_code/1</title>
-<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L118" xlink:title="calls">
+<g id="a_edge17"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L118" xlink:title="calls">
 <path fill="none" stroke="black" d="M393.08,-183.2C422.34,-163.02 470.86,-129.56 503.61,-106.97"/>
 <polygon fill="black" stroke="black" points="505.32,-110.04 511.57,-101.48 501.35,-104.28 505.32,-110.04"/>
 </a>
 </g>
-<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L118" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L118">
+<g id="a_edge17&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L118" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L118">
 <text xml:space="preserve" text-anchor="start" x="458.1" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -471,12 +471,12 @@
 <!-- horizontal_white_space_code/1&#45;&gt;line_break_code/1 -->
 <g id="edge18" class="edge">
 <title>horizontal_white_space_code/1&#45;&gt;line_break_code/1</title>
-<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L118" xlink:title="calls">
+<g id="a_edge18"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L118" xlink:title="calls">
 <path fill="none" stroke="black" d="M342.77,-183.2C313.34,-163.02 264.54,-129.56 231.59,-106.97"/>
 <polygon fill="black" stroke="black" points="233.81,-104.25 223.58,-101.48 229.85,-110.02 233.81,-104.25"/>
 </a>
 </g>
-<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L118" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L118">
+<g id="a_edge18&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L118" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L118">
 <text xml:space="preserve" text-anchor="start" x="287.63" y="-138.5" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
@@ -495,12 +495,12 @@
 <!-- control_code/1&#45;&gt;user::unicode_data_control_range/2 -->
 <g id="edge20" class="edge">
 <title>control_code/1&#45;&gt;user::unicode_data_control_range/2</title>
-<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L146" xlink:title="calls">
+<g id="a_edge20"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L146" xlink:title="calls">
 <path fill="none" stroke="black" d="M673.66,-327.09C680.1,-303 691.81,-259.25 699.5,-230.53"/>
 <polygon fill="black" stroke="black" points="702.83,-231.64 702.03,-221.07 696.06,-229.83 702.83,-231.64"/>
 </a>
 </g>
-<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L146" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/34c907b6f532ea5838ef670f940ad90b46b515da/library/text_normalization/whitespace.lgt#L146">
+<g id="a_edge20&#45;label"><a xlink:href="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L146" xlink:title="https://github.com/LogtalkDotOrg/logtalk3/tree/304c3c6be19fc763042c2df3a7dc20ae630cc515/library/text_normalization/whitespace.lgt#L146">
 <text xml:space="preserve" text-anchor="start" x="692.52" y="-270.12" font-family="Monospace" font-size="9.00">calls</text>
 </a>
 </g>
