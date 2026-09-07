@@ -3618,6 +3618,17 @@ To load any library (including developer tools, ports, and contributions), use t
    text_whitespace <text_whitespace_0>
    xml_whatwg_entities <xml_whatwg_entities_0>
 
+:ref:`text_vectorization <library_text_vectorization>`
+------------------------------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   text_vectorizer <text_vectorizer_0>
+   text_vectorizer_protocol <text_vectorizer_protocol_0>
+
 :ref:`thurstone_mosteller_ranker <library_thurstone_mosteller_ranker>`
 ----------------------------------------------------------------------
 

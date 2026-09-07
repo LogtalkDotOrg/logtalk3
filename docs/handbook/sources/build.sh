@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on September 5, 2026
+##   Last updated on September 7, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -340,6 +340,7 @@ sed '1,19d' ../../../library/svr_regression/NOTES.md | pandoc -f gfm -t rst -o l
 sed '1,19d' ../../../library/tabu_search/NOTES.md | pandoc -f gfm -t rst -o libraries/tabu_search.rst
 sed '1,19d' ../../../library/term_io/NOTES.md | pandoc -f gfm -t rst -o libraries/term_io.rst
 sed '1,19d' ../../../library/text_normalization/NOTES.md | pandoc -f gfm -t rst -o libraries/text_normalization.rst
+sed '1,19d' ../../../library/text_vectorization/NOTES.md | pandoc -f gfm -t rst -o libraries/text_vectorization.rst
 sed '1,19d' ../../../library/thurstone_mosteller_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/thurstone_mosteller_ranker.rst
 sed '1,19d' ../../../library/time_scales/NOTES.md | pandoc -f gfm -t rst -o libraries/time_scales.rst
 sed '1,19d' ../../../library/timeout/NOTES.md | pandoc -f gfm -t rst -o libraries/timeout.rst

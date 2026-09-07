@@ -1,0 +1,437 @@
+.. index:: single: text_vectorizer_protocol
+.. _text_vectorizer_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``text_vectorizer_protocol``
+============================
+
+Protocol for learning and applying text vectorization models.
+
+| **Availability:** 
+|    ``logtalk_load(text_vectorization(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-07
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: learn/2
+.. _text_vectorizer_protocol/0::learn/2:
+
+``learn/2``
+^^^^^^^^^^^
+
+Learns a vectorizer from a non-empty corpus using default options. Documents are lists of ground features.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Corpus,Vectorizer)``
+| **Mode and number of proofs:**
+|    ``learn(+list(list),-compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Corpus`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Corpus`` is neither a variable nor a list:
+|        ``type_error(list,Corpus)``
+|    ``Corpus`` is empty:
+|        ``domain_error(non_empty_corpus,Corpus)``
+|    An element ``Document`` of the list ``Corpus`` is a variable or a partial list:
+|        ``instantiation_error``
+|    An element ``Document`` of the list ``Corpus`` is neither a variable nor a list:
+|        ``type_error(list,Document)``
+|    An element ``Feature`` of a document is not ground:
+|        ``instantiation_error``
+|    No corpus feature satisfies the document-frequency filters:
+|        ``domain_error(non_empty_vocabulary,Corpus)``
+
+
+------------
+
+.. index:: learn/3
+.. _text_vectorizer_protocol/0::learn/3:
+
+``learn/3``
+^^^^^^^^^^^
+
+Learns a vectorizer from a non-empty corpus using the given options. Documents are lists of ground features.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn(Corpus,Vectorizer,Options)``
+| **Mode and number of proofs:**
+|    ``learn(+list(list),-compound,+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Corpus`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Corpus`` is neither a variable nor a list:
+|        ``type_error(list,Corpus)``
+|    ``Corpus`` is empty:
+|        ``domain_error(non_empty_corpus,Corpus)``
+|    An element ``Document`` of the list ``Corpus`` is a variable or a partial list:
+|        ``instantiation_error``
+|    An element ``Document`` of the list ``Corpus`` is neither a variable nor a list:
+|        ``type_error(list,Document)``
+|    An element ``Feature`` of a document is not ground:
+|        ``instantiation_error``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    The ``maximum_document_frequency(Maximum)`` option value is greater than the corpus document count:
+|        ``domain_error(option,maximum_document_frequency(Maximum))``
+|    The ``minimum_document_frequency(Minimum)`` option value is greater than the effective maximum document frequency:
+|        ``domain_error(option,minimum_document_frequency(Minimum))``
+|    No corpus feature satisfies the document-frequency filters:
+|        ``domain_error(non_empty_vocabulary,Corpus)``
+
+
+------------
+
+.. index:: transform/3
+.. _text_vectorizer_protocol/0::transform/3:
+
+``transform/3``
+^^^^^^^^^^^^^^^
+
+Transforms a document into a sparse list of ``Feature-Weight`` pairs in standard term order. Out-of-vocabulary features are ignored.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``transform(Vectorizer,Document,Vector)``
+| **Mode and number of proofs:**
+|    ``transform(+compound,+list,-list(pair))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Vectorizer`` is a variable:
+|        ``instantiation_error``
+|    ``Vectorizer`` is neither a variable nor a valid text vectorizer:
+|        ``domain_error(text_vectorizer,Vectorizer)``
+|    ``Document`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Document`` is neither a variable nor a list:
+|        ``type_error(list,Document)``
+|    An element ``Feature`` of the list ``Document`` is not ground:
+|        ``instantiation_error``
+
+
+------------
+
+.. index:: transform_all/3
+.. _text_vectorizer_protocol/0::transform_all/3:
+
+``transform_all/3``
+^^^^^^^^^^^^^^^^^^^
+
+Transforms all corpus documents into sparse vectors, preserving document order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``transform_all(Vectorizer,Corpus,Vectors)``
+| **Mode and number of proofs:**
+|    ``transform_all(+compound,+list(list),-list(list(pair)))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Vectorizer`` is a variable:
+|        ``instantiation_error``
+|    ``Vectorizer`` is neither a variable nor a valid text vectorizer:
+|        ``domain_error(text_vectorizer,Vectorizer)``
+|    ``Corpus`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Corpus`` is neither a variable nor a list:
+|        ``type_error(list,Corpus)``
+|    An element ``Document`` of the list ``Corpus`` is a variable or a partial list:
+|        ``instantiation_error``
+|    An element ``Document`` of the list ``Corpus`` is neither a variable nor a list:
+|        ``type_error(list,Document)``
+|    An element ``Feature`` of a document is not ground:
+|        ``instantiation_error``
+
+
+------------
+
+.. index:: learn_transform/3
+.. _text_vectorizer_protocol/0::learn_transform/3:
+
+``learn_transform/3``
+^^^^^^^^^^^^^^^^^^^^^
+
+Learns a vectorizer using default options and transforms the training corpus.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn_transform(Corpus,Vectorizer,Vectors)``
+| **Mode and number of proofs:**
+|    ``learn_transform(+list(list),-compound,-list(list(pair)))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Corpus`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Corpus`` is neither a variable nor a list:
+|        ``type_error(list,Corpus)``
+|    ``Corpus`` is empty:
+|        ``domain_error(non_empty_corpus,Corpus)``
+|    An element ``Document`` of the list ``Corpus`` is a variable or a partial list:
+|        ``instantiation_error``
+|    An element ``Document`` of the list ``Corpus`` is neither a variable nor a list:
+|        ``type_error(list,Document)``
+|    An element ``Feature`` of a document is not ground:
+|        ``instantiation_error``
+|    No corpus feature satisfies the document-frequency filters:
+|        ``domain_error(non_empty_vocabulary,Corpus)``
+
+
+------------
+
+.. index:: learn_transform/4
+.. _text_vectorizer_protocol/0::learn_transform/4:
+
+``learn_transform/4``
+^^^^^^^^^^^^^^^^^^^^^
+
+Learns a vectorizer using the given options and transforms the training corpus.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``learn_transform(Corpus,Vectorizer,Vectors,Options)``
+| **Mode and number of proofs:**
+|    ``learn_transform(+list(list),-compound,-list(list(pair)),+list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Corpus`` is a variable or a partial list:
+|        ``instantiation_error``
+|    ``Corpus`` is neither a variable nor a list:
+|        ``type_error(list,Corpus)``
+|    ``Corpus`` is empty:
+|        ``domain_error(non_empty_corpus,Corpus)``
+|    An element ``Document`` of the list ``Corpus`` is a variable or a partial list:
+|        ``instantiation_error``
+|    An element ``Document`` of the list ``Corpus`` is neither a variable nor a list:
+|        ``type_error(list,Document)``
+|    An element ``Feature`` of a document is not ground:
+|        ``instantiation_error``
+|    ``Options`` is a variable:
+|        ``instantiation_error``
+|    ``Options`` is neither a variable nor a list:
+|        ``type_error(list,Options)``
+|    An element ``Option`` of the list ``Options`` is a variable:
+|        ``instantiation_error``
+|    An element ``Option`` of the list ``Options`` is neither a variable nor a compound term:
+|        ``type_error(compound,Option)``
+|    An element ``Option`` of the list ``Options`` is a compound term but not a valid option:
+|        ``domain_error(option,Option)``
+|    The ``maximum_document_frequency(Maximum)`` option value is greater than the corpus document count:
+|        ``domain_error(option,maximum_document_frequency(Maximum))``
+|    The ``minimum_document_frequency(Minimum)`` option value is greater than the effective maximum document frequency:
+|        ``domain_error(option,minimum_document_frequency(Minimum))``
+|    No corpus feature satisfies the document-frequency filters:
+|        ``domain_error(non_empty_vocabulary,Corpus)``
+
+
+------------
+
+.. index:: check_vectorizer/1
+.. _text_vectorizer_protocol/0::check_vectorizer/1:
+
+``check_vectorizer/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Checks that a term is a structurally valid learned text vectorizer.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``check_vectorizer(Vectorizer)``
+| **Mode and number of proofs:**
+|    ``check_vectorizer(@compound)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Vectorizer`` is a variable:
+|        ``instantiation_error``
+|    ``Vectorizer`` is neither a variable nor a valid text vectorizer:
+|        ``domain_error(text_vectorizer,Vectorizer)``
+
+
+------------
+
+.. index:: valid_vectorizer/1
+.. _text_vectorizer_protocol/0::valid_vectorizer/1:
+
+``valid_vectorizer/1``
+^^^^^^^^^^^^^^^^^^^^^^
+
+True when a term is a structurally valid learned text vectorizer.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``valid_vectorizer(Vectorizer)``
+| **Mode and number of proofs:**
+|    ``valid_vectorizer(@compound)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: vocabulary/2
+.. _text_vectorizer_protocol/0::vocabulary/2:
+
+``vocabulary/2``
+^^^^^^^^^^^^^^^^
+
+Returns the learned vocabulary in standard term order.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``vocabulary(Vectorizer,Vocabulary)``
+| **Mode and number of proofs:**
+|    ``vocabulary(+compound,-list)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Vectorizer`` is a variable:
+|        ``instantiation_error``
+|    ``Vectorizer`` is neither a variable nor a valid text vectorizer:
+|        ``domain_error(text_vectorizer,Vectorizer)``
+
+
+------------
+
+.. index:: diagnostics/2
+.. _text_vectorizer_protocol/0::diagnostics/2:
+
+``diagnostics/2``
+^^^^^^^^^^^^^^^^^
+
+Returns the diagnostics and metadata stored in a learned vectorizer.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostics(Vectorizer,Diagnostics)``
+| **Mode and number of proofs:**
+|    ``diagnostics(+compound,-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Vectorizer`` is a variable:
+|        ``instantiation_error``
+|    ``Vectorizer`` is neither a variable nor a valid text vectorizer:
+|        ``domain_error(text_vectorizer,Vectorizer)``
+
+
+------------
+
+.. index:: diagnostic/2
+.. _text_vectorizer_protocol/0::diagnostic/2:
+
+``diagnostic/2``
+^^^^^^^^^^^^^^^^
+
+Tests or enumerates individual diagnostics terms stored in a learned vectorizer.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``diagnostic(Vectorizer,Diagnostic)``
+| **Mode and number of proofs:**
+|    ``diagnostic(+compound,?compound)`` - ``zero_or_more``
+
+| **Exceptions:**
+|    ``Vectorizer`` is a variable:
+|        ``instantiation_error``
+|    ``Vectorizer`` is neither a variable nor a valid text vectorizer:
+|        ``domain_error(text_vectorizer,Vectorizer)``
+
+
+------------
+
+.. index:: vectorizer_options/2
+.. _text_vectorizer_protocol/0::vectorizer_options/2:
+
+``vectorizer_options/2``
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the effective training options stored in a learned vectorizer.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``vectorizer_options(Vectorizer,Options)``
+| **Mode and number of proofs:**
+|    ``vectorizer_options(+compound,-list(compound))`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Vectorizer`` is a variable:
+|        ``instantiation_error``
+|    ``Vectorizer`` is neither a variable nor a valid text vectorizer:
+|        ``domain_error(text_vectorizer,Vectorizer)``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`text_vectorizer <text_vectorizer/0>`
+

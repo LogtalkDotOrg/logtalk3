@@ -3414,6 +3414,17 @@ To load an entity, always load the library that includes it using the goal ``log
 
    default_text_normalization <default_text_normalization_0>
 
+``library/text_vectorization/``
+-------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   text_vectorizer <text_vectorizer_0>
+   text_vectorizer_protocol <text_vectorizer_protocol_0>
+
 ``library/thurstone_mosteller_ranker/``
 ---------------------------------------
 

@@ -289,6 +289,7 @@ directory in the ``NOTES.md`` file.
    tabu_search
    term_io
    text_normalization
+   text_vectorization
    thurstone_mosteller_ranker
    timeout
    time_scales

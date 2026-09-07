@@ -90,6 +90,9 @@ sentence splitting.
 * ADDED: New `text_normalization` library providing extensible Unicode aware
 text cleaning and normalization.
 
+* ADDED: New `text_vectorization` library providing deterministic binary,
+count, term-frequency, and TF-IDF sparse vectorization.
+
 * ADDED: New `language_detection` library providing extensible language
 detection for text.
 

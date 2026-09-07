@@ -2900,6 +2900,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`regressor_protocol <regressor_protocol/0::check_regressor/1>`
 
+``check_vectorizer/1``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`text_vectorizer_protocol <text_vectorizer_protocol/0::check_vectorizer/1>`
+
 ``checksum/2``
 --------------
 
@@ -6300,6 +6310,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`pattern_miner_protocol <pattern_miner_protocol/0::diagnostic/2>`
 * :ref:`ranker_protocol <ranker_protocol/0::diagnostic/2>`
 * :ref:`regressor_protocol <regressor_protocol/0::diagnostic/2>`
+* :ref:`text_vectorizer_protocol <text_vectorizer_protocol/0::diagnostic/2>`
 * :ref:`tool_diagnostics_protocol <tool_diagnostics_protocol/0::diagnostic/2>`
 
 ``diagnostic/3``
@@ -6358,6 +6369,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`pattern_miner_protocol <pattern_miner_protocol/0::diagnostics/2>`
 * :ref:`ranker_protocol <ranker_protocol/0::diagnostics/2>`
 * :ref:`regressor_protocol <regressor_protocol/0::diagnostics/2>`
+* :ref:`text_vectorizer_protocol <text_vectorizer_protocol/0::diagnostics/2>`
 * :ref:`tool_diagnostics_protocol <tool_diagnostics_protocol/0::diagnostics/2>`
 
 ``diagnostics/3``
@@ -14226,6 +14238,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`metagol <metagol/0::learn/2>`
 * :ref:`ranker_protocol <ranker_protocol/0::learn/2>`
 * :ref:`regressor_protocol <regressor_protocol/0::learn/2>`
+* :ref:`text_vectorizer_protocol <text_vectorizer_protocol/0::learn/2>`
 
 ``learn/3``
 -----------
@@ -14242,6 +14255,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`metagol <metagol/0::learn/3>`
 * :ref:`ranker_protocol <ranker_protocol/0::learn/3>`
 * :ref:`regressor_protocol <regressor_protocol/0::learn/3>`
+* :ref:`text_vectorizer_protocol <text_vectorizer_protocol/0::learn/3>`
 * :ref:`truncated_svd_projection <truncated_svd_projection/0::learn/3>`
 
 ``learn_seq/2``
@@ -14253,6 +14267,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`metagol <metagol/0::learn_seq/2>`
+
+``learn_transform/3``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`text_vectorizer_protocol <text_vectorizer_protocol/0::learn_transform/3>`
+
+``learn_transform/4``
+---------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`text_vectorizer_protocol <text_vectorizer_protocol/0::learn_transform/4>`
 
 ``learn_with_timeout/4``
 ------------------------
@@ -29324,6 +29358,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`dimension_reducer_protocol <dimension_reducer_protocol/0::transform/3>`
+* :ref:`text_vectorizer_protocol <text_vectorizer_protocol/0::transform/3>`
 
 ``transform/4``
 ---------------
@@ -29334,6 +29369,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`crs_projections_protocol <crs_projections_protocol/0::transform/4>`
+
+``transform_all/3``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`text_vectorizer_protocol <text_vectorizer_protocol/0::transform_all/3>`
 
 ``transitive_closure/2``
 ------------------------
@@ -30531,6 +30576,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`application_protocol <application_protocol/0::valid_until_date/1>`
 
+``valid_vectorizer/1``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`text_vectorizer_protocol <text_vectorizer_protocol/0::valid_vectorizer/1>`
+
 ``validate/1``
 --------------
 
@@ -30979,6 +31034,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`linear_algebra_protocol <linear_algebra_protocol/0::vector_value/3>`
 
+``vectorizer_options/2``
+------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`text_vectorizer_protocol <text_vectorizer_protocol/0::vectorizer_options/2>`
+
 ``verified_accounts/2``
 -----------------------
 
@@ -31178,6 +31243,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`ccsds_frame_protocol <ccsds_frame_protocol/0::virtual_channel_id/2>`
 * :ref:`ccsds_frames <ccsds_frames/0::virtual_channel_id/2>`
+
+``vocabulary/2``
+----------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`text_vectorizer_protocol <text_vectorizer_protocol/0::vocabulary/2>`
 
 ``void/1``
 ----------

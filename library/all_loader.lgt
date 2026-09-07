@@ -30,6 +30,7 @@
 		lemmatization(loader),
 		stemming(loader),
 		text_normalization(loader),
+		text_vectorization(loader),
 		tokenization(loader),
 		stop_words(loader),
 	    language_detection(loader),
