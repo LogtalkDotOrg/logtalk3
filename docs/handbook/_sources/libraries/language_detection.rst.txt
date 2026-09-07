@@ -5,9 +5,9 @@
 
 This library provides lightweight language detection for text
 represented as atoms, character lists, or character code lists. It
-currently supports German, English, Spanish, French, Italian, and
-Portuguese and returns the corresponding ISO 639-1 language codes. It
-requires a backend with Unicode support.
+currently supports the most common languages and returns the
+corresponding ISO 639-1 language codes. It requires a backend with
+Unicode support.
 
 API documentation
 -----------------
@@ -120,14 +120,9 @@ predicates return an empty list in those cases.
 Language profiles
 -----------------
 
-The library includes the following profile objects, loaded by default:
-
-- ``de_language_profile`` - German (``de``)
-- ``en_language_profile`` - English (``en``)
-- ``es_language_profile`` - Spanish (``es``)
-- ``fr_language_profile`` - French (``fr``)
-- ``it_language_profile`` - Italian (``it``)
-- ``pt_language_profile`` - Portuguese (``pt``)
+The library includes the several profile objects named
+``XX_language_profile`` in the ``profiles`` sub-directory where ``XX``
+is the ISO language code.
 
 The character-trigram vectors are deterministically derived from the
 vendored stop-word inventories. Words are padded with spaces before
@@ -162,8 +157,8 @@ Limitations
 -----------
 
 Accuracy decreases for short, code-switched, transliterated, or highly
-specialized text. Only six Latin-script languages are currently
-included. The bundled n-gram profiles are intentionally lightweight and
-are not a substitute for profiles trained and evaluated on balanced
-corpora. Script pre-filtering, calibrated probabilities, and runtime
-profile training are outside the scope of this library.
+specialized text. Only the most common languages are currently included.
+The bundled n-gram profiles are intentionally lightweight and are not a
+substitute for profiles trained and evaluated on balanced corpora.
+Script pre-filtering, calibrated probabilities, and runtime profile
+training are outside the scope of this library.

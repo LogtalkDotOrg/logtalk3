@@ -1,0 +1,66 @@
+.. index:: single: stopwords_ha
+.. _stopwords_ha/0:
+
+.. rst-class:: right
+
+**object**
+
+``stopwords_ha``
+================
+
+Stop-word facts for the ha language code.
+
+| **Availability:** 
+|    ``logtalk_load(stop_words(loader))``
+
+| **Author:** Gene Diaz
+| **Version:** 1:0:0
+| **Date:** 2026-09-05
+
+| **Copyright:** Copyright (c) 2016 Gene Diaz
+| **License:** MIT
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`stop_words_language_protocol <stop_words_language_protocol/0>`
+
+| **Remarks:**
+
+   - Source: https://github.com/stopwords-iso/stopwords-ha
+   - Source commit: 8fbf04b5967ad5f88322da42826c7673efda2e2b
+   - Generated entries: 39.
+
+| **Inherited public predicates:**
+|     :ref:`stop_words_language_protocol/0::stop_word/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`stop_words(Representation,Language) <stop_words/2>`
+

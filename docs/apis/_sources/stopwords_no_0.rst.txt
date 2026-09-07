@@ -1,0 +1,66 @@
+.. index:: single: stopwords_no
+.. _stopwords_no/0:
+
+.. rst-class:: right
+
+**object**
+
+``stopwords_no``
+================
+
+Stop-word facts for the no language code.
+
+| **Availability:** 
+|    ``logtalk_load(stop_words(loader))``
+
+| **Author:** Gene Diaz
+| **Version:** 1:0:0
+| **Date:** 2026-09-05
+
+| **Copyright:** Copyright (c) 2016 Gene Diaz
+| **License:** MIT
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`stop_words_language_protocol <stop_words_language_protocol/0>`
+
+| **Remarks:**
+
+   - Source: https://github.com/stopwords-iso/stopwords-no
+   - Source commit: bdc5473085ba0d75a3efb7e6c152faa8f795d3c3
+   - Generated entries: 221.
+
+| **Inherited public predicates:**
+|     :ref:`stop_words_language_protocol/0::stop_word/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`stop_words(Representation,Language) <stop_words/2>`
+

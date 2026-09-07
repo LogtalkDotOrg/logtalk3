@@ -1,0 +1,62 @@
+.. index:: single: he_language_profile
+.. _he_language_profile/0:
+
+.. rst-class:: right
+
+**object**
+
+``he_language_profile``
+=======================
+
+Hebrew language detection profile.
+
+| **Availability:** 
+|    ``logtalk_load(language_detection(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-07
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`language_profile_protocol <language_profile_protocol/0>`
+| **Imports:**
+|    ``public`` :ref:`language_profile_common <language_profile_common/0>`
+| **Provides:**
+|    :ref:`language_profiles::default_profile/2 <language_profiles/0::default_profile/2>`
+| **Uses:**
+|    :ref:`stopwords_he <stopwords_he/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`language_profile_protocol/0::language/1`  :ref:`language_profile_protocol/0::stop_word/1`  :ref:`language_profile_protocol/0::trigram_counts/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+

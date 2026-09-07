@@ -1,0 +1,66 @@
+.. index:: single: stopwords_zu
+.. _stopwords_zu/0:
+
+.. rst-class:: right
+
+**object**
+
+``stopwords_zu``
+================
+
+Stop-word facts for the zu language code.
+
+| **Availability:** 
+|    ``logtalk_load(stop_words(loader))``
+
+| **Author:** Gene Diaz
+| **Version:** 1:0:0
+| **Date:** 2026-09-05
+
+| **Copyright:** Copyright (c) 2016 Gene Diaz
+| **License:** MIT
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`stop_words_language_protocol <stop_words_language_protocol/0>`
+
+| **Remarks:**
+
+   - Source: https://github.com/stopwords-iso/stopwords-zu
+   - Source commit: 5f1e34361fe0d5fba6eb8659150e880b205bcfb0
+   - Generated entries: 29.
+
+| **Inherited public predicates:**
+|     :ref:`stop_words_language_protocol/0::stop_word/1`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`stop_words(Representation,Language) <stop_words/2>`
+

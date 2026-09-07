@@ -26,7 +26,7 @@
 		author is 'Paulo Moura',
 		date is 2026-09-06,
 		comment is 'Language detection protocol.',
-		see_also is [language_detector(_, _), language_detection_strategy_protocol]
+		see_also is [language_detection_strategy_protocol]
 	]).
 
 	:- public(detect/2).

@@ -415,9 +415,9 @@
 <span id="library-language-detection"></span><h1><code class="docutils literal notranslate"><span class="pre">language_detection</span></code><a class="headerlink" href="#language-detection" title="Link to this heading"></a></h1>
 <p>This library provides lightweight language detection for text
 represented as atoms, character lists, or character code lists. It
-currently supports German, English, Spanish, French, Italian, and
-Portuguese and returns the corresponding ISO 639-1 language codes. It
-requires a backend with Unicode support.</p>
+currently supports the most common languages and returns the
+corresponding ISO 639-1 language codes. It requires a backend with
+Unicode support.</p>
 <section id="api-documentation">
 <h2>API documentation<a class="headerlink" href="#api-documentation" title="Link to this heading"></a></h2>
 <p>Open the
@@ -512,15 +512,9 @@ predicates return an empty list in those cases.</p>
 </section>
 <section id="language-profiles">
 <h2>Language profiles<a class="headerlink" href="#language-profiles" title="Link to this heading"></a></h2>
-<p>The library includes the following profile objects, loaded by default:</p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">de_language_profile</span></code> - German (<code class="docutils literal notranslate"><span class="pre">de</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">en_language_profile</span></code> - English (<code class="docutils literal notranslate"><span class="pre">en</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">es_language_profile</span></code> - Spanish (<code class="docutils literal notranslate"><span class="pre">es</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">fr_language_profile</span></code> - French (<code class="docutils literal notranslate"><span class="pre">fr</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">it_language_profile</span></code> - Italian (<code class="docutils literal notranslate"><span class="pre">it</span></code>)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">pt_language_profile</span></code> - Portuguese (<code class="docutils literal notranslate"><span class="pre">pt</span></code>)</p></li>
-</ul>
+<p>The library includes the several profile objects named
+<code class="docutils literal notranslate"><span class="pre">XX_language_profile</span></code> in the <code class="docutils literal notranslate"><span class="pre">profiles</span></code> sub-directory where <code class="docutils literal notranslate"><span class="pre">XX</span></code>
+is the ISO language code.</p>
 <p>The character-trigram vectors are deterministically derived from the
 vendored stop-word inventories. Words are padded with spaces before
 trigram extraction so that word boundaries contribute evidence. The
@@ -549,11 +543,11 @@ APIs.</p>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
 <p>Accuracy decreases for short, code-switched, transliterated, or highly
-specialized text. Only six Latin-script languages are currently
-included. The bundled n-gram profiles are intentionally lightweight and
-are not a substitute for profiles trained and evaluated on balanced
-corpora. Script pre-filtering, calibrated probabilities, and runtime
-profile training are outside the scope of this library.</p>
+specialized text. Only the most common languages are currently included.
+The bundled n-gram profiles are intentionally lightweight and are not a
+substitute for profiles trained and evaluated on balanced corpora.
+Script pre-filtering, calibrated probabilities, and runtime profile
+training are outside the scope of this library.</p>
 </section>
 </section>
 

@@ -25,16 +25,7 @@
 		set_logtalk_flag(report, warnings),
 		logtalk_load(types(loader)),
 		logtalk_load(options(loader)),
-		logtalk_load(stop_words(loader)),
-		logtalk_load([
-			stop_words('languages/stopwords_de'),
-			stop_words('languages/stopwords_es'),
-			stop_words('languages/stopwords_fr'),
-			stop_words('languages/stopwords_it'),
-			stop_words('languages/stopwords_pt')
-		], [
-			optimize(on)
-		]),
+		logtalk_load(stop_words(loader_all)),
 		logtalk_load(tokenization(loader)),
 		logtalk_load(text_normalization(loader)),
 		logtalk_load(n_grams(loader)),
@@ -45,16 +36,8 @@
 			language_profile_common,
 			language_detection_scoring,
 			language_profiles,
-			'profiles/en_language_profile',
-			'profiles/pt_language_profile',
-			'profiles/es_language_profile',
-			'profiles/fr_language_profile',
-			'profiles/de_language_profile',
-			'profiles/it_language_profile',
-			'strategies/language_detection_tokenizer',
-			'strategies/stopword_language_detector',
-			'strategies/ngram_language_detector',
-			'strategies/hybrid_language_detector',
+			'profiles/loader',
+			'strategies/loader',
 			language_detector,
 			'test_files/test_objects'
 		], [

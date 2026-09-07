@@ -2169,12 +2169,39 @@ To load any library (including developer tools, ports, and contributions), use t
 
 
 
+   af_language_profile <af_language_profile_0>
+   ar_language_profile <ar_language_profile_0>
+   bg_language_profile <bg_language_profile_0>
+   bn_language_profile <bn_language_profile_0>
+   br_language_profile <br_language_profile_0>
+   ca_language_profile <ca_language_profile_0>
+   cs_language_profile <cs_language_profile_0>
+   da_language_profile <da_language_profile_0>
    de_language_profile <de_language_profile_0>
+   el_language_profile <el_language_profile_0>
    en_language_profile <en_language_profile_0>
+   eo_language_profile <eo_language_profile_0>
    es_language_profile <es_language_profile_0>
+   et_language_profile <et_language_profile_0>
+   eu_language_profile <eu_language_profile_0>
+   fa_language_profile <fa_language_profile_0>
+   fi_language_profile <fi_language_profile_0>
    fr_language_profile <fr_language_profile_0>
+   ga_language_profile <ga_language_profile_0>
+   gl_language_profile <gl_language_profile_0>
+   ha_language_profile <ha_language_profile_0>
+   he_language_profile <he_language_profile_0>
+   hi_language_profile <hi_language_profile_0>
+   hr_language_profile <hr_language_profile_0>
+   hu_language_profile <hu_language_profile_0>
+   hy_language_profile <hy_language_profile_0>
    hybrid_language_detector <hybrid_language_detector_0>
+   id_language_profile <id_language_profile_0>
    it_language_profile <it_language_profile_0>
+   ja_language_profile <ja_language_profile_0>
+   ko_language_profile <ko_language_profile_0>
+   ku_language_profile <ku_language_profile_0>
+   la_language_profile <la_language_profile_0>
    language_detection_scoring <language_detection_scoring_0>
    language_detection_strategy_protocol <language_detection_strategy_protocol_0>
    language_detection_tokenizer <language_detection_tokenizer_0>
@@ -2183,9 +2210,33 @@ To load any library (including developer tools, ports, and contributions), use t
    language_profile_common <language_profile_common_0>
    language_profile_protocol <language_profile_protocol_0>
    language_profiles <language_profiles_0>
+   lt_language_profile <lt_language_profile_0>
+   lv_language_profile <lv_language_profile_0>
+   mr_language_profile <mr_language_profile_0>
+   ms_language_profile <ms_language_profile_0>
    ngram_language_detector <ngram_language_detector_0>
+   nl_language_profile <nl_language_profile_0>
+   no_language_profile <no_language_profile_0>
+   pl_language_profile <pl_language_profile_0>
    pt_language_profile <pt_language_profile_0>
+   ro_language_profile <ro_language_profile_0>
+   ru_language_profile <ru_language_profile_0>
+   sk_language_profile <sk_language_profile_0>
+   sl_language_profile <sl_language_profile_0>
+   so_language_profile <so_language_profile_0>
+   st_language_profile <st_language_profile_0>
    stopword_language_detector <stopword_language_detector_0>
+   sv_language_profile <sv_language_profile_0>
+   sw_language_profile <sw_language_profile_0>
+   th_language_profile <th_language_profile_0>
+   tl_language_profile <tl_language_profile_0>
+   tr_language_profile <tr_language_profile_0>
+   uk_language_profile <uk_language_profile_0>
+   ur_language_profile <ur_language_profile_0>
+   vi_language_profile <vi_language_profile_0>
+   yo_language_profile <yo_language_profile_0>
+   zh_language_profile <zh_language_profile_0>
+   zu_language_profile <zu_language_profile_0>
 
 :ref:`lasso_regression <library_lasso_regression>`
 --------------------------------------------------
@@ -3423,12 +3474,63 @@ To load any library (including developer tools, ports, and contributions), use t
    stop_words(Representation,Language) <stop_words_2>
    stop_words_language_protocol <stop_words_language_protocol_0>
    stop_words_protocol <stop_words_protocol_0>
+   stopwords_af <stopwords_af_0>
+   stopwords_ar <stopwords_ar_0>
+   stopwords_bg <stopwords_bg_0>
+   stopwords_bn <stopwords_bn_0>
+   stopwords_br <stopwords_br_0>
+   stopwords_ca <stopwords_ca_0>
+   stopwords_cs <stopwords_cs_0>
+   stopwords_da <stopwords_da_0>
    stopwords_de <stopwords_de_0>
+   stopwords_el <stopwords_el_0>
    stopwords_en <stopwords_en_0>
+   stopwords_eo <stopwords_eo_0>
    stopwords_es <stopwords_es_0>
+   stopwords_et <stopwords_et_0>
+   stopwords_eu <stopwords_eu_0>
+   stopwords_fa <stopwords_fa_0>
+   stopwords_fi <stopwords_fi_0>
    stopwords_fr <stopwords_fr_0>
+   stopwords_ga <stopwords_ga_0>
+   stopwords_gl <stopwords_gl_0>
+   stopwords_ha <stopwords_ha_0>
+   stopwords_he <stopwords_he_0>
+   stopwords_hi <stopwords_hi_0>
+   stopwords_hr <stopwords_hr_0>
+   stopwords_hu <stopwords_hu_0>
+   stopwords_hy <stopwords_hy_0>
+   stopwords_id <stopwords_id_0>
    stopwords_it <stopwords_it_0>
+   stopwords_ja <stopwords_ja_0>
+   stopwords_ko <stopwords_ko_0>
+   stopwords_ku <stopwords_ku_0>
+   stopwords_la <stopwords_la_0>
+   stopwords_lt <stopwords_lt_0>
+   stopwords_lv <stopwords_lv_0>
+   stopwords_mr <stopwords_mr_0>
+   stopwords_ms <stopwords_ms_0>
+   stopwords_nl <stopwords_nl_0>
+   stopwords_no <stopwords_no_0>
+   stopwords_pl <stopwords_pl_0>
    stopwords_pt <stopwords_pt_0>
+   stopwords_ro <stopwords_ro_0>
+   stopwords_ru <stopwords_ru_0>
+   stopwords_sk <stopwords_sk_0>
+   stopwords_sl <stopwords_sl_0>
+   stopwords_so <stopwords_so_0>
+   stopwords_st <stopwords_st_0>
+   stopwords_sv <stopwords_sv_0>
+   stopwords_sw <stopwords_sw_0>
+   stopwords_th <stopwords_th_0>
+   stopwords_tl <stopwords_tl_0>
+   stopwords_tr <stopwords_tr_0>
+   stopwords_uk <stopwords_uk_0>
+   stopwords_ur <stopwords_ur_0>
+   stopwords_vi <stopwords_vi_0>
+   stopwords_yo <stopwords_yo_0>
+   stopwords_zh <stopwords_zh_0>
+   stopwords_zu <stopwords_zu_0>
 
 :ref:`string_distance <library_string_distance>`
 ------------------------------------------------

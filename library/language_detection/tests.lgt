@@ -37,7 +37,7 @@
 	cover(language_detector(_, _)).
 	cover(test_language_detection_strategy).
 
-	test(language_profiles_2_01, deterministic(Languages == [de, en, es, fr, it, pt])) :-
+	test(language_profiles_2_01, deterministic(Languages == [af, ar, bg, bn, br, ca, cs, da, de, el, en, eo, es, et, eu, fa, fi, fr, ga, gl, ha, he, hi, hr, hu, hy, id, it, ja, ko, ku, la, lt, lv, mr, ms, nl, no, pl, pt, ro, ru, sk, sl, so, st, sv, sw, th, tl, tr, uk, ur, vi, yo, zh, zu])) :-
 		findall(Language, language_profiles::profile(Language, _), Languages0),
 		msort(Languages0, Languages).
 
@@ -121,9 +121,9 @@
 			'A sufficiently long language sample.', _, [candidates([en, pt, en])]
 		).
 
-	test(unsupported_candidate_01, error(domain_error(language, nl))) :-
+	test(unsupported_candidate_01, error(domain_error(language, cy))) :-
 		language_detector(atom, stopword_language_detector)::detect_all(
-			'A sufficiently long language sample.', _, [candidates([en, nl])]
+			'A sufficiently long language sample.', _, [candidates([en, cy])]
 		).
 
 	% auxiliary predicates
@@ -132,7 +132,7 @@
 		findall(
 			Language,
 			(	language_fixture(_, Text),
-				language_detector(atom, Strategy)::detect(Text, Language, _, [min_score(0.0), min_margin(0.0)])
+				language_detector(atom, Strategy)::detect(Text, Language, _, [candidates([de, en, es, fr, it, pt]), min_score(0.0), min_margin(0.0)])
 			),
 			Languages
 		).
