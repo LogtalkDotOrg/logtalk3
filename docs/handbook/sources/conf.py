@@ -147,6 +147,7 @@ latex_elements = {
         \usepackage[defaultsans]{lato}
         \usepackage{inconsolata}
         \usepackage[utf8]{inputenc}
+        \usepackage[T1]{fontenc}
         \DeclareUnicodeCharacter{03C9}{$\omega$}
     ''',
 

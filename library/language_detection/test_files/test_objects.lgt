@@ -45,7 +45,9 @@
 		en_language_profile::stop_word(Word).
 
 	:- multifile(language_profiles::custom_profile/2).
+	:- multifile(language_detection_scripts::custom_language_scripts/2).
 
 	language_profiles::custom_profile(en, custom_en_language_profile).
+	language_detection_scripts::custom_language_scripts(en, ['Greek', 'Latin']).
 
 :- end_object.

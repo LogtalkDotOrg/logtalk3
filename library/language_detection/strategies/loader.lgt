@@ -24,6 +24,7 @@
 		language_detection_tokenizer,
 		ngram_language_detector,
 		stopword_language_detector,
+		script_language_detector,
 		hybrid_language_detector
 	], [
 		optimize(on)

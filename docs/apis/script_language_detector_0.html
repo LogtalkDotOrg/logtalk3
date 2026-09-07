@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>lv_language_profile &mdash; Logtalk 3.102.0</title>
+  <title>script_language_detector &mdash; Logtalk 3.102.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d75fae25" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="_static/css/custom.css?v=0e9007aa" />
@@ -32,8 +32,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="mr_language_profile" href="mr_language_profile_0.html" />
-    <link rel="prev" title="lt_language_profile" href="lt_language_profile_0.html" />
+    <link rel="next" title="sk_language_profile" href="sk_language_profile_0.html" />
+    <link rel="prev" title="ru_language_profile" href="ru_language_profile_0.html" />
    
 </head>
 
@@ -282,7 +282,7 @@
 <li class="toctree-l3"><a class="reference internal" href="language_profile_protocol_0.html">language_profile_protocol</a></li>
 <li class="toctree-l3"><a class="reference internal" href="language_profiles_0.html">language_profiles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="lt_language_profile_0.html">lt_language_profile</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">lv_language_profile</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lv_language_profile_0.html">lv_language_profile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mr_language_profile_0.html">mr_language_profile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ms_language_profile_0.html">ms_language_profile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ngram_language_detector_0.html">ngram_language_detector</a></li>
@@ -292,7 +292,7 @@
 <li class="toctree-l3"><a class="reference internal" href="pt_language_profile_0.html">pt_language_profile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ro_language_profile_0.html">ro_language_profile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ru_language_profile_0.html">ru_language_profile</a></li>
-<li class="toctree-l3"><a class="reference internal" href="script_language_detector_0.html">script_language_detector</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">script_language_detector</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sk_language_profile_0.html">sk_language_profile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="sl_language_profile_0.html">sl_language_profile</a></li>
 <li class="toctree-l3"><a class="reference internal" href="so_language_profile_0.html">so_language_profile</a></li>
@@ -490,9 +490,9 @@
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="library_index.html">Libraries</a></li>
-      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">lv_language_profile</span></code></li>
+      <li class="breadcrumb-item active"><code class="docutils literal notranslate"><span class="pre">script_language_detector</span></code></li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/lv_language_profile_0.rst.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/script_language_detector_0.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -500,10 +500,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p class="right" id="lv-language-profile-0"><span id="index-0"></span><strong>object</strong></p>
-<section id="lv-language-profile">
-<h1><code class="docutils literal notranslate"><span class="pre">lv_language_profile</span></code><a class="headerlink" href="#lv-language-profile" title="Link to this heading"></a></h1>
-<p>Latvian language detection profile.</p>
+  <p class="right" id="script-language-detector-0"><span id="index-0"></span><strong>object</strong></p>
+<section id="script-language-detector">
+<h1><code class="docutils literal notranslate"><span class="pre">script_language_detector</span></code><a class="headerlink" href="#script-language-detector" title="Link to this heading"></a></h1>
+<p>Language detection strategy using Unicode script evidence.</p>
 <div class="line-block">
 <div class="line"><strong>Availability:</strong></div>
 <div class="line-block">
@@ -524,19 +524,16 @@
 <div class="line-block">
 <div class="line"><strong>Implements:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="language_profile_protocol_0.html#language-profile-protocol-0"><span class="std std-ref">language_profile_protocol</span></a></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="language_detection_strategy_protocol_0.html#language-detection-strategy-protocol-0"><span class="std std-ref">language_detection_strategy_protocol</span></a></div>
 </div>
 <div class="line"><strong>Imports:</strong></div>
 <div class="line-block">
-<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="language_profile_common_0.html#language-profile-common-0"><span class="std std-ref">language_profile_common</span></a></div>
-</div>
-<div class="line"><strong>Provides:</strong></div>
-<div class="line-block">
-<div class="line"><a class="reference internal" href="language_profiles_0.html#language-profiles-0-default-profile-2"><span class="std std-ref">language_profiles::default_profile/2</span></a></div>
+<div class="line"><code class="docutils literal notranslate"><span class="pre">public</span></code> <a class="reference internal" href="language_detection_scoring_0.html#language-detection-scoring-0"><span class="std std-ref">language_detection_scoring</span></a></div>
 </div>
 <div class="line"><strong>Uses:</strong></div>
 <div class="line-block">
-<div class="line"><a class="reference internal" href="stopwords_lv_0.html#stopwords-lv-0"><span class="std std-ref">stopwords_lv</span></a></div>
+<div class="line"><a class="reference internal" href="language_detection_scripts_0.html#language-detection-scripts-0"><span class="std std-ref">language_detection_scripts</span></a></div>
+<div class="line"><a class="reference internal" href="list_0.html#list-0"><span class="std std-ref">list</span></a></div>
 </div>
 </div>
 <div class="line-block">
@@ -548,7 +545,7 @@
 <div class="line-block">
 <div class="line"><strong>Inherited public predicates:</strong></div>
 <div class="line-block">
-<div class="line"> <a class="reference internal" href="language_profile_protocol_0.html#language-profile-protocol-0-language-1"><span class="std std-ref">language/1</span></a>  <a class="reference internal" href="language_profile_protocol_0.html#language-profile-protocol-0-stop-word-1"><span class="std std-ref">stop_word/1</span></a>  <a class="reference internal" href="language_profile_protocol_0.html#language-profile-protocol-0-trigram-counts-1"><span class="std std-ref">trigram_counts/1</span></a></div>
+<div class="line"> <a class="reference internal" href="language_detection_strategy_protocol_0.html#language-detection-strategy-protocol-0-scores-3"><span class="std std-ref">scores/3</span></a></div>
 </div>
 </div>
 <nav class="contents local" id="contents">
@@ -574,6 +571,10 @@
 <section id="operators">
 <h2><a class="toc-backref" href="#contents" role="doc-backlink">Operators</a><a class="headerlink" href="#operators" title="Link to this heading"></a></h2>
 <p>(none)</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="ngram_language_detector_0.html#ngram-language-detector-0"><span class="std std-ref">ngram_language_detector</span></a>, <a class="reference internal" href="stopword_language_detector_0.html#stopword-language-detector-0"><span class="std std-ref">stopword_language_detector</span></a>, <a class="reference internal" href="hybrid_language_detector_0.html#hybrid-language-detector-0"><span class="std std-ref">hybrid_language_detector</span></a></p>
+</div>
 </section>
 </section>
 
@@ -581,8 +582,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="lt_language_profile_0.html" class="btn btn-neutral float-left" title="lt_language_profile" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="mr_language_profile_0.html" class="btn btn-neutral float-right" title="mr_language_profile" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="ru_language_profile_0.html" class="btn btn-neutral float-left" title="ru_language_profile" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="sk_language_profile_0.html" class="btn btn-neutral float-right" title="sk_language_profile" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

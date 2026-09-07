@@ -25,7 +25,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-06,
+		date is 2026-09-07,
 		comment is 'tests for the "language_detection" library.'
 	]).
 
@@ -34,6 +34,7 @@
 	]).
 
 	cover(language_profiles).
+	cover(language_detection_scripts).
 	cover(language_detector(_, _)).
 	cover(test_language_detection_strategy).
 
@@ -49,6 +50,28 @@
 
 	test(language_profiles_2_04, deterministic(Profile == de_language_profile)) :-
 		language_profiles::profile(de, Profile).
+
+	test(language_scripts_2_01, deterministic(Scripts == ['Greek', 'Latin'])) :-
+		language_detection_scripts::language_scripts(en, Scripts).
+
+	test(language_scripts_2_02, fail) :-
+		language_detection_scripts::language_scripts(en, ['Latin']).
+
+	test(language_scripts_2_03, deterministic(Count == 57)) :-
+		findall(Language, language_profiles::profile(Language, _), Languages),
+		findall(Language, language_detection_scripts::language_scripts(Language, _), ScriptLanguages),
+		sort(Languages, SortedLanguages),
+		sort(ScriptLanguages, SortedLanguages),
+		length(SortedLanguages, Count).
+
+	test(script_ratios_2_01, deterministic(Ratios == ['Latin'-0.5, 'Common'-0.25, 'Cyrillic'-0.25])) :-
+		language_detection_scripts::script_ratios([65, 66, 32, 1040], Ratios).
+
+	test(script_ratios_2_02, deterministic(Ratios == [])) :-
+		language_detection_scripts::script_ratios([], Ratios).
+
+	test(scripts_to_languages_2_01, deterministic(Languages == [bg, ru, uk])) :-
+		language_detection_scripts::scripts_to_languages(['Common', 'Cyrillic', 'Zzzz'], Languages).
 
 	test(detect_all_3_01, deterministic(Scores == [en-1.0, pt-1.0])) :-
 		language_detector(atom, test_language_detection_strategy)::detect_all('A sufficiently long sample.', Scores, [candidates([en, pt]), min_margin(0.0)]).
@@ -80,6 +103,27 @@
 			'Questo testo italiano contiene delle parole che sono molto comuni.', Language, _, [min_score(0.0), min_margin(0.0)]
 		).
 
+	test(script_scores_cross_script_01, deterministic(Scores == [en-0.0, ru-1.0])) :-
+		script_language_detector::scores([1040, 1041], [en, ru], Scores).
+
+	test(script_scores_same_script_01, deterministic(Scores == [de-0.5, en-0.5])) :-
+		script_language_detector::scores([65, 66], [de, en], Scores).
+
+	test(script_scores_mixed_script_01, deterministic(Scores == [en-0.5, ru-0.5])) :-
+		script_language_detector::scores([65, 1040], [en, ru], Scores).
+
+	test(script_scores_common_only_01, deterministic(Scores == [])) :-
+		script_language_detector::scores([32, 33, 49], [en, ru], Scores).
+
+	test(script_representations_01, deterministic((AtomLanguage == ru, CharsLanguage == ru, CodesLanguage == ru))) :-
+		Codes = [1040, 1041, 1042, 1043],
+		atom_codes(Atom, Codes),
+		atom_chars(Atom, Chars),
+		Options = [candidates([en, ru]), min_length(0), min_score(0.0), min_margin(0.0)],
+		language_detector(atom,  script_language_detector)::detect(Atom,  AtomLanguage,  _, Options),
+		language_detector(chars, script_language_detector)::detect(Chars, CharsLanguage, _, Options),
+		language_detector(codes, script_language_detector)::detect(Codes, CodesLanguage, _, Options).
+
 	test(profile_trigrams_01, deterministic(Counts \== [])) :-
 		en_language_profile::trigram_counts(Counts).
 
@@ -97,6 +141,17 @@
 		language_detector(atom, hybrid_language_detector)::detect(
 			'Questo testo italiano contiene delle parole che sono molto comuni.', Language, _, [min_score(0.0), min_margin(0.0)]
 		).
+
+	test(hybrid_weights_01, deterministic((DifferenceEn < 0.000000000001, DifferenceIt < 0.000000000001))) :-
+		atom_codes('questo testo italiano contiene delle parole che sono molto comuni', Codes),
+		Candidates = [en, it],
+		ngram_language_detector::scores(Codes, Candidates, [en-NGramEn, it-NGramIt]),
+		stopword_language_detector::scores(Codes, Candidates, [en-StopWordEn, it-StopWordIt]),
+		hybrid_language_detector::scores(Codes, Candidates, [en-HybridEn, it-HybridIt]),
+		ExpectedEn is 0.80 * (0.75 * NGramEn + 0.25 * StopWordEn) + 0.10,
+		ExpectedIt is 0.80 * (0.75 * NGramIt + 0.25 * StopWordIt) + 0.10,
+		DifferenceEn is abs(HybridEn - ExpectedEn),
+		DifferenceIt is abs(HybridIt - ExpectedIt).
 
 	test(ngram_six_languages_01, deterministic(Languages == [de, en, es, fr, it, pt])) :-
 		detected_languages(ngram_language_detector, Languages).

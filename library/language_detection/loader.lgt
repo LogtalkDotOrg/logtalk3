@@ -28,6 +28,7 @@
 		logtalk_load(tokenization(loader)),
 		logtalk_load(text_normalization(loader)),
 		logtalk_load(n_grams(loader)),
+		logtalk_load(unicode_data(unicode_range_scripts), [reload(skip)]),
 		logtalk_load([
 			language_detector_protocol,
 			language_detection_strategy_protocol,
@@ -35,6 +36,7 @@
 			language_profile_common,
 			language_detection_scoring,
 			language_profiles,
+			language_detection_scripts,
 			'profiles/loader',
 			'strategies/loader',
 			language_detector

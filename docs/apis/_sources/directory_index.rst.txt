@@ -2071,6 +2071,7 @@ To load an entity, always load the library that includes it using the goal ``log
 
 
    language_detection_scoring <language_detection_scoring_0>
+   language_detection_scripts <language_detection_scripts_0>
    language_detection_strategy_protocol <language_detection_strategy_protocol_0>
    language_detector(Representation,Strategy) <language_detector_2>
    language_detector_protocol <language_detector_protocol_0>
@@ -2155,6 +2156,7 @@ To load an entity, always load the library that includes it using the goal ``log
    hybrid_language_detector <hybrid_language_detector_0>
    language_detection_tokenizer <language_detection_tokenizer_0>
    ngram_language_detector <ngram_language_detector_0>
+   script_language_detector <script_language_detector_0>
    stopword_language_detector <stopword_language_detector_0>
 
 ``library/lasso_regression/``

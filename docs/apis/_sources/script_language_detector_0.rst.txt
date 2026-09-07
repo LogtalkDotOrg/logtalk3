@@ -1,14 +1,14 @@
-.. index:: single: hybrid_language_detector
-.. _hybrid_language_detector/0:
+.. index:: single: script_language_detector
+.. _script_language_detector/0:
 
 .. rst-class:: right
 
 **object**
 
-``hybrid_language_detector``
+``script_language_detector``
 ============================
 
-Language detection strategy combining character-trigram, stop-word, and Unicode script scores.
+Language detection strategy using Unicode script evidence.
 
 | **Availability:** 
 |    ``logtalk_load(language_detection(loader))``
@@ -26,9 +26,8 @@ Language detection strategy combining character-trigram, stop-word, and Unicode 
 | **Imports:**
 |    ``public`` :ref:`language_detection_scoring <language_detection_scoring/0>`
 | **Uses:**
-|    :ref:`ngram_language_detector <ngram_language_detector/0>`
-|    :ref:`script_language_detector <script_language_detector/0>`
-|    :ref:`stopword_language_detector <stopword_language_detector/0>`
+|    :ref:`language_detection_scripts <language_detection_scripts/0>`
+|    :ref:`list <list/0>`
 
 | **Remarks:**
 |    (none)
@@ -62,5 +61,5 @@ Operators
 
 .. seealso::
 
-   :ref:`ngram_language_detector <ngram_language_detector/0>`, :ref:`stopword_language_detector <stopword_language_detector/0>`, :ref:`script_language_detector <script_language_detector/0>`
+   :ref:`ngram_language_detector <ngram_language_detector/0>`, :ref:`stopword_language_detector <stopword_language_detector/0>`, :ref:`hybrid_language_detector <hybrid_language_detector/0>`
 

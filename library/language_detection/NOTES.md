@@ -98,12 +98,45 @@ The library includes the following strategy objects:
   cosine similarity.
 - `stopword_language_detector` tokenizes the input and scores discriminative
   stop-word matches.
-- `hybrid_language_detector` combines the n-gram and stop-word scores using
-  weights of 0.75 and 0.25, respectively. When only one strategy finds
-  evidence, its scores are returned unchanged.
+- `script_language_detector` scores candidates using the Unicode scripts
+	observed in the input. Languages sharing the same script receive the same
+	script evidence and are therefore expected to tie when used alone.
+- `hybrid_language_detector` first combines the n-gram and stop-word scores
+	using weights of 0.75 and 0.25, respectively, and then combines the result
+	with script scores using weights of 0.80 and 0.20. When all strategies find
+	evidence, the effective weights are therefore 0.60 for n-grams, 0.20 for
+	stop words, and 0.20 for scripts. When either lexical or script evidence is
+	unavailable, the available scores are returned unchanged.
 
 Strategy selection is performed by the second object parameter. It is not an
 option of the `language_detector(Representation, Strategy)` object.
+
+
+Script analysis
+---------------
+
+The `language_detection_scripts` object exposes the script analysis used by
+the script strategy. It accepts normalized character codes and returns all
+observed Unicode scripts with ratios ordered by decreasing ratio:
+
+	| ?- atom_codes('abc éè', Codes),
+	     language_detection_scripts::script_ratios(Codes, Ratios).
+	Ratios = ['Latin'-0.8333333333333334, 'Common'-0.16666666666666666]
+	yes
+
+Script names are the values provided by the Unicode Character Database, such
+as `'Latin'`, `'Cyrillic'`, and `'Arabic'`. The `scripts_to_languages/2`
+predicate maps one or more meaningful scripts to the sorted set of compatible
+registered languages:
+
+	| ?- language_detection_scripts::scripts_to_languages(['Cyrillic'], Languages).
+	Languages = [bg, ru, uk]
+	yes
+
+The script strategy ignores the `'Common'`, `'Inherited'`, `'Unknown'`, and
+`'Zzzz'` values when scoring. For mixed-script text, evidence from every other
+observed script is retained. If no meaningful mapped script is observed, the
+strategy returns no scores and detection fails normally.
 
 
 Options
@@ -159,6 +192,12 @@ predicate. For example:
 The profile protocol and registry allow replacing the bundled vectors with
 corpus-derived profiles without changing the detector or strategy APIs.
 
+A custom profile can override or add its expected scripts by defining the
+`language_detection_scripts::custom_language_scripts/2` multifile predicate:
+
+	:- multifile(language_detection_scripts::custom_language_scripts/2).
+	language_detection_scripts::custom_language_scripts(sr, ['Cyrillic', 'Latin']).
+
 
 Limitations
 -----------
@@ -166,6 +205,6 @@ Limitations
 Accuracy decreases for short, code-switched, transliterated, or highly
 specialized text. Only the most common languages are currently included. The
 bundled n-gram profiles are intentionally lightweight and are not a substitute
-for profiles trained and evaluated on balanced corpora. Script pre-filtering,
-calibrated probabilities, and runtime profile training are outside the scope
-of this library.
+for profiles trained and evaluated on balanced corpora. Script-run
+segmentation, calibrated probabilities, and runtime profile training are
+outside the scope of this library.

@@ -238,6 +238,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#testing">Testing</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#strategies">Strategies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#script-analysis">Script analysis</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#options">Options</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#language-profiles">Language profiles</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#adding-strategies-and-profiles">Adding strategies and profiles</a></li>
@@ -481,13 +482,48 @@ Diacritics are preserved because they provide useful language evidence.</p>
 using cosine similarity.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">stopword_language_detector</span></code> tokenizes the input and scores
 discriminative stop-word matches.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">hybrid_language_detector</span></code> combines the n-gram and stop-word scores
-using weights of 0.75 and 0.25, respectively. When only one strategy
-finds evidence, its scores are returned unchanged.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">script_language_detector</span></code> scores candidates using the Unicode
+scripts observed in the input. Languages sharing the same script
+receive the same script evidence and are therefore expected to tie
+when used alone.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">hybrid_language_detector</span></code> first combines the n-gram and stop-word
+scores using weights of 0.75 and 0.25, respectively, and then combines
+the result with script scores using weights of 0.80 and 0.20. When all
+strategies find evidence, the effective weights are therefore 0.60 for
+n-grams, 0.20 for stop words, and 0.20 for scripts. When either
+lexical or script evidence is unavailable, the available scores are
+returned unchanged.</p></li>
 </ul>
 <p>Strategy selection is performed by the second object parameter. It is
 not an option of the <code class="docutils literal notranslate"><span class="pre">language_detector(Representation,</span> <span class="pre">Strategy)</span></code>
 object.</p>
+</section>
+<section id="script-analysis">
+<h2>Script analysis<a class="headerlink" href="#script-analysis" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">language_detection_scripts</span></code> object exposes the script analysis
+used by the script strategy. It accepts normalized character codes and
+returns all observed Unicode scripts with ratios ordered by decreasing
+ratio:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> <span class="k">atom_codes</span>(<span class="s">&#39;abc éè&#39;</span>, <span class="nv">Codes</span>),
+     language_detection_scripts<span class="o">::</span>script_ratios(<span class="nv">Codes</span>, <span class="nv">Ratios</span>).
+<span class="nv">Ratios</span> <span class="o">=</span> [<span class="s">&#39;Latin&#39;</span><span class="o">-</span><span class="m">0.8333333333333334</span>, <span class="s">&#39;Common&#39;</span><span class="o">-</span><span class="m">0.16666666666666666</span>]
+yes
+</pre></div>
+</div>
+<p>Script names are the values provided by the Unicode Character Database,
+such as <code class="docutils literal notranslate"><span class="pre">'Latin'</span></code>, <code class="docutils literal notranslate"><span class="pre">'Cyrillic'</span></code>, and <code class="docutils literal notranslate"><span class="pre">'Arabic'</span></code>. The
+<code class="docutils literal notranslate"><span class="pre">scripts_to_languages/2</span></code> predicate maps one or more meaningful scripts
+to the sorted set of compatible registered languages:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span>| <span class="o">?-</span> language_detection_scripts<span class="o">::</span>scripts_to_languages([<span class="s">&#39;Cyrillic&#39;</span>], <span class="nv">Languages</span>).
+<span class="nv">Languages</span> <span class="o">=</span> [bg, ru, uk]
+yes
+</pre></div>
+</div>
+<p>The script strategy ignores the <code class="docutils literal notranslate"><span class="pre">'Common'</span></code>, <code class="docutils literal notranslate"><span class="pre">'Inherited'</span></code>,
+<code class="docutils literal notranslate"><span class="pre">'Unknown'</span></code>, and <code class="docutils literal notranslate"><span class="pre">'Zzzz'</span></code> values when scoring. For mixed-script
+text, evidence from every other observed script is retained. If no
+meaningful mapped script is observed, the strategy returns no scores and
+detection fails normally.</p>
 </section>
 <section id="options">
 <h2>Options<a class="headerlink" href="#options" title="Link to this heading"></a></h2>
@@ -539,6 +575,13 @@ language_profiles<span class="o">::</span>custom_profile(it, it_custom_language_
 <p>The profile protocol and registry allow replacing the bundled vectors
 with corpus-derived profiles without changing the detector or strategy
 APIs.</p>
+<p>A custom profile can override or add its expected scripts by defining
+the <code class="docutils literal notranslate"><span class="pre">language_detection_scripts::custom_language_scripts/2</span></code> multifile
+predicate:</p>
+<div class="highlight-logtalk notranslate"><div class="highlight"><pre><span></span><span class="p">:- </span><span class="k">multifile</span>(language_detection_scripts<span class="o">::</span>custom_language_scripts<span class="o">/</span><span class="m">2</span>).
+language_detection_scripts<span class="o">::</span>custom_language_scripts(sr, [<span class="s">&#39;Cyrillic&#39;</span>, <span class="s">&#39;Latin&#39;</span>]).
+</pre></div>
+</div>
 </section>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
@@ -546,7 +589,7 @@ APIs.</p>
 specialized text. Only the most common languages are currently included.
 The bundled n-gram profiles are intentionally lightweight and are not a
 substitute for profiles trained and evaluated on balanced corpora.
-Script pre-filtering, calibrated probabilities, and runtime profile
+Script-run segmentation, calibrated probabilities, and runtime profile
 training are outside the scope of this library.</p>
 </section>
 </section>

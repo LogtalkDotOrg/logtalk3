@@ -4864,6 +4864,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http_htmx <http_htmx/0::current_url_abs_path/2>`
 
+``custom_language_scripts/2``
+-----------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`language_detection_scripts <language_detection_scripts/0::custom_language_scripts/2>`
+
 ``custom_profile/2``
 --------------------
 
@@ -5487,6 +5497,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`command_line_option <command_line_option/0::default/1>`
+
+``default_language_scripts/2``
+------------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`language_detection_scripts <language_detection_scripts/0::default_language_scripts/2>`
 
 ``default_option/1``
 --------------------
@@ -14036,6 +14056,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`graph_language_registry <graph_language_registry/0::language_object/2>`
+
+``language_scripts/2``
+----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`language_detection_scripts <language_detection_scripts/0::language_scripts/2>`
 
 ``last/2``
 ----------
@@ -25570,6 +25600,26 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`language_detection_strategy_protocol <language_detection_strategy_protocol/0::scores/3>`
+
+``script_ratios/2``
+-------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`language_detection_scripts <language_detection_scripts/0::script_ratios/2>`
+
+``scripts_to_languages/2``
+--------------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`language_detection_scripts <language_detection_scripts/0::scripts_to_languages/2>`
 
 ``search/1``
 ------------

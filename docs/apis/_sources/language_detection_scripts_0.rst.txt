@@ -1,0 +1,150 @@
+.. index:: single: language_detection_scripts
+.. _language_detection_scripts/0:
+
+.. rst-class:: right
+
+**object**
+
+``language_detection_scripts``
+==============================
+
+Unicode script analysis and language script registry.
+
+| **Availability:** 
+|    ``logtalk_load(language_detection(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-07
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Uses:**
+|    :ref:`list <list/0>`
+|    :ref:`user <user/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: script_ratios/2
+.. _language_detection_scripts/0::script_ratios/2:
+
+``script_ratios/2``
+^^^^^^^^^^^^^^^^^^^
+
+Returns observed Unicode scripts and their ratios ordered by decreasing ratio and then by script name.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``script_ratios(Codes,ScriptRatios)``
+| **Mode and number of proofs:**
+|    ``script_ratios(+list(character_code),-list(pair(atom,float)))`` - ``one``
+
+
+------------
+
+.. index:: language_scripts/2
+.. _language_detection_scripts/0::language_scripts/2:
+
+``language_scripts/2``
+^^^^^^^^^^^^^^^^^^^^^^
+
+Enumerates effective ISO 639-1 language codes and their expected Unicode scripts. Custom mappings override default mappings.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``language_scripts(Language,Scripts)``
+| **Mode and number of proofs:**
+|    ``language_scripts(?atom,?list(atom))`` - ``zero_or_more``
+
+
+------------
+
+.. index:: default_language_scripts/2
+.. _language_detection_scripts/0::default_language_scripts/2:
+
+``default_language_scripts/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Enumerates default ISO 639-1 language codes and their expected Unicode scripts.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``default_language_scripts(Language,Scripts)``
+| **Mode and number of proofs:**
+|    ``default_language_scripts(?atom,?list(atom))`` - ``zero_or_more``
+
+
+------------
+
+.. index:: custom_language_scripts/2
+.. _language_detection_scripts/0::custom_language_scripts/2:
+
+``custom_language_scripts/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Enumerates custom ISO 639-1 language codes and their expected Unicode scripts.
+
+| **Compilation flags:**
+|    ``static, multifile``
+
+| **Template:**
+|    ``custom_language_scripts(Language,Scripts)``
+| **Mode and number of proofs:**
+|    ``custom_language_scripts(?atom,?list(atom))`` - ``zero_or_more``
+
+
+------------
+
+.. index:: scripts_to_languages/2
+.. _language_detection_scripts/0::scripts_to_languages/2:
+
+``scripts_to_languages/2``
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Returns the sorted unique registered languages compatible with any meaningful script in the given list.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``scripts_to_languages(Scripts,Languages)``
+| **Mode and number of proofs:**
+|    ``scripts_to_languages(+list(atom),-list(atom))`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
