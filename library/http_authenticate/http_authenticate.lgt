@@ -23,9 +23,9 @@
 	imports((options, http_authentication_helpers))).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-09-01,
+		date is 2026-09-08,
 		comment is 'HTTP Basic authentication parsing, generation, challenge building, and request verification helpers.'
 	]).
 
@@ -335,13 +335,22 @@
 
 	parse_unauthorized_response_overlay_options(Status, Headers, Body, Properties, Options) :-
 		check_unauthorized_response_overlay_options(Options),
-		(^^option(status(Status), Options) -> true ; Status = none),
-		(^^option(headers(Headers), Options) -> true ; Headers = none),
-		(^^option(body(Body), Options) -> true ; Body = none),
-		(^^option(properties(Properties), Options) -> true ; Properties = none),
-		( Headers == none -> true ; valid_header_list_or_error(Headers) ),
-		( Body == none -> true ; valid_body_term_or_error(Body) ),
-		( Properties == none -> true ; valid_property_list_or_error(Properties) ).
+		^^option(status(Status), Options, status(none)),
+		^^option(headers(Headers), Options, headers(none)),
+		^^option(body(Body), Options, body(none)),
+		^^option(properties(Properties), Options, properties(none)),
+		(	Headers == none ->
+			true
+		;	valid_header_list_or_error(Headers)
+		),
+		(	Body == none ->
+			true
+		;	valid_body_term_or_error(Body)
+		),
+		(	Properties == none ->
+			true
+		;	valid_property_list_or_error(Properties)
+		).
 
 	unauthorized_response_options(Realm, Charset, Status, Headers, Body, Properties, [
 		realm(Realm),

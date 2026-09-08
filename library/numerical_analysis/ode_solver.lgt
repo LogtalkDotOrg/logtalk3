@@ -65,22 +65,39 @@
 		::solve(InitialTime, InitialState, FinalTime, Trajectory, _Statistics, UserOptions).
 
 	check_initial_value(InitialTime, InitialState, FinalTime) :-
-		( var(InitialTime) -> instantiation_error; true ),
-		( var(InitialState) -> instantiation_error; true ),
-		( var(FinalTime) -> instantiation_error; true ),
-		( number(InitialTime) -> true; type_error(number, InitialTime) ),
-		( number(FinalTime) -> true; type_error(number, FinalTime) ),
-		( InitialState = [_|_], ground(InitialState), forall(member(Value, InitialState), number(Value)) ->
+		(	var(InitialTime) ->
+			instantiation_error
+		;	true
+		),
+		(	var(InitialState) ->
+			instantiation_error
+		;	true
+		),
+		(	var(FinalTime) ->
+			instantiation_error
+		;	true
+		),
+		(	number(InitialTime) ->
 			true
-		; domain_error(ode_state, InitialState)
+		;	type_error(number, InitialTime)
+		),
+		(	number(FinalTime) ->
+			true
+		;	type_error(number, FinalTime)
+		),
+		(	InitialState = [_|_],
+			ground(InitialState),
+			forall(member(Value, InitialState), number(Value)) ->
+			true
+		;	domain_error(ode_state, InitialState)
 		).
 
 	evaluate_derivative(Time, State, Derivative) :-
 		derivative(Time, State, Derivative),
 		length(State, Dimension),
-		( length(Derivative, Dimension), forall(member(Value, Derivative), number(Value)) ->
+		(	length(Derivative, Dimension), forall(member(Value, Derivative), number(Value)) ->
 			true
-		; domain_error(ode_derivative, Derivative)
+		;	domain_error(ode_derivative, Derivative)
 		).
 
 :- end_category.

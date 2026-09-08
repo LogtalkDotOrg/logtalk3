@@ -1013,7 +1013,10 @@
 	valid_time_zone([]).
 	valid_time_zone([0'Z]).
 	valid_time_zone([Sign,H1,H2,0':,M1,M2]) :-
-		(Sign =:= 0'+ -> true; Sign =:= 0'-),
+		(	Sign =:= 0'+ ->
+			true
+		;	Sign =:= 0'-
+		),
 		two_digits(H1, H2, Hour),
 		two_digits(M1, M2, Minute),
 		Hour >= 0, Hour =< 14,

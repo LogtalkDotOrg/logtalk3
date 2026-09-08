@@ -1116,7 +1116,10 @@
 		assertz(recorded_linter_warning_(Sequence, RuleId, WarningText, GroundContext, File, Lines, GroundProperties)).
 
 	next_linter_warning_sequence(Sequence) :-
-		( retract(linter_warning_sequence_(Current)) -> true ; Current = 0 ),
+		(	retract(linter_warning_sequence_(Current)) ->
+			true
+		;	Current = 0
+		),
 		Sequence is Current + 1,
 		assertz(linter_warning_sequence_(Sequence)).
 

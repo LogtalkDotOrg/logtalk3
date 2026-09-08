@@ -482,7 +482,10 @@
 	% prompts/get
 
 	handle_prompts_get(Message, Id, Options, Outcome) :-
-		(	params(Message, Params) -> true ; Params = {} ),
+		(	params(Message, Params) ->
+			true
+		;	Params = {}
+		),
 		(	^^has_pair(Params, name, PromptName) ->
 			true
 		;	invalid_params(Id, ErrorResponse),
@@ -534,7 +537,10 @@
 	handle_completion_complete(Message, Id, Options, Outcome) :-
 		^^option(application_capabilities(ApplicationCapabilities), Options),
 		(	member(completions, ApplicationCapabilities) ->
-			( params(Message, Params) -> true; Params = {} ),
+			(	params(Message, Params) ->
+				true
+			;	Params = {}
+			),
 			^^option(application(Application), Options),
 			(	^^completion_request(Application, Params, Reference, Argument, Context) ->
 				execute_completion(Application, Reference, Argument, Context, Id, Outcome)

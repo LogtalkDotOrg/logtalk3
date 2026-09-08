@@ -437,7 +437,10 @@
 
 	valid_binary_subtype(Subtype) :-
 		integer(Subtype),
-		( Subtype >= 0, Subtype =< 9 -> true; Subtype >= 128, Subtype =< 255 ).
+		(	0 =< Subtype, Subtype =< 9 ->
+			true
+		;	128 =< Subtype, Subtype =< 255
+		).
 
 	valid_regular_expression_options(Options) :-
 		string_codes(Options, Codes),

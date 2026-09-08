@@ -51,7 +51,10 @@
 		^^option(tol_rel(TolRel), Options),
 		^^option(safety_factor(Safety), Options),
 		^^option(max_steps(MaxSteps), Options),
-		( MinStep =< MaxStep -> true; domain_error(step_interval, MinStep-MaxStep) ),
+		(	MinStep =< MaxStep ->
+			true
+		;	domain_error(step_interval, MinStep-MaxStep)
+		),
 		^^check_initial_value(InitialTime, InitialState, FinalTime),
 		(	InitialTime =:= FinalTime ->
 			Trajectory = [InitialTime-InitialState],

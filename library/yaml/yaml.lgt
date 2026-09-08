@@ -534,7 +534,10 @@
 		!,
 		anchor_name(AliasName),
 		% Look up the alias in state
-		{ (lookup_anchor(AliasName, S0, Value) -> true ; Value = '@'(null)) }.
+		{	lookup_anchor(AliasName, S0, Value) ->
+			true
+		;	Value = '@'(null)
+		}.
 	inline_value(_Indent, Value, S, S) -->
 		inline_scalar(Scalar),
 		{ parse_scalar_or_number(Scalar, Value) }.
@@ -787,7 +790,10 @@
 	% Check if input starts with newline followed by line with sufficient indent
 	% Used by block scalar parsing to look ahead without DCG pushback
 	has_next_line_with_indent(MinIndent, [Code| Codes]) :-
-		(Code =:= 10 -> true ; Code =:= 13),
+		(	Code =:= 10 ->
+			true
+		;	Code =:= 13
+		),
 		count_leading_spaces_and_check(Codes, 0, MinIndent).
 
 	% Count leading spaces and check if line has sufficient indent or is blank

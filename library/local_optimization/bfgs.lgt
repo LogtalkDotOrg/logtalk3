@@ -95,7 +95,10 @@
 		),
 		require_gradient,
 		objective(Point0, Value0),
-		(	number(Value0) -> true ; domain_error(objective, Value0) ),
+		(	number(Value0) ->
+			true
+		;	domain_error(objective, Value0)
+		),
 		gradient(Point0, Grad0),
 		validate_gradient(Point0, Grad0),
 		direction_sign(ObjDir, Sign),
@@ -261,7 +264,10 @@
 		add_vectors(Point0, Scaled, Trial0),
 		^^project_to_bounds(Trial0, Bounds, Trial),
 		objective(Trial, TrialVal),
-		(	number(TrialVal) -> true ; domain_error(objective, TrialVal) ),
+		(	number(TrialVal) ->
+			true
+		;	domain_error(objective, TrialVal)
+		),
 		Evals1_try is Evals0 + 1,
 		PhiValue0 is Sign * Value0,
 		PhiTrial is Sign * TrialVal,

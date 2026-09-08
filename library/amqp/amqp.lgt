@@ -23,9 +23,9 @@
 	imports(options)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:3:1,
 		author is 'Paulo Moura',
-		date is 2026-08-04,
+		date is 2026-09-08,
 		comment is 'Portable AMQP 0-9-1 (Advanced Message Queuing Protocol) client. Uses the sockets library for TCP communication.',
 		remarks is [
 			'Supported backends' - 'ECLiPSe, GNU Prolog, SICStus Prolog, SWI-Prolog, Trealla Prolog, and XVM (same as the sockets library).',
@@ -715,7 +715,6 @@
 		),
 		% Extract server capabilities
 		member(mechanisms-Mechanisms, StartArguments),
-		(	member(locales-_Locales, StartArguments) -> true ; true),
 		% Send Connection.Start-Ok
 		^^option(username(Username), Options),
 		^^option(password(Password), Options),

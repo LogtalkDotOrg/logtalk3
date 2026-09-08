@@ -96,7 +96,10 @@
 		require_gradient,
 		require_hessian,
 		objective(Point0, Value0),
-		(	number(Value0) -> true ; domain_error(objective, Value0) ),
+		(	number(Value0) ->
+			true
+		;	domain_error(objective, Value0)
+		),
 		gradient(Point0, Grad0),
 		validate_gradient(Point0, Grad0),
 		hessian(Point0, Hessian0),
@@ -189,7 +192,10 @@
 		^^project_to_bounds(Trial0, Bounds, Trial),
 		subtract_vectors(Trial, Point0, ActualP),
 		objective(Trial, TrialVal),
-		(	number(TrialVal) -> true ; domain_error(objective, TrialVal) ),
+		(	number(TrialVal) ->
+			true
+		;	domain_error(objective, TrialVal)
+		),
 		Evals1 is Evals0 + 1,
 		PhiValue0 is Sign * Value0,
 		PhiTrialVal is Sign * TrialVal,

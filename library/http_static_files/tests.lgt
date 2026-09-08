@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-07-18,
+		date is 2026-09-08,
 		comment is 'Unit tests for the "http_static_files" library.'
 	]).
 
@@ -200,8 +200,7 @@
 		headers(Response0, Headers0),
 		memberchk(etag-ETag, Headers0),
 		atom_codes(ETag, [0'W,0'/| StrongETagCodes]),
-		append([32], StrongETagCodes, StrongETagCodes0),
-		append(StrongETagCodes0, [0'\t], IfNoneMatchCodes),
+		append([32| StrongETagCodes], [0'\t], IfNoneMatchCodes),
 		atom_codes(IfNoneMatch, IfNoneMatchCodes),
 		request(get, origin('/hello.txt'), http(1, 1), [if_none_match-IfNoneMatch], empty, [], Request),
 		http_static_files::serve('hello.txt', Request, Root, Response),

@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:1:0,
 		author is 'Paulo Moura',
-		date is 2026-02-13,
+		date is 2026-09-08,
 		comment is 'Unit tests for the "memcached" library.'
 	]).
 
@@ -113,7 +113,7 @@
 	test(memcached_add_01, true(Value == 'added_value')) :-
 		memcached::connect(localhost, Connection),
 		% Ensure key doesn't exist
-		(	memcached::delete(Connection, 'test_key_add') -> true ; true ),
+		ignore(memcached::delete(Connection, 'test_key_add')),
 		memcached::add(Connection, 'test_key_add', 'added_value', 0, 60),
 		memcached::get(Connection, 'test_key_add', Value),
 		memcached::disconnect(Connection).
@@ -137,7 +137,8 @@
 
 	test(memcached_replace_missing_01, error(memcached_error(not_stored))) :-
 		memcached::connect(localhost, Connection),
-		(	memcached::delete(Connection, 'test_key_replace_miss') -> true ; true ),
+		% Ensure key doesn't exist
+		ignore(memcached::delete(Connection, 'test_key_replace_miss')),
 		memcached::replace(Connection, 'test_key_replace_miss', 'value', 0, 60),
 		memcached::disconnect(Connection).
 
@@ -196,7 +197,7 @@
 	test(memcached_cas_not_found_01, error(memcached_error(not_found))) :-
 		memcached::connect(localhost, Connection),
 		% Ensure key doesn't exist
-		(	memcached::delete(Connection, 'test_key_cas_missing') -> true ; true ),
+		ignore(memcached::delete(Connection, 'test_key_cas_missing')),
 		% CAS on a non-existent key should fail with NOT_FOUND
 		memcached::cas(Connection, 'test_key_cas_missing', 'value', 0, 60, 12345),
 		memcached::disconnect(Connection).
@@ -220,7 +221,8 @@
 
 	test(memcached_delete_missing_01, fail) :-
 		memcached::connect(localhost, Connection),
-		(	memcached::delete(Connection, 'nonexistent_key_del') -> true ; true ),
+		% Ensure key doesn't exist
+		ignore(memcached::delete(Connection, 'nonexistent_key_del')),
 		memcached::delete(Connection, 'nonexistent_key_del'),
 		memcached::disconnect(Connection).
 
@@ -248,7 +250,8 @@
 
 	test(memcached_incr_missing_01, fail) :-
 		memcached::connect(localhost, Connection),
-		(	memcached::delete(Connection, 'nonexistent_key_incr') -> true ; true ),
+		% Ensure key doesn't exist
+		ignore(memcached::delete(Connection, 'nonexistent_key_incr')),
 		memcached::incr(Connection, 'nonexistent_key_incr', 1, _),
 		memcached::disconnect(Connection).
 
@@ -264,7 +267,8 @@
 
 	test(memcached_touch_missing_01, fail) :-
 		memcached::connect(localhost, Connection),
-		(	memcached::delete(Connection, 'nonexistent_key_touch') -> true ; true ),
+		% Ensure key doesn't exist
+		ignore(memcached::delete(Connection, 'nonexistent_key_touch')),
 		memcached::touch(Connection, 'nonexistent_key_touch', 60),
 		memcached::disconnect(Connection).
 
@@ -300,7 +304,8 @@
 		memcached::connect(localhost, Connection),
 		memcached::set(Connection, 'mget_key_a', 'value_a'),
 		memcached::set(Connection, 'mget_key_b', 'value_b'),
-		(	memcached::delete(Connection, 'mget_key_missing') -> true ; true ),
+		% Ensure key doesn't exist
+		ignore(memcached::delete(Connection, 'mget_key_missing')),
 		memcached::mget(Connection, ['mget_key_a', 'mget_key_missing', 'mget_key_b'], Items),
 		memcached::disconnect(Connection).
 

@@ -923,12 +923,20 @@
 		!.
 	normalize_input_responses([Item| Items], [input_response(Key, Value)| Out]) :-
 		!,
-		(	^^has_pair(Item, key, Key) -> true ; Key = unknown),
-		(	^^has_pair(Item, value, Value) -> true
+		(	^^has_pair(Item, key, Key) ->
+			true
+		;	Key = unknown
+		),
+		(	^^has_pair(Item, value, Value) ->
+			true
 		;	^^has_pair(Item, action, Action) ->
-			(	Action == accept, ^^has_pair(Item, content, Content) -> Value = accept(Content)
-			;	Action == accept -> Value = accept({})
-			;	Action == decline -> Value = decline
+			(	Action == accept,
+				^^has_pair(Item, content, Content) ->
+				Value = accept(Content)
+			;	Action == accept ->
+				Value = accept({})
+			;	Action == decline ->
+				Value = decline
 			;	Value = cancel
 			)
 		;	Value = Item
@@ -1981,8 +1989,14 @@
 			body_atom(Body0, Body)
 		;	arg(1, Request, M0),
 			arg(2, Request, Path0),
-			(arg(3, Request, Headers0) -> true ; Headers0 = []),
-			(arg(4, Request, Body0) -> true ; Body0 = ''),
+			(	arg(3, Request, Headers0) ->
+				true
+			;	Headers0 = []
+			),
+			(	arg(4, Request, Body0) ->
+				true
+			;	Body0 = ''
+			),
 			upcase(M0, Method),
 			normalize_path(Path0, Path),
 			normalize_headers(Headers0, Headers),

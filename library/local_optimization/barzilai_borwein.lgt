@@ -299,7 +299,10 @@
 		add_vectors(Point0, Step, Trial0),
 		^^project_to_bounds(Trial0, Bounds, Point1),
 		objective(Point1, Value1),
-		(	number(Value1) -> true ; domain_error(objective, Value1) ),
+		(	number(Value1) ->
+			true
+		;	domain_error(objective, Value1)
+		),
 		Evals1 is Evals0 + 1.
 
 	% Armijo expressed in phi-space: Direction already points downhill on
@@ -328,7 +331,10 @@
 		add_vectors(Point0, Scaled, Trial0),
 		^^project_to_bounds(Trial0, Bounds, Trial),
 		objective(Trial, TrialVal),
-		(	number(TrialVal) -> true ; domain_error(objective, TrialVal) ),
+		(	number(TrialVal) ->
+			true
+		;	domain_error(objective, TrialVal)
+		),
 		Evals1_try is Evals0 + 1,
 		PhiValue0 is Sign * Value0,
 		PhiTrial is Sign * TrialVal,

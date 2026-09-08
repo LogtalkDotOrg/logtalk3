@@ -24,9 +24,9 @@
 	imports((tool_diagnostics_common, options))).
 
 	:- info([
-		version is 11:4:0,
+		version is 11:5:0,
 		author is 'Paulo Moura',
-		date is 2026-06-13,
+		date is 2026-09-08,
 		comment is 'Documenting tool. Generates XML documenting files for loaded entities and for library, directory, entity, and predicate indexes.'
 	]).
 
@@ -1817,9 +1817,9 @@
 	valid_option(index_xsl_file(File)) :-
 		atom(File).
 	valid_option(xml_spec_reference(Reference)) :-
-		(Reference == standalone -> true; Reference == (local) -> true; Reference == web).
+		once((Reference == standalone; Reference == (local); Reference == web)).
 	valid_option(xml_spec(Spec)) :-
-		(Spec == dtd -> true; Spec == xsd).
+		once((Spec == dtd; Spec == xsd)).
 	valid_option(xml_docs_directory(Directory)) :-
 		atom(Directory).
 	valid_option(omit_path_prefixes(Prefixes)) :-

@@ -370,7 +370,10 @@
 	valid_features([feature(Feature, DF, IDF)| Features], Previous, DocumentCount) :-
 		ground(Feature),
 		valid(positive_integer, DF),
-		( 	Previous == none -> true; Previous @< Feature),
+		( 	Previous == none ->
+			true
+		;	Previous @< Feature
+		),
 		number(IDF),
 		DF =< DocumentCount,
 		valid_features(Features, Feature, DocumentCount).

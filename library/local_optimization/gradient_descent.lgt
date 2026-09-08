@@ -82,7 +82,10 @@
 		),
 		require_gradient,
 		objective(Point0, Value0),
-		(	number(Value0) -> true ; domain_error(objective, Value0) ),
+		(	number(Value0) ->
+			true
+		;	domain_error(objective, Value0)
+		),
 		gradient(Point0, Grad0),
 		validate_gradient(Point0, Grad0),
 		euclidean_norm(Grad0, GradNorm0),
@@ -204,7 +207,10 @@
 		add_vectors(Point0, Step, Point1_0),
 		^^project_to_bounds(Point1_0, Bounds, Point1),
 		objective(Point1, Value1),
-		(	number(Value1) -> true ; domain_error(objective, Value1) ),
+		(	number(Value1) ->
+			true
+		;	domain_error(objective, Value1)
+		),
 		Evals1 is Evals0 + 1.
 
 	line_search(armijo, Point0, Value0, Grad0, Direction, Bounds, ObjDir,
@@ -227,7 +233,10 @@
 		add_vectors(Point0, Scaled, Trial0),
 		^^project_to_bounds(Trial0, Bounds, Trial),
 		objective(Trial, TrialVal),
-		(	number(TrialVal) -> true ; domain_error(objective, TrialVal) ),
+		(	number(TrialVal) ->
+			true
+		;	domain_error(objective, TrialVal)
+		),
 		Evals1_try is Evals0 + 1,
 		% Armijo condition (minimization form):
 		%   f(x + alpha d) =< f(x) + c · alpha · (g·d)

@@ -262,7 +262,10 @@
 		assertz(recorded_warning_(Sequence, Flag, GroundMessage, GroundTokens)).
 
 	next_warning_sequence(Sequence) :-
-		( retract(warning_sequence_(Current)) -> true ; Current = 0 ),
+		(	retract(warning_sequence_(Current)) ->
+			true
+		;	Current = 0
+		),
 		Sequence is Current + 1,
 		assertz(warning_sequence_(Sequence)).
 

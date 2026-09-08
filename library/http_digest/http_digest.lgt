@@ -23,9 +23,9 @@
 	imports((options, http_authentication_helpers))).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:2:0,
 		author is 'Paulo Moura',
-		date is 2026-09-01,
+		date is 2026-09-08,
 		comment is 'HTTP Digest authentication parsing, generation, request decoration, and verification helpers.'
 	]).
 
@@ -562,10 +562,10 @@
 	parse_unauthorized_response_overlay_options(Status, Headers0, Body, Properties, Options) :-
 		^^check_options(Options),
 		check_unauthorized_response_overlay_options(Options),
-		(^^option(status(Status), Options) -> true ; Status = none),
-		(^^option(headers(Headers0), Options) -> true ; Headers0 = none),
-		(^^option(body(Body), Options) -> true ; Body = none),
-		(^^option(properties(Properties), Options) -> true ; Properties = none).
+		^^option(status(Status), Options, status(none)),
+		^^option(headers(Headers0), Options, headers(none)),
+		^^option(body(Body), Options, body(none)),
+		^^option(properties(Properties), Options, properties(none)).
 
 	% Keep nonce_secret/1 out of default_option/1: omission is only meaningful
 	% when nextnonce(true) requests automatic nonce generation.
@@ -575,7 +575,7 @@
 		^^merge_options(Options, MergedOptions),
 		^^option(nextnonce(NextNonceOption), MergedOptions),
 		normalize_nextnonce_policy(NextNonceOption, NextNonce),
-		(^^option(nonce_secret(Secret), MergedOptions) -> true ; Secret = none),
+		^^option(nonce_secret(Secret), MergedOptions, nonce_secret(none)),
 		^^option(nonce_ttl(NonceTTL), MergedOptions),
 		^^option(current_time(CurrentTimeOption), MergedOptions),
 		resolve_current_time(CurrentTimeOption, CurrentTime).
