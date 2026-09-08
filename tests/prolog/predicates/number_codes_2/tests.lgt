@@ -23,11 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:12:0,
+		version is 1:12:1,
 		author is 'Paulo Moura',
-		date is 2024-09-24,
+		date is 2026-09-08,
 		comment is 'Unit tests for the ISO Prolog standard number_codes/2 built-in predicate.'
 	]).
+
+	:- set_logtalk_flag(arithmetic_expressions, silent).
+	:- set_logtalk_flag(suspicious_calls, silent).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.16.8.4
 

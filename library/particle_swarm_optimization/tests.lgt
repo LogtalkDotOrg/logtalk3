@@ -23,15 +23,17 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-08-05,
+		date is 2026-09-08,
 		comment is 'Unit tests for the "particle_swarm_optimization" library.'
 	]).
 
 	:- uses(list, [
 		length/2, memberchk/2
 	]).
+
+	:- set_logtalk_flag(arithmetic_expressions, silent).
 
 	cover(particle_swarm_optimization(_, _)).
 	cover(particle_swarm_optimization(_)).

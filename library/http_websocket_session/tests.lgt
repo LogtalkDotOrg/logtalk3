@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:2:1,
 		author is 'Paulo Moura',
-		date is 2026-07-31,
+		date is 2026-09-08,
 		comment is 'Unit tests for the "http_websocket_session" library.'
 	]).
 
@@ -140,10 +140,10 @@
 		http_websocket_frames::property(Frame, masking_key(_)).
 
 	test(http_websocket_session_write_message_2_02, deterministic) :-
-		fixed_masking_key_http_websocket_client_session::message(text, hello, Message),
+		{fixed_masking_key_http_websocket_client_session::message(text, hello, Message)},
 		^^file_path('test_http_websocket_session.tmp', File),
 		open(File, write, Output, [type(binary)]),
-		fixed_masking_key_http_websocket_client_session::write_message(Output, Message),
+		{fixed_masking_key_http_websocket_client_session::write_message(Output, Message)},
 		close(Output),
 		read_frames_file('test_http_websocket_session.tmp', [Frame]),
 		http_websocket_frames::opcode(Frame, text),

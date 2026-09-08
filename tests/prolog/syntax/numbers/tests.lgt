@@ -23,11 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:4:0,
+		version is 1:4:1,
 		author is 'Paulo Moura',
-		date is 2021-08-31,
+		date is 2026-09-08,
 		comment is 'Unit tests for the ISO Prolog standard numbers syntax plus tests for de facto standard syntax extensions.'
 	]).
+
+	:- set_logtalk_flag(arithmetic_expressions, silent).
+	:- set_logtalk_flag(suspicious_calls, silent).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 6.3.1
 

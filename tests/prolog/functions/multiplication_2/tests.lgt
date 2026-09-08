@@ -23,11 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2022-03-30,
+		date is 2026-09-08,
 		comment is 'Unit tests for the ISO Prolog standard (*)/2 built-in function.'
 	]).
+
+	:- set_logtalk_flag(arithmetic_expressions, silent).
+	:- set_logtalk_flag(suspicious_calls, silent).
 
 	% tests from the Logtalk portability work
 

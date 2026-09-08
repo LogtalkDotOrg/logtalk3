@@ -23,11 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:5:0,
+		version is 1:5:1,
 		author is 'Paulo Moura',
-		date is 2024-10-07,
+		date is 2026-09-08,
 		comment is 'Unit tests for the ISO Prolog standard functor/3 built-in predicate.'
 	]).
+
+	:- set_logtalk_flag(arithmetic_expressions, silent).
+	:- set_logtalk_flag(suspicious_calls, silent).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 8.5.1.4
 	% updated for the changesa in the ISO/IEC 13211-1 Technical Corrigendum 3:2017

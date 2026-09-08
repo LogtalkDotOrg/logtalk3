@@ -23,15 +23,18 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:2:1,
 		author is 'Paulo Moura',
-		date is 2021-01-26,
+		date is 2026-09-08,
 		comment is 'Unit tests for the ISO Prolog standard cos/1 built-in function.'
 	]).
 
 	:- uses(lgtunit, [
 		op(700, xfx, =~=), (=~=)/2
 	]).
+
+	:- set_logtalk_flag(suspicious_calls, silent).
+	:- set_logtalk_flag(arithmetic_expressions, silent).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 9.3.3.4
 

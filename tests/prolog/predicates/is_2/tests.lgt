@@ -23,15 +23,18 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:4:2,
+		version is 2:4:3,
 		author is 'Paulo Moura',
-		date is 2026-01-08,
+		date is 2026-09-08,
 		comment is 'Unit tests for the ISO Prolog standard is/2 built-in predicate.'
 	]).
 
 	:- uses(lgtunit, [
 		op(700, xfx, =~=), (=~=)/2
 	]).
+
+	:- set_logtalk_flag(arithmetic_expressions, silent).
+	:- set_logtalk_flag(suspicious_calls, silent).
 
 	cleanup :-
 		^^clean_text_input.

@@ -23,11 +23,13 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-08-12,
+		date is 2026-09-08,
 		comment is 'Unit tests for the "univariate_distributions" library.'
 	]).
+
+	:- set_logtalk_flag(arithmetic_expressions, silent).
 
 	cover(univariate_distributions(_)).
 

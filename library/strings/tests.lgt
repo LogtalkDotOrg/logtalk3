@@ -19,6 +19,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+	:- set_logtalk_flag(arithmetic_expressions, silent).
+
 	cover(string(_)).
 
 	% atom_string/2 tests

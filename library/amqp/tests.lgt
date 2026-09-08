@@ -23,14 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:2:1,
 		author is 'Paulo Moura',
-		date is 2026-08-20,
+		date is 2026-09-08,
 		comment is 'Unit tests for the "amqp" library.'
 	]).
 
 	% silence linter warnings about float equality tests
-	:- set_logtalk_flag(suspicious_calls, silent).
+	:- set_logtalk_flag(arithmetic_expressions, silent).
 
 	:- uses(list, [
 		length/2, valid/1 as is_list/1

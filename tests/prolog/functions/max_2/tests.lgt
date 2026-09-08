@@ -23,11 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:3:1,
 		author is 'Paulo Moura',
-		date is 2021-01-26,
+		date is 2026-09-08,
 		comment is 'Unit tests for the ISO Prolog standard max/2 built-in function.'
 	]).
+
+	:- set_logtalk_flag(arithmetic_expressions, silent).
+	:- set_logtalk_flag(suspicious_calls, silent).
 
 	% tests from the ISO/IEC 13211-1:1995/Cor.2:2012(en) standard, section 9.3.8.4
 

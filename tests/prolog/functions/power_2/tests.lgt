@@ -23,15 +23,18 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:3:0,
+		version is 1:3:1,
 		author is 'Paulo Moura',
-		date is 2022-03-30,
+		date is 2026-09-08,
 		comment is 'Unit tests for the ISO Prolog standard (**)/2 built-in function.'
 	]).
 
 	:- uses(lgtunit, [
 		op(700, xfx, =~=), (=~=)/2
 	]).
+
+	:- set_logtalk_flag(arithmetic_expressions, silent).
+	:- set_logtalk_flag(suspicious_calls, silent).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 9.3.1.4
 

@@ -36,15 +36,17 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-08-10,
+		date is 2026-09-08,
 		comment is 'Unit tests for the sampling protocol implementation.'
 	]).
 
 	:- uses(lgtunit, [
 		op(700, xfx, =~=), (=~=)/2
 	]).
+
+	:- set_logtalk_flag(arithmetic_expressions, silent).
 
 	test(sampling_lognormal_3, deterministic(Value =~= Expected)) :-
 		Normal is 0.7 - 0.2 * sqrt(-2.0 * log(0.5)),

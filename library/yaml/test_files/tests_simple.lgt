@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-01-25,
+		date is 2026-09-08,
 		comment is 'Tests for the "yaml" library.'
 	]).
 
@@ -40,6 +40,8 @@
 	:- uses(lgtunit, [
 		assertion/1, assertion/2
 	]).
+
+	:- set_logtalk_flag(arithmetic_expressions, silent).
 
 	cover(yaml).
 

@@ -23,11 +23,14 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2020-07-23,
+		date is 2026-09-08,
 		comment is 'Unit tests for the ISO Prolog standard abs/1 built-in function.'
 	]).
+
+	:- set_logtalk_flag(suspicious_calls, silent).
+	:- set_logtalk_flag(arithmetic_expressions, silent).
 
 	% tests from the ISO/IEC 13211-1:1995(E) standard, section 9.1.7
 
