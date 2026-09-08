@@ -20,13 +20,13 @@
 
 
 :- object(tokenizer(_Representation_, _Language_),
-	implements([tokenizer_protocol, sentence_splitter_protocol]),
+	implements((tokenizer_protocol, sentence_splitter_protocol)),
 	imports(options)).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-05,
+		date is 2026-09-08,
 		comment is 'Tokenizer and sentence splitter parameterized by text representation and language provider.',
 		parameters is [
 			'Representation' - 'Text representation. Valid values are ``atom``, ``codes``, and ``chars``.',
@@ -83,6 +83,7 @@
 
 	prepare(Text, UserOptions, Codes, Options) :-
 		check_representation,
+		check_language,
 		check_text(Text),
 		^^check_options(UserOptions),
 		^^merge_options(UserOptions, Options),
@@ -94,6 +95,14 @@
 		;	member(_Representation_, [atom, chars, codes]) ->
 			true
 		;	domain_error(text_representation, _Representation_)
+		).
+
+	check_language :-
+		(	var(_Language_) ->
+			instantiation_error
+		;	conforms_to_protocol(_Language_, tokenizer_language_protocol) ->
+			true
+		;	domain_error(lemmatizer_language_protocol, _Language_)
 		).
 
 	check_text(Text) :-
