@@ -28,6 +28,9 @@ RELEASE NOTES
 Logtalk compiler and runtime
 ----------------------------
 
+* ADDED: Compiler support for using the `logtalk_linter_hook/7` predicate to
+lint "super" calls and messages to "self".
+
 * ADDED: New linter warning when a cut is followed by a goal that throws an
 error. Controlled by the `suspicious_calls` flag.
 

@@ -19576,6 +19576,20 @@ create_logtalk_flag(Flag, Value, Options) :-
 % compiles the sending of a message to self
 
 
+% linter warnings via hook predicate
+
+'$lgt_compile_message_to_self'(Pred, _, Ctx) :-
+	callable(Pred),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	logtalk_linter_hook(::Pred, Flag, File, Lines, Type, Entity, Warning),
+	nonvar(Flag),
+	'$lgt_valid_flag'(Flag),
+	'$lgt_compiler_flag'(Flag, warning),
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_print_message'(warning(Flag), Warning),
+	fail.
+
 % translation performed at runtime
 
 '$lgt_compile_message_to_self'(Pred, '$lgt_send_to_self'(Pred, NewCtx), Ctx) :-
@@ -19916,6 +19930,21 @@ create_logtalk_flag(Flag, Value, Options) :-
 % '$lgt_compile_super_call'(@term, -callable, +compilation_context)
 %
 % compiles calling of redefined predicates ("super" calls)
+
+
+% linter warnings via hook predicate
+
+'$lgt_compile_super_call'(Pred, _, Ctx) :-
+	callable(Pred),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	logtalk_linter_hook(^^Pred, Flag, File, Lines, Type, Entity, Warning),
+	nonvar(Flag),
+	'$lgt_valid_flag'(Flag),
+	'$lgt_compiler_flag'(Flag, warning),
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_print_message'(warning(Flag), Warning),
+	fail.
 
 '$lgt_compile_super_call'(Pred, TPred, Ctx) :-
 	'$lgt_pp_object_'(Obj, _, _, _, Super, _, _, _, _, _, _),
