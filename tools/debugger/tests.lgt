@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:9:0,
+		version is 0:9:1,
 		author is 'Paulo Moura',
-		date is 2024-08-26,
+		date is 2026-09-08,
 		comment is 'Unit tests for the "debugger" tool.'
 	]).
 
@@ -129,7 +129,7 @@
 		logtalk_load(test_object, [debug(on)]),
 		leash(none),
 		trace,
-		findall(X, test_object::a(X), L).
+		findall(X, {test_object::a(X)}, L).
 
 	test(debugger_notrace_0_01, deterministic) :-
 		notrace.

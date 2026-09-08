@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:0:1,
 		author is 'Paulo Moura',
-		date is 2022-07-21,
+		date is 2026-09-08,
 		comment is 'Unit tests for the "gensym" library.'
 	]).
 
@@ -83,14 +83,16 @@
 	% multiple gensym objects
 
 	test(gensym_multiple_same_counter, deterministic(A1 == A2)) :-
-		gs1::gensym(a, A1),
-		gs2::gensym(a, A2).
+		{	gs1::gensym(a, A1),
+			gs2::gensym(a, A2)
+		}.
 
 	test(gensym_multiple_reset_one, deterministic((B1 == B2, B2 == B3, B3 \== B4))) :-
-		gs1::gensym(b, B1),
-		gs2::gensym(b, B2),
-		gs1::reset_gensym,
-		gs1::gensym(b, B3),
-		gs2::gensym(b, B4).
+		{	gs1::gensym(b, B1),
+			gs2::gensym(b, B2),
+			gs1::reset_gensym,
+			gs1::gensym(b, B3),
+			gs2::gensym(b, B4)
+		}.
 
 :- end_object.

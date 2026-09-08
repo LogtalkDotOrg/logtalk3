@@ -38,9 +38,9 @@ goal_expansion(X = 1, X = 2).
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:9:1,
+		version is 1:9:2,
 		author is 'Paulo Moura',
-		date is 2026-03-22,
+		date is 2026-09-08,
 		comment is 'Unit tests for the "hook_objects" library.'
 	]).
 
@@ -312,24 +312,24 @@ goal_expansion(X = 1, X = 2).
 		logtalk_load('test_files/test_protocol', [reload(skip)]),
 		logtalk_load('test_files/prolog_source_file_03', [hook(object_wrapper_hook(test_protocol))]).
 
-	test(object_wrapper_hook_1_02, true(prolog_source_file_04::d)) :-
+	test(object_wrapper_hook_1_02, true({prolog_source_file_04::d})) :-
 		logtalk_load('test_files/test_protocol', [reload(skip)]),
 		logtalk_load('test_files/prolog_source_file_04', [hook(object_wrapper_hook(test_protocol))]).
 
 	% tests for the object_wrapper_hook/2 object | term_expansion/2
 
-	test(object_wrapper_hook_2_01, true(foo::current_predicate(d/0))) :-
+	test(object_wrapper_hook_2_01, true({foo::current_predicate(d/0)})) :-
 		logtalk_load('test_files/test_protocol', [reload(skip)]),
 		logtalk_load('test_files/prolog_source_file_05', [hook(object_wrapper_hook(foo,[implements(test_protocol)]))]).
 
-	test(object_wrapper_hook_2_02, true(bar::k)) :-
+	test(object_wrapper_hook_2_02, true({bar::k})) :-
 		logtalk_load('test_files/test_protocol', [reload(skip)]),
 		logtalk_load('test_files/test_category', [reload(skip)]),
 		logtalk_load('test_files/prolog_source_file_06', [hook(object_wrapper_hook(bar,[implements(test_protocol),imports(test_category)]))]).
 
 	% tests for the suppress_goal_hook object | goal_expansion/2
 
-	test(suppress_goal_hook_01, true(f16::a)) :-
+	test(suppress_goal_hook_01, true({f16::a})) :-
 		% set the default hook to identity_hook so that the expansions
 		% performed by suppress_goal_hook are not further expanded
 		set_logtalk_flag(hook, identity_hook),

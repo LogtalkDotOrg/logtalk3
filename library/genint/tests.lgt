@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2022-07-26,
+		date is 2026-09-08,
 		comment is 'Unit tests for the "genint" library.'
 	]).
 
@@ -82,14 +82,16 @@
 	% multiple genint objects
 
 	test(genint_multiple_same_counter, deterministic(a(A1,A2) == a(1,1))) :-
-		gi1::genint(a, A1),
-		gi2::genint(a, A2).
+		{	gi1::genint(a, A1),
+			gi2::genint(a, A2)
+		}.
 
 	test(genint_multiple_reset_one, deterministic(a(B1,B2,B3,B4) == a(1,1,1,2))) :-
-		gi1::genint(b, B1),
-		gi2::genint(b, B2),
-		gi1::reset_genint,
-		gi1::genint(b, B3),
-		gi2::genint(b, B4).
+		{	gi1::genint(b, B1),
+			gi2::genint(b, B2),
+			gi1::reset_genint,
+			gi1::genint(b, B3),
+			gi2::genint(b, B4)
+		}.
 
 :- end_object.
