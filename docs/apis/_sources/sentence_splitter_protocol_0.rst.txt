@@ -15,7 +15,7 @@ Sentence splitting protocol for text represented as atoms, lists of characters, 
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-09-05
+| **Date:** 2026-09-08
 
 | **Compilation flags:**
 |    ``static``
@@ -59,6 +59,12 @@ Splits text into sentences using the default options.
 |        ``instantiation_error``
 |    The ``Representation`` parameter is neither a variable nor ``atom``, ``chars``, or ``codes``:
 |        ``domain_error(text_representation,Representation)``
+|    The ``Language`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Language`` parameter neither a variable nor an object identifier:
+|        ``type_error(object_identifier,Language)``
+|    The ``Language`` parameter is an object identifier but not an object conforming to ``tokenizer_language_protocol``:
+|        ``domain_error(tokenizer_language_protocol,Language)``
 |    ``Text`` is not ground:
 |        ``instantiation_error``
 |    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:
@@ -92,6 +98,12 @@ Splits text into sentences using the given tokenization options.
 |        ``instantiation_error``
 |    The ``Representation`` parameter is neither a variable nor ``atom``, ``chars``, or ``codes``:
 |        ``domain_error(text_representation,Representation)``
+|    The ``Language`` parameter is a variable:
+|        ``instantiation_error``
+|    The ``Language`` parameter neither a variable nor an object identifier:
+|        ``type_error(object_identifier,Language)``
+|    The ``Language`` parameter is an object identifier but not an object conforming to ``tokenizer_language_protocol``:
+|        ``domain_error(tokenizer_language_protocol,Language)``
 |    ``Text`` is not ground:
 |        ``instantiation_error``
 |    The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom:

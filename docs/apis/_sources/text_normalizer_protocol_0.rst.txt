@@ -15,7 +15,7 @@ Text normalization protocol for text represented as atoms, lists of characters, 
 
 | **Author:** Paulo Moura
 | **Version:** 1:0:0
-| **Date:** 2026-09-06
+| **Date:** 2026-09-08
 
 | **Compilation flags:**
 |    ``static``
@@ -61,7 +61,9 @@ Normalizes text to the specified Unicode normalization form. Valid forms are ``n
 |        ``domain_error(text_representation,Representation)``
 |    The ``Profile`` parameter is a variable:
 |        ``instantiation_error``
-|    The ``Profile`` parameter is not an object implementing the ``text_normalization_profile_protocol`` protocol:
+|    The ``Profile`` parameter neither a variable nor an object identifier:
+|        ``type_error(object_identifier,Profile)``
+|    The ``Profile`` parameter is an object identifier but not an object conforming to  ``text_normalization_profile_protocol``:
 |        ``domain_error(text_normalization_profile,Profile)``
 |    ``Form`` is a variable:
 |        ``instantiation_error``
@@ -106,7 +108,9 @@ Canonically decomposes text, removes Unicode mark characters, and returns NFC te
 |        ``domain_error(text_representation,Representation)``
 |    The ``Profile`` parameter is a variable:
 |        ``instantiation_error``
-|    The ``Profile`` parameter is not an object implementing the ``text_normalization_profile_protocol`` protocol:
+|    The ``Profile`` parameter neither a variable nor an object identifier:
+|        ``type_error(object_identifier,Profile)``
+|    The ``Profile`` parameter is an object identifier but not an object conforming to  ``text_normalization_profile_protocol``:
 |        ``domain_error(text_normalization_profile,Profile)``
 |    ``Text`` is not ground:
 |        ``instantiation_error``
@@ -145,7 +149,9 @@ Removes diacritics and applies profile-defined transliterations for characters w
 |        ``domain_error(text_representation,Representation)``
 |    The ``Profile`` parameter is a variable:
 |        ``instantiation_error``
-|    The ``Profile`` parameter is not an object implementing the ``text_normalization_profile_protocol`` protocol:
+|    The ``Profile`` parameter neither a variable nor an object identifier:
+|        ``type_error(object_identifier,Profile)``
+|    The ``Profile`` parameter is an object identifier but not an object conforming to  ``text_normalization_profile_protocol``:
 |        ``domain_error(text_normalization_profile,Profile)``
 |    ``Text`` is not ground:
 |        ``instantiation_error``
@@ -184,7 +190,9 @@ Applies full default Unicode case folding, unless overridden by the selected pro
 |        ``domain_error(text_representation,Representation)``
 |    The ``Profile`` parameter is a variable:
 |        ``instantiation_error``
-|    The ``Profile`` parameter is not an object implementing the ``text_normalization_profile_protocol`` protocol:
+|    The ``Profile`` parameter neither a variable nor an object identifier:
+|        ``type_error(object_identifier,Profile)``
+|    The ``Profile`` parameter is an object identifier but not an object conforming to  ``text_normalization_profile_protocol``:
 |        ``domain_error(text_normalization_profile,Profile)``
 |    ``Text`` is not ground:
 |        ``instantiation_error``
@@ -223,7 +231,9 @@ Converts text to lowercase using the selected profile and Unicode default casing
 |        ``domain_error(text_representation,Representation)``
 |    The ``Profile`` parameter is a variable:
 |        ``instantiation_error``
-|    The ``Profile`` parameter is not an object implementing the ``text_normalization_profile_protocol`` protocol:
+|    The ``Profile`` parameter neither a variable nor an object identifier:
+|        ``type_error(object_identifier,Profile)``
+|    The ``Profile`` parameter is an object identifier but not an object conforming to  ``text_normalization_profile_protocol``:
 |        ``domain_error(text_normalization_profile,Profile)``
 |    ``Text`` is not ground:
 |        ``instantiation_error``
@@ -262,7 +272,9 @@ Converts text to uppercase using the selected profile and Unicode default casing
 |        ``domain_error(text_representation,Representation)``
 |    The ``Profile`` parameter is a variable:
 |        ``instantiation_error``
-|    The ``Profile`` parameter is not an object implementing the ``text_normalization_profile_protocol`` protocol:
+|    The ``Profile`` parameter neither a variable nor an object identifier:
+|        ``type_error(object_identifier,Profile)``
+|    The ``Profile`` parameter is an object identifier but not an object conforming to  ``text_normalization_profile_protocol``:
 |        ``domain_error(text_normalization_profile,Profile)``
 |    ``Text`` is not ground:
 |        ``instantiation_error``
@@ -301,7 +313,9 @@ Converts text to title case using the library simple word-boundary definition.
 |        ``domain_error(text_representation,Representation)``
 |    The ``Profile`` parameter is a variable:
 |        ``instantiation_error``
-|    The ``Profile`` parameter is not an object implementing the ``text_normalization_profile_protocol`` protocol:
+|    The ``Profile`` parameter neither a variable nor an object identifier:
+|        ``type_error(object_identifier,Profile)``
+|    The ``Profile`` parameter is an object identifier but not an object conforming to  ``text_normalization_profile_protocol``:
 |        ``domain_error(text_normalization_profile,Profile)``
 |    ``Text`` is not ground:
 |        ``instantiation_error``
@@ -340,7 +354,9 @@ Decodes semicolon-terminated XML, numeric, and profile-defined named character r
 |        ``domain_error(text_representation,Representation)``
 |    The ``Profile`` parameter is a variable:
 |        ``instantiation_error``
-|    The ``Profile`` parameter is not an object implementing the ``text_normalization_profile_protocol`` protocol:
+|    The ``Profile`` parameter neither a variable nor an object identifier:
+|        ``type_error(object_identifier,Profile)``
+|    The ``Profile`` parameter is an object identifier but not an object conforming to  ``text_normalization_profile_protocol``:
 |        ``domain_error(text_normalization_profile,Profile)``
 |    ``Text`` is not ground:
 |        ``instantiation_error``
@@ -381,7 +397,9 @@ Decodes semicolon-terminated character references. The recognized option is ``un
 |        ``domain_error(text_representation,Representation)``
 |    The ``Profile`` parameter is a variable:
 |        ``instantiation_error``
-|    The ``Profile`` parameter is not an object implementing the ``text_normalization_profile_protocol`` protocol:
+|    The ``Profile`` parameter neither a variable nor an object identifier:
+|        ``type_error(object_identifier,Profile)``
+|    The ``Profile`` parameter is an object identifier but not an object conforming to  ``text_normalization_profile_protocol``:
 |        ``domain_error(text_normalization_profile,Profile)``
 |    ``Text`` is not ground:
 |        ``instantiation_error``
@@ -434,7 +452,9 @@ Normalizes whitespace using default options.
 |        ``domain_error(text_representation,Representation)``
 |    The ``Profile`` parameter is a variable:
 |        ``instantiation_error``
-|    The ``Profile`` parameter is not an object implementing the ``text_normalization_profile_protocol`` protocol:
+|    The ``Profile`` parameter neither a variable nor an object identifier:
+|        ``type_error(object_identifier,Profile)``
+|    The ``Profile`` parameter is an object identifier but not an object conforming to  ``text_normalization_profile_protocol``:
 |        ``domain_error(text_normalization_profile,Profile)``
 |    ``Text`` is not ground:
 |        ``instantiation_error``
@@ -473,7 +493,9 @@ Normalizes whitespace. Recognized options are ``trim(Boolean)``, ``collapse(none
 |        ``domain_error(text_representation,Representation)``
 |    The ``Profile`` parameter is a variable:
 |        ``instantiation_error``
-|    The ``Profile`` parameter is not an object implementing the ``text_normalization_profile_protocol`` protocol:
+|    The ``Profile`` parameter neither a variable nor an object identifier:
+|        ``type_error(object_identifier,Profile)``
+|    The ``Profile`` parameter is an object identifier but not an object conforming to  ``text_normalization_profile_protocol``:
 |        ``domain_error(text_normalization_profile,Profile)``
 |    ``Text`` is not ground:
 |        ``instantiation_error``
@@ -522,7 +544,9 @@ Cleans text using the default normalization pipeline options.
 |        ``domain_error(text_representation,Representation)``
 |    The ``Profile`` parameter is a variable:
 |        ``instantiation_error``
-|    The ``Profile`` parameter is not an object implementing the ``text_normalization_profile_protocol`` protocol:
+|    The ``Profile`` parameter neither a variable nor an object identifier:
+|        ``type_error(object_identifier,Profile)``
+|    The ``Profile`` parameter is an object identifier but not an object conforming to  ``text_normalization_profile_protocol``:
 |        ``domain_error(text_normalization_profile,Profile)``
 |    ``Text`` is not ground:
 |        ``instantiation_error``
@@ -563,7 +587,9 @@ Cleans text by applying entity decoding, case conversion, diacritic handling, Un
 |        ``domain_error(text_representation,Representation)``
 |    The ``Profile`` parameter is a variable:
 |        ``instantiation_error``
-|    The ``Profile`` parameter is not an object implementing the ``text_normalization_profile_protocol`` protocol:
+|    The ``Profile`` parameter neither a variable nor an object identifier:
+|        ``type_error(object_identifier,Profile)``
+|    The ``Profile`` parameter is an object identifier but not an object conforming to  ``text_normalization_profile_protocol``:
 |        ``domain_error(text_normalization_profile,Profile)``
 |    ``Text`` is not ground:
 |        ``instantiation_error``

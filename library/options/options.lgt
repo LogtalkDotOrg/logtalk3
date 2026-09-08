@@ -114,7 +114,7 @@
 		^^option(Option, Options, Default),
 		suspicious_calls,
 		File, Lines, Type, Entity,
-		suspicious_call(File, Lines, Type, Entity, ^^option(Option, Options, Default), reason(as('Default option have a different indicator than queried option')))
+		suspicious_call(File, Lines, Type, Entity, ^^option(Option, Options, Default), reason(as('default option have a different indicator than queried option')))
 	) :-
 		callable(Option),
 		callable(Default),
