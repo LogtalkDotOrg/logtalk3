@@ -13818,20 +13818,6 @@ create_logtalk_flag(Flag, Value, Options) :-
 
 '$lgt_compile_body'((If -> _; _), _, _, _, Ctx) :-
 	nonvar(If),
-	once((If = (Term1 = Term2); If = (Term1 \= Term2))),
-	once((number(Term1); number(Term2))),
-	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-	'$lgt_compiler_flag'(suspicious_calls, warning),
-	'$lgt_source_file_context'(File, Lines, Type, Entity),
-	'$lgt_increment_compiling_warnings_counter',
-	'$lgt_print_message'(
-		warning(arithmetic_expressions),
-		suspicious_call(File, Lines, Type, Entity, If, reason(comparing_numbers_using_unification))
-	),
-	fail.
-
-'$lgt_compile_body'((If -> _; _), _, _, _, Ctx) :-
-	nonvar(If),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
 	'$lgt_compiler_flag'(conditionals, warning),
 	(	If == ! ->
@@ -14404,7 +14390,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(Exp1 == Exp2, _, _, _, Ctx) :-
 	once((float(Exp1); float(Exp2))),
 	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),
-	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_compiler_flag'(arithmetic_expressions, warning),
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_print_message'(
@@ -14416,7 +14402,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(Exp1 \== Exp2, _, _, _, Ctx) :-
 	once((float(Exp1); float(Exp2))),
 	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),
-	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_compiler_flag'(arithmetic_expressions, warning),
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_print_message'(
@@ -14426,6 +14412,18 @@ create_logtalk_flag(Flag, Value, Options) :-
 	fail.
 
 % unification (only lint warnings)
+
+'$lgt_compile_body'(Term1 = Term2, _, _, _, Ctx) :-
+	once((number(Term1); number(Term2))),
+	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
+	'$lgt_compiler_flag'(arithmetic_expressions, warning),
+	'$lgt_source_file_context'(File, Lines, Type, Entity),
+	'$lgt_increment_compiling_warnings_counter',
+	'$lgt_print_message'(
+		warning(arithmetic_expressions),
+		suspicious_call(File, Lines, Type, Entity, Term1 = Term2, reason(comparing_numbers_using_unification))
+	),
+	fail.
 
 '$lgt_compile_body'(Term1 = Term2, _, _, _, Ctx) :-
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
@@ -14508,7 +14506,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(Term1 \= Term2, _, _, _, Ctx) :-
 	once((number(Term1); number(Term2))),
 	'$lgt_comp_ctx_mode'(Ctx, compile(_,_,_)),
-	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_compiler_flag'(arithmetic_expressions, warning),
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_print_message'(
@@ -17071,7 +17069,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 	;	'$lgt_float_expression'(Exp2)
 	)),
 	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),
-	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_compiler_flag'(arithmetic_expressions, warning),
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_print_message'(
@@ -17090,7 +17088,7 @@ create_logtalk_flag(Flag, Value, Options) :-
 '$lgt_compile_body'(Exp1 =\= Exp2, _, _, _, Ctx) :-
 	once((float(Exp1); float(Exp2))),
 	'$lgt_comp_ctx_mode'(Ctx, compile(user,_,_)),
-	'$lgt_compiler_flag'(suspicious_calls, warning),
+	'$lgt_compiler_flag'(arithmetic_expressions, warning),
 	'$lgt_source_file_context'(File, Lines, Type, Entity),
 	'$lgt_increment_compiling_warnings_counter',
 	'$lgt_print_message'(
