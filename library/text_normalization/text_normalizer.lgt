@@ -21,12 +21,12 @@
 
 :- object(text_normalizer(_Representation_, _Profile_),
 	implements(text_normalizer_protocol),
-	imports([options, text_diacritics, text_case_folding, text_entities, text_whitespace])).
+	imports((options, text_diacritics, text_case_folding, text_entities, text_whitespace))).
 
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-06,
+		date is 2026-09-08,
 		comment is 'Text normalizer parameterized by text representation and normalization profile.',
 		parameters is [
 			'Representation' - 'Text representation. Valid values are ``atom``, ``chars``, and ``codes``.',
@@ -208,13 +208,13 @@
 		).
 
 	check_form(Form) :-
-		( var(Form) ->
+		(	var(Form) ->
 			instantiation_error
-		; \+ atom(Form) ->
+		;	\+ atom(Form) ->
 			type_error(atom, Form)
-		; member(Form, [nfc, nfd, nfkc, nfkd]) ->
+		;	member(Form, [nfc, nfd, nfkc, nfkd]) ->
 			true
-		; domain_error(unicode_normalization_form, Form)
+		;	domain_error(unicode_normalization_form, Form)
 		).
 
 	check_entity_options(Options) :-
@@ -235,16 +235,16 @@
 	check_option_names([], _).
 	check_option_names([Option| Options], Names) :-
 		functor(Option, Name, 1),
-		( member(Name, Names) ->
+		(	member(Name, Names) ->
 			check_option_names(Options, Names)
-		; domain_error(option, Option)
+		;	domain_error(option, Option)
 		).
 
 	check_distinct_options([]).
 	check_distinct_options([Option| Options]) :-
-		( same_option_name(Option, Options, Duplicate) ->
+		(	same_option_name(Option, Options, Duplicate) ->
 			domain_error(option, Duplicate)
-		; check_distinct_options(Options)
+		;	check_distinct_options(Options)
 		).
 
 	same_option_name(Option, [Candidate| _], Candidate) :-
@@ -262,37 +262,37 @@
 
 	clean_entities(Options, Codes, Decoded) :-
 		^^option(entities(Entities), Options),
-		( Entities == true ->
+		(	Entities == true ->
 			^^option(unknown_entities(Unknown), Options),
 			^^decode_entities_codes(Codes, _Profile_, Unknown, Decoded)
-		; Decoded = Codes
+		;	Decoded = Codes
 		).
 
 	clean_case(Options, Codes, Converted) :-
 		^^option(case(Mode), Options),
-		( Mode == preserve ->
+		(	Mode == preserve ->
 			Converted = Codes
-		; ^^convert_case_codes(Mode, Codes, _Profile_, Converted)
+		;	^^convert_case_codes(Mode, Codes, _Profile_, Converted)
 		).
 
 	clean_diacritics(Options, Codes, Converted) :-
 		^^option(diacritics(Mode), Options),
-		( Mode == none ->
+		(	Mode == none ->
 			Converted = Codes
-		; Mode == remove ->
+		;	Mode == remove ->
 			^^remove_diacritics_codes(Codes, Converted)
-		; ^^fold_diacritics_codes(Codes, _Profile_, Converted)
+		;	^^fold_diacritics_codes(Codes, _Profile_, Converted)
 		).
 
 	clean_whitespace(Options, Codes, Normalized) :-
 		^^option(whitespace(Whitespace), Options),
-		( Whitespace == true ->
+		(	Whitespace == true ->
 			^^option(trim(Trim), Options),
 			^^option(collapse(Collapse), Options),
 			^^option(line_endings(LineEndings), Options),
 			^^option(controls(Controls), Options),
 			^^normalize_whitespace_codes(Codes, Trim, Collapse, LineEndings, Controls, Normalized)
-		; Normalized = Codes
+		;	Normalized = Codes
 		).
 
 :- end_object.
