@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 0:14:0,
+		version is 0:14:1,
 		author is 'Paulo Moura',
-		date is 2021-06-02,
+		date is 2026-09-08,
 		comment is 'Unit tests for the "cbor" library (common).'
 	]).
 
@@ -36,6 +36,8 @@
 	:- uses(lgtunit, [
 		op(700, xfx, =~=), (=~=)/2
 	]).
+
+	:- set_logtalk_flag(arithmetic_expressions, silent).
 
 	cover(cbor).
 	cover(cbor(_)).

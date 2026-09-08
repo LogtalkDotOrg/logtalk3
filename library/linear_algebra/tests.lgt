@@ -23,15 +23,17 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 2:0:0,
+		version is 2:0:1,
 		author is 'Paulo Moura',
-		date is 2026-08-09,
+		date is 2026-09-08,
 		comment is 'Unit tests for the "linear_algebra" library.'
 	]).
 
 	:- uses(lgtunit, [
 		op(700, xfx, =~=), (=~=)/2
 	]).
+
+	:- set_logtalk_flag(arithmetic_expressions, silent).
 
 	cover(linear_algebra).
 

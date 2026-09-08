@@ -23,9 +23,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-05-07,
+		date is 2026-09-08,
 		comment is 'Unit tests for the "lasso_regression" library.'
 	]).
 
@@ -36,6 +36,8 @@
 	:- uses(list, [
 		memberchk/2
 	]).
+
+	:- set_logtalk_flag(arithmetic_expressions, silent).
 
 	cover(lasso_regression).
 

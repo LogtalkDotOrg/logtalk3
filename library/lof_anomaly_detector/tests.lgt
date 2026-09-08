@@ -66,9 +66,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-05-07,
+		date is 2026-09-08,
 		comment is 'Unit tests for the "lof_anomaly_detector" library.'
 	]).
 
@@ -84,6 +84,8 @@
 		print_anomaly_detector/1, score/3, score_all/3,
 		valid_anomaly_detector/1
 	]).
+
+	:- set_logtalk_flag(arithmetic_expressions, silent).
 
 	cover(lof_anomaly_detector).
 

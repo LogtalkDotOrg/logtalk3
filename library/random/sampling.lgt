@@ -39,7 +39,7 @@
 		;	Value is (Mean*Mean) / X
 		).
 
-	:- set_logtalk_flag(suspicious_calls, silent).
+	:- set_logtalk_flag(arithmetic_expressions, silent).
 	geometric(Probability, Value) :-
 		Probability > 0.0,
 		Probability =< 1.0,

@@ -85,9 +85,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:0:0,
+		version is 1:0:1,
 		author is 'Paulo Moura',
-		date is 2026-05-07,
+		date is 2026-09-08,
 		comment is 'Unit tests for the "iqr_anomaly_detector" library.'
 	]).
 
@@ -100,6 +100,8 @@
 		export_to_file/4, learn/2, learn/3, predict/3, predict/4, print_anomaly_detector/1, score/3,
 		score_all/3, valid_anomaly_detector/1
 	]).
+
+	:- set_logtalk_flag(arithmetic_expressions, silent).
 
 	cover(iqr_anomaly_detector).
 

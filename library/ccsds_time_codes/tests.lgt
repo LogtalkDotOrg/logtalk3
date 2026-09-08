@@ -23,15 +23,17 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-07-20,
+		date is 2026-09-08,
 		comment is 'Unit tests for the "ccsds_time_codes" library.'
 	]).
 
 	:- uses(ccsds_time_codes, [
 		valid/1, format/2
 	]).
+
+	:- set_logtalk_flag(arithmetic_expressions, silent).
 
 	cover(ccsds_time_codes).
 	cover(ccsds_cuc(_, _, _)).

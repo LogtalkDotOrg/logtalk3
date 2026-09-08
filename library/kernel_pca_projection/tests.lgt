@@ -131,9 +131,9 @@
 	extends(lgtunit)).
 
 	:- info([
-		version is 1:1:0,
+		version is 1:1:1,
 		author is 'Paulo Moura',
-		date is 2026-08-09,
+		date is 2026-09-08,
 		comment is 'Unit tests for the "kernel_pca_projection" library.'
 	]).
 
@@ -144,6 +144,8 @@
 	:- uses(list, [
 		length/2, member/2, memberchk/2
 	]).
+
+	:- set_logtalk_flag(arithmetic_expressions, silent).
 
 	cover(kernel_pca_projection).
 
