@@ -250,6 +250,9 @@ shared portable standard normal distribution numeric helpers.
 * ADDED: Support for the `open_probability` type to the `types` and `arbitrary`
 libraries.
 
+* ADDED: New `options` library linter warning for `^^option/3` calls where
+the default option have a different indicator than queried option.
+
 * IMPROVED: Performance of the `list::nth0/3` and `list::nth1/3` library
 predicates. Thanks to Andrew Davison for the performance bug report.
 

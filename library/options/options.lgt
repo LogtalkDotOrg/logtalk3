@@ -23,9 +23,9 @@
 	implements(options_protocol)).
 
 	:- info([
-		version is 1:2:0,
+		version is 1:3:0,
 		author is 'Paulo Moura',
-		date is 2022-01-03,
+		date is 2026-09-08,
 		comment is 'Options processing predicates. Options are represented by compound terms where the functor is the option name.'
 	]).
 
@@ -105,5 +105,20 @@
 		;	FixedOption = Option
 		),
 		fix_options(Options, FixedOptions).
+
+	% linter warning definitions
+
+	:- multifile(user::logtalk_linter_hook/7).
+
+	user::logtalk_linter_hook(
+		^^option(Option, Options, Default),
+		suspicious_calls,
+		File, Lines, Type, Entity,
+		suspicious_call(File, Lines, Type, Entity, ^^option(Option, Options, Default), reason(as('Default option have a different indicator than queried option')))
+	) :-
+		callable(Option),
+		callable(Default),
+		functor(Option, Functor, Arity),
+		\+ functor(Default, Functor, Arity).
 
 :- end_category.
