@@ -26,7 +26,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-05,
+		date is 2026-09-08,
 		comment is 'Lemmatizer parameterized by text representation and language provider.',
 		parameters is [
 			'Representation' - 'Word representation. Valid values are ``atom``, ``codes``, and ``chars``.',
@@ -48,6 +48,7 @@
 
 	lemma(Word, Lemma, Options) :-
 		check_representation,
+		check_language,
 		check_text(Word),
 		^^check_options(Options),
 		check_scalar_options(Options),
@@ -63,6 +64,7 @@
 
 	lemmas(Words, Lemmas, Options) :-
 		check_representation,
+		check_language,
 		check_words(Words),
 		^^check_options(Options),
 		check_list_options(Options),
@@ -163,6 +165,14 @@
 		;	member(_Representation_, [atom, chars, codes]) ->
 			true
 		;	domain_error(text_representation, _Representation_)
+		).
+
+	check_language :-
+		(	var(_Language_) ->
+			instantiation_error
+		;	conforms_to_protocol(_Language_, lemmatizer_language_protocol) ->
+			true
+		;	domain_error(lemmatizer_language_protocol, _Language_)
 		).
 
 	check_words(Words) :-
