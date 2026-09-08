@@ -1,0 +1,315 @@
+.. index:: single: lru_cache_protocol
+.. _lru_cache_protocol/0:
+
+.. rst-class:: right
+
+**protocol**
+
+``lru_cache_protocol``
+======================
+
+LRU (Least Recently Used) cache protocol. Key-value pairs are represented as ``Key-Value``.
+
+| **Availability:** 
+|    ``logtalk_load(lru_caches(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-08
+
+| **Compilation flags:**
+|    ``static``
+
+
+| **Dependencies:**
+|   (none)
+
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|    (none)
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+.. index:: new/2
+.. _lru_cache_protocol/0::new/2:
+
+``new/2``
+^^^^^^^^^
+
+Creates a new empty cache with the given maximum capacity.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``new(Capacity,Cache)``
+| **Mode and number of proofs:**
+|    ``new(+non_negative_integer,-cache)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Capacity`` is a variable:
+|        ``instantiation_error``
+|    ``Capacity`` is neither a variable nor an integer:
+|        ``type_error(integer,Capacity)``
+|    ``Capacity`` is an integer but is less than zero:
+|        ``domain_error(non_negative_integer,Capacity)``
+
+
+------------
+
+.. index:: capacity/2
+.. _lru_cache_protocol/0::capacity/2:
+
+``capacity/2``
+^^^^^^^^^^^^^^
+
+Returns the maximum cache capacity.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``capacity(Cache,Capacity)``
+| **Mode and number of proofs:**
+|    ``capacity(+cache,-non_negative_integer)`` - ``one``
+
+
+------------
+
+.. index:: size/2
+.. _lru_cache_protocol/0::size/2:
+
+``size/2``
+^^^^^^^^^^
+
+Returns the number of entries in the cache.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``size(Cache,Size)``
+| **Mode and number of proofs:**
+|    ``size(+cache,-non_negative_integer)`` - ``one``
+
+
+------------
+
+.. index:: empty/1
+.. _lru_cache_protocol/0::empty/1:
+
+``empty/1``
+^^^^^^^^^^^
+
+True iff the cache is empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``empty(Cache)``
+| **Mode and number of proofs:**
+|    ``empty(+cache)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: lookup/3
+.. _lru_cache_protocol/0::lookup/3:
+
+``lookup/3``
+^^^^^^^^^^^^
+
+Looks up a matching key-value pair without changing its recency. Fails if the key is not found or the value does not unify.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``lookup(Key,Value,Cache)``
+| **Mode and number of proofs:**
+|    ``lookup(+ground,?term,+cache)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``Key`` is not ground:
+|        ``instantiation_error``
+
+
+------------
+
+.. index:: get/4
+.. _lru_cache_protocol/0::get/4:
+
+``get/4``
+^^^^^^^^^
+
+Looks up a matching key-value pair and marks it as most recently used, returning the updated cache. Fails if the key is not found or the value does not unify.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``get(Key,Value,Cache,NewCache)``
+| **Mode and number of proofs:**
+|    ``get(+ground,?term,+cache,-cache)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``Key`` is not ground:
+|        ``instantiation_error``
+
+
+------------
+
+.. index:: put/4
+.. _lru_cache_protocol/0::put/4:
+
+``put/4``
+^^^^^^^^^
+
+Inserts or replaces a key-value pair, marks it as most recently used, and evicts the least recently used entry when necessary.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``put(Key,Value,Cache,NewCache)``
+| **Mode and number of proofs:**
+|    ``put(+ground,+term,+cache,-cache)`` - ``one_or_error``
+
+| **Exceptions:**
+|    ``Key`` is not ground:
+|        ``instantiation_error``
+
+
+------------
+
+.. index:: update/5
+.. _lru_cache_protocol/0::update/5:
+
+``update/5``
+^^^^^^^^^^^^
+
+Updates an existing matching key-value pair and marks it as most recently used. Fails if the key is not found or the old value does not unify.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``update(Key,OldValue,NewValue,Cache,NewCache)``
+| **Mode and number of proofs:**
+|    ``update(+ground,?term,+term,+cache,-cache)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``Key`` is not ground:
+|        ``instantiation_error``
+
+
+------------
+
+.. index:: delete/4
+.. _lru_cache_protocol/0::delete/4:
+
+``delete/4``
+^^^^^^^^^^^^
+
+Deletes a matching key-value pair, returning the updated cache. Fails if the key is not found or the value does not unify.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``delete(Key,Value,Cache,NewCache)``
+| **Mode and number of proofs:**
+|    ``delete(+ground,?term,+cache,-cache)`` - ``zero_or_one_or_error``
+
+| **Exceptions:**
+|    ``Key`` is not ground:
+|        ``instantiation_error``
+
+
+------------
+
+.. index:: evict/3
+.. _lru_cache_protocol/0::evict/3:
+
+``evict/3``
+^^^^^^^^^^^
+
+Evicts and returns the least recently used key-value pair. Fails if the cache is empty.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``evict(Cache,Pair,NewCache)``
+| **Mode and number of proofs:**
+|    ``evict(+cache,-pair,-cache)`` - ``zero_or_one``
+
+
+------------
+
+.. index:: as_list/2
+.. _lru_cache_protocol/0::as_list/2:
+
+``as_list/2``
+^^^^^^^^^^^^^
+
+Returns the cache key-value pairs ordered from most recently used to least recently used.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``as_list(Cache,Pairs)``
+| **Mode and number of proofs:**
+|    ``as_list(+cache,-list(pair))`` - ``one``
+
+
+------------
+
+.. index:: clear/2
+.. _lru_cache_protocol/0::clear/2:
+
+``clear/2``
+^^^^^^^^^^^
+
+Returns an empty cache with the same capacity.
+
+| **Compilation flags:**
+|    ``static``
+
+| **Template:**
+|    ``clear(Cache,EmptyCache)``
+| **Mode and number of proofs:**
+|    ``clear(+cache,-cache)`` - ``one``
+
+
+------------
+
+Protected predicates
+--------------------
+
+(none)
+
+Private predicates
+------------------
+
+(none)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`lru_cache <lru_cache/0>`
+

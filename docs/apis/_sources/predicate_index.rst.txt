@@ -1103,6 +1103,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`dictionaryp <dictionaryp/0::as_list/2>`
 * :ref:`difflist <difflist/0::as_list/2>`
 * :ref:`heap_protocol <heap_protocol/0::as_list/2>`
+* :ref:`lru_cache_protocol <lru_cache_protocol/0::as_list/2>`
 * :ref:`queuep <queuep/0::as_list/2>`
 * :ref:`ripple_down_rules_common_protocol <ripple_down_rules_common_protocol/0::as_list/2>`
 * :ref:`setp <setp/0::as_list/2>`
@@ -2407,6 +2408,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`mcp_tool_protocol <mcp_tool_protocol/0::capabilities/1>`
 
+``capacity/2``
+--------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`lru_cache_protocol <lru_cache_protocol/0::capacity/2>`
+
 ``cartesian_product/2``
 -----------------------
 
@@ -3296,6 +3307,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`http_cookie_jar <http_cookie_jar/0::clear/1>`
 * :ref:`open_id_jwks_cache <open_id_jwks_cache/0::clear/1>`
+
+``clear/2``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`lru_cache_protocol <lru_cache_protocol/0::clear/2>`
 
 ``clear_cache/0``
 -----------------
@@ -5688,6 +5709,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`http_client <http_client/0::delete/4>`
 * :ref:`http_client_digest_session(HTTPTransport) <http_client_digest_session/1::delete/4>`
 * :ref:`http_client_session(HTTPTransport) <http_client_session/1::delete/4>`
+* :ref:`lru_cache_protocol <lru_cache_protocol/0::delete/4>`
 * :ref:`trie(Representation) <trie/1::delete/4>`
 
 ``delete_all_after/2``
@@ -7747,6 +7769,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`heap_protocol <heap_protocol/0::empty/1>`
 * :ref:`interval_relation_set_protocol <interval_relation_set_protocol/0::empty/1>`
 * :ref:`listp <listp/0::empty/1>`
+* :ref:`lru_cache_protocol <lru_cache_protocol/0::empty/1>`
 * :ref:`nested_dictionary_protocol <nested_dictionary_protocol/0::empty/1>`
 * :ref:`optional <optional/0::empty/1>`
 * :ref:`queuep <queuep/0::empty/1>`
@@ -8421,6 +8444,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`open_ai_event_stream <open_ai_event_stream/0::event/2>`
+
+``evict/3``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`lru_cache_protocol <lru_cache_protocol/0::evict/3>`
 
 ``exactly_representable/1``
 ---------------------------
@@ -10885,6 +10918,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`http_client <http_client/0::get/4>`
 * :ref:`http_client_digest_session(HTTPTransport) <http_client_digest_session/1::get/4>`
 * :ref:`http_client_session(HTTPTransport) <http_client_session/1::get/4>`
+* :ref:`lru_cache_protocol <lru_cache_protocol/0::get/4>`
 * :ref:`memcached <memcached/0::get/4>`
 
 ``get_field/2``
@@ -15699,6 +15733,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`dictionaryp <dictionaryp/0::lookup/3>`
+* :ref:`lru_cache_protocol <lru_cache_protocol/0::lookup/3>`
 * :ref:`trie(Representation) <trie/1::lookup/3>`
 
 ``lookup/4``
@@ -17749,6 +17784,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`graph_protocol <graph_protocol/0::new/2>`
 * :ref:`interval_constraint_network_protocol <interval_constraint_network_protocol/0::new/2>`
 * :ref:`java_access_protocol <java_access_protocol/0::new/2>`
+* :ref:`lru_cache_protocol <lru_cache_protocol/0::new/2>`
 * :ref:`ripple_down_rules_common_protocol <ripple_down_rules_common_protocol/0::new/2>`
 * :ref:`streamvars <streamvars/0::new/2>`
 * :ref:`union_find_protocol <union_find_protocol/0::new/2>`
@@ -22489,6 +22525,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`generalized_ripple_down_rules <generalized_ripple_down_rules/0::put/4>`
 * :ref:`http_client <http_client/0::put/4>`
+* :ref:`lru_cache_protocol <lru_cache_protocol/0::put/4>`
 
 ``put/5``
 ---------
@@ -26818,6 +26855,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`dictionaryp <dictionaryp/0::size/2>`
 * :ref:`heap_protocol <heap_protocol/0::size/2>`
+* :ref:`lru_cache_protocol <lru_cache_protocol/0::size/2>`
 * :ref:`ripple_down_rules_common_protocol <ripple_down_rules_common_protocol/0::size/2>`
 * :ref:`setp <setp/0::size/2>`
 * :ref:`trie(Representation) <trie/1::size/2>`
@@ -29941,6 +29979,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 
 * :ref:`dictionaryp <dictionaryp/0::update/5>`
+* :ref:`lru_cache_protocol <lru_cache_protocol/0::update/5>`
 * :ref:`trie(Representation) <trie/1::update/5>`
 
 ``update_fecf/2``

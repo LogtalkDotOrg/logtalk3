@@ -1,0 +1,64 @@
+.. index:: single: lru_cache
+.. _lru_cache/0:
+
+.. rst-class:: right
+
+**object**
+
+``lru_cache``
+=============
+
+Immutable LRU (Least Recently Used) caches.
+
+| **Availability:** 
+|    ``logtalk_load(lru_caches(loader))``
+
+| **Author:** Paulo Moura
+| **Version:** 1:0:0
+| **Date:** 2026-09-08
+
+| **Compilation flags:**
+|    ``static, context_switching_calls``
+
+
+| **Implements:**
+|    ``public`` :ref:`lru_cache_protocol <lru_cache_protocol/0>`
+| **Uses:**
+|    :ref:`avltree <avltree/0>`
+|    :ref:`list <list/0>`
+|    :ref:`type <type/0>`
+
+| **Remarks:**
+|    (none)
+
+| **Inherited public predicates:**
+|     :ref:`lru_cache_protocol/0::as_list/2`  :ref:`lru_cache_protocol/0::capacity/2`  :ref:`lru_cache_protocol/0::clear/2`  :ref:`lru_cache_protocol/0::delete/4`  :ref:`lru_cache_protocol/0::empty/1`  :ref:`lru_cache_protocol/0::evict/3`  :ref:`lru_cache_protocol/0::get/4`  :ref:`lru_cache_protocol/0::lookup/3`  :ref:`lru_cache_protocol/0::new/2`  :ref:`lru_cache_protocol/0::put/4`  :ref:`lru_cache_protocol/0::size/2`  :ref:`lru_cache_protocol/0::update/5`  
+
+.. contents::
+   :local:
+   :backlinks: top
+
+Public predicates
+-----------------
+
+(no local declarations; see entity ancestors if any)
+
+Protected predicates
+--------------------
+
+(no local declarations; see entity ancestors if any)
+
+Private predicates
+------------------
+
+(no local declarations; see entity ancestors if any)
+
+Operators
+---------
+
+(none)
+
+.. seealso::
+
+   :ref:`lru_cache_protocol <lru_cache_protocol/0>`
+

@@ -2340,6 +2340,17 @@ To load an entity, always load the library that includes it using the goal ``log
    loop <loop_0>
    loopp <loopp_0>
 
+``library/lru_caches/``
+-----------------------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+   lru_cache <lru_cache_0>
+   lru_cache_protocol <lru_cache_protocol_0>
+
 ``library/massey_ranker/``
 --------------------------
 

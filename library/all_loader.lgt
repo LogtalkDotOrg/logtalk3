@@ -55,6 +55,7 @@
 		dependents(loader),
 		dictionaries(loader),
 		deques(loader),
+		lru_caches(loader),
 		nested_dictionaries(loader),
 		tries(loader),
 		heaps(loader),

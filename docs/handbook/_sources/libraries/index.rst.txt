@@ -206,6 +206,7 @@ directory in the ``NOTES.md`` file.
    logging
    logistic_regression_classifier
    loops
+   lru_caches
    massey_ranker
    mcp_server
    memcached

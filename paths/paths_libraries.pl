@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %  Default standard library paths
-%  Last updated on September 7, 2026
+%  Last updated on September 8, 2026
 %
 %  This file is part of Logtalk <https://logtalk.org/>
 %  SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -211,6 +211,7 @@ logtalk_library_path(lof_anomaly_detector, library('lof_anomaly_detector/')).
 logtalk_library_path(logging, library('logging/')).
 logtalk_library_path(logistic_regression_classifier, library('logistic_regression_classifier/')).
 logtalk_library_path(loops, library('loops/')).
+logtalk_library_path(lru_caches, library('lru_caches/')).
 logtalk_library_path(massey_ranker, library('massey_ranker/')).
 logtalk_library_path(mcp_server, library('mcp_server/')).
 logtalk_library_path(memcached, library('memcached/')).
