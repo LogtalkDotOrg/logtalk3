@@ -24,7 +24,7 @@
 	:- info([
 		version is 1:0:0,
 		author is 'Paulo Moura',
-		date is 2026-09-05,
+		date is 2026-09-08,
 		comment is 'Sentence splitting protocol for text represented as atoms, lists of characters, or lists of character codes.',
 		see_also is [tokenizer_protocol, tokenizer_language_protocol, tokenizer(_, _)]
 	]).
@@ -37,6 +37,9 @@
 		exceptions is [
 			'The ``Representation`` parameter is a variable' - instantiation_error,
 			'The ``Representation`` parameter is neither a variable nor ``atom``, ``chars``, or ``codes``' - domain_error(text_representation, 'Representation'),
+			'The ``Language`` parameter is a variable' - instantiation_error,
+			'The ``Language`` parameter neither a variable nor an object identifier' - type_error(object_identifier, 'Language'),
+			'The ``Language`` parameter is an object identifier but not an object conforming to ``tokenizer_language_protocol``' - domain_error(tokenizer_language_protocol, 'Language'),
 			'``Text`` is not ground' - instantiation_error,
 			'The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom' - type_error(atom, 'Text'),
 			'The ``Representation`` parameter is ``chars`` but ``Text`` is not a list of characters' - type_error(chars, 'Text'),
@@ -52,6 +55,9 @@
 		exceptions is [
 			'The ``Representation`` parameter is a variable' - instantiation_error,
 			'The ``Representation`` parameter is neither a variable nor ``atom``, ``chars``, or ``codes``' - domain_error(text_representation, 'Representation'),
+			'The ``Language`` parameter is a variable' - instantiation_error,
+			'The ``Language`` parameter neither a variable nor an object identifier' - type_error(object_identifier, 'Language'),
+			'The ``Language`` parameter is an object identifier but not an object conforming to ``tokenizer_language_protocol``' - domain_error(tokenizer_language_protocol, 'Language'),
 			'``Text`` is not ground' - instantiation_error,
 			'The ``Representation`` parameter is ``atom`` but ``Text`` is not an atom' - type_error(atom, 'Text'),
 			'The ``Representation`` parameter is ``chars`` but ``Text`` is not a list of characters' - type_error(chars, 'Text'),
