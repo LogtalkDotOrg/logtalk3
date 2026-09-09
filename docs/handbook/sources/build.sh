@@ -3,7 +3,7 @@
 #############################################################################
 ##
 ##   Documentation build script
-##   Last updated on September 8, 2026
+##   Last updated on September 9, 2026
 ##
 ##   This file is part of Logtalk <https://logtalk.org/>
 ##   SPDX-FileCopyrightText: 1998-2026 Paulo Moura <pmoura@logtalk.org>
@@ -107,8 +107,9 @@ sed '1,19d' ../../../library/cartesian_products/NOTES.md | pandoc -f gfm -t rst 
 sed '1,19d' ../../../library/constrained_optimization/NOTES.md | pandoc -f gfm -t rst -o libraries/constrained_optimization.rst
 sed '1,19d' ../../../library/copeland_ranker/NOTES.md | pandoc -f gfm -t rst -o libraries/copeland_ranker.rst
 sed '1,19d' ../../../library/coroutining/NOTES.md | pandoc -f gfm -t rst -o libraries/coroutining.rst
-sed '1,19d' ../../../library/crypto/NOTES.md | pandoc -f gfm -t rst -o libraries/crypto.rst
+sed '1,19d' ../../../library/crontab/NOTES.md | pandoc -f gfm -t rst -o libraries/crontab.rst
 sed '1,19d' ../../../library/crs_projections/NOTES.md | pandoc -f gfm -t rst -o libraries/crs_projections.rst
+sed '1,19d' ../../../library/crypto/NOTES.md | pandoc -f gfm -t rst -o libraries/crypto.rst
 sed '1,19d' ../../../library/cbor/NOTES.md | pandoc -f gfm -t rst -o libraries/cbor.rst
 sed '1,19d' ../../../library/ccsds_frames/NOTES.md | pandoc -f gfm -t rst -o libraries/ccsds_frames.rst
 sed '1,19d' ../../../library/ccsds_link_profiles/NOTES.md | pandoc -f gfm -t rst -o libraries/ccsds_link_profiles.rst

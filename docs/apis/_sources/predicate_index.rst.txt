@@ -8138,6 +8138,16 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`code_metric <code_metric/0::entity_score/2>`
 
+``entry/1``
+-----------
+
+.. toctree::
+   :maxdepth: 1
+
+
+
+* :ref:`crontab(Representation) <crontab/1::entry/1>`
+
 ``enumerate/2``
 ---------------
 
@@ -10577,6 +10587,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ccsds_frame_protocol <ccsds_frame_protocol/0::generate/2>`
 * :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::generate/2>`
 * :ref:`ccsds_time_code_protocol <ccsds_time_code_protocol/0::generate/2>`
+* :ref:`crontab(Representation) <crontab/1::generate/2>`
 * :ref:`geojson_protocol <geojson_protocol/0::generate/2>`
 * :ref:`gpx_protocol <gpx_protocol/0::generate/2>`
 * :ref:`html <html/0::generate/2>`
@@ -10612,6 +10623,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::generate/3>`
 * :ref:`ccsds_time_code_protocol <ccsds_time_code_protocol/0::generate/3>`
 * :ref:`ccsds_time_fields <ccsds_time_fields/0::generate/3>`
+* :ref:`crontab(Representation) <crontab/1::generate/3>`
 * :ref:`http_multipart <http_multipart/0::generate/3>`
 * :ref:`ieee_754_protocol <ieee_754_protocol/0::generate/3>`
 * :ref:`protobuf <protobuf/0::generate/3>`
@@ -20082,6 +20094,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 * :ref:`ccsds_frame_protocol <ccsds_frame_protocol/0::parse/2>`
 * :ref:`ccsds_packets(SecondaryHeaderLength) <ccsds_packets/1::parse/2>`
 * :ref:`ccsds_time_code_protocol <ccsds_time_code_protocol/0::parse/2>`
+* :ref:`crontab(Representation) <crontab/1::parse/2>`
 * :ref:`geojson_protocol <geojson_protocol/0::parse/2>`
 * :ref:`gpx_protocol <gpx_protocol/0::parse/2>`
 * :ref:`http_websocket_frames <http_websocket_frames/0::parse/2>`
@@ -20115,6 +20128,7 @@ This index lists all entities *declaring* a given predicate. To load an entity p
 
 * :ref:`avro <avro/0::parse/3>`
 * :ref:`ccsds_time_fields <ccsds_time_fields/0::parse/3>`
+* :ref:`crontab(Representation) <crontab/1::parse/3>`
 * :ref:`nmea_protocol <nmea_protocol/0::parse/3>`
 * :ref:`protobuf <protobuf/0::parse/3>`
 * :ref:`url(Representation) <url/1::parse/3>`

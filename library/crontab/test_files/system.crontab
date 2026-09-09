@@ -1,0 +1,5 @@
+# System crontab
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin
+
+0 * * * * root run-parts /etc/cron.hourly
+@reboot backup-user /usr/local/bin/start-backup

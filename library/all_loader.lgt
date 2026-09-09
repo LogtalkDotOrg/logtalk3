@@ -49,6 +49,7 @@
 		os(loader),
 		process(loader),
 		sockets(loader),
+		crontab(loader),
 		dates(loader),
 		datalog(loader),
 		events(loader),

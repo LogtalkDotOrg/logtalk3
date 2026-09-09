@@ -70,8 +70,9 @@ logtalk_library_path(colley_ranker, library('colley_ranker/')).
 logtalk_library_path(constrained_optimization, library('constrained_optimization/')).
 logtalk_library_path(copeland_ranker, library('copeland_ranker/')).
 logtalk_library_path(coroutining, library('coroutining/')).
-logtalk_library_path(crypto, library('crypto/')).
+logtalk_library_path(crontab, library('crontab/')).
 logtalk_library_path(crs_projections, library('crs_projections/')).
+logtalk_library_path(crypto, library('crypto/')).
 logtalk_library_path(ccsds_frames, library('ccsds_frames/')).
 logtalk_library_path(ccsds_link_profiles, library('ccsds_link_profiles/')).
 logtalk_library_path(ccsds_packet_services, library('ccsds_packet_services/')).

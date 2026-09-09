@@ -74,6 +74,7 @@ directory in the ``NOTES.md`` file.
    copeland_ranker
    core
    coroutining
+   crontab
    crs_projections
    crypto
    csv

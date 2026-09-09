@@ -1,0 +1,7 @@
+# User crontab
+SHELL=/bin/sh
+MAILTO=" ops@example.com "
+
+*/15 9-17 * JAN MON-FRI echo weekday
+@midnight /usr/local/bin/backup
+* * * * * mail \% report%first line%second line

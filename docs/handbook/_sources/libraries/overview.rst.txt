@@ -65,8 +65,8 @@ Library groups
   ``json_schema``, ``message_pack``, ``mcp_server``, ``mqtt``,
   ``protobuf``, ``stomp``, ``toml``, ``toon``, ``tsv``, and ``yaml``.
 - Coordination and data stores: ``linda``, ``memcached``, and ``redis``.
-- System and external integration: ``git``, ``java``, ``os``, and
-  ``sockets``.
+- System and external integration: ``crontab``, ``git``, ``java``,
+  ``os``, and ``sockets``.
 - Logic and symbolic computing: ``datalog``.
 - Security and integrity: ``block_ciphers``, ``cmac``, ``crypto``,
   ``hashes``, ``hmac``, ``jwt``, ``otp``, and ``paseto``.

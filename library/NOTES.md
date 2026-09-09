@@ -82,7 +82,7 @@ Library groups
 - Coordination and data stores:
 	`linda`, `memcached`, and `redis`.
 - System and external integration:
-	`git`, `java`, `os`, and `sockets`.
+	`crontab`, `git`, `java`, `os`, and `sockets`.
 - Logic and symbolic computing:
 	`datalog`.
 - Security and integrity:
