@@ -138,6 +138,9 @@ In addition to the loader-based libraries, this directory also contains
 a small number of standalone reusable entities, namely ``attributes``,
 ``cloning``, ``counters``, and ``streamvars``.
 
+See also the libraries provided in the "Contributions" and "Ports"
+sections.
+
 Specific notes about individual libraries can be found in the
 corresponding library directory ``NOTES.md`` files.
 
